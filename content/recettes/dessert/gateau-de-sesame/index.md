@@ -6,6 +6,7 @@ layout: recettes
 type: dessert
 categories:
   - Gateau
+  - Test
 regime:
   - vegetarien
 cuisson: Oui

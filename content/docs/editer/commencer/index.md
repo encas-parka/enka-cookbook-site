@@ -16,8 +16,24 @@ gallery: true
 ## Inscription / Connexion
 En cliquant sur le bouton de la barre de menu en haut du site, vous pouvez créer un compte ou vous connecter à l'interface d'édition si vous avez déjà un compte. 
 
-### Création d'un compte github
-Pour s'inscrire sur ce site, il vous faut un compte github (plateforme hébergeant le site).
+
+### Créer un compte authentifié
+
+Commencez par créer un compte sur github, la plateforme qui heberge le site (bouton bleu sur la page de [connexion](/registration)). Puis complétez le formulaire pour obtenir un compte authentifié, en utilisant le même email que pour votre compte github. Les comptes authentifiés peuvent directement publier ou modifier des recettes, créer des évenements, etc, sans modération préalable. 
+
+Une fois la demande effectuée, vous recevrez un email vous signalant que vous avez été invité à collaborer au site encas-parka/enka-cookbook-site (le traitement des demandes de compte se fait manuellement, vous devrez peut-être patienter quelques jours avant de recevoir cet email.). Cliquez sur le lien pour acceptez l'invitation. Vous serez redirigé·e vers une page vous permettant de choisir un mot de passe. 
+
+Sur l'interface d'édition, vous pouvez maintenant avoir accés au bouton "publier" sur les pages d'édition, et à la colonne "prêt" sous l'onglet "Flux" (contrairement aux compte non-authentifiés). Voir ["publier des recettes"](/docs/editer/recettes/#publier-une-recette).
+
+{{< img-grid 
+  from="content" 
+  match="img/connexion/*auth*" 
+  size="12 lg:4" 
+  >}}
+
+#### Commencer par un compte non-authentifié
+Si vous souhaitez commencer dés maintenant à accédez à l'interface d'édition, vous pouvez créer un compte non-authentifié. Cela nécéssite aussi la création d'un compte github. De plus, la création d'un "fork" vous sera alors demander. 
+
 - Cliquez sur "se connecter"
 - Puis sur "se connecter avec Github"
 - Créez un compte github avec le lien "create an account"
@@ -33,18 +49,6 @@ Pour s'inscrire sur ce site, il vous faut un compte github (plateforme hébergea
   >}}
 
 
-### Compte authentifié
-Une fois votre compte github créé, complétez le formulaire pour obtenir un compte authentifié. Les comptes authentifiés peuvent directement publier ou modifier des recettes, créer des évenements, etc, sans modération préalable. 
-
-Une fois la demande effectuée, vous recevrez un email vous signalant que vous avez été invité à collaborer au site encas-parka/enka-cookbook-site (le traitement des demandes de comptes se fait manuellement, vous devrez peut-être patienter quelques jours avant de recevoir cet email.). Cliquez sur le lien pour acceptez l'invitation. Vous serez redirigé·e vers votre compte github: acceptez l'invitation. 
-
-Vous pouvez fermer la page github, et vous connecter à enka-cookbook. Vous pouvez maintenant avoir accés au bouton "publier" sur les pages d'édition, et à la colonne "prêt" sous l'onglet "Flux". Voir ["publier des recettes"](/docs/editer/recettes/#publier-une-recette).
-
-{{< img-grid 
-  from="content" 
-  match="img/connexion/*auth*" 
-  size="12 lg:4" 
-  >}}
 
 
 ## L'interface d'édition

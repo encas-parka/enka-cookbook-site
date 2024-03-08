@@ -20,8 +20,14 @@ plate: 130
 check: Oui
 checkAlwaysOk: true
 ingredients:
-  sec: []
+  sec:
+    - title: Semoule fine (blé)
+      quantite: 1
+      unit: Kg
   lof:
+    - title: Semoule de blé fine
+      quantite: 1
+      unit: Kg
     - title: huile de tournesol
       quantite: 12
       unit: litre
@@ -41,6 +47,12 @@ ingredients:
     - title: Aubergine
       quantite: 4.5
       unit: Kg
+  epices:
+    - title: Paprika
+    - title: Cumin
+    - title: Coriandre
+    - title: Gros sel
+    - title: Gros sel
 preparation: ff
 preparation24h: gf
 astuces:

@@ -1,6 +1,12 @@
 {
   "ingredients": [
     {
+      "title": "Crème soja",
+      "alergenesIng": [
+        "Soja"
+      ]
+    },
+    {
       "title": "Yaourt de soja",
       "vegetarien": true,
       "vegan": true,

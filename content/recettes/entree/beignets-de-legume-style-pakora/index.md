@@ -48,10 +48,10 @@ ingredients:
       quantite: 4.5
       unit: Kg
   epices:
+    - title: Gingembre en poudre
     - title: Paprika
     - title: Cumin
     - title: Coriandre
-    - title: Gros sel
     - title: Gros sel
 preparation: ff
 preparation24h: gf

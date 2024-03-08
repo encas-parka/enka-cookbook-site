@@ -34,13 +34,25 @@ ingredients:
       quantite: 4
       unit: Kg
   epices:
+    - title: Paprika
+      quantite: 100
     - title: Gros sel
       quantite: 5
       unit: c. à café
     - title: Sauce soja
       quantite: 1.3
       unit: litre
-  autres: []
+  autres:
+    - title: Eau
+      quantite: 6.5
+      unit: litre
+  lof:
+    - title: huile de tournesol
+      unit: ml
+      quantite: 500
+materiel:
+  - Gastro 1/1 (Fins)
+  - Four
 preparation: \-
 publishDate: 2024-03-08T10:19:47.990Z
 ---

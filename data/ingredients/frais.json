@@ -1,169 +1,224 @@
 {
   "ingredients": [
     {
+      "pFrais": true,
+      "title": "Crème florette",
+      "alergenesIng": [
+        "Produit laitier"
+      ]
+    },
+    {
       "title": "Yaourt de soja",
       "vegetarien": true,
       "vegan": true,
-      "alergenesIng": ["Soja"],
+      "alergenesIng": [
+        "Soja"
+      ],
       "pFrais": true
     },
     {
       "title": "Babybel",
       "vegetarien": true,
       "vegan": false,
-      "alergenesIng": ["Produit laitier"],
+      "alergenesIng": [
+        "Produit laitier"
+      ],
       "pFrais": true
     },
     {
       "title": "Beurre demi-sel",
       "vegetarien": true,
       "vegan": false,
-      "alergenesIng": ["Produit laitier"],
+      "alergenesIng": [
+        "Produit laitier"
+      ],
       "pFrais": true
     },
     {
       "title": "Beurre doux",
       "vegetarien": true,
       "vegan": false,
-      "alergenesIng": ["Produit laitier"],
+      "alergenesIng": [
+        "Produit laitier"
+      ],
       "pFrais": true
     },
     {
       "title": "Bleu",
       "vegetarien": true,
       "vegan": false,
-      "alergenesIng": ["Produit laitier"],
+      "alergenesIng": [
+        "Produit laitier"
+      ],
       "pFrais": true
     },
     {
       "title": "Brie-Beaufort",
       "vegetarien": true,
       "vegan": false,
-      "alergenesIng": ["Produit laitier"],
+      "alergenesIng": [
+        "Produit laitier"
+      ],
       "pFrais": true
     },
     {
       "title": "Bûche de chèvre",
       "vegetarien": true,
       "vegan": false,
-      "alergenesIng": ["Produit laitier"],
+      "alergenesIng": [
+        "Produit laitier"
+      ],
       "pFrais": true
     },
     {
       "title": "Camembert",
       "vegetarien": true,
       "vegan": false,
-      "alergenesIng": ["Produit laitier"],
+      "alergenesIng": [
+        "Produit laitier"
+      ],
       "pFrais": true
     },
     {
       "title": "Cantal",
       "vegetarien": true,
       "vegan": false,
-      "alergenesIng": ["Produit laitier"],
+      "alergenesIng": [
+        "Produit laitier"
+      ],
       "pFrais": true
     },
     {
       "title": "Cheddar",
       "vegetarien": true,
       "vegan": false,
-      "alergenesIng": ["Produit laitier"],
+      "alergenesIng": [
+        "Produit laitier"
+      ],
       "pFrais": true
     },
     {
       "title": "Comté",
       "vegetarien": true,
       "vegan": false,
-      "alergenesIng": ["Produit laitier"],
+      "alergenesIng": [
+        "Produit laitier"
+      ],
       "pFrais": true
     },
     {
       "title": "Crème Chantilly",
       "vegetarien": true,
       "vegan": false,
-      "alergenesIng": ["Produit laitier"],
+      "alergenesIng": [
+        "Produit laitier"
+      ],
       "pFrais": true
     },
     {
       "title": "Crème épaisse",
       "vegetarien": true,
       "vegan": false,
-      "alergenesIng": ["Produit laitier"],
+      "alergenesIng": [
+        "Produit laitier"
+      ],
       "pFrais": true
     },
     {
       "title": "Edam",
       "vegetarien": true,
-      "alergenesIng": ["Produit laitier"],
+      "alergenesIng": [
+        "Produit laitier"
+      ],
       "pFrais": true
     },
     {
       "title": "Emmental",
       "vegetarien": true,
-      "alergenesIng": ["Produit laitier"],
+      "alergenesIng": [
+        "Produit laitier"
+      ],
       "pFrais": true
     },
     {
       "title": "Feta",
       "vegetarien": true,
       "vegan": false,
-      "alergenesIng": ["Produit laitier"],
+      "alergenesIng": [
+        "Produit laitier"
+      ],
       "pFrais": true
     },
     {
       "title": "Fourme d'Ambert",
       "vegetarien": true,
       "vegan": false,
-      "alergenesIng": ["Produit laitier"],
+      "alergenesIng": [
+        "Produit laitier"
+      ],
       "pFrais": true
     },
     {
       "title": "Fromage à raclette",
       "vegetarien": true,
       "vegan": false,
-      "alergenesIng": ["Produit laitier"],
+      "alergenesIng": [
+        "Produit laitier"
+      ],
       "pFrais": true
     },
     {
       "title": "Fromage blanc",
       "vegetarien": true,
       "vegan": false,
-      "alergenesIng": ["Produit laitier"],
+      "alergenesIng": [
+        "Produit laitier"
+      ],
       "pFrais": true
     },
     {
       "title": "Fromage de chèvre frais",
       "vegetarien": true,
       "vegan": false,
-      "alergenesIng": ["Produit laitier"],
+      "alergenesIng": [
+        "Produit laitier"
+      ],
       "pFrais": true
     },
     {
       "title": "Fromage frais",
       "vegetarien": true,
       "vegan": false,
-      "alergenesIng": ["Produit laitier"],
+      "alergenesIng": [
+        "Produit laitier"
+      ],
       "pFrais": true
     },
     {
       "title": "Fromage râpé",
       "vegetarien": true,
       "vegan": false,
-      "alergenesIng": ["Produit laitier"],
+      "alergenesIng": [
+        "Produit laitier"
+      ],
       "pFrais": true
     },
     {
       "title": "Gouda",
       "vegetarien": true,
       "vegan": false,
-      "alergenesIng": ["Produit laitier"],
+      "alergenesIng": [
+        "Produit laitier"
+      ],
       "pFrais": true
     },
     {
       "title": "Gruyère",
       "vegetarien": true,
       "vegan": false,
-      "alergenesIng": ["Produit laitier"],
+      "alergenesIng": [
+        "Produit laitier"
+      ],
       "pFrais": true
     },
     {
@@ -175,7 +230,9 @@
     },
     {
       "title": "Yaourt de Soja",
-      "alergenesIng": ["Soja"],
+      "alergenesIng": [
+        "Soja"
+      ],
       "vegan": true,
       "vegetarien": true,
       "pFrais": true
@@ -183,27 +240,34 @@
     {
       "title": "Crème glacée",
       "vegetarien": true,
-      "alergenesIng": ["Produit laitier"],
+      "alergenesIng": [
+        "Produit laitier"
+      ],
       "pFrais": true
     },
-{
+    {
       "title": "Crème glacée chocolat",
       "vegetarien": true,
-      "alergenesIng": ["Produit laitier"],
+      "alergenesIng": [
+        "Produit laitier"
+      ],
       "pFrais": true
     },
-{
+    {
       "title": "Crème glacée fraise",
       "vegetarien": true,
-      "alergenesIng": ["Produit laitier"],
+      "alergenesIng": [
+        "Produit laitier"
+      ],
       "pFrais": true
     },
-{
+    {
       "title": "Crème glacée vanille",
       "vegetarien": true,
-      "alergenesIng": ["Produit laitier"],
+      "alergenesIng": [
+        "Produit laitier"
+      ],
       "pFrais": true
     }
-    
   ]
 }

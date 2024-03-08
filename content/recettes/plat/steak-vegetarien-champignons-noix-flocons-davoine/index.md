@@ -81,5 +81,8 @@ preparation: >-
   * Façonner (je ne me souviens plus le poids d'un steak individuel mais peser le tout et calculer, c'est assez généreux). Mettre de l'huile sur les deux faces du steak (au pinceau c'est le mieux)
 
   * Faire cuire à 180°C environ 30 minutes, jusqu'à ce qu'ils brunissent un peu. Retourner en milieu de cuisson.
+astuces:
+  - astuce: Les noix peuvent être remplacées par des amandes ou autres fruits à
+      coques. Les épices peuvent être changées.
 publishDate: 2024-03-08T10:19:47.990Z
 ---

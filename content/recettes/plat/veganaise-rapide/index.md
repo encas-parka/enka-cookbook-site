@@ -32,7 +32,12 @@ ingredients:
       unit: ml
 materiel:
   - Giraffe (Bras Mixeur)
-preparation: "*"
-preparation24h: Mettre la crème soja au frais
+preparation: >-
+  * Mettre tous les ingrédients dans un grand bocal ou deux selon les quantités.
+  La crème soja doit être froide.
+
+  * Mixer avec un bras mixeur.
+preparation24h: Mettre la crème soja au frais, la recette marche mieux si elle
+  est froide (pas testé autrement)
 publishDate: 2024-03-08T11:49:45.632Z
 ---

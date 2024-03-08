@@ -1,12 +1,6 @@
 {
   "ingredients": [
     {
-      "title": "Semoule de blé fine",
-      "alergenesIng": [
-        "Gluten"
-      ]
-    },
-    {
       "title": "Yaourt de soja",
       "vegetarien": true,
       "vegan": true,

@@ -1,21 +1,32 @@
 {
   "ingredients": [
     {
+      "title": "Flocons d'avoine",
+      "alergenesIng": [
+        "Gluten"
+      ]
+    },
+    {
       "title": "Amande",
-      "alergenesIng": ["Fruit à coque"],
+      "alergenesIng": [
+        "Fruit à coque"
+      ],
       "vegan": true,
       "vegetarien": true
     },
     {
       "title": "Amandes effilées",
-      "alergenesIng": ["Fruit à coque"],
+      "alergenesIng": [
+        "Fruit à coque"
+      ],
       "vegan": true,
       "vegetarien": true
     },
-
     {
       "title": "Blé",
-      "alergenesIng": ["Gluten"],
+      "alergenesIng": [
+        "Gluten"
+      ],
       "vegan": true,
       "vegetarien": true
     },
@@ -29,7 +40,9 @@
       "title": "Cacahuète",
       "vegan": true,
       "vegetarien": true,
-      "alergenesIng": ["Arachide"]
+      "alergenesIng": [
+        "Arachide"
+      ]
     },
     {
       "title": "Couscous de Mais-Riz",
@@ -55,7 +68,9 @@
       "title": "Lasagnes",
       "vegan": true,
       "vegetarien": true,
-      "alergenesIng": ["Gluten"]
+      "alergenesIng": [
+        "Gluten"
+      ]
     },
     {
       "title": "Lentilles",
@@ -74,13 +89,17 @@
     },
     {
       "title": "Noisette",
-      "alergenesIng": ["Fruit à coque"],
+      "alergenesIng": [
+        "Fruit à coque"
+      ],
       "vegan": true,
       "vegetarien": true
     },
     {
       "title": "Noix de cajou",
-      "alergenesIng": ["Fruit à coque"],
+      "alergenesIng": [
+        "Fruit à coque"
+      ],
       "vegan": true,
       "vegetarien": true
     },
@@ -89,19 +108,25 @@
       "title": "Noix",
       "vegan": true,
       "vegetarien": true,
-      "alergenesIng": ["Fruit à coque"]
+      "alergenesIng": [
+        "Fruit à coque"
+      ]
     },
     {
       "title": "Noix de macadamia",
       "vegan": true,
       "vegetarien": true,
-      "alergenesIng": ["Fruit à coque"]
+      "alergenesIng": [
+        "Fruit à coque"
+      ]
     },
     {
       "title": "Noix de pécan",
       "vegan": true,
       "vegetarien": true,
-      "alergenesIng": ["Fruit à coque"]
+      "alergenesIng": [
+        "Fruit à coque"
+      ]
     },
     {
       "title": "Nouilles chinoises",
@@ -117,18 +142,23 @@
       "title": "Pâtes",
       "vegan": true,
       "vegetarien": true,
-      "alergenesIng": ["Gluten"]
+      "alergenesIng": [
+        "Gluten"
+      ]
     },
     {
       "title": "Pâtes - langue d'oiseau",
-      "alergenesIng": ["Gluten"],
+      "alergenesIng": [
+        "Gluten"
+      ],
       "vegan": true,
       "vegetarien": true
     },
-
     {
       "title": "Pignon de pin",
-      "alergenesIng": ["Fruit à coque"],
+      "alergenesIng": [
+        "Fruit à coque"
+      ],
       "vegan": true,
       "vegetarien": true
     },
@@ -147,7 +177,6 @@
       "vegan": true,
       "vegetarien": true
     },
-
     {
       "title": "Quinoa",
       "vegan": true,
@@ -165,19 +194,25 @@
     },
     {
       "title": "Semoule grosse (blé)",
-      "alergenesIng": ["Gluten"],
+      "alergenesIng": [
+        "Gluten"
+      ],
       "vegan": true,
       "vegetarien": true
     },
     {
       "title": "Semoule moyenne (blé)",
-      "alergenesIng": ["Gluten"],
+      "alergenesIng": [
+        "Gluten"
+      ],
       "vegan": true,
       "vegetarien": true
     },
     {
       "title": "Semoule fine (blé)",
-      "alergenesIng": ["Gluten"],
+      "alergenesIng": [
+        "Gluten"
+      ],
       "vegan": true,
       "vegetarien": true
     },

@@ -1,6 +1,12 @@
 {
   "ingredients": [
     {
+      "title": "Crème florette",
+      "alergenesIng": [
+        "Produit laitier"
+      ]
+    },
+    {
       "title": "Crème soja",
       "alergenesIng": [
         "Soja"

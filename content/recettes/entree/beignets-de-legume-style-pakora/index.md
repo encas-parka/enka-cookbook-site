@@ -48,6 +48,7 @@ ingredients:
       quantite: 4.5
       unit: Kg
   epices:
+    - title: Garam Masala
     - title: Gingembre en poudre
     - title: Paprika
     - title: Cumin

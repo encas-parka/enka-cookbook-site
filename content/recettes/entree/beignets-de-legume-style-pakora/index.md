@@ -55,6 +55,7 @@ ingredients:
     - title: Gros sel
 materiel:
   - Friteuse
+  - Robot-coupe
 preparation: >-
   * Râper tous les légumes au robocoupe. Enlever une bonne partie du jus.
 

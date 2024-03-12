@@ -19,6 +19,9 @@ checkfor: 250
 ingredients:
   legumes: []
   autres:
+    - title: Protéines de soja
+      quantite: 5.4
+      unit: Kg
     - title: Eau
       quantite: 5.3
       unit: litre

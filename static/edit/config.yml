@@ -1,9 +1,7 @@
 backend:
-  name: git-gateway
+  name: github
   repo: encas-parka/enka-cookbook-site
   branch: main # Branch to update (optional; defaults to master)
-  base_url: https://enka-cookbook.netlify.app/
-
   squash_merges: true  
   use_graphql: true 
 publish_mode: editorial_workflow

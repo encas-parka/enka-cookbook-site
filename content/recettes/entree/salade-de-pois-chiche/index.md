@@ -1,9 +1,8 @@
 ---
-title: Salade de Pois-chiche
 draft: false
-layout: recettes
+title: Salade de Pois-chiche
 img: salade-pois-chiches.webp
-
+layout: recettes
 type: entree
 categories:
   - Salade
@@ -15,6 +14,7 @@ regime:
 cuisson: Oui
 temperature: Froid
 plate: 190
+check: Oui
 ingredients:
   legumes:
     - title: Ail
@@ -39,7 +39,6 @@ ingredients:
       commentaire: Pois-chiche secs
   epices:
     - title: Cumin
-     
     - title: Coriandre
       quantite: 2
       unit: bottes
@@ -49,14 +48,14 @@ ingredients:
       quantite: 1
       unit: litre
 preparation: >-
-  * Mettre les pois chiche à tremper la veille.
+  Faire cuire les pois chiche mais qu'ils restent fermes
 
-  * Faire cuire les pois chiche mais qu'ils restent fermes
 
   * Couper tous les legumes en petits dés ( 1cm pas plus)
 
   * Faire revenir ensembles courgettes, poivrons, oignons, rajouter l'ail à la fin.
 
   * Une fois tous les ingrédients refroidis mélanger tout avec les tomates et l'herbe.
+preparation24h: Mettre les pois chiche à tremper la veille.
 publishDate: 2022-11-23T22:44:10.332Z
 ---

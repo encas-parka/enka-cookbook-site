@@ -48,6 +48,7 @@ ingredients:
       quantite: 4.5
       unit: Kg
   epices:
+    - title: Garam Masala
     - title: Gingembre en poudre
     - title: Paprika
     - title: Cumin
@@ -55,6 +56,7 @@ ingredients:
     - title: Gros sel
 materiel:
   - Friteuse
+  - Robot-coupe
 preparation: >-
   * Râper tous les légumes au robocoupe. Enlever une bonne partie du jus.
 

@@ -132,9 +132,9 @@ collections:
         search_fields: ["title"]
         multiple: true
         max: 4
-        options_length: 10
+        options_length: 20
         required: true
-        hint: "Vous pouver en définir plusieurs, mais la permière servira à définir l'icone associé à la recette."
+        hint: "Vous pouver en définir plusieurs, mais la permière servira à définir l'icone associée à la recette."
       - label: "auteur"
         name: "auteur"
         widget: "string"
@@ -527,7 +527,7 @@ collections:
         multiple: true
         value_field: "title"
         search_fields: ["title"]
-        options_length: 12
+        options_length: 20
 
       - label: "Préparation"
         name: "preparation"

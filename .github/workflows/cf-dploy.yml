@@ -13,4 +13,4 @@ jobs:
     - name: curl
       uses: enflo/curl-action@master
       with:
-        curl: '${{ secrets.CF_HOOK_DEPLOY }}'
+        curl: ${{ secrets.CF_HOOK_DEPLOY }}

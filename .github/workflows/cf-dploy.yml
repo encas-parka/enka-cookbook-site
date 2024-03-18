@@ -10,4 +10,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: deploy-hook
-      run: curl -X POST '${{ secrets.CF_HOOK_DEPLOY }}'
+      run: curl -X POST ${{ secrets.CF_HOOK_DEPLOY }}

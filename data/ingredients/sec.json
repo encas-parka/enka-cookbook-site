@@ -1,6 +1,9 @@
 {
   "ingredients": [
     {
+      "title": "Pois chiche cuit"
+    },
+    {
       "title": "Flocons d'avoine",
       "alergenesIng": [
         "Gluten"

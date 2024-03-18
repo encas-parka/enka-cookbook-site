@@ -6,11 +6,8 @@ on:
       - main
 
 jobs:
-  curl:
+  deploy-on-cloudflare:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@master
-    - name: curl
-      uses: enflo/curl-action@master
-      with:
-        curl: ${{ secrets.CF_HOOK_DEPLOY }}
+    - name: deploy-hook
+      run: curl -X POST '${{ secrets.CF_HOOK_DEPLOY }}'

@@ -4,6 +4,7 @@ backend:
   name: github
   repo: encas-parka/enka-cookbook-site
   base_url: https://enka-cookbook.pages.dev
+  auth_endpoint: /api/auth
   branch: main # Branch to update (optional; defaults to master)
   squash_merges: true  
   use_graphql: true 

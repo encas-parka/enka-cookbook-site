@@ -1,0 +1,16 @@
+name: Deploy to production (cloudflare pages)
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  curl:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    - name: curl
+      uses: enflo/curl-action@master
+      with:
+        curl: '${{ secrets.CF_HOOK_DEPLOY }}'

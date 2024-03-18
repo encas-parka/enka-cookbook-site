@@ -1,6 +1,9 @@
+# Decap Cms for cloudflare with github auth account
+
 backend:
   name: github
   repo: encas-parka/enka-cookbook-site
+  base_url: https://enka-cookbook.pages.dev
   branch: main # Branch to update (optional; defaults to master)
   squash_merges: true  
   use_graphql: true 

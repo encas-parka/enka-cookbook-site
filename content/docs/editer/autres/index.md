@@ -14,16 +14,16 @@ Des listes d'[ingrédients]({{% ref "/ingredients" %}}), de matériel nécessair
 
 Pour les ingrédients, il est demandé de préciser s'il est allergène, ou s'il contient de la viande ou du porc. 
 
-{{< bs/btn-link url="https://enka-cookbook.netlify.app/admin/#/collections/ingredients_index" size=sm >}}
+{{< bs/btn-link url="https://enka-cookbook.netlify.app/admin/#/collections/ingredients_index" size=sm class="m-1 py-0" outline=true >}}
 → ajouter un ingrédient 
 {{< /bs/btn-link >}}
-{{< bs/btn-link url="/ingredients" size=sm >}}
+{{< bs/btn-link url="/ingredients" size=sm class="m-1 py-0" outline=true >}}
 → voir la liste d'ingrédients disponible
 {{< /bs/btn-link >}}
-{{< bs/btn-link url="https://enka-cookbook.netlify.app/admin/#/collections/materiel" size=sm >}}
+{{< bs/btn-link url="https://enka-cookbook.netlify.app/admin/#/collections/materiel" size=sm class="m-1 py-0" outline=true >}}
 → ajouter un materiel
 {{< /bs/btn-link >}}
-{{< bs/btn-link url="https://enka-cookbook.netlify.app/admin/#/collections/sous-categories" size=sm >}}
+{{< bs/btn-link url="https://enka-cookbook.netlify.app/admin/#/collections/sous-categories" size=sm class="m-1 py-0" outline=true >}}
 → ajouter une catégorie
 {{< /bs/btn-link >}}
 

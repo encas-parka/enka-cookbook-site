@@ -44,13 +44,13 @@ Lorsque vous commencez à taper le nom d'un ingrédient, une liste de propositio
 
 Vous pouvez rapidement vérifier la disponibilité d'un ingrédient sur la page [ingrédients]({{% ref "/ingredients" %}}). Lorsque vous souhaitez ajouter une recette avec des ingrédients peu commun, il peut être malin de se rendre sur cette page au préalable pour vérifier leur existence, et commencer par ajouter les ingrédients manquant au site  avant de rédiger la recette. L'ajout d'ingrédients au site se fait depuis l'interface d'édition
 
-{{< bs/btn-link url="https://enka-cookbook.netlify.app/admin/#/collections/ingredients_index" size=sm >}}
+{{< bs/btn-link url="https://enka-cookbook.netlify.app/admin/#/collections/ingredients_index" size=sm class="m-1 py-0" outline=true  >}}
 → ajouter un ingrédient 
 {{< /bs/btn-link >}}
-{{< bs/btn-link url="/ingredients" size=sm >}}
+{{< bs/btn-link url="/ingredients" size=sm class="m-1 py-0" outline=true  >}}
 → voir la liste d'ingrédients disponible
 {{< /bs/btn-link >}}
-{{< bs/btn-link url="/docs/editer/autres" size=sm >}}→ page de doc sur l'ajout d'ingrédients au site{{< /bs/btn-link >}}
+{{< bs/btn-link url="/docs/editer/autres" size=sm class="m-1 py-0" outline=true  >}}→ page de doc sur l'ajout d'ingrédients au site{{< /bs/btn-link >}}
 
 Indiquer les quantités en Kg, grammes, litres ou mili-litres est fortement encouragé, afin de permettre l'élaboration des listes de courses lorsque les recettes sont utilisées par une page événement.  
 

@@ -8,7 +8,7 @@ on:
 jobs:
   deploy-on-cloudflare:
     runs-on: ubuntu-latest
-    if: "contains(github.event.head_commit.message, ' Recettes ')"
+    if: "contains(github.event.head_commit.message, ' Recettes ') || contains(github.event.head_commit.message, ' cf-deploy')"
     steps:
     - name: deploy-hook
       run: curl -X POST ${{ secrets.CF_HOOK_DEPLOY }}

@@ -50,7 +50,7 @@ Vous pouvez rapidement vérifier la disponibilité d'un ingrédient sur la page 
 {{< bs/btn-link url="/ingredients" size=sm >}}
 → voir la liste d'ingrédients disponible
 {{< /bs/btn-link >}}
-{{< bs/btn-link url=/docs/editer/autres" size=sm >}}→ page de doc sur l'ajout d'ingrédients au site{{< /bs/btn-link >}}
+{{< bs/btn-link url="/docs/editer/autres" size=sm >}}→ page de doc sur l'ajout d'ingrédients au site{{< /bs/btn-link >}}
 
 Indiquer les quantités en Kg, grammes, litres ou mili-litres est fortement encouragé, afin de permettre l'élaboration des listes de courses lorsque les recettes sont utilisées par une page événement.  
 

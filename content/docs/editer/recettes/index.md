@@ -38,11 +38,19 @@ Certains champs sont optionnels, d'autres sont obligatoires. De nombreux champs 
 
 
 ## Les ingrédients
-L'ajout des ingrédients se fait à partir de champs répartis dans différentes catégories d'ingrédients. 
+L'ajout des ingrédients dans une recette se fait à partir de champs répartis dans différentes catégories d'ingrédients (sec, fruits et légumes, etc.). 
 
-Lorsque vous commencez à taper le nom d'un ingrédient, une liste de propositions apparaît : les ingrédients sont pré-enregistré afin de permettre certaines classifications automatiques (présence d’allergènes notamment).   
+Lorsque vous commencez à taper le nom d'un ingrédient, une liste de propositions apparaît : les ingrédients sont pré-enregistrés afin de permettre certaines classifications automatiques (présence d’allergènes notamment).   
 
-Vous pouvez rapidement vérifier l'existence d'un ingrédient sur la page [ingrédients](https://enka-cookbook.netlify.app/ingredients/). Lorsque vous souhaitez ajouter une recette avec des ingrédients peu commun, il peut être malin de se rendre sur cette page au préalable pour vérifier leur existence, et commencer par [ajouter les ingrédients manquant au site]({{< ref "docs/editer/autres/index.md#les-ingrédients" >}}) avant de rédiger la recette.
+Vous pouvez rapidement vérifier la disponibilité d'un ingrédient sur la page [ingrédients]({{% ref "/ingredients" %}}). Lorsque vous souhaitez ajouter une recette avec des ingrédients peu commun, il peut être malin de se rendre sur cette page au préalable pour vérifier leur existence, et commencer par ajouter les ingrédients manquant au site  avant de rédiger la recette. L'ajout d'ingrédients au site se fait depuis l'interface d'édition
+
+{{< bs/btn-link url="https://enka-cookbook.netlify.app/admin/#/collections/ingredients_index" size=sm >}}
+→ ajouter un ingrédient 
+{{< /bs/btn-link >}}
+{{< bs/btn-link url="/ingredients" size=sm >}}
+→ voir la liste d'ingrédients disponible
+{{< /bs/btn-link >}}
+{{< bs/btn-link url=/docs/editer/autres" size=sm >}}→ page de doc sur l'ajout d'ingrédients au site{{< /bs/btn-link >}}
 
 Indiquer les quantités en Kg, grammes, litres ou mili-litres est fortement encouragé, afin de permettre l'élaboration des listes de courses lorsque les recettes sont utilisées par une page événement.  
 
@@ -75,7 +83,7 @@ blue
   size="12 lg:6" 
 >}}
 
-## Publier une recette
+## Publier une recette ✨
 
 {{< text_img img_content="img/save/save-step1.jpg" alt="Enregistrer une recette">}}
 Pour publier une recette, il faut :
@@ -84,9 +92,14 @@ Pour publier une recette, il faut :
 3. Cliquer sur "Publier" → "Publier maintenant"
 {{< /text_img >}}
 
-{{% bs/alert warning %}}
+### Enregistrer / accéder aux "brouillons" & recettes non publiées
 
-## Publier plusieurs recettes
+Si vous avez enregistré une recette (ou un ingrédient, un matériel, etc.), mais que vous ne l'avez pas immédiatement publié, vous pouvez la retrouver plus tard dans l'onglet "Flux" de la barre de menu en haut de l'interface d'édition. De là, il vous sera possible de la modifier (en cliquant dessus), ou de la publier (en la glissant dans la colonne "Prêt", puis en cliquant sur publier. Voir les captures d'écran ci-dessous)
+
+
+
+## Publier plusieurs recettes 
+{{% bs/alert warning %}}
 Si vous ajoutez plusieurs recettes en une session, il est recommandé de ne pas les publier immédiatement (étape 3. ci-dessus). 
 
 Il est préférable de créer d'abord toute les recettes, de les enregistrer, puis lorsque c'est fait, de les publier toutes d'un coup depuis l'onglet "Flux". 

@@ -6,6 +6,8 @@ repas:
     date_service: 2024-01-14T11:15:00.000Z
     horaire: midi
     recettes_du_repas:
+      - recette: Houmous
+        type_plat: entree
       - recette: Aubergines grillées au miso
         type_plat: plat
       - recette: Beignets de légume style pakora

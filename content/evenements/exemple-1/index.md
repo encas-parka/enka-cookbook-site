@@ -2,6 +2,14 @@
 title: Exemple 1
 sitemap_exclude: "true"
 repas:
+  - assiettes: 120
+    date_service: 2024-01-14T11:15:00.000Z
+    horaire: midi
+    recettes_du_repas:
+      - recette: Aubergines grillées au miso
+        type_plat: plat
+      - recette: Beignets de légume style pakora
+        type_plat: entree
   - assiettes: 45
     date_service: 2024-01-12T02:18:09.558Z
     horaire: soir

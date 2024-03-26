@@ -5,6 +5,7 @@ layout: recettes
 type: entree
 categories:
   - Bouchées salées
+auteur: mag
 regime:
   - vegan
   - sans-gluten

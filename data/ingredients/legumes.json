@@ -2,10 +2,6 @@
   "ingredients": [
     {
       "pFrais": false,
-      "title": "Olives vertes dénoyautées"
-    },
-    {
-      "pFrais": false,
       "title": "Olives noires à la grecque"
     },
     {
@@ -270,7 +266,7 @@
       "pFrais": true
     },
     {
-      "title": "Harcitos beurre",
+      "title": "Haricots beurre",
       "pFrais": true
     },
     {

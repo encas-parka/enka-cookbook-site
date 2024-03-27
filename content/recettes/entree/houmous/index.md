@@ -1,5 +1,5 @@
 ---
-title: Houmous & /
+title: Houmous test
 layout: recettes
 type: entree
 categories:

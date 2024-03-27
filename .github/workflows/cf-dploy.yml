@@ -14,7 +14,7 @@ jobs:
       run: curl -X POST ${{ secrets.CF_HOOK_DEPLOY }}
   deploy-on-netlify:
     runs-on: ubuntu-latest
-    if: contains(github.event.head_commit.message, 'netlify-deploy')
+    if: "contains(github.event.head_commit.message, 'netlify-deploy')"
     steps:
     - name: deploy-hook-netlify
       run: curl -X POST ${{ secrets.NETLIFY_DEPLOY_MAIN }}

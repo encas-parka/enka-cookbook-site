@@ -95,7 +95,12 @@ collections:
     create: true
 
     fields:
-      - { label: "Intitulé", name: "title", widget: "string", hint: "Attention à ne pas utiliser un nom de recette déjà existant (sinon, l'une des 2 pages ne sera PAS ACCESSIBLE pas sur le site...). ET si vous modifiez le titre alors que la recette est déjà utilisé dans un évenement, la page de l'événement ne FONCTIONNERA PLUS correctement. Il vous faudra éditer la page de l'événement pour indiquer le nouveau titre de la recette.  " }
+      - { label: "Intitulé", 
+          name: "title", 
+          widget: "string", 
+          hint: "Attention à ne pas utiliser un nom de recette déjà existant (sinon, l'une des 2 pages ne sera PAS ACCESSIBLE pas sur le site...). ET si vous modifiez le titre alors que la recette est déjà utilisé dans un évenement, la page de l'événement ne FONCTIONNERA PLUS correctement. Il vous faudra éditer la page de l'événement pour indiquer le nouveau titre de la recette. Ne peut contenir que des lettres, des chiffres, des parenthèses ou des tirets (-)",
+          pattern: [ '^[a-zA-Z0-9 éèëïïùàâôêûç \u002C\u0027\u2018\u2019\u00C0-\u00FF()\-]+$', 'Contient un caractère spécial interdit. Ne peut contenir que des lettres, des chiffres, des parenthèses ou des tirets (-), virgules et apostrophes.' ]
+          }
       # - {label: 'Brouillon', name: 'draft', widget: 'boolean', default: false}
       - { name: "slug",  widget: "hidden", default: }
       - {

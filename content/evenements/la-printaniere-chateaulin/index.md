@@ -16,7 +16,7 @@ repas:
         altAssiettes: 50
         commentaire: Pour les 50 repas on comptera 3 choux frisé en plus pour les
           déposer sur la purée avec la picada aux amandes.
-      - recette: Fromage Frais Ail/ciboulette VEGAN
+      - recette: Fromage Frais Ail - ciboulette VEGAN
         type_plat: entree
         altAssiettes: 50
       - recette: Salade Fenouil-Carottes-Oranges

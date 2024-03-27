@@ -1,6 +1,10 @@
 {
   "ingredients": [
     {
+      "pFrais": true,
+      "title": "test !"
+    },
+    {
       "pFrais": false,
       "title": "Olives noires à la grecque"
     },

@@ -1,6 +1,12 @@
 {
   "ingredients": [
     {
+      "title": "Nouveau Ingrédient",
+      "alergenesIng": [
+        "Gluten"
+      ]
+    },
+    {
       "title": "Crème florette",
       "alergenesIng": [
         "Produit laitier"

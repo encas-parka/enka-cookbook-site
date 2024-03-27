@@ -12,7 +12,7 @@ zoomable_img: true
 
 Des listes d'[ingrédients]({{% ref "/ingredients" %}}), de matériel nécessaires à l'élaboration des recettes (four, gastro, etc.), et des catégories pour classer les recettes (tartes, snacking, soupe, etc.) sont déjà enregistrés dans le site et donc utilisables lorsque l'on [édite/créé une recette]({{% ref "/docs/editer/recettes" %}}). Mais si vous souhaitez en ajouter, c'est possible depuis l'interface d'édition (colonne de gauche). 
 
-Pour les ingrédients, il est demandé de préciser s'il est allergène, ou s'il contient de la viande ou du porc. 
+Pour les ingrédients, il est demandé de préciser s'il est allergène, ou s'il contient de la viande ou du porc (ça permet d'ajouter automatiquement des alertes sur les recettes qui utilisent ces ingrédients). 
 
 {{< bs/btn-link url="https://enka-cookbook.netlify.app/admin/#/collections/ingredients_index" size=sm class="m-1 py-0" outline=true >}}
 → ajouter un ingrédient 

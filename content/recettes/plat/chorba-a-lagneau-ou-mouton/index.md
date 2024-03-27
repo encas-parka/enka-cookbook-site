@@ -1,10 +1,11 @@
 ---
-title: Chorba à  l'agneau (ou mouton)
 draft: false
-layout: recettes
+title: Chorba à l'agneau (ou mouton) ''
 img: https://img.cuisineaz.com/660x660/2016-07-15/i7543-chorba-a-l-agneau.jpeg
-
+layout: recettes
 type: plat
+categories:
+  - Soupe
 auteur: Sylvain
 regime:
   - sans-lactose
@@ -12,6 +13,7 @@ region: Algérie
 cuisson: Oui
 temperature: Chaud
 plate: 170
+check: Oui
 ingredients:
   legumes:
     - title: Céleri branche
@@ -44,7 +46,6 @@ ingredients:
   autres:
     - title: Concentré de tomate
       quantité: 2.4
-
   animaux:
     - title: Agneau
       quantite: 7
@@ -55,7 +56,6 @@ ingredients:
       alergene: true
     - title: Canelle
     - title: Poivre
-     
       commentaire: noir
     - title: Coriandre
       quantite: 8
@@ -84,14 +84,6 @@ preparation: >-
   * Laisser à nouveau mijoter un moment puis ajouter le concentré de tomates dilué dans de l'eau. 
 
   * On ajoute en dernier les langues d'oiseau et on laisse mijoter jusqu'au service ! (ne pas oublier d'ajouter la coriandre hachée vers la fin, on peut aussi en garder pour saupoudrer sur les bols !)
-prepAlt:
-  - regime:
-      - sans-gluten
-      - sans-lactose
-    preparation: Avant d'ajouter les langues d''oiseau prélever la chroma pour les
-      sans-gluglu et incorporer des spaghettis maïs 90%-riz cassé en petits
-      bouts
-categories:
-  - Soupe
+prepAlt: []
 publishDate: 2023-01-11T14:12:52.682Z
 ---

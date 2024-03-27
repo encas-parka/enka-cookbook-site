@@ -1,5 +1,5 @@
 ---
-title: Fromage Frais Ail/ciboulette VEGAN
+title: Fromage Frais Ail - ciboulette VEGAN
 layout: recettes
 type: entree
 categories:

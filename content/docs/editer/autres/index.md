@@ -1,6 +1,6 @@
 ---
 weight: 24
-title: "Autres pages (ingrédients...)"
+title: "Ajouter ingrédients, catégories, etc."
 description: "Ajouter des ingrédients, des catégories, etc."
 icon: "article"
 date: "2024-01-21T23:27:54+01:00"
@@ -48,6 +48,9 @@ Les ingrédients sont regroupés dans listes. Dans certaines d'entre-elles, il e
   {{< /bs/col >}}
   {{< bs/col size="md:12 lg:6" >}}
     {{< zoomable-img img_content="img/ingredients2.jpg"  alt="ingredients2.jpg">}}
+  {{< /bs/col >}}
+  {{< bs/col size="md:12 lg:6" >}}
+    {{< zoomable-img img_content="img/save-ing.jpg"  alt="ingredients2.jpg">}}
   {{< /bs/col >}}
 
 {{< /bs/row >}}

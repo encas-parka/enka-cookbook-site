@@ -680,7 +680,6 @@ collections:
                   widget: "number",
                   min: 1,
                   value_type: "int",
-                  min: 1,
                   max: 90000,
                   required: false,
                   hint: "Laisser vide si égale au nombre d'assiettes défini plus haut. Ce champs peut être utile pour les recettes destinées aux régimes spéciaux (sans-gluten, etc.), dont le nombre d'assiètes prévues est différent de celui défini globalement pour le repas.",

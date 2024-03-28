@@ -18,7 +18,7 @@ Ce site/theme permet de créer des sites de partage de recettes de cuisine (avec
 Un module de recherche est présent sur la barre de menu en haut de chaque page du site: recherche parmi nom, auteur•ice et spécialité (région)
 {{< /img_text >}}
 
-{{< text_img title="Explorer" image="screenshots/explorer.png" alt="Explorer" link="https://hugo-cookbook-demo.netlify.app/recettes">}}
+{{< text_img title="Explorer" image="images/doc/explorer.png" alt="Explorer" link="/recettes">}}
 La page "Explorer" permet de filtrer les recettes en fonction de différents critères (catégories, régimes spéciaux, ingrédients, saisons, etc. )
 {{< /text_img >}}
 
@@ -53,11 +53,15 @@ Ces listes sont présentées sous forme de tableaux, classés par type d'ingréd
    - Enfin, il est possible d'afficher dans ces tableaux, pour chaque ingrédient, les recettes (jour, horaire, nombre de couvert et quantité) à partir desquelles a été calculé le total affiché.
   {{< /text_img >}}
 
+  {{< text_img title="Des affiches Menus" image="images/doc/affiches-1.png">}}
+  - Des affiches de menu sont disponibles pour chaque repas. Il est possible de modifier ce qui s'y affiche, les polices et taille du texte. 
+  {{< /text_img  >}}
+
   {{< img_text title="Trouver un événement" img_content="img/event-search.jpg" >}}
   Un module de recherche est présent dans la barre de menu du haut pour retrouver un événement que vous avez créé,. Il faudra vous souvenir d'au moins 4 lettres du nom de l'événement...
 
   {{< /img_text  >}}
-  
+
 ### Imprimer, exporter en pdf
 
 Une attention particulière a été apporté à la facilitation des impressions ou de l'enregistrement en pdf des pages événements et de leurs différentes parties.

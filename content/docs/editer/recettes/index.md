@@ -42,7 +42,7 @@ L'ajout des ingrédients dans une recette se fait à partir de champs répartis 
 
 Lorsque vous commencez à taper le nom d'un ingrédient, une liste de propositions apparaît : les ingrédients sont pré-enregistrés afin de permettre certaines classifications automatiques (présence d’allergènes notamment).   
 
-Vous pouvez rapidement vérifier la disponibilité d'un ingrédient sur la page [ingrédients]({{% ref "/ingredients" %}}). Lorsque vous souhaitez ajouter une recette avec des ingrédients peu commun, il peut être malin de se rendre sur cette page au préalable pour vérifier leur existence, et commencer par ajouter les ingrédients manquant au site  avant de rédiger la recette. L'ajout d'ingrédients au site se fait depuis l'interface d'édition
+Vous pouvez rapidement vérifier la disponibilité d'un ingrédient sur la page [ingrédients]({{% ref "/ingredients" %}}). Lorsque vous souhaitez ajouter une recette avec des ingrédients peu commun, il peut être malin de se rendre sur cette page au préalable pour vérifier leur existence, et commencer par ajouter les ingrédients manquant au site  avant de rédiger la recette. L'ajout d'ingrédients au site se fait depuis l'interface d'édition (colonne de gauche > ingrédients).
 
 {{< bs/btn-link url="https://enka-cookbook.netlify.app/admin/#/collections/ingredients_index" size=sm class="m-1 py-0" outline=true  >}}
 → ajouter un ingrédient 
@@ -78,7 +78,6 @@ Un champ est dédié aux préparations à effectuer la veille du service. Ce qui
 
 ## Préparations alternatives
 S'il existe des préparations alternatives à celle que vous ajoutez (alternatives végés, ou avec d'autres proportions, etc.), il existe un champ qui permet de les indiquer. Les recettes ainsi liées entre-elles auront alors un lien indiquant l'alternative en bas de leur page. 
-blue
 {{< img-grid 
   from="content" 
   match="img/gallery-prepalt/*" 
@@ -93,6 +92,8 @@ Pour publier une recette, il faut :
 2. Définir son "statut" à "Prêt" (par défaut elle est enregistré comme brouillon)
 3. Cliquer sur "Publier" → "Publier maintenant"
 {{< /text_img >}}
+
+**Si vous modifier de nouveau une recette**, afin de publier les modifications, il faut de nouveau faire : "Enregistrer", puis re-changer le statut de "brouillon" à "prêt", puis "Publier"...
 
 ### Enregistrer / accéder aux "brouillons" & recettes non publiées
 

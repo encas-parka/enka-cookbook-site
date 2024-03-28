@@ -29,11 +29,11 @@ ingredients:
       unit: Kg
   lof:
     - title: huile d'olive
-      quantite: -76.5
+      quantite: 76.5
       unit: litre
   sucres:
     - title: Jus d'orange
-      quantite: -32
+      quantite: 32
       unit: litre
   epices: []
 preparation: >-

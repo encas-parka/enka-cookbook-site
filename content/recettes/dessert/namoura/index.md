@@ -43,7 +43,7 @@ ingredients:
       quantite: 9
       unit: c. à soupe
     - title: Sucre en poudre
-      quantite: 28
+      quantite: 0.6
       unit: Kg
     - title: Sucre en poudre
       quantite: 0.3

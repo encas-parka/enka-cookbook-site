@@ -1,9 +1,8 @@
 ---
-title: Houmous
+title: Houmous /
 layout: recettes
 type: entree
-categories:
-  - Tartinade
+categories: Tartinade
 regime:
   - vegan
   - vegetarien
@@ -40,8 +39,7 @@ ingredients:
     - title: Paprika
       quantite: 0.5
       unit: grammes
-materiel:
-  - Giraffe (Bras Mixeur)
+materiel: Giraffe (Bras Mixeur)
 preparation: >-
   * Mixer tous les ingrédients sauf l'huile d'olive. Mais attention à ne pas
   tout mettre dès le début, saler et ajuster au gout

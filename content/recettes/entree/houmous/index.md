@@ -1,5 +1,5 @@
 ---
-title: Houmous/
+title: Houmous
 layout: recettes
 type: entree
 categories: Tartinade
@@ -8,7 +8,7 @@ regime:
   - vegetarien
 cuisson: Oui
 temperature: Froid
-plate: 5
+plate: -2
 check: Oui
 checkAlwaysOk: false
 ingredients:

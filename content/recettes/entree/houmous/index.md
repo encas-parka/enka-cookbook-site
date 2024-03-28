@@ -1,5 +1,5 @@
 ---
-title: Houmous /
+title: Houmous/
 layout: recettes
 type: entree
 categories: Tartinade

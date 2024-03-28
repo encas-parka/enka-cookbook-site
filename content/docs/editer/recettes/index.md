@@ -57,12 +57,14 @@ Indiquer les quantités en Kg, grammes, litres ou mili-litres est fortement enco
 {{< zoomable-img img_content="img/1-ingredient.jpg" alt="ingredients" >}}
 
 
-Il est possible de "réduire" les ingrédients déjà ajoutés pour avoir une meilleure visibilité de l'ensemble.
+- Il est possible de "réduire" les ingrédients déjà ajoutés pour avoir une meilleure visibilité de l'ensemble.
+- Pour supprimer un ingrédient: cliquer sur la croix ("fermer") en haut a droite du cadre de l'ingrédient.
 {{< img-grid 
   from="content" 
   match="img/gallery-ing/*" 
   size="12 lg:6" 
   >}}
+
 
 ## Préparation à faire la veille
 Un champ est dédié aux préparations à effectuer la veille du service. Ce qui est inscrit dans ce champ sera mis en évidence dans la recette, afin d'éviter les oublis.

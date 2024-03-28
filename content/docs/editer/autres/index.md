@@ -40,7 +40,7 @@ Pour les ingrédients, il est demandé de préciser s'il est allergène, ou s'il
   {{< /bs/col >}}
 {{< /bs/row >}}
 
-Les ingrédients sont regroupés dans listes. Dans certaines d'entre-elles, il est possible de préciser  pour les ingrédients une saison (ex: fruits et légumes), et s'il s'agit d'un ingrédient frais (pouvant nécessiter une conservation au frigo).
+Les ingrédients sont regroupés dans listes. Dans certaines d'entre-elles, il est possible de préciser pour les ingrédients une saison (ex: fruits et légumes), et s'il s'agit d'un ingrédient frais (pouvant nécessiter une conservation au frigo).
 
 {{< bs/row class="align-items-center" >}}
   {{< bs/col size="md:12 lg:6" >}}

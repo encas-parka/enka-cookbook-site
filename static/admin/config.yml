@@ -185,6 +185,7 @@ collections:
       - label: "Quantités indiquées prévues pour combien de couverts ?"
         name: "plate"
         widget: "number"
+        min: 1
         value_type: "int"
       - label: "Testé ?"
         name: "check"
@@ -200,6 +201,7 @@ collections:
       - label: "Testé aussi pour ce nombres de couverts : "
         name: "checkfor"
         widget: "number"
+        min: 1
         value_type: "int"
         hint: "Si vous avez testé la recette pour un nombre de couverts significativement différent, et que la recette était réussie, indiquez ce nombre de couverts ici. S'il vous a fallu modifier les quantités d'ingrédients pour obtenir un résultat satisfaisant, vous pouvez 'dupliquer' cette recette (bouton 'publish' en haut → 'duplicate'), et modifier en conséquence la recette dupliquée (et amender le titre). Merci d'indiquer sur l'une des 2 recettes qu'il existe une recette alternative (compléter le champ 'Préparations Alternatives' en bas de cette page). À défaut, vous pouvez indiquer brièvement les modifications à apporter dans le champ 'astuces' en bas de cette page."
         required: false
@@ -234,6 +236,7 @@ collections:
                   label: "Quantité (nombre)",
                   name: "quantite",
                   widget: "number",
+                  min: 1,
                   value_type: "float",
                 }
               - {
@@ -271,6 +274,7 @@ collections:
                   label: "Quantité (nombre)",
                   name: "quantite",
                   widget: "number",
+                  min: 1,
                   value_type: "float",
                 }
               - {
@@ -310,6 +314,7 @@ collections:
                   label: "Quantité (nombre)",
                   name: "quantite",
                   widget: "number",
+                  min: 1,
                   value_type: "float",
                 }
               - {
@@ -358,6 +363,7 @@ collections:
                   label: "Quantité (nombre)",
                   name: "quantite",
                   widget: "number",
+                  min: 1,
                   value_type: "float",
                 }
               - {
@@ -396,6 +402,7 @@ collections:
                   label: "Quantité (nombre)",
                   name: "quantite",
                   widget: "number",
+                  min: 1,
                   value_type: "float",
                 }
               - {
@@ -445,6 +452,7 @@ collections:
                   label: "Quantité (nombre)",
                   name: "quantite",
                   widget: "number",
+                  min: 1,
                   value_type: "float",
                   required: false,
                 }
@@ -496,6 +504,7 @@ collections:
                   label: "Quantité (nombre)",
                   name: "quantite",
                   widget: "number",
+                  min: 1,
                   value_type: "float",
                   required: false,
                 }
@@ -669,6 +678,7 @@ collections:
                   label: "Nombre d'assiettes pour cette recette",
                   name: "altAssiettes",
                   widget: "number",
+                  min: 1,
                   value_type: "int",
                   min: 1,
                   max: 90000,

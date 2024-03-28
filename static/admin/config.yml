@@ -231,7 +231,7 @@ collections:
                 file: "ingredients_sec"
                 search_fields: ["ingredients.*.title"]
                 value_field: "ingredients.*.title"
-                options_length: 150
+                options_length: 300
               - {
                   label: "Quantité (nombre)",
                   name: "quantite",
@@ -269,7 +269,7 @@ collections:
                 file: "ingredients_legumes"
                 search_fields: ["ingredients.*.title"]
                 value_field: "ingredients.*.title"
-                options_length: 150
+                options_length: 300
               - {
                   label: "Quantité (nombre)",
                   name: "quantite",
@@ -309,7 +309,7 @@ collections:
                 file: "ingredients_lof"
                 search_fields: ["ingredients.*.title"]
                 value_field: "ingredients.*.title"
-                options_length: 150
+                options_length: 300
               - {
                   label: "Quantité (nombre)",
                   name: "quantite",
@@ -358,7 +358,7 @@ collections:
                 file: "ingredients_animaux"
                 search_fields: ["ingredients.*.title"]
                 value_field: "ingredients.*.title"
-                options_length: 150
+                options_length: 300
               - {
                   label: "Quantité (nombre)",
                   name: "quantite",
@@ -397,7 +397,7 @@ collections:
                 file: "ingredients_sucres"
                 search_fields: ["ingredients.*.title"]
                 value_field: "ingredients.*.title"
-                options_length: 150
+                options_length: 300
               - {
                   label: "Quantité (nombre)",
                   name: "quantite",
@@ -447,7 +447,7 @@ collections:
                 file: "ingredients_epices"
                 search_fields: ["ingredients.*.title"]
                 value_field: "ingredients.*.title"
-                options_length: 150
+                options_length: 300
               - {
                   label: "Quantité (nombre)",
                   name: "quantite",
@@ -499,7 +499,7 @@ collections:
                 file: "ingredients_autres"
                 search_fields: ["ingredients.*.title"]
                 value_field: "ingredients.*.title"
-                options_length: 150
+                options_length: 300
               - {
                   label: "Quantité (nombre)",
                   name: "quantite",
@@ -541,7 +541,7 @@ collections:
         multiple: true
         value_field: "title"
         search_fields: ["title"]
-        options_length: 20
+        options_length: 30
 
       - label: "Préparation"
         name: "preparation"
@@ -664,7 +664,7 @@ collections:
                 value_field: "title"
                 search_fields: ["title"]
                 display_fields: ["title"]
-                options_length: 150
+                options_length: 300
 
               - label: "Entrées/Plats/Desserts ?"
                 name: "type_plat"

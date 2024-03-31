@@ -1,6 +1,10 @@
 {
   "ingredients": [
     {
+      "pFrais": true,
+      "title": "Topinambour"
+    },
+    {
       "pFrais": false,
       "title": "Olives noires à la grecque"
     },

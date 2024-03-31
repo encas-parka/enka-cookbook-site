@@ -1,6 +1,9 @@
 {
   "ingredients": [
     {
+      "title": "Graines de lin"
+    },
+    {
       "title": "Protéines de soja",
       "alergenesIng": [
         "Soja"

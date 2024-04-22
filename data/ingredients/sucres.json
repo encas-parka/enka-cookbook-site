@@ -1,6 +1,15 @@
 {
   "ingredients": [
     {
+      "title": "Biscuit Petit Brun",
+      "alergenesIng": [
+        "Gluten",
+        "Produit laitier",
+        "Sésame",
+        "Oeuf"
+      ]
+    },
+    {
       "title": "Speculoos",
       "alergenesIng": [
         "Gluten",

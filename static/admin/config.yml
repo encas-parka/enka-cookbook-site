@@ -591,6 +591,8 @@ collections:
       - label: "Date de publication"
         name: "publishDate"
         widget: "datetime"
+        picker_utc: false, 
+
 
   ################################
   ################################

@@ -1,6 +1,9 @@
 {
   "ingredients": [
     {
+      "title": "Glucose"
+    },
+    {
       "title": "Biscuit Petit Brun",
       "alergenesIng": [
         "Gluten",

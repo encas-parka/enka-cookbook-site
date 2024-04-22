@@ -1,6 +1,13 @@
 {
   "ingredients": [
     {
+      "title": "Speculoos",
+      "alergenesIng": [
+        "Gluten",
+        "Soja"
+      ]
+    },
+    {
       "title": "Sirop d'agave"
     },
     {

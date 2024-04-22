@@ -59,5 +59,5 @@ preparation: >-
   * Faire chauffer huile, crème soja et glucose. Verser sur chocolat concassé.
 
   *  Pour démouler, poser le plat cinq seconde dans un bain marie.
-publishDate: 2024-04-22T09:32:43.801Z
+publishDate: 2024-04-22T11:46:00.000Z
 ---

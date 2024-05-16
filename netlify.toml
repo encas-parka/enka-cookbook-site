@@ -24,8 +24,8 @@
 [context.next.environment]
   HUGO_ENABLEGITINFO = "true"
 
-[[redirects]]
-from = "/"
-to = "https://enka-cookbook.pages.dev"
-status = 301
-force = true
+# [[redirects]]
+# from = "/"
+# to = "https://enka-cookbook.pages.dev"
+# status = 301
+# force = true

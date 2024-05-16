@@ -6,6 +6,7 @@ layout: recettes
 type: dessert
 categories:
   - Gateau
+auteur: Auré
 regime:
   - vegetarien
 cuisson: Oui

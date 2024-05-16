@@ -1,0 +1,189 @@
+{{ if .Site.Params.alert -}}
+{{ partial "header/alert.html" . }}
+{{ end -}}
+{{ if eq .Site.BaseURL "//enka-cookbook.netlify.app/" }}
+<script>window.confirm("L'adresse du site à changée :'https://enka-cookbook.pages.dev/''. Cette adresse sert maintenant juste de sauvegarde : il n'est pas mis a jours automatiquent lors de l'ajout de nouvelles recettes. \n Cliquez sur ok pour être redigé vers la nouvelle adresse.")
+  if (confirm) {
+    window.location.href = "https://enka-cookbook.pages.dev/"
+  }
+</script>
+{{ end }}
+
+<header>
+
+  <div>
+
+    <nav class="navbar navbar-dark bg-dark navbar-expand-sm no-print p-0 fixed-top">
+      <div class="container-fluid" style="max-height: 45px;">
+        <a class="navbar-brand monospace" href="{{ " /" | absURL }}"> <img src="/favicon-96x96.png" alt="logo"
+            height="32" class="d-inline-block align-text-center"> {{ .Site.Params.Title }}</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarHeader"
+          aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarHeader">
+          <ul class="navbar-nav mb-0 mb-lg-2 p-0 text-secondary me-auto">
+            <li class="nav-item">
+              <a class="nav-link px-3" href="/recettes">Explorer</a>
+            </li>
+            <li class="nav-item dropdown ">
+              <a class="nav-link px-3 dropdown-toggle" href="#" id="navbarDropdownTypes" role="button"
+                data-bs-toggle="dropdown" aria-expanded="false">
+                Types
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                {{ range (.Site.GetPage "section" "recettes").Pages}}
+                <li><a class="dropdown-item" href="{{.RelPermalink}}">
+                    {{ $svg := (printf "fonticons/%s.svg" .Title) | lower}}
+                    <span class="float-start me-2">{{ partial "inline-svg" (dict "src" $svg "display" "inline-middle"
+                      "rem" 2) . }}</span> {{.Title}}</a></li>
+                {{ end }}
+              </ul>
+            </li>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownCategories" role="button"
+                data-bs-toggle="dropdown" aria-expanded="false">
+                Catégories
+              </a>
+              <div class="dropdown-menu columns-2" aria-labelledby="navbarDropdown">
+                <div class="row">
+                  {{ range (.Site.GetPage "section" "categories").Pages}}
+                  <div class="col-sm-6">
+                    <ul class="multi-column-dropdown">
+                      <li>
+                        <a class="dropdown-item" href="{{.RelPermalink}}">
+                          {{ $svg := (printf "fonticons/%s.svg" .Title) | lower}}
+                          {{ if resources.Get (printf "fonticons/%s.svg" (.Title | lower) ) }}
+                          <span class="float-start me-2">{{ partial "inline-svg" (dict "src" $svg "display"
+                            "inline-middle" "rem" 3)
+                            . }}</span>
+                          {{ else }}
+                          <span class="float-start me-2">{{ partial "inline-svg" (dict "src" "fonticons/no-cat.svg"
+                            "display"
+                            "inline-middle" "rem" 3) . }}</span>
+                          {{ end }}
+                          {{.Title}}
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                  {{ end }}
+                </div>
+              </div>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownRegimes" role="button"
+                data-bs-toggle="dropdown" aria-expanded="false">
+                Régimes
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                {{ range (.Site.GetPage "section" "regime").Pages}}
+                <li><a class="dropdown-item" href="{{.RelPermalink}}"> {{ $svg := (printf "fonticons/%s.svg" .Title) |
+                    lower}}
+                    <span class="float-start me-2">{{ partial "inline-svg" (dict "src" $svg "display" "inline" "rem" 3)
+                      . }}</span> {{.Title}}</a></li>
+                {{ end }}
+              </ul>
+            </li>
+            <li class="nav-item ">
+              <a href="" class="nav-link" data-bs-toggle="modal" data-bs-target="#search-events-modal" role="button">
+                Evenements</a>
+            </li>
+          </ul>
+
+          <ul class="navbar-nav">
+            <li class="nav-item ">
+              <a href="{{ " /docs" | absURL }}" class="nav-link">
+                la doc
+              </a>
+            </li>
+            <li class="nav-item m-2">
+              <a class="btn btn-outline-primary btn-sm " data-bs-toggle="modal" data-bs-target="#search-recipes-modal">
+                {{ partial "inline-svg" (dict "src" "fonticons/search.svg" "display" "block" "fs" 4) }}
+              </a>
+            </li>
+            {{/* <li class="nav-item m-2">
+              <a href="/registration" class="btn btn-outline-primary btn-sm"
+                style="display: flex; align-items: center;">
+                {{partial "inline-svg" (dict "src" "fonticons/person-circle.svg" "fs" 4 ) }}
+                <span class="mx-2">Inscription</span>
+              </a>
+            </li> */}}
+            {{ if not (eq hugo.Environment "demo") }}
+            <li class="nav-item m-2">
+              <a href="/registration" class="btn btn-outline-primary btn-sm"
+                style="display: flex; align-items: center;">
+                {{partial "inline-svg" (dict "src" "fonticons/box-arrow-in-right.svg" "fs" 4 ) }}
+                <span class="mx-2">Connexion</span>
+              </a>
+            </li>
+
+            {{ end }}
+          </ul>
+        </div>
+
+      </div>
+    </nav>
+  </div>
+
+  {{/* Barre secondaire de navigation pour les pages 'evenements'. Utilise alpinejs pour vérifier la taille de l'ecran,
+  et adapter les boutons en conséquence. → deplacé vers evenement */}}
+  {{ if eq .Type "evenements" }}
+
+  {{end}}
+</header>
+
+{{ if not .IsHome }}
+<div class="navbar mx-lg-4">{{ partial "components/breadcrumb.html" . }}</div>
+
+{{ end }}
+
+
+
+
+{{/* Modal des modules de recherche alpinejs */}}
+<div class="modal fade" id="search-recipes-modal" data-toggle="modal" tabindex="0" aria-labelledby="Search Recipes"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg">
+    <div class="modal-content ">
+      <div class="modal-header py-2">
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        {{ partial "components/search-module-recipes" . }}
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="search-events-modal" data-toggle="modal" tabindex="0" aria-labelledby="Search Events"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg">
+    <div class="modal-content ">
+      <div class="modal-header py-2">
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        {{ partial "components/search-module-events" . }}
+      </div>
+    </div>
+  </div>
+</div>
+
+{{ partial "components/js_search-modules" . }}
+
+<script>
+  function scrollToReveal() {
+    return {
+      isScrolled: true, { {/* aussi pour la barre de navigation des pages evenements */ } }
+
+    lastPos: window.scrollY + 0,
+      scroll() {
+      scrolled = window.scrollY > this.$refs.navbar.offsetHeight && this.lastPos > window.scrollY || window.scrollY === 0;
+      this.lastPos = window.scrollY;
+      this.isScrolled = scrolled;
+    }
+  }
+  }
+</script>

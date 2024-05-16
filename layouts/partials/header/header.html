@@ -176,14 +176,14 @@
 <script>
   function scrollToReveal() {
     return {
-      isScrolled: true, { {/* aussi pour la barre de navigation des pages evenements */ } }
+      isScrolled: true,
 
-    lastPos: window.scrollY + 0,
+      lastPos: window.scrollY + 0,
       scroll() {
-      scrolled = window.scrollY > this.$refs.navbar.offsetHeight && this.lastPos > window.scrollY || window.scrollY === 0;
-      this.lastPos = window.scrollY;
-      this.isScrolled = scrolled;
+        scrolled = window.scrollY > this.$refs.navbar.offsetHeight && this.lastPos > window.scrollY || window.scrollY === 0;
+        this.lastPos = window.scrollY;
+        this.isScrolled = scrolled;
+      }
     }
-  }
   }
 </script>

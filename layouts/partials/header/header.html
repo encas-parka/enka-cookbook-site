@@ -1,7 +1,7 @@
 {{ if .Site.Params.alert -}}
 {{ partial "header/alert.html" . }}
 {{ end -}}
-{{ if eq .Site.BaseURL "https://enka-cookbook.netlify.app/" }}
+{{ if eq .Site.BaseURL "//enka-cookbook.netlify.app/" }}
 <script>window.confirm("L'adresse du site à changée :'https://enka-cookbook.pages.dev/''. Cette adresse sert maintenant juste de sauvegarde : il n'est pas mis a jours automatiquent lors de l'ajout de nouvelles recettes. \n Cliquez sur ok pour être redigé vers la nouvelle adresse.")
   if (confirm) {
     window.location.href = "https://enka-cookbook.pages.dev/"

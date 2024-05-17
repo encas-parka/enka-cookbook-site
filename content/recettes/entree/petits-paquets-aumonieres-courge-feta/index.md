@@ -16,7 +16,7 @@ cuisson: Oui
 temperature: Chaud
 plate: 200
 check: Oui
-checkAlwaysOk: true
+checkAlwaysOk: false
 checkfor: 10
 ingredients:
   legumes:

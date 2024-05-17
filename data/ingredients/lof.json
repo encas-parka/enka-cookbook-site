@@ -1,6 +1,12 @@
 {
   "ingredients": [
     {
+      "title": "Fromage blanc",
+      "alergenesIng": [
+        "Produit laitier"
+      ]
+    },
+    {
       "title": "Feta",
       "alergenesIng": [
         "Produit laitier"

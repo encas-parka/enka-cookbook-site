@@ -1,6 +1,6 @@
 ---
 title: Petits paquets / Aumonières courge feta
-description: Pour l'été, remplacer courge par courgette (pas testé)
+description: ""
 layout: recettes
 type: entree
 categories:
@@ -58,7 +58,7 @@ materiel:
 preparation: >-
   * Couper et caraméliser les oignons (avec vinaigre et sucre vers la fin)
 
-  * Râper courge/courgette. Enlever jus si courgette.
+  * Râper courge/courgette. Enlever jus si courgette (pas testé avec les courgettes)
 
   * Torréfier cumin puis piler avec baies roses
 
@@ -66,11 +66,9 @@ preparation: >-
 
   * Ajouter la feta émiettée
 
-  * Montage : une feuille filo pour 2 paquets. Plier la demi feuille en deux, puis façonner. Une grosse cuiller à soupe par paquet (à peser pour faire partage exact)
+  * Montage : une feuille filo pour 2 paquets. Plier la demi feuille en deux, puis façonner. Une grosse cuiller à soupe par paquet (à peser pour faire partage exact). Cette recette prévoit 2 petits paquets par personne.
 
   * Mettre environ 30 par gastro. Cuire au four à 180°C (à peu près 15 minutes, je me souviens plus exactement, et ça dépend des fours - il faut que ce soit doré et croustillant)
-
-
 
 
   Version vegan : sans la feta
@@ -78,5 +76,6 @@ preparation: >-
 
   Version sans gluten : avec des feuilles de riz (marche pas au four, à cuire à la poele dans un fond d'huile; et monter au dernier moment pour pas que ça durcisse - en vrai c'est pas ouf cette alternative, peut être que ça peut être juste la farce sur une biscotte sans gluten)
 preparation24h: ""
+prepAlt: []
 publishDate: 17-05-2024T15:21
 ---

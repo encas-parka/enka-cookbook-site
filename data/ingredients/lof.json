@@ -1,6 +1,12 @@
 {
   "ingredients": [
     {
+      "title": "Pate filo (1 feuille)",
+      "alergenesIng": [
+        "Gluten"
+      ]
+    },
+    {
       "title": "Bicarbonate alimentaire"
     },
     {

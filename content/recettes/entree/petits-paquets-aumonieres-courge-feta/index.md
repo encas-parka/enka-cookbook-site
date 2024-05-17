@@ -6,7 +6,7 @@ type: entree
 categories:
   - Bouchées salées
   - Snacking
-auteur: Marion
+auteur: ""
 regime:
   - vegetarien
 saison:

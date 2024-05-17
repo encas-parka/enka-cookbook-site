@@ -27,6 +27,9 @@ ingredients:
       quantite: 4.1
       unit: Kg
   lof:
+    - title: Feta
+      quantite: 3
+      unit: Kg
     - title: huile de tournesol
       quantite: 3.5
       unit: litre
@@ -34,6 +37,8 @@ ingredients:
       unit: unité
       quantite: 200
   epices:
+    - title: Sel
+    - title: Poivre
     - title: Vinaigre de cidre
       quantite: 0.5
       unit: litre

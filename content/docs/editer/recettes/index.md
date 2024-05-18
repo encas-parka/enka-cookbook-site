@@ -86,16 +86,16 @@ S'il existe des préparations alternatives à celle que vous ajoutez (alternativ
 
 ## Publier une recette ✨
 
-{{< text_img img_content="img/save/save-step1.jpg" alt="Enregistrer une recette">}}
+{{< text_img img_content="img/save/save-simple.png" alt="Enregistrer une recette">}}
 Pour publier une recette, il faut :
-1. Cliquer sur "Enregistrer" la recette
-2. Définir son "statut" à "Prêt" (par défaut elle est enregistré comme brouillon)
-3. Cliquer sur "Publier" → "Publier maintenant"
+<!-- 1. Cliquer sur "Enregistrer" la recette
+2. Définir son "statut" à "Prêt" (par défaut elle est enregistré comme brouillon) -->
+. Cliquer sur "Publier" → "Publier maintenant"
 {{< /text_img >}}
 
 **Si vous modifier de nouveau une recette**, afin de publier les modifications, il faut de nouveau faire : "Enregistrer", puis re-changer le statut de "brouillon" à "prêt", puis "Publier"...
 
-### Enregistrer / accéder aux "brouillons" & recettes non publiées
+<!-- ### Enregistrer / accéder aux "brouillons" & recettes non publiées
 
 Si vous avez enregistré une recette (ou un ingrédient, un matériel, etc.), mais que vous ne l'avez pas immédiatement publié, vous pouvez la retrouver plus tard dans l'onglet "Flux" de la barre de menu en haut de l'interface d'édition. De là, il vous sera possible de la modifier (en cliquant dessus), ou de la publier (en la glissant dans la colonne "Prêt", puis en cliquant sur publier. Voir les captures d'écran ci-dessous)
 
@@ -116,4 +116,4 @@ Cela permet de limiter le nombre de "reconstruction" du site: l’hébergement g
   match="img/save/*save-workflow.jpg" 
   size="12 lg:6"
   description="Publier plusieurs recettes en un session" 
->}}
+>}} -->

@@ -103,7 +103,7 @@ collections:
               "Contient un caractère spécial interdit. Ne peut contenir que des lettres, des chiffres, des parenthèses ou des tirets (-), virgules et apostrophes.",
             ],
         }
-      - { label: "Brouillon", name: "draft", widget: "boolean", default: false }
+      - { label: "Brouillon", name: "draft", widget: "boolean", default: false, required: false }
       - { name: "slug", widget: "hidden", default }
       - {
           label: "Image",

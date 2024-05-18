@@ -2,6 +2,24 @@
   "ingredients": [
     {
       "pFrais": true,
+      "title": "Margarine végétale spécial cuisson"
+    },
+    {
+      "pFrais": true,
+      "title": "Ricotta",
+      "alergenesIng": [
+        "Produit laitier"
+      ]
+    },
+    {
+      "pFrais": true,
+      "title": "Yaourt de vache",
+      "alergenesIng": [
+        "Produit laitier"
+      ]
+    },
+    {
+      "pFrais": true,
       "title": "Toastinette fromage burger"
     },
     {

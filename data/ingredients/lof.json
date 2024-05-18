@@ -1,6 +1,36 @@
 {
   "ingredients": [
     {
+      "title": "Lait de soja à la vanille",
+      "alergenesIng": [
+        "Soja"
+      ]
+    },
+    {
+      "title": "Huile de coco désodorisée"
+    },
+    {
+      "title": "Crème fraiche liquide entière",
+      "alergenesIng": [
+        "Produit laitier"
+      ]
+    },
+    {
+      "title": "huile de friture"
+    },
+    {
+      "title": "Lait concentré (non sucré)",
+      "alergenesIng": [
+        "Produit laitier"
+      ]
+    },
+    {
+      "title": "Farine de riz blanche"
+    },
+    {
+      "title": "Farine de riz gluant"
+    },
+    {
       "title": "Fromage blanc",
       "alergenesIng": [
         "Produit laitier"

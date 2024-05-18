@@ -2,6 +2,30 @@
   "ingredients": [
     {
       "pFrais": true,
+      "title": "Mâche (salade)"
+    },
+    {
+      "pFrais": false,
+      "title": "Cranberries"
+    },
+    {
+      "pFrais": false,
+      "title": "Cornichon"
+    },
+    {
+      "pFrais": false,
+      "title": "Betterave cuite"
+    },
+    {
+      "pFrais": true,
+      "title": "Gingembre"
+    },
+    {
+      "pFrais": false,
+      "title": "Petits pois surgelés"
+    },
+    {
+      "pFrais": true,
       "title": "Topinambour"
     },
     {

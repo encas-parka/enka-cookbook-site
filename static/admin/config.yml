@@ -141,7 +141,7 @@ collections:
         max: 4
         options_length: 20
         required: true
-        hint: "Vous pouver en définir plusieurs, mais la permière servira à définir l'icone associée à la recette."
+        hint: "Vous pouver en définir plusieurs, mais la première servira à définir l'icone associée à la recette."
       - label: "auteur"
         name: "auteur"
         widget: "string"
@@ -189,6 +189,11 @@ collections:
         widget: "number"
         min: 1
         value_type: "int"
+      - label: "Précision quantité"
+        name: "quantite_desc"
+        widget: "string"
+        required: false
+        hint: "vous pouvez préciser ici comment sont pensées les quantité. Par ex. : '24 parts par gastro'; '2 nems par personnes', etc."
       - label: "Testé ?"
         name: "check"
         hint: "Indiquez si vous avez testé la recette pour le nombre de couverts indiqués. C'est mieux si c'est le cas :)"
@@ -246,12 +251,13 @@ collections:
                   widget: "select",
                   options: ["Kg", "grammes", "unité"],
                 }
-              # - {
-              #     label: "commentaire",
-              #     name: "commentaire",
-              #     widget: "string",
-              #     required: false,
-              #   }
+              - {
+                  label: "commentaire",
+                  name: "commentaire",
+                  widget: "string",
+                  required: false,
+                  hint: "Si vous avez quelque-chose à préciser... ⚠ Ne sera pas afficher dans les listes de course"
+                }
 
           - label: "Fruits et Legumes"
             name: "legumes"
@@ -262,6 +268,7 @@ collections:
             required: false
             collapsed: true
             summary: "{{fields.title}}: {{fields.quantite}} {{fields.unit}}"
+            hint: "Vous pouvez retrouver la liste des ingrédients disponibles (et leur catégorie) sur la page https://enka-cookbook.pages.dev/ingredients/ . Pour ajouter des ingrédients qui ne sont pas encore répertorier, voir https://enka-cookbook.pages.dev/docs/editer/autres/"
             fields:
               - label: "ingredient"
                 name: title
@@ -271,6 +278,7 @@ collections:
                 search_fields: ["ingredients.*.title"]
                 value_field: "ingredients.*.title"
                 options_length: 300
+               
               - {
                   label: "Quantité (nombre)",
                   name: "quantite",
@@ -285,12 +293,14 @@ collections:
                   options: ["Kg", "grammes", "unité"],
                   hint: "Preférez les quantités en grammes/Kg/litres. La taille des légumes est variable, et lorsque tout est en Kg, grammes ou litres, c'est additionnable pour les listes de course ! ",
                 }
-              # - {
-              #     label: "commentaire",
-              #     name: "commentaire",
-              #     widget: "string",
-              #     required: false,
-              #   }
+              - {
+                  label: "commentaire",
+                  name: "commentaire",
+                  widget: "string",
+                  required: false,
+                  hint: "Si vous avez quelque-chose à préciser... ⚠ Ne sera pas afficher dans les listes de course"
+
+                }
 
           - label: "LOF : Lait, oeuf, farines, huile..."
             name: "lof"
@@ -331,14 +341,56 @@ collections:
                       "c. à soupe",
                       "c. à café",
                     ],
-                  hint: "Preférer les quantité en grammes/Kg/litres, qui sont additionnables pour les listes de course !",
+                  hint: "Préférez les quantités en grammes/Kg/litres, qui sont additionnables pour les listes de course !",
                 }
-              # - {
-              #     label: "commentaire",
-              #     name: "commentaire",
-              #     widget: "string",
-              #     required: false,
-              #   }
+              - {
+                  label: "commentaire",
+                  name: "commentaire",
+                  widget: "string",
+                  required: false,
+                  hint: "Si vous avez quelque-chose à préciser... ⚠ Ne sera pas afficher dans les listes de course"
+                }
+
+          - label: "Ingrédients Frais (beurre, yaourt, fromage... )"
+            name: "frais"
+            widget: "list"
+            allow_add: true
+            add_to_top: true
+            label_singular: "Ingrédient"
+            required: false
+            collapsed: true
+            summary: "{{fields.title}}: {{fields.quantite}} {{fields.unit}}"
+            fields:
+              - label: "ingredient"
+                name: title
+                widget: "relation"
+                collection: "ingredients_index"
+                file: "ingredients_frais"
+                search_fields: ["ingredients.*.title"]
+                value_field: "ingredients.*.title"
+                options_length: 300
+              - {
+                  label: "Quantité (nombre)",
+                  name: "quantite",
+                  widget: "number",
+                  min: 1,
+                  value_type: "float",
+                }
+              - {
+                  label: "Unité (quantité en...)",
+                  name: "unit",
+                  widget: "select",
+                  options: ["Kg", "grammes", "unité"],
+                }
+              - {
+                  label: "commentaire",
+                  name: "commentaire",
+                  widget: "string",
+                  required: false,
+                  hint: "Si vous avez quelque-chose à préciser... ⚠ Ne sera pas afficher dans les listes de course"
+                }
+              
+
 
           - label: "Viandes et Poissons (et crustacés, mollusques)"
             name: "animaux"
@@ -371,12 +423,14 @@ collections:
                   widget: "select",
                   options: ["Kg", "grammes", "unité"],
                 }
-              # - {
-              #     label: "commentaire",
-              #     name: "commentaire",
-              #     widget: "string",
-              #     required: false,
-              #   }
+              - {
+                  label: "commentaire",
+                  name: "commentaire",
+                  widget: "string",
+                  required: false,
+                  hint: "Si vous avez quelque-chose à préciser... ⚠ Ne sera pas afficher dans les listes de course"
+
+                }
 
           - label: "Sucrées"
             name: "sucres"
@@ -418,14 +472,16 @@ collections:
                       "c. à soupe",
                       "c. à café",
                     ],
-                  hint: "Preférer les quantité en grammes/Kg/litres, qui sont additionnables pour les listes de course ! ",
+                  hint: "Préférez les quantités en grammes/Kg/litres, qui sont additionnables pour les listes de course ! ",
                 }
-              # - {
-              #     label: "commentaire",
-              #     name: "commentaire",
-              #     widget: "string",
-              #     required: false,
-              #   }
+              - {
+                  label: "commentaire",
+                  name: "commentaire",
+                  widget: "string",
+                  required: false,
+                  hint: "Si vous avez quelque-chose à préciser... ⚠ Ne sera pas afficher dans les listes de course"
+
+                }
 
           - label: "Assaisonnements (Epices, aromatiques, vinaigres, sauce...)"
             name: "epices"
@@ -469,15 +525,17 @@ collections:
                       "c. à café",
                       "bottes",
                     ],
-                  hint: "Preférer les quantité en grammes/Kg/litres, qui sont additionnables pour les listes de course ! ",
+                  hint: "Préférez les quantités en grammes/Kg/litres, qui sont additionnables pour les listes de course ! ",
                   required: false,
                 }
-              # - {
-              #     label: "commentaire",
-              #     name: "commentaire",
-              #     widget: "string",
-              #     required: false,
-              #   }
+              - {
+                  label: "commentaire",
+                  name: "commentaire",
+                  widget: "string",
+                  required: false,
+                  hint: "Si vous avez quelque-chose à préciser... ⚠ Ne sera pas afficher dans les listes de course"
+
+                }
 
           - label: "Autres (ce qui ne se trouve pas ailleurs...)"
             name: "autres"
@@ -520,16 +578,18 @@ collections:
                       "c. à soupe",
                       "c. à café",
                     ],
-                  hint: "Preférer les quantité en grammes/Kg/litres/ml, qui sont additionnables pour les listes de course ! ",
+                  hint: "Préférez les quantités en grammes/Kg/litres/ml, qui sont additionnables pour les listes de course ! ",
 
                   required: false,
                 }
-              # - {
-              #     label: "commentaire",
-              #     name: "commentaire",
-              #     widget: "string",
-              #     required: false,
-              #   }
+              - {
+                  label: "commentaire",
+                  name: "commentaire",
+                  widget: "string",
+                  required: false,
+                  hint: "Si vous avez quelque-chose à préciser... ⚠ Ne sera pas afficher dans les listes de course"
+
+                }
 
       - label: "Materiel"
         name: "materiel"
@@ -549,7 +609,7 @@ collections:
         name: "preparation24h"
         widget: "markdown"
         required: false
-        hint: "Si la recette implique de préparer des choses en avance, le préciser ici pour que ce soit mis en avant lors de l'affichage des recettes"
+        hint: "Si la recette implique de préparer des choses en avance, le préciser ici pour que ce soit mis en avant lors de l'affichage des recettes(ce sera indiquer 'A prévoir a l'avance', a vous de précisez plus précisément quand)."
 
       ############### PrepAlt
 
@@ -686,7 +746,7 @@ collections:
                   value_type: "int",
                   max: 90000,
                   required: false,
-                  hint: "Laisser vide si égale au nombre d'assiettes défini plus haut. Ce champs peut être utile pour les recettes destinées aux régimes spéciaux (sans-gluten, etc.), dont le nombre d'assiètes prévues est différent de celui défini globalement pour le repas.",
+                  hint: "Laisser vide si égale au nombre d'assiettes défini plus haut. Ce champs peut être utile pour les recettes destinées aux régimes spéciaux (sans-gluten, etc.), dont le nombre d’assiettes prévues est différent de celui défini globalement pour le repas.",
                 }
 
               - {

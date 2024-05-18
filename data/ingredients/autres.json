@@ -1,6 +1,30 @@
 {
   "ingredients": [
     {
+      "title": "Pate feuilleté sans gluten et vegan"
+    },
+    {
+      "title": "Pate feuilletée sans gluten"
+    },
+    {
+      "title": "Pate feuilletée",
+      "alergenesIng": [
+        "Gluten"
+      ]
+    },
+    {
+      "title": "Beurre de cacahuètes (salé)",
+      "alergenesIng": [
+        "Arachides"
+      ]
+    },
+    {
+      "title": "Beurre de cacahuètes (sucré)",
+      "alergenesIng": [
+        "Arachides"
+      ]
+    },
+    {
       "title": "Saucisse végane"
     },
     {

@@ -25,12 +25,9 @@
   HUGO_ENABLEGITINFO = "true"
 
 
-[[redirects]]
-from = "/admin/*"
-to =  "https://enka-cookbook.netlify.app/:splat"
-status = 301
+
 
 [[redirects]]
-from = "/*"
-to = "https://enka-cookbook.pages.dev/:splat"
+from = "/"
+to = "https://enka-cookbook.pages.dev/"
 status = 301

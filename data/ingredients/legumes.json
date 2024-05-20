@@ -2,6 +2,14 @@
   "ingredients": [
     {
       "pFrais": true,
+      "title": "Salade verte (chêne)"
+    },
+    {
+      "pFrais": false,
+      "title": "Algue Kombu"
+    },
+    {
+      "pFrais": true,
       "title": "Mâche (salade)"
     },
     {

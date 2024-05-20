@@ -1180,6 +1180,11 @@ collections:
                   - { label: "Eté", value: "ete" }
                   - { label: "Automne", value: "automne" }
                   - { label: "Hiver", value: "hiver" }
+              - label: "Produit Frais ?"
+                name: "pFrais"
+                hint: "...si l'ingrédient doit se conserver au frais (sert à l'élaboration des listes de course)"
+                widget: "boolean"
+                required: false
               - {
                   label: "Allergènes (ou viande)",
                   name: "alergenesIng",
@@ -1204,6 +1209,7 @@ collections:
                       "Sulfites",
                       "Lupin",
                       "Mollusque",
+                      "Alcool",
                     ],
                   hint: "Précisez si l'ingrédient est (ou contient) des Allergènes (gluten, produit laitier, soja, oeufs...) ou de la viande. Cela permet aussi la detection des recettes non-vegan/végétarienne ou concernées par des interdits religieux.",
                 }

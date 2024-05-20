@@ -1,6 +1,12 @@
 {
   "ingredients": [
     {
+      "title": "Pain rassis",
+      "alergenesIng": [
+        "Gluten"
+      ]
+    },
+    {
       "title": "Pate feuilleté sans gluten et vegan"
     },
     {

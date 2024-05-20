@@ -1,6 +1,25 @@
 {
   "ingredients": [
     {
+      "title": "Citronnelle (bâton)"
+    },
+    {
+      "title": "mélange 4 épices"
+    },
+    {
+      "title": "Vinaigre de vin"
+    },
+    {
+      "title": "Vinaigre de Xérès",
+      "alergenesIng": null
+    },
+    {
+      "title": "Basilic sec",
+      "saisons": [
+        "ete"
+      ]
+    },
+    {
       "title": "Coriandre en poudre"
     },
     {

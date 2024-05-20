@@ -26,7 +26,7 @@
 
 
 [[redirects]]
-from = "/enka-cookbook.pages.dev/admin/*"
+from = "/admin/*"
 to =  "https://enka-cookbook.netlify.app/:splat"
 status = 301
 

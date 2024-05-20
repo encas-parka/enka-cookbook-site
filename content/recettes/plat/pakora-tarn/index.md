@@ -55,7 +55,7 @@ ingredients:
       quantite: 1
       unit: c. à café
     - title: Coriandre fraîche
-      quantite: 1
+      quantite: 0.2
       unit: bottes
     - title: Sel
       quantite: 5

@@ -36,6 +36,8 @@ github.com/encas-parka/hugo-cookbook-theme v0.0.0-20240518092011-431db60c0c93 h1
 github.com/encas-parka/hugo-cookbook-theme v0.0.0-20240518092011-431db60c0c93/go.mod h1:oQuU1qbK2NAIqsR19J9tPUe+irpaSzn5ApJ4s8gNQTQ=
 github.com/encas-parka/hugo-cookbook-theme v0.0.0-20240518093040-c856d8adfc2d h1:TuY0732sLrPIkjUM/USPG1avjSJoePmLT8emKp1f1+4=
 github.com/encas-parka/hugo-cookbook-theme v0.0.0-20240518093040-c856d8adfc2d/go.mod h1:oQuU1qbK2NAIqsR19J9tPUe+irpaSzn5ApJ4s8gNQTQ=
+github.com/encas-parka/hugo-cookbook-theme v0.0.0-20240518165617-37f008f816b9 h1:A1zHnAEl8i0e7FeHa0kLrSOfX3foaIOBsZXJQPAg1zw=
+github.com/encas-parka/hugo-cookbook-theme v0.0.0-20240518165617-37f008f816b9/go.mod h1:oQuU1qbK2NAIqsR19J9tPUe+irpaSzn5ApJ4s8gNQTQ=
 github.com/hugomods/base v0.6.0 h1:trDA6k742kUb7VOwrvC564MgalMsAtsQGfB9AZFbVeo=
 github.com/hugomods/base v0.6.0/go.mod h1:hnWCPbVxuhXBwdFax3mmbMlWKmIo/7OP36MCLOyHtT4=
 github.com/hugomods/bootstrap v0.17.0 h1:oH+V92q5W/kye9QPSQdZXYsO3V2wyfkAjdYLPFIfjPI=

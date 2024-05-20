@@ -20,8 +20,8 @@
           aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarHeader">
-          <ul class="navbar-nav mb-0 mb-lg-2 p-0 text-secondary me-auto">
+        <div class="collapse navbar-collapse bg-dark" id="navbarHeader">
+          <ul class="navbar-nav mb-0 mb-lg-2 p-0px-1 text-secondary me-auto">
             <li class="nav-item">
               <a class="nav-link px-3" href="/recettes">Explorer</a>
             </li>
@@ -40,37 +40,39 @@
               </ul>
             </li>
             </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownCategories" role="button"
-                data-bs-toggle="dropdown" aria-expanded="false">
-                Catégories
-              </a>
-              <div class="dropdown-menu columns-2" aria-labelledby="navbarDropdown">
-                <div class="row">
-                  {{ range (.Site.GetPage "section" "categories").Pages}}
-                  <div class="col-sm-6">
-                    <ul class="multi-column-dropdown">
-                      <li>
-                        <a class="dropdown-item" href="{{.RelPermalink}}">
-                          {{ $svg := (printf "fonticons/%s.svg" .Title) | lower}}
-                          {{ if resources.Get (printf "fonticons/%s.svg" (.Title | lower) ) }}
-                          <span class="float-start me-2">{{ partial "inline-svg" (dict "src" $svg "display"
-                            "inline-middle" "rem" 3)
-                            . }}</span>
-                          {{ else }}
-                          <span class="float-start me-2">{{ partial "inline-svg" (dict "src" "fonticons/no-cat.svg"
-                            "display"
-                            "inline-middle" "rem" 3) . }}</span>
-                          {{ end }}
-                          {{.Title}}
-                        </a>
-                      </li>
-                    </ul>
+            <div class="">
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownCategories" role="button"
+                  data-bs-toggle="dropdown" aria-expanded="false">
+                  Catégories
+                </a>
+                <div class="dropdown-menu columns-2 " aria-labelledby="navbarDropdown">
+                  <div class="row ">
+                    {{ range (.Site.GetPage "section" "categories").Pages}}
+                    <div class="col-sm-6">
+                      <ul class="multi-column-dropdown overflow-auto">
+                        <li>
+                          <a class="dropdown-item" href="{{.RelPermalink}}">
+                            {{ $svg := (printf "fonticons/%s.svg" .Title) | lower}}
+                            {{ if resources.Get (printf "fonticons/%s.svg" (.Title | lower) ) }}
+                            <span class="float-start me-2">{{ partial "inline-svg" (dict "src" $svg "display"
+                              "inline-middle" "rem" 3)
+                              . }}</span>
+                            {{ else }}
+                            <span class="float-start me-2">{{ partial "inline-svg" (dict "src" "fonticons/no-cat.svg"
+                              "display"
+                              "inline-middle" "rem" 3) . }}</span>
+                            {{ end }}
+                            {{.Title}}
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                    {{ end }}
                   </div>
-                  {{ end }}
                 </div>
-              </div>
-            </li>
+              </li>
+            </div>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownRegimes" role="button"
                 data-bs-toggle="dropdown" aria-expanded="false">

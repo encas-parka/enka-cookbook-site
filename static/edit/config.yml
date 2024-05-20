@@ -215,7 +215,7 @@ collections:
                   label: "Quantité (nombre)",
                   name: "quantite",
                   widget: "number",
-                  min: 1,
+                  min: 0.1,
                   value_type: "float",
                 }
               - {
@@ -253,7 +253,7 @@ collections:
                   label: "Quantité (nombre)",
                   name: "quantite",
                   widget: "number",
-                  min: 1,
+                  min: 0.1,
                   value_type: "float",
                 }
               - {
@@ -293,7 +293,7 @@ collections:
                   label: "Quantité (nombre)",
                   name: "quantite",
                   widget: "number",
-                  min: 1,
+                  min: 0.1,
                   value_type: "float",
                 }
               - {
@@ -342,7 +342,7 @@ collections:
                   label: "Quantité (nombre)",
                   name: "quantite",
                   widget: "number",
-                  min: 1,
+                  min: 0.1,
                   value_type: "float",
                 }
               - {
@@ -381,7 +381,7 @@ collections:
                   label: "Quantité (nombre)",
                   name: "quantite",
                   widget: "number",
-                  min: 1,
+                  min: 0.1,
                   value_type: "float",
                 }
               - {
@@ -431,7 +431,7 @@ collections:
                   label: "Quantité (nombre)",
                   name: "quantite",
                   widget: "number",
-                  min: 1,
+                  min: 0.1,
                   value_type: "float",
                   required: false,
                 }
@@ -483,7 +483,7 @@ collections:
                   label: "Quantité (nombre)",
                   name: "quantite",
                   widget: "number",
-                  min: 1,
+                  min: 0.1,
                   value_type: "float",
                   required: false,
                 }

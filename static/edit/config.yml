@@ -8,7 +8,7 @@ backend:
   branch: main # Branch to update (optional; defaults to master)
   squash_merges: true  
   use_graphql: true 
-publish_mode: editorial_workflow
+# publish_mode: editorial_workflow
 locale: 'fr'
 local_backend:
   url: http://localhost:8081/api/v1 # when using a custom proxy server port

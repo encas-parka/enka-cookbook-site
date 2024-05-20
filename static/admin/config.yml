@@ -5,7 +5,7 @@ backend:
   branch: main
 
   #Permettre un PR sur github sans l'acces aux dépot (github only)
-  open_authoring: true
+  # open_authoring: true
 
   # Vérifier si ca marche bien : si un article est modifier plusieur fpos avant d'etre mergé/publié, un seul commit avec rebased.
   # squash_merges: true

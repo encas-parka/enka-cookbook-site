@@ -6,6 +6,12 @@ type: plat
 categories:
   - Bouchées salées
   - Friture
+auteur: tarn team
+regime:
+  - vegetarien
+  - sans-gluten
+  - vegan
+  - sans-lactose
 cuisson: Oui
 temperature: Chaud
 plate: 5
@@ -14,7 +20,7 @@ check: Oui
 checkAlwaysOk: false
 ingredients:
   legumes:
-    - title: Pommes de terre
+    - title: Pomme de terre
       quantite: 160
       unit: grammes
     - title: Oignon
@@ -24,35 +30,35 @@ ingredients:
       quantite: 80
       unit: grammes
     - title: Ail
-      quantite: 2.00
+      quantite: 2
       unit: unité
   autres:
-    - title: Gingembre
-      quantite: 20
-      unit: grammes
+    - title: Eau
+      quantite: 200
+      unit: ml
   sec:
     - title: Farine de pois chiche
       quantite: 200
       unit: grammes
   lof:
-    - title: Eau
+    - title: Farine de pois chiche
       quantite: 200
-      unit: mL
+      unit: grammes
   epices:
     - title: Curry
-      quantite: 1.00
-      unit: c.a.s
-    - title: Cumin (graines) 
-      quantite: 1.00
-      unit: c.a.c
+      quantite: 1
+      unit: c. à soupe
+    - title: Cumin (graines)
+      quantite: 1
+      unit: c. à café
     - title: Coriandre en poudre
-      quantite: 1.00
-      unit: c.a.c
+      quantite: 1
+      unit: c. à café
     - title: Coriandre fraîche
-      quantite: 0.20
+      quantite: 1
       unit: bottes
     - title: Sel
-      quantite: 5.00
+      quantite: 5
       unit: grammes
 preparation: >-
   * Peler oignons, patates. Couper en morceaux (pas trop gros), ainsi que les

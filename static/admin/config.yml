@@ -13,7 +13,7 @@ backend:
   #GraphQL allows to retrieve data using less individual API requests compared to a REST API. GitHub's GraphQL API still does not support all mutations necessary to completely replace their REST API, so this feature only calls the new GraphQL API where possible.
   use_graphql: true
 
-#By default, saving a post in the CMS interface pushes a commit directly to the publication branch specified in backend. However, you also have the option to enable the Editorial Workflow, which adds an interface for drafting, reviewing, and approving posts. To do this, add the following line to your Netlify CMS config.yml:
+#By default, saving a post in the CMS interface pushes a commit directly to the publication branch specified in backend. 
 # This line should *not* be indented
 publish_mode: simple
 
@@ -141,7 +141,7 @@ collections:
         max: 4
         options_length: 20
         required: true
-        hint: "Vous pouver en définir plusieurs, mais la première servira à définir l'icone associée à la recette."
+        hint: "Vous pouvez en définir plusieurs, mais la première servira à définir l'icone associée à la recette."
       - label: "auteur"
         name: "auteur"
         widget: "string"
@@ -219,6 +219,7 @@ collections:
       - label: "Ingredients"
         name: "ingredients"
         widget: "object"
+        hint: "Vous pouvez retrouver la liste des ingrédients disponibles (et leur catégorie) sur la page https://enka-cookbook.pages.dev/ingredients/ . Pour ajouter des ingrédients qui ne sont pas encore répertorier, voir https://enka-cookbook.pages.dev/docs/editer/autres/"
         fields:
           - label: "Sec (Legumineuses, céréales)"
             name: "sec"
@@ -268,7 +269,7 @@ collections:
             required: false
             collapsed: true
             summary: "{{fields.title}}: {{fields.quantite}} {{fields.unit}}"
-            hint: "Vous pouvez retrouver la liste des ingrédients disponibles (et leur catégorie) sur la page https://enka-cookbook.pages.dev/ingredients/ . Pour ajouter des ingrédients qui ne sont pas encore répertorier, voir https://enka-cookbook.pages.dev/docs/editer/autres/"
+  
             fields:
               - label: "ingredient"
                 name: title

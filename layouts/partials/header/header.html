@@ -1,13 +1,16 @@
 {{ if .Site.Params.alert -}}
 {{ partial "header/alert.html" . }}
 {{ end -}}
-{{ if eq .Site.BaseURL "//enka-cookbook.netlify.app/" }}
-<script>window.confirm("L'adresse du site à changée :'https://enka-cookbook.pages.dev/''. Cette adresse sert maintenant juste de sauvegarde : il n'est pas mis a jours automatiquent lors de l'ajout de nouvelles recettes. \n Cliquez sur ok pour être redigé vers la nouvelle adresse.")
-  if (confirm) {
+<script>
+var currentUrl = window.location.href;
+if (currentUrl.startsWith("https://enka-cookbook.netlify.app")) {
+
+ var confirmRedirect = confirm("L'adresse du site à changée :'https://enka-cookbook.pages.dev/''. Cette adresse sert maintenant juste de sauvegarde : il n'est pas mis a jours automatiquent lors de l'ajout de nouvelles recettes. \n Cliquez sur ok pour être redigé vers la nouvelle adresse.")
+  if (confirmRedirect) {
     window.location.href = "https://enka-cookbook.pages.dev/"
   }
+}
 </script>
-{{ end }}
 <header>
 
   <div>

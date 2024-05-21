@@ -34,8 +34,7 @@ ingredients:
       unit: grammes
   animaux: []
 preparation: >-
-  I. Préchauffez le four à à 230 'C (chaleur tournante) ou plus si votre four le
-  permet.
+  I. Préchauffez le four à à 230 'C (chaleur tournante) ou plus si votre four le permet.
 
 
   2. Versez le riz dans un plat à gratin à bords hauts de 20 x 30 cm.

@@ -51,6 +51,9 @@ collections:
     filter: { field: "layout", value: "recettes" }
     description: "Liste de l'ensemble des recettes. Vous pouvez utiliser les filtres ci-dessous pour classer / filtrer les recettes. Ou faire 'ctrl+f' pour rechercher une recette avec votre navigateur."
     view_filters:
+      - label: "Brouillons"
+        field: draft
+        pattern: true
       - label: "plats"
         field: type
         pattern: "plat"
@@ -684,7 +687,7 @@ collections:
         allow_add: true
         add_to_top: true
         collapsed: false
-        summary: "{{fields.date_service}} > {{fields.recettes_du_repas}}"
+        summary: "{{fields.date_service}} : {{fields.horaire}} ({{fields.assiettes}} p.) > {{fields.recettes_du_repas}}"
         hint: "Ajouter un menu pour un service"
 
         fields:
@@ -692,8 +695,6 @@ collections:
               label: "Date",
               name: "date_service",
               widget: "datetime",
-              date_format: "DD MMMM YYYY",
-              time_format: false,
               hint: "Jour ou le repas sera servis..",
               picker_utc: true,
             }

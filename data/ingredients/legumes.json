@@ -2,6 +2,10 @@
   "ingredients": [
     {
       "pFrais": true,
+      "title": "Citron non traité"
+    },
+    {
+      "pFrais": true,
       "title": "Salade verte (chêne)"
     },
     {

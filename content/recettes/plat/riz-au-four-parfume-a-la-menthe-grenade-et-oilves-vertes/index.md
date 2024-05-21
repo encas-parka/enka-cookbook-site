@@ -28,6 +28,11 @@ ingredients:
     - title: Feta
       quantite: 150
       unit: grammes
+  frais:
+    - title: Beurre doux
+      quantite: 50
+      unit: grammes
+  animaux: []
 preparation: >-
   I. Préchauffez le four à à 230 'C (chaleur tournante) ou plus si votre four le
   permet.

@@ -45,6 +45,8 @@ ingredients:
     - title: Oeuf
       quantite: 27
       unit: unité
+materiel:
+  - Moule à muffin
 preparation: >-
   Dans une casserole faire un sirop avec le sucre et l’eau. Mélanger et laisser
   cuire pendant 15 minutes. Dans un blender, mettre les haricots bien rincés et

@@ -1,6 +1,12 @@
 {
   "ingredients": [
     {
+      "title": "Gluten pur",
+      "alergenesIng": [
+        "Gluten"
+      ]
+    },
+    {
       "title": "Lait de soja à la vanille",
       "alergenesIng": [
         "Soja"

@@ -1,6 +1,12 @@
 {
   "ingredients": [
     {
+      "title": "Levure fraîche",
+      "alergenesIng": [
+        "Gluten"
+      ]
+    },
+    {
       "title": "Gluten pur",
       "alergenesIng": [
         "Gluten"

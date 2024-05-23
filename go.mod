@@ -6,7 +6,7 @@ module github.com/encas-parka/enka-cookbook-site
 go 1.21
 
 require (
-	github.com/encas-parka/hugo-cookbook-theme v0.0.0-20240523221000-0c62e18975d5 // indirect
+	github.com/encas-parka/hugo-cookbook-theme v0.0.0-20240523234953-651d337997a8 // indirect
 	github.com/hugomods/base v0.6.0 // indirect
 	github.com/hugomods/bootstrap v0.21.2 // indirect
 	github.com/hugomods/icons v0.6.3 // indirect

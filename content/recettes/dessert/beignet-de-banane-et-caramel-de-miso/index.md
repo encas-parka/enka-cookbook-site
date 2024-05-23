@@ -21,6 +21,12 @@ ingredients:
       quantite: 75
       unit: unité
   lof:
+    - title: lait de cajou
+      quantite: 800
+      unit: ml
+    - title: Lait végétal (au choix)
+      quantite: 800
+      unit: ml
     - title: Bicarbonate alimentaire
       quantite: 2
       unit: c. à café
@@ -42,6 +48,9 @@ ingredients:
       unit: litre
       commentaire: pâte à beignet
   epices:
+    - title: Miso blanc
+      quantite: 20
+      unit: c. à soupe
     - title: Sel
       quantite: 15
       unit: grammes

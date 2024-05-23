@@ -5,6 +5,7 @@ layout: recettes
 type: entree
 categories:
   - Snacking
+auteur: Auré
 regime:
   - vegan
 cuisson: Oui

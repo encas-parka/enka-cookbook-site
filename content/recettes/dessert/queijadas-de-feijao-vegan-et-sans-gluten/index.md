@@ -5,6 +5,7 @@ layout: recettes
 type: dessert
 categories:
   - Flan
+auteur: Auré
 regime:
   - sans-gluten
   - vegan

@@ -53,7 +53,7 @@ preparation: >-
   le sirop de sucre. Mixer le tout et laisser refroidir. 
 
 
-  Séparer la pâte feuilletée en 4, saupoudrer le plan de travail avec de la farine et étirer les pâtes. Rouler ensuite la pâte feuilletée sur elle-même pour faire un rouleau. Faire des tronçons de 2 cm d’épaisseur. Placez chaque tranche dans le moule préalablement graissé avec du beurre. Bien appuyer avec le pouce de manière à étirer la pâte vers le haut du moule. 
+  Séparer la pâte feuilletée en 4, saupoudrer le plan de travail avec de la farine et étirer les pâtes. Rouler ensuite la pâte feuilletée sur elle-même pour faire un rouleau. Faire des tronçons de 2 cm d’épaisseur. Placez chaque tranche dans le moule en silicone. Bien appuyer avec le pouce de manière à étirer la pâte vers le haut du moule. 
 
 
   Dans le sirop froid, ajouter le zeste de citron, la cannelle, les œufs. Mixer le tout dans le blender. 

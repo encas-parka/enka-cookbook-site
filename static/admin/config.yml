@@ -344,6 +344,7 @@ collections:
                       "ml",
                       "c. à soupe",
                       "c. à café",
+                      "pincées"
                     ],
                   hint: "Préférez les quantités en grammes/Kg/litres, qui sont additionnables pour les listes de course !",
                 }
@@ -475,6 +476,7 @@ collections:
                       "ml",
                       "c. à soupe",
                       "c. à café",
+                      "pincées"
                     ],
                   hint: "Préférez les quantités en grammes/Kg/litres, qui sont additionnables pour les listes de course ! ",
                 }
@@ -528,6 +530,7 @@ collections:
                       "c. à soupe",
                       "c. à café",
                       "bottes",
+                      "pincées"
                     ],
                   hint: "Préférez les quantités en grammes/Kg/litres, qui sont additionnables pour les listes de course ! ",
                   required: false,
@@ -581,6 +584,7 @@ collections:
                       "ml",
                       "c. à soupe",
                       "c. à café",
+                      "pincées",
                     ],
                   hint: "Préférez les quantités en grammes/Kg/litres/ml, qui sont additionnables pour les listes de course ! ",
 

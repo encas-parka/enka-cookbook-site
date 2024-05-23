@@ -1,6 +1,9 @@
 {
   "ingredients": [
     {
+      "title": "Lait de riz"
+    },
+    {
       "title": "Levure fraîche",
       "alergenesIng": [
         "Gluten"

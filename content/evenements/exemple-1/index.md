@@ -2,6 +2,14 @@
 title: Exemple 1
 sitemap_exclude: "true"
 repas:
+  - assiettes: 100
+    date_service: 2024-01-15T14:59:00.000Z
+    recettes_du_repas:
+      - recette: Beignets Petits Pois Zaatar et sa crème au sumac
+        type_plat: plat
+        altAssiettes: 1
+        commentaire: Un ptit commentaire
+    horaire: soir
   - assiettes: 120
     date_service: 2024-01-14T11:15:00.000Z
     horaire: midi

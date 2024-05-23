@@ -294,7 +294,7 @@ collections:
                   label: "Unité (quantité en...)",
                   name: "unit",
                   widget: "select",
-                  options: ["Kg", "grammes", "unité"],
+                  options: ["Kg", "grammes", "unité", "tête·s", "gousse·s"],
                   hint: "Preférez les quantités en grammes/Kg/litres. La taille des légumes est variable, et lorsque tout est en Kg, grammes ou litres, c'est additionnable pour les listes de course ! ",
                 }
               - {
@@ -384,7 +384,7 @@ collections:
                   label: "Unité (quantité en...)",
                   name: "unit",
                   widget: "select",
-                  options: ["Kg", "grammes", "unité"],
+                  options: ["Kg", "grammes", "unité", "litre", "ml"],
                 }
               - {
                   label: "commentaire",

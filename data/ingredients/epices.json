@@ -1,6 +1,27 @@
 {
   "ingredients": [
     {
+      "title": "Sumac"
+    },
+    {
+      "title": "Piment vert"
+    },
+    {
+      "title": "Anis vert en poudre"
+    },
+    {
+      "title": "Cardamone en poudre"
+    },
+    {
+      "title": "graine de coriandre"
+    },
+    {
+      "title": "Zaatar (zathar)",
+      "alergenesIng": [
+        "Sésame"
+      ]
+    },
+    {
       "title": "Liquid smoke"
     },
     {

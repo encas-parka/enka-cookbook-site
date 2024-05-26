@@ -1,6 +1,6 @@
 ---
 title: BEIGNET DE BANANE ET CARAMEL DE MISO
-draft: true
+draft: false
 layout: recettes
 type: dessert
 categories:

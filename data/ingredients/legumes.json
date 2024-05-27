@@ -2,6 +2,10 @@
   "ingredients": [
     {
       "pFrais": true,
+      "title": "Concombre sans traitement"
+    },
+    {
+      "pFrais": true,
       "title": "Zestes d'orange"
     },
     {

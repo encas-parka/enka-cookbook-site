@@ -21,7 +21,7 @@ checkAlwaysOk: false
 ingredients:
   legumes:
     - title: Ail
-      quantite: 60
+      quantite: 100
       unit: grammes
     - title: Oignon rouge
       quantite: 10

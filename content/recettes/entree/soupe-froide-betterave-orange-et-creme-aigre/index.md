@@ -11,7 +11,7 @@ regime:
   - sans-gluten
 cuisson: Oui
 temperature: Froid
-plate: 98
+plate: 100
 quantite_desc: un bol de 225 ml
 check: Non
 checkAlwaysOk: false
@@ -59,7 +59,7 @@ ingredients:
       quantite: 15
       unit: litre
     - title: Jus d'orange
-      quantite: 1
+      quantite: 2
       unit: litre
       commentaire: 100% pur jus
   frais:

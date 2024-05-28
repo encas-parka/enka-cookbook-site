@@ -1,6 +1,10 @@
 {
   "ingredients": [
     {
+      "pFrais": false,
+      "title": "Champignons séchés"
+    },
+    {
       "pFrais": true,
       "title": "Concombre sans traitement"
     },

@@ -1,6 +1,9 @@
 {
   "ingredients": [
     {
+      "title": "Haricots rouges cuits"
+    },
+    {
       "title": "Riz pour risotto"
     },
     {
@@ -163,7 +166,6 @@
       "vegan": true,
       "vegetarien": true
     },
-
     {
       "title": "Pâtes",
       "vegan": true,

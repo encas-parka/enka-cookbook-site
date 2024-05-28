@@ -49,8 +49,8 @@ ingredients:
   epices:
     - title: Sel
       quantite: 2
-      unit: unité
-      commentaire: pincée
+      unit: pincées
+      
 preparation: >-
   Dans le bol du robot verser les farines, la fécule, les gommes.
 

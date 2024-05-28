@@ -16,8 +16,8 @@ plate: 380
 ingredients:
   legumes:
     - title: Ail
-      quantite: 2
-      unit: unité
+      quantite: 35
+      unit: gousse·s
   sec:
     - title: Petits pois
       quantite: 14

@@ -39,10 +39,11 @@ ingredients:
     - title: Bouillon de légume (sans gluten)
       quantite: 15
       unit: unité
-  autres:
+  sucres:
     - title: Jus de raisin
       quantite: 1
       unit: litre
+  autres:
     - title: Eau
       quantite: 19
       unit: litre

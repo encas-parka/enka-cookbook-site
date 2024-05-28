@@ -25,7 +25,7 @@ ingredients:
       unit: unité
     - title: Ail
       quantite: 12.5
-      unit: unité
+      unit: gousse·s
     - title: Tomate
       quantite: 12.5
       unit: unité

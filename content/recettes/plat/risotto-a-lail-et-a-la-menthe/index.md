@@ -22,7 +22,7 @@ ingredients:
   legumes:
     - title: Ail
       quantite: 330.00
-      unit: unité
+      unit: gousse·s
 
   sec:
     - title: Riz

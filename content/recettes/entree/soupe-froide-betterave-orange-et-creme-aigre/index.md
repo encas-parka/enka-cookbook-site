@@ -58,6 +58,7 @@ ingredients:
     - title: Eau
       quantite: 15
       unit: litre
+  sucres: 
     - title: Jus d'orange
       quantite: 2
       unit: litre

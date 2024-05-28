@@ -25,7 +25,7 @@ ingredients:
       unit: grammes
     - title: Ail
       quantite: 25
-      unit: unité
+      unit: gousse·s
     - title: Echalote
       quantite: 25
       unit: unité

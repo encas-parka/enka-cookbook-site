@@ -6,6 +6,13 @@
     },
     {
       "pFrais": true,
+      "title": "Parmigiano",
+      "alergenesIng": [
+        "Produit laitier"
+      ]
+    },
+    {
+      "pFrais": true,
       "title": "Crème fraîche épaisse entière",
       "alergenesIng": [
         "Produit laitier"

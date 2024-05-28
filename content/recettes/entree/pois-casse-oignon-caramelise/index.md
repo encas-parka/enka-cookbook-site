@@ -1,8 +1,7 @@
 ---
-title: "Pois cassé - oignon caramélisé "
+title: "Tartinade Pois cassé - oignon caramélisé "
 draft: false
 layout: recettes
-
 type: entree
 categories:
   - Tartinade
@@ -15,6 +14,7 @@ regime:
 cuisson: Oui
 temperature: Froid
 plate: 190
+check: Oui
 ingredients:
   legumes:
     - title: Oignon

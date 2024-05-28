@@ -20,7 +20,7 @@ ingredients:
       unit: grammes
     - title: Ail
       quantite: 10
-      unit: unité
+      unit: gousse·s
   lof:
     - title: huile d'olive
       quantite: 250

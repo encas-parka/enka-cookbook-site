@@ -21,7 +21,7 @@ ingredients:
       unit: grammes
     - title: Ail
       quantite: 2
-      unit: unité
+      unit: gousse·s
   lof:
     - title: huile d'olive
       quantite: 50

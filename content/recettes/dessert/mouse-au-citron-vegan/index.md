@@ -4,7 +4,7 @@ draft: false
 layout: recettes
 type: dessert
 categories:
-  - Autre
+  - Sucrée
 regime:
   - vegan
   - vegetarien

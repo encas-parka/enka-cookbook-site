@@ -18,8 +18,8 @@ check: Oui
 ingredients:
   legumes:
     - title: Ail
-      quantite: 1
-      unit: unité
+      quantite: 8
+      unit: gousse·s
     - title: Oignon
       quantite: 2
       unit: Kg

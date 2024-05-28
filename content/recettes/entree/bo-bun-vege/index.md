@@ -47,7 +47,7 @@ ingredients:
       commentaire: sauce
     - title: Ail
       quantite: 18
-      unit: unité
+      unit: gousse·s
       commentaire: Chunks laqués
   autres:
     - title: Eau

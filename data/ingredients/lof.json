@@ -1,6 +1,39 @@
 {
   "ingredients": [
     {
+      "title": "Farine de blé",
+      "alergenesIng": [
+        "Gluten"
+      ]
+    },
+    {
+      "title": "Lait demi-écrémé",
+      "alergenesIng": [
+        "Produit laitier"
+      ],
+      "vegetarien": true,
+      "sans_lactose": false,
+      "vegan": false
+    },
+    {
+      "title": "Lait écrémé",
+      "alergenesIng": [
+        "Produit laitier"
+      ],
+      "vegetarien": true,
+      "sans_lactose": false,
+      "vegan": false
+    },
+    {
+      "title": "Lait entier",
+      "alergenesIng": [
+        "Produit laitier"
+      ],
+      "vegetarien": true,
+      "sans_lactose": false,
+      "vegan": false
+    },
+    {
       "title": "Yahourt de soja",
       "alergenesIng": [
         "Soja"
@@ -159,12 +192,7 @@
     {
       "title": "Farine d’amarante"
     },
-    {
-      "title": "Farine de blé",
-      "alergenesIng": [
-        "Gluten"
-      ]
-    },
+
     {
       "title": "Farine de blé noir (sarrasin)"
     },
@@ -307,33 +335,6 @@
       "vegetarien": true,
       "sans_lactose": true,
       "vegan": true
-    },
-    {
-      "title": "Lait demi-écrémé",
-      "alergenesIng": [
-        "Produit laitier"
-      ],
-      "vegetarien": true,
-      "sans_lactose": false,
-      "vegan": false
-    },
-    {
-      "title": "Lait écrémé",
-      "alergenesIng": [
-        "Produit laitier"
-      ],
-      "vegetarien": true,
-      "sans_lactose": false,
-      "vegan": false
-    },
-    {
-      "title": "Lait entier",
-      "alergenesIng": [
-        "Produit laitier"
-      ],
-      "vegetarien": true,
-      "sans_lactose": false,
-      "vegan": false
     },
     {
       "alergenesIng": [

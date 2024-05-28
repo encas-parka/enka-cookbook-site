@@ -46,7 +46,7 @@ ingredients:
       commentaire: Sauce
     - title: Ail
       quantite: 16
-      unit: unité
+      unit: gousse·s
       commentaire: Sauce
     - title: Pomme de terre
       quantite: 25

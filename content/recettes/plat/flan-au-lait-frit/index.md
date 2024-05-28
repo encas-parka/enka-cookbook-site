@@ -5,7 +5,6 @@ layout: recettes
 type: plat
 categories:
   - Friture
-  - Flan
   - Bouchées salées
 regime:
   - vegetarien

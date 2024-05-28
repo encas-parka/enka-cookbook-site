@@ -25,7 +25,7 @@ ingredients:
       commentaire: sauce
     - title: Ail
       quantite: 5
-      unit: unité
+      unit: gousse·s
     - title: Oignon
       quantite: 2
       unit: Kg

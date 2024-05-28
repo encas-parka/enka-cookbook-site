@@ -4,7 +4,7 @@ draft: false
 layout: recettes
 type: dessert
 categories:
-  - Flan
+  - Sucrée
 regime:
   - vegetarien
   - vegan

@@ -26,9 +26,7 @@ ingredients:
     - title: Eau
       quantite: 1.8
       unit: litre
-    - title: Jus de raisin
-      quantite: 300
-      unit: ml
+
   legumes:
     - title: Ail
       quantite: 3
@@ -51,6 +49,10 @@ ingredients:
     - title: Bouillon de légume (sans gluten)
       quantite: 2
       unit: unité
+  sucres: 
+    - title: Jus de raisin
+      quantite: 300
+      unit: ml
 preparation: >-
   **Bouillon** : Faire chauffer l'eau et y ajouter les cubes de bouillon
 

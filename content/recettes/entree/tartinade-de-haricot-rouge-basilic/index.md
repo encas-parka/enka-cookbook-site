@@ -23,8 +23,8 @@ ingredients:
       unit: Kg
   legumes:
     - title: Ail
-      quantite: 36
-      unit: unité
+      quantite: 30
+      unit: gousse·s
   lof:
     - title: huile d'olive
       quantite: 1.8

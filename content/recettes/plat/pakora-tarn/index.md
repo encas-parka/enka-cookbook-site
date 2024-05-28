@@ -31,7 +31,7 @@ ingredients:
       unit: grammes
     - title: Ail
       quantite: 2
-      unit: unité
+      unit: gousse·s
   autres:
     - title: Eau
       quantite: 200

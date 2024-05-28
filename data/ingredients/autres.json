@@ -1,11 +1,12 @@
 {
   "ingredients": [
     {
-      "title": "Jus d'orange"
+      "title": "Chunks (protéine de soja)",
+      "alergenesIng": [
+        "Soja"
+      ]
     },
-    {
-      "title": "Jus de raisin"
-    },
+
     {
       "title": "Thé Matcha"
     },

@@ -20,7 +20,7 @@ ingredients:
   legumes:
     - title: Ail
       quantite: 7
-      unit: unité
+      unit: gousse·s
   sucres:
     - title: Jus de citron
       quantite: 0.3

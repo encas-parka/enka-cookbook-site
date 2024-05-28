@@ -5,7 +5,6 @@ layout: recettes
 type: entree
 categories:
   - Accompagnement
-  - Tourte
 regime:
   - vegan
   - vegetarien

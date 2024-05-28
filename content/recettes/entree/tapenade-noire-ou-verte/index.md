@@ -13,7 +13,7 @@ ingredients:
   legumes:
     - title: Ail
       quantite: 2
-      unit: unité
+      unit: gousse·s
     - title: Olives noires à la grecque
       quantite: 100
       unit: grammes

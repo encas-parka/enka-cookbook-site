@@ -36,7 +36,7 @@ ingredients:
   legumes:
     - title: Ail
       quantite: 2
-      unit: unité
+      unit: gousse·s
 preparation: >-
   
 

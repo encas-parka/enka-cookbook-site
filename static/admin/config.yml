@@ -440,7 +440,7 @@ collections:
           - label: "Sucrées"
             name: "sucres"
             widget: "list"
-            hint: "Miel, biscuits, jus, chocolats..."
+            hint: "Miel, biscuits, jus de fruits, chocolats..."
             allow_add: true
             add_to_top: true
             label_singular: "Ingrédient"
@@ -489,7 +489,7 @@ collections:
 
                 }
 
-          - label: "Assaisonnements (Epices, aromatiques, vinaigres, sauce...)"
+          - label: "Assaisonnements (Epices, aromatiques, vinaigres, sauces, coulis...)"
             name: "epices"
             hint: "Epices, sauces, condiments..."
             widget: "list"
@@ -1154,7 +1154,7 @@ collections:
                 }
 
       - name: ingredients_epices
-        label: "Assaisonnements (Epices, aromatiques, vinaigres...)"
+        label: "Assaisonnements (Epices, aromatiques, vinaigres, sauces, coulis...)"
         file: data/ingredients/epices.json
         format: json
         fields:
@@ -1220,7 +1220,7 @@ collections:
                 }
 
       - name: ingredients_sucres
-        label: "Sucrés"
+        label: "Sucrés (Miel, biscuits, jus de fruits, chocolats...)"
         file: data/ingredients/sucres.json
         format: json
         fields:

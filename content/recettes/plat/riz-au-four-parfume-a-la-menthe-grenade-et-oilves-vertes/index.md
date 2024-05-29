@@ -1,6 +1,7 @@
 ---
 title: Riz au four parfumé à la menthe, grenade et oilves vertes
 draft: true
+img: riz-au-four-parfumé-à-la-menthe-grenade-et-oilves-vertes.jpeg
 layout: recettes
 type: plat
 categories:
@@ -17,24 +18,47 @@ check: Oui
 checkAlwaysOk: false
 ingredients:
   sec:
+    - title: Noix
+      quantite: 50
+      unit: grammes
     - title: Riz
       quantite: 400
       unit: grammes
   legumes:
+    - title: Ail
+      quantite: 1
+      unit: gousse·s
+    - title: Grenade
+      quantite: 90
+      unit: grammes
     - title: Olives
       quantite: 40
       unit: grammes
   lof:
+    - title: huile d'olive
+      quantite: 3
+      unit: c. à soupe
     - title: Feta
       quantite: 150
       unit: grammes
   frais:
+    - title: Feta
+      quantite: 150
+      unit: grammes
     - title: Beurre doux
       quantite: 50
       unit: grammes
   animaux: []
+  epices:
+    - title: Melasse de grenade
+      quantite: 1
+      unit: c. à soupe
+    - title: Menthe
+      quantite: 50
+      unit: grammes
 preparation: >-
-  I. Préchauffez le four à à 230 'C (chaleur tournante) ou plus si votre four le permet.
+  I. Préchauffez le four à à 230 'C (chaleur tournante) ou plus si votre four le
+  permet.
 
 
   2. Versez le riz dans un plat à gratin à bords hauts de 20 x 30 cm.
@@ -50,5 +74,5 @@ preparation: >-
 
 
   4. Sortez le riz du four et retirez le papier d'aluminium. Prélevez les feuilles sur les brins de menthe (jetez les tiges) et déposez-les sur le riz, puis parseme de feta. Juste avant de servir, incorporez les 10 g de menthe ciselée dans la garniture et versez sur le riz de manière homogène. Servez chaud.
-publishDate: 2024-05-21T06:51:00.000Z
+publishDate: 2024-05-29T19:59:00.000Z
 ---

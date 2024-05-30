@@ -1,5 +1,6 @@
 ---
 title: Madeleines sarrasin sauge noisette
+description: Pour 2 madeleines par personne
 layout: recettes
 type: entree
 categories:
@@ -17,44 +18,44 @@ checkAlwaysOk: false
 ingredients:
   lof:
     - title: Yahourt de soja
-      quantite: 350
+      quantite: 700
       unit: grammes
     - title: Bicarbonate alimentaire
-      quantite: 5
+      quantite: 10
       unit: c. à café
     - title: huile de tournesol
-      quantite: 470
+      quantite: 940
       unit: ml
     - title: Lait végétal (au choix)
-      quantite: 730
-      unit: ml
+      quantite: 1.46
+      unit: litre
     - title: Levure chimique sans gluten
-      quantite: 70
+      quantite: 140
       unit: grammes
     - title: Farine de blé noir (sarrasin)
-      quantite: 800
+      quantite: 1600
       unit: grammes
   epices:
     - title: Vinaigre de cidre
-      quantite: 5
+      quantite: 10
       unit: c. à soupe
     - title: Sauge
-      quantite: 70
+      quantite: 140
       unit: grammes
     - title: Fleur de sel
-      quantite: 2
+      quantite: 4
       unit: c. à soupe
   sucres:
     - title: Poudre de noisettes
-      quantite: 160
+      quantite: 320
       unit: grammes
   legumes:
     - title: Ail
-      quantite: 40
+      quantite: 80
       unit: unité
   sec:
     - title: Noisette
-      quantite: 160
+      quantite: 320
       unit: grammes
 preparation: >-
   1. Confire les têtes d'ail au four dans de l'aluminium avec une pincée de  sel
@@ -75,8 +76,6 @@ preparation: >-
 
 
   Enfourner pour 4 minutes à 240°C, puis baisser à 180°C et poursuivre la cuisson durant 5 ou 6 minutes. À la sortie du four laisser refroidir légèrement puis mettre dans un tupperware pour qu'elles gardent leur humidité et leur moelleux.
-
-
-  Ces proportions font des petites portions.
+preparation24h: Faire la pâte la veille
 publishDate: 27-05-2024T18:45
 ---

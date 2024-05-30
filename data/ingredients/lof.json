@@ -1,6 +1,9 @@
 {
   "ingredients": [
     {
+      "title": "Margarine"
+    },
+    {
       "title": "Farine de blé",
       "alergenesIng": [
         "Gluten"
@@ -192,7 +195,6 @@
     {
       "title": "Farine d’amarante"
     },
-
     {
       "title": "Farine de blé noir (sarrasin)"
     },

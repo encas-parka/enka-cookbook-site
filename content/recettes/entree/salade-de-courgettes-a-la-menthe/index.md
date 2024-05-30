@@ -36,6 +36,14 @@ ingredients:
     - title: Jus de citron
       quantite: 600
       unit: ml
-preparation: 1. Couper
+preparation: >-
+  1. Couper les courgettes en cubes, râper l'ail, effeuiller et ciseler les
+  bouquets de menthe. 
+
+  2. Mélanger les courgettes à l'ail et l'huile d'olive, saler, enfourner pour 20 minutes à 200°C.
+
+  3. Sortir du four, laisser refroidir puis mettre au réfrigérateur dans une passoire pour une heure.
+
+  4. Verser dans un saladier et mélanger avec le jus de itron et la menthe.
 publishDate: 30-05-2024T11:18
 ---

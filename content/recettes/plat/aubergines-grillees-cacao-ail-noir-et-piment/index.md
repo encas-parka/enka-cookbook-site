@@ -43,6 +43,9 @@ ingredients:
     - title: Mélasse
       quantite: 100
       unit: ml
+materiel:
+  - Four
+  - Gastro 1/1 (Normaux)
 preparation: >-
   1. Couper les aubergines en quartiers de 2 cm d'épaisseur.
 

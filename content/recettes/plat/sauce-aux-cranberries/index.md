@@ -23,6 +23,9 @@ ingredients:
       quantite: 500
       unit: grammes
   lof:
+    - title: Margarine
+      quantite: 600
+      unit: grammes
     - title: Fécule de maïs (Maïzena)
       quantite: 5
       unit: c. à soupe

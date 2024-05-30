@@ -1,5 +1,6 @@
 ---
 title: Boulettes fumées de haricots rouges et champignons
+description: Pour 2 boulettes par personne
 layout: recettes
 type: plat
 categories:
@@ -12,58 +13,58 @@ regime:
   - sans-lactose
 cuisson: Oui
 temperature: Chaud
-plate: 100
+plate: 20
 check: Oui
 checkAlwaysOk: false
 ingredients:
   legumes:
     - title: Ail
-      quantite: 20
+      quantite: 4
       unit: unité
     - title: Oignon
-      quantite: 1.5
-      unit: Kg
+      quantite: 200
+      unit: grammes
     - title: Champignons séchés
-      quantite: 300
+      quantite: 40
       unit: grammes
   sec:
     - title: Riz basmati
-      quantite: 750
+      quantite: 100
       unit: grammes
     - title: Haricots rouges cuits
-      quantite: 3.5
-      unit: Kg
+      quantite: 500
+      unit: grammes
   epices:
     - title: Vin Rouge
-      quantite: 0.5
-      unit: litre
+      quantite: 60
+      unit: ml
     - title: Vinaigre de cidre
-      quantite: 4.5
+      quantite: 2
       unit: c. à café
     - title: Persil frais
-      quantite: 2
+      quantite: 1
       unit: unité
     - title: Tamari (sauce)
-      quantite: 0.5
-      unit: litre
+      quantite: 4
+      unit: c. à soupe
     - title: Liquid smoke
-      quantite: 30
+      quantite: 4
       unit: ml
   lof:
     - title: Fécule de maïs (Maïzena)
-      quantite: 225
-      unit: ml
+      quantite: 2
+      unit: c. à soupe
     - title: huile de tournesol
-      quantite: 200
-      unit: ml
+      quantite: 2
+      unit: c. à soupe
   sucres:
     - title: Sucre complet
-      quantite: 400
-      unit: grammes
+      quantite: 6
+      unit: c. à soupe
   autres:
     - title: Eau
-      quantite: 1
-      unit: litre
+      quantite: 120
+      unit: ml
 materiel:
   - Four
   - Gastro 1/1 (Fins)

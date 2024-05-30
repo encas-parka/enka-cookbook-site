@@ -57,6 +57,8 @@ ingredients:
     - title: Noisette
       quantite: 320
       unit: grammes
+materiel:
+  - Four
 preparation: >-
   1. Confire les têtes d'ail au four dans de l'aluminium avec une pincée de  sel
   et quelques gouttes d'huile d'olive. Puis extraire la purée d'ail

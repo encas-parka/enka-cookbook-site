@@ -1,7 +1,7 @@
 ---
 title: Purée de haricots blancs
 layout: recettes
-type: entree
+type: plat
 categories:
   - Accompagnement
 regime:

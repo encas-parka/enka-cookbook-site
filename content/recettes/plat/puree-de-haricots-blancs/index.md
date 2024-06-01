@@ -1,5 +1,5 @@
 ---
-title: Purée de Haricots Blancs
+title: Purée de Haricots Blancs (v2)
 description: La purée sera servie avec une feuille de choux frisé et une picada.
   Mais elle peut faire un accompagnement de légumes avec un peu de jus.
 layout: recettes

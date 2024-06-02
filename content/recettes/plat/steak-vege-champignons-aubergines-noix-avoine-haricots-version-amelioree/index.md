@@ -18,6 +18,12 @@ check: Oui
 checkAlwaysOk: false
 ingredients:
   sec:
+    - title: Noix
+      quantite: 30
+      unit: grammes
+    - title: Flocons d'avoine
+      quantite: 150
+      unit: grammes
     - title: Haricots rouges cuits
       quantite: 150
       unit: grammes
@@ -31,6 +37,21 @@ ingredients:
     - title: Champignons
       quantite: 150
       unit: grammes
+  epices:
+    - title: Origan
+    - title: Moutarde
+      quantite: 1
+      unit: c. à soupe
+    - title: Sriracha
+      quantite: 1
+      unit: c. à soupe
+    - title: Sauce soja
+      quantite: 40
+      unit: ml
+  autres:
+    - title: Eau
+      quantite: 40
+      unit: ml
 preparation: lala
 publishDate: 02-06-2024T12:12
 ---

@@ -38,6 +38,7 @@ ingredients:
       quantite: 150
       unit: grammes
   epices:
+    - title: Cumin moulu
     - title: Paprika fumé
     - title: Origan
     - title: Moutarde

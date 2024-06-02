@@ -57,6 +57,8 @@ ingredients:
     - title: Eau
       quantite: 40
       unit: ml
+materiel:
+  - Four
 preparation: >-
   *  Hâcher finement oignons, champignons, aubergines, et noix
 

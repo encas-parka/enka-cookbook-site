@@ -51,9 +51,29 @@ ingredients:
       quantite: 40
       unit: ml
   autres:
+    - title: Concentré de tomate
+      quantite: 1
+      unit: c. à soupe
     - title: Eau
       quantite: 40
       unit: ml
-preparation: lala
+preparation: >-
+  *  Hâcher finement oignons, champignons, aubergines, et noix
+
+  *  Faire chauffer un fond d’huile. Ajouter oignons et épices (soyez généreux.se sur le paprika).
+
+  * Faire revenir les oignons 5-10 minutes (jusqu’à ce qu’ils dorent un peu)
+
+  * Ajouter les aubegines, un peu plus tard les champignons
+
+  * Ajouter le reste des ingrédients, laisser mijoter un peu
+
+  * Couper le feu et bien mélanger
+
+  *  Laisser reposer au moins 15 minutes
+
+  * Façonner les steaks (boulettes c'est possible aussi). Mettre de l’huile sur les deux faces du steak (au pinceau c’est le mieux)
+
+  * Faire cuire à 180°C environ 30 minutes, jusqu’à ce qu’ils brunissent un peu. Retourner en milieu de cuisson.
 publishDate: 02-06-2024T12:12
 ---

@@ -29,7 +29,7 @@ ingredients:
   legumes:
     - title: Ail
       quantite: 3
-      unit: unité
+      unit: gousse·s
       commentaire: gousses
     - title: Pruneau
       quantite: 250

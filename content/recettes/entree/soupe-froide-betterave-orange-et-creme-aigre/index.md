@@ -1,6 +1,6 @@
 ---
 title: SOUPE FROIDE BETTERAVE, ORANGE ET CREME AIGRE
-draft: true
+draft: false
 layout: recettes
 type: entree
 categories:
@@ -58,7 +58,7 @@ ingredients:
     - title: Eau
       quantite: 15
       unit: litre
-  sucres: 
+  sucres:
     - title: Jus d'orange
       quantite: 2
       unit: litre

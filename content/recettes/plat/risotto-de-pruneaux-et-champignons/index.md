@@ -24,7 +24,7 @@ ingredients:
   legumes:
     - title: Ail
       quantite: 5
-      unit: unité
+      unit: tête·s
       commentaire: têtes
     - title: Oignon
       quantite: 7

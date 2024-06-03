@@ -1,10 +1,10 @@
 ---
 title: QUEIJADAS DE FEIJAO Végan et sans gluten
-draft: true
+draft: false
 layout: recettes
 type: dessert
 categories:
-  - Flan
+  - Gateau
 auteur: Auré
 regime:
   - sans-gluten

@@ -1,6 +1,6 @@
 ---
 title: RISOTTO DE PRUNEAUX ET CHAMPIGNONS
-draft: true
+draft: false
 description: Pas en plat unique, mais en accompagnement. Genre avec les farçous aveyronnais.
 layout: recettes
 type: plat

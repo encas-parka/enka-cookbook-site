@@ -1,6 +1,6 @@
 ---
 title: RISOTTO PRUNEAUX ET CHAMPIGNONS Végan
-draft: true
+draft: false
 description: Quantités pour être en accompagnement et pas en plat unique. Par
   exemple avec les farçous aveyronnais.
 layout: recettes
@@ -26,7 +26,6 @@ ingredients:
     - title: Eau
       quantite: 1.8
       unit: litre
-
   legumes:
     - title: Ail
       quantite: 3
@@ -49,7 +48,7 @@ ingredients:
     - title: Bouillon de légume (sans gluten)
       quantite: 2
       unit: unité
-  sucres: 
+  sucres:
     - title: Jus de raisin
       quantite: 300
       unit: ml

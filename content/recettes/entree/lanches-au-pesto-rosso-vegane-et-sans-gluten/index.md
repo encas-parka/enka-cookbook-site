@@ -1,6 +1,6 @@
 ---
 title: LANCHES AU PESTO ROSSO Végane et sans gluten
-draft: true
+draft: false
 layout: recettes
 type: entree
 categories:
@@ -50,7 +50,6 @@ ingredients:
     - title: Sel
       quantite: 2
       unit: pincées
-      
 preparation: >-
   Dans le bol du robot verser les farines, la fécule, les gommes.
 

@@ -1,12 +1,14 @@
 {
   "ingredients": [
     {
+      "title": "Café moulu"
+    },
+    {
       "title": "Chunks (protéine de soja)",
       "alergenesIng": [
         "Soja"
       ]
     },
-
     {
       "title": "Thé Matcha"
     },

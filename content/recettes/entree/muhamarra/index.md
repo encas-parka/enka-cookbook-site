@@ -34,10 +34,19 @@ ingredients:
       quantite: 1
       unit: Kg
   autres:
+    - title: Chapelure
+      quantite: 500
+      unit: grammes
+    - title: Café moulu
+      quantite: 20
+      unit: grammes
     - title: Tahin
       quantite: 250
       unit: grammes
   epices:
+    - title: Piment en poudre
+      quantite: 125
+      unit: grammes
     - title: Sel
       quantite: 40
       unit: grammes
@@ -47,24 +56,20 @@ ingredients:
     - title: Paprika
       quantite: 75
       unit: grammes
+  sec:
+    - title: Noix
+      quantite: 2.5
+      unit: Kg
+materiel:
+  - Robot Mixeur
 preparation: >-
-  
+  1. Faire griller les poivrons sans enlever méthodiquement les peaux, un peu
+  quand même.
 
+  2. Mixer tous les ingrédients sauf les noix et un peu d'huile d'olive pour le service. Attention à laisser une part sans chapelure pour sans gluten.
 
+  3. Concasser les noix grossièrement, après en avoir qq'unes de côté, les ajouter au melange.
 
-  faire griller les poivrons sans enlever méthodiquement les peaux, un peu quand même.
-
-
-
-
-  mixer tous les ingrédients sauf les noix et un peu d'huile d'olive pour le service.
-
-
-
-
-  concasser les noix grossièrement, après en avoir qq'unes de côté, les ajouter au melange.
-
-
-  transférer dans le plat de service, arroser un peu d'huile d'olives et décorer avec les noix restantes.
+  4. Transférer dans le plat de service, arroser un peu d'huile d'olives et décorer avec les noix restantes.
 publishDate: 04-06-2024T16:31
 ---

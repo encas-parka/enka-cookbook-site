@@ -32,13 +32,14 @@ ingredients:
     - title: huile d'olive
       quantite: 40
       unit: ml
-    - title: Yahourt de soja
-      quantite: 1.5
-      unit: Kg
   epices:
     - title: Menthe séchée
       quantite: 25
       unit: grammes
+  frais:
+    - title: Yaourt de soja
+      quantite: 1.5
+      unit: Kg
 preparation: >-
   
 

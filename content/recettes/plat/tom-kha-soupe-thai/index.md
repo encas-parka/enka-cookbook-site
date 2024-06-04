@@ -18,7 +18,7 @@ region: Thaïlande
 cuisson: Oui
 temperature: Chaud
 plate: 100
-quantite_desc: un bol d'environ 600ml par personne
+quantite_desc: un bol d'environ 700ml par personne
 check: Non
 checkAlwaysOk: false
 ingredients:

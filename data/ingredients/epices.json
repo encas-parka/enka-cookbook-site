@@ -1,6 +1,10 @@
 {
   "ingredients": [
     {
+      "title": "Gingembre bio",
+      "pFrais": true
+    },
+    {
       "title": "Piment oiseau frais ",
       "pFrais": true
     },

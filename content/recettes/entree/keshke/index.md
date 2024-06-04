@@ -17,6 +17,7 @@ ingredients:
     - title: Boulgour
       quantite: 1.875
       unit: Kg
+  autres: []
 preparation: Le lendemain, ajouter le reste du yaourt et des noix hâchées,
   mélanger. Au dernier moment, décorer avec un filet d'huile d'olive, et
   parsemer d'un peu de noix grossièrement hâchées et de menthe séchée.

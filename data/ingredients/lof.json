@@ -1,6 +1,9 @@
 {
   "ingredients": [
     {
+      "title": "Tofu ferme"
+    },
+    {
       "title": "Yaourt grec",
       "alergenesIng": [
         "Produit laitier"

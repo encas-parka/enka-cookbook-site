@@ -1,6 +1,10 @@
 {
   "ingredients": [
     {
+      "title": "Piment oiseau frais ",
+      "pFrais": true
+    },
+    {
       "title": "Gingembre",
       "pFrais": true
     },

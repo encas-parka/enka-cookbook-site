@@ -80,9 +80,15 @@ preparation: >-
   Couper le tofu en dés d'un peu moins d'1cm. 
 
 
+  Effeuiller le shizo.
+
+
   **30min avant le service** : Verser le tofu dans le bouillon. Faire attention à ne pas briser les cubes.
 
 
   Tremper une louche avec le miso dans la casserole et diluer la pâte. Ne surtout pas faire bouillir le miso, cela tuerait les bonnes bactéries et enlèverait les effets positifs.
+
+
+  Au service poser une ou deux feuilles de shizo.
 publishDate: 2024-06-04T22:15:00.000Z
 ---

@@ -26,9 +26,6 @@ ingredients:
     - title: huile d'olive
       quantite: 12.5
       unit: c. à soupe
-    - title: Yaourt grec
-      quantite: 7.5
-      unit: Kg
   legumes:
     - title: Oignon
       quantite: 1.5
@@ -37,6 +34,10 @@ ingredients:
     - title: Menthe séchée
       quantite: 125
       unit: grammes
+  frais:
+    - title: Yaourt grec de vache
+      quantite: 7.5
+      unit: Kg
 preparation: >-
   La veille : hacher l'oignon finement et rincer abondamment le boulgour. Les
   mélanger avec la moitié du yaourt, la menthe séchée et la moitié des noix

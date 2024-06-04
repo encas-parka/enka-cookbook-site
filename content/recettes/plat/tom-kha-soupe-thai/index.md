@@ -2,7 +2,7 @@
 title: TOM KHA SOUPE THAÏ
 draft: false
 img: https://recipecontent.fooby.ch/22054_3-2_1560-1040.jpg
-description: "Le Tom Kha Kai est une  soupe thaïlandaise préparée principalement
+description: "Le Tom Kha est une  soupe thaïlandaise préparée principalement
   avec du lait de coco et du Galanga, c’est un bouillon au goût citronné mais
   pas acide. Tom Kha (en thaï : ต้มข่า) veut dire soupe de galanga , Tom =
   Bouillon et Kha = Galanga."
@@ -92,7 +92,7 @@ ingredients:
       unit: Kg
 preparation: >-
   Dans une très grosse gamelle, la remplir de toute l'eau bouillante ( à la
-  bouilloire ça économise le gaz).
+  bouilloire c'est moins long et ça économise le gaz).
 
 
   Couper le galanga, le gingembre non pelé et l'ail en tranches fines.

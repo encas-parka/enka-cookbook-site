@@ -37,7 +37,16 @@ ingredients:
     - title: Tahin
       quantite: 250
       unit: grammes
-  epices: []
+  epices:
+    - title: Sel
+      quantite: 40
+      unit: grammes
+    - title: Cumin moulu
+      quantite: 20
+      unit: grammes
+    - title: Paprika
+      quantite: 75
+      unit: grammes
 preparation: >-
   
 

@@ -5,6 +5,7 @@ type: entree
 categories:
   - Accompagnement
   - Sauce
+auteur: ça vaulx le détour
 regime:
   - vegetarien
 cuisson: Non

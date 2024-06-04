@@ -1,6 +1,13 @@
 {
   "ingredients": [
     {
+      "title": "Miso blanc"
+    },
+    {
+      "title": "Shizo vert",
+      "pFrais": true
+    },
+    {
       "title": "Piment en poudre"
     },
     {

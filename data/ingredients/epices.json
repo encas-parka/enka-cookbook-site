@@ -1,6 +1,13 @@
 {
   "ingredients": [
     {
+      "title": "Galanga séché"
+    },
+    {
+      "title": "Galanga",
+      "pFrais": true
+    },
+    {
       "title": "Sriracha"
     },
     {

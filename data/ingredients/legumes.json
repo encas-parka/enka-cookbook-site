@@ -1,6 +1,10 @@
 {
   "ingredients": [
     {
+      "pFrais": false,
+      "title": "Champignon shiitake séché"
+    },
+    {
       "pFrais": true,
       "title": "Galanga"
     },

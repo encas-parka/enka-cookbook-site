@@ -1,6 +1,10 @@
 {
   "ingredients": [
     {
+      "title": "Gingembre",
+      "pFrais": true
+    },
+    {
       "title": "Galanga séché"
     },
     {

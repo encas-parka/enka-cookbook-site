@@ -13,10 +13,7 @@ plate: 40
 check: Oui
 checkAlwaysOk: true
 ingredients:
-  lof:
-    - title: Fromage blanc
-      quantite: 1.2
-      unit: litre
+  lof: []
   legumes:
     - title: Ail
       quantite: 7
@@ -27,6 +24,10 @@ ingredients:
       unit: litre
   epices:
     - title: Sel
+  frais:
+    - title: Fromage blanc
+      quantite: 1.2
+      unit: litre
 preparation: >-
   Mélanger tous les ingrédients (le jus de citron petit à petit pour ajuster au
   goût). Ajuster l'assaisonnement.

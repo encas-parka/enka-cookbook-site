@@ -1,6 +1,14 @@
 {
   "ingredients": [
     {
+      "pFrais": true,
+      "title": "Galanga"
+    },
+    {
+      "pFrais": true,
+      "title": "Gingembre bio"
+    },
+    {
       "pFrais": false,
       "title": "Champignons séchés"
     },

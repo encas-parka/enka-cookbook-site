@@ -1,6 +1,12 @@
 {
   "ingredients": [
     {
+      "title": "Yaourt grec",
+      "alergenesIng": [
+        "Produit laitier"
+      ]
+    },
+    {
       "title": "Margarine"
     },
     {

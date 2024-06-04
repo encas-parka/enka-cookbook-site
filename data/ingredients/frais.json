@@ -2,6 +2,14 @@
   "ingredients": [
     {
       "pFrais": true,
+      "title": "Tofu soyeux"
+    },
+    {
+      "pFrais": true,
+      "title": "Tofu ferme"
+    },
+    {
+      "pFrais": true,
       "title": "Yaourt grec de vache"
     },
     {

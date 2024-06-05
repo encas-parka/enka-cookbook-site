@@ -1,5 +1,5 @@
 ---
-title: Petits paquets / Aumonières courge feta
+title: Petits paquets - Aumonières courge feta
 description: ""
 layout: recettes
 type: entree
@@ -27,9 +27,6 @@ ingredients:
       quantite: 4.1
       unit: Kg
   lof:
-    - title: Feta
-      quantite: 3
-      unit: Kg
     - title: huile de tournesol
       quantite: 3.5
       unit: litre

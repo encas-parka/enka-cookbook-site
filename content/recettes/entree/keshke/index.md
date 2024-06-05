@@ -39,7 +39,7 @@ ingredients:
       quantite: 7.5
       unit: Kg
 preparation: >-
-  La veille : hacher l'oignon finement et rincer abondamment le boulgour. Les
+  La veille : hâcher l'oignon finement et rincer abondamment le boulgour. Les
   mélanger avec la moitié du yaourt, la menthe séchée et la moitié des noix
   hâchées. Saler au gout, laisser reposer au moins 5heures au frais, filmé au
   contact.

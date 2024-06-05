@@ -4,15 +4,6 @@
       "title": "Tofu ferme"
     },
     {
-      "title": "Yaourt grec",
-      "alergenesIng": [
-        "Produit laitier"
-      ]
-    },
-    {
-      "title": "Margarine"
-    },
-    {
       "title": "Farine de blé",
       "alergenesIng": [
         "Gluten"
@@ -44,12 +35,6 @@
       "vegetarien": true,
       "sans_lactose": false,
       "vegan": false
-    },
-    {
-      "title": "Yahourt de soja",
-      "alergenesIng": [
-        "Soja"
-      ]
     },
     {
       "title": "lait de cajou"
@@ -107,18 +92,6 @@
     },
     {
       "title": "Farine de riz gluant"
-    },
-    {
-      "title": "Fromage blanc",
-      "alergenesIng": [
-        "Produit laitier"
-      ]
-    },
-    {
-      "title": "Feta",
-      "alergenesIng": [
-        "Produit laitier"
-      ]
     },
     {
       "title": "Pate filo (1 feuille)",

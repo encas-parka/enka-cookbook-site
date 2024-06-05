@@ -17,9 +17,6 @@ check: Oui
 checkAlwaysOk: false
 ingredients:
   lof:
-    - title: Yahourt de soja
-      quantite: 700
-      unit: grammes
     - title: Bicarbonate alimentaire
       quantite: 10
       unit: c. à café
@@ -56,6 +53,10 @@ ingredients:
   sec:
     - title: Noisette
       quantite: 320
+      unit: grammes
+  frais:
+    - title: Yaourt de Soja
+      quantite: 700
       unit: grammes
 materiel:
   - Four

@@ -20,9 +20,6 @@ ingredients:
       commentaire: zeste
       unit: grammes
   lof:
-    - title: Yaourt de soja
-      quantite: 250
-      unit: grammes
     - title: huile de tournesol
       quantite: 0.11
       unit: litre
@@ -47,6 +44,10 @@ ingredients:
     - title: Sel
       quantite: 0.1
       unit: c. à café
+  frais:
+    - title: Yaourt de Soja
+      quantite: 250
+      unit: grammes
 materiel:
   - moule a cake
   - Four

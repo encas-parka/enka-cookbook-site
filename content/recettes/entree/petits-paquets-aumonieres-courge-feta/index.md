@@ -49,6 +49,10 @@ ingredients:
     - title: Sucre en poudre
       quantite: 200
       unit: grammes
+  frais:
+    - title: Feta
+      quantite: 3
+      unit: Kg
 materiel:
   - Gastro 1/1 (Normaux)
   - Four

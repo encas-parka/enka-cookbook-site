@@ -1,4 +1,4 @@
-name: Check Markdown Files and Deploy
+name: Deploy to production (cloudflare pages)
 
 on:
   push:
@@ -6,38 +6,16 @@ on:
       - main
 
 jobs:
-
-  check-and-deploy:
+  deploy-on-cloudflare:
     runs-on: ubuntu-latest
-
+    if: "contains(github.event.head_commit.message, ' Recettes ') || contains(github.event.head_commit.message, 'Evenements') || contains(github.event.head_commit.message, 'cf-deploy')"
     steps:
-    - uses: actions/checkout@v3
-
-    - name: Check and update markdown files
-      id: check-files
-      run: |
-        draft_found='false'
-        for file in $(git diff-tree --no-commit-id --name-only -r ${{ github.sha }} | grep '\.md$'); do
-          has_uuid=$(awk '/^uuid:/ {print $2; exit}' $file)
-          if [ -z "$has_uuid" ]; then
-            title=$(awk '/^title:/ {print $2; exit}' $file)
-            slug=$(echo $title | sed 's/ /-/g' | awk '{print tolower($0)}')
-            timestamp=$(date +'%y-%m-%d-%H-%M-%S')
-            uuid="$timestamp-$slug"
-            awk '/^---/ {print $0 RS "uuid: " uuid RS; next} 1' $file > tmp && mv tmp $file
-          fi
-          draft=$(awk '/^draft:/ {print $2; exit}' $file)
-          if [ "$draft" == "false" ]; then
-            draft_found='true'
-            break
-          fi
-        done
-        echo "draft_found=$draft_found" >> $GITHUB_OUTPUT
-
-    - name: Deploy to Cloudflare Pages
-      if: steps.check-files.outputs.draft_found == 'true'
+    - name: deploy-hook-cloudflare
       run: curl -X POST ${{ secrets.CF_HOOK_DEPLOY }}
-
-    - name: Deploy to Netlify
-      if: contains(github.event.head_commit.message, 'netlify-deploy')
+  deploy-on-netlify:
+    runs-on: ubuntu-latest
+    if: "contains(github.event.head_commit.message, 'netlify-deploy')"
+    steps:
+    - name: deploy-hook-netlify
       run: curl -X POST ${{ secrets.NETLIFY_DEPLOY_MAIN }}
+  

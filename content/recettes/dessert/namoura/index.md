@@ -24,9 +24,6 @@ ingredients:
     - title: huile de colza
       quantite: 0.3
       unit: litre
-    - title: Yaourt de soja
-      quantite: 1.5
-      unit: Kg
   epices: []
   autres:
     - title: Eau

@@ -23,9 +23,6 @@ ingredients:
       quantite: 500
       unit: grammes
   lof:
-    - title: Margarine
-      quantite: 600
-      unit: grammes
     - title: Fécule de maïs (Maïzena)
       quantite: 5
       unit: c. à soupe
@@ -40,6 +37,10 @@ ingredients:
     - title: Vin Rouge
       quantite: 500
       unit: ml
+  frais:
+    - title: Margarine végétale spécial cuisson
+      quantite: 600
+      unit: grammes
 preparation: >-
   1. Émincer finement les échalotes.
 

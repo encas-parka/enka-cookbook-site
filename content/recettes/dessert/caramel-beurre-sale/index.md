@@ -1,5 +1,6 @@
 ---
 title: Caramel beurre salé
+draft: true
 description: Pour mettre sur un dessert par exemple. Consistence un peu élastique.
 layout: recettes
 type: dessert
@@ -14,10 +15,7 @@ plate: 100
 check: Oui
 checkAlwaysOk: true
 ingredients:
-  lof:
-    - title: Beurre demi-sel
-      quantite: 1
-      unit: Kg
+  lof: []
 preparation: t
 publishDate: 2024-03-08T11:58:12.445Z
 ---

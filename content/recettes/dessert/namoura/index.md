@@ -52,6 +52,10 @@ ingredients:
       quantite: 0.3
       unit: Kg
   legumes: []
+  frais:
+    - title: Yaourt de Soja
+      quantite: 1.5
+      unit: Kg
 materiel:
   - Four
 preparation: >-

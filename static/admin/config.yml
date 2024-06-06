@@ -47,7 +47,7 @@ collections:
     label-singular: "Recette"
     folder: "content/recettes/"
     path: "{{type}}/{{slug}}/index"
-    slug: "{{title}}"
+    slug: "{{title}}_{{year}}-{{month}}-{{day}}-{{hour}}{{minute}}{{second}}"
     filter: { field: "layout", value: "recettes" }
     description: "Liste de l'ensemble des recettes. Vous pouvez utiliser les filtres ci-dessous pour classer / filtrer les recettes. Ou faire 'ctrl+f' pour rechercher une recette avec votre navigateur."
     view_filters:

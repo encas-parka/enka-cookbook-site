@@ -95,9 +95,7 @@ collections:
     create: true
 
     fields:
-      - name: id
-        label: Id
-        widget: uuid
+
       - {
           label: "Intitulé",
           name: "title",
@@ -660,6 +658,10 @@ collections:
         name: "publishDate"
         widget: "datetime"
         picker_utc: true
+
+      - name: uuid
+        label: Id
+        widget: uuid
 
   ###############################
   ################################

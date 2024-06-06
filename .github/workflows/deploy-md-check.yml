@@ -6,18 +6,17 @@ on:
       - main
 
 jobs:
-
   check-and-deploy:
     runs-on: ubuntu-latest
     if: "contains(github.event.head_commit.message, 'test-deploy')"
 
     steps:
-
     - uses: actions/checkout@v4
 
     - name: Check and update markdown files
       id: check-files
       run: |
+        draft_found=false
         for file in $(git diff-tree --no-commit-id --name-only -r ${{ github.sha }} | grep '\.md$'); do
           has_uuid=$(awk '/^uuid:/ {print $2; exit}' $file)
           if [ -z "$has_uuid" ]; then
@@ -25,16 +24,17 @@ jobs:
             slug=$(echo $title | sed 's/ /-/g' | awk '{print tolower($0)}')
             timestamp=$(date +%s%3N)
             uuid="$timestamp-$slug"
-            awk '/^---/ {print $0 RS "uuid: " uuid RS; next} 1' $file > tmp && mv tmp $file
+            awk -v uuid="$uuid" '/^---/ {print; print "uuid: " uuid; next}1' $file > tmp && mv tmp $file
           fi
           draft=$(awk '/^draft:/ {print $2; exit}' $file)
           if [ "$draft" == "false" ]; then
-            echo "draft_found=true" >> $GITHUB_OUTPUT
+            draft_found=true
           fi
         done
+        echo "draft_found=$draft_found" >> $GITHUB_ENV
 
     - name: Deploy to Cloudflare Pages
-      if: steps.check-files.outputs.draft_found == 'true'
+      if: env.draft_found == 'true'
       run: curl -X POST ${{ secrets.CF_HOOK_DEPLOY }}
 
     - name: Deploy to Netlify

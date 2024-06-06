@@ -82,6 +82,6 @@ preparation: >-
   Dorer la surface de la tourte au café avec un pinceau.
 
 
-  Faire une cheminée au centre. Enfourner 30/35min...
+  Faire une cheminée au centre. Enfourner 30/35min.
 publishDate: 2024-05-18T15:49:00.000Z
 ---

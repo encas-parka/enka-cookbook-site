@@ -1,4 +1,5 @@
 ---
+uuid: af1b9c8e-bac5-4dc8-8862-271b9603fc7b
 title: Cake courgette chêvre cumin basilic
 layout: recettes
 type: plat

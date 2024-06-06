@@ -1,4 +1,5 @@
 ---
+uuid: 665473d7-f959-40f1-a0a0-0d3e1aa94fcd
 title: Chorba à  l'agneau (ou mouton)
 draft: false
 layout: recettes

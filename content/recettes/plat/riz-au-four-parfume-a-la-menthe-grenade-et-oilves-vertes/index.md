@@ -1,4 +1,5 @@
 ---
+uuid: 86e0f98e-9ef8-4efa-a855-a684e653e645
 title: Riz au four parfumé à la menthe, grenade et oilves vertes
 draft: false
 img: riz-au-four-parfumé-à-la-menthe-grenade-et-oilves-vertes.jpeg

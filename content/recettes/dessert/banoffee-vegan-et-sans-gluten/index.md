@@ -1,4 +1,5 @@
 ---
+uuid: 515c37b9-dbc9-4601-b602-251a8a55fae3
 title: Banoffee (Végan et Sans Gluten)
 draft: false
 layout: recettes
@@ -75,8 +76,7 @@ preparation: >-
   Y déposer des rondelles de BANANE. 1 banane pour 3 personnes.
 
 
-  \---
-
+  
 
   **CARAMEL :**
 
@@ -98,8 +98,7 @@ preparation24h: >-
   À ébullition, retirer la casserole du feu,  ajoutez  l’huile de coco dans le lait puis fouetter jusqu’à ce qu’elle soit bien fondue.
 
 
-  \---
-
+  
 
   Lorsque la matière grasse est parfaitement fondue, transvaser l’ensemble  dans un récipient haut et avec un mixeur plongeant.
 

@@ -1,4 +1,5 @@
 ---
+uuid: 75d56161-e4b8-4894-9cf9-2650fb81f083
 title: Moussaka Végé
 draft: false
 layout: recettes

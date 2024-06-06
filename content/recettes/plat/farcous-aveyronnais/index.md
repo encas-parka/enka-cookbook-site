@@ -1,4 +1,5 @@
 ---
+uuid: c9e2f843-bf62-4353-b7a0-33cf21e2487c
 title: Farçous Aveyronnais
 draft: false
 layout: recettes

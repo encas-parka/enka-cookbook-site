@@ -1,4 +1,5 @@
 ---
+uuid: 787c142f-ad30-44b6-b31e-cd5e28b37a8e
 title: Taboulais libanais des tarnais (sans gluten)
 draft: false
 img: taboule-libanais.jpg

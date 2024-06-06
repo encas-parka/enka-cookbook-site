@@ -1,4 +1,5 @@
 ---
+uuid: eb7d1293-22b9-4893-86fd-d48f100baac6
 title: Caviar d'aubergines fumées
 draft: false
 layout: recettes

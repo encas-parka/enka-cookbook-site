@@ -1,4 +1,5 @@
 ---
+uuid: aed20d5d-014f-4080-a9b8-3dc7c3576d2c
 title: Chou mariné à la japonaise
 layout: recettes
 type: entree

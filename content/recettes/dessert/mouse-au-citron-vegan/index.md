@@ -1,4 +1,5 @@
 ---
+uuid: 541d87f4-f3bf-4da1-a47e-804069455890
 title: Mouse au citron vegan
 draft: false
 layout: recettes

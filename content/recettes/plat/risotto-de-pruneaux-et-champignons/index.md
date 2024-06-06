@@ -1,4 +1,5 @@
 ---
+uuid: 74b23598-ddaa-405f-904a-f071bb7517d6
 title: RISOTTO DE PRUNEAUX ET CHAMPIGNONS
 draft: false
 description: Pas en plat unique, mais en accompagnement. Genre avec les farçous aveyronnais.

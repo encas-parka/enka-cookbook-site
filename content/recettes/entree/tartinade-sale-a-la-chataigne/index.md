@@ -1,4 +1,5 @@
 ---
+uuid: 08e1ba6c-df57-4f90-968b-79fd9b45e395
 title: Tartinade salé a la chataigne
 draft: false
 layout: recettes

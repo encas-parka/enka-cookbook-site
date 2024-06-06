@@ -1,4 +1,5 @@
 ---
+uuid: afdeaabd-4857-4abd-a1c3-cb7013678450
 title: " Fondant Chataine (vegan et sans gluten)"
 draft: false
 layout: recettes

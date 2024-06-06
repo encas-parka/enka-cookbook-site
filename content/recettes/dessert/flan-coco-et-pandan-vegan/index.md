@@ -1,4 +1,5 @@
 ---
+uuid: 2759d142-f28e-46f8-a5ee-c5c81993a8e8
 title: Flan coco et pandan (végan)
 draft: false
 layout: recettes

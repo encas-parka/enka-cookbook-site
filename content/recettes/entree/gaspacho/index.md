@@ -1,4 +1,5 @@
 ---
+uuid: 6513ecff-d89c-413a-a2d2-fecc00755716
 title: Gaspacho
 draft: false
 layout: recettes

@@ -1,4 +1,5 @@
 ---
+uuid: a499dc15-838e-430b-8b67-4e5a4eef96cd
 title: Salade Thaï à la mangue
 draft: false
 layout: recettes

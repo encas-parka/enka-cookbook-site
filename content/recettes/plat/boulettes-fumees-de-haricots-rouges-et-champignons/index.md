@@ -1,4 +1,5 @@
 ---
+uuid: 5be3b6de-9a22-4635-a147-d4295c86c452
 title: Boulettes fumées de haricots rouges et champignons
 description: Pour 2 boulettes par personne
 layout: recettes

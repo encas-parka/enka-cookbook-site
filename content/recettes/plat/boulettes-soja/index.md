@@ -1,4 +1,5 @@
 ---
+uuid: 2c24b04f-659e-4ff6-b016-d24c8854bbd2
 title: "Boulettes (soja) "
 draft: false
 layout: recettes

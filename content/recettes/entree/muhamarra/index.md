@@ -1,4 +1,5 @@
 ---
+uuid: 2422a147-5117-4eaa-b024-e9c9c3785c38
 title: Muhamarra
 layout: recettes
 type: entree

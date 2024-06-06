@@ -1,5 +1,6 @@
 ---
-title: Tourte betterave lentulle (vegan et sans gluten)
+uuid: a426e814-b754-40e3-bc7c-55346a11ef3d
+title: Tourte betterave lentille (vegan et sans gluten)
 draft: false
 layout: recettes
 type: entree
@@ -58,16 +59,10 @@ preparation: >-
   Egoutter. Laisser refroidir.
 
 
-  \---
-
-
   Préchauffer le four à 180°c à chaleur tournante ou 200°c en mode convection naturelle!!
 
 
   Tapisser sur les plaques de cuisson du papier sulfuuuuu.....
-
-
-  \---
 
 
   Râper grossièrement les betteraves, presser tout ça dans une passoire pour ôter un max de jus sans en faire de la purée.
@@ -77,9 +72,6 @@ preparation: >-
 
 
   Ajouter les lentilles aux oignons égouter et tout y mélanger.
-
-
-  \---
 
 
   Etaler les premières pâtes sur les plaques.

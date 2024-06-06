@@ -1,4 +1,5 @@
 ---
+uuid: 98a6b3dd-784c-4194-a8ce-1a8e8e9696d9
 title: Tapenade (noire ou verte)
 layout: recettes
 type: entree

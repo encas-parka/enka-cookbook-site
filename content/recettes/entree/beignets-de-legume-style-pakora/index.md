@@ -1,4 +1,5 @@
 ---
+uuid: a23fde4e-8c2f-483a-a445-1ae1e9652c71
 title: Beignets de légume style pakora
 description: ""
 layout: recettes

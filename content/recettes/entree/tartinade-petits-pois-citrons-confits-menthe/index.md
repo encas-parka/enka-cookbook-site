@@ -1,4 +1,5 @@
 ---
+uuid: 408513bc-8492-41d3-a84f-25e101c31557
 title: Tartinade petits pois citrons confits menthe
 draft: false
 layout: recettes

@@ -1,4 +1,5 @@
 ---
+uuid: bfacf0ee-3cbc-4526-9ea6-2c5d91a0d078
 title: Zaalouk (caviar d'aubergines)
 draft: false
 layout: recettes

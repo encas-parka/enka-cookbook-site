@@ -1,4 +1,5 @@
 ---
+uuid: 585b40cf-be30-4040-b6a5-8cb6538d3fc3
 title: Salade thaï aux nouilles de riz
 draft: false
 layout: recettes

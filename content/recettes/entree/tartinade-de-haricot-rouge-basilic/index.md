@@ -1,4 +1,5 @@
 ---
+uuid: c80760ff-d6f1-4713-af1b-5e6bcd0824a6
 title: Tartinade de haricot rouge - basilic
 draft: false
 img: tartinade-haricot-rouge.jpg

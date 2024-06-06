@@ -1,4 +1,5 @@
 ---
+uuid: 2b15a2fa-a3b6-4136-97f0-76b5e75c7d66
 title: Accras de patate douce
 draft: false
 layout: recettes

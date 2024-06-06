@@ -1,4 +1,5 @@
 ---
+uuid: ec27e5a4-9e47-4b6e-b932-3387866e6de7
 title: BEIGNET DE BANANE ET CARAMEL DE MISO
 draft: false
 layout: recettes

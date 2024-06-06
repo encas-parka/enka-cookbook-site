@@ -1,4 +1,5 @@
 ---
+uuid: 1a490d80-a753-4438-9d9e-adf222789ee8
 title: SOUPE FROIDE CONCOMBRE ET YAOURT VEGAN
 draft: false
 layout: recettes

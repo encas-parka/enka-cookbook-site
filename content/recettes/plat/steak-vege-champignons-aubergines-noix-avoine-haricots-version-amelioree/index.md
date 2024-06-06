@@ -1,4 +1,5 @@
 ---
+uuid: 6068ae73-1984-4084-890f-17076c0afe8c
 title: Steak végé - champignons aubergines noix avoine haricots... version améliorée
 layout: recettes
 type: plat

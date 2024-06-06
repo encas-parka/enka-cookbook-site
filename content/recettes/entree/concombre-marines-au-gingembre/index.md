@@ -1,4 +1,5 @@
 ---
+uuid: 6aa1a283-f3d0-413c-9e05-9999d6176ffe
 title: Concombre marinés au gingembre
 draft: false
 layout: recettes

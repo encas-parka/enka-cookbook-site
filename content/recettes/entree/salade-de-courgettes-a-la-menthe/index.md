@@ -1,4 +1,5 @@
 ---
+uuid: ed6e8b2c-0afd-48bf-8c14-fb5853132bf3
 title: Salade de courgettes à la menthe
 layout: recettes
 type: entree

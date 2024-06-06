@@ -1,4 +1,5 @@
 ---
+uuid: 6a228ac2-d3f3-443c-a38b-b0a60eb51b0a
 title: SOUPE FROIDE BETTERAVE, ORANGE ET CREME AIGRE
 draft: false
 layout: recettes

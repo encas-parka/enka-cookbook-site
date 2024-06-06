@@ -1,4 +1,5 @@
 ---
+uuid: 0a6331f0-7ee1-4d1d-8115-1d6125cf7bc9
 title: CHORIZO VEGAN
 draft: false
 layout: recettes

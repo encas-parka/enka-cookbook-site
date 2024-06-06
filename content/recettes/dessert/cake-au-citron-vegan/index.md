@@ -1,4 +1,5 @@
 ---
+uuid: f2e250a2-8ab5-4c1e-91a7-c82ea2fe3c8e
 title: Cake au citron végan
 layout: recettes
 type: dessert

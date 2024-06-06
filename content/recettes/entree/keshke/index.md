@@ -1,4 +1,5 @@
 ---
+uuid: 963bc23a-4176-4b5f-863c-a2f2c26336d9
 title: Keshke
 layout: recettes
 type: entree

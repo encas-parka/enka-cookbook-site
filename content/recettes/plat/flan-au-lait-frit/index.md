@@ -1,4 +1,5 @@
 ---
+uuid: aa300fa0-0690-488c-a1d9-b6c9bc14b983
 title: Flan au lait frit
 draft: false
 layout: recettes
@@ -95,8 +96,7 @@ preparation: >-
   \- Couper les flans au lait en cube de 5x5cm. 
 
 
-  \---
-
+  
 
   **Obligatoirement au dernier moment :**
 

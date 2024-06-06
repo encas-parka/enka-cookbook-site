@@ -1,4 +1,5 @@
 ---
+uuid: d16fc284-edec-4158-9a5a-2af89434f737
 title: Keshke vegan et sans gluten
 layout: recettes
 type: entree

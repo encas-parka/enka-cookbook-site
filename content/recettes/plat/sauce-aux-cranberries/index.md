@@ -1,4 +1,5 @@
 ---
+uuid: 8fe89b41-b5eb-42a7-a96d-9c5dfd8f0040
 title: Sauce aux cranberries
 layout: recettes
 type: plat

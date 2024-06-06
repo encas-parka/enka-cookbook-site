@@ -1,4 +1,5 @@
 ---
+uuid: 03059cd3-6175-440d-b2bd-740b17673e9c
 title: Taboulais libanais des tarnais
 draft: false
 img: taboule-libanais.jpg

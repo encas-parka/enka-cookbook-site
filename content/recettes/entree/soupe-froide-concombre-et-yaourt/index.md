@@ -1,4 +1,5 @@
 ---
+uuid: 34313587-e2ba-44db-ba37-274158e820a8
 title: SOUPE FROIDE CONCOMBRE ET YAOURT
 draft: false
 layout: recettes

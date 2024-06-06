@@ -1,4 +1,5 @@
 ---
+uuid: edc9f445-939e-453b-a3d0-0624e2c07e34
 title: Houmous de betterave aux cranberries et balsamique
 description: pour une cuiller à soupe par personne
 layout: recettes

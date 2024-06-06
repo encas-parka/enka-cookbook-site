@@ -1,4 +1,5 @@
 ---
+uuid: eb424ca2-bea3-4cd3-ada3-a207c2cb53dc
 title: "Salade concombre, pommes et nigelle à l'aneth "
 draft: false
 layout: recettes

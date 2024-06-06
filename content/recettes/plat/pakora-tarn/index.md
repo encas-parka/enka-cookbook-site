@@ -1,4 +1,5 @@
 ---
+uuid: ecf914cb-db00-4964-8d5e-cce112cc3523
 title: Pakora (tarn)
 draft: true
 layout: recettes

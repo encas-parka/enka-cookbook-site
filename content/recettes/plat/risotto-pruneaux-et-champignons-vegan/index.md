@@ -1,4 +1,5 @@
 ---
+uuid: 06149285-08ba-4079-853b-ddf7efb4216e
 title: RISOTTO PRUNEAUX ET CHAMPIGNONS Végan
 draft: false
 description: Quantités pour être en accompagnement et pas en plat unique. Par

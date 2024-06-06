@@ -1,4 +1,5 @@
 ---
+uuid: 7b2688ac-6360-43b8-8083-635b1cc56257
 title: Aubergines grillées cacao ail noir et piment
 layout: recettes
 type: plat

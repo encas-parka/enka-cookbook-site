@@ -1,4 +1,5 @@
 ---
+uuid: 37d2028a-18bb-42e7-9e22-3c624870de3e
 title: Houmous
 layout: recettes
 type: entree

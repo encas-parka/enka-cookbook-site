@@ -1,4 +1,5 @@
 ---
+uuid: bb31d2dd-96bb-440e-82e4-8e9cb7725b99
 title: Burger Végé Lentilles Patates Douces
 draft: false
 layout: recettes

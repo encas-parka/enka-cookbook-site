@@ -1,4 +1,5 @@
 ---
+uuid: d74da915-b363-436b-9c86-155d19b74351
 title: Tarte au chocolat sans cuisson
 layout: recettes
 type: dessert

@@ -1,4 +1,5 @@
 ---
+uuid: 39748074-b07b-4782-ad4f-4ec635a459d3
 draft: false
 title: "Gateau de sésame "
 description: "Gâteau au Sésame noir et chocolat "

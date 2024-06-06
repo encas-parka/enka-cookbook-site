@@ -1,4 +1,5 @@
 ---
+uuid: 8a072bf8-8830-498b-98ec-e553fe78f699
 draft: false
 layout: recettes
 regime:

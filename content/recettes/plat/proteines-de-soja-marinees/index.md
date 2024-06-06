@@ -1,4 +1,5 @@
 ---
+uuid: dc1c35a5-a38e-42a5-a637-0b22769b50a7
 title: Protéines de soja marinées
 description: Pour mettre dans un wrap par exemple
 layout: recettes

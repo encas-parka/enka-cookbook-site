@@ -1,4 +1,5 @@
 ---
+uuid: 9db0c0bd-66c5-4bad-9a65-71919a9cd577
 title: Namoura
 description: Petits gâteaux de semoule gourmands
 layout: recettes

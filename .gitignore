@@ -9,3 +9,4 @@ public
 .vscode
 _vendor
 node_modules
+content/recettes/uuid.sh

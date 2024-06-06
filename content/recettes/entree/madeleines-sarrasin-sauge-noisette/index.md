@@ -1,4 +1,5 @@
 ---
+uuid: c30b3c0d-66e7-4ec6-8904-438c125dbf57
 title: Madeleines sarrasin sauge noisette
 description: Pour 2 madeleines par personne
 layout: recettes

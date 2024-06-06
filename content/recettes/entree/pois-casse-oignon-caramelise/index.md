@@ -1,4 +1,5 @@
 ---
+uuid: f46bb984-fc5a-41d8-8dbd-9757bc46766c
 title: "Tartinade Pois cassé - oignon caramélisé "
 draft: false
 layout: recettes

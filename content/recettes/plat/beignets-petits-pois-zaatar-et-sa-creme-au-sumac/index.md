@@ -1,4 +1,5 @@
 ---
+uuid: 72b7cd7f-5671-438d-a942-2d78f3c9d90d
 title: Beignets Petits Pois Zaatar et sa crème au sumac
 draft: false
 layout: recettes

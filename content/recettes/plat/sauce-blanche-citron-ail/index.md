@@ -1,4 +1,5 @@
 ---
+uuid: e17b2f93-96ea-4aaa-b9f7-e960503f8bac
 title: Sauce blanche citron ail
 layout: recettes
 type: plat

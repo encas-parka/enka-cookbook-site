@@ -1,4 +1,5 @@
 ---
+uuid: 688312f1-abd3-4cb5-b391-3ca5dffdd08a
 title: Tourte Betterave et feta
 draft: false
 layout: recettes

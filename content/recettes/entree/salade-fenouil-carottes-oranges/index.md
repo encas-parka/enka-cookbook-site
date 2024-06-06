@@ -1,4 +1,5 @@
 ---
+uuid: 44340ce6-ae2d-49ad-b024-599a435f5d19
 title: Salade Fenouil-Carottes-Oranges
 layout: recettes
 type: entree

@@ -1,4 +1,5 @@
 ---
+uuid: 3dda2fab-08f7-4ced-9bd7-b0f3d3806e02
 title: Gateau au pandan Bahn Bo Nuong
 draft: false
 layout: recettes
@@ -42,9 +43,7 @@ ingredients:
       unit: ml
   autres: []
 preparation: >-
-  *
 
-  *
 
   * Faire chauffer le lait de coco dans une casserole à feu doux sans le faire bouillir, ajouter le sucre et remuer jusqu'à dissolution de celui-ci. Couper le feu.
 

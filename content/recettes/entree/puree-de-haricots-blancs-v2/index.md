@@ -1,4 +1,5 @@
 ---
+uuid: 4c223fdc-a379-4528-a20b-30f33bd61f20
 title: Purée de haricots blancs
 layout: recettes
 type: plat

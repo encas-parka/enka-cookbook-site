@@ -1,4 +1,5 @@
 ---
+uuid: 41e554d3-f94b-4b31-9707-68d94502ab27
 title: Véganaise rapide
 layout: recettes
 type: plat

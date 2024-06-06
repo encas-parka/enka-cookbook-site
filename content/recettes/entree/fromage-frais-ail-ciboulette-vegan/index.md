@@ -1,4 +1,5 @@
 ---
+uuid: b0bf275b-93bb-4e9e-8d85-90a24e653a00
 title: Fromage Frais Ail - ciboulette VEGAN
 layout: recettes
 type: entree

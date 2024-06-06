@@ -1,4 +1,5 @@
 ---
+uuid: c3bff34a-92e7-4dcd-88b4-7d8c0a02d8c1
 title: Nems
 draft: false
 layout: recettes

@@ -1,4 +1,5 @@
 ---
+uuid: c9f50b2e-a1e4-4d55-9a6f-4bff948fb91e
 title: LANCHES PORTUGAISES, Chorizo végan et fromage
 draft: false
 img: https://papaencuisine.com/wp-content/uploads/2015/06/lanches-portugaises-9.jpg

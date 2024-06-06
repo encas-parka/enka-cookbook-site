@@ -1,4 +1,5 @@
 ---
+uuid: d0160a6f-4bc4-411f-a336-dedf234c9608
 title: Pomme de terre Hérisson
 draft: false
 description: 1 pomme de terre par personne

@@ -1,4 +1,5 @@
 ---
+uuid: f39ef1f8-d7db-461e-ae97-9999e4582278
 title: Betteraves fermentées
 description: 2 à 3 bâtonnets par assiette
 layout: recettes

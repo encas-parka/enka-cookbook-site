@@ -1,4 +1,5 @@
 ---
+uuid: b83d3bab-2ae6-4b27-8628-1cea8016a61b
 title: Tartinade salé à la chataigne (végan)
 draft: false
 layout: recettes

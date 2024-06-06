@@ -1,4 +1,5 @@
 ---
+uuid: 92fe8d91-486e-4122-9049-33ebd2995e77
 title: Petits paquets - Aumonières courge feta
 description: ""
 layout: recettes

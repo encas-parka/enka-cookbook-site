@@ -1,4 +1,5 @@
 ---
+uuid: ff4c54af-6bd0-4de2-afba-3a67efa1104f
 title: Focaccia
 draft: false
 layout: recettes

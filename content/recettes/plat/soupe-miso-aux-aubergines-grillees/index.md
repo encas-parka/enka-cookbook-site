@@ -1,4 +1,5 @@
 ---
+uuid: f65cb672-da3c-4c45-a5c7-a4c346361cc0
 title: SOUPE MISO AUX AUBERGINES GRILLEES
 draft: false
 description: "La soupe miso de base est constituée de 4 éléments de base : le

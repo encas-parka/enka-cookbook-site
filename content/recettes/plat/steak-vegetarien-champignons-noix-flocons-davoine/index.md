@@ -1,4 +1,5 @@
 ---
+uuid: 6ac34c64-5445-4380-baac-59a5f7dfda05
 title: Steak végétarien champignons - noix - flocons d'avoine
 layout: recettes
 type: plat

@@ -1,4 +1,5 @@
 ---
+uuid: ef6fa447-2818-43d2-b403-1d26feb2c249
 title: Farçous Aveyronnais (Végan et sans gluten)
 draft: false
 layout: recettes

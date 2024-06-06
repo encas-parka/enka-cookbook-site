@@ -1,4 +1,5 @@
 ---
+uuid: 265a4348-8c2b-4966-bd57-ad8e6a7716b0
 title: Banoffee
 draft: false
 layout: recettes

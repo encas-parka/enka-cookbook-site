@@ -1,4 +1,5 @@
 ---
+uuid: a5561a85-9804-4591-bd06-3ef1ac65fbd7
 title: Panisse
 draft: false
 layout: recettes

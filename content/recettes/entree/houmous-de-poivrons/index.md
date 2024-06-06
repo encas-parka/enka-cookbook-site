@@ -1,4 +1,5 @@
 ---
+uuid: c8757990-ebed-4350-b739-778c44ce4d7a
 title: " Houmous de poivrons"
 draft: false
 layout: recettes

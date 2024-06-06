@@ -1,4 +1,5 @@
 ---
+uuid: 7c44315f-0c2a-4960-a599-1f3357484136
 draft: false
 title: Salade de Pois-chiche
 img: salade-pois-chiches.webp

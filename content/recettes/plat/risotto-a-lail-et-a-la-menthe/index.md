@@ -1,4 +1,5 @@
 ---
+uuid: 674cfd84-c496-4650-8d0f-9749638e0d85
 title: Risotto à l'ail et à la menthe
 draft: false
 layout: recettes

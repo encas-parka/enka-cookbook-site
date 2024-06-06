@@ -1,4 +1,5 @@
 ---
+uuid: a93cbdd6-bead-482b-9ec7-87cfa95e36a2
 title: Salade courgette - curry
 draft: false
 img: courgette-curry.jpg

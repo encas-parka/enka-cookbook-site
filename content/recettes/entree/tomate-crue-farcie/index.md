@@ -1,4 +1,5 @@
 ---
+uuid: 48d1a6f7-8e6c-4dac-857e-653c9b426cd7
 title: Tomate crue farcie
 draft: false
 layout: recettes

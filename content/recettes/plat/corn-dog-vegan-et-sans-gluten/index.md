@@ -1,4 +1,5 @@
 ---
+uuid: 3ff32356-7260-4423-a130-eb10dcfb23dc
 title: CORN DOG VEGAN ET SANS GLUTEN
 img: https://yuns.fr/wp-content/uploads/2021/03/hot-dog-3.jpg
 description: “Beignet de saucisse”, “Pogo” ou “Saucisse sur bâtonnet”. C’est une

@@ -1,4 +1,5 @@
 ---
+uuid: a73856da-74c6-4132-8586-557da5d9a89c
 title: Bo Bun Végé
 draft: false
 layout: recettes

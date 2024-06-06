@@ -1,4 +1,5 @@
 ---
+uuid: 4c3e8a90-032c-4a7f-ba00-7e99166b90ac
 title: Pain de Yucca
 draft: false
 layout: recettes

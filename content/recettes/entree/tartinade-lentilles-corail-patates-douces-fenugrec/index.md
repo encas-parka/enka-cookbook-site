@@ -1,4 +1,5 @@
 ---
+uuid: e186175d-6e3e-4eb7-a967-b482f5df6a0d
 title: Tartinade lentilles corail - patates douces - fenugrec
 draft: false
 img: tartinade-lentille-corail.jpg

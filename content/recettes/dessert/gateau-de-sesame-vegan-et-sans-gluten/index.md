@@ -1,4 +1,5 @@
 ---
+uuid: ecd01049-bf00-46a8-9760-f136036807df
 draft: false
 title: Gateau de sésame (végan et sans-gluten)
 description: "Gâteau au Sésame noir et chocolat "

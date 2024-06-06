@@ -1,4 +1,5 @@
 ---
+uuid: 8f8e326d-e0f7-4df6-9ea8-5c3567cfa524
 title: Abricots Pochés verveine
 draft: false
 layout: recettes

@@ -1,4 +1,5 @@
 ---
+uuid: f2beae55-4408-4062-b282-b91368dec205
 title: Caramel beurre salé
 draft: true
 description: Pour mettre sur un dessert par exemple. Consistence un peu élastique.

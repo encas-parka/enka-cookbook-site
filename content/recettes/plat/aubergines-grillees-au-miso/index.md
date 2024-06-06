@@ -1,4 +1,5 @@
 ---
+uuid: 0d3a8f30-a051-4250-9be6-e40fc37fdb6d
 title: Aubergines grillées au miso
 img: img_20210902_154005.jpg
 layout: recettes

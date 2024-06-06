@@ -1,4 +1,5 @@
 ---
+uuid: 16668ef6-acf1-4352-81c3-fe8b85018b3a
 title: Fondant Chataine
 draft: false
 layout: recettes

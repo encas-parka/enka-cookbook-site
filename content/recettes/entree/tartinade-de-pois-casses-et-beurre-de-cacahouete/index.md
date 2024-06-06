@@ -1,4 +1,5 @@
 ---
+uuid: efec8ce1-d35d-418c-af9a-df8af2fc9839
 title: Tartinade de pois cassés et beurre de cacahouète
 draft: false
 layout: recettes

@@ -1,4 +1,5 @@
 ---
+uuid: a9e5ba57-ca21-4b9d-ae43-df047ff610b0
 title: Cake figues, chèvre, romarin
 layout: recettes
 type: plat

@@ -1,37 +1,49 @@
-name: Check Markdown Files and Deploy
+name: Markdown Check and Deploy
 
 on:
   push:
-    branches:
-      - main
+    paths:
+      - '**.md'
 
 jobs:
   check-and-deploy:
     runs-on: ubuntu-latest
-    if: "contains(github.event.head_commit.message, 'test-deploy')"
 
     steps:
-    - uses: actions/checkout@v4
+    - name: Checkout code
+      uses: actions/checkout@v4
 
-    - name: Check and update markdown files
-      id: check-files
+    - name: Setup Node.js environment
+    - uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+
+    - name: Check Markdown files
       run: |
-        draft_found=false
-        for file in $(git diff-tree --no-commit-id --name-only -r ${{ github.sha }} | grep '\.md$'); do
-          has_uuid=$(awk '/^uuid:/ {print $2; exit}' $file)
-          if [ -z "$has_uuid" ]; then
-            title=$(awk '/^title:/ {print $2; exit}' $file)
-            slug=$(echo $title | sed 's/ /-/g' | awk '{print tolower($0)}')
-            timestamp=$(date +%s%3N)
-            uuid="$timestamp-$slug"
-            awk -v uuid="$uuid" '/^---/ {print; print "uuid: " uuid; next}1' $file > tmp && mv tmp $file
+        npm install -g front-matter-cli
+        for file in $(git diff --name-only ${{ github.event.before }} ${{ github.event.after }} | grep '.md$'); do
+          if ! fm --yaml $file | grep -q 'draft: false'; then
+            echo "Draft is not false in $file. Aborting."
+            exit 1
           fi
-          draft=$(awk '/^draft:/ {print $2; exit}' $file)
-          if [ "$draft" == "false" ]; then
-            draft_found=true
+          if ! fm --yaml $file | grep -q 'uuid:'; then
+            echo "Adding uuid to $file."
+            fm --yaml --append "uuid: $(date +%s)" $file
           fi
         done
-        echo "draft_found=$draft_found" >> $GITHUB_ENV
+
+    - name: Commit changes
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add .
+        git commit -m "Add missing uuid to markdown files" || echo "No changes to commit"
+        git push
+
+    - name: Deploy to Cloudflare
+      run: |
+        # Add your Cloudflare deployment command here
+
 
     - name: Deploy to Cloudflare Pages
       if: env.draft_found == 'true'

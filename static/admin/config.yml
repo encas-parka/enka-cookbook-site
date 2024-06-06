@@ -40,7 +40,7 @@ editor:
   preview: false
 
 # ::: Collection Recettes
-
+#
 collections:
   - name: "recettes"
     label: "Recettes"

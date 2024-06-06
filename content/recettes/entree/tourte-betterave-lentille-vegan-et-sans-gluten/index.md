@@ -1,5 +1,4 @@
 ---
-uuid: a426e814-b754-40e3-bc7c-55346a11ef3d
 title: Tourte betterave lentille (vegan et sans gluten)
 draft: false
 layout: recettes

@@ -12,7 +12,7 @@ jobs:
     if: "contains(github.event.head_commit.message, 'test-deploy')"
     
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     
     - name: Check and update markdown files
       id: check-files

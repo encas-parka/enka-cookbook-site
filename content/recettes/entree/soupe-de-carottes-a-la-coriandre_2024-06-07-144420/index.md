@@ -46,7 +46,9 @@ ingredients:
       quantite: 500
       unit: ml
 materiel:
-  - Robot Mixeur
+  - Bruleur
+  - Marmitte
+  - Giraffe (Bras Mixeur)
 preparation: >-
   Eplucher carottes et patates, les laver et les couper en morceaux de taille
   moyenne.

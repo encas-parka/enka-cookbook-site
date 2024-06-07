@@ -15,7 +15,7 @@ region: Portugal
 cuisson: Oui
 temperature: Chaud
 plate: 100
-quantite_desc: Un petit bol par personne
+quantite_desc: Un bol par personne
 check: Oui
 checkAlwaysOk: false
 checkfor: 8

@@ -14,7 +14,7 @@ region: Portugal
 cuisson: Oui
 temperature: Chaud
 plate: 100
-check: Oui
+check: Non
 checkAlwaysOk: false
 checkfor: 6
 ingredients:

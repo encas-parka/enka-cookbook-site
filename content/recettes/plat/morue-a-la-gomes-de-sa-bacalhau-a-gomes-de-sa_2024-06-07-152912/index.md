@@ -61,6 +61,7 @@ materiel:
   - Four
   - Marmitte
   - Bruleur
+  - Gastro Perforé 1/1 (Profonds)
 preparation: >-
   Faire bouillir une grande quantité d'eau pour y faire cuire la morue désalée.
   Jeter les morceaux dans l'eau bouillante. Il faut que ça bouillonne dedans

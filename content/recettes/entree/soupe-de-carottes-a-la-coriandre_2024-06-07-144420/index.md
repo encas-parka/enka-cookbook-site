@@ -41,6 +41,10 @@ ingredients:
     - quantite: 6
       title: Coriandre fraîche
       unit: bottes
+  lof:
+    - title: huile d'olive
+      quantite: 500
+      unit: ml
 materiel:
   - Robot Mixeur
 preparation: >-

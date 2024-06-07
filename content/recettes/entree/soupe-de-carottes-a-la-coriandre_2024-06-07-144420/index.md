@@ -16,7 +16,7 @@ cuisson: Oui
 temperature: Chaud
 plate: 100
 quantite_desc: Un bol par personne
-check: Oui
+check: Non
 checkAlwaysOk: false
 checkfor: 8
 ingredients:

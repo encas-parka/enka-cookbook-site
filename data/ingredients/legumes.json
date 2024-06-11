@@ -1,10 +1,6 @@
 {
   "ingredients": [
     {
-      "pFrais": true,
-      "title": "0 TEST"
-    },
-    {
       "pFrais": false,
       "title": "Champignon shiitake séché"
     },

@@ -1,18 +1,15 @@
 ---
-uuid: c9e2f843-bf62-4353-b7a0-33cf21e2487c
 title: Farçous Aveyronnais
 draft: false
 layout: recettes
 type: plat
-categories:
-  - Bouchées salées
 regime:
   - vegetarien
 region: Aveyrons
 cuisson: Oui
 temperature: Chaud
 plate: 220
-check: Oui
+check: Non
 checkAlwaysOk: false
 ingredients:
   legumes:
@@ -88,5 +85,8 @@ preparation: >-
   * Mélanger tous les ingrédients et saler, poivrer.
 
   * Goûter !!
+uuid: c9e2f843-bf62-4353-b7a0-33cf21e2487c
+categories:
+  - Bouchées salées
 publishDate: 2024-05-21T14:48:00.000Z
 ---

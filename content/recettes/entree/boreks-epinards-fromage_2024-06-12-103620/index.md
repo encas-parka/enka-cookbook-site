@@ -47,5 +47,7 @@ materiel:
   - Gastro 1/1 (Normaux)
   - Four
 preparation: \--
+prepAlt:
+  - recetteAlt: Boreks épinards vegan
 publishDate: 2024-06-12T12:24:00.000Z
 ---

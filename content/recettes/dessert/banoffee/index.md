@@ -1,11 +1,8 @@
 ---
-uuid: 265a4348-8c2b-4966-bd57-ad8e6a7716b0
 title: Banoffee
 draft: false
 layout: recettes
 type: dessert
-categories:
-  - Gateau
 regime:
   - vegetarien
 cuisson: Oui
@@ -93,5 +90,10 @@ preparation24h: >-
 
 
   Ouvrir toutes les boites de conserve, vers dans un gastro et mixer au plongeur pour assouplir la confiture.
+uuid: 265a4348-8c2b-4966-bd57-ad8e6a7716b0
+categories:
+  - Gateau
+prepAlt:
+  - recetteAlt: Banoffee (Végan et Sans Gluten)
 publishDate: 2024-05-18T16:26:00.000Z
 ---

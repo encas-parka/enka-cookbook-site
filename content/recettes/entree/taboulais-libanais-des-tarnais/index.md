@@ -1,12 +1,9 @@
 ---
-uuid: 03059cd3-6175-440d-b2bd-740b17673e9c
 title: Taboulais libanais des tarnais
 draft: false
 img: taboule-libanais.jpg
 layout: recettes
 type: entree
-categories:
-  - Salade
 regime:
   - vegetarien
   - vegan
@@ -82,5 +79,11 @@ preparation: >-
   * **NE PAS MELANGER et laisser au réfrigérateur au moins une heure.**
 
   * Avant de servir, versez l'huile d'olive, salez, poivrez et mélangez.
+uuid: 03059cd3-6175-440d-b2bd-740b17673e9c
+categories:
+  - Salade
+prepAlt:
+  - recetteAlt: Taboulé libanais
+  - recetteAlt: Taboulais libanais des tarnais (sans gluten)
 publishDate: 2024-05-18T16:14:00.000Z
 ---

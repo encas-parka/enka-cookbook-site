@@ -1,11 +1,8 @@
 ---
-uuid: 08e1ba6c-df57-4f90-968b-79fd9b45e395
 title: Tartinade salé a la chataigne
 draft: false
 layout: recettes
 type: entree
-categories:
-  - Tartinade
 regime:
   - vegetarien
   - sans-gluten
@@ -41,5 +38,10 @@ preparation: >-
   épaisse.
 
   * Goûter et réajuster l'assaisonnement, sel, poivre, paprika, ail.
+uuid: 08e1ba6c-df57-4f90-968b-79fd9b45e395
+categories:
+  - Tartinade
+prepAlt:
+  - recetteAlt: Tartinade salé à la chataigne (végan)
 publishDate: 2024-05-18T16:05:00.000Z
 ---

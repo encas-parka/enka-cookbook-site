@@ -1,11 +1,8 @@
 ---
-uuid: 34313587-e2ba-44db-ba37-274158e820a8
 title: SOUPE FROIDE CONCOMBRE ET YAOURT
 draft: false
 layout: recettes
 type: entree
-categories:
-  - Soupe
 auteur: Auré
 regime:
   - sans-gluten
@@ -68,5 +65,10 @@ preparation: >-
 
 
   Au service, verser une louche de soupe, parsemer de menthe, d'une pincée de paprika et d'oignon.
+uuid: 34313587-e2ba-44db-ba37-274158e820a8
+categories:
+  - Soupe
+prepAlt:
+  - recetteAlt: SOUPE FROIDE CONCOMBRE ET YAOURT VEGAN
 publishDate: 2024-05-27T22:14:00.000Z
 ---

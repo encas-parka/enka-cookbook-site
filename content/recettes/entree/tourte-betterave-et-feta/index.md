@@ -1,11 +1,8 @@
 ---
-uuid: 688312f1-abd3-4cb5-b391-3ca5dffdd08a
 title: Tourte Betterave et feta
 draft: false
 layout: recettes
 type: entree
-categories:
-  - Accompagnement
 regime:
   - vegetarien
 cuisson: Oui
@@ -59,5 +56,10 @@ preparation: >-
   * Dorer la surface de la tourte au café avec un pinceau.
 
   * Faire une cheminée au centre. Enfourner 30/35min
+uuid: 688312f1-abd3-4cb5-b391-3ca5dffdd08a
+categories:
+  - Accompagnement
+prepAlt:
+  - recetteAlt: Tourte betterave lentille (vegan et sans gluten)
 publishDate: 2024-05-18T15:41:00.000Z
 ---

@@ -1,12 +1,8 @@
 ---
-uuid: 74b23598-ddaa-405f-904a-f071bb7517d6
 title: RISOTTO DE PRUNEAUX ET CHAMPIGNONS
 draft: false
-description: Pas en plat unique, mais en accompagnement. Genre avec les farçous aveyronnais.
 layout: recettes
 type: plat
-categories:
-  - Accompagnement
 auteur: Auré
 regime:
   - vegetarien
@@ -76,5 +72,11 @@ preparation: >-
 
 
   Hors du feu, saler, poivrer incorporer le reste beurre en morceaux, le parmesan râpé et les morceaux de pruneaux. Mélanger, couvrir et laisser reposer.
+uuid: 74b23598-ddaa-405f-904a-f071bb7517d6
+description: Pas en plat unique, mais en accompagnement. Genre avec les farçous aveyronnais.
+categories:
+  - Accompagnement
+prepAlt:
+  - recetteAlt: RISOTTO PRUNEAUX ET CHAMPIGNONS Végan
 publishDate: 2024-05-27T19:55:00.000Z
 ---

@@ -1,12 +1,9 @@
 ---
-uuid: f9b2749f-928f-437a-abce-a443341d315d
 title: COOKIE THE MATCHA, GINGEMBRE CONFIT CHOCOLAT BLANC
 draft: false
 img: https://www.delscookingtwist.com/wp-content/uploads/2021/04/White-Chocolate-Chip-Matcha-Cookies_5-768x1152.jpg
 layout: recettes
 type: dessert
-categories:
-  - Gateau
 auteur: Auré
 cuisson: Oui
 temperature: Froid
@@ -65,5 +62,10 @@ preparation: >-
 
   Enfourner pendant 10-12 minutes.* Retirer du four et laisser les cookies reposer sur la plaque de cuisson pendant environ 10 minutes avant de les transférer sur une grille de refroidissement
 preparation24h: Faire la pâte à cookie la veille si possible.
+uuid: f9b2749f-928f-437a-abce-a443341d315d
+categories:
+  - Gateau
+prepAlt:
+  - recetteAlt: COOKIE THE MATCHA ET GINGEMBRE CONFIT Végan et sans gluten
 publishDate: 2024-05-24T00:23:00.000Z
 ---

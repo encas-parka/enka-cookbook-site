@@ -1,13 +1,9 @@
 ---
-uuid: f14d305c-214e-43b2-ae0d-27d474947248
 title: QUEIJADAS DE FEIJAO
 draft: false
 img: https://1.bp.blogspot.com/-3MQYZUXTse8/UEOWFoFU28I/AAAAAAAABkQ/VIij9QCy2sU/s1600/Queijadas+de+Feija%CC%83o.jpg
-description: Gâteau portugais, légèrement moins connu que les légendaires Pastéis de nata
 layout: recettes
 type: dessert
-categories:
-  - Gateau
 auteur: Auré
 region: Portugal
 cuisson: Oui
@@ -69,5 +65,11 @@ preparation: >-
 
   Lorsque les gâteaux sont cuits, les retirer, démouler et saupoudrer de sucre glace.
 preparation24h: ""
+uuid: f14d305c-214e-43b2-ae0d-27d474947248
+description: Gâteau portugais, légèrement moins connu que les légendaires Pastéis de nata
+categories:
+  - Gateau
+prepAlt:
+  - recetteAlt: QUEIJADAS DE FEIJAO Végan et sans gluten
 publishDate: 2024-05-23T00:01:00.000Z
 ---

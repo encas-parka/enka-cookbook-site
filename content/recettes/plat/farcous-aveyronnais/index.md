@@ -88,5 +88,7 @@ preparation: >-
 uuid: c9e2f843-bf62-4353-b7a0-33cf21e2487c
 categories:
   - Bouchées salées
+prepAlt:
+  - recetteAlt: Farçous Aveyronnais (Végan et sans gluten)
 publishDate: 2024-05-21T14:48:00.000Z
 ---

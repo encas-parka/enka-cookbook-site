@@ -1,11 +1,7 @@
 ---
-uuid: 963bc23a-4176-4b5f-863c-a2f2c26336d9
 title: Keshke
 layout: recettes
 type: entree
-categories:
-  - Accompagnement
-  - Sauce
 auteur: ça vaulx le détour
 regime:
   - vegetarien
@@ -51,5 +47,11 @@ preparation24h: "La veille : hacher l'oignon finement et rincer abondamment le
   boulgour. Les mélanger avec la moitié du yaourt, la menthe séchée et la moitié
   des noix hâchées. Saler au gout, laisser reposer au moins 5heures au frais,
   filmé au contact."
+uuid: 963bc23a-4176-4b5f-863c-a2f2c26336d9
+categories:
+  - Accompagnement
+  - Sauce
+prepAlt:
+  - recetteAlt: Keshke vegan et sans gluten
 publishDate: 04-06-2024T16:47
 ---

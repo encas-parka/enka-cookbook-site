@@ -1,5 +1,4 @@
 ---
-uuid: a9e5ba57-ca21-4b9d-ae43-df047ff610b0
 title: Cake figues, chèvre, romarin
 layout: recettes
 type: plat
@@ -26,10 +25,10 @@ ingredients:
     - title: Lait demi-écrémé
       quantite: 0.12
       unit: litre
+  frais:
     - title: Comté
       quantite: 100
       unit: grammes
-  frais:
     - title: Bûche de chèvre
       quantite: 150
       unit: grammes
@@ -58,5 +57,6 @@ preparation: >-
   * Ajouter à la pâte le comté râpé, ainsi que les autres ingrédient du cake, mélanger. Saler au goût
 
   * Beurrer et fariner le moule à cake. Verser la pâte dedans, mettre environ 45min au four préchauffé à 180°C. Vérifier la cuisson à la fin en plantant une lame de couteau dans le cake.
+uuid: a9e5ba57-ca21-4b9d-ae43-df047ff610b0
 publishDate: 2023-11-13T13:54:36.088Z
 ---

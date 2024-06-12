@@ -1,10 +1,8 @@
 ---
-uuid: 6068ae73-1984-4084-890f-17076c0afe8c
-title: Steak végé - champignons aubergines noix avoine haricots... version améliorée
+title: Steak végé - champignons aubergines noix avoine haricots rouges - version
+  améliorée
 layout: recettes
 type: plat
-categories:
-  - Plat chaud
 auteur: ""
 regime:
   - vegetarien
@@ -53,17 +51,17 @@ ingredients:
       unit: ml
   autres:
     - title: Concentré de tomate
-      quantite: 1
+      quantite: 2
       unit: c. à soupe
     - title: Eau
-      quantite: 40
+      quantite: 60
       unit: ml
 materiel:
   - Four
 preparation: >-
-  *  Hâcher finement oignons, champignons, aubergines, et noix
+  * Hâcher finement oignons, champignons, aubergines, et noix
 
-  *  Faire chauffer un fond d’huile. Ajouter oignons et épices (soyez généreux.se sur le paprika).
+  * Faire chauffer un fond d’huile. Ajouter oignons et épices (soyez généreux.se sur le paprika).
 
   * Faire revenir les oignons 5-10 minutes (jusqu’à ce qu’ils dorent un peu)
 
@@ -73,10 +71,13 @@ preparation: >-
 
   * Couper le feu et bien mélanger
 
-  *  Laisser reposer au moins 15 minutes
+  * Laisser reposer au moins 15 minutes
 
-  * Façonner les steaks (boulettes c'est possible aussi). Mettre de l’huile sur les deux faces du steak (au pinceau c’est le mieux)
+  * Façonner les steaks (130g de mélange par steak environ). Mettre de l’huile sur les deux faces du steak (au pinceau c’est le mieux)
 
   * Faire cuire à 180°C environ 30 minutes, jusqu’à ce qu’ils brunissent un peu. Retourner en milieu de cuisson.
+uuid: 6068ae73-1984-4084-890f-17076c0afe8c
+categories:
+  - Plat chaud
 publishDate: 02-06-2024T12:12
 ---

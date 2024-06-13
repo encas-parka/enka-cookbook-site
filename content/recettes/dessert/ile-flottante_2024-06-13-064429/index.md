@@ -29,7 +29,7 @@ ingredients:
       quantite: 20
       unit: grammes
     - title: vanille extrait concentré
-      quantite: 5
+      quantite: 10
       unit: ml
     - title: gousse de vanille
       quantite: 1
@@ -44,7 +44,7 @@ ingredients:
 preparation: >-
   faire chauffer le lait avec les gousse de vanille environ 15 min. il suffit
   que le lait soit chaud pour infuser la vanille attention a ne jamais faire
-  bouillir.
+  bouillir. ajouter extrait de vanille
 
 
   separer les blanc et les jaunes d'oeufs (couvrir et mettre les blancs au frigo, les blanc seront fait derniere minute)
@@ -60,8 +60,6 @@ preparation: >-
 
 
   pour les grandes quantités privilégier plusieurs petite casserole plutot qu'une grande!
-
-
 
 
   pour les blancs: 

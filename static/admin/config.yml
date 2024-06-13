@@ -47,7 +47,7 @@ collections:
     label-singular: "Recette"
     folder: "content/recettes/"
     path: "{{type}}/{{slug}}/index"
-    slug: "{{title}}_{{year}}-{{month}}-{{day}}-{{hour}}{{minute}}{{second}}"
+    slug: "{{title}}_{{fields.uuid}}"
     filter: { field: "layout", value: "recettes" }
     description: "Liste de l'ensemble des recettes. Vous pouvez utiliser les filtres ci-dessous pour classer / filtrer les recettes. Ou faire 'ctrl+f' pour rechercher une recette avec votre navigateur."
     view_filters:
@@ -656,12 +656,18 @@ collections:
       - label: "Date de publication"
         name: "publishDate"
         widget: "datetime"
-        picker_utc: true
+        # picker_utc: true
+
+      - { label: 'UUID', name: 'uuid', widget: uuid }
+      - {label: "Title Slug", name: "titleslug", widget: "hidden", default: "{{slug}}"}
+
+
+
 
   ###############################
   ################################
 
-  # ::: COLLECTION Menu / Evenements
+  # ::: Menu / Evenements
 
   - label: "Evenements"
     label-singular: "Evenement"
@@ -700,7 +706,7 @@ collections:
               name: "date_service",
               widget: "datetime",
               hint: "Jour ou le repas sera servis..",
-              picker_utc: true,
+              # picker_utc: true,
             }
 
           - {
@@ -731,7 +737,7 @@ collections:
                 name: "recette"
                 widget: "relation"
                 collection: "recettes"
-                value_field: "title"
+                value_field: "{{fields.titleslug}}"
                 search_fields: ["title"]
                 display_fields: ["title"]
                 options_length: 300

@@ -1,14 +1,85 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="robots" content="noindex" />
-    <title>Content Manager Decap-CMS</title>
-    <!-- Include the script that enables Netlify Identity on this page. -->
-    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
-  </head>
-  <body>
-      <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
-  </body>
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex" />
+  <title>Content Manager Decap-CMS</title>
+  <!-- Include the script that enables Netlify Identity on this page. -->
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+</head>
+
+<body>
+  <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+
+  <script>
+
+    function nanoid(t = 21) {
+      return crypto.getRandomValues(new Uint8Array(t)).reduce((t, e) => (t += (e &= 63) < 36 ? e.toString(36) : e < 62 ? (e - 26).toString(36).toUpperCase() : e > 62 ? '-' : '_'), '')
+    }
+
+    const UuidWidget = createClass({
+      componentDidMount() {
+        const { value, onChange } = this.props
+
+        const isNew = window.location.href.endsWith('new')
+        // Check if the value is an existing uuid
+        // Set initial value
+        if (!value || isNew) {
+          onChange(nanoid())
+        }
+      },
+
+      render() {
+        const { value, classNameWrapper, forID } = this.props
+        return h(
+          'span',
+          {
+            id: forID,
+            style: { fontFamily: 'monospace', marginLeft: '1rem' },
+            //className: classNameWrapper
+          },
+          value
+        )
+      },
+    })
+    CMS.registerWidget('uuid', UuidWidget)
+
+    CMS.registerEventListener({
+      name: "preSave",
+      handler: ({ entry }) => {
+        // Only process blog posts
+        if (entry.get("collection") !== "recettes") return;
+
+        // If there's already a slug, don't change it
+        if (entry.getIn(["data", "titleslug"], "")) return;
+
+        const slugify = (str) => {
+          const repl = {
+            ' ': '-', '(': '-', ')': '-',
+            'é': 'e', 'è': 'e', 'ê': 'e', 'ë': 'e',
+            'à': 'a', 'ä': 'a', 'â': 'a',
+            'ù': 'u', 'ü': 'u', 'û': 'u',
+            'î': 'i', 'ï': 'i',
+            'ô': 'o', 'ö': 'o',
+            'ç': 'c',
+          };
+          return str.toLowerCase()
+            .replace(/[^a-z0-9-]/g, m => repl[m] || '')
+            .replace(/[ -]+/g, '-')
+            .replace(/-{2,}/g, '-')
+            .replace(/^-|-$/g, '');
+        };
+
+        // Slugify the title and save it as the slug
+        const title = entry.getIn(["data", "title"], "");
+        const uuid = entry.getIn(["data", "uuid"], "");
+        const slug = `${slugify(title)}_${uuid}`;
+        return entry.get("data").set("titleslug", slug);
+      },
+        });
+  </script>
+</body>
+
 </html>

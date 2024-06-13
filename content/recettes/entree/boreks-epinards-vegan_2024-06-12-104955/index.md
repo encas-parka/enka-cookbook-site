@@ -1,5 +1,5 @@
 ---
-title: Boreks épinards vegan
+title: Crumble salé épinards vegan sans gluten
 draft: false
 layout: recettes
 type: entree
@@ -15,7 +15,7 @@ regime:
 cuisson: Oui
 temperature: Chaud
 plate: 15
-quantite_desc: 15 parts = 1 gastro
+quantite_desc: ""
 check: Oui
 checkAlwaysOk: false
 ingredients:
@@ -47,15 +47,17 @@ ingredients:
     - title: Levure de bière
       quantite: 50
       unit: grammes
+  epices: []
 materiel:
   - Four
   - Gastro 1/1 (Normaux)
 preparation: >-
-  \--
+  1. Faire revenir oignons, ails et noix concassées
 
+  2. Ajouter les épinards surgelés, s'ils rendent trop d'eau, les égoutter avant de les disposer dans des ramequins
 
+  3. Faire la pâte à crumble avec le reste des ingredients, former de petits agglomérats les disposer sur les ramequins
 
-
-  Ingrédients pour le parmesan vegan : farine de sarrasin, huile, levure de bière,  graines de tournesol
+  4. Mettre au four à 200 degrès 15 mn jusqu'à ce qu'ils soient gratinés
 publishDate: 2024-06-12T12:37:00.000Z
 ---

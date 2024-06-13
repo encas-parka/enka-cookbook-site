@@ -12,7 +12,7 @@ saison:
   - ete
 cuisson: Oui
 temperature: Chaud
-plate: 200
+plate: 100
 check: Oui
 checkAlwaysOk: true
 ingredients:

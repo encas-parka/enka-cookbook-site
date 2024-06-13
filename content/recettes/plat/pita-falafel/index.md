@@ -5,6 +5,7 @@ layout: recettes
 type: plat
 categories:
   - Pain
+auteur: Arnaud
 regime:
   - vegetarien
   - vegan

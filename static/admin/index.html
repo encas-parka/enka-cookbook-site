@@ -11,6 +11,8 @@
 </head>
 
 <body>
+
+  
   <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
 
   <script>
@@ -44,16 +46,31 @@
         )
       },
     })
+
     CMS.registerWidget('uuid', UuidWidget)
+
+    const TextInfoWidget = createClass({
+      render: function() {
+        const {value, classNameWrapper} = this.props;
+        return h('div', {className: classNameWrapper},
+          h('div', {style: {padding: '20px', backgroundColor: '#f0f0f0', borderRadius: '5px'}},
+            value
+          )
+        );
+      }
+    });
+
+    CMS.registerWidget('text-info', TextInfoWidget);
 
     CMS.registerEventListener({
       name: "preSave",
       handler: ({ entry }) => {
         // Only process blog posts
-        if (entry.get("collection") !== "recettes") return;
+        if (entry.get("collection") !== ("recettes" || "evenement")) return;
 
         // If there's already a slug, don't change it
-        if (entry.getIn(["data", "titleslug"], "")) return;
+        const isNew = window.location.href.endsWith('new')
+        if (entry.getIn(["data", "titleslug"], "") && !isNew) return;
 
         const slugify = (str) => {
           const repl = {
@@ -78,7 +95,46 @@
         const slug = `${slugify(title)}_${uuid}`;
         return entry.get("data").set("titleslug", slug);
       },
-        });
+    });
+
+    CMS.registerEventListener({
+      name: "preSave",
+      handler: ({ entry }) => {
+        if (entry.get('collection') !== 'evenement') return;
+
+        let data = entry.get('data');
+
+        if (data.has('repas') && data.get('repas').size > 0) {
+          let sortedRepas = data.get('repas')
+            .sortBy(repas => {
+              const horaire = repas.get('horaire');
+              if (horaire === 'matin') return 0;
+              if (horaire === 'midi') return 1;
+              if (horaire === 'soir') return 2;
+            })
+            .sortBy(repas => new Date(repas.get('date_service')));
+
+          if (data.get('repas').has('recettes_du_repas') && data.get('repas').get('recettes_du_repas').size > 0) {
+            
+          sortedRepas = sortedRepas.map(repas => {
+            let sortedRecettes = repas.get('recettes_du_repas')
+              .sortBy(recette => {
+                const typePlat = recette.get('type_plat');
+                if (typePlat === 'entree') return 0;
+                if (typePlat === 'plat') return 1;
+                if (typePlat === 'dessert') return 2;
+              });
+            
+            return repas.set('recettes_du_repas', sortedRecettes);
+          });
+          }          
+          data = data.set('repas', sortedRepas);
+          return entry.get('data').set('repas', sortedRepas);
+    
+          }
+    
+      },
+});
   </script>
 </body>
 

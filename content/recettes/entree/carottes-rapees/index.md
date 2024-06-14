@@ -6,6 +6,9 @@ categories:
   - Salade
 regime:
   - vegan
+  - vegetarien
+  - sans-gluten
+  - sans-lactose
 cuisson: Non
 temperature: Froid
 plate: 100

@@ -1,6 +1,18 @@
 ---
 title: CHORBA VEGAN ET SANS GLUTEN
 draft: false
+layout: recettes
+type: plat
+categories:
+  - Soupe
+auteur: "Résistances 2024 "
+regime:
+  - vegan
+  - sans-gluten
+cuisson: Oui
+temperature: Chaud
+quantite_desc: un bol d'environ 600ml par personne
+check: Non
 ingredients:
   sec:
     - title: Pâtes langues d'oiseaux sans gluten
@@ -55,18 +67,7 @@ ingredients:
       quantite: 12
       unit: litre
 titleslug: chorba-vegan-et-sans-gluten_
-layout: recettes
-type: plat
-categories:
-  - Soupe
-regime:
-  - vegan
-  - sans-gluten
-cuisson: Oui
-temperature: Chaud
 plate: 40
-quantite_desc: un bol d'environ 600ml par personne
-check: Non
 checkAlwaysOk: false
 preparation: >-
   Eplucher et émincer les carottes et les courgettes. Emincer une branche de

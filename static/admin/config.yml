@@ -101,7 +101,7 @@ collections:
           label: "Intitulé",
           name: "title",
           widget: "string",
-          hint: "Attention à ne pas utiliser un nom de recette déjà existant (sinon, l'une des 2 pages ne sera PAS ACCESSIBLE pas sur le site...). ET si vous modifiez le titre alors que la recette est déjà utilisé dans un évenement, la page de l'événement ne FONCTIONNERA PLUS correctement. Il vous faudra éditer la page de l'événement pour indiquer le nouveau titre de la recette. Ne peut contenir que des lettres, des chiffres, des parenthèses ou des tirets (-)",
+          hint: "Ne peut contenir que des lettres, des chiffres, des parenthèses ou des tirets (-)",
           pattern:
             [
               '^[a-zA-Z0-9 éèëïïùàâôêûç \u002C\u0027\u2018\u2019\u00C0-\u00FF()\-]+$',
@@ -209,7 +209,7 @@ collections:
         widget: "boolean"
         required: false
         default: false
-        hint: "Cochez cette case si les proportions ne changent jamais, quelque-soit le nombre de couvert (par exemple pour les cakes, les tartes, et autres préparations réalisées dans des plats individuels) → Desactive les alertes qui s'affichent en cas de différences significatives entre les quantités d'ingrédients indiquées dans la recette initiale et le nombre de couvert demandé."
+        hint: "Cochez cette case si les proportions ne changent jamais, quelque-soit le nombre de couvert (par exemple pour les cakes, les tartes, et autres préparations réalisées dans des plats individuels) → Désactive les alertes qui s'affichent en cas de différences significatives entre les quantités d'ingrédients indiquées dans la recette initiale et le nombre de couvert demandé."
       - label: "Testé aussi pour ce nombres de couverts : "
         name: "checkfor"
         widget: "number"
@@ -224,7 +224,7 @@ collections:
       - label: "Ingredients"
         name: "ingredients"
         widget: "object"
-        hint: "Vous pouvez retrouver la liste des ingrédients disponibles (et leur catégorie) sur la page https://enka-cookbook.pages.dev/ingredients/ . Pour ajouter des ingrédients qui ne sont pas encore répertorier, voir https://enka-cookbook.pages.dev/docs/editer/autres/"
+        hint: "Vous pouvez retrouver la liste des ingrédients disponibles (et leur catégorie) sur la page https://enka-cookbook.pages.dev/ingredients/ . Pour ajouter des ingrédients qui ne sont pas encore répertoriés, voir https://enka-cookbook.pages.dev/docs/editer/autres/"
         fields:
           - label: "Sec (Legumineuses, céréales)"
             name: "sec"
@@ -297,7 +297,7 @@ collections:
                   name: "unit",
                   widget: "select",
                   options: ["Kg", "grammes", "unité", "tête·s", "gousse·s"],
-                  hint: "Preférez les quantités en grammes/Kg/litres. La taille des légumes est variable, et lorsque tout est en Kg, grammes ou litres, c'est additionnable pour les listes de course ! ",
+                  hint: "Préférez les quantités en grammes/Kg/litres. La taille des légumes est variable, et lorsque tout est en Kg, grammes ou litres, c'est additionnable pour les listes de course ! ",
                 }
               - {
                   label: "commentaire",
@@ -621,7 +621,7 @@ collections:
         name: "preparation24h"
         widget: "markdown"
         required: false
-        hint: "Si la recette implique de préparer des choses en avance, le préciser ici pour que ce soit mis en avant lors de l'affichage des recettes(ce sera indiquer 'A prévoir a l'avance', a vous de précisez plus précisément quand)."
+        hint: "Si la recette implique de préparer des choses en avance, le préciser ici pour que ce soit mis en avant lors de l'affichage des recettes (ce sera indiquer 'A prévoir a l'avance', à vous de préciser plus précisément quand)."
 
 
       ### ::: Astuces 
@@ -677,7 +677,7 @@ collections:
   - label: "Evenements"
     label-singular: "Evenement"
     name: "evenement"
-    description: "Pour creer des menus sur un ou plusieurs jours..."
+    description: "Pour créer des menus sur un ou plusieurs jours..."
     folder: content/evenements/
     path: "{{slug}}/index"
     slug: "{{title}}_{{fields.uuid}}"
@@ -687,7 +687,7 @@ collections:
           label: "Nom de l'évènement",
           name: "title",
           widget: "string",
-          hint: "Attention à ne pas utiliser un nom d'évenement déjà existant (si c'était  le cas, la page n'existera pas sur le site...). Ne peut contenir que des lettres, des chiffres, des parenthèses, des tirets (-), virgules et apostrophes",
+          hint: " Ne peut contenir que des lettres, des chiffres, des parenthèses, des tirets (-), virgules et apostrophes",
           pattern:
             [
               '^[a-zA-Z0-9 éèëïïùàâôêûç \u002C\u0027\u2018\u2019\u00C0-\u00FF()\-]+$',

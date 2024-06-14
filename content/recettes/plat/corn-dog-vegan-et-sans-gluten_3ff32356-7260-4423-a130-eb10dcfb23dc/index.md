@@ -1,0 +1,126 @@
+---
+astuces:
+- astuce: Pour une option végétarienne au fromage. Enrouler la saucisse d'une tranche
+    de toastinette avant de tremper le tout dans la pâte à beignet.
+auteur: Les bretonnes
+categories:
+- Friture
+check: Oui
+checkAlwaysOk: true
+cuisson: Oui
+description: “Beignet de saucisse”, “Pogo” ou “Saucisse sur bâtonnet”. C’est une saucisse
+  enrobée d’une pâte, ensuite frit puis zébrée de ketchup et moutarde. Recette pour
+  un corndog par personne. Mais c'est tellement gourmand qu'il vaut mieux en faire
+  2 par personne.
+draft: false
+img: https://yuns.fr/wp-content/uploads/2021/03/hot-dog-3.jpg
+ingredients:
+  autres:
+  - quantite: 100
+    title: Saucisse végane
+  - quantite: 375
+    title: Eau
+    unit: ml
+  epices:
+  - quantite: 3
+    title: 'Moutarde douce en flacon '
+  - quantite: 2
+    title: Ketchup
+  - quantite: 13
+    title: Poivre
+    unit: grammes
+  - quantite: 62
+    title: Vinaigre de cidre
+    unit: grammes
+  - quantite: 190
+    title: Vinaigre de cidre
+    unit: ml
+  lof:
+  - quantite: 12
+    title: huile de tournesol
+    unit: litre
+  - quantite: 4
+    title: Bicarbonate alimentaire
+    unit: c. à café
+  - quantite: 20
+    title: Levure chimique sans gluten
+    unit: grammes
+  - quantite: 1.5
+    title: Farine de riz
+    unit: Kg
+  - quantite: 3.75
+    title: Lait végétal (au choix)
+    unit: litre
+  sec:
+  - quantite: 2
+    title: Polenta fine
+    unit: Kg
+  - quantite: 125
+    title: Graines de lin
+    unit: grammes
+  sucres:
+  - quantite: 190
+    title: Sirop d'agave
+    unit: ml
+layout: recettes
+materiel:
+- Pique à brochette
+plate: 100
+prepAlt: []
+preparation: 'Dans un sceau, mélanger le lait végétal et le vinaigre. Mettre de côté.
+  (Cela fait du babeurre végétalien)
+
+
+  Dans un autre petit bol, mélanger les graines de lin et l''eau. Mettre de côté.
+  (Cela fait des œufs de lin végétaliens).
+
+
+  Réserver le babeurre végétalien et l''œuf de lin pendant 10 minutes.
+
+
+  Pendant ce temps, piquer chaque soycisse d''une brochette en bois. ((( Pour une
+  option végét gourmande : rouler ensuite une toastinette auteur de la knack )))
+
+
+  Ajouter la polenta, la farine de riz, le sel, la levure, le bicarbonate de soude
+  et le poivre dans un saladier et fouetter.
+
+
+  Ajouter le babeurre végétalien, l''œuf de lin et l''agave. Fouetter jusqu''à ce
+  que le tout soit homogène.
+
+
+  Allumer la friteuse pour 190°C.
+
+
+  Verser suffisamment de pâte pour presque remplir un grand verre doseur. Plonger
+  chaque hot-dog végétalien dans la pâte à beignet et le tourner pour enrober le tout.
+
+
+  Très soigneusement, placer immédiatement le hot-dog dans l''huile. Répéter avec
+  les hot-dogs restants. Ne surchargez pas la friteuse.
+
+
+  Cuire jusqu''à ce que l''enrobage soit doré, environ 3 à 5 minutes.
+
+
+  Très soigneusement, à l''aide de pinces, retirer sur une grille de refroidissement
+  ou une assiette tapissée de papier absorbant.
+
+
+  Laisser refroidir 5 minutes. Servir avec du ketchup et de la moutarde ou votre sauce
+  préférée, en zebrant le corn dog.
+
+
+  Les extras peuvent être conservés au réfrigérateur et réchauffés jusqu''à 5 jours.'
+publishDate: 31-03-2024T15:50
+regime:
+- vegan
+- sans-gluten
+region: Corée
+temperature: Chaud
+title: CORN DOG VEGAN ET SANS GLUTEN
+titleslug: corn-dog-vegan-et-sans-gluten_3ff32356-7260-4423-a130-eb10dcfb23dc
+type: plat
+uuid: 3ff32356-7260-4423-a130-eb10dcfb23dc
+---

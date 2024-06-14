@@ -95,6 +95,8 @@ collections:
     create: true
 
     fields:
+      # - {name: "info", widget: "text-info", default: "Ceci est un exemple de texte d'information pour les utilisateurs.", required: false}
+
       - {
           label: "Intitulé",
           name: "title",
@@ -306,7 +308,7 @@ collections:
 
                 }
 
-          - label: "LOF : Lait, oeuf, farines, huile..."
+          - label: "LOF : Lait, oeuf, farines, huile (NON-FRAIS).."
             name: "lof"
             widget: "list"
             allow_add: true
@@ -599,6 +601,7 @@ collections:
 
                 }
 
+      ### ::: Materiel
       - label: "Materiel"
         name: "materiel"
         widget: "relation"
@@ -609,6 +612,7 @@ collections:
         search_fields: ["title"]
         options_length: 30
 
+      ### ::: Preparation
       - label: "Préparation"
         name: "preparation"
         widget: "markdown"
@@ -619,8 +623,8 @@ collections:
         required: false
         hint: "Si la recette implique de préparer des choses en avance, le préciser ici pour que ce soit mis en avant lors de l'affichage des recettes(ce sera indiquer 'A prévoir a l'avance', a vous de précisez plus précisément quand)."
 
-      ############### PrepAlt
 
+      ### ::: Astuces 
       - label: "Astuces"
         name: "astuces"
         widget: "list"
@@ -633,6 +637,7 @@ collections:
             name: "astuce"
             widget: "string"
 
+      ### ::: PrepAlt
       - label: "Préparations Alternatives"
         name: "prepAlt"
         label_singular: "Préparation alternative"
@@ -649,8 +654,8 @@ collections:
               widget: "relation",
               collection: "recettes",
               search_fields: ["title"],
-              value_field: "title",
-              display_field: "title",
+              value_field: "titleslug",
+              display_fields: ["title"],
             }
 
       - label: "Date de publication"
@@ -675,6 +680,7 @@ collections:
     description: "Pour creer des menus sur un ou plusieurs jours..."
     folder: content/evenements/
     path: "{{slug}}/index"
+    slug: "{{title}}_{{fields.uuid}}"
     create: true
     fields:
       - {
@@ -706,7 +712,7 @@ collections:
               name: "date_service",
               widget: "datetime",
               hint: "Jour ou le repas sera servis..",
-              # picker_utc: true,
+              date_format: YYYY-MM-DD,
             }
 
           - {
@@ -737,10 +743,13 @@ collections:
                 name: "recette"
                 widget: "relation"
                 collection: "recettes"
-                value_field: "{{fields.titleslug}}"
+                value_field: "titleslug"
                 search_fields: ["title"]
                 display_fields: ["title"]
-                options_length: 300
+                options_length: 100
+                filters: 
+                  - field: draft
+                    values: [false]
 
               - label: "Entrées/Plats/Desserts ?"
                 name: "type_plat"
@@ -791,6 +800,10 @@ collections:
                   hint: "Si vous avez quelque-chose a préciser...(N'oubliez pas que les pages des menus seront publié en ligne !)",
                   required: false,
                 }
+
+      - { label: ID, name: "uuid", widget: "uuid" }
+      - {label: "Title Slug", name: "titleslug", widget: "hidden", default: "{{slug}}"}
+        
 
   ################################
 

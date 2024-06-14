@@ -1,7 +1,5 @@
 ---
-uuid: 7cbc9f73-1952-4297-bead-7d2e9b75de01
 title: QUEIJADAS DE FEIJAO Végan et sans gluten
-titleslug: queijadas-de-feijao-vegan-et-sans-gluten_7cbc9f73-1952-4297-bead-7d2e9b75de01
 draft: false
 layout: recettes
 type: dessert
@@ -60,42 +58,35 @@ ingredients:
 materiel:
   - Moule à muffin
 preparation: >-
-  Appareil à flan :
+  **Appareil à flan :**
 
 
-  Dans un petit récipient, mélanger l’agar agar avec une petit quantité d’eau (10/15ml).
+  * Dans un petit récipient, mélanger l’agar agar avec une petit quantité d’eau (10/15ml).
+
+  * Dans une casserole, verser le lait de soja, la crème de soja, la préparation eau/agar agar, le zeste de citron. Porter le tout à ébullition.
+
+  * Dans un grand saladier, mélanger la maïzena, le sucre et la cannelle puis réserver.
+
+  * Lorsque le lait arrive à ébullition, retirer la casserole du feu.
+
+  * Verser le lait en deux fois (⅓ puis le reste) sur le mélange de maïzena tout en fouettant vivement.
+
+  * Puis reverser le tout dans la casserole et cuire l’appareil ⅔ minutes sur feu moyen en fouettant énergiquement sans arrêt. Dès que l’appareil épaissit, retirer la casserole du feu et fouetter l’appareil jusqu’à ce qu’il soit lisse et homogène.
+
+  * Mixer avec les haricots blancs.
 
 
-  Dans une casserole, verser le lait de soja, la crème de soja, la préparation eau/agar agar, le zeste de citron. Porter le tout à ébullition.
+  **Montage :**
 
 
-  Dans un grand saladier, mélanger la maïzena, le sucre et la cannelle puis réserver.
+  * Rouler les pâtes feuilletées véganes sans gluten sur elles-mêmes pour faire un rouleau. Faire des tronçons de 2 cm d’épaisseur. Placez chaque tranche dans le moule.. Bien appuyer avec le pouce de manière à étirer la pâte vers le haut du moule. 
 
+  * Remplir les moules avec la crème obtenue. 
 
-  Lorsque le lait arrive à ébullition, retirer la casserole du feu.
+  * Enfourner et cuire pendant 35min (la durée varie selon les fours) le flan est prêt lorsqu’il est très peu tremblotant, bien levé et que la surface est bien coloré (il va beaucoup gonfler durant la cuisson mais pas de panique c’est normal, il retombera à la sortie du four).
 
-
-  Verser le lait en deux fois (⅓ puis le reste) sur le mélange de maïzena tout en fouettant vivement.
-
-
-  Puis reverser le tout dans la casserole et cuire l’appareil ⅔ minutes sur feu moyen en fouettant énergiquement sans arrêt. Dès que l’appareil épaissit, retirer la casserole du feu et fouetter l’appareil jusqu’à ce qu’il soit lisse et homogène.
-
-
-  Mixer avec les haricots blancs.
-
-
-  Montage :
-
-
-  Rouler les pâtes feuilletées véganes sans gluten sur elles-mêmes pour faire un rouleau. Faire des tronçons de 2 cm d’épaisseur. Placez chaque tranche dans le moule.. Bien appuyer avec le pouce de manière à étirer la pâte vers le haut du moule. 
-
-
-  Remplir les moules avec la crème obtenue. 
-
-
-  Enfourner et cuire pendant 35min (la durée varie selon les fours) le flan est prêt lorsqu’il est très peu tremblotant, bien levé et que la surface est bien coloré (il va beaucoup gonfler durant la cuisson mais pas de panique c’est normal, il retombera à la sortie du four).
-
-
-  Lorsque les gâteaux sont cuits, les retirer, démouler et saupoudrer de sucre glace.
+  * Lorsque les gâteaux sont cuits, les retirer, démouler et saupoudrer de sucre glace.
 publishDate: 2024-05-23T22:19:00.000Z
+uuid: 7cbc9f73-1952-4297-bead-7d2e9b75de01
+titleslug: queijadas-de-feijao-vegan-et-sans-gluten_7cbc9f73-1952-4297-bead-7d2e9b75de01
 ---

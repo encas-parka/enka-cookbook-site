@@ -26,7 +26,10 @@ ingredients:
     - title: Huile végétale
       quantite: 0.5
       unit: litre
-  epices: []
+  epices:
+    - title: Vinaigre balsamique
+      quantite: 150
+      unit: ml
 titleslug: salade-de-tomates_
 preparation: >-
   couper les tomates 

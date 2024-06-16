@@ -37,6 +37,6 @@ preparation: >-2
 
   Dans un saladier, mélange les piments avec l'huile d'olive et le sel. Ajoute dans la poêle chaude et fais cuire au four, en remuant toutes les 2 minutes. Tourne la poêle de 90° toutes les 5 minutes pendant 15 minutes environ au total. Fais cuire jusqu'à ce que les piments soient tendres et boursouflés. Sers immédiatement.
 publishDate: 2024-06-16T13:01:00.000Z
-uuid: bM8YdXuIeFvP0nEvw7LGF
-titleslug: peixinhos-de-horta-tempura-dharicots-plats_bM8YdXuIeFvP0nEvw7LGF
+uuid: B6rkGGu7iCn5AAz5kcWR-
+titleslug: peixinhos-de-horta-tempura-dharicots-plats_B6rkGGu7iCn5AAz5kcWR-
 ---

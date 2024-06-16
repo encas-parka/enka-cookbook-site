@@ -46,6 +46,6 @@ preparation: >-
 
   Au service couper le légume dans la longueur et servir une moitié par personne.
 publishDate: 2024-06-16T16:11:00.000Z
-uuid: qRJ34ueN0sk7-hW3ZWGtr
-titleslug: pimientos-de-padron-poivron-vert-a-lhuile_qRJ34ueN0sk7-hW3ZWGtr
+uuid: u3vFCTQxPfkCDxQUtXqCU
+titleslug: pimientos-de-padron-poivron-vert-a-lhuile_u3vFCTQxPfkCDxQUtXqCU
 ---

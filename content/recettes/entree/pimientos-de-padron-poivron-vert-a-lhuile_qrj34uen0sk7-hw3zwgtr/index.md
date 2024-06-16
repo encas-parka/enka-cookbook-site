@@ -34,8 +34,6 @@ ingredients:
       unit: litre
   epices: []
 preparation: >-
-  
-
   Laver les poivrons, les laisser entier.
 
 
@@ -49,6 +47,9 @@ preparation: >-
 
 
   Au service couper le légume dans la longueur et servir une moitié par personne.
+
+
+  Poser les olives noires dans l'assiette au service (env.5/pers)
 publishDate: 2024-06-16T16:11:00.000Z
 uuid: u3vFCTQxPfkCDxQUtXqCU
 titleslug: pimientos-de-padron-poivron-vert-a-lhuile_u3vFCTQxPfkCDxQUtXqCU

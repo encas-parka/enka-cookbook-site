@@ -32,10 +32,18 @@ ingredients:
     - title: Sel
       quantite: 25
       unit: grammes
-preparation: >-2
-   Préchauffer à 200 °C, puis ajoute la poêle et préchauffe jusqu'à ce que le centre atteigne la même température.
+preparation: >-
+  Equeuter les haricots plats, puis les mettre à cuire dans de l'eau bouillante
+  bien salée jusqu'à ce qu'ils soient tendres (ça dépend pas mal des haricots!).
 
-  Dans un saladier, mélange les piments avec l'huile d'olive et le sel. Ajoute dans la poêle chaude et fais cuire au four, en remuant toutes les 2 minutes. Tourne la poêle de 90° toutes les 5 minutes pendant 15 minutes environ au total. Fais cuire jusqu'à ce que les piments soient tendres et boursouflés. Sers immédiatement.
+
+  Mélanger l'eau, la farine, le sel, pour obtenir une pâte. Il faudra surement ajuster la texture, elle ne doit être ni trop liquide ni trop épaisse. Il sera peut-être nécessaire de faire quelques essais avant de trouver la juste texture!
+
+
+  Enrober alors les haricots plats bien égouttés (sinon ça glisse dessus) et mettre à cuire dans de l'huile chaude, 5 minutes environ. Ca ne va pas colorer, car il n'y a que la farine dedans et ça reste pâle.
+
+
+  Sortir de l'huile, mettre sur du papier absorbant et servir sans attendre car ils se réchauffent mal!
 publishDate: 2024-06-16T13:01:00.000Z
 uuid: B6rkGGu7iCn5AAz5kcWR-
 titleslug: peixinhos-de-horta-tempura-dharicots-plats_B6rkGGu7iCn5AAz5kcWR-

@@ -100,6 +100,6 @@ preparation: >-
   Il ne reste plus qu'à garder au frais afin de faire refroidir
 preparation24h: Faire la pâte sucrée la veille et réserver toute une nuit au frais.
 publishDate: 2024-06-16T21:22:00.000Z
-uuid: dR26mp6jtXPti6W4Fc6QU
-titleslug: tarte-aux-pralines-roses_dR26mp6jtXPti6W4Fc6QU
+uuid: 3vfXekXA7T9bHjeXN2gGp
+titleslug: tarte-aux-pralines-roses_3vfXekXA7T9bHjeXN2gGp
 ---

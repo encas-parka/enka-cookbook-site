@@ -1,6 +1,10 @@
 {
   "ingredients": [
     {
+      "pFrais": true,
+      "title": "Poivron long vert"
+    },
+    {
       "pFrais": false,
       "title": "Champignon shiitake séché"
     },

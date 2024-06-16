@@ -18,6 +18,10 @@ checkAlwaysOk: false
 ingredients:
   sec: []
   legumes:
+    - title: Olives noires entières
+      quantite: 2.7
+      unit: Kg
+      commentaire: à mettre dans l'assiette à côté
     - title: Ail
       quantite: 4
       unit: tête·s

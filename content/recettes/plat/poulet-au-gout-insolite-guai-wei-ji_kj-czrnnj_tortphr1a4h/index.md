@@ -21,6 +21,9 @@ ingredients:
       quantite: 10
       unit: unité
   epices:
+    - title: Coriandre fraîche
+      quantite: 5
+      unit: bottes
     - title: Sésame
       quantite: 500
       unit: grammes

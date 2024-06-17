@@ -21,6 +21,30 @@ ingredients:
       quantite: 10
       unit: unité
   epices:
+    - title: poivre blanc moulue
+      quantite: 30
+      unit: grammes
+      commentaire: soupe
+    - title: Sel
+      quantite: 360
+      unit: grammes
+      commentaire: soupe
+    - title: Cumin moulu
+      quantite: 50
+      unit: grammes
+      commentaire: soupe
+    - title: Coriandre en poudre
+      quantite: 50
+      unit: grammes
+      commentaire: soupe
+    - title: Citronnelle (bâton)
+      quantite: 8
+      unit: unité
+      commentaire: soupe
+    - title: Feuille de laurier
+      quantite: 10
+      unit: unité
+      commentaire: soupe
     - title: Coriandre fraîche
       quantite: 5
       unit: bottes
@@ -57,10 +81,26 @@ ingredients:
       quantite: 500
       unit: ml
   sucres:
+    - title: Jus de citron
+      quantite: 1
+      unit: litre
+      commentaire: soupe
     - title: Sucre en poudre
       quantite: 300
       unit: grammes
   legumes:
+    - title: Echalote
+      quantite: 3
+      unit: Kg
+      commentaire: soupe
+    - title: Gingembre bio
+      quantite: 300
+      unit: grammes
+      commentaire: soupe
+    - title: Ail
+      quantite: 5
+      unit: tête·s
+      commentaire: soupe
     - title: Oignon
       quantite: 19
       unit: Kg

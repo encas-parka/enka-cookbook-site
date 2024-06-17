@@ -78,6 +78,6 @@ preparation: >-
 
   Cuire selon les instructions de l'emballage.
 publishDate: 2024-06-17T22:22:00.000Z
-uuid: OUROm1GBewXgQQcBETLj4
-titleslug: pastilla-vegan-a-laubergine-version-tourte-sans-gluten_OUROm1GBewXgQQcBETLj4
+uuid: vz_CZHoIEBHEx27pMHDCM
+titleslug: pastilla-vegan-a-laubergine-version-tourte-sans-gluten_vz_CZHoIEBHEx27pMHDCM
 ---

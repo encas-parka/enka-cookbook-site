@@ -1,19 +1,17 @@
 ---
-uuid: 4c3e8a90-032c-4a7f-ba00-7e99166b90ac
 title: Pain de Yucca
-titleslug: pain-de-yucca_4c3e8a90-032c-4a7f-ba00-7e99166b90ac
 draft: false
 layout: recettes
 type: plat
 categories:
   - Pain
 regime:
-  - vegan
   - vegetarien
   - sans-gluten
 cuisson: Oui
 temperature: Chaud
 plate: 170
+check: Non
 ingredients:
   lof:
     - title: Oeuf
@@ -55,4 +53,6 @@ preparation: >-
   * Enfourner 8 minutes et deguster immediatement.
 prepAlt: []
 publishDate: 2022-11-23T20:23:25.888Z
+uuid: 4c3e8a90-032c-4a7f-ba00-7e99166b90ac
+titleslug: pain-de-yucca_4c3e8a90-032c-4a7f-ba00-7e99166b90ac
 ---

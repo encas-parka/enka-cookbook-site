@@ -70,7 +70,7 @@ ingredients:
       unit: litre
   autres:
     - title: Eau
-      quantite: 28
+      quantite: 30
       unit: litre
       commentaire: bouillon
     - title: Eau

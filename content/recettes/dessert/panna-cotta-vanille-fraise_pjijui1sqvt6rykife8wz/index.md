@@ -70,6 +70,6 @@ preparation: >-
   Verser une cuillère à soupe de gelée sur chaque panna cotta.
 preparation24h: A faire la veille si le service est à midi.
 publishDate: 2024-06-17T19:25:00.000Z
-uuid: pjIjuI1SQVt6RykIfE8WZ
-titleslug: panna-cotta-vanille-fraise_pjIjuI1SQVt6RykIfE8WZ
+uuid: ulhyN3eajm1KzVE3-Bx8-
+titleslug: panna-cotta-vanille-fraise_ulhyN3eajm1KzVE3-Bx8-
 ---

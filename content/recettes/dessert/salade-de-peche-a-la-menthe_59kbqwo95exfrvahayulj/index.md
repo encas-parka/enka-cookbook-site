@@ -34,6 +34,6 @@ preparation: >-
   Si on fait la salade la veille ça permet à la menthe de bien s'infuser dans les pêches et c'est meilleur.
 preparation24h: Possible de préparer la veille
 publishDate: 2024-06-18T00:10:00.000Z
-uuid: 59kBqwo95eXfRVahayuLj
-titleslug: salade-de-peche-a-la-menthe_59kBqwo95eXfRVahayuLj
+uuid: 5FPUbOvnH-aQ876nOkAPz
+titleslug: salade-de-peche-a-la-menthe_5FPUbOvnH-aQ876nOkAPz
 ---

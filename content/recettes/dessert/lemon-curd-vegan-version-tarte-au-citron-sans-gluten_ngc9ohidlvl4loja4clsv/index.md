@@ -47,6 +47,6 @@ preparation: >-
 
   Verser dans les ramequins, laisser refroidir puis placer au frais. Servir avec deux biscuits végan sans gluten.
 publishDate: 2024-06-17T20:30:00.000Z
-uuid: NgC9Ohidlvl4LOja4ClsV
-titleslug: lemon-curd-vegan-version-tarte-au-citron-sans-gluten_NgC9Ohidlvl4LOja4ClsV
+uuid: uLc0gTnQ7tcSdkAf9ajRH
+titleslug: lemon-curd-vegan-version-tarte-au-citron-sans-gluten_uLc0gTnQ7tcSdkAf9ajRH
 ---

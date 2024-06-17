@@ -2,6 +2,14 @@
   "ingredients": [
     {
       "pFrais": true,
+      "title": "Pâte feuilletée"
+    },
+    {
+      "pFrais": true,
+      "title": "Pâte feuilletée végane sans gluten"
+    },
+    {
+      "pFrais": true,
       "title": "Levure fraîche de boulanger"
     },
     {

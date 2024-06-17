@@ -89,6 +89,6 @@ preparation: >-
 
   Bol de 25cl par personne.
 publishDate: 2024-06-17T22:01:00.000Z
-uuid: tltZKNiXhWE8eZGkUT6vY
-titleslug: bouillon-soto-version-vegane-du-bouillon-de-poulet-a-la-javanaise_tltZKNiXhWE8eZGkUT6vY
+uuid: evzmM_dHOO_gopjEw2Ikn
+titleslug: bouillon-soto-version-vegane-du-bouillon-de-poulet-a-la-javanaise_evzmM_dHOO_gopjEw2Ikn
 ---

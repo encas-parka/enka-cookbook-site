@@ -43,8 +43,8 @@ ingredients:
       commentaire: pâte
   sucres:
     - title: Sucre en poudre
-      quantite: 600
-      unit: grammes
+      quantite: 2
+      unit: Kg
       commentaire: appareil
     - title: Jus de citron
       quantite: 3.7

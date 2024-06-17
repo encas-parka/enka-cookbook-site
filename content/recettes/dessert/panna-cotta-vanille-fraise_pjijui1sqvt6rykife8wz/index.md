@@ -23,7 +23,7 @@ ingredients:
       quantite: 1
       unit: litre
     - title: Confiture de fraises
-      quantite: 1
+      quantite: 1.3
       unit: Kg
     - title: gousse de vanille
       quantite: 4

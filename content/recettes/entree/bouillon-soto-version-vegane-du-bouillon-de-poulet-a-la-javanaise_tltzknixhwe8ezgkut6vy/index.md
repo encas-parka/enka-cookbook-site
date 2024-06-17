@@ -59,6 +59,10 @@ ingredients:
     - title: Jus de citron
       quantite: 350
       unit: ml
+  autres:
+    - title: Eau
+      quantite: 12
+      unit: litre
 preparation: >-
   Mettre une gamelle d'eau sur le feux, faire bouillir.
 

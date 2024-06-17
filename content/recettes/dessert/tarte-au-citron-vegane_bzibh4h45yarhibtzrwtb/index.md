@@ -87,6 +87,6 @@ preparation: >-
   Versez la crème sur le fond de tarte, laisser refroidir à température ambiante puis placer au réfrigérateur pour 2 heures.
 preparation24h: La pâte peut être faite la veille.
 publishDate: 2024-06-17T20:06:00.000Z
-uuid: bzIbh4H45yaRhiBTZrwtB
-titleslug: tarte-au-citron-vegane_bzIbh4H45yaRhiBTZrwtB
+uuid: 5Fh2krusJaqlzhHcJTBqO
+titleslug: tarte-au-citron-vegane_5Fh2krusJaqlzhHcJTBqO
 ---

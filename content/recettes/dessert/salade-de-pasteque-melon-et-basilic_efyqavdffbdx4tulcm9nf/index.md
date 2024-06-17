@@ -27,6 +27,6 @@ ingredients:
       unit: bottes
 preparation: Blablabla
 publishDate: 2024-06-17T23:43:00.000Z
-uuid: efyqaVDfFbdX4tulCM9nF
-titleslug: salade-de-pasteque-melon-et-basilic_efyqaVDfFbdX4tulCM9nF
+uuid: 8SNyZQX7C55K2xzFuhc_s
+titleslug: salade-de-pasteque-melon-et-basilic_8SNyZQX7C55K2xzFuhc_s
 ---

@@ -68,6 +68,10 @@ ingredients:
       quantite: 100
       unit: grammes
       commentaire: sirop
+  autres:
+    - title: Eau
+      quantite: 200
+      unit: ml
 preparation: >-
   La farce est exactement la même que dans la pastilla végane à l'aubergine.
   Donc cuisiner les deux farces dans le même récipient.

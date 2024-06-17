@@ -21,6 +21,10 @@ ingredients:
       quantite: 10
       unit: unité
   epices:
+    - title: Tamari (sauce)
+      quantite: 1
+      unit: litre
+      commentaire: soupe
     - title: poivre blanc moulue
       quantite: 30
       unit: grammes
@@ -89,6 +93,14 @@ ingredients:
       quantite: 300
       unit: grammes
   legumes:
+    - title: Céleri branche
+      quantite: 600
+      unit: Kg
+      commentaire: soupe
+    - title: Poireau
+      quantite: 1
+      unit: Kg
+      commentaire: soupe
     - title: Echalote
       quantite: 3
       unit: Kg

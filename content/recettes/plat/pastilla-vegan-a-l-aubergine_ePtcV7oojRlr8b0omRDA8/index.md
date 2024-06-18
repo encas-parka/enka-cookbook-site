@@ -1,6 +1,5 @@
 ---
 title: PASTILLA VEGAN A L'AUBERGINE
-titleslug: pastilla-vegan-a-l-aubergine_ePtcV7oojRlr8b0omRDA8
 draft: false
 layout: recettes
 type: plat
@@ -73,6 +72,7 @@ ingredients:
   autres:
     - title: Feuilles de brick
       quantite: 260
+      unit: unité
     - title: Eau
       quantite: 2.5
       unit: litre
@@ -133,4 +133,5 @@ preparation: >-
   Les décorer de demi-rondelles de citron confites et de pignons de pin grillés. il est possible de saupoudrer également de sucre glace et de cannelle.
 publishDate: 2024-06-13T17:39:00.000Z
 uuid: ePtcV7oojRlr8b0omRDA8
+titleslug: pastilla-vegan-a-l-aubergine_ePtcV7oojRlr8b0omRDA8
 ---

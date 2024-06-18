@@ -1,7 +1,5 @@
 ---
-uuid: 5dac5de6-768a-464a-be1c-3e72682089f0
 title: Pao de Qeijo
-titleslug: pao-de-qeijo_5dac5de6-768a-464a-be1c-3e72682089f0
 draft: false
 layout: recettes
 type: plat
@@ -9,6 +7,7 @@ categories:
   - Bouchées salées
 regime:
   - vegetarien
+  - sans-gluten
 cuisson: Oui
 temperature: Chaud
 plate: 240
@@ -56,4 +55,6 @@ preparation: >-
 
   Préchauffer le four à 180°C. Disposer sur une plaque recouverte de papier sulfurisé des boulettes de la taille d'une noix. On peut si on le souhaite laisser les boulettes formées une nuit au réfrigérateur. Enfourner 15 à 20 minutes. Se mange chaud.
 publishDate: 2024-05-23T13:58:00.000Z
+uuid: 5dac5de6-768a-464a-be1c-3e72682089f0
+titleslug: pao-de-qeijo_5dac5de6-768a-464a-be1c-3e72682089f0
 ---

@@ -30,8 +30,11 @@ ingredients:
       quantite: 1.2
       unit: tête·s
   lof:
+    - title: Farine de riz
+      quantite: 1
+      unit: Kg
     - title: Farine de pois chiche
-      quantite: 4
+      quantite: 3
       unit: Kg
     - title: huile de tournesol
       quantite: 0.2

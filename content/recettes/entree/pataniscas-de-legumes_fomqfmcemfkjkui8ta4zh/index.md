@@ -54,6 +54,10 @@ ingredients:
       unit: bottes
   frais: []
   autres:
+    - title: Eau
+      quantite: 4
+      unit: litre
+      commentaire: gaseuse
     - title: Levure chimique
       quantite: 35
       unit: grammes

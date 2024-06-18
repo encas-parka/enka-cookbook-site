@@ -1,6 +1,6 @@
 ---
 title: Morue à la Gomes de Sa (Bacalhau à Gomes de Sa) - vegan - ce n'est plus
-  un plat de morue
+  un plat de morue mais une tentative de substitution
 draft: false
 layout: recettes
 type: plat

@@ -1,6 +1,6 @@
 ---
 title: BROWNIE A L'HALVA ET AU TAHIN
-draft: true
+draft: false
 layout: recettes
 type: dessert
 categories:

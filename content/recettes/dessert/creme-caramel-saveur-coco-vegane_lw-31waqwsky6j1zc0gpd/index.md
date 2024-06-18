@@ -59,6 +59,6 @@ preparation: >-
 
   Verser la préparation dans les moules, sur le caramel. Laisser reposer au frais pendant quelques heures ou jusqu’au lendemain.
 publishDate: 2024-06-18T11:33:00.000Z
-uuid: lW-31WAQWskY6j1Zc0gpD
-titleslug: creme-caramel-saveur-coco-vegane_lW-31WAQWskY6j1Zc0gpD
+uuid: QDGcxjHAjr3GuolOpUnZ7
+titleslug: creme-caramel-saveur-coco-vegane_QDGcxjHAjr3GuolOpUnZ7
 ---

@@ -18,7 +18,9 @@ repas:
     date_service: 2024-01-11
     horaire: soir
     recettes_du_repas:
-      - recette: taboule-libanais_8a072bf8-8830-498b-98ec-e553fe78f699
+      - recette: lemon-curd-vegan-version-tarte-au-citron-sans-gluten_ulc0gtnq7tcsdkaf9ajrh
+        type_plat: entree
+      - recette: brownie-a-lhalva-et-au-tahin_gOJnbU4EssjhArx_GgGDN
         type_plat: entree
       - recette: taboulais-libanais-des-tarnais_03059cd3-6175-440d-b2bd-740b17673e9c
         type_plat: entree

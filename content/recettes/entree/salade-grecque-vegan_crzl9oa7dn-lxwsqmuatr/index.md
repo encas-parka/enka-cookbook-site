@@ -1,49 +1,49 @@
 ---
-title: Salade Grecque végan
-draft: false
-layout: recettes
-type: entree
 categories:
-  - Salade
-regime:
-  - vegetarien
-  - sans-gluten
-  - vegan
-  - sans-lactose
-region: Grece
-saison:
-  - ete
-cuisson: Non
-temperature: Froid
-plate: 180
+- Salade
 check: Oui
 checkAlwaysOk: false
+cuisson: Non
+draft: false
 ingredients:
-  legumes:
-    - title: Olives noires à la grecque
-      quantite: 1
-      unit: Kg
-    - title: Oignon rouge
-      quantite: 4.5
-      unit: Kg
-    - title: Tomate
-      quantite: 10
-      unit: Kg
-    - title: Concombre
-      quantite: 16
-      unit: Kg
-  lof:
-    - title: huile d'olive
-      quantite: 3
-      unit: litre
   epices:
-    - title: Origan
-      quantite: 40
-      unit: grammes
+  - quantite: 40
+    title: Origan
+    unit: grammes
+  legumes:
+  - quantite: 1
+    title: Olives noires à la grecque
+    unit: Kg
+  - quantite: 4.5
+    title: Oignon rouge
+    unit: Kg
+  - quantite: 10
+    title: Tomate
+    unit: Kg
+  - quantite: 16
+    title: Concombre
+    unit: Kg
+  lof:
+  - quantite: 3
+    title: huile d'olive
+    unit: litre
+layout: recettes
 materiel:
-  - Grand Saladier
+- Grand Saladier
+plate: 180
 preparation: Coupez, mélanger.
-publishDate: 2024-06-18T12:39:00.000Z
+publishDate: 2024-06-18 12:39:00+00:00
+regime:
+- vegetarien
+- sans-gluten
+- vegan
+- sans-lactose
+region: Grece
+saison:
+- ete
+temperature: Froid
+title: Salade Grecque végan
+titleslug: salade-grecque-vegan_crzl9oa7dn-lxwsqmuatr
+type: entree
 uuid: CRZL9OA7dN-LxWSQmuATR
-titleslug: salade-grecque-vegan_CRZL9OA7dN-LxWSQmuATR
 ---

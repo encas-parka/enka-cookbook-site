@@ -1,62 +1,63 @@
 ---
-title: Tarte au chocolat sans cuisson végan et sans gluten
-draft: false
-layout: recettes
-type: dessert
-categories:
-  - Tarte (sucrée)
 auteur: Ça vaulx le détour
-regime:
-  - vegetarien
-  - vegan
-  - sans-gluten
-  - sans-lactose
-region: ""
-cuisson: Non
-temperature: Froid
-plate: 12
+categories:
+- Tarte (sucrée)
 check: Oui
 checkAlwaysOk: false
+cuisson: Non
+draft: false
 ingredients:
-  sucres:
-    - title: Glucose
-      quantite: 20
-      unit: grammes
-    - title: Chocolat noir patissier 70p100
-      quantite: 250
-      unit: grammes
-    - title: Cornflakes (sans gluten)
-      quantite: 150
-      unit: grammes
-    - title: Biscuit vegan et sans gluten
-      quantite: 200
-      unit: grammes
   lof:
-    - title: Crème soja
-      quantite: 250
-      unit: ml
-    - title: huile de tournesol
-      quantite: 50
-      unit: ml
-    - title: huile de coco
-      quantite: 75
-      unit: ml
+  - quantite: 250
+    title: Crème soja
+    unit: ml
+  - quantite: 50
+    title: huile de tournesol
+    unit: ml
+  - quantite: 75
+    title: huile de coco
+    unit: ml
+  sucres:
+  - quantite: 20
+    title: Glucose
+    unit: grammes
+  - quantite: 250
+    title: Chocolat noir patissier 70p100
+    unit: grammes
+  - quantite: 150
+    title: Cornflakes (sans gluten)
+    unit: grammes
+  - quantite: 200
+    title: Biscuit vegan et sans gluten
+    unit: grammes
+layout: recettes
 materiel:
-  - Gastro 1/1 (Normaux)
-preparation: >-
-  * Biscuit : Réduire les biscuits et les corn flakes en poudre. Puis, ajouter
-  l’huile coco fondue. Bien tasser le mélange au fond du moule et réserver au
-  frais au moins une heure.
+- Gastro 1/1 (Normaux)
+plate: 12
+preparation: '* Biscuit : Réduire les biscuits et les corn flakes en poudre. Puis,
+  ajouter l’huile coco fondue. Bien tasser le mélange au fond du moule et réserver
+  au frais au moins une heure.
 
 
 
-  * Appareil : Faire chauffer huile de tournesol, crème soja et glucose. Verser sur chocolat concassé.
+  * Appareil : Faire chauffer huile de tournesol, crème soja et glucose. Verser sur
+  chocolat concassé.
 
 
 
 
-  * Laisser refroidir, placer au frigo. Pour démouler, poser le plat cinq seconde dans un bain marie.
-publishDate: 2024-06-18T11:58:00.000Z
+  * Laisser refroidir, placer au frigo. Pour démouler, poser le plat cinq seconde
+  dans un bain marie.'
+publishDate: 2024-06-18 11:58:00+00:00
+regime:
+- vegetarien
+- vegan
+- sans-gluten
+- sans-lactose
+region: ''
+temperature: Froid
+title: Tarte au chocolat sans cuisson végan et sans gluten
+titleslug: tarte-au-chocolat-sans-cuisson-vegan-et-sans-gluten_r5i76u3gd9u7ushsljzee
+type: dessert
 uuid: R5I76U3gD9U7uShSlJZEe
-titleslug: tarte-au-chocolat-sans-cuisson-vegan-et-sans-gluten_R5I76U3gD9U7uShSlJZEe
 ---

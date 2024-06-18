@@ -69,7 +69,7 @@ ingredients:
   - commentaire: galettes
     quantite: 13
     title: Ail
-    unit: gousse(s)
+    unit: gousse·s
   - commentaire: Garniture
     quantite: 5
     title: Tomate

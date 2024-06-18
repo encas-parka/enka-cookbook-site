@@ -61,6 +61,6 @@ preparation: >-
 
   ""On peut remplacer l'eau de rose par de la fleur d'oranger ou de l'amaretto. On peut également remplacer l'eau de rose et une partie du sucre par un sirop de rose (ou une autre saveur).""
 publishDate: 2024-06-18T12:28:00.000Z
-uuid: R5iIqfFhs0XB6p_VwRv8k
-titleslug: creme-de-riz-libanaise-mouhalabieh_R5iIqfFhs0XB6p_VwRv8k
+uuid: SuAttjf0ISHDBkBk3O7-x
+titleslug: creme-de-riz-libanaise-mouhalabieh_SuAttjf0ISHDBkBk3O7-x
 ---

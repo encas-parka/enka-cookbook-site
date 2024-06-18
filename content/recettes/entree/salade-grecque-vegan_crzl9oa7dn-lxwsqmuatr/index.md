@@ -5,6 +5,11 @@ layout: recettes
 type: entree
 categories:
   - Salade
+regime:
+  - vegetarien
+  - sans-gluten
+  - vegan
+  - sans-lactose
 region: Grece
 saison:
   - ete

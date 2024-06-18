@@ -12,19 +12,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Vérifier le message de commit
-        id: check-commit-msg
-        run: |
-          COMMIT_MSG="${{ github.event.head_commit.message }}"
-          if echo "$COMMIT_MSG" | grep -qE '(recettes|evenements)'; then
-            echo "check=true" >> $GITHUB_OUTPUT
-          else
-            echo "check=false" >> $GITHUB_OUTPUT
-          fi
 
       - name: Extraire les fichiers Markdown modifiés
         id: changed-files
-        if: steps.check-commit-msg.outputs.check == 'true'
+        if: contains(github.event.head_commit.message, 'Recettes') || contains(github.event.head_commit.message, 'Evenements')
         run: |
           CHANGED_FILES=$(git diff --name-only ${{ github.event.pull_request.base.sha }} ${{ github.event.pull_request.head.sha }})
           echo "name=files::$CHANGED_FILES" >> $GITHUB_OUTPUT

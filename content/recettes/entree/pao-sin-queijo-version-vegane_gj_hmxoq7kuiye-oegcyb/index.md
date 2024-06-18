@@ -71,6 +71,6 @@ preparation: >-
 
   Cuire au four : Préchauffer à 180°. Transférer les boules dans un plat allant au four huilé (ou du papier sulfurisé huilé) et cuire au four pendant 30 minutes. Le pao de queijo végétalien doit être doré à l’extérieur et cuit mais moelleux à l’intérieur.
 publishDate: 2024-06-18T11:51:00.000Z
-uuid: Gj_hmXoq7kuIye-oEGCyb
-titleslug: pao-sin-queijo-version-vegane_Gj_hmXoq7kuIye-oEGCyb
+uuid: zbwpz8vT7WjS1nimmXelc
+titleslug: pao-sin-queijo-version-vegane_zbwpz8vT7WjS1nimmXelc
 ---

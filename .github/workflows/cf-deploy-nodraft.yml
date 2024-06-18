@@ -15,7 +15,7 @@ jobs:
 
       - name: Extraire les fichiers Markdown modifiés
         id: changed-files
-        if: contains(github.event.head_commit.message, 'Recettes') || contains(github.event.head_commit.message, 'Evenements')
+        if: contains(github.event.head_commit.message, ' Recettes ') || contains(github.event.head_commit.message, ' Evenements ')
         run: |
           CHANGED_FILES=$(git diff --name-only ${{ github.event.pull_request.base.sha }} ${{ github.event.pull_request.head.sha }})
           echo "name=files::$CHANGED_FILES" >> $GITHUB_OUTPUT

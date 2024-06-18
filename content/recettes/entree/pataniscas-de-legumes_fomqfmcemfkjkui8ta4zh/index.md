@@ -22,7 +22,7 @@ ingredients:
       quantite: 2
       unit: litre
     - title: Oeuf
-      quantite: 33
+      quantite: 25
       unit: unité
     - title: Farine de blé
       quantite: 4

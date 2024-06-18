@@ -19,7 +19,7 @@ ingredients:
   sec: []
   lof:
     - title: huile de tournesol
-      quantite: 2
+      quantite: 3
       unit: litre
     - title: Oeuf
       quantite: 25

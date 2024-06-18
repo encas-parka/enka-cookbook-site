@@ -15,10 +15,11 @@ jobs:
       - name: Extraire les fichiers Markdown modifiés
         id: changed-files
         run: |
-          echo "name=files::$(git diff --name-only ${{ github.event.pull_request.base.sha }} ${{ github.event.pull_request.head.sha }} | grep -E '^(content/recettes|content/evenement)/.*\.md$') >> $GITHUB_OUTPUT"
+          echo "name=files::$(git diff --name-only ${{ github.event.pull_request.base.sha }} ${{ github.event.pull_request.head.sha }} | grep -E '^(content/recettes|content/evenements)/.*\.md$') >> $GITHUB_OUTPUT"
 
       - name: Vérifier draft
         id: check-draft
+        if: steps.changed-files.outputs.files
         run: |
           for file in ${{ steps.changed-files.outputs.files }}; do
             yaml_header=$(sed -n '/^---/,/^---/p' $file)

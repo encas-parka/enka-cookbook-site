@@ -1,6 +1,9 @@
 {
   "ingredients": [
     {
+      "title": "compote de pomme"
+    },
+    {
       "title": "Halva",
       "alergenesIng": [
         "Sésame"

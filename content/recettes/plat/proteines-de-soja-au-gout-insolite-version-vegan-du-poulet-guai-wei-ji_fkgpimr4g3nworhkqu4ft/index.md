@@ -76,6 +76,8 @@ preparation: >-
 
 
   Au service, décorer de coriandre ciselée et de graines de sésame.
+prepAlt:
+  - recetteAlt: poulet-au-gout-insolite-guai-wei-ji_bhJWcigvQl4HmJEUJpayq
 publishDate: 2024-06-16T23:49:00.000Z
 uuid: FKGpimr4G3NWorHKqU4FT
 titleslug: proteines-de-soja-au-gout-insolite-version-vegan-du-poulet-guai-wei-ji_FKGpimr4G3NWorHKqU4FT

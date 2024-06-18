@@ -11,8 +11,10 @@ regime:
   - sans-gluten
 cuisson: Oui
 temperature: Chaud
+plate: 40
 quantite_desc: un bol d'environ 600ml par personne
 check: Non
+checkAlwaysOk: false
 ingredients:
   sec:
     - title: Pâtes langues d'oiseaux sans gluten
@@ -42,6 +44,7 @@ ingredients:
       unit: bottes
     - title: Concentré de tomate
       quantite: 550
+      unit: grammes
     - title: Coulis de tomates
       quantite: 4
       unit: litre
@@ -66,9 +69,6 @@ ingredients:
     - title: Eau
       quantite: 12
       unit: litre
-titleslug: chorba-vegan-et-sans-gluten_
-plate: 40
-checkAlwaysOk: false
 preparation: >-
   Eplucher et émincer les carottes et les courgettes. Emincer une branche de
   céleri. Mettre le tout dans un saladier. Réserver. 
@@ -89,4 +89,6 @@ preparation: >-
   Laisser cuire au moins 1h à frémissement. Ajouter les pâtes et laisser cuire quelques minutes à frémissement
 preparation24h: Faire tremper les pois chiche la veille.
 publishDate: 2024-06-14T21:50:00.000Z
+uuid: gPSZ4cb1fbvP0pLUURjJG
+titleslug: chorba-vegan-et-sans-gluten_
 ---

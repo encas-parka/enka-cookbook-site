@@ -1,6 +1,15 @@
 {
   "ingredients": [
     {
+      "title": "Halva",
+      "alergenesIng": [
+        "Sésame"
+      ]
+    },
+    {
+      "title": "Chocolat noir patissier 70p100"
+    },
+    {
       "title": "Confiture de fraises"
     },
     {

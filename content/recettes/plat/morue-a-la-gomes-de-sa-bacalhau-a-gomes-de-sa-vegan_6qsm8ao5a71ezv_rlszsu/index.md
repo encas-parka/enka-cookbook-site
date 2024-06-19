@@ -18,7 +18,7 @@ checkAlwaysOk: false
 ingredients:
   legumes:
     - title: Pomme de terre
-      quantite: 0.25
+      quantite: 2.5
       unit: Kg
     - title: Oignon
       quantite: 3
@@ -28,7 +28,7 @@ ingredients:
       unit: tête·s
     - title: Olives noires à la grecque
       quantite: 0.16
-      unit: grammes
+      unit: Kg
   lof:
     - title: huile de tournesol
       quantite: 30

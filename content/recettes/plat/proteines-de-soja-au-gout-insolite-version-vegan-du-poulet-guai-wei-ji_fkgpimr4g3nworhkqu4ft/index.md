@@ -1,6 +1,6 @@
 ---
 title: PROTEINES DE SOJA AU GOÛT INSOLITE - Version végan du poulet guai wei ji
-draft: true
+draft: false
 layout: recettes
 type: plat
 categories:

@@ -1,5 +1,5 @@
 ---
-title: "Salade de pois-chiches "
+title: Salade de pois-chiches à la portugaise
 draft: false
 img: https://www.mundoboaforma.com.br/wp-content/uploads/2017/02/salada-de-grao-de-bico-620x330.jpg
 layout: recettes

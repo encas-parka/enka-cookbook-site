@@ -22,10 +22,11 @@ ingredients:
     - title: Salade verte (chêne)
       quantite: 10
       unit: unité
-titleslug: salade-verte_
 preparation: |-
   laver la salade
 
   la salade...
-publishDate: 14-06-2024T13:56
+publishDate: 2024-06-19T20:27:00.000Z
+uuid: CPe1ODtGupq7cJEKG3FMR
+titleslug: salade-verte_
 ---

@@ -177,31 +177,96 @@ repas:
     date_service: 2024-07-10
     horaire: soir
     recettes_du_repas:
+      - recette: pain-frit-chinois_z-S6ZqW3mshI1MKXtUXM4
+        type_plat: plat
+      - recette: salade-thai-aux-nouilles-de-riz_585b40cf-be30-4040-b6a5-8cb6538d3fc3
+        type_plat: entree
+      - recette: creme-caramel-saveur-coco-vegane_qdgcxjhajr3guolopunz7
+        type_plat: dessert
       - recette: bouillon-soto-version-vegane-du-bouillon-de-poulet-a-la-javanaise_evzmM_dHOO_gopjEw2Ikn
         type_plat: plat
         altAssiettes: 20
       - recette: poulet-au-gout-insolite-guai-wei-ji_bhJWcigvQl4HmJEUJpayq
         type_plat: plat
-  - assiettes: 100
+  - assiettes: 150
     date_service: 2024-07-11
     horaire: midi
-  - assiettes: 100
+    recettes_du_repas:
+      - recette: abricots-poches-verveine_8f8e326d-e0f7-4df6-9ea8-5c3567cfa524
+        type_plat: dessert
+      - recette: soupe-froide-betterave-orange-et-creme-aigre_6a228ac2-d3f3-443c-a38b-b0a60eb51b0a
+        type_plat: entree
+      - recette: puree-de-haricots-blancs-v2_547561cd-e48b-447e-9b8c-da6a78b8f6a5
+        type_plat: plat
+      - recette: tian-tomate-figue-miel_61450409-e067-429a-a1e8-af6b90c3fcea
+        type_plat: plat
+  - assiettes: 150
     date_service: 2024-07-11
     horaire: soir
-  - assiettes: 100
+    recettes_du_repas:
+      - recette: beignet-de-banane-et-caramel-de-miso_ec27e5a4-9e47-4b6e-b932-3387866e6de7
+        type_plat: dessert
+      - recette: concombre-marines-au-gingembre_6aa1a283-f3d0-413c-9e05-9999d6176ffe
+        type_plat: entree
+      - recette: keshke-vegan-et-sans-gluten_d16fc284-edec-4158-9a5a-2af89434f737
+        type_plat: plat
+      - recette: keshke_963bc23a-4176-4b5f-863c-a2f2c26336d9
+        type_plat: plat
+      - recette: caviar-d-aubergines-fumees_eb7d1293-22b9-4893-86fd-d48f100baac6
+        type_plat: entree
+  - assiettes: 180
     date_service: 2024-07-12
     horaire: midi
-  - assiettes: 100
+    recettes_du_repas:
+      - recette: salade-de-peche-a-la-menthe_5fpubovnh-aq876nokapz
+        type_plat: dessert
+      - recette: beignets-petits-pois-zaatar-et-sa-creme-au-sumac_72b7cd7f-5671-438d-a942-2d78f3c9d90d
+        type_plat: plat
+      - recette: aubergines-grillees-cacao-ail-noir-et-piment_7b2688ac-6360-43b8-8083-635b1cc56257
+        type_plat: plat
+      - recette: taboule-libanais_8a072bf8-8830-498b-98ec-e553fe78f699
+        type_plat: entree
+  - assiettes: 180
     date_service: 2024-07-12
     horaire: soir
-  - assiettes: 100
+    recettes_du_repas:
+      - recette: lemon-curd-vegan-version-tarte-au-citron-sans-gluten_ulc0gtnq7tcsdkaf9ajrh
+        type_plat: dessert
+      - recette: tarte-au-citron-vegane_5fh2krusjaqlzhhcjtbqo
+        type_plat: dessert
+      - recette: pao-sin-queijo-version-vegane_zbwpz8vT7WjS1nimmXelc
+        type_plat: plat
+      - recette: pao-de-qeijo_5dac5de6-768a-464a-be1c-3e72682089f0
+        type_plat: plat
+      - recette: tom-kha-soupe-thai_d4113d67-3b5e-49a1-b9aa-39bec1a14276
+        type_plat: entree
+  - assiettes: 190
     date_service: 2024-07-13
     horaire: midi
-  - assiettes: 100
+    recettes_du_repas:
+      - recette: gateau-de-polenta-aux-fruits_Wyl_QPM3Ez3jhu-ogTQKJ
+        type_plat: dessert
+      - recette: salade-de-courgettes-a-la-menthe_ed6e8b2c-0afd-48bf-8c14-fb5853132bf3
+        type_plat: entree
+      - recette: petits-paquets-aumonieres-courge-feta_92fe8d91-486e-4122-9049-33ebd2995e77
+        type_plat: plat
+  - assiettes: 300
     date_service: 2024-07-13
     horaire: soir
-  - assiettes: 350
-    date_service: 2024-07-14
-    horaire: midi
+    recettes_du_repas:
+      - recette: salami-au-chocolat-vegan-sans-gluten_axcmr1dv_vj6ul9owdr-g
+        type_plat: dessert
+        altAssiettes: 30
+      - recette: salami-au-chocolat_42e15e50-0bd2-4088-8b8e-fe0935b6e6c4
+        type_plat: dessert
+      - recette: lanches-au-pesto-rosso-vegane-et-sans-gluten_d154c604-faba-49af-9837-5f377811bfd9
+        type_plat: plat
+        altAssiettes: 30
+      - recette: lanches-portugaises-chorizo-vegan-et-fromage_c9f50b2e-a1e4-4d55-9a6f-4bff948fb91e
+        type_plat: plat
+      - recette: peixinhos-de-horta-tempura-dharicots-plats_B6rkGGu7iCn5AAz5kcWR-
+        type_plat: plat
+      - recette: pataniscas-de-legumes_fOmQFmcemfkJKuI8TA4zH
+        type_plat: entree
 uuid: EMTnHiO77iew8lNX8jYp_
 ---

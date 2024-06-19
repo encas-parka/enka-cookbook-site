@@ -142,15 +142,46 @@ repas:
       - recette: pita-falafel_f7c22585-2de8-4428-9f94-6d469c86b611
         type_plat: plat
         chef: Arnaud
-  - assiettes: 100
+  - assiettes: 150
     date_service: 2024-07-09
     horaire: soir
-  - assiettes: 100
+    recettes_du_repas:
+      - recette: cookie-the-matcha-et-gingembre-confit-vegan-et-sans-gluten_ae3b6152-5624-4e07-9013-963c3ada3629
+        type_plat: dessert
+        altAssiettes: 20
+      - recette: chou-marine-a-la-japonaise_aed20d5d-014f-4080-a9b8-3dc7c3576d2c
+        type_plat: entree
+      - recette: cookie-the-matcha-gingembre-confit-chocolat-blanc_f9b2749f-928f-437a-abce-a443341d315d
+        type_plat: dessert
+      - recette: soupe-miso-aux-aubergines-grillees_f65cb672-da3c-4c45-a5c7-a4c346361cc0
+        type_plat: plat
+  - assiettes: 150
     date_service: 2024-07-10
     horaire: midi
-  - assiettes: 100
+    recettes_du_repas:
+      - recette: tarte-au-chocolat-sans-cuisson-vegan-et-sans-gluten_r5i76u3gd9u7ushsljzee
+        type_plat: dessert
+        altAssiettes: 20
+      - recette: tarte-au-chocolat-sans-cuisson_d74da915-b363-436b-9c86-155d19b74351
+        type_plat: dessert
+      - recette: salade-grecque-vegan_crzl9oa7dn-lxwsqmuatr
+        type_plat: entree
+        altAssiettes: 20
+      - recette: salade-grecque_yjyp_6s9skg6mvhgjufhh
+        type_plat: entree
+      - recette: tartinade-petits-pois-citrons-confits-menthe_408513bc-8492-41d3-a84f-25e101c31557
+        type_plat: entree
+      - recette: boreks-epinards-fromage_c218f5d8-3cd8-40b4-97a7-ca63b6b8fdd6
+        type_plat: plat
+  - assiettes: 150
     date_service: 2024-07-10
     horaire: soir
+    recettes_du_repas:
+      - recette: bouillon-soto-version-vegane-du-bouillon-de-poulet-a-la-javanaise_evzmM_dHOO_gopjEw2Ikn
+        type_plat: plat
+        altAssiettes: 20
+      - recette: poulet-au-gout-insolite-guai-wei-ji_bhJWcigvQl4HmJEUJpayq
+        type_plat: plat
   - assiettes: 100
     date_service: 2024-07-11
     horaire: midi

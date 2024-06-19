@@ -21,7 +21,7 @@ ingredients:
       unit: Kg
   legumes:
     - title: Ail
-      quantite: 4
+      quantite: 3
       unit: tête·s
     - title: Oignon rouge
       quantite: 1.5

@@ -18,7 +18,7 @@ repas:
         altAssiettes: 20
       - recette: tourte-betterave-et-feta_688312f1-abd3-4cb5-b391-3ca5dffdd08a
         type_plat: plat
-        altAssiettes: 100
+        altAssiettes: 80
       - recette: creme-dessert-vanille-vegan_6c0a5194-2128-4bec-bdd5-270c5b1575ea
         type_plat: dessert
         altAssiettes: 10
@@ -36,18 +36,18 @@ repas:
         type_plat: entree
       - recette: tzatziki_CG339fsCw3HNdJdCGDplN
         type_plat: entree
-        altAssiettes: 165
+        altAssiettes: 145
       - recette: pomme-de-terre-herisson_d0160a6f-4bc4-411f-a336-dedf234c9608
         type_plat: plat
       - recette: steak-vege-champignons-aubergines-noix-avoine-haricots-rouges-version-amelioree_6068ae73-1984-4084-890f-17076c0afe8c
         type_plat: plat
       - recette: fondant-chataine_16668ef6-acf1-4352-81c3-fe8b85018b3a
         type_plat: dessert
-        altAssiettes: 165
+        altAssiettes: 145
       - recette: fondant-chataine-vegan-et-sans-gluten_afdeaabd-4857-4abd-a1c3-cb7013678450
         type_plat: dessert
         altAssiettes: 20
-  - assiettes: 230
+  - assiettes: 210
     date_service: 2024-07-06
     horaire: midi
     recettes_du_repas:
@@ -62,10 +62,10 @@ repas:
         altAssiettes: 15
       - recette: pastilla-vegan-a-laubergine_ePtcV7oojRlr8b0omRDA8
         type_plat: plat
-        altAssiettes: 215
+        altAssiettes: 195
       - recette: creme-de-riz-libanaise-mouhalabieh_SuAttjf0ISHDBkBk3O7-x
         type_plat: dessert
-  - assiettes: 250
+  - assiettes: 230
     date_service: 2024-07-06
     horaire: soir
     recettes_du_repas:
@@ -81,9 +81,9 @@ repas:
         type_plat: dessert
         altAssiettes: 25
       - recette: brownie-a-lhalva-et-au-tahin_gOJnbU4EssjhArx_GgGDN
-        altAssiettes: 225
+        altAssiettes: 215
         type_plat: dessert
-  - assiettes: 230
+  - assiettes: 210
     date_service: 2024-07-07
     horaire: midi
     recettes_du_repas:
@@ -99,7 +99,7 @@ repas:
         type_plat: plat
       - recette: tarte-aux-pralines-roses_3vfxekxa7t9bhjexn2ggp
         type_plat: dessert
-  - assiettes: 240
+  - assiettes: 220
     date_service: 2024-07-07
     horaire: soir
     recettes_du_repas:
@@ -107,7 +107,7 @@ repas:
         type_plat: plat
       - recette: morue-a-la-gomes-de-sa-bacalhau-a-gomes-de-sa_ddf1711e-ecf5-443b-881a-4b949d2b74fb
         type_plat: plat
-        altAssiettes: 225
+        altAssiettes: 205
       - recette: morue-a-la-gomes-de-sa-bacalhau-a-gomes-de-sa-vegan_6qsm8aO5a71ezV_rLsZsu
         type_plat: plat
         altAssiettes: 15
@@ -116,7 +116,8 @@ repas:
         altAssiettes: 25
       - recette: queijadas-de-feijao_f14d305c-214e-43b2-ae0d-27d474947248
         type_plat: dessert
-  - assiettes: 240
+        altAssiettes: 205
+  - assiettes: 220
     date_service: 2024-07-08
     horaire: midi
     recettes_du_repas:
@@ -129,10 +130,10 @@ repas:
         altAssiettes: 25
       - recette: chorba-agneau-et-langue-doiseaux_ddae7623-7364-4507-b487-fafa23215553
         type_plat: plat
-        altAssiettes: 215
+        altAssiettes: 195
       - recette: salade-de-pasteque-melon-et-basilic_8snyzqx7c55k2xzfuhc_s
         type_plat: dessert
-  - assiettes: 250
+  - assiettes: 230
     date_service: 2024-07-08
     horaire: soir
     recettes_du_repas:
@@ -141,19 +142,20 @@ repas:
         altAssiettes: 20
       - recette: risotto-de-pruneaux-et-champignons_74b23598-ddaa-405f-904a-f071bb7517d6
         type_plat: plat
-        altAssiettes: 230
+        altAssiettes: 210
       - recette: farcous-aveyronnais-vegan-et-sans-gluten_ef6fa447-2818-43d2-b403-1d26feb2c249
         type_plat: plat
         altAssiettes: 20
       - recette: farcous-aveyronnais_c9e2f843-bf62-4353-b7a0-33cf21e2487c
         type_plat: plat
-      - recette: shortbread-huile-dolive-romarin-et-chocolat-sans-gluten_gyqmjguqq92dujlgy1tzu
+        altAssiettes: 190
+      - recette: shortbread-huile-dolive-romarin-et-chocolat-sans-gluten_GyqMjgUQQ92dUjLGY1tzU
         type_plat: dessert
         altAssiettes: 15
-      - recette: shortbread-huile-dolive-romarin-et-chocolat_ewzgwhsimckhbyp3nxjuz
+      - recette: shortbread-huile-dolive-romarin-et-chocolat_EwzgWhsIMCKhBYP3nxJUz
         altAssiettes: 235
         type_plat: dessert
-  - assiettes: 220
+  - assiettes: 240
     date_service: 2024-07-09
     horaire: midi
     recettes_du_repas:
@@ -165,7 +167,7 @@ repas:
         chef: Arnaud
       - recette: panna-cotta-vanille-fraise_ulhyn3eajm1kzve3-bx8-
         type_plat: dessert
-  - assiettes: 240
+  - assiettes: 220
     date_service: 2024-07-09
     horaire: soir
     recettes_du_repas:
@@ -178,7 +180,8 @@ repas:
         altAssiettes: 20
       - recette: cookie-the-matcha-gingembre-confit-chocolat-blanc_f9b2749f-928f-437a-abce-a443341d315d
         type_plat: dessert
-  - assiettes: 240
+        altAssiettes: 200
+  - assiettes: 220
     date_service: 2024-07-10
     horaire: midi
     recettes_du_repas:
@@ -187,8 +190,9 @@ repas:
       - recette: salade-grecque-vegan_crzl9oa7dn-lxwsqmuatr
         type_plat: entree
         altAssiettes: 20
-      - recette: salade-grecque_yjyp_6s9skg6mvhgjufhh
+      - recette: salade-grecque_Yjyp_6s9skG6MVHgJufHH
         type_plat: entree
+        altAssiettes: 200
       - recette: tartinade-petits-pois-citrons-confits-menthe_408513bc-8492-41d3-a84f-25e101c31557
         type_plat: entree
       - recette: boreks-epinards-fromage_c218f5d8-3cd8-40b4-97a7-ca63b6b8fdd6
@@ -198,7 +202,7 @@ repas:
         altAssiettes: 20
       - recette: tarte-au-chocolat-sans-cuisson_d74da915-b363-436b-9c86-155d19b74351
         type_plat: dessert
-  - assiettes: 240
+  - assiettes: 220
     date_service: 2024-07-10
     horaire: soir
     recettes_du_repas:
@@ -211,9 +215,10 @@ repas:
         altAssiettes: 20
       - recette: poulet-au-gout-insolite-guai-wei-ji_bhJWcigvQl4HmJEUJpayq
         type_plat: plat
+        altAssiettes: 200
       - recette: creme-caramel-saveur-coco-vegane_qdgcxjhajr3guolopunz7
         type_plat: dessert
-  - assiettes: 260
+  - assiettes: 240
     date_service: 2024-07-11
     horaire: midi
     recettes_du_repas:
@@ -227,7 +232,7 @@ repas:
         type_plat: plat
       - recette: abricots-poches-verveine_8f8e326d-e0f7-4df6-9ea8-5c3567cfa524
         type_plat: dessert
-  - assiettes: 260
+  - assiettes: 240
     date_service: 2024-07-11
     horaire: soir
     recettes_du_repas:
@@ -236,7 +241,7 @@ repas:
         altAssiettes: 15
       - recette: baklawa-pois-chiche-feta_Jtj62Si5RXReBze30kBCK
         type_plat: entree
-        altAssiettes: 245
+        altAssiettes: 225
       - recette: concombre-marines-au-gingembre_6aa1a283-f3d0-413c-9e05-9999d6176ffe
         type_plat: entree
       - recette: caviar-d-aubergines-fumees_eb7d1293-22b9-4893-86fd-d48f100baac6
@@ -246,10 +251,10 @@ repas:
         altAssiettes: 20
       - recette: keshke_963bc23a-4176-4b5f-863c-a2f2c26336d9
         type_plat: plat
-        altAssiettes: 240
+        altAssiettes: 220
       - recette: beignet-de-banane-et-caramel-de-miso_ec27e5a4-9e47-4b6e-b932-3387866e6de7
         type_plat: dessert
-  - assiettes: 260
+  - assiettes: 240
     date_service: 2024-07-12
     horaire: midi
     recettes_du_repas:
@@ -259,14 +264,14 @@ repas:
         partof: taboulé
       - recette: taboule-libanais_8a072bf8-8830-498b-98ec-e553fe78f699
         type_plat: entree
-        altAssiettes: 245
+        altAssiettes: 225
       - recette: beignets-petits-pois-zaatar-et-sa-creme-au-sumac_72b7cd7f-5671-438d-a942-2d78f3c9d90d
         type_plat: plat
       - recette: aubergines-grillees-cacao-ail-noir-et-piment_7b2688ac-6360-43b8-8083-635b1cc56257
         type_plat: plat
       - recette: salade-de-peche-a-la-menthe_5fpubovnh-aq876nokapz
         type_plat: dessert
-  - assiettes: 270
+  - assiettes: 250
     date_service: 2024-07-12
     horaire: soir
     recettes_du_repas:
@@ -277,12 +282,12 @@ repas:
         altAssiettes: 20
       - recette: pao-de-qeijo_5dac5de6-768a-464a-be1c-3e72682089f0
         type_plat: plat
-        altAssiettes: 250
+        altAssiettes: 230
       - recette: lemon-curd-vegan-version-tarte-au-citron-sans-gluten_ulc0gtnq7tcsdkaf9ajrh
         type_plat: dessert
       - recette: tarte-au-citron-vegane_5fh2krusjaqlzhhcjtbqo
         type_plat: dessert
-  - assiettes: 260
+  - assiettes: 240
     date_service: 2024-07-13
     horaire: midi
     recettes_du_repas:
@@ -296,7 +301,7 @@ repas:
         type_plat: plat
       - recette: gateau-de-polenta-aux-fruits_Wyl_QPM3Ez3jhu-ogTQKJ
         type_plat: dessert
-  - assiettes: 300
+  - assiettes: 360
     date_service: 2024-07-13
     horaire: soir
     recettes_du_repas:

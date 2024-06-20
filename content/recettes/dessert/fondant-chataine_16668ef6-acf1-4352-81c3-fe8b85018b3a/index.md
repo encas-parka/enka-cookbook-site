@@ -1,5 +1,5 @@
 ---
-title: Fondant Chataine
+title: Fondant Chataigne
 draft: false
 layout: recettes
 type: dessert

@@ -71,11 +71,11 @@
         // If there's already a slug, don't change it
         const isNew = window.location.href.endsWith('new')
         if (entry.getIn(["data", "titleslug"], "") && !isNew) return;
-
         const slugify = str => str.toLowerCase()
           .replace(/[^a-z0-9-]/g, m => 'éèêëàäâùüûîïôöç'.includes(m) ? m.normalize("NFD").replace(/[\u0300-\u036f]/g, "") : '-')
           .replace(/[- ]+/g, '-')
-          .slice(0, 51);
+          .slice(0, 51)
+          .replace(/-$/, ''); // Remove trailing dash
         
         // Slugify the title and save it as the slug
         const title = entry.getIn(["data", "title"], "");
@@ -89,9 +89,9 @@
       name: "preSave",
       handler: ({ entry }) => {
         if (entry.get('collection') !== 'evenement') return;
-
+    
         let data = entry.get('data');
-
+    
         if (data.has('repas') && data.get('repas').size > 0) {
           let sortedRepas = data.get('repas')
             .sortBy(repas => {
@@ -101,28 +101,27 @@
               if (horaire === 'soir') return 2;
             })
             .sortBy(repas => new Date(repas.get('date_service')));
-
-          if (data.get('repas').has('recettes_du_repas') && data.get('repas').get('recettes_du_repas').size > 0) {
-            
+    
           sortedRepas = sortedRepas.map(repas => {
-            let sortedRecettes = repas.get('recettes_du_repas')
-              .sortBy(recette => {
-                const typePlat = recette.get('type_plat');
-                if (typePlat === 'entree') return 0;
-                if (typePlat === 'plat') return 1;
-                if (typePlat === 'dessert') return 2;
-              });
-            
-            return repas.set('recettes_du_repas', sortedRecettes);
+            if (repas.has('recettes_du_repas') && repas.get('recettes_du_repas').size > 0) {
+              let sortedRecettes = repas.get('recettes_du_repas')
+                .sortBy(recette => {
+                  const typePlat = recette.get('type_plat');
+                  if (typePlat === 'entree') return 0;
+                  if (typePlat === 'plat') return 1;
+                  if (typePlat === 'dessert') return 2;
+                  return 3; // Pour tout autre type de plat
+                });
+              
+              return repas.set('recettes_du_repas', sortedRecettes);
+            }
+            return repas;
           });
-          }          
-          data = data.set('repas', sortedRepas);
-          return entry.get('data').set('repas', sortedRepas);
-    
-          }
-    
+          
+         return entry.get('data').set('repas', sortedRepas);
+        }
       },
-});
+    });
   </script>
 </body>
 

@@ -63,5 +63,5 @@ preparation: >-
   \    5 - Laisser fondre le tout, rectifier l'assaisonement. Servir froid.
 publishDate: 2024-06-20T15:16:00.000Z
 uuid: ef99etakaq7gzrwc54dqmpbaemwqnikezmyi
-titleslug: m-chouia_ef99etakaq7gzrwc54dqmpbaemwqnikezmyi
+titleslug: mechouia_ef99etakaq7gzrwc54dqmpbaemwqnikezmyi
 ---

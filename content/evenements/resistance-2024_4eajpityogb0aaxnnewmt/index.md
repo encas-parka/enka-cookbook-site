@@ -19,10 +19,7 @@ repas:
       - recette: tourte-betterave-et-feta_688312f1-abd3-4cb5-b391-3ca5dffdd08a
         type_plat: plat
         altAssiettes: 80
-      - recette: creme-dessert-vanille-vegan_6c0a5194-2128-4bec-bdd5-270c5b1575ea
-        type_plat: dessert
-        altAssiettes: 10
-      - recette: ile-flottante_a339c6a8-ad03-4324-8fee-68b24d5fc04e
+      - recette: creme-de-riz-libanaise-mouhalabieh_SuAttjf0ISHDBkBk3O7-x
         type_plat: dessert
         altAssiettes: 110
   - assiettes: 120
@@ -63,8 +60,12 @@ repas:
       - recette: pastilla-vegan-a-laubergine_ePtcV7oojRlr8b0omRDA8
         type_plat: plat
         altAssiettes: 195
-      - recette: creme-de-riz-libanaise-mouhalabieh_SuAttjf0ISHDBkBk3O7-x
+      - recette: creme-dessert-vanille-vegan_6c0a5194-2128-4bec-bdd5-270c5b1575ea
         type_plat: dessert
+        altAssiettes: 20
+      - recette: ile-flottante_a339c6a8-ad03-4324-8fee-68b24d5fc04e
+        type_plat: dessert
+        altAssiettes: 190
   - assiettes: 230
     date_service: 2024-07-06
     horaire: soir

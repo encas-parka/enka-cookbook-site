@@ -1,7 +1,5 @@
 ---
-uuid: afdeaabd-4857-4abd-a1c3-cb7013678450
-title: " Fondant Chataine (vegan et sans gluten)"
-titleslug: fondant-chataine-vegan-et-sans-gluten_afdeaabd-4857-4abd-a1c3-cb7013678450
+title: " Fondant Chataigne (vegan et sans gluten)"
 draft: false
 layout: recettes
 type: dessert
@@ -59,6 +57,8 @@ preparation: >-
 
   (24 parts par gastro. )
 prepAlt:
-  - recetteAlt: Fondant Chataine
+  - recetteAlt: fondant-chataine_16668ef6-acf1-4352-81c3-fe8b85018b3a
 publishDate: 2024-05-18T13:02:00.000Z
+uuid: afdeaabd-4857-4abd-a1c3-cb7013678450
+titleslug: fondant-chataine-vegan-et-sans-gluten_afdeaabd-4857-4abd-a1c3-cb7013678450
 ---

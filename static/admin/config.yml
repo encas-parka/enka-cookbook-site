@@ -737,7 +737,7 @@ collections:
             widget: "list"
             allow_add: true
             add_to_top: true
-            summary: "{{recette}} : {{fields.type_plat}}"
+            summary: "{{recette}} : {{fields.type_plat}} - {{fields.altAssiettes}}"
             fields:
               - label: "Recette"
                 name: "recette"

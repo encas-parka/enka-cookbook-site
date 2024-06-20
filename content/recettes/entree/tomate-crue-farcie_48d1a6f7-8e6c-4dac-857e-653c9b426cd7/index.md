@@ -21,7 +21,7 @@ ingredients:
   legumes:
     - title: Tomate
       quantite: 125.00
-      unit: unité(s)
+      unit: unité
     - title: Oignon rouge
       quantite: 3.00
       unit: Kg  

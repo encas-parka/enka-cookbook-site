@@ -88,7 +88,7 @@ regime:
 - sans-gluten
 temperature: Chaud
 title: Tourte betterave lentille (vegan et sans gluten)
-titleslug: tourte-betterave-lentille-vegan-et-sans-gluten_iz7rcsf3ppeayoqvk3xnt
+titleslug: tourte-betterave-lentille-vegan-et-sans-gluten_IZ7rcsf3PPeAyOqVK3XNT
 type: entree
 uuid: IZ7rcsf3PPeAyOqVK3XNT
 ---

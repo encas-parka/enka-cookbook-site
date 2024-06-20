@@ -72,23 +72,11 @@
         const isNew = window.location.href.endsWith('new')
         if (entry.getIn(["data", "titleslug"], "") && !isNew) return;
 
-        const slugify = (str) => {
-          const repl = {
-            ' ': '-', '(': '-', ')': '-',
-            'é': 'e', 'è': 'e', 'ê': 'e', 'ë': 'e',
-            'à': 'a', 'ä': 'a', 'â': 'a',
-            'ù': 'u', 'ü': 'u', 'û': 'u',
-            'î': 'i', 'ï': 'i',
-            'ô': 'o', 'ö': 'o',
-            'ç': 'c',
-          };
-          return str.toLowerCase()
-            .replace(/[^a-z0-9-]/g, m => repl[m] || '')
-            .replace(/[ -]+/g, '-')
-            .replace(/-{2,}/g, '-')
-            .replace(/^-|-$/g, '');
-        };
-
+        const slugify = str => str.toLowerCase()
+          .replace(/[^a-z0-9-]/g, m => 'éèêëàäâùüûîïôöç'.includes(m) ? m.normalize("NFD").replace(/[\u0300-\u036f]/g, "") : '-')
+          .replace(/[- ]+/g, '-')
+          .slice(0, 51);
+        
         // Slugify the title and save it as the slug
         const title = entry.getIn(["data", "title"], "");
         const uuid = entry.getIn(["data", "uuid"], "");

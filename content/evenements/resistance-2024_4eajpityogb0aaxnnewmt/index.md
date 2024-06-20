@@ -2,7 +2,7 @@
 title: Resistance 2024
 sitemap_exclude: "true"
 repas:
-  - assiettes: 120
+  - assiettes: 100
     date_service: 2024-07-05
     horaire: midi
     recettes_du_repas:
@@ -25,7 +25,7 @@ repas:
       - recette: ile-flottante_a339c6a8-ad03-4324-8fee-68b24d5fc04e
         type_plat: dessert
         altAssiettes: 110
-  - assiettes: 185
+  - assiettes: 120
     date_service: 2024-07-05
     horaire: soir
     recettes_du_repas:

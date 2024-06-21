@@ -28,7 +28,7 @@ ingredients:
     - title: Cornichon
       quantite: 2.00
       unit: Kg
-    - title: Mâche
+    - title: "Mâche (salade)"
       quantite: 1.00
       unit: Kg
     - title: Cranberries

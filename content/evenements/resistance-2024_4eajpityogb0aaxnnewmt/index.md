@@ -6,6 +6,8 @@ repas:
     date_service: 2024-07-05
     horaire: midi
     recettes_du_repas:
+      - recette: vinaigrette_46d02590-8218-472c-b46a-c24e22671cb8
+        type_plat: entree
       - recette: salade-verte_uAx-TXysQyWoqSV-BBaut
         type_plat: entree
       - recette: salade-courgette-curry_a93cbdd6-bead-482b-9ec7-87cfa95e36a2
@@ -48,6 +50,8 @@ repas:
     date_service: 2024-07-06
     horaire: midi
     recettes_du_repas:
+      - recette: vinaigrette_46d02590-8218-472c-b46a-c24e22671cb8
+        type_plat: entree
       - recette: salade-verte_uAx-TXysQyWoqSV-BBaut
         type_plat: entree
       - recette: tapenade-noire-ou-verte_98a6b3dd-784c-4194-a8ce-1a8e8e9696d9
@@ -223,6 +227,8 @@ repas:
     date_service: 2024-07-11
     horaire: midi
     recettes_du_repas:
+      - recette: vinaigrette_46d02590-8218-472c-b46a-c24e22671cb8
+        type_plat: entree
       - recette: soupe-froide-betterave-orange-et-creme-aigre_6a228ac2-d3f3-443c-a38b-b0a60eb51b0a
         type_plat: entree
       - recette: salade-verte_uAx-TXysQyWoqSV-BBaut
@@ -292,6 +298,8 @@ repas:
     date_service: 2024-07-13
     horaire: midi
     recettes_du_repas:
+      - recette: vinaigrette_46d02590-8218-472c-b46a-c24e22671cb8
+        type_plat: entree
       - recette: tartinade-de-haricot-rouge-basilic_c80760ff-d6f1-4713-af1b-5e6bcd0824a6
         type_plat: entree
       - recette: salade-de-courgettes-a-la-menthe_ed6e8b2c-0afd-48bf-8c14-fb5853132bf3

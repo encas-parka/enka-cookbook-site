@@ -27,7 +27,7 @@ ingredients:
       quantite: 150
       unit: grammes
     - title: Graines de lin
-      quantite: 2
+      quantite: 30
       unit: grammes
   sucres:
     - title: Gingembre confit

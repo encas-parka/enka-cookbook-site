@@ -20,7 +20,7 @@ ingredients:
   - title: Gingembre en poudre
   - title: Paprika
   - title: Cumin
-  - title: Coriandre
+  - title: Coriandre fraîche
   - title: Gros sel
   legumes:
   - quantite: 3.75

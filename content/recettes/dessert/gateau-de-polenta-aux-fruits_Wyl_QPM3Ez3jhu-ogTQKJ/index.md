@@ -25,6 +25,9 @@ ingredients:
       title: Beurre demi-sel
       unit: Kg
   legumes:
+    - title: Fruits divers
+      quantite: 2.8
+      unit: Kg
     - commentaire: nappage
       quantite: 1.7
       title: Fruits divers
@@ -33,9 +36,6 @@ ingredients:
       quantite: 5
       title: Citron vert
       unit: unité
-    - quantite: 2.8
-      title: Fruits divers
-      unit: Kg
   lof:
     - quantite: 20
       title: Oeuf

@@ -59,7 +59,7 @@ ingredients:
     - title: Poivre
      
       commentaire: noir
-    - title: Coriandre
+    - title: Coriandre fraîche
       quantite: 8
       unit: bottes
       commentaire: fraiche

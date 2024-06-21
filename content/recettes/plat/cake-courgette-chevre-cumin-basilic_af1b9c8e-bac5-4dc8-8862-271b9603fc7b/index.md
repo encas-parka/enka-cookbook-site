@@ -14,7 +14,7 @@ ingredients:
   epices:
   - commentaire: sec
     quantite: 1
-    title: Basilic
+    title: Basilic sec
     unit: c. à café
   - quantite: 1
     title: Cumin

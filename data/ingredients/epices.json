@@ -4,7 +4,8 @@
       "title": "Pulpe de tomate"
     },
     {
-      "title": "Menthe glaciale"
+      "title": "Menthe glaciale",
+      "pFrais": true
     },
     {
       "title": "Moutarde à l'ancienne"
@@ -151,10 +152,7 @@
       "alergenesIng": null
     },
     {
-      "title": "Basilic sec",
-      "saisons": [
-        "ete"
-      ]
+      "title": "Basilic sec"
     },
     {
       "title": "Coriandre en poudre"
@@ -169,10 +167,12 @@
       "title": "Poivre noir moulu"
     },
     {
-      "title": "Coriandre fraîche"
+      "title": "Coriandre fraîche",
+      "pFrais": true
     },
     {
-      "title": "Persil frais"
+      "title": "Persil frais",
+      "pFrais": true
     },
     {
       "title": "Curcuma moulu"
@@ -262,7 +262,8 @@
     {
       "title": "Basilic",
       "vegan": true,
-      "vegetarien": true
+      "vegetarien": true,
+      "pFrais": true
     },
     {
       "title": "Bouquet garni",
@@ -287,7 +288,8 @@
     {
       "title": "Ciboulette",
       "vegan": true,
-      "vegetarien": true
+      "vegetarien": true,
+      "pFrais": true
     },
     {
       "title": "Citronelle",
@@ -381,7 +383,8 @@
     {
       "title": "Menthe",
       "vegan": true,
-      "vegetarien": true
+      "vegetarien": true,
+      "pFrais": true
     },
     {
       "title": "Moutarde",
@@ -412,7 +415,7 @@
       "vegetarien": true
     },
     {
-      "title": "Persil",
+      "title": "Persil sec",
       "vegan": true,
       "vegetarien": true
     },

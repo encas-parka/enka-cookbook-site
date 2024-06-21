@@ -31,6 +31,7 @@ ingredients:
     - title: Crème Végétale
       quantite: 1.5
       unit: Kg
+  frais: 
     - title: Yaourt nature
       quantite: 2
       unit: Kg

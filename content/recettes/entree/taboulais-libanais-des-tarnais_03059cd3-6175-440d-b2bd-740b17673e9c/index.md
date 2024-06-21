@@ -16,7 +16,7 @@ ingredients:
     title: Menthe
     unit: bottes
   - quantite: 60
-    title: Persil
+    title: Persil frais
     unit: bottes
   legumes:
   - quantite: 3

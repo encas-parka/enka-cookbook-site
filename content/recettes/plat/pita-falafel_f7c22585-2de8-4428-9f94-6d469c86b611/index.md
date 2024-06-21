@@ -42,7 +42,7 @@ ingredients:
       title: graine de coriandre
       unit: grammes
     - quantite: 1
-      title: Coriandre
+      title: Coriandre fraîche
       unit: bottes
     - quantite: 2
       title: Menthe

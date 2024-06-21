@@ -1,7 +1,5 @@
 ---
-uuid: d154c604-faba-49af-9837-5f377811bfd9
 title: LANCHES AU PESTO ROSSO Végane et sans gluten
-titleslug: lanches-au-pesto-rosso-vegane-et-sans-gluten_d154c604-faba-49af-9837-5f377811bfd9
 draft: false
 layout: recettes
 type: entree
@@ -21,10 +19,10 @@ ingredients:
       unit: grammes
     - title: huile d'olive
       quantite: 30
-      unit: grammes
+      unit: ml
     - title: Lait de riz
       quantite: 280
-      unit: grammes
+      unit: ml
     - title: Fécule de maïs (Maïzena)
       quantite: 80
       unit: grammes
@@ -80,4 +78,6 @@ preparation: >-
   Laisser pousser sur une plaque sulfurisée une seconde fois pendant 1 heure et mettre au four pour une 15/20 min  à 180 degrés. Vérifier la cuisson et laisser plus longtemps si nécessaire.
 preparation24h: Faire la pâte la veille et la première poussée dans la nuit au frigo.
 publishDate: 2024-05-23T22:54:00.000Z
+uuid: d154c604-faba-49af-9837-5f377811bfd9
+titleslug: lanches-au-pesto-rosso-vegane-et-sans-gluten_d154c604-faba-49af-9837-5f377811bfd9
 ---

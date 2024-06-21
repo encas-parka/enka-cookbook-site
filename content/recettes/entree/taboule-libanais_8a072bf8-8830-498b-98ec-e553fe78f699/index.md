@@ -27,7 +27,7 @@ ingredients:
       unit: Kg
       commentaire: grosses tomates de préférences
   epices:
-    - title: Persil
+    - title: Persil frais
       quantite: 6
       unit: Kg
     - title: Menthe

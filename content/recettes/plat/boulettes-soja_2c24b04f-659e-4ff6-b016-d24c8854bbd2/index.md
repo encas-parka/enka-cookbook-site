@@ -45,7 +45,7 @@ ingredients:
   epices:
     - title: Poivre
     - title: Sel
-    - title: Persil
+    - title: Persil frais
       quantite: 1.5
       unit: bottes
     - title: Tamari (sauce)

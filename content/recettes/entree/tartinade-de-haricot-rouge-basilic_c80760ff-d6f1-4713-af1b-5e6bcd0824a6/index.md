@@ -38,7 +38,7 @@ ingredients:
   epices:
     - title: Basilic
       quantite: 9
-      unit: unité
+      unit: bottes
     - title: Poivre
     - title: Sel
   autres:
@@ -61,7 +61,6 @@ preparation24h: >-
 
 
   * Bien cuire les haricots la veille avec le bicarbonate et du sel. Puis mixer avec tout le reste.
-astuces:
-  - astuce: basilic → bottes; ail → gousses
+
 publishDate: 2024-05-18T10:52:00.000Z
 ---

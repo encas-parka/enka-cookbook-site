@@ -45,7 +45,7 @@ ingredients:
     - title: Menthe
       quantite: 4
       unit: bottes
-    - title: Persil
+    - title: Persil frais
       quantite: 9
       unit: bottes
   sucres:

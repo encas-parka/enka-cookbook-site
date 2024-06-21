@@ -1,7 +1,5 @@
 ---
-uuid: ae3b6152-5624-4e07-9013-963c3ada3629
 title: COOKIE THE MATCHA ET GINGEMBRE CONFIT Végan et sans gluten
-titleslug: cookie-the-matcha-et-gingembre-confit-vegan-et-sans-gluten_ae3b6152-5624-4e07-9013-963c3ada3629
 draft: false
 layout: recettes
 type: dessert
@@ -30,7 +28,7 @@ ingredients:
       unit: grammes
     - title: Graines de lin
       quantite: 2
-      unit: c. à soupe
+      unit: grammes
   sucres:
     - title: Gingembre confit
       quantite: 200
@@ -71,4 +69,6 @@ preparation: >-
 
   Enfourner les cookies pour 12-13 minutes. Retirer du four et laisser refroidir sur la plaque pendant quelques minutes avant de transférer sur une grille pour les laisser refroidir complètement.
 publishDate: 2024-05-24T00:12:00.000Z
+uuid: ae3b6152-5624-4e07-9013-963c3ada3629
+titleslug: cookie-the-matcha-et-gingembre-confit-vegan-et-sans-gluten_ae3b6152-5624-4e07-9013-963c3ada3629
 ---

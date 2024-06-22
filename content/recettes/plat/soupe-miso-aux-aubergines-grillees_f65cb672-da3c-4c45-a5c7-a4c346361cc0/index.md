@@ -1,7 +1,5 @@
 ---
-uuid: f65cb672-da3c-4c45-a5c7-a4c346361cc0
 title: SOUPE MISO AUX AUBERGINES GRILLEES
-titleslug: soupe-miso-aux-aubergines-grillees_f65cb672-da3c-4c45-a5c7-a4c346361cc0
 draft: false
 description: "La soupe miso de base est constituée de 4 éléments de base : le
   dashi, 1 à 3 ingrédients de saison, le miso et une garniture."
@@ -25,7 +23,6 @@ ingredients:
     - title: Gochujang
       quantite: 1
       unit: Kg
-    - title: Shizo vert
     - title: Shizo vert
       quantite: 7
       unit: bottes
@@ -93,4 +90,6 @@ preparation: >-
 
   Au service poser une ou deux feuilles de shizo.
 publishDate: 2024-06-04T22:15:00.000Z
+uuid: f65cb672-da3c-4c45-a5c7-a4c346361cc0
+titleslug: soupe-miso-aux-aubergines-grillees_f65cb672-da3c-4c45-a5c7-a4c346361cc0
 ---

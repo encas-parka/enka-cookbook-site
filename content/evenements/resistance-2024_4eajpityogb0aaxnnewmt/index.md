@@ -24,7 +24,7 @@ repas:
       - recette: creme-de-riz-libanaise-mouhalabieh_SuAttjf0ISHDBkBk3O7-x
         type_plat: dessert
         altAssiettes: 110
-  - assiettes: 120
+  - assiettes: 145
     date_service: 2024-07-05
     horaire: soir
     recettes_du_repas:
@@ -33,19 +33,20 @@ repas:
         altAssiettes: 20
       - recette: gaspacho_6513ecff-d89c-413a-a2d2-fecc00755716
         type_plat: entree
+        altAssiettes: 145
       - recette: tzatziki_CG339fsCw3HNdJdCGDplN
         type_plat: entree
-        altAssiettes: 145
+        altAssiettes: 125
       - recette: pomme-de-terre-herisson_d0160a6f-4bc4-411f-a336-dedf234c9608
         type_plat: plat
       - recette: steak-vege-champignons-aubergines-noix-avoine-haricots-rouges-version-amelioree_6068ae73-1984-4084-890f-17076c0afe8c
         type_plat: plat
       - recette: fondant-chataine_16668ef6-acf1-4352-81c3-fe8b85018b3a
         type_plat: dessert
-        altAssiettes: 145
+        altAssiettes: 120
       - recette: fondant-chataine-vegan-et-sans-gluten_afdeaabd-4857-4abd-a1c3-cb7013678450
         type_plat: dessert
-        altAssiettes: 20
+        altAssiettes: 24
   - assiettes: 210
     date_service: 2024-07-06
     horaire: midi
@@ -54,7 +55,7 @@ repas:
         type_plat: entree
       - recette: salade-verte_uAx-TXysQyWoqSV-BBaut
         type_plat: entree
-      - recette: tapenade-noire-ou-verte_98a6b3dd-784c-4194-a8ce-1a8e8e9696d9
+      - recette: tapenade-olives-vertes_3pgmn0mhbdb9h_zyce14q6hb6c0roxo98og5
         type_plat: entree
       - recette: mechouia_ef99etakaq7gzrwc54dqmpbaemwqnikezmyi
         type_plat: plat
@@ -78,8 +79,9 @@ repas:
         type_plat: entree
       - recette: muhamarra_2422a147-5117-4eaa-b024-e9c9c3785c38
         type_plat: entree
-      - recette: babka-vegane-harissa-et-pistache_dec7f984-509e-4ad7-a5a0-f1fe23b5c267
+      - recette: beignets-de-legume-style-pakora_a23fde4e-8c2f-483a-a445-1ae1e9652c71
         type_plat: plat
+        chef: marion
       - recette: riz-au-four-parfume-a-la-menthe-grenade-et-oilves-vertes_86e0f98e-9ef8-4efa-a855-a684e653e645
         type_plat: plat
       - recette: brownie-halva-et-tahin-vegan-et-sans-gluten_zixopigwbvhny48-z-6ss
@@ -102,12 +104,20 @@ repas:
         type_plat: plat
       - recette: madeleines-sarrasin-sauge-noisette_c30b3c0d-66e7-4ec6-8904-438c125dbf57
         type_plat: plat
-      - recette: tarte-aux-pralines-roses_3vfxekxa7t9bhjexn2ggp
+      - recette: creme-dessert-aux-pralines-roses_5ea4220f-3a12-469e-b6ca-3637d70bcafa
         type_plat: dessert
+        altAssiettes: 15
+      - recette: tarte-aux-pralines-roses_3vfXekXA7T9bHjeXN2gGp
+        type_plat: dessert
+        altAssiettes: 200
   - assiettes: 220
     date_service: 2024-07-07
     horaire: soir
     recettes_du_repas:
+      - recette: vinaigrette_46d02590-8218-472c-b46a-c24e22671cb8
+        type_plat: entree
+      - recette: salade-verte_uAx-TXysQyWoqSV-BBaut
+        type_plat: entree
       - recette: tomate-crue-farcie_48d1a6f7-8e6c-4dac-857e-653c9b426cd7
         type_plat: plat
       - recette: morue-a-la-gomes-de-sa-bacalhau-a-gomes-de-sa_ddf1711e-ecf5-443b-881a-4b949d2b74fb
@@ -128,6 +138,8 @@ repas:
     recettes_du_repas:
       - recette: zaalouk-caviar-d-aubergines_bfacf0ee-3cbc-4526-9ea6-2c5d91a0d078
         type_plat: entree
+      - recette: babka-vegane-harissa-et-pistache_dec7f984-509e-4ad7-a5a0-f1fe23b5c267
+        type_plat: plat
       - recette: babka-vegane-harissa-et-pistache_dec7f984-509e-4ad7-a5a0-f1fe23b5c267
         type_plat: plat
       - recette: chorba-vegan-et-sans-gluten_gPSZ4cb1fbvP0pLUURjJG
@@ -190,12 +202,11 @@ repas:
     date_service: 2024-07-10
     horaire: midi
     recettes_du_repas:
+      - recette: vinaigrette_46d02590-8218-472c-b46a-c24e22671cb8
+        type_plat: entree
       - recette: soupe-de-carottes-a-la-coriandre_c1d7ed59-a9f2-4048-97bb-9327d909ca70
         type_plat: entree
-      - recette: salade-grecque-vegan_crzl9oa7dn-lxwsqmuatr
-        type_plat: entree
-        altAssiettes: 20
-      - recette: salade-grecque_Yjyp_6s9skG6MVHgJufHH
+      - recette: salade-grecque-vegan_CRZL9OA7dN-LxWSQmuATR
         type_plat: entree
         altAssiettes: 200
       - recette: tartinade-petits-pois-citrons-confits-menthe_408513bc-8492-41d3-a84f-25e101c31557
@@ -207,6 +218,7 @@ repas:
         altAssiettes: 20
       - recette: tarte-au-chocolat-sans-cuisson_d74da915-b363-436b-9c86-155d19b74351
         type_plat: dessert
+        altAssiettes: 200
   - assiettes: 220
     date_service: 2024-07-10
     horaire: soir
@@ -290,10 +302,12 @@ repas:
       - recette: pao-de-qeijo_5dac5de6-768a-464a-be1c-3e72682089f0
         type_plat: plat
         altAssiettes: 230
-      - recette: lemon-curd-vegan-version-tarte-au-citron-sans-gluten_ulc0gtnq7tcsdkaf9ajrh
+      - recette: lemon-curd-vegan-version-tarte-au-citron-sans-gluten_uLc0gTnQ7tcSdkAf9ajRH
         type_plat: dessert
-      - recette: tarte-au-citron-vegane_5fh2krusjaqlzhhcjtbqo
+        altAssiettes: 20
+      - recette: tarte-au-citron-vegane_5Fh2krusJaqlzhHcJTBqO
         type_plat: dessert
+        altAssiettes: 230
   - assiettes: 240
     date_service: 2024-07-13
     horaire: midi
@@ -321,12 +335,16 @@ repas:
         altAssiettes: 30
       - recette: lanches-portugaises-chorizo-vegan-et-fromage_c9f50b2e-a1e4-4d55-9a6f-4bff948fb91e
         type_plat: plat
+        altAssiettes: 330
       - recette: peixinhos-de-horta-tempura-dharicots-plats_B6rkGGu7iCn5AAz5kcWR-
         type_plat: plat
+      - recette: creme-vegan-au-sureau_-anM5_qyLGXMKBPE03koO
+        type_plat: dessert
       - recette: salami-au-chocolat-vegan-sans-gluten_axcmr1dv_vj6ul9owdr-g
         type_plat: dessert
         altAssiettes: 30
       - recette: salami-au-chocolat_42e15e50-0bd2-4088-8b8e-fe0935b6e6c4
         type_plat: dessert
+        altAssiettes: 330
 uuid: 4eajPITYogB0AAXNnEWmT
 ---

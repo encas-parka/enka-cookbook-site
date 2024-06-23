@@ -39,7 +39,7 @@ preparation: >-
 
 
   et une herbe fraiche, ou des olives (ratio 600g dénoyautées pour 100p) si le coeur vous en dit...
-publishDate: 14-06-2024T13:40
+publishDate: 2024-06-23T13:27:00.000Z
 uuid: 1c959294-27c9-430d-a8af-1c1313619aab
 titleslug: salade-de-tomates_1c959294-27c9-430d-a8af-1c1313619aab
 ---

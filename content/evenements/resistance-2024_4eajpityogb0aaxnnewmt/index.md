@@ -94,6 +94,8 @@ repas:
     date_service: 2024-07-07
     horaire: midi
     recettes_du_repas:
+      - recette: carottes-rapees_50ec884e-8a37-486c-af69-8af8825771ee
+        type_plat: entree
       - recette: soupe-froide-concombre-et-yaourt-vegan_1a490d80-a753-4438-9d9e-adf222789ee8
         type_plat: plat
         altAssiettes: 15
@@ -104,9 +106,6 @@ repas:
         type_plat: plat
       - recette: madeleines-sarrasin-sauge-noisette_c30b3c0d-66e7-4ec6-8904-438c125dbf57
         type_plat: plat
-      - recette: creme-dessert-aux-pralines-roses_5ea4220f-3a12-469e-b6ca-3637d70bcafa
-        type_plat: dessert
-        altAssiettes: 15
       - recette: tarte-aux-pralines-roses_3vfXekXA7T9bHjeXN2gGp
         type_plat: dessert
         altAssiettes: 200
@@ -154,6 +153,10 @@ repas:
     date_service: 2024-07-08
     horaire: soir
     recettes_du_repas:
+      - recette: vinaigrette_46d02590-8218-472c-b46a-c24e22671cb8
+        type_plat: entree
+      - recette: salade-de-tomates_1c959294-27c9-430d-a8af-1c1313619aab
+        type_plat: entree
       - recette: risotto-pruneaux-et-champignons-vegan_06149285-08ba-4079-853b-ddf7efb4216e
         type_plat: plat
         altAssiettes: 20
@@ -213,6 +216,9 @@ repas:
       - recette: tartinade-petits-pois-citrons-confits-menthe_408513bc-8492-41d3-a84f-25e101c31557
         type_plat: entree
         altAssiettes: 220
+      - recette: crumble-sale-epinards-vegan-sans-gluten_59d78eee-d277-451c-866f-3baf4fbb8701
+        type_plat: plat
+        altAssiettes: 20
       - recette: boreks-epinards-fromage_c218f5d8-3cd8-40b4-97a7-ca63b6b8fdd6
         type_plat: plat
         altAssiettes: 220

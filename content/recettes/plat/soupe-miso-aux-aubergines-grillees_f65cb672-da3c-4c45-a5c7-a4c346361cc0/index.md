@@ -47,11 +47,11 @@ ingredients:
     - title: Eau
       quantite: 52
       unit: litre
-  frais: []
-  lof:
+  frais:
     - title: Tofu ferme
       quantite: 4
       unit: Kg
+  lof: []
 materiel:
   - Marmitte
   - Gastro 1/1 (Normaux)

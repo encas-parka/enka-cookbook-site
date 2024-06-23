@@ -94,6 +94,8 @@ repas:
     date_service: 2024-07-07
     horaire: midi
     recettes_du_repas:
+      - recette: vinaigrette_46d02590-8218-472c-b46a-c24e22671cb8
+        type_plat: entree
       - recette: carottes-rapees_50ec884e-8a37-486c-af69-8af8825771ee
         type_plat: entree
       - recette: soupe-froide-concombre-et-yaourt-vegan_1a490d80-a753-4438-9d9e-adf222789ee8

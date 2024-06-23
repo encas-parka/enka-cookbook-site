@@ -1,6 +1,10 @@
 {
   "ingredients": [
     {
+      "pFrais": false,
+      "title": "Olives vertes denoyautées"
+    },
+    {
       "pFrais": true,
       "title": "Fruits divers"
     },

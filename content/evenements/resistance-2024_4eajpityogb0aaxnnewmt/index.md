@@ -204,6 +204,7 @@ repas:
     recettes_du_repas:
       - recette: vinaigrette_46d02590-8218-472c-b46a-c24e22671cb8
         type_plat: entree
+        altAssiettes: 220
       - recette: soupe-de-carottes-a-la-coriandre_c1d7ed59-a9f2-4048-97bb-9327d909ca70
         type_plat: entree
       - recette: salade-grecque-vegan_CRZL9OA7dN-LxWSQmuATR
@@ -211,8 +212,10 @@ repas:
         altAssiettes: 200
       - recette: tartinade-petits-pois-citrons-confits-menthe_408513bc-8492-41d3-a84f-25e101c31557
         type_plat: entree
+        altAssiettes: 220
       - recette: boreks-epinards-fromage_c218f5d8-3cd8-40b4-97a7-ca63b6b8fdd6
         type_plat: plat
+        altAssiettes: 220
       - recette: tarte-au-chocolat-sans-cuisson-vegan-et-sans-gluten_r5i76u3gd9u7ushsljzee
         type_plat: dessert
         altAssiettes: 20
@@ -225,16 +228,20 @@ repas:
     recettes_du_repas:
       - recette: salade-thai-aux-nouilles-de-riz_585b40cf-be30-4040-b6a5-8cb6538d3fc3
         type_plat: entree
+      - recette: proteines-de-soja-au-gout-insolite-version-vegan-du-poulet-guai-wei-ji_FKGpimr4G3NWorHKqU4FT
+        type_plat: plat
+        altAssiettes: 30
       - recette: pain-frit-chinois_z-S6ZqW3mshI1MKXtUXM4
         type_plat: plat
       - recette: bouillon-soto-version-vegane-du-bouillon-de-poulet-a-la-javanaise_evzmM_dHOO_gopjEw2Ikn
         type_plat: plat
-        altAssiettes: 20
+        altAssiettes: 30
       - recette: poulet-au-gout-insolite-guai-wei-ji_bhJWcigvQl4HmJEUJpayq
         type_plat: plat
         altAssiettes: 200
-      - recette: creme-caramel-saveur-coco-vegane_qdgcxjhajr3guolopunz7
+      - recette: creme-caramel-saveur-coco-vegane_QDGcxjHAjr3GuolOpUnZ7
         type_plat: dessert
+        altAssiettes: 220
   - assiettes: 240
     date_service: 2024-07-11
     horaire: midi
@@ -328,8 +335,17 @@ repas:
     date_service: 2024-07-13
     horaire: soir
     recettes_du_repas:
+      - recette: salade-de-pois-chiches-portugaise_X_Pzleo8_S9gTQHtSMi42
+        type_plat: entree
       - recette: pataniscas-de-legumes_fOmQFmcemfkJKuI8TA4zH
         type_plat: entree
+        altAssiettes: 320
+      - recette: chorizo-vegan_0a6331f0-7ee1-4d1d-8115-1d6125cf7bc9
+        type_plat: plat
+        altAssiettes: 330
+      - recette: pataniscas-de-legumes-vegan-sans-gluten_TLaR58u9DZszTdUt9I_72
+        type_plat: plat
+        altAssiettes: 40
       - recette: lanches-au-pesto-rosso-vegane-et-sans-gluten_d154c604-faba-49af-9837-5f377811bfd9
         type_plat: plat
         altAssiettes: 30
@@ -338,8 +354,10 @@ repas:
         altAssiettes: 330
       - recette: peixinhos-de-horta-tempura-dharicots-plats_B6rkGGu7iCn5AAz5kcWR-
         type_plat: plat
+        altAssiettes: 360
       - recette: creme-vegan-au-sureau_-anM5_qyLGXMKBPE03koO
         type_plat: dessert
+        altAssiettes: 360
       - recette: salami-au-chocolat-vegan-sans-gluten_axcmr1dv_vj6ul9owdr-g
         type_plat: dessert
         altAssiettes: 30

@@ -39,8 +39,10 @@ repas:
         altAssiettes: 125
       - recette: pomme-de-terre-herisson_d0160a6f-4bc4-411f-a336-dedf234c9608
         type_plat: plat
+        altAssiettes: 145
       - recette: steak-vege-champignons-aubergines-noix-avoine-haricots-rouges-version-amelioree_6068ae73-1984-4084-890f-17076c0afe8c
         type_plat: plat
+        altAssiettes: 145
       - recette: fondant-chataine_16668ef6-acf1-4352-81c3-fe8b85018b3a
         type_plat: dessert
         altAssiettes: 120
@@ -100,12 +102,14 @@ repas:
         type_plat: plat
         altAssiettes: 15
       - recette: soupe-froide-concombre-et-yaourt_34313587-e2ba-44db-ba37-274158e820a8
-        altAssiettes: 215
+        altAssiettes: 195
         type_plat: plat
       - recette: sauce-aux-cranberries_8fe89b41-b5eb-42a7-a96d-9c5dfd8f0040
         type_plat: plat
+        altAssiettes: 210
       - recette: madeleines-sarrasin-sauge-noisette_c30b3c0d-66e7-4ec6-8904-438c125dbf57
         type_plat: plat
+        altAssiettes: 210
       - recette: creme-dessert-aux-pralines-roses_5ea4220f-3a12-469e-b6ca-3637d70bcafa
         type_plat: dessert
         altAssiettes: 20
@@ -130,10 +134,10 @@ repas:
         altAssiettes: 30
       - recette: queijadas-de-feijao-vegan-et-sans-gluten_7cbc9f73-1952-4297-bead-7d2e9b75de01
         type_plat: dessert
-        altAssiettes: 25
+        altAssiettes: 20
       - recette: queijadas-de-feijao_f14d305c-214e-43b2-ae0d-27d474947248
         type_plat: dessert
-        altAssiettes: 205
+        altAssiettes: 200
   - assiettes: 220
     date_service: 2024-07-08
     horaire: midi
@@ -142,16 +146,15 @@ repas:
         type_plat: entree
       - recette: babka-vegane-harissa-et-pistache_dec7f984-509e-4ad7-a5a0-f1fe23b5c267
         type_plat: plat
-      - recette: babka-vegane-harissa-et-pistache_dec7f984-509e-4ad7-a5a0-f1fe23b5c267
-        type_plat: plat
       - recette: chorba-vegan-et-sans-gluten_gPSZ4cb1fbvP0pLUURjJG
         type_plat: plat
         altAssiettes: 40
       - recette: chorba-agneau-et-langue-doiseaux_ddae7623-7364-4507-b487-fafa23215553
         type_plat: plat
         altAssiettes: 180
-      - recette: salade-de-pasteque-melon-et-basilic_8snyzqx7c55k2xzfuhc_s
+      - recette: salade-de-pasteque-melon-et-basilic_8SNyZQX7C55K2xzFuhc_s
         type_plat: dessert
+        altAssiettes: 220
   - assiettes: 230
     date_service: 2024-07-08
     horaire: soir
@@ -171,12 +174,12 @@ repas:
         altAssiettes: 20
       - recette: farcous-aveyronnais_c9e2f843-bf62-4353-b7a0-33cf21e2487c
         type_plat: plat
-        altAssiettes: 190
+        altAssiettes: 210
       - recette: shortbread-huile-dolive-romarin-et-chocolat-sans-gluten_GyqMjgUQQ92dUjLGY1tzU
         type_plat: dessert
         altAssiettes: 15
       - recette: shortbread-huile-dolive-romarin-et-chocolat_EwzgWhsIMCKhBYP3nxJUz
-        altAssiettes: 235
+        altAssiettes: 215
         type_plat: dessert
   - assiettes: 240
     date_service: 2024-07-09
@@ -328,6 +331,9 @@ repas:
     date_service: 2024-07-13
     horaire: midi
     recettes_du_repas:
+      - recette: petits-paquets-aumonieres-courge-version-vegan-sans_alrhqjttx0kw8-uamd0kihydg3ea-rzgxtcn
+        type_plat: entree
+        altAssiettes: 20
       - recette: vinaigrette_46d02590-8218-472c-b46a-c24e22671cb8
         type_plat: entree
       - recette: tartinade-de-haricot-rouge-basilic_c80760ff-d6f1-4713-af1b-5e6bcd0824a6
@@ -338,6 +344,7 @@ repas:
         type_plat: entree
       - recette: petits-paquets-aumonieres-courge-feta_92fe8d91-486e-4122-9049-33ebd2995e77
         type_plat: plat
+        altAssiettes: 220
       - recette: gateau-de-polenta-aux-fruits_Wyl_QPM3Ez3jhu-ogTQKJ
         type_plat: dessert
   - assiettes: 360

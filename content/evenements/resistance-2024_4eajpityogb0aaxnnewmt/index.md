@@ -218,7 +218,7 @@ repas:
         type_plat: entree
       - recette: salade-grecque-vegan_CRZL9OA7dN-LxWSQmuATR
         type_plat: entree
-        altAssiettes: 200
+        altAssiettes: 220
       - recette: tartinade-petits-pois-citrons-confits-menthe_408513bc-8492-41d3-a84f-25e101c31557
         type_plat: entree
         altAssiettes: 220
@@ -227,7 +227,7 @@ repas:
         altAssiettes: 20
       - recette: boreks-epinards-fromage_c218f5d8-3cd8-40b4-97a7-ca63b6b8fdd6
         type_plat: plat
-        altAssiettes: 220
+        altAssiettes: 200
       - recette: tarte-au-chocolat-sans-cuisson-vegan-et-sans-gluten_r5i76u3gd9u7ushsljzee
         type_plat: dessert
         altAssiettes: 20
@@ -242,15 +242,16 @@ repas:
         type_plat: entree
       - recette: proteines-de-soja-au-gout-insolite-version-vegan-du-poulet-guai-wei-ji_FKGpimr4G3NWorHKqU4FT
         type_plat: plat
-        altAssiettes: 30
+        altAssiettes: 40
       - recette: pain-frit-chinois_z-S6ZqW3mshI1MKXtUXM4
         type_plat: plat
+        altAssiettes: 220
       - recette: bouillon-soto-version-vegane-du-bouillon-de-poulet-a-la-javanaise_evzmM_dHOO_gopjEw2Ikn
         type_plat: plat
-        altAssiettes: 30
+        altAssiettes: 40
       - recette: poulet-au-gout-insolite-guai-wei-ji_bhJWcigvQl4HmJEUJpayq
         type_plat: plat
-        altAssiettes: 200
+        altAssiettes: 180
       - recette: creme-caramel-saveur-coco-vegane_QDGcxjHAjr3GuolOpUnZ7
         type_plat: dessert
         altAssiettes: 220
@@ -282,8 +283,10 @@ repas:
         altAssiettes: 225
       - recette: concombre-marines-au-gingembre_6aa1a283-f3d0-413c-9e05-9999d6176ffe
         type_plat: entree
+        altAssiettes: 240
       - recette: caviar-d-aubergines-fumees_eb7d1293-22b9-4893-86fd-d48f100baac6
         type_plat: entree
+        altAssiettes: 240
       - recette: keshke-vegan-et-sans-gluten_d16fc284-edec-4158-9a5a-2af89434f737
         type_plat: plat
         altAssiettes: 20
@@ -292,6 +295,7 @@ repas:
         altAssiettes: 220
       - recette: beignet-de-banane-et-caramel-de-miso_ec27e5a4-9e47-4b6e-b932-3387866e6de7
         type_plat: dessert
+        altAssiettes: 240
   - assiettes: 240
     date_service: 2024-07-12
     horaire: midi
@@ -305,16 +309,20 @@ repas:
         altAssiettes: 225
       - recette: beignets-petits-pois-zaatar-et-sa-creme-au-sumac_72b7cd7f-5671-438d-a942-2d78f3c9d90d
         type_plat: plat
+        altAssiettes: 240
       - recette: aubergines-grillees-cacao-ail-noir-et-piment_7b2688ac-6360-43b8-8083-635b1cc56257
         type_plat: plat
-      - recette: salade-de-peche-a-la-menthe_5fpubovnh-aq876nokapz
+        altAssiettes: 240
+      - recette: salade-de-peche-a-la-menthe_5FPUbOvnH-aQ876nOkAPz
         type_plat: dessert
+        altAssiettes: 240
   - assiettes: 250
     date_service: 2024-07-12
     horaire: soir
     recettes_du_repas:
       - recette: tom-kha-soupe-thai_d4113d67-3b5e-49a1-b9aa-39bec1a14276
         type_plat: entree
+        altAssiettes: 250
       - recette: pao-sin-queijo-version-vegane_zbwpz8vT7WjS1nimmXelc
         type_plat: plat
         altAssiettes: 20
@@ -336,17 +344,22 @@ repas:
         altAssiettes: 20
       - recette: vinaigrette_46d02590-8218-472c-b46a-c24e22671cb8
         type_plat: entree
+        altAssiettes: 240
       - recette: tartinade-de-haricot-rouge-basilic_c80760ff-d6f1-4713-af1b-5e6bcd0824a6
         type_plat: entree
+        altAssiettes: 240
       - recette: salade-de-courgettes-a-la-menthe_ed6e8b2c-0afd-48bf-8c14-fb5853132bf3
         type_plat: entree
+        altAssiettes: 240
       - recette: salade-verte_uAx-TXysQyWoqSV-BBaut
         type_plat: entree
+        altAssiettes: 220
       - recette: petits-paquets-aumonieres-courge-feta_92fe8d91-486e-4122-9049-33ebd2995e77
         type_plat: plat
         altAssiettes: 220
       - recette: gateau-de-polenta-aux-fruits_Wyl_QPM3Ez3jhu-ogTQKJ
         type_plat: dessert
+        altAssiettes: 220
   - assiettes: 360
     date_service: 2024-07-13
     horaire: soir

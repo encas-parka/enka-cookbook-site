@@ -24,7 +24,7 @@ ingredients:
       title: Olives noires à la grecque
       unit: grammes
   lof:
-    - quantite: 4
+    - quantite: 2
       title: huile d'olive
       unit: c. à soupe
 materiel:

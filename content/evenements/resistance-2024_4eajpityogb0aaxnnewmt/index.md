@@ -339,9 +339,10 @@ repas:
     date_service: 2024-07-13
     horaire: midi
     recettes_du_repas:
-      - recette: petits-paquets-aumonieres-courge-version-vegan-sans_alrhqjttx0kw8-uamd0kihydg3ea-rzgxtcn
+      - recette: aumonieres-courge-vegan-sans-gluten_cgetggpoug8gugx_wfliuc5wrvohligkgefx
         type_plat: entree
         altAssiettes: 20
+        chef: marion
       - recette: vinaigrette_46d02590-8218-472c-b46a-c24e22671cb8
         type_plat: entree
         altAssiettes: 240

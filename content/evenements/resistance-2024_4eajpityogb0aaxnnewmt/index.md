@@ -23,7 +23,7 @@ repas:
         altAssiettes: 80
       - recette: creme-de-riz-libanaise-mouhalabieh_SuAttjf0ISHDBkBk3O7-x
         type_plat: dessert
-        altAssiettes: 110
+        altAssiettes: 100
   - assiettes: 145
     date_service: 2024-07-05
     horaire: soir
@@ -75,8 +75,6 @@ repas:
     date_service: 2024-07-06
     horaire: soir
     recettes_du_repas:
-      - recette: salade-de-pasteque-melon-et-basilic_8SNyZQX7C55K2xzFuhc_s
-        type_plat: entree
       - recette: muhamarra_2422a147-5117-4eaa-b024-e9c9c3785c38
         type_plat: entree
       - recette: beignets-de-legume-style-pakora_a23fde4e-8c2f-483a-a445-1ae1e9652c71
@@ -108,6 +106,9 @@ repas:
         type_plat: plat
       - recette: madeleines-sarrasin-sauge-noisette_c30b3c0d-66e7-4ec6-8904-438c125dbf57
         type_plat: plat
+      - recette: creme-dessert-aux-pralines-roses_5ea4220f-3a12-469e-b6ca-3637d70bcafa
+        type_plat: dessert
+        altAssiettes: 20
       - recette: tarte-aux-pralines-roses_3vfXekXA7T9bHjeXN2gGp
         type_plat: dessert
         altAssiettes: 200
@@ -123,10 +124,10 @@ repas:
         type_plat: plat
       - recette: morue-a-la-gomes-de-sa-bacalhau-a-gomes-de-sa_ddf1711e-ecf5-443b-881a-4b949d2b74fb
         type_plat: plat
-        altAssiettes: 205
+        altAssiettes: 190
       - recette: morue-a-la-gomes-de-sa-bacalhau-a-gomes-de-sa-vegan_6qsm8aO5a71ezV_rLsZsu
         type_plat: plat
-        altAssiettes: 15
+        altAssiettes: 30
       - recette: queijadas-de-feijao-vegan-et-sans-gluten_7cbc9f73-1952-4297-bead-7d2e9b75de01
         type_plat: dessert
         altAssiettes: 25
@@ -145,10 +146,10 @@ repas:
         type_plat: plat
       - recette: chorba-vegan-et-sans-gluten_gPSZ4cb1fbvP0pLUURjJG
         type_plat: plat
-        altAssiettes: 25
+        altAssiettes: 40
       - recette: chorba-agneau-et-langue-doiseaux_ddae7623-7364-4507-b487-fafa23215553
         type_plat: plat
-        altAssiettes: 195
+        altAssiettes: 180
       - recette: salade-de-pasteque-melon-et-basilic_8snyzqx7c55k2xzfuhc_s
         type_plat: dessert
   - assiettes: 230

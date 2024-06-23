@@ -370,6 +370,9 @@ repas:
       - recette: pataniscas-de-legumes_fOmQFmcemfkJKuI8TA4zH
         type_plat: entree
         altAssiettes: 320
+      - recette: pimientos-de-padron-poivron-vert-a-lhuile_u3vFCTQxPfkCDxQUtXqCU
+        type_plat: plat
+        altAssiettes: 360
       - recette: chorizo-vegan_0a6331f0-7ee1-4d1d-8115-1d6125cf7bc9
         type_plat: plat
         altAssiettes: 330

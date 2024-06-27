@@ -94,6 +94,8 @@ repas:
     date_service: 2024-07-07
     horaire: midi
     recettes_du_repas:
+      - recette: tartinade-de-pois-casses-et-beurre-de-cacahouete_efec8ce1-d35d-418c-af9a-df8af2fc9839
+        type_plat: entree
       - recette: vinaigrette_46d02590-8218-472c-b46a-c24e22671cb8
         type_plat: entree
       - recette: carottes-rapees_50ec884e-8a37-486c-af69-8af8825771ee

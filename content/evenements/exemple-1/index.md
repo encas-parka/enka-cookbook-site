@@ -6,12 +6,12 @@ repas:
     date_service: 2024-01-10
     horaire: soir
     recettes_du_repas:
-      - recette: pastilla-vegan-a-l-aubergine_ePtcV7oojRlr8b0omRDA8
-        type_plat: plat
       - recette: burger-vege-lentilles-patates-douces_bb31d2dd-96bb-440e-82e4-8e9cb7725b99
         type_plat: entree
         altAssiettes: 3499
         chef: tttest
+      - recette: pastilla-vegan-a-laubergine_ePtcV7oojRlr8b0omRDA8
+        type_plat: plat
       - recette: aubergines-grillees-au-miso_0d3a8f30-a051-4250-9be6-e40fc37fdb6d
         type_plat: plat
   - assiettes: 45

@@ -694,6 +694,13 @@ collections:
               "Contient un caractère spécial interdit. Ne peut contenir que des lettres, des chiffres, des parenthèses ou des tirets (-), virgules et apostrophes.",
             ],
         }
+      - label: 'Outputs'
+        name: 'outputs'
+        widget: 'hidden'
+        default: 
+          - HTML
+          - Poster
+          - Ingredients
 
       - { name: "sitemap_exclude", widget: "hidden", default: "true" }
 

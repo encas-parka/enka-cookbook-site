@@ -1,6 +1,10 @@
 ---
 title: Resistance 2024
 sitemap_exclude: "true"
+outputs: 
+  - HTML 
+  - Poster 
+  - Ingredients
 repas:
   - assiettes: 100
     date_service: 2024-07-05

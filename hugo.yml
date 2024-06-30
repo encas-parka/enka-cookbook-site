@@ -33,6 +33,20 @@ mediaTypes:
       - ""
     delimiter: ""
 outputFormats:
+  Poster:
+    mediaType: "text/html"
+    baseName: "poster/index"
+    isHTML: true
+    permalinkable: true
+
+    
+  Ingredients:
+    mediaType: "text/html"
+    baseName: "ingredients/index"
+    isHTML: true
+    permalinkable: true
+
+
   JSON:
     mediaType: application/json
     baseName: index

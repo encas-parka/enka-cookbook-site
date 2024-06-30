@@ -12,7 +12,12 @@ if (currentUrl.startsWith("https://enka-cookbook.netlify.app")) {
 }
 </script>
 <header>
-
+  {{/*  ::: import svg icon  */}}
+  {{/*  TODO : importer sprite svg comme ressource externe pour mise en cache  */}}
+  {{ $sprite := resources.Get "fonticons/sprite-icons.svg" }}
+  {{ if $sprite }}
+    <div style="height: 50px;">{{ $sprite.Content | safeHTML }}</div>
+  {{ end }}
   <div>
 
     <nav class="navbar navbar-dark bg-dark navbar-expand-lg no-print p-0 fixed-top">
@@ -36,9 +41,9 @@ if (currentUrl.startsWith("https://enka-cookbook.netlify.app")) {
               <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                 {{ range (.Site.GetPage "section" "recettes").Pages}}
                 <li><a class="dropdown-item" href="{{.RelPermalink}}">
-                    {{ $svg := (printf "fonticons/%s.svg" .Title) | lower}}
-                    <span class="float-start me-2">{{ partial "inline-svg" (dict "src" $svg "display" "inline-middle"
-                      "rem" 2) . }}</span> {{.Title}}</a></li>
+                  {{ $svg := (print .Title | lower )}}
+                  {{ partial "components/icon-svg" (dict "name" $svg "size" "1.5rem") }}
+                  {{.Title}}</a></li>
                 {{ end }}
               </ul>
             </li>
@@ -56,17 +61,20 @@ if (currentUrl.startsWith("https://enka-cookbook.netlify.app")) {
                       <ul class="multi-column-dropdown overflow-auto">
                         <li>
                           <a class="dropdown-item" href="{{.RelPermalink}}">
-                            {{ $svg := (printf "fonticons/%s.svg" .Title) | lower}}
-                            {{ if resources.Get (printf "fonticons/%s.svg" (.Title | lower) ) }}
-                            <span class="float-start me-2">{{ partial "inline-svg" (dict "src" $svg "display"
-                              "inline-middle" "rem" 3)
-                              . }}</span>
-                            {{ else }}
-                            <span class="float-start me-2">{{ partial "inline-svg" (dict "src" "fonticons/no-cat.svg"
-                              "display"
-                              "inline-middle" "rem" 3) . }}</span>
-                            {{ end }}
-                            {{.Title}}
+                          {{/*  USELESS  */}}
+                          {{/*  {{ $svg := (printf "fonticons/%s.svg" .Title) | lower}}
+                          {{ if resources.Get (printf "fonticons/%s.svg" (.Title | lower) ) }}
+                          <span class="float-start me-2">{{ partial "inline-svg" (dict "src" $svg "display"
+                            "inline-middle" "rem" 3)
+                            . }}</span>
+                          {{ else }}
+                          <span class="float-start me-2">{{ partial "inline-svg" (dict "src" "fonticons/no-cat.svg"
+                            "display"
+                            "inline-middle" "rem" 3) . }}</span>
+                          {{ end }}  */}}
+
+                          {{ partial "components/icon-svg" (dict "name" .Title "size" "1.5rem") }}
+                          {{.Title}}
                           </a>
                         </li>
                       </ul>
@@ -83,10 +91,10 @@ if (currentUrl.startsWith("https://enka-cookbook.netlify.app")) {
               </a>
               <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                 {{ range (.Site.GetPage "section" "regime").Pages}}
-                <li><a class="dropdown-item" href="{{.RelPermalink}}"> {{ $svg := (printf "fonticons/%s.svg" .Title) |
-                    lower}}
-                    <span class="float-start me-2">{{ partial "inline-svg" (dict "src" $svg "display" "inline" "rem" 3)
-                      . }}</span> {{.Title}}</a></li>
+                <li><a class="dropdown-item" href="{{.RelPermalink}}"> 
+                  {{ $svg := (print .Title | lower )}}
+                  {{ partial "components/icon-svg" (dict "name" $svg "size" "2rem") }}
+                  {{.Title}}</a></li>
                 {{ end }}
               </ul>
             </li>
@@ -133,15 +141,13 @@ if (currentUrl.startsWith("https://enka-cookbook.netlify.app")) {
 
   {{/* Barre secondaire de navigation pour les pages 'evenements'. Utilise alpinejs pour vérifier la taille de l'ecran,
   et adapter les boutons en conséquence. → deplacé vers evenement */}}
-  {{ if eq .Type "evenements" }}
 
-  {{end}}
 </header>
 
-{{ if not .IsHome }}
-<div class="navbar mx-lg-4">{{ partial "components/breadcrumb.html" . }}</div>
+{{/*  {{ if not .IsHome }}
+<div class="mx-lg-4 top4">{{ partial "components/breadcrumb.html" . }}</div>
 
-{{ end }}
+{{ end }}  */}}
 
 
 

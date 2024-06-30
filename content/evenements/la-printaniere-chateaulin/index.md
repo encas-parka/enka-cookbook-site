@@ -1,6 +1,10 @@
 ---
 title: La printanière - Chateaulin
 sitemap_exclude: "true"
+outputs: 
+  - HTML 
+  - Poster 
+  - Ingredients
 repas:
   - assiettes: 50
     date_service: 2024-03-20

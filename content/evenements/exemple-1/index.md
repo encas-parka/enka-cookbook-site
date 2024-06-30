@@ -1,6 +1,10 @@
 ---
 title: Exemple 1-fs
 sitemap_exclude: "true"
+outputs: 
+  - HTML 
+  - Poster 
+  - Ingredients
 repas:
   - assiettes: 950
     date_service: 2024-01-10

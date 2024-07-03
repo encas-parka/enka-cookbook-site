@@ -1,7 +1,5 @@
 ---
-uuid: bfacf0ee-3cbc-4526-9ea6-2c5d91a0d078
 title: Zaalouk (caviar d'aubergines)
-titleslug: zaalouk-caviar-d-aubergines_bfacf0ee-3cbc-4526-9ea6-2c5d91a0d078
 draft: false
 layout: recettes
 type: entree
@@ -40,11 +38,11 @@ ingredients:
       unit: litre
   epices:
     - title: Paprika
-      quantite: 12
-      unit: c. à café
+      quantite: 40
+      unit: grammes
     - title: Cumin moulu
-      quantite: 12
-      unit: c. à café
+      quantite: 40
+      unit: grammes
 preparation: >-
   * Ebouillanter les tomates pour les éplucher plus facilement
 
@@ -60,4 +58,6 @@ preparation: >-
 
   * Ajouter le persil et la coriandre hachés
 publishDate: 2024-05-20T14:06:00.000Z
+uuid: bfacf0ee-3cbc-4526-9ea6-2c5d91a0d078
+titleslug: zaalouk-caviar-d-aubergines_bfacf0ee-3cbc-4526-9ea6-2c5d91a0d078
 ---

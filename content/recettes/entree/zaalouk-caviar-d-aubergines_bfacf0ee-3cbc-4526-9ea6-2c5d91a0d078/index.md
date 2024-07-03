@@ -56,7 +56,7 @@ preparation: >-
 
   * Verser le jus des citrons
 
-  * Ajouter le persil et la coriandre hachés
+  * Saler, poivrer. Ajouter le persil et la coriandre hachés
 publishDate: 2024-05-20T14:06:00.000Z
 uuid: bfacf0ee-3cbc-4526-9ea6-2c5d91a0d078
 titleslug: zaalouk-caviar-d-aubergines_bfacf0ee-3cbc-4526-9ea6-2c5d91a0d078

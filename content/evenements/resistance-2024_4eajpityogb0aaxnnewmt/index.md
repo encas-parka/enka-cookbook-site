@@ -1,10 +1,10 @@
 ---
 title: Resistance 2024
-sitemap_exclude: "true"
-outputs: 
-  - HTML 
-  - Poster 
+outputs:
+  - HTML
+  - Poster
   - Ingredients
+sitemap_exclude: "true"
 repas:
   - assiettes: 100
     date_service: 2024-07-05
@@ -104,6 +104,9 @@ repas:
         type_plat: entree
       - recette: carottes-rapees_50ec884e-8a37-486c-af69-8af8825771ee
         type_plat: entree
+      - recette: madeleines-sarrasin-sauge-noisette_c30b3c0d-66e7-4ec6-8904-438c125dbf57
+        type_plat: entree
+        altAssiettes: 210
       - recette: soupe-froide-concombre-et-yaourt-vegan_1a490d80-a753-4438-9d9e-adf222789ee8
         type_plat: plat
         altAssiettes: 15
@@ -111,9 +114,6 @@ repas:
         altAssiettes: 195
         type_plat: plat
       - recette: sauce-aux-cranberries_8fe89b41-b5eb-42a7-a96d-9c5dfd8f0040
-        type_plat: plat
-        altAssiettes: 210
-      - recette: madeleines-sarrasin-sauge-noisette_c30b3c0d-66e7-4ec6-8904-438c125dbf57
         type_plat: plat
         altAssiettes: 210
       - recette: creme-dessert-aux-pralines-roses_5ea4220f-3a12-469e-b6ca-3637d70bcafa
@@ -131,7 +131,7 @@ repas:
       - recette: salade-verte_uAx-TXysQyWoqSV-BBaut
         type_plat: entree
       - recette: tomate-crue-farcie_48d1a6f7-8e6c-4dac-857e-653c9b426cd7
-        type_plat: plat
+        type_plat: entree
       - recette: morue-a-la-gomes-de-sa-bacalhau-a-gomes-de-sa_ddf1711e-ecf5-443b-881a-4b949d2b74fb
         type_plat: plat
         altAssiettes: 190
@@ -151,7 +151,7 @@ repas:
       - recette: zaalouk-caviar-d-aubergines_bfacf0ee-3cbc-4526-9ea6-2c5d91a0d078
         type_plat: entree
       - recette: babka-vegane-harissa-et-pistache_dec7f984-509e-4ad7-a5a0-f1fe23b5c267
-        type_plat: plat
+        type_plat: entree
       - recette: chorba-vegan-et-sans-gluten_gPSZ4cb1fbvP0pLUURjJG
         type_plat: plat
         altAssiettes: 40
@@ -281,12 +281,6 @@ repas:
     date_service: 2024-07-11
     horaire: soir
     recettes_du_repas:
-      - recette: faux-baklawa-pois-chiche-vegan_5NcWGHwnEPurB6DhYHDA6
-        type_plat: entree
-        altAssiettes: 15
-      - recette: baklawa-pois-chiche-feta_Jtj62Si5RXReBze30kBCK
-        type_plat: entree
-        altAssiettes: 225
       - recette: concombre-marines-au-gingembre_6aa1a283-f3d0-413c-9e05-9999d6176ffe
         type_plat: entree
         altAssiettes: 240
@@ -294,11 +288,17 @@ repas:
         type_plat: entree
         altAssiettes: 240
       - recette: keshke-vegan-et-sans-gluten_d16fc284-edec-4158-9a5a-2af89434f737
-        type_plat: plat
+        type_plat: entree
         altAssiettes: 20
       - recette: keshke_963bc23a-4176-4b5f-863c-a2f2c26336d9
-        type_plat: plat
+        type_plat: entree
         altAssiettes: 220
+      - recette: faux-baklawa-pois-chiche-vegan_5NcWGHwnEPurB6DhYHDA6
+        type_plat: plat
+        altAssiettes: 15
+      - recette: baklawa-pois-chiche-feta_Jtj62Si5RXReBze30kBCK
+        type_plat: plat
+        altAssiettes: 225
       - recette: beignet-de-banane-et-caramel-de-miso_ec27e5a4-9e47-4b6e-b932-3387866e6de7
         type_plat: dessert
         altAssiettes: 240
@@ -345,10 +345,6 @@ repas:
     date_service: 2024-07-13
     horaire: midi
     recettes_du_repas:
-      - recette: aumonieres-courge-vegan-sans-gluten_cgetggpoug8gugx_wfliuc5wrvohligkgefx
-        type_plat: entree
-        altAssiettes: 20
-        chef: marion
       - recette: vinaigrette_46d02590-8218-472c-b46a-c24e22671cb8
         type_plat: entree
         altAssiettes: 240
@@ -361,6 +357,10 @@ repas:
       - recette: salade-verte_uAx-TXysQyWoqSV-BBaut
         type_plat: entree
         altAssiettes: 220
+      - recette: aumonieres-courge-vegan-sans-gluten_cgetggpoug8gugx_wfliuc5wrvohligkgefx
+        type_plat: plat
+        altAssiettes: 20
+        chef: marion
       - recette: petits-paquets-aumonieres-courge-feta_92fe8d91-486e-4122-9049-33ebd2995e77
         type_plat: plat
         altAssiettes: 220

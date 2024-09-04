@@ -211,7 +211,7 @@ preparation24h: >-
   **OEUF AJITAMA** :
 
 
-  Mélanger l’eau, la sauce soja sans gluten et le sucre.
+  Mélanger l’eau, la sauce soja (sans gluten) et le sucre.
 
 
   Faire bouillir quelques secondes et bien mélanger.

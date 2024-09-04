@@ -160,16 +160,31 @@ preparation: >-
   ENFIN seulement ajouter le taré.
 
 
+  Replonger les champignons et autres légumes cuits auparavant.
+
+
   **LEGUMES** :
 
 
-  Couper en tranche les demi tomates
+  Couper en tranche les demi tomates.
+
+
+  Tailler les cébettes, le vert en 0.5cm, le blanc à émincer finement. 
 
 
   **NOUILLES** :
 
 
   Cuire les nouilles selon instructions. A la sortie de cuisson, les rincer à l'eau afin qu'elles collent moins. Ne pas hésiter à les rincer à nouveau avant d'être servies. Il ne faut pas qu'elles collent.
+
+
+  **MONTAGE D'UN BOL** :
+
+
+  Déposer les nouilles dans le bol et les mélanger avec une grosse louche de bouillon + la cuillère d’huile de sésame. Relever les nouilles et les replacer au centre du bouillon.
+
+
+  Déposer les accompagnements (tranches de tomates, oeuf ajitama coupé en deux, cébettes, les carré d'algue nori sur le coté comme un jeu de cartes), saupoudrer la poudre de citron yuzu, enfin racler une cuillère de miso sur le bord du bol !!! YUMMI YUMMI !!
 preparation24h: >-
   **LE DASHI** :
 

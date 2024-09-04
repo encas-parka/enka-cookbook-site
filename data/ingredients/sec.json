@@ -1,6 +1,12 @@
 {
   "ingredients": [
     {
+      "title": "Nouilles de blé ondulées Ramen",
+      "alergenesIng": [
+        "Gluten"
+      ]
+    },
+    {
       "title": "Flocons d'avoine sans gluten"
     },
     {

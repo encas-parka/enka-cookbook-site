@@ -223,10 +223,13 @@ preparation24h: >-
   Faire bouillir une casserole d’eau avec quelques cuillères à soupe de vinaigre. Ajouter les œufs (qui sortent du frigo) et les cuire 6 minutes.
 
 
-  Tremper les œufs dans un bol d’eau glacée pour stopper la cuisson. Les laisser bien bien refroidir puis les peler.
+  Tremper les œufs dans un bol d’eau glacée pour stopper la cuisson. Les laisser bien bien refroidir puis les peler. Plus ils seront froids, plus sera facile l'écaillage.
 
 
   Dans des sacs congélation verser la marinade et y déposer les œufs. Laisser mariner 12 à 24 h en retournant les sachets délicatement de temps en temps.
+
+
+  La marinade pourra être reversée dans la bouillon s'il n'est pas destiné à être végan.
 astuces:
   - astuce: A la place de la Sauce Soja, j'ai proposé de la Sauce Tamari pour les
       histoires de gluten. A la place du Mirin, j'ai proposé  du Vinaigre de Riz

@@ -220,7 +220,7 @@ preparation24h: >-
   (Si l'on souhaite, ajouter 1-2 c.à.s de katsuobushi puis retirer du feu et laisser redescendre à température ambiante.)
 
 
-  Faire bouillir une casserole d’eau avec quelques cuillères à soupe de vinaigre. Ajouter les œufs (qui sortent du frigo) et les cuire 6 minutes 30 secondes.
+  Faire bouillir une casserole d’eau avec quelques cuillères à soupe de vinaigre. Ajouter les œufs (qui sortent du frigo) et les cuire 6 minutes.
 
 
   Tremper les œufs dans un bol d’eau glacée pour stopper la cuisson. Les laisser bien bien refroidir puis les peler.

@@ -2,6 +2,10 @@
   "ingredients": [
     {
       "pFrais": false,
+      "title": "Algue Nori"
+    },
+    {
+      "pFrais": false,
       "title": "Olives vertes denoyautées"
     },
     {

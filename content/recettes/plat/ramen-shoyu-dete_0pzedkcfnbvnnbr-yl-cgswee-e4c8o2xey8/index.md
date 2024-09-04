@@ -19,6 +19,17 @@ check: Oui
 checkAlwaysOk: false
 ingredients:
   legumes:
+    - title: Zestes de citron séchés
+      unit: grammes
+      quantite: 10
+      commentaire: ou yuzu. Mixé très fin
+    - title: Algue Nori
+      quantite: 45
+      unit: grammes
+      commentaire: coupées en languettes. 16/feuilles
+    - title: Cébette - Ciboule - Cive - Oignon vert
+      quantite: 1.5
+      unit: Kg
     - title: Epinard
       quantite: 2
       unit: Kg
@@ -75,6 +86,10 @@ ingredients:
       unit: litre
       commentaire: Dashi
   epices:
+    - title: Miso blanc
+      quantite: 400
+      unit: grammes
+      commentaire: 4gr à racler sur le bords du bol
     - title: Tamari (sauce)
       quantite: 150
       unit: ml
@@ -114,8 +129,93 @@ ingredients:
     - title: Oeuf
       quantite: 105
       unit: unité
-  sec: []
-preparation: ff
+  sec:
+    - title: Nouilles de riz
+      quantite: 2.5
+      unit: grammes
+      commentaire: pour les sans gluten
+    - title: Nouilles de blé ondulées Ramen
+      quantite: 7
+      unit: Kg
+preparation: >-
+  Récupérer les shiitakés du dashi, les essorer à la main et les trancher assez
+  finement.
+
+
+  Récuperer dans le taré les gingembre, ail et shiitakés et les émincer finement. Séparer les champignons du mélange gingembre et ail.
+
+
+  **Le BOUILLON FINAL** :
+
+
+  Émincer les oignons, les faire revenir dans les gamelles de la soupe, déglacer à la sauce soja (sans gluten) puis légèrement caraméliser avec du sucre.
+
+
+  Ajouter les champignons de Paris et shiitakés coupés en  fines lamelles, puis l’ail et le gingembre hachés + ceux des taré et dashi.
+
+
+  Verser tout le dashi préparé la veille et le faire chauffer à feu très doux. Avant l’ébullition (vers 80°C). Laisser cuire à feu doux encore 1 à 2h à découvert.
+
+
+  ENFIN seulement ajouter le taré.
+
+
+  **LEGUMES** :
+
+
+  Couper en tranche les demi tomates
+
+
+  **NOUILLES** :
+
+
+  Cuire les nouilles selon instructions. A la sortie de cuisson, les rincer à l'eau afin qu'elles collent moins. Ne pas hésiter à les rincer à nouveau avant d'être servies. Il ne faut pas qu'elles collent.
+preparation24h: >-
+  **LE DASHI** :
+
+
+  Le dashi est un bouillon japonais qui est la base de nombreux plats et est indispensable pour donner à vos plats ce goût japonais authentique.
+
+
+  Dans un récipient avec couvercle, mélanger dans l’eau froide les shitaké et le kombu. Laisser reposer au moins 4h, de préférence 12 à 24h.
+
+
+  Il sera ensuite ajouté au bouillon.
+
+
+  **LE TARE** (sauce) :
+
+
+  Couper des tranches de gingembre (ce n’est pas nécessaire de le peler s'il est bio). Dans une casserole, ajouter tous les ingrédients du taré et mélanger.
+
+
+  Faire chauffer à feu très doux (le minimum), dès l’apparition des premières petite bulles signe d’un début d’ébullition.
+
+   Laisser mariner à température ambiante jusqu’au lendemain.
+
+  **OEUF AJITAMA** :
+
+
+  Mélanger l’eau, la sauce soja sans gluten et le sucre.
+
+
+  Faire bouillir quelques secondes et bien mélanger.
+
+
+  (Si l'on souhaite, ajouter 1-2 cs de katsuobushi puis retirer du feux et laisser redescendre à température ambiante.)
+
+
+  Faire bouillir une casserole d’eau avec quelques cuillères à soupe de vinaigre. Ajouter les œufs (qui sortent du frigo) et les cuire 6 minutes 30 secondes.
+
+
+  Tremper les œufs dans un bol d’eau glacée pour stopper la cuisson. Les laisser bien bien refroidir puis les peler.
+
+
+  Dans des sacs congélation verser la marinade et y déposer les œufs. Laisser mariner 12 à 24 h en retournant les sachets délicatement de temps en temps.
+astuces:
+  - astuce: A la place de la Sauce Soja, j'ai proposé de la Sauce Tamari pour les
+      histoires de gluten. A la place du Mirin, j'ai proposé  du Vinaigre de Riz
+      + Sucre dans le Taré pour les histoires d'alcool.
 publishDate: 2024-09-04T21:09:00.000Z
 uuid: 0pzedkcfnbvnnbr-yl-cgswee-e4c8o2xey8
 titleslug: ramen-shoyu-d-ete_0pzedkcfnbvnnbr-yl-cgswee-e4c8o2xey8

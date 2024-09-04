@@ -184,7 +184,7 @@ preparation: >-
   Déposer les nouilles dans le bol et les mélanger avec une grosse louche de bouillon + la cuillère d’huile de sésame. Relever les nouilles et les replacer au centre du bouillon.
 
 
-  Déposer les accompagnements (tranches de tomates, oeuf ajitama coupé en deux, cébettes, les carré d'algue nori sur le coté comme un jeu de cartes), saupoudrer la poudre de citron yuzu, enfin racler une cuillère de miso sur le bord du bol !!! YUMMI YUMMI !!
+  Déposer les accompagnements (tranches de tomates, oeuf ajitama coupé en deux, cube de tofu, cébettes, les carré d'algue nori sur le coté comme un jeu de cartes), saupoudrer la poudre de citron yuzu, enfin racler une cuillère de miso sur le bord du bol !!! YUMMI YUMMI !!
 preparation24h: >-
   **LE DASHI** :
 

@@ -1,6 +1,10 @@
 {
   "ingredients": [
     {
+      "pFrais": true,
+      "title": "Radis noir"
+    },
+    {
       "pFrais": false,
       "title": "Zestes de citron séchés"
     },

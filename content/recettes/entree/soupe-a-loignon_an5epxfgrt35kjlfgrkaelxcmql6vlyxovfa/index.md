@@ -51,6 +51,9 @@ ingredients:
       quantite: 8
       unit: unité
   autres:
+    - title: Eau
+      quantite: 20
+      unit: litre
     - title: Pain au levain
       quantite: 2.3
       unit: Kg
@@ -61,7 +64,29 @@ ingredients:
     - title: Vin blanc
       quantite: 1.5
       unit: litre
-preparation: li
+preparation: >-
+  Mettre les oignons émincés et le beurre dans une casserole. Faire fondre.
+
+  Ajouter l’ail, le thym, le romarin puis laisser caraméliser.
+
+  Lorsque les sucs collent le fond de la casserole, déglacer avec du vin blanc.
+
+  Verser le bouillon et le laurier. Laisser mijoter 2h.
+
+  Sortir du feu. Ajouter le madère.
+
+
+
+  Déposer le pain (le couper en morceaux si besoin) puis le fromage.
+
+  Gratiner au four pendant 10 minutes environ.
+
+
+  réchauffer le four à 220°C.
+
+  Toaster le pain au levain et le frotter avec une demi-gousse d’ail.
+
+  Râper grossièrement le comté, le beaufort et le gruyère : quantités et proportions selon votre goût.
 publishDate: 2025-01-05T20:23:00.000Z
 uuid: an5epxfgrt35kjlfgrkaelxcmql6vlyxovfa
 titleslug: soupe-a-l-oignon_an5epxfgrt35kjlfgrkaelxcmql6vlyxovfa

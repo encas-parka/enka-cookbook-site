@@ -39,6 +39,7 @@ ingredients:
     - quantite: 3
       title: Speculoos
       unit: Kg
+  epices: []
 materiel:
   - Gastro 1/1 (Normaux)
   - Frigo
@@ -95,7 +96,7 @@ preparation24h: >-
   Ouvrir toutes les boites de conserve, vers dans un gastro et mixer au plongeur pour assouplir la confiture.
 prepAlt:
   - recetteAlt: banoffee-vegan-et-sans-gluten_515c37b9-dbc9-4601-b602-251a8a55fae3
-publishDate: 2024-05-18 16:26:00+00:00
+publishDate: 2024-05-17T18:26:00.000Z
 uuid: 265a4348-8c2b-4966-bd57-ad8e6a7716b0
 titleslug: banoffee_265a4348-8c2b-4966-bd57-ad8e6a7716b0
 ---

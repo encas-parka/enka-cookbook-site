@@ -7,7 +7,7 @@ categories:
   - Gateau
 regime:
   - vegetarien
-region: ..
+region: ""
 cuisson: Oui
 temperature: Froid
 plate: 100

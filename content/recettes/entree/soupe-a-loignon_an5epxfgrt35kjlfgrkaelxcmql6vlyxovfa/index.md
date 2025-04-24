@@ -12,7 +12,7 @@ regime:
 region: France
 cuisson: Oui
 temperature: Chaud
-plate: 70
+plate: 50
 check: Non
 checkAlwaysOk: false
 ingredients:
@@ -21,7 +21,7 @@ ingredients:
       quantite: 3
       unit: tête·s
     - title: Oignon
-      quantite: 12
+      quantite: 25
       unit: Kg
   frais:
     - title: Gruyère

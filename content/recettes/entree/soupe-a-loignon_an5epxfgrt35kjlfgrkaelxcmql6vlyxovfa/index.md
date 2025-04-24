@@ -12,8 +12,8 @@ regime:
 region: France
 cuisson: Oui
 temperature: Chaud
-plate: 50
-check: Non
+plate: 60
+check: Oui
 checkAlwaysOk: false
 ingredients:
   legumes:

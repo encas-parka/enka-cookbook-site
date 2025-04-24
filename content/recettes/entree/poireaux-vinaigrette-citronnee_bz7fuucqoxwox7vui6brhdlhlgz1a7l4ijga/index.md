@@ -11,7 +11,8 @@ regime:
 cuisson: Oui
 temperature: Froid
 plate: 50
-check: Non
+quantite_desc: "100"
+check: Oui
 checkAlwaysOk: false
 ingredients:
   legumes:
@@ -22,7 +23,7 @@ ingredients:
       quantite: 4
       unit: unité
     - title: Poireau
-      quantite: 13
+      quantite: 52
       unit: unité
   lof:
     - title: huile d'olive

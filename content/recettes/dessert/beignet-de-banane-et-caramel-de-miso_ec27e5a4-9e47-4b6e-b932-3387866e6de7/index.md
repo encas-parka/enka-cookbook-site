@@ -1,7 +1,5 @@
 ---
-uuid: ec27e5a4-9e47-4b6e-b932-3387866e6de7
 title: BEIGNET DE BANANE ET CARAMEL DE MISO
-titleslug: beignet-de-banane-et-caramel-de-miso_ec27e5a4-9e47-4b6e-b932-3387866e6de7
 draft: false
 layout: recettes
 type: dessert
@@ -51,8 +49,8 @@ ingredients:
       commentaire: pâte à beignet
   epices:
     - title: Miso blanc
-      quantite: 20
-      unit: c. à soupe
+      quantite: 500
+      unit: grammes
     - title: Sel
       quantite: 15
       unit: grammes
@@ -129,4 +127,6 @@ preparation: >-
 
   Retirez la casserole du feu et incorporez le miso en fouettant.
 publishDate: 2024-05-24T00:51:00.000Z
+uuid: ec27e5a4-9e47-4b6e-b932-3387866e6de7
+titleslug: beignet-de-banane-et-caramel-de-miso_ec27e5a4-9e47-4b6e-b932-3387866e6de7
 ---

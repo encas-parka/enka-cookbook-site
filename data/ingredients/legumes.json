@@ -2,6 +2,10 @@
   "ingredients": [
     {
       "pFrais": true,
+      "title": "fruit du dragon"
+    },
+    {
+      "pFrais": true,
       "title": "Ail"
     },
     {

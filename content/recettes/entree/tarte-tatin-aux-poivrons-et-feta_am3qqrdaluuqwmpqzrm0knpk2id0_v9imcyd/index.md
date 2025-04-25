@@ -19,6 +19,9 @@ check: Non
 checkAlwaysOk: true
 ingredients:
   legumes:
+    - title: Ail
+      quantite: 4
+      unit: tête·s
     - title: Oignon
       quantite: 5
       unit: Kg
@@ -53,14 +56,14 @@ preparation: >-
   morceaux.
 
 
-  Éplucher l’oignon et émincer finement. 
+  Éplucher l’oignon et émincer finement.  Hacher l'ail.
 
 
   Dans les woks faire suer les poivrons et les 
 
   oignons à l'huile d'olive. Saler.  Ajouter la moitié du sucre et laisser cuire le 
 
-  tout pour faire caraméliser cette garniture. 
+  tout pour faire caraméliser cette garniture. Ajouter l'ail.
 
   Sel et piment d’Espelette. Sulfuriser les plats à tarte, verser un peu de sucre au fond et disposer les légumes. 
 

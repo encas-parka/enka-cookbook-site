@@ -76,6 +76,6 @@ preparation: >-
 
   Sortir les tartes du four, démouler en la retournant dans une assiette. Un délice.
 publishDate: 2025-04-25T15:39:00.000Z
-uuid: 6zbcgostwl1urdg8ib9rzo6odnbaavesbni5
-titleslug: tarte-tatin-aux-poivrons-vegane-et-sans-gluten_6zbcgostwl1urdg8ib9rzo6odnbaavesbni5
+uuid: hifvgn7qaefk0pwyb0pmvcntsmuqecs126cc
+titleslug: tarte-tatin-aux-poivrons-vegane-et-sans-gluten_hifvgn7qaefk0pwyb0pmvcntsmuqecs126cc
 ---

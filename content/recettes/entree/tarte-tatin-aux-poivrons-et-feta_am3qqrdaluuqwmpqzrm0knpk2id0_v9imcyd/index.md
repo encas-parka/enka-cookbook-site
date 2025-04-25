@@ -74,7 +74,7 @@ preparation: >-
    poivrons. Rabattre les bords si besoin. Enfournez pendant une trentaine
    de minutes jusqu’à l’obtention d’une pâte colorée et cuite. 
 
-  Sortir les tartes du four, démouler et parsemer de feta émiettée.  Un délice.
+  Sortir les tartes du four, démouler en les retournant dans leur plat de service et parsemer de feta émiettée.  Un délice.
 publishDate: 2025-04-25T13:22:00.000Z
 uuid: yhpkq5luse7ajty4mbcls4w0xgrogglpjeph
 titleslug: tarte-tatin-aux-poivrons-et-feta_yhpkq5luse7ajty4mbcls4w0xgrogglpjeph

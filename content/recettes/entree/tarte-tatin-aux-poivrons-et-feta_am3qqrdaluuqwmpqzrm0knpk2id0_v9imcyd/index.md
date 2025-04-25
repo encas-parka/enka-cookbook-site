@@ -46,7 +46,7 @@ ingredients:
       commentaire: grand format
       unit: unité
 preparation: >-
-  Lavez les légumes. Retirer des poivrons les membranes 
+  Laver les légumes. Retirer des poivrons les membranes 
 
   blanches et les graines à l’intérieur. Les tailler en gros 
 

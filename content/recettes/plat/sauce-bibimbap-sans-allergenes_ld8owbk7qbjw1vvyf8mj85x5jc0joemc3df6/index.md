@@ -48,6 +48,6 @@ ingredients:
       unit: ml
 preparation: Tout mixer !!
 publishDate: 2025-05-04T21:30:00.000Z
-uuid: ld8owbk7qbjw1vvyf8mj85x5jc0joemc3df6
-titleslug: sauce-bibimbap-sans-allergenes_ld8owbk7qbjw1vvyf8mj85x5jc0joemc3df6
+uuid: zdjg4mcx05s2dqkcqwk_hcczbyxauocyix-5
+titleslug: sauce-bibimbap-sans-allergenes_zdjg4mcx05s2dqkcqwk_hcczbyxauocyix-5
 ---

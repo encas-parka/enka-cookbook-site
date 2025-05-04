@@ -1,6 +1,13 @@
 {
   "ingredients": [
     {
+      "title": "Doenjang",
+      "alergenesIng": [
+        "Gluten",
+        "Soja"
+      ]
+    },
+    {
       "title": "Algue nori feuille séchée"
     },
     {
@@ -26,7 +33,11 @@
       "title": "Concentré de tomate"
     },
     {
-      "title": "Gochujang"
+      "title": "Gochujang",
+      "alergenesIng": [
+        "Gluten",
+        "Soja"
+      ]
     },
     {
       "title": "Algue wakamé séchée"

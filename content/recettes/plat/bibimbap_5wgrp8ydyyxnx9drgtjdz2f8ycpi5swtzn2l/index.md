@@ -156,7 +156,7 @@ preparation: >-
   Râper les carottes. Elles seront servies crues.
 
 
-  Hacher l'ail. Toaster les graines de sésames noir. Faire revenir les épinards au wok. Verser l'ail en fin de cuisson.
+  Hacher l'ail. Toaster les graines de sésame noir. Faire revenir les épinards au wok. Verser l'ail en fin de cuisson.
 
 
   **Mettre de côté une portion s'il y a des allergiques au sésame.**

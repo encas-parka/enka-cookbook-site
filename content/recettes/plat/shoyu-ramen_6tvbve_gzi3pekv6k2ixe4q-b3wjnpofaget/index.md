@@ -1,5 +1,5 @@
 ---
-title: SHOYU RAMEN
+title: SHOYU RAMEN D'HIVER
 draft: false
 layout: recettes
 type: plat

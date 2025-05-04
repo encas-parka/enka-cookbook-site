@@ -147,7 +147,7 @@ preparation: >-
   Faire tremper les shiitakés dans l'eau pendant 30min. Puis les émincer.
 
 
-  Râper les courgettes. Les placer dans les bacs gastro perforés, les saler afin qu'elles perdent leur eau. Plus tard, bien les essorer à la main (propres). Elles seront servies crues.
+  Râper les courgettes. Les placer dans les bacs gastro perforés, les saler afin qu'elles perdent leur eau. Plus tard, bien les essorer à la main (propre). Elles seront servies crues.
 
 
   Émincer les champignons de Paris. Faire revenir avec de l'huile les deux sortes de champignons à feu vif dans le wok. Saler.

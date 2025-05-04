@@ -1,6 +1,18 @@
 {
   "ingredients": [
     {
+      "title": "Graines de sésame noir",
+      "alergenesIng": [
+        "Sésame"
+      ]
+    },
+    {
+      "title": "Graines de sésame blanc",
+      "alergenesIng": [
+        "Sésame"
+      ]
+    },
+    {
       "title": "Nouilles de blé ondulées Ramen",
       "alergenesIng": [
         "Gluten"

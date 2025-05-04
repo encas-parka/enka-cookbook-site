@@ -2,6 +2,10 @@
   "ingredients": [
     {
       "pFrais": true,
+      "title": "Champignon de Paris"
+    },
+    {
+      "pFrais": true,
       "title": "fruit du dragon"
     },
     {

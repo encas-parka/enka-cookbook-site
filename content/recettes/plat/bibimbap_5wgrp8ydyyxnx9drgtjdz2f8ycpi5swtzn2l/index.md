@@ -220,6 +220,6 @@ astuces:
       du gluten dans le gochujan et le doenjang."
 prepAlt: []
 publishDate: 2025-05-04T21:01:00.000Z
-uuid: 5wgrp8ydyyxnx9drgtjdz2f8ycpi5swtzn2l
-titleslug: bibimbap_5wgrp8ydyyxnx9drgtjdz2f8ycpi5swtzn2l
+uuid: ypey_nn6ro3gddpwsshu-4xeepviycqdxtpe
+titleslug: bibimbap_ypey_nn6ro3gddpwsshu-4xeepviycqdxtpe
 ---

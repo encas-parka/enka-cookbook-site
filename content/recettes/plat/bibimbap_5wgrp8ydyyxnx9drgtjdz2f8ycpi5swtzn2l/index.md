@@ -198,7 +198,7 @@ preparation: >-
   Mixer à la girafe tous les ingrédients. Goûter et rectifier l'assaisonnement. Si la sauce est trop épaisse, la délayer avec plus d'eau.
 
 
-  **Pour les allergiques au gluten > voir recette sauce bibimbap sans gluten.**
+  **Pour les allergiques au gluten > voir recette sauce bibimbap sans allergènes.**
 
 
   **RIZ :** Cuire le riz dans deux rondo (3kg par rondo)

@@ -46,7 +46,10 @@ ingredients:
     - title: Eau
       quantite: 500
       unit: ml
-preparation: Tout mixer !!
+preparation: |-
+  Tout mixer !!
+
+  Goûter car peut être il faut saler.
 publishDate: 2025-05-04T21:30:00.000Z
 uuid: zdjg4mcx05s2dqkcqwk_hcczbyxauocyix-5
 titleslug: sauce-bibimbap-sans-allergenes_zdjg4mcx05s2dqkcqwk_hcczbyxauocyix-5

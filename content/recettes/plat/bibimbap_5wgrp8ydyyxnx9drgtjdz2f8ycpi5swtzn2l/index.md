@@ -133,7 +133,7 @@ preparation: >-
   A cuire en plusieurs fois. Certainement 50 par 50. A voir.
 
 
-  Préchauffer l'eau de **64°C** à l'aide du thermoplongeur (si si la familles!). Plonger les 
+  Préchauffer l'eau de **64°C** à l'aide du thermoplongeur (si si la famille!). Plonger les 
 
   œufs à l'aide d'une araignée ou d'une écumoire. Cuire **54 min** exactement! Retirer les œufs à l'écumoire. Réserver.
 

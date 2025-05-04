@@ -241,6 +241,6 @@ astuces:
       pour les histoires de gluten. A la place du Mirin, j'ai proposé  du
       Vinaigre de Riz + Sucre dans le Taré pour les histoires d'alcool.
 publishDate: 2025-05-04T17:10:00.000Z
-uuid: 6tvbve_gzi3pekv6k2ixe4q-b3wjnpofaget
-titleslug: shoyu-ramen_6tvbve_gzi3pekv6k2ixe4q-b3wjnpofaget
+uuid: vfpupghnxd937t0km3ng41hwg1qqotkzbwbe
+titleslug: shoyu-ramen_vfpupghnxd937t0km3ng41hwg1qqotkzbwbe
 ---

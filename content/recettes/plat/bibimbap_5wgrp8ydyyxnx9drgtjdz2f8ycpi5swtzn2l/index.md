@@ -192,7 +192,10 @@ preparation: >-
   **SAUCE :**
 
 
-  Mixer à la girafe tous les ingrédients. Gouter et rectifier l'assaisonnement. Si la sauce est trop épaisse, la délayer avec plus d'eau.
+  Râper le gingembre. Hacher l'ail.
+
+
+  Mixer à la girafe tous les ingrédients. Goûter et rectifier l'assaisonnement. Si la sauce est trop épaisse, la délayer avec plus d'eau.
 
 
   **Pour les allergiques au gluten > voir recette sauce bibimbap sans gluten.**
@@ -220,7 +223,8 @@ preparation: >-
 astuces:
   - astuce: "Attention : Il y a du sésame dans beaucoup de préparations. Et il y a
       du gluten dans le gochujan et le doenjang."
-prepAlt: []
+prepAlt:
+  - recetteAlt: sauce-bibimbap-sans-allergenes_zdjg4mcx05s2dqkcqwk_hcczbyxauocyix-5
 publishDate: 2025-05-04T21:01:00.000Z
 uuid: ypey_nn6ro3gddpwsshu-4xeepviycqdxtpe
 titleslug: bibimbap_ypey_nn6ro3gddpwsshu-4xeepviycqdxtpe

@@ -100,7 +100,7 @@ ingredients:
       quantite: 600
       unit: grammes
       commentaire: Tofu mariné
-    - title: Gochujang
+    - title: Gochujang sans gluten
       quantite: 250
       unit: grammes
       commentaire: Tofu mariné
@@ -159,7 +159,6 @@ preparation: >-
   Hacher l'ail. Toaster les graines de sésames noir. Faire revenir les épinards au wok. Verser l'ail en fin de cuisson.
 
 
-
   **Mettre de côté une portion s'il y a des allergiques au sésame.**
 
 
@@ -181,10 +180,13 @@ preparation: >-
   Napper d'huile le tout et enfourner pour 40mn environ. A mi-cuisson, les tourner pour que le dessous des cubes soit au dessus. Les cubes devraient avoir gonflé, si ce n'est pas le cas laisser encore un peu au four.
 
 
-  Pendant ce temps, mélanger tous les ingrédients de la marinade sauf le sésame.
+  Pendant ce temps, mélanger tous les ingrédients de la marinade sauf le sésame. Attention le Gochujang doit être sans gluten!
 
 
-  Lorsque c'est prêt, mélanger les cubes dans la marinade et parsemer de sésame blanc **en mettant de côté une portion s'il y a des allergiques au sésame.**
+  **Mettre de côté une portion pour les allergiques au sésame**
+
+
+  Lorsque c'est prêt, mélanger les cubes dans la marinade et parsemer de sésame blanc 
 
 
   **SAUCE :**

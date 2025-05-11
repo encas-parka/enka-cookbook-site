@@ -1,6 +1,10 @@
 {
   "ingredients": [
     {
+      "pFrais": false,
+      "title": "Purée chataîgne sans sucre"
+    },
+    {
       "pFrais": true,
       "title": "Citron (jus)"
     },

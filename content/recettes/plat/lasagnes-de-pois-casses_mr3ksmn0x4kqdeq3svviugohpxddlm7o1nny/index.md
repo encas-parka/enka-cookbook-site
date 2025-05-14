@@ -1,6 +1,6 @@
 ---
 title: LASAGNES DE POIS CASSÉS
-draft: true
+draft: false
 layout: recettes
 type: plat
 categories:
@@ -17,12 +17,14 @@ ingredients:
   legumes:
     - title: Aubergine
       quantite: 8
+      unit: Kg
     - title: Tomate
       quantite: 8
       unit: Kg
     - title: Oignon
       commentaire: ""
       unit: Kg
+      quantite: 1
     - title: Ail
       quantite: 200
       unit: grammes

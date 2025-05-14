@@ -41,6 +41,7 @@ ingredients:
       quantite: 25
   autres:
     - {}
+  lof: []
 preparation: >-
   #### Étape 1
 

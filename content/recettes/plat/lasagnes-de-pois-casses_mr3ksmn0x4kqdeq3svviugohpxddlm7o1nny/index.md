@@ -15,8 +15,37 @@ check: Non
 checkAlwaysOk: false
 ingredients:
   legumes:
+    - title: Aubergine
+      quantite: 8
+    - title: Tomate
+      quantite: 8
+      unit: Kg
+    - title: Oignon
+      commentaire: ""
+      unit: Kg
     - title: Ail
       quantite: 200
+      unit: grammes
+  sec:
+    - title: Lasagnes
+      quantite: 4
+      unit: Kg
+    - title: Pois cassés
+      quantite: 4
+      unit: Kg
+  lof:
+    - title: huile d'olive
+      quantite: 600
+      unit: ml
+    - title: Lait écrémé
+      quantite: 1
+      unit: litre
+  epices:
+    - title: Poivre
+      quantite: 8
+      unit: grammes
+    - title: Sel
+      quantite: 80
       unit: grammes
 preparation: >-
   Laver et couper en cubes les aubergines et les tomates; hacher l'ail, mélanger

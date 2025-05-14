@@ -1,9 +1,9 @@
 {
   "ingredients": [
     {
-      "title": "Lait d'avoine",
+      "title": "Yaourt nature",
       "alergenesIng": [
-        "Gluten"
+        "Produit laitier"
       ]
     },
     {
@@ -98,6 +98,12 @@
     },
     {
       "title": "huile de friture"
+    },
+    {
+      "title": "Lait d'avoine",
+      "alergenesIng": [
+        "Gluten"
+      ]
     },
     {
       "title": "Lait concentré (non sucré)",

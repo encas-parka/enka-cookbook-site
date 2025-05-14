@@ -32,6 +32,9 @@ ingredients:
       unit: Kg
       commentaire: Ciselés
   frais:
+    - title: Yaourt de vache
+      quantite: 500
+      unit: grammes
     - title: Beurre demi-sel
       unit: grammes
       quantite: 300
@@ -39,9 +42,13 @@ ingredients:
     - title: Curry
       unit: c. à café
       quantite: 25
-  autres:
-    - {}
+  autres: []
   lof: []
+  sec:
+    - title: Riz basmati
+      quantite: 5
+      commentaire: Sec (a cuire)
+      unit: Kg
 preparation: >-
   #### Étape 1
 
@@ -70,7 +77,7 @@ preparation: >-
   #### Étape 5
 
 
-  Laisser mijoter à feu doux pendant environ 1 heure jusqu'à ce que le boeuf soit tendre.
+  Laisser mijoter à feu doux pendant environ 1 heure 30 jusqu'à ce que le boeuf soit tendre.
 
 
   #### Étape 6

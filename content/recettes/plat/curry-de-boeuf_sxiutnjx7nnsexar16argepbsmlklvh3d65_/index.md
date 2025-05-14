@@ -84,12 +84,6 @@ preparation: >-
 
 
   Ajouter le yaourt nature et assaisonner avec du sel et du poivre selon votre goût. Laisser mijoter pendant encore 10 minutes.
-
-
-  #### Étape 7
-
-
-  Servir le poulet au curry chaud sur un lit de riz basmati cuit. Garnir de feuilles de coriandre fraîche.
 publishDate: 2025-05-14T10:52:00.000Z
 uuid: sxiutnjx7nnsexar16argepbsmlklvh3d65_
 titleslug: curry-de-boeuf_sxiutnjx7nnsexar16argepbsmlklvh3d65_

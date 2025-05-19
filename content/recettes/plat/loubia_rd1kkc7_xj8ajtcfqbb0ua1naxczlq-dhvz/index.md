@@ -18,7 +18,7 @@ checkfor: ""
 ingredients:
   sec:
     - title: Haricots blancs
-      quantite: ""
+      quantite: 250
       unit: grammes
   legumes:
     - title: Ail

@@ -18,6 +18,7 @@ ingredients:
   lof:
     - title: Oeuf
       quantite: 4
+      unit: unité
     - title: Farine de blé noir (sarrasin)
       quantite: 2
       unit: c. à soupe
@@ -37,13 +38,12 @@ ingredients:
       quantite: 200
       unit: grammes
 preparation: |-
-  
   Mélanger tous les ingrédients
 
   mettre au four 15 min à 200°
 
   Après cuisson
-  mettre le nappage et les graines de sarrasin torréfiées
+  mettre le nappage (chocolat+beurre) et les graines de sarrasin torréfiées
 publishDate: 2025-05-22T16:47:00.000Z
 uuid: 6y4opx4lcujv7-h-reqknfr_vd6a77flg9gd
 titleslug: gateau-a-la-creme-de-marron-nappage-chocolat_6y4opx4lcujv7-h-reqknfr_vd6a77flg9gd

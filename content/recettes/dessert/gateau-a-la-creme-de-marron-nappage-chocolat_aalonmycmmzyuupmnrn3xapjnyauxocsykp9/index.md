@@ -1,5 +1,5 @@
 ---
-title: Gateau à la crème de marron nappage chocolat
+title: Gateau à la crème de marron nappage chocolat (vegan)
 draft: false
 layout: recettes
 type: dessert

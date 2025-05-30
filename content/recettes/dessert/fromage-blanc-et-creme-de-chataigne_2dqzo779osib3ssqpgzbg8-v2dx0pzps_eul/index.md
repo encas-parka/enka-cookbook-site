@@ -1,5 +1,5 @@
 ---
-title: FROMAGE BLANC ET CREME DE CHATAIGNE
+title: FROMAGE BLANC ET FRUITS ROUGES
 draft: false
 layout: recettes
 type: dessert
@@ -19,11 +19,12 @@ ingredients:
     - title: sucre de canne (blond)
       quantite: 1
       unit: Kg
-    - title: Confiture de chataigne (sans sucre)
+  legumes:
+    - title: Fruits rouges
       quantite: 3
       unit: Kg
 preparation: Ne pas oublié la version végane !!
 publishDate: 2025-05-30T21:37:00.000Z
-uuid: 2dqzo779osib3ssqpgzbg8-v2dx0pzps_eul
-titleslug: fromage-blanc-et-creme-de-chataigne_2dqzo779osib3ssqpgzbg8-v2dx0pzps_eul
+uuid: jhl0gvetk7ixbnyggtiv0cnsrhdy5s_tsly8
+titleslug: fromage-blanc-et-fruits-rouges_jhl0gvetk7ixbnyggtiv0cnsrhdy5s_tsly8
 ---

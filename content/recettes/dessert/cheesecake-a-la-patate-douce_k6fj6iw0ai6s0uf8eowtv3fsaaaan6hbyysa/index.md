@@ -11,6 +11,7 @@ regime:
 cuisson: Oui
 temperature: Froid
 plate: 100
+quantite_desc: 1 gastro = 36 parts (6x6)
 check: Non
 checkAlwaysOk: true
 ingredients:
@@ -46,6 +47,7 @@ ingredients:
       unit: grammes
     - title: Oeuf
       quantite: 50
+      unit: unité
     - title: Farine de blé
       quantite: 1.25
       unit: Kg

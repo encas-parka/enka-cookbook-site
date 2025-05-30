@@ -2,6 +2,13 @@
   "ingredients": [
     {
       "pFrais": true,
+      "title": "Philadelphia ou autre marque moins cher",
+      "alergenesIng": [
+        "Produit laitier"
+      ]
+    },
+    {
+      "pFrais": true,
       "title": "Yaourt brassé",
       "alergenesIng": [
         "Produit laitier"

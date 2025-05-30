@@ -45,7 +45,18 @@ ingredients:
     - title: Sirop d'agave
       quantite: 180
       unit: ml
-preparation: .....
+preparation: >-
+  .....Mélanger les flocons d'avoine, les graines et les amandes dans un
+  saladier.
+
+
+  Dans un petit bol, fouetter les autres ingrédients. Verser le mélange d'avoine et bien mélanger pour bien enrober.
+
+
+  Étaler sur une plaque de cuisson recouverte de papier sulfurisé, en formant une couche de 2 mm d'épaisseur. Cuire au four à 180 °C pendant 15 minutes en surveillant attentivement la cuisson du granola pour éviter qu'il ne brûle. Remuer délicatement après 10 minutes de cuisson.
+
+
+  Laisser refroidir et conserver dans un bocal. Parsemer sur des soupes, des salades, des bols de légumes, etc.
 publishDate: 2025-05-30T15:55:00.000Z
 uuid: wm1m4ec1-p-5j5u3xsolugnf5aih4pebmvpo
 titleslug: granola-sale-pour-soupe_wm1m4ec1-p-5j5u3xsolugnf5aih4pebmvpo

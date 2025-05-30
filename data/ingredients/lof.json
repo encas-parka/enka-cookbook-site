@@ -1,6 +1,12 @@
 {
   "ingredients": [
     {
+      "title": "Lait de soja",
+      "alergenesIng": [
+        "Soja"
+      ]
+    },
+    {
       "title": "Yaourt nature",
       "alergenesIng": [
         "Produit laitier"

@@ -94,6 +94,6 @@ preparation: >-
 
   Verser dans le plat préalablement sulfurisé. Enfourner 45 minutes en vérifiant de temps en temps.
 publishDate: 2025-05-30T20:10:00.000Z
-uuid: q-3vmopzsatsya8nhmfhiypyrweu5z3c_l3_
-titleslug: kuku-sabzi-vegan_q-3vmopzsatsya8nhmfhiypyrweu5z3c_l3_
+uuid: eev4gj_snc5kyuyms_-i7ytee1mqicxuqnmn
+titleslug: kuku-sabzi-vegan_eev4gj_snc5kyuyms_-i7ytee1mqicxuqnmn
 ---

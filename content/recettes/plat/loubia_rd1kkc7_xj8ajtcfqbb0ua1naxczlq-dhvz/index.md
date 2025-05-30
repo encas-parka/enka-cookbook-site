@@ -11,40 +11,52 @@ regime:
 region: Tunisie
 cuisson: Oui
 temperature: Chaud
-plate: 5
+plate: 100
 check: Oui
 checkAlwaysOk: false
 checkfor: ""
 ingredients:
   sec:
     - title: Haricots blancs
-      quantite: 250
-      unit: grammes
+      quantite: 5
+      unit: Kg
   legumes:
     - title: Ail
-      quantite: 3
-      unit: gousse·s
+      quantite: 5
+      unit: tête·s
     - title: Carotte
-      quantite: 2
-      unit: unité
+      quantite: 15
+      unit: Kg
     - title: Oignon
-      quantite: 1
-      unit: unité
+      quantite: 10
+      unit: Kg
     - title: Tomate (conserve)
-      quantite: 70
-      unit: grammes
+      quantite: 5
+      unit: Kg
   lof:
     - title: huile d'olive
-      quantite: 3
-      unit: c. à soupe
+      quantite: 1.5
+      unit: litre
   epices:
+    - title: Persil frais
+      quantite: 5
+      unit: bottes
     - title: Coriandre fraîche
-      quantite: ""
+      quantite: 5
       commentaire: "a ajouter ciselée sur le top selon les envies "
+      unit: bottes
     - title: Paprika
+      quantite: 70
+      unit: grammes
     - title: Feuille de laurier
+      quantite: 8
+      unit: unité
     - title: Gingembre en poudre
+      quantite: 100
+      unit: grammes
     - title: Cumin
+      quantite: 70
+      unit: grammes
 preparation: >-
   ### Instructions
 
@@ -64,7 +76,7 @@ preparation: >-
   5 Ajoutez les épices
 
 
-  6 Couper les carottes brunoise et ajoutez-le dans la sauteuse.
+  6 Couper les carottes brunoise et ajoutez-les dans la sauteuse avec les aromates effeuillés.
 
 
   7 Versez la pulpe de tomate, l'eau, salez et poivrez.

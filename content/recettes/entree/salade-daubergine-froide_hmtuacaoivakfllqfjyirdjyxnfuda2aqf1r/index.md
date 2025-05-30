@@ -65,6 +65,6 @@ preparation24h: >-
 
   Faire cuire en remuant bien.
 publishDate: 2025-05-30T20:24:00.000Z
-uuid: hmtuacaoivakfllqfjyirdjyxnfuda2aqf1r
-titleslug: salade-d-aubergine-froide_hmtuacaoivakfllqfjyirdjyxnfuda2aqf1r
+uuid: zkufu9wnkzd2si3qaml1m3dbb8my_nh3srlz
+titleslug: salade-d-aubergine-froide_zkufu9wnkzd2si3qaml1m3dbb8my_nh3srlz
 ---

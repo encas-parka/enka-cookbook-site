@@ -85,6 +85,6 @@ preparation: >-
 
   Servir la sauce à part. Servir bien frais.
 publishDate: 2025-05-30T18:36:00.000Z
-uuid: vy6kxqnc0vr7w3fpohorwdxhsc2cch728q60
-titleslug: salade-de-tomates-sauce-romesco_vy6kxqnc0vr7w3fpohorwdxhsc2cch728q60
+uuid: tftjinnuzjl1jixhmbd5zytznbclocgig4tm
+titleslug: salade-de-tomates-sauce-romesco_tftjinnuzjl1jixhmbd5zytznbclocgig4tm
 ---

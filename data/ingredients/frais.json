@@ -2,6 +2,13 @@
   "ingredients": [
     {
       "pFrais": true,
+      "title": "Yaourt brassé",
+      "alergenesIng": [
+        "Produit laitier"
+      ]
+    },
+    {
+      "pFrais": true,
       "title": "Pâte filo",
       "alergenesIng": [
         "Gluten"

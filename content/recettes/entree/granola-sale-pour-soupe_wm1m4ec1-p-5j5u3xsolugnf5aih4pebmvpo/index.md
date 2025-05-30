@@ -46,8 +46,7 @@ ingredients:
       quantite: 180
       unit: ml
 preparation: >-
-  .....Mélanger les flocons d'avoine, les graines et les amandes dans un
-  saladier.
+  .....Mélanger les flocons d'avoine, les graines dans un saladier.
 
 
   Dans un petit bol, fouetter les autres ingrédients. Verser le mélange d'avoine et bien mélanger pour bien enrober.

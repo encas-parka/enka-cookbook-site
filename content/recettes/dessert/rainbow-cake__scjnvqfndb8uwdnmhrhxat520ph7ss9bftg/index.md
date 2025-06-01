@@ -73,6 +73,9 @@ ingredients:
       commentaire: génoise
   epices: []
   autres:
+    - title: Chantifix
+      quantite: 7
+      unit: unité
     - title: Colorants alimentaires
       commentaire: génoise
     - title: Bicarbonate de soude
@@ -175,30 +178,34 @@ preparation: >-
   Faire toutes les génoises. Toutes les cuire et les réserver.
 
 
-  Une fois toutes prêtes, réunir les génoises de chaque gâteaux ensemble. Les placer les côte à côte pour une meilleure organisation.
+  Une fois toutes prêtes, réunir les génoises de chaque gâteaux ensemble. Les placer côte à côte pour une meilleure organisation.
 
 
-  Préparer la crème de garnissage.
+  Préparer la crème de garnissage, la ganache au chocolat blanc.
 
 
-  Faites fondre 30 s votre chocolat blanc.
-   Remuez un peu puis refaites fondre par 30 s jusqu'à ce que vous ayez un
-   début de chocolat blanc fondu. Laissez ensuite reposer le chocolat 
-  blanc pour qu'il continue à fondre tranquillement pendant 3 minutes 
-
-  environ. Remuez et réservez à température ambiante.
+  Faire fondre chocolat blanc au bain marie. Réserver à température ambiante.
 
 
-  Mettez le mascarpone dans le bol de 
-
-  votre robot et détendez-le en le battant un peu avec le fouet du robot 
-
-  ou au batteur électrique. Incorporez le chocolat blanc fondu mais non 
-
-  très chaud et battez à nouveau quelques minutes pour avoir un mélange 
+  Battre au fouet électrique le mascarpone.  Incorporer le chocolat blanc fondu (il ne doit pas être chaud) et battre à nouveau quelques minutes pour avoir un mélange 
 
   aéré.
+
+
+  **Le montage :**
+
+
+  Sur une plaque de pâtisserie sulfurisée, commencer par la génoise couleur indigo ou violette et garnir de deux millimètres de crème environ.
+
+
+  Ajouter la génoise bleue et appuyer un peu. Puis recommencer jusqu'à épuisement des génoises.
+
+
+  Monter une chantilly pour le glaçage final et recouvrir l'intégralité du gâteau.
+
+
+  Réserver au frais quelques heures.
 publishDate: 2025-06-01T21:25:00.000Z
-uuid: _scjnvqfndb8uwdnmhrhxat520ph7ss9bftg
-titleslug: rainbow-cake__scjnvqfndb8uwdnmhrhxat520ph7ss9bftg
+uuid: xfyujcaqwptqmfo_goer8hzsa0xigpmvwmfd
+titleslug: rainbow-cake_xfyujcaqwptqmfo_goer8hzsa0xigpmvwmfd
 ---

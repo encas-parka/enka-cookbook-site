@@ -204,7 +204,13 @@ preparation: >-
   Monter une chantilly pour le glaçage final et recouvrir l'intégralité du gâteau.
 
 
-  Réserver au frais quelques heures.
+  Réserver au frais.
+
+
+  Faire le gâteau la veille, c'est préférable et à savoir qu'après 2 jours, il est encore meilleur !!!
+
+
+  Pour couper le gâteau, le mieux est d'utiliser un grand couteau scie pour ne pas "écraser" le gâteau.
 publishDate: 2025-06-01T21:25:00.000Z
 uuid: xfyujcaqwptqmfo_goer8hzsa0xigpmvwmfd
 titleslug: rainbow-cake_xfyujcaqwptqmfo_goer8hzsa0xigpmvwmfd

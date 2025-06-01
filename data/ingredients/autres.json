@@ -1,6 +1,13 @@
 {
   "ingredients": [
     {
+      "title": "Chorizo végan",
+      "alergenesIng": [
+        "Gluten",
+        "Soja"
+      ]
+    },
+    {
       "title": "Pain rassis sans gluten"
     },
     {

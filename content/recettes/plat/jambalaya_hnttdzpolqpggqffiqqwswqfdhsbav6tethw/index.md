@@ -19,10 +19,10 @@ ingredients:
       quantite: 6
       unit: tête·s
     - title: Poivron (vert)
-      quantite: 10
+      quantite: 8
       unit: Kg
     - title: Poivron (rouge)
-      quantite: 10
+      quantite: 8
       unit: Kg
     - title: Céleri branche
       quantite: 1
@@ -112,6 +112,6 @@ preparation: >-
 
   Normalement on doit faire cuire le riz dans ces légumes. Mais pour plus de facilité, cuire le riz à part avec le bouillon de poulet.
 publishDate: 2025-06-01T19:06:00.000Z
-uuid: hnttdzpolqpggqffiqqwswqfdhsbav6tethw
-titleslug: jambalaya_hnttdzpolqpggqffiqqwswqfdhsbav6tethw
+uuid: auzisvpxyuoptunrdzjhdhuydw-wapce0t6j
+titleslug: jambalaya_auzisvpxyuoptunrdzjhdhuydw-wapce0t6j
 ---

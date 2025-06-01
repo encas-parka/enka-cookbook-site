@@ -93,6 +93,6 @@ preparation: >-
 
   Rajouter les tranches de chorizo et gardant quelques portions sans chorizo pour une version sans gluten.
 publishDate: 2025-06-01T19:44:00.000Z
-uuid: 3xymgjbfucv7pf4mpcxxe8gspagiz9-eclmw
-titleslug: jambalaya-vegan_3xymgjbfucv7pf4mpcxxe8gspagiz9-eclmw
+uuid: e93_razirtgcghvhfsrccis0h6kod6fjds6m
+titleslug: jambalaya-vegan_e93_razirtgcghvhfsrccis0h6kod6fjds6m
 ---

@@ -1,6 +1,10 @@
 {
   "ingredients": [
     {
+      "pFrais": false,
+      "title": "Maïs en conserve égoutté"
+    },
+    {
       "pFrais": true,
       "title": "Fruits rouges"
     },

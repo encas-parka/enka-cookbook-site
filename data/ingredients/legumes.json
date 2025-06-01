@@ -2,6 +2,10 @@
   "ingredients": [
     {
       "pFrais": false,
+      "title": "Noix de coco râpée"
+    },
+    {
+      "pFrais": false,
       "title": "Maïs en conserve égoutté"
     },
     {

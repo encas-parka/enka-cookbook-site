@@ -2,6 +2,10 @@
   "ingredients": [
     {
       "pFrais": true,
+      "title": "Margarine"
+    },
+    {
+      "pFrais": true,
       "title": "Philadelphia ou autre marque moins cher",
       "alergenesIng": [
         "Produit laitier"

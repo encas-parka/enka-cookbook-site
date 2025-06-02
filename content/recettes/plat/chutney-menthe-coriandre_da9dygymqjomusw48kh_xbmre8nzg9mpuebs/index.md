@@ -47,15 +47,15 @@ ingredients:
       quantite: 10
       unit: bottes
   autres:
+    - title: purée de noix de cajou
+      quantite: 600
+      unit: grammes
     - title: Eau
       quantite: 1.2
       unit: litre
   lof: []
   sucres: []
-  sec:
-    - title: Noix de cajou
-      quantite: 600
-      unit: grammes
+  sec: []
 preparation: mixer finement le tout!!! et c'est tout!!!
 astuces:
   - astuce: ajouter l'eau au fur et à mesure

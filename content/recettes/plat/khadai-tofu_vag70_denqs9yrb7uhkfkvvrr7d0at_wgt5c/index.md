@@ -22,6 +22,9 @@ ingredients:
   autres:
     - {}
   epices:
+    - title: clou de girofle poudre
+      quantite: 15
+      unit: grammes
     - title: Curry
       quantite: 40
       unit: grammes

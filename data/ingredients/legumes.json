@@ -1,6 +1,10 @@
 {
   "ingredients": [
     {
+      "pFrais": true,
+      "title": "piment rouge frais"
+    },
+    {
       "pFrais": false,
       "title": "Noix de coco râpée"
     },

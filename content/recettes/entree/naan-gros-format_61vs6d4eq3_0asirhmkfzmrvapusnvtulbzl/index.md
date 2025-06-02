@@ -7,7 +7,7 @@ categories:
   - Pain
 region: inde
 cuisson: Oui
-temperature: Froid
+temperature: Chaud
 plate: 100
 quantite_desc: 1 par personne
 check: Oui
@@ -40,6 +40,9 @@ ingredients:
       quantite: 80
       unit: grammes
   frais:
+    - title: kiri ou autre du genre
+      quantite: 200
+      unit: unité
     - title: Yaourt grec de vache
       quantite: 2
       unit: Kg
@@ -77,13 +80,10 @@ preparation: >-
   Passer le rouleau ou les mains sur la galette pour étaler la vache qui rit.
 
 
-   
-
-
   Faire cuire 5 minutes le naan à la bilig, ou dans une poêle à crêpes ou au four à 180°.
 
 
-  Srvir chaud.
+  Servir chaud.
 
 
   \

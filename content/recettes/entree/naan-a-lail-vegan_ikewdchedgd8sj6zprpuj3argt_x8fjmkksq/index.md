@@ -26,9 +26,6 @@ ingredients:
     - title: Yaourt de soja
       quantite: 250
       unit: grammes
-    - title: Levure fraîche de boulanger
-      quantite: 20
-      unit: grammes
   epices:
     - title: Ail en poudre
       quantite: 13
@@ -41,6 +38,9 @@ ingredients:
       quantite: 13
       unit: grammes
   autres:
+    - title: Levure de boulanger
+      quantite: 20
+      unit: grammes
     - title: Eau
       quantite: 380
       unit: ml

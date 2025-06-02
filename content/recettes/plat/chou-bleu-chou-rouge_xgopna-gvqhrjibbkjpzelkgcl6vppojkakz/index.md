@@ -51,18 +51,26 @@ ingredients:
     - title: Vinaigre de vin
       quantite: 150
       unit: ml
-  sucres: []
+  sucres:
+    - title: confiture de myrtille
+      quantite: 200
+      unit: grammes
 preparation: >-2
   
    A ABSOLUMENT FAIRE LA VEILLE
 
+
         
 
+
     
+
 
           
 
+
     
+
 
     
 

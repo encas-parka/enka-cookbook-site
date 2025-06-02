@@ -23,6 +23,9 @@ ingredients:
       quantite: 3
       unit: Kg
   legumes:
+    - title: piment rouge frais
+      quantite: 20
+      unit: unité
     - title: Ail
       quantite: 7
       unit: tête·s
@@ -33,6 +36,9 @@ ingredients:
       quantite: 9
       unit: Kg
   epices:
+    - title: fenouil graine
+      quantite: 50
+      unit: grammes
     - title: Sel
       quantite: 80
       unit: grammes

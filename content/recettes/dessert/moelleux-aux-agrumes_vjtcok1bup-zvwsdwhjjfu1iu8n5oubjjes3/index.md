@@ -5,7 +5,7 @@ layout: recettes
 type: dessert
 categories:
   - Sucrée
-auteur: Frédo
+auteur: frédo
 regime:
   - vegetarien
 cuisson: Oui
@@ -44,15 +44,12 @@ ingredients:
       quantite: 2.6
       unit: Kg
   autres:
-    - {}
     - title: Chapelure
       quantite: 650
       unit: grammes
     - title: Levure chimique
       quantite: 13
       unit: unité
-    - title: Levure chimique
-      quantite: 13
   epices: []
 preparation: >-
   Préchauffer le four à 180°

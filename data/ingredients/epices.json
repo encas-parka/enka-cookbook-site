@@ -1,19 +1,13 @@
 {
   "ingredients": [
     {
-      "title": "Sweet Chili Sauce"
+      "title": "Pâte de Curry Rouge"
     },
     {
       "title": "clou de girofle poudre"
     },
     {
-      "title": "fenouil graine"
-    },
-    {
       "title": "curry feuilles"
-    },
-    {
-      "title": "moutarde graine"
     },
     {
       "title": "coriandre graine"
@@ -21,6 +15,12 @@
     {
       "title": "Cébettes",
       "pFrais": true
+    },
+    {
+      "title": "fenouil graine"
+    },
+    {
+      "title": "moutarde graine"
     },
     {
       "title": "Oignon en poudre"
@@ -274,9 +274,6 @@
       "title": "Poivre de Jamaïque"
     },
     {
-      "title": "Vinaigre de cidre"
-    },
-    {
       "title": "Garam Masala"
     },
     {
@@ -289,13 +286,13 @@
       ]
     },
     {
+      "title": "Sweet Chili Sauce"
+    },
+    {
       "title": "Tamari (sauce)",
       "alergenesIng": [
         "Soja"
       ]
-    },
-    {
-      "title": "Vinaigre de riz"
     },
     {
       "title": "Aneth aromatique",
@@ -590,6 +587,12 @@
         "Sulfites",
         "Alcool"
       ]
+    },
+    {
+      "title": "Vinaigre de cidre"
+    },
+    {
+      "title": "Vinaigre de riz"
     }
   ]
 }

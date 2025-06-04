@@ -18,6 +18,34 @@ repas:
   - assiettes: 100
     date_service: 2025-07-05
     horaire: soir
+    recettes_du_repas: []
+  - assiettes: 100
+    date_service: 2025-07-06
+    horaire: midi
+  - assiettes: 100
+    date_service: 2025-07-06
+    horaire: soir
+  - assiettes: 100
+    date_service: 2025-07-07
+    horaire: midi
+  - assiettes: 100
+    date_service: 2025-07-07
+    horaire: soir
+  - assiettes: 100
+    date_service: 2025-07-08
+    horaire: midi
+  - assiettes: 100
+    date_service: 2025-07-08
+    horaire: soir
+  - assiettes: 100
+    date_service: 2025-07-09
+    horaire: midi
+  - assiettes: 100
+    date_service: 2025-07-09
+    horaire: soir
+  - assiettes: 100
+    date_service: 2025-07-12
+    horaire: midi
   - assiettes: 100
     date_service: 2025-07-12
     horaire: soir

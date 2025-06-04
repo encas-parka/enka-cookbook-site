@@ -1,5 +1,5 @@
 ---
-title: LASAGNES DE POIS CASSÉS
+title: Lasagnes de Pois Cassés
 draft: false
 layout: recettes
 type: plat

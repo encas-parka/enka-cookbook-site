@@ -44,6 +44,18 @@ repas:
     date_service: 2025-07-09
     horaire: soir
   - assiettes: 100
+    date_service: 2025-07-10
+    horaire: midi
+  - assiettes: 100
+    date_service: 2025-07-10
+    horaire: soir
+  - assiettes: 100
+    date_service: 2025-07-11
+    horaire: midi
+  - assiettes: 100
+    date_service: 2025-07-11
+    horaire: soir
+  - assiettes: 100
     date_service: 2025-07-12
     horaire: midi
   - assiettes: 100

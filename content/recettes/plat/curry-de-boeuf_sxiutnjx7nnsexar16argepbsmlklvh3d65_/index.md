@@ -84,6 +84,7 @@ preparation: >-
 
 
   Ajouter le yaourt nature et assaisonner avec du sel et du poivre selon votre goût. Laisser mijoter pendant encore 10 minutes.
+astuces: []
 publishDate: 2025-05-14T10:52:00.000Z
 uuid: sxiutnjx7nnsexar16argepbsmlklvh3d65_
 titleslug: curry-de-boeuf_sxiutnjx7nnsexar16argepbsmlklvh3d65_

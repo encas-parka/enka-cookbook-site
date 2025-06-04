@@ -1,6 +1,6 @@
 ---
 title: Salade éxotique
-draft: true
+draft: false
 layout: recettes
 type: entree
 categories:

@@ -2,6 +2,10 @@
   "ingredients": [
     {
       "pFrais": true,
+      "title": "Origan frais"
+    },
+    {
+      "pFrais": true,
       "title": "champignons de paris surgelés"
     },
     {

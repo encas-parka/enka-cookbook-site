@@ -1,6 +1,9 @@
 {
   "ingredients": [
     {
+      "title": "Crème d'orge"
+    },
+    {
       "title": "Lait de soja",
       "alergenesIng": [
         "Soja"

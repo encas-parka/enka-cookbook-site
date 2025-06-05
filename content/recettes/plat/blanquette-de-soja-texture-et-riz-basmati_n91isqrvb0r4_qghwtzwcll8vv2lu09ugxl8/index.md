@@ -1,6 +1,6 @@
 ---
 title: Blanquette de soja texturé et riz basmati
-draft: true
+draft: false
 layout: recettes
 type: plat
 categories:
@@ -19,7 +19,6 @@ checkAlwaysOk: false
 checkfor: 24
 ingredients:
   sec:
-    - {}
     - title: Riz basmati
       quantite: 5
       unit: Kg
@@ -32,6 +31,7 @@ ingredients:
       unit: unité
     - title: Citron (jus)
       quantite: 1
+      unit: unité
     - title: Champignon de Paris
       quantite: 4
       unit: Kg

@@ -20,10 +20,13 @@ ingredients:
       quantite: 12
       unit: Kg
   sucres:
+    - title: boudoir
+      quantite: 100
+      unit: unité
     - title: vanille extrait concentré
       quantite: 40
       unit: ml
-    - title: Miel
+    - title: sucre de canne (blond)
       quantite: 500
       unit: grammes
     - title: sucre de canne (blond)

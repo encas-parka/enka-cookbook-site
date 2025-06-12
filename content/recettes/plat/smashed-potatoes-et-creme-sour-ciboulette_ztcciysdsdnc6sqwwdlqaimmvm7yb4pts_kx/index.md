@@ -11,18 +11,20 @@ regime:
   - sans-lactose
 cuisson: Oui
 temperature: Chaud
-plate: 150
+plate: 100
 quantite_desc: 1 Grosse patate par personnes
 check: Oui
 checkAlwaysOk: false
 ingredients:
   legumes:
     - title: Citron (jus)
+      quantite: 0.5
+      unit: grammes
     - title: Ail
       quantite: 3
       unit: tête·s
     - title: patate
-      quantite: 45
+      quantite: 25
       unit: Kg
   sec: []
   lof:
@@ -34,22 +36,60 @@ ingredients:
       unit: litre
   frais:
     - title: Yaourt de soja
-      quantite: 5
-      unit: litre
+      quantite: 3
+      unit: Kg
   epices:
-    - title: Moutarde
-      quantite: 200
+    - title: Paprika fumé
+      quantite: 150
       unit: grammes
     - title: Poivre noir moulu
     - title: Sel
     - title: Ciboulette
-      quantite: 3
+      quantite: 10
       unit: bottes
 preparation: >-
   Pour les smashed potatoes:
 
+  Lavez les pommes de terre.
 
-  Laver et Cuire les patates à l'eau pendant 20 minutes (en gardant la peau).  Les égoutter et les placer dans un gastro avec du papier sulfurisé. Écraser les patates 1 à une avec un verre par exemple. Mélanger l'huile d'olive et de tournesol et la verser dans les gastro pour badigeonner les patates. Les badigeonner aussi de moutarde. Hâcher l'ail et en parsemer dans les gastro. Cuire au four en mode grill jusqu'à ce que les patates soit bien croustillantes à l'extérieur.
+
+
+
+
+
+
+
+
+
+  Faites-les cuire dans une casserole d'eau salée bouillante pendant
+
+  environ 15 minutes, il faut qu'elles soient assez cuites pour pouvoir
+
+  piquer une fourchette dedans.
+
+
+  Préchauffez le four à 220°C, chaleur sole-voûte.
+
+
+  Egouttez les pommes de terre
+
+
+  Disposez-les sur une plaque de cuisson recouverte de papier
+
+  sulfurisé.
+
+
+  A l'aide d'un dessous de tasse ou de verre, écrasez chaque pomme de
+
+  terre.
+
+
+  Ajoutez l'huile dessus, le sel, le poivre et les épices.
+
+
+  Enfournez à mi-hauteur pour environ 25 minutes (surveillez la
+
+  cuisson – les pommes de terre doivent être bien dorées)
 
 
   Pour la Crème Sour Vegan:

@@ -42,6 +42,9 @@ ingredients:
       quantite: 25
       unit: litre
   epices:
+    - title: câpre
+      quantite: 800
+      unit: grammes
     - title: Estragon
       quantite: 5
       unit: bottes

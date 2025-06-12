@@ -28,6 +28,9 @@ ingredients:
       unit: Kg
   legumes: []
   epices:
+    - title: bouillon cube
+      quantite: 6
+      unit: unité
     - title: Sauce soja
       quantite: 750
       unit: ml

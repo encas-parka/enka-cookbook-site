@@ -14,7 +14,8 @@ quantite_desc: une par personne
 check: Oui
 checkAlwaysOk: false
 ingredients:
-  autres: []
+  autres:
+    - {}
   lof:
     - title: Huile végétale
       quantite: 1
@@ -30,6 +31,10 @@ ingredients:
     - title: Sauce soja
       quantite: 750
       unit: ml
+  sucres:
+    - title: Poudre d'amandes
+      quantite: 600
+      unit: grammes
 preparation: |-
   
   Faire bouillir 3L30 D'eau avec les bouillons cubes.

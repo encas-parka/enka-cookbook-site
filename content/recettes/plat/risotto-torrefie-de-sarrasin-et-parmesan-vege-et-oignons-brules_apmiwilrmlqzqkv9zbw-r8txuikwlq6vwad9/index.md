@@ -112,6 +112,10 @@ preparation: |-
   sans au ni huile. 
   Laisser brûler quelques minute, la face de l'oignon va devenir noir,
   puis rajouter un fond d'eau.
+  Laisser cuire environ 8 minutes, le haut de l'oignon doit être
+  suinté et être cuit.
+  Placer les oignons sur une plaque, la face non découpée posée sur
+  la plaque. Saupoudrer légèrement la face découpée de sucre.
 publishDate: 2025-06-13T14:31:00.000Z
 uuid: apmiwilrmlqzqkv9zbw-r8txuikwlq6vwad9
 titleslug: risotto-torrefie-de-sarrasin-et-parmesan-vege-et-oi_apmiwilrmlqzqkv9zbw-r8txuikwlq6vwad9

@@ -24,6 +24,9 @@ ingredients:
       quantite: 500
       unit: grammes
   legumes:
+    - title: échalote
+      quantite: 20
+      unit: unité
     - title: Oignon
       quantite: 20
       unit: Kg

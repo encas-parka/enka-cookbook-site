@@ -2,6 +2,10 @@
   "ingredients": [
     {
       "pFrais": true,
+      "title": "yaourt de brebis"
+    },
+    {
+      "pFrais": true,
       "title": "Pâte brisée sans gluten"
     },
     {

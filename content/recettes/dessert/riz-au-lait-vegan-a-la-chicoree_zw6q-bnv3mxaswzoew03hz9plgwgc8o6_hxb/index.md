@@ -30,10 +30,13 @@ ingredients:
     - title: Sel
       quantite: 8
       unit: grammes
-  autres: []
+  autres:
+    - title: chicorée soluble
+      quantite: 170
+      unit: grammes
 preparation: >-
-  faire chauffer une grande quantité d'eau, quand elle bout, ajouter le riz et
-  faire cuire pendant 5 mn
+  faire chauffer une grande quantité d'eau avec le sel, quand elle bout, ajouter
+  le riz et faire cuire pendant 5 mn
 
 
   faire chauffer 13 litre de lait d'avoine, juste avant l'ébullition ajouter le riz précuit, le sucre vergeoise et la chicorée, laisser cuire 30 mn en remuant régulièrement

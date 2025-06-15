@@ -1,5 +1,5 @@
 ---
-title: riz au lait végan à la chicoréé
+title: riz au lait végan à la chicorée
 draft: false
 layout: recettes
 type: dessert

@@ -12,8 +12,11 @@ check: Oui
 checkAlwaysOk: false
 ingredients:
   frais:
+    - title: Yaourt de soja
+      quantite: 1.2
+      unit: Kg
     - title: Fromage blanc
-      quantite: 12
+      quantite: 11
       unit: Kg
   sucres:
     - title: sucre de canne (blond)

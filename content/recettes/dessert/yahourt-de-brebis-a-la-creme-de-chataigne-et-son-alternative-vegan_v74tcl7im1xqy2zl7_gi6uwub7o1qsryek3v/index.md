@@ -14,6 +14,9 @@ check: Oui
 checkAlwaysOk: false
 ingredients:
   frais:
+    - title: yaourt de brebis
+      quantite: 11
+      unit: Kg
     - title: Yaourt de soja
       quantite: 1.2
       unit: Kg

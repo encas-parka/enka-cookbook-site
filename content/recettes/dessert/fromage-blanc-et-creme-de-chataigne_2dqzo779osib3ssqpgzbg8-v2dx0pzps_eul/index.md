@@ -1,5 +1,5 @@
 ---
-title: FROMAGE BLANC ET FRUITS ROUGES
+title: FROMAGE BLANC ET FRUITS ROUGES et son alernative vegan
 draft: false
 layout: recettes
 type: dessert

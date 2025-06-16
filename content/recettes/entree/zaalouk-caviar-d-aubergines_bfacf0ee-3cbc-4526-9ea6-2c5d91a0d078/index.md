@@ -1,5 +1,5 @@
 ---
-title: Zaalouk (caviar d'aubergines)
+title: Zaalouk (salade maroc d'aubergines)
 draft: false
 layout: recettes
 type: entree

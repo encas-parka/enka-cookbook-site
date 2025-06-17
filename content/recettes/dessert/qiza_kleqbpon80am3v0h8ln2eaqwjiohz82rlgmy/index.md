@@ -30,6 +30,9 @@ ingredients:
       unit: litre
   epices: []
   sec:
+    - title: graine de nigelle
+      quantite: 1
+      unit: Kg
     - title: Amande
       quantite: 500
       unit: grammes

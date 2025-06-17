@@ -15,8 +15,11 @@ check: Oui
 checkAlwaysOk: false
 ingredients:
   lof:
+    - title: creme de coco
+      quantite: 6.5
+      unit: litre
     - title: lait d’amande
-      quantite: 6.4
+      quantite: 6.5
       unit: litre
   sucres:
     - title: sucre de canne (blond)

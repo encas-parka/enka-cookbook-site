@@ -114,7 +114,6 @@ preparation: >-
   1/4 d'heure avant le service, ajouter le yaourt nature et assaisonner avec du sel et du poivre selon votre goût. Laisser mijoter pendant encore 10 minutes.
 
 
-
   #### Les chatignis (chutney créole)
 
 
@@ -130,22 +129,23 @@ preparation: >-
   Dans un gastro GN 1/6, mélanger les tomates, du sel du poivre, un peu d'huile d'olive, de  l'ail/gingembre.
 
 
-  Chatigni arachide\
+  **Chatigni arachide**\
 
-  hacher les arachides et les reserver.
-
-
-  Chatigni Banane\
-
-  tailler les bananes en 4 (dans les deux sens de la longueur) puis en dés
+  hacher les arachides et les réserver.
 
 
-  Chatigni coco\
+  **Chatigni Banane**\
 
-  Dans un gastro GN 1/6, mélanger 
+  tailler les bananes en 4 (dans les deux sens de la longueur) puis en dés. Reserver avec un peu de jus de citron pour éviter l'oxidation
 
 
+  **Chatigni coco**\
 
+  Si le temps le permet torréfier la noix de coco râpée\
+
+  Dans un gastro GN 1/6, mélanger le yaourt brassé avec la noix de coco râpée.\
+
+  Si vous avez le tempe
 
 
   #### Le riz

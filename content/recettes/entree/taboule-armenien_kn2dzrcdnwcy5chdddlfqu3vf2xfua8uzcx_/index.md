@@ -12,9 +12,10 @@ check: Oui
 checkAlwaysOk: false
 ingredients:
   sec:
-    - title: Boulgour
-      quantite: 400
-      unit: grammes
+    - title: Semoule moyenne (blé)
+      commentaire: semi complète
+      quantite: 0.25
+      unit: Kg
   legumes:
     - {}
     - title: Citron (jus)
@@ -36,8 +37,9 @@ ingredients:
       unit: c. à soupe
   epices:
     - title: Cébettes
-      quantite: ""
+      quantite: 0.4
       unit: bottes
+      commentaire: ""
     - title: Pâte de poivron
       quantite: 1
       unit: c. à soupe
@@ -51,7 +53,7 @@ ingredients:
       quantite: 1
       unit: c. à soupe
     - title: Persil frais
-      quantite: ""
+      quantite: 1
       unit: bottes
     - title: Cumin
     - title: Paprika

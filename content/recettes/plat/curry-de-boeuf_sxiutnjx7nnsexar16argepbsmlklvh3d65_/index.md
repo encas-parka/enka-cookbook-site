@@ -68,6 +68,9 @@ ingredients:
       commentaire: Sec (a cuire)
       unit: Kg
   sucres:
+    - title: Jus de citron
+      quantite: 5
+      unit: c. à soupe
     - title: Noix de coco rapée
       quantite: 500
       unit: grammes

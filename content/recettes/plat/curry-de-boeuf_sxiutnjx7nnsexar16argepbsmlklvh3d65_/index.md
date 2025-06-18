@@ -67,7 +67,10 @@ ingredients:
       quantite: 5
       commentaire: Sec (a cuire)
       unit: Kg
-  sucres: []
+  sucres:
+    - title: Noix de coco rapée
+      quantite: 500
+      unit: grammes
 preparation: >-
   #### La viande et sa sauce
 

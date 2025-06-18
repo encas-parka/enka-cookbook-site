@@ -1,6 +1,6 @@
 ---
 title: RAINBOW CAKE
-draft: true
+draft: false
 description: A faire la veille du service !
 layout: recettes
 type: dessert

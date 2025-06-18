@@ -109,7 +109,7 @@ preparation: >-
   Verser le lait de coco, puis ajouter environ un litre d'eau pour arriver à couvert. Bien mélanger.\
 
 
-  Laisser mijoter à feu doux pendant environ 1 heure 30 jusqu'à ce que le bœuf soit tendre. Donc au plus tard à 10:30 pour un service à midi.\
+  Laisser mijoter à feu doux pendant environ 1 heure 30 jusqu'à ce que le bœuf soit tendre. Donc au plus tard à **10:30** pour un service à midi.\
 
   \
 
@@ -152,7 +152,33 @@ preparation: >-
   #### Le riz
 
 
-  blabla bla
+  un gastro GN 1/1 = 50 personnes. 
+
+
+  Dans chaque gastro (taille moyenne):
+
+
+  1. repartir 2,5 kg de riz
+
+  2. ajouter 50 g de sel
+
+  3. ajouter 250 g d'oignons ciselés
+
+  4. ajouter 100 g d'huile végétale
+
+  5. bien melanger pour nacrer le riz.
+
+  6. Ajouter 1,8 à 2 fois la masse du riz en eau soit 5 litres maxi
+
+  7. Couvrir 
+
+
+  Cuisson au four à 180 ° pendant 30 à 40 minutes.\
+
+  Au plus tard à **11:10** pour un service à midi.
+
+
+  Une fois cuit, égrainer le riz pour éviter qu'il ne colle. ensuite couvrir et maintenir au bain marie.
 astuces: []
 publishDate: 2025-05-14T10:52:00.000Z
 uuid: sxiutnjx7nnsexar16argepbsmlklvh3d65_

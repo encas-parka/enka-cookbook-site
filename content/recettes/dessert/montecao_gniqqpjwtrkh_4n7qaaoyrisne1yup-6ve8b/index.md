@@ -1,6 +1,6 @@
 ---
 title: MONTECAO
-draft: true
+draft: false
 layout: recettes
 type: dessert
 categories:
@@ -30,6 +30,7 @@ ingredients:
       unit: grammes
     - title: Eau de fleur d'oranger
       quantite: 400
+      unit: ml
     - title: Sucre glace
       quantite: 1
       unit: Kg

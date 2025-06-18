@@ -1,6 +1,6 @@
 ---
 title: "Curry de boeuf "
-draft: true
+draft: false
 layout: recettes
 type: plat
 categories:

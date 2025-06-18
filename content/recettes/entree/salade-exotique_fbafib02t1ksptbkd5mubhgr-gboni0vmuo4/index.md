@@ -6,6 +6,10 @@ type: entree
 categories:
   - Salade
 auteur: frédo
+regime:
+  - vegan
+  - sans-gluten
+  - sans-lactose
 cuisson: Non
 temperature: Froid
 plate: 100

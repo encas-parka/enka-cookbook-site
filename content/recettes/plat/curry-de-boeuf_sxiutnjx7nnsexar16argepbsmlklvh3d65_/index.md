@@ -19,6 +19,9 @@ ingredients:
       commentaire: "Coupé en cubes de 3cm de côté "
       title: Bourguignon (boeuf)
   legumes:
+    - title: Banane
+      quantite: 25
+      unit: unité
     - title: Oignon rouge
       quantite: 3
       unit: Kg
@@ -38,12 +41,15 @@ ingredients:
       commentaire: ce n'est pas une erreur il y a besoin deux fois de tomates dans
         cette recette
   frais:
-    - title: Yaourt de vache
-      quantite: 500
-      unit: grammes
+    - title: Yaourt brassé
+      quantite: 2
+      unit: litre
     - title: Beurre demi-sel
       unit: grammes
       quantite: 300
+    - title: Yaourt de vache
+      quantite: 500
+      unit: grammes
   epices:
     - title: Curry
       unit: c. à café
@@ -52,12 +58,16 @@ ingredients:
     - title: Concentré de tomate
       quantite: 500
       unit: grammes
-  lof: []
+  lof:
+    - title: huile d'olive
+      quantite: 5
+      unit: c. à soupe
   sec:
     - title: Riz basmati
       quantite: 5
       commentaire: Sec (a cuire)
       unit: Kg
+  sucres: []
 preparation: >-
   #### La viande et sa sauce
 

@@ -48,7 +48,10 @@ ingredients:
     - title: Curry
       unit: c. à café
       quantite: 25
-  autres: []
+  autres:
+    - title: Concentré de tomate
+      quantite: 500
+      unit: grammes
   lof: []
   sec:
     - title: Riz basmati
@@ -62,20 +65,23 @@ preparation: >-
   Tailler le boeuf en cube d'environ 3 cm de cotés
 
 
-  Ciseller les oignons.\
+  Ciseller les oignons : *tailler en tous petits dés, obtenus par trois coupes successives (largeur, hauteur et longueur)*
 
-  Tailler les tomates en mirepoix : \
+  Tailler les tomates en mirepoix : *gros cubes irréguliers d’environ 1 cm de côté*
 
-  Tailler les poivrons à la paysanne : (en *carrés ou en triangles de 1 cm de section)*
+  Tailler les poivrons à la paysanne : en *carrés ou en triangles de 1 cm de section*
+
+  Tailler l'ail et le gingembre en très fine brunoise : *cubes de 2 à 3 mm de côté*
+
 
 
   \
 
-  Dans une grande casserole, faire fondre le beurre. \
+  Dans une grande sauteuse, faire fondre le beurre. \
 
   Ajouter les oignons, les poivrons et les faire revenir jusqu'à ce qu'ils soient dorés.
 
-  Ajouter les morceaux de boeuf et les faire dorer de tous les côtés.
+  Ajouter les morceaux de bœuf et les faire dorer de tous les côtés.
 
 
 

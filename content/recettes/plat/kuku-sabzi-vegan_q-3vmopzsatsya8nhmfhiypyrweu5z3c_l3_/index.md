@@ -1,6 +1,6 @@
 ---
 title: KUKU SABZI VEGAN
-draft: true
+draft: false
 layout: recettes
 type: plat
 categories:

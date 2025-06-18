@@ -5,6 +5,8 @@ layout: recettes
 type: dessert
 categories:
   - Gateau
+regime:
+  - sans-gluten
 cuisson: Oui
 temperature: Froid
 plate: 12

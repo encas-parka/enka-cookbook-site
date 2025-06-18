@@ -19,6 +19,9 @@ ingredients:
       commentaire: "Coupé en cubes de 3cm de côté "
       title: Bourguignon (boeuf)
   legumes:
+    - title: Oignon
+      quantite: 500
+      unit: grammes
     - title: Banane
       quantite: 25
       unit: unité
@@ -143,9 +146,7 @@ preparation: >-
 
   Si le temps le permet torréfier la noix de coco râpée\
 
-  Dans un gastro GN 1/6, mélanger le yaourt brassé avec la noix de coco râpée.\
-
-  Si vous avez le tempe
+  Dans un gastro GN 1/6, mélanger le yaourt brassé avec la noix de coco râpée.
 
 
   #### Le riz

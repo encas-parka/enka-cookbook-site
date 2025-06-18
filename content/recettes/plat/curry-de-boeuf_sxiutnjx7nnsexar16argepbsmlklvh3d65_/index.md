@@ -59,60 +59,58 @@ ingredients:
       commentaire: Sec (a cuire)
       unit: Kg
 preparation: >-
-  #### Étape 1
+  #### La viande et sa sauce
 
 
-  Tailler le boeuf en cube d'environ 3 cm de cotés
+  Tailler le bœuf en cube d'environ 3 cm de cotés
 
 
-  Ciseller les oignons : *tailler en tous petits dés, obtenus par trois coupes successives (largeur, hauteur et longueur)*
+  Ciseller les oignons : *tailler en tous petits dés, obtenus par trois coupes successives (largeur, hauteur et longueur).*
 
-  Tailler les tomates en mirepoix : *gros cubes irréguliers d’environ 1 cm de côté*
+  Tailler les tomates en mirepoix : *gros cubes irréguliers d’environ 1 cm de côté.*
 
-  Tailler les poivrons à la paysanne : en *carrés ou en triangles de 1 cm de section*
+  Tailler les poivrons à la paysanne : en *carrés ou en triangles de 1 cm de section.*
 
-  Tailler l'ail et le gingembre en très fine brunoise : *cubes de 2 à 3 mm de côté*
+  Tailler ensemble l'ail et le gingembre en très fine brunoise : *cubes de 2 à 3 mm de côté normalement mais là encore plus petit.*
 
 
+  Préparer la pate de curry en mélangeant le concentré de tomate avec la poudre de curry
 
-  \
 
   Dans une grande sauteuse, faire fondre le beurre. \
 
   Ajouter les oignons, les poivrons et les faire revenir jusqu'à ce qu'ils soient dorés.
 
-  Ajouter les morceaux de bœuf et les faire dorer de tous les côtés.
+  Ajouter les morceaux de bœuf et les faire dorer de tous les côtés.\
 
-
-
-
-  #### Étape 2
-
-
-
-
-  #### Étape 3
-
+  Faire un espace au centre, un filet d'huile d'olive, ajouter l'ail/gingembre et la pate de curry et remuer pendant une minute (*pas plus sinon l'ail devient amer*).
 
   Incorporer et les tomates. Laisser mijoter pendant quelques minutes.
 
-
-  #### Étape 4
-
-
-  Verser l'eau et le lait de coco, puis ajouter la pâte de curry. Bien mélanger.
+  Verser le lait de coco, puis ajouter environ un litre d'eau pour arriver à couvert. Bien mélanger.\
 
 
-  #### Étape 5
+  Laisser mijoter à feu doux pendant environ 1 heure 30 jusqu'à ce que le bœuf soit tendre. Donc au plus tard à 10:30 pour un service à midi.\
+
+  \
 
 
-  Laisser mijoter à feu doux pendant environ 1 heure 30 jusqu'à ce que le boeuf soit tendre.
+  1/4 d'heure avant le service, ajouter le yaourt nature et assaisonner avec du sel et du poivre selon votre goût. Laisser mijoter pendant encore 10 minutes.
 
 
-  #### Étape 6
+
+  #### Les chatignis
 
 
-  Ajouter le yaourt nature et assaisonner avec du sel et du poivre selon votre goût. Laisser mijoter pendant encore 10 minutes.
+  Pendant que ça cuit, préparer les quatre chatignis qui accompagneront le plats.\
+
+  Les quantité sont prévues pour une grosse cuillères à soupe de chaque chatigni par personnes.
+
+
+  #### Le riz
+
+
+  blabla bla
 astuces: []
 publishDate: 2025-05-14T10:52:00.000Z
 uuid: sxiutnjx7nnsexar16argepbsmlklvh3d65_

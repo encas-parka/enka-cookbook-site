@@ -1,6 +1,6 @@
 ---
 title: CHEESECAKE A LA PATATE DOUCE
-draft: true
+draft: false
 layout: recettes
 type: dessert
 categories:

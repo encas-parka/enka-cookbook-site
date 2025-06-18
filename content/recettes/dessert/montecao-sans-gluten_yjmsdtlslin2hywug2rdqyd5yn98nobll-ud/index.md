@@ -1,6 +1,6 @@
 ---
 title: MONTECAO SANS GLUTEN
-draft: true
+draft: false
 layout: recettes
 type: dessert
 categories:

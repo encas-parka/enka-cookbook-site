@@ -1,6 +1,6 @@
 ---
 title: HUSH PUPPIES
-draft: true
+draft: false
 description: Petits beignets de maïs frits
 layout: recettes
 type: entree

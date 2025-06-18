@@ -1,6 +1,6 @@
 ---
 title: KUKU SABZI
-draft: true
+draft: false
 description: Omelette aux herbes
 layout: recettes
 type: plat

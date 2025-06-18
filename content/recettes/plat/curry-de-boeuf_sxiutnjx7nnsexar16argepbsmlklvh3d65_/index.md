@@ -99,12 +99,37 @@ preparation: >-
 
 
 
-  #### Les chatignis
+  #### Les chatignis (chutney créole)
 
 
   Pendant que ça cuit, préparer les quatre chatignis qui accompagneront le plats.\
 
   Les quantité sont prévues pour une grosse cuillères à soupe de chaque chatigni par personnes.
+
+
+  **Chatigni "pommes d'amour"**\
+
+  Tailler les tomates prévues pour ce chatigni en macédoine : *cubes de 5 à 6 mm de côté*
+
+  Dans un gastro GN 1/6, mélanger les tomates, du sel du poivre, un peu d'huile d'olive, de  l'ail/gingembre.
+
+
+  Chatigni arachide\
+
+  hacher les arachides et les reserver.
+
+
+  Chatigni Banane\
+
+  tailler les bananes en 4 (dans les deux sens de la longueur) puis en dés
+
+
+  Chatigni coco\
+
+  Dans un gastro GN 1/6, mélanger 
+
+
+
 
 
   #### Le riz

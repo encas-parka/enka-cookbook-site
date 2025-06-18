@@ -19,18 +19,24 @@ ingredients:
       commentaire: "Coupé en cubes de 3cm de côté "
       title: Bourguignon (boeuf)
   legumes:
+    - title: Oignon rouge
+      quantite: 3
+      unit: Kg
+      commentaire: Ciselés
+    - title: Tomate
+      unit: Kg
+      commentaire: ce n'est pas une erreur il y a besoin deux fois de tomates dans
+        cette recette
+      quantite: 1.5
     - title: Poivron (rouge)
       quantite: 1
       unit: Kg
       commentaire: Coupés en lamelle
     - title: Tomate
-      unit: Kg
-      commentaire: Coupées en dés
-      quantite: 1.5
-    - title: Oignon rouge
-      quantite: 3
-      unit: Kg
-      commentaire: Ciselés
+      quantite: 25
+      unit: unité
+      commentaire: ce n'est pas une erreur il y a besoin deux fois de tomates dans
+        cette recette
   frais:
     - title: Yaourt de vache
       quantite: 500
@@ -53,19 +59,36 @@ preparation: >-
   #### Étape 1
 
 
-  Dans une grande casserole, faire fondre le beurre. Ajouter les oignons et les faire revenir jusqu'à ce qu'ils soient dorés.
+  Tailler le boeuf en cube d'environ 3 cm de cotés
+
+
+  Ciseller les oignons.\
+
+  Tailler les tomates en mirepoix : \
+
+  Tailler les poivrons à la paysanne : (en *carrés ou en triangles de 1 cm de section)*
+
+
+  \
+
+  Dans une grande casserole, faire fondre le beurre. \
+
+  Ajouter les oignons, les poivrons et les faire revenir jusqu'à ce qu'ils soient dorés.
+
+  Ajouter les morceaux de boeuf et les faire dorer de tous les côtés.
+
+
 
 
   #### Étape 2
 
 
-  Ajouter les morceaux de boeuf et les faire dorer de tous les côtés.
 
 
   #### Étape 3
 
 
-  Incorporer les poivrons et les tomates. Laisser mijoter pendant quelques minutes.
+  Incorporer et les tomates. Laisser mijoter pendant quelques minutes.
 
 
   #### Étape 4

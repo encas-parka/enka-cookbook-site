@@ -15,7 +15,7 @@ checkAlwaysOk: false
 ingredients:
   animaux:
     - unit: Kg
-      quantite: 10
+      quantite: 15
       commentaire: "Coupé en cubes de 3cm de côté "
       title: Bourguignon (boeuf)
   legumes:

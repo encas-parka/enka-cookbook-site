@@ -1,116 +1,10 @@
 {
   "ingredients": [
     {
-      "title": "Cornichons"
-    },
-    {
-      "title": "Cornichons aigre-doux"
-    },
-    {
-      "title": "Pain Burger"
-    },
-    {
-      "title": "Pain Burger Végan"
-    },
-    {
-      "title": "Écorce d'orange séchée "
-    },
-    {
-      "title": "chicorée soluble"
-    },
-    {
-      "title": "crêpes de sarrasin"
-    },
-    {
-      "title": "purée de noix de cajou"
-    },
-    {
-      "title": "Chantifix"
-    },
-    {
-      "title": "Colorants alimentaires"
-    },
-    {
-      "title": "Chorizo végan",
-      "alergenesIng": [
-        "Gluten",
-        "Soja"
-      ]
-    },
-    {
-      "title": "Pain rassis sans gluten"
-    },
-    {
-      "title": "Pâte à pain",
-      "alergenesIng": [
-        "Gluten"
-      ]
-    },
-    {
-      "title": "jus de goyage"
-    },
-    {
-      "title": "Vin rouge"
-    },
-    {
-      "title": "Vin blanc"
-    },
-    {
-      "title": "Madère"
-    },
-    {
-      "title": "Pain au levain"
-    },
-    {
-      "title": "Eau gazeuse"
-    },
-    {
-      "title": "Purée d'amande"
-    },
-    {
-      "title": "Levure de bière"
-    },
-    {
-      "title": "Café moulu"
-    },
-    {
-      "title": "Chunks (protéine de soja)",
-      "alergenesIng": [
-        "Soja"
-      ]
-    },
-    {
-      "title": "Thé Matcha"
-    },
-    {
-      "title": "Gomme de guar"
-    },
-    {
-      "title": "Gomme de xanthane"
-    },
-    {
-      "title": "Pesto Rosso végan"
+      "title": "Agar-agar"
     },
     {
       "title": "Aquafaba - jus de pois chiche"
-    },
-    {
-      "title": "Pain rassis",
-      "alergenesIng": [
-        "Gluten"
-      ]
-    },
-    {
-      "title": "Pate feuilleté sans gluten et vegan"
-    },
-    {
-      "title": "Pate feuilletée sans gluten"
-    },
-    {
-      "title": "Pate feuilletée",
-      "alergenesIng": [
-        "Gluten"
-      ]
     },
     {
       "title": "Beurre de cacahuètes (salé)",
@@ -125,34 +19,13 @@
       ]
     },
     {
-      "title": "Saucisse végane"
-    },
-    {
-      "title": "Protéines de soja",
-      "alergenesIng": [
-        "Soja"
-      ]
-    },
-    {
-      "title": "Eau"
-    },
-    {
-      "title": "Miso",
-      "alergenesIng": [
-        "Soja"
-      ]
-    },
-    {
-      "title": "Gomme de xanthane",
-      "vegetarien": true,
-      "vegan": true,
-      "sans-lactose": true
-    },
-    {
-      "title": "Agar-agar"
-    },
-    {
       "title": "Bicarbonate de soude"
+    },
+    {
+      "title": "Café moulu"
+    },
+    {
+      "title": "Chantifix"
     },
     {
       "title": "Chapelure",
@@ -161,10 +34,47 @@
       ]
     },
     {
+      "title": "chicorée soluble"
+    },
+    {
+      "title": "Chorizo végan",
+      "alergenesIng": [
+        "Gluten",
+        "Soja"
+      ]
+    },
+    {
+      "title": "Chunks (protéine de soja)",
+      "alergenesIng": [
+        "Soja"
+      ]
+    },
+    {
+      "title": "Colorants alimentaires"
+    },
+    {
       "title": "Colorants alimentaires en poudre"
     },
     {
       "title": "Concentré de tomate"
+    },
+    {
+      "title": "Cornichons"
+    },
+    {
+      "title": "Cornichons aigre-doux"
+    },
+    {
+      "title": "crêpes de sarrasin"
+    },
+    {
+      "title": "Eau"
+    },
+    {
+      "title": "Eau gazeuse"
+    },
+    {
+      "title": "Écorce d'orange séchée "
     },
     {
       "title": "Feuille de gélatine"
@@ -181,19 +91,55 @@
       "vegetarien": true
     },
     {
+      "title": "Gomme de guar"
+    },
+    {
+      "title": "Gomme de xanthane"
+    },
+    {
+      "title": "Gomme de xanthane",
+      "vegetarien": true,
+      "vegan": true,
+      "sans-lactose": true
+    },
+    {
+      "title": "jus de goyage"
+    },
+    {
       "title": "Levure chimique",
       "alergenesIng": [
         "Gluten"
       ]
     },
     {
+      "title": "Levure de bière"
+    },
+    {
       "title": "Levure de boulanger"
+    },
+    {
+      "title": "Madère"
+    },
+    {
+      "title": "Miso",
+      "alergenesIng": [
+        "Soja"
+      ]
     },
     {
       "title": "Pain",
       "alergenesIng": [
         "Gluten"
       ]
+    },
+    {
+      "title": "Pain au levain"
+    },
+    {
+      "title": "Pain Burger"
+    },
+    {
+      "title": "Pain Burger Végan"
     },
     {
       "title": "Pain de mie",
@@ -208,6 +154,48 @@
       ]
     },
     {
+      "title": "Pain rassis",
+      "alergenesIng": [
+        "Gluten"
+      ]
+    },
+    {
+      "title": "Pain rassis sans gluten"
+    },
+    {
+      "title": "Pâte à pain",
+      "alergenesIng": [
+        "Gluten"
+      ]
+    },
+    {
+      "title": "Pate feuilleté sans gluten et vegan"
+    },
+    {
+      "title": "Pate feuilletée",
+      "alergenesIng": [
+        "Gluten"
+      ]
+    },
+    {
+      "title": "Pate feuilletée sans gluten"
+    },
+    {
+      "title": "Pesto Rosso végan"
+    },
+    {
+      "title": "Protéines de soja",
+      "alergenesIng": [
+        "Soja"
+      ]
+    },
+    {
+      "title": "Purée d'amande"
+    },
+    {
+      "title": "purée de noix de cajou"
+    },
+    {
       "alergenesIng": [
         "Sésame"
       ],
@@ -216,10 +204,22 @@
       "vegetarien": true
     },
     {
+      "title": "Saucisse végane"
+    },
+    {
       "alergenesIng": [
         "Sésame"
       ],
       "title": "Tahin"
+    },
+    {
+      "title": "Thé Matcha"
+    },
+    {
+      "title": "Vin blanc"
+    },
+    {
+      "title": "Vin rouge"
     }
   ]
 }

@@ -1,109 +1,6 @@
 {
   "ingredients": [
     {
-      "title": "Noix de coco rapée"
-    },
-    {
-      "title": "boudoir"
-    },
-    {
-      "title": "Crème de marron"
-    },
-    {
-      "title": "Chapelure sans gluten"
-    },
-    {
-      "title": "Cranberries séchées"
-    },
-    {
-      "title": "confiture de myrtille"
-    },
-    {
-      "title": "sucre de palme"
-    },
-    {
-      "title": "Soda au Gingembre - Ginger Beer",
-      "pFrais": false
-    },
-    {
-      "title": "Sirop de sureau"
-    },
-    {
-      "title": "Eau de rose"
-    },
-    {
-      "title": "Eau de fleur d'oranger"
-    },
-    {
-      "title": "Cornflakes (sans gluten)"
-    },
-    {
-      "title": "Muscovado (sucre de canne complet)"
-    },
-    {
-      "title": "compote de pomme"
-    },
-    {
-      "title": "Halva",
-      "alergenesIng": [
-        "Sésame"
-      ]
-    },
-    {
-      "title": "Chocolat noir patissier 70p100"
-    },
-    {
-      "title": "Confiture de fraises"
-    },
-    {
-      "title": "vanille extrait concentré"
-    },
-    {
-      "title": "gousse de vanille"
-    },
-    {
-      "title": "Pralines roses de Lyon"
-    },
-    {
-      "title": "Jus de citron vert"
-    },
-    {
-      "title": "Sirop d'érable "
-    },
-    {
-      "title": "Sucre complet"
-    },
-    {
-      "title": "Mélasse"
-    },
-    {
-      "title": "Cacao"
-    },
-    {
-      "title": "Miel"
-    },
-    {
-      "title": "lait de cajou"
-    },
-    {
-      "title": "sucre blanc"
-    },
-    {
-      "title": "Sucre brun Vergeoise"
-    },
-    {
-      "title": "Gingembre confit"
-    },
-    {
-      "title": "Biscuit vegan et sans gluten"
-    },
-    {
-      "title": "Confiture de chataigne (sans sucre)"
-    },
-    {
-      "title": "Glucose"
-    },
-    {
       "title": "Biscuit Petit Brun",
       "alergenesIng": [
         "Gluten",
@@ -113,20 +10,19 @@
       ]
     },
     {
-      "title": "Speculoos",
-      "alergenesIng": [
-        "Gluten",
-        "Soja"
-      ]
+      "title": "Biscuit vegan et sans gluten"
     },
     {
-      "title": "Sirop d'agave"
+      "title": "boudoir"
     },
     {
-      "title": "sucre de canne (blond)"
+      "title": "Cacao"
     },
     {
       "title": "Cassonade"
+    },
+    {
+      "title": "Chapelure sans gluten"
     },
     {
       "title": "Chocolat amer en poudre"
@@ -141,12 +37,57 @@
       "title": "Chocolat noir"
     },
     {
+      "title": "Chocolat noir patissier 70p100"
+    },
+    {
       "title": "Chocolat praliné"
+    },
+    {
+      "title": "compote de pomme"
+    },
+    {
+      "title": "Confiture de chataigne (sans sucre)"
+    },
+    {
+      "title": "Confiture de fraises"
+    },
+    {
+      "title": "confiture de myrtille"
+    },
+    {
+      "title": "Cornflakes (sans gluten)"
+    },
+    {
+      "title": "Cranberries séchées"
+    },
+    {
+      "title": "Crème de marron"
     },
     {
       "title": "Eau de coco",
       "vegan": true,
       "vegetarien": true
+    },
+    {
+      "title": "Eau de fleur d'oranger"
+    },
+    {
+      "title": "Eau de rose"
+    },
+    {
+      "title": "Gingembre confit"
+    },
+    {
+      "title": "Glucose"
+    },
+    {
+      "title": "gousse de vanille"
+    },
+    {
+      "title": "Halva",
+      "alergenesIng": [
+        "Sésame"
+      ]
     },
     {
       "title": "Jus d'orange",
@@ -167,6 +108,9 @@
       "title": "Jus de citron",
       "vegan": true,
       "vegetarien": true
+    },
+    {
+      "title": "Jus de citron vert"
     },
     {
       "title": "Jus de fraise",
@@ -199,9 +143,24 @@
       "vegetarien": true
     },
     {
+      "title": "lait de cajou"
+    },
+    {
+      "title": "Mélasse"
+    },
+    {
+      "title": "Miel"
+    },
+    {
+      "title": "Muscovado (sucre de canne complet)"
+    },
+    {
       "title": "Nectar d'abricot",
       "vegan": true,
       "vegetarien": true
+    },
+    {
+      "title": "Noix de coco rapée"
     },
     {
       "title": "Pépites de chocolat"
@@ -219,10 +178,48 @@
       ]
     },
     {
+      "title": "Pralines roses de Lyon"
+    },
+    {
       "title": "Praslin en poudre",
       "alergenesIng": [
         "Fruit à coque"
       ]
+    },
+    {
+      "title": "Sirop d'agave"
+    },
+    {
+      "title": "Sirop d'érable "
+    },
+    {
+      "title": "Sirop de sureau"
+    },
+    {
+      "title": "Soda au Gingembre - Ginger Beer",
+      "pFrais": false
+    },
+    {
+      "title": "Speculoos",
+      "alergenesIng": [
+        "Gluten",
+        "Soja"
+      ]
+    },
+    {
+      "title": "sucre blanc"
+    },
+    {
+      "title": "Sucre brun Vergeoise"
+    },
+    {
+      "title": "Sucre complet"
+    },
+    {
+      "title": "sucre de canne (blond)"
+    },
+    {
+      "title": "sucre de palme"
     },
     {
       "title": "Sucre en poudre"
@@ -232,6 +229,9 @@
     },
     {
       "title": "Sucre vanillé"
+    },
+    {
+      "title": "vanille extrait concentré"
     }
   ]
 }

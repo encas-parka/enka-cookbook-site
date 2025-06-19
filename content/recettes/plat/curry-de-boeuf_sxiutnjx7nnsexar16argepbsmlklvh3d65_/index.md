@@ -19,6 +19,14 @@ ingredients:
       commentaire: "Coupé en cubes de 3cm de côté "
       title: Bourguignon (boeuf)
   legumes:
+    - title: Ail
+      quantite: 1
+      unit: tête·s
+    - title: Gingembre bio
+      quantite: 2
+      unit: unité
+      commentaire: deux bouts de racine pour avoir en quantité de gingembre,
+        l'équivalent d'une tète d'ail.
     - title: Oignon
       quantite: 500
       unit: grammes

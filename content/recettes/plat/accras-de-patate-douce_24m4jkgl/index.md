@@ -33,7 +33,7 @@ ingredients:
       unit: Kg
   sec: []
   lof:
-    - title: lait de soja
+    - title: Lait de soja
       quantite: 1
       unit: litre
     - title: Levure chimique

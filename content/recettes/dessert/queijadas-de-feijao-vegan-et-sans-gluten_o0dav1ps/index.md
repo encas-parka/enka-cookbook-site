@@ -35,7 +35,7 @@ ingredients:
     title: Crème soja
     unit: ml
   - quantite: 375
-    title: lait de soja
+    title: Lait de soja
     unit: ml
   sec:
   - quantite: 200

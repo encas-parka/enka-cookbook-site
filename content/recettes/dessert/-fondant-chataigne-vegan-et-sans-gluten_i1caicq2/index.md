@@ -27,7 +27,7 @@ ingredients:
       quantite: 1.5
       unit: Kg
   lof:
-    - title: lait de soja
+    - title: Lait de soja
       quantite: 600
       unit: ml
     - title: Farine de tapioca
@@ -48,7 +48,7 @@ preparation: >-
 
   * Mélanger tout afin d'obtenir une pâte homogène.
 
-  * Tapisser les gastro de papier sulfurisé et verser la pâte. 
+  * Tapisser les gastro de papier sulfurisé et verser la pâte.
 
   * Cuire dans un four préchauffé à 200°, une vingtaine de minutes.
 

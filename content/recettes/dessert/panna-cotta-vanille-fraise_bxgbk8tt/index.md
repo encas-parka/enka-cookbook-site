@@ -13,7 +13,7 @@ ingredients:
     unit: grammes
   lof:
   - quantite: 4.6
-    title: lait de soja
+    title: Lait de soja
     unit: litre
   - quantite: 5
     title: Crème soja

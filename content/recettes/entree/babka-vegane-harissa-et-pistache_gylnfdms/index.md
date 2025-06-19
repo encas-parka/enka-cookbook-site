@@ -33,7 +33,7 @@ ingredients:
     title: Farine de blé
     unit: Kg
   - quantite: 4
-    title: lait de soja
+    title: Lait de soja
     unit: litre
   sec:
   - commentaire: garniture

@@ -30,13 +30,13 @@ ingredients:
     - title: Olives Noires Dénoyautées
       quantite: 5
       unit: Kg
+    - title: Ail
+      quantite: 2
+      unit: bottes
   epices:
     - title: Câpres
       quantite: 1
       unit: Kg
-    - title: Aïl
-      quantite: 2
-      unit: bottes
     - title: Basilic
       quantite: 10
       unit: bottes

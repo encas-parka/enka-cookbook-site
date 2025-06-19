@@ -19,6 +19,9 @@ ingredients:
     - title: Pomme de terre
       quantite: 20
       unit: Kg
+    - title: Ail
+      quantite: 5
+      unit: tête·s
   frais:
     - title: Tofu soyeux
       quantite: 1
@@ -54,10 +57,7 @@ ingredients:
     - title: Ciboulette
       quantite: 10
       unit: bottes
-    - title: Aïl
-      quantite: 5
-      unit: unité
-      commentaire: 5 têtes
+
   lof:
     - title: huile d'olive
       quantite: 1

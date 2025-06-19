@@ -281,6 +281,12 @@ repas:
         type_plat: plat
       - recette: oignons-bhaji_om3sikhm
         type_plat: plat
+      - recette: cookies-arc-en-ciel-vegan-et-sans-gluten_5stxpr61
+        type_plat: dessert
+        altAssiettes: 60
+      - recette: rainbow-cake_g6viqgj8
+        type_plat: dessert
+        altAssiettes: 300
 uuid: kcypd9hcxogceev6bpfwgwoee_trh4bjvnws
 titleslug: "{{slug}}"
 ---

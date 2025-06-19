@@ -6,7 +6,7 @@ outputs:
   - Ingredients
 sitemap_exclude: "true"
 repas:
-  - assiettes: 100
+  - assiettes: 120
     date_service: 2025-07-04
     horaire: midi
     recettes_du_repas:
@@ -16,7 +16,9 @@ repas:
         type_plat: entree
       - recette: loubia_90fy1yfd
         type_plat: plat
-  - assiettes: 100
+      - recette: qiza_w5tmbjl3
+        type_plat: dessert
+  - assiettes: 120
     date_service: 2025-07-04
     horaire: soir
     recettes_du_repas:
@@ -122,6 +124,8 @@ repas:
     date_service: 2025-07-08
     horaire: midi
     recettes_du_repas:
+      - recette: soupe-froide-de-courgettes-a-la-menthe_j0mhymu8qzdzjsng2ci9zh0ebayaq5u58te2
+        type_plat: entree
       - recette: kuku-sabzi-vegan_9yunl3t9
         type_plat: entree
         altAssiettes: 20
@@ -179,9 +183,7 @@ repas:
     date_service: 2025-07-09
     horaire: soir
     recettes_du_repas:
-      - recette: salade-courgette-curry_5feqe55t
-        type_plat: entree
-      - recette: lasagnes-de-pois-casses_menls83h
+      - recette: burgers-galettes-de-pomme-de-terre-et-frites_hy9ryxxqw2l_5fcwcxk8fsvno74utekr4ubx
         type_plat: plat
       - recette: fromage-blanc-et-fruits-rouges-et-son-alernative-vegan_b19pugeu
         type_plat: dessert

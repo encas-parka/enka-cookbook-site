@@ -18,6 +18,9 @@ checkAlwaysOk: false
 ingredients:
   animaux: []
   legumes:
+    - title: Choux fleur
+      quantite: 5
+      unit: Kg
     - title: Pomme de terre
       quantite: 5
       unit: Kg

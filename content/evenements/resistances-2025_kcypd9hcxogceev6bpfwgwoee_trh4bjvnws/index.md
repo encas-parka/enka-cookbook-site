@@ -205,8 +205,12 @@ repas:
     date_service: 2025-07-10
     horaire: soir
     recettes_du_repas:
+      - recette: curry-veg_wbyuybfrzyxchoyptn9pj9qdn9fjbgpbtjep
+        type_plat: plat
+        altAssiettes: 40
       - recette: -curry-de-boeuf_czdyqwi1
         type_plat: plat
+        altAssiettes: 200
       - recette: blanc-manger_nb3iygka
         type_plat: dessert
   - assiettes: 220

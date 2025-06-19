@@ -54,21 +54,22 @@ repas:
     date_service: 2025-07-06
     horaire: midi
     recettes_du_repas:
-      - recette: carottes-rapees_ymnf0y5r
-        commentaire: "En fait : carottes rapées à la verveine !"
+      - recette: carottes-rapees-a-la-verveine-et-a-l'orange_1yz2zw3y
         type_plat: entree
       - recette: salade-verte_qaxl8865
         type_plat: entree
       - recette: tapenade-del-mar_wwwaks1t
         type_plat: entree
+      - recette: vinaigrette_pm7r5avd
+        type_plat: entree
       - recette: pate-a-pain-panzerotti_mnclzdhg
         type_plat: plat
+        altAssiettes: 170
       - recette: panzerotti_60s9q9d4
         type_plat: plat
         partof: ""
       - recette: yahourt-de-brebis-a-la-creme-de-chataigne-et-son-alternative-vegan_fdd3vcbv
         type_plat: dessert
-      - recette: vinaigrette_pm7r5avd
   - assiettes: 200
     date_service: 2025-07-06
     horaire: soir
@@ -155,7 +156,7 @@ repas:
       - recette: gateau-a-la-creme-de-marron-nappage-chocolat-vegan_afobs4r1
         type_plat: dessert
         altAssiettes: 180
-  - assiettes: 200
+  - assiettes: 220
     date_service: 2025-07-09
     horaire: midi
     recettes_du_repas:
@@ -172,18 +173,17 @@ repas:
         chef: Auré
       - recette: creme-de-riz-libanaise-mouhalabieh_0k4dcqig
         type_plat: dessert
-  - assiettes: 220
+  - assiettes: 240
     date_service: 2025-07-09
     horaire: soir
     recettes_du_repas:
-      - recette: burger-vege-lentilles-patates-douces_m3pzgy95
+      - recette: salade-courgette-curry_5feqe55t
+        type_plat: entree
+      - recette: lasagnes-de-pois-casses_menls83h
         type_plat: plat
-        commentaire: |-
-          salade verte comprise dans la recette burger, mais pas vinaigrette
-          + Frites !
       - recette: fromage-blanc-et-fruits-rouges-et-son-alernative-vegan_b19pugeu
         type_plat: dessert
-  - assiettes: 220
+  - assiettes: 240
     date_service: 2025-07-10
     horaire: midi
     recettes_du_repas:
@@ -197,7 +197,7 @@ repas:
         type_plat: plat
       - recette: panacotta-rhubarbe-speculoos_nqdhy6r4
         type_plat: dessert
-  - assiettes: 220
+  - assiettes: 240
     date_service: 2025-07-10
     horaire: soir
     recettes_du_repas:
@@ -258,7 +258,25 @@ repas:
   - assiettes: 360
     date_service: 2025-07-12
     horaire: soir
-    recettes_du_repas: []
+    recettes_du_repas:
+      - recette: chou-bleu-chou-rouge_b0vb19mp
+        type_plat: entree
+      - recette: chutney-menthe-coriandre_s5qszq87
+        type_plat: entree
+      - recette: raita-vegan_74k7xqu3
+        type_plat: entree
+        altAssiettes: 30
+      - recette: raita_a301usio
+        type_plat: entree
+        altAssiettes: 330
+      - recette: urulai-sukka_5ru2hn6h
+        type_plat: plat
+      - recette: khadai-tofu_ls7yrbs9
+        type_plat: plat
+      - recette: sauce-korma-et-betterave_zcgggupn
+        type_plat: plat
+      - recette: oignons-bhaji_om3sikhm
+        type_plat: plat
 uuid: kcypd9hcxogceev6bpfwgwoee_trh4bjvnws
 titleslug: "{{slug}}"
 ---

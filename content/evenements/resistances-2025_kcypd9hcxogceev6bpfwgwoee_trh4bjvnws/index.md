@@ -54,7 +54,7 @@ repas:
     date_service: 2025-07-06
     horaire: midi
     recettes_du_repas:
-      - recette: carottes-rapees-a-la-verveine-et-a-l'orange_1yz2zw3y
+      - recette: carottes-rapees-a-la-verveine-et-a-lorange_1yz2zw3y
         type_plat: entree
       - recette: salade-verte_qaxl8865
         type_plat: entree

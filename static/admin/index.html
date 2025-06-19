@@ -81,15 +81,16 @@
           const isNew = window.location.href.endsWith("new");
           if (entry.getIn(["data", "titleslug"], "") && !isNew) return;
           const slugify = (str) =>
-            str.toLowerCase().replace(
-              /[^a-z0-9-]/g,
-              (m) =>
-                "éèêëàäâùüûîïôöç'".includes(m) // Ajouter l'apostrophe
-                  ? m.normalize("NFD").replace(/[\u0300-\u036f]/g, "")
-                  : m === "'"
-                    ? ""
-                    : "-", // Supprimer l'apostrophe, remplacer le reste par "-"
-            );
+            str
+              .replace(/['']/g, "") // Supprimer d'abord toutes les apostrophes
+              .toLowerCase()
+              .replace(
+                /[^a-z0-9-]/g,
+                (m) =>
+                  "éèêëàäâùüûîïôöç".includes(m)
+                    ? m.normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+                    : "-"
+              );
 
           // Slugify the title and save it as the slug
           const title = entry.getIn(["data", "title"], "");

@@ -1,10 +1,10 @@
-title: Enka Cookbook 
+title: Enka Cookbook
 titleAddition: Des recettes pour pleins
 description: Site collaboratif de partage de recettes et d'organisation d'évènement pour les cantines autogérées.
 
-baseURL: '/'
+baseURL: "/"
 
-titleSeparator: '-'
+titleSeparator: "-"
 relativeURLs: true
 canonifyURLs: false
 disableAliases: true
@@ -39,13 +39,11 @@ outputFormats:
     isHTML: true
     permalinkable: true
 
-    
   Ingredients:
     mediaType: "text/html"
     baseName: "ingredients/index"
     isHTML: true
     permalinkable: true
-
 
   JSON:
     mediaType: application/json
@@ -110,9 +108,9 @@ schemaLinkedIn: ""
 schemaGitHub: ""
 
 # Images
-themeColor: '#fff'
+themeColor: "#fff"
 quality: 85
-bgColor: '#fff'
+bgColor: "#fff"
 landscapePhotoWidths:
   - 900
   - 800
@@ -137,7 +135,6 @@ markup:
     renderer:
       unsafe: true
 
-
 # seo:
 #   - title:
 #     separator: " | "
@@ -151,12 +148,7 @@ module:
   # Import assets from hugo-enka-cookbook theme (bootstrap, vue, vuetify, flatpickr, ...js, css and default images & icons)
   hugoVersion:
     extended: true
-    min: "0.121.1"
-  imports: 
+    min: "0.142.0"
+  imports:
     - path: "github.com/encas-parka/hugo-cookbook-theme"
       disable: false
-
-
-
-
-

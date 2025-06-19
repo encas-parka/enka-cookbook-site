@@ -273,6 +273,9 @@ repas:
       - recette: raita_a301usio
         type_plat: entree
         altAssiettes: 330
+      - recette: carotte-rapees-pour-rainbow-buffet_zyfga6fojaots6g3hy-n2ikqw4mvtedlkgrm
+        type_plat: plat
+        altAssiettes: 360
       - recette: urulai-sukka_5ru2hn6h
         type_plat: plat
       - recette: khadai-tofu_ls7yrbs9

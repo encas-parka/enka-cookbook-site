@@ -14,7 +14,7 @@ ingredients:
     title: Lait de riz
     unit: litre
   - quantite: 10
-    title: lait de soja
+    title: Lait de soja
     unit: litre
   - quantite: 10
     title: Lait d'avoine

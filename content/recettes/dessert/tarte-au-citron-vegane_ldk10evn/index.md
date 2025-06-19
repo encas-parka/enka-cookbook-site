@@ -29,11 +29,11 @@ ingredients:
     unit: grammes
   - commentaire: appareil
     quantite: 2.2
-    title: lait de soja
+    title: Lait de soja
     unit: litre
   - commentaire: pâte
     quantite: 640
-    title: lait de soja
+    title: Lait de soja
     unit: ml
   - commentaire: pâte
     quantite: 3.7

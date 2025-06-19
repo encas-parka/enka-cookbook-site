@@ -19,7 +19,7 @@ ingredients:
     title: Fécule de maïs (Maïzena)
     unit: grammes
   - quantite: 300
-    title: lait de soja
+    title: Lait de soja
     unit: ml
   sucres:
   - quantite: 300

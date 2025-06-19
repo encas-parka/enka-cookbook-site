@@ -19,15 +19,15 @@ ingredients:
     - title: Aubergine
       quantite: 20
       unit: Kg
+    - title: Ail
+      quantite: 10
+      unit: tête·s
   lof:
     - title: huile d'olive
       quantite: 1.1
       unit: litre
   epices:
-    - title: Tête d 'ail
-      quantite: 10
-      unit: unité
-      commentaire: on parle de tête d'ail, pas de gousse d'ail
+
     - title: Vinaigre de vin
       quantite: 1
       unit: litre

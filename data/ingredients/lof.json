@@ -1,166 +1,21 @@
 {
   "ingredients": [
     {
-      "title": "creme de coco"
+      "title": "Bicarbonate alimentaire"
     },
     {
-      "title": "Crème de riz"
+      "title": "Crème d'amande",
+      "vegan": true,
+      "vegetarien": true
     },
     {
       "title": "Crème d'orge"
     },
     {
-      "title": "Lait de soja",
-      "alergenesIng": [
-        "Soja"
-      ]
+      "title": "creme de coco"
     },
     {
-      "title": "Yaourt nature",
-      "alergenesIng": [
-        "Produit laitier"
-      ]
-    },
-    {
-      "title": "Crème liquide entière"
-    },
-    {
-      "title": "Huile végétale"
-    },
-    {
-      "title": "Huile d'argan"
-    },
-    {
-      "title": "Fécule de pomme de terre"
-    },
-    {
-      "title": "Tofu ferme"
-    },
-    {
-      "title": "Farine de blé",
-      "alergenesIng": [
-        "Gluten"
-      ]
-    },
-    {
-      "title": "Lait demi-écrémé",
-      "alergenesIng": [
-        "Produit laitier"
-      ],
-      "vegetarien": true,
-      "sans_lactose": false,
-      "vegan": false
-    },
-    {
-      "title": "Lait écrémé",
-      "alergenesIng": [
-        "Produit laitier"
-      ],
-      "vegetarien": true,
-      "sans_lactose": false,
-      "vegan": false
-    },
-    {
-      "title": "Lait entier",
-      "alergenesIng": [
-        "Produit laitier"
-      ],
-      "vegetarien": true,
-      "sans_lactose": false,
-      "vegan": false
-    },
-    {
-      "title": "lait de cajou"
-    },
-    {
-      "title": "Fécule de tapioca"
-    },
-    {
-      "title": "Farine d'amande"
-    },
-    {
-      "title": "Graines de lin"
-    },
-    {
-      "title": "Lait de riz"
-    },
-    {
-      "title": "Levure fraîche",
-      "alergenesIng": [
-        "Gluten"
-      ]
-    },
-    {
-      "title": "Gluten pur",
-      "alergenesIng": [
-        "Gluten"
-      ]
-    },
-    {
-      "title": "Lait de soja à la vanille",
-      "alergenesIng": [
-        "Soja"
-      ]
-    },
-    {
-      "title": "Huile de coco désodorisée"
-    },
-    {
-      "title": "Crème fraiche liquide entière",
-      "alergenesIng": [
-        "Produit laitier"
-      ]
-    },
-    {
-      "title": "huile de friture"
-    },
-    {
-      "title": "Lait d'avoine",
-      "alergenesIng": [
-        "Gluten"
-      ]
-    },
-    {
-      "title": "Lait concentré (non sucré)",
-      "alergenesIng": [
-        "Produit laitier"
-      ]
-    },
-    {
-      "title": "Farine de riz blanche"
-    },
-    {
-      "title": "Farine de riz gluant"
-    },
-    {
-      "title": "Pate filo (1 feuille)",
-      "alergenesIng": [
-        "Gluten"
-      ]
-    },
-    {
-      "title": "Bicarbonate alimentaire"
-    },
-    {
-      "title": "Levure boulangère sans gluten"
-    },
-    {
-      "title": "Levure boulangère"
-    },
-    {
-      "title": "Levure chimique sans gluten"
-    },
-    {
-      "title": "Levure chimique"
-    },
-    {
-      "title": "Vinaigre de cidre"
-    },
-    {
-      "title": "Lait végétal (au choix)"
-    },
-    {
-      "title": "Farine de riz"
+      "title": "Crème de riz"
     },
     {
       "title": "Crème florette",
@@ -169,15 +24,10 @@
       ]
     },
     {
-      "title": "Crème soja",
+      "title": "Crème fraiche liquide entière",
       "alergenesIng": [
-        "Soja"
+        "Produit laitier"
       ]
-    },
-    {
-      "title": "Crème d'amande",
-      "vegan": true,
-      "vegetarien": true
     },
     {
       "title": "Crème liquide",
@@ -188,12 +38,27 @@
       ]
     },
     {
+      "title": "Crème liquide entière"
+    },
+    {
+      "title": "Crème soja",
+      "alergenesIng": [
+        "Soja"
+      ]
+    },
+    {
       "title": "Crème Végétale",
       "vegan": true,
       "vegetarien": true,
       "alergenesIng": [
         "Soja"
       ]
+    },
+    {
+      "title": "Farine d'amande"
+    },
+    {
+      "title": "Farine d’amarante"
     },
     {
       "title": "Farine d'avoine",
@@ -214,7 +79,10 @@
       ]
     },
     {
-      "title": "Farine d’amarante"
+      "title": "Farine de blé",
+      "alergenesIng": [
+        "Gluten"
+      ]
     },
     {
       "title": "Farine de blé noir (sarrasin)"
@@ -247,6 +115,15 @@
       "title": "Farine de quinoa"
     },
     {
+      "title": "Farine de riz"
+    },
+    {
+      "title": "Farine de riz blanche"
+    },
+    {
+      "title": "Farine de riz gluant"
+    },
+    {
       "title": "Farine de seigle",
       "alergenesIng": [
         "Gluten"
@@ -265,6 +142,24 @@
       "title": "Fécule de maïs (Maïzena)"
     },
     {
+      "title": "Fécule de pomme de terre"
+    },
+    {
+      "title": "Fécule de tapioca"
+    },
+    {
+      "title": "Gluten pur",
+      "alergenesIng": [
+        "Gluten"
+      ]
+    },
+    {
+      "title": "Graines de lin"
+    },
+    {
+      "title": "Huile d'argan"
+    },
+    {
       "title": "huile d'olive",
       "vegan": true,
       "vegetarien": true
@@ -280,9 +175,15 @@
       "vegetarien": true
     },
     {
+      "title": "Huile de coco désodorisée"
+    },
+    {
       "title": "huile de colza",
       "vegan": true,
       "vegetarien": true
+    },
+    {
+      "title": "huile de friture"
     },
     {
       "title": "huile de lin",
@@ -329,26 +230,53 @@
       "vegetarien": true
     },
     {
+      "title": "Huile végétale"
+    },
+    {
       "title": "lait (chèvres)"
+    },
+    {
+      "title": "Lait concentré (non sucré)",
+      "alergenesIng": [
+        "Produit laitier"
+      ]
     },
     {
       "title": "Lait concentré sucré",
       "vegetarien": true
     },
     {
-      "title": "lait d'épeautre"
-    },
-    {
       "title": "lait d’amande"
     },
     {
+      "title": "Lait d'avoine",
+      "alergenesIng": [
+        "Gluten"
+      ]
+    },
+    {
       "title": "lait d’avoine"
+    },
+    {
+      "title": "lait d'épeautre"
+    },
+    {
+      "title": "lait de cajou"
     },
     {
       "title": "lait de coco"
     },
     {
       "title": "lait de noisette"
+    },
+    {
+      "title": "Lait de riz"
+    },
+    {
+      "title": "Lait de soja",
+      "alergenesIng": [
+        "Soja"
+      ]
     },
     {
       "title": "lait de soja",
@@ -358,6 +286,60 @@
       "vegetarien": true,
       "sans_lactose": true,
       "vegan": true
+    },
+    {
+      "title": "Lait de soja à la vanille",
+      "alergenesIng": [
+        "Soja"
+      ]
+    },
+    {
+      "title": "Lait demi-écrémé",
+      "alergenesIng": [
+        "Produit laitier"
+      ],
+      "vegetarien": true,
+      "sans_lactose": false,
+      "vegan": false
+    },
+    {
+      "title": "Lait écrémé",
+      "alergenesIng": [
+        "Produit laitier"
+      ],
+      "vegetarien": true,
+      "sans_lactose": false,
+      "vegan": false
+    },
+    {
+      "title": "Lait entier",
+      "alergenesIng": [
+        "Produit laitier"
+      ],
+      "vegetarien": true,
+      "sans_lactose": false,
+      "vegan": false
+    },
+    {
+      "title": "Lait végétal (au choix)"
+    },
+    {
+      "title": "Levure boulangère"
+    },
+    {
+      "title": "Levure boulangère sans gluten"
+    },
+    {
+      "title": "Levure chimique"
+    },
+    {
+      "title": "Levure chimique sans gluten"
+    },
+    {
+      "title": "Levure fraîche",
+      "alergenesIng": [
+        "Gluten"
+      ]
     },
     {
       "alergenesIng": [
@@ -398,6 +380,24 @@
       ],
       "vegetarien": true,
       "vegan": false
+    },
+    {
+      "title": "Pate filo (1 feuille)",
+      "alergenesIng": [
+        "Gluten"
+      ]
+    },
+    {
+      "title": "Tofu ferme"
+    },
+    {
+      "title": "Vinaigre de cidre"
+    },
+    {
+      "title": "Yaourt nature",
+      "alergenesIng": [
+        "Produit laitier"
+      ]
     }
   ]
 }

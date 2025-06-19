@@ -1,120 +1,6 @@
 {
   "ingredients": [
     {
-      "title": "lentilles blondes"
-    },
-    {
-      "title": "corn flakes"
-    },
-    {
-      "title": "graine de nigelle"
-    },
-    {
-      "title": "Pâtes Penne"
-    },
-    {
-      "title": "Graines de courge"
-    },
-    {
-      "title": "Tapioca perlée"
-    },
-    {
-      "title": "Poudre d'amande",
-      "alergenesIng": [
-        "Fruits à coque"
-      ]
-    },
-    {
-      "title": "Sarrasin"
-    },
-    {
-      "title": "Graines de sésame noir",
-      "alergenesIng": [
-        "Sésame"
-      ]
-    },
-    {
-      "title": "Graines de sésame blanc",
-      "alergenesIng": [
-        "Sésame"
-      ]
-    },
-    {
-      "title": "Nouilles de blé ondulées Ramen",
-      "alergenesIng": [
-        "Gluten"
-      ]
-    },
-    {
-      "title": "Flocons d'avoine sans gluten"
-    },
-    {
-      "title": "Protéines de soja (petites)"
-    },
-    {
-      "title": "Protéines de soja (moyennes)"
-    },
-    {
-      "title": "Protéines de soja (grosses)"
-    },
-    {
-      "title": "Pistache émmondée"
-    },
-    {
-      "title": "Pâtes langues d'oiseaux sans gluten"
-    },
-    {
-      "title": "Graine de tournesol"
-    },
-    {
-      "title": "Semoule couscous sans gluten"
-    },
-    {
-      "title": "Nouilles de riz Phö"
-    },
-    {
-      "title": "Riz basmati"
-    },
-    {
-      "title": "Haricots rouges cuits"
-    },
-    {
-      "title": "Riz pour risotto"
-    },
-    {
-      "title": "Haricots blancs en conserve"
-    },
-    {
-      "title": "Nouilles de riz"
-    },
-    {
-      "title": "Lentilles corail"
-    },
-    {
-      "title": "Petits flocons d'avoine"
-    },
-    {
-      "title": "Quinoa blanc"
-    },
-    {
-      "title": "Graines de nigelle"
-    },
-    {
-      "title": "Polenta fine"
-    },
-    {
-      "title": "Graines de lin"
-    },
-    {
-      "title": "Pois chiche cuit"
-    },
-    {
-      "title": "Flocons d'avoine",
-      "alergenesIng": [
-        "Gluten"
-      ]
-    },
-    {
       "title": "Amande",
       "alergenesIng": [
         "Fruit à coque"
@@ -153,6 +39,9 @@
       ]
     },
     {
+      "title": "corn flakes"
+    },
+    {
       "title": "Couscous de Mais-Riz",
       "vegan": true,
       "vegetarien": true
@@ -163,14 +52,56 @@
       "vegetarien": true
     },
     {
+      "title": "Flocons d'avoine",
+      "alergenesIng": [
+        "Gluten"
+      ]
+    },
+    {
+      "title": "Flocons d'avoine sans gluten"
+    },
+    {
+      "title": "graine de nigelle"
+    },
+    {
+      "title": "Graine de tournesol"
+    },
+    {
+      "title": "Graines de courge"
+    },
+    {
+      "title": "Graines de lin"
+    },
+    {
+      "title": "Graines de nigelle"
+    },
+    {
+      "title": "Graines de sésame blanc",
+      "alergenesIng": [
+        "Sésame"
+      ]
+    },
+    {
+      "title": "Graines de sésame noir",
+      "alergenesIng": [
+        "Sésame"
+      ]
+    },
+    {
       "title": "Haricots blancs",
       "vegan": true,
       "vegetarien": true
     },
     {
+      "title": "Haricots blancs en conserve"
+    },
+    {
       "title": "Haricots rouges",
       "vegan": true,
       "vegetarien": true
+    },
+    {
+      "title": "Haricots rouges cuits"
     },
     {
       "title": "Lasagnes",
@@ -184,6 +115,12 @@
       "title": "Lentilles",
       "vegan": true,
       "vegetarien": true
+    },
+    {
+      "title": "lentilles blondes"
+    },
+    {
+      "title": "Lentilles corail"
     },
     {
       "title": "Lentilles vertes",
@@ -204,14 +141,6 @@
       "vegetarien": true
     },
     {
-      "title": "Noix de cajou",
-      "alergenesIng": [
-        "Fruit à coque"
-      ],
-      "vegan": true,
-      "vegetarien": true
-    },
-    {
       "alergene": true,
       "title": "Noix",
       "vegan": true,
@@ -219,6 +148,14 @@
       "alergenesIng": [
         "Fruit à coque"
       ]
+    },
+    {
+      "title": "Noix de cajou",
+      "alergenesIng": [
+        "Fruit à coque"
+      ],
+      "vegan": true,
+      "vegetarien": true
     },
     {
       "title": "Noix de macadamia",
@@ -242,6 +179,18 @@
       "vegetarien": true
     },
     {
+      "title": "Nouilles de blé ondulées Ramen",
+      "alergenesIng": [
+        "Gluten"
+      ]
+    },
+    {
+      "title": "Nouilles de riz"
+    },
+    {
+      "title": "Nouilles de riz Phö"
+    },
+    {
       "title": "Pâtes",
       "vegan": true,
       "vegetarien": true,
@@ -258,6 +207,15 @@
       "vegetarien": true
     },
     {
+      "title": "Pâtes langues d'oiseaux sans gluten"
+    },
+    {
+      "title": "Pâtes Penne"
+    },
+    {
+      "title": "Petits flocons d'avoine"
+    },
+    {
       "title": "Pignon de pin",
       "alergenesIng": [
         "Fruit à coque"
@@ -266,9 +224,15 @@
       "vegetarien": true
     },
     {
+      "title": "Pistache émmondée"
+    },
+    {
       "title": "Pois cassés",
       "vegan": true,
       "vegetarien": true
+    },
+    {
+      "title": "Pois chiche cuit"
     },
     {
       "title": "Pois chiches",
@@ -281,9 +245,30 @@
       "vegetarien": true
     },
     {
+      "title": "Polenta fine"
+    },
+    {
+      "title": "Poudre d'amande",
+      "alergenesIng": [
+        "Fruits à coque"
+      ]
+    },
+    {
+      "title": "Protéines de soja (grosses)"
+    },
+    {
+      "title": "Protéines de soja (moyennes)"
+    },
+    {
+      "title": "Protéines de soja (petites)"
+    },
+    {
       "title": "Quinoa",
       "vegan": true,
       "vegetarien": true
+    },
+    {
+      "title": "Quinoa blanc"
     },
     {
       "title": "Riz",
@@ -291,7 +276,37 @@
       "vegetarien": true
     },
     {
+      "title": "Riz basmati"
+    },
+    {
+      "title": "Riz pour risotto"
+    },
+    {
       "title": "Riz rond",
+      "vegan": true,
+      "vegetarien": true
+    },
+    {
+      "title": "Sarrasin"
+    },
+    {
+      "title": "Semoule couscous sans gluten"
+    },
+    {
+      "title": "Semoule de manioc",
+      "vegan": true,
+      "vegetarien": true
+    },
+    {
+      "title": "Semoule de riz",
+      "vegan": true,
+      "vegetarien": true
+    },
+    {
+      "title": "Semoule fine (blé)",
+      "alergenesIng": [
+        "Gluten"
+      ],
       "vegan": true,
       "vegetarien": true
     },
@@ -312,27 +327,12 @@
       "vegetarien": true
     },
     {
-      "title": "Semoule fine (blé)",
-      "alergenesIng": [
-        "Gluten"
-      ],
-      "vegan": true,
-      "vegetarien": true
-    },
-    {
-      "title": "Semoule de manioc",
-      "vegan": true,
-      "vegetarien": true
-    },
-    {
-      "title": "Semoule de riz",
-      "vegan": true,
-      "vegetarien": true
-    },
-    {
       "title": "Spaguetti de Mais-Riz",
       "vegan": true,
       "vegetarien": true
+    },
+    {
+      "title": "Tapioca perlée"
     },
     {
       "title": "Vermicelle de Riz",

@@ -2,6 +2,10 @@
   "ingredients": [
     {
       "pFrais": true,
+      "title": "Choux fleur"
+    },
+    {
+      "pFrais": true,
       "title": "Salade Iceberg"
     },
     {

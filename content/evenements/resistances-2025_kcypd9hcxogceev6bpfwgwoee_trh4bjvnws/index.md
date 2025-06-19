@@ -10,132 +10,132 @@ repas:
     date_service: 2025-07-04
     horaire: midi
     recettes_du_repas:
-      - recette: salade-de-betteraves-roties-au-yaourt-et-au-citron_swwnxwrqtoo55hxs5njhndd_c6-2zq5b9gco
+      - recette: salade-de-betteraves-roties-au-yaourt-et-au-citron-confit_klfmz61p
         type_plat: entree
-      - recette: tartinade-chataigne-et-oignons_2bnwp82rmkorooh3ohstss64huqf6x9ohiej
+      - recette: -tartinade-chataigne-et-oignons_wlrjcokd
         type_plat: entree
-      - recette: loubia_-rd1kkc7_xj8ajtcfqbb0ua1naxczlq-dhvz
+      - recette: loubia_90fy1yfd
         type_plat: plat
   - assiettes: 100
     date_service: 2025-07-04
     horaire: soir
     recettes_du_repas:
-      - recette: salade-d-ananas-choux-chinois-et-pasteque-au-piment_vcuknwghlddfxl8sp9zize1qd1i3kwgt-mfw
+      - recette: salade-dananas-choux-chinois-et-pasteque-au-piment_vs3el42t
         type_plat: entree
-      - recette: blanquette-de-soja-texture-et-riz-basmati_n91isqrvb0r4_qghwtzwcll8vv2lu09ugxl8
+      - recette: blanquette-de-soja-texture-et-riz-basmati_3snrddum
         type_plat: plat
         chef: fredo
-      - recette: moelleux-aux-agrumes_vjtcok1bup-zvwsdwhjjfu1iu8n5oubjjes3
+      - recette: moelleux-aux-agrumes_b9cpao7j
         type_plat: dessert
         chef: fredo
   - assiettes: 190
     date_service: 2025-07-05
     horaire: midi
     recettes_du_repas:
-      - recette: salade-de-tomates_1c959294-27c9-430d-a8af-1c1313619aab
+      - recette: salade-de-tomates_g1dyaaxh
         type_plat: entree
       - recette: boulettes-fumees-de-haricots-rouges-et-champignons_5be3b6de-9a22-4635-a147-d4295c86c452
         type_plat: plat
-      - recette: perles-du-japon-vanille-citron-gingembre-cranberrie_kkipwm-j4qtfae825sqxhxbek0mapfzewici
+      - recette: perles-du-japon-vanille-citron-gingembre-cranberries_35jz0q6h
         type_plat: dessert
   - assiettes: 210
     date_service: 2025-07-05
     horaire: soir
     recettes_du_repas:
-      - recette: soupe-de-carotte-orange-epicee_bdblsrs54jy_0cqc34tsvb6qqkwz5ekc3zr0
+      - recette: soupe-de-carotte-orange-epicee_ut8sxh77
         type_plat: entree
-      - recette: crepes-de-sarrasin-ricotta-epinards-et-champignons_vss2rla-uqbj_hyqh-ei_-u-jnin4ozyknlc
+      - recette: crepes-de-sarrasin-ricotta-epinards-et-champignons_k13ttgfy
         type_plat: plat
         chef: fredo
-      - recette: creme-de-soja-a-la-noisette-et-graines-caramelisees_vew3lsv3wekhpggumf3wgaiyddgdjfm1mzym
+      - recette: creme-de-soja-a-la-noisette-et-graines-caramelisees_aej03tyk
         type_plat: dessert
         chef: fredo
   - assiettes: 190
     date_service: 2025-07-06
     horaire: midi
     recettes_du_repas:
-      - recette: carottes-rapees_50ec884e-8a37-486c-af69-8af8825771ee
+      - recette: carottes-rapees_ymnf0y5r
         commentaire: "En fait : carottes rapées à la verveine !"
         type_plat: entree
-      - recette: salade-verte_uAx-TXysQyWoqSV-BBaut
+      - recette: salade-verte_qaxl8865
         type_plat: entree
-      - recette: tapenade-del-mar_3s76oznyylof_5szhrquoqx33ray7z515eob
+      - recette: tapenade-del-mar_wwwaks1t
         type_plat: entree
-      - recette: pate-a-pain-panzerotti_fizahshbsaz_r3m2eadnns0sfwbc_o1l1wex
+      - recette: pate-a-pain-panzerotti_mnclzdhg
         type_plat: plat
-      - recette: panzerotti_v-_4o_tumpbg6xwiqqcst1wyw-dsak1wunik
+      - recette: panzerotti_60s9q9d4
         type_plat: plat
         partof: ""
-      - recette: yahourt-de-brebis-a-la-creme-de-chataigne-et-son-al_v74tcl7im1xqy2zl7_gi6uwub7o1qsryek3v
+      - recette: yahourt-de-brebis-a-la-creme-de-chataigne-et-son-alternative-vegan_fdd3vcbv
         type_plat: dessert
-      - recette: vinaigrette_46d02590-8218-472c-b46a-c24e22671cb8
+      - recette: vinaigrette_pm7r5avd
   - assiettes: 200
     date_service: 2025-07-06
     horaire: soir
     recettes_du_repas:
-      - recette: hush-puppies_bocxtyu7bkfrcttao1bm2bzzz_ikugbpnyrs
+      - recette: hush-puppies_t2i8cfnv
         type_plat: entree
-      - recette: jambalaya_auzisvpxyuoptunrdzjhdhuydw-wapce0t6j
+      - recette: jambalaya_wrp32b32
         type_plat: plat
         altAssiettes: 190
         chef: Auré
-      - recette: jambalaya-vegan_e93_razirtgcghvhfsrccis0h6kod6fjds6m
+      - recette: jambalaya-vegan_bsjylxuj
         type_plat: plat
         chef: Auré
         altAssiettes: 20
-      - recette: cheesecake-a-la-patate-douce_k6fj6iw0ai6s0uf8eowtv3fsaaaan6hbyysa
+      - recette: cheesecake-a-la-patate-douce_tl9k6592
         type_plat: dessert
         chef: Auré
   - assiettes: 200
     date_service: 2025-07-07
     horaire: midi
     recettes_du_repas:
-      - recette: vinaigrette_46d02590-8218-472c-b46a-c24e22671cb8
+      - recette: vinaigrette_pm7r5avd
         type_plat: entree
-      - recette: salade-verte_uAx-TXysQyWoqSV-BBaut
+      - recette: salade-verte_qaxl8865
         type_plat: entree
-      - recette: tarte-a-la-tomate-chevre-miel-et-moutarde_xxie7jodumsf6zgqppcbfobrctlujboqvpek
+      - recette: tarte-a-la-tomate-chevre-miel-et-moutarde_9n6m96pb
         type_plat: plat
         chef: fredo
-      - recette: penne-cruda_d8lonsvlajvtor9ynuxwasirp76ao6khpcls
+      - recette: penne-cruda_aps25u5p
         type_plat: plat
         chef: fredo
-      - recette: fondant-au-chocolat-vegan-et-ss-gluten_besjqlb7yldbyemazvunxcgomrhswf_rbsyp
+      - recette: fondant-au-chocolat-vegan-et-ss-gluten_4ay4973x
         type_plat: dessert
   - assiettes: 210
     date_service: 2025-07-07
     horaire: soir
     recettes_du_repas:
-      - recette: sauce-bibimbap-sans-allergenes_zdjg4mcx05s2dqkcqwk_hcczbyxauocyix-5
+      - recette: sauce-bibimbap-sans-allergenes_3n7u5n4d
         type_plat: entree
         altAssiettes: 20
-      - recette: bibimbap_ypey_nn6ro3gddpwsshu-4xeepviycqdxtpe
+      - recette: bibimbap_arrr55ff
         type_plat: plat
         chef: Auré
-      - recette: beignet-de-banane-et-caramel-de-miso_ec27e5a4-9e47-4b6e-b932-3387866e6de7
+      - recette: beignet-de-banane-et-caramel-de-miso_viow95m6
         type_plat: dessert
         chef: Auré
   - assiettes: 220
     date_service: 2025-07-08
     horaire: midi
     recettes_du_repas:
-      - recette: kuku-sabzi-vegan_eev4gj_snc5kyuyms_-i7ytee1mqicxuqnmn
+      - recette: kuku-sabzi-vegan_9yunl3t9
         type_plat: entree
         altAssiettes: 20
         chef: Auré
-      - recette: muhamarra_2422a147-5117-4eaa-b024-e9c9c3785c38
+      - recette: muhamarra_fmv6q15o
         type_plat: plat
-      - recette: salade-de-pois-chiche_7c44315f-0c2a-4960-a599-1f3357484136
+      - recette: salade-de-pois-chiche_du44ng71
         type_plat: plat
-      - recette: kuku-sabzi_irm8gh8gqgz21_-8dkgn-e-pppmv46ulth8o
+      - recette: kuku-sabzi_z0ran9e3
         type_plat: plat
         altAssiettes: 200
         chef: Auré
-      - recette: montecao-sans-gluten_yjmsdtlslin2hywug2rdqyd5yn98nobll-ud
+      - recette: montecao-sans-gluten_h3ey12h4
         type_plat: dessert
         altAssiettes: 20
         chef: Auré
-      - recette: montecao_gniqqpjwtrkh_4n7qaaoyrisne1yup-6ve8b
+      - recette: montecao_viqc1duj
         type_plat: dessert
         altAssiettes: 200
         chef: Auré
@@ -143,117 +143,117 @@ repas:
     date_service: 2025-07-08
     horaire: soir
     recettes_du_repas:
-      - recette: salade-exotique_fbafib02t1ksptbkd5mubhgr-gboni0vmuo4
+      - recette: salade-exotique_ron7c10v
         type_plat: entree
         chef: fredo
-      - recette: pomme-de-terre-au-four-cervelle-de-canut_nkkk0cl3iqdwxwmztonsf1laa6zooyu3jj4r
+      - recette: pomme-de-terre-au-four-cervelle-de-canut_0n94peio
         type_plat: plat
         chef: fredo
-      - recette: gateau-a-la-creme-de-marron-nappage-chocolat_aalonmycmmzyuupmnrn3xapjnyauxocsykp9
+      - recette: gateau-a-la-creme-de-marron-nappage-chocolat-vegan_afobs4r1
         type_plat: dessert
         altAssiettes: 20
-      - recette: gateau-a-la-creme-de-marron-nappage-chocolat_aalonmycmmzyuupmnrn3xapjnyauxocsykp9
+      - recette: gateau-a-la-creme-de-marron-nappage-chocolat-vegan_afobs4r1
         type_plat: dessert
         altAssiettes: 180
   - assiettes: 200
     date_service: 2025-07-09
     horaire: midi
     recettes_du_repas:
-      - recette: soupe-tarator_c77attnaqcusbemub8mnywa863bhmue7za69
+      - recette: soupe-tarator_xnv149zn
         type_plat: entree
-      - recette: caviar-d-aubergines-fumees_eb7d1293-22b9-4893-86fd-d48f100baac6
+      - recette: caviar-daubergines-fumees_5f138fdx
         type_plat: entree
-      - recette: tarte-tatin-aux-poivrons-vegane-et-sans-gluten_hifvgn7qaefk0pwyb0pmvcntsmuqecs126cc
+      - recette: tarte-tatin-aux-poivrons-vegane-et-sans-gluten_9u9mhkny
         type_plat: plat
         altAssiettes: 20
-      - recette: tarte-tatin-aux-poivrons-et-feta_yhpkq5luse7ajty4mbcls4w0xgrogglpjeph
+      - recette: tarte-tatin-aux-poivrons-et-feta_5z1sos0t
         type_plat: plat
         altAssiettes: 180
         chef: Auré
-      - recette: creme-de-riz-libanaise-mouhalabieh_SuAttjf0ISHDBkBk3O7-x
+      - recette: creme-de-riz-libanaise-mouhalabieh_0k4dcqig
         type_plat: dessert
   - assiettes: 220
     date_service: 2025-07-09
     horaire: soir
     recettes_du_repas:
-      - recette: burger-vege-lentilles-patates-douces_bb31d2dd-96bb-440e-82e4-8e9cb7725b99
+      - recette: burger-vege-lentilles-patates-douces_m3pzgy95
         type_plat: plat
         commentaire: |-
           salade verte comprise dans la recette burger, mais pas vinaigrette
           + Frites !
-      - recette: fromage-blanc-et-fruits-rouges_jhl0gvetk7ixbnyggtiv0cnsrhdy5s_tsly8
+      - recette: fromage-blanc-et-fruits-rouges-et-son-alernative-vegan_b19pugeu
         type_plat: dessert
   - assiettes: 220
     date_service: 2025-07-10
     horaire: midi
     recettes_du_repas:
-      - recette: risotto-sarrasin-torrefie-champignons-parmesan-vega_rscs2yqdy0n9funh_uz9x4hnnk2bb13ge9p7
+      - recette: risotto-sarrasin-torrefie-champignons-parmesan-vegan-et-oignon-brule_jxm7kvcg
         type_plat: plat
         altAssiettes: 20
-      - recette: risotto-de-pruneaux-et-champignons_74b23598-ddaa-405f-904a-f071bb7517d6
+      - recette: risotto-de-pruneaux-et-champignons_5gmpv84u
         type_plat: plat
         altAssiettes: 200
-      - recette: frites-de-panisse-sauce-tartare-et-salade-verte_ueo62h-zbjlny6vbyftoovmqymiyzmolzchz
+      - recette: frites-de-panisse-sauce-tartare-et-salade-verte_ygw1u1ub
         type_plat: plat
-      - recette: panacotta-rhubarbe-speculoos_aogh5cot1tdly-rr6497okpx_fmcneqavj-y
+      - recette: panacotta-rhubarbe-speculoos_nqdhy6r4
         type_plat: dessert
   - assiettes: 220
     date_service: 2025-07-10
     horaire: soir
     recettes_du_repas:
-      - recette: curry-de-boeuf_sxiutnjx7nnsexar16argepbsmlklvh3d65_
+      - recette: -curry-de-boeuf_czdyqwi1
         type_plat: plat
-      - recette: blanc-manger_x7zcziovgc5gfqdzxjvcsrkdsz8kro_falzw
+      - recette: blanc-manger_nb3iygka
         type_plat: dessert
   - assiettes: 220
     date_service: 2025-07-11
     horaire: midi
     recettes_du_repas:
-      - recette: taboulais-libanais-des-tarnais-sans-gluten_787c142f-ad30-44b6-b31e-cd5e28b37a8e
+      - recette: taboulais-libanais-des-tarnais-sans-gluten_cp6n89pn
         type_plat: entree
         altAssiettes: 20
-      - recette: taboulais-libanais-des-tarnais_03059cd3-6175-440d-b2bd-740b17673e9c
+      - recette: taboulais-libanais-des-tarnais_os1bnq2l
         type_plat: entree
         altAssiettes: 200
-      - recette: salade-d-aubergine-aux-herbes-et-a-l-ail-frit_iwsi2gfubuswvsfujarclgyw-nasncxz8yiv
+      - recette: salade-daubergine-aux-herbes-et-a-lail-frit_1ndwl2a6
         type_plat: entree
         chef: fredo
-      - recette: gaspacho_6513ecff-d89c-413a-a2d2-fecc00755716
+      - recette: gaspacho_iv7dktme
         type_plat: plat
-      - recette: champignons-frits-et-sauce-cremeuse-ciboulette_fxvrocevdcjcxtqw_giiyacrzclqtsvk-foa
+      - recette: champignons-frits-et-sauce-cremeuse-ciboulette_dy3mp8uz
         type_plat: plat
-      - recette: riz-au-lait-vegan-a-la-chicoree_zw6q-bnv3mxaswzoew03hz9plgwgc8o6_hxb
+      - recette: riz-au-lait-vegan-a-la-chicoree_ogvm5eqj
         type_plat: dessert
         altAssiettes: 250
   - assiettes: 230
     date_service: 2025-07-11
     horaire: soir
     recettes_du_repas:
-      - recette: soupe-au-pistou_itixubmwjwv3u812zichkgnojzptnpj1uukt
+      - recette: soupe-au-pistou_1doxolwu
         type_plat: plat
-      - recette: salade-de-peche-a-la-menthe_5FPUbOvnH-aQ876nOkAPz
+      - recette: salade-de-peche-a-la-menthe_zpv28h00
         type_plat: dessert
   - assiettes: 240
     date_service: 2025-07-12
     horaire: midi
     recettes_du_repas:
-      - recette: flan-de-courgette-vegan_jbwipqwkolavzm1alliwjncdtt6wqq-snluc
+      - recette: flan-de-courgette-vegan_ax9t0m6d
         type_plat: entree
         altAssiettes: 20
-      - recette: flan-de-courgettes-au-basilic_juj14iqhsv-s5vnzmuogd7exkknrw296xe4u
+      - recette: flan-de-courgettes-au-basilic_89k61vfg
         type_plat: entree
         altAssiettes: 220
-      - recette: tofu-grille_ec-2rqvaz-kqh62478twvnour8ceadoelxte
+      - recette: tofu-grille_lqrar2rx
         type_plat: plat
         altAssiettes: 30
-      - recette: escalope-de-seitan_nul5woxple_tdayxo9k2garjo7nfk_t2ehh2
+      - recette: escalope-de-seitan_wbdg6p6d
         type_plat: plat
         altAssiettes: 210
-      - recette: creme-vegan-au-sureau_-anM5_qyLGXMKBPE03koO
+      - recette: creme-vegan-au-sureau_gqbis76w
         type_plat: plat
-      - recette: smashed-potatoes-et-creme-sour-ciboulette_ztcciysdsdnc6sqwwdlqaimmvm7yb4pts_kx
+      - recette: smashed-potatoes-et-creme-sour-ciboulette_2015fwc3
         type_plat: plat
-      - recette: charlotte-d-abricot-en-verrine_4lnvtjt_busfn7yncdokvevnerxk3kupy5xk
+      - recette: -charlotte-dabricot-en-verrine_3bx3ybas
         type_plat: dessert
   - assiettes: 360
     date_service: 2025-07-12

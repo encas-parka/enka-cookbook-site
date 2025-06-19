@@ -1,128 +1,146 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex" />
+    <title>Content Manager Decap-CMS</title>
+    <!-- Include the script that enables Netlify Identity on this page. -->
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+  </head>
 
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="robots" content="noindex" />
-  <title>Content Manager Decap-CMS</title>
-  <!-- Include the script that enables Netlify Identity on this page. -->
-  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
-</head>
+  <body>
+    <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js?v=2"></script>
 
-<body>
-
-  
-  <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js?v=2"></script>
-
-  <script>
-
-    function nanoid(t = 36) {
-      return crypto.getRandomValues(new Uint8Array(t)).reduce((t, e) => (t += (e &= 63) < 36 ? e.toString(36) : e < 62 ? (e - 26).toString(36).toUpperCase() : e > 62 ? '-' : '_'), '').toLocaleLowerCase()
-    }
-
-    const UuidWidget = createClass({
-      componentDidMount() {
-        const { value, onChange } = this.props
-
-        const isNew = window.location.href.endsWith('new')
-        // Check if the value is an existing uuid
-        // Set initial value
-        if (!value || isNew) {
-          onChange(nanoid())
-        }
-      },
-
-      render() {
-        const { value, classNameWrapper, forID } = this.props
-        return h(
-          'span',
-          {
-            id: forID,
-            style: { fontFamily: 'monospace', marginLeft: '1rem' },
-            //className: classNameWrapper
-          },
-          value
-        )
-      },
-    })
-
-    CMS.registerWidget('uuid', UuidWidget)
-
-    const TextInfoWidget = createClass({
-      render: function() {
-        const {value, classNameWrapper} = this.props;
-        return h('div', {className: classNameWrapper},
-          h('div', {style: {padding: '20px', backgroundColor: '#f0f0f0', borderRadius: '5px'}},
-            value
-          )
-        );
+    <script>
+      function nanoid(t = 8) {
+        return crypto
+          .getRandomValues(new Uint8Array(t))
+          .reduce((t, e) => (t += (e &= 35) < 36 ? e.toString(36) : ""), "")
+          .toLowerCase();
       }
-    });
 
-    CMS.registerWidget('text-info', TextInfoWidget);
+      const UuidWidget = createClass({
+        componentDidMount() {
+          const { value, onChange } = this.props;
 
-    CMS.registerEventListener({
-      name: "preSave",
-      handler: ({ entry }) => {
-        // Only process blog posts
-        if (entry.get("collection") !== ("recettes" || "evenement")) return;
+          const isNew = window.location.href.endsWith("new");
+          // Check if the value is an existing uuid
+          // Set initial value
+          if (!value || isNew) {
+            onChange(nanoid());
+          }
+        },
 
-        // If there's already a slug, don't change it
-        const isNew = window.location.href.endsWith('new')
-        if (entry.getIn(["data", "titleslug"], "") && !isNew) return;
-        const slugify = str => str.toLowerCase()
-          .replace(/[^a-z0-9-]/g, m => 'éèêëàäâùüûîïôöç'.includes(m) ? m.normalize("NFD").replace(/[\u0300-\u036f]/g, "") : '-')
-          .replace(/[- ]+/g, '-')
-          .slice(0, 51)
-          .replace(/-$/, ''); // Remove trailing dash
-        
-        // Slugify the title and save it as the slug
-        const title = entry.getIn(["data", "title"], "");
-        const uuid = entry.getIn(["data", "uuid"], "");
-        const slug = `${slugify(title)}_${uuid}`;
-        return entry.get("data").set("titleslug", slug);
-      },
-    });
+        render() {
+          const { value, classNameWrapper, forID } = this.props;
+          return h(
+            "span",
+            {
+              id: forID,
+              style: { fontFamily: "monospace", marginLeft: "1rem" },
+              //className: classNameWrapper
+            },
+            value,
+          );
+        },
+      });
 
-    CMS.registerEventListener({
-      name: "preSave",
-      handler: ({ entry }) => {
-        if (entry.get('collection') !== 'evenement') return;
-    
-        let data = entry.get('data');
-    
-        if (data.has('repas') && data.get('repas').size > 0) {
-          let sortedRepas = data.get('repas')
-            .sortBy(repas => {
-              const horaire = repas.get('horaire');
-              if (horaire === 'matin') return 0;
-              if (horaire === 'midi') return 1;
-              if (horaire === 'soir') return 2;
-            })
-            .sortBy(repas => new Date(repas.get('date_service')));
-    
-          sortedRepas = sortedRepas.map(repas => {
-            if (repas.has('recettes_du_repas') && repas.get('recettes_du_repas').size > 0) {
-              let sortedRecettes = repas.get('recettes_du_repas')
-                .sortBy(recette => {
-                  const typePlat = recette.get('type_plat');
-                  if (typePlat === 'entree') return 0;
-                  if (typePlat === 'plat') return 1;
-                  if (typePlat === 'dessert') return 2;
-                  return 3; // Pour tout autre type de plat
-                });
-              
-              return repas.set('recettes_du_repas', sortedRecettes);
-            }
-            return repas;
-          });
-          
-         return entry.get('data').set('repas', sortedRepas);
-        }
-      },
-    });
-  </script>
-</body>
+      CMS.registerWidget("uuid", UuidWidget);
 
+      const TextInfoWidget = createClass({
+        render: function () {
+          const { value, classNameWrapper } = this.props;
+          return h(
+            "div",
+            { className: classNameWrapper },
+            h(
+              "div",
+              {
+                style: {
+                  padding: "20px",
+                  backgroundColor: "#f0f0f0",
+                  borderRadius: "5px",
+                },
+              },
+              value,
+            ),
+          );
+        },
+      });
+
+      CMS.registerWidget("text-info", TextInfoWidget);
+
+      CMS.registerEventListener({
+        name: "preSave",
+        handler: ({ entry }) => {
+          // Only process blog posts
+          if (entry.get("collection") !== ("recettes" || "evenement")) return;
+
+          // If there's already a slug, don't change it
+          const isNew = window.location.href.endsWith("new");
+          if (entry.getIn(["data", "titleslug"], "") && !isNew) return;
+          const slugify = (str) =>
+            str.toLowerCase().replace(
+              /[^a-z0-9-]/g,
+              (m) =>
+                "éèêëàäâùüûîïôöç'".includes(m) // Ajouter l'apostrophe
+                  ? m.normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+                  : m === "'"
+                    ? ""
+                    : "-", // Supprimer l'apostrophe, remplacer le reste par "-"
+            );
+
+          // Slugify the title and save it as the slug
+          const title = entry.getIn(["data", "title"], "");
+          const uuid = entry.getIn(["data", "uuid"], "");
+          const slug = `${slugify(title)}_${uuid}`;
+          return entry.get("data").set("titleslug", slug);
+        },
+      });
+
+      CMS.registerEventListener({
+        name: "preSave",
+        handler: ({ entry }) => {
+          if (entry.get("collection") !== "evenement") return;
+
+          let data = entry.get("data");
+
+          if (data.has("repas") && data.get("repas").size > 0) {
+            let sortedRepas = data
+              .get("repas")
+              .sortBy((repas) => {
+                const horaire = repas.get("horaire");
+                if (horaire === "matin") return 0;
+                if (horaire === "midi") return 1;
+                if (horaire === "soir") return 2;
+              })
+              .sortBy((repas) => new Date(repas.get("date_service")));
+
+            sortedRepas = sortedRepas.map((repas) => {
+              if (
+                repas.has("recettes_du_repas") &&
+                repas.get("recettes_du_repas").size > 0
+              ) {
+                let sortedRecettes = repas
+                  .get("recettes_du_repas")
+                  .sortBy((recette) => {
+                    const typePlat = recette.get("type_plat");
+                    if (typePlat === "entree") return 0;
+                    if (typePlat === "plat") return 1;
+                    if (typePlat === "dessert") return 2;
+                    return 3; // Pour tout autre type de plat
+                  });
+
+                return repas.set("recettes_du_repas", sortedRecettes);
+              }
+              return repas;
+            });
+
+            return entry.get("data").set("repas", sortedRepas);
+          }
+        },
+      });
+    </script>
+  </body>
 </html>

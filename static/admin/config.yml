@@ -13,7 +13,7 @@ backend:
   #GraphQL allows to retrieve data using less individual API requests compared to a REST API. GitHub's GraphQL API still does not support all mutations necessary to completely replace their REST API, so this feature only calls the new GraphQL API where possible.
   use_graphql: true
 
-#By default, saving a post in the CMS interface pushes a commit directly to the publication branch specified in backend. 
+#By default, saving a post in the CMS interface pushes a commit directly to the publication branch specified in backend.
 # This line should *not* be indented
 publish_mode: simple
 
@@ -274,7 +274,7 @@ collections:
             required: false
             collapsed: true
             summary: "{{fields.title}}: {{fields.quantite}} {{fields.unit}}"
-  
+
             fields:
               - label: "ingredient"
                 name: title
@@ -284,7 +284,7 @@ collections:
                 search_fields: ["ingredients.*.title"]
                 value_field: "ingredients.*.title"
                 options_length: 300
-               
+
               - {
                   label: "Quantité (nombre)",
                   name: "quantite",
@@ -396,7 +396,7 @@ collections:
                   required: false,
                   hint: "Si vous avez quelque-chose à préciser... ⚠ Ne sera pas afficher dans les listes de course"
                 }
-              
+
 
 
           - label: "Viandes et Poissons (et crustacés, mollusques)"
@@ -624,7 +624,7 @@ collections:
         hint: "Si la recette implique de préparer des choses en avance, le préciser ici pour que ce soit mis en avant lors de l'affichage des recettes (ce sera indiquer 'A prévoir a l'avance', à vous de préciser plus précisément quand)."
 
 
-      ### ::: Astuces 
+      ### ::: Astuces
       - label: "Astuces"
         name: "astuces"
         widget: "list"
@@ -697,7 +697,7 @@ collections:
       - label: 'Outputs'
         name: 'outputs'
         widget: 'hidden'
-        default: 
+        default:
           - HTML
           - Poster
           - Ingredients
@@ -754,7 +754,7 @@ collections:
                 search_fields: ["title"]
                 display_fields: ["title"]
                 options_length: 100
-                filters: 
+                filters:
                   - field: draft
                     values: [false]
 
@@ -810,7 +810,7 @@ collections:
 
       - { label: ID, name: "uuid", widget: "uuid" }
       - {label: "Title Slug", name: "titleslug", widget: "hidden", default: "{{slug}}"}
-        
+
 
   ################################
 
@@ -865,6 +865,7 @@ collections:
 
   - name: "ingredients_index"
     label: "Ingrédients"
+    description: "Listes des ingrédients disponibles pour les recettes. Vous pouvez rechercher rapidement les ingrédients déjà enregistrés et la catégorie à laquelle ils appartiennent  sur la page :  https://enka-cookbook.pages.dev/ingredients/"
     files:
       - name: ingredients_legumes
         label: Légumes et Fruits

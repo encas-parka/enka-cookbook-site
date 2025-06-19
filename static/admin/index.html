@@ -143,6 +143,30 @@
           }
         },
       });
+
+      // Event listener pour trier les ingrédients alphabétiquement
+      CMS.registerEventListener({
+        name: "preSave",
+        handler: ({ entry }) => {
+          // Vérifier si c'est une collection d'ingrédients
+          const collection = entry.get("collection");
+          if (!collection || !collection.includes("ingredients")) return;
+
+          let data = entry.get("data");
+          
+          // Vérifier si la propriété "ingredients" existe et contient des éléments
+          if (data.has("ingredients") && data.get("ingredients").size > 0) {
+            // Trier les ingrédients par titre (insensible à la casse)
+            let sortedIngredients = data
+              .get("ingredients")
+              .sortBy((ingredient) => 
+                ingredient.get("title", "").toLowerCase()
+              );
+
+            return entry.get("data").set("ingredients", sortedIngredients);
+          }
+        },
+      });
     </script>
   </body>
 </html>

@@ -1,5 +1,5 @@
 ---
-title: qiza
+title: qiza et melon
 draft: false
 layout: recettes
 type: dessert
@@ -13,7 +13,10 @@ plate: 300
 check: Oui
 checkAlwaysOk: false
 ingredients:
-  legumes: []
+  legumes:
+    - title: Melon
+      quantite: 20
+      unit: unité
   sucres:
     - title: sucre de canne (blond)
       quantite: 1.5

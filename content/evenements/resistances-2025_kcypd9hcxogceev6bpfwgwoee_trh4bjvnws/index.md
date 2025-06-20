@@ -80,6 +80,8 @@ repas:
     recettes_du_repas:
       - recette: hush-puppies_t2i8cfnv
         type_plat: entree
+      - recette: chorizo-vegan_7fz85huy
+        type_plat: plat
       - recette: jambalaya_wrp32b32
         type_plat: plat
         altAssiettes: 180
@@ -87,9 +89,13 @@ repas:
         type_plat: plat
         chef: Auré
         altAssiettes: 20
+      - recette: fondant-a-la-patate-douce-vegan-et-sans-gluten_3b227p22
+        type_plat: dessert
+        altAssiettes: 20
       - recette: cheesecake-a-la-patate-douce_tl9k6592
         type_plat: dessert
         chef: Auré
+        altAssiettes: 180
   - assiettes: 200
     date_service: 2025-07-07
     horaire: midi

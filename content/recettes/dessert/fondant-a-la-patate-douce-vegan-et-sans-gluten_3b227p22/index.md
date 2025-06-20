@@ -1,6 +1,6 @@
 ---
 title: FONDANT A LA PATATE DOUCE VEGAN ET SANS GLUTEN
-draft: true
+draft: false
 layout: recettes
 type: dessert
 categories:

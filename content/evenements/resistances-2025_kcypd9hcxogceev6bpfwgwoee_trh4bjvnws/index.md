@@ -80,10 +80,6 @@ repas:
     recettes_du_repas:
       - recette: hush-puppies_t2i8cfnv
         type_plat: entree
-      - recette: jambalaya_wrp32b32
-        type_plat: plat
-        altAssiettes: 190
-        chef: Auré
       - recette: jambalaya-vegan_bsjylxuj
         type_plat: plat
         chef: Auré
@@ -159,7 +155,7 @@ repas:
       - recette: gateau-a-la-creme-de-marron-nappage-chocolat-vegan_afobs4r1
         type_plat: dessert
         altAssiettes: 20
-      - recette: gateau-a-la-creme-de-marron-nappage-chocolat-vegan_afobs4r1
+      - recette: gateau-a-la-creme-de-marron-nappage-chocolat_0ncv61f5
         type_plat: dessert
         altAssiettes: 180
   - assiettes: 220
@@ -175,7 +171,7 @@ repas:
         altAssiettes: 20
       - recette: tarte-tatin-aux-poivrons-et-feta_5z1sos0t
         type_plat: plat
-        altAssiettes: 180
+        altAssiettes: 200
         chef: Auré
       - recette: creme-de-riz-libanaise-mouhalabieh_0k4dcqig
         type_plat: dessert

@@ -31,6 +31,10 @@ ingredients:
       unit: litre
   frais: []
   sucres:
+    - title: sucre de canne (blond)
+      quantite: 2.5
+      unit: Kg
+      commentaire: appareil
     - title: Chapelure sans gluten
       quantite: 300
       unit: grammes
@@ -38,8 +42,9 @@ ingredients:
       quantite: 390
       unit: ml
     - title: sucre de canne (blond)
-      quantite: 3.5
+      quantite: 1
       unit: Kg
+      commentaire: pour le sirop
     - title: Poudre d'amandes
       quantite: 2.6
       unit: Kg
@@ -55,9 +60,6 @@ preparation: >-
   Préchauffer le four à 180°
 
 
-  Peser 2.5 kg du sucre pour l'appareil et 910 grammes à part pour confectionner un sirop.
-
-
   Zester les oranges et les citrons. Réserver puis les presser pour en extraire le jus. Réserver.
 
 
@@ -67,15 +69,15 @@ preparation: >-
   Mélanger le sucre, la poudre d'amande, la chapelure et la levure intimement. Ajouter les zestes, la fleur d'oranger, les oeufs et l'huile d'olive.
 
 
-  Répartir l'appareil dans 13 moules à tarte tapissés de papier sulfurisé. Enfourner pour 45 minutes de cuisson.
+  Répartir l'appareil dans les moules à tarte tapissés de papier sulfurisé. Enfourner pour 45 minutes de cuisson.
 
 
-  Préparer un sirop avec le restant de sucre et les jus des citrons et des oranges amenés à l'ébullition. Cuire ce sirop 15 Minutes. Imbiber les moelleux avec ce sirop en sortie de four.\
+  Préparer un sirop avec de sucre et les jus des citrons et des oranges amenés à l'ébullition. Cuire ce sirop 15 Minutes. Imbiber les moelleux avec ce sirop en sortie de four.\
 
   Attendre que les moelleux soient refroidis avant de portionner.
 
 
-  Version sans gluten : remplacer la chapelure par le mix sans gluten
+  **Version sans gluten** : remplacer la chapelure par le mix sans gluten
 publishDate: 2025-06-04T19:18:00.000Z
 uuid: b9cpao7j
 titleslug: moelleux-aux-agrumes_b9cpao7j

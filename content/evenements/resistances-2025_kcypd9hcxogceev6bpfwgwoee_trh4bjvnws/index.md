@@ -6,7 +6,7 @@ outputs:
   - Ingredients
 sitemap_exclude: "true"
 repas:
-  - assiettes: 100
+  - assiettes: 120
     date_service: 2025-07-04
     horaire: midi
     recettes_du_repas:
@@ -16,7 +16,9 @@ repas:
         type_plat: entree
       - recette: loubia_90fy1yfd
         type_plat: plat
-  - assiettes: 100
+      - recette: qiza_w5tmbjl3
+        type_plat: dessert
+  - assiettes: 120
     date_service: 2025-07-04
     horaire: soir
     recettes_du_repas:
@@ -34,6 +36,8 @@ repas:
     recettes_du_repas:
       - recette: salade-de-tomates_g1dyaaxh
         type_plat: entree
+      - recette: pain-pita_rhxadipq
+        type_plat: plat
       - recette: boulettes-fumees-de-haricots-rouges-et-champignons_5be3b6de-9a22-4635-a147-d4295c86c452
         type_plat: plat
       - recette: perles-du-japon-vanille-citron-gingembre-cranberries_35jz0q6h
@@ -76,17 +80,22 @@ repas:
     recettes_du_repas:
       - recette: hush-puppies_t2i8cfnv
         type_plat: entree
+      - recette: chorizo-vegan_7fz85huy
+        type_plat: plat
       - recette: jambalaya_wrp32b32
         type_plat: plat
-        altAssiettes: 190
-        chef: Auré
+        altAssiettes: 180
       - recette: jambalaya-vegan_bsjylxuj
         type_plat: plat
         chef: Auré
         altAssiettes: 20
+      - recette: fondant-a-la-patate-douce-vegan-et-sans-gluten_3b227p22
+        type_plat: dessert
+        altAssiettes: 20
       - recette: cheesecake-a-la-patate-douce_tl9k6592
         type_plat: dessert
         chef: Auré
+        altAssiettes: 180
   - assiettes: 200
     date_service: 2025-07-07
     horaire: midi
@@ -120,6 +129,8 @@ repas:
     date_service: 2025-07-08
     horaire: midi
     recettes_du_repas:
+      - recette: soupe-froide-de-courgettes-a-la-menthe_j0mhymu8qzdzjsng2ci9zh0ebayaq5u58te2
+        type_plat: entree
       - recette: kuku-sabzi-vegan_9yunl3t9
         type_plat: entree
         altAssiettes: 20
@@ -153,7 +164,7 @@ repas:
       - recette: gateau-a-la-creme-de-marron-nappage-chocolat-vegan_afobs4r1
         type_plat: dessert
         altAssiettes: 20
-      - recette: gateau-a-la-creme-de-marron-nappage-chocolat-vegan_afobs4r1
+      - recette: gateau-a-la-creme-de-marron-nappage-chocolat_0ncv61f5
         type_plat: dessert
         altAssiettes: 180
   - assiettes: 220
@@ -169,7 +180,7 @@ repas:
         altAssiettes: 20
       - recette: tarte-tatin-aux-poivrons-et-feta_5z1sos0t
         type_plat: plat
-        altAssiettes: 180
+        altAssiettes: 200
         chef: Auré
       - recette: creme-de-riz-libanaise-mouhalabieh_0k4dcqig
         type_plat: dessert
@@ -177,9 +188,7 @@ repas:
     date_service: 2025-07-09
     horaire: soir
     recettes_du_repas:
-      - recette: salade-courgette-curry_5feqe55t
-        type_plat: entree
-      - recette: lasagnes-de-pois-casses_menls83h
+      - recette: burgers-galettes-de-pomme-de-terre-et-frites_hy9ryxxqw2l_5fcwcxk8fsvno74utekr4ubx
         type_plat: plat
       - recette: fromage-blanc-et-fruits-rouges-et-son-alernative-vegan_b19pugeu
         type_plat: dessert
@@ -201,8 +210,12 @@ repas:
     date_service: 2025-07-10
     horaire: soir
     recettes_du_repas:
+      - recette: curry-veg_wbyuybfrzyxchoyptn9pj9qdn9fjbgpbtjep
+        type_plat: plat
+        altAssiettes: 40
       - recette: -curry-de-boeuf_czdyqwi1
         type_plat: plat
+        altAssiettes: 200
       - recette: blanc-manger_nb3iygka
         type_plat: dessert
   - assiettes: 220
@@ -269,6 +282,9 @@ repas:
       - recette: raita_a301usio
         type_plat: entree
         altAssiettes: 330
+      - recette: carotte-rapees-pour-rainbow-buffet_zyfga6fojaots6g3hy-n2ikqw4mvtedlkgrm
+        type_plat: plat
+        altAssiettes: 360
       - recette: urulai-sukka_5ru2hn6h
         type_plat: plat
       - recette: khadai-tofu_ls7yrbs9
@@ -277,6 +293,12 @@ repas:
         type_plat: plat
       - recette: oignons-bhaji_om3sikhm
         type_plat: plat
+      - recette: cookies-arc-en-ciel-vegan-et-sans-gluten_5stxpr61
+        type_plat: dessert
+        altAssiettes: 60
+      - recette: rainbow-cake_g6viqgj8
+        type_plat: dessert
+        altAssiettes: 300
 uuid: kcypd9hcxogceev6bpfwgwoee_trh4bjvnws
 titleslug: "{{slug}}"
 ---

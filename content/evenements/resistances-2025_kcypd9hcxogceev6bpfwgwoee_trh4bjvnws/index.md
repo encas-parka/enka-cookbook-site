@@ -80,6 +80,9 @@ repas:
     recettes_du_repas:
       - recette: hush-puppies_t2i8cfnv
         type_plat: entree
+      - recette: jambalaya_wrp32b32
+        type_plat: plat
+        altAssiettes: 180
       - recette: jambalaya-vegan_bsjylxuj
         type_plat: plat
         chef: Auré

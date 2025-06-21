@@ -220,6 +220,28 @@ collections:
       ################################
       ## ::: __Ingredients de la recette ##
 
+      # ::: test merge 
+
+      - label: "IngredientsALL"
+        name: "ingredientsALL"
+        widget: "object"
+        allow_add: true
+        add_to_top: true
+        label_singular: "Ingrédient"
+        required: false
+        collapsed: true
+        summary: "{{fields.title}}: {{fields.quantite}} {{fields.unit}}"
+        fields:
+          - label: "ingredient_all"
+            name: title
+            widget: "relation"
+            collection: "ingredients_index"
+            file: "ingredients"
+            search_fields: ["ingredients.*.title"]
+            value_field: "ingredients.*.title"
+            options_length: 600
+
+
       - label: "Ingredients"
         name: "ingredients"
         widget: "object"

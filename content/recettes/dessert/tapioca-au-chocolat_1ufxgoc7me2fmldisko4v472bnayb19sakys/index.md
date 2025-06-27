@@ -1,5 +1,5 @@
 ---
-title: tapioca au chocolat
+title: Tapioca perlée au chocolat
 draft: false
 description: ""
 layout: recettes
@@ -53,6 +53,6 @@ preparation: >-
 
   Peut-être préparé 3heures environ avant de servir
 publishDate: 2025-06-27T19:13:00.000Z
-uuid: 1ufxgoc7me2fmldisko4v472bnayb19sakys
-titleslug: tapioca-au-chocolat_1ufxgoc7me2fmldisko4v472bnayb19sakys
+uuid: 3lmh4nwosg3nhoir63vdog1aaetw_lw7qhrf
+titleslug: tapioca-perlee-au-chocolat_3lmh4nwosg3nhoir63vdog1aaetw_lw7qhrf
 ---

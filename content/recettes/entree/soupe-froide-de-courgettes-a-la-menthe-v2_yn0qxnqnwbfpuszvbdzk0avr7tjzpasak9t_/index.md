@@ -14,7 +14,7 @@ saison:
 cuisson: Oui
 temperature: Froid
 plate: 200
-quantite_desc: En comptant un verre de 15cL par personne.
+quantite_desc: ...
 check: Non
 checkAlwaysOk: false
 ingredients:

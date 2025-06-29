@@ -13,7 +13,7 @@ saison:
   - ete
 cuisson: Oui
 temperature: Froid
-plate: 200
+plate: 220
 quantite_desc: ...
 check: Non
 checkAlwaysOk: false

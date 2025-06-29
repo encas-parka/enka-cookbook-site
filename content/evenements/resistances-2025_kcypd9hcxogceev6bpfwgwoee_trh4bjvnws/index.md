@@ -134,6 +134,7 @@ repas:
     recettes_du_repas:
       - recette: soupe-froide-de-courgettes-a-la-menthe-v2_yn0qxnqnwbfpuszvbdzk0avr7tjzpasak9t_
         type_plat: entree
+        commentaire: version modifier resistance 2025
       - recette: kuku-sabzi-vegan_9yunl3t9
         type_plat: entree
         altAssiettes: 20

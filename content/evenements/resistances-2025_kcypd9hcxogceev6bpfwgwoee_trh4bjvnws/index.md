@@ -132,7 +132,7 @@ repas:
     date_service: 2025-07-08
     horaire: midi
     recettes_du_repas:
-      - recette: soupe-froide-de-courgettes-a-la-menthe_j0mhymu8qzdzjsng2ci9zh0ebayaq5u58te2
+      - recette: soupe-froide-de-courgettes-a-la-menthe-v2_yn0qxnqnwbfpuszvbdzk0avr7tjzpasak9t_
         type_plat: entree
       - recette: kuku-sabzi-vegan_9yunl3t9
         type_plat: entree

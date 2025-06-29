@@ -36,6 +36,9 @@ repas:
     recettes_du_repas:
       - recette: salade-de-tomates_g1dyaaxh
         type_plat: entree
+      - recette: pita-garniture_uzpprkvykwstdskzkew-zvvvdfasfrz49gau
+        type_plat: plat
+        partof: pain pita
       - recette: pain-pita_rhxadipq
         type_plat: plat
       - recette: boulettes-fumees-de-haricots-rouges-et-champignons_5be3b6de-9a22-4635-a147-d4295c86c452

@@ -188,6 +188,9 @@ repas:
     date_service: 2025-07-09
     horaire: soir
     recettes_du_repas:
+      - recette: granola-sale-pour-soupe_0w730pey
+        type_plat: plat
+        altAssiettes: 220
       - recette: burgers-galettes-de-pomme-de-terre-et-frites_hy9ryxxqw2l_5fcwcxk8fsvno74utekr4ubx
         type_plat: plat
       - recette: fromage-blanc-et-fruits-rouges-et-son-alernative-vegan_b19pugeu
@@ -264,6 +267,7 @@ repas:
         altAssiettes: 210
       - recette: creme-vegan-au-sureau_gqbis76w
         type_plat: plat
+        altAssiettes: 20
       - recette: smashed-potatoes-et-creme-sour-ciboulette_2015fwc3
         type_plat: plat
       - recette: -charlotte-dabricot-en-verrine_3bx3ybas
@@ -276,6 +280,7 @@ repas:
         type_plat: entree
       - recette: chutney-menthe-coriandre_s5qszq87
         type_plat: entree
+        altAssiettes: 180
       - recette: raita-vegan_74k7xqu3
         type_plat: entree
         altAssiettes: 30
@@ -287,8 +292,10 @@ repas:
         altAssiettes: 360
       - recette: urulai-sukka_5ru2hn6h
         type_plat: plat
+        altAssiettes: 200
       - recette: khadai-tofu_ls7yrbs9
         type_plat: plat
+        altAssiettes: 240
       - recette: sauce-korma-et-betterave_zcgggupn
         type_plat: plat
       - recette: oignons-bhaji_om3sikhm

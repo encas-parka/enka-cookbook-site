@@ -29,7 +29,7 @@ ingredients:
       unit: grammes
     - title: Amandes effilées
       quantite: 200
-      unit: Kg
+      unit: grammes
   lof:
     - title: Lait de soja
       quantite: 9

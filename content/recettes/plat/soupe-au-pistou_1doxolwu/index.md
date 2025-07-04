@@ -1,10 +1,11 @@
 ---
-title: soupe au pistou
+title: SOUPE AU PISTOU
 draft: false
 layout: recettes
 type: plat
 categories:
   - Soupe
+auteur: Auré
 regime:
   - vegetarien
 cuisson: Oui

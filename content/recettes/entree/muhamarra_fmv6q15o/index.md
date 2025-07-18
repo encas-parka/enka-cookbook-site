@@ -6,7 +6,7 @@ type: entree
 categories:
   - Sauce
   - Accompagnement
-auteur: ''
+auteur: ""
 regime:
   - vegetarien
   - vegan
@@ -30,6 +30,9 @@ ingredients:
       title: Tahin
       unit: grammes
   epices:
+    - title: Mélasse de grenade
+      quantite: 1
+      unit: Kg
     - quantite: 125
       title: Piment en poudre
       unit: grammes
@@ -58,25 +61,18 @@ ingredients:
     - quantite: 250
       title: Miel
       unit: grammes
-    - quantite: 1
-      title: Mélasse
-      unit: Kg
 materiel:
   - Robot Mixeur
 preparation: >-
   1. Faire griller les poivrons sans enlever méthodiquement les peaux, un peu
   quand même.
 
-  2. Mixer tous les ingrédients sauf les noix et un peu d'huile d'olive pour le
-  service. Attention à laisser une part sans chapelure pour sans gluten.
+  2. Mixer tous les ingrédients sauf les noix et un peu d'huile d'olive pour le service. Attention à laisser une part sans chapelure pour sans gluten.
 
-  3. Concasser les noix grossièrement, après en avoir qq'unes de côté, les
-  ajouter au melange.
+  3. Concasser les noix grossièrement, après en avoir qq'unes de côté, les ajouter au melange.
 
-  4. Transférer dans le plat de service, arroser un peu d'huile d'olives et
-  décorer avec les noix restantes.
-publishDate: '2024-06-04T16:31:00.000Z'
+  4. Transférer dans le plat de service, arroser un peu d'huile d'olives et décorer avec les noix restantes.
+publishDate: 2024-06-04T16:31:00.000Z
 uuid: fmv6q15o
 titleslug: muhamarra_fmv6q15o
 ---
-

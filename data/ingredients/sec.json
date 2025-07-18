@@ -1,7 +1,10 @@
 {
   "ingredients": [
     {
-      "title": "Boulgour fin"
+      "title": "Boulgour fin",
+      "alergenesIng": [
+        "Gluten"
+      ]
     },
     {
       "title": "Amande",

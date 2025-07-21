@@ -74,7 +74,7 @@ preparation: >-
   * Pour la sauce mélanger yaourt, miel, jus de citron et cumin, assaissonner
 
 
-  Option vegan : remplacer les oeufs par des oeufs de lin (1 cuillère à soupe de lin moulu pour 2,5 CS d'eau tiède, attendre 10min); la feta par du yaourt de soja (en mettre moins); saler plus.
+  Option vegan : remplacer les oeufs par des oeufs de lin (1 cuillère à soupe de lin moulu pour 2,5 CS d'eau tiède, attendre 10min); la feta par du yaourt de soja (en mettre moins); saler plus. Le yaourt grec par du yaourt de soja, le miel par du sirop d'agave.
 
 
   Option sans gluten : farine sans gluten (par exemple mélange farine riz maïs)

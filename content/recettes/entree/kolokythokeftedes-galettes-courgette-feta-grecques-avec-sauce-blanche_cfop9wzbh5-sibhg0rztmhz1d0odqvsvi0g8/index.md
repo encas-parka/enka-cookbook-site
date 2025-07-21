@@ -54,6 +54,9 @@ ingredients:
       quantite: 2
       unit: c. à soupe
   legumes:
+    - title: Citron vert
+      quantite: 2
+      unit: unité
     - title: Courgette
       quantite: 2.25
       unit: Kg
@@ -64,9 +67,17 @@ preparation: >-
   * Râper les courgettes. Les saler et laisser égoutter 15 min. Bien essorer les
   courgettes râpées avec l'aide d'un torchon.
 
-  * Mélanger avec tous les autres ingrédients (aromates hâchées, épices, feta, oeufs battus, farine) sauf le miel et le yaourt qui sont pour la sauce et l'huile qui est pour la cuisson. Normalement pas besoin de re saler, la feta sale  beaucoup et les courgettes sont salées par la première étape.
+  * Mélanger avec tous les autres ingrédients (aromates hâchées, épices, feta, oeufs battus, farine, zeste du citron) sauf le miel, le jus du citron le yaourt qui sont pour la sauce et l'huile qui est pour la cuisson. Normalement pas besoin de re saler, la feta sale  beaucoup et les courgettes sont salées par la première étape.
 
   * Façonner des galettes, les huiler des 2 côtés et mettre au four à 180°C 20-30 minutes en retournant à mi-cuisson. Pour aller plus vite il est possible de plutôt faire des plaques entières qu'on découpe en parts carrées après ou avant la cuisson avec un couteau.
+
+  * Pour la sauce mélanger yaourt, miel, jus de citron et cumin, assaissonner
+
+
+  Option vegan : remplacer les oeufs par des oeufs de lin (1 cuillère à soupe de lin moulu pour 2,5 CS d'eau tiède, attendre 10min); la feta par du yaourt de soja (en mettre moins); saler plus.
+
+
+  Option sans gluten : farine sans gluten (par exemple mélange farine riz maïs)
 publishDate: 2025-07-21T13:43:00.000+02:00
 uuid: cfop9wzbh5-sibhg0rztmhz1d0odqvsvi0g8
 titleslug: kolokythokeftedes-galettes-courgette-feta-grecques_cfop9wzbh5-sibhg0rztmhz1d0odqvsvi0g8

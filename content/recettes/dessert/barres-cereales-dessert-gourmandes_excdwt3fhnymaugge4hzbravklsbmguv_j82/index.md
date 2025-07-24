@@ -1,5 +1,5 @@
 ---
-title: Barres céréales dessert gourmandes
+title: Barres céréales gourmandes flocons d'avoine chocolat raisin sec
 draft: false
 description: Adaptation d'une recette du site owiowifouettemoi en mode vegan et moins cher
 layout: recettes

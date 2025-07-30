@@ -1,0 +1,172 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex" />
+    <title>Content Manager Decap-CMS</title>
+    <!-- Include the script that enables Netlify Identity on this page. -->
+
+  </head>
+
+  <body>
+    <!-- incrémenter v= en cas de modification pour invalidé le cache des utilisateur -->
+    <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js?v=5"></script>
+
+    <script>
+      function nanoid(t = 8) {
+        return crypto
+          .getRandomValues(new Uint8Array(t))
+          .reduce((t, e) => (t += (e &= 7) < 8 ? e.toString(8) : ""), "")
+          .toLowerCase();
+      }
+
+      const UuidWidget = createClass({
+        componentDidMount() {
+          const { value, onChange } = this.props;
+
+          const isNew = window.location.href.endsWith("new");
+          // Check if the value is an existing uuid
+          // Set initial value
+          if (!value || isNew) {
+            onChange(nanoid());
+          }
+        },
+
+        render() {
+          const { value, classNameWrapper, forID } = this.props;
+          return h(
+            "span",
+            {
+              id: forID,
+              style: { fontFamily: "monospace", marginLeft: "1rem" },
+              //className: classNameWrapper
+            },
+            value,
+          );
+        },
+      });
+
+      CMS.registerWidget("uuid", UuidWidget);
+
+      const TextInfoWidget = createClass({
+        render: function () {
+          const { value, classNameWrapper } = this.props;
+          return h(
+            "div",
+            { className: classNameWrapper },
+            h(
+              "div",
+              {
+                style: {
+                  padding: "20px",
+                  backgroundColor: "#f0f0f0",
+                  borderRadius: "5px",
+                },
+              },
+              value,
+            ),
+          );
+        },
+      });
+
+      CMS.registerWidget("text-info", TextInfoWidget);
+
+      CMS.registerEventListener({
+        name: "preSave",
+        handler: ({ entry }) => {
+          // Only process blog posts
+          if (entry.get("collection") !== ("recettes" || "evenement")) return;
+
+          // If there's already a slug, don't change it
+          const isNew = window.location.href.endsWith("new");
+          if (entry.getIn(["data", "titleslug"], "") && !isNew) return;
+          const slugify = (str) =>
+            str
+              .replace(/['']/g, "") // Supprimer d'abord toutes les apostrophes
+              .toLowerCase()
+              .replace(
+                /[^a-z0-9-]/g,
+                (m) =>
+                  "éèêëàäâùüûîïôöç".includes(m)
+                    ? m.normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+                    : "-"
+              );
+
+          // Slugify the title and save it as the slug
+          const title = entry.getIn(["data", "title"], "");
+          const uuid = entry.getIn(["data", "uuid"], "");
+          const slug = `${slugify(title)}_${uuid}`;
+          return entry.get("data").set("titleslug", slug);
+        },
+      });
+
+      CMS.registerEventListener({
+        name: "preSave",
+        handler: ({ entry }) => {
+          if (entry.get("collection") !== "evenement") return;
+
+          let data = entry.get("data");
+
+          if (data.has("repas") && data.get("repas").size > 0) {
+            let sortedRepas = data
+              .get("repas")
+              .sortBy((repas) => {
+                const horaire = repas.get("horaire");
+                if (horaire === "matin") return 0;
+                if (horaire === "midi") return 1;
+                if (horaire === "soir") return 2;
+              })
+              .sortBy((repas) => new Date(repas.get("date_service")));
+
+            sortedRepas = sortedRepas.map((repas) => {
+              if (
+                repas.has("recettes_du_repas") &&
+                repas.get("recettes_du_repas").size > 0
+              ) {
+                let sortedRecettes = repas
+                  .get("recettes_du_repas")
+                  .sortBy((recette) => {
+                    const typePlat = recette.get("type_plat");
+                    if (typePlat === "entree") return 0;
+                    if (typePlat === "plat") return 1;
+                    if (typePlat === "dessert") return 2;
+                    return 3; // Pour tout autre type de plat
+                  });
+
+                return repas.set("recettes_du_repas", sortedRecettes);
+              }
+              return repas;
+            });
+
+            return entry.get("data").set("repas", sortedRepas);
+          }
+        },
+      });
+
+      // Event listener pour trier les ingrédients alphabétiquement
+      CMS.registerEventListener({
+        name: "preSave",
+        handler: ({ entry }) => {
+          // Vérifier si c'est une collection d'ingrédients
+          const collection = entry.get("collection");
+          if (!collection || !collection.includes("ingredients")) return;
+
+          let data = entry.get("data");
+
+          // Vérifier si la propriété "ingredients" existe et contient des éléments
+          if (data.has("ingredients") && data.get("ingredients").size > 0) {
+            // Trier les ingrédients par titre (insensible à la casse)
+            let sortedIngredients = data
+              .get("ingredients")
+              .sortBy((ingredient) =>
+                ingredient.get("title", "").toLowerCase()
+              );
+
+            return entry.get("data").set("ingredients", sortedIngredients);
+          }
+        },
+      });
+    </script>
+  </body>
+</html>

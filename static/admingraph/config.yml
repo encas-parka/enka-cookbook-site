@@ -1,9 +1,16 @@
 backend:
-  # name: git-gateway
+
+  # PENSER A FAIRE UN DEPLOY SUR NETLIFY SI CHANGEMENT DU CMS
+
+
   name: github
+  # name: github
   repo: encas-parka/enka-cookbook-site
   branch: main
   base_url: https://sveltia-cms-auth.encas-cookbook.workers.dev/
+
+
+
 
   #Permettre un PR sur github sans l'acces aux dépot (github only)
   # open_authoring: true
@@ -11,11 +18,17 @@ backend:
   # Vérifier si ca marche bien : si un article est modifier plusieur fpos avant d'etre mergé/publié, un seul commit avec rebased.
   # squash_merges: true
 
+  #GraphQL allows to retrieve data using less individual API requests compared to a REST API. GitHub's GraphQL API still does not support all mutations necessary to completely replace their REST API, so this feature only calls the new GraphQL API where possible.
+  use_graphql: true
 
 #By default, saving a post in the CMS interface pushes a commit directly to the publication branch specified in backend.
 # This line should *not* be indented
 publish_mode: simple
 
+
+# The search functionally requires loading all collection(s) entries, which can exhaust rate limits on large repositories. It can be disabled by setting the top level search property to false.
+# Defaults to true
+search: true
 locale: "fr"
 
 # when using the default proxy server port
@@ -41,7 +54,7 @@ collections:
     label-singular: "Recette"
     folder: "content/recettes/"
     path: "{{type}}/{{slug}}/index"
-    slug: "{{title}}_{{uuid_short}}"
+    slug: "{{title}}_{{fields.uuid}}"
     filter: { field: "layout", value: "recettes" }
     description: "Liste de l'ensemble des recettes. Vous pouvez utiliser les filtres ci-dessous pour classer / filtrer les recettes. Ou faire 'ctrl+f' pour rechercher une recette avec votre navigateur."
     view_filters:
@@ -89,6 +102,7 @@ collections:
     create: true
 
     fields:
+      # - {name: "info", widget: "text-info", default: "Ceci est un exemple de texte d'information pour les utilisateurs.", required: false}
 
       - {
           label: "Intitulé",
@@ -133,10 +147,11 @@ collections:
         name: "categories"
         widget: "relation"
         collection: "sous-categories"
-        valueField: "title"
-        searchFields: ["title"]
+        value_field: "title"
+        search_fields: ["title"]
         multiple: true
         max: 4
+        options_length: 20
         required: true
         hint: "Vous pouvez en définir plusieurs, mais la première servira à définir l'icone associée à la recette."
       - label: "auteur"
@@ -183,7 +198,7 @@ collections:
         options: ["Chaud", "Froid"]
       - label: "Quantités indiquées prévues pour combien de couverts ?"
         name: "plate"
-        widget: "valueType"
+        widget: "number"
         min: 1
         value_type: "int"
       - label: "Précision quantité"
@@ -201,10 +216,10 @@ collections:
         widget: "boolean"
         required: false
         default: false
-        hint: "Cochez cette case si les proportions ne changent jamais, quelque-soit le nombre de couvert (par exemple pour les cakes, les tartes, et autres préparations réalisées dans des plats individuels) → Desactive les alertes qui s'affichent en cas de différences significatives entre les quantités d'ingrédients indiquées dans la recette initiale et le nombre de couvert demandé."
+        hint: "Cochez cette case si les proportions ne changent jamais, quelque-soit le nombre de couvert (par exemple pour les cakes, les tartes, et autres préparations réalisées dans des plats individuels) → Désactive les alertes qui s'affichent en cas de différences significatives entre les quantités d'ingrédients indiquées dans la recette initiale et le nombre de couvert demandé."
       - label: "Testé aussi pour ce nombres de couverts : "
         name: "checkfor"
-        widget: "valueType"
+        widget: "number"
         min: 1
         value_type: "int"
         hint: "Si vous avez testé la recette pour un nombre de couverts significativement différent, et que la recette était réussie, indiquez ce nombre de couverts ici. S'il vous a fallu modifier les quantités d'ingrédients pour obtenir un résultat satisfaisant, vous pouvez 'dupliquer' cette recette (bouton 'publish' en haut → 'duplicate'), et modifier en conséquence la recette dupliquée (et amender le titre). Merci d'indiquer sur l'une des 2 recettes qu'il existe une recette alternative (compléter le champ 'Préparations Alternatives' en bas de cette page). À défaut, vous pouvez indiquer brièvement les modifications à apporter dans le champ 'astuces' en bas de cette page."
@@ -216,7 +231,7 @@ collections:
       - label: "Ingredients"
         name: "ingredients"
         widget: "object"
-        hint: "Vous pouvez retrouver la liste des ingrédients disponibles (et leur catégorie) sur la page https://enka-cookbook.pages.dev/ingredients/ . Pour ajouter des ingrédients qui ne sont pas encore répertorier, voir https://enka-cookbook.pages.dev/docs/editer/autres/"
+        hint: "Vous pouvez retrouver la liste des ingrédients disponibles (et leur catégorie) sur la page https://enka-cookbook.pages.dev/ingredients/ . Pour ajouter des ingrédients qui ne sont pas encore répertoriés, voir https://enka-cookbook.pages.dev/docs/editer/autres/"
         fields:
           - label: "Sec (Legumineuses, céréales)"
             name: "sec"
@@ -233,12 +248,13 @@ collections:
                 widget: "relation"
                 collection: "ingredients_index"
                 file: "ingredients_sec"
-                searchFields: ["ingredients.*.title"]
-                valueField: "ingredients.*.title"
+                search_fields: ["ingredients.*.title"]
+                value_field: "ingredients.*.title"
+                options_length: 300
               - {
                   label: "Quantité (nombre)",
                   name: "quantite",
-                  widget: "valueType",
+                  widget: "number",
                   min: 0.1,
                   value_type: "float",
                 }
@@ -272,13 +288,14 @@ collections:
                 widget: "relation"
                 collection: "ingredients_index"
                 file: "ingredients_legumes"
-                searchFields: ["ingredients.*.title"]
-                valueField: "ingredients.*.title"
+                search_fields: ["ingredients.*.title"]
+                value_field: "ingredients.*.title"
+                options_length: 300
 
               - {
                   label: "Quantité (nombre)",
                   name: "quantite",
-                  widget: "valueType",
+                  widget: "number",
                   min: 0.1,
                   value_type: "float",
                 }
@@ -287,7 +304,7 @@ collections:
                   name: "unit",
                   widget: "select",
                   options: ["Kg", "grammes", "unité", "tête·s", "gousse·s"],
-                  hint: "Preférez les quantités en grammes/Kg/litres. La taille des légumes est variable, et lorsque tout est en Kg, grammes ou litres, c'est additionnable pour les listes de course ! ",
+                  hint: "Préférez les quantités en grammes/Kg/litres. La taille des légumes est variable, et lorsque tout est en Kg, grammes ou litres, c'est additionnable pour les listes de course ! ",
                 }
               - {
                   label: "commentaire",
@@ -298,7 +315,7 @@ collections:
 
                 }
 
-          - label: "LOF : Lait, oeuf, farines, huile..."
+          - label: "LOF : Lait, oeuf, farines, huile (NON-FRAIS).."
             name: "lof"
             widget: "list"
             allow_add: true
@@ -313,12 +330,13 @@ collections:
                 widget: "relation"
                 collection: "ingredients_index"
                 file: "ingredients_lof"
-                searchFields: ["ingredients.*.title"]
-                valueField: "ingredients.*.title"
+                search_fields: ["ingredients.*.title"]
+                value_field: "ingredients.*.title"
+                options_length: 300
               - {
                   label: "Quantité (nombre)",
                   name: "quantite",
-                  widget: "valueType",
+                  widget: "number",
                   min: 0.1,
                   value_type: "float",
                 }
@@ -362,12 +380,13 @@ collections:
                 widget: "relation"
                 collection: "ingredients_index"
                 file: "ingredients_frais"
-                searchFields: ["ingredients.*.title"]
-                valueField: "ingredients.*.title"
+                search_fields: ["ingredients.*.title"]
+                value_field: "ingredients.*.title"
+                options_length: 300
               - {
                   label: "Quantité (nombre)",
                   name: "quantite",
-                  widget: "valueType",
+                  widget: "number",
                   min: 0.1,
                   value_type: "float",
                 }
@@ -402,12 +421,13 @@ collections:
                 widget: "relation"
                 collection: "ingredients_index"
                 file: "ingredients_animaux"
-                searchFields: ["ingredients.*.title"]
-                valueField: "ingredients.*.title"
+                search_fields: ["ingredients.*.title"]
+                value_field: "ingredients.*.title"
+                options_length: 300
               - {
                   label: "Quantité (nombre)",
                   name: "quantite",
-                  widget: "valueType",
+                  widget: "number",
                   min: 0.1,
                   value_type: "float",
                 }
@@ -442,12 +462,13 @@ collections:
                 widget: "relation"
                 collection: "ingredients_index"
                 file: "ingredients_sucres"
-                searchFields: ["ingredients.*.title"]
-                valueField: "ingredients.*.title"
+                search_fields: ["ingredients.*.title"]
+                value_field: "ingredients.*.title"
+                options_length: 300
               - {
                   label: "Quantité (nombre)",
                   name: "quantite",
-                  widget: "valueType",
+                  widget: "number",
                   min: 0.1,
                   value_type: "float",
                 }
@@ -493,12 +514,13 @@ collections:
                 widget: "relation"
                 collection: "ingredients_index"
                 file: "ingredients_epices"
-                searchFields: ["ingredients.*.title"]
-                valueField: "ingredients.*.title"
+                search_fields: ["ingredients.*.title"]
+                value_field: "ingredients.*.title"
+                options_length: 300
               - {
                   label: "Quantité (nombre)",
                   name: "quantite",
-                  widget: "valueType",
+                  widget: "number",
                   min: 0.1,
                   value_type: "float",
                   required: false,
@@ -547,12 +569,13 @@ collections:
                 widget: "relation"
                 collection: "ingredients_index"
                 file: "ingredients_autres"
-                searchFields: ["ingredients.*.title"]
-                valueField: "ingredients.*.title"
+                search_fields: ["ingredients.*.title"]
+                value_field: "ingredients.*.title"
+                options_length: 300
               - {
                   label: "Quantité (nombre)",
                   name: "quantite",
-                  widget: "valueType",
+                  widget: "number",
                   min: 0.1,
                   value_type: "float",
                   required: false,
@@ -585,27 +608,30 @@ collections:
 
                 }
 
+      ### ::: Materiel
       - label: "Materiel"
         name: "materiel"
         widget: "relation"
         collection: "materiel"
         required: false
         multiple: true
-        valueField: "title"
-        searchFields: ["title"]
+        value_field: "title"
+        search_fields: ["title"]
+        options_length: 30
 
+      ### ::: Preparation
       - label: "Préparation"
         name: "preparation"
-        widget: "editorComponents"
+        widget: "markdown"
 
       - label: "Préparation - A Faire la veille"
         name: "preparation24h"
-        widget: "editorComponents"
+        widget: "markdown"
         required: false
-        hint: "Si la recette implique de préparer des choses en avance, le préciser ici pour que ce soit mis en avant lors de l'affichage des recettes(ce sera indiquer 'A prévoir a l'avance', a vous de précisez plus précisément quand)."
+        hint: "Si la recette implique de préparer des choses en avance, le préciser ici pour que ce soit mis en avant lors de l'affichage des recettes (ce sera indiquer 'A prévoir a l'avance', à vous de préciser plus précisément quand)."
 
-      ############### PrepAlt
 
+      ### ::: Astuces
       - label: "Astuces"
         name: "astuces"
         widget: "list"
@@ -618,6 +644,7 @@ collections:
             name: "astuce"
             widget: "string"
 
+      ### ::: PrepAlt
       - label: "Préparations Alternatives"
         name: "prepAlt"
         label_singular: "Préparation alternative"
@@ -633,44 +660,54 @@ collections:
               name: "recetteAlt",
               widget: "relation",
               collection: "recettes",
-              searchFields: ["title"],
-              valueField: "title",
-              displayFields: "title",
+              search_fields: ["title"],
+              value_field: "titleslug",
+              display_fields: ["title"],
             }
 
       - label: "Date de publication"
         name: "publishDate"
         widget: "datetime"
-        pickerUtc: true
+        # picker_utc: true
 
-      - name: uuid
-        label: Id
-        widget: uuid
+      - { label: 'UUID', name: 'uuid', widget: uuid }
+      - {label: "Title Slug", name: "titleslug", widget: "hidden", default: "{{slug}}"}
+
+
+
 
   ###############################
   ################################
 
-  # ::: COLLECTION Menu / Evenements
+  # ::: Menu / Evenements
 
   - label: "Evenements"
     label-singular: "Evenement"
     name: "evenement"
-    description: "Pour creer des menus sur un ou plusieurs jours..."
+    description: "Pour créer des menus sur un ou plusieurs jours..."
     folder: content/evenements/
     path: "{{slug}}/index"
+    slug: "{{title}}_{{fields.uuid}}"
     create: true
     fields:
       - {
           label: "Nom de l'évènement",
           name: "title",
           widget: "string",
-          hint: "Attention à ne pas utiliser un nom d'évenement déjà existant (si c'était  le cas, la page n'existera pas sur le site...). Ne peut contenir que des lettres, des chiffres, des parenthèses, des tirets (-), virgules et apostrophes",
+          hint: " Ne peut contenir que des lettres, des chiffres, des parenthèses, des tirets (-), virgules et apostrophes",
           pattern:
             [
               '^[a-zA-Z0-9 éèëïïùàâôêûç \u002C\u0027\u2018\u2019\u00C0-\u00FF()\-]+$',
               "Contient un caractère spécial interdit. Ne peut contenir que des lettres, des chiffres, des parenthèses ou des tirets (-), virgules et apostrophes.",
             ],
         }
+      - label: 'Outputs'
+        name: 'outputs'
+        widget: 'hidden'
+        default:
+          - HTML
+          - Poster
+          - Ingredients
 
       - { name: "sitemap_exclude", widget: "hidden", default: "true" }
 
@@ -689,7 +726,7 @@ collections:
               name: "date_service",
               widget: "datetime",
               hint: "Jour ou le repas sera servis..",
-              pickerUtc: true,
+              date_format: YYYY-MM-DD,
             }
 
           - {
@@ -702,7 +739,7 @@ collections:
           - {
               label: "Nombres d'assiettes",
               name: "assiettes",
-              widget: "valueType",
+              widget: "number",
               default: 100,
               value_type: "int",
               min: 1,
@@ -714,15 +751,19 @@ collections:
             widget: "list"
             allow_add: true
             add_to_top: true
-            summary: "{{recette}} : {{fields.type_plat}}"
+            summary: "{{recette | truncate(35)}} : {{fields.type_plat}} - {{fields.altAssiettes}}"
             fields:
               - label: "Recette"
                 name: "recette"
                 widget: "relation"
                 collection: "recettes"
-                valueField: "title"
-                searchFields: ["title"]
-                displayFieldss: ["title"]
+                value_field: "titleslug"
+                search_fields: ["title"]
+                display_fields: ["title"]
+                options_length: 100
+                filters:
+                  - field: draft
+                    values: [false]
 
               - label: "Entrées/Plats/Desserts ?"
                 name: "type_plat"
@@ -735,7 +776,7 @@ collections:
               - {
                   label: "Nombre d'assiettes pour cette recette",
                   name: "altAssiettes",
-                  widget: "valueType",
+                  widget: "number",
                   min: 1,
                   value_type: "int",
                   max: 90000,
@@ -773,6 +814,10 @@ collections:
                   hint: "Si vous avez quelque-chose a préciser...(N'oubliez pas que les pages des menus seront publié en ligne !)",
                   required: false,
                 }
+
+      - { label: ID, name: "uuid", widget: "uuid" }
+      - {label: "Title Slug", name: "titleslug", widget: "hidden", default: "{{slug}}"}
+
 
   ################################
 
@@ -827,6 +872,7 @@ collections:
 
   - name: "ingredients_index"
     label: "Ingrédients"
+    description: "Listes des ingrédients disponibles pour les recettes. Vous pouvez rechercher rapidement les ingrédients déjà enregistrés et la catégorie à laquelle ils appartiennent  sur la page :  https://enka-cookbook.pages.dev/ingredients/"
     files:
       - name: ingredients_legumes
         label: Légumes et Fruits

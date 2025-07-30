@@ -144,7 +144,7 @@ collections:
         search_fields: ["title"]
         multiple: true
         max: 4
-        options_length: 20
+        options_length: 50
         required: true
         hint: "Vous pouvez en définir plusieurs, mais la première servira à définir l'icone associée à la recette."
       - label: "auteur"
@@ -237,7 +237,7 @@ collections:
             collection: "ingredients_index"
             search_fields: ["title"]
             value_field: "title"
-            options_length: 600
+            options_length: 2000
           - label: "Quantité (nombre)"
             name: quantite
             widget: number

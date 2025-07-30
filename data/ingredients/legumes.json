@@ -1,11 +1,6 @@
 {
   "ingredients": [
     {
-      "title": "test seltia",
-      "pFrais": true,
-      "saisons": []
-    },
-    {
       "title": "Abricot",
       "pFrais": true
     },
@@ -92,31 +87,6 @@
     {
       "title": "Catalonia",
       "pFrais": true
-    },
-    {
-      "title": "Cébette - Ciboule - Cive - Oignon vert",
-      "pFrais": true
-    },
-    {
-      "title": "Céleri",
-      "pFrais": true,
-      "alergenesIng": [
-        "Céleri"
-      ]
-    },
-    {
-      "title": "Céleri branche",
-      "pFrais": true,
-      "alergenesIng": [
-        "Céleri"
-      ]
-    },
-    {
-      "title": "Céleri rave",
-      "pFrais": true,
-      "alergenesIng": [
-        "Céleri"
-      ]
     },
     {
       "title": "Cerise",
@@ -267,15 +237,36 @@
       "pFrais": false
     },
     {
+      "title": "Cébette - Ciboule - Cive - Oignon vert",
+      "pFrais": true
+    },
+    {
+      "title": "Céleri",
+      "pFrais": true,
+      "alergenesIng": [
+        "Céleri"
+      ]
+    },
+    {
+      "title": "Céleri branche",
+      "pFrais": true,
+      "alergenesIng": [
+        "Céleri"
+      ]
+    },
+    {
+      "title": "Céleri rave",
+      "pFrais": true,
+      "alergenesIng": [
+        "Céleri"
+      ]
+    },
+    {
       "title": "Datte",
       "pFrais": true
     },
     {
       "title": "Echalote",
-      "pFrais": true
-    },
-    {
-      "title": "échalote",
       "pFrais": true
     },
     {
@@ -383,14 +374,6 @@
       "pFrais": true
     },
     {
-      "title": "Mâche (salade)",
-      "pFrais": true
-    },
-    {
-      "title": "Maïs en conserve égoutté",
-      "pFrais": false
-    },
-    {
       "title": "Mandarine",
       "pFrais": true
     },
@@ -403,6 +386,10 @@
       "pFrais": true
     },
     {
+      "title": "Maïs en conserve égoutté",
+      "pFrais": false
+    },
+    {
       "title": "Melon",
       "pFrais": true
     },
@@ -412,6 +399,10 @@
     },
     {
       "title": "Myrtille",
+      "pFrais": true
+    },
+    {
+      "title": "Mâche (salade)",
       "pFrais": true
     },
     {
@@ -443,16 +434,16 @@
       "pFrais": true
     },
     {
-      "title": "Olives noires à la grecque",
-      "pFrais": false
-    },
-    {
       "title": "Olives Noires Dénoyautées",
       "pFrais": true
     },
     {
       "title": "Olives noires entières",
       "pFrais": true
+    },
+    {
+      "title": "Olives noires à la grecque",
+      "pFrais": false
     },
     {
       "title": "Olives Vertes Dénoyautées",
@@ -500,10 +491,6 @@
     },
     {
       "title": "Patates douces",
-      "pFrais": true
-    },
-    {
-      "title": "Pêche",
       "pFrais": true
     },
     {
@@ -594,6 +581,10 @@
       "pFrais": false
     },
     {
+      "title": "Pêche",
+      "pFrais": true
+    },
+    {
       "title": "Quetsche",
       "pFrais": true
     },
@@ -664,6 +655,10 @@
     {
       "title": "Zestes de citron séchés",
       "pFrais": false
+    },
+    {
+      "title": "échalote",
+      "pFrais": true
     }
   ]
 }

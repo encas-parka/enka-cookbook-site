@@ -3,6 +3,7 @@ backend:
   name: github
   repo: encas-parka/enka-cookbook-site
   branch: main
+  base_url: https://sveltia-cms-auth.encas-cookbook.workers.dev/
 
   #Permettre un PR sur github sans l'acces aux dépot (github only)
   # open_authoring: true
@@ -13,11 +14,9 @@ backend:
   #GraphQL allows to retrieve data using less individual API requests compared to a REST API. GitHub's GraphQL API still does not support all mutations necessary to completely replace their REST API, so this feature only calls the new GraphQL API where possible.
   use_graphql: true
 
-#By default, saving a post in the CMS interface pushes a commit directly to the publication branch specified in backend. 
+#By default, saving a post in the CMS interface pushes a commit directly to the publication branch specified in backend.
 # This line should *not* be indented
 publish_mode: simple
-
-logo_url: https://enka-cookbook.netlify.app/cover.png
 
 # The search functionally requires loading all collection(s) entries, which can exhaust rate limits on large repositories. It can be disabled by setting the top level search property to false.
 # Defaults to true
@@ -273,7 +272,7 @@ collections:
             required: false
             collapsed: true
             summary: "{{fields.title}}: {{fields.quantite}} {{fields.unit}}"
-  
+
             fields:
               - label: "ingredient"
                 name: title
@@ -283,7 +282,7 @@ collections:
                 search_fields: ["ingredients.*.title"]
                 value_field: "ingredients.*.title"
                 options_length: 300
-               
+
               - {
                   label: "Quantité (nombre)",
                   name: "quantite",
@@ -395,7 +394,7 @@ collections:
                   required: false,
                   hint: "Si vous avez quelque-chose à préciser... ⚠ Ne sera pas afficher dans les listes de course"
                 }
-              
+
 
 
           - label: "Viandes et Poissons (et crustacés, mollusques)"

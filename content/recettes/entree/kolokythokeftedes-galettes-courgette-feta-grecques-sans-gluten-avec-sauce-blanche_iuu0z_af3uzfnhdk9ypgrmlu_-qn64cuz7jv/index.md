@@ -10,6 +10,7 @@ categories:
 auteur: Marion
 regime:
   - vegetarien
+  - sans-gluten
 region: Grèce
 saison:
   - ete

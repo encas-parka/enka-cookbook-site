@@ -11,14 +11,13 @@ repas:
       - recette: sauce-blanche-tahin-citron-vegane_1tbcqikrwq2krl27y8-wibrfnsxnn5mjtqym
         type_plat: entree
         altAssiettes: 50
-      - recette: kolokythokeftedes-galettes-courgette-feta-grecques_iuu0z_af3uzfnhdk9ypgrmlu_-qn64cuz7jv
+      - recette: kolokythokeftedes-galettes-courgette-feta-grecques-avec-sauce-blanche_cfop9wzbh5-sibhg0rztmhz1d0odqvsvi0g8
         altAssiettes: 10
         type_plat: entree
       - recette: kolokythopita-tarte-filo-courgette-feta-grecque_8jaekytp-ugpt05g-jwgjuqa-xseqspbol9g
         type_plat: plat
         altAssiettes: 40
-      - recette: _bwr2rkex
-          steak-vege-champignons-aubergines-noix-avoine-haricots-rouges-version-amelioree_6068ae73-1984-4084-890f-17076c0afe8c
+      - recette: steak-vege-champignons-aubergines-noix-avoine-haricots-rouges-version-amelioree_bwr2rkex
         type_plat: plat
         altAssiettes: 40
       - recette: barres-cereales-gourmandes-flocons-d-avoine-chocola_q1eozsxah1hwo7bnjp-huaaue2nr6dkbh2-t

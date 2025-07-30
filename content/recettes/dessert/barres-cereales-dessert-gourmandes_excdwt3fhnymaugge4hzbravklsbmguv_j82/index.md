@@ -60,20 +60,17 @@ preparation: >-
 
   1. Mélange tous les ingrédients secs (farine, la moitié du sucre, flocons d'avoine, cacao, sel, raisins, chocolat en pépites) dans un grand bol
 
+  2. Faire un sirop de sucre en chauffant le reste du sucre avec l'eau  (à la base c'est du sirop d'érable dans cette recette mais c'est moins cher comme ça, possible de mettre du sirop d'érable si vous voulez)
 
-  2. Mélange bien tous les ingrédients liquides (tahin, huile de coco fondue) dans un autre bol avec l'autre moitié du sucre (à la base c'est du sirop d'érable dans cette recette mais c'est moins cher comme ça)
+  3. Mélange bien tous les ingrédients liquides (tahin, huile de coco fondue, sirop de sucre) dans un autre bol
 
+  4. Verse les ingrédients liquides dans les ingrédients secs et mélange pour tout bien incorporer.
 
-  3. Verse les ingrédients liquides dans les ingrédients secs et mélange pour tout bien incorporer.
+  5. Verse dans le moule. Répartis bien la préparation puis tasse-la à l’aide du cul d’un verre ou d’un bout de papier cuisson.
 
+  6. Hop au four pour environ 30 minutes. Ça doit bien colorer mais ça a quand même l'air pas encore cuit quand ça sort si on veut un truc moelleux. Laisse complètement refroidir dans le moule posé sur une grille (sinon ça tombera en morceaux).
 
-  4. Verse dans le moule. Répartis bien la préparation puis tasse-la à l’aide du cul d’un verre ou d’un bout de papier cuisson.
-
-
-  5. Hop au four pour environ 30 minutes. Ça doit bien colorer mais ça a quand même l'air pas encore cuit quand ça sort si on veut un truc moelleux. Laisse complètement refroidir dans le moule posé sur une grille (sinon ça tombera en morceaux).
-
-
-  6. Quand ça sera froid et durci, tu pourras facilement démouler grâce  aux pans de papier cuisson et découper en barres ou carrés (à l’aide d’un bon couteau si c'est bien cuit). Conserve dans un récipient hermétique.
+  7. Quand ça sera froid et durci, tu pourras facilement démouler grâce  aux pans de papier cuisson et découper en barres ou carrés (à l’aide d’un bon couteau si c'est bien cuit). Conserve dans un récipient hermétique.
 prepAlt:
   - recetteAlt: barres-cereales-gourmandes-flocons-d-avoine-chocola_q1eozsxah1hwo7bnjp-huaaue2nr6dkbh2-t
 publishDate: 2025-07-24T18:34:00.000+02:00

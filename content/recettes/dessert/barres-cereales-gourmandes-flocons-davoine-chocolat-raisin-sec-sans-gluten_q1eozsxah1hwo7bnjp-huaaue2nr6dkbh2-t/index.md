@@ -80,5 +80,5 @@ preparation: >-
   7. Quand ça sera froid et durci, tu pourras facilement démouler grâce  aux pans de papier cuisson et découper en barres ou carrés (à l’aide d’un bon couteau si c'est bien cuit). Conserve dans un récipient hermétique.
 publishDate: 2025-07-24T18:34:00.000+02:00
 uuid: q1eozsxah1hwo7bnjp-huaaue2nr6dkbh2-t
-titleslug: barres-cereales-gourmandes-flocons-d-avoine-chocola_q1eozsxah1hwo7bnjp-huaaue2nr6dkbh2-t
+titleslug: barres-cereales-gourmandes-flocons-davoine-chocolat-raisin-sec-sans-gluten_q1eozsxah1hwo7bnjp-huaaue2nr6dkbh2-t
 ---

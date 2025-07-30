@@ -4,7 +4,6 @@ backend:
 
 
   name: github
-  # name: github
   repo: encas-parka/enka-cookbook-site
   branch: main
   base_url: https://sveltia-cms-auth.encas-cookbook.workers.dev/

@@ -15,11 +15,11 @@ repas:
         altAssiettes: 10
         type_plat: entree
       - recette: kolokythopita-tarte-filo-courgette-feta-grecque_8jaekytp-ugpt05g-jwgjuqa-xseqspbol9g
-        type_plat: entree
+        type_plat: plat
         altAssiettes: 40
       - recette: _bwr2rkex
           steak-vege-champignons-aubergines-noix-avoine-haricots-rouges-version-amelioree_6068ae73-1984-4084-890f-17076c0afe8c
-        type_plat: entree
+        type_plat: plat
         altAssiettes: 40
       - recette: barres-cereales-gourmandes-flocons-d-avoine-chocola_q1eozsxah1hwo7bnjp-huaaue2nr6dkbh2-t
         type_plat: dessert

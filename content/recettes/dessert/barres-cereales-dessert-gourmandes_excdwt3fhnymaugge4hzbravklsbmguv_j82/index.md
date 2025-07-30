@@ -44,6 +44,9 @@ ingredients:
       quantite: 170
       unit: grammes
   autres:
+    - title: Eau
+      quantite: 100
+      unit: ml
     - title: Tahin
       quantite: 50
       unit: grammes

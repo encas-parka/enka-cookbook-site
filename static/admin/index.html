@@ -17,7 +17,7 @@
       function nanoid(t = 8) {
         return crypto
           .getRandomValues(new Uint8Array(t))
-          .reduce((t, e) => (t += (e &= 35) < 36 ? e.toString(36) : ""), "")
+          .reduce((t, e) => (t += (e &= 7) < 8 ? e.toString(8) : ""), "")
           .toLowerCase();
       }
 
@@ -153,13 +153,13 @@
           if (!collection || !collection.includes("ingredients")) return;
 
           let data = entry.get("data");
-          
+
           // Vérifier si la propriété "ingredients" existe et contient des éléments
           if (data.has("ingredients") && data.get("ingredients").size > 0) {
             // Trier les ingrédients par titre (insensible à la casse)
             let sortedIngredients = data
               .get("ingredients")
-              .sortBy((ingredient) => 
+              .sortBy((ingredient) =>
                 ingredient.get("title", "").toLowerCase()
               );
 

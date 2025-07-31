@@ -1,0 +1,76 @@
+{{/* 
+	hugo-inline-svg/private/format.html partial
+	
+	@author @sean-au
+	
+	@access private
+
+  @context map of sanitized params
+
+  @returns svg HTML tag
+
+	@example {{ partial "hugo-inline-svg/private/format" $params }}
+
+ ****************************************************/}}
+
+{{ $random := delimit (shuffle (split (md5 "salt-ds3$#2532Ddw$36") "" )) "" }}
+
+{{/* format title */}}
+{{ $title := "" }}
+{{ $ariaTitle := "" }}
+{{ with .title }}
+  {{ $titleId := printf "%s-title" $random }}
+  {{ $title = printf `<title id="%s">%s</title>` $titleId . -}}
+  {{ $ariaTitle = printf `aria-labelledby="%s"` $titleId -}}
+{{ end -}}
+
+{{/* format desc */}}
+{{ $desc := "" }}
+{{ $ariaDesc := "" }}
+{{ with .desc }}
+  {{ $descId := printf "%s-desc" $random }}
+  {{ $desc = printf `<desc id="%s">%s</desc>` $descId . }}
+  {{ $ariaDesc = printf `aria-describedby="%s"` $descId }}
+{{ end }}
+
+{{/* assign classes */}}
+
+{{ $styleAttr := partial "hugo-inline-svg/private/inline-styles" . }}
+
+{{ $class := "" }}
+{{ if $styleAttr }}
+  {{ $class = (slice "inline-svg-inline-styled") }}
+{{ else }}
+  {{ $class = (slice "inline-svg") }}
+
+  {{ if .fs }}
+    {{ $class = $class | append (printf "fs-%v" .fs) }}
+  {{ else if .rem }}
+    {{ $class = $class | append (printf "rem-%v" .rem) }}
+  {{ else }}
+    {{ $class = $class | append "fs-inherit" }}
+  {{ end }}
+
+  {{ if eq .display "block" }}
+    {{ $class = $class | append "d-block" }}
+  {{ else if eq .display "inline" }}
+    {{ $class = $class | append "d-inline-block" }}
+  {{/*  TEST  */}}
+  {{ else if eq .display "inline-middle" }}
+    {{ $class = $class | append "d-inline-block" }}
+  {{ end }}
+
+  {{ $class = printf `class="%s"` (delimit $class " ") }}
+{{ end }}
+
+
+
+{{/* assemble attributes for svg tag */}}
+{{- $attr := (slice .height .width .viewBox $class $ariaTitle $ariaDesc $styleAttr) -}}
+
+{{/* assemble content for inside svg tags */}}
+{{- $content := (slice $title $desc .paths) -}}
+
+{{/* put it all together and return */}}
+{{ $svgHTML := printf `<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" role="img" %s>%s</svg>` (delimit $attr " ") (delimit $content " ") | safeHTML }}
+{{ return $svgHTML }}

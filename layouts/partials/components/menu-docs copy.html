@@ -1,0 +1,32 @@
+<nav class="offcanvas  docs-menu show" tabindex="-1" id="offcanvas" data-bs-keyboard="false" data-bs-backdrop="true" data-bs-scroll="true">
+  <nav class="nav flex-column mt-3">
+    {{ $currentPage := . }}
+    {{ range .Site.Menus.docs }}
+      <ul class="btn-toggle-nav list-unstyled fw-bold pb-1">
+        <li><a class="rounded {{ if or ($currentPage.IsMenuCurrent "docs" .) ($currentPage.HasMenuCurrent "docs" .) }}is-active{{ end }}" href="{{ .PageRef | absURL }}">{{ .Name }}</a></li>
+      </ul>
+      {{ if .HasChildren }}
+        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small ms-2">
+          {{ range .Children }}
+            <li><a class="nav-link rounded {{ if $currentPage.IsMenuCurrent "docs" . }}is-active{{ end }}" href="{{ .PageRef | absURL }}">{{ .Name }}</a></li>
+          {{ end }}
+        </ul>
+      {{ end }}
+    {{ end }}
+  </nav>
+</nav>
+
+
+<!-- Add a button to toggle the offcanvas menu -->
+<button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebar" aria-controls="sidebar">
+  <span class="navbar-toggler-icon"></span>
+</button>
+
+<!-- Add CSS to show the offcanvas menu by default and hide it on small screens -->
+<style>
+  @media (max-width: 767.98px) {
+    #sidebar {
+      display: none;
+    }
+  }
+</style>

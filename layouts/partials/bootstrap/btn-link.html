@@ -1,0 +1,30 @@
+{{- $url := "" }}
+{{- $style := "primary" }}
+{{- $size := "" }}
+{{- $outline := false }}
+{{- $class := "" }}
+{{- $text := .Inner }}
+{{- if .IsNamedParams }}
+  {{- with .Get "url" }}{{ $url = . }}{{ end }}
+  {{- with .Get "style" }}{{ $style = . }}{{ end }}
+  {{- with .Get "outline" }}{{ $outline = . }}{{ end }}
+  {{- with .Get "size" }}{{ $size = . }}{{ end }}
+  {{- with .Get "class" }}{{ $class = . }}{{ end }}
+  {{- with .Get "text" }}{{ $text = . }}{{ end }}
+{{- else }}
+  {{- with .Get 0 }}{{ $url = . }}{{ end }}
+  {{- with .Get 1 }}{{ $style = . }}{{ end }}
+  {{- with .Get 2 }}{{ $outline = . }}{{ end }}
+  {{- with .Get 3 }}{{ $size = . }}{{ end }}
+{{- end }}
+{{- $uri := partial "bootstrap/functions/url" (dict "URL" $url "Page" .Page) }}
+{{- $classes := slice "btn" }}
+{{- $classes = $classes | append (printf (cond $outline "btn-outline-%s" "btn-%s") $style) }}
+{{- with $size }}{{ $classes = $classes | append (printf "btn-%s" .) }}{{ end }}
+{{- with $class }}{{ $classes = $classes | append . }}{{ end }}
+<a
+  class="{{ delimit $classes ` ` }}"
+  href="{{ $uri.URL }}"
+  {{ if $uri.External }}target="_blank" rel="external"{{ end }}>
+  {{- $text -}}
+</a>

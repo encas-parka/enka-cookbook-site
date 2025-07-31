@@ -1,0 +1,103 @@
+{{ define "main" }}
+
+
+
+<div class="content">
+{{ if not hugo.IsProduction }}
+<span class="no-print text-muted">{{ hugo.Environment }} | Layout : layouts/index.html </span>
+{{ end }}
+
+    
+<div class="" >
+  <div class="mb-5 d-block"><img src="/cover.png" alt="" width="256" class="d-block m-auto"></div>
+  <h1 class="text-center">{{.Site.Title}}</h1>
+  <div class="section py-4">
+    <div class="search-wrapper p-4">
+        <div class="search-module m-4"> {{ partial "components/search-module-recipes" . }}</div>
+    </div>
+  </div>
+</div>
+
+<div class="section py-4 my-4">
+  <div class="row justify-content-center">
+    <div class="row">
+      {{ range (.Site.GetPage "section" "recettes").Pages}}
+      {{ partial "recettes-type-card" . }}
+      {{ end -}}
+    </div>
+  </div>
+  <div class="row justify-content-center">
+    <div class="col-lg-4 "><a href="/recettes" class=" btn btn-outline-danger btn-lg mb-4">Explorer parmis toutes les recettes</a></div>
+  </div>
+   
+</div>
+
+
+<div class="section my-4 py-4">
+    <div class="row">
+      <div class="col-lg-8">
+        <div class=" card p-3 gu-3 m-4">
+          <div class="card-body">
+            <h5 class="text-center mt-2">Catégories</h5>
+              <div class="row justify-content-evenly">
+                {{ range $name, $taxonomy := .Site.Taxonomies.categories }}
+                <div class="col-5 card card-recette my-3 text-center fw-bold border-1 ">
+                  <a href=" {{ .Page.Permalink }}" class="fw-bolder streched-link">
+                    {{ $svg := (printf "fonticons/%s.svg" .Page.Title) | lower}}
+                      {{ if resources.Get (printf "fonticons/%s.svg" (.Page.Title | lower) ) }}
+                      <div class="">{{ partial "inline-svg" (dict "src" $svg "display" "inline-middle" "rem" 3)
+                        . }}</div>
+                      {{ else }}
+                      <div class="">{{ partial "inline-svg" (dict "src" "fonticons/no-cat.svg" "display"
+                        "inline-middle" "rem" 3) . }}</div>
+                      {{ end }}
+                      {{.Page.Title }} ({{$taxonomy.Count }})</a>
+                  </div>
+                {{end}}
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-lg-4">
+        <div class="card p-3 g-3 m-4">
+              <div class="card-body">
+                <h5 class="text-center mt-2">Régimes alimentaires</h5>
+                {{ range $name, $taxonomy := .Site.Taxonomies.regime }}
+                  <div class="card card-recette mb-3 text-center  border-1 ">
+                    <a href=" {{.Page.Permalink}}" class="fw-bolder streched-link">
+                    {{ $svg := (printf "fonticons/%s.svg" .Page.Title) | lower }}
+                    <div>{{ partial "inline-svg" (dict "src" $svg "display" "inline"  "rem" 4) .  }}</div>
+                      {{ .Page.Title}} ({{$taxonomy.Count }})</a>
+                  </div>
+                {{end}}
+              </div>
+            </div>
+      </div>
+    </div>
+    <div class="card p-3 m-3">
+        <h5 class="mt-2  text-center">Des exemples de pages évenements</h5>
+        <div class="row justify-content-evenly">
+          {{ range first 2 (where .Site.RegularPages "Section" "evenements") }}
+            <div class="col-lg-3 col-md-2 mt-3">
+              <div class="card card-recette mb-3 text-center font-weight-bold border-1 m-auto">
+                <a href="{{ .Permalink }}" class="fw-bolder">{{.Title}}</a>
+              </div>
+            </div>
+          {{ end }}
+        </div>
+        <div class="m-4 text-center">Pour retrouver un événement, utiliser le menu "evénements" de la barre du haut, et commencer à taper son nom</div>
+    </div>
+  </div>
+
+  {{/*  <div class="section">
+    {{ range where .Site.Pages "Type" "documentation"  }}
+      <ul><a href="{{ .Permalink }}">{{.Title}}</a></ul>
+    {{ end }}
+  </div>
+</div>  */}}
+
+
+
+
+{{end}}

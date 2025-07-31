@@ -1,0 +1,18 @@
+{{/*  partial pour determiner l'icone associer à une recette, en fonction du premier params categorie  */}}
+
+{{ $cat := "" }}
+{{ range first 1 .Params.categories }}
+  {{ $cat = .  | lower }}
+{{ end }}
+{{ $src := "" }}
+
+
+{{ if resources.Get (printf "fonticons/%s.svg" $cat) }}
+{{ $src = ( printf "fonticons/%s.svg" $cat ) }}
+
+{{ else }}
+  {{- $src = (printf "fonticons/no-cat.svg") -}}
+{{ end }}
+
+{{ return $src }}
+

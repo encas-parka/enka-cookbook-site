@@ -1,0 +1,126 @@
+{{ $unit := .unit }}
+{{ $ingredient := .ingredient }}
+{{ $quantiteRecette := .quantite }}
+
+
+
+{{ if strings.Contains $unit "caf" }}
+   {{ if  eq ($ingredient | lower) "sucre" }}
+      {{ $quantiteRecette = mul $quantiteRecette 15 | math.Round }}
+      {{ $unit = "gr." }}
+   {{ else if eq ($ingredient | lower) "sel" }}
+      {{ $quantiteRecette = mul $quantiteRecette 15 | math.Round }}
+      {{ $unit = "gr." }}
+   {{ else if eq ($ingredient | lower) "farine" }}
+      {{ $quantiteRecette = mul $quantiteRecette 4 | math.Round }}
+      {{ $unit = "gr." }}
+  {{ else if eq ($ingredient | lower) "semoule" }}
+      {{ $quantiteRecette = mul $quantiteRecette 4 | math.Round }}
+      {{ $unit = "gr." }}
+  {{ else if eq ($ingredient | lower) "poivre" }}
+      {{ $quantiteRecette = mul $quantiteRecette 3 | math.Round }}
+      {{ $unit = "gr." }}
+  {{ else if eq ($ingredient | lower) "cacao" }}
+      {{ $quantiteRecette = mul $quantiteRecette 3 | math.Round }}
+      {{ $unit = "gr." }}
+  {{ else if eq ($ingredient | lower) "sucre glace" }}
+      {{ $quantiteRecette = mul $quantiteRecette 3 | math.Round }}
+      {{ $unit = "gr." }}
+  {{ else if eq ($ingredient | lower) "maïzena" }}
+      {{ $quantiteRecette = mul $quantiteRecette 3 | math.Round }}
+      {{ $unit = "gr." }}
+  {{ else if strings.Contains ($ingredient | lower) "crème épaisse"  }}
+      {{ $quantiteRecette = mul $quantiteRecette 7  | math.Round }} {{ $unit = "ml"}}
+  {{ else if strings.Contains ($ingredient | lower) "bicarbonate"  }}
+     {{ $quantiteRecette = mul $quantiteRecette 6  | math.Round }} {{ $unit = "gr."}}
+   {{ else if eq ($ingredient | lower) "curcuma" }}
+      {{ $quantiteRecette = mul $quantiteRecette 1.5 | math.Round }}
+      {{ $unit = "gr." }}
+   {{ else if eq ($ingredient | lower) "cumin" }}
+      {{ $quantiteRecette = mul $quantiteRecette 1.5 | math.Round }}
+      {{ $unit = "gr." }}
+   {{ else if eq ($ingredient | lower) "curry" }}
+      {{ $quantiteRecette = mul $quantiteRecette 2 | math.Round }}
+      {{ $unit = "gr." }}
+   {{ else if eq ($ingredient | lower) "muscade" }}
+      {{ $quantiteRecette = mul $quantiteRecette 2 | math.Round }}
+      {{ $unit = "gr." }}
+   {{ else if eq ($ingredient | lower) "paprika" }}
+      {{ $quantiteRecette = mul $quantiteRecette 1.5 | math.Round }}
+      {{ $unit = "gr." }}
+   {{ else }}
+     {{ $quantiteRecette = mul $quantiteRecette 5  | math.Round }} {{ $unit = "ml"}}
+   {{ end }}
+
+
+{{ else if strings.Contains $unit "soupe" }}
+   {{ if eq ($ingredient | lower) "sucre" }}
+      {{ $quantiteRecette = mul $quantiteRecette 15 | math.Round }}
+      {{ $unit = "gr." }}
+   {{ else if eq ($ingredient | lower) "sel" }}
+      {{ $quantiteRecette = mul $quantiteRecette 15 | math.Round }}
+      {{ $unit = "gr." }}
+  {{ else if eq ($ingredient | lower) "farine" }}
+     {{ $quantiteRecette = mul $quantiteRecette 12  | math.Round }} {{ $unit = "gr."}}
+   {{ else if eq ($ingredient | lower) "semoule" }}
+     {{ $quantiteRecette = mul $quantiteRecette 12 | math.Round }}
+     {{ $unit = "gr." }}
+   {{ else if eq ($ingredient | lower) "poivre" }}
+     {{ $quantiteRecette = mul $quantiteRecette 9 | math.Round }}
+     {{ $unit = "gr." }}
+   {{ else if eq ($ingredient | lower) "cacao" }}
+      {{ $quantiteRecette = mul $quantiteRecette 9 | math.Round }}
+      {{ $unit = "gr." }}
+   {{ else if eq ($ingredient | lower) "sucre glace" }}
+      {{ $quantiteRecette = mul $quantiteRecette 9 | math.Round }}
+      {{ $unit = "gr." }}
+   {{ else if eq ($ingredient | lower) "maïzena" }}
+      {{ $quantiteRecette = mul $quantiteRecette 9 | math.Round }}
+      {{ $unit = "gr." }}
+  {{ else if strings.Contains ($ingredient | lower) "crème épaisse"  }}
+     {{ $quantiteRecette = mul $quantiteRecette 20  | math.Round }} {{ $unit = "ml"}}
+  {{ else if strings.Contains ($ingredient | lower) "bicarbonate"  }}
+     {{ $quantiteRecette = mul $quantiteRecette 18  | math.Round }} {{ $unit = "gr."}}
+  {{ else if eq ($ingredient | lower) "curcuma"  }}
+     {{ $quantiteRecette = mul $quantiteRecette 5  | math.Round }} {{ $unit = "gr."}}
+  {{ else if eq ($ingredient | lower) "cumin"  }}
+     {{ $quantiteRecette = mul $quantiteRecette 5  | math.Round }} {{ $unit = "gr."}}
+  {{ else if eq ($ingredient | lower) "curry"  }}
+     {{ $quantiteRecette = mul $quantiteRecette 6  | math.Round }} {{ $unit = "gr."}}
+   {{ else if eq ($ingredient | lower) "muscade" }}
+     {{ $quantiteRecette = mul $quantiteRecette 6 | math.Round }}
+     {{ $unit = "gr." }}
+  {{ else if eq ($ingredient | lower) "paprika"  }}
+     {{ $quantiteRecette = mul $quantiteRecette 5  | math.Round }} {{ $unit = "gr."}}
+   {{ else }}
+     {{ $quantiteRecette = mul $quantiteRecette 15  | math.Round }} {{ $unit = "ml"}}
+   {{ end }}
+   {{ end }}
+
+{{ if and (strings.Contains $unit "gousse") (eq ($ingredient | lower) "ail") }}
+   {{ $quantiteRecette = mul $quantiteRecette 6.5  | math.Round }}  {{ $unit = "gr."}}    
+{{ end }}
+
+{{ $result := "" }}
+
+{{ if .fetchUnit }}
+  {{ $result = $unit }}
+
+{{ else if .fetchQuantite }}
+   {{ $result = $quantiteRecette }}
+
+{{/*  Pour les recettes des evenements, renvoie une String d'un nb à 2 décimales  */}}
+{{ else if .fetchQU }}
+   {{ if and (ne $unit "unité") (gt $quantiteRecette 1000) }}
+      {{ $quantiteRecette = div $quantiteRecette 1000  | lang.FormatNumber 2  | strings.TrimRight "0" | strings.TrimRight ","}} 
+      {{ if eq $unit "ml" }}
+         {{ $unit = "l." }}
+      {{ else if eq $unit "gr." }}
+         {{ $unit = "Kg" }}
+      {{ end }}
+   {{ end }}
+   {{ $quantiteRecette = $quantiteRecette | string }} 
+  {{ $result =  printf "(~ %s %s )" $quantiteRecette $unit }} 
+{{ end }}
+
+{{- return $result -}}

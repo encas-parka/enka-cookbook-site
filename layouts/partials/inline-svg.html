@@ -1,0 +1,27 @@
+{{- /* 
+	inline-svg.html partial
+	
+	@author @sean-au
+	
+	@access public
+
+  @prints SVG HTML tag with utility classes (CSS required)
+
+  @context 
+    string: svg path relative to assets dir OR
+    dict: 
+      src: svg path relative to assets dir
+      em: font size in em units (1-5) (defaults to 1)
+      block: true/false (defaults to false)
+      title: SVG title
+      desc: SVG desc
+
+	@example {{ partial "inline-svg" . }}
+
+ ****************************************************/ -}}
+
+{{- $sanitize := partial "hugo-inline-svg/private/sanitize" . -}}
+{{- $params := partial "hugo-inline-svg/private/params" . -}}
+{{- $params = partial "hugo-inline-svg/private/regex" $params }}
+{{- $svgHTML := partial "hugo-inline-svg/private/format" $params }}
+{{- $svgHTML -}}

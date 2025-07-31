@@ -1,0 +1,6 @@
+{{ $cat := "" }}
+{{ range first 1 .Params.categories }}
+  {{ $cat = .  | lower | replaceRE " " "_" }}
+{{ end }}
+
+{{ partial "components/icon-svg" (dict "name" $cat "size" "3rem") }}

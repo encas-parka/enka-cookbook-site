@@ -1,0 +1,98 @@
+{{ define "main" }}
+{{ if not hugo.IsProduction }}
+<p class="muted">/layout/_default/taxonomy</p>
+{{ end }}
+
+<h2 class="text-center">Recettes : {{.Page.Title}}</h2>
+<p class="text-center fw-bold">{{ len .RegularPages }} recettes</p>
+<p class="text-center"> Pour explorer les recettes avec différents filtres → <a href="/recettes" class="btn btn-sm btn-outline-danger">explorer...</a></p>
+<div class="row justify-content-lg-evenly">
+
+
+  {{ $paginator := .Paginate (.Data.Pages) -}}
+    {{ range $paginator.Pages }}
+  <div class="col-lg-4">
+    <div class="card recipe-card card-recette">
+      <aside>
+     
+          {{if .Params.img}}
+            {{- $img := (string .Params.img)  -}}
+            {{ if strings.Contains $img "http" }}
+              <img class="card-image img-fluid img-cover" src="{{.Params.img}}" />
+            {{ else}}
+              <img class="card-image img-fluid img-cover" src="{{.Permalink}}{{.Params.img}}"/>
+            {{ end }}
+          {{ else }}
+          {{ $imagePath := "" }}
+          {{ range first 1 .Params.Categories }}
+          {{ $imagePath = . | lower }}
+          {{ end }}
+            {{ if os.FileExists (print "static/images/" $imagePath ".webp") }}
+              <img class="card-image img-fluid img-cover" src="/images/{{$imagePath}}.webp" />
+              {{ else }}
+              <img class="card-image img-fluid img-cover" src="/images/no-img.webp" />
+              
+            {{ end }}
+          {{end}}
+          <div class="card-badge-regime">
+            {{ range .Params.regime }}
+             <span class="badge">{{ . }}</span>
+            {{ end }}
+          </div>
+          <a href="{{ .Permalink }}">
+          <div class="card-recipe-title h4 ">{{.Title}}</div></a>
+          <div class="card-badge-type">
+            {{- range first 2 .Params.Categories -}}
+             {{.}}
+            {{- end -}}
+          </div>
+        </aside>
+        <div class="card-body my-1 p-0">
+          <a href="{{.Permalink}}" class="stretched-link"></a>
+          
+          {{/*  {{- if .Description -}}
+          <p class="small">{{.Description}}</p>
+          {{- end -}}  */}}
+          {{/*  {{- if .Params.materiel -}}
+            <div class="border-2 border-bottom py-2 mb-2">
+              {{ range .Params.materiel }}
+                <span class="badge fs-x-sm bg-dark-red border border-1 border-primary">{{.}}</span>
+              {{- end -}}
+            </div>
+          {{- end -}}
+          <div class="border-bottom border-2 pb-2">
+
+          {{ if eq .Params.cuisson "Oui"}}
+            <span class="badge bg-orange fs-x-sm">Avec Cuisson</span>
+          {{- else -}}
+            <span class="badge bg-blue fs-x-sm">Sans Cuisson</span>
+          {{ end }}
+          {{ if eq .Params.temperature "Chaud"}}
+            <span class="badge bg-orange fs-x-sm">Servir {{ .Params.temperature }}</span>
+          {{- else -}}
+            <span class="badge bg-blue fs-x-sm">Servir {{ .Params.temperature }}</span>
+          {{ end }}
+          
+          {{ range .Params.saison }}
+            <span class="badge bg-pink fs-x-sm">{{ . }}</span>
+          {{- end -}}
+         
+          </div>
+          {{if .Params.ingredients}}
+          <div class="py-2"> 
+            {{ range .Params.ingredients.legumes}} <span class="badge fs-x-sm bg-green">{{.title}}</span> {{end}}
+            {{ range .Params.ingredients.animaux}} <span class="badge fs-x-sm bg-red">{{.title}}</span>{{end}}
+            {{ range .Params.ingredients.sec}} <span class="badge fs-x-sm bg-grey">{{.title}}</span>{{end}}
+            {{ range .Params.ingredients.sucres}} <span class="badge fs-x-sm bg-orange">{{.title}}</span>{{end}}
+            {{ range .Params.ingredients.lof}} <span class="badge fs-x-sm bg-orange">{{.title}}</span>{{end}}
+            {{ range .Params.ingredients.autres}} <span class="badge fs-x-sm bg-orange">{{.title}}</span>{{end}}
+            {{end}}
+          </div>  */}}
+        </div>
+      </div>
+    </div>
+        {{ end }}
+      {{ template "_internal/pagination.html" . -}}
+</div>
+
+    {{ end }}

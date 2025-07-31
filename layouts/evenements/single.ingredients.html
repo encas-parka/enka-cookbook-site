@@ -1,0 +1,1669 @@
+{{ define "main" }}
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui"
+  />
+
+  <!--::: Liste qui contiendra tous les ingrédients avec leurs données associés (quantité, recette, date, assietes...). Sert aux tableaux des quantités.  -->
+  {{- $IngredientList := slice -}}
+
+
+  <!-- Liste qui contiendra qui contient les listes de recettes pour chaque date -->
+  {{- $recettesList := slice -}}
+  {{- $recettesLength := 0 -}}
+  {{- $ingname := slice -}}
+
+  {{- $IngredientsTypesList := slice -}}
+  {{- $recetteKey:= 1 -}}
+  {{- $nbDate := 0 -}}
+
+  {{/* TODO Optimiser avec un json ou partial ? */}}
+  {{/* Reccuperation des ingredients frais */}}
+  {{- $legumesFrais := slice -}}
+  {{- range $.Site.Data.ingredients -}}
+    {{- range .ingredients -}}
+      {{- if .pFrais -}}
+        {{- $legumesFrais =  $legumesFrais | append .title -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+
+  {{- range $.Param "repas" -}}
+    <!-- Creation des variables qui ne seront plus visible au prochain scope. Nous sommes dans les params de l'Evenement -->
+    {{- $dateService:=.date_service -}}
+    {{- $nbDate = add $nbDate 1 -}}
+    {{- $horaire:=.horaire -}}
+
+    {{/* Modifier l'heure de la date ISO en fonction du parametre $horaire (non défini par l'utilisateur) afin de permettre le tri par date des recettes. */}}
+    {{ if eq $horaire "matin" }}
+      {{- $dateService = $dateService | replaceRE "T\\d{2}:\\d{2}:\\d{2}" "T08:00:00" }}
+    {{- else if eq $horaire "midi" -}}
+      {{- $dateService = $dateService | replaceRE "T\\d{2}:\\d{2}:\\d{2}" "T12:00:00" -}}
+    {{- else if eq $horaire "soir" -}}
+      {{- $dateService = $dateService | replaceRE "T\\d{2}:\\d{2}:\\d{2}" "T20:00:00" -}}
+    {{- end -}}
+
+    {{- $repasBaseAssiettes := (int .assiettes) -}}
+
+    <!--  -->
+    {{- range .recettes_du_repas -}}
+      <!--::: Creation des variables qui ne seront plus visible au prochain scope. Nous sommes dans les params de 1er niveau des recettes -->
+      {{- $recettesLength = add $recettesLength 1 -}}
+      {{- $assiettesPourCalcul := $repasBaseAssiettes -}}
+      {{- $recette:=.recette -}}
+      {{- $typePlat:=.type_plat -}}
+      {{/* Si un nombre de couverts alternatif a été déclaré pour ce plat en particulier, on substitue... */}}
+      {{ if .altAssiettes }}
+        {{- $assiettesPourCalcul = (int .altAssiettes) -}}
+      {{ end }}
+
+      {{- $recetteName := "" -}}
+
+
+      <!-- Reccupération des données sur les pages de chaque recettes -->
+      {{- $url:= print .recette | urlize -}}
+      {{- with site.GetPage $url -}}
+        {{- $recetteName = .Params.title -}}
+
+        {{- $assiettesRecettes:= .Params.plate -}}
+        <!-- pour tous les parametres ingredients... -->
+        {{- range $key, $value := .Params.ingredients -}}
+          <!-- ...on liste/boucle sur tous les sous parametres -->
+          {{- range $index, $element := . -}}
+
+            {{/* On calcule les proportion de quantité : (quantité recette initiale x nombre d'assiettes pour le repas) / nombre de couvert de la recette initiale */}}
+            {{- $quantiteCompute:= float "0" -}}
+
+            {{- if .quantite -}}
+              {{- $quantiteCompute = ((div (mul (float .quantite) (float $assiettesPourCalcul )) (float $assiettesRecettes ))) -}}
+            {{- end -}}
+
+            {{- $iType :=  $key | strings.FirstUpper -}}
+            {{- if and  (or (eq $key "legumes") (eq $key "epices") ) (in $legumesFrais .title) -}}
+              {{- $iType = "Legumesfrais" -}}
+            {{- end -}}
+            {{ $ingname = $ingname | append .title }}
+            {{- $IngredientList =
+              $IngredientList | append (dict
+              "ingredient" .title
+              "quantite" $quantiteCompute
+              "unit" .unit
+              "ingType" $iType
+              "recette" $recetteName
+              "dateService" $dateService
+              "horaire" $horaire
+              "typePlat" $typePlat
+              "assiettesRecettes" $assiettesRecettes
+              "assiettes" $assiettesPourCalcul
+              )
+            -}}
+
+            {{/* USELESS What ? rm for test */}}
+            {{/* {{ if and  (eq $key "lof") (in $pFrais .title) }}
+            {{ $iType = "Frais" }}
+            {{- $IngredientsTypesList = $IngredientsTypesList | append (dict  "iType" $iType) -}}
+          {{ else }}
+            {{- $IngredientsTypesList = $IngredientsTypesList | append (dict  "iType" ($key | strings.FirstUpper )) -}}
+          {{ end }}
+          */}}
+          {{- $IngredientsTypesList = $IngredientsTypesList | append (dict  "iType" $iType ) -}}
+        {{- end -}}
+      {{- end -}}
+
+    {{- end -}}
+    {{/* {{ with site.GetPage $url }} */}}
+  {{- end -}}
+  {{/* recettes_du_repas */}}
+  {{ $recetteKey = (add (int $recetteKey) 1) }}
+{{- end -}}
+
+{{/* range $.param repas */}}
+  {{/* Dédoublage des listes */}}
+  {{- $IngredientsTypesList = $IngredientsTypesList | uniq -}}
+  {{- $ingname = $ingname | uniq -}}
+
+
+{{/*  lien vers le CMS de la page  */}}
+{{/*  FIXIT : lien vers url slug uuid  */}}
+{{- $linkCMSPage := (path.Join "/admin/#/collections/evenement/entries/" (.Title | urlize)) -}}
+{{/*  FIXIT : Recheck pour généraliser theme  */}}
+{{- $enkaDevCms := "" -}}
+{{ if eq .Site.BaseURL "enka-cookbook.pages.dev"}}
+{{$enkaDevCms = "https://enka-cookbook.netlify.app/"}}
+{{ end }}
+  {{/*  <span class="text-end no-print p-2"><a target="_blank" rel="noopener noreferrer" href="{{- $enkaDevCms -}}{{- $linkCMSPage -}}/index">Modifier</a></span>  */}}
+
+<div id="app">
+
+{{ $here := "ingredients"}}
+
+{{/* ::: navbar page */}}
+{{/* Nettoyage du permalink pour retirer la partie output format */}}
+{{ $basePermalink := .RelPermalink | replaceRE "/(ingredients|poster)/?.*$" "" }}
+{{ $basePermalink = $basePermalink | replaceRE "/$" "" }}
+
+{{ $inglink := printf "%s/ingredients" $basePermalink }}
+{{ $recettelink := printf "%s" $basePermalink }}
+{{ $posterlink := printf "%s/poster" $basePermalink }}
+  {{ if eq $here "ingredients" }}
+    {{ $inglink = "#"}}
+  {{ else if eq $here "recettes" }}
+    {{ $recettelink = "#"}}
+  {{ else if eq $here "poster" }}
+    {{ $posterlink = "#"}}
+  {{ end }}
+
+{{ partial  "components/event-top-nav" ( dict "inglink" $inglink "recettelink" $recettelink "posterlink" $posterlink "here" $here) }}
+
+{{/*  ::: Impression - MODAL  */}}
+<div class="modal modal-xl fade d-print-none" tabindex="-1" id="modalImpression" aria-labelledby="modalImpressionLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable ">
+    <div class=" modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title mt-0" id="modalImpressionLabel">Imprimer / exporter en PDF</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+
+        <div class="row">
+          <div class="col-md-6">
+
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" v-model="toPrint.ingredients" :value="true" name="cb-ing"
+                id="cb-printIngredient">
+              <label class="form-check-label" for="cb-printIngredient">Imprimer les listes des ingrédients</label>
+            </div>
+
+
+                <div v-show="toPrint.ingredients" class="ms-4">
+                  <div class="form-check form-switch my-2">
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      v-model="showAllColIngredients"
+                      id="checkRecipeDetail"
+                    />
+                    <label for="checkRecipeDetail"
+                      >Afficher les recettes pour chaque ingrédient</label
+                    >
+                  </div>
+                  <div class="input-group">
+                    <span class="input-group-text" id="addColSelect"
+                      >+ colonnes :
+                    </span>
+                    <select
+                      v-model="printAddCol"
+                      class="form-select"
+                      aria-describedby="addColSelect"
+                      aria-label="Ajouter des colonnes"
+                    >
+                      <option value="0">0</option>
+                      <option value="1">1</option>
+                      <option value="2">2</option>
+                    </select>
+                  </div>
+                  <div class="text-muted fs-7 text-end">
+                    Ajouter des colonnes aux tableaux afin de pouvoir rajouter
+                    des informations manuscrites
+                  </div>
+                </div>
+                {{/* <div class="form-check">
+                  <input class="form-check-input" type="checkbox" v-model="toPrint.affichesSection" :value="false" name="cb-affiche"
+                  id="cb-printAffiches">
+                  <label class="form-check-label" for="cb-printAffiches">Imprimer les Affiches (imprimez à part, sinon bug)</label>
+                  </div>
+                */}}
+              </div>
+              <div class="col-md-6">
+                <div class="callout small">
+                  <p>
+                    Pour exporter en PDF, dans les options d'impression,
+                    sélectionnez : destination > "enregistrer au format Pdf"
+                    comme imprimante. Pensez aussi à personnaliser les marges
+                    d'impression ou l'échelle afin de redimensionner le contenu
+                    selon ce qui vous convient.
+                  </p>
+                  <p class="fw-bolder">
+                    ⚠ L'impression des listes d'ingredients présente
+                    régulièrement des bug avec Firefox (superposition des
+                    listes). Si c'est le cas, utilisez un navigateur basé sur
+                    chrome (par exemple, "brave"), ou imprimer les listes une à
+                    une grace aux boutons dédiés.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <hr />
+            <div class="text-end">
+              <a
+                class="btn btn-primary"
+                @click="print"
+                role="button"
+                data-bs-dismiss="modal"
+                >Imprimer !</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {{/* ::: Warning : missing recipes */}}
+    {{- range $.Param "repas" -}}
+      {{- range .recettes_du_repas -}}
+        {{- $recette:=.recette -}}
+        {{/* FIXME after update recette scheme */}}
+        {{- $url:= print .recette | urlize -}}
+        {{- with site.GetPage $url -}}
+        {{ else }}
+          <div class="card border-danger border-3 my-3 p-2">
+            <div class="card-body text-danger">
+              <h5 class="card-title mt-1">
+                Une des recettes de l'évenement n'existe plus !
+              </h5>
+              <p class="card-text">
+                La recette
+                <span class="fw-bolder">" {{ $url -}}"</span> présente dans les
+                menus de l'événement n'existe plus sur le site.
+              </p>
+              <p>
+                La recette à peut être été supprimée. Pour résoudre le problème,
+                il faut modifier la page de l'événement pour remplacer la
+                recette disparue
+              </p>
+            </div>
+          </div>
+        {{- end -}}
+      {{- end -}}
+    {{- end -}}
+
+
+    <a href="#" class="scroll-to-top" title="Scroll to top"></a>
+
+    <div class="no-print" id="TotalIngredients"></div>
+    <div class="container-fluid " :class="{'no-print':!toPrint.ingredients}">
+      <h3 class="no-print">
+        Listes des {{ len $ingname }} ingrédients présents dans les
+        {{ $recettesLength }} recettes des {{ .Params.repas | len }} menus
+      </h3>
+      <div class="row justify-content-evenly">
+        {{/* ::: _Sidebar Total ingredients */}}
+        <nav
+          class="flex-column col-md-4 col-lg-3 d-md-block bg-light  mt-7 d-print-none "
+        >
+          <div
+            class="sticky-top overflow-y-auto"
+            style="top: 70px; height: 612px"
+          >
+            <div class="my-5 small">
+              <div class="mb-3">
+                <label class="mb-2"
+                  >Selectionner la période que vous souhaitez prendre en
+                  compte</label
+                >
+                <div class="mb-3">
+                  <input
+                    id="datepickerStart"
+                    class="flatpickr flatpickr-input form-control"
+                    type="text"
+                    readonly="readonly"
+                    placeholder="Date de début"
+                    v-model="startDateSelected"
+                  />
+                </div>
+                <div class="mb-3">
+                  <input
+                    id="datepickerEnd"
+                    class="flatpickr flatpickr-input form-control"
+                    type="text"
+                    readonly="readonly"
+                    placeholder="Date de fin"
+                    v-model="endDateSelected"
+                  />
+                </div>
+                <div class="mb-3 text-end">
+                  <button
+                    class="btn btn-primary btn-sm shadow-sm text-white"
+                    @click="datesReset"
+                    type="button"
+                    id="btn-allDate"
+                  >
+                    Toutes les dates
+                  </button>
+                </div>
+              </div>
+              <hr />
+              <div class="mb-3">
+                Afficher les quantités des produits frais par périodes
+              </div>
+              <div class="mb-1 form-check form-switch">
+                <input
+                  type="checkbox"
+                  class="form-check-input"
+                  v-model="legumesByRanges"
+                  name="cb-legumesByRanges"
+                  id="cb-legumesByRanges"
+                />
+                <label for="cb-legumesByRanges"
+                  >... fruits et legumes frais
+                </label>
+              </div>
+              <div class="mb-1 form-check form-switch">
+                <input
+                  type="checkbox"
+                  class="form-check-input"
+                  v-model="fraisByRanges"
+                  name="cb-fraisByRanges"
+                  id="cb-fraisByRanges"
+                />
+                <label for="cb-fraisByRanges">... autres produit frais</label>
+              </div>
+              <div class="mb-1 form-check form-switch">
+                <input
+                  type="checkbox"
+                  class="form-check-input"
+                  v-model="animauxByRanges"
+                  name="cb-animauxByRanges"
+                  id="cb-animauxByRanges"
+                />
+                <label for="cb-animauxByRanges">... viandes et poissons </label>
+              </div>
+              <div class="input-group mb-3">
+                <input
+                  type="number"
+                  v-model="daysPerRange"
+                  class="form-control"
+                  min="1"
+                  max="9"
+                  :disabled="!animauxByRanges && !fraisByRanges && !legumesByRanges "
+                />
+                <span class="input-group-text" id="basic-addon2">jours</span>
+              </div>
+
+              <hr />
+              <div class="form-check form-switch mb-3">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  v-model="showAllColIngredients"
+                  id="checkRecipeDetail"
+                />
+                <label for="checkRecipeDetail"
+                  >Afficher les recettes pour chaque ingrédient</label
+                >
+              </div>
+              <hr />
+
+              {{ range sort $IngredientsTypesList "iType" "desc" }}
+                <a href="#IngListID{{ .iType }}"> {{ .iType }} - </a>
+              {{ end }}
+            </div>
+          </div>
+        </nav>
+
+        {{/* ::: Total INGREDIENTS */}}
+        <div class="col  print-col-12 ms-md-3">
+          <span
+            class="btn-group no-print my-2 me-2"
+            role="group"
+            aria-label="Exporter / Copier"
+          >
+            <button class="btn btn-outline-secondary" disabled>
+              Copier les tableaux dans le presse-papier :
+            </button>
+            <button
+              type="button"
+              class="btn btn-outline-primary"
+              onclick="copyOrExport('text')"
+            >
+              Texte simple
+            </button>
+            {{/* <button type="button" class="btn btn-outline-primary" onclick="copyOrExport('html')">html</button> */}}
+            {{/* TODO : modal explicatif */}}
+          </span>
+
+          <span
+            class="btn-group no-print my-2"
+            role="group"
+            aria-label="Exporter CSV"
+          >
+            <button class="btn btn-outline-secondary" disabled>
+              Télécharger :
+            </button>
+            <button
+              type="button"
+              class="btn btn-outline-primary"
+              onclick="copyOrExport('csv')"
+            >
+              csv (tableur)
+            </button>
+            <button
+              type="button"
+              class="btn btn-outline-primary"
+              onclick="copyOrExport('md')"
+            >
+              Tableau Markdown
+            </button>
+          </span>
+
+          <div
+            class="border rounded border-transparent bg-dark container-fluid p-2 no-print"
+            style="--bs-bg-opacity: .3;"
+          >
+            <input
+              type="text"
+              v-model="searchInput"
+              class="form-control"
+              placeholder="Rechercher un ingrédient"
+            />
+          </div>
+
+          {{/* :::_FraisByDayRange */}}
+          {{ $fraisByRanges := slice | append  (dict "idR" "LegumesRanges" "titleR" "Fruits Legumes Frais" "iType" "Legumesfrais" "thisRange" "legumesByRanges") (dict "idR" "AnimauxRanges" "titleR" "Viandes/Poissons Frais" "iType" "Animaux" "thisRange" "animauxByRanges") (dict "idR" "FraisRanges" "titleR" "Autres produits Frais" "iType" "Frais" "thisRange" "fraisByRanges") }}
+
+          {{ range $fraisByRanges }}
+            {{ $indexTable := 1 }}
+            <div id="{{ .idR }}" class="avoid-break-inside">
+              <template v-for="(range, index) in rangesDates">
+                {{/* ::: ___table Frais */}}
+
+
+                <div
+                  v-show="{{ .thisRange }} && totalRangeWithDetail('{{ .iType }}', range[0], range[range.length - 1]).size > 0"
+                  class="card my-2 mb-lg-6 border-danger border-1 mb-3  print-nocard"
+                  :class="{'no-print':!toPrint.{{ .idR }} }"
+                  :id="range[0]"
+                >
+                  <div class="card-body">
+                    <div class="no-print">
+                      <span class="fs-5 toCopy">
+                        {{ .titleR }} du [[ range[0] ]] au [[range[range.length
+                        - 1] ]]
+                      </span>
+                      <div class="my-2 float-end no-print">
+                        <a
+                          class="btn btn-outline-secondary btn-sm text-muted "
+                          role="button"
+                          @click="printThis('{{ .idR }}', 'ingredients')"
+                          >{{ partial "components/icon-svg" (dict "name" "printer" "size" "1.5rem") }}</a
+                        >
+                      </div>
+                    </div>
+
+                    <table
+                      id="tableFrais"
+                      class="table table-responsive toCopy caption-top mb-4"
+                      :class="{'table-striped': !showAllColIngredients, 'table-bordered' : showAllColIngredients}"
+                    >
+                      <caption
+                        class="fs-5 text-center text-color-black printonly"
+                      >
+                        {{ .titleR }} du [[ range[0] ]] au [[range[range.length
+                        - 1] ]]
+                      </caption>
+                      <thead>
+                        <tr>
+                          <th>Ingredients {{ .iType }}</th>
+                          <th class="text-center">Recettes</th>
+                          <th class="text-end">Total</th>
+                          <th class="no-print" v-show="!showAllColIngredients">Détail</th>
+                          <th
+                            class="printonly"
+                            v-show="printAddCol === '1' || printAddCol ===  '2' "
+                          ></th>
+                          <th
+                            class="printonly"
+                            v-show="printAddCol === '2' "
+                          ></th>
+                        </tr>
+                      </thead>
+
+                      <tbody>
+                        <template
+                          v-for="item in totalRangeWithDetail('{{ .iType }}', range[0], range[range.length - 1])"
+                        >
+                          <tr
+                            v-show="showAllColIngredients && !item.qTotal"
+                            :class="{'table-secondary fw-bold': item.qTotal}"
+                          >
+                            <td :class="{'small text-muted': !item.qTotal}">
+                              [[item.ingredient]]
+                            </td>
+                            <td v-if="item.recette" class="small">
+                              <span class="fw-bold">[[item.recette]]</span> le
+                              [[new Date
+                              (item.dateService).toISOString().substr(0, 10)]] /
+                              [[item.horaire]] <br />
+                              pour [[item.assiettes]] couverts
+                              <span class="float-end">
+                                <span
+                                  class="fw-bold "
+                                  v-if="item.quantiteOrig && item.unitOrig"
+                                  >[[round2Decimals(item.quantiteOrig)]]
+                                  [[item.unitOrig]] ~=
+                                </span>
+                                <span
+                                  class="fw-bold"
+                                  v-if="item.quantite && item.unit"
+                                  >[[round2Decimals(item.quantite)]]
+                                  [[item.unit]]</span
+                                >
+                              </span>
+                            </td>
+                          </tr>
+
+                          <tr
+                            v-if="item.qTotal"
+                            :class="{'table-secondary': showAllColIngredients}"
+                          >
+                            <td class="toCopyTd">[[item.ingredient]]</td>
+                            <td class="small">[[item.totalAssiettes]] c.</td>
+                            <td class="text-end toCopyTd">
+                              <span>[[item.qTotal]] [[item.unitTotal]]</span>
+                            </td>
+                            <td class="no-print" v-show="!showAllColIngredients">
+                              <button
+                                type="button"
+                                class="btn btn-sm btn-outline-primary"
+                                @click="openIngredientModalRange(item.ingredient, '{{ .iType }}', range[0], range[range.length - 1])"
+                                data-bs-toggle="modal"
+                                data-bs-target="#ingredientDetailModal">
+                                détail
+                              </button>
+                            </td>
+                            <td
+                              v-show="printAddCol === '1' || printAddCol ===  '2' "
+                              class="printonly print-td-15"
+                            ></td>
+                            <td
+                              v-show=" printAddCol ===  '2' || printAddCol ===  '3' "
+                              class="printonly print-td-15"
+                            ></td>
+                          </tr>
+                        </template>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </template>
+            </div>
+          {{ end }}
+
+          {{/* Renommage des iType */}}
+          <div id="tableIng" v-cloak>
+            {{- range sort $IngredientsTypesList "iType" "desc" -}}
+              {{- $iTypeName := (partial "functions/ingredients-types-rename" (dict "ingType" .iType) .) -}}
+              {{- $IngTypeList := (printf "Ing%sList" .iType) -}}
+              {{/* ::: _ Card des tableau ingredients petit et grand */}}
+              <div
+                v-show="totalQuantitesDP.{{ $IngTypeList }} && Object.keys(totalQuantitesDP.{{ $IngTypeList }}).length > 0"
+                class="card my-2 mb-lg-6  mb-3 print-nocard"
+                :class="{'no-print':!toPrint.{{ .iType }} }"
+                id="IngListID{{ .iType }}"
+              >
+                <div class="card-body">
+                  <div class="no-print">
+                    <span class="float-start me-2"
+                      >{{ partial "components/icon-svg" (dict "name" .iType "size" "2rem") }}</span
+                    >
+                    <span class="fs-4 toCopy"> {{ $iTypeName }} </span>
+                    <div class="my-2 float-end no-print">
+                      <a
+                        class="btn btn-outline-secondary btn-sm text-muted "
+                        role="button"
+                        @click="printThis('{{ .iType }}', 'ingredients')"
+                        >{{ partial "components/icon-svg" (dict "name" "printer" "size" "1.7rem") }}</a
+                      >
+                    </div>
+                  </div>
+                  <div
+                    v-show="startDate !== startDateSelected || endDate !== endDateSelected"
+                    class="fs-5 p-2 text-center fw-semibold toCopyDate no-print"
+                  >
+                    Du [[new Date
+                    (startDateSelected).toLocaleDateString("fr-FR", {weekday:
+                    'long', month: 'long', day: 'numeric'})]] au [[new Date
+                    (endDateSelected).toLocaleDateString("fr-FR", {weekday:
+                    'long', month: 'long', day: 'numeric'})]]
+                  </div>
+                  {{/* ::: __Table ingrédients */}}
+                  <table
+                    class="table table-responsive toCopy caption-top"
+                    :class="{'table-striped': !showAllColIngredients, 'table-bordered' : showAllColIngredients}"
+                    id="table-{{ .iType }}"
+                  >
+                    <caption class="fs-5 printonly">
+                      {{ $iTypeName }} du [[new Date
+                      (startDateSelected).toLocaleDateString("fr-FR", {weekday:
+                      'long', month: 'long', day: 'numeric'})]] au [[new Date
+                      (endDateSelected).toLocaleDateString("fr-FR", {weekday:
+                      'long', month: 'long', day: 'numeric'})]]
+                    </caption>
+                    <thead>
+                      <tr>
+                        <th>Ingredients</th>
+                        <th>Recettes</th>
+                        <th class="text-end">Total</th>
+                        <th class="no-print" v-show="!showAllColIngredients">Détail</th>
+                        <th
+                          class="printonly"
+                          v-show="printAddCol === '1' || printAddCol ===  '2' "
+                        ></th>
+                        <th
+                          class="printonly"
+                          v-show="printAddCol === '2' "
+                        ></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <template
+                        v-for="(item, ingredient) in totalQuantitesDP.{{ $IngTypeList }}"
+                      >
+                        <tr v-show="showAllColIngredients && !item.qTotalX">
+                          <td :class="{'small text-muted': !item.qTotalX}">
+                            [[item.ingredient]]
+                          </td>
+                          <td v-if="item.recette " class="small">
+                            <span class="fw-bold">[[item.recette]]</span> le
+                            [[new Date
+                            (item.dateService).toISOString().substr(0, 10)]] /
+                            [[item.horaire]] <br />
+                            pour [[item.assiettes]] couverts
+                            <span class="float-end">
+                              <span
+                                class="fw-bold "
+                                v-if="item.quantiteOrig && item.unitOrig"
+                                >[[round2Decimals(item.quantiteOrig)]]
+                                [[item.unitOrig]] ~=
+                              </span>
+                              <span
+                                class="fw-bold"
+                                v-if="item.quantite && item.unit"
+                                >[[round2Decimals(item.quantite)]]
+                                [[item.unit]]</span
+                              >
+                            </span>
+                          </td>
+                        </tr>
+
+                        <tr
+                          v-if="item.qTotalX"
+                          :class="{'table-secondary': showAllColIngredients}"
+                        >
+                          <td class="toCopyTd">[[item.ingredient]]</td>
+                          <td class="small">
+                            [[item.totalAssiettes]] c. - [[item.totalRecettes]]
+                            recettes
+                          </td>
+
+                          <td class="text-end toCopyTd">
+                            <template v-for="(quantite, index) in item.qTotalX">
+                              <span v-if="quantite.unit !== ''">
+                                [[round2Decimals(quantite.qTotal)]]
+                                [[quantite.unit]]
+                              </span>
+
+                              <span v-else class="small"> non précisé </span>
+                              <span
+                                v-if="index < item.qTotalX.length - 1"
+                                class="mx-1"
+                                >+</span
+                              >
+                            </template>
+                          </td>
+
+                          <td class="no-print" v-show="!showAllColIngredients">
+                            <button
+                              type="button"
+                              class="btn btn-sm btn-outline-primary"
+                              @click="openIngredientModal(item.ingredient, '{{ .iType }}')"
+                              data-bs-toggle="modal"
+                              data-bs-target="#ingredientDetailModal">
+                              détail
+                            </button>
+                          </td>
+
+                          <td
+                            v-show="printAddCol === '1' || printAddCol ===  '2' "
+                            class="printonly print-td-15"
+                          ></td>
+                          <td
+                            v-show=" printAddCol ===  '2' || printAddCol ===  '3' "
+                            class="printonly print-td-15"
+                          ></td>
+                        </tr>
+                      </template>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            {{ end }}
+          </div>
+        </div>
+      </div>
+    </div>
+  <!-- Modal pour les détails d'ingrédients -->
+  <div class="modal fade" id="ingredientDetailModal" tabindex="-1" aria-labelledby="ingredientDetailModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <div class="modal-title fs-5 fw-semibold" id="ingredientDetailModalLabel">Détail : [[selectedIngredient]]
+<!-- afficher range des dates prise en comptes -->
+            <span v-if="modalDateStart && modalDateEnd" class="text-muted">
+              <br><small>Période : [[ formatDateRange(modalDateStart, modalDateEnd) ]]</small>
+            </span>
+          </div>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Recette</th>
+                <th>Date / Horaire / Couverts</th>
+                <th class="text-end">Quantité</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="detail in ingredientDetails" :key="detail.recette + detail.dateService">
+                <td class="fw-medium lh-1">[[detail.recette]]</td>
+                <td>
+                  [[new Date(detail.dateService).toLocaleDateString("fr-FR", {weekday: 'short', month: 'short', day: 'numeric'})]] - [[detail.horaire]] /
+                 <span class="fw-medium text-nowrap"> [[detail.assiettes]] c. </span>
+                </td>
+                <td class="text-end">
+                  <span v-if="detail.quantiteOrig && detail.unitOrig" class="text-muted small">
+                    [[round2Decimals(detail.quantiteOrig)]] [[detail.unitOrig]] ~=
+                  </span>
+                  <strong>[[round2Decimals(detail.quantite)]] [[detail.unit]]</strong>
+                </td>
+              </tr>
+            </tbody>
+            <tfoot v-if="ingredientTotalQuantity">
+              <tr class="table-secondary">
+                <td colspan="2"><strong>Total</strong></td>
+                <td class="text-end">
+                  <template v-for="(total, index) in ingredientTotalQuantity">
+                    <strong>[[round2Decimals(total.qTotal)]] [[total.unit]]</strong>
+                    <span v-if="index < ingredientTotalQuantity.length - 1" class="mx-1">+</span>
+                  </template>
+                </td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  </div>
+
+  {{/* Import de flatpiker, utilisé seulement sur cette page */}}
+<script type="text/javascript">
+
+  function copyTable(el) {
+  var body = document.body,
+    range,
+    sel;
+  if (document.createRange && window.getSelection) {
+    range = document.createRange();
+    sel = window.getSelection();
+    sel.removeAllRanges();
+    try {
+      range.selectNodeContents(el);
+      sel.addRange(range);
+    } catch (e) {
+      range.selectNode(el);
+      sel.addRange(range);
+    }
+  } else if (body.createTextRange) {
+    range = body.createTextRange();
+    range.moveToElementText(el);
+    range.select();
+  }
+  document.execCommand("Copy");
+}
+
+
+  function copyOrExport(format)  {
+    const titles = document.querySelectorAll('span.toCopy');
+    const titlesArray = [];
+    if (titles.length === 0) {
+      {{/*  console.error("Aucun élément avec la classe '.toCopy' n'a été trouvé.");  */}}
+      return;
+    }
+    titles.forEach((title, index) => {
+      titlesArray.push(title.textContent);
+      {{/*  console.log(title.textContent);  */}}
+    });
+
+    const dates = document.querySelector('div.toCopyDate');
+    if (!dates) {
+      {{/*  console.error("Aucun élément avec la classe 'toCopyDate' n'a été trouvé.");  */}}
+    }
+    let date = ""
+    if (dates) {
+      date = dates.textContent
+    }
+
+    const tables = document.querySelectorAll('table.toCopy');
+    let data = '';
+
+    tables.forEach((table, index) => {
+      const dataElements = table.querySelectorAll('td.toCopyTd');
+      const td1Array = [];
+      const td3Array = [];
+
+      Array.from(dataElements).forEach((element, index) => {
+        if (index % 2 === 0) {
+          const td1 = element.textContent;
+          const td3 =  dataElements[index + 1].textContent; // Récupère l'élément suivant dans le tableau dataElements
+          td1Array.push(td1);
+          td3Array.push(td3);
+        }
+      });
+      let title = titlesArray[index];
+
+      if (date && !/\d/.test(title) ) {
+        // La variable date existe et ne contient pas de chiffres
+        title += ` - ${date}`
+      }
+
+      if (format === 'md') {
+        data += `## ${title}\n\n| Ingredients | Total | Ou | Acheté |\n| --- | --- | --- | --- |\n`;
+        for (let i = 0; i < td1Array.length; i++) {
+          data += `| ${td1Array[i]} | ${td3Array[i]} |  |  |\n`;
+        }
+      } else if (format === 'csv') {
+        data += `${title}\n"Ingredients","Total","Ou","Acheté"\n`;
+        for (let i = 0; i < td1Array.length; i++) {
+          data += `"${td1Array[i]}","${td3Array[i]}",,\n`;
+        }
+      } else if (format === 'text') {
+        data += `## ${title}\n`;
+        for (let i = 0; i < td1Array.length; i++) {
+          data += `${td1Array[i]} : ${td3Array[i]} → \n`;
+        }
+      }  else if (format === 'html') {
+        data += `<h2>${title}</h2>\n<table style="border-collapse: collapse; width: 100%;">\n<tr><th style="border: 1px solid black; width: 250px;">Ingredients</th><th style="border: 1px solid black; width: 250px;">Total</th><th style="border: 1px solid black; width: 100px;">Ou</th><th style="border: 1px solid black; width: 100px;">Acheté</th></tr>\n`;
+        for (let i = 0; i < td1Array.length; i++) {
+          data += `<tr><td style="border: 1px solid black; width: 250px;"><strong>${td1Array[i]}</strong></td><td style="border: 1px solid black; width: 250px; text-align: center;">${td3Array[i]}</td><td style="border: 1px solid black; width: 100px;"></td><td style="border: 1px solid black; width: 100px;"></td></tr>\n`;
+        }
+        data += '</table>\n';
+      }
+
+      if (index < tables.length - 1) {
+        data += '\n';
+      }
+    });
+
+    if (format === 'csv') {
+      downloadFile(data, 'csv');
+    } else if (format === 'md') {
+      downloadFile(data, 'md');
+    } else {
+      var textArea = document.createElement("textarea");
+      textArea.value = data;
+      document.body.appendChild(textArea);
+      textArea.select();
+      document.execCommand('copy');
+      document.body.removeChild(textArea);
+    }
+  }
+
+  {{/*  function downloadInnerHtml(filename, elId, mimeType) {
+    var elHtml = document.getElementById(elId).innerHTML;
+    var link = document.createElement('a');
+    mimeType = mimeType || 'text/html';
+
+    link.setAttribute('download', filename);
+    link.setAttribute('href', 'data:' + mimeType  +  ';charset=utf-8,' + encodeURIComponent(elHtml));
+    link.click();
+}  */}}
+
+
+  function downloadFile(data, format) {
+    if (format === 'csv') {
+      type = "text/csv"
+    } else if (format === 'md') {
+      type = "text/plain"
+    }
+
+      // Create CSV file object and feed
+      // our csv_data into it
+      FileData = new Blob([data], {
+        type: type
+      });
+
+      // Create to temporary link to initiate
+      // download process
+      let temp_link = document.createElement('a');
+
+      // Download csv file
+      if (format === 'csv') {
+        temp_link.download = "listes-ingredients.csv";
+      } else if (format === 'md') {
+        temp_link.download = "listes-ingredients.md";
+      }
+      let url = window.URL.createObjectURL(FileData);
+      temp_link.href = url;
+
+      // This link should not be displayed
+      temp_link.style.display = "none";
+      document.body.appendChild(temp_link);
+
+      // Automatically click the link to
+      // trigger download
+      temp_link.click();
+      document.body.removeChild(temp_link);
+  }
+</script><script>
+  flatpickr.localize(flatpickr.l10ns.fr);
+  {{/*  :::VUEAPP  */}}
+  const app = Vue.createApp({
+    delimiters: ['[[', ']]'],
+    el: '#app',
+    data () {
+      return {
+        searchInput: '', // For direct v-model binding
+        debouncedSearchQuery: '', // For debounced search logic
+        searchDebounceTimer: null, // Timer for debounce
+        datesRepas: [], // liste des dates entre 1er et dernier repas : pour les date marqué event dans le date-picker
+        startDate: null, // re-initialisé dans mounted().
+        endDate: null,
+        startDateSelected: null,
+        endDateSelected: null,
+        endDateSelectedDebug: null,
+        endDateAllowed: null,
+        startDateMenu: false,
+        endDateMenu: false,
+        showAllColIngredients: false,
+        {{/*  ingredientsTypesList: [{{ print $IngredientsTypesList }}],  */}}
+        displayDetailsRecettes: true,
+
+
+        ingredients: [
+          {{- range $IngredientList -}}
+
+          {{ $dictIngredient := dict "ingredient" .ingredient "quantite" .quantite "unit" .unit }}
+          {{ $unit := .unit}}
+
+          {
+            ingredient: "{{ .ingredient }}",
+            ingredientType: "{{ .ingType }}",
+
+            quantite: {{- partial "functions/quantite-converter" (dict "fetchQuantite" true "ingredient" .ingredient "quantite" .quantite "unit" .unit) -}},
+            unit: "{{ partial "functions/quantite-converter" (dict "fetchUnit" true "ingredient" .ingredient "quantite" .quantite "unit" .unit) }}",
+            {{ if eq $unit (and ("unité") ("c. à café") ("c. à soupe")) }}
+            quantiteOrig: {{.quantite}},
+            unitOrig: "{{.unit}}",
+            {{ end }}
+
+            recette: "{{ .recette }}",
+            dateService:'{{ .dateService }}',
+            horaire: "{{ .horaire }}",
+            typePlat: "{{ .typePlat }}",
+            assiettesRecettes: {{ .assiettesRecettes }},
+            assiettes: {{ .assiettes }},
+          },
+          {{- end -}}
+          ],
+
+          ingFraisFiltered: [],
+          totalRangeWithDetailResults: {},
+          {{/*  TODO : gérer quantité/unit gr→kg ...  */}}
+          {{/*  ingTypeList : Object.freeze({
+            {{- $ingredientType := "" -}}
+            {{- range $IngredientsTypesList -}}
+            {{- $ingredientType = .iType -}}
+            {{ $dictIngredient := dict "ingredient" .ingredient "quantite" .quantite "unit" .unit }}
+            {{ $unit := .unit}}
+            {{printf "Ing%sList" .iType}}: [
+              {{ range $IngredientList -}}
+              {{ if eq .ingType $ingredientType }}
+              {
+                ingredient: "{{ .ingredient }}",
+                ingredientType: "{{ .ingType }}",
+
+                quantite: {{- partial "functions/quantite-converter" (dict "fetchQuantite" true "ingredient" .ingredient "quantite" .quantite "unit" .unit) -}},
+                unit: "{{ partial "functions/quantite-converter" (dict "fetchUnit" true "ingredient" .ingredient "quantite" .quantite "unit" .unit) }}",
+                  {{ if eq $unit (and ("unité") ("c. à café") ("c. à soupe")) }}
+                quantiteOrig: {{.quantite}},
+                unitOrig: "{{.unit}}",
+                  {{ end }}
+
+                recette: "{{ .recette }}",
+                dateService:'{{ .dateService }}',
+                horaire: "{{ .horaire }}",
+                typePlat: "{{ .typePlat }}",
+                assiettesRecettes: {{ .assiettesRecettes }},
+                assiettes: {{ .assiettes }},
+              },
+                {{- end -}}
+                {{- end -}}
+            ],
+            {{- end -}}
+          }),  */}}
+
+          ingTypeList :{
+            IngLegumesfraisList : [],
+            IngEpicesList : [],
+            IngAutresList : [],
+            IngLegumesList : [],
+            IngSucresList : [],
+            IngAnimauxList : [],
+            IngLofList : [],
+            IngSecList : [],
+            IngFraisList : [],
+          },
+        {{/*  ::: ___Print parameters  */}}
+        printSelectIng: false,
+        toPrint: {
+          ingredients: true,
+          {{- range $IngredientsTypesList -}}
+          {{.iType}}: true,
+          {{- end -}}
+          LegumesRanges: true,
+          FraisRanges: true,
+          AnimauxRanges: true,
+        },
+
+        printAddCol: [],
+
+        IngredientsTypesList: [{{ range $IngredientsTypesList }} {{ .iType }}, {{ end }} ],
+
+        rangesDates: [], // Tableau pour stocker les tranches de dates
+        daysPerRange: 3,
+        fraisByRanges: false,
+        legumesByRanges: false,
+        animauxByRanges: false,
+
+        // Modal ingrédient détail
+        selectedIngredient: '',
+        ingredientDetails: [],
+        ingredientTotalQuantity: null,
+        modalDateStart: '',
+        modalDateEnd: '',
+
+        configDPStart: {
+          enableTime: false,
+          dateFormat: "Y-m-d",
+          altInput: true,
+          altFormat: "D d M",
+        },
+
+
+  } {{/* return */}}
+}, {{/* data */}}
+
+created () {
+
+},
+
+{{/* :::MOUNTED */}}
+mounted () {
+
+
+  {{/*  TODO optim → hugo ?  */}}
+  {{/*  ::: __date range  */}}
+  datesRange: {
+    // Trouver la première et la dernière date dans les données
+    this.startDate = new Date(Math.min(
+      ...this.ingredients.map(i => {
+        return new Date(i.dateService);
+      }),
+      ),
+    );
+    this.endDate = new Date(Math.max(
+      ...this.ingredients.map(i => {
+        return new Date(i.dateService);
+      }),
+      ),
+    );
+
+    this.startDate = new Date(this.startDate).toISOString().substr(0, 10);
+    this.endDate = new Date(this.endDate).toISOString().substr(0, 10);
+
+    this.startDateSelected = this.startDate;
+    this.endDateSelected = this.endDate
+    // Derniere date autorisée dans la sélection (ne sera pas mutable puisque dans `mounted:`)
+    this.endDateAllowed = this.endDateSelected;
+  };
+{{/*  TODO : optim : faire avec hugo  */}}
+  datesRepasGen: {
+    // Creer un tableau avec toutes les dateService, éliminer les doublon (Set). Défini le parametre `datesRepas` de `data()`, pour mettre en evidence les dateq où il y a des évenement dans les date-picker; TODO : est-ce encore utile maintenant que les `allowed-dates` fonctionne bien ? doublon ? Ne creer pas les date intermédiare si il y a des trou =>
+    const dates = this.ingredients.map(i => {
+      const datesFormat = i.dateService;
+      return new Date(datesFormat).toISOString().substr(0, 10) // formatage
+    });
+
+    this.datesRepas = Array.from(new Set(dates)).sort();
+  };
+
+  {{/*  rangeDateEvents: {
+    this.splitDateRanges(this.daysPerRange);
+  };  */}}
+
+  endDateDebugGen: {
+    /* Ajoute un jour a la endDateSelected, pour que les derniers jours soit bien pris en compte par le filtre opéré dans totalsIngredientFiltered.
+    Meme fonction dans watch() pour la mise a jour en fonction de la selection dans le date-picker */
+
+    {{/*  this.endDateSelectedDebug = new Date(lastDateSelected.setDate(lastDateSelected.getDate() + 1 )).toISOString().substr(0, 10);  */}}
+  };
+
+  {{/*  ::: __flatpikr  */}}
+  datePickerInit: {
+    const datePicker = this.datePickerReset();
+  };
+
+  {{/*  Listes des ingrédients filtré par types : utilisé par les filtres dates et search.  */}}
+  ingTypeListGen:  {
+    const ingredientTypes = ["Autres", "Epices", "Frais", "Legumes", "Animaux", "Sec", "Sucres", "Lof"];
+    for (const i of this.ingredients) {
+
+      if (i.unit === 'grammes' || i.unit === 'gr.') {
+        i.quantite = i.quantite / 1000 ;
+        i.unit = 'Kg';
+      }
+      else if (i.unit === 'ml') {
+        i.quantite = i.quantite / 1000 ;
+        i.unit = 'l.';
+      }
+      else if (i.unit === 'litre') {
+        i.unit = 'l.';
+      }
+
+      this.ingTypeList[`Ing${i.ingredientType}List`].push(i);
+    }
+  };
+
+  {{/*  initialise les listes d'ingrédients  par types  */}}
+
+
+}, // mounted() end
+
+{{/*  :::COMPUTED  */}}
+
+computed: {
+
+
+  {{/*  :::__Total Date picker Ingredients  */}}
+  filterByDatePicker() {
+    const filtered = {};
+    const startDate = new Date(this.startDateSelected);
+    const endDate = new Date(this.endDateSelected);
+
+    if ( startDate === this.startDate && endDate === this.endDate ) {
+      return this.ingredients;
+    }
+
+    for (const [type, ingredients] of Object.entries(this.ingTypeList)) {
+      filtered[type] = ingredients.filter(ingredient => {
+        const ingredientDate = new Date(ingredient.dateService);
+        return ingredientDate >= startDate && ingredientDate <= endDate;
+      });
+    }
+
+    return filtered;
+  },
+
+  searchFormat() {
+    return this.debouncedSearchQuery.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "");
+  },
+
+  computeTotalDP() {
+    // Utilisé pour le tableau du total de ingredient filtré par datepicker. Renvoie les totaux des ingredients flitrés, classés par type.
+    const ingFiltered = this.filterByDatePicker;
+    let ingredientTotals = new Map();
+
+    for (const [type, ingredients] of Object.entries(ingFiltered)) {
+      ingredients.forEach((i) => {
+        // Vérifier si l'élément existe dans ingredientTotals
+        if (!ingredientTotals[type]) {
+          ingredientTotals[type] = {};
+        }
+
+        let ingredientItem = ingredientTotals[type][i.ingredient];
+
+        // Vérifier si l'élément existe dans ingredientTotals[type]
+        if (!ingredientItem) {
+          ingredientItem = {
+            ingredient: i.ingredient,
+            qTotalX:[],
+            totalRecettes: 1,
+            totalAssiettes: i.assiettes,
+            iType: i.ingredientType
+          };
+
+          // Ajouter l'élément à ingredientTotals[type]
+          ingredientTotals[type][i.ingredient] = ingredientItem;
+        } else {
+          // Si l'élément existe, mettre à jour les totaux
+          ingredientItem.totalRecettes++;
+          ingredientItem.totalAssiettes += i.assiettes;
+        }
+
+        // Vérifier si l'unité est déjà présente dans qTotalX
+        const existingUnit = ingredientItem.qTotalX.find(item => item.unit === i.unit);
+
+        if (existingUnit) {
+          existingUnit.qTotal += i.quantite;
+        } else {
+          // Ajouter une nouvelle unité à qTotalX
+          ingredientItem.qTotalX.push({
+            qTotal: i.quantite,
+            unit: i.unit,
+          });
+        }
+      });
+    };
+    return ingredientTotals;
+  },
+
+  totalQuantitesDP () {
+    const ingTotaux = this.computeTotalDP;
+    const ingDetail = this.filterByDatePicker;
+    const mergedResult = new Map();
+
+    for (const key in ingDetail) {
+      if (ingDetail.hasOwnProperty(key) && ingTotaux.hasOwnProperty(key)) {
+        mergedResult[key] = Object.assign({}, ingDetail[key], ingTotaux[key]);
+      }
+    }
+    // Sort the sub-objects in each Ing...List based on the ingredient value
+    for (const key in mergedResult) {
+      if (mergedResult.hasOwnProperty(key)) {
+        mergedResult[key] = Object.values(mergedResult[key]).sort((a, b) => a.ingredient.localeCompare(b.ingredient));
+      }
+    }
+
+    if (this.debouncedSearchQuery.length > 2) {
+      return this.searchFilter(mergedResult);
+    } else {
+      return mergedResult;
+    }
+  },
+
+
+  splitDateRanges() {
+    let currentRange = [];
+    this.rangesDates = [];
+    const newDaysPerRange = this.daysPerRange;
+    // split dates
+    for (let i = 0; i < this.datesRepas.length; i++) {
+      currentRange.push(this.datesRepas[i]);
+      // push the current range
+      if (currentRange.length >= Number(newDaysPerRange)) {
+        this.rangesDates.push([...currentRange]);
+        currentRange = [];
+      }
+    }
+      // push the last range
+      if (currentRange.length > 0) {
+      this.rangesDates.push([...currentRange]);
+    }
+    return this.rangesDates;
+  },
+
+
+
+}, // computed end
+
+{{/*  :::WATCH  */}}
+watch: {
+  searchInput(newValue) {
+    if (this.searchDebounceTimer) {
+      clearTimeout(this.searchDebounceTimer);
+    }
+    this.searchDebounceTimer = setTimeout(() => {
+      this.debouncedSearchQuery = newValue;
+    }, 500); // Délai de 500ms
+  },
+
+
+  startDateSelected: function () {
+    this.filterByDatePicker;
+  },
+
+  endDateSelected: function () {
+    this.filterByDatePicker;
+  },
+
+  splitDateRanges: function () {
+    this.totalRangeWithDetail;
+  }
+
+},  {{/*  watch end  */}}
+
+
+{{/*  :::METHODS  */}}
+methods: {
+
+  {{/*  ::: __formatage des dates pour le modal  */}}
+  formatDateRange(startDate, endDate) {
+    if (!startDate || !endDate) return '';
+
+    const start = new Date(startDate);
+    const end = new Date(endDate);
+
+    const options = { day: 'numeric', month: 'short', year: 'numeric' };
+    const startFormatted = start.toLocaleDateString('fr-FR', options);
+    const endFormatted = end.toLocaleDateString('fr-FR', options);
+
+    if (startDate === endDate) {
+      return `du ${startFormatted}`;
+    }
+
+    return `du ${startFormatted} au ${endFormatted}`;
+  },
+
+  {{/*  ::: __print  */}}
+  printThis(el, section) {
+    this.$nextTick(() => {
+      let printThat = [el, section];
+      Object.keys(this.toPrint).forEach((param) => {
+        if (!printThat.includes(param)) {
+          this.toPrint[param] = false;
+        } else {
+          this.toPrint[param] = true;
+        }
+      });
+      this.$nextTick(() => {
+        window.print();
+      });
+    });
+  },
+
+  printGlobal() {
+
+    Object.keys(this.toPrint).forEach((param) => {
+      this.toPrint[param] = true;
+    });
+  },
+
+  print() {
+      setTimeout(() => {
+        window.print();
+      }, 500);
+  },
+
+  {{/*  USELESS . C'est quoi ? Pas de reference  */}}
+  updateSelectedAttribute (e) {
+    let sel, i;
+    sel = document.getElementById(e.target.id);
+          // remove 'selected' from prior user selection
+    for (i = 0; i < sel.length; i += 1) {
+      sel[i].removeAttribute("selected");
+    }
+          // and add 'selected' to current selection
+    sel[sel.selectedIndex].setAttribute("selected", "selected");
+  },
+
+  {{/*  :::__Date picker  */}}
+
+  datesReset: function () {
+    this.startDateSelected = this.startDate;
+    this.endDateSelected = this.endDateAllowed;
+    const datePickerReset = this.datePickerReset();
+  },
+
+  datePickerReset() {
+    const configDPStart = {
+      enableTime: false,
+      dateFormat: "Y-m-d",
+      altInput: true,
+      altFormat: "D d M",
+      defaultDate: this.startDate,
+      minDate: this.startDate,
+      maxDate: this.endDateAllowed,
+    };
+    const configDPEnd = {
+      enableTime: false,
+      dateFormat: "Y-m-d",
+      altInput: true,
+      altFormat: "D d M",
+      defaultDate: this.endDateAllowed,
+      minDate: this.startDate,
+      maxDate: this.endDateAllowed,
+    };
+
+    flatpickr(datepickerStart, configDPStart);
+    flatpickr(datepickerEnd, configDPEnd);
+  },
+
+  {{/*  DateAddDays(dateDebug) {
+    dateDebug = new Date(dateDebug);
+    dateDebug.setDate(dateDebug.getDate() + 1);
+    return dateDebug;
+  },  */}}
+
+
+  {{/* ::: __calculs des totaux des ingredients  */}}
+
+
+  {{/*  Totals des ingredients filtré ...  */}}
+
+
+  {{/*  tableaux des ingredients filtrés en fonction des dates séléctionné et types  */}}
+
+  totalRange(iType, start, end) {
+    // BUG
+    const key = `${iType}_${start}_${end}`;
+    if (this.debouncedSearchQuery.length > 2) {
+      return this.searchFilterRange(this.totalRangeWithDetailResults[key])
+    } else {
+      return this.totalRangeWithDetailResults[key]
+    }
+  },
+
+  totalRangeWithDetail(iType, start, end) {
+
+    const key = `${iType}_${start}_${end}`;
+
+    // Vérifiez si les données existent déjà
+    if (this.totalRangeWithDetailResults[key]) {
+        // Si les données existent, retournez-les directement
+        return this.totalRangeWithDetailResults[key];
+    }
+
+    const totalArray = this.totalRangeArray(iType, start, end);
+
+
+    const ingDetailList = this.ingFraisFiltered;
+
+    const result = new Set([...ingDetailList, ...totalArray].sort((a, b) => a.ingredient.localeCompare(b.ingredient)));
+    {{/*  console.log("tQWD: ", result);  */}}
+
+    this.totalRangeWithDetailResults[key] = result;
+
+    return result;
+  },
+
+  totalRangeArray(iType, start, end) {
+    // renvoie un tableau d'objets {ingredient, unitTotal, qTotal} a partir de computeTotalRange
+
+    const total  = this.computeTotalRange(this.filteredIngredientsRange(iType, start, end));
+
+    const result = Object.entries(total).flatMap(([ingredient, values]) => {
+    return values.map(({ unitTotal, qTotal, totalAssiettes }) => {
+      return {
+        ingredient,
+        unitTotal,
+        qTotal: Math.round(qTotal * 100) / 100,
+        totalAssiettes
+        };
+      });
+    });
+    {{/*  console.log("tQ: ", result);  */}}
+    return result;
+  },
+
+  computeTotalRange(filteredIng) {
+    const totalArray = [];
+
+    filteredIng.forEach((item) => {
+      item = this.convertUnit(item);
+
+      const { ingredient, quantite, unit, assiettes, totalRecettes } = item;
+
+      if (!totalArray[ingredient]) {
+        totalArray[ingredient] = [];
+      }
+
+      const existingItem = totalArray[ingredient].find((item) => item.unitTotal === unit);
+      if (existingItem) {
+        existingItem.qTotal += quantite !== 0 ? quantite : 1;
+        existingItem.totalAssiettes += assiettes;
+        existingItem.totalRecettes += 1;
+      } else {
+        totalArray[ingredient].push({
+          unitTotal: unit,
+          qTotal: quantite !== 0 ? quantite : 1,
+          totalAssiettes: assiettes,
+          totalRecettes: 1,
+        });
+      }
+    });
+
+    {{/*  console.log("cTQ : ", totalArray);  */}}
+    return totalArray;
+  },
+
+  filteredIngredientsRange: function (iType, start, end, allo) {
+    {{/* `allo` sert au debug...  */}}
+    // Récupérer la liste des ingrédients
+    const ingredients = this.ingTypeList[`Ing${iType}List`];
+
+    // Debug de la date (ajout d'un jour pour que la derniere date soit prise en compte) → si 'end' est définie, alors on envoie à DateAddDays, puis on reformate la date.
+    {{/*  end  = this.DateAddDays(end).toISOString().slice(0, 10);  */}}
+
+
+    // Filtrer les ingrédients selon les critères spécifiés
+
+      const filtered = ingredients.filter(
+        (i) =>
+          i.dateService >= start &&
+          i.dateService <=end
+      );
+
+    this.ingFraisFiltered = filtered;
+    {{/*  console.log("filtered", filtered);  */}}
+    return filtered
+  },
+
+  convertUnit(item) {
+    if (item.unit === 'grammes' || item.unit === 'gr.') {
+      item.quantite = item.quantite / 1000 ;
+      item.unit = 'Kg';
+    }
+    if (item.unit === 'ml') {
+      item.quantite = item.quantite / 1000 ;
+      item.unit = 'l.';
+    }
+    return item
+  },
+
+  round2Decimals(x) {
+    return Math.round(x * 100) / 100;
+  },
+
+
+  {{/* :::__ search filter  */}}
+  searchFilterRange(totalRange) {
+    const filteredSet = new Set();
+    // BUG searchRange
+    // TODO : diacritique...
+    totalRange.forEach((item) => {
+      // Utiliser searchFormat pour une recherche cohérente (insensible à la casse et aux accents)
+      if (item.toString().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "").includes(this.searchFormat)) {
+        filteredSet.add(item);
+      }
+    });
+
+    return filteredSet;
+  },
+
+
+  searchFilter(merge_ing_list) {
+    const filtered = {};
+
+    for (const [type, ingredients] of Object.entries(merge_ing_list)) {
+      filtered[type] = ingredients.filter(
+        ingredient => ingredient.ingredient.normalize('NFD').replace(/[\u0300-\u036f]/g, "").toLowerCase().includes(this.searchFormat)
+      );
+    }
+
+    return filtered;
+  },
+
+  {{/* :::__ Modal ingrédient détail */}}
+  openIngredientModal(ingredientName, ingredientType) {
+    this.selectedIngredient = ingredientName;
+
+    // Définir les dates du range basées sur le date picker actuel
+    this.modalDateStart = this.datePickerStart;
+    this.modalDateEnd = this.datePickerEnd;
+
+    // Filtrer les ingrédients pour celui sélectionné dans la période active
+    const filteredIngredients = this.filterByDatePicker;
+    const typeList = `Ing${ingredientType}List`;
+
+    if (filteredIngredients[typeList]) {
+      this.ingredientDetails = filteredIngredients[typeList].filter(
+        ingredient => ingredient.ingredient === ingredientName
+      ).sort((a, b) => new Date(a.dateService) - new Date(b.dateService));
+    } else {
+      this.ingredientDetails = [];
+    }
+
+    // Calculer le total pour cet ingrédient
+    this.calculateIngredientTotal();
+  },
+
+  openIngredientModalRange(ingredientName, ingredientType, startDate, endDate) {
+    this.selectedIngredient = ingredientName;
+
+    // Définir les dates du range spécifiées
+    this.modalDateStart = startDate;
+    this.modalDateEnd = endDate;
+
+    // Filtrer les ingrédients pour celui sélectionné dans la période spécifiée
+    const filtered = this.filteredIngredientsRange(ingredientType, startDate, endDate);
+    this.ingredientDetails = filtered.filter(
+      ingredient => ingredient.ingredient === ingredientName
+    ).sort((a, b) => new Date(a.dateService) - new Date(b.dateService));
+
+    // Calculer le total pour cet ingrédient
+    this.calculateIngredientTotal();
+  },
+
+  calculateIngredientTotal() {
+    const totals = new Map();
+
+    this.ingredientDetails.forEach(detail => {
+      const convertedDetail = this.convertUnit({...detail});
+      const unit = convertedDetail.unit;
+
+      if (totals.has(unit)) {
+        totals.set(unit, totals.get(unit) + convertedDetail.quantite);
+      } else {
+        totals.set(unit, convertedDetail.quantite);
+      }
+    });
+
+    this.ingredientTotalQuantity = Array.from(totals, ([unit, qTotal]) => ({
+      unit,
+      qTotal
+    }));
+  },
+
+} {{/* fin de methods */}}
+}); {{/* fin New Vue */}}
+app.mount('#app')
+</script>
+{{ end }}

@@ -1,0 +1,22 @@
+{{/*  {{ partial "footer/esbuild" (dict "src" "js/vendor/bootstrap.bundle.min.js" "load" "async" "transpile" false) -}}  */}}
+  
+<!-- Charge les script js importé dans app.js -->
+{{ partial "footer/esbuild" (dict "src" "js/app.js" "targetPath" "main.js" "load" "async" "transpile" false) -}}
+
+
+{{ if .Params.zoomable_img }}
+{{ $script := resources.Get "js/zoomable-img.js" | fingerprint }}
+<script type="text/javascript" src="{{ $script.RelPermalink }}"></script>
+{{ end }}
+
+{{/* EXAMPLE - only load script for production
+{{ if eq (hugo.Environment) "production" -}}
+  {{ partial "footer/esbuild" (dict "src" "js/instantpage.js" "load" "async" "transpile" false) -}}
+{{ end -}}
+*/}}
+
+{{/* EXAMPLE - only load script for a page type e.g. contact or gallery
+{{ if eq .Type "gallery" }}
+  {{ partial "footer/esbuild" (dict "src" "js/gallery.js" "load" "async" "transpile" false) -}}
+{{ end }}
+*/}}

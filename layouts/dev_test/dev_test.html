@@ -1,0 +1,565 @@
+{{ define "main" }}
+
+<div class="section py-1">
+  <h3> Range site.Data.ingredientswarning</h3>
+
+{{ $alergene := slice }}
+{{ $sanslactose := slice }}
+{{ $sansgluten := slice }}
+{{ $vegan := slice }}
+{{$warn := slice}}
+{{ range $.Site.Data.ingredients }}
+  {{ with .ingredients }}
+    {{ range . }}
+    {{ $ingredient := .title}}
+        {{ if eq .alergene true }}
+          {{ $alergene = append $ingredient $alergene }}
+        {{ end }}
+        {{ if eq .sans_lactose false }}
+          {{ $sanslactose = $sanslactose | append $ingredient }}  
+        {{ end }}        
+        {{ if eq .sans_gluten false }}
+          {{ $sansgluten = $sansgluten | append $ingredient }}  
+        {{ end }}        
+        {{ if eq .vegan false }}
+          {{ $vegan = $vegan | append $ingredient }}  
+        {{ end }}        
+    {{ end }}
+  {{ end }}
+{{ end }}
+
+<h4>range $alergene . </h4>
+ {{ range $alergene }}
+    {{.}} 
+  {{ end }}
+
+<hr>
+
+  {{ $warn = $warn | append (slice (dict "alergenes" $alergene ) (dict "sans_lactose" $sanslactose) (dict "sans_gutten" $sansgluten) (dict "not_vegan" $vegan) ) }}  
+
+  <h4>range $warn range .alergene .,l</h4>
+  {{ range  $warn }}
+   {{range .alergenes}} 
+    {{.}},
+  {{end}}
+  {{end}}
+
+
+<hr>
+ <h4> range $warn . </h4>
+  {{ range $warn}}
+  <li> {{.}} </li>
+  {{end}}
+
+
+{{/* NOT WORKING */}}  
+{{ range $.Site.Data.ingredients_warning}}
+  {{.}}
+{{end}}
+
+{{ range $.Site.Data.ingredients_warning}}
+  {{.}}
+{{end}}
+
+{{ range index $.Site.Data.ingredients_warning "alergenes"}}
+  {{.}}
+{{end}}
+
+{{ range site.Data.ingredients_warning}}
+  {{.}}
+{{end}}
+
+{{ range where $.Site.Data.ingredients ".Params.alergenes" "true" }}
+  {{.}}
+{{ end }}
+{{/* /NOT WORKING  */}}  
+
+</div>
+
+<div class="section py-1">
+<h3>Range $.Site.Data.ingredients ...</h3>
+
+{{ $alergene := slice }}
+{{ $sanslactose := slice }}
+{{ $sansgluten := slice }}
+{{ $vegan := slice }}
+
+{{ range site.Data.ingredients }}
+  {{ with .ingredients }}
+    {{ range . }}
+    {{ $ingredient := .title}}
+      {{ with .alergene }}
+        {{ if eq . true }}
+          {{ $alergene = $alergene | append $ingredient }}
+        {{ end }}
+      {{ end }}
+      {{ with .sans_lactose }}
+        {{ if eq . false }}
+          {{ $sanslactose = $sanslactose| append $ingredient }}  
+        {{ end }}        
+      {{ end }}
+      {{ with .sans_gluten }}
+        {{ if eq . false }}
+          {{ $sansgluten = $sansgluten| append $ingredient }}  
+        {{ end }}        
+      {{ end }}
+      {{ with .vegan }}
+        {{ if eq . false }}
+          {{ $vegan = $vegan| append $ingredient }}  
+        {{ end }}        
+      {{ end }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+
+{{ $result := dict "alergenes" $alergene "sans-lactose" $sanslactose "sans-gutten" $sansgluten "not_vegan" $vegan| jsonify }}
+{{ printf "%s" $result | safeHTML }}
+
+</div>
+
+
+
+<div class="section py-1">
+  <div class="row justify-content-center">
+    <div class="row g-3 m-4">
+      {{ range (.Site.GetPage "section" "recettes").Pages }}
+      {{ partial "recettes-type-card" . }}
+      {{ end -}}
+    </div>
+  </div>
+</div>
+
+
+<div class="section py-1 my-3">
+  <div class="row justify-content-center g-3 m-4">
+    <code>range $name, $taxonomy := .Site.Taxonomies.Categories</code>
+    {{ range $name, $taxonomy := .Site.Taxonomies.Categories }}
+    <div class="col-lg-3">
+      <div class="card card-recette mb-3 text-center font-weight-bold border-1 ">
+        <a href="/Categories/{{ $name | urlize }}" class="stretched-link"></a>
+        {{ $name | humanize }} ({{$taxonomy.Count }})
+      </div>
+    </div>
+    {{end}}
+  </div>
+</div>
+
+<div class="section">
+
+
+  <ul>
+    <code>range .Site.Pages // range .Data.Terms.Alphabetical</code>
+    {{ range .Site.Pages }}
+    {{ range .Data.Terms.Alphabetical }}
+    <li>
+      <a href="{{ .Page.Title | urlize}}">{{ .Page.Title }}
+        <span class="badge">{{ .Count }}</span>
+      </a>
+    </li>
+    {{ end }}
+    {{ end }}
+  </ul>
+
+  <div class="row justify-content-center">
+    <div class="col-lg-8">
+      <div class="row g-3 my-4">
+        <code>range .Site.Pages // $t := .Data.Terms.Alphabetical // range $t //
+        if in ".url" "Categories" </code>
+        <ul>
+          {{ range .Site.Pages }}
+          {{ $t := .Data.Terms.Alphabetical }}
+          {{ range $t }}
+          {{ if in ".url" "Categories"}}
+          <li>
+            <a href="/categories/{{ .Page.Title | urlize}}">{{ .Page.Title
+              }}
+              <span class="badge">{{ .Count }}</span>
+            </a>
+          </li>
+          {{ end }}
+          {{ end }}
+          {{ end }}
+        </ul>
+
+        <hr>
+      </div>
+    </div>
+
+  </div>
+  Test1 <br>
+  {{ range $key, $value := index .Site.Taxonomies "Categories" }} {{$key |
+  urlize }}
+  {{ end }}
+  <br>
+
+
+  <div class="my-12">
+    <code>range $key, $value := .Site.Taxonomies.Categories </code>
+    {{ range $key, $value := .Site.Taxonomies.Categories }}
+    <div class="mb-4">
+      <h3 class="text-xl">Term: {{ $key }}</h3>
+      {{ range $value.Pages }}
+      <a href="{{ .RelPermalink }}" class="block">
+        {{ .Title }} / {{ dateFormat "January 2006" .Date }}
+      </a>
+      {{ end }}
+    </div>
+    {{ end }}
+  </div>
+
+
+  <div class="row justify-content-center">
+    <div class="col-lg-10">
+      <h2>Combo</h2>
+      <div class="row my-5 card">
+        <code>range (.Site.GetPage "section" "recettes").Pages // range .Pages</code>
+        <div class="alert-info small"></div>
+        {{ range (.Site.GetPage "section" "recettes").Pages }}
+        <div><a class="h4" href="{{.Permalink}}">{{.Title}}
+          </a></div>
+        {{ range .Pages }}
+        <div><a href="{{.Permalink}}">{{.Title}}</a></div>
+        {{ end }}
+        {{ end -}}
+      </div>
+
+
+{{ partial "test/all-taxonomies" . }}
+
+
+      <code>range .Pages ... range (.GetTerms "categories") </code>    
+      {{ range .Pages }}
+          <div><a href="{{.Permalink}}">{{.Title}}</a></div>
+        </div>
+        {{ end -}}
+      </div>
+
+      <ul>
+        {{ range (.GetTerms "categories") }}
+        <li><a href="{{ .Permalink }}">{{ .LinkTitle }}</a></li>
+        {{ end }}
+      </ul>
+
+
+      <h2>Unique</h2>
+      <h4>Page de premier niveau: Sections (dossiers dans /content sans les
+        sous-dossiers) </h4>
+      <div class="alert-info ">Toutes les pages de premier niveau</div>
+      <div class="row mb-5 card">
+        <code>range .Pages </code>
+        {{range .Pages }}
+        <div><a href="{{.Permalink}}">{{.Title}}</a></div>
+        {{ end -}}
+      </div>
+      <div class="row mb-5 card">
+        <code>range .Sites.Sections</code>
+        {{range .Site.Sections }}
+        <div><a href="{{.Permalink}}">{{.Title}}</a></div>
+        {{ end -}}
+      </div>
+      <div class="row mb-5 card">
+        <code>range .Data.Pages</code>
+        {{ range .Data.Pages }}
+        <a href="{{ .Permalink }}">{{ .Title }}</a>
+        {{ end -}}
+      </div>
+      <div class="alert-info">Sections de premier niveau</div>
+      <div class="row mb-5 card">
+        <code>range (where .Site.Sections "Section" "recettes" )</code>
+        {{ range (where .Site.Sections "Section" "recettes" ) }}
+        <div><a href="{{.Permalink}}">{{.Title}}</a></div>
+        {{ end -}}
+      </div>
+      <div class="row mb-5 card">
+        <code>range (where .Site.Sections "Section" "Ingredients" )</code>
+        {{ range (where .Site.Sections "Section" "ingredients" ) }}
+        <div><a href="{{.Permalink}}">{{.Title}}</a></div>
+        {{ end -}}
+      </div>
+      {{/* ####################################################### */}}
+      <h4>Pages autres niveaux</h4>
+      <div class="row mb-5 card">
+        <code>range (where .Site.Pages "Section" "recettes")</code>
+        <div class="alert-info small">Toutes les pages contenu dans le
+          dossiers /content/recettes Et ses sous-dossiers
+          (y compris les pages index/list)</div>
+        {{ range (where .Site.Pages "Section" "recettes" ) }}
+        <div>
+          <a href="{{.Permalink}}">{{.Title}}</a>
+          <span class="small"> (type: {{.Type}} - section: {{.Section}} -
+            kind: {{.Kind}} - Categories: {{.Params.Categories}} -{{.Param "ingredients.legumes"}}</span>
+        </div>
+        {{ end -}}
+      </div>
+      <div class="row mb-5 card">
+        <code>range (where .Site.RegularPages "Sections" "recettes")</code>
+        <div class="alert-info small">Toutes les pages contenu dans le
+          dossiers /content/recettes Et ses sous-dossiers
+          (SANS les pages index/list)</div>
+        {{ range (where .Site.RegularPages "Section" "recettes" ) }}
+        <div>
+          <a href="{{.Permalink}}">{{.Title}}</a>
+          <span class="small"> (type: {{.Type}} - section: {{.Section}} -
+            kind: {{.Kind}}</span>
+        </div>
+        {{ end }}
+      </div>
+      <div class="row mb-5 card">
+        <code>range (.Site.GetPage "section" "recettes").Pages </code>
+        <span class="alert-info small">
+          Liste les pages contenues dans /content/recettes (ne fonctionne que
+          pour les
+          dossier de premiers nivea
+          (section))
+        </span>
+        {{ range (.Site.GetPage "section" "recettes").Pages }}
+        <div><a href="{{.Permalink}}">{{.Title}}</a></div>
+        {{ end -}}
+      </div>
+      <div class="row mb-5 card">
+        <code>range (.Site.GetPage "section" "recettes").Pages </code>
+        <span class="alert-info small">
+          Liste les pages contenues dans /content/recettes (ne fonctionne que
+          pour les
+          dossier de premiers niveau
+          (section))
+        </span>
+        {{ range (.Site.GetPage "section" "recettes").Pages }}
+        <div><a href="{{.Permalink}}">{{.Title}}</a></div>
+        {{ end -}}
+      </div>
+      <div class="row mb-5 card">
+        <code>range (.Site.GetPage "Categories").Pages </code>
+        <span class="alert-info small">Liste les pages contenue dans
+          /content/Categories</span>
+        {{ range (.Site.GetPage "Categories").Pages }}
+        <div><a href="{{.Permalink}}">{{.Title}}</a>
+          <span class="small">(type: {{.Type}} - section: {{.Section}} -
+            kind: {{.Kind}} - Categories: {{.Params.Categories}} </span>
+        </div>
+        {{ end -}}
+      </div>
+      <div class="section py-1 my-3">
+        <div class="row justify-content-center g-3 m-4">
+          {{ range $name, $taxonomy := .Site.Taxonomies.categories }}
+          <div class="col-lg-3">
+            <div class="card card-recette mb-3 text-center font-weight-bold border-1 ">
+              <a href="categories/{{ $name | urlize }}" class="stretched-link"></a>
+              {{ $name | humanize }} ({{$taxonomy.Count }})
+            </div>
+          </div>
+          {{end}}
+        </div>
+      </div>
+
+      <div class="section py-1 my-3">
+        <div class="row justify-content-center g-3 m-4">
+          {{ range $name, $taxonomy := .Site.Taxonomies.regime }}
+          <div class="col-lg-3">
+            <div class="card card-recette mb-3 text-center font-weight-bold border-1 ">
+              <a href="/regime/{{ $name | urlize }}" class="stretched-link"></a>
+              {{ $name | humanize }} ({{$taxonomy.Count }})
+            </div>
+          </div>
+          {{end}}
+        </div>
+      </div>
+      <div class="row my-5 card">
+        <code>range (.Site.Taxonomies.Categories).Pages
+        </code>
+        <div class="alert-info small"></div>
+        {{ range (.Site.Taxonomies.Categories).RegularPagesRecursive }}
+        <div><a class="h5" href="{{.Permalink}}">{{.Title}}</a></div>
+        {{ end }}
+      </div>
+      {{range $name, $taxonomy := .Site.Taxonomies.ingredients.legumes}} {{
+      $cnt := .Count }}
+      <a href={{ .RelPermalink }} title="All pages with tag<i>{{$name}}</i>">{{$name}}<sup>({{$cnt}})</sup></a>
+      {{end}}
+
+
+      <h2>Param / type / taxonomies</h2>
+      <div class="row mb-5 card">
+        <code>range (where .Site.Pages "Type" "plat" )</code>
+        <span class="alert-info small">Liste les pages dont le "Type" est
+          "plat" dans le frontmatter (fonctionne pour
+          "type uniquement ?")
+        </span>
+        {{ range (where .Site.Pages "Type" "plat" ) }}
+        <div><a href="{{.Permalink}}">{{.Title}}</a></div>
+        {{ end -}}
+      </div>
+      <div class="row mb-5 card">
+        <code>range where .Site.RegularPages ".Params.type" "plat" )</code>
+        {{ range where .Site.RegularPages ".Params.type" "plat" }}
+        <div><a href="{{.Permalink}}">{{.Title}}</a></div>
+        {{ end -}}
+      </div>
+      <div class="row mb-5 card">
+        <code>range where .Site.RegularPages ".Params.Categories"
+          "Tartinade" )</code>
+        {{ range where .Site.RegularPages ".Params.Categories" "tartinade"
+        }}
+        <div><a href="{{.Permalink}}">{{.Title}}</a></div>
+        {{ end -}}
+        <span class="alert-warning small my-2">Ne fonctionne pas car
+          Categories est un array ?
+        </span>
+      </div>
+      <div class="row mb-5 card">
+        <highlight>range where .Site.RegularPages ".Params.temperature" "Chaud" )</highlight>
+        {{ range where .Site.RegularPages ".Params.temperature" "Chaud"
+        }}
+        <div><a href="{{.Permalink}}">{{.Title}}</a></div>
+        {{ end -}}
+        <span class="alert-warning small my-2">sans array
+        </span>
+      </div>
+      <div class="row my-5 card">
+        <code>range where (where .Site.Pages "Type" "plat" )
+          "Params.temperature" "=" Chaud</code>
+        <div class="alert-info small">Affiche les pages de type plat dont le
+          paramettre "temperature" est Chaud</div>
+        {{ range where (where .Site.Pages "Type" "plat" ) "Params.temperature" "=" "Chaud" }}
+        <div><a href="{{.Permalink}}">{{.Title}}
+          </a><span class="small">Temperature : {{.Params.temperature}}</span></div>
+        {{ end -}}
+      </div>
+
+      <code>range (where .Site.RegularPages "Section" "recettes" ) "Params.temperature" "=" "Chaud"</code>
+      {{ range where (where .Site.RegularPages "Section" "recettes" ) "Params.temperature" "=" "Chaud"}}
+      <div> <a href="{{.Permalink}}">{{.Title}}</a> </div>
+      {{ end }}
+      
+      <code>range .Site.Taxonomies.cuisson.oui</code>
+      {{ range .Site.Taxonomies.cuisson.oui}}
+      <div> <a href="{{.Permalink}}">{{.Title}}</a> </div>
+      {{ end }}
+      <span>→ rien : n'est pas un array</span>
+    <br>
+
+      pack
+      <div class="row card mb-5">
+        <code>range .Site.Taxonomies.regime.vegetarien</code>
+        <span class="alert-info small">Liste les pages dont le paramettre
+          "regimes" est "vegetarien")
+        </span>
+
+        {{  range .Site.Taxonomies.regime.vegetarien }}
+          <a href="{{ .Permalink }}">{{ .Title}}</a>
+        {{ end }}
+        <span class="alert-warning small my-2">Bug quand un pluriel est
+          defini dans config.toml > taxonomies (regime =
+          "regimes" ne mrche pas; mettre = "regime"). Et les accents et
+          majuscule ne fonctionne pas
+        </span>
+      </div>
+      <div class="row card mb-5">
+        <code>range .Site.Taxonomies.Categories.salade</code>
+        {{ range .Site.Taxonomies.Categories.salade }}
+        <a href="{{ .Permalink }}">{{ .Title}}</a>
+        {{ end }}
+        <div>→ ne fonctionne pas car Categorie n'est pas dans le taxonomie de config.toml</div>
+      </div>
+      <div class="row my-5 card">
+        <code>range where .Site.RegularPages ".Params.Categories"
+          "intersect" (slice "sans-lactose" "sans-gluten"</code>
+        <div class="alert-info small"></div>
+        {{ range where .Site.RegularPages ".Params.regime" "intersect"
+        (slice "sans-lactose"  "sans-gluten" ) }}
+        <div><a href="{{.Permalink}}">{{.Title}}
+          </a></div>
+        {{ end -}}
+      </div>
+      <div class="row card mb-5">
+        <span class="alert-info small">Liste les pages contenant les
+          paramettres "vegan" et "sans-gluten" dans le
+          .params "regime"
+          (possibilité d'utilisé qu'un seul tag; a utiliser lorsque les
+          paramettre sont contenu dans un array ?)</span>
+        <code>
+          $t := slice "vegan" "sans-gluten" <br>
+          range where .Site.Pages ".Params.regime" "intersect" $t
+        </code>
+        {{ $t := slice "vegan" "sans-gluten" "s" }}
+        {{ range where .Site.Pages ".Params.regime" "intersect" $t }}
+        <div>
+          <a href="{{ .Permalink }}">{{ .Title }}</a> - <span class="small">{{.Params.regime}}</span>
+        </div>
+        {{ end }}
+      </div>
+      <div class="row mb-5 card">
+        <code>range .Sites.RegularPages <br> if .Params.regime </code>
+        <div class="alert-info small">Affiche les pages "single" (pas les
+          "lists") de tout le site, si elle contienne la
+          taxonomie (.Params, defini dans frontmatter des pages) 'regime'
+        </div>
+        {{range .Site.RegularPages }}
+        {{if eq .Params.regime "Froid"}}
+        <div><a href="{{.Permalink}}">{{.Title}}
+          </a></div>
+        {{end}}
+        {{ end -}}
+      </div>
+
+      
+      <div class="h4">GetPage</div>
+        <div class=" card">
+        <code>              
+        with .GetPage "recettes/plat/pain-de-yucca" .Title end
+      </code>
+      <div>{{with .GetPage "recettes/plat/pain-de-yucca" }} {{.Title}} {{end}}</div>
+    </div>
+        
+        <code>with .Site.GetPage "recettes/plat/pain-de-yucca" .Title end</code>
+        <div>{{with .Site.GetPage "recettes/plat/pain-de-yucca" }} {{.Title}} {{end}}</div>
+       
+        <code>with site.GetPage "recettes/plat/pain-de-yucca" .Title end</code>
+        <div>{{with site.GetPage "recettes/plat/pain-de-yucca" }} {{.Title}} {{end}}</div>
+        <span class="alert-info small">Utiliser site plutot que .Site pour sortir du contexte ?; dans le cas ou on est dans un .range</span>
+
+        <code>with site.GetPage "recettes/plat/pain-de-yucca" .Title end</code>
+        <div>{{with site.GetPage "recettes/plat/pain-de-yucca" }} {{.Title}} {{end}}</div>
+
+        <br>
+        <h4>test</h4>
+          {{ range $key, $value := index .Site.Taxonomies.regime "vegan" }}
+          <li>{{.Title}} {{.Params.regime}}</li>
+          {{ end }}
+<br>
+        <div class="card mb-5">
+          <code>range .Site.Pages range .Data.Terms.Alphabetical </code>
+            {{ range .Site.Pages }}
+            {{ range .Data.Terms.Alphabetical }}
+            <li>
+              <a href="{{ .Page.Title | urlize}}">{{ .Page.Title }}
+                <span>{{ .Count }}</span>
+              </a>
+            </li>
+            {{ end }}
+            {{ end }}
+        </div>
+
+<div class="card mb-5">
+  <code> range where (where site.Pages "Type" "plat") "Params.specialite" "!=" nil</code>
+  {{ range where (where site.Pages "Type" "plat") "Params.temperature" "!=" "Froid"  }}
+  {{ if (eq .Params.cuisson "Oui") }}
+  <li>{{ .Title }}</li>
+  {{end}}
+  {{end}}
+</div>
+
+{{/*  <div class="card mb-5">
+  <code> with site.GetPage (printf "/%s" .Section) ...</code>
+  {{ with .Site.GetPage (printf "/%s" .Page.Section) }}
+  {{ $sections := .Sections }}
+  {{ range where $sections }}
+  <li><a href="{{ .Permalink }}">{{ .Title }}</a></li>
+  {{ end }}
+  {{end}}
+
+</div>  */}}
+
+
+
+      {{ end }}

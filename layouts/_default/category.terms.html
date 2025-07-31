@@ -1,0 +1,54 @@
+{{ define "main" }}
+
+<div class="container" role="main">
+    <div class="row">
+      {{ if not hugo.IsProduction }}
+      <h5>/layout/_default/category.terms</h5>
+      {{ end }}
+
+    <div class="h2">{{.Title}}</div>
+    <h3>1</h3>
+    {{- $taxo := (printf .Title | lower ) -}}
+    {{ range $taxonomy_term, $taxonomy := (index .Site.Taxonomies $taxo ) }}
+
+    <div class="col-lg-4">
+    
+      <div class="card recipe-card card-recette">
+        <aside>
+          <a href="{{ print "/" $taxo "/" ($taxonomy_term | urlize )}}">
+            {{ $imageCheck := (print "static/images/" $taxonomy_term ".webp") }}
+            {{ if os.FileExists $imageCheck }}
+            {{ $image := (print "/images/" $taxonomy_term ".webp") }}
+            <img class="card-image img-fluid img-cover" src="{{$image}}" />
+            {{else}}
+            {{ $image := (print "/images/no-img.webp") }}
+            <img class="card-image img-fluid img-cover" src="{{$image}}" />
+            {{end}}
+            <div class="card-recipe-title">
+              <div class="h4 my-0">{{ $taxonomy_term }}</div>
+              <div class="small">> Explorer parmis les {{ len $taxonomy_term}} recettes</div>
+    
+        </aside>
+        <div class="muted fw-light small text-decoration-none text-center mt-3 ">Dernieres recettes publiées :</div>
+        <div class="card-body">
+          <a href="{{ print "/" $taxo "/" ($taxonomy_term | urlize )}}" class="stretched-link"></a>
+          {{ range first 5 $taxonomy }}
+          <div class="card card-recette z-index-2">
+            <a href="{{.Permalink}}" class="stretched-link"></a>
+            <div>
+              <div class="fw-bold">{{.Title}}</div>
+              {{/* {{if .Params.regime}} {{ range .Params.regime }}
+              <span class="fs-xx-sm badge bg-grey"> {{.}} </span>
+              {{ end }} {{end}} */}}
+            </div>
+            </a>
+          </div>
+          {{ end }}
+        </div>
+      </div>
+    </div>
+
+    {{end}}
+   
+
+{{ end }}

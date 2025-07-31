@@ -1,0 +1,13 @@
+{{ $allergenes := newScratch }}
+{{- range $.Site.Data.ingredients -}}
+  {{- range .ingredients -}}
+    {{- if .alergenesIng -}}
+      {{- $ingTitle := .title -}}
+      {{ range .alergenesIng -}}
+           {{$allergenes.Add . (slice $ingTitle)}}
+      {{ end }}    
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+{{ return $allergenes }}

@@ -1,0 +1,28 @@
+// Red-Pink palette (personals settings)
+
+$red-primary-0: #A83944;	// Main Primary color */
+$red-primary-1: #F7A6AE;
+$red-primary-2: #D16973;
+$red-primary-3: #811721;
+$red-primary-4: #570109;
+
+
+$primary: $red-primary-0;
+$primary-1: $red-primary-1;
+$primary-2: $red-primary-2;
+$primary-3: $red-primary-3;
+$primary-4: $red-primary-4;
+
+// Links
+//
+// Style anchor elements.
+
+$link-color: $primary;
+$link-decoration: none;
+$link-shade-percentage: 20%;
+$link-hover-color: shift-color($link-color, $link-shade-percentage);
+$link-hover-decoration: underline;
+$stretched-link-pseudo-element: after;
+$stretched-link-z-index: 1;
+
+$paragraph-margin-bottom:   0.8rem;

@@ -1,0 +1,37 @@
+{{ $vmodel := .vmodel }}
+{{ $label := .label }}
+
+
+
+<div class="row mb-2 align-items-center">
+  <div class="col-8 px-0">
+    <div class="form-floating mb-1 ">
+      <select class="form-select" v-model="font{{$vmodel | string }}" id="floatingSelect-{{- $vmodel  | string -}}" aria-label="Floating label select Police : {{ .label }}">
+        <option value="">SansMS</option>
+        <option value="noDisplay">Ne Pas Afficher</option>
+        <option value="montserrat-font" selected>Montserrat</option>
+        <option value="fira-sans-bold">Fira-Sans</option>
+        <option value="gluten-font">Gluten</option>
+        <option value="pacifico-regular">Pacifico</option>
+      </select>
+      <label for="floatingSelect-{{$vmodel}}">{{ .label }} </label>
+    </div>
+    </div>
+    <div class="col-4 p-1">
+      <div class="form mb-1">
+        <select class="form-select" v-model="fontSize{{$vmodel}}" id="floatingSelect-{{$vmodel}}-Size" aria-label="Floating label select Font Size">
+          <option value="font-size: 12px">12</option>
+          <option value="font-size: 14px">14</option>
+          <option value="font-size: 16px">16</option>
+          <option value="font-size: 18px">18</option>
+          <option value="font-size: 20px">20</option>
+          <option value="font-size: 24px">24</option>
+          <option value="font-size: 28px">28</option>
+          <option value="font-size: 32px">32</option>
+          <option value="font-size: 36px">36</option>
+          <option value="font-size: 40px">40</option>
+          <option value="font-size: 44px">44</option>
+        </select>
+      </div>
+    </div>
+  </div>

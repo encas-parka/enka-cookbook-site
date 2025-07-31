@@ -1,11 +1,10 @@
 backend:
 
-  # Interface decap cms avec graphql et auth.js/supabase avec open_authoring
+  # Interface decap cms avec graphql et auth.js/supabase avec open_authoring / editorial_workflow
 
   name: github
   repo: encas-parka/enka-cookbook-site
   branch: supabase
-
 
   #Permettre un PR sur github sans l'acces aux dépot (github only)
   open_authoring: true
@@ -18,7 +17,7 @@ backend:
 
 #By default, saving a post in the CMS interface pushes a commit directly to the publication branch specified in backend.
 # This line should *not* be indented
-# publish_mode: simple
+publish_mode: editorial_workflow
 
 logo_url: https://enka-cookbook.netlify.app/cover.png
 

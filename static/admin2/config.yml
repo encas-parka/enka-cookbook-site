@@ -2,10 +2,10 @@ backend:
   # name: git-gateway
   name: github
   repo: encas-parka/enka-cookbook-site
-  branch: main
+  branch: ingmerged
 
-  # URL de la fonction Edge Supabase
-  proxy_url: https://mkkrfozercivwnbmqfqe.supabase.co/functions/v1/proxy-github
+  base_url: https://sveltia-cms-auth.encas-cookbook.workers.dev/
+
 
 
   #Permettre un PR sur github sans l'acces aux dépot (github only)
@@ -216,7 +216,7 @@ collections:
       ################################
       ## ::: __Ingredients de la recette ##
 
-      # ::: test merge 
+      # ::: test merge
 
       - label: "IngredientsALL"
         name: "ingredientsALL"

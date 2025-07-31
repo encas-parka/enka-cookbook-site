@@ -16,7 +16,7 @@ enableRobotsTXT: true
 languageCode: fr-FR
 defaultContentLanguage: fr
 defaultContentLang: fr
-paginate: 24
+
 rssLimit: 10
 
 outputs:
@@ -152,3 +152,10 @@ module:
   # imports:
   #   - path: "github.com/encas-parka/hugo-cookbook-theme"
   #     disable: false
+
+  imports:
+    - path: github.com/thkukuk/hugo-photoswipe5-gallery
+      disable: false
+    - path: github.com/hugomods/bootstrap
+    - path: github.com/hugomods/images
+      disable: false

@@ -1,42 +1,55 @@
 import { createClient } from 'supabase'
 
-// Fonction principale qui gère toutes les requêtes
+function getCorsHeaders() {
+  return {
+    'Access-Control-Allow-Origin': '*', // Ou votre domaine de production
+    'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
+    'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+  }
+}
+
 Deno.serve(async (req) => {
-  // Gérer la requête CORS "preflight" que le navigateur envoie en premier
+  // Gérer la requête CORS preflight
   if (req.method === 'OPTIONS') {
     return new Response('ok', { headers: getCorsHeaders() })
   }
 
   try {
-    // 1. VÉRIFICATION DE L'AUTHENTIFICATION (la magie de l'intégration)
+    // 1. VÉRIFIER LA PRÉSENCE DE L'EN-TÊTE D'AUTHENTIFICATION
+    const authHeader = req.headers.get('Authorization');
+    if (!authHeader) {
+      console.error("[Proxy Auth] Erreur: En-tête 'Authorization' manquant.");
+      return new Response("En-tête d'authentification manquant.", { status: 401, headers: getCorsHeaders() });
+    }
+    console.log("[Proxy Auth] En-tête 'Authorization' trouvé.");
+
+    // 2. VALIDER L'UTILISATEUR AUPRÈS DE SUPABASE
     const supabaseClient = createClient(
       Deno.env.get('SUPABASE_URL')!,
       Deno.env.get('SUPABASE_ANON_KEY')!,
-      { global: { headers: { Authorization: req.headers.get('Authorization')! } } }
-    )
+      { global: { headers: { Authorization: authHeader } } }
+    );
 
-    const { data: { user }, error } = await supabaseClient.auth.getUser()
+    const { data: { user }, error: userError } = await supabaseClient.auth.getUser();
 
-    if (error || !user) {
-      console.error("Auth Error:", error?.message);
-      return new Response("Accès non autorisé. L'utilisateur n'est pas connecté.", { status: 401, headers: getCorsHeaders() })
+    if (userError || !user) {
+      console.error("[Proxy Auth] Erreur de validation de l'utilisateur:", userError?.message);
+      return new Response("Jeton d'authentification invalide ou expiré.", { status: 401, headers: getCorsHeaders() });
     }
+    console.log(`[Proxy Auth] Utilisateur validé: ${user.email}`);
 
-    console.log(`[Proxy] Requête de ${user.email} reçue.`);
-
-    // 2. RELAIS SÉCURISÉ VERS GITHUB
-    const githubPat = Deno.env.get('GITHUB_PAT')
+    // 3. RELAYER LA REQUÊTE VERS GITHUB
+    const githubPat = Deno.env.get('GITHUB_PAT');
     if (!githubPat) {
-      console.error("FATAL: Le secret GITHUB_PAT n'est pas défini dans Supabase.");
+      console.error("[Proxy GitHub] FATAL: Le secret GITHUB_PAT n'est pas défini.");
       return new Response("Erreur de configuration du serveur proxy.", { status: 500, headers: getCorsHeaders() });
     }
+    console.log(`[Proxy GitHub] Relais de la requête pour ${user.email} vers l'API GitHub.`);
 
-    // Reconstruit l'URL cible de l'API GitHub
-    const url = new URL(req.url)
-    const targetPath = url.pathname.replace(/^\/functions\/v1\/proxy-github/, '')
-    const targetUrl = `https://api.github.com${targetPath}${url.search}`
+    const url = new URL(req.url);
+    const targetPath = url.pathname.replace(/^\/functions\/v1\/proxy-github/, '');
+    const targetUrl = `https://api.github.com${targetPath}${url.search}`;
 
-    // Crée une nouvelle requête pour GitHub
     const githubReq = new Request(targetUrl, {
       method: req.method,
       headers: {
@@ -47,29 +60,23 @@ Deno.serve(async (req) => {
       body: req.body,
     });
 
-    // Envoie la requête à GitHub
     const githubRes = await fetch(githubReq);
+    console.log(`[Proxy GitHub] Réponse de GitHub reçue avec le statut: ${githubRes.status}`);
 
-    // 3. RETOUR DE LA RÉPONSE À DECAP CMS
-    // Il faut recréer une réponse pour pouvoir y ajouter nos en-têtes CORS
-    const response = new Response(githubRes.body, {
+    // 4. RETOURNER LA RÉPONSE DE GITHUB À DECAP CMS
+    // Important: Il faut recréer les en-têtes pour inclure nos propres en-têtes CORS
+    const responseHeaders = new Headers(githubRes.headers);
+    Object.entries(getCorsHeaders()).forEach(([key, value]) => {
+      responseHeaders.set(key, value);
+    });
+
+    return new Response(githubRes.body, {
       status: githubRes.status,
-      headers: { ...getCorsHeaders(), 'Content-Type': githubRes.headers.get('Content-Type')! },
-    })
-
-    return response
+      headers: responseHeaders,
+    });
 
   } catch (err) {
-    console.error("[Proxy] Erreur inattendue:", err);
-    return new Response(JSON.stringify({ message: "Erreur interne du proxy.", details: err.message }), { status: 500, headers: getCorsHeaders() });
+    console.error("[Proxy] Erreur globale inattendue:", err);
+    return new Response(JSON.stringify({ message: "Erreur interne du proxy.", details: err.message }), { status: 502, headers: getCorsHeaders() });
   }
-})
-
-// Fonction utilitaire pour centraliser les en-têtes CORS
-function getCorsHeaders() {
-  return {
-    'Access-Control-Allow-Origin': '*', // Pour le développement. En production, remplacez par l'URL de votre site : 'https://mon-site.pages.dev'
-    'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
-    'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
-  }
-}
+});

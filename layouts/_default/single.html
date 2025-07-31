@@ -1,0 +1,16 @@
+{{ define "main" }}
+
+{{- if hugo.IsDevelopment -}}
+<span class="no-print text-muted">{{ hugo.Environment }} |  Layout : layouts/_default/single.html </span>
+{{- end -}}
+
+<h1>{{.Title}}</h1>
+<div>
+  Categorie: {{.Type}}
+</div>
+
+{{/* lien vers le CMS de la page */}}
+{{ $linkCMSPage := (path.Join "/admin/#/collections/Recettes/entries/" (.Params.type) (.Title | urlize)) }}
+<div class="text-end mx-2 px-2"><a target="_blank" rel="noopener noreferrer" href="{{$linkCMSPage}}/index" >Modifier</a></div>
+
+{{ end }}

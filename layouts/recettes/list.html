@@ -1,0 +1,767 @@
+{{ define "main" }}
+
+{{/*  BUG : partial non pris en compte car les pages recettes ont un params "type" ?  */}}
+
+{{ if not hugo.IsProduction }}
+<span class="no-print text-muted">{{ hugo.Environment }}  | Layout : layouts/recettes/list.html </span>
+{{ end }}
+
+{{ $iCategories := slice }}
+{{ $isec := slice}}
+{{ $ianimaux := slice }}
+{{ $ilegumes := slice }}
+{{ $isucres := slice }}
+{{ $ilof := slice }}
+{{ $ifrais := slice }}
+{{ $iautres := slice }}
+
+{{- $IngredientList := slice -}}
+
+{{- range .RegularPagesRecursive -}}
+
+{{- range .Params.categories -}}
+  {{ $iCategories = $iCategories | append . }}
+{{- end -}}
+{{/* Liste des ingredients par type: pour le multi-select, et les data de l'appfilter */}}
+{{- range .Params.ingredients.sec -}}
+{{ $isec = $isec | append .title }}
+{{- end -}}
+
+{{- range .Params.ingredients.animaux -}}
+{{ $ianimaux = $ianimaux | append .title }}
+{{- end -}}
+
+{{- range .Params.ingredients.legumes -}}
+{{ $ilegumes = $ilegumes | append .title }}
+{{- end -}}
+
+{{- range .Params.ingredients.sucres -}}
+{{ $isucres = $isucres | append .title }}
+{{- end -}}
+
+{{- range .Params.ingredients.lof -}}
+{{ $ilof = $ilof | append .title }}
+{{- end -}}
+
+{{- range .Params.ingredients.frais -}}
+{{ $ifrais = $ifrais | append .title }}
+{{- end }}
+
+{{- range .Params.ingredients.autres -}}
+{{ $iautres = $iautres | append .title }}
+{{- end }}
+
+
+  {{- range $key, $value := .Params.ingredients -}}
+    {{- range $index, $element := . -}}
+    {{- $IngredientList = $IngredientList | append (dict "ingredient" .title) -}}
+    {{- end -}}
+  {{ end }}
+
+{{ end }}
+
+{{ $iCategories = $iCategories | uniq }}
+
+{{ $isec = $isec | uniq }}
+{{ $ianimaux = $ianimaux | uniq }}
+{{ $ilegumes = $ilegumes | uniq }}
+{{ $isucres = $isucres | uniq }}
+{{ $ilof = $ilof | uniq }}
+{{ $ifrais = $ifrais | uniq }}
+{{ $iautres = $iautres | uniq }}
+
+
+
+<div id="app">
+  <a href="#" class="scroll-to-top" title="Scroll to top"></a>
+
+  <div class="container">
+    {{/* <div class="my-12">
+      {{ $image := resources.Get "/images/example.svg" }}
+      <img src="{{ $image.RelPermalink }}" alt="" class="w-96">
+    </div> */}}
+    <div class="row">
+      <div class="col-lg-4 col-md-4 mt-5" :class="{ opacify: disableFilters }"> {{/* Filtre SIDE */}}
+        {{/*  <div>
+          <label>
+            <input type="checkbox" v-model="additiveFiltering" />
+            <span>Additionner les Filtres</span>
+          </label>
+        </div>  */}}
+        <div class="btn btn-warning my-2" @click="resetFilters">Effacer tous les filtres</div>
+          <div class="filters box">
+              <div class="row">
+              <div class="col-12">
+                <div class="mb-4">
+                  <select id="MsCategories">
+                    {{- range $iCategories -}}
+                    <option>{{ . }}</option>
+                    {{ end }}
+                  </select>
+                </div>
+              </div>
+
+            <div class="col-12">
+              <h4>Régimes</h4>
+              <div v-for="regime in allregimes" :key="regime">
+                <label>
+                  <input type="checkbox" v-model="filters['regimes']" :value="regime" />
+                  <span>[[regime]]</span>
+                </label>
+              </div>
+            </div>
+            </div>
+            </div>
+            <div class=""></div>
+        <div class="filters box">
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <h4>Testé</h4> <!-- TODO -->
+              <div v-for="check in allcheck" :key="check">
+                <label v-show="(check === 'Oui')">
+                  <input type="checkbox" v-model="filters['check']" :value="check"/>
+                  <span>[[check]]</span>
+                </label>
+              </div>
+            </div>
+            <div class="col-md-6 mb-3">
+              <h4>Service</h4>
+              <div v-for="temperature in alltemperature" :key="temperature">
+                <label>
+                  <input type="checkbox" v-model="filters['temperature']" :value="temperature" />
+                  <span>[[temperature]]</span>
+                </label>
+              </div>
+            </div>
+            <div class="col-md-6 mb-3">
+              <h4>Cuisson</h4>
+              <div v-for="cuisson in allcuisson" :key="cuisson">
+                <label>
+                  <input type="checkbox" v-model="filters['cuisson']" :value="cuisson" />
+                  <span>[[cuisson]]</span>
+                </label>
+              </div>
+            </div>
+            <div class="col-md-6 mb-3">
+              <h4>Saisons</h4>
+              <div v-for="saison in allsaison" :key="saison">
+                <label>
+                  <input type="checkbox" v-model="filters['saison']" :value="saison" />
+                  <span>[[saison]]</span>
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {{/*  :::_MultiSelect ingredients  */}}
+        <div class="filters box">
+          <div class="row">
+            <div class="my-2" v-if="allisec.length">
+              <select id="MsSec">
+                {{ range $isec }}
+                <option>{{ . }}</option>
+                {{ end }}
+              </select>
+            </div>
+            <div class="my-2" v-if="allilof.length" >
+              <select id="MsLof">
+                {{ range $ilof }}
+                <option>{{ . }}</option>
+                {{ end }}
+              </select>
+            </div>
+            <div class="my-2" v-if="allilegumes.length">
+              <select id="MsLegume">
+                {{ range $ilegumes }}
+                <option>{{ . }}</option>
+                {{ end }}
+              </select>
+            </div>
+            <div class="my-2" v-if="allianimaux.length">
+              <select id="MsAnimaux">
+                {{ range $ianimaux }}
+                <option>{{ . }}</option>
+                {{ end }}
+              </select>
+            </div>
+            <div class="my-2" v-if="allisucre.length">
+              <select id="MsSucre">
+                {{ range $isucres }}
+                <option>{{ . }}</option>
+                {{ end }}
+              </select>
+            </div>
+            <div class="my-2" v-if="allifrais.length">
+              <select id="MsFrais">
+                {{ range $ifrais }}
+                <option>{{ . }}</option>
+                {{ end }}
+              </select>
+            </div>
+            <div class="my-2" v-if="alliautres.length">
+              <select id="MsAutres">
+                {{ range $iautres }}
+                <option>{{ . }}</option>
+                {{ end }}
+              </select>
+            </div>
+          </div>
+          </div>
+      </div>
+      
+      <div class="col-lg-8 col-md-8"> 
+        <nav class="nav nav-underline nav-fill my-4">
+          {{ if eq .Title "Recettes" }}
+            <a class="nav-link active fw-bold" aria-current="page" href="#">Toutes les recettes</a>
+          {{else}}
+            <a class="nav-link fw-bold" href="/recettes">Toutes les recettes</a></a>
+          {{ end }}
+
+          {{ $thispage := .Title }}
+          
+          {{ range  (.Site.GetPage "section" "recettes").Pages }}
+            {{ if eq .Title $thispage }}
+              <a class="nav-link active fw-bold" aria-current="page" href="#">{{.Title}}</a>
+            {{ else }}
+               <a class="nav-link fw-bold" href="{{.RelPermalink}}">{{.Title}}</a></a>
+            {{ end }}
+          
+          {{ end }}
+      
+        </nav>      
+        
+        <div class="row">
+      {{/* ::: Champs de recherche */}}
+        <div class="input-group my-4">
+          <input
+          class="form-control"
+          type="text"
+          v-model="searchQuery"
+          placeholder="Rechercher...  (parmis les titres, auteur·ices, spécialités. Désactive les filtres sélectionnés)"
+          />
+          <button class="btn btn-outline-secondary" type="button" @click="resetSearch">X</button>
+        </div>
+        
+        <div class="card card-body mb-2 ms-3" v-show="filteredRecipes.length != recipes.length">
+          <div class="py-1">
+             <span v-show="filteredRecipes.length > 1">
+              [[filteredRecipes.length]] recettes correspondent aux critères de recherche:
+            </span>
+            <span v-show="filteredRecipes.length === 1">
+              [[filteredRecipes.length]] reccette correspond aux critères de recherche:
+            </span>
+            <div v-show="filteredRecipes.length === 0">
+              Aucune recette ne correspond aux critères de recherche...
+            </div>
+          </div>
+          <div v-if="searchQuery.length >= 2" class="d-inline"><span class="fw-italic text-muted" > contient (dans son titre/auteur·ice...): </span> <span class="fw-bold">[[searchQuery]]</span> </div>
+          <div v-show="searchQuery.length < 2">
+            <div v-show="filters.categories.length > 0" v-for="(item, index) in filters.categories" class="d-inline"><span class="badge  mx-1 bg-green">[[item]]</span> <span class="small" v-show="index+1 !=  filters.categories.length"> ou </span>
+            </div>
+            <span class="fw-bold" v-show="filters.categories.length > 0"> et </span>
+            <div v-show="filters.regimes.length > 0" v-for="(item, index) in filters.regimes" class="d-inline"><span class="badge  mx-1 bg-grey">[[item]]</span> <span class="small" v-show="index+1 !=  filters.regimes.length"> ou </span></div>
+            <span class="fw-bold" v-show="filters.regimes.length > 0"> et </span>
+            <div v-show="filters.temperature.length > 0" v-for="(item, index) in filters.temperature" class="d-inline"><span v-if="item === 'Chaud'" class="badge  mx-1 bg-orange">Servir Chaud</span>
+            <span v-else class="badge  mx-1 bg-blue">Servir Froid</span> <span class="small" v-show="index+1 !=  filters.temperature.length"> ou </span></div>
+            <span class="fw-bold" v-show="filters.temperature.length > 0"> et </span>
+            <div v-show="filters.cuisson.length > 0" v-for="(item, index) in filters.cuisson" class="d-inline"><span v-if="item === 'Oui'" class="badge  mx-1 bg-orange">Avec Cuisson</span>
+            <span v-else class="badge  mx-1 bg-blue">Sans Cuisson</span> <span class="small" v-show="index+1 !=  filters.cuisson.length"> ou </span></div>
+            <span class="fw-bold" v-show="filters.cuisson.length > 0"> et </span>
+            <div v-show="filters.saison.length > 0" v-for="(item, index) in filters.saison" class="d-inline"><span class="badge  mx-1 bg-grey">[[item]]</span> <span class="small" v-show="index+1 !=  filters.saison.length"> ou </span></div>
+            <span class="fw-bold" v-show="filters.saison.length > 0"> et </span>
+            <div v-show="filters.ilegumes.length > 0" v-for="(item, index) in filters.ilegumes" class="d-inline"><span class="badge  mx-1 bg-green">[[item]]</span> <span class="small" v-show="index+1 !=  filters.ilegumes.length"> ou </span></div>
+            <span class="fw-bold" v-show="filters.ilegumes.length > 0"> et </span>
+            <div v-show="filters.ianimaux.length > 0" v-for="(item, index) in filters.ianimaux" class="d-inline"><span
+                class="badge  mx-1 bg-grey">[[item]]</span> <span class="small" v-show="index+1 !=  filters.ianimaux.length"> ou </span></div>
+            <span class="fw-bold" v-show="filters.ianimaux.length > 0"> et </span>
+            <div v-show="filters.isec.length > 0" v-for="(item, index) in filters.isec" class="d-inline"><span
+                class="badge  mx-1 bg-grey">[[item]]</span> <span class="small" v-show="index+1 !=  filters.isec.length"> ou </span></div>
+            <span class="fw-bold" v-show="filters.isec.length > 0"> et </span>
+            <div v-show="filters.ilof.length > 0" v-for="(item, index) in filters.ilof" class="d-inline"><span
+                class="badge  mx-1 bg-grey">[[item]]</span> <span class="small" v-show="index+1 !=  filters.ilof.length"> ou </span></div>
+            <div v-show="filters.isucre.length > 0" v-for="(item, index) in filters.isucre" class="d-inline"><span
+              class="badge  mx-1 bg-grey">[[item]]</span> <span class="small" v-show="index+1 !=  filters.isucre.length"> ou </span></div>
+              <span v-show="filters" class="small text-muted">...</span>
+            </div>
+            <div class="btn btn-warning my-2 btn-sm " @click="resetFilters">Effacer tous les filtres</div>
+        </div> 
+
+
+        {{/* :::recettes CARDS  */}}
+        <div  
+        class="fhide card card-recette my-3 ms-md-3 p-3"
+        v-for="(recipe, key) in recipes"
+        :key="key"
+        :class="{fshow: filteredRecipes.includes(recipe)}"
+        >
+        <a :href="[[recipe.url]]" class="stretched-link"></a>
+
+        <span class="h4">
+          <a :href="[[recipe.url]]"> [[recipe.title]]</a>
+        </span>
+        <span class="float-end mt-1">
+          <span class="badge bg-red">[[recipe.type]]</span>
+          <span class="badge bg-green me-1 " v-for="categorie in recipe.categories" :key="categorie">[[categorie]]</span>
+          <span class="badge bg-pink me-1 " v-for="saison in recipe.saison" :key="saison">[[saison]]</span>
+          <span class="text-muted small">[[recipe.specialite]]
+          </span>
+        </span>
+        <div class="small text-muted"> 
+          <span v-if="recipe.auteur">par [[recipe.auteur]] - </span>
+          <span v-if="recipe.check === 'Oui'"> testées pour [[recipe.plate]]  <span v-if="recipe.checkfor"> à [[recipe.checkfor]]</span> couverts</span>
+          <span v-else> théoriquement pour [[recipe.plate]] couverts <span class="fw-bold"> (non testé !)</span></span>
+        </div>
+        <div class="my-3">
+          <span v-if="recipe.temperature === 'Chaud'" class="badge bg-orange">Servir Chaud</span>
+          <span v-else class="badge bg-blue">Servir Froid</span>
+          <span v-if="recipe.cuisson === 'Oui'" class="badge bg-orange">Avec Cuisson</span>
+          <span v-else class="badge bg-blue">Sans Cuisson</span>
+            <span class="float-end badge bg-grey mx-1" v-for="regime in recipe.regimes" :key="regime">
+              [[regime]]
+            </span>
+        </div>
+      <div class="p-2">
+        <span class="fw-bold">Ingrédients :</span>
+        <span class="small" v-for="legumes in recipe.ilegumes" :key="legumes"
+        :class="{'fw-bold text-decoration-underline': filteredLegumes.includes(legumes)}">[[legumes]] - </span>
+        <span class="small" v-for="sec in recipe.isec" :key="sec" :class="{'fw-bold text-decoration-underline': filteredSec.includes(sec)}">[[sec]] - </span>
+        <span class="small" v-for="animaux in recipe.ianimaux" :key="animaux"
+        :class="{'fw-bold text-decoration-underline': filteredAnimaux.includes(animaux)}">[[animaux]] - </span>
+        <span class="small" v-for="lof in recipe.ilof" :key="lof" :class="{'fw-bold text-decoration-underline': filteredLof.includes(lof)}">[[lof]] - </span>
+        <span class="small" v-for="sucre in recipe.isucre" :key="sucre" :class="{'fw-bold text-decoration-underline': filteredSucre.includes(sucre)}">[[sucre]] - </span>
+        <span>...</span>
+        <div v-if="recipe.materiel.length" class="my-1">
+          <span class="fw-bold">Matériel :</span>
+          <span v-for="materiel in recipe.materiel" :key="materiel" class="small">[[materiel]] - </span>
+        </div>
+      </div>
+  </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+{{/*  <style> 
+  .opacify{
+    opacity : 0.33;
+  }
+</style>  */}}
+
+{{ $multiselectCss := resources.Get "multiselect/multi-select.css" }}
+<link rel="stylesheet" href="{{ $multiselectCss.Permalink }}">
+
+
+
+{{/*  :::SCRIPT VUE  */}}
+
+<script>
+
+  const app = Vue.createApp({
+    delimiters: ['[[', ']]'],
+    el: '#app',
+    data() {
+      return {
+        recettes: [
+        
+        {{- range sort .RegularPagesRecursive ".Title" -}}
+        
+        {
+          title: "{{ .Title }}",
+          url: "{{ .RelPermalink }}",
+          type: "{{ .Params.type }}",
+          auteur: "{{.Params.auteur}}",
+          specialite: "{{.Params.spécialité}}",
+          plate: "{{.Params.plate}}",
+          {{/*  roundplate: "{{ mul (math.Round (div .Params.plate 10)) 10 }}",  */}}
+          check: "{{.Params.check}}",
+          checkfor: "{{ .Params.checkfor }}" ,
+          checkrange: ["{{.Params.plate}}", "{{.Params.checkfor}}"],
+          saison: [{{- range .Params.saison -}} "{{ . }}", {{- end -}}],
+          categories: [ {{ if .Params.categories }} {{- range sort .Params.categories -}} "{{ . }}",{{- end -}} {{- end -}} ],
+          regimes: [ {{- if .Params.regime -}} {{- range sort .Params.regime -}} "{{ . }}", {{- end -}} {{- end -}} ],
+          ilegumes: [{{- range .Params.ingredients.legumes -}} "{{ .title }}",{{- end -}} ],
+          isec: [ {{- range .Params.ingredients.sec -}} "{{ .title }}",{{- end -}} ], 
+          ianimaux: [ {{- range .Params.ingredients.animaux -}} "{{ .title }}",{{- end -}}
+          ],
+          ilof:  [ {{- range .Params.ingredients.lof -}} "{{ .title }}",{{- end -}} ],
+          isucre:  [ {{- range .Params.ingredients.sucres -}} "{{ .title }}",{{- end -}} ],
+          ifrais:  [ {{- range .Params.ingredients.frais -}} "{{ .title }}",{{- end -}} ],
+          iautres:  [ {{- range .Params.ingredients.autres -}} "{{ .title }}",{{- end -}} ],
+          specialite: " {{ .Params.spécialité }}",
+          temperature: "{{ .Params.temperature }}",
+          cuisson: "{{ .Params.cuisson }}",
+          materiel: [ {{- range .Params.materiel -}}  "{{ . }}", {{- end -}} ]
+        },
+        
+        {{- end -}}
+        
+        ],
+        filters: {
+          types: [],
+          categories: [],
+          regimes: [],
+          ilegumes: [],
+          ianimaux: [],
+          isec: [],
+          ilof: [],
+          isucre: [],
+          ifrais: [],
+          iautres: [],
+          cuisson: [],
+          temperature: [],
+          saison: [],
+          check: [],
+        },
+        
+        searchQuery: '',
+        disableFilters: false,
+
+        msCategories: null,
+        msSec: null,
+        msLegumes: null,
+        msAnimaux: null,
+        msLof: null,
+        msSucre: null,
+        msFrais: null,
+        msAutres: null,
+        {{/*  additiveFiltering: false  */}}
+      }
+    },
+
+{{/*  ::: mounted  */}}
+mounted() {
+  {{/*  initialisation du script multiselect : qui permet de filtrer les recettes par ingredients  */}}
+
+  multiSelectCategories: {
+    if (this.allcategories.length > 0) {
+    this.msCategories = new IconicMultiSelect({
+      select: "#MsCategories",
+      placeholder: "Catégories",
+      noResults: "Aucune catégorie trouvée..."
+    });
+    this.msCategories.init();
+    
+    {{/*  fonction fléché obligatoire, sinon perte du contexte this  */}}
+    this.msCategories.subscribe((e) => {
+      console.log(e)
+      this.selectedIng(e.action, "categories", e.value);
+    });
+  }
+  };
+
+  multiSelectSec: {
+    if (this.allisec.length > 0) {
+    this.msSec = new IconicMultiSelect({
+      select: "#MsSec",
+      placeholder: "Ingrédients Sec (céréales, légumineuses)",
+      noResults: "Aucun ingrédient trouvé..."
+    });
+    this.msSec.init();
+    
+    {{/*  fonction fléché obligatoire, sinon perte du contexte this  */}}
+    this.msSec.subscribe((e) => {
+      console.log(e)
+      this.selectedIng(e.action, "isec", e.value);
+    });
+  }
+  };
+  multiSelectLegume: {
+    if (this.allilegumes.length > 0) {
+      this.msLegumes = new IconicMultiSelect({
+        select: "#MsLegume",
+        placeholder: "Fruits et Légumes",
+        noResults: "Aucun ingrédient trouvé..."
+      });
+      this.msLegumes.init();
+      
+      {{/*  fonction fléché obligatoire, sinon perte du contexte this  */}}
+      this.msLegumes.subscribe((e) => {
+        this.selectedIng( e.action, "ilegumes", e.value);
+      });
+    }
+  };
+  multiSelectAnimaux: {
+    if (this.allianimaux.length > 0) {
+      this.msAnimaux = new IconicMultiSelect({
+        select: "#MsAnimaux",
+        placeholder: "Viandes et poissons",
+        noResults: "Aucun ingrédient trouvé..."
+      });
+      this.msAnimaux.init();
+      this.msAnimaux.subscribe((e) => {
+        this.selectedIng( e.action, "ianimaux", e.value);
+      });
+      
+    }
+  };
+
+  multiSelectSucre: {
+    if (this.allisucre.length > 0) {
+      this.msSucre = new IconicMultiSelect({
+        select: "#MsSucre",
+        placeholder: "Ingrédients sucrés",
+        noResults: "Aucun ingrédient trouvé..."
+      });
+      this.msSucre.init();
+      this.msSucre.subscribe((e) => {
+        this.selectedIng( e.action, "isucre", e.value);
+      }); 
+    }
+  };
+  multiSelectLof: {
+    if (this.allilof.length > 0) {
+      this.msLof = new IconicMultiSelect({
+        select: "#MsLof",
+        placeholder: "(LOF) Lait, oeuf, farine, gras",
+        noResults: "Aucun ingrédient trouvé..."
+      });
+      this.msLof.init();
+      this.msLof.subscribe((e) => {
+        this.selectedIng( e.action, "ilof", e.value);
+      });
+    };
+    };
+  multiSelectAutres: {
+    if (this.alliautres.length > 0) {
+      this.msAutres = new IconicMultiSelect({
+        select: "#MsAutres",
+        placeholder: "Autres",
+        noResults: "Aucun ingrédient trouvé..."
+      });
+      this.msAutres.init();
+      this.msAutres.subscribe((e) => {
+        this.selectedIng( e.action, "iautres", e.value);
+      });
+    };
+    };
+  multiSelectFrais: {
+    if (this.allifrais.length > 0) {
+      this.msFrais = new IconicMultiSelect({
+        select: "#MsFrais",
+        placeholder: "Frais",
+        noResults: "Aucun ingrédient …..."
+      });
+      this.msFrais.init();
+      this.msFrais.subscribe((e) => {
+        this.selectedIng( e.action, "ifrais", e.value);
+      });
+    }
+  };
+  
+}, {{/* mounted */}}
+
+watch: {
+
+},
+
+    
+{{/*  :::Computed  */}}
+computed: {
+
+  recipes() { 
+    // TODO : deplacer vers methods: ? Ne dépend pas de donnée réactives.. Voir inutile, et appeler directement data recettes...
+    return this.recettes.map(recipe => ({
+      ...recipe,
+      
+    }))
+  },
+           
+  filteredRecipes() {
+    // Fonction recherche associer à un champ, qui prend en compte plusieurs mots, et recheche dans plusieurs éléments de type string d'un objet 
+
+    if(this.searchQuery.length > 2){
+      this.disableFilters = true;
+      return this.recipes.filter((i) => {
+        return this.searchQuery.toLowerCase().normalize('NFD').replace(/\p{Diacritic}/gu, '').split(' ').every(
+        v => i.title.toLowerCase().normalize('NFD').replace(/\p{Diacritic}/gu, '').includes(v) ||
+        i.auteur.toLowerCase().normalize('NFD').replace(/\p{Diacritic}/gu, '').includes(v) ||
+        i.specialite.toLowerCase().normalize('NFD').replace(/\p{Diacritic}/gu, '').includes(v)
+        
+        );
+      })
+    } else{ 
+      this.disableFilters = false;
+
+      // Filtre les éléments en fonctions des checkbox
+      
+      return this.recipes.filter(
+      {{/*  this.additiveFiltering ?
+      p => this.x(this.filters.categories, p.categories).length ||
+      this.x(this.filters.regimes, p.regimes).length ||
+      this.x(this.filters.ilegumes, p.ilegumes).length ||
+      this.x(this.filters.isec, p.isec).length ||
+      this.x(this.filters.ianimaux, p.ianimaux).length ||
+      this.x(this.filters.ilof, p.ilof).length ||
+      this.x(this.filters.cuisson, p.cuisson).length ||
+      this.x(this.filters.temperature, p.temperature).length ||
+      this.x(this.filters.saison, p.saison).length
+      :  */}}
+      p => (!this.filters.categories.length ||
+      this.x(this.filters.categories, p.categories).length) &&
+      (!this.filters.regimes.length ||
+      this.x(this.filters.regimes, p.regimes).length)  &&
+      (!this.filters.ilegumes.length ||
+      this.x(this.filters.ilegumes, p.ilegumes).length) &&
+      (!this.filters.isec.length ||
+      this.x(this.filters.isec, p.isec).length) &&
+      (!this.filters.ianimaux.length ||
+      this.x(this.filters.ianimaux, p.ianimaux).length)  &&
+      (!this.filters.ilof.length ||
+      this.x(this.filters.ilof, p.ilof).length) &&
+      (!this.filters.isucre.length ||
+      this.x(this.filters.isucre, p.isucre).length) &&
+      (!this.filters.cuisson.length ||
+      this.x(this.filters.cuisson, p.cuisson).length)  &&
+      (!this.filters.temperature.length ||
+      this.x(this.filters.temperature, p.temperature).length)  &&
+      (!this.filters.saison.length ||
+      this.x(this.filters.saison, p.saison).length) &&
+      (!this.filters.check.length ||
+      this.x(this.filters.check, p.check).length) &&
+      (!this.filters.ifrais.length ||
+      this.x(this.filters.ifrais, p.ifrais).length) &&
+      (!this.filters.iautres.length ||
+      this.x(this.filters.iautres, p.iautres).length)
+      
+      );
+    }
+  },
+  // Permet la mise en évidence des ingredients(...) correspondants aux filtres actifs
+  filteredLegumes() {
+    return this.filters.ilegumes
+  },
+  filteredAnimaux() {
+    return this.filters.ianimaux
+  },
+  filteredSec() {
+    return this.filters.isec
+  },
+  filteredLof() {
+    return this.filters.ilof
+  },
+  filteredSucre() {
+    return this.filters.isucre
+  },
+
+  filteredFrais() {
+    return this.filters.ifrais
+  },
+  filteredAutres() {
+    return this.filters.iautres
+  },
+  
+  // Pour la fabrication des boutons de filtres
+  allcategories() {
+    return this.getAll('categories')
+  },
+  allregimes() {
+    return this.getAll('regimes')
+  },
+  allilegumes() {
+    return this.getAll('ilegumes')
+  },
+  allisec() {
+    return this.getAll('isec')
+  },
+  allianimaux() {
+    return this.getAll('ianimaux')
+  },
+  allilof() {
+    return this.getAll('ilof')
+  },
+  allisucre() {
+    return this.getAll('isucre')
+  },
+  allifrais() {
+    return this.getAll('ifrais')
+  },
+  alliautres() {
+    return this.getAll('iautres')
+  },
+  allcuisson(){
+    return this.getAll('cuisson')
+  },
+  alltemperature(){
+    return this.getAll('temperature')
+  },
+  allsaison(){
+    return this.getAll('saison')
+  },
+  allcheck(){
+    return this.getAll('check')
+  },
+  
+},
+    
+{{/*  :::methods  */}}
+methods: {
+  // tags(recipe) {
+    //   return [].concat(recipe.categories, recipe.regimes)
+    // },
+    
+  ingredients(recipe) { // USELESS ?
+    return [].concat(recipe.ilegumes, recipe.isec, recipe.ianimaux, recipe.ilof, recipe.isucre)
+  },
+{{/*          
+  logger(obj) {
+    return JSON.stringify(obj, null, 2)
+  },  */}}
+
+  getAll(prop) {
+    return [...new Set([].concat.apply([], this.recettes.map(item => item[prop])))]
+  },
+  x(arr1, arr2) {
+    return arr1.filter(val => arr2.includes(val))
+  },
+  
+  resetFilters: function () {
+    this.filters['regimes'] = []
+    this.filters['categories'] = []
+    this.filters['ilegumes'] = []
+    this.filters['ianimaux'] = []
+    this.filters['isec'] = []
+    this.filters['ilof'] = []
+    this.filters['isucre'] = []
+    this.filters['ifrais'] = []
+    this.filters['iautres'] = []
+    this.filters['cuisson'] = []
+    this.filters['temperature'] = []
+    this.filters['saison'] = []
+    this.filters['check'] = []
+    this.msCategories._clearSelection()
+    this.msSec._clearSelection()
+    this.msAnimaux._clearSelection()
+    this.msLegumes._clearSelection()
+    this.msLof._clearSelection()
+    this.msSucre._clearSelection()
+    this.msFrais._clearSelection()
+    this.msAutres._clearSelection()
+  },
+  resetSearch: function () {
+    this.searchQuery = '' 
+  },
+
+  selectedIng: function (action, itype, value, ) {
+    const index = this.filters[itype].indexOf(value); // Vérifier si la valeur existe dans le tableau
+    if (action === "ADD_OPTION") {
+      this.filters[itype].push(value)
+    } else if (action === "REMOVE_OPTION") {
+      this.filters[itype].splice(index, 1); 
+    } else if (action === "CLEAR_ALL_OPTIONS") {
+      this.filters[itype] = []
+    }
+  },
+
+}
+
+}
+);
+
+app.mount('#app')
+
+  </script>
+  
+  
+  {{ end }}
+  

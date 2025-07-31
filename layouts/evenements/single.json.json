@@ -1,0 +1,209 @@
+{{- /* layouts/single.json.json */ -}}
+{{- /* Layout pour générer un JSON de liste de courses groupé par type d'ingrédient */ -}}
+{{- /* Compatible avec PocketBase pour les listes collaboratives */ -}}
+
+{{- $IngredientList := slice -}}
+{{- $IngredientTypesRaw := slice -}}
+
+{{- /* Récupération des ingrédients frais depuis les données du site */ -}}
+{{- $legumesFrais := slice -}}
+{{- range $.Site.Data.ingredients -}}
+  {{- range .ingredients -}}
+    {{- if .pFrais -}}
+      {{- $legumesFrais = $legumesFrais | append .title -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+{{- /* Parcours de tous les repas de l'événement */ -}}
+{{- range $.Param "repas" -}}
+  {{- $repasBaseAssiettes := (int .assiettes) -}}
+
+  {{- /* Parcours des recettes du repas */ -}}
+  {{- range .recettes_du_repas -}}
+    {{- $assiettesPourCalcul := $repasBaseAssiettes -}}
+    {{- if .altAssiettes -}}
+      {{- $assiettesPourCalcul = (int .altAssiettes) -}}
+    {{- end -}}
+
+    {{- $url := print .recette | urlize -}}
+
+    {{- with site.GetPage $url -}}
+      {{- $assiettesRecetteOriginale := .Params.plate -}}
+
+      {{- range $key, $value := .Params.ingredients -}}
+        {{- range $index, $element := . -}}
+          {{- if and .title (ne .title "") -}}
+            {{- $quantiteCompute := 0.0 -}}
+            {{- $isComputable := true -}}
+
+            {{- if .quantite -}}
+              {{- $quantiteNum := .quantite | float -}}
+              {{- $assiettesNumPourCalcul := $assiettesPourCalcul | float -}}
+              {{- $plateValRecetteOriginale := 0.0 -}}
+              {{- if $assiettesRecetteOriginale -}}
+                {{- $plateValRecetteOriginale = float $assiettesRecetteOriginale -}}
+              {{- end -}}
+              {{- $numerator := mul $quantiteNum $assiettesNumPourCalcul -}}
+
+              {{- if gt $plateValRecetteOriginale 0.0 -}}
+                {{- $rawCompute := div $numerator $plateValRecetteOriginale -}}
+                {{- /* --- CORRECTION ARRONDI --- */ -}}
+                {{- /* On arrondit immédiatement à 4 décimales pour la précision des calculs suivants */ -}}
+                {{- $quantiteCompute = div (math.Round (mul $rawCompute 10000)) 10000.0 -}}
+              {{- else -}}
+                {{- if eq $numerator 0.0 -}}
+                  {{- $quantiteCompute = float 0.0 -}}
+                {{- else -}}
+                  {{- $isComputable = false -}}
+                {{- end -}}
+              {{- end -}}
+            {{- else -}}
+              {{- $isComputable = false -}}
+            {{- end -}}
+
+            {{- $iType := $key | strings.FirstUpper -}}
+            {{- if and (or (eq $key "legumes") (eq $key "epices")) (in $legumesFrais .title) -}}
+              {{- $iType = "Legumesfrais" -}}
+            {{- end -}}
+
+            {{- $IngredientList = $IngredientList | append (dict
+              "ingredient" .title
+              "computed_quantite" $quantiteCompute
+              "unit" (.unit | default "")
+              "ingType" $iType
+              "is_computable" $isComputable
+            ) -}}
+            {{- $IngredientTypesRaw = $IngredientTypesRaw | append $iType -}}
+          {{- end -}}
+        {{- end -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+{{- $IngredientsTypesList := $IngredientTypesRaw | uniq | sort -}}
+{{- $groupedIngredients := dict -}}
+
+{{- range $IngredientsTypesList -}}
+  {{- $currentTypeName := . -}}
+  {{- $typeIngredients := dict -}}
+
+  {{- $ingredientsInCurrentType := where $IngredientList "ingType" $currentTypeName -}}
+  {{- $ingredientTitlesForCurrentType := slice -}}
+  {{- range $item := $ingredientsInCurrentType -}}
+    {{- $ingredientTitlesForCurrentType = $ingredientTitlesForCurrentType | append $item.ingredient -}}
+  {{- end -}}
+  {{- $uniqueIngredientTitles := $ingredientTitlesForCurrentType | uniq | sort -}}
+
+  {{- range $ingredientTitle := $uniqueIngredientTitles -}}
+    {{- $occurrences := where $ingredientsInCurrentType "ingredient" $ingredientTitle -}}
+
+    {{- $totalGrams := float 0 -}}
+    {{- $totalMilliliters := float 0 -}}
+    {{- $otherUnitsMap := dict -}}
+    {{- $hasUndefinedQuantity := false -}}
+
+    {{- range $item := $occurrences -}}
+      {{- if not $item.is_computable -}}
+        {{- $hasUndefinedQuantity = true -}}
+      {{- else -}}
+        {{- $q := $item.computed_quantite -}}
+        {{- $u := $item.unit | lower -}}
+        {{- if eq $u "kg" -}}
+          {{- $totalGrams = add $totalGrams (mul $q 1000.0) -}}
+        {{- else if eq $u "grammes" -}}
+          {{- $totalGrams = add $totalGrams $q -}}
+        {{- else if eq $u "litre" -}}
+          {{- $totalMilliliters = add $totalMilliliters (mul $q 1000.0) -}}
+        {{- else if eq $u "ml" -}}
+          {{- $totalMilliliters = add $totalMilliliters $q -}}
+        {{- else -}}
+          {{- $currentVal := index $otherUnitsMap $u | default (float 0) -}}
+          {{- $otherUnitsMap = merge $otherUnitsMap (dict $u (add $currentVal $q)) -}}
+        {{- end -}}
+      {{- end -}}
+    {{- end -}}
+
+    {{- $quantiteTextParts := slice -}}
+
+    {{- if gt $totalGrams 0 -}}
+      {{- if ge $totalGrams 1000 -}}
+        {{- $finalKg := div $totalGrams 1000.0 -}}
+        {{- $quantiteTextParts = $quantiteTextParts | append (printf "%.3f Kg" $finalKg) -}}
+      {{- else -}}
+        {{- $quantiteTextParts = $quantiteTextParts | append (printf "%.0f grammes" $totalGrams) -}}
+      {{- end -}}
+    {{- end -}}
+
+    {{- if gt $totalMilliliters 0 -}}
+      {{- if ge $totalMilliliters 1000 -}}
+        {{- $finalL := div $totalMilliliters 1000.0 -}}
+        {{- $quantiteTextParts = $quantiteTextParts | append (printf "%.3f L" $finalL) -}}
+      {{- else -}}
+        {{- $quantiteTextParts = $quantiteTextParts | append (printf "%.0f ml" $totalMilliliters) -}}
+      {{- end -}}
+    {{- end -}}
+
+    {{- $sortedOtherUnitsKeys := slice -}}
+    {{- range $k, $v := $otherUnitsMap -}}{{- $sortedOtherUnitsKeys = $sortedOtherUnitsKeys | append $k -}}{{- end -}}
+    {{- $sortedOtherUnitsKeys = $sortedOtherUnitsKeys | sort -}}
+
+    {{- range $unitKey := $sortedOtherUnitsKeys -}}
+      {{- $unitValue := index $otherUnitsMap $unitKey -}}
+      {{- if gt $unitValue 0 -}}
+        {{- $displayValue := $unitValue -}}
+        {{- if ne (int (mul $unitValue 100)) (mul (int $unitValue) 100) -}}
+          {{- $displayValue = printf "%.2f" $unitValue -}}
+        {{- end -}}
+        {{- if eq $unitKey "" -}}
+          {{- $quantiteTextParts = $quantiteTextParts | append (printf "%v (unité non spécifiée)" $displayValue) -}}
+        {{- else -}}
+          {{- $quantiteTextParts = $quantiteTextParts | append (printf "%v %s" $displayValue (strings.FirstUpper $unitKey)) -}}
+        {{- end -}}
+      {{- end -}}
+    {{- end -}}
+
+    {{- if $hasUndefinedQuantity -}}
+      {{- if not $quantiteTextParts -}}
+        {{- $quantiteTextParts = $quantiteTextParts | append "non précisé" -}}
+      {{- else -}}
+        {{- $quantiteTextParts = $quantiteTextParts | append "et une quantité non précisée" -}}
+      {{- end -}}
+    {{- end -}}
+
+    {{- $finalQuantiteText := delimit $quantiteTextParts " + " | default "N/A" -}}
+
+    {{- $typeIngredients = merge $typeIngredients (dict $ingredientTitle (dict
+          "ingredient" $ingredientTitle
+          "quantity" $finalQuantiteText
+          "ingType" $currentTypeName
+          "isReserved" false
+          "bought_quantity" ""
+          "where_to_buy" ""
+          "notes" ""
+        )) -}}
+  {{- end -}}
+
+  {{- if gt (len $typeIngredients) 0 -}}
+    {{- $groupedIngredients = merge $groupedIngredients (dict $currentTypeName $typeIngredients) -}}
+  {{- end -}}
+{{- end -}}
+
+{{- $totalIngredients := 0 -}}
+{{- range $groupedIngredients -}}
+  {{- $totalIngredients = add $totalIngredients (len .) -}}
+{{- end -}}
+
+{{- $output := dict
+  "event_id" .File.BaseFileName
+  "event_title" .Title
+  "event_uuid" (.Params.uuid | default .File.BaseFileName)
+  "created_at" (now.Format "2006-01-02T15:04:05Z07:00")
+  "updated_at" (now.Format "2006-01-02T15:04:05Z07:00")
+  "total_ingredients" $totalIngredients
+  "total_types" (len $groupedIngredients)
+  "ingredient_types" $groupedIngredients
+-}}
+
+{{- $output | jsonify (dict "indent" "  ") -}}

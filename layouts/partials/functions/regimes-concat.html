@@ -1,0 +1,14 @@
+{{ $result := slice }}
+{{ with $regimes := . }}
+{{ if in $regimes "vegan" }}
+  {{ range $regimes }}
+    {{ if and (ne . "sans-lactose") (ne . "vegetarien") }}
+      {{ $result = $result | append . }}
+    {{ end }}
+  {{ end }}
+{{ else }} {{ $result = $regimes}}
+{{ end }}
+    
+{{ end }}
+
+{{ delimit $result " • " }}

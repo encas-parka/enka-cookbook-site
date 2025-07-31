@@ -1,0 +1,41 @@
+
+  <div id="navbarEvent" class="no-print">
+    <span>{{.Title}}</span>
+     <div class="d-flex justify-content-evenly fixed-top topnav2 no-print bg-dark shadow p-0  rounded-bottom-4" >
+          <a href="{{.recettelink}}" class=""
+          ><span class="me-2 d-md-none">{{ partial "inline-svg" (dict "src" "fonticons/preparation.svg" "display" "inline-middle" "rem" 2) }}</span> <span class="d-none d-md-inline text-light {{if eq .here "recettes" }}fw-bolder{{end}}">Recettes</span></a>
+          <a href="{{ .inglink }}" 
+            ><span class="me-2 d-md-none">{{ partial "inline-svg" (dict "src" "fonticons/ingredients.svg" "display" "inline-middle" "rem" 2) }}</span>
+            <span class="d-none d-md-inline text-light {{if eq .here "ingredients" }}fw-bolder{{end}}">Ingrédients</span></a>
+          <a href="{{ .posterlink }}" 
+            ><span class="me-2 d-md-none">{{ partial "inline-svg" (dict "src" "fonticons/poster.svg" "display" "inline-middle" "rem" 2) }}</span>
+            <span class="d-none d-md-inline text-light {{if eq .here "poster" }}fw-bolder{{end}}">Affiches</span></a> 
+            
+          {{ if eq .here "recettes" }}
+          <button class="btn btn-primary btn-sm shadow-sm py-md-1 py-0" data-bs-toggle="modal"  data-bs-target="#modalImpression"
+          aria-controls="modalImpression"
+            
+          @click="printGlobal"
+          ><span class="me-2 d-md-none">{{ partial "inline-svg" (dict "src" "/fonticons/printer.svg" "display" "inline-middle" "rem" 2)}}</span>
+          <span class="d-none d-md-inline">Impression / PDF</span>
+        </button>
+        {{ else if eq .here "ingredients" }}
+        <button class="btn btn-primary btn-sm shadow-sm py-md-1 py-0" data-bs-toggle="modal"  data-bs-target="#modalImpression"
+        aria-controls="modalImpression"
+          
+        @click="printGlobal"
+        ><span class="me-2 d-md-none">{{ partial "inline-svg" (dict "src" "/fonticons/printer.svg" "display" "inline-middle" "rem" 2)}}</span>
+        <span class="d-none d-md-inline">Impression / PDF</span>
+      </button>
+      {{ else if eq .here "poster" }}
+      <button class="btn btn-primary btn-sm shadow-sm py-md-1 py-0" data-bs-toggle="modal"  data-bs-target="#modalImpression"
+      aria-controls="modalImpression"
+      @click="printGlobal"
+      ><span class="me-2 d-md-none">{{ partial "inline-svg" (dict "src" "/fonticons/printer.svg" "display" "inline-middle" "rem" 2)}}</span>
+      <span class="d-none d-md-inline">Impression / PDF</span>
+        {{ end }}
+      
+    </div>
+  </div>
+
+  

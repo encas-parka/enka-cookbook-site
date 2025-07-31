@@ -1,0 +1,6 @@
+<span  class="inline-svg" {{if .hover }}title="{{ .hover}}" {{end}} >
+{{- $fname:=print "static/fonticons/" .icon ".svg" -}}
+{{- $path:="<path" -}}
+{{- $fill:="<path fill=\"currentColor\"" -}}
+{{ replace (readFile $fname) $path $fill | safeHTML }}
+</span>

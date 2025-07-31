@@ -1,0 +1,120 @@
+
+{{/*  DOCUMENTATION : 
+  Importé par partials/footer/script-footer.html
+  Script alpine js pour les composants search-module-recipes et search-module-events (layouts/partials/components/)  
+*/}}
+
+<script type="text/javascript">
+  {{/*  Auto focus on searchRecipesInput input (for modal searchRecipesInput module)  */}}
+  var searchRecipesModal = document.getElementById('search-recipes-modal')
+  var searchRecipesModalInput = document.getElementById('qsearch-recipes')
+  
+  searchRecipesModal.addEventListener('shown.bs.modal', function () {
+    searchRecipesModalInput.focus()
+  })
+    searchRecipesModal.addEventListener('shown.bs.modal', function () {
+    searchRecipesModalInput.focus()
+  });
+  
+  {{/*  Auto focus on searchEventsInput input (for modal searchEventsInput module)  */}}
+  var searchEventsModal = document.getElementById('search-events-modal')
+  var searchEventsModalInput = document.getElementById('qsearch-events')
+  
+  searchEventsModal.addEventListener('shown.bs.modal', function () {
+    searchEventsModalInput.focus()
+  })
+    searchEventsModal.addEventListener('shown.bs.modal', function () {
+    searchEventsModalInput.focus()
+  });
+  
+  
+  document.addEventListener('alpine:init', () => {
+
+  Alpine.data('searchRecipes', () => ({
+  isOpen: false,
+  searchRecipesInput: "",
+  
+    getRecipes() {
+      if(this.searchRecipesInput.length > 2) {
+        const filterRecipes = this.recipesData.filter((recipe) => {
+        return this.searchRecipesInput.toLowerCase().normalize('NFD').replace(/\p{Diacritic}/gu, '').split(' ').every(
+        v => recipe.title.toLowerCase().normalize('NFD').replace(/\p{Diacritic}/gu, '').includes(v) ||
+        recipe.auteur.toLowerCase().normalize('NFD').replace(/\p{Diacritic}/gu, '').includes(v) ||
+        recipe.specialite.toLowerCase().normalize('NFD').replace(/\p{Diacritic}/gu, '').includes(v))
+        })
+      
+        if(filterRecipes.length > 0 ) {
+          return filterRecipes
+        }
+      }
+    },
+  
+    closeSearch() {
+      this.searchRecipesInput = "";
+      this.isOpen = false;
+    },
+  
+  
+  recipesData: [
+  
+    {{- range(where .Site.RegularPages "Section" "recettes" ) -}}
+  
+      {
+        title: "{{ .Title }}",
+        url: "{{ .RelPermalink }}",
+        type: "{{ .Params.type }}",
+        auteur: "{{- .Params.auteur -}}",
+        specialite: "{{- .Params.spécialité -}}",
+        saison: [{{- range .Params.saison -}} "{{ . }}", {{- end -}} ],
+        categories: [ {{- range .Params.categories -}} "{{ . }}", {{- end -}}],
+        regimes: [ {{- if .Params.regime -}} {{- range sort .Params.regime -}} "{{ . }}", {{- end -}} {{- end -}} ],
+        temperature: "{{ .Params.temperature }}",
+        cuisson: "{{ .Params.cuisson }}",
+        materiel: [{{- range .Params.materiel -}}  "{{ . }}", {{- end -}}]
+      },
+  
+    {{- end -}}
+    ]
+  
+  }));
+  
+    
+  Alpine.data('searchEvents', () => ({
+    isOpen: false,
+    searchEventsInput: "",
+  
+    getEvents() {
+      if(this.searchEventsInput.length >= 4) {
+        const filterEvents = this.eventsData.filter((event) => {
+        return this.searchEventsInput.toLowerCase().normalize('NFD').replace(/\p{Diacritic}/gu, '').split(' ').every(
+        v => event.title.toLowerCase().normalize('NFD').replace(/\p{Diacritic}/gu, '').includes(v) )
+        })
+      
+        if(filterEvents.length > 0 ) {
+          return filterEvents
+        }
+      }
+    },
+  
+      closeSearch() {
+        this.searchEventsInput = "";
+        this.isOpen = false;
+      },
+  
+    eventsData: [
+  
+      {{- range(where .Site.RegularPages "Section" "evenements" ) -}}
+  
+        {
+          title: "{{ .Title }}",
+          url: "{{ .RelPermalink }}",
+          NbRepas: "{{ len .Params.Repas }} repas",
+          NbRecettes: "- {{ $nb := 0}} {{- range .Params.Repas -}} {{- range .recettes_du_repas -}} {{ $nb = add $nb 1 }} {{end}} {{end}} {{ $nb }} recettes",
+        },
+  
+      {{- end -}}
+      ]
+  
+    }))
+  })
+  </script>

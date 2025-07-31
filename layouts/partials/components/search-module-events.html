@@ -1,0 +1,29 @@
+{{/* DOCUMENTATION
+  Module de recherche des recettes alpinejs. Utilisé dans la home-page et dans le header (navbar)
+  Lié au script mis en partial component/js_search-modules, importé par partial/header/header.html (bug depuis footer-script ou header-script) 
+*/}}
+
+<div x-data="searchEvents">
+    <input
+        type="text"
+        x-on:input.debounce="getEvents"
+        x-on:keydown.escape="closeSearch"
+        placeholder="Rechercher un évenement...(au moins 4 lettres)"
+        x-model="searchEventsInput"
+        class="form-control"
+        id="qsearch-events"
+      />
+    
+    <template x-for="event in getEvents" key:="event.url">
+     <a :href="event.url">
+       <div class="searchCard">
+          <span class="fs-5" :href="event.url" x-text="event.title"></span>
+          <div class="float-end">
+          <span  x-text="event.NbRepas"></span>
+         <span x-text="event.NbRecettes"></span>
+        </div>
+        </div>
+     </a>
+    </template>
+</div>
+

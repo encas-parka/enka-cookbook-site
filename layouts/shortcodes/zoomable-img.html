@@ -1,0 +1,8 @@
+{{ $img := ( .Get "image"  | relURL ) }}
+{{ if (.Get "img_content") }}
+  {{ $img = .Page.Resources.GetMatch (print (.Get "img_content")) }}
+{{ end }}
+
+<zoomable-image class="p-2 m-2">
+  <img class="img-fluid" src="{{ $img }}" alt="{{ .Get "alt" }}" >  
+</zoomable-image>

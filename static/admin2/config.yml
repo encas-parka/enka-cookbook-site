@@ -3,7 +3,10 @@ backend:
   name: github
   repo: encas-parka/enka-cookbook-site
   branch: main
-  base_url: https://sveltia-cms-auth.encas-cookbook.workers.dev/
+
+  # URL de la fonction Edge Supabase
+  proxy_url: https://mkkrfozercivwnbmqfqe.supabase.co/functions/v1/proxy-github
+
 
   #Permettre un PR sur github sans l'acces aux dépot (github only)
   # open_authoring: true

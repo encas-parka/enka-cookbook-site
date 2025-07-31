@@ -1,0 +1,83 @@
+  {{/* 
+    - Convertit et renomme les unités de quantités (gr → Kg, c.a.c → gr.; pluriel; etc)
+    - arrondi les quantité
+    - Pour obtenir les quantités correspondant au nombres d'assiettes indiquées dans les pages évenement
+  */}}
+
+{{ $ingredient := .ingredient }}
+{{ $assiettes := "" }}
+{{ $assiettesRecettes := "" }}
+{{ $quantiteRecette := .quantite }}
+
+{{- if in  .alergene  .ingredient -}}
+<span class="fw-bold">• {{- .ingredient -}} </span>
+{{/* TODO in-line-svg from module ? */}}
+<span class="mb-2">{{ partial "components/icon-svg" (dict "name" "exclamation-triangle" "size" ".9rem" "class" "mb-2") }}</span>
+{{- else -}}
+<span class="fw-bold">• {{ .ingredient -}}</span>
+{{- end -}}
+
+{{- if and .assiettes .quantite -}}
+  {{/*  Concerne les pages evenements */}}
+  {{- $assiettes = (int .assiettes) -}}
+  {{- $assiettesRecettes = (int .assiettesRecettes) -}}
+  {{- $quantiteRecette = (float (div (mul (float .quantite) $assiettes ) $assiettesRecettes)) -}}
+{{- end -}}
+
+<span>
+  
+  
+  {{- if .quantite -}} :
+  {{/*  renommage des unités  */}}
+  {{- $unit := .unit -}}
+  
+  {{- if eq .unit "grammes" -}}
+      {{ $unit = "gr."}}
+    {{- else if and (eq .unit "unité") (gt $quantiteRecette 1) -}}
+      {{ $unit = "unités"}}
+    {{- else if and (eq .unit "litre") (gt $quantiteRecette 1) -}}
+      {{ $unit = "l." }}
+  {{- end -}}
+  
+  {{- if or (eq .unit "Kg") (eq .unit "litre") -}}
+    {{- if lt $quantiteRecette 1 -}}
+      <span>{{- mul $quantiteRecette 1000 | math.Round }} </span>
+      {{/* XXX Retester */}}
+      {{- if eq .unit "litre" -}}
+        {{ printf "ml" -}}
+      {{- else if eq .unit "Kg" -}}
+        {{ printf "gr."  -}}
+      {{- end -}}
+    {{- else -}}
+      {{/*  Ne garder que 2 décimales, et les supprimer si = ",00 " */}}
+      {{- $quantiteRecette | lang.FormatNumber 2 | strings.TrimRight "0" | strings.TrimRight "," }} {{ $unit -}}
+    {{- end -}}
+  
+  {{- else if  or (eq .unit "grammes") (eq .unit "ml") -}}
+    {{- if gt (math.Ceil $quantiteRecette) 999 -}}
+      {{- div $quantiteRecette 1000  | lang.FormatNumber 2 | strings.TrimRight "0" | strings.TrimRight "," }}
+      {{- if eq .unit "ml" -}}
+        {{ printf "l." -}}
+      {{- else if eq .unit "grammes" -}}
+        {{ printf "Kg" -}}
+      {{- end -}}
+  
+    {{- else if lt $quantiteRecette 1 -}}
+      {{- $quantiteRecette | lang.FormatNumber 2 | strings.TrimRight "0" | strings.TrimRight "," }} {{ $unit -}}
+    {{- else -}}
+      {{- math.Round $quantiteRecette }} {{ $unit -}}
+    {{- end -}}
+  
+  
+  {{- else -}}
+      {{- $quantiteRecette | lang.FormatNumber 2  | strings.TrimRight "0" | strings.TrimRight "," }} {{ $unit -}}
+  
+  {{- end -}}
+  
+  {{ if eq $unit (and ("unité") ("c. à café") ("c. à soupe")) }}
+  {{ partial "functions/quantite-converter" ( dict "unit" $unit "ingredient" $ingredient "quantite" $quantiteRecette "fetchQU" true ) -}}
+  {{- end -}}
+</span>
+
+
+{{ end }}

@@ -1,0 +1,33 @@
+{{/*  Aperçu des recettes sous forme de "card" (vignette) s'affichant dans les pages listant les recettes des sections 'plats' 'desserts', etc  */}}
+<div class="col-lg-4">
+  
+  <div class="card recipe-card card-recette">
+      <a href="{{ .Permalink }}">
+        {{if .Params.img}}
+        <img class="card-image img-fluid img-cover" src="/{{.Section}}/{{.Title}}/{{.Params.img }}" />
+        {{ else }}
+        <img class="card-image img-fluid img-cover" src="/images/{{.Params.Categories}}.webp" />
+        {{end}}
+        <div class="card-recipe-title h4 ">{{.Title}}</div>
+        <div class="card-badge-type translate-middle">{{.Params.Categories}}</div>
+  
+    <div class="card-body">
+      <a href="{{.Permalink}}" class="stretched-link"></a>
+  
+      {{if .Description}}
+      <p>{{.Description}}</p>
+      {{end}}
+      {{if .Params.ingredients}}
+      <div class="">
+        {{ range .Params.ingredients.frais}} <span class="card-badge-ingredients small bg-green">{{.nom}}</span> {{end}}
+        {{ range .Params.ingredients.animaux}} <span class="card-badge-ingredients small bg-red">{{.nom}}</span> - {{end}}
+        {{ range .Params.ingredients.sec}} <span class="card-badge-ingredients small bg-grey">{{.nom}}</span> - {{end}}
+        {{ range .Params.ingredients.autres}} <span class="card-badge-ingredients small bg-orange">{{.nom}}</span> - {{end}}
+  {{end}}
+      </div>
+    </div>
+  
+    
+  
+  </div>
+</div>

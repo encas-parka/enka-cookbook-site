@@ -1,0 +1,64 @@
+/* 
+	inline-svg.scss partial
+	
+	@author @sean-au
+	
+	@access public
+
+  @usage
+    import this scss file into your site so that the
+    utility classes work. Otherwise use your own CSS
+
+	@example 
+    "assets/scss/main.scss context"
+    @import "inline-svg.scss";
+
+ ****************************************************/
+
+.inline-svg {
+  color: inherit;
+  fill: currentColor;
+  vertical-align: baseline;
+
+  &.d-inline-block {
+    display: inline-block;
+    height: 0.7em;
+    width: 0.7em;
+  }
+
+  &.fs-inherit {
+    font-size: inherit;
+  }
+
+  &.d-block {
+    display: block;
+    height: 1em;
+    width: 1em;
+  }
+
+  @for $i from 1 to 5 {
+    &.rem {
+      &-#{$i} {
+        font-size: ($i) + rem;
+      }
+    }
+  }
+
+  $bs-font-sizes: (
+    1: 2.5,
+    2: 2,
+    3: 1.75,
+    4: 1.5,
+    5: 1.25,
+    6: 1,
+    7: 0.875,
+  );
+
+@each $key, $size in $bs-font-sizes {
+  &.fs {
+    &-#{$key} {
+      font-size: ($size) + rem;
+    }
+  }
+}
+}

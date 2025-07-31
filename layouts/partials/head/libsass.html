@@ -1,0 +1,24 @@
+{{/*  
+  DOCUMENTATION :
+  Prepare les fichier scss en css (de assets à static). Est utilisé par layouts/partials/head/stylesheet.html qui envoie /scss/app.scss (qui lui-même concatène un ensemble de fichiers scss )
+  (retrait de | postCSS pour le build des sites-content)
+*/}}
+
+
+{{ $css := "" }}
+{{ if or (hugo.IsDevelopment) (eq (hugo.Environment) "demo") -}}
+  {{ $options := (dict "targetPath" "main.css" "transpiler" "libsass" "enableSourceMap" true)  -}}
+  {{ $css = resources.Get . | toCSS $options -}}
+  
+{{ else -}}
+
+  {{ $options := (dict "targetPath" "main.css" "transpiler" "libsass" "outputStyle" "compressed")  -}}
+  {{ $css = resources.Get . | toCSS $options | fingerprint }}
+  
+{{ end -}}
+
+<link rel="stylesheet" href="{{ $css.Permalink | relURL }}" integrity="{{ $css.Data.Integrity }}" crossorigin="anonymous">
+
+
+{{/* TEST retrait opt (non accessible depuis le site-content) : "includePaths" (slice "node_modules"))
+"includePaths" (slice "node_modules"))  */}}

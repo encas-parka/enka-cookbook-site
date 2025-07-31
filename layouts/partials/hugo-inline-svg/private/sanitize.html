@@ -1,0 +1,76 @@
+{{/* 
+	hugo-inline-svg/private/sanitize.html partial
+
+  @desc produces error messages for bad inputs
+	
+	@author @sean-au
+	
+	@access private
+
+  @context params from partial
+
+	@example {{ partial "hugo-inline-svg/private/sanitize" . }}
+
+ ****************************************************/}}
+ {{/* $sanitize returns true after runnings to avoid printing */}}
+
+{{ if reflect.IsMap . }}
+
+  {{ if ne (printf "%T" .src) "string" }}
+    {{ partial "hugo-inline-svg/private/input-error" (dict "ctx" . "param" "src" "value" .src "valid" "a string") }}
+  {{ end }}
+
+  {{ with .em }}
+    {{ if or (ne (printf "%T" .) "int") (or (gt . 5) (lt . 1)) }}
+      {{ partial "hugo-inline-svg/private/input-error" (dict "ctx" $ "param" "scale (em)" "value" . "valid" "an integer of 1-5") }}
+    {{ end }}
+  {{ end }}
+
+  {{ with .fs }}
+    {{ if or (ne (printf "%T" .) "int") (or (gt . 7) (lt . 1)) }}
+      {{ partial "hugo-inline-svg/private/input-error" (dict "ctx" $ "param" "font size (fs)" "value" . "valid" "an integer of 1-7") }}
+    {{ end }}
+  {{ end }}
+
+  {{ with .rem }}
+    {{ if or (ne (printf "%T" .) "int") (or (gt . 5) (lt . 1)) }}
+      {{ partial "hugo-inline-svg/private/input-error" (dict "ctx" $ "param" "font size (rem)" "value" . "valid" "an integer of 1-5") }}
+    {{ end }}
+  {{ end }}
+
+  {{ if and .rem .em }}
+    {{ $message := `Both "fs" and "rem" cannot be set at the same time.` }}
+    {{ partial "hugo-inline-svg/private/errorf" $message }}
+  {{ end }}
+
+  {{ with .display }}
+    {{ if ne (printf "%T" .) "string" }}
+      {{ partial "hugo-inline-svg/private/input-error" (dict "ctx" $ "param" "display" "value" . "valid" "boolean (true/false)") }}
+    {{ else }}
+      {{ if and (ne . "block") (ne . "inline") (ne . "inline-middle") }}
+        {{ partial "hugo-inline-svg/private/input-error" (dict "ctx" $ "param" "display" "value" . "valid" "'block' or 'inline' or 'inline-middle'") }}
+      {{ end }}
+    {{ end }}
+  {{ end }}
+
+  {{ with .title }}
+    {{ if ne (printf "%T" .) "string" }}
+      {{ partial "hugo-inline-svg/private/input-error" (dict "ctx" $ "param" "title" "value" . "valid" "a string") }}
+    {{ end }}
+  {{ end }}
+
+  {{ with .desc }}
+    {{ if ne (printf "%T" .) "string" }}
+      {{ partial "hugo-inline-svg/private/input-error" (dict "ctx" $ "param" "desc" "value" . "valid" "a string") }}
+    {{ end }}
+  {{ end }}
+
+{{ else }}
+
+  {{ if ne (printf "%T" (.Get 0)) "string" }}
+    {{ partial "hugo-inline-svg/private/input-error" (dict "ctx" . "param" "positional parameter src" "value" .src "valid" "a string") }}
+  {{ end }}
+
+{{ end }}
+
+{{ return true }}

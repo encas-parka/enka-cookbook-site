@@ -1,0 +1,95 @@
+.recipe-card {
+  background: #fff;
+  margin: 1em auto;
+  height: 90%;
+
+  .recipe-card:hover {
+    transition: 0.2s ease-in;
+    background-color: rgba($primary-4, 0.65);
+  }
+
+  aside {
+    position: relative;
+    img {}
+  }
+}
+
+.card-recipe-title {
+  width: 100%;
+  height: auto;
+  position: absolute;
+  bottom: 5%;
+  background-color: rgba(0, 0, 0, 0.80);
+  text-align: center;
+  color: white;
+  padding: 0.6rem;
+  z-index: 2;
+}
+
+.card-badge-type {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  padding: 0 1rem;
+  margin: 0 0;
+  background-color: rgba(221, 181, 0, 0.8);
+  color: white;
+  font-weight: 700;
+}
+
+.card-badge-regime {
+    position: absolute;
+    top: 1.2em;
+    right: 0;
+    padding: 0 0;
+    text-align: right;
+    .badge {
+      background-color: rgba(11, 63, 31, 0.8);
+      color: white;
+      font-weight: 700;
+      font-size: 0.8rem
+    }
+  }
+
+.card-image {
+  width: 100%;
+  height: 200px;
+}
+.img-cover {
+  object-fit: cover;
+}
+
+
+// Cards
+/// Home page : catégorie des recettes (recettes-cat.html)
+
+.card-recette {
+  box-shadow: rgba(0, 0, 0, 0.04) 0px 3px 5px;
+  padding: 0.5em;
+  margin-bottom: 0.8em;
+  transition: 0.02s ease-in;
+  color: $primary-3;
+}
+
+.card-recette:hover {
+  border-color: $primary-1;
+  box-shadow: rgba($primary-1, 0.1) 0px 3px 5px;
+  .card-recipe-title {
+    transition: 0.2s ease-in;
+    background-color: rgba($primary-4, 0.85);
+  }
+  .img-cover {
+    opacity: 80%;
+    transition: 0.2s ease-in;
+  }
+}
+
+.card-badge-ingredients {
+  background-color: rgba(112, 112, 112, 0.8);
+  color: white;
+  border-radius: 10px;
+  padding: 0.1rem 0.4rem;
+  // line-height: 2.5rem;
+}
+
+

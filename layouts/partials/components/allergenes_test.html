@@ -1,0 +1,35 @@
+{{/*  TEST  (not working : ne renvoie pas les valeurs des variable calculé) */}}
+{{/*  Reccupération des données allergenesIng sur chaque ingrédients. Permet de faire évoluer la liste plutot que de la figer  */}}
+
+{{- $allergenesTypeList := slice -}}
+{{ range $.Site.Data.ingredients }}
+  {{- range .ingredients -}}
+    {{- if .alergenesIng -}}
+      {{- $allergenesTypeList = $allergenesTypeList | append .alergenesIng -}}
+    {{- end -}}
+  {{- end -}}
+  {{ end }}
+{{- $allergenesTypeList = $allergenesTypeList | uniq -}}
+
+{{ $sAllergenes := newScratch }}
+{{- range $.Site.Data.ingredients -}}
+  {{- range .ingredients -}}
+    {{- if .alergenesIng -}}
+      {{- $ingTitle := .title -}}
+      {{ range .alergenesIng -}}
+           {{$sAllergenes.Add . (slice $ingTitle)}}
+      {{ end }}    
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+{{ $allergenesDict := dict }}
+{{ $allergenesList := slice }}
+{{ range $allergenesTypeList }}
+  {{ $allergenesDict = merge $allergenesDict (dict . ($sAllergenes.Get .)) }}
+  {{ $allergenesList = append  ($sAllergenes.Get .) $allergenesList }}
+{{ end }}
+
+{{ $allergenesLgList := slice "Poisson" "Oeuf" "Soja" "Sésame" "Moutarde" "Fruit à coque" "Céleri" "Crustacé" "Arachide" "Mollusque"}}
+
+{{ return slice $allergenesTypeList $allergenesDict $allergenesList $allergenesLgList $sAllergenes  }}

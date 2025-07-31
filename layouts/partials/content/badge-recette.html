@@ -1,0 +1,38 @@
+<span class="badge bg-red me-1"> 
+  {{ range .Params.categories }}
+    {{ . }}
+  {{ end }}
+</span>
+
+{{ if eq .Params.temperature "Chaud" }}
+  <span class="badge bg-orange me-1"> Servir Chaud </span>  
+{{ else }}
+  <span class="badge bg-blue me-1"> Servir Froid </span>  
+{{ end }}
+
+{{ if eq .Params.cuisson "Oui" }}
+  <span class="badge bg-orange me-1">Avec Cuisson</span>
+{{ else }}
+  <span class="badge bg-blue me-1">Sans Cuisson</span>
+{{ end }}
+
+{{ if .Params.regime }}
+{{ $regimeArray := .Params.regime }}
+{{ if in $regimeArray "vegan" }}
+<span class="badge bg-green">vegan</span>
+
+{{else}}
+{{ range .Params.regime }}
+<span class="badge bg-green">{{ . }}</span>
+{{ end }}
+
+{{end}}
+
+
+  {{ range .Params.PrepAlt  }}
+    {{ range .regime }}
+      <span class="badge bg-green-alt">{{ . }} </span> 
+    {{ end }}
+  {{ end }}
+
+{{ end }} {{/* if .Params.regime */}}

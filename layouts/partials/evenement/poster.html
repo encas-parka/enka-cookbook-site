@@ -1,0 +1,97 @@
+{{- $first := true -}}
+{{ $allergenesLgList := slice "Poisson" "Oeuf" "Soja" "Sésame" "Moutarde" "Fruit à coque" "Céleri" "Crustacé" "Arachide" "Mollusque"}}
+{{ $recetteCat := .recetteCat }}
+{{ $recetteCatFormat := .recetteCatFormat }}
+
+{{ $allergenesIng := (partialCached "functions/allergenesIng.html" . )  }}
+{{ $dateService := .dateService | time.Format "2006-01-02" }}
+{{ $dateService = replace $dateService "-" "" }}
+{{ $horaire := .horaire }}
+
+
+{{ range .recettes_du_repas }}
+
+{{/*  Réccupérer le nom lisible de la recette  */}}
+{{- $recetteName := "" -}}
+{{- $recette := .recette -}}
+
+{{- $url:= print .recette | urlize -}}
+
+{{- with site.GetPage $url -}}
+  {{- $recetteName = .Params.title -}}
+{{- end -}}
+
+{{ if eq .type_plat $recetteCat }}
+{{ if (and $first .recette)}}
+  <p v-show="fontCat !== 'noDisplay'" class="text-center pt-5" :class="[[fontCat]]" style="font-size: 1.8em"  :style="fontSizeCat" >·•· {{$recetteCatFormat}} ·•·</p>
+  {{- end -}}
+   <div v-show="recipeVisibility['{{$dateService}}{{$horaire}}_{{.recette}}']" class="mb-3 ">
+      <p class="text-center fw-bold mb-1 text-lowercase" style="font-size: 2em" :class=" [[fontRecettes]] " :style="fontSizeRecettes">{{$recetteName}}</p>
+      <button @click="toggleRecipeVisibility('{{$dateService}}{{$horaire}}_{{.recette}}')" class="btn btn-sm btn-outline-secondary no-print float-end">
+        [[ recipeVisibility['{{$dateService}}{{$horaire}}_{{.recette}}'] ? 'Cacher' : 'Show' ]]
+      </button>
+    {{- $first = false -}}
+    <p v-show="fontDesc !== 'noDisplay'" class="card-text" :class="[[fontDesc]]" :style="[[fontSizeDesc]]">{{.description}}</p>
+    
+    {{- $url := print .recette | urlize -}}
+    {{- with site.GetPage $url -}}
+  
+      <p v-show="fontRegimes !== 'noDisplay'" class="mb-1 text-center" :class="[[fontRegimes]]" :style=" fontSizeRegimes">{{ partial "functions/regimes-concat.html" .Params.regime }}</p>
+  
+      {{ $alertAnimaux := slice }}
+      {{ range .Params.ingredients.animaux }}
+        {{- with . -}}
+        {{ $alertAnimaux = $alertAnimaux | append .title}}
+        {{- end }}
+      {{ end }}
+  
+      {{ $ingredientsRecette := slice }}
+      {{- range $key, $value := .Params.ingredients -}}
+      {{- with . -}}
+        {{- range $index, $element := . -}}
+        {{ $ingredientsRecette = $ingredientsRecette | append .title}}
+        {{- end }}
+      {{- end -}}
+      {{- end -}}
+  
+      {{- $alertAutresAllergenes := slice -}}
+    {{ range $allergenesLgList }}
+      {{- $toAdd := intersect $ingredientsRecette ($allergenesIng.Get . ) -}}
+      {{- $alertAutresAllergenes = $alertAutresAllergenes | append  $toAdd -}}
+    {{ end }}
+  
+  
+      {{- $alertGluten := intersect $ingredientsRecette ($allergenesIng.Get "Gluten") -}}
+      {{- $alertPorc := intersect $ingredientsRecette ($allergenesIng.Get "Porc") -}}
+      {{- $alertLait := intersect $ingredientsRecette ($allergenesIng.Get "Produit laitier") -}}
+  
+      {{ with or ($alertGluten) ($alertPorc) ($alertLait) ($alertAnimaux) ($alertAutresAllergenes) }}
+      <p class="m-0 text-center" v-show="fontAlert !== 'noDisplay'">•••</p>
+      {{ end }}
+  
+      <div  v-show="fontAlert !== 'noDisplay'">
+        {{- with $alertAutresAllergenes -}}
+        <p class="text-center mb-0" :class="[[fontAlert]]" :style="fontSizeAlert"><span class="fw-bold">Alergènes : </span>{{ delimit $alertAutresAllergenes ", "}}</p>
+        {{- end -}}
+        {{- with $alertGluten -}}
+        <p class="text-center mb-0" :class="[[fontAlert]]" :style="fontSizeAlert"><span class="fw-bold">Contient du gluten : </span>{{ delimit $alertGluten ", "}}</p>
+        {{- end -}}
+        {{- with $alertPorc -}}
+        <p class="text-center  mb-0" :class="[[fontAlert]]" :style="fontSizeAlert"><span class="fw-bold">Contient du porc : </span>{{ delimit $alertPorc ", "}}</p>
+        {{- end -}}
+        {{- with $alertLait -}}
+        <p class="text-center mb-0" :class="[[fontAlert]]" :style="fontSizeAlert"><span class="fw-bold">Contient des produits laitiers : </span>{{ delimit $alertLait ", "}}</p>
+        {{- end -}}
+        {{- with $alertAnimaux -}}
+        <p class="text-center mb-0" :class="[[fontAlert]]" :style="fontSizeAlert"><span class="fw-bold">Animaux : </span>{{ delimit $alertAnimaux ", "}}</p>
+        {{- end -}}
+      </div>
+      <div v-show="fontIng !== 'noDisplay'">
+        <p class="text-center m-0">•••</p>
+        <p class="text-center" :class="[[fontIng]]" :style="fontSizeIng"><span class="fw-bold">Ingrédients : </span>{{ delimit $ingredientsRecette ", "}}</p>
+      </div>
+      {{- end  }}
+    </div>
+      {{- end }}
+      
+      {{- end }}

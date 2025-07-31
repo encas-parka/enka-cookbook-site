@@ -1,0 +1,30 @@
+{{/*  DOCUMENTATION
+  La base qui définie la façon dont sont construite chacune des pages. 
+*/}}
+
+<!doctype html>
+<html lang="{{ .Site.LanguageCode | default "fr" }}">
+  {{ partial "head/head.html" . }}
+
+  {{/*  Creer un espace au dessus de la navbar en rajoutant la class "section" à body. Mais de maniere générale définit des layout en fonction du type de page... from hyas*/}}
+  {{/*  {{- partial "head/body-class.html" . -}}
+   <body class="{{ delimit (.Scratch.Get "class") " " }}">   */}}
+
+  <body>
+    
+  {{ partial "header/header.html" . }}
+
+    <div class="wrap container" role="document">
+      <div class="content">
+        {{ block "main" . }}{{ end }}
+      </div>
+    </div>
+
+  {{ block "sidebar-footer" . }}{{ end }}
+  {{ partial "footer/footer.html" . }}
+  {{ partial "footer/script-footer.html" . }}
+    
+
+
+  </body>
+</html> 

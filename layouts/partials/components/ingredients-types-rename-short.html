@@ -1,0 +1,19 @@
+
+{{ $iTypeName := .ingType }}
+{{ if eq .ingType "Lof" }}
+{{ $iTypeName = "L.O.F." }}
+{{ else if  eq .ingType "Animaux"}}
+{{ $iTypeName = "Viandes et Poissons" }}
+{{ else if  eq .ingType "Epices"}}
+{{ $iTypeName = "Assaisonnements" }}
+{{ else if  eq .ingType "Legumes"}}
+{{ $iTypeName = "Fruits et Légumes" }}
+{{ else if  eq .ingType "Sec"}}
+{{ $iTypeName = "Sec : Céréales, légumineuses" }}
+{{ else if  eq .ingType "Sucres"}}
+{{ $iTypeName = "Sucrés" }}
+{{ else if  eq .ingType "Frais"}}
+{{ $iTypeName = "Produits Frais" }}
+{{ end }}
+
+{{ return $iTypeName }}

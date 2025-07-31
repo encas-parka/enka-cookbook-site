@@ -1,0 +1,35 @@
+  {{/*  TODO : limiter les allergene indiquer / distinguer gluten  */}}
+  
+  {{ if in  .alergene  .ingredient }}
+    <span class="fw-bold">{{ .ingredient }}</span>
+    {{/* TODO in-line-svg from module ? */}}
+    {{ partial "inline-svg" (dict 
+          "src" "fonticons/exclamation-triangle"
+          "display" "inline" 
+          "title" "Allergène"
+          "fs" 5
+           ) }}
+  {{ else }}
+    <span class="fw-bold">{{- .ingredient -}}</span>
+  {{ end }}
+
+  {{ $unit := .unit }}
+  {{ if eq .unit "grammes" }}
+    {{ $unit = "gr." }}
+  {{ else if eq .unit "litre" }}
+    {{ $unit = "l." }}
+  {{ else if and (eq .unit "unité") (gt .quantite 1) }}
+    {{ $unit = "unités" }}
+  {{ end }}
+
+  {{ if .quantite }}
+    : <span class="amount">{{- .quantite -}}</span>
+    <span class="unit"> {{- $unit -}}</span>
+
+    {{ if eq .unit (and ("unité") ("c. à café") ("c. à soupe")) }}
+    ( ~<span class="amount">{{ partial "functions/quantite-converter" ( dict "unit" .unit "ingredient" .ingredient "quantite" .quantite "fetchQuantite" true ) }}</span>
+    <span>{{ partial "functions/quantite-converter" ( dict "unit" .unit "ingredient" .ingredient "quantite" .quantite "fetchUnit" true ) }} )</span>
+      
+    {{ end }}
+  {{ end }}
+

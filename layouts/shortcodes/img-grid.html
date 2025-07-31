@@ -1,0 +1,58 @@
+{{/*  
+  Boostrap shortcode for image grid 
+  Requires: zoomable-img.js →
+```
+{{ $script := resources.Get "js/zoomable-img.js" | fingerprint }}
+<script type="text/javascript" src="{{ $script.RelPermalink }}"></script>
+```
+  author: QaldeK  
+  example shortcode: {{< img-grid from="content" match="img/gallery*.jpg" size="12 lg:6" >}}  + load zoomable-img.js
+  TODO : assets & static
+
+*/}}
+{{ $from := .Get "from" | default "assets" }}
+{{ $images := "" }}
+{{ $size := .Get "size" | default "12 md:6 lg:4" }}
+{{ $default_row_class := "align-items-center my-4 bg-light rounded" }}
+{{ $max_height := .Get "max_height" }}
+
+
+{{ $row_class := .Get "row_class" | default $default_row_class }}
+
+{{- $col_size := slice }}
+
+{{ if eq $from "content" }}
+  {{ $images = .Page.Resources.Match (.Get "match") }}
+{{/*  {{ else if eq $from "assets" }}
+  {{ $images = string (.Get "match") }}  */}}
+{{ else if eq $from "assets" }}
+  {{ $images = resources.Match (.Get "match") }}
+{{ end }}
+
+
+{{- with $size }}
+  {{- $sizes := split . " " }}
+  {{- range $sizes }}
+    {{- $kv := split . ":" }}
+    {{- if gt (len $kv) 1 }}
+      {{- $col_size = $col_size | append (printf "col-%s-%s" (index $kv 0) (index $kv 1)) }}
+    {{- else }}
+      {{- $col_size = $col_size | append (printf "col-%s" .) }}
+    {{- end }}
+  {{- end }}
+{{- else }}
+  {{- $col_size = $col_size | append "col" }}
+{{- end }}
+
+
+<div class="row {{$row_class}}">
+  {{ range $images }}
+  <div class="col {{ delimit $col_size ` ` }}">
+    <zoomable-image  class="p-2 m-2 shadow-sm rounded" >
+      <img src="{{ .RelPermalink }}" alt="{{.}}" class="img-fluid 
+      " style="max-height: {{$max_height}}" >
+    </zoomable-image>
+  </div>
+  {{ end }}
+  <div class="text-center text-muted small my-2">{{.Get "description" }}</div>
+</div>

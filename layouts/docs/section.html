@@ -1,0 +1,33 @@
+{{ define "main" }}
+
+{{- if not hugo.IsProduction -}}
+<div class="no-print text-muted mb-4">{{ hugo.Environment }} |  Layout : layouts/_default/section.html </div>
+{{- end -}}
+
+{{ partial "components/menu-docs.html" . }}
+
+<div class="row justify-content-center">
+    <div class="col-lg-12">
+        <h1>{{.Title}}</h1>
+        <div class="row">
+          {{ $paginator := .Paginate (.Data.Pages) -}}
+          {{ range $paginator.Pages }}
+          <div class="col-lg-6"> 
+            <a  href="{{.Permalink}}">
+            <div class="card card-recette mb-3">
+              <div class="card-body">
+                <div class="card-title fs-5 fw-bolder">{{ .Title}}</div>
+                <p class="card-text text-start">{{ .Description }}</p>
+              </div>
+            </a>
+            </div>
+          </div>
+          {{ end -}}
+
+        </div>
+        {{ template "_internal/pagination.html" . -}}
+  <div class="card card-recette m-4"><a href="/ingredients" class="fs-5 fw-bolder">Liste des ingredients enregistrés</a></div>
+
+    </div>
+</div>
+{{ end }}

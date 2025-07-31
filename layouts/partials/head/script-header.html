@@ -1,0 +1,62 @@
+
+{{/*   bootstrap et alpinejs sont importé depuis app.js. Ici, les import spécifique a certaines page. La concaténation de vuejs bug  */}}
+
+{{ if or (eq .Type "evenements") (eq .Type "ingredients") (eq .Type "recettes")}}
+
+{{/*  {{ $vuejs := resources.Get "js/vue.min.js" | fingerprint }}  */}}
+{{ $fp := resources.Get "flatpickr/flatpickr.min.js" }}
+{{ $fp_fr := resources.Get "flatpickr/l10n/fr.js" }}
+{{ $multiselect := resources.Get "multiselect/multiselectmin.js" }}
+
+{{ $bundlejs := slice $fp $fp_fr $multiselect | resources.Concat "js/bundle.js" | fingerprint }}
+
+  {{ if or (hugo.IsProduction) (eq (hugo.Environment) "demo") }}
+    <script src="{{- $bundlejs.Permalink -}}" integrity="{{ $bundlejs.Data.Integrity }}"></script>
+    {{/*  <script src="{{- $vuejs.Permalink -}}" integrity="{{ $vuejs.Data.Integrity }}"></script>  */}}
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+  {{ else }}
+    {{/*  {{ $vuejs = resources.Get "js/vue.common.dev.js"  }}  */}}
+    {{/*  <script src="{{- $vuejs.Permalink -}}"></script>  */}}
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+    <script src="{{- $fp.Permalink -}}"></script>
+    <script src="{{- $fp_fr.Permalink -}}"></script>
+    <script src="{{- $multiselect.Permalink -}}"></script>
+  {{end}}
+
+{{ end }}
+
+
+
+
+
+{{/* DOCUMENTATION : For specific layout script (→ in layout-footer-script)
+    USAGE: Insert at the end of the layout page:
+
+    {{ define "page-script"}}
+      {{- $script:=  resources.Get "js/quantite.js" | js.Build (dict "sourceMap" "external" ) | resources.Minify | resources.Fingerprint  -}}
+      <script type="text/javascript" src="
+      
+      {{$script.RelPermalink}}" integrity=" {{ $script.Data.Integrity }}"></script>
+    {{end}} 
+
+    Or For Buddle js:
+    {{ define "page-script"}}
+      {{ $menu := resources.Get "js/menu.js" }}
+
+      {{ $prism := resources.Get "js/prism.js" }}
+
+      {{ $theme := resources.Get "js/theme.js" }}
+
+      {{ $bundle := slice $menu $prism $theme | resources.Concat "js/bundle.js" | js.Build (dict "sourceMap" "external" ) | resources.Minify | resources.Fingerprint }}
+
+      <script type="text/javascript" src="{{ $bundle.RelPermalink }}" integrity="{{ $bundle.Data.Integrity }}"></script>
+    {{end}}
+
+    Or, with partial (from layout/partials/footer/esbuild in hyas theme)
+
+    {{ define "page-script"}}
+      {{ partial "footer/esbuild" (dict "src" "js/script.js" "load" "async" "transpile" false) -}}
+    {{end}}
+    */}}

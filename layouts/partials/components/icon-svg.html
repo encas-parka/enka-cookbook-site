@@ -1,0 +1,7 @@
+{{ $sprite := resources.Get "fonticons/sprite-icons.svg" }}
+{{ $iconId := .name | lower | replaceRE " " "_" }}
+{{ $iconExists := in $sprite.Content (printf "id=\"%s\"" $iconId) }}
+
+  <svg class="{{.class}}" style="width: {{ .size | default "3rem" }}; height: {{ .size | default "3rem" }};">
+    <use xlink:href="#{{ if $iconExists }}{{ $iconId }}{{ else }}no-cat{{ end }}"></use>
+  </svg>

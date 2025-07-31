@@ -1,0 +1,47 @@
+<div class="wrapper d-flex docs-menu">
+  <div class="sidebar">
+    <div class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark h-100 offcanvas-md" style="width: 280px;">
+      <hr>
+      <ul class="nav nav-pills flex-column mb-auto  ">
+        {{ $thisPage := .Title }}
+        {{ $beforeSection := "" }}
+        {{ range where .Site.Pages "Type" "docs" }}
+
+        {{ if eq .Title $thisPage }}
+          <li class="nav-item mb-2 ">
+            <a href="{{ .RelPermalink }}" 
+              class="nav-link active  " 
+              aria-current="page">
+              {{ .Title }}
+            </a>
+          </li>
+        {{ else }}
+        <li class="nav-item mb-2">
+          <a href="{{ .RelPermalink }}" class="nav-link" aria-current="page">
+            {{ .Title }}
+          </a>
+        </li>
+        {{ end }}
+
+        {{ $beforeSection = .currentSection }}
+
+        {{ end }}
+       </ul>
+  
+    </div>
+  </div>
+</div>
+
+<style>
+
+  .docs-menu {
+  width: 250px !important;
+  top: 54px !important;
+}
+
+@media (min-width: 768px) {
+  .container {
+    padding-left: 300px !important;
+    margin-left: inherit;
+  }
+</style>

@@ -1,0 +1,431 @@
+{{ define "main" }}
+
+
+{{ if not hugo.IsProduction }}
+<span class="no-print text-muted">{{ hugo.Environment }}  | Layout : layouts/recettes/list.html </span>
+{{ end }}
+
+
+{{- $IngredientList := slice -}}
+{{- range .RegularPagesRecursive -}}
+
+{{- range $key, $value := .Params.ingredients -}}
+
+{{- range $index, $element := . -}}
+{{- $IngredientList = $IngredientList | append (dict "ingredient" .title) -}}
+{{- end -}}
+
+{{ end }}
+
+{{ end }}
+
+
+
+{{/*  TODO : Ajouter explication des filtres   */}}
+<div id="app">
+  <div class="container">
+    {{/* <div class="my-12">
+      {{ $image := resources.Get "/images/example.svg" }}
+      <img src="{{ $image.RelPermalink }}" alt="" class="w-96">
+    </div> */}}
+    <div class="row">
+      
+      
+      <div class="col-lg-4 mt-5" :class="{ opacify: disableFilters }"> {{/* Filtre SIDE */}}
+        {{/*  <div>
+          <label>
+            <input type="checkbox" v-model="additiveFiltering" />
+            <span>Additionner les Filtres</span>
+          </label>
+        </div>  */}}
+        <div class="btn btn-warning my-2" @click="resetFilters">Effacer tous les filtres</div>
+        <div class="filters box">
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <h4>Catégorie</h4>
+              <div v-for="categorie in allcategories" :key="categorie">
+                <label>
+                  <input type="checkbox" v-model="filters['categories']" :value="categorie" />
+                  <span>[[categorie]]</span>
+                </label>
+              </div>
+            </div>
+            <div class="col-md-6 mb-3">
+              <h4>Régimes</h4>
+              <div v-for="regime in allregimes" :key="regime">
+                <label>
+                  <input type="checkbox" v-model="filters['regimes']" :value="regime" />
+                  <span>[[regime]]</span>
+                </label>
+              </div>
+            </div>
+            <div class=""></div>
+          </div>
+        </div>
+        <div class="filters box">
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <h4>Service</h4>
+              <div v-for="temperature in alltemperature" :key="temperature">
+                <label>
+                  <input type="checkbox" v-model="filters['temperature']" :value="temperature" />
+                  <span>[[temperature]]</span>
+                </label>
+              </div>
+            </div>
+            <div class="col-md-6 mb-3">
+              <h4>Cuisson</h4>
+              <div v-for="cuisson in allcuisson" :key="cuisson">
+                <label>
+                  <input type="checkbox" v-model="filters['cuisson']" :value="cuisson" />
+                  <span>[[cuisson]]</span>
+                </label>
+              </div>
+            </div>
+            <div class="col-md-6 mb-3">
+              <h4>Saisons</h4>
+              <div v-for="saison in allsaison" :key="saison">
+                <label>
+                  <input type="checkbox" v-model="filters['saison']" :value="saison" />
+                  <span>[[saison]]</span>
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <v-app>
+          <div class="filters box">
+            <div class="row ">
+              <div class="col-lg-12 col-md-6" v-if="allilegumes.length">
+                <v-autocomplete v-model="filters['ilegumes']" :items="allilegumes" label="Legumes ou fuits"
+                deletable-chips multiple small-chips class="mt-1"></v-autocomplete>
+              </div>
+              <div class="col-lg-12 col-md-6" v-if="allisec.length">
+                <v-autocomplete v-model="filters['isec']" :items="allisec" label="Sec (pois, pates, riz...)"
+                deletable-chips multiple small-chips class="mt-1"></v-autocomplete>
+              </div>
+              <div class="col-lg-12 col-md-6" v-if="allianimaux.length">
+                <v-autocomplete v-model="filters['ianimaux']" :items="allianimaux" label="Viandes & Poissons"
+                deletable-chips multiple small-chips class="mt-1"></v-autocomplete>
+              </div>
+              <div class="col-lg-12 col-md-6" v-if="allilof.length">
+                <v-autocomplete v-model="filters['ilof']" :items="allilof" label="LOF (Lait, oeufs, farines, gras...)"
+                deletable-chips multiple small-chips class="mt-1"></v-autocomplete>
+              </div>
+            </div>
+          </div>
+        </v-app>
+      </div>
+      
+      
+      <div class="col-lg-8"> {{/* Recette CARDS */}}
+        <h3>{{ .Title | pluralize }}</h3>
+        <!-- TODO ? Moins gourmand ?: possibilité de remplacer in "recipes" par "recettes" : plus besoin de la computed recipes() ; et dans filteredRecipes, mettre this.recettes.filters ...-->
+        
+        
+        <div class="input-group"> {{/* Champs de recherche */}}
+          <input
+          class="form-control"
+          type="text"
+          v-model="searchQuery"
+          
+          placeholder="Rechercher...  (désactive les filtres sélectionnés)"
+          />
+          <button class="btn btn-outline-secondary" type="button" @click="resetSearch">X</button>
+        </div>
+        
+        <div class="text-end py-2">
+           <span v-show="filteredRecipes.length > 1">
+            [[filteredRecipes.length]] recettes correspondent aux critères de recherche
+          </span>
+          <span v-show="filteredRecipes.length === 1">
+            [[filteredRecipes.length]] reccette correspond aux critères de recherche
+          </span>
+          <div class="m-5" v-show="filteredRecipes.length < 1">
+            Aucune recette ne correspond aux critères de recherche...
+          </div>
+        </div>
+        
+        {{/*  Les recettes CARDS  */}}
+        <div  
+        class="fhide card my-2 p-3"
+        v-for="(recipe, key) in recipes"
+        :key="key"
+        :class="{fshow: filteredRecipes.includes(recipe) }"
+        >
+        <span class="h4">
+          <a :href="[[recipe.url]]">[[recipe.title]]</a>
+        </span>
+        <span class="float-end mt-1">
+          <span class="badge bg-red">[[recipe.type]]</span>
+          <span class="badge bg-green me-1 " v-for="categorie in recipe.categories" :key="categorie">[[categorie]]</span>
+          <span class="badge bg-pink me-1 " v-for="saison in recipe.saison" :key="saison">[[saison]]</span>
+          <span class="text-muted small">[[recipe.specialite]]
+          </span>
+        </span>
+        <div class="small text-muted">[[recipe.auteur]]</div>
+        <div class="my-3">
+          <span v-if="recipe.temperature === 'Chaud'" class="badge bg-orange">Servir Chaud</span>
+          <span v-else class="badge bg-blue">Servir Froid</span>
+          <span v-if="recipe.cuisson === 'Oui'" class="badge bg-orange">Avec Cuisson</span>
+          <span v-else class="badge bg-blue">Sans Cuisson</span>
+          <span class="">
+            <span class="float-end badge bg-grey mx-1" v-for="regime in recipe.regimes" :key="regime">
+              [[regime]]
+            </span>
+          </span>
+        </div>
+      <div class="p-2">
+        <span class="fw-bold">Ingrédients :</span>
+        <span class="small" v-for="legumes in recipe.ilegumes" :key="legumes"
+        :class="{'fw-bold text-decoration-underline': filteredLegumes.includes(legumes)}">[[legumes]] - </span>
+        <span class="small" v-for="sec in recipe.isec" :key="sec" :class="{'fw-bold text-decoration-underline': filteredSec.includes(sec)}">[[sec]] - </span>
+        <span class="small" v-for="animaux in recipe.ianimaux" :key="animaux"
+        :class="{'fw-bold text-decoration-underline': filteredAnimaux.includes(animaux)}">[[animaux]] - </span>
+        <span class="small" v-for="lof in recipe.ilof" :key="lof" :class="{'fw-bold text-decoration-underline': filteredLof.includes(lof)}">[[lof]] - </span>
+        <div v-if="recipe.materiel.length" class="my-1">
+          <span class="fw-bold">Matériel :</span>
+          <span v-for="materiel in recipe.materiel" :key="materiel" class="small">[[materiel]] - </span>
+        </div>
+      </div>
+  </div>
+</div>
+</div>
+</div>
+</div>
+
+{{/*  <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">  */}}
+<link href="https://cdn.jsdelivr.net/npm/@mdi/font@6.x/css/materialdesignicons.min.css" rel="stylesheet">
+<style> 
+  .opacify{
+    opacity : 0.33;
+  }
+</style>
+
+
+<script type="module">
+  const appfilters = new Vue ({
+    delimiters: ['[[', ']]'],
+    el: '#app',
+    vuetify: new Vuetify(),
+    data: () => ({
+      recettes: [
+      
+      {{- range .Data.Pages -}}
+        
+      {
+        title: "{{ .Title }}",
+        url: "{{ .RelPermalink }}",
+        type: "{{ .Params.type }}",
+        auteur: "{{.Params.auteur}}",
+        specialite: "{{.Params.spécialité}}",
+        saison: [{{- range .Params.saison -}} "{{ . }}", {{- end -}}],
+        categories: [{{- range sort .Params.categories -}} "{{ . }}",{{- end -}}],
+        regimes: [{{- range sort .Params.regime -}} "{{ . }}",{{- end -}} ],
+        ilegumes: [{{- range .Params.ingredients.legumes -}} "{{ .title }}",{{- end -}} ],
+        isec: [ {{- range .Params.ingredients.sec -}} "{{ .title }}",{{- end -}} ], 
+        ianimaux: [ {{- range .Params.ingredients.animaux -}} "{{ .title }}",{{- end -}}
+        ],
+        ilof:  [ {{- range .Params.ingredients.lof -}} "{{ .title }}",{{- end -}} ],
+        specialite: " {{ .Params.spécialité }}",
+        temperature: "{{ .Params.temperature }}",
+        cuisson: "{{ .Params.cuisson }}",
+        materiel: [ {{- range .Params.materiel -}}  "{{ . }}", {{- end -}} ]
+      },
+      
+      {{- end -}}
+      
+      ],
+      filters: {
+        types: [],
+        categories: [],
+        regimes: [],
+        ilegumes: [],
+        ianimaux: [],
+        isec: [],
+        ilof: [],
+        cuisson: [],
+        temperature: [],
+        saison: []
+      },
+      
+      searchQuery: '',
+      disableFilters: false,
+
+      {{/*  additiveFiltering: false  */}}
+      
+    }),
+    
+    
+    computed: {
+      recipes() { // TODO : deplacer vers methods: ? Ne dépend pas de donnée réactives.. Voir inutile, et appeler directement data recettes...
+        return this.recettes.map(recipe => ({
+          ...recipe,
+          
+        }))
+      },
+      
+  {{/*  // Fonction de recherche sur tous les éléments d'un tableau d'objets contenant lui meme des tableaux
+
+      searchRecipes() {
+        const query = this.query.trim().toLowerCase().split(/\s+/);
+        this.filteredData = this.data.filter(item => {
+          return query.every(word => {
+            const keys = Object.keys(item);
+            return keys.some(key => {
+              if(Array.isArray(item[key])){
+                return item[key].some(subItem => subItem.toLowerCase().includes(word));
+              } else if(typeof item[key] === 'string') {
+                return item[key].toLowerCase().includes(word);
+              }
+            });
+          });
+        });
+      },  */}}
+      
+      filteredRecipes() {
+        // Fonction recherche associer à un champ, qui prend en compte plusieurs mots, et recheche dans plusieurs éléments de type string d'un objet 
+
+        if(this.searchQuery.length > 2){
+          this.disableFilters = true;
+          return this.recipes.filter((i) => {
+            return this.searchQuery.toLowerCase().split(' ').every(
+            v => i.title.toLowerCase().includes(v) ||
+            i.auteur.toLowerCase().includes(v) ||
+            i.specialite.toLowerCase().includes(v)
+            
+            );
+          })
+        } else{ 
+          this.disableFilters = false;
+
+          // Filtre les éléments en fonctions des checkbox
+          
+          return this.recipes.filter(
+          {{/*  this.additiveFiltering ?
+          p => this.x(this.filters.categories, p.categories).length ||
+          this.x(this.filters.regimes, p.regimes).length ||
+          this.x(this.filters.ilegumes, p.ilegumes).length ||
+          this.x(this.filters.isec, p.isec).length ||
+          this.x(this.filters.ianimaux, p.ianimaux).length ||
+          this.x(this.filters.ilof, p.ilof).length ||
+          this.x(this.filters.cuisson, p.cuisson).length ||
+          this.x(this.filters.temperature, p.temperature).length ||
+          this.x(this.filters.saison, p.saison).length
+          :  */}}
+          p => (!this.filters.categories.length ||
+          this.x(this.filters.categories, p.categories).length) &&
+          (!this.filters.regimes.length ||
+          this.x(this.filters.regimes, p.regimes).length)  &&
+          (!this.filters.ilegumes.length ||
+          this.x(this.filters.ilegumes, p.ilegumes).length) &&
+          (!this.filters.isec.length ||
+          this.x(this.filters.isec, p.isec).length) &&
+          (!this.filters.ianimaux.length ||
+          this.x(this.filters.ianimaux, p.ianimaux).length)  &&
+          (!this.filters.ilof.length ||
+          this.x(this.filters.ilof, p.ilof).length) &&
+          (!this.filters.cuisson.length ||
+          this.x(this.filters.cuisson, p.cuisson).length)  &&
+          (!this.filters.temperature.length ||
+          this.x(this.filters.temperature, p.temperature).length)  &&
+          (!this.filters.saison.length ||
+          this.x(this.filters.saison, p.saison).length)
+          );
+        }
+      },
+      
+
+      // Permet la mise en évidence des ingredients(...) correspondants aux filtres actifs
+      filteredLegumes() {
+        return this.filters.ilegumes
+      },
+      filteredAnimaux() {
+        return this.filters.ianimaux
+      },
+      filteredSec() {
+        return this.filters.isec
+      },
+      filteredLof() {
+        return this.filters.ilof
+      },
+      
+      
+      
+      // Pour la fabrication des boutons de filtres
+      allcategories() {
+        return this.getAll('categories')
+      },
+      allregimes() {
+        return this.getAll('regimes')
+      },
+      allilegumes() {
+        return this.getAll('ilegumes')
+      },
+      allisec() {
+        return this.getAll('isec')
+      },
+      allianimaux() {
+        return this.getAll('ianimaux')
+      },
+      allilof() {
+        return this.getAll('ilof')
+      },
+      allcuisson(){
+        return this.getAll('cuisson')
+      },
+      alltemperature(){
+        return this.getAll('temperature')
+      },
+      allsaison(){
+        return this.getAll('saison')
+      },
+      
+      
+      
+    },
+    
+    
+    methods: {
+      // tags(recipe) {
+        //   return [].concat(recipe.categories, recipe.regimes)
+        // },
+        
+        ingredients(recipe) { // USELESS ?
+          return [].concat(recipe.ilegumes, recipe.isec, recipe.ianimaux, recipe.ilof)
+        },
+{{/*          
+        logger(obj) {
+          return JSON.stringify(obj, null, 2)
+        },  */}}
+
+        getAll(prop) {
+          return [...new Set([].concat.apply([], this.recettes.map(item => item[prop])))]
+        },
+        x(arr1, arr2) {
+          return arr1.filter(val => arr2.includes(val))
+        },
+        
+        resetFilters: function () {
+          this.filters['regimes'] = []
+          this.filters['categories'] = []
+          this.filters['ilegumes'] = []
+          this.filters['ianimaux'] = []
+          this.filters['isec'] = []
+          this.filters['ilof'] = []
+          this.filters['cuisson'] = []
+          this.filters['temperature'] = []
+        },
+        resetSearch: function () {
+          this.searchQuery = '' 
+        },
+   
+      }
+      
+    }
+    );
+  </script>
+  
+  
+  {{ end }}
+  

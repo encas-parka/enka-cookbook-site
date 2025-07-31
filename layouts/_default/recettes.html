@@ -1,0 +1,350 @@
+
+{{ define "main" }}
+
+
+{{- if not hugo.IsProduction -}}
+<span class="no-print text-muted">{{ hugo.Environment }} |  Layout : layouts/_default/recettes.html </span>
+{{- end -}}
+
+
+{{/*  TODO json allergenes  */}}
+{{/*  Reccupération des données allergenesIng sur chaque ingrédients. Permet de faire évoluer la liste plutot que de la figer  */}}
+{{/*  {{- $allergenesTypeList := slice -}}
+{{ range $.Site.Data.ingredients }}
+  {{- range .ingredients -}}
+    {{- if .alergenesIng -}}
+      {{- $allergenesTypeList = $allergenesTypeList | append .alergenesIng -}}
+    {{- end -}}
+  {{- end -}}
+  {{ end }}
+{{- $allergenesTypeList = $allergenesTypeList | uniq -}}  */}}
+
+{{/*  {{ $sAllergenes := newScratch }}
+{{- range $.Site.Data.ingredients -}}
+  {{- range .ingredients -}}
+    {{- if .alergenesIng -}}
+      {{- $ingTitle := .title -}}
+      {{ range .alergenesIng -}}
+           {{$sAllergenes.Add . (slice $ingTitle)}}
+      {{ end }}    
+    {{- end -}}
+  {{- end -}}
+{{- end -}}  */}}
+
+{{ $sAllergenes := (partialCached "functions/allergenesIng.html" .)  }}
+
+{{ $allergenesLgList := slice "Poisson" "Oeuf" "Soja" "Sésame" "Moutarde" "Fruit à coque" "Céleri" "Crustacé" "Arachide" "Mollusque"}}
+
+
+{{/*  {{ $allergenesDict := dict }}  */}}
+{{ $allergenesList := slice }}
+{{ range $allergenesLgList }} {{/* replace $allergenesTypeList */}}
+  {{/*  {{ $allergenesDict = merge $allergenesDict (dict . ($sAllergenes.Get .)) }}  */}}
+  {{ $allergenesList = append  ($sAllergenes.Get .) $allergenesList }}
+{{ end }}
+
+
+{{/* reccupération des ingredients warning de la recette  */}}
+{{ $ingredientsL := slice }}
+
+{{- range $key, $value := .Params.ingredients -}}
+{{- with . -}}
+{{- range $index, $element := . -}}
+{{ $ingredientsL = $ingredientsL | append .title}}
+{{- end }}
+{{- end -}} 
+{{- end -}}
+
+{{- $alertGluten := intersect $ingredientsL ($sAllergenes.Get "Gluten") -}}
+{{- $alertPorc := intersect $ingredientsL ($sAllergenes.Get "Porc") -}}
+{{- $alertLait := intersect $ingredientsL ($sAllergenes.Get "Produit laitier") -}}
+{{- $alertLactose := intersect $ingredientsL ($sAllergenes.Get "lactose") -}}
+{{- $alertAutresAllergenes := slice -}}
+{{ range $allergenesLgList }}
+  {{- $toAdd := intersect $ingredientsL ($sAllergenes.Get . ) -}}
+  {{- $alertAutresAllergenes = $alertAutresAllergenes | append  $toAdd -}}
+{{ end }}
+
+{{ $svg := partial "components/svg-icon-cat-find" . }}
+<div class="float-start  me-2"></div>
+<div class="h1">
+  <span class="print-recette-title ">{{ partial "components/icon-svg" (dict "name" $svg "size" "3rem") }} {{.Title}}</span>
+</div>
+
+<div class="row">
+      <div class="col-md-6 ">
+      {{- if .Params.auteur -}}
+      <span class="text-muted fs-5 no-print">une recette de {{ .Params.auteur }}</span>
+      {{- end -}}
+    </div>
+
+    <div class="col-md-6 no-print">
+      {{ $linkCMSPage := (path.Join "/admin/#/collections/recettes/entries/" (.Type) (.File.ContentBaseName)) }}
+      {{$enkaDevCms := ""}}
+      {{ if eq .Site.BaseURL "enka-cookbook.pages.dev"}}
+        {{$enkaDevCms = "https://enka-cookbook.netlify.app"}}
+      {{ end }}
+      <div class="text-end mx-2 px-2 no-print"><a target="_blank" rel="noopener noreferrer" href="{{- $enkaDevCms -}}{{- $linkCMSPage -}}/index" >Modifier</a> 
+      </div>
+
+     
+
+      <div class="printonly">
+        <div class="m-2 p-2 fs-5 text-end print-fs-small">
+          {{ partial "content/badge-recette.html" . }}
+        </div>
+        <div class="m-2 p-2 text-end print-m-1 print-y-1 ">
+          {{- if .Params.materiel -}}
+            <span class="fw-bold print-fs-smaller">Materiel: </span>
+            {{- range .Params.materiel -}}
+              <span class="badge bg-grey me-1 print-fs-smaller">{{ . }}</span>
+            {{- end -}}
+          {{- end -}}
+        </div>
+      </div>
+  
+    </div>
+
+
+    <div class="print-only">
+      <div class="m-2 p-2 fs-5 text-end print-fs-small">
+        <span class="me-2">{{ partial "content/badge-recette.html" . }}</span>
+        {{- if .Params.materiel -}}
+          <span class="fw-bold print-fs-smaller">Materiel: </span>
+          {{- range .Params.materiel -}}
+            <span class="badge bg-grey print-fs-smaller me-2">{{ . }}</span>
+          {{- end -}}
+        {{- end -}}
+      </div>
+    </div>
+  <div class="printonly my-4">
+    <div class=" text-center mb-1">
+      <span class="fs-6 fw-bolder">
+        Quantité pour <span id="quantityDefined"> {{.Params.plate}}</span> couverts
+        {{ with .Params.quantite_desc }}
+      </span>
+      <span class="text-center printonly ms-2">
+          {{.}}
+      </span>
+      {{ end }}
+    </div>
+  </div>
+</div>
+
+
+{{/* lien vers le CMS de la page */}}
+
+
+  <div class="row mt-3 no-print">
+    <div class="col-12 col-md-6 col-lg-6 col-xl-6 no-print">
+ 
+      {{- if eq .Params.check "Oui" -}}
+        <span class="no-print">Cette recette a été testée pour {{.Params.plate}} couverts </span>
+        {{- if (.Params.checkfor) -}}
+          <span class="no-print">et pour {{.Params.checkfor}} couverts</span>
+        {{- end -}}
+      {{- else -}}
+        <div class="card border-danger shadow mb-3">
+          <div class="card-body small">
+            {{ if eq .Site.BaseURL "enka-cookbook.pages.dev"}}
+            {{$enkaDevCms = "https://enka-cookbook.netlify.app/"}}
+            {{ end }}
+            <span class="card-text">Les auteur•ices de la recette ne l'ont <strong>pas testé</strong> pour le nombre de couverts indiqués par défaut ({{.Params.plate}}).<span class="no-print"> Merci de <a href="{{- $enkaDevCms -}}{{$linkCMSPage}}/index">modifier</a> la recette pour indiquer si vous l'avez testé avec succès, ou pour corriger les quantités d'ingrédients indiquées.</span></span>
+          </div>
+        </div>
+        
+      {{- end -}}
+
+      <div class="no-print">
+        <span id="quantityInit" style="display:none">{{.Params.plate}}</span>
+        <form>
+          <div class="input-group my-2">
+            <span class="input-group-text" for="amount">Nombre de couverts à servir : </span>
+            <input type="number" class="form-control form-control-lg " id="quantityInput" name="quantityInput" value="{{.Params.plate}}" style="flex: 0 1 120px">
+          </div>
+        </form>
+      </div>
+      </div>
+      {{- with (or ( $alertAutresAllergenes ) ( $alertGluten) ( $alertLait) ( $alertLactose) ( $alertPorc)) -}}
+      <div class="col-12 col-md-6 col-lg-6 col-xl-6 print-col-2 no-print ">
+        <div class="card border-danger shadow small px-4 card-body print-nocard">
+          {{- with $alertAutresAllergenes -}}
+          <div> <span class="me-2"> {{ partial "components/icon-svg" (dict "name" "exclamation-triangle" "size" "1rem") }}</span>
+            Allergènes divers:
+            <span class="fw-bold">{{ delimit $alertAutresAllergenes ", "}}</span>
+          </div>
+          {{- end -}}
+          {{- with $alertGluten -}}
+          <div><span class="me-2">{{ partial "components/icon-svg" (dict "name" "gluten" "size" "1rem") }}</span>
+            Gluten :
+            <span class="fw-bold">{{ delimit $alertGluten ", "}}</span>
+          </div>
+          {{- end -}}
+          {{- with $alertLait -}}
+          <div><span class="me-2">{{ partial "components/icon-svg" (dict "name" "milk-box" "size" "1rem") }}</span>
+            Produits laitier :
+            <span class="fw-bold">{{ delimit $alertLait ", "}}</span>
+          </div>
+          {{- end -}}
+          {{- with $alertLactose -}}
+          <div><span class="me-2">{{ partial "components/icon-svg" (dict "name" "milk-box" "size" "1rem") }}</span>
+            Lactose :
+            <span class="fw-bold">{{ delimit $alertLait ", "}}</span>
+          </div>
+          {{- end -}}
+          {{- with $alertPorc -}}
+          <div><span class="me-2">{{ partial "components/icon-svg" (dict "name" "no-vegan" "size" "1rem") }}</span> Porc:
+            <span class="fw-bold">{{ delimit $alertPorc ", "}}</span>
+          </div>
+          {{- end -}}
+        </div>
+      </div>
+      {{- end -}} 
+    </div>
+
+  {{ with .Params.description }}
+  <div class="row justify-content-center m-3">
+        
+    <div class="col-md-8">
+      <p class="text-center fst-italic">{{.}}</p>
+    </div>
+  </div>
+  {{ end }}
+
+  {{ with .Params.quantite_desc }}
+  <div class="my-2 no-print">    
+      {{.}}
+  </div>
+  {{ end }}
+
+{{/* :::INGREDIENTS  */}}
+
+<div class="row mt-4">
+  <div class="col-md-4 print-col-30-100">
+    <h4><span class="me-2">{{ partial "components/icon-svg" (dict "name" "ingredients" "size" "2rem") }}</span> Ingredients </h4>
+
+      {{/*  <div class="card my-4 p-2 shadow">
+        <span class="small">{{ partial "inline-svg" (dict "src" "fonticons/exclamation-triangle" "display" "inline" "rem" 1) }} → Allergènes </span>
+      </div>  */}}
+
+      {{- range $key, $value := .Params.ingredients  -}}
+        {{- with . -}}
+        <div class="card my-2 p-2 " outlined>
+          <div>
+            <span class="fw-bold mb-2 me-1">{{ partial "components/icon-svg" (dict "name" $key "size" "1.5rem") }} {{ partial "functions/ingredients-types-rename-short" (dict "ingType" ($key  | strings.FirstUpper )) .}} </span>   
+            {{ if eq $key "epices"}}
+             <span class="small text-muted">(gouttez, ajustez !)</span>
+            {{ end }}
+          </div>
+          
+          {{- range $index, $element := . -}} 
+          <div class="small ps-2 print-fs-smaller mt-1">
+            • {{ partial "functions/ing4recettes" (dict "ingredient" .title "quantite" .quantite "unit" .unit "alergene" $allergenesList  ) }} 
+            {{ with .commentaire }}
+            <span class="small fs-6 fw-light ms-2 lh-1 print-fs-smaller">({{.}})</span>
+            {{ end }}
+          </div>
+          {{end}}
+        </div>
+       {{- end -}} {{/* with */}} 
+      {{- end -}} {{/* range key value */}}
+
+      <div class="text-muted small">
+        {{ partial "components/icon-svg" (dict "name" "exclamation-triangle" "size" "1rem") }} → Allergènes
+      </div>
+  </div>
+
+
+{{/* ::: PREPARATION  */}}
+    <div class="col-md-8 print-col-70-100">
+
+
+      <h4><span class="me-2">{{ partialCached "components/icon-svg" (dict "name" "preparation" "size" "2.3rem") }}</span> Préparation</h4>
+      <div class="avoid-break-inside">
+          <div class="m-auto">
+            {{- if .Params.preparation24h -}}
+            <div class="border border-danger mb-4">
+              <div class="p-3">
+                <div class="h5 mt-0 print-fs-medium">A prévoir à l'avance !</div>
+                <div>{{ .Params.preparation24h | markdownify }}</div>
+              </div>
+            </div>
+            {{- end -}}
+            {{.Params.preparation | markdownify}}
+          </div>
+      </div>
+      
+    {{- if .Params.astuces -}}
+    {{- range .Params.astuces -}}
+    <div class="card my-2  bg-light">
+      <div class="card-body small">
+        <div class="fw-bold">Astuce: </div>
+        <div>{{ .astuce }}</div>
+      </div>
+    </div>
+    {{- end -}}
+    {{- end -}}
+
+
+  {{/*  Réccupération des backlink : recettes citant celle-ci comme recette alternative  */}}
+  {{ $backlinks := dict }}
+  {{ $page := . }}
+  {{/*  tableau des recettes alternatives signalées pour eviter les doublons avec les backlinks  */}}
+  {{ $recetteAlt := slice}}
+  {{ range where .Site.RegularPages "Section" "recettes" }}
+  {{ $url := .RelPermalink }}
+  {{ $title := .Title }}
+  {{ $titleslug := .Params.titleslug }}
+  {{ range .Params.prepAlt }} 
+    {{ if eq .recetteAlt $page.Params.titleslug }}
+      {{ $backlinks = merge $backlinks (dict $url $title ) }}
+    {{ end }}
+  {{ end }}
+  {{ end }}
+
+    {{- if  (or .Params.prepAlt $backlinks) -}}
+    <div class="card my-5  bg-light no-print">
+      <div class="card-body small">
+        <div class="card-title fw-bold">Préparation(s) alternative(s): </div>
+      {{- range .Params.prepAlt -}}
+      {{ $recetteAlt = $recetteAlt | append .recetteAlt }}
+        <div>
+          {{ with site.GetPage ( .recetteAlt | urlize) }} 
+          <a id="toBacklink{{.RelPermalink}}"href="{{ .Permalink}}">{{.Title}}</a>
+         {{end}}
+        </div>
+      {{- end -}}
+      {{- end -}}
+
+      {{ with $backlinks }}
+      <div>
+        {{ range $url, $title := $backlinks }}
+          {{ if not (in $recetteAlt $page.Params.titleslug) }}
+          <span><a href="{{ $url }}">{{ $title}}</a></span>
+          {{ end }}
+        {{ end }}
+      </div>
+      {{ end }}
+
+      </div>
+    </div>
+
+
+  </div>
+  
+  <br><hr><br>
+  <div class="no-print ">
+    {{/*  <div class="small">Si vous avez des retour d'experience à partager sur cette recette. Vous pouvez précisions, autres quantités, </div>  */}}
+  </div>
+</div>
+
+
+{{/*  :::Script : giscus + quantite  */}}
+{{/*  {{ partial "components/giscus-comment" }}  */}}
+
+{{ partial "footer/esbuild" (dict "src" "js/quantite.js" "load" "async" "transpile" false) -}}
+
+{{ end }}
+
+
+

@@ -1,0 +1,32 @@
+<div class="col-lg-6">
+  <div class="container">
+    <div class="card recipe-card card-recette">
+      <aside>
+        <a href="{{ .Permalink }}">
+          {{if .Params.img}}
+          <img class="card-image img-fluid img-cover" src="{{.Params.img}}" />
+          {{ else }}
+          <img class="card-image img-fluid img-cover" src="/images/{{.Params.Categories}}.webp" />
+          {{end}}
+          <div class="card-recipe-title h4 ">{{.Title}}</div>
+      </aside>
+      <div class="card-body">
+        <a href="{{.Permalink}}" class="stretched-link"></a>
+        <div class="card card-recette mb-3 text-center font-weight-bold border-3 ">
+          Voir tous les {{.Title}} ({{ len .RegularPages
+        }}
+        recettes)
+        </div>
+        {{ range first 9 .RegularPages }}
+        <div class="card card-recette z-index-2 ">
+          <a href="{{.Permalink}}" class="stretched-link"></a>
+          <span>
+            <b>{{.Title}}</b>
+            <small>{{if .Params.regime}}{{.Params.regime}}{{end}} </small></a>
+          </span>
+        </div>
+        {{ end }}
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,8 @@
+
+{{ $src:= ( printf "fonticons/%s.svg" .icon ) }}
+
+{{ if (fileExists (printf "assets/%s" $src)) }}
+<span class="me-2 no-print">{{ partial "inline-svg" (dict "src" $src "display" "inline-middle" "rem" 2) }} </span>
+<span class="me-2 printonly">{{ partial "inline-svg" (dict "src" $src "display" "inline-middle" "fs" 3) }} </span>
+{{end}}
+

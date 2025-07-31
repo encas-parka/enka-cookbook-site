@@ -1,29 +1,18 @@
 backend:
-  name: proxy
+  name: github
   repo: encas-parka/enka-cookbook-site
   branch: supabase
-  proxy_url: https://mkkrfozercivwnbmqfqe.supabase.co/functions/v1/proxy-github
 
-  # auth_endpoint: /api/auth
-
-  #Permettre un PR sur github sans l'acces aux dépot (github only)
-  # open_authoring: true
+  # Ce paramètre est crucial. On indique au CMS d'utiliser le mode "github".
+  # Même si cela semble contradictoire, le script du CMS va d'abord vérifier
+  # le localStorage. Comme votre script `auth.js` y a déjà placé un token valide,
+  # le CMS l'utilisera et ne déclenchera PAS la fenêtre popup d'authentification GitHub.
+  # C'est exactement le comportement que vous recherchez.
+  auth_type: github
 
   # Vérifier si ca marche bien : si un article est modifier plusieur fpos avant d'etre mergé/publié, un seul commit avec rebased.
   squash_merges: true
 
-  #GraphQL allows to retrieve data using less individual API requests compared to a REST API. GitHub's GraphQL API still does not support all mutations necessary to completely replace their REST API, so this feature only calls the new GraphQL API where possible.
-  use_graphql: true
-
-#By default, saving a post in the CMS interface pushes a commit directly to the publication branch specified in backend.
-# This line should *not* be indented
-# publish_mode: editorial_workflow
-# local_backend: false
-
-# The search functionally requires loading all collection(s) entries, which can exhaust rate limits on large repositories. It can be disabled by setting the top level search property to false.
-# Defaults to true
-search: true
-locale: "fr"
 
 # when using the default proxy server port
 # for local cms developpement.

@@ -14,7 +14,7 @@ regime:
   - sans-lactose
 cuisson: Non
 temperature: Froid
-plate: 10
+plate: 50
 check: Non
 checkAlwaysOk: true
 ingredients:

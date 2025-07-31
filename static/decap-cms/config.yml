@@ -1,26 +1,37 @@
 backend:
+
+  # Interface decap cms avec graphql et auth.js/supabase avec open_authoring
+
   name: github
   repo: encas-parka/enka-cookbook-site
   branch: supabase
-  base_url: https://enka-cookbook.pages.dev
 
 
-  # Ce paramètre est crucial. On indique au CMS d'utiliser le mode "github".
-  # Même si cela semble contradictoire, le script du CMS va d'abord vérifier
-  # le localStorage. Comme votre script `auth.js` y a déjà placé un token valide,
-  # le CMS l'utilisera et ne déclenchera PAS la fenêtre popup d'authentification GitHub.
-  # C'est exactement le comportement que vous recherchez.
-  auth_type: github
+  #Permettre un PR sur github sans l'acces aux dépot (github only)
+  open_authoring: true
 
   # Vérifier si ca marche bien : si un article est modifier plusieur fpos avant d'etre mergé/publié, un seul commit avec rebased.
   squash_merges: true
 
+  #GraphQL allows to retrieve data using less individual API requests compared to a REST API. GitHub's GraphQL API still does not support all mutations necessary to completely replace their REST API, so this feature only calls the new GraphQL API where possible.
+  use_graphql: true
+
+#By default, saving a post in the CMS interface pushes a commit directly to the publication branch specified in backend.
+# This line should *not* be indented
+# publish_mode: simple
+
+logo_url: https://enka-cookbook.netlify.app/cover.png
+
+# The search functionally requires loading all collection(s) entries, which can exhaust rate limits on large repositories. It can be disabled by setting the top level search property to false.
+# Defaults to true
+search: false
+locale: "fr"
 
 # when using the default proxy server port
 # for local cms developpement.
 # Need to run : 'npx decap-server' from the root directory of the above repository.
-# local_backend:
-#   url: http://localhost:8081/api/v1 # when using a custom proxy server port
+local_backend:
+  url: http://localhost:8081/api/v1 # when using a custom proxy server port
 
 media_folder: "static/images"
 public_folder: "/images"
@@ -136,7 +147,7 @@ collections:
         search_fields: ["title"]
         multiple: true
         max: 4
-        options_length: 50
+        options_length: 20
         required: true
         hint: "Vous pouvez en définir plusieurs, mais la première servira à définir l'icone associée à la recette."
       - label: "auteur"
@@ -229,7 +240,7 @@ collections:
             collection: "ingredients_index"
             search_fields: ["title"]
             value_field: "title"
-            options_length: 2000
+            options_length: 600
           - label: "Quantité (nombre)"
             name: quantite
             widget: number
@@ -388,7 +399,7 @@ collections:
             widget: "list"
             allow_add: true
             add_to_top: true
-            summary: "{{recette}} : {{fields.type_plat}} - {{fields.altAssiettes}}"
+            summary: "{{recette | truncate(35)}} : {{fields.type_plat}} - {{fields.altAssiettes}}"
             fields:
               - label: "Recette"
                 name: "recette"

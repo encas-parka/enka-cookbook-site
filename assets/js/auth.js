@@ -39,7 +39,7 @@ async function setupCmsAuthenticationAndRedirect() {
     localStorage.setItem('sveltia-cms.user', JSON.stringify(cmsAuth));
 
 
-    window.location.href = "/adminsupa/";
+    window.location.href = "/sveltia/";
 
   } catch (e) {
     console.error("Erreur lors de la configuration de l'authentification CMS :", e);

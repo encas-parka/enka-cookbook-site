@@ -7,7 +7,7 @@ backend:
   branch: supabase
 
   #Permettre un PR sur github sans l'acces aux dépot (github only)
-  open_authoring: true
+  # open_authoring: true
 
   # Vérifier si ca marche bien : si un article est modifier plusieur fpos avant d'etre mergé/publié, un seul commit avec rebased.
   squash_merges: true
@@ -17,7 +17,7 @@ backend:
 
 #By default, saving a post in the CMS interface pushes a commit directly to the publication branch specified in backend.
 # This line should *not* be indented
-publish_mode: editorial_workflow
+# publish_mode: editorial_workflow
 
 logo_url: https://enka-cookbook.netlify.app/cover.png
 

@@ -7,8 +7,79 @@
   <title>Administration du Contenu</title>
 </head>
 <body>
-  <!-- Scripts à la fin du body -->
+  <!-- Chargement de Decap CMS -->
   <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
 
+  <!-- Chargement de notre intégration Supabase -->
+  <script type="module">
+    import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm";
+
+    // Configuration Supabase
+    const SUPABASE_URL = "https://mkkrfozercivwnbmqfqe.supabase.co";
+    const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1ra3Jmb3plcmNpdnduYm1xZnFlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTM5MTQ5MDIsImV4cCI6MjA2OTQ5MDkwMn0.E4uPMUe4JYR75IcCO8LkwC_ngoQkZwKowcLJP3lDqTQ";
+
+    const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+    // Vérifier l'authentification au chargement
+    window.addEventListener('DOMContentLoaded', async () => {
+      console.log('Page chargée, vérification auth...');
+
+      const { data: { session } } = await supabase.auth.getSession();
+
+      if (!session) {
+        console.log('Pas de session, redirection...');
+        // Pas de session, rediriger vers la page de login
+        window.location.href = '/login/';
+        return;
+      }
+
+      console.log('Session trouvée, initialisation CMS...');
+
+      // Essayer de charger le config.yml
+      try {
+        const response = await fetch('./config.yml');
+        if (response.ok) {
+          console.log('Config.yml trouvé, chargement...');
+          window.CMS.init({
+            config: {
+              load_config_file: true
+            }
+          });
+        } else {
+          console.error('Config.yml non trouvé:', response.status);
+        }
+      } catch (error) {
+        console.error('Erreur lors du chargement config:', error);
+      }
+    });
+
+    // Écouter les changements d'état d'authentification
+    supabase.auth.onAuthStateChange((event, session) => {
+      if (event === 'SIGNED_OUT') {
+        window.location.href = '/login/';
+      }
+    });
+  </script>
+
+  <!-- Bouton de déconnexion -->
+  <div id="logout-section" style="position: fixed; top: 10px; right: 10px; z-index: 1000;">
+    <button id="logout-btn" class="btn btn-outline-secondary btn-sm">
+      Déconnexion
+    </button>
+  </div>
+
+  <script type="module">
+    import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm";
+
+    const supabase = createClient(
+      "https://mkkrfozercivwnbmqfqe.supabase.co",
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1ra3Jmb3plcmNpdnduYm1xZnFlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTM5MTQ5MDIsImV4cCI6MjA2OTQ5MDkwMn0.E4uPMUe4JYR75IcCO8LkwC_ngoQkZwKowcLJP3lDqTQ"
+    );
+
+    document.getElementById('logout-btn').addEventListener('click', async () => {
+      await supabase.auth.signOut();
+      window.location.href = '/registration/';
+    });
+  </script>
 </body>
 </html>

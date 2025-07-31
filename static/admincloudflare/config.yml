@@ -1,12 +1,10 @@
 backend:
-  name: proxy
+  name: github
   repo: encas-parka/enka-cookbook-site
   branch: supabase
 
-  proxy_url: https://decap-cms-proxy.encas-cookbook.workers.dev/repos/encas-parka/enka-cookbook-site/contents
+  base_url: https://decap-cms-proxy.encas-cookbook.workers.dev
 
-  # local_backend: false
-  # auth_endpoint: /api/auth
 
   #Permettre un PR sur github sans l'acces aux dépot (github only)
   # open_authoring: true
@@ -32,6 +30,8 @@ locale: "fr"
 # Need to run : 'npx decap-server' from the root directory of the above repository.
 # local_backend:
 #   url: http://localhost:8081/api/v1 # when using a custom proxy server port
+
+
 
 media_folder: "static/images"
 public_folder: "/images"

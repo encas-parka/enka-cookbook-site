@@ -7,99 +7,14 @@
   <title>Administration du Contenu</title>
 </head>
 <body>
-  <!-- Scripts à la fin du body -->
-  <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
-
-  <script type="module">
-    // Importe le client Supabase
-    import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
-
-    // --- CONFIGURATION ---
-    const SUPABASE_URL = 'https://mkkrfozercivwnbmqfqe.supabase.co';
-    const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1ra3Jmb3plcmNpdnduYm1xZnFlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTM5MTQ5MDIsImV4cCI6MjA2OTQ5MDkwMn0.E4uPMUe4JYR75IcCO8LkwC_ngoQkZwKowcLJP3lDqTQ";
-
-    const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-    // On attend que l'objet CMS soit défini par le script decap-cms-app.js
-    // C'est la vérification la plus simple pour éviter les erreurs de timing.
-    function initDecap() {
-      const { h, CMS } = window;
-      if (!CMS) {
-        console.log("Decap CMS pas encore prêt, on réessaie...");
-        setTimeout(initDecap, 50); // On attend 50ms et on réessaie
-        return;
-      }
-
-    console.log("Decap CMS est prêt, on configure le backend.");
-
-    CMS.on('init', ({ detail }) => {
-      // Si notre backend est déjà 'supabase-proxy', cela signifie que notre script a déjà
-      // été exécuté (parce que nous appelons CMS.init(config) plus bas). On sort pour éviter une boucle.
-      if (detail.config.backend.name === 'supabase-proxy') {
-        return;
-      }
-
-      // 1. On récupère la classe du backend 'proxy' original.
-      // Avec 'decap-cms-app.js', ceci est garanti de fonctionner.
-      const ProxyBackend = CMS.getBackend('proxy');
-      if (!ProxyBackend) {
-        console.error("Le backend 'proxy' de Decap CMS n'a pas pu être chargé.");
-        return;
-      }
-
-      // 2. On définit notre propre classe de backend qui hérite du backend proxy original.
-      class SupabaseProxyBackend extends ProxyBackend.default {
-        constructor(config, options) {
-          super(config, options);
-          // On désactive l'interface d'authentification de Decap, car on utilise la nôtre (auth.js).
-          this.authComponent = () => h('div');
-        }
-
-        // 3. Cette méthode est surchargée. Elle sera appelée par Decap CMS
-        // juste avant chaque requête vers notre proxy.
-        async request(req) {
-          console.log("SupabaseProxyBackend: Interception d'une requête...");
-          // On récupère la session Supabase de l'utilisateur.
-          const { data: { session } } = await supabase.auth.getSession();
-
-          if (!session) {
-            console.warn("SupabaseProxyBackend: Aucune session Supabase active. La requête ne sera pas authentifiée.");
-            // Si pas de session, on laisse la requête originale continuer.
-            // Elle sera (correctement) rejetée par notre fonction Edge sur le serveur.
-            return super.request(req);
-          }
-
-          console.log("SupabaseProxyBackend: Session Supabase trouvée, injection du jeton.");
-          // On clone la requête pour y ajouter notre en-tête d'authentification.
-          const newReq = req.clone({
-            headers: {
-              ...Object.fromEntries(req.headers.entries()),
-              Authorization: `Bearer ${session.access_token}`,
-            },
-          });
-
-          // On passe la requête modifiée au gestionnaire de requêtes du backend proxy original.
-          return super.request(newReq);
-        }
-      }
-
-      // 4. On récupère la configuration chargée depuis config.yml
-      const config = detail.config;
-
-      // 5. On enregistre notre backend personnalisé sous un nouveau nom.
-      CMS.registerBackend('supabase-proxy', SupabaseProxyBackend);
-
-      // 6. On modifie la configuration en mémoire pour qu'elle utilise notre backend.
-      config.backend.name = 'supabase-proxy';
-
-      // 7. On relance l'initialisation du CMS avec la configuration modifiée.
-      CMS.init(config);
-    });
-
-    // On lance la toute première initialisation de Decap CMS.
-    // Il va charger config.yml, déclencher notre événement 'init' ci-dessus,
-    // puis continuer son initialisation avec la configuration que nous avons modifiée.
-    CMS.init();
-    }
-  </script>
+  <!-- 
+    On charge la version complète de Decap CMS.
+    Elle lira automatiquement le fichier /adminsupa/config.yml et s'initialisera
+    avec la configuration du proxy que nous avons définie.
+    
+    Aucun script personnalisé n'est nécessaire pour l'approche proxy Cloudflare,
+    ce qui rend cette solution beaucoup plus simple et robuste.
+  -->
+  <script src="https://unpkg.com/decap-cms-app@^3.0.0/dist/decap-cms-app.js"></script>
 </body>
 </html>

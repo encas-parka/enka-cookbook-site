@@ -50,7 +50,7 @@ loginForm.addEventListener("submit", async (event) => {
     errorMessage.style.display = "block";
   } else {
     // Si la connexion réussit, rediriger vers la page d'administration
-    window.location.href = "/adminsupa/";
+    window.location.href = "/admincloudflare/";
   }
 
   // Cache le spinner et réactive le bouton

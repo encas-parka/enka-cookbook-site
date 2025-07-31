@@ -2,6 +2,8 @@ backend:
   name: github
   repo: encas-parka/enka-cookbook-site
   branch: supabase
+  base_url: https://enka-cookbook.pages.dev
+
 
   # Ce paramètre est crucial. On indique au CMS d'utiliser le mode "github".
   # Même si cela semble contradictoire, le script du CMS va d'abord vérifier

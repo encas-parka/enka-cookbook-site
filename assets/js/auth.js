@@ -29,7 +29,7 @@ const userEmailDisplay = document.getElementById("user-email-display");
 async function setupCmsAuthenticationAndRedirect() {
   try {
     // Appelle la fonction Supabase 'get-cms-auth'
-    const { data: cmsAuth, error: functionError } = await supabase.functions.invoke('get-cms-auth');
+    const { data: cmsAuth, error: functionError } = await supabase.functions.invoke('smart-action');
 
     if (functionError) {
       // Si la fonction elle-même retourne une erreur (ex: l'utilisateur n'est pas authentifié)

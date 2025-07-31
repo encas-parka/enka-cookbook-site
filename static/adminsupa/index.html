@@ -49,32 +49,6 @@
       }
     }
 
-    // --- ENREGISTREMENT DES WIDGETS ET LISTENERS PERSONNALISÉS ---
-    // Widget UUID
-    function nanoid(t = 8) { return crypto.getRandomValues(new Uint8Array(t)).reduce((t, e) => (t += (e &= 35) < 36 ? e.toString(36) : ""), "").toLowerCase(); }
-    const UuidWidget = createClass({
-        componentDidMount() { if (!this.props.value || window.location.href.endsWith("/new")) { this.props.onChange(nanoid()); } },
-        render() { return h("span", { id: this.props.forID, style: { fontFamily: "monospace", marginLeft: "1rem" } }, this.props.value); },
-    });
-    CMS.registerWidget("uuid", UuidWidget);
-
-    // Widget Text Info
-    const TextInfoWidget = createClass({
-        render: function () { return h("div", { className: this.props.classNameWrapper }, h("div", { style: { padding: "20px", backgroundColor: "#f0f0f0", borderRadius: "5px" } }, this.props.value)); },
-    });
-    CMS.registerWidget("text-info", TextInfoWidget);
-
-    // Event Listener 'preSave'
-    CMS.registerEventListener({
-        name: "preSave",
-        handler: ({ entry }) => {
-            let updatedData = entry.get('data');
-            // ... (votre logique de slugify et de tri reste identique) ...
-            if (["recettes", "evenement"].includes(entry.get("collection"))) { if (!entry.getIn(["data", "titleslug"]) || window.location.href.endsWith("/new")) { const slugify = (str) => str.replace(/['']/g, "").toLowerCase().replace(/[^a-z0-9-]/g, (m) => "éèêëàäâùüûîïôöç".includes(m) ? m.normalize("NFD").replace(/[\u0300-\u036f]/g, "") : "-"); const title = entry.getIn(["data", "title"], ""); const uuid = entry.getIn(["data", "uuid"], ""); const slug = `${slugify(title)}_${uuid}`; updatedData = updatedData.set("titleslug", slug); } }
-            if (entry.get("collection") === "evenement" && updatedData.has("repas") && updatedData.get("repas").size > 0) { let sortedRepas = updatedData.get("repas").sortBy(repas => new Date(repas.get("date_service"))).sortBy(repas => ({ "matin": 0, "midi": 1, "soir": 2 }[repas.get("horaire")])); sortedRepas = sortedRepas.map(repas => { if (repas.has("recettes_du_repas") && repas.get("recettes_du_repas").size > 0) { const sortedRecettes = repas.get("recettes_du_repas").sortBy(recette => ({ "entree": 0, "plat": 1, "dessert": 2 }[recette.get("type_plat")] || 3)); return repas.set("recettes_du_repas", sortedRecettes); } return repas; }); updatedData = updatedData.set("repas", sortedRepas); }
-            return updatedData;
-        },
-    });
 
     // --- ENREGISTREMENT ET INITIALISATION ---
     CMS.registerBackend('proxy', SupabaseProxyBackend); // On enregistre notre backend personnalisé

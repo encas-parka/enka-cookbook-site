@@ -1,8 +1,9 @@
 backend:
-  name: github
+  name: proxy
   repo: encas-parka/enka-cookbook-site
-  branch: ingmerged
-  base_url: https://sveltia-cms-auth.encas-cookbook.workers.dev/
+  branch: supabase
+
+  proxy_url: https://decap-cms-proxy.encas-cookbook.workers.dev/
   # auth_endpoint: /api/auth
 
   #Permettre un PR sur github sans l'acces aux dépot (github only)
@@ -16,7 +17,7 @@ backend:
 
 #By default, saving a post in the CMS interface pushes a commit directly to the publication branch specified in backend.
 # This line should *not* be indented
-publish_mode: simple
+# publish_mode: editorial_workflow
 
 
 # The search functionally requires loading all collection(s) entries, which can exhaust rate limits on large repositories. It can be disabled by setting the top level search property to false.

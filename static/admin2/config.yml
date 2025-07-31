@@ -17,7 +17,7 @@ backend:
 
 #By default, saving a post in the CMS interface pushes a commit directly to the publication branch specified in backend.
 # This line should *not* be indented
-publish_mode: simple
+# publish_mode: simple
 
 locale: "fr"
 

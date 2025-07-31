@@ -3,7 +3,9 @@ backend:
   repo: encas-parka/enka-cookbook-site
   branch: supabase
 
-  proxy_url: https://decap-cms-proxy.encas-cookbook.workers.dev/repos/encas-parka/enka-cookbook-site/
+  proxy_url: https://decap-cms-proxy.encas-cookbook.workers.dev/repos/encas-parka/enka-cookbook-site/contents
+
+  # local_backend: false
   # auth_endpoint: /api/auth
 
   #Permettre un PR sur github sans l'acces aux dépot (github only)

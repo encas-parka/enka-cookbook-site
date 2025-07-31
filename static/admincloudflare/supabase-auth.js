@@ -1,8 +1,8 @@
 import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm";
 
 // Configuration Supabase
-const SUPABASE_URL = "https://mkkrfozercivwnbmqfqe.supabase.co";
-const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1ra3Jmb3plcmNpdnduYm1xZnFlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTM5MTQ5MDIsImV4cCI6MjA2OTQ5MDkwMn0.E4uPMUe4JYR75IcCO8LkwC_ngoQkZwKowcLJP3lDqTQ";
+const SUPABASE_URL = env.SUPABASE_URL;
+const SUPABASE_ANON_KEY = env.SUPABASE_ANON_KEY;
 
 const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
@@ -20,7 +20,7 @@ class SupabaseBackend {
 
     if (!session) {
       // Rediriger vers la page de login
-      window.location.href = '/login/';
+      window.location.href = '/registration/';
       throw new Error('Not authenticated');
     }
 
@@ -49,14 +49,14 @@ class SupabaseBackend {
       };
     } catch (error) {
       console.error('Authentication error:', error);
-      window.location.href = '/login/';
+      window.location.href = '/registration/';
       throw error;
     }
   }
 
   async logout() {
     await supabase.auth.signOut();
-    window.location.href = '/login/';
+    window.location.href = '/registration/';
   }
 
   // Proxy toutes les autres méthodes vers l'API GitHub via notre worker
@@ -131,4 +131,6 @@ class SupabaseBackend {
 // Enregistrer le backend personnalisé
 if (window.CMS) {
   window.CMS.registerBackend('supabase-proxy', SupabaseBackend);
+  console.log('Méthodes disponibles sur le backend:', Object.getOwnPropertyNames(SupabaseBackend.prototype));
+  console.log('Backend enregistré:', window.CMS.backends);
 }

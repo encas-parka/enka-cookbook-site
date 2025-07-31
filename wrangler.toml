@@ -1,0 +1,9 @@
+name = "decap-supabase-proxy"
+main = "worker.js"
+compatibility_date = "2024-01-01"
+
+[env.local]
+vars = { ENVIRONMENT = "local" }
+
+[env.production]
+vars = { ENVIRONMENT = "production" }

@@ -1,9 +1,9 @@
 backend:
-  name: github
+  name: supabase-proxy
   repo: encas-parka/enka-cookbook-site
   branch: supabase
-
-  base_url: https://decap-cms-proxy.encas-cookbook.workers.dev
+  auth_endpoint: /auth/verify
+  base_url: http://localhost:8787
 
 
   #Permettre un PR sur github sans l'acces aux dépot (github only)

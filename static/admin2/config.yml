@@ -2,7 +2,7 @@ backend:
   # name: git-gateway
   name: github
   repo: encas-parka/enka-cookbook-site
-  branch: ingmerged
+  branch: main
 
   base_url: https://sveltia-cms-auth.encas-cookbook.workers.dev/
 

@@ -445,7 +445,7 @@ collections:
 
   # ::: COLLECTION : Materiel
 
-  - label: "Materiel"
+  - label: "Materiel test"
     name: "materiel"
     folder: content/materiel
     create: true

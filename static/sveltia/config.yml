@@ -136,7 +136,7 @@ collections:
           label: "Régimes",
           name: "regime",
           widget: "select",
-          label_singular: "Régime"
+          label_singular: "Régime",
           required: false,
           multiple: true,
           options: ["vegetarien", "vegan", "sans-gluten", "sans-lactose"],

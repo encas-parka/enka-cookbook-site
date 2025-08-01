@@ -6,7 +6,7 @@ backend:
   branch: main
   base_url: https://enka-cookbook.pages.dev
 
-  authType: github
+  auth_type: github
 
   # Vérifier si ca marche bien : si un article est modifier plusieur fpos avant d'etre mergé/publié, un seul commit avec rebased.
   squash_merges: true
@@ -33,7 +33,7 @@ editor:
 collections:
   - name: "recettes"
     label: "Recettes"
-    label-singular: "Recette"
+    label_singular: "Recette"
     folder: "content/recettes/"
     path: "{{type}}/{{slug}}/index"
     slug: "{{title}}_{{uuid_shorter}}"
@@ -118,8 +118,8 @@ collections:
         name: "categories"
         widget: "relation"
         collection: "sous-categories"
-        valueField: "title"
-        searchFields: ["title"]
+        value_field: "title"
+        search_fields: ["title"]
         multiple: true
         max: 4
         options_length: 50
@@ -136,7 +136,7 @@ collections:
           label: "Régimes",
           name: "regime",
           widget: "select",
-          label_singular: "Régime",
+          label_singular: "Régime"
           required: false,
           multiple: true,
           options: ["vegetarien", "vegan", "sans-gluten", "sans-lactose"],
@@ -171,7 +171,7 @@ collections:
         name: "plate"
         widget: "number"
         min: 1
-        valueType: "int"
+        value_type: "int"
       - label: "Précision quantité"
         name: "quantite_desc"
         widget: "string"
@@ -192,7 +192,7 @@ collections:
         name: "checkfor"
         widget: "number"
         min: 1
-        valueType: "int"
+        value_type: "int"
         hint: "Si vous avez testé la recette pour un nombre de couverts significativement différent, et que la recette était réussie, indiquez ce nombre de couverts ici. S'il vous a fallu modifier les quantités d'ingrédients pour obtenir un résultat satisfaisant, vous pouvez 'dupliquer' cette recette (bouton 'publish' en haut → 'duplicate'), et modifier en conséquence la recette dupliquée (et amender le titre). Merci d'indiquer sur l'une des 2 recettes qu'il existe une recette alternative (compléter le champ 'Préparations Alternatives' en bas de cette page). À défaut, vous pouvez indiquer brièvement les modifications à apporter dans le champ 'astuces' en bas de cette page."
         required: false
 
@@ -213,14 +213,14 @@ collections:
             name: title
             widget: "relation"
             collection: "ingredients_index"
-            searchFields: ["title"]
-            valueField: "title"
+            search_fields: ["title"]
+            value_field: "title"
             options_length: 1000
           - label: "Quantité (nombre)"
             name: quantite
             widget: number
             min: 0.1
-            valueType: float
+            value_type: float
           - label: "Unité (quantité en...)"
             name: unit
             widget: select
@@ -238,21 +238,21 @@ collections:
         collection: "materiel"
         required: false
         multiple: true
-        valueField: "title"
-        searchFields: ["title"]
+        value_field: "title"
+        search_fields: ["title"]
         options_length: 30
 
       ### ::: Preparation
       - label: "Préparation"
         name: "preparation"
         widget: "markdown"
-        editorComponents: [""]
+        editor_components: [""]
 
 
       - label: "Préparation - A Faire la veille"
         name: "preparation24h"
         widget: "markdown"
-        editorComponents: [""]
+        editor_components: [""]
         required: false
         hint: "Si la recette implique de préparer des choses en avance, le préciser ici pour que ce soit mis en avant lors de l'affichage des recettes (ce sera indiquer 'A prévoir a l'avance', à vous de préciser plus précisément quand)."
 
@@ -286,9 +286,9 @@ collections:
               name: "recetteAlt",
               widget: "relation",
               collection: "recettes",
-              searchFields: ["title"],
-              valueField: "slug",
-              displayFields: ["title"],
+              search_fields: ["title"],
+              value_field: "slug",
+              display_fields: ["title"],
             }
 
       - label: "Date de publication"
@@ -305,14 +305,14 @@ collections:
   # ::: Menu / Evenements
 
   - label: "Evenements"
-    label-singular: "Evenement"
+    label_singular: "Evenement"
     name: "evenement"
     description: "Pour créer des menus sur un ou plusieurs jours..."
     folder: content/evenements/
     path: "{{slug}}/index"
     slug: "{{title}}_{{uuid_shorter}}"
     create: true
-    sortableFields: ["title", "publishDate"]
+    sortable_fields: ["title", "publishDate"]
     fields:
       - {
           label: "Nom de l'évènement",
@@ -382,9 +382,9 @@ collections:
                 name: "recette"
                 widget: "relation"
                 collection: "recettes"
-                valueField: "slug"
-                searchFields: ["title"]
-                displayFields: ["title"]
+                value_field: "slug"
+                search_fields: ["title"]
+                display_fields: ["title"]
                 options_length: 1000
 
               - label: "Entrées/Plats/Desserts ?"
@@ -401,7 +401,7 @@ collections:
                   name: "altAssiettes",
                   widget: "number",
                   min: 1,
-                  valueType: "int",
+                  value_type: "int",
                   max: 90000,
                   required: false,
                   hint: "Laisser vide si égale au nombre d'assiettes défini plus haut. Ce champs peut être utile pour les recettes destinées aux régimes spéciaux (sans-gluten, etc.), dont le nombre d’assiettes prévues est différent de celui défini globalement pour le repas.",

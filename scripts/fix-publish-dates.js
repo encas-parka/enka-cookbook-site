@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 
+// Corrige le format des dates publishDate dans les recettes pour garantir un format ISO 8601 valide et homogène dans tous les fichiers.
+
 const fs = require("fs");
 const path = require("path");
 const matter = require("gray-matter");

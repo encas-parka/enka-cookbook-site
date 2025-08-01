@@ -48,6 +48,4 @@ preparation: >-
 astuces:
   - astuce: faire le matin pour le soir ou le soir pour le lendemain matin
 publishDate: 2025-06-17T09:14:00.000Z
-uuid: 4ay4973x
-titleslug: fondant-au-chocolat-vegan-et-ss-gluten_4ay4973x
 ---

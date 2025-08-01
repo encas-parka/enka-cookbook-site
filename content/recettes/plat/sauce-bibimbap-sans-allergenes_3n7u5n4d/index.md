@@ -51,6 +51,4 @@ preparation: |-
 
   Goûter car peut être il faut saler.
 publishDate: 2025-05-04T21:30:00.000Z
-uuid: 3n7u5n4d
-titleslug: sauce-bibimbap-sans-allergenes_3n7u5n4d
 ---

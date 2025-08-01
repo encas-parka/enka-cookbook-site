@@ -88,6 +88,4 @@ preparation: >-
   Ajouter le sucre et rectifier l'assaisonnement sel/poivre
 prepAlt: []
 publishDate: 2025-06-04T18:15:00.000Z
-uuid: 0n94peio
-titleslug: pomme-de-terre-au-four-cervelle-de-canut_0n94peio
 ---

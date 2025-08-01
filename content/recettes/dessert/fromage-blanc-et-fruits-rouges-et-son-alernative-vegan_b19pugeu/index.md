@@ -28,6 +28,4 @@ ingredients:
       unit: Kg
 preparation: Ne pas oublié la version végane !!
 publishDate: 2025-05-30T21:37:00.000Z
-uuid: b19pugeu
-titleslug: fromage-blanc-et-fruits-rouges-et-son-alernative-vegan_b19pugeu
 ---

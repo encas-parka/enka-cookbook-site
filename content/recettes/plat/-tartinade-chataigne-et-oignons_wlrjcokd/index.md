@@ -50,6 +50,4 @@ preparation: >-
 
   Puis mixer tout les ingrédients restant + les oignons ensemble.  Ajouter huile jusqu'à avoir une belle consistance.
 publishDate: 2025-05-11T12:24:00.000Z
-uuid: wlrjcokd
-titleslug: -tartinade-chataigne-et-oignons_wlrjcokd
 ---

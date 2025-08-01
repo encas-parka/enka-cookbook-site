@@ -29,6 +29,4 @@ materiel:
   - Gastro 1/3
 preparation: test
 publishDate: 2025-04-07T10:30:00.000Z
-uuid: auc1ujzb
-titleslug: newtest_auc1ujzb
 ---

@@ -77,6 +77,4 @@ preparation: >-
 prepAlt:
   - recetteAlt: barres-cereales-gourmandes-flocons-davoine-chocolat-raisin-sec-sans-gluten_q1eozsxah1hwo7bnjp-huaaue2nr6dkbh2-t
 publishDate: 2025-07-24T18:34:00.000+02:00
-uuid: excdwt3fhnymaugge4hzbravklsbmguv_j82
-titleslug: barres-cereales-dessert-gourmandes_excdwt3fhnymaugge4hzbravklsbmguv_j82
 ---

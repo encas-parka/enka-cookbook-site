@@ -80,7 +80,5 @@ regime:
 region: Chine -Sichuan
 temperature: Chaud
 title: PROTEINES DE SOJA AU GOÛT INSOLITE - Version végan du poulet guai wei ji
-titleslug: proteines-de-soja-au-gout-insolite-version-vegan-du-poulet-guai-wei-ji_893blsfs
 type: plat
-uuid: 893blsfs
 ---

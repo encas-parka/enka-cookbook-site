@@ -88,8 +88,6 @@ saison:
   - automne
 temperature: Chaud
 title: Petits paquets - Aumonières courge feta
-titleslug: petits-paquets-aumonieres-courge-feta_zqwvzeeb
 type: entree
-uuid: zqwvzeeb
 ---
 

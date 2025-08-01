@@ -1,7 +1,5 @@
 ---
-uuid: ttqpnu7a
 title: Beignets Petits Pois Zaatar et sa crème au sumac
-titleslug: beignets-petits-pois-zaatar-et-sa-creme-au-sumac_ttqpnu7a
 draft: false
 layout: recettes
 type: plat

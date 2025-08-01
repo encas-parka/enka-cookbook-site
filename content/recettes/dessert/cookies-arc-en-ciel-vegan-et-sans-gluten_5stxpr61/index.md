@@ -70,6 +70,4 @@ preparation: >-
 
   Sortir les cookies du four. Attention, ils sont très friables, il faut les laisser reposer quelques minutes afin qu’ils durcissent.
 publishDate: 2025-06-01T22:06:00.000Z
-uuid: 5stxpr61
-titleslug: cookies-arc-en-ciel-vegan-et-sans-gluten_5stxpr61
 ---

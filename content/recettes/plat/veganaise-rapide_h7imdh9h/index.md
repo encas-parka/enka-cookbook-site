@@ -39,7 +39,5 @@ regime:
 - sans-lactose
 temperature: Froid
 title: Véganaise rapide
-titleslug: veganaise-rapide_h7imdh9h
 type: plat
-uuid: h7imdh9h
 ---

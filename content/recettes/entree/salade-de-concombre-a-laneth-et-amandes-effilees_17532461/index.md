@@ -49,6 +49,4 @@ preparation: |-
 
   (possible de remplacer les amandes effilées par amandes concassées)
 publishDate: 2025-07-31T10:37:00.000+02:00
-uuid: "17532461"
-titleslug: salade-de-concombre-a-laneth-et-amandes-effilees_17532461
 ---

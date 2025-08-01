@@ -29,6 +29,4 @@ preparation: |-
 
   ...
 publishDate: 2024-06-19 20:27:00+00:00
-uuid: qaxl8865
-titleslug: salade-verte_qaxl8865
 ---

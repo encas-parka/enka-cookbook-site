@@ -1,7 +1,5 @@
 ---
-uuid: x79awrso
 title: Concombre marinés au gingembre
-titleslug: concombre-marines-au-gingembre_x79awrso
 draft: false
 layout: recettes
 type: entree

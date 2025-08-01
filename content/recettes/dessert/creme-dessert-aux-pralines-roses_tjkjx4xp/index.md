@@ -52,7 +52,5 @@ regime:
 - sans-gluten
 temperature: Froid
 title: Crème dessert aux pralines roses
-titleslug: creme-dessert-aux-pralines-roses_tjkjx4xp
 type: dessert
-uuid: tjkjx4xp
 ---

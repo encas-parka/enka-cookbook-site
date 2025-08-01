@@ -40,7 +40,5 @@ regime:
 region: Portugal
 temperature: Chaud
 title: PIMIENTOS DE PADRON - Poivron vert à l'huile
-titleslug: pimientos-de-padron-poivron-vert-a-lhuile_01fbszqb
 type: entree
-uuid: 01fbszqb
 ---

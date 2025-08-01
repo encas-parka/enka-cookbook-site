@@ -39,6 +39,4 @@ preparation: >-
 
   * Cuire à 180-200°C pendant 30-50 minutes en remuant les patates à mi cuisson
 publishDate: 2025-07-31T10:43:00.000+02:00
-uuid: "50555166"
-titleslug: pommes-de-terres-au-four-style-potatoes_50555166
 ---

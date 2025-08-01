@@ -49,7 +49,5 @@ regime:
 - sans-lactose
 temperature: Froid
 title: Fromage Frais Ail - ciboulette VEGAN
-titleslug: fromage-frais-ail-ciboulette-vegan_5t07t2t3
 type: entree
-uuid: 5t07t2t3
 ---

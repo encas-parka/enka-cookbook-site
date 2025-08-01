@@ -100,6 +100,4 @@ preparation: >-
 
   \
 publishDate: 2025-06-02T17:33:00.000Z
-uuid: ls7yrbs9
-titleslug: khadai-tofu_ls7yrbs9
 ---

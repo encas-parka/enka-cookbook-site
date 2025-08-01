@@ -61,7 +61,5 @@ saison:
 - printemps
 temperature: Froid
 title: Salami au chocolat - vegan sans gluten
-titleslug: salami-au-chocolat-vegan-sans-gluten_dkg558ax
 type: dessert
-uuid: dkg558ax
 ---

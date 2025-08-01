@@ -63,6 +63,4 @@ preparation: |-
   \- Pochez le tout de crème mascarpone chantilly. Sur le dessus,
   ajoutez des abricots rôtis
 publishDate: 2025-06-12T10:34:00.000Z
-uuid: 3bx3ybas
-titleslug: -charlotte-dabricot-en-verrine_3bx3ybas
 ---

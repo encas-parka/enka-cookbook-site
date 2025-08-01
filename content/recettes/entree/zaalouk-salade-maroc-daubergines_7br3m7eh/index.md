@@ -58,6 +58,4 @@ preparation: >-
 
   * Saler, poivrer. Ajouter le persil et la coriandre hachés
 publishDate: 2024-05-20T14:06:00.000Z
-uuid: 7br3m7eh
-titleslug: zaalouk-salade-maroc-daubergines_7br3m7eh
 ---

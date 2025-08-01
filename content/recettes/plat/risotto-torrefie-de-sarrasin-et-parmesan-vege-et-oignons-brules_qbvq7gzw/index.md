@@ -117,6 +117,4 @@ preparation: |-
   Placer les oignons sur une plaque, la face non découpée posée sur
   la plaque. Saupoudrer légèrement la face découpée de sucre.
 publishDate: 2025-06-13T14:31:00.000Z
-uuid: qbvq7gzw
-titleslug: risotto-torrefie-de-sarrasin-et-parmesan-vege-et-oignons-brules_qbvq7gzw
 ---

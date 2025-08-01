@@ -52,7 +52,5 @@ regime:
 - sans-gluten
 temperature: Chaud
 title: Pain de Yucca
-titleslug: pain-de-yucca_2ph7gysz
 type: plat
-uuid: 2ph7gysz
 ---

@@ -76,7 +76,5 @@ regime:
 region: Portugal
 temperature: Froid
 title: QUEIJADAS DE FEIJAO Végan et sans gluten
-titleslug: queijadas-de-feijao-vegan-et-sans-gluten_o0dav1ps
 type: dessert
-uuid: o0dav1ps
 ---

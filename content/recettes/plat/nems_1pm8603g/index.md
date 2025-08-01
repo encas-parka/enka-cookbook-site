@@ -1,7 +1,5 @@
 ---
-uuid: 1pm8603g
 title: Nems
-titleslug: nems_1pm8603g
 draft: false
 layout: recettes
 img: https://www.cookomix.com/wp-content/uploads/2017/02/nems-au-poulet-thermomix-800x600.jpg

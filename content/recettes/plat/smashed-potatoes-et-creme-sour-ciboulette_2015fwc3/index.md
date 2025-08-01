@@ -97,6 +97,4 @@ preparation: >-
 
   Mélanger les yaourts, la ciboulette hachée, le jus de citron (jauger au goût le jus de citron est là pour donner un goût "laitier" que le yaourt de soja n'a pas), le sel et le poivre
 publishDate: 2025-05-05T16:07:00.000Z
-uuid: 2015fwc3
-titleslug: smashed-potatoes-et-creme-sour-ciboulette_2015fwc3
 ---

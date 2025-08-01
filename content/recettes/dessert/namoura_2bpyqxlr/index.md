@@ -75,7 +75,5 @@ regime:
 - sans-lactose
 temperature: Froid
 title: Namoura
-titleslug: namoura_2bpyqxlr
 type: dessert
-uuid: 2bpyqxlr
 ---

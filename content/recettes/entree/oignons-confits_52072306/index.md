@@ -42,6 +42,4 @@ preparation: >-
 
   * Laisser cuire jusqu'à ce que les oignons soient confits
 publishDate: 2025-07-31T10:48:00.000+02:00
-uuid: "52072306"
-titleslug: oignons-confits_52072306
 ---

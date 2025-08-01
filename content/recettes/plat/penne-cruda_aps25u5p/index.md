@@ -65,6 +65,4 @@ preparation: >-
 
   Servir avec du parmesan ou grana ou pecorino râpé.
 publishDate: 2025-06-04T17:18:00.000Z
-uuid: aps25u5p
-titleslug: penne-cruda_aps25u5p
 ---

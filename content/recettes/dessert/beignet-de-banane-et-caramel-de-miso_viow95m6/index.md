@@ -127,6 +127,4 @@ preparation: >-
 
   Retirez la casserole du feu et incorporez le miso en fouettant.
 publishDate: 2024-05-24T00:51:00.000Z
-uuid: viow95m6
-titleslug: beignet-de-banane-et-caramel-de-miso_viow95m6
 ---

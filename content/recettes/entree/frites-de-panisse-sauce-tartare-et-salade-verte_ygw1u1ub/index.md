@@ -116,6 +116,4 @@ preparation: |-
 
   sel poivre
 publishDate: 2025-06-12T10:49:00.000Z
-uuid: ygw1u1ub
-titleslug: frites-de-panisse-sauce-tartare-et-salade-verte_ygw1u1ub
 ---

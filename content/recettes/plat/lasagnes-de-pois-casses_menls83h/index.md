@@ -80,6 +80,4 @@ preparation: >-
 
   Si les légumes colorent trop vite, recouvrir les bacs de papier aluminium ou sulfurisé et poursuivre la cuisson.
 publishDate: 2025-05-14T13:07:00.000Z
-uuid: menls83h
-titleslug: lasagnes-de-pois-casses_menls83h
 ---

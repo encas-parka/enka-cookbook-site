@@ -49,7 +49,5 @@ regime:
 region: Portugal
 temperature: Chaud
 title: PEIXINHOS DE HORTA - Tempura d'haricots plats
-titleslug: peixinhos-de-horta-tempura-dharicots-plats_gkm4cofr
 type: entree
-uuid: gkm4cofr
 ---

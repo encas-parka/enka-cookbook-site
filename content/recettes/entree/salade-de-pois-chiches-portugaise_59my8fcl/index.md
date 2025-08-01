@@ -64,7 +64,5 @@ publishDate: 2024-06-18 23:36:00+00:00
 region: Portugal
 temperature: Froid
 title: Salade de pois-chiches portugaise
-titleslug: salade-de-pois-chiches-portugaise_59my8fcl
 type: entree
-uuid: 59my8fcl
 ---

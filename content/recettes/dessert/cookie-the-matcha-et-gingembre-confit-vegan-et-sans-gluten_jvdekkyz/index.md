@@ -69,6 +69,4 @@ preparation: >-
 
   Enfourner les cookies pour 12-13 minutes. Retirer du four et laisser refroidir sur la plaque pendant quelques minutes avant de transférer sur une grille pour les laisser refroidir complètement.
 publishDate: 2024-05-24T00:12:00.000Z
-uuid: jvdekkyz
-titleslug: cookie-the-matcha-et-gingembre-confit-vegan-et-sans-gluten_jvdekkyz
 ---

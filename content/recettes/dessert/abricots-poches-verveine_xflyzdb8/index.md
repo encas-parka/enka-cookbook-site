@@ -1,7 +1,5 @@
 ---
-uuid: xflyzdb8
 title: Abricots Pochés verveine
-titleslug: abricots-poches-verveine_xflyzdb8
 draft: false
 layout: recettes
 type: dessert

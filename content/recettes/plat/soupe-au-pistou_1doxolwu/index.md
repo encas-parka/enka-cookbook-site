@@ -116,6 +116,4 @@ preparation: >-
 
   \
 publishDate: 2025-06-17T16:16:00.000Z
-uuid: 1doxolwu
-titleslug: soupe-au-pistou_1doxolwu
 ---

@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 
+// Trie automatiquement et alphabétiquement les ingrédients dans tous les fichiers JSON du dossier data/ingredients/, en préservant la structure et en évitant les réécritures inutiles.
+
 /**
  * Script de migration pour trier alphabétiquement les ingrédients
  * dans tous les fichiers JSON du dossier data/ingredients/

@@ -47,6 +47,4 @@ preparation: >-
 
   répartisser dans les ramequins et laisser tiédir
 publishDate: 2025-06-15T12:58:00.000Z
-uuid: ogvm5eqj
-titleslug: riz-au-lait-vegan-a-la-chicoree_ogvm5eqj
 ---

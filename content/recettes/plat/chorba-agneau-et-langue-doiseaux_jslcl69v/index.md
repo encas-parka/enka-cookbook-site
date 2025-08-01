@@ -85,7 +85,5 @@ regime:
 region: Algérie
 temperature: Chaud
 title: CHORBA  AGNEAU ET LANGUE D'OISEAUX
-titleslug: chorba-agneau-et-langue-doiseaux_jslcl69v
 type: plat
-uuid: jslcl69v
 ---

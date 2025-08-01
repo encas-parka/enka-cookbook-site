@@ -88,6 +88,4 @@ preparation: >-
 
   Râper grossièrement le comté, le beaufort et le gruyère : quantités et proportions selon votre goût.
 publishDate: 2025-01-05T20:23:00.000Z
-uuid: j85fqs9y
-titleslug: soupe-a-loignon_j85fqs9y
 ---

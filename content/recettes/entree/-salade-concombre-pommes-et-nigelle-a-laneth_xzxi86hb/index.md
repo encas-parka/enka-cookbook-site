@@ -1,7 +1,5 @@
 ---
-uuid: xzxi86hb
 title: "Salade concombre, pommes et nigelle à l'aneth "
-titleslug: -salade-concombre-pommes-et-nigelle-a-laneth_xzxi86hb
 draft: false
 layout: recettes
 type: entree

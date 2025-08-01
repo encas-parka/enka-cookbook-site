@@ -57,7 +57,5 @@ preparation24h: la creme peut etre faite la veille  pour qu'elle refroidisse bie
 publishDate: 2024-06-13 08:06:00+00:00
 temperature: Froid
 title: ile flottante
-titleslug: ile-flottante_mowazdcf
 type: dessert
-uuid: mowazdcf
 ---

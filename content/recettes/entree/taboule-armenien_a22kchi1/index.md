@@ -119,6 +119,4 @@ preparation: >-
 
   * MELANGER LE BOULGOUR, LA PREPARATION CUITE, ET LA PREPARATION CRUE, SALER POIVRER HUILER SI BESOIN
 publishDate: 2025-05-14T08:59:00.000Z
-uuid: a22kchi1
-titleslug: taboule-armenien_a22kchi1
 ---

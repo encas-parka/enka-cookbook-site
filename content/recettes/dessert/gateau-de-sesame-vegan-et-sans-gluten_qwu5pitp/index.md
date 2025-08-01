@@ -68,7 +68,5 @@ regime:
 - sans-lactose
 temperature: Froid
 title: Gateau de sésame (végan et sans-gluten)
-titleslug: gateau-de-sesame-vegan-et-sans-gluten_qwu5pitp
 type: dessert
-uuid: qwu5pitp
 ---

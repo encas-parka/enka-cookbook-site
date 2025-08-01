@@ -41,6 +41,4 @@ preparation: |-
 astuces:
   - astuce: prévoir du sopalin
 publishDate: 2025-06-15T20:04:00.000Z
-uuid: lqrar2rx
-titleslug: tofu-grille_lqrar2rx
 ---

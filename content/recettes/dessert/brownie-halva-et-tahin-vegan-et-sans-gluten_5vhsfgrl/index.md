@@ -69,7 +69,5 @@ regime:
 - sans-lactose
 temperature: Chaud
 title: BROWNIE HALVA ET TAHIN Végan et sans gluten
-titleslug: brownie-halva-et-tahin-vegan-et-sans-gluten_5vhsfgrl
 type: dessert
-uuid: 5vhsfgrl
 ---

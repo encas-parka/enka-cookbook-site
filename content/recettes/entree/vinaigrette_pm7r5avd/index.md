@@ -44,7 +44,5 @@ preparation: |-
 
   et en enfin l'eau
 publishDate: '2024-06-15T11:21:00.000Z'
-uuid: pm7r5avd
-titleslug: vinaigrette_pm7r5avd
 ---
 

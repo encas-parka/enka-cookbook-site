@@ -1,7 +1,5 @@
 ---
-uuid: 1mokjmgx
 title: "Boulettes (soja) "
-titleslug: -boulettes-soja_1mokjmgx
 draft: false
 layout: recettes
 type: plat

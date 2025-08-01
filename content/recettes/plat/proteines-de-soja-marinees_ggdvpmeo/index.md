@@ -57,7 +57,5 @@ regime:
 - sans-lactose
 temperature: Chaud
 title: Protéines de soja marinées
-titleslug: proteines-de-soja-marinees_ggdvpmeo
 type: plat
-uuid: ggdvpmeo
 ---

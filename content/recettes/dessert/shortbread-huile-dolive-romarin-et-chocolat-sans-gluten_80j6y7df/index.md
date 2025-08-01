@@ -69,7 +69,5 @@ regime:
 - sans-lactose
 temperature: Froid
 title: SHORTBREAD HUILE D'OLIVE, ROMARIN ET CHOCOLAT Sans Gluten
-titleslug: shortbread-huile-dolive-romarin-et-chocolat-sans-gluten_80j6y7df
 type: dessert
-uuid: 80j6y7df
 ---

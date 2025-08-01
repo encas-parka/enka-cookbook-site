@@ -56,6 +56,4 @@ preparation: >-
 
   si démoulé alors il faut bien attendre que cela refroidisse
 publishDate: 2025-06-15T15:19:00.000Z
-uuid: ax9t0m6d
-titleslug: flan-de-courgette-vegan_ax9t0m6d
 ---

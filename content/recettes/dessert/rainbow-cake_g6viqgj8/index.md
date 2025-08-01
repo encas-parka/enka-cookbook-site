@@ -212,6 +212,4 @@ preparation: >-
 
   Pour couper le gâteau, le mieux est d'utiliser un grand couteau scie pour ne pas "écraser" le gâteau.
 publishDate: 2025-06-01T21:25:00.000Z
-uuid: g6viqgj8
-titleslug: rainbow-cake_g6viqgj8
 ---

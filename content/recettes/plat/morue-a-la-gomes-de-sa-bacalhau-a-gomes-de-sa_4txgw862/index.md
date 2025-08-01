@@ -94,7 +94,5 @@ regime:
 region: Portugal
 temperature: Chaud
 title: Morue à la Gomes de Sa (Bacalhau à Gomes de Sa)
-titleslug: morue-a-la-gomes-de-sa-bacalhau-a-gomes-de-sa_4txgw862
 type: plat
-uuid: 4txgw862
 ---

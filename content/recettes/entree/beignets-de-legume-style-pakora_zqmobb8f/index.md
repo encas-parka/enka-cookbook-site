@@ -76,7 +76,5 @@ saison:
 - ete
 temperature: Chaud
 title: Beignets de légume style pakora
-titleslug: beignets-de-legume-style-pakora_zqmobb8f
 type: entree
-uuid: zqmobb8f
 ---

@@ -3,10 +3,10 @@
 backend:
   name: github
   repo: encas-parka/enka-cookbook-site
-  branch: supabase
+  branch: main
   base_url: https://enka-cookbook.pages.dev
 
-  auth_type: github
+  authType: github
 
   # Vérifier si ca marche bien : si un article est modifier plusieur fpos avant d'etre mergé/publié, un seul commit avec rebased.
   squash_merges: true
@@ -36,9 +36,11 @@ collections:
     label-singular: "Recette"
     folder: "content/recettes/"
     path: "{{type}}/{{slug}}/index"
-    slug: "{{title}}_{{fields.uuid}}"
+    slug: "{{title}}_{{uuid_shorter}}"
     filter: { field: "layout", value: "recettes" }
     description: "Liste de l'ensemble des recettes. Vous pouvez utiliser les filtres ci-dessous pour classer / filtrer les recettes. Ou faire 'ctrl+f' pour rechercher une recette avec votre navigateur."
+    sortable_fields: ["title", "publishDate"]
+
     view_filters:
       - label: "Brouillons"
         field: draft
@@ -55,15 +57,7 @@ collections:
       - label: "non testé"
         field: check
         pattern: "Non"
-      - label: "Vegan"
-        field: regime
-        pattern: "vegan"
-      - label: "Vegetarien"
-        field: regime
-        pattern: "vegetarien"
-      - label: "Sans-Gluten"
-        field: regime
-        pattern: "sans-gluten"
+
     view_groups:
       - label: "Catégorie: "
         field: type
@@ -71,10 +65,6 @@ collections:
         field: categories
       - label: "Auteur·es: "
         field: auteur
-      - label: "Régimes"
-        field: regime
-      - label: "Saisons: "
-        field: saison
       - label: "Cuisson: "
         field: cuisson
       - label: "Sevice chaud/froid: "
@@ -98,7 +88,6 @@ collections:
             ],
         }
       - { label: "Brouillon", name: "draft", widget: "boolean", default: false, required: false }
-      - { name: "slug", widget: "hidden", default }
       - {
           label: "Image",
           name: "img",
@@ -129,8 +118,8 @@ collections:
         name: "categories"
         widget: "relation"
         collection: "sous-categories"
-        value_field: "title"
-        search_fields: ["title"]
+        valueField: "title"
+        searchFields: ["title"]
         multiple: true
         max: 4
         options_length: 50
@@ -182,7 +171,7 @@ collections:
         name: "plate"
         widget: "number"
         min: 1
-        value_type: "int"
+        valueType: "int"
       - label: "Précision quantité"
         name: "quantite_desc"
         widget: "string"
@@ -203,7 +192,7 @@ collections:
         name: "checkfor"
         widget: "number"
         min: 1
-        value_type: "int"
+        valueType: "int"
         hint: "Si vous avez testé la recette pour un nombre de couverts significativement différent, et que la recette était réussie, indiquez ce nombre de couverts ici. S'il vous a fallu modifier les quantités d'ingrédients pour obtenir un résultat satisfaisant, vous pouvez 'dupliquer' cette recette (bouton 'publish' en haut → 'duplicate'), et modifier en conséquence la recette dupliquée (et amender le titre). Merci d'indiquer sur l'une des 2 recettes qu'il existe une recette alternative (compléter le champ 'Préparations Alternatives' en bas de cette page). À défaut, vous pouvez indiquer brièvement les modifications à apporter dans le champ 'astuces' en bas de cette page."
         required: false
 
@@ -224,14 +213,14 @@ collections:
             name: title
             widget: "relation"
             collection: "ingredients_index"
-            search_fields: ["title"]
-            value_field: "title"
+            searchFields: ["title"]
+            valueField: "title"
             options_length: 2000
           - label: "Quantité (nombre)"
             name: quantite
             widget: number
             min: 0.1
-            value_type: float
+            valueType: float
           - label: "Unité (quantité en...)"
             name: unit
             widget: select
@@ -249,18 +238,21 @@ collections:
         collection: "materiel"
         required: false
         multiple: true
-        value_field: "title"
-        search_fields: ["title"]
+        valueField: "title"
+        searchFields: ["title"]
         options_length: 30
 
       ### ::: Preparation
       - label: "Préparation"
         name: "preparation"
         widget: "markdown"
+        editorComponents: [""]
+
 
       - label: "Préparation - A Faire la veille"
         name: "preparation24h"
         widget: "markdown"
+        editorComponents: [""]
         required: false
         hint: "Si la recette implique de préparer des choses en avance, le préciser ici pour que ce soit mis en avant lors de l'affichage des recettes (ce sera indiquer 'A prévoir a l'avance', à vous de préciser plus précisément quand)."
 
@@ -294,18 +286,15 @@ collections:
               name: "recetteAlt",
               widget: "relation",
               collection: "recettes",
-              search_fields: ["title"],
-              value_field: "titleslug",
-              display_fields: ["title"],
+              searchFields: ["title"],
+              valueField: "slug",
+              displayFields: ["title"],
             }
 
       - label: "Date de publication"
         name: "publishDate"
         widget: "datetime"
         # picker_utc: true
-
-      - { label: 'UUID', name: 'uuid', widget: uuid }
-      - {label: "Title Slug", name: "titleslug", widget: "hidden", default: "{{slug}}"}
 
 
 
@@ -321,8 +310,9 @@ collections:
     description: "Pour créer des menus sur un ou plusieurs jours..."
     folder: content/evenements/
     path: "{{slug}}/index"
-    slug: "{{title}}_{{fields.uuid}}"
+    slug: "{{title}}_{{uuid_shorter}}"
     create: true
+    sortableFields: ["title", "publishDate"]
     fields:
       - {
           label: "Nom de l'évènement",
@@ -350,8 +340,8 @@ collections:
         widget: "list"
         allow_add: true
         add_to_top: true
-        collapsed: false
-        summary: "{{fields.date_service}} : {{fields.horaire}} ({{fields.assiettes}} p.) > {{fields.recettes_du_repas}}"
+        collapsed: true
+        summary: "{{fields.date_service | date('DD/MM/YYYY')}} : {{fields.horaire}} ({{fields.assiettes}} p.)"
         hint: "Ajouter un menu pour un service"
 
         fields:
@@ -360,7 +350,7 @@ collections:
               name: "date_service",
               widget: "datetime",
               hint: "Jour ou le repas sera servis..",
-              date_format: YYYY-MM-DD,
+              dateFormat: YYYY-MM-DD,
             }
 
           - {
@@ -375,7 +365,7 @@ collections:
               name: "assiettes",
               widget: "number",
               default: 100,
-              value_type: "int",
+              valueType: "int",
               min: 1,
               max: 10000,
             }
@@ -385,19 +375,17 @@ collections:
             widget: "list"
             allow_add: true
             add_to_top: true
+            collapsed: true
             summary: "{{recette}} : {{fields.type_plat}} - {{fields.altAssiettes}}"
             fields:
               - label: "Recette"
                 name: "recette"
                 widget: "relation"
                 collection: "recettes"
-                value_field: "titleslug"
-                search_fields: ["title"]
-                display_fields: ["title"]
-                options_length: 100
-                filters:
-                  - field: draft
-                    values: [false]
+                valueField: "slug"
+                searchFields: ["title"]
+                displayFields: ["title"]
+                options_length: 1000
 
               - label: "Entrées/Plats/Desserts ?"
                 name: "type_plat"
@@ -407,12 +395,13 @@ collections:
                   - { label: "Plat", value: "plat" }
                   - { label: "Dessert", value: "dessert" }
 
+
               - {
                   label: "Nombre d'assiettes pour cette recette",
                   name: "altAssiettes",
                   widget: "number",
                   min: 1,
-                  value_type: "int",
+                  valueType: "int",
                   max: 90000,
                   required: false,
                   hint: "Laisser vide si égale au nombre d'assiettes défini plus haut. Ce champs peut être utile pour les recettes destinées aux régimes spéciaux (sans-gluten, etc.), dont le nombre d’assiettes prévues est différent de celui défini globalement pour le repas.",
@@ -449,8 +438,7 @@ collections:
                   required: false,
                 }
 
-      - { label: ID, name: "uuid", widget: "uuid" }
-      - {label: "Title Slug", name: "titleslug", widget: "hidden", default: "{{slug}}"}
+
 
 
   ################################

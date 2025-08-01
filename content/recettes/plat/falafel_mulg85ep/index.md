@@ -45,6 +45,4 @@ ingredients:
 preparation: Mixer les Pois chiches égouttés, mis à trempé 24h avant
 preparation24h: FAIRE TREMPER 24H AVANT
 publishDate: 2024-09-05T19:40:00.000Z
-uuid: mulg85ep
-titleslug: falafel_mulg85ep
 ---

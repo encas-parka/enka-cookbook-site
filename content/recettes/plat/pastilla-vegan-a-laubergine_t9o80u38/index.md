@@ -104,7 +104,5 @@ regime:
 - vegan
 temperature: Chaud
 title: PASTILLA VEGAN A L'AUBERGINE
-titleslug: pastilla-vegan-a-laubergine_t9o80u38
 type: plat
-uuid: t9o80u38
 ---

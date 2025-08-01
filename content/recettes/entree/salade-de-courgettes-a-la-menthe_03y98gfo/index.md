@@ -48,8 +48,6 @@ saison:
   - ete
 temperature: Froid
 title: Salade de courgettes à la menthe
-titleslug: salade-de-courgettes-a-la-menthe_03y98gfo
 type: entree
-uuid: 03y98gfo
 ---
 

@@ -70,7 +70,5 @@ regime:
 - sans-gluten
 temperature: Froid
 title: PANNA COTTA VANILLE - FRAISE
-titleslug: panna-cotta-vanille-fraise_bxgbk8tt
 type: dessert
-uuid: bxgbk8tt
 ---

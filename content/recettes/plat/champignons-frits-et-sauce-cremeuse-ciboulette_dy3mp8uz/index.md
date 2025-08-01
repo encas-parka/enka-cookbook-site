@@ -71,6 +71,4 @@ preparation: >-
 
   Je tape la recette + précise dès que je peux
 publishDate: 2025-06-18T00:46:00.000Z
-uuid: dy3mp8uz
-titleslug: champignons-frits-et-sauce-cremeuse-ciboulette_dy3mp8uz
 ---

@@ -47,6 +47,4 @@ preparation: >-
 
   Hacher la coriandre finement. Mélanger les ingrédients au dernier moment en y ajoutant la sauce Sweet chili
 publishDate: 2025-06-04T16:01:00.000Z
-uuid: vs3el42t
-titleslug: salade-dananas-choux-chinois-et-pasteque-au-piment_vs3el42t
 ---

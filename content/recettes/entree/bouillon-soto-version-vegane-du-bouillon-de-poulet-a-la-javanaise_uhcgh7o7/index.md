@@ -71,7 +71,5 @@ regime:
 region: Java
 temperature: Chaud
 title: BOUILLON SOTO - Version végane du bouillon de poulet à la javanaise
-titleslug: bouillon-soto-version-vegane-du-bouillon-de-poulet-a-la-javanaise_uhcgh7o7
 type: entree
-uuid: uhcgh7o7
 ---

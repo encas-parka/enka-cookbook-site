@@ -106,6 +106,4 @@ preparation: >-
 
   Enfourner 30 minutes environ
 publishDate: 2025-06-05T12:01:00.000Z
-uuid: 9n6m96pb
-titleslug: tarte-a-la-tomate-chevre-miel-et-moutarde_9n6m96pb
 ---

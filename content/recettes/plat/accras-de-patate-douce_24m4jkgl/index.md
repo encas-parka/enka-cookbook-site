@@ -1,7 +1,5 @@
 ---
-uuid: 24m4jkgl
 title: Accras de patate douce
-titleslug: accras-de-patate-douce_24m4jkgl
 draft: false
 layout: recettes
 type: plat

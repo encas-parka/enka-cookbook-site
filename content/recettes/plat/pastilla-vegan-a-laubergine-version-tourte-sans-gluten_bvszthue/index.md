@@ -82,7 +82,5 @@ regime:
 - sans-gluten
 temperature: Chaud
 title: PASTILLA  VEGAN A L'AUBERGINE - Version tourte sans gluten
-titleslug: pastilla-vegan-a-laubergine-version-tourte-sans-gluten_bvszthue
 type: plat
-uuid: bvszthue
 ---

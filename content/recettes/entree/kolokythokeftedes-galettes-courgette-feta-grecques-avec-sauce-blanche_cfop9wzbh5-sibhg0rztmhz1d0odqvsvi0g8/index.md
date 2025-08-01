@@ -79,6 +79,4 @@ preparation: >-
 
   Option sans gluten : farine sans gluten (par exemple mélange farine riz maïs)
 publishDate: 2025-07-21T13:43:00.000+02:00
-uuid: cfop9wzbh5-sibhg0rztmhz1d0odqvsvi0g8
-titleslug: kolokythokeftedes-galettes-courgette-feta-grecques_cfop9wzbh5-sibhg0rztmhz1d0odqvsvi0g8
 ---

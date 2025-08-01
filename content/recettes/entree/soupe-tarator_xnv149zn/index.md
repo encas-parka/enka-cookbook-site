@@ -64,6 +64,4 @@ preparation: >-
 
     Ne pas hésiter à même ajouter un ou deux glaçons pour rafraîchir le tarator.
 publishDate: 2025-05-30T12:11:00.000Z
-uuid: xnv149zn
-titleslug: soupe-tarator_xnv149zn
 ---

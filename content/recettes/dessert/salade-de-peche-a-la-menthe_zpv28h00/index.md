@@ -33,7 +33,5 @@ saison:
 - ete
 temperature: Froid
 title: SALADE DE PECHE A LA MENTHE
-titleslug: salade-de-peche-a-la-menthe_zpv28h00
 type: dessert
-uuid: zpv28h00
 ---

@@ -80,7 +80,5 @@ regime:
 - sans-gluten
 temperature: Chaud
 title: CHORBA VEGAN ET SANS GLUTEN
-titleslug: chorba-vegan-et-sans-gluten_uhcnn2i4
 type: plat
-uuid: uhcnn2i4
 ---

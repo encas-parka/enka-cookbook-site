@@ -90,6 +90,4 @@ preparation: >-
 
   Au service poser une ou deux feuilles de shizo.
 publishDate: 2024-06-04T22:15:00.000Z
-uuid: tvn2c235
-titleslug: soupe-miso-aux-aubergines-grillees_tvn2c235
 ---

@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 
+// Version corrigée du script de migration des slugs : gère mieux les cas limites, met à jour les slugs/UUID, références et dossiers pour toutes les recettes et événements.
+
 const fs = require("fs");
 const path = require("path");
 const crypto = require("crypto");

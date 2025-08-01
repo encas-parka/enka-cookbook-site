@@ -191,6 +191,4 @@ astuces: []
 prepAlt:
   - recetteAlt: curry-veg_wbyuybfrzyxchoyptn9pj9qdn9fjbgpbtjep
 publishDate: 2025-05-14T10:52:00.000Z
-uuid: sxiutnjx7nnsexar16argepbsmlklvh3d65_
-titleslug: curry-de-boeuf_sxiutnjx7nnsexar16argepbsmlklvh3d65_
 ---

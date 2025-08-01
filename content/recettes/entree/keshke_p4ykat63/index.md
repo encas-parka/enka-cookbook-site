@@ -52,7 +52,5 @@ regime:
 - vegetarien
 temperature: Froid
 title: Keshke
-titleslug: keshke_p4ykat63
 type: entree
-uuid: p4ykat63
 ---

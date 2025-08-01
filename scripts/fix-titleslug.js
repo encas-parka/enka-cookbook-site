@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+// Synchronise le champ titleslug et uuid du frontmatter des recettes avec le nom du dossier, en recalculant si besoin, pour garantir la cohérence des slugs.
 
 const fs = require("fs");
 const path = require("path");

@@ -91,7 +91,5 @@ regime:
 - vegan
 temperature: Froid
 title: TARTE AU CITRON VEGANE
-titleslug: tarte-au-citron-vegane_ldk10evn
 type: dessert
-uuid: ldk10evn
 ---

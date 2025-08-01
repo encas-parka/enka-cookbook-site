@@ -86,6 +86,4 @@ preparation: >-
 
   Calculer pour faire 15 part par plat gastro mais c'est sûr sûr que c'est ça. Déso
 publishDate: 2025-05-30T19:06:00.000Z
-uuid: z0ran9e3
-titleslug: kuku-sabzi_z0ran9e3
 ---

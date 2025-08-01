@@ -117,6 +117,4 @@ preparation: >-
 
   Au moment de servir ajouter le persil ou le mettre à disposition au service.
 publishDate: 2025-06-05T12:58:00.000Z
-uuid: 3snrddum
-titleslug: blanquette-de-soja-texture-et-riz-basmati_3snrddum
 ---

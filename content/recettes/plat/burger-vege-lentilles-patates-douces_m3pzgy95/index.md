@@ -137,7 +137,5 @@ regime:
 - vegetarien
 temperature: Chaud
 title: Burger Végé Lentilles Patates Douces
-titleslug: burger-vege-lentilles-patates-douces_m3pzgy95
 type: plat
-uuid: m3pzgy95
 ---

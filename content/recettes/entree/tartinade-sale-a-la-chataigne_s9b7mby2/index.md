@@ -41,7 +41,5 @@ regime:
 - sans-gluten
 temperature: Froid
 title: Tartinade salé a la chataigne
-titleslug: tartinade-sale-a-la-chataigne_s9b7mby2
 type: entree
-uuid: s9b7mby2
 ---

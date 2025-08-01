@@ -1,5 +1,4 @@
 ---
-uuid: 48lztgof
 draft: false
 layout: recettes
 regime:
@@ -39,7 +38,6 @@ ingredients:
       quantite: 1.2
       unit: Kg
 title: Taboulé libanais
-titleslug: taboule-libanais_48lztgof
 type: entree
 categories:
   - Salade

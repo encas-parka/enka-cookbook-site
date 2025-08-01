@@ -1,7 +1,5 @@
 ---
-uuid: xw0ldfh1
 title: " Houmous de poivrons"
-titleslug: -houmous-de-poivrons_xw0ldfh1
 draft: false
 layout: recettes
 

@@ -52,7 +52,5 @@ regime:
 - sans-gluten
 temperature: Froid
 title: LEMON CURD VEGAN - version tarte au citron sans gluten
-titleslug: lemon-curd-vegan-version-tarte-au-citron-sans-gluten_24nxll5l
 type: dessert
-uuid: 24nxll5l
 ---

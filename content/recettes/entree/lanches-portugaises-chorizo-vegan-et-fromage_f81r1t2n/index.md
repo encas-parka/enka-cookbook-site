@@ -1,7 +1,5 @@
 ---
-uuid: f81r1t2n
 title: LANCHES PORTUGAISES, Chorizo végan et fromage
-titleslug: lanches-portugaises-chorizo-vegan-et-fromage_f81r1t2n
 draft: false
 img: https://papaencuisine.com/wp-content/uploads/2015/06/lanches-portugaises-9.jpg
 description: " Une pâte à brioche salée dans laquelle on met tout ce qu’on veut"

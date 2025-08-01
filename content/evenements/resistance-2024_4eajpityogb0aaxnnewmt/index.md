@@ -4,10 +4,10 @@ outputs:
   - HTML
   - Poster
   - Ingredients
-sitemap_exclude: "true"
+sitemap_exclude: 'true'
 repas:
   - assiettes: 100
-    date_service: 2024-07-05
+    date_service: 2024-07-05T00:00:00.000Z
     horaire: midi
     recettes_du_repas:
       - recette: vinaigrette_pm7r5avd
@@ -16,7 +16,7 @@ repas:
         type_plat: entree
       - recette: salade-courgette-curry_5feqe55t
         type_plat: entree
-        commentaire: ""
+        commentaire: ''
       - recette: tartinade-lentilles-corail-patates-douces-fenugrec_8b7f7uzp
         type_plat: entree
       - recette: tourte-betterave-lentille-vegan-et-sans-gluten_c61r7tbd
@@ -29,7 +29,7 @@ repas:
         type_plat: dessert
         altAssiettes: 100
   - assiettes: 145
-    date_service: 2024-07-05
+    date_service: 2024-07-05T00:00:00.000Z
     horaire: soir
     recettes_du_repas:
       - recette: tzatziki-vegan_98M8i-fxh2fYdzsmrM8fM
@@ -44,17 +44,18 @@ repas:
       - recette: pomme-de-terre-herisson_5f8innnm
         type_plat: plat
         altAssiettes: 145
-      - recette: steak-vege-champignons-aubergines-noix-avoine-haricots-rouges-version-amelioree_6068ae73-1984-4084-890f-17076c0afe8c
+      - recette: >-
+          steak-vege-champignons-aubergines-noix-avoine-haricots-rouges-version-amelioree_bwr2rkex
         type_plat: plat
         altAssiettes: 145
       - recette: fondant-chataigne_tx71o7g8
         type_plat: dessert
         altAssiettes: 120
-      - recette: -fondant-chataigne-vegan-et-sans-gluten_i1caicq2
+      - recette: '-fondant-chataigne-vegan-et-sans-gluten_i1caicq2'
         type_plat: dessert
         altAssiettes: 24
   - assiettes: 210
-    date_service: 2024-07-06
+    date_service: 2024-07-06T00:00:00.000Z
     horaire: midi
     recettes_du_repas:
       - recette: vinaigrette_pm7r5avd
@@ -78,7 +79,7 @@ repas:
         type_plat: dessert
         altAssiettes: 190
   - assiettes: 230
-    date_service: 2024-07-06
+    date_service: 2024-07-06T00:00:00.000Z
     horaire: soir
     recettes_du_repas:
       - recette: muhamarra_fmv6q15o
@@ -88,14 +89,14 @@ repas:
         chef: marion
       - recette: riz-au-four-parfume-a-la-menthe-grenade-et-oilves-vertes_bcsmamfb
         type_plat: plat
-      - recette: brownie-halva-et-tahin-vegan-et-sans-gluten_zixopigwbvhny48-z-6ss
+      - recette: brownie-halva-et-tahin-vegan-et-sans-gluten_5vhsfgrl
         type_plat: dessert
         altAssiettes: 25
       - recette: brownie-a-lhalva-et-au-tahin_ma5dwaaz
         altAssiettes: 215
         type_plat: dessert
   - assiettes: 210
-    date_service: 2024-07-07
+    date_service: 2024-07-07T00:00:00.000Z
     horaire: midi
     recettes_du_repas:
       - recette: tartinade-de-pois-casses-et-beurre-de-cacahouete_kbslbg9v
@@ -123,7 +124,7 @@ repas:
         type_plat: dessert
         altAssiettes: 200
   - assiettes: 220
-    date_service: 2024-07-07
+    date_service: 2024-07-07T00:00:00.000Z
     horaire: soir
     recettes_du_repas:
       - recette: vinaigrette_pm7r5avd
@@ -135,7 +136,7 @@ repas:
       - recette: morue-a-la-gomes-de-sa-bacalhau-a-gomes-de-sa_4txgw862
         type_plat: plat
         altAssiettes: 190
-      - recette: -no-morue-a-la-gomes-de-sa-bacalhau-a-gomes-de-sa-vegan_j60pwioo
+      - recette: '-no-morue-a-la-gomes-de-sa-bacalhau-a-gomes-de-sa-vegan_j60pwioo'
         type_plat: plat
         altAssiettes: 30
       - recette: queijadas-de-feijao-vegan-et-sans-gluten_o0dav1ps
@@ -145,7 +146,7 @@ repas:
         type_plat: dessert
         altAssiettes: 200
   - assiettes: 220
-    date_service: 2024-07-08
+    date_service: 2024-07-08T00:00:00.000Z
     horaire: midi
     recettes_du_repas:
       - recette: zaalouk-salade-maroc-daubergines_7br3m7eh
@@ -162,7 +163,7 @@ repas:
         type_plat: dessert
         altAssiettes: 220
   - assiettes: 230
-    date_service: 2024-07-08
+    date_service: 2024-07-08T00:00:00.000Z
     horaire: soir
     recettes_du_repas:
       - recette: vinaigrette_pm7r5avd
@@ -188,7 +189,7 @@ repas:
         altAssiettes: 215
         type_plat: dessert
   - assiettes: 240
-    date_service: 2024-07-09
+    date_service: 2024-07-09T00:00:00.000Z
     horaire: midi
     recettes_du_repas:
       - recette: sauce-blanche-citron-ail_e5eck71q
@@ -197,10 +198,10 @@ repas:
       - recette: pita-falafel_s66nkdu0
         type_plat: plat
         chef: Arnaud
-      - recette: panna-cotta-vanille-fraise_ulhyn3eajm1kzve3-bx8-
+      - recette: panna-cotta-vanille-fraise_bxgbk8tt
         type_plat: dessert
   - assiettes: 220
-    date_service: 2024-07-09
+    date_service: 2024-07-09T00:00:00.000Z
     horaire: soir
     recettes_du_repas:
       - recette: chou-marine-a-la-japonaise_qiqf8ey5
@@ -214,7 +215,7 @@ repas:
         type_plat: dessert
         altAssiettes: 200
   - assiettes: 220
-    date_service: 2024-07-10
+    date_service: 2024-07-10T00:00:00.000Z
     horaire: midi
     recettes_du_repas:
       - recette: vinaigrette_pm7r5avd
@@ -234,25 +235,27 @@ repas:
       - recette: boreks-epinards-fromage_qp9wb4vi
         type_plat: plat
         altAssiettes: 200
-      - recette: tarte-au-chocolat-sans-cuisson-vegan-et-sans-gluten_r5i76u3gd9u7ushsljzee
+      - recette: tarte-au-chocolat-sans-cuisson-vegan-et-sans-gluten_bycnh0x3
         type_plat: dessert
         altAssiettes: 20
       - recette: tarte-au-chocolat-sans-cuisson_matyge19
         type_plat: dessert
         altAssiettes: 200
   - assiettes: 220
-    date_service: 2024-07-10
+    date_service: 2024-07-10T00:00:00.000Z
     horaire: soir
     recettes_du_repas:
       - recette: salade-thai-aux-nouilles-de-riz_hwngworo
         type_plat: entree
-      - recette: proteines-de-soja-au-gout-insolite-version-vegan-du-poulet-guai-wei-ji_893blsfs
+      - recette: >-
+          proteines-de-soja-au-gout-insolite-version-vegan-du-poulet-guai-wei-ji_893blsfs
         type_plat: plat
         altAssiettes: 40
       - recette: pain-frit-chinois_9dxao10r
         type_plat: plat
         altAssiettes: 220
-      - recette: bouillon-soto-version-vegane-du-bouillon-de-poulet-a-la-javanaise_uhcgh7o7
+      - recette: >-
+          bouillon-soto-version-vegane-du-bouillon-de-poulet-a-la-javanaise_uhcgh7o7
         type_plat: plat
         altAssiettes: 40
       - recette: poulet-au-gout-insolite-guai-wei-ji_18c7udz6
@@ -262,7 +265,7 @@ repas:
         type_plat: dessert
         altAssiettes: 220
   - assiettes: 240
-    date_service: 2024-07-11
+    date_service: 2024-07-11T00:00:00.000Z
     horaire: midi
     recettes_du_repas:
       - recette: vinaigrette_pm7r5avd
@@ -278,7 +281,7 @@ repas:
       - recette: abricots-poches-verveine_xflyzdb8
         type_plat: dessert
   - assiettes: 240
-    date_service: 2024-07-11
+    date_service: 2024-07-11T00:00:00.000Z
     horaire: soir
     recettes_du_repas:
       - recette: concombre-marines-au-gingembre_x79awrso
@@ -303,7 +306,7 @@ repas:
         type_plat: dessert
         altAssiettes: 240
   - assiettes: 240
-    date_service: 2024-07-12
+    date_service: 2024-07-12T00:00:00.000Z
     horaire: midi
     recettes_du_repas:
       - recette: taboule-libanais-quinoa-sans-glut_f9gzv3rn
@@ -316,14 +319,15 @@ repas:
       - recette: beignets-petits-pois-zaatar-et-sa-creme-au-sumac_ttqpnu7a
         type_plat: plat
         altAssiettes: 240
-      - recette: aubergines-grillees-cacao-ail-noir-et-piment_7b2688ac-6360-43b8-8083-635b1cc56257
+      - recette: >-
+          aubergines-grillees-cacao-ail-noir-et-piment_7b2688ac-6360-43b8-8083-635b1cc56257
         type_plat: plat
         altAssiettes: 240
       - recette: salade-de-peche-a-la-menthe_zpv28h00
         type_plat: dessert
         altAssiettes: 240
   - assiettes: 250
-    date_service: 2024-07-12
+    date_service: 2024-07-12T00:00:00.000Z
     horaire: soir
     recettes_du_repas:
       - recette: tom-kha-soupe-thai_fg4lgtvf
@@ -342,7 +346,7 @@ repas:
         type_plat: dessert
         altAssiettes: 230
   - assiettes: 240
-    date_service: 2024-07-13
+    date_service: 2024-07-13T00:00:00.000Z
     horaire: midi
     recettes_du_repas:
       - recette: vinaigrette_pm7r5avd
@@ -368,7 +372,7 @@ repas:
         type_plat: dessert
         altAssiettes: 220
   - assiettes: 360
-    date_service: 2024-07-13
+    date_service: 2024-07-13T00:00:00.000Z
     horaire: soir
     recettes_du_repas:
       - recette: salade-de-pois-chiches-portugaise_59my8fcl
@@ -391,13 +395,13 @@ repas:
       - recette: lanches-portugaises-chorizo-vegan-et-fromage_f81r1t2n
         type_plat: plat
         altAssiettes: 330
-      - recette: peixinhos-de-horta-tempura-dharicots-plats_B6rkGGu7iCn5AAz5kcWR-
+      - recette: peixinhos-de-horta-tempura-dharicots-plats_gkm4cofr
         type_plat: plat
         altAssiettes: 360
       - recette: creme-vegan-au-sureau_gqbis76w
         type_plat: dessert
         altAssiettes: 360
-      - recette: salami-au-chocolat-vegan-sans-gluten_axcmr1dv_vj6ul9owdr-g
+      - recette: salami-au-chocolat-vegan-sans-gluten_dkg558ax
         type_plat: dessert
         altAssiettes: 30
       - recette: salami-au-chocolat_o80x9ec6
@@ -405,3 +409,4 @@ repas:
         altAssiettes: 330
 uuid: 4eajPITYogB0AAXNnEWmT
 ---
+

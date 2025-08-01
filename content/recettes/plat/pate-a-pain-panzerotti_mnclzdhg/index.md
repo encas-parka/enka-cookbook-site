@@ -24,6 +24,4 @@ ingredients:
       unit: unité
 preparation: c'est arnaud qui le fait
 publishDate: 2025-06-17T18:50:00.000Z
-uuid: mnclzdhg
-titleslug: pate-a-pain-panzerotti_mnclzdhg
 ---

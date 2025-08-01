@@ -88,6 +88,4 @@ preparation: >-
 
   Passer les crêpes à la bilik pour cuire 1 face puis les garnir du mélange épinards etc... les rouler et les placer dans les gastros sur papier sulfurisé. Maintenir au four à 100° jusqu'au moment du service.
 publishDate: 2025-06-04T18:10:00.000Z
-uuid: k13ttgfy
-titleslug: crepes-de-sarrasin-ricotta-epinards-et-champignons_k13ttgfy
 ---

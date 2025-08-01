@@ -1,7 +1,5 @@
 ---
-uuid: me07vdl3
 title: RISOTTO PRUNEAUX ET CHAMPIGNONS Végan
-titleslug: risotto-pruneaux-et-champignons-vegan_me07vdl3
 draft: false
 description: Quantités pour être en accompagnement et pas en plat unique. Par
   exemple avec les farçous aveyronnais.

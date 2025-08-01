@@ -48,6 +48,4 @@ preparation: |-
 astuces:
   - astuce: a faire la veille pour le lendemain ou la matin pour la soir
 publishDate: 2025-06-17T09:33:00.000Z
-uuid: nb3iygka
-titleslug: blanc-manger_nb3iygka
 ---

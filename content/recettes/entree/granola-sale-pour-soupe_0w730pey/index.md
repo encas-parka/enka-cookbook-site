@@ -57,6 +57,4 @@ preparation: >-
 
   Laisser refroidir et conserver dans un bocal. Parsemer sur des soupes, des salades, des bols de légumes, etc.
 publishDate: 2025-05-30T15:55:00.000Z
-uuid: 0w730pey
-titleslug: granola-sale-pour-soupe_0w730pey
 ---

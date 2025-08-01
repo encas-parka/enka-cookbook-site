@@ -1,7 +1,5 @@
 ---
-uuid: dt04de42
 title: Tian Tomate - figue - miel
-titleslug: tian-tomate-figue-miel_dt04de42
 draft: false
 img: tian-tomate.jpg
 layout: recettes

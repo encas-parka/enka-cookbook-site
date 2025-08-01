@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+// Script de correction manuelle : traite une liste de recettes problématiques spécifiques, génère de nouveaux slugs/UUID courts, met à jour les fichiers et références associées.
 
 const fs = require('fs');
 const path = require('path');

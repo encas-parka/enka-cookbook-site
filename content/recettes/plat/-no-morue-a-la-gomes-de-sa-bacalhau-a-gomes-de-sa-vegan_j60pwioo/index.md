@@ -72,6 +72,4 @@ preparation: >-
 prepAlt:
   - recetteAlt: morue-a-la-gomes-de-sa-bacalhau-a-gomes-de-sa_4txgw862
 publishDate: 2024-06-19 01:00:00+00:00
-uuid: j60pwioo
-titleslug: -no-morue-a-la-gomes-de-sa-bacalhau-a-gomes-de-sa-vegan_j60pwioo
 ---

@@ -73,6 +73,4 @@ preparation: >-
 
   Mélanger les zestes des citrons, la pâte de curry, le sucre et le lait de coco et ajouter cette sauce aux crudités mélangés intimement avant de servir.
 publishDate: 2025-06-04T16:41:00.000Z
-uuid: ron7c10v
-titleslug: salade-exotique_ron7c10v
 ---

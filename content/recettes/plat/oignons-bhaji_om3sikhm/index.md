@@ -78,6 +78,4 @@ preparation: >-
 
   \
 publishDate: 2025-06-02T16:53:00.000Z
-uuid: om3sikhm
-titleslug: oignons-bhaji_om3sikhm
 ---

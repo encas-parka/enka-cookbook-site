@@ -55,7 +55,5 @@ saison:
 - hiver
 temperature: Froid
 title: Chou mariné à la japonaise
-titleslug: chou-marine-a-la-japonaise_qiqf8ey5
 type: entree
-uuid: qiqf8ey5
 ---

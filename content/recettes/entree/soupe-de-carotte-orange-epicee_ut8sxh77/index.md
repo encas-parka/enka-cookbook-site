@@ -59,6 +59,4 @@ preparation: >-
 
   à faire refroidir au moins une heure si servie froide
 publishDate: 2025-06-15T12:40:00.000Z
-uuid: ut8sxh77
-titleslug: soupe-de-carotte-orange-epicee_ut8sxh77
 ---

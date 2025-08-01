@@ -48,7 +48,5 @@ saison:
 - printemps
 temperature: Froid
 title: Salade Fenouil-Carottes-Oranges
-titleslug: salade-fenouil-carottes-oranges_ccqlephv
 type: entree
-uuid: ccqlephv
 ---

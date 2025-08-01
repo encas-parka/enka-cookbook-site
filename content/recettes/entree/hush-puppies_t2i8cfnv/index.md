@@ -75,6 +75,4 @@ preparation: >-
 
   Faire frire les boulettes. Vérifier que l'huile est prête en laissant tomber une petite quantité de pâte dans l'huile ; si elle grésille et flotte à la surface, l'huile est prête.
 publishDate: 2025-06-01T20:39:00.000Z
-uuid: t2i8cfnv
-titleslug: hush-puppies_t2i8cfnv
 ---

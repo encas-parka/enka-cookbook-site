@@ -65,7 +65,5 @@ regime:
 - vegetarien
 temperature: Froid
 title: Cake au citron végan
-titleslug: cake-au-citron-vegan_mkxnupyn
 type: dessert
-uuid: mkxnupyn
 ---

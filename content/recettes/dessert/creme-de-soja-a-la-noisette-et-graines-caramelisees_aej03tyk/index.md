@@ -70,6 +70,4 @@ preparation: >-
   Ajouter les graines caramélisées sur la crème
 preparation24h: A faire la veille pour le matin ou le matin pour le soir
 publishDate: 2025-06-05T07:55:00.000Z
-uuid: aej03tyk
-titleslug: creme-de-soja-a-la-noisette-et-graines-caramelisees_aej03tyk
 ---

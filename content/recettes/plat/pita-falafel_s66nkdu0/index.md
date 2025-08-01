@@ -131,6 +131,4 @@ preparation: |-
   \- Cuire au four 180° 1h environ.
 preparation24h: Faire tremper les pois chiches 24h avant minimum
 publishDate: 2024-06-06 11:25:00+00:00
-uuid: s66nkdu0
-titleslug: pita-falafel_s66nkdu0
 ---

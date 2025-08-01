@@ -107,6 +107,4 @@ preparation: >-
 
   \
 publishDate: 2025-06-02T18:49:00.000Z
-uuid: f55a7yzd
-titleslug: naan-a-lail-vegan_f55a7yzd
 ---

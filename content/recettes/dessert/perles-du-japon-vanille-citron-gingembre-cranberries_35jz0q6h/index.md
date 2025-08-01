@@ -65,6 +65,4 @@ preparation: >-
   Dans les verrines ou autres contenants, répartir au fond la banane, ajouter les perles du japon puis le mélange haché gingembre/cranberries. Stocker au froid
 preparation24h: On peut faire cette préparation la veille
 publishDate: 2025-06-04T18:43:00.000Z
-uuid: 35jz0q6h
-titleslug: perles-du-japon-vanille-citron-gingembre-cranberries_35jz0q6h
 ---

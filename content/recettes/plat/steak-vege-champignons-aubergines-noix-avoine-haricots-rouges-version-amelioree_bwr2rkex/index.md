@@ -84,7 +84,5 @@ preparation: >-
   * Faire cuire à 180°C environ 30 minutes, jusqu’à ce qu’ils brunissent un peu.
   Retourner en milieu de cuisson.
 publishDate: '2024-06-02T12:12:00.000Z'
-uuid: bwr2rkex
-titleslug:
-  steak-vege-champignons-aubergines-noix-avoine-haricots-rouges-version-amelioree_bwr2rkex
+
 ---

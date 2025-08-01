@@ -60,6 +60,4 @@ preparation: mixer finement le tout!!! et c'est tout!!!
 astuces:
   - astuce: ajouter l'eau au fur et à mesure
 publishDate: 2025-06-02T15:52:00.000Z
-uuid: s5qszq87
-titleslug: chutney-menthe-coriandre_s5qszq87
 ---

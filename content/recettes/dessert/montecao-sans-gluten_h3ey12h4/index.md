@@ -69,6 +69,4 @@ preparation: >-
 
   Parsemer à nouveau d'une petite pincée de cannelle.
 publishDate: 2025-05-30T17:34:00.000Z
-uuid: h3ey12h4
-titleslug: montecao-sans-gluten_h3ey12h4
 ---

@@ -46,9 +46,7 @@ regime:
   - sans-lactose
 temperature: Froid
 title: Houmous de betterave aux cranberries et balsamique
-titleslug: >-
   houmous-de-betterave-aux-cranberries-et-balsamique_edc9f445-939e-453b-a3d0-0624e2c07e34
 type: entree
-uuid: edc9f445-939e-453b-a3d0-0624e2c07e34
 ---
 

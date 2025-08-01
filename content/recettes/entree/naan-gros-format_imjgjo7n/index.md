@@ -88,6 +88,4 @@ preparation: >-
 
   \
 publishDate: 2025-06-02T19:02:00.000Z
-uuid: imjgjo7n
-titleslug: naan-gros-format_imjgjo7n
 ---

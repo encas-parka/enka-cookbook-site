@@ -60,7 +60,5 @@ regime:
 - sans-gluten
 temperature: Froid
 title: CREME CARAMEL SAVEUR COCO VEGANE
-titleslug: creme-caramel-saveur-coco-vegane_89xt49nm
 type: dessert
-uuid: 89xt49nm
 ---

@@ -49,6 +49,4 @@ preparation: |-
 
   Verser dans des moules individuels 30 min.
 publishDate: 2025-06-12T10:02:00.000Z
-uuid: 89k61vfg
-titleslug: flan-de-courgettes-au-basilic_89k61vfg
 ---

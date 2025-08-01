@@ -77,7 +77,5 @@ saison:
 - ete
 temperature: Froid
 title: Cake courgette chêvre cumin basilic
-titleslug: cake-courgette-chevre-cumin-basilic_ez95dnbm
 type: plat
-uuid: ez95dnbm
 ---

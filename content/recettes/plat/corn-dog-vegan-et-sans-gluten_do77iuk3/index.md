@@ -125,8 +125,6 @@ regime:
 region: Corée
 temperature: Chaud
 title: CORN DOG VEGAN ET SANS GLUTEN
-titleslug: corn-dog-vegan-et-sans-gluten_do77iuk3
 type: plat
-uuid: do77iuk3
 ---
 

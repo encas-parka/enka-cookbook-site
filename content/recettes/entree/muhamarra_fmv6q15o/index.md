@@ -73,6 +73,4 @@ preparation: >-
 
   4. Transférer dans le plat de service, arroser un peu d'huile d'olives et décorer avec les noix restantes.
 publishDate: 2024-06-04T16:31:00.000Z
-uuid: fmv6q15o
-titleslug: muhamarra_fmv6q15o
 ---

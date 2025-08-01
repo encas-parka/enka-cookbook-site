@@ -65,6 +65,4 @@ preparation24h: >-
 
   Faire cuire en remuant bien.
 publishDate: 2025-05-30T20:24:00.000Z
-uuid: ldk5eemc
-titleslug: salade-daubergine-froide_ldk5eemc
 ---

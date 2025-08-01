@@ -52,7 +52,5 @@ regime:
 - sans-gluten
 temperature: Froid
 title: SOUPE FROIDE CONCOMBRE ET YAOURT VEGAN
-titleslug: soupe-froide-concombre-et-yaourt-vegan_djwi3tfv
 type: entree
-uuid: djwi3tfv
 ---

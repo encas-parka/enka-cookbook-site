@@ -60,7 +60,5 @@ regime:
 - sans-lactose
 temperature: Chaud
 title: Crumble salé épinards vegan sans gluten
-titleslug: crumble-sale-epinards-vegan-sans-gluten_4t98rnjy
 type: entree
-uuid: 4t98rnjy
 ---

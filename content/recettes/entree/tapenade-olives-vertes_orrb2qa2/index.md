@@ -33,6 +33,4 @@ preparation: Dans un petit mixeur, ou à l'aide d'un mixeur plongeant, mixer les
   olives vertes avec l'ail grossièrement hâchée et l'huile d'olive.
 preparation24h: ""
 publishDate: 2024-03-18 13:28:23.107000+00:00
-uuid: orrb2qa2
-titleslug: tapenade-olives-vertes_orrb2qa2
 ---

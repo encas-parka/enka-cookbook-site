@@ -64,6 +64,4 @@ prepAlt:
   - recetteAlt: taboulais-libanais-des-tarnais-sans-gluten_cp6n89pn
   - recetteAlt: taboule-libanais_48lztgof
 publishDate: 2023-04-13T14:12:56.856Z
-uuid: f9gzv3rn
-titleslug: taboule-libanais-quinoa-sans-glut_f9gzv3rn
 ---

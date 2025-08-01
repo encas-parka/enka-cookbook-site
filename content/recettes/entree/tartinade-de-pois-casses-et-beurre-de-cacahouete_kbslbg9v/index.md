@@ -1,7 +1,5 @@
 ---
-uuid: kbslbg9v
 title: Tartinade de pois cassés et beurre de cacahouète
-titleslug: tartinade-de-pois-casses-et-beurre-de-cacahouete_kbslbg9v
 draft: false
 layout: recettes
 type: entree

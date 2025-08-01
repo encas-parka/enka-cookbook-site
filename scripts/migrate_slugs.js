@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 
+// Migre tous les slugs de recettes vers le format court (titre_slug + UUID court), met à jour les références dans les recettes et les événements, et renomme les dossiers.
+
 const fs = require('fs');
 const path = require('path');
 const crypto = require('crypto');

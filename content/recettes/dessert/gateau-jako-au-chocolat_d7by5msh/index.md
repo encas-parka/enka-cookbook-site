@@ -40,6 +40,4 @@ preparation: >-
 
   Enfourner pour 30 mn
 publishDate: 2025-06-05T07:22:00.000Z
-uuid: d7by5msh
-titleslug: gateau-jako-au-chocolat_d7by5msh
 ---

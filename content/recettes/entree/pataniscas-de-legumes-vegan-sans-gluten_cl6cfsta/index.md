@@ -61,6 +61,4 @@ preparation: >-
 
   Couler des grosses cuillers de pâte pour obtenir des beignets.
 publishDate: 2024-06-19 00:34:00+00:00
-uuid: cl6cfsta
-titleslug: pataniscas-de-legumes-vegan-sans-gluten_cl6cfsta
 ---

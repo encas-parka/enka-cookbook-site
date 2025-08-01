@@ -86,6 +86,4 @@ preparation: >-
 
   Cuise les cheesecake pendant 35-40 minutes (170°). Laisser refroidir avant de servir.
 publishDate: 2025-05-30T16:53:00.000Z
-uuid: tl9k6592
-titleslug: cheesecake-a-la-patate-douce_tl9k6592
 ---

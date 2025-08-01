@@ -75,7 +75,5 @@ regime:
 region: Portugal
 temperature: Chaud
 title: Soupe de carottes à la coriandre
-titleslug: soupe-de-carottes-a-la-coriandre_lt8nb835
 type: entree
-uuid: lt8nb835
 ---

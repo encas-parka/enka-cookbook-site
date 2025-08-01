@@ -89,7 +89,5 @@ regime:
 - sans-lactose
 temperature: Chaud
 title: Steak végétarien champignons - noix - flocons d'avoine
-titleslug: steak-vegetarien-champignons-noix-flocons-davoine_6myo6ojk
 type: plat
-uuid: 6myo6ojk
 ---

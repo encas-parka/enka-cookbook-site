@@ -70,6 +70,4 @@ preparation: >-
 
   * Après avoir disposeé ds les plats de services, faire des "splotch" de yaourt grec avec une cuillère à soupe (ne pas mélanger!)
 publishDate: 2025-05-15T16:33:00.000Z
-uuid: koir0veu
-titleslug: -ragout-de-lentilles-aux-aubergines_koir0veu
 ---

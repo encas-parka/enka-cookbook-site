@@ -1,7 +1,5 @@
 ---
-uuid: g8x1djy4
 title: Tartinade petits pois citrons confits menthe
-titleslug: tartinade-petits-pois-citrons-confits-menthe_g8x1djy4
 draft: false
 layout: recettes
 description: ""

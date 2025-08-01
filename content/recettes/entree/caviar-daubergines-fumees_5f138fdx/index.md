@@ -1,7 +1,5 @@
 ---
-uuid: 5f138fdx
 title: Caviar d'aubergines fumées
-titleslug: caviar-daubergines-fumees_5f138fdx
 draft: false
 layout: recettes
 type: entree

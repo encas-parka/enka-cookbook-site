@@ -33,6 +33,4 @@ preparation: Laisser tremper les olives noires pendant une demi heure puis
   rincez les bien. Mixer les avec l'ail et l'huile d'olive.
 preparation24h: ""
 publishDate: 2024-03-18 13:28:23.107000+00:00
-uuid: msdsbbvf
-titleslug: tapenade-olives-noires_msdsbbvf
 ---

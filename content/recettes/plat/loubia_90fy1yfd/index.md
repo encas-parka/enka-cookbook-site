@@ -97,6 +97,4 @@ preparation: >-
   11 Faire le boulgour.
 preparation24h: Faire tremper les haricots blancs
 publishDate: 2025-05-14T08:43:00.000Z
-uuid: 90fy1yfd
-titleslug: loubia_90fy1yfd
 ---

@@ -127,6 +127,4 @@ preparation: >-2
 
   \
 publishDate: 2025-06-02T18:31:00.000Z
-uuid: b0vb19mp
-titleslug: chou-bleu-chou-rouge_b0vb19mp
 ---

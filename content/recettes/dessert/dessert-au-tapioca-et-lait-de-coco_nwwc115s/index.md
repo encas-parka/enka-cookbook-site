@@ -43,6 +43,4 @@ preparation: |-
   5. Répartissez le mélange dans les récipients en y mettant au fond les fruits.
   6. Placez-les au frais au moins 2 heures avant de les déguster.
 publishDate: 2025-05-15T16:47:00.000Z
-uuid: nwwc115s
-titleslug: dessert-au-tapioca-et-lait-de-coco_nwwc115s
 ---

@@ -66,6 +66,4 @@ preparation: |-
 
   Une fois les panne cotte prêtes, répartir la compotée de rhubarbe.
 publishDate: 2025-06-13T14:40:00.000Z
-uuid: nqdhy6r4
-titleslug: panacotta-rhubarbe-speculoos_nqdhy6r4
 ---

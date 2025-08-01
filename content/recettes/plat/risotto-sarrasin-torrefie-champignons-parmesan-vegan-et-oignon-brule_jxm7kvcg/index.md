@@ -80,6 +80,4 @@ preparation: >-
 
   Mélanger la poudre d'amande la levure maltée et du sel au goût (ça doit être bien salé)
 publishDate: 2025-05-05T12:41:00.000Z
-uuid: jxm7kvcg
-titleslug: risotto-sarrasin-torrefie-champignons-parmesan-vegan-et-oignon-brule_jxm7kvcg
 ---

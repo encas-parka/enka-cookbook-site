@@ -122,7 +122,5 @@ regime: null
 region: Lyon
 temperature: Froid
 title: TARTE AUX PRALINES ROSES
-titleslug: tarte-aux-pralines-roses_pu5lrr1m
 type: dessert
-uuid: pu5lrr1m
 ---

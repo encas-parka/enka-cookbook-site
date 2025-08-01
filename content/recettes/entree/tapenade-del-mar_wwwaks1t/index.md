@@ -36,6 +36,4 @@ ingredients:
   sucres: []
 preparation: tout mixer sauf l'ail qui est pressée...et voilà!
 publishDate: 2025-06-15T19:47:00.000Z
-uuid: wwwaks1t
-titleslug: tapenade-del-mar_wwwaks1t
 ---

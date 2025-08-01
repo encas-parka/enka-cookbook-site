@@ -47,6 +47,4 @@ preparation: |-
   Après cuisson
   mettre le nappage (chocolat+beurre) et les graines de sarrasin torréfiées
 publishDate: 2025-05-22T16:47:00.000Z
-uuid: 0ncv61f5
-titleslug: gateau-a-la-creme-de-marron-nappage-chocolat_0ncv61f5
 ---

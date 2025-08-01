@@ -55,8 +55,6 @@ regime:
   - sans-lactose
 temperature: Chaud
 title: Sauce aux cranberries
-titleslug: sauce-aux-cranberries_8i618u6t
 type: plat
-uuid: 8i618u6t
 ---
 

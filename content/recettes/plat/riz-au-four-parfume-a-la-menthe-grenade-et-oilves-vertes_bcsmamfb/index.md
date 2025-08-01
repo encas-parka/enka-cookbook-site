@@ -72,6 +72,4 @@ preparation: >-
 
   4. Sortez le riz du four et retirez le papier d'aluminium. Prélevez les feuilles sur les brins de menthe (jetez les tiges) et déposez-les sur le riz, puis parseme de feta. Juste avant de servir, incorporez les 10 g de menthe ciselée dans la garniture et versez sur le riz de manière homogène. Servez chaud.
 publishDate: 2024-05-29T20:01:00.000Z
-uuid: bcsmamfb
-titleslug: riz-au-four-parfume-a-la-menthe-grenade-et-oilves-vertes_bcsmamfb
 ---

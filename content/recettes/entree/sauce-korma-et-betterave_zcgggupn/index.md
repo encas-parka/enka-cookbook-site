@@ -89,6 +89,4 @@ preparation: >-
 
   \
 publishDate: 2025-06-02T17:53:00.000Z
-uuid: zcgggupn
-titleslug: sauce-korma-et-betterave_zcgggupn
 ---

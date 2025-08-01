@@ -59,6 +59,4 @@ preparation: >-
 prepAlt:
   - recetteAlt: fondant-chataigne_tx71o7g8
 publishDate: 2024-05-18T13:02:00.000Z
-uuid: i1caicq2
-titleslug: -fondant-chataigne-vegan-et-sans-gluten_i1caicq2
 ---

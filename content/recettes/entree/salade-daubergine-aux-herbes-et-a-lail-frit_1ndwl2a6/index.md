@@ -79,6 +79,4 @@ preparation: >-
 
   AU DERNIER MOMENT, ajouter les herbes hachées, le jus d e citron, l'ail frit.
 publishDate: 2025-06-04T19:09:00.000Z
-uuid: 1ndwl2a6
-titleslug: salade-daubergine-aux-herbes-et-a-lail-frit_1ndwl2a6
 ---

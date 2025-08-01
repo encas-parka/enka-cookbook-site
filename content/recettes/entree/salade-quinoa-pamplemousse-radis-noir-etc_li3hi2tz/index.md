@@ -133,6 +133,4 @@ preparation: >-
 
   Assaisonner uniquement à l'huile d'olive, sel, poivre.
 publishDate: 2025-01-05T13:17:00.000Z
-uuid: li3hi2tz
-titleslug: salade-quinoa-pamplemousse-radis-noir-etc_li3hi2tz
 ---

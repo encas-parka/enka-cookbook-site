@@ -198,6 +198,4 @@ preparation: >-
   Une fois cuit, égrainer le riz pour éviter qu'il ne colle. ensuite couvrir et maintenir au bain marie.
 astuces: []
 publishDate: 2025-05-14T10:52:00.000Z
-uuid: wbyuybfrzyxchoyptn9pj9qdn9fjbgpbtjep
-titleslug: curry-veg_wbyuybfrzyxchoyptn9pj9qdn9fjbgpbtjep
 ---

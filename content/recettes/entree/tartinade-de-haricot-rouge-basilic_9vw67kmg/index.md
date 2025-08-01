@@ -1,7 +1,5 @@
 ---
-uuid: 9vw67kmg
 title: Tartinade de haricot rouge - basilic
-titleslug: tartinade-de-haricot-rouge-basilic_9vw67kmg
 draft: false
 img: tartinade-haricot-rouge.jpg
 layout: recettes

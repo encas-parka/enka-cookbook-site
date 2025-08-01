@@ -1,7 +1,5 @@
 ---
-uuid: j2muiu74
 title: "Tartinade Pois cassé - oignon caramélisé "
-titleslug: -tartinade-pois-casse-oignon-caramelise_j2muiu74
 draft: false
 layout: recettes
 type: entree

@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+// Corrige toutes les références de recettes dans les fichiers d'événements pour garantir que les slugs utilisés sont à jour et cohérents avec les recettes migrées.
 
 const fs = require("fs");
 const path = require("path");

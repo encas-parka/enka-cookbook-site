@@ -181,6 +181,4 @@ preparation: >-
   Une fois cuit, égrainer le riz pour éviter qu'il ne colle. ensuite couvrir et maintenir au bain marie.
 astuces: []
 publishDate: 2025-05-14T10:52:00.000Z
-uuid: czdyqwi1
-titleslug: -curry-de-boeuf_czdyqwi1
 ---

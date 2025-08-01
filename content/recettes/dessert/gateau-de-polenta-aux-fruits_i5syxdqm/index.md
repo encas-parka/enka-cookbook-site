@@ -94,6 +94,4 @@ preparation: >-
 
    Au dernier moment : étaler le yaourt directement sur le gâteau, disposer des tranches de fruits, des pistaches concassées, le miel et le zeste des citrons restant sur le gâteau.
 publishDate: 2024-06-18 15:19:00+00:00
-uuid: i5syxdqm
-titleslug: gateau-de-polenta-aux-fruits_i5syxdqm
 ---

@@ -61,7 +61,5 @@ regime:
 - sans-gluten
 temperature: Chaud
 title: Pao de Qeijo
-titleslug: pao-de-qeijo_0rq586k4
 type: plat
-uuid: 0rq586k4
 ---

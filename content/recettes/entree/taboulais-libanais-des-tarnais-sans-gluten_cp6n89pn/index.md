@@ -1,7 +1,5 @@
 ---
-uuid: cp6n89pn
 title: Taboulais libanais des tarnais (sans gluten)
-titleslug: taboulais-libanais-des-tarnais-sans-gluten_cp6n89pn
 draft: false
 img: taboule-libanais.jpg
 layout: recettes

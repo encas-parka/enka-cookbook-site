@@ -55,6 +55,4 @@ preparation24h: >-
 
   Quand les courgettes sont tendres, les verser sur le bouquet de menthe. Refroidir et mettre au frais toute la nuit.
 publishDate: 2025-06-19T15:32:00.000Z
-uuid: j0mhymu8qzdzjsng2ci9zh0ebayaq5u58te2
-titleslug: soupe-froide-de-courgettes-a-la-menthe_j0mhymu8qzdzjsng2ci9zh0ebayaq5u58te2
 ---

@@ -26,7 +26,5 @@ saison:
 - ete
 temperature: Froid
 title: SALADE DE PASTEQUE, MELON ET BASILIC
-titleslug: salade-de-pasteque-melon-et-basilic_o2puuuwx
 type: dessert
-uuid: o2puuuwx
 ---

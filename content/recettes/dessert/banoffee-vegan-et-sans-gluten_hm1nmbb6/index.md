@@ -1,7 +1,5 @@
 ---
-uuid: hm1nmbb6
 title: Banoffee (Végan et Sans Gluten)
-titleslug: banoffee-vegan-et-sans-gluten_hm1nmbb6
 draft: false
 layout: recettes
 type: dessert

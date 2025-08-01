@@ -41,7 +41,5 @@ regime:
 - vegetarien
 temperature: Froid
 title: SALADE DE BETTERAVE, YAOURT, GRAINES DE MOUTARDE ET CIBOULETTE
-titleslug: salade-de-betterave-yaourt-graines-de-moutarde-et-ciboulette_unt5ae7v
 type: entree
-uuid: unt5ae7v
 ---

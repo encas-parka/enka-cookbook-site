@@ -78,6 +78,4 @@ preparation: >-
   Laisser pousser sur une plaque sulfurisée une seconde fois pendant 1 heure et mettre au four pour une 15/20 min  à 180 degrés. Vérifier la cuisson et laisser plus longtemps si nécessaire.
 preparation24h: Faire la pâte la veille et la première poussée dans la nuit au frigo.
 publishDate: 2024-05-23T22:54:00.000Z
-uuid: 91j1kytb
-titleslug: lanches-au-pesto-rosso-vegane-et-sans-gluten_91j1kytb
 ---

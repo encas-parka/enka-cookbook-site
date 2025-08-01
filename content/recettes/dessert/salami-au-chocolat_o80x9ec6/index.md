@@ -63,7 +63,5 @@ regime:
 region: Portugal
 temperature: Froid
 title: Salami au chocolat
-titleslug: salami-au-chocolat_o80x9ec6
 type: dessert
-uuid: o80x9ec6
 ---

@@ -54,6 +54,4 @@ preparation: >-
 
   Met ensuite le nappage (chocolat + crème de soja) ainsi que les graines de sarrasin torréfiées
 publishDate: 2025-05-22T17:00:00.000Z
-uuid: afobs4r1
-titleslug: gateau-a-la-creme-de-marron-nappage-chocolat-vegan_afobs4r1
 ---

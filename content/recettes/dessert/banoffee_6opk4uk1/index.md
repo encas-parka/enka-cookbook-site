@@ -47,13 +47,13 @@ preparation: >-
   **FOND DE TARTE:**
 
 
-  Mixer les SPECULOOS en miette. 
+  Mixer les SPECULOOS en miette.
 
 
   Faire fondre le beurre salé. Mélanger bien les deux ensemble.
 
 
-  Tapissser les fonds de tous les ramequins et bien tasser. 
+  Tapissser les fonds de tous les ramequins et bien tasser.
 
 
   Y déposer des rondelles de BANANE. 1 banane pour 3 personnes.
@@ -64,7 +64,7 @@ preparation: >-
 
 
 
-  **CHANTILLY :** 
+  **CHANTILLY :**
 
 
   Battre au robot (en plusieurs fois) la CREME LIQUIDE très froide, le MASCARPONE et le SUCRE.
@@ -78,7 +78,7 @@ preparation24h: >-
   ##### **1 jour avant :**
 
 
-  **DULCE DE LECHE:** 
+  **DULCE DE LECHE:**
 
 
   Prendre un très grosse gamelle, là où rentre toutes les conserves de lait concentré sucré.
@@ -97,6 +97,5 @@ preparation24h: >-
 prepAlt:
   - recetteAlt: banoffee-vegan-et-sans-gluten_hm1nmbb6
 publishDate: 2024-05-17T18:26:00.000Z
-uuid: 6opk4uk1
-titleslug: banoffee_6opk4uk1
+
 ---

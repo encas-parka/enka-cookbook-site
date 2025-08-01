@@ -25,6 +25,4 @@ ingredients:
       unit: unité
 preparation: c'est arnaud qui le fait
 publishDate: 2025-06-17T18:46:00.000Z
-uuid: rhxadipq
-titleslug: pain-pita_rhxadipq
 ---

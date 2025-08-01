@@ -40,8 +40,6 @@ regime:
   - sans-gluten
 temperature: Froid
 title: Sauce blanche citron ail
-titleslug: sauce-blanche-citron-ail_e5eck71q
 type: plat
-uuid: e5eck71q
 ---
 

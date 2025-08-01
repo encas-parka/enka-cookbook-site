@@ -60,7 +60,5 @@ regime:
 - vegan
 temperature: Froid
 title: Tarte au chocolat sans cuisson
-titleslug: tarte-au-chocolat-sans-cuisson_matyge19
 type: dessert
-uuid: matyge19
 ---

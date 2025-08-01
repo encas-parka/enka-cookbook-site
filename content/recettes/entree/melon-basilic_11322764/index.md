@@ -30,6 +30,4 @@ ingredients:
       commentaire: ""
 preparation: :)
 publishDate: 2025-07-31T10:31:00.000+02:00
-uuid: "11322764"
-titleslug: melon-basilic_11322764
 ---

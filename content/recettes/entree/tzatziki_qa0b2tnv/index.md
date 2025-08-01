@@ -43,6 +43,4 @@ preparation: Couper très fin (cube) ou hacher gros les concombres, mettre dans
   une passoire 30 minutes avec du sel. Rincer, sécher, ajouter le reste avec
   herbes hâchées à la main.
 publishDate: 2024-06-20T15:11:00.000Z
-uuid: qa0b2tnv
-titleslug: tzatziki_qa0b2tnv
 ---

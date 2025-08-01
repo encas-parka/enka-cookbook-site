@@ -56,6 +56,4 @@ preparation24h: >-
 
   faire chauffer doucement en remuant jusqu'a fremissement. ca doit epaissir un peu. mettre dans des ramequins au frais.
 publishDate: 2024-06-13 08:46:00+00:00
-uuid: kuc9xyht
-titleslug: creme-dessert-vanille-vegan_kuc9xyht
 ---

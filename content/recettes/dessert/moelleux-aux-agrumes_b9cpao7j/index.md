@@ -79,6 +79,4 @@ preparation: >-
 
   **Version sans gluten** : remplacer la chapelure par le mix sans gluten
 publishDate: 2025-06-04T19:18:00.000Z
-uuid: b9cpao7j
-titleslug: moelleux-aux-agrumes_b9cpao7j
 ---

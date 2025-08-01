@@ -83,6 +83,4 @@ preparation: >-
 
   Couler des grosses cuillers de pâte pour obtenir des beignets.
 publishDate: 2024-06-19 00:00:00+00:00
-uuid: 3fqacu8z
-titleslug: pataniscas-de-legumes_3fqacu8z
 ---

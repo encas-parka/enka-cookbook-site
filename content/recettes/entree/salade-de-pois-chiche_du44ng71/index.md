@@ -1,8 +1,6 @@
 ---
-uuid: du44ng71
 draft: false
 title: Salade de Pois-chiche
-titleslug: salade-de-pois-chiche_du44ng71
 img: salade-pois-chiches.webp
 layout: recettes
 type: entree

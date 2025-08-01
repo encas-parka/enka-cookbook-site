@@ -62,6 +62,4 @@ preparation: >-
 
   \    5 - Laisser fondre le tout, rectifier l'assaisonement. Servir froid.
 publishDate: 2024-06-20T15:16:00.000Z
-uuid: xr9e7ec2
-titleslug: mechouia_xr9e7ec2
 ---

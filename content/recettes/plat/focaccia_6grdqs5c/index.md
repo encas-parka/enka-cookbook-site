@@ -1,7 +1,5 @@
 ---
-uuid: 6grdqs5c
 title: Focaccia
-titleslug: focaccia_6grdqs5c
 draft: false
 layout: recettes
 type: plat

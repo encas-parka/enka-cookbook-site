@@ -53,6 +53,4 @@ preparation: >-
 
   Peut-être préparé 3heures environ avant de servir
 publishDate: 2025-06-27T19:13:00.000Z
-uuid: 3lmh4nwosg3nhoir63vdog1aaetw_lw7qhrf
-titleslug: tapioca-perlee-au-chocolat_3lmh4nwosg3nhoir63vdog1aaetw_lw7qhrf
 ---

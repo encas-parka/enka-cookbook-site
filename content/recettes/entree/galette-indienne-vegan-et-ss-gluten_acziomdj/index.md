@@ -51,6 +51,4 @@ preparation: |-
 
   \
 publishDate: 2025-06-02T19:10:00.000Z
-uuid: acziomdj
-titleslug: galette-indienne-vegan-et-ss-gluten_acziomdj
 ---

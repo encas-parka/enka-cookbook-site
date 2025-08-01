@@ -55,6 +55,4 @@ preparation: >-
 
   \
 publishDate: 2025-06-02T18:09:00.000Z
-uuid: 74k7xqu3
-titleslug: raita-vegan_74k7xqu3
 ---

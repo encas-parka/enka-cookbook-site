@@ -67,7 +67,5 @@ regime:
 region: Liban
 temperature: Froid
 title: CREME DE RIZ LIBANAISE - MOUHALABIEH
-titleslug: creme-de-riz-libanaise-mouhalabieh_0k4dcqig
 type: dessert
-uuid: 0k4dcqig
 ---

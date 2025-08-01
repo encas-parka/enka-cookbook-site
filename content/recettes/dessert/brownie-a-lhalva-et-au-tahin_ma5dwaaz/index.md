@@ -61,7 +61,5 @@ regime:
 - vegetarien
 temperature: Chaud
 title: BROWNIE A L'HALVA ET AU TAHIN
-titleslug: brownie-a-lhalva-et-au-tahin_ma5dwaaz
 type: dessert
-uuid: ma5dwaaz
 ---

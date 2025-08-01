@@ -81,7 +81,5 @@ regime:
 - sans-gluten
 temperature: Chaud
 title: RISOTTO DE PRUNEAUX ET CHAMPIGNONS
-titleslug: risotto-de-pruneaux-et-champignons_5gmpv84u
 type: plat
-uuid: 5gmpv84u
 ---

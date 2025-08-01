@@ -58,7 +58,5 @@ saison:
 - ete
 temperature: Froid
 title: Taboulais libanais des tarnais
-titleslug: taboulais-libanais-des-tarnais_os1bnq2l
 type: entree
-uuid: os1bnq2l
 ---

@@ -1,7 +1,5 @@
 ---
-uuid: 5feqe55t
 title: Salade courgette - curry
-titleslug: salade-courgette-curry_5feqe55t
 draft: false
 img: courgette-curry.jpg
 layout: recettes

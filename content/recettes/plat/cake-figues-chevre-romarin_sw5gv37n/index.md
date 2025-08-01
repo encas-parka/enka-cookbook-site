@@ -62,7 +62,5 @@ regime:
 - vegetarien
 temperature: Froid
 title: Cake figues, chèvre, romarin
-titleslug: cake-figues-chevre-romarin_sw5gv37n
 type: plat
-uuid: sw5gv37n
 ---

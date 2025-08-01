@@ -50,6 +50,4 @@ preparation: |-
 
   Les poireaux peuvent être servis tièdes ou froids.
 publishDate: 2025-01-05T20:40:00.000Z
-uuid: sbpn8dbs
-titleslug: poireaux-vinaigrette-citronnee_sbpn8dbs
 ---

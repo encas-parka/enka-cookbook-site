@@ -77,6 +77,4 @@ preparation: >-
 
   Option sans gluten : voir recette koloythokeftedes pour les galettes où on peut remplacer la farine par de la farine sans gluten
 publishDate: 2025-07-21T13:43:00.000+02:00
-uuid: 8jaekytp-ugpt05g-jwgjuqa-xseqspbol9g
-titleslug: kolokythopita-tarte-filo-courgette-feta-grecque_8jaekytp-ugpt05g-jwgjuqa-xseqspbol9g
 ---

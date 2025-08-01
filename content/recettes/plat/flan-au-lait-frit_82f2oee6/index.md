@@ -1,7 +1,5 @@
 ---
-uuid: 82f2oee6
 title: Flan au lait frit
-titleslug: flan-au-lait-frit_82f2oee6
 draft: false
 layout: recettes
 type: plat

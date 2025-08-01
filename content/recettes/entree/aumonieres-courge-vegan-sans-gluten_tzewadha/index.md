@@ -75,7 +75,5 @@ preparation: >-
 preparation24h: ''
 prepAlt: []
 publishDate: '2024-05-17T15:21:00.000Z'
-uuid: tzewadha
-titleslug: aumonieres-courge-vegan-sans-gluten_tzewadha
 ---
 

@@ -37,6 +37,4 @@ preparation: >-
 
   mettre une cuillère à soupe de châtaigne sur le yaourt
 publishDate: 2025-06-15T13:19:00.000Z
-uuid: fdd3vcbv
-titleslug: yahourt-de-brebis-a-la-creme-de-chataigne-et-son-alternative-vegan_fdd3vcbv
 ---

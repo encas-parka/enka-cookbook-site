@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+// Script de nettoyage final : migre les 17 dernières recettes problématiques vers le format UUID court et titleslug cohérent, met à jour les références et renomme les dossiers associés.
 
 const fs = require('fs');
 const path = require('path');

@@ -1,7 +1,5 @@
 ---
-uuid: wbq41lw3
 title: Moussaka Végé
-titleslug: moussaka-vege_wbq41lw3
 draft: false
 layout: recettes
 type: plat

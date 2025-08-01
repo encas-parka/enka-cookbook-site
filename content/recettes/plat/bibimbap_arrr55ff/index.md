@@ -226,6 +226,4 @@ astuces:
 prepAlt:
   - recetteAlt: sauce-bibimbap-sans-allergenes_3n7u5n4d
 publishDate: 2025-05-04T21:01:00.000Z
-uuid: arrr55ff
-titleslug: bibimbap_arrr55ff
 ---

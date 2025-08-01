@@ -1,28 +1,10 @@
 backend:
-  # name: git-gateway
   name: github
   repo: encas-parka/enka-cookbook-site
   branch: main
   base_url: https://sveltia-cms-auth.encas-cookbook.workers.dev/
 
-  #Permettre un PR sur github sans l'acces aux dépot (github only)
-  # open_authoring: true
 
-  # Vérifier si ca marche bien : si un article est modifier plusieur fpos avant d'etre mergé/publié, un seul commit avec rebased.
-  # squash_merges: true
-
-
-#By default, saving a post in the CMS interface pushes a commit directly to the publication branch specified in backend.
-# This line should *not* be indented
-publish_mode: simple
-
-locale: "fr"
-
-# when using the default proxy server port
-# for local cms developpement.
-# Need to run : 'npx decap-server' from the root directory of the above repository.
-local_backend:
-  url: http://localhost:8081/api/v1 # when using a custom proxy server port
 
 media_folder: "static/images"
 public_folder: "/images"

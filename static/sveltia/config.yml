@@ -215,7 +215,7 @@ collections:
             collection: "ingredients_index"
             searchFields: ["title"]
             valueField: "title"
-            options_length: 2000
+            options_length: 1000
           - label: "Quantité (nombre)"
             name: quantite
             widget: number
@@ -491,7 +491,7 @@ collections:
 
   - name: "ingredients_index"
     label: "Ingrédients"
-    description: "Liste des ingrédients disponibles pour les recettes. Gérée automatiquement depuis /content/ingredients/ (un dossier par ingrédient, avec un index.md)."
+    description: "Liste des ingrédients disponibles pour les recettes."
     folder: "content/ingredients"
     create: true
     path: "{{slug}}/index"

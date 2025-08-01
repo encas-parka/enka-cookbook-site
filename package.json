@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "@sveltia/cms": "^0.92.4",
     "gray-matter": "^4.0.3"
   }
 }

@@ -1,4 +1,4 @@
 ---
 title: "lait d’amande"
-itype: "lof"
+type: "lof"
 ---

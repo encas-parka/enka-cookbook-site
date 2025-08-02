@@ -1,4 +1,4 @@
 ---
 title: "creme de coco"
-itype: "lof"
+type: "lof"
 ---

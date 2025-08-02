@@ -1,4 +1,4 @@
 ---
 title: "Bicarbonate alimentaire"
-itype: "lof"
+type: "lof"
 ---

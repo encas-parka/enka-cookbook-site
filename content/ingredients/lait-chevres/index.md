@@ -1,4 +1,4 @@
 ---
 title: "lait (chèvres)"
-itype: "lof"
+type: "lof"
 ---

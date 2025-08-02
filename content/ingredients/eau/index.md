@@ -1,4 +1,4 @@
 ---
 title: "Eau"
-itype: "autres"
+type: "autres"
 ---

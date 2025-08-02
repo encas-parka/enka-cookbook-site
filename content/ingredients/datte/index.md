@@ -1,5 +1,5 @@
 ---
 title: "Datte"
 pFrais: true
-itype: "legumes"
+type: "legumes"
 ---

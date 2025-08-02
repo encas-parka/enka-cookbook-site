@@ -1,5 +1,5 @@
 ---
 title: "Gingembre"
 pFrais: true
-itype: "epices"
+type: "epices"
 ---

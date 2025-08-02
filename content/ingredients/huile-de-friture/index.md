@@ -1,4 +1,4 @@
 ---
 title: "huile de friture"
-itype: "lof"
+type: "lof"
 ---

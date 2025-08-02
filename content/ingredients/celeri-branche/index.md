@@ -1,7 +1,7 @@
 ---
 title: "Céleri branche"
 pFrais: true
-alergenesIng:
+type: "legumes"
+allergenes:
   - "Céleri"
-itype: "legumes"
 ---

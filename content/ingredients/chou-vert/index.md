@@ -4,5 +4,5 @@ pFrais: true
 saisons:
   - "automne"
   - "hiver"
-itype: "legumes"
+type: "legumes"
 ---

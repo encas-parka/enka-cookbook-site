@@ -1,4 +1,4 @@
 ---
 title: "Confiture de fraises"
-itype: "sucres"
+type: "sucres"
 ---

@@ -1,5 +1,5 @@
 ---
 title: "Menthe glaciale"
 pFrais: true
-itype: "epices"
+type: "epices"
 ---

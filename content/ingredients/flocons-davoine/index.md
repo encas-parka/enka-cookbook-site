@@ -1,6 +1,6 @@
 ---
 title: "Flocons d'avoine"
-alergenesIng:
+type: "sec"
+allergenes:
   - "Gluten"
-itype: "sec"
 ---

@@ -1,4 +1,4 @@
 ---
 title: "Cranberries séchées"
-itype: "sucres"
+type: "sucres"
 ---

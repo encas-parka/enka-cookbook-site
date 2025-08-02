@@ -1,4 +1,4 @@
 ---
 title: "Gousse d'ail"
-itype: "epices"
+type: "epices"
 ---

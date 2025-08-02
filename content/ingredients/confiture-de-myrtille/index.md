@@ -1,4 +1,4 @@
 ---
 title: "confiture de myrtille"
-itype: "sucres"
+type: "sucres"
 ---

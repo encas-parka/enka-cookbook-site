@@ -1,4 +1,4 @@
 ---
 title: "Farine de lentilles"
-itype: "lof"
+type: "lof"
 ---

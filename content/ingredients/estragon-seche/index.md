@@ -1,4 +1,4 @@
 ---
 title: "Estragon séché"
-itype: "epices"
+type: "epices"
 ---

@@ -1,6 +1,6 @@
 ---
 title: "Graines de sésame noir"
-alergenesIng:
+type: "sec"
+allergenes:
   - "Sésame"
-itype: "sec"
 ---

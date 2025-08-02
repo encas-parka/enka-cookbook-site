@@ -1,8 +1,8 @@
 ---
 title: "Amandes effilées"
-alergenesIng:
-  - "Fruit à coque"
 vegan: true
 vegetarien: true
-itype: "sec"
+type: "sec"
+allergenes:
+  - "Fruit à coque"
 ---

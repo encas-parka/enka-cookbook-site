@@ -1,5 +1,5 @@
 ---
 title: "Catalonia"
 pFrais: true
-itype: "legumes"
+type: "legumes"
 ---

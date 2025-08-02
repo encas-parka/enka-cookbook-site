@@ -1,4 +1,4 @@
 ---
 title: "Algue nori feuille séchée"
-itype: "epices"
+type: "epices"
 ---

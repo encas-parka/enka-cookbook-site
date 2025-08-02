@@ -2,7 +2,7 @@
 title: "Lasagnes"
 vegan: true
 vegetarien: true
-alergenesIng:
+type: "sec"
+allergenes:
   - "Gluten"
-itype: "sec"
 ---

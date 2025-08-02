@@ -1,5 +1,5 @@
 ---
 title: "Epinards surgelés"
 pFrais: true
-itype: "legumes"
+type: "legumes"
 ---

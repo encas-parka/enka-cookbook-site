@@ -1,6 +1,6 @@
 ---
 title: "Lait concentré (non sucré)"
-alergenesIng:
+type: "lof"
+allergenes:
   - "Produit laitier"
-itype: "lof"
 ---

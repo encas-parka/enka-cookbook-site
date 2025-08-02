@@ -1,6 +1,6 @@
 ---
 title: "Farine d'avoine"
-alergenesIng:
+type: "lof"
+allergenes:
   - "Gluten"
-itype: "lof"
 ---

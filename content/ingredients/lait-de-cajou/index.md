@@ -1,4 +1,4 @@
 ---
 title: "lait de cajou"
-itype: "sucres"
+type: "sucres"
 ---

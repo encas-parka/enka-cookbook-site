@@ -1,4 +1,4 @@
 ---
 title: "Graine de tournesol"
-itype: "sec"
+type: "sec"
 ---

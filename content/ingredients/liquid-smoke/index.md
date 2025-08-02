@@ -1,4 +1,4 @@
 ---
 title: "Liquid smoke"
-itype: "epices"
+type: "epices"
 ---

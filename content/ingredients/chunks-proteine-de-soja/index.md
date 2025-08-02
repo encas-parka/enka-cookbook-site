@@ -1,6 +1,6 @@
 ---
 title: "Chunks (protéine de soja)"
-alergenesIng:
+type: "autres"
+allergenes:
   - "Soja"
-itype: "autres"
 ---

@@ -1,4 +1,4 @@
 ---
 title: "Jus de citron"
-itype: "epices"
+type: "epices"
 ---

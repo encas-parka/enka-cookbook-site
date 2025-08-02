@@ -1,6 +1,6 @@
 ---
 title: "Graines de sésame blanc"
-alergenesIng:
+type: "sec"
+allergenes:
   - "Sésame"
-itype: "sec"
 ---

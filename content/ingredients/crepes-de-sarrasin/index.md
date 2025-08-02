@@ -1,4 +1,4 @@
 ---
 title: "crêpes de sarrasin"
-itype: "autres"
+type: "autres"
 ---

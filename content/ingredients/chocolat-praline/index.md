@@ -1,4 +1,4 @@
 ---
 title: "Chocolat praliné"
-itype: "sucres"
+type: "sucres"
 ---

@@ -1,6 +1,6 @@
 ---
 title: "Beurre de cacahuètes (salé)"
-alergenesIng:
+type: "autres"
+allergenes:
   - "Arachides"
-itype: "autres"
 ---

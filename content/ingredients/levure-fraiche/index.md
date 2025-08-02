@@ -1,6 +1,6 @@
 ---
 title: "Levure fraîche"
-alergenesIng:
+type: "lof"
+allergenes:
   - "Gluten"
-itype: "lof"
 ---

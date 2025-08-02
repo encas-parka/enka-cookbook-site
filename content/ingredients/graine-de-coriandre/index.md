@@ -1,4 +1,4 @@
 ---
 title: "graine de coriandre"
-itype: "epices"
+type: "epices"
 ---

@@ -1,4 +1,4 @@
 ---
 title: "Haricots rouges cuits"
-itype: "sec"
+type: "sec"
 ---

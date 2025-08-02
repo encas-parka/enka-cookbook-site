@@ -1,5 +1,5 @@
 ---
 title: "Champignons"
 pFrais: true
-itype: "legumes"
+type: "legumes"
 ---

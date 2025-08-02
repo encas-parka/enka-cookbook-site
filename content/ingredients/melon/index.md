@@ -1,5 +1,5 @@
 ---
 title: "Melon"
 pFrais: true
-itype: "legumes"
+type: "legumes"
 ---

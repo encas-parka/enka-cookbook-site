@@ -1,4 +1,4 @@
 ---
 title: "Huile d'argan"
-itype: "lof"
+type: "lof"
 ---

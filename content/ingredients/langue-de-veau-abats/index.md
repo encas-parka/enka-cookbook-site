@@ -1,7 +1,7 @@
 ---
 title: "Langue de veau (abats)"
-alergenesIng:
-  - "Viande"
 pFrais: true
-itype: "animaux"
+type: "animaux"
+allergenes:
+  - "Viande"
 ---

@@ -1,4 +1,4 @@
 ---
 title: "Concentré de tomate"
-itype: "autres"
+type: "autres"
 ---

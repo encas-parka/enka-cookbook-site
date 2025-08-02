@@ -1,4 +1,4 @@
 ---
 title: "Cacao"
-itype: "sucres"
+type: "sucres"
 ---

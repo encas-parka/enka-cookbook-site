@@ -1,4 +1,4 @@
 ---
 title: "Cassonade"
-itype: "sucres"
+type: "sucres"
 ---

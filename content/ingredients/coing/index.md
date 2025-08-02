@@ -1,5 +1,5 @@
 ---
 title: "Coing"
 pFrais: true
-itype: "legumes"
+type: "legumes"
 ---

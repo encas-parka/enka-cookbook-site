@@ -1,4 +1,4 @@
 ---
 title: "Fécule de tapioca"
-itype: "lof"
+type: "lof"
 ---

@@ -1,4 +1,4 @@
 ---
 title: "Algue kombu séchée"
-itype: "epices"
+type: "epices"
 ---

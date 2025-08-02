@@ -1,4 +1,4 @@
 ---
 title: "Cumin moulu"
-itype: "epices"
+type: "epices"
 ---

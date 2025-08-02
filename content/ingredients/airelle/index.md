@@ -1,5 +1,5 @@
 ---
 title: "Airelle"
 pFrais: true
-itype: "legumes"
+type: "legumes"
 ---

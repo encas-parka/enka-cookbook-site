@@ -1,4 +1,4 @@
 ---
 title: "Cornflakes (sans gluten)"
-itype: "sucres"
+type: "sucres"
 ---

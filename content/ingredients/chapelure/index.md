@@ -1,6 +1,6 @@
 ---
 title: "Chapelure"
-alergenesIng:
+type: "autres"
+allergenes:
   - "Gluten"
-itype: "autres"
 ---

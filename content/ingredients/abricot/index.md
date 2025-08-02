@@ -1,5 +1,6 @@
 ---
-title: "Abricot"
+title: Abricot
+type: legumes
 pFrais: true
-itype: "legumes"
 ---
+

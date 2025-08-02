@@ -2,7 +2,7 @@
 title: "Crème Végétale"
 vegan: true
 vegetarien: true
-alergenesIng:
+type: "lof"
+allergenes:
   - "Soja"
-itype: "lof"
 ---

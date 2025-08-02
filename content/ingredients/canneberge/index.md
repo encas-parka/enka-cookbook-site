@@ -1,5 +1,5 @@
 ---
 title: "Canneberge"
 pFrais: true
-itype: "legumes"
+type: "legumes"
 ---

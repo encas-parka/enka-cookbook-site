@@ -1,4 +1,4 @@
 ---
 title: "Cornichons"
-itype: "autres"
+type: "autres"
 ---

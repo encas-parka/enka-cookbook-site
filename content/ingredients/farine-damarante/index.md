@@ -1,4 +1,4 @@
 ---
 title: "Farine d’amarante"
-itype: "lof"
+type: "lof"
 ---

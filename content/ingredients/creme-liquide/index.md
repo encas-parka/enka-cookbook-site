@@ -2,7 +2,7 @@
 title: "Crème liquide"
 vegetarien: true
 vegan: false
-alergenesIng:
+type: "lof"
+allergenes:
   - "Produit laitier"
-itype: "lof"
 ---

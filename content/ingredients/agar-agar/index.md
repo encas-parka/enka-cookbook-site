@@ -1,4 +1,4 @@
 ---
 title: "Agar-agar"
-itype: "autres"
+type: "autres"
 ---

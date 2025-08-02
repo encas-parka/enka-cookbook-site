@@ -1,6 +1,6 @@
 ---
 title: "Boulgour fin"
-alergenesIng:
+type: "sec"
+allergenes:
   - "Gluten"
-itype: "sec"
 ---

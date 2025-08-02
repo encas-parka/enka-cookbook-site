@@ -1,5 +1,5 @@
 ---
 title: "Champignons (conserve)"
 pFrais: false
-itype: "legumes"
+type: "legumes"
 ---

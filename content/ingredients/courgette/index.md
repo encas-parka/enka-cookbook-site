@@ -1,5 +1,5 @@
 ---
 title: "Courgette"
 pFrais: true
-itype: "legumes"
+type: "legumes"
 ---

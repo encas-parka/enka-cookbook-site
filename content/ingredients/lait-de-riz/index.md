@@ -1,4 +1,4 @@
 ---
 title: "Lait de riz"
-itype: "lof"
+type: "lof"
 ---

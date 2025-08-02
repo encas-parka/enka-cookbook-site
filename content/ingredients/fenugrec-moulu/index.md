@@ -1,4 +1,4 @@
 ---
 title: "fenugrec moulu"
-itype: "epices"
+type: "epices"
 ---

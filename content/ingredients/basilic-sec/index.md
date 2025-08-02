@@ -1,4 +1,4 @@
 ---
 title: "Basilic sec"
-itype: "epices"
+type: "epices"
 ---

@@ -1,4 +1,4 @@
 ---
 title: "Menthe séchée"
-itype: "epices"
+type: "epices"
 ---

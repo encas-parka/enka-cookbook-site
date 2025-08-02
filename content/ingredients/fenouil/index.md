@@ -1,5 +1,5 @@
 ---
 title: "Fenouil"
 pFrais: true
-itype: "legumes"
+type: "legumes"
 ---

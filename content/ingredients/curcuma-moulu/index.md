@@ -1,4 +1,4 @@
 ---
 title: "Curcuma moulu"
-itype: "epices"
+type: "epices"
 ---

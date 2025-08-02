@@ -1,4 +1,4 @@
 ---
 title: "Coriandre en poudre"
-itype: "epices"
+type: "epices"
 ---

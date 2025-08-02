@@ -1,4 +1,4 @@
 ---
 title: "bouillon cube"
-itype: "epices"
+type: "epices"
 ---

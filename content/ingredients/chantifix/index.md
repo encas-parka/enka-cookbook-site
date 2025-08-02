@@ -1,4 +1,4 @@
 ---
 title: "Chantifix"
-itype: "autres"
+type: "autres"
 ---

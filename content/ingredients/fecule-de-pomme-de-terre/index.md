@@ -1,4 +1,4 @@
 ---
 title: "Fécule de pomme de terre"
-itype: "lof"
+type: "lof"
 ---

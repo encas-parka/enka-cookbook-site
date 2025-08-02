@@ -1,5 +1,5 @@
 ---
 title: "Courge"
 pFrais: true
-itype: "legumes"
+type: "legumes"
 ---

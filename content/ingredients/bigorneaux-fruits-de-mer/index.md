@@ -1,7 +1,7 @@
 ---
 title: "Bigorneaux (fruits de mer)"
-alergenesIng:
-  - "Mollusque"
 pFrais: true
-itype: "animaux"
+type: "animaux"
+allergenes:
+  - "Mollusque"
 ---

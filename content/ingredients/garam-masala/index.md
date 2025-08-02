@@ -1,4 +1,4 @@
 ---
 title: "Garam Masala"
-itype: "epices"
+type: "epices"
 ---

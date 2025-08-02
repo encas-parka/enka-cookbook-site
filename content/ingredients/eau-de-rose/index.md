@@ -1,4 +1,4 @@
 ---
 title: "Eau de rose"
-itype: "sucres"
+type: "sucres"
 ---

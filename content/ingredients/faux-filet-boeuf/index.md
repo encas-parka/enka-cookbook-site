@@ -1,7 +1,7 @@
 ---
 title: "Faux filet (boeuf)"
-alergenesIng:
-  - "Viande"
 pFrais: true
-itype: "animaux"
+type: "animaux"
+allergenes:
+  - "Viande"
 ---

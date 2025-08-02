@@ -3,7 +3,7 @@
 backend:
   name: github
   repo: encas-parka/enka-cookbook-site
-  branch: main
+  branch: ing-merged-mig
   base_url: https://enka-cookbook.pages.dev
 
   auth_type: github
@@ -198,6 +198,38 @@ collections:
 
       ################################
       ## ::: __Ingredients de la recette ##
+      - label: "Ingredients"
+        name: "ingredients+"
+        widget: "list"
+        allow_add: true
+        add_to_top: true
+        label_singular: "Ingrédient"
+        required: false
+        collapsed: true
+        summary: "{{fields.title}}: {{fields.quantite}} {{fields.unit}}"
+        fields:
+          - label: "Ingrédient"
+            name: title
+            widget: "relation"
+            collection: "ingredients"
+            search_fields: ["title"]
+            value_field: "title"
+            display_fields: ["title", "itype", "alergenesIng", "vegan", "vegetarien"]
+            options_length: 1000
+          - label: "Quantité (nombre)"
+            name: quantite
+            widget: number
+            min: 0.1
+            value_type: float
+          - label: "Unité (quantité en...)"
+            name: unit
+            widget: select
+            options: ["Kg", "grammes", "unité", "litre", "ml", "c. à soupe", "c. à café", "pincées", "tête·s", "gousse·s", "bottes"]
+          - label: "commentaire"
+            name: commentaire
+            widget: string
+            required: false
+            hint: "Si vous avez quelque-chose à préciser... S'affiche à coté de l'ingrédients dans la recette. ⚠ Ne sera pas affiché dans les listes de course"
 
       - label: "Ingredients"
         name: "ingredients"
@@ -212,9 +244,10 @@ collections:
           - label: "Ingrédient"
             name: title
             widget: "relation"
-            collection: "ingredients_index"
+            collection: "ingredients"
             search_fields: ["title"]
             value_field: "title"
+            display_fields: ["title", "itype", "alergenesIng", "vegan", "vegetarien"]
             options_length: 1000
           - label: "Quantité (nombre)"
             name: quantite
@@ -547,5 +580,3 @@ collections:
           - { label: "Hiver", value: "hiver" }
 
       - { label: "Produit Frais ?", name: "pFrais", widget: "boolean", required: false, hint: "Fruits et légumes frais (ni surgelé, ni conserve, ni séché, etc.), ou ingrédients qui se conserve au frigo" }
-      - { label: "Surgelé ?", name: "pSurg", widget: "boolean", required: false, hint: "Ingrédients qui doivent être conservé au congélateur" }
-      - { label: "Commentaire", name: "commentaire", widget: "string", required: false }

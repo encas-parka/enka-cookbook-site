@@ -1,5 +1,5 @@
 ---
 title: "Aubergine"
 pFrais: true
-itype: "legumes"
+type: "legumes"
 ---

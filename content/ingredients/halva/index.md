@@ -1,6 +1,6 @@
 ---
 title: "Halva"
-alergenesIng:
+type: "sucres"
+allergenes:
   - "Sésame"
-itype: "sucres"
 ---

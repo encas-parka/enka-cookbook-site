@@ -1,9 +1,9 @@
 ---
 title: "Biscuit Petit Brun"
-alergenesIng:
+type: "sucres"
+allergenes:
   - "Gluten"
   - "Produit laitier"
   - "Sésame"
   - "Oeuf"
-itype: "sucres"
 ---

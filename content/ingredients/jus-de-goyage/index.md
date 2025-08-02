@@ -1,4 +1,4 @@
 ---
 title: "jus de goyage"
-itype: "autres"
+type: "autres"
 ---

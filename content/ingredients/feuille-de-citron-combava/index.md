@@ -1,4 +1,4 @@
 ---
 title: "Feuille de citron combava"
-itype: "epices"
+type: "epices"
 ---

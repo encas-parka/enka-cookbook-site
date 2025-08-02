@@ -1,4 +1,4 @@
 ---
 title: "fenouil graine"
-itype: "epices"
+type: "epices"
 ---

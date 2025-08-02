@@ -1,6 +1,6 @@
 ---
 title: "Farine d'orge"
-alergenesIng:
+type: "lof"
+allergenes:
   - "Gluten"
-itype: "lof"
 ---

@@ -1,4 +1,4 @@
 ---
 title: "Farine de châtaigne"
-itype: "lof"
+type: "lof"
 ---

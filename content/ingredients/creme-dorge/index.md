@@ -1,4 +1,4 @@
 ---
 title: "Crème d'orge"
-itype: "lof"
+type: "lof"
 ---

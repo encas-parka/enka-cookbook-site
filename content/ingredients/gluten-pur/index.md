@@ -1,6 +1,6 @@
 ---
 title: "Gluten pur"
-alergenesIng:
+type: "lof"
+allergenes:
   - "Gluten"
-itype: "lof"
 ---

@@ -1,8 +1,8 @@
 ---
 title: "Jambon de Bayonne (charcuterie)"
-alergenesIng:
+pFrais: true
+type: "animaux"
+allergenes:
   - "Viande"
   - "Porc"
-pFrais: true
-itype: "animaux"
 ---

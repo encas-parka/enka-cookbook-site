@@ -1,4 +1,4 @@
 ---
 title: "Chocolat noir"
-itype: "sucres"
+type: "sucres"
 ---

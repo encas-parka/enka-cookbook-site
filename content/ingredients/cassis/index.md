@@ -1,5 +1,5 @@
 ---
 title: "Cassis"
 pFrais: true
-itype: "legumes"
+type: "legumes"
 ---

@@ -1,4 +1,4 @@
 ---
 title: "Crème liquide entière"
-itype: "lof"
+type: "lof"
 ---

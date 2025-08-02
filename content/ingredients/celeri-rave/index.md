@@ -1,7 +1,7 @@
 ---
 title: "Céleri rave"
 pFrais: true
-alergenesIng:
+type: "legumes"
+allergenes:
   - "Céleri"
-itype: "legumes"
 ---

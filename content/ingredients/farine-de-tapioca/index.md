@@ -1,4 +1,4 @@
 ---
 title: "Farine de tapioca"
-itype: "lof"
+type: "lof"
 ---

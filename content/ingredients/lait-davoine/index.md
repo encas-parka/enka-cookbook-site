@@ -1,4 +1,4 @@
 ---
 title: "lait d’avoine"
-itype: "lof"
+type: "lof"
 ---

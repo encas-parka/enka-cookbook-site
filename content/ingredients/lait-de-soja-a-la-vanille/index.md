@@ -1,6 +1,6 @@
 ---
 title: "Lait de soja à la vanille"
-alergenesIng:
+type: "lof"
+allergenes:
   - "Soja"
-itype: "lof"
 ---

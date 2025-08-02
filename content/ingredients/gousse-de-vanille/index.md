@@ -1,4 +1,4 @@
 ---
 title: "gousse de vanille"
-itype: "sucres"
+type: "sucres"
 ---

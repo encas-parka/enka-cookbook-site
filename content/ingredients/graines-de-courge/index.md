@@ -1,4 +1,4 @@
 ---
 title: "Graines de courge"
-itype: "sec"
+type: "sec"
 ---

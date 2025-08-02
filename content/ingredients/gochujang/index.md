@@ -1,7 +1,7 @@
 ---
 title: "Gochujang"
-alergenesIng:
+type: "epices"
+allergenes:
   - "Gluten"
   - "Soja"
-itype: "epices"
 ---

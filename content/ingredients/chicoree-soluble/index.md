@@ -1,4 +1,4 @@
 ---
 title: "chicorée soluble"
-itype: "autres"
+type: "autres"
 ---

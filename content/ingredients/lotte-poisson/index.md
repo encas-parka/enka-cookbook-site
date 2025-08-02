@@ -1,7 +1,7 @@
 ---
 title: "Lotte (poisson)"
-alergenesIng:
-  - "Poisson"
 pFrais: true
-itype: "animaux"
+type: "animaux"
+allergenes:
+  - "Poisson"
 ---

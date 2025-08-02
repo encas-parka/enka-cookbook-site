@@ -2,8 +2,8 @@
 title: "Mayonnaise"
 vegan: true
 vegetarien: true
-alergenesIng:
+type: "epices"
+allergenes:
   - "Oeuf"
   - "Moutarde"
-itype: "epices"
 ---

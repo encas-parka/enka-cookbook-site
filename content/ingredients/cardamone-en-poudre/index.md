@@ -1,4 +1,4 @@
 ---
 title: "Cardamone en poudre"
-itype: "epices"
+type: "epices"
 ---

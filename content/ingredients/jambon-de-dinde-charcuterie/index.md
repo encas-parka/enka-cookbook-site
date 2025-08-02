@@ -1,7 +1,7 @@
 ---
 title: "Jambon de dinde (charcuterie)"
-alergenesIng:
-  - "Viande"
 pFrais: true
-itype: "animaux"
+type: "animaux"
+allergenes:
+  - "Viande"
 ---

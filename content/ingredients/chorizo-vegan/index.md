@@ -1,7 +1,7 @@
 ---
 title: "Chorizo végan"
-alergenesIng:
+type: "autres"
+allergenes:
   - "Gluten"
   - "Soja"
-itype: "autres"
 ---

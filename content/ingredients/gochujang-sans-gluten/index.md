@@ -1,4 +1,4 @@
 ---
 title: "Gochujang sans gluten"
-itype: "epices"
+type: "epices"
 ---

@@ -1,4 +1,4 @@
 ---
 title: "Citronnelle (bâton)"
-itype: "epices"
+type: "epices"
 ---

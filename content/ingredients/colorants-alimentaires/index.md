@@ -1,4 +1,4 @@
 ---
 title: "Colorants alimentaires"
-itype: "autres"
+type: "autres"
 ---

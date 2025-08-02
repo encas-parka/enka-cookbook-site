@@ -1,4 +1,4 @@
 ---
 title: "Madère"
-itype: "autres"
+type: "autres"
 ---

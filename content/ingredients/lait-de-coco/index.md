@@ -1,4 +1,4 @@
 ---
 title: "lait de coco"
-itype: "lof"
+type: "lof"
 ---

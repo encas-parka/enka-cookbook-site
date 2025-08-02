@@ -1,4 +1,4 @@
 ---
 title: "curry feuilles"
-itype: "epices"
+type: "epices"
 ---

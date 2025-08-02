@@ -1,4 +1,4 @@
 ---
 title: "Melasse de grenade"
-itype: "epices"
+type: "epices"
 ---

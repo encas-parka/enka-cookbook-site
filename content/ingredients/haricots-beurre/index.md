@@ -1,5 +1,5 @@
 ---
 title: "Haricots beurre"
 pFrais: true
-itype: "legumes"
+type: "legumes"
 ---

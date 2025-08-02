@@ -1,4 +1,4 @@
 ---
 title: "Galanga séché"
-itype: "epices"
+type: "epices"
 ---

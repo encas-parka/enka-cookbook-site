@@ -1,4 +1,4 @@
 ---
 title: "Feuille de gélatine"
-itype: "autres"
+type: "autres"
 ---

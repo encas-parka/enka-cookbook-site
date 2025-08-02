@@ -1,7 +1,7 @@
 ---
 title: "Côte (agneau)"
-alergenesIng:
-  - "Viande"
 pFrais: true
-itype: "animaux"
+type: "animaux"
+allergenes:
+  - "Viande"
 ---

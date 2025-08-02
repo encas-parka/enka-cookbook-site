@@ -1,6 +1,6 @@
 ---
 title: "Crème soja"
-alergenesIng:
+type: "lof"
+allergenes:
   - "Soja"
-itype: "lof"
 ---

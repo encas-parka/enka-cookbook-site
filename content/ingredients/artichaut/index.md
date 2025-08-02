@@ -1,5 +1,5 @@
 ---
 title: "Artichaut"
 pFrais: true
-itype: "legumes"
+type: "legumes"
 ---

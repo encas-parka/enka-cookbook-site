@@ -1,4 +1,4 @@
 ---
 title: "Chocolat au lait"
-itype: "sucres"
+type: "sucres"
 ---

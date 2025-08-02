@@ -1,4 +1,4 @@
 ---
 title: "Eau gazeuse"
-itype: "autres"
+type: "autres"
 ---

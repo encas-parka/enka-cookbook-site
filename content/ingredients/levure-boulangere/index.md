@@ -1,4 +1,4 @@
 ---
 title: "Levure boulangère"
-itype: "lof"
+type: "lof"
 ---

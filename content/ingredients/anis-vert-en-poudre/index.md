@@ -1,4 +1,4 @@
 ---
 title: "Anis vert en poudre"
-itype: "epices"
+type: "epices"
 ---

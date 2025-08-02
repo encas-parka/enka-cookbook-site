@@ -1,4 +1,4 @@
 ---
 title: "Glucose"
-itype: "sucres"
+type: "sucres"
 ---

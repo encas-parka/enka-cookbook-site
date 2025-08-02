@@ -1,7 +1,7 @@
 ---
 title: "Cervelle (abats)"
-alergenesIng:
-  - "Viande"
 pFrais: true
-itype: "animaux"
+type: "animaux"
+allergenes:
+  - "Viande"
 ---

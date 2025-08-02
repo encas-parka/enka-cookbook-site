@@ -1,6 +1,6 @@
 ---
 title: "Crème fraiche liquide entière"
-alergenesIng:
+type: "lof"
+allergenes:
   - "Produit laitier"
-itype: "lof"
 ---

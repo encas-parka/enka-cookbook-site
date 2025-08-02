@@ -1,6 +1,6 @@
 ---
 title: "Farine de blé"
-alergenesIng:
+type: "lof"
+allergenes:
   - "Gluten"
-itype: "lof"
 ---

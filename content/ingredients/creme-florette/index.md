@@ -1,6 +1,6 @@
 ---
 title: "Crème florette"
-alergenesIng:
+type: "lof"
+allergenes:
   - "Produit laitier"
-itype: "lof"
 ---

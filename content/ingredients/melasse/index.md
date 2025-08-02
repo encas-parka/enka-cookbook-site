@@ -1,4 +1,4 @@
 ---
 title: "Mélasse"
-itype: "sucres"
+type: "sucres"
 ---

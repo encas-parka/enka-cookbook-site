@@ -1,4 +1,4 @@
 ---
 title: "lait d'épeautre"
-itype: "lof"
+type: "lof"
 ---

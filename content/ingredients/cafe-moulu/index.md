@@ -1,4 +1,4 @@
 ---
 title: "Café moulu"
-itype: "autres"
+type: "autres"
 ---

@@ -1,6 +1,6 @@
 ---
 title: "Farine de kamut"
-alergenesIng:
+type: "lof"
+allergenes:
   - "Gluten"
-itype: "lof"
 ---

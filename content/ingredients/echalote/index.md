@@ -1,5 +1,5 @@
 ---
 title: "échalote"
 pFrais: true
-itype: "legumes"
+type: "legumes"
 ---

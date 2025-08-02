@@ -1,9 +1,9 @@
 ---
 title: "Lait écrémé"
-alergenesIng:
-  - "Produit laitier"
 vegetarien: true
 sans_lactose: false
 vegan: false
-itype: "lof"
+type: "lof"
+allergenes:
+  - "Produit laitier"
 ---

@@ -1,6 +1,6 @@
 ---
 title: "Feuilles de brick"
-alergenesIng:
+type: "autres"
+allergenes:
   - "Gluten"
-itype: "autres"
 ---

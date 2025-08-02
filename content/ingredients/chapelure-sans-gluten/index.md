@@ -1,4 +1,4 @@
 ---
 title: "Chapelure sans gluten"
-itype: "sucres"
+type: "sucres"
 ---

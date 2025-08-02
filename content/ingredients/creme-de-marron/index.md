@@ -1,4 +1,4 @@
 ---
 title: "Crème de marron"
-itype: "sucres"
+type: "sucres"
 ---

@@ -1,4 +1,4 @@
 ---
 title: "Lentilles corail"
-itype: "sec"
+type: "sec"
 ---

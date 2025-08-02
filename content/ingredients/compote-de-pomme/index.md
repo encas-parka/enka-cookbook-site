@@ -1,4 +1,4 @@
 ---
 title: "compote de pomme"
-itype: "sucres"
+type: "sucres"
 ---

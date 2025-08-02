@@ -1,4 +1,4 @@
 ---
 title: "Farine d'amande"
-itype: "lof"
+type: "lof"
 ---

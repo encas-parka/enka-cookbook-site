@@ -3,7 +3,7 @@ alergene: true
 title: "Cacahuète"
 vegan: true
 vegetarien: true
-alergenesIng:
+type: "sec"
+allergenes:
   - "Arachide"
-itype: "sec"
 ---

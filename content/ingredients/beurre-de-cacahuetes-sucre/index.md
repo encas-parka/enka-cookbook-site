@@ -1,6 +1,6 @@
 ---
 title: "Beurre de cacahuètes (sucré)"
-alergenesIng:
+type: "autres"
+allergenes:
   - "Arachides"
-itype: "autres"
 ---

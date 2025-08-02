@@ -1,4 +1,4 @@
 ---
 title: "Ail"
-itype: "legumes"
+type: "legumes"
 ---

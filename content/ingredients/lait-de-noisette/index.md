@@ -1,4 +1,4 @@
 ---
 title: "lait de noisette"
-itype: "lof"
+type: "lof"
 ---

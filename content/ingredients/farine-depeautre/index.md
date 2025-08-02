@@ -1,6 +1,6 @@
 ---
 title: "Farine d'épeautre"
-alergenesIng:
+type: "lof"
+allergenes:
   - "Gluten"
-itype: "lof"
 ---

@@ -1,4 +1,4 @@
 ---
 title: "Harissa"
-itype: "epices"
+type: "epices"
 ---

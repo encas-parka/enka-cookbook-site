@@ -1,7 +1,7 @@
 ---
 title: "Filet d'autruche (volaille et gibier)"
-alergenesIng:
-  - "Viande"
 pFrais: true
-itype: "animaux"
+type: "animaux"
+allergenes:
+  - "Viande"
 ---

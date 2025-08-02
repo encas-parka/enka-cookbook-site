@@ -1,4 +1,4 @@
 ---
 title: "Huile végétale"
-itype: "lof"
+type: "lof"
 ---

@@ -1,4 +1,4 @@
 ---
 title: "Farine de millet"
-itype: "lof"
+type: "lof"
 ---

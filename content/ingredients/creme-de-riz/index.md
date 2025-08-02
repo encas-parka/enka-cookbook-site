@@ -1,4 +1,4 @@
 ---
 title: "Crème de riz"
-itype: "lof"
+type: "lof"
 ---

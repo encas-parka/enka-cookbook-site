@@ -1,4 +1,4 @@
 ---
 title: "Baies roses"
-itype: "epices"
+type: "epices"
 ---

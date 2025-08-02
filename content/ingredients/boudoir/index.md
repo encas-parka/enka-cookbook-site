@@ -1,4 +1,4 @@
 ---
 title: "boudoir"
-itype: "sucres"
+type: "sucres"
 ---

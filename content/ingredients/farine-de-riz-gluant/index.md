@@ -1,4 +1,4 @@
 ---
 title: "Farine de riz gluant"
-itype: "lof"
+type: "lof"
 ---

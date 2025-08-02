@@ -1,5 +1,5 @@
 ---
 title: "Citrouille"
 pFrais: true
-itype: "legumes"
+type: "legumes"
 ---

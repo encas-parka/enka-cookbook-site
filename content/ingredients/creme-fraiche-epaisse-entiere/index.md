@@ -1,7 +1,7 @@
 ---
 pFrais: true
 title: "Crème fraîche épaisse entière"
-alergenesIng:
+type: "frais"
+allergenes:
   - "Produit laitier"
-itype: "frais"
 ---

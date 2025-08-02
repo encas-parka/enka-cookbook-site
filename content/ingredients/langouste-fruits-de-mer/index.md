@@ -1,7 +1,7 @@
 ---
 title: "Langouste (fruits de mer)"
-alergenesIng:
-  - "Crustacé"
 pFrais: true
-itype: "animaux"
+type: "animaux"
+allergenes:
+  - "Crustacé"
 ---

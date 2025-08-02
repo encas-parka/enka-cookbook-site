@@ -1,4 +1,4 @@
 ---
 title: "Bicarbonate de soude"
-itype: "autres"
+type: "autres"
 ---

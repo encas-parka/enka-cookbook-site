@@ -1,6 +1,6 @@
 ---
 title: "Farine de soja"
-alergenesIng:
+type: "lof"
+allergenes:
   - "Soja"
-itype: "lof"
 ---

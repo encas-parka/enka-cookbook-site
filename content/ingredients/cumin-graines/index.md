@@ -1,4 +1,4 @@
 ---
 title: "Cumin (graines)"
-itype: "epices"
+type: "epices"
 ---

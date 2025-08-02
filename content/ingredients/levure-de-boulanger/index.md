@@ -1,4 +1,4 @@
 ---
 title: "Levure de boulanger"
-itype: "autres"
+type: "autres"
 ---

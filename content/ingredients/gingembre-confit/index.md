@@ -1,4 +1,4 @@
 ---
 title: "Gingembre confit"
-itype: "sucres"
+type: "sucres"
 ---

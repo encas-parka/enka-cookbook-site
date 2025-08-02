@@ -1,4 +1,4 @@
 ---
 title: "Câpres"
-itype: "epices"
+type: "epices"
 ---

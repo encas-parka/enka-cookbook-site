@@ -1,5 +1,5 @@
 ---
 title: "Galanga"
 pFrais: true
-itype: "epices"
+type: "epices"
 ---

@@ -1,4 +1,4 @@
 ---
 title: "Bouillon de légumes"
-itype: "epices"
+type: "epices"
 ---

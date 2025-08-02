@@ -1,4 +1,4 @@
 ---
 title: "lentilles blondes"
-itype: "sec"
+type: "sec"
 ---

@@ -1,6 +1,6 @@
 ---
 title: "Levure chimique"
-alergenesIng:
+type: "autres"
+allergenes:
   - "Gluten"
-itype: "autres"
 ---

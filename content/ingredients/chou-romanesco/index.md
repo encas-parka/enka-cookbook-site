@@ -1,5 +1,5 @@
 ---
 title: "Chou Romanesco"
 pFrais: true
-itype: "legumes"
+type: "legumes"
 ---

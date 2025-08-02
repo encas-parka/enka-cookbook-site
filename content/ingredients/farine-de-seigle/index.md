@@ -1,6 +1,6 @@
 ---
 title: "Farine de seigle"
-alergenesIng:
+type: "lof"
+allergenes:
   - "Gluten"
-itype: "lof"
 ---

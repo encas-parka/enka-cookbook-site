@@ -1,5 +1,7 @@
 ---
+uuid: xflyzdb8
 title: Abricots Pochés verveine
+titleslug: abricots-poches-verveine_xflyzdb8
 draft: false
 layout: recettes
 type: dessert
@@ -16,32 +18,28 @@ plate: 12
 check: Oui
 checkAlwaysOk: true
 ingredients:
-  legumes:
-    - title: Abricot
-      quantite: 1.4
-      unit: Kg
-  sucres:
-    - title: Sucre en poudre
-      quantite: 70
-      unit: grammes
-  epices:
-    - title: Verveine
-      quantite: 40
-      unit: grammes
-  autres:
-    - title: Eau
-      quantite: 1.2
-      unit: litre
+  - ingredient: abricot_1af6e084
+    quantite: 1.4
+    unit: Kg
+    commentaire: ''
+  - ingredient: sucre-en-poudre_7ad056a9
+    quantite: 70
+    unit: grammes
+    commentaire: ''
+  - ingredient: verveine_74be391a
+    quantite: 40
+    unit: grammes
+    commentaire: ''
+  - ingredient: eau_07c9add7
+    quantite: 1.2
+    unit: litre
+    commentaire: ''
 materiel:
   - Marmitte
-preparation: >-
-  * Laver, dénoyauter les abricots. Récupérer 3 amandins par tranche de 10
-  personnes.
-
+preparation: |-
+  * Laver, dénoyauter les abricots. Récupérer 3 amandins par tranche de 10 personnes.
   * Porter l’eau additionnée du sucre et des amandins à ébullition.
-
   * Retirer du feu, ajouter la verveine, couvrir, attendre dix minutes puis ajouter les oreillons d’abricots.
-
   * Couvrir et laisser refroidir. Réserver au frais jusqu’au service. Enlever les feuilles infusées avant de servir.
 publishDate: 2024-05-18T18:38:00.000Z
 ---

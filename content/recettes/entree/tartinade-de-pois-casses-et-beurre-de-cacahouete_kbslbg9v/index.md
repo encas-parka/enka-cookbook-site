@@ -1,5 +1,7 @@
 ---
+uuid: kbslbg9v
 title: Tartinade de pois cassés et beurre de cacahouète
+titleslug: tartinade-de-pois-casses-et-beurre-de-cacahouete_kbslbg9v
 draft: false
 layout: recettes
 type: entree
@@ -14,24 +16,23 @@ plate: 350
 check: Oui
 checkAlwaysOk: false
 ingredients:
-  sec:
-    - title: Pois cassés
-      quantite: 7
-      unit: Kg
-  legumes:
-    - title: Petits pois surgelés
-      quantite: 7
-      unit: Kg
-  autres:
-    - title: Beurre de cacahuètes (salé)
-      quantite: 1.75
-      unit: Kg
-  epices:
-    - title: Feuille de laurier
-      quantite: 35
-      unit: unité
-preparation: "* Le jour même, mélanger les deux sortes de pois, ajouter le
-  beurre de cacahuète et corriger sel et poivre."
+  - ingredient: pois-casses_5f950e06
+    quantite: 7
+    unit: Kg
+    commentaire: ''
+  - ingredient: petits-pois-surgeles_7c4ea801
+    quantite: 7
+    unit: Kg
+    commentaire: ''
+  - ingredient: beurre-de-cacahuetes-sale_19d76924
+    quantite: 1.75
+    unit: Kg
+    commentaire: ''
+  - ingredient: feuille-de-laurier_07af7d60
+    quantite: 35
+    unit: unité
+    commentaire: ''
+preparation: '* Le jour même, mélanger les deux sortes de pois, ajouter le beurre de cacahuète et corriger sel et poivre.'
 preparation24h: |-
   **2 jours avant :**
 

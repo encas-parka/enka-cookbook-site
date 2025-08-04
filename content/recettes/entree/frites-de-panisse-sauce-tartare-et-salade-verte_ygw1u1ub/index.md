@@ -14,51 +14,60 @@ plate: 100
 check: Oui
 checkAlwaysOk: false
 ingredients:
-  legumes:
-    - title: Salade verte (chêne)
-      quantite: 12
-      unit: unité
-    - title: Cornichon
-      quantite: 1.5
-      unit: Kg
-    - title: Ail
-      quantite: 2
-      unit: tête·s
-  lof:
-    - title: Lait de soja
-      quantite: 1
-      unit: litre
-    - title: Huile végétale
-      quantite: 1
-      unit: litre
-    - title: huile de friture
-      quantite: 6
-      unit: litre
-    - title: Farine de pois chiche
-      quantite: 7.5
-      unit: Kg
-  autres:
-    - title: Eau
-      quantite: 25
-      unit: litre
-  epices:
-    - title: câpre
-      quantite: 800
-      unit: grammes
-    - title: Estragon
-      quantite: 5
-      unit: bottes
-    - title: Persil frais
-      quantite: 7
-      unit: bottes
-    - title: Jus de citron
-      quantite: 250
-      unit: ml
-    - title: Moutarde
-      quantite: 250
-      unit: grammes
+  - ingredient: salade-verte-chene_0495f582
+    quantite: 12
+    unit: unité
+    commentaire: ''
+  - ingredient: cornichon_10ed7938
+    quantite: 1.5
+    unit: Kg
+    commentaire: ''
+  - ingredient: ail_ac8a27b6
+    quantite: 2
+    unit: tête·s
+    commentaire: ''
+  - ingredient: lait-de-soja_f077bf9e
+    quantite: 1
+    unit: litre
+    commentaire: ''
+  - ingredient: huile-vegetale_aeda0877
+    quantite: 1
+    unit: litre
+    commentaire: ''
+  - ingredient: huile-de-friture_6f71e8e0
+    quantite: 6
+    unit: litre
+    commentaire: ''
+  - ingredient: farine-de-pois-chiche_b814ca8b
+    quantite: 7.5
+    unit: Kg
+    commentaire: ''
+  - ingredient: eau_07c9add7
+    quantite: 25
+    unit: litre
+    commentaire: ''
+  - ingredient: câpre
+    quantite: 800
+    unit: grammes
+    commentaire: ''
+  - ingredient: estragon_02f4ceec
+    quantite: 5
+    unit: bottes
+    commentaire: ''
+  - ingredient: persil-frais_6997a677
+    quantite: 7
+    unit: bottes
+    commentaire: ''
+  - ingredient: jus-de-citron_13c3c6f6
+    quantite: 250
+    unit: ml
+    commentaire: ''
+  - ingredient: moutarde_a465da0a
+    quantite: 250
+    unit: grammes
+    commentaire: ''
 preparation: |-
-  
+
   1/ Préparation de panisse :
 
   Dans une casserole, mettre l'eau salée, et les têtes d’ail.
@@ -116,4 +125,6 @@ preparation: |-
 
   sel poivre
 publishDate: 2025-06-12T10:49:00.000Z
+uuid: ygw1u1ub
+titleslug: frites-de-panisse-sauce-tartare-et-salade-verte_ygw1u1ub
 ---

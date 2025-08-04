@@ -1,4 +1,0 @@
----
-title: "Cacao"
-type: "sucres"
----

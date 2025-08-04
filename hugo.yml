@@ -16,7 +16,6 @@ enableRobotsTXT: true
 languageCode: fr-FR
 defaultContentLanguage: fr
 defaultContentLang: fr
-paginate: 24
 rssLimit: 10
 
 outputs:
@@ -24,6 +23,13 @@ outputs:
     - HTML
     - REDIRECTS
     - HEADERS
+  page:
+    - HTML
+  evenements:
+    - HTML
+    - IngredientsJSON
+    - Poster
+    - Ingredients
 mediaTypes:
   application/json:
     suffixes:
@@ -32,6 +38,7 @@ mediaTypes:
     suffixes:
       - ""
     delimiter: ""
+
 outputFormats:
   Poster:
     mediaType: "text/html"
@@ -45,16 +52,24 @@ outputFormats:
     isHTML: true
     permalinkable: true
 
+  IngredientsJSON:
+    mediaType: "application/json"
+    baseName: "ingredients_json/index"
+    isPlainText: true
+    notAlternative: true
+
   JSON:
     mediaType: application/json
     baseName: index
     isPlainText: true
     notAlternative: true
+
   REDIRECTS:
     mediatype: text/netlify
     baseName: _redirects
     isPlainText: true
     notAlternative: true
+
   HEADERS:
     mediatype: text/netlify
     baseName: _headers

@@ -1,4 +1,0 @@
----
-title: "boudoir"
-type: "sucres"
----

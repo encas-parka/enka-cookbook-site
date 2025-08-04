@@ -1,4 +1,0 @@
----
-title: "tabasco"
-itype: "epices"
----

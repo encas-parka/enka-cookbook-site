@@ -1,5 +1,7 @@
 ---
+uuid: h00h93yw
 title: Salade Thaï à la mangue
+titleslug: salade-thai-a-la-mangue_h00h93yw
 draft: false
 layout: recettes
 type: entree
@@ -17,49 +19,56 @@ plate: 5
 check: Oui
 checkAlwaysOk: false
 ingredients:
-  sec:
-    - title: Nouilles de riz
-      quantite: 200
-      unit: grammes
-  lof:
-    - title: huile de sésame
-      quantite: 1
-      unit: c. à soupe
-  epices:
-    - title: Citronnelle (bâton)
-      quantite: 0.2
-      unit: unité
-    - title: Coriandre fraîche
-      quantite: 0.3
-      unit: bottes
-    - title: Tamari (sauce)
-      quantite: 1
-      unit: c. à soupe
-  autres:
-    - title: Beurre de cacahuètes (salé)
-      quantite: 4
-      unit: c. à soupe
-    - title: Eau
-      quantite: 50
-      unit: ml
-  legumes:
-    - title: Citron vert
-      quantite: 2
-      unit: unité
-    - title: Poivron (rouge)
-      quantite: 150
-      unit: grammes
-    - title: Carotte
-      quantite: 1
-      unit: unité
-    - title: Avocat
-      quantite: 1
-      unit: unité
-    - title: Mangue
-      quantite: 1
-      unit: unité
-preparation: >-
-  
+  - ingredient: nouilles-de-riz_c8c022fd
+    quantite: 200
+    unit: grammes
+    commentaire: ''
+  - ingredient: huile-de-sesame_037e0427
+    quantite: 1
+    unit: c. à soupe
+    commentaire: ''
+  - ingredient: citronnelle-baton_b5af872a
+    quantite: 0.2
+    unit: unité
+    commentaire: ''
+  - ingredient: coriandre-fraiche_41b7dd9c
+    quantite: 0.3
+    unit: bottes
+    commentaire: ''
+  - ingredient: tamari-sauce_dc405c2c
+    quantite: 1
+    unit: c. à soupe
+    commentaire: ''
+  - ingredient: beurre-de-cacahuetes-sale_19d76924
+    quantite: 4
+    unit: c. à soupe
+    commentaire: ''
+  - ingredient: eau_07c9add7
+    quantite: 50
+    unit: ml
+    commentaire: ''
+  - ingredient: citron-vert_16b30846
+    quantite: 2
+    unit: unité
+    commentaire: ''
+  - ingredient: poivron-rouge_91d0a814
+    quantite: 150
+    unit: grammes
+    commentaire: ''
+  - ingredient: carotte_57d4b1a7
+    quantite: 1
+    unit: unité
+    commentaire: ''
+  - ingredient: avocat_a8520940
+    quantite: 1
+    unit: unité
+    commentaire: ''
+  - ingredient: mangue_d89f6509
+    quantite: 1
+    unit: unité
+    commentaire: ''
+preparation: |-
+
 
 
 
@@ -67,18 +76,13 @@ preparation: >-
 
 
 
-
   En dés : avocats et mangues.
 
 
 
-
   * Écraser à la fourchette : beurre de cacahuètes, jus des citrons verts, tamari, eau. Puis ajouter citronelle et huile de sésame.
-
   * Cuire les nouilles (si besoin, les conserver dans l'eau froide jusqu'à moment de monter la salade).
-
   * Hacher la coriandre.
-
   * Mélanger légumes et nouilles, servir la sauce et la coriandre à côté.
 publishDate: 2024-05-20T15:21:00.000Z
 ---

@@ -1,6 +1,7 @@
 ---
 title: marché
 outputs:
+  - IngredientsJSON
   - HTML
   - Poster
   - Ingredients

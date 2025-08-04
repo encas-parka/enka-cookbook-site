@@ -1,6 +1,7 @@
 ---
 title: RésistanceS 2025
 outputs:
+  - IngredientsJSON
   - HTML
   - Poster
   - Ingredients
@@ -274,7 +275,7 @@ repas:
         altAssiettes: 20
       - recette: smashed-potatoes-et-creme-sour-ciboulette_2015fwc3
         type_plat: plat
-      - recette: -charlotte-dabricot-en-verrine_3bx3ybas
+      - recette: charlotte-dabricot-en-verrine_3bx3ybas
         type_plat: dessert
   - assiettes: 360
     date_service: 2025-07-12

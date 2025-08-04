@@ -18,29 +18,32 @@ plate: 50
 check: Non
 checkAlwaysOk: true
 ingredients:
-  frais:
-    - title: Yaourt de soja
-      quantite: 800
-      unit: ml
-  legumes: []
-  epices:
-    - title: Sumac
-    - title: Sel
-    - title: Jus de citron
-      quantite: 500
-      unit: ml
-  autres:
-    - title: Eau
-      quantite: 200
-      unit: ml
-    - title: Tahin
-      quantite: 300
-      unit: ml
-preparation: >-
-  Délayer le tahin dans le jus de citron puis ajouter le yaourt et l'eau.
-  Assaissonner.
-
+  - ingredient: yaourt-de-soja_fba4e592
+    quantite: 800
+    unit: ml
+    commentaire: ''
+  - ingredient: sumac_38a340e3
+    commentaire: ''
+  - ingredient: sel_6369338b
+    commentaire: ''
+  - ingredient: jus-de-citron_13c3c6f6
+    quantite: 500
+    unit: ml
+    commentaire: ''
+  - ingredient: eau_07c9add7
+    quantite: 200
+    unit: ml
+    commentaire: ''
+  - ingredient: tahin_9d513003
+    quantite: 300
+    unit: ml
+    commentaire: ''
+preparation: |-
+  Délayer le tahin dans le jus de citron puis ajouter le yaourt et l'eau. Assaissonner.
 
   (pas encore testé... à ajuster si ça parait déconnant)
-publishDate: 2025-07-30T16:55:00.000+02:00
+publishDate: 2025-07-30T14:55:00.000Z
+uuid: 1tbcqikrwq2krl27y8-wibrfnsxnn5mjtqym
+titleslug: sauce-blanche-tahin-citron-vegane_1tbcqikrwq2krl27y8-wibrfnsxnn5mjtqym
 ---
+

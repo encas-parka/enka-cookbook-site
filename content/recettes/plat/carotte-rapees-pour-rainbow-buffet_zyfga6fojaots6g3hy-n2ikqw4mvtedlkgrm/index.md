@@ -13,10 +13,13 @@ plate: 100
 check: Oui
 checkAlwaysOk: false
 ingredients:
-  legumes:
-    - title: Carotte
-      quantite: 10
-      unit: Kg
+  - ingredient: carotte_57d4b1a7
+    quantite: 10
+    unit: Kg
+    commentaire: ''
 preparation: Pour l'assiette composée arc en ciel
 publishDate: 2025-06-19T19:04:00.000Z
+uuid: zyfga6fojaots6g3hy-n2ikqw4mvtedlkgrm
+titleslug: carotte-rapees-pour-rainbow-buffet_zyfga6fojaots6g3hy-n2ikqw4mvtedlkgrm
 ---
+

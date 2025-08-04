@@ -1,4 +1,0 @@
----
-title: "Harissa"
-type: "epices"
----

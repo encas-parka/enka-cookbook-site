@@ -1,4 +1,4 @@
 {
   "format_on_save": "off",
-  	"file_scan_inclusions": [".env*", "llm", "node_modules/@sveltia"]
+  	"file_scan_inclusions": [".env*", "llm"]
 }

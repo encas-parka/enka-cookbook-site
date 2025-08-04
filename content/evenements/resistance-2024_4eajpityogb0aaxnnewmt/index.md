@@ -1,6 +1,7 @@
 ---
 title: Resistance 2024
 outputs:
+  - IngredientsJSON
   - HTML
   - Poster
   - Ingredients
@@ -51,7 +52,7 @@ repas:
       - recette: fondant-chataigne_tx71o7g8
         type_plat: dessert
         altAssiettes: 120
-      - recette: '-fondant-chataigne-vegan-et-sans-gluten_i1caicq2'
+      - recette: 'fondant-chataigne-vegan-et-sans-gluten_i1caicq2'
         type_plat: dessert
         altAssiettes: 24
   - assiettes: 210
@@ -409,4 +410,3 @@ repas:
         altAssiettes: 330
 uuid: 4eajPITYogB0AAXNnEWmT
 ---
-

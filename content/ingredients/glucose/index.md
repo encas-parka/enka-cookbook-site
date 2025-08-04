@@ -1,4 +1,0 @@
----
-title: "Glucose"
-type: "sucres"
----

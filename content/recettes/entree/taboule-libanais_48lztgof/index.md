@@ -1,4 +1,5 @@
 ---
+uuid: 48lztgof
 draft: false
 layout: recettes
 regime:
@@ -8,36 +9,36 @@ regime:
 region: Liban
 temperature: Froid
 ingredients:
-  sucres:
-    - title: Jus de citron
-      quantite: 2
-      unit: litre
-  lof:
-    - title: huile d'olive
-      quantite: 2
-      unit: litre
-  autres: []
-  legumes:
-    - title: Echalote
-      quantite: 600
-      unit: grammes
-    - title: Tomate
-      quantite: 10
-      unit: Kg
-      commentaire: grosses tomates de préférences
-  epices:
-    - title: Persil frais
-      quantite: 6
-      unit: Kg
-    - title: Menthe
-      quantite: 10
-      unit: bottes
-  animaux: []
-  sec:
-    - title: Semoule
-      quantite: 1.2
-      unit: Kg
+  - ingredient: jus-de-citron_13c3c6f6
+    quantite: 2
+    unit: litre
+    commentaire: ''
+  - ingredient: huile-dolive_f2e76310
+    quantite: 2
+    unit: litre
+    commentaire: ''
+  - ingredient: echalote_b84a60d7
+    quantite: 600
+    unit: grammes
+    commentaire: ''
+  - ingredient: tomate_304bc6b8
+    quantite: 10
+    unit: Kg
+    commentaire: grosses tomates de préférences
+  - ingredient: persil-frais_6997a677
+    quantite: 6
+    unit: Kg
+    commentaire: ''
+  - ingredient: menthe_1244273b
+    quantite: 10
+    unit: bottes
+    commentaire: ''
+  - ingredient: Semoule
+    quantite: 1.2
+    unit: Kg
+    commentaire: ''
 title: Taboulé libanais
+titleslug: taboule-libanais_48lztgof
 type: entree
 categories:
   - Salade

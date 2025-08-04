@@ -23,7 +23,7 @@ collections:
     label_singular: "Recette"
     folder: "content/recettes/"
     path: "{{type}}/{{slug}}/index"
-    slug: "{{title}}_{{uuid_short}}"
+    slug: "{{title}}_{{field.uuid}}"
     filter: { field: "layout", value: "recettes" }
     description: "Liste de l'ensemble des recettes. Vous pouvez utiliser les filtres ci-dessous pour classer / filtrer les recettes. Ou faire 'ctrl+f' pour rechercher une recette avec votre navigateur."
     view_filters:
@@ -293,9 +293,7 @@ collections:
         widget: "datetime"
         picker_utc: true
 
-      - name: uuid
-        label: Id
-        widget: uuid
+      - { name: "uuid", widget: "hidden", default: "{{uuid_short}}" }
 
   ###############################
   ################################
@@ -323,6 +321,15 @@ collections:
         }
 
       - { name: "sitemap_exclude", widget: "hidden", default: "true" }
+
+      - label: 'Outputs'
+        name: 'outputs'
+        widget: 'hidden'
+        default:
+          - HTML
+          - Poster
+          - Ingredients
+          - IngredientsJSON
 
       - label: "Repas"
         name: "repas"

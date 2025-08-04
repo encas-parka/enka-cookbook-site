@@ -1,5 +1,7 @@
 ---
+uuid: cp6n89pn
 title: Taboulais libanais des tarnais (sans gluten)
+titleslug: taboulais-libanais-des-tarnais-sans-gluten_cp6n89pn
 draft: false
 img: taboule-libanais.jpg
 layout: recettes
@@ -20,36 +22,40 @@ plate: 15
 check: Oui
 checkAlwaysOk: false
 ingredients:
-  legumes:
-    - title: Oignon
-      quantite: 250
-      unit: grammes
-    - title: Tomate
-      quantite: 1.2
-      unit: Kg
-  lof:
-    - title: huile d'olive
-      quantite: 250
-      unit: ml
-  sec:
-    - title: Quinoa blanc
-      quantite: 150
-      unit: grammes
-  epices:
-    - title: Poivre
-    - title: Sel
-      quantite: ""
-      unit: null
-    - title: Menthe
-      quantite: 4
-      unit: bottes
-    - title: Persil frais
-      quantite: 9
-      unit: bottes
-  sucres:
-    - title: Jus de citron
-      quantite: 150
-      unit: ml
+  - ingredient: oignon_e8b218bd
+    quantite: 250
+    unit: grammes
+    commentaire: ''
+  - ingredient: tomate_304bc6b8
+    quantite: 1.2
+    unit: Kg
+    commentaire: ''
+  - ingredient: huile-dolive_f2e76310
+    quantite: 250
+    unit: ml
+    commentaire: ''
+  - ingredient: quinoa-blanc_644aeb62
+    quantite: 150
+    unit: grammes
+    commentaire: ''
+  - ingredient: poivre_62b71c44
+    commentaire: ''
+  - ingredient: sel_6369338b
+    quantite: ''
+    unit: null
+    commentaire: ''
+  - ingredient: menthe_1244273b
+    quantite: 4
+    unit: bottes
+    commentaire: ''
+  - ingredient: persil-frais_6997a677
+    quantite: 9
+    unit: bottes
+    commentaire: ''
+  - ingredient: jus-de-citron_13c3c6f6
+    quantite: 150
+    unit: ml
+    commentaire: ''
 preparation: |-
   * Précuire le quinoa ou le millet dans l'eau bouillante.
   * Lavez le persil et hachez le finement.

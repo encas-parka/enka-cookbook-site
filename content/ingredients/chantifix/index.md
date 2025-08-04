@@ -1,4 +1,0 @@
----
-title: "Chantifix"
-type: "autres"
----

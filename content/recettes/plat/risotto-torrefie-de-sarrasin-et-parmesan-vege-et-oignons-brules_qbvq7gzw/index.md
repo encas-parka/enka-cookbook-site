@@ -14,49 +14,54 @@ plate: 100
 check: Oui
 checkAlwaysOk: false
 ingredients:
-  sec:
-    - title: Sarrasin
-      quantite: 5
-      unit: Kg
-  lof: []
-  frais:
-    - title: Margarine
-      quantite: 500
-      unit: grammes
-  legumes:
-    - title: échalote
-      quantite: 20
-      unit: unité
-    - title: Oignon
-      quantite: 20
-      unit: Kg
-    - title: Champignon de Paris
-      quantite: 10
-      unit: Kg
-  epices:
-    - title: bouillon cube
-      quantite: 15
-      unit: unité
-    - title: Persil frais
-      quantite: 3
-      unit: bottes
-  autres:
-    - title: Levure de bière
-      quantite: 200
-      unit: grammes
-    - title: Vin blanc
-      quantite: 1
-      unit: litre
-    - title: Eau
-      quantite: 15
-      unit: litre
-  sucres:
-    - title: Poudre d'amandes
-      quantite: 400
-      unit: grammes
-    - title: sucre de canne (blond)
-      quantite: 100
-      unit: grammes
+  - ingredient: sarrasin_a44df735
+    quantite: 5
+    unit: Kg
+    commentaire: ''
+  - ingredient: margarine_703ec02e
+    quantite: 500
+    unit: grammes
+    commentaire: ''
+  - ingredient: echalote_b84a60d7
+    quantite: 20
+    unit: unité
+    commentaire: ''
+  - ingredient: oignon_e8b218bd
+    quantite: 20
+    unit: Kg
+    commentaire: ''
+  - ingredient: champignon-de-paris_88536266
+    quantite: 10
+    unit: Kg
+    commentaire: ''
+  - ingredient: bouillon-cube_36bd5164
+    quantite: 15
+    unit: unité
+    commentaire: ''
+  - ingredient: persil-frais_6997a677
+    quantite: 3
+    unit: bottes
+    commentaire: ''
+  - ingredient: levure-de-biere_efa52455
+    quantite: 200
+    unit: grammes
+    commentaire: ''
+  - ingredient: vin-blanc_b0705250
+    quantite: 1
+    unit: litre
+    commentaire: ''
+  - ingredient: eau_07c9add7
+    quantite: 15
+    unit: litre
+    commentaire: ''
+  - ingredient: poudre-damandes_726f5873
+    quantite: 400
+    unit: grammes
+    commentaire: ''
+  - ingredient: sucre-de-canne-blond_751efe1c
+    quantite: 100
+    unit: grammes
+    commentaire: ''
 preparation: |-
   Faire bouillir 15 litre d'eau
 
@@ -117,4 +122,6 @@ preparation: |-
   Placer les oignons sur une plaque, la face non découpée posée sur
   la plaque. Saupoudrer légèrement la face découpée de sucre.
 publishDate: 2025-06-13T14:31:00.000Z
+uuid: qbvq7gzw
+titleslug: risotto-torrefie-de-sarrasin-et-parmesan-vege-et-oignons-brules_qbvq7gzw
 ---

@@ -1,4 +1,0 @@
----
-title: "Sumac"
-itype: "epices"
----

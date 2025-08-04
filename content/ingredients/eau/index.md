@@ -1,4 +1,0 @@
----
-title: "Eau"
-type: "autres"
----

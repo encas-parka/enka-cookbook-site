@@ -1,8 +1,7 @@
 ---
-title: Kolokythokeftedes - galettes courgette feta grecques sans gluten - avec
-  sauce blanche
+title: Kolokythokeftedes - galettes courgette feta grecques sans gluten - avec sauce blanche
 draft: false
-description: ""
+description: ''
 layout: recettes
 type: entree
 categories:
@@ -21,67 +20,74 @@ quantite_desc: Pour 3 galettes par personnes
 check: Oui
 checkAlwaysOk: true
 ingredients:
-  sec: []
-  lof:
-    - title: Farine de maïs
-      quantite: 160
-      unit: grammes
-    - title: huile de tournesol
-      quantite: 8
-      unit: c. à soupe
-    - title: Oeuf
-      quantite: 6
-      unit: unité
-    - title: Farine de riz
-      quantite: 160
-      unit: grammes
-  frais:
-    - title: Yaourt grec de vache
-      quantite: 500
-      unit: grammes
-    - title: Feta
-      quantite: 600
-      unit: grammes
-  epices:
-    - title: Poivre
-    - title: Sel
-    - title: Paprika
-    - title: Aneth aromatique
-    - title: Menthe fraîche
-      quantite: 2
-      unit: bottes
-    - title: Basilic
-      quantite: 1
-      unit: bottes
-    - title: Cumin moulu
-  sucres:
-    - title: Miel
-      quantite: 2
-      unit: c. à soupe
-  legumes:
-    - title: Citron vert
-      quantite: 2
-      unit: unité
-    - title: Courgette
-      quantite: 2.25
-      unit: Kg
+  - ingredient: farine-de-mais_d27ea568
+    quantite: 160
+    unit: grammes
+    commentaire: ''
+  - ingredient: huile-de-tournesol_4fd6f191
+    quantite: 8
+    unit: c. à soupe
+    commentaire: ''
+  - ingredient: oeuf_292e5c0b
+    quantite: 6
+    unit: unité
+    commentaire: ''
+  - ingredient: farine-de-riz_098d359f
+    quantite: 160
+    unit: grammes
+    commentaire: ''
+  - ingredient: yaourt-grec-de-vache_833f77c3
+    quantite: 500
+    unit: grammes
+    commentaire: ''
+  - ingredient: feta_9ed8205a
+    quantite: 600
+    unit: grammes
+    commentaire: ''
+  - ingredient: poivre_62b71c44
+    commentaire: ''
+  - ingredient: sel_6369338b
+    commentaire: ''
+  - ingredient: paprika_3f355588
+    commentaire: ''
+  - ingredient: aneth-aromatique_5a3354bb
+    commentaire: ''
+  - ingredient: menthe-fraiche_9b57de6f
+    quantite: 2
+    unit: bottes
+    commentaire: ''
+  - ingredient: basilic_5bd35f90
+    quantite: 1
+    unit: bottes
+    commentaire: ''
+  - ingredient: cumin-moulu_d8e8177e
+    commentaire: ''
+  - ingredient: miel_4c7a2f1e
+    quantite: 2
+    unit: c. à soupe
+    commentaire: ''
+  - ingredient: citron-vert_16b30846
+    quantite: 2
+    unit: unité
+    commentaire: ''
+  - ingredient: courgette_58e8d67f
+    quantite: 2.25
+    unit: Kg
+    commentaire: ''
 materiel:
   - Four
   - Robot-coupe
-preparation: >-
-  * Râper les courgettes. Les saler et laisser égoutter 15 min. Bien essorer les
-  courgettes râpées avec l'aide d'un torchon.
-
+preparation: |-
+  * Râper les courgettes. Les saler et laisser égoutter 15 min. Bien essorer les courgettes râpées avec l'aide d'un torchon.
   * Mélanger avec tous les autres ingrédients (aromates hâchées, épices, feta, oeufs battus, farine, zeste du citron) sauf le miel, le jus du citron le yaourt qui sont pour la sauce et l'huile qui est pour la cuisson. Normalement pas besoin de re saler, la feta sale  beaucoup et les courgettes sont salées par la première étape.
-
   * Façonner des galettes, les huiler des 2 côtés et mettre au four à 180°C 20-30 minutes en retournant à mi-cuisson. Pour aller plus vite il est possible de plutôt faire des plaques entières qu'on découpe en parts carrées après ou avant la cuisson avec un couteau.
-
   * Pour la sauce mélanger yaourt, miel, jus de citron et cumin, assaissonner
-
 
   Option vegan : remplacer les oeufs par des oeufs de lin (1 cuillère à soupe de lin moulu pour 2,5 CS d'eau tiède, attendre 10min) ou essayer avec de la farine de pois chiche; la feta par du yaourt de soja (en mettre moins); saler plus. Le yaourt grec par du yaourt de soja, le miel par du sirop d'agave.
 
-
   Option sans gluten : farine sans gluten (par exemple mélange farine riz maïs)
-publishDate: 2025-07-21T13:43:00.000+02:00
+publishDate: 2025-07-21T11:43:00.000Z
+uuid: iuu0z_af3uzfnhdk9ypgrmlu_-qn64cuz7jv
+titleslug: kolokythokeftedes-galettes-courgette-feta-grecques_iuu0z_af3uzfnhdk9ypgrmlu_-qn64cuz7jv
 ---
+

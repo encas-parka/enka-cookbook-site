@@ -1,4 +1,0 @@
----
-title: "Ail"
-type: "legumes"
----

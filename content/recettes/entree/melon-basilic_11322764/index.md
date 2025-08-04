@@ -19,15 +19,17 @@ quantite_desc: pour 2 petites tranches par personne
 check: Oui
 checkAlwaysOk: true
 ingredients:
-  legumes:
-    - title: Melon
-      quantite: 4
-      unit: unité
-  epices:
-    - title: Basilic
-      quantite: 1
-      unit: bottes
-      commentaire: ""
-preparation: :)
-publishDate: 2025-07-31T10:31:00.000+02:00
+  - ingredient: melon_c9b6e164
+    quantite: 4
+    unit: unité
+    commentaire: ''
+  - ingredient: basilic_5bd35f90
+    quantite: 1
+    unit: bottes
+    commentaire: ''
+preparation: ':)'
+publishDate: 2025-07-31T08:31:00.000Z
+uuid: '11322764'
+titleslug: melon-basilic_11322764
 ---
+

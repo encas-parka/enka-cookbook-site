@@ -19,35 +19,34 @@ temperature: Froid
 plate: 100
 check: Oui
 ingredients:
-  sucres:
-    - title: Jus de citron
-      quantite: 2
-      unit: litre
-  lof:
-    - title: huile d'olive
-      quantite: 2
-      unit: litre
-  autres: []
-  legumes:
-    - title: Echalote
-      quantite: 600
-      unit: grammes
-    - title: Tomate
-      quantite: 10
-      unit: Kg
-      commentaire: grosses tomates de préférences
-  epices:
-    - title: Persil frais
-      quantite: 6
-      unit: Kg
-    - title: Menthe
-      quantite: 10
-      unit: bottes
-  animaux: []
-  sec:
-    - title: Quinoa blanc
-      quantite: 1
-      unit: Kg
+  - ingredient: jus-de-citron_13c3c6f6
+    quantite: 2
+    unit: litre
+    commentaire: ''
+  - ingredient: huile-dolive_f2e76310
+    quantite: 2
+    unit: litre
+    commentaire: ''
+  - ingredient: echalote_b84a60d7
+    quantite: 600
+    unit: grammes
+    commentaire: ''
+  - ingredient: tomate_304bc6b8
+    quantite: 10
+    unit: Kg
+    commentaire: grosses tomates de préférences
+  - ingredient: persil-frais_6997a677
+    quantite: 6
+    unit: Kg
+    commentaire: ''
+  - ingredient: menthe_1244273b
+    quantite: 10
+    unit: bottes
+    commentaire: ''
+  - ingredient: quinoa-blanc_644aeb62
+    quantite: 1
+    unit: Kg
+    commentaire: ''
 preparation: |-
   * Précuire le quinoa ou le millet dans l’eau bouillante.
   * Laver le persil et couper le en FINE JULIENNE (1mm d'epaisseur)
@@ -64,4 +63,6 @@ prepAlt:
   - recetteAlt: taboulais-libanais-des-tarnais-sans-gluten_cp6n89pn
   - recetteAlt: taboule-libanais_48lztgof
 publishDate: 2023-04-13T14:12:56.856Z
+uuid: f9gzv3rn
+titleslug: taboule-libanais-quinoa-sans-glut_f9gzv3rn
 ---

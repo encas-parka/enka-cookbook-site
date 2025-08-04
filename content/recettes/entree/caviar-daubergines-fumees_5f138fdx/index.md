@@ -1,5 +1,7 @@
 ---
+uuid: 5f138fdx
 title: Caviar d'aubergines fumées
+titleslug: caviar-daubergines-fumees_5f138fdx
 draft: false
 layout: recettes
 type: entree
@@ -16,25 +18,26 @@ cuisson: Oui
 temperature: Froid
 plate: 100
 ingredients:
-  legumes:
-    - title: Aubergine
-      quantite: 10
-      unit: Kg
-  lof:
-    - title: huile d'olive
-      quantite: 1
-      unit: litre
-  sucres:
-    - title: Jus de citron
-      quantite: 0.4
-      unit: litre
-  autres:
-    - title: Tahin
-      quantite: 400
-      unit: grammes
-  epices:
-    - title: Poivre
-    - title: Sel
+  - ingredient: aubergine_618b199f
+    quantite: 10
+    unit: Kg
+    commentaire: ''
+  - ingredient: huile-dolive_f2e76310
+    quantite: 1
+    unit: litre
+    commentaire: ''
+  - ingredient: jus-de-citron_13c3c6f6
+    quantite: 0.4
+    unit: litre
+    commentaire: ''
+  - ingredient: tahin_9d513003
+    quantite: 400
+    unit: grammes
+    commentaire: ''
+  - ingredient: poivre_62b71c44
+    commentaire: ''
+  - ingredient: sel_6369338b
+    commentaire: ''
 materiel:
   - Bruleur
   - Plat Paela

@@ -1,79 +1,90 @@
 ---
 auteur: Ça vaulx le détour
 categories:
-- Bouchées salées
+  - Bouchées salées
 check: Oui
 checkAlwaysOk: false
 cuisson: Oui
 draft: false
 ingredients:
-  autres:
-  - quantite: 4
-    title: Pate feuilleté sans gluten et vegan
+  - ingredient: pate-feuillete-sans-gluten-et-vegan_528c6626
+    quantite: 4
     unit: unité
-  epices:
-  - quantite: 2
-    title: Paprika
+    commentaire: ''
+  - ingredient: paprika_3f355588
+    quantite: 2
     unit: c. à café
-  - quantite: 1
-    title: Coriandre fraîche
+    commentaire: ''
+  - ingredient: coriandre-fraiche_41b7dd9c
+    quantite: 1
     unit: bottes
-  - quantite: 1.5
-    title: Aneth aromatique
+    commentaire: ''
+  - ingredient: aneth-aromatique_5a3354bb
+    quantite: 1.5
     unit: bottes
-  - quantite: 80
-    title: Concentré de tomate
+    commentaire: ''
+  - ingredient: concentre-de-tomate_19e2acfd
+    quantite: 80
     unit: grammes
-  - quantite: 1.5
-    title: Coulis de tomates
+    commentaire: ''
+  - ingredient: coulis-de-tomates_248c5d01
+    quantite: 1.5
     unit: Kg
-  - quantite: 4
-    title: Cumin moulu
+    commentaire: ''
+  - ingredient: cumin-moulu_d8e8177e
+    quantite: 4
     unit: c. à café
-  - quantite: 3
-    title: Cannelle
+    commentaire: ''
+  - ingredient: cannelle_e0a73872
+    quantite: 3
     unit: c. à café
-  frais:
-  - quantite: 800
-    title: Yaourt de soja
+    commentaire: ''
+  - ingredient: yaourt-de-soja_fba4e592
+    quantite: 800
     unit: grammes
-  legumes:
-  - quantite: 5
-    title: Cébette - Ciboule - Cive - Oignon vert
+    commentaire: ''
+  - ingredient: cebette-ciboule-cive-oignon-vert_d79eb5f7
+    quantite: 5
     unit: unité
-  - quantite: 450
-    title: Epinard
+    commentaire: ''
+  - ingredient: epinard_ee09878e
+    quantite: 450
     unit: grammes
-  - quantite: 1
-    title: Ail
+    commentaire: ''
+  - ingredient: ail_ac8a27b6
+    quantite: 1
     unit: tête·s
-  - quantite: 6
-    title: Oignon
+    commentaire: ''
+  - ingredient: oignon_e8b218bd
+    quantite: 6
     unit: unité
-  lof:
-  - quantite: 180
-    title: huile d'olive
+    commentaire: ''
+  - ingredient: huile-dolive_f2e76310
+    quantite: 180
     unit: ml
-  sec:
-  - quantite: 1.2
-    title: Pois chiche cuit
+    commentaire: ''
+  - ingredient: pois-chiche-cuit_bc2f3b22
+    quantite: 1.2
     unit: Kg
-  sucres:
-  - quantite: 3
-    title: Sucre en poudre
+    commentaire: ''
+  - ingredient: sucre-en-poudre_7ad056a9
+    quantite: 3
     unit: c. à soupe
+    commentaire: ''
 layout: recettes
 materiel:
-- Four
+  - Four
 plate: 16
 preparation: Comme la recette de baklawa pois chiche ?
-publishDate: 2024-06-20 10:04:00+00:00
+publishDate: 2024-06-20T10:04:00.000Z
 regime:
-- vegetarien
-- vegan
-- sans-gluten
-- sans-lactose
+  - vegetarien
+  - vegan
+  - sans-gluten
+  - sans-lactose
 temperature: Chaud
 title: Faux baklawa pois chiche végan
+titleslug: faux-baklawa-pois-chiche-vegan_n7jfgvkd
 type: entree
+uuid: n7jfgvkd
 ---

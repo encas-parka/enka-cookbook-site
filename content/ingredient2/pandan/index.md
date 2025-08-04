@@ -1,4 +1,0 @@
----
-title: "Pandan"
-itype: "epices"
----

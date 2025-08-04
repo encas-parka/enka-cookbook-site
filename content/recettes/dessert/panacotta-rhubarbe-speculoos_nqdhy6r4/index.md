@@ -13,30 +13,32 @@ plate: 100
 check: Oui
 checkAlwaysOk: false
 ingredients:
-  legumes:
-    - title: Rhubarbe
-      quantite: 7
-      unit: Kg
-  lof:
-    - title: lait d’amande
-      quantite: 4
-      unit: litre
-  sucres:
-    - title: Speculoos
-      quantite: 1
-      unit: Kg
-    - title: vanille extrait concentré
-      quantite: 40
-      unit: ml
-    - title: sucre de canne (blond)
-      quantite: 900
-      unit: grammes
-  autres:
-    - title: Agar-agar
-      quantite: 16
-      unit: grammes
+  - ingredient: rhubarbe_0fad8689
+    quantite: 7
+    unit: Kg
+    commentaire: ''
+  - ingredient: lait-damande_7cc11715
+    quantite: 4
+    unit: litre
+    commentaire: ''
+  - ingredient: speculoos_9078e74b
+    quantite: 1
+    unit: Kg
+    commentaire: ''
+  - ingredient: vanille-extrait-concentre_d8ed34b2
+    quantite: 40
+    unit: ml
+    commentaire: ''
+  - ingredient: sucre-de-canne-blond_751efe1c
+    quantite: 900
+    unit: grammes
+    commentaire: ''
+  - ingredient: agar-agar_c8394674
+    quantite: 16
+    unit: grammes
+    commentaire: ''
 preparation: |-
-  
+
   Épluchez et coupez la rhubarbe en petits tronçons et mettez-la dans
   une casserole avec 500g de sucre. Ajuster en gouttant.
 
@@ -66,4 +68,6 @@ preparation: |-
 
   Une fois les panne cotte prêtes, répartir la compotée de rhubarbe.
 publishDate: 2025-06-13T14:40:00.000Z
+uuid: nqdhy6r4
+titleslug: panacotta-rhubarbe-speculoos_nqdhy6r4
 ---

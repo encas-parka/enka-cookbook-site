@@ -1,4 +1,0 @@
----
-title: "Miel"
-itype: "sucres"
----

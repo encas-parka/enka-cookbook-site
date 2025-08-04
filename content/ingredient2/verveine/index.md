@@ -1,4 +1,0 @@
----
-title: "Verveine"
-itype: "epices"
----

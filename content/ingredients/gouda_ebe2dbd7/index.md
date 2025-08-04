@@ -1,0 +1,12 @@
+---
+title: Gouda
+vegetarien: true
+sans_lactose: false
+vegan: false
+pFrais: true
+type: frais
+allergenes:
+  - Produit laitier
+uuid: ebe2dbd7
+---
+

@@ -15,24 +15,24 @@ plate: 100
 check: Oui
 checkAlwaysOk: false
 ingredients:
-  legumes:
-    - title: Courgette
-      quantite: 11
-      unit: Kg
-  lof:
-    - title: Oeuf
-      quantite: 40
-      unit: unité
-  frais:
-    - title: Crème florette
-      quantite: 2.5
-      unit: litre
-  epices:
-    - title: Basilic
-      quantite: 5
-      unit: bottes
+  - ingredient: courgette_58e8d67f
+    quantite: 11
+    unit: Kg
+    commentaire: ''
+  - ingredient: oeuf_292e5c0b
+    quantite: 40
+    unit: unité
+    commentaire: ''
+  - ingredient: creme-florette_aaf590da
+    quantite: 2.5
+    unit: litre
+    commentaire: ''
+  - ingredient: basilic_5bd35f90
+    quantite: 5
+    unit: bottes
+    commentaire: ''
 preparation: |-
-  
+
   Lavez les courgettes, les couper en lamelles. Plongez-les dans un
   grand volume d'eau salée pendant 10min.
 
@@ -49,4 +49,6 @@ preparation: |-
 
   Verser dans des moules individuels 30 min.
 publishDate: 2025-06-12T10:02:00.000Z
+uuid: 89k61vfg
+titleslug: flan-de-courgettes-au-basilic_89k61vfg
 ---

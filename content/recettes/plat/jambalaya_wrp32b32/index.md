@@ -1,7 +1,6 @@
 ---
 title: JAMBALAYA
 draft: false
-description: ''
 layout: recettes
 type: plat
 categories:
@@ -12,10 +11,77 @@ region: Nouvelle Orléans
 cuisson: Oui
 temperature: Chaud
 plate: 100
-quantite_desc: ''
 check: Non
 checkAlwaysOk: false
-checkfor: null
+ingredients:
+  - ingredient: ail_ac8a27b6
+    quantite: 6
+    unit: tête·s
+    commentaire: ''
+  - ingredient: poivron-vert_561d4a97
+    quantite: 8
+    unit: Kg
+    commentaire: ''
+  - ingredient: poivron-rouge_91d0a814
+    quantite: 8
+    unit: Kg
+    commentaire: ''
+  - ingredient: celeri-branche_33bb0c56
+    quantite: 1
+    unit: Kg
+    commentaire: ''
+  - ingredient: cebette-ciboule-cive-oignon-vert_d79eb5f7
+    quantite: 2
+    unit: Kg
+    commentaire: ''
+  - ingredient: oignon_e8b218bd
+    quantite: 10
+    unit: Kg
+    commentaire: ''
+  - ingredient: riz_03826597
+    quantite: 10
+    unit: Kg
+    commentaire: ''
+  - ingredient: poulet-volaille-et-gibier_65082341
+    quantite: 10
+    unit: unité
+    commentaire: ''
+  - ingredient: chorizo-vegan_1f26eb09
+    quantite: 3
+    unit: Kg
+    commentaire: ''
+  - ingredient: cumin-moulu_d8e8177e
+    quantite: 20
+    unit: grammes
+    commentaire: ''
+  - ingredient: poivre_62b71c44
+    quantite: 40
+    unit: grammes
+    commentaire: ''
+  - ingredient: oignon-en-poudre_14b70e3c
+    quantite: 40
+    unit: grammes
+    commentaire: ''
+  - ingredient: ail-en-poudre_bdf8a42e
+    quantite: 80
+    unit: grammes
+    commentaire: ''
+  - ingredient: thym_bb1e854d
+    quantite: 80
+    unit: grammes
+    commentaire: ''
+  - ingredient: origan_6dd42bdf
+    quantite: 80
+    unit: grammes
+    commentaire: ''
+  - ingredient: paprika_3f355588
+    quantite: 125
+    unit: grammes
+    commentaire: ''
+  - ingredient: persil-frais_6997a677
+    quantite: 4
+    unit: bottes
+    commentaire: ''
 preparation: |-
   **Préparation du poulet :**
 
@@ -43,66 +109,7 @@ preparation: |-
   Cette sauce doit être épaisse, pas liquide. Y verser les tranches de chorizo grillées et le poulets dépiauter.
 
   Normalement on doit faire cuire le riz dans ces légumes. Mais pour plus de facilité, cuire le riz à part avec le bouillon de poulet.
-preparation24h: ''
-prepAlt:
-  - recetteAlt: jambalaya-vegan_bsjylxuj
 publishDate: 2025-06-01T19:06:00.000Z
-ingredients:
-  epices:
-    - unit: grammes
-      quantite: 20
-      title: Cumin moulu
-    - unit: grammes
-      quantite: 40
-      title: Poivre
-    - unit: grammes
-      quantite: 40
-      title: Oignon en poudre
-    - unit: grammes
-      quantite: 80
-      title: Ail en poudre
-    - unit: grammes
-      quantite: 80
-      title: Thym
-    - unit: grammes
-      quantite: 80
-      title: Origan
-    - unit: grammes
-      quantite: 125
-      title: Paprika
-    - unit: bottes
-      quantite: 4
-      title: Persil frais
-  autres:
-    - unit: Kg
-      quantite: 3
-      title: Chorizo végan
-  animaux:
-    - unit: unité
-      quantite: 10
-      title: Poulet (volaille et gibier)
-  sec:
-    - unit: Kg
-      quantite: 10
-      title: Riz
-  legumes:
-    - unit: tête·s
-      quantite: 6
-      title: Ail
-    - unit: Kg
-      quantite: 8
-      title: Poivron (vert)
-    - unit: Kg
-      quantite: 8
-      title: Poivron (rouge)
-    - unit: Kg
-      quantite: 1
-      title: Céleri branche
-    - unit: Kg
-      quantite: 2
-      title: Cébette - Ciboule - Cive - Oignon vert
-    - unit: Kg
-      quantite: 10
-      title: Oignon
+uuid: wrp32b32
+titleslug: jambalaya_wrp32b32
 ---
-

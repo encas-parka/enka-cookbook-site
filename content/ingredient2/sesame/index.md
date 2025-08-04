@@ -1,4 +1,0 @@
----
-title: "Sésame"
-itype: "epices"
----

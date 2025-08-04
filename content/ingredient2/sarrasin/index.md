@@ -1,4 +1,0 @@
----
-title: "Sarrasin"
-itype: "sec"
----

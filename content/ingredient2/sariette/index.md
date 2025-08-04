@@ -1,4 +1,0 @@
----
-title: "Sariette"
-itype: "epices"
----

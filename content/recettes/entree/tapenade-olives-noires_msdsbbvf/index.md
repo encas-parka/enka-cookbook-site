@@ -16,21 +16,23 @@ plate: 10
 check: Oui
 checkAlwaysOk: false
 ingredients:
-  legumes:
-    - quantite: 1
-      title: Ail
-      unit: gousse·s
-    - quantite: 100
-      title: Olives noires à la grecque
-      unit: grammes
-  lof:
-    - quantite: 2
-      title: huile d'olive
-      unit: c. à soupe
+  - ingredient: ail_ac8a27b6
+    quantite: 1
+    unit: gousse·s
+    commentaire: ''
+  - ingredient: olives-noires-a-la-grecque_25bbe4de
+    quantite: 100
+    unit: grammes
+    commentaire: ''
+  - ingredient: huile-dolive_f2e76310
+    quantite: 2
+    unit: c. à soupe
+    commentaire: ''
 materiel:
   - Robot Mixeur
-preparation: Laisser tremper les olives noires pendant une demi heure puis
-  rincez les bien. Mixer les avec l'ail et l'huile d'olive.
-preparation24h: ""
-publishDate: 2024-03-18 13:28:23.107000+00:00
+preparation: Laisser tremper les olives noires pendant une demi heure puis rincez les bien. Mixer les avec l'ail et l'huile d'olive.
+preparation24h: ''
+publishDate: 2024-03-18T13:28:23.107Z
+uuid: msdsbbvf
+titleslug: tapenade-olives-noires_msdsbbvf
 ---

@@ -1,4 +1,0 @@
----
-title: "Câpres"
-type: "epices"
----

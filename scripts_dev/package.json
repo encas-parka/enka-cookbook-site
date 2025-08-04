@@ -4,7 +4,12 @@
   "description": "Scripts utilitaires pour Enka Cookbook",
   "type": "module",
   "scripts": {
-    "sort-ingredients": "node sort-ingredients.js"
+    "sort-ingredients": "node sort-ingredients.js",
+    "migrate-content": "node migration/migrate-content.js",
+    "update-references": "node migration/update-ingredient-references.js",
+    "verify-migration": "node migration/verify-migration.js",
+    "full-migration": "node migration/run-full-migration.js",
+    "backup-before-migration": "node migration/backup-before-migration.js"
   },
   "engines": {
     "node": ">=14.0.0"
@@ -12,8 +17,13 @@
   "keywords": [
     "ingredients",
     "migration",
-    "sort"
+    "sort",
+    "uuid",
+    "slug"
   ],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "js-yaml": "^4.1.0"
+  }
 }

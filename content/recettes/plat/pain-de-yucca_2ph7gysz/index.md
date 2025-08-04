@@ -1,56 +1,53 @@
 ---
 categories:
-- Pain
+  - Pain
 check: Non
 cuisson: Oui
 draft: false
 ingredients:
-  autres:
-  - commentaire: levure chimique pour les vegan et l'absence de gluten...
+  - ingredient: levure-chimique_ce366696
     quantite: 51
-    title: Levure chimique
     unit: grammes
-  epices:
-  - quantite: 80
-    title: Sel
+    commentaire: levure chimique pour les vegan et l'absence de gluten...
+  - ingredient: sel_6369338b
+    quantite: 80
     unit: grammes
-  frais:
-  - quantite: 4
-    title: Feta
+    commentaire: ''
+  - ingredient: feta_9ed8205a
+    quantite: 4
     unit: Kg
-  - quantite: 1
-    title: Beurre demi-sel
+    commentaire: ''
+  - ingredient: beurre-demi-sel_0f3b870d
+    quantite: 1
     unit: Kg
-  lof:
-  - commentaire: à faire ramolir
+    commentaire: ''
+  - ingredient: oeuf_292e5c0b
     quantite: 17
-    title: Oeuf
     unit: unité
-  - quantite: 2.7
-    title: Farine de tapioca
+    commentaire: à faire ramolir
+  - ingredient: farine-de-tapioca_9714d6db
+    quantite: 2.7
     unit: Kg
+    commentaire: ''
 layout: recettes
 materiel:
-- Four
+  - Four
 plate: 170
 prepAlt: []
-preparation: '* Prechauffer le four a 260°.
-
+preparation: |-
+  * Prechauffer le four a 260°.
   * Emietter la feta et ajouter la farine, la levure et le sel .
-
   * Incorporer les oeufs et le beurre.
-
-  * Mélanger jusqu''a former une boule.
-
-  * Rouler des petites boules avec la pate et les placer sur une plaque recouvert
-  de papier sulfu.
-
-  * Enfourner 8 minutes et deguster immediatement.'
-publishDate: 2022-11-23 20:23:25.888000+00:00
+  * Mélanger jusqu'a former une boule.
+  * Rouler des petites boules avec la pate et les placer sur une plaque recouvert de papier sulfu.
+  * Enfourner 8 minutes et deguster immediatement.
+publishDate: 2022-11-23T20:23:25.888Z
 regime:
-- vegetarien
-- sans-gluten
+  - vegetarien
+  - sans-gluten
 temperature: Chaud
 title: Pain de Yucca
+titleslug: pain-de-yucca_2ph7gysz
 type: plat
+uuid: 2ph7gysz
 ---

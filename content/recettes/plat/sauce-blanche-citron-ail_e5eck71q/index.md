@@ -6,30 +6,26 @@ checkAlwaysOk: true
 cuisson: Non
 draft: false
 ingredients:
-  epices:
-    - title: Sel
-  frais:
-    - quantite: 1.2
-      title: Fromage blanc
-      unit: litre
-  legumes:
-    - quantite: 7
-      title: Ail
-      unit: gousse·s
-  lof: []
-  sucres:
-    - quantite: 0.3
-      title: Jus de citron
-      unit: litre
+  - ingredient: sel_6369338b
+    commentaire: ''
+  - ingredient: fromage-blanc_be5e8822
+    quantite: 1.2
+    unit: litre
+    commentaire: ''
+  - ingredient: ail_ac8a27b6
+    quantite: 7
+    unit: gousse·s
+    commentaire: ''
+  - ingredient: jus-de-citron_13c3c6f6
+    quantite: 0.3
+    unit: litre
+    commentaire: ''
 layout: recettes
 plate: 40
-preparation: >-
-  Mélanger tous les ingrédients (le jus de citron petit à petit pour ajuster au
-  goût). Ajuster l'assaisonnement.
-
+preparation: |-
+  Mélanger tous les ingrédients (le jus de citron petit à petit pour ajuster au goût). Ajuster l'assaisonnement.
 
   Dosé pour 2 cuillers à soupe par personne.
-
 
 
 
@@ -40,6 +36,9 @@ regime:
   - sans-gluten
 temperature: Froid
 title: Sauce blanche citron ail
+titleslug: sauce-blanche-citron-ail_e5eck71q
 type: plat
+uuid: e5eck71q
 ---
+
 

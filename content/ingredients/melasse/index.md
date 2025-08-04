@@ -1,4 +1,0 @@
----
-title: "Mélasse"
-type: "sucres"
----

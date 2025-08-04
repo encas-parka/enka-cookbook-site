@@ -1,95 +1,111 @@
 ---
 auteur: Ça vaulx le détour
 categories:
-- Bouchées salées
+  - Bouchées salées
 check: Oui
 checkAlwaysOk: false
 cuisson: Oui
 draft: false
 ingredients:
-  epices:
-  - quantite: 15
-    title: Cumin moulu
+  - ingredient: cumin-moulu_d8e8177e
+    quantite: 15
     unit: c. à café
-  - commentaire: a voir s'il est piquant ou pas, goutu ou pas
+    commentaire: ''
+  - ingredient: paprika_3f355588
     quantite: 30
-    title: Paprika
     unit: grammes
-  - commentaire: à adapter en fonction du piquant
+    commentaire: a voir s'il est piquant ou pas, goutu ou pas
+  - ingredient: piment-en-poudre_9892d5ee
     quantite: 10
-    title: Piment en poudre
     unit: grammes
-  - quantite: 2
-    title: Aneth aromatique
+    commentaire: à adapter en fonction du piquant
+  - ingredient: aneth-aromatique_5a3354bb
+    quantite: 2
     unit: bottes
-  - quantite: 2
-    title: Coriandre fraîche
+    commentaire: ''
+  - ingredient: coriandre-fraiche_41b7dd9c
+    quantite: 2
     unit: bottes
-  - quantite: 12
-    title: Cannelle
+    commentaire: ''
+  - ingredient: cannelle_e0a73872
+    quantite: 12
     unit: c. à café
-  - quantite: 6.75
-    title: Pulpe de tomate
+    commentaire: ''
+  - ingredient: pulpe-de-tomate_0a4fb75c
+    quantite: 6.75
     unit: Kg
-  frais:
-  - quantite: 6
-    title: Yaourt grec de vache
+    commentaire: ''
+  - ingredient: yaourt-grec-de-vache_833f77c3
+    quantite: 6
     unit: Kg
-  - quantite: 2
-    title: Beurre doux
+    commentaire: ''
+  - ingredient: beurre-doux_6c5403a0
+    quantite: 2
     unit: Kg
-  - quantite: 3
-    title: Feta
+    commentaire: ''
+  - ingredient: feta_9ed8205a
+    quantite: 3
     unit: Kg
-  - quantite: 3.7
-    title: Pâte filo
+    commentaire: ''
+  - ingredient: pate-filo_a3ac485c
+    quantite: 3.7
     unit: Kg
-  legumes:
-  - quantite: 40
-    title: Cébette - Ciboule - Cive - Oignon vert
+    commentaire: ''
+  - ingredient: cebette-ciboule-cive-oignon-vert_d79eb5f7
+    quantite: 40
     unit: unité
-  - quantite: 1
-    title: Ail
+    commentaire: ''
+  - ingredient: ail_ac8a27b6
+    quantite: 1
     unit: tête·s
-  - quantite: 4.5
-    title: Oignon
+    commentaire: ''
+  - ingredient: oignon_e8b218bd
+    quantite: 4.5
     unit: Kg
-  - quantite: 2.25
-    title: Epinard
+    commentaire: ''
+  - ingredient: epinard_ee09878e
+    quantite: 2.25
     unit: Kg
-  lof:
-  - quantite: 900
-    title: huile d'olive
+    commentaire: ''
+  - ingredient: huile-dolive_f2e76310
+    quantite: 900
     unit: ml
-  sec:
-  - quantite: 6
-    title: Pois chiche cuit
+    commentaire: ''
+  - ingredient: pois-chiche-cuit_bc2f3b22
+    quantite: 6
     unit: Kg
+    commentaire: ''
 layout: recettes
 materiel:
-- Four
-- Gastro 1/1 (Normaux)
+  - Four
+  - Gastro 1/1 (Normaux)
 plate: 120
-preparation: "* Préchauffer les fours!! th 6-7 ou 190°c\n* Dans un grand poelon, à\
-  \ feu moyen : huile, oignons , ail; quand ils sont tendres, y ajouter les épices\n\
-  * Ajouter la pulpe de tomate, le concentré et le sucre : laisser mijoter. Laisser\
-  \ un peu évaporer le liquide, on veut pas quelque chose de trop sec, mais tout de\
-  \ meme pas trop d'eau, surtout si l'on a voulu utiliser des vrais tomates.\n* Incorporer\
-  \ les pois chiches, l'aneth et les épinards. Saler et poivrer.\n* MONTAGE \n\n \
-  \ Fondre le beurre\n\n  Badigeonner légèrement de beurre les feuilles en les superposant\
-  \ dans un plat huilé, beurré\n\n  5 épaisseurs de feuilles sur le dessous\n\n  Verser\
-  \ la prepa tomate/pois chiches sur les feuilles, parsemer de feta\n\n  Recouvrir\
-  \ d'au moins 5 épaisseurs de feuilles filo, en les badigeonnant de beurre fondu\n\
-  \n  Entailler légèrement le dessus à la forme de découpe souhaiter, des pti losanges\
-  \ (on en servira plusieurs) ou en nombre de part désirées pour chaque plat, et verser\
-  \ dessus la fin du beure fondu, a défaut un filet d'huile d'olive\n* Enfourner 30\
-  \ à 35 min, jusqu'à ce que ce soit doré et croustillant\n*  Le YAOURT d'accompagnement:\
-  \ ciseler les feuilles fraiches et emincer fin-fin les oignons nouveaux, mélanger\
-  \ au yaourt; ajouter piment de cayenne et/ou paprika, et saler à convenance personnelle!!"
-publishDate: 2024-06-20 09:53:00+00:00
+preparation: |-
+  * Préchauffer les fours!! th 6-7 ou 190°c
+  * Dans un grand poelon, à feu moyen : huile, oignons , ail; quand ils sont tendres, y ajouter les épices
+  * Ajouter la pulpe de tomate, le concentré et le sucre : laisser mijoter. Laisser un peu évaporer le liquide, on veut pas quelque chose de trop sec, mais tout de meme pas trop d'eau, surtout si l'on a voulu utiliser des vrais tomates.
+  * Incorporer les pois chiches, l'aneth et les épinards. Saler et poivrer.
+  * MONTAGE 
+
+    Fondre le beurre
+
+    Badigeonner légèrement de beurre les feuilles en les superposant dans un plat huilé, beurré
+
+    5 épaisseurs de feuilles sur le dessous
+
+    Verser la prepa tomate/pois chiches sur les feuilles, parsemer de feta
+
+    Recouvrir d'au moins 5 épaisseurs de feuilles filo, en les badigeonnant de beurre fondu
+
+    Entailler légèrement le dessus à la forme de découpe souhaiter, des pti losanges (on en servira plusieurs) ou en nombre de part désirées pour chaque plat, et verser dessus la fin du beure fondu, a défaut un filet d'huile d'olive
+  * Enfourner 30 à 35 min, jusqu'à ce que ce soit doré et croustillant
+  *  Le YAOURT d'accompagnement: ciseler les feuilles fraiches et emincer fin-fin les oignons nouveaux, mélanger au yaourt; ajouter piment de cayenne et/ou paprika, et saler à convenance personnelle!!
+publishDate: 2024-06-20T09:53:00.000Z
 regime:
-- vegetarien
+  - vegetarien
 temperature: Chaud
 title: Baklawa pois chiche feta
+titleslug: baklawa-pois-chiche-feta_y7qtdtwq
 type: entree
+uuid: y7qtdtwq
 ---

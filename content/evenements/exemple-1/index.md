@@ -112,8 +112,8 @@ repas:
         type_plat: dessert
 uuid: 6Q6NvkpGwTyKczBjnIWzK
 outputs:
+  - IngredientsJSON
   - HTML
   - Poster
   - Ingredients
 ---
-

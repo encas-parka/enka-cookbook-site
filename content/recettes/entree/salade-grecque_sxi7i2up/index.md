@@ -1,49 +1,54 @@
 ---
 categories:
-- Salade
+  - Salade
 check: Oui
 checkAlwaysOk: false
 cuisson: Non
 draft: false
 ingredients:
-  epices:
-  - quantite: 40
-    title: Origan
+  - ingredient: origan_6dd42bdf
+    quantite: 40
     unit: grammes
-  frais:
-  - quantite: 3
-    title: Feta
+    commentaire: ''
+  - ingredient: feta_9ed8205a
+    quantite: 3
     unit: Kg
-  legumes:
-  - quantite: 1
-    title: Olives noires à la grecque
+    commentaire: ''
+  - ingredient: olives-noires-a-la-grecque_25bbe4de
+    quantite: 1
     unit: Kg
-  - quantite: 4.5
-    title: Oignon rouge
+    commentaire: ''
+  - ingredient: oignon-rouge_c3b8a6c1
+    quantite: 4.5
     unit: Kg
-  - quantite: 10
-    title: Tomate
+    commentaire: ''
+  - ingredient: tomate_304bc6b8
+    quantite: 10
     unit: Kg
-  - quantite: 16
-    title: Concombre
+    commentaire: ''
+  - ingredient: concombre_69857871
+    quantite: 16
     unit: Kg
-  lof:
-  - quantite: 3
-    title: huile d'olive
+    commentaire: ''
+  - ingredient: huile-dolive_f2e76310
+    quantite: 3
     unit: litre
+    commentaire: ''
 layout: recettes
 materiel:
-- Grand Saladier
+  - Grand Saladier
 plate: 180
 preparation: Coupez, mélanger.
-publishDate: 2024-06-18 12:39:00+00:00
+publishDate: 2024-06-18T12:39:00.000Z
 regime:
-- vegetarien
-- sans-gluten
+  - vegetarien
+  - sans-gluten
 region: Grece
 saison:
-- ete
+  - ete
 temperature: Froid
 title: Salade Grecque
+titleslug: salade-grecque_sxi7i2up
 type: entree
+uuid: sxi7i2up
 ---

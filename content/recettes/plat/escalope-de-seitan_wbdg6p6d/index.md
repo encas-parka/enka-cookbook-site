@@ -14,32 +14,32 @@ quantite_desc: une par personne
 check: Oui
 checkAlwaysOk: false
 ingredients:
-  autres:
-    - {}
-  lof:
-    - title: Huile végétale
-      quantite: 1
-      unit: litre
-    - title: Farine de riz
-      quantite: 800
-      unit: grammes
-    - title: Gluten pur
-      quantite: 2.15
-      unit: Kg
-  legumes: []
-  epices:
-    - title: bouillon cube
-      quantite: 6
-      unit: unité
-    - title: Sauce soja
-      quantite: 750
-      unit: ml
-  sucres:
-    - title: Poudre d'amandes
-      quantite: 600
-      unit: grammes
+  - ingredient: huile-vegetale_aeda0877
+    quantite: 1
+    unit: litre
+    commentaire: ''
+  - ingredient: farine-de-riz_098d359f
+    quantite: 800
+    unit: grammes
+    commentaire: ''
+  - ingredient: gluten-pur_65dd5dbd
+    quantite: 2.15
+    unit: Kg
+    commentaire: ''
+  - ingredient: bouillon-cube_36bd5164
+    quantite: 6
+    unit: unité
+    commentaire: ''
+  - ingredient: sauce-soja_06ce2397
+    quantite: 750
+    unit: ml
+    commentaire: ''
+  - ingredient: poudre-damandes_726f5873
+    quantite: 600
+    unit: grammes
+    commentaire: ''
 preparation: |-
-  
+
   Faire bouillir 3L30 D'eau avec les bouillons cubes.
 
 
@@ -71,4 +71,6 @@ preparation: |-
 
   Il est aussi possible de les mettre dans une friteuse pendant 1 min.
 publishDate: 2025-06-12T10:12:00.000Z
+uuid: wbdg6p6d
+titleslug: escalope-de-seitan_wbdg6p6d
 ---

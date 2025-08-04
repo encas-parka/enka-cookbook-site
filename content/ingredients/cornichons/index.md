@@ -1,4 +1,0 @@
----
-title: "Cornichons"
-type: "autres"
----

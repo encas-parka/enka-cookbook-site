@@ -24,6 +24,8 @@ repas:
         type_plat: plat
       - recette: steak-vege-champignons-aubergines-noix-avoine-haricots-rouges-version-amelioree_bwr2rkex
         type_plat: plat
+      - recette: barre-cereales-noisettes_42230653
+        type_plat: dessert
   - assiettes: 150
     date_service: 2025-08-23
     horaire: midi

@@ -10,6 +10,8 @@ repas:
     date_service: 2025-08-22
     horaire: midi
     recettes_du_repas:
+      - recette: sauce-verte_23513512
+        type_plat: entree
       - recette: vinaigrette_pm7r5avd
         type_plat: entree
       - recette: salade-verte_qaxl8865

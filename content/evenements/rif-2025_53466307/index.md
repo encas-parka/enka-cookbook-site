@@ -48,6 +48,9 @@ repas:
       - recette: salade-de-concombre-a-laneth-et-amandes-effilees_17532461
         type_plat: entree
         altAssiettes: ""
+      - recette: tomates-farcies-et-riz_57663707
+        type_plat: plat
+        altAssiettes: 1
 uuid: "53466307"
 titleslug: "{{slug}}"
 ---

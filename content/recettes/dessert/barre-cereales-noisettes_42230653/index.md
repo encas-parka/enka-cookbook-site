@@ -44,7 +44,7 @@ ingredients:
       quantite: 200
       unit: grammes
     - title: Sucre vanillé
-      quantite: 160
+      quantite: 100
       unit: grammes
   epices:
     - title: Sel

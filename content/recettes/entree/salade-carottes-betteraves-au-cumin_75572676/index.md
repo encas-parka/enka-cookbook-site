@@ -9,7 +9,7 @@ regime:
   - vegan
 cuisson: Non
 temperature: Froid
-plate: 1
+plate: 20
 check: Non
 checkAlwaysOk: false
 ingredients:

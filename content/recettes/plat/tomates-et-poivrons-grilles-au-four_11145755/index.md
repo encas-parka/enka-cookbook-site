@@ -27,7 +27,7 @@ ingredients:
       quantite: 1
       unit: c. à soupe
     - title: Thym
-      quantite: 20.1
+      quantite: 2
       unit: c. à soupe
     - title: Poivre noir moulu
       quantite: 1

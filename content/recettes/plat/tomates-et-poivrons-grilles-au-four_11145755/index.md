@@ -11,7 +11,7 @@ saison:
   - ete
 cuisson: Oui
 temperature: Chaud
-plate: 1
+plate: 10
 check: Oui
 checkAlwaysOk: false
 ingredients:

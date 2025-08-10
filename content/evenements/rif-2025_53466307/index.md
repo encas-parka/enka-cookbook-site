@@ -31,6 +31,10 @@ repas:
     date_service: 2025-08-23
     horaire: midi
     recettes_du_repas:
+      - recette: salade-carottes-betteraves-au-cumin_75572676
+        type_plat: entree
+      - recette: tomates-et-poivrons-grilles-au-four_11145755
+        type_plat: plat
       - recette: substitut-feta-avec-du-tofu_55504446
         type_plat: plat
         altAssiettes: 150
@@ -39,6 +43,12 @@ repas:
         altAssiettes: 20
       - recette: kolokythopita-tarte-filo-courgette-feta-grecque_8jaekytp-ugpt05g-jwgjuqa-xseqspbol9g
         type_plat: plat
+        altAssiettes: 130
+      - recette: barres-cereales-gourmandes-flocons-davoine-chocolat-raisin-sec-sans-gluten_q1eozsxah1hwo7bnjp-huaaue2nr6dkbh2-t
+        type_plat: dessert
+        altAssiettes: 20
+      - recette: barres-cereales-dessert-gourmandes_excdwt3fhnymaugge4hzbravklsbmguv_j82
+        type_plat: dessert
         altAssiettes: 130
   - assiettes: 150
     date_service: 2025-08-24

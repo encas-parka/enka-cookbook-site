@@ -1,7 +1,7 @@
 backend:
   name: github
   repo: encas-parka/enka-cookbook-site
-  branch: main
+  branch: ing-merged-mig
   base_url: https://sveltia-cms-auth.encas-cookbook.workers.dev/
 
 

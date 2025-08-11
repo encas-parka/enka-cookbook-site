@@ -132,15 +132,7 @@ collections:
 
         ## ::: __Description ##
 
-      - {
-          label: "Régimes",
-          name: "regime",
-          widget: "select",
-          label_singular: "Régime",
-          required: false,
-          multiple: true,
-          options: ["vegetarien", "vegan", "sans-gluten", "sans-lactose"],
-        }
+
       - {
           label: "Spécialité (région)",
           name: "region",
@@ -198,37 +190,6 @@ collections:
 
       ################################
       ## ::: __Ingredients de la recette ##
-      - label: "Ingredients"
-        name: "ingredients+"
-        widget: "list"
-        allow_add: true
-        add_to_top: true
-        label_singular: "Ingrédient"
-        required: false
-        collapsed: true
-        summary: "{{fields.title}}: {{fields.quantite}} {{fields.unit}}"
-        fields:
-          - label: "Ingrédient"
-            name: title
-            widget: "relation"
-            collection: "ingredients"
-            search_fields: ["title"]
-            value_field: "title"
-            display_fields: ["title", "itype"]
-          - label: "Quantité (nombre)"
-            name: quantite
-            widget: number
-            min: 0.1
-            value_type: float
-          - label: "Unité (quantité en...)"
-            name: unit
-            widget: select
-            options: ["Kg", "grammes", "unité", "litre", "ml", "c. à soupe", "c. à café", "pincées", "tête·s", "gousse·s", "bottes"]
-          - label: "commentaire"
-            name: commentaire
-            widget: string
-            required: false
-            hint: "Si vous avez quelque-chose à préciser... S'affiche à coté de l'ingrédients dans la recette. ⚠ Ne sera pas affiché dans les listes de course"
 
       - label: "Ingredients"
         name: "ingredients"
@@ -243,11 +204,10 @@ collections:
           - label: "Ingrédient"
             name: title
             widget: "relation"
-            collection: "ingredients"
+            collection: "ingredients_index"
             search_fields: ["title"]
-            value_field: "title"
-            display_fields: ["title", "itype", "alergenesIng", "vegan", "vegetarien"]
-            options_length: 1000
+            value_field: "slug"
+            display_fields: ["title"]
           - label: "Quantité (nombre)"
             name: quantite
             widget: number
@@ -326,7 +286,8 @@ collections:
       - label: "Date de publication"
         name: "publishDate"
         widget: "datetime"
-        # picker_utc: true
+        picker_utc: true
+        default: "{{now}}"
 
 
 
@@ -364,6 +325,7 @@ collections:
           - HTML
           - Poster
           - Ingredients
+          - IngredientsJSON
 
       - { name: "sitemap_exclude", widget: "hidden", default: "true" }
 
@@ -527,7 +489,7 @@ collections:
     folder: "content/ingredients"
     create: true
     path: "{{slug}}/index"
-    slug: "{{title}}"
+    slug: "{{title}}_{{uuid_shorter}}"
     fields:
       - { label: "Nom de l'ingrédient", name: "title", widget: "string" }
       - label: "Type d'ingrédient"

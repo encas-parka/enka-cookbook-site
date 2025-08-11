@@ -18,11 +18,10 @@ check: Non
 checkAlwaysOk: false
 checkfor: null
 ingredients:
-  - ingredient: airelle_551c6172
+  - ingredient: biscuit-petit-brun_b2b25254
     quantite: 12
-    unit: pincées
+    unit: grammes
     commentaire: ''
-    title: agneau_b7e677da
 materiel: []
 preparation: test another sveltia
 preparation24h: ''

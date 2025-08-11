@@ -18,7 +18,7 @@ check: Non
 checkAlwaysOk: false
 checkfor: null
 ingredients:
-  - title: Algue wakamé séchée
+  - title: ail-en-poudre_bdf8a42e
     quantite: 12
     unit: pincées
     commentaire: ''

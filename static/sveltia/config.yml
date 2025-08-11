@@ -36,7 +36,7 @@ collections:
     label_singular: "Recette"
     folder: "content/recettes/"
     path: "{{type}}/{{slug}}/index"
-    slug: "{{title}}_{{uuid_shorter}}"
+    slug: "{{title}}_{{uuid_short}}"
     filter: { field: "layout", value: "recettes" }
     description: "Liste de l'ensemble des recettes. Vous pouvez utiliser les filtres ci-dessous pour classer / filtrer les recettes. Ou faire 'ctrl+f' pour rechercher une recette avec votre navigateur."
     sortable_fields: ["title", "publishDate"]
@@ -214,8 +214,7 @@ collections:
             collection: "ingredients"
             search_fields: ["title"]
             value_field: "title"
-            display_fields: ["title", "itype", "alergenesIng", "vegan", "vegetarien"]
-            options_length: 1000
+            display_fields: ["title", "itype"]
           - label: "Quantité (nombre)"
             name: quantite
             widget: number
@@ -532,7 +531,7 @@ collections:
     fields:
       - { label: "Nom de l'ingrédient", name: "title", widget: "string" }
       - label: "Type d'ingrédient"
-        name: "itype"
+        name: "type"
         widget: "select"
         required: true
         options:
@@ -545,7 +544,7 @@ collections:
           - { label: "Viandes et Poissons (et crustacés, mollusques)", value: "animaux" }
           - { label: "Autres (ce qui ne se trouve pas ailleurs...)", value: "autres" }
       - label: "Allergènes"
-        name: "alergenesIng"
+        name: "allergenes"
         widget: "select"
         multiple: true
         required: false
@@ -580,3 +579,5 @@ collections:
           - { label: "Hiver", value: "hiver" }
 
       - { label: "Produit Frais ?", name: "pFrais", widget: "boolean", required: false, hint: "Fruits et légumes frais (ni surgelé, ni conserve, ni séché, etc.), ou ingrédients qui se conserve au frigo" }
+
+      - { label: "Produit Surgelé ?", name: "pSurgel", widget: "boolean", required: false, hint: "Ingrédients qui se conserve au congélateur" }

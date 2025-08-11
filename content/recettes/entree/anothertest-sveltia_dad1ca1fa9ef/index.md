@@ -27,7 +27,7 @@ preparation: test another sveltia
 preparation24h: ''
 astuces: []
 prepAlt: []
-publishDate: 2025-08-11T14:01:00
+publishDate: 2025-08-11T12:20:00.000Z
 regime: []
 ---
 

@@ -11,13 +11,13 @@
 
   <body>
     <!-- incrémenter v= en cas de modification pour invalidé le cache des utilisateur -->
-    <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js?v=5"></script>
+    <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js?v=6"></script>
 
     <script>
-      function nanoid(t = 8) {
+      function nanoid(t = 10) {
         return crypto
           .getRandomValues(new Uint8Array(t))
-          .reduce((t, e) => (t += (e &= 7) < 8 ? e.toString(8) : ""), "")
+          .reduce((t, e) => (t += (e &= 9) < 10 ? e.toString(10) : ""), "")
           .toLowerCase();
       }
 

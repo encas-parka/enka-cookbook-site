@@ -25,7 +25,7 @@ repas:
         type_plat: plat
       - recette: steak-vege-champignons-aubergines-noix-avoine-haricots-rouges-version-amelioree_bwr2rkex
         type_plat: plat
-      - recette: tapioca-perlee-au-chocolat_3lmh4nwosg3nhoir63vdog1aaetw_lw7qhrf
+      - recette: tapioca-perlee-au-chocolat_3lmh4nwosg3
         type_plat: dessert
   - assiettes: 150
     date_service: 2025-08-23
@@ -38,7 +38,7 @@ repas:
       - recette: substitut-feta-avec-du-tofu_55504446
         type_plat: plat
         altAssiettes: 150
-      - recette: kolokythokeftedes-galettes-courgette-feta-grecques_iuu0z_af3uzfnhdk9ypgrmlu_-qn64cuz7jv
+      - recette: kolokythokeftedes-galettes-courgette-feta-grecques_qn64cuz7jv
         type_plat: plat
         altAssiettes: 20
       - recette: kolokythopita-tarte-filo-courgette-feta-grecque_8jaekytp-ugpt05g-jwgjuqa-xseqspbol9g

@@ -2,74 +2,11 @@
 title: Exemple 1-fs
 sitemap_exclude: 'true'
 repas:
-  - date_service: 2024-01-10T00:00:00.000Z
-    horaire: soir
-    assiettes: 950
-    recettes_du_repas:
-      - recette: bo-bun-vege_cjf5v7d3
-        type_plat: entree
-        altAssiettes: null
-        chef: ''
-        partof: ''
-        commentaire: ''
-      - recette: burger-vege-lentilles-patates-douces_m3pzgy95
-        type_plat: entree
-        altAssiettes: 3499
-        chef: tttest
-        partof: ''
-        commentaire: ''
-      - recette: pastilla-vegan-a-laubergine_t9o80u38
-        type_plat: plat
-      - recette: aubergines-grillees-au-miso_8e05fd35
-        type_plat: plat
-  - date_service: 2024-01-11T00:00:00.000Z
-    horaire: soir
-    assiettes: 45
-    recettes_du_repas:
-      - recette: lemon-curd-vegan-version-tarte-au-citron-sans-gluten_24nxll5l
-        type_plat: entree
-      - recette: brownie-a-lhalva-et-au-tahin_ma5dwaaz
-        type_plat: entree
-      - recette: taboulais-libanais-des-tarnais_os1bnq2l
-        type_plat: entree
-      - recette: tartinade-petits-pois-citrons-confits-menthe_g8x1djy4
-        type_plat: plat
-  - date_service: 2024-01-13T00:00:00.000Z
-    horaire: midi
-    assiettes: 120
-    recettes_du_repas:
-      - recette: houmous_4b72qxc8
-        type_plat: entree
-      - recette: beignets-de-legume-style-pakora_zqmobb8f
-        type_plat: entree
-      - recette: cookie-the-matcha-et-gingembre-confit-vegan-et-sans-gluten_jvdekkyz
-        type_plat: plat
-  - date_service: 2024-01-15T00:00:00.000Z
-    horaire: soir
-    assiettes: 1230
-    recettes_du_repas:
-      - recette: soupe-froide-concombre-et-yaourt_2amw0731
-        type_plat: entree
-      - recette: soupe-froide-concombre-et-yaourt-vegan_djwi3tfv
-        type_plat: entree
-        altAssiettes: 250
-      - recette: tom-kha-soupe-thai_fg4lgtvf
-        type_plat: plat
-      - recette: boreks-epinards-fromage_qp9wb4vi
-        type_plat: plat
-  - date_service: 2024-01-16T00:00:00.000Z
-    horaire: soir
-    assiettes: 100
-    recettes_du_repas:
-      - recette: beignet-de-banane-et-caramel-de-miso_viow95m6
-        type_plat: plat
-        altAssiettes: 1
-        commentaire: Un ptit commentaire
   - date_service: 2024-06-13T00:00:00.000Z
     horaire: midi
     assiettes: 346
     recettes_du_repas:
-      - recette: '-tartinade-pois-casse-oignon-caramelise_j2muiu74'
+      - recette: -tartinade-pois-casse-oignon-caramelise_j2muiu74
         type_plat: entree
       - recette: risotto-de-pruneaux-et-champignons_5gmpv84u
         type_plat: entree
@@ -96,6 +33,12 @@ repas:
     horaire: soir
     assiettes: 150
     recettes_du_repas:
+      - recette: anothertest-sveltia_dad1ca1fa9ef
+        type_plat: entree
+        altAssiettes: null
+        chef: ''
+        partof: ''
+        commentaire: ''
       - recette: corn-dog-vegan-et-sans-gluten_do77iuk3
         type_plat: entree
       - recette: caviar-daubergines-fumees_5f138fdx
@@ -110,10 +53,11 @@ repas:
         altAssiettes: 25
       - recette: tarte-au-chocolat-sans-cuisson_matyge19
         type_plat: dessert
-uuid: 6Q6NvkpGwTyKczBjnIWzK
 outputs:
   - IngredientsJSON
   - HTML
   - Poster
   - Ingredients
+uuid: 6Q6NvkpGwTyKczBjnIWzK
 ---
+

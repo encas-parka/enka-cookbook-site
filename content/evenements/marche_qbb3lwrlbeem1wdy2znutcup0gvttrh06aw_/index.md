@@ -24,7 +24,7 @@ repas:
       - recette: barres-cereales-gourmandes-flocons-davoine-chocolat-raisin-sec-sans-gluten_q1eozsxah1hwo7bnjp-huaaue2nr6dkbh2-t
         type_plat: dessert
         altAssiettes: 10
-      - recette: barres-cereales-dessert-gourmandes_excdwt3fhnymaugge4hzbravklsbmguv_j82
+      - recette: barres-cereales-dessert-gourmandes_excdwt3f
         type_plat: dessert
         altAssiettes: 20
     horaire: matin

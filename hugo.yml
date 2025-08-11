@@ -18,6 +18,17 @@ defaultContentLanguage: fr
 defaultContentLang: fr
 rssLimit: 10
 
+disableKinds:
+- taxonomy
+- term
+
+
+pagination:
+  disableAliases: false
+  pagerSize: 500
+  path: page
+
+
 outputs:
   home:
     - HTML
@@ -25,11 +36,7 @@ outputs:
     - HEADERS
   page:
     - HTML
-  evenements:
-    - HTML
-    - IngredientsJSON
-    - Poster
-    - Ingredients
+
 mediaTypes:
   application/json:
     suffixes:
@@ -54,7 +61,7 @@ outputFormats:
 
   IngredientsJSON:
     mediaType: "application/json"
-    baseName: "ingredients_json/index"
+    baseName: "ingredients/index"
     isPlainText: true
     notAlternative: true
 

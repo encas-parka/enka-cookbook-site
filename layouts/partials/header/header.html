@@ -42,7 +42,7 @@ if (currentUrl.startsWith("https://enka-cookbook.netlify.app")) {
                 {{ range (.Site.GetPage "section" "recettes").Pages}}
                 <li><a class="dropdown-item" href="{{.RelPermalink}}">
                   {{ $svg := (print .Title | lower )}}
-                  {{ partial "components/icon-svg" (dict "name" $svg "size" "1.5rem") }}
+                  {{ partialCached "components/icon-svg" (dict "name" $svg "size" "1.5rem") $svg "1.5rem" }}
                   {{.Title}}</a></li>
                 {{ end }}
               </ul>
@@ -91,9 +91,9 @@ if (currentUrl.startsWith("https://enka-cookbook.netlify.app")) {
               </a>
               <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                 {{ range (.Site.GetPage "section" "regime").Pages}}
-                <li><a class="dropdown-item" href="{{.RelPermalink}}"> 
+                <li><a class="dropdown-item" href="{{.RelPermalink}}">
                   {{ $svg := (print .Title | lower )}}
-                  {{ partial "components/icon-svg" (dict "name" $svg "size" "2rem") }}
+                  {{ partialCached "components/icon-svg" (dict "name" $svg "size" "2rem") $svg "2rem" }}
                   {{.Title}}</a></li>
                 {{ end }}
               </ul>
@@ -112,13 +112,13 @@ if (currentUrl.startsWith("https://enka-cookbook.netlify.app")) {
             </li>
             <li class="nav-item m-2">
               <a class="btn btn-outline-primary btn-sm " data-bs-toggle="modal" data-bs-target="#search-recipes-modal">
-                {{ partial "inline-svg" (dict "src" "fonticons/search.svg" "display" "block" "fs" 4) }}
+                {{ partialCached "inline-svg" (dict "src" "fonticons/search.svg" "display" "block" "fs" 4) "search" }}
               </a>
             </li>
             {{/* <li class="nav-item m-2">
               <a href="/registration" class="btn btn-outline-primary btn-sm"
                 style="display: flex; align-items: center;">
-                {{partial "inline-svg" (dict "src" "fonticons/person-circle.svg" "fs" 4 ) }}
+                {{partialCached "inline-svg" (dict "src" "fonticons/person-circle.svg" "fs" 4) "person-circle" }}
                 <span class="mx-2">Inscription</span>
               </a>
             </li> */}}
@@ -126,7 +126,7 @@ if (currentUrl.startsWith("https://enka-cookbook.netlify.app")) {
             <li class="nav-item m-2">
               <a href="/registration" class="btn btn-outline-primary btn-sm"
                 style="display: flex; align-items: center;">
-                {{partial "inline-svg" (dict "src" "fonticons/box-arrow-in-right.svg" "fs" 4 ) }}
+                {{partialCached "inline-svg" (dict "src" "fonticons/box-arrow-in-right.svg" "fs" 4) "box-arrow-in-right_fs4"  }}
                 <span class="mx-2">Connexion</span>
               </a>
             </li>
@@ -144,15 +144,10 @@ if (currentUrl.startsWith("https://enka-cookbook.netlify.app")) {
 
 </header>
 
-{{/*  {{ if not .IsHome }}
-<div class="mx-lg-4 top4">{{ partial "components/breadcrumb.html" . }}</div>
-
-{{ end }}  */}}
 
 
 
-
-{{/* Modal des modules de recherche alpinejs */}}
+{{/* Modal des modules de recherche vuejs */}}
 <div class="modal fade" id="search-recipes-modal" data-toggle="modal" tabindex="0" aria-labelledby="Search Recipes"
   aria-hidden="true">
   <div class="modal-dialog modal-dialog-scrollable modal-lg">
@@ -161,7 +156,7 @@ if (currentUrl.startsWith("https://enka-cookbook.netlify.app")) {
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        {{ partial "components/search-module-recipes" . }}
+        {{ partialCached "components/search-module-recipes" . "search-recipes" }}
       </div>
     </div>
   </div>
@@ -175,13 +170,13 @@ if (currentUrl.startsWith("https://enka-cookbook.netlify.app")) {
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        {{ partial "components/search-module-events" . }}
+        {{ partialCached "components/search-module-events" . "search-events" }}
       </div>
     </div>
   </div>
 </div>
 
-{{ partial "components/js_search-modules" . }}
+
 
 <script>
   function scrollToReveal() {

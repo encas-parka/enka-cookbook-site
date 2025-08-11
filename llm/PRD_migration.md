@@ -26,7 +26,7 @@ Ce document décrit la migration vers une convention de slug immuable combinant 
 - **[TERMINÉ]** Partials d'index créés:
   - `hugo-cookbook-theme/layouts/partials/functions/ingredients-index.html`: index global ingrédients (bySlug, byUUID, byAllergen)
   - `hugo-cookbook-theme/layouts/partials/functions/recettes-index.html`: index global recettes (bySlugRecette, byUUIDRecette)
-  - `hugo-cookbook-theme/layouts/partials/functions/extract-uuid-from-slug.html`: helper d'extraction UUID depuis slug
+  - `hugo-cookbook-theme/layouts/partials/functions/extract-uuid-from-slug.html.html`: helper d'extraction UUID depuis slug
 
 ### Phase 2 — Exécution
 - Exécuter le script de migration des recettes pour transformer les ingrédients référencés:
@@ -76,7 +76,7 @@ Ce document décrit la migration vers une convention de slug immuable combinant 
   - bySlugRecette: slug → page/meta
   - byUUIDRecette: uuid → page/meta
   - **[TERMINÉ]** Implémenté, retourne dict structuré { bySlugRecette, byUUIDRecette }
-- Helper `functions/extract-uuid-from-slug.html`:
+- Helper `functions/extract-uuid-from-slug.html.html`:
   - Extrait UUID depuis slug (après dernier “_”)
   - **[TERMINÉ]** Implémenté, utilisé pour fallback UUID
 - Résolution standard:
@@ -165,7 +165,7 @@ Contraintes:
 - Partials:
   - `functions/ingredients-index.html`: **[TERMINÉ]** ajouter `byUUID`, `byAllergen`.
   - `functions/recettes-index.html`: **[TERMINÉ]** créer `bySlugRecette`/`byUUIDRecette`.
-  - `functions/extract-uuid-from-slug.html`: **[TERMINÉ]** helper pour fallback UUID.
+  - `functions/extract-uuid-from-slug.html.html`: **[TERMINÉ]** helper pour fallback UUID.
   - `functions/ing4recettes.html`: **[TERMINÉ]** adapté pour accepter meta complet depuis l'index, avec gestion des allergènes et conversion d'unités.
   - `functions/ingredients-types-rename-short.html`: **[TERMINÉ]** déjà aligné sur types CMS.
   - `functions/allergenesIng.html`: **[TERMINÉ]** remplacer/adapter vers l'index global.

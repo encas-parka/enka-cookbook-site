@@ -23,7 +23,7 @@ ingredients:
     unit: grammes
     commentaire: ''
 materiel: []
-preparation: test another sveltia
+preparation: test another sveltia héhé
 preparation24h: ''
 astuces: []
 prepAlt: []

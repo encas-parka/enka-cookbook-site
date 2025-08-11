@@ -18,7 +18,7 @@ check: Non
 checkAlwaysOk: false
 checkfor: null
 ingredients:
-  - title: ail-en-poudre_bdf8a42e
+  - title: agneau_b7e677da
     quantite: 12
     unit: pincées
     commentaire: ''

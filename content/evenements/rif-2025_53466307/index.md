@@ -38,7 +38,7 @@ repas:
       - recette: substitut-feta-avec-du-tofu_55504446
         type_plat: plat
         altAssiettes: 150
-      - recette: kolokythokeftedes-galettes-courgette-feta-grecques_qn64cuz7jv
+      - recette: kolokythokeftedes-galettes-courgette-feta-grecques-sans-gluten-avec-sauce-blanche_qn64cuz7jv
         type_plat: plat
         altAssiettes: 20
       - recette: kolokythopita-tarte-filo-courgette-feta-grecque_8jaekytp-ugpt05g-jwgjuqa-xseqspbol9g

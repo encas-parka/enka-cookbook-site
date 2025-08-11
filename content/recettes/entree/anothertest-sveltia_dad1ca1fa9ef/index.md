@@ -18,10 +18,11 @@ check: Non
 checkAlwaysOk: false
 checkfor: null
 ingredients:
-  - title: agneau_b7e677da
+  - ingredient: airelle_551c6172
     quantite: 12
     unit: pincées
     commentaire: ''
+    title: agneau_b7e677da
 materiel: []
 preparation: test another sveltia
 preparation24h: ''

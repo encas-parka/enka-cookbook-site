@@ -8,7 +8,6 @@ type: entree
 categories:
   - Friture
 auteur: ''
-regime: []
 region: ''
 saison: []
 cuisson: Oui
@@ -19,13 +18,9 @@ check: Non
 checkAlwaysOk: false
 checkfor: null
 ingredients:
-  - title: Airelle
-    quantite: 23
-    unit: litre
-    commentaire: ''
-  - title: Algue Kombu
-    quantite: 10
-    unit: ml
+  - title: Algue wakamé séchée
+    quantite: 12
+    unit: pincées
     commentaire: ''
 materiel: []
 preparation: test another sveltia
@@ -33,5 +28,6 @@ preparation24h: ''
 astuces: []
 prepAlt: []
 publishDate: 2025-08-11T14:01:00
+regime: []
 ---
 

@@ -83,8 +83,6 @@ regime:
   - vegan
 temperature: Froid
 title: BABKA VEGANE HARISSA ET PISTACHE
-titleslug: babka-vegane-harissa-et-pistache_gylnfdms
 type: entree
-uuid: gylnfdms
 ---
 

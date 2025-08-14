@@ -29,6 +29,5 @@ preparation24h: ''
 astuces: []
 prepAlt: []
 publishDate: 2025-08-11T12:53:00.000Z
-uuid: 086975d31101
 ---
 

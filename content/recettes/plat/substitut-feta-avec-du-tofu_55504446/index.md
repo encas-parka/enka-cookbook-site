@@ -68,7 +68,5 @@ preparation24h: |-
 
   Toute la recette doit être faite la veille idéalement
 publishDate: 2025-07-31T08:27:00.000Z
-uuid: '55504446'
-titleslug: substitut-feta-avec-du-tofu_55504446
 ---
 

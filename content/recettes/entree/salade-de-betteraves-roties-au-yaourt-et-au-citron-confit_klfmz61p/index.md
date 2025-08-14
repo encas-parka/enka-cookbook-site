@@ -51,6 +51,4 @@ ingredients:
     commentaire: ''
 preparation: je le fais la semaine pro
 publishDate: 2025-05-19T14:28:00.000Z
-uuid: klfmz61p
-titleslug: salade-de-betteraves-roties-au-yaourt-et-au-citron-confit_klfmz61p
 ---

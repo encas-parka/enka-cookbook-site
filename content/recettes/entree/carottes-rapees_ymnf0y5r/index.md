@@ -30,8 +30,6 @@ ingredients:
     commentaire: ''
 preparation: Raper et assaisonner à convenance
 publishDate: '2024-06-14T13:22:00.000Z'
-uuid: ymnf0y5r
-titleslug: carottes-rapees_ymnf0y5r
 ---
 
 

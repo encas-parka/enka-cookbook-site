@@ -70,6 +70,4 @@ preparation: |-
   Déguster avec une soupe!
 preparation24h: Faire la pâte la veille c'est encore mieux !!
 publishDate: 2024-06-16T20:47:00.000Z
-uuid: 9dxao10r
-titleslug: pain-frit-chinois_9dxao10r
 ---

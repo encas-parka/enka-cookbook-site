@@ -1,7 +1,5 @@
 ---
-uuid: lvuvvf9u
 title: Gateau au pandan Bahn Bo Nuong
-titleslug: gateau-au-pandan-bahn-bo-nuong_lvuvvf9u
 draft: false
 layout: recettes
 type: dessert

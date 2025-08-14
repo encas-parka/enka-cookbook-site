@@ -5,6 +5,5 @@ allergenes:
   - Porc
 pFrais: true
 type: animaux
-uuid: db96c02e
 ---
 

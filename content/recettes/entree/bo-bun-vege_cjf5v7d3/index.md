@@ -1,7 +1,5 @@
 ---
-uuid: cjf5v7d3
 title: Bo Bun Végé
-titleslug: bo-bun-vege_cjf5v7d3
 draft: false
 layout: recettes
 type: entree

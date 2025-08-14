@@ -1,7 +1,5 @@
 ---
-uuid: 5f8innnm
 title: Pomme de terre Hérisson
-titleslug: pomme-de-terre-herisson_5f8innnm
 draft: false
 description: 1 pomme de terre par personne
 layout: recettes

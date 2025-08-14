@@ -45,7 +45,5 @@ preparation: |-
   * Ajouter le mélange à la purée de patate douce et délayer avec le lait de soja jusqu'à ce que la consistance soit bien homogène.
   * Verser dans le moule à gâteau, et placer au four préchauffé à 200° pendant 35 min au moins.
 publishDate: 2025-05-30T17:18:00.000Z
-uuid: 3b227p22
-titleslug: fondant-a-la-patate-douce-vegan-et-sans-gluten_3b227p22
 ---
 

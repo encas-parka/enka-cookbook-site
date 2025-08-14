@@ -4,6 +4,5 @@ pFrais: true
 type: animaux
 allergenes:
   - Viande
-uuid: 2876482a
 ---
 

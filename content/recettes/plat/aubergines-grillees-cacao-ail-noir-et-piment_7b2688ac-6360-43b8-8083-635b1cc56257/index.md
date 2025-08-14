@@ -54,9 +54,7 @@ saison:
   - ete
 temperature: Chaud
 title: Aubergines grillées cacao ail noir et piment
-titleslug: aubergines-grillees-cacao-ail-noir-et-piment_7b2688ac-6360-43b8-8083-635b1cc56257
 type: plat
-uuid: 7b2688ac-6360-43b8-8083-635b1cc56257
 ---
 
 

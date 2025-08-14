@@ -63,7 +63,5 @@ regime:
   - vegetarien
 temperature: Froid
 title: SOUPE FROIDE CONCOMBRE ET YAOURT
-titleslug: soupe-froide-concombre-et-yaourt_2amw0731
 type: entree
-uuid: 2amw0731
 ---

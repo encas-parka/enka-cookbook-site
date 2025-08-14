@@ -5,6 +5,5 @@ vegetarien: true
 type: lof
 allergenes:
   - Fruit à coque
-uuid: 834a1dc7
 ---
 

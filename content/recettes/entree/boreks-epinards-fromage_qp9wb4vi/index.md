@@ -64,7 +64,5 @@ regime:
   - vegetarien
 temperature: Chaud
 title: Boreks épinards fromage
-titleslug: boreks-epinards-fromage_qp9wb4vi
 type: entree
-uuid: qp9wb4vi
 ---

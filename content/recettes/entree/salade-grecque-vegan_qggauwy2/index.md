@@ -46,7 +46,5 @@ saison:
   - ete
 temperature: Froid
 title: Salade Grecque végan
-titleslug: salade-grecque-vegan_qggauwy2
 type: entree
-uuid: qggauwy2
 ---

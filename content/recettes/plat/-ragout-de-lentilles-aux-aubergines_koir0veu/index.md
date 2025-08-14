@@ -58,6 +58,4 @@ ingredients:
     commentaire: ''
 preparation: "\n\n\n* Faire cuire les lentilles ds un grand volume d'eau non salée.\n* Chauffer\n   2 c à soupe d'huile d'O ds sauteuse feu moyen vif, faire revenir ail, \n  oignon et thym + 1 peu de sel (juska ce que les oignons soient \n  fondants). Réserver.\n* Huiler,\n   saler, poivrer les aubergines coupées (2 petites aubergines coupées en rectangle d'env 5 x 2 cm (420g))+ tomates cerises avant de les \n  enfourner jusqu'à ce que le tout soit doré et fondant. En fin de cuisson\n   arroser de vin blanc et un peu d'eau pour qu'en mélangeant le tout, les\n   lentilles se réhumidifie.\n* \_Mélanger le tout + flocons de piment + origan frais (saler poivrer huiler si nécessaire)\n* Après avoir disposeé ds les plats de services, faire des \"splotch\" de yaourt grec avec une cuillère à soupe (ne pas mélanger!)"
 publishDate: 2025-05-15T16:33:00.000Z
-uuid: koir0veu
-titleslug: '-ragout-de-lentilles-aux-aubergines_koir0veu'
 ---

@@ -6,6 +6,5 @@ allergenes:
   - Soja
 pFrais: true
 type: frais
-uuid: fba4e592
 ---
 

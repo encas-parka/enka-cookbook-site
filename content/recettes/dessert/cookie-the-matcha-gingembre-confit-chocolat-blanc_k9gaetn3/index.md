@@ -64,7 +64,5 @@ preparation24h: Faire la pâte à cookie la veille si possible.
 publishDate: 2024-05-24T00:23:00.000Z
 temperature: Froid
 title: COOKIE THE MATCHA, GINGEMBRE CONFIT CHOCOLAT BLANC
-titleslug: cookie-the-matcha-gingembre-confit-chocolat-blanc_k9gaetn3
 type: dessert
-uuid: k9gaetn3
 ---

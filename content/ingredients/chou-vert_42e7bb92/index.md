@@ -5,6 +5,5 @@ saisons:
   - automne
   - hiver
 type: legumes
-uuid: 42e7bb92
 ---
 

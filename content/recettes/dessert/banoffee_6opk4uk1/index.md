@@ -84,6 +84,4 @@ preparation24h: |-
 prepAlt:
   - recetteAlt: banoffee-vegan-et-sans-gluten_hm1nmbb6
 publishDate: 2024-05-17T18:26:00.000Z
-uuid: 6opk4uk1
-titleslug: banoffee_6opk4uk1
 ---

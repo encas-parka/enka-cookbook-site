@@ -1,7 +1,5 @@
 ---
-uuid: f1yn4mof
 title: Panisse
-titleslug: panisse_f1yn4mof
 draft: false
 layout: recettes
 type: plat

@@ -95,6 +95,4 @@ preparation: |-
 
   Frites
 publishDate: 2025-06-19T11:10:00.000Z
-uuid: hy9ryxxqw2l
-titleslug: burgers-galettes-de-pomme-de-terre-et-frites_hy9ryxxqw2l
 ---

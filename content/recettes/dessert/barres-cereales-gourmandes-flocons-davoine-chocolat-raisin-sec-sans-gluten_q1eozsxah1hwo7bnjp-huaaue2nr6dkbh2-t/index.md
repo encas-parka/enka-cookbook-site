@@ -77,7 +77,5 @@ preparation: |-
   6. Hop au four pour environ 30 minutes. Ça doit bien colorer mais ça a quand même l'air pas encore cuit quand ça sort si on veut un truc moelleux. Laisse complètement refroidir dans le moule posé sur une grille (sinon ça tombera en morceaux).
   7. Quand ça sera froid et durci, tu pourras facilement démouler grâce  aux pans de papier cuisson et découper en barres ou carrés (à l’aide d’un bon couteau si c'est bien cuit). Conserve dans un récipient hermétique.
 publishDate: 2025-07-24T16:34:00.000Z
-uuid: q1eozsxah1hwo7bnjp-huaaue2nr6dkbh2-t
-titleslug: barres-cereales-gourmandes-flocons-davoine-chocolat-raisin-sec-sans-gluten_q1eozsxah1hwo7bnjp-huaaue2nr6dkbh2-t
 ---
 

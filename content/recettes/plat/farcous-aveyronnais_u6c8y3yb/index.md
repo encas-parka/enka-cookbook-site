@@ -80,7 +80,5 @@ regime:
 region: Aveyrons
 temperature: Chaud
 title: Farçous Aveyronnais
-titleslug: farcous-aveyronnais_u6c8y3yb
 type: plat
-uuid: u6c8y3yb
 ---

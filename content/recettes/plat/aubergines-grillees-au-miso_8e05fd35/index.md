@@ -65,7 +65,5 @@ saison:
   - ete
 temperature: Chaud
 title: Aubergines grillées au miso
-titleslug: aubergines-grillees-au-miso_8e05fd35
 type: plat
-uuid: 8e05fd35
 ---

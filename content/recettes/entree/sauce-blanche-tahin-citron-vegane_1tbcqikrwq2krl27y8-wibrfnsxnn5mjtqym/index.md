@@ -43,7 +43,5 @@ preparation: |-
 
   (pas encore testé... à ajuster si ça parait déconnant)
 publishDate: 2025-07-30T14:55:00.000Z
-uuid: 1tbcqikrwq2krl27y8-wibrfnsxnn5mjtqym
-titleslug: sauce-blanche-tahin-citron-vegane_1tbcqikrwq2krl27y8-wibrfnsxnn5mjtqym
 ---
 

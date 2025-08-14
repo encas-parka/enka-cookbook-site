@@ -110,6 +110,4 @@ preparation: |-
 
   Normalement on doit faire cuire le riz dans ces légumes. Mais pour plus de facilité, cuire le riz à part avec le bouillon de poulet.
 publishDate: 2025-06-01T19:06:00.000Z
-uuid: wrp32b32
-titleslug: jambalaya_wrp32b32
 ---

@@ -6,6 +6,5 @@ vegetarien: true
 type: sec
 allergenes:
   - Arachide
-uuid: e392b364
 ---
 

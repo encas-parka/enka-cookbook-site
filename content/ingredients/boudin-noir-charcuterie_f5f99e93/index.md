@@ -5,6 +5,5 @@ type: animaux
 allergenes:
   - Viande
   - Porc
-uuid: f5f99e93
 ---
 

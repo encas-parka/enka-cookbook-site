@@ -6,6 +6,5 @@ vegan: false
 type: lof
 allergenes:
   - Produit laitier
-uuid: df345131
 ---
 

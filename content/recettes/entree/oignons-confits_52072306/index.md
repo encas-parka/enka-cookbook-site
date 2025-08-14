@@ -37,7 +37,5 @@ preparation: |-
   * Si ça brule au fond, rajouter de l'eau
   * Laisser cuire jusqu'à ce que les oignons soient confits
 publishDate: 2025-07-31T08:48:00.000Z
-uuid: '52072306'
-titleslug: oignons-confits_52072306
 ---
 

@@ -5,6 +5,5 @@ allergenes:
   - Moutarde
 vegetarien: true
 type: epices
-uuid: a465da0a
 ---
 

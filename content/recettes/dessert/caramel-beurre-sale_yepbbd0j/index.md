@@ -1,7 +1,5 @@
 ---
-uuid: yepbbd0j
 title: Caramel beurre salé
-titleslug: caramel-beurre-sale_yepbbd0j
 draft: true
 description: Pour mettre sur un dessert par exemple. Consistence un peu élastique.
 layout: recettes

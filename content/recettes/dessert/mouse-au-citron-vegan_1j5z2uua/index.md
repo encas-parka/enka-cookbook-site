@@ -1,7 +1,5 @@
 ---
-uuid: 1j5z2uua
 title: Mouse au citron vegan
-titleslug: mouse-au-citron-vegan_1j5z2uua
 draft: false
 layout: recettes
 type: dessert

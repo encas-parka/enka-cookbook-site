@@ -49,7 +49,5 @@ regime:
   - sans-lactose
 temperature: Froid
 title: Betteraves fermentées
-titleslug: betteraves-fermentees_tmtybxnr
 type: entree
-uuid: tmtybxnr
 ---

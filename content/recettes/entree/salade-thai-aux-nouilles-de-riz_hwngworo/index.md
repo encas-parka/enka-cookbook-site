@@ -1,7 +1,5 @@
 ---
-uuid: hwngworo
 title: Salade thaï aux nouilles de riz
-titleslug: salade-thai-aux-nouilles-de-riz_hwngworo
 draft: false
 layout: recettes
 type: entree

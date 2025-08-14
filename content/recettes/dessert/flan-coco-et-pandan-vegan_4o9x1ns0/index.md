@@ -1,7 +1,5 @@
 ---
-uuid: 4o9x1ns0
 title: Flan coco et pandan (végan)
-titleslug: flan-coco-et-pandan-vegan_4o9x1ns0
 draft: false
 layout: recettes
 type: dessert

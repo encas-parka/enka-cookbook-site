@@ -64,6 +64,4 @@ ingredients:
     commentaire: ''
 preparation: "\n A ABSOLUMENT FAIRE LA VEILLE\n\n\n      \n\n\n  \n\n\n        \n\n\n  \n\n\n  \n\nEAU VIOLETTE :\n\nDans une grosse gamelle, faire blanchir à l'eau les choux rouges tronçonnés en gros morceaux.\n\nQuand l'eau est violette foncée, stopper la cuisson. Garder cette eau, elle servira de colorant bleu pour le chou blanc.\n\nSortir les choux, laisser refroidir.\n\nCHOU ROUGE:\n\nEmincer les choux blanchis ainsi que les oignons. Emincer l'ail.\n\nFaire griller les épices.\n\nDans les grands woks, faire d'abord fondre les oignons.\n\nEnsuite\_verser les épices, l'ail et le chou. Faire bien revenir.\n\nAjouter le sucre et le vinaigre. Saler, poivrer. Laisser confire au moins 30min en remuant fréquemment.\n\nAjouter la gelée de groseille, laisser cuire encore.\n\nRectifier l'assaisonnement.\n\nServir chaud ou froid.\n\nCHOU BLEU:\n\nEmincer finement le chou blanc.\n\nTransformer l'eau violette en bleue en ajoutant quelques cuillères de bicarbonnate de soude.\n\nLaisser macérer les choux blancs dans l'eau bleue au minimum 12h au frais.\n\n\\"
 publishDate: 2025-06-02T18:31:00.000Z
-uuid: b0vb19mp
-titleslug: chou-bleu-chou-rouge_b0vb19mp
 ---

@@ -6,6 +6,5 @@ vegan: true
 type: lof
 allergenes:
   - Soja
-uuid: f077bf9e
 ---
 

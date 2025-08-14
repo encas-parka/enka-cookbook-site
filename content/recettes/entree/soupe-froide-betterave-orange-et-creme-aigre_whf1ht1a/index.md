@@ -1,7 +1,5 @@
 ---
-uuid: whf1ht1a
 title: SOUPE FROIDE BETTERAVE, ORANGE ET CREME AIGRE
-titleslug: soupe-froide-betterave-orange-et-creme-aigre_whf1ht1a
 draft: false
 layout: recettes
 type: entree

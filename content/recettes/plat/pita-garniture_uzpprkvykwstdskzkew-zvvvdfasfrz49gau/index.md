@@ -75,7 +75,5 @@ ingredients:
     commentaire: sauce
 preparation: ...
 publishDate: 2025-06-27T12:45:00.000Z
-uuid: uzpprkvykwstdskzkew-zvvvdfasfrz49gau
-titleslug: pita-garniture_uzpprkvykwstdskzkew-zvvvdfasfrz49gau
 ---
 

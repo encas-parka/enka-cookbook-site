@@ -1,7 +1,5 @@
 ---
-uuid: fg4lgtvf
 title: TOM KHA SOUPE THAÏ
-titleslug: tom-kha-soupe-thai_fg4lgtvf
 draft: false
 img: https://recipecontent.fooby.ch/22054_3-2_1560-1040.jpg
 description: 'Le Tom Kha est une  soupe thaïlandaise préparée principalement avec du lait de coco et du Galanga, c’est un bouillon au goût citronné mais pas acide. Tom Kha (en thaï : ต้มข่า) veut dire soupe de galanga , Tom = Bouillon et Kha = Galanga.'

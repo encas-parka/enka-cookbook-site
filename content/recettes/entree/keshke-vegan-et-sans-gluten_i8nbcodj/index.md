@@ -58,9 +58,7 @@ regime:
   - sans-gluten
 temperature: Froid
 title: Keshke vegan et sans gluten
-titleslug: keshke-vegan-et-sans-gluten_i8nbcodj
 type: entree
-uuid: i8nbcodj
 ---
 
 

@@ -48,7 +48,5 @@ regime:
   - vegetarien
 temperature: Froid
 title: Houmous
-titleslug: houmous_4b72qxc8
 type: entree
-uuid: 4b72qxc8
 ---

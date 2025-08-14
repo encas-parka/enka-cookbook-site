@@ -47,9 +47,7 @@ regime:
   - sans-lactose
 temperature: Froid
 title: Purée de haricots blancs
-titleslug: puree-de-haricots-blancs_e0ep6btu
 type: plat
-uuid: e0ep6btu
 ---
 
 

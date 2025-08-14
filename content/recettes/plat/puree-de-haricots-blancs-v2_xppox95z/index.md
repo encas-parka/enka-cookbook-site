@@ -38,7 +38,5 @@ regime:
   - sans-lactose
 temperature: Chaud
 title: Purée de Haricots Blancs (v2)
-titleslug: puree-de-haricots-blancs-v2_xppox95z
 type: plat
-uuid: xppox95z
 ---

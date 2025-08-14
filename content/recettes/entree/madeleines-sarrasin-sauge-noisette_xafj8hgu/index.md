@@ -79,9 +79,7 @@ regime:
   - vegetarien
 temperature: Froid
 title: Madeleines sarrasin sauge noisette
-titleslug: madeleines-sarrasin-sauge-noisette_xafj8hgu
 type: entree
-uuid: xafj8hgu
 ---
 
 

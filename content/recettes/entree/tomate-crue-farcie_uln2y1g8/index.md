@@ -1,7 +1,5 @@
 ---
-uuid: uln2y1g8
 title: Tomate crue farcie
-titleslug: tomate-crue-farcie_uln2y1g8
 draft: false
 layout: recettes
 type: entree

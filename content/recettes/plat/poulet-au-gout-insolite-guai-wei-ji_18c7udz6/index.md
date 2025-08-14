@@ -161,6 +161,4 @@ preparation: |-
 
   Bol de 25cl par personne.
 publishDate: 2024-06-16T22:24:00.000Z
-uuid: 18c7udz6
-titleslug: poulet-au-gout-insolite-guai-wei-ji_18c7udz6
 ---

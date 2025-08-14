@@ -115,6 +115,4 @@ materiel:
 preparation: "**Preparation des Fafafels**\n\n\\- Mixer les Pois chiches égouttés, mis à trempé 24h avant.\n\n\\- Hacher ou mixer 500g D’ail\n\n\\- Mixer finement les Oignons\n\n\\- Hacher 8 Bouquets de Persil\n\nMélanger tous ces ingrédients puis\_:\n\n\\- Concasser les Graines de Cumin, de Coriandre et les piments.\n\nAjouter à la préparation avec \n\n\\- Sésame, Paprika et Bicarbonate. \n\nSaler Poivrer.\n\n**Légumes au four**\n\n\\- Couper les courgettes \n\n\\- Hacher l’ail finement\n\n\\- Mettre courgettes, ail haché, huile d’olive, sel, poivre dans des gastros. \n\n\\- Cuire au four 180° 1h environ."
 preparation24h: Faire tremper les pois chiches 24h avant minimum
 publishDate: 2024-06-06T11:25:00.000Z
-uuid: s66nkdu0
-titleslug: pita-falafel_s66nkdu0
 ---

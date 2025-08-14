@@ -82,7 +82,5 @@ regime:
 region: Aveyrons
 temperature: Chaud
 title: Farçous Aveyronnais (Végan et sans gluten)
-titleslug: farcous-aveyronnais-vegan-et-sans-gluten_lekbbcho
 type: plat
-uuid: lekbbcho
 ---

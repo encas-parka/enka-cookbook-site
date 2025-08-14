@@ -201,6 +201,4 @@ preparation24h: |-
 astuces:
   - astuce: A la place de la Sauce Soja, j'ai proposé de la Sauce Tamari pour les histoires de gluten. A la place du Mirin, j'ai proposé  du Vinaigre de Riz + Sucre dans le Taré pour les histoires d'alcool.
 publishDate: 2024-09-04T21:09:00.000Z
-uuid: 9rqsh0k2
-titleslug: '-ramen-shoyu-dete_9rqsh0k2'
 ---

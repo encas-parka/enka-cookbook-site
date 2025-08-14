@@ -46,7 +46,6 @@ ingredients:
     quantite: 1
     unit: c. à soupe
     commentaire: ''
-uuid: 85eb86d3
 ---
 
 

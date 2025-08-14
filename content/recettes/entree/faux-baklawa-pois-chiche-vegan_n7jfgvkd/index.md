@@ -84,7 +84,5 @@ regime:
   - sans-lactose
 temperature: Chaud
 title: Faux baklawa pois chiche végan
-titleslug: faux-baklawa-pois-chiche-vegan_n7jfgvkd
 type: entree
-uuid: n7jfgvkd
 ---

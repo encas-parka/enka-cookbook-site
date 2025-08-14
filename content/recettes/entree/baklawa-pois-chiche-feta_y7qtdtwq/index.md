@@ -105,7 +105,5 @@ regime:
   - vegetarien
 temperature: Chaud
 title: Baklawa pois chiche feta
-titleslug: baklawa-pois-chiche-feta_y7qtdtwq
 type: entree
-uuid: y7qtdtwq
 ---

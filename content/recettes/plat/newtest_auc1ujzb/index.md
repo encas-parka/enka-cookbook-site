@@ -40,7 +40,5 @@ materiel:
 preparation: test
 preparation24h: ''
 publishDate: 2025-04-07T10:30:00.000Z
-uuid: auc1ujzb
-titleslug: newtest_auc1ujzb
 ---
 

@@ -1,7 +1,5 @@
 ---
-uuid: 98u96rcj
 title: Risotto à l'ail et à la menthe
-titleslug: risotto-a-lail-et-a-la-menthe_98u96rcj
 draft: false
 layout: recettes
 type: plat

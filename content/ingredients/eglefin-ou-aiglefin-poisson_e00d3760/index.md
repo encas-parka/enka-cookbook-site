@@ -4,6 +4,5 @@ pFrais: true
 type: animaux
 allergenes:
   - Poisson
-uuid: e00d3760
 ---
 

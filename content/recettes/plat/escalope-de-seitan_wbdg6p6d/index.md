@@ -71,6 +71,4 @@ preparation: |-
 
   Il est aussi possible de les mettre dans une friteuse pendant 1 min.
 publishDate: 2025-06-12T10:12:00.000Z
-uuid: wbdg6p6d
-titleslug: escalope-de-seitan_wbdg6p6d
 ---

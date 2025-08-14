@@ -7,6 +7,5 @@ vegan: false
 type: frais
 allergenes:
   - Produit laitier
-uuid: bcc41064
 ---
 

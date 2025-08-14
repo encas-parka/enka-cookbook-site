@@ -5,6 +5,5 @@ pFrais: true
 type: frais
 allergenes:
   - Produit laitier
-uuid: dcd0674a
 ---
 

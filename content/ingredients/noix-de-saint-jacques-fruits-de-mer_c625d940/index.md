@@ -4,6 +4,5 @@ allergenes:
   - Mollusque
 pFrais: true
 type: animaux
-uuid: c625d940
 ---
 

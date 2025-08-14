@@ -90,7 +90,5 @@ preparation: |-
 
   \
 publishDate: 2025-06-17T19:05:00.000Z
-uuid: w5tmbjl3
-titleslug: qiza_w5tmbjl3
 ---
 

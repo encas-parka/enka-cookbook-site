@@ -130,6 +130,4 @@ preparation24h: "**LE DASHI\_:**\n\n\n*Le dashi est un bouillon japonais qui est
 astuces:
   - astuce: A la place de la Sauce Soja, on peut remplacerr par de la Sauce Tamari pour les histoires de gluten. A la place du Mirin, j'ai proposé  du Vinaigre de Riz + Sucre dans le Taré pour les histoires d'alcool.
 publishDate: 2025-05-04T17:10:00.000Z
-uuid: bizthf3y
-titleslug: shoyu-ramen-dhiver_bizthf3y
 ---

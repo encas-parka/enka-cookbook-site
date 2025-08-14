@@ -1,7 +1,5 @@
 ---
-uuid: h00h93yw
 title: Salade Thaï à la mangue
-titleslug: salade-thai-a-la-mangue_h00h93yw
 draft: false
 layout: recettes
 type: entree

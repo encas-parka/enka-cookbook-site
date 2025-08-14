@@ -6,6 +6,5 @@ allergenes:
 vegan: true
 vegetarien: true
 type: epices
-uuid: da8d039c
 ---
 

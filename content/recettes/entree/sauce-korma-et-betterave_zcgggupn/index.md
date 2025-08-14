@@ -61,6 +61,4 @@ ingredients:
     commentaire: gousses
 preparation: "Faire une pâte d'oignon en les hachant finement. Puis les faire sauter à la poêle et réduire en purée.\n\nFaire\n chauffer de l'huile dans une casserole, ajouter les gousses de \ncardamome, ajouter la pâte d'oignon, le piment vert haché, les feuilles \nde curry et continuer à faire sauter pendant 3 à 5 minutes.\n\nFouetter\n ensemble le lait de coco, la crème, le yaourt, la pâte de noix de cajou\n et le garam masala, puis les ajouter dans la poêle avec du sel au goût \net laisser mijoter à découvert pendant 10 à 12 minutes jusqu'à \népaississement.\_\n\nAjouter la purée de betterave.\n\nAjouter de l'eau si nécessaire, pour assouplir la sauce.\n\n\_Ajouter la poudre de macis de cardamome et rectifiez le sel si nécessaire.\_\n\nServir chaud.\n\n\\"
 publishDate: 2025-06-02T17:53:00.000Z
-uuid: zcgggupn
-titleslug: sauce-korma-et-betterave_zcgggupn
 ---

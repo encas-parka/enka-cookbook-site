@@ -54,7 +54,5 @@ regime:
   - vegetarien
 temperature: Chaud
 title: Tourte Betterave et feta
-titleslug: tourte-betterave-et-feta_eivoui8a
 type: entree
-uuid: eivoui8a
 ---

@@ -1,7 +1,5 @@
 ---
-uuid: rjvdp3kx
 title: Chorba à  l'agneau (ou mouton)
-titleslug: chorba-a-lagneau-ou-mouton_rjvdp3kx
 draft: false
 layout: recettes
 img: https://img.cuisineaz.com/660x660/2016-07-15/i7543-chorba-a-l-agneau.jpeg

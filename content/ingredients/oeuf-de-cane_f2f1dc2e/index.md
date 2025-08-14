@@ -5,6 +5,5 @@ allergenes:
 vegetarien: true
 vegan: false
 type: lof
-uuid: f2f1dc2e
 ---
 

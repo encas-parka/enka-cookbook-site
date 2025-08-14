@@ -49,6 +49,4 @@ preparation: |-
   Vinaigrette inutile. Voilà! Servir bien frais.
 preparation24h: "Laver les aubergines. Les couper en cubes d'1cm. Les faire cuire avec un peu d'huile dans les gros wok.\n\n(ne pas hésiter à égoutter/retirer le surplus de liquide)\n\nPendant ce temps, râper au robot l'ail et un quart des\_tomates.\n\nLes verser dans les aubergines toujours sur le feux.\_\n\nY ajouter\_sel, poivre, huile d'olive.\n\nFaire cuire\_en remuant bien."
 publishDate: 2025-05-30T20:24:00.000Z
-uuid: ldk5eemc
-titleslug: salade-daubergine-froide_ldk5eemc
 ---

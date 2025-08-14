@@ -65,6 +65,4 @@ preparation: |-
 prepAlt:
   - recetteAlt: pao-de-qeijo_0rq586k4
 publishDate: 2024-06-18T11:51:00.000Z
-uuid: o52n8vlf
-titleslug: pao-sin-queijo-version-vegane_o52n8vlf
 ---

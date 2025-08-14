@@ -64,7 +64,5 @@ publishDate: 2024-05-23T00:01:00.000Z
 region: Portugal
 temperature: Froid
 title: QUEIJADAS DE FEIJAO
-titleslug: queijadas-de-feijao_nwaputnv
 type: dessert
-uuid: nwaputnv
 ---

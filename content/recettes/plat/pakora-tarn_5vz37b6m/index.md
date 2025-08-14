@@ -1,7 +1,5 @@
 ---
-uuid: 5vz37b6m
 title: Pakora (tarn)
-titleslug: pakora-tarn_5vz37b6m
 draft: true
 layout: recettes
 type: plat

@@ -41,8 +41,6 @@ regime:
   - sans-lactose
 temperature: Froid
 title: Crème Végan au sureau
-titleslug: creme-vegan-au-sureau_gqbis76w
 type: dessert
-uuid: gqbis76w
 ---
 

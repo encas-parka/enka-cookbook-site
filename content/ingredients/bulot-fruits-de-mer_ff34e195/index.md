@@ -4,6 +4,5 @@ pFrais: true
 type: animaux
 allergenes:
   - Mollusque
-uuid: ff34e195
 ---
 

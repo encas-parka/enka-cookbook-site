@@ -1,7 +1,5 @@
 ---
-uuid: iv7dktme
 title: Gaspacho
-titleslug: gaspacho_iv7dktme
 draft: false
 layout: recettes
 type: entree

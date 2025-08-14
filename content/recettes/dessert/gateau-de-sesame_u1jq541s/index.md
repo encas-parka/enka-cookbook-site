@@ -54,7 +54,5 @@ regime:
   - vegetarien
 temperature: Chaud
 title: 'Gateau de sésame '
-titleslug: gateau-de-sesame_u1jq541s
 type: dessert
-uuid: u1jq541s
 ---

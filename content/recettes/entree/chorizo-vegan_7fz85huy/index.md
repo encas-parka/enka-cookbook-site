@@ -1,7 +1,5 @@
 ---
-uuid: 7fz85huy
 title: CHORIZO VEGAN
-titleslug: chorizo-vegan_7fz85huy
 draft: false
 layout: recettes
 type: entree

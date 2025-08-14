@@ -5,6 +5,5 @@ allergenes:
 vegan: true
 vegetarien: true
 type: sec
-uuid: 611d5ac1
 ---
 

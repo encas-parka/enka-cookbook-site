@@ -6,6 +6,5 @@ allergenes:
   - Produit laitier
   - Sésame
   - Oeuf
-uuid: b2b25254
 ---
 

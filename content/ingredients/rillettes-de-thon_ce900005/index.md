@@ -4,6 +4,5 @@ allergenes:
   - Poisson
 pFrais: true
 type: animaux
-uuid: ce900005
 ---
 

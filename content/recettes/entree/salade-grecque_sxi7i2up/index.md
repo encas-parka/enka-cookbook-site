@@ -48,7 +48,5 @@ saison:
   - ete
 temperature: Froid
 title: Salade Grecque
-titleslug: salade-grecque_sxi7i2up
 type: entree
-uuid: sxi7i2up
 ---

@@ -57,7 +57,5 @@ regime:
 region: ''
 temperature: Froid
 title: Tarte au chocolat sans cuisson végan et sans gluten
-titleslug: tarte-au-chocolat-sans-cuisson-vegan-et-sans-gluten_bycnh0x3
 type: dessert
-uuid: bycnh0x3
 ---

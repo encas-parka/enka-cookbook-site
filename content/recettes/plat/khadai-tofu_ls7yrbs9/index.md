@@ -73,6 +73,4 @@ ingredients:
     commentaire: ''
 preparation: "### Préparation\n\nChauffer un peu d’huile dans le grand wok. Quand l’huile est chaude, mettre le cumin et l’oignon haché.\n\nQuand les oignons sont dorés, mettre les épices : le curcuma, le curry, \nle paprika, la poudre préalablement préparée, l’ail et le gingembre et \nmélanger.\n\nAjouter la purée de tomates et mélanger.\n\nMettre les autres oignons, les\_ poivrons coupés en morceaux\_ et bien mélanger.\n\nSaler et verser environ 1L d’eau, mélanger.\n\nCouvrir et laisser cuire à feu moyen en mélangeant et en ajoutant un peu\n d’eau de temps en temps. Les poivrons doivent être fondants.\n\nAjouter le tofu coupé en cube et grillé ou frit au préalable dans une poêle et mélanger.\n\nMettre les feuilles de fenugrec en les écrasant, en laissant de côté les brindilles.\n\nAjouter un peu d'eau, mélanger et laisser cuire 5/10 minutes et c’est prêt.\n\n\\"
 publishDate: 2025-06-02T17:33:00.000Z
-uuid: ls7yrbs9
-titleslug: khadai-tofu_ls7yrbs9
 ---

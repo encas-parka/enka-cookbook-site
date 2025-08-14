@@ -1,7 +1,5 @@
 ---
-uuid: 4malfqei
 title: Tartinade salé à la chataigne (végan)
-titleslug: tartinade-sale-a-la-chataigne-vegan_4malfqei
 draft: false
 layout: recettes
 type: entree

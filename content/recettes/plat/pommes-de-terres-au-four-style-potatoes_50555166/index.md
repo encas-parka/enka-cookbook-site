@@ -38,7 +38,5 @@ preparation: |-
   * Les sécher et les mettre dans des gastros en couche la plus fine possible, brasser avec l'huile et l'assaisonnement
   * Cuire à 180-200°C pendant 30-50 minutes en remuant les patates à mi cuisson
 publishDate: 2025-07-31T08:43:00.000Z
-uuid: '50555166'
-titleslug: pommes-de-terres-au-four-style-potatoes_50555166
 ---
 

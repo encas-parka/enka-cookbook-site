@@ -71,6 +71,4 @@ ingredients:
     commentaire: ''
 preparation: "faire gonfler le boulgour :\n\n* 400 g de boulgour fin + volume équivalent en eau chaude salée (pour le faire gonfler)\n* 12 cl huile d'O\n* 1 c à soupe de concentré de tomate\n* 1 c à soupe de pate de poivron et tomate (achat ds magasin de produits exotiques)\n* 1 oignon haché\n* 1 poivron haché\n* 1 c à café de sel\_ / de poivre / de paprika / de cumin poudre /\_\n* le zeste d'1 citron\n* 1/2 bottes de cébettes\n* 1 tomate\n* 1/2 botte de persil plat\n* jus du citron\n* 1 c à soupe de mélasse de grenade\n* 1 c à café de sumac / de menthe séchée\n* MELANGER LE BOULGOUR, LA PREPARATION CUITE, ET LA PREPARATION CRUE, SALER POIVRER HUILER SI BESOIN\n\nfaire revenir :dans un autre contenant couper e mélanger :\n1/2 bottes de cébettes\n\n* 1 tomate\n\n* 1/2 botte de persil plat\n\n* jus du citron\n\n* 1 c à soupe de mélasse de grenade\n\n* 1 c à café de sumac / de menthe séchée\n\n* MELANGER LE BOULGOUR, LA PREPARATION CUITE, ET LA PREPARATION CRUE, SALER POIVRER HUILER SI BESOIN"
 publishDate: 2025-05-14T08:59:00.000Z
-uuid: a22kchi1
-titleslug: taboule-armenien_a22kchi1
 ---

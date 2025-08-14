@@ -53,6 +53,4 @@ preparation: |-
   Farcir les panzerotti et les faire frire immédiatement pour que 
   l’humidité ne casse pas la pâte. Les déguster bien chauds.
 publishDate: 2025-05-30T16:22:00.000Z
-uuid: 60s9q9d4
-titleslug: panzerotti_60s9q9d4
 ---

@@ -199,14 +199,14 @@ collections:
         label_singular: "Ingrédient"
         required: false
         collapsed: true
-        summary: "{{fields.title}}: {{fields.quantite}} {{fields.unit}}"
+        summary: "{{fields.ingredient}}: {{fields.quantite}} {{fields.unit}}"
         fields:
           - label: "Ingrédient"
-            name: title
+            name: ingredient
             widget: "relation"
             collection: "ingredients_index"
             search_fields: ["title"]
-            value_field: "slug"
+            value_field: ["slug"]
             display_fields: ["title"]
           - label: "Quantité (nombre)"
             name: quantite
@@ -279,7 +279,7 @@ collections:
               widget: "relation",
               collection: "recettes",
               search_fields: ["title"],
-              value_field: "slug",
+              value_field: ["slug"],
               display_fields: ["title"],
             }
 
@@ -376,10 +376,9 @@ collections:
                 name: "recette"
                 widget: "relation"
                 collection: "recettes"
-                value_field: "slug"
+                value_field: ["slug"]
                 search_fields: ["title"]
                 display_fields: ["title"]
-                options_length: 1000
 
               - label: "Entrées/Plats/Desserts ?"
                 name: "type_plat"
@@ -489,7 +488,7 @@ collections:
     folder: "content/ingredients"
     create: true
     path: "{{slug}}/index"
-    slug: "{{title}}_{{uuid_shorter}}"
+    slug: "{{title}}_{{uuid_short}}"
     fields:
       - { label: "Nom de l'ingrédient", name: "title", widget: "string" }
       - label: "Type d'ingrédient"

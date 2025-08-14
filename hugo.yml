@@ -173,4 +173,5 @@ module:
     min: "0.142.0"
   imports:
     - path: "github.com/encas-parka/hugo-cookbook-theme"
+      version: "ing-mergerd-migration"
       disable: false

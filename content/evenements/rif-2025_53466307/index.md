@@ -49,7 +49,7 @@ repas:
         altAssiettes: 20
       - recette: barres-cereales-dessert-gourmandes_excdwt3fhnymaugge4hzbravklsbmguv_j82
         type_plat: dessert
-        altAssiettes: 130
+        altAssiettes: 100
   - assiettes: 120
     date_service: 2025-08-24
     horaire: midi

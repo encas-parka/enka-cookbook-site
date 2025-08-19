@@ -37,6 +37,7 @@ outputs:
   page:
     - HTML
 
+
 mediaTypes:
   application/json:
     suffixes:
@@ -47,9 +48,16 @@ mediaTypes:
     delimiter: ""
 
 outputFormats:
+
   Poster:
     mediaType: "text/html"
     baseName: "poster/index"
+    isHTML: true
+    permalinkable: true
+
+  Menus:
+    mediaType: "text/html"
+    baseName: "menus/index"
     isHTML: true
     permalinkable: true
 
@@ -76,6 +84,8 @@ outputFormats:
     baseName: _redirects
     isPlainText: true
     notAlternative: true
+    permalinkable: false
+    isHTML: false
 
   HEADERS:
     mediatype: text/netlify
@@ -91,23 +101,10 @@ sitemap:
   changefreq: monthly
   filename: sitemap.xml
   priority: 0.5
-taxonomies:
-  category: categories
-  regime: regime
-  auteur: auteur
-  region: region
+
 permalinks:
   blog: /:title/
 
-related:
-  threshold: 80
-  includeNewer: true
-  toLower: false
-  indices:
-    - name: categories
-      weight: 100
-    - name: date
-      weight: 10
 
 # Opengraph
 ogLocale: fr
@@ -125,9 +122,7 @@ schemaLogoHeight: 512
 schemaImage: cover.png
 schemaImageWidth: 1280
 schemaImageHeight: 640
-schemaTwitter: ""
-schemaLinkedIn: ""
-schemaGitHub: ""
+
 
 # Images
 themeColor: "#fff"
@@ -149,8 +144,6 @@ smallLimit: "320"
 defaultImage: default-image.png
 fillImage: 1280x720 Center
 
-footer: Powered by <a href="https://www.netlify.com/">Netlify</a>, <a href="https://gohugo.io/">Hugo</a>, and <a href="https://gethyas.com/">Hyas</a>
-copyRight: ""
 
 markup:
   goldmark:
@@ -173,5 +166,5 @@ module:
     min: "0.142.0"
   imports:
     - path: "github.com/encas-parka/hugo-cookbook-theme"
-      version: "ing-mergerd-migration"
+      version: "ing-mergerd-migration" # for development and test
       disable: false

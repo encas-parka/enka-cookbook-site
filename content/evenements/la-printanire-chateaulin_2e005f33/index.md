@@ -1,11 +1,7 @@
 ---
 title: La printanière - Chateaulin
 sitemap_exclude: 'true'
-outputs:
-  - IngredientsJSON
-  - HTML
-  - Poster
-  - Ingredients
+
 repas:
   - assiettes: 50
     date_service: 2024-03-20T00:00:00.000Z
@@ -31,4 +27,3 @@ repas:
         commentaire: 2 à 3 bâtonnets par personne
 uuid: 2e005f33
 ---
-

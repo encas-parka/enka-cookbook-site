@@ -64,16 +64,3 @@ Sorties Hugo
 Conventions contenu
 - Chaque entrée est un dossier avec index.md. Recettes sous content/recettes/{entree|plat|dessert}/{slug}/index.md. Évènements sous content/evenements/{slug}/index.md. Ingrédients sous content/ingredients/{slug}/index.md.
 - Les relations utilisent soit title soit slug selon la config CMS; dans le site, préférer les slugs uniques (title_uuid) pour éviter collisions.
-
-Authentification Appwrite
-- Service d'authentification: Appwrite (cloud.appwrite.io) avec Project ID: 689725820024e81781b7
-- Page de connexion: /login avec formulaire email/mot de passe et gestion de session
-- Fonctions Appwrite existantes:
-  * cms-auth-function (ID: 68976500002eb5c6ee4f): génère token CMS pour utilisateurs authentifiés
-  * send-access-request (ID: 689cdea5001a4d74549d): envoie emails de demande d'accès aux admins
-  * invite: gestion des invitations et création de memberships d'équipe
-- Stockage local: localStorage pour 'sveltia-cms.user', 'appwrite-user-email', 'is-authenticated'
-- SDK: Appwrite Web SDK chargé via CDN sur page /login; node-appwrite pour fonctions serveur
-- Flux: Connexion Appwrite → Vérification session → Appel fonction cms-auth → Stockage token CMS → Accès Sveltia CMS
-- Page d'inscription: /registration (existante mais non implémentée)
-- Pages liées: /accept-invitation (traitement invitations), /invitation (création invitations)

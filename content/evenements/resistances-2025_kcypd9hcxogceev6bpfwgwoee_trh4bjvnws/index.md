@@ -1,10 +1,6 @@
 ---
 title: RésistanceS 2025
-outputs:
-  - IngredientsJSON
-  - HTML
-  - Poster
-  - Ingredients
+
 sitemap_exclude: "true"
 repas:
   - assiettes: 120

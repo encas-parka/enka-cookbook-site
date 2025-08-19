@@ -53,11 +53,6 @@ repas:
         altAssiettes: 25
       - recette: tarte-au-chocolat-sans-cuisson_matyge19
         type_plat: dessert
-outputs:
-  - IngredientsJSON
-  - HTML
-  - Poster
-  - Ingredients
+
 uuid: 6Q6NvkpGwTyKczBjnIWzK
 ---
-

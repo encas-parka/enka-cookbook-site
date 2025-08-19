@@ -1,6 +1,6 @@
 ---
 title: Amande
-type: sec^
+type: sec
 allergenes:
   - Fruit à coque
 ---

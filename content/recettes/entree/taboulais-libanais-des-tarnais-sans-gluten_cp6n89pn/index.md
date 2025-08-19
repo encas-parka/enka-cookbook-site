@@ -20,36 +20,40 @@ plate: 15
 check: Oui
 checkAlwaysOk: false
 ingredients:
-  legumes:
-    - title: Oignon
-      quantite: 250
-      unit: grammes
-    - title: Tomate
-      quantite: 1.2
-      unit: Kg
-  lof:
-    - title: huile d'olive
-      quantite: 250
-      unit: ml
-  sec:
-    - title: Quinoa blanc
-      quantite: 150
-      unit: grammes
-  epices:
-    - title: Poivre
-    - title: Sel
-      quantite: ""
-      unit: null
-    - title: Menthe
-      quantite: 4
-      unit: bottes
-    - title: Persil frais
-      quantite: 9
-      unit: bottes
-  sucres:
-    - title: Jus de citron
-      quantite: 150
-      unit: ml
+  - ingredient: oignon_rtavky
+    quantite: 250
+    unit: grammes
+    commentaire: ''
+  - ingredient: tomate_ibtbnq
+    quantite: 1.2
+    unit: Kg
+    commentaire: ''
+  - ingredient: huile-dolive_h3c8al
+    quantite: 250
+    unit: ml
+    commentaire: ''
+  - ingredient: quinoa-blanc_csxn1a
+    quantite: 150
+    unit: grammes
+    commentaire: ''
+  - ingredient: poivre_2pps90
+    commentaire: ''
+  - ingredient: sel_2juq3x
+    quantite: ''
+    unit: null
+    commentaire: ''
+  - ingredient: menthe_2j9y2v
+    quantite: 4
+    unit: bottes
+    commentaire: ''
+  - ingredient: persil-frais_hgfa4e
+    quantite: 9
+    unit: bottes
+    commentaire: ''
+  - ingredient: jus-de-citron_e4mjd1
+    quantite: 150
+    unit: ml
+    commentaire: ''
 preparation: |-
   * Précuire le quinoa ou le millet dans l'eau bouillante.
   * Lavez le persil et hachez le finement.

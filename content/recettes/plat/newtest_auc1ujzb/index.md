@@ -16,14 +16,14 @@ plate: 100
 check: Non
 checkAlwaysOk: false
 ingredients:
-  sec:
-    - title: Cacahuète
-      quantite: 1.1
-      unit: unité
-  animaux:
-    - title: Anguille (poisson)
-      quantite: 1.1
-      unit: grammes
+  - ingredient: cacahuete_73ikep
+    quantite: 1.1
+    unit: unité
+    commentaire: ''
+  - ingredient: anguille-poisson_1g26bd
+    quantite: 1.1
+    unit: grammes
+    commentaire: ''
 materiel:
   - Friteuse
   - Gastro 1/3

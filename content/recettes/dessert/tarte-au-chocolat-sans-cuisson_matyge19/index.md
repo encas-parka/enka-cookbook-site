@@ -1,63 +1,62 @@
 ---
 auteur: AdL
 categories:
-- Tarte (sucrée)
+  - Tarte (sucrée)
 check: Oui
 checkAlwaysOk: false
 cuisson: Non
 draft: false
 ingredients:
-  lof:
-  - quantite: 100
-    title: huile de tournesol
+  - ingredient: huile-de-tournesol_c70jxb
+    quantite: 100
     unit: ml
-  - quantite: 500
-    title: Crème soja
+    commentaire: ''
+  - ingredient: creme-soja_chfwwq
+    quantite: 500
     unit: ml
-  - quantite: 150
-    title: huile de coco
+    commentaire: ''
+  - ingredient: huile-de-coco_6bm4lq
+    quantite: 150
     unit: ml
-  sec:
-  - quantite: 300
-    title: Flocons d'avoine
+    commentaire: ''
+  - ingredient: flocons-davoine_ovewgk
+    quantite: 300
     unit: grammes
-  sucres:
-  - quantite: 40
-    title: Glucose
+    commentaire: ''
+  - ingredient: glucose_lm7zqh
+    quantite: 40
     unit: grammes
-  - quantite: 500
-    title: Chocolat noir
+    commentaire: ''
+  - ingredient: chocolat-noir_cr4kiz
+    quantite: 500
     unit: grammes
-  - quantite: 200
-    title: Biscuit Petit Brun
+    commentaire: ''
+  - ingredient: biscuit-petit-brun_i5hlq1
+    quantite: 200
     unit: grammes
-  - quantite: 200
-    title: Speculoos
+    commentaire: ''
+  - ingredient: speculoos_h6thsp
+    quantite: 200
     unit: grammes
+    commentaire: ''
 layout: recettes
 materiel:
-- Gastro 1/1 (Fins)
+  - Gastro 1/1 (Fins)
 plate: 24
-preparation: '## Biscuit :
-
+preparation: |-
+  ## Biscuit :
 
   * Faire griller les flocons d’avoine dans un poêle à sec.
-
-  * Réduire les spéculoos et petit bruns en poudre puis les mélanger avec les flocons
-  d’avoine. Enfin, ajouter l’huile coco fondue.
-
+  * Réduire les spéculoos et petit bruns en poudre puis les mélanger avec les flocons d’avoine. Enfin, ajouter l’huile coco fondue.
   * Bien tasser le mélange au fond des moule et réserver au frais au moins une heure.
-
 
   ## Appareil :
 
-
   * Faire chauffer huile, crème soja et glucose. Verser sur chocolat concassé.
-
-  *  Pour démouler, poser le plat cinq seconde dans un bain marie.'
-publishDate: 2024-04-22 10:22:00+00:00
+  *  Pour démouler, poser le plat cinq seconde dans un bain marie.
+publishDate: 2024-04-22T10:22:00.000Z
 regime:
-- vegan
+  - vegan
 temperature: Froid
 title: Tarte au chocolat sans cuisson
 type: dessert

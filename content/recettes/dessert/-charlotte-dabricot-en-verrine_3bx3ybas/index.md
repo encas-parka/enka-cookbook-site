@@ -1,5 +1,5 @@
 ---
-title: "charlotte d'abricot en verrine "
+title: 'charlotte d''abricot en verrine '
 draft: false
 layout: recettes
 type: dessert
@@ -15,31 +15,34 @@ plate: 100
 check: Oui
 checkAlwaysOk: false
 ingredients:
-  legumes:
-    - title: Abricot
-      quantite: 12
-      unit: Kg
-  sucres:
-    - title: boudoir
-      quantite: 100
-      unit: unité
-    - title: vanille extrait concentré
-      quantite: 40
-      unit: ml
-    - title: sucre de canne (blond)
-      quantite: 500
-      unit: grammes
-    - title: sucre de canne (blond)
-      quantite: 700
-      unit: grammes
-  epices:
-    - title: Romarin
-      quantite: 2
-      unit: bottes
-  frais:
-    - title: Mascarpone
-      quantite: 3
-      unit: Kg
+  - ingredient: abricot_xo0ibs
+    quantite: 12
+    unit: Kg
+    commentaire: ''
+  - ingredient: boudoir_nz97kr
+    quantite: 100
+    unit: unité
+    commentaire: ''
+  - ingredient: vanille-extrait-concentre_n818be
+    quantite: 40
+    unit: ml
+    commentaire: ''
+  - ingredient: sucre-de-canne-blond_n85gmi
+    quantite: 500
+    unit: grammes
+    commentaire: ''
+  - ingredient: sucre-de-canne-blond_n85gmi
+    quantite: 700
+    unit: grammes
+    commentaire: ''
+  - ingredient: romarin_6z655r
+    quantite: 2
+    unit: bottes
+    commentaire: ''
+  - ingredient: mascarpone_0tpvue
+    quantite: 3
+    unit: Kg
+    commentaire: ''
 preparation: |-
   \- Lavez, dénoyautez et coupez en quartier les abricots.
 

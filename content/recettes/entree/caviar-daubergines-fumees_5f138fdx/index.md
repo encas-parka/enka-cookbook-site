@@ -16,25 +16,26 @@ cuisson: Oui
 temperature: Froid
 plate: 100
 ingredients:
-  legumes:
-    - title: Aubergine
-      quantite: 10
-      unit: Kg
-  lof:
-    - title: huile d'olive
-      quantite: 1
-      unit: litre
-  sucres:
-    - title: Jus de citron
-      quantite: 0.4
-      unit: litre
-  autres:
-    - title: Tahin
-      quantite: 400
-      unit: grammes
-  epices:
-    - title: Poivre
-    - title: Sel
+  - ingredient: aubergine_7sk3a5
+    quantite: 10
+    unit: Kg
+    commentaire: ''
+  - ingredient: huile-dolive_h3c8al
+    quantite: 1
+    unit: litre
+    commentaire: ''
+  - ingredient: jus-de-citron_e4mjd1
+    quantite: 0.4
+    unit: litre
+    commentaire: ''
+  - ingredient: tahin_u33083
+    quantite: 400
+    unit: grammes
+    commentaire: ''
+  - ingredient: poivre_2pps90
+    commentaire: ''
+  - ingredient: sel_2juq3x
+    commentaire: ''
 materiel:
   - Bruleur
   - Plat Paela

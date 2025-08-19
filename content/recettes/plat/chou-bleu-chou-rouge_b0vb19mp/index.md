@@ -14,117 +14,54 @@ plate: 100
 check: Oui
 checkAlwaysOk: false
 ingredients:
-  sec: []
-  legumes:
-    - title: Ail
-      quantite: 4
-      unit: tête·s
-    - title: Oignon
-      quantite: 4
-      unit: Kg
-    - title: Chou rouge
-      quantite: 7
-      unit: Kg
-  lof:
-    - title: Huile végétale
-      quantite: 200
-      unit: ml
-  epices:
-    - title: Gingembre en poudre
-      quantite: 15
-      unit: grammes
-    - title: Cumin (graines)
-      quantite: 30
-      unit: grammes
-    - title: moutarde graine
-      quantite: 50
-      unit: grammes
-    - title: Cannelle
-      quantite: 15
-      unit: grammes
-    - title: Coriandre en poudre
-      quantite: 30
-      unit: grammes
-    - title: Muscade
-      quantite: 7
-      unit: grammes
-    - title: Vinaigre de vin
-      quantite: 150
-      unit: ml
-  sucres:
-    - title: confiture de myrtille
-      quantite: 200
-      unit: grammes
-preparation: >-2
-  
-   A ABSOLUMENT FAIRE LA VEILLE
-
-
-        
-
-
-    
-
-
-          
-
-
-    
-
-
-    
-
-  EAU VIOLETTE :
-
-
-  Dans une grosse gamelle, faire blanchir à l'eau les choux rouges tronçonnés en gros morceaux.
-
-
-  Quand l'eau est violette foncée, stopper la cuisson. Garder cette eau, elle servira de colorant bleu pour le chou blanc.
-
-
-  Sortir les choux, laisser refroidir.
-
-
-  CHOU ROUGE:
-
-
-  Emincer les choux blanchis ainsi que les oignons. Emincer l'ail.
-
-
-  Faire griller les épices.
-
-
-  Dans les grands woks, faire d'abord fondre les oignons.
-
-
-  Ensuite verser les épices, l'ail et le chou. Faire bien revenir.
-
-
-  Ajouter le sucre et le vinaigre. Saler, poivrer. Laisser confire au moins 30min en remuant fréquemment.
-
-
-  Ajouter la gelée de groseille, laisser cuire encore.
-
-
-  Rectifier l'assaisonnement.
-
-
-  Servir chaud ou froid.
-
-
-  CHOU BLEU:
-
-
-  Emincer finement le chou blanc.
-
-
-  Transformer l'eau violette en bleue en ajoutant quelques cuillères de bicarbonnate de soude.
-
-
-  Laisser macérer les choux blancs dans l'eau bleue au minimum 12h au frais.
-
-
-  \
+  - ingredient: ail_u2m28w
+    quantite: 4
+    unit: tête·s
+    commentaire: ''
+  - ingredient: oignon_rtavky
+    quantite: 4
+    unit: Kg
+    commentaire: ''
+  - ingredient: chou-rouge_nl2s2n
+    quantite: 7
+    unit: Kg
+    commentaire: ''
+  - ingredient: huile-vegetale_atccqu
+    quantite: 200
+    unit: ml
+    commentaire: ''
+  - ingredient: gingembre-en-poudre_alwx6o
+    quantite: 15
+    unit: grammes
+    commentaire: ''
+  - ingredient: cumin-graines_l3esgp
+    quantite: 30
+    unit: grammes
+    commentaire: ''
+  - ingredient: moutarde-graine_m5zboz
+    quantite: 50
+    unit: grammes
+    commentaire: ''
+  - ingredient: cannelle_sk1gbb
+    quantite: 15
+    unit: grammes
+    commentaire: ''
+  - ingredient: coriandre-en-poudre_nf05n7
+    quantite: 30
+    unit: grammes
+    commentaire: ''
+  - ingredient: muscade_msyocm
+    quantite: 7
+    unit: grammes
+    commentaire: ''
+  - ingredient: vinaigre-de-vin_bjuxby
+    quantite: 150
+    unit: ml
+    commentaire: ''
+  - ingredient: confiture-de-myrtille_ywjjiv
+    quantite: 200
+    unit: grammes
+    commentaire: ''
+preparation: "\n A ABSOLUMENT FAIRE LA VEILLE\n\n\n      \n\n\n  \n\n\n        \n\n\n  \n\n\n  \n\nEAU VIOLETTE :\n\nDans une grosse gamelle, faire blanchir à l'eau les choux rouges tronçonnés en gros morceaux.\n\nQuand l'eau est violette foncée, stopper la cuisson. Garder cette eau, elle servira de colorant bleu pour le chou blanc.\n\nSortir les choux, laisser refroidir.\n\nCHOU ROUGE:\n\nEmincer les choux blanchis ainsi que les oignons. Emincer l'ail.\n\nFaire griller les épices.\n\nDans les grands woks, faire d'abord fondre les oignons.\n\nEnsuite\_verser les épices, l'ail et le chou. Faire bien revenir.\n\nAjouter le sucre et le vinaigre. Saler, poivrer. Laisser confire au moins 30min en remuant fréquemment.\n\nAjouter la gelée de groseille, laisser cuire encore.\n\nRectifier l'assaisonnement.\n\nServir chaud ou froid.\n\nCHOU BLEU:\n\nEmincer finement le chou blanc.\n\nTransformer l'eau violette en bleue en ajoutant quelques cuillères de bicarbonnate de soude.\n\nLaisser macérer les choux blancs dans l'eau bleue au minimum 12h au frais.\n\n\\"
 publishDate: 2025-06-02T18:31:00.000Z
 ---

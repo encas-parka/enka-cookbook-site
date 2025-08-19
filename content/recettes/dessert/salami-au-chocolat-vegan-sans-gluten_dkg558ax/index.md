@@ -1,65 +1,58 @@
 ---
 categories:
-- Sucrée
+  - Sucrée
 check: Non
 checkAlwaysOk: false
 cuisson: Non
 draft: false
 ingredients:
-  autres: []
-  epices: []
-  frais:
-  - quantite: 150
-    title: Margarine végétale spécial cuisson
+  - ingredient: margarine-vegetale-special-cuisson_8j3hna
+    quantite: 150
     unit: grammes
-  lof: []
-  sec: []
-  sucres:
-  - quantite: 195
-    title: Biscuit vegan et sans gluten
+    commentaire: ''
+  - ingredient: biscuit-vegan-et-sans-gluten_ade8hh
+    quantite: 195
     unit: grammes
-  - quantite: 30
-    title: Cacao
+    commentaire: ''
+  - ingredient: cacao_r6792n
+    quantite: 30
     unit: grammes
-  - quantite: 300
-    title: Chocolat noir
+    commentaire: ''
+  - ingredient: chocolat-noir_cr4kiz
+    quantite: 300
     unit: grammes
-  - quantite: 225
-    title: Sucre en poudre
+    commentaire: ''
+  - ingredient: sucre-en-poudre_u9z2he
+    quantite: 225
     unit: grammes
+    commentaire: ''
 layout: recettes
 plate: 15
-preparation: 'Faire fondre le chocolat au bain marie.
-
+preparation: |-
+  Faire fondre le chocolat au bain marie.
 
   Mélanger la margarine, le sucre et le cacao. Ajouter le chocolat fondu et bien mélanger.
 
-
   Casser les biscuits en petits morceaux
-
 
   Ajouter les biscuits au mélange. Laisser refroidir un petit moment.
 
-
-  Disposer une partie de la pâte sur du papier cuisson et le rouler pour en faire
-  un boudin d''environ 5cm de diamètre. Bien tasser pour que le salami soit homogène.
-
+  Disposer une partie de la pâte sur du papier cuisson et le rouler pour en faire un boudin d'environ 5cm de diamètre. Bien tasser pour que le salami soit homogène.
 
   Un salami fait entre 10 et 12 parts.
 
-
   Mettre au frigo pour que le salami se durcisse bien.
 
-
-  Sortir du frigo 30 min avant de le couper et servir.'
-publishDate: 2024-06-18 00:07:00+00:00
+  Sortir du frigo 30 min avant de le couper et servir.
+publishDate: 2024-06-18T00:07:00.000Z
 regime:
-- vegan
-- sans-gluten
+  - vegan
+  - sans-gluten
 region: Portugal
 saison:
-- printemps
+  - printemps
 temperature: Froid
 title: Salami au chocolat - vegan sans gluten
 type: dessert
 ---
+

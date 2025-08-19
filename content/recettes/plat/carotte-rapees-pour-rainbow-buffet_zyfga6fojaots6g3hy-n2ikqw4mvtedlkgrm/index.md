@@ -13,10 +13,11 @@ plate: 100
 check: Oui
 checkAlwaysOk: false
 ingredients:
-  legumes:
-    - title: Carotte
-      quantite: 10
-      unit: Kg
+  - ingredient: carotte_eouu0v
+    quantite: 10
+    unit: Kg
+    commentaire: ''
 preparation: Pour l'assiette composée arc en ciel
 publishDate: 2025-06-19T19:04:00.000Z
 ---
+

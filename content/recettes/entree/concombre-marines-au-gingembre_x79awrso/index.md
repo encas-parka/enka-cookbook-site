@@ -18,32 +18,33 @@ plate: 150
 check: Oui
 checkAlwaysOk: false
 ingredients:
-  legumes:
-    - title: Gingembre
-      quantite: 1.25
-      unit: Kg
-    - title: Concombre
-      quantite: 23
-      unit: Kg
-  lof:
-    - title: huile d'olive
-      quantite: 400
-      unit: ml
-  epices:
-    - title: Sel
-      quantite: 100
-      unit: grammes
-    - title: Vinaigre de vin
-      quantite: 1.2
-      unit: litre
-  sucres:
-    - title: Sucre en poudre
-      quantite: 600
-      unit: grammes
+  - ingredient: gingembre_0d1fzw
+    quantite: 1.25
+    unit: Kg
+    commentaire: ''
+  - ingredient: concombre_l5p1a5
+    quantite: 23
+    unit: Kg
+    commentaire: ''
+  - ingredient: huile-dolive_h3c8al
+    quantite: 400
+    unit: ml
+    commentaire: ''
+  - ingredient: sel_2juq3x
+    quantite: 100
+    unit: grammes
+    commentaire: ''
+  - ingredient: vinaigre-de-vin_bjuxby
+    quantite: 1.2
+    unit: litre
+    commentaire: ''
+  - ingredient: sucre-en-poudre_u9z2he
+    quantite: 600
+    unit: grammes
+    commentaire: ''
 materiel:
   - Gastro 1/1 (Profond)
 preparation: Servir.
-preparation24h: "**La veille:** Eplucher et mandoliner les concombres, râper le
-  gingembre. Tout mélanger."
+preparation24h: '**La veille:** Eplucher et mandoliner les concombres, râper le gingembre. Tout mélanger.'
 publishDate: 2024-05-20T14:44:00.000Z
 ---

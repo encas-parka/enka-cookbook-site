@@ -15,28 +15,30 @@ plate: 15
 check: Oui
 checkAlwaysOk: false
 ingredients:
-  lof:
-    - title: Farine de pois chiche
-      quantite: 1
-      unit: Kg
-  legumes:
-    - title: Cébette - Ciboule - Cive - Oignon vert
-      quantite: 300
-      unit: grammes
-  autres:
-    - title: Eau
-      quantite: 1
-      unit: litre
-  epices:
-    - title: Coriandre en poudre
-      quantite: 3
-      unit: c. à café
-    - title: Ail en poudre
-      quantite: 3
-      unit: c. à café
-    - title: Cumin moulu
-      quantite: 3
-      unit: c. à café
+  - ingredient: farine-de-pois-chiche_o627mw
+    quantite: 1
+    unit: Kg
+    commentaire: ''
+  - ingredient: cebette-ciboule-cive-oignon-vert_j7as8d
+    quantite: 300
+    unit: grammes
+    commentaire: ''
+  - ingredient: eau_ljzb7j
+    quantite: 1
+    unit: litre
+    commentaire: ''
+  - ingredient: coriandre-en-poudre_nf05n7
+    quantite: 3
+    unit: c. à café
+    commentaire: ''
+  - ingredient: ail-en-poudre_vs2dfm
+    quantite: 3
+    unit: c. à café
+    commentaire: ''
+  - ingredient: cumin-moulu_he3u48
+    quantite: 3
+    unit: c. à café
+    commentaire: ''
 preparation: |-
   \    
 

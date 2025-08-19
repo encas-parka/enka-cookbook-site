@@ -1,91 +1,84 @@
 ---
 categories:
-- Bouchées salées
-- Friture
+  - Bouchées salées
+  - Friture
 check: Oui
 checkAlwaysOk: false
 cuisson: Oui
 draft: false
 ingredients:
-  autres:
-  - quantite: 7
-    title: Levure chimique
+  - ingredient: levure-chimique_vgec6e
+    quantite: 7
     unit: grammes
-  epices:
-  - quantite: 1
-    title: Persil frais
+    commentaire: ''
+  - ingredient: persil-frais_hgfa4e
+    quantite: 1
     unit: bottes
-  frais:
-  - commentaire: sauce
+    commentaire: ''
+  - ingredient: yaourt-de-soja_hlbwfd
     quantite: 1.6
-    title: Yaourt de Soja
     unit: Kg
-  legumes:
-  - commentaire: sauce
+    commentaire: sauce
+  - ingredient: citron-confit_m6gmgq
     quantite: 35
-    title: Citron confit
     unit: grammes
-  - quantite: 5
-    title: Ail
+    commentaire: sauce
+  - ingredient: ail_u2m28w
+    quantite: 5
     unit: gousse·s
-  - quantite: 2
-    title: Oignon
+    commentaire: ''
+  - ingredient: oignon_rtavky
+    quantite: 2
     unit: Kg
-  - quantite: 1
-    title: Bette (blette)
+    commentaire: ''
+  - ingredient: bette-blette_dkdml5
+    quantite: 1
     unit: Kg
-  lof:
-  - quantite: 1
-    title: huile de friture
+    commentaire: ''
+  - ingredient: huile-de-friture_1ej217
+    quantite: 1
     unit: litre
-  - quantite: 200
-    title: Fécule de maïs (Maïzena)
+    commentaire: ''
+  - ingredient: fecule-de-mais-maizena_8nbcjp
+    quantite: 200
     unit: grammes
-  - quantite: 200
-    title: Farine de pois chiche
+    commentaire: ''
+  - ingredient: farine-de-pois-chiche_o627mw
+    quantite: 200
     unit: grammes
-  - quantite: 700
-    title: Lait végétal (au choix)
+    commentaire: ''
+  - ingredient: lait-vegetal-au-choix_vw9d1a
+    quantite: 700
     unit: ml
+    commentaire: ''
 layout: recettes
 materiel:
-- Plat Paela
+  - Plat Paela
 plate: 20
 prepAlt:
-- recetteAlt: farcous-aveyronnais_u6c8y3yb
-preparation: '* Commencer par nettoyer les verts de blettes, éplucher ail et oignon.
-
+  - recetteAlt: farcous-aveyronnais_u6c8y3yb
+preparation: |-
+  * Commencer par nettoyer les verts de blettes, éplucher ail et oignon.
   * Réserver les côtes de blettes pour une autre recette.
-
-  * Hâcher le plus petit possible le vert des blettes, le persil, les oignons et l''ail.
-  Ou tout mixer.
-
+  * Hâcher le plus petit possible le vert des blettes, le persil, les oignons et l'ail. Ou tout mixer.
   * Mélanger doucement le lait à la farine.
-
   * Incorporer la garniture, saler, poivrer et mélanger une dernière fois.
-
-  * Faire chauffer de l''huile dans la grande poêle et faire cuire les farçous quelques
-  minutes.
-
+  * Faire chauffer de l'huile dans la grande poêle et faire cuire les farçous quelques minutes.
   * Ils doivent être bien dorés.
-
 
 
 
   **SAUCE :**
 
-
   * Hâcher finement le citron confit.
-
   * Mélanger tous les ingrédients. Saler et poivrer.
-
-  * Goûter !!'
-publishDate: 2024-05-21 15:00:00+00:00
+  * Goûter !!
+publishDate: 2024-05-21T15:00:00.000Z
 regime:
-- vegan
-- vegetarien
-- sans-gluten
-- sans-lactose
+  - vegan
+  - vegetarien
+  - sans-gluten
+  - sans-lactose
 region: Aveyrons
 temperature: Chaud
 title: Farçous Aveyronnais (Végan et sans gluten)

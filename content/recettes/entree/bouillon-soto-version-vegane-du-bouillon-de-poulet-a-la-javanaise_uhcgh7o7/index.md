@@ -1,73 +1,95 @@
 ---
 auteur: Auré
 categories:
-- Soupe
+  - Soupe
 check: Non
 checkAlwaysOk: false
 cuisson: Oui
 draft: false
 ingredients:
-  autres:
-  - quantite: 12
-    title: Eau
+  - ingredient: eau_ljzb7j
+    quantite: 12
     unit: litre
-  epices:
-  - quantite: 350
-    title: Tamari (sauce)
+    commentaire: ''
+  - ingredient: tamari-sauce_bbwo4n
+    quantite: 350
     unit: ml
-  - quantite: 15
-    title: poivre blanc moulue
+    commentaire: ''
+  - ingredient: poivre-blanc-moulue_7lakpz
+    quantite: 15
     unit: grammes
-  - quantite: 16
-    title: Bouillon de légume (sans gluten)
+    commentaire: ''
+  - ingredient: bouillon-de-legume-sans-gluten_tmk6ya
+    quantite: 16
     unit: unité
-  - quantite: 20
-    title: Cumin moulu
+    commentaire: ''
+  - ingredient: cumin-moulu_he3u48
+    quantite: 20
     unit: grammes
-  - quantite: 20
-    title: Coriandre en poudre
+    commentaire: ''
+  - ingredient: coriandre-en-poudre_nf05n7
+    quantite: 20
     unit: grammes
-  - quantite: 3
-    title: Citronnelle (bâton)
+    commentaire: ''
+  - ingredient: citronnelle-baton_t2e14k
+    quantite: 3
     unit: unité
-  - quantite: 4
-    title: Feuille de laurier
+    commentaire: ''
+  - ingredient: feuille-de-laurier_j84olg
+    quantite: 4
     unit: unité
-  legumes:
-  - quantite: 200
-    title: Céleri branche
+    commentaire: ''
+  - ingredient: celeri-branche_78fo97
+    quantite: 200
     unit: grammes
-  - quantite: 500
-    title: Poireau
+    commentaire: ''
+  - ingredient: poireau_l3fs10
+    quantite: 500
     unit: grammes
-  - quantite: 1
-    title: Echalote
+    commentaire: ''
+  - ingredient: echalote_vwdomu
+    quantite: 1
     unit: Kg
-  - quantite: 100
-    title: Gingembre bio
+    commentaire: ''
+  - ingredient: gingembre-bio_nz839c
+    quantite: 100
     unit: grammes
-  - quantite: 2
-    title: Ail
+    commentaire: ''
+  - ingredient: ail_u2m28w
+    quantite: 2
     unit: tête·s
-  sucres:
-  - quantite: 350
-    title: Jus de citron
+    commentaire: ''
+  - ingredient: jus-de-citron_e4mjd1
+    quantite: 350
     unit: ml
+    commentaire: ''
 layout: recettes
 plate: 40
-preparation: "Mettre une gamelle d'eau sur le feux, faire bouillir.\n\nEmincer finement\
-  \ les poireaux, échalottes et le céleri. \n\nHacher le gingembre et l’ail. Verser\
-  \ dans la gamelle.\n\nCasser les bâtons de citronnelle et plonger de même.\n\nAjouter\
-  \ les épices, laurier, coriandre moulue, cumin moulu, poivre blanc, sel ainsi que\
-  \ la sauce tamari.\n\nLe citron sera verser en fin de cuisson.\n\nGoûter et rectifier\
-  \ l’assaisonnement. Laisser mijoter 45min à 1h minimum.\n\nAjouter le jus de citron\
-  \ petit à petit en goûtant. Saler, rectifier l’assaisonnement.\n\nAvant le service,\
-  \ ôter toute la citronnelle, feuilles de laurier.\n\nBol de 25cl par personne."
-publishDate: 2024-06-17 22:01:00+00:00
+preparation: |-
+  Mettre une gamelle d'eau sur le feux, faire bouillir.
+
+  Emincer finement les poireaux, échalottes et le céleri. 
+
+  Hacher le gingembre et l’ail. Verser dans la gamelle.
+
+  Casser les bâtons de citronnelle et plonger de même.
+
+  Ajouter les épices, laurier, coriandre moulue, cumin moulu, poivre blanc, sel ainsi que la sauce tamari.
+
+  Le citron sera verser en fin de cuisson.
+
+  Goûter et rectifier l’assaisonnement. Laisser mijoter 45min à 1h minimum.
+
+  Ajouter le jus de citron petit à petit en goûtant. Saler, rectifier l’assaisonnement.
+
+  Avant le service, ôter toute la citronnelle, feuilles de laurier.
+
+  Bol de 25cl par personne.
+publishDate: 2024-06-17T22:01:00.000Z
 quantite_desc: bol d'environ 25cl par personne
 regime:
-- vegan
-- sans-gluten
+  - vegan
+  - sans-gluten
 region: Java
 temperature: Chaud
 title: BOUILLON SOTO - Version végane du bouillon de poulet à la javanaise

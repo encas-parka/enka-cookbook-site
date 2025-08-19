@@ -1,71 +1,68 @@
 ---
 categories:
-- Accompagnement
+  - Accompagnement
 check: Oui
 checkAlwaysOk: true
 cuisson: Oui
 draft: false
 img: img_20210902_154005.jpg
 ingredients:
-  autres:
-  - quantite: 100
-    title: Miso
+  - ingredient: miso_3zdyyy
+    quantite: 100
     unit: grammes
-  epices:
-  - quantite: 50
-    title: Vinaigre de riz
+    commentaire: ''
+  - ingredient: vinaigre-de-riz_k6injl
+    quantite: 50
     unit: ml
-  - quantite: 15
-    title: Sauce soja dark (foncé)
+    commentaire: ''
+  - ingredient: sauce-soja-dark-fonce_h138n7
+    quantite: 15
     unit: ml
-  - quantite: 0.01
-    title: Sésame doré
+    commentaire: ''
+  - ingredient: sesame-dore_h3g82r
+    quantite: 0.01
     unit: grammes
-  - quantite: 1
-    title: Sauce soja
+    commentaire: ''
+  - ingredient: sauce-soja_jjrwlj
+    quantite: 1
     unit: c. à soupe
-  legumes:
-  - quantite: 50
-    title: Cébette - Ciboule - Cive - Oignon vert
+    commentaire: ''
+  - ingredient: cebette-ciboule-cive-oignon-vert_j7as8d
+    quantite: 50
     unit: grammes
-  - quantite: 1.3
-    title: Aubergine
+    commentaire: ''
+  - ingredient: aubergine_7sk3a5
+    quantite: 1.3
     unit: Kg
-  lof:
-  - quantite: 6
-    title: huile de tournesol
+    commentaire: ''
+  - ingredient: huile-de-tournesol_c70jxb
+    quantite: 6
     unit: c. à soupe
-  sec: []
-  sucres:
-  - quantite: 1
-    title: Sirop d'agave
+    commentaire: ''
+  - ingredient: sirop-dagave_7cflkx
+    quantite: 1
     unit: c. à soupe
-  - quantite: 1
-    title: Jus de citron
+    commentaire: ''
+  - ingredient: jus-de-citron_e4mjd1
+    quantite: 1
     unit: c. à soupe
+    commentaire: ''
 layout: recettes
 materiel:
-- Four
+  - Four
 plate: 10
-preparation: '* Préchauffer le four à 220°
-
-  * Lavez les aubergines. Séchez-les puis coupez leurs pédoncules. Coupez-les en deux
-  dans la longueur, puis quadrillez leur chair, sans percer la peau. Badigeonnez-les
-  d''un peu d’huile et déposez les côté chair sur une plaque avec sulfu. Faites cuire
-  environ 20 min.
-
+preparation: |-
+  * Préchauffer le four à 220°
+  * Lavez les aubergines. Séchez-les puis coupez leurs pédoncules. Coupez-les en deux dans la longueur, puis quadrillez leur chair, sans percer la peau. Badigeonnez-les d'un peu d’huile et déposez les côté chair sur une plaque avec sulfu. Faites cuire environ 20 min.
   * Mélanger tous les ingrédients de la marinade.
-
-  * Sortir les aubergines du four. Les retourner et les badigeonner avec la marinade.
-  Saupourdrer de sésame et enfourner de nouveau pour 15-20 min (surveiller la cuisson).
-
-  * Parsemer de ciboule ciselée avant de servir.'
-publishDate: 2024-01-10 02:06:21.069000+00:00
+  * Sortir les aubergines du four. Les retourner et les badigeonner avec la marinade. Saupourdrer de sésame et enfourner de nouveau pour 15-20 min (surveiller la cuisson).
+  * Parsemer de ciboule ciselée avant de servir.
+publishDate: 2024-01-10T02:06:21.069Z
 regime:
-- vegetarien
-- vegan
+  - vegetarien
+  - vegan
 saison:
-- ete
+  - ete
 temperature: Chaud
 title: Aubergines grillées au miso
 type: plat

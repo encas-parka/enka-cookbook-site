@@ -24,15 +24,16 @@ preparation: test
 preparation24h: ''
 publishDate: 2025-04-07T10:30:00.000Z
 ingredients:
-  animaux:
-    - unit: grammes
-      quantite: 1.1
-      title: Anguille (poisson)
-  sec:
-    - unit: unité
-      quantite: 1.1
-      title: Cacahuète
+  - ingredient: anguille-poisson_1g26bd
+    quantite: 1.1
+    unit: grammes
+    commentaire: ''
+  - ingredient: cacahuete_73ikep
+    quantite: 1.1
+    unit: unité
+    commentaire: ''
 regime:
   - sans-gluten
 ---
+
 

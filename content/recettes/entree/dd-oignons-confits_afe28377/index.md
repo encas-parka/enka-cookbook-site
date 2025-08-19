@@ -34,17 +34,18 @@ preparation24h: ''
 prepAlt:
   - recetteAlt: barres-cereales-gourmandes-flocons-davoine-chocolat-raisin-sec-sans-gluten_q1eozsxah1hwo7bnjp-huaaue2nr6dkbh2-t
   - recetteAlt: oignons-confits_52072306
-publishDate: 2025-07-31T10:48:00.000+02:00
+publishDate: 2025-07-31T08:48:00.000Z
 ingredients:
-  legumes:
-    - title: Oignon
-      quantite: 1
-      unit: Kg
-  lof:
-    - title: huile de tournesol
-  sucres:
-    - title: Sucre en poudre
-      quantite: 1
-      unit: c. à soupe
+  - ingredient: oignon_rtavky
+    quantite: 1
+    unit: Kg
+    commentaire: ''
+  - ingredient: huile-de-tournesol_c70jxb
+    commentaire: ''
+  - ingredient: sucre-en-poudre_u9z2he
+    quantite: 1
+    unit: c. à soupe
+    commentaire: ''
 ---
+
 

@@ -14,26 +14,26 @@ plate: 100
 check: Oui
 checkAlwaysOk: false
 ingredients:
-  legumes:
-    - title: Ail
-      quantite: 25
-      unit: gousse·s
-    - title: Olives Vertes Dénoyautées
-      quantite: 4
-      unit: Kg
-  autres:
-    - title: Purée d'amande
-      quantite: 300
-      unit: grammes
-  epices:
-    - title: câpre
-      quantite: 200
-      unit: grammes
-  lof:
-    - title: huile d'olive
-      quantite: 1.2
-      unit: litre
-  sucres: []
+  - ingredient: ail_u2m28w
+    quantite: 25
+    unit: gousse·s
+    commentaire: ''
+  - ingredient: olives-vertes-denoyautees_163u4z
+    quantite: 4
+    unit: Kg
+    commentaire: ''
+  - ingredient: puree-damande_7dlfuw
+    quantite: 300
+    unit: grammes
+    commentaire: ''
+  - ingredient: capres_c88lz8
+    quantite: 200
+    unit: grammes
+    commentaire: ''
+  - ingredient: huile-dolive_h3c8al
+    quantite: 1.2
+    unit: litre
+    commentaire: ''
 preparation: tout mixer sauf l'ail qui est pressée...et voilà!
 publishDate: 2025-06-15T19:47:00.000Z
 ---

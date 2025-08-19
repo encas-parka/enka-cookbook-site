@@ -1,44 +1,42 @@
 ---
 categories:
-- Tartinade
+  - Tartinade
 check: Oui
 checkAlwaysOk: false
 cuisson: Non
 draft: false
 ingredients:
-  autres: []
-  frais:
-  - quantite: 1
-    title: Ricotta
+  - ingredient: ricotta_q6t705
+    quantite: 1
     unit: Kg
-  legumes:
-  - quantite: 750
-    title: Echalote
+    commentaire: ''
+  - ingredient: echalote_vwdomu
+    quantite: 750
     unit: grammes
-  - quantite: 10
-    title: Ail
+    commentaire: ''
+  - ingredient: ail_u2m28w
+    quantite: 10
     unit: gousse·s
-  lof:
-  - quantite: 250
-    title: huile d'olive
+    commentaire: ''
+  - ingredient: huile-dolive_h3c8al
+    quantite: 250
     unit: ml
-  sucres:
-  - quantite: 3.75
-    title: Confiture de chataigne (sans sucre)
+    commentaire: ''
+  - ingredient: confiture-de-chataigne-sans-sucre_q33x0k
+    quantite: 3.75
     unit: Kg
+    commentaire: ''
 layout: recettes
 plate: 100
 prepAlt:
-- recetteAlt: Tartinade salé à la chataigne (végan)
-preparation: '* Emincer très fin les échalottes, hacher l''ail et brasser tous les
-  ingrédients ensemble à l''aide d''une spatule ou aux mains. La texture doit être
-  épaisse.
-
-  * Goûter et réajuster l''assaisonnement, sel, poivre, paprika, ail.'
-publishDate: 2024-05-18 16:05:00+00:00
+  - recetteAlt: Tartinade salé à la chataigne (végan)
+preparation: |-
+  * Emincer très fin les échalottes, hacher l'ail et brasser tous les ingrédients ensemble à l'aide d'une spatule ou aux mains. La texture doit être épaisse.
+  * Goûter et réajuster l'assaisonnement, sel, poivre, paprika, ail.
+publishDate: 2024-05-18T16:05:00.000Z
 regime:
-- vegetarien
-- sans-gluten
+  - vegetarien
+  - sans-gluten
 temperature: Froid
 title: Tartinade salé a la chataigne
 type: entree

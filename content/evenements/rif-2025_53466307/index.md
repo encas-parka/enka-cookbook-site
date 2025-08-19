@@ -1,9 +1,6 @@
 ---
 title: RIF 2025
-outputs:
-  - HTML
-  - Poster
-  - Ingredients
+
 sitemap_exclude: "true"
 repas:
   - assiettes: 120

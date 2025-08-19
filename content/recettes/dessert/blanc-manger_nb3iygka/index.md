@@ -14,27 +14,26 @@ plate: 100
 check: Oui
 checkAlwaysOk: false
 ingredients:
-  lof:
-    - title: creme de coco
-      quantite: 6.5
-      unit: litre
-    - title: lait d’amande
-      quantite: 6.5
-      unit: litre
-  sucres:
-    - title: sucre de canne (blond)
-      quantite: 2.5
-      unit: Kg
-  autres:
-    - title: Agar-agar
-      quantite: 50
-      unit: grammes
-  epices: []
-  legumes:
-    - title: Noix de coco râpée
-      quantite: 1
-      unit: Kg
-  frais: []
+  - ingredient: creme-de-coco_bnmw1o
+    quantite: 6.5
+    unit: litre
+    commentaire: ''
+  - ingredient: lait-damande_csxbg6
+    quantite: 6.5
+    unit: litre
+    commentaire: ''
+  - ingredient: sucre-de-canne-blond_n85gmi
+    quantite: 2.5
+    unit: Kg
+    commentaire: ''
+  - ingredient: agar-agar_ruhtax
+    quantite: 50
+    unit: grammes
+    commentaire: ''
+  - ingredient: noix-de-coco-rapee_coa5dh
+    quantite: 1
+    unit: Kg
+    commentaire: ''
 preparation: |-
   fouetter tous les ingrédients
 

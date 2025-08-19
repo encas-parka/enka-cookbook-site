@@ -15,14 +15,14 @@ check: Oui
 checkAlwaysOk: false
 checkfor: 100
 ingredients:
-  lof:
-    - title: Farine de blé
-      quantite: 15
-      unit: Kg
-  frais:
-    - title: Levure fraîche de boulanger
-      quantite: 15
-      unit: unité
+  - ingredient: farine-de-ble_2av6w8
+    quantite: 15
+    unit: Kg
+    commentaire: ''
+  - ingredient: levure-fraiche-de-boulanger_7qqcwc
+    quantite: 15
+    unit: unité
+    commentaire: ''
 preparation: c'est arnaud qui le fait
 publishDate: 2025-06-17T18:46:00.000Z
 ---

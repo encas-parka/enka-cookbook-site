@@ -17,81 +17,94 @@ plate: 100
 check: Oui
 checkAlwaysOk: true
 ingredients:
-  autres:
-    - quantite: 100
-      title: Bicarbonate de soude
-      unit: grammes
-    - quantite: 500
-      title: Tahin
-      unit: grammes
-  epices:
-    - commentaire: Peu importe la couleur
-      quantite: 500
-      title: Sésame blanc
-      unit: grammes
-    - quantite: 2
-      title: Ciboulette
-      unit: bottes
-    - quantite: 50
-      title: Paprika
-      unit: grammes
-    - quantite: 100
-      title: Cumin (graines)
-      unit: grammes
-    - quantite: 150
-      title: graine de coriandre
-      unit: grammes
-    - quantite: 1
-      title: Coriandre fraîche
-      unit: bottes
-    - quantite: 2
-      title: Menthe
-      unit: bottes
-    - quantite: 10
-      title: Persil frais
-      unit: bottes
-  frais:
-    - quantite: 1
-      title: Yaourt de Soja
-      unit: Kg
-    - quantite: 5
-      title: Fromage blanc
-      unit: Kg
-  legumes:
-    - quantite: 3
-      title: Tomate
-      unit: Kg
-    - quantite: 2
-      title: Petit oignon blanc
-      unit: Kg
-    - quantite: 10
-      title: Courgette
-      unit: Kg
-    - quantite: 3
-      title: Oignon
-      unit: Kg
-    - quantite: 1
-      title: Ail
-      unit: Kg
-  lof:
-    - commentaire: En fonction des friteuses et du restes des prepa
-      quantite: 10
-      title: huile de friture
-      unit: litre
-    - quantite: 2
-      title: huile d'olive
-      unit: litre
-    - quantite: 15
-      title: Farine de blé
-      unit: Kg
-  sec:
-    - quantite: 5
-      title: Pois chiches
-      unit: Kg
-  sucres:
-    - quantite: 1
-      title: Jus de citron
-      unit: litre
+  - ingredient: bicarbonate-de-soude_fnnx13
+    quantite: 100
+    unit: grammes
+    commentaire: ''
+  - ingredient: tahin_u33083
+    quantite: 500
+    unit: grammes
+    commentaire: ''
+  - ingredient: sesame-blanc_1uz8x5
+    quantite: 500
+    unit: grammes
+    commentaire: Peu importe la couleur
+  - ingredient: ciboulette_mt22ff
+    quantite: 2
+    unit: bottes
+    commentaire: ''
+  - ingredient: paprika_bidsmu
+    quantite: 50
+    unit: grammes
+    commentaire: ''
+  - ingredient: cumin-graines_l3esgp
+    quantite: 100
+    unit: grammes
+    commentaire: ''
+  - ingredient: graine-de-coriandre_crkg3d
+    quantite: 150
+    unit: grammes
+    commentaire: ''
+  - ingredient: coriandre-fraiche_fetrpe
+    quantite: 1
+    unit: bottes
+    commentaire: ''
+  - ingredient: menthe_2j9y2v
+    quantite: 2
+    unit: bottes
+    commentaire: ''
+  - ingredient: persil-frais_hgfa4e
+    quantite: 10
+    unit: bottes
+    commentaire: ''
+  - ingredient: yaourt-de-soja_hlbwfd
+    quantite: 1
+    unit: Kg
+    commentaire: ''
+  - ingredient: fromage-blanc_b2dxf8
+    quantite: 5
+    unit: Kg
+    commentaire: ''
+  - ingredient: tomate_ibtbnq
+    quantite: 3
+    unit: Kg
+    commentaire: ''
+  - ingredient: petit-oignon-blanc_9nbd98
+    quantite: 2
+    unit: Kg
+    commentaire: ''
+  - ingredient: courgette_9zozfk
+    quantite: 10
+    unit: Kg
+    commentaire: ''
+  - ingredient: oignon_rtavky
+    quantite: 3
+    unit: Kg
+    commentaire: ''
+  - ingredient: ail_u2m28w
+    quantite: 1
+    unit: Kg
+    commentaire: ''
+  - ingredient: huile-de-friture_1ej217
+    quantite: 10
+    unit: litre
+    commentaire: En fonction des friteuses et du restes des prepa
+  - ingredient: huile-dolive_h3c8al
+    quantite: 2
+    unit: litre
+    commentaire: ''
+  - ingredient: farine-de-ble_2av6w8
+    quantite: 15
+    unit: Kg
+    commentaire: ''
+  - ingredient: pois-chiches_6a8w8k
+    quantite: 5
+    unit: Kg
+    commentaire: ''
+  - ingredient: jus-de-citron_e4mjd1
+    quantite: 1
+    unit: litre
+    commentaire: ''
 materiel:
   - Four
   - Friteuse
@@ -99,36 +112,7 @@ materiel:
   - Giraffe (Bras Mixeur)
   - Bruleur
   - Robot-coupe
-preparation: |-
-  **Preparation des Fafafels**
-
-  \- Mixer les Pois chiches égouttés, mis à trempé 24h avant.
-
-  \- Hacher ou mixer 500g D’ail
-
-  \- Mixer finement les Oignons
-
-  \- Hacher 8 Bouquets de Persil
-
-  Mélanger tous ces ingrédients puis :
-
-  \- Concasser les Graines de Cumin, de Coriandre et les piments.
-
-  Ajouter à la préparation avec 
-
-  \- Sésame, Paprika et Bicarbonate. 
-
-  Saler Poivrer.
-
-  **Légumes au four**
-
-  \- Couper les courgettes 
-
-  \- Hacher l’ail finement
-
-  \- Mettre courgettes, ail haché, huile d’olive, sel, poivre dans des gastros. 
-
-  \- Cuire au four 180° 1h environ.
+preparation: "**Preparation des Fafafels**\n\n\\- Mixer les Pois chiches égouttés, mis à trempé 24h avant.\n\n\\- Hacher ou mixer 500g D’ail\n\n\\- Mixer finement les Oignons\n\n\\- Hacher 8 Bouquets de Persil\n\nMélanger tous ces ingrédients puis\_:\n\n\\- Concasser les Graines de Cumin, de Coriandre et les piments.\n\nAjouter à la préparation avec \n\n\\- Sésame, Paprika et Bicarbonate. \n\nSaler Poivrer.\n\n**Légumes au four**\n\n\\- Couper les courgettes \n\n\\- Hacher l’ail finement\n\n\\- Mettre courgettes, ail haché, huile d’olive, sel, poivre dans des gastros. \n\n\\- Cuire au four 180° 1h environ."
 preparation24h: Faire tremper les pois chiches 24h avant minimum
-publishDate: 2024-06-06 11:25:00+00:00
+publishDate: 2024-06-06T11:25:00.000Z
 ---

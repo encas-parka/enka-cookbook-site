@@ -1,68 +1,65 @@
 ---
 auteur: ''
 categories:
-- Gateau
+  - Gateau
 check: Oui
 checkAlwaysOk: true
 cuisson: Oui
 draft: false
 ingredients:
-  autres:
-  - quantite: 0.25
-    title: Bicarbonate de soude
+  - ingredient: bicarbonate-de-soude_fnnx13
+    quantite: 0.25
     unit: c. à café
-  - quantite: 0.25
-    title: Gomme de xanthane
+    commentaire: ''
+  - ingredient: gomme-de-xanthane_5le7rm
+    quantite: 0.25
     unit: c. à café
-  epices:
-  - quantite: 0.1
-    title: Sel
+    commentaire: ''
+  - ingredient: sel_2juq3x
+    quantite: 0.1
     unit: c. à café
-  frais:
-  - quantite: 250
-    title: Yaourt de Soja
+    commentaire: ''
+  - ingredient: yaourt-de-soja_hlbwfd
+    quantite: 250
     unit: grammes
-  legumes:
-  - commentaire: zeste
+    commentaire: ''
+  - ingredient: citron-jaune_5cg0yu
     quantite: 120
-    title: Citron jaune
     unit: grammes
-  lof:
-  - quantite: 0.11
-    title: huile de tournesol
+    commentaire: zeste
+  - ingredient: huile-de-tournesol_c70jxb
+    quantite: 0.11
     unit: litre
-  - quantite: 250
-    title: Farine de blé
+    commentaire: ''
+  - ingredient: farine-de-ble_2av6w8
+    quantite: 250
     unit: grammes
-  sucres:
-  - quantite: 0.8
-    title: Jus de citron
+    commentaire: ''
+  - ingredient: jus-de-citron_e4mjd1
+    quantite: 0.8
     unit: litre
-  - quantite: 280
-    title: sucre de canne (blond)
+    commentaire: ''
+  - ingredient: sucre-de-canne-blond_n85gmi
+    quantite: 280
     unit: grammes
+    commentaire: ''
 layout: recettes
 materiel:
-- moule a cake
-- Four
+  - moule a cake
+  - Four
 plate: 10
-preparation: '
+preparation: |-
 
 
   * Mélanger le sucre et le yaourt.
-
   * Ajouter zeste et farine, et mélanger au fouet.
-
-  * Incorporer le jus de citron et l''huile.
-
+  * Incorporer le jus de citron et l'huile.
   * Ajouter levure, bicar, gomme et sel.
-
-  * Graisser un moule à cake, enfourner pou 50 min à 170° et attendre que ça refroidisse
-  avant de démouler.'
-publishDate: 2023-11-13 14:16:06.322000+00:00
+  * Graisser un moule à cake, enfourner pou 50 min à 170° et attendre que ça refroidisse avant de démouler.
+publishDate: 2023-11-13T14:16:06.322Z
 regime:
-- vegan
-- vegetarien
+  - vegan
+  - vegetarien
 temperature: Froid
 title: Cake au citron végan
 type: dessert

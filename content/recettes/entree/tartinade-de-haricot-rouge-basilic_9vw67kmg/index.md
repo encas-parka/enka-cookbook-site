@@ -17,48 +17,46 @@ plate: 270
 check: Oui
 checkAlwaysOk: false
 ingredients:
-  sec:
-    - title: Haricots rouges
-      quantite: 6.3
-      unit: Kg
-  legumes:
-    - title: Ail
-      quantite: 30
-      unit: gousse·s
-  lof:
-    - title: huile d'olive
-      quantite: 1.8
-      unit: litre
-  sucres:
-    - title: Jus de citron
-      quantite: 900
-      unit: ml
-  epices:
-    - title: Basilic
-      quantite: 9
-      unit: bottes
-    - title: Poivre
-    - title: Sel
-  autres:
-    - title: Bicarbonate de soude
-      quantite: 90
-      unit: ml
+  - ingredient: haricots-rouges_dr1py6
+    quantite: 6.3
+    unit: Kg
+    commentaire: ''
+  - ingredient: ail_u2m28w
+    quantite: 30
+    unit: gousse·s
+    commentaire: ''
+  - ingredient: huile-dolive_h3c8al
+    quantite: 1.8
+    unit: litre
+    commentaire: ''
+  - ingredient: jus-de-citron_e4mjd1
+    quantite: 900
+    unit: ml
+    commentaire: ''
+  - ingredient: basilic_s8j4ff
+    quantite: 9
+    unit: bottes
+    commentaire: ''
+  - ingredient: poivre_2pps90
+    commentaire: ''
+  - ingredient: sel_2juq3x
+    commentaire: ''
+  - ingredient: bicarbonate-de-soude_fnnx13
+    quantite: 90
+    unit: ml
+    commentaire: ''
 materiel:
   - Marmitte
-preparation: "* Rectifier l'assaisonement le jour j"
-preparation24h: >-
+preparation: '* Rectifier l''assaisonement le jour j'
+preparation24h: |-
   **Obligatoirement 2 J avant**
-
 
   * Faire tremper les haricots l'avant veille.
 
 
 
-
   **Obligatoirement 1 J avant**
 
-
   * Bien cuire les haricots la veille avec le bicarbonate et du sel. Puis mixer avec tout le reste.
-
 publishDate: 2024-05-18T10:52:00.000Z
 ---

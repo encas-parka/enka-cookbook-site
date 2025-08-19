@@ -1,56 +1,52 @@
 ---
 categories:
-- Sucrée
+  - Sucrée
 check: Non
 checkAlwaysOk: false
 cuisson: Oui
 draft: false
 ingredients:
-  epices:
-  - quantite: 6
-    title: Curcuma moulu
+  - ingredient: curcuma-moulu_htp5ma
+    quantite: 6
     unit: grammes
-  frais:
-  - quantite: 200
-    title: Margarine végétale spécial cuisson
+    commentaire: ''
+  - ingredient: margarine-vegetale-special-cuisson_8j3hna
+    quantite: 200
     unit: grammes
-  lof:
-  - quantite: 75
-    title: Fécule de maïs (Maïzena)
+    commentaire: ''
+  - ingredient: fecule-de-mais-maizena_8nbcjp
+    quantite: 75
     unit: grammes
-  - quantite: 300
-    title: Lait de soja
+    commentaire: ''
+  - ingredient: lait-de-soja_gpeob7
+    quantite: 300
     unit: ml
-  sucres:
-  - quantite: 300
-    title: Sucre en poudre
+    commentaire: ''
+  - ingredient: sucre-en-poudre_u9z2he
+    quantite: 300
     unit: grammes
-  - quantite: 500
-    title: Jus de citron
+    commentaire: ''
+  - ingredient: jus-de-citron_e4mjd1
+    quantite: 500
     unit: ml
+    commentaire: ''
 layout: recettes
 plate: 10
 prepAlt:
-- recetteAlt: tarte-au-citron-vegane_5fh2krusjaqlzhhcjtbqo
-preparation: 'Dans une casserole, mélanger la fécule de maïs et le sucre. Délayer
-  au fouet en ajoutant le lait petit à petit. Ajouter le jus de citron.
+  - recetteAlt: tarte-au-citron-vegane_5fh2krusjaqlzhhcjtbqo
+preparation: |-
+  Dans une casserole, mélanger la fécule de maïs et le sucre. Délayer au fouet en ajoutant le lait petit à petit. Ajouter le jus de citron.
 
+  Faire cuire sur feu moyen en mélangeant continuellement au fouet jusqu’à ce que la crème bouillonne et épaississe légèrement (patience, ça peut prendre un peu de temps). Laisser bouillir environ 1min sans cesser de remuer. Retirer du feu, ajoutez immédiatement la margarine puis fouetter longuement jusqu’à ce que la crème soit bien lisse et homogène.
 
-  Faire cuire sur feu moyen en mélangeant continuellement au fouet jusqu’à ce que
-  la crème bouillonne et épaississe légèrement (patience, ça peut prendre un peu de
-  temps). Laisser bouillir environ 1min sans cesser de remuer. Retirer du feu, ajoutez
-  immédiatement la margarine puis fouetter longuement jusqu’à ce que la crème soit
-  bien lisse et homogène.
-
-
-  Verser dans les ramequins, laisser refroidir puis placer au frais. Servir avec deux
-  biscuits végan sans gluten.'
-publishDate: 2024-06-17 20:30:00+00:00
+  Verser dans les ramequins, laisser refroidir puis placer au frais. Servir avec deux biscuits végan sans gluten.
+publishDate: 2024-06-17T20:30:00.000Z
 quantite_desc: un ramequin + un biscuit par personnes
 regime:
-- vegan
-- sans-gluten
+  - vegan
+  - sans-gluten
 temperature: Froid
 title: LEMON CURD VEGAN - version tarte au citron sans gluten
 type: dessert
 ---
+

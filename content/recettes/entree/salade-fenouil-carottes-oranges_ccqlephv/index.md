@@ -1,51 +1,49 @@
 ---
 auteur: mag
 categories:
-- Salade
+  - Salade
 check: Non
 checkAlwaysOk: false
 cuisson: Non
 draft: false
 ingredients:
-  epices: []
-  legumes:
-  - quantite: 7
-    title: Carotte
+  - ingredient: carotte_eouu0v
+    quantite: 7
     unit: Kg
-  - quantite: 3
-    title: Orange
+    commentaire: ''
+  - ingredient: orange_yh2uod
+    quantite: 3
     unit: unité
-  - quantite: 4.5
-    title: Fenouil
+    commentaire: ''
+  - ingredient: fenouil_mhsals
+    quantite: 4.5
     unit: Kg
-  lof:
-  - quantite: 76.5
-    title: huile d'olive
+    commentaire: ''
+  - ingredient: huile-dolive_h3c8al
+    quantite: 76.5
     unit: litre
-  sucres:
-  - quantite: 32
-    title: Jus d'orange
+    commentaire: ''
+  - ingredient: jus-dorange_gzi2ry
+    quantite: 32
     unit: litre
+    commentaire: ''
 layout: recettes
 plate: 50
-preparation: 'Couper en finesse les fenouils.
-
+preparation: |-
+  Couper en finesse les fenouils.
 
   Raper gros les carottes.
 
-
   Mettre le zeste des 3 oranges et éventuellement les sarments si y a la motive.
 
-
-  Ajouter l''huile et le jus d''orange, assaisonner avec sel et poivre à convenance
-  .'
-publishDate: 2024-03-26 18:34:06.792000+00:00
+  Ajouter l'huile et le jus d'orange, assaisonner avec sel et poivre à convenance .
+publishDate: 2024-03-26T18:34:06.792Z
 regime:
-- vegan
-- sans-gluten
-- sans-lactose
+  - vegan
+  - sans-gluten
+  - sans-lactose
 saison:
-- printemps
+  - printemps
 temperature: Froid
 title: Salade Fenouil-Carottes-Oranges
 type: entree

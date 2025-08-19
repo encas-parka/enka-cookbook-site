@@ -111,9 +111,5 @@ repas:
       - recette: tarte-au-chocolat-sans-cuisson_matyge19
         type_plat: dessert
 uuid: 6Q6NvkpGwTyKczBjnIWzK
-outputs:
-  - HTML
-  - Poster
-  - Ingredients
----
 
+---

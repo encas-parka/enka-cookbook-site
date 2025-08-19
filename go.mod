@@ -1,12 +1,12 @@
 module github.com/encas-parka/enka-cookbook-site
 
 // uncomment for dev
- //replace github.com/encas-parka/hugo-cookbook-theme => ../hugo-cookbook-theme
+//replace github.com/encas-parka/hugo-cookbook-theme => ../hugo-cookbook-theme
 
 go 1.24
 
 require (
-	github.com/encas-parka/hugo-cookbook-theme v0.0.0-20250620145127-f6143bc9a405 // indirect
+	github.com/encas-parka/hugo-cookbook-theme v0.0.0-20250801165309-fc0f7d48fcb1 // indirect
 	github.com/hugomods/base v0.7.3 // indirect
 	github.com/hugomods/bootstrap v0.24.1 // indirect
 	github.com/hugomods/icons v0.6.6 // indirect

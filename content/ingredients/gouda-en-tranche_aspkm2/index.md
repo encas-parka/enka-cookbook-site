@@ -1,6 +1,7 @@
 ---
 title: Gouda en tranche
-allergenes: []
+allergenes:
+  - Produit laitier
 pFrais: true
 type: frais
 ---

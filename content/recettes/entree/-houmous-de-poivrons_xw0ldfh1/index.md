@@ -1,5 +1,5 @@
 ---
-title: ' Houmous de poivrons'
+title: 'Houmous de poivrons'
 draft: false
 layout: recettes
 type: entree

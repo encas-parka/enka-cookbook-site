@@ -15,7 +15,7 @@ quantite_desc: 48 parts par gastro
 check: Non
 checkAlwaysOk: false
 ingredients:
-  - ingredient: creme-liquide-entiere_lmvjme
+  - ingredient: creme-fraiche-liquide-entiere_6tnb6h
     quantite: 1.75
     unit: litre
     commentaire: glaçage
@@ -27,7 +27,7 @@ ingredients:
     quantite: 700
     unit: ml
     commentaire: génoise
-  - ingredient: creme-liquide-entiere_lmvjme
+  - ingredient: creme-fraiche-liquide-entiere_6tnb6h
     quantite: 1.4
     unit: litre
     commentaire: génoise

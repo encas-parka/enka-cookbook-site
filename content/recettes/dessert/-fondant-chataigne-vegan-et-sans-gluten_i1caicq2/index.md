@@ -1,5 +1,5 @@
 ---
-title: ' Fondant Chataigne (vegan et sans gluten)'
+title: 'Fondant Chataigne (vegan et sans gluten)'
 draft: false
 layout: recettes
 type: dessert
@@ -59,4 +59,3 @@ prepAlt:
   - recetteAlt: fondant-chataigne_tx71o7g8
 publishDate: 2024-05-18T13:02:00.000Z
 ---
-

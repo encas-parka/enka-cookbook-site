@@ -25,7 +25,7 @@ ingredients:
     quantite: 65
     unit: unité
     commentaire: ''
-  - ingredient: creme-liquide-entiere_lmvjme
+  - ingredient: creme-fraiche-liquide-entiere_6tnb6h
     quantite: 2
     unit: litre
     commentaire: ''

@@ -1,6 +1,7 @@
 ---
 title: Toastinette fromage burger
-allergenes: []
+allergenes:
+  - Produit laitier
 pFrais: true
 type: frais
 ---

@@ -1,6 +1,7 @@
 ---
 title: lait (chèvres)
-allergenes: []
+allergenes:
+  - Produit laitier
 pFrais: false
 type: lof
 ---

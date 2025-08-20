@@ -1,6 +1,7 @@
 ---
 title: Yaourt grec de vache
-allergenes: []
+allergenes:
+  - Produit laitier
 pFrais: true
 type: frais
 ---

@@ -1,6 +1,7 @@
 ---
 title: yaourt de brebis
-allergenes: []
+allergenes:
+    - Produit laitier
 pFrais: true
 type: frais
 ---

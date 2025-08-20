@@ -1,6 +1,7 @@
 ---
 title: Lait concentré sucré
-allergenes: []
+allergenes:
+  - Produit laitier
 pFrais: false
 type: lof
 ---

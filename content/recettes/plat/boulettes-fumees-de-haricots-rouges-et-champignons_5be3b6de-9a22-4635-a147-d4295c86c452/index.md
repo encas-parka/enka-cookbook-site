@@ -82,8 +82,6 @@ regime:
   - vegan
   - sans-lactose
 temperature: Chaud
-title: Boulettes fumées de haricots rouges et champignons boulettes-fumees-de-haricots-rouges-et-champignons_5be3b6de-9a22-4635-a147-d4295c86c452
+title: Boulettes fumées de haricots rouges et champignons
 type: plat
 ---
-
-

@@ -1,5 +1,5 @@
 ---
-title: "Inviter un utilisateur"
+title: "Inviter un·e utilisateur·ice"
 type: "invitation"
 sitemap_exclude: true
 draft: false

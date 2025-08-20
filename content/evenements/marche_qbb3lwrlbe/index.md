@@ -1,6 +1,5 @@
 ---
 title: marché
-
 sitemap_exclude: "true"
 repas:
   - assiettes: 40

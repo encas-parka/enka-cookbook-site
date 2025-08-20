@@ -1,6 +1,5 @@
 ---
 title: RIF 2025
-
 sitemap_exclude: "true"
 repas:
   - assiettes: 120

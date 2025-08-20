@@ -129,7 +129,7 @@ repas:
     date_service: 2025-07-08
     horaire: midi
     recettes_du_repas:
-      - recette: soupe-froide-de-courgettes-a-la-menthe-v2_yn0qxnqnwbfpuszvbdzk0avr7tjzpasak9t_
+      - recette: soupe-froide-de-courgettes-a-la-menthe-v2_yn0qxnqnwbfpuszvbdzk0avr7tjzpasak9t
         type_plat: entree
         commentaire: version modifier resistance 2025
       - recette: kuku-sabzi-vegan_9yunl3t9
@@ -192,7 +192,7 @@ repas:
       - recette: granola-sale-pour-soupe_0w730pey
         type_plat: plat
         altAssiettes: 220
-      - recette: burgers-galettes-de-pomme-de-terre-et-frites_hy9ryxxqw2l_5fcwcxk8fsvno74utekr4ubx
+      - recette: burgers-galettes-de-pomme-de-terre-et-frites_hy9ryxxqw2l
         type_plat: plat
       - recette: fromage-blanc-et-fruits-rouges-et-son-alernative-vegan_b19pugeu
         type_plat: dessert

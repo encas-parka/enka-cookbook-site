@@ -1,4 +1,5 @@
 ---
+title: Événements
 output:
   - HTML
 

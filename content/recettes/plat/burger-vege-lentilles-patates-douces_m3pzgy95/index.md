@@ -1,140 +1,142 @@
 ---
 categories:
-- Snacking
+  - Snacking
 check: Oui
 checkAlwaysOk: false
 checkfor: 170
 cuisson: Oui
 draft: false
 ingredients:
-  epices:
-  - commentaire: galettes
+  - ingredient: curcuma-moulu_htp5ma
     quantite: 60
-    title: Curcuma moulu
     unit: grammes
-  - commentaire: galettes
+    commentaire: galettes
+  - ingredient: curry_7jceco
     quantite: 75
-    title: Curry
     unit: grammes
-  - commentaire: galettes
+    commentaire: galettes
+  - ingredient: cumin-moulu_he3u48
     quantite: 75
-    title: Cumin moulu
     unit: grammes
-  - commentaire: galettes
+    commentaire: galettes
+  - ingredient: persil-frais_hgfa4e
     quantite: 7
-    title: Persil frais
     unit: bottes
-  - commentaire: Sauce
+    commentaire: galettes
+  - ingredient: persil-frais_hgfa4e
     quantite: 8
-    title: Persil frais
     unit: bottes
-  - commentaire: galettes
+    commentaire: Sauce
+  - ingredient: coriandre-fraiche_fetrpe
     quantite: 7
-    title: Coriandre fraîche
     unit: bottes
-  - commentaire: PM galettes
+    commentaire: galettes
+  - ingredient: sel_2juq3x
     quantite: 40
-    title: Sel
     unit: grammes
-  - commentaire: PM Sauce
+    commentaire: PM galettes
+  - ingredient: sel_2juq3x
     quantite: 50
-    title: Sel
     unit: grammes
-  - commentaire: PM galettes
+    commentaire: PM Sauce
+  - ingredient: poivre-noir-moulu_rgt7s4
     quantite: 20
-    title: Poivre noir moulu
     unit: grammes
-  - commentaire: PM Sauce
+    commentaire: PM galettes
+  - ingredient: poivre-noir-moulu_rgt7s4
     quantite: 25
-    title: Poivre noir moulu
     unit: grammes
-  frais:
-  - commentaire: Sauce
+    commentaire: PM Sauce
+  - ingredient: fromage-blanc_b2dxf8
     quantite: 8
-    title: Fromage blanc
     unit: Kg
-  - commentaire: sauce végane
+    commentaire: Sauce
+  - ingredient: yaourt-de-soja_hlbwfd
     quantite: 500
-    title: Yaourt de soja
     unit: grammes
-  legumes:
-  - commentaire: galettes
+    commentaire: sauce végane
+  - ingredient: patates-douces_ndu75n
     quantite: 6.5
-    title: Patates douces
     unit: Kg
-  - commentaire: galettes
+    commentaire: galettes
+  - ingredient: oignon_rtavky
     quantite: 1.95
-    title: Oignon
     unit: Kg
-  - commentaire: galettes
+    commentaire: galettes
+  - ingredient: ail_u2m28w
     quantite: 13
-    title: Ail
     unit: gousse·s
-  - commentaire: Garniture
+    commentaire: galettes
+  - ingredient: tomate_ibtbnq
     quantite: 5
-    title: Tomate
     unit: Kg
-  - commentaire: Iceberg Garniture
+    commentaire: Garniture
+  - ingredient: salade-verte-chene_cg3wgm
     quantite: 6
-    title: Salade verte (chêne)
     unit: unité
-  - commentaire: Accompagnement
+    commentaire: Iceberg Garniture
+  - ingredient: salade-verte-chene_cg3wgm
     quantite: 12
-    title: Salade verte (chêne)
     unit: unité
-  - commentaire: Sauce
+    commentaire: Accompagnement
+  - ingredient: echalote_vwdomu
     quantite: 400
-    title: Echalote
     unit: grammes
-  - commentaire: Sauce
+    commentaire: Sauce
+  - ingredient: ail_u2m28w
     quantite: 16
-    title: Ail
     unit: tête·s
-  - commentaire: Accompagnement Frites (agria, binjte)
+    commentaire: Sauce
+  - ingredient: pomme-de-terre_18dy4e
     quantite: 25
-    title: Pomme de terre
     unit: Kg
-  lof:
-  - commentaire: galettes
+    commentaire: Accompagnement Frites (agria, binjte)
+  - ingredient: huile-dolive_h3c8al
     quantite: 210
-    title: Huile d'olive
     unit: mL
-  - commentaire: galettes
+    commentaire: galettes
+  - ingredient: farine-de-ble_2av6w8
     quantite: 649.1
-    title: Farine de blé
     unit: grammes
-  sec:
-  - commentaire: galettes
+    commentaire: galettes
+  - ingredient: lentilles-corail_toc8a7
     quantite: 1.3
-    title: Lentilles corail
     unit: Kg
-  - commentaire: galettes
+    commentaire: galettes
+  - ingredient: petits-flocons-davoine_51luzk
     quantite: 550
-    title: Petits flocons d'avoine
     unit: grammes
-  - commentaire: Sauce
+    commentaire: galettes
+  - ingredient: noix_usibcf
     quantite: 1
-    title: Noix
     unit: Kg
+    commentaire: Sauce
 layout: recettes
 plate: 100
-preparation: "  **galettes patates douces lentilles:**\n  - Éplucher les patates douces\
-  \ et les faire cuire à la vapeur pendant 20 minutes.\n  - Cuire les lentilles 10\
-  \ minutes.\n  - Faire revenir les oignons avec l'huile d'olive, le curcuma, le curry,\
-  \ le cumin et l'ail.\n  - Écraser les patates douces et les lentilles, ajouter les\
-  \ oignons, la farine, les flocons d'avoine, le persil et la coriandre, assaisonner\
-  \ et mélanger. \n  - Former les galettes et les cuire 20 minutes à 200°C.\n  - Congeler\
-  \ les galettes et les passer en friteuse avant l'envoi.\n\n **sauce fromage blanc:**\n\
-  \  - Rôtir les têtes d'ail, les presser et les mélanger au fromage blanc.\n  - Ajouter\
-  \ les noix, le persil et les échalotes, assaisonner.\n\n  **accompagnement:**\n\
-  \  - Blanchir les pommes de terre, puis les frire.\n  - Laver la salade verte.\n\
-  \n  **montage:**\n  - Déposer la sauce sur le pain, ajouter la salade, la galette,\
-  \ le chou, puis refermer le burger. \n  - Servir avec la salade verte et les frites,\
-  \ accompagné de la sauce fromage blanc."
-publishDate: 2024-05-18 17:59:00+00:00
+preparation: |2-
+    **galettes patates douces lentilles:**
+    - Éplucher les patates douces et les faire cuire à la vapeur pendant 20 minutes.
+    - Cuire les lentilles 10 minutes.
+    - Faire revenir les oignons avec l'huile d'olive, le curcuma, le curry, le cumin et l'ail.
+    - Écraser les patates douces et les lentilles, ajouter les oignons, la farine, les flocons d'avoine, le persil et la coriandre, assaisonner et mélanger.
+    - Former les galettes et les cuire 20 minutes à 200°C.
+    - Congeler les galettes et les passer en friteuse avant l'envoi.
+
+   **sauce fromage blanc:**
+    - Rôtir les têtes d'ail, les presser et les mélanger au fromage blanc.
+    - Ajouter les noix, le persil et les échalotes, assaisonner.
+
+    **accompagnement:**
+    - Blanchir les pommes de terre, puis les frire.
+    - Laver la salade verte.
+
+    **montage:**
+    - Déposer la sauce sur le pain, ajouter la salade, la galette, le chou, puis refermer le burger.
+    - Servir avec la salade verte et les frites, accompagné de la sauce fromage blanc.
+publishDate: 2024-05-18T17:59:00.000Z
 quantite_desc: 1 burger par personne
 regime:
-- vegetarien
+  - vegetarien
 temperature: Chaud
 title: Burger Végé Lentilles Patates Douces
 type: plat

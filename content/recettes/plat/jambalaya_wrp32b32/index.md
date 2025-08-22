@@ -48,61 +48,74 @@ prepAlt:
   - recetteAlt: jambalaya-vegan_bsjylxuj
 publishDate: 2025-06-01T19:06:00.000Z
 ingredients:
-  epices:
-    - unit: grammes
-      quantite: 20
-      title: Cumin moulu
-    - unit: grammes
-      quantite: 40
-      title: Poivre
-    - unit: grammes
-      quantite: 40
-      title: Oignon en poudre
-    - unit: grammes
-      quantite: 80
-      title: Ail en poudre
-    - unit: grammes
-      quantite: 80
-      title: Thym
-    - unit: grammes
-      quantite: 80
-      title: Origan
-    - unit: grammes
-      quantite: 125
-      title: Paprika
-    - unit: bottes
-      quantite: 4
-      title: Persil frais
-  autres:
-    - unit: Kg
-      quantite: 3
-      title: Chorizo végan
-  animaux:
-    - unit: unité
-      quantite: 10
-      title: Poulet (volaille et gibier)
-  sec:
-    - unit: Kg
-      quantite: 10
-      title: Riz
-  legumes:
-    - unit: tête·s
-      quantite: 6
-      title: Ail
-    - unit: Kg
-      quantite: 8
-      title: Poivron (vert)
-    - unit: Kg
-      quantite: 8
-      title: Poivron (rouge)
-    - unit: Kg
-      quantite: 1
-      title: Céleri branche
-    - unit: Kg
-      quantite: 2
-      title: Cébette - Ciboule - Cive - Oignon vert
-    - unit: Kg
-      quantite: 10
-      title: Oignon
+  - ingredient: cumin-moulu_he3u48
+    quantite: 20
+    unit: grammes
+    commentaire: ''
+  - ingredient: poivre_2pps90
+    quantite: 40
+    unit: grammes
+    commentaire: ''
+  - ingredient: oignon-en-poudre_q28bck
+    quantite: 40
+    unit: grammes
+    commentaire: ''
+  - ingredient: ail-en-poudre_vs2dfm
+    quantite: 80
+    unit: grammes
+    commentaire: ''
+  - ingredient: thym_a16yd7
+    quantite: 80
+    unit: grammes
+    commentaire: ''
+  - ingredient: origan_fkftyb
+    quantite: 80
+    unit: grammes
+    commentaire: ''
+  - ingredient: paprika_bidsmu
+    quantite: 125
+    unit: grammes
+    commentaire: ''
+  - ingredient: persil-frais_hgfa4e
+    quantite: 4
+    unit: bottes
+    commentaire: ''
+  - ingredient: chorizo-vegan_f1xrxx
+    quantite: 3
+    unit: Kg
+    commentaire: ''
+  - ingredient: poulet-volaille-et-gibier_11b1e0
+    quantite: 10
+    unit: unité
+    commentaire: ''
+  - ingredient: riz_0uelc3
+    quantite: 10
+    unit: Kg
+    commentaire: ''
+  - ingredient: ail_u2m28w
+    quantite: 6
+    unit: tête·s
+    commentaire: ''
+  - ingredient: poivron-vert_rl1e9p
+    quantite: 8
+    unit: Kg
+    commentaire: ''
+  - ingredient: poivron-rouge_0zglpj
+    quantite: 8
+    unit: Kg
+    commentaire: ''
+  - ingredient: celeri-branche_78fo97
+    quantite: 1
+    unit: Kg
+    commentaire: ''
+  - ingredient: cebette-ciboule-cive-oignon-vert_j7as8d
+    quantite: 2
+    unit: Kg
+    commentaire: ''
+  - ingredient: oignon_rtavky
+    quantite: 10
+    unit: Kg
+    commentaire: ''
 ---
+
 

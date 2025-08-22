@@ -15,37 +15,38 @@ plate: 25
 check: Non
 checkAlwaysOk: false
 ingredients:
-  epices:
-    - title: Vinaigre de riz
-      quantite: 300
-      unit: ml
-    - title: Gochujang sans gluten
-      quantite: 250
-      unit: grammes
-  sucres:
-    - title: "Sirop d'érable "
-      quantite: 125
-      unit: ml
-    - title: Soda au Gingembre - Ginger Beer
-      quantite: 250
-      unit: ml
-  lof:
-    - title: huile de tournesol
-      quantite: 250
-      unit: ml
-  legumes:
-    - title: Gingembre bio
-      quantite: 80
-      unit: grammes
-      commentaire: râpé
-    - title: Ail
-      quantite: 8
-      unit: gousse·s
-      commentaire: haché
-  autres:
-    - title: Eau
-      quantite: 500
-      unit: ml
+  - ingredient: vinaigre-de-riz_k6injl
+    quantite: 300
+    unit: ml
+    commentaire: ''
+  - ingredient: gochujang-sans-gluten_28jpdi
+    quantite: 250
+    unit: grammes
+    commentaire: ''
+  - ingredient: sirop-derable_zkmmgt
+    quantite: 125
+    unit: ml
+    commentaire: ''
+  - ingredient: soda-au-gingembre-ginger-beer_s80bet
+    quantite: 250
+    unit: ml
+    commentaire: ''
+  - ingredient: huile-de-tournesol_c70jxb
+    quantite: 250
+    unit: ml
+    commentaire: ''
+  - ingredient: gingembre-bio_nz839c
+    quantite: 80
+    unit: grammes
+    commentaire: râpé
+  - ingredient: ail_u2m28w
+    quantite: 8
+    unit: gousse·s
+    commentaire: haché
+  - ingredient: eau_ljzb7j
+    quantite: 500
+    unit: ml
+    commentaire: ''
 preparation: |-
   Tout mixer !!
 

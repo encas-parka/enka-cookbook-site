@@ -13,44 +13,44 @@ plate: 12
 check: Oui
 checkAlwaysOk: false
 ingredients:
-  sec:
-    - title: Sarrasin
-      quantite: 100
-      unit: grammes
-  lof:
-    - title: Farine de blé
-      quantite: 250
-      unit: grammes
-    - title: Crème soja
-      quantite: 200
-      unit: ml
-    - title: lait d’amande
-      quantite: 300
-      unit: grammes
-    - title: huile d'olive
-      quantite: 20
-      unit: grammes
-  sucres:
-    - title: Chocolat noir patissier 70p100
-      quantite: 200
-      unit: grammes
-    - title: Confiture de chataigne (sans sucre)
-      quantite: 325
-      unit: grammes
-  autres:
-    - title: Levure chimique
-      quantite: 1
-      unit: unité
-preparation: >-
-  Verse la crème de marron dans un bol et détend la un peu au fouet, ajoute le
-  lait végétal, l’huile et fouette bien.
-
+  - ingredient: sarrasin_9f35oz
+    quantite: 100
+    unit: grammes
+    commentaire: ''
+  - ingredient: farine-de-ble_2av6w8
+    quantite: 250
+    unit: grammes
+    commentaire: ''
+  - ingredient: creme-soja_chfwwq
+    quantite: 200
+    unit: ml
+    commentaire: ''
+  - ingredient: lait-damande_csxbg6
+    quantite: 300
+    unit: grammes
+    commentaire: ''
+  - ingredient: huile-dolive_h3c8al
+    quantite: 20
+    unit: grammes
+    commentaire: ''
+  - ingredient: chocolat-noir-patissier-70p100_1e3zhq
+    quantite: 200
+    unit: grammes
+    commentaire: ''
+  - ingredient: confiture-de-chataigne-sans-sucre_q33x0k
+    quantite: 325
+    unit: grammes
+    commentaire: ''
+  - ingredient: levure-chimique_vgec6e
+    quantite: 1
+    unit: unité
+    commentaire: ''
+preparation: |-
+  Verse la crème de marron dans un bol et détend la un peu au fouet, ajoute le lait végétal, l’huile et fouette bien.
 
   Ajoute la farine, la levure et mélange.
 
-
   Verse dans le moule de ton choix et enfourne 1 heure au four à 180°
-
 
   Met ensuite le nappage (chocolat + crème de soja) ainsi que les graines de sarrasin torréfiées
 publishDate: 2025-05-22T17:00:00.000Z

@@ -1,72 +1,67 @@
 ---
 categories:
-- Biscuits
+  - Biscuits
 check: Oui
 checkAlwaysOk: false
 cuisson: Oui
 draft: false
 ingredients:
-  autres:
-  - quantite: 60
-    title: Purée d'amande
+  - ingredient: puree-damande_7dlfuw
+    quantite: 60
     unit: grammes
-  epices:
-  - quantite: 1
-    title: Sel
-    unit: pincées
-  - commentaire: (branche)
+    commentaire: ''
+  - ingredient: sel_2juq3x
     quantite: 1
-    title: Romarin
+    unit: pincées
+    commentaire: ''
+  - ingredient: romarin_6z655r
+    quantite: 1
     unit: unité
-  lof:
-  - quantite: 90
-    title: huile d'olive
+    commentaire: (branche)
+  - ingredient: huile-dolive_h3c8al
+    quantite: 90
     unit: ml
-  - quantite: 30
-    title: Fécule de maïs (Maïzena)
+    commentaire: ''
+  - ingredient: fecule-de-mais-maizena_8nbcjp
+    quantite: 30
     unit: grammes
-  - quantite: 120
-    title: Farine de riz blanche
+    commentaire: ''
+  - ingredient: farine-de-riz-blanche_1nb85u
+    quantite: 120
     unit: grammes
-  sucres:
-  - quantite: 50
-    title: Chocolat noir patissier 70p100
+    commentaire: ''
+  - ingredient: chocolat-noir-patissier-70p100_1e3zhq
+    quantite: 50
     unit: grammes
-  - quantite: 70
-    title: Muscovado (sucre de canne complet)
+    commentaire: ''
+  - ingredient: muscovado-sucre-de-canne-complet_l5w2jl
+    quantite: 70
     unit: grammes
-  - quantite: 100
-    title: Poudre d'amandes
+    commentaire: ''
+  - ingredient: poudre-damandes_rmgr7l
+    quantite: 100
     unit: grammes
+    commentaire: ''
 layout: recettes
 materiel:
-- Four
+  - Four
 plate: 10
-preparation: '
+preparation: |-
 
 
 
 
-  * Mélanger tous les ingrédients secs (chocolat cassé en pépite et feuilles de romarin
-  hachée) du biscuit dans un récipient. Ajoutez ensuite l’huile d''olive, la purée
-  d’oléagineux  et mélanger bien jusqu’à obtenir une pâte homogène. Si la préparation
-  colle trop, ajouter de la farine.
-
-  * Verser la pâte dans un moule rectangulaire recouvert de papier cuisson et aplatir
-  dans le fond du moule, piquer à l’aide d’une fourchette.
-
+  * Mélanger tous les ingrédients secs (chocolat cassé en pépite et feuilles de romarin hachée) du biscuit dans un récipient. Ajoutez ensuite l’huile d'olive, la purée d’oléagineux  et mélanger bien jusqu’à obtenir une pâte homogène. Si la préparation colle trop, ajouter de la farine.
+  * Verser la pâte dans un moule rectangulaire recouvert de papier cuisson et aplatir dans le fond du moule, piquer à l’aide d’une fourchette.
   * Enfourner environ 25minutes à 170°.
-
-  * Si le biscuit colore trop, baisser légèrement la température, le biscuit doit
-  être presque blanc.
-
-  * Sortir du four et découper un fois presque refroidi.'
-publishDate: 2024-06-18 12:29:00+00:00
+  * Si le biscuit colore trop, baisser légèrement la température, le biscuit doit être presque blanc.
+  * Sortir du four et découper un fois presque refroidi.
+publishDate: 2024-06-18T12:29:00.000Z
 regime:
-- vegetarien
-- sans-gluten
-- vegan
-- sans-lactose
+  - vegetarien
+  - sans-gluten
+  - vegan
+  - sans-lactose
 temperature: Froid
 title: SHORTBREAD HUILE D'OLIVE, ROMARIN ET CHOCOLAT Sans Gluten
 type: dessert

@@ -14,24 +14,23 @@ plate: 350
 check: Oui
 checkAlwaysOk: false
 ingredients:
-  sec:
-    - title: Pois cassés
-      quantite: 7
-      unit: Kg
-  legumes:
-    - title: Petits pois surgelés
-      quantite: 7
-      unit: Kg
-  autres:
-    - title: Beurre de cacahuètes (salé)
-      quantite: 1.75
-      unit: Kg
-  epices:
-    - title: Feuille de laurier
-      quantite: 35
-      unit: unité
-preparation: "* Le jour même, mélanger les deux sortes de pois, ajouter le
-  beurre de cacahuète et corriger sel et poivre."
+  - ingredient: pois-casses_7v72le
+    quantite: 7
+    unit: Kg
+    commentaire: ''
+  - ingredient: petits-pois-surgeles_8y3ngp
+    quantite: 7
+    unit: Kg
+    commentaire: ''
+  - ingredient: beurre-de-cacahuetes-sale_ks3ocl
+    quantite: 1.75
+    unit: Kg
+    commentaire: ''
+  - ingredient: feuille-de-laurier_j84olg
+    quantite: 35
+    unit: unité
+    commentaire: ''
+preparation: '* Le jour même, mélanger les deux sortes de pois, ajouter le beurre de cacahuète et corriger sel et poivre.'
 preparation24h: |-
   **2 jours avant :**
 

@@ -1,8 +1,7 @@
 ---
-title: " Houmous de poivrons"
+title: 'Houmous de poivrons'
 draft: false
 layout: recettes
-
 type: entree
 categories:
   - Tartinade
@@ -15,49 +14,35 @@ cuisson: Oui
 temperature: Froid
 plate: 100
 ingredients:
-  sec:
-    - title: Pois chiches
-      quantite: 1.5
-      unit: Kg
-  legumes:
-    - title: Ail
-      quantite: 6
-      unit: gousse·s
-  lof:
-    - title: huile d'olive
-      quantite: 0.75
-      unit: litre
-  autres:
-    - title: Tahin
-      quantite: 2
-      unit: Kg
-  epices:
-    - title: Paprika
-      quantite: 100
-      unit: grammes
-    - title: Sel
-    - title: Poivre
-  sucres:
-    - title: Jus de citron
-      quantite: 0.75
-      unit: litre
-preparation: >-
-  • Épépinez et coupez les poivrons. Arrosez d'un bon filet d’huile d’olive. Faire
-  cuire au four à 200° pendant 45 mn en les retournant deux ou trois fois
-  pendant la cuisson.
-
-  • Après cuisson, les faire refroidir (dans un sac plastique, c'est plus facile pour enlever la peau) et enlever la peau.
-
-  • Égoutter les pois chiches et les mixer avec le tahine le jus de citron et de l'ail.
-
-  • Rajouter les poivrons, l'huile d'olive, le paprika, le sel, le poivre et finir de mixer.
-
-  • Au dressage, saupoudrer de graines de sésame.
-preparation24h: >-
-  **24H avant**, FAIRE TREMPER LES POIS CHICHES dans 3 fois leur volume
-  d'eau et changer l'eau le matin pour éviter que ça fermente. 
-
-
-  **Obligatoirement 1 J avant**
+  - ingredient: pois-chiches_6a8w8k
+    quantite: 1.5
+    unit: Kg
+    commentaire: ''
+  - ingredient: ail_u2m28w
+    quantite: 6
+    unit: gousse·s
+    commentaire: ''
+  - ingredient: huile-dolive_h3c8al
+    quantite: 0.75
+    unit: litre
+    commentaire: ''
+  - ingredient: tahin_u33083
+    quantite: 2
+    unit: Kg
+    commentaire: ''
+  - ingredient: paprika_bidsmu
+    quantite: 100
+    unit: grammes
+    commentaire: ''
+  - ingredient: sel_2juq3x
+    commentaire: ''
+  - ingredient: poivre_2pps90
+    commentaire: ''
+  - ingredient: jus-de-citron_e4mjd1
+    quantite: 0.75
+    unit: litre
+    commentaire: ''
+preparation: "•\_Épépinez\_et\_coupez\_les\_poivrons.\_Arrosez\_d'un\_bon\_filet\_d’huile\_d’olive.\_Faire cuire\_au\_four\_à\_200°\_pendant\_45\_mn\_en\_les\_retournant\_deux\_ou\_trois\_fois pendant\_la\_cuisson.\n•\_Après\_cuisson,\_les\_faire\_refroidir\_(dans\_un\_sac\_plastique,\_c'est\_plus\_facile pour\_enlever\_la\_peau)\_et\_enlever\_la\_peau.\n•\_Égoutter\_les\_pois\_chiches\_et\_les\_mixer\_avec\_le\_tahine\_le\_jus\_de\_citron\_et\_de l'ail.\n•\_Rajouter\_les\_poivrons,\_l'huile\_d'olive,\_le\_paprika,\_le\_sel,\_le\_poivre\_et\_finir\_de mixer.\n•\_Au\_dressage,\_saupoudrer\_de\_graines\_de\_sésame."
+preparation24h: "**24H\_avant**,\_FAIRE\_TREMPER\_LES\_POIS\_CHICHES\_dans\_3\_fois\_leur\_volume d'eau\_et\_changer\_l'eau\_le\_matin\_pour\_éviter\_que\_ça\_fermente. \n\n**Obligatoirement\_1\_J\_avant**"
 publishDate: 2023-06-21T09:47:13.131Z
 ---

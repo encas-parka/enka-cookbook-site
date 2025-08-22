@@ -1,5 +1,5 @@
 ---
-title: " Fondant Chataigne (vegan et sans gluten)"
+title: 'Fondant Chataigne (vegan et sans gluten)'
 draft: false
 layout: recettes
 type: dessert
@@ -16,44 +16,43 @@ quantite_desc: 24 parts par gastro (env. 9cmx8cm)
 check: Oui
 checkAlwaysOk: false
 ingredients:
-  sucres:
-    - title: Poudre d'amandes
-      quantite: 400
-      unit: grammes
-    - title: Sucre en poudre
-      quantite: 400
-      unit: grammes
-    - title: Confiture de chataigne (sans sucre)
-      quantite: 1.5
-      unit: Kg
-  lof:
-    - title: Lait de soja
-      quantite: 600
-      unit: ml
-    - title: Farine de tapioca
-      quantite: 70
-      unit: grammes
-    - title: Farine de riz gluant
-      quantite: 70
-      unit: grammes
-  epices:
-    - title: Sel
-      quantite: 1.5
-      unit: c. à café
+  - ingredient: poudre-damandes_rmgr7l
+    quantite: 400
+    unit: grammes
+    commentaire: ''
+  - ingredient: sucre-en-poudre_u9z2he
+    quantite: 400
+    unit: grammes
+    commentaire: ''
+  - ingredient: confiture-de-chataigne-sans-sucre_q33x0k
+    quantite: 1.5
+    unit: Kg
+    commentaire: ''
+  - ingredient: lait-de-soja_gpeob7
+    quantite: 600
+    unit: ml
+    commentaire: ''
+  - ingredient: farine-de-tapioca_v212im
+    quantite: 70
+    unit: grammes
+    commentaire: ''
+  - ingredient: farine-de-riz-gluant_civ587
+    quantite: 70
+    unit: grammes
+    commentaire: ''
+  - ingredient: sel_2juq3x
+    quantite: 1.5
+    unit: c. à café
+    commentaire: ''
 materiel:
   - Gastro 1/1 (Normaux)
   - Four
-preparation: >-
+preparation: |-
   * Faire fondre le beurre.
-
   * Mélanger tout afin d'obtenir une pâte homogène.
-
   * Tapisser les gastro de papier sulfurisé et verser la pâte.
-
   * Cuire dans un four préchauffé à 200°, une vingtaine de minutes.
-
   * Le gateau gonfle, se fissure, le sortir quand le coeur est encore tremblotant, et le laisser refroidir completement avant de faire les parts.
-
 
   (24 parts par gastro. )
 prepAlt:

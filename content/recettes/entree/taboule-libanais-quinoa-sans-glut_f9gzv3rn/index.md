@@ -19,35 +19,34 @@ temperature: Froid
 plate: 100
 check: Oui
 ingredients:
-  sucres:
-    - title: Jus de citron
-      quantite: 2
-      unit: litre
-  lof:
-    - title: huile d'olive
-      quantite: 2
-      unit: litre
-  autres: []
-  legumes:
-    - title: Echalote
-      quantite: 600
-      unit: grammes
-    - title: Tomate
-      quantite: 10
-      unit: Kg
-      commentaire: grosses tomates de préférences
-  epices:
-    - title: Persil frais
-      quantite: 6
-      unit: Kg
-    - title: Menthe
-      quantite: 10
-      unit: bottes
-  animaux: []
-  sec:
-    - title: Quinoa blanc
-      quantite: 1
-      unit: Kg
+  - ingredient: jus-de-citron_e4mjd1
+    quantite: 2
+    unit: litre
+    commentaire: ''
+  - ingredient: huile-dolive_h3c8al
+    quantite: 2
+    unit: litre
+    commentaire: ''
+  - ingredient: echalote_vwdomu
+    quantite: 600
+    unit: grammes
+    commentaire: ''
+  - ingredient: tomate_ibtbnq
+    quantite: 10
+    unit: Kg
+    commentaire: grosses tomates de préférences
+  - ingredient: persil-frais_hgfa4e
+    quantite: 6
+    unit: Kg
+    commentaire: ''
+  - ingredient: menthe_2j9y2v
+    quantite: 10
+    unit: bottes
+    commentaire: ''
+  - ingredient: quinoa-blanc_csxn1a
+    quantite: 1
+    unit: Kg
+    commentaire: ''
 preparation: |-
   * Précuire le quinoa ou le millet dans l’eau bouillante.
   * Laver le persil et couper le en FINE JULIENNE (1mm d'epaisseur)

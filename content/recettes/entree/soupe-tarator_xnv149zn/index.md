@@ -17,27 +17,27 @@ quantite_desc: 250ml par personne
 check: Non
 checkAlwaysOk: false
 ingredients:
-  legumes:
-    - title: Ail
-      quantite: 5
-      unit: tête·s
-    - title: Concombre
-      quantite: 15
-      unit: Kg
-  epices:
-    - title: Aneth aromatique
-      quantite: 6
-      unit: bottes
-  frais:
-    - title: Yaourt nature
-      quantite: 10
-      unit: Kg
-      commentaire: ou mieux, yaourt brassé
-  lof:
-    - title: huile d'olive
-      quantite: 1
-      unit: litre
-preparation: >-
+  - ingredient: ail_u2m28w
+    quantite: 5
+    unit: tête·s
+    commentaire: ''
+  - ingredient: concombre_l5p1a5
+    quantite: 15
+    unit: Kg
+    commentaire: ''
+  - ingredient: aneth-aromatique_nnkg8f
+    quantite: 6
+    unit: bottes
+    commentaire: ''
+  - ingredient: yaourt-nature_yl86w7
+    quantite: 10
+    unit: Kg
+    commentaire: ou mieux, yaourt brassé
+  - ingredient: huile-dolive_h3c8al
+    quantite: 1
+    unit: litre
+    commentaire: ''
+preparation: |-
   * Fouetter les yaourts jusqu’à ce qu’ils deviennent bien liquides. 
     Ajouter, au besoin un peu d’eau fraîche (pas trop non plus puisque l’eau
      du concombre viendra s’y ajouter), surtout si ce sont des 
@@ -53,12 +53,9 @@ preparation: >-
 
   * Éplucher et dégermer l’ail. Écraser avec un presse-ail (ou hacher très finement). 
 
-
   * Ciseler l’aneth et mélanger au yaourt battu. 
 
-
   * Ajouter l’ail, l’huile d’olive et les concombres râpés. 'optionnel : des noix concassés.
-
 
   * Mélanger le tout et garder bien au frais avant de servir.
 

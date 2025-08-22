@@ -13,32 +13,34 @@ plate: 12
 check: Oui
 checkAlwaysOk: false
 ingredients:
-  sec:
-    - title: Sarrasin
-      quantite: 100
-      unit: grammes
-  lof:
-    - title: Oeuf
-      quantite: 4
-      unit: unité
-    - title: Farine de blé noir (sarrasin)
-      quantite: 2
-      unit: c. à soupe
-  frais:
-    - title: Beurre demi-sel
-      quantite: 25
-      unit: grammes
-      commentaire: pour la nappage à mélanger avec le chocolat
-    - title: Beurre demi-sel
-      quantite: 100
-      unit: grammes
-  sucres:
-    - title: Confiture de chataigne (sans sucre)
-      quantite: 500
-      unit: grammes
-    - title: Chocolat noir patissier 70p100
-      quantite: 200
-      unit: grammes
+  - ingredient: sarrasin_9f35oz
+    quantite: 100
+    unit: grammes
+    commentaire: ''
+  - ingredient: oeuf_zf3zf8
+    quantite: 4
+    unit: unité
+    commentaire: ''
+  - ingredient: farine-de-ble-noir-sarrasin_2ej7fi
+    quantite: 2
+    unit: c. à soupe
+    commentaire: ''
+  - ingredient: beurre-demi-sel_mxub21
+    quantite: 25
+    unit: grammes
+    commentaire: pour la nappage à mélanger avec le chocolat
+  - ingredient: beurre-demi-sel_mxub21
+    quantite: 100
+    unit: grammes
+    commentaire: ''
+  - ingredient: confiture-de-chataigne-sans-sucre_q33x0k
+    quantite: 500
+    unit: grammes
+    commentaire: ''
+  - ingredient: chocolat-noir-patissier-70p100_1e3zhq
+    quantite: 200
+    unit: grammes
+    commentaire: ''
 preparation: |-
   Mélanger tous les ingrédients
 

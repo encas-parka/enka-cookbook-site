@@ -18,28 +18,30 @@ plate: 50
 check: Non
 checkAlwaysOk: true
 ingredients:
-  legumes:
-    - title: Concombre
-      quantite: 2.5
-      unit: Kg
-  epices:
-    - title: Poivre
-    - title: Sel
-    - title: Aneth aromatique
-      quantite: 2
-      unit: bottes
-  frais:
-    - title: Yaourt de soja
-      quantite: 550
-      unit: grammes
-  lof:
-    - title: huile d'olive
-      quantite: 300
-      unit: ml
-  sec:
-    - title: Amandes effilées
-      quantite: 200
-      unit: grammes
+  - ingredient: concombre_l5p1a5
+    quantite: 2.5
+    unit: Kg
+    commentaire: ''
+  - ingredient: poivre_2pps90
+    commentaire: ''
+  - ingredient: sel_2juq3x
+    commentaire: ''
+  - ingredient: aneth-aromatique_nnkg8f
+    quantite: 2
+    unit: bottes
+    commentaire: ''
+  - ingredient: yaourt-de-soja_hlbwfd
+    quantite: 550
+    unit: grammes
+    commentaire: ''
+  - ingredient: huile-dolive_h3c8al
+    quantite: 300
+    unit: ml
+    commentaire: ''
+  - ingredient: amandes-effilees_xkijt9
+    quantite: 200
+    unit: grammes
+    commentaire: ''
 preparation: |-
   Mandoliner le concombre au robocoupe (si vous en avez un :p)
 
@@ -48,5 +50,6 @@ preparation: |-
   Tout mélanger
 
   (possible de remplacer les amandes effilées par amandes concassées)
-publishDate: 2025-07-31T10:37:00.000+02:00
+publishDate: 2025-07-31T08:37:00.000Z
 ---
+

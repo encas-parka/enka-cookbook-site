@@ -15,35 +15,32 @@ plate: 20
 check: Oui
 checkAlwaysOk: false
 ingredients:
-  legumes:
-    - title: Echalote
-      quantite: 150
-      unit: grammes
-    - title: Ail
-      quantite: 2
-      unit: gousse·s
-  lof:
-    - title: huile d'olive
-      quantite: 50
-      unit: ml
-  frais:
-    - title: Yaourt de soja
-      quantite: 200
-      unit: grammes
-  sucres:
-    - title: Confiture de chataigne (sans sucre)
-      quantite: 750
-      unit: grammes
-  autres: []
-  epices:
-    - title: Paprika
-      quantite: 8
-      unit: grammes
-preparation: >-
-  * Emincer très fin les échalottes, hacher l'ail et brasser tous les
-  ingrédients ensemble à l'aide d'une spatule ou aux mains. La texture doit être
-  épaisse.
-
+  - ingredient: echalote_vwdomu
+    quantite: 150
+    unit: grammes
+    commentaire: ''
+  - ingredient: ail_u2m28w
+    quantite: 2
+    unit: gousse·s
+    commentaire: ''
+  - ingredient: huile-dolive_h3c8al
+    quantite: 50
+    unit: ml
+    commentaire: ''
+  - ingredient: yaourt-de-soja_hlbwfd
+    quantite: 200
+    unit: grammes
+    commentaire: ''
+  - ingredient: confiture-de-chataigne-sans-sucre_q33x0k
+    quantite: 750
+    unit: grammes
+    commentaire: ''
+  - ingredient: paprika_bidsmu
+    quantite: 8
+    unit: grammes
+    commentaire: ''
+preparation: |-
+  * Emincer très fin les échalottes, hacher l'ail et brasser tous les ingrédients ensemble à l'aide d'une spatule ou aux mains. La texture doit être épaisse.
   * Goûter et réajuster l'assaisonnement, sel, poivre, paprika, ail.
 prepAlt:
   - recetteAlt: Tartinade salé a la chataigne

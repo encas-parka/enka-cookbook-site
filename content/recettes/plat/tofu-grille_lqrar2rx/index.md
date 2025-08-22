@@ -14,22 +14,22 @@ plate: 30
 check: Oui
 checkAlwaysOk: false
 ingredients:
-  sec: []
-  lof:
-    - title: huile de friture
-      quantite: 1
-      unit: litre
-    - title: Fécule de maïs (Maïzena)
-      quantite: 300
-      unit: grammes
-  frais:
-    - title: Tofu ferme
-      quantite: 3
-      unit: Kg
-  epices:
-    - title: Paprika fumé
-      quantite: 40
-      unit: grammes
+  - ingredient: huile-de-friture_1ej217
+    quantite: 1
+    unit: litre
+    commentaire: ''
+  - ingredient: fecule-de-mais-maizena_8nbcjp
+    quantite: 300
+    unit: grammes
+    commentaire: ''
+  - ingredient: tofu-ferme_3ahcls
+    quantite: 3
+    unit: Kg
+    commentaire: ''
+  - ingredient: paprika-fume_ique18
+    quantite: 40
+    unit: grammes
+    commentaire: ''
 preparation: |-
   essorer le tofu avec du sopalin
 

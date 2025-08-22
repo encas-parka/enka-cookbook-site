@@ -14,32 +14,32 @@ quantite_desc: une par personne
 check: Oui
 checkAlwaysOk: false
 ingredients:
-  autres:
-    - {}
-  lof:
-    - title: Huile végétale
-      quantite: 1
-      unit: litre
-    - title: Farine de riz
-      quantite: 800
-      unit: grammes
-    - title: Gluten pur
-      quantite: 2.15
-      unit: Kg
-  legumes: []
-  epices:
-    - title: bouillon cube
-      quantite: 6
-      unit: unité
-    - title: Sauce soja
-      quantite: 750
-      unit: ml
-  sucres:
-    - title: Poudre d'amandes
-      quantite: 600
-      unit: grammes
+  - ingredient: huile-vegetale_atccqu
+    quantite: 1
+    unit: litre
+    commentaire: ''
+  - ingredient: farine-de-riz_oygozr
+    quantite: 800
+    unit: grammes
+    commentaire: ''
+  - ingredient: gluten-pur_946ddw
+    quantite: 2.15
+    unit: Kg
+    commentaire: ''
+  - ingredient: bouillon-cube_57xo8g
+    quantite: 6
+    unit: unité
+    commentaire: ''
+  - ingredient: sauce-soja_jjrwlj
+    quantite: 750
+    unit: ml
+    commentaire: ''
+  - ingredient: poudre-damandes_rmgr7l
+    quantite: 600
+    unit: grammes
+    commentaire: ''
 preparation: |-
-  
+
   Faire bouillir 3L30 D'eau avec les bouillons cubes.
 
 

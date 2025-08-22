@@ -11,21 +11,22 @@ plate: 100
 check: Oui
 checkAlwaysOk: false
 ingredients:
-  frais:
-    - title: Yaourt de soja
-      quantite: 1.2
-      unit: Kg
-    - title: Fromage blanc
-      quantite: 11
-      unit: Kg
-  sucres:
-    - title: sucre de canne (blond)
-      quantite: 1
-      unit: Kg
-  legumes:
-    - title: Fruits rouges
-      quantite: 3
-      unit: Kg
+  - ingredient: yaourt-de-soja_hlbwfd
+    quantite: 1.2
+    unit: Kg
+    commentaire: ''
+  - ingredient: fromage-blanc_b2dxf8
+    quantite: 11
+    unit: Kg
+    commentaire: ''
+  - ingredient: sucre-de-canne-blond_n85gmi
+    quantite: 1
+    unit: Kg
+    commentaire: ''
+  - ingredient: fruits-rouges_rqmasf
+    quantite: 3
+    unit: Kg
+    commentaire: ''
 preparation: Ne pas oublié la version végane !!
 publishDate: 2025-05-30T21:37:00.000Z
 ---

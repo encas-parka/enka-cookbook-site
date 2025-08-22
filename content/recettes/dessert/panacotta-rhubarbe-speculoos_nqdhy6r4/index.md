@@ -13,30 +13,32 @@ plate: 100
 check: Oui
 checkAlwaysOk: false
 ingredients:
-  legumes:
-    - title: Rhubarbe
-      quantite: 7
-      unit: Kg
-  lof:
-    - title: lait d’amande
-      quantite: 4
-      unit: litre
-  sucres:
-    - title: Speculoos
-      quantite: 1
-      unit: Kg
-    - title: vanille extrait concentré
-      quantite: 40
-      unit: ml
-    - title: sucre de canne (blond)
-      quantite: 900
-      unit: grammes
-  autres:
-    - title: Agar-agar
-      quantite: 16
-      unit: grammes
+  - ingredient: rhubarbe_f7wbmo
+    quantite: 7
+    unit: Kg
+    commentaire: ''
+  - ingredient: lait-damande_csxbg6
+    quantite: 4
+    unit: litre
+    commentaire: ''
+  - ingredient: speculoos_h6thsp
+    quantite: 1
+    unit: Kg
+    commentaire: ''
+  - ingredient: vanille-extrait-concentre_n818be
+    quantite: 40
+    unit: ml
+    commentaire: ''
+  - ingredient: sucre-de-canne-blond_n85gmi
+    quantite: 900
+    unit: grammes
+    commentaire: ''
+  - ingredient: agar-agar_ruhtax
+    quantite: 16
+    unit: grammes
+    commentaire: ''
 preparation: |-
-  
+
   Épluchez et coupez la rhubarbe en petits tronçons et mettez-la dans
   une casserole avec 500g de sucre. Ajuster en gouttant.
 

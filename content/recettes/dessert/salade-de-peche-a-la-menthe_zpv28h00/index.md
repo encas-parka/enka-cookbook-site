@@ -1,36 +1,35 @@
 ---
 categories:
-- Salade
+  - Salade
 check: Oui
 checkAlwaysOk: false
 cuisson: Non
 draft: false
 ingredients:
-  epices:
-  - quantite: 1.5
-    title: Menthe
+  - ingredient: menthe_2j9y2v
+    quantite: 1.5
     unit: bottes
-  - quantite: 1.5
-    title: Menthe glaciale
+    commentaire: ''
+  - ingredient: menthe-glaciale_zo92gu
+    quantite: 1.5
     unit: bottes
-  legumes:
-  - quantite: 10
-    title: Pêche
+    commentaire: ''
+  - ingredient: peche_n1vs7d
+    quantite: 10
     unit: Kg
+    commentaire: ''
 layout: recettes
 materiel:
-- ramequins
+  - ramequins
 plate: 100
-preparation: 'Il faut soit acheter des pêches bien mûres, soit qu''elles soient acheté
-  quelques jours avant.
+preparation: |-
+  Il faut soit acheter des pêches bien mûres, soit qu'elles soient acheté quelques jours avant.
 
-
-  Si on fait la salade la veille ça permet à la menthe de bien s''infuser dans les
-  pêches et c''est meilleur.'
+  Si on fait la salade la veille ça permet à la menthe de bien s'infuser dans les pêches et c'est meilleur.
 preparation24h: Possible de préparer la veille
-publishDate: 2024-06-18 00:10:00+00:00
+publishDate: 2024-06-18T00:10:00.000Z
 saison:
-- ete
+  - ete
 temperature: Froid
 title: SALADE DE PECHE A LA MENTHE
 type: dessert

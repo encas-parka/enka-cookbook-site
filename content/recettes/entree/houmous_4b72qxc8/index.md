@@ -1,52 +1,51 @@
 ---
 categories:
-- Tartinade
+  - Tartinade
 check: Oui
 checkAlwaysOk: false
 cuisson: Oui
 draft: false
 ingredients:
-  autres:
-  - quantite: 100
-    title: Tahin
+  - ingredient: tahin_u33083
+    quantite: 100
     unit: grammes
-  - quantite: 3
-    title: Eau
+    commentaire: ''
+  - ingredient: eau_ljzb7j
+    quantite: 3
     unit: c. à soupe
-  epices:
-  - quantite: 0.5
-    title: Paprika
+    commentaire: ''
+  - ingredient: paprika_bidsmu
+    quantite: 0.5
     unit: grammes
-  legumes:
-  - quantite: 1
-    title: Ail
+    commentaire: ''
+  - ingredient: ail_u2m28w
+    quantite: 1
     unit: gousse·s
-  lof:
-  - quantite: 2
-    title: huile d'olive
+    commentaire: ''
+  - ingredient: huile-dolive_h3c8al
+    quantite: 2
     unit: c. à soupe
-  sec:
-  - quantite: 300
-    title: Pois chiche cuit
+    commentaire: ''
+  - ingredient: pois-chiche-cuit_wwl5vn
+    quantite: 300
     unit: grammes
-  sucres:
-  - quantite: 2
-    title: Jus de citron
+    commentaire: ''
+  - ingredient: jus-de-citron_e4mjd1
+    quantite: 2
     unit: c. à soupe
+    commentaire: ''
 layout: recettes
 materiel:
-- Giraffe (Bras Mixeur)
+  - Giraffe (Bras Mixeur)
 plate: 5
-preparation: '* Mixer tous les ingrédients sauf l''huile d''olive. Mais attention
-  à ne pas tout mettre dès le début, saler et ajuster au gout
-
-  * Mettre le houmous dans le bol ou l''assiette, de service, et verser un filer d''huile
-  d''olive sur le dessus. Parsemer très légèrement de paprika pour la décoration'
+preparation: |-
+  * Mixer tous les ingrédients sauf l'huile d'olive. Mais attention à ne pas tout mettre dès le début, saler et ajuster au gout
+  * Mettre le houmous dans le bol ou l'assiette, de service, et verser un filer d'huile d'olive sur le dessus. Parsemer très légèrement de paprika pour la décoration
 preparation24h: ''
-publishDate: 2024-03-18 13:12:27.157000+00:00
+publishDate: 2024-03-18T13:12:27.157Z
 regime:
-- vegan
-- vegetarien
+  - vegan
+  - vegetarien
 temperature: Froid
 title: Houmous
 type: entree

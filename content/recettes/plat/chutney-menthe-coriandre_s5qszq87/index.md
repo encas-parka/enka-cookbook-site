@@ -17,45 +17,50 @@ plate: 60
 check: Oui
 checkAlwaysOk: false
 ingredients:
-  legumes:
-    - title: Citron (jus)
-      quantite: 300
-      unit: grammes
-    - title: Gingembre
-      quantite: 150
-      unit: grammes
-    - title: Ail
-      quantite: 20
-      unit: gousse·s
-  epices:
-    - title: Cumin moulu
-      quantite: 5
-      unit: grammes
-    - title: Sel
-      quantite: 50
-      unit: grammes
-    - title: Piment vert
-      quantite: 3
-      unit: unité
-    - title: Vinaigre de cidre
-      quantite: 50
-      unit: ml
-    - title: Menthe
-      quantite: 5
-      unit: bottes
-    - title: Coriandre fraîche
-      quantite: 10
-      unit: bottes
-  autres:
-    - title: purée de noix de cajou
-      quantite: 600
-      unit: grammes
-    - title: Eau
-      quantite: 1.2
-      unit: litre
-  lof: []
-  sucres: []
-  sec: []
+  - ingredient: citron-jus_bwkn34
+    quantite: 300
+    unit: grammes
+    commentaire: ''
+  - ingredient: gingembre_0d1fzw
+    quantite: 150
+    unit: grammes
+    commentaire: ''
+  - ingredient: ail_u2m28w
+    quantite: 20
+    unit: gousse·s
+    commentaire: ''
+  - ingredient: cumin-moulu_he3u48
+    quantite: 5
+    unit: grammes
+    commentaire: ''
+  - ingredient: sel_2juq3x
+    quantite: 50
+    unit: grammes
+    commentaire: ''
+  - ingredient: piment-vert_dr1bbg
+    quantite: 3
+    unit: unité
+    commentaire: ''
+  - ingredient: vinaigre-de-cidre_7qo3ht
+    quantite: 50
+    unit: ml
+    commentaire: ''
+  - ingredient: menthe_2j9y2v
+    quantite: 5
+    unit: bottes
+    commentaire: ''
+  - ingredient: coriandre-fraiche_fetrpe
+    quantite: 10
+    unit: bottes
+    commentaire: ''
+  - ingredient: puree-de-noix-de-cajou_mmvfvp
+    quantite: 600
+    unit: grammes
+    commentaire: ''
+  - ingredient: eau_ljzb7j
+    quantite: 1.2
+    unit: litre
+    commentaire: ''
 preparation: mixer finement le tout!!! et c'est tout!!!
 astuces:
   - astuce: ajouter l'eau au fur et à mesure

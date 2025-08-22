@@ -14,49 +14,54 @@ plate: 100
 check: Oui
 checkAlwaysOk: false
 ingredients:
-  sec:
-    - title: Sarrasin
-      quantite: 5
-      unit: Kg
-  lof: []
-  frais:
-    - title: Margarine
-      quantite: 500
-      unit: grammes
-  legumes:
-    - title: échalote
-      quantite: 20
-      unit: unité
-    - title: Oignon
-      quantite: 20
-      unit: Kg
-    - title: Champignon de Paris
-      quantite: 10
-      unit: Kg
-  epices:
-    - title: bouillon cube
-      quantite: 15
-      unit: unité
-    - title: Persil frais
-      quantite: 3
-      unit: bottes
-  autres:
-    - title: Levure de bière
-      quantite: 200
-      unit: grammes
-    - title: Vin blanc
-      quantite: 1
-      unit: litre
-    - title: Eau
-      quantite: 15
-      unit: litre
-  sucres:
-    - title: Poudre d'amandes
-      quantite: 400
-      unit: grammes
-    - title: sucre de canne (blond)
-      quantite: 100
-      unit: grammes
+  - ingredient: sarrasin_9f35oz
+    quantite: 5
+    unit: Kg
+    commentaire: ''
+  - ingredient: margarine_eipcl2
+    quantite: 500
+    unit: grammes
+    commentaire: ''
+  - ingredient: echalote_owsv5m
+    quantite: 20
+    unit: unité
+    commentaire: ''
+  - ingredient: oignon_rtavky
+    quantite: 20
+    unit: Kg
+    commentaire: ''
+  - ingredient: champignon-de-paris_92zzps
+    quantite: 10
+    unit: Kg
+    commentaire: ''
+  - ingredient: bouillon-cube_57xo8g
+    quantite: 15
+    unit: unité
+    commentaire: ''
+  - ingredient: persil-frais_hgfa4e
+    quantite: 3
+    unit: bottes
+    commentaire: ''
+  - ingredient: levure-de-biere_4be4ic
+    quantite: 200
+    unit: grammes
+    commentaire: ''
+  - ingredient: vin-blanc_judtle
+    quantite: 1
+    unit: litre
+    commentaire: ''
+  - ingredient: eau_ljzb7j
+    quantite: 15
+    unit: litre
+    commentaire: ''
+  - ingredient: poudre-damandes_rmgr7l
+    quantite: 400
+    unit: grammes
+    commentaire: ''
+  - ingredient: sucre-de-canne-blond_n85gmi
+    quantite: 100
+    unit: grammes
+    commentaire: ''
 preparation: |-
   Faire bouillir 15 litre d'eau
 
@@ -109,7 +114,7 @@ preparation: |-
   Éplucher les oignons, les découper en deux
 
   Mettre les oignons sur le côté coupé sur une poêle chaude à sec,
-  sans au ni huile. 
+  sans au ni huile.
   Laisser brûler quelques minute, la face de l'oignon va devenir noir,
   puis rajouter un fond d'eau.
   Laisser cuire environ 8 minutes, le haut de l'oignon doit être

@@ -13,39 +13,42 @@ plate: 4
 check: Oui
 checkAlwaysOk: false
 ingredients:
-  sec: []
-  legumes:
-    - title: Citron (jus)
-      quantite: 1
-      unit: unité
-    - title: Citron confit
-      quantite: 40
-      unit: grammes
-    - title: Oignon rouge
-      quantite: 1
-      unit: unité
-    - title: Betterave rouge
-      quantite: 1
-      unit: Kg
-  lof:
-    - title: huile d'olive
-      quantite: 2
-      unit: c. à soupe
-  frais:
-    - title: Yaourt grec de vache
-      quantite: 150
-      unit: grammes
-  epices:
-    - title: Aneth aromatique
-      quantite: 15
-      unit: grammes
-    - title: Cumin moulu
-      quantite: 1.5
-      unit: c. à café
-  autres:
-    - title: Tahin
-      quantite: 1
-      unit: c. à soupe
+  - ingredient: citron-jus_bwkn34
+    quantite: 1
+    unit: unité
+    commentaire: ''
+  - ingredient: citron-confit_m6gmgq
+    quantite: 40
+    unit: grammes
+    commentaire: ''
+  - ingredient: oignon-rouge_doxujz
+    quantite: 1
+    unit: unité
+    commentaire: ''
+  - ingredient: betterave-rouge_7sc3uw
+    quantite: 1
+    unit: Kg
+    commentaire: ''
+  - ingredient: huile-dolive_h3c8al
+    quantite: 2
+    unit: c. à soupe
+    commentaire: ''
+  - ingredient: yaourt-grec-de-vache_dzqmba
+    quantite: 150
+    unit: grammes
+    commentaire: ''
+  - ingredient: aneth-aromatique_nnkg8f
+    quantite: 15
+    unit: grammes
+    commentaire: ''
+  - ingredient: cumin-moulu_he3u48
+    quantite: 1.5
+    unit: c. à café
+    commentaire: ''
+  - ingredient: tahin_u33083
+    quantite: 1
+    unit: c. à soupe
+    commentaire: ''
 preparation: je le fais la semaine pro
 publishDate: 2025-05-19T14:28:00.000Z
 ---

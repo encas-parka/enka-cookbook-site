@@ -7,44 +7,43 @@ checkAlwaysOk: false
 cuisson: Oui
 draft: false
 ingredients:
-  epices:
-    - quantite: 50
-      title: Harissa
-      unit: grammes
-    - quantite: 400
-      title: Purée d'ail noir
-      unit: grammes
-  legumes:
-    - quantite: 13
-      title: Aubergine
-      unit: Kg
-  lof:
-    - quantite: 1.2
-      title: huile d'olive
-      unit: litre
-  sucres:
-    - quantite: 150
-      title: Jus de citron
-      unit: ml
-    - quantite: 200
-      title: Cacao
-      unit: ml
-    - quantite: 100
-      title: Mélasse
-      unit: ml
+  - ingredient: harissa_4n95t5
+    quantite: 50
+    unit: grammes
+    commentaire: ''
+  - ingredient: puree-dail-noir_veh1lf
+    quantite: 400
+    unit: grammes
+    commentaire: ''
+  - ingredient: aubergine_7sk3a5
+    quantite: 13
+    unit: Kg
+    commentaire: ''
+  - ingredient: huile-dolive_h3c8al
+    quantite: 1.2
+    unit: litre
+    commentaire: ''
+  - ingredient: jus-de-citron_e4mjd1
+    quantite: 150
+    unit: ml
+    commentaire: ''
+  - ingredient: cacao_r6792n
+    quantite: 200
+    unit: ml
+    commentaire: ''
+  - ingredient: melasse_9x2uyr
+    quantite: 100
+    unit: ml
+    commentaire: ''
 layout: recettes
 materiel:
   - Four
   - Gastro 1/1 (Normaux)
 plate: 100
-preparation: >-
+preparation: |-
   1. Couper les aubergines en quartiers de 2 cm d'épaisseur.
-
-  2. Les enduire de 600 ml d'huile (ou la moitié) avec du sel et les passer 10
-  minutes au four à 200°C
-
-  3. Mélanger le reste des ingrédients (dont le reste de l'huile) et enduire les
-  aubergines avec puis les remettre à cuire 10 à 15 minutes.
+  2. Les enduire de 600 ml d'huile (ou la moitié) avec du sel et les passer 10 minutes au four à 200°C
+  3. Mélanger le reste des ingrédients (dont le reste de l'huile) et enduire les aubergines avec puis les remettre à cuire 10 à 15 minutes.
 publishDate: '2024-05-28T14:50:00.000Z'
 regime:
   - vegetarien
@@ -55,7 +54,5 @@ saison:
   - ete
 temperature: Chaud
 title: Aubergines grillées cacao ail noir et piment
-  aubergines-grillees-cacao-ail-noir-et-piment_7b2688ac-6360-43b8-8083-635b1cc56257
 type: plat
 ---
-

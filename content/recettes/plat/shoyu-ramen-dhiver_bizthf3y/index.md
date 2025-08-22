@@ -17,228 +17,117 @@ quantite_desc: pour gros bols de 18cm
 check: Oui
 checkAlwaysOk: true
 ingredients:
-  epices:
-    - title: Miso blanc
-      quantite: 300
-      unit: grammes
-    - title: Algue nori séchée
-      quantite: 22
-      unit: grammes
-      commentaire: coupées en languettes 16/feuilles
-    - title: Sauce soja
-      quantite: 75
-      unit: ml
-      commentaire: Oeufs mollets Ajitama
-    - title: Sel
-      quantite: 10
-      unit: grammes
-      commentaire: Taré
-    - title: Vinaigre de riz
-      quantite: 200
-      unit: ml
-      commentaire: Taré
-    - title: Sauce soja
-      quantite: 1.5
-      unit: litre
-      commentaire: Taré
-    - title: Algue kombu séchée
-      quantite: 15
-      unit: grammes
-      commentaire: Taré
-    - title: Algue kombu séchée
-      quantite: 15
-      unit: grammes
-      commentaire: Dashi
-  autres:
-    - title: Eau
-      quantite: 1.5
-      unit: litre
-      commentaire: Oeufs mollets Ajitama
-    - title: Eau
-      quantite: 35
-      unit: litre
-      commentaire: Dashi
-  legumes:
-    - title: Zestes de citron séchés
-      quantite: 5
-      unit: grammes
-      commentaire: ou Yuzu. Mixé très fin
-    - title: Cébette - Ciboule - Cive - Oignon vert
-      quantite: 750
-      unit: grammes
-    - title: Ail
-      quantite: 30
-      unit: gousse·s
-      commentaire: Bouillon final
-    - title: Gingembre bio
-      quantite: 300
-      unit: grammes
-      commentaire: Bouillon final
-    - title: Champignons
-      quantite: 1
-      unit: Kg
-      commentaire: Bouillon final
-    - title: Poireau
-      quantite: 3
-      unit: Kg
-      commentaire: Bouillon final
-    - title: Oignon
-      quantite: 3
-      unit: Kg
-      commentaire: Bouillon final
-    - title: Champignon shiitake séché
-      quantite: 125
-      unit: grammes
-      commentaire: Taré
-    - title: Ail
-      quantite: 10
-      unit: gousse·s
-      commentaire: Taré
-    - title: Gingembre bio
-      quantite: 120
-      unit: grammes
-      commentaire: Taré
-    - title: Champignon shiitake séché
-      quantite: 250
-      unit: grammes
-      commentaire: Dashi
-  sucres:
-    - title: sucre blanc
-      quantite: 250
-      unit: grammes
-      commentaire: Oeufs mollets Ajitama
-    - title: sucre blanc
-      quantite: 100
-      unit: grammes
-      commentaire: Taré
-  lof:
-    - title: huile de sésame
-      quantite: 50
-      unit: ml
-      commentaire: 1 c.à.c par personne
-    - title: Oeuf
-      quantite: 54
-      unit: unité
-      commentaire: Oeufs mollets Ajitama
-  sec:
-    - title: Nouilles de riz
-      quantite: 1.5
-      unit: Kg
-      commentaire: Version sans gluten
-    - title: Nouilles de blé ondulées Ramen
-      quantite: 3.25
-      unit: Kg
-      commentaire: env. 170gr de nouilles cuites par personne
-preparation: >-
-  **Le BOUILLON FINAL :**
-
-
-  Émincer les oignons, les faire revenir, déglacer à la sauce soja sans gluten puis légèrement caraméliser avec du sucre.
-
-
-  Ajouter les champignons coupés en lamelles, puis l’ail et le gingembre hachés + ceux des taré et dashi.
-
-
-   Verser tout le dashi préparé la veille et le faire chauffer à feu **très** doux. Avant l’ébullition (vers 80°C)
-
-
-  Ajouter les poireaux (blancs et verts) éffilés finement dans la longueur, comme des tagliatelles.
-
-
-  Une fois cuits, retirer tous les légumes du bouillon. Réserver.
-
-
-  Laisser cuire à feu doux encore 1 à 2h à découvert.
-
-
-  ENFIN seulement ajouter le taré.
-
-
-
-  **NOUILLES :**
-
-
-  Cuire les nouilles selon instructions. A la sortie de cuisson, les rincer à l'eau afin qu'elles collent moins.
-
-
-
-  **MONTAGE D'UN BOL :**
-
-
-  Déposer les nouilles dans le bol et les mélanger dans le bouillon + la cuillère d’huile aromatique,
-
-
-  les relever et les replacer au centre du bouillon.
-
-
-  Déposer les accompagnements, racler une cuillère de miso sur le bord du bol !!! YUMMI YUMMI !!
-preparation24h: >-
-  **LE DASHI :**
-
-
-
-  *Le dashi est un bouillon japonais qui est la base de nombreux plats et est
-   indispensable pour donner à vos plats ce goût japonais authentique.*
-
-  Dans un récipient avec couvercle, mélanger dans l’eau froide les shitaké
-   et le kombu. Laisser reposer au moins 4h, de préférence 12 à 24h.
-
-  Il sera ensuite ajouté au bouillon.
-
-
-  Récupérer les shiitakés et les trancher assez finement.
-
-
-
-
-  **LE TARE (sauce) :**
-
-
-  Couper des tranches de gingembre (ce n’est pas nécessaire de le peler 
-
-  s'il est bio). Dans une casserole, ajouter tous les ingrédients du taré 
-
-  et mélanger.
-
-
-  Faire chauffer à feu très doux (le minimum), dès l’apparition des premières petite bulles signe d’un début d’ébullition.
-
-
-   Laisser mariner à température ambiante jusqu’au lendemain.
-
-
-  Récupérer gingembre, ail et shiitakés et les émincer finement
-
-
-
-  **OEUF AJITAMA :**
-
-
-  Mélanger l’eau, la sauce soja sans gluten et le sucre.
-
-
-  Faire bouillir quelques secondes et bien mélanger.
-
-
-  (Si l'on souhaite, ajouter 1-2 cs de katsuobushi puis retirer du feux et laisser redescendre à température ambiante.)
-
-
-  Faire bouillir une casserole d’eau avec quelques cuillères à soupe de 
-
-  vinaigre. Ajouter les œufs (qui sortent du frigo) et les cuire 6 minutes
-   30 secondes.
-
-  Tremper les œufs dans un bol d’eau glacée pour stopper la cuisson. Les laisser bien bien refroidir puis les peler.
-
-
-  Dans des sacs congélation verser la marinade et y déposer les œufs. 
-
-  Laisser mariner 12 à 24 h en retournant les sachets délicatement de 
-
-  temps en temps.
+  - ingredient: miso-blanc_k2uthk
+    quantite: 300
+    unit: grammes
+    commentaire: ''
+  - ingredient: algue-nori-feuille-sechee_ffafjo
+    quantite: 22
+    unit: grammes
+    commentaire: coupées en languettes 16/feuilles
+  - ingredient: sauce-soja_jjrwlj
+    quantite: 75
+    unit: ml
+    commentaire: Oeufs mollets Ajitama
+  - ingredient: sel_2juq3x
+    quantite: 10
+    unit: grammes
+    commentaire: Taré
+  - ingredient: vinaigre-de-riz_k6injl
+    quantite: 200
+    unit: ml
+    commentaire: Taré
+  - ingredient: sauce-soja_jjrwlj
+    quantite: 1.5
+    unit: litre
+    commentaire: Taré
+  - ingredient: algue-kombu-sechee_cd0g12
+    quantite: 15
+    unit: grammes
+    commentaire: Taré
+  - ingredient: algue-kombu-sechee_cd0g12
+    quantite: 15
+    unit: grammes
+    commentaire: Dashi
+  - ingredient: eau_ljzb7j
+    quantite: 1.5
+    unit: litre
+    commentaire: Oeufs mollets Ajitama
+  - ingredient: eau_ljzb7j
+    quantite: 35
+    unit: litre
+    commentaire: Dashi
+  - ingredient: zestes-de-citron-seches_w9kkd2
+    quantite: 5
+    unit: grammes
+    commentaire: ou Yuzu. Mixé très fin
+  - ingredient: cebette-ciboule-cive-oignon-vert_j7as8d
+    quantite: 750
+    unit: grammes
+    commentaire: ''
+  - ingredient: ail_u2m28w
+    quantite: 30
+    unit: gousse·s
+    commentaire: Bouillon final
+  - ingredient: gingembre-bio_nz839c
+    quantite: 300
+    unit: grammes
+    commentaire: Bouillon final
+  - ingredient: champignons_v9qhs9
+    quantite: 1
+    unit: Kg
+    commentaire: Bouillon final
+  - ingredient: poireau_l3fs10
+    quantite: 3
+    unit: Kg
+    commentaire: Bouillon final
+  - ingredient: oignon_rtavky
+    quantite: 3
+    unit: Kg
+    commentaire: Bouillon final
+  - ingredient: champignon-shiitake-seche_7b8r4n
+    quantite: 125
+    unit: grammes
+    commentaire: Taré
+  - ingredient: ail_u2m28w
+    quantite: 10
+    unit: gousse·s
+    commentaire: Taré
+  - ingredient: gingembre-bio_nz839c
+    quantite: 120
+    unit: grammes
+    commentaire: Taré
+  - ingredient: champignon-shiitake-seche_7b8r4n
+    quantite: 250
+    unit: grammes
+    commentaire: Dashi
+  - ingredient: sucre-blanc_lny16c
+    quantite: 250
+    unit: grammes
+    commentaire: Oeufs mollets Ajitama
+  - ingredient: sucre-blanc_lny16c
+    quantite: 100
+    unit: grammes
+    commentaire: Taré
+  - ingredient: huile-de-sesame_fazth1
+    quantite: 50
+    unit: ml
+    commentaire: 1 c.à.c par personne
+  - ingredient: oeuf_zf3zf8
+    quantite: 54
+    unit: unité
+    commentaire: Oeufs mollets Ajitama
+  - ingredient: nouilles-de-riz_mesg7t
+    quantite: 1.5
+    unit: Kg
+    commentaire: Version sans gluten
+  - ingredient: nouilles-de-ble-ondulees-ramen_ul46ke
+    quantite: 3.25
+    unit: Kg
+    commentaire: env. 170gr de nouilles cuites par personne
+preparation: "**Le BOUILLON FINAL :**\n\nÉmincer les oignons, les faire revenir, déglacer à la sauce soja sans gluten puis légèrement caraméliser avec du sucre.\n\nAjouter les champignons coupés en lamelles, puis l’ail et le gingembre hachés + ceux des taré et dashi.\n\n\_Verser tout le\_dashi préparé la veille et le faire chauffer à feu **très** doux. Avant l’ébullition (vers 80°C)\n\nAjouter les poireaux (blancs et verts) éffilés finement dans la longueur, comme des tagliatelles.\n\nUne fois cuits, retirer\_tous les légumes du bouillon. Réserver.\n\nLaisser cuire à feu doux encore 1 à 2h à découvert.\n\nENFIN seulement ajouter le taré.\n\n\n**NOUILLES :**\n\nCuire les nouilles selon instructions. A la sortie de cuisson, les rincer à l'eau afin qu'elles collent moins.\n\n\n**MONTAGE D'UN BOL :**\n\nDéposer les nouilles dans le bol et les mélanger dans le bouillon + la cuillère d’huile aromatique,\n\nles relever et les replacer au centre du bouillon.\n\nDéposer les accompagnements, racler une cuillère de miso sur le bord du bol !!! YUMMI YUMMI !!"
+preparation24h: "**LE DASHI\_:**\n\n\n*Le dashi est un bouillon japonais qui est la base de nombreux plats et est\n indispensable pour donner à vos plats ce goût japonais authentique.*\n\nDans un récipient avec couvercle, mélanger dans l’eau froide les shitaké\n et le kombu. Laisser reposer au moins 4h, de préférence 12 à 24h.\n\nIl\_sera ensuite ajouté au bouillon.\n\nRécupérer les shiitakés et les trancher assez finement.\n\n\n\n**LE TARE (sauce) :**\n\nCouper des tranches de gingembre (ce n’est pas nécessaire de le peler \ns'il est bio). Dans une casserole, ajouter tous les ingrédients du taré \net mélanger.\n\nFaire chauffer à feu très doux (le minimum), dès l’apparition des premières petite bulles signe d’un début d’ébullition.\n\n\_Laisser mariner à température ambiante jusqu’au lendemain.\n\nRécupérer gingembre, ail et shiitakés et les émincer finement\n\n\n**OEUF AJITAMA :**\n\nMélanger l’eau, la sauce soja sans gluten et le sucre.\n\nFaire bouillir quelques secondes et bien mélanger.\n\n(Si l'on souhaite,\_ajouter 1-2 cs de katsuobushi puis retirer du feux et laisser redescendre à température ambiante.)\n\nFaire bouillir une casserole d’eau avec quelques cuillères à soupe de \nvinaigre. Ajouter les œufs (qui sortent du frigo) et les cuire 6 minutes\n 30 secondes.\n\nTremper les\_œufs dans un bol d’eau glacée pour stopper la cuisson. Les laisser bien bien refroidir puis les peler.\n\nDans des sacs congélation verser la marinade et y déposer les œufs. \nLaisser mariner 12 à 24 h en retournant les sachets délicatement de \ntemps en temps."
 astuces:
-  - astuce: A la place de la Sauce Soja, on peut remplacerr par de la Sauce Tamari
-      pour les histoires de gluten. A la place du Mirin, j'ai proposé  du
-      Vinaigre de Riz + Sucre dans le Taré pour les histoires d'alcool.
+  - astuce: A la place de la Sauce Soja, on peut remplacerr par de la Sauce Tamari pour les histoires de gluten. A la place du Mirin, j'ai proposé  du Vinaigre de Riz + Sucre dans le Taré pour les histoires d'alcool.
 publishDate: 2025-05-04T17:10:00.000Z
 ---

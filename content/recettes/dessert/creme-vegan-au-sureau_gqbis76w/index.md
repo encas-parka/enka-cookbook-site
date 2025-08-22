@@ -1,43 +1,46 @@
 ---
 categories:
-- Sucrée
+  - Sucrée
 check: Oui
 checkAlwaysOk: true
 cuisson: Oui
 draft: false
 ingredients:
-  lof:
-  - quantite: 1.8
-    title: Fécule de maïs (Maïzena)
+  - ingredient: fecule-de-mais-maizena_8nbcjp
+    quantite: 1.8
     unit: Kg
-  - quantite: 10
-    title: Lait de riz
+    commentaire: ''
+  - ingredient: lait-de-riz_hzwesd
+    quantite: 10
     unit: litre
-  - quantite: 10
-    title: Lait de soja
+    commentaire: ''
+  - ingredient: lait-de-soja_gpeob7
+    quantite: 10
     unit: litre
-  - quantite: 10
-    title: Lait d'avoine
+    commentaire: ''
+  - ingredient: lait-davoine_3eex0o
+    quantite: 10
     unit: litre
-  sucres:
-  - quantite: 6
-    title: Sirop de sureau
+    commentaire: ''
+  - ingredient: sirop-de-sureau_k2rneh
+    quantite: 6
     unit: litre
+    commentaire: ''
 layout: recettes
 materiel:
-- Bruleur
+  - Bruleur
 plate: 300
-preparation: '1. Tout mélanger à froid
-
-  2. Faire chauffer à feu doux jusqu''à épaississement
-
-  3. Mettre en ramequins'
-publishDate: 2024-06-19 19:02:00+00:00
+preparation: |-
+  1. Tout mélanger à froid
+  2. Faire chauffer à feu doux jusqu'à épaississement
+  3. Mettre en ramequins
+publishDate: 2024-06-19T19:02:00.000Z
 regime:
-- vegetarien
-- vegan
-- sans-lactose
+  - vegetarien
+  - vegan
+  - sans-lactose
 temperature: Froid
 title: Crème Végan au sureau
 type: dessert
 ---
+

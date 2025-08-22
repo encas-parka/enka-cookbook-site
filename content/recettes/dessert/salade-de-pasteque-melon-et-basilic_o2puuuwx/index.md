@@ -1,29 +1,30 @@
 ---
 auteur: Auré
 categories:
-- Salade
+  - Salade
 check: Non
 checkAlwaysOk: false
 cuisson: Non
 draft: false
 ingredients:
-  epices:
-  - quantite: 2
-    title: Basilic
+  - ingredient: basilic_s8j4ff
+    quantite: 2
     unit: bottes
-  legumes:
-  - quantite: 6
-    title: Pastèque
+    commentaire: ''
+  - ingredient: pasteque_n8iflg
+    quantite: 6
     unit: Kg
-  - quantite: 8
-    title: Melon
+    commentaire: ''
+  - ingredient: melon_on84nb
+    quantite: 8
     unit: unité
+    commentaire: ''
 layout: recettes
 plate: 100
 preparation: Blablabla
-publishDate: 2024-06-17 23:43:00+00:00
+publishDate: 2024-06-17T23:43:00.000Z
 saison:
-- ete
+  - ete
 temperature: Froid
 title: SALADE DE PASTEQUE, MELON ET BASILIC
 type: dessert

@@ -11,19 +11,30 @@ disableAliases: true
 # disableHugoGeneratorInject: true
 removePathAccents: true
 enableEmoji: true
-enableGitInfo: false
+enableGitInfo: true
 enableRobotsTXT: true
 languageCode: fr-FR
 defaultContentLanguage: fr
 defaultContentLang: fr
-paginate: 24
 rssLimit: 10
+
+disableKinds:
+  - taxonomy
+  - term
+
+pagination:
+  disableAliases: false
+  pagerSize: 500
+  path: page
 
 outputs:
   home:
     - HTML
     - REDIRECTS
     - HEADERS
+  page:
+    - HTML
+
 mediaTypes:
   application/json:
     suffixes:
@@ -32,10 +43,17 @@ mediaTypes:
     suffixes:
       - ""
     delimiter: ""
+
 outputFormats:
   Poster:
     mediaType: "text/html"
     baseName: "poster/index"
+    isHTML: true
+    permalinkable: true
+
+  Menus:
+    mediaType: "text/html"
+    baseName: "menus/index"
     isHTML: true
     permalinkable: true
 
@@ -45,16 +63,26 @@ outputFormats:
     isHTML: true
     permalinkable: true
 
+  IngredientsJSON:
+    mediaType: "application/json"
+    baseName: "ingredients/index"
+    isPlainText: true
+    notAlternative: true
+
   JSON:
     mediaType: application/json
     baseName: index
     isPlainText: true
     notAlternative: true
+
   REDIRECTS:
     mediatype: text/netlify
     baseName: _redirects
     isPlainText: true
     notAlternative: true
+    permalinkable: false
+    isHTML: false
+
   HEADERS:
     mediatype: text/netlify
     baseName: _headers
@@ -69,23 +97,9 @@ sitemap:
   changefreq: monthly
   filename: sitemap.xml
   priority: 0.5
-taxonomies:
-  category: categories
-  regime: regime
-  auteur: auteur
-  region: region
+
 permalinks:
   blog: /:title/
-
-related:
-  threshold: 80
-  includeNewer: true
-  toLower: false
-  indices:
-    - name: categories
-      weight: 100
-    - name: date
-      weight: 10
 
 # Opengraph
 ogLocale: fr
@@ -103,9 +117,6 @@ schemaLogoHeight: 512
 schemaImage: cover.png
 schemaImageWidth: 1280
 schemaImageHeight: 640
-schemaTwitter: ""
-schemaLinkedIn: ""
-schemaGitHub: ""
 
 # Images
 themeColor: "#fff"
@@ -126,9 +137,6 @@ lqipWidth: 20x
 smallLimit: "320"
 defaultImage: default-image.png
 fillImage: 1280x720 Center
-
-footer: Powered by <a href="https://www.netlify.com/">Netlify</a>, <a href="https://gohugo.io/">Hugo</a>, and <a href="https://gethyas.com/">Hyas</a>
-copyRight: ""
 
 markup:
   goldmark:

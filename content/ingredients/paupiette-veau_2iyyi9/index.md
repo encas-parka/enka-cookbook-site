@@ -1,0 +1,7 @@
+---
+title: Paupiette (veau)
+allergenes:
+  - Viande
+pFrais: true
+type: animaux
+---

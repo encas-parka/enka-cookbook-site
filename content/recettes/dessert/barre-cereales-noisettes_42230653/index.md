@@ -14,46 +14,50 @@ check: Oui
 checkAlwaysOk: false
 checkfor: 1
 ingredients:
-  sec:
-    - title: Amandes effilées
-      quantite: 50
-      unit: grammes
-    - title: Flocons d'avoine sans gluten
-      quantite: 135
-      unit: grammes
-    - title: corn flakes
-      quantite: 80
-      unit: grammes
-  legumes:
-    - title: Raisin sec
-      quantite: 50
-      unit: grammes
-  lof:
-    - title: Farine d'épeautre
-      quantite: 80
-      unit: grammes
-    - title: huile de tournesol
-      quantite: 100
-      unit: grammes
-  sucres:
-    - title: Chocolat noir patissier 70p100
-      quantite: 100
-      unit: grammes
-      commentaire: ""
-    - title: "Sirop d'érable "
-      quantite: 200
-      unit: grammes
-    - title: Sucre vanillé
-      quantite: 100
-      unit: grammes
-  epices:
-    - title: Sel
-      quantite: 1
-      unit: c. à café
-  autres:
-    - title: Beurre de cacahuètes (salé)
-      quantite: 100
-      unit: grammes
+  - ingredient: amandes-effilees_xkijt9
+    quantite: 50
+    unit: grammes
+    commentaire: ''
+  - ingredient: flocons-davoine-sans-gluten_02w66c
+    quantite: 135
+    unit: grammes
+    commentaire: ''
+  - ingredient: corn-flakes_kp0srn
+    quantite: 80
+    unit: grammes
+    commentaire: ''
+  - ingredient: raisin-sec_9yf54l
+    quantite: 50
+    unit: grammes
+    commentaire: ''
+  - ingredient: farine-depeautre_861x4y
+    quantite: 80
+    unit: grammes
+    commentaire: ''
+  - ingredient: huile-de-tournesol_c70jxb
+    quantite: 100
+    unit: grammes
+    commentaire: ''
+  - ingredient: chocolat-noir-patissier-70p100_1e3zhq
+    quantite: 100
+    unit: grammes
+    commentaire: ''
+  - ingredient: sirop-derable_zkmmgt
+    quantite: 200
+    unit: grammes
+    commentaire: ''
+  - ingredient: sucre-vanille_dgwl19
+    quantite: 100
+    unit: grammes
+    commentaire: ''
+  - ingredient: sel_2juq3x
+    quantite: 1
+    unit: c. à café
+    commentaire: ''
+  - ingredient: beurre-de-cacahuetes-sale_ks3ocl
+    quantite: 100
+    unit: grammes
+    commentaire: ''
 preparation: |-
   Préchauffer le four à 180C
 
@@ -66,7 +70,8 @@ preparation: |-
   Mettre au four 40min.
 
   Servir froid.
-publishDate: 2025-08-08T10:51:00.000+02:00
-uuid: "42230653"
+publishDate: 2025-08-08T08:51:00.000Z
+uuid: '42230653'
 titleslug: barre-cereales-noisettes_42230653
 ---
+

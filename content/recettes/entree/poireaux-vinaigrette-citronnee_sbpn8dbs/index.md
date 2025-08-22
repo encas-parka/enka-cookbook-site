@@ -11,34 +11,37 @@ regime:
 cuisson: Oui
 temperature: Froid
 plate: 50
-quantite_desc: "100"
+quantite_desc: '100'
 check: Oui
 checkAlwaysOk: false
 ingredients:
-  legumes:
-    - title: Ail
-      quantite: 5
-      unit: gousse·s
-    - title: Citron jaune
-      quantite: 4
-      unit: unité
-    - title: Poireau
-      quantite: 52
-      unit: unité
-  lof:
-    - title: huile d'olive
-      quantite: 750
-      unit: ml
-  epices:
-    - title: Thym
-      quantite: 5
-      unit: grammes
-    - title: Moutarde
-      quantite: 200
-  sucres:
-    - title: "Sirop d'érable "
-      quantite: 150
-      unit: ml
+  - ingredient: ail_u2m28w
+    quantite: 5
+    unit: gousse·s
+    commentaire: ''
+  - ingredient: citron-jaune_5cg0yu
+    quantite: 4
+    unit: unité
+    commentaire: ''
+  - ingredient: poireau_l3fs10
+    quantite: 52
+    unit: unité
+    commentaire: ''
+  - ingredient: huile-dolive_h3c8al
+    quantite: 750
+    unit: ml
+    commentaire: ''
+  - ingredient: thym_a16yd7
+    quantite: 5
+    unit: grammes
+    commentaire: ''
+  - ingredient: moutarde_5c1b20
+    quantite: 200
+    commentaire: ''
+  - ingredient: sirop-derable_zkmmgt
+    quantite: 150
+    unit: ml
+    commentaire: ''
 preparation: |-
   Couper une fois dans la longueur les poireaux. Oter le cul et garder le vert.
 

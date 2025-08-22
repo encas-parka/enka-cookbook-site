@@ -8,82 +8,73 @@ cuisson: Oui
 description: Pour 2 boulettes par personne
 draft: false
 ingredients:
-  autres:
-    - quantite: 120
-      title: Eau
-      unit: ml
-  epices:
-    - quantite: 60
-      title: Vin Rouge
-      unit: ml
-    - quantite: 2
-      title: Vinaigre de cidre
-      unit: c. à café
-    - quantite: 1
-      title: Persil frais
-      unit: unité
-    - quantite: 4
-      title: Tamari (sauce)
-      unit: c. à soupe
-    - quantite: 4
-      title: Liquid smoke
-      unit: ml
-  legumes:
-    - quantite: 4
-      title: Ail
-      unit: unité
-    - quantite: 200
-      title: Oignon
-      unit: grammes
-    - quantite: 40
-      title: Champignons séchés
-      unit: grammes
-  lof:
-    - quantite: 2
-      title: Fécule de maïs (Maïzena)
-      unit: c. à soupe
-    - quantite: 2
-      title: huile de tournesol
-      unit: c. à soupe
-  sec:
-    - quantite: 100
-      title: Riz basmati
-      unit: grammes
-    - quantite: 500
-      title: Haricots rouges cuits
-      unit: grammes
-  sucres:
-    - quantite: 6
-      title: Sucre complet
-      unit: c. à soupe
+  - ingredient: eau_ljzb7j
+    quantite: 120
+    unit: ml
+    commentaire: ''
+  - ingredient: vin-rouge_ruvnjp
+    quantite: 60
+    unit: ml
+    commentaire: ''
+  - ingredient: vinaigre-de-cidre_7qo3ht
+    quantite: 2
+    unit: c. à café
+    commentaire: ''
+  - ingredient: persil-frais_hgfa4e
+    quantite: 1
+    unit: unité
+    commentaire: ''
+  - ingredient: tamari-sauce_bbwo4n
+    quantite: 4
+    unit: c. à soupe
+    commentaire: ''
+  - ingredient: liquid-smoke_effe0c
+    quantite: 4
+    unit: ml
+    commentaire: ''
+  - ingredient: ail_u2m28w
+    quantite: 4
+    unit: unité
+    commentaire: ''
+  - ingredient: oignon_rtavky
+    quantite: 200
+    unit: grammes
+    commentaire: ''
+  - ingredient: champignons-seches_wcvin0
+    quantite: 40
+    unit: grammes
+    commentaire: ''
+  - ingredient: fecule-de-mais-maizena_8nbcjp
+    quantite: 2
+    unit: c. à soupe
+    commentaire: ''
+  - ingredient: huile-de-tournesol_c70jxb
+    quantite: 2
+    unit: c. à soupe
+    commentaire: ''
+  - ingredient: riz-basmati_opblzb
+    quantite: 100
+    unit: grammes
+    commentaire: ''
+  - ingredient: haricots-rouges-cuits_iwdje3
+    quantite: 500
+    unit: grammes
+    commentaire: ''
+  - ingredient: sucre-complet_njgchn
+    quantite: 6
+    unit: c. à soupe
+    commentaire: ''
 layout: recettes
 materiel:
   - Four
   - Gastro 1/1 (Fins)
 plate: 20
-preparation: >-
-  1. Réhydrater les champignons séchés dans de l'eau bouillante. Puis utiliser
-  cette eau pour cuire le riz. Hacher finement les champignons. Hacher finement
-  l'oignon et l'ail.
-
-  2. Faire revenir l'oignon et l'ail dans un peu d'huile à la poêle. Puis
-  ajouter les champignons, mélanger. Enfin, ajouter les haricots, le riz, le
-  liquid smoke, la moitié du tamari. Laisser légèrement refroidir et ajouter le
-  persil haché. Puis mixer le tout au robot avec la lame S. Presser plusieurs
-  fois sur le bouton pulse afin d'obtenir une farce hachée mais pas complètement
-  lisse.
-
-  3. À l'aide des mains mouillées former des boulettes et les déposer sur une
-  plaque recouverte de papier sulfurisé.
-
-  4. Réaliser la sauce nappante : Mettre tous les ingrédients restant (dont le
-  reste du tamari) dans une casserole et mélanger correctement. Porter doucement
-  à ébullition sur feu moyen sans cesser de remuer avec un fouet. Quand la sauce
-  a épaissi, couper le feu.
-
-  5. Passer les boulettes au four une première fois pendant 20 minutes à 180°C,
-  puis les badigeonner de sauce nappante. Les repasser au four 20 minutes à
-  180°C.
+preparation: |-
+  1. Réhydrater les champignons séchés dans de l'eau bouillante. Puis utiliser cette eau pour cuire le riz. Hacher finement les champignons. Hacher finement l'oignon et l'ail.
+  2. Faire revenir l'oignon et l'ail dans un peu d'huile à la poêle. Puis ajouter les champignons, mélanger. Enfin, ajouter les haricots, le riz, le liquid smoke, la moitié du tamari. Laisser légèrement refroidir et ajouter le persil haché. Puis mixer le tout au robot avec la lame S. Presser plusieurs fois sur le bouton pulse afin d'obtenir une farce hachée mais pas complètement lisse.
+  3. À l'aide des mains mouillées former des boulettes et les déposer sur une plaque recouverte de papier sulfurisé.
+  4. Réaliser la sauce nappante : Mettre tous les ingrédients restant (dont le reste du tamari) dans une casserole et mélanger correctement. Porter doucement à ébullition sur feu moyen sans cesser de remuer avec un fouet. Quand la sauce a épaissi, couper le feu.
+  5. Passer les boulettes au four une première fois pendant 20 minutes à 180°C, puis les badigeonner de sauce nappante. Les repasser au four 20 minutes à 180°C.
 publishDate: '2024-05-28T15:18:00.000Z'
 regime:
   - vegetarien
@@ -92,7 +83,5 @@ regime:
   - sans-lactose
 temperature: Chaud
 title: Boulettes fumées de haricots rouges et champignons
-  boulettes-fumees-de-haricots-rouges-et-champignons_5be3b6de-9a22-4635-a147-d4295c86c452
 type: plat
 ---
-

@@ -1,6 +1,6 @@
 ---
 title: Événements
-output:
+outputs:
   - HTML
 
 cascade:

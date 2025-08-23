@@ -1,0 +1,21 @@
+name = "enka-cookbook"
+compatibility_date = "2025-08-23"
+
+# Configuration pour Hugo avec modules Go
+[build]
+command = "hugo --minify --buildFuture"
+
+[assets]
+directory = "./public/"
+not_found_handling = "404-page"
+
+# Variables d'environnement pour Hugo
+[vars]
+HUGO_ENV = "production"
+GO111MODULE = "on"
+
+# Optionnel : activer les URLs de preview
+preview_urls = true
+
+# Optionnel : utiliser workers.dev subdomain
+workers_dev = true

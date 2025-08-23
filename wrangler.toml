@@ -18,4 +18,4 @@ GO111MODULE = "on"
 preview_urls = true
 
 # Optionnel : utiliser workers.dev subdomain
-workers_dev = true
+# workers_dev = true

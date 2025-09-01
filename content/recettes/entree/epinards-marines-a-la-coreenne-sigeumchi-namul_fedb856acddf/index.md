@@ -1,5 +1,5 @@
 ---
-title: Épinards marinés à la coréenne (Sigeumchi Namul)
+title: Épinards marinés à la coréenne - Sigeumchi Namul
 draft: false
 img: ''
 description: ''

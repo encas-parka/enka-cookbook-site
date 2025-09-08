@@ -1,5 +1,5 @@
 ---
-title: Tournage septembre 2025
+title: Tournage sept 2025
 sitemap_exclude: 'true'
 repas:
   - date_service: 2025-09-26T13:00:00

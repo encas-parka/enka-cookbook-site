@@ -39,7 +39,7 @@ ingredients:
   - ingredient: agar-agar_ruhtax
     quantite: 4
     unit: grammes
-    commentaire: ''
+    commentaire: top
   - ingredient: jus-de-citron_e4mjd1
     quantite: 50
     unit: ml

@@ -1,5 +1,5 @@
 ---
-title: qiza et melon
+title: qizha et melon
 draft: false
 description: ''
 layout: recettes

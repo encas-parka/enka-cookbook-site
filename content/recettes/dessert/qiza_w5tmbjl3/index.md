@@ -1,18 +1,27 @@
 ---
 title: qiza et melon
 draft: false
+description: ''
 layout: recettes
 type: dessert
 categories:
   - Biscuits
-regime:
-  - vegan
+auteur: ''
+region: ''
 cuisson: Oui
 temperature: Froid
 plate: 300
+quantite_desc: ''
 check: Oui
-checkAlwaysOk: false
 ingredients:
+  - ingredient: huile-dolive_h3c8al
+    quantite: 1
+    unit: litre
+    commentaire: ''
+  - ingredient: semoule-fine-ble_mltl42
+    quantite: 2
+    unit: Kg
+    commentaire: ''
   - ingredient: melon_on84nb
     quantite: 20
     unit: unité
@@ -90,5 +99,8 @@ preparation: |-
 
   \
 publishDate: 2025-06-17T19:05:00.000Z
+checkAlwaysOk: false
+regime:
+  - vegan
 ---
 

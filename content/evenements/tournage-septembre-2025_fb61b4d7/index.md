@@ -30,7 +30,7 @@ repas:
         commentaire: ''
   - date_service: 2025-09-24T13:00:00
     horaire: midi
-    assiettes: 39
+    assiettes: 57
     recettes_du_repas:
       - recette: melomakarona_873af893f35e
         type_plat: dessert
@@ -52,7 +52,7 @@ repas:
         commentaire: ''
   - date_service: 2025-09-23T13:00:00
     horaire: midi
-    assiettes: 57
+    assiettes: 39
     recettes_du_repas:
       - recette: tarte-au-chocolat-sans-cuisson_matyge19
         type_plat: dessert

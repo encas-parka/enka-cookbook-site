@@ -19,7 +19,7 @@ check: Oui
 ingredients:
   - ingredient: noix_usibcf
     quantite: 300
-    unit: grammes
+    unit: gr.
     commentaire: déco
   - ingredient: miel_g0lph5
     quantite: 2
@@ -35,7 +35,7 @@ ingredients:
     commentaire: sirop
   - ingredient: sucre-blanc_lny16c
     quantite: 350
-    unit: grammes
+    unit: gr.
     commentaire: sirop
   - ingredient: eau_ljzb7j
     quantite: 250
@@ -43,7 +43,7 @@ ingredients:
     commentaire: sirop
   - ingredient: beurre-doux_kmq1zb
     quantite: 25
-    unit: grammes
+    unit: gr.
     commentaire: pâte
   - ingredient: bicarbonate-alimentaire_vf8140
     quantite: 0.5
@@ -63,7 +63,7 @@ ingredients:
     commentaire: pâte
   - ingredient: farine-de-ble_2av6w8
     quantite: 500
-    unit: grammes
+    unit: gr.
     commentaire: pâte
   - ingredient: huile-dolive_h3c8al
     quantite: 280
@@ -84,9 +84,9 @@ preparation: |-
       - Laissez chauffer quelques minutes. Après quelques bouillons légers, retirez du feu ;
       - Quand le sirop a tiédi, ajoutez le miel et mélangez soigneusement ;
       - Laissez refroidir le sirop.
-      - 
+      -
   - **Préparez ensuite la pâte.** Dans un grand récipient, versez d’abord les ingrédients liquides (beurre fondu, jus d’orange, huile d’olive). Ajoutez ensuite le sucre, les épices (cannelle, girofle) et le bicarbonate de sodium. Malaxez avec les mains et ajoutez la farine. Il ne faut pas trop pétrir la pâte pour éviter qu’elle ne devienne trop ferme. Elle doit rester suffisamment « aérée » pour absorber le sirop.
-  - 
+  -
   - **Préchauffez le four à 180°.** **Formez les macarons avec la pâte**, en leur donnant une forme ovale. Placez-les sur une plaque de cuisson recouverte de papier sulfurisé. A l’aide de la fourchette **pratiquez de petits trous à la surface**. Faites cuire pendant **30 minutes.**
   - **Sortir les melomakarona du four et les plonger immédiatement dans le sirop froid.** Retournez-les des deux côtés pour qu’ils soient bien enduits de sirop. **\*\* ASTUCE \*\*** Cette **étape** est **la plus cruciale**. Les macarons doivent passer le plus rapidement possible du chaud du four au sirop pour permettre sa correcte absorption. Vous pouvez mettre le sirop dans un plat sur 3 à 4 cm d’épaisseur et y disposer rapidement les melomakarona. Au besoin réaliser deux fournées et utilisez une pince pour retirer délicatement les melomakarona du sirop, afin qu’ils ne se cassent pas. **Un melomakarona réussi est un melomakarona entier qui a correctement absorbé le sirop !&#32;**
   - **Roulez les melomakarona dans la décoration** que vous avez choisie et préparée
@@ -99,4 +99,3 @@ astuces: []
 prepAlt: []
 publishDate: 2025-09-08T13:40:00.000Z
 ---
-

@@ -82,15 +82,15 @@ preparation: |-
 
   Découper  en frites et les faire frire à la friteuse 1 à 2
 
-  2/ Préparation de la sauce:
+  2/ Préparation de la sauce (100p.):
 
   LA VEGANAISE
 
 
-  1 l. lait de soja
+  1 litre lait de soja
 
 
-  2 l. huile de tournesol
+  2 litres huile de tournesol
 
 
   30cl jus de citron préssé
@@ -108,7 +108,7 @@ preparation: |-
   Tout en mixant, verser l'huile dans le récipient. Le mélange va
   monter et épaissir.
 
-  RAJOUTER POUR LA SAUCE TARTARE:
+  RAJOUTER POUR LA SAUCE TARTARE (100p.):
 
 
   250 gr câpres

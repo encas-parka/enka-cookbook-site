@@ -19,11 +19,11 @@ checkAlwaysOk: false
 ingredients:
   - ingredient: citron-jus_bwkn34
     quantite: 300
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: gingembre_0d1fzw
     quantite: 150
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: ail_u2m28w
     quantite: 20
@@ -31,11 +31,11 @@ ingredients:
     commentaire: ''
   - ingredient: cumin-moulu_he3u48
     quantite: 5
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: sel_2juq3x
     quantite: 50
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: piment-vert_dr1bbg
     quantite: 3
@@ -55,11 +55,11 @@ ingredients:
     commentaire: ''
   - ingredient: puree-de-noix-de-cajou_mmvfvp
     quantite: 600
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: eau_ljzb7j
     quantite: 1.2
-    unit: litre
+    unit: l.
     commentaire: ''
 preparation: mixer finement le tout!!! et c'est tout!!!
 astuces:

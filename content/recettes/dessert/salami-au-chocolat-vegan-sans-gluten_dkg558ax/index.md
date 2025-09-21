@@ -8,23 +8,23 @@ draft: false
 ingredients:
   - ingredient: margarine-vegetale-special-cuisson_8j3hna
     quantite: 150
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: biscuit-vegan-et-sans-gluten_ade8hh
     quantite: 195
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: cacao_r6792n
     quantite: 30
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: chocolat-noir_cr4kiz
     quantite: 300
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: sucre-en-poudre_u9z2he
     quantite: 225
-    unit: grammes
+    unit: gr.
     commentaire: ''
 layout: recettes
 plate: 15
@@ -55,4 +55,3 @@ temperature: Froid
 title: Salami au chocolat - vegan sans gluten
 type: dessert
 ---
-

@@ -10,7 +10,7 @@ draft: false
 ingredients:
   - ingredient: menthe-sechee_uid60d
     quantite: 125
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: yaourt-grec-de-vache_dzqmba
     quantite: 7.5
@@ -26,7 +26,7 @@ ingredients:
     commentaire: ''
   - ingredient: noix_usibcf
     quantite: 750
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: boulgour_omf24t
     quantite: 1.875

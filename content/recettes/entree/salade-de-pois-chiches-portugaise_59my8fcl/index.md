@@ -23,7 +23,7 @@ ingredients:
     commentaire: ''
   - ingredient: huile-dolive_h3c8al
     quantite: 0.5
-    unit: litre
+    unit: l.
     commentaire: ''
   - ingredient: pois-chiches_6a8w8k
     quantite: 4
@@ -31,7 +31,7 @@ ingredients:
     commentaire: ''
   - ingredient: jus-de-citron_e4mjd1
     quantite: 0.4
-    unit: litre
+    unit: l.
     commentaire: ''
 layout: recettes
 materiel:
@@ -52,7 +52,7 @@ preparation: |-
 
   Saler poivrer au choix
 preparation24h: |-
-  TREMPER LES POIS CHICHES ! 
+  TREMPER LES POIS CHICHES !
 
   24H AVANT CUISSON
 

@@ -33,7 +33,7 @@ ingredients:
     commentaire: ''
   - ingredient: thym_a16yd7
     quantite: 5
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: moutarde_5c1b20
     quantite: 200

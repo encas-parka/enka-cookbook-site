@@ -9,7 +9,7 @@ draft: false
 ingredients:
   - ingredient: levure-chimique_vgec6e
     quantite: 70
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: puree-de-sesame-noir_9d8hxn
     quantite: 1
@@ -23,7 +23,7 @@ ingredients:
     commentaire: ''
   - ingredient: creme-liquide_nvzduo
     quantite: 1
-    unit: litre
+    unit: l.
     commentaire: ''
   - ingredient: oeuf_zf3zf8
     quantite: 25

@@ -15,7 +15,7 @@ checkAlwaysOk: true
 ingredients:
   - ingredient: levure-boulangere-sans-gluten_ec0v6n
     quantite: 14
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: huile-dolive_h3c8al
     quantite: 30
@@ -27,19 +27,19 @@ ingredients:
     commentaire: ''
   - ingredient: fecule-de-mais-maizena_8nbcjp
     quantite: 80
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: farine-de-millet_nxk1ar
     quantite: 100
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: farine-de-riz_oygozr
     quantite: 300
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: pesto-rosso-vegan_lz3awd
     quantite: 400
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: gomme-de-xanthane_5le7rm
     quantite: 2
@@ -51,7 +51,7 @@ ingredients:
     commentaire: ''
   - ingredient: sucre-en-poudre_u9z2he
     quantite: 60
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: sel_2juq3x
     quantite: 2

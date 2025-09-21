@@ -22,27 +22,27 @@ ingredients:
     commentaire: ''
   - ingredient: fecule-de-tapioca_zq1y8c
     quantite: 100
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: huile-de-coco_6bm4lq
     quantite: 150
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: graines-de-lin_km927d
     quantite: 30
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: gingembre-confit_oskdzx
     quantite: 200
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: poudre-damandes_rmgr7l
     quantite: 220
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: sucre-brun-vergeoise_znjs35
     quantite: 80
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: sel_2juq3x
     quantite: 1

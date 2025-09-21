@@ -19,11 +19,11 @@ checkAlwaysOk: true
 ingredients:
   - ingredient: miso-blanc_k2uthk
     quantite: 300
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: algue-nori-feuille-sechee_ffafjo
     quantite: 22
-    unit: grammes
+    unit: gr.
     commentaire: coupées en languettes 16/feuilles
   - ingredient: sauce-soja_jjrwlj
     quantite: 75
@@ -31,7 +31,7 @@ ingredients:
     commentaire: Oeufs mollets Ajitama
   - ingredient: sel_2juq3x
     quantite: 10
-    unit: grammes
+    unit: gr.
     commentaire: Taré
   - ingredient: vinaigre-de-riz_k6injl
     quantite: 200
@@ -39,31 +39,31 @@ ingredients:
     commentaire: Taré
   - ingredient: sauce-soja_jjrwlj
     quantite: 1.5
-    unit: litre
+    unit: l.
     commentaire: Taré
   - ingredient: algue-kombu-sechee_cd0g12
     quantite: 15
-    unit: grammes
+    unit: gr.
     commentaire: Taré
   - ingredient: algue-kombu-sechee_cd0g12
     quantite: 15
-    unit: grammes
+    unit: gr.
     commentaire: Dashi
   - ingredient: eau_ljzb7j
     quantite: 1.5
-    unit: litre
+    unit: l.
     commentaire: Oeufs mollets Ajitama
   - ingredient: eau_ljzb7j
     quantite: 35
-    unit: litre
+    unit: l.
     commentaire: Dashi
   - ingredient: zestes-de-citron-seches_w9kkd2
     quantite: 5
-    unit: grammes
+    unit: gr.
     commentaire: ou Yuzu. Mixé très fin
   - ingredient: cebette-ciboule-cive-oignon-vert_j7as8d
     quantite: 750
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: ail_u2m28w
     quantite: 30
@@ -71,7 +71,7 @@ ingredients:
     commentaire: Bouillon final
   - ingredient: gingembre-bio_nz839c
     quantite: 300
-    unit: grammes
+    unit: gr.
     commentaire: Bouillon final
   - ingredient: champignons_v9qhs9
     quantite: 1
@@ -87,7 +87,7 @@ ingredients:
     commentaire: Bouillon final
   - ingredient: champignon-shiitake-seche_7b8r4n
     quantite: 125
-    unit: grammes
+    unit: gr.
     commentaire: Taré
   - ingredient: ail_u2m28w
     quantite: 10
@@ -95,19 +95,19 @@ ingredients:
     commentaire: Taré
   - ingredient: gingembre-bio_nz839c
     quantite: 120
-    unit: grammes
+    unit: gr.
     commentaire: Taré
   - ingredient: champignon-shiitake-seche_7b8r4n
     quantite: 250
-    unit: grammes
+    unit: gr.
     commentaire: Dashi
   - ingredient: sucre-blanc_lny16c
     quantite: 250
-    unit: grammes
+    unit: gr.
     commentaire: Oeufs mollets Ajitama
   - ingredient: sucre-blanc_lny16c
     quantite: 100
-    unit: grammes
+    unit: gr.
     commentaire: Taré
   - ingredient: huile-de-sesame_fazth1
     quantite: 50

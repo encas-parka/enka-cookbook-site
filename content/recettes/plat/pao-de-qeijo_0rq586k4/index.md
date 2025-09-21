@@ -26,7 +26,7 @@ ingredients:
     commentaire: ''
   - ingredient: lait-demi-ecreme_x286pc
     quantite: 1.92
-    unit: litre
+    unit: l.
     commentaire: ''
   - ingredient: farine-de-tapioca_v212im
     quantite: 4.8

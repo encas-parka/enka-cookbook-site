@@ -15,11 +15,11 @@ checkAlwaysOk: false
 ingredients:
   - ingredient: tapioca-perlee_mkttuh
     quantite: 105
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: peche_n1vs7d
     quantite: 600
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: lait-de-coco_xdy736
     quantite: 600
@@ -31,7 +31,7 @@ ingredients:
     commentaire: ''
   - ingredient: sucre-blanc_lny16c
     quantite: 30
-    unit: grammes
+    unit: gr.
     commentaire: ''
 preparation: |-
   1. Portez à ébullition le lait de coco et l'eau (100 ml).
@@ -42,4 +42,3 @@ preparation: |-
   6. Placez-les au frais au moins 2 heures avant de les déguster.
 publishDate: 2025-05-15T16:47:00.000Z
 ---
-

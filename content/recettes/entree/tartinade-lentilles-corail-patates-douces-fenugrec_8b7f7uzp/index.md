@@ -20,11 +20,11 @@ checkAlwaysOk: false
 ingredients:
   - ingredient: lentilles-corail_toc8a7
     quantite: 180
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: patates-douces_ndu75n
     quantite: 280
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: huile-dolive_h3c8al
     quantite: 30
@@ -32,7 +32,7 @@ ingredients:
     commentaire: ''
   - ingredient: fenugrec-moulu_d5zbfl
     quantite: 5
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: poivre-noir-moulu_rgt7s4
     quantite: 3
@@ -40,7 +40,7 @@ ingredients:
     commentaire: ''
   - ingredient: sel_2juq3x
     quantite: 5
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: eau_ljzb7j
     quantite: 550

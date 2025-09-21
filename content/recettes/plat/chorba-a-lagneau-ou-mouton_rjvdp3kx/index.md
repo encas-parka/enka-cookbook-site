@@ -64,7 +64,7 @@ ingredients:
     commentaire: fraiche
   - ingredient: huile-dolive_h3c8al
     quantite: 1
-    unit: litre
+    unit: l.
     commentaire: ''
 materiel:
   - Marmitte

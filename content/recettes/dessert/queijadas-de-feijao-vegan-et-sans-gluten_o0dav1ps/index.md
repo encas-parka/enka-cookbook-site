@@ -9,7 +9,7 @@ draft: false
 ingredients:
   - ingredient: agar-agar_ruhtax
     quantite: 1
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: pate-feuillete-sans-gluten-et-vegan_40wkon
     quantite: 2
@@ -21,7 +21,7 @@ ingredients:
     commentaire: ''
   - ingredient: margarine-vegetale-special-cuisson_8j3hna
     quantite: 35
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: citron-non-traite_tobtbt
     quantite: 1
@@ -29,7 +29,7 @@ ingredients:
     commentaire: zeste
   - ingredient: fecule-de-mais-maizena_8nbcjp
     quantite: 35
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: creme-soja_chfwwq
     quantite: 40
@@ -41,11 +41,11 @@ ingredients:
     commentaire: ''
   - ingredient: haricots-blancs-en-conserve_g6ngse
     quantite: 200
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: sucre-en-poudre_u9z2he
     quantite: 85
-    unit: grammes
+    unit: gr.
     commentaire: ''
 layout: recettes
 materiel:

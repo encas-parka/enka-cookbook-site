@@ -30,7 +30,7 @@ ingredients:
     commentaire: ''
   - ingredient: celeri-branche_78fo97
     quantite: 500
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: poivron-vert_rl1e9p
     quantite: 5
@@ -57,31 +57,31 @@ ingredients:
     commentaire: ''
   - ingredient: poivre_2pps90
     quantite: 20
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: oignon-en-poudre_q28bck
     quantite: 20
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: ail-en-poudre_vs2dfm
     quantite: 40
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: thym_a16yd7
     quantite: 40
     commentaire: ''
   - ingredient: origan_fkftyb
     quantite: 40
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: paprika_bidsmu
     quantite: 60
-    unit: grammes
+    unit: gr.
     commentaire: ''
 preparation: |-
   Trancher le chorizo végan et tout faire dorer à la poêle avec de l'huile.
 
-  Faire quelques litres de bouillon de légumes.
+  Faire quelques l.s de bouillon de légumes.
 
   Découper tous les légumes  en mirepoix ( cube 1cm ) et hacher le persil.
 
@@ -89,7 +89,7 @@ preparation: |-
 
   Ajouter le céleri, les poivrons et les cébettes. Verser peu à peu de bouillon. Une fois les légumes tendres, ajouter les assaisonnements petit à petit.
 
-  Cette sauce doit être épaisse, pas liquide. 
+  Cette sauce doit être épaisse, pas liquide.
 
   Faire en deux fois le jambalaya. Diviser les légumes par deux et les répartir dans deux gamelles différentes.
 

@@ -21,15 +21,15 @@ checkAlwaysOk: false
 ingredients:
   - ingredient: pomme-de-terre_18dy4e
     quantite: 160
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: oignon_rtavky
     quantite: 160
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: courgette_9zozfk
     quantite: 80
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: ail_u2m28w
     quantite: 2
@@ -41,11 +41,11 @@ ingredients:
     commentaire: ''
   - ingredient: farine-de-pois-chiche_o627mw
     quantite: 200
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: farine-de-pois-chiche_o627mw
     quantite: 200
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: curry_7jceco
     quantite: 1
@@ -65,7 +65,7 @@ ingredients:
     commentaire: ''
   - ingredient: sel_2juq3x
     quantite: 5
-    unit: grammes
+    unit: gr.
     commentaire: ''
 preparation: |-
   * Peler oignons, patates. Couper en morceaux (pas trop gros), ainsi que les courgettes.

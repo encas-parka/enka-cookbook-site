@@ -21,7 +21,7 @@ checkAlwaysOk: false
 ingredients:
   - ingredient: ail_u2m28w
     quantite: 100
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: oignon-rouge_doxujz
     quantite: 10
@@ -41,7 +41,7 @@ ingredients:
     commentaire: ''
   - ingredient: huile-dolive_h3c8al
     quantite: 2
-    unit: litre
+    unit: l.
     commentaire: ''
   - ingredient: pain-rassis_k8dala
     quantite: 1.8
@@ -53,19 +53,19 @@ ingredients:
     commentaire: ''
   - ingredient: basilic-sec_z6747e
     quantite: 30
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: origan_fkftyb
     quantite: 30
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: sel_2juq3x
     quantite: 30
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: poivre-noir-moulu_rgt7s4
     quantite: 20
-    unit: grammes
+    unit: gr.
     commentaire: ''
 preparation: Le jour même mixer les légumes avec l'huile, le vinaigre et le pain... servir frais bien entendu!!!
 preparation24h: '**24h avant** : faire tremper les légumes prédécoupés petits avec l''huile assaisonnée.'

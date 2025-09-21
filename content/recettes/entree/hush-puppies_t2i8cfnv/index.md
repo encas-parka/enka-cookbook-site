@@ -31,19 +31,19 @@ ingredients:
     commentaire: finement haché
   - ingredient: huile-de-friture_1ej217
     quantite: 15
-    unit: litre
+    unit: l.
     commentaire: ''
   - ingredient: lait-vegetal-au-choix_vw9d1a
     quantite: 2.5
-    unit: litre
+    unit: l.
     commentaire: ''
   - ingredient: levure-chimique_vgec6e
     quantite: 55
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: farine-de-ble_2av6w8
     quantite: 900
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: farine-de-mais_z8uiyd
     quantite: 3.6
@@ -55,15 +55,15 @@ ingredients:
     commentaire: ''
   - ingredient: poivre_2pps90
     quantite: 20
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: paprika_bidsmu
     quantite: 50
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: sel_2juq3x
     quantite: 30
-    unit: grammes
+    unit: gr.
     commentaire: ''
 preparation: |-
   Mélanger le lait non laitier et le vinaigre de cidre de pomme. Remuer et laisser reposer quelques minutes pour faire cailler le tout, créant ainsi un « babeurre » végétalien.

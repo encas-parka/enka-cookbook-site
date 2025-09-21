@@ -17,19 +17,19 @@ checkAlwaysOk: false
 ingredients:
   - ingredient: huile-dolive_h3c8al
     quantite: 70
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: huile-dolive_h3c8al
     quantite: 220
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: gluten-pur_946ddw
     quantite: 1200
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: paprika_bidsmu
     quantite: 12
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: liquid-smoke_effe0c
     quantite: 5
@@ -37,31 +37,31 @@ ingredients:
     commentaire: ''
   - ingredient: paprika_bidsmu
     quantite: 22
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: ail-en-poudre_vs2dfm
     quantite: 65
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: sauce-piment-chipotle_8u0rev
     quantite: 250
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: shiro-miso_dx771g
     quantite: 160
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: miso-dorge_z8jaad
     quantite: 160
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: sauce-soja_jjrwlj
     quantite: 260
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: eau_ljzb7j
     quantite: 800
-    unit: grammes
+    unit: gr.
     commentaire: chaude
 materiel:
   - Ficelle

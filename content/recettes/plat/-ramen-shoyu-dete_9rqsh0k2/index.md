@@ -20,11 +20,11 @@ checkAlwaysOk: false
 ingredients:
   - ingredient: zestes-de-citron-seches_w9kkd2
     quantite: 10
-    unit: grammes
+    unit: gr.
     commentaire: ou yuzu. Mixé très fin
   - ingredient: algue-nori_rtj08p
     quantite: 45
-    unit: grammes
+    unit: gr.
     commentaire: coupées en languettes. 16/feuilles
   - ingredient: cebette-ciboule-cive-oignon-vert_j7as8d
     quantite: 1.5
@@ -44,7 +44,7 @@ ingredients:
     commentaire: Bouillon final
   - ingredient: gingembre-bio_nz839c
     quantite: 600
-    unit: grammes
+    unit: gr.
     commentaire: Bouillon final
   - ingredient: champignons_v9qhs9
     quantite: 2
@@ -56,7 +56,7 @@ ingredients:
     commentaire: Bouillon final
   - ingredient: champignon-shiitake-seche_7b8r4n
     quantite: 250
-    unit: grammes
+    unit: gr.
     commentaire: Taré
   - ingredient: ail_u2m28w
     quantite: 20
@@ -64,31 +64,31 @@ ingredients:
     commentaire: Taré
   - ingredient: gingembre-bio_nz839c
     quantite: 240
-    unit: grammes
+    unit: gr.
     commentaire: Taré
   - ingredient: algue-kombu_oafcb5
     quantite: 30
-    unit: grammes
+    unit: gr.
     commentaire: Taré à faire la veille
   - ingredient: champignon-shiitake-seche_7b8r4n
     quantite: 500
-    unit: grammes
+    unit: gr.
     commentaire: Dashi
   - ingredient: algue-kombu_oafcb5
     quantite: 30
-    unit: grammes
+    unit: gr.
     commentaire: Dashi à faire la veille
   - ingredient: eau_ljzb7j
     quantite: 3
-    unit: litre
+    unit: l.
     commentaire: Oeufs mollés Ajitama
   - ingredient: eau_ljzb7j
     quantite: 70
-    unit: litre
+    unit: l.
     commentaire: Dashi
   - ingredient: miso-blanc_k2uthk
     quantite: 400
-    unit: grammes
+    unit: gr.
     commentaire: 4gr à racler sur le bords du bol
   - ingredient: tamari-sauce_bbwo4n
     quantite: 150
@@ -96,7 +96,7 @@ ingredients:
     commentaire: ou sauce soja. Oeufs mollés Ajitama
   - ingredient: sel_2juq3x
     quantite: 20
-    unit: grammes
+    unit: gr.
     commentaire: Taré
   - ingredient: vinaigre-de-riz_k6injl
     quantite: 400
@@ -104,15 +104,15 @@ ingredients:
     commentaire: Taré
   - ingredient: tamari-sauce_bbwo4n
     quantite: 3
-    unit: litre
+    unit: l.
     commentaire: ou Sauce Soja si on s'en fout du gluten
   - ingredient: sucre-en-poudre_u9z2he
     quantite: 500
-    unit: grammes
+    unit: gr.
     commentaire: Oeufs mollés Ajitama
   - ingredient: sucre-en-poudre_u9z2he
     quantite: 200
-    unit: grammes
+    unit: gr.
     commentaire: Taré
   - ingredient: tofu-ferme_3ahcls
     quantite: 5
@@ -128,7 +128,7 @@ ingredients:
     commentaire: ''
   - ingredient: nouilles-de-riz_mesg7t
     quantite: 2.5
-    unit: grammes
+    unit: gr.
     commentaire: pour les sans gluten
   - ingredient: nouilles-de-ble-ondulees-ramen_ul46ke
     quantite: 7
@@ -155,7 +155,7 @@ preparation: |-
 
   Couper en tranche les demi tomates.
 
-  Tailler les cébettes, le vert en 0.5cm, le blanc à émincer finement. 
+  Tailler les cébettes, le vert en 0.5cm, le blanc à émincer finement.
 
   **NOUILLES** :
 

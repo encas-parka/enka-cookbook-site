@@ -25,11 +25,11 @@ ingredients:
     commentaire: ''
   - ingredient: creme-soja_chfwwq
     quantite: 1
-    unit: litre
+    unit: l.
     commentaire: ''
   - ingredient: lait-de-coco_xdy736
     quantite: 2
-    unit: litre
+    unit: l.
     commentaire: ''
   - ingredient: huile-de-coco_6bm4lq
     quantite: 600
@@ -41,7 +41,7 @@ ingredients:
     commentaire: ''
   - ingredient: puree-de-noix-de-cajou_mmvfvp
     quantite: 300
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: curry-feuilles_xqmcoe
     quantite: 120

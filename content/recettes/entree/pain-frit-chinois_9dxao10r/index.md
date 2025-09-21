@@ -18,15 +18,15 @@ checkAlwaysOk: true
 ingredients:
   - ingredient: eau_ljzb7j
     quantite: 1
-    unit: litre
+    unit: l.
     commentaire: ''
   - ingredient: sel_2juq3x
     quantite: 20
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: huile-de-friture_1ej217
     quantite: 12
-    unit: litre
+    unit: l.
     commentaire: ''
   - ingredient: huile-vegetale_atccqu
     quantite: 50
@@ -34,7 +34,7 @@ ingredients:
     commentaire: ''
   - ingredient: levure-chimique_vgec6e
     quantite: 50
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: farine-de-ble_2av6w8
     quantite: 1.8
@@ -42,7 +42,7 @@ ingredients:
     commentaire: ''
   - ingredient: sucre-en-poudre_u9z2he
     quantite: 25
-    unit: grammes
+    unit: gr.
     commentaire: ''
 preparation: |-
   Dans un grand saladier, mélanger ensemble les ingrédients sec, puis ajouter ensuite le reste des ingrédients. Mélanger à la cuillère pour grossièrement combiner le tout, puis pétrir un peu à la main, juste assez pour ne plus qu'il y ait de farine sèche.

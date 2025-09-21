@@ -23,7 +23,7 @@ ingredients:
     commentaire: ''
   - ingredient: sel_2juq3x
     quantite: 80
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: eau_ljzb7j
     quantite: 300
@@ -31,15 +31,15 @@ ingredients:
     commentaire: ''
   - ingredient: levure-de-boulanger_abzedk
     quantite: 135
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: levure-chimique_vgec6e
     quantite: 35
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: sucre-blanc_lny16c
     quantite: 80
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: kiri-ou-autre-du-genre_bppied
     quantite: 200

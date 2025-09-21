@@ -21,7 +21,7 @@ ingredients:
     commentaire: ''
   - ingredient: farine-de-riz-gluant_civ587
     quantite: 150
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: oeuf_zf3zf8
     quantite: 30
@@ -45,7 +45,7 @@ materiel:
 preparation: |-
   * Faire fondre le beurre.
   * Mélanger tout afin d'obtenir une pâte homogène.
-  * Tapisser les gastro de papier sulfurisé et verser la pâte. 
+  * Tapisser les gastro de papier sulfurisé et verser la pâte.
   * Cuire dans un four préchauffé à 200°, une vingtaine de minutes.
   * Le gateau gonfle, se fissure, le sortir quand le coeur est encore tremblotant, et le laisser refroidir completement avant de faire les parts.
 

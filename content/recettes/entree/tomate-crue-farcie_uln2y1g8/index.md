@@ -42,11 +42,11 @@ ingredients:
     commentaire: ''
   - ingredient: sel_2juq3x
     quantite: 250
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: poivre-noir-moulu_rgt7s4
     quantite: 125
-    unit: grammes
+    unit: gr.
     commentaire: ''
 preparation: |-
   * Couper en deux les tomates par la largeur. Évider et garder l'intérieur.

@@ -37,15 +37,15 @@ ingredients:
     commentaire: ''
   - ingredient: huile-dolive_h3c8al
     quantite: 2
-    unit: litre
+    unit: l.
     commentaire: ''
   - ingredient: paprika_bidsmu
     quantite: 40
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: cumin-moulu_he3u48
     quantite: 40
-    unit: grammes
+    unit: gr.
     commentaire: ''
 preparation: |-
   * Ebouillanter les tomates pour les éplucher plus facilement

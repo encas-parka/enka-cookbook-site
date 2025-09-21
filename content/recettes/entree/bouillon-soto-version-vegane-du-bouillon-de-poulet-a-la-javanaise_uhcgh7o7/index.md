@@ -9,7 +9,7 @@ draft: false
 ingredients:
   - ingredient: eau_ljzb7j
     quantite: 12
-    unit: litre
+    unit: l.
     commentaire: ''
   - ingredient: tamari-sauce_bbwo4n
     quantite: 350
@@ -17,7 +17,7 @@ ingredients:
     commentaire: ''
   - ingredient: poivre-blanc-moulue_7lakpz
     quantite: 15
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: bouillon-de-legume-sans-gluten_tmk6ya
     quantite: 16
@@ -25,11 +25,11 @@ ingredients:
     commentaire: ''
   - ingredient: cumin-moulu_he3u48
     quantite: 20
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: coriandre-en-poudre_nf05n7
     quantite: 20
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: citronnelle-baton_t2e14k
     quantite: 3
@@ -41,11 +41,11 @@ ingredients:
     commentaire: ''
   - ingredient: celeri-branche_78fo97
     quantite: 200
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: poireau_l3fs10
     quantite: 500
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: echalote_vwdomu
     quantite: 1
@@ -53,7 +53,7 @@ ingredients:
     commentaire: ''
   - ingredient: gingembre-bio_nz839c
     quantite: 100
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: ail_u2m28w
     quantite: 2
@@ -68,7 +68,7 @@ plate: 40
 preparation: |-
   Mettre une gamelle d'eau sur le feux, faire bouillir.
 
-  Emincer finement les poireaux, échalottes et le céleri. 
+  Emincer finement les poireaux, échalottes et le céleri.
 
   Hacher le gingembre et l’ail. Verser dans la gamelle.
 

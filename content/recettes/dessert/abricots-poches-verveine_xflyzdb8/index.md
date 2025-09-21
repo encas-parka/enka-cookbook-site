@@ -22,15 +22,15 @@ ingredients:
     commentaire: ''
   - ingredient: sucre-en-poudre_u9z2he
     quantite: 70
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: verveine_9fa412
     quantite: 40
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: eau_ljzb7j
     quantite: 1.2
-    unit: litre
+    unit: l.
     commentaire: ''
 materiel:
   - Marmitte
@@ -41,4 +41,3 @@ preparation: |-
   * Couvrir et laisser refroidir. Réserver au frais jusqu’au service. Enlever les feuilles infusées avant de servir.
 publishDate: 2024-05-18T18:38:00.000Z
 ---
-

@@ -46,27 +46,27 @@ ingredients:
     commentaire: ''
   - ingredient: oignon_rtavky
     quantite: 150
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: aubergine_7sk3a5
     quantite: 150
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: champignons_v9qhs9
     quantite: 150
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: flocons-davoine-sans-gluten_02w66c
     quantite: 150
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: noix_usibcf
     quantite: 30
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: haricots-rouges-cuits_iwdje3
     quantite: 150
-    unit: grammes
+    unit: gr.
     commentaire: ''
 materiel:
   - Four
@@ -82,4 +82,3 @@ preparation: |-
   * Faire cuire à 180°C environ 30 minutes, jusqu’à ce qu’ils brunissent un peu. Retourner en milieu de cuisson.
 publishDate: '2024-06-02T12:12:00.000Z'
 ---
-

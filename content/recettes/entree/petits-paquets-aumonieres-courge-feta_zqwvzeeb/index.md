@@ -16,15 +16,15 @@ ingredients:
     commentaire: ''
   - ingredient: vinaigre-de-cidre_7qo3ht
     quantite: 0.5
-    unit: litre
+    unit: l.
     commentaire: ''
   - ingredient: baies-roses_9o3793
     quantite: 50
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: cumin-graines_l3esgp
     quantite: 50
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: feta_m5dxyo
     quantite: 3
@@ -40,7 +40,7 @@ ingredients:
     commentaire: ''
   - ingredient: huile-de-tournesol_c70jxb
     quantite: 3.5
-    unit: litre
+    unit: l.
     commentaire: ''
   - ingredient: pate-filo-1-feuille_x6je0g
     quantite: 200
@@ -48,7 +48,7 @@ ingredients:
     commentaire: ''
   - ingredient: sucre-en-poudre_u9z2he
     quantite: 200
-    unit: grammes
+    unit: gr.
     commentaire: ''
 layout: recettes
 materiel:
@@ -79,5 +79,3 @@ temperature: Chaud
 title: Petits paquets - Aumonières courge feta
 type: entree
 ---
-
-

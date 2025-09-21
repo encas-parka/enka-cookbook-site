@@ -37,11 +37,11 @@ ingredients:
     commentaire: ''
   - ingredient: sucre-blanc_lny16c
     quantite: 300
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: piment-despelette_bdx3gq
     quantite: 8
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: huile-dolive_h3c8al
     quantite: 300

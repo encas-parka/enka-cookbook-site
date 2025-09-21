@@ -19,7 +19,7 @@ ingredients:
     commentaire: ''
   - ingredient: citron-confit_m6gmgq
     quantite: 40
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: oignon-rouge_doxujz
     quantite: 1
@@ -35,11 +35,11 @@ ingredients:
     commentaire: ''
   - ingredient: yaourt-grec-de-vache_dzqmba
     quantite: 150
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: aneth-aromatique_nnkg8f
     quantite: 15
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: cumin-moulu_he3u48
     quantite: 1.5

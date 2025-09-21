@@ -34,15 +34,15 @@ ingredients:
     commentaire: ''
   - ingredient: ail_u2m28w
     quantite: 4
-    unit: unité
+    unit: gousse·s
     commentaire: ''
   - ingredient: oignon_rtavky
     quantite: 200
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: champignons-seches_wcvin0
     quantite: 40
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: fecule-de-mais-maizena_8nbcjp
     quantite: 2
@@ -54,11 +54,11 @@ ingredients:
     commentaire: ''
   - ingredient: riz-basmati_opblzb
     quantite: 100
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: haricots-rouges-cuits_iwdje3
     quantite: 500
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: sucre-complet_njgchn
     quantite: 6

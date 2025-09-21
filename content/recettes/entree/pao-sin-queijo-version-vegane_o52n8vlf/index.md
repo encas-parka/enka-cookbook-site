@@ -30,11 +30,11 @@ ingredients:
     commentaire: ''
   - ingredient: pomme-de-terre_18dy4e
     quantite: 400
-    unit: grammes
+    unit: gr.
     commentaire: en purée
   - ingredient: farine-de-tapioca_v212im
     quantite: 250
-    unit: grammes
+    unit: gr.
     commentaire: pour travailler la pâte
   - ingredient: huile-vegetale_atccqu
     quantite: 165

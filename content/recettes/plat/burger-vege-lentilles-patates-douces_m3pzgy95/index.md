@@ -9,15 +9,15 @@ draft: false
 ingredients:
   - ingredient: curcuma-moulu_htp5ma
     quantite: 60
-    unit: grammes
+    unit: gr.
     commentaire: galettes
   - ingredient: curry_7jceco
     quantite: 75
-    unit: grammes
+    unit: gr.
     commentaire: galettes
   - ingredient: cumin-moulu_he3u48
     quantite: 75
-    unit: grammes
+    unit: gr.
     commentaire: galettes
   - ingredient: persil-frais_hgfa4e
     quantite: 7
@@ -33,19 +33,19 @@ ingredients:
     commentaire: galettes
   - ingredient: sel_2juq3x
     quantite: 40
-    unit: grammes
+    unit: gr.
     commentaire: PM galettes
   - ingredient: sel_2juq3x
     quantite: 50
-    unit: grammes
+    unit: gr.
     commentaire: PM Sauce
   - ingredient: poivre-noir-moulu_rgt7s4
     quantite: 20
-    unit: grammes
+    unit: gr.
     commentaire: PM galettes
   - ingredient: poivre-noir-moulu_rgt7s4
     quantite: 25
-    unit: grammes
+    unit: gr.
     commentaire: PM Sauce
   - ingredient: fromage-blanc_b2dxf8
     quantite: 8
@@ -53,7 +53,7 @@ ingredients:
     commentaire: Sauce
   - ingredient: yaourt-de-soja_hlbwfd
     quantite: 500
-    unit: grammes
+    unit: gr.
     commentaire: sauce végane
   - ingredient: patates-douces_ndu75n
     quantite: 6.5
@@ -81,7 +81,7 @@ ingredients:
     commentaire: Accompagnement
   - ingredient: echalote_vwdomu
     quantite: 400
-    unit: grammes
+    unit: gr.
     commentaire: Sauce
   - ingredient: ail_u2m28w
     quantite: 16
@@ -97,7 +97,7 @@ ingredients:
     commentaire: galettes
   - ingredient: farine-de-ble_2av6w8
     quantite: 649.1
-    unit: grammes
+    unit: gr.
     commentaire: galettes
   - ingredient: lentilles-corail_toc8a7
     quantite: 1.3
@@ -105,7 +105,7 @@ ingredients:
     commentaire: galettes
   - ingredient: petits-flocons-davoine_51luzk
     quantite: 550
-    unit: grammes
+    unit: gr.
     commentaire: galettes
   - ingredient: noix_usibcf
     quantite: 1

@@ -29,10 +29,10 @@ ingredients:
     commentaire: ''
   - ingredient: huile-vegetale_atccqu
     quantite: 0.5
-    unit: litre
+    unit: l.
     commentaire: ''
 preparation: |-
-  couper les tomates 
+  couper les tomates
 
   assaisonner d'huile, sel et poivre...
 

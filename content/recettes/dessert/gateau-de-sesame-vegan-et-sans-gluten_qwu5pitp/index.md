@@ -13,33 +13,33 @@ ingredients:
     commentaire: ''
   - ingredient: puree-de-sesame-noir_9d8hxn
     quantite: 150
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: sel_2juq3x
     commentaire: ''
   - ingredient: fecule-de-mais-maizena_8nbcjp
     quantite: 200
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: creme-damande_geh6n8
     quantite: 0.2
-    unit: litre
+    unit: l.
     commentaire: ''
   - ingredient: lait-damande_csxbg6
     quantite: 0.8
-    unit: litre
+    unit: l.
     commentaire: ''
   - ingredient: huile-de-tournesol_c70jxb
     quantite: 0.4
-    unit: litre
+    unit: l.
     commentaire: ''
   - ingredient: chocolat-noir_cr4kiz
     quantite: 400
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: sucre-en-poudre_u9z2he
     quantite: 700
-    unit: grammes
+    unit: gr.
     commentaire: ''
 layout: recettes
 materiel:

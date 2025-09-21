@@ -23,7 +23,7 @@ ingredients:
     commentaire: ''
   - ingredient: huile-dolive_h3c8al
     quantite: 0
-    unit: litre
+    unit: l.
     commentaire: ''
   - ingredient: creme-vegetale_aq796v
     quantite: 1.5

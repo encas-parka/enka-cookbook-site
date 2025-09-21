@@ -19,11 +19,11 @@ checkAlwaysOk: false
 ingredients:
   - ingredient: noix_usibcf
     quantite: 50
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: riz_0uelc3
     quantite: 400
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: ail_u2m28w
     quantite: 1
@@ -31,11 +31,11 @@ ingredients:
     commentaire: ''
   - ingredient: grenade_j3mr9h
     quantite: 90
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: olives_75wo2d
     quantite: 40
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: huile-dolive_h3c8al
     quantite: 3
@@ -43,11 +43,11 @@ ingredients:
     commentaire: ''
   - ingredient: feta_m5dxyo
     quantite: 150
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: beurre-doux_kmq1zb
     quantite: 50
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: melasse-de-grenade_ia5a5o
     quantite: 1
@@ -55,7 +55,7 @@ ingredients:
     commentaire: ''
   - ingredient: menthe_2j9y2v
     quantite: 50
-    unit: grammes
+    unit: gr.
     commentaire: ''
 preparation: |-
   I. Préchauffez le four à à 230 'C (chaleur tournante) ou plus si votre four le permet.

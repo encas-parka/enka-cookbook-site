@@ -12,19 +12,19 @@ ingredients:
     commentaire: ''
   - ingredient: lait-de-riz_hzwesd
     quantite: 10
-    unit: litre
+    unit: l.
     commentaire: ''
   - ingredient: lait-de-soja_gpeob7
     quantite: 10
-    unit: litre
+    unit: l.
     commentaire: ''
   - ingredient: lait-davoine_3eex0o
     quantite: 10
-    unit: litre
+    unit: l.
     commentaire: ''
   - ingredient: sirop-de-sureau_k2rneh
     quantite: 6
-    unit: litre
+    unit: l.
     commentaire: ''
 layout: recettes
 materiel:
@@ -43,4 +43,3 @@ temperature: Froid
 title: Crème Végan au sureau
 type: dessert
 ---
-

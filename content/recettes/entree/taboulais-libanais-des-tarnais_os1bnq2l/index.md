@@ -11,7 +11,7 @@ ingredients:
     commentaire: ''
   - ingredient: sel_2juq3x
     quantite: 10
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: menthe_2j9y2v
     quantite: 30
@@ -31,7 +31,7 @@ ingredients:
     commentaire: ''
   - ingredient: huile-dolive_h3c8al
     quantite: 1.5
-    unit: litre
+    unit: l.
     commentaire: ''
   - ingredient: boulgour_omf24t
     quantite: 1
@@ -39,7 +39,7 @@ ingredients:
     commentaire: ''
   - ingredient: jus-de-citron_e4mjd1
     quantite: 1
-    unit: litre
+    unit: l.
     commentaire: ''
 layout: recettes
 plate: 180
@@ -66,7 +66,7 @@ preparation: |-
   *
   * Epluchez et ciselez l'oignon (en tous petits dés).
   * Dans un saladier, déposez le boulgour et versez le jus de citron.
-  * Ajoutez les tomates, l'oignon la menthe et le persil. 
+  * Ajoutez les tomates, l'oignon la menthe et le persil.
   * **NE PAS MELANGER et laisser au réfrigérateur au moins une heure.**
   * Avant de servir, versez l'huile d'olive, salez, poivrez et mélangez.
 publishDate: 2024-05-18T16:14:00.000Z

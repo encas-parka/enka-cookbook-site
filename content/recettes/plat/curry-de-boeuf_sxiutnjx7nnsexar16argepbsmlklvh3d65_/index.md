@@ -27,7 +27,7 @@ ingredients:
     commentaire: deux bouts de racine pour avoir en quantité de gingembre, l'équivalent d'une tète d'ail.
   - ingredient: oignon_rtavky
     quantite: 500
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: banane_9vpwp5
     quantite: 25
@@ -51,15 +51,15 @@ ingredients:
     commentaire: ce n'est pas une erreur il y a besoin deux fois de tomates dans cette recette
   - ingredient: yaourt-brasse_a73fzw
     quantite: 2
-    unit: litre
+    unit: l.
     commentaire: ''
   - ingredient: beurre-demi-sel_mxub21
     quantite: 300
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: yaourt-de-vache_xahmrh
     quantite: 500
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: curry_7jceco
     quantite: 25
@@ -67,7 +67,7 @@ ingredients:
     commentaire: ''
   - ingredient: concentre-de-tomate_mck2wl
     quantite: 500
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: huile-dolive_h3c8al
     quantite: 5
@@ -83,7 +83,7 @@ ingredients:
     commentaire: ''
   - ingredient: noix-de-coco-rapee_rxvf6y
     quantite: 500
-    unit: grammes
+    unit: gr.
     commentaire: ''
 preparation: |-
   #### La viande et sa sauce
@@ -102,7 +102,7 @@ preparation: |-
   Ajouter les morceaux de bœuf et les faire dorer de tous les côtés.\
   Faire un espace au centre, un filet d'huile d'olive, ajouter l'ail/gingembre et la pate de curry et remuer pendant une minute (*pas plus sinon l'ail devient amer*).
   Incorporer et les tomates. Laisser mijoter pendant quelques minutes.
-  Verser le lait de coco, puis ajouter environ un litre d'eau pour arriver à couvert. Bien mélanger.\
+  Verser le lait de coco, puis ajouter environ un l. d'eau pour arriver à couvert. Bien mélanger.\
 
   Laisser mijoter à feu doux pendant environ 1 heure 30 jusqu'à ce que le bœuf soit tendre. Donc au plus tard à **10:30** pour un service à midi.\
   \
@@ -130,7 +130,7 @@ preparation: |-
 
   #### Le riz
 
-  un gastro GN 1/1 = 50 personnes. 
+  un gastro GN 1/1 = 50 personnes.
 
   Dans chaque gastro (taille moyenne):
 
@@ -139,8 +139,8 @@ preparation: |-
   3. ajouter 250 g d'oignons ciselés
   4. ajouter 100 g d'huile végétale
   5. bien melanger pour nacrer le riz.
-  6. Ajouter 1,8 à 2 fois la masse du riz en eau soit 5 litres maxi
-  7. Couvrir 
+  6. Ajouter 1,8 à 2 fois la masse du riz en eau soit 5 l.s maxi
+  7. Couvrir
 
   Cuisson au four à 180 ° pendant 30 à 40 minutes.\
   Au plus tard à **11:10** pour un service à midi.
@@ -151,4 +151,3 @@ prepAlt:
   - recetteAlt: curry-veg_wbyuybfrzyxchoyptn9pj9qdn9fjbgpbtjep
 publishDate: 2025-05-14T10:52:00.000Z
 ---
-

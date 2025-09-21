@@ -9,7 +9,7 @@ draft: false
 ingredients:
   - ingredient: tahin_u33083
     quantite: 160
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: vinaigre-balsamique_qemlqs
     quantite: 90
@@ -17,7 +17,7 @@ ingredients:
     commentaire: ''
   - ingredient: canneberge_uja9ip
     quantite: 100
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: ail_u2m28w
     quantite: 4
@@ -25,7 +25,7 @@ ingredients:
     commentaire: ''
   - ingredient: betterave-cuite_i7psri
     quantite: 400
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: huile-dolive_h3c8al
     quantite: 120

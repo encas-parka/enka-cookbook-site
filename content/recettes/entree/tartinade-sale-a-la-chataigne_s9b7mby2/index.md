@@ -12,7 +12,7 @@ ingredients:
     commentaire: ''
   - ingredient: echalote_vwdomu
     quantite: 750
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: ail_u2m28w
     quantite: 10

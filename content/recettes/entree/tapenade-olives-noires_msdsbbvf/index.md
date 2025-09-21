@@ -22,7 +22,7 @@ ingredients:
     commentaire: ''
   - ingredient: olives-noires-a-la-grecque_9p3n36
     quantite: 100
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: huile-dolive_h3c8al
     quantite: 2

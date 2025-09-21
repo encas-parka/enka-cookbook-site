@@ -45,7 +45,7 @@ ingredients:
     commentaire: ''
   - ingredient: huile-dolive_h3c8al
     quantite: 0.25
-    unit: litre
+    unit: l.
     commentaire: ''
 preparation: |-
   Découper les tomates et poivrons en 2.
@@ -59,4 +59,3 @@ publishDate: 2025-08-08T09:43:00.000Z
 uuid: '11145755'
 titleslug: tomates-et-poivrons-grilles-au-four_11145755
 ---
-

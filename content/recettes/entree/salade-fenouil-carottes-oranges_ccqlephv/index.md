@@ -21,11 +21,11 @@ ingredients:
     commentaire: ''
   - ingredient: huile-dolive_h3c8al
     quantite: 76.5
-    unit: litre
+    unit: l.
     commentaire: ''
   - ingredient: jus-dorange_gzi2ry
     quantite: 32
-    unit: litre
+    unit: l.
     commentaire: ''
 layout: recettes
 plate: 50

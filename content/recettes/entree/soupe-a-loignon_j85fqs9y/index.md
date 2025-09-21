@@ -26,31 +26,31 @@ ingredients:
     commentaire: ''
   - ingredient: gruyere_pvia1r
     quantite: 700
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: beaufort_dar9kl
     quantite: 700
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: comte_da93ql
     quantite: 700
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: beurre-doux_kmq1zb
     quantite: 500
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: bouillon-de-legume-sans-gluten_tmk6ya
     quantite: 36
     unit: unité
-    commentaire: 2 par litre
+    commentaire: 2 par l.
   - ingredient: romarin_6z655r
     quantite: 5
     unit: unité
     commentaire: ''
   - ingredient: thym_a16yd7
     quantite: 15
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: feuille-de-laurier_j84olg
     quantite: 8
@@ -58,7 +58,7 @@ ingredients:
     commentaire: ''
   - ingredient: eau_ljzb7j
     quantite: 20
-    unit: litre
+    unit: l.
     commentaire: ''
   - ingredient: pain-au-levain_d66ur8
     quantite: 2.3
@@ -70,7 +70,7 @@ ingredients:
     commentaire: au goût
   - ingredient: vin-blanc_judtle
     quantite: 1.5
-    unit: litre
+    unit: l.
     commentaire: ''
 preparation: |-
   Mettre les oignons émincés et le beurre dans une casserole. Faire fondre.

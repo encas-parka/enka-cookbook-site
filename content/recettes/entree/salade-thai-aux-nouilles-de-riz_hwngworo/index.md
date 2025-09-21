@@ -27,11 +27,11 @@ ingredients:
     commentaire: ''
   - ingredient: gingembre_0d1fzw
     quantite: 300
-    unit: grammes
+    unit: gr.
     commentaire: sauce
   - ingredient: champignon-noir_hlihcc
     quantite: 760
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: chou-chinois_hz46f4
     quantite: 13
@@ -51,11 +51,11 @@ ingredients:
     commentaire: ''
   - ingredient: sauce-soja_jjrwlj
     quantite: 0.5
-    unit: litre
+    unit: l.
     commentaire: sauce
   - ingredient: vinaigre-de-riz_k6injl
     quantite: 1
-    unit: litre
+    unit: l.
     commentaire: sauce
   - ingredient: menthe_2j9y2v
     quantite: 4
@@ -67,11 +67,11 @@ ingredients:
     commentaire: sauce
   - ingredient: huile-de-sesame_fazth1
     quantite: 1.5
-    unit: litre
+    unit: l.
     commentaire: sauce
   - ingredient: huile-de-colza_eu7lc6
     quantite: 1.5
-    unit: litre
+    unit: l.
     commentaire: sauce
 materiel:
   - Grand Saladier

@@ -10,15 +10,15 @@ temperature: Froid
 ingredients:
   - ingredient: jus-de-citron_e4mjd1
     quantite: 2
-    unit: litre
+    unit: l.
     commentaire: ''
   - ingredient: huile-dolive_h3c8al
     quantite: 2
-    unit: litre
+    unit: l.
     commentaire: ''
   - ingredient: echalote_vwdomu
     quantite: 600
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: tomate_ibtbnq
     quantite: 10
@@ -46,13 +46,13 @@ saison:
 cuisson: Non
 plate: 100
 preparation: |-
-  * Faire tremper le ble dans un grand volume d'eau et laisser 30mn. 
+  * Faire tremper le ble dans un grand volume d'eau et laisser 30mn.
   * Laver le persil et couper le en FINE JULIENNE (1mm d'epaisseur)
   * Laver les tomates et couper les en BRUNOISE (carre de 3mm)
   * Nettoyer et ciseler la menthe, et echalote.
   * Egoutter le blé.
-  * Melanger les herbes, les tomates, les echalotes, et ajouter le ble. 
-  * Reservez au frais. 
+  * Melanger les herbes, les tomates, les echalotes, et ajouter le ble.
+  * Reservez au frais.
   * Mélanger le citron et l huile et incorporer 30MN avant de servir.
   * Réserver au frais.
 prepAlt: []

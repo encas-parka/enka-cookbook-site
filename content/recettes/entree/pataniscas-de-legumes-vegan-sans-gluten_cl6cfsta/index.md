@@ -42,18 +42,18 @@ ingredients:
     commentaire: ''
   - ingredient: huile-de-tournesol_c70jxb
     quantite: 0.2
-    unit: litre
+    unit: l.
     commentaire: ''
   - ingredient: eau-gazeuse_ekw33n
     quantite: 0.8
-    unit: litre
+    unit: l.
     commentaire: ''
 preparation: |-
   \- meilleur quand préparé un peu en avance (2/3h repos de la pâte) -
 
   Raper les courgettes et les carottes. Hacher les oignons, l'ail et le persil. Dans un grand récipent, ajouter les épices et la levure au reste, bien mélanger. Ajouter la farine et remélanger jusqu'à avoir une texture homogène.
 
-  Ajouter les 2/3 de l'eau gaseuse. 
+  Ajouter les 2/3 de l'eau gaseuse.
 
   La pâte doit ressembler à de la pâte à beignets, un peu épaisse mais pas trop. Le dernier tiers d'eau pour rectifier.
 

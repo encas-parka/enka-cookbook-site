@@ -18,27 +18,27 @@ check: Oui
 ingredients:
   - ingredient: huile-vegetale_atccqu
     quantite: 300
-    unit: grammes
+    unit: gr.
     commentaire: (crème)
   - ingredient: lait-de-coco_xdy736
     quantite: 300
-    unit: grammes
+    unit: gr.
     commentaire: (crème)
   - ingredient: sirop-derable_zkmmgt
     quantite: 240
-    unit: grammes
+    unit: gr.
     commentaire: (crème)
   - ingredient: noix-de-cajou_5rkq49
     quantite: 450
-    unit: grammes
+    unit: gr.
     commentaire: (crème)
   - ingredient: sucre-blanc_lny16c
     quantite: 100
-    unit: grammes
+    unit: gr.
     commentaire: (top)
   - ingredient: agar-agar_ruhtax
     quantite: 4
-    unit: grammes
+    unit: gr.
     commentaire: top
   - ingredient: jus-de-citron_e4mjd1
     quantite: 50
@@ -58,11 +58,11 @@ ingredients:
     commentaire: (top)
   - ingredient: huile-de-coco_6bm4lq
     quantite: 190
-    unit: grammes
+    unit: gr.
     commentaire: (base)
   - ingredient: speculoos_h6thsp
     quantite: 500
-    unit: grammes
+    unit: gr.
     commentaire: (base)
 materiel:
   - Giraffe (Bras Mixeur)
@@ -81,4 +81,3 @@ astuces: []
 prepAlt: []
 publishDate: 2025-09-08T11:24:00.000Z
 ---
-

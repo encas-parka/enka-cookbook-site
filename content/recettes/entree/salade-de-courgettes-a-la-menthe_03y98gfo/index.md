@@ -20,7 +20,7 @@ ingredients:
     commentaire: ''
   - ingredient: huile-dolive_h3c8al
     quantite: 1
-    unit: litre
+    unit: l.
     commentaire: ''
   - ingredient: jus-de-citron_e4mjd1
     quantite: 600
@@ -29,7 +29,7 @@ ingredients:
 layout: recettes
 plate: 100
 preparation: |-
-  1. Couper les courgettes en cubes, râper l'ail, effeuiller et ciseler les bouquets de menthe. 
+  1. Couper les courgettes en cubes, râper l'ail, effeuiller et ciseler les bouquets de menthe.
   2. Mélanger les courgettes à l'ail et l'huile d'olive, saler, enfourner pour 20 minutes à 200°C.
   3. Sortir du four, laisser refroidir puis mettre au réfrigérateur dans une passoire pour une heure.
   4. Verser dans un saladier et mélanger avec le jus de itron et la menthe.
@@ -45,5 +45,3 @@ temperature: Froid
 title: Salade de courgettes à la menthe
 type: entree
 ---
-
-

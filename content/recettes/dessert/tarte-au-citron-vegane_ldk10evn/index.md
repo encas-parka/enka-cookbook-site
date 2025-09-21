@@ -8,7 +8,7 @@ draft: false
 ingredients:
   - ingredient: curcuma-moulu_htp5ma
     quantite: 30
-    unit: grammes
+    unit: gr.
     commentaire: appareil
   - ingredient: margarine-vegetale-special-cuisson_8j3hna
     quantite: 1.5
@@ -20,11 +20,11 @@ ingredients:
     commentaire: pâte
   - ingredient: fecule-de-mais-maizena_8nbcjp
     quantite: 550
-    unit: grammes
+    unit: gr.
     commentaire: appareil
   - ingredient: lait-de-soja_gpeob7
     quantite: 2.2
-    unit: litre
+    unit: l.
     commentaire: appareil
   - ingredient: lait-de-soja_gpeob7
     quantite: 640
@@ -40,11 +40,11 @@ ingredients:
     commentaire: appareil
   - ingredient: jus-de-citron_e4mjd1
     quantite: 3.7
-    unit: litre
+    unit: l.
     commentaire: appareil
   - ingredient: poudre-damandes_rmgr7l
     quantite: 550
-    unit: grammes
+    unit: gr.
     commentaire: pâte
   - ingredient: sucre-en-poudre_u9z2he
     quantite: 1.1
@@ -73,4 +73,3 @@ temperature: Froid
 title: TARTE AU CITRON VEGANE
 type: dessert
 ---
-

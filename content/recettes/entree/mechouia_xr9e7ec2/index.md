@@ -39,7 +39,7 @@ ingredients:
     commentaire: ''
   - ingredient: ras-el-hanout_j40pyf
     quantite: 100
-    unit: grammes
+    unit: gr.
     commentaire: au goût
   - ingredient: pulpe-de-tomate_ftj0mq
     quantite: 4
@@ -47,7 +47,7 @@ ingredients:
     commentaire: ''
   - ingredient: sucre-en-poudre_u9z2he
     quantite: 200
-    unit: grammes
+    unit: gr.
     commentaire: ''
 preparation: |-
   \    1 - Couper séparemment les oignons et les poivrons en petits dès. Hacher l'ail grossièrement.

@@ -10,27 +10,27 @@ draft: false
 ingredients:
   - ingredient: puree-damande_7dlfuw
     quantite: 120
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: lait-de-riz_hzwesd
     quantite: 2
-    unit: litre
+    unit: l.
     commentaire: ''
   - ingredient: fecule-de-pomme-de-terre_g56l9d
     quantite: 120
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: farine-de-riz-blanche_1nb85u
     quantite: 160
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: pralines-roses-de-lyon_31bhpd
     quantite: 265
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: sucre-en-poudre_u9z2he
     quantite: 265
-    unit: grammes
+    unit: gr.
     commentaire: ''
 layout: recettes
 materiel:

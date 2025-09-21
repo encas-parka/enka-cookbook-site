@@ -29,15 +29,15 @@ ingredients:
     commentaire: ''
   - ingredient: vinaigre-de-cidre_7qo3ht
     quantite: 0.5
-    unit: litre
+    unit: l.
     commentaire: ''
   - ingredient: baies-roses_9o3793
     quantite: 50
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: cumin-graines_l3esgp
     quantite: 50
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: courge_oa85mx
     quantite: 1
@@ -49,11 +49,11 @@ ingredients:
     commentaire: ''
   - ingredient: huile-de-tournesol_c70jxb
     quantite: 3.5
-    unit: litre
+    unit: l.
     commentaire: ''
   - ingredient: sucre-en-poudre_u9z2he
     quantite: 200
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: pate-feuillete-sans-gluten-et-vegan_40wkon
     quantite: 5
@@ -73,5 +73,3 @@ preparation24h: ''
 prepAlt: []
 publishDate: '2024-05-17T15:21:00.000Z'
 ---
-
-

@@ -28,7 +28,7 @@ ingredients:
     commentaire: ''
   - ingredient: ail_u2m28w
     quantite: 200
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: lasagnes_wby30p
     quantite: 4
@@ -44,15 +44,15 @@ ingredients:
     commentaire: ''
   - ingredient: lait-ecreme_ue125d
     quantite: 1
-    unit: litre
+    unit: l.
     commentaire: ''
   - ingredient: poivre_2pps90
     quantite: 8
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: sel_2juq3x
     quantite: 80
-    unit: grammes
+    unit: gr.
     commentaire: ''
 preparation: |-
   Laver et couper en cubes les aubergines et les tomates; hacher l'ail, mélanger le tout avec la moitié de l'huile d'olive

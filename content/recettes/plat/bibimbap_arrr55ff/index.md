@@ -19,15 +19,15 @@ checkAlwaysOk: false
 ingredients:
   - ingredient: huile-de-sesame_fazth1
     quantite: 1
-    unit: litre
+    unit: l.
     commentaire: Sauce
   - ingredient: huile-vegetale_atccqu
     quantite: 1
-    unit: litre
+    unit: l.
     commentaire: ''
   - ingredient: fecule-de-mais-maizena_8nbcjp
     quantite: 300
-    unit: grammes
+    unit: gr.
     commentaire: Tofu mariné
   - ingredient: oeuf_zf3zf8
     quantite: 102
@@ -35,7 +35,7 @@ ingredients:
     commentaire: ''
   - ingredient: gingembre-bio_nz839c
     quantite: 350
-    unit: grammes
+    unit: gr.
     commentaire: Sauce
   - ingredient: ail_u2m28w
     quantite: 3
@@ -51,7 +51,7 @@ ingredients:
     commentaire: ''
   - ingredient: champignon-shiitake-seche_7b8r4n
     quantite: 700
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: champignon-de-paris_92zzps
     quantite: 4
@@ -67,15 +67,15 @@ ingredients:
     commentaire: ''
   - ingredient: graines-de-sesame-blanc_z9plfy
     quantite: 250
-    unit: grammes
+    unit: gr.
     commentaire: Sauce
   - ingredient: graines-de-sesame-blanc_z9plfy
     quantite: 500
-    unit: grammes
+    unit: gr.
     commentaire: Tofu mariné
   - ingredient: graines-de-sesame-noir_atlkei
     quantite: 500
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: riz_0uelc3
     quantite: 10
@@ -87,7 +87,7 @@ ingredients:
     commentaire: Sauce
   - ingredient: vinaigre-de-riz_k6injl
     quantite: 1
-    unit: litre
+    unit: l.
     commentaire: ''
   - ingredient: doenjang_vet0jj
     quantite: 1
@@ -99,15 +99,15 @@ ingredients:
     commentaire: Tofu mariné
   - ingredient: ail-en-poudre_vs2dfm
     quantite: 100
-    unit: grammes
+    unit: gr.
     commentaire: Tofu mariné
   - ingredient: ketchup_ytlacu
     quantite: 600
-    unit: grammes
+    unit: gr.
     commentaire: Tofu mariné
   - ingredient: gochujang-sans-gluten_28jpdi
     quantite: 250
-    unit: grammes
+    unit: gr.
     commentaire: Tofu mariné
   - ingredient: sauce-soja_jjrwlj
     quantite: 500
@@ -115,7 +115,7 @@ ingredients:
     commentaire: Tofu mariné
   - ingredient: eau_ljzb7j
     quantite: 2
-    unit: litre
+    unit: l.
     commentaire: Sauce
   - ingredient: tofu-ferme_3ahcls
     quantite: 7
@@ -127,17 +127,17 @@ ingredients:
     commentaire: Sauce
   - ingredient: soda-au-gingembre-ginger-beer_s80bet
     quantite: 1
-    unit: litre
+    unit: l.
     commentaire: Sauce
 preparation: |-
   **ŒUFS PARFAITS :**
 
   A cuire en plusieurs fois. Certainement 50 par 50. A voir.
 
-  Préchauffer l'eau de **64°C** à l'aide du thermoplongeur (si si la famille!). Plonger les 
+  Préchauffer l'eau de **64°C** à l'aide du thermoplongeur (si si la famille!). Plonger les
   œufs à l'aide d'une araignée ou d'une écumoire. Cuire **54 min** exactement! Retirer les œufs à l'écumoire. Réserver.
 
-  **GARNITURE :** 
+  **GARNITURE :**
 
   Faire décongeler les épinards dans les bacs gastro perforés.
 
@@ -169,7 +169,7 @@ preparation: |-
 
   **Mettre de côté une portion pour les allergiques au sésame**
 
-  Lorsque c'est prêt, mélanger les cubes dans la marinade et parsemer de sésame blanc 
+  Lorsque c'est prêt, mélanger les cubes dans la marinade et parsemer de sésame blanc
 
   **SAUCE :**
 
@@ -181,9 +181,9 @@ preparation: |-
 
   **RIZ :** Cuire le riz dans deux rondo (3kg par rondo)
 
-  **MONTAGE DES BOLS :** 
+  **MONTAGE DES BOLS :**
 
-  Disposer environ 300gr de riz cuit dans le fond du bol. 
+  Disposer environ 300gr de riz cuit dans le fond du bol.
 
   Arroser de sauce.
 

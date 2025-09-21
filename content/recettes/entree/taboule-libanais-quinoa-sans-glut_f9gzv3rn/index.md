@@ -21,15 +21,15 @@ check: Oui
 ingredients:
   - ingredient: jus-de-citron_e4mjd1
     quantite: 2
-    unit: litre
+    unit: l.
     commentaire: ''
   - ingredient: huile-dolive_h3c8al
     quantite: 2
-    unit: litre
+    unit: l.
     commentaire: ''
   - ingredient: echalote_vwdomu
     quantite: 600
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: tomate_ibtbnq
     quantite: 10
@@ -53,8 +53,8 @@ preparation: |-
   * Laver les tomates et couper les en BRUNOISE (carre de 3mm)
   * Nettoyer et ciseler la menthe, et echalote.
   * Egoutter le blé.
-  * Melanger les herbes, les tomates, les echalotes, et ajouter le ble. 
-  * Reservez au frais. 
+  * Melanger les herbes, les tomates, les echalotes, et ajouter le ble.
+  * Reservez au frais.
   * Mélanger le citron et l huile et incorporer 30MN avant de servir.
   * Réserver au frais.
 astuces: []

@@ -13,7 +13,7 @@ ingredients:
     commentaire: ''
   - ingredient: sauge_crbm3g
     quantite: 140
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: fleur-de-sel_tjrhvg
     quantite: 4
@@ -21,7 +21,7 @@ ingredients:
     commentaire: ''
   - ingredient: yaourt-de-soja_hlbwfd
     quantite: 700
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: ail_u2m28w
     quantite: 80
@@ -37,23 +37,23 @@ ingredients:
     commentaire: ''
   - ingredient: lait-vegetal-au-choix_vw9d1a
     quantite: 1.46
-    unit: litre
+    unit: l.
     commentaire: ''
   - ingredient: levure-chimique-sans-gluten_zb9tj8
     quantite: 140
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: farine-de-ble-noir-sarrasin_2ej7fi
     quantite: 1600
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: noisette_ut0l0k
     quantite: 320
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: poudre-de-noisettes_0g08xt
     quantite: 320
-    unit: grammes
+    unit: gr.
     commentaire: ''
 layout: recettes
 materiel:

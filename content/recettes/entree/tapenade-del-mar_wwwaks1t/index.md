@@ -24,15 +24,15 @@ ingredients:
     commentaire: ''
   - ingredient: puree-damande_7dlfuw
     quantite: 300
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: capres_c88lz8
     quantite: 200
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: huile-dolive_h3c8al
     quantite: 1.2
-    unit: litre
+    unit: l.
     commentaire: ''
 preparation: tout mixer sauf l'ail qui est pressée...et voilà!
 publishDate: 2025-06-15T19:47:00.000Z

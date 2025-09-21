@@ -42,7 +42,7 @@ ingredients:
     commentaire: ''
   - ingredient: huile-dolive_h3c8al
     quantite: 1.5
-    unit: litre
+    unit: l.
     commentaire: ''
   - ingredient: persil-frais_hgfa4e
     quantite: 5
@@ -54,7 +54,7 @@ ingredients:
     commentaire: 'a ajouter ciselée sur le top selon les envies '
   - ingredient: paprika_bidsmu
     quantite: 70
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: feuille-de-laurier_j84olg
     quantite: 8
@@ -62,11 +62,11 @@ ingredients:
     commentaire: ''
   - ingredient: gingembre-en-poudre_alwx6o
     quantite: 100
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: cumin_dc8855
     quantite: 70
-    unit: grammes
+    unit: gr.
     commentaire: ''
 preparation: |-
   ### Instructions

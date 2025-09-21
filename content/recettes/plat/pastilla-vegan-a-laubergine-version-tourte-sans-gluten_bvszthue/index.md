@@ -29,11 +29,11 @@ ingredients:
     commentaire: sirop
   - ingredient: figues-seches_mr7sd5
     quantite: 400
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: oignon_rtavky
     quantite: 500
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: ail_u2m28w
     quantite: 3
@@ -53,19 +53,19 @@ ingredients:
     commentaire: ''
   - ingredient: amande_fuhtcw
     quantite: 160
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: pignon-de-pin_82a9ot
     quantite: 100
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: sucre-glace_phv1to
     quantite: 30
-    unit: grammes
+    unit: gr.
     commentaire: déco
   - ingredient: sucre-en-poudre_u9z2he
     quantite: 100
-    unit: grammes
+    unit: gr.
     commentaire: sirop
 layout: recettes
 plate: 16

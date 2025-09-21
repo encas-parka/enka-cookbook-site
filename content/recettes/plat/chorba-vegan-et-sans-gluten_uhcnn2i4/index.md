@@ -9,23 +9,23 @@ draft: false
 ingredients:
   - ingredient: eau_ljzb7j
     quantite: 12
-    unit: litre
+    unit: l.
     commentaire: ''
   - ingredient: paprika_bidsmu
     quantite: 30
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: piment-doux_0p7ynz
     quantite: 15
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: gingembre-en-poudre_alwx6o
     quantite: 30
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: ras-el-hanout_j40pyf
     quantite: 140
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: menthe_2j9y2v
     quantite: 2
@@ -37,11 +37,11 @@ ingredients:
     commentaire: ''
   - ingredient: concentre-de-tomate_mck2wl
     quantite: 550
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: coulis-de-tomates_09bywc
     quantite: 4
-    unit: litre
+    unit: l.
     commentaire: ''
   - ingredient: courgette_9zozfk
     quantite: 2
@@ -49,7 +49,7 @@ ingredients:
     commentaire: ''
   - ingredient: celeri-branche_78fo97
     quantite: 500
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: carotte_eouu0v
     quantite: 3
@@ -65,7 +65,7 @@ ingredients:
     commentaire: ''
   - ingredient: pates-langues-doiseaux-sans-gluten_89m8hr
     quantite: 800
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: pois-chiches_6a8w8k
     quantite: 1.5
@@ -74,15 +74,15 @@ ingredients:
 layout: recettes
 plate: 40
 preparation: |-
-  Eplucher et émincer les carottes et les courgettes. Emincer une branche de céleri. Mettre le tout dans un saladier. Réserver. 
+  Eplucher et émincer les carottes et les courgettes. Emincer une branche de céleri. Mettre le tout dans un saladier. Réserver.
 
-  Eplucher et émincer grossièrement les oignons. 
+  Eplucher et émincer grossièrement les oignons.
 
-  Dans une gamelle : verser un filet d'huile d'olive et y faire cuire les oignons. Assaisonner avec le ras el hanout, le gingembre en poudre, le paprika et le piment doux. 
+  Dans une gamelle : verser un filet d'huile d'olive et y faire cuire les oignons. Assaisonner avec le ras el hanout, le gingembre en poudre, le paprika et le piment doux.
 
   Déposer les pois chiche, carottes, les courgettes et le céleri dans la gamelle. Ajouter le concentré de tomates, l'eau et le coulis de tomate. Assaisonner de sel et de poivre.
 
-  Plonger une demi botte entière de coriandre dans la cocotte. Remuer le tout. 
+  Plonger une demi botte entière de coriandre dans la cocotte. Remuer le tout.
 
   Laisser cuire au moins 1h à frémissement. Ajouter les pâtes et laisser cuire quelques minutes à frémissement
 preparation24h: Faire tremper les pois chiche la veille.

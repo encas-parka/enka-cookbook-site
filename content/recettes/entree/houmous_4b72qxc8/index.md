@@ -8,7 +8,7 @@ draft: false
 ingredients:
   - ingredient: tahin_u33083
     quantite: 100
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: eau_ljzb7j
     quantite: 3
@@ -16,7 +16,7 @@ ingredients:
     commentaire: ''
   - ingredient: paprika_bidsmu
     quantite: 0.5
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: ail_u2m28w
     quantite: 1
@@ -28,7 +28,7 @@ ingredients:
     commentaire: ''
   - ingredient: pois-chiche-cuit_wwl5vn
     quantite: 300
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: jus-de-citron_e4mjd1
     quantite: 2

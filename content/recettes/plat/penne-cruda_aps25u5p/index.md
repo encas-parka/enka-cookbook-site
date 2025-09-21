@@ -33,7 +33,7 @@ ingredients:
     commentaire: ''
   - ingredient: ail_u2m28w
     quantite: 2
-    unit: bottes
+    unit: tête·s
     commentaire: ''
   - ingredient: capres_c88lz8
     quantite: 1
@@ -45,7 +45,7 @@ ingredients:
     commentaire: ''
   - ingredient: huile-dolive_h3c8al
     quantite: 1
-    unit: litre
+    unit: l.
     commentaire: ''
 preparation: |-
   Faire cuire les pennes al dente dans beaucoup d'eau salée.
@@ -63,4 +63,3 @@ preparation: |-
   Servir avec du parmesan ou grana ou pecorino râpé.
 publishDate: 2025-06-04T17:18:00.000Z
 ---
-

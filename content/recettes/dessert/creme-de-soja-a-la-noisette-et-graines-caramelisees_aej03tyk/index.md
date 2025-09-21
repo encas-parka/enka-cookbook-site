@@ -19,31 +19,31 @@ checkAlwaysOk: false
 ingredients:
   - ingredient: pistache-emmondee_q7adw3
     quantite: 100
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: graines-de-sesame-blanc_z9plfy
     quantite: 100
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: graine-de-tournesol_4vxqlr
     quantite: 200
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: amandes-effilees_xkijt9
     quantite: 200
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: lait-de-soja_gpeob7
     quantite: 9
-    unit: litre
+    unit: l.
     commentaire: ''
   - ingredient: creme-de-riz_s0sjb1
     quantite: 500
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: sucre-blanc_lny16c
     quantite: 200
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: sucre-de-canne-blond_n85gmi
     quantite: 1.4
@@ -72,4 +72,3 @@ preparation: |-
 preparation24h: A faire la veille pour le matin ou le matin pour le soir
 publishDate: 2025-06-05T07:55:00.000Z
 ---
-

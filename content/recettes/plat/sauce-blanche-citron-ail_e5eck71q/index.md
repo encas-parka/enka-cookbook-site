@@ -10,7 +10,7 @@ ingredients:
     commentaire: ''
   - ingredient: fromage-blanc_b2dxf8
     quantite: 1.2
-    unit: litre
+    unit: l.
     commentaire: ''
   - ingredient: ail_u2m28w
     quantite: 7
@@ -18,7 +18,7 @@ ingredients:
     commentaire: ''
   - ingredient: jus-de-citron_e4mjd1
     quantite: 0.3
-    unit: litre
+    unit: l.
     commentaire: ''
 layout: recettes
 plate: 40
@@ -38,5 +38,3 @@ temperature: Froid
 title: Sauce blanche citron ail
 type: plat
 ---
-
-

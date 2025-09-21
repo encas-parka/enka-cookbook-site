@@ -29,15 +29,15 @@ ingredients:
     commentaire: ''
   - ingredient: farine-de-ble_2av6w8
     quantite: 320
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: yaourt-grec-de-vache_dzqmba
     quantite: 500
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: feta_m5dxyo
     quantite: 600
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: poivre_2pps90
     commentaire: ''
@@ -83,4 +83,3 @@ preparation: |-
   Option sans gluten : farine sans gluten (par exemple mélange farine riz maïs)
 publishDate: 2025-07-21T11:43:00.000Z
 ---
-

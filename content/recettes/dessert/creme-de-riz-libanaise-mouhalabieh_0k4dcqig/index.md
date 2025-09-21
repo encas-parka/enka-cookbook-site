@@ -9,7 +9,7 @@ draft: false
 ingredients:
   - ingredient: agar-agar_ruhtax
     quantite: 2
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: sel_2juq3x
     quantite: 1
@@ -17,15 +17,15 @@ ingredients:
     commentaire: ''
   - ingredient: farine-de-riz_oygozr
     quantite: 500
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: lait-de-riz_hzwesd
     quantite: 8
-    unit: litre
+    unit: l.
     commentaire: ''
   - ingredient: amandes-effilees_xkijt9
     quantite: 200
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: eau-de-fleur-doranger_ikdk3g
     quantite: 100
@@ -33,7 +33,7 @@ ingredients:
     commentaire: + quelques gouttes d'eau de rose
   - ingredient: sucre-en-poudre_u9z2he
     quantite: 500
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: poudre-damandes_rmgr7l
     quantite: 1

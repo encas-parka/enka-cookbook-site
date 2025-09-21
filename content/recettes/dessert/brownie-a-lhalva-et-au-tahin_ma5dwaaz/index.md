@@ -12,7 +12,7 @@ ingredients:
     commentaire: ''
   - ingredient: sel_2juq3x
     quantite: 28
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: beurre-doux_kmq1zb
     quantite: 2.8
@@ -40,14 +40,14 @@ ingredients:
     commentaire: ''
   - ingredient: cacao_r6792n
     quantite: 335
-    unit: grammes
+    unit: gr.
     commentaire: ''
 layout: recettes
 materiel:
   - Four
 plate: 100
 preparation: |-
-  * Préchauffer le four à 200°C : Il est important que le four soit bien chaud lors de l'enfournage car le timing de cuisson est très précis. Donc ne pas zapper pas l'étape du préchauffage ! 
+  * Préchauffer le four à 200°C : Il est important que le four soit bien chaud lors de l'enfournage car le timing de cuisson est très précis. Donc ne pas zapper pas l'étape du préchauffage !
   * Chemiser les moules de papier sulfurisé. Réserver.
   * Faire fondre le beurre et le chocolat au bain-marie. Mélanger hors du feu, jusqu'à obtenir une texture lisse et brillante. Réserver.
   * Fouetter au batteur électrique le sucre et les œufs pour parvenir à une texture claire et crémeuse.

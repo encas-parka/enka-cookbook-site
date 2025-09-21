@@ -24,7 +24,7 @@ ingredients:
     commentaire: ''
   - ingredient: creme-soja_chfwwq
     quantite: 1.5
-    unit: litre
+    unit: l.
     commentaire: ''
   - ingredient: huile-vegetale_atccqu
     quantite: 250
@@ -32,15 +32,15 @@ ingredients:
     commentaire: ''
   - ingredient: melange-4-epices_dex52s
     quantite: 75
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: curry_7jceco
     quantite: 75
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: jus-dorange_gzi2ry
     quantite: 4
-    unit: litre
+    unit: l.
     commentaire: ''
 preparation: |-
   laver et brosser les carottes puis les râper .

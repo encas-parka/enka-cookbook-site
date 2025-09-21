@@ -42,7 +42,7 @@ ingredients:
     commentaire: ''
   - ingredient: farine-de-pois-chiche_o627mw
     quantite: 260
-    unit: grammes
+    unit: gr.
     commentaire: pour la version vegan
   - ingredient: creme-soja_chfwwq
     quantite: 850
@@ -50,7 +50,7 @@ ingredients:
     commentaire: pour la sauce vegan
   - ingredient: fecule-de-mais-maizena_8nbcjp
     quantite: 680
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: oeuf_zf3zf8
     quantite: 41
@@ -58,11 +58,11 @@ ingredients:
     commentaire: ''
   - ingredient: cumin-graines_l3esgp
     quantite: 85
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: sumac_6izdfu
     quantite: 51
-    unit: grammes
+    unit: gr.
     commentaire: à convenance, pour la sauce
   - ingredient: persil-frais_hgfa4e
     quantite: 3.4
@@ -70,11 +70,11 @@ ingredients:
     commentaire: ''
   - ingredient: anis-vert-en-poudre_t3szad
     quantite: 17
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: cardamone-en-poudre_2n9g9t
     quantite: 25.5
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: persil-frais_hgfa4e
     quantite: 3.4
@@ -82,7 +82,7 @@ ingredients:
     commentaire: ''
   - ingredient: piment-en-flocons_5k7zz4
     quantite: 25.5
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: menthe_2j9y2v
     quantite: 3.4
@@ -90,19 +90,19 @@ ingredients:
     commentaire: ''
   - ingredient: curcuma-moulu_htp5ma
     quantite: 17
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: paprika_bidsmu
     quantite: 17
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: graine-de-coriandre_crkg3d
     quantite: 170
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: zaatar-zathar_wxocup
     quantite: 680
-    unit: grammes
+    unit: gr.
     commentaire: ''
 materiel:
   - Four
@@ -123,7 +123,7 @@ preparation: |-
 
   * Mettre le four à 180°C - thermostat 6
   * Dans un poele, 1 bonne  cà s de pate dans l'huile pour 1 beignets.Frire 3 - 4 minutes de chaque coté.
-  * Les mettre sur papier absorbant. 
+  * Les mettre sur papier absorbant.
 
 
 

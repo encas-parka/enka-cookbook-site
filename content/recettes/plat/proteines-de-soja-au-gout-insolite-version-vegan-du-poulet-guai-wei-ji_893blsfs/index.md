@@ -9,11 +9,11 @@ draft: false
 ingredients:
   - ingredient: eau_ljzb7j
     quantite: 2
-    unit: litre
+    unit: l.
     commentaire: ''
   - ingredient: tahin_u33083
     quantite: 500
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: coriandre-fraiche_fetrpe
     quantite: 2
@@ -21,19 +21,19 @@ ingredients:
     commentaire: ''
   - ingredient: sesame_mo4efz
     quantite: 200
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: piment-despelette_bdx3gq
     quantite: 20
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: poivre-de-sichuan_93rauy
     quantite: 40
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: tamari-sauce_bbwo4n
     quantite: 1
-    unit: litre
+    unit: l.
     commentaire: ''
   - ingredient: vinaigre-de-riz-noir_cx8yxn
     quantite: 800
@@ -53,7 +53,7 @@ ingredients:
     commentaire: ''
   - ingredient: sucre-en-poudre_u9z2he
     quantite: 100
-    unit: grammes
+    unit: gr.
     commentaire: ''
 layout: recettes
 plate: 40

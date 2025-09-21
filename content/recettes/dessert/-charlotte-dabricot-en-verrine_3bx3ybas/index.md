@@ -29,11 +29,11 @@ ingredients:
     commentaire: ''
   - ingredient: sucre-de-canne-blond_n85gmi
     quantite: 500
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: sucre-de-canne-blond_n85gmi
     quantite: 700
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: romarin_6z655r
     quantite: 2

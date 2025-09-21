@@ -33,7 +33,7 @@ ingredients:
     commentaire: ''
   - ingredient: fecule-de-mais-maizena_8nbcjp
     quantite: 75
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: basilic_s8j4ff
     quantite: 2
@@ -41,7 +41,7 @@ ingredients:
     commentaire: ''
   - ingredient: levure-de-biere_4be4ic
     quantite: 40
-    unit: grammes
+    unit: gr.
     commentaire: ''
 preparation: |-
   râper les courgettes, émincer les oignons et faire cuire pendant 15mn, réserver dans un saladier

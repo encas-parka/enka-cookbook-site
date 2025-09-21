@@ -181,7 +181,7 @@ ingredients:
   lof:
     - title: Huile d'olive
       quantite: 1
-      unit: litre
+      unit: l.
 ```
 
 **Après migration:**
@@ -192,7 +192,7 @@ ingredients:
     unit: tête·s
   - ingredient: huile-d-olive_5e6f7g8h
     quantite: 1
-    unit: litre
+    unit: l.
 ```
 
 ## 🎉 Après la migration

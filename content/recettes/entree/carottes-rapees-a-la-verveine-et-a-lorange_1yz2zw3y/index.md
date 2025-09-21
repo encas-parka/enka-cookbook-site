@@ -31,7 +31,7 @@ ingredients:
     commentaire: ''
   - ingredient: verveine_9fa412
     quantite: 15
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: jus-dorange_gzi2ry
     quantite: 300
@@ -39,7 +39,7 @@ ingredients:
     commentaire: ''
   - ingredient: ecorce-dorange-sechee_0tlmi4
     quantite: 2
-    unit: grammes
+    unit: gr.
     commentaire: ''
 preparation: |-
   Le lendemain, faire la sauce en mélangeant tous les autres ingrédients.
@@ -50,4 +50,3 @@ preparation: |-
 preparation24h: '**Obligatoirement 1 J avant :** Laver puis râper les carottes. Hacher la verveine. Les mélanger ensemble.'
 publishDate: 2025-06-19T03:56:00.000Z
 ---
-

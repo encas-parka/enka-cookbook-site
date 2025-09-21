@@ -19,8 +19,8 @@ checkfor: null
 preparation: |-
   **Préparation du poulet :**
 
-  Découper les poulets. Détacher les cuisses le long du tronc. 
-  Entailler d’abord la peau puis couper à hauteur de l’articulation. 
+  Découper les poulets. Détacher les cuisses le long du tronc.
+  Entailler d’abord la peau puis couper à hauteur de l’articulation.
   Détacher les ailes du tronc de la même manière que les cuisses. Laisser les ailes entières. Détacher la poitrine des deux côtés, en coupant prudemment le long du sternum. Garder les carcasses.
 
   Cuire les morceaux de poulet dans une grosse gamelle et la grande poêle à paella, saisir d’abord le côté peau à feu vif, pendant 5 min environ, puis les retourner. Benner les carcasses et couvrir avec l’eau bouillante. Saler. Plonger les bouquets garnis et les bouillons de légumes sans gluten.
@@ -50,31 +50,31 @@ publishDate: 2025-06-01T19:06:00.000Z
 ingredients:
   - ingredient: cumin-moulu_he3u48
     quantite: 20
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: poivre_2pps90
     quantite: 40
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: oignon-en-poudre_q28bck
     quantite: 40
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: ail-en-poudre_vs2dfm
     quantite: 80
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: thym_a16yd7
     quantite: 80
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: origan_fkftyb
     quantite: 80
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: paprika_bidsmu
     quantite: 125
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: persil-frais_hgfa4e
     quantite: 4
@@ -117,5 +117,3 @@ ingredients:
     unit: Kg
     commentaire: ''
 ---
-
-

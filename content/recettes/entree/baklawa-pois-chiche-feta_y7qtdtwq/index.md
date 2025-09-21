@@ -13,11 +13,11 @@ ingredients:
     commentaire: ''
   - ingredient: paprika_bidsmu
     quantite: 30
-    unit: grammes
+    unit: gr.
     commentaire: a voir s'il est piquant ou pas, goutu ou pas
   - ingredient: piment-en-poudre_fmc1dm
     quantite: 10
-    unit: grammes
+    unit: gr.
     commentaire: à adapter en fonction du piquant
   - ingredient: aneth-aromatique_nnkg8f
     quantite: 2
@@ -85,7 +85,7 @@ preparation: |-
   * Dans un grand poelon, à feu moyen : huile, oignons , ail; quand ils sont tendres, y ajouter les épices
   * Ajouter la pulpe de tomate, le concentré et le sucre : laisser mijoter. Laisser un peu évaporer le liquide, on veut pas quelque chose de trop sec, mais tout de meme pas trop d'eau, surtout si l'on a voulu utiliser des vrais tomates.
   * Incorporer les pois chiches, l'aneth et les épinards. Saler et poivrer.
-  * MONTAGE 
+  * MONTAGE
 
     Fondre le beurre
 

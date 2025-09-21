@@ -17,7 +17,7 @@ ingredients:
     commentaire: ''
   - ingredient: creme-fraiche-liquide-entiere_6tnb6h
     quantite: 8.275
-    unit: litre
+    unit: l.
     commentaire: ''
   - ingredient: oeuf_zf3zf8
     quantite: 15
@@ -29,7 +29,7 @@ ingredients:
     commentaire: ''
   - ingredient: glucose_lm7zqh
     quantite: 825
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: pralines-roses-de-lyon_31bhpd
     quantite: 8.275
@@ -37,7 +37,7 @@ ingredients:
     commentaire: ''
   - ingredient: poudre-damandes_rmgr7l
     quantite: 550
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: sucre-en-poudre_u9z2he
     quantite: 1.5

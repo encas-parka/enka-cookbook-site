@@ -40,23 +40,23 @@ ingredients:
     commentaire: ''
   - ingredient: poivre_2pps90
     quantite: 45
-    unit: grammes
+    unit: gr.
     commentaire: à ajuster au goût
   - ingredient: sel_2juq3x
     quantite: 45
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: sumac_6izdfu
     quantite: 45
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: curcuma-moulu_htp5ma
     quantite: 45
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: aneth-aromatique_nnkg8f
     quantite: 500
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: coriandre-fraiche_fetrpe
     quantite: 1.5
@@ -75,13 +75,13 @@ ingredients:
     unit: unité
     commentaire: ''
 preparation: |-
-  Préchauffer le four à 180 °C (th. 6). 
+  Préchauffer le four à 180 °C (th. 6).
 
-  Laver, sécher, effeuiller et 
-  ciseler finement les herbes, les cébettes et la salade. Peler et passer les gousses d'ail au presse-ail. 
+  Laver, sécher, effeuiller et
+  ciseler finement les herbes, les cébettes et la salade. Peler et passer les gousses d'ail au presse-ail.
 
   Dans un grand récipients, casser les œufs et les battre.
-  Ajouter le curcuma, les herbes, l’ail haché, les épices, l'huile et bien mélanger. Goûter et rectifier 
+  Ajouter le curcuma, les herbes, l’ail haché, les épices, l'huile et bien mélanger. Goûter et rectifier
   l’assaisonnement.
 
   Tapisser les plats gastro de papier sulfu, verser la préparation et enfourner pour 45 minutes.

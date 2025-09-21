@@ -29,7 +29,7 @@ ingredients:
     commentaire: ''
   - ingredient: huile-dolive_h3c8al
     quantite: 2.5
-    unit: litre
+    unit: l.
     commentaire: ''
   - ingredient: sucre-de-canne-blond_n85gmi
     quantite: 2.5
@@ -37,7 +37,7 @@ ingredients:
     commentaire: appareil
   - ingredient: chapelure-sans-gluten_5e0pcl
     quantite: 300
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: eau-de-fleur-doranger_ikdk3g
     quantite: 390
@@ -53,7 +53,7 @@ ingredients:
     commentaire: ''
   - ingredient: chapelure_psu3gg
     quantite: 650
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: levure-chimique_vgec6e
     quantite: 13
@@ -76,4 +76,3 @@ preparation: |-
   **Version sans gluten** : remplacer la chapelure par le mix sans gluten
 publishDate: 2025-06-04T19:18:00.000Z
 ---
-

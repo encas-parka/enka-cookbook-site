@@ -9,7 +9,7 @@ draft: false
 ingredients:
   - ingredient: levure-chimique_vgec6e
     quantite: 7
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: persil-frais_hgfa4e
     quantite: 1
@@ -21,7 +21,7 @@ ingredients:
     commentaire: sauce
   - ingredient: citron-confit_m6gmgq
     quantite: 35
-    unit: grammes
+    unit: gr.
     commentaire: sauce
   - ingredient: ail_u2m28w
     quantite: 5
@@ -37,15 +37,15 @@ ingredients:
     commentaire: ''
   - ingredient: huile-de-friture_1ej217
     quantite: 1
-    unit: litre
+    unit: l.
     commentaire: ''
   - ingredient: fecule-de-mais-maizena_8nbcjp
     quantite: 200
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: farine-de-pois-chiche_o627mw
     quantite: 200
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: lait-vegetal-au-choix_vw9d1a
     quantite: 700

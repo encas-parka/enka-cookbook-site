@@ -32,15 +32,15 @@ ingredients:
     commentaire: ''
   - ingredient: sel_2juq3x
     quantite: 100
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: vinaigre-de-vin_bjuxby
     quantite: 1.2
-    unit: litre
+    unit: l.
     commentaire: ''
   - ingredient: sucre-en-poudre_u9z2he
     quantite: 600
-    unit: grammes
+    unit: gr.
     commentaire: ''
 materiel:
   - Gastro 1/1 (Profond)

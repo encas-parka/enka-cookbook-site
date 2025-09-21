@@ -9,11 +9,11 @@ draft: false
 ingredients:
   - ingredient: harissa_4n95t5
     quantite: 50
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: puree-dail-noir_veh1lf
     quantite: 400
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: aubergine_7sk3a5
     quantite: 13
@@ -21,7 +21,7 @@ ingredients:
     commentaire: ''
   - ingredient: huile-dolive_h3c8al
     quantite: 1.2
-    unit: litre
+    unit: l.
     commentaire: ''
   - ingredient: jus-de-citron_e4mjd1
     quantite: 150

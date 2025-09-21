@@ -24,15 +24,15 @@ ingredients:
     commentaire: ''
   - ingredient: chocolat-noir-patissier-70p100_1e3zhq
     quantite: 300
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: muscovado-sucre-de-canne-complet_l5w2jl
     quantite: 130
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: sucre-de-canne-blond_n85gmi
     quantite: 300
-    unit: grammes
+    unit: gr.
     commentaire: ''
 layout: recettes
 materiel:
@@ -41,7 +41,7 @@ plate: 100
 preparation: |-
   * Dans un saladier, mélanger la farine, les deux sortes de sucre, et le sel
   * Laver les brins de romarin, les couper en petits morceaux et les ajouter dans le saladier avec l'huile d'olive.
-  * Ajouter les pépites de chocolat et mélanger à nouveau. 
+  * Ajouter les pépites de chocolat et mélanger à nouveau.
   * Rassembler la pâte avec les mains pour former une boule de pâte.\
     Découper la pâte en deux.\
     Les placer entre deux feuilles de papier cuisson, et  les étaler en un rectangle épais à l'aide d'un rouleau à pâtisserie. Le biscuit doit faire  un 1cm d'épaisseur.

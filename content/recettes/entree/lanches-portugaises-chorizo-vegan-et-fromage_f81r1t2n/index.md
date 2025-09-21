@@ -24,11 +24,11 @@ ingredients:
     commentaire: ''
   - ingredient: lait-demi-ecreme_x286pc
     quantite: 1.625
-    unit: litre
+    unit: l.
     commentaire: ''
   - ingredient: levure-fraiche_1z66lc
     quantite: 250
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: farine-de-ble_2av6w8
     quantite: 5
@@ -36,11 +36,11 @@ ingredients:
     commentaire: ''
   - ingredient: sucre-en-poudre_u9z2he
     quantite: 190
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: sel_2juq3x
     quantite: 63
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: gouda-en-tranche_aspkm2
     quantite: 100
@@ -48,7 +48,7 @@ ingredients:
     commentaire: ''
   - ingredient: beurre-doux_kmq1zb
     quantite: 310
-    unit: grammes
+    unit: gr.
     commentaire: ''
 preparation: |-
   Faire tiédir le lait et y diluer la levure. Attention température du lait entre 38 à 43 °C. Mélanger et laisser reposer 15 minutes.

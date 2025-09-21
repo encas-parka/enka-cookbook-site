@@ -10,15 +10,15 @@ draft: false
 ingredients:
   - ingredient: levure-de-biere_4be4ic
     quantite: 50
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: ail_u2m28w
     quantite: 5
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: oignon_rtavky
     quantite: 500
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: epinard_4totf1
     quantite: 1
@@ -30,15 +30,15 @@ ingredients:
     commentaire: ''
   - ingredient: farine-de-ble-noir-sarrasin_2ej7fi
     quantite: 150
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: graine-de-tournesol_4vxqlr
     quantite: 50
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: noix_usibcf
     quantite: 200
-    unit: grammes
+    unit: gr.
     commentaire: ''
 layout: recettes
 materiel:

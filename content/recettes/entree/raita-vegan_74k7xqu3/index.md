@@ -31,7 +31,7 @@ ingredients:
     commentaire: ''
   - ingredient: cumin-graines_l3esgp
     quantite: 20
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: coriandre-fraiche_fetrpe
     quantite: 0.5

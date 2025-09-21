@@ -10,7 +10,7 @@ draft: false
 ingredients:
   - ingredient: eau_ljzb7j
     quantite: 19
-    unit: litre
+    unit: l.
     commentaire: ''
   - ingredient: bouillon-de-legume-sans-gluten_tmk6ya
     quantite: 15
@@ -18,11 +18,11 @@ ingredients:
     commentaire: ''
   - ingredient: parmesan_pr1fiu
     quantite: 800
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: beurre-doux_kmq1zb
     quantite: 800
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: ail_u2m28w
     quantite: 5
@@ -50,7 +50,7 @@ ingredients:
     commentaire: ''
   - ingredient: jus-de-raisin_tkuufn
     quantite: 1
-    unit: litre
+    unit: l.
     commentaire: ''
 layout: recettes
 plate: 100

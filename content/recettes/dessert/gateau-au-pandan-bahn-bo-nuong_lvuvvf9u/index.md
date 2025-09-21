@@ -19,7 +19,7 @@ checkfor: 155
 ingredients:
   - ingredient: levure-chimique-sans-gluten_zb9tj8
     quantite: 122
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: oeuf_zf3zf8
     quantite: 66
@@ -31,15 +31,15 @@ ingredients:
     commentaire: ''
   - ingredient: farine-de-riz-blanche_1nb85u
     quantite: 450
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: lait-de-coco_xdy736
     quantite: 4.45
-    unit: litre
+    unit: l.
     commentaire: ''
   - ingredient: sel_2juq3x
     quantite: 10
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: pandan-extrait-de_krizq0
     quantite: 50

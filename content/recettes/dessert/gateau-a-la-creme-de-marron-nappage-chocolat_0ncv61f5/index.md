@@ -15,7 +15,7 @@ checkAlwaysOk: false
 ingredients:
   - ingredient: sarrasin_9f35oz
     quantite: 100
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: oeuf_zf3zf8
     quantite: 4
@@ -27,19 +27,19 @@ ingredients:
     commentaire: ''
   - ingredient: beurre-demi-sel_mxub21
     quantite: 25
-    unit: grammes
+    unit: gr.
     commentaire: pour la nappage à mélanger avec le chocolat
   - ingredient: beurre-demi-sel_mxub21
     quantite: 100
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: confiture-de-chataigne-sans-sucre_q33x0k
     quantite: 500
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: chocolat-noir-patissier-70p100_1e3zhq
     quantite: 200
-    unit: grammes
+    unit: gr.
     commentaire: ''
 preparation: |-
   Mélanger tous les ingrédients

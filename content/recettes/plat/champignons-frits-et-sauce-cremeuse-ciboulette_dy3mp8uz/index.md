@@ -32,19 +32,19 @@ ingredients:
     commentaire: ''
   - ingredient: fecule-de-mais-maizena_8nbcjp
     quantite: 620
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: lait-de-soja_gpeob7
     quantite: 6.2
-    unit: litre
+    unit: l.
     commentaire: ''
   - ingredient: creme-soja_chfwwq
     quantite: 6.2
-    unit: litre
+    unit: l.
     commentaire: ''
   - ingredient: huile-de-friture_1ej217
     quantite: 5
-    unit: litre
+    unit: l.
     commentaire: ''
   - ingredient: farine-de-ble_2av6w8
     quantite: 10
@@ -67,7 +67,7 @@ ingredients:
 preparation: |-
 
   Champignons de Paris panés :
-  champignons de paris, panure( farine, eau, corn flakes, sel) huile friture 
+  champignons de paris, panure( farine, eau, corn flakes, sel) huile friture
 
   Sauce cremeuse vegan ciboulette  :
 

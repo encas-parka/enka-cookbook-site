@@ -18,15 +18,15 @@ check: Oui
 ingredients:
   - ingredient: sucre-blanc_lny16c
     quantite: 50
-    unit: grammes
+    unit: gr.
     commentaire: coulis
   - ingredient: agar-agar_ruhtax
     quantite: 8
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: framboises-surgelees_65cee288c5d4
     quantite: 500
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: gousse-de-vanille_2a0lnj
     quantite: 5
@@ -34,17 +34,17 @@ ingredients:
     commentaire: ''
   - ingredient: sucre-blanc_lny16c
     quantite: 250
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: creme-fraiche-liquide-entiere_6tnb6h
     quantite: 2
-    unit: litre
+    unit: l.
     commentaire: ''
 materiel:
   - ramequins
   - Giraffe (Bras Mixeur)
 preparation: |-
-  - Mélanger sucre et crème (sauf 10cL pour délayer l'agar agar plus tard) au fouet dans une casserole. 
+  - Mélanger sucre et crème (sauf 10cL pour délayer l'agar agar plus tard) au fouet dans une casserole.
   - Fendre les gousses de vanille, les ajouter au mélange
   - Faire chauffer à feu doux environ 10 minutes
   - Ajouter l'agar agar délayé dans le reste de la crème au mélange. Porter à ébullition puis couper le feu
@@ -56,4 +56,3 @@ astuces: []
 prepAlt: []
 publishDate: 2025-09-08T13:57:00.000Z
 ---
-

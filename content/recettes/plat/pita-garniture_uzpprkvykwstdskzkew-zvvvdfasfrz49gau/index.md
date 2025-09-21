@@ -39,15 +39,15 @@ ingredients:
     commentaire: sauce
   - ingredient: poivre_2pps90
     quantite: 60
-    unit: grammes
+    unit: gr.
     commentaire: sauce
   - ingredient: sel_2juq3x
     quantite: 60
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: sel_2juq3x
     quantite: 60
-    unit: grammes
+    unit: gr.
     commentaire: sauce
   - ingredient: ciboulette_mt22ff
     quantite: 6
@@ -67,13 +67,12 @@ ingredients:
     commentaire: sauce
   - ingredient: huile-dolive_h3c8al
     quantite: 1
-    unit: litre
+    unit: l.
     commentaire: sauce
   - ingredient: jus-de-citron_e4mjd1
     quantite: 2
-    unit: litre
+    unit: l.
     commentaire: sauce
 preparation: ...
 publishDate: 2025-06-27T12:45:00.000Z
 ---
-

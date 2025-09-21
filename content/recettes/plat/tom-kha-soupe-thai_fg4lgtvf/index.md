@@ -53,7 +53,7 @@ ingredients:
     commentaire: au service
   - ingredient: sambal-oelek_kzomvp
     quantite: 500
-    unit: grammes
+    unit: gr.
     commentaire: au service
   - ingredient: tamari-sauce_bbwo4n
     quantite: 500
@@ -61,7 +61,7 @@ ingredients:
     commentaire: ''
   - ingredient: gingembre-bio_nz839c
     quantite: 600
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: feuille-de-citron-combava_cydiwr
     quantite: 50
@@ -73,7 +73,7 @@ ingredients:
     commentaire: ''
   - ingredient: galanga_equ6wc
     quantite: 300
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: citronnelle-baton_t2e14k
     quantite: 8
@@ -81,19 +81,19 @@ ingredients:
     commentaire: ''
   - ingredient: eau_ljzb7j
     quantite: 52
-    unit: litre
+    unit: l.
     commentaire: ''
   - ingredient: jus-de-citron-vert_rdw6xn
     quantite: 2
-    unit: litre
+    unit: l.
     commentaire: ''
   - ingredient: sucre-de-canne-blond_n85gmi
     quantite: 300
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: lait-de-coco_xdy736
     quantite: 8
-    unit: litre
+    unit: l.
     commentaire: ''
   - ingredient: nouilles-de-riz-pho_oyjc63
     quantite: 7
@@ -112,7 +112,7 @@ preparation: |-
 
   Quand le bouillon commence à bouillir, porter à feu doux et laisser mijoter 45min en remuant de temps en temps.
 
-  Pendant ce temps, 
+  Pendant ce temps,
 
   couper en morceaux les champignons de Paris.
 

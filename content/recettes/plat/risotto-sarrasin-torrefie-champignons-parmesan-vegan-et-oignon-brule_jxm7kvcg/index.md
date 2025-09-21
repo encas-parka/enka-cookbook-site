@@ -32,7 +32,7 @@ ingredients:
     commentaire: ''
   - ingredient: huile-de-tournesol_c70jxb
     quantite: 1
-    unit: litre
+    unit: l.
     commentaire: ''
   - ingredient: poivre-noir-moulu_rgt7s4
     commentaire: ''
@@ -44,11 +44,11 @@ ingredients:
     commentaire: ''
   - ingredient: levure-de-biere_4be4ic
     quantite: 300
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: sucre-blanc_lny16c
     quantite: 400
-    unit: grammes
+    unit: gr.
     commentaire: Quantité approximative
 preparation: |-
   Pour le risotto:
@@ -69,7 +69,7 @@ preparation: |-
 
   Éplucher les oignons et les couper en 2 , les poser face contre la une poêle chauffée à feu vif pendant 3-4 minutes (jusqu'à ce qu'il soit cramés). Ajouter de l'eau chaude dans la poêle et couvrir pendant 5 à 10 minutes (jusqu'à ce que les oignons soit mou/cuit). Les sortir dans un gastro face vers le haut et tout de suite les saupoudrer de sucre pour qu'il fonde avec la chaleur des oignons.
 
-  Pour le Parmesan Vegan: 
+  Pour le Parmesan Vegan:
 
   Mélanger la poudre d'amande la levure maltée et du sel au goût (ça doit être bien salé)
 publishDate: 2025-05-05T12:41:00.000Z

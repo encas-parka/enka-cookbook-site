@@ -19,7 +19,7 @@ ingredients:
     commentaire: Morue salée
   - ingredient: poivre-noir-moulu_rgt7s4
     quantite: ''
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: persil-frais_hgfa4e
     quantite: 8
@@ -68,13 +68,13 @@ preparation: |-
 
   Eplucher, laver et découper les patates en rondelles épaisses (1,5 d'épaisseur environ). Les rincer, plonger dans **un grand volume d'eau de cuisson de morue tiédie** et lancer le feu. Egouter quand il y a une cuisson ferme, pour que les rondelles restent entières (rincer à l'eau froide pour être tranquille).
 
-  Cuire les oeufs jusqu'à qu'ils soient durs. Refroidir, éplucher, réserver. 
+  Cuire les oeufs jusqu'à qu'ils soient durs. Refroidir, éplucher, réserver.
 
   Hâcher le persil, réserver.
 
-  Dans un faitout/rodeau faire revenir les oignons coupés en dés et l'ail hâché. Ajouter le poivre. Ajouter la morue efilée et laisser le tout sur un feu doux pendant 10-15 minutes. 
+  Dans un faitout/rodeau faire revenir les oignons coupés en dés et l'ail hâché. Ajouter le poivre. Ajouter la morue efilée et laisser le tout sur un feu doux pendant 10-15 minutes.
 
-  Disposer les bacs gastros nécessaires. Ajouter une couche de patates au fond, puis la morue avec les oignons et l'ail (répartir un peu partout). Mettre un filet d'huile d'olive dessus. Mettre au four pour griller tout ça, puis maintenir au chaud. 
+  Disposer les bacs gastros nécessaires. Ajouter une couche de patates au fond, puis la morue avec les oignons et l'ail (répartir un peu partout). Mettre un filet d'huile d'olive dessus. Mettre au four pour griller tout ça, puis maintenir au chaud.
 
   Au moment du service (à la sortie du four) soupoudrer le persil et les olives sur le plat.
 
@@ -84,7 +84,7 @@ preparation: |-
 preparation24h: |-
   !! Désaler la morue !!!
 
-  Mettre la morue (coupée en bouts) dans un grand volume d'eau  Au moins 24h avant ! 
+  Mettre la morue (coupée en bouts) dans un grand volume d'eau  Au moins 24h avant !
 
   Le plus simple est de séparer les gros et petits bouts dans des récipients différents.
 

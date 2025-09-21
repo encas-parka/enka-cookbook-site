@@ -10,7 +10,7 @@ draft: false
 ingredients:
   - ingredient: eau_ljzb7j
     quantite: 0.6
-    unit: litre
+    unit: l.
     commentaire: ''
   - ingredient: ciboulette_mt22ff
     quantite: 4
@@ -22,11 +22,11 @@ ingredients:
     commentaire: ''
   - ingredient: huile-de-colza_eu7lc6
     quantite: 1
-    unit: litre
+    unit: l.
     commentaire: ''
   - ingredient: jus-de-citron_e4mjd1
     quantite: 0.15
-    unit: litre
+    unit: l.
     commentaire: ''
 layout: recettes
 plate: 50
@@ -37,7 +37,7 @@ preparation: |-
 
   Possible 2 J avant
 
-   
+
 
   Laver et ciseler finement la ciboulette. La mélanger au fromage.
 

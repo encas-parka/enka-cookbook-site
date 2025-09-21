@@ -48,11 +48,11 @@ ingredients:
     commentaire: ''
   - ingredient: fecule-de-mais-maizena_8nbcjp
     quantite: 500
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: creme-soja_chfwwq
     quantite: 2
-    unit: litre
+    unit: l.
     commentaire: ''
   - ingredient: huile-de-tournesol_c70jxb
     quantite: 500
@@ -60,15 +60,15 @@ ingredients:
     commentaire: ''
   - ingredient: margarine_eipcl2
     quantite: 500
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: thym_a16yd7
     quantite: 100
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: bouillon-de-legume-sans-gluten_tmk6ya
     quantite: 20
-    unit: litre
+    unit: l.
     commentaire: ''
   - ingredient: persil-frais_hgfa4e
     quantite: 10
@@ -76,24 +76,24 @@ ingredients:
     commentaire: ''
   - ingredient: miso-dorge_z8jaad
     quantite: 500
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: miso-blanc_k2uthk
     quantite: 500
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: eau-de-fleur-doranger_ikdk3g
     quantite: 1
-    unit: litre
+    unit: l.
     commentaire: ''
 preparation: |-
   Etape 1 : blanquette
 
-  Préparer 20 litres de bouillon de légumes sans gluten et l'amener à ébullition.
+  Préparer 20 l.s de bouillon de légumes sans gluten et l'amener à ébullition.
 
   Réhydrater les protéïnes de soja mélangées aux 2 misos avec une partie du bouillon au moins 30 minutes.
 
-  Eplucher les carottes. Les couper en rondelles (robot-coupe). Réserver. 
+  Eplucher les carottes. Les couper en rondelles (robot-coupe). Réserver.
 
   Eplucher les oignons. Les couper en fines lamelles (robot-coupe). Réserver.
 

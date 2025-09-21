@@ -28,7 +28,7 @@ ingredients:
     commentaire: ''
   - ingredient: eau_ljzb7j
     quantite: 13
-    unit: litre
+    unit: l.
     commentaire: ''
   - ingredient: tamarin-liquide_7la29q
     quantite: 400
@@ -36,7 +36,7 @@ ingredients:
     commentaire: ''
   - ingredient: moutarde-graine_m5zboz
     quantite: 200
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: curry-feuilles_xqmcoe
     quantite: 100
@@ -44,19 +44,19 @@ ingredients:
     commentaire: ''
   - ingredient: piment-en-flocons_5k7zz4
     quantite: 40
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: curcuma-moulu_htp5ma
     quantite: 30
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: graine-de-coriandre_crkg3d
     quantite: 200
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: sucre-de-palme_cvd8ul
     quantite: 600
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: noix-de-coco-rapee_coa5dh
     quantite: 2
@@ -77,5 +77,3 @@ ingredients:
 uuid: 5ru2hn6h
 titleslug: urulai-sukka_5ru2hn6h
 ---
-
-

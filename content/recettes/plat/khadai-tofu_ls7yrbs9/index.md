@@ -21,35 +21,35 @@ ingredients:
     commentaire: ''
   - ingredient: clou-de-girofle-poudre_yynfo5
     quantite: 15
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: curry_7jceco
     quantite: 40
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: curcuma-moulu_htp5ma
     quantite: 20
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: coriandre-en-poudre_nf05n7
     quantite: 150
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: cardamone-en-poudre_2n9g9t
     quantite: 10
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: poivre-noir-moulu_rgt7s4
     quantite: 60
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: fenugrec_zoxy2t
     quantite: 60
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: paprika_bidsmu
     quantite: 40
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: coulis-de-tomates_09bywc
     quantite: 3
@@ -57,7 +57,7 @@ ingredients:
     commentaire: ''
   - ingredient: gingembre_0d1fzw
     quantite: 80
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: ail_u2m28w
     quantite: 2

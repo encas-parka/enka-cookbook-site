@@ -19,11 +19,11 @@ checkAlwaysOk: false
 ingredients:
   - ingredient: riz-pour-risotto_8f86ou
     quantite: 600
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: eau_ljzb7j
     quantite: 1.8
-    unit: litre
+    unit: l.
     commentaire: ''
   - ingredient: ail_u2m28w
     quantite: 3
@@ -31,15 +31,15 @@ ingredients:
     commentaire: gousses
   - ingredient: pruneau_kndzid
     quantite: 250
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: champignons_v9qhs9
     quantite: 600
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: oignon_rtavky
     quantite: 200
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: huile-dolive_h3c8al
     quantite: 250

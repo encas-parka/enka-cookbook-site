@@ -14,7 +14,7 @@ ingredients:
     commentaire: ''
   - ingredient: haricots-blancs_znpoor
     quantite: 70
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: jus-de-citron_e4mjd1
     quantite: 25

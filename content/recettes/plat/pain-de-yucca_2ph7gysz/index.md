@@ -7,11 +7,11 @@ draft: false
 ingredients:
   - ingredient: levure-chimique_vgec6e
     quantite: 51
-    unit: grammes
+    unit: gr.
     commentaire: levure chimique pour les vegan et l'absence de gluten...
   - ingredient: sel_2juq3x
     quantite: 80
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: feta_m5dxyo
     quantite: 4

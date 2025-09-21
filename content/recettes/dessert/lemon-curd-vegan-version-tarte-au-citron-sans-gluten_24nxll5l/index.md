@@ -8,15 +8,15 @@ draft: false
 ingredients:
   - ingredient: curcuma-moulu_htp5ma
     quantite: 6
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: margarine-vegetale-special-cuisson_8j3hna
     quantite: 200
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: fecule-de-mais-maizena_8nbcjp
     quantite: 75
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: lait-de-soja_gpeob7
     quantite: 300
@@ -24,7 +24,7 @@ ingredients:
     commentaire: ''
   - ingredient: sucre-en-poudre_u9z2he
     quantite: 300
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: jus-de-citron_e4mjd1
     quantite: 500
@@ -49,4 +49,3 @@ temperature: Froid
 title: LEMON CURD VEGAN - version tarte au citron sans gluten
 type: dessert
 ---
-

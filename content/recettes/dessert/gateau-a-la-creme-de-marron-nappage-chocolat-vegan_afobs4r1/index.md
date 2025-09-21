@@ -15,11 +15,11 @@ checkAlwaysOk: false
 ingredients:
   - ingredient: sarrasin_9f35oz
     quantite: 100
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: farine-de-ble_2av6w8
     quantite: 250
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: creme-soja_chfwwq
     quantite: 200
@@ -27,19 +27,19 @@ ingredients:
     commentaire: ''
   - ingredient: lait-damande_csxbg6
     quantite: 300
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: huile-dolive_h3c8al
     quantite: 20
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: chocolat-noir-patissier-70p100_1e3zhq
     quantite: 200
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: confiture-de-chataigne-sans-sucre_q33x0k
     quantite: 325
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: levure-chimique_vgec6e
     quantite: 1

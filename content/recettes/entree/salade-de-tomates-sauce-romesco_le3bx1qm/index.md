@@ -25,7 +25,7 @@ ingredients:
     commentaire: sauce
   - ingredient: oignon_rtavky
     quantite: 500
-    unit: grammes
+    unit: gr.
     commentaire: sauce
   - ingredient: poivron-rouge_0zglpj
     quantite: 1
@@ -53,22 +53,22 @@ ingredients:
     commentaire: grosses
   - ingredient: pain-rassis-sans-gluten_drjaa4
     quantite: 250
-    unit: grammes
+    unit: gr.
     commentaire: sauce
   - ingredient: amande_fuhtcw
     quantite: 250
-    unit: grammes
+    unit: gr.
     commentaire: sauce
 preparation: |-
-  SAUCE ROMESCO : 
+  SAUCE ROMESCO :
 
-  Préchauffer le grill du four. Laver, [épépiner](https://www.academiedugout.fr/glossaire/epepiner_1497) les poivrons et les mettre sur une plaque peau vers le haut. [Éplucher les oignons, les émincer](https://www.academiedugout.fr/glossaire/eplucher-et-emincer-un-oignon_1523) et les glisser sous les poivrons. Laver et épépiner les tomates et les ajouter 
-  sur la plaque. Y déposer aussi les gousses d’ail incisées et les tranches de pain rassis. Glisser la plaque dans le four. Retirer le pain dès qu’il est doré. Griller oignon, poivron, ail et tomate. 
+  Préchauffer le grill du four. Laver, [épépiner](https://www.academiedugout.fr/glossaire/epepiner_1497) les poivrons et les mettre sur une plaque peau vers le haut. [Éplucher les oignons, les émincer](https://www.academiedugout.fr/glossaire/eplucher-et-emincer-un-oignon_1523) et les glisser sous les poivrons. Laver et épépiner les tomates et les ajouter
+  sur la plaque. Y déposer aussi les gousses d’ail incisées et les tranches de pain rassis. Glisser la plaque dans le four. Retirer le pain dès qu’il est doré. Griller oignon, poivron, ail et tomate.
   Assaisonner de fleur de sel, de poivre du moulin et d’un filet d’huile d’olive. Enfourner pendant 20 minutes.
 
-  Dans le bol du mixeur. Rassembler le pain, les amandes torréfiées et les légumes grillés en prenant soin d’enlever la peau des gousses d’ail et celle des tomates. Ajouter du vinaigre de Xérès. 
+  Dans le bol du mixeur. Rassembler le pain, les amandes torréfiées et les légumes grillés en prenant soin d’enlever la peau des gousses d’ail et celle des tomates. Ajouter du vinaigre de Xérès.
 
-  Mixer jusqu’à ce que le mélange soit en une purée homogène. Ajouter de l'huile d’olive. Si la sauce est trop épaisse l’allonger avec un peu d’eau. Goûter et rectifier son assaisonnement. La réserver au frais. 
+  Mixer jusqu’à ce que le mélange soit en une purée homogène. Ajouter de l'huile d’olive. Si la sauce est trop épaisse l’allonger avec un peu d’eau. Goûter et rectifier son assaisonnement. La réserver au frais.
 
   SALADE DE TOMATE :
 

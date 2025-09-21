@@ -33,11 +33,11 @@ ingredients:
     commentaire: ''
   - ingredient: yaourt-grec-de-vache_dzqmba
     quantite: 150
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: feta_m5dxyo
     quantite: 400
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: poivre_2pps90
     commentaire: ''
@@ -76,4 +76,3 @@ preparation: |-
   Option sans gluten : voir recette koloythokeftedes pour les galettes où on peut remplacer la farine par de la farine sans gluten
 publishDate: 2025-07-21T11:43:00.000Z
 ---
-

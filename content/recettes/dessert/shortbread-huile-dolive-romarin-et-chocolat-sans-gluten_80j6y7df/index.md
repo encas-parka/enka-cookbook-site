@@ -8,7 +8,7 @@ draft: false
 ingredients:
   - ingredient: puree-damande_7dlfuw
     quantite: 60
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: sel_2juq3x
     quantite: 1
@@ -24,23 +24,23 @@ ingredients:
     commentaire: ''
   - ingredient: fecule-de-mais-maizena_8nbcjp
     quantite: 30
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: farine-de-riz-blanche_1nb85u
     quantite: 120
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: chocolat-noir-patissier-70p100_1e3zhq
     quantite: 50
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: muscovado-sucre-de-canne-complet_l5w2jl
     quantite: 70
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: poudre-damandes_rmgr7l
     quantite: 100
-    unit: grammes
+    unit: gr.
     commentaire: ''
 layout: recettes
 materiel:

@@ -21,11 +21,11 @@ ingredients:
     commentaire: ''
   - ingredient: cebette-ciboule-cive-oignon-vert_j7as8d
     quantite: 300
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: eau_ljzb7j
     quantite: 1
-    unit: litre
+    unit: l.
     commentaire: ''
   - ingredient: coriandre-en-poudre_nf05n7
     quantite: 3
@@ -40,7 +40,7 @@ ingredients:
     unit: c. à café
     commentaire: ''
 preparation: |-
-  \    
+  \
 
 
 

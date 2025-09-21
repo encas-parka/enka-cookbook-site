@@ -8,7 +8,7 @@ draft: false
 ingredients:
   - ingredient: tahin_u33083
     quantite: 200
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: sel_2juq3x
     quantite: 1.5
@@ -24,27 +24,27 @@ ingredients:
     commentaire: ''
   - ingredient: farine-de-ble-noir-sarrasin_2ej7fi
     quantite: 270
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: halva_2cnk7l
     quantite: 400
-    unit: grammes
+    unit: gr.
     commentaire: coupé en morceaux
   - ingredient: compote-de-pomme_wz2fkg
     quantite: 400
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: sucre-en-poudre_u9z2he
     quantite: 150
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: chocolat-noir-patissier-70p100_1e3zhq
     quantite: 400
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: cacao_r6792n
     quantite: 70
-    unit: grammes
+    unit: gr.
     commentaire: ''
 layout: recettes
 materiel:

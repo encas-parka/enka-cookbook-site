@@ -13,7 +13,7 @@ ingredients:
     commentaire: ''
   - ingredient: paprika_bidsmu
     quantite: 10
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: menthe_2j9y2v
     quantite: 0.5
@@ -25,7 +25,7 @@ ingredients:
     commentaire: ''
   - ingredient: yaourt-de-soja_hlbwfd
     quantite: 600
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: oignon-rouge_doxujz
     quantite: 1
@@ -40,7 +40,7 @@ plate: 10
 prepAlt:
   - recetteAlt: soupe-froide-concombre-et-yaourt_2amw0731
 preparation: |-
-  Epépiner les concombres et les hacher grossièrement. Les réduire en purée au mixeur jusqu'à obtention d'une texture lisse. 
+  Epépiner les concombres et les hacher grossièrement. Les réduire en purée au mixeur jusqu'à obtention d'une texture lisse.
 
   Ajouter le yaourt de soja, l'eau froide et le bouillon cube délayé d'une un peu d'eau chaude. Mixer par brèves impulsions.
 

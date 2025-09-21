@@ -29,7 +29,7 @@ ingredients:
     commentaire: ''
   - ingredient: lait-de-riz_hzwesd
     quantite: 9
-    unit: litre
+    unit: l.
     commentaire: ''
   - ingredient: cranberries-sechees_rn44lx
     quantite: 1
@@ -41,7 +41,7 @@ ingredients:
     commentaire: ''
   - ingredient: gingembre-confit_oskdzx
     quantite: 800
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: jus-de-citron_e4mjd1
     quantite: 500

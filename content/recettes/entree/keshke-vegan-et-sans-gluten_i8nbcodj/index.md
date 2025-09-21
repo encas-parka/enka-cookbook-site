@@ -10,7 +10,7 @@ draft: false
 ingredients:
   - ingredient: menthe-sechee_uid60d
     quantite: 25
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: yaourt-de-soja_hlbwfd
     quantite: 1.5
@@ -18,7 +18,7 @@ ingredients:
     commentaire: ''
   - ingredient: oignon_rtavky
     quantite: 300
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: huile-dolive_h3c8al
     quantite: 40
@@ -26,11 +26,11 @@ ingredients:
     commentaire: ''
   - ingredient: noix_usibcf
     quantite: 150
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: semoule-couscous-sans-gluten_o5vfrd
     quantite: 700
-    unit: grammes
+    unit: gr.
     commentaire: ''
 layout: recettes
 plate: 20
@@ -43,7 +43,7 @@ preparation: |-
 
   Au dernier moment, décorer avec un filet d'huile d'olive, et parsemer d'un peu de noix grossièrement hâchées et de menthe séchée.
 preparation24h: |-
-  La veille : hacher l'oignon finement et rincer abondamment la graine. 
+  La veille : hacher l'oignon finement et rincer abondamment la graine.
 
   Les mélanger avec la moitié du yaourt, la menthe séchée et la moitié des noix hâchées.
 
@@ -60,5 +60,3 @@ temperature: Froid
 title: Keshke vegan et sans gluten
 type: entree
 ---
-
-

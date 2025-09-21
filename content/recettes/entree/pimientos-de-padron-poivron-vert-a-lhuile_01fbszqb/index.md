@@ -21,7 +21,7 @@ ingredients:
     commentaire: ''
   - ingredient: huile-vegetale_atccqu
     quantite: 2
-    unit: litre
+    unit: l.
     commentaire: ''
 layout: recettes
 plate: 100
@@ -32,7 +32,7 @@ preparation: |-
 
   Préchauffer le four à 200 °C.
 
-  Dans un gros bac mélanger les pimientos, l'ail avec l'huile et pas mal de sel. Verser dans plusieurs bac gastro et faire cuire au four, en remuant régulièrement. Changer les gastro d'étage. Faire cuire jusqu'à ce que les poivrons soient tendres et boursouflés. 
+  Dans un gros bac mélanger les pimientos, l'ail avec l'huile et pas mal de sel. Verser dans plusieurs bac gastro et faire cuire au four, en remuant régulièrement. Changer les gastro d'étage. Faire cuire jusqu'à ce que les poivrons soient tendres et boursouflés.
 
   Au service couper le légume dans la longueur et servir une moitié par personne.
 

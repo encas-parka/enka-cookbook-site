@@ -10,7 +10,7 @@ draft: false
 ingredients:
   - ingredient: gros-sel_5dwrvm
     quantite: 80
-    unit: grammes
+    unit: gr.
     commentaire: Gouter en fin de cuisson (rectifier)
   - ingredient: coriandre-fraiche_fetrpe
     quantite: 6

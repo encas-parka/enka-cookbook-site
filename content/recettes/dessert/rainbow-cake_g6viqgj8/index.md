@@ -17,7 +17,7 @@ checkAlwaysOk: false
 ingredients:
   - ingredient: creme-fraiche-liquide-entiere_6tnb6h
     quantite: 1.75
-    unit: litre
+    unit: l.
     commentaire: glaçage
   - ingredient: farine-de-ble_2av6w8
     quantite: 1.4
@@ -29,11 +29,11 @@ ingredients:
     commentaire: génoise
   - ingredient: creme-fraiche-liquide-entiere_6tnb6h
     quantite: 1.4
-    unit: litre
+    unit: l.
     commentaire: génoise
   - ingredient: levure-chimique-sans-gluten_zb9tj8
     quantite: 38
-    unit: grammes
+    unit: gr.
     commentaire: génoise
   - ingredient: oeuf_zf3zf8
     quantite: 21
@@ -41,7 +41,7 @@ ingredients:
     commentaire: génoise
   - ingredient: sucre-glace_phv1to
     quantite: 350
-    unit: grammes
+    unit: gr.
     commentaire: glaçage
   - ingredient: chocolat-blanc_fsz13t
     quantite: 1.4
@@ -61,11 +61,11 @@ ingredients:
     commentaire: ganache choco
   - ingredient: beurre-doux_kmq1zb
     quantite: 700
-    unit: grammes
+    unit: gr.
     commentaire: génoise
   - ingredient: noix-de-coco-rapee_coa5dh
     quantite: 350
-    unit: grammes
+    unit: gr.
     commentaire: génoise
   - ingredient: chantifix_aujuzx
     quantite: 7

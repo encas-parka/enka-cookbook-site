@@ -9,7 +9,7 @@ draft: false
 ingredients:
   - ingredient: sesame-noir_9bdo2l
     quantite: 0.03
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: tamari-sauce_bbwo4n
     quantite: 4
@@ -29,7 +29,7 @@ ingredients:
     commentaire: ''
   - ingredient: sucre-en-poudre_u9z2he
     quantite: 30
-    unit: grammes
+    unit: gr.
     commentaire: ''
 layout: recettes
 materiel:

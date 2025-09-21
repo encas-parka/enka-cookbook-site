@@ -13,23 +13,23 @@ ingredients:
     commentaire: ''
   - ingredient: eau_ljzb7j
     quantite: 30
-    unit: litre
+    unit: l.
     commentaire: ''
   - ingredient: piment-doux_0p7ynz
     quantite: 35
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: paprika_bidsmu
     quantite: 75
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: gingembre-en-poudre_alwx6o
     quantite: 75
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: ras-el-hanout_j40pyf
     quantite: 350
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: menthe_2j9y2v
     quantite: 5
@@ -45,7 +45,7 @@ ingredients:
     commentaire: ''
   - ingredient: coulis-de-tomates_09bywc
     quantite: 10
-    unit: litre
+    unit: l.
     commentaire: ''
   - ingredient: courgette_9zozfk
     quantite: 3
@@ -65,7 +65,7 @@ ingredients:
     commentaire: ''
   - ingredient: huile-dolive_h3c8al
     quantite: 1
-    unit: litre
+    unit: l.
     commentaire: ''
   - ingredient: pates-langue-doiseau_hlx995
     quantite: 2
@@ -78,19 +78,19 @@ ingredients:
 layout: recettes
 plate: 100
 preparation: |-
-  Eplucher et émincer les carottes et les courgettes. Emincer les branches de céleri. Mettre le tout dans un saladier. Réserver. 
+  Eplucher et émincer les carottes et les courgettes. Emincer les branches de céleri. Mettre le tout dans un saladier. Réserver.
 
-  Eplucher et émincer grossièrement les oignons. 
+  Eplucher et émincer grossièrement les oignons.
 
   Couper la viande en morceaux. Dans une gamelle : verser un filet d'huile d'olive et y faire cuire les morceaux de viande en ajoutant les oignons.
 
   Assaisonner avec le ras el hanout, le gingembre en poudre, le paprika et le piment doux.
 
-   Déposer, les carottes, les courgettes, le céleri et les pois chiche dans la gamelle. 
+   Déposer, les carottes, les courgettes, le céleri et les pois chiche dans la gamelle.
 
   Ajouter le concentré de tomates, l'eau et le coulis de tomate. Assaisonner de sel et de poivre.
 
-  Plonger une botte entière de coriandre dans la gamelle. Remuer le tout. Laisser cuire au moins 1h à frémissement. 
+  Plonger une botte entière de coriandre dans la gamelle. Remuer le tout. Laisser cuire au moins 1h à frémissement.
 
   Un peu avant le service, ajouter les langues d'oiseaux. Laisser cuire quelques minutes à frémissement. Servir.
 preparation24h: Faire tremper les pois chiche la veille.

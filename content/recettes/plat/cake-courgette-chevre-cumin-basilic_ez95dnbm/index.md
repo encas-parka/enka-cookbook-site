@@ -9,7 +9,7 @@ draft: false
 ingredients:
   - ingredient: levure-chimique_vgec6e
     quantite: 10
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: basilic-sec_z6747e
     quantite: 1
@@ -25,11 +25,11 @@ ingredients:
     commentaire: ''
   - ingredient: comte_da93ql
     quantite: 100
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: buche-de-chevre_yjxnau
     quantite: 180
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: courgette_9zozfk
     quantite: 2
@@ -49,7 +49,7 @@ ingredients:
     commentaire: ''
   - ingredient: farine-de-ble_2av6w8
     quantite: 170
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: lait-demi-ecreme_x286pc
     quantite: 120

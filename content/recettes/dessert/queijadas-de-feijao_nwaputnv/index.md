@@ -11,7 +11,7 @@ img: https://1.bp.blogspot.com/-3MQYZUXTse8/UEOWFoFU28I/AAAAAAAABkQ/VIij9QCy2sU/
 ingredients:
   - ingredient: eau_ljzb7j
     quantite: 950
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: pate-feuilletee_h1levi
     quantite: 2.4
@@ -35,7 +35,7 @@ ingredients:
     commentaire: ''
   - ingredient: sucre-glace_phv1to
     quantite: 100
-    unit: grammes
+    unit: gr.
     commentaire: pour saupoudrer
   - ingredient: sucre-en-poudre_u9z2he
     quantite: 2

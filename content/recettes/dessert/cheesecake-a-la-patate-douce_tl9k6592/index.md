@@ -21,11 +21,11 @@ ingredients:
     commentaire: ''
   - ingredient: cacao_r6792n
     quantite: 170
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: sucre-de-canne-blond_n85gmi
     quantite: 670
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: philadelphia-ou-autre-marque-moins-cher_2s1qoq
     quantite: 1.7
@@ -37,11 +37,11 @@ ingredients:
     commentaire: ''
   - ingredient: beurre-doux_kmq1zb
     quantite: 670
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: fecule-de-mais-maizena_8nbcjp
     quantite: 170
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: lait-concentre-sucre_5dcfzk
     quantite: 1.4
@@ -49,7 +49,7 @@ ingredients:
     commentaire: ''
   - ingredient: levure-chimique_vgec6e
     quantite: 22
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: oeuf_zf3zf8
     quantite: 50
@@ -61,7 +61,7 @@ ingredients:
     commentaire: ''
   - ingredient: sel_2juq3x
     quantite: 16
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: patates-douces_ndu75n
     quantite: 2.5

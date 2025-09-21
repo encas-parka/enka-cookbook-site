@@ -27,7 +27,7 @@ ingredients:
     commentaire: ''
   - ingredient: huile-dolive_h3c8al
     quantite: 1.8
-    unit: litre
+    unit: l.
     commentaire: ''
   - ingredient: jus-de-citron_e4mjd1
     quantite: 900

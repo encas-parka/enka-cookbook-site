@@ -22,15 +22,15 @@ ingredients:
     commentaire: ''
   - ingredient: huile-dolive_h3c8al
     quantite: 1
-    unit: litre
+    unit: l.
     commentaire: ''
   - ingredient: jus-de-citron_e4mjd1
     quantite: 0.4
-    unit: litre
+    unit: l.
     commentaire: ''
   - ingredient: tahin_u33083
     quantite: 400
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: poivre_2pps90
     commentaire: ''

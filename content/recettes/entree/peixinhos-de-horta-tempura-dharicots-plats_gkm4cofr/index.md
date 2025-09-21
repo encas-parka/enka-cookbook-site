@@ -9,11 +9,11 @@ draft: false
 ingredients:
   - ingredient: eau_ljzb7j
     quantite: 3
-    unit: litre
+    unit: l.
     commentaire: ''
   - ingredient: sel_2juq3x
     quantite: 25
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: haricots-plats_2y941t
     quantite: 7

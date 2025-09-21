@@ -18,11 +18,11 @@ checkAlwaysOk: false
 ingredients:
   - ingredient: poudre-damandes_rmgr7l
     quantite: 400
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: sucre-en-poudre_u9z2he
     quantite: 400
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: confiture-de-chataigne-sans-sucre_q33x0k
     quantite: 1.5
@@ -34,11 +34,11 @@ ingredients:
     commentaire: ''
   - ingredient: farine-de-tapioca_v212im
     quantite: 70
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: farine-de-riz-gluant_civ587
     quantite: 70
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: sel_2juq3x
     quantite: 1.5

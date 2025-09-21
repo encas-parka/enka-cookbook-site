@@ -25,7 +25,7 @@ ingredients:
     commentaire: ''
   - ingredient: concentre-de-tomate_mck2wl
     quantite: 80
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: coulis-de-tomates_09bywc
     quantite: 1.5
@@ -41,7 +41,7 @@ ingredients:
     commentaire: ''
   - ingredient: yaourt-de-soja_hlbwfd
     quantite: 800
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: cebette-ciboule-cive-oignon-vert_j7as8d
     quantite: 5
@@ -49,7 +49,7 @@ ingredients:
     commentaire: ''
   - ingredient: epinard_4totf1
     quantite: 450
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: ail_u2m28w
     quantite: 1

@@ -21,23 +21,23 @@ ingredients:
     commentaire: ''
   - ingredient: flocons-davoine_ovewgk
     quantite: 300
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: glucose_lm7zqh
     quantite: 40
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: chocolat-noir_cr4kiz
     quantite: 500
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: biscuit-petit-brun_i5hlq1
     quantite: 200
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: speculoos_h6thsp
     quantite: 200
-    unit: grammes
+    unit: gr.
     commentaire: ''
 layout: recettes
 materiel:

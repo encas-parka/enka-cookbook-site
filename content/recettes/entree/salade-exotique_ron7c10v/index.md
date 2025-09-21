@@ -46,15 +46,15 @@ ingredients:
     commentaire: ''
   - ingredient: pate-de-curry-rouge_5qtg4a
     quantite: 100
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: lait-de-coco_xdy736
     quantite: 8
-    unit: litre
+    unit: l.
     commentaire: ''
   - ingredient: sucre-blanc_lny16c
     quantite: 500
-    unit: grammes
+    unit: gr.
     commentaire: ''
 preparation: |-
   Zester les citrons. Réserver. Presser les citrons pour récupérer le jus. Réserver.

@@ -28,15 +28,15 @@ ingredients:
     commentaire: ''
   - ingredient: lait-de-soja_gpeob7
     quantite: 1
-    unit: litre
+    unit: l.
     commentaire: ''
   - ingredient: huile-vegetale_atccqu
     quantite: 1
-    unit: litre
+    unit: l.
     commentaire: ''
   - ingredient: huile-de-friture_1ej217
     quantite: 6
-    unit: litre
+    unit: l.
     commentaire: ''
   - ingredient: farine-de-pois-chiche_o627mw
     quantite: 7.5
@@ -44,11 +44,11 @@ ingredients:
     commentaire: ''
   - ingredient: eau_ljzb7j
     quantite: 25
-    unit: litre
+    unit: l.
     commentaire: ''
   - ingredient: capres_c88lz8
     quantite: 800
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: estragon_kt0wyw
     quantite: 5
@@ -64,7 +64,7 @@ ingredients:
     commentaire: ''
   - ingredient: moutarde_5c1b20
     quantite: 250
-    unit: grammes
+    unit: gr.
     commentaire: ''
 preparation: |-
 
@@ -87,10 +87,10 @@ preparation: |-
   LA VEGANAISE
 
 
-  1 litre lait de soja
+  1 l. lait de soja
 
 
-  2 litre huile de tournesol
+  2 l. huile de tournesol
 
 
   30cl jus de citron préssé

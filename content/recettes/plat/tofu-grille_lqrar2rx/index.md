@@ -16,11 +16,11 @@ checkAlwaysOk: false
 ingredients:
   - ingredient: huile-de-friture_1ej217
     quantite: 1
-    unit: litre
+    unit: l.
     commentaire: ''
   - ingredient: fecule-de-mais-maizena_8nbcjp
     quantite: 300
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: tofu-ferme_3ahcls
     quantite: 3
@@ -28,7 +28,7 @@ ingredients:
     commentaire: ''
   - ingredient: paprika-fume_ique18
     quantite: 40
-    unit: grammes
+    unit: gr.
     commentaire: ''
 preparation: |-
   essorer le tofu avec du sopalin

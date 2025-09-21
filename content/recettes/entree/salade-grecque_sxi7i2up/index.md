@@ -8,7 +8,7 @@ draft: false
 ingredients:
   - ingredient: origan_fkftyb
     quantite: 40
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: feta_m5dxyo
     quantite: 3
@@ -32,7 +32,7 @@ ingredients:
     commentaire: ''
   - ingredient: huile-dolive_h3c8al
     quantite: 3
-    unit: litre
+    unit: l.
     commentaire: ''
 layout: recettes
 materiel:

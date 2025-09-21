@@ -34,7 +34,7 @@ ingredients:
     commentaire: pâte à beignet
   - ingredient: levure-chimique-sans-gluten_zb9tj8
     quantite: 10
-    unit: grammes
+    unit: gr.
     commentaire: pâte à beignet
   - ingredient: farine-de-riz_oygozr
     quantite: 1
@@ -42,19 +42,19 @@ ingredients:
     commentaire: pâte à beignet
   - ingredient: graines-de-lin_km927d
     quantite: 70
-    unit: grammes
+    unit: gr.
     commentaire: pâte à beignet
   - ingredient: lait-vegetal-au-choix_vw9d1a
     quantite: 2
-    unit: litre
+    unit: l.
     commentaire: pâte à beignet
   - ingredient: miso-blanc_k2uthk
     quantite: 500
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: sel_2juq3x
     quantite: 15
-    unit: grammes
+    unit: gr.
     commentaire: pâte à beignet
   - ingredient: vinaigre-de-cidre_7qo3ht
     quantite: 100
@@ -74,11 +74,11 @@ ingredients:
     commentaire: caramel
   - ingredient: sucre-en-poudre_u9z2he
     quantite: 100
-    unit: grammes
+    unit: gr.
     commentaire: pâte à beignet
   - ingredient: margarine-vegetale-special-cuisson_8j3hna
     quantite: 650
-    unit: grammes
+    unit: gr.
     commentaire: caramel
 preparation: |-
   PÂTE A BEIGNET :

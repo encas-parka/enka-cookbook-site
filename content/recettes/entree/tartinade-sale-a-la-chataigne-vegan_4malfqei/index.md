@@ -17,7 +17,7 @@ checkAlwaysOk: false
 ingredients:
   - ingredient: echalote_vwdomu
     quantite: 150
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: ail_u2m28w
     quantite: 2
@@ -29,15 +29,15 @@ ingredients:
     commentaire: ''
   - ingredient: yaourt-de-soja_hlbwfd
     quantite: 200
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: confiture-de-chataigne-sans-sucre_q33x0k
     quantite: 750
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: paprika_bidsmu
     quantite: 8
-    unit: grammes
+    unit: gr.
     commentaire: ''
 preparation: |-
   * Emincer très fin les échalottes, hacher l'ail et brasser tous les ingrédients ensemble à l'aide d'une spatule ou aux mains. La texture doit être épaisse.

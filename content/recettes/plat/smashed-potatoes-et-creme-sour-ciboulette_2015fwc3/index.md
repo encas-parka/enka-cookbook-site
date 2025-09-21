@@ -18,7 +18,7 @@ checkAlwaysOk: false
 ingredients:
   - ingredient: citron-jus_bwkn34
     quantite: 0.5
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: ail_u2m28w
     quantite: 3
@@ -30,11 +30,11 @@ ingredients:
     commentaire: ''
   - ingredient: huile-de-tournesol_c70jxb
     quantite: 2
-    unit: litre
+    unit: l.
     commentaire: ''
   - ingredient: huile-dolive_h3c8al
     quantite: 1
-    unit: litre
+    unit: l.
     commentaire: ''
   - ingredient: yaourt-de-soja_hlbwfd
     quantite: 3
@@ -42,7 +42,7 @@ ingredients:
     commentaire: ''
   - ingredient: paprika-fume_ique18
     quantite: 150
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: poivre-noir-moulu_rgt7s4
     commentaire: ''

@@ -26,11 +26,11 @@ ingredients:
     commentaire: ''
   - ingredient: poivre_2pps90
     quantite: 13
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: vinaigre-de-cidre_7qo3ht
     quantite: 62
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: vinaigre-de-cidre_7qo3ht
     quantite: 190
@@ -38,7 +38,7 @@ ingredients:
     commentaire: ''
   - ingredient: huile-de-tournesol_c70jxb
     quantite: 12
-    unit: litre
+    unit: l.
     commentaire: ''
   - ingredient: bicarbonate-alimentaire_vf8140
     quantite: 4
@@ -46,7 +46,7 @@ ingredients:
     commentaire: ''
   - ingredient: levure-chimique-sans-gluten_zb9tj8
     quantite: 20
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: farine-de-riz_oygozr
     quantite: 1.5
@@ -54,7 +54,7 @@ ingredients:
     commentaire: ''
   - ingredient: lait-vegetal-au-choix_vw9d1a
     quantite: 3.75
-    unit: litre
+    unit: l.
     commentaire: ''
   - ingredient: polenta-fine_9xvfud
     quantite: 2
@@ -62,7 +62,7 @@ ingredients:
     commentaire: ''
   - ingredient: graines-de-lin_km927d
     quantite: 125
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: sirop-dagave_7cflkx
     quantite: 190
@@ -108,5 +108,3 @@ temperature: Chaud
 title: CORN DOG VEGAN ET SANS GLUTEN
 type: plat
 ---
-
-

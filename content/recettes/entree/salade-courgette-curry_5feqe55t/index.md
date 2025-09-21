@@ -31,7 +31,7 @@ ingredients:
     commentaire: ''
   - ingredient: curry_7jceco
     quantite: 225
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: poivre_2pps90
     unit: null

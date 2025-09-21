@@ -24,23 +24,23 @@ ingredients:
     commentaire: ''
   - ingredient: yaourt-de-soja_hlbwfd
     quantite: 250
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: ail-en-poudre_vs2dfm
     quantite: 13
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: sel_2juq3x
     quantite: 13
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: sucre-blanc_lny16c
     quantite: 13
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: levure-de-boulanger_abzedk
     quantite: 20
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: eau_ljzb7j
     quantite: 380

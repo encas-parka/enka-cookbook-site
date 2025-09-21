@@ -58,11 +58,11 @@ ingredients:
     commentaire: ''
   - ingredient: eau_ljzb7j
     quantite: 15
-    unit: litre
+    unit: l.
     commentaire: ''
   - ingredient: jus-dorange_gzi2ry
     quantite: 2
-    unit: litre
+    unit: l.
     commentaire: 100% pur jus
   - ingredient: creme-fraiche-epaisse-entiere_izd01q
     quantite: 2.5

@@ -20,7 +20,7 @@ ingredients:
     commentaire: ''
   - ingredient: margarine_eipcl2
     quantite: 500
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: echalote_owsv5m
     quantite: 20
@@ -44,33 +44,33 @@ ingredients:
     commentaire: ''
   - ingredient: levure-de-biere_4be4ic
     quantite: 200
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: vin-blanc_judtle
     quantite: 1
-    unit: litre
+    unit: l.
     commentaire: ''
   - ingredient: eau_ljzb7j
     quantite: 15
-    unit: litre
+    unit: l.
     commentaire: ''
   - ingredient: poudre-damandes_rmgr7l
     quantite: 400
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: sucre-de-canne-blond_n85gmi
     quantite: 100
-    unit: grammes
+    unit: gr.
     commentaire: ''
 preparation: |-
-  Faire bouillir 15 litre d'eau
+  Faire bouillir 15 l. d'eau
 
   Torréfier le sarrasin en le grillant à la poêle à sec, sans
   huile, sans eau, quelques minute en remuant pour que tous les grains
   soit torréfiés. Le grain ne doit pas être brûlé et noir mais
   grillé. On peut aussi le torréfier au four dans des gastros.
 
-  Chauffer 15 litres d'eau avec les bouillons cubes.
+  Chauffer 15 l.s d'eau avec les bouillons cubes.
 
   couper les échalotes et les champignons en gros morceaux séparément,
   hacher le persil.

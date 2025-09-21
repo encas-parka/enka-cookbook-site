@@ -18,19 +18,19 @@ checkAlwaysOk: false
 ingredients:
   - ingredient: fecule-de-mais-maizena_8nbcjp
     quantite: 130
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: lait-de-coco_xdy736
     quantite: 1.5
-    unit: litre
+    unit: l.
     commentaire: ''
   - ingredient: lait-vegetal-au-choix_vw9d1a
     quantite: 1.2
-    unit: litre
+    unit: l.
     commentaire: ''
   - ingredient: agar-agar_ruhtax
     quantite: 10
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: sel_2juq3x
     quantite: 1
@@ -42,7 +42,7 @@ ingredients:
     commentaire: ''
   - ingredient: sucre-en-poudre_u9z2he
     quantite: 400
-    unit: grammes
+    unit: gr.
     commentaire: ''
 preparation: |-
   * Dans une casserole, mélanger les laits végétal et de coco, le sucre, la fécule de maïs, l'agar agar, le pandan et le sel. Fouetter jusqu'à ce que le mélange soit homogène.

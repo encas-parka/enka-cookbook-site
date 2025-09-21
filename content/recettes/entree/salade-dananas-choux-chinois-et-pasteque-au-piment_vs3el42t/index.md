@@ -32,11 +32,11 @@ ingredients:
     commentaire: ''
   - ingredient: sweet-chili-sauce_t5cuz3
     quantite: 4
-    unit: litre
+    unit: l.
     commentaire: ''
   - ingredient: huile-dolive_h3c8al
     quantite: 1
-    unit: litre
+    unit: l.
     commentaire: ''
 preparation: |-
   Eplucher l'ananas, enlever le coeur et couper en morceaux cubes 3cm. Réserver

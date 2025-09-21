@@ -16,11 +16,11 @@ checkAlwaysOk: false
 ingredients:
   - ingredient: creme-de-coco_bnmw1o
     quantite: 6.5
-    unit: litre
+    unit: l.
     commentaire: ''
   - ingredient: lait-damande_csxbg6
     quantite: 6.5
-    unit: litre
+    unit: l.
     commentaire: ''
   - ingredient: sucre-de-canne-blond_n85gmi
     quantite: 2.5
@@ -28,7 +28,7 @@ ingredients:
     commentaire: ''
   - ingredient: agar-agar_ruhtax
     quantite: 50
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: noix-de-coco-rapee_coa5dh
     quantite: 1

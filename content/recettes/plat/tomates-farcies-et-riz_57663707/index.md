@@ -13,15 +13,15 @@ checkAlwaysOk: false
 ingredients:
   - ingredient: riz_0uelc3
     quantite: 373.1
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: corn-flakes_kp0srn
     quantite: 40
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: flocons-davoine_ovewgk
     quantite: 100
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: oignon_rtavky
     quantite: 1
@@ -33,7 +33,7 @@ ingredients:
     commentaire: grosses tomates charnues
   - ingredient: huile-dolive_h3c8al
     quantite: 0.25
-    unit: litre
+    unit: l.
     commentaire: ''
   - ingredient: persil-frais_hgfa4e
     quantite: 1
@@ -53,7 +53,7 @@ ingredients:
     commentaire: ''
   - ingredient: tofu-soyeux_xqb8f5
     quantite: 400
-    unit: grammes
+    unit: gr.
     commentaire: ''
 preparation: |-
   Couper les chapeaux des tomates et les vider de leur chaire. La couper en petits morceaux et la réserver.
@@ -71,4 +71,3 @@ publishDate: 2025-08-08T09:24:00.000Z
 uuid: '57663707'
 titleslug: tomates-farcies-et-riz_57663707
 ---
-

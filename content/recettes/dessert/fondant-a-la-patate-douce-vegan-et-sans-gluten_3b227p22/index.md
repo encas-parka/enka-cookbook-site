@@ -25,11 +25,11 @@ ingredients:
     commentaire: ''
   - ingredient: sucre-de-canne-blond_n85gmi
     quantite: 300
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: poudre-damandes_rmgr7l
     quantite: 500
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: lait-de-soja_gpeob7
     quantite: 750
@@ -37,7 +37,7 @@ ingredients:
     commentaire: ''
   - ingredient: farine-de-tapioca_v212im
     quantite: 250
-    unit: grammes
+    unit: gr.
     commentaire: ''
 preparation: |-
   * Écraser à la fourchette les patates douces bien cuites pour en faire une purée.
@@ -46,4 +46,3 @@ preparation: |-
   * Verser dans le moule à gâteau, et placer au four préchauffé à 200° pendant 35 min au moins.
 publishDate: 2025-05-30T17:18:00.000Z
 ---
-

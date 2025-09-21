@@ -15,7 +15,7 @@ checkAlwaysOk: false
 ingredients:
   - ingredient: sucre-en-poudre_u9z2he
     quantite: 300
-    unit: grammes
+    unit: gr.
     commentaire: chantilly
   - ingredient: sucre-en-poudre_u9z2he
     quantite: 2
@@ -47,15 +47,15 @@ ingredients:
     commentaire: ''
   - ingredient: huile-de-coco-desodorisee_ja17ja
     quantite: 1
-    unit: litre
+    unit: l.
     commentaire: chantilly
   - ingredient: sel_2juq3x
     quantite: 80
-    unit: grammes
+    unit: gr.
     commentaire: caramel
   - ingredient: cannelle_sk1gbb
     quantite: 15
-    unit: grammes
+    unit: gr.
     commentaire: ''
 materiel:
   - Gastro 1/1 (Normaux)

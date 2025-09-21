@@ -23,11 +23,11 @@ ingredients:
     commentaire: facultatif
   - ingredient: huile-dolive_h3c8al
     quantite: 2
-    unit: litre
+    unit: l.
     commentaire: ''
   - ingredient: levure-fraiche_1z66lc
     quantite: 50
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: farine-de-ble_2av6w8
     quantite: 12
@@ -35,13 +35,13 @@ ingredients:
     commentaire: ''
   - ingredient: thym_a16yd7
     quantite: 30
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: romarin_6z655r
     commentaire: ''
   - ingredient: sel_2juq3x
     quantite: 300
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: coulis-de-tomates_09bywc
     quantite: 2
@@ -49,12 +49,12 @@ ingredients:
     commentaire: ''
   - ingredient: eau_ljzb7j
     quantite: 5
-    unit: litre
+    unit: l.
     commentaire: tiède (pas chaude !)
 materiel:
   - Four
 preparation: |-
-  Faire par deux kg de farine ce sera plus simple (60g sel, 10g levure, environ un litre d'eau et 10cl d'huile d'olive).
+  Faire par deux kg de farine ce sera plus simple (60g sel, 10g levure, environ un l. d'eau et 10cl d'huile d'olive).
 
   * Étaler la pâte, sans rouleau, avec les mains, épaisseur 1 à 2cm Éffeuiller les herbes, puis badigeonner d'un tout petit peu de sauce tomate qu'on aura pris soin d'assaisoner avec un peu de sel et de poivre.
   * Laisser lever encore deux heures.

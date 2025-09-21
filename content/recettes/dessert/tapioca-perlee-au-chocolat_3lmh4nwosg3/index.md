@@ -16,15 +16,15 @@ checkAlwaysOk: false
 ingredients:
   - ingredient: lait-de-riz_hzwesd
     quantite: 1
-    unit: litre
+    unit: l.
     commentaire: ''
   - ingredient: tapioca-perlee_mkttuh
     quantite: 80
-    unit: grammes
+    unit: gr.
     commentaire: entre 60 à 80g
   - ingredient: chocolat-noir-patissier-70p100_1e3zhq
     quantite: 200
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: poivre-noir-moulu_rgt7s4
     quantite: 1
@@ -46,4 +46,3 @@ preparation: |-
   Peut-être préparé 3heures environ avant de servir
 publishDate: 2025-06-27T19:13:00.000Z
 ---
-

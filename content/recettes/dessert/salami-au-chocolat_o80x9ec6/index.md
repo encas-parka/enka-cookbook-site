@@ -22,7 +22,7 @@ ingredients:
     commentaire: ''
   - ingredient: cacao_r6792n
     quantite: 200
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: chocolat-noir_cr4kiz
     quantite: 2

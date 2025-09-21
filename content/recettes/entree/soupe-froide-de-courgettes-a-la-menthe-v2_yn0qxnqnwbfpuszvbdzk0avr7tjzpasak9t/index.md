@@ -24,7 +24,7 @@ ingredients:
     commentaire: ''
   - ingredient: eau_ljzb7j
     quantite: 4.4
-    unit: litre
+    unit: l.
     commentaire: ''
   - ingredient: menthe-fraiche_y16lzq
     quantite: 20
@@ -36,7 +36,7 @@ ingredients:
     commentaire: ''
   - ingredient: lait-de-soja_gpeob7
     quantite: 20
-    unit: litre
+    unit: l.
     commentaire: ''
 preparation: Le lendemain ajouter le lait de soja et mixer l'ensemble jusqu'à ce que la texture soit bien lisse (rajouter éventuelement un peu d'eau selon la texture souhaitée).  rectifier son assaisonement. Puis juste avant de servir verser dans les verres et mettre un filet d'huile d'olive et une feuille de menthe par verre.
 preparation24h: |-
@@ -49,4 +49,3 @@ preparation24h: |-
   Quand les courgettes sont tendres, les verser sur le bouquet de menthe. Refroidir et mettre au frais toute la nuit.
 publishDate: 2025-06-19T15:32:00.000Z
 ---
-

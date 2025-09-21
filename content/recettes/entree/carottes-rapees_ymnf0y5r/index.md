@@ -18,7 +18,7 @@ checkAlwaysOk: true
 ingredients:
   - ingredient: sel_2juq3x
     quantite: 10
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: carotte_eouu0v
     quantite: 13
@@ -26,10 +26,8 @@ ingredients:
     commentaire: ''
   - ingredient: huile-vegetale_atccqu
     quantite: 1
-    unit: litre
+    unit: l.
     commentaire: ''
 preparation: Raper et assaisonner à convenance
 publishDate: '2024-06-14T13:22:00.000Z'
 ---
-
-

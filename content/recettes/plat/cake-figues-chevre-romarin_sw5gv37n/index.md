@@ -8,7 +8,7 @@ draft: false
 ingredients:
   - ingredient: levure-chimique_vgec6e
     quantite: 10
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: romarin_6z655r
     quantite: 2
@@ -16,19 +16,19 @@ ingredients:
     commentaire: ''
   - ingredient: comte_da93ql
     quantite: 100
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: buche-de-chevre_yjxnau
     quantite: 150
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: farine-de-ble_2av6w8
     quantite: 180
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: huile-dolive_h3c8al
     quantite: 0.1
-    unit: litre
+    unit: l.
     commentaire: ''
   - ingredient: oeuf_zf3zf8
     quantite: 3
@@ -36,11 +36,11 @@ ingredients:
     commentaire: ''
   - ingredient: lait-demi-ecreme_x286pc
     quantite: 0.12
-    unit: litre
+    unit: l.
     commentaire: ''
   - ingredient: figues-seches_mr7sd5
     quantite: 150
-    unit: grammes
+    unit: gr.
     commentaire: ''
 layout: recettes
 materiel:

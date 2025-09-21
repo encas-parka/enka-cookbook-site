@@ -21,27 +21,27 @@ ingredients:
     commentaire: ''
   - ingredient: yaourt-de-soja_hlbwfd
     quantite: 250
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: citron-jaune_5cg0yu
     quantite: 120
-    unit: grammes
+    unit: gr.
     commentaire: zeste
   - ingredient: huile-de-tournesol_c70jxb
     quantite: 0.11
-    unit: litre
+    unit: l.
     commentaire: ''
   - ingredient: farine-de-ble_2av6w8
     quantite: 250
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: jus-de-citron_e4mjd1
     quantite: 0.8
-    unit: litre
+    unit: l.
     commentaire: ''
   - ingredient: sucre-de-canne-blond_n85gmi
     quantite: 280
-    unit: grammes
+    unit: gr.
     commentaire: ''
 layout: recettes
 materiel:

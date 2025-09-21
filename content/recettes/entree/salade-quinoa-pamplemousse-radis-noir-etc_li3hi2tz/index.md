@@ -17,7 +17,7 @@ checkAlwaysOk: true
 ingredients:
   - ingredient: noisette_ut0l0k
     quantite: 700
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: quinoa_staxxt
     quantite: 2
@@ -25,7 +25,7 @@ ingredients:
     commentaire: ''
   - ingredient: cranberries_tlytgh
     quantite: 500
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: epinard_4totf1
     quantite: 1.5

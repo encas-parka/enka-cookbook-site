@@ -18,19 +18,19 @@ check: Oui
 ingredients:
   - ingredient: beurre-de-cacahuetes-sucre_7wpsj2
     quantite: 220
-    unit: grammes
+    unit: gr.
     commentaire: crunchy
   - ingredient: farine-de-ble_2av6w8
     quantite: 90
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: sucre-blanc_lny16c
     quantite: 330
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: chocolat-noir-patissier-70p100_1e3zhq
     quantite: 230
-    unit: grammes
+    unit: gr.
     commentaire: (en pépites)
   - ingredient: oeuf_zf3zf8
     quantite: 6
@@ -38,7 +38,7 @@ ingredients:
     commentaire: ''
   - ingredient: chocolat-noir-patissier-70p100_1e3zhq
     quantite: 420
-    unit: grammes
+    unit: gr.
     commentaire: (fondu)
   - ingredient: vanille-extrait-concentre_n818be
     quantite: 4
@@ -50,7 +50,7 @@ ingredients:
     commentaire: ''
   - ingredient: margarine_eipcl2
     quantite: 280
-    unit: grammes
+    unit: gr.
     commentaire: ''
 materiel:
   - Four
@@ -87,4 +87,3 @@ astuces: []
 prepAlt: []
 publishDate: 2025-09-05T16:25:00.000Z
 ---
-

@@ -9,15 +9,15 @@ draft: false
 ingredients:
   - ingredient: agar-agar_ruhtax
     quantite: 40
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: lait-de-soja_gpeob7
     quantite: 4.6
-    unit: litre
+    unit: l.
     commentaire: ''
   - ingredient: creme-soja_chfwwq
     quantite: 5
-    unit: litre
+    unit: l.
     commentaire: ''
   - ingredient: jus-de-citron_e4mjd1
     quantite: 200
@@ -25,7 +25,7 @@ ingredients:
     commentaire: ''
   - ingredient: jus-de-fraise_pxtrie
     quantite: 1
-    unit: litre
+    unit: l.
     commentaire: ''
   - ingredient: confiture-de-fraises_jf0jf7
     quantite: 1.3
@@ -41,7 +41,7 @@ ingredients:
     commentaire: ''
   - ingredient: sucre-en-poudre_u9z2he
     quantite: 800
-    unit: grammes
+    unit: gr.
     commentaire: ''
 layout: recettes
 materiel:
@@ -70,4 +70,3 @@ temperature: Froid
 title: PANNA COTTA VANILLE - FRAISE
 type: dessert
 ---
-

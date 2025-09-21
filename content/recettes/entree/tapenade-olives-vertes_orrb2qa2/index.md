@@ -18,7 +18,7 @@ checkAlwaysOk: false
 ingredients:
   - ingredient: olives-vertes-denoyautees_163u4z
     quantite: 100
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: ail_u2m28w
     quantite: 1

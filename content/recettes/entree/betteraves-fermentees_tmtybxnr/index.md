@@ -10,11 +10,11 @@ draft: false
 ingredients:
   - ingredient: eau_ljzb7j
     quantite: 0.8
-    unit: litre
+    unit: l.
     commentaire: ''
   - ingredient: gros-sel_5dwrvm
     quantite: 25
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: aneth-aromatique_nnkg8f
     quantite: 3

@@ -21,15 +21,15 @@ checkAlwaysOk: false
 ingredients:
   - ingredient: chapelure_psu3gg
     quantite: 500
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: cafe-moulu_86z19m
     quantite: 20
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: tahin_u33083
     quantite: 250
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: melasse-de-grenade_cl88ye
     quantite: 1
@@ -37,19 +37,19 @@ ingredients:
     commentaire: ''
   - ingredient: piment-en-poudre_fmc1dm
     quantite: 125
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: sel_2juq3x
     quantite: 40
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: cumin-moulu_he3u48
     quantite: 20
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: paprika_bidsmu
     quantite: 75
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: poivron-rouge_0zglpj
     quantite: 8
@@ -65,7 +65,7 @@ ingredients:
     commentaire: ''
   - ingredient: miel_g0lph5
     quantite: 250
-    unit: grammes
+    unit: gr.
     commentaire: ''
 materiel:
   - Robot Mixeur
@@ -76,4 +76,3 @@ preparation: |-
   4. Transférer dans le plat de service, arroser un peu d'huile d'olives et décorer avec les noix restantes.
 publishDate: 2024-06-04T16:31:00.000Z
 ---
-

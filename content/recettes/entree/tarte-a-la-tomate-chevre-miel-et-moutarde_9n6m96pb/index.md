@@ -19,7 +19,7 @@ checkfor: 32
 ingredients:
   - ingredient: origan-frais_iu5sb3
     quantite: 200
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: tomate_ibtbnq
     quantite: 65
@@ -27,7 +27,7 @@ ingredients:
     commentaire: ''
   - ingredient: creme-fraiche-liquide-entiere_6tnb6h
     quantite: 2
-    unit: litre
+    unit: l.
     commentaire: ''
   - ingredient: oeuf_zf3zf8
     quantite: 30
@@ -35,7 +35,7 @@ ingredients:
     commentaire: ''
   - ingredient: huile-de-tournesol_c70jxb
     quantite: 1
-    unit: litre
+    unit: l.
     commentaire: ''
   - ingredient: farine-de-ble_2av6w8
     quantite: 2
@@ -55,11 +55,11 @@ ingredients:
     commentaire: ''
   - ingredient: miel_g0lph5
     quantite: 500
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: thym_a16yd7
     quantite: 100
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: moutarde-a-lancienne_15qnl9
     quantite: 1
@@ -67,7 +67,7 @@ ingredients:
     commentaire: ''
   - ingredient: tahin_u33083
     quantite: 500
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: levure-chimique_vgec6e
     quantite: 4
@@ -75,7 +75,7 @@ ingredients:
     commentaire: ''
   - ingredient: eau_ljzb7j
     quantite: 1
-    unit: litre
+    unit: l.
     commentaire: ''
 materiel:
   - moule à tarte

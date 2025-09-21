@@ -15,7 +15,7 @@ ingredients:
     commentaire: ''
   - ingredient: eau_ljzb7j
     quantite: 600
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: bicarbonate-de-soude_fnnx13
     quantite: 1
@@ -23,7 +23,7 @@ ingredients:
     commentaire: ''
   - ingredient: levure-chimique_vgec6e
     quantite: 30
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: yaourt-de-soja_hlbwfd
     quantite: 1.5
@@ -31,11 +31,11 @@ ingredients:
     commentaire: ''
   - ingredient: huile-de-colza_eu7lc6
     quantite: 0.3
-    unit: litre
+    unit: l.
     commentaire: ''
   - ingredient: semoule-fine-ble_mltl42
     quantite: 750
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: jus-de-citron_e4mjd1
     quantite: 9

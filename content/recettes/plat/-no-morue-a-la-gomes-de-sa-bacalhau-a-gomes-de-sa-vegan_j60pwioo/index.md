@@ -25,7 +25,7 @@ ingredients:
     unit: bottes
     commentaire: ''
   - ingredient: poivre-noir-moulu_rgt7s4
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: tofu-ferme_3ahcls
     quantite: 1
@@ -62,9 +62,9 @@ preparation: |-
 
   Hâcher le persil, réserver.
 
-  Dans un faitout/rodeau faire revenir les oignons coupés en dés et l'ail hâché. Ajouter le poivre. Ajouter le tofu mariné et laisser le tout sur un feu doux pendant 15-20 minutes. 
+  Dans un faitout/rodeau faire revenir les oignons coupés en dés et l'ail hâché. Ajouter le poivre. Ajouter le tofu mariné et laisser le tout sur un feu doux pendant 15-20 minutes.
 
-  Disposer les bacs gastros nécessaires. Ajouter une couche de patates au fond, puis le tofu avec les oignons et l'ail (répartir un peu partout). Mettre un filet d'huile d'olive dessus. Mettre au four pour griller tout ça, puis maintenir au chaud. 
+  Disposer les bacs gastros nécessaires. Ajouter une couche de patates au fond, puis le tofu avec les oignons et l'ail (répartir un peu partout). Mettre un filet d'huile d'olive dessus. Mettre au four pour griller tout ça, puis maintenir au chaud.
 
   Au moment du service (à la sortie du four) asperser abondamment de persil et d'olives sur le plat.
 

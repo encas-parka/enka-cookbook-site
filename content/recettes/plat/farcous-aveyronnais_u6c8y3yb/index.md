@@ -8,7 +8,7 @@ draft: false
 ingredients:
   - ingredient: levure-chimique_vgec6e
     quantite: 77
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: persil-frais_hgfa4e
     quantite: 8
@@ -20,11 +20,11 @@ ingredients:
     commentaire: sauce
   - ingredient: citron-confit_m6gmgq
     quantite: 400
-    unit: grammes
+    unit: gr.
     commentaire: sauce
   - ingredient: ail_u2m28w
     quantite: 320
-    unit: grammes
+    unit: gr.
     commentaire: ~ 4 têtes
   - ingredient: oignon_rtavky
     quantite: 14
@@ -36,7 +36,7 @@ ingredients:
     commentaire: ''
   - ingredient: huile-de-friture_1ej217
     quantite: 5
-    unit: litre
+    unit: l.
     commentaire: ''
   - ingredient: farine-de-ble_2av6w8
     quantite: 4
@@ -44,7 +44,7 @@ ingredients:
     commentaire: ''
   - ingredient: lait-demi-ecreme_x286pc
     quantite: 7.5
-    unit: litre
+    unit: l.
     commentaire: ''
   - ingredient: oeuf_zf3zf8
     quantite: 46

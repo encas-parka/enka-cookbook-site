@@ -16,11 +16,11 @@ checkAlwaysOk: false
 ingredients:
   - ingredient: huile-vegetale_atccqu
     quantite: 1
-    unit: litre
+    unit: l.
     commentaire: ''
   - ingredient: farine-de-riz_oygozr
     quantite: 800
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: gluten-pur_946ddw
     quantite: 2.15
@@ -36,7 +36,7 @@ ingredients:
     commentaire: ''
   - ingredient: poudre-damandes_rmgr7l
     quantite: 600
-    unit: grammes
+    unit: gr.
     commentaire: ''
 preparation: |-
 

@@ -35,12 +35,12 @@ ingredients:
     commentaire: ou mieux, yaourt brassé
   - ingredient: huile-dolive_h3c8al
     quantite: 1
-    unit: litre
+    unit: l.
     commentaire: ''
 preparation: |-
-  * Fouetter les yaourts jusqu’à ce qu’ils deviennent bien liquides. 
+  * Fouetter les yaourts jusqu’à ce qu’ils deviennent bien liquides.
     Ajouter, au besoin un peu d’eau fraîche (pas trop non plus puisque l’eau
-     du concombre viendra s’y ajouter), surtout si ce sont des 
+     du concombre viendra s’y ajouter), surtout si ce sont des
     yaourts ordinaires, non brassés.
 
 
@@ -49,11 +49,11 @@ preparation: |-
 
     *Ce sera plus facile avec un robot. Sinon, couper le concombre en dés, aussi petits que possible.*
 
-    \    
+    \
 
-  * Éplucher et dégermer l’ail. Écraser avec un presse-ail (ou hacher très finement). 
+  * Éplucher et dégermer l’ail. Écraser avec un presse-ail (ou hacher très finement).
 
-  * Ciseler l’aneth et mélanger au yaourt battu. 
+  * Ciseler l’aneth et mélanger au yaourt battu.
 
   * Ajouter l’ail, l’huile d’olive et les concombres râpés. 'optionnel : des noix concassés.
 

@@ -19,15 +19,15 @@ checkAlwaysOk: true
 ingredients:
   - ingredient: bicarbonate-de-soude_fnnx13
     quantite: 100
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: tahin_u33083
     quantite: 500
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: sesame-blanc_1uz8x5
     quantite: 500
-    unit: grammes
+    unit: gr.
     commentaire: Peu importe la couleur
   - ingredient: ciboulette_mt22ff
     quantite: 2
@@ -35,15 +35,15 @@ ingredients:
     commentaire: ''
   - ingredient: paprika_bidsmu
     quantite: 50
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: cumin-graines_l3esgp
     quantite: 100
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: graine-de-coriandre_crkg3d
     quantite: 150
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: coriandre-fraiche_fetrpe
     quantite: 1
@@ -87,11 +87,11 @@ ingredients:
     commentaire: ''
   - ingredient: huile-de-friture_1ej217
     quantite: 10
-    unit: litre
+    unit: l.
     commentaire: En fonction des friteuses et du restes des prepa
   - ingredient: huile-dolive_h3c8al
     quantite: 2
-    unit: litre
+    unit: l.
     commentaire: ''
   - ingredient: farine-de-ble_2av6w8
     quantite: 15
@@ -103,7 +103,7 @@ ingredients:
     commentaire: ''
   - ingredient: jus-de-citron_e4mjd1
     quantite: 1
-    unit: litre
+    unit: l.
     commentaire: ''
 materiel:
   - Four

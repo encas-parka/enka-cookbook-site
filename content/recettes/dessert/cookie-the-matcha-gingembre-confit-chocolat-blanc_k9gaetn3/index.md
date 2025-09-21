@@ -10,7 +10,7 @@ img: https://www.delscookingtwist.com/wp-content/uploads/2021/04/White-Chocolate
 ingredients:
   - ingredient: the-matcha_giui8l
     quantite: 70
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: sel_2juq3x
     quantite: 4
@@ -34,7 +34,7 @@ ingredients:
     commentaire: ''
   - ingredient: gingembre-confit_oskdzx
     quantite: 900
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: chocolat-blanc_fsz13t
     quantite: 1.5

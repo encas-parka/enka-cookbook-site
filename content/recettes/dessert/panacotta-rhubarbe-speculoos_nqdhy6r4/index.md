@@ -19,7 +19,7 @@ ingredients:
     commentaire: ''
   - ingredient: lait-damande_csxbg6
     quantite: 4
-    unit: litre
+    unit: l.
     commentaire: ''
   - ingredient: speculoos_h6thsp
     quantite: 1
@@ -31,11 +31,11 @@ ingredients:
     commentaire: ''
   - ingredient: sucre-de-canne-blond_n85gmi
     quantite: 900
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: agar-agar_ruhtax
     quantite: 16
-    unit: grammes
+    unit: gr.
     commentaire: ''
 preparation: |-
 

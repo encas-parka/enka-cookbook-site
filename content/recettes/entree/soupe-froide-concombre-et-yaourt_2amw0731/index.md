@@ -9,11 +9,11 @@ draft: false
 ingredients:
   - ingredient: eau_ljzb7j
     quantite: 5
-    unit: litre
+    unit: l.
     commentaire: ''
   - ingredient: paprika_bidsmu
     quantite: 100
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: menthe_2j9y2v
     quantite: 3
@@ -44,7 +44,7 @@ plate: 100
 prepAlt:
   - recetteAlt: SOUPE FROIDE CONCOMBRE ET YAOURT VEGAN
 preparation: |-
-  Epépiner les concombres et les hacher grossièrement. Les réduire en purée au mixeur jusqu'à obtention d'une texture lisse. 
+  Epépiner les concombres et les hacher grossièrement. Les réduire en purée au mixeur jusqu'à obtention d'une texture lisse.
 
   Ajouter le yaourt grec, l'eau froide et les bouillons cubes délayés d'une un peu d'eau chaude. Mixer par brèves impulsions.
 

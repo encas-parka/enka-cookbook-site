@@ -17,11 +17,11 @@ ingredients:
     commentaire: ''
   - ingredient: piment-en-flocons_5k7zz4
     quantite: 6
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: origan_fkftyb
     quantite: 13
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: feta_m5dxyo
     quantite: 3.75

@@ -10,7 +10,7 @@ draft: false
 ingredients:
   - ingredient: agar-agar_ruhtax
     quantite: 56
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: curcuma-moulu_htp5ma
     quantite: 6
@@ -18,11 +18,11 @@ ingredients:
     commentaire: ''
   - ingredient: lait-de-coco_xdy736
     quantite: 4
-    unit: litre
+    unit: l.
     commentaire: ''
   - ingredient: lait-damande_csxbg6
     quantite: 10
-    unit: litre
+    unit: l.
     commentaire: ''
   - ingredient: sucre-en-poudre_u9z2he
     quantite: 2.8
@@ -30,7 +30,7 @@ ingredients:
     commentaire: caramel
   - ingredient: sirop-dagave_7cflkx
     quantite: 1.5
-    unit: litre
+    unit: l.
     commentaire: ''
   - ingredient: sucre-en-poudre_u9z2he
     quantite: 1.5

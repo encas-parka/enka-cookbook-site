@@ -35,7 +35,7 @@ ingredients:
     commentaire: ''
   - ingredient: huile-dolive_h3c8al
     quantite: 1
-    unit: litre
+    unit: l.
     commentaire: ''
   - ingredient: buche-de-chevre_yjxnau
     quantite: 6.5
@@ -43,7 +43,7 @@ ingredients:
     commentaire: le top c'est cendré
   - ingredient: miel_g0lph5
     quantite: 600
-    unit: grammes
+    unit: gr.
     commentaire: environ
   - ingredient: poivre-noir-moulu_rgt7s4
     quantite: 10
@@ -51,7 +51,7 @@ ingredients:
     commentaire: ''
   - ingredient: sel_2juq3x
     quantite: 30
-    unit: grammes
+    unit: gr.
     commentaire: ''
 materiel:
   - Four
@@ -60,7 +60,7 @@ preparation: |-
 
   **Penser à faire une version sans miel et sans chèvre pour vegan**
 
-  * Lavez et taillez les tomates en tranches d'environ 3mm d'épaisseur. 
+  * Lavez et taillez les tomates en tranches d'environ 3mm d'épaisseur.
   * Coupez le fromage de chèvre en tranches de la même épaisseur, puis les figues en tranches plus fines.
   * Allumez le grill du four
   * Montez les tians dans des plats à gratin ou des gastros, en intercalant à chaque fois une rangée de tranches de tomates, de chèvre et de figues.

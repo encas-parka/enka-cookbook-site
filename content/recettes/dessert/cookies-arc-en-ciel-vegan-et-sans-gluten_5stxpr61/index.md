@@ -26,11 +26,11 @@ ingredients:
     commentaire: ''
   - ingredient: compote-de-pomme_wz2fkg
     quantite: 500
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: levure-chimique-sans-gluten_zb9tj8
     quantite: 50
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: farine-de-riz_oygozr
     quantite: 1.7
@@ -44,12 +44,12 @@ ingredients:
     commentaire: ''
   - ingredient: sel_2juq3x
     quantite: 15
-    unit: grammes
+    unit: gr.
     commentaire: ''
 preparation: |-
   Préchauffer le four à 180°C (t6).
 
-  Dans un saladier, battre la margarine, le sucre et la compote. Ce n’est pas un soucis si le mélange n’est pas 
+  Dans un saladier, battre la margarine, le sucre et la compote. Ce n’est pas un soucis si le mélange n’est pas
   très homogène, il le deviendra par la suite.
 
   Ajouter la farine de riz, la noix de coco, le sel et la levure sans gluten à l’aide d’une spatule, les incorporer aux autres ingrédients jusqu’à obtenir une pâte homogène.

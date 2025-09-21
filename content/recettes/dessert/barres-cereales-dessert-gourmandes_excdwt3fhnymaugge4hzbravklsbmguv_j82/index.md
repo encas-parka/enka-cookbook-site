@@ -20,7 +20,7 @@ checkAlwaysOk: true
 ingredients:
   - ingredient: flocons-davoine_ovewgk
     quantite: 135
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: sel_2juq3x
     quantite: 1
@@ -28,15 +28,15 @@ ingredients:
     commentaire: ''
   - ingredient: farine-de-ble_2av6w8
     quantite: 40
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: huile-de-coco_6bm4lq
     quantite: 90
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: chocolat-noir_cr4kiz
     quantite: 100
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: cacao_r6792n
     quantite: 1
@@ -44,7 +44,7 @@ ingredients:
     commentaire: ''
   - ingredient: sucre-en-poudre_u9z2he
     quantite: 170
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: eau_ljzb7j
     quantite: 100
@@ -52,11 +52,11 @@ ingredients:
     commentaire: ''
   - ingredient: tahin_u33083
     quantite: 50
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: raisin-sec_9yf54l
     quantite: 50
-    unit: grammes
+    unit: gr.
     commentaire: ''
 materiel:
   - Four
@@ -75,4 +75,3 @@ prepAlt:
   - recetteAlt: barres-cereales-gourmandes-flocons-davoine-chocolat-raisin-sec-sans-gluten_q1eozsxah1hwo7bnjp-huaaue2nr6dkbh2-t
 publishDate: 2025-07-24T16:34:00.000Z
 ---
-

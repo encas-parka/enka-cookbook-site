@@ -28,7 +28,7 @@ ingredients:
     commentaire: ''
   - ingredient: creme-soja_chfwwq
     quantite: 2
-    unit: litre
+    unit: l.
     commentaire: ''
   - ingredient: haricots-rouges-cuits_iwdje3
     quantite: 2.25

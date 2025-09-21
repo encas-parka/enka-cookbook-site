@@ -21,19 +21,19 @@ ingredients:
     commentaire: ''
   - ingredient: glucose_lm7zqh
     quantite: 20
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: chocolat-noir-patissier-70p100_1e3zhq
     quantite: 250
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: cornflakes-sans-gluten_hyp3th
     quantite: 150
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: biscuit-vegan-et-sans-gluten_ade8hh
     quantite: 200
-    unit: grammes
+    unit: gr.
     commentaire: ''
 layout: recettes
 materiel:

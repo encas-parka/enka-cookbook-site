@@ -21,7 +21,7 @@ checkAlwaysOk: true
 ingredients:
   - ingredient: flocons-davoine-sans-gluten_02w66c
     quantite: 135
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: sel_2juq3x
     quantite: 1
@@ -29,19 +29,19 @@ ingredients:
     commentaire: ''
   - ingredient: farine-de-riz_oygozr
     quantite: 20
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: farine-de-mais_z8uiyd
     quantite: 20
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: huile-de-coco_6bm4lq
     quantite: 90
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: chocolat-noir_cr4kiz
     quantite: 100
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: cacao_r6792n
     quantite: 1
@@ -49,7 +49,7 @@ ingredients:
     commentaire: ''
   - ingredient: sucre-en-poudre_u9z2he
     quantite: 170
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: eau_ljzb7j
     quantite: 100
@@ -57,11 +57,11 @@ ingredients:
     commentaire: ''
   - ingredient: tahin_u33083
     quantite: 50
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: raisin-sec_9yf54l
     quantite: 50
-    unit: grammes
+    unit: gr.
     commentaire: ''
 materiel:
   - Four
@@ -78,4 +78,3 @@ preparation: |-
   7. Quand ça sera froid et durci, tu pourras facilement démouler grâce  aux pans de papier cuisson et découper en barres ou carrés (à l’aide d’un bon couteau si c'est bien cuit). Conserve dans un récipient hermétique.
 publishDate: 2025-07-24T16:34:00.000Z
 ---
-

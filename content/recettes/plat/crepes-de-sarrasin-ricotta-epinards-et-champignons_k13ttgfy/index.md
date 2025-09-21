@@ -33,7 +33,7 @@ ingredients:
     commentaire: ''
   - ingredient: lait-entier_dbbjuu
     quantite: 5
-    unit: litre
+    unit: l.
     commentaire: ''
   - ingredient: huile-de-tournesol_c70jxb
     quantite: 500
@@ -41,15 +41,15 @@ ingredients:
     commentaire: ''
   - ingredient: fecule-de-mais-maizena_8nbcjp
     quantite: 500
-    unit: grammes
+    unit: gr.
     commentaire: la maïzena est pour la béchamel sans gluten
   - ingredient: farine-de-ble_2av6w8
     quantite: 200
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: margarine_eipcl2
     quantite: 500
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: tofu-ferme_3ahcls
     quantite: 1
@@ -61,11 +61,11 @@ ingredients:
     commentaire: ''
   - ingredient: bouillon-de-legume-sans-gluten_tmk6ya
     quantite: 2
-    unit: litre
+    unit: l.
     commentaire: ''
   - ingredient: muscade_msyocm
     quantite: 50
-    unit: grammes
+    unit: gr.
     commentaire: ''
 preparation: |-
   La veille, penser à décongeler les épinards et les champignons dans des gastros à trous pour qu'ils puissent s'égoutter et les stocker en frigo.
@@ -76,7 +76,7 @@ preparation: |-
 
   Etape 2 : béchamel sans gluten
 
-  Diluer le nombre de tablettes requis pour confectionner 2 litres de bouillon de légumes et le porter à ébullition. Diluer à part dans un peu de liquide froid la fécule de maïs (maïzena) et l'incorporer dans le bouillon bouillant. Cuire quelques minutes jusqu'à épaississement. Réserver.
+  Diluer le nombre de tablettes requis pour confectionner 2 l.s de bouillon de légumes et le porter à ébullition. Diluer à part dans un peu de liquide froid la fécule de maïs (maïzena) et l'incorporer dans le bouillon bouillant. Cuire quelques minutes jusqu'à épaississement. Réserver.
 
   Etape 3
 

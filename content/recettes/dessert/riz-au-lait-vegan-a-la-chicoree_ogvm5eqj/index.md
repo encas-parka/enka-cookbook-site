@@ -20,7 +20,7 @@ ingredients:
     commentaire: ''
   - ingredient: lait-davoine_3eex0o
     quantite: 17
-    unit: litre
+    unit: l.
     commentaire: ''
   - ingredient: sucre-brun-vergeoise_znjs35
     quantite: 1.5
@@ -28,16 +28,16 @@ ingredients:
     commentaire: ''
   - ingredient: sel_2juq3x
     quantite: 8
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: chicoree-soluble_pss0bn
     quantite: 170
-    unit: grammes
+    unit: gr.
     commentaire: ''
 preparation: |-
   faire chauffer une grande quantité d'eau avec le sel, quand elle bout, ajouter le riz et faire cuire pendant 5 mn
 
-  faire chauffer 13 litre de lait d'avoine, juste avant l'ébullition ajouter le riz précuit, le sucre vergeoise et la chicorée, laisser cuire 30 mn en remuant régulièrement
+  faire chauffer 13 litres de lait d'avoine, juste avant l'ébullition ajouter le riz précuit, le sucre vergeoise et la chicorée, laisser cuire 30 mn en remuant régulièrement
 
   5 mn avant la fin de la cuisson, ajouter les 4 litres de lait restants
 

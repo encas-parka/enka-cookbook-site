@@ -13,23 +13,23 @@ ingredients:
     commentaire: ''
   - ingredient: eau_ljzb7j
     quantite: 2.5
-    unit: litre
+    unit: l.
     commentaire: sirop
   - ingredient: cannelle_sk1gbb
     quantite: 5
-    unit: grammes
+    unit: gr.
     commentaire: sirop
   - ingredient: ras-el-hanout_j40pyf
     quantite: 35
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: cannelle_sk1gbb
     quantite: 5
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: poivre_2pps90
     quantite: 35
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: figues-seches_mr7sd5
     quantite: 4
@@ -53,15 +53,15 @@ ingredients:
     commentaire: ''
   - ingredient: huile-dargan_1jfxgt
     quantite: 1
-    unit: litre
+    unit: l.
     commentaire: ''
   - ingredient: huile-vegetale_atccqu
     quantite: 2
-    unit: litre
+    unit: l.
     commentaire: ''
   - ingredient: pignon-de-pin_82a9ot
     quantite: 950
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: amande_fuhtcw
     quantite: 1.6
@@ -69,11 +69,11 @@ ingredients:
     commentaire: ''
   - ingredient: sucre-glace_phv1to
     quantite: 300
-    unit: grammes
+    unit: gr.
     commentaire: déco
   - ingredient: sucre-en-poudre_u9z2he
     quantite: 900
-    unit: grammes
+    unit: gr.
     commentaire: sirop
 layout: recettes
 materiel:
@@ -110,7 +110,7 @@ preparation: |-
 
   Dix minutes avant la fin de la cuisson, glacer au sirop de citron.
 
-  Démouler les pastillas sur le plat de service. 
+  Démouler les pastillas sur le plat de service.
 
   Les décorer de demi-rondelles de citron confites et de pignons de pin grillés. il est possible de saupoudrer également de sucre glace et de cannelle.
 publishDate: 2024-06-13T17:39:00.000Z

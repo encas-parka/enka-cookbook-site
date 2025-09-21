@@ -17,11 +17,11 @@ checkAlwaysOk: false
 ingredients:
   - ingredient: citron-non-traite_tobtbt
     quantite: 250
-    unit: grammes
+    unit: gr.
     commentaire: pour les zetes
   - ingredient: sucre-en-poudre_u9z2he
     quantite: 350
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: jus-de-citron_e4mjd1
     quantite: 200
@@ -33,15 +33,15 @@ ingredients:
     commentaire: ''
   - ingredient: eau_ljzb7j
     quantite: 1
-    unit: litre
+    unit: l.
     commentaire: ''
   - ingredient: agar-agar_ruhtax
     quantite: 8
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: fecule-de-mais-maizena_8nbcjp
     quantite: 50
-    unit: grammes
+    unit: gr.
     commentaire: ''
 preparation: |-
   * Zester les citrons et en garder un peu pour la déco.

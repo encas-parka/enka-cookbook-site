@@ -12,7 +12,7 @@ ingredients:
     commentaire: ''
   - ingredient: farine-de-mais_z8uiyd
     quantite: 50
-    unit: grammes
+    unit: gr.
     commentaire: la quantité exact c'est 1 cuillere a café bombé par oeuf
   - ingredient: oeuf_zf3zf8
     quantite: 5
@@ -20,11 +20,11 @@ ingredients:
     commentaire: ''
   - ingredient: lait-demi-ecreme_x286pc
     quantite: 2
-    unit: litre
+    unit: l.
     commentaire: ''
   - ingredient: sucre-glace_phv1to
     quantite: 20
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: vanille-extrait-concentre_n818be
     quantite: 10
@@ -36,7 +36,7 @@ ingredients:
     commentaire: ''
   - ingredient: sucre-blanc_lny16c
     quantite: 200
-    unit: grammes
+    unit: gr.
     commentaire: ''
 layout: recettes
 plate: 10
@@ -53,7 +53,7 @@ preparation: |-
 
   pour les grandes quantités privilégier plusieurs petite casserole plutot qu'une grande!
 
-  pour les blancs: 
+  pour les blancs:
 
   monter en neige les blanc avec une pincé de sel et le sucre glace
 

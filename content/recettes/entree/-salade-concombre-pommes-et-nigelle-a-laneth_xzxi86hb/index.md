@@ -39,11 +39,11 @@ ingredients:
     commentaire: ''
   - ingredient: huile-dolive_h3c8al
     quantite: 1.2
-    unit: litre
+    unit: l.
     commentaire: ''
   - ingredient: graines-de-nigelle_5muly5
     quantite: 300
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: yaourt-de-vache_xahmrh
     quantite: 2

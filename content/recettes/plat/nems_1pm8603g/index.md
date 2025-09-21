@@ -20,7 +20,7 @@ ingredients:
     commentaire: surplus pour les ratés...
   - ingredient: champignon-noir_hlihcc
     quantite: 375
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: pousses-de-soja_4wa1jr
     quantite: 2.8
@@ -44,7 +44,7 @@ ingredients:
     commentaire: ''
   - ingredient: huile-de-tournesol_c70jxb
     quantite: 10
-    unit: litre
+    unit: l.
     commentaire: ''
   - ingredient: poivre_2pps90
     commentaire: ''

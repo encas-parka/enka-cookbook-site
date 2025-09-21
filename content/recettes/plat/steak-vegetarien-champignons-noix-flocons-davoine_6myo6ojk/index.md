@@ -12,17 +12,17 @@ draft: false
 ingredients:
   - ingredient: eau_ljzb7j
     quantite: 6.5
-    unit: litre
+    unit: l.
     commentaire: ''
   - ingredient: poivre_2pps90
     commentaire: ''
   - ingredient: cumin_dc8855
     quantite: 10
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: paprika-fume_ique18
     quantite: 70
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: gros-sel_5dwrvm
     quantite: 5
@@ -30,7 +30,7 @@ ingredients:
     commentaire: ''
   - ingredient: sauce-soja_jjrwlj
     quantite: 1.3
-    unit: litre
+    unit: l.
     commentaire: ''
   - ingredient: ail_u2m28w
     quantite: 26
@@ -50,7 +50,7 @@ ingredients:
     commentaire: ''
   - ingredient: noix_usibcf
     quantite: 500
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: flocons-davoine_ovewgk
     quantite: 4.3

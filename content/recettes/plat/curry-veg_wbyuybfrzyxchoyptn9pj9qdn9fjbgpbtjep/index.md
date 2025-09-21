@@ -38,7 +38,7 @@ ingredients:
     commentaire: deux bouts de racine pour avoir en quantité de gingembre, l'équivalent d'une tète d'ail.
   - ingredient: oignon_rtavky
     quantite: 500
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: banane_9vpwp5
     quantite: 25
@@ -62,15 +62,15 @@ ingredients:
     commentaire: ce n'est pas une erreur il y a besoin deux fois de tomates dans cette recette
   - ingredient: yaourt-de-soja_hlbwfd
     quantite: 2
-    unit: litre
+    unit: l.
     commentaire: ''
   - ingredient: margarine_eipcl2
     quantite: 300
-    unit: grammes
+    unit: gr.
     commentaire: margarine pour cuisson
   - ingredient: yaourt-de-soja_hlbwfd
     quantite: 500
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: curry_7jceco
     quantite: 25
@@ -78,7 +78,7 @@ ingredients:
     commentaire: ''
   - ingredient: concentre-de-tomate_mck2wl
     quantite: 500
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: huile-dolive_h3c8al
     quantite: 5
@@ -94,7 +94,7 @@ ingredients:
     commentaire: ''
   - ingredient: noix-de-coco-rapee_rxvf6y
     quantite: 500
-    unit: grammes
+    unit: gr.
     commentaire: ''
 preparation: |-
   #### La viande et sa sauce
@@ -113,7 +113,7 @@ preparation: |-
   Ajouter les pommes de terre, les carottes et le choux fleur et les faire dorer de tous les côtés.\
   Faire un espace au centre, un filet d'huile d'olive, ajouter l'ail/gingembre et la pate de curry et remuer pendant une minute (*pas plus sinon l'ail devient amer*).
   Incorporer et les tomates. Laisser mijoter pendant quelques minutes.
-  Verser le lait de coco, puis ajouter environ un litre d'eau pour arriver à couvert. Bien mélanger.\
+  Verser le lait de coco, puis ajouter environ un l. d'eau pour arriver à couvert. Bien mélanger.\
 
   Laisser mijoter à feu doux pendant 45 minute/1 heure jusqu'à ce que les légumes soient tendres. Donc au plus tard à **11:00** pour un service à midi.\
   \
@@ -150,7 +150,7 @@ preparation: |-
   3. ajouter 250 g d'oignons ciselés
   4. ajouter 100 g d'huile végétale
   5. bien melanger pour nacrer le riz.
-  6. Ajouter 1,8 à 2 fois la masse du riz en eau soit 5 litres maxi
+  6. Ajouter 1,8 à 2 fois la masse du riz en eau soit 5 l.s maxi
   7. Couvrir
 
   Cuisson au four à 180 ° pendant 30 à 40 minutes.\

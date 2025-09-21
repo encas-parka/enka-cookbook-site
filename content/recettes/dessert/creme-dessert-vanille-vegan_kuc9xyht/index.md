@@ -19,11 +19,11 @@ checkAlwaysOk: false
 ingredients:
   - ingredient: lait-damande_csxbg6
     quantite: 2
-    unit: litre
+    unit: l.
     commentaire: ''
   - ingredient: farine-de-mais_z8uiyd
     quantite: 60
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: gousse-de-vanille_2a0lnj
     quantite: 1
@@ -35,7 +35,7 @@ ingredients:
     commentaire: ''
   - ingredient: sucre-blanc_lny16c
     quantite: 200
-    unit: grammes
+    unit: gr.
     commentaire: ''
 preparation: |-
   a faire la veille :

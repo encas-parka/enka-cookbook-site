@@ -16,7 +16,7 @@ ingredients:
     commentaire: ''
   - ingredient: raifort-en-poudre_yi8qce
     quantite: 3
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: feuille-de-laurier_j84olg
     quantite: 1
@@ -24,7 +24,7 @@ ingredients:
     commentaire: ''
   - ingredient: estragon-seche_cgk776
     quantite: 3
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: oignon_rtavky
     quantite: 2
@@ -36,7 +36,7 @@ ingredients:
     commentaire: ''
   - ingredient: lentilles-vertes_ogtomg
     quantite: 300
-    unit: grammes
+    unit: gr.
     commentaire: ''
 layout: recettes
 materiel:

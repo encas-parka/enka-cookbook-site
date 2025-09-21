@@ -14,11 +14,11 @@ ingredients:
     commentaire: ''
   - ingredient: moutarde-a-lancienne_15qnl9
     quantite: 270
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: yaourt-de-soja_hlbwfd
     quantite: 400
-    unit: grammes
+    unit: gr.
     commentaire: version végane (10/15pers)
   - ingredient: yaourt-grec-de-vache_dzqmba
     quantite: 3.6

@@ -22,7 +22,7 @@ checkAlwaysOk: false
 ingredients:
   - ingredient: oignon_rtavky
     quantite: 250
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: tomate_ibtbnq
     quantite: 1.2
@@ -34,7 +34,7 @@ ingredients:
     commentaire: ''
   - ingredient: quinoa-blanc_csxn1a
     quantite: 150
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: poivre_2pps90
     commentaire: ''
@@ -61,7 +61,7 @@ preparation: |-
   * Coupez les tomates en petits dés.
   * Epluchez et ciselez l'oignon (en tous petits dés).
   * Dans un saladier, déposez le boulgour et versez le jus de citron.
-  * Ajoutez les tomates, l'oignon la menthe et le persil. 
+  * Ajoutez les tomates, l'oignon la menthe et le persil.
   * **NE PAS MELANGER et laisser au réfrigérateur au moins une heure.**
   * Avant de servir, versez l'huile d'olive, salez, poivrez et mélangez.
 astuces: []

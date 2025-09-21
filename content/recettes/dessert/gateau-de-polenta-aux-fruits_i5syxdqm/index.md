@@ -45,7 +45,7 @@ ingredients:
     commentaire: ''
   - ingredient: pistache-emmondee_q7adw3
     quantite: 400
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: amande_fuhtcw
     quantite: 1
@@ -53,7 +53,7 @@ ingredients:
     commentaire: ''
   - ingredient: miel_g0lph5
     quantite: 260
-    unit: grammes
+    unit: gr.
     commentaire: nappage
   - ingredient: sucre-en-poudre_u9z2he
     quantite: 1.4

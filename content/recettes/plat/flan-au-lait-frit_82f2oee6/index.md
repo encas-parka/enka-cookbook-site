@@ -18,7 +18,7 @@ checkAlwaysOk: false
 ingredients:
   - ingredient: huile-de-friture_1ej217
     quantite: 12
-    unit: litre
+    unit: l.
     commentaire: ''
   - ingredient: farine-de-ble_2av6w8
     quantite: 1.7
@@ -26,7 +26,7 @@ ingredients:
     commentaire: Pâte
   - ingredient: farine-de-mais_z8uiyd
     quantite: 600
-    unit: grammes
+    unit: gr.
     commentaire: Pâte
   - ingredient: farine-de-mais_z8uiyd
     quantite: 1.3
@@ -34,27 +34,27 @@ ingredients:
     commentaire: ''
   - ingredient: lait-concentre-non-sucre_zat1zc
     quantite: 4
-    unit: litre
+    unit: l.
     commentaire: ''
   - ingredient: lait-demi-ecreme_x286pc
     quantite: 7.7
-    unit: litre
+    unit: l.
     commentaire: ''
   - ingredient: eau_ljzb7j
     quantite: 3.3
-    unit: litre
+    unit: l.
     commentaire: Pâte
   - ingredient: levure-chimique_vgec6e
     quantite: 100
-    unit: grammes
+    unit: gr.
     commentaire: Pâte
   - ingredient: sel_2juq3x
     quantite: 200
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: poivre-blanc-moulue_7lakpz
     quantite: 75
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: sucre-en-poudre_u9z2he
     quantite: 1
@@ -85,7 +85,7 @@ preparation: |-
 
   \- Mélanger tous les ingrédients de la pâte et laisser reposer 30min à température ambiante.
 
-  \- Couper les flans au lait en cube de 5x5cm. 
+  \- Couper les flans au lait en cube de 5x5cm.
 
 
 
@@ -95,7 +95,7 @@ preparation: |-
 
   \- Les faire frire env. 3min. Ils doivent ressortir dorés et croustillants.
 
-  \- Les égoutter sur du papier sopalin. 
+  \- Les égoutter sur du papier sopalin.
 
   \- Et les saupoudrer d'un peu de sucre.
 publishDate: 2024-05-18T15:27:00.000Z

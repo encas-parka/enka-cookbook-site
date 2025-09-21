@@ -38,17 +38,17 @@ ingredients:
     commentaire: ''
   - ingredient: levure-de-biere_4be4ic
     quantite: 500
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: sucre-blanc_lny16c
     quantite: 200
-    unit: grammes
+    unit: gr.
     commentaire: ''
 materiel:
   - Bruleur
   - Robot Mixeur
 preparation: |-
-  Couper les oignons et les faire caraméliser dans une poêle. Ajouter sucre sel thym et romarin quelques minutes avant la fin de la cuisson. 
+  Couper les oignons et les faire caraméliser dans une poêle. Ajouter sucre sel thym et romarin quelques minutes avant la fin de la cuisson.
 
   Puis mixer tout les ingrédients restant + les oignons ensemble.  Ajouter huile jusqu'à avoir une belle consistance.
 publishDate: 2025-05-11T12:24:00.000Z

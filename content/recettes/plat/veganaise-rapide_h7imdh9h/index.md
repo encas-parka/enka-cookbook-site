@@ -17,7 +17,7 @@ ingredients:
     commentaire: ''
   - ingredient: huile-de-tournesol_c70jxb
     quantite: 1.2
-    unit: litre
+    unit: l.
     commentaire: ''
   - ingredient: creme-vegetale_aq796v
     quantite: 600

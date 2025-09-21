@@ -33,11 +33,11 @@ ingredients:
     commentaire: Pour les végans, on utilisera du tofu soyeux
   - ingredient: paprika-fume_ique18
     quantite: 200
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: thym_a16yd7
     quantite: 200
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: feuille-de-laurier_j84olg
     quantite: 20
@@ -49,11 +49,11 @@ ingredients:
     commentaire: ''
   - ingredient: origan_fkftyb
     quantite: 200
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: sariette_22uzom
     quantite: 200
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: persil-frais_hgfa4e
     quantite: 10
@@ -65,7 +65,7 @@ ingredients:
     commentaire: ''
   - ingredient: huile-dolive_h3c8al
     quantite: 1
-    unit: litre
+    unit: l.
     commentaire: ''
   - ingredient: sucre-blanc_lny16c
     quantite: 0.1
@@ -88,4 +88,3 @@ preparation: |-
 prepAlt: []
 publishDate: 2025-06-04T18:15:00.000Z
 ---
-

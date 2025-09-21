@@ -8,7 +8,7 @@ draft: false
 ingredients:
   - ingredient: origan_fkftyb
     quantite: 40
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: olives-noires-a-la-grecque_9p3n36
     quantite: 1
@@ -28,7 +28,7 @@ ingredients:
     commentaire: ''
   - ingredient: huile-dolive_h3c8al
     quantite: 3
-    unit: litre
+    unit: l.
     commentaire: ''
 layout: recettes
 materiel:

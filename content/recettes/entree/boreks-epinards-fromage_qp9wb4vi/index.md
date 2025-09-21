@@ -10,19 +10,19 @@ draft: false
 ingredients:
   - ingredient: sesame-blanc_1uz8x5
     quantite: 300
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: fromage-frais_0d5y4q
     quantite: 700
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: ail_u2m28w
     quantite: 5
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: oignon_rtavky
     quantite: 500
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: epinard_4totf1
     quantite: 1
@@ -38,7 +38,7 @@ ingredients:
     commentaire: ''
   - ingredient: lait-entier_dbbjuu
     quantite: 0.33
-    unit: litre
+    unit: l.
     commentaire: ''
   - ingredient: pate-filo-1-feuille_x6je0g
     quantite: 15

@@ -25,7 +25,7 @@ ingredients:
     commentaire: ''
   - ingredient: creme-florette_k6zm70
     quantite: 2.5
-    unit: litre
+    unit: l.
     commentaire: ''
   - ingredient: basilic_s8j4ff
     quantite: 5

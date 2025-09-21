@@ -32,11 +32,11 @@ ingredients:
     commentaire: ''
   - ingredient: algue-kombu-sechee_cd0g12
     quantite: 30
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: champignon-noir_hlihcc
     quantite: 500
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: aubergine_7sk3a5
     quantite: 18
@@ -44,11 +44,11 @@ ingredients:
     commentaire: ''
   - ingredient: champignon-shiitake-seche_7b8r4n
     quantite: 500
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: eau_ljzb7j
     quantite: 52
-    unit: litre
+    unit: l.
     commentaire: ''
   - ingredient: tofu-ferme_3ahcls
     quantite: 4
@@ -66,11 +66,11 @@ preparation: |-
 
   Préparer l'autre moitié des aubergines, retirer le pédoncule, les couper en deux dans le sens de la longueur, puis les découper en tranches et enfin en lanières. Les disposer dans les plats à gastro. Saler, poivrer puis verser un généreux filet l’huile. Mélanger à la main pour bien enrober. Enfournez à 150°C pendant 45 minutes à une heure. Laisser à découvert pendant les 10 premières minutes, puis couvrir d’un papier aluminium ou d’une feuille de cuisson afin que les légumes cuisent à couvert.
 
-  Retirer les shiitakés  du dashi, les couper finement et les replonger dans la gamelle . Placer le bouillon dashi sur le feu, faire chauffer sans jamais porter à ébullition. 
+  Retirer les shiitakés  du dashi, les couper finement et les replonger dans la gamelle . Placer le bouillon dashi sur le feu, faire chauffer sans jamais porter à ébullition.
 
   Faire tremper les champignons noirs au moins 30min, les rincer correctement puis les émincer. Verser dans le dashi.
 
-  Couper le tofu en dés d'un peu moins d'1cm. 
+  Couper le tofu en dés d'un peu moins d'1cm.
 
   Effeuiller le shizo.
 

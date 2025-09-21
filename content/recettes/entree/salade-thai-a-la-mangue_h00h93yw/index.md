@@ -19,7 +19,7 @@ checkAlwaysOk: false
 ingredients:
   - ingredient: nouilles-de-riz_mesg7t
     quantite: 200
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: huile-de-sesame_fazth1
     quantite: 1
@@ -51,7 +51,7 @@ ingredients:
     commentaire: ''
   - ingredient: poivron-rouge_0zglpj
     quantite: 150
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: carotte_eouu0v
     quantite: 1

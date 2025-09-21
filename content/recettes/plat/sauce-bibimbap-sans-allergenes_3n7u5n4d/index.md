@@ -21,7 +21,7 @@ ingredients:
     commentaire: ''
   - ingredient: gochujang-sans-gluten_28jpdi
     quantite: 250
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: sirop-derable_zkmmgt
     quantite: 125
@@ -37,7 +37,7 @@ ingredients:
     commentaire: ''
   - ingredient: gingembre-bio_nz839c
     quantite: 80
-    unit: grammes
+    unit: gr.
     commentaire: râpé
   - ingredient: ail_u2m28w
     quantite: 8

@@ -27,11 +27,11 @@ ingredients:
     commentaire: ''
   - ingredient: sel_2juq3x
     quantite: 275
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: menthe-sechee_uid60d
     quantite: 275
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: huile-dolive_h3c8al
     quantite: 880
@@ -39,7 +39,7 @@ ingredients:
     commentaire: ''
   - ingredient: fecule-de-mais-maizena_8nbcjp
     quantite: 220
-    unit: grammes
+    unit: gr.
     commentaire: ''
 preparation: |-
   **sauce lactose:**

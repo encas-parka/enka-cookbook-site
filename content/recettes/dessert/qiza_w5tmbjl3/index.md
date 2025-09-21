@@ -16,7 +16,7 @@ check: Oui
 ingredients:
   - ingredient: huile-dolive_h3c8al
     quantite: 1
-    unit: litre
+    unit: l.
     commentaire: ''
   - ingredient: semoule-fine-ble_mltl42
     quantite: 2
@@ -40,7 +40,7 @@ ingredients:
     commentaire: ''
   - ingredient: eau_ljzb7j
     quantite: 3
-    unit: litre
+    unit: l.
     commentaire: ''
   - ingredient: graine-de-nigelle_obd7fb
     quantite: 1
@@ -48,15 +48,15 @@ ingredients:
     commentaire: ''
   - ingredient: amande_fuhtcw
     quantite: 500
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: levure-chimique_vgec6e
     quantite: 50
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: farine-de-ble_2av6w8
     quantite: 500
-    unit: grammes
+    unit: gr.
     commentaire: ''
 preparation: |-
   ### Préparation
@@ -103,4 +103,3 @@ checkAlwaysOk: false
 regime:
   - vegan
 ---
-

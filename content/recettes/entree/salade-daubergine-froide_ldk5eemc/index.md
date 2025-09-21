@@ -37,7 +37,7 @@ ingredients:
     commentaire: ''
   - ingredient: huile-dolive_h3c8al
     quantite: 1.3
-    unit: litre
+    unit: l.
     commentaire: ''
 preparation: |-
 

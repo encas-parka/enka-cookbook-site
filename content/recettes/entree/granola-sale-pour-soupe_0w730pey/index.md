@@ -16,11 +16,11 @@ checkAlwaysOk: false
 ingredients:
   - ingredient: graines-de-sesame-blanc_z9plfy
     quantite: 250
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: graine-de-courge
     quantite: 250
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: flocons-davoine_ovewgk
     quantite: 1
@@ -28,19 +28,19 @@ ingredients:
     commentaire: ''
   - ingredient: thym_a16yd7
     quantite: 15
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: paprika_bidsmu
     quantite: 15
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: concentre-de-tomate_mck2wl
     quantite: 100
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: miso-dorge_z8jaad
     quantite: 100
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: huile-dolive_h3c8al
     quantite: 180

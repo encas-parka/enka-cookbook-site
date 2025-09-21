@@ -60,7 +60,7 @@ ingredients:
     commentaire: Galettes crique
   - ingredient: huile-de-friture_1ej217
     quantite: 20
-    unit: litre
+    unit: l.
     commentaire: ''
   - ingredient: oeuf_zf3zf8
     quantite: 30
@@ -96,4 +96,3 @@ preparation: |-
   Frites
 publishDate: 2025-06-19T11:10:00.000Z
 ---
-

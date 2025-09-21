@@ -34,15 +34,15 @@ ingredients:
     commentaire: ''
   - ingredient: lait-de-soja_gpeob7
     quantite: 1
-    unit: litre
+    unit: l.
     commentaire: ''
   - ingredient: levure-chimique_vgec6e
     quantite: 100
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: huile-de-friture_1ej217
     quantite: 10
-    unit: litre
+    unit: l.
     commentaire: ''
   - ingredient: oeuf_zf3zf8
     quantite: 24
@@ -66,7 +66,7 @@ ingredients:
     commentaire: au gout
   - ingredient: piment-oiseau_9qrveq
     quantite: 2
-    unit: grammes
+    unit: gr.
     commentaire: attention, très fort
 materiel:
   - Friteuse
@@ -78,4 +78,3 @@ preparation: |-
   * La pate ne doit pas être trop liquide, hop passer en friture
 publishDate: 2024-05-28T11:09:00.000Z
 ---
-

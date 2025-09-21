@@ -48,7 +48,7 @@ ingredients:
     commentaire: 1 ou 2 bottes de coriandre
   - ingredient: jus-de-citron_e4mjd1
     quantite: 1
-    unit: litre
+    unit: l.
     commentaire: ''
 preparation: |-
   Faire cuire les pois chiche mais qu'ils restent fermes

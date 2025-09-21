@@ -25,11 +25,11 @@ ingredients:
     commentaire: ''
   - ingredient: huile-dolive_h3c8al
     quantite: 1.1
-    unit: litre
+    unit: l.
     commentaire: ''
   - ingredient: vinaigre-de-vin_bjuxby
     quantite: 1
-    unit: litre
+    unit: l.
     commentaire: ''
   - ingredient: piment-vert_dr1bbg
     quantite: 17.1
@@ -49,7 +49,7 @@ ingredients:
     commentaire: ''
   - ingredient: jus-de-citron_e4mjd1
     quantite: 1
-    unit: litre
+    unit: l.
     commentaire: ''
 preparation: |-
   Préchauffer le four à 210°
@@ -76,4 +76,3 @@ preparation: |-
   AU DERNIER MOMENT, ajouter les herbes hachées, le jus d e citron, l'ail frit.
 publishDate: 2025-06-04T19:09:00.000Z
 ---
-

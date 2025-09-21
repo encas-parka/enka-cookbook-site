@@ -32,22 +32,22 @@ ingredients:
     commentaire: ''
   - ingredient: vinaigre-balsamique_qemlqs
     quantite: 0.25
-    unit: litre
+    unit: l.
     commentaire: ''
   - ingredient: sucre-en-poudre_u9z2he
     quantite: 250
-    unit: grammes
+    unit: gr.
     commentaire: ''
 materiel:
   - Bruleur
   - Marmitte
   - Plat Paela
 preparation: |-
-  * Rincer puis faire tremper les pois cassés *pendant une heure*. 
-  * Puis les faire revenir rapidement une grande casserole avec de l'huile d'olive (bien remuer en permanence) avant d'ajouter 2 fois leur volume d'eau. 
-  * Porter à ébullition puis baisser le feu et laisser cuire pendant une heure environ. 
-  * Pendant ce temps, faire revenir les oignons coupés assez petits dans une poele. 
-  * Une fois translucides saupoudrer de sucre et laisser caraméliser en remuant de temps en temps. Quand c'est bien chaud, déglacer avec le vinaigre. 
+  * Rincer puis faire tremper les pois cassés *pendant une heure*.
+  * Puis les faire revenir rapidement une grande casserole avec de l'huile d'olive (bien remuer en permanence) avant d'ajouter 2 fois leur volume d'eau.
+  * Porter à ébullition puis baisser le feu et laisser cuire pendant une heure environ.
+  * Pendant ce temps, faire revenir les oignons coupés assez petits dans une poele.
+  * Une fois translucides saupoudrer de sucre et laisser caraméliser en remuant de temps en temps. Quand c'est bien chaud, déglacer avec le vinaigre.
   * Laisser bouillir et évaporer le liquide avant de remuer.
   * Mixer les pois cassés et y ajouter les oignons.
 publishDate: 2023-01-11T14:25:46.288Z

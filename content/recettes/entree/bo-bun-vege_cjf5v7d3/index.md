@@ -37,15 +37,15 @@ ingredients:
     commentaire: ''
   - ingredient: algue-kombu_oafcb5
     quantite: 15
-    unit: grammes
+    unit: gr.
     commentaire: sauce
   - ingredient: gingembre_0d1fzw
     quantite: 150
-    unit: grammes
+    unit: gr.
     commentaire: sauce
   - ingredient: ail_u2m28w
     quantite: 420
-    unit: grammes
+    unit: gr.
     commentaire: sauce
   - ingredient: ail_u2m28w
     quantite: 18
@@ -53,7 +53,7 @@ ingredients:
     commentaire: Chunks laqués
   - ingredient: eau_ljzb7j
     quantite: 20
-    unit: litre
+    unit: l.
     commentaire: chaude
   - ingredient: proteines-de-soja_6m90g7
     quantite: 1.5
@@ -69,7 +69,7 @@ ingredients:
     commentaire: ''
   - ingredient: jus-dorange_gzi2ry
     quantite: 3
-    unit: litre
+    unit: l.
     commentaire: chunks laqués
   - ingredient: sucre-en-poudre_u9z2he
     quantite: 3
@@ -77,19 +77,19 @@ ingredients:
     commentaire: sauce
   - ingredient: sucre-en-poudre_u9z2he
     quantite: 250
-    unit: grammes
+    unit: gr.
     commentaire: chunks laqués
   - ingredient: vinaigre-de-riz_k6injl
     quantite: 3
-    unit: litre
+    unit: l.
     commentaire: sauce
   - ingredient: poivre-noir-moulu_rgt7s4
     quantite: 12
-    unit: grammes
+    unit: gr.
     commentaire: chunks laqués
   - ingredient: melange-4-epices_dex52s
     quantite: 20
-    unit: grammes
+    unit: gr.
     commentaire: chunks laqués
   - ingredient: menthe_2j9y2v
     quantite: 5
@@ -101,7 +101,7 @@ ingredients:
     commentaire: Grosses bottes
   - ingredient: tamari-sauce_bbwo4n
     quantite: 1.5
-    unit: litre
+    unit: l.
     commentaire: sauce
 materiel:
   - Plat Paela
@@ -122,7 +122,7 @@ preparation: |-
   Possible 1 J avant
 
   * Faire chauffer l'eau sans la bouillir en infusant l'algue Kombu minimum 20min.
-  * Mettre dans une gamelle, l'ail pressé,  le sucre, le jus de citrons verts, le vinaigre,jusqu'à ce que le sucre se dissolve. 
+  * Mettre dans une gamelle, l'ail pressé,  le sucre, le jus de citrons verts, le vinaigre,jusqu'à ce que le sucre se dissolve.
   * Ajoutez la sauce tamari, l'eau, l'algueet les échalottes hâchées menues.
   * Mélanger et réserver au frais.
 
@@ -146,7 +146,7 @@ preparation: |-
 
   **ASSEMBLAGE DU BO BUN :**
 
-  \- les nouilles au fond d'un gros bol et arroser d'une louche de sauce. 
+  \- les nouilles au fond d'un gros bol et arroser d'une louche de sauce.
 
   \- les légumes crus (carottes, concombre et salade) autour des nouilles ainsi que les chunks, cacahuètes et coriandre et menthe.
 astuces:

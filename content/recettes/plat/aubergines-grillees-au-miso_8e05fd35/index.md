@@ -9,7 +9,7 @@ img: img_20210902_154005.jpg
 ingredients:
   - ingredient: miso_3zdyyy
     quantite: 100
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: vinaigre-de-riz_k6injl
     quantite: 50
@@ -21,7 +21,7 @@ ingredients:
     commentaire: ''
   - ingredient: sesame-dore_h3g82r
     quantite: 0.01
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: sauce-soja_jjrwlj
     quantite: 1
@@ -29,7 +29,7 @@ ingredients:
     commentaire: ''
   - ingredient: cebette-ciboule-cive-oignon-vert_j7as8d
     quantite: 50
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: aubergine_7sk3a5
     quantite: 1.3

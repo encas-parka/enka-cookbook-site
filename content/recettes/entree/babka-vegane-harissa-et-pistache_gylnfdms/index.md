@@ -10,7 +10,7 @@ draft: false
 ingredients:
   - ingredient: sel_2juq3x
     quantite: 65
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: harissa_4n95t5
     quantite: 1
@@ -18,15 +18,15 @@ ingredients:
     commentaire: garniture
   - ingredient: levure-fraiche-de-boulanger_7qqcwc
     quantite: 300
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: huile-vegetale_atccqu
     quantite: 2
-    unit: litre
+    unit: l.
     commentaire: garniture
   - ingredient: huile-vegetale_atccqu
     quantite: 1
-    unit: litre
+    unit: l.
     commentaire: ''
   - ingredient: farine-de-ble_2av6w8
     quantite: 5.8
@@ -34,7 +34,7 @@ ingredients:
     commentaire: ''
   - ingredient: lait-de-soja_gpeob7
     quantite: 4
-    unit: litre
+    unit: l.
     commentaire: ''
   - ingredient: pistache-emmondee_q7adw3
     quantite: 1
@@ -42,7 +42,7 @@ ingredients:
     commentaire: garniture
   - ingredient: sucre-en-poudre_u9z2he
     quantite: 800
-    unit: grammes
+    unit: gr.
     commentaire: ''
 layout: recettes
 plate: 100
@@ -61,7 +61,7 @@ preparation: |-
 
   Ensuite, deux options s’offrent, soit la brioche est cuite et dégustée le jour-même, dans ce cas, laisser pousser la pâte à température ambiante jusqu’à ce qu’elle double de volume (le temps de levé peut varier entre 1h30 et 3h selon la température ambiante, plus il fait chaud et plus la pâte lèvera rapidement).
 
-  Ou deuxième option, si elle doit être cuire et la déguster le lendemain, la laisser lever toute la nuit au réfrigérateur 
+  Ou deuxième option, si elle doit être cuire et la déguster le lendemain, la laisser lever toute la nuit au réfrigérateur
 
   Après ce temps de repos, la pâte doit au moins avoir doublé de volume.
 
@@ -85,4 +85,3 @@ temperature: Froid
 title: BABKA VEGANE HARISSA ET PISTACHE
 type: entree
 ---
-

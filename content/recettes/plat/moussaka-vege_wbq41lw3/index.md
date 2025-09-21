@@ -34,7 +34,7 @@ ingredients:
     commentaire: ''
   - ingredient: beurre-demi-sel_mxub21
     quantite: 500
-    unit: grammes
+    unit: gr.
     commentaire: Béchamel
   - ingredient: parmigiano_cr4ai3
     quantite: 1.5
@@ -50,11 +50,11 @@ ingredients:
     commentaire: ''
   - ingredient: farine-de-ble_2av6w8
     quantite: 500
-    unit: grammes
+    unit: gr.
     commentaire: Béchamel
   - ingredient: lait-demi-ecreme_x286pc
     quantite: 7
-    unit: litre
+    unit: l.
     commentaire: Béchamel
   - ingredient: sauce-tomate-mutti_xdkeh3
     quantite: 11

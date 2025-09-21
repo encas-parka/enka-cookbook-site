@@ -22,11 +22,11 @@ ingredients:
     commentaire: ''
   - ingredient: eau_ljzb7j
     quantite: 30
-    unit: litre
+    unit: l.
     commentaire: bouillon
   - ingredient: eau_ljzb7j
     quantite: 5
-    unit: litre
+    unit: l.
     commentaire: pour les oignons. au juger
   - ingredient: tahin_u33083
     quantite: 1.1
@@ -34,23 +34,23 @@ ingredients:
     commentaire: ''
   - ingredient: tamari-sauce_bbwo4n
     quantite: 1
-    unit: litre
+    unit: l.
     commentaire: soupe
   - ingredient: poivre-blanc-moulue_7lakpz
     quantite: 30
-    unit: grammes
+    unit: gr.
     commentaire: soupe
   - ingredient: sel_2juq3x
     quantite: 360
-    unit: grammes
+    unit: gr.
     commentaire: soupe
   - ingredient: cumin-moulu_he3u48
     quantite: 50
-    unit: grammes
+    unit: gr.
     commentaire: soupe
   - ingredient: coriandre-en-poudre_nf05n7
     quantite: 50
-    unit: grammes
+    unit: gr.
     commentaire: soupe
   - ingredient: citronnelle-baton_t2e14k
     quantite: 8
@@ -66,27 +66,27 @@ ingredients:
     commentaire: ''
   - ingredient: sesame_mo4efz
     quantite: 500
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: piment-despelette_bdx3gq
     quantite: 50
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: poivre-de-sichuan_93rauy
     quantite: 100
-    unit: grammes
+    unit: gr.
     commentaire: moulue
   - ingredient: tamari-sauce_bbwo4n
     quantite: 2.2
-    unit: litre
+    unit: l.
     commentaire: ''
   - ingredient: vinaigre-de-riz-noir_cx8yxn
     quantite: 1.7
-    unit: litre
+    unit: l.
     commentaire: ''
   - ingredient: celeri-branche_78fo97
     quantite: 600
-    unit: grammes
+    unit: gr.
     commentaire: soupe
   - ingredient: poireau_l3fs10
     quantite: 1
@@ -98,7 +98,7 @@ ingredients:
     commentaire: soupe
   - ingredient: gingembre-bio_nz839c
     quantite: 300
-    unit: grammes
+    unit: gr.
     commentaire: soupe
   - ingredient: ail_u2m28w
     quantite: 5
@@ -114,11 +114,11 @@ ingredients:
     commentaire: ''
   - ingredient: jus-de-citron_e4mjd1
     quantite: 1
-    unit: litre
+    unit: l.
     commentaire: soupe
   - ingredient: sucre-en-poudre_u9z2he
     quantite: 300
-    unit: grammes
+    unit: gr.
     commentaire: ''
 preparation: |-
   **Poulet Guai wei ji** : Découper les poulets. Détacher les cuisses le long du tronc. Entailler d’abord la peau puis coupe à hauteur de l’articulation.  Détacher les ailes du tronc de la même manière que les cuisses. Laisser les ailes entières. Détacher la poitrine des deux côtés, en coupant prudemment le long du sternum. Garder les carcasses.
@@ -127,7 +127,7 @@ preparation: |-
 
   Porter le tout à ébullition, puis baisser le feu, mettre un couvercle et laisser cuire à feu doux pendant 30min.
 
-  A la fin de cuisson, égoutter le poulet et réserver dans des gastros. Garder le bouillon dans la gamelle et y replonger les carcasses. 
+  A la fin de cuisson, égoutter le poulet et réserver dans des gastros. Garder le bouillon dans la gamelle et y replonger les carcasses.
 
   Laisser refroidir la viande. Puis effilocher en très fines lamelles avec les mains.
 
@@ -143,9 +143,9 @@ preparation: |-
 
   Allumer le feu ! Moyen.
 
-  Emincer finement les poireaux, échalottes et le céleri. Verser dans le bouillon avec les carcasses. 
+  Emincer finement les poireaux, échalottes et le céleri. Verser dans le bouillon avec les carcasses.
 
-  Hacher le gingembre et l'ail. Verser dans la gamelle. 
+  Hacher le gingembre et l'ail. Verser dans la gamelle.
 
   Casser les bâtons de citronnelle et plonger de même.
 

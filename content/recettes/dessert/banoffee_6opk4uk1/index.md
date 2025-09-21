@@ -28,7 +28,7 @@ ingredients:
     commentaire: ''
   - ingredient: creme-fraiche-liquide-entiere_6tnb6h
     quantite: 4
-    unit: litre
+    unit: l.
     commentaire: ''
   - ingredient: lait-concentre-sucre_5dcfzk
     quantite: 3
@@ -36,7 +36,7 @@ ingredients:
     commentaire: ''
   - ingredient: sucre-en-poudre_u9z2he
     quantite: 280
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: speculoos_h6thsp
     quantite: 3
@@ -85,4 +85,3 @@ prepAlt:
   - recetteAlt: banoffee-vegan-et-sans-gluten_hm1nmbb6
 publishDate: 2024-05-17T18:26:00.000Z
 ---
-

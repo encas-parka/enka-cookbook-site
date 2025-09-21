@@ -21,7 +21,7 @@ checkfor: 170
 ingredients:
   - ingredient: gingembre_0d1fzw
     quantite: 200
-    unit: grammes
+    unit: gr.
     commentaire: ''
   - ingredient: ail_u2m28w
     quantite: 25
@@ -33,7 +33,7 @@ ingredients:
     commentaire: ''
   - ingredient: eau_ljzb7j
     quantite: 7
-    unit: litre
+    unit: l.
     commentaire: ''
   - ingredient: tahin_u33083
     quantite: 1.13
@@ -61,7 +61,7 @@ ingredients:
     commentaire: ''
   - ingredient: farine-de-riz-blanche_1nb85u
     quantite: 550
-    unit: grammes
+    unit: gr.
     commentaire: ''
 materiel:
   - Four

@@ -1,6 +1,6 @@
 ---
 title: QIZHA
-draft: false
+draft: true
 description: ''
 layout: recettes
 type: dessert
@@ -14,13 +14,13 @@ plate: 200
 quantite_desc: ''
 check: Oui
 ingredients:
-  - ingredient: huile-dolive_h3c8al
-    quantite: 1
-    unit: l.
-    commentaire: ''
   - ingredient: semoule-fine-ble_mltl42
     quantite: 2
     unit: Kg
+    commentaire: ''
+  - ingredient: huile-dolive_h3c8al
+    quantite: 1.5
+    unit: l.
     commentaire: ''
   - ingredient: sucre-de-canne-blond_n85gmi
     quantite: 1.5

@@ -1,5 +1,5 @@
 ---
-title: qizha et melon
+title: qizha
 draft: false
 description: ''
 layout: recettes
@@ -10,7 +10,7 @@ auteur: ''
 region: ''
 cuisson: Oui
 temperature: Froid
-plate: 300
+plate: 200
 quantite_desc: ''
 check: Oui
 ingredients:
@@ -21,10 +21,6 @@ ingredients:
   - ingredient: semoule-fine-ble_mltl42
     quantite: 2
     unit: Kg
-    commentaire: ''
-  - ingredient: melon_on84nb
-    quantite: 20
-    unit: unité
     commentaire: ''
   - ingredient: sucre-de-canne-blond_n85gmi
     quantite: 1.5
@@ -103,3 +99,4 @@ checkAlwaysOk: false
 regime:
   - vegan
 ---
+

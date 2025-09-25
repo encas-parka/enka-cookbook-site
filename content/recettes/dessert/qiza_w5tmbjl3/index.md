@@ -1,5 +1,5 @@
 ---
-title: qizha
+title: QIZHA
 draft: false
 description: ''
 layout: recettes

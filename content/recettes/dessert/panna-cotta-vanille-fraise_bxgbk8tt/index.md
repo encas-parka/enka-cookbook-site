@@ -1,11 +1,17 @@
 ---
-auteur: Auré
+title: PANNA COTTA VANILLE - FRAISE VEGAN
+draft: false
+description: ''
+layout: recettes
+type: dessert
 categories:
   - Sucrée
-check: Non
-checkAlwaysOk: false
+auteur: Auré
+region: ''
 cuisson: Oui
-draft: false
+temperature: Froid
+plate: 100
+check: Non
 ingredients:
   - ingredient: agar-agar_ruhtax
     quantite: 40
@@ -43,10 +49,8 @@ ingredients:
     quantite: 800
     unit: gr.
     commentaire: ''
-layout: recettes
 materiel:
   - ramequins
-plate: 100
 preparation: |-
   Dans une casserole, mélanger le sucre, l'extrait de vanille, les gousses de vanille fendues et raclées, la crème soja et le lait de soja.
 
@@ -63,10 +67,9 @@ preparation: |-
   Verser une cuillère à soupe de gelée sur chaque panna cotta.
 preparation24h: A faire la veille si le service est à midi.
 publishDate: 2024-06-17T19:25:00.000Z
+checkAlwaysOk: false
 regime:
   - vegan
   - sans-gluten
-temperature: Froid
-title: PANNA COTTA VANILLE - FRAISE
-type: dessert
 ---
+

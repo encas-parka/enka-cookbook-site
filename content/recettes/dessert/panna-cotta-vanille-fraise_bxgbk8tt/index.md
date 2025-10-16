@@ -1,5 +1,5 @@
 ---
-title: PANNA COTTA VANILLE - FRAISE VEGAN
+title: PANNA COTTA  VEGAN VANILLE - FRAISE
 draft: false
 description: ''
 layout: recettes

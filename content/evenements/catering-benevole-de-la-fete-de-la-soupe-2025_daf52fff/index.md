@@ -2,6 +2,78 @@
 title: Catering bénévole de la fête de la soupe 2025
 sitemap_exclude: 'true'
 repas:
+  - date_service: 2025-10-25T19:00:00
+    horaire: soir
+    assiettes: 130
+    recettes_du_repas:
+      - recette: couscous-d-automne-vegetarien_18896c97733b
+        type_plat: plat
+        altAssiettes: null
+        chef: Boubakar
+        partof: ''
+        commentaire: ''
+      - recette: salade-de-crudites-chou-chinois-pommes-carottes-betteraves_f120bb931355
+        type_plat: entree
+        altAssiettes: null
+        chef: Boubakar
+        partof: ''
+        commentaire: ''
+  - date_service: 2025-10-25T11:30:00
+    horaire: midi
+    assiettes: 120
+    recettes_du_repas:
+      - recette: banoffee-vegan-et-sans-gluten_hm1nmbb6
+        type_plat: dessert
+        altAssiettes: null
+        chef: Jim
+        partof: ''
+        commentaire: ''
+      - recette: salade-fatouche_765b52ed2fe5
+        type_plat: plat
+        altAssiettes: null
+        chef: Yassine
+        partof: ''
+        commentaire: ''
+      - recette: houmous-de-betterave-aux-cranberries-et-balsamique_edc9f445-939e-453b-a3d0-0624e2c07e34
+        type_plat: entree
+        altAssiettes: null
+        chef: ''
+        partof: ''
+        commentaire: ''
+      - recette: falafel-de-lulu_bac80dbf1a3c
+        type_plat: plat
+        altAssiettes: null
+        chef: Lulu
+        partof: ''
+        commentaire: ''
+      - recette: babka-vegane-harissa-et-pistache_gylnfdms
+        type_plat: entree
+        altAssiettes: 60
+        chef: Auré
+        partof: ''
+        commentaire: ''
+  - date_service: 2025-10-24T19:00:00
+    horaire: soir
+    assiettes: 130
+    recettes_du_repas:
+      - recette: beignet-sauce-cacahuete_cc4f99e22180
+        type_plat: dessert
+        altAssiettes: null
+        chef: Manuella
+        partof: ''
+        commentaire: ''
+      - recette: tajine-olives-citron-avec-pate-langues-d-oiseaux-orzo_d530015916b0
+        type_plat: plat
+        altAssiettes: null
+        chef: Boubakeur
+        partof: ''
+        commentaire: ''
+      - recette: houmous_5f3ada9bde90
+        type_plat: entree
+        altAssiettes: null
+        chef: Boubakeur
+        partof: ''
+        commentaire: ''
   - date_service: 2025-10-24T11:30:00
     horaire: midi
     assiettes: 90

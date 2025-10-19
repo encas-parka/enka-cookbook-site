@@ -16,6 +16,10 @@ plate: 100
 quantite_desc: ''
 check: Non
 ingredients:
+  - ingredient: huile-d-arachide_8d1cfa5bf2ae
+    quantite: 0.9
+    unit: l.
+    commentaire: ''
   - ingredient: beurre-de-cacahuetes-sucre_7wpsj2
     quantite: 1.8
     unit: Kg

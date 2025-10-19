@@ -6,6 +6,12 @@ repas:
     horaire: soir
     assiettes: 130
     recettes_du_repas:
+      - recette: flan-libanais-vegan_442fc9052846
+        type_plat: dessert
+        altAssiettes: null
+        chef: Nini
+        partof: ''
+        commentaire: ''
       - recette: couscous-d-automne-vegetarien_18896c97733b
         type_plat: plat
         altAssiettes: null

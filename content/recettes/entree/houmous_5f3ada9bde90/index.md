@@ -1,5 +1,5 @@
 ---
-title: Houmous
+title: Houmous pois chiche
 draft: false
 img: ''
 description: Entrée pour le catering de la fête de la soupe 2025

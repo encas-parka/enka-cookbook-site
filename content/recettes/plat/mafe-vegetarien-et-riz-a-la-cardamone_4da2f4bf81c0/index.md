@@ -20,6 +20,10 @@ plate: 100
 quantite_desc: ''
 check: Non
 ingredients:
+  - ingredient: pate-d-arachide_6778796eb8d8
+    quantite: 3.5
+    unit: Kg
+    commentaire: Dakatine pour les vrai·e·s
   - ingredient: riz-basmati_opblzb
     quantite: 6
     unit: Kg

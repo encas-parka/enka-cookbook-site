@@ -102,31 +102,31 @@ repas:
     recettes_du_repas:
       - recette: banoffee_6opk4uk1
         type_plat: dessert
-        altAssiettes: 120
+        altAssiettes: null
         chef: Jim
         partof: ''
         commentaire: ''
       - recette: salade-fatouche_765b52ed2fe5
         type_plat: plat
-        altAssiettes: 120
+        altAssiettes: null
         chef: Yassine
         partof: ''
         commentaire: ''
       - recette: houmous-de-betterave-aux-cranberries-et-balsamique_edc9f445-939e-453b-a3d0-0624e2c07e34
         type_plat: entree
-        altAssiettes: 120
+        altAssiettes: null
         chef: ''
         partof: ''
         commentaire: ''
       - recette: falafel-de-lulu_bac80dbf1a3c
         type_plat: plat
-        altAssiettes: 120
+        altAssiettes: null
         chef: Lulu
         partof: ''
         commentaire: ''
       - recette: babka-vegane-harissa-et-pistache_gylnfdms
         type_plat: entree
-        altAssiettes: 60
+        altAssiettes: null
         chef: Auré
         partof: ''
         commentaire: ''
@@ -136,19 +136,19 @@ repas:
     recettes_du_repas:
       - recette: flan-libanais-vegan_442fc9052846
         type_plat: dessert
-        altAssiettes: 130
+        altAssiettes: null
         chef: Nini
         partof: ''
         commentaire: ''
       - recette: couscous-d-automne-vegetarien_18896c97733b
         type_plat: plat
-        altAssiettes: 130
+        altAssiettes: null
         chef: Boubakar
         partof: ''
         commentaire: ''
       - recette: salade-de-crudites-chou-chinois-pommes-carottes-betteraves_f120bb931355
         type_plat: entree
-        altAssiettes: 130
+        altAssiettes: null
         chef: Boubakar
         partof: ''
         commentaire: ''

@@ -8,19 +8,19 @@ repas:
     recettes_du_repas:
       - recette: flan-libanais-vegan_442fc9052846
         type_plat: dessert
-        altAssiettes: null
+        altAssiettes: 130
         chef: Nini
         partof: ''
         commentaire: ''
       - recette: couscous-d-automne-vegetarien_18896c97733b
         type_plat: plat
-        altAssiettes: null
+        altAssiettes: 130
         chef: Boubakar
         partof: ''
         commentaire: ''
       - recette: salade-de-crudites-chou-chinois-pommes-carottes-betteraves_f120bb931355
         type_plat: entree
-        altAssiettes: null
+        altAssiettes: 130
         chef: Boubakar
         partof: ''
         commentaire: ''
@@ -28,27 +28,27 @@ repas:
     horaire: midi
     assiettes: 120
     recettes_du_repas:
-      - recette: banoffee-vegan-et-sans-gluten_hm1nmbb6
+      - recette: banoffee_6opk4uk1
         type_plat: dessert
-        altAssiettes: null
+        altAssiettes: 120
         chef: Jim
         partof: ''
         commentaire: ''
       - recette: salade-fatouche_765b52ed2fe5
         type_plat: plat
-        altAssiettes: null
+        altAssiettes: 120
         chef: Yassine
         partof: ''
         commentaire: ''
       - recette: houmous-de-betterave-aux-cranberries-et-balsamique_edc9f445-939e-453b-a3d0-0624e2c07e34
         type_plat: entree
-        altAssiettes: null
+        altAssiettes: 120
         chef: ''
         partof: ''
         commentaire: ''
       - recette: falafel-de-lulu_bac80dbf1a3c
         type_plat: plat
-        altAssiettes: null
+        altAssiettes: 120
         chef: Lulu
         partof: ''
         commentaire: ''

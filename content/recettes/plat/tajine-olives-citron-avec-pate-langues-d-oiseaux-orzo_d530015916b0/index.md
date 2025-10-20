@@ -19,7 +19,7 @@ quantite_desc: ''
 check: Non
 ingredients:
   - ingredient: pates-langue-doiseau_hlx995
-    quantite: 6
+    quantite: 8
     unit: Kg
     commentaire: ''
   - ingredient: sel_2juq3x

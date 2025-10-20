@@ -25,7 +25,7 @@ ingredients:
     unit: Kg
     commentaire: Dakatine pour les vrai·e·s
   - ingredient: riz-basmati_opblzb
-    quantite: 6
+    quantite: 8
     unit: Kg
     commentaire: ''
   - ingredient: gingembre_0d1fzw

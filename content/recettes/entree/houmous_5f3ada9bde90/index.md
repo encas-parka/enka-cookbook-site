@@ -38,7 +38,7 @@ ingredients:
     commentaire: ''
   - ingredient: pois-chiches_6a8w8k
     quantite: 1.8
-    unit: gr.
+    unit: Kg
     commentaire: poids sec
 materiel: []
 preparation: |-

@@ -37,7 +37,7 @@ ingredients:
     unit: gr.
     commentaire: ''
   - ingredient: semoule-moyenne-ble_yx78ae
-    quantite: 6
+    quantite: 8
     unit: Kg
     commentaire: ''
   - ingredient: sel_2juq3x

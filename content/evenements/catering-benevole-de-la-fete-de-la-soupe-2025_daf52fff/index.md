@@ -4,7 +4,7 @@ sitemap_exclude: 'true'
 repas:
   - date_service: 2025-10-23T11:30:00
     horaire: midi
-    assiettes: 40
+    assiettes: 45
     recettes_du_repas:
       - recette: lassi-vegan-a-la-mangue_073807647055
         type_plat: dessert
@@ -26,7 +26,7 @@ repas:
         commentaire: ''
   - date_service: 2025-10-23T19:00:00
     horaire: soir
-    assiettes: 55
+    assiettes: 60
     recettes_du_repas:
       - recette: compote-pommes-poires_22aad0ed9211
         type_plat: dessert
@@ -48,7 +48,7 @@ repas:
         commentaire: ''
   - date_service: 2025-10-24T11:30:00
     horaire: midi
-    assiettes: 90
+    assiettes: 100
     recettes_du_repas:
       - recette: panna-cotta-vegan-a-la-chataigne-chips-de-chocolat_b099198baed3
         type_plat: dessert
@@ -76,7 +76,7 @@ repas:
         commentaire: ''
   - date_service: 2025-10-24T19:00:00
     horaire: soir
-    assiettes: 130
+    assiettes: 140
     recettes_du_repas:
       - recette: beignet-sauce-cacahuete_cc4f99e22180
         type_plat: dessert
@@ -98,7 +98,7 @@ repas:
         commentaire: ''
   - date_service: 2025-10-25T11:30:00
     horaire: midi
-    assiettes: 120
+    assiettes: 130
     recettes_du_repas:
       - recette: banoffee_6opk4uk1
         type_plat: dessert
@@ -132,7 +132,7 @@ repas:
         commentaire: ''
   - date_service: 2025-10-25T19:00:00
     horaire: soir
-    assiettes: 130
+    assiettes: 140
     recettes_du_repas:
       - recette: flan-libanais-vegan_442fc9052846
         type_plat: dessert

@@ -1,13 +1,13 @@
 ---
 title: QIZHA
 draft: true
-description: ''
+description: Une petite part par personne
 layout: recettes
 type: dessert
 categories:
   - Biscuits
-auteur: ''
-region: ''
+auteur: Auré
+region: Palestine
 cuisson: Oui
 temperature: Froid
 plate: 200

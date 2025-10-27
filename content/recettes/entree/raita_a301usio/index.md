@@ -1,20 +1,21 @@
 ---
-title: raita
+title: Raïta (Rainbow Queer Naan)
 draft: false
+description: ''
 layout: recettes
 type: entree
 categories:
   - Tartinade
-regime:
-  - vegetarien
+auteur: Auré
+region: Inde
 saison:
   - printemps
   - ete
 cuisson: Non
 temperature: Froid
 plate: 100
+quantite_desc: ''
 check: Oui
-checkAlwaysOk: false
 ingredients:
   - ingredient: ail_u2m28w
     quantite: 20
@@ -63,4 +64,8 @@ preparation: |-
   \
 prepAlt: []
 publishDate: 2025-06-02T18:02:00.000Z
+checkAlwaysOk: false
+regime:
+  - vegetarien
 ---
+

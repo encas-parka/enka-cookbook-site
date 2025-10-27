@@ -7,7 +7,7 @@ layout: recettes
 type: dessert
 categories:
   - Autre
-auteur: ''
+auteur: Auré
 region: Inde
 saison: []
 cuisson: Non

@@ -1,17 +1,17 @@
 ---
-title: CAROTTE RAPÉES POUR RAINBOW BUFFET
+title: CAROTTE RAPÉES (Rainbow Queer Naan)
 draft: false
+description: ''
 layout: recettes
 type: plat
 categories:
   - Accompagnement
-regime:
-  - vegan
+auteur: ''
+region: ''
 cuisson: Non
 temperature: Froid
 plate: 100
 check: Oui
-checkAlwaysOk: false
 ingredients:
   - ingredient: carotte_eouu0v
     quantite: 10
@@ -19,5 +19,8 @@ ingredients:
     commentaire: ''
 preparation: Pour l'assiette composée arc en ciel
 publishDate: 2025-06-19T19:04:00.000Z
+checkAlwaysOk: false
+regime:
+  - vegan
 ---
 

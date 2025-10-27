@@ -12,7 +12,7 @@ cuisson: Oui
 temperature: Froid
 plate: 60
 quantite_desc: ''
-check: Oui
+check: Non
 ingredients:
   - ingredient: creme-fraiche-liquide-entiere_6tnb6h
     quantite: 1.75

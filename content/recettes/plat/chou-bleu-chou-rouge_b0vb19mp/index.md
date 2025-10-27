@@ -1,5 +1,5 @@
 ---
-title: chou bleu chou rouge
+title: CHOU BLEU, CHOU VIOLET (Rainbow Queer Naan)
 draft: false
 description: ''
 layout: recettes
@@ -14,6 +14,10 @@ plate: 100
 quantite_desc: ''
 check: Oui
 ingredients:
+  - ingredient: chou-blanc_mlukbi
+    quantite: 5
+    unit: Kg
+    commentaire: ''
   - ingredient: ail_u2m28w
     quantite: 4
     unit: tête·s

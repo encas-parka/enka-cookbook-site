@@ -31,15 +31,15 @@ ingredients:
     unit: gr.
     commentaire: ''
   - ingredient: curry-feuilles_xqmcoe
-    quantite: 100
+    quantite: 20
     unit: unité
-    commentaire: ''
+    commentaire: Ou feuilles d'agrumes (kombava, citronnier, pamplemousse...)
   - ingredient: piment-en-flocons_5k7zz4
-    quantite: 40
+    quantite: 50
     unit: gr.
-    commentaire: ''
+    commentaire: Tester la force du piquant
   - ingredient: curcuma-moulu_htp5ma
-    quantite: 30
+    quantite: 150
     unit: gr.
     commentaire: ''
   - ingredient: graine-de-coriandre_crkg3d
@@ -122,8 +122,8 @@ preparation: |-
   \
 preparation24h: ''
 publishDate: 2025-06-02T16:27:00.000Z
-checkfor: null
 checkAlwaysOk: false
+checkfor: null
 regime:
   - vegan
   - sans-gluten

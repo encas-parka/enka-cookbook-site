@@ -1,11 +1,18 @@
 ---
-auteur: Auré
+title: TARTE AUX PRALINES ROSES
+draft: false
+description: ''
+layout: recettes
+type: dessert
 categories:
   - Tarte (sucrée)
-check: Non
-checkAlwaysOk: true
+auteur: Auré
+region: Lyon
 cuisson: Oui
-draft: false
+temperature: Froid
+plate: 100
+quantite_desc: 8 parts par moule d'env. 30cm
+check: Non
 ingredients:
   - ingredient: sel_2juq3x
     quantite: 8
@@ -43,10 +50,8 @@ ingredients:
     quantite: 1.5
     unit: Kg
     commentaire: ''
-layout: recettes
 materiel:
   - moule à tarte
-plate: 100
 preparation: |-
   **Pâte Sucrée** : Chaque pâte devrait peser à peu près 650gr.
 
@@ -78,15 +83,14 @@ preparation: |-
 
   Pour contrôler la texture : Verser une petite quantité dans une assiette, de mettre au frais, et de juger après 1 minute que la crème est assez épaisse (mais pas trop non plus). La texture idéale est assez épaisse (elle doit tenir et ne pas être liquide), mais pas trop prise non plus (sinon elle ne sera pas agréable à manger).
 
+  Si elle reste trop liquide, ajouter de l'agar agar dans l'appareil bouillant. 
+
   Verser dans le fond de tarte. Etaler.
 
   Il ne reste plus qu'à garder au frais afin de faire refroidir
 preparation24h: Faire la pâte sucrée la veille et réserver toute une nuit au frais.
 publishDate: 2024-06-16T21:22:00.000Z
-quantite_desc: 8 parts par moule d'env. 30cm
+checkAlwaysOk: true
 regime: null
-region: Lyon
-temperature: Froid
-title: TARTE AUX PRALINES ROSES
-type: dessert
 ---
+

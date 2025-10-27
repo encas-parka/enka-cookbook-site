@@ -22,15 +22,15 @@ ingredients:
     unit: gr.
     commentaire: ''
   - ingredient: agar-agar_ruhtax
-    quantite: 40
+    quantite: 56
     unit: gr.
     commentaire: ''
   - ingredient: sucre-blanc_lny16c
-    quantite: 800
-    unit: gr.
+    quantite: 1.5
+    unit: Kg
     commentaire: ''
   - ingredient: puree-chataigne-sans-sucre_xm77fg
-    quantite: 2
+    quantite: 4
     unit: Kg
     commentaire: ''
   - ingredient: lait-damande_csxbg6
@@ -44,13 +44,9 @@ ingredients:
 materiel: []
 preparation: |-
   - Faire bouillir le lait d'amande, la crème soja et le sucre
-
   - Ajouter l'agar-agar et laisser bouillir 2 minutes
-
   - Couper la cuisson et rajouter la crème de châtaignes
-
   - Dresser dans des ramequins et réserver une nuit au frigo
-
   - Faire fondre le chocolat au bain marie
 
   -Étaler finement le chocolat fondu sur une feuille de papier cuisson et réserver au frigo pendant une nuit

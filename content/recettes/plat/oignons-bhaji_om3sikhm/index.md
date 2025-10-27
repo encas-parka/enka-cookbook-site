@@ -1,18 +1,19 @@
 ---
-title: oignons bhaji
+title: oignons bhaji (Rainbow Queer Naan)
 draft: false
+description: ''
 layout: recettes
 type: plat
 categories:
   - Friture
-regime:
-  - vegan
-  - sans-gluten
+  - Bouchées salées
+auteur: Auré
+region: Inde
 cuisson: Oui
 temperature: Chaud
-plate: 100
+plate: 130
+quantite_desc: ''
 check: Oui
-checkAlwaysOk: false
 ingredients:
   - ingredient: huile-de-friture_1ej217
     quantite: 7
@@ -79,4 +80,9 @@ preparation: |-
 
   \
 publishDate: 2025-06-02T16:53:00.000Z
+checkAlwaysOk: false
+regime:
+  - vegan
+  - sans-gluten
 ---
+

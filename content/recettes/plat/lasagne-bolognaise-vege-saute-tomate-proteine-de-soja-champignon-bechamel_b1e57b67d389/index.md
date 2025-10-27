@@ -28,10 +28,6 @@ ingredients:
     quantite: 3
     unit: Kg
     commentaire: Le poids triple avec la réhydratation
-  - ingredient: fromage-rape_u1fypr
-    quantite: 3.5
-    unit: Kg
-    commentaire: ''
   - ingredient: farine-de-ble_2av6w8
     quantite: 900
     unit: gr.
@@ -39,6 +35,10 @@ ingredients:
   - ingredient: beurre-doux_kmq1zb
     quantite: 900
     unit: gr.
+    commentaire: ''
+  - ingredient: fromage-rape_u1fypr
+    quantite: 3.5
+    unit: Kg
     commentaire: ''
   - ingredient: lait-demi-ecreme_x286pc
     quantite: 16
@@ -53,11 +53,11 @@ ingredients:
     unit: unité
     commentaire: ''
   - ingredient: sauce-tomate-mutti_xdkeh3
-    quantite: 15
+    quantite: 10
     unit: Kg
     commentaire: ''
   - ingredient: celeri-branche_78fo97
-    quantite: 3
+    quantite: 1.5
     unit: Kg
     commentaire: ''
   - ingredient: carotte_eouu0v
@@ -75,19 +75,12 @@ ingredients:
 materiel: []
 preparation: |-
   - Faire le soffrito (oignon, céleri, carottes) 
-
   - rajouter la protéine de soja réhydratée et les champignons
-
   - Assaisonner avec le mélange d'épices (4 épices, cumin, paprika) C'est ce qui remplacera la saveur "viande"
-
   - ajouter la polpa mutti et le laurier. Rectifier l'assaisonnement et laisser mijoter
-
   - faire la béchamel : faire un roux avec le mélange beurre/farine, ajouter le lait. Laisser s'épaissir à feu très doux.
-
   - monter les étages de lasagne : plaques - ragout - béchamel
-
   - Couvrir de fromage rapé
-
   - faire cuire à 180° pendant 30 min
 preparation24h: ''
 astuces: []

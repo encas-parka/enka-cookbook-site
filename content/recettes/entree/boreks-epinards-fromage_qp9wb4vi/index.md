@@ -1,12 +1,20 @@
 ---
+title: Boreks épinards fromage
+draft: false
+description: ''
+layout: recettes
+type: entree
 categories:
   - Accompagnement
   - Bouchées salées
   - Snacking
-check: Oui
-checkAlwaysOk: true
+auteur: ''
+region: ''
 cuisson: Oui
-draft: false
+temperature: Chaud
+plate: 15
+quantite_desc: 15 couverts = 1 gastro
+check: Oui
 ingredients:
   - ingredient: sesame-blanc_1uz8x5
     quantite: 300
@@ -32,10 +40,6 @@ ingredients:
     quantite: 200
     unit: ml
     commentaire: ''
-  - ingredient: oeuf_zf3zf8
-    quantite: 3
-    unit: unité
-    commentaire: ''
   - ingredient: lait-entier_dbbjuu
     quantite: 0.33
     unit: l.
@@ -44,13 +48,9 @@ ingredients:
     quantite: 15
     unit: unité
     commentaire: ''
-layout: recettes
 materiel:
   - Gastro 1/1 (Normaux)
   - Four
-plate: 15
-prepAlt:
-  - recetteAlt: Boreks épinards vegan
 preparation: |-
   1. Fouetter les oeufs, l'huile et le lait ensemble
   2. Faire revenir les oignons et l'ail, y ajouter les épinards, égoutter avant de mélanger avec le fromage de  façon pas trop lisse ( genre on laisse des bouts)
@@ -58,11 +58,11 @@ preparation: |-
   4. On recommence jusqu'à épuisement des feuilles, pour la dernière on vide le liquide, qu'on fait bien pénétrer et on parsème de sésame;
 
   Au four à 200 jusqu'à ce que tout soit doré, genre 30mn
+prepAlt:
+  - recetteAlt: Boreks épinards vegan
 publishDate: 2024-06-12T12:24:00.000Z
-quantite_desc: 15 couverts = 1 gastro
+checkAlwaysOk: true
 regime:
   - vegetarien
-temperature: Chaud
-title: Boreks épinards fromage
-type: entree
 ---
+

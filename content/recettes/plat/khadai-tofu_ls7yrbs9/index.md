@@ -1,7 +1,7 @@
 ---
 title: Khadaï Tofu (Rainbow Queer Naan)
 draft: false
-description: ''
+description: Quantité pour accompagnement, pas plat principal
 layout: recettes
 type: plat
 categories:

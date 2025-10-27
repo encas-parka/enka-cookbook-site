@@ -1,19 +1,18 @@
 ---
-title: khadai tofu
+title: khadai tofu (Rainbow Queer Naan)
 draft: false
+description: ''
 layout: recettes
 type: plat
 categories:
   - Plat chaud
-regime:
-  - vegan
-  - sans-gluten
+auteur: Auré
 region: inde
 cuisson: Oui
 temperature: Chaud
 plate: 100
+quantite_desc: ''
 check: Oui
-checkAlwaysOk: false
 ingredients:
   - ingredient: tofu-ferme_3ahcls
     quantite: 2
@@ -71,6 +70,33 @@ ingredients:
     quantite: 6
     unit: Kg
     commentaire: ''
-preparation: "### Préparation\n\nChauffer un peu d’huile dans le grand wok. Quand l’huile est chaude, mettre le cumin et l’oignon haché.\n\nQuand les oignons sont dorés, mettre les épices : le curcuma, le curry, \nle paprika, la poudre préalablement préparée, l’ail et le gingembre et \nmélanger.\n\nAjouter la purée de tomates et mélanger.\n\nMettre les autres oignons, les\_ poivrons coupés en morceaux\_ et bien mélanger.\n\nSaler et verser environ 1L d’eau, mélanger.\n\nCouvrir et laisser cuire à feu moyen en mélangeant et en ajoutant un peu\n d’eau de temps en temps. Les poivrons doivent être fondants.\n\nAjouter le tofu coupé en cube et grillé ou frit au préalable dans une poêle et mélanger.\n\nMettre les feuilles de fenugrec en les écrasant, en laissant de côté les brindilles.\n\nAjouter un peu d'eau, mélanger et laisser cuire 5/10 minutes et c’est prêt.\n\n\\"
+preparation: |-
+  ### Préparation
+
+  Chauffer un peu d’huile dans le grand wok. Quand l’huile est chaude, mettre le cumin et l’oignon haché.
+
+  Quand les oignons sont dorés, mettre les épices : le curcuma, le curry, le paprika, la poudre préalablement préparée, l’ail et le gingembre et 
+  mélanger.
+
+  Ajouter la purée de tomates et mélanger.
+
+  Mettre les autres oignons, les  poivrons coupés en morceaux  et bien mélanger.
+
+  Saler et verser environ 1L d’eau, mélanger.
+
+  Couvrir et laisser cuire à feu moyen en mélangeant et en ajoutant un peu
+   d’eau de temps en temps. Les poivrons doivent être fondants.
+
+  Ajouter le tofu coupé en cube et grillé ou frit au préalable dans une poêle et mélanger.
+
+  Mettre les feuilles de fenugrec en les écrasant, en laissant de côté les brindilles.
+
+  Ajouter un peu d'eau, mélanger et laisser cuire 5/10 minutes. Rectifier l'assaisonemen et c’est prêt.
+preparation24h: ''
 publishDate: 2025-06-02T17:33:00.000Z
+checkAlwaysOk: false
+regime:
+  - vegan
+  - sans-gluten
 ---
+

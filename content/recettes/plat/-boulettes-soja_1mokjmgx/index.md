@@ -1,23 +1,19 @@
 ---
-title: 'Boulettes (soja) '
+title: Boulettes de soja (accompagnement pour soupe pho)
 draft: false
+description: ''
 layout: recettes
 type: plat
 categories:
   - Bouchées salées
   - Accompagnement
-regime:
-  - vegetarien
-  - vegan
-  - sans-gluten
-  - sans-lactose
+auteur: Auré
+region: ''
 cuisson: Oui
 temperature: Chaud
 plate: 100
 quantite_desc: 3 boulettes par personne
 check: Oui
-checkAlwaysOk: false
-checkfor: 170
 ingredients:
   - ingredient: gingembre_0d1fzw
     quantite: 200
@@ -76,4 +72,12 @@ preparation: |-
   * Mouiller ses mains, prendre la valeur d'une cuillère à soupe de préparation, former une boule de la grosseur d'une noix en pressant un peu. Posez sur la plaque de cuisson.
   * Faites cuire 15 à 20 minutes voire plus. Elles doivent être légèrement dorées.
 publishDate: 2024-05-18T13:54:00.000Z
+checkfor: 170
+checkAlwaysOk: false
+regime:
+  - vegetarien
+  - vegan
+  - sans-gluten
+  - sans-lactose
 ---
+

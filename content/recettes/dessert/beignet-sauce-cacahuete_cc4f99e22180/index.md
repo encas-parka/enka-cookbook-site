@@ -13,7 +13,7 @@ saison: []
 cuisson: Oui
 temperature: Chaud
 plate: 100
-quantite_desc: ''
+quantite_desc: Pour 4 beignets par personnes (grosse quantité !)
 check: Non
 ingredients:
   - ingredient: huile-d-arachide_8d1cfa5bf2ae
@@ -54,21 +54,27 @@ ingredients:
     commentaire: ''
 materiel: []
 preparation: |-
-  > Faire une pâte à beignet
+  > Faire une pâte à beignet:
 
-  Dans un cul de poule, ajouter tous les ingrédients sec (farine, levures, sel (9gr), sucre)
+  Diluer la levure boulangère dans l'eau tiède.
 
-  Délayer en ajoutant le lait progressivement
+  Dans un cul de poule, ajouter tous les ingrédients sec (farine, levures, sel, sucre)
 
-  > Faire la sauce cacahuète
+  Délayer en ajoutant le lait progressivement puis mélanger vigoureusement.
 
-  Mixer le beurre de cacahuète avec l'huile d'arachide. Rectifier l'assaisonement
+  Couvrir bien la pâte, afin que l'air ne puisse pas passer. Laisser reposer la pâte pendant 1 à 2 heures maximum pour qu'elle gonfle.
 
-  > Faire frire les beignets
+  Faire ensuite chauffer l'huile de friture. Tester si l'huile est chaude en essayant d'abord de faire frire 1 beignet. Si le beignet remonte directement a la surface, c'est que l'huile est chaude. L’huile ne doit pas être trop chaude car elle doit cuire l’intérieur des beignets mais sans brûler l’extérieur !
 
-  Ajouter la sauce cacahuète dessus
+  Prendre une petite quantité de pâte avec la main et la couper dans l'huile. Le beignet doit former une boule de la taille d'une balle de ping pong. Faire tourner le beignet dans la friture. Tremper les mains dans l'eau à chaque fois, pour un autre tour de friture.
 
-  Possibilité de saupoudrer du sucre glace dessus
+  > Faire la sauce cacahuète:
+
+  Mixer le beurre de cacahuète sucré avec l'huile d'arachide. Rectifier l'assaisonement.
+
+  Servir dans un bol 3 à 4 beignets. Ajouter la sauce cacahuète dessus. Possibilité de saupoudrer du sucre glace dessus.
+
+  Dessert maxi gourmand et grosse quantité!
 preparation24h: ''
 astuces: []
 prepAlt: []

@@ -1,11 +1,18 @@
 ---
+title: Burger Végé Lentilles Patates Douces
+draft: false
+description: ''
+layout: recettes
+type: plat
 categories:
   - Snacking
-check: Oui
-checkAlwaysOk: false
-checkfor: 170
+auteur: Lulu
+region: ''
 cuisson: Oui
-draft: false
+temperature: Chaud
+plate: 100
+quantite_desc: 1 burger par personne
+check: Oui
 ingredients:
   - ingredient: curcuma-moulu_htp5ma
     quantite: 60
@@ -111,10 +118,8 @@ ingredients:
     quantite: 1
     unit: Kg
     commentaire: Sauce
-layout: recettes
-plate: 100
-preparation: |2-
-    **galettes patates douces lentilles:**
+preparation: |-
+  **galettes patates douces lentilles:**
     - Éplucher les patates douces et les faire cuire à la vapeur pendant 20 minutes.
     - Cuire les lentilles 10 minutes.
     - Faire revenir les oignons avec l'huile d'olive, le curcuma, le curry, le cumin et l'ail.
@@ -134,10 +139,9 @@ preparation: |2-
     - Déposer la sauce sur le pain, ajouter la salade, la galette, le chou, puis refermer le burger.
     - Servir avec la salade verte et les frites, accompagné de la sauce fromage blanc.
 publishDate: 2024-05-18T17:59:00.000Z
-quantite_desc: 1 burger par personne
+checkfor: 170
+checkAlwaysOk: false
 regime:
   - vegetarien
-temperature: Chaud
-title: Burger Végé Lentilles Patates Douces
-type: plat
 ---
+

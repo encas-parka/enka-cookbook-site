@@ -1,18 +1,18 @@
 ---
 title: chou bleu chou rouge
 draft: false
+description: ''
 layout: recettes
 type: plat
 categories:
   - Accompagnement
-regime:
-  - vegan
-  - sans-gluten
+auteur: Auré
+region: ''
 cuisson: Oui
 temperature: Froid
 plate: 100
+quantite_desc: ''
 check: Oui
-checkAlwaysOk: false
 ingredients:
   - ingredient: ail_u2m28w
     quantite: 4
@@ -23,7 +23,7 @@ ingredients:
     unit: Kg
     commentaire: ''
   - ingredient: chou-rouge_nl2s2n
-    quantite: 7
+    quantite: 3.5
     unit: Kg
     commentaire: ''
   - ingredient: huile-vegetale_atccqu
@@ -62,6 +62,47 @@ ingredients:
     quantite: 200
     unit: gr.
     commentaire: ''
-preparation: "\n A ABSOLUMENT FAIRE LA VEILLE\n\n\n      \n\n\n  \n\n\n        \n\n\n  \n\n\n  \n\nEAU VIOLETTE :\n\nDans une grosse gamelle, faire blanchir à l'eau les choux rouges tronçonnés en gros morceaux.\n\nQuand l'eau est violette foncée, stopper la cuisson. Garder cette eau, elle servira de colorant bleu pour le chou blanc.\n\nSortir les choux, laisser refroidir.\n\nCHOU ROUGE:\n\nEmincer les choux blanchis ainsi que les oignons. Emincer l'ail.\n\nFaire griller les épices.\n\nDans les grands woks, faire d'abord fondre les oignons.\n\nEnsuite\_verser les épices, l'ail et le chou. Faire bien revenir.\n\nAjouter le sucre et le vinaigre. Saler, poivrer. Laisser confire au moins 30min en remuant fréquemment.\n\nAjouter la gelée de groseille, laisser cuire encore.\n\nRectifier l'assaisonnement.\n\nServir chaud ou froid.\n\nCHOU BLEU:\n\nEmincer finement le chou blanc.\n\nTransformer l'eau violette en bleue en ajoutant quelques cuillères de bicarbonnate de soude.\n\nLaisser macérer les choux blancs dans l'eau bleue au minimum 12h au frais.\n\n\\"
+preparation: |-
+  A ABSOLUMENT FAIRE LA VEILLE
+
+  EAU VIOLETTE :
+
+  Dans une grosse gamelle, faire blanchir à l'eau les choux rouges tronçonnés en gros morceaux.
+
+  Quand l'eau est violette foncée, stopper la cuisson. Garder cette eau, elle servira de colorant bleu pour le chou blanc.
+
+  Sortir les choux, laisser refroidir.
+
+  CHOU ROUGE:
+
+  Emincer les choux blanchis ainsi que les oignons. Emincer l'ail.
+
+  Faire griller les épices.
+
+  Dans les grands woks, faire d'abord fondre les oignons.
+
+  Ensuite verser les épices, l'ail et le chou. Faire bien revenir.
+
+  Ajouter le sucre et le vinaigre. Saler, poivrer. Laisser confire au moins 30min en remuant fréquemment.
+
+  Ajouter la gelée de groseille, laisser cuire encore.
+
+  Rectifier l'assaisonnement. Rendre bien gourmand la chose avec tout ce qui inspire.
+
+  Servir chaud ou froid.
+
+  CHOU BLEU:
+
+  Emincer finement le chou blanc.
+
+  Transformer l'eau violette en bleue en ajoutant quelques cuillères de bicarbonnate de soude.
+
+  Laisser macérer les choux blancs dans l'eau bleue au minimum 24h au frais.
+preparation24h: ''
 publishDate: 2025-06-02T18:31:00.000Z
+checkAlwaysOk: false
+regime:
+  - vegan
+  - sans-gluten
 ---
+

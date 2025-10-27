@@ -11,7 +11,7 @@ auteur: Auré
 region: Hong Kong
 cuisson: Oui
 temperature: Chaud
-plate: 130
+plate: 120
 quantite_desc: 1 flan = 3cmx3cm • 3ou4 flans par personne • 1 gastro (53x32,5cm) = env. 60 flans
 check: Oui
 ingredients:

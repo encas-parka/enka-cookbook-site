@@ -1,20 +1,18 @@
 ---
 title: Beignets Petits Pois Zaatar et sa crème au sumac
 draft: false
+description: ''
 layout: recettes
 type: plat
 categories:
   - Bouchées salées
-auteur: ''
-regime:
-  - vegetarien
-  - sans-gluten
+auteur: Ottolenghi
+region: ''
 cuisson: Oui
 temperature: Chaud
 plate: 170
 quantite_desc: Version vegan inclue dans les quantités..
 check: Oui
-checkAlwaysOk: false
 ingredients:
   - ingredient: citron-non-traite_tobtbt
     quantite: 1.7
@@ -130,4 +128,9 @@ preparation: |-
   * Au moment du service mettre 4-5min les beignets au four.
   * Au service rajouter sauce et une rondelle de citrons
 publishDate: 2024-05-23T14:10:00.000Z
+checkAlwaysOk: false
+regime:
+  - vegetarien
+  - sans-gluten
 ---
+

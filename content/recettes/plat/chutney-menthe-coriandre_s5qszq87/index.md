@@ -1,21 +1,21 @@
 ---
 title: chutney menthe coriandre
 draft: false
+description: ''
 layout: recettes
 type: plat
 categories:
   - Sauce
-regime:
-  - vegan
-  - sans-gluten
+auteur: Auré
+region: Inde
 saison:
   - printemps
   - ete
 cuisson: Non
 temperature: Froid
 plate: 60
+quantite_desc: ''
 check: Oui
-checkAlwaysOk: false
 ingredients:
   - ingredient: citron-jus_bwkn34
     quantite: 300
@@ -65,4 +65,9 @@ preparation: mixer finement le tout!!! et c'est tout!!!
 astuces:
   - astuce: ajouter l'eau au fur et à mesure
 publishDate: 2025-06-02T15:52:00.000Z
+checkAlwaysOk: false
+regime:
+  - vegan
+  - sans-gluten
 ---
+

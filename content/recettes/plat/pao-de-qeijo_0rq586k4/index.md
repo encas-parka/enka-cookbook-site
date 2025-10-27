@@ -1,10 +1,18 @@
 ---
+title: Pao de Qeijo
+draft: false
+description: ''
+layout: recettes
+type: plat
 categories:
   - Bouchées salées
-check: Oui
-checkAlwaysOk: false
+auteur: Adèle
+region: Brésil
 cuisson: Oui
-draft: false
+temperature: Chaud
+plate: 240
+quantite_desc: 2 part par personne
+check: Oui
 ingredients:
   - ingredient: sel_2juq3x
     commentaire: ''
@@ -32,11 +40,7 @@ ingredients:
     quantite: 4.8
     unit: Kg
     commentaire: ''
-layout: recettes
-plate: 240
 preparation: |-
-
-
   * Raper puis hacher au couteau les fromages.
   * Faire chauffer dans une casserole le lait et l'huile jusqu'à ébulltion. Pendant ce temps verser la farine de manioc et le sel dans un saladier et bien mélanger. Verser dessus le mélange liquide très chaud puis mélanger vigoureusement.
   * Ajouter tout le fromage, bien mélanger puis ajouter les oeufs. Mélanger de nouveau, à la main cette fois-ci, ou au robot patissier avec la feuille. La pâte sera collate, c'est normal. Si elle l'est trop pour former des boulettes avec les mains, la mettre une demi-heure au frais.
@@ -47,11 +51,9 @@ preparation: |-
 
   Préchauffer le four à 180°C. Disposer sur une plaque recouverte de papier sulfurisé des boulettes de la taille d'une noix. On peut si on le souhaite laisser les boulettes formées une nuit au réfrigérateur. Enfourner 15 à 20 minutes. Se mange chaud.
 publishDate: 2024-05-23T13:58:00.000Z
-quantite_desc: 2 part par personne
+checkAlwaysOk: false
 regime:
   - vegetarien
   - sans-gluten
-temperature: Chaud
-title: Pao de Qeijo
-type: plat
 ---
+

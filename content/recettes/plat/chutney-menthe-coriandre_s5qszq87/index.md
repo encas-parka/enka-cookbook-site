@@ -1,5 +1,5 @@
 ---
-title: chutney menthe coriandre
+title: chutney menthe coriandre (Rainbow Queer Naan)
 draft: false
 description: ''
 layout: recettes

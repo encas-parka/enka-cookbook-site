@@ -1,7 +1,7 @@
 ---
 title: CAROTTE RAPÉES (Rainbow Queer Naan)
 draft: false
-description: ''
+description: Quantités pour accompagner plein d'autres trucs dans l'assiettes.
 layout: recettes
 type: plat
 categories:

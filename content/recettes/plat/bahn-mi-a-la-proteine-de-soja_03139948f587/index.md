@@ -2,7 +2,7 @@
 title: Bahn mi à la protéine de soja
 draft: false
 img: ''
-description: Recette utilisée pour la presta catering de la fête de la soupe 2025
+description: Sandwich végan
 layout: recettes
 type: plat
 categories:
@@ -16,8 +16,8 @@ saison:
 cuisson: Oui
 temperature: Chaud
 plate: 100
-quantite_desc: ''
-check: Non
+quantite_desc: Une demi baguette par sandwich
+check: Oui
 ingredients:
   - ingredient: proteines-de-soja_6m90g7
     quantite: 3
@@ -35,8 +35,8 @@ ingredients:
     quantite: 5
     unit: tête·s
     commentaire: ''
-  - ingredient: mayonnaise_1ijv6u
-    quantite: 1.5
+  - ingredient: veganaise_89945bda5f0b
+    quantite: 3
     unit: Kg
     commentaire: ''
   - ingredient: miso-blanc_k2uthk
@@ -69,9 +69,9 @@ preparation: |-
   - Faire cuire les protéines de soja à la poêle avec des épices
   - Râper les carottes
   - Couper le chou rouge finement
-  - Préparer la sauce mayonnaise/sauce soja/gingembre/Ail
+  - Mixer la véganaise avec la sauce soja, le gingembre et ail râpés.
 
-  Possibilité de rajouter des légumes lactofermentés
+  Possibilité de rajouter des légumes lactofermentés.
 preparation24h: ''
 astuces: []
 prepAlt: []

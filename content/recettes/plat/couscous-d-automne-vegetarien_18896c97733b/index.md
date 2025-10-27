@@ -8,7 +8,7 @@ type: plat
 categories:
   - Plat chaud
 auteur: Alio
-region: ''
+region: Algérie
 saison: []
 cuisson: Oui
 temperature: Chaud

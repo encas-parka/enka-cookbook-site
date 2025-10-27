@@ -1,11 +1,21 @@
 ---
+title: Aubergines grillées, cacao, ail noir et harissa
+draft: false
+description: ''
+layout: recettes
+type: plat
 categories:
   - Accompagnement
   - Plat chaud
-check: Oui
-checkAlwaysOk: false
+auteur: Ottolenghi
+region: ''
+saison:
+  - ete
 cuisson: Oui
-draft: false
+temperature: Chaud
+plate: 100
+quantite_desc: ''
+check: Oui
 ingredients:
   - ingredient: harissa_4n95t5
     quantite: 50
@@ -28,31 +38,27 @@ ingredients:
     unit: ml
     commentaire: ''
   - ingredient: cacao_r6792n
-    quantite: 200
-    unit: ml
+    quantite: 40
+    unit: gr.
     commentaire: ''
-  - ingredient: melasse_9x2uyr
+  - ingredient: melasse-de-grenade_cl88ye
     quantite: 100
     unit: ml
     commentaire: ''
-layout: recettes
 materiel:
   - Four
   - Gastro 1/1 (Normaux)
-plate: 100
 preparation: |-
   1. Couper les aubergines en quartiers de 2 cm d'épaisseur.
   2. Les enduire de 600 ml d'huile (ou la moitié) avec du sel et les passer 10 minutes au four à 200°C
   3. Mélanger le reste des ingrédients (dont le reste de l'huile) et enduire les aubergines avec puis les remettre à cuire 10 à 15 minutes.
-publishDate: '2024-05-28T14:50:00.000Z'
+preparation24h: ''
+publishDate: 2024-05-28T14:50:00.000Z
+checkAlwaysOk: false
 regime:
   - vegetarien
   - vegan
   - sans-gluten
   - sans-lactose
-saison:
-  - ete
-temperature: Chaud
-title: Aubergines grillées cacao ail noir et piment
-type: plat
 ---
+

@@ -1,5 +1,5 @@
 ---
-title: khadai tofu (Rainbow Queer Naan)
+title: Khadaï Tofu (Rainbow Queer Naan)
 draft: false
 description: ''
 layout: recettes
@@ -7,7 +7,7 @@ type: plat
 categories:
   - Plat chaud
 auteur: Auré
-region: inde
+region: Inde
 cuisson: Oui
 temperature: Chaud
 plate: 100

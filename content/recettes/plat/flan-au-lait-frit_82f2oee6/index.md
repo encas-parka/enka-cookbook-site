@@ -1,20 +1,19 @@
 ---
 title: Flan au lait frit
 draft: false
+description: Servir en plat salé même si c'est sucré.
 layout: recettes
 type: plat
 categories:
   - Friture
   - Bouchées salées
-regime:
-  - vegetarien
+auteur: Auré
 region: Hong Kong
 cuisson: Oui
 temperature: Chaud
-plate: 100
-quantite_desc: 1 flan = 5x5cm • 3 flans par personne • 1 gastro (53x32,5cm) = env. 60 flans
+plate: 130
+quantite_desc: 1 flan = 3cmx3cm • 3ou4 flans par personne • 1 gastro (53x32,5cm) = env. 60 flans
 check: Oui
-checkAlwaysOk: false
 ingredients:
   - ingredient: huile-de-friture_1ej217
     quantite: 12
@@ -65,7 +64,7 @@ materiel:
   - Gastro 1/1 (Fins)
   - Marmitte
 preparation: |-
-  *Possible 1 J avant :*
+  _Possible 1 J avant :_
 
   \- Dans une gamelle, verser le lait et le lait concentré avec le sel et le poivre. Rectifier l'assaisonnement.
 
@@ -79,15 +78,11 @@ preparation: |-
 
   \- Recouvrir de film alimentaire et reserver bien bien au frigo.
 
-
-
   ##### PREPARATION DE LA PÂTE :
 
   \- Mélanger tous les ingrédients de la pâte et laisser reposer 30min à température ambiante.
 
   \- Couper les flans au lait en cube de 5x5cm.
-
-
 
   **Obligatoirement au dernier moment :**
 
@@ -99,4 +94,8 @@ preparation: |-
 
   \- Et les saupoudrer d'un peu de sucre.
 publishDate: 2024-05-18T15:27:00.000Z
+checkAlwaysOk: false
+regime:
+  - vegetarien
 ---
+

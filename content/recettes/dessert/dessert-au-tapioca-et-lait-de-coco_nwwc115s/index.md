@@ -1,17 +1,18 @@
 ---
-title: Dessert AU tapioca et lait de coco
+title: Crème dessert au tapioca et lait de coco
 draft: false
+description: ''
 layout: recettes
 type: dessert
 categories:
   - Gateau
-regime:
-  - vegetarien
+auteur: ''
+region: ''
 cuisson: Oui
 temperature: Froid
 plate: 7
+quantite_desc: ''
 check: Oui
-checkAlwaysOk: false
 ingredients:
   - ingredient: tapioca-perlee_mkttuh
     quantite: 105
@@ -41,4 +42,8 @@ preparation: |-
   5. Répartissez le mélange dans les récipients en y mettant au fond les fruits.
   6. Placez-les au frais au moins 2 heures avant de les déguster.
 publishDate: 2025-05-15T16:47:00.000Z
+checkAlwaysOk: false
+regime:
+  - vegetarien
 ---
+

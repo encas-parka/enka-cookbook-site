@@ -1,12 +1,18 @@
 ---
-auteur: Auré
+title: BABKA VEGANE HARISSA ET PISTACHE
+draft: false
+description: brioche individuelle. Mais possibilité de les façonner en grosse pièce dans des moules à tarte ou à cake.
+layout: recettes
+type: entree
 categories:
   - Autre
-check: Non
-checkAlwaysOk: true
+auteur: Auré
+region: ''
 cuisson: Oui
-description: brioche individuelle
-draft: false
+temperature: Froid
+plate: 100
+quantite_desc: 1 babka par personne
+check: Non
 ingredients:
   - ingredient: sel_2juq3x
     quantite: 65
@@ -15,7 +21,7 @@ ingredients:
   - ingredient: harissa_4n95t5
     quantite: 1
     unit: Kg
-    commentaire: garniture
+    commentaire: garniture. Si elle est trop forte, en mettre beaucoup moins et rallonger avec du concentré de tomate.
   - ingredient: levure-fraiche-de-boulanger_7qqcwc
     quantite: 300
     unit: gr.
@@ -44,8 +50,6 @@ ingredients:
     quantite: 800
     unit: gr.
     commentaire: ''
-layout: recettes
-plate: 100
 preparation: |-
   Faire chauffer le lait jusqu’à ce qu’il soit tiède (si celui-ci est trop chaud, il tuera la levure donc il est important qu’il soit juste légèrement tiède) et y délayer la levure, laisser ensuite reposer 10/15 mn.
 
@@ -78,10 +82,8 @@ preparation: |-
   A la fin de la cuisson, les brioches doivent être bien dorées.
 preparation24h: Faire la pâte la veille.
 publishDate: 2024-06-14T23:13:00.000Z
-quantite_desc: 1 babka par personne
+checkAlwaysOk: true
 regime:
   - vegan
-temperature: Froid
-title: BABKA VEGANE HARISSA ET PISTACHE
-type: entree
 ---
+

@@ -7,15 +7,12 @@ type: entree
 categories:
   - Friture
 auteur: Auré
-regime:
-  - vegan
 region: Nouvelle Orléans
 cuisson: Oui
 temperature: Chaud
 plate: 100
 quantite_desc: 3 boulettes par personne
 check: Non
-checkAlwaysOk: false
 ingredients:
   - ingredient: ail_u2m28w
     quantite: 2
@@ -72,8 +69,13 @@ preparation: |-
 
   Ajouter l'oignon  et l'ail finement hachés, le maïs bien bien égoutté au mélange sec. Bien mélanger pour répartir uniformément les légumes dans la pâte.
 
-  Verser progressivement le « babeurre » végétalien préparé dans les ingrédients secs. Remuer jusqu'à ce que la pâte se mette en place. La pâte doit être épaisse, mais pas trop sèche.
+  Verser progressivement le « babeurre » végétalien préparé dans les ingrédients secs. Remuer jusqu'à ce que la pâte se mette en place. La pâte doit être épaisse, mais pas sèche.
 
-  Faire frire les boulettes. Vérifier que l'huile est prête en laissant tomber une petite quantité de pâte dans l'huile ; si elle grésille et flotte à la surface, l'huile est prête.
+  Faire frire les boulettes. Si elle est trop liquide, y allait à la cuillère à soupe. Vérifier que l'huile est prête en laissant tomber une petite quantité de pâte dans l'huile ; si elle grésille et flotte à la surface, l'huile est prête.
+preparation24h: ''
 publishDate: 2025-06-01T20:39:00.000Z
+checkAlwaysOk: false
+regime:
+  - vegan
 ---
+

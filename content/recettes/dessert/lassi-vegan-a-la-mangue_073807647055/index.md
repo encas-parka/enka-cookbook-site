@@ -14,14 +14,14 @@ cuisson: Non
 temperature: Froid
 plate: 100
 quantite_desc: 25cl par personne
-check: Non
+check: Oui
 ingredients:
   - ingredient: cardamone-en-poudre_2n9g9t
     quantite: 50
     unit: gr.
     commentaire: ''
   - ingredient: sucre-de-canne-blond_n85gmi
-    quantite: 1
+    quantite: 1.5
     unit: Kg
     commentaire: ''
   - ingredient: citron-jus_bwkn34
@@ -29,7 +29,7 @@ ingredients:
     unit: ml
     commentaire: ''
   - ingredient: mangue_mdoij4
-    quantite: 5
+    quantite: 10
     unit: Kg
     commentaire: ''
   - ingredient: lait-de-coco_xdy736

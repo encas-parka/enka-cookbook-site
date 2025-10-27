@@ -1,11 +1,17 @@
 ---
+title: Houmous de betterave aux cranberries et balsamique
+draft: false
+description: Une cuillère à soupe par personne!
+layout: recettes
+type: entree
 categories:
   - Accompagnement
-check: Oui
-checkAlwaysOk: false
+auteur: ''
+region: ''
 cuisson: Non
-description: pour une cuiller à soupe par personne
-draft: false
+temperature: Froid
+plate: 100
+check: Oui
 ingredients:
   - ingredient: tahin_u33083
     quantite: 160
@@ -35,16 +41,13 @@ ingredients:
     quantite: 1.1
     unit: Kg
     commentaire: ''
-layout: recettes
-plate: 100
 preparation: Mettre tous les ingrédients dans un blender et mixer jusqu'à l'obtention d'une texture lisse. Saler. Ajouter un peu d'eau si nécessaire.
-publishDate: '2024-05-30T10:42:00.000Z'
+publishDate: 2024-05-30T10:42:00.000Z
+checkAlwaysOk: false
 regime:
   - vegetarien
   - vegan
   - sans-gluten
   - sans-lactose
-temperature: Froid
-title: Houmous de betterave aux cranberries et balsamique
-type: entree
 ---
+

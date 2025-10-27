@@ -1,22 +1,21 @@
 ---
 title: Pomme de terre au four, cervelle de canut
 draft: false
+description: ''
 layout: recettes
 type: plat
 categories:
   - Plat chaud
 auteur: frédo
-regime:
-  - sans-gluten
+region: ''
 cuisson: Oui
 temperature: Chaud
-plate: 99
+plate: 100
+quantite_desc: ''
 check: Non
-checkAlwaysOk: false
-checkfor: ''
 ingredients:
   - ingredient: pomme-de-terre_18dy4e
-    quantite: 20
+    quantite: 30
     unit: Kg
     commentaire: ''
   - ingredient: ail_u2m28w
@@ -87,4 +86,9 @@ preparation: |-
   Ajouter le sucre et rectifier l'assaisonnement sel/poivre
 prepAlt: []
 publishDate: 2025-06-04T18:15:00.000Z
+checkfor: ''
+checkAlwaysOk: false
+regime:
+  - sans-gluten
 ---
+

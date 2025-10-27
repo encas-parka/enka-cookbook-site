@@ -1,20 +1,19 @@
 ---
 title: Caviar d'aubergines fumées
 draft: false
+description: ''
 layout: recettes
 type: entree
 categories:
   - Tartinade
-regime:
-  - vegan
-  - vegetarien
-  - sans-gluten
-  - sans-lactose
+auteur: Auré
+region: ''
 saison:
   - ete
 cuisson: Oui
 temperature: Froid
 plate: 100
+quantite_desc: Une cuillère à soupe par personne
 ingredients:
   - ingredient: aubergine_7sk3a5
     quantite: 10
@@ -41,8 +40,16 @@ materiel:
   - Plat Paela
 preparation: |-
   * Coucher à même le gaz le maximum d'aubergines. Plus y a de brûleurs, mieux c'est ! Laisser cuire 10 min et retourner les pour encore 10 min.
+  * Si il y a trop d'aubergine, en cuire une partie au four
   * Placer les aubergines cuites dans un sac poubelle afin d'aider la peau à se décoller.
   * Enlever la peau. Et rincer la chair à l'eau pour nettoyer les petits bouts de cramé.
   * Mixer tous les ingrédients dans un gros gastro. Attention de ne pas mettre trop de citron. Rectifier l'assaisonnement. Servir froid.
+preparation24h: ''
 publishDate: 2023-06-25T13:04:00.526Z
+regime:
+  - vegan
+  - vegetarien
+  - sans-gluten
+  - sans-lactose
 ---
+

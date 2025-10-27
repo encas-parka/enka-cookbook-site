@@ -1,15 +1,17 @@
 ---
 title: FROMAGE BLANC ET FRUITS ROUGES et son alernative vegan
 draft: false
+description: ''
 layout: recettes
 type: dessert
 categories:
   - Sucrée
+auteur: Résistances 2025
+region: ''
 cuisson: Non
 temperature: Froid
 plate: 100
 check: Oui
-checkAlwaysOk: false
 ingredients:
   - ingredient: yaourt-de-soja_hlbwfd
     quantite: 1.2
@@ -29,4 +31,6 @@ ingredients:
     commentaire: ''
 preparation: Ne pas oublié la version végane !!
 publishDate: 2025-05-30T21:37:00.000Z
+checkAlwaysOk: false
 ---
+

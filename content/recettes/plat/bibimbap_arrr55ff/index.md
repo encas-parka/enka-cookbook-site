@@ -7,15 +7,12 @@ type: plat
 categories:
   - Plat chaud
 auteur: Auré
-regime:
-  - vegan
-  - sans-gluten
 region: Corée
 cuisson: Oui
 temperature: Chaud
 plate: 100
+quantite_desc: ''
 check: Non
-checkAlwaysOk: false
 ingredients:
   - ingredient: huile-de-sesame_fazth1
     quantite: 1
@@ -88,7 +85,7 @@ ingredients:
   - ingredient: vinaigre-de-riz_k6injl
     quantite: 1
     unit: l.
-    commentaire: ''
+    commentaire: sauce
   - ingredient: doenjang_vet0jj
     quantite: 1
     unit: Kg
@@ -132,7 +129,9 @@ ingredients:
 preparation: |-
   **ŒUFS PARFAITS :**
 
-  A cuire en plusieurs fois. Certainement 50 par 50. A voir.
+  **Si pas de thermo plongeur, faire des oeufs mollets (oeuf entier dans l'eau bouillante vinaigrée pendant 5min30)**
+
+  A cuire en plusieurs fois. Certainement 20 par 20. 
 
   Préchauffer l'eau de **64°C** à l'aide du thermoplongeur (si si la famille!). Plonger les
   œufs à l'aide d'une araignée ou d'une écumoire. Cuire **54 min** exactement! Retirer les œufs à l'écumoire. Réserver.
@@ -156,6 +155,8 @@ preparation: |-
   Verser le sésame noir.
 
   **TOFU MARINE :**
+
+  **Si pas de four, les faire à la poêle.**
 
   Préchauffer le four à 180°C, chaleur tournante.
 
@@ -185,16 +186,20 @@ preparation: |-
 
   Disposer environ 300gr de riz cuit dans le fond du bol.
 
-  Arroser de sauce.
+  Arroser de sauce (3 cuillères à soupe par bol)
 
   Déposer une portion de chaque garniture sur le riz en alternant les couleurs.
 
   Déposer l’œuf parfait écalé.
-
-  Reverser de la sauce sur les bords.
+preparation24h: ''
 astuces:
   - astuce: 'Attention : Il y a du sésame dans beaucoup de préparations. Et il y a du gluten dans le gochujan et le doenjang.'
 prepAlt:
   - recetteAlt: sauce-bibimbap-sans-allergenes_3n7u5n4d
 publishDate: 2025-05-04T21:01:00.000Z
+checkAlwaysOk: false
+regime:
+  - vegan
+  - sans-gluten
 ---
+

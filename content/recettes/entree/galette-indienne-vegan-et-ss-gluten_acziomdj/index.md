@@ -1,19 +1,18 @@
 ---
-title: galette indienne vegan et ss gluten
+title: galette indienne vegan et ss gluten (Rainbow Queer Naan)
 draft: false
+description: ''
 layout: recettes
 type: entree
 categories:
   - Pain
-regime:
-  - vegan
-  - sans-gluten
-region: inde
+auteur: Auré
+region: Inde
 cuisson: Oui
 temperature: Chaud
 plate: 15
+quantite_desc: ''
 check: Oui
-checkAlwaysOk: false
 ingredients:
   - ingredient: farine-de-pois-chiche_o627mw
     quantite: 1
@@ -53,4 +52,9 @@ preparation: |-
 
   \
 publishDate: 2025-06-02T19:10:00.000Z
+checkAlwaysOk: false
+regime:
+  - vegan
+  - sans-gluten
 ---
+

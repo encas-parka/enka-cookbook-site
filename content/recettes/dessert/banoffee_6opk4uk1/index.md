@@ -1,25 +1,25 @@
 ---
 title: Banoffee
 draft: false
+description: ''
 layout: recettes
 type: dessert
 categories:
   - Gateau
-regime:
-  - vegetarien
+auteur: ''
 region: ''
 cuisson: Oui
 temperature: Froid
 plate: 100
+quantite_desc: ''
 check: Oui
-checkAlwaysOk: false
 ingredients:
   - ingredient: beurre-demi-sel_mxub21
     quantite: 1
     unit: Kg
     commentaire: ''
   - ingredient: mascarpone_0tpvue
-    quantite: 2
+    quantite: 1.5
     unit: Kg
     commentaire: ''
   - ingredient: banane_9vpwp5
@@ -27,20 +27,20 @@ ingredients:
     unit: unité
     commentaire: ''
   - ingredient: creme-fraiche-liquide-entiere_6tnb6h
-    quantite: 4
+    quantite: 3.5
     unit: l.
     commentaire: ''
   - ingredient: lait-concentre-sucre_5dcfzk
-    quantite: 3
+    quantite: 5
+    unit: Kg
+    commentaire: ''
+  - ingredient: speculoos_h6thsp
+    quantite: 2.5
     unit: Kg
     commentaire: ''
   - ingredient: sucre-en-poudre_u9z2he
     quantite: 280
     unit: gr.
-    commentaire: ''
-  - ingredient: speculoos_h6thsp
-    quantite: 3
-    unit: Kg
     commentaire: ''
 materiel:
   - Gastro 1/1 (Normaux)
@@ -54,17 +54,15 @@ preparation: |-
 
   Tapissser les fonds de tous les ramequins et bien tasser.
 
-  Y déposer des rondelles de BANANE. 1 banane pour 3 personnes.
+  Y déposer plein de rondelles ou des tronçons de BANANE. 1 banane pour 3 personnes.
 
   Troisième étage : 1,5 à 2 cuillère à soupe de CONFITURE DE LAIT.
-
-
 
   **CHANTILLY :**
 
   Battre au robot (en plusieurs fois) la CREME LIQUIDE très froide, le MASCARPONE et le SUCRE.
 
-  Recouvrir de cette dernière couche les banoffee.
+  Recouvrir de cette dernière bonne couche les banoffee.
 
   Placer au frais.
 preparation24h: |-
@@ -80,8 +78,12 @@ preparation24h: |-
 
   Laisser refroidir sans rien bouger.
 
-  Ouvrir toutes les boites de conserve, vers dans un gastro et mixer au plongeur pour assouplir la confiture.
+  Ouvrir toutes les boites de conserve, verser dans un gastro et mixer au plongeur pour assouplir la confiture.
 prepAlt:
   - recetteAlt: banoffee-vegan-et-sans-gluten_hm1nmbb6
 publishDate: 2024-05-17T18:26:00.000Z
+checkAlwaysOk: false
+regime:
+  - vegetarien
 ---
+

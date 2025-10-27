@@ -20,7 +20,7 @@ quantite_desc: ''
 check: Non
 ingredients:
   - ingredient: proteines-de-soja_6m90g7
-    quantite: 5
+    quantite: 3
     unit: Kg
     commentaire: ''
   - ingredient: coriandre_yat3fu
@@ -66,13 +66,9 @@ ingredients:
 materiel: []
 preparation: |-
   - Réhydrater les protéines de soja dans du bouillon de légumes
-
   - Faire cuire les protéines de soja à la poêle avec des épices
-
   - Râper les carottes
-
   - Couper le chou rouge finement
-
   - Préparer la sauce mayonnaise/sauce soja/gingembre/Ail
 
   Possibilité de rajouter des légumes lactofermentés

@@ -10,9 +10,9 @@ auteur: Auré
 region: ''
 cuisson: Oui
 temperature: Froid
-plate: 100
-quantite_desc: 48 parts par gastro
-check: Non
+plate: 60
+quantite_desc: ''
+check: Oui
 ingredients:
   - ingredient: creme-fraiche-liquide-entiere_6tnb6h
     quantite: 1.75

@@ -2,8 +2,7 @@
 title: BIBIMBAP
 draft: false
 description: Bibimbap signifie en coréen « riz mélangé ». Au moment de la dégustation, chaque convive mélange son bol.
-layout: recettes
-type: plat
+typeR: plat
 categories:
   - Plat chaud
 auteur: Auré
@@ -131,7 +130,7 @@ preparation: |-
 
   **Si pas de thermo plongeur, faire des oeufs mollets (oeuf entier dans l'eau bouillante vinaigrée pendant 5min30)**
 
-  A cuire en plusieurs fois. Certainement 20 par 20. 
+  A cuire en plusieurs fois. Certainement 20 par 20.
 
   Préchauffer l'eau de **64°C** à l'aide du thermoplongeur (si si la famille!). Plonger les
   œufs à l'aide d'une araignée ou d'une écumoire. Cuire **54 min** exactement! Retirer les œufs à l'écumoire. Réserver.
@@ -202,4 +201,3 @@ regime:
   - vegan
   - sans-gluten
 ---
-

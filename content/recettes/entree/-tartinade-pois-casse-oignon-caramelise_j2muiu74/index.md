@@ -1,8 +1,7 @@
 ---
 title: 'Tartinade Pois cassé - oignon caramélisé '
 draft: false
-layout: recettes
-type: entree
+typeR: entree
 categories:
   - Tartinade
 auteur: Sylvain

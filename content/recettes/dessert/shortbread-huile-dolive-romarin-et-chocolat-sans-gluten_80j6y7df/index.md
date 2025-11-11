@@ -42,7 +42,6 @@ ingredients:
     quantite: 100
     unit: gr.
     commentaire: ''
-layout: recettes
 materiel:
   - Four
 plate: 10
@@ -64,5 +63,5 @@ regime:
   - sans-lactose
 temperature: Froid
 title: SHORTBREAD HUILE D'OLIVE, ROMARIN ET CHOCOLAT Sans Gluten
-type: dessert
+typeR: dessert
 ---

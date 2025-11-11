@@ -1,8 +1,7 @@
 ---
 title: Champignons frits et sauce crémeuse ciboulette
 draft: false
-layout: recettes
-type: plat
+typeR: plat
 categories:
   - Accompagnement
 regime:

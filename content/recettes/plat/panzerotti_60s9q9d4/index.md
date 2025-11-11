@@ -2,8 +2,7 @@
 title: PANZEROTTI
 draft: false
 description: ''
-layout: recettes
-type: plat
+typeR: plat
 categories:
   - Friture
 auteur: ''
@@ -42,7 +41,7 @@ preparation: |-
   Former des boules de pain d'environ 150gr chacune et les disposer bien espacées sur le plan de travail fariné. Laisser lever à nouveau jusqu’au double.
 
   Couper la mozzarella en petits cubes et la mettre dans une passoire à
-  mailles étroites (placée sur un bol). 
+  mailles étroites (placée sur un bol).
 
   Cuisiner une sauce tomate avec mes oignons, la purée de tomates, l’origan, sel, poivre. Laisser refroidir. Puis mélanger avec la mozzarella.
 
@@ -61,4 +60,3 @@ checkAlwaysOk: true
 regime:
   - vegetarien
 ---
-

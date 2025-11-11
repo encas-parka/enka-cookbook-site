@@ -1,8 +1,7 @@
 ---
 title: BEIGNET DE BANANE ET CARAMEL DE MISO
 draft: false
-layout: recettes
-type: dessert
+typeR: dessert
 categories:
   - Friture
 auteur: Auré

@@ -2,8 +2,7 @@
 title: Tapioca perlée au chocolat
 draft: false
 description: ''
-layout: recettes
-type: dessert
+typeR: dessert
 categories:
   - Sucrée
 regime:

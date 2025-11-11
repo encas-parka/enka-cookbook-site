@@ -34,7 +34,6 @@ ingredients:
     quantite: 300
     unit: gr.
     commentaire: ''
-layout: recettes
 materiel:
   - Four
 plate: 100
@@ -54,5 +53,5 @@ regime:
   - sans-lactose
 temperature: Froid
 title: SHORTBREAD HUILE D'OLIVE, ROMARIN ET CHOCOLAT
-type: dessert
+typeR: dessert
 ---

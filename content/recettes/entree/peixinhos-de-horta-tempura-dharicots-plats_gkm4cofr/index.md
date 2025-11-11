@@ -23,7 +23,6 @@ ingredients:
     quantite: 3
     unit: Kg
     commentaire: ''
-layout: recettes
 plate: 100
 preparation: |-
   Equeuter les haricots plats, puis les mettre à cuire dans de l'eau bouillante bien salée jusqu'à ce qu'ils soient tendres (ça dépend pas mal des haricots!).
@@ -40,5 +39,5 @@ regime:
 region: Portugal
 temperature: Chaud
 title: PEIXINHOS DE HORTA - Tempura d'haricots plats
-type: entree
+typeR: entree
 ---

@@ -3,8 +3,7 @@ title: Bahn mi à la protéine de soja
 draft: false
 img: ''
 description: Sandwich végan
-layout: recettes
-type: plat
+typeR: plat
 categories:
   - Snacking
 auteur: Alio
@@ -77,4 +76,3 @@ astuces: []
 prepAlt: []
 publishDate: 2025-10-16T16:18:00.000Z
 ---
-

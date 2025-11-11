@@ -3,8 +3,7 @@ title: Brownie choco beurre de cacahuète
 draft: false
 img: ''
 description: ''
-layout: recettes
-type: dessert
+typeR: dessert
 categories:
   - Gateau
 auteur: ''

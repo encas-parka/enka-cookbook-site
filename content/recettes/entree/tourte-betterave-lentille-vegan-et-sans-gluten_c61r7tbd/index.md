@@ -38,7 +38,6 @@ ingredients:
     quantite: 300
     unit: gr.
     commentaire: ''
-layout: recettes
 materiel:
   - Four
   - Marmitte
@@ -78,5 +77,5 @@ regime:
   - sans-gluten
 temperature: Chaud
 title: Tourte betterave lentille (vegan et sans gluten)
-type: entree
+typeR: entree
 ---

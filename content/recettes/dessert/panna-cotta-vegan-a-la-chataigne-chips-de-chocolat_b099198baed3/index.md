@@ -3,8 +3,7 @@ title: Panna Cotta végan à la chataigne - chips de chocolat
 draft: false
 img: ''
 description: Dessert pour le catering de la fête de la soupe 2025
-layout: recettes
-type: dessert
+typeR: dessert
 categories:
   - Sucrée
 auteur: Alio
@@ -55,4 +54,3 @@ astuces: []
 prepAlt: []
 publishDate: 2025-10-16T18:01:00.000Z
 ---
-

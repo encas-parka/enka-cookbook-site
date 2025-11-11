@@ -26,7 +26,6 @@ ingredients:
     quantite: 6
     unit: l.
     commentaire: ''
-layout: recettes
 materiel:
   - Bruleur
 plate: 300
@@ -41,5 +40,5 @@ regime:
   - sans-lactose
 temperature: Froid
 title: Crème Végan au sureau
-type: dessert
+typeR: dessert
 ---

@@ -36,7 +36,6 @@ ingredients:
     quantite: 500
     unit: ml
     commentaire: ''
-layout: recettes
 materiel:
   - Bruleur
   - Marmitte
@@ -68,5 +67,5 @@ regime:
 region: Portugal
 temperature: Chaud
 title: Soupe de carottes à la coriandre
-type: entree
+typeR: entree
 ---

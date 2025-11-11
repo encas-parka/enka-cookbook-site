@@ -75,7 +75,6 @@ ingredients:
     quantite: 900
     unit: gr.
     commentaire: sirop
-layout: recettes
 materiel:
   - moule à tarte
 plate: 100
@@ -119,5 +118,5 @@ regime:
   - vegan
 temperature: Chaud
 title: PASTILLA VEGAN A L'AUBERGINE
-type: plat
+typeR: plat
 ---

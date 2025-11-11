@@ -1,8 +1,7 @@
 ---
 title: Focaccia
 draft: false
-layout: recettes
-type: plat
+typeR: plat
 categories:
   - Pain
 auteur: elmar

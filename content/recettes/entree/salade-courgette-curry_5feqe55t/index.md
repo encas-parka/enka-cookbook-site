@@ -2,8 +2,7 @@
 title: Salade courgette - curry
 draft: false
 img: courgette-curry.jpg
-layout: recettes
-type: entree
+typeR: entree
 categories:
   - Salade
 regime:

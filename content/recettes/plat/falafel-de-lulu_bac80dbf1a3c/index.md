@@ -3,8 +3,7 @@ title: FALAFEL DE LULU
 draft: false
 img: ''
 description: ''
-layout: recettes
-type: plat
+typeR: plat
 categories:
   - Friture
 auteur: ''
@@ -77,4 +76,3 @@ astuces: []
 prepAlt: []
 publishDate: 2025-10-16T16:10:00.000Z
 ---
-

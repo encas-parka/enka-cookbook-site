@@ -1,8 +1,7 @@
 ---
 title: Pita garniture
 draft: false
-layout: recettes
-type: plat
+typeR: plat
 categories:
   - Snacking
 regime:

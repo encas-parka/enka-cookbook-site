@@ -32,7 +32,6 @@ ingredients:
     quantite: 700
     unit: gr.
     commentaire: ''
-layout: recettes
 plate: 20
 preparation: |-
 
@@ -58,5 +57,5 @@ regime:
   - sans-gluten
 temperature: Froid
 title: Keshke vegan et sans gluten
-type: entree
+typeR: entree
 ---

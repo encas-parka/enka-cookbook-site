@@ -2,8 +2,7 @@
 title: Taboulais libanais des tarnais (sans gluten)
 draft: false
 img: taboule-libanais.jpg
-layout: recettes
-type: entree
+typeR: entree
 categories:
   - Salade
 regime:

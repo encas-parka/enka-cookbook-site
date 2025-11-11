@@ -1,8 +1,7 @@
 ---
 title: Tarte à la tomate, chèvre miel et moutarde
 draft: false
-layout: recettes
-type: entree
+typeR: entree
 categories:
   - Tarte (salée)
 auteur: Frédo

@@ -50,7 +50,6 @@ ingredients:
     quantite: 200
     unit: gr.
     commentaire: ''
-layout: recettes
 materiel:
   - Gastro 1/1 (Normaux)
   - Four
@@ -77,5 +76,5 @@ saison:
   - automne
 temperature: Chaud
 title: Petits paquets - Aumonières courge feta
-type: entree
+typeR: entree
 ---

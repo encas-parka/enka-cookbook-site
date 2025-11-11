@@ -1,8 +1,7 @@
 ---
 title: TARTE TATIN AUX POIVRONS VEGANE ET SANS GLUTEN
 draft: false
-layout: recettes
-type: entree
+typeR: entree
 categories:
   - Tarte (salée)
 auteur: Auré

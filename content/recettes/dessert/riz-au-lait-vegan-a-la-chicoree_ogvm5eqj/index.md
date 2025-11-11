@@ -1,8 +1,7 @@
 ---
 title: riz au lait végan à la chicorée
 draft: false
-layout: recettes
-type: dessert
+typeR: dessert
 categories:
   - Sucrée
 regime:

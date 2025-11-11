@@ -3,8 +3,7 @@ title: Cheesecake vegan citron framboise
 draft: false
 img: ''
 description: Attention, il faut s'y prendre à l'avance
-layout: recettes
-type: dessert
+typeR: dessert
 categories:
   - Sucrée
 auteur: Miki

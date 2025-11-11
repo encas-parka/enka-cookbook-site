@@ -1,8 +1,7 @@
 ---
 title: Crêpes de sarrasin ricotta, épinards et champignons
 draft: false
-layout: recettes
-type: plat
+typeR: plat
 categories:
   - Plat chaud
 auteur: frédo

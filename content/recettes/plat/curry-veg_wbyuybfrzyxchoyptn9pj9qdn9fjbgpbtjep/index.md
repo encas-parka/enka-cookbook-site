@@ -1,8 +1,7 @@
 ---
 title: Curry VEG
 draft: false
-layout: recettes
-type: plat
+typeR: plat
 categories:
   - Plat chaud
 auteur: Léon

@@ -1,8 +1,7 @@
 ---
 title: Salade carottes betteraves au cumin
 draft: false
-layout: recettes
-type: entree
+typeR: entree
 categories:
   - Salade
 regime:
@@ -50,4 +49,3 @@ publishDate: 2025-08-08T09:35:00.000Z
 uuid: '75572676'
 titleslug: salade-carottes-betteraves-au-cumin_75572676
 ---
-

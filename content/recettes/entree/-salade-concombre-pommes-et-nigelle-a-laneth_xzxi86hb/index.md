@@ -1,8 +1,7 @@
 ---
 title: 'Salade concombre, pommes et nigelle à l''aneth '
 draft: false
-layout: recettes
-type: entree
+typeR: entree
 categories:
   - Salade
 regime:

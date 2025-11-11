@@ -1,8 +1,7 @@
 ---
 title: Salade thaï aux nouilles de riz
 draft: false
-layout: recettes
-type: entree
+typeR: entree
 categories:
   - Salade
 regime:

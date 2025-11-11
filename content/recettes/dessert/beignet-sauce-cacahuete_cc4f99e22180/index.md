@@ -3,8 +3,7 @@ title: Beignet sauce cacahuète
 draft: false
 img: ''
 description: Dessert pour le catering de la fête de la soupe 2025
-layout: recettes
-type: dessert
+typeR: dessert
 categories:
   - Friture
 auteur: Alio
@@ -80,4 +79,3 @@ astuces: []
 prepAlt: []
 publishDate: 2025-10-19T20:10:00.000Z
 ---
-

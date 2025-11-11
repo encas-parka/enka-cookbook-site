@@ -71,7 +71,6 @@ ingredients:
     quantite: 1.5
     unit: Kg
     commentaire: ''
-layout: recettes
 plate: 40
 preparation: |-
   Eplucher et émincer les carottes et les courgettes. Emincer une branche de céleri. Mettre le tout dans un saladier. Réserver.
@@ -93,5 +92,5 @@ regime:
   - sans-gluten
 temperature: Chaud
 title: CHORBA VEGAN ET SANS GLUTEN
-type: plat
+typeR: plat
 ---

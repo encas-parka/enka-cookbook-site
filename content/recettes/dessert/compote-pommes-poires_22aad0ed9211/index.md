@@ -3,8 +3,7 @@ title: Compote pommes poires
 draft: false
 img: ''
 description: Dessert pour la catering de la fête de la soupe 2025
-layout: recettes
-type: dessert
+typeR: dessert
 categories:
   - Sucrée
 auteur: Alio
@@ -45,4 +44,3 @@ astuces: []
 prepAlt: []
 publishDate: 2025-10-19T19:18:00.000Z
 ---
-

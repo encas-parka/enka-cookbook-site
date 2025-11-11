@@ -47,7 +47,6 @@ ingredients:
     quantite: 85
     unit: gr.
     commentaire: ''
-layout: recettes
 materiel:
   - Moule à muffin
 plate: 20
@@ -76,5 +75,5 @@ regime:
 region: Portugal
 temperature: Froid
 title: QUEIJADAS DE FEIJAO Végan et sans gluten
-type: dessert
+typeR: dessert
 ---

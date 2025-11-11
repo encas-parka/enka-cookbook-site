@@ -2,8 +2,7 @@
 title: Raïta (Rainbow Queer Naan)
 draft: false
 description: ''
-layout: recettes
-type: entree
+typeR: entree
 categories:
   - Tartinade
 auteur: Auré
@@ -68,4 +67,3 @@ checkAlwaysOk: false
 regime:
   - vegetarien
 ---
-

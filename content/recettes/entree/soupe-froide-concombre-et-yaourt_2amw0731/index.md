@@ -39,7 +39,6 @@ ingredients:
     quantite: 13
     unit: Kg
     commentaire: ''
-layout: recettes
 plate: 100
 prepAlt:
   - recetteAlt: SOUPE FROIDE CONCOMBRE ET YAOURT VEGAN
@@ -63,5 +62,5 @@ regime:
   - vegetarien
 temperature: Froid
 title: SOUPE FROIDE CONCOMBRE ET YAOURT
-type: entree
+typeR: entree
 ---

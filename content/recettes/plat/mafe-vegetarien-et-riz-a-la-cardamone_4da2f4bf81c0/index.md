@@ -3,8 +3,7 @@ title: Mafé végétarien et riz à la cardamone
 draft: false
 img: ''
 description: Plat pour le catering de la fête de la soupe 2025
-layout: recettes
-type: plat
+typeR: plat
 categories:
   - Plat chaud
 auteur: Alio
@@ -74,7 +73,7 @@ preparation: |-
 
   Ajouter les tomates fraiches et le concentré
 
-  Ajouter le bouillon 
+  Ajouter le bouillon
 
   Rajouter un peu d'eau si besoin et laisser mijoter à couvert
 
@@ -92,4 +91,3 @@ astuces: []
 prepAlt: []
 publishDate: 2025-10-19T18:50:00.000Z
 ---
-

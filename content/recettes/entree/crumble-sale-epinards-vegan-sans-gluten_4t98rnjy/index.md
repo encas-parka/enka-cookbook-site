@@ -40,7 +40,6 @@ ingredients:
     quantite: 200
     unit: gr.
     commentaire: ''
-layout: recettes
 materiel:
   - Four
   - Gastro 1/1 (Normaux)
@@ -59,5 +58,5 @@ regime:
   - sans-lactose
 temperature: Chaud
 title: Crumble salé épinards vegan sans gluten
-type: entree
+typeR: entree
 ---

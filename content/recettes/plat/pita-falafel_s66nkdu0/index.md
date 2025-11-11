@@ -1,8 +1,7 @@
 ---
 title: PITA FALAFEL
 draft: false
-layout: recettes
-type: plat
+typeR: plat
 categories:
   - Pain
 auteur: Arnaud

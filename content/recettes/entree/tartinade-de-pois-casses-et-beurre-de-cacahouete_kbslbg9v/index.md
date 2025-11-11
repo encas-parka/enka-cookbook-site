@@ -1,8 +1,7 @@
 ---
 title: Tartinade de pois cassés et beurre de cacahouète
 draft: false
-layout: recettes
-type: entree
+typeR: entree
 categories:
   - Tartinade
 regime:
@@ -36,9 +35,9 @@ preparation24h: |-
 
   * faire tremper les pois cassé deux jours avant de servir
 
-  **La veille :** 
+  **La veille :**
 
-  * faire cuire les pois cassé entre 30 et 45 mn la veille avec le laurier. 
+  * faire cuire les pois cassé entre 30 et 45 mn la veille avec le laurier.
   * Sortir les petits pois surgelés du congélateur
 astuces:
   - astuce: laurier → quantité en feuilles

@@ -1,8 +1,7 @@
 ---
 title: Barre cereales noisettes
 draft: false
-layout: recettes
-type: dessert
+typeR: dessert
 categories:
   - Biscuits
 regime:

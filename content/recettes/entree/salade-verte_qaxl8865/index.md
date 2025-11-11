@@ -2,8 +2,7 @@
 title: Salade verte
 draft: false
 description: ''
-layout: recettes
-type: entree
+typeR: entree
 categories:
   - Accompagnement
 regime:

@@ -1,8 +1,7 @@
 ---
 title: yahourt de brebis à la crème de chataigne et son alternative vegan
 draft: false
-layout: recettes
-type: dessert
+typeR: dessert
 categories:
   - Autre
 regime:

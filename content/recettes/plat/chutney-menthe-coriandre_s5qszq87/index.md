@@ -2,8 +2,7 @@
 title: Chutney menthe coriandre (Rainbow Queer Naan)
 draft: false
 description: ''
-layout: recettes
-type: plat
+typeR: plat
 categories:
   - Sauce
 auteur: Auré
@@ -70,4 +69,3 @@ regime:
   - vegan
   - sans-gluten
 ---
-

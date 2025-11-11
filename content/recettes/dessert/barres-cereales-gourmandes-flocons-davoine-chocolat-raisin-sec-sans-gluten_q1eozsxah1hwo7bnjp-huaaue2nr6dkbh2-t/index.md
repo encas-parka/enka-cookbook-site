@@ -2,8 +2,7 @@
 title: Barres céréales gourmandes flocons d'avoine chocolat raisin sec sans gluten
 draft: false
 description: Adaptation d'une recette du site owiowifouettemoi en mode vegan et moins cher
-layout: recettes
-type: dessert
+typeR: dessert
 categories:
   - Autre
 auteur: ''

@@ -2,8 +2,7 @@
 title: BABKA VEGANE HARISSA ET PISTACHE
 draft: false
 description: brioche individuelle. Mais possibilité de les façonner en grosse pièce dans des moules à tarte ou à cake.
-layout: recettes
-type: entree
+typeR: entree
 categories:
   - Autre
 auteur: Auré
@@ -86,4 +85,3 @@ checkAlwaysOk: true
 regime:
   - vegan
 ---
-

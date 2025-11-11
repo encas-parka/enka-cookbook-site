@@ -1,8 +1,7 @@
 ---
 title: COOKIE THE MATCHA ET GINGEMBRE CONFIT Végan et sans gluten
 draft: false
-layout: recettes
-type: dessert
+typeR: dessert
 categories:
   - Gateau
 auteur: Auré

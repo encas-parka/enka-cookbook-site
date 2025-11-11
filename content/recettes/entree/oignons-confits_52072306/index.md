@@ -1,8 +1,7 @@
 ---
 title: Oignons confits
 draft: false
-layout: recettes
-type: entree
+typeR: entree
 categories:
   - Accompagnement
 regime:
@@ -38,4 +37,3 @@ preparation: |-
   * Laisser cuire jusqu'à ce que les oignons soient confits
 publishDate: 2025-07-31T08:48:00.000Z
 ---
-

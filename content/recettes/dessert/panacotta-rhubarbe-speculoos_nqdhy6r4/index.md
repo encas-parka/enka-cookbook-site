@@ -1,8 +1,7 @@
 ---
 title: panacotta rhubarbe spéculoos
 draft: false
-layout: recettes
-type: dessert
+typeR: dessert
 categories:
   - Sucrée
 regime:

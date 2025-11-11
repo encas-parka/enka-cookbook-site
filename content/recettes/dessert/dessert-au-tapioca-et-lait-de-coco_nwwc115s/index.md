@@ -2,8 +2,7 @@
 title: Crème dessert au tapioca et lait de coco
 draft: false
 description: ''
-layout: recettes
-type: dessert
+typeR: dessert
 categories:
   - Gateau
 auteur: ''
@@ -46,4 +45,3 @@ checkAlwaysOk: false
 regime:
   - vegetarien
 ---
-

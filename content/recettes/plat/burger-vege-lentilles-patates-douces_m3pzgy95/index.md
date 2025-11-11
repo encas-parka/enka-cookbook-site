@@ -2,8 +2,7 @@
 title: Burger Végé Lentilles Patates Douces
 draft: false
 description: ''
-layout: recettes
-type: plat
+typeR: plat
 categories:
   - Snacking
 auteur: Lulu
@@ -144,4 +143,3 @@ checkAlwaysOk: false
 regime:
   - vegetarien
 ---
-

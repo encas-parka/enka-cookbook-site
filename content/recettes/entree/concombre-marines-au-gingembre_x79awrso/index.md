@@ -1,8 +1,7 @@
 ---
 title: Concombre marinés au gingembre
 draft: false
-layout: recettes
-type: entree
+typeR: entree
 categories:
   - Salade
 regime:

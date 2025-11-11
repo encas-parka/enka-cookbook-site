@@ -38,7 +38,6 @@ ingredients:
     quantite: 200
     unit: gr.
     commentaire: ''
-layout: recettes
 plate: 10
 preparation: |-
   faire chauffer le lait avec les gousse de vanille environ 15 min. il suffit que le lait soit chaud pour infuser la vanille attention a ne jamais faire bouillir. ajouter extrait de vanille
@@ -64,5 +63,5 @@ preparation24h: la creme peut etre faite la veille  pour qu'elle refroidisse bie
 publishDate: 2024-06-13T08:06:00.000Z
 temperature: Froid
 title: ile flottante
-type: dessert
+typeR: dessert
 ---

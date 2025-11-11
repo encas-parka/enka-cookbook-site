@@ -1,8 +1,7 @@
 ---
 title: pain pita
 draft: false
-layout: recettes
-type: plat
+typeR: plat
 categories:
   - Autre
 regime:

@@ -32,7 +32,6 @@ ingredients:
     quantite: 1.875
     unit: Kg
     commentaire: ''
-layout: recettes
 plate: 100
 prepAlt:
   - recetteAlt: keshke-vegan-et-sans-gluten_i8nbcodj
@@ -46,5 +45,5 @@ regime:
   - vegetarien
 temperature: Froid
 title: Keshke
-type: entree
+typeR: entree
 ---

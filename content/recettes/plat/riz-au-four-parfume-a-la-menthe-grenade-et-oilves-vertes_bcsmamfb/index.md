@@ -2,8 +2,7 @@
 title: Riz au four parfumé à la menthe, grenade et oilves vertes
 draft: false
 img: riz-au-four-parfumé-à-la-menthe-grenade-et-oilves-vertes.jpeg
-layout: recettes
-type: plat
+typeR: plat
 categories:
   - Plat chaud
 auteur: Ottolenghi

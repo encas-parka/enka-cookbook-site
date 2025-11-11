@@ -3,8 +3,7 @@ title: Épinards marinés à la coréenne - Sigeumchi Namul
 draft: false
 img: ''
 description: ''
-layout: recettes
-type: entree
+typeR: entree
 categories:
   - Snacking
 auteur: ''
@@ -68,4 +67,3 @@ astuces: []
 prepAlt: []
 publishDate: 2025-09-01T08:08:00.000Z
 ---
-

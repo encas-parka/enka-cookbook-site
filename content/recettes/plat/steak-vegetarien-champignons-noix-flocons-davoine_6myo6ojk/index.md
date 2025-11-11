@@ -56,7 +56,6 @@ ingredients:
     quantite: 4.3
     unit: Kg
     commentaire: ''
-layout: recettes
 materiel:
   - Gastro 1/1 (Fins)
   - Four
@@ -82,5 +81,5 @@ regime:
   - sans-lactose
 temperature: Chaud
 title: Steak végétarien champignons - noix - flocons d'avoine
-type: plat
+typeR: plat
 ---

@@ -1,8 +1,7 @@
 ---
 title: Tartinade salé à la chataigne (végan)
 draft: false
-layout: recettes
-type: entree
+typeR: entree
 categories:
   - Tartinade
 regime:

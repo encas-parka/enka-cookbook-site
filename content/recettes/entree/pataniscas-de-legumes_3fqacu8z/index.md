@@ -1,8 +1,7 @@
 ---
 title: Pataniscas de legumes
 draft: false
-layout: recettes
-type: entree
+typeR: entree
 categories:
   - Bouchées salées
   - Snacking

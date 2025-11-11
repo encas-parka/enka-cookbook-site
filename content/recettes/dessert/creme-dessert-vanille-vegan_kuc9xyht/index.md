@@ -2,8 +2,7 @@
 title: créme dessert vanille vegan
 draft: false
 description: (alternative vegan de l'ile flottante)
-layout: recettes
-type: dessert
+typeR: dessert
 categories:
   - Sucrée
 regime:

@@ -53,7 +53,6 @@ ingredients:
     quantite: 50
     unit: unité
     commentaire: ''
-layout: recettes
 materiel:
   - Gastro 1/1 (Normaux)
   - Four
@@ -98,5 +97,5 @@ regime:
 region: Portugal
 temperature: Chaud
 title: Morue à la Gomes de Sa (Bacalhau à Gomes de Sa)
-type: plat
+typeR: plat
 ---

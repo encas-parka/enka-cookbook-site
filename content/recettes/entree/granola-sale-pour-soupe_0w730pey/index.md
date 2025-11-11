@@ -1,8 +1,7 @@
 ---
 title: GRANOLA salé pour Soupe
 draft: false
-layout: recettes
-type: entree
+typeR: entree
 categories:
   - Soupe
 auteur: Auré

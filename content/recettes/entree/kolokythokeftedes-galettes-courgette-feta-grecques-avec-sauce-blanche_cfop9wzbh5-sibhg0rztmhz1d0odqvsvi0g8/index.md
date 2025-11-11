@@ -2,8 +2,7 @@
 title: Kolokythokeftedes - galettes courgette feta grecques - avec sauce blanche
 draft: false
 description: ''
-layout: recettes
-type: entree
+typeR: entree
 categories:
   - Bouchées salées
 auteur: Marion

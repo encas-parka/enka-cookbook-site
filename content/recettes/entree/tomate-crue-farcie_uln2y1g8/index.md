@@ -1,8 +1,7 @@
 ---
 title: Tomate crue farcie
 draft: false
-layout: recettes
-type: entree
+typeR: entree
 categories:
   - Accompagnement
 regime:

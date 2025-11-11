@@ -1,8 +1,7 @@
 ---
 title: Salade d'Aubergine aux herbes et à l'ail frit
 draft: false
-layout: recettes
-type: entree
+typeR: entree
 categories:
   - Salade
 auteur: frédo

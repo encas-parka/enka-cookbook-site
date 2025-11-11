@@ -3,8 +3,7 @@ title: Tajine olives citron avec pâte langues d'oiseaux (orzo)
 draft: false
 img: ''
 description: Plat pour le catering de la fête de la soupe 2025
-layout: recettes
-type: plat
+typeR: plat
 categories:
   - Plat chaud
 auteur: Alio
@@ -78,4 +77,3 @@ astuces: []
 prepAlt: []
 publishDate: 2025-10-19T19:26:00.000Z
 ---
-

@@ -3,8 +3,7 @@ title: Lasagne bolognaise végé saute tomate protéine de soja champignon béch
 draft: false
 img: ''
 description: Lasagne pour le catering de la fête de la soupe 2025
-layout: recettes
-type: plat
+typeR: plat
 categories:
   - Plat chaud
 auteur: Alio
@@ -74,7 +73,7 @@ ingredients:
     commentaire: 10 paquets de pates à lasagnes (1,5 paquets par plaque gastro ; 1 plaque gastro = 15 portions)
 materiel: []
 preparation: |-
-  - Faire le soffrito (oignon, céleri, carottes) 
+  - Faire le soffrito (oignon, céleri, carottes)
   - rajouter la protéine de soja réhydratée et les champignons
   - Assaisonner avec le mélange d'épices (4 épices, cumin, paprika) C'est ce qui remplacera la saveur "viande"
   - ajouter la polpa mutti et le laurier. Rectifier l'assaisonnement et laisser mijoter
@@ -87,4 +86,3 @@ astuces: []
 prepAlt: []
 publishDate: 2025-10-16T18:24:00.000Z
 ---
-

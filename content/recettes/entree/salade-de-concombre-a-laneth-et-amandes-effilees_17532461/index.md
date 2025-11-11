@@ -1,8 +1,7 @@
 ---
 title: Salade de concombre à l'aneth et amandes effilées
 draft: false
-layout: recettes
-type: entree
+typeR: entree
 categories:
   - Salade
 regime:

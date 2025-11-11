@@ -1,8 +1,7 @@
 ---
 title: 'RAGOUT DE LENTILLES AUX AUBERGINES '
 draft: false
-layout: recettes
-type: plat
+typeR: plat
 categories:
   - Plat chaud
 cuisson: Oui

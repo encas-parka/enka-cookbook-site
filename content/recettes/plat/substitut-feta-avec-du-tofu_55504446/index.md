@@ -1,8 +1,7 @@
 ---
 title: Substitut feta avec du tofu
 draft: false
-layout: recettes
-type: plat
+typeR: plat
 categories:
   - Autre
 regime:

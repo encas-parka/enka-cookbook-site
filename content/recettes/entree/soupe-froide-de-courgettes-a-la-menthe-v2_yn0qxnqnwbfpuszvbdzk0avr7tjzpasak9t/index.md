@@ -1,8 +1,7 @@
 ---
 title: Soupe froide de courgettes à la menthe v2
 draft: false
-layout: recettes
-type: entree
+typeR: entree
 categories:
   - Soupe
 regime:

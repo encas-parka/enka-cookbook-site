@@ -46,7 +46,6 @@ ingredients:
     quantite: 70
     unit: gr.
     commentaire: ''
-layout: recettes
 materiel:
   - Four
 plate: 20
@@ -65,5 +64,5 @@ regime:
   - sans-lactose
 temperature: Chaud
 title: BROWNIE HALVA ET TAHIN Végan et sans gluten
-type: dessert
+typeR: dessert
 ---

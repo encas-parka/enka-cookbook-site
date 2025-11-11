@@ -50,7 +50,6 @@ ingredients:
     quantite: 1.1
     unit: Kg
     commentaire: ''
-layout: recettes
 plate: 100
 preparation: |-
   Dans un récipient mélanger la farine, le sucre glace, la poudre d’amandes et le sel. Ajouter la margarine coupée en morceaux et mélanger l’ensemble du bout des doigts jusqu’à obtenir une pâte sableuse. Incorporer ensuite le lait et mélanger bien de façon à obtenir une pâte homogène et former autant de boules qu'il ne faut de tartes. Mettre au frais enveloppé de film alimentaire pendant 30min.
@@ -71,5 +70,5 @@ regime:
   - vegan
 temperature: Froid
 title: TARTE AU CITRON VEGANE
-type: dessert
+typeR: dessert
 ---

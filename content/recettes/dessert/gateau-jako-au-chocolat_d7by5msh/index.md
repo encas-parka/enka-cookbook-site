@@ -1,8 +1,7 @@
 ---
 title: Gateau Jako au chocolat
 draft: false
-layout: recettes
-type: dessert
+typeR: dessert
 categories:
   - Sucrée
 auteur: frédo

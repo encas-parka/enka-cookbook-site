@@ -1,8 +1,7 @@
 ---
 title: gateau à la crème de marron nappage chocolat
 draft: false
-layout: recettes
-type: dessert
+typeR: dessert
 categories:
   - Gateau
 regime:

@@ -2,8 +2,7 @@
 title: Tartinade lentilles corail - patates douces - fenugrec
 draft: false
 img: tartinade-lentille-corail.jpg
-layout: recettes
-type: entree
+typeR: entree
 categories:
   - Tartinade
 regime:

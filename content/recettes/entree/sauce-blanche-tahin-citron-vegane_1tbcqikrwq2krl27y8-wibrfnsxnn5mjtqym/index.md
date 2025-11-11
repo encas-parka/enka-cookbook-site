@@ -2,8 +2,7 @@
 title: Sauce blanche tahin citron vegane
 draft: false
 description: pour aller avec des falafels ou autre boulettes végé
-layout: recettes
-type: entree
+typeR: entree
 categories:
   - Sauce
 auteur: Marion
@@ -44,4 +43,3 @@ preparation: |-
   (pas encore testé... à ajuster si ça parait déconnant)
 publishDate: 2025-07-30T14:55:00.000Z
 ---
-

@@ -31,7 +31,6 @@ ingredients:
     quantite: 30
     unit: gr.
     commentaire: ''
-layout: recettes
 materiel:
   - Grand Saladier
 plate: 6
@@ -50,5 +49,5 @@ saison:
   - hiver
 temperature: Froid
 title: Chou mariné à la japonaise
-type: entree
+typeR: entree
 ---

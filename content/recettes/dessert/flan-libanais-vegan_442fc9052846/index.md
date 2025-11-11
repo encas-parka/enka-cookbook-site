@@ -3,8 +3,7 @@ title: Flan libanais vegan
 draft: false
 img: ''
 description: Dessert pour le catering de la fête de la soupe 2025
-layout: recettes
-type: dessert
+typeR: dessert
 categories:
   - Autre
 auteur: Alio
@@ -40,7 +39,7 @@ materiel: []
 preparation: |-
   Mettre tout les ingrédients ensemble dans une casserole et chauffer à feu doux en mélangeant avec un fouet.
 
-  Une fois que la préparation s'est épaissie (consistance type yaourt liquide "yop"), couper la cuisson. 
+  Une fois que la préparation s'est épaissie (consistance type yaourt liquide "yop"), couper la cuisson.
 
   Dresser dans des ramequins et réserver au frais.
 
@@ -50,4 +49,3 @@ astuces: []
 prepAlt: []
 publishDate: 2025-10-19T21:54:00.000Z
 ---
-

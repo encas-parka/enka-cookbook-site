@@ -2,8 +2,7 @@
 title: Caviar d'aubergines fumées
 draft: false
 description: ''
-layout: recettes
-type: entree
+typeR: entree
 categories:
   - Tartinade
 auteur: Auré
@@ -52,4 +51,3 @@ regime:
   - sans-gluten
   - sans-lactose
 ---
-

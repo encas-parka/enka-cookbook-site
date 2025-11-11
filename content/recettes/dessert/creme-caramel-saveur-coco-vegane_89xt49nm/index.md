@@ -36,7 +36,6 @@ ingredients:
     quantite: 1.5
     unit: Kg
     commentaire: ''
-layout: recettes
 plate: 100
 preparation: |-
   **Le caramel** : Faire fondre le sucre (caramel) dans une casserole jusqu’à obtention d’un caramel liquide. Attention de ne pas chauffer le sucre trop fort, le caramel brûle assez vite.
@@ -54,5 +53,5 @@ regime:
   - sans-gluten
 temperature: Froid
 title: CREME CARAMEL SAVEUR COCO VEGANE
-type: dessert
+typeR: dessert
 ---

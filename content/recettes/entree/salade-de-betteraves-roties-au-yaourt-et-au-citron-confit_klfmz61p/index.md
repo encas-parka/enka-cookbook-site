@@ -1,8 +1,7 @@
 ---
 title: Salade de betteraves rôties au yaourt et au citron confit
 draft: false
-layout: recettes
-type: entree
+typeR: entree
 categories:
   - Salade
 regime:

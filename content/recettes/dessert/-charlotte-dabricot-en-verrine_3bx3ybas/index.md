@@ -1,8 +1,7 @@
 ---
 title: 'charlotte d''abricot en verrine '
 draft: false
-layout: recettes
-type: dessert
+typeR: dessert
 categories:
   - Sucrée
 regime:

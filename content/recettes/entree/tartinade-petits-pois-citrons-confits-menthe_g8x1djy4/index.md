@@ -1,9 +1,8 @@
 ---
 title: Tartinade petits pois citrons confits menthe
 draft: false
-layout: recettes
 description: ''
-type: entree
+typeR: entree
 categories:
   - Tartinade
 regime:

@@ -34,7 +34,6 @@ ingredients:
     quantite: 300
     unit: ml
     commentaire: ''
-layout: recettes
 plate: 100
 preparation: |-
   1. Émincer finement les échalotes.
@@ -50,5 +49,5 @@ regime:
   - sans-lactose
 temperature: Chaud
 title: Sauce aux cranberries
-type: plat
+typeR: plat
 ---

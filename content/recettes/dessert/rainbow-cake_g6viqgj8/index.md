@@ -2,8 +2,7 @@
 title: RAINBOW CAKE (Rainbow Queer Naan)
 draft: false
 description: A faire la veille du service !
-layout: recettes
-type: dessert
+typeR: dessert
 categories:
   - Gateau
 auteur: Auré
@@ -88,7 +87,7 @@ preparation: |-
   Faire fondre le beurre dans une casserole. Réserver.
 
   Battre les oeufs entiers avec le sucre.  Le faire en plusieurs fois vu les quantités. Il est préférable de faire deux gâteaux par deux gâteaux.
-  Fouetter jusqu'à ce que le mélange double de volume et soit mousseux. 
+  Fouetter jusqu'à ce que le mélange double de volume et soit mousseux.
 
   Rajouter le beurre fondu légèrement refroidi. Battre à nouveau.
 
@@ -102,7 +101,7 @@ preparation: |-
 
   Peser la pâte.
 
-  Diviser la pâte en 7 parts de 
+  Diviser la pâte en 7 parts de
   poids identiques dans autant de bols.
 
   **L'important est que les gâteaux aient tous le même poids.**
@@ -121,8 +120,8 @@ preparation: |-
 
   Pour le **vert** : Gouttes de bleu + gouttes de jaune
 
-  Pour le **bleu** : 3/4 tube de bleu (je  n'ai pas réussi à avoir un beau bleu car les 
-  oeufs utilisés pour les gâteaux étaient bio, donc bien jaunes et comme 
+  Pour le **bleu** : 3/4 tube de bleu (je  n'ai pas réussi à avoir un beau bleu car les
+  oeufs utilisés pour les gâteaux étaient bio, donc bien jaunes et comme
   jaune + bleu = vert. J'ai dû rajouter pas mal de colorant bleu)
 
   Pour l'**indigo** : gouttes de bleu + gouttes de rouge + gouttes de jaune"
@@ -134,9 +133,9 @@ preparation: |-
   **Placez au four préchauffé à 180°C (Th. 6) pour 8 à 10 mn.**
 
   Pour savoir si les génoises/gâteaux sont
-   cuits, tapoter avec mon doigt le dessus du gâteau. Il est cuit quand 
-  il ne s'enfonce pas dans la pâte mais doit rester moelleux. En général 
-  compter 8 à 9 minutes. Les gâteaux ont environ 1 cm d'épaisseur. 
+   cuits, tapoter avec mon doigt le dessus du gâteau. Il est cuit quand
+  il ne s'enfonce pas dans la pâte mais doit rester moelleux. En général
+  compter 8 à 9 minutes. Les gâteaux ont environ 1 cm d'épaisseur.
   Ajuster la cuisson en fonction de l'épaisseur.
 
   Faire toutes les génoises. Toutes les cuire et les réserver.
@@ -147,7 +146,7 @@ preparation: |-
 
   Faire fondre chocolat blanc au bain marie. Réserver à température ambiante.
 
-  Battre au fouet électrique le mascarpone.  Incorporer le chocolat blanc fondu (il ne doit pas être chaud) et battre à nouveau quelques minutes pour avoir un mélange 
+  Battre au fouet électrique le mascarpone.  Incorporer le chocolat blanc fondu (il ne doit pas être chaud) et battre à nouveau quelques minutes pour avoir un mélange
   aéré.
 
   **Le montage :**
@@ -167,4 +166,3 @@ publishDate: 2025-06-01T21:25:00.000Z
 checkAlwaysOk: false
 regime: null
 ---
-

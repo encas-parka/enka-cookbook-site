@@ -1,8 +1,7 @@
 ---
 title: Salade Thaï à la mangue
 draft: false
-layout: recettes
-type: entree
+typeR: entree
 categories:
   - Salade
 regime:

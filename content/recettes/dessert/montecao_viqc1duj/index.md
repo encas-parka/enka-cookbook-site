@@ -1,8 +1,7 @@
 ---
 title: MONTECAO
 draft: false
-layout: recettes
-type: dessert
+typeR: dessert
 categories:
   - Biscuits
 auteur: Auré

@@ -1,8 +1,7 @@
 ---
 title: 'RAMEN SHOYU D''été '
 draft: false
-layout: recettes
-type: plat
+typeR: plat
 categories:
   - Plat chaud
 auteur: Auré

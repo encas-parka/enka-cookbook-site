@@ -2,8 +2,7 @@
 title: SOUPE A L'OIGNON
 draft: false
 description: ''
-layout: recettes
-type: entree
+typeR: entree
 categories:
   - Soupe
 auteur: Auré

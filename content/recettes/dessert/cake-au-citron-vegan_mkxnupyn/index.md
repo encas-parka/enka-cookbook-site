@@ -43,7 +43,6 @@ ingredients:
     quantite: 280
     unit: gr.
     commentaire: ''
-layout: recettes
 materiel:
   - moule a cake
   - Four
@@ -62,5 +61,5 @@ regime:
   - vegetarien
 temperature: Froid
 title: Cake au citron végan
-type: dessert
+typeR: dessert
 ---

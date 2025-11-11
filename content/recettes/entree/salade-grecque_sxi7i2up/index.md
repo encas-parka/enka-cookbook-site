@@ -34,7 +34,6 @@ ingredients:
     quantite: 3
     unit: l.
     commentaire: ''
-layout: recettes
 materiel:
   - Grand Saladier
 plate: 180
@@ -48,5 +47,5 @@ saison:
   - ete
 temperature: Froid
 title: Salade Grecque
-type: entree
+typeR: entree
 ---

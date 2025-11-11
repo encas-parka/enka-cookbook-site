@@ -3,8 +3,7 @@ title: LASSI VEGAN A LA MANGUE
 draft: false
 img: ''
 description: Boisson
-layout: recettes
-type: dessert
+typeR: dessert
 categories:
   - Autre
 auteur: Auré
@@ -54,4 +53,3 @@ astuces: []
 prepAlt: []
 publishDate: 2025-10-16T18:21:00.000Z
 ---
-

@@ -1,8 +1,7 @@
 ---
 title: Melon basilic
 draft: false
-layout: recettes
-type: entree
+typeR: entree
 categories:
   - Salade
 regime:
@@ -30,4 +29,3 @@ ingredients:
 preparation: ':)'
 publishDate: 2025-07-31T08:31:00.000Z
 ---
-

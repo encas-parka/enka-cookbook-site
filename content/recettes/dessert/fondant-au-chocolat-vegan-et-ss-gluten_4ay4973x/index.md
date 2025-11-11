@@ -1,8 +1,7 @@
 ---
 title: fondant au chocolat vegan et ss gluten
 draft: false
-layout: recettes
-type: dessert
+typeR: dessert
 categories:
   - Gateau
 regime:

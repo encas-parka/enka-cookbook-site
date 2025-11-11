@@ -1,8 +1,7 @@
 ---
 title: Zaalouk (salade maroc d'aubergines)
 draft: false
-layout: recettes
-type: entree
+typeR: entree
 categories:
   - Tartinade
 regime:

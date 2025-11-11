@@ -2,8 +2,7 @@
 title: Khadaï Tofu (Rainbow Queer Naan)
 draft: false
 description: Quantité pour accompagnement, pas plat principal
-layout: recettes
-type: plat
+typeR: plat
 categories:
   - Plat chaud
 auteur: Auré
@@ -75,7 +74,7 @@ preparation: |-
 
   Chauffer un peu d’huile dans le grand wok. Quand l’huile est chaude, mettre le cumin et l’oignon haché.
 
-  Quand les oignons sont dorés, mettre les épices : le curcuma, le curry, le paprika, la poudre préalablement préparée, l’ail et le gingembre et 
+  Quand les oignons sont dorés, mettre les épices : le curcuma, le curry, le paprika, la poudre préalablement préparée, l’ail et le gingembre et
   mélanger.
 
   Ajouter la purée de tomates et mélanger.
@@ -99,4 +98,3 @@ regime:
   - vegan
   - sans-gluten
 ---
-

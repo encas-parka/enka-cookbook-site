@@ -1,8 +1,7 @@
 ---
 title: Blanquette de soja texturé et riz basmati
 draft: false
-layout: recettes
-type: plat
+typeR: plat
 categories:
   - Plat chaud
 auteur: frédo

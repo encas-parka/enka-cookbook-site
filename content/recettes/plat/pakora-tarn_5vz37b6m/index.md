@@ -1,8 +1,7 @@
 ---
 title: Pakora (tarn)
 draft: true
-layout: recettes
-type: plat
+typeR: plat
 categories:
   - Bouchées salées
   - Friture

@@ -1,8 +1,7 @@
 ---
 title: Pataniscas de legumes - vegan sans gluten
 draft: false
-layout: recettes
-type: entree
+typeR: entree
 categories:
   - Bouchées salées
   - Snacking

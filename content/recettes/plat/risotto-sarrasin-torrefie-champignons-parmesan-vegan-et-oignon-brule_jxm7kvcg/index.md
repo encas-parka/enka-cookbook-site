@@ -1,8 +1,7 @@
 ---
 title: Risotto Sarrasin Torréfié Champignons, Parmesan vegan et oignon brulé
 draft: false
-layout: recettes
-type: plat
+typeR: plat
 categories:
   - Plat chaud
 regime:

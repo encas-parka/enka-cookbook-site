@@ -2,8 +2,7 @@
 title: SOUPE MISO AUX AUBERGINES GRILLEES
 draft: false
 description: 'La soupe miso de base est constituée de 4 éléments de base : le dashi, 1 à 3 ingrédients de saison, le miso et une garniture.'
-layout: recettes
-type: plat
+typeR: plat
 categories:
   - Soupe
 auteur: Auré

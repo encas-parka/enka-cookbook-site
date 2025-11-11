@@ -2,8 +2,7 @@
 title: JAMBALAYA
 draft: false
 description: ''
-layout: recettes
-type: plat
+typeR: plat
 categories:
   - Plat chaud
 auteur: Auré

@@ -20,7 +20,6 @@ ingredients:
     quantite: 0.3
     unit: l.
     commentaire: ''
-layout: recettes
 plate: 40
 preparation: |-
   Mélanger tous les ingrédients (le jus de citron petit à petit pour ajuster au goût). Ajuster l'assaisonnement.
@@ -36,5 +35,5 @@ regime:
   - sans-gluten
 temperature: Froid
 title: Sauce blanche citron ail
-type: plat
+typeR: plat
 ---

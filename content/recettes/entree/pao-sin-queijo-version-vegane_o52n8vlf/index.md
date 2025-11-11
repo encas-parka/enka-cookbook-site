@@ -1,8 +1,7 @@
 ---
 title: Pao sin queijo - Version végane
 draft: false
-layout: recettes
-type: entree
+typeR: entree
 categories:
   - Bouchées salées
 regime:

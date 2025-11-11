@@ -2,8 +2,7 @@
 title: Sauce korma et betterave (Rainbow Queer Naan)
 draft: false
 description: ''
-layout: recettes
-type: entree
+typeR: entree
 categories:
   - Sauce
 auteur: Auré
@@ -62,14 +61,14 @@ preparation: |-
   Faire une pâte d'oignon en les hachant finement. Puis les faire sauter à la poêle et réduire en purée.
 
   Faire
-   chauffer de l'huile dans une casserole, ajouter les gousses de 
-  cardamome, ajouter la pâte d'oignon, le piment vert haché, les feuilles 
+   chauffer de l'huile dans une casserole, ajouter les gousses de
+  cardamome, ajouter la pâte d'oignon, le piment vert haché, les feuilles
   de curry et continuer à faire sauter pendant 3 à 5 minutes.
 
   Fouetter
    ensemble le lait de coco, la crème, le yaourt, la pâte de noix de cajou
-   et le garam masala, puis les ajouter dans la poêle avec du sel au goût 
-  et laisser mijoter à découvert pendant 10 à 12 minutes jusqu'à 
+   et le garam masala, puis les ajouter dans la poêle avec du sel au goût
+  et laisser mijoter à découvert pendant 10 à 12 minutes jusqu'à
   épaississement. 
 
   Ajouter la purée de betterave.
@@ -87,4 +86,3 @@ regime:
   - vegan
   - sans-gluten
 ---
-

@@ -52,7 +52,6 @@ ingredients:
     quantite: 1
     unit: l.
     commentaire: ''
-layout: recettes
 plate: 100
 prepAlt:
   - recetteAlt: risotto-pruneaux-et-champignons-vegan_me07vdl3
@@ -75,5 +74,5 @@ regime:
   - sans-gluten
 temperature: Chaud
 title: RISOTTO DE PRUNEAUX ET CHAMPIGNONS
-type: plat
+typeR: plat
 ---

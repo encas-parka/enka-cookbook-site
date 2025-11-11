@@ -1,8 +1,7 @@
 ---
 title: tofu grillé
 draft: false
-layout: recettes
-type: plat
+typeR: plat
 categories:
   - Accompagnement
 regime:

@@ -2,8 +2,7 @@
 title: QIZHA
 draft: true
 description: Une petite part par personne
-layout: recettes
-type: dessert
+typeR: dessert
 categories:
   - Biscuits
 auteur: Auré
@@ -99,4 +98,3 @@ checkAlwaysOk: false
 regime:
   - vegan
 ---
-

@@ -20,7 +20,6 @@ ingredients:
     quantite: 25
     unit: ml
     commentaire: ''
-layout: recettes
 plate: 4
 preparation: |-
   Tremper les haricots la veille, cela peut aussi se faire en 2h avec de l'eau chaude, mais pour une meilleure digestion, 2 jours de trempages en changeant l'eau est le top.
@@ -38,5 +37,5 @@ regime:
   - sans-lactose
 temperature: Chaud
 title: Purée de Haricots Blancs (v2)
-type: plat
+typeR: plat
 ---

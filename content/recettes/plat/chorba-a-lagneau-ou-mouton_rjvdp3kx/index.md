@@ -1,9 +1,8 @@
 ---
 title: Chorba à  l'agneau (ou mouton)
 draft: false
-layout: recettes
 img: https://img.cuisineaz.com/660x660/2016-07-15/i7543-chorba-a-l-agneau.jpeg
-type: plat
+typeR: plat
 auteur: Sylvain
 regime:
   - sans-lactose

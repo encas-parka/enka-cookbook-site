@@ -1,8 +1,7 @@
 ---
 title: Salade éxotique
 draft: false
-layout: recettes
-type: entree
+typeR: entree
 categories:
   - Salade
 auteur: frédo

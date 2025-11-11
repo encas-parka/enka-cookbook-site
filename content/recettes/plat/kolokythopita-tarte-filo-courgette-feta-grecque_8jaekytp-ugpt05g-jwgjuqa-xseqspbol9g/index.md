@@ -2,8 +2,7 @@
 title: Kolokythopita - tarte filo courgette feta grecque
 draft: false
 description: ''
-layout: recettes
-type: plat
+typeR: plat
 categories:
   - Snacking
 auteur: Marion

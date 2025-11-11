@@ -47,7 +47,6 @@ ingredients:
     quantite: 1
     unit: c. à soupe
     commentaire: ''
-layout: recettes
 materiel:
   - Four
 plate: 10
@@ -65,5 +64,5 @@ saison:
   - ete
 temperature: Chaud
 title: Aubergines grillées au miso
-type: plat
+typeR: plat
 ---

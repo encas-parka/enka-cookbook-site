@@ -40,7 +40,6 @@ ingredients:
     quantite: 50
     unit: gr.
     commentaire: ''
-layout: recettes
 materiel:
   - Marmitte
 plate: 120
@@ -59,5 +58,5 @@ regime:
   - sans-lactose
 temperature: Chaud
 title: Protéines de soja marinées
-type: plat
+typeR: plat
 ---

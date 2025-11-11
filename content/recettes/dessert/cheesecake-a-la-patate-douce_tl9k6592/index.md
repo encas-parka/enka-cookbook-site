@@ -1,8 +1,7 @@
 ---
 title: CHEESECAKE A LA PATATE DOUCE
 draft: false
-layout: recettes
-type: dessert
+typeR: dessert
 categories:
   - Gateau
 auteur: Auré

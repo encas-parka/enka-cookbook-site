@@ -1,8 +1,7 @@
 ---
 title: POULET AU GOÛT INSOLITE - GUAI WEI JI
 draft: false
-layout: recettes
-type: plat
+typeR: plat
 categories:
   - Plat chaud
 auteur: Auré

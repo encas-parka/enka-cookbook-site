@@ -55,7 +55,6 @@ ingredients:
     quantite: 100
     unit: gr.
     commentaire: ''
-layout: recettes
 plate: 40
 prepAlt:
   - recetteAlt: poulet-au-gout-insolite-guai-wei-ji_18c7udz6
@@ -78,5 +77,5 @@ regime:
 region: Chine -Sichuan
 temperature: Chaud
 title: PROTEINES DE SOJA AU GOÛT INSOLITE - Version végan du poulet guai wei ji
-type: plat
+typeR: plat
 ---

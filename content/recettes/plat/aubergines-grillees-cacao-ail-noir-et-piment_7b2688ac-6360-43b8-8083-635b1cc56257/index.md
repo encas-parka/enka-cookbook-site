@@ -2,8 +2,7 @@
 title: Aubergines grillées, cacao, ail noir et harissa
 draft: false
 description: ''
-layout: recettes
-type: plat
+typeR: plat
 categories:
   - Accompagnement
   - Plat chaud
@@ -61,4 +60,3 @@ regime:
   - sans-gluten
   - sans-lactose
 ---
-

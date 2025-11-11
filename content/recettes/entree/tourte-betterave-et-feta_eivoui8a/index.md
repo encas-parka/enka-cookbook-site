@@ -31,7 +31,6 @@ ingredients:
     quantite: 5
     unit: Kg
     commentaire: ''
-layout: recettes
 materiel:
   - Four
   - Grand Saladier
@@ -54,5 +53,5 @@ regime:
   - vegetarien
 temperature: Chaud
 title: Tourte Betterave et feta
-type: entree
+typeR: entree
 ---

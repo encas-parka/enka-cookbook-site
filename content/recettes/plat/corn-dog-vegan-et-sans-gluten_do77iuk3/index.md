@@ -68,7 +68,6 @@ ingredients:
     quantite: 190
     unit: ml
     commentaire: ''
-layout: recettes
 materiel:
   - Pique à brochette
 plate: 100
@@ -106,5 +105,5 @@ regime:
 region: Corée
 temperature: Chaud
 title: CORN DOG VEGAN ET SANS GLUTEN
-type: plat
+typeR: plat
 ---

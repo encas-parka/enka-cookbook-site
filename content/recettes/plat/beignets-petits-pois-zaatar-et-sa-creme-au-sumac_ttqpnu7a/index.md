@@ -2,8 +2,7 @@
 title: Beignets Petits Pois Zaatar et sa crème au sumac
 draft: false
 description: ''
-layout: recettes
-type: plat
+typeR: plat
 categories:
   - Bouchées salées
 auteur: Ottolenghi
@@ -133,4 +132,3 @@ regime:
   - vegetarien
   - sans-gluten
 ---
-

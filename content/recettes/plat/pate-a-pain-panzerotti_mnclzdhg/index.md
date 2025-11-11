@@ -1,8 +1,7 @@
 ---
 title: pâte à pain panzerotti
 draft: false
-layout: recettes
-type: plat
+typeR: plat
 categories:
   - Autre
 regime:

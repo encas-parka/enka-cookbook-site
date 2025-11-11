@@ -2,8 +2,7 @@
 title: RISOTTO PRUNEAUX ET CHAMPIGNONS Végan
 draft: false
 description: Quantités pour être en accompagnement et pas en plat unique. Par exemple avec les farçous aveyronnais.
-layout: recettes
-type: plat
+typeR: plat
 categories:
   - Accompagnement
 auteur: Auré

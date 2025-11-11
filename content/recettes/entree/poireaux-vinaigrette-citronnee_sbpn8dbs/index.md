@@ -1,8 +1,7 @@
 ---
 title: POIREAUX VINAIGRETTE CITRONNEE
 draft: false
-layout: recettes
-type: entree
+typeR: entree
 categories:
   - Salade
 auteur: Auré

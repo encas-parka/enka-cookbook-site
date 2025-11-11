@@ -1,8 +1,7 @@
 ---
 title: Flan coco et pandan (végan)
 draft: false
-layout: recettes
-type: dessert
+typeR: dessert
 categories:
   - Sucrée
 regime:

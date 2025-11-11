@@ -10,4 +10,6 @@ cascade:
     - IngredientsJSON
     - Poster
     - Ingredients
+    - ingredients_aw
+    - metadata
 ---

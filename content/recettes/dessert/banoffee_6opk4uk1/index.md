@@ -2,8 +2,7 @@
 title: Banoffee
 draft: false
 description: ''
-layout: recettes
-type: dessert
+typeR: dessert
 categories:
   - Gateau
 auteur: ''
@@ -86,4 +85,3 @@ checkAlwaysOk: false
 regime:
   - vegetarien
 ---
-

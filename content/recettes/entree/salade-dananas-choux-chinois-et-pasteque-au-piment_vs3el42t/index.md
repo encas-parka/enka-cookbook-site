@@ -1,8 +1,7 @@
 ---
 title: salade d'ananas, choux chinois et pasteque au piment
 draft: false
-layout: recettes
-type: entree
+typeR: entree
 categories:
   - Salade
 auteur: frédo

@@ -33,7 +33,6 @@ ingredients:
     quantite: 0.4
     unit: l.
     commentaire: ''
-layout: recettes
 materiel:
   - Bruleur
   - Marmitte
@@ -61,5 +60,5 @@ publishDate: 2024-06-18T23:36:00.000Z
 region: Portugal
 temperature: Froid
 title: Salade de pois-chiches portugaise
-type: entree
+typeR: entree
 ---

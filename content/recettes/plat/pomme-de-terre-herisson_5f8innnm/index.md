@@ -2,8 +2,7 @@
 title: Pomme de terre Hérisson
 draft: false
 description: 1 pomme de terre par personne
-layout: recettes
-type: plat
+typeR: plat
 categories:
   - Accompagnement
 regime:

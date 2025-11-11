@@ -28,7 +28,6 @@ ingredients:
     quantite: 9
     unit: Kg
     commentaire: ''
-layout: recettes
 plate: 100
 preparation: |-
   Trancher les betteraves, ciseler la ciboulette. Tout mélanger.
@@ -41,5 +40,5 @@ regime:
   - vegetarien
 temperature: Froid
 title: SALADE DE BETTERAVE, YAOURT, GRAINES DE MOUTARDE ET CIBOULETTE
-type: entree
+typeR: entree
 ---

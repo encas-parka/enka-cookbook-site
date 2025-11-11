@@ -1,8 +1,7 @@
 ---
 title: tapenade del mar
 draft: false
-layout: recettes
-type: entree
+typeR: entree
 categories:
   - Tartinade
 regime:

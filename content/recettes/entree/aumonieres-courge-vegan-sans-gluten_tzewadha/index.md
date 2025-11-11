@@ -2,8 +2,7 @@
 title: Aumonières courge végan sans gluten
 draft: false
 description: ''
-layout: recettes
-type: entree
+typeR: entree
 categories:
   - Bouchées salées
   - Snacking

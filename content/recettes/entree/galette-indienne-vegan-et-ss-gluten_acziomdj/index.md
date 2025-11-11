@@ -2,8 +2,7 @@
 title: galette indienne vegan et ss gluten (Rainbow Queer Naan)
 draft: false
 description: ''
-layout: recettes
-type: entree
+typeR: entree
 categories:
   - Pain
 auteur: Auré
@@ -57,4 +56,3 @@ regime:
   - vegan
   - sans-gluten
 ---
-

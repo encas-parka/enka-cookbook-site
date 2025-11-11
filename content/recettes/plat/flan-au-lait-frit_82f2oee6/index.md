@@ -2,8 +2,7 @@
 title: Flan au lait frit
 draft: false
 description: Servir en plat salé même si c'est sucré.
-layout: recettes
-type: plat
+typeR: plat
 categories:
   - Friture
   - Bouchées salées
@@ -98,4 +97,3 @@ checkAlwaysOk: false
 regime:
   - vegetarien
 ---
-

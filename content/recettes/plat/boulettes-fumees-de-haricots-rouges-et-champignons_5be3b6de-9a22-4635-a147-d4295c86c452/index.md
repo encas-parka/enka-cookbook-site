@@ -64,7 +64,6 @@ ingredients:
     quantite: 6
     unit: c. à soupe
     commentaire: ''
-layout: recettes
 materiel:
   - Four
   - Gastro 1/1 (Fins)
@@ -83,5 +82,5 @@ regime:
   - sans-lactose
 temperature: Chaud
 title: Boulettes fumées de haricots rouges et champignons
-type: plat
+typeR: plat
 ---

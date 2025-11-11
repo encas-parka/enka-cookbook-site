@@ -2,8 +2,7 @@
 title: Tartinade de haricot rouge - basilic
 draft: false
 img: tartinade-haricot-rouge.jpg
-layout: recettes
-type: entree
+typeR: entree
 categories:
   - Tartinade
 regime:

@@ -3,8 +3,7 @@ title: Salade fatouche
 draft: false
 img: ''
 description: Entrée pour le catering de la fête de la soupe 2025
-layout: recettes
-type: entree
+typeR: entree
 categories:
   - Salade
 auteur: Alio
@@ -80,4 +79,3 @@ astuces: []
 prepAlt: []
 publishDate: 2025-10-19T20:35:00.000Z
 ---
-

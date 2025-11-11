@@ -2,8 +2,7 @@
 title: Pao de Qeijo
 draft: false
 description: ''
-layout: recettes
-type: plat
+typeR: plat
 categories:
   - Bouchées salées
 auteur: Adèle
@@ -56,4 +55,3 @@ regime:
   - vegetarien
   - sans-gluten
 ---
-

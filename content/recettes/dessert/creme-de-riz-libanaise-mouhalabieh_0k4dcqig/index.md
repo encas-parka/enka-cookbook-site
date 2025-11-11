@@ -39,7 +39,6 @@ ingredients:
     quantite: 1
     unit: Kg
     commentaire: ''
-layout: recettes
 plate: 100
 preparation: |-
   Mélanger la farine de riz, le sel et 2L de lait. Porter le reste du lait à ébullition. Au premier bouillon, baisser le feu. Il faut un feu large et doux. Ajouter le mélange de farine et de lait à la gamelle en remuant. Ajouter également le sucre, l'agar-agar. Remuer sans cesse.
@@ -56,5 +55,5 @@ regime:
 region: Liban
 temperature: Froid
 title: CREME DE RIZ LIBANAISE - MOUHALABIEH
-type: dessert
+typeR: dessert
 ---

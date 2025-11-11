@@ -1,8 +1,7 @@
 ---
 title: SHOYU RAMEN D'HIVER
 draft: false
-layout: recettes
-type: plat
+typeR: plat
 categories:
   - Soupe
 auteur: Auré

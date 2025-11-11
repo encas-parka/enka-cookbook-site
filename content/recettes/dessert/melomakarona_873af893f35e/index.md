@@ -3,8 +3,7 @@ title: Melomakarona
 draft: false
 img: ''
 description: ''
-layout: recettes
-type: dessert
+typeR: dessert
 categories:
   - Biscuits
 auteur: ''

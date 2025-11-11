@@ -3,8 +3,7 @@ title: Houmous pois chiche
 draft: false
 img: ''
 description: Entrée pour le catering de la fête de la soupe 2025
-layout: recettes
-type: entree
+typeR: entree
 categories:
   - Tartinade
 auteur: Alio
@@ -44,7 +43,7 @@ materiel: []
 preparation: |-
   > Faire cuire les pois chiches
 
-  >Dans un mixeur, mettre tous les ingrédients avec du cumin sauf l'huile 
+  >Dans un mixeur, mettre tous les ingrédients avec du cumin sauf l'huile
 
   (Faire attention à faire en plusieurs fois)
 
@@ -58,4 +57,3 @@ astuces: []
 prepAlt: []
 publishDate: 2025-10-19T20:27:00.000Z
 ---
-

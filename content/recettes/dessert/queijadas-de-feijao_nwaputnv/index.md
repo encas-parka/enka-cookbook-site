@@ -41,7 +41,6 @@ ingredients:
     quantite: 2
     unit: Kg
     commentaire: ''
-layout: recettes
 materiel:
   - Moule à muffin
 plate: 100
@@ -64,5 +63,5 @@ publishDate: 2024-05-23T00:01:00.000Z
 region: Portugal
 temperature: Froid
 title: QUEIJADAS DE FEIJAO
-type: dessert
+typeR: dessert
 ---

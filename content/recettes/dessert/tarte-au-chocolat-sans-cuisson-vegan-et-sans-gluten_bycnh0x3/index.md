@@ -35,7 +35,6 @@ ingredients:
     quantite: 200
     unit: gr.
     commentaire: ''
-layout: recettes
 materiel:
   - Gastro 1/1 (Normaux)
 plate: 12
@@ -57,5 +56,5 @@ regime:
 region: ''
 temperature: Froid
 title: Tarte au chocolat sans cuisson végan et sans gluten
-type: dessert
+typeR: dessert
 ---

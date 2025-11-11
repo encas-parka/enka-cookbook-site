@@ -26,7 +26,6 @@ ingredients:
     quantite: 3.75
     unit: Kg
     commentaire: ''
-layout: recettes
 plate: 100
 prepAlt:
   - recetteAlt: Tartinade salé à la chataigne (végan)
@@ -39,5 +38,5 @@ regime:
   - sans-gluten
 temperature: Froid
 title: Tartinade salé a la chataigne
-type: entree
+typeR: entree
 ---

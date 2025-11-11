@@ -1,8 +1,7 @@
 ---
 title: TARTE TATIN AUX POIVRONS ET FETA
 draft: false
-layout: recettes
-type: entree
+typeR: entree
 categories:
   - Tarte (salée)
 auteur: Auré

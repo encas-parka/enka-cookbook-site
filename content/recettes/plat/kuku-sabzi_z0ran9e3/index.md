@@ -2,8 +2,7 @@
 title: KUKU SABZI
 draft: false
 description: Omelette aux herbes
-layout: recettes
-type: plat
+typeR: plat
 categories:
   - Plat chaud
 auteur: Auré

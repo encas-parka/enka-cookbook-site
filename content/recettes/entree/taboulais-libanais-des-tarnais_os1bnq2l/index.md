@@ -41,7 +41,6 @@ ingredients:
     quantite: 1
     unit: l.
     commentaire: ''
-layout: recettes
 plate: 180
 prepAlt:
   - recetteAlt: taboulais-libanais-des-tarnais-sans-gluten_cp6n89pn
@@ -78,5 +77,5 @@ saison:
   - ete
 temperature: Froid
 title: Taboulais libanais des tarnais
-type: entree
+typeR: entree
 ---

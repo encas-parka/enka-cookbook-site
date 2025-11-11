@@ -55,7 +55,6 @@ ingredients:
     quantite: 320
     unit: gr.
     commentaire: ''
-layout: recettes
 materiel:
   - Four
 plate: 100
@@ -79,5 +78,5 @@ regime:
   - vegetarien
 temperature: Froid
 title: Madeleines sarrasin sauge noisette
-type: entree
+typeR: entree
 ---

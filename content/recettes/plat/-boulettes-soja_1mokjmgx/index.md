@@ -2,8 +2,7 @@
 title: Boulettes de soja (accompagnement pour soupe pho)
 draft: false
 description: ''
-layout: recettes
-type: plat
+typeR: plat
 categories:
   - Bouchées salées
   - Accompagnement
@@ -80,4 +79,3 @@ regime:
   - sans-gluten
   - sans-lactose
 ---
-

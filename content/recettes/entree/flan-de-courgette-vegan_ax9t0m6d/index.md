@@ -1,8 +1,7 @@
 ---
 title: flan de courgette vegan
 draft: false
-layout: recettes
-type: entree
+typeR: entree
 categories:
   - Bouchées salées
 regime:

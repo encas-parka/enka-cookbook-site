@@ -30,7 +30,6 @@ ingredients:
     quantite: 500
     unit: ml
     commentaire: ''
-layout: recettes
 plate: 10
 prepAlt:
   - recetteAlt: tarte-au-citron-vegane_5fh2krusjaqlzhhcjtbqo
@@ -47,5 +46,5 @@ regime:
   - sans-gluten
 temperature: Froid
 title: LEMON CURD VEGAN - version tarte au citron sans gluten
-type: dessert
+typeR: dessert
 ---

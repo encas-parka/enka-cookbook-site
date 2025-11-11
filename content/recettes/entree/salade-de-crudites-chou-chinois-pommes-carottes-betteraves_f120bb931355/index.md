@@ -3,8 +3,7 @@ title: Salade de crudités chou chinois pommes carottes betteraves
 draft: false
 img: ''
 description: Entrée pour le catering bénévole de la fête de la soupe
-layout: recettes
-type: entree
+typeR: entree
 categories:
   - Salade
 auteur: Alio
@@ -62,4 +61,3 @@ astuces: []
 prepAlt: []
 publishDate: 2025-10-19T20:46:00.000Z
 ---
-

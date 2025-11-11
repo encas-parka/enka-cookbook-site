@@ -2,8 +2,7 @@
 title: oignons bhaji (Rainbow Queer Naan)
 draft: false
 description: ''
-layout: recettes
-type: plat
+typeR: plat
 categories:
   - Friture
   - Bouchées salées
@@ -85,4 +84,3 @@ regime:
   - vegan
   - sans-gluten
 ---
-

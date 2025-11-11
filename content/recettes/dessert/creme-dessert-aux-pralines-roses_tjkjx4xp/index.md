@@ -32,7 +32,6 @@ ingredients:
     quantite: 265
     unit: gr.
     commentaire: ''
-layout: recettes
 materiel:
   - ramequins
 plate: 20
@@ -58,5 +57,5 @@ regime:
   - sans-gluten
 temperature: Froid
 title: Crème dessert aux pralines roses
-type: dessert
+typeR: dessert
 ---

@@ -2,8 +2,7 @@
 title: HUSH PUPPIES
 draft: false
 description: Petits beignets de maïs frits
-layout: recettes
-type: entree
+typeR: entree
 categories:
   - Friture
 auteur: Auré
@@ -78,4 +77,3 @@ checkAlwaysOk: false
 regime:
   - vegan
 ---
-

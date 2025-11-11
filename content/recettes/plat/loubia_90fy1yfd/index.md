@@ -2,8 +2,7 @@
 title: LOUBIA
 draft: false
 description: Ragout d'haricots blancs
-layout: recettes
-type: plat
+typeR: plat
 categories:
   - Plat chaud
 regime:

@@ -1,8 +1,7 @@
 ---
 title: SOUPE TARATOR
 draft: false
-layout: recettes
-type: entree
+typeR: entree
 categories:
   - Soupe
 auteur: Auré

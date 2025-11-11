@@ -1,8 +1,7 @@
 ---
 title: 'Tartinade Chataigne et Oignons '
 draft: false
-layout: recettes
-type: plat
+typeR: plat
 categories:
   - Tartinade
   - Accompagnement

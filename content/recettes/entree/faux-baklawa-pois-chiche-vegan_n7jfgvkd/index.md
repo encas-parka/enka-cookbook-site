@@ -71,7 +71,6 @@ ingredients:
     quantite: 3
     unit: c. à soupe
     commentaire: ''
-layout: recettes
 materiel:
   - Four
 plate: 16
@@ -84,5 +83,5 @@ regime:
   - sans-lactose
 temperature: Chaud
 title: Faux baklawa pois chiche végan
-type: entree
+typeR: entree
 ---

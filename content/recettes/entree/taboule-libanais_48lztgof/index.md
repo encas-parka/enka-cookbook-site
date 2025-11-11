@@ -1,6 +1,5 @@
 ---
 draft: false
-layout: recettes
 regime:
   - vegetarien
   - vegan
@@ -37,7 +36,7 @@ ingredients:
     unit: Kg
     commentaire: ''
 title: Taboulé libanais
-type: entree
+typeR: entree
 categories:
   - Salade
 saison:

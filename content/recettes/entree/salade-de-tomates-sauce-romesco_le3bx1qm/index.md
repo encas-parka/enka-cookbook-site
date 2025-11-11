@@ -1,8 +1,7 @@
 ---
 title: SALADE DE TOMATES SAUCE ROMESCO
 draft: false
-layout: recettes
-type: entree
+typeR: entree
 categories:
   - Salade
 auteur: Auré

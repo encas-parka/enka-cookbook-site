@@ -1,8 +1,7 @@
 ---
 title: Mouse au citron vegan
 draft: false
-layout: recettes
-type: dessert
+typeR: dessert
 categories:
   - Sucrée
 regime:

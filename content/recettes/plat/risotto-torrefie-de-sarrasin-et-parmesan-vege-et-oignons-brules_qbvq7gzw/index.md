@@ -1,8 +1,7 @@
 ---
 title: risotto torréfié de sarrasin et parmesan végé et oignons brûlés
 draft: false
-layout: recettes
-type: plat
+typeR: plat
 categories:
   - Plat chaud
 regime:

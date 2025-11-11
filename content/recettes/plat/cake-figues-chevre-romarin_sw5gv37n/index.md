@@ -42,7 +42,6 @@ ingredients:
     quantite: 150
     unit: gr.
     commentaire: ''
-layout: recettes
 materiel:
   - moule a cake
   - Grand Saladier
@@ -58,5 +57,5 @@ regime:
   - vegetarien
 temperature: Froid
 title: Cake figues, chèvre, romarin
-type: plat
+typeR: plat
 ---

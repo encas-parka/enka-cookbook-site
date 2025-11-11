@@ -1,8 +1,7 @@
 ---
 title: 'Curry de boeuf '
 draft: false
-layout: recettes
-type: plat
+typeR: plat
 categories:
   - Plat chaud
 auteur: Léon

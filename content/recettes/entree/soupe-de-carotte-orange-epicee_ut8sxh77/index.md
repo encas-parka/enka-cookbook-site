@@ -1,8 +1,7 @@
 ---
 title: soupe de carotte orange épicée
 draft: false
-layout: recettes
-type: entree
+typeR: entree
 categories:
   - Soupe
 regime:

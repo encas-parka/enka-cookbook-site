@@ -1,8 +1,7 @@
 ---
 title: SAUCE BIBIMBAP SANS ALLERGENES
 draft: false
-layout: recettes
-type: plat
+typeR: plat
 categories:
   - Plat chaud
 auteur: Auré

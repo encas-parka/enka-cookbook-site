@@ -2,8 +2,7 @@
 draft: false
 title: Salade de Pois-chiche
 img: salade-pois-chiches.webp
-layout: recettes
-type: entree
+typeR: entree
 categories:
   - Salade
 regime:

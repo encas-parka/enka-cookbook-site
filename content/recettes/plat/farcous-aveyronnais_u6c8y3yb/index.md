@@ -50,7 +50,6 @@ ingredients:
     quantite: 46
     unit: unité
     commentaire: ''
-layout: recettes
 materiel:
   - Plat Paela
 plate: 220
@@ -80,5 +79,5 @@ regime:
 region: Aveyrons
 temperature: Chaud
 title: Farçous Aveyronnais
-type: plat
+typeR: plat
 ---

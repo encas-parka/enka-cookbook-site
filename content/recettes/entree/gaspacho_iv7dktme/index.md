@@ -1,8 +1,7 @@
 ---
 title: Gaspacho
 draft: false
-layout: recettes
-type: entree
+typeR: entree
 categories:
   - Soupe
 regime:

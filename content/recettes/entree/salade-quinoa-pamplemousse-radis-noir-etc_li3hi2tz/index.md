@@ -1,8 +1,7 @@
 ---
 title: SALADE QUINOA, PAMPLEMOUSSE, RADIS NOIR etc
 draft: false
-layout: recettes
-type: entree
+typeR: entree
 categories:
   - Salade
 auteur: Auré

@@ -1,8 +1,7 @@
 ---
 title: escalope de seitan
 draft: false
-layout: recettes
-type: plat
+typeR: plat
 categories:
   - Plat chaud
 regime:

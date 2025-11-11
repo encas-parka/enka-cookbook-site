@@ -1,8 +1,7 @@
 ---
 title: Taboulé libanais (quinoa - sans glut)
 draft: false
-layout: recettes
-type: entree
+typeR: entree
 categories:
   - Salade
 regime:

@@ -26,7 +26,6 @@ ingredients:
     quantite: 225
     unit: gr.
     commentaire: ''
-layout: recettes
 plate: 15
 preparation: |-
   Faire fondre le chocolat au bain marie.
@@ -53,5 +52,5 @@ saison:
   - printemps
 temperature: Froid
 title: Salami au chocolat - vegan sans gluten
-type: dessert
+typeR: dessert
 ---

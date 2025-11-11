@@ -1,8 +1,7 @@
 ---
 title: Steak végé - champignons aubergines noix avoine haricots rouges - version améliorée
 draft: false
-layout: recettes
-type: plat
+typeR: plat
 categories:
   - Plat chaud
 auteur: ''

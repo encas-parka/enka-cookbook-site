@@ -2,8 +2,7 @@
 title: Tian Tomate - figue - miel
 draft: false
 img: tian-tomate.jpg
-layout: recettes
-type: plat
+typeR: plat
 categories:
   - Plat chaud
 regime:

@@ -29,7 +29,6 @@ ingredients:
     quantite: 2.7
     unit: Kg
     commentaire: ''
-layout: recettes
 materiel:
   - Four
 plate: 170
@@ -47,5 +46,5 @@ regime:
   - sans-gluten
 temperature: Chaud
 title: Pain de Yucca
-type: plat
+typeR: plat
 ---

@@ -1,8 +1,7 @@
 ---
 title: Tomates et poivrons grillés au four
 draft: false
-layout: recettes
-type: plat
+typeR: plat
 categories:
   - Plat chaud
 regime:

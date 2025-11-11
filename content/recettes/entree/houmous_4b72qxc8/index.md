@@ -34,7 +34,6 @@ ingredients:
     quantite: 2
     unit: c. à soupe
     commentaire: ''
-layout: recettes
 materiel:
   - Giraffe (Bras Mixeur)
 plate: 5
@@ -48,5 +47,5 @@ regime:
   - vegetarien
 temperature: Froid
 title: Houmous
-type: entree
+typeR: entree
 ---

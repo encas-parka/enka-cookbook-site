@@ -1,8 +1,7 @@
 ---
 title: LANCHES AU PESTO ROSSO Végane et sans gluten
 draft: false
-layout: recettes
-type: entree
+typeR: entree
 categories:
   - Snacking
 auteur: Auré

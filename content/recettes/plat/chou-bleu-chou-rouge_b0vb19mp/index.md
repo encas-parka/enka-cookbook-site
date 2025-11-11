@@ -2,8 +2,7 @@
 title: CHOU BLEU, CHOU VIOLET (Rainbow Queer Naan)
 draft: false
 description: ''
-layout: recettes
-type: plat
+typeR: plat
 categories:
   - Accompagnement
 auteur: Auré
@@ -109,4 +108,3 @@ regime:
   - vegan
   - sans-gluten
 ---
-

@@ -1,8 +1,7 @@
 ---
 title: Risotto à l'ail et à la menthe
 draft: false
-layout: recettes
-type: plat
+typeR: plat
 categories:
   - Plat chaud
   - Accompagnement

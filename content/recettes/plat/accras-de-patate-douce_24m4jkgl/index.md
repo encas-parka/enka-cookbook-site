@@ -1,8 +1,7 @@
 ---
 title: Accras de patate douce
 draft: false
-layout: recettes
-type: plat
+typeR: plat
 categories:
   - Friture
 regime:

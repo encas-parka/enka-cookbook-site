@@ -2,8 +2,7 @@
 title: BROWNIE A L'HALVA ET AU TAHIN
 draft: false
 description: ''
-layout: recettes
-type: dessert
+typeR: dessert
 categories:
   - Gateau
 auteur: Ottolenghi
@@ -65,4 +64,3 @@ checkAlwaysOk: false
 regime:
   - vegetarien
 ---
-

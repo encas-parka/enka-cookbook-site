@@ -18,7 +18,6 @@ ingredients:
     quantite: 10
     unit: Kg
     commentaire: ''
-layout: recettes
 materiel:
   - ramequins
 plate: 100
@@ -32,5 +31,5 @@ saison:
   - ete
 temperature: Froid
 title: SALADE DE PECHE A LA MENTHE
-type: dessert
+typeR: dessert
 ---

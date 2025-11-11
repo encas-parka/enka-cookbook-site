@@ -39,7 +39,6 @@ ingredients:
     quantite: 200
     unit: gr.
     commentaire: ''
-layout: recettes
 materiel:
   - Gastro 1/1 (Fins)
 plate: 24
@@ -59,5 +58,5 @@ regime:
   - vegan
 temperature: Froid
 title: Tarte au chocolat sans cuisson
-type: dessert
+typeR: dessert
 ---

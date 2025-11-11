@@ -28,7 +28,6 @@ ingredients:
     quantite: 2
     unit: Kg
     commentaire: ''
-layout: recettes
 plate: 100
 prepAlt:
   - recetteAlt: salami-au-chocolat-vegan-sans-gluten_axcmr1dv_vj6ul9owdr-g
@@ -57,5 +56,5 @@ regime:
 region: Portugal
 temperature: Froid
 title: Salami au chocolat
-type: dessert
+typeR: dessert
 ---

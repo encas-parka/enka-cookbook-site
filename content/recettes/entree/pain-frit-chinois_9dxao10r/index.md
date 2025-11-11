@@ -3,8 +3,7 @@ title: PAIN FRIT CHINOIS
 draft: false
 img: https://i0.wp.com/christinapotvin.com/wp-content/uploads/2021/10/miniature-youtube-3.jpg?resize=1080%2C675&ssl=1
 description: Super dans la soupe
-layout: recettes
-type: entree
+typeR: entree
 categories:
   - Accompagnement
 auteur: Auré

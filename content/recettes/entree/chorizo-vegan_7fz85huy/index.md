@@ -1,8 +1,7 @@
 ---
 title: CHORIZO VEGAN
 draft: false
-layout: recettes
-type: entree
+typeR: entree
 categories:
   - Snacking
 auteur: Auré

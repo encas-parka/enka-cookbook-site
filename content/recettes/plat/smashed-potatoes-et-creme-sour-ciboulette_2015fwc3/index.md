@@ -1,8 +1,7 @@
 ---
 title: Smashed Potatoes et Crème sour Ciboulette
 draft: false
-layout: recettes
-type: plat
+typeR: plat
 categories:
   - Accompagnement
 regime:

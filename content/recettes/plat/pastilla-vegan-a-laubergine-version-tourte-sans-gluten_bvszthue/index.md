@@ -67,7 +67,6 @@ ingredients:
     quantite: 100
     unit: gr.
     commentaire: sirop
-layout: recettes
 plate: 16
 preparation: |-
   La farce est exactement la même que dans la pastilla végane à l'aubergine. Donc cuisiner les deux farces dans le même récipient.
@@ -82,5 +81,5 @@ regime:
   - sans-gluten
 temperature: Chaud
 title: PASTILLA  VEGAN A L'AUBERGINE - Version tourte sans gluten
-type: plat
+typeR: plat
 ---

@@ -28,7 +28,6 @@ ingredients:
     quantite: 0.15
     unit: l.
     commentaire: ''
-layout: recettes
 plate: 50
 preparation: |-
 
@@ -53,5 +52,5 @@ regime:
   - sans-lactose
 temperature: Froid
 title: Fromage Frais Ail - ciboulette VEGAN
-type: entree
+typeR: entree
 ---

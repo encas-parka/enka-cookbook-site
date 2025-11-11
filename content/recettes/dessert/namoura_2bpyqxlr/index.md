@@ -49,7 +49,6 @@ ingredients:
     quantite: 0.3
     unit: Kg
     commentaire: ''
-layout: recettes
 materiel:
   - Four
 plate: 50
@@ -67,5 +66,5 @@ regime:
   - sans-lactose
 temperature: Froid
 title: Namoura
-type: dessert
+typeR: dessert
 ---

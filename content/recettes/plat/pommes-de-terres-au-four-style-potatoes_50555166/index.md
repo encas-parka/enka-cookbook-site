@@ -1,8 +1,7 @@
 ---
 title: Pommes de terres au four style potatoes
 draft: false
-layout: recettes
-type: plat
+typeR: plat
 categories:
   - Accompagnement
 regime:
@@ -39,4 +38,3 @@ preparation: |-
   * Cuire à 180-200°C pendant 30-50 minutes en remuant les patates à mi cuisson
 publishDate: 2025-07-31T08:43:00.000Z
 ---
-

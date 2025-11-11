@@ -45,6 +45,7 @@ mediaTypes:
     delimiter: ""
 
 outputFormats:
+  # Pages et json lié aux evenement
   Poster:
     mediaType: "text/html"
     baseName: "poster/index"
@@ -69,12 +70,25 @@ outputFormats:
     isPlainText: true
     notAlternative: true
 
+  ingredients_aw:
+    mediaType: "application/json"
+    baseName: "ingredients_aw/index"
+    isPlainText: true
+    notAlternative: true
+
+  metadata:
+    mediaType: "application/json"
+    baseName: "metadata"
+    isPlainText: true
+    notAlternative: true
+
   JSON:
     mediaType: application/json
     baseName: index
     isPlainText: true
     notAlternative: true
 
+# LEGACY: USELESS
   REDIRECTS:
     mediatype: text/netlify
     baseName: _redirects
@@ -157,6 +171,7 @@ module:
   hugoVersion:
     extended: true
     min: "0.142.0"
+
   imports:
     - path: "github.com/encas-parka/hugo-cookbook-theme"
       disable: false

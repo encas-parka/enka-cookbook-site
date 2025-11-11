@@ -23,7 +23,6 @@ ingredients:
     quantite: 600
     unit: ml
     commentaire: ''
-layout: recettes
 materiel:
   - Giraffe (Bras Mixeur)
 plate: 100
@@ -39,5 +38,5 @@ regime:
   - sans-lactose
 temperature: Froid
 title: Véganaise rapide
-type: plat
+typeR: plat
 ---

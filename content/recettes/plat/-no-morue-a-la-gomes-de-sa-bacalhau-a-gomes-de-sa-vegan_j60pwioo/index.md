@@ -2,8 +2,7 @@
 title: 'no-Morue à la Gomes de Sa (Bacalhau à Gomes de Sa) - vegan '
 draft: false
 description: ce n'est plus un plat de morue mais une tentative de substitution
-layout: recettes
-type: plat
+typeR: plat
 categories:
   - Plat chaud
 regime:

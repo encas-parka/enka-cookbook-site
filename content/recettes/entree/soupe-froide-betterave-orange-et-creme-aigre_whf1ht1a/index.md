@@ -1,8 +1,7 @@
 ---
 title: SOUPE FROIDE BETTERAVE, ORANGE ET CREME AIGRE
 draft: false
-layout: recettes
-type: entree
+typeR: entree
 categories:
   - Soupe
 auteur: Auré

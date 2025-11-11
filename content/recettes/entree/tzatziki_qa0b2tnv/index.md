@@ -1,8 +1,7 @@
 ---
 title: Tzatziki
 draft: false
-layout: recettes
-type: entree
+typeR: entree
 categories:
   - Tartinade
 regime:

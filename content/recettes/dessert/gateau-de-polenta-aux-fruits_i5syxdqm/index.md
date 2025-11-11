@@ -2,8 +2,7 @@
 title: GATEAU DE POLENTA AUX FRUITS
 draft: false
 description: Habituellement aux pêches, ce gâteau est pratique pour passer les restes de fruits
-layout: recettes
-type: dessert
+typeR: dessert
 categories:
   - Gateau
 regime:

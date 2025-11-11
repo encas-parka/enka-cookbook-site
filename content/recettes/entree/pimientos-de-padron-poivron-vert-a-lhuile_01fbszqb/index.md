@@ -23,7 +23,6 @@ ingredients:
     quantite: 2
     unit: l.
     commentaire: ''
-layout: recettes
 plate: 100
 preparation: |-
   Laver les poivrons, les laisser entier.
@@ -44,5 +43,5 @@ regime:
 region: Portugal
 temperature: Chaud
 title: PIMIENTOS DE PADRON - Poivron vert à l'huile
-type: entree
+typeR: entree
 ---

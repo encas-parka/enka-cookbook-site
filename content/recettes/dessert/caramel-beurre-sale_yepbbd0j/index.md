@@ -2,8 +2,7 @@
 title: Caramel beurre salé
 draft: true
 description: Pour mettre sur un dessert par exemple. Consistence un peu élastique.
-layout: recettes
-type: dessert
+typeR: dessert
 categories:
   - Sauce
 regime:

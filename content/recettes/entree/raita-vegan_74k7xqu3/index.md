@@ -2,8 +2,7 @@
 title: RAïTA VÉGANE (Rainbow Queer Naan)
 draft: false
 description: ''
-layout: recettes
-type: entree
+typeR: entree
 categories:
   - Tartinade
 auteur: Auré
@@ -39,7 +38,7 @@ ingredients:
     unit: bottes
     commentaire: ''
 preparation: |-
-  \    
+  \
 
   * 1 - Hâcher finement les oignons. Passer au presse ail les gousses. Et couper grossièrement
 
@@ -57,4 +56,3 @@ checkAlwaysOk: false
 regime:
   - vegan
 ---
-

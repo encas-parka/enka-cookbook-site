@@ -1,8 +1,7 @@
 ---
 title: frites de panisse sauce tartare et salade verte
 draft: false
-layout: recettes
-type: entree
+typeR: entree
 categories:
   - Bouchées salées
 regime:

@@ -1,8 +1,7 @@
 ---
 title: Panisse
 draft: false
-layout: recettes
-type: plat
+typeR: plat
 categories:
   - Friture
   - Accompagnement

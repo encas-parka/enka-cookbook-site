@@ -19,7 +19,6 @@ ingredients:
     quantite: 8
     unit: unité
     commentaire: ''
-layout: recettes
 plate: 100
 preparation: Blablabla
 publishDate: 2024-06-17T23:43:00.000Z
@@ -27,5 +26,5 @@ saison:
   - ete
 temperature: Froid
 title: SALADE DE PASTEQUE, MELON ET BASILIC
-type: dessert
+typeR: dessert
 ---

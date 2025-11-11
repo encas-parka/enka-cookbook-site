@@ -1,8 +1,7 @@
 ---
 title: 'Houmous de poivrons'
 draft: false
-layout: recettes
-type: entree
+# typeR: entree
 categories:
   - Tartinade
 regime:

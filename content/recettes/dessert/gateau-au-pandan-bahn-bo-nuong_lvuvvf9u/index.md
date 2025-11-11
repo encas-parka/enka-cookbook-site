@@ -1,8 +1,7 @@
 ---
 title: Gateau au pandan Bahn Bo Nuong
 draft: false
-layout: recettes
-type: dessert
+typeR: dessert
 categories:
   - Gateau
 regime:

@@ -75,7 +75,6 @@ ingredients:
     quantite: 6
     unit: Kg
     commentaire: ''
-layout: recettes
 materiel:
   - Four
   - Gastro 1/1 (Normaux)
@@ -105,5 +104,5 @@ regime:
   - vegetarien
 temperature: Chaud
 title: Baklawa pois chiche feta
-type: entree
+typeR: entree
 ---

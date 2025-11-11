@@ -2,8 +2,7 @@
 title: Houmous de betterave aux cranberries et balsamique
 draft: false
 description: Une cuillère à soupe par personne!
-layout: recettes
-type: entree
+typeR: entree
 categories:
   - Accompagnement
 auteur: ''
@@ -50,4 +49,3 @@ regime:
   - sans-gluten
   - sans-lactose
 ---
-

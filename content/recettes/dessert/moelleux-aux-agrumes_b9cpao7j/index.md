@@ -1,8 +1,7 @@
 ---
 title: Moelleux aux agrumes
 draft: false
-layout: recettes
-type: dessert
+typeR: dessert
 categories:
   - Sucrée
 auteur: frédo

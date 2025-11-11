@@ -41,7 +41,6 @@ ingredients:
     quantite: 700
     unit: gr.
     commentaire: ''
-layout: recettes
 materiel:
   - Gastro 1/1 (Fins)
   - Four
@@ -57,5 +56,5 @@ regime:
   - sans-lactose
 temperature: Froid
 title: Gateau de sésame (végan et sans-gluten)
-type: dessert
+typeR: dessert
 ---

@@ -1,8 +1,7 @@
 ---
 title: Crème de soja à la noisette et graines caramélisées
 draft: false
-layout: recettes
-type: dessert
+typeR: dessert
 categories:
   - Sucrée
 auteur: frédo

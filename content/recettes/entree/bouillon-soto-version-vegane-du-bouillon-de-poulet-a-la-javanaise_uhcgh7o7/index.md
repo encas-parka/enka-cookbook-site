@@ -63,7 +63,6 @@ ingredients:
     quantite: 350
     unit: ml
     commentaire: ''
-layout: recettes
 plate: 40
 preparation: |-
   Mettre une gamelle d'eau sur le feux, faire bouillir.
@@ -93,5 +92,5 @@ regime:
 region: Java
 temperature: Chaud
 title: BOUILLON SOTO - Version végane du bouillon de poulet à la javanaise
-type: entree
+typeR: entree
 ---

@@ -2,8 +2,7 @@
 title: FROMAGE BLANC ET FRUITS ROUGES et son alernative vegan
 draft: false
 description: ''
-layout: recettes
-type: dessert
+typeR: dessert
 categories:
   - Sucrée
 auteur: Résistances 2025
@@ -33,4 +32,3 @@ preparation: Ne pas oublié la version végane !!
 publishDate: 2025-05-30T21:37:00.000Z
 checkAlwaysOk: false
 ---
-

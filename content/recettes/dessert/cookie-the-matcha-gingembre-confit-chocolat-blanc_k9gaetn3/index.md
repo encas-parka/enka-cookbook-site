@@ -44,7 +44,6 @@ ingredients:
     quantite: 1.2
     unit: Kg
     commentaire: ''
-layout: recettes
 plate: 100
 prepAlt:
   - recetteAlt: cookie-the-matcha-et-gingembre-confit-vegan-et-sans-gluten_jvdekkyz
@@ -64,5 +63,5 @@ preparation24h: Faire la pâte à cookie la veille si possible.
 publishDate: 2024-05-24T00:23:00.000Z
 temperature: Froid
 title: COOKIE THE MATCHA, GINGEMBRE CONFIT CHOCOLAT BLANC
-type: dessert
+typeR: dessert
 ---

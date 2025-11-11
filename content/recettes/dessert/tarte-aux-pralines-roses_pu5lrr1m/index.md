@@ -2,8 +2,7 @@
 title: TARTE AUX PRALINES ROSES
 draft: false
 description: ''
-layout: recettes
-type: dessert
+typeR: dessert
 categories:
   - Tarte (sucrée)
 auteur: Auré
@@ -83,7 +82,7 @@ preparation: |-
 
   Pour contrôler la texture : Verser une petite quantité dans une assiette, de mettre au frais, et de juger après 1 minute que la crème est assez épaisse (mais pas trop non plus). La texture idéale est assez épaisse (elle doit tenir et ne pas être liquide), mais pas trop prise non plus (sinon elle ne sera pas agréable à manger).
 
-  Si elle reste trop liquide, ajouter de l'agar agar dans l'appareil bouillant. 
+  Si elle reste trop liquide, ajouter de l'agar agar dans l'appareil bouillant.
 
   Verser dans le fond de tarte. Etaler.
 
@@ -93,4 +92,3 @@ publishDate: 2024-06-16T21:22:00.000Z
 checkAlwaysOk: true
 regime: null
 ---
-

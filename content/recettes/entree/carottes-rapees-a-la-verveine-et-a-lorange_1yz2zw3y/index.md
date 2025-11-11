@@ -1,8 +1,7 @@
 ---
 title: Carottes râpées à la verveine et à l'orange
 draft: false
-layout: recettes
-type: entree
+typeR: entree
 categories:
   - Salade
 regime:

@@ -3,8 +3,7 @@ title: Panacotta vanille et coulis de framboise
 draft: false
 img: ''
 description: ''
-layout: recettes
-type: dessert
+typeR: dessert
 categories:
   - Sucrée
 auteur: ''

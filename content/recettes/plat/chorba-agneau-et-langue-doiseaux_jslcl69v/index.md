@@ -75,7 +75,6 @@ ingredients:
     quantite: 2.5
     unit: Kg
     commentaire: ''
-layout: recettes
 plate: 100
 preparation: |-
   Eplucher et émincer les carottes et les courgettes. Emincer les branches de céleri. Mettre le tout dans un saladier. Réserver.
@@ -101,5 +100,5 @@ regime:
 region: Algérie
 temperature: Chaud
 title: CHORBA  AGNEAU ET LANGUE D'OISEAUX
-type: plat
+typeR: plat
 ---

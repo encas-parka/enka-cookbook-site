@@ -1,8 +1,7 @@
 ---
 title: vinaigrette
 draft: false
-layout: recettes
-type: entree
+typeR: entree
 categories:
   - Sauce
 regime:

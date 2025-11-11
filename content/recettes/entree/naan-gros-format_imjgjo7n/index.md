@@ -2,8 +2,7 @@
 title: Naan gros gros format (Rainbow Queer Naan)
 draft: false
 description: ''
-layout: recettes
-type: entree
+typeR: entree
 categories:
   - Pain
 auteur: Auré
@@ -62,13 +61,13 @@ preparation: |-
   Elle doit gonfler un max.
 
    Former
-   100 petites boules de taille identique (pour 50 personnes, 2 par 
-  personne), les étaler très finement au rouleau à pâtisserie fariné sur 
+   100 petites boules de taille identique (pour 50 personnes, 2 par
+  personne), les étaler très finement au rouleau à pâtisserie fariné sur
   le plan de travail fariné ou à la main.
 
   Déposer
-   2 portions de vache qui rit sur un disque de pâte, en laissant, 
-  disposez un second disque de pâte par dessus et soudez les bords en 
+   2 portions de vache qui rit sur un disque de pâte, en laissant,
+  disposez un second disque de pâte par dessus et soudez les bords en
   appuyant bien avec les doigts.
 
   Passer le rouleau ou les mains sur la galette pour étaler la vache qui rit.
@@ -81,4 +80,3 @@ preparation: |-
 publishDate: 2025-06-02T19:02:00.000Z
 checkAlwaysOk: false
 ---
-

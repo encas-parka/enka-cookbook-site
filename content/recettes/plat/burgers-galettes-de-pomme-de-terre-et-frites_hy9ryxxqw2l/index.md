@@ -1,8 +1,7 @@
 ---
 title: BURGERS (galettes de pomme de terre) et FRITES
 draft: false
-layout: recettes
-type: plat
+typeR: plat
 categories:
   - Snacking
 auteur: Lucien

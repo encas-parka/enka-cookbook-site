@@ -2,8 +2,7 @@
 title: Pomme de terre au four, cervelle de canut
 draft: false
 description: ''
-layout: recettes
-type: plat
+typeR: plat
 categories:
   - Plat chaud
 auteur: frédo
@@ -91,4 +90,3 @@ checkAlwaysOk: false
 regime:
   - sans-gluten
 ---
-

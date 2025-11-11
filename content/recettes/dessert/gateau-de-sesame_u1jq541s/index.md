@@ -41,7 +41,6 @@ ingredients:
     quantite: 3
     unit: Kg
     commentaire: ''
-layout: recettes
 materiel:
   - Gastro 1/1 (Fins)
   - Four
@@ -54,5 +53,5 @@ regime:
   - vegetarien
 temperature: Chaud
 title: 'Gateau de sésame '
-type: dessert
+typeR: dessert
 ---

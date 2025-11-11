@@ -2,8 +2,7 @@
 title: PANNA COTTA  VEGAN VANILLE - FRAISE
 draft: false
 description: ''
-layout: recettes
-type: dessert
+typeR: dessert
 categories:
   - Sucrée
 auteur: Auré
@@ -72,4 +71,3 @@ regime:
   - vegan
   - sans-gluten
 ---
-

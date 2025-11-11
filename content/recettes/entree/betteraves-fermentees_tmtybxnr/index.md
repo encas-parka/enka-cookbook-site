@@ -24,7 +24,6 @@ ingredients:
     quantite: 1.5
     unit: Kg
     commentaire: ''
-layout: recettes
 plate: 9
 preparation: |-
   Couper les betteraves en tronçons, grand comme un doigts à peu près.
@@ -49,5 +48,5 @@ regime:
   - sans-lactose
 temperature: Froid
 title: Betteraves fermentées
-type: entree
+typeR: entree
 ---

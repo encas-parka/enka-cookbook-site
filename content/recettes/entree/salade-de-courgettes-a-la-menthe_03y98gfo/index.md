@@ -26,7 +26,6 @@ ingredients:
     quantite: 600
     unit: ml
     commentaire: ''
-layout: recettes
 plate: 100
 preparation: |-
   1. Couper les courgettes en cubes, râper l'ail, effeuiller et ciseler les bouquets de menthe.
@@ -43,5 +42,5 @@ saison:
   - ete
 temperature: Froid
 title: Salade de courgettes à la menthe
-type: entree
+typeR: entree
 ---

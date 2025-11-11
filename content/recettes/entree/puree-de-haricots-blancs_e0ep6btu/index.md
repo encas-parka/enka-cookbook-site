@@ -30,7 +30,6 @@ ingredients:
     quantite: 2
     unit: Kg
     commentaire: ''
-layout: recettes
 plate: 100
 preparation: |-
   1. La veille, faire tremper les haricots.
@@ -47,7 +46,5 @@ regime:
   - sans-lactose
 temperature: Froid
 title: Purée de haricots blancs
-type: plat
+typeR: plat
 ---
-
-

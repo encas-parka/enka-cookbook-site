@@ -51,7 +51,6 @@ ingredients:
     quantite: 700
     unit: ml
     commentaire: ''
-layout: recettes
 materiel:
   - Plat Paela
 plate: 20
@@ -82,5 +81,5 @@ regime:
 region: Aveyrons
 temperature: Chaud
 title: Farçous Aveyronnais (Végan et sans gluten)
-type: plat
+typeR: plat
 ---

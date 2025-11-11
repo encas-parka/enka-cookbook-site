@@ -27,7 +27,6 @@ ingredients:
     quantite: 32
     unit: l.
     commentaire: ''
-layout: recettes
 plate: 50
 preparation: |-
   Couper en finesse les fenouils.
@@ -46,5 +45,5 @@ saison:
   - printemps
 temperature: Froid
 title: Salade Fenouil-Carottes-Oranges
-type: entree
+typeR: entree
 ---

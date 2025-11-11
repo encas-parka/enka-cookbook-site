@@ -55,7 +55,6 @@ ingredients:
     quantite: 120
     unit: ml
     commentaire: ''
-layout: recettes
 materiel:
   - moule a cake
   - Four
@@ -73,5 +72,5 @@ saison:
   - ete
 temperature: Froid
 title: Cake courgette chêvre cumin basilic
-type: plat
+typeR: plat
 ---

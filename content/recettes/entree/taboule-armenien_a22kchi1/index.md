@@ -1,8 +1,7 @@
 ---
 title: TABOULE ARMENIEN
 draft: false
-layout: recettes
-type: entree
+typeR: entree
 categories:
   - Salade
 cuisson: Oui

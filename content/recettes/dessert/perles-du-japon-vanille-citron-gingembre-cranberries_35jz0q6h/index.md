@@ -1,8 +1,7 @@
 ---
 title: Perles du japon vanille-citron-gingembre-cranberries
 draft: false
-layout: recettes
-type: dessert
+typeR: dessert
 categories:
   - Sucrée
 auteur: frédo

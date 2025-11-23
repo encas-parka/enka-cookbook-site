@@ -6,7 +6,7 @@ replace github.com/encas-parka/hugo-cookbook-theme => ../hugo-cookbook-theme
 go 1.24
 
 require (
-	github.com/encas-parka/hugo-cookbook-theme v0.0.0-20251015095421-dfe6fcb4634c // indirect
+	github.com/encas-parka/hugo-cookbook-theme v0.0.0-20251111134212-d906680c4130 // indirect
 	github.com/hugomods/base v0.7.3 // indirect
 	github.com/hugomods/bootstrap v0.24.1 // indirect
 	github.com/hugomods/icons v0.6.6 // indirect

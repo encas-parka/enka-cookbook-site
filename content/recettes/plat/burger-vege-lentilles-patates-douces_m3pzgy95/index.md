@@ -10,7 +10,7 @@ auteur: Lulu
 region: ''
 cuisson: Oui
 temperature: Chaud
-plate: 100
+plate: 60
 quantite_desc: 1 burger par personne
 check: Oui
 ingredients:
@@ -120,24 +120,29 @@ ingredients:
     commentaire: Sauce
 preparation: |-
   **galettes patates douces lentilles:**
-    - Éplucher les patates douces et les faire cuire à la vapeur pendant 20 minutes.
-    - Cuire les lentilles 10 minutes.
-    - Faire revenir les oignons avec l'huile d'olive, le curcuma, le curry, le cumin et l'ail.
-    - Écraser les patates douces et les lentilles, ajouter les oignons, la farine, les flocons d'avoine, le persil et la coriandre, assaisonner et mélanger.
-    - Former les galettes et les cuire 20 minutes à 200°C.
-    - Congeler les galettes et les passer en friteuse avant l'envoi.
+
+  - Éplucher les patates douces et les faire cuire à la vapeur pendant 20 minutes.
+  - Cuire les lentilles 10 minutes.
+  - Faire revenir les oignons avec l'huile d'olive, le curcuma, le curry, le cumin et l'ail.
+  - Écraser les patates douces et les lentilles, ajouter les oignons, la farine, les flocons d'avoine, le persil et la coriandre, assaisonner et mélanger.
+  - Former les galettes et les cuire 20 minutes à 200°C.
+  - Congeler les galettes et les passer en friteuse avant l'envoi.
 
    **sauce fromage blanc:**
-    - Rôtir les têtes d'ail, les presser et les mélanger au fromage blanc.
-    - Ajouter les noix, le persil et les échalotes, assaisonner.
+
+  - Rôtir les têtes d'ail, les presser et les mélanger au fromage blanc.
+  - Ajouter les noix, le persil et les échalotes, assaisonner.
 
     **accompagnement:**
-    - Blanchir les pommes de terre, puis les frire.
-    - Laver la salade verte.
+
+  - Blanchir les pommes de terre, puis les frire.
+  - Laver la salade verte.
 
     **montage:**
-    - Déposer la sauce sur le pain, ajouter la salade, la galette, le chou, puis refermer le burger.
-    - Servir avec la salade verte et les frites, accompagné de la sauce fromage blanc.
+
+  - Déposer la sauce sur le pain, ajouter la salade, la galette, le chou, puis refermer le burger.
+  - Servir avec la salade verte et les frites, accompagné de la sauce fromage blanc.
+preparation24h: ''
 publishDate: 2024-05-18T17:59:00.000Z
 checkfor: 170
 checkAlwaysOk: false

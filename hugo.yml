@@ -32,8 +32,13 @@ outputs:
     - HTML
     - REDIRECTS
     - HEADERS
+    - dataJson
   page:
     - HTML
+    - RecipeDetail
+  section:
+    - HTML
+
 
 mediaTypes:
   application/json:
@@ -102,6 +107,21 @@ outputFormats:
     baseName: _headers
     isPlainText: true
     notAlternative: true
+
+
+  RecipeDetail:
+    mediaType: application/json
+    baseName: recipe
+    isPlainText: true
+    notAlternative: false
+    permalinkable: false
+
+  dataJson:
+    mediaType: application/json
+    baseName: data
+    isPlainText: true
+    notAlternative: true
+    path: api/
 
 caches:
   getjson:

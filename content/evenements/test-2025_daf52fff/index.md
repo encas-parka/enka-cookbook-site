@@ -2,9 +2,9 @@
 title: test 2025
 sitemap_exclude: 'true'
 repas:
-  - date_service: 2025-10-23T11:30:00
-    horaire: midi
-    assiettes: 45
+  - date_service: 2025-11-15
+    horaire: soir
+    assiettes: 40
     recettes_du_repas:
       - recette: lassi-vegan-a-la-mangue_073807647055
         type_plat: dessert
@@ -24,7 +24,7 @@ repas:
         chef: Alio/Lucien
         partof: ''
         commentaire: ''
-  - date_service: 2025-10-23T19:00:00
+  - date_service: 2025-11-22
     horaire: soir
     assiettes: 60
     recettes_du_repas:
@@ -46,9 +46,9 @@ repas:
         chef: Manuella
         partof: ''
         commentaire: ''
-  - date_service: 2025-10-24T11:30:00
-    horaire: midi
-    assiettes: 100
+  - date_service: 2025-11-23
+    horaire: soir
+    assiettes: 121
     recettes_du_repas:
       - recette: panna-cotta-vegan-a-la-chataigne-chips-de-chocolat_b099198baed3
         type_plat: dessert
@@ -74,7 +74,7 @@ repas:
         chef: Alio
         partof: ''
         commentaire: ''
-  - date_service: 2025-10-24T19:00:00
+  - date_service: 2025-11-24
     horaire: soir
     assiettes: 140
     recettes_du_repas:
@@ -96,7 +96,7 @@ repas:
         chef: Boubakeur
         partof: ''
         commentaire: ''
-  - date_service: 2025-10-25T11:30:00
+  - date_service: 2025-11-25
     horaire: midi
     assiettes: 130
     recettes_du_repas:
@@ -130,9 +130,9 @@ repas:
         chef: Auré
         partof: ''
         commentaire: ''
-  - date_service: 2025-10-25T19:00:00
+  - date_service: 2025-12-29
     horaire: soir
-    assiettes: 140
+    assiettes: 100
     recettes_du_repas:
       - recette: flan-libanais-vegan_442fc9052846
         type_plat: dessert
@@ -148,7 +148,7 @@ repas:
         commentaire: ''
       - recette: salade-de-crudites-chou-chinois-pommes-carottes-betteraves_f120bb931355
         type_plat: entree
-        altAssiettes: null
+        altAssiettes: 10
         chef: Boubakar
         partof: ''
         commentaire: ''

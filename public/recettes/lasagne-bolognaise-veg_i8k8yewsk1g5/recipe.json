@@ -1,0 +1,152 @@
+
+{
+  "uuid": "i8k8yewsk1g5",
+  "slug": "lasagne-bolognaise-veg_i8k8yewsk1g5",
+  "title": "Lasagne Bolognaise Végé Saute Tomate Protéine De Soja Champignon Béchamel",
+  "draft": false,
+  "typeR": "plat",
+  "categories": ["Plat chaud"],
+  "regime": null,
+  "cuisson": true,
+  "serveHot": true,
+  "plate": 100,
+  "quantite_desc": "",
+  "check": true,
+  "checkAlwaysOk": null,
+  "materiel": [],
+  "ingredients": [{
+      "uuid": "92zzps",
+      "name": "Champignon de Paris",
+      "originalQuantity": 5,
+      "originalUnit": "kg",
+      "normalizedQuantity": 5000,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": [],
+      "type": "legumes"
+    },{
+      "uuid": "1r89qf",
+      "name": "Protéines de soja (petites)",
+      "originalQuantity": 3,
+      "originalUnit": "kg",
+      "normalizedQuantity": 3000,
+      "normalizedUnit": "gr.",
+      "comment": "Le poids triple avec la réhydratation",
+      "allergens": [],
+      "type": "sec"
+    },{
+      "uuid": "2av6w8",
+      "name": "Farine de blé",
+      "originalQuantity": 900,
+      "originalUnit": "gr.",
+      "normalizedQuantity": 900,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": ["Gluten"],
+      "type": "lof"
+    },{
+      "uuid": "kmq1zb",
+      "name": "Beurre doux",
+      "originalQuantity": 900,
+      "originalUnit": "gr.",
+      "normalizedQuantity": 900,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": ["Produit laitier"],
+      "type": "frais"
+    },{
+      "uuid": "u1fypr",
+      "name": "Fromage râpé",
+      "originalQuantity": 3.5,
+      "originalUnit": "kg",
+      "normalizedQuantity": 3500,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": ["Produit laitier"],
+      "type": "frais"
+    },{
+      "uuid": "x286pc",
+      "name": "Lait demi-écrémé",
+      "originalQuantity": 16,
+      "originalUnit": "l.",
+      "normalizedQuantity": 16000,
+      "normalizedUnit": "ml",
+      "comment": "",
+      "allergens": ["Produit laitier"],
+      "type": "lof"
+    },{
+      "uuid": "h3c8al",
+      "name": "huile d'olive",
+      "originalQuantity": 1,
+      "originalUnit": "l.",
+      "normalizedQuantity": 1000,
+      "normalizedUnit": "ml",
+      "comment": "",
+      "allergens": [],
+      "type": "lof"
+    },{
+      "uuid": "msyocm",
+      "name": "Muscade",
+      "originalQuantity": 1,
+      "originalUnit": "unité",
+      "normalizedQuantity": 1,
+      "normalizedUnit": "unité",
+      "comment": "",
+      "allergens": [],
+      "type": "epices"
+    },{
+      "uuid": "xdkeh3",
+      "name": "Sauce tomate mutti",
+      "originalQuantity": 10,
+      "originalUnit": "kg",
+      "normalizedQuantity": 10000,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": [],
+      "type": "epices"
+    },{
+      "uuid": "78fo97",
+      "name": "Céleri branche",
+      "originalQuantity": 1.5,
+      "originalUnit": "kg",
+      "normalizedQuantity": 1500,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": ["Céleri"],
+      "type": "legumes"
+    },{
+      "uuid": "eouu0v",
+      "name": "Carotte",
+      "originalQuantity": 3,
+      "originalUnit": "kg",
+      "normalizedQuantity": 3000,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": [],
+      "type": "legumes"
+    },{
+      "uuid": "rtavky",
+      "name": "Oignon",
+      "originalQuantity": 3,
+      "originalUnit": "kg",
+      "normalizedQuantity": 3000,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": [],
+      "type": "legumes"
+    },{
+      "uuid": "wby30p",
+      "name": "Lasagnes",
+      "originalQuantity": 10,
+      "originalUnit": "unité",
+      "normalizedQuantity": 10,
+      "normalizedUnit": "unité",
+      "comment": "10 paquets de pates à lasagnes (1,5 paquets par plaque gastro ; 1 plaque gastro = 15 portions)",
+      "allergens": ["Gluten"],
+      "type": "sec"
+    }],
+  "preparation": "- Faire le soffrito (oignon, céleri, carottes)\n- rajouter la protéine de soja réhydratée et les champignons\n- Assaisonner avec le mélange d'épices (4 épices, cumin, paprika) C'est ce qui remplacera la saveur \"viande\"\n- ajouter la polpa mutti et le laurier. Rectifier l'assaisonnement et laisser mijoter\n- faire la béchamel : faire un roux avec le mélange beurre/farine, ajouter le lait. Laisser s'épaissir à feu très doux.\n- monter les étages de lasagne : plaques - ragout - béchamel\n- Couvrir de fromage rapé\n- faire cuire à 180° pendant 30 min",
+  "prepAlt": [],
+  "permissionWrite": [],
+  "publishDate": "2025-10-16T18:24:00Z"
+}

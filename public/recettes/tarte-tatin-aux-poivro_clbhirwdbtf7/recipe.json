@@ -1,0 +1,102 @@
+
+{
+  "uuid": "clbhirwdbtf7",
+  "slug": "tarte-tatin-aux-poivro_clbhirwdbtf7",
+  "title": "Tarte Tatin Aux Poivrons Et Feta",
+  "draft": false,
+  "typeR": "entree",
+  "categories": ["Tarte (salée)"],
+  "regime": ["vegetarien"],
+  "cuisson": true,
+  "serveHot": false,
+  "plate": 100,
+  "quantite_desc": "8 parts par grande tarte. ",
+  "check": false,
+  "checkAlwaysOk": true,
+  "materiel": null,
+  "ingredients": [{
+      "uuid": "u2m28w",
+      "name": "Ail",
+      "originalQuantity": 4,
+      "originalUnit": "tête·s",
+      "normalizedQuantity": 320,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": [],
+      "type": "legumes"
+    },{
+      "uuid": "rtavky",
+      "name": "Oignon",
+      "originalQuantity": 5,
+      "originalUnit": "kg",
+      "normalizedQuantity": 5000,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": [],
+      "type": "legumes"
+    },{
+      "uuid": "0zglpj",
+      "name": "Poivron (rouge)",
+      "originalQuantity": 20,
+      "originalUnit": "kg",
+      "normalizedQuantity": 20000,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": [],
+      "type": "legumes"
+    },{
+      "uuid": "h3c8al",
+      "name": "huile d'olive",
+      "originalQuantity": 1,
+      "originalUnit": "l.",
+      "normalizedQuantity": 1000,
+      "normalizedUnit": "ml",
+      "comment": "",
+      "allergens": [],
+      "type": "lof"
+    },{
+      "uuid": "lny16c",
+      "name": "sucre blanc",
+      "originalQuantity": 1,
+      "originalUnit": "kg",
+      "normalizedQuantity": 1000,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": [],
+      "type": "sucres"
+    },{
+      "uuid": "bdx3gq",
+      "name": "Piment d'espelette",
+      "originalQuantity": 25,
+      "originalUnit": "gr.",
+      "normalizedQuantity": 25,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": [],
+      "type": "epices"
+    },{
+      "uuid": "m5dxyo",
+      "name": "Feta",
+      "originalQuantity": 2,
+      "originalUnit": "kg",
+      "normalizedQuantity": 2000,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": ["Produit laitier"],
+      "type": "frais"
+    },{
+      "uuid": "h6bpv4",
+      "name": "Pâte feuilletée",
+      "originalQuantity": 13,
+      "originalUnit": "unité",
+      "normalizedQuantity": 13,
+      "normalizedUnit": "unité",
+      "comment": "grand format",
+      "allergens": [],
+      "type": "frais"
+    }],
+  "preparation": "Laver les légumes. Retirer des poivrons les membranes\nblanches et les graines à l’intérieur. Les tailler en gros\nmorceaux.\n\nÉplucher l’oignon et émincer finement.  Hacher l'ail.\n\nDans les woks faire suer les poivrons et les\noignons à l'huile d'olive. Saler.  Ajouter la moitié du sucre et laisser cuire le\ntout pour faire caraméliser cette garniture. Ajouter l'ail.\nSel et piment d’Espelette. Sulfuriser les plats à tarte, verser un peu de sucre au fond et disposer les légumes.\n\nPréchauffer le four à 200 °C (th. 6). Dérouler les rouleaux de pâte\nfeuilletée et piquer avec une fourchette. Disposer ensuite sur les\n poivrons. Rabattre les bords si besoin. Enfournez pendant une trentaine\n de minutes jusqu’à l’obtention d’une pâte colorée et cuite.\n\nSortir les tartes du four, démouler en les retournant dans leur plat de service et parsemer de feta émiettée.  Un délice.",
+  "prepAlt": null,
+  "permissionWrite": [],
+  "publishDate": "2025-04-25T13:22:00Z"
+}

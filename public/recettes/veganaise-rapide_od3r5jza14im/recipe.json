@@ -1,0 +1,62 @@
+
+{
+  "uuid": "od3r5jza14im",
+  "slug": "veganaise-rapide_od3r5jza14im",
+  "title": "Véganaise Rapide",
+  "draft": false,
+  "typeR": "plat",
+  "categories": ["Sauce"],
+  "regime": ["vegetarien","vegan","sans-gluten","sans-lactose"],
+  "cuisson": false,
+  "serveHot": false,
+  "plate": 100,
+  "quantite_desc": null,
+  "check": true,
+  "checkAlwaysOk": true,
+  "materiel": ["Giraffe (Bras Mixeur)"],
+  "ingredients": [{
+      "uuid": "2juq3x",
+      "name": "Sel",
+      "originalQuantity": 1,
+      "originalUnit": "c. à soupe",
+      "normalizedQuantity": 15,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": [],
+      "type": "epices"
+    },{
+      "uuid": "5c1b20",
+      "name": "Moutarde",
+      "originalQuantity": 150,
+      "originalUnit": "ml",
+      "normalizedQuantity": 150,
+      "normalizedUnit": "ml",
+      "comment": "",
+      "allergens": ["Moutarde"],
+      "type": "epices"
+    },{
+      "uuid": "c70jxb",
+      "name": "huile de tournesol",
+      "originalQuantity": 1.2,
+      "originalUnit": "l.",
+      "normalizedQuantity": 1200,
+      "normalizedUnit": "ml",
+      "comment": "",
+      "allergens": [],
+      "type": "lof"
+    },{
+      "uuid": "aq796v",
+      "name": "Crème Végétale",
+      "originalQuantity": 600,
+      "originalUnit": "ml",
+      "normalizedQuantity": 600,
+      "normalizedUnit": "ml",
+      "comment": "",
+      "allergens": ["Soja"],
+      "type": "lof"
+    }],
+  "preparation": "* Mettre tous les ingrédients dans un grand bocal ou deux selon les quantités. La crème soja doit être froide.\n* Mixer avec un bras mixeur.",
+  "prepAlt": null,
+  "permissionWrite": [],
+  "publishDate": "2024-03-08T11:49:45.632Z"
+}

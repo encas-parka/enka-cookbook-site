@@ -1,0 +1,52 @@
+
+{
+  "uuid": "7ti71zyu09ol",
+  "slug": "salade-de-pasteque-mel_7ti71zyu09ol",
+  "title": "Salade De Pasteque, Melon Et Basilic",
+  "draft": false,
+  "typeR": "dessert",
+  "categories": ["Salade"],
+  "regime": null,
+  "cuisson": false,
+  "serveHot": false,
+  "plate": 100,
+  "quantite_desc": null,
+  "check": false,
+  "checkAlwaysOk": false,
+  "materiel": null,
+  "ingredients": [{
+      "uuid": "s8j4ff",
+      "name": "Basilic",
+      "originalQuantity": 2,
+      "originalUnit": "bottes",
+      "normalizedQuantity": 2,
+      "normalizedUnit": "bottes",
+      "comment": "",
+      "allergens": [],
+      "type": "epices"
+    },{
+      "uuid": "n8iflg",
+      "name": "Pastèque",
+      "originalQuantity": 6,
+      "originalUnit": "kg",
+      "normalizedQuantity": 6000,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": [],
+      "type": "legumes"
+    },{
+      "uuid": "on84nb",
+      "name": "Melon",
+      "originalQuantity": 8,
+      "originalUnit": "unité",
+      "normalizedQuantity": 8,
+      "normalizedUnit": "unité",
+      "comment": "",
+      "allergens": [],
+      "type": "legumes"
+    }],
+  "preparation": "Blablabla",
+  "prepAlt": null,
+  "permissionWrite": [],
+  "publishDate": "2024-06-17T23:43:00Z"
+}

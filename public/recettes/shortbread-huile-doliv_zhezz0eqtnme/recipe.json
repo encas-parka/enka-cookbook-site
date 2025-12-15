@@ -1,0 +1,112 @@
+
+{
+  "uuid": "zhezz0eqtnme",
+  "slug": "shortbread-huile-doliv_zhezz0eqtnme",
+  "title": "Shortbread Huile D'olive, Romarin Et Chocolat Sans Gluten",
+  "draft": false,
+  "typeR": "dessert",
+  "categories": ["Biscuits"],
+  "regime": ["vegetarien","sans-gluten","vegan","sans-lactose"],
+  "cuisson": true,
+  "serveHot": false,
+  "plate": 10,
+  "quantite_desc": null,
+  "check": true,
+  "checkAlwaysOk": false,
+  "materiel": ["Four"],
+  "ingredients": [{
+      "uuid": "7dlfuw",
+      "name": "Purée d'amande",
+      "originalQuantity": 60,
+      "originalUnit": "gr.",
+      "normalizedQuantity": 60,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": [],
+      "type": "autres"
+    },{
+      "uuid": "2juq3x",
+      "name": "Sel",
+      "originalQuantity": 1,
+      "originalUnit": "pincées",
+      "normalizedQuantity": 0.4,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": [],
+      "type": "epices"
+    },{
+      "uuid": "6z655r",
+      "name": "Romarin",
+      "originalQuantity": 1,
+      "originalUnit": "unité",
+      "normalizedQuantity": 1,
+      "normalizedUnit": "unité",
+      "comment": "(branche)",
+      "allergens": [],
+      "type": "epices"
+    },{
+      "uuid": "h3c8al",
+      "name": "huile d'olive",
+      "originalQuantity": 90,
+      "originalUnit": "ml",
+      "normalizedQuantity": 90,
+      "normalizedUnit": "ml",
+      "comment": "",
+      "allergens": [],
+      "type": "lof"
+    },{
+      "uuid": "8nbcjp",
+      "name": "Fécule de maïs (Maïzena)",
+      "originalQuantity": 30,
+      "originalUnit": "gr.",
+      "normalizedQuantity": 30,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": [],
+      "type": "lof"
+    },{
+      "uuid": "1nb85u",
+      "name": "Farine de riz blanche",
+      "originalQuantity": 120,
+      "originalUnit": "gr.",
+      "normalizedQuantity": 120,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": [],
+      "type": "lof"
+    },{
+      "uuid": "1e3zhq",
+      "name": "Chocolat noir patissier 70p100",
+      "originalQuantity": 50,
+      "originalUnit": "gr.",
+      "normalizedQuantity": 50,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": [],
+      "type": "sucres"
+    },{
+      "uuid": "l5w2jl",
+      "name": "Muscovado (sucre de canne complet)",
+      "originalQuantity": 70,
+      "originalUnit": "gr.",
+      "normalizedQuantity": 70,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": [],
+      "type": "sucres"
+    },{
+      "uuid": "rmgr7l",
+      "name": "Poudre d'amandes",
+      "originalQuantity": 100,
+      "originalUnit": "gr.",
+      "normalizedQuantity": 100,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": ["Fruit à coque"],
+      "type": "sucres"
+    }],
+  "preparation": "\n\n\n\n* Mélanger tous les ingrédients secs (chocolat cassé en pépite et feuilles de romarin hachée) du biscuit dans un récipient. Ajoutez ensuite l’huile d'olive, la purée d’oléagineux  et mélanger bien jusqu’à obtenir une pâte homogène. Si la préparation colle trop, ajouter de la farine.\n* Verser la pâte dans un moule rectangulaire recouvert de papier cuisson et aplatir dans le fond du moule, piquer à l’aide d’une fourchette.\n* Enfourner environ 25minutes à 170°.\n* Si le biscuit colore trop, baisser légèrement la température, le biscuit doit être presque blanc.\n* Sortir du four et découper un fois presque refroidi.",
+  "prepAlt": null,
+  "permissionWrite": [],
+  "publishDate": "2024-06-18T12:29:00Z"
+}

@@ -1,0 +1,82 @@
+
+{
+  "uuid": "kobshcsn8ypy",
+  "slug": "concombre-marines-au-g_kobshcsn8ypy",
+  "title": "Concombre Marinés Au Gingembre",
+  "draft": false,
+  "typeR": "entree",
+  "categories": ["Salade"],
+  "regime": ["vegetarien","vegan","sans-gluten","sans-lactose"],
+  "cuisson": false,
+  "serveHot": false,
+  "plate": 150,
+  "quantite_desc": null,
+  "check": true,
+  "checkAlwaysOk": false,
+  "materiel": ["Gastro 1/1 (Profond)"],
+  "ingredients": [{
+      "uuid": "0d1fzw",
+      "name": "Gingembre",
+      "originalQuantity": 1.25,
+      "originalUnit": "kg",
+      "normalizedQuantity": 1250,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": [],
+      "type": "legumes"
+    },{
+      "uuid": "l5p1a5",
+      "name": "Concombre",
+      "originalQuantity": 23,
+      "originalUnit": "kg",
+      "normalizedQuantity": 23000,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": [],
+      "type": "legumes"
+    },{
+      "uuid": "h3c8al",
+      "name": "huile d'olive",
+      "originalQuantity": 400,
+      "originalUnit": "ml",
+      "normalizedQuantity": 400,
+      "normalizedUnit": "ml",
+      "comment": "",
+      "allergens": [],
+      "type": "lof"
+    },{
+      "uuid": "2juq3x",
+      "name": "Sel",
+      "originalQuantity": 100,
+      "originalUnit": "gr.",
+      "normalizedQuantity": 100,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": [],
+      "type": "epices"
+    },{
+      "uuid": "bjuxby",
+      "name": "Vinaigre de vin",
+      "originalQuantity": 1.2,
+      "originalUnit": "l.",
+      "normalizedQuantity": 1200,
+      "normalizedUnit": "ml",
+      "comment": "",
+      "allergens": ["Alcool"],
+      "type": "epices"
+    },{
+      "uuid": "u9z2he",
+      "name": "Sucre en poudre",
+      "originalQuantity": 600,
+      "originalUnit": "gr.",
+      "normalizedQuantity": 600,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": [],
+      "type": "sucres"
+    }],
+  "preparation": "Servir.",
+  "prepAlt": null,
+  "permissionWrite": [],
+  "publishDate": "2024-05-20T14:44:00Z"
+}

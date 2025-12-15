@@ -1,0 +1,132 @@
+
+{
+  "uuid": "whssdyoowqnq",
+  "slug": "salade-fatouche_whssdyoowqnq",
+  "title": "Salade Fatouche",
+  "draft": false,
+  "typeR": "entree",
+  "categories": ["Salade"],
+  "regime": null,
+  "cuisson": false,
+  "serveHot": false,
+  "plate": 100,
+  "quantite_desc": "",
+  "check": true,
+  "checkAlwaysOk": null,
+  "materiel": [],
+  "ingredients": [{
+      "uuid": "4vxqlr",
+      "name": "Graine de tournesol",
+      "originalQuantity": 400,
+      "originalUnit": "gr.",
+      "normalizedQuantity": 400,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": [],
+      "type": "sec"
+    },{
+      "uuid": "qzrsoa",
+      "name": "Graines de courge",
+      "originalQuantity": 400,
+      "originalUnit": "gr.",
+      "normalizedQuantity": 400,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": [],
+      "type": "sec"
+    },{
+      "uuid": "h3c8al",
+      "name": "huile d'olive",
+      "originalQuantity": 1,
+      "originalUnit": "l.",
+      "normalizedQuantity": 1000,
+      "normalizedUnit": "ml",
+      "comment": "",
+      "allergens": [],
+      "type": "lof"
+    },{
+      "uuid": "l0yikk",
+      "name": "Laitue romaine",
+      "originalQuantity": 10,
+      "originalUnit": "unité",
+      "normalizedQuantity": 10,
+      "normalizedUnit": "unité",
+      "comment": "",
+      "allergens": [],
+      "type": "legumes"
+    },{
+      "uuid": "y16lzq",
+      "name": "Menthe fraîche",
+      "originalQuantity": 6,
+      "originalUnit": "bottes",
+      "normalizedQuantity": 6,
+      "normalizedUnit": "bottes",
+      "comment": "",
+      "allergens": [],
+      "type": "epices"
+    },{
+      "uuid": "hgfa4e",
+      "name": "Persil frais",
+      "originalQuantity": 6,
+      "originalUnit": "bottes",
+      "normalizedQuantity": 6,
+      "normalizedUnit": "bottes",
+      "comment": "",
+      "allergens": [],
+      "type": "epices"
+    },{
+      "uuid": "u2m28w",
+      "name": "Ail",
+      "originalQuantity": 2,
+      "originalUnit": "tête·s",
+      "normalizedQuantity": 160,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": [],
+      "type": "legumes"
+    },{
+      "uuid": "rtavky",
+      "name": "Oignon",
+      "originalQuantity": 2,
+      "originalUnit": "kg",
+      "normalizedQuantity": 2000,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": [],
+      "type": "legumes"
+    },{
+      "uuid": "4il0xo",
+      "name": "Radis",
+      "originalQuantity": 2,
+      "originalUnit": "kg",
+      "normalizedQuantity": 2000,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": [],
+      "type": "legumes"
+    },{
+      "uuid": "l5p1a5",
+      "name": "Concombre",
+      "originalQuantity": 20,
+      "originalUnit": "unité",
+      "normalizedQuantity": 4000,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": [],
+      "type": "legumes"
+    },{
+      "uuid": "ibtbnq",
+      "name": "Tomate",
+      "originalQuantity": 8,
+      "originalUnit": "kg",
+      "normalizedQuantity": 8000,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": [],
+      "type": "legumes"
+    }],
+  "preparation": "\u003eCouper les tomates et concombres en dés\n\nÉmincer les radis et l'oignon\n\nLaver et émincer la salade\n\nHacher la menthe et le persil\n\nAssaisonner avec l'huile, du sel, poivre, de la menthe séchée et du sumac\n\nAjouter les graines de courges et tournesol\n\nRectifier l'assaisonnement",
+  "prepAlt": [],
+  "permissionWrite": [],
+  "publishDate": "2025-10-19T20:35:00Z"
+}

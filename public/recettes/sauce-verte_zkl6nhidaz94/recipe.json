@@ -1,0 +1,92 @@
+
+{
+  "uuid": "zkl6nhidaz94",
+  "slug": "sauce-verte_zkl6nhidaz94",
+  "title": "Sauce Verte",
+  "draft": false,
+  "typeR": "entree",
+  "categories": ["Sauce"],
+  "regime": ["vegan"],
+  "cuisson": false,
+  "serveHot": false,
+  "plate": 20,
+  "quantite_desc": "100ml/pers",
+  "check": true,
+  "checkAlwaysOk": false,
+  "materiel": null,
+  "ingredients": [{
+      "uuid": "4vxqlr",
+      "name": "Graine de tournesol",
+      "originalQuantity": 1,
+      "originalUnit": "gr.",
+      "normalizedQuantity": 1,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": [],
+      "type": "sec"
+    },{
+      "uuid": "chfwwq",
+      "name": "Crème soja",
+      "originalQuantity": 0.5,
+      "originalUnit": "l.",
+      "normalizedQuantity": 500,
+      "normalizedUnit": "ml",
+      "comment": "",
+      "allergens": ["Soja"],
+      "type": "lof"
+    },{
+      "uuid": "hlbwfd",
+      "name": "Yaourt de soja",
+      "originalQuantity": 400,
+      "originalUnit": "gr.",
+      "normalizedQuantity": 400,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": ["Soja"],
+      "type": "frais"
+    },{
+      "uuid": "hgfa4e",
+      "name": "Persil frais",
+      "originalQuantity": 4,
+      "originalUnit": "bottes",
+      "normalizedQuantity": 4,
+      "normalizedUnit": "bottes",
+      "comment": "ou fanes de carottes",
+      "allergens": [],
+      "type": "epices"
+    },{
+      "uuid": "e4mjd1",
+      "name": "Jus de citron",
+      "originalQuantity": 0.25,
+      "originalUnit": "l.",
+      "normalizedQuantity": 250,
+      "normalizedUnit": "ml",
+      "comment": "",
+      "allergens": [],
+      "type": "sucres"
+    },{
+      "uuid": "2pps90",
+      "name": "Poivre",
+      "originalQuantity": 1,
+      "originalUnit": "au goût",
+      "normalizedQuantity": 1,
+      "normalizedUnit": "au goût",
+      "comment": "",
+      "allergens": [],
+      "type": "epices"
+    },{
+      "uuid": "2juq3x",
+      "name": "Sel",
+      "originalQuantity": 1,
+      "originalUnit": "au goût",
+      "normalizedQuantity": 1,
+      "normalizedUnit": "au goût",
+      "comment": "",
+      "allergens": [],
+      "type": "epices"
+    }],
+  "preparation": "Dans un mixeur, hacher le persil avec les graines gonflées, ajouter la crème, le yaourt, le citron.\n\nVerser l'huile d'olive en ajustant la consistance.\n\nSaler et poivrer.",
+  "prepAlt": null,
+  "permissionWrite": [],
+  "publishDate": "2025-08-08T08:26:00Z"
+}

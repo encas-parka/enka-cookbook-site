@@ -1,0 +1,357 @@
+
+
+<!doctype html>
+<html lang="fr-FR">
+  
+  
+
+  
+  
+
+  <script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><body>
+
+  
+  <div id="svelte-header"></div>
+
+
+    <div class="wrap container" role="document">
+      <div class="content">
+        
+
+
+
+
+<nav class="offcanvas offcanvas-md offcanvas-start docs-menu show p-3" tabindex="-1" id="sidebar" data-bs-keyboard="false" data-bs-backdrop="false" data-bs-scroll="true">
+
+  <nav class="nav flex-column mt-3">
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#sidebar" aria-label="Close" id="sidebar-close"></button>
+    
+      <ul class="nav nav-pills flex-column mb-auto ">
+        <li><a class="nav-link mb-2 fw-bolder " href="//localhost:1313/docs/decouvrir">Découvrir</a></li>
+      </ul>
+      
+    
+      <ul class="nav nav-pills flex-column mb-auto ">
+        <li><a class="nav-link mb-2 fw-bolder " href="//localhost:1313/docs/editer">Editer le site</a></li>
+      </ul>
+      
+        <ul class="nav nav-pills flex-column mb-auto ms-2">
+          
+            <li><a class="nav-link mb-2 " href="//localhost:1313/docs/editer/commencer">Commencer</a></li>
+            
+          
+            <li><a class="nav-link mb-2 " href="//localhost:1313/docs/editer/recettes">Les Recettes</a></li>
+            
+          
+            <li><a class="nav-link mb-2 " href="//localhost:1313/docs/editer/evenements">Les Evénements / Menus</a></li>
+            
+          
+            <li><a class="nav-link mb-2 active" href="//localhost:1313/docs/editer/autres">Ajouter ingrédients, catégories...</a></li>
+            <span class=" small">  <nav id="TableOfContents"></nav></span>
+            
+          
+        </ul>
+      
+    
+      <ul class="nav nav-pills flex-column mb-auto ">
+        <li><a class="nav-link mb-2 fw-bolder " href="//localhost:1313/docs/web-tools">Autres Outils Web</a></li>
+      </ul>
+      
+    
+  </nav>
+</nav>
+
+
+<style>
+  nav#TableOfContents {
+    ul {
+      padding-left: .5rem;
+      list-style-type: none;
+    }
+    li {
+      border-left: #811721 solid 2px;
+      padding-left: 1rem;
+      margin-bottom: .3rem;
+    
+    }
+  }
+
+  @media (max-width: 768px) {
+    #sidebar {
+      display: none;
+    }
+  }
+
+ 
+.docs-menu {
+  width: 250px !important;
+  top: 54px !important;
+}
+
+
+ 
+@media (min-width: 768px) {
+  .container {
+    padding-left: 300px !important;
+    margin-left: inherit;
+  }
+  
+  #sidebarCollapse {
+    display: none;
+  }
+  
+  .offcanvas-backdrop {
+    display: none;
+  }
+
+  #sidebar-close {
+    display: none;
+  }
+
+  #sidebar {
+    display: block;
+  }
+}
+
+
+ 
+#sidebar.nav-link:hover {
+  background-color: #e5e5e5;
+}
+
+
+.bi {
+  vertical-align: -.125em;
+  pointer-events: none;
+  fill: currentColor;
+}
+.btn-toggle {
+  display: inline-flex;
+  align-items: center;
+  padding: .25rem .5rem;
+  font-weight: 600;
+  color: rgba(0, 0, 0, .65); 
+  background-color: transparent;
+  border: 0;
+}
+.btn-toggle:hover,
+.btn-toggle:focus {
+  color: rgba(0, 0, 0, .85);
+  background-color: #e5e5e5;
+}
+.btn-toggle::before {
+  width: 1.25em;
+  line-height: 0;
+  content: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='rgba%280,0,0,.5%29' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M5 14l6-6-6-6'/%3e%3c/svg%3e");
+  transition: transform .35s ease;
+  transform-origin: .5em 50%;
+}
+.btn-toggle[aria-expanded="true"] {
+  color: rgba(0, 0, 0, .85);
+}
+.btn-toggle[aria-expanded="true"]::before {
+  transform: rotate(90deg);
+}
+.btn-toggle-nav a {
+  display: inline-flex;
+  padding: .1875rem .5rem;
+  margin-top: .125rem;
+  margin-left: 1.25rem;
+  margin-bottom: .5rem;
+  text-decoration: none;
+}
+.btn-toggle-nav a:hover,
+.btn-toggle-nav a:focus {
+  background-color: #e5e5e5;
+}
+.btn-toggle-nav a.active {
+  font-weight: bold;
+}
+
+ 
+.offcanvas-header {
+  background-color: #0d6efd!important;
+  color: white!important;
+}
+</style>
+
+
+
+  <header>
+    <h1>Ajouter ingrédients, catégories, etc.</h1>
+  </header>
+  <article><p>Des listes d&rsquo;<a href="">ingrédients</a>, de matériel nécessaires à l&rsquo;élaboration des recettes (four, gastro, etc.), et des catégories pour classer les recettes (tartes, snacking, soupe, etc.) sont déjà enregistrés dans le site et donc utilisables lorsque l&rsquo;on <a href="//localhost:1313/docs/editer/recettes/">édite/créé une recette</a>. Mais si vous souhaitez en ajouter, c&rsquo;est possible depuis l&rsquo;interface d&rsquo;édition (colonne de gauche).</p>
+<p>Pour les ingrédients, il est demandé de préciser s&rsquo;il est allergène, ou s&rsquo;il contient de la viande ou du porc (ça permet d&rsquo;ajouter automatiquement des alertes sur les recettes qui utilisent ces ingrédients).</p>
+<p>
+
+<a
+  class="btn btn-outline-primary btn-sm m-1 py-0"
+  href="https://enka-cookbook.netlify.app/admin/#/collections/ingredients_index"
+  target="_blank" rel="external">
+→ ajouter un ingrédient 
+</a>
+
+
+
+
+<a
+  class="btn btn-outline-primary btn-sm m-1 py-0"
+  href=""
+  >
+→ voir la liste d'ingrédients disponible
+</a>
+
+
+
+
+<a
+  class="btn btn-outline-primary btn-sm m-1 py-0"
+  href="https://enka-cookbook.netlify.app/admin/#/collections/materiel"
+  target="_blank" rel="external">
+→ ajouter un materiel
+</a>
+
+
+
+
+<a
+  class="btn btn-outline-primary btn-sm m-1 py-0"
+  href="https://enka-cookbook.netlify.app/admin/#/collections/sous-categories"
+  target="_blank" rel="external">
+→ ajouter une catégorie
+</a>
+
+</p>
+
+<div class="row align-items-center">
+  
+  
+<div class="col-md-12 col-lg-6">
+  
+    
+    
+      
+    
+    
+    <zoomable-image class="p-2 m-2">
+      <img class="img-fluid" src="img/autres.jpg" alt="autres.jpg" >  
+    </zoomable-image>
+
+  
+</div>
+
+
+
+  
+<div class="col-md-12 col-lg-6">
+  
+    
+    
+      
+    
+    
+    <zoomable-image class="p-2 m-2">
+      <img class="img-fluid" src="img/ingredients.jpg" alt="ingredients.jpg" >  
+    </zoomable-image>
+
+  
+</div>
+
+
+
+</div>
+
+
+<p>Les ingrédients sont regroupés dans listes. Dans certaines d&rsquo;entre-elles, il est possible de préciser pour les ingrédients une saison (ex: fruits et légumes), et s&rsquo;il s&rsquo;agit d&rsquo;un ingrédient frais (pouvant nécessiter une conservation au frigo).</p>
+
+<div class="row align-items-center">
+  
+  
+<div class="col-md-12 col-lg-6">
+  
+    
+    
+      
+    
+    
+    <zoomable-image class="p-2 m-2">
+      <img class="img-fluid" src="img/ingredients3.jpg" alt="ingredients3.jpg" >  
+    </zoomable-image>
+
+  
+</div>
+
+
+  
+<div class="col-md-12 col-lg-6">
+  
+    
+    
+      
+    
+    
+    <zoomable-image class="p-2 m-2">
+      <img class="img-fluid" src="img/ingredients2.jpg" alt="ingredients2.jpg" >  
+    </zoomable-image>
+
+  
+</div>
+
+
+  
+<div class="col-md-12 col-lg-6">
+  
+    
+    
+      
+    
+    
+    <zoomable-image class="p-2 m-2">
+      <img class="img-fluid" src="img/save-ing.jpg" alt="ingredients2.jpg" >  
+    </zoomable-image>
+
+  
+</div>
+
+
+
+
+</div>
+
+
+</article>
+
+
+  
+  
+  <script type="text/javascript" src="../../../js/zoomable-img.2e9fbfd9bcbe13961d1e8ad4142103a094df72a28d110197ca6ff5170ab2e9b3.js"></script>
+  
+
+
+      </div>
+    </div>
+
+  
+  <footer class="footer text-muted">
+  <div class="container">
+    <p class="m-0 text-center"></p>
+  </div>
+</footer>
+  
+<script type="module" src="../../../dist/assets/index.js"></script>
+
+
+<link rel="stylesheet" href="../../../dist/assets/index.css">
+
+
+<style>
+  body {
+    padding-top: 40px;  
+  }
+</style>
+
+
+
+
+  </body>
+</html>

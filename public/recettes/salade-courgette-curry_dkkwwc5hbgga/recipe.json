@@ -1,0 +1,92 @@
+
+{
+  "uuid": "dkkwwc5hbgga",
+  "slug": "salade-courgette-curry_dkkwwc5hbgga",
+  "title": "Salade Courgette - Curry",
+  "draft": false,
+  "typeR": "entree",
+  "categories": ["Salade"],
+  "regime": ["vegan","sans-gluten","sans-lactose","vegetarien"],
+  "cuisson": false,
+  "serveHot": false,
+  "plate": 90,
+  "quantite_desc": null,
+  "check": true,
+  "checkAlwaysOk": false,
+  "materiel": null,
+  "ingredients": [{
+      "uuid": "5cg0yu",
+      "name": "Citron jaune",
+      "originalQuantity": 15,
+      "originalUnit": "unité",
+      "normalizedQuantity": 1500,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": [],
+      "type": "legumes"
+    },{
+      "uuid": "9zozfk",
+      "name": "Courgette",
+      "originalQuantity": 12,
+      "originalUnit": "kg",
+      "normalizedQuantity": 12000,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": [],
+      "type": "legumes"
+    },{
+      "uuid": "h3c8al",
+      "name": "huile d'olive",
+      "originalQuantity": 380,
+      "originalUnit": "ml",
+      "normalizedQuantity": 380,
+      "normalizedUnit": "ml",
+      "comment": "",
+      "allergens": [],
+      "type": "lof"
+    },{
+      "uuid": "7jceco",
+      "name": "Curry",
+      "originalQuantity": 225,
+      "originalUnit": "gr.",
+      "normalizedQuantity": 225,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": [],
+      "type": "epices"
+    },{
+      "uuid": "2pps90",
+      "name": "Poivre",
+      "originalQuantity": 1,
+      "originalUnit": "au goût",
+      "normalizedQuantity": 1,
+      "normalizedUnit": "au goût",
+      "comment": "",
+      "allergens": [],
+      "type": "epices"
+    },{
+      "uuid": "2juq3x",
+      "name": "Sel",
+      "originalQuantity": 1,
+      "originalUnit": "au goût",
+      "normalizedQuantity": 1,
+      "normalizedUnit": "au goût",
+      "comment": "",
+      "allergens": [],
+      "type": "epices"
+    },{
+      "uuid": "bbwo4n",
+      "name": "Tamari (sauce)",
+      "originalQuantity": 380,
+      "originalUnit": "ml",
+      "normalizedQuantity": 380,
+      "normalizedUnit": "ml",
+      "comment": "",
+      "allergens": ["Soja"],
+      "type": "epices"
+    }],
+  "preparation": "* Le lendemain rectifier l’assaisonnement.",
+  "prepAlt": null,
+  "permissionWrite": [],
+  "publishDate": "2024-05-19T10:40:00Z"
+}

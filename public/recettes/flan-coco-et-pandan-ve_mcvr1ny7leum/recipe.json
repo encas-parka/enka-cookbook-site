@@ -1,0 +1,92 @@
+
+{
+  "uuid": "mcvr1ny7leum",
+  "slug": "flan-coco-et-pandan-ve_mcvr1ny7leum",
+  "title": "Flan Coco Et Pandan (Végan)",
+  "draft": false,
+  "typeR": "dessert",
+  "categories": ["Sucrée"],
+  "regime": ["vegetarien","vegan","sans-lactose"],
+  "cuisson": true,
+  "serveHot": false,
+  "plate": 20,
+  "quantite_desc": "Pour 20 ramequins",
+  "check": true,
+  "checkAlwaysOk": false,
+  "materiel": null,
+  "ingredients": [{
+      "uuid": "8nbcjp",
+      "name": "Fécule de maïs (Maïzena)",
+      "originalQuantity": 130,
+      "originalUnit": "gr.",
+      "normalizedQuantity": 130,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": [],
+      "type": "lof"
+    },{
+      "uuid": "xdy736",
+      "name": "lait de coco",
+      "originalQuantity": 1.5,
+      "originalUnit": "l.",
+      "normalizedQuantity": 1500,
+      "normalizedUnit": "ml",
+      "comment": "",
+      "allergens": [],
+      "type": "lof"
+    },{
+      "uuid": "vw9d1a",
+      "name": "Lait végétal (au choix)",
+      "originalQuantity": 1.2,
+      "originalUnit": "l.",
+      "normalizedQuantity": 1200,
+      "normalizedUnit": "ml",
+      "comment": "",
+      "allergens": [],
+      "type": "lof"
+    },{
+      "uuid": "ruhtax",
+      "name": "Agar-agar",
+      "originalQuantity": 10,
+      "originalUnit": "gr.",
+      "normalizedQuantity": 10,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": [],
+      "type": "autres"
+    },{
+      "uuid": "2juq3x",
+      "name": "Sel",
+      "originalQuantity": 1,
+      "originalUnit": "c. à café",
+      "normalizedQuantity": 5,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": [],
+      "type": "epices"
+    },{
+      "uuid": "krizq0",
+      "name": "Pandan (extrait de)",
+      "originalQuantity": 1,
+      "originalUnit": "c. à soupe",
+      "normalizedQuantity": 15,
+      "normalizedUnit": "ml",
+      "comment": "",
+      "allergens": [],
+      "type": "epices"
+    },{
+      "uuid": "u9z2he",
+      "name": "Sucre en poudre",
+      "originalQuantity": 400,
+      "originalUnit": "gr.",
+      "normalizedQuantity": 400,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": [],
+      "type": "sucres"
+    }],
+  "preparation": "* Dans une casserole, mélanger les laits végétal et de coco, le sucre, la fécule de maïs, l'agar agar, le pandan et le sel. Fouetter jusqu'à ce que le mélange soit homogène.\n* Faire chauffer à feu moyen jusqu'à ce que le mélange commence à bouillir et à épaissir.\n* Laisser bouillir 2min afin que l'agar agar fasse effet.\n* Répartir dans les ramequins et laisser refroidir avant de réserver au frigo au moins deux heures.",
+  "prepAlt": null,
+  "permissionWrite": [],
+  "publishDate": "2024-05-18T14:14:00Z"
+}

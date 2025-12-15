@@ -1,0 +1,2573 @@
+{
+  "mainGroup_id": "cate_5_daf52fff",
+  "hugoContentHash": "287eb60d08e4edc7a21e2d170bf0b672",
+  "name": "Catering bénévole de la fête de la soupe 2025",
+  "allDates": ["2025-10-23T12:00:00.000Z","2025-10-23T20:00:00.000Z","2025-10-24T12:00:00.000Z","2025-10-24T20:00:00.000Z","2025-10-25T12:00:00.000Z","2025-10-25T20:00:00.000Z"],
+  "ingredients": [
+    
+    
+    {
+        "ingredientHugoUuid": "ruhtax",
+        "ingredientName": "Agar-agar",
+        "productSemanticKey": "agar-agar_ruhtax_cate_5_daf52fff",
+        "ingType": "autres",
+        "totalAssiettes": 100,
+        "nbRecipes": 1,"totalNeededRaw": [{ "q":56, "u": "gr." }],
+        "byDate": {"2025-10-24T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 56, "u": "gr."}],
+          "recipes": [{
+                "r": "Panna cotta végan à la chataigne - chips de chocolat","qEq":56,
+                "uEq": "gr.",
+                "a": 100
+              }],
+          "totalAssiettes": 100,
+          "recipeCount": 1
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "u2m28w",
+        "ingredientName": "Ail",
+        "productSemanticKey": "ail_u2m28w_cate_5_daf52fff",
+        "ingType": "legumes",
+        "totalAssiettes": 915,
+        "nbRecipes": 8,"pFrais": true,
+          "conversionRules": ["1 tête = 80 gr.","1 gousse = 6.5 gr.","un ail = 6.5 gr."],"totalNeededRaw": [{ "q":8.4, "u": "gousse·s" },{ "q":18.1, "u": "tête·s" },{ "q":5.2, "u": "unité" }],
+        "byDate": {"2025-10-23T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 180, "u": "gr."}],
+          "recipes": [{
+                "r": "Bahn mi à la protéine de soja",
+                "q":2.2,
+                "u": "tête·s","qEq":180,
+                "uEq": "gr.",
+                "a": 45
+              }],
+          "totalAssiettes": 45,
+          "recipeCount": 1
+        },"2025-10-23T20:00:00.000Z": {
+          "totalConsolidated": [{"q": 96, "u": "gr."}],
+          "recipes": [{
+                "r": "Mafé végétarien et riz à la cardamone",
+                "q":1.2,
+                "u": "tête·s","qEq":96,
+                "uEq": "gr.",
+                "a": 60
+              }],
+          "totalAssiettes": 60,
+          "recipeCount": 1
+        },"2025-10-24T20:00:00.000Z": {
+          "totalConsolidated": [{"q": 391, "u": "gr."}],
+          "recipes": [{
+                "r": "Tajine olives citron avec pâte langues d'oiseaux (orzo)",
+                "q":4.2,
+                "u": "tête·s","qEq":336,
+                "uEq": "gr.",
+                "a": 140
+              },{
+                "r": "Houmous pois chiche",
+                "q":8.4,
+                "u": "gousse·s","qEq":55,
+                "uEq": "gr.",
+                "a": 140
+              }],
+          "totalAssiettes": 280,
+          "recipeCount": 2
+        },"2025-10-25T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 762, "u": "gr."}],
+          "recipes": [{
+                "r": "Salade fatouche",
+                "q":2.6,
+                "u": "tête·s","qEq":208,
+                "uEq": "gr.",
+                "a": 130
+              },{
+                "r": "Houmous de betterave aux cranberries et balsamique",
+                "q":5.2,
+                "u": "unité","qEq":34,
+                "uEq": "gr.",
+                "a": 130
+              },{
+                "r": "Falafel de lulu",
+                "q":6.5,
+                "u": "tête·s","qEq":520,
+                "uEq": "gr.",
+                "a": 130
+              }],
+          "totalAssiettes": 390,
+          "recipeCount": 3
+        },"2025-10-25T20:00:00.000Z": {
+          "totalConsolidated": [{"q": 112, "u": "gr."}],
+          "recipes": [{
+                "r": "Couscous d'automne végétarien",
+                "q":1.4,
+                "u": "tête·s","qEq":112,
+                "uEq": "gr.",
+                "a": 140
+              }],
+          "totalAssiettes": 140,
+          "recipeCount": 1
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "9vpwp5",
+        "ingredientName": "Banane",
+        "productSemanticKey": "banane_9vpwp5_cate_5_daf52fff",
+        "ingType": "legumes",
+        "totalAssiettes": 130,
+        "nbRecipes": 1,"pFrais": true,"totalNeededRaw": [{ "q":45.5, "u": "unité" }],
+        "byDate": {"2025-10-25T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 45.5, "u": "unité"}],
+          "recipes": [{
+                "r": "Banoffee","qEq":45.5,
+                "uEq": "unité",
+                "a": 130
+              }],
+          "totalAssiettes": 130,
+          "recipeCount": 1
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "s8j4ff",
+        "ingredientName": "Basilic",
+        "productSemanticKey": "basilic_s8j4ff_cate_5_daf52fff",
+        "ingType": "epices",
+        "totalAssiettes": 60,
+        "nbRecipes": 1,"pFrais": true,"totalNeededRaw": [{ "q":1.2, "u": "bottes" }],
+        "byDate": {"2025-10-23T20:00:00.000Z": {
+          "totalConsolidated": [{"q": 1.2, "u": "bottes"}],
+          "recipes": [{
+                "r": "Salade chou rouge carottes basilic","qEq":1.2,
+                "uEq": "bottes",
+                "a": 60
+              }],
+          "totalAssiettes": 60,
+          "recipeCount": 1
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "i7psri",
+        "ingredientName": "Betterave cuite",
+        "productSemanticKey": "betterave-_i7psri_cate_5_daf52fff",
+        "ingType": "legumes",
+        "totalAssiettes": 270,
+        "nbRecipes": 2,"totalNeededRaw": [{ "q":1920, "u": "gr." }],
+        "byDate": {"2025-10-25T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 520, "u": "gr."}],
+          "recipes": [{
+                "r": "Houmous de betterave aux cranberries et balsamique","qEq":520,
+                "uEq": "gr.",
+                "a": 130
+              }],
+          "totalAssiettes": 130,
+          "recipeCount": 1
+        },"2025-10-25T20:00:00.000Z": {
+          "totalConsolidated": [{"q": 1400, "u": "gr."}],
+          "recipes": [{
+                "r": "Salade de crudités chou chinois pommes carottes betteraves",
+                "q":1.4,
+                "u": "Kg","qEq":1400,
+                "uEq": "gr.",
+                "a": 140
+              }],
+          "totalAssiettes": 140,
+          "recipeCount": 1
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "7wpsj2",
+        "ingredientName": "Beurre de cacahuètes (sucré)",
+        "productSemanticKey": "beurre-de-_7wpsj2_cate_5_daf52fff",
+        "ingType": "autres",
+        "totalAssiettes": 140,
+        "nbRecipes": 1,"totalNeededRaw": [{ "q":2520, "u": "gr." }],
+        "byDate": {"2025-10-24T20:00:00.000Z": {
+          "totalConsolidated": [{"q": 2520, "u": "gr."}],
+          "recipes": [{
+                "r": "Beignet sauce cacahuète",
+                "q":2.5,
+                "u": "Kg","qEq":2520,
+                "uEq": "gr.",
+                "a": 140
+              }],
+          "totalAssiettes": 140,
+          "recipeCount": 1
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "mxub21",
+        "ingredientName": "Beurre demi-sel",
+        "productSemanticKey": "beurre-dem_mxub21_cate_5_daf52fff",
+        "ingType": "frais",
+        "totalAssiettes": 130,
+        "nbRecipes": 1,"pFrais": true,"totalNeededRaw": [{ "q":1300, "u": "gr." }],
+        "byDate": {"2025-10-25T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 1300, "u": "gr."}],
+          "recipes": [{
+                "r": "Banoffee",
+                "q":1.3,
+                "u": "Kg","qEq":1300,
+                "uEq": "gr.",
+                "a": 130
+              }],
+          "totalAssiettes": 130,
+          "recipeCount": 1
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "kmq1zb",
+        "ingredientName": "Beurre doux",
+        "productSemanticKey": "beurre-dou_kmq1zb_cate_5_daf52fff",
+        "ingType": "frais",
+        "totalAssiettes": 100,
+        "nbRecipes": 1,"pFrais": true,"totalNeededRaw": [{ "q":900, "u": "gr." }],
+        "byDate": {"2025-10-24T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 900, "u": "gr."}],
+          "recipes": [{
+                "r": "Lasagne bolognaise végé saute tomate protéine de soja champignon béchamel","qEq":900,
+                "uEq": "gr.",
+                "a": 100
+              }],
+          "totalAssiettes": 100,
+          "recipeCount": 1
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "57xo8g",
+        "ingredientName": "bouillon cube",
+        "productSemanticKey": "bouillon-c_57xo8g_cate_5_daf52fff",
+        "ingType": "epices",
+        "totalAssiettes": 60,
+        "nbRecipes": 1,"totalNeededRaw": [{ "q":7.8, "u": "unité" }],
+        "byDate": {"2025-10-23T20:00:00.000Z": {
+          "totalConsolidated": [{"q": 7.8, "u": "unité"}],
+          "recipes": [{
+                "r": "Mafé végétarien et riz à la cardamone","qEq":7.8,
+                "uEq": "unité",
+                "a": 60
+              }],
+          "totalAssiettes": 60,
+          "recipeCount": 1
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "uja9ip",
+        "ingredientName": "Canneberge",
+        "productSemanticKey": "canneberge_uja9ip_cate_5_daf52fff",
+        "ingType": "legumes",
+        "totalAssiettes": 130,
+        "nbRecipes": 1,"pFrais": true,"totalNeededRaw": [{ "q":130, "u": "gr." }],
+        "byDate": {"2025-10-25T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 130, "u": "gr."}],
+          "recipes": [{
+                "r": "Houmous de betterave aux cranberries et balsamique","qEq":130,
+                "uEq": "gr.",
+                "a": 130
+              }],
+          "totalAssiettes": 130,
+          "recipeCount": 1
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "2n9g9t",
+        "ingredientName": "Cardamone en poudre",
+        "productSemanticKey": "cardamone-_2n9g9t_cate_5_daf52fff",
+        "ingType": "epices",
+        "totalAssiettes": 45,
+        "nbRecipes": 1,"totalNeededRaw": [{ "q":22, "u": "gr." }],
+        "byDate": {"2025-10-23T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 22, "u": "gr."}],
+          "recipes": [{
+                "r": "Lassi vegan a la mangue","qEq":22,
+                "uEq": "gr.",
+                "a": 45
+              }],
+          "totalAssiettes": 45,
+          "recipeCount": 1
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "eouu0v",
+        "ingredientName": "Carotte",
+        "productSemanticKey": "carotte_eouu0v_cate_5_daf52fff",
+        "ingType": "legumes",
+        "totalAssiettes": 685,
+        "nbRecipes": 7,"pFrais": true,"totalNeededRaw": [{ "q":25630, "u": "gr." }],
+        "byDate": {"2025-10-23T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 2250, "u": "gr."}],
+          "recipes": [{
+                "r": "Bahn mi à la protéine de soja",
+                "q":2.2,
+                "u": "Kg","qEq":2250,
+                "uEq": "gr.",
+                "a": 45
+              }],
+          "totalAssiettes": 45,
+          "recipeCount": 1
+        },"2025-10-23T20:00:00.000Z": {
+          "totalConsolidated": [{"q": 7500, "u": "gr."}],
+          "recipes": [{
+                "r": "Mafé végétarien et riz à la cardamone",
+                "q":4.2,
+                "u": "Kg","qEq":4200,
+                "uEq": "gr.",
+                "a": 60
+              },{
+                "r": "Salade chou rouge carottes basilic",
+                "q":3.3,
+                "u": "Kg","qEq":3300,
+                "uEq": "gr.",
+                "a": 60
+              }],
+          "totalAssiettes": 120,
+          "recipeCount": 2
+        },"2025-10-24T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 3000, "u": "gr."}],
+          "recipes": [{
+                "r": "Lasagne bolognaise végé saute tomate protéine de soja champignon béchamel",
+                "q":3.0,
+                "u": "Kg","qEq":3000,
+                "uEq": "gr.",
+                "a": 100
+              }],
+          "totalAssiettes": 100,
+          "recipeCount": 1
+        },"2025-10-24T20:00:00.000Z": {
+          "totalConsolidated": [{"q": 7000, "u": "gr."}],
+          "recipes": [{
+                "r": "Tajine olives citron avec pâte langues d'oiseaux (orzo)",
+                "q":7.0,
+                "u": "Kg","qEq":7000,
+                "uEq": "gr.",
+                "a": 140
+              }],
+          "totalAssiettes": 140,
+          "recipeCount": 1
+        },"2025-10-25T20:00:00.000Z": {
+          "totalConsolidated": [{"q": 5880, "u": "gr."}],
+          "recipes": [{
+                "r": "Couscous d'automne végétarien",
+                "q":5.5,
+                "u": "Kg","qEq":5460,
+                "uEq": "gr.",
+                "a": 140
+              },{
+                "r": "Salade de crudités chou chinois pommes carottes betteraves","qEq":420,
+                "uEq": "gr.",
+                "a": 140
+              }],
+          "totalAssiettes": 280,
+          "recipeCount": 2
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "78fo97",
+        "ingredientName": "Céleri branche",
+        "productSemanticKey": "celeri-bra_78fo97_cate_5_daf52fff",
+        "ingType": "legumes",
+        "totalAssiettes": 240,
+        "nbRecipes": 2,"pFrais": true,"totalNeededRaw": [{ "q":2760, "u": "gr." }],
+        "byDate": {"2025-10-24T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 1500, "u": "gr."}],
+          "recipes": [{
+                "r": "Lasagne bolognaise végé saute tomate protéine de soja champignon béchamel",
+                "q":1.5,
+                "u": "Kg","qEq":1500,
+                "uEq": "gr.",
+                "a": 100
+              }],
+          "totalAssiettes": 100,
+          "recipeCount": 1
+        },"2025-10-25T20:00:00.000Z": {
+          "totalConsolidated": [{"q": 1260, "u": "gr."}],
+          "recipes": [{
+                "r": "Couscous d'automne végétarien","qEq":1260,
+                "uEq": "gr.",
+                "a": 140
+              }],
+          "totalAssiettes": 140,
+          "recipeCount": 1
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "92zzps",
+        "ingredientName": "Champignon de Paris",
+        "productSemanticKey": "champignon_92zzps_cate_5_daf52fff",
+        "ingType": "legumes",
+        "totalAssiettes": 100,
+        "nbRecipes": 1,"pFrais": true,"totalNeededRaw": [{ "q":5000, "u": "gr." }],
+        "byDate": {"2025-10-24T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 5000, "u": "gr."}],
+          "recipes": [{
+                "r": "Lasagne bolognaise végé saute tomate protéine de soja champignon béchamel",
+                "q":5.0,
+                "u": "Kg","qEq":5000,
+                "uEq": "gr.",
+                "a": 100
+              }],
+          "totalAssiettes": 100,
+          "recipeCount": 1
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "cr4kiz",
+        "ingredientName": "Chocolat noir",
+        "productSemanticKey": "chocolat-n_cr4kiz_cate_5_daf52fff",
+        "ingType": "sucres",
+        "totalAssiettes": 100,
+        "nbRecipes": 1,"totalNeededRaw": [{ "q":600, "u": "gr." }],
+        "byDate": {"2025-10-24T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 600, "u": "gr."}],
+          "recipes": [{
+                "r": "Panna cotta végan à la chataigne - chips de chocolat","qEq":600,
+                "uEq": "gr.",
+                "a": 100
+              }],
+          "totalAssiettes": 100,
+          "recipeCount": 1
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "mlukbi",
+        "ingredientName": "Chou blanc",
+        "productSemanticKey": "chou-blanc_mlukbi_cate_5_daf52fff",
+        "ingType": "legumes",
+        "totalAssiettes": 60,
+        "nbRecipes": 1,"pFrais": true,"totalNeededRaw": [{ "q":4200, "u": "gr." }],
+        "byDate": {"2025-10-23T20:00:00.000Z": {
+          "totalConsolidated": [{"q": 4200, "u": "gr."}],
+          "recipes": [{
+                "r": "Mafé végétarien et riz à la cardamone",
+                "q":4.2,
+                "u": "Kg","qEq":4200,
+                "uEq": "gr.",
+                "a": 60
+              }],
+          "totalAssiettes": 60,
+          "recipeCount": 1
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "hz46f4",
+        "ingredientName": "Chou chinois",
+        "productSemanticKey": "chou-chino_hz46f4_cate_5_daf52fff",
+        "ingType": "legumes",
+        "totalAssiettes": 140,
+        "nbRecipes": 1,"pFrais": true,"totalNeededRaw": [{ "q":6020, "u": "gr." }],
+        "byDate": {"2025-10-25T20:00:00.000Z": {
+          "totalConsolidated": [{"q": 6020, "u": "gr."}],
+          "recipes": [{
+                "r": "Salade de crudités chou chinois pommes carottes betteraves",
+                "q":6.0,
+                "u": "Kg","qEq":6020,
+                "uEq": "gr.",
+                "a": 140
+              }],
+          "totalAssiettes": 140,
+          "recipeCount": 1
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "nl2s2n",
+        "ingredientName": "Chou rouge",
+        "productSemanticKey": "chou-rouge_nl2s2n_cate_5_daf52fff",
+        "ingType": "legumes",
+        "totalAssiettes": 105,
+        "nbRecipes": 2,"pFrais": true,"totalNeededRaw": [{ "q":4875, "u": "gr." }],
+        "byDate": {"2025-10-23T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 1575, "u": "gr."}],
+          "recipes": [{
+                "r": "Bahn mi à la protéine de soja",
+                "q":1.6,
+                "u": "Kg","qEq":1575,
+                "uEq": "gr.",
+                "a": 45
+              }],
+          "totalAssiettes": 45,
+          "recipeCount": 1
+        },"2025-10-23T20:00:00.000Z": {
+          "totalConsolidated": [{"q": 3300, "u": "gr."}],
+          "recipes": [{
+                "r": "Salade chou rouge carottes basilic",
+                "q":3.3,
+                "u": "Kg","qEq":3300,
+                "uEq": "gr.",
+                "a": 60
+              }],
+          "totalAssiettes": 60,
+          "recipeCount": 1
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "bwkn34",
+        "ingredientName": "Citron (jus)",
+        "productSemanticKey": "citron-jus_bwkn34_cate_5_daf52fff",
+        "ingType": "legumes",
+        "totalAssiettes": 45,
+        "nbRecipes": 1,"pFrais": true,"totalNeededRaw": [{ "q":225, "u": "ml" }],
+        "byDate": {"2025-10-23T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 225, "u": "ml"}],
+          "recipes": [{
+                "r": "Lassi vegan a la mangue","qEq":225,
+                "uEq": "ml",
+                "a": 45
+              }],
+          "totalAssiettes": 45,
+          "recipeCount": 1
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "tobtbt",
+        "ingredientName": "Citron non traité",
+        "productSemanticKey": "citron-non_tobtbt_cate_5_daf52fff",
+        "ingType": "legumes",
+        "totalAssiettes": 140,
+        "nbRecipes": 1,"pFrais": true,
+          "conversionRules": ["un citron = 100 gr."],"totalNeededRaw": [{ "q":14, "u": "unité" }],
+        "byDate": {"2025-10-24T20:00:00.000Z": {
+          "totalConsolidated": [{"q": 1400, "u": "gr."}],
+          "recipes": [{
+                "r": "Tajine olives citron avec pâte langues d'oiseaux (orzo)",
+                "q":14.0,
+                "u": "unité","qEq":1400,
+                "uEq": "gr.",
+                "a": 140
+              }],
+          "totalAssiettes": 140,
+          "recipeCount": 1
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "mck2wl",
+        "ingredientName": "Concentré de tomate",
+        "productSemanticKey": "concentre-_mck2wl_cate_5_daf52fff",
+        "ingType": "epices",
+        "totalAssiettes": 60,
+        "nbRecipes": 1,"totalNeededRaw": [{ "q":135, "u": "gr." }],
+        "byDate": {"2025-10-23T20:00:00.000Z": {
+          "totalConsolidated": [{"q": 135, "u": "gr."}],
+          "recipes": [{
+                "r": "Mafé végétarien et riz à la cardamone","qEq":135,
+                "uEq": "gr.",
+                "a": 60
+              }],
+          "totalAssiettes": 60,
+          "recipeCount": 1
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "l5p1a5",
+        "ingredientName": "Concombre",
+        "productSemanticKey": "concombre_l5p1a5_cate_5_daf52fff",
+        "ingType": "legumes",
+        "totalAssiettes": 175,
+        "nbRecipes": 2,"pFrais": true,
+          "conversionRules": ["un concombre = 200 gr."],"totalNeededRaw": [{ "q":35, "u": "unité" }],
+        "byDate": {"2025-10-23T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 1800, "u": "gr."}],
+          "recipes": [{
+                "r": "Bahn mi à la protéine de soja",
+                "q":9.0,
+                "u": "unité","qEq":1800,
+                "uEq": "gr.",
+                "a": 45
+              }],
+          "totalAssiettes": 45,
+          "recipeCount": 1
+        },"2025-10-25T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 5200, "u": "gr."}],
+          "recipes": [{
+                "r": "Salade fatouche",
+                "q":26.0,
+                "u": "unité","qEq":5200,
+                "uEq": "gr.",
+                "a": 130
+              }],
+          "totalAssiettes": 130,
+          "recipeCount": 1
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "yat3fu",
+        "ingredientName": "Coriandre",
+        "productSemanticKey": "coriandre_yat3fu_cate_5_daf52fff",
+        "ingType": "epices",
+        "totalAssiettes": 45,
+        "nbRecipes": 1,"totalNeededRaw": [{ "q":4.5, "u": "bottes" }],
+        "byDate": {"2025-10-23T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 4.5, "u": "bottes"}],
+          "recipes": [{
+                "r": "Bahn mi à la protéine de soja","qEq":4.5,
+                "uEq": "bottes",
+                "a": 45
+              }],
+          "totalAssiettes": 45,
+          "recipeCount": 1
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "fetrpe",
+        "ingredientName": "Coriandre fraîche",
+        "productSemanticKey": "coriandre-_fetrpe_cate_5_daf52fff",
+        "ingType": "epices",
+        "totalAssiettes": 130,
+        "nbRecipes": 1,"pFrais": true,"totalNeededRaw": [{ "q":7.8, "u": "bottes" }],
+        "byDate": {"2025-10-25T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 7.8, "u": "bottes"}],
+          "recipes": [{
+                "r": "Falafel de lulu","qEq":7.8,
+                "uEq": "bottes",
+                "a": 130
+              }],
+          "totalAssiettes": 130,
+          "recipeCount": 1
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "oa85mx",
+        "ingredientName": "Courge",
+        "productSemanticKey": "courge_oa85mx_cate_5_daf52fff",
+        "ingType": "legumes",
+        "totalAssiettes": 140,
+        "nbRecipes": 1,"pFrais": true,"totalNeededRaw": [{ "q":5460, "u": "gr." }],
+        "byDate": {"2025-10-25T20:00:00.000Z": {
+          "totalConsolidated": [{"q": 5460, "u": "gr."}],
+          "recipes": [{
+                "r": "Couscous d'automne végétarien",
+                "q":5.5,
+                "u": "Kg","qEq":5460,
+                "uEq": "gr.",
+                "a": 140
+              }],
+          "totalAssiettes": 140,
+          "recipeCount": 1
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "6tnb6h",
+        "ingredientName": "Crème fraiche liquide entière",
+        "productSemanticKey": "creme-frai_6tnb6h_cate_5_daf52fff",
+        "ingType": "lof",
+        "totalAssiettes": 130,
+        "nbRecipes": 1,"totalNeededRaw": [{ "q":4550, "u": "ml" }],
+        "byDate": {"2025-10-25T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 4550, "u": "ml"}],
+          "recipes": [{
+                "r": "Banoffee",
+                "q":4.5,
+                "u": "l.","qEq":4550,
+                "uEq": "ml",
+                "a": 130
+              }],
+          "totalAssiettes": 130,
+          "recipeCount": 1
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "chfwwq",
+        "ingredientName": "Crème soja",
+        "productSemanticKey": "creme-soja_chfwwq_cate_5_daf52fff",
+        "ingType": "lof",
+        "totalAssiettes": 100,
+        "nbRecipes": 1,"totalNeededRaw": [{ "q":5000, "u": "ml" }],
+        "byDate": {"2025-10-24T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 5000, "u": "ml"}],
+          "recipes": [{
+                "r": "Panna cotta végan à la chataigne - chips de chocolat",
+                "q":5.0,
+                "u": "l.","qEq":5000,
+                "uEq": "ml",
+                "a": 100
+              }],
+          "totalAssiettes": 100,
+          "recipeCount": 1
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "he3u48",
+        "ingredientName": "Cumin moulu",
+        "productSemanticKey": "cumin-moul_he3u48_cate_5_daf52fff",
+        "ingType": "epices",
+        "totalAssiettes": 130,
+        "nbRecipes": 1,"totalNeededRaw": [{ "q":195, "u": "gr." }],
+        "byDate": {"2025-10-25T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 195, "u": "gr."}],
+          "recipes": [{
+                "r": "Falafel de lulu","qEq":195,
+                "uEq": "gr.",
+                "a": 130
+              }],
+          "totalAssiettes": 130,
+          "recipeCount": 1
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "ljzb7j",
+        "ingredientName": "Eau",
+        "productSemanticKey": "eau_ljzb7j_cate_5_daf52fff",
+        "ingType": "autres",
+        "totalAssiettes": 100,
+        "nbRecipes": 1,"totalNeededRaw": [{ "q":200, "u": "ml" }],
+        "byDate": {"2025-10-24T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 200, "u": "ml"}],
+          "recipes": [{
+                "r": "Vinaigrette",
+                "q":0.2,
+                "u": "l.","qEq":200,
+                "uEq": "ml",
+                "a": 100
+              }],
+          "totalAssiettes": 100,
+          "recipeCount": 1
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "ikdk3g",
+        "ingredientName": "Eau de fleur d'oranger",
+        "productSemanticKey": "eau-de-fle_ikdk3g_cate_5_daf52fff",
+        "ingType": "sucres",
+        "totalAssiettes": 140,
+        "nbRecipes": 1,"totalNeededRaw": [{ "q":210, "u": "ml" }],
+        "byDate": {"2025-10-25T20:00:00.000Z": {
+          "totalConsolidated": [{"q": 210, "u": "ml"}],
+          "recipes": [{
+                "r": "Flan libanais vegan","qEq":210,
+                "uEq": "ml",
+                "a": 140
+              }],
+          "totalAssiettes": 140,
+          "recipeCount": 1
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "ktlybm",
+        "ingredientName": "Eau de rose",
+        "productSemanticKey": "eau-de-ros_ktlybm_cate_5_daf52fff",
+        "ingType": "sucres",
+        "totalAssiettes": 140,
+        "nbRecipes": 1,"totalNeededRaw": [{ "q":112, "u": "ml" }],
+        "byDate": {"2025-10-25T20:00:00.000Z": {
+          "totalConsolidated": [{"q": 112, "u": "ml"}],
+          "recipes": [{
+                "r": "Flan libanais vegan","qEq":112,
+                "uEq": "ml",
+                "a": 140
+              }],
+          "totalAssiettes": 140,
+          "recipeCount": 1
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "2av6w8",
+        "ingredientName": "Farine de blé",
+        "productSemanticKey": "farine-de-_2av6w8_cate_5_daf52fff",
+        "ingType": "lof",
+        "totalAssiettes": 370,
+        "nbRecipes": 3,"totalNeededRaw": [{ "q":14040, "u": "gr." }],
+        "byDate": {"2025-10-24T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 900, "u": "gr."}],
+          "recipes": [{
+                "r": "Lasagne bolognaise végé saute tomate protéine de soja champignon béchamel","qEq":900,
+                "uEq": "gr.",
+                "a": 100
+              }],
+          "totalAssiettes": 100,
+          "recipeCount": 1
+        },"2025-10-24T20:00:00.000Z": {
+          "totalConsolidated": [{"q": 5600, "u": "gr."}],
+          "recipes": [{
+                "r": "Beignet sauce cacahuète",
+                "q":5.6,
+                "u": "Kg","qEq":5600,
+                "uEq": "gr.",
+                "a": 140
+              }],
+          "totalAssiettes": 140,
+          "recipeCount": 1
+        },"2025-10-25T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 7540, "u": "gr."}],
+          "recipes": [{
+                "r": "Babka vegane harissa et pistache",
+                "q":7.5,
+                "u": "Kg","qEq":7540,
+                "uEq": "gr.",
+                "a": 130
+              }],
+          "totalAssiettes": 130,
+          "recipeCount": 1
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "8nbcjp",
+        "ingredientName": "Fécule de maïs (Maïzena)",
+        "productSemanticKey": "fecule-de-_8nbcjp_cate_5_daf52fff",
+        "ingType": "lof",
+        "totalAssiettes": 140,
+        "nbRecipes": 1,"totalNeededRaw": [{ "q":1120, "u": "gr." }],
+        "byDate": {"2025-10-25T20:00:00.000Z": {
+          "totalConsolidated": [{"q": 1120, "u": "gr."}],
+          "recipes": [{
+                "r": "Flan libanais vegan","qEq":1120,
+                "uEq": "gr.",
+                "a": 140
+              }],
+          "totalAssiettes": 140,
+          "recipeCount": 1
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "u1fypr",
+        "ingredientName": "Fromage râpé",
+        "productSemanticKey": "fromage-ra_u1fypr_cate_5_daf52fff",
+        "ingType": "frais",
+        "totalAssiettes": 100,
+        "nbRecipes": 1,"pFrais": true,"totalNeededRaw": [{ "q":3500, "u": "gr." }],
+        "byDate": {"2025-10-24T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 3500, "u": "gr."}],
+          "recipes": [{
+                "r": "Lasagne bolognaise végé saute tomate protéine de soja champignon béchamel",
+                "q":3.5,
+                "u": "Kg","qEq":3500,
+                "uEq": "gr.",
+                "a": 100
+              }],
+          "totalAssiettes": 100,
+          "recipeCount": 1
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "0d1fzw",
+        "ingredientName": "Gingembre",
+        "productSemanticKey": "gingembre_0d1fzw_cate_5_daf52fff",
+        "ingType": "legumes",
+        "totalAssiettes": 105,
+        "nbRecipes": 2,"pFrais": true,"totalNeededRaw": [{ "q":314, "u": "gr." }],
+        "byDate": {"2025-10-23T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 292, "u": "gr."}],
+          "recipes": [{
+                "r": "Bahn mi à la protéine de soja","qEq":292,
+                "uEq": "gr.",
+                "a": 45
+              }],
+          "totalAssiettes": 45,
+          "recipeCount": 1
+        },"2025-10-23T20:00:00.000Z": {
+          "totalConsolidated": [{"q": 21, "u": "gr."}],
+          "recipes": [{
+                "r": "Mafé végétarien et riz à la cardamone","qEq":21,
+                "uEq": "gr.",
+                "a": 60
+              }],
+          "totalAssiettes": 60,
+          "recipeCount": 1
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "4vxqlr",
+        "ingredientName": "Graine de tournesol",
+        "productSemanticKey": "graine-de-_4vxqlr_cate_5_daf52fff",
+        "ingType": "sec",
+        "totalAssiettes": 130,
+        "nbRecipes": 1,"totalNeededRaw": [{ "q":520, "u": "gr." }],
+        "byDate": {"2025-10-25T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 520, "u": "gr."}],
+          "recipes": [{
+                "r": "Salade fatouche","qEq":520,
+                "uEq": "gr.",
+                "a": 130
+              }],
+          "totalAssiettes": 130,
+          "recipeCount": 1
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "qzrsoa",
+        "ingredientName": "Graines de courge",
+        "productSemanticKey": "graines-de_qzrsoa_cate_5_daf52fff",
+        "ingType": "sec",
+        "totalAssiettes": 130,
+        "nbRecipes": 1,"totalNeededRaw": [{ "q":520, "u": "gr." }],
+        "byDate": {"2025-10-25T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 520, "u": "gr."}],
+          "recipes": [{
+                "r": "Salade fatouche","qEq":520,
+                "uEq": "gr.",
+                "a": 130
+              }],
+          "totalAssiettes": 130,
+          "recipeCount": 1
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "4n95t5",
+        "ingredientName": "Harissa",
+        "productSemanticKey": "harissa_4n95t5_cate_5_daf52fff",
+        "ingType": "epices",
+        "totalAssiettes": 130,
+        "nbRecipes": 1,"totalNeededRaw": [{ "q":1300, "u": "gr." }],
+        "byDate": {"2025-10-25T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 1300, "u": "gr."}],
+          "recipes": [{
+                "r": "Babka vegane harissa et pistache",
+                "q":1.3,
+                "u": "Kg","qEq":1300,
+                "uEq": "gr.",
+                "a": 130
+              }],
+          "totalAssiettes": 130,
+          "recipeCount": 1
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "8d1cfa5bf2ae",
+        "ingredientName": "Huile d'arachide",
+        "productSemanticKey": "huile-dara_8d1cfa_cate_5_daf52fff",
+        "ingType": "lof",
+        "totalAssiettes": 140,
+        "nbRecipes": 1,"totalNeededRaw": [{ "q":1260, "u": "ml" }],
+        "byDate": {"2025-10-24T20:00:00.000Z": {
+          "totalConsolidated": [{"q": 1260, "u": "ml"}],
+          "recipes": [{
+                "r": "Beignet sauce cacahuète",
+                "q":1.3,
+                "u": "l.","qEq":1260,
+                "uEq": "ml",
+                "a": 140
+              }],
+          "totalAssiettes": 140,
+          "recipeCount": 1
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "h3c8al",
+        "ingredientName": "huile d'olive",
+        "productSemanticKey": "huile-doli_h3c8al_cate_5_daf52fff",
+        "ingType": "lof",
+        "totalAssiettes": 1050,
+        "nbRecipes": 8,"totalNeededRaw": [{ "q":10586, "u": "ml" }],
+        "byDate": {"2025-10-24T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 1000, "u": "ml"}],
+          "recipes": [{
+                "r": "Lasagne bolognaise végé saute tomate protéine de soja champignon béchamel",
+                "q":1.0,
+                "u": "l.","qEq":1000,
+                "uEq": "ml",
+                "a": 100
+              }],
+          "totalAssiettes": 100,
+          "recipeCount": 1
+        },"2025-10-24T20:00:00.000Z": {
+          "totalConsolidated": [{"q": 2030, "u": "ml"}],
+          "recipes": [{
+                "r": "Tajine olives citron avec pâte langues d'oiseaux (orzo)",
+                "q":1.4,
+                "u": "l.","qEq":1400,
+                "uEq": "ml",
+                "a": 140
+              },{
+                "r": "Houmous pois chiche",
+                "q":0.6,
+                "u": "l.","qEq":630,
+                "uEq": "ml",
+                "a": 140
+              }],
+          "totalAssiettes": 280,
+          "recipeCount": 2
+        },"2025-10-25T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 4056, "u": "ml"}],
+          "recipes": [{
+                "r": "Salade fatouche",
+                "q":1.3,
+                "u": "l.","qEq":1300,
+                "uEq": "ml",
+                "a": 130
+              },{
+                "r": "Houmous de betterave aux cranberries et balsamique","qEq":156,
+                "uEq": "ml",
+                "a": 130
+              },{
+                "r": "Falafel de lulu",
+                "q":2.6,
+                "u": "l.","qEq":2600,
+                "uEq": "ml",
+                "a": 130
+              }],
+          "totalAssiettes": 390,
+          "recipeCount": 3
+        },"2025-10-25T20:00:00.000Z": {
+          "totalConsolidated": [{"q": 3500, "u": "ml"}],
+          "recipes": [{
+                "r": "Couscous d'automne végétarien",
+                "q":2.8,
+                "u": "l.","qEq":2800,
+                "uEq": "ml",
+                "a": 140
+              },{
+                "r": "Salade de crudités chou chinois pommes carottes betteraves","qEq":700,
+                "uEq": "ml",
+                "a": 140
+              }],
+          "totalAssiettes": 280,
+          "recipeCount": 2
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "1ej217",
+        "ingredientName": "huile de friture",
+        "productSemanticKey": "huile-de-f_1ej217_cate_5_daf52fff",
+        "ingType": "lof",
+        "totalAssiettes": 270,
+        "nbRecipes": 2,"totalNeededRaw": [{ "q":25800, "u": "ml" }],
+        "byDate": {"2025-10-24T20:00:00.000Z": {
+          "totalConsolidated": [{"q": 6300, "u": "ml"}],
+          "recipes": [{
+                "r": "Beignet sauce cacahuète",
+                "q":6.3,
+                "u": "l.","qEq":6300,
+                "uEq": "ml",
+                "a": 140
+              }],
+          "totalAssiettes": 140,
+          "recipeCount": 1
+        },"2025-10-25T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 19500, "u": "ml"}],
+          "recipes": [{
+                "r": "Falafel de lulu",
+                "q":19.5,
+                "u": "l.","qEq":19500,
+                "uEq": "ml",
+                "a": 130
+              }],
+          "totalAssiettes": 130,
+          "recipeCount": 1
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "c70jxb",
+        "ingredientName": "huile de tournesol",
+        "productSemanticKey": "huile-de-t_c70jxb_cate_5_daf52fff",
+        "ingType": "lof",
+        "totalAssiettes": 140,
+        "nbRecipes": 1,"totalNeededRaw": [{ "q":1400, "u": "ml" }],
+        "byDate": {"2025-10-25T20:00:00.000Z": {
+          "totalConsolidated": [{"q": 1400, "u": "ml"}],
+          "recipes": [{
+                "r": "Couscous d'automne végétarien",
+                "q":1.4,
+                "u": "l.","qEq":1400,
+                "uEq": "ml",
+                "a": 140
+              }],
+          "totalAssiettes": 140,
+          "recipeCount": 1
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "atccqu",
+        "ingredientName": "Huile végétale",
+        "productSemanticKey": "huile-vege_atccqu_cate_5_daf52fff",
+        "ingType": "lof",
+        "totalAssiettes": 360,
+        "nbRecipes": 3,"totalNeededRaw": [{ "q":5400, "u": "ml" }],
+        "byDate": {"2025-10-24T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 1500, "u": "ml"}],
+          "recipes": [{
+                "r": "Vinaigrette",
+                "q":1.5,
+                "u": "l.","qEq":1500,
+                "uEq": "ml",
+                "a": 100
+              }],
+          "totalAssiettes": 100,
+          "recipeCount": 1
+        },"2025-10-25T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 3900, "u": "ml"}],
+          "recipes": [{
+                "r": "Babka vegane harissa et pistache",
+                "q":2.6,
+                "u": "l.","qEq":2600,
+                "uEq": "ml",
+                "a": 130
+              },{
+                "r": "Babka vegane harissa et pistache",
+                "q":1.3,
+                "u": "l.","qEq":1300,
+                "uEq": "ml",
+                "a": 130
+              }],
+          "totalAssiettes": 260,
+          "recipeCount": 2
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "e4mjd1",
+        "ingredientName": "Jus de citron",
+        "productSemanticKey": "jus-de-cit_e4mjd1_cate_5_daf52fff",
+        "ingType": "sucres",
+        "totalAssiettes": 200,
+        "nbRecipes": 2,"totalNeededRaw": [{ "q":375, "u": "ml" }],
+        "byDate": {"2025-10-23T20:00:00.000Z": {
+          "totalConsolidated": [{"q": 60, "u": "ml"}],
+          "recipes": [{
+                "r": "Compote pommes poires","qEq":60,
+                "uEq": "ml",
+                "a": 60
+              }],
+          "totalAssiettes": 60,
+          "recipeCount": 1
+        },"2025-10-24T20:00:00.000Z": {
+          "totalConsolidated": [{"q": 315, "u": "ml"}],
+          "recipes": [{
+                "r": "Houmous pois chiche","qEq":315,
+                "uEq": "ml",
+                "a": 140
+              }],
+          "totalAssiettes": 140,
+          "recipeCount": 1
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "5dcfzk",
+        "ingredientName": "Lait concentré sucré",
+        "productSemanticKey": "lait-conce_5dcfzk_cate_5_daf52fff",
+        "ingType": "lof",
+        "totalAssiettes": 130,
+        "nbRecipes": 1,"totalNeededRaw": [{ "q":6500, "u": "gr." }],
+        "byDate": {"2025-10-25T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 6500, "u": "gr."}],
+          "recipes": [{
+                "r": "Banoffee",
+                "q":6.5,
+                "u": "Kg","qEq":6500,
+                "uEq": "gr.",
+                "a": 130
+              }],
+          "totalAssiettes": 130,
+          "recipeCount": 1
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "csxbg6",
+        "ingredientName": "lait d’amande",
+        "productSemanticKey": "lait-daman_csxbg6_cate_5_daf52fff",
+        "ingType": "lof",
+        "totalAssiettes": 100,
+        "nbRecipes": 1,"totalNeededRaw": [{ "q":5000, "u": "ml" }],
+        "byDate": {"2025-10-24T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 5000, "u": "ml"}],
+          "recipes": [{
+                "r": "Panna cotta végan à la chataigne - chips de chocolat",
+                "q":5.0,
+                "u": "l.","qEq":5000,
+                "uEq": "ml",
+                "a": 100
+              }],
+          "totalAssiettes": 100,
+          "recipeCount": 1
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "xdy736",
+        "ingredientName": "lait de coco",
+        "productSemanticKey": "lait-de-co_xdy736_cate_5_daf52fff",
+        "ingType": "lof",
+        "totalAssiettes": 45,
+        "nbRecipes": 1,"totalNeededRaw": [{ "q":3600, "u": "ml" }],
+        "byDate": {"2025-10-23T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 3600, "u": "ml"}],
+          "recipes": [{
+                "r": "Lassi vegan a la mangue",
+                "q":3.6,
+                "u": "l.","qEq":3600,
+                "uEq": "ml",
+                "a": 45
+              }],
+          "totalAssiettes": 45,
+          "recipeCount": 1
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "hzwesd",
+        "ingredientName": "Lait de riz",
+        "productSemanticKey": "lait-de-ri_hzwesd_cate_5_daf52fff",
+        "ingType": "lof",
+        "totalAssiettes": 140,
+        "nbRecipes": 1,"totalNeededRaw": [{ "q":14000, "u": "ml" }],
+        "byDate": {"2025-10-25T20:00:00.000Z": {
+          "totalConsolidated": [{"q": 14000, "u": "ml"}],
+          "recipes": [{
+                "r": "Flan libanais vegan",
+                "q":14.0,
+                "u": "l.","qEq":14000,
+                "uEq": "ml",
+                "a": 140
+              }],
+          "totalAssiettes": 140,
+          "recipeCount": 1
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "gpeob7",
+        "ingredientName": "Lait de soja",
+        "productSemanticKey": "lait-de-so_gpeob7_cate_5_daf52fff",
+        "ingType": "lof",
+        "totalAssiettes": 130,
+        "nbRecipes": 1,"totalNeededRaw": [{ "q":5200, "u": "ml" }],
+        "byDate": {"2025-10-25T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 5200, "u": "ml"}],
+          "recipes": [{
+                "r": "Babka vegane harissa et pistache",
+                "q":5.2,
+                "u": "l.","qEq":5200,
+                "uEq": "ml",
+                "a": 130
+              }],
+          "totalAssiettes": 130,
+          "recipeCount": 1
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "x286pc",
+        "ingredientName": "Lait demi-écrémé",
+        "productSemanticKey": "lait-demi-_x286pc_cate_5_daf52fff",
+        "ingType": "lof",
+        "totalAssiettes": 240,
+        "nbRecipes": 2,"totalNeededRaw": [{ "q":20200, "u": "ml" }],
+        "byDate": {"2025-10-24T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 16000, "u": "ml"}],
+          "recipes": [{
+                "r": "Lasagne bolognaise végé saute tomate protéine de soja champignon béchamel",
+                "q":16.0,
+                "u": "l.","qEq":16000,
+                "uEq": "ml",
+                "a": 100
+              }],
+          "totalAssiettes": 100,
+          "recipeCount": 1
+        },"2025-10-24T20:00:00.000Z": {
+          "totalConsolidated": [{"q": 4200, "u": "ml"}],
+          "recipes": [{
+                "r": "Beignet sauce cacahuète",
+                "q":4.2,
+                "u": "l.","qEq":4200,
+                "uEq": "ml",
+                "a": 140
+              }],
+          "totalAssiettes": 140,
+          "recipeCount": 1
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "l0yikk",
+        "ingredientName": "Laitue romaine",
+        "productSemanticKey": "laitue-rom_l0yikk_cate_5_daf52fff",
+        "ingType": "legumes",
+        "totalAssiettes": 130,
+        "nbRecipes": 1,"pFrais": true,"totalNeededRaw": [{ "q":13, "u": "unité" }],
+        "byDate": {"2025-10-25T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 13, "u": "unité"}],
+          "recipes": [{
+                "r": "Salade fatouche","qEq":13,
+                "uEq": "unité",
+                "a": 130
+              }],
+          "totalAssiettes": 130,
+          "recipeCount": 1
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "wby30p",
+        "ingredientName": "Lasagnes",
+        "productSemanticKey": "lasagnes_wby30p_cate_5_daf52fff",
+        "ingType": "sec",
+        "totalAssiettes": 100,
+        "nbRecipes": 1,"totalNeededRaw": [{ "q":10, "u": "unité" }],
+        "byDate": {"2025-10-24T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 10, "u": "unité"}],
+          "recipes": [{
+                "r": "Lasagne bolognaise végé saute tomate protéine de soja champignon béchamel","qEq":10,
+                "uEq": "unité",
+                "a": 100
+              }],
+          "totalAssiettes": 100,
+          "recipeCount": 1
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "q936bv",
+        "ingredientName": "Levure boulangère",
+        "productSemanticKey": "levure-bou_q936bv_cate_5_daf52fff",
+        "ingType": "lof",
+        "totalAssiettes": 140,
+        "nbRecipes": 1,"totalNeededRaw": [{ "q":74, "u": "gr." }],
+        "byDate": {"2025-10-24T20:00:00.000Z": {
+          "totalConsolidated": [{"q": 74, "u": "gr."}],
+          "recipes": [{
+                "r": "Beignet sauce cacahuète","qEq":74,
+                "uEq": "gr.",
+                "a": 140
+              }],
+          "totalAssiettes": 140,
+          "recipeCount": 1
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "vgec6e",
+        "ingredientName": "Levure chimique",
+        "productSemanticKey": "levure-chi_vgec6e_cate_5_daf52fff",
+        "ingType": "lof",
+        "totalAssiettes": 140,
+        "nbRecipes": 1,"totalNeededRaw": [{ "q":74, "u": "gr." }],
+        "byDate": {"2025-10-24T20:00:00.000Z": {
+          "totalConsolidated": [{"q": 74, "u": "gr."}],
+          "recipes": [{
+                "r": "Beignet sauce cacahuète","qEq":74,
+                "uEq": "gr.",
+                "a": 140
+              }],
+          "totalAssiettes": 140,
+          "recipeCount": 1
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "7qqcwc",
+        "ingredientName": "Levure fraîche de boulanger",
+        "productSemanticKey": "levure-fra_7qqcwc_cate_5_daf52fff",
+        "ingType": "frais",
+        "totalAssiettes": 130,
+        "nbRecipes": 1,"pFrais": true,"totalNeededRaw": [{ "q":390, "u": "gr." }],
+        "byDate": {"2025-10-25T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 390, "u": "gr."}],
+          "recipes": [{
+                "r": "Babka vegane harissa et pistache","qEq":390,
+                "uEq": "gr.",
+                "a": 130
+              }],
+          "totalAssiettes": 130,
+          "recipeCount": 1
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "mdoij4",
+        "ingredientName": "Mangue",
+        "productSemanticKey": "mangue_mdoij4_cate_5_daf52fff",
+        "ingType": "legumes",
+        "totalAssiettes": 45,
+        "nbRecipes": 1,"pFrais": true,"totalNeededRaw": [{ "q":4500, "u": "gr." }],
+        "byDate": {"2025-10-23T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 4500, "u": "gr."}],
+          "recipes": [{
+                "r": "Lassi vegan a la mangue",
+                "q":4.5,
+                "u": "Kg","qEq":4500,
+                "uEq": "gr.",
+                "a": 45
+              }],
+          "totalAssiettes": 45,
+          "recipeCount": 1
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "0tpvue",
+        "ingredientName": "Mascarpone",
+        "productSemanticKey": "mascarpone_0tpvue_cate_5_daf52fff",
+        "ingType": "frais",
+        "totalAssiettes": 130,
+        "nbRecipes": 1,"pFrais": true,"totalNeededRaw": [{ "q":1950, "u": "gr." }],
+        "byDate": {"2025-10-25T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 1950, "u": "gr."}],
+          "recipes": [{
+                "r": "Banoffee",
+                "q":1.9,
+                "u": "Kg","qEq":1950,
+                "uEq": "gr.",
+                "a": 130
+              }],
+          "totalAssiettes": 130,
+          "recipeCount": 1
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "y16lzq",
+        "ingredientName": "Menthe fraîche",
+        "productSemanticKey": "menthe-fra_y16lzq_cate_5_daf52fff",
+        "ingType": "epices",
+        "totalAssiettes": 130,
+        "nbRecipes": 1,"pFrais": true,"totalNeededRaw": [{ "q":7.8, "u": "bottes" }],
+        "byDate": {"2025-10-25T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 7.8, "u": "bottes"}],
+          "recipes": [{
+                "r": "Salade fatouche","qEq":7.8,
+                "uEq": "bottes",
+                "a": 130
+              }],
+          "totalAssiettes": 130,
+          "recipeCount": 1
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "k2uthk",
+        "ingredientName": "Miso blanc",
+        "productSemanticKey": "miso-blanc_k2uthk_cate_5_daf52fff",
+        "ingType": "epices",
+        "totalAssiettes": 45,
+        "nbRecipes": 1,"totalNeededRaw": [{ "q":382, "u": "gr." }],
+        "byDate": {"2025-10-23T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 382, "u": "gr."}],
+          "recipes": [{
+                "r": "Bahn mi à la protéine de soja","qEq":382,
+                "uEq": "gr.",
+                "a": 45
+              }],
+          "totalAssiettes": 45,
+          "recipeCount": 1
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "5c1b20",
+        "ingredientName": "Moutarde",
+        "productSemanticKey": "moutarde_5c1b20_cate_5_daf52fff",
+        "ingType": "epices",
+        "totalAssiettes": 100,
+        "nbRecipes": 1,"totalNeededRaw": [{ "q":200, "u": "gr." }],
+        "byDate": {"2025-10-24T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 200, "u": "gr."}],
+          "recipes": [{
+                "r": "Vinaigrette","qEq":200,
+                "uEq": "gr.",
+                "a": 100
+              }],
+          "totalAssiettes": 100,
+          "recipeCount": 1
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "msyocm",
+        "ingredientName": "Muscade",
+        "productSemanticKey": "muscade_msyocm_cate_5_daf52fff",
+        "ingType": "epices",
+        "totalAssiettes": 100,
+        "nbRecipes": 1,"totalNeededRaw": [{ "q":1, "u": "unité" }],
+        "byDate": {"2025-10-24T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 1, "u": "unité"}],
+          "recipes": [{
+                "r": "Lasagne bolognaise végé saute tomate protéine de soja champignon béchamel","qEq":1,
+                "uEq": "unité",
+                "a": 100
+              }],
+          "totalAssiettes": 100,
+          "recipeCount": 1
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "f5fy8w",
+        "ingredientName": "Navet",
+        "productSemanticKey": "navet_f5fy8w_cate_5_daf52fff",
+        "ingType": "legumes",
+        "totalAssiettes": 140,
+        "nbRecipes": 1,"pFrais": true,"totalNeededRaw": [{ "q":2380, "u": "gr." }],
+        "byDate": {"2025-10-25T20:00:00.000Z": {
+          "totalConsolidated": [{"q": 2380, "u": "gr."}],
+          "recipes": [{
+                "r": "Couscous d'automne végétarien",
+                "q":2.4,
+                "u": "Kg","qEq":2380,
+                "uEq": "gr.",
+                "a": 140
+              }],
+          "totalAssiettes": 140,
+          "recipeCount": 1
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "rtavky",
+        "ingredientName": "Oignon",
+        "productSemanticKey": "oignon_rtavky_cate_5_daf52fff",
+        "ingType": "legumes",
+        "totalAssiettes": 700,
+        "nbRecipes": 6,"pFrais": true,"totalNeededRaw": [{ "q":28640, "u": "gr." }],
+        "byDate": {"2025-10-23T20:00:00.000Z": {
+          "totalConsolidated": [{"q": 4200, "u": "gr."}],
+          "recipes": [{
+                "r": "Mafé végétarien et riz à la cardamone",
+                "q":4.2,
+                "u": "Kg","qEq":4200,
+                "uEq": "gr.",
+                "a": 60
+              }],
+          "totalAssiettes": 60,
+          "recipeCount": 1
+        },"2025-10-24T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 3000, "u": "gr."}],
+          "recipes": [{
+                "r": "Lasagne bolognaise végé saute tomate protéine de soja champignon béchamel",
+                "q":3.0,
+                "u": "Kg","qEq":3000,
+                "uEq": "gr.",
+                "a": 100
+              }],
+          "totalAssiettes": 100,
+          "recipeCount": 1
+        },"2025-10-24T20:00:00.000Z": {
+          "totalConsolidated": [{"q": 12600, "u": "gr."}],
+          "recipes": [{
+                "r": "Tajine olives citron avec pâte langues d'oiseaux (orzo)",
+                "q":12.6,
+                "u": "Kg","qEq":12600,
+                "uEq": "gr.",
+                "a": 140
+              }],
+          "totalAssiettes": 140,
+          "recipeCount": 1
+        },"2025-10-25T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 5200, "u": "gr."}],
+          "recipes": [{
+                "r": "Salade fatouche",
+                "q":2.6,
+                "u": "Kg","qEq":2600,
+                "uEq": "gr.",
+                "a": 130
+              },{
+                "r": "Falafel de lulu",
+                "q":2.6,
+                "u": "Kg","qEq":2600,
+                "uEq": "gr.",
+                "a": 130
+              }],
+          "totalAssiettes": 260,
+          "recipeCount": 2
+        },"2025-10-25T20:00:00.000Z": {
+          "totalConsolidated": [{"q": 3640, "u": "gr."}],
+          "recipes": [{
+                "r": "Couscous d'automne végétarien",
+                "q":3.6,
+                "u": "Kg","qEq":3640,
+                "uEq": "gr.",
+                "a": 140
+              }],
+          "totalAssiettes": 140,
+          "recipeCount": 1
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "163u4z",
+        "ingredientName": "Olives Vertes Dénoyautées",
+        "productSemanticKey": "olives-ver_163u4z_cate_5_daf52fff",
+        "ingType": "legumes",
+        "totalAssiettes": 140,
+        "nbRecipes": 1,"totalNeededRaw": [{ "q":7420, "u": "gr." }],
+        "byDate": {"2025-10-24T20:00:00.000Z": {
+          "totalConsolidated": [{"q": 7420, "u": "gr."}],
+          "recipes": [{
+                "r": "Tajine olives citron avec pâte langues d'oiseaux (orzo)",
+                "q":7.4,
+                "u": "Kg","qEq":7420,
+                "uEq": "gr.",
+                "a": 140
+              }],
+          "totalAssiettes": 140,
+          "recipeCount": 1
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "e7953e50480d",
+        "ingredientName": "Pain baguette",
+        "productSemanticKey": "pain-bague_e7953e_cate_5_daf52fff",
+        "ingType": "sec",
+        "totalAssiettes": 45,
+        "nbRecipes": 1,"totalNeededRaw": [{ "q":22.5, "u": "unité" }],
+        "byDate": {"2025-10-23T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 22.5, "u": "unité"}],
+          "recipes": [{
+                "r": "Bahn mi à la protéine de soja","qEq":22.5,
+                "uEq": "unité",
+                "a": 45
+              }],
+          "totalAssiettes": 45,
+          "recipeCount": 1
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "6778796eb8d8",
+        "ingredientName": "Pâte d'arachide",
+        "productSemanticKey": "pate-darac_677879_cate_5_daf52fff",
+        "ingType": "autres",
+        "totalAssiettes": 60,
+        "nbRecipes": 1,"totalNeededRaw": [{ "q":2100, "u": "gr." }],
+        "byDate": {"2025-10-23T20:00:00.000Z": {
+          "totalConsolidated": [{"q": 2100, "u": "gr."}],
+          "recipes": [{
+                "r": "Mafé végétarien et riz à la cardamone",
+                "q":2.1,
+                "u": "Kg","qEq":2100,
+                "uEq": "gr.",
+                "a": 60
+              }],
+          "totalAssiettes": 60,
+          "recipeCount": 1
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "hlx995",
+        "ingredientName": "Pâtes - langue d'oiseau",
+        "productSemanticKey": "pates-lang_hlx995_cate_5_daf52fff",
+        "ingType": "sec",
+        "totalAssiettes": 140,
+        "nbRecipes": 1,"totalNeededRaw": [{ "q":11200, "u": "gr." }],
+        "byDate": {"2025-10-24T20:00:00.000Z": {
+          "totalConsolidated": [{"q": 11200, "u": "gr."}],
+          "recipes": [{
+                "r": "Tajine olives citron avec pâte langues d'oiseaux (orzo)",
+                "q":11.2,
+                "u": "Kg","qEq":11200,
+                "uEq": "gr.",
+                "a": 140
+              }],
+          "totalAssiettes": 140,
+          "recipeCount": 1
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "hgfa4e",
+        "ingredientName": "Persil frais",
+        "productSemanticKey": "persil-fra_hgfa4e_cate_5_daf52fff",
+        "ingType": "epices",
+        "totalAssiettes": 400,
+        "nbRecipes": 3,"pFrais": true,"totalNeededRaw": [{ "q":33.4, "u": "bottes" }],
+        "byDate": {"2025-10-24T20:00:00.000Z": {
+          "totalConsolidated": [{"q": 12.6, "u": "bottes"}],
+          "recipes": [{
+                "r": "Tajine olives citron avec pâte langues d'oiseaux (orzo)","qEq":12.6,
+                "uEq": "bottes",
+                "a": 140
+              }],
+          "totalAssiettes": 140,
+          "recipeCount": 1
+        },"2025-10-25T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 20.8, "u": "bottes"}],
+          "recipes": [{
+                "r": "Salade fatouche","qEq":7.8,
+                "uEq": "bottes",
+                "a": 130
+              },{
+                "r": "Falafel de lulu","qEq":13,
+                "uEq": "bottes",
+                "a": 130
+              }],
+          "totalAssiettes": 260,
+          "recipeCount": 2
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "q7adw3",
+        "ingredientName": "Pistache émmondée",
+        "productSemanticKey": "pistache-e_q7adw3_cate_5_daf52fff",
+        "ingType": "sec",
+        "totalAssiettes": 130,
+        "nbRecipes": 1,"totalNeededRaw": [{ "q":1300, "u": "gr." }],
+        "byDate": {"2025-10-25T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 1300, "u": "gr."}],
+          "recipes": [{
+                "r": "Babka vegane harissa et pistache",
+                "q":1.3,
+                "u": "Kg","qEq":1300,
+                "uEq": "gr.",
+                "a": 130
+              }],
+          "totalAssiettes": 130,
+          "recipeCount": 1
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "b83ol6",
+        "ingredientName": "Poire",
+        "productSemanticKey": "poire_b83ol6_cate_5_daf52fff",
+        "ingType": "legumes",
+        "totalAssiettes": 60,
+        "nbRecipes": 1,"pFrais": true,"totalNeededRaw": [{ "q":4800, "u": "gr." }],
+        "byDate": {"2025-10-23T20:00:00.000Z": {
+          "totalConsolidated": [{"q": 4800, "u": "gr."}],
+          "recipes": [{
+                "r": "Compote pommes poires",
+                "q":4.8,
+                "u": "Kg","qEq":4800,
+                "uEq": "gr.",
+                "a": 60
+              }],
+          "totalAssiettes": 60,
+          "recipeCount": 1
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "wwl5vn",
+        "ingredientName": "Pois chiche cuit",
+        "productSemanticKey": "pois-chich_wwl5vn_cate_5_daf52fff",
+        "ingType": "sec",
+        "totalAssiettes": 130,
+        "nbRecipes": 1,"totalNeededRaw": [{ "q":1430, "u": "gr." }],
+        "byDate": {"2025-10-25T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 1430, "u": "gr."}],
+          "recipes": [{
+                "r": "Houmous de betterave aux cranberries et balsamique",
+                "q":1.4,
+                "u": "Kg","qEq":1430,
+                "uEq": "gr.",
+                "a": 130
+              }],
+          "totalAssiettes": 130,
+          "recipeCount": 1
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "6a8w8k",
+        "ingredientName": "Pois chiches",
+        "productSemanticKey": "pois-chich_6a8w8k_cate_5_daf52fff",
+        "ingType": "sec",
+        "totalAssiettes": 410,
+        "nbRecipes": 3,"totalNeededRaw": [{ "q":14740, "u": "gr." }],
+        "byDate": {"2025-10-24T20:00:00.000Z": {
+          "totalConsolidated": [{"q": 2520, "u": "gr."}],
+          "recipes": [{
+                "r": "Houmous pois chiche",
+                "q":2.5,
+                "u": "Kg","qEq":2520,
+                "uEq": "gr.",
+                "a": 140
+              }],
+          "totalAssiettes": 140,
+          "recipeCount": 1
+        },"2025-10-25T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 10400, "u": "gr."}],
+          "recipes": [{
+                "r": "Falafel de lulu",
+                "q":10.4,
+                "u": "Kg","qEq":10400,
+                "uEq": "gr.",
+                "a": 130
+              }],
+          "totalAssiettes": 130,
+          "recipeCount": 1
+        },"2025-10-25T20:00:00.000Z": {
+          "totalConsolidated": [{"q": 1820, "u": "gr."}],
+          "recipes": [{
+                "r": "Couscous d'automne végétarien",
+                "q":1.8,
+                "u": "Kg","qEq":1820,
+                "uEq": "gr.",
+                "a": 140
+              }],
+          "totalAssiettes": 140,
+          "recipeCount": 1
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "2pps90",
+        "ingredientName": "Poivre",
+        "productSemanticKey": "poivre_2pps90_cate_5_daf52fff",
+        "ingType": "epices",
+        "totalAssiettes": 230,
+        "nbRecipes": 2,"totalNeededRaw": [{ "q":42, "u": "gr." }],
+        "byDate": {"2025-10-24T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 3, "u": "gr."}],
+          "recipes": [{
+                "r": "Vinaigrette","qEq":3,
+                "uEq": "gr.",
+                "a": 100
+              }],
+          "totalAssiettes": 100,
+          "recipeCount": 1
+        },"2025-10-25T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 39, "u": "gr."}],
+          "recipes": [{
+                "r": "Falafel de lulu","qEq":39,
+                "uEq": "gr.",
+                "a": 130
+              }],
+          "totalAssiettes": 130,
+          "recipeCount": 1
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "i6jlwm",
+        "ingredientName": "Pomme",
+        "productSemanticKey": "pomme_i6jlwm_cate_5_daf52fff",
+        "ingType": "legumes",
+        "totalAssiettes": 200,
+        "nbRecipes": 2,"pFrais": true,"totalNeededRaw": [{ "q":6620, "u": "gr." }],
+        "byDate": {"2025-10-23T20:00:00.000Z": {
+          "totalConsolidated": [{"q": 4800, "u": "gr."}],
+          "recipes": [{
+                "r": "Compote pommes poires",
+                "q":4.8,
+                "u": "Kg","qEq":4800,
+                "uEq": "gr.",
+                "a": 60
+              }],
+          "totalAssiettes": 60,
+          "recipeCount": 1
+        },"2025-10-25T20:00:00.000Z": {
+          "totalConsolidated": [{"q": 1820, "u": "gr."}],
+          "recipes": [{
+                "r": "Salade de crudités chou chinois pommes carottes betteraves",
+                "q":1.8,
+                "u": "Kg","qEq":1820,
+                "uEq": "gr.",
+                "a": 140
+              }],
+          "totalAssiettes": 140,
+          "recipeCount": 1
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "18dy4e",
+        "ingredientName": "Pomme de terre",
+        "productSemanticKey": "pomme-de-t_18dy4e_cate_5_daf52fff",
+        "ingType": "legumes",
+        "totalAssiettes": 185,
+        "nbRecipes": 2,"pFrais": true,"totalNeededRaw": [{ "q":24280, "u": "gr." }],
+        "byDate": {"2025-10-23T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 13500, "u": "gr."}],
+          "recipes": [{
+                "r": "Frites de pommes de terre",
+                "q":13.5,
+                "u": "Kg","qEq":13500,
+                "uEq": "gr.",
+                "a": 45
+              }],
+          "totalAssiettes": 45,
+          "recipeCount": 1
+        },"2025-10-25T20:00:00.000Z": {
+          "totalConsolidated": [{"q": 10780, "u": "gr."}],
+          "recipes": [{
+                "r": "Couscous d'automne végétarien",
+                "q":10.8,
+                "u": "Kg","qEq":10780,
+                "uEq": "gr.",
+                "a": 140
+              }],
+          "totalAssiettes": 140,
+          "recipeCount": 1
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "6m90g7",
+        "ingredientName": "Protéines de soja",
+        "productSemanticKey": "proteines-_6m90g7_cate_5_daf52fff",
+        "ingType": "autres",
+        "totalAssiettes": 45,
+        "nbRecipes": 1,"totalNeededRaw": [{ "q":1350, "u": "gr." }],
+        "byDate": {"2025-10-23T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 1350, "u": "gr."}],
+          "recipes": [{
+                "r": "Bahn mi à la protéine de soja",
+                "q":1.4,
+                "u": "Kg","qEq":1350,
+                "uEq": "gr.",
+                "a": 45
+              }],
+          "totalAssiettes": 45,
+          "recipeCount": 1
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "1r89qf",
+        "ingredientName": "Protéines de soja (petites)",
+        "productSemanticKey": "proteines-_1r89qf_cate_5_daf52fff",
+        "ingType": "sec",
+        "totalAssiettes": 100,
+        "nbRecipes": 1,"totalNeededRaw": [{ "q":3000, "u": "gr." }],
+        "byDate": {"2025-10-24T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 3000, "u": "gr."}],
+          "recipes": [{
+                "r": "Lasagne bolognaise végé saute tomate protéine de soja champignon béchamel",
+                "q":3.0,
+                "u": "Kg","qEq":3000,
+                "uEq": "gr.",
+                "a": 100
+              }],
+          "totalAssiettes": 100,
+          "recipeCount": 1
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "xm77fg",
+        "ingredientName": "Purée chataîgne sans sucre",
+        "productSemanticKey": "puree-chat_xm77fg_cate_5_daf52fff",
+        "ingType": "legumes",
+        "totalAssiettes": 100,
+        "nbRecipes": 1,"totalNeededRaw": [{ "q":4000, "u": "gr." }],
+        "byDate": {"2025-10-24T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 4000, "u": "gr."}],
+          "recipes": [{
+                "r": "Panna cotta végan à la chataigne - chips de chocolat",
+                "q":4.0,
+                "u": "Kg","qEq":4000,
+                "uEq": "gr.",
+                "a": 100
+              }],
+          "totalAssiettes": 100,
+          "recipeCount": 1
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "4il0xo",
+        "ingredientName": "Radis",
+        "productSemanticKey": "radis_4il0xo_cate_5_daf52fff",
+        "ingType": "legumes",
+        "totalAssiettes": 130,
+        "nbRecipes": 1,"pFrais": true,"totalNeededRaw": [{ "q":2600, "u": "gr." }],
+        "byDate": {"2025-10-25T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 2600, "u": "gr."}],
+          "recipes": [{
+                "r": "Salade fatouche",
+                "q":2.6,
+                "u": "Kg","qEq":2600,
+                "uEq": "gr.",
+                "a": 130
+              }],
+          "totalAssiettes": 130,
+          "recipeCount": 1
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "9yf54l",
+        "ingredientName": "Raisin sec",
+        "productSemanticKey": "raisin-sec_9yf54l_cate_5_daf52fff",
+        "ingType": "legumes",
+        "totalAssiettes": 140,
+        "nbRecipes": 1,"totalNeededRaw": [{ "q":1400, "u": "gr." }],
+        "byDate": {"2025-10-25T20:00:00.000Z": {
+          "totalConsolidated": [{"q": 1400, "u": "gr."}],
+          "recipes": [{
+                "r": "Couscous d'automne végétarien",
+                "q":1.4,
+                "u": "Kg","qEq":1400,
+                "uEq": "gr.",
+                "a": 140
+              }],
+          "totalAssiettes": 140,
+          "recipeCount": 1
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "opblzb",
+        "ingredientName": "Riz basmati",
+        "productSemanticKey": "riz-basmat_opblzb_cate_5_daf52fff",
+        "ingType": "sec",
+        "totalAssiettes": 60,
+        "nbRecipes": 1,"totalNeededRaw": [{ "q":4800, "u": "gr." }],
+        "byDate": {"2025-10-23T20:00:00.000Z": {
+          "totalConsolidated": [{"q": 4800, "u": "gr."}],
+          "recipes": [{
+                "r": "Mafé végétarien et riz à la cardamone",
+                "q":4.8,
+                "u": "Kg","qEq":4800,
+                "uEq": "gr.",
+                "a": 60
+              }],
+          "totalAssiettes": 60,
+          "recipeCount": 1
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "cg3wgm",
+        "ingredientName": "Salade verte (chêne)",
+        "productSemanticKey": "salade-ver_cg3wgm_cate_5_daf52fff",
+        "ingType": "legumes",
+        "totalAssiettes": 100,
+        "nbRecipes": 1,"pFrais": true,"totalNeededRaw": [{ "q":10, "u": "unité" }],
+        "byDate": {"2025-10-24T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 10, "u": "unité"}],
+          "recipes": [{
+                "r": "Salade verte","qEq":10,
+                "uEq": "unité",
+                "a": 100
+              }],
+          "totalAssiettes": 100,
+          "recipeCount": 1
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "jjrwlj",
+        "ingredientName": "Sauce soja",
+        "productSemanticKey": "sauce-soja_jjrwlj_cate_5_daf52fff",
+        "ingType": "epices",
+        "totalAssiettes": 185,
+        "nbRecipes": 2,"totalNeededRaw": [{ "q":2205, "u": "ml" }],
+        "byDate": {"2025-10-23T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 1575, "u": "ml"}],
+          "recipes": [{
+                "r": "Bahn mi à la protéine de soja",
+                "q":1.6,
+                "u": "l.","qEq":1575,
+                "uEq": "ml",
+                "a": 45
+              }],
+          "totalAssiettes": 45,
+          "recipeCount": 1
+        },"2025-10-25T20:00:00.000Z": {
+          "totalConsolidated": [{"q": 630, "u": "ml"}],
+          "recipes": [{
+                "r": "Salade de crudités chou chinois pommes carottes betteraves","qEq":630,
+                "uEq": "ml",
+                "a": 140
+              }],
+          "totalAssiettes": 140,
+          "recipeCount": 1
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "xdkeh3",
+        "ingredientName": "Sauce tomate mutti",
+        "productSemanticKey": "sauce-toma_xdkeh3_cate_5_daf52fff",
+        "ingType": "epices",
+        "totalAssiettes": 240,
+        "nbRecipes": 2,"totalNeededRaw": [{ "q":11120, "u": "gr." }],
+        "byDate": {"2025-10-24T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 10000, "u": "gr."}],
+          "recipes": [{
+                "r": "Lasagne bolognaise végé saute tomate protéine de soja champignon béchamel",
+                "q":10.0,
+                "u": "Kg","qEq":10000,
+                "uEq": "gr.",
+                "a": 100
+              }],
+          "totalAssiettes": 100,
+          "recipeCount": 1
+        },"2025-10-25T20:00:00.000Z": {
+          "totalConsolidated": [{"q": 1120, "u": "gr."}],
+          "recipes": [{
+                "r": "Couscous d'automne végétarien","qEq":1120,
+                "uEq": "gr.",
+                "a": 140
+              }],
+          "totalAssiettes": 140,
+          "recipeCount": 1
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "2juq3x",
+        "ingredientName": "Sel",
+        "productSemanticKey": "sel_2juq3x_cate_5_daf52fff",
+        "ingType": "epices",
+        "totalAssiettes": 1060,
+        "nbRecipes": 8,"totalNeededRaw": [{ "q":725, "u": "gr." }],
+        "byDate": {"2025-10-24T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 3, "u": "gr."}],
+          "recipes": [{
+                "r": "Vinaigrette","qEq":3,
+                "uEq": "gr.",
+                "a": 100
+              }],
+          "totalAssiettes": 100,
+          "recipeCount": 1
+        },"2025-10-24T20:00:00.000Z": {
+          "totalConsolidated": [{"q": 251, "u": "gr."}],
+          "recipes": [{
+                "r": "Beignet sauce cacahuète","qEq":13,
+                "uEq": "gr.",
+                "a": 140
+              },{
+                "r": "Tajine olives citron avec pâte langues d'oiseaux (orzo)","qEq":182,
+                "uEq": "gr.",
+                "a": 140
+              },{
+                "r": "Houmous pois chiche","qEq":56,
+                "uEq": "gr.",
+                "a": 140
+              }],
+          "totalAssiettes": 420,
+          "recipeCount": 3
+        },"2025-10-25T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 150, "u": "gr."}],
+          "recipes": [{
+                "r": "Falafel de lulu","qEq":65,
+                "uEq": "gr.",
+                "a": 130
+              },{
+                "r": "Babka vegane harissa et pistache","qEq":84,
+                "uEq": "gr.",
+                "a": 130
+              }],
+          "totalAssiettes": 260,
+          "recipeCount": 2
+        },"2025-10-25T20:00:00.000Z": {
+          "totalConsolidated": [{"q": 322, "u": "gr."}],
+          "recipes": [{
+                "r": "Couscous d'automne végétarien","qEq":140,
+                "uEq": "gr.",
+                "a": 140
+              },{
+                "r": "Couscous d'automne végétarien","qEq":182,
+                "uEq": "gr.",
+                "a": 140
+              }],
+          "totalAssiettes": 280,
+          "recipeCount": 2
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "yx78ae",
+        "ingredientName": "Semoule moyenne (blé)",
+        "productSemanticKey": "semoule-mo_yx78ae_cate_5_daf52fff",
+        "ingType": "sec",
+        "totalAssiettes": 140,
+        "nbRecipes": 1,"totalNeededRaw": [{ "q":11200, "u": "gr." }],
+        "byDate": {"2025-10-25T20:00:00.000Z": {
+          "totalConsolidated": [{"q": 11200, "u": "gr."}],
+          "recipes": [{
+                "r": "Couscous d'automne végétarien",
+                "q":11.2,
+                "u": "Kg","qEq":11200,
+                "uEq": "gr.",
+                "a": 140
+              }],
+          "totalAssiettes": 140,
+          "recipeCount": 1
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "h6thsp",
+        "ingredientName": "Speculoos",
+        "productSemanticKey": "speculoos_h6thsp_cate_5_daf52fff",
+        "ingType": "sucres",
+        "totalAssiettes": 130,
+        "nbRecipes": 1,"totalNeededRaw": [{ "q":3250, "u": "gr." }],
+        "byDate": {"2025-10-25T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 3250, "u": "gr."}],
+          "recipes": [{
+                "r": "Banoffee",
+                "q":3.2,
+                "u": "Kg","qEq":3250,
+                "uEq": "gr.",
+                "a": 130
+              }],
+          "totalAssiettes": 130,
+          "recipeCount": 1
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "lny16c",
+        "ingredientName": "sucre blanc",
+        "productSemanticKey": "sucre-blan_lny16c_cate_5_daf52fff",
+        "ingType": "sucres",
+        "totalAssiettes": 100,
+        "nbRecipes": 1,"totalNeededRaw": [{ "q":1500, "u": "gr." }],
+        "byDate": {"2025-10-24T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 1500, "u": "gr."}],
+          "recipes": [{
+                "r": "Panna cotta végan à la chataigne - chips de chocolat",
+                "q":1.5,
+                "u": "Kg","qEq":1500,
+                "uEq": "gr.",
+                "a": 100
+              }],
+          "totalAssiettes": 100,
+          "recipeCount": 1
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "n85gmi",
+        "ingredientName": "sucre de canne (blond)",
+        "productSemanticKey": "sucre-de-c_n85gmi_cate_5_daf52fff",
+        "ingType": "sucres",
+        "totalAssiettes": 45,
+        "nbRecipes": 1,"totalNeededRaw": [{ "q":675, "u": "gr." }],
+        "byDate": {"2025-10-23T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 675, "u": "gr."}],
+          "recipes": [{
+                "r": "Lassi vegan a la mangue",
+                "q":0.7,
+                "u": "Kg","qEq":675,
+                "uEq": "gr.",
+                "a": 45
+              }],
+          "totalAssiettes": 45,
+          "recipeCount": 1
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "u9z2he",
+        "ingredientName": "Sucre en poudre",
+        "productSemanticKey": "sucre-en-p_u9z2he_cate_5_daf52fff",
+        "ingType": "sucres",
+        "totalAssiettes": 540,
+        "nbRecipes": 4,"totalNeededRaw": [{ "q":3350, "u": "gr." }],
+        "byDate": {"2025-10-24T20:00:00.000Z": {
+          "totalConsolidated": [{"q": 686, "u": "gr."}],
+          "recipes": [{
+                "r": "Beignet sauce cacahuète","qEq":686,
+                "uEq": "gr.",
+                "a": 140
+              }],
+          "totalAssiettes": 140,
+          "recipeCount": 1
+        },"2025-10-25T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 1404, "u": "gr."}],
+          "recipes": [{
+                "r": "Banoffee","qEq":364,
+                "uEq": "gr.",
+                "a": 130
+              },{
+                "r": "Babka vegane harissa et pistache","qEq":1040,
+                "uEq": "gr.",
+                "a": 130
+              }],
+          "totalAssiettes": 260,
+          "recipeCount": 2
+        },"2025-10-25T20:00:00.000Z": {
+          "totalConsolidated": [{"q": 1260, "u": "gr."}],
+          "recipes": [{
+                "r": "Flan libanais vegan","qEq":1260,
+                "uEq": "gr.",
+                "a": 140
+              }],
+          "totalAssiettes": 140,
+          "recipeCount": 1
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "u33083",
+        "ingredientName": "Tahin",
+        "productSemanticKey": "tahin_u33083_cate_5_daf52fff",
+        "ingType": "autres",
+        "totalAssiettes": 270,
+        "nbRecipes": 2,"totalNeededRaw": [{ "q":1608, "u": "gr." }],
+        "byDate": {"2025-10-24T20:00:00.000Z": {
+          "totalConsolidated": [{"q": 1400, "u": "gr."}],
+          "recipes": [{
+                "r": "Houmous pois chiche",
+                "q":1.4,
+                "u": "Kg","qEq":1400,
+                "uEq": "gr.",
+                "a": 140
+              }],
+          "totalAssiettes": 140,
+          "recipeCount": 1
+        },"2025-10-25T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 208, "u": "gr."}],
+          "recipes": [{
+                "r": "Houmous de betterave aux cranberries et balsamique","qEq":208,
+                "uEq": "gr.",
+                "a": 130
+              }],
+          "totalAssiettes": 130,
+          "recipeCount": 1
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "ibtbnq",
+        "ingredientName": "Tomate",
+        "productSemanticKey": "tomate_ibtbnq_cate_5_daf52fff",
+        "ingType": "legumes",
+        "totalAssiettes": 190,
+        "nbRecipes": 2,"pFrais": true,"totalNeededRaw": [{ "q":12500, "u": "gr." }],
+        "byDate": {"2025-10-23T20:00:00.000Z": {
+          "totalConsolidated": [{"q": 2100, "u": "gr."}],
+          "recipes": [{
+                "r": "Mafé végétarien et riz à la cardamone",
+                "q":2.1,
+                "u": "Kg","qEq":2100,
+                "uEq": "gr.",
+                "a": 60
+              }],
+          "totalAssiettes": 60,
+          "recipeCount": 1
+        },"2025-10-25T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 10400, "u": "gr."}],
+          "recipes": [{
+                "r": "Salade fatouche",
+                "q":10.4,
+                "u": "Kg","qEq":10400,
+                "uEq": "gr.",
+                "a": 130
+              }],
+          "totalAssiettes": 130,
+          "recipeCount": 1
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "89945bda5f0b",
+        "ingredientName": "Véganaise",
+        "productSemanticKey": "veganaise_89945b_cate_5_daf52fff",
+        "ingType": "epices",
+        "totalAssiettes": 45,
+        "nbRecipes": 1,"totalNeededRaw": [{ "q":1350, "u": "gr." }],
+        "byDate": {"2025-10-23T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 1350, "u": "gr."}],
+          "recipes": [{
+                "r": "Bahn mi à la protéine de soja",
+                "q":1.4,
+                "u": "Kg","qEq":1350,
+                "uEq": "gr.",
+                "a": 45
+              }],
+          "totalAssiettes": 45,
+          "recipeCount": 1
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "qemlqs",
+        "ingredientName": "Vinaigre balsamique",
+        "productSemanticKey": "vinaigre-b_qemlqs_cate_5_daf52fff",
+        "ingType": "epices",
+        "totalAssiettes": 230,
+        "nbRecipes": 2,"totalNeededRaw": [{ "q":317, "u": "ml" }],
+        "byDate": {"2025-10-24T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 200, "u": "ml"}],
+          "recipes": [{
+                "r": "Vinaigrette",
+                "q":0.2,
+                "u": "l.","qEq":200,
+                "uEq": "ml",
+                "a": 100
+              }],
+          "totalAssiettes": 100,
+          "recipeCount": 1
+        },"2025-10-25T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 117, "u": "ml"}],
+          "recipes": [{
+                "r": "Houmous de betterave aux cranberries et balsamique","qEq":117,
+                "uEq": "ml",
+                "a": 130
+              }],
+          "totalAssiettes": 130,
+          "recipeCount": 1
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "7qo3ht",
+        "ingredientName": "Vinaigre de cidre",
+        "productSemanticKey": "vinaigre-d_7qo3ht_cate_5_daf52fff",
+        "ingType": "epices",
+        "totalAssiettes": 200,
+        "nbRecipes": 2,"totalNeededRaw": [{ "q":840, "u": "ml" }],
+        "byDate": {"2025-10-23T20:00:00.000Z": {
+          "totalConsolidated": [{"q": 210, "u": "ml"}],
+          "recipes": [{
+                "r": "Salade chou rouge carottes basilic","qEq":210,
+                "uEq": "ml",
+                "a": 60
+              }],
+          "totalAssiettes": 60,
+          "recipeCount": 1
+        },"2025-10-25T20:00:00.000Z": {
+          "totalConsolidated": [{"q": 630, "u": "ml"}],
+          "recipes": [{
+                "r": "Salade de crudités chou chinois pommes carottes betteraves","qEq":630,
+                "uEq": "ml",
+                "a": 140
+              }],
+          "totalAssiettes": 140,
+          "recipeCount": 1
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "hlbwfd",
+        "ingredientName": "Yaourt de soja",
+        "productSemanticKey": "yaourt-de-_hlbwfd_cate_5_daf52fff",
+        "ingType": "frais",
+        "totalAssiettes": 45,
+        "nbRecipes": 1,"pFrais": true,"totalNeededRaw": [{ "q":5400, "u": "ml" }],
+        "byDate": {"2025-10-23T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 5400, "u": "ml"}],
+          "recipes": [{
+                "r": "Lassi vegan a la mangue",
+                "q":5.4,
+                "u": "l.","qEq":5400,
+                "uEq": "ml",
+                "a": 45
+              }],
+          "totalAssiettes": 45,
+          "recipeCount": 1
+        }}
+      }]
+}

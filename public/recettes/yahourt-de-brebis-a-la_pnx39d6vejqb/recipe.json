@@ -1,0 +1,62 @@
+
+{
+  "uuid": "pnx39d6vejqb",
+  "slug": "yahourt-de-brebis-a-la_pnx39d6vejqb",
+  "title": "Yahourt De Brebis À La Crème De Chataigne Et Son Alternative Vegan",
+  "draft": false,
+  "typeR": "dessert",
+  "categories": ["Autre"],
+  "regime": ["vegetarien"],
+  "cuisson": false,
+  "serveHot": false,
+  "plate": 100,
+  "quantite_desc": null,
+  "check": true,
+  "checkAlwaysOk": false,
+  "materiel": null,
+  "ingredients": [{
+      "uuid": "cq437o",
+      "name": "yaourt de brebis",
+      "originalQuantity": 11,
+      "originalUnit": "kg",
+      "normalizedQuantity": 11000,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": ["Produit laitier"],
+      "type": "frais"
+    },{
+      "uuid": "hlbwfd",
+      "name": "Yaourt de soja",
+      "originalQuantity": 1.2,
+      "originalUnit": "kg",
+      "normalizedQuantity": 1200,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": ["Soja"],
+      "type": "frais"
+    },{
+      "uuid": "n85gmi",
+      "name": "sucre de canne (blond)",
+      "originalQuantity": 1.5,
+      "originalUnit": "kg",
+      "normalizedQuantity": 1500,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": [],
+      "type": "sucres"
+    },{
+      "uuid": "dau8y8",
+      "name": "Crème de marron",
+      "originalQuantity": 3,
+      "originalUnit": "kg",
+      "normalizedQuantity": 3000,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": [],
+      "type": "sucres"
+    }],
+  "preparation": "répartir les yaourts, (séparément), dans les ramequins ( il faut une 30aine de vegan)avec une dose de 125gr par personne ( c'est la contenance d'un yaourt).\n\nmélanger la crème de châtaigne non sucrée avec le sucre\n\nmettre une cuillère à soupe de châtaigne sur le yaourt",
+  "prepAlt": null,
+  "permissionWrite": [],
+  "publishDate": "2025-06-15T13:19:00Z"
+}

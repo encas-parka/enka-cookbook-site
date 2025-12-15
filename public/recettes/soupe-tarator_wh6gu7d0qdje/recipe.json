@@ -1,0 +1,72 @@
+
+{
+  "uuid": "wh6gu7d0qdje",
+  "slug": "soupe-tarator_wh6gu7d0qdje",
+  "title": "Soupe Tarator",
+  "draft": false,
+  "typeR": "entree",
+  "categories": ["Soupe"],
+  "regime": ["vegetarien","sans-gluten"],
+  "cuisson": false,
+  "serveHot": false,
+  "plate": 100,
+  "quantite_desc": "250ml par personne",
+  "check": false,
+  "checkAlwaysOk": false,
+  "materiel": null,
+  "ingredients": [{
+      "uuid": "u2m28w",
+      "name": "Ail",
+      "originalQuantity": 5,
+      "originalUnit": "tête·s",
+      "normalizedQuantity": 400,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": [],
+      "type": "legumes"
+    },{
+      "uuid": "l5p1a5",
+      "name": "Concombre",
+      "originalQuantity": 15,
+      "originalUnit": "kg",
+      "normalizedQuantity": 15000,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": [],
+      "type": "legumes"
+    },{
+      "uuid": "nnkg8f",
+      "name": "Aneth aromatique",
+      "originalQuantity": 6,
+      "originalUnit": "bottes",
+      "normalizedQuantity": 6,
+      "normalizedUnit": "bottes",
+      "comment": "",
+      "allergens": [],
+      "type": "epices"
+    },{
+      "uuid": "yl86w7",
+      "name": "Yaourt nature",
+      "originalQuantity": 10,
+      "originalUnit": "kg",
+      "normalizedQuantity": 10000,
+      "normalizedUnit": "gr.",
+      "comment": "ou mieux, yaourt brassé",
+      "allergens": ["Produit laitier"],
+      "type": "frais"
+    },{
+      "uuid": "h3c8al",
+      "name": "huile d'olive",
+      "originalQuantity": 1,
+      "originalUnit": "l.",
+      "normalizedQuantity": 1000,
+      "normalizedUnit": "ml",
+      "comment": "",
+      "allergens": [],
+      "type": "lof"
+    }],
+  "preparation": "* Fouetter les yaourts jusqu’à ce qu’ils deviennent bien liquides.\n  Ajouter, au besoin un peu d’eau fraîche (pas trop non plus puisque l’eau\n   du concombre viendra s’y ajouter), surtout si ce sont des\n  yaourts ordinaires, non brassés.\n\n\n\n* Éplucher les concombres et râper en laissant ses grains pour qu'ils  gardent toute leur eau.\n\n  *Ce sera plus facile avec un robot. Sinon, couper le concombre en dés, aussi petits que possible.*\n\n  \\\n\n* Éplucher et dégermer l’ail. Écraser avec un presse-ail (ou hacher très finement).\n\n* Ciseler l’aneth et mélanger au yaourt battu.\n\n* Ajouter l’ail, l’huile d’olive et les concombres râpés. 'optionnel : des noix concassés.\n\n* Mélanger le tout et garder bien au frais avant de servir.\n\n  Ne pas hésiter à même ajouter un ou deux glaçons pour rafraîchir le tarator.",
+  "prepAlt": null,
+  "permissionWrite": [],
+  "publishDate": "2025-05-30T12:11:00Z"
+}

@@ -1,0 +1,132 @@
+
+{
+  "uuid": "go4i0y6buluy",
+  "slug": "bahn-mi-a-la-proteine-_go4i0y6buluy",
+  "title": "Bahn Mi À La Protéine De Soja",
+  "draft": false,
+  "typeR": "plat",
+  "categories": ["Snacking"],
+  "regime": null,
+  "cuisson": true,
+  "serveHot": true,
+  "plate": 100,
+  "quantite_desc": "Une demi baguette par sandwich",
+  "check": true,
+  "checkAlwaysOk": null,
+  "materiel": [],
+  "ingredients": [{
+      "uuid": "6m90g7",
+      "name": "Protéines de soja",
+      "originalQuantity": 3,
+      "originalUnit": "kg",
+      "normalizedQuantity": 3000,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": ["Soja"],
+      "type": "autres"
+    },{
+      "uuid": "yat3fu",
+      "name": "Coriandre",
+      "originalQuantity": 10,
+      "originalUnit": "bottes",
+      "normalizedQuantity": 10,
+      "normalizedUnit": "bottes",
+      "comment": "",
+      "allergens": [],
+      "type": "epices"
+    },{
+      "uuid": "0d1fzw",
+      "name": "Gingembre",
+      "originalQuantity": 650,
+      "originalUnit": "gr.",
+      "normalizedQuantity": 650,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": [],
+      "type": "legumes"
+    },{
+      "uuid": "u2m28w",
+      "name": "Ail",
+      "originalQuantity": 5,
+      "originalUnit": "tête·s",
+      "normalizedQuantity": 400,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": [],
+      "type": "legumes"
+    },{
+      "uuid": "89945bda5f0b",
+      "name": "Véganaise",
+      "originalQuantity": 3,
+      "originalUnit": "kg",
+      "normalizedQuantity": 3000,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": [],
+      "type": "epices"
+    },{
+      "uuid": "k2uthk",
+      "name": "Miso blanc",
+      "originalQuantity": 850,
+      "originalUnit": "gr.",
+      "normalizedQuantity": 850,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": [],
+      "type": "epices"
+    },{
+      "uuid": "l5p1a5",
+      "name": "Concombre",
+      "originalQuantity": 20,
+      "originalUnit": "unité",
+      "normalizedQuantity": 4000,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": [],
+      "type": "legumes"
+    },{
+      "uuid": "jjrwlj",
+      "name": "Sauce soja",
+      "originalQuantity": 3.5,
+      "originalUnit": "l.",
+      "normalizedQuantity": 3500,
+      "normalizedUnit": "ml",
+      "comment": "",
+      "allergens": ["Soja"],
+      "type": "epices"
+    },{
+      "uuid": "nl2s2n",
+      "name": "Chou rouge",
+      "originalQuantity": 3.5,
+      "originalUnit": "kg",
+      "normalizedQuantity": 3500,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": [],
+      "type": "legumes"
+    },{
+      "uuid": "eouu0v",
+      "name": "Carotte",
+      "originalQuantity": 5,
+      "originalUnit": "kg",
+      "normalizedQuantity": 5000,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": [],
+      "type": "legumes"
+    },{
+      "uuid": "e7953e50480d",
+      "name": "Pain baguette",
+      "originalQuantity": 50,
+      "originalUnit": "unité",
+      "normalizedQuantity": 50,
+      "normalizedUnit": "unité",
+      "comment": "",
+      "allergens": [],
+      "type": "sec"
+    }],
+  "preparation": "- Réhydrater les protéines de soja dans du bouillon de légumes\n- Faire cuire les protéines de soja à la poêle avec des épices\n- Râper les carottes\n- Couper le chou rouge finement\n- Mixer la véganaise avec la sauce soja, le gingembre et ail râpés.\n\nPossibilité de rajouter des légumes lactofermentés.",
+  "prepAlt": [],
+  "permissionWrite": [],
+  "publishDate": "2025-10-16T16:18:00Z"
+}

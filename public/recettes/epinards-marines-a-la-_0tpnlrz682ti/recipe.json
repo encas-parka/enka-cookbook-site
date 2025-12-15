@@ -1,0 +1,102 @@
+
+{
+  "uuid": "0tpnlrz682ti",
+  "slug": "epinards-marines-a-la-_0tpnlrz682ti",
+  "title": "Épinards Marinés À La Coréenne - Sigeumchi Namul",
+  "draft": false,
+  "typeR": "entree",
+  "categories": ["Snacking"],
+  "regime": null,
+  "cuisson": true,
+  "serveHot": false,
+  "plate": 20,
+  "quantite_desc": "",
+  "check": true,
+  "checkAlwaysOk": null,
+  "materiel": ["Bruleur"],
+  "ingredients": [{
+      "uuid": "2pps90",
+      "name": "Poivre",
+      "originalQuantity": 1,
+      "originalUnit": "c. à café",
+      "normalizedQuantity": 5,
+      "normalizedUnit": "ml",
+      "comment": "",
+      "allergens": [],
+      "type": "epices"
+    },{
+      "uuid": "mo4efz",
+      "name": "Sésame",
+      "originalQuantity": 3,
+      "originalUnit": "c. à soupe",
+      "normalizedQuantity": 45,
+      "normalizedUnit": "ml",
+      "comment": "",
+      "allergens": [],
+      "type": "epices"
+    },{
+      "uuid": "fazth1",
+      "name": "huile de sésame",
+      "originalQuantity": 30,
+      "originalUnit": "ml",
+      "normalizedQuantity": 30,
+      "normalizedUnit": "ml",
+      "comment": "",
+      "allergens": ["Sésame"],
+      "type": "lof"
+    },{
+      "uuid": "lny16c",
+      "name": "sucre blanc",
+      "originalQuantity": 5,
+      "originalUnit": "c. à café",
+      "normalizedQuantity": 25,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": [],
+      "type": "sucres"
+    },{
+      "uuid": "v1kli8",
+      "name": "Gousse d'ail",
+      "originalQuantity": 3,
+      "originalUnit": "unité",
+      "normalizedQuantity": 3,
+      "normalizedUnit": "unité",
+      "comment": "",
+      "allergens": [],
+      "type": "epices"
+    },{
+      "uuid": "jjrwlj",
+      "name": "Sauce soja",
+      "originalQuantity": 75,
+      "originalUnit": "ml",
+      "normalizedQuantity": 75,
+      "normalizedUnit": "ml",
+      "comment": "",
+      "allergens": ["Soja"],
+      "type": "epices"
+    },{
+      "uuid": "owsv5m",
+      "name": "échalote",
+      "originalQuantity": 1,
+      "originalUnit": "unité",
+      "normalizedQuantity": 30,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": [],
+      "type": "legumes"
+    },{
+      "uuid": "4totf1",
+      "name": "Epinard",
+      "originalQuantity": 2,
+      "originalUnit": "kg",
+      "normalizedQuantity": 2000,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": [],
+      "type": "legumes"
+    }],
+  "preparation": "Couper les racines des épinards. Les laver puis les blanchir dans de l'eau bouillante jusqu'à ce qu'ils flétrissent (30 secondes - 1 minute selon la quantité d'eau et d'épinard)\n\nEnlever les épinards vite et les mettre dans de l'eau glacée (préparée à l'avance) pour arrêter la cuisson.\n\nÉgoutter et enlever doucement l'excès d'eau. Couper en tronçons de 5cm.\n\nAjouter le reste des ingrédients (= la marinade) et tout bien mélanger à la main.\n\nAttendre au moins 10 min avant de servir.",
+  "prepAlt": [],
+  "permissionWrite": [],
+  "publishDate": "2025-09-01T08:08:00Z"
+}

@@ -1,0 +1,112 @@
+
+{
+  "uuid": "c54ri2ggbvt2",
+  "slug": "tourte-betterave-lenti_c54ri2ggbvt2",
+  "title": "Tourte Betterave Lentille (Vegan Et Sans Gluten)",
+  "draft": false,
+  "typeR": "entree",
+  "categories": ["Accompagnement"],
+  "regime": ["vegan","vegetarien","sans-lactose","sans-gluten"],
+  "cuisson": true,
+  "serveHot": true,
+  "plate": 20,
+  "quantite_desc": "8 parts par tourte • 3 tourtes pour 20 personnes.",
+  "check": true,
+  "checkAlwaysOk": false,
+  "materiel": ["Four","Marmitte"],
+  "ingredients": [{
+      "uuid": "40wkon",
+      "name": "Pate feuilleté sans gluten et vegan",
+      "originalQuantity": 6,
+      "originalUnit": "unité",
+      "normalizedQuantity": 6,
+      "normalizedUnit": "unité",
+      "comment": "",
+      "allergens": [],
+      "type": "frais"
+    },{
+      "uuid": "2pps90",
+      "name": "Poivre",
+      "originalQuantity": 1,
+      "originalUnit": "au goût",
+      "normalizedQuantity": 1,
+      "normalizedUnit": "au goût",
+      "comment": "",
+      "allergens": [],
+      "type": "epices"
+    },{
+      "uuid": "2juq3x",
+      "name": "Sel",
+      "originalQuantity": 1,
+      "originalUnit": "au goût",
+      "normalizedQuantity": 1,
+      "normalizedUnit": "au goût",
+      "comment": "",
+      "allergens": [],
+      "type": "epices"
+    },{
+      "uuid": "yi8qce",
+      "name": "Raifort en poudre",
+      "originalQuantity": 3,
+      "originalUnit": "gr.",
+      "normalizedQuantity": 3,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": [],
+      "type": "epices"
+    },{
+      "uuid": "j84olg",
+      "name": "Feuille de laurier",
+      "originalQuantity": 1,
+      "originalUnit": "unité",
+      "normalizedQuantity": 1,
+      "normalizedUnit": "unité",
+      "comment": "",
+      "allergens": [],
+      "type": "epices"
+    },{
+      "uuid": "cgk776",
+      "name": "Estragon séché",
+      "originalQuantity": 3,
+      "originalUnit": "gr.",
+      "normalizedQuantity": 3,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": [],
+      "type": "epices"
+    },{
+      "uuid": "rtavky",
+      "name": "Oignon",
+      "originalQuantity": 2,
+      "originalUnit": "kg",
+      "normalizedQuantity": 2000,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": [],
+      "type": "legumes"
+    },{
+      "uuid": "i7psri",
+      "name": "Betterave cuite",
+      "originalQuantity": 1.2,
+      "originalUnit": "kg",
+      "normalizedQuantity": 1200,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": [],
+      "type": "legumes"
+    },{
+      "uuid": "ogtomg",
+      "name": "Lentilles vertes",
+      "originalQuantity": 300,
+      "originalUnit": "gr.",
+      "normalizedQuantity": 300,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": [],
+      "type": "sec"
+    }],
+  "preparation": "Couper les oignons en petit dès.\n\nFaire cuire les lentilles vertes à l'eau avec les oignons, une feuille de laurier et du sel.\n\nEgoutter. Laisser refroidir.\n\nPréchauffer le four à 180°c à chaleur tournante ou 200°c en mode convection naturelle!!\n\nTapisser sur les plaques de cuisson du papier sulfuuuuu.....\n\nRâper grossièrement les betteraves, presser tout ça dans une passoire pour ôter un max de jus sans en faire de la purée.\n\nVerser dans un grand saladier avec du sel,  l'estragon, le raifort et une généreuse quantité de poivre.\n\nAjouter les lentilles aux oignons égouter et tout y mélanger.\n\nEtaler les premières pâtes sur les plaques.\n\nDisposer l'appareil à betterave en cercle en laissant 1cm de bords libres pour sceller avec la deuxième pâte.\n\nDorer la surface de la tourte au café avec un pinceau.\n\nFaire une cheminée au centre. Enfourner 30/35min.",
+  "prepAlt": [{"recetteAlt":"tourte-betterave-et-feta_eivoui8a"}],
+  "permissionWrite": [],
+  "publishDate": "2024-05-18T15:49:00Z"
+}

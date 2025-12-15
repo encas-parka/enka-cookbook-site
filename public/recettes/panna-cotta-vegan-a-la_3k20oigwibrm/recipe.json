@@ -1,0 +1,82 @@
+
+{
+  "uuid": "3k20oigwibrm",
+  "slug": "panna-cotta-vegan-a-la_3k20oigwibrm",
+  "title": "Panna Cotta Végan À La Chataigne - Chips De Chocolat",
+  "draft": false,
+  "typeR": "dessert",
+  "categories": ["Sucrée"],
+  "regime": null,
+  "cuisson": true,
+  "serveHot": false,
+  "plate": 100,
+  "quantite_desc": "",
+  "check": true,
+  "checkAlwaysOk": null,
+  "materiel": [],
+  "ingredients": [{
+      "uuid": "cr4kiz",
+      "name": "Chocolat noir",
+      "originalQuantity": 600,
+      "originalUnit": "gr.",
+      "normalizedQuantity": 600,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": [],
+      "type": "sucres"
+    },{
+      "uuid": "ruhtax",
+      "name": "Agar-agar",
+      "originalQuantity": 56,
+      "originalUnit": "gr.",
+      "normalizedQuantity": 56,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": [],
+      "type": "autres"
+    },{
+      "uuid": "lny16c",
+      "name": "sucre blanc",
+      "originalQuantity": 1.5,
+      "originalUnit": "kg",
+      "normalizedQuantity": 1500,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": [],
+      "type": "sucres"
+    },{
+      "uuid": "xm77fg",
+      "name": "Purée chataîgne sans sucre",
+      "originalQuantity": 4,
+      "originalUnit": "kg",
+      "normalizedQuantity": 4000,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": [],
+      "type": "legumes"
+    },{
+      "uuid": "csxbg6",
+      "name": "lait d’amande",
+      "originalQuantity": 5,
+      "originalUnit": "l.",
+      "normalizedQuantity": 5000,
+      "normalizedUnit": "ml",
+      "comment": "",
+      "allergens": [],
+      "type": "lof"
+    },{
+      "uuid": "chfwwq",
+      "name": "Crème soja",
+      "originalQuantity": 5,
+      "originalUnit": "l.",
+      "normalizedQuantity": 5000,
+      "normalizedUnit": "ml",
+      "comment": "",
+      "allergens": ["Soja"],
+      "type": "lof"
+    }],
+  "preparation": "- Faire bouillir le lait d'amande, la crème soja et le sucre\n- Ajouter l'agar-agar et laisser bouillir 2 minutes\n- Couper la cuisson et rajouter la crème de châtaignes\n- Dresser dans des ramequins et réserver une nuit au frigo\n- Faire fondre le chocolat au bain marie\n\n-Étaler finement le chocolat fondu sur une feuille de papier cuisson et réserver au frigo pendant une nuit",
+  "prepAlt": [],
+  "permissionWrite": [],
+  "publishDate": "2025-10-16T18:01:00Z"
+}

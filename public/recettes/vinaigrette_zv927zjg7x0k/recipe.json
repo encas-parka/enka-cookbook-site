@@ -1,0 +1,82 @@
+
+{
+  "uuid": "zv927zjg7x0k",
+  "slug": "vinaigrette_zv927zjg7x0k",
+  "title": "Vinaigrette",
+  "draft": false,
+  "typeR": "entree",
+  "categories": ["Sauce"],
+  "regime": ["vegetarien","vegan","sans-gluten","sans-lactose"],
+  "cuisson": false,
+  "serveHot": false,
+  "plate": 100,
+  "quantite_desc": null,
+  "check": true,
+  "checkAlwaysOk": true,
+  "materiel": null,
+  "ingredients": [{
+      "uuid": "ljzb7j",
+      "name": "Eau",
+      "originalQuantity": 0.2,
+      "originalUnit": "l.",
+      "normalizedQuantity": 200,
+      "normalizedUnit": "ml",
+      "comment": "",
+      "allergens": [],
+      "type": "autres"
+    },{
+      "uuid": "2pps90",
+      "name": "Poivre",
+      "originalQuantity": 3,
+      "originalUnit": "gr.",
+      "normalizedQuantity": 3,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": [],
+      "type": "epices"
+    },{
+      "uuid": "2juq3x",
+      "name": "Sel",
+      "originalQuantity": 3,
+      "originalUnit": "gr.",
+      "normalizedQuantity": 3,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": [],
+      "type": "epices"
+    },{
+      "uuid": "5c1b20",
+      "name": "Moutarde",
+      "originalQuantity": 200,
+      "originalUnit": "gr.",
+      "normalizedQuantity": 200,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": ["Moutarde"],
+      "type": "epices"
+    },{
+      "uuid": "qemlqs",
+      "name": "Vinaigre balsamique",
+      "originalQuantity": 0.2,
+      "originalUnit": "l.",
+      "normalizedQuantity": 200,
+      "normalizedUnit": "ml",
+      "comment": "",
+      "allergens": ["Sulfites"],
+      "type": "epices"
+    },{
+      "uuid": "atccqu",
+      "name": "Huile végétale",
+      "originalQuantity": 1.5,
+      "originalUnit": "l.",
+      "normalizedQuantity": 1500,
+      "normalizedUnit": "ml",
+      "comment": "",
+      "allergens": [],
+      "type": "lof"
+    }],
+  "preparation": "monter la sauce en commençant par la moutarde, et le vinaigre\n\npuis ajouter petit à petit l'huile\n\net en enfin l'eau",
+  "prepAlt": null,
+  "permissionWrite": [],
+  "publishDate": "2024-06-15T11:21:00Z"
+}

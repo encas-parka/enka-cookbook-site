@@ -1,0 +1,467 @@
+
+
+<!doctype html>
+<html lang="fr-FR">
+  
+  
+
+  
+  
+
+  <script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><body>
+
+  
+  <div id="svelte-header"></div>
+
+
+    <div class="wrap container" role="document">
+      <div class="content">
+        
+
+
+
+
+<nav class="offcanvas offcanvas-md offcanvas-start docs-menu show p-3" tabindex="-1" id="sidebar" data-bs-keyboard="false" data-bs-backdrop="false" data-bs-scroll="true">
+
+  <nav class="nav flex-column mt-3">
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#sidebar" aria-label="Close" id="sidebar-close"></button>
+    
+      <ul class="nav nav-pills flex-column mb-auto ">
+        <li><a class="nav-link mb-2 fw-bolder " href="//localhost:1313/docs/decouvrir">Découvrir</a></li>
+      </ul>
+      
+    
+      <ul class="nav nav-pills flex-column mb-auto ">
+        <li><a class="nav-link mb-2 fw-bolder " href="//localhost:1313/docs/editer">Editer le site</a></li>
+      </ul>
+      
+        <ul class="nav nav-pills flex-column mb-auto ms-2">
+          
+            <li><a class="nav-link mb-2 " href="//localhost:1313/docs/editer/commencer">Commencer</a></li>
+            
+          
+            <li><a class="nav-link mb-2 " href="//localhost:1313/docs/editer/recettes">Les Recettes</a></li>
+            
+          
+            <li><a class="nav-link mb-2 " href="//localhost:1313/docs/editer/evenements">Les Evénements / Menus</a></li>
+            
+          
+            <li><a class="nav-link mb-2 " href="//localhost:1313/docs/editer/autres">Ajouter ingrédients, catégories...</a></li>
+            
+          
+        </ul>
+      
+    
+      <ul class="nav nav-pills flex-column mb-auto ">
+        <li><a class="nav-link mb-2 fw-bolder active" href="//localhost:1313/docs/web-tools">Autres Outils Web</a></li>
+      </ul>
+      
+    
+  </nav>
+</nav>
+
+
+<style>
+  nav#TableOfContents {
+    ul {
+      padding-left: .5rem;
+      list-style-type: none;
+    }
+    li {
+      border-left: #811721 solid 2px;
+      padding-left: 1rem;
+      margin-bottom: .3rem;
+    
+    }
+  }
+
+  @media (max-width: 768px) {
+    #sidebar {
+      display: none;
+    }
+  }
+
+ 
+.docs-menu {
+  width: 250px !important;
+  top: 54px !important;
+}
+
+
+ 
+@media (min-width: 768px) {
+  .container {
+    padding-left: 300px !important;
+    margin-left: inherit;
+  }
+  
+  #sidebarCollapse {
+    display: none;
+  }
+  
+  .offcanvas-backdrop {
+    display: none;
+  }
+
+  #sidebar-close {
+    display: none;
+  }
+
+  #sidebar {
+    display: block;
+  }
+}
+
+
+ 
+#sidebar.nav-link:hover {
+  background-color: #e5e5e5;
+}
+
+
+.bi {
+  vertical-align: -.125em;
+  pointer-events: none;
+  fill: currentColor;
+}
+.btn-toggle {
+  display: inline-flex;
+  align-items: center;
+  padding: .25rem .5rem;
+  font-weight: 600;
+  color: rgba(0, 0, 0, .65); 
+  background-color: transparent;
+  border: 0;
+}
+.btn-toggle:hover,
+.btn-toggle:focus {
+  color: rgba(0, 0, 0, .85);
+  background-color: #e5e5e5;
+}
+.btn-toggle::before {
+  width: 1.25em;
+  line-height: 0;
+  content: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='rgba%280,0,0,.5%29' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M5 14l6-6-6-6'/%3e%3c/svg%3e");
+  transition: transform .35s ease;
+  transform-origin: .5em 50%;
+}
+.btn-toggle[aria-expanded="true"] {
+  color: rgba(0, 0, 0, .85);
+}
+.btn-toggle[aria-expanded="true"]::before {
+  transform: rotate(90deg);
+}
+.btn-toggle-nav a {
+  display: inline-flex;
+  padding: .1875rem .5rem;
+  margin-top: .125rem;
+  margin-left: 1.25rem;
+  margin-bottom: .5rem;
+  text-decoration: none;
+}
+.btn-toggle-nav a:hover,
+.btn-toggle-nav a:focus {
+  background-color: #e5e5e5;
+}
+.btn-toggle-nav a.active {
+  font-weight: bold;
+}
+
+ 
+.offcanvas-header {
+  background-color: #0d6efd!important;
+  color: white!important;
+}
+</style>
+
+
+
+  <header>
+    <h1>Autres Outils Web</h1>
+  </header>
+  <article><p>Parmi les outils web qui peuvent servir à l&rsquo;orga d&rsquo;un événement cantine: les doc participatifs de type pad ou tableurs (pour gerer les courses, la répartition des taches, les présences&hellip; ).</p>
+<p>Il est possibles de copier facilement les tableaux de listes d&rsquo;ingrédients d&rsquo;une page événement pour l&rsquo;intégrer dans un PAD ou un tableur (excel, libreoffice, etc.).</p>
+<hr>
+
+ 
+   
+ 
+ 
+ <zoomable-image class="p-2 m-2">
+   <img class="img-fluid" src="img/export.jpg" alt="" >  
+ </zoomable-image>
+
+<hr>
+
+<div class="row align-items-center">
+  
+   
+<div class="col-md-12 col-lg-6">
+  
+     
+     
+       
+     
+     
+     <zoomable-image class="p-2 m-2">
+       <img class="img-fluid" src="img/export-txt.jpg" alt="" >  
+     </zoomable-image>
+
+   
+</div>
+
+
+ 
+   
+<div class="col-md-12 col-lg-6">
+  
+     
+     
+       
+     
+     
+     <zoomable-image class="p-2 m-2">
+       <img class="img-fluid" src="img/export-csv.jpg" alt="" >  
+     </zoomable-image>
+
+   
+</div>
+
+   
+   
+   
+<div class="col-md-12 col-lg-6">
+  
+     
+     
+       
+     
+     
+     <zoomable-image class="p-2 m-2">
+       <img class="img-fluid" src="img/export-csv2.jpg" alt="" >  
+     </zoomable-image>
+
+   
+</div>
+
+
+ 
+</div>
+
+
+<h2 id="cryptdrive--cryptpad">Cryptdrive / cryptpad</h2>
+<p>Cryptdrive fait partis des outils libres et gratuits permettant le partage et l&rsquo;édition collaborative de documents de type <a href="https://cryptpad.fr/pad/#/2/pad/view/jlJop8fEr9dMLRJ4y5l4lzuXtYKjIF-pHV99px6iaLg/">pad</a> ou <a href="https://cryptpad.fr/sheet/#/2/sheet/view/vfpnxrKfbia-SXvwKUKFjlNFbtcxr4hMaEgcvyshZ98/">tableur</a>. Il est permet aussi de créer <a href="https://cryptpad.fr/form/#/2/form/view/3gjFB4&#43;kJqsrTK4ahmlR3Rq-d0KUhEcclzPnj-CuVxw/">des &ldquo;sondages&rdquo;</a> de type framadate, et pour les plus organisé•es des <a href="https://cryptpad.fr/kanban/">&ldquo;kanban&rdquo;</a>. Le tout peut être stocker sur un seul espace, avec dossiers et sous-dossiers. Les dossiers complets ou les documents peuvent être partagées, en mode &rsquo;lecture seule&rsquo; ou en mode édition&hellip; avec possibilité de choisir un mot de passe, d&rsquo;ajouter des commentaires ou de chatter. <a href="https://docs.cryptpad.org/fr/user_guide/index.html">La doc</a>&hellip;</p>
+
+<div class="row align-items-center">
+  
+   
+<div class="col-md-12 col-lg-6">
+  
+     
+     
+       
+     
+     
+     <zoomable-image class="p-2 m-2">
+       <img class="img-fluid" src="img/cryptpad.jpg" alt="" >  
+     </zoomable-image>
+
+   
+</div>
+
+
+ 
+   
+<div class="col-md-12 col-lg-6">
+  
+     
+     
+       
+     
+     
+     <zoomable-image class="p-2 m-2">
+       <img class="img-fluid" src="img/cryptpad-create.jpg" alt="" >  
+     </zoomable-image>
+
+   
+</div>
+
+
+ 
+
+ 
+</div>
+
+
+
+<div class="row align-items-center">
+  
+   
+<div class="col-md-12 col-lg-6">
+  
+     
+     
+       
+     
+     
+     <zoomable-image class="p-2 m-2">
+       <img class="img-fluid" src="img/cryptpad-kanban.jpg" alt="" >  
+     </zoomable-image>
+
+   
+</div>
+
+
+   
+<div class="col-md-12 col-lg-6">
+  
+     
+     
+       
+     
+     
+     <zoomable-image class="p-2 m-2">
+       <img class="img-fluid" src="img/cryptpad-modele.jpg" alt="" >  
+     </zoomable-image>
+
+   
+</div>
+
+
+   
+<div class="col-md-12 col-lg-6">
+  
+     
+     
+       
+     
+     
+     <zoomable-image class="p-2 m-2">
+       <img class="img-fluid" src="img/cryptdrive-doc.jpg" alt="" >  
+     </zoomable-image>
+
+   
+</div>
+
+
+
+ 
+</div>
+
+
+
+
+  
+
+
+<div class="row mb-5 align-items-center  shadow-sm rounded py-3">
+  <div class="col-md-6">
+    <h4 class="title">Importer les listes d&#39;ingrédients sur le tableur</h4>
+    <p class="fs-6 p-01"><p>Pour importer les listes d&rsquo;ingredients au tableur de cryptpad :</p>
+<ol>
+<li>&ldquo;Télécharger CSV&rdquo; sur la page de l&rsquo;événement</li>
+<li>Ouvrez le fichier avec votre tableur libreoffice</li>
+<li>Cliquez sur &ldquo;OK&rdquo; avec les options par défauts, ça devrait marcher</li>
+<li>Enregistrez le document au format .ods</li>
+<li>Depuis le tableur de cryptpad, cliquez sur &ldquo;Fichier&rdquo; &gt;&ldquo;Importer&rdquo;</li>
+</ol></p>
+    
+  </div>
+
+  <div id="image" class="col-md-6">
+    <zoomable-image><img src="img/cryptdrive-tableur-import.jpg" alt=""></zoomable-image>
+  </div>
+
+</div>
+  
+
+
+
+
+
+<div class="row align-items-center">
+  
+ 
+   
+<div class="col-md-12 col-lg-6">
+  
+     
+     
+       
+     
+     
+     <zoomable-image class="p-2 m-2">
+       <img class="img-fluid" src="img/export-csv.jpg" alt="" >  
+     </zoomable-image>
+
+   
+</div>
+
+
+   
+<div class="col-md-12 col-lg-6">
+  
+     
+     
+       
+     
+     
+     <zoomable-image class="p-2 m-2">
+       <img class="img-fluid" src="img/cryptdrive-tableur.jpg" alt="" >  
+     </zoomable-image>
+
+   
+</div>
+
+
+ 
+</div>
+
+
+<h2 id="element---la-messagerie">Element - la messagerie</h2>
+<p>Les listes e-mail, c&rsquo;est cool mais on y répond pas tous, ça manque de réactivité tout ça&hellip; les groupes signal c&rsquo;est cool mais y&rsquo;en a toujours un•e qui n&rsquo;a pas de smartphone, et les infos sont toutes en vrac&hellip;</p>
+<p>&lsquo;<a href="https://element.io">Element</a>&rsquo;, c&rsquo;est entre les 2 :</p>
+<ul>
+<li>une messagerie (décentralisée et chiffrée, basée sur des protocoles libres),</li>
+<li>avec la possibilité de créer des &lsquo;salons&rsquo; et des sous-discussions,</li>
+<li>utilisable depuis son smartphone ou depuis son pc (comme <a href="https://element.io/download">logiciel</a> ou directement depuis son <a href="https://app.element.io/#/welcome">navigateur</a>),</li>
+<li>nécessitant juste un email et un mot de passe pour s&rsquo;y inscrire</li>
+</ul>
+<h2 id="besoin-de-gérer-des-reservations-">Besoin de gérer des reservations ?</h2>
+<p><a href="https://cal.com/fr">Cal.com</a> permet de faire ça assez simplement, gratuitement pour les options basiques (et est open-source)&hellip;</p>
+</article>
+
+
+  
+  
+  <script type="text/javascript" src="../../js/zoomable-img.2e9fbfd9bcbe13961d1e8ad4142103a094df72a28d110197ca6ff5170ab2e9b3.js"></script>
+  
+
+
+      </div>
+    </div>
+
+  
+  <footer class="footer text-muted">
+  <div class="container">
+    <p class="m-0 text-center"></p>
+  </div>
+</footer>
+  
+<script type="module" src="../../dist/assets/index.js"></script>
+
+
+<link rel="stylesheet" href="../../dist/assets/index.css">
+
+
+<style>
+  body {
+    padding-top: 40px;  
+  }
+</style>
+
+
+
+
+  </body>
+</html>

@@ -1,0 +1,376 @@
+
+
+<!doctype html>
+<html lang="fr-FR">
+  
+  
+
+  
+  
+
+  <script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><body>
+
+  
+  <div id="svelte-header"></div>
+
+
+    <div class="wrap container" role="document">
+      <div class="content">
+        
+  <div class="row justify-content-center mt-4">
+      
+      
+      
+      <div id="loading-state" class="text-center p-5">
+        <div
+          class="spinner-border text-primary"
+          role="status"
+          style="width: 3rem; height: 3rem"
+        >
+          <span class="visually-hidden">Chargement...</span>
+        </div>
+        <p class="mt-3">Vérification de la session...</p>
+      </div>
+
+      
+      
+      
+      <div id="user-logged-in" class="" style="display: none">
+        <div class="row row-cols-1 row-cols-md-2 ">
+        <div class="col">
+            <div class="alert alert-info my-4 rounded" role="alert">
+              Les recettes ou événements sauvegardés <spans class="fw-bolder"> ne sont pas automatiquement publiés en ligne</spans>. Cela permet d'économiser le quota de mises à jour fournies par l'hebergeur. Lorsque vous avez terminé d'éditer les recettes ou événements et que c'est prêt pour la publication, cliquer sur "Publish Changes" en haut du dashboard, ou dans sur "Save and Publish" dans le menu déroulant du bouton "Save" sur les recettes ou événements.
+              <div class="d-flex-inline wrap my-2">
+              <img src="../images/publish_changes.webp" alt="Publish Changes" class="img-fluid m-lg-4 m-2 shadow" style="width: 200px; height: 100%;">
+              <img src="../images/save_and_publish.webp" alt="Save and Publish" class="img-fluid m-2 m-lg-4 shadow" style="width: 200px; height: 100%;">
+              </div>
+            </div>
+
+            </div>
+
+        <div class="col">
+        <div class="card text-center">
+          <div class="card-body">
+            <img src="../cover.png" alt="logo" class="mb-3" width="150px" />
+            <h5 class="card-title" id="welcome-user">Bienvenue !</h5>
+            <p class="card-text">
+              Vous pouvez accéder à l'interface d'édition en cliquant sur le
+              bouton ci-dessous.
+            </p>
+            <button id="logout-button" class="btn btn-secondary me-3">
+              Se déconnecter
+            </button>
+            <a href="../sveltia/" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Editer le site</a>
+            <div id="user-encas-gmx" class="alert alert-warning my-4" role="alert"  style="display: none">
+              Vous êtes connecté·e avec le compte encas-cookbook, qui sera probablement desactivé dans un certain temps. Vous êtes encouragé·e à créer un compte personnel pour pouvoir continuer à utiliser le site.
+              <button class="btn btn-warning my-2" onclick="handleNewRegistration()">Créer un compte</button>
+            </div>
+          </div>
+
+        </div>
+        </div>
+      </div>
+      </div>
+
+      
+      
+      
+      <div id="user-logged-out" style="display: none" class="col-lg-6">
+        <div class="card">
+          <div class="card-body p-4">
+            <div class="text-center mb-4">
+              <img src="../cover.png" alt="logo" class="m-auto" width="150px" />
+              <h4 class="mt-3">Accès à l'interface d'édition</h4>
+            </div>
+            <div id="email-pwd-login">
+              <form id="login-form">
+                
+                <div
+                  id="error-message"
+                  class="alert alert-danger my-4 rounded"
+                  style="display: none"
+                  role="alert"
+                ></div>
+
+                <div class="mb-3">
+                  <label for="login-email" class="form-label">Email</label>
+                  <input
+                    type="email"
+                    class="form-control"
+                    id="login-email"
+                    required
+                    autocomplete="email"
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="login-password" class="form-label"
+                    >Mot de passe</label
+                  >
+                  <input
+                    type="password"
+                    class="form-control"
+                    id="login-password"
+                    required
+                    autocomplete="current-password"
+                  />
+                </div>
+                <div class="d-grid">
+                  <button
+                    type="submit"
+                    id="login-button"
+                    class="btn btn-primary btn-lg"
+                  >
+                    <span
+                      class="spinner-border spinner-border-sm"
+                      role="status"
+                      aria-hidden="true"
+                      style="display: none"
+                    ></span>
+                    Se connecter
+                  </button>
+                </div>
+
+              </form>
+
+              <div class="text-end mt-2">
+                <button class="btn btn-link" id="forgot-password-button"> mon mot de passe oublié ?</button>
+              </div>
+            </div>
+            
+            
+            <div id="password-forgotten" style="display: none">
+              <div class="alert alert-info my-4 rounded">
+                <p>Renseignez votre adresse e-mail d'inscription pour réinitialiser votre mot de passe</p>
+              </div>
+              <form id="password-forgotten-form">
+                <div class="mb-3">
+                  <label for="email" class="form-label">Email</label>
+                  <input
+                    type="email"
+                    class="form-control"
+                    id="email"
+                    required
+                    autocomplete="email"
+                  />
+                </div>
+                <div class="d-grid">
+                  <button
+                    type="submit"
+                    id="submit-password-forgotten"
+                    class="btn btn-primary btn-lg"
+                  >
+                    <span
+                      class="spinner-border spinner-border-sm"
+                      role="status"
+                      aria-hidden="true"
+                      style="display: none"
+                    ></span>
+                    Envoyer
+                  </button>
+                </div>
+              </form>
+            </div>
+            
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+
+
+    
+    
+    
+    <div id="email-not-verified" style="display: none" class="col-lg-6 m-auto">
+      <div class="card">
+        <div class="card-body p-4">
+          <div class="text-center mb-4">
+            <img src="../cover.png" alt="logo" class="m-auto" width="150px" />
+            <h4 class="mt-3">Email non vérifié</h4>
+            
+            
+            <p id="user-email-to-verify" class="text-muted"></p>
+            
+            
+            <div id="info-message" class="alert alert-success rounded mt-3" style="display: none;" role="alert"></div>
+          </div>
+
+          <div class="alert alert-warning rounded" role="alert">
+            <h5 class="alert-heading">Vérification d'email requise</h5>
+            <p>
+              Vous devez vérifier votre adresse email avant de pouvoir accéder à l'interface d'édition.
+              Veuillez consulter votre boîte mail et cliquer sur le lien de vérification qui vous a été envoyé ("Account Verification" de "noreply@appwrite.io").
+            </p>
+            <hr>
+            <div class="d-flex  justify-content-evenly ">
+                <button id="resend-verification" class="btn btn-primary">
+                  Renvoyer l'email
+                  <span class="spinner-border spinner-border-sm ms-2" role="status" aria-hidden="true" style="display: none;"></span>
+                </button>
+                <button id="logout-button-unverified" class="btn btn-secondary">
+                  Se déconnecter
+                </button>
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+
+  
+  <div id="logged-out-sections" style="display: none;" >
+    <div class="row row-cols-lg-2 g-5 mt-5 justify-content-evenly">
+    
+      <div class="col-md-6">
+        <div class="card h-100">
+          <div class="card-header fw-bold">Demander un accès</div>
+          <div class="card-body small">
+            <p>
+              Si vous souhaitez participer au site, et que vous connaissez quelqu'un·e qui y est déjà inscrit·e, le mieux est de lui demander de vous inviter.
+              <br>
+              Sinon, remplissez ce formulaire pour recevoir une invitation, en indiquant à quelle cantine vous participez, ou les raisons pour lesquelles vous souhaitez avoir un compte.
+            </p>
+            <form id="access-request-form" class="contact-form">
+              
+              <div id="form-feedback" class="mb-3"></div>
+
+              <div class="form-group">
+                <label for="contact-form-email" class="visually-hidden"
+                  >Email</label
+                >
+                <input
+                  id="contact-form-email"
+                  name="Email"
+                  type="email"
+                  placeholder="Votre email"
+                  class="form-control mb-3"
+                  required
+                  autocomplete="off"
+                  maxlength="100"
+                />
+
+                <label for="contact-form-message" class="visually-hidden"
+                  >Message</label
+                >
+                <textarea
+                  class="form-control"
+                  id="contact-form-message"
+                  name="Message"
+                  placeholder="Quelques mots de présentation (qui vous a parlé du site ? etc.)"
+                  rows="4"
+                ></textarea>
+
+                <div class="d-flex justify-content-end mt-3">
+                  <button
+                    class="btn btn-info"
+                    type="submit"
+                    value="Submit"
+                    id="Form-submit"
+                  >
+                    <span
+                      class="spinner-border spinner-border-sm me-2"
+                      role="status"
+                      aria-hidden="true"
+                      style="display: none"
+                    ></span>
+                    Envoyer la demande
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+    
+      <div class="col-md-6">
+        <div class="card h-100">
+          <div class="card-header fw-bold">À propos de ce site</div>
+          <div class="card-body small">
+            <p>
+              Ce site est un outil collaboratif pour le partage de recettes de cuisine, principalement destiné aux collectifs cuisinant pour des événements militants et solidaires.
+            </p>
+            <h6>Fonctionnalités principales :</h6>
+            <ul>
+              <li><strong>Recettes</strong> avec calcul automatique des quantités en fonction du nombre de convives</li>
+              <li><strong>Création de menus</strong> et de séries de menus pour des événements sur plusieurs jours</li>
+              <li><strong>Recherche avancée</strong> de recettes par catégories, régimes spéciaux, ingrédients, etc.</li>
+              <li><strong>Pages événements</strong> pour organiser les repas et calculer les listes d'ingrédients nécessaires</li>
+              <li><strong>Export Pdf et impression</strong> des menus, affiches de menus, listes d'ingrédients...</li>
+            </ul>
+            <p>
+              Le contenu est publié sous licence <strong>GPL-3.0</strong>, encourageant le partage et la réutilisation des recettes.
+            </p>
+            <p class="mb-0">
+              <a href="https://github.com/encas-parka/hugo-cookbook-theme" target="_blank" rel="noopener">Voir le projet sur GitHub</a>
+            </p>
+          </div>
+        </div>
+    </div>
+  </div>
+  </div>
+
+
+
+
+<script defer
+  type="text/javascript"
+  src="../authAppwrite.js"
+  integrity="">
+</script><script>
+  async function handleNewRegistration() {
+    try {
+      
+      if (window.AppwriteClient && window.AppwriteClient.logoutGlobal) {
+        await window.AppwriteClient.logoutGlobal();
+      }
+      
+      window.location.href = "/registration";
+    } catch (error) {
+      console.error("Erreur lors de la déconnexion:", error);
+      
+      window.location.href = "/registration";
+    }
+  }
+</script>
+
+
+
+  
+
+<script defer
+  type="text/javascript"
+  src="../auth-debug.js"
+  integrity="">
+</script>
+
+
+      </div>
+    </div>
+
+  
+  <footer class="footer text-muted">
+  <div class="container">
+    <p class="m-0 text-center"></p>
+  </div>
+</footer>
+  
+<script type="module" src="../dist/assets/index.js"></script>
+
+
+<link rel="stylesheet" href="../dist/assets/index.css">
+
+
+<style>
+  body {
+    padding-top: 40px;  
+  }
+</style>
+
+
+
+
+  </body>
+</html>

@@ -1,0 +1,442 @@
+
+
+<!doctype html>
+<html lang="fr-FR">
+  
+  
+
+  
+  
+
+  <script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><body>
+
+  
+  <div id="svelte-header"></div>
+
+
+    <div class="wrap container" role="document">
+      <div class="content">
+        
+
+
+
+
+<nav class="offcanvas offcanvas-md offcanvas-start docs-menu show p-3" tabindex="-1" id="sidebar" data-bs-keyboard="false" data-bs-backdrop="false" data-bs-scroll="true">
+
+  <nav class="nav flex-column mt-3">
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#sidebar" aria-label="Close" id="sidebar-close"></button>
+    
+      <ul class="nav nav-pills flex-column mb-auto ">
+        <li><a class="nav-link mb-2 fw-bolder " href="//localhost:1313/docs/decouvrir">Découvrir</a></li>
+      </ul>
+      
+    
+      <ul class="nav nav-pills flex-column mb-auto ">
+        <li><a class="nav-link mb-2 fw-bolder " href="//localhost:1313/docs/editer">Editer le site</a></li>
+      </ul>
+      
+        <ul class="nav nav-pills flex-column mb-auto ms-2">
+          
+            <li><a class="nav-link mb-2 active" href="//localhost:1313/docs/editer/commencer">Commencer</a></li>
+            <span class=" small">  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#inscription--connexion">Inscription / Connexion</a>
+      <ul>
+        <li><a href="#créer-un-compte-authentifié">Créer un compte authentifié</a></li>
+      </ul>
+    </li>
+    <li><a href="#linterface-dédition">L&rsquo;interface d&rsquo;édition</a></li>
+  </ul>
+</nav></span>
+            
+          
+            <li><a class="nav-link mb-2 " href="//localhost:1313/docs/editer/recettes">Les Recettes</a></li>
+            
+          
+            <li><a class="nav-link mb-2 " href="//localhost:1313/docs/editer/evenements">Les Evénements / Menus</a></li>
+            
+          
+            <li><a class="nav-link mb-2 " href="//localhost:1313/docs/editer/autres">Ajouter ingrédients, catégories...</a></li>
+            
+          
+        </ul>
+      
+    
+      <ul class="nav nav-pills flex-column mb-auto ">
+        <li><a class="nav-link mb-2 fw-bolder " href="//localhost:1313/docs/web-tools">Autres Outils Web</a></li>
+      </ul>
+      
+    
+  </nav>
+</nav>
+
+
+<style>
+  nav#TableOfContents {
+    ul {
+      padding-left: .5rem;
+      list-style-type: none;
+    }
+    li {
+      border-left: #811721 solid 2px;
+      padding-left: 1rem;
+      margin-bottom: .3rem;
+    
+    }
+  }
+
+  @media (max-width: 768px) {
+    #sidebar {
+      display: none;
+    }
+  }
+
+ 
+.docs-menu {
+  width: 250px !important;
+  top: 54px !important;
+}
+
+
+ 
+@media (min-width: 768px) {
+  .container {
+    padding-left: 300px !important;
+    margin-left: inherit;
+  }
+  
+  #sidebarCollapse {
+    display: none;
+  }
+  
+  .offcanvas-backdrop {
+    display: none;
+  }
+
+  #sidebar-close {
+    display: none;
+  }
+
+  #sidebar {
+    display: block;
+  }
+}
+
+
+ 
+#sidebar.nav-link:hover {
+  background-color: #e5e5e5;
+}
+
+
+.bi {
+  vertical-align: -.125em;
+  pointer-events: none;
+  fill: currentColor;
+}
+.btn-toggle {
+  display: inline-flex;
+  align-items: center;
+  padding: .25rem .5rem;
+  font-weight: 600;
+  color: rgba(0, 0, 0, .65); 
+  background-color: transparent;
+  border: 0;
+}
+.btn-toggle:hover,
+.btn-toggle:focus {
+  color: rgba(0, 0, 0, .85);
+  background-color: #e5e5e5;
+}
+.btn-toggle::before {
+  width: 1.25em;
+  line-height: 0;
+  content: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='rgba%280,0,0,.5%29' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M5 14l6-6-6-6'/%3e%3c/svg%3e");
+  transition: transform .35s ease;
+  transform-origin: .5em 50%;
+}
+.btn-toggle[aria-expanded="true"] {
+  color: rgba(0, 0, 0, .85);
+}
+.btn-toggle[aria-expanded="true"]::before {
+  transform: rotate(90deg);
+}
+.btn-toggle-nav a {
+  display: inline-flex;
+  padding: .1875rem .5rem;
+  margin-top: .125rem;
+  margin-left: 1.25rem;
+  margin-bottom: .5rem;
+  text-decoration: none;
+}
+.btn-toggle-nav a:hover,
+.btn-toggle-nav a:focus {
+  background-color: #e5e5e5;
+}
+.btn-toggle-nav a.active {
+  font-weight: bold;
+}
+
+ 
+.offcanvas-header {
+  background-color: #0d6efd!important;
+  color: white!important;
+}
+</style>
+
+
+
+  <header>
+    <h1>Commencer !</h1>
+  </header>
+  <article><!-- 
+
+
+
+  
+
+
+<script type="module">
+import PhotoSwipeLightbox from '/assets/photoswipe5/photoswipe-lightbox.esm.js';
+import PhotoSwipeDynamicCaption from '/assets/photoswipe-dynamic-caption-plugin/photoswipe-dynamic-caption-plugin.esm.js';
+
+const lightbox = new PhotoSwipeLightbox({
+  gallery: '#photoswipe5-gallery',
+  childSelector: '.pswp-gallery__item',
+  pswpModule: () => import('/assets/photoswipe5/photoswipe.esm.js'),
+  bgOpacity: 0.95,
+  loop: false,
+});
+lightbox.init();
+
+const captionPlugin = new PhotoSwipeDynamicCaption(lightbox, {
+  
+  type: 'auto',
+});
+</script>
+
+<link rel="stylesheet" href="../../../assets/photoswipe5/photoswipe.css">
+<link rel="stylesheet" href="../../../assets/photoswipe-dynamic-caption-plugin/photoswipe-dynamic-caption-plugin.css">
+ -->
+<h2 id="inscription--connexion">Inscription / Connexion</h2>
+<p>En cliquant sur le bouton de la barre de menu en haut du site, vous pouvez créer un compte ou vous connecter à l&rsquo;interface d&rsquo;édition si vous avez déjà un compte.</p>
+<h3 id="créer-un-compte-authentifié">Créer un compte authentifié</h3>
+<p>Commencez par créer un compte sur github, la plateforme qui heberge le site (bouton bleu sur la page de <a href="../../../registration">connexion</a>). Puis complétez le formulaire pour obtenir un compte authentifié, en utilisant le même email que pour votre compte github. Les comptes authentifiés peuvent directement publier ou modifier des recettes, créer des évenements, etc, sans modération préalable.</p>
+<p>Une fois la demande effectuée, vous recevrez un email vous signalant que vous avez été invité à collaborer au site encas-parka/enka-cookbook-site (le traitement des demandes de compte se fait manuellement, vous devrez peut-être patienter quelques jours avant de recevoir cet email.). Cliquez sur le lien pour acceptez l&rsquo;invitation. Vous serez redirigé·e vers une page vous permettant de choisir un mot de passe.</p>
+<p>Sur l&rsquo;interface d&rsquo;édition, vous pouvez maintenant avoir accés au bouton &ldquo;publier&rdquo; sur les pages d&rsquo;édition, et à la colonne &ldquo;prêt&rdquo; sous l&rsquo;onglet &ldquo;Flux&rdquo; (contrairement aux compte non-authentifiés). Voir <a href="../../../docs/editer/recettes/#publier-une-recette">&ldquo;publier des recettes&rdquo;</a>.</p>
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+<div class="row align-items-center my-4 bg-light rounded">
+  
+  <div class="col col-12 col-lg-4">
+    <zoomable-image  class="p-2 m-2 shadow-sm rounded" >
+      <img src="../../../docs/editer/commencer/img/connexion/1-github-invit-email-auth.png" alt="img/connexion/1-github-invit-email-auth.png" class="img-fluid 
+      " style="max-height: " >
+    </zoomable-image>
+  </div>
+  
+  <div class="col col-12 col-lg-4">
+    <zoomable-image  class="p-2 m-2 shadow-sm rounded" >
+      <img src="../../../docs/editer/commencer/img/connexion/2-github-invit-confirm-auth.png" alt="img/connexion/2-github-invit-confirm-auth.png" class="img-fluid 
+      " style="max-height: " >
+    </zoomable-image>
+  </div>
+  
+  <div class="col col-12 col-lg-4">
+    <zoomable-image  class="p-2 m-2 shadow-sm rounded" >
+      <img src="../../../docs/editer/commencer/img/connexion/3-1-decap-auth.png" alt="img/connexion/3-1-decap-auth.png" class="img-fluid 
+      " style="max-height: " >
+    </zoomable-image>
+  </div>
+  
+  <div class="col col-12 col-lg-4">
+    <zoomable-image  class="p-2 m-2 shadow-sm rounded" >
+      <img src="../../../docs/editer/commencer/img/connexion/3-decap-authentif-auth.png" alt="img/connexion/3-decap-authentif-auth.png" class="img-fluid 
+      " style="max-height: " >
+    </zoomable-image>
+  </div>
+  
+  <div class="col col-12 col-lg-4">
+    <zoomable-image  class="p-2 m-2 shadow-sm rounded" >
+      <img src="../../../docs/editer/commencer/img/connexion/save-step1-auth.jpg" alt="img/connexion/save-step1-auth.jpg" class="img-fluid 
+      " style="max-height: " >
+    </zoomable-image>
+  </div>
+  
+  <div class="text-center text-muted small my-2"></div>
+</div>
+<h4 id="commencer-par-un-compte-non-authentifié">Commencer par un compte non-authentifié</h4>
+<p>Si vous souhaitez commencer dés maintenant à accédez à l&rsquo;interface d&rsquo;édition, vous pouvez créer un compte non-authentifié. Cela nécéssite aussi la création d&rsquo;un compte github. De plus, la création d&rsquo;un &ldquo;fork&rdquo; vous sera alors demander.</p>
+<ul>
+<li>Cliquez sur &ldquo;se connecter&rdquo;</li>
+<li>Puis sur &ldquo;se connecter avec Github&rdquo;</li>
+<li>Créez un compte github avec le lien &ldquo;create an account&rdquo;</li>
+<li>Renseignez le formulaire d&rsquo;inscription</li>
+<li>Autorisez &ldquo;netlify&rdquo;</li>
+<li>Si une erreur est affichée, c&rsquo;est pas grave. Fermez la page d&rsquo;erreur et retournez sur la page de <a href="../../../admin">connexion</a>. Acceptez de créer un &ldquo;fork&rdquo; (actualisez la page si ça ne vous est pas proposé). Cela vous permettra de commencez à proposer des modifications au site sans avoir de compte authentifié (voir plus bas), mais les modifications que vous proposerez devront être validées par le compte administrateur du site avant d&rsquo;être publiées sur le site.</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+<div class="row align-items-center my-4 bg-light rounded">
+  
+  <div class="col col-12 col-lg-4">
+    <zoomable-image  class="p-2 m-2 shadow-sm rounded" >
+      <img src="../../../docs/editer/commencer/img/connexion/1-connexion.jpg" alt="img/connexion/1-connexion.jpg" class="img-fluid 
+      " style="max-height: " >
+    </zoomable-image>
+  </div>
+  
+  <div class="col col-12 col-lg-4">
+    <zoomable-image  class="p-2 m-2 shadow-sm rounded" >
+      <img src="../../../docs/editer/commencer/img/connexion/2-connexion-decap-login.jpg" alt="img/connexion/2-connexion-decap-login.jpg" class="img-fluid 
+      " style="max-height: " >
+    </zoomable-image>
+  </div>
+  
+  <div class="col col-12 col-lg-4">
+    <zoomable-image  class="p-2 m-2 shadow-sm rounded" >
+      <img src="../../../docs/editer/commencer/img/connexion/3-connexion-github.png" alt="img/connexion/3-connexion-github.png" class="img-fluid 
+      " style="max-height: " >
+    </zoomable-image>
+  </div>
+  
+  <div class="col col-12 col-lg-4">
+    <zoomable-image  class="p-2 m-2 shadow-sm rounded" >
+      <img src="../../../docs/editer/commencer/img/connexion/4-connexion-github.png" alt="img/connexion/4-connexion-github.png" class="img-fluid 
+      " style="max-height: " >
+    </zoomable-image>
+  </div>
+  
+  <div class="col col-12 col-lg-4">
+    <zoomable-image  class="p-2 m-2 shadow-sm rounded" >
+      <img src="../../../docs/editer/commencer/img/connexion/5-connexion-github.png" alt="img/connexion/5-connexion-github.png" class="img-fluid 
+      " style="max-height: " >
+    </zoomable-image>
+  </div>
+  
+  <div class="col col-12 col-lg-4">
+    <zoomable-image  class="p-2 m-2 shadow-sm rounded" >
+      <img src="../../../docs/editer/commencer/img/connexion/6-connexion-github-fork.png" alt="img/connexion/6-connexion-github-fork.png" class="img-fluid 
+      " style="max-height: " >
+    </zoomable-image>
+  </div>
+  
+  <div class="text-center text-muted small my-2"></div>
+</div>
+<h2 id="linterface-dédition">L&rsquo;interface d&rsquo;édition</h2>
+<p><figure><img src="../../../docs/editer/commencer/img/cms-recettes.jpg"
+    alt="Decap-cms" width="90%">
+</figure>
+
+Depuis l&rsquo;interface d&rsquo;édition, vous pouvez créez ou modifier une recette, un événement, un ingrédient, etc.</p>
+
+<div class="row">
+    
+
+<div class="col">
+  
+<div class="card">
+  <div class="card-body">
+    <a href="../../../docs/editer/recettes" class="h5 card-title">Les recettes</a>
+    <p class="card-text">Ajouter, modifier, dupliquer une recette</p>
+  </div>
+</div>
+
+</div>
+
+
+
+<div class="col">
+  
+<div class="card">
+  <div class="card-body">
+    <a href="../../../docs/editer/evenements" class="h5 card-title">Les événements</a>
+    <p class="card-text">Ajouter, modifier, dupliquer un événement/menu</p>
+  </div>
+</div>
+
+</div>
+
+
+
+<div class="col">
+  
+<div class="card">
+  <div class="card-body">
+    <a href="../../../docs/editer/autres" class="h5 card-title">Autres données</a>
+    <p class="card-text">Ajouter des ingrédients, catégories, etc.</p>
+  </div>
+</div>
+
+</div>
+
+
+
+
+</div>
+
+
+</article>
+
+
+  
+  
+  <script type="text/javascript" src="../../../js/zoomable-img.2e9fbfd9bcbe13961d1e8ad4142103a094df72a28d110197ca6ff5170ab2e9b3.js"></script>
+  
+
+
+      </div>
+    </div>
+
+  
+  <footer class="footer text-muted">
+  <div class="container">
+    <p class="m-0 text-center"></p>
+  </div>
+</footer>
+  
+<script type="module" src="../../../dist/assets/index.js"></script>
+
+
+<link rel="stylesheet" href="../../../dist/assets/index.css">
+
+
+<style>
+  body {
+    padding-top: 40px;  
+  }
+</style>
+
+
+
+
+  </body>
+</html>

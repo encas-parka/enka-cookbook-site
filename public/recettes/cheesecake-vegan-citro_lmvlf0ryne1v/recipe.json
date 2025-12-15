@@ -1,0 +1,142 @@
+
+{
+  "uuid": "lmvlf0ryne1v",
+  "slug": "cheesecake-vegan-citro_lmvlf0ryne1v",
+  "title": "Cheesecake Vegan Citron Framboise",
+  "draft": false,
+  "typeR": "dessert",
+  "categories": ["Sucrée"],
+  "regime": null,
+  "cuisson": false,
+  "serveHot": false,
+  "plate": 25,
+  "quantite_desc": "",
+  "check": true,
+  "checkAlwaysOk": null,
+  "materiel": ["Giraffe (Bras Mixeur)"],
+  "ingredients": [{
+      "uuid": "atccqu",
+      "name": "Huile végétale",
+      "originalQuantity": 300,
+      "originalUnit": "gr.",
+      "normalizedQuantity": 300,
+      "normalizedUnit": "gr.",
+      "comment": "(crème)",
+      "allergens": [],
+      "type": "lof"
+    },{
+      "uuid": "xdy736",
+      "name": "lait de coco",
+      "originalQuantity": 300,
+      "originalUnit": "gr.",
+      "normalizedQuantity": 300,
+      "normalizedUnit": "gr.",
+      "comment": "(crème)",
+      "allergens": [],
+      "type": "lof"
+    },{
+      "uuid": "zkmmgt",
+      "name": "Sirop d'érable ",
+      "originalQuantity": 240,
+      "originalUnit": "gr.",
+      "normalizedQuantity": 240,
+      "normalizedUnit": "gr.",
+      "comment": "(crème)",
+      "allergens": [],
+      "type": "sucres"
+    },{
+      "uuid": "5rkq49",
+      "name": "Noix de cajou",
+      "originalQuantity": 450,
+      "originalUnit": "gr.",
+      "normalizedQuantity": 450,
+      "normalizedUnit": "gr.",
+      "comment": "(crème)",
+      "allergens": ["Fruit à coque"],
+      "type": "sec"
+    },{
+      "uuid": "lny16c",
+      "name": "sucre blanc",
+      "originalQuantity": 100,
+      "originalUnit": "gr.",
+      "normalizedQuantity": 100,
+      "normalizedUnit": "gr.",
+      "comment": "(top)",
+      "allergens": [],
+      "type": "sucres"
+    },{
+      "uuid": "ruhtax",
+      "name": "Agar-agar",
+      "originalQuantity": 4,
+      "originalUnit": "gr.",
+      "normalizedQuantity": 4,
+      "normalizedUnit": "gr.",
+      "comment": "top",
+      "allergens": [],
+      "type": "autres"
+    },{
+      "uuid": "e4mjd1",
+      "name": "Jus de citron",
+      "originalQuantity": 50,
+      "originalUnit": "ml",
+      "normalizedQuantity": 50,
+      "normalizedUnit": "ml",
+      "comment": "(top) (à ajuster au gout)",
+      "allergens": [],
+      "type": "sucres"
+    },{
+      "uuid": "e4mjd1",
+      "name": "Jus de citron",
+      "originalQuantity": 100,
+      "originalUnit": "ml",
+      "normalizedQuantity": 100,
+      "normalizedUnit": "ml",
+      "comment": "(crème) (à ajuster au gout)",
+      "allergens": [],
+      "type": "sucres"
+    },{
+      "uuid": "ljzb7j",
+      "name": "Eau",
+      "originalQuantity": 250,
+      "originalUnit": "ml",
+      "normalizedQuantity": 250,
+      "normalizedUnit": "ml",
+      "comment": "(top)",
+      "allergens": [],
+      "type": "autres"
+    },{
+      "uuid": "65cee288c5d4",
+      "name": "Framboises surgelées",
+      "originalQuantity": 1,
+      "originalUnit": "kg",
+      "normalizedQuantity": 1000,
+      "normalizedUnit": "gr.",
+      "comment": "(top)",
+      "allergens": [],
+      "type": "legumes"
+    },{
+      "uuid": "6bm4lq",
+      "name": "huile de coco",
+      "originalQuantity": 190,
+      "originalUnit": "gr.",
+      "normalizedQuantity": 190,
+      "normalizedUnit": "gr.",
+      "comment": "(base)",
+      "allergens": [],
+      "type": "lof"
+    },{
+      "uuid": "h6thsp",
+      "name": "Speculoos",
+      "originalQuantity": 500,
+      "originalUnit": "gr.",
+      "normalizedQuantity": 500,
+      "normalizedUnit": "gr.",
+      "comment": "(base)",
+      "allergens": ["Gluten","Soja"],
+      "type": "sucres"
+    }],
+  "preparation": "- Égoutter les noix de cajou trempées la veille\n- Les mixer au bras mixeur, puis mixer avec tous les autres ingrédients \"crème\"\n- Verser la crème sur la base durcie. Mettre au frigo au moins 1h.\n- Pendant ce temps, préparer le top : faire chauffer les framboises surgelées avec l'eau, le sucre, le jus de citron. Mixer au mixeur et filtrer. Refaire chauffer avec l'agar agar (delayé à froid dans un peu d'eau) jusqu'à ébullition. Laisser refroidir puis verser sur la crème et remettre au frais (au moins 1h)\n\n3 étapes différentes avec un peu de temps pour que ça fige au frigo entre chaque, puis encore un peu d'attente pour que le dessus fige. Du coup, c'est bien de s'y prendre à l'avance !",
+  "prepAlt": [],
+  "permissionWrite": [],
+  "publishDate": "2025-09-08T11:24:00Z"
+}

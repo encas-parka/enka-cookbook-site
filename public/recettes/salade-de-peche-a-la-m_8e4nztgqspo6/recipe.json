@@ -1,0 +1,52 @@
+
+{
+  "uuid": "8e4nztgqspo6",
+  "slug": "salade-de-peche-a-la-m_8e4nztgqspo6",
+  "title": "Salade De Peche a La Menthe",
+  "draft": false,
+  "typeR": "dessert",
+  "categories": ["Salade"],
+  "regime": null,
+  "cuisson": false,
+  "serveHot": false,
+  "plate": 100,
+  "quantite_desc": null,
+  "check": true,
+  "checkAlwaysOk": false,
+  "materiel": ["ramequins"],
+  "ingredients": [{
+      "uuid": "2j9y2v",
+      "name": "Menthe",
+      "originalQuantity": 1.5,
+      "originalUnit": "bottes",
+      "normalizedQuantity": 1.5,
+      "normalizedUnit": "bottes",
+      "comment": "",
+      "allergens": [],
+      "type": "epices"
+    },{
+      "uuid": "zo92gu",
+      "name": "Menthe glaciale",
+      "originalQuantity": 1.5,
+      "originalUnit": "bottes",
+      "normalizedQuantity": 1.5,
+      "normalizedUnit": "bottes",
+      "comment": "",
+      "allergens": [],
+      "type": "epices"
+    },{
+      "uuid": "n1vs7d",
+      "name": "Pêche",
+      "originalQuantity": 10,
+      "originalUnit": "kg",
+      "normalizedQuantity": 10000,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": [],
+      "type": "legumes"
+    }],
+  "preparation": "Il faut soit acheter des pêches bien mûres, soit qu'elles soient acheté quelques jours avant.\n\nSi on fait la salade la veille ça permet à la menthe de bien s'infuser dans les pêches et c'est meilleur.",
+  "prepAlt": null,
+  "permissionWrite": [],
+  "publishDate": "2024-06-18T00:10:00Z"
+}

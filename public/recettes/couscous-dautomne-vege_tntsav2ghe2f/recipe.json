@@ -1,0 +1,172 @@
+
+{
+  "uuid": "tntsav2ghe2f",
+  "slug": "couscous-dautomne-vege_tntsav2ghe2f",
+  "title": "Couscous D'automne Végétarien",
+  "draft": false,
+  "typeR": "plat",
+  "categories": ["Plat chaud"],
+  "regime": null,
+  "cuisson": true,
+  "serveHot": true,
+  "plate": 100,
+  "quantite_desc": "",
+  "check": false,
+  "checkAlwaysOk": null,
+  "materiel": [],
+  "ingredients": [{
+      "uuid": "9yf54l",
+      "name": "Raisin sec",
+      "originalQuantity": 1,
+      "originalUnit": "kg",
+      "normalizedQuantity": 1000,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": [],
+      "type": "legumes"
+    },{
+      "uuid": "xdkeh3",
+      "name": "Sauce tomate mutti",
+      "originalQuantity": 800,
+      "originalUnit": "gr.",
+      "normalizedQuantity": 800,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": [],
+      "type": "epices"
+    },{
+      "uuid": "c70jxb",
+      "name": "huile de tournesol",
+      "originalQuantity": 1,
+      "originalUnit": "l.",
+      "normalizedQuantity": 1000,
+      "normalizedUnit": "ml",
+      "comment": "",
+      "allergens": [],
+      "type": "lof"
+    },{
+      "uuid": "h3c8al",
+      "name": "huile d'olive",
+      "originalQuantity": 2,
+      "originalUnit": "l.",
+      "normalizedQuantity": 2000,
+      "normalizedUnit": "ml",
+      "comment": "",
+      "allergens": [],
+      "type": "lof"
+    },{
+      "uuid": "2juq3x",
+      "name": "Sel",
+      "originalQuantity": 100,
+      "originalUnit": "gr.",
+      "normalizedQuantity": 100,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": [],
+      "type": "epices"
+    },{
+      "uuid": "yx78ae",
+      "name": "Semoule moyenne (blé)",
+      "originalQuantity": 8,
+      "originalUnit": "kg",
+      "normalizedQuantity": 8000,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": ["Gluten"],
+      "type": "sec"
+    },{
+      "uuid": "2juq3x",
+      "name": "Sel",
+      "originalQuantity": 130,
+      "originalUnit": "gr.",
+      "normalizedQuantity": 130,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": [],
+      "type": "epices"
+    },{
+      "uuid": "u2m28w",
+      "name": "Ail",
+      "originalQuantity": 1,
+      "originalUnit": "tête·s",
+      "normalizedQuantity": 80,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": [],
+      "type": "legumes"
+    },{
+      "uuid": "rtavky",
+      "name": "Oignon",
+      "originalQuantity": 2.6,
+      "originalUnit": "kg",
+      "normalizedQuantity": 2600,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": [],
+      "type": "legumes"
+    },{
+      "uuid": "f5fy8w",
+      "name": "Navet",
+      "originalQuantity": 1.7,
+      "originalUnit": "kg",
+      "normalizedQuantity": 1700,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": [],
+      "type": "legumes"
+    },{
+      "uuid": "78fo97",
+      "name": "Céleri branche",
+      "originalQuantity": 900,
+      "originalUnit": "gr.",
+      "normalizedQuantity": 900,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": ["Céleri"],
+      "type": "legumes"
+    },{
+      "uuid": "oa85mx",
+      "name": "Courge",
+      "originalQuantity": 3.9,
+      "originalUnit": "kg",
+      "normalizedQuantity": 3900,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": [],
+      "type": "legumes"
+    },{
+      "uuid": "eouu0v",
+      "name": "Carotte",
+      "originalQuantity": 3.9,
+      "originalUnit": "kg",
+      "normalizedQuantity": 3900,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": [],
+      "type": "legumes"
+    },{
+      "uuid": "18dy4e",
+      "name": "Pomme de terre",
+      "originalQuantity": 7.7,
+      "originalUnit": "kg",
+      "normalizedQuantity": 7700,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": [],
+      "type": "legumes"
+    },{
+      "uuid": "6a8w8k",
+      "name": "Pois chiches",
+      "originalQuantity": 1.3,
+      "originalUnit": "kg",
+      "normalizedQuantity": 1300,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": [],
+      "type": "sec"
+    }],
+  "preparation": "\u003eFaire chauffer l'huile avec les épices : cumin, gingembre, paprika, curcuma, coriandre, clou de girofle, muscade, poivre\n\nÉmincer les oignons et faire suer dans l'huile chaude\n\nCouper les légumes grossièrement et les ajouter dans la casserole dans l'ordre : Pdt, courges, carottes, navet, celeri. Faire rissoler.\n\nRajouter la sauce tomate et les pois chiches\n\nCouvrir d'eau et laisser mijoter longtemps\n\n\u003ePour la semoule précuite, enduire la semoule d'huile et l'égrainer à la main (en la frottant délicatement avec ses deux mains)\n\nrajouter le sel et le cumin (21gr) et les raisins secs\n\nCouvrir d'eau avec légèrement plus d'eau que de semoule\n\nRecouvrir si possible d'un tissu ou torchon propre et poser un couvercle sur le récipient. Laisser réhydrater 10 minutes\n\nÉgrainer à nouveau avec l'aide d'une fourchette. Possible de transvaser dans un autre récipient pour être sûr·e de bien atteindre la semoule dans le fond",
+  "prepAlt": [],
+  "permissionWrite": [],
+  "publishDate": "2025-10-19T20:53:00Z"
+}

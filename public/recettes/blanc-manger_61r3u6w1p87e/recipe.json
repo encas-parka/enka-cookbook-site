@@ -1,0 +1,72 @@
+
+{
+  "uuid": "61r3u6w1p87e",
+  "slug": "blanc-manger_61r3u6w1p87e",
+  "title": "Blanc Manger",
+  "draft": false,
+  "typeR": "dessert",
+  "categories": ["Sucrée"],
+  "regime": ["vegan","sans-gluten"],
+  "cuisson": true,
+  "serveHot": false,
+  "plate": 100,
+  "quantite_desc": null,
+  "check": true,
+  "checkAlwaysOk": false,
+  "materiel": null,
+  "ingredients": [{
+      "uuid": "bnmw1o",
+      "name": "creme de coco",
+      "originalQuantity": 6.5,
+      "originalUnit": "l.",
+      "normalizedQuantity": 6500,
+      "normalizedUnit": "ml",
+      "comment": "",
+      "allergens": [],
+      "type": "lof"
+    },{
+      "uuid": "csxbg6",
+      "name": "lait d’amande",
+      "originalQuantity": 6.5,
+      "originalUnit": "l.",
+      "normalizedQuantity": 6500,
+      "normalizedUnit": "ml",
+      "comment": "",
+      "allergens": [],
+      "type": "lof"
+    },{
+      "uuid": "n85gmi",
+      "name": "sucre de canne (blond)",
+      "originalQuantity": 2.5,
+      "originalUnit": "kg",
+      "normalizedQuantity": 2500,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": [],
+      "type": "sucres"
+    },{
+      "uuid": "ruhtax",
+      "name": "Agar-agar",
+      "originalQuantity": 50,
+      "originalUnit": "gr.",
+      "normalizedQuantity": 50,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": [],
+      "type": "autres"
+    },{
+      "uuid": "coa5dh",
+      "name": "Noix de coco râpée",
+      "originalQuantity": 1,
+      "originalUnit": "kg",
+      "normalizedQuantity": 1000,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": [],
+      "type": "sucres"
+    }],
+  "preparation": "fouetter tous les ingrédients\n\nfaire bouillir à petit feu tout en remuant pendant qq minute\n\nverser dans les ramequins\n\nlaisser refroidir à température ambiante pendant 30 mn\n\npuis mettre au frigo pendant minimum 3 h",
+  "prepAlt": null,
+  "permissionWrite": [],
+  "publishDate": "2025-06-17T09:33:00Z"
+}

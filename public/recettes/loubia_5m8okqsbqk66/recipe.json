@@ -1,0 +1,152 @@
+
+{
+  "uuid": "5m8okqsbqk66",
+  "slug": "loubia_5m8okqsbqk66",
+  "title": "Loubia",
+  "draft": false,
+  "typeR": "plat",
+  "categories": ["Plat chaud"],
+  "regime": ["vegetarien"],
+  "cuisson": true,
+  "serveHot": true,
+  "plate": 100,
+  "quantite_desc": null,
+  "check": true,
+  "checkAlwaysOk": false,
+  "materiel": null,
+  "ingredients": [{
+      "uuid": "omf24t",
+      "name": "Boulgour",
+      "originalQuantity": 5,
+      "originalUnit": "kg",
+      "normalizedQuantity": 5000,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": [],
+      "type": "sec"
+    },{
+      "uuid": "znpoor",
+      "name": "Haricots blancs",
+      "originalQuantity": 5,
+      "originalUnit": "kg",
+      "normalizedQuantity": 5000,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": [],
+      "type": "sec"
+    },{
+      "uuid": "u2m28w",
+      "name": "Ail",
+      "originalQuantity": 5,
+      "originalUnit": "tête·s",
+      "normalizedQuantity": 400,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": [],
+      "type": "legumes"
+    },{
+      "uuid": "eouu0v",
+      "name": "Carotte",
+      "originalQuantity": 15,
+      "originalUnit": "kg",
+      "normalizedQuantity": 15000,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": [],
+      "type": "legumes"
+    },{
+      "uuid": "rtavky",
+      "name": "Oignon",
+      "originalQuantity": 10,
+      "originalUnit": "kg",
+      "normalizedQuantity": 10000,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": [],
+      "type": "legumes"
+    },{
+      "uuid": "24z2y0",
+      "name": "Tomate (conserve)",
+      "originalQuantity": 5,
+      "originalUnit": "kg",
+      "normalizedQuantity": 5000,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": [],
+      "type": "legumes"
+    },{
+      "uuid": "h3c8al",
+      "name": "huile d'olive",
+      "originalQuantity": 1.5,
+      "originalUnit": "l.",
+      "normalizedQuantity": 1500,
+      "normalizedUnit": "ml",
+      "comment": "",
+      "allergens": [],
+      "type": "lof"
+    },{
+      "uuid": "hgfa4e",
+      "name": "Persil frais",
+      "originalQuantity": 5,
+      "originalUnit": "bottes",
+      "normalizedQuantity": 5,
+      "normalizedUnit": "bottes",
+      "comment": "",
+      "allergens": [],
+      "type": "epices"
+    },{
+      "uuid": "fetrpe",
+      "name": "Coriandre fraîche",
+      "originalQuantity": 5,
+      "originalUnit": "bottes",
+      "normalizedQuantity": 5,
+      "normalizedUnit": "bottes",
+      "comment": "a ajouter ciselée sur le top selon les envies ",
+      "allergens": [],
+      "type": "epices"
+    },{
+      "uuid": "bidsmu",
+      "name": "Paprika",
+      "originalQuantity": 70,
+      "originalUnit": "gr.",
+      "normalizedQuantity": 70,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": [],
+      "type": "epices"
+    },{
+      "uuid": "j84olg",
+      "name": "Feuille de laurier",
+      "originalQuantity": 8,
+      "originalUnit": "unité",
+      "normalizedQuantity": 8,
+      "normalizedUnit": "unité",
+      "comment": "",
+      "allergens": [],
+      "type": "epices"
+    },{
+      "uuid": "alwx6o",
+      "name": "Gingembre en poudre",
+      "originalQuantity": 100,
+      "originalUnit": "gr.",
+      "normalizedQuantity": 100,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": [],
+      "type": "epices"
+    },{
+      "uuid": "dc8855",
+      "name": "Cumin",
+      "originalQuantity": 70,
+      "originalUnit": "gr.",
+      "normalizedQuantity": 70,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": [],
+      "type": "epices"
+    }],
+  "preparation": "### Instructions\n\n1  La veille, faites tremper les haricots blancs secs dans un grand bol d'eau.\n\n2  Le lendemain, rincez les haricots et blanchissez-les dans un grand volume d'eau bouillante pendant 8 minutes.\n\n3 Égouttez et réservez.\n\n4  Faites revenir les oignons émincés, l'ail râpé avec l'huile d'olive dans une sauteuse.\n\n5  Ajoutez les épices\n\n6  Couper les carottes brunoise et ajoutez-les dans la sauteuse avec les aromates effeuillés.\n\n7  Versez la pulpe de tomate, l'eau, salez et poivrez.\n\n8  Quand la sauce commence à bouillonner, ajoutez vos haricots.\n\n9  Faites cuire à feu moyen / doux et à couvert pendant 1 heure 30 minutes.\n\n10  En fin de cuisson, ajustez l'assaisonnement.\n\n11 Faire le boulgour.",
+  "prepAlt": null,
+  "permissionWrite": [],
+  "publishDate": "2025-05-14T08:43:00Z"
+}

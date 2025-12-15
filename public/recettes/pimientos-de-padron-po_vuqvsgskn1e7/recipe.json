@@ -1,0 +1,62 @@
+
+{
+  "uuid": "vuqvsgskn1e7",
+  "slug": "pimientos-de-padron-po_vuqvsgskn1e7",
+  "title": "Pimientos De Padron - Poivron Vert À L'huile",
+  "draft": false,
+  "typeR": "entree",
+  "categories": ["Accompagnement"],
+  "regime": ["vegan"],
+  "cuisson": true,
+  "serveHot": true,
+  "plate": 100,
+  "quantite_desc": "un demi poivron long par personne",
+  "check": false,
+  "checkAlwaysOk": false,
+  "materiel": null,
+  "ingredients": [{
+      "uuid": "yeske5",
+      "name": "Olives noires entières",
+      "originalQuantity": 2.7,
+      "originalUnit": "kg",
+      "normalizedQuantity": 2700,
+      "normalizedUnit": "gr.",
+      "comment": "à mettre dans l'assiette à côté",
+      "allergens": [],
+      "type": "legumes"
+    },{
+      "uuid": "u2m28w",
+      "name": "Ail",
+      "originalQuantity": 4,
+      "originalUnit": "tête·s",
+      "normalizedQuantity": 320,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": [],
+      "type": "legumes"
+    },{
+      "uuid": "rniow3",
+      "name": "Poivron long vert (corne de boeuf)",
+      "originalQuantity": 10,
+      "originalUnit": "kg",
+      "normalizedQuantity": 10000,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": [],
+      "type": "legumes"
+    },{
+      "uuid": "atccqu",
+      "name": "Huile végétale",
+      "originalQuantity": 2,
+      "originalUnit": "l.",
+      "normalizedQuantity": 2000,
+      "normalizedUnit": "ml",
+      "comment": "",
+      "allergens": [],
+      "type": "lof"
+    }],
+  "preparation": "Laver les poivrons, les laisser entier.\n\nPeler et émincer grossièrement l'ail.\n\nPréchauffer le four à 200 °C.\n\nDans un gros bac mélanger les pimientos, l'ail avec l'huile et pas mal de sel. Verser dans plusieurs bac gastro et faire cuire au four, en remuant régulièrement. Changer les gastro d'étage. Faire cuire jusqu'à ce que les poivrons soient tendres et boursouflés.\n\nAu service couper le légume dans la longueur et servir une moitié par personne.\n\nPoser les olives noires dans l'assiette au service (env.5/pers)",
+  "prepAlt": null,
+  "permissionWrite": [],
+  "publishDate": "2024-06-16T16:11:00Z"
+}

@@ -1,0 +1,112 @@
+
+{
+  "uuid": "1ky8us1j1pp7",
+  "slug": "salade-de-pois-chiche_1ky8us1j1pp7",
+  "title": "Salade De Pois-Chiche",
+  "draft": false,
+  "typeR": "entree",
+  "categories": ["Salade"],
+  "regime": ["vegetarien","vegan","sans-gluten","sans-lactose"],
+  "cuisson": true,
+  "serveHot": false,
+  "plate": 190,
+  "quantite_desc": null,
+  "check": true,
+  "checkAlwaysOk": null,
+  "materiel": null,
+  "ingredients": [{
+      "uuid": "u2m28w",
+      "name": "Ail",
+      "originalQuantity": 8,
+      "originalUnit": "gousse·s",
+      "normalizedQuantity": 52,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": [],
+      "type": "legumes"
+    },{
+      "uuid": "rtavky",
+      "name": "Oignon",
+      "originalQuantity": 2,
+      "originalUnit": "kg",
+      "normalizedQuantity": 2000,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": [],
+      "type": "legumes"
+    },{
+      "uuid": "ibtbnq",
+      "name": "Tomate",
+      "originalQuantity": 8,
+      "originalUnit": "kg",
+      "normalizedQuantity": 8000,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": [],
+      "type": "legumes"
+    },{
+      "uuid": "9zozfk",
+      "name": "Courgette",
+      "originalQuantity": 7,
+      "originalUnit": "kg",
+      "normalizedQuantity": 7000,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": [],
+      "type": "legumes"
+    },{
+      "uuid": "0lpad0",
+      "name": "Poivron",
+      "originalQuantity": 5,
+      "originalUnit": "kg",
+      "normalizedQuantity": 5000,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": [],
+      "type": "legumes"
+    },{
+      "uuid": "6a8w8k",
+      "name": "Pois chiches",
+      "originalQuantity": 6,
+      "originalUnit": "kg",
+      "normalizedQuantity": 6000,
+      "normalizedUnit": "gr.",
+      "comment": "Pois-chiche secs",
+      "allergens": [],
+      "type": "sec"
+    },{
+      "uuid": "dc8855",
+      "name": "Cumin",
+      "originalQuantity": 1,
+      "originalUnit": "au goût",
+      "normalizedQuantity": 1,
+      "normalizedUnit": "au goût",
+      "comment": "",
+      "allergens": [],
+      "type": "epices"
+    },{
+      "uuid": "fetrpe",
+      "name": "Coriandre fraîche",
+      "originalQuantity": 2,
+      "originalUnit": "bottes",
+      "normalizedQuantity": 2,
+      "normalizedUnit": "bottes",
+      "comment": "1 ou 2 bottes de coriandre",
+      "allergens": [],
+      "type": "epices"
+    },{
+      "uuid": "e4mjd1",
+      "name": "Jus de citron",
+      "originalQuantity": 1,
+      "originalUnit": "l.",
+      "normalizedQuantity": 1000,
+      "normalizedUnit": "ml",
+      "comment": "",
+      "allergens": [],
+      "type": "sucres"
+    }],
+  "preparation": "Faire cuire les pois chiche mais qu'ils restent fermes\n\n* Couper tous les legumes en petits dés ( 1cm pas plus)\n* Faire revenir ensembles courgettes, poivrons, oignons, rajouter l'ail à la fin.\n* Une fois tous les ingrédients refroidis mélanger tout avec les tomates et l'herbe.",
+  "prepAlt": null,
+  "permissionWrite": [],
+  "publishDate": "2022-11-23T22:44:10.332Z"
+}

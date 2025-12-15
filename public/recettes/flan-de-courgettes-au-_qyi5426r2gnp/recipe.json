@@ -1,0 +1,62 @@
+
+{
+  "uuid": "qyi5426r2gnp",
+  "slug": "flan-de-courgettes-au-_qyi5426r2gnp",
+  "title": "Flan De Courgettes Au Basilic",
+  "draft": false,
+  "typeR": "entree",
+  "categories": ["Bouchées salées"],
+  "regime": ["vegetarien"],
+  "cuisson": true,
+  "serveHot": false,
+  "plate": 100,
+  "quantite_desc": null,
+  "check": true,
+  "checkAlwaysOk": false,
+  "materiel": null,
+  "ingredients": [{
+      "uuid": "9zozfk",
+      "name": "Courgette",
+      "originalQuantity": 11,
+      "originalUnit": "kg",
+      "normalizedQuantity": 11000,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": [],
+      "type": "legumes"
+    },{
+      "uuid": "zf3zf8",
+      "name": "Oeuf",
+      "originalQuantity": 40,
+      "originalUnit": "unité",
+      "normalizedQuantity": 40,
+      "normalizedUnit": "unité",
+      "comment": "",
+      "allergens": ["Oeuf"],
+      "type": "lof"
+    },{
+      "uuid": "k6zm70",
+      "name": "Crème florette",
+      "originalQuantity": 2.5,
+      "originalUnit": "l.",
+      "normalizedQuantity": 2500,
+      "normalizedUnit": "ml",
+      "comment": "",
+      "allergens": ["Produit laitier"],
+      "type": "frais"
+    },{
+      "uuid": "s8j4ff",
+      "name": "Basilic",
+      "originalQuantity": 5,
+      "originalUnit": "bottes",
+      "normalizedQuantity": 5,
+      "normalizedUnit": "bottes",
+      "comment": "",
+      "allergens": [],
+      "type": "epices"
+    }],
+  "preparation": "\nLavez les courgettes, les couper en lamelles. Plongez-les dans un\ngrand volume d'eau salée pendant 10min.\n\n\nPréchauffez le four à 180 degrés.\n\n\nDans un saladier, battez les oeufs avec la crème. Salez, poivrer.\n\n\nMixer les courgettes et le basilic puis ajouter-les à la\npréparation.\n\n\nVerser dans des moules individuels 30 min.",
+  "prepAlt": null,
+  "permissionWrite": [],
+  "publishDate": "2025-06-12T10:02:00Z"
+}

@@ -1,0 +1,2 @@
+# Redirection SPA pour l'application Svelte
+/a/*  /a/index.html  200

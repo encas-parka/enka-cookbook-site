@@ -1,0 +1,92 @@
+
+{
+  "uuid": "7c1hbo8nci50",
+  "slug": "houmous-de-betterave-a_7c1hbo8nci50",
+  "title": "Houmous De Betterave Aux Cranberries Et Balsamique",
+  "draft": false,
+  "typeR": "entree",
+  "categories": ["Accompagnement"],
+  "regime": ["vegetarien","vegan","sans-gluten","sans-lactose"],
+  "cuisson": false,
+  "serveHot": false,
+  "plate": 100,
+  "quantite_desc": null,
+  "check": true,
+  "checkAlwaysOk": false,
+  "materiel": null,
+  "ingredients": [{
+      "uuid": "u33083",
+      "name": "Tahin",
+      "originalQuantity": 160,
+      "originalUnit": "gr.",
+      "normalizedQuantity": 160,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": ["Sésame"],
+      "type": "autres"
+    },{
+      "uuid": "qemlqs",
+      "name": "Vinaigre balsamique",
+      "originalQuantity": 90,
+      "originalUnit": "ml",
+      "normalizedQuantity": 90,
+      "normalizedUnit": "ml",
+      "comment": "",
+      "allergens": ["Sulfites"],
+      "type": "epices"
+    },{
+      "uuid": "uja9ip",
+      "name": "Canneberge",
+      "originalQuantity": 100,
+      "originalUnit": "gr.",
+      "normalizedQuantity": 100,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": [],
+      "type": "legumes"
+    },{
+      "uuid": "u2m28w",
+      "name": "Ail",
+      "originalQuantity": 4,
+      "originalUnit": "unité",
+      "normalizedQuantity": 26,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": [],
+      "type": "legumes"
+    },{
+      "uuid": "i7psri",
+      "name": "Betterave cuite",
+      "originalQuantity": 400,
+      "originalUnit": "gr.",
+      "normalizedQuantity": 400,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": [],
+      "type": "legumes"
+    },{
+      "uuid": "h3c8al",
+      "name": "huile d'olive",
+      "originalQuantity": 120,
+      "originalUnit": "ml",
+      "normalizedQuantity": 120,
+      "normalizedUnit": "ml",
+      "comment": "",
+      "allergens": [],
+      "type": "lof"
+    },{
+      "uuid": "wwl5vn",
+      "name": "Pois chiche cuit",
+      "originalQuantity": 1.1,
+      "originalUnit": "kg",
+      "normalizedQuantity": 1100,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": [],
+      "type": "sec"
+    }],
+  "preparation": "Mettre tous les ingrédients dans un blender et mixer jusqu'à l'obtention d'une texture lisse. Saler. Ajouter un peu d'eau si nécessaire.",
+  "prepAlt": null,
+  "permissionWrite": [],
+  "publishDate": "2024-05-30T10:42:00Z"
+}

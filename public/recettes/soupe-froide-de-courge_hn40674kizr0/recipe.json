@@ -1,0 +1,72 @@
+
+{
+  "uuid": "hn40674kizr0",
+  "slug": "soupe-froide-de-courge_hn40674kizr0",
+  "title": "Soupe Froide De Courgettes À La Menthe",
+  "draft": false,
+  "typeR": "entree",
+  "categories": ["Soupe"],
+  "regime": ["vegan","sans-gluten","sans-lactose"],
+  "cuisson": true,
+  "serveHot": false,
+  "plate": 20,
+  "quantite_desc": "En comptant un verre de 15cL par personne.",
+  "check": true,
+  "checkAlwaysOk": false,
+  "materiel": null,
+  "ingredients": [{
+      "uuid": "9zozfk",
+      "name": "Courgette",
+      "originalQuantity": 2.5,
+      "originalUnit": "kg",
+      "normalizedQuantity": 2500,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": [],
+      "type": "legumes"
+    },{
+      "uuid": "ljzb7j",
+      "name": "Eau",
+      "originalQuantity": 200,
+      "originalUnit": "ml",
+      "normalizedQuantity": 200,
+      "normalizedUnit": "ml",
+      "comment": "",
+      "allergens": [],
+      "type": "autres"
+    },{
+      "uuid": "y16lzq",
+      "name": "Menthe fraîche",
+      "originalQuantity": 1,
+      "originalUnit": "bottes",
+      "normalizedQuantity": 1,
+      "normalizedUnit": "bottes",
+      "comment": "dont éventuellement qqs feuilles de menthe glaciale",
+      "allergens": [],
+      "type": "epices"
+    },{
+      "uuid": "h3c8al",
+      "name": "huile d'olive",
+      "originalQuantity": 40,
+      "originalUnit": "ml",
+      "normalizedQuantity": 40,
+      "normalizedUnit": "ml",
+      "comment": "",
+      "allergens": [],
+      "type": "lof"
+    },{
+      "uuid": "gpeob7",
+      "name": "Lait de soja",
+      "originalQuantity": 200,
+      "originalUnit": "ml",
+      "normalizedQuantity": 200,
+      "normalizedUnit": "ml",
+      "comment": "",
+      "allergens": ["Soja"],
+      "type": "lof"
+    }],
+  "preparation": "Le lendemain ajouter le lait de soja et mixer l'ensemble jusqu'à ce que la texture soit bien lisse (rajouter éventuelement un peu d'eau selon la texture souhaitée).  rectifier son assaisonement. Puis juste avant de servir verser dans les verres et mettre un filet d'huile d'olive et une feuille de menthe par verre.",
+  "prepAlt": null,
+  "permissionWrite": [],
+  "publishDate": "2025-06-19T15:32:00Z"
+}

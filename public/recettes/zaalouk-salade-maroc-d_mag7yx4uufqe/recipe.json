@@ -1,0 +1,92 @@
+
+{
+  "uuid": "mag7yx4uufqe",
+  "slug": "zaalouk-salade-maroc-d_mag7yx4uufqe",
+  "title": "Zaalouk (Salade Maroc D'aubergines)",
+  "draft": false,
+  "typeR": "entree",
+  "categories": ["Tartinade"],
+  "regime": ["vegetarien","vegan","sans-gluten","sans-lactose"],
+  "cuisson": true,
+  "serveHot": false,
+  "plate": 100,
+  "quantite_desc": null,
+  "check": true,
+  "checkAlwaysOk": false,
+  "materiel": null,
+  "ingredients": [{
+      "uuid": "5cg0yu",
+      "name": "Citron jaune",
+      "originalQuantity": 5,
+      "originalUnit": "unité",
+      "normalizedQuantity": 500,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": [],
+      "type": "legumes"
+    },{
+      "uuid": "u2m28w",
+      "name": "Ail",
+      "originalQuantity": 12.5,
+      "originalUnit": "gousse·s",
+      "normalizedQuantity": 81.25,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": [],
+      "type": "legumes"
+    },{
+      "uuid": "ibtbnq",
+      "name": "Tomate",
+      "originalQuantity": 12.5,
+      "originalUnit": "unité",
+      "normalizedQuantity": 1500,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": [],
+      "type": "legumes"
+    },{
+      "uuid": "7sk3a5",
+      "name": "Aubergine",
+      "originalQuantity": 8.5,
+      "originalUnit": "kg",
+      "normalizedQuantity": 8500,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": [],
+      "type": "legumes"
+    },{
+      "uuid": "h3c8al",
+      "name": "huile d'olive",
+      "originalQuantity": 2,
+      "originalUnit": "l.",
+      "normalizedQuantity": 2000,
+      "normalizedUnit": "ml",
+      "comment": "",
+      "allergens": [],
+      "type": "lof"
+    },{
+      "uuid": "bidsmu",
+      "name": "Paprika",
+      "originalQuantity": 40,
+      "originalUnit": "gr.",
+      "normalizedQuantity": 40,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": [],
+      "type": "epices"
+    },{
+      "uuid": "he3u48",
+      "name": "Cumin moulu",
+      "originalQuantity": 40,
+      "originalUnit": "gr.",
+      "normalizedQuantity": 40,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": [],
+      "type": "epices"
+    }],
+  "preparation": "* Ebouillanter les tomates pour les éplucher plus facilement\n* Couper les aubergines genre en 2 dans le sens de la longueur puis tranches sur chaque moitié, en gros pas trop petit\n* Faire cuire 5mn les aubergines à la vapeur\n* Faire revenir aubergines plus ail plus épices dans l'hyuile d'olive, 5mn\n* Ajouter les tomates, 5mn\n* Verser le jus des citrons\n* Saler, poivrer. Ajouter le persil et la coriandre hachés",
+  "prepAlt": null,
+  "permissionWrite": [],
+  "publishDate": "2024-05-20T14:06:00Z"
+}

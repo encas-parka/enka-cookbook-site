@@ -1,0 +1,569 @@
+
+
+<!doctype html>
+<html lang="fr-FR">
+  
+  
+
+  
+  
+
+  <script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><body>
+
+  
+  <div id="svelte-header"></div>
+
+
+    <div class="wrap container" role="document">
+      <div class="content">
+        
+
+
+
+
+<nav class="offcanvas offcanvas-md offcanvas-start docs-menu show p-3" tabindex="-1" id="sidebar" data-bs-keyboard="false" data-bs-backdrop="false" data-bs-scroll="true">
+
+  <nav class="nav flex-column mt-3">
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#sidebar" aria-label="Close" id="sidebar-close"></button>
+    
+      <ul class="nav nav-pills flex-column mb-auto ">
+        <li><a class="nav-link mb-2 fw-bolder " href="//localhost:1313/docs/decouvrir">Découvrir</a></li>
+      </ul>
+      
+    
+      <ul class="nav nav-pills flex-column mb-auto ">
+        <li><a class="nav-link mb-2 fw-bolder " href="//localhost:1313/docs/editer">Editer le site</a></li>
+      </ul>
+      
+        <ul class="nav nav-pills flex-column mb-auto ms-2">
+          
+            <li><a class="nav-link mb-2 " href="//localhost:1313/docs/editer/commencer">Commencer</a></li>
+            
+          
+            <li><a class="nav-link mb-2 active" href="//localhost:1313/docs/editer/recettes">Les Recettes</a></li>
+            <span class=" small">  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#aperçu-de-lédition-dune-recette">Aperçu de l&rsquo;édition d&rsquo;une recette</a></li>
+    <li><a href="#important">Important</a></li>
+    <li><a href="#les-ingrédients">Les ingrédients</a></li>
+    <li><a href="#préparation-à-faire-la-veille">Préparation à faire la veille</a></li>
+    <li><a href="#préparations-alternatives">Préparations alternatives</a></li>
+    <li><a href="#publier-une-recette-">Publier une recette ✨</a></li>
+  </ul>
+</nav></span>
+            
+          
+            <li><a class="nav-link mb-2 " href="//localhost:1313/docs/editer/evenements">Les Evénements / Menus</a></li>
+            
+          
+            <li><a class="nav-link mb-2 " href="//localhost:1313/docs/editer/autres">Ajouter ingrédients, catégories...</a></li>
+            
+          
+        </ul>
+      
+    
+      <ul class="nav nav-pills flex-column mb-auto ">
+        <li><a class="nav-link mb-2 fw-bolder " href="//localhost:1313/docs/web-tools">Autres Outils Web</a></li>
+      </ul>
+      
+    
+  </nav>
+</nav>
+
+
+<style>
+  nav#TableOfContents {
+    ul {
+      padding-left: .5rem;
+      list-style-type: none;
+    }
+    li {
+      border-left: #811721 solid 2px;
+      padding-left: 1rem;
+      margin-bottom: .3rem;
+    
+    }
+  }
+
+  @media (max-width: 768px) {
+    #sidebar {
+      display: none;
+    }
+  }
+
+ 
+.docs-menu {
+  width: 250px !important;
+  top: 54px !important;
+}
+
+
+ 
+@media (min-width: 768px) {
+  .container {
+    padding-left: 300px !important;
+    margin-left: inherit;
+  }
+  
+  #sidebarCollapse {
+    display: none;
+  }
+  
+  .offcanvas-backdrop {
+    display: none;
+  }
+
+  #sidebar-close {
+    display: none;
+  }
+
+  #sidebar {
+    display: block;
+  }
+}
+
+
+ 
+#sidebar.nav-link:hover {
+  background-color: #e5e5e5;
+}
+
+
+.bi {
+  vertical-align: -.125em;
+  pointer-events: none;
+  fill: currentColor;
+}
+.btn-toggle {
+  display: inline-flex;
+  align-items: center;
+  padding: .25rem .5rem;
+  font-weight: 600;
+  color: rgba(0, 0, 0, .65); 
+  background-color: transparent;
+  border: 0;
+}
+.btn-toggle:hover,
+.btn-toggle:focus {
+  color: rgba(0, 0, 0, .85);
+  background-color: #e5e5e5;
+}
+.btn-toggle::before {
+  width: 1.25em;
+  line-height: 0;
+  content: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='rgba%280,0,0,.5%29' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M5 14l6-6-6-6'/%3e%3c/svg%3e");
+  transition: transform .35s ease;
+  transform-origin: .5em 50%;
+}
+.btn-toggle[aria-expanded="true"] {
+  color: rgba(0, 0, 0, .85);
+}
+.btn-toggle[aria-expanded="true"]::before {
+  transform: rotate(90deg);
+}
+.btn-toggle-nav a {
+  display: inline-flex;
+  padding: .1875rem .5rem;
+  margin-top: .125rem;
+  margin-left: 1.25rem;
+  margin-bottom: .5rem;
+  text-decoration: none;
+}
+.btn-toggle-nav a:hover,
+.btn-toggle-nav a:focus {
+  background-color: #e5e5e5;
+}
+.btn-toggle-nav a.active {
+  font-weight: bold;
+}
+
+ 
+.offcanvas-header {
+  background-color: #0d6efd!important;
+  color: white!important;
+}
+</style>
+
+
+
+  <header>
+    <h1>Les Recettes</h1>
+  </header>
+  <article>
+
+
+
+  
+
+
+<script type="module">
+import PhotoSwipeLightbox from '/assets/photoswipe5/photoswipe-lightbox.esm.js';
+import PhotoSwipeDynamicCaption from '/assets/photoswipe-dynamic-caption-plugin/photoswipe-dynamic-caption-plugin.esm.js';
+
+const lightbox = new PhotoSwipeLightbox({
+  gallery: '#photoswipe5-gallery',
+  childSelector: '.pswp-gallery__item',
+  pswpModule: () => import('/assets/photoswipe5/photoswipe.esm.js'),
+  bgOpacity: 0.95,
+  loop: false,
+});
+lightbox.init();
+
+const captionPlugin = new PhotoSwipeDynamicCaption(lightbox, {
+  
+  type: 'auto',
+});
+</script>
+
+<link rel="stylesheet" href="../../../assets/photoswipe5/photoswipe.css">
+<link rel="stylesheet" href="../../../assets/photoswipe-dynamic-caption-plugin/photoswipe-dynamic-caption-plugin.css">
+
+<h2 id="aperçu-de-lédition-dune-recette">Aperçu de l&rsquo;édition d&rsquo;une recette</h2>
+<p><figure class="border border-1 border-gray-300 m-4 p-2 rounded"><img src="../../../docs/editer/recettes/img/recette-apercu.png"
+    alt="apercu recette" width="100%">
+</figure>
+ </figure></p>
+<p>Certains champs sont optionnels, d&rsquo;autres sont obligatoires. De nombreux champs servent à classer la recettes, et servent pour la recherche par filtres des recettes.</p>
+<h2 id="important">Important</h2>
+<div class="alert alert-warning clearfix" role="alert">
+<div class="float-start">
+  <svg aria-hidden="true" class="bi bi-exclamation-circle-fill hi-svg-inline alert-icon me-2" fill="currentColor" height="1em" viewBox="0 0 16 16" width="1em" xmlns="http://www.w3.org/2000/svg">
+  <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4m.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2"/>
+</svg>
+</div>
+  <div class="alert-content">
+<ul>
+<li>
+<p>Chaque recette doit avoir <strong>un nom unique</strong>. Si 2 recettes existent avec le même nom, une seule des 2 sera visible/accessible sur le site. Pensez-y si vous dupliquez des recettes.</p>
+</li>
+<li>
+<p><strong>Ne pas renommer une recette</strong>  ( ou un ingrédient / un &ldquo;materiel&rdquo;, une catégories&hellip; ) si vous ne venez pas de la créer. Si une recette est renommée, alors les pages événements qui l&rsquo;utilisaient n&rsquo;y auront plus accès, et seront buggées, et les recettes qui lui sont liées comme &ldquo;recettes alternatives&rdquo; auront des liens &ldquo;cassés&rdquo;. Au pire, dupliquez la recette et mettez lui le nom qui vous convient .</p>
+</li>
+<li>
+<p>Si vous n&rsquo;êtes pas l&rsquo;auteur•ices d&rsquo;une recette mais que vous pensez qu&rsquo;il faudrait modifier les ingrédients/proportions, à moins que vous ayez eu l&rsquo;avis de l&rsquo;auteur•ice, ne le faites pas. Utilisez plutôt l&rsquo;option &ldquo;Dupliquer&rdquo;, modifier le nom de la recette pour la distinguer de la précédente (en ajoutant par exemple &ldquo;version vachement mieux&rdquo; :), et modifiez ensuite ce que vous souhaitez.</p>
+</div>
+</li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+<div class="row align-items-center my-4 bg-light rounded">
+  
+  <div class="col col-12 col-lg-4">
+    <zoomable-image  class="p-2 m-2 shadow-sm rounded" >
+      <img src="../../../docs/editer/recettes/img/recette-erreur-1.jpg" alt="img/recette-erreur-1.jpg" class="img-fluid 
+      " style="max-height: " >
+    </zoomable-image>
+  </div>
+  
+  <div class="col col-12 col-lg-4">
+    <zoomable-image  class="p-2 m-2 shadow-sm rounded" >
+      <img src="../../../docs/editer/recettes/img/recette-erreur-2.jpg" alt="img/recette-erreur-2.jpg" class="img-fluid 
+      " style="max-height: " >
+    </zoomable-image>
+  </div>
+  
+  <div class="col col-12 col-lg-4">
+    <zoomable-image  class="p-2 m-2 shadow-sm rounded" >
+      <img src="../../../docs/editer/recettes/img/recette-erreur-3.jpg" alt="img/recette-erreur-3.jpg" class="img-fluid 
+      " style="max-height: " >
+    </zoomable-image>
+  </div>
+  
+  <div class="text-center text-muted small my-2">Une page &#39;événement&#39; avec erreur si une de ses recettes n&#39;existe plus (ou à été renommée)</div>
+</div>
+<h2 id="les-ingrédients">Les ingrédients</h2>
+<p>L&rsquo;ajout des ingrédients dans une recette se fait à partir de champs répartis dans différentes catégories d&rsquo;ingrédients (sec, fruits et légumes, etc.).</p>
+<p>Lorsque vous commencez à taper le nom d&rsquo;un ingrédient, une liste de propositions apparaît : les ingrédients sont pré-enregistrés afin de permettre certaines classifications automatiques (présence d’allergènes notamment).</p>
+<p>Vous pouvez rapidement vérifier la disponibilité d&rsquo;un ingrédient sur la page <a href="">ingrédients</a>. Lorsque vous souhaitez ajouter une recette avec des ingrédients peu commun, il peut être malin de se rendre sur cette page au préalable pour vérifier leur existence, et commencer par ajouter les ingrédients manquant au site  avant de rédiger la recette. L&rsquo;ajout d&rsquo;ingrédients au site se fait depuis l&rsquo;interface d&rsquo;édition (colonne de gauche &gt; ingrédients).</p>
+<p>
+
+<a
+  class="btn btn-outline-primary btn-sm m-1 py-0"
+  href="https://enka-cookbook.netlify.app/admin/#/collections/ingredients_index"
+  target="_blank" rel="external">
+→ ajouter un ingrédient
+</a>
+
+
+
+
+<a
+  class="btn btn-outline-primary btn-sm m-1 py-0"
+  href=""
+  >
+→ voir la liste d'ingrédients disponible
+</a>
+
+
+
+
+<a
+  class="btn btn-outline-primary btn-sm m-1 py-0"
+  href="../../../docs/editer/autres/"
+  >→ page de doc sur l'ajout d'ingrédients au site</a>
+
+</p>
+<p>Indiquer les quantités en Kg, gr., l.s ou mili-l.s est fortement encouragé, afin de permettre l&rsquo;élaboration des listes de courses lorsque les recettes sont utilisées par une page événement.</p>
+
+
+  
+
+
+<zoomable-image class="p-2 m-2">
+  <img class="img-fluid" src="img/1-ingredient.jpg" alt="ingredients" >  
+</zoomable-image>
+
+<ul>
+<li>Il est possible de &ldquo;réduire&rdquo; les ingrédients déjà ajoutés pour avoir une meilleure visibilité de l&rsquo;ensemble.</li>
+<li>Pour supprimer un ingrédient: cliquer sur la croix (&ldquo;fermer&rdquo;) en haut a droite du cadre de l&rsquo;ingrédient.
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+<div class="row align-items-center my-4 bg-light rounded">
+  
+  <div class="col col-12 col-lg-6">
+    <zoomable-image  class="p-2 m-2 shadow-sm rounded" >
+      <img src="../../../docs/editer/recettes/img/gallery-ing/1-reduce.jpg" alt="img/gallery-ing/1-reduce.jpg" class="img-fluid 
+      " style="max-height: " >
+    </zoomable-image>
+  </div>
+  
+  <div class="col col-12 col-lg-6">
+    <zoomable-image  class="p-2 m-2 shadow-sm rounded" >
+      <img src="../../../docs/editer/recettes/img/gallery-ing/2-reduce.jpg" alt="img/gallery-ing/2-reduce.jpg" class="img-fluid 
+      " style="max-height: " >
+    </zoomable-image>
+  </div>
+  
+  <div class="text-center text-muted small my-2"></div>
+</div></li>
+</ul>
+<h2 id="préparation-à-faire-la-veille">Préparation à faire la veille</h2>
+<p>Un champ est dédié aux préparations à effectuer la veille du service. Ce qui est inscrit dans ce champ sera mis en évidence dans la recette, afin d&rsquo;éviter les oublis.</p>
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+<div class="row align-items-center my-4 bg-light rounded">
+  
+  <div class="col col-12 col-lg-6">
+    <zoomable-image  class="p-2 m-2 shadow-sm rounded" >
+      <img src="../../../docs/editer/recettes/img/gallery-veille/1-prep-veille.jpg" alt="img/gallery-veille/1-prep-veille.jpg" class="img-fluid 
+      " style="max-height: 300px" >
+    </zoomable-image>
+  </div>
+  
+  <div class="col col-12 col-lg-6">
+    <zoomable-image  class="p-2 m-2 shadow-sm rounded" >
+      <img src="../../../docs/editer/recettes/img/gallery-veille/prep-veille-2.jpg" alt="img/gallery-veille/prep-veille-2.jpg" class="img-fluid 
+      " style="max-height: 300px" >
+    </zoomable-image>
+  </div>
+  
+  <div class="text-center text-muted small my-2"></div>
+</div>
+<h2 id="préparations-alternatives">Préparations alternatives</h2>
+<p>S&rsquo;il existe des préparations alternatives à celle que vous ajoutez (alternatives végés, ou avec d&rsquo;autres proportions, etc.), il existe un champ qui permet de les indiquer. Les recettes ainsi liées entre-elles auront alors un lien indiquant l&rsquo;alternative en bas de leur page.
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+<div class="row align-items-center my-4 bg-light rounded">
+  
+  <div class="col col-12 col-lg-6">
+    <zoomable-image  class="p-2 m-2 shadow-sm rounded" >
+      <img src="../../../docs/editer/recettes/img/gallery-prepalt/1-prepalt.jpg" alt="img/gallery-prepalt/1-prepalt.jpg" class="img-fluid 
+      " style="max-height: " >
+    </zoomable-image>
+  </div>
+  
+  <div class="col col-12 col-lg-6">
+    <zoomable-image  class="p-2 m-2 shadow-sm rounded" >
+      <img src="../../../docs/editer/recettes/img/gallery-prepalt/2-prepalt.jpg" alt="img/gallery-prepalt/2-prepalt.jpg" class="img-fluid 
+      " style="max-height: " >
+    </zoomable-image>
+  </div>
+  
+  <div class="text-center text-muted small my-2"></div>
+</div></p>
+<h2 id="publier-une-recette-">Publier une recette ✨</h2>
+
+
+  
+
+
+<div class="row mb-5 align-items-center  shadow-sm rounded py-3">
+  <div class="col-md-6">
+    <h4 class="title"></h4>
+    <p class="fs-6 p-01"><p>Pour publier une recette, il faut :</p>
+<!-- 1. Cliquer sur "Enregistrer" la recette
+2. Définir son "statut" à "Prêt" (par défaut elle est enregistré comme brouillon) -->
+<p>. Cliquer sur &ldquo;Publier&rdquo; → &ldquo;Publier maintenant&rdquo;</p>
+</p>
+    
+  </div>
+
+  <div id="image" class="col-md-6">
+    <zoomable-image><img src="img/save/save-simple.png" alt="Enregistrer une recette"></zoomable-image>
+  </div>
+
+</div>
+  
+
+
+
+
+<p><strong>Si vous modifier de nouveau une recette</strong>, afin de publier les modifications, il faut de nouveau faire : &ldquo;Enregistrer&rdquo;, puis re-changer le statut de &ldquo;brouillon&rdquo; à &ldquo;prêt&rdquo;, puis &ldquo;Publier&rdquo;&hellip;</p>
+<!-- ### Enregistrer / accéder aux "brouillons" & recettes non publiées
+
+Si vous avez enregistré une recette (ou un ingrédient, un matériel, etc.), mais que vous ne l'avez pas immédiatement publié, vous pouvez la retrouver plus tard dans l'onglet "Flux" de la barre de menu en haut de l'interface d'édition. De là, il vous sera possible de la modifier (en cliquant dessus), ou de la publier (en la glissant dans la colonne "Prêt", puis en cliquant sur publier. Voir les captures d'écran ci-dessous)
+
+
+
+## Publier plusieurs recettes
+
+<div class="alert alert-warning clearfix" role="alert">
+  
+    
+<div class="float-start">
+  <svg aria-hidden="true" class="bi bi-exclamation-circle-fill hi-svg-inline alert-icon me-2" fill="currentColor" height="1em" viewBox="0 0 16 16" width="1em" xmlns="http://www.w3.org/2000/svg">
+  <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4m.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2"/>
+</svg>
+</div>
+
+  <div class="alert-content">
+    
+Si vous ajoutez plusieurs recettes en une session, il est recommandé de ne pas les publier immédiatement (étape 3. ci-dessus).
+
+Il est préférable de créer d'abord toute les recettes, de les enregistrer, puis lorsque c'est fait, de les publier toutes d'un coup depuis l'onglet "Flux".
+
+Cela permet de limiter le nombre de "reconstruction" du site: l’hébergement gratuit de ce site implique une limitation du nombre mensuelle de publication autorisée, et si on est plein à modifier le site sur une même période, cette limite risque d'être atteinte et les nouvelles publications seront bloquées jusqu'au mois suivant (environs 600 modifications/publications par mois possibles)...
+
+
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+<div class="row align-items-center my-4 bg-light rounded">
+  
+  <div class="col col-12 col-lg-6">
+    <zoomable-image  class="p-2 m-2 shadow-sm rounded" >
+      <img src="../../../docs/editer/recettes/img/save/1-save-workflow.jpg" alt="img/save/1-save-workflow.jpg" class="img-fluid 
+      " style="max-height: " >
+    </zoomable-image>
+  </div>
+  
+  <div class="col col-12 col-lg-6">
+    <zoomable-image  class="p-2 m-2 shadow-sm rounded" >
+      <img src="../../../docs/editer/recettes/img/save/2-save-workflow.jpg" alt="img/save/2-save-workflow.jpg" class="img-fluid 
+      " style="max-height: " >
+    </zoomable-image>
+  </div>
+  
+  <div class="text-center text-muted small my-2">Publier plusieurs recettes en un session</div>
+</div> -->
+</article>
+
+
+  
+  
+  <script type="text/javascript" src="../../../js/zoomable-img.2e9fbfd9bcbe13961d1e8ad4142103a094df72a28d110197ca6ff5170ab2e9b3.js"></script>
+  
+
+
+      </div>
+    </div>
+
+  
+  <footer class="footer text-muted">
+  <div class="container">
+    <p class="m-0 text-center"></p>
+  </div>
+</footer>
+  
+<script type="module" src="../../../dist/assets/index.js"></script>
+
+
+<link rel="stylesheet" href="../../../dist/assets/index.css">
+
+
+<style>
+  body {
+    padding-top: 40px;  
+  }
+</style>
+
+
+
+
+  </body>
+</html>

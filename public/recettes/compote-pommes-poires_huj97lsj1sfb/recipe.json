@@ -1,0 +1,52 @@
+
+{
+  "uuid": "huj97lsj1sfb",
+  "slug": "compote-pommes-poires_huj97lsj1sfb",
+  "title": "Compote Pommes Poires",
+  "draft": false,
+  "typeR": "dessert",
+  "categories": ["Sucrée"],
+  "regime": null,
+  "cuisson": true,
+  "serveHot": false,
+  "plate": 100,
+  "quantite_desc": "",
+  "check": false,
+  "checkAlwaysOk": null,
+  "materiel": [],
+  "ingredients": [{
+      "uuid": "e4mjd1",
+      "name": "Jus de citron",
+      "originalQuantity": 100,
+      "originalUnit": "ml",
+      "normalizedQuantity": 100,
+      "normalizedUnit": "ml",
+      "comment": "",
+      "allergens": [],
+      "type": "sucres"
+    },{
+      "uuid": "b83ol6",
+      "name": "Poire",
+      "originalQuantity": 8,
+      "originalUnit": "kg",
+      "normalizedQuantity": 8000,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": [],
+      "type": "legumes"
+    },{
+      "uuid": "i6jlwm",
+      "name": "Pomme",
+      "originalQuantity": 8,
+      "originalUnit": "kg",
+      "normalizedQuantity": 8000,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": [],
+      "type": "legumes"
+    }],
+  "preparation": "Éplucher et les pommes et poires et retirer les pépins\n\nFaire cuire dans une casserole à couvert\n\nUne fois les fruits bien fondant, mixer avec un robot-plongeur\n\nPossibilité de rajouter du jus de citron\n\nRectifier l'assaisonnement avec du sucre, de la cannelle, ou encore de la vanille en fonction des goûts",
+  "prepAlt": [],
+  "permissionWrite": [],
+  "publishDate": "2025-10-19T19:18:00Z"
+}

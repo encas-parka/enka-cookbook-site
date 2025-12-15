@@ -1,0 +1,2020 @@
+{
+  "mainGroup_id": "rif-_5_53466307",
+  "hugoContentHash": "88d51fbc4f0a071255f236838df68ff4",
+  "name": "RIF 2025",
+  "allDates": ["2025-08-22T12:00:00.000Z","2025-08-23T12:00:00.000Z","2025-08-24T12:00:00.000Z"],
+  "ingredients": [
+    
+    
+    {
+        "ingredientHugoUuid": "vs2dfm",
+        "ingredientName": "Ail en poudre",
+        "productSemanticKey": "ail-en-pou_vs2dfm_rif-_5_53466307",
+        "ingType": "epices",
+        "totalAssiettes": 120,
+        "nbRecipes": 1,
+          "conversionRules": ["1 c. à café = 5 ml."],"totalNeededRaw": [{ "q":7.5, "u": "c. à café" }],
+        "byDate": {"2025-08-23T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 38, "u": "ml"}],
+          "recipes": [{
+                "r": "Substitut feta avec du tofu",
+                "q":7.5,
+                "u": "c. à café","qEq":38,
+                "uEq": "ml",
+                "a": 120
+              }],
+          "totalAssiettes": 120,
+          "recipeCount": 1
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "xkijt9",
+        "ingredientName": "Amandes effilées",
+        "productSemanticKey": "amandes-ef_xkijt9_rif-_5_53466307",
+        "ingType": "sec",
+        "totalAssiettes": 120,
+        "nbRecipes": 1,"totalNeededRaw": [{ "q":480, "u": "gr." }],
+        "byDate": {"2025-08-24T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 480, "u": "gr."}],
+          "recipes": [{
+                "r": "Salade de concombre à l'aneth et amandes effilées","qEq":480,
+                "uEq": "gr.",
+                "a": 120
+              }],
+          "totalAssiettes": 120,
+          "recipeCount": 1
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "nnkg8f",
+        "ingredientName": "Aneth aromatique",
+        "productSemanticKey": "aneth-arom_nnkg8f_rif-_5_53466307",
+        "ingType": "epices",
+        "totalAssiettes": 260,
+        "nbRecipes": 3,"totalNeededRaw": [{ "q":4.8, "u": "bottes" },{ "q":2, "u": "recette·s" }],
+        "byDate": {"2025-08-23T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 2, "u": "recette·s"}],
+          "recipes": [{
+                "r": "Kolokythokeftedes - galettes courgette feta grecques sans gluten - avec sauce blanche",
+                "q":1,
+                "u": "recette·s","qEq":1,
+                "uEq": "recette·s",
+                "a": 20
+              },{
+                "r": "Kolokythopita - tarte filo courgette feta grecque",
+                "q":1,
+                "u": "recette·s","qEq":1,
+                "uEq": "recette·s",
+                "a": 120
+              }],
+          "totalAssiettes": 140,
+          "recipeCount": 2
+        },"2025-08-24T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 4.8, "u": "bottes"}],
+          "recipes": [{
+                "r": "Salade de concombre à l'aneth et amandes effilées","qEq":4.8,
+                "uEq": "bottes",
+                "a": 120
+              }],
+          "totalAssiettes": 120,
+          "recipeCount": 1
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "7sk3a5",
+        "ingredientName": "Aubergine",
+        "productSemanticKey": "aubergine_7sk3a5_rif-_5_53466307",
+        "ingType": "legumes",
+        "totalAssiettes": 120,
+        "nbRecipes": 1,"pFrais": true,"totalNeededRaw": [{ "q":3000, "u": "gr." }],
+        "byDate": {"2025-08-22T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 3000, "u": "gr."}],
+          "recipes": [{
+                "r": "Steak végé - champignons aubergines noix avoine haricots rouges - version améliorée","qEq":3000,
+                "uEq": "gr.",
+                "a": 120
+              }],
+          "totalAssiettes": 120,
+          "recipeCount": 1
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "s8j4ff",
+        "ingredientName": "Basilic",
+        "productSemanticKey": "basilic_s8j4ff_rif-_5_53466307",
+        "ingType": "epices",
+        "totalAssiettes": 260,
+        "nbRecipes": 3,"pFrais": true,"totalNeededRaw": [{ "q":21.2, "u": "bottes" }],
+        "byDate": {"2025-08-23T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 16.2, "u": "bottes"}],
+          "recipes": [{
+                "r": "Kolokythokeftedes - galettes courgette feta grecques sans gluten - avec sauce blanche","qEq":1.2,
+                "uEq": "bottes",
+                "a": 20
+              },{
+                "r": "Kolokythopita - tarte filo courgette feta grecque","qEq":15,
+                "uEq": "bottes",
+                "a": 120
+              }],
+          "totalAssiettes": 140,
+          "recipeCount": 2
+        },"2025-08-24T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 5, "u": "bottes"}],
+          "recipes": [{
+                "r": "Melon basilic","qEq":5,
+                "uEq": "bottes",
+                "a": 120
+              }],
+          "totalAssiettes": 120,
+          "recipeCount": 1
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "7sc3uw",
+        "ingredientName": "Betterave rouge",
+        "productSemanticKey": "betterave-_7sc3uw_rif-_5_53466307",
+        "ingType": "legumes",
+        "totalAssiettes": 120,
+        "nbRecipes": 1,"pFrais": true,
+          "conversionRules": ["une betterave rouge = 250 gr."],"totalNeededRaw": [{ "q":30, "u": "unité" }],
+        "byDate": {"2025-08-23T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 7500, "u": "gr."}],
+          "recipes": [{
+                "r": "Salade carottes betteraves au cumin",
+                "q":30.0,
+                "u": "unité","qEq":7500,
+                "uEq": "gr.",
+                "a": 120
+              }],
+          "totalAssiettes": 120,
+          "recipeCount": 1
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "r6792n",
+        "ingredientName": "Cacao",
+        "productSemanticKey": "cacao_r6792n_rif-_5_53466307",
+        "ingType": "sucres",
+        "totalAssiettes": 120,
+        "nbRecipes": 2,
+          "conversionRules": ["1 c. à soupe = 15 ml."],"totalNeededRaw": [{ "q":10, "u": "c. à soupe" }],
+        "byDate": {"2025-08-23T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 150, "u": "ml"}],
+          "recipes": [{
+                "r": "Barres céréales gourmandes flocons d'avoine chocolat raisin sec sans gluten",
+                "q":1.7,
+                "u": "c. à soupe","qEq":25,
+                "uEq": "ml",
+                "a": 20
+              },{
+                "r": "Barres céréales gourmandes flocons d'avoine chocolat raisin sec",
+                "q":8.3,
+                "u": "c. à soupe","qEq":125,
+                "uEq": "ml",
+                "a": 100
+              }],
+          "totalAssiettes": 120,
+          "recipeCount": 2
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "eouu0v",
+        "ingredientName": "Carotte",
+        "productSemanticKey": "carotte_eouu0v_rif-_5_53466307",
+        "ingType": "legumes",
+        "totalAssiettes": 120,
+        "nbRecipes": 1,"pFrais": true,
+          "conversionRules": ["une carotte = 125 gr."],"totalNeededRaw": [{ "q":60, "u": "unité" }],
+        "byDate": {"2025-08-23T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 7500, "u": "gr."}],
+          "recipes": [{
+                "r": "Salade carottes betteraves au cumin",
+                "q":60.0,
+                "u": "unité","qEq":7500,
+                "uEq": "gr.",
+                "a": 120
+              }],
+          "totalAssiettes": 120,
+          "recipeCount": 1
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "v9qhs9",
+        "ingredientName": "Champignons",
+        "productSemanticKey": "champignon_v9qhs9_rif-_5_53466307",
+        "ingType": "legumes",
+        "totalAssiettes": 120,
+        "nbRecipes": 1,"pFrais": true,"totalNeededRaw": [{ "q":3000, "u": "gr." }],
+        "byDate": {"2025-08-22T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 3000, "u": "gr."}],
+          "recipes": [{
+                "r": "Steak végé - champignons aubergines noix avoine haricots rouges - version améliorée","qEq":3000,
+                "uEq": "gr.",
+                "a": 120
+              }],
+          "totalAssiettes": 120,
+          "recipeCount": 1
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "cr4kiz",
+        "ingredientName": "Chocolat noir",
+        "productSemanticKey": "chocolat-n_cr4kiz_rif-_5_53466307",
+        "ingType": "sucres",
+        "totalAssiettes": 120,
+        "nbRecipes": 2,"totalNeededRaw": [{ "q":1000, "u": "gr." }],
+        "byDate": {"2025-08-23T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 1000, "u": "gr."}],
+          "recipes": [{
+                "r": "Barres céréales gourmandes flocons d'avoine chocolat raisin sec sans gluten","qEq":167,
+                "uEq": "gr.",
+                "a": 20
+              },{
+                "r": "Barres céréales gourmandes flocons d'avoine chocolat raisin sec","qEq":833,
+                "uEq": "gr.",
+                "a": 100
+              }],
+          "totalAssiettes": 120,
+          "recipeCount": 2
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "1e3zhq",
+        "ingredientName": "Chocolat noir patissier 70p100",
+        "productSemanticKey": "chocolat-n_1e3zhq_rif-_5_53466307",
+        "ingType": "sucres",
+        "totalAssiettes": 120,
+        "nbRecipes": 1,"totalNeededRaw": [{ "q":3000, "u": "gr." }],
+        "byDate": {"2025-08-22T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 3000, "u": "gr."}],
+          "recipes": [{
+                "r": "Tapioca perlée au chocolat","qEq":3000,
+                "uEq": "gr.",
+                "a": 120
+              }],
+          "totalAssiettes": 120,
+          "recipeCount": 1
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "1koje1",
+        "ingredientName": "Citron vert",
+        "productSemanticKey": "citron-ver_1koje1_rif-_5_53466307",
+        "ingType": "legumes",
+        "totalAssiettes": 20,
+        "nbRecipes": 1,"pFrais": true,
+          "conversionRules": ["un citron = 100 gr."],"totalNeededRaw": [{ "q":2.5, "u": "unité" }],
+        "byDate": {"2025-08-23T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 250, "u": "gr."}],
+          "recipes": [{
+                "r": "Kolokythokeftedes - galettes courgette feta grecques sans gluten - avec sauce blanche",
+                "q":2.5,
+                "u": "unité","qEq":250,
+                "uEq": "gr.",
+                "a": 20
+              }],
+          "totalAssiettes": 20,
+          "recipeCount": 1
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "mck2wl",
+        "ingredientName": "Concentré de tomate",
+        "productSemanticKey": "concentre-_mck2wl_rif-_5_53466307",
+        "ingType": "epices",
+        "totalAssiettes": 120,
+        "nbRecipes": 1,
+          "conversionRules": ["1 c. à soupe = 15 ml."],"totalNeededRaw": [{ "q":40, "u": "c. à soupe" }],
+        "byDate": {"2025-08-22T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 600, "u": "ml"}],
+          "recipes": [{
+                "r": "Steak végé - champignons aubergines noix avoine haricots rouges - version améliorée",
+                "q":40.0,
+                "u": "c. à soupe","qEq":600,
+                "uEq": "ml",
+                "a": 120
+              }],
+          "totalAssiettes": 120,
+          "recipeCount": 1
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "l5p1a5",
+        "ingredientName": "Concombre",
+        "productSemanticKey": "concombre_l5p1a5_rif-_5_53466307",
+        "ingType": "legumes",
+        "totalAssiettes": 120,
+        "nbRecipes": 1,"pFrais": true,"totalNeededRaw": [{ "q":6000, "u": "gr." }],
+        "byDate": {"2025-08-24T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 6000, "u": "gr."}],
+          "recipes": [{
+                "r": "Salade de concombre à l'aneth et amandes effilées",
+                "q":6.0,
+                "u": "Kg","qEq":6000,
+                "uEq": "gr.",
+                "a": 120
+              }],
+          "totalAssiettes": 120,
+          "recipeCount": 1
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "kp0srn",
+        "ingredientName": "corn flakes",
+        "productSemanticKey": "corn-flake_kp0srn_rif-_5_53466307",
+        "ingType": "sec",
+        "totalAssiettes": 120,
+        "nbRecipes": 1,"totalNeededRaw": [{ "q":600, "u": "gr." }],
+        "byDate": {"2025-08-24T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 600, "u": "gr."}],
+          "recipes": [{
+                "r": "Tomates farcies et riz","qEq":600,
+                "uEq": "gr.",
+                "a": 120
+              }],
+          "totalAssiettes": 120,
+          "recipeCount": 1
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "9zozfk",
+        "ingredientName": "Courgette",
+        "productSemanticKey": "courgette_9zozfk_rif-_5_53466307",
+        "ingType": "legumes",
+        "totalAssiettes": 140,
+        "nbRecipes": 2,"pFrais": true,"totalNeededRaw": [{ "q":20812, "u": "gr." }],
+        "byDate": {"2025-08-23T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 20812, "u": "gr."}],
+          "recipes": [{
+                "r": "Kolokythokeftedes - galettes courgette feta grecques sans gluten - avec sauce blanche",
+                "q":2.8,
+                "u": "Kg","qEq":2812,
+                "uEq": "gr.",
+                "a": 20
+              },{
+                "r": "Kolokythopita - tarte filo courgette feta grecque",
+                "q":18.0,
+                "u": "Kg","qEq":18000,
+                "uEq": "gr.",
+                "a": 120
+              }],
+          "totalAssiettes": 140,
+          "recipeCount": 2
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "chfwwq",
+        "ingredientName": "Crème soja",
+        "productSemanticKey": "creme-soja_chfwwq_rif-_5_53466307",
+        "ingType": "lof",
+        "totalAssiettes": 60,
+        "nbRecipes": 1,"totalNeededRaw": [{ "q":1500, "u": "ml" }],
+        "byDate": {"2025-08-22T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 1500, "u": "ml"}],
+          "recipes": [{
+                "r": "Sauce verte",
+                "q":1.5,
+                "u": "l.","qEq":1500,
+                "uEq": "ml",
+                "a": 60
+              }],
+          "totalAssiettes": 60,
+          "recipeCount": 1
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "aq796v",
+        "ingredientName": "Crème Végétale",
+        "productSemanticKey": "creme-vege_aq796v_rif-_5_53466307",
+        "ingType": "lof",
+        "totalAssiettes": 120,
+        "nbRecipes": 1,"totalNeededRaw": [{ "q":720, "u": "ml" }],
+        "byDate": {"2025-08-22T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 720, "u": "ml"}],
+          "recipes": [{
+                "r": "Véganaise rapide","qEq":720,
+                "uEq": "ml",
+                "a": 120
+              }],
+          "totalAssiettes": 120,
+          "recipeCount": 1
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "l3esgp",
+        "ingredientName": "Cumin (graines)",
+        "productSemanticKey": "cumin-grai_l3esgp_rif-_5_53466307",
+        "ingType": "epices",
+        "totalAssiettes": 120,
+        "nbRecipes": 1,
+          "conversionRules": ["1 c. à soupe = 15 ml."],"totalNeededRaw": [{ "q":12, "u": "c. à soupe" }],
+        "byDate": {"2025-08-23T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 180, "u": "ml"}],
+          "recipes": [{
+                "r": "Salade carottes betteraves au cumin",
+                "q":12.0,
+                "u": "c. à soupe","qEq":180,
+                "uEq": "ml",
+                "a": 120
+              }],
+          "totalAssiettes": 120,
+          "recipeCount": 1
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "he3u48",
+        "ingredientName": "Cumin moulu",
+        "productSemanticKey": "cumin-moul_he3u48_rif-_5_53466307",
+        "ingType": "epices",
+        "totalAssiettes": 380,
+        "nbRecipes": 4,
+          "conversionRules": ["1 c. à soupe = 15 ml."],"totalNeededRaw": [{ "q":30, "u": "c. à soupe" },{ "q":3, "u": "recette·s" }],
+        "byDate": {"2025-08-22T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 1, "u": "recette·s"}],
+          "recipes": [{
+                "r": "Steak végé - champignons aubergines noix avoine haricots rouges - version améliorée",
+                "q":1,
+                "u": "recette·s","qEq":1,
+                "uEq": "recette·s",
+                "a": 120
+              }],
+          "totalAssiettes": 120,
+          "recipeCount": 1
+        },"2025-08-23T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 2, "u": "recette·s"}],
+          "recipes": [{
+                "r": "Kolokythokeftedes - galettes courgette feta grecques sans gluten - avec sauce blanche",
+                "q":1,
+                "u": "recette·s","qEq":1,
+                "uEq": "recette·s",
+                "a": 20
+              },{
+                "r": "Kolokythopita - tarte filo courgette feta grecque",
+                "q":1,
+                "u": "recette·s","qEq":1,
+                "uEq": "recette·s",
+                "a": 120
+              }],
+          "totalAssiettes": 140,
+          "recipeCount": 2
+        },"2025-08-24T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 450, "u": "ml"}],
+          "recipes": [{
+                "r": "Tomates farcies et riz",
+                "q":30.0,
+                "u": "c. à soupe","qEq":450,
+                "uEq": "ml",
+                "a": 120
+              }],
+          "totalAssiettes": 120,
+          "recipeCount": 1
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "ljzb7j",
+        "ingredientName": "Eau",
+        "productSemanticKey": "eau_ljzb7j_rif-_5_53466307",
+        "ingType": "autres",
+        "totalAssiettes": 360,
+        "nbRecipes": 4,"totalNeededRaw": [{ "q":2440, "u": "ml" }],
+        "byDate": {"2025-08-22T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 1440, "u": "ml"}],
+          "recipes": [{
+                "r": "Vinaigrette",
+                "q":0.2,
+                "u": "l.","qEq":240,
+                "uEq": "ml",
+                "a": 120
+              },{
+                "r": "Steak végé - champignons aubergines noix avoine haricots rouges - version améliorée","qEq":1200,
+                "uEq": "ml",
+                "a": 120
+              }],
+          "totalAssiettes": 240,
+          "recipeCount": 2
+        },"2025-08-23T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 1000, "u": "ml"}],
+          "recipes": [{
+                "r": "Barres céréales gourmandes flocons d'avoine chocolat raisin sec sans gluten","qEq":167,
+                "uEq": "ml",
+                "a": 20
+              },{
+                "r": "Barres céréales gourmandes flocons d'avoine chocolat raisin sec","qEq":833,
+                "uEq": "ml",
+                "a": 100
+              }],
+          "totalAssiettes": 120,
+          "recipeCount": 2
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "2av6w8",
+        "ingredientName": "Farine de blé",
+        "productSemanticKey": "farine-de-_2av6w8_rif-_5_53466307",
+        "ingType": "lof",
+        "totalAssiettes": 100,
+        "nbRecipes": 1,"totalNeededRaw": [{ "q":333, "u": "gr." }],
+        "byDate": {"2025-08-23T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 333, "u": "gr."}],
+          "recipes": [{
+                "r": "Barres céréales gourmandes flocons d'avoine chocolat raisin sec","qEq":333,
+                "uEq": "gr.",
+                "a": 100
+              }],
+          "totalAssiettes": 100,
+          "recipeCount": 1
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "z8uiyd",
+        "ingredientName": "Farine de maïs",
+        "productSemanticKey": "farine-de-_z8uiyd_rif-_5_53466307",
+        "ingType": "lof",
+        "totalAssiettes": 40,
+        "nbRecipes": 2,"totalNeededRaw": [{ "q":233, "u": "gr." }],
+        "byDate": {"2025-08-23T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 233, "u": "gr."}],
+          "recipes": [{
+                "r": "Kolokythokeftedes - galettes courgette feta grecques sans gluten - avec sauce blanche","qEq":200,
+                "uEq": "gr.",
+                "a": 20
+              },{
+                "r": "Barres céréales gourmandes flocons d'avoine chocolat raisin sec sans gluten","qEq":33,
+                "uEq": "gr.",
+                "a": 20
+              }],
+          "totalAssiettes": 40,
+          "recipeCount": 2
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "oygozr",
+        "ingredientName": "Farine de riz",
+        "productSemanticKey": "farine-de-_oygozr_rif-_5_53466307",
+        "ingType": "lof",
+        "totalAssiettes": 40,
+        "nbRecipes": 2,"totalNeededRaw": [{ "q":233, "u": "gr." }],
+        "byDate": {"2025-08-23T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 233, "u": "gr."}],
+          "recipes": [{
+                "r": "Kolokythokeftedes - galettes courgette feta grecques sans gluten - avec sauce blanche","qEq":200,
+                "uEq": "gr.",
+                "a": 20
+              },{
+                "r": "Barres céréales gourmandes flocons d'avoine chocolat raisin sec sans gluten","qEq":33,
+                "uEq": "gr.",
+                "a": 20
+              }],
+          "totalAssiettes": 40,
+          "recipeCount": 2
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "m5dxyo",
+        "ingredientName": "Feta",
+        "productSemanticKey": "feta_m5dxyo_rif-_5_53466307",
+        "ingType": "frais",
+        "totalAssiettes": 140,
+        "nbRecipes": 2,"pFrais": true,"totalNeededRaw": [{ "q":6750, "u": "gr." }],
+        "byDate": {"2025-08-23T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 6750, "u": "gr."}],
+          "recipes": [{
+                "r": "Kolokythokeftedes - galettes courgette feta grecques sans gluten - avec sauce blanche","qEq":750,
+                "uEq": "gr.",
+                "a": 20
+              },{
+                "r": "Kolokythopita - tarte filo courgette feta grecque","qEq":6000,
+                "uEq": "gr.",
+                "a": 120
+              }],
+          "totalAssiettes": 140,
+          "recipeCount": 2
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "tjrhvg",
+        "ingredientName": "Fleur de sel",
+        "productSemanticKey": "fleur-de-s_tjrhvg_rif-_5_53466307",
+        "ingType": "epices",
+        "totalAssiettes": 120,
+        "nbRecipes": 1,
+          "conversionRules": ["1 c. à soupe = 15 ml."],"totalNeededRaw": [{ "q":12, "u": "c. à soupe" }],
+        "byDate": {"2025-08-23T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 180, "u": "ml"}],
+          "recipes": [{
+                "r": "Tomates et poivrons grillés au four",
+                "q":12.0,
+                "u": "c. à soupe","qEq":180,
+                "uEq": "ml",
+                "a": 120
+              }],
+          "totalAssiettes": 120,
+          "recipeCount": 1
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "ovewgk",
+        "ingredientName": "Flocons d'avoine",
+        "productSemanticKey": "flocons-da_ovewgk_rif-_5_53466307",
+        "ingType": "sec",
+        "totalAssiettes": 220,
+        "nbRecipes": 2,"totalNeededRaw": [{ "q":2625, "u": "gr." }],
+        "byDate": {"2025-08-23T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 1125, "u": "gr."}],
+          "recipes": [{
+                "r": "Barres céréales gourmandes flocons d'avoine chocolat raisin sec","qEq":1125,
+                "uEq": "gr.",
+                "a": 100
+              }],
+          "totalAssiettes": 100,
+          "recipeCount": 1
+        },"2025-08-24T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 1500, "u": "gr."}],
+          "recipes": [{
+                "r": "Tomates farcies et riz","qEq":1500,
+                "uEq": "gr.",
+                "a": 120
+              }],
+          "totalAssiettes": 120,
+          "recipeCount": 1
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "02w66c",
+        "ingredientName": "Flocons d'avoine sans gluten",
+        "productSemanticKey": "flocons-da_02w66c_rif-_5_53466307",
+        "ingType": "sec",
+        "totalAssiettes": 140,
+        "nbRecipes": 2,"totalNeededRaw": [{ "q":3225, "u": "gr." }],
+        "byDate": {"2025-08-22T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 3000, "u": "gr."}],
+          "recipes": [{
+                "r": "Steak végé - champignons aubergines noix avoine haricots rouges - version améliorée","qEq":3000,
+                "uEq": "gr.",
+                "a": 120
+              }],
+          "totalAssiettes": 120,
+          "recipeCount": 1
+        },"2025-08-23T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 225, "u": "gr."}],
+          "recipes": [{
+                "r": "Barres céréales gourmandes flocons d'avoine chocolat raisin sec sans gluten","qEq":225,
+                "uEq": "gr.",
+                "a": 20
+              }],
+          "totalAssiettes": 20,
+          "recipeCount": 1
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "4vxqlr",
+        "ingredientName": "Graine de tournesol",
+        "productSemanticKey": "graine-de-_4vxqlr_rif-_5_53466307",
+        "ingType": "sec",
+        "totalAssiettes": 60,
+        "nbRecipes": 1,"totalNeededRaw": [{ "q":1, "u": "recette·s" }],
+        "byDate": {"2025-08-22T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 1, "u": "recette·s"}],
+          "recipes": [{
+                "r": "Sauce verte",
+                "q":1,
+                "u": "recette·s","qEq":1,
+                "uEq": "recette·s",
+                "a": 60
+              }],
+          "totalAssiettes": 60,
+          "recipeCount": 1
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "iwdje3",
+        "ingredientName": "Haricots rouges cuits",
+        "productSemanticKey": "haricots-r_iwdje3_rif-_5_53466307",
+        "ingType": "sec",
+        "totalAssiettes": 120,
+        "nbRecipes": 1,"totalNeededRaw": [{ "q":3000, "u": "gr." }],
+        "byDate": {"2025-08-22T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 3000, "u": "gr."}],
+          "recipes": [{
+                "r": "Steak végé - champignons aubergines noix avoine haricots rouges - version améliorée","qEq":3000,
+                "uEq": "gr.",
+                "a": 120
+              }],
+          "totalAssiettes": 120,
+          "recipeCount": 1
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "h3c8al",
+        "ingredientName": "huile d'olive",
+        "productSemanticKey": "huile-doli_h3c8al_rif-_5_53466307",
+        "ingType": "lof",
+        "totalAssiettes": 360,
+        "nbRecipes": 3,"totalNeededRaw": [{ "q":7470, "u": "ml" }],
+        "byDate": {"2025-08-23T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 3000, "u": "ml"}],
+          "recipes": [{
+                "r": "Tomates et poivrons grillés au four",
+                "q":3.0,
+                "u": "l.","qEq":3000,
+                "uEq": "ml",
+                "a": 120
+              }],
+          "totalAssiettes": 120,
+          "recipeCount": 1
+        },"2025-08-24T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 4470, "u": "ml"}],
+          "recipes": [{
+                "r": "Salade de concombre à l'aneth et amandes effilées","qEq":720,
+                "uEq": "ml",
+                "a": 120
+              },{
+                "r": "Tomates farcies et riz",
+                "q":3.8,
+                "u": "l.","qEq":3750,
+                "uEq": "ml",
+                "a": 120
+              }],
+          "totalAssiettes": 240,
+          "recipeCount": 2
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "6bm4lq",
+        "ingredientName": "huile de coco",
+        "productSemanticKey": "huile-de-c_6bm4lq_rif-_5_53466307",
+        "ingType": "lof",
+        "totalAssiettes": 120,
+        "nbRecipes": 2,"totalNeededRaw": [{ "q":900, "u": "gr." }],
+        "byDate": {"2025-08-23T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 900, "u": "gr."}],
+          "recipes": [{
+                "r": "Barres céréales gourmandes flocons d'avoine chocolat raisin sec sans gluten","qEq":150,
+                "uEq": "gr.",
+                "a": 20
+              },{
+                "r": "Barres céréales gourmandes flocons d'avoine chocolat raisin sec","qEq":750,
+                "uEq": "gr.",
+                "a": 100
+              }],
+          "totalAssiettes": 120,
+          "recipeCount": 2
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "c70jxb",
+        "ingredientName": "huile de tournesol",
+        "productSemanticKey": "huile-de-t_c70jxb_rif-_5_53466307",
+        "ingType": "lof",
+        "totalAssiettes": 620,
+        "nbRecipes": 6,
+          "conversionRules": ["1 c. à soupe = 15 ml."],"totalNeededRaw": [{ "q":1890, "u": "ml" },{ "q":85, "u": "c. à soupe" },{ "q":2, "u": "recette·s" }],
+        "byDate": {"2025-08-22T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 1440, "u": "ml"},{"q": 2, "u": "recette·s"}],
+          "recipes": [{
+                "r": "Véganaise rapide",
+                "q":1.4,
+                "u": "l.","qEq":1440,
+                "uEq": "ml",
+                "a": 120
+              },{
+                "r": "Pommes de terres au four style potatoes",
+                "q":1,
+                "u": "recette·s","qEq":1,
+                "uEq": "recette·s",
+                "a": 120
+              },{
+                "r": "Oignons confits",
+                "q":1,
+                "u": "recette·s","qEq":1,
+                "uEq": "recette·s",
+                "a": 120
+              }],
+          "totalAssiettes": 360,
+          "recipeCount": 3
+        },"2025-08-23T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 1725, "u": "ml"}],
+          "recipes": [{
+                "r": "Substitut feta avec du tofu","qEq":450,
+                "uEq": "ml",
+                "a": 120
+              },{
+                "r": "Kolokythokeftedes - galettes courgette feta grecques sans gluten - avec sauce blanche",
+                "q":10.0,
+                "u": "c. à soupe","qEq":150,
+                "uEq": "ml",
+                "a": 20
+              },{
+                "r": "Kolokythopita - tarte filo courgette feta grecque",
+                "q":75.0,
+                "u": "c. à soupe","qEq":1125,
+                "uEq": "ml",
+                "a": 120
+              }],
+          "totalAssiettes": 260,
+          "recipeCount": 3
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "atccqu",
+        "ingredientName": "Huile végétale",
+        "productSemanticKey": "huile-vege_atccqu_rif-_5_53466307",
+        "ingType": "lof",
+        "totalAssiettes": 120,
+        "nbRecipes": 1,"totalNeededRaw": [{ "q":1800, "u": "ml" }],
+        "byDate": {"2025-08-22T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 1800, "u": "ml"}],
+          "recipes": [{
+                "r": "Vinaigrette",
+                "q":1.8,
+                "u": "l.","qEq":1800,
+                "uEq": "ml",
+                "a": 120
+              }],
+          "totalAssiettes": 120,
+          "recipeCount": 1
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "e4mjd1",
+        "ingredientName": "Jus de citron",
+        "productSemanticKey": "jus-de-cit_e4mjd1_rif-_5_53466307",
+        "ingType": "sucres",
+        "totalAssiettes": 300,
+        "nbRecipes": 3,"totalNeededRaw": [{ "q":2850, "u": "ml" }],
+        "byDate": {"2025-08-22T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 750, "u": "ml"}],
+          "recipes": [{
+                "r": "Sauce verte",
+                "q":0.8,
+                "u": "l.","qEq":750,
+                "uEq": "ml",
+                "a": 60
+              }],
+          "totalAssiettes": 60,
+          "recipeCount": 1
+        },"2025-08-23T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 2100, "u": "ml"}],
+          "recipes": [{
+                "r": "Salade carottes betteraves au cumin","qEq":1200,
+                "uEq": "ml",
+                "a": 120
+              },{
+                "r": "Substitut feta avec du tofu","qEq":900,
+                "uEq": "ml",
+                "a": 120
+              }],
+          "totalAssiettes": 240,
+          "recipeCount": 2
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "hzwesd",
+        "ingredientName": "Lait de riz",
+        "productSemanticKey": "lait-de-ri_hzwesd_rif-_5_53466307",
+        "ingType": "lof",
+        "totalAssiettes": 120,
+        "nbRecipes": 1,"totalNeededRaw": [{ "q":15000, "u": "ml" }],
+        "byDate": {"2025-08-22T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 15000, "u": "ml"}],
+          "recipes": [{
+                "r": "Tapioca perlée au chocolat",
+                "q":15.0,
+                "u": "l.","qEq":15000,
+                "uEq": "ml",
+                "a": 120
+              }],
+          "totalAssiettes": 120,
+          "recipeCount": 1
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "4be4ic",
+        "ingredientName": "Levure de bière",
+        "productSemanticKey": "levure-de-_4be4ic_rif-_5_53466307",
+        "ingType": "lof",
+        "totalAssiettes": 120,
+        "nbRecipes": 1,
+          "conversionRules": ["1 c. à soupe = 15 ml."],"totalNeededRaw": [{ "q":30, "u": "c. à soupe" }],
+        "byDate": {"2025-08-23T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 450, "u": "ml"}],
+          "recipes": [{
+                "r": "Substitut feta avec du tofu",
+                "q":30.0,
+                "u": "c. à soupe","qEq":450,
+                "uEq": "ml",
+                "a": 120
+              }],
+          "totalAssiettes": 120,
+          "recipeCount": 1
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "on84nb",
+        "ingredientName": "Melon",
+        "productSemanticKey": "melon_on84nb_rif-_5_53466307",
+        "ingType": "legumes",
+        "totalAssiettes": 120,
+        "nbRecipes": 1,"pFrais": true,"totalNeededRaw": [{ "q":20, "u": "unité" }],
+        "byDate": {"2025-08-24T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 20, "u": "unité"}],
+          "recipes": [{
+                "r": "Melon basilic","qEq":20,
+                "uEq": "unité",
+                "a": 120
+              }],
+          "totalAssiettes": 120,
+          "recipeCount": 1
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "y16lzq",
+        "ingredientName": "Menthe fraîche",
+        "productSemanticKey": "menthe-fra_y16lzq_rif-_5_53466307",
+        "ingType": "epices",
+        "totalAssiettes": 140,
+        "nbRecipes": 2,"pFrais": true,"totalNeededRaw": [{ "q":32.5, "u": "bottes" }],
+        "byDate": {"2025-08-23T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 32.5, "u": "bottes"}],
+          "recipes": [{
+                "r": "Kolokythokeftedes - galettes courgette feta grecques sans gluten - avec sauce blanche","qEq":2.5,
+                "uEq": "bottes",
+                "a": 20
+              },{
+                "r": "Kolokythopita - tarte filo courgette feta grecque","qEq":30,
+                "uEq": "bottes",
+                "a": 120
+              }],
+          "totalAssiettes": 140,
+          "recipeCount": 2
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "g0lph5",
+        "ingredientName": "Miel",
+        "productSemanticKey": "miel_g0lph5_rif-_5_53466307",
+        "ingType": "sucres",
+        "totalAssiettes": 20,
+        "nbRecipes": 1,
+          "conversionRules": ["1 c. à soupe = 15 ml."],"totalNeededRaw": [{ "q":2.5, "u": "c. à soupe" }],
+        "byDate": {"2025-08-23T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 38, "u": "ml"}],
+          "recipes": [{
+                "r": "Kolokythokeftedes - galettes courgette feta grecques sans gluten - avec sauce blanche",
+                "q":2.5,
+                "u": "c. à soupe","qEq":38,
+                "uEq": "ml",
+                "a": 20
+              }],
+          "totalAssiettes": 20,
+          "recipeCount": 1
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "k2uthk",
+        "ingredientName": "Miso blanc",
+        "productSemanticKey": "miso-blanc_k2uthk_rif-_5_53466307",
+        "ingType": "epices",
+        "totalAssiettes": 120,
+        "nbRecipes": 1,"totalNeededRaw": [{ "q":570, "u": "ml" }],
+        "byDate": {"2025-08-23T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 570, "u": "ml"}],
+          "recipes": [{
+                "r": "Substitut feta avec du tofu","qEq":570,
+                "uEq": "ml",
+                "a": 120
+              }],
+          "totalAssiettes": 120,
+          "recipeCount": 1
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "5c1b20",
+        "ingredientName": "Moutarde",
+        "productSemanticKey": "moutarde_5c1b20_rif-_5_53466307",
+        "ingType": "epices",
+        "totalAssiettes": 360,
+        "nbRecipes": 3,
+          "conversionRules": ["1 c. à soupe = 15 ml."],"totalNeededRaw": [{ "q":240, "u": "gr." },{ "q":180, "u": "ml" },{ "q":20, "u": "c. à soupe" }],
+        "byDate": {"2025-08-22T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 240, "u": "gr."},{"q": 480, "u": "ml"}],
+          "recipes": [{
+                "r": "Vinaigrette","qEq":240,
+                "uEq": "gr.",
+                "a": 120
+              },{
+                "r": "Véganaise rapide","qEq":180,
+                "uEq": "ml",
+                "a": 120
+              },{
+                "r": "Steak végé - champignons aubergines noix avoine haricots rouges - version améliorée",
+                "q":20.0,
+                "u": "c. à soupe","qEq":300,
+                "uEq": "ml",
+                "a": 120
+              }],
+          "totalAssiettes": 360,
+          "recipeCount": 3
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "usibcf",
+        "ingredientName": "Noix",
+        "productSemanticKey": "noix_usibcf_rif-_5_53466307",
+        "ingType": "sec",
+        "totalAssiettes": 120,
+        "nbRecipes": 1,"totalNeededRaw": [{ "q":600, "u": "gr." }],
+        "byDate": {"2025-08-22T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 600, "u": "gr."}],
+          "recipes": [{
+                "r": "Steak végé - champignons aubergines noix avoine haricots rouges - version améliorée","qEq":600,
+                "uEq": "gr.",
+                "a": 120
+              }],
+          "totalAssiettes": 120,
+          "recipeCount": 1
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "zf3zf8",
+        "ingredientName": "Oeuf",
+        "productSemanticKey": "oeuf_zf3zf8_rif-_5_53466307",
+        "ingType": "lof",
+        "totalAssiettes": 140,
+        "nbRecipes": 2,"totalNeededRaw": [{ "q":67.5, "u": "unité" }],
+        "byDate": {"2025-08-23T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 67.5, "u": "unité"}],
+          "recipes": [{
+                "r": "Kolokythokeftedes - galettes courgette feta grecques sans gluten - avec sauce blanche","qEq":7.5,
+                "uEq": "unité",
+                "a": 20
+              },{
+                "r": "Kolokythopita - tarte filo courgette feta grecque","qEq":60,
+                "uEq": "unité",
+                "a": 120
+              }],
+          "totalAssiettes": 140,
+          "recipeCount": 2
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "rtavky",
+        "ingredientName": "Oignon",
+        "productSemanticKey": "oignon_rtavky_rif-_5_53466307",
+        "ingType": "legumes",
+        "totalAssiettes": 360,
+        "nbRecipes": 3,"pFrais": true,
+          "conversionRules": ["un oignon = 120 gr."],"totalNeededRaw": [{ "q":9000, "u": "gr." },{ "q":15, "u": "unité" }],
+        "byDate": {"2025-08-22T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 9000, "u": "gr."}],
+          "recipes": [{
+                "r": "Oignons confits",
+                "q":6.0,
+                "u": "Kg","qEq":6000,
+                "uEq": "gr.",
+                "a": 120
+              },{
+                "r": "Steak végé - champignons aubergines noix avoine haricots rouges - version améliorée","qEq":3000,
+                "uEq": "gr.",
+                "a": 120
+              }],
+          "totalAssiettes": 240,
+          "recipeCount": 2
+        },"2025-08-24T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 1800, "u": "gr."}],
+          "recipes": [{
+                "r": "Tomates farcies et riz",
+                "q":15.0,
+                "u": "unité","qEq":1800,
+                "uEq": "gr.",
+                "a": 120
+              }],
+          "totalAssiettes": 120,
+          "recipeCount": 1
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "fkftyb",
+        "ingredientName": "Origan",
+        "productSemanticKey": "origan_fkftyb_rif-_5_53466307",
+        "ingType": "epices",
+        "totalAssiettes": 240,
+        "nbRecipes": 2,
+          "conversionRules": ["1 c. à café = 5 ml."],"totalNeededRaw": [{ "q":15, "u": "c. à café" },{ "q":1, "u": "recette·s" }],
+        "byDate": {"2025-08-22T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 1, "u": "recette·s"}],
+          "recipes": [{
+                "r": "Steak végé - champignons aubergines noix avoine haricots rouges - version améliorée",
+                "q":1,
+                "u": "recette·s","qEq":1,
+                "uEq": "recette·s",
+                "a": 120
+              }],
+          "totalAssiettes": 120,
+          "recipeCount": 1
+        },"2025-08-23T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 75, "u": "ml"}],
+          "recipes": [{
+                "r": "Substitut feta avec du tofu",
+                "q":15.0,
+                "u": "c. à café","qEq":75,
+                "uEq": "ml",
+                "a": 120
+              }],
+          "totalAssiettes": 120,
+          "recipeCount": 1
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "bidsmu",
+        "ingredientName": "Paprika",
+        "productSemanticKey": "paprika_bidsmu_rif-_5_53466307",
+        "ingType": "epices",
+        "totalAssiettes": 20,
+        "nbRecipes": 1,"totalNeededRaw": [{ "q":1, "u": "recette·s" }],
+        "byDate": {"2025-08-23T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 1, "u": "recette·s"}],
+          "recipes": [{
+                "r": "Kolokythokeftedes - galettes courgette feta grecques sans gluten - avec sauce blanche",
+                "q":1,
+                "u": "recette·s","qEq":1,
+                "uEq": "recette·s",
+                "a": 20
+              }],
+          "totalAssiettes": 20,
+          "recipeCount": 1
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "ique18",
+        "ingredientName": "Paprika fumé",
+        "productSemanticKey": "paprika-fu_ique18_rif-_5_53466307",
+        "ingType": "epices",
+        "totalAssiettes": 360,
+        "nbRecipes": 3,
+          "conversionRules": ["1 c. à soupe = 15 ml."],"totalNeededRaw": [{ "q":12, "u": "c. à soupe" },{ "q":2, "u": "recette·s" }],
+        "byDate": {"2025-08-22T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 2, "u": "recette·s"}],
+          "recipes": [{
+                "r": "Pommes de terres au four style potatoes",
+                "q":1,
+                "u": "recette·s","qEq":1,
+                "uEq": "recette·s",
+                "a": 120
+              },{
+                "r": "Steak végé - champignons aubergines noix avoine haricots rouges - version améliorée",
+                "q":1,
+                "u": "recette·s","qEq":1,
+                "uEq": "recette·s",
+                "a": 120
+              }],
+          "totalAssiettes": 240,
+          "recipeCount": 2
+        },"2025-08-23T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 180, "u": "ml"}],
+          "recipes": [{
+                "r": "Tomates et poivrons grillés au four",
+                "q":12.0,
+                "u": "c. à soupe","qEq":180,
+                "uEq": "ml",
+                "a": 120
+              }],
+          "totalAssiettes": 120,
+          "recipeCount": 1
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "x6je0g",
+        "ingredientName": "Pate filo (1 feuille)",
+        "productSemanticKey": "pate-filo-_x6je0g_rif-_5_53466307",
+        "ingType": "autres",
+        "totalAssiettes": 120,
+        "nbRecipes": 1,"pFrais": true,"totalNeededRaw": [{ "q":150, "u": "unité" }],
+        "byDate": {"2025-08-23T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 150, "u": "unité"}],
+          "recipes": [{
+                "r": "Kolokythopita - tarte filo courgette feta grecque","qEq":150,
+                "uEq": "unité",
+                "a": 120
+              }],
+          "totalAssiettes": 120,
+          "recipeCount": 1
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "hgfa4e",
+        "ingredientName": "Persil frais",
+        "productSemanticKey": "persil-fra_hgfa4e_rif-_5_53466307",
+        "ingType": "epices",
+        "totalAssiettes": 300,
+        "nbRecipes": 3,"pFrais": true,"totalNeededRaw": [{ "q":33, "u": "bottes" }],
+        "byDate": {"2025-08-22T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 12, "u": "bottes"}],
+          "recipes": [{
+                "r": "Sauce verte","qEq":12,
+                "uEq": "bottes",
+                "a": 60
+              }],
+          "totalAssiettes": 60,
+          "recipeCount": 1
+        },"2025-08-23T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 6, "u": "bottes"}],
+          "recipes": [{
+                "r": "Salade carottes betteraves au cumin","qEq":6,
+                "uEq": "bottes",
+                "a": 120
+              }],
+          "totalAssiettes": 120,
+          "recipeCount": 1
+        },"2025-08-24T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 15, "u": "bottes"}],
+          "recipes": [{
+                "r": "Tomates farcies et riz","qEq":15,
+                "uEq": "bottes",
+                "a": 120
+              }],
+          "totalAssiettes": 120,
+          "recipeCount": 1
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "2pps90",
+        "ingredientName": "Poivre",
+        "productSemanticKey": "poivre_2pps90_rif-_5_53466307",
+        "ingType": "epices",
+        "totalAssiettes": 680,
+        "nbRecipes": 7,
+          "conversionRules": ["1 c. à café = 5 ml."],"totalNeededRaw": [{ "q":4, "u": "gr." },{ "q":7.5, "u": "c. à café" },{ "q":5, "u": "recette·s" }],
+        "byDate": {"2025-08-22T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 4, "u": "gr."},{"q": 2, "u": "recette·s"}],
+          "recipes": [{
+                "r": "Vinaigrette","qEq":4,
+                "uEq": "gr.",
+                "a": 120
+              },{
+                "r": "Sauce verte",
+                "q":1,
+                "u": "recette·s","qEq":1,
+                "uEq": "recette·s",
+                "a": 60
+              },{
+                "r": "Pommes de terres au four style potatoes",
+                "q":1,
+                "u": "recette·s","qEq":1,
+                "uEq": "recette·s",
+                "a": 120
+              }],
+          "totalAssiettes": 300,
+          "recipeCount": 3
+        },"2025-08-23T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 38, "u": "ml"},{"q": 2, "u": "recette·s"}],
+          "recipes": [{
+                "r": "Substitut feta avec du tofu",
+                "q":7.5,
+                "u": "c. à café","qEq":38,
+                "uEq": "ml",
+                "a": 120
+              },{
+                "r": "Kolokythokeftedes - galettes courgette feta grecques sans gluten - avec sauce blanche",
+                "q":1,
+                "u": "recette·s","qEq":1,
+                "uEq": "recette·s",
+                "a": 20
+              },{
+                "r": "Kolokythopita - tarte filo courgette feta grecque",
+                "q":1,
+                "u": "recette·s","qEq":1,
+                "uEq": "recette·s",
+                "a": 120
+              }],
+          "totalAssiettes": 260,
+          "recipeCount": 3
+        },"2025-08-24T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 1, "u": "recette·s"}],
+          "recipes": [{
+                "r": "Salade de concombre à l'aneth et amandes effilées",
+                "q":1,
+                "u": "recette·s","qEq":1,
+                "uEq": "recette·s",
+                "a": 120
+              }],
+          "totalAssiettes": 120,
+          "recipeCount": 1
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "3bg9f8",
+        "ingredientName": "poivre moulue",
+        "productSemanticKey": "poivre-mou_3bg9f8_rif-_5_53466307",
+        "ingType": "epices",
+        "totalAssiettes": 120,
+        "nbRecipes": 1,
+          "conversionRules": ["1 c. à café = 5 ml."],"totalNeededRaw": [{ "q":15, "u": "c. à café" }],
+        "byDate": {"2025-08-24T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 75, "u": "ml"}],
+          "recipes": [{
+                "r": "Tomates farcies et riz",
+                "q":15.0,
+                "u": "c. à café","qEq":75,
+                "uEq": "ml",
+                "a": 120
+              }],
+          "totalAssiettes": 120,
+          "recipeCount": 1
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "rgt7s4",
+        "ingredientName": "Poivre noir moulu",
+        "productSemanticKey": "poivre-noi_rgt7s4_rif-_5_53466307",
+        "ingType": "epices",
+        "totalAssiettes": 240,
+        "nbRecipes": 2,
+          "conversionRules": ["1 pincée = 0,4 gr.","1 c. à café = 5 ml."],"totalNeededRaw": [{ "q":12, "u": "c. à café" },{ "q":15, "u": "pincées" }],
+        "byDate": {"2025-08-22T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 6, "u": "gr."}],
+          "recipes": [{
+                "r": "Tapioca perlée au chocolat",
+                "q":15.0,
+                "u": "pincées","qEq":6,
+                "uEq": "gr.",
+                "a": 120
+              }],
+          "totalAssiettes": 120,
+          "recipeCount": 1
+        },"2025-08-23T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 60, "u": "ml"}],
+          "recipes": [{
+                "r": "Tomates et poivrons grillés au four",
+                "q":12.0,
+                "u": "c. à café","qEq":60,
+                "uEq": "ml",
+                "a": 120
+              }],
+          "totalAssiettes": 120,
+          "recipeCount": 1
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "0lpad0",
+        "ingredientName": "Poivron",
+        "productSemanticKey": "poivron_0lpad0_rif-_5_53466307",
+        "ingType": "legumes",
+        "totalAssiettes": 120,
+        "nbRecipes": 1,"pFrais": true,"totalNeededRaw": [{ "q":60, "u": "unité" }],
+        "byDate": {"2025-08-23T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 60, "u": "unité"}],
+          "recipes": [{
+                "r": "Tomates et poivrons grillés au four","qEq":60,
+                "uEq": "unité",
+                "a": 120
+              }],
+          "totalAssiettes": 120,
+          "recipeCount": 1
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "18dy4e",
+        "ingredientName": "Pomme de terre",
+        "productSemanticKey": "pomme-de-t_18dy4e_rif-_5_53466307",
+        "ingType": "legumes",
+        "totalAssiettes": 120,
+        "nbRecipes": 1,"pFrais": true,"totalNeededRaw": [{ "q":30000, "u": "gr." }],
+        "byDate": {"2025-08-22T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 30000, "u": "gr."}],
+          "recipes": [{
+                "r": "Pommes de terres au four style potatoes",
+                "q":30.0,
+                "u": "Kg","qEq":30000,
+                "uEq": "gr.",
+                "a": 120
+              }],
+          "totalAssiettes": 120,
+          "recipeCount": 1
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "9yf54l",
+        "ingredientName": "Raisin sec",
+        "productSemanticKey": "raisin-sec_9yf54l_rif-_5_53466307",
+        "ingType": "legumes",
+        "totalAssiettes": 120,
+        "nbRecipes": 2,"totalNeededRaw": [{ "q":500, "u": "gr." }],
+        "byDate": {"2025-08-23T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 500, "u": "gr."}],
+          "recipes": [{
+                "r": "Barres céréales gourmandes flocons d'avoine chocolat raisin sec sans gluten","qEq":83,
+                "uEq": "gr.",
+                "a": 20
+              },{
+                "r": "Barres céréales gourmandes flocons d'avoine chocolat raisin sec","qEq":417,
+                "uEq": "gr.",
+                "a": 100
+              }],
+          "totalAssiettes": 120,
+          "recipeCount": 2
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "0uelc3",
+        "ingredientName": "Riz",
+        "productSemanticKey": "riz_0uelc3_rif-_5_53466307",
+        "ingType": "sec",
+        "totalAssiettes": 120,
+        "nbRecipes": 1,"totalNeededRaw": [{ "q":5596, "u": "gr." }],
+        "byDate": {"2025-08-24T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 5596, "u": "gr."}],
+          "recipes": [{
+                "r": "Tomates farcies et riz","qEq":5596,
+                "uEq": "gr.",
+                "a": 120
+              }],
+          "totalAssiettes": 120,
+          "recipeCount": 1
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "6z655r",
+        "ingredientName": "Romarin",
+        "productSemanticKey": "romarin_6z655r_rif-_5_53466307",
+        "ingType": "epices",
+        "totalAssiettes": 120,
+        "nbRecipes": 1,
+          "conversionRules": ["1 c. à soupe = 15 ml."],"totalNeededRaw": [{ "q":24, "u": "c. à soupe" }],
+        "byDate": {"2025-08-23T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 360, "u": "ml"}],
+          "recipes": [{
+                "r": "Tomates et poivrons grillés au four",
+                "q":24.0,
+                "u": "c. à soupe","qEq":360,
+                "uEq": "ml",
+                "a": 120
+              }],
+          "totalAssiettes": 120,
+          "recipeCount": 1
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "cg3wgm",
+        "ingredientName": "Salade verte (chêne)",
+        "productSemanticKey": "salade-ver_cg3wgm_rif-_5_53466307",
+        "ingType": "legumes",
+        "totalAssiettes": 120,
+        "nbRecipes": 1,"pFrais": true,"totalNeededRaw": [{ "q":12, "u": "unité" }],
+        "byDate": {"2025-08-22T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 12, "u": "unité"}],
+          "recipes": [{
+                "r": "Salade verte","qEq":12,
+                "uEq": "unité",
+                "a": 120
+              }],
+          "totalAssiettes": 120,
+          "recipeCount": 1
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "jjrwlj",
+        "ingredientName": "Sauce soja",
+        "productSemanticKey": "sauce-soja_jjrwlj_rif-_5_53466307",
+        "ingType": "epices",
+        "totalAssiettes": 120,
+        "nbRecipes": 1,"totalNeededRaw": [{ "q":800, "u": "ml" }],
+        "byDate": {"2025-08-22T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 800, "u": "ml"}],
+          "recipes": [{
+                "r": "Steak végé - champignons aubergines noix avoine haricots rouges - version améliorée","qEq":800,
+                "uEq": "ml",
+                "a": 120
+              }],
+          "totalAssiettes": 120,
+          "recipeCount": 1
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "2juq3x",
+        "ingredientName": "Sel",
+        "productSemanticKey": "sel_2juq3x_rif-_5_53466307",
+        "ingType": "epices",
+        "totalAssiettes": 1040,
+        "nbRecipes": 11,
+          "conversionRules": ["1 c. à soupe de sel = 15 gr.","1 c. à café de sel = 5 gr.","1 pincée = 0,4 gr."],"totalNeededRaw": [{ "q":4, "u": "gr." },{ "q":7.5, "u": "c. à café" },{ "q":16.2, "u": "c. à soupe" },{ "q":10, "u": "pincées" },{ "q":5, "u": "recette·s" }],
+        "byDate": {"2025-08-22T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 22, "u": "gr."},{"q": 2, "u": "recette·s"}],
+          "recipes": [{
+                "r": "Vinaigrette","qEq":4,
+                "uEq": "gr.",
+                "a": 120
+              },{
+                "r": "Sauce verte",
+                "q":1,
+                "u": "recette·s","qEq":1,
+                "uEq": "recette·s",
+                "a": 60
+              },{
+                "r": "Véganaise rapide",
+                "q":1.2,
+                "u": "c. à soupe","qEq":18,
+                "uEq": "gr.",
+                "a": 120
+              },{
+                "r": "Pommes de terres au four style potatoes",
+                "q":1,
+                "u": "recette·s","qEq":1,
+                "uEq": "recette·s",
+                "a": 120
+              }],
+          "totalAssiettes": 420,
+          "recipeCount": 4
+        },"2025-08-23T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 42, "u": "gr."},{"q": 2, "u": "recette·s"}],
+          "recipes": [{
+                "r": "Substitut feta avec du tofu",
+                "q":7.5,
+                "u": "c. à café","qEq":38,
+                "uEq": "gr.",
+                "a": 120
+              },{
+                "r": "Kolokythokeftedes - galettes courgette feta grecques sans gluten - avec sauce blanche",
+                "q":1,
+                "u": "recette·s","qEq":1,
+                "uEq": "recette·s",
+                "a": 20
+              },{
+                "r": "Kolokythopita - tarte filo courgette feta grecque",
+                "q":1,
+                "u": "recette·s","qEq":1,
+                "uEq": "recette·s",
+                "a": 120
+              },{
+                "r": "Barres céréales gourmandes flocons d'avoine chocolat raisin sec sans gluten",
+                "q":1.7,
+                "u": "pincées","qEq":1,
+                "uEq": "gr.",
+                "a": 20
+              },{
+                "r": "Barres céréales gourmandes flocons d'avoine chocolat raisin sec",
+                "q":8.3,
+                "u": "pincées","qEq":3,
+                "uEq": "gr.",
+                "a": 100
+              }],
+          "totalAssiettes": 380,
+          "recipeCount": 5
+        },"2025-08-24T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 225, "u": "gr."},{"q": 1, "u": "recette·s"}],
+          "recipes": [{
+                "r": "Salade de concombre à l'aneth et amandes effilées",
+                "q":1,
+                "u": "recette·s","qEq":1,
+                "uEq": "recette·s",
+                "a": 120
+              },{
+                "r": "Tomates farcies et riz",
+                "q":15.0,
+                "u": "c. à soupe","qEq":225,
+                "uEq": "gr.",
+                "a": 120
+              }],
+          "totalAssiettes": 240,
+          "recipeCount": 2
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "zkmmgt",
+        "ingredientName": "Sirop d'érable ",
+        "productSemanticKey": "sirop-dera_zkmmgt_rif-_5_53466307",
+        "ingType": "sucres",
+        "totalAssiettes": 120,
+        "nbRecipes": 1,
+          "conversionRules": ["1 c. à soupe = 15 ml."],"totalNeededRaw": [{ "q":24, "u": "c. à soupe" }],
+        "byDate": {"2025-08-23T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 360, "u": "ml"}],
+          "recipes": [{
+                "r": "Salade carottes betteraves au cumin",
+                "q":24.0,
+                "u": "c. à soupe","qEq":360,
+                "uEq": "ml",
+                "a": 120
+              }],
+          "totalAssiettes": 120,
+          "recipeCount": 1
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "oxiae3",
+        "ingredientName": "Sriracha",
+        "productSemanticKey": "sriracha_oxiae3_rif-_5_53466307",
+        "ingType": "epices",
+        "totalAssiettes": 120,
+        "nbRecipes": 1,
+          "conversionRules": ["1 c. à soupe = 15 ml."],"totalNeededRaw": [{ "q":20, "u": "c. à soupe" }],
+        "byDate": {"2025-08-22T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 300, "u": "ml"}],
+          "recipes": [{
+                "r": "Steak végé - champignons aubergines noix avoine haricots rouges - version améliorée",
+                "q":20.0,
+                "u": "c. à soupe","qEq":300,
+                "uEq": "ml",
+                "a": 120
+              }],
+          "totalAssiettes": 120,
+          "recipeCount": 1
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "u9z2he",
+        "ingredientName": "Sucre en poudre",
+        "productSemanticKey": "sucre-en-p_u9z2he_rif-_5_53466307",
+        "ingType": "sucres",
+        "totalAssiettes": 240,
+        "nbRecipes": 3,
+          "conversionRules": ["1 c. à soupe de sucre = 15 gr."],"totalNeededRaw": [{ "q":1700, "u": "gr." },{ "q":6, "u": "c. à soupe" }],
+        "byDate": {"2025-08-22T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 90, "u": "gr."}],
+          "recipes": [{
+                "r": "Oignons confits",
+                "q":6.0,
+                "u": "c. à soupe","qEq":90,
+                "uEq": "gr.",
+                "a": 120
+              }],
+          "totalAssiettes": 120,
+          "recipeCount": 1
+        },"2025-08-23T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 1700, "u": "gr."}],
+          "recipes": [{
+                "r": "Barres céréales gourmandes flocons d'avoine chocolat raisin sec sans gluten","qEq":283,
+                "uEq": "gr.",
+                "a": 20
+              },{
+                "r": "Barres céréales gourmandes flocons d'avoine chocolat raisin sec","qEq":1417,
+                "uEq": "gr.",
+                "a": 100
+              }],
+          "totalAssiettes": 120,
+          "recipeCount": 2
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "u33083",
+        "ingredientName": "Tahin",
+        "productSemanticKey": "tahin_u33083_rif-_5_53466307",
+        "ingType": "autres",
+        "totalAssiettes": 120,
+        "nbRecipes": 2,"totalNeededRaw": [{ "q":500, "u": "gr." }],
+        "byDate": {"2025-08-23T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 500, "u": "gr."}],
+          "recipes": [{
+                "r": "Barres céréales gourmandes flocons d'avoine chocolat raisin sec sans gluten","qEq":83,
+                "uEq": "gr.",
+                "a": 20
+              },{
+                "r": "Barres céréales gourmandes flocons d'avoine chocolat raisin sec","qEq":417,
+                "uEq": "gr.",
+                "a": 100
+              }],
+          "totalAssiettes": 120,
+          "recipeCount": 2
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "mkttuh",
+        "ingredientName": "Tapioca perlée",
+        "productSemanticKey": "tapioca-pe_mkttuh_rif-_5_53466307",
+        "ingType": "sec",
+        "totalAssiettes": 120,
+        "nbRecipes": 1,"totalNeededRaw": [{ "q":1200, "u": "gr." }],
+        "byDate": {"2025-08-22T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 1200, "u": "gr."}],
+          "recipes": [{
+                "r": "Tapioca perlée au chocolat","qEq":1200,
+                "uEq": "gr.",
+                "a": 120
+              }],
+          "totalAssiettes": 120,
+          "recipeCount": 1
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "a16yd7",
+        "ingredientName": "Thym",
+        "productSemanticKey": "thym_a16yd7_rif-_5_53466307",
+        "ingType": "epices",
+        "totalAssiettes": 120,
+        "nbRecipes": 1,
+          "conversionRules": ["1 c. à soupe = 15 ml."],"totalNeededRaw": [{ "q":24, "u": "c. à soupe" }],
+        "byDate": {"2025-08-23T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 360, "u": "ml"}],
+          "recipes": [{
+                "r": "Tomates et poivrons grillés au four",
+                "q":24.0,
+                "u": "c. à soupe","qEq":360,
+                "uEq": "ml",
+                "a": 120
+              }],
+          "totalAssiettes": 120,
+          "recipeCount": 1
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "3ahcls",
+        "ingredientName": "Tofu ferme",
+        "productSemanticKey": "tofu-ferme_3ahcls_rif-_5_53466307",
+        "ingType": "frais",
+        "totalAssiettes": 120,
+        "nbRecipes": 1,"totalNeededRaw": [{ "q":6000, "u": "gr." }],
+        "byDate": {"2025-08-23T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 6000, "u": "gr."}],
+          "recipes": [{
+                "r": "Substitut feta avec du tofu","qEq":6000,
+                "uEq": "gr.",
+                "a": 120
+              }],
+          "totalAssiettes": 120,
+          "recipeCount": 1
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "xqb8f5",
+        "ingredientName": "Tofu soyeux",
+        "productSemanticKey": "tofu-soyeu_xqb8f5_rif-_5_53466307",
+        "ingType": "frais",
+        "totalAssiettes": 120,
+        "nbRecipes": 1,"pFrais": true,"totalNeededRaw": [{ "q":6000, "u": "gr." }],
+        "byDate": {"2025-08-24T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 6000, "u": "gr."}],
+          "recipes": [{
+                "r": "Tomates farcies et riz","qEq":6000,
+                "uEq": "gr.",
+                "a": 120
+              }],
+          "totalAssiettes": 120,
+          "recipeCount": 1
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "ibtbnq",
+        "ingredientName": "Tomate",
+        "productSemanticKey": "tomate_ibtbnq_rif-_5_53466307",
+        "ingType": "legumes",
+        "totalAssiettes": 240,
+        "nbRecipes": 2,"pFrais": true,
+          "conversionRules": ["une tomate = 120 gr."],"totalNeededRaw": [{ "q":180, "u": "unité" }],
+        "byDate": {"2025-08-23T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 7200, "u": "gr."}],
+          "recipes": [{
+                "r": "Tomates et poivrons grillés au four",
+                "q":60.0,
+                "u": "unité","qEq":7200,
+                "uEq": "gr.",
+                "a": 120
+              }],
+          "totalAssiettes": 120,
+          "recipeCount": 1
+        },"2025-08-24T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 14400, "u": "gr."}],
+          "recipes": [{
+                "r": "Tomates farcies et riz",
+                "q":120.0,
+                "u": "unité","qEq":14400,
+                "uEq": "gr.",
+                "a": 120
+              }],
+          "totalAssiettes": 120,
+          "recipeCount": 1
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "qemlqs",
+        "ingredientName": "Vinaigre balsamique",
+        "productSemanticKey": "vinaigre-b_qemlqs_rif-_5_53466307",
+        "ingType": "epices",
+        "totalAssiettes": 120,
+        "nbRecipes": 1,"totalNeededRaw": [{ "q":240, "u": "ml" }],
+        "byDate": {"2025-08-22T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 240, "u": "ml"}],
+          "recipes": [{
+                "r": "Vinaigrette",
+                "q":0.2,
+                "u": "l.","qEq":240,
+                "uEq": "ml",
+                "a": 120
+              }],
+          "totalAssiettes": 120,
+          "recipeCount": 1
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "7qo3ht",
+        "ingredientName": "Vinaigre de cidre",
+        "productSemanticKey": "vinaigre-d_7qo3ht_rif-_5_53466307",
+        "ingType": "epices",
+        "totalAssiettes": 120,
+        "nbRecipes": 1,"totalNeededRaw": [{ "q":1200, "u": "ml" }],
+        "byDate": {"2025-08-23T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 1200, "u": "ml"}],
+          "recipes": [{
+                "r": "Substitut feta avec du tofu","qEq":1200,
+                "uEq": "ml",
+                "a": 120
+              }],
+          "totalAssiettes": 120,
+          "recipeCount": 1
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "hlbwfd",
+        "ingredientName": "Yaourt de soja",
+        "productSemanticKey": "yaourt-de-_hlbwfd_rif-_5_53466307",
+        "ingType": "frais",
+        "totalAssiettes": 180,
+        "nbRecipes": 2,"pFrais": true,"totalNeededRaw": [{ "q":2520, "u": "gr." }],
+        "byDate": {"2025-08-22T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 1200, "u": "gr."}],
+          "recipes": [{
+                "r": "Sauce verte","qEq":1200,
+                "uEq": "gr.",
+                "a": 60
+              }],
+          "totalAssiettes": 60,
+          "recipeCount": 1
+        },"2025-08-24T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 1320, "u": "gr."}],
+          "recipes": [{
+                "r": "Salade de concombre à l'aneth et amandes effilées","qEq":1320,
+                "uEq": "gr.",
+                "a": 120
+              }],
+          "totalAssiettes": 120,
+          "recipeCount": 1
+        }}
+      }
+    
+    
+    ,{
+        "ingredientHugoUuid": "dzqmba",
+        "ingredientName": "Yaourt grec de vache",
+        "productSemanticKey": "yaourt-gre_dzqmba_rif-_5_53466307",
+        "ingType": "frais",
+        "totalAssiettes": 140,
+        "nbRecipes": 2,"pFrais": true,"totalNeededRaw": [{ "q":2875, "u": "gr." }],
+        "byDate": {"2025-08-23T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 2875, "u": "gr."}],
+          "recipes": [{
+                "r": "Kolokythokeftedes - galettes courgette feta grecques sans gluten - avec sauce blanche","qEq":625,
+                "uEq": "gr.",
+                "a": 20
+              },{
+                "r": "Kolokythopita - tarte filo courgette feta grecque","qEq":2250,
+                "uEq": "gr.",
+                "a": 120
+              }],
+          "totalAssiettes": 140,
+          "recipeCount": 2
+        }}
+      }]
+}

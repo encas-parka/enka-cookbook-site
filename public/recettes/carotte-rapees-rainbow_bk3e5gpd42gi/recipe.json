@@ -1,0 +1,32 @@
+
+{
+  "uuid": "bk3e5gpd42gi",
+  "slug": "carotte-rapees-rainbow_bk3e5gpd42gi",
+  "title": "Carotte Rapées (Rainbow Queer Naan)",
+  "draft": false,
+  "typeR": "plat",
+  "categories": ["Accompagnement"],
+  "regime": ["vegan"],
+  "cuisson": false,
+  "serveHot": false,
+  "plate": 100,
+  "quantite_desc": "",
+  "check": true,
+  "checkAlwaysOk": false,
+  "materiel": null,
+  "ingredients": [{
+      "uuid": "eouu0v",
+      "name": "Carotte",
+      "originalQuantity": 5,
+      "originalUnit": "kg",
+      "normalizedQuantity": 5000,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": [],
+      "type": "legumes"
+    }],
+  "preparation": "Pour l'assiette composée arc en ciel",
+  "prepAlt": null,
+  "permissionWrite": [],
+  "publishDate": "2025-06-19T19:04:00Z"
+}

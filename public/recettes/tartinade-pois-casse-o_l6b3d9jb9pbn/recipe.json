@@ -1,0 +1,92 @@
+
+{
+  "uuid": "l6b3d9jb9pbn",
+  "slug": "tartinade-pois-casse-o_l6b3d9jb9pbn",
+  "title": "Tartinade Pois Cassé - Oignon Caramélisé ",
+  "draft": false,
+  "typeR": "entree",
+  "categories": ["Tartinade"],
+  "regime": ["vegetarien","vegan","sans-gluten","sans-lactose"],
+  "cuisson": true,
+  "serveHot": false,
+  "plate": 190,
+  "quantite_desc": null,
+  "check": true,
+  "checkAlwaysOk": null,
+  "materiel": ["Bruleur","Marmitte","Plat Paela"],
+  "ingredients": [{
+      "uuid": "rtavky",
+      "name": "Oignon",
+      "originalQuantity": 3,
+      "originalUnit": "kg",
+      "normalizedQuantity": 3000,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": [],
+      "type": "legumes"
+    },{
+      "uuid": "7v72le",
+      "name": "Pois cassés",
+      "originalQuantity": 3,
+      "originalUnit": "kg",
+      "normalizedQuantity": 3000,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": [],
+      "type": "sec"
+    },{
+      "uuid": "2juq3x",
+      "name": "Sel",
+      "originalQuantity": 1,
+      "originalUnit": "au goût",
+      "normalizedQuantity": 1,
+      "normalizedUnit": "au goût",
+      "comment": "",
+      "allergens": [],
+      "type": "epices"
+    },{
+      "uuid": "dc8855",
+      "name": "Cumin",
+      "originalQuantity": 1,
+      "originalUnit": "au goût",
+      "normalizedQuantity": 1,
+      "normalizedUnit": "au goût",
+      "comment": "",
+      "allergens": [],
+      "type": "epices"
+    },{
+      "uuid": "bidsmu",
+      "name": "Paprika",
+      "originalQuantity": 1,
+      "originalUnit": "au goût",
+      "normalizedQuantity": 1,
+      "normalizedUnit": "au goût",
+      "comment": "",
+      "allergens": [],
+      "type": "epices"
+    },{
+      "uuid": "qemlqs",
+      "name": "Vinaigre balsamique",
+      "originalQuantity": 0.25,
+      "originalUnit": "l.",
+      "normalizedQuantity": 250,
+      "normalizedUnit": "ml",
+      "comment": "",
+      "allergens": ["Sulfites"],
+      "type": "epices"
+    },{
+      "uuid": "u9z2he",
+      "name": "Sucre en poudre",
+      "originalQuantity": 250,
+      "originalUnit": "gr.",
+      "normalizedQuantity": 250,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": [],
+      "type": "sucres"
+    }],
+  "preparation": "* Rincer puis faire tremper les pois cassés *pendant une heure*.\n* Puis les faire revenir rapidement une grande casserole avec de l'huile d'olive (bien remuer en permanence) avant d'ajouter 2 fois leur volume d'eau.\n* Porter à ébullition puis baisser le feu et laisser cuire pendant une heure environ.\n* Pendant ce temps, faire revenir les oignons coupés assez petits dans une poele.\n* Une fois translucides saupoudrer de sucre et laisser caraméliser en remuant de temps en temps. Quand c'est bien chaud, déglacer avec le vinaigre.\n* Laisser bouillir et évaporer le liquide avant de remuer.\n* Mixer les pois cassés et y ajouter les oignons.",
+  "prepAlt": null,
+  "permissionWrite": [],
+  "publishDate": "2023-01-11T14:25:46.288Z"
+}

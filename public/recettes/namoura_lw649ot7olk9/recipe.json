@@ -1,0 +1,122 @@
+
+{
+  "uuid": "lw649ot7olk9",
+  "slug": "namoura_lw649ot7olk9",
+  "title": "Namoura",
+  "draft": false,
+  "typeR": "dessert",
+  "categories": ["Gateau"],
+  "regime": ["vegan","sans-lactose"],
+  "cuisson": true,
+  "serveHot": false,
+  "plate": 50,
+  "quantite_desc": null,
+  "check": false,
+  "checkAlwaysOk": true,
+  "materiel": ["Four"],
+  "ingredients": [{
+      "uuid": "ljzb7j",
+      "name": "Eau",
+      "originalQuantity": 9,
+      "originalUnit": "c. à soupe",
+      "normalizedQuantity": 135,
+      "normalizedUnit": "ml",
+      "comment": "",
+      "allergens": [],
+      "type": "autres"
+    },{
+      "uuid": "ljzb7j",
+      "name": "Eau",
+      "originalQuantity": 600,
+      "originalUnit": "gr.",
+      "normalizedQuantity": 600,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": [],
+      "type": "autres"
+    },{
+      "uuid": "fnnx13",
+      "name": "Bicarbonate de soude",
+      "originalQuantity": 1,
+      "originalUnit": "c. à café",
+      "normalizedQuantity": 5,
+      "normalizedUnit": "ml",
+      "comment": "",
+      "allergens": [],
+      "type": "autres"
+    },{
+      "uuid": "vgec6e",
+      "name": "Levure chimique",
+      "originalQuantity": 30,
+      "originalUnit": "gr.",
+      "normalizedQuantity": 30,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": ["Gluten"],
+      "type": "lof"
+    },{
+      "uuid": "hlbwfd",
+      "name": "Yaourt de soja",
+      "originalQuantity": 1.5,
+      "originalUnit": "kg",
+      "normalizedQuantity": 1500,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": ["Soja"],
+      "type": "frais"
+    },{
+      "uuid": "eu7lc6",
+      "name": "huile de colza",
+      "originalQuantity": 0.3,
+      "originalUnit": "l.",
+      "normalizedQuantity": 300,
+      "normalizedUnit": "ml",
+      "comment": "",
+      "allergens": [],
+      "type": "lof"
+    },{
+      "uuid": "mltl42",
+      "name": "Semoule fine (blé)",
+      "originalQuantity": 750,
+      "originalUnit": "gr.",
+      "normalizedQuantity": 750,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": ["Gluten"],
+      "type": "sec"
+    },{
+      "uuid": "e4mjd1",
+      "name": "Jus de citron",
+      "originalQuantity": 9,
+      "originalUnit": "c. à soupe",
+      "normalizedQuantity": 135,
+      "normalizedUnit": "ml",
+      "comment": "",
+      "allergens": [],
+      "type": "sucres"
+    },{
+      "uuid": "u9z2he",
+      "name": "Sucre en poudre",
+      "originalQuantity": 0.6,
+      "originalUnit": "kg",
+      "normalizedQuantity": 600,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": [],
+      "type": "sucres"
+    },{
+      "uuid": "u9z2he",
+      "name": "Sucre en poudre",
+      "originalQuantity": 0.3,
+      "originalUnit": "kg",
+      "normalizedQuantity": 300,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": [],
+      "type": "sucres"
+    }],
+  "preparation": "Mélanger tous les ingrédients de la pâte( semoule, yaourt, levure, bicarbonate, 1/3 de l'eau florale, l'huile, et la plus petite partie du sucre, et l'eau qui est noté en cuillère à soupe) et verser dans un plat allant au four, préalablement huilé ou chemisé de papier sulfurisé. La pâte a une consistance plus pâteuse que liquide.\n\nCuire environ 30 à 35 min à 180°C. Le gâteau est légèrement doré.\n\nPendant ce temps, préparer le sirop en versant la plus grosse partie du sucre, l'eau et le jus de citron dans une casserole et porter à ébullition. Le sucre doit être totalement dissout. puis y ajouter les 2/3 de l'eau florale.\n\nA la sortie du four, découper les parts de gâteau, y mettre une amande au centre de chaque part et puis verser une bonne dose de sirop sur le gâteau. Bien répartir pour que chaque partie du gâteau s'imbibe bien. Enfin, filmer de manière complètement hermétique jusqu'au moment de le servir.",
+  "prepAlt": null,
+  "permissionWrite": [],
+  "publishDate": "2024-03-27T19:32:00Z"
+}

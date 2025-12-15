@@ -1,0 +1,82 @@
+
+{
+  "uuid": "n5w78efonn14",
+  "slug": "pain-de-yucca_n5w78efonn14",
+  "title": "Pain De Yucca",
+  "draft": false,
+  "typeR": "plat",
+  "categories": ["Pain"],
+  "regime": ["vegetarien","sans-gluten"],
+  "cuisson": true,
+  "serveHot": true,
+  "plate": 170,
+  "quantite_desc": null,
+  "check": false,
+  "checkAlwaysOk": null,
+  "materiel": ["Four"],
+  "ingredients": [{
+      "uuid": "vgec6e",
+      "name": "Levure chimique",
+      "originalQuantity": 51,
+      "originalUnit": "gr.",
+      "normalizedQuantity": 51,
+      "normalizedUnit": "gr.",
+      "comment": "levure chimique pour les vegan et l'absence de gluten...",
+      "allergens": ["Gluten"],
+      "type": "lof"
+    },{
+      "uuid": "2juq3x",
+      "name": "Sel",
+      "originalQuantity": 80,
+      "originalUnit": "gr.",
+      "normalizedQuantity": 80,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": [],
+      "type": "epices"
+    },{
+      "uuid": "m5dxyo",
+      "name": "Feta",
+      "originalQuantity": 4,
+      "originalUnit": "kg",
+      "normalizedQuantity": 4000,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": ["Produit laitier"],
+      "type": "frais"
+    },{
+      "uuid": "mxub21",
+      "name": "Beurre demi-sel",
+      "originalQuantity": 1,
+      "originalUnit": "kg",
+      "normalizedQuantity": 1000,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": ["Produit laitier"],
+      "type": "frais"
+    },{
+      "uuid": "zf3zf8",
+      "name": "Oeuf",
+      "originalQuantity": 17,
+      "originalUnit": "unité",
+      "normalizedQuantity": 17,
+      "normalizedUnit": "unité",
+      "comment": "à faire ramolir",
+      "allergens": ["Oeuf"],
+      "type": "lof"
+    },{
+      "uuid": "v212im",
+      "name": "Farine de tapioca",
+      "originalQuantity": 2.7,
+      "originalUnit": "kg",
+      "normalizedQuantity": 2700,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": [],
+      "type": "lof"
+    }],
+  "preparation": "* Prechauffer le four a 260°.\n* Emietter la feta et ajouter la farine, la levure et le sel .\n* Incorporer les oeufs et le beurre.\n* Mélanger jusqu'a former une boule.\n* Rouler des petites boules avec la pate et les placer sur une plaque recouvert de papier sulfu.\n* Enfourner 8 minutes et deguster immediatement.",
+  "prepAlt": [],
+  "permissionWrite": [],
+  "publishDate": "2022-11-23T20:23:25.888Z"
+}

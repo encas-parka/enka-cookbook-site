@@ -1,0 +1,122 @@
+
+{
+  "uuid": "clojw2gbb3cz",
+  "slug": "smashed-potatoes-et-cr_clojw2gbb3cz",
+  "title": "Smashed Potatoes Et Crème Sour Ciboulette",
+  "draft": false,
+  "typeR": "plat",
+  "categories": ["Accompagnement"],
+  "regime": ["vegan","sans-gluten","sans-lactose"],
+  "cuisson": true,
+  "serveHot": true,
+  "plate": 100,
+  "quantite_desc": "1 Grosse patate par personnes",
+  "check": true,
+  "checkAlwaysOk": false,
+  "materiel": null,
+  "ingredients": [{
+      "uuid": "bwkn34",
+      "name": "Citron (jus)",
+      "originalQuantity": 0.5,
+      "originalUnit": "gr.",
+      "normalizedQuantity": 0.5,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": [],
+      "type": "legumes"
+    },{
+      "uuid": "u2m28w",
+      "name": "Ail",
+      "originalQuantity": 3,
+      "originalUnit": "tête·s",
+      "normalizedQuantity": 240,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": [],
+      "type": "legumes"
+    },{
+      "uuid": "bq423s",
+      "name": "patate",
+      "originalQuantity": 25,
+      "originalUnit": "kg",
+      "normalizedQuantity": 25000,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": [],
+      "type": "legumes"
+    },{
+      "uuid": "c70jxb",
+      "name": "huile de tournesol",
+      "originalQuantity": 2,
+      "originalUnit": "l.",
+      "normalizedQuantity": 2000,
+      "normalizedUnit": "ml",
+      "comment": "",
+      "allergens": [],
+      "type": "lof"
+    },{
+      "uuid": "h3c8al",
+      "name": "huile d'olive",
+      "originalQuantity": 1,
+      "originalUnit": "l.",
+      "normalizedQuantity": 1000,
+      "normalizedUnit": "ml",
+      "comment": "",
+      "allergens": [],
+      "type": "lof"
+    },{
+      "uuid": "hlbwfd",
+      "name": "Yaourt de soja",
+      "originalQuantity": 3,
+      "originalUnit": "kg",
+      "normalizedQuantity": 3000,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": ["Soja"],
+      "type": "frais"
+    },{
+      "uuid": "ique18",
+      "name": "Paprika fumé",
+      "originalQuantity": 150,
+      "originalUnit": "gr.",
+      "normalizedQuantity": 150,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": [],
+      "type": "epices"
+    },{
+      "uuid": "rgt7s4",
+      "name": "Poivre noir moulu",
+      "originalQuantity": 1,
+      "originalUnit": "au goût",
+      "normalizedQuantity": 1,
+      "normalizedUnit": "au goût",
+      "comment": "",
+      "allergens": [],
+      "type": "epices"
+    },{
+      "uuid": "2juq3x",
+      "name": "Sel",
+      "originalQuantity": 1,
+      "originalUnit": "au goût",
+      "normalizedQuantity": 1,
+      "normalizedUnit": "au goût",
+      "comment": "",
+      "allergens": [],
+      "type": "epices"
+    },{
+      "uuid": "mt22ff",
+      "name": "Ciboulette",
+      "originalQuantity": 10,
+      "originalUnit": "bottes",
+      "normalizedQuantity": 10,
+      "normalizedUnit": "bottes",
+      "comment": "",
+      "allergens": [],
+      "type": "epices"
+    }],
+  "preparation": "Pour les smashed potatoes:\nLavez les pommes de terre.\n\n\n\n\n\n\n\n\n\nFaites-les cuire dans une casserole d'eau salée bouillante pendant\nenviron 15 minutes, il faut qu'elles soient assez cuites pour pouvoir\npiquer une fourchette dedans.\n\nPréchauffez le four à 220°C, chaleur sole-voûte.\n\nEgouttez les pommes de terre\n\nDisposez-les sur une plaque de cuisson recouverte de papier\nsulfurisé.\n\nA l'aide d'un dessous de tasse ou de verre, écrasez chaque pomme de\nterre.\n\nAjoutez l'huile dessus, le sel, le poivre et les épices.\n\nEnfournez à mi-hauteur pour environ 25 minutes (surveillez la\ncuisson – les pommes de terre doivent être bien dorées)\n\nPour la Crème Sour Vegan:\n\nMélanger les yaourts, la ciboulette hachée, le jus de citron (jauger au goût le jus de citron est là pour donner un goût \"laitier\" que le yaourt de soja n'a pas), le sel et le poivre",
+  "prepAlt": null,
+  "permissionWrite": [],
+  "publishDate": "2025-05-05T16:07:00Z"
+}

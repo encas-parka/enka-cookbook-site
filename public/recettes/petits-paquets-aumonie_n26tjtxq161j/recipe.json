@@ -1,0 +1,132 @@
+
+{
+  "uuid": "n26tjtxq161j",
+  "slug": "petits-paquets-aumonie_n26tjtxq161j",
+  "title": "Petits Paquets - Aumonières Courge Feta",
+  "draft": false,
+  "typeR": "entree",
+  "categories": ["Bouchées salées","Snacking"],
+  "regime": ["vegetarien"],
+  "cuisson": true,
+  "serveHot": true,
+  "plate": 200,
+  "quantite_desc": null,
+  "check": true,
+  "checkAlwaysOk": false,
+  "materiel": ["Gastro 1/1 (Normaux)","Four"],
+  "ingredients": [{
+      "uuid": "2juq3x",
+      "name": "Sel",
+      "originalQuantity": 1,
+      "originalUnit": "au goût",
+      "normalizedQuantity": 1,
+      "normalizedUnit": "au goût",
+      "comment": "",
+      "allergens": [],
+      "type": "epices"
+    },{
+      "uuid": "2pps90",
+      "name": "Poivre",
+      "originalQuantity": 1,
+      "originalUnit": "au goût",
+      "normalizedQuantity": 1,
+      "normalizedUnit": "au goût",
+      "comment": "",
+      "allergens": [],
+      "type": "epices"
+    },{
+      "uuid": "7qo3ht",
+      "name": "Vinaigre de cidre",
+      "originalQuantity": 0.5,
+      "originalUnit": "l.",
+      "normalizedQuantity": 500,
+      "normalizedUnit": "ml",
+      "comment": "",
+      "allergens": ["Alcool"],
+      "type": "epices"
+    },{
+      "uuid": "9o3793",
+      "name": "Baies roses",
+      "originalQuantity": 50,
+      "originalUnit": "gr.",
+      "normalizedQuantity": 50,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": [],
+      "type": "epices"
+    },{
+      "uuid": "l3esgp",
+      "name": "Cumin (graines)",
+      "originalQuantity": 50,
+      "originalUnit": "gr.",
+      "normalizedQuantity": 50,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": [],
+      "type": "epices"
+    },{
+      "uuid": "m5dxyo",
+      "name": "Feta",
+      "originalQuantity": 3,
+      "originalUnit": "kg",
+      "normalizedQuantity": 3000,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": ["Produit laitier"],
+      "type": "frais"
+    },{
+      "uuid": "oa85mx",
+      "name": "Courge",
+      "originalQuantity": 10,
+      "originalUnit": "kg",
+      "normalizedQuantity": 10000,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": [],
+      "type": "legumes"
+    },{
+      "uuid": "rtavky",
+      "name": "Oignon",
+      "originalQuantity": 4.1,
+      "originalUnit": "kg",
+      "normalizedQuantity": 4100,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": [],
+      "type": "legumes"
+    },{
+      "uuid": "c70jxb",
+      "name": "huile de tournesol",
+      "originalQuantity": 3.5,
+      "originalUnit": "l.",
+      "normalizedQuantity": 3500,
+      "normalizedUnit": "ml",
+      "comment": "",
+      "allergens": [],
+      "type": "lof"
+    },{
+      "uuid": "x6je0g",
+      "name": "Pate filo (1 feuille)",
+      "originalQuantity": 200,
+      "originalUnit": "unité",
+      "normalizedQuantity": 200,
+      "normalizedUnit": "unité",
+      "comment": "",
+      "allergens": ["Gluten"],
+      "type": "autres"
+    },{
+      "uuid": "u9z2he",
+      "name": "Sucre en poudre",
+      "originalQuantity": 200,
+      "originalUnit": "gr.",
+      "normalizedQuantity": 200,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": [],
+      "type": "sucres"
+    }],
+  "preparation": "* Couper et caraméliser les oignons (avec vinaigre et sucre vers la fin)\n* Râper courge/courgette. Enlever jus si courgette (pas testé avec les courgettes)\n* Torréfier cumin puis piler avec baies roses\n* Mélanger les trois, assaisonner (poivre, sel, pas trop salé car la feta sale)\n* Ajouter la feta émiettée\n* Montage : une feuille filo pour 2 paquets. Plier la demi feuille en deux, puis façonner. Une grosse cuiller à soupe par paquet (à peser pour faire partage exact). Cette recette prévoit 2 petits paquets par personne.\n* Mettre environ 30 par gastro. Cuire au four à 180°C (à peu près 15 minutes, je me souviens plus exactement, et ça dépend des fours - il faut que ce soit doré et croustillant)\n\nVersion vegan : sans la feta\n\nVersion sans gluten : avec des feuilles de riz (marche pas au four, à cuire à la poele dans un fond d'huile; et monter au dernier moment pour pas que ça durcisse - en vrai c'est pas ouf cette alternative, peut être que ça peut être juste la farce sur une biscotte sans gluten)",
+  "prepAlt": [],
+  "permissionWrite": [],
+  "publishDate": "2024-05-17T15:21:00Z"
+}

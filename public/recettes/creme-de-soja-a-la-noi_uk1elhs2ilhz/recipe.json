@@ -1,0 +1,122 @@
+
+{
+  "uuid": "uk1elhs2ilhz",
+  "slug": "creme-de-soja-a-la-noi_uk1elhs2ilhz",
+  "title": "Crème De Soja À La Noisette Et Graines Caramélisées",
+  "draft": false,
+  "typeR": "dessert",
+  "categories": ["Sucrée"],
+  "regime": ["vegetarien","vegan","sans-gluten","sans-lactose"],
+  "cuisson": true,
+  "serveHot": false,
+  "plate": 100,
+  "quantite_desc": null,
+  "check": true,
+  "checkAlwaysOk": false,
+  "materiel": null,
+  "ingredients": [{
+      "uuid": "q7adw3",
+      "name": "Pistache émmondée",
+      "originalQuantity": 100,
+      "originalUnit": "gr.",
+      "normalizedQuantity": 100,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": [],
+      "type": "sec"
+    },{
+      "uuid": "z9plfy",
+      "name": "Graines de sésame blanc",
+      "originalQuantity": 100,
+      "originalUnit": "gr.",
+      "normalizedQuantity": 100,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": ["Sésame"],
+      "type": "sec"
+    },{
+      "uuid": "4vxqlr",
+      "name": "Graine de tournesol",
+      "originalQuantity": 200,
+      "originalUnit": "gr.",
+      "normalizedQuantity": 200,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": [],
+      "type": "sec"
+    },{
+      "uuid": "xkijt9",
+      "name": "Amandes effilées",
+      "originalQuantity": 200,
+      "originalUnit": "gr.",
+      "normalizedQuantity": 200,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": ["Fruit à coque"],
+      "type": "sec"
+    },{
+      "uuid": "gpeob7",
+      "name": "Lait de soja",
+      "originalQuantity": 9,
+      "originalUnit": "l.",
+      "normalizedQuantity": 9000,
+      "normalizedUnit": "ml",
+      "comment": "",
+      "allergens": ["Soja"],
+      "type": "lof"
+    },{
+      "uuid": "s0sjb1",
+      "name": "Crème de riz",
+      "originalQuantity": 500,
+      "originalUnit": "gr.",
+      "normalizedQuantity": 500,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": [],
+      "type": "lof"
+    },{
+      "uuid": "lny16c",
+      "name": "sucre blanc",
+      "originalQuantity": 200,
+      "originalUnit": "gr.",
+      "normalizedQuantity": 200,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": [],
+      "type": "sucres"
+    },{
+      "uuid": "n85gmi",
+      "name": "sucre de canne (blond)",
+      "originalQuantity": 1.4,
+      "originalUnit": "kg",
+      "normalizedQuantity": 1400,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": [],
+      "type": "sucres"
+    },{
+      "uuid": "0g08xt",
+      "name": "Poudre de noisettes",
+      "originalQuantity": 1,
+      "originalUnit": "kg",
+      "normalizedQuantity": 1000,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": ["Fruit à coque"],
+      "type": "sucres"
+    },{
+      "uuid": "ruhtax",
+      "name": "Agar-agar",
+      "originalQuantity": 14,
+      "originalUnit": "c. à café",
+      "normalizedQuantity": 70,
+      "normalizedUnit": "ml",
+      "comment": "",
+      "allergens": [],
+      "type": "autres"
+    }],
+  "preparation": "A faire la veille pour le midi ou le matin pour le soir.\n\nDiluer l'agar-agar  et la crème de riz dans un peu de lait de soja froid. Réserver.\n\nCaraméliser les graines (amande-tournesol-pistaches hachées-sésame) : les griller à sec. Quand elles commencent à dorer et qu'elles sont bien chaudes les saupoudrer de sucre blanc sans cesser de remuer ce qui va les caraméliser. Procéder en plusieurs fois, quand il y a trop de masse ça ne fonctionne pas. Réserver.\n\nPorter le restant de lait de soja à ébullition - Attention, ne pas le quitter et remuer sans cesse, ça peut très vite attacher. A l'approche de l'ébullition ajouter la poudre de noisette puis le sucre blond et enfin l'agar-agar et la crème de riz dilués. Cuire alors au moins 2 minutes au bouillon.\n\nTransvaser le contenu dans des récipients jusqu'au complet refroidissement. Stocker filmé au froid jusqu'au lendemain. La crème va prendre. S'il s'avère qu'elle est trop compacte, la passer au mixeur avant de portionner en verrines ou autres contenants.\n\nAjouter les graines caramélisées sur la crème",
+  "prepAlt": null,
+  "permissionWrite": [],
+  "publishDate": "2025-06-05T07:55:00Z"
+}

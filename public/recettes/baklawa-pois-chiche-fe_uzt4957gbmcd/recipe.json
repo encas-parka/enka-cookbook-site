@@ -1,0 +1,192 @@
+
+{
+  "uuid": "uzt4957gbmcd",
+  "slug": "baklawa-pois-chiche-fe_uzt4957gbmcd",
+  "title": "Baklawa Pois Chiche Feta",
+  "draft": false,
+  "typeR": "entree",
+  "categories": ["Bouchées salées"],
+  "regime": ["vegetarien"],
+  "cuisson": true,
+  "serveHot": true,
+  "plate": 120,
+  "quantite_desc": null,
+  "check": true,
+  "checkAlwaysOk": false,
+  "materiel": ["Four","Gastro 1/1 (Normaux)"],
+  "ingredients": [{
+      "uuid": "he3u48",
+      "name": "Cumin moulu",
+      "originalQuantity": 15,
+      "originalUnit": "c. à café",
+      "normalizedQuantity": 75,
+      "normalizedUnit": "ml",
+      "comment": "",
+      "allergens": [],
+      "type": "epices"
+    },{
+      "uuid": "bidsmu",
+      "name": "Paprika",
+      "originalQuantity": 30,
+      "originalUnit": "gr.",
+      "normalizedQuantity": 30,
+      "normalizedUnit": "gr.",
+      "comment": "a voir s'il est piquant ou pas, goutu ou pas",
+      "allergens": [],
+      "type": "epices"
+    },{
+      "uuid": "fmc1dm",
+      "name": "Piment en poudre",
+      "originalQuantity": 10,
+      "originalUnit": "gr.",
+      "normalizedQuantity": 10,
+      "normalizedUnit": "gr.",
+      "comment": "à adapter en fonction du piquant",
+      "allergens": [],
+      "type": "epices"
+    },{
+      "uuid": "nnkg8f",
+      "name": "Aneth aromatique",
+      "originalQuantity": 2,
+      "originalUnit": "bottes",
+      "normalizedQuantity": 2,
+      "normalizedUnit": "bottes",
+      "comment": "",
+      "allergens": [],
+      "type": "epices"
+    },{
+      "uuid": "fetrpe",
+      "name": "Coriandre fraîche",
+      "originalQuantity": 2,
+      "originalUnit": "bottes",
+      "normalizedQuantity": 2,
+      "normalizedUnit": "bottes",
+      "comment": "",
+      "allergens": [],
+      "type": "epices"
+    },{
+      "uuid": "sk1gbb",
+      "name": "Cannelle",
+      "originalQuantity": 12,
+      "originalUnit": "c. à café",
+      "normalizedQuantity": 60,
+      "normalizedUnit": "ml",
+      "comment": "",
+      "allergens": [],
+      "type": "epices"
+    },{
+      "uuid": "ftj0mq",
+      "name": "Pulpe de tomate",
+      "originalQuantity": 6.75,
+      "originalUnit": "kg",
+      "normalizedQuantity": 6750,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": [],
+      "type": "epices"
+    },{
+      "uuid": "dzqmba",
+      "name": "Yaourt grec de vache",
+      "originalQuantity": 6,
+      "originalUnit": "kg",
+      "normalizedQuantity": 6000,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": ["Produit laitier"],
+      "type": "frais"
+    },{
+      "uuid": "kmq1zb",
+      "name": "Beurre doux",
+      "originalQuantity": 2,
+      "originalUnit": "kg",
+      "normalizedQuantity": 2000,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": ["Produit laitier"],
+      "type": "frais"
+    },{
+      "uuid": "m5dxyo",
+      "name": "Feta",
+      "originalQuantity": 3,
+      "originalUnit": "kg",
+      "normalizedQuantity": 3000,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": ["Produit laitier"],
+      "type": "frais"
+    },{
+      "uuid": "7tvtlu",
+      "name": "Pâte filo",
+      "originalQuantity": 3.7,
+      "originalUnit": "kg",
+      "normalizedQuantity": 3700,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": ["Gluten"],
+      "type": "frais"
+    },{
+      "uuid": "j7as8d",
+      "name": "Cébette - Ciboule - Cive - Oignon vert",
+      "originalQuantity": 40,
+      "originalUnit": "unité",
+      "normalizedQuantity": 4800,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": [],
+      "type": "legumes"
+    },{
+      "uuid": "u2m28w",
+      "name": "Ail",
+      "originalQuantity": 1,
+      "originalUnit": "tête·s",
+      "normalizedQuantity": 80,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": [],
+      "type": "legumes"
+    },{
+      "uuid": "rtavky",
+      "name": "Oignon",
+      "originalQuantity": 4.5,
+      "originalUnit": "kg",
+      "normalizedQuantity": 4500,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": [],
+      "type": "legumes"
+    },{
+      "uuid": "4totf1",
+      "name": "Epinard",
+      "originalQuantity": 2.25,
+      "originalUnit": "kg",
+      "normalizedQuantity": 2250,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": [],
+      "type": "legumes"
+    },{
+      "uuid": "h3c8al",
+      "name": "huile d'olive",
+      "originalQuantity": 900,
+      "originalUnit": "ml",
+      "normalizedQuantity": 900,
+      "normalizedUnit": "ml",
+      "comment": "",
+      "allergens": [],
+      "type": "lof"
+    },{
+      "uuid": "wwl5vn",
+      "name": "Pois chiche cuit",
+      "originalQuantity": 6,
+      "originalUnit": "kg",
+      "normalizedQuantity": 6000,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": [],
+      "type": "sec"
+    }],
+  "preparation": "* Préchauffer les fours!! th 6-7 ou 190°c\n* Dans un grand poelon, à feu moyen : huile, oignons , ail; quand ils sont tendres, y ajouter les épices\n* Ajouter la pulpe de tomate, le concentré et le sucre : laisser mijoter. Laisser un peu évaporer le liquide, on veut pas quelque chose de trop sec, mais tout de meme pas trop d'eau, surtout si l'on a voulu utiliser des vrais tomates.\n* Incorporer les pois chiches, l'aneth et les épinards. Saler et poivrer.\n* MONTAGE\n\n  Fondre le beurre\n\n  Badigeonner légèrement de beurre les feuilles en les superposant dans un plat huilé, beurré\n\n  5 épaisseurs de feuilles sur le dessous\n\n  Verser la prepa tomate/pois chiches sur les feuilles, parsemer de feta\n\n  Recouvrir d'au moins 5 épaisseurs de feuilles filo, en les badigeonnant de beurre fondu\n\n  Entailler légèrement le dessus à la forme de découpe souhaiter, des pti losanges (on en servira plusieurs) ou en nombre de part désirées pour chaque plat, et verser dessus la fin du beure fondu, a défaut un filet d'huile d'olive\n* Enfourner 30 à 35 min, jusqu'à ce que ce soit doré et croustillant\n*  Le YAOURT d'accompagnement: ciseler les feuilles fraiches et emincer fin-fin les oignons nouveaux, mélanger au yaourt; ajouter piment de cayenne et/ou paprika, et saler à convenance personnelle!!",
+  "prepAlt": null,
+  "permissionWrite": [],
+  "publishDate": "2024-06-20T09:53:00Z"
+}

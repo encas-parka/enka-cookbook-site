@@ -1,0 +1,82 @@
+
+{
+  "uuid": "y9t03vab458e",
+  "slug": "creme-dessert-aux-pral_y9t03vab458e",
+  "title": "Crème Dessert Aux Pralines Roses",
+  "draft": false,
+  "typeR": "dessert",
+  "categories": ["Autre"],
+  "regime": ["vegan","sans-gluten"],
+  "cuisson": true,
+  "serveHot": false,
+  "plate": 20,
+  "quantite_desc": null,
+  "check": true,
+  "checkAlwaysOk": true,
+  "materiel": ["ramequins"],
+  "ingredients": [{
+      "uuid": "7dlfuw",
+      "name": "Purée d'amande",
+      "originalQuantity": 120,
+      "originalUnit": "gr.",
+      "normalizedQuantity": 120,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": [],
+      "type": "autres"
+    },{
+      "uuid": "hzwesd",
+      "name": "Lait de riz",
+      "originalQuantity": 2,
+      "originalUnit": "l.",
+      "normalizedQuantity": 2000,
+      "normalizedUnit": "ml",
+      "comment": "",
+      "allergens": [],
+      "type": "lof"
+    },{
+      "uuid": "g56l9d",
+      "name": "Fécule de pomme de terre",
+      "originalQuantity": 120,
+      "originalUnit": "gr.",
+      "normalizedQuantity": 120,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": [],
+      "type": "lof"
+    },{
+      "uuid": "1nb85u",
+      "name": "Farine de riz blanche",
+      "originalQuantity": 160,
+      "originalUnit": "gr.",
+      "normalizedQuantity": 160,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": [],
+      "type": "lof"
+    },{
+      "uuid": "31bhpd",
+      "name": "Pralines roses de Lyon",
+      "originalQuantity": 265,
+      "originalUnit": "gr.",
+      "normalizedQuantity": 265,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": [],
+      "type": "sucres"
+    },{
+      "uuid": "u9z2he",
+      "name": "Sucre en poudre",
+      "originalQuantity": 265,
+      "originalUnit": "gr.",
+      "normalizedQuantity": 265,
+      "normalizedUnit": "gr.",
+      "comment": "",
+      "allergens": [],
+      "type": "sucres"
+    }],
+  "preparation": "Broyer les pralines afin de bien casser les amandes à l'intérieur.\n\nPuis faire fondre dans une partie de lait végé. Réserver.\n\nMélanger la farine et la fécule dans un saladier. Délayer avec un peu de lait puis ajouter le sucre, la purée d’amande et mélanger.\n\nFiltrer le lait rose et faire sécher et caraméliser les amandes au four. Réserver.\n\nDans une casserole, faire chauffer les laits, rose et nature.\n\nQuand le lait commence légèrement à fumer, l’ajouter progressivement au contenu du saladier en fouettant. Remettre le tout dans la casserole et continuer de fouetter en appliquant une cuisson douce.\n\n Lorsque la crème a correctement épaissi, la transvaser dans un gastro. Placer un film étirable au contact de la crème pour éviter la formation d’une fine pellicule de peau. Et mettre au frais ou dehors si c'est l'hiver ^^\n\nServir en ramequin et déposer quelques amandes des pralines sur la crème.",
+  "prepAlt": null,
+  "permissionWrite": [],
+  "publishDate": "2024-06-13T14:27:00Z"
+}

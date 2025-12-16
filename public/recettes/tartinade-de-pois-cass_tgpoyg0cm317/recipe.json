@@ -14,47 +14,7 @@
   "check": true,
   "checkAlwaysOk": false,
   "materiel": null,
-  "ingredients": [{
-      "uuid": "7v72le",
-      "name": "Pois cassés",
-      "originalQuantity": 7,
-      "originalUnit": "kg",
-      "normalizedQuantity": 7000,
-      "normalizedUnit": "gr.",
-      "comment": "",
-      "allergens": [],
-      "type": "sec"
-    },{
-      "uuid": "8y3ngp",
-      "name": "Petits pois surgelés",
-      "originalQuantity": 7,
-      "originalUnit": "kg",
-      "normalizedQuantity": 7000,
-      "normalizedUnit": "gr.",
-      "comment": "",
-      "allergens": [],
-      "type": "legumes"
-    },{
-      "uuid": "ks3ocl",
-      "name": "Beurre de cacahuètes (salé)",
-      "originalQuantity": 1.75,
-      "originalUnit": "kg",
-      "normalizedQuantity": 1750,
-      "normalizedUnit": "gr.",
-      "comment": "",
-      "allergens": ["Arachides"],
-      "type": "autres"
-    },{
-      "uuid": "j84olg",
-      "name": "Feuille de laurier",
-      "originalQuantity": 35,
-      "originalUnit": "unité",
-      "normalizedQuantity": 35,
-      "normalizedUnit": "unité",
-      "comment": "",
-      "allergens": [],
-      "type": "epices"
-    }],
+  "ingredients": [{"allergens":[],"comment":"","name":"Pois cassés","normalizedQuantity":7000,"normalizedUnit":"gr.","originalQuantity":7,"originalUnit":"kg","type":"sec","uuid":"7v72le"},{"allergens":[],"comment":"","name":"Petits pois surgelés","normalizedQuantity":7000,"normalizedUnit":"gr.","originalQuantity":7,"originalUnit":"kg","type":"legumes","uuid":"8y3ngp"},{"allergens":["Arachides"],"comment":"","name":"Beurre de cacahuètes (salé)","normalizedQuantity":1750,"normalizedUnit":"gr.","originalQuantity":1.75,"originalUnit":"kg","type":"autres","uuid":"ks3ocl"},{"allergens":[],"comment":"","name":"Feuille de laurier","normalizedQuantity":35,"normalizedUnit":"unité","originalQuantity":35,"originalUnit":"unité","type":"epices","uuid":"j84olg"}],
   "preparation": "* Le jour même, mélanger les deux sortes de pois, ajouter le beurre de cacahuète et corriger sel et poivre.",
   "prepAlt": null,
   "permissionWrite": [],

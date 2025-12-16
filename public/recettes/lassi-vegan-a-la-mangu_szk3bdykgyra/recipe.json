@@ -14,67 +14,7 @@
   "check": true,
   "checkAlwaysOk": null,
   "materiel": [],
-  "ingredients": [{
-      "uuid": "2n9g9t",
-      "name": "Cardamone en poudre",
-      "originalQuantity": 50,
-      "originalUnit": "gr.",
-      "normalizedQuantity": 50,
-      "normalizedUnit": "gr.",
-      "comment": "",
-      "allergens": [],
-      "type": "epices"
-    },{
-      "uuid": "n85gmi",
-      "name": "sucre de canne (blond)",
-      "originalQuantity": 1.5,
-      "originalUnit": "kg",
-      "normalizedQuantity": 1500,
-      "normalizedUnit": "gr.",
-      "comment": "",
-      "allergens": [],
-      "type": "sucres"
-    },{
-      "uuid": "bwkn34",
-      "name": "Citron (jus)",
-      "originalQuantity": 500,
-      "originalUnit": "ml",
-      "normalizedQuantity": 500,
-      "normalizedUnit": "ml",
-      "comment": "",
-      "allergens": [],
-      "type": "legumes"
-    },{
-      "uuid": "mdoij4",
-      "name": "Mangue",
-      "originalQuantity": 10,
-      "originalUnit": "kg",
-      "normalizedQuantity": 10000,
-      "normalizedUnit": "gr.",
-      "comment": "",
-      "allergens": [],
-      "type": "legumes"
-    },{
-      "uuid": "xdy736",
-      "name": "lait de coco",
-      "originalQuantity": 8,
-      "originalUnit": "l.",
-      "normalizedQuantity": 8000,
-      "normalizedUnit": "ml",
-      "comment": "",
-      "allergens": [],
-      "type": "lof"
-    },{
-      "uuid": "hlbwfd",
-      "name": "Yaourt de soja",
-      "originalQuantity": 12,
-      "originalUnit": "l.",
-      "normalizedQuantity": 12000,
-      "normalizedUnit": "ml",
-      "comment": "",
-      "allergens": ["Soja"],
-      "type": "frais"
-    }],
+  "ingredients": [{"allergens":[],"comment":"","name":"Cardamone en poudre","normalizedQuantity":50,"normalizedUnit":"gr.","originalQuantity":50,"originalUnit":"gr.","type":"epices","uuid":"2n9g9t"},{"allergens":[],"comment":"","name":"sucre de canne (blond)","normalizedQuantity":1500,"normalizedUnit":"gr.","originalQuantity":1.5,"originalUnit":"kg","type":"sucres","uuid":"n85gmi"},{"allergens":[],"comment":"","name":"Citron (jus)","normalizedQuantity":500,"normalizedUnit":"ml","originalQuantity":500,"originalUnit":"ml","type":"legumes","uuid":"bwkn34"},{"allergens":[],"comment":"","name":"Mangue","normalizedQuantity":10000,"normalizedUnit":"gr.","originalQuantity":10,"originalUnit":"kg","type":"legumes","uuid":"mdoij4"},{"allergens":[],"comment":"","name":"lait de coco","normalizedQuantity":8000,"normalizedUnit":"ml","originalQuantity":8,"originalUnit":"l.","type":"lof","uuid":"xdy736"},{"allergens":["Soja"],"comment":"","name":"Yaourt de soja","normalizedQuantity":12000,"normalizedUnit":"ml","originalQuantity":12,"originalUnit":"l.","type":"frais","uuid":"hlbwfd"}],
   "preparation": "Mixer les mangues, le yaourt et le lait de coco afin d'obtenir une texture lisse.\n\nAjouter le sucre et le jus de citron, mixer, goûter. Ne pas hésiter à sucrer plus.\n\nVerser la cardamone et mixer jusqu'à texture bien crémeuse.\n\nServir frais dans des verres.",
   "prepAlt": [],
   "permissionWrite": [],

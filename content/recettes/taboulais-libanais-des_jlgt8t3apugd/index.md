@@ -18,40 +18,87 @@ plate: 15
 check: true
 checkAlwaysOk: false
 ingredients:
-  - ingredient: oignon_rtavky
-    quantite: 250
-    unit: gr.
-    commentaire: ''
-  - ingredient: tomate_ibtbnq
-    quantite: 1.2
-    unit: Kg
-    commentaire: ''
-  - ingredient: huile-dolive_h3c8al
-    quantite: 250
-    unit: ml
-    commentaire: ''
-  - ingredient: quinoa-blanc_csxn1a
-    quantite: 150
-    unit: gr.
-    commentaire: ''
-  - ingredient: poivre_2pps90
-    commentaire: ''
-  - ingredient: sel_2juq3x
-    quantite: ''
-    unit: null
-    commentaire: ''
-  - ingredient: menthe_2j9y2v
-    quantite: 4
-    unit: bottes
-    commentaire: ''
-  - ingredient: persil-frais_hgfa4e
-    quantite: 9
-    unit: bottes
-    commentaire: ''
-  - ingredient: jus-de-citron_e4mjd1
-    quantite: 150
-    unit: ml
-    commentaire: ''
+  - uuid: rtavky
+    name: Oignon
+    originalQuantity: 250
+    originalUnit: gr.
+    normalizedQuantity: 250
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: ibtbnq
+    name: Tomate
+    originalQuantity: 1.2
+    originalUnit: kg
+    normalizedQuantity: 1200
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: h3c8al
+    name: huile d'olive
+    originalQuantity: 250
+    originalUnit: ml
+    normalizedQuantity: 250
+    normalizedUnit: ml
+    comment: ''
+    allergens: []
+    type: lof
+  - uuid: csxn1a
+    name: Quinoa blanc
+    originalQuantity: 150
+    originalUnit: gr.
+    normalizedQuantity: 150
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: sec
+  - uuid: 2pps90
+    name: Poivre
+    originalQuantity: 1
+    originalUnit: au goût
+    normalizedQuantity: 1
+    normalizedUnit: au goût
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: 2juq3x
+    name: Sel
+    originalQuantity: 1
+    originalUnit: au goût
+    normalizedQuantity: 1
+    normalizedUnit: au goût
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: 2j9y2v
+    name: Menthe
+    originalQuantity: 4
+    originalUnit: bottes
+    normalizedQuantity: 4
+    normalizedUnit: bottes
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: hgfa4e
+    name: Persil frais
+    originalQuantity: 9
+    originalUnit: bottes
+    normalizedQuantity: 9
+    normalizedUnit: bottes
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: e4mjd1
+    name: Jus de citron
+    originalQuantity: 150
+    originalUnit: ml
+    normalizedQuantity: 150
+    normalizedUnit: ml
+    comment: ''
+    allergens: []
+    type: sucres
 preparation: |-
   * Précuire le quinoa ou le millet dans l'eau bouillante.
   * Lavez le persil et hachez le finement.

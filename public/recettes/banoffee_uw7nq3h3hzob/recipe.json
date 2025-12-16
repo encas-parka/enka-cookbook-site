@@ -14,77 +14,7 @@
   "check": true,
   "checkAlwaysOk": false,
   "materiel": ["Gastro 1/1 (Normaux)","Frigo"],
-  "ingredients": [{
-      "uuid": "mxub21",
-      "name": "Beurre demi-sel",
-      "originalQuantity": 1,
-      "originalUnit": "kg",
-      "normalizedQuantity": 1000,
-      "normalizedUnit": "gr.",
-      "comment": "",
-      "allergens": ["Produit laitier"],
-      "type": "frais"
-    },{
-      "uuid": "0tpvue",
-      "name": "Mascarpone",
-      "originalQuantity": 1.5,
-      "originalUnit": "kg",
-      "normalizedQuantity": 1500,
-      "normalizedUnit": "gr.",
-      "comment": "",
-      "allergens": ["Produit laitier"],
-      "type": "frais"
-    },{
-      "uuid": "9vpwp5",
-      "name": "Banane",
-      "originalQuantity": 35,
-      "originalUnit": "unité",
-      "normalizedQuantity": 35,
-      "normalizedUnit": "unité",
-      "comment": "",
-      "allergens": [],
-      "type": "legumes"
-    },{
-      "uuid": "6tnb6h",
-      "name": "Crème fraiche liquide entière",
-      "originalQuantity": 3.5,
-      "originalUnit": "l.",
-      "normalizedQuantity": 3500,
-      "normalizedUnit": "ml",
-      "comment": "",
-      "allergens": ["Produit laitier"],
-      "type": "lof"
-    },{
-      "uuid": "5dcfzk",
-      "name": "Lait concentré sucré",
-      "originalQuantity": 5,
-      "originalUnit": "kg",
-      "normalizedQuantity": 5000,
-      "normalizedUnit": "gr.",
-      "comment": "",
-      "allergens": ["Produit laitier"],
-      "type": "lof"
-    },{
-      "uuid": "h6thsp",
-      "name": "Speculoos",
-      "originalQuantity": 2.5,
-      "originalUnit": "kg",
-      "normalizedQuantity": 2500,
-      "normalizedUnit": "gr.",
-      "comment": "",
-      "allergens": ["Gluten","Soja"],
-      "type": "sucres"
-    },{
-      "uuid": "u9z2he",
-      "name": "Sucre en poudre",
-      "originalQuantity": 280,
-      "originalUnit": "gr.",
-      "normalizedQuantity": 280,
-      "normalizedUnit": "gr.",
-      "comment": "",
-      "allergens": [],
-      "type": "sucres"
-    }],
+  "ingredients": [{"allergens":["Produit laitier"],"comment":"","name":"Beurre demi-sel","normalizedQuantity":1000,"normalizedUnit":"gr.","originalQuantity":1,"originalUnit":"kg","type":"frais","uuid":"mxub21"},{"allergens":["Produit laitier"],"comment":"","name":"Mascarpone","normalizedQuantity":1500,"normalizedUnit":"gr.","originalQuantity":1.5,"originalUnit":"kg","type":"frais","uuid":"0tpvue"},{"allergens":[],"comment":"","name":"Banane","normalizedQuantity":35,"normalizedUnit":"unité","originalQuantity":35,"originalUnit":"unité","type":"legumes","uuid":"9vpwp5"},{"allergens":["Produit laitier"],"comment":"","name":"Crème fraiche liquide entière","normalizedQuantity":3500,"normalizedUnit":"ml","originalQuantity":3.5,"originalUnit":"l.","type":"lof","uuid":"6tnb6h"},{"allergens":["Produit laitier"],"comment":"","name":"Lait concentré sucré","normalizedQuantity":5000,"normalizedUnit":"gr.","originalQuantity":5,"originalUnit":"kg","type":"lof","uuid":"5dcfzk"},{"allergens":["Gluten","Soja"],"comment":"","name":"Speculoos","normalizedQuantity":2500,"normalizedUnit":"gr.","originalQuantity":2.5,"originalUnit":"kg","type":"sucres","uuid":"h6thsp"},{"allergens":[],"comment":"","name":"Sucre en poudre","normalizedQuantity":280,"normalizedUnit":"gr.","originalQuantity":280,"originalUnit":"gr.","type":"sucres","uuid":"u9z2he"}],
   "preparation": "**FOND DE TARTE:**\n\nMixer les SPECULOOS en miette.\n\nFaire fondre le beurre salé. Mélanger bien les deux ensemble.\n\nTapissser les fonds de tous les ramequins et bien tasser.\n\nY déposer plein de rondelles ou des tronçons de BANANE. 1 banane pour 3 personnes.\n\nTroisième étage : 1,5 à 2 cuillère à soupe de CONFITURE DE LAIT.\n\n**CHANTILLY :**\n\nBattre au robot (en plusieurs fois) la CREME LIQUIDE très froide, le MASCARPONE et le SUCRE.\n\nRecouvrir de cette dernière bonne couche les banoffee.\n\nPlacer au frais.",
   "prepAlt": [{"recetteAlt":"banoffee-vegan-et-sans-gluten_hm1nmbb6"}],
   "permissionWrite": [],

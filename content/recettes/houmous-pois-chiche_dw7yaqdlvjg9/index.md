@@ -14,30 +14,61 @@ plate: 100
 quantite_desc: ''
 check: true
 ingredients:
-  - ingredient: ail_u2m28w
-    quantite: 6
-    unit: gousse·s
-    commentaire: ''
-  - ingredient: sel_2juq3x
-    quantite: 40
-    unit: gr.
-    commentaire: ''
-  - ingredient: huile-dolive_h3c8al
-    quantite: 0.45
-    unit: l.
-    commentaire: ''
-  - ingredient: jus-de-citron_e4mjd1
-    quantite: 225
-    unit: ml
-    commentaire: ''
-  - ingredient: tahin_u33083
-    quantite: 1
-    unit: Kg
-    commentaire: ''
-  - ingredient: pois-chiches_6a8w8k
-    quantite: 1.8
-    unit: Kg
-    commentaire: poids sec
+  - uuid: u2m28w
+    name: Ail
+    originalQuantity: 6
+    originalUnit: gousse·s
+    normalizedQuantity: 39
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: 2juq3x
+    name: Sel
+    originalQuantity: 40
+    originalUnit: gr.
+    normalizedQuantity: 40
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: h3c8al
+    name: huile d'olive
+    originalQuantity: 0.45
+    originalUnit: l.
+    normalizedQuantity: 450
+    normalizedUnit: ml
+    comment: ''
+    allergens: []
+    type: lof
+  - uuid: e4mjd1
+    name: Jus de citron
+    originalQuantity: 225
+    originalUnit: ml
+    normalizedQuantity: 225
+    normalizedUnit: ml
+    comment: ''
+    allergens: []
+    type: sucres
+  - uuid: u33083
+    name: Tahin
+    originalQuantity: 1
+    originalUnit: kg
+    normalizedQuantity: 1000
+    normalizedUnit: gr.
+    comment: ''
+    allergens:
+      - Sésame
+    type: autres
+  - uuid: 6a8w8k
+    name: Pois chiches
+    originalQuantity: 1.8
+    originalUnit: kg
+    normalizedQuantity: 1800
+    normalizedUnit: gr.
+    comment: poids sec
+    allergens: []
+    type: sec
 materiel: []
 preparation: |-
   > Faire cuire les pois chiches

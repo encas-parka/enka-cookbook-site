@@ -11,37 +11,72 @@ cuisson: false
 plate: 100
 check: true
 ingredients:
-  - ingredient: tahin_u33083
-    quantite: 160
-    unit: gr.
-    commentaire: ''
-  - ingredient: vinaigre-balsamique_qemlqs
-    quantite: 90
-    unit: ml
-    commentaire: ''
-  - ingredient: canneberge_uja9ip
-    quantite: 100
-    unit: gr.
-    commentaire: ''
-  - ingredient: ail_u2m28w
-    quantite: 4
-    unit: unité
-    commentaire: ''
-  - ingredient: betterave-cuite_i7psri
-    quantite: 400
-    unit: gr.
-    commentaire: ''
-  - ingredient: huile-dolive_h3c8al
-    quantite: 120
-    unit: ml
-    commentaire: ''
-  - ingredient: pois-chiche-cuit_wwl5vn
-    quantite: 1.1
-    unit: Kg
-    commentaire: ''
-preparation: >-
-  Mettre tous les ingrédients dans un blender et mixer jusqu'à l'obtention d'une
-  texture lisse. Saler. Ajouter un peu d'eau si nécessaire.
+  - uuid: u33083
+    name: Tahin
+    originalQuantity: 160
+    originalUnit: gr.
+    normalizedQuantity: 160
+    normalizedUnit: gr.
+    comment: ''
+    allergens:
+      - Sésame
+    type: autres
+  - uuid: qemlqs
+    name: Vinaigre balsamique
+    originalQuantity: 90
+    originalUnit: ml
+    normalizedQuantity: 90
+    normalizedUnit: ml
+    comment: ''
+    allergens:
+      - Sulfites
+    type: epices
+  - uuid: uja9ip
+    name: Canneberge
+    originalQuantity: 100
+    originalUnit: gr.
+    normalizedQuantity: 100
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: u2m28w
+    name: Ail
+    originalQuantity: 4
+    originalUnit: unité
+    normalizedQuantity: 26
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: i7psri
+    name: Betterave cuite
+    originalQuantity: 400
+    originalUnit: gr.
+    normalizedQuantity: 400
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: h3c8al
+    name: huile d'olive
+    originalQuantity: 120
+    originalUnit: ml
+    normalizedQuantity: 120
+    normalizedUnit: ml
+    comment: ''
+    allergens: []
+    type: lof
+  - uuid: wwl5vn
+    name: Pois chiche cuit
+    originalQuantity: 1.1
+    originalUnit: kg
+    normalizedQuantity: 1100
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: sec
+preparation: Mettre tous les ingrédients dans un blender et mixer jusqu'à l'obtention d'une texture lisse. Saler. Ajouter un peu d'eau si nécessaire.
 publishDate: 2024-05-30T10:42:00.000Z
 checkAlwaysOk: false
 regime:

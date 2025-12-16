@@ -12,79 +12,127 @@ plate: 100
 quantite_desc: 3 boulettes par personne
 check: false
 ingredients:
-  - ingredient: ail_u2m28w
-    quantite: 2
-    unit: tête·s
-    commentaire: finement haché
-  - ingredient: mais-en-conserve-egoutte_dx4nss
-    quantite: 2
-    unit: Kg
-    commentaire: ''
-  - ingredient: oignon_rtavky
-    quantite: 2
-    unit: Kg
-    commentaire: finement haché
-  - ingredient: huile-de-friture_1ej217
-    quantite: 15
-    unit: l.
-    commentaire: ''
-  - ingredient: lait-vegetal-au-choix_vw9d1a
-    quantite: 2.5
-    unit: l.
-    commentaire: ''
-  - ingredient: levure-chimique_vgec6e
-    quantite: 55
-    unit: gr.
-    commentaire: ''
-  - ingredient: farine-de-ble_2av6w8
-    quantite: 900
-    unit: gr.
-    commentaire: ''
-  - ingredient: farine-de-mais_z8uiyd
-    quantite: 3.6
-    unit: Kg
-    commentaire: ''
-  - ingredient: vinaigre-de-cidre_7qo3ht
-    quantite: 225
-    unit: ml
-    commentaire: ''
-  - ingredient: poivre_2pps90
-    quantite: 20
-    unit: gr.
-    commentaire: ''
-  - ingredient: paprika_bidsmu
-    quantite: 50
-    unit: gr.
-    commentaire: ''
-  - ingredient: sel_2juq3x
-    quantite: 30
-    unit: gr.
-    commentaire: ''
-preparation: >-
-  Mélanger le lait non laitier et le vinaigre de cidre de pomme. Remuer et
-  laisser reposer quelques minutes pour faire cailler le tout, créant ainsi un «
-  babeurre » végétalien.
+  - uuid: u2m28w
+    name: Ail
+    originalQuantity: 2
+    originalUnit: tête·s
+    normalizedQuantity: 160
+    normalizedUnit: gr.
+    comment: finement haché
+    allergens: []
+    type: legumes
+  - uuid: dx4nss
+    name: Maïs en conserve égoutté
+    originalQuantity: 2
+    originalUnit: kg
+    normalizedQuantity: 2000
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: rtavky
+    name: Oignon
+    originalQuantity: 2
+    originalUnit: kg
+    normalizedQuantity: 2000
+    normalizedUnit: gr.
+    comment: finement haché
+    allergens: []
+    type: legumes
+  - uuid: 1ej217
+    name: huile de friture
+    originalQuantity: 15
+    originalUnit: l.
+    normalizedQuantity: 15000
+    normalizedUnit: ml
+    comment: ''
+    allergens: []
+    type: lof
+  - uuid: vw9d1a
+    name: Lait végétal (au choix)
+    originalQuantity: 2.5
+    originalUnit: l.
+    normalizedQuantity: 2500
+    normalizedUnit: ml
+    comment: ''
+    allergens: []
+    type: lof
+  - uuid: vgec6e
+    name: Levure chimique
+    originalQuantity: 55
+    originalUnit: gr.
+    normalizedQuantity: 55
+    normalizedUnit: gr.
+    comment: ''
+    allergens:
+      - Gluten
+    type: lof
+  - uuid: 2av6w8
+    name: Farine de blé
+    originalQuantity: 900
+    originalUnit: gr.
+    normalizedQuantity: 900
+    normalizedUnit: gr.
+    comment: ''
+    allergens:
+      - Gluten
+    type: lof
+  - uuid: z8uiyd
+    name: Farine de maïs
+    originalQuantity: 3.6
+    originalUnit: kg
+    normalizedQuantity: 3600
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: lof
+  - uuid: 7qo3ht
+    name: Vinaigre de cidre
+    originalQuantity: 225
+    originalUnit: ml
+    normalizedQuantity: 225
+    normalizedUnit: ml
+    comment: ''
+    allergens:
+      - Alcool
+    type: epices
+  - uuid: 2pps90
+    name: Poivre
+    originalQuantity: 20
+    originalUnit: gr.
+    normalizedQuantity: 20
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: bidsmu
+    name: Paprika
+    originalQuantity: 50
+    originalUnit: gr.
+    normalizedQuantity: 50
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: 2juq3x
+    name: Sel
+    originalQuantity: 30
+    originalUnit: gr.
+    normalizedQuantity: 30
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: epices
+preparation: |-
+  Mélanger le lait non laitier et le vinaigre de cidre de pomme. Remuer et laisser reposer quelques minutes pour faire cailler le tout, créant ainsi un « babeurre » végétalien.
 
+  Dans un autre récipient, mélanger au fouet la semoule de maïs, la farine tout usage, la levure chimique, le bicarbonate de soude, le sel, le paprika et le poivre noir.
 
-  Dans un autre récipient, mélanger au fouet la semoule de maïs, la farine tout
-  usage, la levure chimique, le bicarbonate de soude, le sel, le paprika et le
-  poivre noir.
+  Ajouter l'oignon  et l'ail finement hachés, le maïs bien bien égoutté au mélange sec. Bien mélanger pour répartir uniformément les légumes dans la pâte.
 
+  Verser progressivement le « babeurre » végétalien préparé dans les ingrédients secs. Remuer jusqu'à ce que la pâte se mette en place. La pâte doit être épaisse, mais pas sèche.
 
-  Ajouter l'oignon  et l'ail finement hachés, le maïs bien bien égoutté au
-  mélange sec. Bien mélanger pour répartir uniformément les légumes dans la
-  pâte.
-
-
-  Verser progressivement le « babeurre » végétalien préparé dans les ingrédients
-  secs. Remuer jusqu'à ce que la pâte se mette en place. La pâte doit être
-  épaisse, mais pas sèche.
-
-
-  Faire frire les boulettes. Si elle est trop liquide, y allait à la cuillère à
-  soupe. Vérifier que l'huile est prête en laissant tomber une petite quantité
-  de pâte dans l'huile ; si elle grésille et flotte à la surface, l'huile est
-  prête.
+  Faire frire les boulettes. Si elle est trop liquide, y allait à la cuillère à soupe. Vérifier que l'huile est prête en laissant tomber une petite quantité de pâte dans l'huile ; si elle grésille et flotte à la surface, l'huile est prête.
 preparation24h: ''
 publishDate: 2025-06-01T20:39:00.000Z
 checkAlwaysOk: false

@@ -12,58 +12,125 @@ plate: 100
 check: true
 checkAlwaysOk: false
 ingredients:
-  - ingredient: salade-verte-chene_cg3wgm
-    quantite: 12
-    unit: unité
-    commentaire: ''
-  - ingredient: cornichon_77kyi3
-    quantite: 1.5
-    unit: Kg
-    commentaire: ''
-  - ingredient: ail_u2m28w
-    quantite: 2
-    unit: tête·s
-    commentaire: ''
-  - ingredient: lait-de-soja_gpeob7
-    quantite: 1
-    unit: l.
-    commentaire: ''
-  - ingredient: huile-vegetale_atccqu
-    quantite: 1
-    unit: l.
-    commentaire: ''
-  - ingredient: huile-de-friture_1ej217
-    quantite: 6
-    unit: l.
-    commentaire: ''
-  - ingredient: farine-de-pois-chiche_o627mw
-    quantite: 7.5
-    unit: Kg
-    commentaire: ''
-  - ingredient: eau_ljzb7j
-    quantite: 25
-    unit: l.
-    commentaire: ''
-  - ingredient: capres_c88lz8
-    quantite: 800
-    unit: gr.
-    commentaire: ''
-  - ingredient: estragon_kt0wyw
-    quantite: 5
-    unit: bottes
-    commentaire: ''
-  - ingredient: persil-frais_hgfa4e
-    quantite: 7
-    unit: bottes
-    commentaire: ''
-  - ingredient: jus-de-citron_e4mjd1
-    quantite: 250
-    unit: ml
-    commentaire: ''
-  - ingredient: moutarde_5c1b20
-    quantite: 250
-    unit: gr.
-    commentaire: ''
+  - uuid: cg3wgm
+    name: Salade verte (chêne)
+    originalQuantity: 12
+    originalUnit: unité
+    normalizedQuantity: 12
+    normalizedUnit: unité
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: 77kyi3
+    name: Cornichon
+    originalQuantity: 1.5
+    originalUnit: kg
+    normalizedQuantity: 1500
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: u2m28w
+    name: Ail
+    originalQuantity: 2
+    originalUnit: tête·s
+    normalizedQuantity: 160
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: gpeob7
+    name: Lait de soja
+    originalQuantity: 1
+    originalUnit: l.
+    normalizedQuantity: 1000
+    normalizedUnit: ml
+    comment: ''
+    allergens:
+      - Soja
+    type: lof
+  - uuid: atccqu
+    name: Huile végétale
+    originalQuantity: 1
+    originalUnit: l.
+    normalizedQuantity: 1000
+    normalizedUnit: ml
+    comment: ''
+    allergens: []
+    type: lof
+  - uuid: 1ej217
+    name: huile de friture
+    originalQuantity: 6
+    originalUnit: l.
+    normalizedQuantity: 6000
+    normalizedUnit: ml
+    comment: ''
+    allergens: []
+    type: lof
+  - uuid: o627mw
+    name: Farine de pois chiche
+    originalQuantity: 7.5
+    originalUnit: kg
+    normalizedQuantity: 7500
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: lof
+  - uuid: ljzb7j
+    name: Eau
+    originalQuantity: 25
+    originalUnit: l.
+    normalizedQuantity: 25000
+    normalizedUnit: ml
+    comment: ''
+    allergens: []
+    type: autres
+  - uuid: c88lz8
+    name: Câpres
+    originalQuantity: 800
+    originalUnit: gr.
+    normalizedQuantity: 800
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: kt0wyw
+    name: Estragon
+    originalQuantity: 5
+    originalUnit: bottes
+    normalizedQuantity: 5
+    normalizedUnit: bottes
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: hgfa4e
+    name: Persil frais
+    originalQuantity: 7
+    originalUnit: bottes
+    normalizedQuantity: 7
+    normalizedUnit: bottes
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: e4mjd1
+    name: Jus de citron
+    originalQuantity: 250
+    originalUnit: ml
+    normalizedQuantity: 250
+    normalizedUnit: ml
+    comment: ''
+    allergens: []
+    type: sucres
+  - uuid: 5c1b20
+    name: Moutarde
+    originalQuantity: 250
+    originalUnit: gr.
+    normalizedQuantity: 250
+    normalizedUnit: gr.
+    comment: ''
+    allergens:
+      - Moutarde
+    type: epices
 preparation: |-
 
   1/ Préparation de panisse :

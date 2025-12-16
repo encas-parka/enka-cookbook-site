@@ -14,23 +14,36 @@ plate: 10
 check: true
 checkAlwaysOk: false
 ingredients:
-  - ingredient: olives-vertes-denoyautees_163u4z
-    quantite: 100
-    unit: gr.
-    commentaire: ''
-  - ingredient: ail_u2m28w
-    quantite: 1
-    unit: gousse·s
-    commentaire: ''
-  - ingredient: huile-dolive_h3c8al
-    quantite: 2
-    unit: c. à soupe
-    commentaire: ''
+  - uuid: 163u4z
+    name: Olives Vertes Dénoyautées
+    originalQuantity: 100
+    originalUnit: gr.
+    normalizedQuantity: 100
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: u2m28w
+    name: Ail
+    originalQuantity: 1
+    originalUnit: gousse·s
+    normalizedQuantity: 6.5
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: h3c8al
+    name: huile d'olive
+    originalQuantity: 2
+    originalUnit: c. à soupe
+    normalizedQuantity: 30
+    normalizedUnit: ml
+    comment: ''
+    allergens: []
+    type: lof
 materiel:
   - Robot Mixeur
-preparation: >-
-  Dans un petit mixeur, ou à l'aide d'un mixeur plongeant, mixer les olives
-  vertes avec l'ail grossièrement hâchée et l'huile d'olive.
+preparation: Dans un petit mixeur, ou à l'aide d'un mixeur plongeant, mixer les olives vertes avec l'ail grossièrement hâchée et l'huile d'olive.
 preparation24h: ''
 publishDate: 2024-03-18T13:28:23.107Z
 serveHot: false

@@ -14,67 +14,7 @@
   "check": true,
   "checkAlwaysOk": false,
   "materiel": null,
-  "ingredients": [{
-      "uuid": "f7wbmo",
-      "name": "Rhubarbe",
-      "originalQuantity": 7,
-      "originalUnit": "kg",
-      "normalizedQuantity": 7000,
-      "normalizedUnit": "gr.",
-      "comment": "",
-      "allergens": [],
-      "type": "legumes"
-    },{
-      "uuid": "csxbg6",
-      "name": "lait d’amande",
-      "originalQuantity": 4,
-      "originalUnit": "l.",
-      "normalizedQuantity": 4000,
-      "normalizedUnit": "ml",
-      "comment": "",
-      "allergens": [],
-      "type": "lof"
-    },{
-      "uuid": "h6thsp",
-      "name": "Speculoos",
-      "originalQuantity": 1,
-      "originalUnit": "kg",
-      "normalizedQuantity": 1000,
-      "normalizedUnit": "gr.",
-      "comment": "",
-      "allergens": ["Gluten","Soja"],
-      "type": "sucres"
-    },{
-      "uuid": "n818be",
-      "name": "vanille extrait concentré",
-      "originalQuantity": 40,
-      "originalUnit": "ml",
-      "normalizedQuantity": 40,
-      "normalizedUnit": "ml",
-      "comment": "",
-      "allergens": [],
-      "type": "sucres"
-    },{
-      "uuid": "n85gmi",
-      "name": "sucre de canne (blond)",
-      "originalQuantity": 900,
-      "originalUnit": "gr.",
-      "normalizedQuantity": 900,
-      "normalizedUnit": "gr.",
-      "comment": "",
-      "allergens": [],
-      "type": "sucres"
-    },{
-      "uuid": "ruhtax",
-      "name": "Agar-agar",
-      "originalQuantity": 16,
-      "originalUnit": "gr.",
-      "normalizedQuantity": 16,
-      "normalizedUnit": "gr.",
-      "comment": "",
-      "allergens": [],
-      "type": "autres"
-    }],
+  "ingredients": [{"allergens":[],"comment":"","name":"Rhubarbe","normalizedQuantity":7000,"normalizedUnit":"gr.","originalQuantity":7,"originalUnit":"kg","type":"legumes","uuid":"f7wbmo"},{"allergens":[],"comment":"","name":"lait d’amande","normalizedQuantity":4000,"normalizedUnit":"ml","originalQuantity":4,"originalUnit":"l.","type":"lof","uuid":"csxbg6"},{"allergens":["Gluten","Soja"],"comment":"","name":"Speculoos","normalizedQuantity":1000,"normalizedUnit":"gr.","originalQuantity":1,"originalUnit":"kg","type":"sucres","uuid":"h6thsp"},{"allergens":[],"comment":"","name":"vanille extrait concentré","normalizedQuantity":40,"normalizedUnit":"ml","originalQuantity":40,"originalUnit":"ml","type":"sucres","uuid":"n818be"},{"allergens":[],"comment":"","name":"sucre de canne (blond)","normalizedQuantity":900,"normalizedUnit":"gr.","originalQuantity":900,"originalUnit":"gr.","type":"sucres","uuid":"n85gmi"},{"allergens":[],"comment":"","name":"Agar-agar","normalizedQuantity":16,"normalizedUnit":"gr.","originalQuantity":16,"originalUnit":"gr.","type":"autres","uuid":"ruhtax"}],
   "preparation": "\nÉpluchez et coupez la rhubarbe en petits tronçons et mettez-la dans\nune casserole avec 500g de sucre. Ajuster en gouttant.\n\n\nFaites revenir le tout en mélangeant de temps en temps jusqu’à\nobtenir une belle compotée\n\n\nSi la rhubarbe a rendu trop d’eau et que la compote semble trop\nliquide, égoutter l’excèdent d’eau dans une passoire type\nécumoire ou dans une passoire avec un torchon pour éviter de perdre\nla pulpe.\n\n\nMixer les speculoos et les répartir dans les 100 vérines ou\nramequins.\n\n\nFaites chauffer le lait végétal avec 400gr de sucre et la vanille\njusqu’à ébullition. Le lait va monter, baisser le feu juste avant\nqu'il déborde. Ajoutez l'agar-agar, remuer à l'aide d'un fouet.\n\n\nRépartir la préparation dans les vérines sur les spéculoos.\nRéserver au frais, l'agar-agar va figer avec le froid.\n\n\nUne fois les panne cotte prêtes, répartir la compotée de rhubarbe.",
   "prepAlt": null,
   "permissionWrite": [],

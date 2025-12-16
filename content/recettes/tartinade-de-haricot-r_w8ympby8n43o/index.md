@@ -15,51 +15,91 @@ plate: 270
 check: true
 checkAlwaysOk: false
 ingredients:
-  - ingredient: haricots-rouges_dr1py6
-    quantite: 6.3
-    unit: Kg
-    commentaire: ''
-  - ingredient: ail_u2m28w
-    quantite: 30
-    unit: gousse·s
-    commentaire: ''
-  - ingredient: huile-dolive_h3c8al
-    quantite: 1.8
-    unit: l.
-    commentaire: ''
-  - ingredient: jus-de-citron_e4mjd1
-    quantite: 900
-    unit: ml
-    commentaire: ''
-  - ingredient: basilic_s8j4ff
-    quantite: 9
-    unit: bottes
-    commentaire: ''
-  - ingredient: poivre_2pps90
-    commentaire: ''
-  - ingredient: sel_2juq3x
-    commentaire: ''
-  - ingredient: bicarbonate-de-soude_fnnx13
-    quantite: 90
-    unit: ml
-    commentaire: ''
+  - uuid: dr1py6
+    name: Haricots rouges
+    originalQuantity: 6.3
+    originalUnit: kg
+    normalizedQuantity: 6300
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: sec
+  - uuid: u2m28w
+    name: Ail
+    originalQuantity: 30
+    originalUnit: gousse·s
+    normalizedQuantity: 195
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: h3c8al
+    name: huile d'olive
+    originalQuantity: 1.8
+    originalUnit: l.
+    normalizedQuantity: 1800
+    normalizedUnit: ml
+    comment: ''
+    allergens: []
+    type: lof
+  - uuid: e4mjd1
+    name: Jus de citron
+    originalQuantity: 900
+    originalUnit: ml
+    normalizedQuantity: 900
+    normalizedUnit: ml
+    comment: ''
+    allergens: []
+    type: sucres
+  - uuid: s8j4ff
+    name: Basilic
+    originalQuantity: 9
+    originalUnit: bottes
+    normalizedQuantity: 9
+    normalizedUnit: bottes
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: 2pps90
+    name: Poivre
+    originalQuantity: 1
+    originalUnit: au goût
+    normalizedQuantity: 1
+    normalizedUnit: au goût
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: 2juq3x
+    name: Sel
+    originalQuantity: 1
+    originalUnit: au goût
+    normalizedQuantity: 1
+    normalizedUnit: au goût
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: fnnx13
+    name: Bicarbonate de soude
+    originalQuantity: 90
+    originalUnit: ml
+    normalizedQuantity: 90
+    normalizedUnit: ml
+    comment: ''
+    allergens: []
+    type: autres
 materiel:
   - Marmitte
 preparation: '* Rectifier l''assaisonement le jour j'
-preparation24h: >-
+preparation24h: |-
   **Obligatoirement 2 J avant**
-
 
   * Faire tremper les haricots l'avant veille.
 
 
 
-
   **Obligatoirement 1 J avant**
 
-
-  * Bien cuire les haricots la veille avec le bicarbonate et du sel. Puis mixer
-  avec tout le reste.
+  * Bien cuire les haricots la veille avec le bicarbonate et du sel. Puis mixer avec tout le reste.
 publishDate: 2024-05-18T10:52:00.000Z
 serveHot: false
 uuid: w8ympby8n43o

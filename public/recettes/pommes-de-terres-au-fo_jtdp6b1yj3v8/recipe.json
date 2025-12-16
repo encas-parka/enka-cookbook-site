@@ -14,57 +14,7 @@
   "check": true,
   "checkAlwaysOk": true,
   "materiel": ["Four","Gastro 1/1 (Fins)"],
-  "ingredients": [{
-      "uuid": "18dy4e",
-      "name": "Pomme de terre",
-      "originalQuantity": 12.5,
-      "originalUnit": "kg",
-      "normalizedQuantity": 12500,
-      "normalizedUnit": "gr.",
-      "comment": "",
-      "allergens": [],
-      "type": "legumes"
-    },{
-      "uuid": "c70jxb",
-      "name": "huile de tournesol",
-      "originalQuantity": 1,
-      "originalUnit": "au goût",
-      "normalizedQuantity": 1,
-      "normalizedUnit": "au goût",
-      "comment": "",
-      "allergens": [],
-      "type": "lof"
-    },{
-      "uuid": "ique18",
-      "name": "Paprika fumé",
-      "originalQuantity": 1,
-      "originalUnit": "au goût",
-      "normalizedQuantity": 1,
-      "normalizedUnit": "au goût",
-      "comment": "",
-      "allergens": [],
-      "type": "epices"
-    },{
-      "uuid": "2pps90",
-      "name": "Poivre",
-      "originalQuantity": 1,
-      "originalUnit": "au goût",
-      "normalizedQuantity": 1,
-      "normalizedUnit": "au goût",
-      "comment": "",
-      "allergens": [],
-      "type": "epices"
-    },{
-      "uuid": "2juq3x",
-      "name": "Sel",
-      "originalQuantity": 1,
-      "originalUnit": "au goût",
-      "normalizedQuantity": 1,
-      "normalizedUnit": "au goût",
-      "comment": "",
-      "allergens": [],
-      "type": "epices"
-    }],
+  "ingredients": [{"allergens":[],"comment":"","name":"Pomme de terre","normalizedQuantity":12500,"normalizedUnit":"gr.","originalQuantity":12.5,"originalUnit":"kg","type":"legumes","uuid":"18dy4e"},{"allergens":[],"comment":"","name":"huile de tournesol","normalizedQuantity":1,"normalizedUnit":"au goût","originalQuantity":1,"originalUnit":"au goût","type":"lof","uuid":"c70jxb"},{"allergens":[],"comment":"","name":"Paprika fumé","normalizedQuantity":1,"normalizedUnit":"au goût","originalQuantity":1,"originalUnit":"au goût","type":"epices","uuid":"ique18"},{"allergens":[],"comment":"","name":"Poivre","normalizedQuantity":1,"normalizedUnit":"au goût","originalQuantity":1,"originalUnit":"au goût","type":"epices","uuid":"2pps90"},{"allergens":[],"comment":"","name":"Sel","normalizedQuantity":1,"normalizedUnit":"au goût","originalQuantity":1,"originalUnit":"au goût","type":"epices","uuid":"2juq3x"}],
   "preparation": "* Laver et couper les patates en forme de potatoes\n* Les faire tremper dans l'eau 10-15 minutes\n* Les sécher et les mettre dans des gastros en couche la plus fine possible, brasser avec l'huile et l'assaisonnement\n* Cuire à 180-200°C pendant 30-50 minutes en remuant les patates à mi cuisson",
   "prepAlt": null,
   "permissionWrite": [],

@@ -14,51 +14,93 @@ cuisson: true
 plate: 190
 check: true
 ingredients:
-  - ingredient: ail_u2m28w
-    quantite: 8
-    unit: gousse·s
-    commentaire: ''
-  - ingredient: oignon_rtavky
-    quantite: 2
-    unit: Kg
-    commentaire: ''
-  - ingredient: tomate_ibtbnq
-    quantite: 8
-    unit: Kg
-    commentaire: ''
-  - ingredient: courgette_9zozfk
-    quantite: 7
-    unit: Kg
-    commentaire: ''
-  - ingredient: poivron_0lpad0
-    quantite: 5
-    unit: Kg
-    commentaire: ''
-  - ingredient: pois-chiches_6a8w8k
-    quantite: 6
-    unit: Kg
-    commentaire: Pois-chiche secs
-  - ingredient: cumin_dc8855
-    commentaire: ''
-  - ingredient: coriandre-fraiche_fetrpe
-    quantite: 2
-    unit: bottes
-    commentaire: 1 ou 2 bottes de coriandre
-  - ingredient: jus-de-citron_e4mjd1
-    quantite: 1
-    unit: l.
-    commentaire: ''
-preparation: >-
+  - uuid: u2m28w
+    name: Ail
+    originalQuantity: 8
+    originalUnit: gousse·s
+    normalizedQuantity: 52
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: rtavky
+    name: Oignon
+    originalQuantity: 2
+    originalUnit: kg
+    normalizedQuantity: 2000
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: ibtbnq
+    name: Tomate
+    originalQuantity: 8
+    originalUnit: kg
+    normalizedQuantity: 8000
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: 9zozfk
+    name: Courgette
+    originalQuantity: 7
+    originalUnit: kg
+    normalizedQuantity: 7000
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: 0lpad0
+    name: Poivron
+    originalQuantity: 5
+    originalUnit: kg
+    normalizedQuantity: 5000
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: 6a8w8k
+    name: Pois chiches
+    originalQuantity: 6
+    originalUnit: kg
+    normalizedQuantity: 6000
+    normalizedUnit: gr.
+    comment: Pois-chiche secs
+    allergens: []
+    type: sec
+  - uuid: dc8855
+    name: Cumin
+    originalQuantity: 1
+    originalUnit: au goût
+    normalizedQuantity: 1
+    normalizedUnit: au goût
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: fetrpe
+    name: Coriandre fraîche
+    originalQuantity: 2
+    originalUnit: bottes
+    normalizedQuantity: 2
+    normalizedUnit: bottes
+    comment: 1 ou 2 bottes de coriandre
+    allergens: []
+    type: epices
+  - uuid: e4mjd1
+    name: Jus de citron
+    originalQuantity: 1
+    originalUnit: l.
+    normalizedQuantity: 1000
+    normalizedUnit: ml
+    comment: ''
+    allergens: []
+    type: sucres
+preparation: |-
   Faire cuire les pois chiche mais qu'ils restent fermes
 
-
   * Couper tous les legumes en petits dés ( 1cm pas plus)
-
-  * Faire revenir ensembles courgettes, poivrons, oignons, rajouter l'ail à la
-  fin.
-
-  * Une fois tous les ingrédients refroidis mélanger tout avec les tomates et
-  l'herbe.
+  * Faire revenir ensembles courgettes, poivrons, oignons, rajouter l'ail à la fin.
+  * Une fois tous les ingrédients refroidis mélanger tout avec les tomates et l'herbe.
 preparation24h: Mettre les pois chiche à tremper la veille.
 publishDate: 2022-11-23T22:44:10.332Z
 serveHot: false

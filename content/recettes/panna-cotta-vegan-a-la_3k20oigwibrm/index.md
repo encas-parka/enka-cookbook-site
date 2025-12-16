@@ -15,45 +15,70 @@ plate: 100
 quantite_desc: ''
 check: true
 ingredients:
-  - ingredient: chocolat-noir_cr4kiz
-    quantite: 600
-    unit: gr.
-    commentaire: ''
-  - ingredient: agar-agar_ruhtax
-    quantite: 56
-    unit: gr.
-    commentaire: ''
-  - ingredient: sucre-blanc_lny16c
-    quantite: 1.5
-    unit: Kg
-    commentaire: ''
-  - ingredient: puree-chataigne-sans-sucre_xm77fg
-    quantite: 4
-    unit: Kg
-    commentaire: ''
-  - ingredient: lait-damande_csxbg6
-    quantite: 5
-    unit: l.
-    commentaire: ''
-  - ingredient: creme-soja_chfwwq
-    quantite: 5
-    unit: l.
-    commentaire: ''
+  - uuid: cr4kiz
+    name: Chocolat noir
+    originalQuantity: 600
+    originalUnit: gr.
+    normalizedQuantity: 600
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: sucres
+  - uuid: ruhtax
+    name: Agar-agar
+    originalQuantity: 56
+    originalUnit: gr.
+    normalizedQuantity: 56
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: autres
+  - uuid: lny16c
+    name: sucre blanc
+    originalQuantity: 1.5
+    originalUnit: kg
+    normalizedQuantity: 1500
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: sucres
+  - uuid: xm77fg
+    name: Purée chataîgne sans sucre
+    originalQuantity: 4
+    originalUnit: kg
+    normalizedQuantity: 4000
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: csxbg6
+    name: lait d’amande
+    originalQuantity: 5
+    originalUnit: l.
+    normalizedQuantity: 5000
+    normalizedUnit: ml
+    comment: ''
+    allergens: []
+    type: lof
+  - uuid: chfwwq
+    name: Crème soja
+    originalQuantity: 5
+    originalUnit: l.
+    normalizedQuantity: 5000
+    normalizedUnit: ml
+    comment: ''
+    allergens:
+      - Soja
+    type: lof
 materiel: []
-preparation: >-
+preparation: |-
   - Faire bouillir le lait d'amande, la crème soja et le sucre
-
   - Ajouter l'agar-agar et laisser bouillir 2 minutes
-
   - Couper la cuisson et rajouter la crème de châtaignes
-
   - Dresser dans des ramequins et réserver une nuit au frigo
-
   - Faire fondre le chocolat au bain marie
 
-
-  -Étaler finement le chocolat fondu sur une feuille de papier cuisson et
-  réserver au frigo pendant une nuit
+  -Étaler finement le chocolat fondu sur une feuille de papier cuisson et réserver au frigo pendant une nuit
 preparation24h: ''
 astuces: []
 prepAlt: []

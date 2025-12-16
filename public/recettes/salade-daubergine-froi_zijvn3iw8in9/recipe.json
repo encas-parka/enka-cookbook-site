@@ -14,67 +14,7 @@
   "check": true,
   "checkAlwaysOk": false,
   "materiel": null,
-  "ingredients": [{
-      "uuid": "doxujz",
-      "name": "Oignon rouge",
-      "originalQuantity": 2,
-      "originalUnit": "kg",
-      "normalizedQuantity": 2000,
-      "normalizedUnit": "gr.",
-      "comment": "",
-      "allergens": [],
-      "type": "legumes"
-    },{
-      "uuid": "u2m28w",
-      "name": "Ail",
-      "originalQuantity": 3,
-      "originalUnit": "tête·s",
-      "normalizedQuantity": 240,
-      "normalizedUnit": "gr.",
-      "comment": "",
-      "allergens": [],
-      "type": "legumes"
-    },{
-      "uuid": "ibtbnq",
-      "name": "Tomate",
-      "originalQuantity": 10,
-      "originalUnit": "kg",
-      "normalizedQuantity": 10000,
-      "normalizedUnit": "gr.",
-      "comment": "",
-      "allergens": [],
-      "type": "legumes"
-    },{
-      "uuid": "7sk3a5",
-      "name": "Aubergine",
-      "originalQuantity": 12,
-      "originalUnit": "kg",
-      "normalizedQuantity": 12000,
-      "normalizedUnit": "gr.",
-      "comment": "",
-      "allergens": [],
-      "type": "legumes"
-    },{
-      "uuid": "hgfa4e",
-      "name": "Persil frais",
-      "originalQuantity": 10,
-      "originalUnit": "bottes",
-      "normalizedQuantity": 10,
-      "normalizedUnit": "bottes",
-      "comment": "",
-      "allergens": [],
-      "type": "epices"
-    },{
-      "uuid": "h3c8al",
-      "name": "huile d'olive",
-      "originalQuantity": 1.3,
-      "originalUnit": "l.",
-      "normalizedQuantity": 1300,
-      "normalizedUnit": "ml",
-      "comment": "",
-      "allergens": [],
-      "type": "lof"
-    }],
+  "ingredients": [{"allergens":[],"comment":"","name":"Oignon rouge","normalizedQuantity":2000,"normalizedUnit":"gr.","originalQuantity":2,"originalUnit":"kg","type":"legumes","uuid":"doxujz"},{"allergens":[],"comment":"","name":"Ail","normalizedQuantity":240,"normalizedUnit":"gr.","originalQuantity":3,"originalUnit":"tête·s","type":"legumes","uuid":"u2m28w"},{"allergens":[],"comment":"","name":"Tomate","normalizedQuantity":10000,"normalizedUnit":"gr.","originalQuantity":10,"originalUnit":"kg","type":"legumes","uuid":"ibtbnq"},{"allergens":[],"comment":"","name":"Aubergine","normalizedQuantity":12000,"normalizedUnit":"gr.","originalQuantity":12,"originalUnit":"kg","type":"legumes","uuid":"7sk3a5"},{"allergens":[],"comment":"","name":"Persil frais","normalizedQuantity":10,"normalizedUnit":"bottes","originalQuantity":10,"originalUnit":"bottes","type":"epices","uuid":"hgfa4e"},{"allergens":[],"comment":"","name":"huile d'olive","normalizedQuantity":1300,"normalizedUnit":"ml","originalQuantity":1.3,"originalUnit":"l.","type":"lof","uuid":"h3c8al"}],
   "preparation": "\n\nCouper le reste des tomates en petits morceaux (1cm²), le persil et les oignons.\n\nArroser d'huile d'olive. Rectifier l'assaisonnement sel, poivre.\n\nVinaigrette inutile. Voilà! Servir bien frais.",
   "prepAlt": null,
   "permissionWrite": [],

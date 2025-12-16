@@ -12,54 +12,117 @@ plate: 100
 check: true
 checkAlwaysOk: false
 ingredients:
-  - ingredient: sarrasin_9f35oz
-    quantite: 5
-    unit: Kg
-    commentaire: ''
-  - ingredient: margarine_eipcl2
-    quantite: 500
-    unit: gr.
-    commentaire: ''
-  - ingredient: echalote_owsv5m
-    quantite: 20
-    unit: unité
-    commentaire: ''
-  - ingredient: oignon_rtavky
-    quantite: 20
-    unit: Kg
-    commentaire: ''
-  - ingredient: champignon-de-paris_92zzps
-    quantite: 10
-    unit: Kg
-    commentaire: ''
-  - ingredient: bouillon-cube_57xo8g
-    quantite: 15
-    unit: unité
-    commentaire: ''
-  - ingredient: persil-frais_hgfa4e
-    quantite: 3
-    unit: bottes
-    commentaire: ''
-  - ingredient: levure-de-biere_4be4ic
-    quantite: 200
-    unit: gr.
-    commentaire: ''
-  - ingredient: vin-blanc_judtle
-    quantite: 1
-    unit: l.
-    commentaire: ''
-  - ingredient: eau_ljzb7j
-    quantite: 15
-    unit: l.
-    commentaire: ''
-  - ingredient: poudre-damandes_rmgr7l
-    quantite: 400
-    unit: gr.
-    commentaire: ''
-  - ingredient: sucre-de-canne-blond_n85gmi
-    quantite: 100
-    unit: gr.
-    commentaire: ''
+  - uuid: 9f35oz
+    name: Sarrasin
+    originalQuantity: 5
+    originalUnit: kg
+    normalizedQuantity: 5000
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: sec
+  - uuid: eipcl2
+    name: Margarine
+    originalQuantity: 500
+    originalUnit: gr.
+    normalizedQuantity: 500
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: frais
+  - uuid: owsv5m
+    name: échalote
+    originalQuantity: 20
+    originalUnit: unité
+    normalizedQuantity: 600
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: rtavky
+    name: Oignon
+    originalQuantity: 20
+    originalUnit: kg
+    normalizedQuantity: 20000
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: 92zzps
+    name: Champignon de Paris
+    originalQuantity: 10
+    originalUnit: kg
+    normalizedQuantity: 10000
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: 57xo8g
+    name: bouillon cube
+    originalQuantity: 15
+    originalUnit: unité
+    normalizedQuantity: 15
+    normalizedUnit: unité
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: hgfa4e
+    name: Persil frais
+    originalQuantity: 3
+    originalUnit: bottes
+    normalizedQuantity: 3
+    normalizedUnit: bottes
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: 4be4ic
+    name: Levure de bière
+    originalQuantity: 200
+    originalUnit: gr.
+    normalizedQuantity: 200
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: lof
+  - uuid: judtle
+    name: Vin Blanc
+    originalQuantity: 1
+    originalUnit: l.
+    normalizedQuantity: 1000
+    normalizedUnit: ml
+    comment: ''
+    allergens:
+      - Sulfites
+      - Alcool
+    type: epices
+  - uuid: ljzb7j
+    name: Eau
+    originalQuantity: 15
+    originalUnit: l.
+    normalizedQuantity: 15000
+    normalizedUnit: ml
+    comment: ''
+    allergens: []
+    type: autres
+  - uuid: rmgr7l
+    name: Poudre d'amandes
+    originalQuantity: 400
+    originalUnit: gr.
+    normalizedQuantity: 400
+    normalizedUnit: gr.
+    comment: ''
+    allergens:
+      - Fruit à coque
+    type: sucres
+  - uuid: n85gmi
+    name: sucre de canne (blond)
+    originalQuantity: 100
+    originalUnit: gr.
+    normalizedQuantity: 100
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: sucres
 preparation: |-
   Faire bouillir 15 l. d'eau
 

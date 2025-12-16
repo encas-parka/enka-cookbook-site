@@ -14,31 +14,48 @@ quantite_desc: 20 parts par gastro
 check: true
 checkAlwaysOk: false
 ingredients:
-  - ingredient: oeuf_zf3zf8
-    quantite: 35
-    unit: unité
-    commentaire: ''
-  - ingredient: beurre-doux_kmq1zb
-    quantite: 1
-    unit: Kg
-    commentaire: ''
-  - ingredient: chocolat-noir-patissier-70p100_1e3zhq
-    quantite: 1.5
-    unit: Kg
-    commentaire: ''
-  - ingredient: creme-de-marron_dau8y8
-    quantite: 5
-    unit: Kg
-    commentaire: ''
-preparation: >-
+  - uuid: zf3zf8
+    name: Oeuf
+    originalQuantity: 35
+    originalUnit: unité
+    normalizedQuantity: 35
+    normalizedUnit: unité
+    comment: ''
+    allergens:
+      - Oeuf
+    type: lof
+  - uuid: kmq1zb
+    name: Beurre doux
+    originalQuantity: 1
+    originalUnit: kg
+    normalizedQuantity: 1000
+    normalizedUnit: gr.
+    comment: ''
+    allergens:
+      - Produit laitier
+    type: frais
+  - uuid: 1e3zhq
+    name: Chocolat noir patissier 70p100
+    originalQuantity: 1.5
+    originalUnit: kg
+    normalizedQuantity: 1500
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: sucres
+  - uuid: dau8y8
+    name: Crème de marron
+    originalQuantity: 5
+    originalUnit: kg
+    normalizedQuantity: 5000
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: sucres
+preparation: |-
   Préchauffer le four à 160°.
 
-
-  Fondre dans un cul de poule au bain-marie le chocolat additionné du beurre,
-  ajouter la crème de marron. Lorsque le mélange est presque froid y ajouter les
-  oeufs entiers. Bien mélanger. Portionner en gastros plats tapissés de papier
-  sulfurisé.
-
+  Fondre dans un cul de poule au bain-marie le chocolat additionné du beurre, ajouter la crème de marron. Lorsque le mélange est presque froid y ajouter les oeufs entiers. Bien mélanger. Portionner en gastros plats tapissés de papier sulfurisé.
 
   Enfourner pour 30 mn
 publishDate: 2025-06-05T07:22:00.000Z

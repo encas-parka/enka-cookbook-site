@@ -7,70 +7,151 @@ checkAlwaysOk: false
 cuisson: true
 draft: false
 ingredients:
-  - ingredient: pate-feuillete-sans-gluten-et-vegan_40wkon
-    quantite: 4
-    unit: unité
-    commentaire: ''
-  - ingredient: paprika_bidsmu
-    quantite: 2
-    unit: c. à café
-    commentaire: ''
-  - ingredient: coriandre-fraiche_fetrpe
-    quantite: 1
-    unit: bottes
-    commentaire: ''
-  - ingredient: aneth-aromatique_nnkg8f
-    quantite: 1.5
-    unit: bottes
-    commentaire: ''
-  - ingredient: concentre-de-tomate_mck2wl
-    quantite: 80
-    unit: gr.
-    commentaire: ''
-  - ingredient: coulis-de-tomates_09bywc
-    quantite: 1.5
-    unit: Kg
-    commentaire: ''
-  - ingredient: cumin-moulu_he3u48
-    quantite: 4
-    unit: c. à café
-    commentaire: ''
-  - ingredient: cannelle_sk1gbb
-    quantite: 3
-    unit: c. à café
-    commentaire: ''
-  - ingredient: yaourt-de-soja_hlbwfd
-    quantite: 800
-    unit: gr.
-    commentaire: ''
-  - ingredient: cebette-ciboule-cive-oignon-vert_j7as8d
-    quantite: 5
-    unit: unité
-    commentaire: ''
-  - ingredient: epinard_4totf1
-    quantite: 450
-    unit: gr.
-    commentaire: ''
-  - ingredient: ail_u2m28w
-    quantite: 1
-    unit: tête·s
-    commentaire: ''
-  - ingredient: oignon_rtavky
-    quantite: 6
-    unit: unité
-    commentaire: ''
-  - ingredient: huile-dolive_h3c8al
-    quantite: 180
-    unit: ml
-    commentaire: ''
-  - ingredient: pois-chiche-cuit_wwl5vn
-    quantite: 1.2
-    unit: Kg
-    commentaire: ''
-  - ingredient: sucre-en-poudre_u9z2he
-    quantite: 3
-    unit: c. à soupe
-    commentaire: ''
+  - uuid: 40wkon
+    name: Pate feuilleté sans gluten et vegan
+    originalQuantity: 4
+    originalUnit: unité
+    normalizedQuantity: 4
+    normalizedUnit: unité
+    comment: ''
+    allergens: []
+    type: frais
+  - uuid: bidsmu
+    name: Paprika
+    originalQuantity: 2
+    originalUnit: c. à café
+    normalizedQuantity: 10
+    normalizedUnit: ml
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: fetrpe
+    name: Coriandre fraîche
+    originalQuantity: 1
+    originalUnit: bottes
+    normalizedQuantity: 1
+    normalizedUnit: bottes
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: nnkg8f
+    name: Aneth aromatique
+    originalQuantity: 1.5
+    originalUnit: bottes
+    normalizedQuantity: 1.5
+    normalizedUnit: bottes
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: mck2wl
+    name: Concentré de tomate
+    originalQuantity: 80
+    originalUnit: gr.
+    normalizedQuantity: 80
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: 09bywc
+    name: Coulis de tomates
+    originalQuantity: 1.5
+    originalUnit: kg
+    normalizedQuantity: 1500
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: he3u48
+    name: Cumin moulu
+    originalQuantity: 4
+    originalUnit: c. à café
+    normalizedQuantity: 20
+    normalizedUnit: ml
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: sk1gbb
+    name: Cannelle
+    originalQuantity: 3
+    originalUnit: c. à café
+    normalizedQuantity: 15
+    normalizedUnit: ml
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: hlbwfd
+    name: Yaourt de soja
+    originalQuantity: 800
+    originalUnit: gr.
+    normalizedQuantity: 800
+    normalizedUnit: gr.
+    comment: ''
+    allergens:
+      - Soja
+    type: frais
+  - uuid: j7as8d
+    name: Cébette - Ciboule - Cive - Oignon vert
+    originalQuantity: 5
+    originalUnit: unité
+    normalizedQuantity: 600
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: 4totf1
+    name: Epinard
+    originalQuantity: 450
+    originalUnit: gr.
+    normalizedQuantity: 450
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: u2m28w
+    name: Ail
+    originalQuantity: 1
+    originalUnit: tête·s
+    normalizedQuantity: 80
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: rtavky
+    name: Oignon
+    originalQuantity: 6
+    originalUnit: unité
+    normalizedQuantity: 720
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: h3c8al
+    name: huile d'olive
+    originalQuantity: 180
+    originalUnit: ml
+    normalizedQuantity: 180
+    normalizedUnit: ml
+    comment: ''
+    allergens: []
+    type: lof
+  - uuid: wwl5vn
+    name: Pois chiche cuit
+    originalQuantity: 1.2
+    originalUnit: kg
+    normalizedQuantity: 1200
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: sec
+  - uuid: u9z2he
+    name: Sucre en poudre
+    originalQuantity: 3
+    originalUnit: c. à soupe
+    normalizedQuantity: 45
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: sucres
 materiel:
   - Four
 plate: 16

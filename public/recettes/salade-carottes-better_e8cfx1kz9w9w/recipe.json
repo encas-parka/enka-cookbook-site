@@ -14,67 +14,7 @@
   "check": false,
   "checkAlwaysOk": false,
   "materiel": null,
-  "ingredients": [{
-      "uuid": "7sc3uw",
-      "name": "Betterave rouge",
-      "originalQuantity": 5,
-      "originalUnit": "unité",
-      "normalizedQuantity": 1250,
-      "normalizedUnit": "gr.",
-      "comment": "",
-      "allergens": [],
-      "type": "legumes"
-    },{
-      "uuid": "eouu0v",
-      "name": "Carotte",
-      "originalQuantity": 10,
-      "originalUnit": "unité",
-      "normalizedQuantity": 1250,
-      "normalizedUnit": "gr.",
-      "comment": "",
-      "allergens": [],
-      "type": "legumes"
-    },{
-      "uuid": "zkmmgt",
-      "name": "Sirop d'érable ",
-      "originalQuantity": 4,
-      "originalUnit": "c. à soupe",
-      "normalizedQuantity": 60,
-      "normalizedUnit": "ml",
-      "comment": "",
-      "allergens": [],
-      "type": "sucres"
-    },{
-      "uuid": "hgfa4e",
-      "name": "Persil frais",
-      "originalQuantity": 1,
-      "originalUnit": "bottes",
-      "normalizedQuantity": 1,
-      "normalizedUnit": "bottes",
-      "comment": "",
-      "allergens": [],
-      "type": "epices"
-    },{
-      "uuid": "l3esgp",
-      "name": "Cumin (graines)",
-      "originalQuantity": 2,
-      "originalUnit": "c. à soupe",
-      "normalizedQuantity": 30,
-      "normalizedUnit": "ml",
-      "comment": "",
-      "allergens": [],
-      "type": "epices"
-    },{
-      "uuid": "e4mjd1",
-      "name": "Jus de citron",
-      "originalQuantity": 200,
-      "originalUnit": "ml",
-      "normalizedQuantity": 200,
-      "normalizedUnit": "ml",
-      "comment": "",
-      "allergens": [],
-      "type": "sucres"
-    }],
+  "ingredients": [{"allergens":[],"comment":"","name":"Betterave rouge","normalizedQuantity":1250,"normalizedUnit":"gr.","originalQuantity":5,"originalUnit":"unité","type":"legumes","uuid":"7sc3uw"},{"allergens":[],"comment":"","name":"Carotte","normalizedQuantity":1250,"normalizedUnit":"gr.","originalQuantity":10,"originalUnit":"unité","type":"legumes","uuid":"eouu0v"},{"allergens":[],"comment":"","name":"Sirop d'érable ","normalizedQuantity":60,"normalizedUnit":"ml","originalQuantity":4,"originalUnit":"c. à soupe","type":"sucres","uuid":"zkmmgt"},{"allergens":[],"comment":"","name":"Persil frais","normalizedQuantity":1,"normalizedUnit":"bottes","originalQuantity":1,"originalUnit":"bottes","type":"epices","uuid":"hgfa4e"},{"allergens":[],"comment":"","name":"Cumin (graines)","normalizedQuantity":30,"normalizedUnit":"ml","originalQuantity":2,"originalUnit":"c. à soupe","type":"epices","uuid":"l3esgp"},{"allergens":[],"comment":"","name":"Jus de citron","normalizedQuantity":200,"normalizedUnit":"ml","originalQuantity":200,"originalUnit":"ml","type":"sucres","uuid":"e4mjd1"}],
   "preparation": "Laver et peler les légumes.\n\nRaper, et réserver.\n\nHacher le persil.\n\nMélanger les tout au moment du service",
   "prepAlt": null,
   "permissionWrite": [],

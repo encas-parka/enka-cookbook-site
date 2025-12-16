@@ -13,22 +13,44 @@ plate: 100
 check: true
 checkAlwaysOk: false
 ingredients:
-  - ingredient: courgette_9zozfk
-    quantite: 11
-    unit: Kg
-    commentaire: ''
-  - ingredient: oeuf_zf3zf8
-    quantite: 40
-    unit: unité
-    commentaire: ''
-  - ingredient: creme-florette_k6zm70
-    quantite: 2.5
-    unit: l.
-    commentaire: ''
-  - ingredient: basilic_s8j4ff
-    quantite: 5
-    unit: bottes
-    commentaire: ''
+  - uuid: 9zozfk
+    name: Courgette
+    originalQuantity: 11
+    originalUnit: kg
+    normalizedQuantity: 11000
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: zf3zf8
+    name: Oeuf
+    originalQuantity: 40
+    originalUnit: unité
+    normalizedQuantity: 40
+    normalizedUnit: unité
+    comment: ''
+    allergens:
+      - Oeuf
+    type: lof
+  - uuid: k6zm70
+    name: Crème florette
+    originalQuantity: 2.5
+    originalUnit: l.
+    normalizedQuantity: 2500
+    normalizedUnit: ml
+    comment: ''
+    allergens:
+      - Produit laitier
+    type: frais
+  - uuid: s8j4ff
+    name: Basilic
+    originalQuantity: 5
+    originalUnit: bottes
+    normalizedQuantity: 5
+    normalizedUnit: bottes
+    comment: ''
+    allergens: []
+    type: epices
 preparation: |-
 
   Lavez les courgettes, les couper en lamelles. Plongez-les dans un

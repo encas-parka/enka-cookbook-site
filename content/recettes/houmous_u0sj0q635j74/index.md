@@ -6,44 +6,76 @@ checkAlwaysOk: false
 cuisson: true
 draft: false
 ingredients:
-  - ingredient: tahin_u33083
-    quantite: 100
-    unit: gr.
-    commentaire: ''
-  - ingredient: eau_ljzb7j
-    quantite: 3
-    unit: c. à soupe
-    commentaire: ''
-  - ingredient: paprika_bidsmu
-    quantite: 0.5
-    unit: gr.
-    commentaire: ''
-  - ingredient: ail_u2m28w
-    quantite: 1
-    unit: gousse·s
-    commentaire: ''
-  - ingredient: huile-dolive_h3c8al
-    quantite: 2
-    unit: c. à soupe
-    commentaire: ''
-  - ingredient: pois-chiche-cuit_wwl5vn
-    quantite: 300
-    unit: gr.
-    commentaire: ''
-  - ingredient: jus-de-citron_e4mjd1
-    quantite: 2
-    unit: c. à soupe
-    commentaire: ''
+  - uuid: u33083
+    name: Tahin
+    originalQuantity: 100
+    originalUnit: gr.
+    normalizedQuantity: 100
+    normalizedUnit: gr.
+    comment: ''
+    allergens:
+      - Sésame
+    type: autres
+  - uuid: ljzb7j
+    name: Eau
+    originalQuantity: 3
+    originalUnit: c. à soupe
+    normalizedQuantity: 45
+    normalizedUnit: ml
+    comment: ''
+    allergens: []
+    type: autres
+  - uuid: bidsmu
+    name: Paprika
+    originalQuantity: 0.5
+    originalUnit: gr.
+    normalizedQuantity: 0.5
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: u2m28w
+    name: Ail
+    originalQuantity: 1
+    originalUnit: gousse·s
+    normalizedQuantity: 6.5
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: h3c8al
+    name: huile d'olive
+    originalQuantity: 2
+    originalUnit: c. à soupe
+    normalizedQuantity: 30
+    normalizedUnit: ml
+    comment: ''
+    allergens: []
+    type: lof
+  - uuid: wwl5vn
+    name: Pois chiche cuit
+    originalQuantity: 300
+    originalUnit: gr.
+    normalizedQuantity: 300
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: sec
+  - uuid: e4mjd1
+    name: Jus de citron
+    originalQuantity: 2
+    originalUnit: c. à soupe
+    normalizedQuantity: 30
+    normalizedUnit: ml
+    comment: ''
+    allergens: []
+    type: sucres
 materiel:
   - Giraffe (Bras Mixeur)
 plate: 5
-preparation: >-
-  * Mixer tous les ingrédients sauf l'huile d'olive. Mais attention à ne pas
-  tout mettre dès le début, saler et ajuster au gout
-
-  * Mettre le houmous dans le bol ou l'assiette, de service, et verser un filer
-  d'huile d'olive sur le dessus. Parsemer très légèrement de paprika pour la
-  décoration
+preparation: |-
+  * Mixer tous les ingrédients sauf l'huile d'olive. Mais attention à ne pas tout mettre dès le début, saler et ajuster au gout
+  * Mettre le houmous dans le bol ou l'assiette, de service, et verser un filer d'huile d'olive sur le dessus. Parsemer très légèrement de paprika pour la décoration
 preparation24h: ''
 publishDate: 2024-03-18T13:12:27.157Z
 regime:

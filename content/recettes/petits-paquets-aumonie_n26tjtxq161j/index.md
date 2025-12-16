@@ -10,80 +10,125 @@ cuisson: true
 description: ''
 draft: false
 ingredients:
-  - ingredient: sel_2juq3x
-    commentaire: ''
-  - ingredient: poivre_2pps90
-    commentaire: ''
-  - ingredient: vinaigre-de-cidre_7qo3ht
-    quantite: 0.5
-    unit: l.
-    commentaire: ''
-  - ingredient: baies-roses_9o3793
-    quantite: 50
-    unit: gr.
-    commentaire: ''
-  - ingredient: cumin-graines_l3esgp
-    quantite: 50
-    unit: gr.
-    commentaire: ''
-  - ingredient: feta_m5dxyo
-    quantite: 3
-    unit: Kg
-    commentaire: ''
-  - ingredient: courge_oa85mx
-    quantite: 10
-    unit: Kg
-    commentaire: ''
-  - ingredient: oignon_rtavky
-    quantite: 4.1
-    unit: Kg
-    commentaire: ''
-  - ingredient: huile-de-tournesol_c70jxb
-    quantite: 3.5
-    unit: l.
-    commentaire: ''
-  - ingredient: pate-filo-1-feuille_x6je0g
-    quantite: 200
-    unit: unité
-    commentaire: ''
-  - ingredient: sucre-en-poudre_u9z2he
-    quantite: 200
-    unit: gr.
-    commentaire: ''
+  - uuid: 2juq3x
+    name: Sel
+    originalQuantity: 1
+    originalUnit: au goût
+    normalizedQuantity: 1
+    normalizedUnit: au goût
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: 2pps90
+    name: Poivre
+    originalQuantity: 1
+    originalUnit: au goût
+    normalizedQuantity: 1
+    normalizedUnit: au goût
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: 7qo3ht
+    name: Vinaigre de cidre
+    originalQuantity: 0.5
+    originalUnit: l.
+    normalizedQuantity: 500
+    normalizedUnit: ml
+    comment: ''
+    allergens:
+      - Alcool
+    type: epices
+  - uuid: 9o3793
+    name: Baies roses
+    originalQuantity: 50
+    originalUnit: gr.
+    normalizedQuantity: 50
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: l3esgp
+    name: Cumin (graines)
+    originalQuantity: 50
+    originalUnit: gr.
+    normalizedQuantity: 50
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: m5dxyo
+    name: Feta
+    originalQuantity: 3
+    originalUnit: kg
+    normalizedQuantity: 3000
+    normalizedUnit: gr.
+    comment: ''
+    allergens:
+      - Produit laitier
+    type: frais
+  - uuid: oa85mx
+    name: Courge
+    originalQuantity: 10
+    originalUnit: kg
+    normalizedQuantity: 10000
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: rtavky
+    name: Oignon
+    originalQuantity: 4.1
+    originalUnit: kg
+    normalizedQuantity: 4100
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: c70jxb
+    name: huile de tournesol
+    originalQuantity: 3.5
+    originalUnit: l.
+    normalizedQuantity: 3500
+    normalizedUnit: ml
+    comment: ''
+    allergens: []
+    type: lof
+  - uuid: x6je0g
+    name: Pate filo (1 feuille)
+    originalQuantity: 200
+    originalUnit: unité
+    normalizedQuantity: 200
+    normalizedUnit: unité
+    comment: ''
+    allergens:
+      - Gluten
+    type: autres
+  - uuid: u9z2he
+    name: Sucre en poudre
+    originalQuantity: 200
+    originalUnit: gr.
+    normalizedQuantity: 200
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: sucres
 materiel:
   - Gastro 1/1 (Normaux)
   - Four
 plate: 200
 prepAlt: []
-preparation: >-
+preparation: |-
   * Couper et caraméliser les oignons (avec vinaigre et sucre vers la fin)
-
-  * Râper courge/courgette. Enlever jus si courgette (pas testé avec les
-  courgettes)
-
+  * Râper courge/courgette. Enlever jus si courgette (pas testé avec les courgettes)
   * Torréfier cumin puis piler avec baies roses
-
-  * Mélanger les trois, assaisonner (poivre, sel, pas trop salé car la feta
-  sale)
-
+  * Mélanger les trois, assaisonner (poivre, sel, pas trop salé car la feta sale)
   * Ajouter la feta émiettée
-
-  * Montage : une feuille filo pour 2 paquets. Plier la demi feuille en deux,
-  puis façonner. Une grosse cuiller à soupe par paquet (à peser pour faire
-  partage exact). Cette recette prévoit 2 petits paquets par personne.
-
-  * Mettre environ 30 par gastro. Cuire au four à 180°C (à peu près 15 minutes,
-  je me souviens plus exactement, et ça dépend des fours - il faut que ce soit
-  doré et croustillant)
-
+  * Montage : une feuille filo pour 2 paquets. Plier la demi feuille en deux, puis façonner. Une grosse cuiller à soupe par paquet (à peser pour faire partage exact). Cette recette prévoit 2 petits paquets par personne.
+  * Mettre environ 30 par gastro. Cuire au four à 180°C (à peu près 15 minutes, je me souviens plus exactement, et ça dépend des fours - il faut que ce soit doré et croustillant)
 
   Version vegan : sans la feta
 
-
-  Version sans gluten : avec des feuilles de riz (marche pas au four, à cuire à
-  la poele dans un fond d'huile; et monter au dernier moment pour pas que ça
-  durcisse - en vrai c'est pas ouf cette alternative, peut être que ça peut être
-  juste la farce sur une biscotte sans gluten)
+  Version sans gluten : avec des feuilles de riz (marche pas au four, à cuire à la poele dans un fond d'huile; et monter au dernier moment pour pas que ça durcisse - en vrai c'est pas ouf cette alternative, peut être que ça peut être juste la farce sur une biscotte sans gluten)
 preparation24h: ''
 publishDate: '2024-05-17T15:21:00.000Z'
 regime:

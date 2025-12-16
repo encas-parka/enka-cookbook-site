@@ -14,37 +14,7 @@
   "check": true,
   "checkAlwaysOk": false,
   "materiel": null,
-  "ingredients": [{
-      "uuid": "h3c8al",
-      "name": "huile d'olive",
-      "originalQuantity": 15,
-      "originalUnit": "ml",
-      "normalizedQuantity": 15,
-      "normalizedUnit": "ml",
-      "comment": "",
-      "allergens": [],
-      "type": "lof"
-    },{
-      "uuid": "znpoor",
-      "name": "Haricots blancs",
-      "originalQuantity": 70,
-      "originalUnit": "gr.",
-      "normalizedQuantity": 70,
-      "normalizedUnit": "gr.",
-      "comment": "",
-      "allergens": [],
-      "type": "sec"
-    },{
-      "uuid": "e4mjd1",
-      "name": "Jus de citron",
-      "originalQuantity": 25,
-      "originalUnit": "ml",
-      "normalizedQuantity": 25,
-      "normalizedUnit": "ml",
-      "comment": "",
-      "allergens": [],
-      "type": "sucres"
-    }],
+  "ingredients": [{"allergens":[],"comment":"","name":"huile d'olive","normalizedQuantity":15,"normalizedUnit":"ml","originalQuantity":15,"originalUnit":"ml","type":"lof","uuid":"h3c8al"},{"allergens":[],"comment":"","name":"Haricots blancs","normalizedQuantity":70,"normalizedUnit":"gr.","originalQuantity":70,"originalUnit":"gr.","type":"sec","uuid":"znpoor"},{"allergens":[],"comment":"","name":"Jus de citron","normalizedQuantity":25,"normalizedUnit":"ml","originalQuantity":25,"originalUnit":"ml","type":"sucres","uuid":"e4mjd1"}],
   "preparation": "Tremper les haricots la veille, cela peut aussi se faire en 2h avec de l'eau chaude, mais pour une meilleure digestion, 2 jours de trempages en changeant l'eau est le top.\n\nEnsuite les cuire, selon les haricots le temps varie, par exemple ceux de Lima prennent plutôt 2h, alors que les petits lingots blancs seront cuit en une petite heur s'ils ont eu un bon trempage.\n\n\n\nEnsuite les mixer avec le jus de citron, l 'huile, sans oublier de saler. Ici on peut rajouter un peu d 'eau, selon l'égouttage opéré. On voudra que la purée soit bien lisse et pas sèche.",
   "prepAlt": null,
   "permissionWrite": [],

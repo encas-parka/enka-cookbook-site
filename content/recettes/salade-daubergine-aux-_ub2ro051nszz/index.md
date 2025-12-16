@@ -13,77 +13,109 @@ plate: 100
 check: false
 checkAlwaysOk: false
 ingredients:
-  - ingredient: aubergine_7sk3a5
-    quantite: 20
-    unit: Kg
-    commentaire: ''
-  - ingredient: ail_u2m28w
-    quantite: 10
-    unit: tête·s
-    commentaire: ''
-  - ingredient: huile-dolive_h3c8al
-    quantite: 1.1
-    unit: l.
-    commentaire: ''
-  - ingredient: vinaigre-de-vin_bjuxby
-    quantite: 1
-    unit: l.
-    commentaire: ''
-  - ingredient: piment-vert_dr1bbg
-    quantite: 17.1
-    unit: unité
-    commentaire: ''
-  - ingredient: menthe-fraiche_y16lzq
-    quantite: 5
-    unit: bottes
-    commentaire: ''
-  - ingredient: coriandre-fraiche_fetrpe
-    quantite: 5
-    unit: bottes
-    commentaire: ''
-  - ingredient: aneth-aromatique_nnkg8f
-    quantite: 5
-    unit: bottes
-    commentaire: ''
-  - ingredient: jus-de-citron_e4mjd1
-    quantite: 1
-    unit: l.
-    commentaire: ''
-preparation: >-
+  - uuid: 7sk3a5
+    name: Aubergine
+    originalQuantity: 20
+    originalUnit: kg
+    normalizedQuantity: 20000
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: u2m28w
+    name: Ail
+    originalQuantity: 10
+    originalUnit: tête·s
+    normalizedQuantity: 800
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: h3c8al
+    name: huile d'olive
+    originalQuantity: 1.1
+    originalUnit: l.
+    normalizedQuantity: 1100
+    normalizedUnit: ml
+    comment: ''
+    allergens: []
+    type: lof
+  - uuid: bjuxby
+    name: Vinaigre de vin
+    originalQuantity: 1
+    originalUnit: l.
+    normalizedQuantity: 1000
+    normalizedUnit: ml
+    comment: ''
+    allergens:
+      - Alcool
+    type: epices
+  - uuid: dr1bbg
+    name: Piment vert
+    originalQuantity: 17.1
+    originalUnit: unité
+    normalizedQuantity: 17.1
+    normalizedUnit: unité
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: y16lzq
+    name: Menthe fraîche
+    originalQuantity: 5
+    originalUnit: bottes
+    normalizedQuantity: 5
+    normalizedUnit: bottes
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: fetrpe
+    name: Coriandre fraîche
+    originalQuantity: 5
+    originalUnit: bottes
+    normalizedQuantity: 5
+    normalizedUnit: bottes
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: nnkg8f
+    name: Aneth aromatique
+    originalQuantity: 5
+    originalUnit: bottes
+    normalizedQuantity: 5
+    normalizedUnit: bottes
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: e4mjd1
+    name: Jus de citron
+    originalQuantity: 1
+    originalUnit: l.
+    normalizedQuantity: 1000
+    normalizedUnit: ml
+    comment: ''
+    allergens: []
+    type: sucres
+preparation: |-
   Préchauffer le four à 210°
-
 
   Couper les aubergines en cube de 3 cm.
 
-
   Mélanger les aubergines avec l'huile, du sel et du poivre dans des gastros.
 
-
-  Mettre les gastros couverts d'une feuille de papier sulfurisé pour une durée
-  de 35 minutes.
-
+  Mettre les gastros couverts d'une feuille de papier sulfurisé pour une durée de 35 minutes.
 
 
 
 
   Hacher les piments.
 
-
   Hacher l'ail en brunoise (cube de 1 mm)
-
 
   Hacher les herbes (menthe, coriandre, aneth)
 
+  Dans une casserole, frire l'ail dans l'huile pendant 1 minutes (attention de ne pas faire cuire l'ail trop longtemps car il deviendrait amer. verser le tout dans un chinois en prenant soin de récupérer l'huile de friture qui sera aussi utilisée par la suite.
 
-  Dans une casserole, frire l'ail dans l'huile pendant 1 minutes (attention de
-  ne pas faire cuire l'ail trop longtemps car il deviendrait amer. verser le
-  tout dans un chinois en prenant soin de récupérer l'huile de friture qui sera
-  aussi utilisée par la suite.
-
-
-  Mélanger les aubergines, le vinaigre, les piments, 3 cuillères à soupe d'huile
-  de friture.
-
+  Mélanger les aubergines, le vinaigre, les piments, 3 cuillères à soupe d'huile de friture.
 
   AU DERNIER MOMENT, ajouter les herbes hachées, le jus d e citron, l'ail frit.
 publishDate: 2025-06-04T19:09:00.000Z

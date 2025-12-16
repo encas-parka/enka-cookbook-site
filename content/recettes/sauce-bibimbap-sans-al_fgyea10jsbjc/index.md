@@ -13,38 +13,78 @@ plate: 25
 check: false
 checkAlwaysOk: false
 ingredients:
-  - ingredient: vinaigre-de-riz_k6injl
-    quantite: 300
-    unit: ml
-    commentaire: ''
-  - ingredient: gochujang-sans-gluten_28jpdi
-    quantite: 250
-    unit: gr.
-    commentaire: ''
-  - ingredient: sirop-derable_zkmmgt
-    quantite: 125
-    unit: ml
-    commentaire: ''
-  - ingredient: soda-au-gingembre-ginger-beer_s80bet
-    quantite: 250
-    unit: ml
-    commentaire: ''
-  - ingredient: huile-de-tournesol_c70jxb
-    quantite: 250
-    unit: ml
-    commentaire: ''
-  - ingredient: gingembre-bio_nz839c
-    quantite: 80
-    unit: gr.
-    commentaire: râpé
-  - ingredient: ail_u2m28w
-    quantite: 8
-    unit: gousse·s
-    commentaire: haché
-  - ingredient: eau_ljzb7j
-    quantite: 500
-    unit: ml
-    commentaire: ''
+  - uuid: k6injl
+    name: Vinaigre de riz
+    originalQuantity: 300
+    originalUnit: ml
+    normalizedQuantity: 300
+    normalizedUnit: ml
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: 28jpdi
+    name: Gochujang sans gluten
+    originalQuantity: 250
+    originalUnit: gr.
+    normalizedQuantity: 250
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: zkmmgt
+    name: 'Sirop d''érable '
+    originalQuantity: 125
+    originalUnit: ml
+    normalizedQuantity: 125
+    normalizedUnit: ml
+    comment: ''
+    allergens: []
+    type: sucres
+  - uuid: s80bet
+    name: Soda au Gingembre - Ginger Beer
+    originalQuantity: 250
+    originalUnit: ml
+    normalizedQuantity: 250
+    normalizedUnit: ml
+    comment: ''
+    allergens: []
+    type: sucres
+  - uuid: c70jxb
+    name: huile de tournesol
+    originalQuantity: 250
+    originalUnit: ml
+    normalizedQuantity: 250
+    normalizedUnit: ml
+    comment: ''
+    allergens: []
+    type: lof
+  - uuid: nz839c
+    name: Gingembre bio
+    originalQuantity: 80
+    originalUnit: gr.
+    normalizedQuantity: 80
+    normalizedUnit: gr.
+    comment: râpé
+    allergens: []
+    type: legumes
+  - uuid: u2m28w
+    name: Ail
+    originalQuantity: 8
+    originalUnit: gousse·s
+    normalizedQuantity: 52
+    normalizedUnit: gr.
+    comment: haché
+    allergens: []
+    type: legumes
+  - uuid: ljzb7j
+    name: Eau
+    originalQuantity: 500
+    originalUnit: ml
+    normalizedQuantity: 500
+    normalizedUnit: ml
+    comment: ''
+    allergens: []
+    type: autres
 preparation: |-
   Tout mixer !!
 

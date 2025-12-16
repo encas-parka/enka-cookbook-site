@@ -17,22 +17,43 @@ plate: 100
 quantite_desc: ''
 check: false
 ingredients:
-  - ingredient: vinaigre-de-cidre_7qo3ht
-    quantite: 350
-    unit: ml
-    commentaire: ''
-  - ingredient: basilic_s8j4ff
-    quantite: 2
-    unit: bottes
-    commentaire: ''
-  - ingredient: carotte_eouu0v
-    quantite: 5.5
-    unit: Kg
-    commentaire: ''
-  - ingredient: chou-rouge_nl2s2n
-    quantite: 5.5
-    unit: Kg
-    commentaire: ''
+  - uuid: 7qo3ht
+    name: Vinaigre de cidre
+    originalQuantity: 350
+    originalUnit: ml
+    normalizedQuantity: 350
+    normalizedUnit: ml
+    comment: ''
+    allergens:
+      - Alcool
+    type: epices
+  - uuid: s8j4ff
+    name: Basilic
+    originalQuantity: 2
+    originalUnit: bottes
+    normalizedQuantity: 2
+    normalizedUnit: bottes
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: eouu0v
+    name: Carotte
+    originalQuantity: 5.5
+    originalUnit: kg
+    normalizedQuantity: 5500
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: nl2s2n
+    name: Chou rouge
+    originalQuantity: 5.5
+    originalUnit: kg
+    normalizedQuantity: 5500
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
 materiel: []
 preparation: |-
   Râper les carottes

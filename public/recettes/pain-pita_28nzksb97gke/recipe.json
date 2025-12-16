@@ -14,27 +14,7 @@
   "check": true,
   "checkAlwaysOk": false,
   "materiel": null,
-  "ingredients": [{
-      "uuid": "2av6w8",
-      "name": "Farine de blé",
-      "originalQuantity": 15,
-      "originalUnit": "kg",
-      "normalizedQuantity": 15000,
-      "normalizedUnit": "gr.",
-      "comment": "",
-      "allergens": ["Gluten"],
-      "type": "lof"
-    },{
-      "uuid": "7qqcwc",
-      "name": "Levure fraîche de boulanger",
-      "originalQuantity": 15,
-      "originalUnit": "unité",
-      "normalizedQuantity": 15,
-      "normalizedUnit": "unité",
-      "comment": "",
-      "allergens": [],
-      "type": "frais"
-    }],
+  "ingredients": [{"allergens":["Gluten"],"comment":"","name":"Farine de blé","normalizedQuantity":15000,"normalizedUnit":"gr.","originalQuantity":15,"originalUnit":"kg","type":"lof","uuid":"2av6w8"},{"allergens":[],"comment":"","name":"Levure fraîche de boulanger","normalizedQuantity":15,"normalizedUnit":"unité","originalQuantity":15,"originalUnit":"unité","type":"frais","uuid":"7qqcwc"}],
   "preparation": "c'est arnaud qui le fait",
   "prepAlt": null,
   "permissionWrite": [],

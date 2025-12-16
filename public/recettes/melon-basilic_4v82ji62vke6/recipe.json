@@ -14,27 +14,7 @@
   "check": true,
   "checkAlwaysOk": true,
   "materiel": null,
-  "ingredients": [{
-      "uuid": "on84nb",
-      "name": "Melon",
-      "originalQuantity": 4,
-      "originalUnit": "unité",
-      "normalizedQuantity": 4,
-      "normalizedUnit": "unité",
-      "comment": "",
-      "allergens": [],
-      "type": "legumes"
-    },{
-      "uuid": "s8j4ff",
-      "name": "Basilic",
-      "originalQuantity": 1,
-      "originalUnit": "bottes",
-      "normalizedQuantity": 1,
-      "normalizedUnit": "bottes",
-      "comment": "",
-      "allergens": [],
-      "type": "epices"
-    }],
+  "ingredients": [{"allergens":[],"comment":"","name":"Melon","normalizedQuantity":4,"normalizedUnit":"unité","originalQuantity":4,"originalUnit":"unité","type":"legumes","uuid":"on84nb"},{"allergens":[],"comment":"","name":"Basilic","normalizedQuantity":1,"normalizedUnit":"bottes","originalQuantity":1,"originalUnit":"bottes","type":"epices","uuid":"s8j4ff"}],
   "preparation": ":)",
   "prepAlt": null,
   "permissionWrite": [],

@@ -17,14 +17,24 @@ quantite_desc: pour 2 petites tranches par personne
 check: true
 checkAlwaysOk: true
 ingredients:
-  - ingredient: melon_on84nb
-    quantite: 4
-    unit: unité
-    commentaire: ''
-  - ingredient: basilic_s8j4ff
-    quantite: 1
-    unit: bottes
-    commentaire: ''
+  - uuid: on84nb
+    name: Melon
+    originalQuantity: 4
+    originalUnit: unité
+    normalizedQuantity: 4
+    normalizedUnit: unité
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: s8j4ff
+    name: Basilic
+    originalQuantity: 1
+    originalUnit: bottes
+    normalizedQuantity: 1
+    normalizedUnit: bottes
+    comment: ''
+    allergens: []
+    type: epices
 preparation: ':)'
 publishDate: 2025-07-31T08:31:00.000Z
 serveHot: false

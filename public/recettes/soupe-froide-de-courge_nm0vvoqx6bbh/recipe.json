@@ -14,57 +14,7 @@
   "check": false,
   "checkAlwaysOk": false,
   "materiel": null,
-  "ingredients": [{
-      "uuid": "9zozfk",
-      "name": "Courgette",
-      "originalQuantity": 37,
-      "originalUnit": "kg",
-      "normalizedQuantity": 37000,
-      "normalizedUnit": "gr.",
-      "comment": "",
-      "allergens": [],
-      "type": "legumes"
-    },{
-      "uuid": "ljzb7j",
-      "name": "Eau",
-      "originalQuantity": 4.4,
-      "originalUnit": "l.",
-      "normalizedQuantity": 4400,
-      "normalizedUnit": "ml",
-      "comment": "",
-      "allergens": [],
-      "type": "autres"
-    },{
-      "uuid": "y16lzq",
-      "name": "Menthe fraîche",
-      "originalQuantity": 20,
-      "originalUnit": "bottes",
-      "normalizedQuantity": 20,
-      "normalizedUnit": "bottes",
-      "comment": "dont éventuellement qqs feuilles de menthe glaciale",
-      "allergens": [],
-      "type": "epices"
-    },{
-      "uuid": "h3c8al",
-      "name": "huile d'olive",
-      "originalQuantity": 880,
-      "originalUnit": "ml",
-      "normalizedQuantity": 880,
-      "normalizedUnit": "ml",
-      "comment": "",
-      "allergens": [],
-      "type": "lof"
-    },{
-      "uuid": "gpeob7",
-      "name": "Lait de soja",
-      "originalQuantity": 20,
-      "originalUnit": "l.",
-      "normalizedQuantity": 20000,
-      "normalizedUnit": "ml",
-      "comment": "",
-      "allergens": ["Soja"],
-      "type": "lof"
-    }],
+  "ingredients": [{"allergens":[],"comment":"","name":"Courgette","normalizedQuantity":37000,"normalizedUnit":"gr.","originalQuantity":37,"originalUnit":"kg","type":"legumes","uuid":"9zozfk"},{"allergens":[],"comment":"","name":"Eau","normalizedQuantity":4400,"normalizedUnit":"ml","originalQuantity":4.4,"originalUnit":"l.","type":"autres","uuid":"ljzb7j"},{"allergens":[],"comment":"dont éventuellement qqs feuilles de menthe glaciale","name":"Menthe fraîche","normalizedQuantity":20,"normalizedUnit":"bottes","originalQuantity":20,"originalUnit":"bottes","type":"epices","uuid":"y16lzq"},{"allergens":[],"comment":"","name":"huile d'olive","normalizedQuantity":880,"normalizedUnit":"ml","originalQuantity":880,"originalUnit":"ml","type":"lof","uuid":"h3c8al"},{"allergens":["Soja"],"comment":"","name":"Lait de soja","normalizedQuantity":20000,"normalizedUnit":"ml","originalQuantity":20,"originalUnit":"l.","type":"lof","uuid":"gpeob7"}],
   "preparation": "Le lendemain ajouter le lait de soja et mixer l'ensemble jusqu'à ce que la texture soit bien lisse (rajouter éventuelement un peu d'eau selon la texture souhaitée).  rectifier son assaisonement. Puis juste avant de servir verser dans les verres et mettre un filet d'huile d'olive et une feuille de menthe par verre.",
   "prepAlt": null,
   "permissionWrite": [],

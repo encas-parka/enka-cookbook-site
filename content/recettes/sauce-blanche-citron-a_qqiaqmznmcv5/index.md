@@ -6,28 +6,48 @@ checkAlwaysOk: true
 cuisson: false
 draft: false
 ingredients:
-  - ingredient: sel_2juq3x
-    commentaire: ''
-  - ingredient: fromage-blanc_b2dxf8
-    quantite: 1.2
-    unit: l.
-    commentaire: ''
-  - ingredient: ail_u2m28w
-    quantite: 7
-    unit: gousse·s
-    commentaire: ''
-  - ingredient: jus-de-citron_e4mjd1
-    quantite: 0.3
-    unit: l.
-    commentaire: ''
+  - uuid: 2juq3x
+    name: Sel
+    originalQuantity: 1
+    originalUnit: au goût
+    normalizedQuantity: 1
+    normalizedUnit: au goût
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: b2dxf8
+    name: Fromage blanc
+    originalQuantity: 1.2
+    originalUnit: l.
+    normalizedQuantity: 1200
+    normalizedUnit: ml
+    comment: ''
+    allergens:
+      - Produit laitier
+    type: frais
+  - uuid: u2m28w
+    name: Ail
+    originalQuantity: 7
+    originalUnit: gousse·s
+    normalizedQuantity: 45.5
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: e4mjd1
+    name: Jus de citron
+    originalQuantity: 0.3
+    originalUnit: l.
+    normalizedQuantity: 300
+    normalizedUnit: ml
+    comment: ''
+    allergens: []
+    type: sucres
 plate: 40
-preparation: >-
-  Mélanger tous les ingrédients (le jus de citron petit à petit pour ajuster au
-  goût). Ajuster l'assaisonnement.
-
+preparation: |-
+  Mélanger tous les ingrédients (le jus de citron petit à petit pour ajuster au goût). Ajuster l'assaisonnement.
 
   Dosé pour 2 cuillers à soupe par personne.
-
 
 
 

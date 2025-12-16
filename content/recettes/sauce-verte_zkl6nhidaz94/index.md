@@ -14,37 +14,75 @@ check: true
 checkAlwaysOk: false
 checkfor: 50
 ingredients:
-  - ingredient: graine-de-tournesol_4vxqlr
-    quantite: ''
-    unit: gr.
-    commentaire: ''
-  - ingredient: creme-soja_chfwwq
-    quantite: 0.5
-    unit: l.
-    commentaire: ''
-  - ingredient: yaourt-de-soja_hlbwfd
-    quantite: 400
-    unit: gr.
-    commentaire: ''
-  - ingredient: persil-frais_hgfa4e
-    quantite: 4
-    unit: bottes
-    commentaire: ou fanes de carottes
-  - ingredient: jus-de-citron_e4mjd1
-    quantite: 0.25
-    unit: l.
-    commentaire: ''
-  - ingredient: poivre_2pps90
-    commentaire: ''
-  - ingredient: sel_2juq3x
-    commentaire: ''
-preparation: >-
-  Dans un mixeur, hacher le persil avec les graines gonflées, ajouter la crème,
-  le yaourt, le citron.
-
+  - uuid: 4vxqlr
+    name: Graine de tournesol
+    originalQuantity: 1
+    originalUnit: gr.
+    normalizedQuantity: 1
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: sec
+  - uuid: chfwwq
+    name: Crème soja
+    originalQuantity: 0.5
+    originalUnit: l.
+    normalizedQuantity: 500
+    normalizedUnit: ml
+    comment: ''
+    allergens:
+      - Soja
+    type: lof
+  - uuid: hlbwfd
+    name: Yaourt de soja
+    originalQuantity: 400
+    originalUnit: gr.
+    normalizedQuantity: 400
+    normalizedUnit: gr.
+    comment: ''
+    allergens:
+      - Soja
+    type: frais
+  - uuid: hgfa4e
+    name: Persil frais
+    originalQuantity: 4
+    originalUnit: bottes
+    normalizedQuantity: 4
+    normalizedUnit: bottes
+    comment: ou fanes de carottes
+    allergens: []
+    type: epices
+  - uuid: e4mjd1
+    name: Jus de citron
+    originalQuantity: 0.25
+    originalUnit: l.
+    normalizedQuantity: 250
+    normalizedUnit: ml
+    comment: ''
+    allergens: []
+    type: sucres
+  - uuid: 2pps90
+    name: Poivre
+    originalQuantity: 1
+    originalUnit: au goût
+    normalizedQuantity: 1
+    normalizedUnit: au goût
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: 2juq3x
+    name: Sel
+    originalQuantity: 1
+    originalUnit: au goût
+    normalizedQuantity: 1
+    normalizedUnit: au goût
+    comment: ''
+    allergens: []
+    type: epices
+preparation: |-
+  Dans un mixeur, hacher le persil avec les graines gonflées, ajouter la crème, le yaourt, le citron.
 
   Verser l'huile d'olive en ajustant la consistance.
-
 
   Saler et poivrer.
 preparation24h: Faire tremper les graines de tournesol dans de l'eau 8 à 12h avant.

@@ -14,89 +14,120 @@ plate: 32
 quantite_desc: ''
 check: true
 ingredients:
-  - ingredient: beurre-de-cacahuetes-sucre_7wpsj2
-    quantite: 220
-    unit: gr.
-    commentaire: crunchy
-  - ingredient: farine-de-ble_2av6w8
-    quantite: 90
-    unit: gr.
-    commentaire: ''
-  - ingredient: sucre-blanc_lny16c
-    quantite: 330
-    unit: gr.
-    commentaire: ''
-  - ingredient: chocolat-noir-patissier-70p100_1e3zhq
-    quantite: 230
-    unit: gr.
-    commentaire: (en pépites)
-  - ingredient: oeuf_zf3zf8
-    quantite: 6
-    unit: unité
-    commentaire: ''
-  - ingredient: chocolat-noir-patissier-70p100_1e3zhq
-    quantite: 420
-    unit: gr.
-    commentaire: (fondu)
-  - ingredient: vanille-extrait-concentre_n818be
-    quantite: 4
-    unit: c. à café
-    commentaire: ''
-  - ingredient: sel_2juq3x
-    quantite: 2
-    unit: pincées
-    commentaire: ''
-  - ingredient: margarine_eipcl2
-    quantite: 280
-    unit: gr.
-    commentaire: ''
+  - uuid: 7wpsj2
+    name: Beurre de cacahuètes (sucré)
+    originalQuantity: 220
+    originalUnit: gr.
+    normalizedQuantity: 220
+    normalizedUnit: gr.
+    comment: crunchy
+    allergens:
+      - Arachides
+    type: autres
+  - uuid: 2av6w8
+    name: Farine de blé
+    originalQuantity: 90
+    originalUnit: gr.
+    normalizedQuantity: 90
+    normalizedUnit: gr.
+    comment: ''
+    allergens:
+      - Gluten
+    type: lof
+  - uuid: lny16c
+    name: sucre blanc
+    originalQuantity: 330
+    originalUnit: gr.
+    normalizedQuantity: 330
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: sucres
+  - uuid: 1e3zhq
+    name: Chocolat noir patissier 70p100
+    originalQuantity: 230
+    originalUnit: gr.
+    normalizedQuantity: 230
+    normalizedUnit: gr.
+    comment: (en pépites)
+    allergens: []
+    type: sucres
+  - uuid: zf3zf8
+    name: Oeuf
+    originalQuantity: 6
+    originalUnit: unité
+    normalizedQuantity: 6
+    normalizedUnit: unité
+    comment: ''
+    allergens:
+      - Oeuf
+    type: lof
+  - uuid: 1e3zhq
+    name: Chocolat noir patissier 70p100
+    originalQuantity: 420
+    originalUnit: gr.
+    normalizedQuantity: 420
+    normalizedUnit: gr.
+    comment: (fondu)
+    allergens: []
+    type: sucres
+  - uuid: n818be
+    name: vanille extrait concentré
+    originalQuantity: 4
+    originalUnit: c. à café
+    normalizedQuantity: 20
+    normalizedUnit: ml
+    comment: ''
+    allergens: []
+    type: sucres
+  - uuid: 2juq3x
+    name: Sel
+    originalQuantity: 2
+    originalUnit: pincées
+    normalizedQuantity: 0.8
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: eipcl2
+    name: Margarine
+    originalQuantity: 280
+    originalUnit: gr.
+    normalizedQuantity: 280
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: frais
 materiel:
   - Four
   - Gastro 1/1 (Fins)
   - Grand Saladier
-preparation: >-
+preparation: |-
   Instructions :
-
 
   Mettre le chocolat et le beurre à fondre au bain-marie ou au micro-ondes.
 
-
   Dans un autre bol, mélanger les deux gros œufs, le sucre et la vanille
-
 
   Ne pas trop mélanger pour avoir une pâte molle et non aérée.
 
-
   Verser le chocolat fondu, mais pas chaud pour ne pas cuire les œufs.
-
 
   Ajouter la farine.
 
-
   Ajouter le chocolat coupé en morceaux. Bien mélanger.
-
 
   Verser dans un moule carré de 21X21 garni de papier sulfurisé.
 
-
   Bien étaler la pâte.
 
+  Ajouter le beurre de cacahuètes en petits paquets. J’ai pris ici du beurre de cacahuètes « crunchy ».
 
-  Ajouter le beurre de cacahuètes en petits paquets. J’ai pris ici du beurre de
-  cacahuètes « crunchy ».
+  Avec un couteau ou une baguette chinoise, répartir grossièrement le beurre de cacahuètes pour que chaque part finale en ait.
 
+  Mettre au four à 170°C pendant 30 minutes. Les côtés doivent commencer légèrement à se colorer et le reste doit paraitre cuit en surface mais pas trop en dessous !
 
-  Avec un couteau ou une baguette chinoise, répartir grossièrement le beurre de
-  cacahuètes pour que chaque part finale en ait.
-
-
-  Mettre au four à 170°C pendant 30 minutes. Les côtés doivent commencer
-  légèrement à se colorer et le reste doit paraitre cuit en surface mais pas
-  trop en dessous !
-
-
-  Laisser refroidir complètement puis mettre au frais deux heures avant de
-  démouler et de couper en parts.
+  Laisser refroidir complètement puis mettre au frais deux heures avant de démouler et de couper en parts.
 preparation24h: ''
 astuces: []
 prepAlt: []

@@ -14,37 +14,7 @@
   "check": true,
   "checkAlwaysOk": true,
   "materiel": null,
-  "ingredients": [{
-      "uuid": "2juq3x",
-      "name": "Sel",
-      "originalQuantity": 10,
-      "originalUnit": "gr.",
-      "normalizedQuantity": 10,
-      "normalizedUnit": "gr.",
-      "comment": "",
-      "allergens": [],
-      "type": "epices"
-    },{
-      "uuid": "eouu0v",
-      "name": "Carotte",
-      "originalQuantity": 13,
-      "originalUnit": "kg",
-      "normalizedQuantity": 13000,
-      "normalizedUnit": "gr.",
-      "comment": "",
-      "allergens": [],
-      "type": "legumes"
-    },{
-      "uuid": "atccqu",
-      "name": "Huile végétale",
-      "originalQuantity": 1,
-      "originalUnit": "l.",
-      "normalizedQuantity": 1000,
-      "normalizedUnit": "ml",
-      "comment": "",
-      "allergens": [],
-      "type": "lof"
-    }],
+  "ingredients": [{"allergens":[],"comment":"","name":"Sel","normalizedQuantity":10,"normalizedUnit":"gr.","originalQuantity":10,"originalUnit":"gr.","type":"epices","uuid":"2juq3x"},{"allergens":[],"comment":"","name":"Carotte","normalizedQuantity":13000,"normalizedUnit":"gr.","originalQuantity":13,"originalUnit":"kg","type":"legumes","uuid":"eouu0v"},{"allergens":[],"comment":"","name":"Huile végétale","normalizedQuantity":1000,"normalizedUnit":"ml","originalQuantity":1,"originalUnit":"l.","type":"lof","uuid":"atccqu"}],
   "preparation": "Raper et assaisonner à convenance",
   "prepAlt": null,
   "permissionWrite": [],

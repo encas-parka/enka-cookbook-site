@@ -1,533 +1,203 @@
 {
   "mainGroup_id": "la-p_chateaulin",
-  "hugoContentHash": "3cf0a8b2246717ca38cbc2ee5cb3b40a",
+  "hugoContentHash": "f2d4a950a783f6852e58e9599c1ab1ee",
   "name": "La printanière - Chateaulin",
   "allDates": ["2024-03-20T20:00:00.000Z"],
   "ingredients": [
     
     
     {
-        "ingredientHugoUuid": "u2m28w",
-        "ingredientName": "Ail",
-        "productSemanticKey": "ail_u2m28w_la-p_chateaulin",
-        "ingType": "legumes",
-        "totalAssiettes": 100,
-        "nbRecipes": 2,"pFrais": true,
-          "conversionRules": ["un ail = 6.5 gr.","1 gousse = 6.5 gr."],"totalNeededRaw": [{ "q":2, "u": "gousse·s" },{ "q":5, "u": "unité" }],
+        "ingredientHugoUuid": "",
+        "ingredientName": "inconnu",
+        "productSemanticKey": "inconnu__la-p_chateaulin",
+        "ingType": null,
+        "totalAssiettes": 1320,
+        "nbRecipes": 30,"totalNeededRaw": [{ "q":30, "u": "recette·s" }],
         "byDate": {"2024-03-20T20:00:00.000Z": {
-          "totalConsolidated": [{"q": 46, "u": "gr."}],
+          "totalConsolidated": [{"q": 30, "u": "recette·s"}],
           "recipes": [{
+                "r": "Namoura",
+                "q":1,
+                "u": "recette·s","qEq":1,
+                "uEq": "recette·s",
+                "a": 50
+              },{
+                "r": "Namoura",
+                "q":1,
+                "u": "recette·s","qEq":1,
+                "uEq": "recette·s",
+                "a": 50
+              },{
+                "r": "Namoura",
+                "q":1,
+                "u": "recette·s","qEq":1,
+                "uEq": "recette·s",
+                "a": 50
+              },{
+                "r": "Namoura",
+                "q":1,
+                "u": "recette·s","qEq":1,
+                "uEq": "recette·s",
+                "a": 50
+              },{
+                "r": "Namoura",
+                "q":1,
+                "u": "recette·s","qEq":1,
+                "uEq": "recette·s",
+                "a": 50
+              },{
+                "r": "Namoura",
+                "q":1,
+                "u": "recette·s","qEq":1,
+                "uEq": "recette·s",
+                "a": 50
+              },{
+                "r": "Namoura",
+                "q":1,
+                "u": "recette·s","qEq":1,
+                "uEq": "recette·s",
+                "a": 50
+              },{
+                "r": "Namoura",
+                "q":1,
+                "u": "recette·s","qEq":1,
+                "uEq": "recette·s",
+                "a": 50
+              },{
+                "r": "Namoura",
+                "q":1,
+                "u": "recette·s","qEq":1,
+                "uEq": "recette·s",
+                "a": 50
+              },{
+                "r": "Namoura",
+                "q":1,
+                "u": "recette·s","qEq":1,
+                "uEq": "recette·s",
+                "a": 50
+              },{
                 "r": "Purée de haricots blancs",
-                "q":5.0,
-                "u": "unité","qEq":32,
-                "uEq": "gr.",
+                "q":1,
+                "u": "recette·s","qEq":1,
+                "uEq": "recette·s",
+                "a": 50
+              },{
+                "r": "Purée de haricots blancs",
+                "q":1,
+                "u": "recette·s","qEq":1,
+                "uEq": "recette·s",
+                "a": 50
+              },{
+                "r": "Purée de haricots blancs",
+                "q":1,
+                "u": "recette·s","qEq":1,
+                "uEq": "recette·s",
+                "a": 50
+              },{
+                "r": "Purée de haricots blancs",
+                "q":1,
+                "u": "recette·s","qEq":1,
+                "uEq": "recette·s",
+                "a": 50
+              },{
+                "r": "Purée de haricots blancs",
+                "q":1,
+                "u": "recette·s","qEq":1,
+                "uEq": "recette·s",
+                "a": 50
+              },{
+                "r": "Purée de haricots blancs",
+                "q":1,
+                "u": "recette·s","qEq":1,
+                "uEq": "recette·s",
                 "a": 50
               },{
                 "r": "Fromage frais ail - ciboulette vegan",
-                "q":2.0,
-                "u": "gousse·s","qEq":13,
-                "uEq": "gr.",
+                "q":1,
+                "u": "recette·s","qEq":1,
+                "uEq": "recette·s",
                 "a": 50
-              }],
-          "totalAssiettes": 100,
-          "recipeCount": 2
-        }}
-      }
-    
-    
-    ,{
-        "ingredientHugoUuid": "nnkg8f",
-        "ingredientName": "Aneth aromatique",
-        "productSemanticKey": "aneth-arom_nnkg8f_la-p_chateaulin",
-        "ingType": "epices",
-        "totalAssiettes": 5,
-        "nbRecipes": 1,
-          "conversionRules": ["1 c. à soupe = 15 ml."],"totalNeededRaw": [{ "q":1.7, "u": "c. à soupe" }],
-        "byDate": {"2024-03-20T20:00:00.000Z": {
-          "totalConsolidated": [{"q": 25, "u": "ml"}],
-          "recipes": [{
+              },{
+                "r": "Fromage frais ail - ciboulette vegan",
+                "q":1,
+                "u": "recette·s","qEq":1,
+                "uEq": "recette·s",
+                "a": 50
+              },{
+                "r": "Fromage frais ail - ciboulette vegan",
+                "q":1,
+                "u": "recette·s","qEq":1,
+                "uEq": "recette·s",
+                "a": 50
+              },{
+                "r": "Fromage frais ail - ciboulette vegan",
+                "q":1,
+                "u": "recette·s","qEq":1,
+                "uEq": "recette·s",
+                "a": 50
+              },{
+                "r": "Fromage frais ail - ciboulette vegan",
+                "q":1,
+                "u": "recette·s","qEq":1,
+                "uEq": "recette·s",
+                "a": 50
+              },{
+                "r": "Salade fenouil-carottes-oranges",
+                "q":1,
+                "u": "recette·s","qEq":1,
+                "uEq": "recette·s",
+                "a": 50
+              },{
+                "r": "Salade fenouil-carottes-oranges",
+                "q":1,
+                "u": "recette·s","qEq":1,
+                "uEq": "recette·s",
+                "a": 50
+              },{
+                "r": "Salade fenouil-carottes-oranges",
+                "q":1,
+                "u": "recette·s","qEq":1,
+                "uEq": "recette·s",
+                "a": 50
+              },{
+                "r": "Salade fenouil-carottes-oranges",
+                "q":1,
+                "u": "recette·s","qEq":1,
+                "uEq": "recette·s",
+                "a": 50
+              },{
+                "r": "Salade fenouil-carottes-oranges",
+                "q":1,
+                "u": "recette·s","qEq":1,
+                "uEq": "recette·s",
+                "a": 50
+              },{
                 "r": "Betteraves fermentées",
-                "q":1.7,
-                "u": "c. à soupe","qEq":25,
-                "uEq": "ml",
+                "q":1,
+                "u": "recette·s","qEq":1,
+                "uEq": "recette·s",
                 "a": 5
-              }],
-          "totalAssiettes": 5,
-          "recipeCount": 1
-        }}
-      }
-    
-    
-    ,{
-        "ingredientHugoUuid": "7sc3uw",
-        "ingredientName": "Betterave rouge",
-        "productSemanticKey": "betterave-_7sc3uw_la-p_chateaulin",
-        "ingType": "legumes",
-        "totalAssiettes": 5,
-        "nbRecipes": 1,"pFrais": true,"totalNeededRaw": [{ "q":833, "u": "gr." }],
-        "byDate": {"2024-03-20T20:00:00.000Z": {
-          "totalConsolidated": [{"q": 833, "u": "gr."}],
-          "recipes": [{
-                "r": "Betteraves fermentées",
-                "q":0.8,
-                "u": "Kg","qEq":833,
-                "uEq": "gr.",
-                "a": 5
-              }],
-          "totalAssiettes": 5,
-          "recipeCount": 1
-        }}
-      }
-    
-    
-    ,{
-        "ingredientHugoUuid": "fnnx13",
-        "ingredientName": "Bicarbonate de soude",
-        "productSemanticKey": "bicarbonat_fnnx13_la-p_chateaulin",
-        "ingType": "autres",
-        "totalAssiettes": 50,
-        "nbRecipes": 1,
-          "conversionRules": ["1 c. à café = 5 ml."],"totalNeededRaw": [{ "q":1, "u": "c. à café" }],
-        "byDate": {"2024-03-20T20:00:00.000Z": {
-          "totalConsolidated": [{"q": 5, "u": "ml"}],
-          "recipes": [{
-                "r": "Namoura",
-                "q":1.0,
-                "u": "c. à café","qEq":5,
-                "uEq": "ml",
-                "a": 50
-              }],
-          "totalAssiettes": 50,
-          "recipeCount": 1
-        }}
-      }
-    
-    
-    ,{
-        "ingredientHugoUuid": "eouu0v",
-        "ingredientName": "Carotte",
-        "productSemanticKey": "carotte_eouu0v_la-p_chateaulin",
-        "ingType": "legumes",
-        "totalAssiettes": 50,
-        "nbRecipes": 1,"pFrais": true,"totalNeededRaw": [{ "q":7000, "u": "gr." }],
-        "byDate": {"2024-03-20T20:00:00.000Z": {
-          "totalConsolidated": [{"q": 7000, "u": "gr."}],
-          "recipes": [{
-                "r": "Salade fenouil-carottes-oranges",
-                "q":7.0,
-                "u": "Kg","qEq":7000,
-                "uEq": "gr.",
-                "a": 50
-              }],
-          "totalAssiettes": 50,
-          "recipeCount": 1
-        }}
-      }
-    
-    
-    ,{
-        "ingredientHugoUuid": "mt22ff",
-        "ingredientName": "Ciboulette",
-        "productSemanticKey": "ciboulette_mt22ff_la-p_chateaulin",
-        "ingType": "epices",
-        "totalAssiettes": 50,
-        "nbRecipes": 1,"pFrais": true,"totalNeededRaw": [{ "q":4, "u": "bottes" }],
-        "byDate": {"2024-03-20T20:00:00.000Z": {
-          "totalConsolidated": [{"q": 4, "u": "bottes"}],
-          "recipes": [{
-                "r": "Fromage frais ail - ciboulette vegan","qEq":4,
-                "uEq": "bottes",
-                "a": 50
-              }],
-          "totalAssiettes": 50,
-          "recipeCount": 1
-        }}
-      }
-    
-    
-    ,{
-        "ingredientHugoUuid": "ljzb7j",
-        "ingredientName": "Eau",
-        "productSemanticKey": "eau_ljzb7j_la-p_chateaulin",
-        "ingType": "autres",
-        "totalAssiettes": 155,
-        "nbRecipes": 4,
-          "conversionRules": ["1 c. à soupe = 15 ml."],"totalNeededRaw": [{ "q":600, "u": "gr." },{ "q":1044, "u": "ml" },{ "q":9, "u": "c. à soupe" }],
-        "byDate": {"2024-03-20T20:00:00.000Z": {
-          "totalConsolidated": [{"q": 600, "u": "gr."},{"q": 1179, "u": "ml"}],
-          "recipes": [{
-                "r": "Namoura",
-                "q":9.0,
-                "u": "c. à soupe","qEq":135,
-                "uEq": "ml",
-                "a": 50
-              },{
-                "r": "Namoura","qEq":600,
-                "uEq": "gr.",
-                "a": 50
-              },{
-                "r": "Fromage frais ail - ciboulette vegan",
-                "q":0.6,
-                "u": "l.","qEq":600,
-                "uEq": "ml",
-                "a": 50
               },{
                 "r": "Betteraves fermentées",
-                "q":0.4,
-                "u": "l.","qEq":444,
-                "uEq": "ml",
+                "q":1,
+                "u": "recette·s","qEq":1,
+                "uEq": "recette·s",
+                "a": 5
+              },{
+                "r": "Betteraves fermentées",
+                "q":1,
+                "u": "recette·s","qEq":1,
+                "uEq": "recette·s",
+                "a": 5
+              },{
+                "r": "Betteraves fermentées",
+                "q":1,
+                "u": "recette·s","qEq":1,
+                "uEq": "recette·s",
                 "a": 5
               }],
-          "totalAssiettes": 155,
-          "recipeCount": 4
-        }}
-      }
-    
-    
-    ,{
-        "ingredientHugoUuid": "mhsals",
-        "ingredientName": "Fenouil",
-        "productSemanticKey": "fenouil_mhsals_la-p_chateaulin",
-        "ingType": "legumes",
-        "totalAssiettes": 50,
-        "nbRecipes": 1,"pFrais": true,"totalNeededRaw": [{ "q":4500, "u": "gr." }],
-        "byDate": {"2024-03-20T20:00:00.000Z": {
-          "totalConsolidated": [{"q": 4500, "u": "gr."}],
-          "recipes": [{
-                "r": "Salade fenouil-carottes-oranges",
-                "q":4.5,
-                "u": "Kg","qEq":4500,
-                "uEq": "gr.",
-                "a": 50
-              }],
-          "totalAssiettes": 50,
-          "recipeCount": 1
-        }}
-      }
-    
-    
-    ,{
-        "ingredientHugoUuid": "5dwrvm",
-        "ingredientName": "Gros sel",
-        "productSemanticKey": "gros-sel_5dwrvm_la-p_chateaulin",
-        "ingType": "epices",
-        "totalAssiettes": 5,
-        "nbRecipes": 1,"totalNeededRaw": [{ "q":14, "u": "gr." }],
-        "byDate": {"2024-03-20T20:00:00.000Z": {
-          "totalConsolidated": [{"q": 14, "u": "gr."}],
-          "recipes": [{
-                "r": "Betteraves fermentées","qEq":14,
-                "uEq": "gr.",
-                "a": 5
-              }],
-          "totalAssiettes": 5,
-          "recipeCount": 1
-        }}
-      }
-    
-    
-    ,{
-        "ingredientHugoUuid": "znpoor",
-        "ingredientName": "Haricots blancs",
-        "productSemanticKey": "haricots-b_znpoor_la-p_chateaulin",
-        "ingType": "sec",
-        "totalAssiettes": 50,
-        "nbRecipes": 1,"totalNeededRaw": [{ "q":1000, "u": "gr." }],
-        "byDate": {"2024-03-20T20:00:00.000Z": {
-          "totalConsolidated": [{"q": 1000, "u": "gr."}],
-          "recipes": [{
-                "r": "Purée de haricots blancs",
-                "q":1.0,
-                "u": "Kg","qEq":1000,
-                "uEq": "gr.",
-                "a": 50
-              }],
-          "totalAssiettes": 50,
-          "recipeCount": 1
-        }}
-      }
-    
-    
-    ,{
-        "ingredientHugoUuid": "h3c8al",
-        "ingredientName": "huile d'olive",
-        "productSemanticKey": "huile-doli_h3c8al_la-p_chateaulin",
-        "ingType": "lof",
-        "totalAssiettes": 100,
-        "nbRecipes": 2,"totalNeededRaw": [{ "q":76750, "u": "ml" }],
-        "byDate": {"2024-03-20T20:00:00.000Z": {
-          "totalConsolidated": [{"q": 76750, "u": "ml"}],
-          "recipes": [{
-                "r": "Purée de haricots blancs","qEq":250,
-                "uEq": "ml",
-                "a": 50
-              },{
-                "r": "Salade fenouil-carottes-oranges",
-                "q":76.5,
-                "u": "l.","qEq":76500,
-                "uEq": "ml",
-                "a": 50
-              }],
-          "totalAssiettes": 100,
-          "recipeCount": 2
-        }}
-      }
-    
-    
-    ,{
-        "ingredientHugoUuid": "eu7lc6",
-        "ingredientName": "huile de colza",
-        "productSemanticKey": "huile-de-c_eu7lc6_la-p_chateaulin",
-        "ingType": "lof",
-        "totalAssiettes": 100,
-        "nbRecipes": 2,"totalNeededRaw": [{ "q":1300, "u": "ml" }],
-        "byDate": {"2024-03-20T20:00:00.000Z": {
-          "totalConsolidated": [{"q": 1300, "u": "ml"}],
-          "recipes": [{
-                "r": "Namoura",
-                "q":0.3,
-                "u": "l.","qEq":300,
-                "uEq": "ml",
-                "a": 50
-              },{
-                "r": "Fromage frais ail - ciboulette vegan",
-                "q":1.0,
-                "u": "l.","qEq":1000,
-                "uEq": "ml",
-                "a": 50
-              }],
-          "totalAssiettes": 100,
-          "recipeCount": 2
-        }}
-      }
-    
-    
-    ,{
-        "ingredientHugoUuid": "gzi2ry",
-        "ingredientName": "Jus d'orange",
-        "productSemanticKey": "jus-dorang_gzi2ry_la-p_chateaulin",
-        "ingType": "sucres",
-        "totalAssiettes": 50,
-        "nbRecipes": 1,"totalNeededRaw": [{ "q":32000, "u": "ml" }],
-        "byDate": {"2024-03-20T20:00:00.000Z": {
-          "totalConsolidated": [{"q": 32000, "u": "ml"}],
-          "recipes": [{
-                "r": "Salade fenouil-carottes-oranges",
-                "q":32.0,
-                "u": "l.","qEq":32000,
-                "uEq": "ml",
-                "a": 50
-              }],
-          "totalAssiettes": 50,
-          "recipeCount": 1
-        }}
-      }
-    
-    
-    ,{
-        "ingredientHugoUuid": "e4mjd1",
-        "ingredientName": "Jus de citron",
-        "productSemanticKey": "jus-de-cit_e4mjd1_la-p_chateaulin",
-        "ingType": "sucres",
-        "totalAssiettes": 100,
-        "nbRecipes": 2,
-          "conversionRules": ["1 c. à soupe = 15 ml."],"totalNeededRaw": [{ "q":150, "u": "ml" },{ "q":9, "u": "c. à soupe" }],
-        "byDate": {"2024-03-20T20:00:00.000Z": {
-          "totalConsolidated": [{"q": 285, "u": "ml"}],
-          "recipes": [{
-                "r": "Namoura",
-                "q":9.0,
-                "u": "c. à soupe","qEq":135,
-                "uEq": "ml",
-                "a": 50
-              },{
-                "r": "Fromage frais ail - ciboulette vegan",
-                "q":0.1,
-                "u": "l.","qEq":150,
-                "uEq": "ml",
-                "a": 50
-              }],
-          "totalAssiettes": 100,
-          "recipeCount": 2
-        }}
-      }
-    
-    
-    ,{
-        "ingredientHugoUuid": "vgec6e",
-        "ingredientName": "Levure chimique",
-        "productSemanticKey": "levure-chi_vgec6e_la-p_chateaulin",
-        "ingType": "lof",
-        "totalAssiettes": 50,
-        "nbRecipes": 1,"totalNeededRaw": [{ "q":30, "u": "gr." }],
-        "byDate": {"2024-03-20T20:00:00.000Z": {
-          "totalConsolidated": [{"q": 30, "u": "gr."}],
-          "recipes": [{
-                "r": "Namoura","qEq":30,
-                "uEq": "gr.",
-                "a": 50
-              }],
-          "totalAssiettes": 50,
-          "recipeCount": 1
-        }}
-      }
-    
-    
-    ,{
-        "ingredientHugoUuid": "yh2uod",
-        "ingredientName": "Orange",
-        "productSemanticKey": "orange_yh2uod_la-p_chateaulin",
-        "ingType": "legumes",
-        "totalAssiettes": 50,
-        "nbRecipes": 1,"pFrais": true,
-          "conversionRules": ["une orange = 200 gr."],"totalNeededRaw": [{ "q":3, "u": "unité" }],
-        "byDate": {"2024-03-20T20:00:00.000Z": {
-          "totalConsolidated": [{"q": 600, "u": "gr."}],
-          "recipes": [{
-                "r": "Salade fenouil-carottes-oranges",
-                "q":3.0,
-                "u": "unité","qEq":600,
-                "uEq": "gr.",
-                "a": 50
-              }],
-          "totalAssiettes": 50,
-          "recipeCount": 1
-        }}
-      }
-    
-    
-    ,{
-        "ingredientHugoUuid": "6z655r",
-        "ingredientName": "Romarin",
-        "productSemanticKey": "romarin_6z655r_la-p_chateaulin",
-        "ingType": "epices",
-        "totalAssiettes": 50,
-        "nbRecipes": 1,"totalNeededRaw": [{ "q":2.5, "u": "unité" }],
-        "byDate": {"2024-03-20T20:00:00.000Z": {
-          "totalConsolidated": [{"q": 2.5, "u": "unité"}],
-          "recipes": [{
-                "r": "Purée de haricots blancs","qEq":2.5,
-                "uEq": "unité",
-                "a": 50
-              }],
-          "totalAssiettes": 50,
-          "recipeCount": 1
-        }}
-      }
-    
-    
-    ,{
-        "ingredientHugoUuid": "2juq3x",
-        "ingredientName": "Sel",
-        "productSemanticKey": "sel_2juq3x_la-p_chateaulin",
-        "ingType": "epices",
-        "totalAssiettes": 50,
-        "nbRecipes": 1,
-          "conversionRules": ["1 c. à soupe de sel = 15 gr."],"totalNeededRaw": [{ "q":1.5, "u": "c. à soupe" }],
-        "byDate": {"2024-03-20T20:00:00.000Z": {
-          "totalConsolidated": [{"q": 22, "u": "gr."}],
-          "recipes": [{
-                "r": "Purée de haricots blancs",
-                "q":1.5,
-                "u": "c. à soupe","qEq":22,
-                "uEq": "gr.",
-                "a": 50
-              }],
-          "totalAssiettes": 50,
-          "recipeCount": 1
-        }}
-      }
-    
-    
-    ,{
-        "ingredientHugoUuid": "mltl42",
-        "ingredientName": "Semoule fine (blé)",
-        "productSemanticKey": "semoule-fi_mltl42_la-p_chateaulin",
-        "ingType": "sec",
-        "totalAssiettes": 50,
-        "nbRecipes": 1,"totalNeededRaw": [{ "q":750, "u": "gr." }],
-        "byDate": {"2024-03-20T20:00:00.000Z": {
-          "totalConsolidated": [{"q": 750, "u": "gr."}],
-          "recipes": [{
-                "r": "Namoura","qEq":750,
-                "uEq": "gr.",
-                "a": 50
-              }],
-          "totalAssiettes": 50,
-          "recipeCount": 1
-        }}
-      }
-    
-    
-    ,{
-        "ingredientHugoUuid": "u9z2he",
-        "ingredientName": "Sucre en poudre",
-        "productSemanticKey": "sucre-en-p_u9z2he_la-p_chateaulin",
-        "ingType": "sucres",
-        "totalAssiettes": 100,
-        "nbRecipes": 2,"totalNeededRaw": [{ "q":900, "u": "gr." }],
-        "byDate": {"2024-03-20T20:00:00.000Z": {
-          "totalConsolidated": [{"q": 900, "u": "gr."}],
-          "recipes": [{
-                "r": "Namoura",
-                "q":0.6,
-                "u": "Kg","qEq":600,
-                "uEq": "gr.",
-                "a": 50
-              },{
-                "r": "Namoura",
-                "q":0.3,
-                "u": "Kg","qEq":300,
-                "uEq": "gr.",
-                "a": 50
-              }],
-          "totalAssiettes": 100,
-          "recipeCount": 2
-        }}
-      }
-    
-    
-    ,{
-        "ingredientHugoUuid": "a16yd7",
-        "ingredientName": "Thym",
-        "productSemanticKey": "thym_a16yd7_la-p_chateaulin",
-        "ingType": "epices",
-        "totalAssiettes": 50,
-        "nbRecipes": 1,
-          "conversionRules": ["1 c. à soupe = 15 ml."],"totalNeededRaw": [{ "q":0.5, "u": "c. à soupe" }],
-        "byDate": {"2024-03-20T20:00:00.000Z": {
-          "totalConsolidated": [{"q": 8, "u": "ml"}],
-          "recipes": [{
-                "r": "Purée de haricots blancs",
-                "q":0.5,
-                "u": "c. à soupe","qEq":8,
-                "uEq": "ml",
-                "a": 50
-              }],
-          "totalAssiettes": 50,
-          "recipeCount": 1
-        }}
-      }
-    
-    
-    ,{
-        "ingredientHugoUuid": "hlbwfd",
-        "ingredientName": "Yaourt de soja",
-        "productSemanticKey": "yaourt-de-_hlbwfd_la-p_chateaulin",
-        "ingType": "frais",
-        "totalAssiettes": 50,
-        "nbRecipes": 1,"pFrais": true,"totalNeededRaw": [{ "q":1500, "u": "gr." }],
-        "byDate": {"2024-03-20T20:00:00.000Z": {
-          "totalConsolidated": [{"q": 1500, "u": "gr."}],
-          "recipes": [{
-                "r": "Namoura",
-                "q":1.5,
-                "u": "Kg","qEq":1500,
-                "uEq": "gr.",
-                "a": 50
-              }],
-          "totalAssiettes": 50,
-          "recipeCount": 1
+          "totalAssiettes": 1320,
+          "recipeCount": 30
         }}
       }]
 }

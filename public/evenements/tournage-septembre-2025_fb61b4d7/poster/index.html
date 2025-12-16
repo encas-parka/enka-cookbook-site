@@ -1,7 +1,7 @@
 
 <!doctype html>
 <html lang="fr-FR">
-  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <head>
   <meta charset="utf-8">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -10,16 +10,18 @@
 
 
 
-<link rel="stylesheet" href="//localhost:1313/main.css" integrity="" crossorigin="anonymous">
+
+
+<link rel="stylesheet" href="../../../main.caa157b6c0157581bca13c5bb82cd8be6b4376460dd91d55414377f6857e2343.css" integrity="sha256-yqFXtsAVdYG8oTxbuCzYvmtDdkYN2R1VQUN39oV&#43;I0M=" crossorigin="anonymous">
 
 
   
   <meta name="theme-color" content="">
-<link rel="apple-touch-icon" sizes="180x180" href="//localhost:1313/apple-touch-icon.png">
-<link rel="icon" type="image/png" href="//localhost:1313/favicon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="//localhost:1313/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="96x96" href="//localhost:1313/favicon-96x96.png">
-<link rel="manifest" crossorigin="use-credentials" href="//localhost:1313/site.webmanifest">
+<link rel="apple-touch-icon" sizes="180x180" href="../../../apple-touch-icon.png">
+<link rel="icon" type="image/png" href="../../../favicon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../../../favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="96x96" href="../../../favicon-96x96.png">
+<link rel="manifest" crossorigin="use-credentials" href="../../../site.webmanifest">
 </head>
 
   
@@ -71,7 +73,7 @@
 
   <nav class="main-nav-enka no-print-enka" id="main-navbar">
     <div class="nav-container-enka">
-      <a class="nav-brand-enka" href="//localhost:1313/">
+      <a class="nav-brand-enka" href="../../../">
         <img src="../../../favicon-96x96.png" alt="logo" class="brand-logo-enka">
       </a>
 
@@ -493,8 +495,8 @@ body {
   
   
   
-    <script src="../../../js/vue.global.js"></script>
-    
+    <script src="../../../js/vue.global.prod.js"></script>
+  
 
     <div class="event-container" role="document">
       <div class="content">
@@ -990,7 +992,7 @@ body {
 
       <div v-show="fontIng !== 'noDisplay'">
         <p class="text-center m-0">•••</p>
-        <p class="text-center" :class="[[fontIng]]" :style="fontSizeIng"><span class="fw-bold">Ingrédients : </span>Persil frais, Cumin (graines), Betterave rouge, Carotte, Sirop d&#39;érable , Jus de citron</p>
+        <p class="text-center" :class="[[fontIng]]" :style="fontSizeIng"><span class="fw-bold">Ingrédients : </span></p>
       </div>
     </div>
 
@@ -1125,18 +1127,17 @@ body {
                @blur="finishEditingRecipe()"
                @keydown.enter="finishEditingRecipe()"
                @keydown.escape="finishEditingRecipe()">
-      </p><p v-show="fontDesc !== 'noDisplay'" class="card-text" :class="[[fontDesc]]" :style="[[fontSizeDesc]]"></p><p v-show="fontRegimes !== 'noDisplay'" class="mb-1 text-center" :class="[[fontRegimes]]" :style=" fontSizeRegimes"><span class="mx-2">Végétarien</span></p>
+      </p><p v-show="fontDesc !== 'noDisplay'" class="card-text" :class="[[fontDesc]]" :style="[[fontSizeDesc]]"></p><p v-show="fontRegimes !== 'noDisplay'" class="mb-1 text-center" :class="[[fontRegimes]]" :style=" fontSizeRegimes"><span class="mx-2">Vegan</span><span class="mx-2">Sans-gluten</span></p>
 
 
 
     
-      <p class="m-0 text-center" v-show="fontAlert !== 'noDisplay'">•••</p>
 
-    <div v-show="fontAlert !== 'noDisplay'"><p class="text-center mb-0" :class="[[fontAlert]]" :style="fontSizeAlert"><span class="fw-bold">Alergènes : </span>Crème soja, Biscuit Petit Brun, Biscuit Petit Brun, Speculoos</p><p class="text-center mb-0" :class="[[fontAlert]]" :style="fontSizeAlert"><span class="fw-bold">Contient du gluten : </span>Flocons d&#39;avoine, Biscuit Petit Brun, Speculoos</p><p class="text-center mb-0" :class="[[fontAlert]]" :style="fontSizeAlert"><span class="fw-bold">Contient des produits laitiers : </span>Biscuit Petit Brun</p></div>
+    <div v-show="fontAlert !== 'noDisplay'"></div>
 
       <div v-show="fontIng !== 'noDisplay'">
         <p class="text-center m-0">•••</p>
-        <p class="text-center" :class="[[fontIng]]" :style="fontSizeIng"><span class="fw-bold">Ingrédients : </span>huile de tournesol, Crème soja, huile de coco, Flocons d&#39;avoine, Glucose, Chocolat noir, Biscuit Petit Brun, Speculoos</p>
+        <p class="text-center" :class="[[fontIng]]" :style="fontSizeIng"><span class="fw-bold">Ingrédients : </span></p>
       </div>
     </div>
 
@@ -1257,18 +1258,17 @@ body {
                @blur="finishEditingRecipe()"
                @keydown.enter="finishEditingRecipe()"
                @keydown.escape="finishEditingRecipe()">
-      </p><p v-show="fontDesc !== 'noDisplay'" class="card-text" :class="[[fontDesc]]" :style="[[fontSizeDesc]]"></p><p v-show="fontRegimes !== 'noDisplay'" class="mb-1 text-center" :class="[[fontRegimes]]" :style=" fontSizeRegimes"><span class="mx-2">Végétarien</span><span class="mx-2">Sans-gluten</span></p>
+      </p><p v-show="fontDesc !== 'noDisplay'" class="card-text" :class="[[fontDesc]]" :style="[[fontSizeDesc]]"></p><p v-show="fontRegimes !== 'noDisplay'" class="mb-1 text-center" :class="[[fontRegimes]]" :style=" fontSizeRegimes"><span class="mx-2">Vegan</span><span class="mx-2">Sans-gluten</span></p>
 
 
 
     
-      <p class="m-0 text-center" v-show="fontAlert !== 'noDisplay'">•••</p>
 
-    <div v-show="fontAlert !== 'noDisplay'"><p class="text-center mb-0" :class="[[fontAlert]]" :style="fontSizeAlert"><span class="fw-bold">Contient des produits laitiers : </span>Fromage blanc</p></div>
+    <div v-show="fontAlert !== 'noDisplay'"></div>
 
       <div v-show="fontIng !== 'noDisplay'">
         <p class="text-center m-0">•••</p>
-        <p class="text-center" :class="[[fontIng]]" :style="fontSizeIng"><span class="fw-bold">Ingrédients : </span>Menthe, Fromage blanc, Ail, Concombre, huile d&#39;olive, Jus de citron</p>
+        <p class="text-center" :class="[[fontIng]]" :style="fontSizeIng"><span class="fw-bold">Ingrédients : </span></p>
       </div>
     </div>
 
@@ -1356,18 +1356,17 @@ body {
                @blur="finishEditingRecipe()"
                @keydown.enter="finishEditingRecipe()"
                @keydown.escape="finishEditingRecipe()">
-      </p><p v-show="fontDesc !== 'noDisplay'" class="card-text" :class="[[fontDesc]]" :style="[[fontSizeDesc]]"></p><p v-show="fontRegimes !== 'noDisplay'" class="mb-1 text-center" :class="[[fontRegimes]]" :style=" fontSizeRegimes"><span class="mx-2">Végétarien</span></p>
+      </p><p v-show="fontDesc !== 'noDisplay'" class="card-text" :class="[[fontDesc]]" :style="[[fontSizeDesc]]"></p><p v-show="fontRegimes !== 'noDisplay'" class="mb-1 text-center" :class="[[fontRegimes]]" :style=" fontSizeRegimes"><span class="mx-2">Vegan</span><span class="mx-2">Sans-gluten</span></p>
 
 
 
     
-      <p class="m-0 text-center" v-show="fontAlert !== 'noDisplay'">•••</p>
 
-    <div v-show="fontAlert !== 'noDisplay'"><p class="text-center mb-0" :class="[[fontAlert]]" :style="fontSizeAlert"><span class="fw-bold">Alergènes : </span>Chunks (protéine de soja)</p><p class="text-center mb-0" :class="[[fontAlert]]" :style="fontSizeAlert"><span class="fw-bold">Contient du gluten : </span>Farine de blé</p><p class="text-center mb-0" :class="[[fontAlert]]" :style="fontSizeAlert"><span class="fw-bold">Contient des produits laitiers : </span>Beurre demi-sel, Parmigiano, Mozzarella, Lait demi-écrémé</p></div>
+    <div v-show="fontAlert !== 'noDisplay'"></div>
 
       <div v-show="fontIng !== 'noDisplay'">
         <p class="text-center m-0">•••</p>
-        <p class="text-center" :class="[[fontIng]]" :style="fontSizeIng"><span class="fw-bold">Ingrédients : </span>Chunks (protéine de soja), Sauce tomate mutti, Gros sel, Beurre demi-sel, Parmigiano, Mozzarella, Ail, Pomme de terre, Oignon, Aubergine, Farine de blé, Lait demi-écrémé</p>
+        <p class="text-center" :class="[[fontIng]]" :style="fontSizeIng"><span class="fw-bold">Ingrédients : </span></p>
       </div>
     </div>
 
@@ -1456,18 +1455,17 @@ body {
                @blur="finishEditingRecipe()"
                @keydown.enter="finishEditingRecipe()"
                @keydown.escape="finishEditingRecipe()">
-      </p><p v-show="fontDesc !== 'noDisplay'" class="card-text" :class="[[fontDesc]]" :style="[[fontSizeDesc]]"></p><p v-show="fontRegimes !== 'noDisplay'" class="mb-1 text-center" :class="[[fontRegimes]]" :style=" fontSizeRegimes"><span class="mx-2">Végétarien</span></p>
+      </p><p v-show="fontDesc !== 'noDisplay'" class="card-text" :class="[[fontDesc]]" :style="[[fontSizeDesc]]"></p><p v-show="fontRegimes !== 'noDisplay'" class="mb-1 text-center" :class="[[fontRegimes]]" :style=" fontSizeRegimes"><span class="mx-2">Vegan</span><span class="mx-2">Sans-gluten</span></p>
 
 
 
     
-      <p class="m-0 text-center" v-show="fontAlert !== 'noDisplay'">•••</p>
 
-    <div v-show="fontAlert !== 'noDisplay'"><p class="text-center mb-0" :class="[[fontAlert]]" :style="fontSizeAlert"><span class="fw-bold">Alergènes : </span>Noix</p><p class="text-center mb-0" :class="[[fontAlert]]" :style="fontSizeAlert"><span class="fw-bold">Contient du gluten : </span>Farine de blé</p><p class="text-center mb-0" :class="[[fontAlert]]" :style="fontSizeAlert"><span class="fw-bold">Contient des produits laitiers : </span>Beurre doux</p></div>
+    <div v-show="fontAlert !== 'noDisplay'"></div>
 
       <div v-show="fontIng !== 'noDisplay'">
         <p class="text-center m-0">•••</p>
-        <p class="text-center" :class="[[fontIng]]" :style="fontSizeIng"><span class="fw-bold">Ingrédients : </span>Eau, Bâtonnet de canelle, clou de girofle poudre, Cannelle, Beurre doux, Orange, Zestes d&#39;orange, Bicarbonate alimentaire, Farine de blé, huile d&#39;olive, Noix, Miel, sucre blanc, Sucre glace, Jus d&#39;orange</p>
+        <p class="text-center" :class="[[fontIng]]" :style="fontSizeIng"><span class="fw-bold">Ingrédients : </span></p>
       </div>
     </div>
 
@@ -1679,18 +1677,17 @@ body {
                @blur="finishEditingRecipe()"
                @keydown.enter="finishEditingRecipe()"
                @keydown.escape="finishEditingRecipe()">
-      </p><p v-show="fontDesc !== 'noDisplay'" class="card-text" :class="[[fontDesc]]" :style="[[fontSizeDesc]]"></p><p v-show="fontRegimes !== 'noDisplay'" class="mb-1 text-center" :class="[[fontRegimes]]" :style=" fontSizeRegimes"><span class="mx-2">Vegan</span></p>
+      </p><p v-show="fontDesc !== 'noDisplay'" class="card-text" :class="[[fontDesc]]" :style="[[fontSizeDesc]]"></p><p v-show="fontRegimes !== 'noDisplay'" class="mb-1 text-center" :class="[[fontRegimes]]" :style=" fontSizeRegimes"><span class="mx-2">Vegan</span><span class="mx-2">Sans-gluten</span></p>
 
 
 
     
-      <p class="m-0 text-center" v-show="fontAlert !== 'noDisplay'">•••</p>
 
-    <div v-show="fontAlert !== 'noDisplay'"><p class="text-center mb-0" :class="[[fontAlert]]" :style="fontSizeAlert"><span class="fw-bold">Alergènes : </span>Noix de cajou, Speculoos</p><p class="text-center mb-0" :class="[[fontAlert]]" :style="fontSizeAlert"><span class="fw-bold">Contient du gluten : </span>Speculoos</p></div>
+    <div v-show="fontAlert !== 'noDisplay'"></div>
 
       <div v-show="fontIng !== 'noDisplay'">
         <p class="text-center m-0">•••</p>
-        <p class="text-center" :class="[[fontIng]]" :style="fontSizeIng"><span class="fw-bold">Ingrédients : </span>Agar-agar, Eau, Framboises surgelées, Huile végétale, lait de coco, huile de coco, Noix de cajou, Sirop d&#39;érable , sucre blanc, Jus de citron, Jus de citron, Speculoos</p>
+        <p class="text-center" :class="[[fontIng]]" :style="fontSizeIng"><span class="fw-bold">Ingrédients : </span></p>
       </div>
     </div>
 
@@ -1860,13 +1857,12 @@ body {
 
 
     
-      <p class="m-0 text-center" v-show="fontAlert !== 'noDisplay'">•••</p>
 
-    <div v-show="fontAlert !== 'noDisplay'"><p class="text-center mb-0" :class="[[fontAlert]]" :style="fontSizeAlert"><span class="fw-bold">Alergènes : </span>Moutarde, Crème Végétale</p></div>
+    <div v-show="fontAlert !== 'noDisplay'"></div>
 
       <div v-show="fontIng !== 'noDisplay'">
         <p class="text-center m-0">•••</p>
-        <p class="text-center" :class="[[fontIng]]" :style="fontSizeIng"><span class="fw-bold">Ingrédients : </span>Sel, Moutarde, huile de tournesol, Crème Végétale</p>
+        <p class="text-center" :class="[[fontIng]]" :style="fontSizeIng"><span class="fw-bold">Ingrédients : </span></p>
       </div>
     </div>
 
@@ -1953,18 +1949,17 @@ body {
                @blur="finishEditingRecipe()"
                @keydown.enter="finishEditingRecipe()"
                @keydown.escape="finishEditingRecipe()">
-      </p><p v-show="fontDesc !== 'noDisplay'" class="card-text" :class="[[fontDesc]]" :style="[[fontSizeDesc]]"></p><p v-show="fontRegimes !== 'noDisplay'" class="mb-1 text-center" :class="[[fontRegimes]]" :style=" fontSizeRegimes"><span class="mx-2">Végétarien</span><span class="mx-2">Sans-gluten</span></p>
+      </p><p v-show="fontDesc !== 'noDisplay'" class="card-text" :class="[[fontDesc]]" :style="[[fontSizeDesc]]"></p><p v-show="fontRegimes !== 'noDisplay'" class="mb-1 text-center" :class="[[fontRegimes]]" :style=" fontSizeRegimes"><span class="mx-2">Vegan</span><span class="mx-2">Sans-gluten</span></p>
 
 
 
     
-      <p class="m-0 text-center" v-show="fontAlert !== 'noDisplay'">•••</p>
 
-    <div v-show="fontAlert !== 'noDisplay'"><p class="text-center mb-0" :class="[[fontAlert]]" :style="fontSizeAlert"><span class="fw-bold">Contient des produits laitiers : </span>Crème fraiche liquide entière</p></div>
+    <div v-show="fontAlert !== 'noDisplay'"></div>
 
       <div v-show="fontIng !== 'noDisplay'">
         <p class="text-center m-0">•••</p>
-        <p class="text-center" :class="[[fontIng]]" :style="fontSizeIng"><span class="fw-bold">Ingrédients : </span>Agar-agar, Framboises surgelées, Crème fraiche liquide entière, sucre blanc, gousse de vanille, sucre blanc</p>
+        <p class="text-center" :class="[[fontIng]]" :style="fontSizeIng"><span class="fw-bold">Ingrédients : </span></p>
       </div>
     </div>
 

@@ -11,66 +11,143 @@ plate: 190
 check: false
 checkAlwaysOk: false
 ingredients:
-  - ingredient: courgette_9zozfk
-    quantite: 16
-    unit: Kg
-    commentaire: ''
-  - ingredient: salade-verte-chene_cg3wgm
-    quantite: 30
-    unit: unité
-    commentaire: ''
-  - ingredient: ail_u2m28w
-    quantite: 5
-    unit: tête·s
-    commentaire: ''
-  - ingredient: oignon_rtavky
-    quantite: 3
-    unit: Kg
-    commentaire: ''
-  - ingredient: tomate_ibtbnq
-    quantite: 6
-    unit: Kg
-    commentaire: ''
-  - ingredient: fromage-blanc_b2dxf8
-    quantite: 10
-    unit: Kg
-    commentaire: sauce
-  - ingredient: poivre_2pps90
-    quantite: 60
-    unit: gr.
-    commentaire: sauce
-  - ingredient: sel_2juq3x
-    quantite: 60
-    unit: gr.
-    commentaire: ''
-  - ingredient: sel_2juq3x
-    quantite: 60
-    unit: gr.
-    commentaire: sauce
-  - ingredient: ciboulette_mt22ff
-    quantite: 6
-    unit: bottes
-    commentaire: sauce
-  - ingredient: basilic_s8j4ff
-    quantite: 2
-    unit: bottes
-    commentaire: sauce
-  - ingredient: persil-frais_hgfa4e
-    quantite: 2
-    unit: bottes
-    commentaire: sauce
-  - ingredient: tahin_u33083
-    quantite: 1
-    unit: Kg
-    commentaire: sauce
-  - ingredient: huile-dolive_h3c8al
-    quantite: 1
-    unit: l.
-    commentaire: sauce
-  - ingredient: jus-de-citron_e4mjd1
-    quantite: 2
-    unit: l.
-    commentaire: sauce
+  - uuid: 9zozfk
+    name: Courgette
+    originalQuantity: 16
+    originalUnit: kg
+    normalizedQuantity: 16000
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: cg3wgm
+    name: Salade verte (chêne)
+    originalQuantity: 30
+    originalUnit: unité
+    normalizedQuantity: 30
+    normalizedUnit: unité
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: u2m28w
+    name: Ail
+    originalQuantity: 5
+    originalUnit: tête·s
+    normalizedQuantity: 400
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: rtavky
+    name: Oignon
+    originalQuantity: 3
+    originalUnit: kg
+    normalizedQuantity: 3000
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: ibtbnq
+    name: Tomate
+    originalQuantity: 6
+    originalUnit: kg
+    normalizedQuantity: 6000
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: b2dxf8
+    name: Fromage blanc
+    originalQuantity: 10
+    originalUnit: kg
+    normalizedQuantity: 10000
+    normalizedUnit: gr.
+    comment: sauce
+    allergens:
+      - Produit laitier
+    type: frais
+  - uuid: 2pps90
+    name: Poivre
+    originalQuantity: 60
+    originalUnit: gr.
+    normalizedQuantity: 60
+    normalizedUnit: gr.
+    comment: sauce
+    allergens: []
+    type: epices
+  - uuid: 2juq3x
+    name: Sel
+    originalQuantity: 60
+    originalUnit: gr.
+    normalizedQuantity: 60
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: 2juq3x
+    name: Sel
+    originalQuantity: 60
+    originalUnit: gr.
+    normalizedQuantity: 60
+    normalizedUnit: gr.
+    comment: sauce
+    allergens: []
+    type: epices
+  - uuid: mt22ff
+    name: Ciboulette
+    originalQuantity: 6
+    originalUnit: bottes
+    normalizedQuantity: 6
+    normalizedUnit: bottes
+    comment: sauce
+    allergens: []
+    type: epices
+  - uuid: s8j4ff
+    name: Basilic
+    originalQuantity: 2
+    originalUnit: bottes
+    normalizedQuantity: 2
+    normalizedUnit: bottes
+    comment: sauce
+    allergens: []
+    type: epices
+  - uuid: hgfa4e
+    name: Persil frais
+    originalQuantity: 2
+    originalUnit: bottes
+    normalizedQuantity: 2
+    normalizedUnit: bottes
+    comment: sauce
+    allergens: []
+    type: epices
+  - uuid: u33083
+    name: Tahin
+    originalQuantity: 1
+    originalUnit: kg
+    normalizedQuantity: 1000
+    normalizedUnit: gr.
+    comment: sauce
+    allergens:
+      - Sésame
+    type: autres
+  - uuid: h3c8al
+    name: huile d'olive
+    originalQuantity: 1
+    originalUnit: l.
+    normalizedQuantity: 1000
+    normalizedUnit: ml
+    comment: sauce
+    allergens: []
+    type: lof
+  - uuid: e4mjd1
+    name: Jus de citron
+    originalQuantity: 2
+    originalUnit: l.
+    normalizedQuantity: 2000
+    normalizedUnit: ml
+    comment: sauce
+    allergens: []
+    type: sucres
 preparation: ...
 publishDate: 2025-06-27T12:45:00.000Z
 serveHot: false

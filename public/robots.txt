@@ -1,4 +1,6 @@
 User-agent: *
 Disallow: /
+Allow: /$
+Allow: /recettes/
 
-Sitemap: //localhost:1313/sitemap.xml
+Sitemap: /sitemap.xml

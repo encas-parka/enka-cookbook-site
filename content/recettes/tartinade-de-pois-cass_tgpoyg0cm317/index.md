@@ -12,25 +12,44 @@ plate: 350
 check: true
 checkAlwaysOk: false
 ingredients:
-  - ingredient: pois-casses_7v72le
-    quantite: 7
-    unit: Kg
-    commentaire: ''
-  - ingredient: petits-pois-surgeles_8y3ngp
-    quantite: 7
-    unit: Kg
-    commentaire: ''
-  - ingredient: beurre-de-cacahuetes-sale_ks3ocl
-    quantite: 1.75
-    unit: Kg
-    commentaire: ''
-  - ingredient: feuille-de-laurier_j84olg
-    quantite: 35
-    unit: unité
-    commentaire: ''
-preparation: >-
-  * Le jour même, mélanger les deux sortes de pois, ajouter le beurre de
-  cacahuète et corriger sel et poivre.
+  - uuid: 7v72le
+    name: Pois cassés
+    originalQuantity: 7
+    originalUnit: kg
+    normalizedQuantity: 7000
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: sec
+  - uuid: 8y3ngp
+    name: Petits pois surgelés
+    originalQuantity: 7
+    originalUnit: kg
+    normalizedQuantity: 7000
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: ks3ocl
+    name: Beurre de cacahuètes (salé)
+    originalQuantity: 1.75
+    originalUnit: kg
+    normalizedQuantity: 1750
+    normalizedUnit: gr.
+    comment: ''
+    allergens:
+      - Arachides
+    type: autres
+  - uuid: j84olg
+    name: Feuille de laurier
+    originalQuantity: 35
+    originalUnit: unité
+    normalizedQuantity: 35
+    normalizedUnit: unité
+    comment: ''
+    allergens: []
+    type: epices
+preparation: '* Le jour même, mélanger les deux sortes de pois, ajouter le beurre de cacahuète et corriger sel et poivre.'
 preparation24h: |-
   **2 jours avant :**
 

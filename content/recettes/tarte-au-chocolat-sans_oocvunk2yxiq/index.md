@@ -7,52 +7,82 @@ checkAlwaysOk: false
 cuisson: false
 draft: false
 ingredients:
-  - ingredient: creme-soja_chfwwq
-    quantite: 250
-    unit: ml
-    commentaire: ''
-  - ingredient: huile-de-tournesol_c70jxb
-    quantite: 50
-    unit: ml
-    commentaire: ''
-  - ingredient: huile-de-coco_6bm4lq
-    quantite: 75
-    unit: ml
-    commentaire: ''
-  - ingredient: glucose_lm7zqh
-    quantite: 20
-    unit: gr.
-    commentaire: ''
-  - ingredient: chocolat-noir-patissier-70p100_1e3zhq
-    quantite: 250
-    unit: gr.
-    commentaire: ''
-  - ingredient: cornflakes-sans-gluten_hyp3th
-    quantite: 150
-    unit: gr.
-    commentaire: ''
-  - ingredient: biscuit-vegan-et-sans-gluten_ade8hh
-    quantite: 200
-    unit: gr.
-    commentaire: ''
+  - uuid: chfwwq
+    name: Crème soja
+    originalQuantity: 250
+    originalUnit: ml
+    normalizedQuantity: 250
+    normalizedUnit: ml
+    comment: ''
+    allergens:
+      - Soja
+    type: lof
+  - uuid: c70jxb
+    name: huile de tournesol
+    originalQuantity: 50
+    originalUnit: ml
+    normalizedQuantity: 50
+    normalizedUnit: ml
+    comment: ''
+    allergens: []
+    type: lof
+  - uuid: 6bm4lq
+    name: huile de coco
+    originalQuantity: 75
+    originalUnit: ml
+    normalizedQuantity: 75
+    normalizedUnit: ml
+    comment: ''
+    allergens: []
+    type: lof
+  - uuid: lm7zqh
+    name: Glucose
+    originalQuantity: 20
+    originalUnit: gr.
+    normalizedQuantity: 20
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: sucres
+  - uuid: 1e3zhq
+    name: Chocolat noir patissier 70p100
+    originalQuantity: 250
+    originalUnit: gr.
+    normalizedQuantity: 250
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: sucres
+  - uuid: hyp3th
+    name: Cornflakes (sans gluten)
+    originalQuantity: 150
+    originalUnit: gr.
+    normalizedQuantity: 150
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: sucres
+  - uuid: ade8hh
+    name: Biscuit vegan et sans gluten
+    originalQuantity: 200
+    originalUnit: gr.
+    normalizedQuantity: 200
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: sucres
 materiel:
   - Gastro 1/1 (Normaux)
 plate: 12
-preparation: >-
-  * Biscuit : Réduire les biscuits et les corn flakes en poudre. Puis, ajouter
-  l’huile coco fondue. Bien tasser le mélange au fond du moule et réserver au
-  frais au moins une heure.
+preparation: |-
+  * Biscuit : Réduire les biscuits et les corn flakes en poudre. Puis, ajouter l’huile coco fondue. Bien tasser le mélange au fond du moule et réserver au frais au moins une heure.
+
+
+  * Appareil : Faire chauffer huile de tournesol, crème soja et glucose. Verser sur chocolat concassé.
 
 
 
-  * Appareil : Faire chauffer huile de tournesol, crème soja et glucose. Verser
-  sur chocolat concassé.
-
-
-
-
-  * Laisser refroidir, placer au frigo. Pour démouler, poser le plat cinq
-  seconde dans un bain marie.
+  * Laisser refroidir, placer au frigo. Pour démouler, poser le plat cinq seconde dans un bain marie.
 publishDate: 2024-06-18T11:58:00.000Z
 regime:
   - vegetarien

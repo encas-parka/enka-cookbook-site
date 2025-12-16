@@ -12,26 +12,51 @@ plate: 100
 check: true
 checkAlwaysOk: false
 ingredients:
-  - ingredient: ail_u2m28w
-    quantite: 25
-    unit: gousse·s
-    commentaire: ''
-  - ingredient: olives-vertes-denoyautees_163u4z
-    quantite: 4
-    unit: Kg
-    commentaire: ''
-  - ingredient: puree-damande_7dlfuw
-    quantite: 300
-    unit: gr.
-    commentaire: ''
-  - ingredient: capres_c88lz8
-    quantite: 200
-    unit: gr.
-    commentaire: ''
-  - ingredient: huile-dolive_h3c8al
-    quantite: 1.2
-    unit: l.
-    commentaire: ''
+  - uuid: u2m28w
+    name: Ail
+    originalQuantity: 25
+    originalUnit: gousse·s
+    normalizedQuantity: 162.5
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: 163u4z
+    name: Olives Vertes Dénoyautées
+    originalQuantity: 4
+    originalUnit: kg
+    normalizedQuantity: 4000
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: 7dlfuw
+    name: Purée d'amande
+    originalQuantity: 300
+    originalUnit: gr.
+    normalizedQuantity: 300
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: autres
+  - uuid: c88lz8
+    name: Câpres
+    originalQuantity: 200
+    originalUnit: gr.
+    normalizedQuantity: 200
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: h3c8al
+    name: huile d'olive
+    originalQuantity: 1.2
+    originalUnit: l.
+    normalizedQuantity: 1200
+    normalizedUnit: ml
+    comment: ''
+    allergens: []
+    type: lof
 preparation: tout mixer sauf l'ail qui est pressée...et voilà!
 publishDate: 2025-06-15T19:47:00.000Z
 serveHot: false

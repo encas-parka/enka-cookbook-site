@@ -14,67 +14,7 @@
   "check": true,
   "checkAlwaysOk": false,
   "materiel": ["Gastro 1/1 (Profond)"],
-  "ingredients": [{
-      "uuid": "0d1fzw",
-      "name": "Gingembre",
-      "originalQuantity": 1.25,
-      "originalUnit": "kg",
-      "normalizedQuantity": 1250,
-      "normalizedUnit": "gr.",
-      "comment": "",
-      "allergens": [],
-      "type": "legumes"
-    },{
-      "uuid": "l5p1a5",
-      "name": "Concombre",
-      "originalQuantity": 23,
-      "originalUnit": "kg",
-      "normalizedQuantity": 23000,
-      "normalizedUnit": "gr.",
-      "comment": "",
-      "allergens": [],
-      "type": "legumes"
-    },{
-      "uuid": "h3c8al",
-      "name": "huile d'olive",
-      "originalQuantity": 400,
-      "originalUnit": "ml",
-      "normalizedQuantity": 400,
-      "normalizedUnit": "ml",
-      "comment": "",
-      "allergens": [],
-      "type": "lof"
-    },{
-      "uuid": "2juq3x",
-      "name": "Sel",
-      "originalQuantity": 100,
-      "originalUnit": "gr.",
-      "normalizedQuantity": 100,
-      "normalizedUnit": "gr.",
-      "comment": "",
-      "allergens": [],
-      "type": "epices"
-    },{
-      "uuid": "bjuxby",
-      "name": "Vinaigre de vin",
-      "originalQuantity": 1.2,
-      "originalUnit": "l.",
-      "normalizedQuantity": 1200,
-      "normalizedUnit": "ml",
-      "comment": "",
-      "allergens": ["Alcool"],
-      "type": "epices"
-    },{
-      "uuid": "u9z2he",
-      "name": "Sucre en poudre",
-      "originalQuantity": 600,
-      "originalUnit": "gr.",
-      "normalizedQuantity": 600,
-      "normalizedUnit": "gr.",
-      "comment": "",
-      "allergens": [],
-      "type": "sucres"
-    }],
+  "ingredients": [{"allergens":[],"comment":"","name":"Gingembre","normalizedQuantity":1250,"normalizedUnit":"gr.","originalQuantity":1.25,"originalUnit":"kg","type":"legumes","uuid":"0d1fzw"},{"allergens":[],"comment":"","name":"Concombre","normalizedQuantity":23000,"normalizedUnit":"gr.","originalQuantity":23,"originalUnit":"kg","type":"legumes","uuid":"l5p1a5"},{"allergens":[],"comment":"","name":"huile d'olive","normalizedQuantity":400,"normalizedUnit":"ml","originalQuantity":400,"originalUnit":"ml","type":"lof","uuid":"h3c8al"},{"allergens":[],"comment":"","name":"Sel","normalizedQuantity":100,"normalizedUnit":"gr.","originalQuantity":100,"originalUnit":"gr.","type":"epices","uuid":"2juq3x"},{"allergens":["Alcool"],"comment":"","name":"Vinaigre de vin","normalizedQuantity":1200,"normalizedUnit":"ml","originalQuantity":1.2,"originalUnit":"l.","type":"epices","uuid":"bjuxby"},{"allergens":[],"comment":"","name":"Sucre en poudre","normalizedQuantity":600,"normalizedUnit":"gr.","originalQuantity":600,"originalUnit":"gr.","type":"sucres","uuid":"u9z2he"}],
   "preparation": "Servir.",
   "prepAlt": null,
   "permissionWrite": [],

@@ -12,10 +12,15 @@ plate: 100
 quantite_desc: ''
 check: true
 ingredients:
-  - ingredient: carotte_eouu0v
-    quantite: 5
-    unit: Kg
-    commentaire: ''
+  - uuid: eouu0v
+    name: Carotte
+    originalQuantity: 5
+    originalUnit: kg
+    normalizedQuantity: 5000
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
 preparation: Pour l'assiette composée arc en ciel
 preparation24h: ''
 publishDate: 2025-06-19T19:04:00.000Z

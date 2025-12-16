@@ -14,77 +14,7 @@
   "check": true,
   "checkAlwaysOk": false,
   "materiel": ["Gastro 1/1 (Normaux)","Four"],
-  "ingredients": [{
-      "uuid": "rmgr7l",
-      "name": "Poudre d'amandes",
-      "originalQuantity": 400,
-      "originalUnit": "gr.",
-      "normalizedQuantity": 400,
-      "normalizedUnit": "gr.",
-      "comment": "",
-      "allergens": ["Fruit à coque"],
-      "type": "sucres"
-    },{
-      "uuid": "u9z2he",
-      "name": "Sucre en poudre",
-      "originalQuantity": 400,
-      "originalUnit": "gr.",
-      "normalizedQuantity": 400,
-      "normalizedUnit": "gr.",
-      "comment": "",
-      "allergens": [],
-      "type": "sucres"
-    },{
-      "uuid": "q33x0k",
-      "name": "Confiture de chataigne (sans sucre)",
-      "originalQuantity": 1.5,
-      "originalUnit": "kg",
-      "normalizedQuantity": 1500,
-      "normalizedUnit": "gr.",
-      "comment": "",
-      "allergens": [],
-      "type": "sucres"
-    },{
-      "uuid": "gpeob7",
-      "name": "Lait de soja",
-      "originalQuantity": 600,
-      "originalUnit": "ml",
-      "normalizedQuantity": 600,
-      "normalizedUnit": "ml",
-      "comment": "",
-      "allergens": ["Soja"],
-      "type": "lof"
-    },{
-      "uuid": "v212im",
-      "name": "Farine de tapioca",
-      "originalQuantity": 70,
-      "originalUnit": "gr.",
-      "normalizedQuantity": 70,
-      "normalizedUnit": "gr.",
-      "comment": "",
-      "allergens": [],
-      "type": "lof"
-    },{
-      "uuid": "civ587",
-      "name": "Farine de riz gluant",
-      "originalQuantity": 70,
-      "originalUnit": "gr.",
-      "normalizedQuantity": 70,
-      "normalizedUnit": "gr.",
-      "comment": "",
-      "allergens": [],
-      "type": "lof"
-    },{
-      "uuid": "2juq3x",
-      "name": "Sel",
-      "originalQuantity": 1.5,
-      "originalUnit": "c. à café",
-      "normalizedQuantity": 7.5,
-      "normalizedUnit": "gr.",
-      "comment": "",
-      "allergens": [],
-      "type": "epices"
-    }],
+  "ingredients": [{"allergens":["Fruit à coque"],"comment":"","name":"Poudre d'amandes","normalizedQuantity":400,"normalizedUnit":"gr.","originalQuantity":400,"originalUnit":"gr.","type":"sucres","uuid":"rmgr7l"},{"allergens":[],"comment":"","name":"Sucre en poudre","normalizedQuantity":400,"normalizedUnit":"gr.","originalQuantity":400,"originalUnit":"gr.","type":"sucres","uuid":"u9z2he"},{"allergens":[],"comment":"","name":"Confiture de chataigne (sans sucre)","normalizedQuantity":1500,"normalizedUnit":"gr.","originalQuantity":1.5,"originalUnit":"kg","type":"sucres","uuid":"q33x0k"},{"allergens":["Soja"],"comment":"","name":"Lait de soja","normalizedQuantity":600,"normalizedUnit":"ml","originalQuantity":600,"originalUnit":"ml","type":"lof","uuid":"gpeob7"},{"allergens":[],"comment":"","name":"Farine de tapioca","normalizedQuantity":70,"normalizedUnit":"gr.","originalQuantity":70,"originalUnit":"gr.","type":"lof","uuid":"v212im"},{"allergens":[],"comment":"","name":"Farine de riz gluant","normalizedQuantity":70,"normalizedUnit":"gr.","originalQuantity":70,"originalUnit":"gr.","type":"lof","uuid":"civ587"},{"allergens":[],"comment":"","name":"Sel","normalizedQuantity":7.5,"normalizedUnit":"gr.","originalQuantity":1.5,"originalUnit":"c. à café","type":"epices","uuid":"2juq3x"}],
   "preparation": "* Faire fondre le beurre.\n* Mélanger tout afin d'obtenir une pâte homogène.\n* Tapisser les gastro de papier sulfurisé et verser la pâte.\n* Cuire dans un four préchauffé à 200°, une vingtaine de minutes.\n* Le gateau gonfle, se fissure, le sortir quand le coeur est encore tremblotant, et le laisser refroidir completement avant de faire les parts.\n\n(24 parts par gastro. )",
   "prepAlt": [{"recetteAlt":"fondant-chataigne_tx71o7g8"}],
   "permissionWrite": [],

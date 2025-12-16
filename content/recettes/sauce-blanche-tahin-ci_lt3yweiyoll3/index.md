@@ -16,30 +16,64 @@ plate: 50
 check: false
 checkAlwaysOk: true
 ingredients:
-  - ingredient: yaourt-de-soja_hlbwfd
-    quantite: 800
-    unit: ml
-    commentaire: ''
-  - ingredient: sumac_6izdfu
-    commentaire: ''
-  - ingredient: sel_2juq3x
-    commentaire: ''
-  - ingredient: jus-de-citron_e4mjd1
-    quantite: 500
-    unit: ml
-    commentaire: ''
-  - ingredient: eau_ljzb7j
-    quantite: 200
-    unit: ml
-    commentaire: ''
-  - ingredient: tahin_u33083
-    quantite: 300
-    unit: ml
-    commentaire: ''
-preparation: >-
-  Délayer le tahin dans le jus de citron puis ajouter le yaourt et l'eau.
-  Assaissonner.
-
+  - uuid: hlbwfd
+    name: Yaourt de soja
+    originalQuantity: 800
+    originalUnit: ml
+    normalizedQuantity: 800
+    normalizedUnit: ml
+    comment: ''
+    allergens:
+      - Soja
+    type: frais
+  - uuid: 6izdfu
+    name: Sumac
+    originalQuantity: 1
+    originalUnit: au goût
+    normalizedQuantity: 1
+    normalizedUnit: au goût
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: 2juq3x
+    name: Sel
+    originalQuantity: 1
+    originalUnit: au goût
+    normalizedQuantity: 1
+    normalizedUnit: au goût
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: e4mjd1
+    name: Jus de citron
+    originalQuantity: 500
+    originalUnit: ml
+    normalizedQuantity: 500
+    normalizedUnit: ml
+    comment: ''
+    allergens: []
+    type: sucres
+  - uuid: ljzb7j
+    name: Eau
+    originalQuantity: 200
+    originalUnit: ml
+    normalizedQuantity: 200
+    normalizedUnit: ml
+    comment: ''
+    allergens: []
+    type: autres
+  - uuid: u33083
+    name: Tahin
+    originalQuantity: 300
+    originalUnit: ml
+    normalizedQuantity: 300
+    normalizedUnit: ml
+    comment: ''
+    allergens:
+      - Sésame
+    type: autres
+preparation: |-
+  Délayer le tahin dans le jus de citron puis ajouter le yaourt et l'eau. Assaissonner.
 
   (pas encore testé... à ajuster si ça parait déconnant)
 publishDate: 2025-07-30T14:55:00.000Z

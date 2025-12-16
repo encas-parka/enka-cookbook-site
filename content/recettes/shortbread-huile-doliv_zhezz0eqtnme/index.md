@@ -6,63 +6,100 @@ checkAlwaysOk: false
 cuisson: true
 draft: false
 ingredients:
-  - ingredient: puree-damande_7dlfuw
-    quantite: 60
-    unit: gr.
-    commentaire: ''
-  - ingredient: sel_2juq3x
-    quantite: 1
-    unit: pincées
-    commentaire: ''
-  - ingredient: romarin_6z655r
-    quantite: 1
-    unit: unité
-    commentaire: (branche)
-  - ingredient: huile-dolive_h3c8al
-    quantite: 90
-    unit: ml
-    commentaire: ''
-  - ingredient: fecule-de-mais-maizena_8nbcjp
-    quantite: 30
-    unit: gr.
-    commentaire: ''
-  - ingredient: farine-de-riz-blanche_1nb85u
-    quantite: 120
-    unit: gr.
-    commentaire: ''
-  - ingredient: chocolat-noir-patissier-70p100_1e3zhq
-    quantite: 50
-    unit: gr.
-    commentaire: ''
-  - ingredient: muscovado-sucre-de-canne-complet_l5w2jl
-    quantite: 70
-    unit: gr.
-    commentaire: ''
-  - ingredient: poudre-damandes_rmgr7l
-    quantite: 100
-    unit: gr.
-    commentaire: ''
+  - uuid: 7dlfuw
+    name: Purée d'amande
+    originalQuantity: 60
+    originalUnit: gr.
+    normalizedQuantity: 60
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: autres
+  - uuid: 2juq3x
+    name: Sel
+    originalQuantity: 1
+    originalUnit: pincées
+    normalizedQuantity: 0.4
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: 6z655r
+    name: Romarin
+    originalQuantity: 1
+    originalUnit: unité
+    normalizedQuantity: 1
+    normalizedUnit: unité
+    comment: (branche)
+    allergens: []
+    type: epices
+  - uuid: h3c8al
+    name: huile d'olive
+    originalQuantity: 90
+    originalUnit: ml
+    normalizedQuantity: 90
+    normalizedUnit: ml
+    comment: ''
+    allergens: []
+    type: lof
+  - uuid: 8nbcjp
+    name: Fécule de maïs (Maïzena)
+    originalQuantity: 30
+    originalUnit: gr.
+    normalizedQuantity: 30
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: lof
+  - uuid: 1nb85u
+    name: Farine de riz blanche
+    originalQuantity: 120
+    originalUnit: gr.
+    normalizedQuantity: 120
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: lof
+  - uuid: 1e3zhq
+    name: Chocolat noir patissier 70p100
+    originalQuantity: 50
+    originalUnit: gr.
+    normalizedQuantity: 50
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: sucres
+  - uuid: l5w2jl
+    name: Muscovado (sucre de canne complet)
+    originalQuantity: 70
+    originalUnit: gr.
+    normalizedQuantity: 70
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: sucres
+  - uuid: rmgr7l
+    name: Poudre d'amandes
+    originalQuantity: 100
+    originalUnit: gr.
+    normalizedQuantity: 100
+    normalizedUnit: gr.
+    comment: ''
+    allergens:
+      - Fruit à coque
+    type: sucres
 materiel:
   - Four
 plate: 10
-preparation: >-
+preparation: |-
 
 
 
 
-  * Mélanger tous les ingrédients secs (chocolat cassé en pépite et feuilles de
-  romarin hachée) du biscuit dans un récipient. Ajoutez ensuite l’huile d'olive,
-  la purée d’oléagineux  et mélanger bien jusqu’à obtenir une pâte homogène. Si
-  la préparation colle trop, ajouter de la farine.
-
-  * Verser la pâte dans un moule rectangulaire recouvert de papier cuisson et
-  aplatir dans le fond du moule, piquer à l’aide d’une fourchette.
-
+  * Mélanger tous les ingrédients secs (chocolat cassé en pépite et feuilles de romarin hachée) du biscuit dans un récipient. Ajoutez ensuite l’huile d'olive, la purée d’oléagineux  et mélanger bien jusqu’à obtenir une pâte homogène. Si la préparation colle trop, ajouter de la farine.
+  * Verser la pâte dans un moule rectangulaire recouvert de papier cuisson et aplatir dans le fond du moule, piquer à l’aide d’une fourchette.
   * Enfourner environ 25minutes à 170°.
-
-  * Si le biscuit colore trop, baisser légèrement la température, le biscuit
-  doit être presque blanc.
-
+  * Si le biscuit colore trop, baisser légèrement la température, le biscuit doit être presque blanc.
   * Sortir du four et découper un fois presque refroidi.
 publishDate: 2024-06-18T12:29:00.000Z
 regime:

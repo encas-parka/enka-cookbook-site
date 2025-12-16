@@ -15,50 +15,106 @@ plate: 60
 quantite_desc: ''
 check: true
 ingredients:
-  - ingredient: citron-jus_bwkn34
-    quantite: 300
-    unit: gr.
-    commentaire: ''
-  - ingredient: gingembre_0d1fzw
-    quantite: 150
-    unit: gr.
-    commentaire: ''
-  - ingredient: ail_u2m28w
-    quantite: 20
-    unit: gousse·s
-    commentaire: ''
-  - ingredient: cumin-moulu_he3u48
-    quantite: 5
-    unit: gr.
-    commentaire: ''
-  - ingredient: sel_2juq3x
-    quantite: 50
-    unit: gr.
-    commentaire: ''
-  - ingredient: piment-vert_dr1bbg
-    quantite: 3
-    unit: unité
-    commentaire: ''
-  - ingredient: vinaigre-de-cidre_7qo3ht
-    quantite: 50
-    unit: ml
-    commentaire: ''
-  - ingredient: menthe_2j9y2v
-    quantite: 5
-    unit: bottes
-    commentaire: ''
-  - ingredient: coriandre-fraiche_fetrpe
-    quantite: 10
-    unit: bottes
-    commentaire: ''
-  - ingredient: puree-de-noix-de-cajou_mmvfvp
-    quantite: 600
-    unit: gr.
-    commentaire: ''
-  - ingredient: eau_ljzb7j
-    quantite: 1.2
-    unit: l.
-    commentaire: ''
+  - uuid: bwkn34
+    name: Citron (jus)
+    originalQuantity: 300
+    originalUnit: gr.
+    normalizedQuantity: 300
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: 0d1fzw
+    name: Gingembre
+    originalQuantity: 150
+    originalUnit: gr.
+    normalizedQuantity: 150
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: u2m28w
+    name: Ail
+    originalQuantity: 20
+    originalUnit: gousse·s
+    normalizedQuantity: 130
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: he3u48
+    name: Cumin moulu
+    originalQuantity: 5
+    originalUnit: gr.
+    normalizedQuantity: 5
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: 2juq3x
+    name: Sel
+    originalQuantity: 50
+    originalUnit: gr.
+    normalizedQuantity: 50
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: dr1bbg
+    name: Piment vert
+    originalQuantity: 3
+    originalUnit: unité
+    normalizedQuantity: 3
+    normalizedUnit: unité
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: 7qo3ht
+    name: Vinaigre de cidre
+    originalQuantity: 50
+    originalUnit: ml
+    normalizedQuantity: 50
+    normalizedUnit: ml
+    comment: ''
+    allergens:
+      - Alcool
+    type: epices
+  - uuid: 2j9y2v
+    name: Menthe
+    originalQuantity: 5
+    originalUnit: bottes
+    normalizedQuantity: 5
+    normalizedUnit: bottes
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: fetrpe
+    name: Coriandre fraîche
+    originalQuantity: 10
+    originalUnit: bottes
+    normalizedQuantity: 10
+    normalizedUnit: bottes
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: mmvfvp
+    name: purée de noix de cajou
+    originalQuantity: 600
+    originalUnit: gr.
+    normalizedQuantity: 600
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: autres
+  - uuid: ljzb7j
+    name: Eau
+    originalQuantity: 1.2
+    originalUnit: l.
+    normalizedQuantity: 1200
+    normalizedUnit: ml
+    comment: ''
+    allergens: []
+    type: autres
 preparation: mixer finement le tout!!! et c'est tout!!!
 astuces:
   - astuce: ajouter l'eau au fur et à mesure

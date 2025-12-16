@@ -14,57 +14,7 @@
   "check": true,
   "checkAlwaysOk": false,
   "materiel": null,
-  "ingredients": [{
-      "uuid": "mt22ff",
-      "name": "Ciboulette",
-      "originalQuantity": 5,
-      "originalUnit": "bottes",
-      "normalizedQuantity": 5,
-      "normalizedUnit": "bottes",
-      "comment": "",
-      "allergens": [],
-      "type": "epices"
-    },{
-      "uuid": "15qnl9",
-      "name": "Moutarde à l'ancienne",
-      "originalQuantity": 270,
-      "originalUnit": "gr.",
-      "normalizedQuantity": 270,
-      "normalizedUnit": "gr.",
-      "comment": "",
-      "allergens": [],
-      "type": "epices"
-    },{
-      "uuid": "hlbwfd",
-      "name": "Yaourt de soja",
-      "originalQuantity": 400,
-      "originalUnit": "gr.",
-      "normalizedQuantity": 400,
-      "normalizedUnit": "gr.",
-      "comment": "version végane (10/15pers)",
-      "allergens": ["Soja"],
-      "type": "frais"
-    },{
-      "uuid": "dzqmba",
-      "name": "Yaourt grec de vache",
-      "originalQuantity": 3.6,
-      "originalUnit": "kg",
-      "normalizedQuantity": 3600,
-      "normalizedUnit": "gr.",
-      "comment": "",
-      "allergens": ["Produit laitier"],
-      "type": "frais"
-    },{
-      "uuid": "i7psri",
-      "name": "Betterave cuite",
-      "originalQuantity": 9,
-      "originalUnit": "kg",
-      "normalizedQuantity": 9000,
-      "normalizedUnit": "gr.",
-      "comment": "",
-      "allergens": [],
-      "type": "legumes"
-    }],
+  "ingredients": [{"allergens":[],"comment":"","name":"Ciboulette","normalizedQuantity":5,"normalizedUnit":"bottes","originalQuantity":5,"originalUnit":"bottes","type":"epices","uuid":"mt22ff"},{"allergens":[],"comment":"","name":"Moutarde à l'ancienne","normalizedQuantity":270,"normalizedUnit":"gr.","originalQuantity":270,"originalUnit":"gr.","type":"epices","uuid":"15qnl9"},{"allergens":["Soja"],"comment":"version végane (10/15pers)","name":"Yaourt de soja","normalizedQuantity":400,"normalizedUnit":"gr.","originalQuantity":400,"originalUnit":"gr.","type":"frais","uuid":"hlbwfd"},{"allergens":["Produit laitier"],"comment":"","name":"Yaourt grec de vache","normalizedQuantity":3600,"normalizedUnit":"gr.","originalQuantity":3.6,"originalUnit":"kg","type":"frais","uuid":"dzqmba"},{"allergens":[],"comment":"","name":"Betterave cuite","normalizedQuantity":9000,"normalizedUnit":"gr.","originalQuantity":9,"originalUnit":"kg","type":"legumes","uuid":"i7psri"}],
   "preparation": "Trancher les betteraves, ciseler la ciboulette. Tout mélanger.\n\nSaler, poivrer et goûter.",
   "prepAlt": null,
   "permissionWrite": [],

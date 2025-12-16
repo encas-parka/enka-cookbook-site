@@ -7,91 +7,172 @@ checkAlwaysOk: false
 cuisson: true
 draft: false
 ingredients:
-  - ingredient: cumin-moulu_he3u48
-    quantite: 15
-    unit: c. à café
-    commentaire: ''
-  - ingredient: paprika_bidsmu
-    quantite: 30
-    unit: gr.
-    commentaire: a voir s'il est piquant ou pas, goutu ou pas
-  - ingredient: piment-en-poudre_fmc1dm
-    quantite: 10
-    unit: gr.
-    commentaire: à adapter en fonction du piquant
-  - ingredient: aneth-aromatique_nnkg8f
-    quantite: 2
-    unit: bottes
-    commentaire: ''
-  - ingredient: coriandre-fraiche_fetrpe
-    quantite: 2
-    unit: bottes
-    commentaire: ''
-  - ingredient: cannelle_sk1gbb
-    quantite: 12
-    unit: c. à café
-    commentaire: ''
-  - ingredient: pulpe-de-tomate_ftj0mq
-    quantite: 6.75
-    unit: Kg
-    commentaire: ''
-  - ingredient: yaourt-grec-de-vache_dzqmba
-    quantite: 6
-    unit: Kg
-    commentaire: ''
-  - ingredient: beurre-doux_kmq1zb
-    quantite: 2
-    unit: Kg
-    commentaire: ''
-  - ingredient: feta_m5dxyo
-    quantite: 3
-    unit: Kg
-    commentaire: ''
-  - ingredient: pate-filo_7tvtlu
-    quantite: 3.7
-    unit: Kg
-    commentaire: ''
-  - ingredient: cebette-ciboule-cive-oignon-vert_j7as8d
-    quantite: 40
-    unit: unité
-    commentaire: ''
-  - ingredient: ail_u2m28w
-    quantite: 1
-    unit: tête·s
-    commentaire: ''
-  - ingredient: oignon_rtavky
-    quantite: 4.5
-    unit: Kg
-    commentaire: ''
-  - ingredient: epinard_4totf1
-    quantite: 2.25
-    unit: Kg
-    commentaire: ''
-  - ingredient: huile-dolive_h3c8al
-    quantite: 900
-    unit: ml
-    commentaire: ''
-  - ingredient: pois-chiche-cuit_wwl5vn
-    quantite: 6
-    unit: Kg
-    commentaire: ''
+  - uuid: he3u48
+    name: Cumin moulu
+    originalQuantity: 15
+    originalUnit: c. à café
+    normalizedQuantity: 75
+    normalizedUnit: ml
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: bidsmu
+    name: Paprika
+    originalQuantity: 30
+    originalUnit: gr.
+    normalizedQuantity: 30
+    normalizedUnit: gr.
+    comment: a voir s'il est piquant ou pas, goutu ou pas
+    allergens: []
+    type: epices
+  - uuid: fmc1dm
+    name: Piment en poudre
+    originalQuantity: 10
+    originalUnit: gr.
+    normalizedQuantity: 10
+    normalizedUnit: gr.
+    comment: à adapter en fonction du piquant
+    allergens: []
+    type: epices
+  - uuid: nnkg8f
+    name: Aneth aromatique
+    originalQuantity: 2
+    originalUnit: bottes
+    normalizedQuantity: 2
+    normalizedUnit: bottes
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: fetrpe
+    name: Coriandre fraîche
+    originalQuantity: 2
+    originalUnit: bottes
+    normalizedQuantity: 2
+    normalizedUnit: bottes
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: sk1gbb
+    name: Cannelle
+    originalQuantity: 12
+    originalUnit: c. à café
+    normalizedQuantity: 60
+    normalizedUnit: ml
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: ftj0mq
+    name: Pulpe de tomate
+    originalQuantity: 6.75
+    originalUnit: kg
+    normalizedQuantity: 6750
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: dzqmba
+    name: Yaourt grec de vache
+    originalQuantity: 6
+    originalUnit: kg
+    normalizedQuantity: 6000
+    normalizedUnit: gr.
+    comment: ''
+    allergens:
+      - Produit laitier
+    type: frais
+  - uuid: kmq1zb
+    name: Beurre doux
+    originalQuantity: 2
+    originalUnit: kg
+    normalizedQuantity: 2000
+    normalizedUnit: gr.
+    comment: ''
+    allergens:
+      - Produit laitier
+    type: frais
+  - uuid: m5dxyo
+    name: Feta
+    originalQuantity: 3
+    originalUnit: kg
+    normalizedQuantity: 3000
+    normalizedUnit: gr.
+    comment: ''
+    allergens:
+      - Produit laitier
+    type: frais
+  - uuid: 7tvtlu
+    name: Pâte filo
+    originalQuantity: 3.7
+    originalUnit: kg
+    normalizedQuantity: 3700
+    normalizedUnit: gr.
+    comment: ''
+    allergens:
+      - Gluten
+    type: frais
+  - uuid: j7as8d
+    name: Cébette - Ciboule - Cive - Oignon vert
+    originalQuantity: 40
+    originalUnit: unité
+    normalizedQuantity: 4800
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: u2m28w
+    name: Ail
+    originalQuantity: 1
+    originalUnit: tête·s
+    normalizedQuantity: 80
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: rtavky
+    name: Oignon
+    originalQuantity: 4.5
+    originalUnit: kg
+    normalizedQuantity: 4500
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: 4totf1
+    name: Epinard
+    originalQuantity: 2.25
+    originalUnit: kg
+    normalizedQuantity: 2250
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: h3c8al
+    name: huile d'olive
+    originalQuantity: 900
+    originalUnit: ml
+    normalizedQuantity: 900
+    normalizedUnit: ml
+    comment: ''
+    allergens: []
+    type: lof
+  - uuid: wwl5vn
+    name: Pois chiche cuit
+    originalQuantity: 6
+    originalUnit: kg
+    normalizedQuantity: 6000
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: sec
 materiel:
   - Four
   - Gastro 1/1 (Normaux)
 plate: 120
-preparation: >-
+preparation: |-
   * Préchauffer les fours!! th 6-7 ou 190°c
-
-  * Dans un grand poelon, à feu moyen : huile, oignons , ail; quand ils sont
-  tendres, y ajouter les épices
-
-  * Ajouter la pulpe de tomate, le concentré et le sucre : laisser mijoter.
-  Laisser un peu évaporer le liquide, on veut pas quelque chose de trop sec,
-  mais tout de meme pas trop d'eau, surtout si l'on a voulu utiliser des vrais
-  tomates.
-
+  * Dans un grand poelon, à feu moyen : huile, oignons , ail; quand ils sont tendres, y ajouter les épices
+  * Ajouter la pulpe de tomate, le concentré et le sucre : laisser mijoter. Laisser un peu évaporer le liquide, on veut pas quelque chose de trop sec, mais tout de meme pas trop d'eau, surtout si l'on a voulu utiliser des vrais tomates.
   * Incorporer les pois chiches, l'aneth et les épinards. Saler et poivrer.
-
   * MONTAGE
 
     Fondre le beurre
@@ -106,10 +187,7 @@ preparation: >-
 
     Entailler légèrement le dessus à la forme de découpe souhaiter, des pti losanges (on en servira plusieurs) ou en nombre de part désirées pour chaque plat, et verser dessus la fin du beure fondu, a défaut un filet d'huile d'olive
   * Enfourner 30 à 35 min, jusqu'à ce que ce soit doré et croustillant
-
-  *  Le YAOURT d'accompagnement: ciseler les feuilles fraiches et emincer
-  fin-fin les oignons nouveaux, mélanger au yaourt; ajouter piment de cayenne
-  et/ou paprika, et saler à convenance personnelle!!
+  *  Le YAOURT d'accompagnement: ciseler les feuilles fraiches et emincer fin-fin les oignons nouveaux, mélanger au yaourt; ajouter piment de cayenne et/ou paprika, et saler à convenance personnelle!!
 publishDate: 2024-06-20T09:53:00.000Z
 regime:
   - vegetarien

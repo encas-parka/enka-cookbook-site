@@ -7,61 +7,86 @@ checkAlwaysOk: false
 cuisson: false
 draft: false
 ingredients:
-  - ingredient: eau_ljzb7j
-    quantite: 500
-    unit: ml
-    commentaire: ''
-  - ingredient: paprika_bidsmu
-    quantite: 10
-    unit: gr.
-    commentaire: ''
-  - ingredient: menthe_2j9y2v
-    quantite: 0.5
-    unit: bottes
-    commentaire: moitié pour la soupe et moitié pour le service
-  - ingredient: bouillon-de-legume-sans-gluten_tmk6ya
-    quantite: 1
-    unit: unité
-    commentaire: ''
-  - ingredient: yaourt-de-soja_hlbwfd
-    quantite: 600
-    unit: gr.
-    commentaire: ''
-  - ingredient: oignon-rouge_doxujz
-    quantite: 1
-    unit: unité
-    commentaire: ''
-  - ingredient: concombre-sans-traitement_ep9gif
-    quantite: 1.3
-    unit: Kg
-    commentaire: ''
+  - uuid: ljzb7j
+    name: Eau
+    originalQuantity: 500
+    originalUnit: ml
+    normalizedQuantity: 500
+    normalizedUnit: ml
+    comment: ''
+    allergens: []
+    type: autres
+  - uuid: bidsmu
+    name: Paprika
+    originalQuantity: 10
+    originalUnit: gr.
+    normalizedQuantity: 10
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: 2j9y2v
+    name: Menthe
+    originalQuantity: 0.5
+    originalUnit: bottes
+    normalizedQuantity: 0.5
+    normalizedUnit: bottes
+    comment: moitié pour la soupe et moitié pour le service
+    allergens: []
+    type: epices
+  - uuid: tmk6ya
+    name: Bouillon de légume (sans gluten)
+    originalQuantity: 1
+    originalUnit: unité
+    normalizedQuantity: 1
+    normalizedUnit: unité
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: hlbwfd
+    name: Yaourt de soja
+    originalQuantity: 600
+    originalUnit: gr.
+    normalizedQuantity: 600
+    normalizedUnit: gr.
+    comment: ''
+    allergens:
+      - Soja
+    type: frais
+  - uuid: doxujz
+    name: Oignon rouge
+    originalQuantity: 1
+    originalUnit: unité
+    normalizedQuantity: 120
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: ep9gif
+    name: Concombre sans traitement
+    originalQuantity: 1.3
+    originalUnit: kg
+    normalizedQuantity: 1300
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
 plate: 10
 prepAlt:
   - recetteAlt: soupe-froide-concombre-et-yaourt_2amw0731
-preparation: >-
-  Epépiner les concombres et les hacher grossièrement. Les réduire en purée au
-  mixeur jusqu'à obtention d'une texture lisse.
+preparation: |-
+  Epépiner les concombres et les hacher grossièrement. Les réduire en purée au mixeur jusqu'à obtention d'une texture lisse.
 
+  Ajouter le yaourt de soja, l'eau froide et le bouillon cube délayé d'une un peu d'eau chaude. Mixer par brèves impulsions.
 
-  Ajouter le yaourt de soja, l'eau froide et le bouillon cube délayé d'une un
-  peu d'eau chaude. Mixer par brèves impulsions.
-
-
-  Ciseler la moitié de la menthe et l'ajouter à la soupe. Saler et poivrer au
-  goût. \
-
+  Ciseler la moitié de la menthe et l'ajouter à la soupe. Saler et poivrer au goût. \
   Bien mélanger.
-
 
   Placer au moins 2h au frais. Rectifier l'assaisonnement.
 
+  Emincer très très finement les oignons rouges. Ciseler l'autre moitié de la menthe.
 
-  Emincer très très finement les oignons rouges. Ciseler l'autre moitié de la
-  menthe.
-
-
-  Au service, verser une louche de soupe, parsemer de menthe, d'une pincée de
-  paprika et d'oignon.
+  Au service, verser une louche de soupe, parsemer de menthe, d'une pincée de paprika et d'oignon.
 publishDate: 2024-05-27T22:33:00.000Z
 quantite_desc: un bol d'environ 225ml par personne
 regime:

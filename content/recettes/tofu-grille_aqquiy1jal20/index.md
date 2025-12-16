@@ -12,22 +12,42 @@ plate: 30
 check: true
 checkAlwaysOk: false
 ingredients:
-  - ingredient: huile-de-friture_1ej217
-    quantite: 1
-    unit: l.
-    commentaire: ''
-  - ingredient: fecule-de-mais-maizena_8nbcjp
-    quantite: 300
-    unit: gr.
-    commentaire: ''
-  - ingredient: tofu-ferme_3ahcls
-    quantite: 3
-    unit: Kg
-    commentaire: ''
-  - ingredient: paprika-fume_ique18
-    quantite: 40
-    unit: gr.
-    commentaire: ''
+  - uuid: 1ej217
+    name: huile de friture
+    originalQuantity: 1
+    originalUnit: l.
+    normalizedQuantity: 1000
+    normalizedUnit: ml
+    comment: ''
+    allergens: []
+    type: lof
+  - uuid: 8nbcjp
+    name: Fécule de maïs (Maïzena)
+    originalQuantity: 300
+    originalUnit: gr.
+    normalizedQuantity: 300
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: lof
+  - uuid: 3ahcls
+    name: Tofu ferme
+    originalQuantity: 3
+    originalUnit: kg
+    normalizedQuantity: 3000
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: frais
+  - uuid: ique18
+    name: Paprika fumé
+    originalQuantity: 40
+    originalUnit: gr.
+    normalizedQuantity: 40
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: epices
 preparation: |-
   essorer le tofu avec du sopalin
 

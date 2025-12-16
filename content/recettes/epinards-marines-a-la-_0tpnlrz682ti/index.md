@@ -17,56 +17,90 @@ plate: 20
 quantite_desc: ''
 check: true
 ingredients:
-  - ingredient: poivre_2pps90
-    quantite: 1
-    unit: c. à café
-    commentaire: ''
-  - ingredient: sesame_mo4efz
-    quantite: 3
-    unit: c. à soupe
-    commentaire: ''
-  - ingredient: huile-de-sesame_fazth1
-    quantite: 30
-    unit: ml
-    commentaire: ''
-  - ingredient: sucre-blanc_lny16c
-    quantite: 5
-    unit: c. à café
-    commentaire: ''
-  - ingredient: gousse-dail_v1kli8
-    quantite: 3
-    unit: unité
-    commentaire: ''
-  - ingredient: sauce-soja_jjrwlj
-    quantite: 75
-    unit: ml
-    commentaire: ''
-  - ingredient: echalote_owsv5m
-    quantite: 1
-    unit: unité
-    commentaire: ''
-  - ingredient: epinard_4totf1
-    quantite: 2
-    unit: Kg
-    commentaire: ''
+  - uuid: 2pps90
+    name: Poivre
+    originalQuantity: 1
+    originalUnit: c. à café
+    normalizedQuantity: 5
+    normalizedUnit: ml
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: mo4efz
+    name: Sésame
+    originalQuantity: 3
+    originalUnit: c. à soupe
+    normalizedQuantity: 45
+    normalizedUnit: ml
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: fazth1
+    name: huile de sésame
+    originalQuantity: 30
+    originalUnit: ml
+    normalizedQuantity: 30
+    normalizedUnit: ml
+    comment: ''
+    allergens:
+      - Sésame
+    type: lof
+  - uuid: lny16c
+    name: sucre blanc
+    originalQuantity: 5
+    originalUnit: c. à café
+    normalizedQuantity: 25
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: sucres
+  - uuid: v1kli8
+    name: Gousse d'ail
+    originalQuantity: 3
+    originalUnit: unité
+    normalizedQuantity: 3
+    normalizedUnit: unité
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: jjrwlj
+    name: Sauce soja
+    originalQuantity: 75
+    originalUnit: ml
+    normalizedQuantity: 75
+    normalizedUnit: ml
+    comment: ''
+    allergens:
+      - Soja
+    type: epices
+  - uuid: owsv5m
+    name: échalote
+    originalQuantity: 1
+    originalUnit: unité
+    normalizedQuantity: 30
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: 4totf1
+    name: Epinard
+    originalQuantity: 2
+    originalUnit: kg
+    normalizedQuantity: 2000
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
 materiel:
   - Bruleur
-preparation: >-
-  Couper les racines des épinards. Les laver puis les blanchir dans de l'eau
-  bouillante jusqu'à ce qu'ils flétrissent (30 secondes - 1 minute selon la
-  quantité d'eau et d'épinard)
+preparation: |-
+  Couper les racines des épinards. Les laver puis les blanchir dans de l'eau bouillante jusqu'à ce qu'ils flétrissent (30 secondes - 1 minute selon la quantité d'eau et d'épinard)
 
-
-  Enlever les épinards vite et les mettre dans de l'eau glacée (préparée à
-  l'avance) pour arrêter la cuisson.
-
+  Enlever les épinards vite et les mettre dans de l'eau glacée (préparée à l'avance) pour arrêter la cuisson.
 
   Égoutter et enlever doucement l'excès d'eau. Couper en tronçons de 5cm.
 
-
-  Ajouter le reste des ingrédients (= la marinade) et tout bien mélanger à la
-  main.
-
+  Ajouter le reste des ingrédients (= la marinade) et tout bien mélanger à la main.
 
   Attendre au moins 10 min avant de servir.
 preparation24h: ''

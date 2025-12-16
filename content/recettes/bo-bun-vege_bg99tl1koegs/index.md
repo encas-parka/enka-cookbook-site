@@ -17,164 +17,244 @@ plate: 100
 check: true
 checkAlwaysOk: false
 ingredients:
-  - ingredient: salade-verte-chene_cg3wgm
-    quantite: 12
-    unit: unité
-    commentaire: ''
-  - ingredient: concombre_l5p1a5
-    quantite: 4.5
-    unit: Kg
-    commentaire: ''
-  - ingredient: echalote_vwdomu
-    quantite: 1.5
-    unit: Kg
-    commentaire: sauce
-  - ingredient: carotte_eouu0v
-    quantite: 6.5
-    unit: Kg
-    commentaire: ''
-  - ingredient: algue-kombu_oafcb5
-    quantite: 15
-    unit: gr.
-    commentaire: sauce
-  - ingredient: gingembre_0d1fzw
-    quantite: 150
-    unit: gr.
-    commentaire: sauce
-  - ingredient: ail_u2m28w
-    quantite: 420
-    unit: gr.
-    commentaire: sauce
-  - ingredient: ail_u2m28w
-    quantite: 18
-    unit: gousse·s
-    commentaire: Chunks laqués
-  - ingredient: eau_ljzb7j
-    quantite: 20
-    unit: l.
-    commentaire: chaude
-  - ingredient: proteines-de-soja_6m90g7
-    quantite: 1.5
-    unit: Kg
-    commentaire: chuncks laqués
-  - ingredient: cacahuete_73ikep
-    quantite: 1.5
-    unit: Kg
-    commentaire: ''
-  - ingredient: vermicelle-de-riz_3tifny
-    quantite: 8.7
-    unit: Kg
-    commentaire: ''
-  - ingredient: jus-dorange_gzi2ry
-    quantite: 3
-    unit: l.
-    commentaire: chunks laqués
-  - ingredient: sucre-en-poudre_u9z2he
-    quantite: 3
-    unit: Kg
-    commentaire: sauce
-  - ingredient: sucre-en-poudre_u9z2he
-    quantite: 250
-    unit: gr.
-    commentaire: chunks laqués
-  - ingredient: vinaigre-de-riz_k6injl
-    quantite: 3
-    unit: l.
-    commentaire: sauce
-  - ingredient: poivre-noir-moulu_rgt7s4
-    quantite: 12
-    unit: gr.
-    commentaire: chunks laqués
-  - ingredient: melange-4-epices_dex52s
-    quantite: 20
-    unit: gr.
-    commentaire: chunks laqués
-  - ingredient: menthe_2j9y2v
-    quantite: 5
-    unit: bottes
-    commentaire: Grosse botte
-  - ingredient: coriandre-fraiche_fetrpe
-    quantite: 5
-    unit: bottes
-    commentaire: Grosses bottes
-  - ingredient: tamari-sauce_bbwo4n
-    quantite: 1.5
-    unit: l.
-    commentaire: sauce
+  - uuid: cg3wgm
+    name: Salade verte (chêne)
+    originalQuantity: 12
+    originalUnit: unité
+    normalizedQuantity: 12
+    normalizedUnit: unité
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: l5p1a5
+    name: Concombre
+    originalQuantity: 4.5
+    originalUnit: kg
+    normalizedQuantity: 4500
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: vwdomu
+    name: Echalote
+    originalQuantity: 1.5
+    originalUnit: kg
+    normalizedQuantity: 1500
+    normalizedUnit: gr.
+    comment: sauce
+    allergens: []
+    type: legumes
+  - uuid: eouu0v
+    name: Carotte
+    originalQuantity: 6.5
+    originalUnit: kg
+    normalizedQuantity: 6500
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: oafcb5
+    name: Algue Kombu
+    originalQuantity: 15
+    originalUnit: gr.
+    normalizedQuantity: 15
+    normalizedUnit: gr.
+    comment: sauce
+    allergens: []
+    type: legumes
+  - uuid: 0d1fzw
+    name: Gingembre
+    originalQuantity: 150
+    originalUnit: gr.
+    normalizedQuantity: 150
+    normalizedUnit: gr.
+    comment: sauce
+    allergens: []
+    type: legumes
+  - uuid: u2m28w
+    name: Ail
+    originalQuantity: 420
+    originalUnit: gr.
+    normalizedQuantity: 420
+    normalizedUnit: gr.
+    comment: sauce
+    allergens: []
+    type: legumes
+  - uuid: u2m28w
+    name: Ail
+    originalQuantity: 18
+    originalUnit: gousse·s
+    normalizedQuantity: 117
+    normalizedUnit: gr.
+    comment: Chunks laqués
+    allergens: []
+    type: legumes
+  - uuid: ljzb7j
+    name: Eau
+    originalQuantity: 20
+    originalUnit: l.
+    normalizedQuantity: 20000
+    normalizedUnit: ml
+    comment: chaude
+    allergens: []
+    type: autres
+  - uuid: 6m90g7
+    name: Protéines de soja
+    originalQuantity: 1.5
+    originalUnit: kg
+    normalizedQuantity: 1500
+    normalizedUnit: gr.
+    comment: chuncks laqués
+    allergens:
+      - Soja
+    type: autres
+  - uuid: 73ikep
+    name: Cacahuète
+    originalQuantity: 1.5
+    originalUnit: kg
+    normalizedQuantity: 1500
+    normalizedUnit: gr.
+    comment: ''
+    allergens:
+      - Arachide
+    type: sec
+  - uuid: 3tifny
+    name: Vermicelle de Riz
+    originalQuantity: 8.7
+    originalUnit: kg
+    normalizedQuantity: 8700
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: sec
+  - uuid: gzi2ry
+    name: Jus d'orange
+    originalQuantity: 3
+    originalUnit: l.
+    normalizedQuantity: 3000
+    normalizedUnit: ml
+    comment: chunks laqués
+    allergens: []
+    type: sucres
+  - uuid: u9z2he
+    name: Sucre en poudre
+    originalQuantity: 3
+    originalUnit: kg
+    normalizedQuantity: 3000
+    normalizedUnit: gr.
+    comment: sauce
+    allergens: []
+    type: sucres
+  - uuid: u9z2he
+    name: Sucre en poudre
+    originalQuantity: 250
+    originalUnit: gr.
+    normalizedQuantity: 250
+    normalizedUnit: gr.
+    comment: chunks laqués
+    allergens: []
+    type: sucres
+  - uuid: k6injl
+    name: Vinaigre de riz
+    originalQuantity: 3
+    originalUnit: l.
+    normalizedQuantity: 3000
+    normalizedUnit: ml
+    comment: sauce
+    allergens: []
+    type: epices
+  - uuid: rgt7s4
+    name: Poivre noir moulu
+    originalQuantity: 12
+    originalUnit: gr.
+    normalizedQuantity: 12
+    normalizedUnit: gr.
+    comment: chunks laqués
+    allergens: []
+    type: epices
+  - uuid: dex52s
+    name: mélange 4 épices
+    originalQuantity: 20
+    originalUnit: gr.
+    normalizedQuantity: 20
+    normalizedUnit: gr.
+    comment: chunks laqués
+    allergens: []
+    type: epices
+  - uuid: 2j9y2v
+    name: Menthe
+    originalQuantity: 5
+    originalUnit: bottes
+    normalizedQuantity: 5
+    normalizedUnit: bottes
+    comment: Grosse botte
+    allergens: []
+    type: epices
+  - uuid: fetrpe
+    name: Coriandre fraîche
+    originalQuantity: 5
+    originalUnit: bottes
+    normalizedQuantity: 5
+    normalizedUnit: bottes
+    comment: Grosses bottes
+    allergens: []
+    type: epices
+  - uuid: bbwo4n
+    name: Tamari (sauce)
+    originalQuantity: 1.5
+    originalUnit: l.
+    normalizedQuantity: 1500
+    normalizedUnit: ml
+    comment: sauce
+    allergens:
+      - Soja
+    type: epices
 materiel:
   - Plat Paela
-preparation: >-
+preparation: |-
   **CHUNCKS LAQUES :**
-
 
   Possible 1 J avant
 
-
   * Faire griller les protéines de soja dans la très grande poêle.
-
   * Déglacer au jus d'orange et sauce soja.
-
   * Ajouter poivre et 4épices, ail et gingembre pressés.
-
   * Ensuite les faire caraméliser avec le sucre.
-
 
 
 
   **SAUCE VEGANE:**
 
-
   Possible 1 J avant
 
-
-  * Faire chauffer l'eau sans la bouillir en infusant l'algue Kombu minimum
-  20min.
-
-  * Mettre dans une gamelle, l'ail pressé,  le sucre, le jus de citrons verts,
-  le vinaigre,jusqu'à ce que le sucre se dissolve.
-
+  * Faire chauffer l'eau sans la bouillir en infusant l'algue Kombu minimum 20min.
+  * Mettre dans une gamelle, l'ail pressé,  le sucre, le jus de citrons verts, le vinaigre,jusqu'à ce que le sucre se dissolve.
   * Ajoutez la sauce tamari, l'eau, l'algueet les échalottes hâchées menues.
-
   * Mélanger et réserver au frais.
-
 
 
 
   **GARNITURE :**
 
-
   * Râper les carottes
-
   * Couper les concombre pélés en bâtonnets
-
   * Hâcher grossièrement la menthe et la coriandre
-
   * Couper la salade
-
   * Toaster les cacahuètes et les broyer légèrement.
-
 
 
 
   **1h30 avant le service:**
 
-
-  * Cuire les vermicelles à l'eau bouillante et les rincer à la sortie de
-  cuisson.
-
+  * Cuire les vermicelles à l'eau bouillante et les rincer à la sortie de cuisson.
   * Les cuire petit à petit, pas tout d'un coup.
-
   * Les laisser reposer dans une passoire sous un torchon durant 1h.
-
 
   **ASSEMBLAGE DU BO BUN :**
 
-
   \- les nouilles au fond d'un gros bol et arroser d'une louche de sauce.
 
-
-  \- les légumes crus (carottes, concombre et salade) autour des nouilles ainsi
-  que les chunks, cacahuètes et coriandre et menthe.
+  \- les légumes crus (carottes, concombre et salade) autour des nouilles ainsi que les chunks, cacahuètes et coriandre et menthe.
 astuces:
   - astuce: S'accompagne de nems
 publishDate: 2024-05-20T14:53:00.000Z

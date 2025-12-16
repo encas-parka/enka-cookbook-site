@@ -1,10 +1,10 @@
 {
   "mainGroup_id": "test_5_daf52fff",
-  "hugoContentHash": "55449793bb07dc4d5e66a6cf7696cf9b",
+  "hugoContentHash": "3d0b32f6ab7bd214d6acb0f8355095d0",
   "name": "test 2025",
   "allDates": ["2025-11-15T20:00:00.000Z","2025-11-22T20:00:00.000Z","2025-11-23T20:00:00.000Z","2025-11-24T20:00:00.000Z","2025-11-25T12:00:00.000Z","2025-12-29T20:00:00.000Z"],
-  "lastModified": "2025-12-04T22:03:56+01:00",
-  "ingredientsCount": 96,
+  "lastModified": "2025-12-16T00:38:48+01:00",
+  "ingredientsCount": 1,
   "totalAssiettes": 0,
   "totalRecipes": 0
 }

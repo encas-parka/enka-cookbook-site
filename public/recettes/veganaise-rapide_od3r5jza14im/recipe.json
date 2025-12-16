@@ -14,47 +14,7 @@
   "check": true,
   "checkAlwaysOk": true,
   "materiel": ["Giraffe (Bras Mixeur)"],
-  "ingredients": [{
-      "uuid": "2juq3x",
-      "name": "Sel",
-      "originalQuantity": 1,
-      "originalUnit": "c. à soupe",
-      "normalizedQuantity": 15,
-      "normalizedUnit": "gr.",
-      "comment": "",
-      "allergens": [],
-      "type": "epices"
-    },{
-      "uuid": "5c1b20",
-      "name": "Moutarde",
-      "originalQuantity": 150,
-      "originalUnit": "ml",
-      "normalizedQuantity": 150,
-      "normalizedUnit": "ml",
-      "comment": "",
-      "allergens": ["Moutarde"],
-      "type": "epices"
-    },{
-      "uuid": "c70jxb",
-      "name": "huile de tournesol",
-      "originalQuantity": 1.2,
-      "originalUnit": "l.",
-      "normalizedQuantity": 1200,
-      "normalizedUnit": "ml",
-      "comment": "",
-      "allergens": [],
-      "type": "lof"
-    },{
-      "uuid": "aq796v",
-      "name": "Crème Végétale",
-      "originalQuantity": 600,
-      "originalUnit": "ml",
-      "normalizedQuantity": 600,
-      "normalizedUnit": "ml",
-      "comment": "",
-      "allergens": ["Soja"],
-      "type": "lof"
-    }],
+  "ingredients": [{"allergens":[],"comment":"","name":"Sel","normalizedQuantity":15,"normalizedUnit":"gr.","originalQuantity":1,"originalUnit":"c. à soupe","type":"epices","uuid":"2juq3x"},{"allergens":["Moutarde"],"comment":"","name":"Moutarde","normalizedQuantity":150,"normalizedUnit":"ml","originalQuantity":150,"originalUnit":"ml","type":"epices","uuid":"5c1b20"},{"allergens":[],"comment":"","name":"huile de tournesol","normalizedQuantity":1200,"normalizedUnit":"ml","originalQuantity":1.2,"originalUnit":"l.","type":"lof","uuid":"c70jxb"},{"allergens":["Soja"],"comment":"","name":"Crème Végétale","normalizedQuantity":600,"normalizedUnit":"ml","originalQuantity":600,"originalUnit":"ml","type":"lof","uuid":"aq796v"}],
   "preparation": "* Mettre tous les ingrédients dans un grand bocal ou deux selon les quantités. La crème soja doit être froide.\n* Mixer avec un bras mixeur.",
   "prepAlt": null,
   "permissionWrite": [],

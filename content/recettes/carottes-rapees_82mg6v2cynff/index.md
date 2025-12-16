@@ -14,18 +14,33 @@ plate: 100
 check: true
 checkAlwaysOk: true
 ingredients:
-  - ingredient: sel_2juq3x
-    quantite: 10
-    unit: gr.
-    commentaire: ''
-  - ingredient: carotte_eouu0v
-    quantite: 13
-    unit: Kg
-    commentaire: ''
-  - ingredient: huile-vegetale_atccqu
-    quantite: 1
-    unit: l.
-    commentaire: ''
+  - uuid: 2juq3x
+    name: Sel
+    originalQuantity: 10
+    originalUnit: gr.
+    normalizedQuantity: 10
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: eouu0v
+    name: Carotte
+    originalQuantity: 13
+    originalUnit: kg
+    normalizedQuantity: 13000
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: atccqu
+    name: Huile végétale
+    originalQuantity: 1
+    originalUnit: l.
+    normalizedQuantity: 1000
+    normalizedUnit: ml
+    comment: ''
+    allergens: []
+    type: lof
 preparation: Raper et assaisonner à convenance
 publishDate: '2024-06-14T13:22:00.000Z'
 serveHot: false

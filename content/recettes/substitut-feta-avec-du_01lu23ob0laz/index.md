@@ -14,62 +14,103 @@ plate: 8
 check: false
 checkAlwaysOk: true
 ingredients:
-  - ingredient: tofu-ferme_3ahcls
-    quantite: 400
-    unit: gr.
-    commentaire: ''
-  - ingredient: poivre_2pps90
-    quantite: 0.5
-    unit: c. à café
-    commentaire: ''
-  - ingredient: sel_2juq3x
-    quantite: 0.5
-    unit: c. à café
-    commentaire: ''
-  - ingredient: origan_fkftyb
-    quantite: 1
-    unit: c. à café
-    commentaire: ''
-  - ingredient: ail-en-poudre_vs2dfm
-    quantite: 0.5
-    unit: c. à café
-    commentaire: ''
-  - ingredient: jus-de-citron_e4mjd1
-    quantite: 60
-    unit: ml
-    commentaire: ''
-  - ingredient: miso-blanc_k2uthk
-    quantite: 38
-    unit: ml
-    commentaire: ''
-  - ingredient: vinaigre-de-cidre_7qo3ht
-    quantite: 80
-    unit: ml
-    commentaire: ''
-  - ingredient: huile-de-tournesol_c70jxb
-    quantite: 30
-    unit: ml
-    commentaire: ''
-  - ingredient: levure-de-biere_4be4ic
-    quantite: 2
-    unit: c. à soupe
-    commentaire: ''
-preparation: >-
+  - uuid: 3ahcls
+    name: Tofu ferme
+    originalQuantity: 400
+    originalUnit: gr.
+    normalizedQuantity: 400
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: frais
+  - uuid: 2pps90
+    name: Poivre
+    originalQuantity: 0.5
+    originalUnit: c. à café
+    normalizedQuantity: 2.5
+    normalizedUnit: ml
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: 2juq3x
+    name: Sel
+    originalQuantity: 0.5
+    originalUnit: c. à café
+    normalizedQuantity: 2.5
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: fkftyb
+    name: Origan
+    originalQuantity: 1
+    originalUnit: c. à café
+    normalizedQuantity: 5
+    normalizedUnit: ml
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: vs2dfm
+    name: Ail en poudre
+    originalQuantity: 0.5
+    originalUnit: c. à café
+    normalizedQuantity: 2.5
+    normalizedUnit: ml
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: e4mjd1
+    name: Jus de citron
+    originalQuantity: 60
+    originalUnit: ml
+    normalizedQuantity: 60
+    normalizedUnit: ml
+    comment: ''
+    allergens: []
+    type: sucres
+  - uuid: k2uthk
+    name: Miso blanc
+    originalQuantity: 38
+    originalUnit: ml
+    normalizedQuantity: 38
+    normalizedUnit: ml
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: 7qo3ht
+    name: Vinaigre de cidre
+    originalQuantity: 80
+    originalUnit: ml
+    normalizedQuantity: 80
+    normalizedUnit: ml
+    comment: ''
+    allergens:
+      - Alcool
+    type: epices
+  - uuid: c70jxb
+    name: huile de tournesol
+    originalQuantity: 30
+    originalUnit: ml
+    normalizedQuantity: 30
+    normalizedUnit: ml
+    comment: ''
+    allergens: []
+    type: lof
+  - uuid: 4be4ic
+    name: Levure de bière
+    originalQuantity: 2
+    originalUnit: c. à soupe
+    normalizedQuantity: 30
+    normalizedUnit: ml
+    comment: ''
+    allergens: []
+    type: lof
+preparation: |-
   * Pressez le tofu pour éliminer l'excès d'humidité
-
-  * Pendant que le tofu est pressé, préparez la marinade. Placez la pâte de
-  miso, le vinaigre, le jus de citron, l'huile d'olive, la poudre d'ail,
-  l'origan séché, la levure nutritionnelle, le sel, le poivre noir dans un grand
-  bol
+  * Pendant que le tofu est pressé, préparez la marinade. Placez la pâte de miso, le vinaigre, le jus de citron, l'huile d'olive, la poudre d'ail, l'origan séché, la levure nutritionnelle, le sel, le poivre noir dans un grand bol
      et fouettez jusqu'à ce que le tout soit bien mélangé.
-  * Coupez le bloc de tofu en deux dans le sens de la longueur, puis coupez-le
-  en petits cubes. Ajoutez les cubes de tofu à la marinade, placez le couvercle
-  sur le bol et secouez doucement pour enrober le tofu dans la marinade, ou
-  utilisez une cuillère ou une spatule en silicone et mélangez délicatement les
-  cubes de tofu dans la marinade.
-
-  * Placer au réfrigérateur pendant la nuit pour que les saveurs s'infusent
-  pleinement dans le tofu.
+  * Coupez le bloc de tofu en deux dans le sens de la longueur, puis coupez-le en petits cubes. Ajoutez les cubes de tofu à la marinade, placez le couvercle sur le bol et secouez doucement pour enrober le tofu dans la marinade, ou utilisez une cuillère ou une spatule en silicone et mélangez délicatement les cubes de tofu dans la marinade.
+  * Placer au réfrigérateur pendant la nuit pour que les saveurs s'infusent pleinement dans le tofu.
 preparation24h: |-
   Préparation facultative - Congelez le bloc de tofu et décongelez-le avant
   de commencer la recette

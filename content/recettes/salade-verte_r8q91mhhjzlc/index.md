@@ -12,17 +12,19 @@ regime:
   - sans-lactose
 cuisson: false
 plate: 100
-quantite_desc: >-
-  on compte une salade pour 10personnes, mais tout dépend de sa taille. La
-  taille de référence est plutôt celle que l'on trouve basiquement au
-  supermarché
+quantite_desc: on compte une salade pour 10personnes, mais tout dépend de sa taille. La taille de référence est plutôt celle que l'on trouve basiquement au supermarché
 check: true
 checkAlwaysOk: true
 ingredients:
-  - ingredient: salade-verte-chene_cg3wgm
-    quantite: 10
-    unit: unité
-    commentaire: ''
+  - uuid: cg3wgm
+    name: Salade verte (chêne)
+    originalQuantity: 10
+    originalUnit: unité
+    normalizedQuantity: 10
+    normalizedUnit: unité
+    comment: ''
+    allergens: []
+    type: legumes
 preparation: |-
   \- laver la salade
 

@@ -13,35 +13,63 @@ plate: 20
 check: true
 checkAlwaysOk: false
 ingredients:
-  - ingredient: echalote_vwdomu
-    quantite: 150
-    unit: gr.
-    commentaire: ''
-  - ingredient: ail_u2m28w
-    quantite: 2
-    unit: gousse·s
-    commentaire: ''
-  - ingredient: huile-dolive_h3c8al
-    quantite: 50
-    unit: ml
-    commentaire: ''
-  - ingredient: yaourt-de-soja_hlbwfd
-    quantite: 200
-    unit: gr.
-    commentaire: ''
-  - ingredient: confiture-de-chataigne-sans-sucre_q33x0k
-    quantite: 750
-    unit: gr.
-    commentaire: ''
-  - ingredient: paprika_bidsmu
-    quantite: 8
-    unit: gr.
-    commentaire: ''
-preparation: >-
-  * Emincer très fin les échalottes, hacher l'ail et brasser tous les
-  ingrédients ensemble à l'aide d'une spatule ou aux mains. La texture doit être
-  épaisse.
-
+  - uuid: vwdomu
+    name: Echalote
+    originalQuantity: 150
+    originalUnit: gr.
+    normalizedQuantity: 150
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: u2m28w
+    name: Ail
+    originalQuantity: 2
+    originalUnit: gousse·s
+    normalizedQuantity: 13
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: h3c8al
+    name: huile d'olive
+    originalQuantity: 50
+    originalUnit: ml
+    normalizedQuantity: 50
+    normalizedUnit: ml
+    comment: ''
+    allergens: []
+    type: lof
+  - uuid: hlbwfd
+    name: Yaourt de soja
+    originalQuantity: 200
+    originalUnit: gr.
+    normalizedQuantity: 200
+    normalizedUnit: gr.
+    comment: ''
+    allergens:
+      - Soja
+    type: frais
+  - uuid: q33x0k
+    name: Confiture de chataigne (sans sucre)
+    originalQuantity: 750
+    originalUnit: gr.
+    normalizedQuantity: 750
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: sucres
+  - uuid: bidsmu
+    name: Paprika
+    originalQuantity: 8
+    originalUnit: gr.
+    normalizedQuantity: 8
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: epices
+preparation: |-
+  * Emincer très fin les échalottes, hacher l'ail et brasser tous les ingrédients ensemble à l'aide d'une spatule ou aux mains. La texture doit être épaisse.
   * Goûter et réajuster l'assaisonnement, sel, poivre, paprika, ail.
 prepAlt:
   - recetteAlt: Tartinade salé a la chataigne

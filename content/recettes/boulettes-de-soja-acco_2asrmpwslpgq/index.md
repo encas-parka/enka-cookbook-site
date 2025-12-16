@@ -13,76 +13,129 @@ plate: 100
 quantite_desc: 3 boulettes par personne
 check: true
 ingredients:
-  - ingredient: gingembre_0d1fzw
-    quantite: 200
-    unit: gr.
-    commentaire: ''
-  - ingredient: ail_u2m28w
-    quantite: 25
-    unit: gousse·s
-    commentaire: ''
-  - ingredient: echalote_vwdomu
-    quantite: 25
-    unit: unité
-    commentaire: ''
-  - ingredient: eau_ljzb7j
-    quantite: 7
-    unit: l.
-    commentaire: ''
-  - ingredient: tahin_u33083
-    quantite: 1.13
-    unit: Kg
-    commentaire: ''
-  - ingredient: proteines-de-soja_6m90g7
-    quantite: 1.7
-    unit: Kg
-    commentaire: ''
-  - ingredient: poivre_2pps90
-    commentaire: ''
-  - ingredient: sel_2juq3x
-    commentaire: ''
-  - ingredient: persil-frais_hgfa4e
-    quantite: 1.5
-    unit: bottes
-    commentaire: ''
-  - ingredient: tamari-sauce_bbwo4n
-    quantite: 380
-    unit: ml
-    commentaire: ''
-  - ingredient: bouillon-de-legume-sans-gluten_tmk6ya
-    quantite: 16
-    unit: unité
-    commentaire: ''
-  - ingredient: farine-de-riz-blanche_1nb85u
-    quantite: 550
-    unit: gr.
-    commentaire: ''
+  - uuid: 0d1fzw
+    name: Gingembre
+    originalQuantity: 200
+    originalUnit: gr.
+    normalizedQuantity: 200
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: u2m28w
+    name: Ail
+    originalQuantity: 25
+    originalUnit: gousse·s
+    normalizedQuantity: 162.5
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: vwdomu
+    name: Echalote
+    originalQuantity: 25
+    originalUnit: unité
+    normalizedQuantity: 25
+    normalizedUnit: unité
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: ljzb7j
+    name: Eau
+    originalQuantity: 7
+    originalUnit: l.
+    normalizedQuantity: 7000
+    normalizedUnit: ml
+    comment: ''
+    allergens: []
+    type: autres
+  - uuid: u33083
+    name: Tahin
+    originalQuantity: 1.13
+    originalUnit: kg
+    normalizedQuantity: 1130
+    normalizedUnit: gr.
+    comment: ''
+    allergens:
+      - Sésame
+    type: autres
+  - uuid: 6m90g7
+    name: Protéines de soja
+    originalQuantity: 1.7
+    originalUnit: kg
+    normalizedQuantity: 1700
+    normalizedUnit: gr.
+    comment: ''
+    allergens:
+      - Soja
+    type: autres
+  - uuid: 2pps90
+    name: Poivre
+    originalQuantity: 1
+    originalUnit: au goût
+    normalizedQuantity: 1
+    normalizedUnit: au goût
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: 2juq3x
+    name: Sel
+    originalQuantity: 1
+    originalUnit: au goût
+    normalizedQuantity: 1
+    normalizedUnit: au goût
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: hgfa4e
+    name: Persil frais
+    originalQuantity: 1.5
+    originalUnit: bottes
+    normalizedQuantity: 1.5
+    normalizedUnit: bottes
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: bbwo4n
+    name: Tamari (sauce)
+    originalQuantity: 380
+    originalUnit: ml
+    normalizedQuantity: 380
+    normalizedUnit: ml
+    comment: ''
+    allergens:
+      - Soja
+    type: epices
+  - uuid: tmk6ya
+    name: Bouillon de légume (sans gluten)
+    originalQuantity: 16
+    originalUnit: unité
+    normalizedQuantity: 16
+    normalizedUnit: unité
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: 1nb85u
+    name: Farine de riz blanche
+    originalQuantity: 550
+    originalUnit: gr.
+    normalizedQuantity: 550
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: lof
 materiel:
   - Four
   - Marmitte
   - Robot Mixeur
-preparation: >-
-  * Dans une casserole, mettre l'eau, le bouillon de légumes et la sauce tamari.
-  Porter à ébullition, couvrir et laisser gonfler 30 minutes.
-
+preparation: |-
+  * Dans une casserole, mettre l'eau, le bouillon de légumes et la sauce tamari. Porter à ébullition, couvrir et laisser gonfler 30 minutes.
   * Pendant ce temps, éplucher l'ail, les échalotes et râper le gingembre.
-
-  * Egoutter les protéines en veillant à recueillir un  peu de bouillon pour
-  rallonger la pâte si elle est trop sèche.
-
-  * Dans le bol d'un mixer, mettre les protéines de soja égouttées, l'ail et
-  l'échalote coupés en morceaux, le persil, la sauce soja, la farine et le
-  tahin, sel et poivre. Mixer jusqu'à obtenir une préparation assez fine.
-
-  * Faire chauffer le four à 200 °. Préparer une plaque à four recouverte de
-  papier cuisson ou graisser légèrement un plat.
-
-  * Mouiller ses mains, prendre la valeur d'une cuillère à soupe de préparation,
-  former une boule de la grosseur d'une noix en pressant un peu. Posez sur la
-  plaque de cuisson.
-
-  * Faites cuire 15 à 20 minutes voire plus. Elles doivent être légèrement
-  dorées.
+  * Egoutter les protéines en veillant à recueillir un  peu de bouillon pour rallonger la pâte si elle est trop sèche.
+  * Dans le bol d'un mixer, mettre les protéines de soja égouttées, l'ail et l'échalote coupés en morceaux, le persil, la sauce soja, la farine et le tahin, sel et poivre. Mixer jusqu'à obtenir une préparation assez fine.
+  * Faire chauffer le four à 200 °. Préparer une plaque à four recouverte de papier cuisson ou graisser légèrement un plat.
+  * Mouiller ses mains, prendre la valeur d'une cuillère à soupe de préparation, former une boule de la grosseur d'une noix en pressant un peu. Posez sur la plaque de cuisson.
+  * Faites cuire 15 à 20 minutes voire plus. Elles doivent être légèrement dorées.
 publishDate: 2024-05-18T13:54:00.000Z
 checkfor: 170
 checkAlwaysOk: false

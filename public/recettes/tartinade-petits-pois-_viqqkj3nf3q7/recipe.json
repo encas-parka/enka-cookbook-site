@@ -14,67 +14,7 @@
   "check": null,
   "checkAlwaysOk": null,
   "materiel": ["Grand Saladier"],
-  "ingredients": [{
-      "uuid": "u2m28w",
-      "name": "Ail",
-      "originalQuantity": 35,
-      "originalUnit": "gousse·s",
-      "normalizedQuantity": 227.5,
-      "normalizedUnit": "gr.",
-      "comment": "",
-      "allergens": [],
-      "type": "legumes"
-    },{
-      "uuid": "8doafu",
-      "name": "Petits pois",
-      "originalQuantity": 14,
-      "originalUnit": "kg",
-      "normalizedQuantity": 14000,
-      "normalizedUnit": "gr.",
-      "comment": "",
-      "allergens": [],
-      "type": "legumes"
-    },{
-      "uuid": "h3c8al",
-      "name": "huile d'olive",
-      "originalQuantity": 1,
-      "originalUnit": "l.",
-      "normalizedQuantity": 1000,
-      "normalizedUnit": "ml",
-      "comment": "",
-      "allergens": [],
-      "type": "lof"
-    },{
-      "uuid": "aq796v",
-      "name": "Crème Végétale",
-      "originalQuantity": 1.5,
-      "originalUnit": "kg",
-      "normalizedQuantity": 1500,
-      "normalizedUnit": "gr.",
-      "comment": "",
-      "allergens": ["Soja"],
-      "type": "lof"
-    },{
-      "uuid": "yl86w7",
-      "name": "Yaourt nature",
-      "originalQuantity": 2,
-      "originalUnit": "kg",
-      "normalizedQuantity": 2000,
-      "normalizedUnit": "gr.",
-      "comment": "",
-      "allergens": ["Produit laitier"],
-      "type": "frais"
-    },{
-      "uuid": "2j9y2v",
-      "name": "Menthe",
-      "originalQuantity": 2,
-      "originalUnit": "bottes",
-      "normalizedQuantity": 2,
-      "normalizedUnit": "bottes",
-      "comment": "",
-      "allergens": [],
-      "type": "epices"
-    }],
+  "ingredients": [{"allergens":[],"comment":"","name":"Ail","normalizedQuantity":227.5,"normalizedUnit":"gr.","originalQuantity":35,"originalUnit":"gousse·s","type":"legumes","uuid":"u2m28w"},{"allergens":[],"comment":"","name":"Petits pois","normalizedQuantity":14000,"normalizedUnit":"gr.","originalQuantity":14,"originalUnit":"kg","type":"legumes","uuid":"8doafu"},{"allergens":[],"comment":"","name":"huile d'olive","normalizedQuantity":1000,"normalizedUnit":"ml","originalQuantity":1,"originalUnit":"l.","type":"lof","uuid":"h3c8al"},{"allergens":["Soja"],"comment":"","name":"Crème Végétale","normalizedQuantity":1500,"normalizedUnit":"gr.","originalQuantity":1.5,"originalUnit":"kg","type":"lof","uuid":"aq796v"},{"allergens":["Produit laitier"],"comment":"","name":"Yaourt nature","normalizedQuantity":2000,"normalizedUnit":"gr.","originalQuantity":2,"originalUnit":"kg","type":"frais","uuid":"yl86w7"},{"allergens":[],"comment":"","name":"Menthe","normalizedQuantity":2,"normalizedUnit":"bottes","originalQuantity":2,"originalUnit":"bottes","type":"epices","uuid":"2j9y2v"}],
   "preparation": "* Cuire les petits pois pendant quelques minutes à l’eau bouillante salée. \n* Les égoutter puis les rincer à l’eau froide pour préserver leur couleur.\n* Hacher finement (ou mixer grossièrement ^^) le citron confit et laver la menthe.\n* Écraser grossièrement les petits pois avec l’ail, la menthe, la crème et le yaourt. \n* Goûter, puis assaisonner.\n* Mélanger le citron confit avec la pâte.",
   "prepAlt": null,
   "permissionWrite": [],

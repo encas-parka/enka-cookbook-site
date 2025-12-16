@@ -14,94 +14,145 @@ check: true
 checkAlwaysOk: false
 checkfor: ''
 ingredients:
-  - ingredient: boulgour_omf24t
-    quantite: 5
-    unit: Kg
-    commentaire: ''
-  - ingredient: haricots-blancs_znpoor
-    quantite: 5
-    unit: Kg
-    commentaire: ''
-  - ingredient: ail_u2m28w
-    quantite: 5
-    unit: tête·s
-    commentaire: ''
-  - ingredient: carotte_eouu0v
-    quantite: 15
-    unit: Kg
-    commentaire: ''
-  - ingredient: oignon_rtavky
-    quantite: 10
-    unit: Kg
-    commentaire: ''
-  - ingredient: tomate-conserve_24z2y0
-    quantite: 5
-    unit: Kg
-    commentaire: ''
-  - ingredient: huile-dolive_h3c8al
-    quantite: 1.5
-    unit: l.
-    commentaire: ''
-  - ingredient: persil-frais_hgfa4e
-    quantite: 5
-    unit: bottes
-    commentaire: ''
-  - ingredient: coriandre-fraiche_fetrpe
-    quantite: 5
-    unit: bottes
-    commentaire: 'a ajouter ciselée sur le top selon les envies '
-  - ingredient: paprika_bidsmu
-    quantite: 70
-    unit: gr.
-    commentaire: ''
-  - ingredient: feuille-de-laurier_j84olg
-    quantite: 8
-    unit: unité
-    commentaire: ''
-  - ingredient: gingembre-en-poudre_alwx6o
-    quantite: 100
-    unit: gr.
-    commentaire: ''
-  - ingredient: cumin_dc8855
-    quantite: 70
-    unit: gr.
-    commentaire: ''
-preparation: >-
+  - uuid: omf24t
+    name: Boulgour
+    originalQuantity: 5
+    originalUnit: kg
+    normalizedQuantity: 5000
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: sec
+  - uuid: znpoor
+    name: Haricots blancs
+    originalQuantity: 5
+    originalUnit: kg
+    normalizedQuantity: 5000
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: sec
+  - uuid: u2m28w
+    name: Ail
+    originalQuantity: 5
+    originalUnit: tête·s
+    normalizedQuantity: 400
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: eouu0v
+    name: Carotte
+    originalQuantity: 15
+    originalUnit: kg
+    normalizedQuantity: 15000
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: rtavky
+    name: Oignon
+    originalQuantity: 10
+    originalUnit: kg
+    normalizedQuantity: 10000
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: 24z2y0
+    name: Tomate (conserve)
+    originalQuantity: 5
+    originalUnit: kg
+    normalizedQuantity: 5000
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: h3c8al
+    name: huile d'olive
+    originalQuantity: 1.5
+    originalUnit: l.
+    normalizedQuantity: 1500
+    normalizedUnit: ml
+    comment: ''
+    allergens: []
+    type: lof
+  - uuid: hgfa4e
+    name: Persil frais
+    originalQuantity: 5
+    originalUnit: bottes
+    normalizedQuantity: 5
+    normalizedUnit: bottes
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: fetrpe
+    name: Coriandre fraîche
+    originalQuantity: 5
+    originalUnit: bottes
+    normalizedQuantity: 5
+    normalizedUnit: bottes
+    comment: 'a ajouter ciselée sur le top selon les envies '
+    allergens: []
+    type: epices
+  - uuid: bidsmu
+    name: Paprika
+    originalQuantity: 70
+    originalUnit: gr.
+    normalizedQuantity: 70
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: j84olg
+    name: Feuille de laurier
+    originalQuantity: 8
+    originalUnit: unité
+    normalizedQuantity: 8
+    normalizedUnit: unité
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: alwx6o
+    name: Gingembre en poudre
+    originalQuantity: 100
+    originalUnit: gr.
+    normalizedQuantity: 100
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: dc8855
+    name: Cumin
+    originalQuantity: 70
+    originalUnit: gr.
+    normalizedQuantity: 70
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: epices
+preparation: |-
   ### Instructions
-
 
   1  La veille, faites tremper les haricots blancs secs dans un grand bol d'eau.
 
-
-  2  Le lendemain, rincez les haricots et blanchissez-les dans un grand volume
-  d'eau bouillante pendant 8 minutes.
-
+  2  Le lendemain, rincez les haricots et blanchissez-les dans un grand volume d'eau bouillante pendant 8 minutes.
 
   3 Égouttez et réservez.
 
-
-  4  Faites revenir les oignons émincés, l'ail râpé avec l'huile d'olive dans
-  une sauteuse.
-
+  4  Faites revenir les oignons émincés, l'ail râpé avec l'huile d'olive dans une sauteuse.
 
   5  Ajoutez les épices
 
-
-  6  Couper les carottes brunoise et ajoutez-les dans la sauteuse avec les
-  aromates effeuillés.
-
+  6  Couper les carottes brunoise et ajoutez-les dans la sauteuse avec les aromates effeuillés.
 
   7  Versez la pulpe de tomate, l'eau, salez et poivrez.
 
-
   8  Quand la sauce commence à bouillonner, ajoutez vos haricots.
-
 
   9  Faites cuire à feu moyen / doux et à couvert pendant 1 heure 30 minutes.
 
-
   10  En fin de cuisson, ajustez l'assaisonnement.
-
 
   11 Faire le boulgour.
 preparation24h: Faire tremper les haricots blancs

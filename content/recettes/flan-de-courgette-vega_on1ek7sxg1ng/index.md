@@ -13,47 +13,78 @@ quantite_desc: ''
 check: true
 checkAlwaysOk: false
 ingredients:
-  - ingredient: oignon_rtavky
-    quantite: 1
-    unit: Kg
-    commentaire: ''
-  - ingredient: courgette_9zozfk
-    quantite: 3
-    unit: Kg
-    commentaire: ''
-  - ingredient: huile-dolive_h3c8al
-    quantite: 20
-    unit: ml
-    commentaire: ''
-  - ingredient: creme-soja_chfwwq
-    quantite: 750
-    unit: ml
-    commentaire: ''
-  - ingredient: fecule-de-mais-maizena_8nbcjp
-    quantite: 75
-    unit: gr.
-    commentaire: ''
-  - ingredient: basilic_s8j4ff
-    quantite: 2
-    unit: bottes
-    commentaire: ''
-  - ingredient: levure-de-biere_4be4ic
-    quantite: 40
-    unit: gr.
-    commentaire: ''
-preparation: >-
-  râper les courgettes, émincer les oignons et faire cuire pendant 15mn,
-  réserver dans un saladier
-
+  - uuid: rtavky
+    name: Oignon
+    originalQuantity: 1
+    originalUnit: kg
+    normalizedQuantity: 1000
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: 9zozfk
+    name: Courgette
+    originalQuantity: 3
+    originalUnit: kg
+    normalizedQuantity: 3000
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: h3c8al
+    name: huile d'olive
+    originalQuantity: 20
+    originalUnit: ml
+    normalizedQuantity: 20
+    normalizedUnit: ml
+    comment: ''
+    allergens: []
+    type: lof
+  - uuid: chfwwq
+    name: Crème soja
+    originalQuantity: 750
+    originalUnit: ml
+    normalizedQuantity: 750
+    normalizedUnit: ml
+    comment: ''
+    allergens:
+      - Soja
+    type: lof
+  - uuid: 8nbcjp
+    name: Fécule de maïs (Maïzena)
+    originalQuantity: 75
+    originalUnit: gr.
+    normalizedQuantity: 75
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: lof
+  - uuid: s8j4ff
+    name: Basilic
+    originalQuantity: 2
+    originalUnit: bottes
+    normalizedQuantity: 2
+    normalizedUnit: bottes
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: 4be4ic
+    name: Levure de bière
+    originalQuantity: 40
+    originalUnit: gr.
+    normalizedQuantity: 40
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: lof
+preparation: |-
+  râper les courgettes, émincer les oignons et faire cuire pendant 15mn, réserver dans un saladier
 
   rajouter tous les autres ingrédients
 
-
   remplir les ramequins au 3/4 car ça gonfle
 
-
   mettre au four préchauffé à 180° avec un bol d'eau pendant 35mn
-
 
   si démoulé alors il faut bien attendre que cela refroidisse
 publishDate: 2025-06-15T15:19:00.000Z

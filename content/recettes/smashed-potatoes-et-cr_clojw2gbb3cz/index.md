@@ -14,45 +14,99 @@ quantite_desc: 1 Grosse patate par personnes
 check: true
 checkAlwaysOk: false
 ingredients:
-  - ingredient: citron-jus_bwkn34
-    quantite: 0.5
-    unit: gr.
-    commentaire: ''
-  - ingredient: ail_u2m28w
-    quantite: 3
-    unit: tête·s
-    commentaire: ''
-  - ingredient: patate_bq423s
-    quantite: 25
-    unit: Kg
-    commentaire: ''
-  - ingredient: huile-de-tournesol_c70jxb
-    quantite: 2
-    unit: l.
-    commentaire: ''
-  - ingredient: huile-dolive_h3c8al
-    quantite: 1
-    unit: l.
-    commentaire: ''
-  - ingredient: yaourt-de-soja_hlbwfd
-    quantite: 3
-    unit: Kg
-    commentaire: ''
-  - ingredient: paprika-fume_ique18
-    quantite: 150
-    unit: gr.
-    commentaire: ''
-  - ingredient: poivre-noir-moulu_rgt7s4
-    commentaire: ''
-  - ingredient: sel_2juq3x
-    commentaire: ''
-  - ingredient: ciboulette_mt22ff
-    quantite: 10
-    unit: bottes
-    commentaire: ''
-preparation: >-
+  - uuid: bwkn34
+    name: Citron (jus)
+    originalQuantity: 0.5
+    originalUnit: gr.
+    normalizedQuantity: 0.5
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: u2m28w
+    name: Ail
+    originalQuantity: 3
+    originalUnit: tête·s
+    normalizedQuantity: 240
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: bq423s
+    name: patate
+    originalQuantity: 25
+    originalUnit: kg
+    normalizedQuantity: 25000
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: c70jxb
+    name: huile de tournesol
+    originalQuantity: 2
+    originalUnit: l.
+    normalizedQuantity: 2000
+    normalizedUnit: ml
+    comment: ''
+    allergens: []
+    type: lof
+  - uuid: h3c8al
+    name: huile d'olive
+    originalQuantity: 1
+    originalUnit: l.
+    normalizedQuantity: 1000
+    normalizedUnit: ml
+    comment: ''
+    allergens: []
+    type: lof
+  - uuid: hlbwfd
+    name: Yaourt de soja
+    originalQuantity: 3
+    originalUnit: kg
+    normalizedQuantity: 3000
+    normalizedUnit: gr.
+    comment: ''
+    allergens:
+      - Soja
+    type: frais
+  - uuid: ique18
+    name: Paprika fumé
+    originalQuantity: 150
+    originalUnit: gr.
+    normalizedQuantity: 150
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: rgt7s4
+    name: Poivre noir moulu
+    originalQuantity: 1
+    originalUnit: au goût
+    normalizedQuantity: 1
+    normalizedUnit: au goût
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: 2juq3x
+    name: Sel
+    originalQuantity: 1
+    originalUnit: au goût
+    normalizedQuantity: 1
+    normalizedUnit: au goût
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: mt22ff
+    name: Ciboulette
+    originalQuantity: 10
+    originalUnit: bottes
+    normalizedQuantity: 10
+    normalizedUnit: bottes
+    comment: ''
+    allergens: []
+    type: epices
+preparation: |-
   Pour les smashed potatoes:
-
   Lavez les pommes de terre.
 
 
@@ -63,44 +117,28 @@ preparation: >-
 
 
 
-
   Faites-les cuire dans une casserole d'eau salée bouillante pendant
-
   environ 15 minutes, il faut qu'elles soient assez cuites pour pouvoir
-
   piquer une fourchette dedans.
-
 
   Préchauffez le four à 220°C, chaleur sole-voûte.
 
-
   Egouttez les pommes de terre
 
-
   Disposez-les sur une plaque de cuisson recouverte de papier
-
   sulfurisé.
 
-
   A l'aide d'un dessous de tasse ou de verre, écrasez chaque pomme de
-
   terre.
-
 
   Ajoutez l'huile dessus, le sel, le poivre et les épices.
 
-
   Enfournez à mi-hauteur pour environ 25 minutes (surveillez la
-
   cuisson – les pommes de terre doivent être bien dorées)
-
 
   Pour la Crème Sour Vegan:
 
-
-  Mélanger les yaourts, la ciboulette hachée, le jus de citron (jauger au goût
-  le jus de citron est là pour donner un goût "laitier" que le yaourt de soja
-  n'a pas), le sel et le poivre
+  Mélanger les yaourts, la ciboulette hachée, le jus de citron (jauger au goût le jus de citron est là pour donner un goût "laitier" que le yaourt de soja n'a pas), le sel et le poivre
 publishDate: 2025-05-05T16:07:00.000Z
 serveHot: true
 uuid: clojw2gbb3cz

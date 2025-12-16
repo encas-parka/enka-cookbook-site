@@ -17,68 +17,124 @@ plate: 100
 check: true
 checkAlwaysOk: false
 ingredients:
-  - ingredient: chapelure_psu3gg
-    quantite: 500
-    unit: gr.
-    commentaire: ''
-  - ingredient: cafe-moulu_86z19m
-    quantite: 20
-    unit: gr.
-    commentaire: ''
-  - ingredient: tahin_u33083
-    quantite: 250
-    unit: gr.
-    commentaire: ''
-  - ingredient: melasse-de-grenade_cl88ye
-    quantite: 1
-    unit: Kg
-    commentaire: ''
-  - ingredient: piment-en-poudre_fmc1dm
-    quantite: 125
-    unit: gr.
-    commentaire: ''
-  - ingredient: sel_2juq3x
-    quantite: 40
-    unit: gr.
-    commentaire: ''
-  - ingredient: cumin-moulu_he3u48
-    quantite: 20
-    unit: gr.
-    commentaire: ''
-  - ingredient: paprika_bidsmu
-    quantite: 75
-    unit: gr.
-    commentaire: ''
-  - ingredient: poivron-rouge_0zglpj
-    quantite: 8
-    unit: Kg
-    commentaire: ''
-  - ingredient: huile-dolive_h3c8al
-    quantite: 60
-    unit: ml
-    commentaire: ''
-  - ingredient: noix_usibcf
-    quantite: 2.5
-    unit: Kg
-    commentaire: ''
-  - ingredient: miel_g0lph5
-    quantite: 250
-    unit: gr.
-    commentaire: ''
+  - uuid: psu3gg
+    name: Chapelure
+    originalQuantity: 500
+    originalUnit: gr.
+    normalizedQuantity: 500
+    normalizedUnit: gr.
+    comment: ''
+    allergens:
+      - Gluten
+    type: autres
+  - uuid: 86z19m
+    name: Café moulu
+    originalQuantity: 20
+    originalUnit: gr.
+    normalizedQuantity: 20
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: autres
+  - uuid: u33083
+    name: Tahin
+    originalQuantity: 250
+    originalUnit: gr.
+    normalizedQuantity: 250
+    normalizedUnit: gr.
+    comment: ''
+    allergens:
+      - Sésame
+    type: autres
+  - uuid: cl88ye
+    name: Mélasse de grenade
+    originalQuantity: 1
+    originalUnit: kg
+    normalizedQuantity: 1000
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: fmc1dm
+    name: Piment en poudre
+    originalQuantity: 125
+    originalUnit: gr.
+    normalizedQuantity: 125
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: 2juq3x
+    name: Sel
+    originalQuantity: 40
+    originalUnit: gr.
+    normalizedQuantity: 40
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: he3u48
+    name: Cumin moulu
+    originalQuantity: 20
+    originalUnit: gr.
+    normalizedQuantity: 20
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: bidsmu
+    name: Paprika
+    originalQuantity: 75
+    originalUnit: gr.
+    normalizedQuantity: 75
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: 0zglpj
+    name: Poivron (rouge)
+    originalQuantity: 8
+    originalUnit: kg
+    normalizedQuantity: 8000
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: h3c8al
+    name: huile d'olive
+    originalQuantity: 60
+    originalUnit: ml
+    normalizedQuantity: 60
+    normalizedUnit: ml
+    comment: ''
+    allergens: []
+    type: lof
+  - uuid: usibcf
+    name: Noix
+    originalQuantity: 2.5
+    originalUnit: kg
+    normalizedQuantity: 2500
+    normalizedUnit: gr.
+    comment: ''
+    allergens:
+      - Fruit à coque
+    type: sec
+  - uuid: g0lph5
+    name: Miel
+    originalQuantity: 250
+    originalUnit: gr.
+    normalizedQuantity: 250
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: sucres
 materiel:
   - Robot Mixeur
-preparation: >-
-  1. Faire griller les poivrons sans enlever méthodiquement les peaux, un peu
-  quand même.
-
-  2. Mixer tous les ingrédients sauf les noix et un peu d'huile d'olive pour le
-  service. Attention à laisser une part sans chapelure pour sans gluten.
-
-  3. Concasser les noix grossièrement, après en avoir qq'unes de côté, les
-  ajouter au melange.
-
-  4. Transférer dans le plat de service, arroser un peu d'huile d'olives et
-  décorer avec les noix restantes.
+preparation: |-
+  1. Faire griller les poivrons sans enlever méthodiquement les peaux, un peu quand même.
+  2. Mixer tous les ingrédients sauf les noix et un peu d'huile d'olive pour le service. Attention à laisser une part sans chapelure pour sans gluten.
+  3. Concasser les noix grossièrement, après en avoir qq'unes de côté, les ajouter au melange.
+  4. Transférer dans le plat de service, arroser un peu d'huile d'olives et décorer avec les noix restantes.
 publishDate: 2024-06-04T16:31:00.000Z
 serveHot: false
 uuid: ugmtyzfzdf9i

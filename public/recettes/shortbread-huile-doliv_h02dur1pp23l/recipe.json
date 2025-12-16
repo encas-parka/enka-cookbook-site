@@ -14,77 +14,7 @@
   "check": true,
   "checkAlwaysOk": false,
   "materiel": ["Four"],
-  "ingredients": [{
-      "uuid": "6z655r",
-      "name": "Romarin",
-      "originalQuantity": 10,
-      "originalUnit": "unité",
-      "normalizedQuantity": 10,
-      "normalizedUnit": "unité",
-      "comment": "(branches pas enormes)",
-      "allergens": [],
-      "type": "epices"
-    },{
-      "uuid": "2juq3x",
-      "name": "Sel",
-      "originalQuantity": 1,
-      "originalUnit": "c. à café",
-      "normalizedQuantity": 5,
-      "normalizedUnit": "gr.",
-      "comment": "",
-      "allergens": [],
-      "type": "epices"
-    },{
-      "uuid": "h3c8al",
-      "name": "huile d'olive",
-      "originalQuantity": 500,
-      "originalUnit": "ml",
-      "normalizedQuantity": 500,
-      "normalizedUnit": "ml",
-      "comment": "max",
-      "allergens": [],
-      "type": "lof"
-    },{
-      "uuid": "2av6w8",
-      "name": "Farine de blé",
-      "originalQuantity": 1,
-      "originalUnit": "kg",
-      "normalizedQuantity": 1000,
-      "normalizedUnit": "gr.",
-      "comment": "",
-      "allergens": ["Gluten"],
-      "type": "lof"
-    },{
-      "uuid": "1e3zhq",
-      "name": "Chocolat noir patissier 70p100",
-      "originalQuantity": 300,
-      "originalUnit": "gr.",
-      "normalizedQuantity": 300,
-      "normalizedUnit": "gr.",
-      "comment": "",
-      "allergens": [],
-      "type": "sucres"
-    },{
-      "uuid": "l5w2jl",
-      "name": "Muscovado (sucre de canne complet)",
-      "originalQuantity": 130,
-      "originalUnit": "gr.",
-      "normalizedQuantity": 130,
-      "normalizedUnit": "gr.",
-      "comment": "",
-      "allergens": [],
-      "type": "sucres"
-    },{
-      "uuid": "n85gmi",
-      "name": "sucre de canne (blond)",
-      "originalQuantity": 300,
-      "originalUnit": "gr.",
-      "normalizedQuantity": 300,
-      "normalizedUnit": "gr.",
-      "comment": "",
-      "allergens": [],
-      "type": "sucres"
-    }],
+  "ingredients": [{"allergens":[],"comment":"(branches pas enormes)","name":"Romarin","normalizedQuantity":10,"normalizedUnit":"unité","originalQuantity":10,"originalUnit":"unité","type":"epices","uuid":"6z655r"},{"allergens":[],"comment":"","name":"Sel","normalizedQuantity":5,"normalizedUnit":"gr.","originalQuantity":1,"originalUnit":"c. à café","type":"epices","uuid":"2juq3x"},{"allergens":[],"comment":"max","name":"huile d'olive","normalizedQuantity":500,"normalizedUnit":"ml","originalQuantity":500,"originalUnit":"ml","type":"lof","uuid":"h3c8al"},{"allergens":["Gluten"],"comment":"","name":"Farine de blé","normalizedQuantity":1000,"normalizedUnit":"gr.","originalQuantity":1,"originalUnit":"kg","type":"lof","uuid":"2av6w8"},{"allergens":[],"comment":"","name":"Chocolat noir patissier 70p100","normalizedQuantity":300,"normalizedUnit":"gr.","originalQuantity":300,"originalUnit":"gr.","type":"sucres","uuid":"1e3zhq"},{"allergens":[],"comment":"","name":"Muscovado (sucre de canne complet)","normalizedQuantity":130,"normalizedUnit":"gr.","originalQuantity":130,"originalUnit":"gr.","type":"sucres","uuid":"l5w2jl"},{"allergens":[],"comment":"","name":"sucre de canne (blond)","normalizedQuantity":300,"normalizedUnit":"gr.","originalQuantity":300,"originalUnit":"gr.","type":"sucres","uuid":"n85gmi"}],
   "preparation": "* Dans un saladier, mélanger la farine, les deux sortes de sucre, et le sel\n* Laver les brins de romarin, les couper en petits morceaux et les ajouter dans le saladier avec l'huile d'olive.\n* Ajouter les pépites de chocolat et mélanger à nouveau.\n* Rassembler la pâte avec les mains pour former une boule de pâte.\\\n  Découper la pâte en deux.\\\n  Les placer entre deux feuilles de papier cuisson, et  les étaler en un rectangle épais à l'aide d'un rouleau à pâtisserie. Le biscuit doit faire  un 1cm d'épaisseur.\n* Faire cuire 20-25 minutes à 180°C (thermostat 6).\n* Sortir la plaque du four, et découper en rectangles fin à l'aide d'un couteau pointu tant que la pâte est encore chaude. Laisser refroidir, puis séparer les biscuits.",
   "prepAlt": null,
   "permissionWrite": [],

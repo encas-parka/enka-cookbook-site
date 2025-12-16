@@ -14,37 +14,7 @@
   "check": false,
   "checkAlwaysOk": null,
   "materiel": [],
-  "ingredients": [{
-      "uuid": "e4mjd1",
-      "name": "Jus de citron",
-      "originalQuantity": 100,
-      "originalUnit": "ml",
-      "normalizedQuantity": 100,
-      "normalizedUnit": "ml",
-      "comment": "",
-      "allergens": [],
-      "type": "sucres"
-    },{
-      "uuid": "b83ol6",
-      "name": "Poire",
-      "originalQuantity": 8,
-      "originalUnit": "kg",
-      "normalizedQuantity": 8000,
-      "normalizedUnit": "gr.",
-      "comment": "",
-      "allergens": [],
-      "type": "legumes"
-    },{
-      "uuid": "i6jlwm",
-      "name": "Pomme",
-      "originalQuantity": 8,
-      "originalUnit": "kg",
-      "normalizedQuantity": 8000,
-      "normalizedUnit": "gr.",
-      "comment": "",
-      "allergens": [],
-      "type": "legumes"
-    }],
+  "ingredients": [{"allergens":[],"comment":"","name":"Jus de citron","normalizedQuantity":100,"normalizedUnit":"ml","originalQuantity":100,"originalUnit":"ml","type":"sucres","uuid":"e4mjd1"},{"allergens":[],"comment":"","name":"Poire","normalizedQuantity":8000,"normalizedUnit":"gr.","originalQuantity":8,"originalUnit":"kg","type":"legumes","uuid":"b83ol6"},{"allergens":[],"comment":"","name":"Pomme","normalizedQuantity":8000,"normalizedUnit":"gr.","originalQuantity":8,"originalUnit":"kg","type":"legumes","uuid":"i6jlwm"}],
   "preparation": "Éplucher et les pommes et poires et retirer les pépins\n\nFaire cuire dans une casserole à couvert\n\nUne fois les fruits bien fondant, mixer avec un robot-plongeur\n\nPossibilité de rajouter du jus de citron\n\nRectifier l'assaisonnement avec du sucre, de la cannelle, ou encore de la vanille en fonction des goûts",
   "prepAlt": [],
   "permissionWrite": [],

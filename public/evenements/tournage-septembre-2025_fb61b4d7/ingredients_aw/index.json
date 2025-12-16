@@ -1,1254 +1,452 @@
 {
   "mainGroup_id": "tour_5_fb61b4d7",
-  "hugoContentHash": "301ebe6daba502d6e79520a731e34bef",
+  "hugoContentHash": "ffb3c50cc3115184feea5d78a05a3a2f",
   "name": "Tournage sept 2025",
   "allDates": ["2025-09-23T12:00:00.000Z","2025-09-24T12:00:00.000Z","2025-09-25T12:00:00.000Z","2025-09-26T12:00:00.000Z"],
   "ingredients": [
     
     
     {
-        "ingredientHugoUuid": "ruhtax",
-        "ingredientName": "Agar-agar",
-        "productSemanticKey": "agar-agar_ruhtax_tour_5_fb61b4d7",
-        "ingType": "autres",
-        "totalAssiettes": 72,
-        "nbRecipes": 2,"totalNeededRaw": [{ "q":20, "u": "gr." }],
-        "byDate": {"2025-09-25T12:00:00.000Z": {
-          "totalConsolidated": [{"q": 6, "u": "gr."}],
+        "ingredientHugoUuid": "",
+        "ingredientName": "inconnu",
+        "productSemanticKey": "inconnu__tour_5_fb61b4d7",
+        "ingType": null,
+        "totalAssiettes": 3249,
+        "nbRecipes": 69,"totalNeededRaw": [{ "q":69, "u": "recette·s" }],
+        "byDate": {"2025-09-23T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 14, "u": "recette·s"}],
           "recipes": [{
-                "r": "Cheesecake vegan citron framboise","qEq":6,
-                "uEq": "gr.",
-                "a": 35
+                "r": "Tarte au chocolat sans cuisson",
+                "q":1,
+                "u": "recette·s","qEq":1,
+                "uEq": "recette·s",
+                "a": 39
+              },{
+                "r": "Tarte au chocolat sans cuisson",
+                "q":1,
+                "u": "recette·s","qEq":1,
+                "uEq": "recette·s",
+                "a": 39
+              },{
+                "r": "Tarte au chocolat sans cuisson",
+                "q":1,
+                "u": "recette·s","qEq":1,
+                "uEq": "recette·s",
+                "a": 39
+              },{
+                "r": "Tarte au chocolat sans cuisson",
+                "q":1,
+                "u": "recette·s","qEq":1,
+                "uEq": "recette·s",
+                "a": 39
+              },{
+                "r": "Tarte au chocolat sans cuisson",
+                "q":1,
+                "u": "recette·s","qEq":1,
+                "uEq": "recette·s",
+                "a": 39
+              },{
+                "r": "Tarte au chocolat sans cuisson",
+                "q":1,
+                "u": "recette·s","qEq":1,
+                "uEq": "recette·s",
+                "a": 39
+              },{
+                "r": "Tarte au chocolat sans cuisson",
+                "q":1,
+                "u": "recette·s","qEq":1,
+                "uEq": "recette·s",
+                "a": 39
+              },{
+                "r": "Tarte au chocolat sans cuisson",
+                "q":1,
+                "u": "recette·s","qEq":1,
+                "uEq": "recette·s",
+                "a": 39
+              },{
+                "r": "Salade carottes betteraves au cumin",
+                "q":1,
+                "u": "recette·s","qEq":1,
+                "uEq": "recette·s",
+                "a": 39
+              },{
+                "r": "Salade carottes betteraves au cumin",
+                "q":1,
+                "u": "recette·s","qEq":1,
+                "uEq": "recette·s",
+                "a": 39
+              },{
+                "r": "Salade carottes betteraves au cumin",
+                "q":1,
+                "u": "recette·s","qEq":1,
+                "uEq": "recette·s",
+                "a": 39
+              },{
+                "r": "Salade carottes betteraves au cumin",
+                "q":1,
+                "u": "recette·s","qEq":1,
+                "uEq": "recette·s",
+                "a": 39
+              },{
+                "r": "Salade carottes betteraves au cumin",
+                "q":1,
+                "u": "recette·s","qEq":1,
+                "uEq": "recette·s",
+                "a": 39
+              },{
+                "r": "Salade carottes betteraves au cumin",
+                "q":1,
+                "u": "recette·s","qEq":1,
+                "uEq": "recette·s",
+                "a": 39
               }],
-          "totalAssiettes": 35,
-          "recipeCount": 1
-        },"2025-09-26T12:00:00.000Z": {
-          "totalConsolidated": [{"q": 15, "u": "gr."}],
+          "totalAssiettes": 546,
+          "recipeCount": 14
+        },"2025-09-24T12:00:00.000Z": {
+          "totalConsolidated": [{"q": 33, "u": "recette·s"}],
           "recipes": [{
-                "r": "Panacotta vanille et coulis de framboise","qEq":15,
-                "uEq": "gr.",
-                "a": 37
-              }],
-          "totalAssiettes": 37,
-          "recipeCount": 1
-        }}
-      }
-    
-    
-    ,{
-        "ingredientHugoUuid": "u2m28w",
-        "ingredientName": "Ail",
-        "productSemanticKey": "ail_u2m28w_tour_5_fb61b4d7",
-        "ingType": "legumes",
-        "totalAssiettes": 114,
-        "nbRecipes": 2,"pFrais": true,
-          "conversionRules": ["1 tête = 80 gr.","1 gousse = 6.5 gr."],"totalNeededRaw": [{ "q":19.9, "u": "gousse·s" },{ "q":6.7, "u": "tête·s" }],
-        "byDate": {"2025-09-24T12:00:00.000Z": {
-          "totalConsolidated": [{"q": 666, "u": "gr."}],
-          "recipes": [{
-                "r": "Moussaka végé",
-                "q":6.7,
-                "u": "tête·s","qEq":536,
-                "uEq": "gr.",
+                "r": "Melomakarona",
+                "q":1,
+                "u": "recette·s","qEq":1,
+                "uEq": "recette·s",
                 "a": 57
               },{
-                "r": "Tzatziki",
-                "q":19.9,
-                "u": "gousse·s","qEq":130,
-                "uEq": "gr.",
-                "a": 57
-              }],
-          "totalAssiettes": 114,
-          "recipeCount": 2
-        }}
-      }
-    
-    
-    ,{
-        "ingredientHugoUuid": "7sk3a5",
-        "ingredientName": "Aubergine",
-        "productSemanticKey": "aubergine_7sk3a5_tour_5_fb61b4d7",
-        "ingType": "legumes",
-        "totalAssiettes": 57,
-        "nbRecipes": 1,"pFrais": true,"totalNeededRaw": [{ "q":4158, "u": "gr." }],
-        "byDate": {"2025-09-24T12:00:00.000Z": {
-          "totalConsolidated": [{"q": 4158, "u": "gr."}],
-          "recipes": [{
-                "r": "Moussaka végé",
-                "q":4.2,
-                "u": "Kg","qEq":4158,
-                "uEq": "gr.",
-                "a": 57
-              }],
-          "totalAssiettes": 57,
-          "recipeCount": 1
-        }}
-      }
-    
-    
-    ,{
-        "ingredientHugoUuid": "b77daa7e0067",
-        "ingredientName": "Bâtonnet de canelle",
-        "productSemanticKey": "batonnet-d_b77daa_tour_5_fb61b4d7",
-        "ingType": "epices",
-        "totalAssiettes": 57,
-        "nbRecipes": 1,"totalNeededRaw": [{ "q":3.8, "u": "unité" }],
-        "byDate": {"2025-09-24T12:00:00.000Z": {
-          "totalConsolidated": [{"q": 3.8, "u": "unité"}],
-          "recipes": [{
-                "r": "Melomakarona","qEq":3.8,
-                "uEq": "unité",
-                "a": 57
-              }],
-          "totalAssiettes": 57,
-          "recipeCount": 1
-        }}
-      }
-    
-    
-    ,{
-        "ingredientHugoUuid": "7sc3uw",
-        "ingredientName": "Betterave rouge",
-        "productSemanticKey": "betterave-_7sc3uw_tour_5_fb61b4d7",
-        "ingType": "legumes",
-        "totalAssiettes": 39,
-        "nbRecipes": 1,"pFrais": true,
-          "conversionRules": ["une betterave rouge = 250 gr."],"totalNeededRaw": [{ "q":9.8, "u": "unité" }],
-        "byDate": {"2025-09-23T12:00:00.000Z": {
-          "totalConsolidated": [{"q": 2438, "u": "gr."}],
-          "recipes": [{
-                "r": "Salade carottes betteraves au cumin",
-                "q":9.8,
-                "u": "unité","qEq":2438,
-                "uEq": "gr.",
-                "a": 39
-              }],
-          "totalAssiettes": 39,
-          "recipeCount": 1
-        }}
-      }
-    
-    
-    ,{
-        "ingredientHugoUuid": "mxub21",
-        "ingredientName": "Beurre demi-sel",
-        "productSemanticKey": "beurre-dem_mxub21_tour_5_fb61b4d7",
-        "ingType": "frais",
-        "totalAssiettes": 57,
-        "nbRecipes": 1,"pFrais": true,"totalNeededRaw": [{ "q":168, "u": "gr." }],
-        "byDate": {"2025-09-24T12:00:00.000Z": {
-          "totalConsolidated": [{"q": 168, "u": "gr."}],
-          "recipes": [{
-                "r": "Moussaka végé","qEq":168,
-                "uEq": "gr.",
-                "a": 57
-              }],
-          "totalAssiettes": 57,
-          "recipeCount": 1
-        }}
-      }
-    
-    
-    ,{
-        "ingredientHugoUuid": "kmq1zb",
-        "ingredientName": "Beurre doux",
-        "productSemanticKey": "beurre-dou_kmq1zb_tour_5_fb61b4d7",
-        "ingType": "frais",
-        "totalAssiettes": 57,
-        "nbRecipes": 1,"pFrais": true,"totalNeededRaw": [{ "q":95, "u": "gr." }],
-        "byDate": {"2025-09-24T12:00:00.000Z": {
-          "totalConsolidated": [{"q": 95, "u": "gr."}],
-          "recipes": [{
-                "r": "Melomakarona","qEq":95,
-                "uEq": "gr.",
-                "a": 57
-              }],
-          "totalAssiettes": 57,
-          "recipeCount": 1
-        }}
-      }
-    
-    
-    ,{
-        "ingredientHugoUuid": "vf8140",
-        "ingredientName": "Bicarbonate alimentaire",
-        "productSemanticKey": "bicarbonat_vf8140_tour_5_fb61b4d7",
-        "ingType": "lof",
-        "totalAssiettes": 57,
-        "nbRecipes": 1,
-          "conversionRules": ["1 c. à café = 5 ml."],"totalNeededRaw": [{ "q":1.9, "u": "c. à café" }],
-        "byDate": {"2025-09-24T12:00:00.000Z": {
-          "totalConsolidated": [{"q": 10, "u": "ml"}],
-          "recipes": [{
                 "r": "Melomakarona",
-                "q":1.9,
-                "u": "c. à café","qEq":10,
-                "uEq": "ml",
-                "a": 57
-              }],
-          "totalAssiettes": 57,
-          "recipeCount": 1
-        }}
-      }
-    
-    
-    ,{
-        "ingredientHugoUuid": "i5hlq1",
-        "ingredientName": "Biscuit Petit Brun",
-        "productSemanticKey": "biscuit-pe_i5hlq1_tour_5_fb61b4d7",
-        "ingType": "sucres",
-        "totalAssiettes": 39,
-        "nbRecipes": 1,"totalNeededRaw": [{ "q":325, "u": "gr." }],
-        "byDate": {"2025-09-23T12:00:00.000Z": {
-          "totalConsolidated": [{"q": 325, "u": "gr."}],
-          "recipes": [{
-                "r": "Tarte au chocolat sans cuisson","qEq":325,
-                "uEq": "gr.",
-                "a": 39
-              }],
-          "totalAssiettes": 39,
-          "recipeCount": 1
-        }}
-      }
-    
-    
-    ,{
-        "ingredientHugoUuid": "sk1gbb",
-        "ingredientName": "Cannelle",
-        "productSemanticKey": "cannelle_sk1gbb_tour_5_fb61b4d7",
-        "ingType": "epices",
-        "totalAssiettes": 57,
-        "nbRecipes": 1,
-          "conversionRules": ["1 c. à café = 5 ml."],"totalNeededRaw": [{ "q":3.8, "u": "c. à café" }],
-        "byDate": {"2025-09-24T12:00:00.000Z": {
-          "totalConsolidated": [{"q": 19, "u": "ml"}],
-          "recipes": [{
-                "r": "Melomakarona",
-                "q":3.8,
-                "u": "c. à café","qEq":19,
-                "uEq": "ml",
-                "a": 57
-              }],
-          "totalAssiettes": 57,
-          "recipeCount": 1
-        }}
-      }
-    
-    
-    ,{
-        "ingredientHugoUuid": "eouu0v",
-        "ingredientName": "Carotte",
-        "productSemanticKey": "carotte_eouu0v_tour_5_fb61b4d7",
-        "ingType": "legumes",
-        "totalAssiettes": 39,
-        "nbRecipes": 1,"pFrais": true,
-          "conversionRules": ["une carotte = 125 gr."],"totalNeededRaw": [{ "q":19.5, "u": "unité" }],
-        "byDate": {"2025-09-23T12:00:00.000Z": {
-          "totalConsolidated": [{"q": 2438, "u": "gr."}],
-          "recipes": [{
-                "r": "Salade carottes betteraves au cumin",
-                "q":19.5,
-                "u": "unité","qEq":2438,
-                "uEq": "gr.",
-                "a": 39
-              }],
-          "totalAssiettes": 39,
-          "recipeCount": 1
-        }}
-      }
-    
-    
-    ,{
-        "ingredientHugoUuid": "cr4kiz",
-        "ingredientName": "Chocolat noir",
-        "productSemanticKey": "chocolat-n_cr4kiz_tour_5_fb61b4d7",
-        "ingType": "sucres",
-        "totalAssiettes": 39,
-        "nbRecipes": 1,"totalNeededRaw": [{ "q":812, "u": "gr." }],
-        "byDate": {"2025-09-23T12:00:00.000Z": {
-          "totalConsolidated": [{"q": 812, "u": "gr."}],
-          "recipes": [{
-                "r": "Tarte au chocolat sans cuisson","qEq":812,
-                "uEq": "gr.",
-                "a": 39
-              }],
-          "totalAssiettes": 39,
-          "recipeCount": 1
-        }}
-      }
-    
-    
-    ,{
-        "ingredientHugoUuid": "pbydyr",
-        "ingredientName": "Chunks (protéine de soja)",
-        "productSemanticKey": "chunks-pro_pbydyr_tour_5_fb61b4d7",
-        "ingType": "autres",
-        "totalAssiettes": 57,
-        "nbRecipes": 1,"totalNeededRaw": [{ "q":2280, "u": "gr." }],
-        "byDate": {"2025-09-24T12:00:00.000Z": {
-          "totalConsolidated": [{"q": 2280, "u": "gr."}],
-          "recipes": [{
-                "r": "Moussaka végé",
-                "q":2.3,
-                "u": "Kg","qEq":2280,
-                "uEq": "gr.",
-                "a": 57
-              }],
-          "totalAssiettes": 57,
-          "recipeCount": 1
-        }}
-      }
-    
-    
-    ,{
-        "ingredientHugoUuid": "yynfo5",
-        "ingredientName": "clou de girofle poudre",
-        "productSemanticKey": "clou-de-gi_yynfo5_tour_5_fb61b4d7",
-        "ingType": "epices",
-        "totalAssiettes": 57,
-        "nbRecipes": 1,
-          "conversionRules": ["1 pincée = 0,4 gr."],"totalNeededRaw": [{ "q":3.8, "u": "pincées" }],
-        "byDate": {"2025-09-24T12:00:00.000Z": {
-          "totalConsolidated": [{"q": 2, "u": "gr."}],
-          "recipes": [{
-                "r": "Melomakarona",
-                "q":3.8,
-                "u": "pincées","qEq":2,
-                "uEq": "gr.",
-                "a": 57
-              }],
-          "totalAssiettes": 57,
-          "recipeCount": 1
-        }}
-      }
-    
-    
-    ,{
-        "ingredientHugoUuid": "l5p1a5",
-        "ingredientName": "Concombre",
-        "productSemanticKey": "concombre_l5p1a5_tour_5_fb61b4d7",
-        "ingType": "legumes",
-        "totalAssiettes": 57,
-        "nbRecipes": 1,"pFrais": true,"totalNeededRaw": [{ "q":3990, "u": "gr." }],
-        "byDate": {"2025-09-24T12:00:00.000Z": {
-          "totalConsolidated": [{"q": 3990, "u": "gr."}],
-          "recipes": [{
-                "r": "Tzatziki",
-                "q":4.0,
-                "u": "Kg","qEq":3990,
-                "uEq": "gr.",
-                "a": 57
-              }],
-          "totalAssiettes": 57,
-          "recipeCount": 1
-        }}
-      }
-    
-    
-    ,{
-        "ingredientHugoUuid": "6tnb6h",
-        "ingredientName": "Crème fraiche liquide entière",
-        "productSemanticKey": "creme-frai_6tnb6h_tour_5_fb61b4d7",
-        "ingType": "lof",
-        "totalAssiettes": 37,
-        "nbRecipes": 1,"totalNeededRaw": [{ "q":3700, "u": "ml" }],
-        "byDate": {"2025-09-26T12:00:00.000Z": {
-          "totalConsolidated": [{"q": 3700, "u": "ml"}],
-          "recipes": [{
-                "r": "Panacotta vanille et coulis de framboise",
-                "q":3.7,
-                "u": "l.","qEq":3700,
-                "uEq": "ml",
-                "a": 37
-              }],
-          "totalAssiettes": 37,
-          "recipeCount": 1
-        }}
-      }
-    
-    
-    ,{
-        "ingredientHugoUuid": "chfwwq",
-        "ingredientName": "Crème soja",
-        "productSemanticKey": "creme-soja_chfwwq_tour_5_fb61b4d7",
-        "ingType": "lof",
-        "totalAssiettes": 39,
-        "nbRecipes": 1,"totalNeededRaw": [{ "q":812, "u": "ml" }],
-        "byDate": {"2025-09-23T12:00:00.000Z": {
-          "totalConsolidated": [{"q": 812, "u": "ml"}],
-          "recipes": [{
-                "r": "Tarte au chocolat sans cuisson","qEq":812,
-                "uEq": "ml",
-                "a": 39
-              }],
-          "totalAssiettes": 39,
-          "recipeCount": 1
-        }}
-      }
-    
-    
-    ,{
-        "ingredientHugoUuid": "aq796v",
-        "ingredientName": "Crème Végétale",
-        "productSemanticKey": "creme-vege_aq796v_tour_5_fb61b4d7",
-        "ingType": "lof",
-        "totalAssiettes": 45,
-        "nbRecipes": 1,"totalNeededRaw": [{ "q":270, "u": "ml" }],
-        "byDate": {"2025-09-26T12:00:00.000Z": {
-          "totalConsolidated": [{"q": 270, "u": "ml"}],
-          "recipes": [{
-                "r": "Véganaise rapide","qEq":270,
-                "uEq": "ml",
-                "a": 45
-              }],
-          "totalAssiettes": 45,
-          "recipeCount": 1
-        }}
-      }
-    
-    
-    ,{
-        "ingredientHugoUuid": "l3esgp",
-        "ingredientName": "Cumin (graines)",
-        "productSemanticKey": "cumin-grai_l3esgp_tour_5_fb61b4d7",
-        "ingType": "epices",
-        "totalAssiettes": 39,
-        "nbRecipes": 1,
-          "conversionRules": ["1 c. à soupe = 15 ml."],"totalNeededRaw": [{ "q":3.9, "u": "c. à soupe" }],
-        "byDate": {"2025-09-23T12:00:00.000Z": {
-          "totalConsolidated": [{"q": 58, "u": "ml"}],
-          "recipes": [{
-                "r": "Salade carottes betteraves au cumin",
-                "q":3.9,
-                "u": "c. à soupe","qEq":58,
-                "uEq": "ml",
-                "a": 39
-              }],
-          "totalAssiettes": 39,
-          "recipeCount": 1
-        }}
-      }
-    
-    
-    ,{
-        "ingredientHugoUuid": "ljzb7j",
-        "ingredientName": "Eau",
-        "productSemanticKey": "eau_ljzb7j_tour_5_fb61b4d7",
-        "ingType": "autres",
-        "totalAssiettes": 92,
-        "nbRecipes": 2,"totalNeededRaw": [{ "q":1300, "u": "ml" }],
-        "byDate": {"2025-09-24T12:00:00.000Z": {
-          "totalConsolidated": [{"q": 950, "u": "ml"}],
-          "recipes": [{
-                "r": "Melomakarona","qEq":950,
-                "uEq": "ml",
-                "a": 57
-              }],
-          "totalAssiettes": 57,
-          "recipeCount": 1
-        },"2025-09-25T12:00:00.000Z": {
-          "totalConsolidated": [{"q": 350, "u": "ml"}],
-          "recipes": [{
-                "r": "Cheesecake vegan citron framboise","qEq":350,
-                "uEq": "ml",
-                "a": 35
-              }],
-          "totalAssiettes": 35,
-          "recipeCount": 1
-        }}
-      }
-    
-    
-    ,{
-        "ingredientHugoUuid": "2av6w8",
-        "ingredientName": "Farine de blé",
-        "productSemanticKey": "farine-de-_2av6w8_tour_5_fb61b4d7",
-        "ingType": "lof",
-        "totalAssiettes": 114,
-        "nbRecipes": 2,"totalNeededRaw": [{ "q":2068, "u": "gr." }],
-        "byDate": {"2025-09-24T12:00:00.000Z": {
-          "totalConsolidated": [{"q": 2068, "u": "gr."}],
-          "recipes": [{
-                "r": "Melomakarona","qEq":1900,
-                "uEq": "gr.",
+                "q":1,
+                "u": "recette·s","qEq":1,
+                "uEq": "recette·s",
                 "a": 57
               },{
-                "r": "Moussaka végé","qEq":168,
-                "uEq": "gr.",
+                "r": "Melomakarona",
+                "q":1,
+                "u": "recette·s","qEq":1,
+                "uEq": "recette·s",
                 "a": 57
-              }],
-          "totalAssiettes": 114,
-          "recipeCount": 2
-        }}
-      }
-    
-    
-    ,{
-        "ingredientHugoUuid": "ovewgk",
-        "ingredientName": "Flocons d'avoine",
-        "productSemanticKey": "flocons-da_ovewgk_tour_5_fb61b4d7",
-        "ingType": "sec",
-        "totalAssiettes": 39,
-        "nbRecipes": 1,"totalNeededRaw": [{ "q":488, "u": "gr." }],
-        "byDate": {"2025-09-23T12:00:00.000Z": {
-          "totalConsolidated": [{"q": 488, "u": "gr."}],
-          "recipes": [{
-                "r": "Tarte au chocolat sans cuisson","qEq":488,
-                "uEq": "gr.",
-                "a": 39
-              }],
-          "totalAssiettes": 39,
-          "recipeCount": 1
-        }}
-      }
-    
-    
-    ,{
-        "ingredientHugoUuid": "65cee288c5d4",
-        "ingredientName": "Framboises surgelées",
-        "productSemanticKey": "framboises_65cee2_tour_5_fb61b4d7",
-        "ingType": "legumes",
-        "totalAssiettes": 72,
-        "nbRecipes": 2,"pSurgel": true,"totalNeededRaw": [{ "q":2325, "u": "gr." }],
-        "byDate": {"2025-09-25T12:00:00.000Z": {
-          "totalConsolidated": [{"q": 1400, "u": "gr."}],
-          "recipes": [{
-                "r": "Cheesecake vegan citron framboise",
-                "q":1.4,
-                "u": "Kg","qEq":1400,
-                "uEq": "gr.",
-                "a": 35
-              }],
-          "totalAssiettes": 35,
-          "recipeCount": 1
-        },"2025-09-26T12:00:00.000Z": {
-          "totalConsolidated": [{"q": 925, "u": "gr."}],
-          "recipes": [{
-                "r": "Panacotta vanille et coulis de framboise","qEq":925,
-                "uEq": "gr.",
-                "a": 37
-              }],
-          "totalAssiettes": 37,
-          "recipeCount": 1
-        }}
-      }
-    
-    
-    ,{
-        "ingredientHugoUuid": "b2dxf8",
-        "ingredientName": "Fromage blanc",
-        "productSemanticKey": "fromage-bl_b2dxf8_tour_5_fb61b4d7",
-        "ingType": "frais",
-        "totalAssiettes": 57,
-        "nbRecipes": 1,"pFrais": true,"totalNeededRaw": [{ "q":3420, "u": "gr." }],
-        "byDate": {"2025-09-24T12:00:00.000Z": {
-          "totalConsolidated": [{"q": 3420, "u": "gr."}],
-          "recipes": [{
-                "r": "Tzatziki",
-                "q":3.4,
-                "u": "Kg","qEq":3420,
-                "uEq": "gr.",
+              },{
+                "r": "Melomakarona",
+                "q":1,
+                "u": "recette·s","qEq":1,
+                "uEq": "recette·s",
                 "a": 57
-              }],
-          "totalAssiettes": 57,
-          "recipeCount": 1
-        }}
-      }
-    
-    
-    ,{
-        "ingredientHugoUuid": "lm7zqh",
-        "ingredientName": "Glucose",
-        "productSemanticKey": "glucose_lm7zqh_tour_5_fb61b4d7",
-        "ingType": "sucres",
-        "totalAssiettes": 39,
-        "nbRecipes": 1,"totalNeededRaw": [{ "q":65, "u": "gr." }],
-        "byDate": {"2025-09-23T12:00:00.000Z": {
-          "totalConsolidated": [{"q": 65, "u": "gr."}],
-          "recipes": [{
-                "r": "Tarte au chocolat sans cuisson","qEq":65,
-                "uEq": "gr.",
-                "a": 39
-              }],
-          "totalAssiettes": 39,
-          "recipeCount": 1
-        }}
-      }
-    
-    
-    ,{
-        "ingredientHugoUuid": "2a0lnj",
-        "ingredientName": "gousse de vanille",
-        "productSemanticKey": "gousse-de-_2a0lnj_tour_5_fb61b4d7",
-        "ingType": "sucres",
-        "totalAssiettes": 37,
-        "nbRecipes": 1,"totalNeededRaw": [{ "q":9.2, "u": "unité" }],
-        "byDate": {"2025-09-26T12:00:00.000Z": {
-          "totalConsolidated": [{"q": 9.2, "u": "unité"}],
-          "recipes": [{
-                "r": "Panacotta vanille et coulis de framboise","qEq":9.2,
-                "uEq": "unité",
-                "a": 37
-              }],
-          "totalAssiettes": 37,
-          "recipeCount": 1
-        }}
-      }
-    
-    
-    ,{
-        "ingredientHugoUuid": "5dwrvm",
-        "ingredientName": "Gros sel",
-        "productSemanticKey": "gros-sel_5dwrvm_tour_5_fb61b4d7",
-        "ingType": "epices",
-        "totalAssiettes": 57,
-        "nbRecipes": 1,"totalNeededRaw": [{ "q":1, "u": "recette·s" }],
-        "byDate": {"2025-09-24T12:00:00.000Z": {
-          "totalConsolidated": [{"q": 1, "u": "recette·s"}],
-          "recipes": [{
+              },{
+                "r": "Melomakarona",
+                "q":1,
+                "u": "recette·s","qEq":1,
+                "uEq": "recette·s",
+                "a": 57
+              },{
+                "r": "Melomakarona",
+                "q":1,
+                "u": "recette·s","qEq":1,
+                "uEq": "recette·s",
+                "a": 57
+              },{
+                "r": "Melomakarona",
+                "q":1,
+                "u": "recette·s","qEq":1,
+                "uEq": "recette·s",
+                "a": 57
+              },{
+                "r": "Melomakarona",
+                "q":1,
+                "u": "recette·s","qEq":1,
+                "uEq": "recette·s",
+                "a": 57
+              },{
+                "r": "Melomakarona",
+                "q":1,
+                "u": "recette·s","qEq":1,
+                "uEq": "recette·s",
+                "a": 57
+              },{
+                "r": "Melomakarona",
+                "q":1,
+                "u": "recette·s","qEq":1,
+                "uEq": "recette·s",
+                "a": 57
+              },{
+                "r": "Melomakarona",
+                "q":1,
+                "u": "recette·s","qEq":1,
+                "uEq": "recette·s",
+                "a": 57
+              },{
+                "r": "Melomakarona",
+                "q":1,
+                "u": "recette·s","qEq":1,
+                "uEq": "recette·s",
+                "a": 57
+              },{
+                "r": "Melomakarona",
+                "q":1,
+                "u": "recette·s","qEq":1,
+                "uEq": "recette·s",
+                "a": 57
+              },{
+                "r": "Melomakarona",
+                "q":1,
+                "u": "recette·s","qEq":1,
+                "uEq": "recette·s",
+                "a": 57
+              },{
+                "r": "Melomakarona",
+                "q":1,
+                "u": "recette·s","qEq":1,
+                "uEq": "recette·s",
+                "a": 57
+              },{
                 "r": "Moussaka végé",
                 "q":1,
                 "u": "recette·s","qEq":1,
                 "uEq": "recette·s",
                 "a": 57
-              }],
-          "totalAssiettes": 57,
-          "recipeCount": 1
-        }}
-      }
-    
-    
-    ,{
-        "ingredientHugoUuid": "h3c8al",
-        "ingredientName": "huile d'olive",
-        "productSemanticKey": "huile-doli_h3c8al_tour_5_fb61b4d7",
-        "ingType": "lof",
-        "totalAssiettes": 114,
-        "nbRecipes": 2,"totalNeededRaw": [{ "q":2489, "u": "ml" }],
-        "byDate": {"2025-09-24T12:00:00.000Z": {
-          "totalConsolidated": [{"q": 2489, "u": "ml"}],
-          "recipes": [{
-                "r": "Melomakarona","qEq":1064,
-                "uEq": "ml",
+              },{
+                "r": "Moussaka végé",
+                "q":1,
+                "u": "recette·s","qEq":1,
+                "uEq": "recette·s",
+                "a": 57
+              },{
+                "r": "Moussaka végé",
+                "q":1,
+                "u": "recette·s","qEq":1,
+                "uEq": "recette·s",
+                "a": 57
+              },{
+                "r": "Moussaka végé",
+                "q":1,
+                "u": "recette·s","qEq":1,
+                "uEq": "recette·s",
+                "a": 57
+              },{
+                "r": "Moussaka végé",
+                "q":1,
+                "u": "recette·s","qEq":1,
+                "uEq": "recette·s",
+                "a": 57
+              },{
+                "r": "Moussaka végé",
+                "q":1,
+                "u": "recette·s","qEq":1,
+                "uEq": "recette·s",
+                "a": 57
+              },{
+                "r": "Moussaka végé",
+                "q":1,
+                "u": "recette·s","qEq":1,
+                "uEq": "recette·s",
+                "a": 57
+              },{
+                "r": "Moussaka végé",
+                "q":1,
+                "u": "recette·s","qEq":1,
+                "uEq": "recette·s",
+                "a": 57
+              },{
+                "r": "Moussaka végé",
+                "q":1,
+                "u": "recette·s","qEq":1,
+                "uEq": "recette·s",
+                "a": 57
+              },{
+                "r": "Moussaka végé",
+                "q":1,
+                "u": "recette·s","qEq":1,
+                "uEq": "recette·s",
+                "a": 57
+              },{
+                "r": "Moussaka végé",
+                "q":1,
+                "u": "recette·s","qEq":1,
+                "uEq": "recette·s",
+                "a": 57
+              },{
+                "r": "Moussaka végé",
+                "q":1,
+                "u": "recette·s","qEq":1,
+                "uEq": "recette·s",
                 "a": 57
               },{
                 "r": "Tzatziki",
-                "q":1.4,
-                "u": "l.","qEq":1425,
-                "uEq": "ml",
+                "q":1,
+                "u": "recette·s","qEq":1,
+                "uEq": "recette·s",
                 "a": 57
-              }],
-          "totalAssiettes": 114,
-          "recipeCount": 2
-        }}
-      }
-    
-    
-    ,{
-        "ingredientHugoUuid": "6bm4lq",
-        "ingredientName": "huile de coco",
-        "productSemanticKey": "huile-de-c_6bm4lq_tour_5_fb61b4d7",
-        "ingType": "lof",
-        "totalAssiettes": 74,
-        "nbRecipes": 2,"totalNeededRaw": [{ "q":266, "u": "gr." },{ "q":244, "u": "ml" }],
-        "byDate": {"2025-09-23T12:00:00.000Z": {
-          "totalConsolidated": [{"q": 244, "u": "ml"}],
-          "recipes": [{
-                "r": "Tarte au chocolat sans cuisson","qEq":244,
-                "uEq": "ml",
-                "a": 39
-              }],
-          "totalAssiettes": 39,
-          "recipeCount": 1
-        },"2025-09-25T12:00:00.000Z": {
-          "totalConsolidated": [{"q": 266, "u": "gr."}],
-          "recipes": [{
-                "r": "Cheesecake vegan citron framboise","qEq":266,
-                "uEq": "gr.",
-                "a": 35
-              }],
-          "totalAssiettes": 35,
-          "recipeCount": 1
-        }}
-      }
-    
-    
-    ,{
-        "ingredientHugoUuid": "c70jxb",
-        "ingredientName": "huile de tournesol",
-        "productSemanticKey": "huile-de-t_c70jxb_tour_5_fb61b4d7",
-        "ingType": "lof",
-        "totalAssiettes": 84,
-        "nbRecipes": 2,"totalNeededRaw": [{ "q":702, "u": "ml" }],
-        "byDate": {"2025-09-23T12:00:00.000Z": {
-          "totalConsolidated": [{"q": 162, "u": "ml"}],
-          "recipes": [{
-                "r": "Tarte au chocolat sans cuisson","qEq":162,
-                "uEq": "ml",
-                "a": 39
-              }],
-          "totalAssiettes": 39,
-          "recipeCount": 1
-        },"2025-09-26T12:00:00.000Z": {
-          "totalConsolidated": [{"q": 540, "u": "ml"}],
-          "recipes": [{
-                "r": "Véganaise rapide",
-                "q":0.5,
-                "u": "l.","qEq":540,
-                "uEq": "ml",
-                "a": 45
-              }],
-          "totalAssiettes": 45,
-          "recipeCount": 1
-        }}
-      }
-    
-    
-    ,{
-        "ingredientHugoUuid": "atccqu",
-        "ingredientName": "Huile végétale",
-        "productSemanticKey": "huile-vege_atccqu_tour_5_fb61b4d7",
-        "ingType": "lof",
-        "totalAssiettes": 35,
-        "nbRecipes": 1,"totalNeededRaw": [{ "q":420, "u": "gr." }],
-        "byDate": {"2025-09-25T12:00:00.000Z": {
-          "totalConsolidated": [{"q": 420, "u": "gr."}],
-          "recipes": [{
-                "r": "Cheesecake vegan citron framboise","qEq":420,
-                "uEq": "gr.",
-                "a": 35
-              }],
-          "totalAssiettes": 35,
-          "recipeCount": 1
-        }}
-      }
-    
-    
-    ,{
-        "ingredientHugoUuid": "gzi2ry",
-        "ingredientName": "Jus d'orange",
-        "productSemanticKey": "jus-dorang_gzi2ry_tour_5_fb61b4d7",
-        "ingType": "sucres",
-        "totalAssiettes": 57,
-        "nbRecipes": 1,"totalNeededRaw": [{ "q":760, "u": "ml" }],
-        "byDate": {"2025-09-24T12:00:00.000Z": {
-          "totalConsolidated": [{"q": 760, "u": "ml"}],
-          "recipes": [{
-                "r": "Melomakarona","qEq":760,
-                "uEq": "ml",
-                "a": 57
-              }],
-          "totalAssiettes": 57,
-          "recipeCount": 1
-        }}
-      }
-    
-    
-    ,{
-        "ingredientHugoUuid": "e4mjd1",
-        "ingredientName": "Jus de citron",
-        "productSemanticKey": "jus-de-cit_e4mjd1_tour_5_fb61b4d7",
-        "ingType": "sucres",
-        "totalAssiettes": 166,
-        "nbRecipes": 4,"totalNeededRaw": [{ "q":2025, "u": "ml" }],
-        "byDate": {"2025-09-23T12:00:00.000Z": {
-          "totalConsolidated": [{"q": 390, "u": "ml"}],
-          "recipes": [{
-                "r": "Salade carottes betteraves au cumin","qEq":390,
-                "uEq": "ml",
-                "a": 39
-              }],
-          "totalAssiettes": 39,
-          "recipeCount": 1
-        },"2025-09-24T12:00:00.000Z": {
-          "totalConsolidated": [{"q": 1425, "u": "ml"}],
-          "recipes": [{
+              },{
                 "r": "Tzatziki",
-                "q":1.4,
-                "u": "l.","qEq":1425,
-                "uEq": "ml",
+                "q":1,
+                "u": "recette·s","qEq":1,
+                "uEq": "recette·s",
+                "a": 57
+              },{
+                "r": "Tzatziki",
+                "q":1,
+                "u": "recette·s","qEq":1,
+                "uEq": "recette·s",
+                "a": 57
+              },{
+                "r": "Tzatziki",
+                "q":1,
+                "u": "recette·s","qEq":1,
+                "uEq": "recette·s",
+                "a": 57
+              },{
+                "r": "Tzatziki",
+                "q":1,
+                "u": "recette·s","qEq":1,
+                "uEq": "recette·s",
+                "a": 57
+              },{
+                "r": "Tzatziki",
+                "q":1,
+                "u": "recette·s","qEq":1,
+                "uEq": "recette·s",
                 "a": 57
               }],
-          "totalAssiettes": 57,
-          "recipeCount": 1
+          "totalAssiettes": 1881,
+          "recipeCount": 33
         },"2025-09-25T12:00:00.000Z": {
-          "totalConsolidated": [{"q": 210, "u": "ml"}],
+          "totalConsolidated": [{"q": 12, "u": "recette·s"}],
           "recipes": [{
-                "r": "Cheesecake vegan citron framboise","qEq":70,
-                "uEq": "ml",
+                "r": "Cheesecake vegan citron framboise",
+                "q":1,
+                "u": "recette·s","qEq":1,
+                "uEq": "recette·s",
                 "a": 35
               },{
-                "r": "Cheesecake vegan citron framboise","qEq":140,
-                "uEq": "ml",
+                "r": "Cheesecake vegan citron framboise",
+                "q":1,
+                "u": "recette·s","qEq":1,
+                "uEq": "recette·s",
+                "a": 35
+              },{
+                "r": "Cheesecake vegan citron framboise",
+                "q":1,
+                "u": "recette·s","qEq":1,
+                "uEq": "recette·s",
+                "a": 35
+              },{
+                "r": "Cheesecake vegan citron framboise",
+                "q":1,
+                "u": "recette·s","qEq":1,
+                "uEq": "recette·s",
+                "a": 35
+              },{
+                "r": "Cheesecake vegan citron framboise",
+                "q":1,
+                "u": "recette·s","qEq":1,
+                "uEq": "recette·s",
+                "a": 35
+              },{
+                "r": "Cheesecake vegan citron framboise",
+                "q":1,
+                "u": "recette·s","qEq":1,
+                "uEq": "recette·s",
+                "a": 35
+              },{
+                "r": "Cheesecake vegan citron framboise",
+                "q":1,
+                "u": "recette·s","qEq":1,
+                "uEq": "recette·s",
+                "a": 35
+              },{
+                "r": "Cheesecake vegan citron framboise",
+                "q":1,
+                "u": "recette·s","qEq":1,
+                "uEq": "recette·s",
+                "a": 35
+              },{
+                "r": "Cheesecake vegan citron framboise",
+                "q":1,
+                "u": "recette·s","qEq":1,
+                "uEq": "recette·s",
+                "a": 35
+              },{
+                "r": "Cheesecake vegan citron framboise",
+                "q":1,
+                "u": "recette·s","qEq":1,
+                "uEq": "recette·s",
+                "a": 35
+              },{
+                "r": "Cheesecake vegan citron framboise",
+                "q":1,
+                "u": "recette·s","qEq":1,
+                "uEq": "recette·s",
+                "a": 35
+              },{
+                "r": "Cheesecake vegan citron framboise",
+                "q":1,
+                "u": "recette·s","qEq":1,
+                "uEq": "recette·s",
                 "a": 35
               }],
-          "totalAssiettes": 70,
-          "recipeCount": 2
-        }}
-      }
-    
-    
-    ,{
-        "ingredientHugoUuid": "xdy736",
-        "ingredientName": "lait de coco",
-        "productSemanticKey": "lait-de-co_xdy736_tour_5_fb61b4d7",
-        "ingType": "lof",
-        "totalAssiettes": 35,
-        "nbRecipes": 1,"totalNeededRaw": [{ "q":420, "u": "gr." }],
-        "byDate": {"2025-09-25T12:00:00.000Z": {
-          "totalConsolidated": [{"q": 420, "u": "gr."}],
-          "recipes": [{
-                "r": "Cheesecake vegan citron framboise","qEq":420,
-                "uEq": "gr.",
-                "a": 35
-              }],
-          "totalAssiettes": 35,
-          "recipeCount": 1
-        }}
-      }
-    
-    
-    ,{
-        "ingredientHugoUuid": "x286pc",
-        "ingredientName": "Lait demi-écrémé",
-        "productSemanticKey": "lait-demi-_x286pc_tour_5_fb61b4d7",
-        "ingType": "lof",
-        "totalAssiettes": 57,
-        "nbRecipes": 1,"totalNeededRaw": [{ "q":2347, "u": "ml" }],
-        "byDate": {"2025-09-24T12:00:00.000Z": {
-          "totalConsolidated": [{"q": 2347, "u": "ml"}],
-          "recipes": [{
-                "r": "Moussaka végé",
-                "q":2.3,
-                "u": "l.","qEq":2347,
-                "uEq": "ml",
-                "a": 57
-              }],
-          "totalAssiettes": 57,
-          "recipeCount": 1
-        }}
-      }
-    
-    
-    ,{
-        "ingredientHugoUuid": "2j9y2v",
-        "ingredientName": "Menthe",
-        "productSemanticKey": "menthe_2j9y2v_tour_5_fb61b4d7",
-        "ingType": "epices",
-        "totalAssiettes": 57,
-        "nbRecipes": 1,"pFrais": true,"totalNeededRaw": [{ "q":6.8, "u": "bottes" }],
-        "byDate": {"2025-09-24T12:00:00.000Z": {
-          "totalConsolidated": [{"q": 6.8, "u": "bottes"}],
-          "recipes": [{
-                "r": "Tzatziki","qEq":6.8,
-                "uEq": "bottes",
-                "a": 57
-              }],
-          "totalAssiettes": 57,
-          "recipeCount": 1
-        }}
-      }
-    
-    
-    ,{
-        "ingredientHugoUuid": "g0lph5",
-        "ingredientName": "Miel",
-        "productSemanticKey": "miel_g0lph5_tour_5_fb61b4d7",
-        "ingType": "sucres",
-        "totalAssiettes": 57,
-        "nbRecipes": 1,
-          "conversionRules": ["1 c. à soupe = 15 ml."],"totalNeededRaw": [{ "q":7.6, "u": "c. à soupe" }],
-        "byDate": {"2025-09-24T12:00:00.000Z": {
-          "totalConsolidated": [{"q": 114, "u": "ml"}],
-          "recipes": [{
-                "r": "Melomakarona",
-                "q":7.6,
-                "u": "c. à soupe","qEq":114,
-                "uEq": "ml",
-                "a": 57
-              }],
-          "totalAssiettes": 57,
-          "recipeCount": 1
-        }}
-      }
-    
-    
-    ,{
-        "ingredientHugoUuid": "5c1b20",
-        "ingredientName": "Moutarde",
-        "productSemanticKey": "moutarde_5c1b20_tour_5_fb61b4d7",
-        "ingType": "epices",
-        "totalAssiettes": 45,
-        "nbRecipes": 1,"totalNeededRaw": [{ "q":68, "u": "ml" }],
-        "byDate": {"2025-09-26T12:00:00.000Z": {
-          "totalConsolidated": [{"q": 68, "u": "ml"}],
-          "recipes": [{
-                "r": "Véganaise rapide","qEq":68,
-                "uEq": "ml",
-                "a": 45
-              }],
-          "totalAssiettes": 45,
-          "recipeCount": 1
-        }}
-      }
-    
-    
-    ,{
-        "ingredientHugoUuid": "5yety4",
-        "ingredientName": "Mozzarella",
-        "productSemanticKey": "mozzarella_5yety4_tour_5_fb61b4d7",
-        "ingType": "frais",
-        "totalAssiettes": 57,
-        "nbRecipes": 1,"pFrais": true,"totalNeededRaw": [{ "q":13.4, "u": "unité" }],
-        "byDate": {"2025-09-24T12:00:00.000Z": {
-          "totalConsolidated": [{"q": 13.4, "u": "unité"}],
-          "recipes": [{
-                "r": "Moussaka végé","qEq":13.4,
-                "uEq": "unité",
-                "a": 57
-              }],
-          "totalAssiettes": 57,
-          "recipeCount": 1
-        }}
-      }
-    
-    
-    ,{
-        "ingredientHugoUuid": "usibcf",
-        "ingredientName": "Noix",
-        "productSemanticKey": "noix_usibcf_tour_5_fb61b4d7",
-        "ingType": "sec",
-        "totalAssiettes": 57,
-        "nbRecipes": 1,"totalNeededRaw": [{ "q":1140, "u": "gr." }],
-        "byDate": {"2025-09-24T12:00:00.000Z": {
-          "totalConsolidated": [{"q": 1140, "u": "gr."}],
-          "recipes": [{
-                "r": "Melomakarona","qEq":1140,
-                "uEq": "gr.",
-                "a": 57
-              }],
-          "totalAssiettes": 57,
-          "recipeCount": 1
-        }}
-      }
-    
-    
-    ,{
-        "ingredientHugoUuid": "5rkq49",
-        "ingredientName": "Noix de cajou",
-        "productSemanticKey": "noix-de-ca_5rkq49_tour_5_fb61b4d7",
-        "ingType": "sec",
-        "totalAssiettes": 35,
-        "nbRecipes": 1,"totalNeededRaw": [{ "q":630, "u": "gr." }],
-        "byDate": {"2025-09-25T12:00:00.000Z": {
-          "totalConsolidated": [{"q": 630, "u": "gr."}],
-          "recipes": [{
-                "r": "Cheesecake vegan citron framboise","qEq":630,
-                "uEq": "gr.",
-                "a": 35
-              }],
-          "totalAssiettes": 35,
-          "recipeCount": 1
-        }}
-      }
-    
-    
-    ,{
-        "ingredientHugoUuid": "rtavky",
-        "ingredientName": "Oignon",
-        "productSemanticKey": "oignon_rtavky_tour_5_fb61b4d7",
-        "ingType": "legumes",
-        "totalAssiettes": 57,
-        "nbRecipes": 1,"pFrais": true,"totalNeededRaw": [{ "q":2012, "u": "gr." }],
-        "byDate": {"2025-09-24T12:00:00.000Z": {
-          "totalConsolidated": [{"q": 2012, "u": "gr."}],
-          "recipes": [{
-                "r": "Moussaka végé",
-                "q":2.0,
-                "u": "Kg","qEq":2012,
-                "uEq": "gr.",
-                "a": 57
-              }],
-          "totalAssiettes": 57,
-          "recipeCount": 1
-        }}
-      }
-    
-    
-    ,{
-        "ingredientHugoUuid": "yh2uod",
-        "ingredientName": "Orange",
-        "productSemanticKey": "orange_yh2uod_tour_5_fb61b4d7",
-        "ingType": "legumes",
-        "totalAssiettes": 57,
-        "nbRecipes": 1,"pFrais": true,
-          "conversionRules": ["une orange = 200 gr."],"totalNeededRaw": [{ "q":1.9, "u": "unité" }],
-        "byDate": {"2025-09-24T12:00:00.000Z": {
-          "totalConsolidated": [{"q": 380, "u": "gr."}],
-          "recipes": [{
-                "r": "Melomakarona",
-                "q":1.9,
-                "u": "unité","qEq":380,
-                "uEq": "gr.",
-                "a": 57
-              }],
-          "totalAssiettes": 57,
-          "recipeCount": 1
-        }}
-      }
-    
-    
-    ,{
-        "ingredientHugoUuid": "cr4ai3",
-        "ingredientName": "Parmigiano",
-        "productSemanticKey": "parmigiano_cr4ai3_tour_5_fb61b4d7",
-        "ingType": "frais",
-        "totalAssiettes": 57,
-        "nbRecipes": 1,"pFrais": true,"totalNeededRaw": [{ "q":503, "u": "gr." }],
-        "byDate": {"2025-09-24T12:00:00.000Z": {
-          "totalConsolidated": [{"q": 503, "u": "gr."}],
-          "recipes": [{
-                "r": "Moussaka végé",
-                "q":0.5,
-                "u": "Kg","qEq":503,
-                "uEq": "gr.",
-                "a": 57
-              }],
-          "totalAssiettes": 57,
-          "recipeCount": 1
-        }}
-      }
-    
-    
-    ,{
-        "ingredientHugoUuid": "hgfa4e",
-        "ingredientName": "Persil frais",
-        "productSemanticKey": "persil-fra_hgfa4e_tour_5_fb61b4d7",
-        "ingType": "epices",
-        "totalAssiettes": 39,
-        "nbRecipes": 1,"pFrais": true,"totalNeededRaw": [{ "q":1.9, "u": "bottes" }],
-        "byDate": {"2025-09-23T12:00:00.000Z": {
-          "totalConsolidated": [{"q": 1.9, "u": "bottes"}],
-          "recipes": [{
-                "r": "Salade carottes betteraves au cumin","qEq":1.9,
-                "uEq": "bottes",
-                "a": 39
-              }],
-          "totalAssiettes": 39,
-          "recipeCount": 1
-        }}
-      }
-    
-    
-    ,{
-        "ingredientHugoUuid": "18dy4e",
-        "ingredientName": "Pomme de terre",
-        "productSemanticKey": "pomme-de-t_18dy4e_tour_5_fb61b4d7",
-        "ingType": "legumes",
-        "totalAssiettes": 57,
-        "nbRecipes": 1,"pFrais": true,"totalNeededRaw": [{ "q":2682, "u": "gr." }],
-        "byDate": {"2025-09-24T12:00:00.000Z": {
-          "totalConsolidated": [{"q": 2682, "u": "gr."}],
-          "recipes": [{
-                "r": "Moussaka végé",
-                "q":2.7,
-                "u": "Kg","qEq":2682,
-                "uEq": "gr.",
-                "a": 57
-              }],
-          "totalAssiettes": 57,
-          "recipeCount": 1
-        }}
-      }
-    
-    
-    ,{
-        "ingredientHugoUuid": "xdkeh3",
-        "ingredientName": "Sauce tomate mutti",
-        "productSemanticKey": "sauce-toma_xdkeh3_tour_5_fb61b4d7",
-        "ingType": "epices",
-        "totalAssiettes": 57,
-        "nbRecipes": 1,"totalNeededRaw": [{ "q":3688, "u": "gr." }],
-        "byDate": {"2025-09-24T12:00:00.000Z": {
-          "totalConsolidated": [{"q": 3688, "u": "gr."}],
-          "recipes": [{
-                "r": "Moussaka végé",
-                "q":3.7,
-                "u": "Kg","qEq":3688,
-                "uEq": "gr.",
-                "a": 57
-              }],
-          "totalAssiettes": 57,
-          "recipeCount": 1
-        }}
-      }
-    
-    
-    ,{
-        "ingredientHugoUuid": "2juq3x",
-        "ingredientName": "Sel",
-        "productSemanticKey": "sel_2juq3x_tour_5_fb61b4d7",
-        "ingType": "epices",
-        "totalAssiettes": 45,
-        "nbRecipes": 1,
-          "conversionRules": ["1 c. à soupe de sel = 15 gr."],"totalNeededRaw": [{ "q":0.5, "u": "c. à soupe" }],
-        "byDate": {"2025-09-26T12:00:00.000Z": {
-          "totalConsolidated": [{"q": 7, "u": "gr."}],
-          "recipes": [{
-                "r": "Véganaise rapide",
-                "q":0.5,
-                "u": "c. à soupe","qEq":7,
-                "uEq": "gr.",
-                "a": 45
-              }],
-          "totalAssiettes": 45,
-          "recipeCount": 1
-        }}
-      }
-    
-    
-    ,{
-        "ingredientHugoUuid": "zkmmgt",
-        "ingredientName": "Sirop d'érable ",
-        "productSemanticKey": "sirop-dera_zkmmgt_tour_5_fb61b4d7",
-        "ingType": "sucres",
-        "totalAssiettes": 74,
-        "nbRecipes": 2,
-          "conversionRules": ["1 c. à soupe = 15 ml."],"totalNeededRaw": [{ "q":336, "u": "gr." },{ "q":7.8, "u": "c. à soupe" }],
-        "byDate": {"2025-09-23T12:00:00.000Z": {
-          "totalConsolidated": [{"q": 117, "u": "ml"}],
-          "recipes": [{
-                "r": "Salade carottes betteraves au cumin",
-                "q":7.8,
-                "u": "c. à soupe","qEq":117,
-                "uEq": "ml",
-                "a": 39
-              }],
-          "totalAssiettes": 39,
-          "recipeCount": 1
-        },"2025-09-25T12:00:00.000Z": {
-          "totalConsolidated": [{"q": 336, "u": "gr."}],
-          "recipes": [{
-                "r": "Cheesecake vegan citron framboise","qEq":336,
-                "uEq": "gr.",
-                "a": 35
-              }],
-          "totalAssiettes": 35,
-          "recipeCount": 1
-        }}
-      }
-    
-    
-    ,{
-        "ingredientHugoUuid": "h6thsp",
-        "ingredientName": "Speculoos",
-        "productSemanticKey": "speculoos_h6thsp_tour_5_fb61b4d7",
-        "ingType": "sucres",
-        "totalAssiettes": 74,
-        "nbRecipes": 2,"totalNeededRaw": [{ "q":1025, "u": "gr." }],
-        "byDate": {"2025-09-23T12:00:00.000Z": {
-          "totalConsolidated": [{"q": 325, "u": "gr."}],
-          "recipes": [{
-                "r": "Tarte au chocolat sans cuisson","qEq":325,
-                "uEq": "gr.",
-                "a": 39
-              }],
-          "totalAssiettes": 39,
-          "recipeCount": 1
-        },"2025-09-25T12:00:00.000Z": {
-          "totalConsolidated": [{"q": 700, "u": "gr."}],
-          "recipes": [{
-                "r": "Cheesecake vegan citron framboise","qEq":700,
-                "uEq": "gr.",
-                "a": 35
-              }],
-          "totalAssiettes": 35,
-          "recipeCount": 1
-        }}
-      }
-    
-    
-    ,{
-        "ingredientHugoUuid": "lny16c",
-        "ingredientName": "sucre blanc",
-        "productSemanticKey": "sucre-blan_lny16c_tour_5_fb61b4d7",
-        "ingType": "sucres",
-        "totalAssiettes": 166,
-        "nbRecipes": 4,"totalNeededRaw": [{ "q":2025, "u": "gr." }],
-        "byDate": {"2025-09-24T12:00:00.000Z": {
-          "totalConsolidated": [{"q": 1330, "u": "gr."}],
-          "recipes": [{
-                "r": "Melomakarona","qEq":1330,
-                "uEq": "gr.",
-                "a": 57
-              }],
-          "totalAssiettes": 57,
-          "recipeCount": 1
-        },"2025-09-25T12:00:00.000Z": {
-          "totalConsolidated": [{"q": 140, "u": "gr."}],
-          "recipes": [{
-                "r": "Cheesecake vegan citron framboise","qEq":140,
-                "uEq": "gr.",
-                "a": 35
-              }],
-          "totalAssiettes": 35,
-          "recipeCount": 1
+          "totalAssiettes": 420,
+          "recipeCount": 12
         },"2025-09-26T12:00:00.000Z": {
-          "totalConsolidated": [{"q": 555, "u": "gr."}],
+          "totalConsolidated": [{"q": 10, "u": "recette·s"}],
           "recipes": [{
-                "r": "Panacotta vanille et coulis de framboise","qEq":92,
-                "uEq": "gr.",
+                "r": "Panacotta vanille et coulis de framboise",
+                "q":1,
+                "u": "recette·s","qEq":1,
+                "uEq": "recette·s",
                 "a": 37
               },{
-                "r": "Panacotta vanille et coulis de framboise","qEq":462,
-                "uEq": "gr.",
+                "r": "Panacotta vanille et coulis de framboise",
+                "q":1,
+                "u": "recette·s","qEq":1,
+                "uEq": "recette·s",
                 "a": 37
+              },{
+                "r": "Panacotta vanille et coulis de framboise",
+                "q":1,
+                "u": "recette·s","qEq":1,
+                "uEq": "recette·s",
+                "a": 37
+              },{
+                "r": "Panacotta vanille et coulis de framboise",
+                "q":1,
+                "u": "recette·s","qEq":1,
+                "uEq": "recette·s",
+                "a": 37
+              },{
+                "r": "Panacotta vanille et coulis de framboise",
+                "q":1,
+                "u": "recette·s","qEq":1,
+                "uEq": "recette·s",
+                "a": 37
+              },{
+                "r": "Panacotta vanille et coulis de framboise",
+                "q":1,
+                "u": "recette·s","qEq":1,
+                "uEq": "recette·s",
+                "a": 37
+              },{
+                "r": "Véganaise rapide",
+                "q":1,
+                "u": "recette·s","qEq":1,
+                "uEq": "recette·s",
+                "a": 45
+              },{
+                "r": "Véganaise rapide",
+                "q":1,
+                "u": "recette·s","qEq":1,
+                "uEq": "recette·s",
+                "a": 45
+              },{
+                "r": "Véganaise rapide",
+                "q":1,
+                "u": "recette·s","qEq":1,
+                "uEq": "recette·s",
+                "a": 45
+              },{
+                "r": "Véganaise rapide",
+                "q":1,
+                "u": "recette·s","qEq":1,
+                "uEq": "recette·s",
+                "a": 45
               }],
-          "totalAssiettes": 74,
-          "recipeCount": 2
-        }}
-      }
-    
-    
-    ,{
-        "ingredientHugoUuid": "phv1to",
-        "ingredientName": "Sucre glace",
-        "productSemanticKey": "sucre-glac_phv1to_tour_5_fb61b4d7",
-        "ingType": "sucres",
-        "totalAssiettes": 57,
-        "nbRecipes": 1,
-          "conversionRules": ["1 c. à soupe de sucre = 15 gr."],"totalNeededRaw": [{ "q":3.8, "u": "c. à soupe" }],
-        "byDate": {"2025-09-24T12:00:00.000Z": {
-          "totalConsolidated": [{"q": 57, "u": "gr."}],
-          "recipes": [{
-                "r": "Melomakarona",
-                "q":3.8,
-                "u": "c. à soupe","qEq":57,
-                "uEq": "gr.",
-                "a": 57
-              }],
-          "totalAssiettes": 57,
-          "recipeCount": 1
-        }}
-      }
-    
-    
-    ,{
-        "ingredientHugoUuid": "z6hnb8",
-        "ingredientName": "Zestes d'orange",
-        "productSemanticKey": "zestes-dor_z6hnb8_tour_5_fb61b4d7",
-        "ingType": "legumes",
-        "totalAssiettes": 57,
-        "nbRecipes": 1,"pFrais": true,"totalNeededRaw": [{ "q":3.8, "u": "unité" }],
-        "byDate": {"2025-09-24T12:00:00.000Z": {
-          "totalConsolidated": [{"q": 3.8, "u": "unité"}],
-          "recipes": [{
-                "r": "Melomakarona","qEq":3.8,
-                "uEq": "unité",
-                "a": 57
-              }],
-          "totalAssiettes": 57,
-          "recipeCount": 1
+          "totalAssiettes": 402,
+          "recipeCount": 10
         }}
       }]
 }

@@ -14,57 +14,7 @@
   "check": true,
   "checkAlwaysOk": false,
   "materiel": null,
-  "ingredients": [{
-      "uuid": "n85gmi",
-      "name": "sucre de canne (blond)",
-      "originalQuantity": 0.7,
-      "originalUnit": "kg",
-      "normalizedQuantity": 700,
-      "normalizedUnit": "gr.",
-      "comment": "",
-      "allergens": [],
-      "type": "sucres"
-    },{
-      "uuid": "1e3zhq",
-      "name": "Chocolat noir patissier 70p100",
-      "originalQuantity": 4,
-      "originalUnit": "kg",
-      "normalizedQuantity": 4000,
-      "normalizedUnit": "gr.",
-      "comment": "",
-      "allergens": [],
-      "type": "sucres"
-    },{
-      "uuid": "hlbwfd",
-      "name": "Yaourt de soja",
-      "originalQuantity": 1.8,
-      "originalUnit": "kg",
-      "normalizedQuantity": 1800,
-      "normalizedUnit": "gr.",
-      "comment": "",
-      "allergens": ["Soja"],
-      "type": "frais"
-    },{
-      "uuid": "chfwwq",
-      "name": "Crème soja",
-      "originalQuantity": 2,
-      "originalUnit": "l.",
-      "normalizedQuantity": 2000,
-      "normalizedUnit": "ml",
-      "comment": "",
-      "allergens": ["Soja"],
-      "type": "lof"
-    },{
-      "uuid": "iwdje3",
-      "name": "Haricots rouges cuits",
-      "originalQuantity": 2.25,
-      "originalUnit": "kg",
-      "normalizedQuantity": 2250,
-      "normalizedUnit": "gr.",
-      "comment": "",
-      "allergens": [],
-      "type": "sec"
-    }],
+  "ingredients": [{"allergens":[],"comment":"","name":"sucre de canne (blond)","normalizedQuantity":700,"normalizedUnit":"gr.","originalQuantity":0.7,"originalUnit":"kg","type":"sucres","uuid":"n85gmi"},{"allergens":[],"comment":"","name":"Chocolat noir patissier 70p100","normalizedQuantity":4000,"normalizedUnit":"gr.","originalQuantity":4,"originalUnit":"kg","type":"sucres","uuid":"1e3zhq"},{"allergens":["Soja"],"comment":"","name":"Yaourt de soja","normalizedQuantity":1800,"normalizedUnit":"gr.","originalQuantity":1.8,"originalUnit":"kg","type":"frais","uuid":"hlbwfd"},{"allergens":["Soja"],"comment":"","name":"Crème soja","normalizedQuantity":2000,"normalizedUnit":"ml","originalQuantity":2,"originalUnit":"l.","type":"lof","uuid":"chfwwq"},{"allergens":[],"comment":"","name":"Haricots rouges cuits","normalizedQuantity":2250,"normalizedUnit":"gr.","originalQuantity":2.25,"originalUnit":"kg","type":"sec","uuid":"iwdje3"}],
   "preparation": "séparer le chocolat en deux, faire fondre une partie que l'on mélange ensuite avec la crème, c'est une ganache\n\navec l'autre partie de chocolat fondu mixer avec le sucre, les haricots et le yahourt\n\nfaire cuire 25 mn à 180°\n\nattendre que ça refroidisse pour démouler ( ou pas ) pour recouvrir de ganache",
   "prepAlt": null,
   "permissionWrite": [],

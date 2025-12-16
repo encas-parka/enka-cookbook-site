@@ -14,57 +14,7 @@
   "check": false,
   "checkAlwaysOk": false,
   "materiel": null,
-  "ingredients": [{
-      "uuid": "csxbg6",
-      "name": "lait d’amande",
-      "originalQuantity": 2,
-      "originalUnit": "l.",
-      "normalizedQuantity": 2000,
-      "normalizedUnit": "ml",
-      "comment": "",
-      "allergens": [],
-      "type": "lof"
-    },{
-      "uuid": "z8uiyd",
-      "name": "Farine de maïs",
-      "originalQuantity": 60,
-      "originalUnit": "gr.",
-      "normalizedQuantity": 60,
-      "normalizedUnit": "gr.",
-      "comment": "",
-      "allergens": [],
-      "type": "lof"
-    },{
-      "uuid": "2a0lnj",
-      "name": "gousse de vanille",
-      "originalQuantity": 1,
-      "originalUnit": "unité",
-      "normalizedQuantity": 1,
-      "normalizedUnit": "unité",
-      "comment": "",
-      "allergens": [],
-      "type": "sucres"
-    },{
-      "uuid": "n818be",
-      "name": "vanille extrait concentré",
-      "originalQuantity": 0.5,
-      "originalUnit": "ml",
-      "normalizedQuantity": 0.5,
-      "normalizedUnit": "ml",
-      "comment": "",
-      "allergens": [],
-      "type": "sucres"
-    },{
-      "uuid": "lny16c",
-      "name": "sucre blanc",
-      "originalQuantity": 200,
-      "originalUnit": "gr.",
-      "normalizedQuantity": 200,
-      "normalizedUnit": "gr.",
-      "comment": "",
-      "allergens": [],
-      "type": "sucres"
-    }],
+  "ingredients": [{"allergens":[],"comment":"","name":"lait d’amande","normalizedQuantity":2000,"normalizedUnit":"ml","originalQuantity":2,"originalUnit":"l.","type":"lof","uuid":"csxbg6"},{"allergens":[],"comment":"","name":"Farine de maïs","normalizedQuantity":60,"normalizedUnit":"gr.","originalQuantity":60,"originalUnit":"gr.","type":"lof","uuid":"z8uiyd"},{"allergens":[],"comment":"","name":"gousse de vanille","normalizedQuantity":1,"normalizedUnit":"unité","originalQuantity":1,"originalUnit":"unité","type":"sucres","uuid":"2a0lnj"},{"allergens":[],"comment":"","name":"vanille extrait concentré","normalizedQuantity":0.5,"normalizedUnit":"ml","originalQuantity":0.5,"originalUnit":"ml","type":"sucres","uuid":"n818be"},{"allergens":[],"comment":"","name":"sucre blanc","normalizedQuantity":200,"normalizedUnit":"gr.","originalQuantity":200,"originalUnit":"gr.","type":"sucres","uuid":"lny16c"}],
   "preparation": "a faire la veille :\n\nouvrir la gousse de vanille en 2 et faire infuser a chaud 10 min dans le lait. ajouter l'extrait de vanille.\n\nmelanger la maizena dans un peu de la preparation pour bien la diluer\n\nfaire chauffer doucement en remuant jusqu'a fremissement. ca doit epaissir un peu. mettre dans des ramequins au frais.",
   "prepAlt": null,
   "permissionWrite": [],

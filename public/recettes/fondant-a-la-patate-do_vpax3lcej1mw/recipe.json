@@ -14,67 +14,7 @@
   "check": false,
   "checkAlwaysOk": true,
   "materiel": null,
-  "ingredients": [{
-      "uuid": "ndu75n",
-      "name": "Patates douces",
-      "originalQuantity": 2.5,
-      "originalUnit": "kg",
-      "normalizedQuantity": 2500,
-      "normalizedUnit": "gr.",
-      "comment": "",
-      "allergens": [],
-      "type": "legumes"
-    },{
-      "uuid": "n818be",
-      "name": "vanille extrait concentré",
-      "originalQuantity": 5,
-      "originalUnit": "c. à café",
-      "normalizedQuantity": 25,
-      "normalizedUnit": "ml",
-      "comment": "",
-      "allergens": [],
-      "type": "sucres"
-    },{
-      "uuid": "n85gmi",
-      "name": "sucre de canne (blond)",
-      "originalQuantity": 300,
-      "originalUnit": "gr.",
-      "normalizedQuantity": 300,
-      "normalizedUnit": "gr.",
-      "comment": "",
-      "allergens": [],
-      "type": "sucres"
-    },{
-      "uuid": "rmgr7l",
-      "name": "Poudre d'amandes",
-      "originalQuantity": 500,
-      "originalUnit": "gr.",
-      "normalizedQuantity": 500,
-      "normalizedUnit": "gr.",
-      "comment": "",
-      "allergens": ["Fruit à coque"],
-      "type": "sucres"
-    },{
-      "uuid": "gpeob7",
-      "name": "Lait de soja",
-      "originalQuantity": 750,
-      "originalUnit": "ml",
-      "normalizedQuantity": 750,
-      "normalizedUnit": "ml",
-      "comment": "",
-      "allergens": ["Soja"],
-      "type": "lof"
-    },{
-      "uuid": "v212im",
-      "name": "Farine de tapioca",
-      "originalQuantity": 250,
-      "originalUnit": "gr.",
-      "normalizedQuantity": 250,
-      "normalizedUnit": "gr.",
-      "comment": "",
-      "allergens": [],
-      "type": "lof"
-    }],
+  "ingredients": [{"allergens":[],"comment":"","name":"Patates douces","normalizedQuantity":2500,"normalizedUnit":"gr.","originalQuantity":2.5,"originalUnit":"kg","type":"legumes","uuid":"ndu75n"},{"allergens":[],"comment":"","name":"vanille extrait concentré","normalizedQuantity":25,"normalizedUnit":"ml","originalQuantity":5,"originalUnit":"c. à café","type":"sucres","uuid":"n818be"},{"allergens":[],"comment":"","name":"sucre de canne (blond)","normalizedQuantity":300,"normalizedUnit":"gr.","originalQuantity":300,"originalUnit":"gr.","type":"sucres","uuid":"n85gmi"},{"allergens":["Fruit à coque"],"comment":"","name":"Poudre d'amandes","normalizedQuantity":500,"normalizedUnit":"gr.","originalQuantity":500,"originalUnit":"gr.","type":"sucres","uuid":"rmgr7l"},{"allergens":["Soja"],"comment":"","name":"Lait de soja","normalizedQuantity":750,"normalizedUnit":"ml","originalQuantity":750,"originalUnit":"ml","type":"lof","uuid":"gpeob7"},{"allergens":[],"comment":"","name":"Farine de tapioca","normalizedQuantity":250,"normalizedUnit":"gr.","originalQuantity":250,"originalUnit":"gr.","type":"lof","uuid":"v212im"}],
   "preparation": "* Écraser à la fourchette les patates douces bien cuites pour en faire une purée.\n* Mélanger la poudre d'amande, les sucres et la farine.\n* Ajouter le mélange à la purée de patate douce et délayer avec le lait de soja jusqu'à ce que la consistance soit bien homogène.\n* Verser dans le moule à gâteau, et placer au four préchauffé à 200° pendant 35 min au moins.",
   "prepAlt": null,
   "permissionWrite": [],

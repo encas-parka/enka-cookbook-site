@@ -7,39 +7,60 @@ checkAlwaysOk: false
 cuisson: false
 draft: false
 ingredients:
-  - ingredient: carotte_eouu0v
-    quantite: 7
-    unit: Kg
-    commentaire: ''
-  - ingredient: orange_yh2uod
-    quantite: 3
-    unit: unité
-    commentaire: ''
-  - ingredient: fenouil_mhsals
-    quantite: 4.5
-    unit: Kg
-    commentaire: ''
-  - ingredient: huile-dolive_h3c8al
-    quantite: 76.5
-    unit: l.
-    commentaire: ''
-  - ingredient: jus-dorange_gzi2ry
-    quantite: 32
-    unit: l.
-    commentaire: ''
+  - uuid: eouu0v
+    name: Carotte
+    originalQuantity: 7
+    originalUnit: kg
+    normalizedQuantity: 7000
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: yh2uod
+    name: Orange
+    originalQuantity: 3
+    originalUnit: unité
+    normalizedQuantity: 600
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: mhsals
+    name: Fenouil
+    originalQuantity: 4.5
+    originalUnit: kg
+    normalizedQuantity: 4500
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: h3c8al
+    name: huile d'olive
+    originalQuantity: 76.5
+    originalUnit: l.
+    normalizedQuantity: 76500
+    normalizedUnit: ml
+    comment: ''
+    allergens: []
+    type: lof
+  - uuid: gzi2ry
+    name: Jus d'orange
+    originalQuantity: 32
+    originalUnit: l.
+    normalizedQuantity: 32000
+    normalizedUnit: ml
+    comment: ''
+    allergens: []
+    type: sucres
 plate: 50
-preparation: >-
+preparation: |-
   Couper en finesse les fenouils.
-
 
   Raper gros les carottes.
 
-
   Mettre le zeste des 3 oranges et éventuellement les sarments si y a la motive.
 
-
-  Ajouter l'huile et le jus d'orange, assaisonner avec sel et poivre à
-  convenance .
+  Ajouter l'huile et le jus d'orange, assaisonner avec sel et poivre à convenance .
 publishDate: 2024-03-26T18:34:06.792Z
 regime:
   - vegan

@@ -14,57 +14,7 @@
   "check": true,
   "checkAlwaysOk": false,
   "materiel": null,
-  "ingredients": [{
-      "uuid": "bnmw1o",
-      "name": "creme de coco",
-      "originalQuantity": 6.5,
-      "originalUnit": "l.",
-      "normalizedQuantity": 6500,
-      "normalizedUnit": "ml",
-      "comment": "",
-      "allergens": [],
-      "type": "lof"
-    },{
-      "uuid": "csxbg6",
-      "name": "lait d’amande",
-      "originalQuantity": 6.5,
-      "originalUnit": "l.",
-      "normalizedQuantity": 6500,
-      "normalizedUnit": "ml",
-      "comment": "",
-      "allergens": [],
-      "type": "lof"
-    },{
-      "uuid": "n85gmi",
-      "name": "sucre de canne (blond)",
-      "originalQuantity": 2.5,
-      "originalUnit": "kg",
-      "normalizedQuantity": 2500,
-      "normalizedUnit": "gr.",
-      "comment": "",
-      "allergens": [],
-      "type": "sucres"
-    },{
-      "uuid": "ruhtax",
-      "name": "Agar-agar",
-      "originalQuantity": 50,
-      "originalUnit": "gr.",
-      "normalizedQuantity": 50,
-      "normalizedUnit": "gr.",
-      "comment": "",
-      "allergens": [],
-      "type": "autres"
-    },{
-      "uuid": "coa5dh",
-      "name": "Noix de coco râpée",
-      "originalQuantity": 1,
-      "originalUnit": "kg",
-      "normalizedQuantity": 1000,
-      "normalizedUnit": "gr.",
-      "comment": "",
-      "allergens": [],
-      "type": "sucres"
-    }],
+  "ingredients": [{"allergens":[],"comment":"","name":"creme de coco","normalizedQuantity":6500,"normalizedUnit":"ml","originalQuantity":6.5,"originalUnit":"l.","type":"lof","uuid":"bnmw1o"},{"allergens":[],"comment":"","name":"lait d’amande","normalizedQuantity":6500,"normalizedUnit":"ml","originalQuantity":6.5,"originalUnit":"l.","type":"lof","uuid":"csxbg6"},{"allergens":[],"comment":"","name":"sucre de canne (blond)","normalizedQuantity":2500,"normalizedUnit":"gr.","originalQuantity":2.5,"originalUnit":"kg","type":"sucres","uuid":"n85gmi"},{"allergens":[],"comment":"","name":"Agar-agar","normalizedQuantity":50,"normalizedUnit":"gr.","originalQuantity":50,"originalUnit":"gr.","type":"autres","uuid":"ruhtax"},{"allergens":[],"comment":"","name":"Noix de coco râpée","normalizedQuantity":1000,"normalizedUnit":"gr.","originalQuantity":1,"originalUnit":"kg","type":"sucres","uuid":"coa5dh"}],
   "preparation": "fouetter tous les ingrédients\n\nfaire bouillir à petit feu tout en remuant pendant qq minute\n\nverser dans les ramequins\n\nlaisser refroidir à température ambiante pendant 30 mn\n\npuis mettre au frigo pendant minimum 3 h",
   "prepAlt": null,
   "permissionWrite": [],

@@ -14,77 +14,7 @@
   "check": true,
   "checkAlwaysOk": false,
   "materiel": null,
-  "ingredients": [{
-      "uuid": "xo0ibs",
-      "name": "Abricot",
-      "originalQuantity": 12,
-      "originalUnit": "kg",
-      "normalizedQuantity": 12000,
-      "normalizedUnit": "gr.",
-      "comment": "",
-      "allergens": [],
-      "type": "legumes"
-    },{
-      "uuid": "nz97kr",
-      "name": "boudoir",
-      "originalQuantity": 100,
-      "originalUnit": "unité",
-      "normalizedQuantity": 100,
-      "normalizedUnit": "unité",
-      "comment": "",
-      "allergens": [],
-      "type": "sucres"
-    },{
-      "uuid": "n818be",
-      "name": "vanille extrait concentré",
-      "originalQuantity": 40,
-      "originalUnit": "ml",
-      "normalizedQuantity": 40,
-      "normalizedUnit": "ml",
-      "comment": "",
-      "allergens": [],
-      "type": "sucres"
-    },{
-      "uuid": "n85gmi",
-      "name": "sucre de canne (blond)",
-      "originalQuantity": 500,
-      "originalUnit": "gr.",
-      "normalizedQuantity": 500,
-      "normalizedUnit": "gr.",
-      "comment": "",
-      "allergens": [],
-      "type": "sucres"
-    },{
-      "uuid": "n85gmi",
-      "name": "sucre de canne (blond)",
-      "originalQuantity": 700,
-      "originalUnit": "gr.",
-      "normalizedQuantity": 700,
-      "normalizedUnit": "gr.",
-      "comment": "",
-      "allergens": [],
-      "type": "sucres"
-    },{
-      "uuid": "6z655r",
-      "name": "Romarin",
-      "originalQuantity": 2,
-      "originalUnit": "bottes",
-      "normalizedQuantity": 2,
-      "normalizedUnit": "bottes",
-      "comment": "",
-      "allergens": [],
-      "type": "epices"
-    },{
-      "uuid": "0tpvue",
-      "name": "Mascarpone",
-      "originalQuantity": 3,
-      "originalUnit": "kg",
-      "normalizedQuantity": 3000,
-      "normalizedUnit": "gr.",
-      "comment": "",
-      "allergens": ["Produit laitier"],
-      "type": "frais"
-    }],
+  "ingredients": [{"allergens":[],"comment":"","name":"Abricot","normalizedQuantity":12000,"normalizedUnit":"gr.","originalQuantity":12,"originalUnit":"kg","type":"legumes","uuid":"xo0ibs"},{"allergens":[],"comment":"","name":"boudoir","normalizedQuantity":100,"normalizedUnit":"unité","originalQuantity":100,"originalUnit":"unité","type":"sucres","uuid":"nz97kr"},{"allergens":[],"comment":"","name":"vanille extrait concentré","normalizedQuantity":40,"normalizedUnit":"ml","originalQuantity":40,"originalUnit":"ml","type":"sucres","uuid":"n818be"},{"allergens":[],"comment":"","name":"sucre de canne (blond)","normalizedQuantity":500,"normalizedUnit":"gr.","originalQuantity":500,"originalUnit":"gr.","type":"sucres","uuid":"n85gmi"},{"allergens":[],"comment":"","name":"sucre de canne (blond)","normalizedQuantity":700,"normalizedUnit":"gr.","originalQuantity":700,"originalUnit":"gr.","type":"sucres","uuid":"n85gmi"},{"allergens":[],"comment":"","name":"Romarin","normalizedQuantity":2,"normalizedUnit":"bottes","originalQuantity":2,"originalUnit":"bottes","type":"epices","uuid":"6z655r"},{"allergens":["Produit laitier"],"comment":"","name":"Mascarpone","normalizedQuantity":3000,"normalizedUnit":"gr.","originalQuantity":3,"originalUnit":"kg","type":"frais","uuid":"0tpvue"}],
   "preparation": "\\- Lavez, dénoyautez et coupez en quartier les abricots.\n\n\\- Dans une casserole, faites cuire la moitié d’abricots, le sucre,\n3 cuillères à soupe d’eau, et deux brins de romarin\n\n\\- Portez le mélange à ébullition, jusqu’à ce que les fruits\nsoient fondants. Si la compoté est très juteuse, n’hésitez pas à\nl'égoutter à l’aide d’une passoire.\n\n\\- Découpez les biscuits à la cuillère en 2 ou 3 morceaux en\nfonction de la taille de votre verrine.\n\n\\- Montez en chantilly, le mascarpone et la crème à l’aide d’un\nbatteur. Les deux ingrédients doivent être bien froids et sortir du\nréfrigérateur. Incorporez la vanille liquide.\n\n\\- Placez un peu de compotée d’abricots au fond des verrines, puis\ndisposez les morceaux de biscuits à la cuillère.\n\n\\- Pochez le tout de crème mascarpone chantilly. Sur le dessus,\najoutez des abricots rôtis",
   "prepAlt": null,
   "permissionWrite": [],

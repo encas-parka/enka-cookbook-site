@@ -11,42 +11,89 @@ plate: 4
 check: true
 checkAlwaysOk: false
 ingredients:
-  - ingredient: citron-jus_bwkn34
-    quantite: 1
-    unit: unité
-    commentaire: ''
-  - ingredient: citron-confit_m6gmgq
-    quantite: 40
-    unit: gr.
-    commentaire: ''
-  - ingredient: oignon-rouge_doxujz
-    quantite: 1
-    unit: unité
-    commentaire: ''
-  - ingredient: betterave-rouge_7sc3uw
-    quantite: 1
-    unit: Kg
-    commentaire: ''
-  - ingredient: huile-dolive_h3c8al
-    quantite: 2
-    unit: c. à soupe
-    commentaire: ''
-  - ingredient: yaourt-grec-de-vache_dzqmba
-    quantite: 150
-    unit: gr.
-    commentaire: ''
-  - ingredient: aneth-aromatique_nnkg8f
-    quantite: 15
-    unit: gr.
-    commentaire: ''
-  - ingredient: cumin-moulu_he3u48
-    quantite: 1.5
-    unit: c. à café
-    commentaire: ''
-  - ingredient: tahin_u33083
-    quantite: 1
-    unit: c. à soupe
-    commentaire: ''
+  - uuid: bwkn34
+    name: Citron (jus)
+    originalQuantity: 1
+    originalUnit: unité
+    normalizedQuantity: 1
+    normalizedUnit: unité
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: m6gmgq
+    name: Citron confit
+    originalQuantity: 40
+    originalUnit: gr.
+    normalizedQuantity: 40
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: doxujz
+    name: Oignon rouge
+    originalQuantity: 1
+    originalUnit: unité
+    normalizedQuantity: 120
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: 7sc3uw
+    name: Betterave rouge
+    originalQuantity: 1
+    originalUnit: kg
+    normalizedQuantity: 1000
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: h3c8al
+    name: huile d'olive
+    originalQuantity: 2
+    originalUnit: c. à soupe
+    normalizedQuantity: 30
+    normalizedUnit: ml
+    comment: ''
+    allergens: []
+    type: lof
+  - uuid: dzqmba
+    name: Yaourt grec de vache
+    originalQuantity: 150
+    originalUnit: gr.
+    normalizedQuantity: 150
+    normalizedUnit: gr.
+    comment: ''
+    allergens:
+      - Produit laitier
+    type: frais
+  - uuid: nnkg8f
+    name: Aneth aromatique
+    originalQuantity: 15
+    originalUnit: gr.
+    normalizedQuantity: 15
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: he3u48
+    name: Cumin moulu
+    originalQuantity: 1.5
+    originalUnit: c. à café
+    normalizedQuantity: 7.5
+    normalizedUnit: ml
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: u33083
+    name: Tahin
+    originalQuantity: 1
+    originalUnit: c. à soupe
+    normalizedQuantity: 15
+    normalizedUnit: ml
+    comment: ''
+    allergens:
+      - Sésame
+    type: autres
 preparation: je le fais la semaine pro
 publishDate: 2025-05-19T14:28:00.000Z
 serveHot: false

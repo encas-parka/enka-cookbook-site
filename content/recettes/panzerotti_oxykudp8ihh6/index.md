@@ -12,61 +12,78 @@ plate: 100
 quantite_desc: ''
 check: false
 ingredients:
-  - ingredient: huile-de-friture_1ej217
-    quantite: 8
-    unit: l.
-    commentaire: ''
-  - ingredient: pate-a-pain_m42cma
-    quantite: 15
-    unit: Kg
-    commentaire: ''
-  - ingredient: origan_fkftyb
-    quantite: 150
-    unit: gr.
-    commentaire: ''
-  - ingredient: sauce-tomate-mutti_xdkeh3
-    quantite: 4
-    unit: Kg
-    commentaire: ''
-  - ingredient: mozzarella_5yety4
-    quantite: 5.5
-    unit: Kg
-    commentaire: ''
-  - ingredient: huile-dolive_h3c8al
-    quantite: 500
-    unit: ml
-    commentaire: ''
-preparation: >-
-  Former des boules de pain d'environ 150gr chacune et les disposer bien
-  espacées sur le plan de travail fariné. Laisser lever à nouveau jusqu’au
-  double.
-
+  - uuid: 1ej217
+    name: huile de friture
+    originalQuantity: 8
+    originalUnit: l.
+    normalizedQuantity: 8000
+    normalizedUnit: ml
+    comment: ''
+    allergens: []
+    type: lof
+  - uuid: m42cma
+    name: Pâte à pain
+    originalQuantity: 15
+    originalUnit: kg
+    normalizedQuantity: 15000
+    normalizedUnit: gr.
+    comment: ''
+    allergens:
+      - Gluten
+    type: autres
+  - uuid: fkftyb
+    name: Origan
+    originalQuantity: 150
+    originalUnit: gr.
+    normalizedQuantity: 150
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: xdkeh3
+    name: Sauce tomate mutti
+    originalQuantity: 4
+    originalUnit: kg
+    normalizedQuantity: 4000
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: 5yety4
+    name: Mozzarella
+    originalQuantity: 5.5
+    originalUnit: kg
+    normalizedQuantity: 5500
+    normalizedUnit: gr.
+    comment: ''
+    allergens:
+      - Produit laitier
+    type: frais
+  - uuid: h3c8al
+    name: huile d'olive
+    originalQuantity: 500
+    originalUnit: ml
+    normalizedQuantity: 500
+    normalizedUnit: ml
+    comment: ''
+    allergens: []
+    type: lof
+preparation: |-
+  Former des boules de pain d'environ 150gr chacune et les disposer bien espacées sur le plan de travail fariné. Laisser lever à nouveau jusqu’au double.
 
   Couper la mozzarella en petits cubes et la mettre dans une passoire à
-
   mailles étroites (placée sur un bol).
 
+  Cuisiner une sauce tomate avec mes oignons, la purée de tomates, l’origan, sel, poivre. Laisser refroidir. Puis mélanger avec la mozzarella.
 
-  Cuisiner une sauce tomate avec mes oignons, la purée de tomates, l’origan,
-  sel, poivre. Laisser refroidir. Puis mélanger avec la mozzarella.
-
-
-  Reprendre les boules de pâte et les étaler avec un rouleau à pâtisserie. Pas
-  trop gros le panzerotti, la taille d'une paume de main. Sinon ça risque de
-  percer lors de la friture.
+  Reprendre les boules de pâte et les étaler avec un rouleau à pâtisserie. Pas trop gros le panzerotti, la taille d'une paume de main. Sinon ça risque de percer lors de la friture.
    Disposer quelques cuillerées de farce au centre de chaque disque.
-  Badigeonner les bords avec un peu d’eau, refermer et bien sceller les bords à
-  l’aide d’une fourchette.
+  Badigeonner les bords avec un peu d’eau, refermer et bien sceller les bords à l’aide d’une fourchette.
 
-
-  Les faire frire dans une abondante huile bouillante en les tournant jusqu’à ce
-  qu’elles soient dorées. Les égoutter de l’huile
-
+  Les faire frire dans une abondante huile bouillante en les tournant jusqu’à ce qu’elles soient dorées. Les égoutter de l’huile
   et les placer sur du papier absorbant.
 
-
   Farcir les panzerotti et les faire frire immédiatement pour que
-
   l’humidité ne casse pas la pâte. Les déguster bien chauds.
 preparation24h: ''
 publishDate: 2025-05-30T16:22:00.000Z

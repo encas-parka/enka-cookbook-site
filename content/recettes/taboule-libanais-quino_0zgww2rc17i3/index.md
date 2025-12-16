@@ -17,34 +17,69 @@ cuisson: false
 plate: 100
 check: true
 ingredients:
-  - ingredient: jus-de-citron_e4mjd1
-    quantite: 2
-    unit: l.
-    commentaire: ''
-  - ingredient: huile-dolive_h3c8al
-    quantite: 2
-    unit: l.
-    commentaire: ''
-  - ingredient: echalote_vwdomu
-    quantite: 600
-    unit: gr.
-    commentaire: ''
-  - ingredient: tomate_ibtbnq
-    quantite: 10
-    unit: Kg
-    commentaire: grosses tomates de préférences
-  - ingredient: persil-frais_hgfa4e
-    quantite: 6
-    unit: Kg
-    commentaire: ''
-  - ingredient: menthe_2j9y2v
-    quantite: 10
-    unit: bottes
-    commentaire: ''
-  - ingredient: quinoa-blanc_csxn1a
-    quantite: 1
-    unit: Kg
-    commentaire: ''
+  - uuid: e4mjd1
+    name: Jus de citron
+    originalQuantity: 2
+    originalUnit: l.
+    normalizedQuantity: 2000
+    normalizedUnit: ml
+    comment: ''
+    allergens: []
+    type: sucres
+  - uuid: h3c8al
+    name: huile d'olive
+    originalQuantity: 2
+    originalUnit: l.
+    normalizedQuantity: 2000
+    normalizedUnit: ml
+    comment: ''
+    allergens: []
+    type: lof
+  - uuid: vwdomu
+    name: Echalote
+    originalQuantity: 600
+    originalUnit: gr.
+    normalizedQuantity: 600
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: ibtbnq
+    name: Tomate
+    originalQuantity: 10
+    originalUnit: kg
+    normalizedQuantity: 10000
+    normalizedUnit: gr.
+    comment: grosses tomates de préférences
+    allergens: []
+    type: legumes
+  - uuid: hgfa4e
+    name: Persil frais
+    originalQuantity: 6
+    originalUnit: kg
+    normalizedQuantity: 6000
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: 2j9y2v
+    name: Menthe
+    originalQuantity: 10
+    originalUnit: bottes
+    normalizedQuantity: 10
+    normalizedUnit: bottes
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: csxn1a
+    name: Quinoa blanc
+    originalQuantity: 1
+    originalUnit: kg
+    normalizedQuantity: 1000
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: sec
 preparation: |-
   * Précuire le quinoa ou le millet dans l’eau bouillante.
   * Laver le persil et couper le en FINE JULIENNE (1mm d'epaisseur)

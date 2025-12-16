@@ -12,69 +12,143 @@ quantite_desc: 2 champis par personne
 check: true
 checkAlwaysOk: false
 ingredients:
-  - ingredient: ail_u2m28w
-    quantite: 4
-    unit: tête·s
-    commentaire: ''
-  - ingredient: echalote_owsv5m
-    quantite: 1.3
-    unit: Kg
-    commentaire: ''
-  - ingredient: champignon-de-paris_92zzps
-    quantite: 30
-    unit: Kg
-    commentaire: ''
-  - ingredient: huile-dolive_h3c8al
-    quantite: 930
-    unit: ml
-    commentaire: ''
-  - ingredient: fecule-de-mais-maizena_8nbcjp
-    quantite: 620
-    unit: gr.
-    commentaire: ''
-  - ingredient: lait-de-soja_gpeob7
-    quantite: 6.2
-    unit: l.
-    commentaire: ''
-  - ingredient: creme-soja_chfwwq
-    quantite: 6.2
-    unit: l.
-    commentaire: ''
-  - ingredient: huile-de-friture_1ej217
-    quantite: 5
-    unit: l.
-    commentaire: ''
-  - ingredient: farine-de-ble_2av6w8
-    quantite: 10
-    unit: Kg
-    commentaire: ''
-  - ingredient: eau_ljzb7j
-    commentaire: ''
-  - ingredient: corn-flakes_kp0srn
-    quantite: 7
-    unit: Kg
-    commentaire: ''
-  - ingredient: poivre_2pps90
-    commentaire: ''
-  - ingredient: ciboulette_mt22ff
-    quantite: 6
-    unit: bottes
-    commentaire: ''
-  - ingredient: sel_2juq3x
-    commentaire: ''
-preparation: >-
+  - uuid: u2m28w
+    name: Ail
+    originalQuantity: 4
+    originalUnit: tête·s
+    normalizedQuantity: 320
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: owsv5m
+    name: échalote
+    originalQuantity: 1.3
+    originalUnit: kg
+    normalizedQuantity: 1300
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: 92zzps
+    name: Champignon de Paris
+    originalQuantity: 30
+    originalUnit: kg
+    normalizedQuantity: 30000
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: h3c8al
+    name: huile d'olive
+    originalQuantity: 930
+    originalUnit: ml
+    normalizedQuantity: 930
+    normalizedUnit: ml
+    comment: ''
+    allergens: []
+    type: lof
+  - uuid: 8nbcjp
+    name: Fécule de maïs (Maïzena)
+    originalQuantity: 620
+    originalUnit: gr.
+    normalizedQuantity: 620
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: lof
+  - uuid: gpeob7
+    name: Lait de soja
+    originalQuantity: 6.2
+    originalUnit: l.
+    normalizedQuantity: 6200
+    normalizedUnit: ml
+    comment: ''
+    allergens:
+      - Soja
+    type: lof
+  - uuid: chfwwq
+    name: Crème soja
+    originalQuantity: 6.2
+    originalUnit: l.
+    normalizedQuantity: 6200
+    normalizedUnit: ml
+    comment: ''
+    allergens:
+      - Soja
+    type: lof
+  - uuid: 1ej217
+    name: huile de friture
+    originalQuantity: 5
+    originalUnit: l.
+    normalizedQuantity: 5000
+    normalizedUnit: ml
+    comment: ''
+    allergens: []
+    type: lof
+  - uuid: 2av6w8
+    name: Farine de blé
+    originalQuantity: 10
+    originalUnit: kg
+    normalizedQuantity: 10000
+    normalizedUnit: gr.
+    comment: ''
+    allergens:
+      - Gluten
+    type: lof
+  - uuid: ljzb7j
+    name: Eau
+    originalQuantity: 1
+    originalUnit: au goût
+    normalizedQuantity: 1
+    normalizedUnit: au goût
+    comment: ''
+    allergens: []
+    type: autres
+  - uuid: kp0srn
+    name: corn flakes
+    originalQuantity: 7
+    originalUnit: kg
+    normalizedQuantity: 7000
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: sec
+  - uuid: 2pps90
+    name: Poivre
+    originalQuantity: 1
+    originalUnit: au goût
+    normalizedQuantity: 1
+    normalizedUnit: au goût
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: mt22ff
+    name: Ciboulette
+    originalQuantity: 6
+    originalUnit: bottes
+    normalizedQuantity: 6
+    normalizedUnit: bottes
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: 2juq3x
+    name: Sel
+    originalQuantity: 1
+    originalUnit: au goût
+    normalizedQuantity: 1
+    normalizedUnit: au goût
+    comment: ''
+    allergens: []
+    type: epices
+preparation: |-
 
   Champignons de Paris panés :
-
   champignons de paris, panure( farine, eau, corn flakes, sel) huile friture
-
 
   Sauce cremeuse vegan ciboulette  :
 
-
-  creme soja, lait soja, huile olive, maizena, ail, echalottes, ciboulette, sel,
-  poivre
-
+  creme soja, lait soja, huile olive, maizena, ail, echalottes, ciboulette, sel, poivre
 
 
   Je tape la recette + précise dès que je peux

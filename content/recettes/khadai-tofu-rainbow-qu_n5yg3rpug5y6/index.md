@@ -12,62 +12,132 @@ plate: 100
 quantite_desc: ''
 check: true
 ingredients:
-  - ingredient: tofu-ferme_3ahcls
-    quantite: 2
-    unit: Kg
-    commentaire: ''
-  - ingredient: clou-de-girofle-poudre_yynfo5
-    quantite: 15
-    unit: gr.
-    commentaire: ''
-  - ingredient: curry_7jceco
-    quantite: 40
-    unit: gr.
-    commentaire: ''
-  - ingredient: curcuma-moulu_htp5ma
-    quantite: 20
-    unit: gr.
-    commentaire: ''
-  - ingredient: coriandre-en-poudre_nf05n7
-    quantite: 150
-    unit: gr.
-    commentaire: ''
-  - ingredient: cardamone-en-poudre_2n9g9t
-    quantite: 10
-    unit: gr.
-    commentaire: ''
-  - ingredient: poivre-noir-moulu_rgt7s4
-    quantite: 60
-    unit: gr.
-    commentaire: ''
-  - ingredient: fenugrec_zoxy2t
-    quantite: 60
-    unit: gr.
-    commentaire: ''
-  - ingredient: paprika_bidsmu
-    quantite: 40
-    unit: gr.
-    commentaire: ''
-  - ingredient: coulis-de-tomates_09bywc
-    quantite: 3
-    unit: Kg
-    commentaire: ''
-  - ingredient: gingembre_0d1fzw
-    quantite: 80
-    unit: gr.
-    commentaire: ''
-  - ingredient: ail_u2m28w
-    quantite: 2
-    unit: tête·s
-    commentaire: ''
-  - ingredient: oignon_rtavky
-    quantite: 7
-    unit: Kg
-    commentaire: 3 kg en gros bouts et 4 kg hachés
-  - ingredient: poivron-rouge_0zglpj
-    quantite: 6
-    unit: Kg
-    commentaire: ''
+  - uuid: 3ahcls
+    name: Tofu ferme
+    originalQuantity: 2
+    originalUnit: kg
+    normalizedQuantity: 2000
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: frais
+  - uuid: yynfo5
+    name: clou de girofle poudre
+    originalQuantity: 15
+    originalUnit: gr.
+    normalizedQuantity: 15
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: 7jceco
+    name: Curry
+    originalQuantity: 40
+    originalUnit: gr.
+    normalizedQuantity: 40
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: htp5ma
+    name: Curcuma moulu
+    originalQuantity: 20
+    originalUnit: gr.
+    normalizedQuantity: 20
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: nf05n7
+    name: Coriandre en poudre
+    originalQuantity: 150
+    originalUnit: gr.
+    normalizedQuantity: 150
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: 2n9g9t
+    name: Cardamone en poudre
+    originalQuantity: 10
+    originalUnit: gr.
+    normalizedQuantity: 10
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: rgt7s4
+    name: Poivre noir moulu
+    originalQuantity: 60
+    originalUnit: gr.
+    normalizedQuantity: 60
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: zoxy2t
+    name: Fenugrec
+    originalQuantity: 60
+    originalUnit: gr.
+    normalizedQuantity: 60
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: bidsmu
+    name: Paprika
+    originalQuantity: 40
+    originalUnit: gr.
+    normalizedQuantity: 40
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: 09bywc
+    name: Coulis de tomates
+    originalQuantity: 3
+    originalUnit: kg
+    normalizedQuantity: 3000
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: 0d1fzw
+    name: Gingembre
+    originalQuantity: 80
+    originalUnit: gr.
+    normalizedQuantity: 80
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: u2m28w
+    name: Ail
+    originalQuantity: 2
+    originalUnit: tête·s
+    normalizedQuantity: 160
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: rtavky
+    name: Oignon
+    originalQuantity: 7
+    originalUnit: kg
+    normalizedQuantity: 7000
+    normalizedUnit: gr.
+    comment: 3 kg en gros bouts et 4 kg hachés
+    allergens: []
+    type: legumes
+  - uuid: 0zglpj
+    name: Poivron (rouge)
+    originalQuantity: 6
+    originalUnit: kg
+    normalizedQuantity: 6000
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
 preparation: "### Préparation\n\nChauffer un peu d’huile dans le grand wok. Quand l’huile est chaude, mettre le cumin et l’oignon haché.\n\nQuand les oignons sont dorés, mettre les épices : le curcuma, le curry, le paprika, la poudre préalablement préparée, l’ail et le gingembre et\nmélanger.\n\nAjouter la purée de tomates et mélanger.\n\nMettre les autres oignons, les\_ poivrons coupés en morceaux\_ et bien mélanger.\n\nSaler et verser environ 1L d’eau, mélanger.\n\nCouvrir et laisser cuire à feu moyen en mélangeant et en ajoutant un peu\n d’eau de temps en temps. Les poivrons doivent être fondants.\n\nAjouter le tofu coupé en cube et grillé ou frit au préalable dans une poêle et mélanger.\n\nMettre les feuilles de fenugrec en les écrasant, en laissant de côté les brindilles.\n\nAjouter un peu d'eau, mélanger et laisser cuire 5/10 minutes. Rectifier l'assaisonemen et c’est prêt."
 preparation24h: ''
 publishDate: 2025-06-02T17:33:00.000Z

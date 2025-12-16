@@ -12,50 +12,108 @@ check: true
 checkAlwaysOk: false
 checkfor: 1
 ingredients:
-  - ingredient: amandes-effilees_xkijt9
-    quantite: 50
-    unit: gr.
-    commentaire: ''
-  - ingredient: flocons-davoine-sans-gluten_02w66c
-    quantite: 135
-    unit: gr.
-    commentaire: ''
-  - ingredient: corn-flakes_kp0srn
-    quantite: 80
-    unit: gr.
-    commentaire: ''
-  - ingredient: raisin-sec_9yf54l
-    quantite: 50
-    unit: gr.
-    commentaire: ''
-  - ingredient: farine-depeautre_861x4y
-    quantite: 80
-    unit: gr.
-    commentaire: ''
-  - ingredient: huile-de-tournesol_c70jxb
-    quantite: 100
-    unit: gr.
-    commentaire: ''
-  - ingredient: chocolat-noir-patissier-70p100_1e3zhq
-    quantite: 100
-    unit: gr.
-    commentaire: ''
-  - ingredient: sirop-derable_zkmmgt
-    quantite: 200
-    unit: gr.
-    commentaire: ''
-  - ingredient: sucre-vanille_dgwl19
-    quantite: 100
-    unit: gr.
-    commentaire: ''
-  - ingredient: sel_2juq3x
-    quantite: 1
-    unit: c. à café
-    commentaire: ''
-  - ingredient: beurre-de-cacahuetes-sale_ks3ocl
-    quantite: 100
-    unit: gr.
-    commentaire: ''
+  - uuid: xkijt9
+    name: Amandes effilées
+    originalQuantity: 50
+    originalUnit: gr.
+    normalizedQuantity: 50
+    normalizedUnit: gr.
+    comment: ''
+    allergens:
+      - Fruit à coque
+    type: sec
+  - uuid: 02w66c
+    name: Flocons d'avoine sans gluten
+    originalQuantity: 135
+    originalUnit: gr.
+    normalizedQuantity: 135
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: sec
+  - uuid: kp0srn
+    name: corn flakes
+    originalQuantity: 80
+    originalUnit: gr.
+    normalizedQuantity: 80
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: sec
+  - uuid: 9yf54l
+    name: Raisin sec
+    originalQuantity: 50
+    originalUnit: gr.
+    normalizedQuantity: 50
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: 861x4y
+    name: Farine d'épeautre
+    originalQuantity: 80
+    originalUnit: gr.
+    normalizedQuantity: 80
+    normalizedUnit: gr.
+    comment: ''
+    allergens:
+      - Gluten
+    type: lof
+  - uuid: c70jxb
+    name: huile de tournesol
+    originalQuantity: 100
+    originalUnit: gr.
+    normalizedQuantity: 100
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: lof
+  - uuid: 1e3zhq
+    name: Chocolat noir patissier 70p100
+    originalQuantity: 100
+    originalUnit: gr.
+    normalizedQuantity: 100
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: sucres
+  - uuid: zkmmgt
+    name: 'Sirop d''érable '
+    originalQuantity: 200
+    originalUnit: gr.
+    normalizedQuantity: 200
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: sucres
+  - uuid: dgwl19
+    name: Sucre vanillé
+    originalQuantity: 100
+    originalUnit: gr.
+    normalizedQuantity: 100
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: sucres
+  - uuid: 2juq3x
+    name: Sel
+    originalQuantity: 1
+    originalUnit: c. à café
+    normalizedQuantity: 5
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: ks3ocl
+    name: Beurre de cacahuètes (salé)
+    originalQuantity: 100
+    originalUnit: gr.
+    normalizedQuantity: 100
+    normalizedUnit: gr.
+    comment: ''
+    allergens:
+      - Arachides
+    type: autres
 preparation: |-
   Préchauffer le four à 180C
 

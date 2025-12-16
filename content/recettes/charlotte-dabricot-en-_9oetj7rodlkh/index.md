@@ -13,34 +13,70 @@ plate: 100
 check: true
 checkAlwaysOk: false
 ingredients:
-  - ingredient: abricot_xo0ibs
-    quantite: 12
-    unit: Kg
-    commentaire: ''
-  - ingredient: boudoir_nz97kr
-    quantite: 100
-    unit: unité
-    commentaire: ''
-  - ingredient: vanille-extrait-concentre_n818be
-    quantite: 40
-    unit: ml
-    commentaire: ''
-  - ingredient: sucre-de-canne-blond_n85gmi
-    quantite: 500
-    unit: gr.
-    commentaire: ''
-  - ingredient: sucre-de-canne-blond_n85gmi
-    quantite: 700
-    unit: gr.
-    commentaire: ''
-  - ingredient: romarin_6z655r
-    quantite: 2
-    unit: bottes
-    commentaire: ''
-  - ingredient: mascarpone_0tpvue
-    quantite: 3
-    unit: Kg
-    commentaire: ''
+  - uuid: xo0ibs
+    name: Abricot
+    originalQuantity: 12
+    originalUnit: kg
+    normalizedQuantity: 12000
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: nz97kr
+    name: boudoir
+    originalQuantity: 100
+    originalUnit: unité
+    normalizedQuantity: 100
+    normalizedUnit: unité
+    comment: ''
+    allergens: []
+    type: sucres
+  - uuid: n818be
+    name: vanille extrait concentré
+    originalQuantity: 40
+    originalUnit: ml
+    normalizedQuantity: 40
+    normalizedUnit: ml
+    comment: ''
+    allergens: []
+    type: sucres
+  - uuid: n85gmi
+    name: sucre de canne (blond)
+    originalQuantity: 500
+    originalUnit: gr.
+    normalizedQuantity: 500
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: sucres
+  - uuid: n85gmi
+    name: sucre de canne (blond)
+    originalQuantity: 700
+    originalUnit: gr.
+    normalizedQuantity: 700
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: sucres
+  - uuid: 6z655r
+    name: Romarin
+    originalQuantity: 2
+    originalUnit: bottes
+    normalizedQuantity: 2
+    normalizedUnit: bottes
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: 0tpvue
+    name: Mascarpone
+    originalQuantity: 3
+    originalUnit: kg
+    normalizedQuantity: 3000
+    normalizedUnit: gr.
+    comment: ''
+    allergens:
+      - Produit laitier
+    type: frais
 preparation: |-
   \- Lavez, dénoyautez et coupez en quartier les abricots.
 

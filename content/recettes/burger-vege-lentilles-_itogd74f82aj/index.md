@@ -12,110 +12,244 @@ plate: 100
 quantite_desc: 1 burger par personne
 check: true
 ingredients:
-  - ingredient: curcuma-moulu_htp5ma
-    quantite: 60
-    unit: gr.
-    commentaire: galettes
-  - ingredient: curry_7jceco
-    quantite: 75
-    unit: gr.
-    commentaire: galettes
-  - ingredient: cumin-moulu_he3u48
-    quantite: 75
-    unit: gr.
-    commentaire: galettes
-  - ingredient: persil-frais_hgfa4e
-    quantite: 7
-    unit: bottes
-    commentaire: galettes
-  - ingredient: persil-frais_hgfa4e
-    quantite: 8
-    unit: bottes
-    commentaire: Sauce
-  - ingredient: coriandre-fraiche_fetrpe
-    quantite: 7
-    unit: bottes
-    commentaire: galettes
-  - ingredient: sel_2juq3x
-    quantite: 40
-    unit: gr.
-    commentaire: PM galettes
-  - ingredient: sel_2juq3x
-    quantite: 50
-    unit: gr.
-    commentaire: PM Sauce
-  - ingredient: poivre-noir-moulu_rgt7s4
-    quantite: 20
-    unit: gr.
-    commentaire: PM galettes
-  - ingredient: poivre-noir-moulu_rgt7s4
-    quantite: 25
-    unit: gr.
-    commentaire: PM Sauce
-  - ingredient: fromage-blanc_b2dxf8
-    quantite: 8
-    unit: Kg
-    commentaire: Sauce
-  - ingredient: yaourt-de-soja_hlbwfd
-    quantite: 500
-    unit: gr.
-    commentaire: sauce végane
-  - ingredient: patates-douces_ndu75n
-    quantite: 6.5
-    unit: Kg
-    commentaire: galettes
-  - ingredient: oignon_rtavky
-    quantite: 1.95
-    unit: Kg
-    commentaire: galettes
-  - ingredient: ail_u2m28w
-    quantite: 13
-    unit: gousse·s
-    commentaire: galettes
-  - ingredient: tomate_ibtbnq
-    quantite: 5
-    unit: Kg
-    commentaire: Garniture
-  - ingredient: salade-verte-chene_cg3wgm
-    quantite: 6
-    unit: unité
-    commentaire: Iceberg Garniture
-  - ingredient: salade-verte-chene_cg3wgm
-    quantite: 12
-    unit: unité
-    commentaire: Accompagnement
-  - ingredient: echalote_vwdomu
-    quantite: 400
-    unit: gr.
-    commentaire: Sauce
-  - ingredient: ail_u2m28w
-    quantite: 16
-    unit: tête·s
-    commentaire: Sauce
-  - ingredient: pomme-de-terre_18dy4e
-    quantite: 25
-    unit: Kg
-    commentaire: Accompagnement Frites (agria, binjte)
-  - ingredient: huile-dolive_h3c8al
-    quantite: 210
-    unit: mL
-    commentaire: galettes
-  - ingredient: farine-de-ble_2av6w8
-    quantite: 649.1
-    unit: gr.
-    commentaire: galettes
-  - ingredient: lentilles-corail_toc8a7
-    quantite: 1.3
-    unit: Kg
-    commentaire: galettes
-  - ingredient: petits-flocons-davoine_51luzk
-    quantite: 550
-    unit: gr.
-    commentaire: galettes
-  - ingredient: noix_usibcf
-    quantite: 1
-    unit: Kg
-    commentaire: Sauce
+  - uuid: htp5ma
+    name: Curcuma moulu
+    originalQuantity: 60
+    originalUnit: gr.
+    normalizedQuantity: 60
+    normalizedUnit: gr.
+    comment: galettes
+    allergens: []
+    type: epices
+  - uuid: 7jceco
+    name: Curry
+    originalQuantity: 75
+    originalUnit: gr.
+    normalizedQuantity: 75
+    normalizedUnit: gr.
+    comment: galettes
+    allergens: []
+    type: epices
+  - uuid: he3u48
+    name: Cumin moulu
+    originalQuantity: 75
+    originalUnit: gr.
+    normalizedQuantity: 75
+    normalizedUnit: gr.
+    comment: galettes
+    allergens: []
+    type: epices
+  - uuid: hgfa4e
+    name: Persil frais
+    originalQuantity: 7
+    originalUnit: bottes
+    normalizedQuantity: 7
+    normalizedUnit: bottes
+    comment: galettes
+    allergens: []
+    type: epices
+  - uuid: hgfa4e
+    name: Persil frais
+    originalQuantity: 8
+    originalUnit: bottes
+    normalizedQuantity: 8
+    normalizedUnit: bottes
+    comment: Sauce
+    allergens: []
+    type: epices
+  - uuid: fetrpe
+    name: Coriandre fraîche
+    originalQuantity: 7
+    originalUnit: bottes
+    normalizedQuantity: 7
+    normalizedUnit: bottes
+    comment: galettes
+    allergens: []
+    type: epices
+  - uuid: 2juq3x
+    name: Sel
+    originalQuantity: 40
+    originalUnit: gr.
+    normalizedQuantity: 40
+    normalizedUnit: gr.
+    comment: PM galettes
+    allergens: []
+    type: epices
+  - uuid: 2juq3x
+    name: Sel
+    originalQuantity: 50
+    originalUnit: gr.
+    normalizedQuantity: 50
+    normalizedUnit: gr.
+    comment: PM Sauce
+    allergens: []
+    type: epices
+  - uuid: rgt7s4
+    name: Poivre noir moulu
+    originalQuantity: 20
+    originalUnit: gr.
+    normalizedQuantity: 20
+    normalizedUnit: gr.
+    comment: PM galettes
+    allergens: []
+    type: epices
+  - uuid: rgt7s4
+    name: Poivre noir moulu
+    originalQuantity: 25
+    originalUnit: gr.
+    normalizedQuantity: 25
+    normalizedUnit: gr.
+    comment: PM Sauce
+    allergens: []
+    type: epices
+  - uuid: b2dxf8
+    name: Fromage blanc
+    originalQuantity: 8
+    originalUnit: kg
+    normalizedQuantity: 8000
+    normalizedUnit: gr.
+    comment: Sauce
+    allergens:
+      - Produit laitier
+    type: frais
+  - uuid: hlbwfd
+    name: Yaourt de soja
+    originalQuantity: 500
+    originalUnit: gr.
+    normalizedQuantity: 500
+    normalizedUnit: gr.
+    comment: sauce végane
+    allergens:
+      - Soja
+    type: frais
+  - uuid: ndu75n
+    name: Patates douces
+    originalQuantity: 6.5
+    originalUnit: kg
+    normalizedQuantity: 6500
+    normalizedUnit: gr.
+    comment: galettes
+    allergens: []
+    type: legumes
+  - uuid: rtavky
+    name: Oignon
+    originalQuantity: 1.95
+    originalUnit: kg
+    normalizedQuantity: 1950
+    normalizedUnit: gr.
+    comment: galettes
+    allergens: []
+    type: legumes
+  - uuid: u2m28w
+    name: Ail
+    originalQuantity: 13
+    originalUnit: gousse·s
+    normalizedQuantity: 84.5
+    normalizedUnit: gr.
+    comment: galettes
+    allergens: []
+    type: legumes
+  - uuid: ibtbnq
+    name: Tomate
+    originalQuantity: 5
+    originalUnit: kg
+    normalizedQuantity: 5000
+    normalizedUnit: gr.
+    comment: Garniture
+    allergens: []
+    type: legumes
+  - uuid: cg3wgm
+    name: Salade verte (chêne)
+    originalQuantity: 6
+    originalUnit: unité
+    normalizedQuantity: 6
+    normalizedUnit: unité
+    comment: Iceberg Garniture
+    allergens: []
+    type: legumes
+  - uuid: cg3wgm
+    name: Salade verte (chêne)
+    originalQuantity: 12
+    originalUnit: unité
+    normalizedQuantity: 12
+    normalizedUnit: unité
+    comment: Accompagnement
+    allergens: []
+    type: legumes
+  - uuid: vwdomu
+    name: Echalote
+    originalQuantity: 400
+    originalUnit: gr.
+    normalizedQuantity: 400
+    normalizedUnit: gr.
+    comment: Sauce
+    allergens: []
+    type: legumes
+  - uuid: u2m28w
+    name: Ail
+    originalQuantity: 16
+    originalUnit: tête·s
+    normalizedQuantity: 1280
+    normalizedUnit: gr.
+    comment: Sauce
+    allergens: []
+    type: legumes
+  - uuid: 18dy4e
+    name: Pomme de terre
+    originalQuantity: 25
+    originalUnit: kg
+    normalizedQuantity: 25000
+    normalizedUnit: gr.
+    comment: Accompagnement Frites (agria, binjte)
+    allergens: []
+    type: legumes
+  - uuid: h3c8al
+    name: huile d'olive
+    originalQuantity: 210
+    originalUnit: ml
+    normalizedQuantity: 210
+    normalizedUnit: ml
+    comment: galettes
+    allergens: []
+    type: lof
+  - uuid: 2av6w8
+    name: Farine de blé
+    originalQuantity: 649.1
+    originalUnit: gr.
+    normalizedQuantity: 649.1
+    normalizedUnit: gr.
+    comment: galettes
+    allergens:
+      - Gluten
+    type: lof
+  - uuid: toc8a7
+    name: Lentilles corail
+    originalQuantity: 1.3
+    originalUnit: kg
+    normalizedQuantity: 1300
+    normalizedUnit: gr.
+    comment: galettes
+    allergens: []
+    type: sec
+  - uuid: 51luzk
+    name: Petits flocons d'avoine
+    originalQuantity: 550
+    originalUnit: gr.
+    normalizedQuantity: 550
+    normalizedUnit: gr.
+    comment: galettes
+    allergens: []
+    type: sec
+  - uuid: usibcf
+    name: Noix
+    originalQuantity: 1
+    originalUnit: kg
+    normalizedQuantity: 1000
+    normalizedUnit: gr.
+    comment: Sauce
+    allergens:
+      - Fruit à coque
+    type: sec
 preparation: |-
   **galettes patates douces lentilles:**
     - Éplucher les patates douces et les faire cuire à la vapeur pendant 20 minutes.

@@ -14,67 +14,7 @@
   "check": true,
   "checkAlwaysOk": true,
   "materiel": null,
-  "ingredients": [{
-      "uuid": "uid60d",
-      "name": "Menthe séchée",
-      "originalQuantity": 25,
-      "originalUnit": "gr.",
-      "normalizedQuantity": 25,
-      "normalizedUnit": "gr.",
-      "comment": "",
-      "allergens": [],
-      "type": "epices"
-    },{
-      "uuid": "hlbwfd",
-      "name": "Yaourt de soja",
-      "originalQuantity": 1.5,
-      "originalUnit": "kg",
-      "normalizedQuantity": 1500,
-      "normalizedUnit": "gr.",
-      "comment": "",
-      "allergens": ["Soja"],
-      "type": "frais"
-    },{
-      "uuid": "rtavky",
-      "name": "Oignon",
-      "originalQuantity": 300,
-      "originalUnit": "gr.",
-      "normalizedQuantity": 300,
-      "normalizedUnit": "gr.",
-      "comment": "",
-      "allergens": [],
-      "type": "legumes"
-    },{
-      "uuid": "h3c8al",
-      "name": "huile d'olive",
-      "originalQuantity": 40,
-      "originalUnit": "ml",
-      "normalizedQuantity": 40,
-      "normalizedUnit": "ml",
-      "comment": "",
-      "allergens": [],
-      "type": "lof"
-    },{
-      "uuid": "usibcf",
-      "name": "Noix",
-      "originalQuantity": 150,
-      "originalUnit": "gr.",
-      "normalizedQuantity": 150,
-      "normalizedUnit": "gr.",
-      "comment": "",
-      "allergens": ["Fruit à coque"],
-      "type": "sec"
-    },{
-      "uuid": "o5vfrd",
-      "name": "Semoule couscous sans gluten",
-      "originalQuantity": 700,
-      "originalUnit": "gr.",
-      "normalizedQuantity": 700,
-      "normalizedUnit": "gr.",
-      "comment": "",
-      "allergens": [],
-      "type": "sec"
-    }],
+  "ingredients": [{"allergens":[],"comment":"","name":"Menthe séchée","normalizedQuantity":25,"normalizedUnit":"gr.","originalQuantity":25,"originalUnit":"gr.","type":"epices","uuid":"uid60d"},{"allergens":["Soja"],"comment":"","name":"Yaourt de soja","normalizedQuantity":1500,"normalizedUnit":"gr.","originalQuantity":1.5,"originalUnit":"kg","type":"frais","uuid":"hlbwfd"},{"allergens":[],"comment":"","name":"Oignon","normalizedQuantity":300,"normalizedUnit":"gr.","originalQuantity":300,"originalUnit":"gr.","type":"legumes","uuid":"rtavky"},{"allergens":[],"comment":"","name":"huile d'olive","normalizedQuantity":40,"normalizedUnit":"ml","originalQuantity":40,"originalUnit":"ml","type":"lof","uuid":"h3c8al"},{"allergens":["Fruit à coque"],"comment":"","name":"Noix","normalizedQuantity":150,"normalizedUnit":"gr.","originalQuantity":150,"originalUnit":"gr.","type":"sec","uuid":"usibcf"},{"allergens":[],"comment":"","name":"Semoule couscous sans gluten","normalizedQuantity":700,"normalizedUnit":"gr.","originalQuantity":700,"originalUnit":"gr.","type":"sec","uuid":"o5vfrd"}],
   "preparation": "\n\n\n\nLe lendemain, ajouter le reste du yaourt et des noix hâchées, mélanger.\n\nAu dernier moment, décorer avec un filet d'huile d'olive, et parsemer d'un peu de noix grossièrement hâchées et de menthe séchée.",
   "prepAlt": null,
   "permissionWrite": [],

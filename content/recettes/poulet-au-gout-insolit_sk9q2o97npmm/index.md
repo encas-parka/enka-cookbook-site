@@ -14,182 +14,284 @@ plate: 100
 check: false
 checkAlwaysOk: false
 ingredients:
-  - ingredient: poulet-volaille-et-gibier_11b1e0
-    quantite: 10
-    unit: unité
-    commentaire: ''
-  - ingredient: eau_ljzb7j
-    quantite: 30
-    unit: l.
-    commentaire: bouillon
-  - ingredient: eau_ljzb7j
-    quantite: 5
-    unit: l.
-    commentaire: pour les oignons. au juger
-  - ingredient: tahin_u33083
-    quantite: 1.1
-    unit: Kg
-    commentaire: ''
-  - ingredient: tamari-sauce_bbwo4n
-    quantite: 1
-    unit: l.
-    commentaire: soupe
-  - ingredient: poivre-blanc-moulue_7lakpz
-    quantite: 30
-    unit: gr.
-    commentaire: soupe
-  - ingredient: sel_2juq3x
-    quantite: 360
-    unit: gr.
-    commentaire: soupe
-  - ingredient: cumin-moulu_he3u48
-    quantite: 50
-    unit: gr.
-    commentaire: soupe
-  - ingredient: coriandre-en-poudre_nf05n7
-    quantite: 50
-    unit: gr.
-    commentaire: soupe
-  - ingredient: citronnelle-baton_t2e14k
-    quantite: 8
-    unit: unité
-    commentaire: soupe
-  - ingredient: feuille-de-laurier_j84olg
-    quantite: 10
-    unit: unité
-    commentaire: soupe
-  - ingredient: coriandre-fraiche_fetrpe
-    quantite: 5
-    unit: bottes
-    commentaire: ''
-  - ingredient: sesame_mo4efz
-    quantite: 500
-    unit: gr.
-    commentaire: ''
-  - ingredient: piment-despelette_bdx3gq
-    quantite: 50
-    unit: gr.
-    commentaire: ''
-  - ingredient: poivre-de-sichuan_93rauy
-    quantite: 100
-    unit: gr.
-    commentaire: moulue
-  - ingredient: tamari-sauce_bbwo4n
-    quantite: 2.2
-    unit: l.
-    commentaire: ''
-  - ingredient: vinaigre-de-riz-noir_cx8yxn
-    quantite: 1.7
-    unit: l.
-    commentaire: ''
-  - ingredient: celeri-branche_78fo97
-    quantite: 600
-    unit: gr.
-    commentaire: soupe
-  - ingredient: poireau_l3fs10
-    quantite: 1
-    unit: Kg
-    commentaire: soupe
-  - ingredient: echalote_vwdomu
-    quantite: 3
-    unit: Kg
-    commentaire: soupe
-  - ingredient: gingembre-bio_nz839c
-    quantite: 300
-    unit: gr.
-    commentaire: soupe
-  - ingredient: ail_u2m28w
-    quantite: 5
-    unit: tête·s
-    commentaire: soupe
-  - ingredient: oignon_rtavky
-    quantite: 19
-    unit: Kg
-    commentaire: ''
-  - ingredient: huile-de-sesame_fazth1
-    quantite: 500
-    unit: ml
-    commentaire: ''
-  - ingredient: jus-de-citron_e4mjd1
-    quantite: 1
-    unit: l.
-    commentaire: soupe
-  - ingredient: sucre-en-poudre_u9z2he
-    quantite: 300
-    unit: gr.
-    commentaire: ''
-preparation: >-
-  **Poulet Guai wei ji** : Découper les poulets. Détacher les cuisses le long du
-  tronc. Entailler d’abord la peau puis coupe à hauteur de l’articulation. 
-  Détacher les ailes du tronc de la même manière que les cuisses. Laisser les
-  ailes entières. Détacher la poitrine des deux côtés, en coupant prudemment le
-  long du sternum. Garder les carcasses.
+  - uuid: 11b1e0
+    name: Poulet (volaille et gibier)
+    originalQuantity: 10
+    originalUnit: unité
+    normalizedQuantity: 10
+    normalizedUnit: unité
+    comment: ''
+    allergens:
+      - Viande
+    type: animaux
+  - uuid: ljzb7j
+    name: Eau
+    originalQuantity: 30
+    originalUnit: l.
+    normalizedQuantity: 30000
+    normalizedUnit: ml
+    comment: bouillon
+    allergens: []
+    type: autres
+  - uuid: ljzb7j
+    name: Eau
+    originalQuantity: 5
+    originalUnit: l.
+    normalizedQuantity: 5000
+    normalizedUnit: ml
+    comment: pour les oignons. au juger
+    allergens: []
+    type: autres
+  - uuid: u33083
+    name: Tahin
+    originalQuantity: 1.1
+    originalUnit: kg
+    normalizedQuantity: 1100
+    normalizedUnit: gr.
+    comment: ''
+    allergens:
+      - Sésame
+    type: autres
+  - uuid: bbwo4n
+    name: Tamari (sauce)
+    originalQuantity: 1
+    originalUnit: l.
+    normalizedQuantity: 1000
+    normalizedUnit: ml
+    comment: soupe
+    allergens:
+      - Soja
+    type: epices
+  - uuid: 7lakpz
+    name: poivre blanc moulue
+    originalQuantity: 30
+    originalUnit: gr.
+    normalizedQuantity: 30
+    normalizedUnit: gr.
+    comment: soupe
+    allergens: []
+    type: epices
+  - uuid: 2juq3x
+    name: Sel
+    originalQuantity: 360
+    originalUnit: gr.
+    normalizedQuantity: 360
+    normalizedUnit: gr.
+    comment: soupe
+    allergens: []
+    type: epices
+  - uuid: he3u48
+    name: Cumin moulu
+    originalQuantity: 50
+    originalUnit: gr.
+    normalizedQuantity: 50
+    normalizedUnit: gr.
+    comment: soupe
+    allergens: []
+    type: epices
+  - uuid: nf05n7
+    name: Coriandre en poudre
+    originalQuantity: 50
+    originalUnit: gr.
+    normalizedQuantity: 50
+    normalizedUnit: gr.
+    comment: soupe
+    allergens: []
+    type: epices
+  - uuid: t2e14k
+    name: Citronnelle (bâton)
+    originalQuantity: 8
+    originalUnit: unité
+    normalizedQuantity: 800
+    normalizedUnit: gr.
+    comment: soupe
+    allergens: []
+    type: epices
+  - uuid: j84olg
+    name: Feuille de laurier
+    originalQuantity: 10
+    originalUnit: unité
+    normalizedQuantity: 10
+    normalizedUnit: unité
+    comment: soupe
+    allergens: []
+    type: epices
+  - uuid: fetrpe
+    name: Coriandre fraîche
+    originalQuantity: 5
+    originalUnit: bottes
+    normalizedQuantity: 5
+    normalizedUnit: bottes
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: mo4efz
+    name: Sésame
+    originalQuantity: 500
+    originalUnit: gr.
+    normalizedQuantity: 500
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: bdx3gq
+    name: Piment d'espelette
+    originalQuantity: 50
+    originalUnit: gr.
+    normalizedQuantity: 50
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: 93rauy
+    name: Poivre de Sichuan
+    originalQuantity: 100
+    originalUnit: gr.
+    normalizedQuantity: 100
+    normalizedUnit: gr.
+    comment: moulue
+    allergens: []
+    type: epices
+  - uuid: bbwo4n
+    name: Tamari (sauce)
+    originalQuantity: 2.2
+    originalUnit: l.
+    normalizedQuantity: 2200
+    normalizedUnit: ml
+    comment: ''
+    allergens:
+      - Soja
+    type: epices
+  - uuid: cx8yxn
+    name: Vinaigre de riz noir
+    originalQuantity: 1.7
+    originalUnit: l.
+    normalizedQuantity: 1700
+    normalizedUnit: ml
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: 78fo97
+    name: Céleri branche
+    originalQuantity: 600
+    originalUnit: gr.
+    normalizedQuantity: 600
+    normalizedUnit: gr.
+    comment: soupe
+    allergens:
+      - Céleri
+    type: legumes
+  - uuid: l3fs10
+    name: Poireau
+    originalQuantity: 1
+    originalUnit: kg
+    normalizedQuantity: 1000
+    normalizedUnit: gr.
+    comment: soupe
+    allergens: []
+    type: legumes
+  - uuid: vwdomu
+    name: Echalote
+    originalQuantity: 3
+    originalUnit: kg
+    normalizedQuantity: 3000
+    normalizedUnit: gr.
+    comment: soupe
+    allergens: []
+    type: legumes
+  - uuid: nz839c
+    name: Gingembre bio
+    originalQuantity: 300
+    originalUnit: gr.
+    normalizedQuantity: 300
+    normalizedUnit: gr.
+    comment: soupe
+    allergens: []
+    type: legumes
+  - uuid: u2m28w
+    name: Ail
+    originalQuantity: 5
+    originalUnit: tête·s
+    normalizedQuantity: 400
+    normalizedUnit: gr.
+    comment: soupe
+    allergens: []
+    type: legumes
+  - uuid: rtavky
+    name: Oignon
+    originalQuantity: 19
+    originalUnit: kg
+    normalizedQuantity: 19000
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: fazth1
+    name: huile de sésame
+    originalQuantity: 500
+    originalUnit: ml
+    normalizedQuantity: 500
+    normalizedUnit: ml
+    comment: ''
+    allergens:
+      - Sésame
+    type: lof
+  - uuid: e4mjd1
+    name: Jus de citron
+    originalQuantity: 1
+    originalUnit: l.
+    normalizedQuantity: 1000
+    normalizedUnit: ml
+    comment: soupe
+    allergens: []
+    type: sucres
+  - uuid: u9z2he
+    name: Sucre en poudre
+    originalQuantity: 300
+    originalUnit: gr.
+    normalizedQuantity: 300
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: sucres
+preparation: |-
+  **Poulet Guai wei ji** : Découper les poulets. Détacher les cuisses le long du tronc. Entailler d’abord la peau puis coupe à hauteur de l’articulation.  Détacher les ailes du tronc de la même manière que les cuisses. Laisser les ailes entières. Détacher la poitrine des deux côtés, en coupant prudemment le long du sternum. Garder les carcasses.
 
+  Cuire les morceaux de poulet dans une grosse gamelle, saisir d'abord le côté peau à feu vif, pendant 5 min environ, puis les retourner.  Benner les carcasses et couvrir avec l'eau froide (quantités du bouillon). Saler.
 
-  Cuire les morceaux de poulet dans une grosse gamelle, saisir d'abord le côté
-  peau à feu vif, pendant 5 min environ, puis les retourner.  Benner les
-  carcasses et couvrir avec l'eau froide (quantités du bouillon). Saler.
+  Porter le tout à ébullition, puis baisser le feu, mettre un couvercle et laisser cuire à feu doux pendant 30min.
 
+  A la fin de cuisson, égoutter le poulet et réserver dans des gastros. Garder le bouillon dans la gamelle et y replonger les carcasses.
 
-  Porter le tout à ébullition, puis baisser le feu, mettre un couvercle et
-  laisser cuire à feu doux pendant 30min.
+  Laisser refroidir la viande. Puis effilocher en très fines lamelles avec les mains.
 
+  Eplucher les oignons, les émincer et les cuire au wok jusqu'à caramélisation. Saler.
 
-  A la fin de cuisson, égoutter le poulet et réserver dans des gastros. Garder
-  le bouillon dans la gamelle et y replonger les carcasses.
-
-
-  Laisser refroidir la viande. Puis effilocher en très fines lamelles avec les
-  mains.
-
-
-  Eplucher les oignons, les émincer et les cuire au wok jusqu'à caramélisation.
-  Saler.
-
-
-  Mélanger tous les ingrédients liquides pour la sauce, mixer jusqu'à
-  l'incorporation totale de sauce. La consistance doit être celle d'une pâte à
-  crêpe, si ce n'est pas le cas, allonger avec de l'eau. Incorporer à la fin le
-  sucre, les baies de Sichuan moulues et le piment d'Espelette.
-
+  Mélanger tous les ingrédients liquides pour la sauce, mixer jusqu'à l'incorporation totale de sauce. La consistance doit être celle d'une pâte à crêpe, si ce n'est pas le cas, allonger avec de l'eau. Incorporer à la fin le sucre, les baies de Sichuan moulues et le piment d'Espelette.
 
   Mélanger le poulet et les oignons  avec la sauce.
 
-
   Au service, décorer de coriandre ciselée et de graines de sésame.
-
 
   **Bouillon de poulet à la javanaise** :
 
-
   Allumer le feu ! Moyen.
 
-
-  Emincer finement les poireaux, échalottes et le céleri. Verser dans le
-  bouillon avec les carcasses.
-
+  Emincer finement les poireaux, échalottes et le céleri. Verser dans le bouillon avec les carcasses.
 
   Hacher le gingembre et l'ail. Verser dans la gamelle.
 
-
   Casser les bâtons de citronnelle et plonger de même.
 
-
-  Ajouter les épices, laurier,  coriandre moulue, cumin moulu, poivre blanc, sel
-  ainsi que la sauce tamari.
-
+  Ajouter les épices, laurier,  coriandre moulue, cumin moulu, poivre blanc, sel ainsi que la sauce tamari.
 
   Le citron sera verser en fin de cuisson.
 
-
   Goûter et rectifier l'assaisonnement. Laisser mijoter 45min à 1h minimum.
-
 
   Ajouter le jus de citron petit à petit en goûtant. Rectifier l'assaisonnement.
 
-
   Avant le service, ôter toutes les carcasses, citronnelle, feuilles de laurier.
-
 
   Bol de 25cl par personne.
 publishDate: 2024-06-16T22:24:00.000Z

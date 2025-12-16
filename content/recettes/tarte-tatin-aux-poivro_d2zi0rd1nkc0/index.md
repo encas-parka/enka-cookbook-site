@@ -17,67 +17,87 @@ quantite_desc: 8 parts par grand moule à tarte.
 check: false
 checkAlwaysOk: true
 ingredients:
-  - ingredient: ail_u2m28w
-    quantite: 8
-    unit: gousse·s
-    commentaire: ''
-  - ingredient: oignon_rtavky
-    quantite: 2
-    unit: Kg
-    commentaire: ''
-  - ingredient: poivron-rouge_0zglpj
-    quantite: 6
-    unit: Kg
-    commentaire: ''
-  - ingredient: pate-feuilletee-vegane-sans-gluten_n2l0fi
-    quantite: 4
-    unit: unité
-    commentaire: ''
-  - ingredient: sucre-blanc_lny16c
-    quantite: 300
-    unit: gr.
-    commentaire: ''
-  - ingredient: piment-despelette_bdx3gq
-    quantite: 8
-    unit: gr.
-    commentaire: ''
-  - ingredient: huile-dolive_h3c8al
-    quantite: 300
-    unit: ml
-    commentaire: ''
-preparation: >-
+  - uuid: u2m28w
+    name: Ail
+    originalQuantity: 8
+    originalUnit: gousse·s
+    normalizedQuantity: 52
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: rtavky
+    name: Oignon
+    originalQuantity: 2
+    originalUnit: kg
+    normalizedQuantity: 2000
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: 0zglpj
+    name: Poivron (rouge)
+    originalQuantity: 6
+    originalUnit: kg
+    normalizedQuantity: 6000
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: n2l0fi
+    name: Pâte feuilletée végane sans gluten
+    originalQuantity: 4
+    originalUnit: unité
+    normalizedQuantity: 4
+    normalizedUnit: unité
+    comment: ''
+    allergens: []
+    type: frais
+  - uuid: lny16c
+    name: sucre blanc
+    originalQuantity: 300
+    originalUnit: gr.
+    normalizedQuantity: 300
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: sucres
+  - uuid: bdx3gq
+    name: Piment d'espelette
+    originalQuantity: 8
+    originalUnit: gr.
+    normalizedQuantity: 8
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: h3c8al
+    name: huile d'olive
+    originalQuantity: 300
+    originalUnit: ml
+    normalizedQuantity: 300
+    normalizedUnit: ml
+    comment: ''
+    allergens: []
+    type: lof
+preparation: |-
   Laver les légumes. Retirer des poivrons les membranes
-
   blanches et les graines à l’intérieur. Les tailler en gros
-
   morceaux.
-
 
   Éplucher l’oignon et émincer finement. Hacher l'ail.
 
-
   Faire suer les poivrons et les
-
-  oignons à l’huile d’olive. Saler. Ajouter la moitié du sucre et laisser cuire
-  le
-
+  oignons à l’huile d’olive. Saler. Ajouter la moitié du sucre et laisser cuire le
   tout pour faire caraméliser cette garniture. Ajouter l'ail.
-
-  Sel et piment d’Espelette. Sulfuriser les plats à tarte, verser un peu de
-  sucre au fond et disposer les légumes.
-
+  Sel et piment d’Espelette. Sulfuriser les plats à tarte, verser un peu de sucre au fond et disposer les légumes.
 
   Préchauffer le four à 200 °C (th. 6). Dérouler les rouleaux de pâte
-
   feuilletée et piquer avec une fourchette. Disposer ensuite sur les
-
   poivrons. Rabattre les bords si besoin. Enfournez pendant une trentaine
-
   de minutes jusqu’à l’obtention d’une pâte colorée et cuite.
 
-
-  Sortir les tartes du four, démouler en la retournant dans une assiette. Un
-  délice.
+  Sortir les tartes du four, démouler en la retournant dans une assiette. Un délice.
 publishDate: 2025-04-25T15:39:00.000Z
 serveHot: false
 uuid: d2zi0rd1nkc0

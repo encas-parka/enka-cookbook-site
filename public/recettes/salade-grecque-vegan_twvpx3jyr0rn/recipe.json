@@ -14,67 +14,7 @@
   "check": true,
   "checkAlwaysOk": false,
   "materiel": ["Grand Saladier"],
-  "ingredients": [{
-      "uuid": "fkftyb",
-      "name": "Origan",
-      "originalQuantity": 40,
-      "originalUnit": "gr.",
-      "normalizedQuantity": 40,
-      "normalizedUnit": "gr.",
-      "comment": "",
-      "allergens": [],
-      "type": "epices"
-    },{
-      "uuid": "9p3n36",
-      "name": "Olives noires à la grecque",
-      "originalQuantity": 1,
-      "originalUnit": "kg",
-      "normalizedQuantity": 1000,
-      "normalizedUnit": "gr.",
-      "comment": "",
-      "allergens": [],
-      "type": "legumes"
-    },{
-      "uuid": "doxujz",
-      "name": "Oignon rouge",
-      "originalQuantity": 4.5,
-      "originalUnit": "kg",
-      "normalizedQuantity": 4500,
-      "normalizedUnit": "gr.",
-      "comment": "",
-      "allergens": [],
-      "type": "legumes"
-    },{
-      "uuid": "ibtbnq",
-      "name": "Tomate",
-      "originalQuantity": 10,
-      "originalUnit": "kg",
-      "normalizedQuantity": 10000,
-      "normalizedUnit": "gr.",
-      "comment": "",
-      "allergens": [],
-      "type": "legumes"
-    },{
-      "uuid": "l5p1a5",
-      "name": "Concombre",
-      "originalQuantity": 16,
-      "originalUnit": "kg",
-      "normalizedQuantity": 16000,
-      "normalizedUnit": "gr.",
-      "comment": "",
-      "allergens": [],
-      "type": "legumes"
-    },{
-      "uuid": "h3c8al",
-      "name": "huile d'olive",
-      "originalQuantity": 3,
-      "originalUnit": "l.",
-      "normalizedQuantity": 3000,
-      "normalizedUnit": "ml",
-      "comment": "",
-      "allergens": [],
-      "type": "lof"
-    }],
+  "ingredients": [{"allergens":[],"comment":"","name":"Origan","normalizedQuantity":40,"normalizedUnit":"gr.","originalQuantity":40,"originalUnit":"gr.","type":"epices","uuid":"fkftyb"},{"allergens":[],"comment":"","name":"Olives noires à la grecque","normalizedQuantity":1000,"normalizedUnit":"gr.","originalQuantity":1,"originalUnit":"kg","type":"legumes","uuid":"9p3n36"},{"allergens":[],"comment":"","name":"Oignon rouge","normalizedQuantity":4500,"normalizedUnit":"gr.","originalQuantity":4.5,"originalUnit":"kg","type":"legumes","uuid":"doxujz"},{"allergens":[],"comment":"","name":"Tomate","normalizedQuantity":10000,"normalizedUnit":"gr.","originalQuantity":10,"originalUnit":"kg","type":"legumes","uuid":"ibtbnq"},{"allergens":[],"comment":"","name":"Concombre","normalizedQuantity":16000,"normalizedUnit":"gr.","originalQuantity":16,"originalUnit":"kg","type":"legumes","uuid":"l5p1a5"},{"allergens":[],"comment":"","name":"huile d'olive","normalizedQuantity":3000,"normalizedUnit":"ml","originalQuantity":3,"originalUnit":"l.","type":"lof","uuid":"h3c8al"}],
   "preparation": "Coupez, mélanger.",
   "prepAlt": null,
   "permissionWrite": [],

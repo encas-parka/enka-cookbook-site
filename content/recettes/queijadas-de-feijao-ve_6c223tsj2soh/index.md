@@ -7,92 +7,118 @@ checkAlwaysOk: true
 cuisson: true
 draft: false
 ingredients:
-  - ingredient: agar-agar_ruhtax
-    quantite: 1
-    unit: gr.
-    commentaire: ''
-  - ingredient: pate-feuillete-sans-gluten-et-vegan_40wkon
-    quantite: 2
-    unit: unité
-    commentaire: ''
-  - ingredient: cannelle_sk1gbb
-    quantite: 1
-    unit: c. à café
-    commentaire: ''
-  - ingredient: margarine-vegetale-special-cuisson_8j3hna
-    quantite: 35
-    unit: gr.
-    commentaire: ''
-  - ingredient: citron-non-traite_tobtbt
-    quantite: 1
-    unit: unité
-    commentaire: zeste
-  - ingredient: fecule-de-mais-maizena_8nbcjp
-    quantite: 35
-    unit: gr.
-    commentaire: ''
-  - ingredient: creme-soja_chfwwq
-    quantite: 40
-    unit: ml
-    commentaire: ''
-  - ingredient: lait-de-soja_gpeob7
-    quantite: 375
-    unit: ml
-    commentaire: ''
-  - ingredient: haricots-blancs-en-conserve_g6ngse
-    quantite: 200
-    unit: gr.
-    commentaire: ''
-  - ingredient: sucre-en-poudre_u9z2he
-    quantite: 85
-    unit: gr.
-    commentaire: ''
+  - uuid: ruhtax
+    name: Agar-agar
+    originalQuantity: 1
+    originalUnit: gr.
+    normalizedQuantity: 1
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: autres
+  - uuid: 40wkon
+    name: Pate feuilleté sans gluten et vegan
+    originalQuantity: 2
+    originalUnit: unité
+    normalizedQuantity: 2
+    normalizedUnit: unité
+    comment: ''
+    allergens: []
+    type: frais
+  - uuid: sk1gbb
+    name: Cannelle
+    originalQuantity: 1
+    originalUnit: c. à café
+    normalizedQuantity: 5
+    normalizedUnit: ml
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: 8j3hna
+    name: Margarine végétale spécial cuisson
+    originalQuantity: 35
+    originalUnit: gr.
+    normalizedQuantity: 35
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: frais
+  - uuid: tobtbt
+    name: Citron non traité
+    originalQuantity: 1
+    originalUnit: unité
+    normalizedQuantity: 100
+    normalizedUnit: gr.
+    comment: zeste
+    allergens: []
+    type: legumes
+  - uuid: 8nbcjp
+    name: Fécule de maïs (Maïzena)
+    originalQuantity: 35
+    originalUnit: gr.
+    normalizedQuantity: 35
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: lof
+  - uuid: chfwwq
+    name: Crème soja
+    originalQuantity: 40
+    originalUnit: ml
+    normalizedQuantity: 40
+    normalizedUnit: ml
+    comment: ''
+    allergens:
+      - Soja
+    type: lof
+  - uuid: gpeob7
+    name: Lait de soja
+    originalQuantity: 375
+    originalUnit: ml
+    normalizedQuantity: 375
+    normalizedUnit: ml
+    comment: ''
+    allergens:
+      - Soja
+    type: lof
+  - uuid: g6ngse
+    name: Haricots blancs en conserve
+    originalQuantity: 200
+    originalUnit: gr.
+    normalizedQuantity: 200
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: sec
+  - uuid: u9z2he
+    name: Sucre en poudre
+    originalQuantity: 85
+    originalUnit: gr.
+    normalizedQuantity: 85
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: sucres
 materiel:
   - Moule à muffin
 plate: 20
-preparation: >-
+preparation: |-
   **Appareil à flan :**
 
-
-  * Dans un petit récipient, mélanger l’agar agar avec une petit quantité d’eau
-  (10/15ml).
-
-  * Dans une casserole, verser le lait de soja, la crème de soja, la préparation
-  eau/agar agar, le zeste de citron. Porter le tout à ébullition.
-
-  * Dans un grand saladier, mélanger la maïzena, le sucre et la cannelle puis
-  réserver.
-
+  * Dans un petit récipient, mélanger l’agar agar avec une petit quantité d’eau (10/15ml).
+  * Dans une casserole, verser le lait de soja, la crème de soja, la préparation eau/agar agar, le zeste de citron. Porter le tout à ébullition.
+  * Dans un grand saladier, mélanger la maïzena, le sucre et la cannelle puis réserver.
   * Lorsque le lait arrive à ébullition, retirer la casserole du feu.
-
-  * Verser le lait en deux fois (⅓ puis le reste) sur le mélange de maïzena tout
-  en fouettant vivement.
-
-  * Puis reverser le tout dans la casserole et cuire l’appareil ⅔ minutes sur
-  feu moyen en fouettant énergiquement sans arrêt. Dès que l’appareil épaissit,
-  retirer la casserole du feu et fouetter l’appareil jusqu’à ce qu’il soit lisse
-  et homogène.
-
+  * Verser le lait en deux fois (⅓ puis le reste) sur le mélange de maïzena tout en fouettant vivement.
+  * Puis reverser le tout dans la casserole et cuire l’appareil ⅔ minutes sur feu moyen en fouettant énergiquement sans arrêt. Dès que l’appareil épaissit, retirer la casserole du feu et fouetter l’appareil jusqu’à ce qu’il soit lisse et homogène.
   * Mixer avec les haricots blancs.
-
 
   **Montage :**
 
-
-  * Rouler les pâtes feuilletées véganes sans gluten sur elles-mêmes pour faire
-  un rouleau. Faire des tronçons de 2 cm d’épaisseur. Placez chaque tranche dans
-  le moule.. Bien appuyer avec le pouce de manière à étirer la pâte vers le haut
-  du moule.
-
+  * Rouler les pâtes feuilletées véganes sans gluten sur elles-mêmes pour faire un rouleau. Faire des tronçons de 2 cm d’épaisseur. Placez chaque tranche dans le moule.. Bien appuyer avec le pouce de manière à étirer la pâte vers le haut du moule.
   * Remplir les moules avec la crème obtenue.
-
-  * Enfourner et cuire pendant 35min (la durée varie selon les fours) le flan
-  est prêt lorsqu’il est très peu tremblotant, bien levé et que la surface est
-  bien coloré (il va beaucoup gonfler durant la cuisson mais pas de panique
-  c’est normal, il retombera à la sortie du four).
-
-  * Lorsque les gâteaux sont cuits, les retirer, démouler et saupoudrer de sucre
-  glace.
+  * Enfourner et cuire pendant 35min (la durée varie selon les fours) le flan est prêt lorsqu’il est très peu tremblotant, bien levé et que la surface est bien coloré (il va beaucoup gonfler durant la cuisson mais pas de panique c’est normal, il retombera à la sortie du four).
+  * Lorsque les gâteaux sont cuits, les retirer, démouler et saupoudrer de sucre glace.
 publishDate: 2024-05-23T22:19:00.000Z
 quantite_desc: 1 petit flan par personne
 regime:

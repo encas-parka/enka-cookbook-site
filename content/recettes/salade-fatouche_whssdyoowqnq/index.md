@@ -14,50 +14,105 @@ plate: 100
 quantite_desc: ''
 check: true
 ingredients:
-  - ingredient: graine-de-tournesol_4vxqlr
-    quantite: 400
-    unit: gr.
-    commentaire: ''
-  - ingredient: graines-de-courge_qzrsoa
-    quantite: 400
-    unit: gr.
-    commentaire: ''
-  - ingredient: huile-dolive_h3c8al
-    quantite: 1
-    unit: l.
-    commentaire: ''
-  - ingredient: laitue-romaine_l0yikk
-    quantite: 10
-    unit: unité
-    commentaire: ''
-  - ingredient: menthe-fraiche_y16lzq
-    quantite: 6
-    unit: bottes
-    commentaire: ''
-  - ingredient: persil-frais_hgfa4e
-    quantite: 6
-    unit: bottes
-    commentaire: ''
-  - ingredient: ail_u2m28w
-    quantite: 2
-    unit: tête·s
-    commentaire: ''
-  - ingredient: oignon_rtavky
-    quantite: 2
-    unit: Kg
-    commentaire: ''
-  - ingredient: radis_4il0xo
-    quantite: 2
-    unit: Kg
-    commentaire: ''
-  - ingredient: concombre_l5p1a5
-    quantite: 20
-    unit: unité
-    commentaire: ''
-  - ingredient: tomate_ibtbnq
-    quantite: 8
-    unit: Kg
-    commentaire: ''
+  - uuid: 4vxqlr
+    name: Graine de tournesol
+    originalQuantity: 400
+    originalUnit: gr.
+    normalizedQuantity: 400
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: sec
+  - uuid: qzrsoa
+    name: Graines de courge
+    originalQuantity: 400
+    originalUnit: gr.
+    normalizedQuantity: 400
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: sec
+  - uuid: h3c8al
+    name: huile d'olive
+    originalQuantity: 1
+    originalUnit: l.
+    normalizedQuantity: 1000
+    normalizedUnit: ml
+    comment: ''
+    allergens: []
+    type: lof
+  - uuid: l0yikk
+    name: Laitue romaine
+    originalQuantity: 10
+    originalUnit: unité
+    normalizedQuantity: 10
+    normalizedUnit: unité
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: y16lzq
+    name: Menthe fraîche
+    originalQuantity: 6
+    originalUnit: bottes
+    normalizedQuantity: 6
+    normalizedUnit: bottes
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: hgfa4e
+    name: Persil frais
+    originalQuantity: 6
+    originalUnit: bottes
+    normalizedQuantity: 6
+    normalizedUnit: bottes
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: u2m28w
+    name: Ail
+    originalQuantity: 2
+    originalUnit: tête·s
+    normalizedQuantity: 160
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: rtavky
+    name: Oignon
+    originalQuantity: 2
+    originalUnit: kg
+    normalizedQuantity: 2000
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: 4il0xo
+    name: Radis
+    originalQuantity: 2
+    originalUnit: kg
+    normalizedQuantity: 2000
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: l5p1a5
+    name: Concombre
+    originalQuantity: 20
+    originalUnit: unité
+    normalizedQuantity: 4000
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: ibtbnq
+    name: Tomate
+    originalQuantity: 8
+    originalUnit: kg
+    normalizedQuantity: 8000
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
 materiel: []
 preparation: |-
   >Couper les tomates et concombres en dés

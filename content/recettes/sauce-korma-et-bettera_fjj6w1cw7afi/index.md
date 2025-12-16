@@ -12,50 +12,107 @@ plate: 130
 quantite_desc: ''
 check: true
 ingredients:
-  - ingredient: betterave-cuite_i7psri
-    quantite: 1
-    unit: Kg
-    commentaire: ''
-  - ingredient: oignon_rtavky
-    quantite: 6
-    unit: Kg
-    commentaire: ''
-  - ingredient: creme-soja_chfwwq
-    quantite: 1
-    unit: l.
-    commentaire: ''
-  - ingredient: lait-de-coco_xdy736
-    quantite: 2
-    unit: l.
-    commentaire: ''
-  - ingredient: huile-de-coco_6bm4lq
-    quantite: 600
-    unit: ml
-    commentaire: ''
-  - ingredient: yaourt-de-soja_hlbwfd
-    quantite: 2
-    unit: Kg
-    commentaire: ''
-  - ingredient: puree-de-noix-de-cajou_mmvfvp
-    quantite: 300
-    unit: gr.
-    commentaire: ''
-  - ingredient: curry-feuilles_xqmcoe
-    quantite: 120
-    unit: unité
-    commentaire: ''
-  - ingredient: piment-vert_dr1bbg
-    quantite: 6
-    unit: unité
-    commentaire: ''
-  - ingredient: poivre-en-graine_2dirai
-    quantite: 80
-    unit: unité
-    commentaire: ''
-  - ingredient: cardamome_azpv5r
-    quantite: 40
-    unit: unité
-    commentaire: gousses
+  - uuid: i7psri
+    name: Betterave cuite
+    originalQuantity: 1
+    originalUnit: kg
+    normalizedQuantity: 1000
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: rtavky
+    name: Oignon
+    originalQuantity: 6
+    originalUnit: kg
+    normalizedQuantity: 6000
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: chfwwq
+    name: Crème soja
+    originalQuantity: 1
+    originalUnit: l.
+    normalizedQuantity: 1000
+    normalizedUnit: ml
+    comment: ''
+    allergens:
+      - Soja
+    type: lof
+  - uuid: xdy736
+    name: lait de coco
+    originalQuantity: 2
+    originalUnit: l.
+    normalizedQuantity: 2000
+    normalizedUnit: ml
+    comment: ''
+    allergens: []
+    type: lof
+  - uuid: 6bm4lq
+    name: huile de coco
+    originalQuantity: 600
+    originalUnit: ml
+    normalizedQuantity: 600
+    normalizedUnit: ml
+    comment: ''
+    allergens: []
+    type: lof
+  - uuid: hlbwfd
+    name: Yaourt de soja
+    originalQuantity: 2
+    originalUnit: kg
+    normalizedQuantity: 2000
+    normalizedUnit: gr.
+    comment: ''
+    allergens:
+      - Soja
+    type: frais
+  - uuid: mmvfvp
+    name: purée de noix de cajou
+    originalQuantity: 300
+    originalUnit: gr.
+    normalizedQuantity: 300
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: autres
+  - uuid: xqmcoe
+    name: curry feuilles
+    originalQuantity: 120
+    originalUnit: unité
+    normalizedQuantity: 120
+    normalizedUnit: unité
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: dr1bbg
+    name: Piment vert
+    originalQuantity: 6
+    originalUnit: unité
+    normalizedQuantity: 6
+    normalizedUnit: unité
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: 2dirai
+    name: poivre en graine
+    originalQuantity: 80
+    originalUnit: unité
+    normalizedQuantity: 80
+    normalizedUnit: unité
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: azpv5r
+    name: Cardamome
+    originalQuantity: 40
+    originalUnit: unité
+    normalizedQuantity: 40
+    normalizedUnit: unité
+    comment: gousses
+    allergens: []
+    type: epices
 preparation: "Faire une pâte d'oignon en les hachant finement. Puis les faire sauter à la poêle et réduire en purée.\n\nFaire\n chauffer de l'huile dans une casserole, ajouter les gousses de\ncardamome, ajouter la pâte d'oignon, le piment vert haché, les feuilles\nde curry et continuer à faire sauter pendant 3 à 5 minutes.\n\nFouetter\n ensemble le lait de coco, la crème, le yaourt, la pâte de noix de cajou\n et le garam masala, puis les ajouter dans la poêle avec du sel au goût\net laisser mijoter à découvert pendant 10 à 12 minutes jusqu'à\népaississement.\_\n\nAjouter la purée de betterave.\n\nAjouter de l'eau si nécessaire, pour assouplir la sauce.\n\n\_Ajouter la poudre de macis de cardamome et rectifiez le sel si nécessaire.\_\n\nServir chaud.\n\n\\"
 publishDate: 2025-06-02T17:53:00.000Z
 checkAlwaysOk: false

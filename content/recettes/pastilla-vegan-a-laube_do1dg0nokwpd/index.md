@@ -7,76 +7,148 @@ checkAlwaysOk: false
 cuisson: true
 draft: false
 ingredients:
-  - ingredient: eau_ljzb7j
-    quantite: 200
-    unit: ml
-    commentaire: ''
-  - ingredient: cannelle_sk1gbb
-    quantite: 1
-    unit: pincées
-    commentaire: sirop
-  - ingredient: cannelle_sk1gbb
-    quantite: 1
-    unit: pincées
-    commentaire: ''
-  - ingredient: pate-feuilletee-vegane-sans-gluten_n2l0fi
-    quantite: 4
-    unit: unité
-    commentaire: ''
-  - ingredient: citron-jaune_5cg0yu
-    quantite: 2
-    unit: unité
-    commentaire: sirop
-  - ingredient: figues-seches_mr7sd5
-    quantite: 400
-    unit: gr.
-    commentaire: ''
-  - ingredient: oignon_rtavky
-    quantite: 500
-    unit: gr.
-    commentaire: ''
-  - ingredient: ail_u2m28w
-    quantite: 3
-    unit: gousse·s
-    commentaire: ''
-  - ingredient: aubergine_7sk3a5
-    quantite: 1.5
-    unit: Kg
-    commentaire: ''
-  - ingredient: huile-dargan_1jfxgt
-    quantite: 100
-    unit: ml
-    commentaire: ''
-  - ingredient: huile-vegetale_atccqu
-    quantite: 200
-    unit: ml
-    commentaire: ''
-  - ingredient: amande_fuhtcw
-    quantite: 160
-    unit: gr.
-    commentaire: ''
-  - ingredient: pignon-de-pin_82a9ot
-    quantite: 100
-    unit: gr.
-    commentaire: ''
-  - ingredient: sucre-glace_phv1to
-    quantite: 30
-    unit: gr.
-    commentaire: déco
-  - ingredient: sucre-en-poudre_u9z2he
-    quantite: 100
-    unit: gr.
-    commentaire: sirop
+  - uuid: ljzb7j
+    name: Eau
+    originalQuantity: 200
+    originalUnit: ml
+    normalizedQuantity: 200
+    normalizedUnit: ml
+    comment: ''
+    allergens: []
+    type: autres
+  - uuid: sk1gbb
+    name: Cannelle
+    originalQuantity: 1
+    originalUnit: pincées
+    normalizedQuantity: 0.4
+    normalizedUnit: gr.
+    comment: sirop
+    allergens: []
+    type: epices
+  - uuid: sk1gbb
+    name: Cannelle
+    originalQuantity: 1
+    originalUnit: pincées
+    normalizedQuantity: 0.4
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: n2l0fi
+    name: Pâte feuilletée végane sans gluten
+    originalQuantity: 4
+    originalUnit: unité
+    normalizedQuantity: 4
+    normalizedUnit: unité
+    comment: ''
+    allergens: []
+    type: frais
+  - uuid: 5cg0yu
+    name: Citron jaune
+    originalQuantity: 2
+    originalUnit: unité
+    normalizedQuantity: 200
+    normalizedUnit: gr.
+    comment: sirop
+    allergens: []
+    type: legumes
+  - uuid: mr7sd5
+    name: Figues Sèches
+    originalQuantity: 400
+    originalUnit: gr.
+    normalizedQuantity: 400
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: rtavky
+    name: Oignon
+    originalQuantity: 500
+    originalUnit: gr.
+    normalizedQuantity: 500
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: u2m28w
+    name: Ail
+    originalQuantity: 3
+    originalUnit: gousse·s
+    normalizedQuantity: 19.5
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: 7sk3a5
+    name: Aubergine
+    originalQuantity: 1.5
+    originalUnit: kg
+    normalizedQuantity: 1500
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: 1jfxgt
+    name: Huile d'argan
+    originalQuantity: 100
+    originalUnit: ml
+    normalizedQuantity: 100
+    normalizedUnit: ml
+    comment: ''
+    allergens: []
+    type: lof
+  - uuid: atccqu
+    name: Huile végétale
+    originalQuantity: 200
+    originalUnit: ml
+    normalizedQuantity: 200
+    normalizedUnit: ml
+    comment: ''
+    allergens: []
+    type: lof
+  - uuid: fuhtcw
+    name: Amande
+    originalQuantity: 160
+    originalUnit: gr.
+    normalizedQuantity: 160
+    normalizedUnit: gr.
+    comment: ''
+    allergens:
+      - Fruit à coque
+    type: sec
+  - uuid: 82a9ot
+    name: Pignon de pin
+    originalQuantity: 100
+    originalUnit: gr.
+    normalizedQuantity: 100
+    normalizedUnit: gr.
+    comment: ''
+    allergens:
+      - Fruit à coque
+    type: sec
+  - uuid: phv1to
+    name: Sucre glace
+    originalQuantity: 30
+    originalUnit: gr.
+    normalizedQuantity: 30
+    normalizedUnit: gr.
+    comment: déco
+    allergens: []
+    type: sucres
+  - uuid: u9z2he
+    name: Sucre en poudre
+    originalQuantity: 100
+    originalUnit: gr.
+    normalizedQuantity: 100
+    normalizedUnit: gr.
+    comment: sirop
+    allergens: []
+    type: sucres
 plate: 16
-preparation: >-
-  La farce est exactement la même que dans la pastilla végane à l'aubergine.
-  Donc cuisiner les deux farces dans le même récipient.
+preparation: |-
+  La farce est exactement la même que dans la pastilla végane à l'aubergine. Donc cuisiner les deux farces dans le même récipient.
 
-
-  Mélanger le tout ensemble et monter les tourtes avec une pâte feuilletée en
-  dessous et une au dessus. Et bien colmater. Percer une petite cheminée au
-  centre de la tourte avant cuisson.
-
+  Mélanger le tout ensemble et monter les tourtes avec une pâte feuilletée en dessous et une au dessus. Et bien colmater. Percer une petite cheminée au centre de la tourte avant cuisson.
 
   Cuire selon les instructions de l'emballage.
 publishDate: 2024-06-17T22:22:00.000Z

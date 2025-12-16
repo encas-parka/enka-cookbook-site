@@ -15,44 +15,76 @@ plate: 90
 check: true
 checkAlwaysOk: false
 ingredients:
-  - ingredient: citron-jaune_5cg0yu
-    quantite: 15
-    unit: unité
-    commentaire: ''
-  - ingredient: courgette_9zozfk
-    quantite: 12
-    unit: Kg
-    commentaire: ''
-  - ingredient: huile-dolive_h3c8al
-    quantite: 380
-    unit: ml
-    commentaire: ''
-  - ingredient: curry_7jceco
-    quantite: 225
-    unit: gr.
-    commentaire: ''
-  - ingredient: poivre_2pps90
-    unit: null
-    commentaire: ''
-  - ingredient: sel_2juq3x
-    quantite: ''
-    unit: null
-    commentaire: ''
-  - ingredient: tamari-sauce_bbwo4n
-    quantite: 380
-    unit: ml
-    commentaire: ''
+  - uuid: 5cg0yu
+    name: Citron jaune
+    originalQuantity: 15
+    originalUnit: unité
+    normalizedQuantity: 1500
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: 9zozfk
+    name: Courgette
+    originalQuantity: 12
+    originalUnit: kg
+    normalizedQuantity: 12000
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: h3c8al
+    name: huile d'olive
+    originalQuantity: 380
+    originalUnit: ml
+    normalizedQuantity: 380
+    normalizedUnit: ml
+    comment: ''
+    allergens: []
+    type: lof
+  - uuid: 7jceco
+    name: Curry
+    originalQuantity: 225
+    originalUnit: gr.
+    normalizedQuantity: 225
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: 2pps90
+    name: Poivre
+    originalQuantity: 1
+    originalUnit: au goût
+    normalizedQuantity: 1
+    normalizedUnit: au goût
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: 2juq3x
+    name: Sel
+    originalQuantity: 1
+    originalUnit: au goût
+    normalizedQuantity: 1
+    normalizedUnit: au goût
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: bbwo4n
+    name: Tamari (sauce)
+    originalQuantity: 380
+    originalUnit: ml
+    normalizedQuantity: 380
+    normalizedUnit: ml
+    comment: ''
+    allergens:
+      - Soja
+    type: epices
 preparation: '* Le lendemain rectifier l’assaisonnement.'
-preparation24h: >-
+preparation24h: |-
   ##### Préparation à faire la veille
 
-
-  * Laver les courgettes, les couper soit en julienne soit en macédoine ou
-  émincer avec une mandoline ou au robot, au choix mais un truc pas trop gros
-  quoi.
-
-  * Faire légèrement torréfier le curry. Prélever les zestes des citrons, les
-  presser. Puis tout mélanger.
+  * Laver les courgettes, les couper soit en julienne soit en macédoine ou émincer avec une mandoline ou au robot, au choix mais un truc pas trop gros quoi.
+  * Faire légèrement torréfier le curry. Prélever les zestes des citrons, les presser. Puis tout mélanger.
 publishDate: 2024-05-19T10:40:00.000Z
 serveHot: false
 uuid: dkkwwc5hbgga

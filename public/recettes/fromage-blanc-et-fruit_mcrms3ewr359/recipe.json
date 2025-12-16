@@ -14,47 +14,7 @@
   "check": true,
   "checkAlwaysOk": false,
   "materiel": null,
-  "ingredients": [{
-      "uuid": "hlbwfd",
-      "name": "Yaourt de soja",
-      "originalQuantity": 1.2,
-      "originalUnit": "kg",
-      "normalizedQuantity": 1200,
-      "normalizedUnit": "gr.",
-      "comment": "",
-      "allergens": ["Soja"],
-      "type": "frais"
-    },{
-      "uuid": "b2dxf8",
-      "name": "Fromage blanc",
-      "originalQuantity": 11,
-      "originalUnit": "kg",
-      "normalizedQuantity": 11000,
-      "normalizedUnit": "gr.",
-      "comment": "",
-      "allergens": ["Produit laitier"],
-      "type": "frais"
-    },{
-      "uuid": "n85gmi",
-      "name": "sucre de canne (blond)",
-      "originalQuantity": 1,
-      "originalUnit": "kg",
-      "normalizedQuantity": 1000,
-      "normalizedUnit": "gr.",
-      "comment": "",
-      "allergens": [],
-      "type": "sucres"
-    },{
-      "uuid": "rqmasf",
-      "name": "Fruits rouges",
-      "originalQuantity": 3,
-      "originalUnit": "kg",
-      "normalizedQuantity": 3000,
-      "normalizedUnit": "gr.",
-      "comment": "",
-      "allergens": [],
-      "type": "legumes"
-    }],
+  "ingredients": [{"allergens":["Soja"],"comment":"","name":"Yaourt de soja","normalizedQuantity":1200,"normalizedUnit":"gr.","originalQuantity":1.2,"originalUnit":"kg","type":"frais","uuid":"hlbwfd"},{"allergens":["Produit laitier"],"comment":"","name":"Fromage blanc","normalizedQuantity":11000,"normalizedUnit":"gr.","originalQuantity":11,"originalUnit":"kg","type":"frais","uuid":"b2dxf8"},{"allergens":[],"comment":"","name":"sucre de canne (blond)","normalizedQuantity":1000,"normalizedUnit":"gr.","originalQuantity":1,"originalUnit":"kg","type":"sucres","uuid":"n85gmi"},{"allergens":[],"comment":"","name":"Fruits rouges","normalizedQuantity":3000,"normalizedUnit":"gr.","originalQuantity":3,"originalUnit":"kg","type":"legumes","uuid":"rqmasf"}],
   "preparation": "Ne pas oublié la version végane !!",
   "prepAlt": null,
   "permissionWrite": [],

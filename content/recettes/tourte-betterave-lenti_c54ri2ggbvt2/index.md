@@ -6,82 +6,115 @@ checkAlwaysOk: false
 cuisson: true
 draft: false
 ingredients:
-  - ingredient: pate-feuillete-sans-gluten-et-vegan_40wkon
-    quantite: 6
-    unit: unité
-    commentaire: ''
-  - ingredient: poivre_2pps90
-    commentaire: ''
-  - ingredient: sel_2juq3x
-    commentaire: ''
-  - ingredient: raifort-en-poudre_yi8qce
-    quantite: 3
-    unit: gr.
-    commentaire: ''
-  - ingredient: feuille-de-laurier_j84olg
-    quantite: 1
-    unit: unité
-    commentaire: ''
-  - ingredient: estragon-seche_cgk776
-    quantite: 3
-    unit: gr.
-    commentaire: ''
-  - ingredient: oignon_rtavky
-    quantite: 2
-    unit: Kg
-    commentaire: ''
-  - ingredient: betterave-cuite_i7psri
-    quantite: 1.2
-    unit: Kg
-    commentaire: ''
-  - ingredient: lentilles-vertes_ogtomg
-    quantite: 300
-    unit: gr.
-    commentaire: ''
+  - uuid: 40wkon
+    name: Pate feuilleté sans gluten et vegan
+    originalQuantity: 6
+    originalUnit: unité
+    normalizedQuantity: 6
+    normalizedUnit: unité
+    comment: ''
+    allergens: []
+    type: frais
+  - uuid: 2pps90
+    name: Poivre
+    originalQuantity: 1
+    originalUnit: au goût
+    normalizedQuantity: 1
+    normalizedUnit: au goût
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: 2juq3x
+    name: Sel
+    originalQuantity: 1
+    originalUnit: au goût
+    normalizedQuantity: 1
+    normalizedUnit: au goût
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: yi8qce
+    name: Raifort en poudre
+    originalQuantity: 3
+    originalUnit: gr.
+    normalizedQuantity: 3
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: j84olg
+    name: Feuille de laurier
+    originalQuantity: 1
+    originalUnit: unité
+    normalizedQuantity: 1
+    normalizedUnit: unité
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: cgk776
+    name: Estragon séché
+    originalQuantity: 3
+    originalUnit: gr.
+    normalizedQuantity: 3
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: rtavky
+    name: Oignon
+    originalQuantity: 2
+    originalUnit: kg
+    normalizedQuantity: 2000
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: i7psri
+    name: Betterave cuite
+    originalQuantity: 1.2
+    originalUnit: kg
+    normalizedQuantity: 1200
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: ogtomg
+    name: Lentilles vertes
+    originalQuantity: 300
+    originalUnit: gr.
+    normalizedQuantity: 300
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: sec
 materiel:
   - Four
   - Marmitte
 plate: 20
 prepAlt:
   - recetteAlt: tourte-betterave-et-feta_eivoui8a
-preparation: >-
+preparation: |-
   Couper les oignons en petit dès.
 
-
-  Faire cuire les lentilles vertes à l'eau avec les oignons, une feuille de
-  laurier et du sel.
-
+  Faire cuire les lentilles vertes à l'eau avec les oignons, une feuille de laurier et du sel.
 
   Egoutter. Laisser refroidir.
 
-
-  Préchauffer le four à 180°c à chaleur tournante ou 200°c en mode convection
-  naturelle!!
-
+  Préchauffer le four à 180°c à chaleur tournante ou 200°c en mode convection naturelle!!
 
   Tapisser sur les plaques de cuisson du papier sulfuuuuu.....
 
+  Râper grossièrement les betteraves, presser tout ça dans une passoire pour ôter un max de jus sans en faire de la purée.
 
-  Râper grossièrement les betteraves, presser tout ça dans une passoire pour
-  ôter un max de jus sans en faire de la purée.
-
-
-  Verser dans un grand saladier avec du sel,  l'estragon, le raifort et une
-  généreuse quantité de poivre.
-
+  Verser dans un grand saladier avec du sel,  l'estragon, le raifort et une généreuse quantité de poivre.
 
   Ajouter les lentilles aux oignons égouter et tout y mélanger.
 
-
   Etaler les premières pâtes sur les plaques.
 
-
-  Disposer l'appareil à betterave en cercle en laissant 1cm de bords libres pour
-  sceller avec la deuxième pâte.
-
+  Disposer l'appareil à betterave en cercle en laissant 1cm de bords libres pour sceller avec la deuxième pâte.
 
   Dorer la surface de la tourte au café avec un pinceau.
-
 
   Faire une cheminée au centre. Enfourner 30/35min.
 publishDate: 2024-05-18T15:49:00.000Z

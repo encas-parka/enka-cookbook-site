@@ -14,37 +14,7 @@
   "check": true,
   "checkAlwaysOk": false,
   "materiel": ["Robot Mixeur"],
-  "ingredients": [{
-      "uuid": "u2m28w",
-      "name": "Ail",
-      "originalQuantity": 1,
-      "originalUnit": "gousse·s",
-      "normalizedQuantity": 6.5,
-      "normalizedUnit": "gr.",
-      "comment": "",
-      "allergens": [],
-      "type": "legumes"
-    },{
-      "uuid": "9p3n36",
-      "name": "Olives noires à la grecque",
-      "originalQuantity": 100,
-      "originalUnit": "gr.",
-      "normalizedQuantity": 100,
-      "normalizedUnit": "gr.",
-      "comment": "",
-      "allergens": [],
-      "type": "legumes"
-    },{
-      "uuid": "h3c8al",
-      "name": "huile d'olive",
-      "originalQuantity": 2,
-      "originalUnit": "c. à soupe",
-      "normalizedQuantity": 30,
-      "normalizedUnit": "ml",
-      "comment": "",
-      "allergens": [],
-      "type": "lof"
-    }],
+  "ingredients": [{"allergens":[],"comment":"","name":"Ail","normalizedQuantity":6.5,"normalizedUnit":"gr.","originalQuantity":1,"originalUnit":"gousse·s","type":"legumes","uuid":"u2m28w"},{"allergens":[],"comment":"","name":"Olives noires à la grecque","normalizedQuantity":100,"normalizedUnit":"gr.","originalQuantity":100,"originalUnit":"gr.","type":"legumes","uuid":"9p3n36"},{"allergens":[],"comment":"","name":"huile d'olive","normalizedQuantity":30,"normalizedUnit":"ml","originalQuantity":2,"originalUnit":"c. à soupe","type":"lof","uuid":"h3c8al"}],
   "preparation": "Laisser tremper les olives noires pendant une demi heure puis rincez les bien. Mixer les avec l'ail et l'huile d'olive.",
   "prepAlt": null,
   "permissionWrite": [],

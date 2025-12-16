@@ -12,55 +12,83 @@ plate: 240
 quantite_desc: 2 part par personne
 check: true
 ingredients:
-  - ingredient: sel_2juq3x
-    commentaire: ''
-  - ingredient: gruyere_pvia1r
-    quantite: 1.92
-    unit: Kg
-    commentaire: ''
-  - ingredient: parmesan_pr1fiu
-    quantite: 1.92
-    unit: Kg
-    commentaire: ''
-  - ingredient: huile-de-tournesol_c70jxb
-    quantite: 720
-    unit: ml
-    commentaire: ''
-  - ingredient: oeuf_zf3zf8
-    quantite: 39
-    unit: unité
-    commentaire: ''
-  - ingredient: lait-demi-ecreme_x286pc
-    quantite: 1.92
-    unit: l.
-    commentaire: ''
-  - ingredient: farine-de-tapioca_v212im
-    quantite: 4.8
-    unit: Kg
-    commentaire: ''
-preparation: >-
+  - uuid: 2juq3x
+    name: Sel
+    originalQuantity: 1
+    originalUnit: au goût
+    normalizedQuantity: 1
+    normalizedUnit: au goût
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: pvia1r
+    name: Gruyère
+    originalQuantity: 1.92
+    originalUnit: kg
+    normalizedQuantity: 1920
+    normalizedUnit: gr.
+    comment: ''
+    allergens:
+      - Produit laitier
+    type: frais
+  - uuid: pr1fiu
+    name: Parmesan
+    originalQuantity: 1.92
+    originalUnit: kg
+    normalizedQuantity: 1920
+    normalizedUnit: gr.
+    comment: ''
+    allergens:
+      - Produit laitier
+    type: frais
+  - uuid: c70jxb
+    name: huile de tournesol
+    originalQuantity: 720
+    originalUnit: ml
+    normalizedQuantity: 720
+    normalizedUnit: ml
+    comment: ''
+    allergens: []
+    type: lof
+  - uuid: zf3zf8
+    name: Oeuf
+    originalQuantity: 39
+    originalUnit: unité
+    normalizedQuantity: 39
+    normalizedUnit: unité
+    comment: ''
+    allergens:
+      - Oeuf
+    type: lof
+  - uuid: x286pc
+    name: Lait demi-écrémé
+    originalQuantity: 1.92
+    originalUnit: l.
+    normalizedQuantity: 1920
+    normalizedUnit: ml
+    comment: ''
+    allergens:
+      - Produit laitier
+    type: lof
+  - uuid: v212im
+    name: Farine de tapioca
+    originalQuantity: 4.8
+    originalUnit: kg
+    normalizedQuantity: 4800
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: lof
+preparation: |-
   * Raper puis hacher au couteau les fromages.
-
-  * Faire chauffer dans une casserole le lait et l'huile jusqu'à ébulltion.
-  Pendant ce temps verser la farine de manioc et le sel dans un saladier et bien
-  mélanger. Verser dessus le mélange liquide très chaud puis mélanger
-  vigoureusement.
-
-  * Ajouter tout le fromage, bien mélanger puis ajouter les oeufs. Mélanger de
-  nouveau, à la main cette fois-ci, ou au robot patissier avec la feuille. La
-  pâte sera collate, c'est normal. Si elle l'est trop pour former des boulettes
-  avec les mains, la mettre une demi-heure au frais.
-
+  * Faire chauffer dans une casserole le lait et l'huile jusqu'à ébulltion. Pendant ce temps verser la farine de manioc et le sel dans un saladier et bien mélanger. Verser dessus le mélange liquide très chaud puis mélanger vigoureusement.
+  * Ajouter tout le fromage, bien mélanger puis ajouter les oeufs. Mélanger de nouveau, à la main cette fois-ci, ou au robot patissier avec la feuille. La pâte sera collate, c'est normal. Si elle l'est trop pour former des boulettes avec les mains, la mettre une demi-heure au frais.
 
 
 
   **Obligatoirement au dernier moment :**
 
-
-  Préchauffer le four à 180°C. Disposer sur une plaque recouverte de papier
-  sulfurisé des boulettes de la taille d'une noix. On peut si on le souhaite
-  laisser les boulettes formées une nuit au réfrigérateur. Enfourner 15 à 20
-  minutes. Se mange chaud.
+  Préchauffer le four à 180°C. Disposer sur une plaque recouverte de papier sulfurisé des boulettes de la taille d'une noix. On peut si on le souhaite laisser les boulettes formées une nuit au réfrigérateur. Enfourner 15 à 20 minutes. Se mange chaud.
 publishDate: 2024-05-23T13:58:00.000Z
 checkAlwaysOk: false
 regime:

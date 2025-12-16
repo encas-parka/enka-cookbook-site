@@ -7,42 +7,53 @@ checkAlwaysOk: false
 cuisson: true
 draft: false
 ingredients:
-  - ingredient: olives-noires-entieres_yeske5
-    quantite: 2.7
-    unit: Kg
-    commentaire: à mettre dans l'assiette à côté
-  - ingredient: ail_u2m28w
-    quantite: 4
-    unit: tête·s
-    commentaire: ''
-  - ingredient: poivron-long-vert-corne-de-boeuf_rniow3
-    quantite: 10
-    unit: Kg
-    commentaire: ''
-  - ingredient: huile-vegetale_atccqu
-    quantite: 2
-    unit: l.
-    commentaire: ''
+  - uuid: yeske5
+    name: Olives noires entières
+    originalQuantity: 2.7
+    originalUnit: kg
+    normalizedQuantity: 2700
+    normalizedUnit: gr.
+    comment: à mettre dans l'assiette à côté
+    allergens: []
+    type: legumes
+  - uuid: u2m28w
+    name: Ail
+    originalQuantity: 4
+    originalUnit: tête·s
+    normalizedQuantity: 320
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: rniow3
+    name: Poivron long vert (corne de boeuf)
+    originalQuantity: 10
+    originalUnit: kg
+    normalizedQuantity: 10000
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: atccqu
+    name: Huile végétale
+    originalQuantity: 2
+    originalUnit: l.
+    normalizedQuantity: 2000
+    normalizedUnit: ml
+    comment: ''
+    allergens: []
+    type: lof
 plate: 100
-preparation: >-
+preparation: |-
   Laver les poivrons, les laisser entier.
-
 
   Peler et émincer grossièrement l'ail.
 
-
   Préchauffer le four à 200 °C.
 
+  Dans un gros bac mélanger les pimientos, l'ail avec l'huile et pas mal de sel. Verser dans plusieurs bac gastro et faire cuire au four, en remuant régulièrement. Changer les gastro d'étage. Faire cuire jusqu'à ce que les poivrons soient tendres et boursouflés.
 
-  Dans un gros bac mélanger les pimientos, l'ail avec l'huile et pas mal de sel.
-  Verser dans plusieurs bac gastro et faire cuire au four, en remuant
-  régulièrement. Changer les gastro d'étage. Faire cuire jusqu'à ce que les
-  poivrons soient tendres et boursouflés.
-
-
-  Au service couper le légume dans la longueur et servir une moitié par
-  personne.
-
+  Au service couper le légume dans la longueur et servir une moitié par personne.
 
   Poser les olives noires dans l'assiette au service (env.5/pers)
 publishDate: 2024-06-16T16:11:00.000Z

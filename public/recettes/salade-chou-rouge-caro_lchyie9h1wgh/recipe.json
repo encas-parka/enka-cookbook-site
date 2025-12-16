@@ -14,47 +14,7 @@
   "check": false,
   "checkAlwaysOk": null,
   "materiel": [],
-  "ingredients": [{
-      "uuid": "7qo3ht",
-      "name": "Vinaigre de cidre",
-      "originalQuantity": 350,
-      "originalUnit": "ml",
-      "normalizedQuantity": 350,
-      "normalizedUnit": "ml",
-      "comment": "",
-      "allergens": ["Alcool"],
-      "type": "epices"
-    },{
-      "uuid": "s8j4ff",
-      "name": "Basilic",
-      "originalQuantity": 2,
-      "originalUnit": "bottes",
-      "normalizedQuantity": 2,
-      "normalizedUnit": "bottes",
-      "comment": "",
-      "allergens": [],
-      "type": "epices"
-    },{
-      "uuid": "eouu0v",
-      "name": "Carotte",
-      "originalQuantity": 5.5,
-      "originalUnit": "kg",
-      "normalizedQuantity": 5500,
-      "normalizedUnit": "gr.",
-      "comment": "",
-      "allergens": [],
-      "type": "legumes"
-    },{
-      "uuid": "nl2s2n",
-      "name": "Chou rouge",
-      "originalQuantity": 5.5,
-      "originalUnit": "kg",
-      "normalizedQuantity": 5500,
-      "normalizedUnit": "gr.",
-      "comment": "",
-      "allergens": [],
-      "type": "legumes"
-    }],
+  "ingredients": [{"allergens":["Alcool"],"comment":"","name":"Vinaigre de cidre","normalizedQuantity":350,"normalizedUnit":"ml","originalQuantity":350,"originalUnit":"ml","type":"epices","uuid":"7qo3ht"},{"allergens":[],"comment":"","name":"Basilic","normalizedQuantity":2,"normalizedUnit":"bottes","originalQuantity":2,"originalUnit":"bottes","type":"epices","uuid":"s8j4ff"},{"allergens":[],"comment":"","name":"Carotte","normalizedQuantity":5500,"normalizedUnit":"gr.","originalQuantity":5.5,"originalUnit":"kg","type":"legumes","uuid":"eouu0v"},{"allergens":[],"comment":"","name":"Chou rouge","normalizedQuantity":5500,"normalizedUnit":"gr.","originalQuantity":5.5,"originalUnit":"kg","type":"legumes","uuid":"nl2s2n"}],
   "preparation": "Râper les carottes\n\nCouper finement le chou rouge\n\nHacher le basilic\n\nAssaisonner avec de l'huile d'olive, sel, et vinaigre de cidre",
   "prepAlt": [],
   "permissionWrite": [],

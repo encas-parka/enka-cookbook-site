@@ -14,77 +14,7 @@
   "check": false,
   "checkAlwaysOk": true,
   "materiel": null,
-  "ingredients": [{
-      "uuid": "l5p1a5",
-      "name": "Concombre",
-      "originalQuantity": 2.5,
-      "originalUnit": "kg",
-      "normalizedQuantity": 2500,
-      "normalizedUnit": "gr.",
-      "comment": "",
-      "allergens": [],
-      "type": "legumes"
-    },{
-      "uuid": "2pps90",
-      "name": "Poivre",
-      "originalQuantity": 1,
-      "originalUnit": "au goût",
-      "normalizedQuantity": 1,
-      "normalizedUnit": "au goût",
-      "comment": "",
-      "allergens": [],
-      "type": "epices"
-    },{
-      "uuid": "2juq3x",
-      "name": "Sel",
-      "originalQuantity": 1,
-      "originalUnit": "au goût",
-      "normalizedQuantity": 1,
-      "normalizedUnit": "au goût",
-      "comment": "",
-      "allergens": [],
-      "type": "epices"
-    },{
-      "uuid": "nnkg8f",
-      "name": "Aneth aromatique",
-      "originalQuantity": 2,
-      "originalUnit": "bottes",
-      "normalizedQuantity": 2,
-      "normalizedUnit": "bottes",
-      "comment": "",
-      "allergens": [],
-      "type": "epices"
-    },{
-      "uuid": "hlbwfd",
-      "name": "Yaourt de soja",
-      "originalQuantity": 550,
-      "originalUnit": "gr.",
-      "normalizedQuantity": 550,
-      "normalizedUnit": "gr.",
-      "comment": "",
-      "allergens": ["Soja"],
-      "type": "frais"
-    },{
-      "uuid": "h3c8al",
-      "name": "huile d'olive",
-      "originalQuantity": 300,
-      "originalUnit": "ml",
-      "normalizedQuantity": 300,
-      "normalizedUnit": "ml",
-      "comment": "",
-      "allergens": [],
-      "type": "lof"
-    },{
-      "uuid": "xkijt9",
-      "name": "Amandes effilées",
-      "originalQuantity": 200,
-      "originalUnit": "gr.",
-      "normalizedQuantity": 200,
-      "normalizedUnit": "gr.",
-      "comment": "",
-      "allergens": ["Fruit à coque"],
-      "type": "sec"
-    }],
+  "ingredients": [{"allergens":[],"comment":"","name":"Concombre","normalizedQuantity":2500,"normalizedUnit":"gr.","originalQuantity":2.5,"originalUnit":"kg","type":"legumes","uuid":"l5p1a5"},{"allergens":[],"comment":"","name":"Poivre","normalizedQuantity":1,"normalizedUnit":"au goût","originalQuantity":1,"originalUnit":"au goût","type":"epices","uuid":"2pps90"},{"allergens":[],"comment":"","name":"Sel","normalizedQuantity":1,"normalizedUnit":"au goût","originalQuantity":1,"originalUnit":"au goût","type":"epices","uuid":"2juq3x"},{"allergens":[],"comment":"","name":"Aneth aromatique","normalizedQuantity":2,"normalizedUnit":"bottes","originalQuantity":2,"originalUnit":"bottes","type":"epices","uuid":"nnkg8f"},{"allergens":["Soja"],"comment":"","name":"Yaourt de soja","normalizedQuantity":550,"normalizedUnit":"gr.","originalQuantity":550,"originalUnit":"gr.","type":"frais","uuid":"hlbwfd"},{"allergens":[],"comment":"","name":"huile d'olive","normalizedQuantity":300,"normalizedUnit":"ml","originalQuantity":300,"originalUnit":"ml","type":"lof","uuid":"h3c8al"},{"allergens":["Fruit à coque"],"comment":"","name":"Amandes effilées","normalizedQuantity":200,"normalizedUnit":"gr.","originalQuantity":200,"originalUnit":"gr.","type":"sec","uuid":"xkijt9"}],
   "preparation": "Mandoliner le concombre au robocoupe (si vous en avez un :p)\n\nHâcher l'aneth\n\nTout mélanger\n\n(possible de remplacer les amandes effilées par amandes concassées)",
   "prepAlt": null,
   "permissionWrite": [],

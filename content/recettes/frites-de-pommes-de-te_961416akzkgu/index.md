@@ -18,10 +18,15 @@ plate: 100
 quantite_desc: Entre 250 et 300gr par personne en fonction de comment vous êtes gourmand·e·s
 check: true
 ingredients:
-  - ingredient: pomme-de-terre_18dy4e
-    quantite: 30
-    unit: Kg
-    commentaire: ''
+  - uuid: 18dy4e
+    name: Pomme de terre
+    originalQuantity: 30
+    originalUnit: kg
+    normalizedQuantity: 30000
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
 materiel: []
 preparation: |-
   Faire un premier bain à 140°

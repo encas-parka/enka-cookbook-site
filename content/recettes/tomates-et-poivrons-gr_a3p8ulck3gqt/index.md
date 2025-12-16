@@ -13,48 +13,84 @@ plate: 10
 check: true
 checkAlwaysOk: false
 ingredients:
-  - ingredient: tomate_ibtbnq
-    quantite: 5
-    unit: unité
-    commentaire: ''
-  - ingredient: poivron_0lpad0
-    quantite: 5
-    unit: unité
-    commentaire: ''
-  - ingredient: paprika-fume_ique18
-    quantite: 1
-    unit: c. à soupe
-    commentaire: ''
-  - ingredient: thym_a16yd7
-    quantite: 2
-    unit: c. à soupe
-    commentaire: ''
-  - ingredient: poivre-noir-moulu_rgt7s4
-    quantite: 1
-    unit: c. à café
-    commentaire: ''
-  - ingredient: fleur-de-sel_tjrhvg
-    quantite: 1
-    unit: c. à soupe
-    commentaire: ''
-  - ingredient: romarin_6z655r
-    quantite: 2
-    unit: c. à soupe
-    commentaire: ''
-  - ingredient: huile-dolive_h3c8al
-    quantite: 0.25
-    unit: l.
-    commentaire: ''
-preparation: >-
+  - uuid: ibtbnq
+    name: Tomate
+    originalQuantity: 5
+    originalUnit: unité
+    normalizedQuantity: 600
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: 0lpad0
+    name: Poivron
+    originalQuantity: 5
+    originalUnit: unité
+    normalizedQuantity: 5
+    normalizedUnit: unité
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: ique18
+    name: Paprika fumé
+    originalQuantity: 1
+    originalUnit: c. à soupe
+    normalizedQuantity: 15
+    normalizedUnit: ml
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: a16yd7
+    name: Thym
+    originalQuantity: 2
+    originalUnit: c. à soupe
+    normalizedQuantity: 30
+    normalizedUnit: ml
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: rgt7s4
+    name: Poivre noir moulu
+    originalQuantity: 1
+    originalUnit: c. à café
+    normalizedQuantity: 5
+    normalizedUnit: ml
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: tjrhvg
+    name: Fleur de sel
+    originalQuantity: 1
+    originalUnit: c. à soupe
+    normalizedQuantity: 15
+    normalizedUnit: ml
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: 6z655r
+    name: Romarin
+    originalQuantity: 2
+    originalUnit: c. à soupe
+    normalizedQuantity: 30
+    normalizedUnit: ml
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: h3c8al
+    name: huile d'olive
+    originalQuantity: 0.25
+    originalUnit: l.
+    normalizedQuantity: 250
+    normalizedUnit: ml
+    comment: ''
+    allergens: []
+    type: lof
+preparation: |-
   Découper les tomates et poivrons en 2.
-
 
   Epépiner les poivrons, garder la chaire des tomates
 
-
-  Déposer sur une plaque de four, saupoudrer les aromatiques et épices et enduir
-  généreusement d'huile d'olive.
-
+  Déposer sur une plaque de four, saupoudrer les aromatiques et épices et enduir généreusement d'huile d'olive.
 
   Cuisson au four pregnant 30min
 publishDate: 2025-08-08T09:43:00.000Z

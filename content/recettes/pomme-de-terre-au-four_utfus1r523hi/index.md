@@ -12,84 +12,145 @@ plate: 100
 quantite_desc: ''
 check: false
 ingredients:
-  - ingredient: pomme-de-terre_18dy4e
-    quantite: 30
-    unit: Kg
-    commentaire: ''
-  - ingredient: ail_u2m28w
-    quantite: 5
-    unit: tête·s
-    commentaire: ''
-  - ingredient: tofu-soyeux_xqb8f5
-    quantite: 1
-    unit: Kg
-    commentaire: >-
-      c'est pour l'option Vegan (la quantité est a déterminer en fonction du
-      nombre)
-  - ingredient: fromage-blanc_b2dxf8
-    quantite: 15
-    unit: Kg
-    commentaire: Pour les végans, on utilisera du tofu soyeux
-  - ingredient: paprika-fume_ique18
-    quantite: 200
-    unit: gr.
-    commentaire: ''
-  - ingredient: thym_a16yd7
-    quantite: 200
-    unit: gr.
-    commentaire: ''
-  - ingredient: feuille-de-laurier_j84olg
-    quantite: 20
-    unit: unité
-    commentaire: ''
-  - ingredient: romarin_6z655r
-    quantite: 10
-    unit: unité
-    commentaire: ''
-  - ingredient: origan_fkftyb
-    quantite: 200
-    unit: gr.
-    commentaire: ''
-  - ingredient: sariette_22uzom
-    quantite: 200
-    unit: gr.
-    commentaire: ''
-  - ingredient: persil-frais_hgfa4e
-    quantite: 10
-    unit: bottes
-    commentaire: ''
-  - ingredient: ciboulette_mt22ff
-    quantite: 10
-    unit: bottes
-    commentaire: ''
-  - ingredient: huile-dolive_h3c8al
-    quantite: 1
-    unit: l.
-    commentaire: ''
-  - ingredient: sucre-blanc_lny16c
-    quantite: 0.1
-    unit: Kg
-    commentaire: ''
-preparation: >-
+  - uuid: 18dy4e
+    name: Pomme de terre
+    originalQuantity: 30
+    originalUnit: kg
+    normalizedQuantity: 30000
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: u2m28w
+    name: Ail
+    originalQuantity: 5
+    originalUnit: tête·s
+    normalizedQuantity: 400
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: xqb8f5
+    name: Tofu soyeux
+    originalQuantity: 1
+    originalUnit: kg
+    normalizedQuantity: 1000
+    normalizedUnit: gr.
+    comment: c'est pour l'option Vegan (la quantité est a déterminer en fonction du nombre)
+    allergens: []
+    type: frais
+  - uuid: b2dxf8
+    name: Fromage blanc
+    originalQuantity: 15
+    originalUnit: kg
+    normalizedQuantity: 15000
+    normalizedUnit: gr.
+    comment: Pour les végans, on utilisera du tofu soyeux
+    allergens:
+      - Produit laitier
+    type: frais
+  - uuid: ique18
+    name: Paprika fumé
+    originalQuantity: 200
+    originalUnit: gr.
+    normalizedQuantity: 200
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: a16yd7
+    name: Thym
+    originalQuantity: 200
+    originalUnit: gr.
+    normalizedQuantity: 200
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: j84olg
+    name: Feuille de laurier
+    originalQuantity: 20
+    originalUnit: unité
+    normalizedQuantity: 20
+    normalizedUnit: unité
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: 6z655r
+    name: Romarin
+    originalQuantity: 10
+    originalUnit: unité
+    normalizedQuantity: 10
+    normalizedUnit: unité
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: fkftyb
+    name: Origan
+    originalQuantity: 200
+    originalUnit: gr.
+    normalizedQuantity: 200
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: 22uzom
+    name: Sariette
+    originalQuantity: 200
+    originalUnit: gr.
+    normalizedQuantity: 200
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: hgfa4e
+    name: Persil frais
+    originalQuantity: 10
+    originalUnit: bottes
+    normalizedQuantity: 10
+    normalizedUnit: bottes
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: mt22ff
+    name: Ciboulette
+    originalQuantity: 10
+    originalUnit: bottes
+    normalizedQuantity: 10
+    normalizedUnit: bottes
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: h3c8al
+    name: huile d'olive
+    originalQuantity: 1
+    originalUnit: l.
+    normalizedQuantity: 1000
+    normalizedUnit: ml
+    comment: ''
+    allergens: []
+    type: lof
+  - uuid: lny16c
+    name: sucre blanc
+    originalQuantity: 0.1
+    originalUnit: kg
+    normalizedQuantity: 100
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: sucres
+preparation: |-
   Plucher les pommes de terre et les couper en 4 dans le sens de la longueur.
 
-
-  Repartir les PDT dans des gastros et les brasser avec
-  thym/Laurier/Romarin/Paprika/Origan + huile d'olive + sel et poivre (selon
-  votre gout).
-
+  Repartir les PDT dans des gastros et les brasser avec thym/Laurier/Romarin/Paprika/Origan + huile d'olive + sel et poivre (selon votre gout).
 
   Préchauffer le four à 180°.
 
-
   Mettre au four pour une durée de 40 minutes.
-
 
   Hacher l'ail, le persil, la ciboulette et la sariette.
 
-
   Mélanger au fromage blanc (ou au tofu soyeux pour les végan).
-
 
   Ajouter le sucre et rectifier l'assaisonnement sel/poivre
 prepAlt: []

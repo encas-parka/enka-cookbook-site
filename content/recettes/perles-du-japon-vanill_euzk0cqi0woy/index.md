@@ -13,64 +13,97 @@ check: false
 checkAlwaysOk: false
 checkfor: 10
 ingredients:
-  - ingredient: tapioca-perlee_mkttuh
-    quantite: 1
-    unit: Kg
-    commentaire: pour moi il s'agit des perles du japon
-  - ingredient: citron-jaune_5cg0yu
-    quantite: 10
-    unit: unité
-    commentaire: ''
-  - ingredient: banane_9vpwp5
-    quantite: 25
-    unit: unité
-    commentaire: ''
-  - ingredient: lait-de-riz_hzwesd
-    quantite: 9
-    unit: l.
-    commentaire: ''
-  - ingredient: cranberries-sechees_rn44lx
-    quantite: 1
-    unit: Kg
-    commentaire: ''
-  - ingredient: sucre-blanc_lny16c
-    quantite: 1
-    unit: Kg
-    commentaire: ''
-  - ingredient: gingembre-confit_oskdzx
-    quantite: 800
-    unit: gr.
-    commentaire: ''
-  - ingredient: jus-de-citron_e4mjd1
-    quantite: 500
-    unit: ml
-    commentaire: ''
-  - ingredient: vanille-extrait-concentre_n818be
-    quantite: 10
-    unit: c. à café
-    commentaire: ''
-preparation: >-
-  Eplucher les bananes, les couper en 2 dans le sens de la longueur puis en 2
-  pour obtenir 4 morceaux/personne. Les arroser de jus de citron pour qu'elles
-  ne noircissent pas. Réserver.
-
+  - uuid: mkttuh
+    name: Tapioca perlée
+    originalQuantity: 1
+    originalUnit: kg
+    normalizedQuantity: 1000
+    normalizedUnit: gr.
+    comment: pour moi il s'agit des perles du japon
+    allergens: []
+    type: sec
+  - uuid: 5cg0yu
+    name: Citron jaune
+    originalQuantity: 10
+    originalUnit: unité
+    normalizedQuantity: 1000
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: 9vpwp5
+    name: Banane
+    originalQuantity: 25
+    originalUnit: unité
+    normalizedQuantity: 25
+    normalizedUnit: unité
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: hzwesd
+    name: Lait de riz
+    originalQuantity: 9
+    originalUnit: l.
+    normalizedQuantity: 9000
+    normalizedUnit: ml
+    comment: ''
+    allergens: []
+    type: lof
+  - uuid: rn44lx
+    name: Cranberries séchées
+    originalQuantity: 1
+    originalUnit: kg
+    normalizedQuantity: 1000
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: sucres
+  - uuid: lny16c
+    name: sucre blanc
+    originalQuantity: 1
+    originalUnit: kg
+    normalizedQuantity: 1000
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: sucres
+  - uuid: oskdzx
+    name: Gingembre confit
+    originalQuantity: 800
+    originalUnit: gr.
+    normalizedQuantity: 800
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: sucres
+  - uuid: e4mjd1
+    name: Jus de citron
+    originalQuantity: 500
+    originalUnit: ml
+    normalizedQuantity: 500
+    normalizedUnit: ml
+    comment: ''
+    allergens: []
+    type: sucres
+  - uuid: n818be
+    name: vanille extrait concentré
+    originalQuantity: 10
+    originalUnit: c. à café
+    normalizedQuantity: 50
+    normalizedUnit: ml
+    comment: ''
+    allergens: []
+    type: sucres
+preparation: |-
+  Eplucher les bananes, les couper en 2 dans le sens de la longueur puis en 2 pour obtenir 4 morceaux/personne. Les arroser de jus de citron pour qu'elles ne noircissent pas. Réserver.
 
   Hacher les cranberries et le gingembre confit. Réserver.
 
+  Zester les citrons. Réserver puis les presser pour en extraire le jus. Réserver.
 
-  Zester les citrons. Réserver puis les presser pour en extraire le jus.
-  Réserver.
+  Cuire les perles du japon dans le lait de riz auquel on a ajouté la vanille liquide selon les indications inscrites sur le paquet (ça change selon les marques pour le temps de cuisson). En fin de cuisson ajouter le sucre et le jus des citrons.
 
-
-  Cuire les perles du japon dans le lait de riz auquel on a ajouté la vanille
-  liquide selon les indications inscrites sur le paquet (ça change selon les
-  marques pour le temps de cuisson). En fin de cuisson ajouter le sucre et le
-  jus des citrons.
-
-
-  Dans les verrines ou autres contenants, répartir au fond la banane, ajouter
-  les perles du japon puis le mélange haché gingembre/cranberries. Stocker au
-  froid
+  Dans les verrines ou autres contenants, répartir au fond la banane, ajouter les perles du japon puis le mélange haché gingembre/cranberries. Stocker au froid
 preparation24h: On peut faire cette préparation la veille
 publishDate: 2025-06-04T18:43:00.000Z
 serveHot: false

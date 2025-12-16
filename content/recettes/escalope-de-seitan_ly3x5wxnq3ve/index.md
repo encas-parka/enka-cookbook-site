@@ -12,30 +12,63 @@ quantite_desc: une par personne
 check: true
 checkAlwaysOk: false
 ingredients:
-  - ingredient: huile-vegetale_atccqu
-    quantite: 1
-    unit: l.
-    commentaire: ''
-  - ingredient: farine-de-riz_oygozr
-    quantite: 800
-    unit: gr.
-    commentaire: ''
-  - ingredient: gluten-pur_946ddw
-    quantite: 2.15
-    unit: Kg
-    commentaire: ''
-  - ingredient: bouillon-cube_57xo8g
-    quantite: 6
-    unit: unité
-    commentaire: ''
-  - ingredient: sauce-soja_jjrwlj
-    quantite: 750
-    unit: ml
-    commentaire: ''
-  - ingredient: poudre-damandes_rmgr7l
-    quantite: 600
-    unit: gr.
-    commentaire: ''
+  - uuid: atccqu
+    name: Huile végétale
+    originalQuantity: 1
+    originalUnit: l.
+    normalizedQuantity: 1000
+    normalizedUnit: ml
+    comment: ''
+    allergens: []
+    type: lof
+  - uuid: oygozr
+    name: Farine de riz
+    originalQuantity: 800
+    originalUnit: gr.
+    normalizedQuantity: 800
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: lof
+  - uuid: 946ddw
+    name: Gluten pur
+    originalQuantity: 2.15
+    originalUnit: kg
+    normalizedQuantity: 2150
+    normalizedUnit: gr.
+    comment: ''
+    allergens:
+      - Gluten
+    type: lof
+  - uuid: 57xo8g
+    name: bouillon cube
+    originalQuantity: 6
+    originalUnit: unité
+    normalizedQuantity: 6
+    normalizedUnit: unité
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: jjrwlj
+    name: Sauce soja
+    originalQuantity: 750
+    originalUnit: ml
+    normalizedQuantity: 750
+    normalizedUnit: ml
+    comment: ''
+    allergens:
+      - Soja
+    type: epices
+  - uuid: rmgr7l
+    name: Poudre d'amandes
+    originalQuantity: 600
+    originalUnit: gr.
+    normalizedQuantity: 600
+    normalizedUnit: gr.
+    comment: ''
+    allergens:
+      - Fruit à coque
+    type: sucres
 preparation: |-
 
   Faire bouillir 3L30 D'eau avec les bouillons cubes.

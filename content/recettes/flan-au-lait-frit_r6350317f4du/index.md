@@ -10,107 +10,144 @@ auteur: Auré
 region: Hong Kong
 cuisson: true
 plate: 120
-quantite_desc: >-
-  1 flan = 3cmx3cm • 3ou4 flans par personne • 1 gastro (53x32,5cm) = env. 60
-  flans
+quantite_desc: 1 flan = 3cmx3cm • 3ou4 flans par personne • 1 gastro (53x32,5cm) = env. 60 flans
 check: true
 ingredients:
-  - ingredient: huile-de-friture_1ej217
-    quantite: 12
-    unit: l.
-    commentaire: ''
-  - ingredient: farine-de-ble_2av6w8
-    quantite: 1.7
-    unit: Kg
-    commentaire: Pâte
-  - ingredient: farine-de-mais_z8uiyd
-    quantite: 600
-    unit: gr.
-    commentaire: Pâte
-  - ingredient: farine-de-mais_z8uiyd
-    quantite: 1.3
-    unit: Kg
-    commentaire: ''
-  - ingredient: lait-concentre-non-sucre_zat1zc
-    quantite: 4
-    unit: l.
-    commentaire: ''
-  - ingredient: lait-demi-ecreme_x286pc
-    quantite: 7.7
-    unit: l.
-    commentaire: ''
-  - ingredient: eau_ljzb7j
-    quantite: 3.3
-    unit: l.
-    commentaire: Pâte
-  - ingredient: levure-chimique_vgec6e
-    quantite: 100
-    unit: gr.
-    commentaire: Pâte
-  - ingredient: sel_2juq3x
-    quantite: 200
-    unit: gr.
-    commentaire: ''
-  - ingredient: poivre-blanc-moulue_7lakpz
-    quantite: 75
-    unit: gr.
-    commentaire: ''
-  - ingredient: sucre-en-poudre_u9z2he
-    quantite: 1
-    unit: Kg
-    commentaire: ''
+  - uuid: 1ej217
+    name: huile de friture
+    originalQuantity: 12
+    originalUnit: l.
+    normalizedQuantity: 12000
+    normalizedUnit: ml
+    comment: ''
+    allergens: []
+    type: lof
+  - uuid: 2av6w8
+    name: Farine de blé
+    originalQuantity: 1.7
+    originalUnit: kg
+    normalizedQuantity: 1700
+    normalizedUnit: gr.
+    comment: Pâte
+    allergens:
+      - Gluten
+    type: lof
+  - uuid: z8uiyd
+    name: Farine de maïs
+    originalQuantity: 600
+    originalUnit: gr.
+    normalizedQuantity: 600
+    normalizedUnit: gr.
+    comment: Pâte
+    allergens: []
+    type: lof
+  - uuid: z8uiyd
+    name: Farine de maïs
+    originalQuantity: 1.3
+    originalUnit: kg
+    normalizedQuantity: 1300
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: lof
+  - uuid: zat1zc
+    name: Lait concentré (non sucré)
+    originalQuantity: 4
+    originalUnit: l.
+    normalizedQuantity: 4000
+    normalizedUnit: ml
+    comment: ''
+    allergens:
+      - Produit laitier
+    type: lof
+  - uuid: x286pc
+    name: Lait demi-écrémé
+    originalQuantity: 7.7
+    originalUnit: l.
+    normalizedQuantity: 7700
+    normalizedUnit: ml
+    comment: ''
+    allergens:
+      - Produit laitier
+    type: lof
+  - uuid: ljzb7j
+    name: Eau
+    originalQuantity: 3.3
+    originalUnit: l.
+    normalizedQuantity: 3300
+    normalizedUnit: ml
+    comment: Pâte
+    allergens: []
+    type: autres
+  - uuid: vgec6e
+    name: Levure chimique
+    originalQuantity: 100
+    originalUnit: gr.
+    normalizedQuantity: 100
+    normalizedUnit: gr.
+    comment: Pâte
+    allergens:
+      - Gluten
+    type: lof
+  - uuid: 2juq3x
+    name: Sel
+    originalQuantity: 200
+    originalUnit: gr.
+    normalizedQuantity: 200
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: 7lakpz
+    name: poivre blanc moulue
+    originalQuantity: 75
+    originalUnit: gr.
+    normalizedQuantity: 75
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: u9z2he
+    name: Sucre en poudre
+    originalQuantity: 1
+    originalUnit: kg
+    normalizedQuantity: 1000
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: sucres
 materiel:
   - Friteuse
   - Gastro 1/1 (Fins)
   - Marmitte
-preparation: >-
+preparation: |-
   _Possible 1 J avant :_
 
+  \- Dans une gamelle, verser le lait et le lait concentré avec le sel et le poivre. Rectifier l'assaisonnement.
 
-  \- Dans une gamelle, verser le lait et le lait concentré avec le sel et le
-  poivre. Rectifier l'assaisonnement.
+  \- Ajouter la farine de maïs et fouetter jusqu'à obtenir une préparation lisse.
 
+  \- Laisser frémir sur feu moyen afin qu'elle épaississe en fouettant de temps en temps.
 
-  \- Ajouter la farine de maïs et fouetter jusqu'à obtenir une préparation
-  lisse.
-
-
-  \- Laisser frémir sur feu moyen afin qu'elle épaississe en fouettant de temps
-  en temps.
-
-
-  \- Calculer le nombre de bac gastro nécessaires, les tapisser de papier
-  sulfurisé.
-
+  \- Calculer le nombre de bac gastro nécessaires, les tapisser de papier sulfurisé.
 
   \- Y verser le flan et laisser refroidir.
 
-
   \- Recouvrir de film alimentaire et reserver bien bien au frigo.
-
 
   ##### PREPARATION DE LA PÂTE :
 
-
-  \- Mélanger tous les ingrédients de la pâte et laisser reposer 30min à
-  température ambiante.
-
+  \- Mélanger tous les ingrédients de la pâte et laisser reposer 30min à température ambiante.
 
   \- Couper les flans au lait en cube de 5x5cm.
 
-
   **Obligatoirement au dernier moment :**
 
-
-  \- Tremper les flans dans la pâte à beignet à l'aide de baguettes chinoises ou
-  d'un écumoir.
-
+  \- Tremper les flans dans la pâte à beignet à l'aide de baguettes chinoises ou d'un écumoir.
 
   \- Les faire frire env. 3min. Ils doivent ressortir dorés et croustillants.
 
-
   \- Les égoutter sur du papier sopalin.
-
 
   \- Et les saupoudrer d'un peu de sucre.
 publishDate: 2024-05-18T15:27:00.000Z

@@ -14,77 +14,7 @@
   "check": true,
   "checkAlwaysOk": false,
   "materiel": null,
-  "ingredients": [{
-      "uuid": "5cg0yu",
-      "name": "Citron jaune",
-      "originalQuantity": 15,
-      "originalUnit": "unité",
-      "normalizedQuantity": 1500,
-      "normalizedUnit": "gr.",
-      "comment": "",
-      "allergens": [],
-      "type": "legumes"
-    },{
-      "uuid": "9zozfk",
-      "name": "Courgette",
-      "originalQuantity": 12,
-      "originalUnit": "kg",
-      "normalizedQuantity": 12000,
-      "normalizedUnit": "gr.",
-      "comment": "",
-      "allergens": [],
-      "type": "legumes"
-    },{
-      "uuid": "h3c8al",
-      "name": "huile d'olive",
-      "originalQuantity": 380,
-      "originalUnit": "ml",
-      "normalizedQuantity": 380,
-      "normalizedUnit": "ml",
-      "comment": "",
-      "allergens": [],
-      "type": "lof"
-    },{
-      "uuid": "7jceco",
-      "name": "Curry",
-      "originalQuantity": 225,
-      "originalUnit": "gr.",
-      "normalizedQuantity": 225,
-      "normalizedUnit": "gr.",
-      "comment": "",
-      "allergens": [],
-      "type": "epices"
-    },{
-      "uuid": "2pps90",
-      "name": "Poivre",
-      "originalQuantity": 1,
-      "originalUnit": "au goût",
-      "normalizedQuantity": 1,
-      "normalizedUnit": "au goût",
-      "comment": "",
-      "allergens": [],
-      "type": "epices"
-    },{
-      "uuid": "2juq3x",
-      "name": "Sel",
-      "originalQuantity": 1,
-      "originalUnit": "au goût",
-      "normalizedQuantity": 1,
-      "normalizedUnit": "au goût",
-      "comment": "",
-      "allergens": [],
-      "type": "epices"
-    },{
-      "uuid": "bbwo4n",
-      "name": "Tamari (sauce)",
-      "originalQuantity": 380,
-      "originalUnit": "ml",
-      "normalizedQuantity": 380,
-      "normalizedUnit": "ml",
-      "comment": "",
-      "allergens": ["Soja"],
-      "type": "epices"
-    }],
+  "ingredients": [{"allergens":[],"comment":"","name":"Citron jaune","normalizedQuantity":1500,"normalizedUnit":"gr.","originalQuantity":15,"originalUnit":"unité","type":"legumes","uuid":"5cg0yu"},{"allergens":[],"comment":"","name":"Courgette","normalizedQuantity":12000,"normalizedUnit":"gr.","originalQuantity":12,"originalUnit":"kg","type":"legumes","uuid":"9zozfk"},{"allergens":[],"comment":"","name":"huile d'olive","normalizedQuantity":380,"normalizedUnit":"ml","originalQuantity":380,"originalUnit":"ml","type":"lof","uuid":"h3c8al"},{"allergens":[],"comment":"","name":"Curry","normalizedQuantity":225,"normalizedUnit":"gr.","originalQuantity":225,"originalUnit":"gr.","type":"epices","uuid":"7jceco"},{"allergens":[],"comment":"","name":"Poivre","normalizedQuantity":1,"normalizedUnit":"au goût","originalQuantity":1,"originalUnit":"au goût","type":"epices","uuid":"2pps90"},{"allergens":[],"comment":"","name":"Sel","normalizedQuantity":1,"normalizedUnit":"au goût","originalQuantity":1,"originalUnit":"au goût","type":"epices","uuid":"2juq3x"},{"allergens":["Soja"],"comment":"","name":"Tamari (sauce)","normalizedQuantity":380,"normalizedUnit":"ml","originalQuantity":380,"originalUnit":"ml","type":"epices","uuid":"bbwo4n"}],
   "preparation": "* Le lendemain rectifier l’assaisonnement.",
   "prepAlt": null,
   "permissionWrite": [],

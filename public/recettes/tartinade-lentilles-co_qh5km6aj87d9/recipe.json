@@ -14,77 +14,7 @@
   "check": true,
   "checkAlwaysOk": false,
   "materiel": null,
-  "ingredients": [{
-      "uuid": "toc8a7",
-      "name": "Lentilles corail",
-      "originalQuantity": 180,
-      "originalUnit": "gr.",
-      "normalizedQuantity": 180,
-      "normalizedUnit": "gr.",
-      "comment": "",
-      "allergens": [],
-      "type": "sec"
-    },{
-      "uuid": "ndu75n",
-      "name": "Patates douces",
-      "originalQuantity": 280,
-      "originalUnit": "gr.",
-      "normalizedQuantity": 280,
-      "normalizedUnit": "gr.",
-      "comment": "",
-      "allergens": [],
-      "type": "legumes"
-    },{
-      "uuid": "h3c8al",
-      "name": "huile d'olive",
-      "originalQuantity": 30,
-      "originalUnit": "ml",
-      "normalizedQuantity": 30,
-      "normalizedUnit": "ml",
-      "comment": "",
-      "allergens": [],
-      "type": "lof"
-    },{
-      "uuid": "d5zbfl",
-      "name": "fenugrec moulu",
-      "originalQuantity": 5,
-      "originalUnit": "gr.",
-      "normalizedQuantity": 5,
-      "normalizedUnit": "gr.",
-      "comment": "",
-      "allergens": [],
-      "type": "epices"
-    },{
-      "uuid": "rgt7s4",
-      "name": "Poivre noir moulu",
-      "originalQuantity": 3,
-      "originalUnit": "pincées",
-      "normalizedQuantity": 1.2000000000000002,
-      "normalizedUnit": "gr.",
-      "comment": "",
-      "allergens": [],
-      "type": "epices"
-    },{
-      "uuid": "2juq3x",
-      "name": "Sel",
-      "originalQuantity": 5,
-      "originalUnit": "gr.",
-      "normalizedQuantity": 5,
-      "normalizedUnit": "gr.",
-      "comment": "",
-      "allergens": [],
-      "type": "epices"
-    },{
-      "uuid": "ljzb7j",
-      "name": "Eau",
-      "originalQuantity": 550,
-      "originalUnit": "ml",
-      "normalizedQuantity": 550,
-      "normalizedUnit": "ml",
-      "comment": "",
-      "allergens": [],
-      "type": "autres"
-    }],
+  "ingredients": [{"allergens":[],"comment":"","name":"Lentilles corail","normalizedQuantity":180,"normalizedUnit":"gr.","originalQuantity":180,"originalUnit":"gr.","type":"sec","uuid":"toc8a7"},{"allergens":[],"comment":"","name":"Patates douces","normalizedQuantity":280,"normalizedUnit":"gr.","originalQuantity":280,"originalUnit":"gr.","type":"legumes","uuid":"ndu75n"},{"allergens":[],"comment":"","name":"huile d'olive","normalizedQuantity":30,"normalizedUnit":"ml","originalQuantity":30,"originalUnit":"ml","type":"lof","uuid":"h3c8al"},{"allergens":[],"comment":"","name":"fenugrec moulu","normalizedQuantity":5,"normalizedUnit":"gr.","originalQuantity":5,"originalUnit":"gr.","type":"epices","uuid":"d5zbfl"},{"allergens":[],"comment":"","name":"Poivre noir moulu","normalizedQuantity":1.2000000000000002,"normalizedUnit":"gr.","originalQuantity":3,"originalUnit":"pincées","type":"epices","uuid":"rgt7s4"},{"allergens":[],"comment":"","name":"Sel","normalizedQuantity":5,"normalizedUnit":"gr.","originalQuantity":5,"originalUnit":"gr.","type":"epices","uuid":"2juq3x"},{"allergens":[],"comment":"","name":"Eau","normalizedQuantity":550,"normalizedUnit":"ml","originalQuantity":550,"originalUnit":"ml","type":"autres","uuid":"ljzb7j"}],
   "preparation": "* Eplucher et couper grossièrement les patates douces.\n* Mettre les lentilles, les patates douces et l'eau dans une casserole, porter à ébullition puis baisser le feu et couvrir jusqu'à ce que ce soit cuit.\n* Ajouter le reste des ingrédients et mixer finement. Rectifier l’assaisonnement.",
   "prepAlt": null,
   "permissionWrite": [],

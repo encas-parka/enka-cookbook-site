@@ -14,57 +14,7 @@
   "check": true,
   "checkAlwaysOk": true,
   "materiel": ["Bruleur"],
-  "ingredients": [{
-      "uuid": "8nbcjp",
-      "name": "Fécule de maïs (Maïzena)",
-      "originalQuantity": 1.8,
-      "originalUnit": "kg",
-      "normalizedQuantity": 1800,
-      "normalizedUnit": "gr.",
-      "comment": "",
-      "allergens": [],
-      "type": "lof"
-    },{
-      "uuid": "hzwesd",
-      "name": "Lait de riz",
-      "originalQuantity": 10,
-      "originalUnit": "l.",
-      "normalizedQuantity": 10000,
-      "normalizedUnit": "ml",
-      "comment": "",
-      "allergens": [],
-      "type": "lof"
-    },{
-      "uuid": "gpeob7",
-      "name": "Lait de soja",
-      "originalQuantity": 10,
-      "originalUnit": "l.",
-      "normalizedQuantity": 10000,
-      "normalizedUnit": "ml",
-      "comment": "",
-      "allergens": ["Soja"],
-      "type": "lof"
-    },{
-      "uuid": "3eex0o",
-      "name": "Lait d'avoine",
-      "originalQuantity": 10,
-      "originalUnit": "l.",
-      "normalizedQuantity": 10000,
-      "normalizedUnit": "ml",
-      "comment": "",
-      "allergens": ["Gluten"],
-      "type": "lof"
-    },{
-      "uuid": "k2rneh",
-      "name": "Sirop de sureau",
-      "originalQuantity": 6,
-      "originalUnit": "l.",
-      "normalizedQuantity": 6000,
-      "normalizedUnit": "ml",
-      "comment": "",
-      "allergens": [],
-      "type": "sucres"
-    }],
+  "ingredients": [{"allergens":[],"comment":"","name":"Fécule de maïs (Maïzena)","normalizedQuantity":1800,"normalizedUnit":"gr.","originalQuantity":1.8,"originalUnit":"kg","type":"lof","uuid":"8nbcjp"},{"allergens":[],"comment":"","name":"Lait de riz","normalizedQuantity":10000,"normalizedUnit":"ml","originalQuantity":10,"originalUnit":"l.","type":"lof","uuid":"hzwesd"},{"allergens":["Soja"],"comment":"","name":"Lait de soja","normalizedQuantity":10000,"normalizedUnit":"ml","originalQuantity":10,"originalUnit":"l.","type":"lof","uuid":"gpeob7"},{"allergens":["Gluten"],"comment":"","name":"Lait d'avoine","normalizedQuantity":10000,"normalizedUnit":"ml","originalQuantity":10,"originalUnit":"l.","type":"lof","uuid":"3eex0o"},{"allergens":[],"comment":"","name":"Sirop de sureau","normalizedQuantity":6000,"normalizedUnit":"ml","originalQuantity":6,"originalUnit":"l.","type":"sucres","uuid":"k2rneh"}],
   "preparation": "1. Tout mélanger à froid\n2. Faire chauffer à feu doux jusqu'à épaississement\n3. Mettre en ramequins",
   "prepAlt": null,
   "permissionWrite": [],

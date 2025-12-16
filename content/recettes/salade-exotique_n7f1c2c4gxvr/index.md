@@ -14,74 +14,110 @@ plate: 100
 check: false
 checkAlwaysOk: false
 ingredients:
-  - ingredient: citron-vert_1koje1
-    quantite: 20
-    unit: unité
-    commentaire: ''
-  - ingredient: oignon-rouge_doxujz
-    quantite: 20
-    unit: unité
-    commentaire: ''
-  - ingredient: concombre_l5p1a5
-    quantite: 20
-    unit: unité
-    commentaire: ''
-  - ingredient: carotte_eouu0v
-    quantite: 50
-    unit: unité
-    commentaire: ''
-  - ingredient: chou-chinois_hz46f4
-    quantite: 10
-    unit: unité
-    commentaire: ''
-  - ingredient: menthe-fraiche_y16lzq
-    quantite: 10
-    unit: bottes
-    commentaire: ''
-  - ingredient: coriandre-fraiche_fetrpe
-    quantite: 10
-    unit: bottes
-    commentaire: ''
-  - ingredient: pate-de-curry-rouge_5qtg4a
-    quantite: 100
-    unit: gr.
-    commentaire: ''
-  - ingredient: lait-de-coco_xdy736
-    quantite: 8
-    unit: l.
-    commentaire: ''
-  - ingredient: sucre-blanc_lny16c
-    quantite: 500
-    unit: gr.
-    commentaire: ''
-preparation: >-
-  Zester les citrons. Réserver. Presser les citrons pour récupérer le jus.
-  Réserver.
+  - uuid: 1koje1
+    name: Citron vert
+    originalQuantity: 20
+    originalUnit: unité
+    normalizedQuantity: 2000
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: doxujz
+    name: Oignon rouge
+    originalQuantity: 20
+    originalUnit: unité
+    normalizedQuantity: 2400
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: l5p1a5
+    name: Concombre
+    originalQuantity: 20
+    originalUnit: unité
+    normalizedQuantity: 4000
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: eouu0v
+    name: Carotte
+    originalQuantity: 50
+    originalUnit: unité
+    normalizedQuantity: 6250
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: hz46f4
+    name: Chou chinois
+    originalQuantity: 10
+    originalUnit: unité
+    normalizedQuantity: 10
+    normalizedUnit: unité
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: y16lzq
+    name: Menthe fraîche
+    originalQuantity: 10
+    originalUnit: bottes
+    normalizedQuantity: 10
+    normalizedUnit: bottes
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: fetrpe
+    name: Coriandre fraîche
+    originalQuantity: 10
+    originalUnit: bottes
+    normalizedQuantity: 10
+    normalizedUnit: bottes
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: 5qtg4a
+    name: Pâte de Curry Rouge
+    originalQuantity: 100
+    originalUnit: gr.
+    normalizedQuantity: 100
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: xdy736
+    name: lait de coco
+    originalQuantity: 8
+    originalUnit: l.
+    normalizedQuantity: 8000
+    normalizedUnit: ml
+    comment: ''
+    allergens: []
+    type: lof
+  - uuid: lny16c
+    name: sucre blanc
+    originalQuantity: 500
+    originalUnit: gr.
+    normalizedQuantity: 500
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: sucres
+preparation: |-
+  Zester les citrons. Réserver. Presser les citrons pour récupérer le jus. Réserver.
 
+  Râper les carottes et les arroser avec le jus des citrons. les saler un peu. Réserver.
 
-  Râper les carottes et les arroser avec le jus des citrons. les saler un peu.
-  Réserver.
+  Eplucher les concombres et les couper en petits cubes 1cm (mirepoix). Réserver.
 
+  Eplucher les oignons. Emincer les oignons en fines lamelles (robot-coupe). Réserver.
 
-  Eplucher les concombres et les couper en petits cubes 1cm (mirepoix).
-  Réserver.
+  Laver les bottes de menthe et coriandre et les égoutter puis les hacher finement. Réserver.
 
+  Enlever les premières feuilles des choux chinois et les couper en 4 dans le sens de la longueur. Les émincer ensuite en fines lamelles dans le sens de la largeur.
 
-  Eplucher les oignons. Emincer les oignons en fines lamelles (robot-coupe).
-  Réserver.
-
-
-  Laver les bottes de menthe et coriandre et les égoutter puis les hacher
-  finement. Réserver.
-
-
-  Enlever les premières feuilles des choux chinois et les couper en 4 dans le
-  sens de la longueur. Les émincer ensuite en fines lamelles dans le sens de la
-  largeur.
-
-
-  Mélanger les zestes des citrons, la pâte de curry, le sucre et le lait de coco
-  et ajouter cette sauce aux crudités mélangés intimement avant de servir.
+  Mélanger les zestes des citrons, la pâte de curry, le sucre et le lait de coco et ajouter cette sauce aux crudités mélangés intimement avant de servir.
 publishDate: 2025-06-04T16:41:00.000Z
 serveHot: false
 uuid: n7f1c2c4gxvr

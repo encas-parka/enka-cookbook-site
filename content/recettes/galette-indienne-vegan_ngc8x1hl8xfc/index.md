@@ -12,30 +12,60 @@ plate: 15
 quantite_desc: ''
 check: true
 ingredients:
-  - ingredient: farine-de-pois-chiche_o627mw
-    quantite: 1
-    unit: Kg
-    commentaire: ''
-  - ingredient: cebette-ciboule-cive-oignon-vert_j7as8d
-    quantite: 300
-    unit: gr.
-    commentaire: ''
-  - ingredient: eau_ljzb7j
-    quantite: 1
-    unit: l.
-    commentaire: ''
-  - ingredient: coriandre-en-poudre_nf05n7
-    quantite: 3
-    unit: c. à café
-    commentaire: ''
-  - ingredient: ail-en-poudre_vs2dfm
-    quantite: 3
-    unit: c. à café
-    commentaire: ''
-  - ingredient: cumin-moulu_he3u48
-    quantite: 3
-    unit: c. à café
-    commentaire: ''
+  - uuid: o627mw
+    name: Farine de pois chiche
+    originalQuantity: 1
+    originalUnit: kg
+    normalizedQuantity: 1000
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: lof
+  - uuid: j7as8d
+    name: Cébette - Ciboule - Cive - Oignon vert
+    originalQuantity: 300
+    originalUnit: gr.
+    normalizedQuantity: 300
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: ljzb7j
+    name: Eau
+    originalQuantity: 1
+    originalUnit: l.
+    normalizedQuantity: 1000
+    normalizedUnit: ml
+    comment: ''
+    allergens: []
+    type: autres
+  - uuid: nf05n7
+    name: Coriandre en poudre
+    originalQuantity: 3
+    originalUnit: c. à café
+    normalizedQuantity: 15
+    normalizedUnit: ml
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: vs2dfm
+    name: Ail en poudre
+    originalQuantity: 3
+    originalUnit: c. à café
+    normalizedQuantity: 15
+    normalizedUnit: ml
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: he3u48
+    name: Cumin moulu
+    originalQuantity: 3
+    originalUnit: c. à café
+    normalizedQuantity: 15
+    normalizedUnit: ml
+    comment: ''
+    allergens: []
+    type: epices
 preparation: |-
   \
 

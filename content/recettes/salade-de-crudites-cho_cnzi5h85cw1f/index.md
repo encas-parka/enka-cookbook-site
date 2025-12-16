@@ -14,51 +14,82 @@ plate: 100
 quantite_desc: ''
 check: false
 ingredients:
-  - ingredient: huile-dolive_h3c8al
-    quantite: 500
-    unit: ml
-    commentaire: ''
-  - ingredient: sauce-soja_jjrwlj
-    quantite: 450
-    unit: ml
-    commentaire: ''
-  - ingredient: vinaigre-de-cidre_7qo3ht
-    quantite: 450
-    unit: ml
-    commentaire: ''
-  - ingredient: betterave-cuite_i7psri
-    quantite: 1
-    unit: Kg
-    commentaire: ''
-  - ingredient: carotte_eouu0v
-    quantite: 300
-    unit: gr.
-    commentaire: ''
-  - ingredient: pomme_i6jlwm
-    quantite: 1.3
-    unit: Kg
-    commentaire: ''
-  - ingredient: chou-chinois_hz46f4
-    quantite: 4.3
-    unit: Kg
-    commentaire: ''
+  - uuid: h3c8al
+    name: huile d'olive
+    originalQuantity: 500
+    originalUnit: ml
+    normalizedQuantity: 500
+    normalizedUnit: ml
+    comment: ''
+    allergens: []
+    type: lof
+  - uuid: jjrwlj
+    name: Sauce soja
+    originalQuantity: 450
+    originalUnit: ml
+    normalizedQuantity: 450
+    normalizedUnit: ml
+    comment: ''
+    allergens:
+      - Soja
+    type: epices
+  - uuid: 7qo3ht
+    name: Vinaigre de cidre
+    originalQuantity: 450
+    originalUnit: ml
+    normalizedQuantity: 450
+    normalizedUnit: ml
+    comment: ''
+    allergens:
+      - Alcool
+    type: epices
+  - uuid: i7psri
+    name: Betterave cuite
+    originalQuantity: 1
+    originalUnit: kg
+    normalizedQuantity: 1000
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: eouu0v
+    name: Carotte
+    originalQuantity: 300
+    originalUnit: gr.
+    normalizedQuantity: 300
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: i6jlwm
+    name: Pomme
+    originalQuantity: 1.3
+    originalUnit: kg
+    normalizedQuantity: 1300
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: hz46f4
+    name: Chou chinois
+    originalQuantity: 4.3
+    originalUnit: kg
+    normalizedQuantity: 4300
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
 materiel: []
-preparation: >-
+preparation: |-
   > Tailler le chou chinois finement
 
-
-  Éplucher et enlever les pépins des pommes. Les couper en morceaux de tailles
-  approximatives
-
+  Éplucher et enlever les pépins des pommes. Les couper en morceaux de tailles approximatives
 
   Couper les betteraves en dés
 
-
   Éplucher et râper les carottes
 
-
   Mélanger avec l'huile, le vinaigre, et la sauce soja
-
 
   Rectifier l'assaisonnement
 preparation24h: ''

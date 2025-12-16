@@ -12,78 +12,170 @@ plate: 220
 check: true
 checkAlwaysOk: false
 ingredients:
-  - ingredient: cornichons-aigre-doux_eaudjn
-    quantite: 1.5
-    unit: Kg
-    commentaire: ''
-  - ingredient: pain-burger_1xyo35
-    quantite: 190
-    unit: unité
-    commentaire: ''
-  - ingredient: pain-burger-vegan_0zasob
-    quantite: 30
-    unit: unité
-    commentaire: ''
-  - ingredient: pomme-de-terre_18dy4e
-    quantite: 50
-    unit: Kg
-    commentaire: Frites
-  - ingredient: salade-iceberg_ihweq6
-    quantite: 20
-    unit: unité
-    commentaire: ''
-  - ingredient: tomate_ibtbnq
-    quantite: 45
-    unit: unité
-    commentaire: ''
-  - ingredient: ail_u2m28w
-    quantite: 5
-    unit: gousse·s
-    commentaire: Sauce Végane
-  - ingredient: ail_u2m28w
-    quantite: 2
-    unit: tête·s
-    commentaire: Sauce Végé
-  - ingredient: ail_u2m28w
-    quantite: 6
-    unit: tête·s
-    commentaire: Galettes crique
-  - ingredient: oignon_rtavky
-    quantite: 5
-    unit: Kg
-    commentaire: Galettes crique
-  - ingredient: pomme-de-terre_18dy4e
-    quantite: 35
-    unit: Kg
-    commentaire: Galettes crique
-  - ingredient: huile-de-friture_1ej217
-    quantite: 20
-    unit: l.
-    commentaire: ''
-  - ingredient: oeuf_zf3zf8
-    quantite: 30
-    unit: unité
-    commentaire: Galettes crique
-  - ingredient: persil-frais_hgfa4e
-    quantite: 1
-    unit: bottes
-    commentaire: Sauce Végane
-  - ingredient: persil-frais_hgfa4e
-    quantite: 7
-    unit: bottes
-    commentaire: Sauce Végé
-  - ingredient: persil-frais_hgfa4e
-    quantite: 10
-    unit: bottes
-    commentaire: Galettes crique
-  - ingredient: yaourt-vegetal_qiji6w
-    quantite: 1.2
-    unit: Kg
-    commentaire: Sauce Végane
-  - ingredient: fromage-blanc_b2dxf8
-    quantite: 8
-    unit: Kg
-    commentaire: Sauce Végé
+  - uuid: eaudjn
+    name: Cornichons aigre-doux
+    originalQuantity: 1.5
+    originalUnit: kg
+    normalizedQuantity: 1500
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: autres
+  - uuid: 1xyo35
+    name: Pain Burger
+    originalQuantity: 190
+    originalUnit: unité
+    normalizedQuantity: 190
+    normalizedUnit: unité
+    comment: ''
+    allergens: []
+    type: autres
+  - uuid: 0zasob
+    name: Pain Burger Végan
+    originalQuantity: 30
+    originalUnit: unité
+    normalizedQuantity: 30
+    normalizedUnit: unité
+    comment: ''
+    allergens: []
+    type: autres
+  - uuid: 18dy4e
+    name: Pomme de terre
+    originalQuantity: 50
+    originalUnit: kg
+    normalizedQuantity: 50000
+    normalizedUnit: gr.
+    comment: Frites
+    allergens: []
+    type: legumes
+  - uuid: ihweq6
+    name: Salade Iceberg
+    originalQuantity: 20
+    originalUnit: unité
+    normalizedQuantity: 20
+    normalizedUnit: unité
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: ibtbnq
+    name: Tomate
+    originalQuantity: 45
+    originalUnit: unité
+    normalizedQuantity: 5400
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: u2m28w
+    name: Ail
+    originalQuantity: 5
+    originalUnit: gousse·s
+    normalizedQuantity: 32.5
+    normalizedUnit: gr.
+    comment: Sauce Végane
+    allergens: []
+    type: legumes
+  - uuid: u2m28w
+    name: Ail
+    originalQuantity: 2
+    originalUnit: tête·s
+    normalizedQuantity: 160
+    normalizedUnit: gr.
+    comment: Sauce Végé
+    allergens: []
+    type: legumes
+  - uuid: u2m28w
+    name: Ail
+    originalQuantity: 6
+    originalUnit: tête·s
+    normalizedQuantity: 480
+    normalizedUnit: gr.
+    comment: Galettes crique
+    allergens: []
+    type: legumes
+  - uuid: rtavky
+    name: Oignon
+    originalQuantity: 5
+    originalUnit: kg
+    normalizedQuantity: 5000
+    normalizedUnit: gr.
+    comment: Galettes crique
+    allergens: []
+    type: legumes
+  - uuid: 18dy4e
+    name: Pomme de terre
+    originalQuantity: 35
+    originalUnit: kg
+    normalizedQuantity: 35000
+    normalizedUnit: gr.
+    comment: Galettes crique
+    allergens: []
+    type: legumes
+  - uuid: 1ej217
+    name: huile de friture
+    originalQuantity: 20
+    originalUnit: l.
+    normalizedQuantity: 20000
+    normalizedUnit: ml
+    comment: ''
+    allergens: []
+    type: lof
+  - uuid: zf3zf8
+    name: Oeuf
+    originalQuantity: 30
+    originalUnit: unité
+    normalizedQuantity: 30
+    normalizedUnit: unité
+    comment: Galettes crique
+    allergens:
+      - Oeuf
+    type: lof
+  - uuid: hgfa4e
+    name: Persil frais
+    originalQuantity: 1
+    originalUnit: bottes
+    normalizedQuantity: 1
+    normalizedUnit: bottes
+    comment: Sauce Végane
+    allergens: []
+    type: epices
+  - uuid: hgfa4e
+    name: Persil frais
+    originalQuantity: 7
+    originalUnit: bottes
+    normalizedQuantity: 7
+    normalizedUnit: bottes
+    comment: Sauce Végé
+    allergens: []
+    type: epices
+  - uuid: hgfa4e
+    name: Persil frais
+    originalQuantity: 10
+    originalUnit: bottes
+    normalizedQuantity: 10
+    normalizedUnit: bottes
+    comment: Galettes crique
+    allergens: []
+    type: epices
+  - uuid: qiji6w
+    name: Yaourt Végétal
+    originalQuantity: 1.2
+    originalUnit: kg
+    normalizedQuantity: 1200
+    normalizedUnit: gr.
+    comment: Sauce Végane
+    allergens: []
+    type: frais
+  - uuid: b2dxf8
+    name: Fromage blanc
+    originalQuantity: 8
+    originalUnit: kg
+    normalizedQuantity: 8000
+    normalizedUnit: gr.
+    comment: Sauce Végé
+    allergens:
+      - Produit laitier
+    type: frais
 preparation: |-
   Crique
 

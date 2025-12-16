@@ -12,34 +12,72 @@ plate: 100
 check: false
 checkAlwaysOk: true
 ingredients:
-  - ingredient: levure-chimique_vgec6e
-    quantite: 33
-    unit: gr.
-    commentaire: ''
-  - ingredient: huile-de-colza_eu7lc6
-    quantite: 1.7
-    unit: l.
-    commentaire: ''
-  - ingredient: farine-de-ble_2av6w8
-    quantite: 3.4
-    unit: Kg
-    commentaire: ''
-  - ingredient: poudre-damandes_rmgr7l
-    quantite: 450
-    unit: gr.
-    commentaire: ''
-  - ingredient: eau-de-fleur-doranger_ikdk3g
-    quantite: 400
-    unit: ml
-    commentaire: ''
-  - ingredient: sucre-glace_phv1to
-    quantite: 1
-    unit: Kg
-    commentaire: ''
-  - ingredient: cannelle_sk1gbb
-    quantite: 30
-    unit: gr.
-    commentaire: ''
+  - uuid: vgec6e
+    name: Levure chimique
+    originalQuantity: 33
+    originalUnit: gr.
+    normalizedQuantity: 33
+    normalizedUnit: gr.
+    comment: ''
+    allergens:
+      - Gluten
+    type: lof
+  - uuid: eu7lc6
+    name: huile de colza
+    originalQuantity: 1.7
+    originalUnit: l.
+    normalizedQuantity: 1700
+    normalizedUnit: ml
+    comment: ''
+    allergens: []
+    type: lof
+  - uuid: 2av6w8
+    name: Farine de blé
+    originalQuantity: 3.4
+    originalUnit: kg
+    normalizedQuantity: 3400
+    normalizedUnit: gr.
+    comment: ''
+    allergens:
+      - Gluten
+    type: lof
+  - uuid: rmgr7l
+    name: Poudre d'amandes
+    originalQuantity: 450
+    originalUnit: gr.
+    normalizedQuantity: 450
+    normalizedUnit: gr.
+    comment: ''
+    allergens:
+      - Fruit à coque
+    type: sucres
+  - uuid: ikdk3g
+    name: Eau de fleur d'oranger
+    originalQuantity: 400
+    originalUnit: ml
+    normalizedQuantity: 400
+    normalizedUnit: ml
+    comment: ''
+    allergens: []
+    type: sucres
+  - uuid: phv1to
+    name: Sucre glace
+    originalQuantity: 1
+    originalUnit: kg
+    normalizedQuantity: 1000
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: sucres
+  - uuid: sk1gbb
+    name: Cannelle
+    originalQuantity: 30
+    originalUnit: gr.
+    normalizedQuantity: 30
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: epices
 preparation: |-
   Préchauffer le four à 170°C.
 

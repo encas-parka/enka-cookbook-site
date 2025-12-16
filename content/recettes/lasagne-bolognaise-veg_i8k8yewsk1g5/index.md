@@ -18,79 +18,138 @@ plate: 100
 quantite_desc: ''
 check: true
 ingredients:
-  - ingredient: champignon-de-paris_92zzps
-    quantite: 5
-    unit: Kg
-    commentaire: ''
-  - ingredient: proteines-de-soja-petites_1r89qf
-    quantite: 3
-    unit: Kg
-    commentaire: Le poids triple avec la réhydratation
-  - ingredient: farine-de-ble_2av6w8
-    quantite: 900
-    unit: gr.
-    commentaire: ''
-  - ingredient: beurre-doux_kmq1zb
-    quantite: 900
-    unit: gr.
-    commentaire: ''
-  - ingredient: fromage-rape_u1fypr
-    quantite: 3.5
-    unit: Kg
-    commentaire: ''
-  - ingredient: lait-demi-ecreme_x286pc
-    quantite: 16
-    unit: l.
-    commentaire: ''
-  - ingredient: huile-dolive_h3c8al
-    quantite: 1
-    unit: l.
-    commentaire: ''
-  - ingredient: muscade_msyocm
-    quantite: 1
-    unit: unité
-    commentaire: ''
-  - ingredient: sauce-tomate-mutti_xdkeh3
-    quantite: 10
-    unit: Kg
-    commentaire: ''
-  - ingredient: celeri-branche_78fo97
-    quantite: 1.5
-    unit: Kg
-    commentaire: ''
-  - ingredient: carotte_eouu0v
-    quantite: 3
-    unit: Kg
-    commentaire: ''
-  - ingredient: oignon_rtavky
-    quantite: 3
-    unit: Kg
-    commentaire: ''
-  - ingredient: lasagnes_wby30p
-    quantite: 10
-    unit: unité
-    commentaire: >-
-      10 paquets de pates à lasagnes (1,5 paquets par plaque gastro ; 1 plaque
-      gastro = 15 portions)
+  - uuid: 92zzps
+    name: Champignon de Paris
+    originalQuantity: 5
+    originalUnit: kg
+    normalizedQuantity: 5000
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: 1r89qf
+    name: Protéines de soja (petites)
+    originalQuantity: 3
+    originalUnit: kg
+    normalizedQuantity: 3000
+    normalizedUnit: gr.
+    comment: Le poids triple avec la réhydratation
+    allergens: []
+    type: sec
+  - uuid: 2av6w8
+    name: Farine de blé
+    originalQuantity: 900
+    originalUnit: gr.
+    normalizedQuantity: 900
+    normalizedUnit: gr.
+    comment: ''
+    allergens:
+      - Gluten
+    type: lof
+  - uuid: kmq1zb
+    name: Beurre doux
+    originalQuantity: 900
+    originalUnit: gr.
+    normalizedQuantity: 900
+    normalizedUnit: gr.
+    comment: ''
+    allergens:
+      - Produit laitier
+    type: frais
+  - uuid: u1fypr
+    name: Fromage râpé
+    originalQuantity: 3.5
+    originalUnit: kg
+    normalizedQuantity: 3500
+    normalizedUnit: gr.
+    comment: ''
+    allergens:
+      - Produit laitier
+    type: frais
+  - uuid: x286pc
+    name: Lait demi-écrémé
+    originalQuantity: 16
+    originalUnit: l.
+    normalizedQuantity: 16000
+    normalizedUnit: ml
+    comment: ''
+    allergens:
+      - Produit laitier
+    type: lof
+  - uuid: h3c8al
+    name: huile d'olive
+    originalQuantity: 1
+    originalUnit: l.
+    normalizedQuantity: 1000
+    normalizedUnit: ml
+    comment: ''
+    allergens: []
+    type: lof
+  - uuid: msyocm
+    name: Muscade
+    originalQuantity: 1
+    originalUnit: unité
+    normalizedQuantity: 1
+    normalizedUnit: unité
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: xdkeh3
+    name: Sauce tomate mutti
+    originalQuantity: 10
+    originalUnit: kg
+    normalizedQuantity: 10000
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: 78fo97
+    name: Céleri branche
+    originalQuantity: 1.5
+    originalUnit: kg
+    normalizedQuantity: 1500
+    normalizedUnit: gr.
+    comment: ''
+    allergens:
+      - Céleri
+    type: legumes
+  - uuid: eouu0v
+    name: Carotte
+    originalQuantity: 3
+    originalUnit: kg
+    normalizedQuantity: 3000
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: rtavky
+    name: Oignon
+    originalQuantity: 3
+    originalUnit: kg
+    normalizedQuantity: 3000
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: wby30p
+    name: Lasagnes
+    originalQuantity: 10
+    originalUnit: unité
+    normalizedQuantity: 10
+    normalizedUnit: unité
+    comment: 10 paquets de pates à lasagnes (1,5 paquets par plaque gastro ; 1 plaque gastro = 15 portions)
+    allergens:
+      - Gluten
+    type: sec
 materiel: []
-preparation: >-
+preparation: |-
   - Faire le soffrito (oignon, céleri, carottes)
-
   - rajouter la protéine de soja réhydratée et les champignons
-
-  - Assaisonner avec le mélange d'épices (4 épices, cumin, paprika) C'est ce qui
-  remplacera la saveur "viande"
-
-  - ajouter la polpa mutti et le laurier. Rectifier l'assaisonnement et laisser
-  mijoter
-
-  - faire la béchamel : faire un roux avec le mélange beurre/farine, ajouter le
-  lait. Laisser s'épaissir à feu très doux.
-
+  - Assaisonner avec le mélange d'épices (4 épices, cumin, paprika) C'est ce qui remplacera la saveur "viande"
+  - ajouter la polpa mutti et le laurier. Rectifier l'assaisonnement et laisser mijoter
+  - faire la béchamel : faire un roux avec le mélange beurre/farine, ajouter le lait. Laisser s'épaissir à feu très doux.
   - monter les étages de lasagne : plaques - ragout - béchamel
-
   - Couvrir de fromage rapé
-
   - faire cuire à 180° pendant 30 min
 preparation24h: ''
 astuces: []

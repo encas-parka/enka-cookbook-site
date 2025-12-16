@@ -14,67 +14,7 @@
   "check": true,
   "checkAlwaysOk": false,
   "materiel": ["Grand Saladier"],
-  "ingredients": [{
-      "uuid": "9bdo2l",
-      "name": "Sésame noir",
-      "originalQuantity": 0.03,
-      "originalUnit": "gr.",
-      "normalizedQuantity": 0.03,
-      "normalizedUnit": "gr.",
-      "comment": "",
-      "allergens": ["Sésame"],
-      "type": "epices"
-    },{
-      "uuid": "bbwo4n",
-      "name": "Tamari (sauce)",
-      "originalQuantity": 4,
-      "originalUnit": "c. à soupe",
-      "normalizedQuantity": 60,
-      "normalizedUnit": "ml",
-      "comment": "",
-      "allergens": ["Soja"],
-      "type": "epices"
-    },{
-      "uuid": "k6injl",
-      "name": "Vinaigre de riz",
-      "originalQuantity": 300,
-      "originalUnit": "ml",
-      "normalizedQuantity": 300,
-      "normalizedUnit": "ml",
-      "comment": "",
-      "allergens": [],
-      "type": "epices"
-    },{
-      "uuid": "jrqk2q",
-      "name": "Chou vert",
-      "originalQuantity": 1,
-      "originalUnit": "kg",
-      "normalizedQuantity": 1000,
-      "normalizedUnit": "gr.",
-      "comment": "",
-      "allergens": [],
-      "type": "legumes"
-    },{
-      "uuid": "eu7lc6",
-      "name": "huile de colza",
-      "originalQuantity": 4,
-      "originalUnit": "c. à soupe",
-      "normalizedQuantity": 60,
-      "normalizedUnit": "ml",
-      "comment": "",
-      "allergens": [],
-      "type": "lof"
-    },{
-      "uuid": "u9z2he",
-      "name": "Sucre en poudre",
-      "originalQuantity": 30,
-      "originalUnit": "gr.",
-      "normalizedQuantity": 30,
-      "normalizedUnit": "gr.",
-      "comment": "",
-      "allergens": [],
-      "type": "sucres"
-    }],
+  "ingredients": [{"allergens":["Sésame"],"comment":"","name":"Sésame noir","normalizedQuantity":0.03,"normalizedUnit":"gr.","originalQuantity":0.03,"originalUnit":"gr.","type":"epices","uuid":"9bdo2l"},{"allergens":["Soja"],"comment":"","name":"Tamari (sauce)","normalizedQuantity":60,"normalizedUnit":"ml","originalQuantity":4,"originalUnit":"c. à soupe","type":"epices","uuid":"bbwo4n"},{"allergens":[],"comment":"","name":"Vinaigre de riz","normalizedQuantity":300,"normalizedUnit":"ml","originalQuantity":300,"originalUnit":"ml","type":"epices","uuid":"k6injl"},{"allergens":[],"comment":"","name":"Chou vert","normalizedQuantity":1000,"normalizedUnit":"gr.","originalQuantity":1,"originalUnit":"kg","type":"legumes","uuid":"jrqk2q"},{"allergens":[],"comment":"","name":"huile de colza","normalizedQuantity":60,"normalizedUnit":"ml","originalQuantity":4,"originalUnit":"c. à soupe","type":"lof","uuid":"eu7lc6"},{"allergens":[],"comment":"","name":"Sucre en poudre","normalizedQuantity":30,"normalizedUnit":"gr.","originalQuantity":30,"originalUnit":"gr.","type":"sucres","uuid":"u9z2he"}],
   "preparation": "* Hacher très finement le choux à la mandoline fine. Le faire tremper 20 minutes dans de l'eau salée.\n* Mélanger le vinaigre et le sucre pour que le vinaigre fonde. Essorer le choux blanc, le rincer. Mélanger le choux avec la marinade de vinaigre. Laisser mariner environ 4 heures.\n* Égoutter le choux en le pressant dans ses mains. Jeter la marinade. Assaisonner avec l'huile et le tamari, ajouter les graines de sésame.",
   "prepAlt": null,
   "permissionWrite": [],

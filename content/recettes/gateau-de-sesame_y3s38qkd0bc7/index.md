@@ -7,40 +7,93 @@ cuisson: true
 description: 'Gâteau au Sésame noir et chocolat '
 draft: false
 ingredients:
-  - ingredient: levure-chimique_vgec6e
-    quantite: 70
-    unit: gr.
-    commentaire: ''
-  - ingredient: puree-de-sesame-noir_9d8hxn
-    quantite: 1
-    unit: Kg
-    commentaire: ''
-  - ingredient: sel_2juq3x
-    commentaire: ''
-  - ingredient: beurre-demi-sel_mxub21
-    quantite: 2
-    unit: Kg
-    commentaire: ''
-  - ingredient: creme-liquide_nvzduo
-    quantite: 1
-    unit: l.
-    commentaire: ''
-  - ingredient: oeuf_zf3zf8
-    quantite: 25
-    unit: unité
-    commentaire: ''
-  - ingredient: farine-de-ble_2av6w8
-    quantite: 1
-    unit: Kg
-    commentaire: ''
-  - ingredient: chocolat-noir_cr4kiz
-    quantite: 2
-    unit: Kg
-    commentaire: ''
-  - ingredient: sucre-en-poudre_u9z2he
-    quantite: 3
-    unit: Kg
-    commentaire: ''
+  - uuid: vgec6e
+    name: Levure chimique
+    originalQuantity: 70
+    originalUnit: gr.
+    normalizedQuantity: 70
+    normalizedUnit: gr.
+    comment: ''
+    allergens:
+      - Gluten
+    type: lof
+  - uuid: 9d8hxn
+    name: Purée de sésame noir
+    originalQuantity: 1
+    originalUnit: kg
+    normalizedQuantity: 1000
+    normalizedUnit: gr.
+    comment: ''
+    allergens:
+      - Sésame
+    type: autres
+  - uuid: 2juq3x
+    name: Sel
+    originalQuantity: 1
+    originalUnit: au goût
+    normalizedQuantity: 1
+    normalizedUnit: au goût
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: mxub21
+    name: Beurre demi-sel
+    originalQuantity: 2
+    originalUnit: kg
+    normalizedQuantity: 2000
+    normalizedUnit: gr.
+    comment: ''
+    allergens:
+      - Produit laitier
+    type: frais
+  - uuid: nvzduo
+    name: Crème liquide
+    originalQuantity: 1
+    originalUnit: l.
+    normalizedQuantity: 1000
+    normalizedUnit: ml
+    comment: ''
+    allergens:
+      - Produit laitier
+    type: lof
+  - uuid: zf3zf8
+    name: Oeuf
+    originalQuantity: 25
+    originalUnit: unité
+    normalizedQuantity: 25
+    normalizedUnit: unité
+    comment: ''
+    allergens:
+      - Oeuf
+    type: lof
+  - uuid: 2av6w8
+    name: Farine de blé
+    originalQuantity: 1
+    originalUnit: kg
+    normalizedQuantity: 1000
+    normalizedUnit: gr.
+    comment: ''
+    allergens:
+      - Gluten
+    type: lof
+  - uuid: cr4kiz
+    name: Chocolat noir
+    originalQuantity: 2
+    originalUnit: kg
+    normalizedQuantity: 2000
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: sucres
+  - uuid: u9z2he
+    name: Sucre en poudre
+    originalQuantity: 3
+    originalUnit: kg
+    normalizedQuantity: 3000
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: sucres
 materiel:
   - Gastro 1/1 (Fins)
   - Four

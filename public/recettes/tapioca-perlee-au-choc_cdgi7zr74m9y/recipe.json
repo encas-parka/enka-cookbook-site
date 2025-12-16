@@ -14,47 +14,7 @@
   "check": true,
   "checkAlwaysOk": false,
   "materiel": ["Bain Marie"],
-  "ingredients": [{
-      "uuid": "hzwesd",
-      "name": "Lait de riz",
-      "originalQuantity": 1,
-      "originalUnit": "l.",
-      "normalizedQuantity": 1000,
-      "normalizedUnit": "ml",
-      "comment": "",
-      "allergens": [],
-      "type": "lof"
-    },{
-      "uuid": "mkttuh",
-      "name": "Tapioca perlée",
-      "originalQuantity": 80,
-      "originalUnit": "gr.",
-      "normalizedQuantity": 80,
-      "normalizedUnit": "gr.",
-      "comment": "entre 60 à 80g",
-      "allergens": [],
-      "type": "sec"
-    },{
-      "uuid": "1e3zhq",
-      "name": "Chocolat noir patissier 70p100",
-      "originalQuantity": 200,
-      "originalUnit": "gr.",
-      "normalizedQuantity": 200,
-      "normalizedUnit": "gr.",
-      "comment": "",
-      "allergens": [],
-      "type": "sucres"
-    },{
-      "uuid": "rgt7s4",
-      "name": "Poivre noir moulu",
-      "originalQuantity": 1,
-      "originalUnit": "pincées",
-      "normalizedQuantity": 0.4,
-      "normalizedUnit": "gr.",
-      "comment": "optionnel pour relever l'arôme du chocolat",
-      "allergens": [],
-      "type": "epices"
-    }],
+  "ingredients": [{"allergens":[],"comment":"","name":"Lait de riz","normalizedQuantity":1000,"normalizedUnit":"ml","originalQuantity":1,"originalUnit":"l.","type":"lof","uuid":"hzwesd"},{"allergens":[],"comment":"entre 60 à 80g","name":"Tapioca perlée","normalizedQuantity":80,"normalizedUnit":"gr.","originalQuantity":80,"originalUnit":"gr.","type":"sec","uuid":"mkttuh"},{"allergens":[],"comment":"","name":"Chocolat noir patissier 70p100","normalizedQuantity":200,"normalizedUnit":"gr.","originalQuantity":200,"originalUnit":"gr.","type":"sucres","uuid":"1e3zhq"},{"allergens":[],"comment":"optionnel pour relever l'arôme du chocolat","name":"Poivre noir moulu","normalizedQuantity":0.4,"normalizedUnit":"gr.","originalQuantity":1,"originalUnit":"pincées","type":"epices","uuid":"rgt7s4"}],
   "preparation": "1 - A feu moyen, faire fondre le chocolat dans le lait de riz pour obtenir un chocolat au lait. ( ne pas faire bouillir)\n\n2 - Ajouter la pincée de poivre moulu (optionnel)\n\n3 - Ajouter les perles de tapioca tout en remuant 6min environ\n\n4 - Verser encore chaud le mélange dans des plats à tartes (environ 1 à 2cm d'épaisseur max)\n\n5 - Laisser refroidir ( les perles continuent de gonfler) puis mettre au frigo pour que la préparation prenne en consistance.\n\nPeut-être préparé 3heures environ avant de servir",
   "prepAlt": null,
   "permissionWrite": [],

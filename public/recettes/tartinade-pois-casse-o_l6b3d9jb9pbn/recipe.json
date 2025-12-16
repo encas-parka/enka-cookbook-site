@@ -14,77 +14,7 @@
   "check": true,
   "checkAlwaysOk": null,
   "materiel": ["Bruleur","Marmitte","Plat Paela"],
-  "ingredients": [{
-      "uuid": "rtavky",
-      "name": "Oignon",
-      "originalQuantity": 3,
-      "originalUnit": "kg",
-      "normalizedQuantity": 3000,
-      "normalizedUnit": "gr.",
-      "comment": "",
-      "allergens": [],
-      "type": "legumes"
-    },{
-      "uuid": "7v72le",
-      "name": "Pois cassés",
-      "originalQuantity": 3,
-      "originalUnit": "kg",
-      "normalizedQuantity": 3000,
-      "normalizedUnit": "gr.",
-      "comment": "",
-      "allergens": [],
-      "type": "sec"
-    },{
-      "uuid": "2juq3x",
-      "name": "Sel",
-      "originalQuantity": 1,
-      "originalUnit": "au goût",
-      "normalizedQuantity": 1,
-      "normalizedUnit": "au goût",
-      "comment": "",
-      "allergens": [],
-      "type": "epices"
-    },{
-      "uuid": "dc8855",
-      "name": "Cumin",
-      "originalQuantity": 1,
-      "originalUnit": "au goût",
-      "normalizedQuantity": 1,
-      "normalizedUnit": "au goût",
-      "comment": "",
-      "allergens": [],
-      "type": "epices"
-    },{
-      "uuid": "bidsmu",
-      "name": "Paprika",
-      "originalQuantity": 1,
-      "originalUnit": "au goût",
-      "normalizedQuantity": 1,
-      "normalizedUnit": "au goût",
-      "comment": "",
-      "allergens": [],
-      "type": "epices"
-    },{
-      "uuid": "qemlqs",
-      "name": "Vinaigre balsamique",
-      "originalQuantity": 0.25,
-      "originalUnit": "l.",
-      "normalizedQuantity": 250,
-      "normalizedUnit": "ml",
-      "comment": "",
-      "allergens": ["Sulfites"],
-      "type": "epices"
-    },{
-      "uuid": "u9z2he",
-      "name": "Sucre en poudre",
-      "originalQuantity": 250,
-      "originalUnit": "gr.",
-      "normalizedQuantity": 250,
-      "normalizedUnit": "gr.",
-      "comment": "",
-      "allergens": [],
-      "type": "sucres"
-    }],
+  "ingredients": [{"allergens":[],"comment":"","name":"Oignon","normalizedQuantity":3000,"normalizedUnit":"gr.","originalQuantity":3,"originalUnit":"kg","type":"legumes","uuid":"rtavky"},{"allergens":[],"comment":"","name":"Pois cassés","normalizedQuantity":3000,"normalizedUnit":"gr.","originalQuantity":3,"originalUnit":"kg","type":"sec","uuid":"7v72le"},{"allergens":[],"comment":"","name":"Sel","normalizedQuantity":1,"normalizedUnit":"au goût","originalQuantity":1,"originalUnit":"au goût","type":"epices","uuid":"2juq3x"},{"allergens":[],"comment":"","name":"Cumin","normalizedQuantity":1,"normalizedUnit":"au goût","originalQuantity":1,"originalUnit":"au goût","type":"epices","uuid":"dc8855"},{"allergens":[],"comment":"","name":"Paprika","normalizedQuantity":1,"normalizedUnit":"au goût","originalQuantity":1,"originalUnit":"au goût","type":"epices","uuid":"bidsmu"},{"allergens":["Sulfites"],"comment":"","name":"Vinaigre balsamique","normalizedQuantity":250,"normalizedUnit":"ml","originalQuantity":0.25,"originalUnit":"l.","type":"epices","uuid":"qemlqs"},{"allergens":[],"comment":"","name":"Sucre en poudre","normalizedQuantity":250,"normalizedUnit":"gr.","originalQuantity":250,"originalUnit":"gr.","type":"sucres","uuid":"u9z2he"}],
   "preparation": "* Rincer puis faire tremper les pois cassés *pendant une heure*.\n* Puis les faire revenir rapidement une grande casserole avec de l'huile d'olive (bien remuer en permanence) avant d'ajouter 2 fois leur volume d'eau.\n* Porter à ébullition puis baisser le feu et laisser cuire pendant une heure environ.\n* Pendant ce temps, faire revenir les oignons coupés assez petits dans une poele.\n* Une fois translucides saupoudrer de sucre et laisser caraméliser en remuant de temps en temps. Quand c'est bien chaud, déglacer avec le vinaigre.\n* Laisser bouillir et évaporer le liquide avant de remuer.\n* Mixer les pois cassés et y ajouter les oignons.",
   "prepAlt": null,
   "permissionWrite": [],

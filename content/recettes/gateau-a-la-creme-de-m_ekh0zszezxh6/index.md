@@ -11,34 +11,72 @@ plate: 12
 check: true
 checkAlwaysOk: false
 ingredients:
-  - ingredient: sarrasin_9f35oz
-    quantite: 100
-    unit: gr.
-    commentaire: ''
-  - ingredient: oeuf_zf3zf8
-    quantite: 4
-    unit: unité
-    commentaire: ''
-  - ingredient: farine-de-ble-noir-sarrasin_2ej7fi
-    quantite: 2
-    unit: c. à soupe
-    commentaire: ''
-  - ingredient: beurre-demi-sel_mxub21
-    quantite: 25
-    unit: gr.
-    commentaire: pour la nappage à mélanger avec le chocolat
-  - ingredient: beurre-demi-sel_mxub21
-    quantite: 100
-    unit: gr.
-    commentaire: ''
-  - ingredient: confiture-de-chataigne-sans-sucre_q33x0k
-    quantite: 500
-    unit: gr.
-    commentaire: ''
-  - ingredient: chocolat-noir-patissier-70p100_1e3zhq
-    quantite: 200
-    unit: gr.
-    commentaire: ''
+  - uuid: 9f35oz
+    name: Sarrasin
+    originalQuantity: 100
+    originalUnit: gr.
+    normalizedQuantity: 100
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: sec
+  - uuid: zf3zf8
+    name: Oeuf
+    originalQuantity: 4
+    originalUnit: unité
+    normalizedQuantity: 4
+    normalizedUnit: unité
+    comment: ''
+    allergens:
+      - Oeuf
+    type: lof
+  - uuid: 2ej7fi
+    name: Farine de blé noir (sarrasin)
+    originalQuantity: 2
+    originalUnit: c. à soupe
+    normalizedQuantity: 30
+    normalizedUnit: ml
+    comment: ''
+    allergens: []
+    type: lof
+  - uuid: mxub21
+    name: Beurre demi-sel
+    originalQuantity: 25
+    originalUnit: gr.
+    normalizedQuantity: 25
+    normalizedUnit: gr.
+    comment: pour la nappage à mélanger avec le chocolat
+    allergens:
+      - Produit laitier
+    type: frais
+  - uuid: mxub21
+    name: Beurre demi-sel
+    originalQuantity: 100
+    originalUnit: gr.
+    normalizedQuantity: 100
+    normalizedUnit: gr.
+    comment: ''
+    allergens:
+      - Produit laitier
+    type: frais
+  - uuid: q33x0k
+    name: Confiture de chataigne (sans sucre)
+    originalQuantity: 500
+    originalUnit: gr.
+    normalizedQuantity: 500
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: sucres
+  - uuid: 1e3zhq
+    name: Chocolat noir patissier 70p100
+    originalQuantity: 200
+    originalUnit: gr.
+    normalizedQuantity: 200
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: sucres
 preparation: |-
   Mélanger tous les ingrédients
 

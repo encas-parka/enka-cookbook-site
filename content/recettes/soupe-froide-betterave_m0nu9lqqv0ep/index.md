@@ -14,84 +14,138 @@ quantite_desc: un bol de 225 ml
 check: false
 checkAlwaysOk: false
 ingredients:
-  - ingredient: citron-jaune_5cg0yu
-    quantite: 8
-    unit: unité
-    commentaire: Crème aigre
-  - ingredient: zestes-dorange_z6hnb8
-    quantite: 4
-    unit: unité
-    commentaire: nombre d'orange
-  - ingredient: orange-non-traitee_bf44pm
-    quantite: 4
-    unit: unité
-    commentaire: garder les zestes
-  - ingredient: oignon_rtavky
-    quantite: 2
-    unit: Kg
-    commentaire: ''
-  - ingredient: betterave-rouge_7sc3uw
-    quantite: 7.5
-    unit: Kg
-    commentaire: ''
-  - ingredient: poivre-noir-moulu_rgt7s4
-    quantite: 1
-    unit: c. à café
-    commentaire: Crème aigre
-  - ingredient: sel_2juq3x
-    quantite: 2
-    unit: c. à café
-    commentaire: Crème aigre
-  - ingredient: bouillon-de-legume-sans-gluten_tmk6ya
-    quantite: 30
-    unit: unité
-    commentaire: ''
-  - ingredient: ciboulette_mt22ff
-    quantite: 5
-    unit: bottes
-    commentaire: ''
-  - ingredient: huile-dolive_h3c8al
-    quantite: 300
-    unit: ml
-    commentaire: ''
-  - ingredient: eau_ljzb7j
-    quantite: 15
-    unit: l.
-    commentaire: ''
-  - ingredient: jus-dorange_gzi2ry
-    quantite: 2
-    unit: l.
-    commentaire: 100% pur jus
-  - ingredient: creme-fraiche-epaisse-entiere_izd01q
-    quantite: 2.5
-    unit: Kg
-    commentaire: Crème aigre
-preparation: >-
-  **Soupe** : Hacher les oignons. Peler et couper en morceaux les betteraves
-  crues.
+  - uuid: 5cg0yu
+    name: Citron jaune
+    originalQuantity: 8
+    originalUnit: unité
+    normalizedQuantity: 800
+    normalizedUnit: gr.
+    comment: Crème aigre
+    allergens: []
+    type: legumes
+  - uuid: z6hnb8
+    name: Zestes d'orange
+    originalQuantity: 4
+    originalUnit: unité
+    normalizedQuantity: 4
+    normalizedUnit: unité
+    comment: nombre d'orange
+    allergens: []
+    type: legumes
+  - uuid: bf44pm
+    name: Orange non traitée
+    originalQuantity: 4
+    originalUnit: unité
+    normalizedQuantity: 4
+    normalizedUnit: unité
+    comment: garder les zestes
+    allergens: []
+    type: legumes
+  - uuid: rtavky
+    name: Oignon
+    originalQuantity: 2
+    originalUnit: kg
+    normalizedQuantity: 2000
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: 7sc3uw
+    name: Betterave rouge
+    originalQuantity: 7.5
+    originalUnit: kg
+    normalizedQuantity: 7500
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: rgt7s4
+    name: Poivre noir moulu
+    originalQuantity: 1
+    originalUnit: c. à café
+    normalizedQuantity: 5
+    normalizedUnit: ml
+    comment: Crème aigre
+    allergens: []
+    type: epices
+  - uuid: 2juq3x
+    name: Sel
+    originalQuantity: 2
+    originalUnit: c. à café
+    normalizedQuantity: 10
+    normalizedUnit: gr.
+    comment: Crème aigre
+    allergens: []
+    type: epices
+  - uuid: tmk6ya
+    name: Bouillon de légume (sans gluten)
+    originalQuantity: 30
+    originalUnit: unité
+    normalizedQuantity: 30
+    normalizedUnit: unité
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: mt22ff
+    name: Ciboulette
+    originalQuantity: 5
+    originalUnit: bottes
+    normalizedQuantity: 5
+    normalizedUnit: bottes
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: h3c8al
+    name: huile d'olive
+    originalQuantity: 300
+    originalUnit: ml
+    normalizedQuantity: 300
+    normalizedUnit: ml
+    comment: ''
+    allergens: []
+    type: lof
+  - uuid: ljzb7j
+    name: Eau
+    originalQuantity: 15
+    originalUnit: l.
+    normalizedQuantity: 15000
+    normalizedUnit: ml
+    comment: ''
+    allergens: []
+    type: autres
+  - uuid: gzi2ry
+    name: Jus d'orange
+    originalQuantity: 2
+    originalUnit: l.
+    normalizedQuantity: 2000
+    normalizedUnit: ml
+    comment: 100% pur jus
+    allergens: []
+    type: sucres
+  - uuid: izd01q
+    name: Crème fraîche épaisse entière
+    originalQuantity: 2.5
+    originalUnit: kg
+    normalizedQuantity: 2500
+    normalizedUnit: gr.
+    comment: Crème aigre
+    allergens:
+      - Produit laitier
+    type: frais
+preparation: |-
+  **Soupe** : Hacher les oignons. Peler et couper en morceaux les betteraves crues.
 
+  Faire chauffer l'huile dans une grande casserole. Y mettre les oignons à revenir 10min sur feux doux. Ajouter les betteraves, l'eau chaude et les bouillons cubes, mélanger et porter à ébullition.
 
-  Faire chauffer l'huile dans une grande casserole. Y mettre les oignons à
-  revenir 10min sur feux doux. Ajouter les betteraves, l'eau chaude et les
-  bouillons cubes, mélanger et porter à ébullition.
-
-
-  Réduire le feu, couvrir et laisser mijoter 20/30min : les betteraves doivent
-  être tendres.
-
+  Réduire le feu, couvrir et laisser mijoter 20/30min : les betteraves doivent être tendres.
 
   Mixer la soupe jusqu'à obtention d'un velouté. Laisser refroidir.
 
-
   Ajouter les zestes et le jus d'orange, saler et poivrer. Placer au frais.
 
+  **Crème aigre** : Presser le jus des citrons. Mélanger à la crème fraiche. La préparation épaissit. Saler et poivrer.
 
-  **Crème aigre** : Presser le jus des citrons. Mélanger à la crème fraiche. La
-  préparation épaissit. Saler et poivrer.
-
-
-  Servir un bol de soupe avec une cuillère à soupe de crème aigre et parsemer de
-  ciboulette hachée.
+  Servir un bol de soupe avec une cuillère à soupe de crème aigre et parsemer de ciboulette hachée.
 preparation24h: Faire cette soupe la veille car elle doit être servie très froide.
 publishDate: 2024-05-27T21:09:00.000Z
 serveHot: false

@@ -18,87 +18,124 @@ plate: 100
 quantite_desc: ''
 check: false
 ingredients:
-  - ingredient: pate-d-arachide_6778796eb8d8
-    quantite: 3.5
-    unit: Kg
-    commentaire: Dakatine pour les vrai·e·s
-  - ingredient: riz-basmati_opblzb
-    quantite: 8
-    unit: Kg
-    commentaire: ''
-  - ingredient: gingembre_0d1fzw
-    quantite: 35
-    unit: gr.
-    commentaire: ''
-  - ingredient: bouillon-cube_57xo8g
-    quantite: 13
-    unit: unité
-    commentaire: ''
-  - ingredient: chou-blanc_mlukbi
-    quantite: 7
-    unit: Kg
-    commentaire: ''
-  - ingredient: carotte_eouu0v
-    quantite: 7
-    unit: Kg
-    commentaire: ''
-  - ingredient: ail_u2m28w
-    quantite: 2
-    unit: tête·s
-    commentaire: ''
-  - ingredient: oignon_rtavky
-    quantite: 7
-    unit: Kg
-    commentaire: ''
-  - ingredient: concentre-de-tomate_mck2wl
-    quantite: 225
-    unit: gr.
-    commentaire: ''
-  - ingredient: tomate_ibtbnq
-    quantite: 3.5
-    unit: Kg
-    commentaire: ''
+  - uuid: 6778796eb8d8
+    name: Pâte d'arachide
+    originalQuantity: 3.5
+    originalUnit: kg
+    normalizedQuantity: 3500
+    normalizedUnit: gr.
+    comment: Dakatine pour les vrai·e·s
+    allergens:
+      - Arachides
+    type: autres
+  - uuid: opblzb
+    name: Riz basmati
+    originalQuantity: 8
+    originalUnit: kg
+    normalizedQuantity: 8000
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: sec
+  - uuid: 0d1fzw
+    name: Gingembre
+    originalQuantity: 35
+    originalUnit: gr.
+    normalizedQuantity: 35
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: 57xo8g
+    name: bouillon cube
+    originalQuantity: 13
+    originalUnit: unité
+    normalizedQuantity: 13
+    normalizedUnit: unité
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: mlukbi
+    name: Chou blanc
+    originalQuantity: 7
+    originalUnit: kg
+    normalizedQuantity: 7000
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: eouu0v
+    name: Carotte
+    originalQuantity: 7
+    originalUnit: kg
+    normalizedQuantity: 7000
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: u2m28w
+    name: Ail
+    originalQuantity: 2
+    originalUnit: tête·s
+    normalizedQuantity: 160
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: rtavky
+    name: Oignon
+    originalQuantity: 7
+    originalUnit: kg
+    normalizedQuantity: 7000
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: mck2wl
+    name: Concentré de tomate
+    originalQuantity: 225
+    originalUnit: gr.
+    normalizedQuantity: 225
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: ibtbnq
+    name: Tomate
+    originalQuantity: 3.5
+    originalUnit: kg
+    normalizedQuantity: 3500
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
 materiel: []
-preparation: >-
+preparation: |-
   > Faire chauffer l'huile avec les épices poivre et curcuma
-
 
   Faire suer les oignons, l'ail et le gingembre
 
-
-  Rajouter les carottes et chou blanc. Ajouter le sel, laisser rissoler les
-  légumes
-
+  Rajouter les carottes et chou blanc. Ajouter le sel, laisser rissoler les légumes
 
   Ajouter la pâte d'arachide
 
-
   Faire fondre les cubes de bouillon dans un peu d'eau chaude dans une casserole
-
 
   Ajouter les tomates fraiches et le concentré
 
-
   Ajouter le bouillon
-
 
   Rajouter un peu d'eau si besoin et laisser mijoter à couvert
 
-
   Rectifier l'assaisonnement
-
 
   > Rincer le riz jusqu'à ce que l'eau soit claire et débarrassée de l'amidon
 
-
   ajouter quelques graines de cardamone
-
 
   Ajouter à peu près 2 volumes d'eau par volume de riz
 
-
-  Si pas de ricecooker, faire cuire à feu fort jusqu'au début de l’ébullition
-  pour mettre à feu très doux
+  Si pas de ricecooker, faire cuire à feu fort jusqu'au début de l’ébullition pour mettre à feu très doux
 preparation24h: ''
 astuces: []
 prepAlt: []

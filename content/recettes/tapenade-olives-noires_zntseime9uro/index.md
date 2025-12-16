@@ -14,23 +14,36 @@ plate: 10
 check: true
 checkAlwaysOk: false
 ingredients:
-  - ingredient: ail_u2m28w
-    quantite: 1
-    unit: gousse·s
-    commentaire: ''
-  - ingredient: olives-noires-a-la-grecque_9p3n36
-    quantite: 100
-    unit: gr.
-    commentaire: ''
-  - ingredient: huile-dolive_h3c8al
-    quantite: 2
-    unit: c. à soupe
-    commentaire: ''
+  - uuid: u2m28w
+    name: Ail
+    originalQuantity: 1
+    originalUnit: gousse·s
+    normalizedQuantity: 6.5
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: 9p3n36
+    name: Olives noires à la grecque
+    originalQuantity: 100
+    originalUnit: gr.
+    normalizedQuantity: 100
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: h3c8al
+    name: huile d'olive
+    originalQuantity: 2
+    originalUnit: c. à soupe
+    normalizedQuantity: 30
+    normalizedUnit: ml
+    comment: ''
+    allergens: []
+    type: lof
 materiel:
   - Robot Mixeur
-preparation: >-
-  Laisser tremper les olives noires pendant une demi heure puis rincez les bien.
-  Mixer les avec l'ail et l'huile d'olive.
+preparation: Laisser tremper les olives noires pendant une demi heure puis rincez les bien. Mixer les avec l'ail et l'huile d'olive.
 preparation24h: ''
 publishDate: 2024-03-18T13:28:23.107Z
 serveHot: false

@@ -11,30 +11,62 @@ plate: 100
 check: true
 checkAlwaysOk: false
 ingredients:
-  - ingredient: rhubarbe_f7wbmo
-    quantite: 7
-    unit: Kg
-    commentaire: ''
-  - ingredient: lait-damande_csxbg6
-    quantite: 4
-    unit: l.
-    commentaire: ''
-  - ingredient: speculoos_h6thsp
-    quantite: 1
-    unit: Kg
-    commentaire: ''
-  - ingredient: vanille-extrait-concentre_n818be
-    quantite: 40
-    unit: ml
-    commentaire: ''
-  - ingredient: sucre-de-canne-blond_n85gmi
-    quantite: 900
-    unit: gr.
-    commentaire: ''
-  - ingredient: agar-agar_ruhtax
-    quantite: 16
-    unit: gr.
-    commentaire: ''
+  - uuid: f7wbmo
+    name: Rhubarbe
+    originalQuantity: 7
+    originalUnit: kg
+    normalizedQuantity: 7000
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: csxbg6
+    name: lait d’amande
+    originalQuantity: 4
+    originalUnit: l.
+    normalizedQuantity: 4000
+    normalizedUnit: ml
+    comment: ''
+    allergens: []
+    type: lof
+  - uuid: h6thsp
+    name: Speculoos
+    originalQuantity: 1
+    originalUnit: kg
+    normalizedQuantity: 1000
+    normalizedUnit: gr.
+    comment: ''
+    allergens:
+      - Gluten
+      - Soja
+    type: sucres
+  - uuid: n818be
+    name: vanille extrait concentré
+    originalQuantity: 40
+    originalUnit: ml
+    normalizedQuantity: 40
+    normalizedUnit: ml
+    comment: ''
+    allergens: []
+    type: sucres
+  - uuid: n85gmi
+    name: sucre de canne (blond)
+    originalQuantity: 900
+    originalUnit: gr.
+    normalizedQuantity: 900
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: sucres
+  - uuid: ruhtax
+    name: Agar-agar
+    originalQuantity: 16
+    originalUnit: gr.
+    normalizedQuantity: 16
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: autres
 preparation: |-
 
   Épluchez et coupez la rhubarbe en petits tronçons et mettez-la dans

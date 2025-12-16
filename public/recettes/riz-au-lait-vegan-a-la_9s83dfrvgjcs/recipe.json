@@ -14,57 +14,7 @@
   "check": true,
   "checkAlwaysOk": false,
   "materiel": null,
-  "ingredients": [{
-      "uuid": "6azw4k",
-      "name": "Riz rond",
-      "originalQuantity": 1.7,
-      "originalUnit": "kg",
-      "normalizedQuantity": 1700,
-      "normalizedUnit": "gr.",
-      "comment": "",
-      "allergens": [],
-      "type": "sec"
-    },{
-      "uuid": "3eex0o",
-      "name": "Lait d'avoine",
-      "originalQuantity": 17,
-      "originalUnit": "l.",
-      "normalizedQuantity": 17000,
-      "normalizedUnit": "ml",
-      "comment": "",
-      "allergens": ["Gluten"],
-      "type": "lof"
-    },{
-      "uuid": "znjs35",
-      "name": "Sucre brun Vergeoise",
-      "originalQuantity": 1.5,
-      "originalUnit": "kg",
-      "normalizedQuantity": 1500,
-      "normalizedUnit": "gr.",
-      "comment": "",
-      "allergens": [],
-      "type": "sucres"
-    },{
-      "uuid": "2juq3x",
-      "name": "Sel",
-      "originalQuantity": 8,
-      "originalUnit": "gr.",
-      "normalizedQuantity": 8,
-      "normalizedUnit": "gr.",
-      "comment": "",
-      "allergens": [],
-      "type": "epices"
-    },{
-      "uuid": "pss0bn",
-      "name": "chicorée soluble",
-      "originalQuantity": 170,
-      "originalUnit": "gr.",
-      "normalizedQuantity": 170,
-      "normalizedUnit": "gr.",
-      "comment": "",
-      "allergens": [],
-      "type": "autres"
-    }],
+  "ingredients": [{"allergens":[],"comment":"","name":"Riz rond","normalizedQuantity":1700,"normalizedUnit":"gr.","originalQuantity":1.7,"originalUnit":"kg","type":"sec","uuid":"6azw4k"},{"allergens":["Gluten"],"comment":"","name":"Lait d'avoine","normalizedQuantity":17000,"normalizedUnit":"ml","originalQuantity":17,"originalUnit":"l.","type":"lof","uuid":"3eex0o"},{"allergens":[],"comment":"","name":"Sucre brun Vergeoise","normalizedQuantity":1500,"normalizedUnit":"gr.","originalQuantity":1.5,"originalUnit":"kg","type":"sucres","uuid":"znjs35"},{"allergens":[],"comment":"","name":"Sel","normalizedQuantity":8,"normalizedUnit":"gr.","originalQuantity":8,"originalUnit":"gr.","type":"epices","uuid":"2juq3x"},{"allergens":[],"comment":"","name":"chicorée soluble","normalizedQuantity":170,"normalizedUnit":"gr.","originalQuantity":170,"originalUnit":"gr.","type":"autres","uuid":"pss0bn"}],
   "preparation": "faire chauffer une grande quantité d'eau avec le sel, quand elle bout, ajouter le riz et faire cuire pendant 5 mn\n\nfaire chauffer 13 litres de lait d'avoine, juste avant l'ébullition ajouter le riz précuit, le sucre vergeoise et la chicorée, laisser cuire 30 mn en remuant régulièrement\n\n5 mn avant la fin de la cuisson, ajouter les 4 litres de lait restants\n\nrépartisser dans les ramequins et laisser tiédir",
   "prepAlt": null,
   "permissionWrite": [],

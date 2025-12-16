@@ -14,37 +14,7 @@
   "check": true,
   "checkAlwaysOk": false,
   "materiel": ["ramequins"],
-  "ingredients": [{
-      "uuid": "2j9y2v",
-      "name": "Menthe",
-      "originalQuantity": 1.5,
-      "originalUnit": "bottes",
-      "normalizedQuantity": 1.5,
-      "normalizedUnit": "bottes",
-      "comment": "",
-      "allergens": [],
-      "type": "epices"
-    },{
-      "uuid": "zo92gu",
-      "name": "Menthe glaciale",
-      "originalQuantity": 1.5,
-      "originalUnit": "bottes",
-      "normalizedQuantity": 1.5,
-      "normalizedUnit": "bottes",
-      "comment": "",
-      "allergens": [],
-      "type": "epices"
-    },{
-      "uuid": "n1vs7d",
-      "name": "Pêche",
-      "originalQuantity": 10,
-      "originalUnit": "kg",
-      "normalizedQuantity": 10000,
-      "normalizedUnit": "gr.",
-      "comment": "",
-      "allergens": [],
-      "type": "legumes"
-    }],
+  "ingredients": [{"allergens":[],"comment":"","name":"Menthe","normalizedQuantity":1.5,"normalizedUnit":"bottes","originalQuantity":1.5,"originalUnit":"bottes","type":"epices","uuid":"2j9y2v"},{"allergens":[],"comment":"","name":"Menthe glaciale","normalizedQuantity":1.5,"normalizedUnit":"bottes","originalQuantity":1.5,"originalUnit":"bottes","type":"epices","uuid":"zo92gu"},{"allergens":[],"comment":"","name":"Pêche","normalizedQuantity":10000,"normalizedUnit":"gr.","originalQuantity":10,"originalUnit":"kg","type":"legumes","uuid":"n1vs7d"}],
   "preparation": "Il faut soit acheter des pêches bien mûres, soit qu'elles soient acheté quelques jours avant.\n\nSi on fait la salade la veille ça permet à la menthe de bien s'infuser dans les pêches et c'est meilleur.",
   "prepAlt": null,
   "permissionWrite": [],

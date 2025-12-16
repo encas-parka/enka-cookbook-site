@@ -14,67 +14,7 @@
   "check": null,
   "checkAlwaysOk": null,
   "materiel": ["Bruleur","Plat Paela"],
-  "ingredients": [{
-      "uuid": "7sk3a5",
-      "name": "Aubergine",
-      "originalQuantity": 10,
-      "originalUnit": "kg",
-      "normalizedQuantity": 10000,
-      "normalizedUnit": "gr.",
-      "comment": "",
-      "allergens": [],
-      "type": "legumes"
-    },{
-      "uuid": "h3c8al",
-      "name": "huile d'olive",
-      "originalQuantity": 1,
-      "originalUnit": "l.",
-      "normalizedQuantity": 1000,
-      "normalizedUnit": "ml",
-      "comment": "",
-      "allergens": [],
-      "type": "lof"
-    },{
-      "uuid": "e4mjd1",
-      "name": "Jus de citron",
-      "originalQuantity": 0.4,
-      "originalUnit": "l.",
-      "normalizedQuantity": 400,
-      "normalizedUnit": "ml",
-      "comment": "",
-      "allergens": [],
-      "type": "sucres"
-    },{
-      "uuid": "u33083",
-      "name": "Tahin",
-      "originalQuantity": 400,
-      "originalUnit": "gr.",
-      "normalizedQuantity": 400,
-      "normalizedUnit": "gr.",
-      "comment": "",
-      "allergens": ["Sésame"],
-      "type": "autres"
-    },{
-      "uuid": "2pps90",
-      "name": "Poivre",
-      "originalQuantity": 1,
-      "originalUnit": "au goût",
-      "normalizedQuantity": 1,
-      "normalizedUnit": "au goût",
-      "comment": "",
-      "allergens": [],
-      "type": "epices"
-    },{
-      "uuid": "2juq3x",
-      "name": "Sel",
-      "originalQuantity": 1,
-      "originalUnit": "au goût",
-      "normalizedQuantity": 1,
-      "normalizedUnit": "au goût",
-      "comment": "",
-      "allergens": [],
-      "type": "epices"
-    }],
+  "ingredients": [{"allergens":[],"comment":"","name":"Aubergine","normalizedQuantity":10000,"normalizedUnit":"gr.","originalQuantity":10,"originalUnit":"kg","type":"legumes","uuid":"7sk3a5"},{"allergens":[],"comment":"","name":"huile d'olive","normalizedQuantity":1000,"normalizedUnit":"ml","originalQuantity":1,"originalUnit":"l.","type":"lof","uuid":"h3c8al"},{"allergens":[],"comment":"","name":"Jus de citron","normalizedQuantity":400,"normalizedUnit":"ml","originalQuantity":0.4,"originalUnit":"l.","type":"sucres","uuid":"e4mjd1"},{"allergens":["Sésame"],"comment":"","name":"Tahin","normalizedQuantity":400,"normalizedUnit":"gr.","originalQuantity":400,"originalUnit":"gr.","type":"autres","uuid":"u33083"},{"allergens":[],"comment":"","name":"Poivre","normalizedQuantity":1,"normalizedUnit":"au goût","originalQuantity":1,"originalUnit":"au goût","type":"epices","uuid":"2pps90"},{"allergens":[],"comment":"","name":"Sel","normalizedQuantity":1,"normalizedUnit":"au goût","originalQuantity":1,"originalUnit":"au goût","type":"epices","uuid":"2juq3x"}],
   "preparation": "* Coucher à même le gaz le maximum d'aubergines. Plus y a de brûleurs, mieux c'est ! Laisser cuire 10 min et retourner les pour encore 10 min.\n* Si il y a trop d'aubergine, en cuire une partie au four\n* Placer les aubergines cuites dans un sac poubelle afin d'aider la peau à se décoller.\n* Enlever la peau. Et rincer la chair à l'eau pour nettoyer les petits bouts de cramé.\n* Mixer tous les ingrédients dans un gros gastro. Attention de ne pas mettre trop de citron. Rectifier l'assaisonnement. Servir froid.",
   "prepAlt": null,
   "permissionWrite": [],

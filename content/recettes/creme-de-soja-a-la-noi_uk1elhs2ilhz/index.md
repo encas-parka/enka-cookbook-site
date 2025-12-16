@@ -15,72 +15,110 @@ plate: 100
 check: true
 checkAlwaysOk: false
 ingredients:
-  - ingredient: pistache-emmondee_q7adw3
-    quantite: 100
-    unit: gr.
-    commentaire: ''
-  - ingredient: graines-de-sesame-blanc_z9plfy
-    quantite: 100
-    unit: gr.
-    commentaire: ''
-  - ingredient: graine-de-tournesol_4vxqlr
-    quantite: 200
-    unit: gr.
-    commentaire: ''
-  - ingredient: amandes-effilees_xkijt9
-    quantite: 200
-    unit: gr.
-    commentaire: ''
-  - ingredient: lait-de-soja_gpeob7
-    quantite: 9
-    unit: l.
-    commentaire: ''
-  - ingredient: creme-de-riz_s0sjb1
-    quantite: 500
-    unit: gr.
-    commentaire: ''
-  - ingredient: sucre-blanc_lny16c
-    quantite: 200
-    unit: gr.
-    commentaire: ''
-  - ingredient: sucre-de-canne-blond_n85gmi
-    quantite: 1.4
-    unit: Kg
-    commentaire: ''
-  - ingredient: poudre-de-noisettes_0g08xt
-    quantite: 1
-    unit: Kg
-    commentaire: ''
-  - ingredient: agar-agar_ruhtax
-    quantite: 14
-    unit: c. à café
-    commentaire: ''
-preparation: >-
+  - uuid: q7adw3
+    name: Pistache émmondée
+    originalQuantity: 100
+    originalUnit: gr.
+    normalizedQuantity: 100
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: sec
+  - uuid: z9plfy
+    name: Graines de sésame blanc
+    originalQuantity: 100
+    originalUnit: gr.
+    normalizedQuantity: 100
+    normalizedUnit: gr.
+    comment: ''
+    allergens:
+      - Sésame
+    type: sec
+  - uuid: 4vxqlr
+    name: Graine de tournesol
+    originalQuantity: 200
+    originalUnit: gr.
+    normalizedQuantity: 200
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: sec
+  - uuid: xkijt9
+    name: Amandes effilées
+    originalQuantity: 200
+    originalUnit: gr.
+    normalizedQuantity: 200
+    normalizedUnit: gr.
+    comment: ''
+    allergens:
+      - Fruit à coque
+    type: sec
+  - uuid: gpeob7
+    name: Lait de soja
+    originalQuantity: 9
+    originalUnit: l.
+    normalizedQuantity: 9000
+    normalizedUnit: ml
+    comment: ''
+    allergens:
+      - Soja
+    type: lof
+  - uuid: s0sjb1
+    name: Crème de riz
+    originalQuantity: 500
+    originalUnit: gr.
+    normalizedQuantity: 500
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: lof
+  - uuid: lny16c
+    name: sucre blanc
+    originalQuantity: 200
+    originalUnit: gr.
+    normalizedQuantity: 200
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: sucres
+  - uuid: n85gmi
+    name: sucre de canne (blond)
+    originalQuantity: 1.4
+    originalUnit: kg
+    normalizedQuantity: 1400
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: sucres
+  - uuid: 0g08xt
+    name: Poudre de noisettes
+    originalQuantity: 1
+    originalUnit: kg
+    normalizedQuantity: 1000
+    normalizedUnit: gr.
+    comment: ''
+    allergens:
+      - Fruit à coque
+    type: sucres
+  - uuid: ruhtax
+    name: Agar-agar
+    originalQuantity: 14
+    originalUnit: c. à café
+    normalizedQuantity: 70
+    normalizedUnit: ml
+    comment: ''
+    allergens: []
+    type: autres
+preparation: |-
   A faire la veille pour le midi ou le matin pour le soir.
 
+  Diluer l'agar-agar  et la crème de riz dans un peu de lait de soja froid. Réserver.
 
-  Diluer l'agar-agar  et la crème de riz dans un peu de lait de soja froid.
-  Réserver.
+  Caraméliser les graines (amande-tournesol-pistaches hachées-sésame) : les griller à sec. Quand elles commencent à dorer et qu'elles sont bien chaudes les saupoudrer de sucre blanc sans cesser de remuer ce qui va les caraméliser. Procéder en plusieurs fois, quand il y a trop de masse ça ne fonctionne pas. Réserver.
 
+  Porter le restant de lait de soja à ébullition - Attention, ne pas le quitter et remuer sans cesse, ça peut très vite attacher. A l'approche de l'ébullition ajouter la poudre de noisette puis le sucre blond et enfin l'agar-agar et la crème de riz dilués. Cuire alors au moins 2 minutes au bouillon.
 
-  Caraméliser les graines (amande-tournesol-pistaches hachées-sésame) : les
-  griller à sec. Quand elles commencent à dorer et qu'elles sont bien chaudes
-  les saupoudrer de sucre blanc sans cesser de remuer ce qui va les caraméliser.
-  Procéder en plusieurs fois, quand il y a trop de masse ça ne fonctionne pas.
-  Réserver.
-
-
-  Porter le restant de lait de soja à ébullition - Attention, ne pas le quitter
-  et remuer sans cesse, ça peut très vite attacher. A l'approche de l'ébullition
-  ajouter la poudre de noisette puis le sucre blond et enfin l'agar-agar et la
-  crème de riz dilués. Cuire alors au moins 2 minutes au bouillon.
-
-
-  Transvaser le contenu dans des récipients jusqu'au complet refroidissement.
-  Stocker filmé au froid jusqu'au lendemain. La crème va prendre. S'il s'avère
-  qu'elle est trop compacte, la passer au mixeur avant de portionner en verrines
-  ou autres contenants.
-
+  Transvaser le contenu dans des récipients jusqu'au complet refroidissement. Stocker filmé au froid jusqu'au lendemain. La crème va prendre. S'il s'avère qu'elle est trop compacte, la passer au mixeur avant de portionner en verrines ou autres contenants.
 
   Ajouter les graines caramélisées sur la crème
 preparation24h: A faire la veille pour le matin ou le matin pour le soir

@@ -15,49 +15,65 @@ plate: 10
 check: false
 checkAlwaysOk: false
 ingredients:
-  - ingredient: lait-damande_csxbg6
-    quantite: 2
-    unit: l.
-    commentaire: ''
-  - ingredient: farine-de-mais_z8uiyd
-    quantite: 60
-    unit: gr.
-    commentaire: ''
-  - ingredient: gousse-de-vanille_2a0lnj
-    quantite: 1
-    unit: unité
-    commentaire: ''
-  - ingredient: vanille-extrait-concentre_n818be
-    quantite: 0.5
-    unit: ml
-    commentaire: ''
-  - ingredient: sucre-blanc_lny16c
-    quantite: 200
-    unit: gr.
-    commentaire: ''
-preparation: >-
+  - uuid: csxbg6
+    name: lait d’amande
+    originalQuantity: 2
+    originalUnit: l.
+    normalizedQuantity: 2000
+    normalizedUnit: ml
+    comment: ''
+    allergens: []
+    type: lof
+  - uuid: z8uiyd
+    name: Farine de maïs
+    originalQuantity: 60
+    originalUnit: gr.
+    normalizedQuantity: 60
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: lof
+  - uuid: 2a0lnj
+    name: gousse de vanille
+    originalQuantity: 1
+    originalUnit: unité
+    normalizedQuantity: 1
+    normalizedUnit: unité
+    comment: ''
+    allergens: []
+    type: sucres
+  - uuid: n818be
+    name: vanille extrait concentré
+    originalQuantity: 0.5
+    originalUnit: ml
+    normalizedQuantity: 0.5
+    normalizedUnit: ml
+    comment: ''
+    allergens: []
+    type: sucres
+  - uuid: lny16c
+    name: sucre blanc
+    originalQuantity: 200
+    originalUnit: gr.
+    normalizedQuantity: 200
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: sucres
+preparation: |-
   a faire la veille :
 
-
-  ouvrir la gousse de vanille en 2 et faire infuser a chaud 10 min dans le lait.
-  ajouter l'extrait de vanille.
-
+  ouvrir la gousse de vanille en 2 et faire infuser a chaud 10 min dans le lait. ajouter l'extrait de vanille.
 
   melanger la maizena dans un peu de la preparation pour bien la diluer
 
-
-  faire chauffer doucement en remuant jusqu'a fremissement. ca doit epaissir un
-  peu. mettre dans des ramequins au frais.
-preparation24h: >-
-  ouvrir la gousse de vanille en 2 et faire infuser a chaud 10 min dans le lait.
-  ajouter l'extrait de vanille.
-
+  faire chauffer doucement en remuant jusqu'a fremissement. ca doit epaissir un peu. mettre dans des ramequins au frais.
+preparation24h: |-
+  ouvrir la gousse de vanille en 2 et faire infuser a chaud 10 min dans le lait. ajouter l'extrait de vanille.
 
   melanger la maizena dans un peu de la preparation pour bien la diluer
 
-
-  faire chauffer doucement en remuant jusqu'a fremissement. ca doit epaissir un
-  peu. mettre dans des ramequins au frais.
+  faire chauffer doucement en remuant jusqu'a fremissement. ca doit epaissir un peu. mettre dans des ramequins au frais.
 publishDate: 2024-06-13T08:46:00.000Z
 serveHot: false
 uuid: nzjlrmlxvqyp

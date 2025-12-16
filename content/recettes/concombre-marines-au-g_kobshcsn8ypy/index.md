@@ -16,36 +16,65 @@ plate: 150
 check: true
 checkAlwaysOk: false
 ingredients:
-  - ingredient: gingembre_0d1fzw
-    quantite: 1.25
-    unit: Kg
-    commentaire: ''
-  - ingredient: concombre_l5p1a5
-    quantite: 23
-    unit: Kg
-    commentaire: ''
-  - ingredient: huile-dolive_h3c8al
-    quantite: 400
-    unit: ml
-    commentaire: ''
-  - ingredient: sel_2juq3x
-    quantite: 100
-    unit: gr.
-    commentaire: ''
-  - ingredient: vinaigre-de-vin_bjuxby
-    quantite: 1.2
-    unit: l.
-    commentaire: ''
-  - ingredient: sucre-en-poudre_u9z2he
-    quantite: 600
-    unit: gr.
-    commentaire: ''
+  - uuid: 0d1fzw
+    name: Gingembre
+    originalQuantity: 1.25
+    originalUnit: kg
+    normalizedQuantity: 1250
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: l5p1a5
+    name: Concombre
+    originalQuantity: 23
+    originalUnit: kg
+    normalizedQuantity: 23000
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: h3c8al
+    name: huile d'olive
+    originalQuantity: 400
+    originalUnit: ml
+    normalizedQuantity: 400
+    normalizedUnit: ml
+    comment: ''
+    allergens: []
+    type: lof
+  - uuid: 2juq3x
+    name: Sel
+    originalQuantity: 100
+    originalUnit: gr.
+    normalizedQuantity: 100
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: bjuxby
+    name: Vinaigre de vin
+    originalQuantity: 1.2
+    originalUnit: l.
+    normalizedQuantity: 1200
+    normalizedUnit: ml
+    comment: ''
+    allergens:
+      - Alcool
+    type: epices
+  - uuid: u9z2he
+    name: Sucre en poudre
+    originalQuantity: 600
+    originalUnit: gr.
+    normalizedQuantity: 600
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: sucres
 materiel:
   - Gastro 1/1 (Profond)
 preparation: Servir.
-preparation24h: >-
-  **La veille:** Eplucher et mandoliner les concombres, râper le gingembre. Tout
-  mélanger.
+preparation24h: '**La veille:** Eplucher et mandoliner les concombres, râper le gingembre. Tout mélanger.'
 publishDate: 2024-05-20T14:44:00.000Z
 serveHot: false
 uuid: kobshcsn8ypy

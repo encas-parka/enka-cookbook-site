@@ -14,17 +14,7 @@
   "check": true,
   "checkAlwaysOk": true,
   "materiel": null,
-  "ingredients": [{
-      "uuid": "cg3wgm",
-      "name": "Salade verte (chêne)",
-      "originalQuantity": 10,
-      "originalUnit": "unité",
-      "normalizedQuantity": 10,
-      "normalizedUnit": "unité",
-      "comment": "",
-      "allergens": [],
-      "type": "legumes"
-    }],
+  "ingredients": [{"allergens":[],"comment":"","name":"Salade verte (chêne)","normalizedQuantity":10,"normalizedUnit":"unité","originalQuantity":10,"originalUnit":"unité","type":"legumes","uuid":"cg3wgm"}],
   "preparation": "\\- laver la salade\n\n...",
   "prepAlt": null,
   "permissionWrite": [],

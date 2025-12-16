@@ -12,26 +12,51 @@ plate: 7
 quantite_desc: ''
 check: true
 ingredients:
-  - ingredient: tapioca-perlee_mkttuh
-    quantite: 105
-    unit: gr.
-    commentaire: ''
-  - ingredient: peche_n1vs7d
-    quantite: 600
-    unit: gr.
-    commentaire: ''
-  - ingredient: lait-de-coco_xdy736
-    quantite: 600
-    unit: ml
-    commentaire: ''
-  - ingredient: vanille-extrait-concentre_n818be
-    quantite: 3
-    unit: c. à café
-    commentaire: ''
-  - ingredient: sucre-blanc_lny16c
-    quantite: 30
-    unit: gr.
-    commentaire: ''
+  - uuid: mkttuh
+    name: Tapioca perlée
+    originalQuantity: 105
+    originalUnit: gr.
+    normalizedQuantity: 105
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: sec
+  - uuid: n1vs7d
+    name: Pêche
+    originalQuantity: 600
+    originalUnit: gr.
+    normalizedQuantity: 600
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: xdy736
+    name: lait de coco
+    originalQuantity: 600
+    originalUnit: ml
+    normalizedQuantity: 600
+    normalizedUnit: ml
+    comment: ''
+    allergens: []
+    type: lof
+  - uuid: n818be
+    name: vanille extrait concentré
+    originalQuantity: 3
+    originalUnit: c. à café
+    normalizedQuantity: 15
+    normalizedUnit: ml
+    comment: ''
+    allergens: []
+    type: sucres
+  - uuid: lny16c
+    name: sucre blanc
+    originalQuantity: 30
+    originalUnit: gr.
+    normalizedQuantity: 30
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: sucres
 preparation: |-
   1. Portez à ébullition le lait de coco et l'eau (100 ml).
   2. Ajoutez le tapioca et la noix de coco râpée.

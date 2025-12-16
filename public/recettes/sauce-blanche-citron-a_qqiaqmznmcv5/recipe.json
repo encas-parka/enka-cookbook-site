@@ -14,47 +14,7 @@
   "check": true,
   "checkAlwaysOk": true,
   "materiel": null,
-  "ingredients": [{
-      "uuid": "2juq3x",
-      "name": "Sel",
-      "originalQuantity": 1,
-      "originalUnit": "au goût",
-      "normalizedQuantity": 1,
-      "normalizedUnit": "au goût",
-      "comment": "",
-      "allergens": [],
-      "type": "epices"
-    },{
-      "uuid": "b2dxf8",
-      "name": "Fromage blanc",
-      "originalQuantity": 1.2,
-      "originalUnit": "l.",
-      "normalizedQuantity": 1200,
-      "normalizedUnit": "ml",
-      "comment": "",
-      "allergens": ["Produit laitier"],
-      "type": "frais"
-    },{
-      "uuid": "u2m28w",
-      "name": "Ail",
-      "originalQuantity": 7,
-      "originalUnit": "gousse·s",
-      "normalizedQuantity": 45.5,
-      "normalizedUnit": "gr.",
-      "comment": "",
-      "allergens": [],
-      "type": "legumes"
-    },{
-      "uuid": "e4mjd1",
-      "name": "Jus de citron",
-      "originalQuantity": 0.3,
-      "originalUnit": "l.",
-      "normalizedQuantity": 300,
-      "normalizedUnit": "ml",
-      "comment": "",
-      "allergens": [],
-      "type": "sucres"
-    }],
+  "ingredients": [{"allergens":[],"comment":"","name":"Sel","normalizedQuantity":1,"normalizedUnit":"au goût","originalQuantity":1,"originalUnit":"au goût","type":"epices","uuid":"2juq3x"},{"allergens":["Produit laitier"],"comment":"","name":"Fromage blanc","normalizedQuantity":1200,"normalizedUnit":"ml","originalQuantity":1.2,"originalUnit":"l.","type":"frais","uuid":"b2dxf8"},{"allergens":[],"comment":"","name":"Ail","normalizedQuantity":45.5,"normalizedUnit":"gr.","originalQuantity":7,"originalUnit":"gousse·s","type":"legumes","uuid":"u2m28w"},{"allergens":[],"comment":"","name":"Jus de citron","normalizedQuantity":300,"normalizedUnit":"ml","originalQuantity":0.3,"originalUnit":"l.","type":"sucres","uuid":"e4mjd1"}],
   "preparation": "Mélanger tous les ingrédients (le jus de citron petit à petit pour ajuster au goût). Ajuster l'assaisonnement.\n\nDosé pour 2 cuillers à soupe par personne.\n\n\n\nAlternative vegan : yahourt de soja",
   "prepAlt": null,
   "permissionWrite": [],

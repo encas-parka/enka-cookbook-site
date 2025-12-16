@@ -8,54 +8,75 @@ checkfor: 150
 cuisson: true
 draft: false
 ingredients:
-  - ingredient: puree-damande_7dlfuw
-    quantite: 120
-    unit: gr.
-    commentaire: ''
-  - ingredient: lait-de-riz_hzwesd
-    quantite: 2
-    unit: l.
-    commentaire: ''
-  - ingredient: fecule-de-pomme-de-terre_g56l9d
-    quantite: 120
-    unit: gr.
-    commentaire: ''
-  - ingredient: farine-de-riz-blanche_1nb85u
-    quantite: 160
-    unit: gr.
-    commentaire: ''
-  - ingredient: pralines-roses-de-lyon_31bhpd
-    quantite: 265
-    unit: gr.
-    commentaire: ''
-  - ingredient: sucre-en-poudre_u9z2he
-    quantite: 265
-    unit: gr.
-    commentaire: ''
+  - uuid: 7dlfuw
+    name: Purée d'amande
+    originalQuantity: 120
+    originalUnit: gr.
+    normalizedQuantity: 120
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: autres
+  - uuid: hzwesd
+    name: Lait de riz
+    originalQuantity: 2
+    originalUnit: l.
+    normalizedQuantity: 2000
+    normalizedUnit: ml
+    comment: ''
+    allergens: []
+    type: lof
+  - uuid: g56l9d
+    name: Fécule de pomme de terre
+    originalQuantity: 120
+    originalUnit: gr.
+    normalizedQuantity: 120
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: lof
+  - uuid: 1nb85u
+    name: Farine de riz blanche
+    originalQuantity: 160
+    originalUnit: gr.
+    normalizedQuantity: 160
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: lof
+  - uuid: 31bhpd
+    name: Pralines roses de Lyon
+    originalQuantity: 265
+    originalUnit: gr.
+    normalizedQuantity: 265
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: sucres
+  - uuid: u9z2he
+    name: Sucre en poudre
+    originalQuantity: 265
+    originalUnit: gr.
+    normalizedQuantity: 265
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: sucres
 materiel:
   - ramequins
 plate: 20
-preparation: >-
+preparation: |-
   Broyer les pralines afin de bien casser les amandes à l'intérieur.
-
 
   Puis faire fondre dans une partie de lait végé. Réserver.
 
+  Mélanger la farine et la fécule dans un saladier. Délayer avec un peu de lait puis ajouter le sucre, la purée d’amande et mélanger.
 
-  Mélanger la farine et la fécule dans un saladier. Délayer avec un peu de lait
-  puis ajouter le sucre, la purée d’amande et mélanger.
-
-
-  Filtrer le lait rose et faire sécher et caraméliser les amandes au four.
-  Réserver.
-
+  Filtrer le lait rose et faire sécher et caraméliser les amandes au four. Réserver.
 
   Dans une casserole, faire chauffer les laits, rose et nature.
 
-
-  Quand le lait commence légèrement à fumer, l’ajouter progressivement au
-  contenu du saladier en fouettant. Remettre le tout dans la casserole et
-  continuer de fouetter en appliquant une cuisson douce.
+  Quand le lait commence légèrement à fumer, l’ajouter progressivement au contenu du saladier en fouettant. Remettre le tout dans la casserole et continuer de fouetter en appliquant une cuisson douce.
 
    Lorsque la crème a correctement épaissi, la transvaser dans un gastro. Placer un film étirable au contact de la crème pour éviter la formation d’une fine pellicule de peau. Et mettre au frais ou dehors si c'est l'hiver ^^
 

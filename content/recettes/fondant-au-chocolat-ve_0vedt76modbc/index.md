@@ -12,37 +12,59 @@ plate: 100
 check: true
 checkAlwaysOk: false
 ingredients:
-  - ingredient: sucre-de-canne-blond_n85gmi
-    quantite: 0.7
-    unit: Kg
-    commentaire: ''
-  - ingredient: chocolat-noir-patissier-70p100_1e3zhq
-    quantite: 4
-    unit: Kg
-    commentaire: ''
-  - ingredient: yaourt-de-soja_hlbwfd
-    quantite: 1.8
-    unit: Kg
-    commentaire: ''
-  - ingredient: creme-soja_chfwwq
-    quantite: 2
-    unit: l.
-    commentaire: ''
-  - ingredient: haricots-rouges-cuits_iwdje3
-    quantite: 2.25
-    unit: Kg
-    commentaire: ''
-preparation: >-
-  séparer le chocolat en deux, faire fondre une partie que l'on mélange ensuite
-  avec la crème, c'est une ganache
+  - uuid: n85gmi
+    name: sucre de canne (blond)
+    originalQuantity: 0.7
+    originalUnit: kg
+    normalizedQuantity: 700
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: sucres
+  - uuid: 1e3zhq
+    name: Chocolat noir patissier 70p100
+    originalQuantity: 4
+    originalUnit: kg
+    normalizedQuantity: 4000
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: sucres
+  - uuid: hlbwfd
+    name: Yaourt de soja
+    originalQuantity: 1.8
+    originalUnit: kg
+    normalizedQuantity: 1800
+    normalizedUnit: gr.
+    comment: ''
+    allergens:
+      - Soja
+    type: frais
+  - uuid: chfwwq
+    name: Crème soja
+    originalQuantity: 2
+    originalUnit: l.
+    normalizedQuantity: 2000
+    normalizedUnit: ml
+    comment: ''
+    allergens:
+      - Soja
+    type: lof
+  - uuid: iwdje3
+    name: Haricots rouges cuits
+    originalQuantity: 2.25
+    originalUnit: kg
+    normalizedQuantity: 2250
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: sec
+preparation: |-
+  séparer le chocolat en deux, faire fondre une partie que l'on mélange ensuite avec la crème, c'est une ganache
 
-
-  avec l'autre partie de chocolat fondu mixer avec le sucre, les haricots et le
-  yahourt
-
+  avec l'autre partie de chocolat fondu mixer avec le sucre, les haricots et le yahourt
 
   faire cuire 25 mn à 180°
-
 
   attendre que ça refroidisse pour démouler ( ou pas ) pour recouvrir de ganache
 astuces:

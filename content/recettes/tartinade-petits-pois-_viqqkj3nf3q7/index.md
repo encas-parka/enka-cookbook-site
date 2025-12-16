@@ -11,30 +11,62 @@ regime:
 cuisson: true
 plate: 380
 ingredients:
-  - ingredient: ail_u2m28w
-    quantite: 35
-    unit: gousse·s
-    commentaire: ''
-  - ingredient: petits-pois_8doafu
-    quantite: 14
-    unit: Kg
-    commentaire: ''
-  - ingredient: huile-dolive_h3c8al
-    quantite: 0
-    unit: l.
-    commentaire: ''
-  - ingredient: creme-vegetale_aq796v
-    quantite: 1.5
-    unit: Kg
-    commentaire: ''
-  - ingredient: yaourt-nature_yl86w7
-    quantite: 2
-    unit: Kg
-    commentaire: ''
-  - ingredient: menthe_2j9y2v
-    quantite: 2
-    unit: bottes
-    commentaire: ''
+  - uuid: u2m28w
+    name: Ail
+    originalQuantity: 35
+    originalUnit: gousse·s
+    normalizedQuantity: 227.5
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: 8doafu
+    name: Petits pois
+    originalQuantity: 14
+    originalUnit: kg
+    normalizedQuantity: 14000
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: h3c8al
+    name: huile d'olive
+    originalQuantity: 1
+    originalUnit: l.
+    normalizedQuantity: 1000
+    normalizedUnit: ml
+    comment: ''
+    allergens: []
+    type: lof
+  - uuid: aq796v
+    name: Crème Végétale
+    originalQuantity: 1.5
+    originalUnit: kg
+    normalizedQuantity: 1500
+    normalizedUnit: gr.
+    comment: ''
+    allergens:
+      - Soja
+    type: lof
+  - uuid: yl86w7
+    name: Yaourt nature
+    originalQuantity: 2
+    originalUnit: kg
+    normalizedQuantity: 2000
+    normalizedUnit: gr.
+    comment: ''
+    allergens:
+      - Produit laitier
+    type: frais
+  - uuid: 2j9y2v
+    name: Menthe
+    originalQuantity: 2
+    originalUnit: bottes
+    normalizedQuantity: 2
+    normalizedUnit: bottes
+    comment: ''
+    allergens: []
+    type: epices
 materiel:
   - Grand Saladier
 preparation: "* Cuire les petits pois pendant quelques minutes à l’eau bouillante salée.\_\n* Les égoutter puis les rincer à l’eau froide pour préserver leur couleur.\n* Hacher finement (ou mixer grossièrement ^^) le citron confit et laver la menthe.\n* Écraser grossièrement les petits pois avec l’ail, la menthe, la crème et le yaourt. \n* Goûter, puis assaisonner.\n* Mélanger le citron confit avec la pâte."

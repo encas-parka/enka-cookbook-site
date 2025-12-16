@@ -8,7 +8,7 @@
   
   
 
-  <script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><body>
+  <body>
 
   
   <div id="svelte-header"></div>
@@ -19,8 +19,6 @@
         
 
 
-
-<span class="no-print text-muted">development  | Layout : layouts/recettes/list.html </span>
 
 
 
@@ -2122,8 +2120,7 @@
 
 
 
-  <script src="../js/vue.global.js"></script>
-  
+  <script src="../js/vue.global.prod.js"></script>
 
 
 
@@ -2136,7 +2133,8 @@
 
 
 
-  <script src="//localhost:1313/js/bundle.73fbc800e82bd77a16d9453ab4ac42b6e6c91214276b853cac769ee42e464b91.js"></script>
+
+  <script src="../js/bundle.73fbc800e82bd77a16d9453ab4ac42b6e6c91214276b853cac769ee42e464b91.js" integrity="sha256-c/vIAOgr13oW2UU6tKxCtubJEhQna4U8rHae5C5GS5E="></script>
 
 
 
@@ -2197,7 +2195,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["12", ""],
         saison: ["ete",],
-        categories: ["Sucrée",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["Eau", "Verveine", "Abricot", "Sucre en poudre"],
+        categories: ["Sucrée",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "false",
         materiel: ["Marmitte",]
@@ -2212,7 +2210,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["100", ""],
         saison: ["ete",],
-        categories: ["Friture",],regimes: ["vegetarien","sans-lactose",],ingredients: ["Persil frais", "tabasco", "Piment oiseau", "Citron jaune", "Echalote", "Oignon", "Patates douces", "Lait de soja", "Levure chimique", "huile de friture", "Oeuf", "Farine de blé", "Jus de citron"],
+        categories: ["Friture",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: ["Friteuse","Marmitte",]
@@ -2227,7 +2225,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["10", ""],
         saison: ["ete",],
-        categories: ["Accompagnement",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["Miso", "Vinaigre de riz", "Sauce soja dark (foncé)", "Sésame doré", "Sauce soja", "Cébette - Ciboule - Cive - Oignon vert", "Aubergine", "huile de tournesol", "Sirop d'agave", "Jus de citron"],
+        categories: ["Accompagnement",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: ["Four",]
@@ -2242,7 +2240,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["100", ""],
         saison: ["ete",],
-        categories: ["Accompagnement","Plat chaud",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["Harissa", "Purée d'ail noir", "Mélasse de grenade", "Aubergine", "huile d'olive", "Jus de citron", "Cacao"],
+        categories: ["Accompagnement","Plat chaud",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: ["Four","Gastro 1\/1 (Normaux)",]
@@ -2257,7 +2255,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["20", ""],
         saison: ["hiver","automne",],
-        categories: ["Bouchées salées","Snacking",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["Sel", "Poivre", "Vinaigre de cidre", "Baies roses", "Cumin (graines)", "Pate feuilleté sans gluten et vegan", "Courge", "Oignon", "huile de tournesol", "Sucre en poudre"],
+        categories: ["Bouchées salées","Snacking",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: ["Gastro 1\/1 (Normaux)","Four",]
@@ -2272,7 +2270,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["100", ""],
         saison: [],
-        categories: ["Autre",],regimes: ["vegan","sans-lactose",],ingredients: ["Sel", "Harissa", "Levure fraîche de boulanger", "Huile végétale", "Huile végétale", "Farine de blé", "Lait de soja", "Pistache émmondée", "Sucre en poudre"],
+        categories: ["Autre",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: []
@@ -2287,7 +2285,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["100", ""],
         saison: ["ete","printemps","automne",],
-        categories: ["Snacking",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["Protéines de soja", "Coriandre", "Véganaise", "Miso blanc", "Sauce soja", "Gingembre", "Ail", "Concombre", "Chou rouge", "Carotte", "Pain baguette"],
+        categories: ["Snacking",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: []
@@ -2302,7 +2300,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["120", ""],
         saison: [],
-        categories: ["Bouchées salées",],regimes: ["vegetarien",],ingredients: ["Cumin moulu", "Paprika", "Piment en poudre", "Aneth aromatique", "Coriandre fraîche", "Cannelle", "Pulpe de tomate", "Yaourt grec de vache", "Beurre doux", "Feta", "Pâte filo", "Cébette - Ciboule - Cive - Oignon vert", "Ail", "Oignon", "Epinard", "huile d'olive", "Pois chiche cuit"],
+        categories: ["Bouchées salées",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: ["Four","Gastro 1\/1 (Normaux)",]
@@ -2317,7 +2315,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["100", ""],
         saison: [],
-        categories: ["Gateau",],regimes: ["vegetarien",],ingredients: ["Beurre demi-sel", "Mascarpone", "Banane", "Crème fraiche liquide entière", "Lait concentré sucré", "Speculoos", "Sucre en poudre"],
+        categories: ["Gateau",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: ["Gastro 1\/1 (Normaux)","Frigo",]
@@ -2332,7 +2330,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["100", ""],
         saison: [],
-        categories: ["Gateau",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["Sel", "Cannelle", "Margarine végétale spécial cuisson", "Yaourt de soja", "Banane", "Crème soja", "Huile de coco désodorisée", "Huile de coco désodorisée", "Sucre en poudre", "Sucre en poudre", "Biscuit vegan et sans gluten"],
+        categories: ["Gateau",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: ["Gastro 1\/1 (Normaux)","Frigo",]
@@ -2347,7 +2345,7 @@ const app = Vue.createApp({
         checkfor: "1",
         checkrange: ["20", "1"],
         saison: [],
-        categories: ["Biscuits",],regimes: ["vegan","sans-lactose",],ingredients: ["Beurre de cacahuètes (salé)", "Sel", "Raisin sec", "Farine d'épeautre", "huile de tournesol", "Amandes effilées", "Flocons d'avoine sans gluten", "corn flakes", "Chocolat noir patissier 70p100", "Sirop d'érable ", "Sucre vanillé"],
+        categories: ["Biscuits",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: []
@@ -2362,7 +2360,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["12", ""],
         saison: [],
-        categories: ["Autre",],regimes: ["vegan","sans-lactose",],ingredients: ["Eau", "Tahin", "Sel", "Raisin sec", "Farine de blé", "huile de coco", "Flocons d'avoine", "Chocolat noir", "Cacao", "Sucre en poudre"],
+        categories: ["Autre",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: ["Four","Gastro 1\/1 (Fins)",]
@@ -2377,7 +2375,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["12", ""],
         saison: [],
-        categories: ["Autre",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["Eau", "Tahin", "Sel", "Raisin sec", "Farine de riz", "Farine de maïs", "huile de coco", "Flocons d'avoine sans gluten", "Chocolat noir", "Cacao", "Sucre en poudre"],
+        categories: ["Autre",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: ["Four","Gastro 1\/1 (Fins)",]
@@ -2392,7 +2390,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["100", ""],
         saison: [],
-        categories: ["Friture",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["Eau", "Miso blanc", "Sel", "Vinaigre de cidre", "Margarine végétale spécial cuisson", "Banane", "lait de cajou", "Lait végétal (au choix)", "Bicarbonate alimentaire", "Levure chimique sans gluten", "Farine de riz", "Graines de lin", "Lait végétal (au choix)", "Polenta fine", "sucre blanc", "Sucre en poudre"],
+        categories: ["Friture",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: []
@@ -2407,7 +2405,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["100", ""],
         saison: [],
-        categories: ["Friture",],regimes: ["vegetarien",],ingredients: ["Beurre de cacahuètes (sucré)", "Sel", "Huile d'arachide", "Lait demi-écrémé", "Levure chimique", "Levure boulangère", "Farine de blé", "huile de friture", "Sucre en poudre"],
+        categories: ["Friture",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: []
@@ -2422,7 +2420,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["170", ""],
         saison: [],
-        categories: ["Bouchées salées",],regimes: ["vegetarien","sans-gluten",],ingredients: ["Cumin (graines)", "Sumac", "Persil frais", "Anis vert en poudre", "Cardamone en poudre", "Persil frais", "Piment en flocons", "Menthe", "Curcuma moulu", "Paprika", "graine de coriandre", "Zaatar (zathar)", "Crème fraîche épaisse entière", "Ricotta", "Citron non traité", "Citron confit", "Petits pois surgelés", "Epinard", "Farine de pois chiche", "Crème soja", "Fécule de maïs (Maïzena)", "Oeuf"],
+        categories: ["Bouchées salées",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: ["Four",]
@@ -2437,7 +2435,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["9", ""],
         saison: [],
-        categories: ["Bouchées salées",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["Eau", "Gros sel", "Aneth aromatique", "Betterave rouge"],
+        categories: ["Bouchées salées",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "false",
         materiel: []
@@ -2452,7 +2450,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["100", ""],
         saison: [],
-        categories: ["Plat chaud",],regimes: ["vegetarien","sans-lactose",],ingredients: ["Eau", "Gochujang", "Vinaigre de riz", "Doenjang", "Vinaigre de riz", "Ail en poudre", "Ketchup", "Gochujang sans gluten", "Sauce soja", "Tofu ferme", "Gingembre bio", "Ail", "Ail", "Epinards surgelés", "Champignon shiitake séché", "Champignon de Paris", "Courgette", "Carotte", "huile de sésame", "Huile végétale", "Fécule de maïs (Maïzena)", "Oeuf", "Graines de sésame blanc", "Graines de sésame blanc", "Graines de sésame noir", "Riz", "Sirop d'érable ", "Soda au Gingembre - Ginger Beer"],
+        categories: ["Plat chaud",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: []
@@ -2467,7 +2465,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["100", ""],
         saison: [],
-        categories: ["Sucrée",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["Agar-agar", "creme de coco", "lait d’amande", "sucre de canne (blond)", "Noix de coco râpée"],
+        categories: ["Sucrée",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: []
@@ -2482,7 +2480,7 @@ const app = Vue.createApp({
         checkfor: "24",
         checkrange: ["100", "24"],
         saison: [],
-        categories: ["Plat chaud",],regimes: ["vegan","sans-lactose",],ingredients: ["Thym", "Bouillon de légume (sans gluten)", "Persil frais", "Miso d'orge", "Miso blanc", "Margarine", "Oignon", "Citron (jus)", "Champignon de Paris", "Poireau", "Carotte", "Fécule de maïs (Maïzena)", "Crème soja", "huile de tournesol", "Riz basmati", "Protéines de soja (grosses)", "Eau de fleur d'oranger"],
+        categories: ["Plat chaud",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: []
@@ -2497,7 +2495,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["100", ""],
         saison: ["ete",],
-        categories: ["Salade",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["Eau", "Protéines de soja", "Vinaigre de riz", "Poivre noir moulu", "mélange 4 épices", "Menthe", "Coriandre fraîche", "Tamari (sauce)", "Salade verte (chêne)", "Concombre", "Echalote", "Carotte", "Algue Kombu", "Gingembre", "Ail", "Ail", "Cacahuète", "Vermicelle de Riz", "Jus d'orange", "Sucre en poudre", "Sucre en poudre"],
+        categories: ["Salade",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: ["Plat Paela",]
@@ -2512,7 +2510,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["15", ""],
         saison: [],
-        categories: ["Accompagnement","Bouchées salées","Snacking",],regimes: ["vegetarien",],ingredients: ["Pate filo (1 feuille)", "Sésame blanc", "Fromage frais", "Ail", "Oignon", "Epinard", "huile de tournesol", "Lait entier"],
+        categories: ["Accompagnement","Bouchées salées","Snacking",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: ["Gastro 1\/1 (Normaux)","Four",]
@@ -2527,7 +2525,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["40", ""],
         saison: [],
-        categories: ["Soupe",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["Eau", "Tamari (sauce)", "poivre blanc moulue", "Bouillon de légume (sans gluten)", "Cumin moulu", "Coriandre en poudre", "Citronnelle (bâton)", "Feuille de laurier", "Céleri branche", "Poireau", "Echalote", "Gingembre bio", "Ail", "Jus de citron"],
+        categories: ["Soupe",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: []
@@ -2542,7 +2540,7 @@ const app = Vue.createApp({
         checkfor: "170",
         checkrange: ["100", "170"],
         saison: [],
-        categories: ["Accompagnement","Bouchées salées",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["Eau", "Tahin", "Protéines de soja", "Poivre", "Sel", "Persil frais", "Tamari (sauce)", "Bouillon de légume (sans gluten)", "Gingembre", "Ail", "Echalote", "Farine de riz blanche"],
+        categories: ["Accompagnement","Bouchées salées",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: ["Four","Marmitte","Robot Mixeur",]
@@ -2557,7 +2555,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["20", ""],
         saison: [],
-        categories: ["Bouchées salées","Plat chaud",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["Eau", "Vin Rouge", "Vinaigre de cidre", "Persil frais", "Tamari (sauce)", "Liquid smoke", "Ail", "Oignon", "Champignons séchés", "Fécule de maïs (Maïzena)", "huile de tournesol", "Riz basmati", "Haricots rouges cuits", "Sucre complet"],
+        categories: ["Bouchées salées","Plat chaud",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: ["Four","Gastro 1\/1 (Fins)",]
@@ -2572,7 +2570,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["100", ""],
         saison: [],
-        categories: ["Gateau",],regimes: ["vegetarien",],ingredients: ["Tahin", "Sel", "Beurre doux", "Oeuf", "Farine de blé", "Halva", "Sucre en poudre", "Chocolat noir patissier 70p100", "Cacao"],
+        categories: ["Gateau",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: ["Four",]
@@ -2587,7 +2585,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["32", ""],
         saison: [],
-        categories: ["Gateau",],regimes: ["vegetarien","sans-lactose",],ingredients: ["Beurre de cacahuètes (sucré)", "Sel", "Margarine", "Farine de blé", "Oeuf", "sucre blanc", "Chocolat noir patissier 70p100", "Chocolat noir patissier 70p100", "vanille extrait concentré"],
+        categories: ["Gateau",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: ["Four","Gastro 1\/1 (Fins)","Grand Saladier",]
@@ -2602,7 +2600,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["20", ""],
         saison: [],
-        categories: ["Gateau",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["Tahin", "Sel", "Lait végétal (au choix)", "huile de tournesol", "Farine de blé noir (sarrasin)", "Halva", "compote de pomme", "Sucre en poudre", "Chocolat noir patissier 70p100", "Cacao"],
+        categories: ["Gateau",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: ["Four",]
@@ -2617,7 +2615,7 @@ const app = Vue.createApp({
         checkfor: "170",
         checkrange: ["100", "170"],
         saison: [],
-        categories: ["Snacking",],regimes: ["vegetarien",],ingredients: ["Curcuma moulu", "Curry", "Cumin moulu", "Persil frais", "Persil frais", "Coriandre fraîche", "Sel", "Sel", "Poivre noir moulu", "Poivre noir moulu", "Fromage blanc", "Yaourt de soja", "Patates douces", "Oignon", "Ail", "Tomate", "Salade verte (chêne)", "Salade verte (chêne)", "Echalote", "Ail", "Pomme de terre", "huile d'olive", "Farine de blé", "Lentilles corail", "Petits flocons d'avoine", "Noix"],
+        categories: ["Snacking",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: []
@@ -2632,7 +2630,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["220", ""],
         saison: [],
-        categories: ["Snacking",],regimes: ["vegetarien","sans-gluten",],ingredients: ["Cornichons aigre-doux", "Pain Burger", "Pain Burger Végan", "Persil frais", "Persil frais", "Persil frais", "Yaourt Végétal", "Fromage blanc", "Pomme de terre", "Salade Iceberg", "Tomate", "Ail", "Ail", "Ail", "Oignon", "Pomme de terre", "huile de friture", "Oeuf"],
+        categories: ["Snacking",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: []
@@ -2647,7 +2645,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["10", ""],
         saison: [],
-        categories: ["Gateau",],regimes: ["vegan","sans-lactose",],ingredients: ["Bicarbonate de soude", "Gomme de xanthane", "Sel", "Yaourt de soja", "Citron jaune", "huile de tournesol", "Farine de blé", "Jus de citron", "sucre de canne (blond)"],
+        categories: ["Gateau",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: ["moule a cake","Four",]
@@ -2662,7 +2660,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["10", ""],
         saison: ["ete",],
-        categories: ["Cake",],regimes: ["vegetarien",],ingredients: ["Basilic sec", "Cumin", "Crème épaisse", "Comté", "Bûche de chèvre", "Courgette", "Ail", "Levure chimique", "huile d'olive", "Oeuf", "Farine de blé", "Lait demi-écrémé"],
+        categories: ["Cake",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: ["moule a cake","Four","Grand Saladier",]
@@ -2677,7 +2675,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["10", ""],
         saison: [],
-        categories: ["Cake",],regimes: ["vegetarien",],ingredients: ["Romarin", "Comté", "Bûche de chèvre", "Figues Sèches", "Levure chimique", "Farine de blé", "huile d'olive", "Oeuf", "Lait demi-écrémé"],
+        categories: ["Cake",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: ["moule a cake","Grand Saladier","Four",]
@@ -2692,7 +2690,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["100", ""],
         saison: [],
-        categories: ["Accompagnement",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["Carotte"],
+        categories: ["Accompagnement",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu"],
         temperature: "",
         cuisson: "false",
         materiel: []
@@ -2707,7 +2705,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["100", ""],
         saison: [],
-        categories: ["Salade",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["Sel", "Carotte", "Huile végétale"],
+        categories: ["Salade",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "false",
         materiel: []
@@ -2722,7 +2720,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["12", ""],
         saison: [],
-        categories: ["Salade",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["Écorce d'orange séchée ", "Poivre noir moulu", "Moutarde", "Verveine", "Carotte", "huile d'olive", "Jus d'orange"],
+        categories: ["Salade",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "false",
         materiel: []
@@ -2737,7 +2735,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["100", ""],
         saison: ["ete",],
-        categories: ["Tartinade",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["Tahin", "Poivre", "Sel", "Aubergine", "huile d'olive", "Jus de citron"],
+        categories: ["Tartinade",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: ["Bruleur","Plat Paela",]
@@ -2752,7 +2750,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["250", ""],
         saison: [],
-        categories: ["Accompagnement",],regimes: ["vegan","sans-lactose",],ingredients: ["Eau", "Poivre", "Ciboulette", "Sel", "Ail", "échalote", "Champignon de Paris", "huile d'olive", "Fécule de maïs (Maïzena)", "Lait de soja", "Crème soja", "huile de friture", "Farine de blé", "corn flakes"],
+        categories: ["Accompagnement",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: []
@@ -2767,7 +2765,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["100", ""],
         saison: ["ete",],
-        categories: ["Sucrée",],regimes: ["vegetarien","sans-gluten",],ingredients: ["Romarin", "Mascarpone", "Abricot", "boudoir", "vanille extrait concentré", "sucre de canne (blond)", "sucre de canne (blond)"],
+        categories: ["Sucrée",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: []
@@ -2782,7 +2780,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["100", ""],
         saison: [],
-        categories: ["Gateau",],regimes: ["vegetarien",],ingredients: ["Sel", "Philadelphia ou autre marque moins cher", "Ricotta", "Beurre doux", "Patates douces", "Fécule de maïs (Maïzena)", "Lait concentré sucré", "Levure chimique", "Oeuf", "Farine de blé", "vanille extrait concentré", "Cacao", "sucre de canne (blond)"],
+        categories: ["Gateau",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: []
@@ -2797,7 +2795,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["25", ""],
         saison: [],
-        categories: ["Sucrée",],regimes: ["vegan","sans-lactose",],ingredients: ["Agar-agar", "Eau", "Framboises surgelées", "Huile végétale", "lait de coco", "huile de coco", "Noix de cajou", "Sirop d'érable ", "sucre blanc", "Jus de citron", "Jus de citron", "Speculoos"],
+        categories: ["Sucrée",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "false",
         materiel: ["Giraffe (Bras Mixeur)",]
@@ -2812,7 +2810,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["100", ""],
         saison: [],
-        categories: ["Soupe",],regimes: ["sans-lactose",],ingredients: ["Agneau", "Eau", "Piment doux", "Paprika", "Gingembre en poudre", "Ras el hanout", "Menthe", "Coriandre fraîche", "Concentré de tomate", "Coulis de tomates", "Courgette", "Céleri branche", "Carotte", "Oignon", "huile d'olive", "Pâtes - langue d'oiseau", "Pois chiches"],
+        categories: ["Soupe",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: []
@@ -2827,7 +2825,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["170", ""],
         saison: [],
-        categories: ["Soupe",],regimes: ["sans-lactose",],ingredients: ["Agneau", "Concentré de tomate", "Cumin", "Ras el hanout", "Cannelle", "Poivre", "Coriandre fraîche", "Céleri branche", "Carotte", "Oignon", "Courgette", "Tomate", "huile d'olive", "Pâtes - langue d'oiseau", "Pois chiches", "Lentilles vertes"],
+        categories: ["Soupe",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: ["Marmitte",]
@@ -2842,7 +2840,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["40", ""],
         saison: [],
-        categories: ["Soupe",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["Eau", "Paprika", "Piment doux", "Gingembre en poudre", "Ras el hanout", "Menthe", "Coriandre fraîche", "Concentré de tomate", "Coulis de tomates", "Courgette", "Céleri branche", "Carotte", "Oignon", "huile d'olive", "Pâtes langues d'oiseaux sans gluten", "Pois chiches"],
+        categories: ["Soupe",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: []
@@ -2857,7 +2855,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["100", ""],
         saison: [],
-        categories: ["Snacking",],regimes: ["vegan","sans-lactose",],ingredients: ["Eau", "Paprika", "Liquid smoke", "Paprika", "Ail en poudre", "Sauce piment chipotle", "Shiro miso", "Miso d'orge", "Sauce soja", "huile d'olive", "huile d'olive", "Gluten pur"],
+        categories: ["Snacking",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: ["Ficelle",]
@@ -2872,7 +2870,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["100", ""],
         saison: [],
-        categories: ["Accompagnement",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["Gingembre en poudre", "Cumin (graines)", "moutarde graine", "Cannelle", "Coriandre en poudre", "Muscade", "Vinaigre de vin", "Chou blanc", "Ail", "Oignon", "Chou rouge", "Huile végétale", "confiture de myrtille"],
+        categories: ["Accompagnement",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: []
@@ -2887,7 +2885,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["6", ""],
         saison: ["automne","hiver",],
-        categories: ["Salade",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["Sésame noir", "Tamari (sauce)", "Vinaigre de riz", "Chou vert", "huile de colza", "Sucre en poudre"],
+        categories: ["Salade",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "false",
         materiel: ["Grand Saladier",]
@@ -2902,7 +2900,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["60", ""],
         saison: ["printemps","ete",],
-        categories: ["Sauce",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["purée de noix de cajou", "Eau", "Cumin moulu", "Sel", "Piment vert", "Vinaigre de cidre", "Menthe", "Coriandre fraîche", "Citron (jus)", "Gingembre", "Ail"],
+        categories: ["Sauce",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "false",
         materiel: []
@@ -2917,7 +2915,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["100", ""],
         saison: ["automne",],
-        categories: ["Sucrée",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["Poire", "Pomme", "Jus de citron"],
+        categories: ["Sucrée",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: []
@@ -2932,7 +2930,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["150", ""],
         saison: ["ete",],
-        categories: ["Salade",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["Sel", "Vinaigre de vin", "Gingembre", "Concombre", "huile d'olive", "Sucre en poudre"],
+        categories: ["Salade",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "false",
         materiel: ["Gastro 1\/1 (Profond)",]
@@ -2947,7 +2945,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["20", ""],
         saison: [],
-        categories: ["Gateau",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["Eau", "Thé Matcha", "Sel", "Bicarbonate alimentaire", "Fécule de tapioca", "huile de coco", "Graines de lin", "Gingembre confit", "Poudre d'amandes", "Sucre brun Vergeoise"],
+        categories: ["Gateau",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: []
@@ -2962,7 +2960,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["100", ""],
         saison: [],
-        categories: ["Gateau",],regimes: ["vegetarien",],ingredients: ["Thé Matcha", "Sel", "Beurre doux", "Oeuf", "Bicarbonate alimentaire", "Farine de blé", "Gingembre confit", "Chocolat blanc", "Sucre brun Vergeoise"],
+        categories: ["Gateau",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: []
@@ -2977,7 +2975,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["50", ""],
         saison: [],
-        categories: ["Biscuits",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["Colorants alimentaires", "Sel", "Margarine", "Levure chimique sans gluten", "Farine de riz", "sucre de canne (blond)", "compote de pomme", "Noix de coco râpée"],
+        categories: ["Biscuits",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: []
@@ -2992,7 +2990,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["100", ""],
         saison: [],
-        categories: ["Friture",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["Saucisse végane", "Eau", "Moutarde douce en flacon ", "Ketchup", "Poivre", "Vinaigre de cidre", "Vinaigre de cidre", "huile de tournesol", "Bicarbonate alimentaire", "Levure chimique sans gluten", "Farine de riz", "Lait végétal (au choix)", "Graines de lin", "Polenta fine", "Sirop d'agave"],
+        categories: ["Friture",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: ["Pique à brochette",]
@@ -3007,7 +3005,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["100", ""],
         saison: [],
-        categories: ["Plat chaud",],regimes: ["vegan","sans-lactose",],ingredients: ["Sauce tomate mutti", "Sel", "Sel", "Raisin sec", "Ail", "Oignon", "Navet", "Céleri branche", "Courge", "Carotte", "Pomme de terre", "huile de tournesol", "huile d'olive", "Semoule moyenne (blé)", "Pois chiches"],
+        categories: ["Plat chaud",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: []
@@ -3022,7 +3020,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["100", ""],
         saison: [],
-        categories: ["Sucrée",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["Agar-agar", "Curcuma moulu", "lait de coco", "lait d’amande", "Sucre en poudre", "Sirop d'agave", "Sucre en poudre"],
+        categories: ["Sucrée",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: []
@@ -3037,7 +3035,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["100", ""],
         saison: [],
-        categories: ["Autre",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["Agar-agar", "Sel", "Farine de riz", "Lait de riz", "Amandes effilées", "Eau de fleur d'oranger", "Sucre en poudre", "Poudre d'amandes"],
+        categories: ["Autre",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: []
@@ -3052,7 +3050,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["100", ""],
         saison: [],
-        categories: ["Sucrée",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["Agar-agar", "Lait de soja", "Crème de riz", "Pistache émmondée", "Graines de sésame blanc", "Graine de tournesol", "Amandes effilées", "sucre blanc", "sucre de canne (blond)", "Poudre de noisettes"],
+        categories: ["Sucrée",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: []
@@ -3067,7 +3065,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["7", ""],
         saison: [],
-        categories: ["Gateau",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["Pêche", "lait de coco", "Tapioca perlée", "vanille extrait concentré", "sucre blanc"],
+        categories: ["Gateau",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: []
@@ -3082,7 +3080,7 @@ const app = Vue.createApp({
         checkfor: "150",
         checkrange: ["20", "150"],
         saison: [],
-        categories: ["Autre",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["Purée d'amande", "Lait de riz", "Fécule de pomme de terre", "Farine de riz blanche", "Pralines roses de Lyon", "Sucre en poudre"],
+        categories: ["Autre",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: ["ramequins",]
@@ -3097,7 +3095,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["10", ""],
         saison: [],
-        categories: ["Sucrée",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["lait d’amande", "Farine de maïs", "gousse de vanille", "vanille extrait concentré", "sucre blanc"],
+        categories: ["Sucrée",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: []
@@ -3112,7 +3110,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["300", ""],
         saison: [],
-        categories: ["Sucrée",],regimes: ["vegan","sans-lactose",],ingredients: ["Fécule de maïs (Maïzena)", "Lait de riz", "Lait de soja", "Lait d'avoine", "Sirop de sureau"],
+        categories: ["Sucrée",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: ["Bruleur",]
@@ -3127,7 +3125,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["100", ""],
         saison: [],
-        categories: ["Plat chaud",],regimes: ["vegetarien",],ingredients: ["champignons-surgeles", "crêpes de sarrasin", "Bouillon de légume (sans gluten)", "Muscade", "Margarine", "Tofu ferme", "Ricotta", "Oignon", "Epinards surgelés", "Lait entier", "huile de tournesol", "Fécule de maïs (Maïzena)", "Farine de blé"],
+        categories: ["Plat chaud",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: []
@@ -3142,7 +3140,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["15", ""],
         saison: [],
-        categories: ["Accompagnement","Bouchées salées","Snacking",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["Ail", "Oignon", "Epinard", "Levure de bière", "huile de tournesol", "Farine de blé noir (sarrasin)", "Graine de tournesol", "Noix"],
+        categories: ["Accompagnement","Bouchées salées","Snacking",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: ["Four","Gastro 1\/1 (Normaux)",]
@@ -3157,7 +3155,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["100", ""],
         saison: [],
-        categories: ["Plat chaud",],regimes: ["sans-gluten",],ingredients: ["Bourguignon (boeuf)", "Curry", "Concentré de tomate", "Yaourt brassé", "Beurre demi-sel", "Yaourt de vache", "Oignon", "Banane", "Oignon rouge", "Tomate", "Poivron (rouge)", "Tomate", "huile d'olive", "Riz basmati", "Jus de citron", "Noix de coco rapée"],
+        categories: ["Plat chaud",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: []
@@ -3172,7 +3170,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["100", ""],
         saison: [],
-        categories: ["Plat chaud",],regimes: ["sans-gluten",],ingredients: ["Bourguignon (boeuf)", "Curry", "Concentré de tomate", "Yaourt brassé", "Beurre demi-sel", "Yaourt de vache", "Ail", "Gingembre bio", "Oignon", "Banane", "Oignon rouge", "Tomate", "Poivron (rouge)", "Tomate", "huile d'olive", "Riz basmati", "Jus de citron", "Noix de coco rapée"],
+        categories: ["Plat chaud",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: []
@@ -3187,7 +3185,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["100", ""],
         saison: [],
-        categories: ["Plat chaud",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["Curry", "Concentré de tomate", "Yaourt de soja", "Margarine", "Yaourt de soja", "Chou-fleur", "Pomme de terre", "Carotte", "Ail", "Gingembre bio", "Oignon", "Banane", "Oignon rouge", "Tomate", "Poivron (rouge)", "Tomate", "huile d'olive", "Riz basmati", "Jus de citron", "Noix de coco rapée"],
+        categories: ["Plat chaud",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: []
@@ -3202,7 +3200,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["20", ""],
         saison: ["printemps","automne","hiver",],
-        categories: ["Snacking",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["Poivre", "Sésame", "Gousse d'ail", "Sauce soja", "échalote", "Epinard", "huile de sésame", "sucre blanc"],
+        categories: ["Snacking",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: ["Bruleur",]
@@ -3217,7 +3215,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["100", ""],
         saison: [],
-        categories: ["Plat chaud",],regimes: ["vegan","sans-lactose",],ingredients: ["bouillon cube", "Sauce soja", "Huile végétale", "Farine de riz", "Gluten pur", "Poudre d'amandes"],
+        categories: ["Plat chaud",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: []
@@ -3232,7 +3230,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["150", ""],
         saison: [],
-        categories: ["Accompagnement","Friture",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["Bicarbonate de soude", "Piment doux", "Coriandre fraîche", "Cumin moulu", "Paprika fumé", "Sésame", "graine de coriandre", "Persil frais", "Petit oignon blanc", "Ail", "Pois chiches"],
+        categories: ["Accompagnement","Friture",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: []
@@ -3247,7 +3245,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["100", ""],
         saison: [],
-        categories: ["Friture",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["Poivre", "Sel", "Cumin moulu", "Coriandre fraîche", "Persil frais", "Ail", "Oignon", "huile de friture", "huile d'olive", "Pois chiches"],
+        categories: ["Friture",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: ["Friteuse",]
@@ -3262,7 +3260,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["220", ""],
         saison: [],
-        categories: ["Bouchées salées",],regimes: ["vegetarien",],ingredients: ["Persil frais", "Fromage blanc", "Citron confit", "Ail", "Oignon", "Bette (blette)", "Levure chimique", "huile de friture", "Farine de blé", "Lait demi-écrémé", "Oeuf"],
+        categories: ["Bouchées salées",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: ["Plat Paela",]
@@ -3277,7 +3275,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["20", ""],
         saison: [],
-        categories: ["Bouchées salées","Friture",],regimes: ["vegan","sans-lactose",],ingredients: ["Persil frais", "Yaourt de soja", "Citron confit", "Ail", "Oignon", "Bette (blette)", "Levure chimique", "huile de friture", "Fécule de maïs (Maïzena)", "Farine de pois chiche", "Lait végétal (au choix)"],
+        categories: ["Bouchées salées","Friture",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: ["Plat Paela",]
@@ -3292,7 +3290,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["16", ""],
         saison: [],
-        categories: ["Bouchées salées",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["Paprika", "Coriandre fraîche", "Aneth aromatique", "Concentré de tomate", "Coulis de tomates", "Cumin moulu", "Cannelle", "Pate feuilleté sans gluten et vegan", "Yaourt de soja", "Cébette - Ciboule - Cive - Oignon vert", "Epinard", "Ail", "Oignon", "huile d'olive", "Pois chiche cuit", "Sucre en poudre"],
+        categories: ["Bouchées salées",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: ["Four",]
@@ -3307,7 +3305,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["120", ""],
         saison: [],
-        categories: ["Bouchées salées","Friture",],regimes: ["vegetarien",],ingredients: ["Eau", "Sel", "poivre blanc moulue", "huile de friture", "Farine de blé", "Farine de maïs", "Farine de maïs", "Lait concentré (non sucré)", "Lait demi-écrémé", "Levure chimique", "Sucre en poudre"],
+        categories: ["Bouchées salées","Friture",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: ["Friteuse","Gastro 1\/1 (Fins)","Marmitte",]
@@ -3322,7 +3320,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["20", ""],
         saison: [],
-        categories: ["Sucrée",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["Agar-agar", "Sel", "Pandan (extrait de)", "Fécule de maïs (Maïzena)", "lait de coco", "Lait végétal (au choix)", "Sucre en poudre"],
+        categories: ["Sucrée",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: []
@@ -3337,7 +3335,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["30", ""],
         saison: [],
-        categories: ["Bouchées salées",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["Basilic", "Oignon", "Courgette", "huile d'olive", "Crème soja", "Fécule de maïs (Maïzena)", "Levure de bière"],
+        categories: ["Bouchées salées",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: []
@@ -3352,7 +3350,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["100", ""],
         saison: ["ete",],
-        categories: ["Bouchées salées",],regimes: ["vegetarien","sans-gluten",],ingredients: ["Basilic", "Crème florette", "Courgette", "Oeuf"],
+        categories: ["Bouchées salées",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: []
@@ -3367,7 +3365,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["100", ""],
         saison: [],
-        categories: ["Autre",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["Fécule de maïs (Maïzena)", "Lait de riz", "Eau de rose", "Eau de fleur d'oranger", "Sucre en poudre"],
+        categories: ["Autre",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: []
@@ -3382,7 +3380,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["100", ""],
         saison: [],
-        categories: ["Pain",],regimes: ["vegan","sans-lactose",],ingredients: ["Eau", "Thym", "Romarin", "Sel", "Coulis de tomates", "Levure fraîche", "Oignon", "huile d'olive", "Farine de blé"],
+        categories: ["Pain",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: ["Four",]
@@ -3397,7 +3395,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["25", ""],
         saison: [],
-        categories: ["Gateau",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["Patates douces", "Lait de soja", "Farine de tapioca", "vanille extrait concentré", "sucre de canne (blond)", "Poudre d'amandes"],
+        categories: ["Gateau",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: []
@@ -3412,7 +3410,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["100", ""],
         saison: [],
-        categories: ["Gateau",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["Yaourt de soja", "Crème soja", "Haricots rouges cuits", "sucre de canne (blond)", "Chocolat noir patissier 70p100"],
+        categories: ["Gateau",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: []
@@ -3427,7 +3425,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["100", ""],
         saison: [],
-        categories: ["Gateau",],regimes: ["vegetarien","sans-gluten",],ingredients: ["Sel", "Beurre doux", "Farine de riz gluant", "Oeuf", "Sucre en poudre", "Confiture de chataigne (sans sucre)"],
+        categories: ["Gateau",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: ["Gastro 1\/1 (Normaux)","Four",]
@@ -3442,7 +3440,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["20", ""],
         saison: [],
-        categories: ["Gateau",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["Sel", "Lait de soja", "Farine de tapioca", "Farine de riz gluant", "Poudre d'amandes", "Sucre en poudre", "Confiture de chataigne (sans sucre)"],
+        categories: ["Gateau",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: ["Gastro 1\/1 (Normaux)","Four",]
@@ -3457,7 +3455,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["100", ""],
         saison: [],
-        categories: ["Bouchées salées",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["Eau", "Câpres", "Estragon", "Persil frais", "Moutarde", "Salade verte (chêne)", "Cornichon", "Ail", "Lait de soja", "Huile végétale", "huile de friture", "Farine de pois chiche", "Jus de citron"],
+        categories: ["Bouchées salées",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: []
@@ -3472,7 +3470,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["100", ""],
         saison: ["printemps","automne","ete","hiver",],
-        categories: ["Friture",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["Pomme de terre"],
+        categories: ["Friture",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: []
@@ -3487,7 +3485,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["100", ""],
         saison: [],
-        categories: ["Sucrée",],regimes: ["vegetarien","sans-gluten",],ingredients: ["Yaourt de soja", "Fromage blanc", "Fruits rouges", "sucre de canne (blond)"],
+        categories: ["Sucrée",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "false",
         materiel: []
@@ -3502,7 +3500,7 @@ const app = Vue.createApp({
         checkfor: "4",
         checkrange: ["50", "4"],
         saison: [],
-        categories: ["Tartinade",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["Eau", "Ciboulette", "Ail", "huile de colza", "Jus de citron"],
+        categories: ["Tartinade",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "false",
         materiel: []
@@ -3517,7 +3515,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["15", ""],
         saison: [],
-        categories: ["Pain",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["Eau", "Coriandre en poudre", "Ail en poudre", "Cumin moulu", "Cébette - Ciboule - Cive - Oignon vert", "Farine de pois chiche"],
+        categories: ["Pain",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: []
@@ -3532,7 +3530,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["100", ""],
         saison: ["ete",],
-        categories: ["Soupe",],regimes: ["vegan","sans-lactose",],ingredients: ["Pain rassis", "Vinaigre de Xérès", "Basilic sec", "Origan", "Sel", "Poivre noir moulu", "Ail", "Oignon rouge", "Poivron (vert)", "Concombre", "Tomate", "huile d'olive"],
+        categories: ["Soupe",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "false",
         materiel: []
@@ -3547,7 +3545,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["12", ""],
         saison: [],
-        categories: ["Gateau",],regimes: ["vegetarien","sans-gluten",],ingredients: ["Beurre demi-sel", "Beurre demi-sel", "Oeuf", "Farine de blé noir (sarrasin)", "Sarrasin", "Confiture de chataigne (sans sucre)", "Chocolat noir patissier 70p100"],
+        categories: ["Gateau",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: []
@@ -3562,7 +3560,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["12", ""],
         saison: [],
-        categories: ["Gateau",],regimes: ["vegan","sans-lactose",],ingredients: ["Farine de blé", "Crème soja", "lait d’amande", "huile d'olive", "Levure chimique", "Sarrasin", "Chocolat noir patissier 70p100", "Confiture de chataigne (sans sucre)"],
+        categories: ["Gateau",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: []
@@ -3577,7 +3575,7 @@ const app = Vue.createApp({
         checkfor: "155",
         checkrange: ["100", "155"],
         saison: [],
-        categories: ["Gateau",],regimes: ["vegetarien","sans-gluten","sans-lactose",],ingredients: ["Sel", "Pandan (extrait de)", "Levure chimique sans gluten", "Oeuf", "Farine de tapioca", "Farine de riz blanche", "lait de coco"],
+        categories: ["Gateau",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: []
@@ -3592,7 +3590,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["100", ""],
         saison: [],
-        categories: ["Gateau",],regimes: ["vegetarien","sans-gluten",],ingredients: ["Yaourt grec de vache", "Beurre demi-sel", "Fruits divers", "Fruits divers", "Citron vert", "Oeuf", "Polenta fine", "Pistache émmondée", "Amande", "Miel", "Sucre en poudre"],
+        categories: ["Gateau",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: []
@@ -3607,7 +3605,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["150", ""],
         saison: [],
-        categories: ["Gateau",],regimes: ["vegetarien",],ingredients: ["Purée de sésame noir", "Sel", "Beurre demi-sel", "Levure chimique", "Crème liquide", "Oeuf", "Farine de blé", "Chocolat noir", "Sucre en poudre"],
+        categories: ["Gateau",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: ["Gastro 1\/1 (Fins)","Four",]
@@ -3622,7 +3620,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["25", ""],
         saison: [],
-        categories: ["Gateau",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["Bicarbonate de soude", "Purée de sésame noir", "Sel", "Fécule de maïs (Maïzena)", "Crème d'amande", "lait d’amande", "huile de tournesol", "Chocolat noir", "Sucre en poudre"],
+        categories: ["Gateau",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: ["Gastro 1\/1 (Fins)","Four",]
@@ -3637,7 +3635,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["100", ""],
         saison: [],
-        categories: ["Sucrée",],regimes: ["vegetarien","sans-gluten",],ingredients: ["Beurre doux", "Oeuf", "Chocolat noir patissier 70p100", "Crème de marron"],
+        categories: ["Sucrée",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: []
@@ -3652,7 +3650,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["100", ""],
         saison: [],
-        categories: ["Soupe",],regimes: ["vegan","sans-lactose",],ingredients: ["graine-de-courge", "Thym", "Paprika", "Concentré de tomate", "Miso d'orge", "huile d'olive", "Graines de sésame blanc", "Flocons d'avoine", "Sirop d'agave"],
+        categories: ["Soupe",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: []
@@ -3667,7 +3665,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["5", ""],
         saison: [],
-        categories: ["Tartinade",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["Tahin", "Eau", "Paprika", "Ail", "huile d'olive", "Pois chiche cuit", "Jus de citron"],
+        categories: ["Tartinade",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: ["Giraffe (Bras Mixeur)",]
@@ -3682,7 +3680,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["100", ""],
         saison: [],
-        categories: ["Accompagnement",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["Tahin", "Vinaigre balsamique", "Canneberge", "Ail", "Betterave cuite", "huile d'olive", "Pois chiche cuit"],
+        categories: ["Accompagnement",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "false",
         materiel: []
@@ -3697,7 +3695,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["100", ""],
         saison: [],
-        categories: ["Tartinade",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["Tahin", "Paprika", "Sel", "Poivre", "Ail", "huile d'olive", "Pois chiches", "Jus de citron"],
+        categories: ["Tartinade",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: []
@@ -3712,7 +3710,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["100", ""],
         saison: [],
-        categories: ["Tartinade",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["Tahin", "Sel", "Ail", "huile d'olive", "Pois chiches", "Jus de citron"],
+        categories: ["Tartinade",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: []
@@ -3727,7 +3725,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["100", ""],
         saison: [],
-        categories: ["Friture",],regimes: ["vegan","sans-lactose",],ingredients: ["Vinaigre de cidre", "Poivre", "Paprika", "Sel", "Ail", "Maïs en conserve égoutté", "Oignon", "huile de friture", "Lait végétal (au choix)", "Levure chimique", "Farine de blé", "Farine de maïs"],
+        categories: ["Friture",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: []
@@ -3742,7 +3740,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["10", ""],
         saison: [],
-        categories: ["Sucrée",],regimes: ["vegetarien","sans-gluten",],ingredients: ["Sel", "Farine de maïs", "Oeuf", "Lait demi-écrémé", "Sucre glace", "vanille extrait concentré", "gousse de vanille", "sucre blanc"],
+        categories: ["Sucrée",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: []
@@ -3757,7 +3755,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["100", ""],
         saison: [],
-        categories: ["Plat chaud",],regimes: ["sans-lactose",],ingredients: ["Poulet (volaille et gibier)", "Chorizo végan", "Cumin moulu", "Poivre", "Oignon en poudre", "Ail en poudre", "Thym", "Origan", "Paprika", "Persil frais", "Ail", "Poivron (vert)", "Poivron (rouge)", "Céleri branche", "Cébette - Ciboule - Cive - Oignon vert", "Oignon", "Riz"],
+        categories: ["Plat chaud",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: []
@@ -3772,7 +3770,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["50", ""],
         saison: [],
-        categories: ["Plat chaud",],regimes: ["vegan","sans-lactose",],ingredients: ["Chorizo végan", "Persil frais", "Cumin moulu", "Poivre", "Oignon en poudre", "Ail en poudre", "Thym", "Origan", "Paprika", "Ail", "Cébette - Ciboule - Cive - Oignon vert", "Céleri branche", "Poivron (vert)", "Poivron (rouge)", "Oignon", "Riz"],
+        categories: ["Plat chaud",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: []
@@ -3787,7 +3785,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["100", ""],
         saison: [],
-        categories: ["Accompagnement","Sauce",],regimes: ["vegetarien","sans-gluten",],ingredients: ["Menthe séchée", "Yaourt grec de vache", "Oignon", "huile d'olive", "Noix", "Boulgour"],
+        categories: ["Accompagnement","Sauce",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "false",
         materiel: []
@@ -3802,7 +3800,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["20", ""],
         saison: [],
-        categories: ["Accompagnement","Sauce",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["Menthe séchée", "Yaourt de soja", "Oignon", "huile d'olive", "Noix", "Semoule couscous sans gluten"],
+        categories: ["Accompagnement","Sauce",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "false",
         materiel: []
@@ -3817,7 +3815,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["100", ""],
         saison: [],
-        categories: ["Plat chaud",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["clou de girofle poudre", "Curry", "Curcuma moulu", "Coriandre en poudre", "Cardamone en poudre", "Poivre noir moulu", "Fenugrec", "Paprika", "Coulis de tomates", "Tofu ferme", "Gingembre", "Ail", "Oignon", "Poivron (rouge)"],
+        categories: ["Plat chaud",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: []
@@ -3832,7 +3830,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["16", ""],
         saison: ["ete",],
-        categories: ["Bouchées salées",],regimes: ["vegetarien",],ingredients: ["Poivre", "Sel", "Paprika", "Aneth aromatique", "Menthe fraîche", "Basilic", "Cumin moulu", "Yaourt grec de vache", "Feta", "Citron vert", "Courgette", "huile de tournesol", "Oeuf", "Farine de blé", "Miel"],
+        categories: ["Bouchées salées",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: ["Four","Robot-coupe",]
@@ -3847,7 +3845,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["16", ""],
         saison: ["ete",],
-        categories: ["Bouchées salées",],regimes: ["vegetarien","sans-gluten",],ingredients: ["Poivre", "Sel", "Paprika", "Aneth aromatique", "Menthe fraîche", "Basilic", "Cumin moulu", "Yaourt grec de vache", "Feta", "Citron vert", "Courgette", "Farine de maïs", "huile de tournesol", "Oeuf", "Farine de riz", "Miel"],
+        categories: ["Bouchées salées",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: ["Four","Robot-coupe",]
@@ -3862,7 +3860,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["8", ""],
         saison: ["ete",],
-        categories: ["Snacking",],regimes: ["vegetarien",],ingredients: ["Pate filo (1 feuille)", "Poivre", "Sel", "Aneth aromatique", "Menthe fraîche", "Basilic", "Cumin moulu", "Yaourt grec de vache", "Feta", "Courgette", "huile de tournesol", "Oeuf"],
+        categories: ["Snacking",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: ["Four","Robot-coupe",]
@@ -3877,7 +3875,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["100", ""],
         saison: [],
-        categories: ["Plat chaud",],regimes: ["vegetarien","sans-gluten","sans-lactose",],ingredients: ["Poivre", "Sel", "Sumac", "Curcuma moulu", "Aneth aromatique", "Coriandre fraîche", "Persil frais", "Salade", "Epinard", "Cébette - Ciboule - Cive - Oignon vert", "Poireau", "Ail", "huile d'olive", "Oeuf"],
+        categories: ["Plat chaud",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: []
@@ -3892,7 +3890,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["25", ""],
         saison: [],
-        categories: ["Plat chaud",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["Eau", "Eau", "Poivre", "Sel", "Sumac", "Curcuma moulu", "Aneth aromatique", "Persil frais", "Salade", "Epinard", "Cébette - Ciboule - Cive - Oignon vert", "Poireau", "Ail", "Crème soja", "Farine de pois chiche", "huile d'olive", "Graines de lin"],
+        categories: ["Plat chaud",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: []
@@ -3907,7 +3905,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["20", ""],
         saison: [],
-        categories: ["Snacking",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["Pesto Rosso végan", "Gomme de xanthane", "Gomme de guar", "Sel", "Levure boulangère sans gluten", "huile d'olive", "Lait de riz", "Fécule de maïs (Maïzena)", "Farine de millet", "Farine de riz", "Sucre en poudre"],
+        categories: ["Snacking",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: []
@@ -3922,7 +3920,7 @@ const app = Vue.createApp({
         checkfor: "24",
         checkrange: ["100", "24"],
         saison: [],
-        categories: ["Snacking",],regimes: ["vegetarien",],ingredients: ["Sel", "Levure fraîche", "Gouda en tranche", "Beurre doux", "Oeuf", "Lait demi-écrémé", "Farine de blé", "Sucre en poudre"],
+        categories: ["Snacking",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: []
@@ -3937,7 +3935,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["100", ""],
         saison: ["printemps","ete","automne","hiver",],
-        categories: ["Plat chaud",],regimes: ["vegetarien",],ingredients: ["Muscade", "Sauce tomate mutti", "Beurre doux", "Fromage râpé", "Champignon de Paris", "Céleri branche", "Carotte", "Oignon", "Farine de blé", "Lait demi-écrémé", "huile d'olive", "Protéines de soja (petites)", "Lasagnes"],
+        categories: ["Plat chaud",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: []
@@ -3952,7 +3950,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["100", ""],
         saison: [],
-        categories: ["Plat chaud",],regimes: ["vegetarien",],ingredients: ["Poivre", "Sel", "Aubergine", "Tomate", "Oignon", "Ail", "huile d'olive", "Lait écrémé", "Lasagnes", "Pois cassés"],
+        categories: ["Plat chaud",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: []
@@ -3967,7 +3965,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["100", ""],
         saison: [],
-        categories: ["Autre",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["Cardamone en poudre", "Yaourt de soja", "Citron (jus)", "Mangue", "lait de coco", "sucre de canne (blond)"],
+        categories: ["Autre",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "false",
         materiel: []
@@ -3982,7 +3980,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["10", ""],
         saison: [],
-        categories: ["Sucrée",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["Curcuma moulu", "Margarine végétale spécial cuisson", "Fécule de maïs (Maïzena)", "Lait de soja", "Sucre en poudre", "Jus de citron"],
+        categories: ["Sucrée",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: []
@@ -3997,7 +3995,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["100", ""],
         saison: [],
-        categories: ["Plat chaud",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["Persil frais", "Coriandre fraîche", "Paprika", "Feuille de laurier", "Gingembre en poudre", "Cumin", "Ail", "Carotte", "Oignon", "Tomate (conserve)", "huile d'olive", "Boulgour", "Haricots blancs"],
+        categories: ["Plat chaud",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: []
@@ -4012,7 +4010,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["100", ""],
         saison: [],
-        categories: ["Bouchées salées",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["Vinaigre de cidre", "Sauge", "Fleur de sel", "Yaourt de soja", "Ail", "Bicarbonate alimentaire", "huile de tournesol", "Lait végétal (au choix)", "Levure chimique sans gluten", "Farine de blé noir (sarrasin)", "Noisette", "Poudre de noisettes"],
+        categories: ["Bouchées salées",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: ["Four",]
@@ -4027,7 +4025,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["100", ""],
         saison: ["ete","automne","printemps","hiver",],
-        categories: ["Plat chaud",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["Pâte d'arachide", "bouillon cube", "Concentré de tomate", "Gingembre", "Chou blanc", "Carotte", "Ail", "Oignon", "Tomate", "Riz basmati"],
+        categories: ["Plat chaud",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: []
@@ -4042,7 +4040,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["100", ""],
         saison: [],
-        categories: ["Salade",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["Ras el hanout", "Pulpe de tomate", "Ail", "Oignon", "Poivron (vert)", "Poivron (rouge)", "huile d'olive", "Sucre en poudre"],
+        categories: ["Salade",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: []
@@ -4057,7 +4055,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["15", ""],
         saison: ["hiver",],
-        categories: ["Biscuits",],regimes: ["vegetarien",],ingredients: ["Eau", "Bâtonnet de canelle", "clou de girofle poudre", "Cannelle", "Beurre doux", "Orange", "Zestes d'orange", "Bicarbonate alimentaire", "Farine de blé", "huile d'olive", "Noix", "Miel", "sucre blanc", "Sucre glace", "Jus d'orange"],
+        categories: ["Biscuits",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: []
@@ -4072,7 +4070,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["24", ""],
         saison: ["ete",],
-        categories: ["Salade",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["Basilic", "Melon"],
+        categories: ["Salade",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu"],
         temperature: "",
         cuisson: "false",
         materiel: []
@@ -4087,7 +4085,7 @@ const app = Vue.createApp({
         checkfor: "30",
         checkrange: ["100", "30"],
         saison: [],
-        categories: ["Sucrée",],regimes: ["vegetarien","sans-lactose",],ingredients: ["Chapelure", "Citron jaune", "Orange", "Oeuf", "huile d'olive", "Levure chimique", "sucre de canne (blond)", "Chapelure sans gluten", "Eau de fleur d'oranger", "sucre de canne (blond)", "Poudre d'amandes"],
+        categories: ["Sucrée",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: []
@@ -4102,7 +4100,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["100", ""],
         saison: [],
-        categories: ["Biscuits",],regimes: ["vegan","sans-lactose",],ingredients: ["Cannelle", "Levure chimique", "huile de colza", "Farine de blé", "Poudre d'amandes", "Eau de fleur d'oranger", "Sucre glace"],
+        categories: ["Biscuits",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: []
@@ -4117,7 +4115,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["20", ""],
         saison: [],
-        categories: ["Biscuits",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["Cannelle", "huile de colza", "Farine de pois chiche", "Farine de maïs", "Farine de riz", "Eau de fleur d'oranger", "sucre de canne (blond)"],
+        categories: ["Biscuits",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: []
@@ -4132,7 +4130,7 @@ const app = Vue.createApp({
         checkfor: "6",
         checkrange: ["100", "6"],
         saison: [],
-        categories: ["Plat chaud",],regimes: ["sans-gluten","sans-lactose",],ingredients: ["Morue (poisson)", "Poivre noir moulu", "Persil frais", "Olives noires à la grecque", "Ail", "Oignon", "Pomme de terre", "huile d'olive", "huile de tournesol", "Oeuf"],
+        categories: ["Plat chaud",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: ["Gastro 1\/1 (Normaux)","Four","Marmitte","Bruleur","Gastro Perforé 1\/1 (Profonds)",]
@@ -4147,7 +4145,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["24", ""],
         saison: [],
-        categories: ["Sucrée",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["Aquafaba - jus de pois chiche", "Eau", "Agar-agar", "Citron non traité", "Fécule de maïs (Maïzena)", "Sucre en poudre", "Jus de citron"],
+        categories: ["Sucrée",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: []
@@ -4162,7 +4160,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["170", ""],
         saison: ["ete",],
-        categories: ["Plat chaud",],regimes: ["vegetarien",],ingredients: ["Chunks (protéine de soja)", "Sauce tomate mutti", "Gros sel", "Beurre demi-sel", "Parmigiano", "Mozzarella", "Ail", "Pomme de terre", "Oignon", "Aubergine", "Farine de blé", "Lait demi-écrémé"],
+        categories: ["Plat chaud",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: ["Four","Gastro 1\/1 (Normaux)",]
@@ -4177,7 +4175,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["100", ""],
         saison: ["ete",],
-        categories: ["Accompagnement","Sauce",],regimes: ["vegan","sans-lactose",],ingredients: ["Chapelure", "Café moulu", "Tahin", "Mélasse de grenade", "Piment en poudre", "Sel", "Cumin moulu", "Paprika", "Poivron (rouge)", "huile d'olive", "Noix", "Miel"],
+        categories: ["Accompagnement","Sauce",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: ["Robot Mixeur",]
@@ -4192,7 +4190,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["20", ""],
         saison: [],
-        categories: ["Pain",],regimes: ["vegan","sans-lactose",],ingredients: ["Eau", "Ail en poudre", "Sel", "Yaourt de soja", "Huile végétale", "Farine de blé", "Levure de boulanger", "sucre blanc"],
+        categories: ["Pain",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: []
@@ -4207,7 +4205,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["100", ""],
         saison: [],
-        categories: ["Pain",],regimes: ["vegetarien",],ingredients: ["Eau", "Sel", "kiri ou autre du genre", "Yaourt grec de vache", "Huile végétale", "Farine de blé", "Levure de boulanger", "Levure chimique", "sucre blanc"],
+        categories: ["Pain",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: []
@@ -4222,7 +4220,7 @@ const app = Vue.createApp({
         checkfor: "12",
         checkrange: ["50", "12"],
         saison: [],
-        categories: ["Gateau",],regimes: ["vegan","sans-lactose",],ingredients: ["Eau", "Eau", "Bicarbonate de soude", "Yaourt de soja", "Levure chimique", "huile de colza", "Semoule fine (blé)", "Jus de citron", "Sucre en poudre", "Sucre en poudre"],
+        categories: ["Gateau",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: ["Four",]
@@ -4237,7 +4235,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["150", ""],
         saison: [],
-        categories: ["Friture",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["Feuilles de riz (galettes)", "Poivre", "Sel", "Menthe", "Champignon noir", "Pousses de soja", "Carotte", "Oignon", "Petits pois", "huile de tournesol", "Vermicelle de Riz"],
+        categories: ["Friture",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: ["Friteuse",]
@@ -4252,7 +4250,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["10", ""],
         saison: [],
-        categories: ["Plat chaud",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["Sel", "fenugrec moulu", "Persil frais", "Poivre noir moulu", "Tofu ferme", "Pomme de terre", "Oignon", "Ail", "Olives noires à la grecque", "huile de tournesol", "huile d'olive"],
+        categories: ["Plat chaud",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: []
@@ -4267,7 +4265,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["130", ""],
         saison: [],
-        categories: ["Bouchées salées","Friture",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["Eau", "fenouil graine", "Sel", "Curry", "Cumin (graines)", "Coriandre en poudre", "piment rouge frais", "Ail", "Gingembre", "Oignon", "huile de friture", "Farine de pois chiche"],
+        categories: ["Bouchées salées","Friture",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: []
@@ -4282,7 +4280,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["20", ""],
         saison: [],
-        categories: ["Accompagnement",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["Oignon", "huile de tournesol", "Sucre en poudre"],
+        categories: ["Accompagnement",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: ["Bruleur","Robot-coupe",]
@@ -4297,7 +4295,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["170", ""],
         saison: [],
-        categories: ["Pain",],regimes: ["vegetarien",],ingredients: ["Sel", "Feta", "Beurre demi-sel", "Levure chimique", "Oeuf", "Farine de tapioca"],
+        categories: ["Pain",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: ["Four",]
@@ -4312,7 +4310,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["100", ""],
         saison: [],
-        categories: ["Accompagnement",],regimes: ["vegan","sans-lactose",],ingredients: ["Eau", "Sel", "huile de friture", "Huile végétale", "Levure chimique", "Farine de blé", "Sucre en poudre"],
+        categories: ["Accompagnement",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: []
@@ -4327,7 +4325,7 @@ const app = Vue.createApp({
         checkfor: "100",
         checkrange: ["100", "100"],
         saison: [],
-        categories: ["Autre",],regimes: ["vegan","sans-lactose",],ingredients: ["Levure fraîche de boulanger", "Farine de blé"],
+        categories: ["Autre",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: []
@@ -4342,7 +4340,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["100", ""],
         saison: [],
-        categories: ["Sucrée",],regimes: ["vegan","sans-lactose",],ingredients: ["Agar-agar", "Rhubarbe", "lait d’amande", "Speculoos", "vanille extrait concentré", "sucre de canne (blond)"],
+        categories: ["Sucrée",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: []
@@ -4357,7 +4355,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["20", ""],
         saison: [],
-        categories: ["Sucrée",],regimes: ["vegetarien","sans-gluten",],ingredients: ["Agar-agar", "Framboises surgelées", "Crème fraiche liquide entière", "sucre blanc", "gousse de vanille", "sucre blanc"],
+        categories: ["Sucrée",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: ["ramequins","Giraffe (Bras Mixeur)",]
@@ -4372,7 +4370,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["100", ""],
         saison: [],
-        categories: ["Accompagnement","Friture",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["Eau", "Poivre", "Sel", "huile de friture", "huile d'olive", "Farine de pois chiche"],
+        categories: ["Accompagnement","Friture",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: ["Plateaux","Marmitte","Friteuse",]
@@ -4387,7 +4385,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["100", ""],
         saison: [],
-        categories: ["Sucrée",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["Agar-agar", "Lait de soja", "Crème soja", "Jus de citron", "Jus de fraise", "Confiture de fraises", "gousse de vanille", "vanille extrait concentré", "Sucre en poudre"],
+        categories: ["Sucrée",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: ["ramequins",]
@@ -4402,7 +4400,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["100", ""],
         saison: ["automne",],
-        categories: ["Sucrée",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["Agar-agar", "Purée chataîgne sans sucre", "lait d’amande", "Crème soja", "Chocolat noir", "sucre blanc"],
+        categories: ["Sucrée",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: []
@@ -4417,7 +4415,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["100", ""],
         saison: [],
-        categories: ["Friture",],regimes: ["vegetarien",],ingredients: ["Pâte à pain", "Origan", "Sauce tomate mutti", "Mozzarella", "huile de friture", "huile d'olive"],
+        categories: ["Friture",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: []
@@ -4432,7 +4430,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["240", ""],
         saison: [],
-        categories: ["Bouchées salées",],regimes: ["vegetarien","sans-gluten",],ingredients: ["Sel", "Gruyère", "Parmesan", "huile de tournesol", "Oeuf", "Lait demi-écrémé", "Farine de tapioca"],
+        categories: ["Bouchées salées",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: []
@@ -4447,7 +4445,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["16", ""],
         saison: [],
-        categories: ["Bouchées salées",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["Eau", "Ail en poudre", "Sel", "Pomme de terre", "Farine de tapioca", "Huile végétale", "Lait végétal (au choix)", "Farine de tapioca"],
+        categories: ["Bouchées salées",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: []
@@ -4462,7 +4460,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["16", ""],
         saison: [],
-        categories: ["Tarte (salée)",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["Eau", "Cannelle", "Cannelle", "Pâte feuilletée végane sans gluten", "Citron jaune", "Figues Sèches", "Oignon", "Ail", "Aubergine", "Huile d'argan", "Huile végétale", "Amande", "Pignon de pin", "Sucre glace", "Sucre en poudre"],
+        categories: ["Tarte (salée)",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: []
@@ -4477,7 +4475,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["100", ""],
         saison: [],
-        categories: ["Tarte (salée)",],regimes: ["vegan","sans-lactose",],ingredients: ["Feuilles de brick", "Eau", "Cannelle", "Ras el hanout", "Cannelle", "Poivre", "Figues Sèches", "Citron non traité", "Ail", "Oignon", "Aubergine", "Huile d'argan", "Huile végétale", "Pignon de pin", "Amande", "Sucre glace", "Sucre en poudre"],
+        categories: ["Tarte (salée)",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: ["moule à tarte",]
@@ -4492,7 +4490,7 @@ const app = Vue.createApp({
         checkfor: "10",
         checkrange: ["100", "10"],
         saison: [],
-        categories: ["Bouchées salées","Snacking",],regimes: ["vegetarien","sans-lactose",],ingredients: ["Eau gazeuse", "Sel", "Poivre noir moulu", "Curcuma moulu", "Persil frais", "Ail", "Oignon", "Courgette", "Carotte", "Levure chimique", "huile de tournesol", "Oeuf", "Farine de blé"],
+        categories: ["Bouchées salées","Snacking",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: ["Bruleur","Gastro 1\/1 (Fins)","Grand Saladier",]
@@ -4507,7 +4505,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["20", ""],
         saison: [],
-        categories: ["Bouchées salées","Snacking",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["Eau gazeuse", "Carotte", "Courgette", "Oignon", "Ail", "Farine de riz", "Farine de pois chiche", "huile de tournesol"],
+        categories: ["Bouchées salées","Snacking",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: []
@@ -4522,7 +4520,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["100", ""],
         saison: [],
-        categories: ["Autre",],regimes: ["vegan","sans-lactose",],ingredients: ["Levure fraîche de boulanger", "Farine de blé"],
+        categories: ["Autre",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: []
@@ -4537,7 +4535,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["100", ""],
         saison: [],
-        categories: ["Friture",],regimes: ["vegan","sans-lactose",],ingredients: ["Eau", "Sel", "Haricots plats", "Farine de blé"],
+        categories: ["Friture",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: []
@@ -4552,7 +4550,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["100", ""],
         saison: [],
-        categories: ["Plat chaud",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["Câpres", "Basilic", "Tomate", "Olives Vertes Dénoyautées", "Olives Noires Dénoyautées", "Ail", "huile d'olive", "Pâtes Penne"],
+        categories: ["Plat chaud",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "false",
         materiel: []
@@ -4567,7 +4565,7 @@ const app = Vue.createApp({
         checkfor: "10",
         checkrange: ["100", "10"],
         saison: [],
-        categories: ["Sucrée",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["Citron jaune", "Banane", "Lait de riz", "Tapioca perlée", "Cranberries séchées", "sucre blanc", "Gingembre confit", "Jus de citron", "vanille extrait concentré"],
+        categories: ["Sucrée",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: []
@@ -4582,7 +4580,7 @@ const app = Vue.createApp({
         checkfor: "10",
         checkrange: ["200", "10"],
         saison: ["hiver","automne",],
-        categories: ["Bouchées salées","Snacking",],regimes: ["vegetarien",],ingredients: ["Pate filo (1 feuille)", "Sel", "Poivre", "Vinaigre de cidre", "Baies roses", "Cumin (graines)", "Feta", "Courge", "Oignon", "huile de tournesol", "Sucre en poudre"],
+        categories: ["Bouchées salées","Snacking",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: ["Gastro 1\/1 (Normaux)","Four",]
@@ -4597,7 +4595,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["100", ""],
         saison: [],
-        categories: ["Accompagnement",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["Olives noires entières", "Ail", "Poivron long vert (corne de boeuf)", "Huile végétale"],
+        categories: ["Accompagnement",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: []
@@ -4612,7 +4610,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["100", ""],
         saison: ["ete",],
-        categories: ["Pain",],regimes: ["vegetarien",],ingredients: ["Bicarbonate de soude", "Tahin", "Sésame blanc", "Ciboulette", "Paprika", "Cumin (graines)", "graine de coriandre", "Coriandre fraîche", "Menthe", "Persil frais", "Yaourt de soja", "Fromage blanc", "Tomate", "Petit oignon blanc", "Courgette", "Oignon", "Ail", "huile de friture", "huile d'olive", "Farine de blé", "Pois chiches", "Jus de citron"],
+        categories: ["Pain",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: ["Four","Friteuse","Gastro 1\/1 (Fins)","Giraffe (Bras Mixeur)","Bruleur","Robot-coupe",]
@@ -4627,7 +4625,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["190", ""],
         saison: [],
-        categories: ["Snacking",],regimes: ["vegetarien","sans-gluten",],ingredients: ["Tahin", "Poivre", "Sel", "Sel", "Ciboulette", "Basilic", "Persil frais", "Fromage blanc", "Courgette", "Salade verte (chêne)", "Ail", "Oignon", "Tomate", "huile d'olive", "Jus de citron"],
+        categories: ["Snacking",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "false",
         materiel: []
@@ -4642,7 +4640,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["50", ""],
         saison: [],
-        categories: ["Salade",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["Thym", "Moutarde", "Ail", "Citron jaune", "Poireau", "huile d'olive", "Sirop d'érable "],
+        categories: ["Salade",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: []
@@ -4657,7 +4655,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["100", ""],
         saison: [],
-        categories: ["Plat chaud",],regimes: ["vegetarien","sans-gluten",],ingredients: ["Paprika fumé", "Thym", "Feuille de laurier", "Romarin", "Origan", "Sariette", "Persil frais", "Ciboulette", "Tofu soyeux", "Fromage blanc", "Pomme de terre", "Ail", "huile d'olive", "sucre blanc"],
+        categories: ["Plat chaud",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: []
@@ -4672,7 +4670,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["100", ""],
         saison: [],
-        categories: ["Accompagnement",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["Poivre", "Sel", "Pomme de terre", "huile d'olive"],
+        categories: ["Accompagnement",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: ["Four","Gastro 1\/1 (Fins)",]
@@ -4687,7 +4685,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["50", ""],
         saison: [],
-        categories: ["Accompagnement",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["Paprika fumé", "Poivre", "Sel", "Pomme de terre", "huile de tournesol"],
+        categories: ["Accompagnement",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: ["Four","Gastro 1\/1 (Fins)",]
@@ -4702,7 +4700,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["100", ""],
         saison: [],
-        categories: ["Plat chaud",],regimes: ["sans-gluten","sans-lactose",],ingredients: ["Poulet (volaille et gibier)", "Eau", "Eau", "Tahin", "Tamari (sauce)", "poivre blanc moulue", "Sel", "Cumin moulu", "Coriandre en poudre", "Citronnelle (bâton)", "Feuille de laurier", "Coriandre fraîche", "Sésame", "Piment d'espelette", "Poivre de Sichuan", "Tamari (sauce)", "Vinaigre de riz noir", "Céleri branche", "Poireau", "Echalote", "Gingembre bio", "Ail", "Oignon", "huile de sésame", "Jus de citron", "Sucre en poudre"],
+        categories: ["Plat chaud",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: []
@@ -4717,7 +4715,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["40", ""],
         saison: [],
-        categories: ["Plat chaud",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["Eau", "Tahin", "Coriandre fraîche", "Sésame", "Piment d'espelette", "Poivre de Sichuan", "Tamari (sauce)", "Vinaigre de riz noir", "Oignon", "huile de sésame", "Protéines de soja (moyennes)", "Sucre en poudre"],
+        categories: ["Plat chaud",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: []
@@ -4732,7 +4730,7 @@ const app = Vue.createApp({
         checkfor: "250",
         checkrange: ["120", "250"],
         saison: [],
-        categories: ["Snacking",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["Protéines de soja", "Eau", "Coulis de tomates", "Sauce soja", "Paprika fumé", "Coriandre", "Curcuma", "Cumin"],
+        categories: ["Snacking",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: ["Marmitte",]
@@ -4747,7 +4745,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["100", ""],
         saison: [],
-        categories: ["Accompagnement",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["Sel", "Thym", "Romarin", "Ail", "huile d'olive", "Haricots blancs"],
+        categories: ["Accompagnement",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: []
@@ -4762,7 +4760,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["4", ""],
         saison: [],
-        categories: ["Accompagnement",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["huile d'olive", "Haricots blancs", "Jus de citron"],
+        categories: ["Accompagnement",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: []
@@ -4777,7 +4775,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["100", ""],
         saison: [],
-        categories: ["Gateau",],regimes: ["vegetarien","sans-lactose",],ingredients: ["Eau", "Cannelle", "Pate feuilletée", "Citron non traité", "Oeuf", "Haricots blancs en conserve", "Sucre glace", "Sucre en poudre"],
+        categories: ["Gateau",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: ["Moule à muffin",]
@@ -4792,7 +4790,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["20", ""],
         saison: [],
-        categories: ["Gateau",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["Agar-agar", "Cannelle", "Pate feuilleté sans gluten et vegan", "Margarine végétale spécial cuisson", "Citron non traité", "Fécule de maïs (Maïzena)", "Crème soja", "Lait de soja", "Haricots blancs en conserve", "Sucre en poudre"],
+        categories: ["Gateau",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: ["Moule à muffin",]
@@ -4807,7 +4805,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["2", ""],
         saison: [],
-        categories: ["Plat chaud",],regimes: ["vegetarien","sans-gluten",],ingredients: ["Origan", "Piment en poudre", "Thym", "Vin Blanc", "Yaourt grec de vache", "Tomates cerises", "Aubergine", "Oignon rouge", "Ail", "huile d'olive", "Lentilles vertes"],
+        categories: ["Plat chaud",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: []
@@ -4822,7 +4820,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["60", ""],
         saison: [],
-        categories: ["Gateau",],regimes: ["vegetarien",],ingredients: ["Chantifix", "Colorants alimentaires", "Bicarbonate de soude", "Mascarpone", "Beurre doux", "Crème fraiche liquide entière", "Farine de blé", "Lait écrémé", "Crème fraiche liquide entière", "Levure chimique sans gluten", "Oeuf", "Sucre glace", "Chocolat blanc", "vanille extrait concentré", "Sucre en poudre", "Noix de coco râpée"],
+        categories: ["Gateau",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: []
@@ -4837,7 +4835,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["100", ""],
         saison: ["printemps","ete",],
-        categories: ["Tartinade",],regimes: ["vegetarien","sans-gluten",],ingredients: ["Poivre noir moulu", "Sel", "Cumin (graines)", "Coriandre fraîche", "Yaourt brassé", "Ail", "Oignon", "Concombre"],
+        categories: ["Tartinade",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "false",
         materiel: []
@@ -4852,7 +4850,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["30", ""],
         saison: [],
-        categories: ["Tartinade",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["Cumin (graines)", "Coriandre fraîche", "Yaourt de soja", "Ail", "Oignon", "Concombre"],
+        categories: ["Tartinade",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "false",
         materiel: []
@@ -4867,7 +4865,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["100", ""],
         saison: ["ete",],
-        categories: ["Plat chaud",],regimes: ["vegetarien","sans-lactose",],ingredients: ["Eau", "Eau", "Miso blanc", "Tamari (sauce)", "Sel", "Vinaigre de riz", "Tamari (sauce)", "Tofu ferme", "Zestes de citron séchés", "Algue Nori", "Cébette - Ciboule - Cive - Oignon vert", "Epinard", "Tomate", "Ail", "Gingembre bio", "Champignons", "Oignon", "Champignon shiitake séché", "Ail", "Gingembre bio", "Algue Kombu", "Champignon shiitake séché", "Algue Kombu", "huile de sésame", "Oeuf", "Nouilles de riz", "Nouilles de blé ondulées Ramen", "Sucre en poudre", "Sucre en poudre"],
+        categories: ["Plat chaud",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: []
@@ -4882,7 +4880,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["220", ""],
         saison: [],
-        categories: ["Accompagnement","Plat chaud",],regimes: ["vegetarien","sans-gluten",],ingredients: ["Sel", "Menthe séchée", "Yaourt de vache", "Ail", "huile d'olive", "Fécule de maïs (Maïzena)", "Riz"],
+        categories: ["Accompagnement","Plat chaud",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: []
@@ -4897,7 +4895,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["100", ""],
         saison: [],
-        categories: ["Accompagnement",],regimes: ["vegetarien","sans-gluten",],ingredients: ["Eau", "Bouillon de légume (sans gluten)", "Parmesan", "Beurre doux", "Ail", "Oignon", "Pruneau", "Champignons", "huile d'olive", "Riz pour risotto", "Jus de raisin"],
+        categories: ["Accompagnement",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: []
@@ -4912,7 +4910,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["10", ""],
         saison: [],
-        categories: ["Accompagnement",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["Eau", "Bouillon de légume (sans gluten)", "Ail", "Pruneau", "Champignons", "Oignon", "huile d'olive", "Riz pour risotto", "Jus de raisin"],
+        categories: ["Accompagnement",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: []
@@ -4927,7 +4925,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["200", ""],
         saison: [],
-        categories: ["Plat chaud",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["Poivre noir moulu", "Sel", "Persil frais", "Oignon", "Ail", "Champignon de Paris", "huile de tournesol", "Levure de bière", "Sarrasin", "sucre blanc"],
+        categories: ["Plat chaud",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: []
@@ -4942,7 +4940,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["100", ""],
         saison: [],
-        categories: ["Plat chaud",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["Eau", "bouillon cube", "Persil frais", "Vin Blanc", "Margarine", "échalote", "Oignon", "Champignon de Paris", "Levure de bière", "Sarrasin", "Poudre d'amandes", "sucre de canne (blond)"],
+        categories: ["Plat chaud",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: []
@@ -4957,7 +4955,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["6", ""],
         saison: [],
-        categories: ["Plat chaud",],regimes: ["vegetarien","sans-gluten",],ingredients: ["Melasse de grenade", "Menthe", "Feta", "Beurre doux", "Ail", "Grenade", "Olives", "huile d'olive", "Noix", "Riz"],
+        categories: ["Plat chaud",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: []
@@ -4972,7 +4970,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["100", ""],
         saison: [],
-        categories: ["Sucrée",],regimes: ["vegan","sans-lactose",],ingredients: ["chicorée soluble", "Sel", "Lait d'avoine", "Riz rond", "Sucre brun Vergeoise"],
+        categories: ["Sucrée",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: []
@@ -4987,7 +4985,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["20", ""],
         saison: [],
-        categories: ["Salade",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["Persil frais", "Cumin (graines)", "Betterave rouge", "Carotte", "Sirop d'érable ", "Jus de citron"],
+        categories: ["Salade",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "false",
         materiel: []
@@ -5002,7 +5000,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["100", ""],
         saison: ["ete","printemps","automne",],
-        categories: ["Salade",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["Vinaigre de cidre", "Basilic", "Carotte", "Chou rouge"],
+        categories: ["Salade",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "false",
         materiel: []
@@ -5017,7 +5015,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["180", ""],
         saison: ["ete","automne",],
-        categories: ["Salade",],regimes: ["vegetarien","sans-gluten",],ingredients: ["Poivre", "Sel", "Aneth aromatique", "Yaourt de vache", "Pomme", "Cébette - Ciboule - Cive - Oignon vert", "Concombre", "huile d'olive", "Graines de nigelle"],
+        categories: ["Salade",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "false",
         materiel: ["Grand Saladier","Gastro 1\/1 (Profond)",]
@@ -5032,7 +5030,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["90", ""],
         saison: [],
-        categories: ["Salade",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["Curry", "Poivre", "Sel", "Tamari (sauce)", "Citron jaune", "Courgette", "huile d'olive"],
+        categories: ["Salade",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "false",
         materiel: []
@@ -5047,7 +5045,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["100", ""],
         saison: [],
-        categories: ["Salade",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["Coriandre fraîche", "Sweet Chili Sauce", "Pastèque", "Ananas", "Chou chinois", "huile d'olive"],
+        categories: ["Salade",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "false",
         materiel: []
@@ -5062,7 +5060,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["100", ""],
         saison: [],
-        categories: ["Salade",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["Vinaigre de vin", "Piment vert", "Menthe fraîche", "Coriandre fraîche", "Aneth aromatique", "Aubergine", "Ail", "huile d'olive", "Jus de citron"],
+        categories: ["Salade",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: []
@@ -5077,7 +5075,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["100", ""],
         saison: [],
-        categories: ["Salade",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["Persil frais", "Oignon rouge", "Ail", "Tomate", "Aubergine", "huile d'olive"],
+        categories: ["Salade",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: []
@@ -5092,7 +5090,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["100", ""],
         saison: [],
-        categories: ["Salade",],regimes: ["vegetarien","sans-gluten",],ingredients: ["Ciboulette", "Moutarde à l'ancienne", "Yaourt de soja", "Yaourt grec de vache", "Betterave cuite"],
+        categories: ["Salade",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "false",
         materiel: []
@@ -5107,7 +5105,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["4", ""],
         saison: [],
-        categories: ["Salade",],regimes: ["vegetarien","sans-gluten",],ingredients: ["Tahin", "Aneth aromatique", "Cumin moulu", "Yaourt grec de vache", "Citron (jus)", "Citron confit", "Oignon rouge", "Betterave rouge", "huile d'olive"],
+        categories: ["Salade",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: []
@@ -5122,7 +5120,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["50", ""],
         saison: ["ete",],
-        categories: ["Salade",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["Poivre", "Sel", "Aneth aromatique", "Yaourt de soja", "Concombre", "huile d'olive", "Amandes effilées"],
+        categories: ["Salade",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "false",
         materiel: []
@@ -5137,7 +5135,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["100", ""],
         saison: ["ete",],
-        categories: ["Salade",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["Menthe", "Ail", "Courgette", "huile d'olive", "Jus de citron"],
+        categories: ["Salade",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: []
@@ -5152,7 +5150,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["100", ""],
         saison: [],
-        categories: ["Salade",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["Sauce soja", "Vinaigre de cidre", "Betterave cuite", "Carotte", "Pomme", "Chou chinois", "huile d'olive"],
+        categories: ["Salade",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "false",
         materiel: []
@@ -5167,7 +5165,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["100", ""],
         saison: ["ete",],
-        categories: ["Salade",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["Basilic", "Pastèque", "Melon"],
+        categories: ["Salade",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "false",
         materiel: []
@@ -5182,7 +5180,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["100", ""],
         saison: ["ete",],
-        categories: ["Salade",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["Menthe", "Menthe glaciale", "Pêche"],
+        categories: ["Salade",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "false",
         materiel: ["ramequins",]
@@ -5197,7 +5195,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["190", ""],
         saison: [],
-        categories: ["Salade",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["Cumin", "Coriandre fraîche", "Ail", "Oignon", "Tomate", "Courgette", "Poivron", "Pois chiches", "Jus de citron"],
+        categories: ["Salade",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: []
@@ -5212,7 +5210,7 @@ const app = Vue.createApp({
         checkfor: "8",
         checkrange: ["100", "8"],
         saison: [],
-        categories: ["Accompagnement","Salade",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["Coriandre fraîche", "Ail", "Oignon rouge", "huile d'olive", "Pois chiches", "Jus de citron"],
+        categories: ["Accompagnement","Salade",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: ["Bruleur","Marmitte","Gastro 1\/1 (Normaux)","Gastro Perforé 1\/1 (Profonds)","Robot Mixeur",]
@@ -5227,7 +5225,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["100", ""],
         saison: ["ete",],
-        categories: ["Salade",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["Vinaigre balsamique", "Tomate", "Huile végétale"],
+        categories: ["Salade",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "false",
         materiel: []
@@ -5242,7 +5240,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["100", ""],
         saison: [],
-        categories: ["Salade",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["Pain rassis sans gluten", "Vinaigre de Xérès", "Basilic", "Ail", "Tomate", "Oignon", "Poivron (rouge)", "Cornichon", "Oignon rouge", "Tomate", "Amande"],
+        categories: ["Salade",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: []
@@ -5257,7 +5255,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["100", ""],
         saison: [],
-        categories: ["Salade",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["Menthe fraîche", "Coriandre fraîche", "Pâte de Curry Rouge", "Citron vert", "Oignon rouge", "Concombre", "Carotte", "Chou chinois", "lait de coco", "sucre blanc"],
+        categories: ["Salade",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "false",
         materiel: []
@@ -5272,7 +5270,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["100", ""],
         saison: [],
-        categories: ["Salade",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["Menthe fraîche", "Persil frais", "Laitue romaine", "Ail", "Oignon", "Radis", "Concombre", "Tomate", "huile d'olive", "Graine de tournesol", "Graines de courge"],
+        categories: ["Salade",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "false",
         materiel: []
@@ -5287,7 +5285,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["50", ""],
         saison: ["printemps",],
-        categories: ["Salade",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["Carotte", "Orange", "Fenouil", "huile d'olive", "Jus d'orange"],
+        categories: ["Salade",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "false",
         materiel: []
@@ -5302,7 +5300,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["180", ""],
         saison: ["ete",],
-        categories: ["Salade",],regimes: ["vegetarien","sans-gluten",],ingredients: ["Origan", "Feta", "Olives noires à la grecque", "Oignon rouge", "Tomate", "Concombre", "huile d'olive"],
+        categories: ["Salade",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "false",
         materiel: ["Grand Saladier",]
@@ -5317,7 +5315,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["180", ""],
         saison: ["ete",],
-        categories: ["Salade",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["Origan", "Olives noires à la grecque", "Oignon rouge", "Tomate", "Concombre", "huile d'olive"],
+        categories: ["Salade",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "false",
         materiel: ["Grand Saladier",]
@@ -5332,7 +5330,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["55", ""],
         saison: [],
-        categories: ["Salade",],regimes: ["vegetarien","sans-gluten",],ingredients: ["Persil frais", "Feta", "Cranberries", "Epinard", "Oignon rouge", "Pamplemousse", "Radis noir", "huile d'olive", "Noisette", "Quinoa"],
+        categories: ["Salade",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: []
@@ -5347,7 +5345,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["5", ""],
         saison: [],
-        categories: ["Salade",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["Beurre de cacahuètes (salé)", "Eau", "Citronnelle (bâton)", "Coriandre fraîche", "Tamari (sauce)", "Citron vert", "Poivron (rouge)", "Carotte", "Avocat", "Mangue", "huile de sésame", "Nouilles de riz"],
+        categories: ["Salade",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: []
@@ -5362,7 +5360,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["350", ""],
         saison: [],
-        categories: ["Salade",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["Sauce soja", "Vinaigre de riz", "Menthe", "Coriandre fraîche", "Gingembre", "Champignon noir", "Chou chinois", "Cébette - Ciboule - Cive - Oignon vert", "Carotte", "Betterave rouge", "huile de sésame", "huile de colza", "Cacahuète", "Vermicelle de Riz"],
+        categories: ["Salade",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: ["Grand Saladier",]
@@ -5377,7 +5375,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["100", ""],
         saison: [],
-        categories: ["Accompagnement",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["Salade verte (chêne)"],
+        categories: ["Accompagnement",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu"],
         temperature: "",
         cuisson: "false",
         materiel: []
@@ -5392,7 +5390,7 @@ const app = Vue.createApp({
         checkfor: "10",
         checkrange: ["100", "10"],
         saison: [],
-        categories: ["Sucrée",],regimes: ["vegetarien",],ingredients: ["Beurre doux", "Biscuit Petit Brun", "Sucre en poudre", "Cacao", "Chocolat noir"],
+        categories: ["Sucrée",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "false",
         materiel: []
@@ -5407,7 +5405,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["15", ""],
         saison: ["printemps",],
-        categories: ["Sucrée",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["Margarine végétale spécial cuisson", "Biscuit vegan et sans gluten", "Cacao", "Chocolat noir", "Sucre en poudre"],
+        categories: ["Sucrée",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "false",
         materiel: []
@@ -5422,7 +5420,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["100", ""],
         saison: [],
-        categories: ["Sauce",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["Vin Rouge", "Margarine végétale spécial cuisson", "Canneberge", "Echalote", "Fécule de maïs (Maïzena)", "huile d'olive", "Sirop d'érable "],
+        categories: ["Sauce",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: []
@@ -5437,7 +5435,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["25", ""],
         saison: [],
-        categories: ["Plat chaud",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["Eau", "Vinaigre de riz", "Gochujang sans gluten", "Gingembre bio", "Ail", "huile de tournesol", "Sirop d'érable ", "Soda au Gingembre - Ginger Beer"],
+        categories: ["Plat chaud",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "false",
         materiel: []
@@ -5452,7 +5450,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["40", ""],
         saison: [],
-        categories: ["Sauce",],regimes: ["vegetarien","sans-gluten",],ingredients: ["Sel", "Fromage blanc", "Ail", "Jus de citron"],
+        categories: ["Sauce",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "false",
         materiel: []
@@ -5467,7 +5465,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["50", ""],
         saison: [],
-        categories: ["Sauce",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["Eau", "Tahin", "Sumac", "Sel", "Yaourt de soja", "Jus de citron"],
+        categories: ["Sauce",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "false",
         materiel: []
@@ -5482,7 +5480,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["130", ""],
         saison: [],
-        categories: ["Sauce",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["purée de noix de cajou", "curry feuilles", "Piment vert", "poivre en graine", "Cardamome", "Yaourt de soja", "Betterave cuite", "Oignon", "Crème soja", "lait de coco", "huile de coco"],
+        categories: ["Sauce",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: []
@@ -5497,7 +5495,7 @@ const app = Vue.createApp({
         checkfor: "50",
         checkrange: ["20", "50"],
         saison: [],
-        categories: ["Sauce",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["Persil frais", "Poivre", "Sel", "Yaourt de soja", "Crème soja", "Graine de tournesol", "Jus de citron"],
+        categories: ["Sauce",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "false",
         materiel: []
@@ -5512,7 +5510,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["100", ""],
         saison: [],
-        categories: ["Gateau",],regimes: ["vegan","sans-lactose",],ingredients: ["Romarin", "Sel", "huile d'olive", "Farine de blé", "Chocolat noir patissier 70p100", "Muscovado (sucre de canne complet)", "sucre de canne (blond)"],
+        categories: ["Gateau",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: ["Four",]
@@ -5527,7 +5525,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["10", ""],
         saison: [],
-        categories: ["Biscuits",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["Purée d'amande", "Sel", "Romarin", "huile d'olive", "Fécule de maïs (Maïzena)", "Farine de riz blanche", "Chocolat noir patissier 70p100", "Muscovado (sucre de canne complet)", "Poudre d'amandes"],
+        categories: ["Biscuits",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: ["Four",]
@@ -5542,7 +5540,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["50", ""],
         saison: [],
-        categories: ["Soupe",],regimes: ["vegetarien","sans-lactose",],ingredients: ["Eau", "Eau", "Miso blanc", "Algue nori feuille séchée", "Sauce soja", "Sel", "Vinaigre de riz", "Sauce soja", "Algue kombu séchée", "Algue kombu séchée", "Zestes de citron séchés", "Cébette - Ciboule - Cive - Oignon vert", "Ail", "Gingembre bio", "Champignons", "Poireau", "Oignon", "Champignon shiitake séché", "Ail", "Gingembre bio", "Champignon shiitake séché", "huile de sésame", "Oeuf", "Nouilles de riz", "Nouilles de blé ondulées Ramen", "sucre blanc", "sucre blanc"],
+        categories: ["Soupe",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: []
@@ -5557,7 +5555,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["100", ""],
         saison: [],
-        categories: ["Accompagnement",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["Paprika fumé", "Poivre noir moulu", "Sel", "Ciboulette", "Yaourt de soja", "Citron (jus)", "Ail", "patate", "huile de tournesol", "huile d'olive"],
+        categories: ["Accompagnement",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: []
@@ -5572,7 +5570,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["60", ""],
         saison: [],
-        categories: ["Soupe",],regimes: ["vegetarien","sans-gluten",],ingredients: ["Eau", "Pain au levain", "Madère", "Bouillon de légume (sans gluten)", "Romarin", "Thym", "Feuille de laurier", "Vin Blanc", "Gruyère", "Beaufort", "Comté", "Beurre doux", "Ail", "Oignon"],
+        categories: ["Soupe",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: []
@@ -5587,7 +5585,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["100", ""],
         saison: [],
-        categories: ["Soupe",],regimes: ["vegetarien","sans-gluten",],ingredients: ["Eau", "Basilic", "Bouquet garni", "Parmesan", "Ail", "Courgette", "Haricots verts", "Tomate", "Oignon", "Pomme de terre", "Poireau", "Céleri branche", "Navet", "Carotte", "huile d'olive", "Haricots blancs"],
+        categories: ["Soupe",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: []
@@ -5602,7 +5600,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["100", ""],
         saison: [],
-        categories: ["Soupe",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["mélange 4 épices", "Curry", "Oignon", "Carotte", "Crème soja", "Huile végétale", "Jus d'orange"],
+        categories: ["Soupe",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: []
@@ -5617,7 +5615,7 @@ const app = Vue.createApp({
         checkfor: "8",
         checkrange: ["100", "8"],
         saison: [],
-        categories: ["Soupe",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["Gros sel", "Coriandre fraîche", "Ail", "Oignon", "Pomme de terre", "Carotte", "huile d'olive"],
+        categories: ["Soupe",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: ["Bruleur","Marmitte","Giraffe (Bras Mixeur)",]
@@ -5632,7 +5630,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["100", ""],
         saison: [],
-        categories: ["Soupe",],regimes: ["vegetarien","sans-gluten",],ingredients: ["Eau", "Poivre noir moulu", "Sel", "Bouillon de légume (sans gluten)", "Ciboulette", "Crème fraîche épaisse entière", "Citron jaune", "Zestes d'orange", "Orange non traitée", "Oignon", "Betterave rouge", "huile d'olive", "Jus d'orange"],
+        categories: ["Soupe",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: []
@@ -5647,7 +5645,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["100", ""],
         saison: [],
-        categories: ["Soupe",],regimes: ["vegetarien","sans-gluten",],ingredients: ["Eau", "Paprika", "Menthe", "Menthe", "Bouillon de légume (sans gluten)", "Yaourt grec de vache", "Oignon rouge", "Concombre sans traitement"],
+        categories: ["Soupe",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "false",
         materiel: []
@@ -5662,7 +5660,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["10", ""],
         saison: [],
-        categories: ["Soupe",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["Eau", "Paprika", "Menthe", "Bouillon de légume (sans gluten)", "Yaourt de soja", "Oignon rouge", "Concombre sans traitement"],
+        categories: ["Soupe",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "false",
         materiel: []
@@ -5677,7 +5675,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["20", ""],
         saison: ["ete",],
-        categories: ["Soupe",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["Eau", "Menthe fraîche", "Courgette", "huile d'olive", "Lait de soja"],
+        categories: ["Soupe",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: []
@@ -5692,7 +5690,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["220", ""],
         saison: ["ete",],
-        categories: ["Soupe",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["Eau", "Menthe fraîche", "Courgette", "huile d'olive", "Lait de soja"],
+        categories: ["Soupe",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: []
@@ -5707,7 +5705,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["100", ""],
         saison: [],
-        categories: ["Soupe",],regimes: ["vegan","sans-lactose",],ingredients: ["Eau", "Gochujang", "Shizo vert", "Miso blanc", "Algue kombu séchée", "Tofu ferme", "Champignon noir", "Aubergine", "Champignon shiitake séché"],
+        categories: ["Soupe",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: ["Marmitte","Gastro 1\/1 (Normaux)",]
@@ -5722,7 +5720,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["100", ""],
         saison: [],
-        categories: ["Soupe",],regimes: ["vegetarien","sans-gluten",],ingredients: ["Aneth aromatique", "Yaourt nature", "Ail", "Concombre", "huile d'olive"],
+        categories: ["Soupe",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "false",
         materiel: []
@@ -5737,7 +5735,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["6", ""],
         saison: ["ete",],
-        categories: ["Plat chaud",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["Eau", "Concentré de tomate", "Cumin moulu", "Paprika fumé", "Origan", "Moutarde", "Sriracha", "Sauce soja", "Oignon", "Aubergine", "Champignons", "Flocons d'avoine sans gluten", "Noix", "Haricots rouges cuits"],
+        categories: ["Plat chaud",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: ["Four",]
@@ -5752,7 +5750,7 @@ const app = Vue.createApp({
         checkfor: "40",
         checkrange: ["130", "40"],
         saison: [],
-        categories: ["Snacking",],regimes: ["vegan","sans-lactose",],ingredients: ["Eau", "Poivre", "Cumin", "Paprika fumé", "Gros sel", "Sauce soja", "Ail", "Champignons", "Oignon", "huile de tournesol", "Noix", "Flocons d'avoine"],
+        categories: ["Snacking",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: ["Gastro 1\/1 (Fins)","Four",]
@@ -5767,7 +5765,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["8", ""],
         saison: [],
-        categories: ["Autre",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["Poivre", "Sel", "Origan", "Ail en poudre", "Miso blanc", "Vinaigre de cidre", "Tofu ferme", "huile de tournesol", "Levure de bière", "Jus de citron"],
+        categories: ["Autre",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "false",
         materiel: []
@@ -5782,7 +5780,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["180", ""],
         saison: ["ete",],
-        categories: ["Salade",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["Poivre", "Sel", "Menthe", "Persil frais", "Oignon", "Tomate", "huile d'olive", "Boulgour", "Jus de citron"],
+        categories: ["Salade",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "false",
         materiel: []
@@ -5797,7 +5795,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["15", ""],
         saison: ["ete",],
-        categories: ["Salade",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["Poivre", "Sel", "Menthe", "Persil frais", "Oignon", "Tomate", "huile d'olive", "Quinoa blanc", "Jus de citron"],
+        categories: ["Salade",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "false",
         materiel: []
@@ -5812,7 +5810,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["5", ""],
         saison: [],
-        categories: ["Salade",],regimes: ["vegan","sans-lactose",],ingredients: ["Pâte de poivron", "Melasse de grenade", "Sumac", "Menthe séchée", "Persil frais", "Cumin", "Paprika", "Poivre", "Concentré de tomate", "Citron (jus)", "Tomate", "Poivron", "Oignon", "Cébettes", "huile d'olive", "Semoule moyenne (blé)"],
+        categories: ["Salade",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: []
@@ -5827,7 +5825,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["100", ""],
         saison: ["ete","automne",],
-        categories: ["Salade",],regimes: ["vegan","sans-lactose",],ingredients: ["Persil frais", "Menthe", "Echalote", "Tomate", "huile d'olive", "Semoule moyenne (blé)", "Jus de citron"],
+        categories: ["Salade",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "false",
         materiel: []
@@ -5842,7 +5840,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["100", ""],
         saison: ["ete","automne",],
-        categories: ["Salade",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["Persil frais", "Menthe", "Echalote", "Tomate", "huile d'olive", "Quinoa blanc", "Jus de citron"],
+        categories: ["Salade",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "false",
         materiel: []
@@ -5857,7 +5855,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["100", ""],
         saison: ["printemps","ete",],
-        categories: ["Plat chaud",],regimes: ["vegan","sans-lactose",],ingredients: ["Sel", "Persil frais", "Citron non traité", "Ail", "Oignon", "Carotte", "Olives Vertes Dénoyautées", "huile d'olive", "Pâtes - langue d'oiseau"],
+        categories: ["Plat chaud",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: []
@@ -5872,7 +5870,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["100", ""],
         saison: [],
-        categories: ["Tartinade",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["Purée d'amande", "Câpres", "Ail", "Olives Vertes Dénoyautées", "huile d'olive"],
+        categories: ["Tartinade",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "false",
         materiel: []
@@ -5887,7 +5885,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["10", ""],
         saison: [],
-        categories: ["Tartinade",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["Ail", "Olives noires à la grecque", "huile d'olive"],
+        categories: ["Tartinade",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "false",
         materiel: ["Robot Mixeur",]
@@ -5902,7 +5900,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["10", ""],
         saison: [],
-        categories: ["Tartinade",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["Olives Vertes Dénoyautées", "Ail", "huile d'olive"],
+        categories: ["Tartinade",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "false",
         materiel: ["Robot Mixeur",]
@@ -5917,7 +5915,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["8", ""],
         saison: [],
-        categories: ["Sucrée",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["Poivre noir moulu", "Lait de riz", "Tapioca perlée", "Chocolat noir patissier 70p100"],
+        categories: ["Sucrée",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: ["Bain Marie",]
@@ -5932,7 +5930,7 @@ const app = Vue.createApp({
         checkfor: "32",
         checkrange: ["100", "32"],
         saison: [],
-        categories: ["Tarte (salée)",],regimes: ["vegetarien",],ingredients: ["Tahin", "Eau", "Thym", "Moutarde à l'ancienne", "Bûche de chèvre", "Yaourt de soja", "Pâte brisée sans gluten", "Origan frais", "Tomate", "Crème fraiche liquide entière", "Oeuf", "huile de tournesol", "Farine de blé", "Levure chimique", "Miel"],
+        categories: ["Tarte (salée)",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: ["moule à tarte",]
@@ -5947,7 +5945,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["24", ""],
         saison: [],
-        categories: ["Tarte (sucrée)",],regimes: ["vegetarien",],ingredients: ["huile de tournesol", "Crème soja", "huile de coco", "Flocons d'avoine", "Glucose", "Chocolat noir", "Biscuit Petit Brun", "Speculoos"],
+        categories: ["Tarte (sucrée)",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "false",
         materiel: ["Gastro 1\/1 (Fins)",]
@@ -5962,7 +5960,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["12", ""],
         saison: [],
-        categories: ["Tarte (sucrée)",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["Crème soja", "huile de tournesol", "huile de coco", "Glucose", "Chocolat noir patissier 70p100", "Cornflakes (sans gluten)", "Biscuit vegan et sans gluten"],
+        categories: ["Tarte (sucrée)",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "false",
         materiel: ["Gastro 1\/1 (Normaux)",]
@@ -5977,7 +5975,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["100", ""],
         saison: [],
-        categories: ["Tarte (sucrée)",],regimes: ["vegan","sans-lactose",],ingredients: ["Curcuma moulu", "Margarine végétale spécial cuisson", "Margarine végétale spécial cuisson", "Fécule de maïs (Maïzena)", "Lait de soja", "Lait de soja", "Farine de blé", "Sucre en poudre", "Jus de citron", "Poudre d'amandes", "Sucre en poudre"],
+        categories: ["Tarte (sucrée)",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: []
@@ -5992,7 +5990,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["100", ""],
         saison: [],
-        categories: ["Tarte (sucrée)",],regimes: ["vegetarien",],ingredients: ["Sel", "Beurre doux", "Crème fraiche liquide entière", "Oeuf", "Farine de blé", "Glucose", "Pralines roses de Lyon", "Poudre d'amandes", "Sucre en poudre"],
+        categories: ["Tarte (sucrée)",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: ["moule à tarte",]
@@ -6007,7 +6005,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["100", ""],
         saison: ["ete","automne",],
-        categories: ["Tarte (salée)",],regimes: ["vegetarien","sans-gluten",],ingredients: ["Piment d'espelette", "Feta", "Pâte feuilletée", "Ail", "Oignon", "Poivron (rouge)", "huile d'olive", "sucre blanc"],
+        categories: ["Tarte (salée)",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: []
@@ -6022,7 +6020,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["30", ""],
         saison: ["ete","automne",],
-        categories: ["Tarte (salée)",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["Piment d'espelette", "Pâte feuilletée végane sans gluten", "Ail", "Oignon", "Poivron (rouge)", "huile d'olive", "sucre blanc"],
+        categories: ["Tarte (salée)",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: []
@@ -6037,7 +6035,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["200", ""],
         saison: [],
-        categories: ["Accompagnement","Tartinade",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["Romarin", "Thym", "Poivre", "Oignon", "Purée chataîgne sans sucre", "Huile végétale", "Crème soja", "Levure de bière", "sucre blanc"],
+        categories: ["Accompagnement","Tartinade",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: ["Bruleur","Robot Mixeur",]
@@ -6052,7 +6050,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["270", ""],
         saison: [],
-        categories: ["Tartinade",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["Bicarbonate de soude", "Basilic", "Poivre", "Sel", "Ail", "huile d'olive", "Haricots rouges", "Jus de citron"],
+        categories: ["Tartinade",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: ["Marmitte",]
@@ -6067,7 +6065,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["350", ""],
         saison: [],
-        categories: ["Tartinade",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["Beurre de cacahuètes (salé)", "Feuille de laurier", "Petits pois surgelés", "Pois cassés"],
+        categories: ["Tartinade",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: []
@@ -6082,7 +6080,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["8", ""],
         saison: [],
-        categories: ["Tartinade",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["Eau", "fenugrec moulu", "Poivre noir moulu", "Sel", "Patates douces", "huile d'olive", "Lentilles corail"],
+        categories: ["Tartinade",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: []
@@ -6097,7 +6095,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["380", ""],
         saison: [],
-        categories: ["Tartinade",],regimes: ["vegetarien","sans-gluten",],ingredients: ["Menthe", "Yaourt nature", "Ail", "Petits pois", "huile d'olive", "Crème Végétale"],
+        categories: ["Tartinade",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: ["Grand Saladier",]
@@ -6112,7 +6110,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["190", ""],
         saison: [],
-        categories: ["Tartinade",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["Sel", "Cumin", "Paprika", "Vinaigre balsamique", "Oignon", "Pois cassés", "Sucre en poudre"],
+        categories: ["Tartinade",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: ["Bruleur","Marmitte","Plat Paela",]
@@ -6127,7 +6125,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["100", ""],
         saison: [],
-        categories: ["Tartinade",],regimes: ["vegetarien","sans-gluten",],ingredients: ["Ricotta", "Echalote", "Ail", "huile d'olive", "Confiture de chataigne (sans sucre)"],
+        categories: ["Tartinade",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "false",
         materiel: []
@@ -6142,7 +6140,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["20", ""],
         saison: [],
-        categories: ["Tartinade",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["Paprika", "Yaourt de soja", "Echalote", "Ail", "huile d'olive", "Confiture de chataigne (sans sucre)"],
+        categories: ["Tartinade",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "false",
         materiel: []
@@ -6157,7 +6155,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["100", ""],
         saison: ["ete",],
-        categories: ["Plat chaud",],regimes: ["vegetarien","sans-gluten",],ingredients: ["Poivre noir moulu", "Sel", "Bûche de chèvre", "Figue", "Aubergine", "Courgette", "Tomate", "huile d'olive", "Miel"],
+        categories: ["Plat chaud",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: ["Four",]
@@ -6172,7 +6170,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["30", ""],
         saison: [],
-        categories: ["Accompagnement",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["Paprika fumé", "Tofu ferme", "huile de friture", "Fécule de maïs (Maïzena)"],
+        categories: ["Accompagnement",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: []
@@ -6187,7 +6185,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["100", ""],
         saison: [],
-        categories: ["Soupe",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["Eau", "Bouillon de légume (sans gluten)", "Coriandre fraîche", "Sambal oelek", "Tamari (sauce)", "Feuille de citron combava", "Piment oiseau frais ", "Citronnelle (bâton)", "Citron vert", "Oignon", "Tomate", "Champignons", "Echalote", "Ail", "Gingembre bio", "Galanga", "lait de coco", "Nouilles de riz Phö", "Jus de citron vert", "sucre de canne (blond)"],
+        categories: ["Soupe",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: []
@@ -6202,7 +6200,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["250", ""],
         saison: ["ete",],
-        categories: ["Accompagnement",],regimes: ["vegetarien","sans-gluten",],ingredients: ["Sel", "Poivre noir moulu", "Ricotta", "Tomate", "Oignon rouge", "Cornichon", "Mâche (salade)", "Cranberries"],
+        categories: ["Accompagnement",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "false",
         materiel: []
@@ -6217,7 +6215,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["10", ""],
         saison: ["ete",],
-        categories: ["Plat chaud",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["Paprika fumé", "Thym", "Poivre noir moulu", "Fleur de sel", "Romarin", "Tomate", "Poivron", "huile d'olive"],
+        categories: ["Plat chaud",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: []
@@ -6232,7 +6230,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["8", ""],
         saison: [],
-        categories: ["Plat chaud",],regimes: ["vegan","sans-lactose",],ingredients: ["Persil frais", "poivre moulue", "Sel", "Cumin moulu", "Tofu soyeux", "Oignon", "Tomate", "huile d'olive", "Riz", "corn flakes", "Flocons d'avoine"],
+        categories: ["Plat chaud",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: []
@@ -6247,7 +6245,7 @@ const app = Vue.createApp({
         checkfor: "160",
         checkrange: ["100", "160"],
         saison: [],
-        categories: ["Accompagnement",],regimes: ["vegetarien",],ingredients: ["Poivre", "Sel", "Piment en flocons", "Origan", "Pate feuilletée", "Feta", "Betterave rouge"],
+        categories: ["Accompagnement",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: ["Four","Grand Saladier",]
@@ -6262,7 +6260,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["20", ""],
         saison: [],
-        categories: ["Accompagnement",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["Poivre", "Sel", "Raifort en poudre", "Feuille de laurier", "Estragon séché", "Pate feuilleté sans gluten et vegan", "Oignon", "Betterave cuite", "Lentilles vertes"],
+        categories: ["Accompagnement",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: ["Four","Marmitte",]
@@ -6277,7 +6275,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["100", ""],
         saison: ["ete",],
-        categories: ["Tartinade",],regimes: ["vegetarien","sans-gluten",],ingredients: ["Menthe", "Fromage blanc", "Ail", "Concombre", "huile d'olive", "Jus de citron"],
+        categories: ["Tartinade",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "false",
         materiel: []
@@ -6292,7 +6290,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["150", ""],
         saison: [],
-        categories: ["Accompagnement",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["Eau", "tamarin liquide", "moutarde graine", "curry feuilles", "Piment en flocons", "Curcuma moulu", "graine de coriandre", "Citron vert", "Pomme de terre", "huile de coco", "Lentilles", "sucre de palme", "Noix de coco râpée"],
+        categories: ["Accompagnement",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: []
@@ -6307,7 +6305,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["100", ""],
         saison: [],
-        categories: ["Sauce",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["Sel", "Moutarde", "huile de tournesol", "Crème Végétale"],
+        categories: ["Sauce",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "false",
         materiel: ["Giraffe (Bras Mixeur)",]
@@ -6322,7 +6320,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["100", ""],
         saison: [],
-        categories: ["Sauce",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["Eau", "Poivre", "Sel", "Moutarde", "Vinaigre balsamique", "Huile végétale"],
+        categories: ["Sauce",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "false",
         materiel: []
@@ -6337,7 +6335,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["100", ""],
         saison: [],
-        categories: ["Autre",],regimes: ["vegetarien","sans-gluten",],ingredients: ["yaourt de brebis", "Yaourt de soja", "sucre de canne (blond)", "Crème de marron"],
+        categories: ["Autre",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "false",
         materiel: []
@@ -6352,7 +6350,7 @@ const app = Vue.createApp({
         checkfor: "",
         checkrange: ["100", ""],
         saison: ["ete",],
-        categories: ["Tartinade",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["Paprika", "Cumin moulu", "Citron jaune", "Ail", "Tomate", "Aubergine", "huile d'olive"],
+        categories: ["Tartinade",],regimes: ["vegan","sans-gluten","sans-lactose",],ingredients: ["inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu", "inconnu"],
         temperature: "",
         cuisson: "true",
         materiel: []

@@ -14,17 +14,7 @@
   "check": true,
   "checkAlwaysOk": false,
   "materiel": null,
-  "ingredients": [{
-      "uuid": "eouu0v",
-      "name": "Carotte",
-      "originalQuantity": 5,
-      "originalUnit": "kg",
-      "normalizedQuantity": 5000,
-      "normalizedUnit": "gr.",
-      "comment": "",
-      "allergens": [],
-      "type": "legumes"
-    }],
+  "ingredients": [{"allergens":[],"comment":"","name":"Carotte","normalizedQuantity":5000,"normalizedUnit":"gr.","originalQuantity":5,"originalUnit":"kg","type":"legumes","uuid":"eouu0v"}],
   "preparation": "Pour l'assiette composée arc en ciel",
   "prepAlt": null,
   "permissionWrite": [],

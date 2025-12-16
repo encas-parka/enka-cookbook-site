@@ -14,67 +14,7 @@
   "check": true,
   "checkAlwaysOk": true,
   "materiel": null,
-  "ingredients": [{
-      "uuid": "uid60d",
-      "name": "Menthe séchée",
-      "originalQuantity": 125,
-      "originalUnit": "gr.",
-      "normalizedQuantity": 125,
-      "normalizedUnit": "gr.",
-      "comment": "",
-      "allergens": [],
-      "type": "epices"
-    },{
-      "uuid": "dzqmba",
-      "name": "Yaourt grec de vache",
-      "originalQuantity": 7.5,
-      "originalUnit": "kg",
-      "normalizedQuantity": 7500,
-      "normalizedUnit": "gr.",
-      "comment": "",
-      "allergens": ["Produit laitier"],
-      "type": "frais"
-    },{
-      "uuid": "rtavky",
-      "name": "Oignon",
-      "originalQuantity": 1.5,
-      "originalUnit": "kg",
-      "normalizedQuantity": 1500,
-      "normalizedUnit": "gr.",
-      "comment": "",
-      "allergens": [],
-      "type": "legumes"
-    },{
-      "uuid": "h3c8al",
-      "name": "huile d'olive",
-      "originalQuantity": 12.5,
-      "originalUnit": "c. à soupe",
-      "normalizedQuantity": 187.5,
-      "normalizedUnit": "ml",
-      "comment": "",
-      "allergens": [],
-      "type": "lof"
-    },{
-      "uuid": "usibcf",
-      "name": "Noix",
-      "originalQuantity": 750,
-      "originalUnit": "gr.",
-      "normalizedQuantity": 750,
-      "normalizedUnit": "gr.",
-      "comment": "",
-      "allergens": ["Fruit à coque"],
-      "type": "sec"
-    },{
-      "uuid": "omf24t",
-      "name": "Boulgour",
-      "originalQuantity": 1.875,
-      "originalUnit": "kg",
-      "normalizedQuantity": 1875,
-      "normalizedUnit": "gr.",
-      "comment": "",
-      "allergens": [],
-      "type": "sec"
-    }],
+  "ingredients": [{"allergens":[],"comment":"","name":"Menthe séchée","normalizedQuantity":125,"normalizedUnit":"gr.","originalQuantity":125,"originalUnit":"gr.","type":"epices","uuid":"uid60d"},{"allergens":["Produit laitier"],"comment":"","name":"Yaourt grec de vache","normalizedQuantity":7500,"normalizedUnit":"gr.","originalQuantity":7.5,"originalUnit":"kg","type":"frais","uuid":"dzqmba"},{"allergens":[],"comment":"","name":"Oignon","normalizedQuantity":1500,"normalizedUnit":"gr.","originalQuantity":1.5,"originalUnit":"kg","type":"legumes","uuid":"rtavky"},{"allergens":[],"comment":"","name":"huile d'olive","normalizedQuantity":187.5,"normalizedUnit":"ml","originalQuantity":12.5,"originalUnit":"c. à soupe","type":"lof","uuid":"h3c8al"},{"allergens":["Fruit à coque"],"comment":"","name":"Noix","normalizedQuantity":750,"normalizedUnit":"gr.","originalQuantity":750,"originalUnit":"gr.","type":"sec","uuid":"usibcf"},{"allergens":[],"comment":"","name":"Boulgour","normalizedQuantity":1875,"normalizedUnit":"gr.","originalQuantity":1.875,"originalUnit":"kg","type":"sec","uuid":"omf24t"}],
   "preparation": "La veille : hâcher l'oignon finement et rincer abondamment le boulgour. Les mélanger avec la moitié du yaourt, la menthe séchée et la moitié des noix hâchées. Saler au gout, laisser reposer au moins 5heures au frais, filmé au contact.\n\nLe lendemain, ajouter le reste du yaourt et des noix hâchées, mélanger. Au dernier moment, décorer avec un filet d'huile d'olive, et parsemer d'un peu de noix grossièrement hâchées et de menthe séchée.",
   "prepAlt": [{"recetteAlt":"keshke-vegan-et-sans-gluten_i8nbcodj"}],
   "permissionWrite": [],

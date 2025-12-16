@@ -7,59 +7,101 @@ checkAlwaysOk: true
 cuisson: true
 draft: false
 ingredients:
-  - ingredient: bicarbonate-de-soude_fnnx13
-    quantite: 0.25
-    unit: c. à café
-    commentaire: ''
-  - ingredient: gomme-de-xanthane_5le7rm
-    quantite: 0.25
-    unit: c. à café
-    commentaire: ''
-  - ingredient: sel_2juq3x
-    quantite: 0.1
-    unit: c. à café
-    commentaire: ''
-  - ingredient: yaourt-de-soja_hlbwfd
-    quantite: 250
-    unit: gr.
-    commentaire: ''
-  - ingredient: citron-jaune_5cg0yu
-    quantite: 120
-    unit: gr.
-    commentaire: zeste
-  - ingredient: huile-de-tournesol_c70jxb
-    quantite: 0.11
-    unit: l.
-    commentaire: ''
-  - ingredient: farine-de-ble_2av6w8
-    quantite: 250
-    unit: gr.
-    commentaire: ''
-  - ingredient: jus-de-citron_e4mjd1
-    quantite: 0.8
-    unit: l.
-    commentaire: ''
-  - ingredient: sucre-de-canne-blond_n85gmi
-    quantite: 280
-    unit: gr.
-    commentaire: ''
+  - uuid: fnnx13
+    name: Bicarbonate de soude
+    originalQuantity: 0.25
+    originalUnit: c. à café
+    normalizedQuantity: 1.25
+    normalizedUnit: ml
+    comment: ''
+    allergens: []
+    type: autres
+  - uuid: 5le7rm
+    name: Gomme de xanthane
+    originalQuantity: 0.25
+    originalUnit: c. à café
+    normalizedQuantity: 1.25
+    normalizedUnit: ml
+    comment: ''
+    allergens: []
+    type: autres
+  - uuid: 2juq3x
+    name: Sel
+    originalQuantity: 0.1
+    originalUnit: c. à café
+    normalizedQuantity: 0.5
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: hlbwfd
+    name: Yaourt de soja
+    originalQuantity: 250
+    originalUnit: gr.
+    normalizedQuantity: 250
+    normalizedUnit: gr.
+    comment: ''
+    allergens:
+      - Soja
+    type: frais
+  - uuid: 5cg0yu
+    name: Citron jaune
+    originalQuantity: 120
+    originalUnit: gr.
+    normalizedQuantity: 120
+    normalizedUnit: gr.
+    comment: zeste
+    allergens: []
+    type: legumes
+  - uuid: c70jxb
+    name: huile de tournesol
+    originalQuantity: 0.11
+    originalUnit: l.
+    normalizedQuantity: 110
+    normalizedUnit: ml
+    comment: ''
+    allergens: []
+    type: lof
+  - uuid: 2av6w8
+    name: Farine de blé
+    originalQuantity: 250
+    originalUnit: gr.
+    normalizedQuantity: 250
+    normalizedUnit: gr.
+    comment: ''
+    allergens:
+      - Gluten
+    type: lof
+  - uuid: e4mjd1
+    name: Jus de citron
+    originalQuantity: 0.8
+    originalUnit: l.
+    normalizedQuantity: 800
+    normalizedUnit: ml
+    comment: ''
+    allergens: []
+    type: sucres
+  - uuid: n85gmi
+    name: sucre de canne (blond)
+    originalQuantity: 280
+    originalUnit: gr.
+    normalizedQuantity: 280
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: sucres
 materiel:
   - moule a cake
   - Four
 plate: 10
-preparation: >-
+preparation: |-
 
 
   * Mélanger le sucre et le yaourt.
-
   * Ajouter zeste et farine, et mélanger au fouet.
-
   * Incorporer le jus de citron et l'huile.
-
   * Ajouter levure, bicar, gomme et sel.
-
-  * Graisser un moule à cake, enfourner pou 50 min à 170° et attendre que ça
-  refroidisse avant de démouler.
+  * Graisser un moule à cake, enfourner pou 50 min à 170° et attendre que ça refroidisse avant de démouler.
 publishDate: 2023-11-13T14:16:06.322Z
 regime:
   - vegan

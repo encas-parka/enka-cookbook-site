@@ -6,26 +6,53 @@ checkAlwaysOk: true
 cuisson: true
 draft: false
 ingredients:
-  - ingredient: fecule-de-mais-maizena_8nbcjp
-    quantite: 1.8
-    unit: Kg
-    commentaire: ''
-  - ingredient: lait-de-riz_hzwesd
-    quantite: 10
-    unit: l.
-    commentaire: ''
-  - ingredient: lait-de-soja_gpeob7
-    quantite: 10
-    unit: l.
-    commentaire: ''
-  - ingredient: lait-davoine_3eex0o
-    quantite: 10
-    unit: l.
-    commentaire: ''
-  - ingredient: sirop-de-sureau_k2rneh
-    quantite: 6
-    unit: l.
-    commentaire: ''
+  - uuid: 8nbcjp
+    name: Fécule de maïs (Maïzena)
+    originalQuantity: 1.8
+    originalUnit: kg
+    normalizedQuantity: 1800
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: lof
+  - uuid: hzwesd
+    name: Lait de riz
+    originalQuantity: 10
+    originalUnit: l.
+    normalizedQuantity: 10000
+    normalizedUnit: ml
+    comment: ''
+    allergens: []
+    type: lof
+  - uuid: gpeob7
+    name: Lait de soja
+    originalQuantity: 10
+    originalUnit: l.
+    normalizedQuantity: 10000
+    normalizedUnit: ml
+    comment: ''
+    allergens:
+      - Soja
+    type: lof
+  - uuid: 3eex0o
+    name: Lait d'avoine
+    originalQuantity: 10
+    originalUnit: l.
+    normalizedQuantity: 10000
+    normalizedUnit: ml
+    comment: ''
+    allergens:
+      - Gluten
+    type: lof
+  - uuid: k2rneh
+    name: Sirop de sureau
+    originalQuantity: 6
+    originalUnit: l.
+    normalizedQuantity: 6000
+    normalizedUnit: ml
+    comment: ''
+    allergens: []
+    type: sucres
 materiel:
   - Bruleur
 plate: 300

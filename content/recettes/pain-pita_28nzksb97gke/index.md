@@ -13,14 +13,25 @@ check: true
 checkAlwaysOk: false
 checkfor: 100
 ingredients:
-  - ingredient: farine-de-ble_2av6w8
-    quantite: 15
-    unit: Kg
-    commentaire: ''
-  - ingredient: levure-fraiche-de-boulanger_7qqcwc
-    quantite: 15
-    unit: unité
-    commentaire: ''
+  - uuid: 2av6w8
+    name: Farine de blé
+    originalQuantity: 15
+    originalUnit: kg
+    normalizedQuantity: 15000
+    normalizedUnit: gr.
+    comment: ''
+    allergens:
+      - Gluten
+    type: lof
+  - uuid: 7qqcwc
+    name: Levure fraîche de boulanger
+    originalQuantity: 15
+    originalUnit: unité
+    normalizedQuantity: 15
+    normalizedUnit: unité
+    comment: ''
+    allergens: []
+    type: frais
 preparation: c'est arnaud qui le fait
 publishDate: 2025-06-17T18:46:00.000Z
 serveHot: true

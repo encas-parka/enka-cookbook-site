@@ -7,40 +7,88 @@ cuisson: true
 description: 'Gâteau au Sésame noir et chocolat '
 draft: false
 ingredients:
-  - ingredient: bicarbonate-de-soude_fnnx13
-    quantite: 2
-    unit: c. à café
-    commentaire: ''
-  - ingredient: puree-de-sesame-noir_9d8hxn
-    quantite: 150
-    unit: gr.
-    commentaire: ''
-  - ingredient: sel_2juq3x
-    commentaire: ''
-  - ingredient: fecule-de-mais-maizena_8nbcjp
-    quantite: 200
-    unit: gr.
-    commentaire: ''
-  - ingredient: creme-damande_geh6n8
-    quantite: 0.2
-    unit: l.
-    commentaire: ''
-  - ingredient: lait-damande_csxbg6
-    quantite: 0.8
-    unit: l.
-    commentaire: ''
-  - ingredient: huile-de-tournesol_c70jxb
-    quantite: 0.4
-    unit: l.
-    commentaire: ''
-  - ingredient: chocolat-noir_cr4kiz
-    quantite: 400
-    unit: gr.
-    commentaire: ''
-  - ingredient: sucre-en-poudre_u9z2he
-    quantite: 700
-    unit: gr.
-    commentaire: ''
+  - uuid: fnnx13
+    name: Bicarbonate de soude
+    originalQuantity: 2
+    originalUnit: c. à café
+    normalizedQuantity: 10
+    normalizedUnit: ml
+    comment: ''
+    allergens: []
+    type: autres
+  - uuid: 9d8hxn
+    name: Purée de sésame noir
+    originalQuantity: 150
+    originalUnit: gr.
+    normalizedQuantity: 150
+    normalizedUnit: gr.
+    comment: ''
+    allergens:
+      - Sésame
+    type: autres
+  - uuid: 2juq3x
+    name: Sel
+    originalQuantity: 1
+    originalUnit: au goût
+    normalizedQuantity: 1
+    normalizedUnit: au goût
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: 8nbcjp
+    name: Fécule de maïs (Maïzena)
+    originalQuantity: 200
+    originalUnit: gr.
+    normalizedQuantity: 200
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: lof
+  - uuid: geh6n8
+    name: Crème d'amande
+    originalQuantity: 0.2
+    originalUnit: l.
+    normalizedQuantity: 200
+    normalizedUnit: ml
+    comment: ''
+    allergens: []
+    type: lof
+  - uuid: csxbg6
+    name: lait d’amande
+    originalQuantity: 0.8
+    originalUnit: l.
+    normalizedQuantity: 800
+    normalizedUnit: ml
+    comment: ''
+    allergens: []
+    type: lof
+  - uuid: c70jxb
+    name: huile de tournesol
+    originalQuantity: 0.4
+    originalUnit: l.
+    normalizedQuantity: 400
+    normalizedUnit: ml
+    comment: ''
+    allergens: []
+    type: lof
+  - uuid: cr4kiz
+    name: Chocolat noir
+    originalQuantity: 400
+    originalUnit: gr.
+    normalizedQuantity: 400
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: sucres
+  - uuid: u9z2he
+    name: Sucre en poudre
+    originalQuantity: 700
+    originalUnit: gr.
+    normalizedQuantity: 700
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: sucres
 materiel:
   - Gastro 1/1 (Fins)
   - Four

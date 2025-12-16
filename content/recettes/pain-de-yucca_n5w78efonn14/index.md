@@ -5,46 +5,74 @@ check: false
 cuisson: true
 draft: false
 ingredients:
-  - ingredient: levure-chimique_vgec6e
-    quantite: 51
-    unit: gr.
-    commentaire: levure chimique pour les vegan et l'absence de gluten...
-  - ingredient: sel_2juq3x
-    quantite: 80
-    unit: gr.
-    commentaire: ''
-  - ingredient: feta_m5dxyo
-    quantite: 4
-    unit: Kg
-    commentaire: ''
-  - ingredient: beurre-demi-sel_mxub21
-    quantite: 1
-    unit: Kg
-    commentaire: ''
-  - ingredient: oeuf_zf3zf8
-    quantite: 17
-    unit: unité
-    commentaire: à faire ramolir
-  - ingredient: farine-de-tapioca_v212im
-    quantite: 2.7
-    unit: Kg
-    commentaire: ''
+  - uuid: vgec6e
+    name: Levure chimique
+    originalQuantity: 51
+    originalUnit: gr.
+    normalizedQuantity: 51
+    normalizedUnit: gr.
+    comment: levure chimique pour les vegan et l'absence de gluten...
+    allergens:
+      - Gluten
+    type: lof
+  - uuid: 2juq3x
+    name: Sel
+    originalQuantity: 80
+    originalUnit: gr.
+    normalizedQuantity: 80
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: m5dxyo
+    name: Feta
+    originalQuantity: 4
+    originalUnit: kg
+    normalizedQuantity: 4000
+    normalizedUnit: gr.
+    comment: ''
+    allergens:
+      - Produit laitier
+    type: frais
+  - uuid: mxub21
+    name: Beurre demi-sel
+    originalQuantity: 1
+    originalUnit: kg
+    normalizedQuantity: 1000
+    normalizedUnit: gr.
+    comment: ''
+    allergens:
+      - Produit laitier
+    type: frais
+  - uuid: zf3zf8
+    name: Oeuf
+    originalQuantity: 17
+    originalUnit: unité
+    normalizedQuantity: 17
+    normalizedUnit: unité
+    comment: à faire ramolir
+    allergens:
+      - Oeuf
+    type: lof
+  - uuid: v212im
+    name: Farine de tapioca
+    originalQuantity: 2.7
+    originalUnit: kg
+    normalizedQuantity: 2700
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: lof
 materiel:
   - Four
 plate: 170
 prepAlt: []
-preparation: >-
+preparation: |-
   * Prechauffer le four a 260°.
-
   * Emietter la feta et ajouter la farine, la levure et le sel .
-
   * Incorporer les oeufs et le beurre.
-
   * Mélanger jusqu'a former une boule.
-
-  * Rouler des petites boules avec la pate et les placer sur une plaque
-  recouvert de papier sulfu.
-
+  * Rouler des petites boules avec la pate et les placer sur une plaque recouvert de papier sulfu.
   * Enfourner 8 minutes et deguster immediatement.
 publishDate: 2022-11-23T20:23:25.888Z
 regime:

@@ -21,58 +21,106 @@ check: false
 checkAlwaysOk: false
 checkfor: ''
 ingredients:
-  - ingredient: sel_2juq3x
-    commentaire: ''
-  - ingredient: poivre_2pps90
-    commentaire: ''
-  - ingredient: vinaigre-de-cidre_7qo3ht
-    quantite: 0.5
-    unit: l.
-    commentaire: ''
-  - ingredient: baies-roses_9o3793
-    quantite: 50
-    unit: gr.
-    commentaire: ''
-  - ingredient: cumin-graines_l3esgp
-    quantite: 50
-    unit: gr.
-    commentaire: ''
-  - ingredient: courge_oa85mx
-    quantite: 1
-    unit: Kg
-    commentaire: ''
-  - ingredient: oignon_rtavky
-    quantite: 0.41
-    unit: Kg
-    commentaire: ''
-  - ingredient: huile-de-tournesol_c70jxb
-    quantite: 3.5
-    unit: l.
-    commentaire: ''
-  - ingredient: sucre-en-poudre_u9z2he
-    quantite: 200
-    unit: gr.
-    commentaire: ''
-  - ingredient: pate-feuillete-sans-gluten-et-vegan_40wkon
-    quantite: 5
-    unit: unité
-    commentaire: ''
+  - uuid: 2juq3x
+    name: Sel
+    originalQuantity: 1
+    originalUnit: au goût
+    normalizedQuantity: 1
+    normalizedUnit: au goût
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: 2pps90
+    name: Poivre
+    originalQuantity: 1
+    originalUnit: au goût
+    normalizedQuantity: 1
+    normalizedUnit: au goût
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: 7qo3ht
+    name: Vinaigre de cidre
+    originalQuantity: 0.5
+    originalUnit: l.
+    normalizedQuantity: 500
+    normalizedUnit: ml
+    comment: ''
+    allergens:
+      - Alcool
+    type: epices
+  - uuid: 9o3793
+    name: Baies roses
+    originalQuantity: 50
+    originalUnit: gr.
+    normalizedQuantity: 50
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: l3esgp
+    name: Cumin (graines)
+    originalQuantity: 50
+    originalUnit: gr.
+    normalizedQuantity: 50
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: oa85mx
+    name: Courge
+    originalQuantity: 1
+    originalUnit: kg
+    normalizedQuantity: 1000
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: rtavky
+    name: Oignon
+    originalQuantity: 0.41
+    originalUnit: kg
+    normalizedQuantity: 410
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: c70jxb
+    name: huile de tournesol
+    originalQuantity: 3.5
+    originalUnit: l.
+    normalizedQuantity: 3500
+    normalizedUnit: ml
+    comment: ''
+    allergens: []
+    type: lof
+  - uuid: u9z2he
+    name: Sucre en poudre
+    originalQuantity: 200
+    originalUnit: gr.
+    normalizedQuantity: 200
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: sucres
+  - uuid: 40wkon
+    name: Pate feuilleté sans gluten et vegan
+    originalQuantity: 5
+    originalUnit: unité
+    normalizedQuantity: 5
+    normalizedUnit: unité
+    comment: ''
+    allergens: []
+    type: frais
 materiel:
   - Gastro 1/1 (Normaux)
   - Four
-preparation: >-
+preparation: |-
   * Couper et caraméliser les oignons (avec vinaigre et sucre vers la fin)
-
-  * Râper courge/courgette. Enlever jus si courgette (pas testé avec les
-  courgettes)
-
+  * Râper courge/courgette. Enlever jus si courgette (pas testé avec les courgettes)
   * Torréfier cumin puis piler avec baies roses
-
-  * Mélanger les trois, assaisonner (poivre, sel, pas trop salé car la feta
-  sale)
-
+  * Mélanger les trois, assaisonner (poivre, sel, pas trop salé car la feta sale)
   * Montage : couper des petits carrés de pate feuilletée. Envelopper.
-
   * Cuire au four à 180°C (à peu près 20 minutes)
 preparation24h: ''
 prepAlt: []

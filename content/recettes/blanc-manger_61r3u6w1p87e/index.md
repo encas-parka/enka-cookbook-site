@@ -12,26 +12,51 @@ plate: 100
 check: true
 checkAlwaysOk: false
 ingredients:
-  - ingredient: creme-de-coco_bnmw1o
-    quantite: 6.5
-    unit: l.
-    commentaire: ''
-  - ingredient: lait-damande_csxbg6
-    quantite: 6.5
-    unit: l.
-    commentaire: ''
-  - ingredient: sucre-de-canne-blond_n85gmi
-    quantite: 2.5
-    unit: Kg
-    commentaire: ''
-  - ingredient: agar-agar_ruhtax
-    quantite: 50
-    unit: gr.
-    commentaire: ''
-  - ingredient: noix-de-coco-rapee_coa5dh
-    quantite: 1
-    unit: Kg
-    commentaire: ''
+  - uuid: bnmw1o
+    name: creme de coco
+    originalQuantity: 6.5
+    originalUnit: l.
+    normalizedQuantity: 6500
+    normalizedUnit: ml
+    comment: ''
+    allergens: []
+    type: lof
+  - uuid: csxbg6
+    name: lait d’amande
+    originalQuantity: 6.5
+    originalUnit: l.
+    normalizedQuantity: 6500
+    normalizedUnit: ml
+    comment: ''
+    allergens: []
+    type: lof
+  - uuid: n85gmi
+    name: sucre de canne (blond)
+    originalQuantity: 2.5
+    originalUnit: kg
+    normalizedQuantity: 2500
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: sucres
+  - uuid: ruhtax
+    name: Agar-agar
+    originalQuantity: 50
+    originalUnit: gr.
+    normalizedQuantity: 50
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: autres
+  - uuid: coa5dh
+    name: Noix de coco râpée
+    originalQuantity: 1
+    originalUnit: kg
+    normalizedQuantity: 1000
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: sucres
 preparation: |-
   fouetter tous les ingrédients
 

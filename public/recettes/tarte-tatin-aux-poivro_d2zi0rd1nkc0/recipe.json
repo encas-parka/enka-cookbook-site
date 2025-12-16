@@ -14,77 +14,7 @@
   "check": false,
   "checkAlwaysOk": true,
   "materiel": null,
-  "ingredients": [{
-      "uuid": "u2m28w",
-      "name": "Ail",
-      "originalQuantity": 8,
-      "originalUnit": "gousse·s",
-      "normalizedQuantity": 52,
-      "normalizedUnit": "gr.",
-      "comment": "",
-      "allergens": [],
-      "type": "legumes"
-    },{
-      "uuid": "rtavky",
-      "name": "Oignon",
-      "originalQuantity": 2,
-      "originalUnit": "kg",
-      "normalizedQuantity": 2000,
-      "normalizedUnit": "gr.",
-      "comment": "",
-      "allergens": [],
-      "type": "legumes"
-    },{
-      "uuid": "0zglpj",
-      "name": "Poivron (rouge)",
-      "originalQuantity": 6,
-      "originalUnit": "kg",
-      "normalizedQuantity": 6000,
-      "normalizedUnit": "gr.",
-      "comment": "",
-      "allergens": [],
-      "type": "legumes"
-    },{
-      "uuid": "n2l0fi",
-      "name": "Pâte feuilletée végane sans gluten",
-      "originalQuantity": 4,
-      "originalUnit": "unité",
-      "normalizedQuantity": 4,
-      "normalizedUnit": "unité",
-      "comment": "",
-      "allergens": [],
-      "type": "frais"
-    },{
-      "uuid": "lny16c",
-      "name": "sucre blanc",
-      "originalQuantity": 300,
-      "originalUnit": "gr.",
-      "normalizedQuantity": 300,
-      "normalizedUnit": "gr.",
-      "comment": "",
-      "allergens": [],
-      "type": "sucres"
-    },{
-      "uuid": "bdx3gq",
-      "name": "Piment d'espelette",
-      "originalQuantity": 8,
-      "originalUnit": "gr.",
-      "normalizedQuantity": 8,
-      "normalizedUnit": "gr.",
-      "comment": "",
-      "allergens": [],
-      "type": "epices"
-    },{
-      "uuid": "h3c8al",
-      "name": "huile d'olive",
-      "originalQuantity": 300,
-      "originalUnit": "ml",
-      "normalizedQuantity": 300,
-      "normalizedUnit": "ml",
-      "comment": "",
-      "allergens": [],
-      "type": "lof"
-    }],
+  "ingredients": [{"allergens":[],"comment":"","name":"Ail","normalizedQuantity":52,"normalizedUnit":"gr.","originalQuantity":8,"originalUnit":"gousse·s","type":"legumes","uuid":"u2m28w"},{"allergens":[],"comment":"","name":"Oignon","normalizedQuantity":2000,"normalizedUnit":"gr.","originalQuantity":2,"originalUnit":"kg","type":"legumes","uuid":"rtavky"},{"allergens":[],"comment":"","name":"Poivron (rouge)","normalizedQuantity":6000,"normalizedUnit":"gr.","originalQuantity":6,"originalUnit":"kg","type":"legumes","uuid":"0zglpj"},{"allergens":[],"comment":"","name":"Pâte feuilletée végane sans gluten","normalizedQuantity":4,"normalizedUnit":"unité","originalQuantity":4,"originalUnit":"unité","type":"frais","uuid":"n2l0fi"},{"allergens":[],"comment":"","name":"sucre blanc","normalizedQuantity":300,"normalizedUnit":"gr.","originalQuantity":300,"originalUnit":"gr.","type":"sucres","uuid":"lny16c"},{"allergens":[],"comment":"","name":"Piment d'espelette","normalizedQuantity":8,"normalizedUnit":"gr.","originalQuantity":8,"originalUnit":"gr.","type":"epices","uuid":"bdx3gq"},{"allergens":[],"comment":"","name":"huile d'olive","normalizedQuantity":300,"normalizedUnit":"ml","originalQuantity":300,"originalUnit":"ml","type":"lof","uuid":"h3c8al"}],
   "preparation": "Laver les légumes. Retirer des poivrons les membranes\nblanches et les graines à l’intérieur. Les tailler en gros\nmorceaux.\n\nÉplucher l’oignon et émincer finement. Hacher l'ail.\n\nFaire suer les poivrons et les\noignons à l’huile d’olive. Saler. Ajouter la moitié du sucre et laisser cuire le\ntout pour faire caraméliser cette garniture. Ajouter l'ail.\nSel et piment d’Espelette. Sulfuriser les plats à tarte, verser un peu de sucre au fond et disposer les légumes.\n\nPréchauffer le four à 200 °C (th. 6). Dérouler les rouleaux de pâte\nfeuilletée et piquer avec une fourchette. Disposer ensuite sur les\npoivrons. Rabattre les bords si besoin. Enfournez pendant une trentaine\nde minutes jusqu’à l’obtention d’une pâte colorée et cuite.\n\nSortir les tartes du four, démouler en la retournant dans une assiette. Un délice.",
   "prepAlt": null,
   "permissionWrite": [],

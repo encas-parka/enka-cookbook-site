@@ -14,57 +14,7 @@
   "check": false,
   "checkAlwaysOk": true,
   "materiel": null,
-  "ingredients": [{
-      "uuid": "ljzb7j",
-      "name": "Eau",
-      "originalQuantity": 0.6,
-      "originalUnit": "l.",
-      "normalizedQuantity": 600,
-      "normalizedUnit": "ml",
-      "comment": "",
-      "allergens": [],
-      "type": "autres"
-    },{
-      "uuid": "mt22ff",
-      "name": "Ciboulette",
-      "originalQuantity": 4,
-      "originalUnit": "bottes",
-      "normalizedQuantity": 4,
-      "normalizedUnit": "bottes",
-      "comment": "",
-      "allergens": [],
-      "type": "epices"
-    },{
-      "uuid": "u2m28w",
-      "name": "Ail",
-      "originalQuantity": 2,
-      "originalUnit": "gousse·s",
-      "normalizedQuantity": 13,
-      "normalizedUnit": "gr.",
-      "comment": "",
-      "allergens": [],
-      "type": "legumes"
-    },{
-      "uuid": "eu7lc6",
-      "name": "huile de colza",
-      "originalQuantity": 1,
-      "originalUnit": "l.",
-      "normalizedQuantity": 1000,
-      "normalizedUnit": "ml",
-      "comment": "",
-      "allergens": [],
-      "type": "lof"
-    },{
-      "uuid": "e4mjd1",
-      "name": "Jus de citron",
-      "originalQuantity": 0.15,
-      "originalUnit": "l.",
-      "normalizedQuantity": 150,
-      "normalizedUnit": "ml",
-      "comment": "",
-      "allergens": [],
-      "type": "sucres"
-    }],
+  "ingredients": [{"allergens":[],"comment":"","name":"Eau","normalizedQuantity":600,"normalizedUnit":"ml","originalQuantity":0.6,"originalUnit":"l.","type":"autres","uuid":"ljzb7j"},{"allergens":[],"comment":"","name":"Ciboulette","normalizedQuantity":4,"normalizedUnit":"bottes","originalQuantity":4,"originalUnit":"bottes","type":"epices","uuid":"mt22ff"},{"allergens":[],"comment":"","name":"Ail","normalizedQuantity":13,"normalizedUnit":"gr.","originalQuantity":2,"originalUnit":"gousse·s","type":"legumes","uuid":"u2m28w"},{"allergens":[],"comment":"","name":"huile de colza","normalizedQuantity":1000,"normalizedUnit":"ml","originalQuantity":1,"originalUnit":"l.","type":"lof","uuid":"eu7lc6"},{"allergens":[],"comment":"","name":"Jus de citron","normalizedQuantity":150,"normalizedUnit":"ml","originalQuantity":0.15,"originalUnit":"l.","type":"sucres","uuid":"e4mjd1"}],
   "preparation": "\n\nAjouter un peu plus de la moitié de chaque ingrédient (sauf la ciboulette), et mixer correctement. Goutter, et rajouter chaque ingrédient petit à petit pour qu'il y ait le bon dosage d'ail, de gras, d'acidité, et la bonne texture avec l'eau. Saler au gout.\n\nPossible 2 J avant\n\n\n\nLaver et ciseler finement la ciboulette. La mélanger au fromage.\n\nObligatoirement au dernier moment",
   "prepAlt": null,
   "permissionWrite": [],

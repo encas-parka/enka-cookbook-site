@@ -16,30 +16,71 @@ plate: 50
 check: false
 checkAlwaysOk: true
 ingredients:
-  - ingredient: concombre_l5p1a5
-    quantite: 2.5
-    unit: Kg
-    commentaire: ''
-  - ingredient: poivre_2pps90
-    commentaire: ''
-  - ingredient: sel_2juq3x
-    commentaire: ''
-  - ingredient: aneth-aromatique_nnkg8f
-    quantite: 2
-    unit: bottes
-    commentaire: ''
-  - ingredient: yaourt-de-soja_hlbwfd
-    quantite: 550
-    unit: gr.
-    commentaire: ''
-  - ingredient: huile-dolive_h3c8al
-    quantite: 300
-    unit: ml
-    commentaire: ''
-  - ingredient: amandes-effilees_xkijt9
-    quantite: 200
-    unit: gr.
-    commentaire: ''
+  - uuid: l5p1a5
+    name: Concombre
+    originalQuantity: 2.5
+    originalUnit: kg
+    normalizedQuantity: 2500
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: 2pps90
+    name: Poivre
+    originalQuantity: 1
+    originalUnit: au goût
+    normalizedQuantity: 1
+    normalizedUnit: au goût
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: 2juq3x
+    name: Sel
+    originalQuantity: 1
+    originalUnit: au goût
+    normalizedQuantity: 1
+    normalizedUnit: au goût
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: nnkg8f
+    name: Aneth aromatique
+    originalQuantity: 2
+    originalUnit: bottes
+    normalizedQuantity: 2
+    normalizedUnit: bottes
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: hlbwfd
+    name: Yaourt de soja
+    originalQuantity: 550
+    originalUnit: gr.
+    normalizedQuantity: 550
+    normalizedUnit: gr.
+    comment: ''
+    allergens:
+      - Soja
+    type: frais
+  - uuid: h3c8al
+    name: huile d'olive
+    originalQuantity: 300
+    originalUnit: ml
+    normalizedQuantity: 300
+    normalizedUnit: ml
+    comment: ''
+    allergens: []
+    type: lof
+  - uuid: xkijt9
+    name: Amandes effilées
+    originalQuantity: 200
+    originalUnit: gr.
+    normalizedQuantity: 200
+    normalizedUnit: gr.
+    comment: ''
+    allergens:
+      - Fruit à coque
+    type: sec
 preparation: |-
   Mandoliner le concombre au robocoupe (si vous en avez un :p)
 

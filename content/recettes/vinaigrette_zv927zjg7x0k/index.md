@@ -14,30 +14,62 @@ plate: 100
 check: true
 checkAlwaysOk: true
 ingredients:
-  - ingredient: eau_ljzb7j
-    quantite: 0.2
-    unit: l.
-    commentaire: ''
-  - ingredient: poivre_2pps90
-    quantite: 3
-    unit: gr.
-    commentaire: ''
-  - ingredient: sel_2juq3x
-    quantite: 3
-    unit: gr.
-    commentaire: ''
-  - ingredient: moutarde_5c1b20
-    quantite: 200
-    unit: gr.
-    commentaire: ''
-  - ingredient: vinaigre-balsamique_qemlqs
-    quantite: 0.2
-    unit: l.
-    commentaire: ''
-  - ingredient: huile-vegetale_atccqu
-    quantite: 1.5
-    unit: l.
-    commentaire: ''
+  - uuid: ljzb7j
+    name: Eau
+    originalQuantity: 0.2
+    originalUnit: l.
+    normalizedQuantity: 200
+    normalizedUnit: ml
+    comment: ''
+    allergens: []
+    type: autres
+  - uuid: 2pps90
+    name: Poivre
+    originalQuantity: 3
+    originalUnit: gr.
+    normalizedQuantity: 3
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: 2juq3x
+    name: Sel
+    originalQuantity: 3
+    originalUnit: gr.
+    normalizedQuantity: 3
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: 5c1b20
+    name: Moutarde
+    originalQuantity: 200
+    originalUnit: gr.
+    normalizedQuantity: 200
+    normalizedUnit: gr.
+    comment: ''
+    allergens:
+      - Moutarde
+    type: epices
+  - uuid: qemlqs
+    name: Vinaigre balsamique
+    originalQuantity: 0.2
+    originalUnit: l.
+    normalizedQuantity: 200
+    normalizedUnit: ml
+    comment: ''
+    allergens:
+      - Sulfites
+    type: epices
+  - uuid: atccqu
+    name: Huile végétale
+    originalQuantity: 1.5
+    originalUnit: l.
+    normalizedQuantity: 1500
+    normalizedUnit: ml
+    comment: ''
+    allergens: []
+    type: lof
 preparation: |-
   monter la sauce en commençant par la moutarde, et le vinaigre
 

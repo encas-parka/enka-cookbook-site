@@ -14,67 +14,7 @@
   "check": true,
   "checkAlwaysOk": false,
   "materiel": null,
-  "ingredients": [{
-      "uuid": "u2m28w",
-      "name": "Ail",
-      "originalQuantity": 6,
-      "originalUnit": "gousse·s",
-      "normalizedQuantity": 39,
-      "normalizedUnit": "gr.",
-      "comment": "",
-      "allergens": [],
-      "type": "legumes"
-    },{
-      "uuid": "rtavky",
-      "name": "Oignon",
-      "originalQuantity": 2,
-      "originalUnit": "unité",
-      "normalizedQuantity": 240,
-      "normalizedUnit": "gr.",
-      "comment": "",
-      "allergens": [],
-      "type": "legumes"
-    },{
-      "uuid": "l5p1a5",
-      "name": "Concombre",
-      "originalQuantity": 1,
-      "originalUnit": "kg",
-      "normalizedQuantity": 1000,
-      "normalizedUnit": "gr.",
-      "comment": "",
-      "allergens": [],
-      "type": "legumes"
-    },{
-      "uuid": "hlbwfd",
-      "name": "Yaourt de soja",
-      "originalQuantity": 2,
-      "originalUnit": "kg",
-      "normalizedQuantity": 2000,
-      "normalizedUnit": "gr.",
-      "comment": "",
-      "allergens": ["Soja"],
-      "type": "frais"
-    },{
-      "uuid": "l3esgp",
-      "name": "Cumin (graines)",
-      "originalQuantity": 20,
-      "originalUnit": "gr.",
-      "normalizedQuantity": 20,
-      "normalizedUnit": "gr.",
-      "comment": "",
-      "allergens": [],
-      "type": "epices"
-    },{
-      "uuid": "fetrpe",
-      "name": "Coriandre fraîche",
-      "originalQuantity": 0.5,
-      "originalUnit": "bottes",
-      "normalizedQuantity": 0.5,
-      "normalizedUnit": "bottes",
-      "comment": "",
-      "allergens": [],
-      "type": "epices"
-    }],
+  "ingredients": [{"allergens":[],"comment":"","name":"Ail","normalizedQuantity":39,"normalizedUnit":"gr.","originalQuantity":6,"originalUnit":"gousse·s","type":"legumes","uuid":"u2m28w"},{"allergens":[],"comment":"","name":"Oignon","normalizedQuantity":240,"normalizedUnit":"gr.","originalQuantity":2,"originalUnit":"unité","type":"legumes","uuid":"rtavky"},{"allergens":[],"comment":"","name":"Concombre","normalizedQuantity":1000,"normalizedUnit":"gr.","originalQuantity":1,"originalUnit":"kg","type":"legumes","uuid":"l5p1a5"},{"allergens":["Soja"],"comment":"","name":"Yaourt de soja","normalizedQuantity":2000,"normalizedUnit":"gr.","originalQuantity":2,"originalUnit":"kg","type":"frais","uuid":"hlbwfd"},{"allergens":[],"comment":"","name":"Cumin (graines)","normalizedQuantity":20,"normalizedUnit":"gr.","originalQuantity":20,"originalUnit":"gr.","type":"epices","uuid":"l3esgp"},{"allergens":[],"comment":"","name":"Coriandre fraîche","normalizedQuantity":0.5,"normalizedUnit":"bottes","originalQuantity":0.5,"originalUnit":"bottes","type":"epices","uuid":"fetrpe"}],
   "preparation": "\\\n\n* 1 - Hâcher finement les oignons. Passer au presse ail les gousses. Et couper grossièrement\n\n en petits dès les concombres. Saler, poivrer. Mélanger dans 2 gros gastros.\n\n* 2 - Faire griller à la poêle les graines de cumin (+ pour la version végane). Puis les\n\n passer au pilon. Verser dans les légumes.\n\n* 3 - Ajouter au tout les yaourts et les feuilles de coriandre ciselées. Servir très frais.\n\n\\",
   "prepAlt": null,
   "permissionWrite": [],

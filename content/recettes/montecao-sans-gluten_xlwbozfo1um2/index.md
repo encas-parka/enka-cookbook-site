@@ -13,34 +13,69 @@ plate: 20
 check: true
 checkAlwaysOk: true
 ingredients:
-  - ingredient: huile-de-colza_eu7lc6
-    quantite: 400
-    unit: gr.
-    commentaire: ''
-  - ingredient: farine-de-pois-chiche_o627mw
-    quantite: 270
-    unit: gr.
-    commentaire: ''
-  - ingredient: farine-de-mais_z8uiyd
-    quantite: 270
-    unit: gr.
-    commentaire: ''
-  - ingredient: farine-de-riz_oygozr
-    quantite: 270
-    unit: gr.
-    commentaire: ''
-  - ingredient: eau-de-fleur-doranger_ikdk3g
-    quantite: 4
-    unit: c. à soupe
-    commentaire: ''
-  - ingredient: sucre-de-canne-blond_n85gmi
-    quantite: 340
-    unit: gr.
-    commentaire: ''
-  - ingredient: cannelle_sk1gbb
-    quantite: 10
-    unit: gr.
-    commentaire: ''
+  - uuid: eu7lc6
+    name: huile de colza
+    originalQuantity: 400
+    originalUnit: gr.
+    normalizedQuantity: 400
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: lof
+  - uuid: o627mw
+    name: Farine de pois chiche
+    originalQuantity: 270
+    originalUnit: gr.
+    normalizedQuantity: 270
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: lof
+  - uuid: z8uiyd
+    name: Farine de maïs
+    originalQuantity: 270
+    originalUnit: gr.
+    normalizedQuantity: 270
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: lof
+  - uuid: oygozr
+    name: Farine de riz
+    originalQuantity: 270
+    originalUnit: gr.
+    normalizedQuantity: 270
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: lof
+  - uuid: ikdk3g
+    name: Eau de fleur d'oranger
+    originalQuantity: 4
+    originalUnit: c. à soupe
+    normalizedQuantity: 60
+    normalizedUnit: ml
+    comment: ''
+    allergens: []
+    type: sucres
+  - uuid: n85gmi
+    name: sucre de canne (blond)
+    originalQuantity: 340
+    originalUnit: gr.
+    normalizedQuantity: 340
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: sucres
+  - uuid: sk1gbb
+    name: Cannelle
+    originalQuantity: 10
+    originalUnit: gr.
+    normalizedQuantity: 10
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: epices
 preparation: "\nPeser la farine, le sucre et l'huile et les mettre dans un saladier ou le bol du mixer.\n\nBattre avec les crochets pétrisseurs.\n\nQuand la pâte est bien\_ homogène, façonner des petites boules en prélevant la pâte avec une cuillère à café.\n\nLa pâte étant un peu friable, on la presse bien entre les paumes des mains.\n\nDisposer sur une plaque recouverte de papier cuisson. \n\nAplatir légèrement le dessus de chaque boule\_ et saupoudrer d'une petite pincée de cannelle.\n\nEnfourner dans le four préchauffé à 175° durant 7 à 10 minutes.\n\nQuand le dessus des biscuits commence à se craqueler, baisser la \ntempérature à 150 ° et poursuivre la cuisson environ 5 à 7 minutes.\n\nParsemer à nouveau d'une petite pincée de cannelle."
 publishDate: 2025-05-30T17:34:00.000Z
 serveHot: false

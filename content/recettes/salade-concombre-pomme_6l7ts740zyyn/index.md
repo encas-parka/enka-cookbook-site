@@ -15,49 +15,95 @@ plate: 180
 check: true
 checkAlwaysOk: false
 ingredients:
-  - ingredient: pomme_i6jlwm
-    quantite: 8
-    unit: Kg
-    commentaire: ''
-  - ingredient: cebette-ciboule-cive-oignon-vert_j7as8d
-    quantite: 40
-    unit: unité
-    commentaire: ''
-  - ingredient: concombre_l5p1a5
-    quantite: 28
-    unit: unité
-    commentaire: ''
-  - ingredient: poivre_2pps90
-    commentaire: ''
-  - ingredient: sel_2juq3x
-    commentaire: ''
-  - ingredient: aneth-aromatique_nnkg8f
-    quantite: 10
-    unit: bottes
-    commentaire: ''
-  - ingredient: huile-dolive_h3c8al
-    quantite: 1.2
-    unit: l.
-    commentaire: ''
-  - ingredient: graines-de-nigelle_5muly5
-    quantite: 300
-    unit: gr.
-    commentaire: ''
-  - ingredient: yaourt-de-vache_xahmrh
-    quantite: 2
-    unit: Kg
-    commentaire: ''
+  - uuid: i6jlwm
+    name: Pomme
+    originalQuantity: 8
+    originalUnit: kg
+    normalizedQuantity: 8000
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: j7as8d
+    name: Cébette - Ciboule - Cive - Oignon vert
+    originalQuantity: 40
+    originalUnit: unité
+    normalizedQuantity: 4800
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: l5p1a5
+    name: Concombre
+    originalQuantity: 28
+    originalUnit: unité
+    normalizedQuantity: 5600
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: 2pps90
+    name: Poivre
+    originalQuantity: 1
+    originalUnit: au goût
+    normalizedQuantity: 1
+    normalizedUnit: au goût
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: 2juq3x
+    name: Sel
+    originalQuantity: 1
+    originalUnit: au goût
+    normalizedQuantity: 1
+    normalizedUnit: au goût
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: nnkg8f
+    name: Aneth aromatique
+    originalQuantity: 10
+    originalUnit: bottes
+    normalizedQuantity: 10
+    normalizedUnit: bottes
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: h3c8al
+    name: huile d'olive
+    originalQuantity: 1.2
+    originalUnit: l.
+    normalizedQuantity: 1200
+    normalizedUnit: ml
+    comment: ''
+    allergens: []
+    type: lof
+  - uuid: 5muly5
+    name: Graines de nigelle
+    originalQuantity: 300
+    originalUnit: gr.
+    normalizedQuantity: 300
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: sec
+  - uuid: xahmrh
+    name: Yaourt de vache
+    originalQuantity: 2
+    originalUnit: kg
+    normalizedQuantity: 2000
+    normalizedUnit: gr.
+    comment: ''
+    allergens:
+      - Produit laitier
+    type: frais
 materiel:
   - Grand Saladier
   - Gastro 1/1 (Profond)
-preparation: >-
+preparation: |-
   * Evidez, coupez en 2, et émincez les pommes
-
-  * Pelez, coupez en 2 dans la longueur, épépinez, puis coupez en tranche de 5mm
-  d'épaisseur les concombre
-
+  * Pelez, coupez en 2 dans la longueur, épépinez, puis coupez en tranche de 5mm d'épaisseur les concombre
   * Emincez en biais les oignons frai
-
   * Mélangez, assaisonnez, goutez
 publishDate: 2024-05-18T13:28:00.000Z
 serveHot: false

@@ -14,77 +14,7 @@
   "check": true,
   "checkAlwaysOk": false,
   "materiel": null,
-  "ingredients": [{
-      "uuid": "u33083",
-      "name": "Tahin",
-      "originalQuantity": 160,
-      "originalUnit": "gr.",
-      "normalizedQuantity": 160,
-      "normalizedUnit": "gr.",
-      "comment": "",
-      "allergens": ["Sésame"],
-      "type": "autres"
-    },{
-      "uuid": "qemlqs",
-      "name": "Vinaigre balsamique",
-      "originalQuantity": 90,
-      "originalUnit": "ml",
-      "normalizedQuantity": 90,
-      "normalizedUnit": "ml",
-      "comment": "",
-      "allergens": ["Sulfites"],
-      "type": "epices"
-    },{
-      "uuid": "uja9ip",
-      "name": "Canneberge",
-      "originalQuantity": 100,
-      "originalUnit": "gr.",
-      "normalizedQuantity": 100,
-      "normalizedUnit": "gr.",
-      "comment": "",
-      "allergens": [],
-      "type": "legumes"
-    },{
-      "uuid": "u2m28w",
-      "name": "Ail",
-      "originalQuantity": 4,
-      "originalUnit": "unité",
-      "normalizedQuantity": 26,
-      "normalizedUnit": "gr.",
-      "comment": "",
-      "allergens": [],
-      "type": "legumes"
-    },{
-      "uuid": "i7psri",
-      "name": "Betterave cuite",
-      "originalQuantity": 400,
-      "originalUnit": "gr.",
-      "normalizedQuantity": 400,
-      "normalizedUnit": "gr.",
-      "comment": "",
-      "allergens": [],
-      "type": "legumes"
-    },{
-      "uuid": "h3c8al",
-      "name": "huile d'olive",
-      "originalQuantity": 120,
-      "originalUnit": "ml",
-      "normalizedQuantity": 120,
-      "normalizedUnit": "ml",
-      "comment": "",
-      "allergens": [],
-      "type": "lof"
-    },{
-      "uuid": "wwl5vn",
-      "name": "Pois chiche cuit",
-      "originalQuantity": 1.1,
-      "originalUnit": "kg",
-      "normalizedQuantity": 1100,
-      "normalizedUnit": "gr.",
-      "comment": "",
-      "allergens": [],
-      "type": "sec"
-    }],
+  "ingredients": [{"allergens":["Sésame"],"comment":"","name":"Tahin","normalizedQuantity":160,"normalizedUnit":"gr.","originalQuantity":160,"originalUnit":"gr.","type":"autres","uuid":"u33083"},{"allergens":["Sulfites"],"comment":"","name":"Vinaigre balsamique","normalizedQuantity":90,"normalizedUnit":"ml","originalQuantity":90,"originalUnit":"ml","type":"epices","uuid":"qemlqs"},{"allergens":[],"comment":"","name":"Canneberge","normalizedQuantity":100,"normalizedUnit":"gr.","originalQuantity":100,"originalUnit":"gr.","type":"legumes","uuid":"uja9ip"},{"allergens":[],"comment":"","name":"Ail","normalizedQuantity":26,"normalizedUnit":"gr.","originalQuantity":4,"originalUnit":"unité","type":"legumes","uuid":"u2m28w"},{"allergens":[],"comment":"","name":"Betterave cuite","normalizedQuantity":400,"normalizedUnit":"gr.","originalQuantity":400,"originalUnit":"gr.","type":"legumes","uuid":"i7psri"},{"allergens":[],"comment":"","name":"huile d'olive","normalizedQuantity":120,"normalizedUnit":"ml","originalQuantity":120,"originalUnit":"ml","type":"lof","uuid":"h3c8al"},{"allergens":[],"comment":"","name":"Pois chiche cuit","normalizedQuantity":1100,"normalizedUnit":"gr.","originalQuantity":1.1,"originalUnit":"kg","type":"sec","uuid":"wwl5vn"}],
   "preparation": "Mettre tous les ingrédients dans un blender et mixer jusqu'à l'obtention d'une texture lisse. Saler. Ajouter un peu d'eau si nécessaire.",
   "prepAlt": null,
   "permissionWrite": [],

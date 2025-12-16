@@ -14,77 +14,7 @@
   "check": false,
   "checkAlwaysOk": false,
   "materiel": ["Bruleur","Marmitte","Giraffe (Bras Mixeur)"],
-  "ingredients": [{
-      "uuid": "5dwrvm",
-      "name": "Gros sel",
-      "originalQuantity": 80,
-      "originalUnit": "gr.",
-      "normalizedQuantity": 80,
-      "normalizedUnit": "gr.",
-      "comment": "Gouter en fin de cuisson (rectifier)",
-      "allergens": [],
-      "type": "epices"
-    },{
-      "uuid": "fetrpe",
-      "name": "Coriandre fraîche",
-      "originalQuantity": 6,
-      "originalUnit": "bottes",
-      "normalizedQuantity": 6,
-      "normalizedUnit": "bottes",
-      "comment": "",
-      "allergens": [],
-      "type": "epices"
-    },{
-      "uuid": "u2m28w",
-      "name": "Ail",
-      "originalQuantity": 2,
-      "originalUnit": "tête·s",
-      "normalizedQuantity": 160,
-      "normalizedUnit": "gr.",
-      "comment": "",
-      "allergens": [],
-      "type": "legumes"
-    },{
-      "uuid": "rtavky",
-      "name": "Oignon",
-      "originalQuantity": 2.25,
-      "originalUnit": "kg",
-      "normalizedQuantity": 2250,
-      "normalizedUnit": "gr.",
-      "comment": "",
-      "allergens": [],
-      "type": "legumes"
-    },{
-      "uuid": "18dy4e",
-      "name": "Pomme de terre",
-      "originalQuantity": 3,
-      "originalUnit": "kg",
-      "normalizedQuantity": 3000,
-      "normalizedUnit": "gr.",
-      "comment": "",
-      "allergens": [],
-      "type": "legumes"
-    },{
-      "uuid": "eouu0v",
-      "name": "Carotte",
-      "originalQuantity": 12.5,
-      "originalUnit": "kg",
-      "normalizedQuantity": 12500,
-      "normalizedUnit": "gr.",
-      "comment": "",
-      "allergens": [],
-      "type": "legumes"
-    },{
-      "uuid": "h3c8al",
-      "name": "huile d'olive",
-      "originalQuantity": 500,
-      "originalUnit": "ml",
-      "normalizedQuantity": 500,
-      "normalizedUnit": "ml",
-      "comment": "",
-      "allergens": [],
-      "type": "lof"
-    }],
+  "ingredients": [{"allergens":[],"comment":"Gouter en fin de cuisson (rectifier)","name":"Gros sel","normalizedQuantity":80,"normalizedUnit":"gr.","originalQuantity":80,"originalUnit":"gr.","type":"epices","uuid":"5dwrvm"},{"allergens":[],"comment":"","name":"Coriandre fraîche","normalizedQuantity":6,"normalizedUnit":"bottes","originalQuantity":6,"originalUnit":"bottes","type":"epices","uuid":"fetrpe"},{"allergens":[],"comment":"","name":"Ail","normalizedQuantity":160,"normalizedUnit":"gr.","originalQuantity":2,"originalUnit":"tête·s","type":"legumes","uuid":"u2m28w"},{"allergens":[],"comment":"","name":"Oignon","normalizedQuantity":2250,"normalizedUnit":"gr.","originalQuantity":2.25,"originalUnit":"kg","type":"legumes","uuid":"rtavky"},{"allergens":[],"comment":"","name":"Pomme de terre","normalizedQuantity":3000,"normalizedUnit":"gr.","originalQuantity":3,"originalUnit":"kg","type":"legumes","uuid":"18dy4e"},{"allergens":[],"comment":"","name":"Carotte","normalizedQuantity":12500,"normalizedUnit":"gr.","originalQuantity":12.5,"originalUnit":"kg","type":"legumes","uuid":"eouu0v"},{"allergens":[],"comment":"","name":"huile d'olive","normalizedQuantity":500,"normalizedUnit":"ml","originalQuantity":500,"originalUnit":"ml","type":"lof","uuid":"h3c8al"}],
   "preparation": "Eplucher carottes et patates, les laver et les couper en morceaux de taille moyenne.\n\nEcraser les gousses d'ail et couper les oignons en quartiers.\n\nTout mettre dans une marmite et couvrir d'eau froide, avec au moins 2cm d'eau au dessus.\n\nAjouter le sel et l'huile.\n\nMettre sur le feu pendant 30min.\n\nHacher la coriandre.\n\nVérifier si les carottes et patates sont cuites, et quand c'est le cas tout mixer en rajoutant un filet d'huile d'olive. Ajouter un peu d'eau pendant le mixage si nécessaire pour avoir une consistance de soupe veloutée\n\nMélanger la coriandre une fois le tout bien mixé.",
   "prepAlt": null,
   "permissionWrite": [],

@@ -14,67 +14,7 @@
   "check": true,
   "checkAlwaysOk": null,
   "materiel": [],
-  "ingredients": [{
-      "uuid": "cr4kiz",
-      "name": "Chocolat noir",
-      "originalQuantity": 600,
-      "originalUnit": "gr.",
-      "normalizedQuantity": 600,
-      "normalizedUnit": "gr.",
-      "comment": "",
-      "allergens": [],
-      "type": "sucres"
-    },{
-      "uuid": "ruhtax",
-      "name": "Agar-agar",
-      "originalQuantity": 56,
-      "originalUnit": "gr.",
-      "normalizedQuantity": 56,
-      "normalizedUnit": "gr.",
-      "comment": "",
-      "allergens": [],
-      "type": "autres"
-    },{
-      "uuid": "lny16c",
-      "name": "sucre blanc",
-      "originalQuantity": 1.5,
-      "originalUnit": "kg",
-      "normalizedQuantity": 1500,
-      "normalizedUnit": "gr.",
-      "comment": "",
-      "allergens": [],
-      "type": "sucres"
-    },{
-      "uuid": "xm77fg",
-      "name": "Purée chataîgne sans sucre",
-      "originalQuantity": 4,
-      "originalUnit": "kg",
-      "normalizedQuantity": 4000,
-      "normalizedUnit": "gr.",
-      "comment": "",
-      "allergens": [],
-      "type": "legumes"
-    },{
-      "uuid": "csxbg6",
-      "name": "lait d’amande",
-      "originalQuantity": 5,
-      "originalUnit": "l.",
-      "normalizedQuantity": 5000,
-      "normalizedUnit": "ml",
-      "comment": "",
-      "allergens": [],
-      "type": "lof"
-    },{
-      "uuid": "chfwwq",
-      "name": "Crème soja",
-      "originalQuantity": 5,
-      "originalUnit": "l.",
-      "normalizedQuantity": 5000,
-      "normalizedUnit": "ml",
-      "comment": "",
-      "allergens": ["Soja"],
-      "type": "lof"
-    }],
+  "ingredients": [{"allergens":[],"comment":"","name":"Chocolat noir","normalizedQuantity":600,"normalizedUnit":"gr.","originalQuantity":600,"originalUnit":"gr.","type":"sucres","uuid":"cr4kiz"},{"allergens":[],"comment":"","name":"Agar-agar","normalizedQuantity":56,"normalizedUnit":"gr.","originalQuantity":56,"originalUnit":"gr.","type":"autres","uuid":"ruhtax"},{"allergens":[],"comment":"","name":"sucre blanc","normalizedQuantity":1500,"normalizedUnit":"gr.","originalQuantity":1.5,"originalUnit":"kg","type":"sucres","uuid":"lny16c"},{"allergens":[],"comment":"","name":"Purée chataîgne sans sucre","normalizedQuantity":4000,"normalizedUnit":"gr.","originalQuantity":4,"originalUnit":"kg","type":"legumes","uuid":"xm77fg"},{"allergens":[],"comment":"","name":"lait d’amande","normalizedQuantity":5000,"normalizedUnit":"ml","originalQuantity":5,"originalUnit":"l.","type":"lof","uuid":"csxbg6"},{"allergens":["Soja"],"comment":"","name":"Crème soja","normalizedQuantity":5000,"normalizedUnit":"ml","originalQuantity":5,"originalUnit":"l.","type":"lof","uuid":"chfwwq"}],
   "preparation": "- Faire bouillir le lait d'amande, la crème soja et le sucre\n- Ajouter l'agar-agar et laisser bouillir 2 minutes\n- Couper la cuisson et rajouter la crème de châtaignes\n- Dresser dans des ramequins et réserver une nuit au frigo\n- Faire fondre le chocolat au bain marie\n\n-Étaler finement le chocolat fondu sur une feuille de papier cuisson et réserver au frigo pendant une nuit",
   "prepAlt": [],
   "permissionWrite": [],

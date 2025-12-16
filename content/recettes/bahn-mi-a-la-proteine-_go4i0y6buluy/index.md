@@ -17,50 +17,107 @@ plate: 100
 quantite_desc: Une demi baguette par sandwich
 check: true
 ingredients:
-  - ingredient: proteines-de-soja_6m90g7
-    quantite: 3
-    unit: Kg
-    commentaire: ''
-  - ingredient: coriandre_yat3fu
-    quantite: 10
-    unit: bottes
-    commentaire: ''
-  - ingredient: gingembre_0d1fzw
-    quantite: 650
-    unit: gr.
-    commentaire: ''
-  - ingredient: ail_u2m28w
-    quantite: 5
-    unit: tête·s
-    commentaire: ''
-  - ingredient: veganaise_89945bda5f0b
-    quantite: 3
-    unit: Kg
-    commentaire: ''
-  - ingredient: miso-blanc_k2uthk
-    quantite: 850
-    unit: gr.
-    commentaire: ''
-  - ingredient: concombre_l5p1a5
-    quantite: 20
-    unit: unité
-    commentaire: ''
-  - ingredient: sauce-soja_jjrwlj
-    quantite: 3.5
-    unit: l.
-    commentaire: ''
-  - ingredient: chou-rouge_nl2s2n
-    quantite: 3.5
-    unit: Kg
-    commentaire: ''
-  - ingredient: carotte_eouu0v
-    quantite: 5
-    unit: Kg
-    commentaire: ''
-  - ingredient: pain-baguette_e7953e50480d
-    quantite: 50
-    unit: unité
-    commentaire: ''
+  - uuid: 6m90g7
+    name: Protéines de soja
+    originalQuantity: 3
+    originalUnit: kg
+    normalizedQuantity: 3000
+    normalizedUnit: gr.
+    comment: ''
+    allergens:
+      - Soja
+    type: autres
+  - uuid: yat3fu
+    name: Coriandre
+    originalQuantity: 10
+    originalUnit: bottes
+    normalizedQuantity: 10
+    normalizedUnit: bottes
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: 0d1fzw
+    name: Gingembre
+    originalQuantity: 650
+    originalUnit: gr.
+    normalizedQuantity: 650
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: u2m28w
+    name: Ail
+    originalQuantity: 5
+    originalUnit: tête·s
+    normalizedQuantity: 400
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: 89945bda5f0b
+    name: Véganaise
+    originalQuantity: 3
+    originalUnit: kg
+    normalizedQuantity: 3000
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: k2uthk
+    name: Miso blanc
+    originalQuantity: 850
+    originalUnit: gr.
+    normalizedQuantity: 850
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: l5p1a5
+    name: Concombre
+    originalQuantity: 20
+    originalUnit: unité
+    normalizedQuantity: 4000
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: jjrwlj
+    name: Sauce soja
+    originalQuantity: 3.5
+    originalUnit: l.
+    normalizedQuantity: 3500
+    normalizedUnit: ml
+    comment: ''
+    allergens:
+      - Soja
+    type: epices
+  - uuid: nl2s2n
+    name: Chou rouge
+    originalQuantity: 3.5
+    originalUnit: kg
+    normalizedQuantity: 3500
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: eouu0v
+    name: Carotte
+    originalQuantity: 5
+    originalUnit: kg
+    normalizedQuantity: 5000
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: e7953e50480d
+    name: Pain baguette
+    originalQuantity: 50
+    originalUnit: unité
+    normalizedQuantity: 50
+    normalizedUnit: unité
+    comment: ''
+    allergens: []
+    type: sec
 materiel: []
 preparation: |-
   - Réhydrater les protéines de soja dans du bouillon de légumes

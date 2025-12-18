@@ -15,6 +15,10 @@ plate: 130
 quantite_desc: ''
 check: Oui
 ingredients:
+  - ingredient: sel-de-kala-namak_3c4d381268f4
+    quantite: 10
+    unit: gr.
+    commentaire: ''
   - ingredient: huile-de-friture_1ej217
     quantite: 7
     unit: l.
@@ -47,7 +51,7 @@ ingredients:
     quantite: 80
     unit: gr.
     commentaire: ''
-  - ingredient: garam-masala_1akmaa
+  - ingredient: curry_7jceco
     quantite: 250
     unit: gr.
     commentaire: ''

@@ -14,6 +14,10 @@ plate: 100
 quantite_desc: ''
 check: Oui
 ingredients:
+  - ingredient: sucre-de-canne-blond_n85gmi
+    quantite: 200
+    unit: gr.
+    commentaire: ''
   - ingredient: chou-blanc_mlukbi
     quantite: 5
     unit: Kg

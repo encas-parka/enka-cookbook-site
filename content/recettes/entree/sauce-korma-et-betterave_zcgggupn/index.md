@@ -45,7 +45,7 @@ ingredients:
   - ingredient: curry-feuilles_xqmcoe
     quantite: 120
     unit: unité
-    commentaire: ''
+    commentaire: ou feuille d'un agrume
   - ingredient: piment-vert_dr1bbg
     quantite: 6
     unit: unité

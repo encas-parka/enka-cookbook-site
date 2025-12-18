@@ -66,7 +66,7 @@ ingredients:
     quantite: 150
     unit: ml
     commentaire: ''
-  - ingredient: confiture-de-myrtille_ywjjiv
+  - ingredient: confiture-de-groseille_c4d9e03d5721
     quantite: 200
     unit: gr.
     commentaire: ''

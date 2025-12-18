@@ -69,7 +69,7 @@ ingredients:
   - ingredient: lentilles_khdlkd
     quantite: 6
     unit: Kg
-    commentaire: ''
+    commentaire: Toor Dal
 preparation: |-
   ### Préparation
 
@@ -126,8 +126,8 @@ preparation: |-
   \
 preparation24h: ''
 publishDate: 2025-06-02T16:27:00.000Z
-checkfor: null
 checkAlwaysOk: false
+checkfor: null
 regime:
   - vegan
   - sans-gluten

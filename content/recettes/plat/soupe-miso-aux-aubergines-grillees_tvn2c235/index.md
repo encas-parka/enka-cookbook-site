@@ -7,21 +7,13 @@ type: plat
 categories:
   - Soupe
 auteur: Auré
-regime:
-  - vegan
-  - sans-gluten
 region: Japon
 cuisson: Oui
 temperature: Chaud
 plate: 100
 quantite_desc: environ 600ml par personne
 check: Non
-checkAlwaysOk: false
 ingredients:
-  - ingredient: gochujang_rv1rfv
-    quantite: 1
-    unit: Kg
-    commentaire: ''
   - ingredient: shizo-vert_1yqgar
     quantite: 7
     unit: bottes
@@ -80,4 +72,9 @@ preparation: |-
 
   Au service poser une ou deux feuilles de shizo.
 publishDate: 2024-06-04T22:15:00.000Z
+checkAlwaysOk: false
+regime:
+  - vegan
+  - sans-gluten
 ---
+

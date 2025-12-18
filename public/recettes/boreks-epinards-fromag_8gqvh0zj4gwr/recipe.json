@@ -1,22 +1,26 @@
 
 {
-  "uuid": "8gqvh0zj4gwr",
   "slug": "boreks-epinards-fromag_8gqvh0zj4gwr",
   "title": "Boreks Épinards Fromage",
   "draft": false,
   "typeR": "entree",
   "categories": ["Accompagnement","Bouchées salées","Snacking"],
+  "description": "",
+  "region": "",
+  "saison": null,
+  "auteur": "",
   "regime": ["vegetarien"],
   "cuisson": true,
   "serveHot": true,
   "plate": 15,
   "quantite_desc": "15 couverts = 1 gastro",
   "check": true,
-  "checkAlwaysOk": true,
   "materiel": ["Gastro 1/1 (Normaux)","Four"],
   "ingredients": [{"allergens":["Sésame"],"comment":"","name":"Sésame blanc","normalizedQuantity":300,"normalizedUnit":"gr.","originalQuantity":300,"originalUnit":"gr.","type":"epices","uuid":"1uz8x5"},{"allergens":["Produit laitier"],"comment":"","name":"Fromage frais","normalizedQuantity":700,"normalizedUnit":"gr.","originalQuantity":700,"originalUnit":"gr.","type":"frais","uuid":"0d5y4q"},{"allergens":[],"comment":"","name":"Ail","normalizedQuantity":5,"normalizedUnit":"gr.","originalQuantity":5,"originalUnit":"gr.","type":"legumes","uuid":"u2m28w"},{"allergens":[],"comment":"","name":"Oignon","normalizedQuantity":500,"normalizedUnit":"gr.","originalQuantity":500,"originalUnit":"gr.","type":"legumes","uuid":"rtavky"},{"allergens":[],"comment":"","name":"Epinard","normalizedQuantity":1000,"normalizedUnit":"gr.","originalQuantity":1,"originalUnit":"kg","type":"legumes","uuid":"4totf1"},{"allergens":[],"comment":"","name":"huile de tournesol","normalizedQuantity":200,"normalizedUnit":"ml","originalQuantity":200,"originalUnit":"ml","type":"lof","uuid":"c70jxb"},{"allergens":["Produit laitier"],"comment":"","name":"Lait entier","normalizedQuantity":330,"normalizedUnit":"ml","originalQuantity":0.33,"originalUnit":"l.","type":"lof","uuid":"dbbjuu"},{"allergens":["Gluten"],"comment":"","name":"Pate filo (1 feuille)","normalizedQuantity":15,"normalizedUnit":"unité","originalQuantity":15,"originalUnit":"unité","type":"autres","uuid":"x6je0g"}],
   "preparation": "1. Fouetter les oeufs, l'huile et le lait ensemble\n2. Faire revenir les oignons et l'ail, y ajouter les épinards, égoutter avant de mélanger avec le fromage de  façon pas trop lisse ( genre on laisse des bouts)\n3. On étale avec un pinceau du gras au fond des gastro, peut être une feuille de papier sulfurisé aussi, et on étale une ou deux feuilles pour que les 4 bords du plats soient couvert par cette première feuille, on badigeonne de liquide, une autre feuille de filo qui ne dépassent pas sur les côtés cette fois ci mais au contraire on peut les froisser pour les faire entrer dans le cadre, on empile trois strate la dernière pas de liquide mais du mélange épinard fromage\n4. On recommence jusqu'à épuisement des feuilles, pour la dernière on vide le liquide, qu'on fait bien pénétrer et on parsème de sésame;\n\nAu four à 200 jusqu'à ce que tout soit doré, genre 30mn",
+  "preparation24h": null,
+  "astuces": null,
   "prepAlt": [{"recetteAlt":"Boreks épinards vegan"}],
   "permissionWrite": [],
-  "publishDate": "2024-06-12T12:24:00Z"
+  "publishedAt": "2025-01-01T00:00:00Z"
 }

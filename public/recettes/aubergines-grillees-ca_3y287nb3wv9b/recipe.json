@@ -1,22 +1,26 @@
 
 {
-  "uuid": "3y287nb3wv9b",
   "slug": "aubergines-grillees-ca_3y287nb3wv9b",
   "title": "Aubergines Grillées, Cacao, Ail Noir Et Harissa",
   "draft": false,
   "typeR": "plat",
   "categories": ["Accompagnement","Plat chaud"],
+  "description": "",
+  "region": "",
+  "saison": ["ete"],
+  "auteur": "Ottolenghi",
   "regime": ["vegetarien","vegan","sans-gluten","sans-lactose"],
   "cuisson": true,
   "serveHot": true,
   "plate": 100,
   "quantite_desc": "",
   "check": true,
-  "checkAlwaysOk": false,
   "materiel": ["Four","Gastro 1/1 (Normaux)"],
   "ingredients": [{"allergens":[],"comment":"","name":"Harissa","normalizedQuantity":50,"normalizedUnit":"gr.","originalQuantity":50,"originalUnit":"gr.","type":"epices","uuid":"4n95t5"},{"allergens":[],"comment":"","name":"Purée d'ail noir","normalizedQuantity":400,"normalizedUnit":"gr.","originalQuantity":400,"originalUnit":"gr.","type":"epices","uuid":"veh1lf"},{"allergens":[],"comment":"","name":"Aubergine","normalizedQuantity":13000,"normalizedUnit":"gr.","originalQuantity":13,"originalUnit":"kg","type":"legumes","uuid":"7sk3a5"},{"allergens":[],"comment":"","name":"huile d'olive","normalizedQuantity":1200,"normalizedUnit":"ml","originalQuantity":1.2,"originalUnit":"l.","type":"lof","uuid":"h3c8al"},{"allergens":[],"comment":"","name":"Jus de citron","normalizedQuantity":150,"normalizedUnit":"ml","originalQuantity":150,"originalUnit":"ml","type":"sucres","uuid":"e4mjd1"},{"allergens":[],"comment":"","name":"Cacao","normalizedQuantity":40,"normalizedUnit":"gr.","originalQuantity":40,"originalUnit":"gr.","type":"sucres","uuid":"r6792n"},{"allergens":[],"comment":"","name":"Mélasse de grenade","normalizedQuantity":100,"normalizedUnit":"ml","originalQuantity":100,"originalUnit":"ml","type":"epices","uuid":"cl88ye"}],
   "preparation": "1. Couper les aubergines en quartiers de 2 cm d'épaisseur.\n2. Les enduire de 600 ml d'huile (ou la moitié) avec du sel et les passer 10 minutes au four à 200°C\n3. Mélanger le reste des ingrédients (dont le reste de l'huile) et enduire les aubergines avec puis les remettre à cuire 10 à 15 minutes.",
+  "preparation24h": "",
+  "astuces": null,
   "prepAlt": null,
   "permissionWrite": [],
-  "publishDate": "2024-05-28T14:50:00Z"
+  "publishedAt": "2025-01-01T00:00:00Z"
 }

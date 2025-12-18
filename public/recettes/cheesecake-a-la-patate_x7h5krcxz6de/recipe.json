@@ -1,22 +1,26 @@
 
 {
-  "uuid": "x7h5krcxz6de",
   "slug": "cheesecake-a-la-patate_x7h5krcxz6de",
   "title": "Cheesecake a La Patate Douce",
   "draft": false,
   "typeR": "dessert",
   "categories": ["Gateau"],
+  "description": null,
+  "region": null,
+  "saison": null,
+  "auteur": "Auré",
   "regime": ["vegetarien"],
   "cuisson": true,
   "serveHot": false,
   "plate": 100,
   "quantite_desc": "1 gastro = 36 parts (6x6)",
   "check": false,
-  "checkAlwaysOk": true,
   "materiel": null,
   "ingredients": [{"allergens":[],"comment":"","name":"vanille extrait concentré","normalizedQuantity":40,"normalizedUnit":"ml","originalQuantity":40,"originalUnit":"ml","type":"sucres","uuid":"n818be"},{"allergens":[],"comment":"","name":"Cacao","normalizedQuantity":170,"normalizedUnit":"gr.","originalQuantity":170,"originalUnit":"gr.","type":"sucres","uuid":"r6792n"},{"allergens":[],"comment":"","name":"sucre de canne (blond)","normalizedQuantity":670,"normalizedUnit":"gr.","originalQuantity":670,"originalUnit":"gr.","type":"sucres","uuid":"n85gmi"},{"allergens":["Produit laitier"],"comment":"","name":"Philadelphia ou autre marque moins cher","normalizedQuantity":1700,"normalizedUnit":"gr.","originalQuantity":1.7,"originalUnit":"kg","type":"frais","uuid":"2s1qoq"},{"allergens":["Produit laitier"],"comment":"","name":"Ricotta","normalizedQuantity":4200,"normalizedUnit":"gr.","originalQuantity":4.2,"originalUnit":"kg","type":"frais","uuid":"q6t705"},{"allergens":["Produit laitier"],"comment":"","name":"Beurre doux","normalizedQuantity":670,"normalizedUnit":"gr.","originalQuantity":670,"originalUnit":"gr.","type":"frais","uuid":"kmq1zb"},{"allergens":[],"comment":"","name":"Fécule de maïs (Maïzena)","normalizedQuantity":170,"normalizedUnit":"gr.","originalQuantity":170,"originalUnit":"gr.","type":"lof","uuid":"8nbcjp"},{"allergens":["Produit laitier"],"comment":"","name":"Lait concentré sucré","normalizedQuantity":1400,"normalizedUnit":"gr.","originalQuantity":1.4,"originalUnit":"kg","type":"lof","uuid":"5dcfzk"},{"allergens":["Gluten"],"comment":"","name":"Levure chimique","normalizedQuantity":22,"normalizedUnit":"gr.","originalQuantity":22,"originalUnit":"gr.","type":"lof","uuid":"vgec6e"},{"allergens":["Oeuf"],"comment":"","name":"Oeuf","normalizedQuantity":50,"normalizedUnit":"unité","originalQuantity":50,"originalUnit":"unité","type":"lof","uuid":"zf3zf8"},{"allergens":["Gluten"],"comment":"","name":"Farine de blé","normalizedQuantity":1250,"normalizedUnit":"gr.","originalQuantity":1.25,"originalUnit":"kg","type":"lof","uuid":"2av6w8"},{"allergens":[],"comment":"","name":"Sel","normalizedQuantity":16,"normalizedUnit":"gr.","originalQuantity":16,"originalUnit":"gr.","type":"epices","uuid":"2juq3x"},{"allergens":[],"comment":"","name":"Patates douces","normalizedQuantity":2500,"normalizedUnit":"gr.","originalQuantity":2.5,"originalUnit":"kg","type":"legumes","uuid":"ndu75n"}],
   "preparation": "Peler et couper en dès les patates douces. Les faire cuire à la vapeur.\n\nFaire la pâte de base en mélangeant le beurre, la farine, un tiers des œufs, le cacao en poudre, la levure chimique et le sel. Séparer la pâte en fonction du nombre de plats nécessaires. Former des boules aplaties emballées dans du cellophane et placer au frais 30 minutes.\n\nPréchauffer le four à 170°. Tapisser les plats de papier cuisson. Presser la pâte refroidie dans les moules pour obtenir un fond régulier.\n\nCasser le reste des œufs et séparer le blanc des jaunes. Battre les blancs en neige en plusieurs fois s'il y en a beaucoup. Réserver.\n\nBattre les jaunes, la ricotta, le fromage frais, 2/3 du lait concentré, la moitié de la maïzena et l'extrait de vanille.\n\nAjouter les blancs en neige, les incorporer uniformément à la maryse et répartir le mélange sur le fond de pâte.\n\nMixer les patates douces cuites avec le restant de lait concentré et de maïzena.\n\nA l'aide d'une cuillère à soupe, déposer de petits morceaux du mélange de patates sur le mélange de fromage en respectant une distance d'environ 4 cm. Passer une fourchette en spirale dans les deux mélanges de manière à obtenir un léger marbrage.\n\nCuise les cheesecake pendant 35-40 minutes (170°). Laisser refroidir avant de servir.",
+  "preparation24h": null,
+  "astuces": null,
   "prepAlt": null,
   "permissionWrite": [],
-  "publishDate": "2025-05-30T16:53:00Z"
+  "publishedAt": "2025-01-01T00:00:00Z"
 }

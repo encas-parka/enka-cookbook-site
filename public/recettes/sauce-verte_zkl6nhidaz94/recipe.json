@@ -1,22 +1,26 @@
 
 {
-  "uuid": "zkl6nhidaz94",
   "slug": "sauce-verte_zkl6nhidaz94",
   "title": "Sauce Verte",
   "draft": false,
   "typeR": "entree",
   "categories": ["Sauce"],
+  "description": "",
+  "region": null,
+  "saison": null,
+  "auteur": null,
   "regime": ["vegan"],
   "cuisson": false,
   "serveHot": false,
   "plate": 20,
   "quantite_desc": "100ml/pers",
   "check": true,
-  "checkAlwaysOk": false,
   "materiel": null,
   "ingredients": [{"allergens":[],"comment":"","name":"Graine de tournesol","normalizedQuantity":1,"normalizedUnit":"gr.","originalQuantity":1,"originalUnit":"gr.","type":"sec","uuid":"4vxqlr"},{"allergens":["Soja"],"comment":"","name":"Crème soja","normalizedQuantity":500,"normalizedUnit":"ml","originalQuantity":0.5,"originalUnit":"l.","type":"lof","uuid":"chfwwq"},{"allergens":["Soja"],"comment":"","name":"Yaourt de soja","normalizedQuantity":400,"normalizedUnit":"gr.","originalQuantity":400,"originalUnit":"gr.","type":"frais","uuid":"hlbwfd"},{"allergens":[],"comment":"ou fanes de carottes","name":"Persil frais","normalizedQuantity":4,"normalizedUnit":"bottes","originalQuantity":4,"originalUnit":"bottes","type":"epices","uuid":"hgfa4e"},{"allergens":[],"comment":"","name":"Jus de citron","normalizedQuantity":250,"normalizedUnit":"ml","originalQuantity":0.25,"originalUnit":"l.","type":"sucres","uuid":"e4mjd1"},{"allergens":[],"comment":"","name":"Poivre","normalizedQuantity":1,"normalizedUnit":"au goût","originalQuantity":1,"originalUnit":"au goût","type":"epices","uuid":"2pps90"},{"allergens":[],"comment":"","name":"Sel","normalizedQuantity":1,"normalizedUnit":"au goût","originalQuantity":1,"originalUnit":"au goût","type":"epices","uuid":"2juq3x"}],
   "preparation": "Dans un mixeur, hacher le persil avec les graines gonflées, ajouter la crème, le yaourt, le citron.\n\nVerser l'huile d'olive en ajustant la consistance.\n\nSaler et poivrer.",
+  "preparation24h": "Faire tremper les graines de tournesol dans de l'eau 8 à 12h avant.",
+  "astuces": null,
   "prepAlt": null,
   "permissionWrite": [],
-  "publishDate": "2025-08-08T08:26:00Z"
+  "publishedAt": "2025-01-01T00:00:00Z"
 }

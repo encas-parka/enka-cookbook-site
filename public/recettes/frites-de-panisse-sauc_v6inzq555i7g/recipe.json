@@ -1,22 +1,26 @@
 
 {
-  "uuid": "v6inzq555i7g",
   "slug": "frites-de-panisse-sauc_v6inzq555i7g",
   "title": "Frites De Panisse Sauce Tartare Et Salade Verte",
   "draft": false,
   "typeR": "entree",
   "categories": ["Bouchées salées"],
+  "description": null,
+  "region": null,
+  "saison": null,
+  "auteur": null,
   "regime": ["vegan","sans-gluten"],
   "cuisson": true,
   "serveHot": true,
   "plate": 100,
   "quantite_desc": null,
   "check": true,
-  "checkAlwaysOk": false,
   "materiel": null,
   "ingredients": [{"allergens":[],"comment":"","name":"Salade verte (chêne)","normalizedQuantity":12,"normalizedUnit":"unité","originalQuantity":12,"originalUnit":"unité","type":"legumes","uuid":"cg3wgm"},{"allergens":[],"comment":"","name":"Cornichon","normalizedQuantity":1500,"normalizedUnit":"gr.","originalQuantity":1.5,"originalUnit":"kg","type":"legumes","uuid":"77kyi3"},{"allergens":[],"comment":"","name":"Ail","normalizedQuantity":160,"normalizedUnit":"gr.","originalQuantity":2,"originalUnit":"tête·s","type":"legumes","uuid":"u2m28w"},{"allergens":["Soja"],"comment":"","name":"Lait de soja","normalizedQuantity":1000,"normalizedUnit":"ml","originalQuantity":1,"originalUnit":"l.","type":"lof","uuid":"gpeob7"},{"allergens":[],"comment":"","name":"Huile végétale","normalizedQuantity":1000,"normalizedUnit":"ml","originalQuantity":1,"originalUnit":"l.","type":"lof","uuid":"atccqu"},{"allergens":[],"comment":"","name":"huile de friture","normalizedQuantity":6000,"normalizedUnit":"ml","originalQuantity":6,"originalUnit":"l.","type":"lof","uuid":"1ej217"},{"allergens":[],"comment":"","name":"Farine de pois chiche","normalizedQuantity":7500,"normalizedUnit":"gr.","originalQuantity":7.5,"originalUnit":"kg","type":"lof","uuid":"o627mw"},{"allergens":[],"comment":"","name":"Eau","normalizedQuantity":25000,"normalizedUnit":"ml","originalQuantity":25,"originalUnit":"l.","type":"autres","uuid":"ljzb7j"},{"allergens":[],"comment":"","name":"Câpres","normalizedQuantity":800,"normalizedUnit":"gr.","originalQuantity":800,"originalUnit":"gr.","type":"epices","uuid":"c88lz8"},{"allergens":[],"comment":"","name":"Estragon","normalizedQuantity":5,"normalizedUnit":"bottes","originalQuantity":5,"originalUnit":"bottes","type":"epices","uuid":"kt0wyw"},{"allergens":[],"comment":"","name":"Persil frais","normalizedQuantity":7,"normalizedUnit":"bottes","originalQuantity":7,"originalUnit":"bottes","type":"epices","uuid":"hgfa4e"},{"allergens":[],"comment":"","name":"Jus de citron","normalizedQuantity":250,"normalizedUnit":"ml","originalQuantity":250,"originalUnit":"ml","type":"sucres","uuid":"e4mjd1"},{"allergens":["Moutarde"],"comment":"","name":"Moutarde","normalizedQuantity":250,"normalizedUnit":"gr.","originalQuantity":250,"originalUnit":"gr.","type":"epices","uuid":"5c1b20"}],
   "preparation": "\n1/ Préparation de panisse :\n\nDans une casserole, mettre l'eau salée, et les têtes d’ail.\nPorter à ébullition, puis sortir la casserole du feu et ajouter\nprogressivement la farine de pois chiches tout en fouettant. Laisser\ncuire à feu doux pendant 5 minutes.\n\n\nMouler la préparation dans des gastros, filmer et réserver au\nréfrigérateur pendant 1 heure minimum.\n\n\nDécouper  en frites et les faire frire à la friteuse 1 à 2\n\n2/ Préparation de la sauce (100p.):\n\nLA VEGANAISE\n\n\n1 litre lait de soja\n\n\n2 litres huile de tournesol\n\n\n30cl jus de citron préssé\n\n\n100gr de moutarde\n\nDans le bol d’un mixeur plongeur ou un récipient étroit de\npréférence, verser la crème de soja, le jus de citron, le vinaigre\nde cidre, la moutarde, du poivre et du sel. Mixer ces premiers\ningrédients ensemble.\n\nTenez l'huile à côté, ouverte et prête à être versée.\n\nTout en mixant, verser l'huile dans le récipient. Le mélange va\nmonter et épaissir.\n\nRAJOUTER POUR LA SAUCE TARTARE (100p.):\n\n\n250 gr câpres\n\n\n400gr cornichon au vinaigre\n\n\n4 bouquets de persil plat\n\n\n5 bouquets d’estragon\n\n\nsel poivre",
+  "preparation24h": null,
+  "astuces": null,
   "prepAlt": null,
   "permissionWrite": [],
-  "publishDate": "2025-06-12T10:49:00Z"
+  "publishedAt": "2025-01-01T00:00:00Z"
 }

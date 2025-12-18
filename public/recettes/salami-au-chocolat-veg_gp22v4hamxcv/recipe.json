@@ -1,22 +1,26 @@
 
 {
-  "uuid": "gp22v4hamxcv",
   "slug": "salami-au-chocolat-veg_gp22v4hamxcv",
   "title": "Salami Au Chocolat - Vegan Sans Gluten",
   "draft": false,
   "typeR": "dessert",
   "categories": ["Sucrée"],
+  "description": null,
+  "region": "Portugal",
+  "saison": ["printemps"],
+  "auteur": null,
   "regime": ["vegan","sans-gluten"],
   "cuisson": false,
   "serveHot": false,
   "plate": 15,
   "quantite_desc": null,
   "check": false,
-  "checkAlwaysOk": false,
   "materiel": null,
   "ingredients": [{"allergens":[],"comment":"","name":"Margarine végétale spécial cuisson","normalizedQuantity":150,"normalizedUnit":"gr.","originalQuantity":150,"originalUnit":"gr.","type":"frais","uuid":"8j3hna"},{"allergens":[],"comment":"","name":"Biscuit vegan et sans gluten","normalizedQuantity":195,"normalizedUnit":"gr.","originalQuantity":195,"originalUnit":"gr.","type":"sucres","uuid":"ade8hh"},{"allergens":[],"comment":"","name":"Cacao","normalizedQuantity":30,"normalizedUnit":"gr.","originalQuantity":30,"originalUnit":"gr.","type":"sucres","uuid":"r6792n"},{"allergens":[],"comment":"","name":"Chocolat noir","normalizedQuantity":300,"normalizedUnit":"gr.","originalQuantity":300,"originalUnit":"gr.","type":"sucres","uuid":"cr4kiz"},{"allergens":[],"comment":"","name":"Sucre en poudre","normalizedQuantity":225,"normalizedUnit":"gr.","originalQuantity":225,"originalUnit":"gr.","type":"sucres","uuid":"u9z2he"}],
   "preparation": "Faire fondre le chocolat au bain marie.\n\nMélanger la margarine, le sucre et le cacao. Ajouter le chocolat fondu et bien mélanger.\n\nCasser les biscuits en petits morceaux\n\nAjouter les biscuits au mélange. Laisser refroidir un petit moment.\n\nDisposer une partie de la pâte sur du papier cuisson et le rouler pour en faire un boudin d'environ 5cm de diamètre. Bien tasser pour que le salami soit homogène.\n\nUn salami fait entre 10 et 12 parts.\n\nMettre au frigo pour que le salami se durcisse bien.\n\nSortir du frigo 30 min avant de le couper et servir.",
+  "preparation24h": null,
+  "astuces": null,
   "prepAlt": null,
   "permissionWrite": [],
-  "publishDate": "2024-06-18T00:07:00Z"
+  "publishedAt": "2025-01-01T00:00:00Z"
 }

@@ -1,22 +1,26 @@
 
 {
-  "uuid": "euzk0cqi0woy",
   "slug": "perles-du-japon-vanill_euzk0cqi0woy",
   "title": "Perles Du Japon Vanille-Citron-Gingembre-Cranberries",
   "draft": false,
   "typeR": "dessert",
   "categories": ["Sucrée"],
+  "description": null,
+  "region": null,
+  "saison": null,
+  "auteur": "frédo",
   "regime": ["vegetarien"],
   "cuisson": true,
   "serveHot": false,
   "plate": 100,
   "quantite_desc": null,
   "check": false,
-  "checkAlwaysOk": false,
   "materiel": null,
   "ingredients": [{"allergens":[],"comment":"pour moi il s'agit des perles du japon","name":"Tapioca perlée","normalizedQuantity":1000,"normalizedUnit":"gr.","originalQuantity":1,"originalUnit":"kg","type":"sec","uuid":"mkttuh"},{"allergens":[],"comment":"","name":"Citron jaune","normalizedQuantity":1000,"normalizedUnit":"gr.","originalQuantity":10,"originalUnit":"unité","type":"legumes","uuid":"5cg0yu"},{"allergens":[],"comment":"","name":"Banane","normalizedQuantity":25,"normalizedUnit":"unité","originalQuantity":25,"originalUnit":"unité","type":"legumes","uuid":"9vpwp5"},{"allergens":[],"comment":"","name":"Lait de riz","normalizedQuantity":9000,"normalizedUnit":"ml","originalQuantity":9,"originalUnit":"l.","type":"lof","uuid":"hzwesd"},{"allergens":[],"comment":"","name":"Cranberries séchées","normalizedQuantity":1000,"normalizedUnit":"gr.","originalQuantity":1,"originalUnit":"kg","type":"sucres","uuid":"rn44lx"},{"allergens":[],"comment":"","name":"sucre blanc","normalizedQuantity":1000,"normalizedUnit":"gr.","originalQuantity":1,"originalUnit":"kg","type":"sucres","uuid":"lny16c"},{"allergens":[],"comment":"","name":"Gingembre confit","normalizedQuantity":800,"normalizedUnit":"gr.","originalQuantity":800,"originalUnit":"gr.","type":"sucres","uuid":"oskdzx"},{"allergens":[],"comment":"","name":"Jus de citron","normalizedQuantity":500,"normalizedUnit":"ml","originalQuantity":500,"originalUnit":"ml","type":"sucres","uuid":"e4mjd1"},{"allergens":[],"comment":"","name":"vanille extrait concentré","normalizedQuantity":50,"normalizedUnit":"ml","originalQuantity":10,"originalUnit":"c. à café","type":"sucres","uuid":"n818be"}],
   "preparation": "Eplucher les bananes, les couper en 2 dans le sens de la longueur puis en 2 pour obtenir 4 morceaux/personne. Les arroser de jus de citron pour qu'elles ne noircissent pas. Réserver.\n\nHacher les cranberries et le gingembre confit. Réserver.\n\nZester les citrons. Réserver puis les presser pour en extraire le jus. Réserver.\n\nCuire les perles du japon dans le lait de riz auquel on a ajouté la vanille liquide selon les indications inscrites sur le paquet (ça change selon les marques pour le temps de cuisson). En fin de cuisson ajouter le sucre et le jus des citrons.\n\nDans les verrines ou autres contenants, répartir au fond la banane, ajouter les perles du japon puis le mélange haché gingembre/cranberries. Stocker au froid",
+  "preparation24h": "On peut faire cette préparation la veille",
+  "astuces": null,
   "prepAlt": null,
   "permissionWrite": [],
-  "publishDate": "2025-06-04T18:43:00Z"
+  "publishedAt": "2025-01-01T00:00:00Z"
 }

@@ -1,22 +1,26 @@
 
 {
-  "uuid": "7c1hbo8nci50",
   "slug": "houmous-de-betterave-a_7c1hbo8nci50",
   "title": "Houmous De Betterave Aux Cranberries Et Balsamique",
   "draft": false,
   "typeR": "entree",
   "categories": ["Accompagnement"],
+  "description": "Une cuillère à soupe par personne!",
+  "region": "",
+  "saison": null,
+  "auteur": "",
   "regime": ["vegetarien","vegan","sans-gluten","sans-lactose"],
   "cuisson": false,
   "serveHot": false,
   "plate": 100,
   "quantite_desc": null,
   "check": true,
-  "checkAlwaysOk": false,
   "materiel": null,
   "ingredients": [{"allergens":["Sésame"],"comment":"","name":"Tahin","normalizedQuantity":160,"normalizedUnit":"gr.","originalQuantity":160,"originalUnit":"gr.","type":"autres","uuid":"u33083"},{"allergens":["Sulfites"],"comment":"","name":"Vinaigre balsamique","normalizedQuantity":90,"normalizedUnit":"ml","originalQuantity":90,"originalUnit":"ml","type":"epices","uuid":"qemlqs"},{"allergens":[],"comment":"","name":"Canneberge","normalizedQuantity":100,"normalizedUnit":"gr.","originalQuantity":100,"originalUnit":"gr.","type":"legumes","uuid":"uja9ip"},{"allergens":[],"comment":"","name":"Ail","normalizedQuantity":26,"normalizedUnit":"gr.","originalQuantity":4,"originalUnit":"unité","type":"legumes","uuid":"u2m28w"},{"allergens":[],"comment":"","name":"Betterave cuite","normalizedQuantity":400,"normalizedUnit":"gr.","originalQuantity":400,"originalUnit":"gr.","type":"legumes","uuid":"i7psri"},{"allergens":[],"comment":"","name":"huile d'olive","normalizedQuantity":120,"normalizedUnit":"ml","originalQuantity":120,"originalUnit":"ml","type":"lof","uuid":"h3c8al"},{"allergens":[],"comment":"","name":"Pois chiche cuit","normalizedQuantity":1100,"normalizedUnit":"gr.","originalQuantity":1.1,"originalUnit":"kg","type":"sec","uuid":"wwl5vn"}],
   "preparation": "Mettre tous les ingrédients dans un blender et mixer jusqu'à l'obtention d'une texture lisse. Saler. Ajouter un peu d'eau si nécessaire.",
+  "preparation24h": null,
+  "astuces": null,
   "prepAlt": null,
   "permissionWrite": [],
-  "publishDate": "2024-05-30T10:42:00Z"
+  "publishedAt": "2025-01-01T00:00:00Z"
 }

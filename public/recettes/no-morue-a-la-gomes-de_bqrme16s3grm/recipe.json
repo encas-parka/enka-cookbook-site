@@ -1,22 +1,26 @@
 
 {
-  "uuid": "bqrme16s3grm",
   "slug": "no-morue-a-la-gomes-de_bqrme16s3grm",
   "title": "No-Morue À La Gomes De Sa (Bacalhau À Gomes De Sa) - Vegan ",
   "draft": false,
   "typeR": "plat",
   "categories": ["Plat chaud"],
+  "description": "ce n'est plus un plat de morue mais une tentative de substitution",
+  "region": "Portugal",
+  "saison": null,
+  "auteur": null,
   "regime": ["vegan","sans-gluten"],
   "cuisson": true,
   "serveHot": true,
   "plate": 10,
   "quantite_desc": null,
   "check": false,
-  "checkAlwaysOk": false,
   "materiel": null,
   "ingredients": [{"allergens":[],"comment":"","name":"Sel","normalizedQuantity":1,"normalizedUnit":"au goût","originalQuantity":1,"originalUnit":"au goût","type":"epices","uuid":"2juq3x"},{"allergens":[],"comment":"","name":"fenugrec moulu","normalizedQuantity":1,"normalizedUnit":"au goût","originalQuantity":1,"originalUnit":"au goût","type":"epices","uuid":"d5zbfl"},{"allergens":[],"comment":"","name":"Persil frais","normalizedQuantity":0.8,"normalizedUnit":"bottes","originalQuantity":0.8,"originalUnit":"bottes","type":"epices","uuid":"hgfa4e"},{"allergens":[],"comment":"","name":"Poivre noir moulu","normalizedQuantity":1,"normalizedUnit":"gr.","originalQuantity":1,"originalUnit":"gr.","type":"epices","uuid":"rgt7s4"},{"allergens":[],"comment":"","name":"Tofu ferme","normalizedQuantity":1000,"normalizedUnit":"gr.","originalQuantity":1,"originalUnit":"kg","type":"frais","uuid":"3ahcls"},{"allergens":[],"comment":"","name":"Pomme de terre","normalizedQuantity":2500,"normalizedUnit":"gr.","originalQuantity":2.5,"originalUnit":"kg","type":"legumes","uuid":"18dy4e"},{"allergens":[],"comment":"","name":"Oignon","normalizedQuantity":3000,"normalizedUnit":"gr.","originalQuantity":3,"originalUnit":"kg","type":"legumes","uuid":"rtavky"},{"allergens":[],"comment":"","name":"Ail","normalizedQuantity":48,"normalizedUnit":"gr.","originalQuantity":0.6,"originalUnit":"tête·s","type":"legumes","uuid":"u2m28w"},{"allergens":[],"comment":"","name":"Olives noires à la grecque","normalizedQuantity":160,"normalizedUnit":"gr.","originalQuantity":0.16,"originalUnit":"kg","type":"legumes","uuid":"9p3n36"},{"allergens":[],"comment":"","name":"huile de tournesol","normalizedQuantity":30,"normalizedUnit":"ml","originalQuantity":30,"originalUnit":"ml","type":"lof","uuid":"c70jxb"},{"allergens":[],"comment":"","name":"huile d'olive","normalizedQuantity":20,"normalizedUnit":"ml","originalQuantity":20,"originalUnit":"ml","type":"lof","uuid":"h3c8al"}],
   "preparation": "3h AVANT - Faire mariner le tofu dans l'huile d'olive, le sel et le fenouil\n\nEplucher, laver et découper les patates en rondelles épaisses (1,5 d'épaisseur environ). Les rincer, plonger dans **un grand volume d'eau froide** et lancer le feu. Egouter quand il y a une cuisson ferme, pour que les rondelles restent entières (rincer à l'eau froide pour être tranquille).\n\nHâcher le persil, réserver.\n\nDans un faitout/rodeau faire revenir les oignons coupés en dés et l'ail hâché. Ajouter le poivre. Ajouter le tofu mariné et laisser le tout sur un feu doux pendant 15-20 minutes.\n\nDisposer les bacs gastros nécessaires. Ajouter une couche de patates au fond, puis le tofu avec les oignons et l'ail (répartir un peu partout). Mettre un filet d'huile d'olive dessus. Mettre au four pour griller tout ça, puis maintenir au chaud.\n\nAu moment du service (à la sortie du four) asperser abondamment de persil et d'olives sur le plat.\n\nAcompagner de salade verte.",
+  "preparation24h": null,
+  "astuces": null,
   "prepAlt": [{"recetteAlt":"morue-a-la-gomes-de-sa-bacalhau-a-gomes-de-sa_4txgw862"}],
   "permissionWrite": [],
-  "publishDate": "2024-06-19T01:00:00Z"
+  "publishedAt": "2025-01-01T00:00:00Z"
 }

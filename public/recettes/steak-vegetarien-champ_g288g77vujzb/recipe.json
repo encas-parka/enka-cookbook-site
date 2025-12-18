@@ -1,22 +1,26 @@
 
 {
-  "uuid": "g288g77vujzb",
   "slug": "steak-vegetarien-champ_g288g77vujzb",
   "title": "Steak Végétarien Champignons - Noix - Flocons D'avoine",
   "draft": false,
   "typeR": "plat",
   "categories": ["Snacking"],
+  "description": null,
+  "region": null,
+  "saison": null,
+  "auteur": "Marion",
   "regime": ["vegetarien","vegan","sans-lactose"],
   "cuisson": true,
   "serveHot": true,
   "plate": 130,
   "quantite_desc": null,
   "check": true,
-  "checkAlwaysOk": true,
   "materiel": ["Gastro 1/1 (Fins)","Four"],
   "ingredients": [{"allergens":[],"comment":"","name":"Eau","normalizedQuantity":6500,"normalizedUnit":"ml","originalQuantity":6.5,"originalUnit":"l.","type":"autres","uuid":"ljzb7j"},{"allergens":[],"comment":"","name":"Poivre","normalizedQuantity":1,"normalizedUnit":"au goût","originalQuantity":1,"originalUnit":"au goût","type":"epices","uuid":"2pps90"},{"allergens":[],"comment":"","name":"Cumin","normalizedQuantity":10,"normalizedUnit":"gr.","originalQuantity":10,"originalUnit":"gr.","type":"epices","uuid":"dc8855"},{"allergens":[],"comment":"","name":"Paprika fumé","normalizedQuantity":70,"normalizedUnit":"gr.","originalQuantity":70,"originalUnit":"gr.","type":"epices","uuid":"ique18"},{"allergens":[],"comment":"","name":"Gros sel","normalizedQuantity":25,"normalizedUnit":"ml","originalQuantity":5,"originalUnit":"c. à café","type":"epices","uuid":"5dwrvm"},{"allergens":["Soja"],"comment":"","name":"Sauce soja","normalizedQuantity":1300,"normalizedUnit":"ml","originalQuantity":1.3,"originalUnit":"l.","type":"epices","uuid":"jjrwlj"},{"allergens":[],"comment":"","name":"Ail","normalizedQuantity":169,"normalizedUnit":"gr.","originalQuantity":26,"originalUnit":"unité","type":"legumes","uuid":"u2m28w"},{"allergens":[],"comment":"","name":"Champignons","normalizedQuantity":2000,"normalizedUnit":"gr.","originalQuantity":2,"originalUnit":"kg","type":"legumes","uuid":"v9qhs9"},{"allergens":[],"comment":"","name":"Oignon","normalizedQuantity":4000,"normalizedUnit":"gr.","originalQuantity":4,"originalUnit":"kg","type":"legumes","uuid":"rtavky"},{"allergens":[],"comment":"","name":"huile de tournesol","normalizedQuantity":500,"normalizedUnit":"ml","originalQuantity":500,"originalUnit":"ml","type":"lof","uuid":"c70jxb"},{"allergens":["Fruit à coque"],"comment":"","name":"Noix","normalizedQuantity":500,"normalizedUnit":"gr.","originalQuantity":500,"originalUnit":"gr.","type":"sec","uuid":"usibcf"},{"allergens":["Gluten"],"comment":"","name":"Flocons d'avoine","normalizedQuantity":4300,"normalizedUnit":"gr.","originalQuantity":4.3,"originalUnit":"kg","type":"sec","uuid":"ovewgk"}],
   "preparation": "* Hâcher finement oignons, champignons et ail (ail optionnel mais meilleur), et noix\n* Faire chauffer un fond d'huile dans une grosse marmite. Ajouter oignons et épices.\n* Faire revenir les oignons 5-10 minutes (jusqu'à ce qu'ils dorent un peu)\n* Ajouter les champignons et l'ail, faire revenir 5 minutes\n* Ajouter sauce soja, eau et sel\n* Faire mijoter 10 minutes\n* Ajouter flocons d'avoine et noix\n* Couper le feu et bien mélanger\n* Laisser reposer au moins 20 minutes\n* Façonner (je ne me souviens plus le poids d'un steak individuel mais peser le tout et calculer, c'est assez généreux). Mettre de l'huile sur les deux faces du steak (au pinceau c'est le mieux)\n* Faire cuire à 180°C environ 30 minutes, jusqu'à ce qu'ils brunissent un peu. Retourner en milieu de cuisson.",
+  "preparation24h": null,
+  "astuces": [{"astuce":"Les noix peuvent être remplacées par des amandes ou autres fruits à coques. Les épices peuvent être changées."}],
   "prepAlt": [{"recetteAlt":"steak-vege-champignons-aubergines-noix-avoine-haricots-rouges-version-amelioree_6068ae73-1984-4084-890f-17076c0afe8c"}],
   "permissionWrite": [],
-  "publishDate": "2024-03-08T10:19:47.99Z"
+  "publishedAt": "2025-01-01T00:00:00Z"
 }

@@ -1,22 +1,26 @@
 
 {
-  "uuid": "28nzksb97gke",
   "slug": "pain-pita_28nzksb97gke",
   "title": "Pain Pita",
   "draft": false,
   "typeR": "plat",
   "categories": ["Autre"],
+  "description": null,
+  "region": null,
+  "saison": null,
+  "auteur": null,
   "regime": ["vegan"],
   "cuisson": true,
   "serveHot": true,
   "plate": 100,
   "quantite_desc": "1 par personne",
   "check": true,
-  "checkAlwaysOk": false,
   "materiel": null,
   "ingredients": [{"allergens":["Gluten"],"comment":"","name":"Farine de blé","normalizedQuantity":15000,"normalizedUnit":"gr.","originalQuantity":15,"originalUnit":"kg","type":"lof","uuid":"2av6w8"},{"allergens":[],"comment":"","name":"Levure fraîche de boulanger","normalizedQuantity":15,"normalizedUnit":"unité","originalQuantity":15,"originalUnit":"unité","type":"frais","uuid":"7qqcwc"}],
   "preparation": "c'est arnaud qui le fait",
+  "preparation24h": null,
+  "astuces": null,
   "prepAlt": null,
   "permissionWrite": [],
-  "publishDate": "2025-06-17T18:46:00Z"
+  "publishedAt": "2025-01-01T00:00:00Z"
 }

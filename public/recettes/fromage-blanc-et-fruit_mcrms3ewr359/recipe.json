@@ -1,22 +1,26 @@
 
 {
-  "uuid": "mcrms3ewr359",
   "slug": "fromage-blanc-et-fruit_mcrms3ewr359",
   "title": "Fromage Blanc Et Fruits Rouges Et Son Alernative Vegan",
   "draft": false,
   "typeR": "dessert",
   "categories": ["Sucrée"],
+  "description": "",
+  "region": "",
+  "saison": null,
+  "auteur": "Résistances 2025",
   "regime": null,
   "cuisson": false,
   "serveHot": false,
   "plate": 100,
   "quantite_desc": null,
   "check": true,
-  "checkAlwaysOk": false,
   "materiel": null,
   "ingredients": [{"allergens":["Soja"],"comment":"","name":"Yaourt de soja","normalizedQuantity":1200,"normalizedUnit":"gr.","originalQuantity":1.2,"originalUnit":"kg","type":"frais","uuid":"hlbwfd"},{"allergens":["Produit laitier"],"comment":"","name":"Fromage blanc","normalizedQuantity":11000,"normalizedUnit":"gr.","originalQuantity":11,"originalUnit":"kg","type":"frais","uuid":"b2dxf8"},{"allergens":[],"comment":"","name":"sucre de canne (blond)","normalizedQuantity":1000,"normalizedUnit":"gr.","originalQuantity":1,"originalUnit":"kg","type":"sucres","uuid":"n85gmi"},{"allergens":[],"comment":"","name":"Fruits rouges","normalizedQuantity":3000,"normalizedUnit":"gr.","originalQuantity":3,"originalUnit":"kg","type":"legumes","uuid":"rqmasf"}],
   "preparation": "Ne pas oublié la version végane !!",
+  "preparation24h": null,
+  "astuces": null,
   "prepAlt": null,
   "permissionWrite": [],
-  "publishDate": "2025-05-30T21:37:00Z"
+  "publishedAt": "2025-01-01T00:00:00Z"
 }

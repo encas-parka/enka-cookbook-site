@@ -1,22 +1,26 @@
 
 {
-  "uuid": "oocvunk2yxiq",
   "slug": "tarte-au-chocolat-sans_oocvunk2yxiq",
   "title": "Tarte Au Chocolat Sans Cuisson Végan Et Sans Gluten",
   "draft": false,
   "typeR": "dessert",
   "categories": ["Tarte (sucrée)"],
+  "description": null,
+  "region": "",
+  "saison": null,
+  "auteur": "Ça vaulx le détour",
   "regime": ["vegetarien","vegan","sans-gluten","sans-lactose"],
   "cuisson": false,
   "serveHot": false,
   "plate": 12,
   "quantite_desc": null,
   "check": true,
-  "checkAlwaysOk": false,
   "materiel": ["Gastro 1/1 (Normaux)"],
   "ingredients": [{"allergens":["Soja"],"comment":"","name":"Crème soja","normalizedQuantity":250,"normalizedUnit":"ml","originalQuantity":250,"originalUnit":"ml","type":"lof","uuid":"chfwwq"},{"allergens":[],"comment":"","name":"huile de tournesol","normalizedQuantity":50,"normalizedUnit":"ml","originalQuantity":50,"originalUnit":"ml","type":"lof","uuid":"c70jxb"},{"allergens":[],"comment":"","name":"huile de coco","normalizedQuantity":75,"normalizedUnit":"ml","originalQuantity":75,"originalUnit":"ml","type":"lof","uuid":"6bm4lq"},{"allergens":[],"comment":"","name":"Glucose","normalizedQuantity":20,"normalizedUnit":"gr.","originalQuantity":20,"originalUnit":"gr.","type":"sucres","uuid":"lm7zqh"},{"allergens":[],"comment":"","name":"Chocolat noir patissier 70p100","normalizedQuantity":250,"normalizedUnit":"gr.","originalQuantity":250,"originalUnit":"gr.","type":"sucres","uuid":"1e3zhq"},{"allergens":[],"comment":"","name":"Cornflakes (sans gluten)","normalizedQuantity":150,"normalizedUnit":"gr.","originalQuantity":150,"originalUnit":"gr.","type":"sucres","uuid":"hyp3th"},{"allergens":[],"comment":"","name":"Biscuit vegan et sans gluten","normalizedQuantity":200,"normalizedUnit":"gr.","originalQuantity":200,"originalUnit":"gr.","type":"sucres","uuid":"ade8hh"}],
   "preparation": "* Biscuit : Réduire les biscuits et les corn flakes en poudre. Puis, ajouter l’huile coco fondue. Bien tasser le mélange au fond du moule et réserver au frais au moins une heure.\n\n\n* Appareil : Faire chauffer huile de tournesol, crème soja et glucose. Verser sur chocolat concassé.\n\n\n\n* Laisser refroidir, placer au frigo. Pour démouler, poser le plat cinq seconde dans un bain marie.",
+  "preparation24h": null,
+  "astuces": null,
   "prepAlt": null,
   "permissionWrite": [],
-  "publishDate": "2024-06-18T11:58:00Z"
+  "publishedAt": "2025-01-01T00:00:00Z"
 }

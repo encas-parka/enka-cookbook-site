@@ -1,22 +1,26 @@
 
 {
-  "uuid": "ly3x5wxnq3ve",
   "slug": "escalope-de-seitan_ly3x5wxnq3ve",
   "title": "Escalope De Seitan",
   "draft": false,
   "typeR": "plat",
   "categories": ["Plat chaud"],
+  "description": null,
+  "region": null,
+  "saison": null,
+  "auteur": null,
   "regime": ["vegan"],
   "cuisson": true,
   "serveHot": true,
   "plate": 100,
   "quantite_desc": "une par personne",
   "check": true,
-  "checkAlwaysOk": false,
   "materiel": null,
   "ingredients": [{"allergens":[],"comment":"","name":"Huile végétale","normalizedQuantity":1000,"normalizedUnit":"ml","originalQuantity":1,"originalUnit":"l.","type":"lof","uuid":"atccqu"},{"allergens":[],"comment":"","name":"Farine de riz","normalizedQuantity":800,"normalizedUnit":"gr.","originalQuantity":800,"originalUnit":"gr.","type":"lof","uuid":"oygozr"},{"allergens":["Gluten"],"comment":"","name":"Gluten pur","normalizedQuantity":2150,"normalizedUnit":"gr.","originalQuantity":2.15,"originalUnit":"kg","type":"lof","uuid":"946ddw"},{"allergens":[],"comment":"","name":"bouillon cube","normalizedQuantity":6,"normalizedUnit":"unité","originalQuantity":6,"originalUnit":"unité","type":"epices","uuid":"57xo8g"},{"allergens":["Soja"],"comment":"","name":"Sauce soja","normalizedQuantity":750,"normalizedUnit":"ml","originalQuantity":750,"originalUnit":"ml","type":"epices","uuid":"jjrwlj"},{"allergens":["Fruit à coque"],"comment":"","name":"Poudre d'amandes","normalizedQuantity":600,"normalizedUnit":"gr.","originalQuantity":600,"originalUnit":"gr.","type":"sucres","uuid":"rmgr7l"}],
   "preparation": "\nFaire bouillir 3L30 D'eau avec les bouillons cubes.\n\n\nDans une autre casserole Faire bouillir une très grande quantité\nd'eau, elle servira à faire cuire les escalopes.\n\n\nMélanger le gluten de blé, la poudre d'amande, la farine de riz du\nsel, du poivre et d'autres épices selon l'envie, ça peut être du\npaprika fumé par exemple.\n\n\nUne fois bien mélangé, ajouter le bouillon petit à petit en\npétrissant le mélange. A la fin la pâte ne doit ni être collante\nni sèche.\n\n\nFaçonner les escalopes à la main en aplatissant et en étirant des\nboules de seitan, il doit y en avoir 100.\n\n\nCuire les escalopes 10min dans l'eau bouillante\n\n\nPuis cuire les escalopes dans une poêle à feu vif dans de l'huile\nde tournesol 2/3 min de chaque côté jusqu'à qu'elles soient bien\ndorées. ajouter de la sauce soja sur un des côtés déjà cuit.\n\n\nIl est aussi possible de les mettre dans une friteuse pendant 1 min.",
+  "preparation24h": null,
+  "astuces": null,
   "prepAlt": null,
   "permissionWrite": [],
-  "publishDate": "2025-06-12T10:12:00Z"
+  "publishedAt": "2025-01-01T00:00:00Z"
 }

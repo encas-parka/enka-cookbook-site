@@ -1,22 +1,26 @@
 
 {
-  "uuid": "vlzttv5as1jo",
   "slug": "oignons-bhaji-rainbow-_vlzttv5as1jo",
   "title": "Oignons Bhaji (Rainbow Queer Naan)",
   "draft": false,
   "typeR": "plat",
   "categories": ["Friture","Bouchées salées"],
+  "description": "",
+  "region": "Inde",
+  "saison": null,
+  "auteur": "Auré",
   "regime": ["vegan","sans-gluten"],
   "cuisson": true,
   "serveHot": true,
   "plate": 130,
   "quantite_desc": "",
   "check": true,
-  "checkAlwaysOk": false,
   "materiel": null,
   "ingredients": [{"allergens":[],"comment":"","name":"huile de friture","normalizedQuantity":7000,"normalizedUnit":"ml","originalQuantity":7,"originalUnit":"l.","type":"lof","uuid":"1ej217"},{"allergens":[],"comment":"","name":"Farine de pois chiche","normalizedQuantity":3000,"normalizedUnit":"gr.","originalQuantity":3,"originalUnit":"kg","type":"lof","uuid":"o627mw"},{"allergens":[],"comment":"","name":"piment rouge frais","normalizedQuantity":20,"normalizedUnit":"unité","originalQuantity":20,"originalUnit":"unité","type":"legumes","uuid":"mwavdx"},{"allergens":[],"comment":"","name":"Ail","normalizedQuantity":560,"normalizedUnit":"gr.","originalQuantity":7,"originalUnit":"tête·s","type":"legumes","uuid":"u2m28w"},{"allergens":[],"comment":"","name":"Gingembre","normalizedQuantity":100,"normalizedUnit":"gr.","originalQuantity":100,"originalUnit":"gr.","type":"legumes","uuid":"0d1fzw"},{"allergens":[],"comment":"","name":"Oignon","normalizedQuantity":9000,"normalizedUnit":"gr.","originalQuantity":9,"originalUnit":"kg","type":"legumes","uuid":"rtavky"},{"allergens":[],"comment":"","name":"fenouil graine","normalizedQuantity":50,"normalizedUnit":"gr.","originalQuantity":50,"originalUnit":"gr.","type":"epices","uuid":"x7e30y"},{"allergens":[],"comment":"","name":"Sel","normalizedQuantity":80,"normalizedUnit":"gr.","originalQuantity":80,"originalUnit":"gr.","type":"epices","uuid":"2juq3x"},{"allergens":[],"comment":"","name":"Curry","normalizedQuantity":250,"normalizedUnit":"gr.","originalQuantity":250,"originalUnit":"gr.","type":"epices","uuid":"7jceco"},{"allergens":[],"comment":"","name":"Cumin (graines)","normalizedQuantity":50,"normalizedUnit":"gr.","originalQuantity":50,"originalUnit":"gr.","type":"epices","uuid":"l3esgp"},{"allergens":[],"comment":"","name":"Coriandre en poudre","normalizedQuantity":50,"normalizedUnit":"gr.","originalQuantity":50,"originalUnit":"gr.","type":"epices","uuid":"nf05n7"},{"allergens":[],"comment":"","name":"Eau","normalizedQuantity":2000,"normalizedUnit":"ml","originalQuantity":2,"originalUnit":"l.","type":"autres","uuid":"ljzb7j"}],
   "preparation": "Mélanger dans un bol tous les ingrédients pour l'oignon bhaji - sauf l'eau, l'huile de tournesol.\n\nAjouter ensuite l'eau et remuer afin d’obtenir une pâte épaisse. Ajouter\n une cuillère à soupe d'eau supplémentaire si la pâte est trop épaisse.\n\nFaire\n chauffer l'huile de tournesol dans un wok ou friteuse à feu moyen. Une\nfois que l'huile est chaude, déposer 5 à 6 cuillères à soupe de la pâte\ndans la poêle, selon la taille.\n\nFaire frire les bhajis des deux côtés jusqu'à ce qu'ils soient dorés.\n\nRetirer les bhajis de l'huile et saupoudrer d'un peu de sel . Continuer jusqu'à ce que la pâte soit complètement épuisée.\n\n\\",
+  "preparation24h": null,
+  "astuces": null,
   "prepAlt": null,
   "permissionWrite": [],
-  "publishDate": "2025-06-02T16:53:00Z"
+  "publishedAt": "2025-01-01T00:00:00Z"
 }

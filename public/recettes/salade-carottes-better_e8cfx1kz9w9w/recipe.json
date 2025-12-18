@@ -1,22 +1,26 @@
 
 {
-  "uuid": "e8cfx1kz9w9w",
   "slug": "salade-carottes-better_e8cfx1kz9w9w",
   "title": "Salade Carottes Betteraves Au Cumin",
   "draft": false,
   "typeR": "entree",
   "categories": ["Salade"],
+  "description": null,
+  "region": null,
+  "saison": null,
+  "auteur": null,
   "regime": ["vegan"],
   "cuisson": false,
   "serveHot": false,
   "plate": 20,
   "quantite_desc": null,
   "check": false,
-  "checkAlwaysOk": false,
   "materiel": null,
   "ingredients": [{"allergens":[],"comment":"","name":"Betterave rouge","normalizedQuantity":1250,"normalizedUnit":"gr.","originalQuantity":5,"originalUnit":"unité","type":"legumes","uuid":"7sc3uw"},{"allergens":[],"comment":"","name":"Carotte","normalizedQuantity":1250,"normalizedUnit":"gr.","originalQuantity":10,"originalUnit":"unité","type":"legumes","uuid":"eouu0v"},{"allergens":[],"comment":"","name":"Sirop d'érable ","normalizedQuantity":60,"normalizedUnit":"ml","originalQuantity":4,"originalUnit":"c. à soupe","type":"sucres","uuid":"zkmmgt"},{"allergens":[],"comment":"","name":"Persil frais","normalizedQuantity":1,"normalizedUnit":"bottes","originalQuantity":1,"originalUnit":"bottes","type":"epices","uuid":"hgfa4e"},{"allergens":[],"comment":"","name":"Cumin (graines)","normalizedQuantity":30,"normalizedUnit":"ml","originalQuantity":2,"originalUnit":"c. à soupe","type":"epices","uuid":"l3esgp"},{"allergens":[],"comment":"","name":"Jus de citron","normalizedQuantity":200,"normalizedUnit":"ml","originalQuantity":200,"originalUnit":"ml","type":"sucres","uuid":"e4mjd1"}],
   "preparation": "Laver et peler les légumes.\n\nRaper, et réserver.\n\nHacher le persil.\n\nMélanger les tout au moment du service",
+  "preparation24h": "Mélanger jus de citron, cumin en graines, sirop d'érables et ajuster la consistance avec l'huile d'olive.",
+  "astuces": null,
   "prepAlt": null,
   "permissionWrite": [],
-  "publishDate": "2025-08-08T09:35:00Z"
+  "publishedAt": "2025-01-01T00:00:00Z"
 }

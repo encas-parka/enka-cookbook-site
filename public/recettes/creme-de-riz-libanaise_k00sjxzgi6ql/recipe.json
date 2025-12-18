@@ -1,22 +1,26 @@
 
 {
-  "uuid": "k00sjxzgi6ql",
   "slug": "creme-de-riz-libanaise_k00sjxzgi6ql",
   "title": "Creme De Riz Libanaise - Mouhalabieh",
   "draft": false,
   "typeR": "dessert",
   "categories": ["Autre"],
+  "description": null,
+  "region": "Liban",
+  "saison": null,
+  "auteur": "Livre cantines",
   "regime": ["vegan","sans-gluten"],
   "cuisson": true,
   "serveHot": false,
   "plate": 100,
   "quantite_desc": null,
   "check": true,
-  "checkAlwaysOk": false,
   "materiel": null,
   "ingredients": [{"allergens":[],"comment":"","name":"Agar-agar","normalizedQuantity":2,"normalizedUnit":"gr.","originalQuantity":2,"originalUnit":"gr.","type":"autres","uuid":"ruhtax"},{"allergens":[],"comment":"","name":"Sel","normalizedQuantity":5,"normalizedUnit":"gr.","originalQuantity":1,"originalUnit":"c. à café","type":"epices","uuid":"2juq3x"},{"allergens":[],"comment":"","name":"Farine de riz","normalizedQuantity":500,"normalizedUnit":"gr.","originalQuantity":500,"originalUnit":"gr.","type":"lof","uuid":"oygozr"},{"allergens":[],"comment":"","name":"Lait de riz","normalizedQuantity":8000,"normalizedUnit":"ml","originalQuantity":8,"originalUnit":"l.","type":"lof","uuid":"hzwesd"},{"allergens":["Fruit à coque"],"comment":"","name":"Amandes effilées","normalizedQuantity":200,"normalizedUnit":"gr.","originalQuantity":200,"originalUnit":"gr.","type":"sec","uuid":"xkijt9"},{"allergens":[],"comment":"+ quelques gouttes d'eau de rose","name":"Eau de fleur d'oranger","normalizedQuantity":100,"normalizedUnit":"ml","originalQuantity":100,"originalUnit":"ml","type":"sucres","uuid":"ikdk3g"},{"allergens":[],"comment":"","name":"Sucre en poudre","normalizedQuantity":500,"normalizedUnit":"gr.","originalQuantity":500,"originalUnit":"gr.","type":"sucres","uuid":"u9z2he"},{"allergens":["Fruit à coque"],"comment":"","name":"Poudre d'amandes","normalizedQuantity":1000,"normalizedUnit":"gr.","originalQuantity":1,"originalUnit":"kg","type":"sucres","uuid":"rmgr7l"}],
   "preparation": "Mélanger la farine de riz, le sel et 2L de lait. Porter le reste du lait à ébullition. Au premier bouillon, baisser le feu. Il faut un feu large et doux. Ajouter le mélange de farine et de lait à la gamelle en remuant. Ajouter également le sucre, l'agar-agar. Remuer sans cesse.\n\nLaisser frémir jusqu'à ce que le mélange épaississe. Il faut utiliser une spatule en bois \\[ndt: et qui pue pas l'oignon!] et bien  passer au fond (c'est un peu comme la béchamel). Si la préparation commence à accrocher parce qu'on a oublié de remuer à un moment, il ne faut pas trop racler au fond : on risque de faire des grumeaux ; dans ce cas, le mieux est de changer de gamelle.\n\nQuand la préparation a épaissi, couper le feu puis ajouter la poudre d'amande. Laisser tiédir puis ajouter l'eau \\[florale]. Mettre en pots et laisser complètement refroidir. \\[ndt: verser avec un pichet c'est carrément plus pratique qu'une louche]\n\n\"\"On peut remplacer l'eau de rose par de la fleur d'oranger ou de l'amaretto. On peut également remplacer l'eau de rose et une partie du sucre par un sirop de rose (ou une autre saveur).\"\"",
+  "preparation24h": null,
+  "astuces": null,
   "prepAlt": null,
   "permissionWrite": [],
-  "publishDate": "2024-06-18T12:28:00Z"
+  "publishedAt": "2025-01-01T00:00:00Z"
 }

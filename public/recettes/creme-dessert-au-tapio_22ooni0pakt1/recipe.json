@@ -1,22 +1,26 @@
 
 {
-  "uuid": "22ooni0pakt1",
   "slug": "creme-dessert-au-tapio_22ooni0pakt1",
   "title": "Crème Dessert Au Tapioca Et Lait De Coco",
   "draft": false,
   "typeR": "dessert",
   "categories": ["Gateau"],
+  "description": "",
+  "region": "",
+  "saison": null,
+  "auteur": "",
   "regime": ["vegetarien"],
   "cuisson": true,
   "serveHot": false,
   "plate": 7,
   "quantite_desc": "",
   "check": true,
-  "checkAlwaysOk": false,
   "materiel": null,
   "ingredients": [{"allergens":[],"comment":"","name":"Tapioca perlée","normalizedQuantity":105,"normalizedUnit":"gr.","originalQuantity":105,"originalUnit":"gr.","type":"sec","uuid":"mkttuh"},{"allergens":[],"comment":"","name":"Pêche","normalizedQuantity":600,"normalizedUnit":"gr.","originalQuantity":600,"originalUnit":"gr.","type":"legumes","uuid":"n1vs7d"},{"allergens":[],"comment":"","name":"lait de coco","normalizedQuantity":600,"normalizedUnit":"ml","originalQuantity":600,"originalUnit":"ml","type":"lof","uuid":"xdy736"},{"allergens":[],"comment":"","name":"vanille extrait concentré","normalizedQuantity":15,"normalizedUnit":"ml","originalQuantity":3,"originalUnit":"c. à café","type":"sucres","uuid":"n818be"},{"allergens":[],"comment":"","name":"sucre blanc","normalizedQuantity":30,"normalizedUnit":"gr.","originalQuantity":30,"originalUnit":"gr.","type":"sucres","uuid":"lny16c"}],
   "preparation": "1. Portez à ébullition le lait de coco et l'eau (100 ml).\n2. Ajoutez le tapioca et la noix de coco râpée.\n3. Laissez cuire environ 10 minutes en remuant régulièrement.\n4. Ensuite, ajoutez le sucre et la vanille.\n5. Répartissez le mélange dans les récipients en y mettant au fond les fruits.\n6. Placez-les au frais au moins 2 heures avant de les déguster.",
+  "preparation24h": null,
+  "astuces": null,
   "prepAlt": null,
   "permissionWrite": [],
-  "publishDate": "2025-05-15T16:47:00Z"
+  "publishedAt": "2025-01-01T00:00:00Z"
 }

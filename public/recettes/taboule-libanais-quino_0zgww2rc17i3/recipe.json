@@ -1,22 +1,26 @@
 
 {
-  "uuid": "0zgww2rc17i3",
   "slug": "taboule-libanais-quino_0zgww2rc17i3",
   "title": "Taboulé Libanais (Quinoa - Sans Glut)",
   "draft": false,
   "typeR": "entree",
   "categories": ["Salade"],
+  "description": null,
+  "region": "Liban",
+  "saison": ["ete","automne"],
+  "auteur": null,
   "regime": ["vegetarien","vegan","sans-lactose","sans-gluten"],
   "cuisson": false,
   "serveHot": false,
   "plate": 100,
   "quantite_desc": null,
   "check": true,
-  "checkAlwaysOk": null,
   "materiel": null,
   "ingredients": [{"allergens":[],"comment":"","name":"Jus de citron","normalizedQuantity":2000,"normalizedUnit":"ml","originalQuantity":2,"originalUnit":"l.","type":"sucres","uuid":"e4mjd1"},{"allergens":[],"comment":"","name":"huile d'olive","normalizedQuantity":2000,"normalizedUnit":"ml","originalQuantity":2,"originalUnit":"l.","type":"lof","uuid":"h3c8al"},{"allergens":[],"comment":"","name":"Echalote","normalizedQuantity":600,"normalizedUnit":"gr.","originalQuantity":600,"originalUnit":"gr.","type":"legumes","uuid":"vwdomu"},{"allergens":[],"comment":"grosses tomates de préférences","name":"Tomate","normalizedQuantity":10000,"normalizedUnit":"gr.","originalQuantity":10,"originalUnit":"kg","type":"legumes","uuid":"ibtbnq"},{"allergens":[],"comment":"","name":"Persil frais","normalizedQuantity":6000,"normalizedUnit":"gr.","originalQuantity":6,"originalUnit":"kg","type":"epices","uuid":"hgfa4e"},{"allergens":[],"comment":"","name":"Menthe","normalizedQuantity":10,"normalizedUnit":"bottes","originalQuantity":10,"originalUnit":"bottes","type":"epices","uuid":"2j9y2v"},{"allergens":[],"comment":"","name":"Quinoa blanc","normalizedQuantity":1000,"normalizedUnit":"gr.","originalQuantity":1,"originalUnit":"kg","type":"sec","uuid":"csxn1a"}],
   "preparation": "* Précuire le quinoa ou le millet dans l’eau bouillante.\n* Laver le persil et couper le en FINE JULIENNE (1mm d'epaisseur)\n* Laver les tomates et couper les en BRUNOISE (carre de 3mm)\n* Nettoyer et ciseler la menthe, et echalote.\n* Egoutter le blé.\n* Melanger les herbes, les tomates, les echalotes, et ajouter le ble.\n* Reservez au frais.\n* Mélanger le citron et l huile et incorporer 30MN avant de servir.\n* Réserver au frais.",
+  "preparation24h": null,
+  "astuces": [],
   "prepAlt": [{"recetteAlt":"taboulais-libanais-des-tarnais_os1bnq2l"},{"recetteAlt":"taboulais-libanais-des-tarnais-sans-gluten_cp6n89pn"},{"recetteAlt":"taboule-libanais_48lztgof"}],
   "permissionWrite": [],
-  "publishDate": "2023-04-13T14:12:56.856Z"
+  "publishedAt": "2025-01-01T00:00:00Z"
 }

@@ -1,22 +1,26 @@
 
 {
-  "uuid": "go4i0y6buluy",
   "slug": "bahn-mi-a-la-proteine-_go4i0y6buluy",
   "title": "Bahn Mi À La Protéine De Soja",
   "draft": false,
   "typeR": "plat",
   "categories": ["Snacking"],
+  "description": "Sandwich végan",
+  "region": "Vietnam",
+  "saison": ["ete","printemps","automne"],
+  "auteur": "Alio",
   "regime": null,
   "cuisson": true,
   "serveHot": true,
   "plate": 100,
   "quantite_desc": "Une demi baguette par sandwich",
   "check": true,
-  "checkAlwaysOk": null,
   "materiel": [],
   "ingredients": [{"allergens":["Soja"],"comment":"","name":"Protéines de soja","normalizedQuantity":3000,"normalizedUnit":"gr.","originalQuantity":3,"originalUnit":"kg","type":"autres","uuid":"6m90g7"},{"allergens":[],"comment":"","name":"Coriandre","normalizedQuantity":10,"normalizedUnit":"bottes","originalQuantity":10,"originalUnit":"bottes","type":"epices","uuid":"yat3fu"},{"allergens":[],"comment":"","name":"Gingembre","normalizedQuantity":650,"normalizedUnit":"gr.","originalQuantity":650,"originalUnit":"gr.","type":"legumes","uuid":"0d1fzw"},{"allergens":[],"comment":"","name":"Ail","normalizedQuantity":400,"normalizedUnit":"gr.","originalQuantity":5,"originalUnit":"tête·s","type":"legumes","uuid":"u2m28w"},{"allergens":[],"comment":"","name":"Véganaise","normalizedQuantity":3000,"normalizedUnit":"gr.","originalQuantity":3,"originalUnit":"kg","type":"epices","uuid":"89945bda5f0b"},{"allergens":[],"comment":"","name":"Miso blanc","normalizedQuantity":850,"normalizedUnit":"gr.","originalQuantity":850,"originalUnit":"gr.","type":"epices","uuid":"k2uthk"},{"allergens":[],"comment":"","name":"Concombre","normalizedQuantity":4000,"normalizedUnit":"gr.","originalQuantity":20,"originalUnit":"unité","type":"legumes","uuid":"l5p1a5"},{"allergens":["Soja"],"comment":"","name":"Sauce soja","normalizedQuantity":3500,"normalizedUnit":"ml","originalQuantity":3.5,"originalUnit":"l.","type":"epices","uuid":"jjrwlj"},{"allergens":[],"comment":"","name":"Chou rouge","normalizedQuantity":3500,"normalizedUnit":"gr.","originalQuantity":3.5,"originalUnit":"kg","type":"legumes","uuid":"nl2s2n"},{"allergens":[],"comment":"","name":"Carotte","normalizedQuantity":5000,"normalizedUnit":"gr.","originalQuantity":5,"originalUnit":"kg","type":"legumes","uuid":"eouu0v"},{"allergens":[],"comment":"","name":"Pain baguette","normalizedQuantity":50,"normalizedUnit":"unité","originalQuantity":50,"originalUnit":"unité","type":"sec","uuid":"e7953e50480d"}],
   "preparation": "- Réhydrater les protéines de soja dans du bouillon de légumes\n- Faire cuire les protéines de soja à la poêle avec des épices\n- Râper les carottes\n- Couper le chou rouge finement\n- Mixer la véganaise avec la sauce soja, le gingembre et ail râpés.\n\nPossibilité de rajouter des légumes lactofermentés.",
+  "preparation24h": "",
+  "astuces": [],
   "prepAlt": [],
   "permissionWrite": [],
-  "publishDate": "2025-10-16T16:18:00Z"
+  "publishedAt": "2025-01-01T00:00:00Z"
 }

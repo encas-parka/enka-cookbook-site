@@ -1,22 +1,26 @@
 
 {
-  "uuid": "xezil66i6mv7",
   "slug": "gateau-a-la-creme-de-m_xezil66i6mv7",
   "title": "Gateau À La Crème De Marron Nappage Chocolat (Vegan)",
   "draft": false,
   "typeR": "dessert",
   "categories": ["Gateau"],
+  "description": null,
+  "region": null,
+  "saison": null,
+  "auteur": null,
   "regime": ["vegan"],
   "cuisson": true,
   "serveHot": false,
   "plate": 12,
   "quantite_desc": null,
   "check": true,
-  "checkAlwaysOk": false,
   "materiel": null,
   "ingredients": [{"allergens":[],"comment":"","name":"Sarrasin","normalizedQuantity":100,"normalizedUnit":"gr.","originalQuantity":100,"originalUnit":"gr.","type":"sec","uuid":"9f35oz"},{"allergens":["Gluten"],"comment":"","name":"Farine de blé","normalizedQuantity":250,"normalizedUnit":"gr.","originalQuantity":250,"originalUnit":"gr.","type":"lof","uuid":"2av6w8"},{"allergens":["Soja"],"comment":"","name":"Crème soja","normalizedQuantity":200,"normalizedUnit":"ml","originalQuantity":200,"originalUnit":"ml","type":"lof","uuid":"chfwwq"},{"allergens":[],"comment":"","name":"lait d’amande","normalizedQuantity":300,"normalizedUnit":"gr.","originalQuantity":300,"originalUnit":"gr.","type":"lof","uuid":"csxbg6"},{"allergens":[],"comment":"","name":"huile d'olive","normalizedQuantity":20,"normalizedUnit":"gr.","originalQuantity":20,"originalUnit":"gr.","type":"lof","uuid":"h3c8al"},{"allergens":[],"comment":"","name":"Chocolat noir patissier 70p100","normalizedQuantity":200,"normalizedUnit":"gr.","originalQuantity":200,"originalUnit":"gr.","type":"sucres","uuid":"1e3zhq"},{"allergens":[],"comment":"","name":"Confiture de chataigne (sans sucre)","normalizedQuantity":325,"normalizedUnit":"gr.","originalQuantity":325,"originalUnit":"gr.","type":"sucres","uuid":"q33x0k"},{"allergens":["Gluten"],"comment":"","name":"Levure chimique","normalizedQuantity":11,"normalizedUnit":"gr.","originalQuantity":1,"originalUnit":"unité","type":"lof","uuid":"vgec6e"}],
   "preparation": "Verse la crème de marron dans un bol et détend la un peu au fouet, ajoute le lait végétal, l’huile et fouette bien.\n\nAjoute la farine, la levure et mélange.\n\nVerse dans le moule de ton choix et enfourne 1 heure au four à 180°\n\nMet ensuite le nappage (chocolat + crème de soja) ainsi que les graines de sarrasin torréfiées",
+  "preparation24h": null,
+  "astuces": null,
   "prepAlt": null,
   "permissionWrite": [],
-  "publishDate": "2025-05-22T17:00:00Z"
+  "publishedAt": "2025-01-01T00:00:00Z"
 }

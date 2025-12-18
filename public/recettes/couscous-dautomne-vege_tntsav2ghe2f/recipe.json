@@ -1,22 +1,26 @@
 
 {
-  "uuid": "tntsav2ghe2f",
   "slug": "couscous-dautomne-vege_tntsav2ghe2f",
   "title": "Couscous D'automne Végétarien",
   "draft": false,
   "typeR": "plat",
   "categories": ["Plat chaud"],
+  "description": "Plat pour le catering de la fête de la soupe 2025",
+  "region": "Algérie",
+  "saison": [],
+  "auteur": "Alio",
   "regime": null,
   "cuisson": true,
   "serveHot": true,
   "plate": 100,
   "quantite_desc": "",
   "check": false,
-  "checkAlwaysOk": null,
   "materiel": [],
   "ingredients": [{"allergens":[],"comment":"","name":"Raisin sec","normalizedQuantity":1000,"normalizedUnit":"gr.","originalQuantity":1,"originalUnit":"kg","type":"legumes","uuid":"9yf54l"},{"allergens":[],"comment":"","name":"Sauce tomate mutti","normalizedQuantity":800,"normalizedUnit":"gr.","originalQuantity":800,"originalUnit":"gr.","type":"epices","uuid":"xdkeh3"},{"allergens":[],"comment":"","name":"huile de tournesol","normalizedQuantity":1000,"normalizedUnit":"ml","originalQuantity":1,"originalUnit":"l.","type":"lof","uuid":"c70jxb"},{"allergens":[],"comment":"","name":"huile d'olive","normalizedQuantity":2000,"normalizedUnit":"ml","originalQuantity":2,"originalUnit":"l.","type":"lof","uuid":"h3c8al"},{"allergens":[],"comment":"","name":"Sel","normalizedQuantity":100,"normalizedUnit":"gr.","originalQuantity":100,"originalUnit":"gr.","type":"epices","uuid":"2juq3x"},{"allergens":["Gluten"],"comment":"","name":"Semoule moyenne (blé)","normalizedQuantity":8000,"normalizedUnit":"gr.","originalQuantity":8,"originalUnit":"kg","type":"sec","uuid":"yx78ae"},{"allergens":[],"comment":"","name":"Sel","normalizedQuantity":130,"normalizedUnit":"gr.","originalQuantity":130,"originalUnit":"gr.","type":"epices","uuid":"2juq3x"},{"allergens":[],"comment":"","name":"Ail","normalizedQuantity":80,"normalizedUnit":"gr.","originalQuantity":1,"originalUnit":"tête·s","type":"legumes","uuid":"u2m28w"},{"allergens":[],"comment":"","name":"Oignon","normalizedQuantity":2600,"normalizedUnit":"gr.","originalQuantity":2.6,"originalUnit":"kg","type":"legumes","uuid":"rtavky"},{"allergens":[],"comment":"","name":"Navet","normalizedQuantity":1700,"normalizedUnit":"gr.","originalQuantity":1.7,"originalUnit":"kg","type":"legumes","uuid":"f5fy8w"},{"allergens":["Céleri"],"comment":"","name":"Céleri branche","normalizedQuantity":900,"normalizedUnit":"gr.","originalQuantity":900,"originalUnit":"gr.","type":"legumes","uuid":"78fo97"},{"allergens":[],"comment":"","name":"Courge","normalizedQuantity":3900,"normalizedUnit":"gr.","originalQuantity":3.9,"originalUnit":"kg","type":"legumes","uuid":"oa85mx"},{"allergens":[],"comment":"","name":"Carotte","normalizedQuantity":3900,"normalizedUnit":"gr.","originalQuantity":3.9,"originalUnit":"kg","type":"legumes","uuid":"eouu0v"},{"allergens":[],"comment":"","name":"Pomme de terre","normalizedQuantity":7700,"normalizedUnit":"gr.","originalQuantity":7.7,"originalUnit":"kg","type":"legumes","uuid":"18dy4e"},{"allergens":[],"comment":"","name":"Pois chiches","normalizedQuantity":1300,"normalizedUnit":"gr.","originalQuantity":1.3,"originalUnit":"kg","type":"sec","uuid":"6a8w8k"}],
   "preparation": "\u003eFaire chauffer l'huile avec les épices : cumin, gingembre, paprika, curcuma, coriandre, clou de girofle, muscade, poivre\n\nÉmincer les oignons et faire suer dans l'huile chaude\n\nCouper les légumes grossièrement et les ajouter dans la casserole dans l'ordre : Pdt, courges, carottes, navet, celeri. Faire rissoler.\n\nRajouter la sauce tomate et les pois chiches\n\nCouvrir d'eau et laisser mijoter longtemps\n\n\u003ePour la semoule précuite, enduire la semoule d'huile et l'égrainer à la main (en la frottant délicatement avec ses deux mains)\n\nrajouter le sel et le cumin (21gr) et les raisins secs\n\nCouvrir d'eau avec légèrement plus d'eau que de semoule\n\nRecouvrir si possible d'un tissu ou torchon propre et poser un couvercle sur le récipient. Laisser réhydrater 10 minutes\n\nÉgrainer à nouveau avec l'aide d'une fourchette. Possible de transvaser dans un autre récipient pour être sûr·e de bien atteindre la semoule dans le fond",
+  "preparation24h": "Faire tremper les pois chiches",
+  "astuces": [],
   "prepAlt": [],
   "permissionWrite": [],
-  "publishDate": "2025-10-19T20:53:00Z"
+  "publishedAt": "2025-01-01T00:00:00Z"
 }

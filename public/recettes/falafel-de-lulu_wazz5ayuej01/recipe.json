@@ -1,22 +1,26 @@
 
 {
-  "uuid": "wazz5ayuej01",
   "slug": "falafel-de-lulu_wazz5ayuej01",
   "title": "Falafel De Lulu",
   "draft": false,
   "typeR": "plat",
   "categories": ["Friture"],
+  "description": "",
+  "region": "",
+  "saison": [],
+  "auteur": "",
   "regime": null,
   "cuisson": true,
   "serveHot": true,
   "plate": 100,
   "quantite_desc": "3 par personne",
   "check": true,
-  "checkAlwaysOk": null,
   "materiel": ["Friteuse"],
   "ingredients": [{"allergens":[],"comment":"","name":"huile de friture","normalizedQuantity":15000,"normalizedUnit":"ml","originalQuantity":15,"originalUnit":"l.","type":"lof","uuid":"1ej217"},{"allergens":[],"comment":"","name":"Ail","normalizedQuantity":400,"normalizedUnit":"gr.","originalQuantity":5,"originalUnit":"tête·s","type":"legumes","uuid":"u2m28w"},{"allergens":[],"comment":"","name":"huile d'olive","normalizedQuantity":2000,"normalizedUnit":"ml","originalQuantity":2,"originalUnit":"l.","type":"lof","uuid":"h3c8al"},{"allergens":[],"comment":"","name":"Poivre","normalizedQuantity":30,"normalizedUnit":"gr.","originalQuantity":30,"originalUnit":"gr.","type":"epices","uuid":"2pps90"},{"allergens":[],"comment":"","name":"Sel","normalizedQuantity":50,"normalizedUnit":"gr.","originalQuantity":50,"originalUnit":"gr.","type":"epices","uuid":"2juq3x"},{"allergens":[],"comment":"","name":"Cumin moulu","normalizedQuantity":150,"normalizedUnit":"gr.","originalQuantity":150,"originalUnit":"gr.","type":"epices","uuid":"he3u48"},{"allergens":[],"comment":"","name":"Coriandre fraîche","normalizedQuantity":6,"normalizedUnit":"bottes","originalQuantity":6,"originalUnit":"bottes","type":"epices","uuid":"fetrpe"},{"allergens":[],"comment":"","name":"Persil frais","normalizedQuantity":10,"normalizedUnit":"bottes","originalQuantity":10,"originalUnit":"bottes","type":"epices","uuid":"hgfa4e"},{"allergens":[],"comment":"","name":"Oignon","normalizedQuantity":2000,"normalizedUnit":"gr.","originalQuantity":2,"originalUnit":"kg","type":"legumes","uuid":"rtavky"},{"allergens":[],"comment":"","name":"Pois chiches","normalizedQuantity":8000,"normalizedUnit":"gr.","originalQuantity":8,"originalUnit":"kg","type":"sec","uuid":"6a8w8k"}],
   "preparation": "Mixer les pois chiche avec de l'huile d'olive. La verser petit à petit, un peu comme la mayonnaise.\nIl faut obtenir une pâte très moussante.\n\n Ensuite, tout mixer avec les herbes, les oignons coupés, l'ail.\nMélanger le tout avec les épices. Goûter.\nCUMIN EN MASSE !!!\n \n\nPrendre les deux plus belles cuillères à soupe de la cuisine avec un pot d'eau chaude.\nFaire des quenelles pendant 5h et les disposer au dur (congélo) sur des plateaux.\nSi pas de congélateur, les frire directement en plongeant les quenelles directement.\nCes quenelles ne peuvent pas être façonner à la main.\nBON COURAGE !! Coeur Coeur",
+  "preparation24h": "Au moins 17h avant, faire tremper les pois chiche.",
+  "astuces": [],
   "prepAlt": [],
   "permissionWrite": [],
-  "publishDate": "2025-10-16T16:10:00Z"
+  "publishedAt": "2025-01-01T00:00:00Z"
 }

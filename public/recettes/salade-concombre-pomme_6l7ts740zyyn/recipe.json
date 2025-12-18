@@ -1,22 +1,26 @@
 
 {
-  "uuid": "6l7ts740zyyn",
   "slug": "salade-concombre-pomme_6l7ts740zyyn",
   "title": "Salade Concombre, Pommes Et Nigelle À L'aneth ",
   "draft": false,
   "typeR": "entree",
   "categories": ["Salade"],
+  "description": null,
+  "region": null,
+  "saison": ["ete","automne"],
+  "auteur": null,
   "regime": ["vegetarien","sans-gluten"],
   "cuisson": false,
   "serveHot": false,
   "plate": 180,
   "quantite_desc": null,
   "check": true,
-  "checkAlwaysOk": false,
   "materiel": ["Grand Saladier","Gastro 1/1 (Profond)"],
   "ingredients": [{"allergens":[],"comment":"","name":"Pomme","normalizedQuantity":8000,"normalizedUnit":"gr.","originalQuantity":8,"originalUnit":"kg","type":"legumes","uuid":"i6jlwm"},{"allergens":[],"comment":"","name":"Cébette - Ciboule - Cive - Oignon vert","normalizedQuantity":4800,"normalizedUnit":"gr.","originalQuantity":40,"originalUnit":"unité","type":"legumes","uuid":"j7as8d"},{"allergens":[],"comment":"","name":"Concombre","normalizedQuantity":5600,"normalizedUnit":"gr.","originalQuantity":28,"originalUnit":"unité","type":"legumes","uuid":"l5p1a5"},{"allergens":[],"comment":"","name":"Poivre","normalizedQuantity":1,"normalizedUnit":"au goût","originalQuantity":1,"originalUnit":"au goût","type":"epices","uuid":"2pps90"},{"allergens":[],"comment":"","name":"Sel","normalizedQuantity":1,"normalizedUnit":"au goût","originalQuantity":1,"originalUnit":"au goût","type":"epices","uuid":"2juq3x"},{"allergens":[],"comment":"","name":"Aneth aromatique","normalizedQuantity":10,"normalizedUnit":"bottes","originalQuantity":10,"originalUnit":"bottes","type":"epices","uuid":"nnkg8f"},{"allergens":[],"comment":"","name":"huile d'olive","normalizedQuantity":1200,"normalizedUnit":"ml","originalQuantity":1.2,"originalUnit":"l.","type":"lof","uuid":"h3c8al"},{"allergens":[],"comment":"","name":"Graines de nigelle","normalizedQuantity":300,"normalizedUnit":"gr.","originalQuantity":300,"originalUnit":"gr.","type":"sec","uuid":"5muly5"},{"allergens":["Produit laitier"],"comment":"","name":"Yaourt de vache","normalizedQuantity":2000,"normalizedUnit":"gr.","originalQuantity":2,"originalUnit":"kg","type":"frais","uuid":"xahmrh"}],
   "preparation": "* Evidez, coupez en 2, et émincez les pommes\n* Pelez, coupez en 2 dans la longueur, épépinez, puis coupez en tranche de 5mm d'épaisseur les concombre\n* Emincez en biais les oignons frai\n* Mélangez, assaisonnez, goutez",
+  "preparation24h": null,
+  "astuces": null,
   "prepAlt": null,
   "permissionWrite": [],
-  "publishDate": "2024-05-18T13:28:00Z"
+  "publishedAt": "2025-01-01T00:00:00Z"
 }

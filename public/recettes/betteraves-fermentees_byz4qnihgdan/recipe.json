@@ -1,22 +1,26 @@
 
 {
-  "uuid": "byz4qnihgdan",
   "slug": "betteraves-fermentees_byz4qnihgdan",
   "title": "Betteraves Fermentées",
   "draft": false,
   "typeR": "entree",
   "categories": ["Bouchées salées"],
+  "description": "2 à 3 bâtonnets par assiette",
+  "region": null,
+  "saison": null,
+  "auteur": "mag",
   "regime": ["vegan","sans-gluten","sans-lactose"],
   "cuisson": false,
   "serveHot": false,
   "plate": 9,
   "quantite_desc": null,
   "check": false,
-  "checkAlwaysOk": true,
   "materiel": null,
   "ingredients": [{"allergens":[],"comment":"","name":"Eau","normalizedQuantity":800,"normalizedUnit":"ml","originalQuantity":0.8,"originalUnit":"l.","type":"autres","uuid":"ljzb7j"},{"allergens":[],"comment":"","name":"Gros sel","normalizedQuantity":25,"normalizedUnit":"gr.","originalQuantity":25,"originalUnit":"gr.","type":"epices","uuid":"5dwrvm"},{"allergens":[],"comment":"","name":"Aneth aromatique","normalizedQuantity":45,"normalizedUnit":"ml","originalQuantity":3,"originalUnit":"c. à soupe","type":"epices","uuid":"nnkg8f"},{"allergens":[],"comment":"","name":"Betterave rouge","normalizedQuantity":1500,"normalizedUnit":"gr.","originalQuantity":1.5,"originalUnit":"kg","type":"legumes","uuid":"7sc3uw"}],
   "preparation": "Couper les betteraves en tronçons, grand comme un doigts à peu près.\n\nles mettre dans un grand bocal type le parfait, un de 2L ou 2 de 1L.\n\nmettre l'aneth séchée\n\nEnsuite dilué l'eau et le sel, on peut faire chauffer un peu l'eau, mais seulement une partie pour aider à la dilution, il ne faut pas mettre trop de chaud sur les betteraves, sinon on tue les futures bonnes batteries qui vont nous permettre la fermentation!!\n\npuis on verse cette eau salée dans nos pots, il faut que ça recouvre, on peut rajouter un peu d'eau et un peu de sel si ce n'est pas le cas.\n\n\n\nEnsuite on attend, et tout dépend des températures.\n\nEn général, elles sont bonnes et croquantes de fermentation en une semaine, mais je compte 2. et goute à partir d'une semaine, dès qu'on aime le goût on mets le pot au frais, ce qui va considérablement réduire la fermentation, le goût n'évoluera plus beaucoup, et bisou et papilles seront ravies dans manger...",
+  "preparation24h": null,
+  "astuces": null,
   "prepAlt": null,
   "permissionWrite": [],
-  "publishDate": "2024-03-26T18:54:24.596Z"
+  "publishedAt": "2025-01-01T00:00:00Z"
 }

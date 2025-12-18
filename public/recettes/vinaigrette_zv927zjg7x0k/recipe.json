@@ -1,22 +1,26 @@
 
 {
-  "uuid": "zv927zjg7x0k",
   "slug": "vinaigrette_zv927zjg7x0k",
   "title": "Vinaigrette",
   "draft": false,
   "typeR": "entree",
   "categories": ["Sauce"],
+  "description": null,
+  "region": null,
+  "saison": null,
+  "auteur": null,
   "regime": ["vegetarien","vegan","sans-gluten","sans-lactose"],
   "cuisson": false,
   "serveHot": false,
   "plate": 100,
   "quantite_desc": null,
   "check": true,
-  "checkAlwaysOk": true,
   "materiel": null,
   "ingredients": [{"allergens":[],"comment":"","name":"Eau","normalizedQuantity":200,"normalizedUnit":"ml","originalQuantity":0.2,"originalUnit":"l.","type":"autres","uuid":"ljzb7j"},{"allergens":[],"comment":"","name":"Poivre","normalizedQuantity":3,"normalizedUnit":"gr.","originalQuantity":3,"originalUnit":"gr.","type":"epices","uuid":"2pps90"},{"allergens":[],"comment":"","name":"Sel","normalizedQuantity":3,"normalizedUnit":"gr.","originalQuantity":3,"originalUnit":"gr.","type":"epices","uuid":"2juq3x"},{"allergens":["Moutarde"],"comment":"","name":"Moutarde","normalizedQuantity":200,"normalizedUnit":"gr.","originalQuantity":200,"originalUnit":"gr.","type":"epices","uuid":"5c1b20"},{"allergens":["Sulfites"],"comment":"","name":"Vinaigre balsamique","normalizedQuantity":200,"normalizedUnit":"ml","originalQuantity":0.2,"originalUnit":"l.","type":"epices","uuid":"qemlqs"},{"allergens":[],"comment":"","name":"Huile végétale","normalizedQuantity":1500,"normalizedUnit":"ml","originalQuantity":1.5,"originalUnit":"l.","type":"lof","uuid":"atccqu"}],
   "preparation": "monter la sauce en commençant par la moutarde, et le vinaigre\n\npuis ajouter petit à petit l'huile\n\net en enfin l'eau",
+  "preparation24h": null,
+  "astuces": null,
   "prepAlt": null,
   "permissionWrite": [],
-  "publishDate": "2024-06-15T11:21:00Z"
+  "publishedAt": "2025-01-01T00:00:00Z"
 }

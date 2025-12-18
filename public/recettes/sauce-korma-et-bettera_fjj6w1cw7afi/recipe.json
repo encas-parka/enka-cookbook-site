@@ -1,22 +1,26 @@
 
 {
-  "uuid": "fjj6w1cw7afi",
   "slug": "sauce-korma-et-bettera_fjj6w1cw7afi",
   "title": "Sauce Korma Et Betterave (Rainbow Queer Naan)",
   "draft": false,
   "typeR": "entree",
   "categories": ["Sauce"],
+  "description": "",
+  "region": "Inde",
+  "saison": null,
+  "auteur": "Auré",
   "regime": ["vegan","sans-gluten"],
   "cuisson": true,
   "serveHot": false,
   "plate": 130,
   "quantite_desc": "",
   "check": true,
-  "checkAlwaysOk": false,
   "materiel": null,
   "ingredients": [{"allergens":[],"comment":"","name":"Betterave cuite","normalizedQuantity":1000,"normalizedUnit":"gr.","originalQuantity":1,"originalUnit":"kg","type":"legumes","uuid":"i7psri"},{"allergens":[],"comment":"","name":"Oignon","normalizedQuantity":6000,"normalizedUnit":"gr.","originalQuantity":6,"originalUnit":"kg","type":"legumes","uuid":"rtavky"},{"allergens":["Soja"],"comment":"","name":"Crème soja","normalizedQuantity":1000,"normalizedUnit":"ml","originalQuantity":1,"originalUnit":"l.","type":"lof","uuid":"chfwwq"},{"allergens":[],"comment":"","name":"lait de coco","normalizedQuantity":2000,"normalizedUnit":"ml","originalQuantity":2,"originalUnit":"l.","type":"lof","uuid":"xdy736"},{"allergens":[],"comment":"","name":"huile de coco","normalizedQuantity":600,"normalizedUnit":"ml","originalQuantity":600,"originalUnit":"ml","type":"lof","uuid":"6bm4lq"},{"allergens":["Soja"],"comment":"","name":"Yaourt de soja","normalizedQuantity":2000,"normalizedUnit":"gr.","originalQuantity":2,"originalUnit":"kg","type":"frais","uuid":"hlbwfd"},{"allergens":[],"comment":"","name":"purée de noix de cajou","normalizedQuantity":300,"normalizedUnit":"gr.","originalQuantity":300,"originalUnit":"gr.","type":"autres","uuid":"mmvfvp"},{"allergens":[],"comment":"","name":"curry feuilles","normalizedQuantity":120,"normalizedUnit":"unité","originalQuantity":120,"originalUnit":"unité","type":"epices","uuid":"xqmcoe"},{"allergens":[],"comment":"","name":"Piment vert","normalizedQuantity":6,"normalizedUnit":"unité","originalQuantity":6,"originalUnit":"unité","type":"epices","uuid":"dr1bbg"},{"allergens":[],"comment":"","name":"poivre en graine","normalizedQuantity":80,"normalizedUnit":"unité","originalQuantity":80,"originalUnit":"unité","type":"epices","uuid":"2dirai"},{"allergens":[],"comment":"gousses","name":"Cardamome","normalizedQuantity":40,"normalizedUnit":"unité","originalQuantity":40,"originalUnit":"unité","type":"epices","uuid":"azpv5r"}],
   "preparation": "Faire une pâte d'oignon en les hachant finement. Puis les faire sauter à la poêle et réduire en purée.\n\nFaire\n chauffer de l'huile dans une casserole, ajouter les gousses de\ncardamome, ajouter la pâte d'oignon, le piment vert haché, les feuilles\nde curry et continuer à faire sauter pendant 3 à 5 minutes.\n\nFouetter\n ensemble le lait de coco, la crème, le yaourt, la pâte de noix de cajou\n et le garam masala, puis les ajouter dans la poêle avec du sel au goût\net laisser mijoter à découvert pendant 10 à 12 minutes jusqu'à\népaississement. \n\nAjouter la purée de betterave.\n\nAjouter de l'eau si nécessaire, pour assouplir la sauce.\n\n Ajouter la poudre de macis de cardamome et rectifiez le sel si nécessaire. \n\nServir chaud.\n\n\\",
+  "preparation24h": null,
+  "astuces": null,
   "prepAlt": null,
   "permissionWrite": [],
-  "publishDate": "2025-06-02T17:53:00Z"
+  "publishedAt": "2025-01-01T00:00:00Z"
 }

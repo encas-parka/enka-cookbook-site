@@ -1,22 +1,26 @@
 
 {
-  "uuid": "yx5v76raggif",
   "slug": "salade-de-courgettes-a_yx5v76raggif",
   "title": "Salade De Courgettes À La Menthe",
   "draft": false,
   "typeR": "entree",
   "categories": ["Salade"],
+  "description": null,
+  "region": null,
+  "saison": ["ete"],
+  "auteur": null,
   "regime": ["vegetarien","vegan","sans-gluten","sans-lactose"],
   "cuisson": true,
   "serveHot": false,
   "plate": 100,
   "quantite_desc": null,
   "check": true,
-  "checkAlwaysOk": false,
   "materiel": null,
   "ingredients": [{"allergens":[],"comment":"","name":"Menthe","normalizedQuantity":6,"normalizedUnit":"unité","originalQuantity":6,"originalUnit":"unité","type":"epices","uuid":"2j9y2v"},{"allergens":[],"comment":"","name":"Ail","normalizedQuantity":234,"normalizedUnit":"gr.","originalQuantity":36,"originalUnit":"unité","type":"legumes","uuid":"u2m28w"},{"allergens":[],"comment":"","name":"Courgette","normalizedQuantity":20000,"normalizedUnit":"gr.","originalQuantity":20,"originalUnit":"kg","type":"legumes","uuid":"9zozfk"},{"allergens":[],"comment":"","name":"huile d'olive","normalizedQuantity":1000,"normalizedUnit":"ml","originalQuantity":1,"originalUnit":"l.","type":"lof","uuid":"h3c8al"},{"allergens":[],"comment":"","name":"Jus de citron","normalizedQuantity":600,"normalizedUnit":"ml","originalQuantity":600,"originalUnit":"ml","type":"sucres","uuid":"e4mjd1"}],
   "preparation": "1. Couper les courgettes en cubes, râper l'ail, effeuiller et ciseler les bouquets de menthe.\n2. Mélanger les courgettes à l'ail et l'huile d'olive, saler, enfourner pour 20 minutes à 200°C.\n3. Sortir du four, laisser refroidir puis mettre au réfrigérateur dans une passoire pour une heure.\n4. Verser dans un saladier et mélanger avec le jus de itron et la menthe.",
+  "preparation24h": null,
+  "astuces": null,
   "prepAlt": null,
   "permissionWrite": [],
-  "publishDate": "2024-05-30T11:18:00Z"
+  "publishedAt": "2025-01-01T00:00:00Z"
 }

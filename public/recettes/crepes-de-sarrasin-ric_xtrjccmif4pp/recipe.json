@@ -1,22 +1,26 @@
 
 {
-  "uuid": "xtrjccmif4pp",
   "slug": "crepes-de-sarrasin-ric_xtrjccmif4pp",
   "title": "Crêpes De Sarrasin Ricotta, Épinards Et Champignons",
   "draft": false,
   "typeR": "plat",
   "categories": ["Plat chaud"],
+  "description": null,
+  "region": null,
+  "saison": null,
+  "auteur": "frédo",
   "regime": ["vegetarien"],
   "cuisson": true,
   "serveHot": true,
   "plate": 100,
   "quantite_desc": "1 crêpe par personne",
   "check": false,
-  "checkAlwaysOk": false,
   "materiel": null,
   "ingredients": [{"allergens":[],"comment":"","name":"crêpes de sarrasin","normalizedQuantity":100,"normalizedUnit":"unité","originalQuantity":100,"originalUnit":"unité","type":"autres","uuid":"0keyhv"},{"allergens":[],"comment":"","name":"Oignon","normalizedQuantity":3000,"normalizedUnit":"gr.","originalQuantity":25,"originalUnit":"unité","type":"legumes","uuid":"rtavky"},{"allergens":[],"comment":"","name":"Epinards surgelés","normalizedQuantity":8000,"normalizedUnit":"gr.","originalQuantity":8,"originalUnit":"kg","type":"legumes","uuid":"c4z22l"},{"allergens":[],"comment":"","name":"","normalizedQuantity":8000,"normalizedUnit":"gr.","originalQuantity":8,"originalUnit":"kg","type":"","uuid":""},{"allergens":["Produit laitier"],"comment":"","name":"Lait entier","normalizedQuantity":5000,"normalizedUnit":"ml","originalQuantity":5,"originalUnit":"l.","type":"lof","uuid":"dbbjuu"},{"allergens":[],"comment":"","name":"huile de tournesol","normalizedQuantity":500,"normalizedUnit":"ml","originalQuantity":500,"originalUnit":"ml","type":"lof","uuid":"c70jxb"},{"allergens":[],"comment":"la maïzena est pour la béchamel sans gluten","name":"Fécule de maïs (Maïzena)","normalizedQuantity":500,"normalizedUnit":"gr.","originalQuantity":500,"originalUnit":"gr.","type":"lof","uuid":"8nbcjp"},{"allergens":["Gluten"],"comment":"","name":"Farine de blé","normalizedQuantity":200,"normalizedUnit":"gr.","originalQuantity":200,"originalUnit":"gr.","type":"lof","uuid":"2av6w8"},{"allergens":[],"comment":"","name":"Margarine","normalizedQuantity":500,"normalizedUnit":"gr.","originalQuantity":500,"originalUnit":"gr.","type":"frais","uuid":"eipcl2"},{"allergens":[],"comment":"","name":"Tofu ferme","normalizedQuantity":1000,"normalizedUnit":"gr.","originalQuantity":1,"originalUnit":"kg","type":"frais","uuid":"3ahcls"},{"allergens":["Produit laitier"],"comment":"","name":"Ricotta","normalizedQuantity":4500,"normalizedUnit":"gr.","originalQuantity":4.5,"originalUnit":"kg","type":"frais","uuid":"q6t705"},{"allergens":[],"comment":"","name":"Bouillon de légume (sans gluten)","normalizedQuantity":2000,"normalizedUnit":"ml","originalQuantity":2,"originalUnit":"l.","type":"epices","uuid":"tmk6ya"},{"allergens":[],"comment":"","name":"Muscade","normalizedQuantity":50,"normalizedUnit":"gr.","originalQuantity":50,"originalUnit":"gr.","type":"epices","uuid":"msyocm"}],
   "preparation": "La veille, penser à décongeler les épinards et les champignons dans des gastros à trous pour qu'ils puissent s'égoutter et les stocker en frigo.\n\nEtape 1 :  béchamel normale\n\nFaire chauffer l'huile dans une casserole, y ajouter la farine, mélanger à la spatule en bois ou au fouet jusqu'à absorption. Rajouter l'intégralité du lait froid, réduire un peu le feu, saler, poivrer, ajouter la muscade et cuire jusqu'à épaississement. Réserver.\n\nEtape 2 : béchamel sans gluten\n\nDiluer le nombre de tablettes requis pour confectionner 2 l.s de bouillon de légumes et le porter à ébullition. Diluer à part dans un peu de liquide froid la fécule de maïs (maïzena) et l'incorporer dans le bouillon bouillant. Cuire quelques minutes jusqu'à épaississement. Réserver.\n\nEtape 3\n\nFaire revenir les oignons émincés finement (robot-coupe). Quand ils commencent à dorer y ajouter les champignons qui doivent colorer aussi un peu puis enfin les épinards et prolonger la cuisson 15 minutes environ ou jusqu'à ce qu'il n'y ait plus de jus. Portionner les repas végan-sans gluten et y ajouter la béchamel maïzena et le tofu.Portionner les repas végés et y ajouter la béchamel au lait et la ricotta quand le mélange a refroidi.\n\nEtape 4\n\nPasser les crêpes à la bilik pour cuire 1 face puis les garnir du mélange épinards etc... les rouler et les placer dans les gastros sur papier sulfurisé. Maintenir au four à 100° jusqu'au moment du service.",
+  "preparation24h": null,
+  "astuces": null,
   "prepAlt": null,
   "permissionWrite": [],
-  "publishDate": "2025-06-04T18:10:00Z"
+  "publishedAt": "2025-01-01T00:00:00Z"
 }

@@ -1,22 +1,26 @@
 
 {
-  "uuid": "ugmtyzfzdf9i",
   "slug": "muhamarra_ugmtyzfzdf9i",
   "title": "Muhamarra",
   "draft": false,
   "typeR": "entree",
   "categories": ["Sauce","Accompagnement"],
+  "description": null,
+  "region": null,
+  "saison": ["ete"],
+  "auteur": "",
   "regime": ["vegetarien","vegan","sans-lactose"],
   "cuisson": true,
   "serveHot": false,
   "plate": 100,
   "quantite_desc": null,
   "check": true,
-  "checkAlwaysOk": false,
   "materiel": ["Robot Mixeur"],
   "ingredients": [{"allergens":["Gluten"],"comment":"","name":"Chapelure","normalizedQuantity":500,"normalizedUnit":"gr.","originalQuantity":500,"originalUnit":"gr.","type":"autres","uuid":"psu3gg"},{"allergens":[],"comment":"","name":"Café moulu","normalizedQuantity":20,"normalizedUnit":"gr.","originalQuantity":20,"originalUnit":"gr.","type":"autres","uuid":"86z19m"},{"allergens":["Sésame"],"comment":"","name":"Tahin","normalizedQuantity":250,"normalizedUnit":"gr.","originalQuantity":250,"originalUnit":"gr.","type":"autres","uuid":"u33083"},{"allergens":[],"comment":"","name":"Mélasse de grenade","normalizedQuantity":1000,"normalizedUnit":"gr.","originalQuantity":1,"originalUnit":"kg","type":"epices","uuid":"cl88ye"},{"allergens":[],"comment":"","name":"Piment en poudre","normalizedQuantity":125,"normalizedUnit":"gr.","originalQuantity":125,"originalUnit":"gr.","type":"epices","uuid":"fmc1dm"},{"allergens":[],"comment":"","name":"Sel","normalizedQuantity":40,"normalizedUnit":"gr.","originalQuantity":40,"originalUnit":"gr.","type":"epices","uuid":"2juq3x"},{"allergens":[],"comment":"","name":"Cumin moulu","normalizedQuantity":20,"normalizedUnit":"gr.","originalQuantity":20,"originalUnit":"gr.","type":"epices","uuid":"he3u48"},{"allergens":[],"comment":"","name":"Paprika","normalizedQuantity":75,"normalizedUnit":"gr.","originalQuantity":75,"originalUnit":"gr.","type":"epices","uuid":"bidsmu"},{"allergens":[],"comment":"","name":"Poivron (rouge)","normalizedQuantity":8000,"normalizedUnit":"gr.","originalQuantity":8,"originalUnit":"kg","type":"legumes","uuid":"0zglpj"},{"allergens":[],"comment":"","name":"huile d'olive","normalizedQuantity":60,"normalizedUnit":"ml","originalQuantity":60,"originalUnit":"ml","type":"lof","uuid":"h3c8al"},{"allergens":["Fruit à coque"],"comment":"","name":"Noix","normalizedQuantity":2500,"normalizedUnit":"gr.","originalQuantity":2.5,"originalUnit":"kg","type":"sec","uuid":"usibcf"},{"allergens":[],"comment":"","name":"Miel","normalizedQuantity":250,"normalizedUnit":"gr.","originalQuantity":250,"originalUnit":"gr.","type":"sucres","uuid":"g0lph5"}],
   "preparation": "1. Faire griller les poivrons sans enlever méthodiquement les peaux, un peu quand même.\n2. Mixer tous les ingrédients sauf les noix et un peu d'huile d'olive pour le service. Attention à laisser une part sans chapelure pour sans gluten.\n3. Concasser les noix grossièrement, après en avoir qq'unes de côté, les ajouter au melange.\n4. Transférer dans le plat de service, arroser un peu d'huile d'olives et décorer avec les noix restantes.",
+  "preparation24h": null,
+  "astuces": null,
   "prepAlt": null,
   "permissionWrite": [],
-  "publishDate": "2024-06-04T16:31:00Z"
+  "publishedAt": "2025-01-01T00:00:00Z"
 }

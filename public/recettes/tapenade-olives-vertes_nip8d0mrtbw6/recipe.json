@@ -1,22 +1,26 @@
 
 {
-  "uuid": "nip8d0mrtbw6",
   "slug": "tapenade-olives-vertes_nip8d0mrtbw6",
   "title": "Tapenade Olives Vertes",
   "draft": false,
   "typeR": "entree",
   "categories": ["Tartinade"],
+  "description": null,
+  "region": null,
+  "saison": null,
+  "auteur": null,
   "regime": ["vegetarien","vegan","sans-gluten","sans-lactose"],
   "cuisson": false,
   "serveHot": false,
   "plate": 10,
   "quantite_desc": null,
   "check": true,
-  "checkAlwaysOk": false,
   "materiel": ["Robot Mixeur"],
   "ingredients": [{"allergens":[],"comment":"","name":"Olives Vertes Dénoyautées","normalizedQuantity":100,"normalizedUnit":"gr.","originalQuantity":100,"originalUnit":"gr.","type":"legumes","uuid":"163u4z"},{"allergens":[],"comment":"","name":"Ail","normalizedQuantity":6.5,"normalizedUnit":"gr.","originalQuantity":1,"originalUnit":"gousse·s","type":"legumes","uuid":"u2m28w"},{"allergens":[],"comment":"","name":"huile d'olive","normalizedQuantity":30,"normalizedUnit":"ml","originalQuantity":2,"originalUnit":"c. à soupe","type":"lof","uuid":"h3c8al"}],
   "preparation": "Dans un petit mixeur, ou à l'aide d'un mixeur plongeant, mixer les olives vertes avec l'ail grossièrement hâchée et l'huile d'olive.",
+  "preparation24h": "",
+  "astuces": null,
   "prepAlt": null,
   "permissionWrite": [],
-  "publishDate": "2024-03-18T13:28:23.107Z"
+  "publishedAt": "2025-01-01T00:00:00Z"
 }

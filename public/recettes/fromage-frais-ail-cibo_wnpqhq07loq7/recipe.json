@@ -1,22 +1,26 @@
 
 {
-  "uuid": "wnpqhq07loq7",
   "slug": "fromage-frais-ail-cibo_wnpqhq07loq7",
   "title": "Fromage Frais Ail - Ciboulette Vegan",
   "draft": false,
   "typeR": "entree",
   "categories": ["Tartinade"],
+  "description": null,
+  "region": null,
+  "saison": null,
+  "auteur": "ça vaut le détour ",
   "regime": ["vegan","sans-gluten","sans-lactose"],
   "cuisson": false,
   "serveHot": false,
   "plate": 50,
   "quantite_desc": null,
   "check": false,
-  "checkAlwaysOk": true,
   "materiel": null,
   "ingredients": [{"allergens":[],"comment":"","name":"Eau","normalizedQuantity":600,"normalizedUnit":"ml","originalQuantity":0.6,"originalUnit":"l.","type":"autres","uuid":"ljzb7j"},{"allergens":[],"comment":"","name":"Ciboulette","normalizedQuantity":4,"normalizedUnit":"bottes","originalQuantity":4,"originalUnit":"bottes","type":"epices","uuid":"mt22ff"},{"allergens":[],"comment":"","name":"Ail","normalizedQuantity":13,"normalizedUnit":"gr.","originalQuantity":2,"originalUnit":"gousse·s","type":"legumes","uuid":"u2m28w"},{"allergens":[],"comment":"","name":"huile de colza","normalizedQuantity":1000,"normalizedUnit":"ml","originalQuantity":1,"originalUnit":"l.","type":"lof","uuid":"eu7lc6"},{"allergens":[],"comment":"","name":"Jus de citron","normalizedQuantity":150,"normalizedUnit":"ml","originalQuantity":0.15,"originalUnit":"l.","type":"sucres","uuid":"e4mjd1"}],
   "preparation": "\n\nAjouter un peu plus de la moitié de chaque ingrédient (sauf la ciboulette), et mixer correctement. Goutter, et rajouter chaque ingrédient petit à petit pour qu'il y ait le bon dosage d'ail, de gras, d'acidité, et la bonne texture avec l'eau. Saler au gout.\n\nPossible 2 J avant\n\n\n\nLaver et ciseler finement la ciboulette. La mélanger au fromage.\n\nObligatoirement au dernier moment",
+  "preparation24h": "Faire tremper les graines de tournesol dans de l'eau tiède pendant 12 heures. Puis égoutter, rincer, et placer dans le bol d'un blender ou dans un récipient pour utiliser le mixeur plongeant.\n\nPossible 2 J avant",
+  "astuces": null,
   "prepAlt": null,
   "permissionWrite": [],
-  "publishDate": "2024-03-26T18:42:55.847Z"
+  "publishedAt": "2025-01-01T00:00:00Z"
 }

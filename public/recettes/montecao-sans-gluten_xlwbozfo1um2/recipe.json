@@ -1,22 +1,26 @@
 
 {
-  "uuid": "xlwbozfo1um2",
   "slug": "montecao-sans-gluten_xlwbozfo1um2",
   "title": "Montecao Sans Gluten",
   "draft": false,
   "typeR": "dessert",
   "categories": ["Biscuits"],
+  "description": null,
+  "region": null,
+  "saison": null,
+  "auteur": "Auré",
   "regime": ["vegan","sans-gluten"],
   "cuisson": true,
   "serveHot": false,
   "plate": 20,
   "quantite_desc": null,
   "check": true,
-  "checkAlwaysOk": true,
   "materiel": null,
   "ingredients": [{"allergens":[],"comment":"","name":"huile de colza","normalizedQuantity":400,"normalizedUnit":"gr.","originalQuantity":400,"originalUnit":"gr.","type":"lof","uuid":"eu7lc6"},{"allergens":[],"comment":"","name":"Farine de pois chiche","normalizedQuantity":270,"normalizedUnit":"gr.","originalQuantity":270,"originalUnit":"gr.","type":"lof","uuid":"o627mw"},{"allergens":[],"comment":"","name":"Farine de maïs","normalizedQuantity":270,"normalizedUnit":"gr.","originalQuantity":270,"originalUnit":"gr.","type":"lof","uuid":"z8uiyd"},{"allergens":[],"comment":"","name":"Farine de riz","normalizedQuantity":270,"normalizedUnit":"gr.","originalQuantity":270,"originalUnit":"gr.","type":"lof","uuid":"oygozr"},{"allergens":[],"comment":"","name":"Eau de fleur d'oranger","normalizedQuantity":60,"normalizedUnit":"ml","originalQuantity":4,"originalUnit":"c. à soupe","type":"sucres","uuid":"ikdk3g"},{"allergens":[],"comment":"","name":"sucre de canne (blond)","normalizedQuantity":340,"normalizedUnit":"gr.","originalQuantity":340,"originalUnit":"gr.","type":"sucres","uuid":"n85gmi"},{"allergens":[],"comment":"","name":"Cannelle","normalizedQuantity":10,"normalizedUnit":"gr.","originalQuantity":10,"originalUnit":"gr.","type":"epices","uuid":"sk1gbb"}],
   "preparation": "\nPeser la farine, le sucre et l'huile et les mettre dans un saladier ou le bol du mixer.\n\nBattre avec les crochets pétrisseurs.\n\nQuand la pâte est bien  homogène, façonner des petites boules en prélevant la pâte avec une cuillère à café.\n\nLa pâte étant un peu friable, on la presse bien entre les paumes des mains.\n\nDisposer sur une plaque recouverte de papier cuisson. \n\nAplatir légèrement le dessus de chaque boule  et saupoudrer d'une petite pincée de cannelle.\n\nEnfourner dans le four préchauffé à 175° durant 7 à 10 minutes.\n\nQuand le dessus des biscuits commence à se craqueler, baisser la \ntempérature à 150 ° et poursuivre la cuisson environ 5 à 7 minutes.\n\nParsemer à nouveau d'une petite pincée de cannelle.",
+  "preparation24h": null,
+  "astuces": null,
   "prepAlt": null,
   "permissionWrite": [],
-  "publishDate": "2025-05-30T17:34:00Z"
+  "publishedAt": "2025-01-01T00:00:00Z"
 }

@@ -1,22 +1,26 @@
 
 {
-  "uuid": "4v82ji62vke6",
   "slug": "melon-basilic_4v82ji62vke6",
   "title": "Melon Basilic",
   "draft": false,
   "typeR": "entree",
   "categories": ["Salade"],
+  "description": null,
+  "region": null,
+  "saison": ["ete"],
+  "auteur": null,
   "regime": ["vegetarien","vegan","sans-gluten","sans-lactose"],
   "cuisson": false,
   "serveHot": false,
   "plate": 24,
   "quantite_desc": "pour 2 petites tranches par personne",
   "check": true,
-  "checkAlwaysOk": true,
   "materiel": null,
   "ingredients": [{"allergens":[],"comment":"","name":"Melon","normalizedQuantity":4,"normalizedUnit":"unité","originalQuantity":4,"originalUnit":"unité","type":"legumes","uuid":"on84nb"},{"allergens":[],"comment":"","name":"Basilic","normalizedQuantity":1,"normalizedUnit":"bottes","originalQuantity":1,"originalUnit":"bottes","type":"epices","uuid":"s8j4ff"}],
   "preparation": ":)",
+  "preparation24h": null,
+  "astuces": null,
   "prepAlt": null,
   "permissionWrite": [],
-  "publishDate": "2025-07-31T08:31:00Z"
+  "publishedAt": "2025-01-01T00:00:00Z"
 }

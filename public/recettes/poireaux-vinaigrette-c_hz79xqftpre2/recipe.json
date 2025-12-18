@@ -1,22 +1,26 @@
 
 {
-  "uuid": "hz79xqftpre2",
   "slug": "poireaux-vinaigrette-c_hz79xqftpre2",
   "title": "Poireaux Vinaigrette Citronnee",
   "draft": false,
   "typeR": "entree",
   "categories": ["Salade"],
+  "description": null,
+  "region": null,
+  "saison": null,
+  "auteur": "Auré",
   "regime": ["vegan"],
   "cuisson": true,
   "serveHot": false,
   "plate": 50,
   "quantite_desc": "100",
   "check": true,
-  "checkAlwaysOk": false,
   "materiel": null,
   "ingredients": [{"allergens":[],"comment":"","name":"Ail","normalizedQuantity":32.5,"normalizedUnit":"gr.","originalQuantity":5,"originalUnit":"gousse·s","type":"legumes","uuid":"u2m28w"},{"allergens":[],"comment":"","name":"Citron jaune","normalizedQuantity":400,"normalizedUnit":"gr.","originalQuantity":4,"originalUnit":"unité","type":"legumes","uuid":"5cg0yu"},{"allergens":[],"comment":"","name":"Poireau","normalizedQuantity":7800,"normalizedUnit":"gr.","originalQuantity":52,"originalUnit":"unité","type":"legumes","uuid":"l3fs10"},{"allergens":[],"comment":"","name":"huile d'olive","normalizedQuantity":750,"normalizedUnit":"ml","originalQuantity":750,"originalUnit":"ml","type":"lof","uuid":"h3c8al"},{"allergens":[],"comment":"","name":"Thym","normalizedQuantity":5,"normalizedUnit":"gr.","originalQuantity":5,"originalUnit":"gr.","type":"epices","uuid":"a16yd7"},{"allergens":["Moutarde"],"comment":"","name":"Moutarde","normalizedQuantity":200,"normalizedUnit":"au goût","originalQuantity":200,"originalUnit":"au goût","type":"epices","uuid":"5c1b20"},{"allergens":[],"comment":"","name":"Sirop d'érable ","normalizedQuantity":150,"normalizedUnit":"ml","originalQuantity":150,"originalUnit":"ml","type":"sucres","uuid":"zkmmgt"}],
   "preparation": "Couper une fois dans la longueur les poireaux. Oter le cul et garder le vert.\n\nLes laver correctement.\n\nLes cuire à la vapeur. Ils doivent être bien bien fondants.\n\nFaire la vinaigrette.\n\nLes poireaux peuvent être servis tièdes ou froids.",
+  "preparation24h": null,
+  "astuces": null,
   "prepAlt": null,
   "permissionWrite": [],
-  "publishDate": "2025-01-05T20:40:00Z"
+  "publishedAt": "2025-01-01T00:00:00Z"
 }

@@ -1,22 +1,26 @@
 
 {
-  "uuid": "oe0ud1afn5xr",
   "slug": "burgers-galettes-de-po_oe0ud1afn5xr",
   "title": "Burgers (Galettes De Pomme De Terre) Et Frites",
   "draft": false,
   "typeR": "plat",
   "categories": ["Snacking"],
+  "description": null,
+  "region": null,
+  "saison": null,
+  "auteur": "Lucien",
   "regime": ["vegetarien"],
   "cuisson": true,
   "serveHot": true,
   "plate": 220,
   "quantite_desc": null,
   "check": true,
-  "checkAlwaysOk": false,
   "materiel": null,
   "ingredients": [{"allergens":[],"comment":"","name":"Cornichons aigre-doux","normalizedQuantity":1500,"normalizedUnit":"gr.","originalQuantity":1.5,"originalUnit":"kg","type":"autres","uuid":"eaudjn"},{"allergens":[],"comment":"","name":"Pain Burger","normalizedQuantity":190,"normalizedUnit":"unité","originalQuantity":190,"originalUnit":"unité","type":"autres","uuid":"1xyo35"},{"allergens":[],"comment":"","name":"Pain Burger Végan","normalizedQuantity":30,"normalizedUnit":"unité","originalQuantity":30,"originalUnit":"unité","type":"autres","uuid":"0zasob"},{"allergens":[],"comment":"Frites","name":"Pomme de terre","normalizedQuantity":50000,"normalizedUnit":"gr.","originalQuantity":50,"originalUnit":"kg","type":"legumes","uuid":"18dy4e"},{"allergens":[],"comment":"","name":"Salade Iceberg","normalizedQuantity":20,"normalizedUnit":"unité","originalQuantity":20,"originalUnit":"unité","type":"legumes","uuid":"ihweq6"},{"allergens":[],"comment":"","name":"Tomate","normalizedQuantity":5400,"normalizedUnit":"gr.","originalQuantity":45,"originalUnit":"unité","type":"legumes","uuid":"ibtbnq"},{"allergens":[],"comment":"Sauce Végane","name":"Ail","normalizedQuantity":32.5,"normalizedUnit":"gr.","originalQuantity":5,"originalUnit":"gousse·s","type":"legumes","uuid":"u2m28w"},{"allergens":[],"comment":"Sauce Végé","name":"Ail","normalizedQuantity":160,"normalizedUnit":"gr.","originalQuantity":2,"originalUnit":"tête·s","type":"legumes","uuid":"u2m28w"},{"allergens":[],"comment":"Galettes crique","name":"Ail","normalizedQuantity":480,"normalizedUnit":"gr.","originalQuantity":6,"originalUnit":"tête·s","type":"legumes","uuid":"u2m28w"},{"allergens":[],"comment":"Galettes crique","name":"Oignon","normalizedQuantity":5000,"normalizedUnit":"gr.","originalQuantity":5,"originalUnit":"kg","type":"legumes","uuid":"rtavky"},{"allergens":[],"comment":"Galettes crique","name":"Pomme de terre","normalizedQuantity":35000,"normalizedUnit":"gr.","originalQuantity":35,"originalUnit":"kg","type":"legumes","uuid":"18dy4e"},{"allergens":[],"comment":"","name":"huile de friture","normalizedQuantity":20000,"normalizedUnit":"ml","originalQuantity":20,"originalUnit":"l.","type":"lof","uuid":"1ej217"},{"allergens":["Oeuf"],"comment":"Galettes crique","name":"Oeuf","normalizedQuantity":30,"normalizedUnit":"unité","originalQuantity":30,"originalUnit":"unité","type":"lof","uuid":"zf3zf8"},{"allergens":[],"comment":"Sauce Végane","name":"Persil frais","normalizedQuantity":1,"normalizedUnit":"bottes","originalQuantity":1,"originalUnit":"bottes","type":"epices","uuid":"hgfa4e"},{"allergens":[],"comment":"Sauce Végé","name":"Persil frais","normalizedQuantity":7,"normalizedUnit":"bottes","originalQuantity":7,"originalUnit":"bottes","type":"epices","uuid":"hgfa4e"},{"allergens":[],"comment":"Galettes crique","name":"Persil frais","normalizedQuantity":10,"normalizedUnit":"bottes","originalQuantity":10,"originalUnit":"bottes","type":"epices","uuid":"hgfa4e"},{"allergens":[],"comment":"Sauce Végane","name":"Yaourt Végétal","normalizedQuantity":1200,"normalizedUnit":"gr.","originalQuantity":1.2,"originalUnit":"kg","type":"frais","uuid":"qiji6w"},{"allergens":["Produit laitier"],"comment":"Sauce Végé","name":"Fromage blanc","normalizedQuantity":8000,"normalizedUnit":"gr.","originalQuantity":8,"originalUnit":"kg","type":"frais","uuid":"b2dxf8"}],
   "preparation": "Crique\n\nSauce Végé et Sauce Végane\n\nGarniture\n\nFrites",
+  "preparation24h": null,
+  "astuces": null,
   "prepAlt": null,
   "permissionWrite": [],
-  "publishDate": "2025-06-19T11:10:00Z"
+  "publishedAt": "2025-01-01T00:00:00Z"
 }

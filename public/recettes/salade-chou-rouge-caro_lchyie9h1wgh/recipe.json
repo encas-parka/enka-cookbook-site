@@ -1,22 +1,26 @@
 
 {
-  "uuid": "lchyie9h1wgh",
   "slug": "salade-chou-rouge-caro_lchyie9h1wgh",
   "title": "Salade Chou Rouge Carottes Basilic",
   "draft": false,
   "typeR": "entree",
   "categories": ["Salade"],
+  "description": "Entrée pour le catering de la fête de la soupe 2025",
+  "region": "",
+  "saison": ["ete","printemps","automne"],
+  "auteur": "Alio",
   "regime": null,
   "cuisson": false,
   "serveHot": false,
   "plate": 100,
   "quantite_desc": "",
   "check": false,
-  "checkAlwaysOk": null,
   "materiel": [],
   "ingredients": [{"allergens":["Alcool"],"comment":"","name":"Vinaigre de cidre","normalizedQuantity":350,"normalizedUnit":"ml","originalQuantity":350,"originalUnit":"ml","type":"epices","uuid":"7qo3ht"},{"allergens":[],"comment":"","name":"Basilic","normalizedQuantity":2,"normalizedUnit":"bottes","originalQuantity":2,"originalUnit":"bottes","type":"epices","uuid":"s8j4ff"},{"allergens":[],"comment":"","name":"Carotte","normalizedQuantity":5500,"normalizedUnit":"gr.","originalQuantity":5.5,"originalUnit":"kg","type":"legumes","uuid":"eouu0v"},{"allergens":[],"comment":"","name":"Chou rouge","normalizedQuantity":5500,"normalizedUnit":"gr.","originalQuantity":5.5,"originalUnit":"kg","type":"legumes","uuid":"nl2s2n"}],
   "preparation": "Râper les carottes\n\nCouper finement le chou rouge\n\nHacher le basilic\n\nAssaisonner avec de l'huile d'olive, sel, et vinaigre de cidre",
+  "preparation24h": "",
+  "astuces": [],
   "prepAlt": [],
   "permissionWrite": [],
-  "publishDate": "2025-10-19T18:40:00Z"
+  "publishedAt": "2025-01-01T00:00:00Z"
 }

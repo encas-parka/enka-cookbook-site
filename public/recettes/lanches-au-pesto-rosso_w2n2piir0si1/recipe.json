@@ -1,22 +1,26 @@
 
 {
-  "uuid": "w2n2piir0si1",
   "slug": "lanches-au-pesto-rosso_w2n2piir0si1",
   "title": "Lanches Au Pesto Rosso Végane Et Sans Gluten",
   "draft": false,
   "typeR": "entree",
   "categories": ["Snacking"],
+  "description": null,
+  "region": null,
+  "saison": null,
+  "auteur": "Auré",
   "regime": null,
   "cuisson": true,
   "serveHot": true,
   "plate": 20,
   "quantite_desc": "1 par personne",
   "check": false,
-  "checkAlwaysOk": true,
   "materiel": null,
   "ingredients": [{"allergens":[],"comment":"","name":"Levure boulangère sans gluten","normalizedQuantity":14,"normalizedUnit":"gr.","originalQuantity":14,"originalUnit":"gr.","type":"lof","uuid":"ec0v6n"},{"allergens":[],"comment":"","name":"huile d'olive","normalizedQuantity":30,"normalizedUnit":"ml","originalQuantity":30,"originalUnit":"ml","type":"lof","uuid":"h3c8al"},{"allergens":[],"comment":"","name":"Lait de riz","normalizedQuantity":280,"normalizedUnit":"ml","originalQuantity":280,"originalUnit":"ml","type":"lof","uuid":"hzwesd"},{"allergens":[],"comment":"","name":"Fécule de maïs (Maïzena)","normalizedQuantity":80,"normalizedUnit":"gr.","originalQuantity":80,"originalUnit":"gr.","type":"lof","uuid":"8nbcjp"},{"allergens":[],"comment":"","name":"Farine de millet","normalizedQuantity":100,"normalizedUnit":"gr.","originalQuantity":100,"originalUnit":"gr.","type":"lof","uuid":"nxk1ar"},{"allergens":[],"comment":"","name":"Farine de riz","normalizedQuantity":300,"normalizedUnit":"gr.","originalQuantity":300,"originalUnit":"gr.","type":"lof","uuid":"oygozr"},{"allergens":[],"comment":"","name":"Pesto Rosso végan","normalizedQuantity":400,"normalizedUnit":"gr.","originalQuantity":400,"originalUnit":"gr.","type":"autres","uuid":"lz3awd"},{"allergens":[],"comment":"","name":"Gomme de xanthane","normalizedQuantity":10,"normalizedUnit":"ml","originalQuantity":2,"originalUnit":"c. à café","type":"autres","uuid":"5le7rm"},{"allergens":[],"comment":"","name":"Gomme de guar","normalizedQuantity":30,"normalizedUnit":"ml","originalQuantity":2,"originalUnit":"c. à soupe","type":"autres","uuid":"9tn9mn"},{"allergens":[],"comment":"","name":"Sucre en poudre","normalizedQuantity":60,"normalizedUnit":"gr.","originalQuantity":60,"originalUnit":"gr.","type":"sucres","uuid":"u9z2he"},{"allergens":[],"comment":"","name":"Sel","normalizedQuantity":0.8,"normalizedUnit":"gr.","originalQuantity":2,"originalUnit":"pincées","type":"epices","uuid":"2juq3x"}],
   "preparation": "Dans le bol du robot verser les farines, la fécule, les gommes.\n\nEn parallèle faire tiédir LÉGÈREMENT le lait et y laisser reposer la levure une dizaine de minutes. Attention le lait doit être tiède et non chaud sinon cela tue l’action de la levure.\n\nCommencer à pétrir à l’aide du crochet puis ajouter le mélange lait / levure.\n\nIncorporer ensuite le sucre et le sel.\n\nPétrir une dizaine de minutes puis intégrer l’huile et pétrir de nouveau jusqu’à ce que la pâte se décolle des bords du robot.\n\nLaisser pousser 2 heures à température ambiante ou dans un four à une vingtaine de degrés (recouvrir d’un papier film au contact de la pâte)\n\nDégazer ensuite votre pâte, la couper en deux. Etaler deux rectangle, découper 10 bandes par rectangle.\n\nGarnir un côté avec une belle cuillère de pesto rosso végan sans gluten et replier la bande sur elle même.\n\nLaisser pousser sur une plaque sulfurisée une seconde fois pendant 1 heure et mettre au four pour une 15/20 min  à 180 degrés. Vérifier la cuisson et laisser plus longtemps si nécessaire.",
+  "preparation24h": "Faire la pâte la veille et la première poussée dans la nuit au frigo.",
+  "astuces": null,
   "prepAlt": null,
   "permissionWrite": [],
-  "publishDate": "2024-05-23T22:54:00Z"
+  "publishedAt": "2025-01-01T00:00:00Z"
 }

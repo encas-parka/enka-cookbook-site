@@ -1,22 +1,26 @@
 
 {
-  "uuid": "od3r5jza14im",
   "slug": "veganaise-rapide_od3r5jza14im",
   "title": "Véganaise Rapide",
   "draft": false,
   "typeR": "plat",
   "categories": ["Sauce"],
+  "description": null,
+  "region": null,
+  "saison": null,
+  "auteur": "Marion",
   "regime": ["vegetarien","vegan","sans-gluten","sans-lactose"],
   "cuisson": false,
   "serveHot": false,
   "plate": 100,
   "quantite_desc": null,
   "check": true,
-  "checkAlwaysOk": true,
   "materiel": ["Giraffe (Bras Mixeur)"],
   "ingredients": [{"allergens":[],"comment":"","name":"Sel","normalizedQuantity":15,"normalizedUnit":"gr.","originalQuantity":1,"originalUnit":"c. à soupe","type":"epices","uuid":"2juq3x"},{"allergens":["Moutarde"],"comment":"","name":"Moutarde","normalizedQuantity":150,"normalizedUnit":"ml","originalQuantity":150,"originalUnit":"ml","type":"epices","uuid":"5c1b20"},{"allergens":[],"comment":"","name":"huile de tournesol","normalizedQuantity":1200,"normalizedUnit":"ml","originalQuantity":1.2,"originalUnit":"l.","type":"lof","uuid":"c70jxb"},{"allergens":["Soja"],"comment":"","name":"Crème Végétale","normalizedQuantity":600,"normalizedUnit":"ml","originalQuantity":600,"originalUnit":"ml","type":"lof","uuid":"aq796v"}],
   "preparation": "* Mettre tous les ingrédients dans un grand bocal ou deux selon les quantités. La crème soja doit être froide.\n* Mixer avec un bras mixeur.",
+  "preparation24h": "Mettre la crème soja au frais, la recette marche mieux si elle est froide (pas testé autrement)",
+  "astuces": null,
   "prepAlt": null,
   "permissionWrite": [],
-  "publishDate": "2024-03-08T11:49:45.632Z"
+  "publishedAt": "2025-01-01T00:00:00Z"
 }

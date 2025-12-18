@@ -1,22 +1,26 @@
 
 {
-  "uuid": "hycxy4esy2bt",
   "slug": "pao-sin-queijo-version_hycxy4esy2bt",
   "title": "Pao Sin Queijo - Version Végane",
   "draft": false,
   "typeR": "entree",
   "categories": ["Bouchées salées"],
+  "description": null,
+  "region": "Brésil",
+  "saison": null,
+  "auteur": null,
   "regime": ["vegan","sans-gluten"],
   "cuisson": true,
   "serveHot": true,
   "plate": 16,
   "quantite_desc": "2 boules par personne",
   "check": false,
-  "checkAlwaysOk": false,
   "materiel": null,
   "ingredients": [{"allergens":[],"comment":"","name":"Eau","normalizedQuantity":250,"normalizedUnit":"ml","originalQuantity":250,"originalUnit":"ml","type":"autres","uuid":"ljzb7j"},{"allergens":[],"comment":"","name":"Ail en poudre","normalizedQuantity":30,"normalizedUnit":"ml","originalQuantity":2,"originalUnit":"c. à soupe","type":"epices","uuid":"vs2dfm"},{"allergens":[],"comment":"","name":"Sel","normalizedQuantity":20,"normalizedUnit":"gr.","originalQuantity":4,"originalUnit":"c. à café","type":"epices","uuid":"2juq3x"},{"allergens":[],"comment":"en purée","name":"Pomme de terre","normalizedQuantity":400,"normalizedUnit":"gr.","originalQuantity":400,"originalUnit":"gr.","type":"legumes","uuid":"18dy4e"},{"allergens":[],"comment":"pour travailler la pâte","name":"Farine de tapioca","normalizedQuantity":250,"normalizedUnit":"gr.","originalQuantity":250,"originalUnit":"gr.","type":"lof","uuid":"v212im"},{"allergens":[],"comment":"","name":"Huile végétale","normalizedQuantity":165,"normalizedUnit":"ml","originalQuantity":165,"originalUnit":"ml","type":"lof","uuid":"atccqu"},{"allergens":[],"comment":"","name":"Lait végétal (au choix)","normalizedQuantity":125,"normalizedUnit":"ml","originalQuantity":125,"originalUnit":"ml","type":"lof","uuid":"vw9d1a"},{"allergens":[],"comment":"","name":"Farine de tapioca","normalizedQuantity":1000,"normalizedUnit":"gr.","originalQuantity":1,"originalUnit":"kg","type":"lof","uuid":"v212im"}],
   "preparation": "Chauffer les ingrédients humides : Dans une casserole à feu moyen-vif, mélanger l'eau, l'huile, le lait végétal et le sel. Faites chauffer jusqu'à formation de petites bulles (ne pas laisser bouillir), puis verser lentement sur la farine de tapioca. A l'aide d'une cuillère en bois, remuer la pâte jusqu'à ce qu'elle devienne élastique.\n\nRepos : Couvrir le mélange de tapioca et laisser reposer 10 minutes dans un endroit tiède.\n\nFaire une purée : Pendant ce temps, éplucher et cuire les pommes de terre dans de l'eau bouillante salée jusqu'à ce qu'elles soient tendres à la fourchette. Écraser jusqu'à consistance lisse.\n\nPréparer la pâte : Au mélange de tapioca, ajouter la purée de pommes de terre et la poudre d'ail. La pâte sera collante mais maniable.\n\nPétrir la pâte : Saupoudrer légèrement un plan de travail propre avec de la farine de tapioca, puis transférez la pâte sur la surface farinée et commencer à pétrir. Si à un moment donné la pâte commence à coller aux mains ou au plan de travail, saupoudrer un peu plus de farine de tapioca sur la pâte et continuer à pétrir.\n\nForme : Diviser maintenant la pâte en nombre de parts nécessaires, les former en boules, la taille traditionnelle est celle d'une balle de golf.\n\nCuire au four : Préchauffer à 180°. Transférer les boules dans un plat allant au four huilé (ou du papier sulfurisé huilé) et cuire au four pendant 30 minutes. Le pao de queijo végétalien doit être doré à l’extérieur et cuit mais moelleux à l’intérieur.",
+  "preparation24h": null,
+  "astuces": null,
   "prepAlt": [{"recetteAlt":"pao-de-qeijo_0rq586k4"}],
   "permissionWrite": [],
-  "publishDate": "2024-06-18T11:51:00Z"
+  "publishedAt": "2025-01-01T00:00:00Z"
 }

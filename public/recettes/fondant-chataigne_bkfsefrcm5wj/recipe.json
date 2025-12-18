@@ -1,22 +1,26 @@
 
 {
-  "uuid": "bkfsefrcm5wj",
   "slug": "fondant-chataigne_bkfsefrcm5wj",
   "title": "Fondant Chataigne",
   "draft": false,
   "typeR": "dessert",
   "categories": ["Gateau"],
+  "description": null,
+  "region": null,
+  "saison": null,
+  "auteur": null,
   "regime": ["sans-gluten","vegetarien"],
   "cuisson": true,
   "serveHot": false,
   "plate": 100,
   "quantite_desc": "24 parts par gastro (env. 9cmx8cm)",
   "check": true,
-  "checkAlwaysOk": false,
   "materiel": ["Gastro 1/1 (Normaux)","Four"],
   "ingredients": [{"allergens":[],"comment":"","name":"Sel","normalizedQuantity":10,"normalizedUnit":"gr.","originalQuantity":2,"originalUnit":"c. à café","type":"epices","uuid":"2juq3x"},{"allergens":[],"comment":"","name":"Farine de riz gluant","normalizedQuantity":150,"normalizedUnit":"gr.","originalQuantity":150,"originalUnit":"gr.","type":"lof","uuid":"civ587"},{"allergens":["Oeuf"],"comment":"","name":"Oeuf","normalizedQuantity":30,"normalizedUnit":"unité","originalQuantity":30,"originalUnit":"unité","type":"lof","uuid":"zf3zf8"},{"allergens":[],"comment":"","name":"Sucre en poudre","normalizedQuantity":1500,"normalizedUnit":"gr.","originalQuantity":1.5,"originalUnit":"kg","type":"sucres","uuid":"u9z2he"},{"allergens":[],"comment":"","name":"Confiture de chataigne (sans sucre)","normalizedQuantity":2300,"normalizedUnit":"gr.","originalQuantity":2.3,"originalUnit":"kg","type":"sucres","uuid":"q33x0k"},{"allergens":["Produit laitier"],"comment":"","name":"Beurre doux","normalizedQuantity":1000,"normalizedUnit":"gr.","originalQuantity":1,"originalUnit":"kg","type":"frais","uuid":"kmq1zb"}],
   "preparation": "* Faire fondre le beurre.\n* Mélanger tout afin d'obtenir une pâte homogène.\n* Tapisser les gastro de papier sulfurisé et verser la pâte.\n* Cuire dans un four préchauffé à 200°, une vingtaine de minutes.\n* Le gateau gonfle, se fissure, le sortir quand le coeur est encore tremblotant, et le laisser refroidir completement avant de faire les parts.\n\n(24 parts par gastro. )",
+  "preparation24h": null,
+  "astuces": null,
   "prepAlt": [{"recetteAlt":"-fondant-chataigne-vegan-et-sans-gluten_i1caicq2"}],
   "permissionWrite": [],
-  "publishDate": "2024-05-18T13:02:00Z"
+  "publishedAt": "2025-01-01T00:00:00Z"
 }

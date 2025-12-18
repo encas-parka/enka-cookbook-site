@@ -1,22 +1,26 @@
 
 {
-  "uuid": "cu5wc60t605t",
   "slug": "barre-cereales-noisett_cu5wc60t605t",
   "title": "Barre Cereales Noisettes",
   "draft": false,
   "typeR": "dessert",
   "categories": ["Biscuits"],
+  "description": null,
+  "region": null,
+  "saison": null,
+  "auteur": null,
   "regime": ["vegan"],
   "cuisson": true,
   "serveHot": false,
   "plate": 20,
   "quantite_desc": null,
   "check": true,
-  "checkAlwaysOk": false,
   "materiel": null,
   "ingredients": [{"allergens":["Fruit à coque"],"comment":"","name":"Amandes effilées","normalizedQuantity":50,"normalizedUnit":"gr.","originalQuantity":50,"originalUnit":"gr.","type":"sec","uuid":"xkijt9"},{"allergens":[],"comment":"","name":"Flocons d'avoine sans gluten","normalizedQuantity":135,"normalizedUnit":"gr.","originalQuantity":135,"originalUnit":"gr.","type":"sec","uuid":"02w66c"},{"allergens":[],"comment":"","name":"corn flakes","normalizedQuantity":80,"normalizedUnit":"gr.","originalQuantity":80,"originalUnit":"gr.","type":"sec","uuid":"kp0srn"},{"allergens":[],"comment":"","name":"Raisin sec","normalizedQuantity":50,"normalizedUnit":"gr.","originalQuantity":50,"originalUnit":"gr.","type":"legumes","uuid":"9yf54l"},{"allergens":["Gluten"],"comment":"","name":"Farine d'épeautre","normalizedQuantity":80,"normalizedUnit":"gr.","originalQuantity":80,"originalUnit":"gr.","type":"lof","uuid":"861x4y"},{"allergens":[],"comment":"","name":"huile de tournesol","normalizedQuantity":100,"normalizedUnit":"gr.","originalQuantity":100,"originalUnit":"gr.","type":"lof","uuid":"c70jxb"},{"allergens":[],"comment":"","name":"Chocolat noir patissier 70p100","normalizedQuantity":100,"normalizedUnit":"gr.","originalQuantity":100,"originalUnit":"gr.","type":"sucres","uuid":"1e3zhq"},{"allergens":[],"comment":"","name":"Sirop d'érable ","normalizedQuantity":200,"normalizedUnit":"gr.","originalQuantity":200,"originalUnit":"gr.","type":"sucres","uuid":"zkmmgt"},{"allergens":[],"comment":"","name":"Sucre vanillé","normalizedQuantity":100,"normalizedUnit":"gr.","originalQuantity":100,"originalUnit":"gr.","type":"sucres","uuid":"dgwl19"},{"allergens":[],"comment":"","name":"Sel","normalizedQuantity":5,"normalizedUnit":"gr.","originalQuantity":1,"originalUnit":"c. à café","type":"epices","uuid":"2juq3x"},{"allergens":["Arachides"],"comment":"","name":"Beurre de cacahuètes (salé)","normalizedQuantity":100,"normalizedUnit":"gr.","originalQuantity":100,"originalUnit":"gr.","type":"autres","uuid":"ks3ocl"}],
   "preparation": "Préchauffer le four à 180C\n\nConcasser le chocolat en petits morceaux\n\nMélanger tous les ingrédients dans une jarre.\n\nVerser dans un plat à four et aplanir avec une maryse.\n\nMettre au four 40min.\n\nServir froid.",
+  "preparation24h": null,
+  "astuces": null,
   "prepAlt": null,
   "permissionWrite": [],
-  "publishDate": "2025-08-08T08:51:00Z"
+  "publishedAt": "2025-01-01T00:00:00Z"
 }

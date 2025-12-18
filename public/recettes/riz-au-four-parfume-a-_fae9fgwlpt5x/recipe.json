@@ -1,22 +1,26 @@
 
 {
-  "uuid": "fae9fgwlpt5x",
   "slug": "riz-au-four-parfume-a-_fae9fgwlpt5x",
   "title": "Riz Au Four Parfumé À La Menthe, Grenade Et Oilves Vertes",
   "draft": false,
   "typeR": "plat",
   "categories": ["Plat chaud"],
+  "description": null,
+  "region": "",
+  "saison": null,
+  "auteur": "Ottolenghi",
   "regime": ["vegetarien","sans-gluten"],
   "cuisson": true,
   "serveHot": true,
   "plate": 6,
   "quantite_desc": null,
   "check": true,
-  "checkAlwaysOk": false,
   "materiel": null,
   "ingredients": [{"allergens":["Fruit à coque"],"comment":"","name":"Noix","normalizedQuantity":50,"normalizedUnit":"gr.","originalQuantity":50,"originalUnit":"gr.","type":"sec","uuid":"usibcf"},{"allergens":[],"comment":"","name":"Riz","normalizedQuantity":400,"normalizedUnit":"gr.","originalQuantity":400,"originalUnit":"gr.","type":"sec","uuid":"0uelc3"},{"allergens":[],"comment":"","name":"Ail","normalizedQuantity":6.5,"normalizedUnit":"gr.","originalQuantity":1,"originalUnit":"gousse·s","type":"legumes","uuid":"u2m28w"},{"allergens":[],"comment":"","name":"Grenade","normalizedQuantity":90,"normalizedUnit":"gr.","originalQuantity":90,"originalUnit":"gr.","type":"legumes","uuid":"j3mr9h"},{"allergens":[],"comment":"","name":"Olives","normalizedQuantity":40,"normalizedUnit":"gr.","originalQuantity":40,"originalUnit":"gr.","type":"legumes","uuid":"75wo2d"},{"allergens":[],"comment":"","name":"huile d'olive","normalizedQuantity":45,"normalizedUnit":"ml","originalQuantity":3,"originalUnit":"c. à soupe","type":"lof","uuid":"h3c8al"},{"allergens":["Produit laitier"],"comment":"","name":"Feta","normalizedQuantity":150,"normalizedUnit":"gr.","originalQuantity":150,"originalUnit":"gr.","type":"frais","uuid":"m5dxyo"},{"allergens":["Produit laitier"],"comment":"","name":"Beurre doux","normalizedQuantity":50,"normalizedUnit":"gr.","originalQuantity":50,"originalUnit":"gr.","type":"frais","uuid":"kmq1zb"},{"allergens":[],"comment":"","name":"Melasse de grenade","normalizedQuantity":15,"normalizedUnit":"ml","originalQuantity":1,"originalUnit":"c. à soupe","type":"epices","uuid":"ia5a5o"},{"allergens":[],"comment":"","name":"Menthe","normalizedQuantity":50,"normalizedUnit":"gr.","originalQuantity":50,"originalUnit":"gr.","type":"epices","uuid":"2j9y2v"}],
   "preparation": "I. Préchauffez le four à à 230 'C (chaleur tournante) ou plus si votre four le permet.\n\n2. Versez le riz dans un plat à gratin à bords hauts de 20 x 30 cm.\n\nAssaisonnez avec ¾ de cuillère à café de sel et du poivre à volonté, arrosez de beurre fondu, puis mouillez avec l'eau bouillante. Déposez les brins de menthe sur le dessus, puis couvrez le plat hermétiquement ave du papier d'aluminium.\n\nEnfournez pour 25 minutes en fin de cuisson, le riz doit avoir absorbé tout le liquide et s'égrener facilement.\n\n3. Pendant que le riz cuit, versez tous les ingrédients prévus pour la garniture sauf les 10 g de menthe ciselée dans un cul-depoule, ajoutez ¼ de cuillère à café de sel, mélangez et réservez.\n\n4. Sortez le riz du four et retirez le papier d'aluminium. Prélevez les feuilles sur les brins de menthe (jetez les tiges) et déposez-les sur le riz, puis parseme de feta. Juste avant de servir, incorporez les 10 g de menthe ciselée dans la garniture et versez sur le riz de manière homogène. Servez chaud.",
+  "preparation24h": null,
+  "astuces": null,
   "prepAlt": null,
   "permissionWrite": [],
-  "publishDate": "2024-05-29T20:01:00Z"
+  "publishedAt": "2025-01-01T00:00:00Z"
 }

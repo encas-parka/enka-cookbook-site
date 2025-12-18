@@ -1,22 +1,26 @@
 
 {
-  "uuid": "1xi8sogude9r",
   "slug": "tartinade-chataigne-et_1xi8sogude9r",
   "title": "Tartinade Chataigne Et Oignons ",
   "draft": false,
   "typeR": "plat",
   "categories": ["Tartinade","Accompagnement"],
+  "description": null,
+  "region": null,
+  "saison": null,
+  "auteur": null,
   "regime": ["vegan","sans-gluten","sans-lactose"],
   "cuisson": true,
   "serveHot": false,
   "plate": 200,
   "quantite_desc": null,
   "check": true,
-  "checkAlwaysOk": false,
   "materiel": ["Bruleur","Robot Mixeur"],
   "ingredients": [{"allergens":[],"comment":"","name":"Oignon","normalizedQuantity":5000,"normalizedUnit":"gr.","originalQuantity":5,"originalUnit":"kg","type":"legumes","uuid":"rtavky"},{"allergens":[],"comment":"","name":"Purée chataîgne sans sucre","normalizedQuantity":6000,"normalizedUnit":"gr.","originalQuantity":6,"originalUnit":"kg","type":"legumes","uuid":"xm77fg"},{"allergens":[],"comment":"","name":"Huile végétale","normalizedQuantity":1,"normalizedUnit":"au goût","originalQuantity":1,"originalUnit":"au goût","type":"lof","uuid":"atccqu"},{"allergens":["Soja"],"comment":"","name":"Crème soja","normalizedQuantity":500,"normalizedUnit":"ml","originalQuantity":500,"originalUnit":"ml","type":"lof","uuid":"chfwwq"},{"allergens":[],"comment":"","name":"Romarin","normalizedQuantity":1,"normalizedUnit":"au goût","originalQuantity":1,"originalUnit":"au goût","type":"epices","uuid":"6z655r"},{"allergens":[],"comment":"","name":"Thym","normalizedQuantity":1,"normalizedUnit":"au goût","originalQuantity":1,"originalUnit":"au goût","type":"epices","uuid":"a16yd7"},{"allergens":[],"comment":"","name":"Poivre","normalizedQuantity":1,"normalizedUnit":"au goût","originalQuantity":1,"originalUnit":"au goût","type":"epices","uuid":"2pps90"},{"allergens":[],"comment":"","name":"Levure de bière","normalizedQuantity":500,"normalizedUnit":"gr.","originalQuantity":500,"originalUnit":"gr.","type":"lof","uuid":"4be4ic"},{"allergens":[],"comment":"","name":"sucre blanc","normalizedQuantity":200,"normalizedUnit":"gr.","originalQuantity":200,"originalUnit":"gr.","type":"sucres","uuid":"lny16c"}],
   "preparation": "Couper les oignons et les faire caraméliser dans une poêle. Ajouter sucre sel thym et romarin quelques minutes avant la fin de la cuisson.\n\nPuis mixer tout les ingrédients restant + les oignons ensemble.  Ajouter huile jusqu'à avoir une belle consistance.",
+  "preparation24h": null,
+  "astuces": null,
   "prepAlt": null,
   "permissionWrite": [],
-  "publishDate": "2025-05-11T12:24:00Z"
+  "publishedAt": "2025-01-01T00:00:00Z"
 }

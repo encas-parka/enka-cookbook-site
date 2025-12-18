@@ -1,22 +1,26 @@
 
 {
-  "uuid": "rls5yc07k88e",
   "slug": "bouillon-soto-version-_rls5yc07k88e",
   "title": "Bouillon Soto - Version Végane Du Bouillon De Poulet À La Javanaise",
   "draft": false,
   "typeR": "entree",
   "categories": ["Soupe"],
+  "description": null,
+  "region": "Java",
+  "saison": null,
+  "auteur": "Auré",
   "regime": ["vegan","sans-gluten"],
   "cuisson": true,
   "serveHot": true,
   "plate": 40,
   "quantite_desc": "bol d'environ 25cl par personne",
   "check": false,
-  "checkAlwaysOk": false,
   "materiel": null,
   "ingredients": [{"allergens":[],"comment":"","name":"Eau","normalizedQuantity":12000,"normalizedUnit":"ml","originalQuantity":12,"originalUnit":"l.","type":"autres","uuid":"ljzb7j"},{"allergens":["Soja"],"comment":"","name":"Tamari (sauce)","normalizedQuantity":350,"normalizedUnit":"ml","originalQuantity":350,"originalUnit":"ml","type":"epices","uuid":"bbwo4n"},{"allergens":[],"comment":"","name":"poivre blanc moulue","normalizedQuantity":15,"normalizedUnit":"gr.","originalQuantity":15,"originalUnit":"gr.","type":"epices","uuid":"7lakpz"},{"allergens":[],"comment":"","name":"Bouillon de légume (sans gluten)","normalizedQuantity":16,"normalizedUnit":"unité","originalQuantity":16,"originalUnit":"unité","type":"epices","uuid":"tmk6ya"},{"allergens":[],"comment":"","name":"Cumin moulu","normalizedQuantity":20,"normalizedUnit":"gr.","originalQuantity":20,"originalUnit":"gr.","type":"epices","uuid":"he3u48"},{"allergens":[],"comment":"","name":"Coriandre en poudre","normalizedQuantity":20,"normalizedUnit":"gr.","originalQuantity":20,"originalUnit":"gr.","type":"epices","uuid":"nf05n7"},{"allergens":[],"comment":"","name":"Citronnelle (bâton)","normalizedQuantity":300,"normalizedUnit":"gr.","originalQuantity":3,"originalUnit":"unité","type":"epices","uuid":"t2e14k"},{"allergens":[],"comment":"","name":"Feuille de laurier","normalizedQuantity":4,"normalizedUnit":"unité","originalQuantity":4,"originalUnit":"unité","type":"epices","uuid":"j84olg"},{"allergens":["Céleri"],"comment":"","name":"Céleri branche","normalizedQuantity":200,"normalizedUnit":"gr.","originalQuantity":200,"originalUnit":"gr.","type":"legumes","uuid":"78fo97"},{"allergens":[],"comment":"","name":"Poireau","normalizedQuantity":500,"normalizedUnit":"gr.","originalQuantity":500,"originalUnit":"gr.","type":"legumes","uuid":"l3fs10"},{"allergens":[],"comment":"","name":"Echalote","normalizedQuantity":1000,"normalizedUnit":"gr.","originalQuantity":1,"originalUnit":"kg","type":"legumes","uuid":"vwdomu"},{"allergens":[],"comment":"","name":"Gingembre bio","normalizedQuantity":100,"normalizedUnit":"gr.","originalQuantity":100,"originalUnit":"gr.","type":"legumes","uuid":"nz839c"},{"allergens":[],"comment":"","name":"Ail","normalizedQuantity":160,"normalizedUnit":"gr.","originalQuantity":2,"originalUnit":"tête·s","type":"legumes","uuid":"u2m28w"},{"allergens":[],"comment":"","name":"Jus de citron","normalizedQuantity":350,"normalizedUnit":"ml","originalQuantity":350,"originalUnit":"ml","type":"sucres","uuid":"e4mjd1"}],
   "preparation": "Mettre une gamelle d'eau sur le feux, faire bouillir.\n\nEmincer finement les poireaux, échalottes et le céleri.\n\nHacher le gingembre et l’ail. Verser dans la gamelle.\n\nCasser les bâtons de citronnelle et plonger de même.\n\nAjouter les épices, laurier, coriandre moulue, cumin moulu, poivre blanc, sel ainsi que la sauce tamari.\n\nLe citron sera verser en fin de cuisson.\n\nGoûter et rectifier l’assaisonnement. Laisser mijoter 45min à 1h minimum.\n\nAjouter le jus de citron petit à petit en goûtant. Saler, rectifier l’assaisonnement.\n\nAvant le service, ôter toute la citronnelle, feuilles de laurier.\n\nBol de 25cl par personne.",
+  "preparation24h": null,
+  "astuces": null,
   "prepAlt": null,
   "permissionWrite": [],
-  "publishDate": "2024-06-17T22:01:00Z"
+  "publishedAt": "2025-01-01T00:00:00Z"
 }

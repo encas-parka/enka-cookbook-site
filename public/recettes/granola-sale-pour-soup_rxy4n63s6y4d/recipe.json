@@ -1,22 +1,26 @@
 
 {
-  "uuid": "rxy4n63s6y4d",
   "slug": "granola-sale-pour-soup_rxy4n63s6y4d",
   "title": "Granola Salé Pour Soupe",
   "draft": false,
   "typeR": "entree",
   "categories": ["Soupe"],
+  "description": null,
+  "region": null,
+  "saison": null,
+  "auteur": "Auré",
   "regime": ["vegan"],
   "cuisson": true,
   "serveHot": false,
   "plate": 100,
   "quantite_desc": null,
   "check": false,
-  "checkAlwaysOk": false,
   "materiel": null,
   "ingredients": [{"allergens":["Sésame"],"comment":"","name":"Graines de sésame blanc","normalizedQuantity":250,"normalizedUnit":"gr.","originalQuantity":250,"originalUnit":"gr.","type":"sec","uuid":"z9plfy"},{"allergens":[],"comment":"","name":"","normalizedQuantity":250,"normalizedUnit":"gr.","originalQuantity":250,"originalUnit":"gr.","type":"","uuid":""},{"allergens":["Gluten"],"comment":"","name":"Flocons d'avoine","normalizedQuantity":1000,"normalizedUnit":"gr.","originalQuantity":1,"originalUnit":"kg","type":"sec","uuid":"ovewgk"},{"allergens":[],"comment":"","name":"Thym","normalizedQuantity":15,"normalizedUnit":"gr.","originalQuantity":15,"originalUnit":"gr.","type":"epices","uuid":"a16yd7"},{"allergens":[],"comment":"","name":"Paprika","normalizedQuantity":15,"normalizedUnit":"gr.","originalQuantity":15,"originalUnit":"gr.","type":"epices","uuid":"bidsmu"},{"allergens":[],"comment":"","name":"Concentré de tomate","normalizedQuantity":100,"normalizedUnit":"gr.","originalQuantity":100,"originalUnit":"gr.","type":"epices","uuid":"mck2wl"},{"allergens":["Gluten"],"comment":"","name":"Miso d'orge","normalizedQuantity":100,"normalizedUnit":"gr.","originalQuantity":100,"originalUnit":"gr.","type":"epices","uuid":"z8jaad"},{"allergens":[],"comment":"","name":"huile d'olive","normalizedQuantity":180,"normalizedUnit":"ml","originalQuantity":180,"originalUnit":"ml","type":"lof","uuid":"h3c8al"},{"allergens":[],"comment":"","name":"Sirop d'agave","normalizedQuantity":180,"normalizedUnit":"ml","originalQuantity":180,"originalUnit":"ml","type":"sucres","uuid":"7cflkx"}],
   "preparation": ".....Mélanger les flocons d'avoine, les graines dans un saladier.\n\nDans un petit bol, fouetter les autres ingrédients. Verser le mélange d'avoine et bien mélanger pour bien enrober.\n\nÉtaler sur une plaque de cuisson recouverte de papier sulfurisé, en formant une couche de 2 mm d'épaisseur. Cuire au four à 180 °C pendant 15 minutes en surveillant attentivement la cuisson du granola pour éviter qu'il ne brûle. Remuer délicatement après 10 minutes de cuisson.\n\nLaisser refroidir et conserver dans un bocal. Parsemer sur des soupes, des salades, des bols de légumes, etc.",
+  "preparation24h": null,
+  "astuces": null,
   "prepAlt": null,
   "permissionWrite": [],
-  "publishDate": "2025-05-30T15:55:00Z"
+  "publishedAt": "2025-01-01T00:00:00Z"
 }

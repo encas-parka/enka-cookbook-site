@@ -1,22 +1,26 @@
 
 {
-  "uuid": "bdsp69jk64pl",
   "slug": "salami-au-chocolat_bdsp69jk64pl",
   "title": "Salami Au Chocolat",
   "draft": false,
   "typeR": "dessert",
   "categories": ["Sucrée"],
+  "description": null,
+  "region": "Portugal",
+  "saison": null,
+  "auteur": null,
   "regime": ["vegetarien"],
   "cuisson": false,
   "serveHot": false,
   "plate": 100,
   "quantite_desc": null,
   "check": false,
-  "checkAlwaysOk": false,
   "materiel": null,
   "ingredients": [{"allergens":["Produit laitier"],"comment":"","name":"Beurre doux","normalizedQuantity":1000,"normalizedUnit":"gr.","originalQuantity":1,"originalUnit":"kg","type":"frais","uuid":"kmq1zb"},{"allergens":["Gluten","Produit laitier","Sésame","Oeuf"],"comment":"Officiellement c'est la \"Bolacha Maria\" mais ça passe aussi","name":"Biscuit Petit Brun","normalizedQuantity":1300,"normalizedUnit":"gr.","originalQuantity":1.3,"originalUnit":"kg","type":"sucres","uuid":"i5hlq1"},{"allergens":[],"comment":"","name":"Sucre en poudre","normalizedQuantity":1500,"normalizedUnit":"gr.","originalQuantity":1.5,"originalUnit":"kg","type":"sucres","uuid":"u9z2he"},{"allergens":[],"comment":"","name":"Cacao","normalizedQuantity":200,"normalizedUnit":"gr.","originalQuantity":200,"originalUnit":"gr.","type":"sucres","uuid":"r6792n"},{"allergens":[],"comment":"","name":"Chocolat noir","normalizedQuantity":2000,"normalizedUnit":"gr.","originalQuantity":2,"originalUnit":"kg","type":"sucres","uuid":"cr4kiz"}],
   "preparation": "Faire fondre le chocolat au bain marie.\n\nRéchauffer le beurre pour pouvoir l'écraser facilement.\n\nMélanger le beurre, le sucre et le cacao. Ajouter le chocolat fondu et bien mélanger.\n\nCasser les biscuits en petits morceaux\n\nAjouter les biscuits au mélange. Laisser refroidir un petit moment.\n\nDisposer une partie de la pâte sur du papier cuisson et le rouler pour en faire un boudin d'environ 5cm de diamètre. Bien tasser pour que le salami soit homogène.\n\nUn salami fait entre 10 et 12 parts.\n\nMettre au frigo pour que le salami se durcisse bien.\n\nSortir du frigo 30 min avant de le couper et servir.",
+  "preparation24h": "Possible de le faire la veille !",
+  "astuces": null,
   "prepAlt": [{"recetteAlt":"salami-au-chocolat-vegan-sans-gluten_axcmr1dv_vj6ul9owdr-g"}],
   "permissionWrite": [],
-  "publishDate": "2024-06-12T23:57:00Z"
+  "publishedAt": "2025-01-01T00:00:00Z"
 }

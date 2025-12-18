@@ -1,22 +1,26 @@
 
 {
-  "uuid": "r6350317f4du",
   "slug": "flan-au-lait-frit_r6350317f4du",
   "title": "Flan Au Lait Frit",
   "draft": false,
   "typeR": "plat",
   "categories": ["Friture","Bouchées salées"],
+  "description": "Servir en plat salé même si c'est sucré.",
+  "region": "Hong Kong",
+  "saison": null,
+  "auteur": "Auré",
   "regime": ["vegetarien"],
   "cuisson": true,
   "serveHot": true,
   "plate": 120,
   "quantite_desc": "1 flan = 3cmx3cm • 3ou4 flans par personne • 1 gastro (53x32,5cm) = env. 60 flans",
   "check": true,
-  "checkAlwaysOk": false,
   "materiel": ["Friteuse","Gastro 1/1 (Fins)","Marmitte"],
   "ingredients": [{"allergens":[],"comment":"","name":"huile de friture","normalizedQuantity":12000,"normalizedUnit":"ml","originalQuantity":12,"originalUnit":"l.","type":"lof","uuid":"1ej217"},{"allergens":["Gluten"],"comment":"Pâte","name":"Farine de blé","normalizedQuantity":1700,"normalizedUnit":"gr.","originalQuantity":1.7,"originalUnit":"kg","type":"lof","uuid":"2av6w8"},{"allergens":[],"comment":"Pâte","name":"Farine de maïs","normalizedQuantity":600,"normalizedUnit":"gr.","originalQuantity":600,"originalUnit":"gr.","type":"lof","uuid":"z8uiyd"},{"allergens":[],"comment":"","name":"Farine de maïs","normalizedQuantity":1300,"normalizedUnit":"gr.","originalQuantity":1.3,"originalUnit":"kg","type":"lof","uuid":"z8uiyd"},{"allergens":["Produit laitier"],"comment":"","name":"Lait concentré (non sucré)","normalizedQuantity":4000,"normalizedUnit":"ml","originalQuantity":4,"originalUnit":"l.","type":"lof","uuid":"zat1zc"},{"allergens":["Produit laitier"],"comment":"","name":"Lait demi-écrémé","normalizedQuantity":7700,"normalizedUnit":"ml","originalQuantity":7.7,"originalUnit":"l.","type":"lof","uuid":"x286pc"},{"allergens":[],"comment":"Pâte","name":"Eau","normalizedQuantity":3300,"normalizedUnit":"ml","originalQuantity":3.3,"originalUnit":"l.","type":"autres","uuid":"ljzb7j"},{"allergens":["Gluten"],"comment":"Pâte","name":"Levure chimique","normalizedQuantity":100,"normalizedUnit":"gr.","originalQuantity":100,"originalUnit":"gr.","type":"lof","uuid":"vgec6e"},{"allergens":[],"comment":"","name":"Sel","normalizedQuantity":200,"normalizedUnit":"gr.","originalQuantity":200,"originalUnit":"gr.","type":"epices","uuid":"2juq3x"},{"allergens":[],"comment":"","name":"poivre blanc moulue","normalizedQuantity":75,"normalizedUnit":"gr.","originalQuantity":75,"originalUnit":"gr.","type":"epices","uuid":"7lakpz"},{"allergens":[],"comment":"","name":"Sucre en poudre","normalizedQuantity":1000,"normalizedUnit":"gr.","originalQuantity":1,"originalUnit":"kg","type":"sucres","uuid":"u9z2he"}],
   "preparation": "_Possible 1 J avant :_\n\n\\- Dans une gamelle, verser le lait et le lait concentré avec le sel et le poivre. Rectifier l'assaisonnement.\n\n\\- Ajouter la farine de maïs et fouetter jusqu'à obtenir une préparation lisse.\n\n\\- Laisser frémir sur feu moyen afin qu'elle épaississe en fouettant de temps en temps.\n\n\\- Calculer le nombre de bac gastro nécessaires, les tapisser de papier sulfurisé.\n\n\\- Y verser le flan et laisser refroidir.\n\n\\- Recouvrir de film alimentaire et reserver bien bien au frigo.\n\n##### PREPARATION DE LA PÂTE :\n\n\\- Mélanger tous les ingrédients de la pâte et laisser reposer 30min à température ambiante.\n\n\\- Couper les flans au lait en cube de 5x5cm.\n\n**Obligatoirement au dernier moment :**\n\n\\- Tremper les flans dans la pâte à beignet à l'aide de baguettes chinoises ou d'un écumoir.\n\n\\- Les faire frire env. 3min. Ils doivent ressortir dorés et croustillants.\n\n\\- Les égoutter sur du papier sopalin.\n\n\\- Et les saupoudrer d'un peu de sucre.",
+  "preparation24h": null,
+  "astuces": null,
   "prepAlt": null,
   "permissionWrite": [],
-  "publishDate": "2024-05-18T15:27:00Z"
+  "publishedAt": "2025-01-01T00:00:00Z"
 }

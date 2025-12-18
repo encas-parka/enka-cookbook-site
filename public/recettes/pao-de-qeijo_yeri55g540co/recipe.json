@@ -1,22 +1,26 @@
 
 {
-  "uuid": "yeri55g540co",
   "slug": "pao-de-qeijo_yeri55g540co",
   "title": "Pao De Qeijo",
   "draft": false,
   "typeR": "plat",
   "categories": ["Bouchées salées"],
+  "description": "",
+  "region": "Brésil",
+  "saison": null,
+  "auteur": "Adèle",
   "regime": ["vegetarien","sans-gluten"],
   "cuisson": true,
   "serveHot": true,
   "plate": 240,
   "quantite_desc": "2 part par personne",
   "check": true,
-  "checkAlwaysOk": false,
   "materiel": null,
   "ingredients": [{"allergens":[],"comment":"","name":"Sel","normalizedQuantity":1,"normalizedUnit":"au goût","originalQuantity":1,"originalUnit":"au goût","type":"epices","uuid":"2juq3x"},{"allergens":["Produit laitier"],"comment":"","name":"Gruyère","normalizedQuantity":1920,"normalizedUnit":"gr.","originalQuantity":1.92,"originalUnit":"kg","type":"frais","uuid":"pvia1r"},{"allergens":["Produit laitier"],"comment":"","name":"Parmesan","normalizedQuantity":1920,"normalizedUnit":"gr.","originalQuantity":1.92,"originalUnit":"kg","type":"frais","uuid":"pr1fiu"},{"allergens":[],"comment":"","name":"huile de tournesol","normalizedQuantity":720,"normalizedUnit":"ml","originalQuantity":720,"originalUnit":"ml","type":"lof","uuid":"c70jxb"},{"allergens":["Oeuf"],"comment":"","name":"Oeuf","normalizedQuantity":39,"normalizedUnit":"unité","originalQuantity":39,"originalUnit":"unité","type":"lof","uuid":"zf3zf8"},{"allergens":["Produit laitier"],"comment":"","name":"Lait demi-écrémé","normalizedQuantity":1920,"normalizedUnit":"ml","originalQuantity":1.92,"originalUnit":"l.","type":"lof","uuid":"x286pc"},{"allergens":[],"comment":"","name":"Farine de tapioca","normalizedQuantity":4800,"normalizedUnit":"gr.","originalQuantity":4.8,"originalUnit":"kg","type":"lof","uuid":"v212im"}],
   "preparation": "* Raper puis hacher au couteau les fromages.\n* Faire chauffer dans une casserole le lait et l'huile jusqu'à ébulltion. Pendant ce temps verser la farine de manioc et le sel dans un saladier et bien mélanger. Verser dessus le mélange liquide très chaud puis mélanger vigoureusement.\n* Ajouter tout le fromage, bien mélanger puis ajouter les oeufs. Mélanger de nouveau, à la main cette fois-ci, ou au robot patissier avec la feuille. La pâte sera collate, c'est normal. Si elle l'est trop pour former des boulettes avec les mains, la mettre une demi-heure au frais.\n\n\n\n**Obligatoirement au dernier moment :**\n\nPréchauffer le four à 180°C. Disposer sur une plaque recouverte de papier sulfurisé des boulettes de la taille d'une noix. On peut si on le souhaite laisser les boulettes formées une nuit au réfrigérateur. Enfourner 15 à 20 minutes. Se mange chaud.",
+  "preparation24h": null,
+  "astuces": null,
   "prepAlt": null,
   "permissionWrite": [],
-  "publishDate": "2024-05-23T13:58:00Z"
+  "publishedAt": "2025-01-01T00:00:00Z"
 }

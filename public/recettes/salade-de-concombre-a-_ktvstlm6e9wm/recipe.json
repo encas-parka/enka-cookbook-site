@@ -1,22 +1,26 @@
 
 {
-  "uuid": "ktvstlm6e9wm",
   "slug": "salade-de-concombre-a-_ktvstlm6e9wm",
   "title": "Salade De Concombre À L'aneth Et Amandes Effilées",
   "draft": false,
   "typeR": "entree",
   "categories": ["Salade"],
+  "description": null,
+  "region": null,
+  "saison": ["ete"],
+  "auteur": null,
   "regime": ["vegetarien","vegan","sans-gluten","sans-lactose"],
   "cuisson": false,
   "serveHot": false,
   "plate": 50,
   "quantite_desc": null,
   "check": false,
-  "checkAlwaysOk": true,
   "materiel": null,
   "ingredients": [{"allergens":[],"comment":"","name":"Concombre","normalizedQuantity":2500,"normalizedUnit":"gr.","originalQuantity":2.5,"originalUnit":"kg","type":"legumes","uuid":"l5p1a5"},{"allergens":[],"comment":"","name":"Poivre","normalizedQuantity":1,"normalizedUnit":"au goût","originalQuantity":1,"originalUnit":"au goût","type":"epices","uuid":"2pps90"},{"allergens":[],"comment":"","name":"Sel","normalizedQuantity":1,"normalizedUnit":"au goût","originalQuantity":1,"originalUnit":"au goût","type":"epices","uuid":"2juq3x"},{"allergens":[],"comment":"","name":"Aneth aromatique","normalizedQuantity":2,"normalizedUnit":"bottes","originalQuantity":2,"originalUnit":"bottes","type":"epices","uuid":"nnkg8f"},{"allergens":["Soja"],"comment":"","name":"Yaourt de soja","normalizedQuantity":550,"normalizedUnit":"gr.","originalQuantity":550,"originalUnit":"gr.","type":"frais","uuid":"hlbwfd"},{"allergens":[],"comment":"","name":"huile d'olive","normalizedQuantity":300,"normalizedUnit":"ml","originalQuantity":300,"originalUnit":"ml","type":"lof","uuid":"h3c8al"},{"allergens":["Fruit à coque"],"comment":"","name":"Amandes effilées","normalizedQuantity":200,"normalizedUnit":"gr.","originalQuantity":200,"originalUnit":"gr.","type":"sec","uuid":"xkijt9"}],
   "preparation": "Mandoliner le concombre au robocoupe (si vous en avez un :p)\n\nHâcher l'aneth\n\nTout mélanger\n\n(possible de remplacer les amandes effilées par amandes concassées)",
+  "preparation24h": null,
+  "astuces": null,
   "prepAlt": null,
   "permissionWrite": [],
-  "publishDate": "2025-07-31T08:37:00Z"
+  "publishedAt": "2025-01-01T00:00:00Z"
 }

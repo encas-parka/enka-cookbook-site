@@ -1,22 +1,26 @@
 
 {
-  "uuid": "ub2ro051nszz",
   "slug": "salade-daubergine-aux-_ub2ro051nszz",
   "title": "Salade D'aubergine Aux Herbes Et À L'ail Frit",
   "draft": false,
   "typeR": "entree",
   "categories": ["Salade"],
+  "description": null,
+  "region": null,
+  "saison": null,
+  "auteur": "frédo",
   "regime": ["sans-gluten","vegan"],
   "cuisson": true,
   "serveHot": false,
   "plate": 100,
   "quantite_desc": null,
   "check": false,
-  "checkAlwaysOk": false,
   "materiel": null,
   "ingredients": [{"allergens":[],"comment":"","name":"Aubergine","normalizedQuantity":20000,"normalizedUnit":"gr.","originalQuantity":20,"originalUnit":"kg","type":"legumes","uuid":"7sk3a5"},{"allergens":[],"comment":"","name":"Ail","normalizedQuantity":800,"normalizedUnit":"gr.","originalQuantity":10,"originalUnit":"tête·s","type":"legumes","uuid":"u2m28w"},{"allergens":[],"comment":"","name":"huile d'olive","normalizedQuantity":1100,"normalizedUnit":"ml","originalQuantity":1.1,"originalUnit":"l.","type":"lof","uuid":"h3c8al"},{"allergens":["Alcool"],"comment":"","name":"Vinaigre de vin","normalizedQuantity":1000,"normalizedUnit":"ml","originalQuantity":1,"originalUnit":"l.","type":"epices","uuid":"bjuxby"},{"allergens":[],"comment":"","name":"Piment vert","normalizedQuantity":17.1,"normalizedUnit":"unité","originalQuantity":17.1,"originalUnit":"unité","type":"epices","uuid":"dr1bbg"},{"allergens":[],"comment":"","name":"Menthe fraîche","normalizedQuantity":5,"normalizedUnit":"bottes","originalQuantity":5,"originalUnit":"bottes","type":"epices","uuid":"y16lzq"},{"allergens":[],"comment":"","name":"Coriandre fraîche","normalizedQuantity":5,"normalizedUnit":"bottes","originalQuantity":5,"originalUnit":"bottes","type":"epices","uuid":"fetrpe"},{"allergens":[],"comment":"","name":"Aneth aromatique","normalizedQuantity":5,"normalizedUnit":"bottes","originalQuantity":5,"originalUnit":"bottes","type":"epices","uuid":"nnkg8f"},{"allergens":[],"comment":"","name":"Jus de citron","normalizedQuantity":1000,"normalizedUnit":"ml","originalQuantity":1,"originalUnit":"l.","type":"sucres","uuid":"e4mjd1"}],
   "preparation": "Préchauffer le four à 210°\n\nCouper les aubergines en cube de 3 cm.\n\nMélanger les aubergines avec l'huile, du sel et du poivre dans des gastros.\n\nMettre les gastros couverts d'une feuille de papier sulfurisé pour une durée de 35 minutes.\n\n\n\n\nHacher les piments.\n\nHacher l'ail en brunoise (cube de 1 mm)\n\nHacher les herbes (menthe, coriandre, aneth)\n\nDans une casserole, frire l'ail dans l'huile pendant 1 minutes (attention de ne pas faire cuire l'ail trop longtemps car il deviendrait amer. verser le tout dans un chinois en prenant soin de récupérer l'huile de friture qui sera aussi utilisée par la suite.\n\nMélanger les aubergines, le vinaigre, les piments, 3 cuillères à soupe d'huile de friture.\n\nAU DERNIER MOMENT, ajouter les herbes hachées, le jus d e citron, l'ail frit.",
+  "preparation24h": null,
+  "astuces": null,
   "prepAlt": null,
   "permissionWrite": [],
-  "publishDate": "2025-06-04T19:09:00Z"
+  "publishedAt": "2025-01-01T00:00:00Z"
 }

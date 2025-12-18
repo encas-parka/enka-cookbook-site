@@ -1,22 +1,26 @@
 
 {
-  "uuid": "5hcczovaonrt",
   "slug": "moelleux-aux-agrumes_5hcczovaonrt",
   "title": "Moelleux Aux Agrumes",
   "draft": false,
   "typeR": "dessert",
   "categories": ["Sucrée"],
+  "description": null,
+  "region": null,
+  "saison": null,
+  "auteur": "frédo",
   "regime": ["vegetarien"],
   "cuisson": true,
   "serveHot": false,
   "plate": 100,
   "quantite_desc": null,
   "check": false,
-  "checkAlwaysOk": false,
   "materiel": null,
   "ingredients": [{"allergens":[],"comment":"","name":"Citron jaune","normalizedQuantity":1300,"normalizedUnit":"gr.","originalQuantity":13,"originalUnit":"unité","type":"legumes","uuid":"5cg0yu"},{"allergens":[],"comment":"","name":"Orange","normalizedQuantity":2600,"normalizedUnit":"gr.","originalQuantity":13,"originalUnit":"unité","type":"legumes","uuid":"yh2uod"},{"allergens":["Oeuf"],"comment":"","name":"Oeuf","normalizedQuantity":39,"normalizedUnit":"unité","originalQuantity":39,"originalUnit":"unité","type":"lof","uuid":"zf3zf8"},{"allergens":[],"comment":"","name":"huile d'olive","normalizedQuantity":2500,"normalizedUnit":"ml","originalQuantity":2.5,"originalUnit":"l.","type":"lof","uuid":"h3c8al"},{"allergens":[],"comment":"appareil","name":"sucre de canne (blond)","normalizedQuantity":2500,"normalizedUnit":"gr.","originalQuantity":2.5,"originalUnit":"kg","type":"sucres","uuid":"n85gmi"},{"allergens":[],"comment":"","name":"Chapelure sans gluten","normalizedQuantity":300,"normalizedUnit":"gr.","originalQuantity":300,"originalUnit":"gr.","type":"sucres","uuid":"5e0pcl"},{"allergens":[],"comment":"","name":"Eau de fleur d'oranger","normalizedQuantity":390,"normalizedUnit":"ml","originalQuantity":390,"originalUnit":"ml","type":"sucres","uuid":"ikdk3g"},{"allergens":[],"comment":"pour le sirop","name":"sucre de canne (blond)","normalizedQuantity":1000,"normalizedUnit":"gr.","originalQuantity":1,"originalUnit":"kg","type":"sucres","uuid":"n85gmi"},{"allergens":["Fruit à coque"],"comment":"","name":"Poudre d'amandes","normalizedQuantity":2600,"normalizedUnit":"gr.","originalQuantity":2.6,"originalUnit":"kg","type":"sucres","uuid":"rmgr7l"},{"allergens":["Gluten"],"comment":"","name":"Chapelure","normalizedQuantity":650,"normalizedUnit":"gr.","originalQuantity":650,"originalUnit":"gr.","type":"autres","uuid":"psu3gg"},{"allergens":["Gluten"],"comment":"","name":"Levure chimique","normalizedQuantity":143,"normalizedUnit":"gr.","originalQuantity":13,"originalUnit":"unité","type":"lof","uuid":"vgec6e"}],
   "preparation": "Préchauffer le four à 180°\n\nZester les oranges et les citrons. Réserver puis les presser pour en extraire le jus. Réserver.\n\nDécoquiller les oeufs. Réserver.\n\nMélanger le sucre, la poudre d'amande, la chapelure et la levure intimement. Ajouter les zestes, la fleur d'oranger, les oeufs et l'huile d'olive.\n\nRépartir l'appareil dans les moules à tarte tapissés de papier sulfurisé. Enfourner pour 45 minutes de cuisson.\n\nPréparer un sirop avec de sucre et les jus des citrons et des oranges amenés à l'ébullition. Cuire ce sirop 15 Minutes. Imbiber les moelleux avec ce sirop en sortie de four.\\\nAttendre que les moelleux soient refroidis avant de portionner.\n\n**Version sans gluten** : remplacer la chapelure par le mix sans gluten",
+  "preparation24h": null,
+  "astuces": null,
   "prepAlt": null,
   "permissionWrite": [],
-  "publishDate": "2025-06-04T19:18:00Z"
+  "publishedAt": "2025-01-01T00:00:00Z"
 }

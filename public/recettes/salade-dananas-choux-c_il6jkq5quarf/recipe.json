@@ -1,22 +1,26 @@
 
 {
-  "uuid": "il6jkq5quarf",
   "slug": "salade-dananas-choux-c_il6jkq5quarf",
   "title": "Salade D'ananas, Choux Chinois Et Pasteque Au Piment",
   "draft": false,
   "typeR": "entree",
   "categories": ["Salade"],
+  "description": null,
+  "region": null,
+  "saison": null,
+  "auteur": "frédo",
   "regime": ["vegetarien"],
   "cuisson": false,
   "serveHot": false,
   "plate": 100,
   "quantite_desc": null,
   "check": false,
-  "checkAlwaysOk": false,
   "materiel": null,
   "ingredients": [{"allergens":[],"comment":"","name":"Pastèque","normalizedQuantity":10000,"normalizedUnit":"gr.","originalQuantity":10,"originalUnit":"kg","type":"legumes","uuid":"n8iflg"},{"allergens":[],"comment":"","name":"Ananas","normalizedQuantity":10000,"normalizedUnit":"gr.","originalQuantity":10,"originalUnit":"kg","type":"legumes","uuid":"7aceyw"},{"allergens":[],"comment":"","name":"Chou chinois","normalizedQuantity":10000,"normalizedUnit":"gr.","originalQuantity":10,"originalUnit":"kg","type":"legumes","uuid":"hz46f4"},{"allergens":[],"comment":"","name":"Coriandre fraîche","normalizedQuantity":10,"normalizedUnit":"bottes","originalQuantity":10,"originalUnit":"bottes","type":"epices","uuid":"fetrpe"},{"allergens":[],"comment":"","name":"Sweet Chili Sauce","normalizedQuantity":4000,"normalizedUnit":"ml","originalQuantity":4,"originalUnit":"l.","type":"epices","uuid":"t5cuz3"},{"allergens":[],"comment":"","name":"huile d'olive","normalizedQuantity":1000,"normalizedUnit":"ml","originalQuantity":1,"originalUnit":"l.","type":"lof","uuid":"h3c8al"}],
   "preparation": "Eplucher l'ananas, enlever le coeur et couper en morceaux cubes 3cm. Réserver\n\nEplucher la pasteque, enlever grossièrement les graines et couper en morceaux cubes 3cm.\\\nEnlever les premières feuilles des choux chinois et les couper en 4 dans le sens de la longueur. Emincer ensuite en fines lamelles dans le sens de la largeur. Réserver.\n\nHacher la coriandre finement. Mélanger les ingrédients au dernier moment en y ajoutant la sauce Sweet chili",
+  "preparation24h": null,
+  "astuces": null,
   "prepAlt": null,
   "permissionWrite": [],
-  "publishDate": "2025-06-04T16:01:00Z"
+  "publishedAt": "2025-01-01T00:00:00Z"
 }

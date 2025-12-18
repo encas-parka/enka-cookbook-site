@@ -1,22 +1,26 @@
 
 {
-  "uuid": "3k20oigwibrm",
   "slug": "panna-cotta-vegan-a-la_3k20oigwibrm",
   "title": "Panna Cotta Végan À La Chataigne - Chips De Chocolat",
   "draft": false,
   "typeR": "dessert",
   "categories": ["Sucrée"],
+  "description": "Dessert pour le catering de la fête de la soupe 2025",
+  "region": "Italie",
+  "saison": ["automne"],
+  "auteur": "Alio",
   "regime": null,
   "cuisson": true,
   "serveHot": false,
   "plate": 100,
   "quantite_desc": "",
   "check": true,
-  "checkAlwaysOk": null,
   "materiel": [],
   "ingredients": [{"allergens":[],"comment":"","name":"Chocolat noir","normalizedQuantity":600,"normalizedUnit":"gr.","originalQuantity":600,"originalUnit":"gr.","type":"sucres","uuid":"cr4kiz"},{"allergens":[],"comment":"","name":"Agar-agar","normalizedQuantity":56,"normalizedUnit":"gr.","originalQuantity":56,"originalUnit":"gr.","type":"autres","uuid":"ruhtax"},{"allergens":[],"comment":"","name":"sucre blanc","normalizedQuantity":1500,"normalizedUnit":"gr.","originalQuantity":1.5,"originalUnit":"kg","type":"sucres","uuid":"lny16c"},{"allergens":[],"comment":"","name":"Purée chataîgne sans sucre","normalizedQuantity":4000,"normalizedUnit":"gr.","originalQuantity":4,"originalUnit":"kg","type":"legumes","uuid":"xm77fg"},{"allergens":[],"comment":"","name":"lait d’amande","normalizedQuantity":5000,"normalizedUnit":"ml","originalQuantity":5,"originalUnit":"l.","type":"lof","uuid":"csxbg6"},{"allergens":["Soja"],"comment":"","name":"Crème soja","normalizedQuantity":5000,"normalizedUnit":"ml","originalQuantity":5,"originalUnit":"l.","type":"lof","uuid":"chfwwq"}],
   "preparation": "- Faire bouillir le lait d'amande, la crème soja et le sucre\n- Ajouter l'agar-agar et laisser bouillir 2 minutes\n- Couper la cuisson et rajouter la crème de châtaignes\n- Dresser dans des ramequins et réserver une nuit au frigo\n- Faire fondre le chocolat au bain marie\n\n-Étaler finement le chocolat fondu sur une feuille de papier cuisson et réserver au frigo pendant une nuit",
+  "preparation24h": "",
+  "astuces": [],
   "prepAlt": [],
   "permissionWrite": [],
-  "publishDate": "2025-10-16T18:01:00Z"
+  "publishedAt": "2025-01-01T00:00:00Z"
 }

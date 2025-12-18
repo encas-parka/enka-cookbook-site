@@ -1,22 +1,26 @@
 
 {
-  "uuid": "clxhcyzv3p5y",
   "slug": "steak-vege-champignons_clxhcyzv3p5y",
   "title": "Steak Végé - Champignons Aubergines Noix Avoine Haricots Rouges - Version Améliorée",
   "draft": false,
   "typeR": "plat",
   "categories": ["Plat chaud"],
+  "description": null,
+  "region": null,
+  "saison": ["ete"],
+  "auteur": "",
   "regime": ["vegetarien","vegan","sans-lactose"],
   "cuisson": true,
   "serveHot": true,
   "plate": 6,
   "quantite_desc": null,
   "check": true,
-  "checkAlwaysOk": false,
   "materiel": ["Four"],
   "ingredients": [{"allergens":[],"comment":"","name":"Concentré de tomate","normalizedQuantity":30,"normalizedUnit":"ml","originalQuantity":2,"originalUnit":"c. à soupe","type":"epices","uuid":"mck2wl"},{"allergens":[],"comment":"","name":"Eau","normalizedQuantity":60,"normalizedUnit":"ml","originalQuantity":60,"originalUnit":"ml","type":"autres","uuid":"ljzb7j"},{"allergens":[],"comment":"","name":"Cumin moulu","normalizedQuantity":1,"normalizedUnit":"au goût","originalQuantity":1,"originalUnit":"au goût","type":"epices","uuid":"he3u48"},{"allergens":[],"comment":"","name":"Paprika fumé","normalizedQuantity":1,"normalizedUnit":"au goût","originalQuantity":1,"originalUnit":"au goût","type":"epices","uuid":"ique18"},{"allergens":[],"comment":"","name":"Origan","normalizedQuantity":1,"normalizedUnit":"au goût","originalQuantity":1,"originalUnit":"au goût","type":"epices","uuid":"fkftyb"},{"allergens":["Moutarde"],"comment":"","name":"Moutarde","normalizedQuantity":15,"normalizedUnit":"ml","originalQuantity":1,"originalUnit":"c. à soupe","type":"epices","uuid":"5c1b20"},{"allergens":[],"comment":"","name":"Sriracha","normalizedQuantity":15,"normalizedUnit":"ml","originalQuantity":1,"originalUnit":"c. à soupe","type":"epices","uuid":"oxiae3"},{"allergens":["Soja"],"comment":"","name":"Sauce soja","normalizedQuantity":40,"normalizedUnit":"ml","originalQuantity":40,"originalUnit":"ml","type":"epices","uuid":"jjrwlj"},{"allergens":[],"comment":"","name":"Oignon","normalizedQuantity":150,"normalizedUnit":"gr.","originalQuantity":150,"originalUnit":"gr.","type":"legumes","uuid":"rtavky"},{"allergens":[],"comment":"","name":"Aubergine","normalizedQuantity":150,"normalizedUnit":"gr.","originalQuantity":150,"originalUnit":"gr.","type":"legumes","uuid":"7sk3a5"},{"allergens":[],"comment":"","name":"Champignons","normalizedQuantity":150,"normalizedUnit":"gr.","originalQuantity":150,"originalUnit":"gr.","type":"legumes","uuid":"v9qhs9"},{"allergens":[],"comment":"","name":"Flocons d'avoine sans gluten","normalizedQuantity":150,"normalizedUnit":"gr.","originalQuantity":150,"originalUnit":"gr.","type":"sec","uuid":"02w66c"},{"allergens":["Fruit à coque"],"comment":"","name":"Noix","normalizedQuantity":30,"normalizedUnit":"gr.","originalQuantity":30,"originalUnit":"gr.","type":"sec","uuid":"usibcf"},{"allergens":[],"comment":"","name":"Haricots rouges cuits","normalizedQuantity":150,"normalizedUnit":"gr.","originalQuantity":150,"originalUnit":"gr.","type":"sec","uuid":"iwdje3"}],
   "preparation": "* Hâcher finement oignons, champignons, aubergines, et noix\n* Faire chauffer un fond d’huile. Ajouter oignons et épices (soyez généreux.se sur le paprika).\n* Faire revenir les oignons 5-10 minutes (jusqu’à ce qu’ils dorent un peu)\n* Ajouter les aubegines, un peu plus tard les champignons\n* Ajouter le reste des ingrédients, laisser mijoter un peu\n* Couper le feu et bien mélanger\n* Laisser reposer au moins 15 minutes\n* Façonner les steaks (130g de mélange par steak environ). Mettre de l’huile sur les deux faces du steak (au pinceau c’est le mieux)\n* Faire cuire à 180°C environ 30 minutes, jusqu’à ce qu’ils brunissent un peu. Retourner en milieu de cuisson.",
+  "preparation24h": null,
+  "astuces": null,
   "prepAlt": null,
   "permissionWrite": [],
-  "publishDate": "2024-06-02T12:12:00Z"
+  "publishedAt": "2025-01-01T00:00:00Z"
 }

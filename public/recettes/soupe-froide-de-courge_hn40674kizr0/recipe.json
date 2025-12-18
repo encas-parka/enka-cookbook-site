@@ -1,22 +1,26 @@
 
 {
-  "uuid": "hn40674kizr0",
   "slug": "soupe-froide-de-courge_hn40674kizr0",
   "title": "Soupe Froide De Courgettes À La Menthe",
   "draft": false,
   "typeR": "entree",
   "categories": ["Soupe"],
+  "description": null,
+  "region": null,
+  "saison": ["ete"],
+  "auteur": null,
   "regime": ["vegan","sans-gluten","sans-lactose"],
   "cuisson": true,
   "serveHot": false,
   "plate": 20,
   "quantite_desc": "En comptant un verre de 15cL par personne.",
   "check": true,
-  "checkAlwaysOk": false,
   "materiel": null,
   "ingredients": [{"allergens":[],"comment":"","name":"Courgette","normalizedQuantity":2500,"normalizedUnit":"gr.","originalQuantity":2.5,"originalUnit":"kg","type":"legumes","uuid":"9zozfk"},{"allergens":[],"comment":"","name":"Eau","normalizedQuantity":200,"normalizedUnit":"ml","originalQuantity":200,"originalUnit":"ml","type":"autres","uuid":"ljzb7j"},{"allergens":[],"comment":"dont éventuellement qqs feuilles de menthe glaciale","name":"Menthe fraîche","normalizedQuantity":1,"normalizedUnit":"bottes","originalQuantity":1,"originalUnit":"bottes","type":"epices","uuid":"y16lzq"},{"allergens":[],"comment":"","name":"huile d'olive","normalizedQuantity":40,"normalizedUnit":"ml","originalQuantity":40,"originalUnit":"ml","type":"lof","uuid":"h3c8al"},{"allergens":["Soja"],"comment":"","name":"Lait de soja","normalizedQuantity":200,"normalizedUnit":"ml","originalQuantity":200,"originalUnit":"ml","type":"lof","uuid":"gpeob7"}],
   "preparation": "Le lendemain ajouter le lait de soja et mixer l'ensemble jusqu'à ce que la texture soit bien lisse (rajouter éventuelement un peu d'eau selon la texture souhaitée).  rectifier son assaisonement. Puis juste avant de servir verser dans les verres et mettre un filet d'huile d'olive et une feuille de menthe par verre.",
+  "preparation24h": "**Obligatoirement 1 J avant**\n\nLaver les courgettes. Couper les en gros morceaux. Les faire revenir rapidemment à feu fort dans 2 càs d'huile d'olive. Puis mettre sur feu doux, ajouter 20cL d'eau et placer la gaze de menthe sous les courgettes, saler, poivrer. Couvrir et laisser mijoter.\n\nPendant ce temps, laver la menthe puis ficeler la en bouquet. Mettre de côté 20 petites feuilles de menthe pour la déco.\n\nQuand les courgettes sont tendres, les verser sur le bouquet de menthe. Refroidir et mettre au frais toute la nuit.",
+  "astuces": null,
   "prepAlt": null,
   "permissionWrite": [],
-  "publishDate": "2025-06-19T15:32:00Z"
+  "publishedAt": "2025-01-01T00:00:00Z"
 }

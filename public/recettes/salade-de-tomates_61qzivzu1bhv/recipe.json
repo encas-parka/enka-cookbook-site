@@ -1,22 +1,26 @@
 
 {
-  "uuid": "61qzivzu1bhv",
   "slug": "salade-de-tomates_61qzivzu1bhv",
   "title": "Salade De Tomates",
   "draft": false,
   "typeR": "entree",
   "categories": ["Salade"],
+  "description": null,
+  "region": "le suuuuuud",
+  "saison": ["ete"],
+  "auteur": null,
   "regime": ["vegan","sans-gluten","sans-lactose","vegetarien"],
   "cuisson": false,
   "serveHot": false,
   "plate": 100,
   "quantite_desc": null,
   "check": true,
-  "checkAlwaysOk": false,
   "materiel": null,
   "ingredients": [{"allergens":["Sulfites"],"comment":"","name":"Vinaigre balsamique","normalizedQuantity":150,"normalizedUnit":"ml","originalQuantity":150,"originalUnit":"ml","type":"epices","uuid":"qemlqs"},{"allergens":[],"comment":"","name":"Tomate","normalizedQuantity":17000,"normalizedUnit":"gr.","originalQuantity":17,"originalUnit":"kg","type":"legumes","uuid":"ibtbnq"},{"allergens":[],"comment":"","name":"Huile végétale","normalizedQuantity":500,"normalizedUnit":"ml","originalQuantity":0.5,"originalUnit":"l.","type":"lof","uuid":"atccqu"}],
   "preparation": "couper les tomates\n\nassaisonner d'huile, sel et poivre...\n\net une herbe fraiche, ou des olives (ratio 600g dénoyautées pour 100p) si le coeur vous en dit...",
+  "preparation24h": null,
+  "astuces": null,
   "prepAlt": null,
   "permissionWrite": [],
-  "publishDate": "2024-06-23T13:27:00Z"
+  "publishedAt": "2025-01-01T00:00:00Z"
 }

@@ -1,22 +1,26 @@
 
 {
-  "uuid": "3yn2db59qug9",
   "slug": "keshke-vegan-et-sans-g_3yn2db59qug9",
   "title": "Keshke Vegan Et Sans Gluten",
   "draft": false,
   "typeR": "entree",
   "categories": ["Accompagnement","Sauce"],
+  "description": null,
+  "region": null,
+  "saison": null,
+  "auteur": "ça vaulx le détour",
   "regime": ["vegetarien","vegan","sans-lactose","sans-gluten"],
   "cuisson": false,
   "serveHot": false,
   "plate": 20,
   "quantite_desc": null,
   "check": true,
-  "checkAlwaysOk": true,
   "materiel": null,
   "ingredients": [{"allergens":[],"comment":"","name":"Menthe séchée","normalizedQuantity":25,"normalizedUnit":"gr.","originalQuantity":25,"originalUnit":"gr.","type":"epices","uuid":"uid60d"},{"allergens":["Soja"],"comment":"","name":"Yaourt de soja","normalizedQuantity":1500,"normalizedUnit":"gr.","originalQuantity":1.5,"originalUnit":"kg","type":"frais","uuid":"hlbwfd"},{"allergens":[],"comment":"","name":"Oignon","normalizedQuantity":300,"normalizedUnit":"gr.","originalQuantity":300,"originalUnit":"gr.","type":"legumes","uuid":"rtavky"},{"allergens":[],"comment":"","name":"huile d'olive","normalizedQuantity":40,"normalizedUnit":"ml","originalQuantity":40,"originalUnit":"ml","type":"lof","uuid":"h3c8al"},{"allergens":["Fruit à coque"],"comment":"","name":"Noix","normalizedQuantity":150,"normalizedUnit":"gr.","originalQuantity":150,"originalUnit":"gr.","type":"sec","uuid":"usibcf"},{"allergens":[],"comment":"","name":"Semoule couscous sans gluten","normalizedQuantity":700,"normalizedUnit":"gr.","originalQuantity":700,"originalUnit":"gr.","type":"sec","uuid":"o5vfrd"}],
   "preparation": "\n\n\n\nLe lendemain, ajouter le reste du yaourt et des noix hâchées, mélanger.\n\nAu dernier moment, décorer avec un filet d'huile d'olive, et parsemer d'un peu de noix grossièrement hâchées et de menthe séchée.",
+  "preparation24h": "La veille : hacher l'oignon finement et rincer abondamment la graine.\n\nLes mélanger avec la moitié du yaourt, la menthe séchée et la moitié des noix hâchées.\n\nSaler au goût, laisser reposer au moins 5 heures au frais, filmé au contact.\n\nObligatoirement 1 J avant",
+  "astuces": null,
   "prepAlt": null,
   "permissionWrite": [],
-  "publishDate": "2024-06-04T17:00:00Z"
+  "publishedAt": "2025-01-01T00:00:00Z"
 }

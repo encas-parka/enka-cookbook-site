@@ -1,22 +1,26 @@
 
 {
-  "uuid": "zhezz0eqtnme",
   "slug": "shortbread-huile-doliv_zhezz0eqtnme",
   "title": "Shortbread Huile D'olive, Romarin Et Chocolat Sans Gluten",
   "draft": false,
   "typeR": "dessert",
   "categories": ["Biscuits"],
+  "description": null,
+  "region": null,
+  "saison": null,
+  "auteur": null,
   "regime": ["vegetarien","sans-gluten","vegan","sans-lactose"],
   "cuisson": true,
   "serveHot": false,
   "plate": 10,
   "quantite_desc": null,
   "check": true,
-  "checkAlwaysOk": false,
   "materiel": ["Four"],
   "ingredients": [{"allergens":[],"comment":"","name":"Purée d'amande","normalizedQuantity":60,"normalizedUnit":"gr.","originalQuantity":60,"originalUnit":"gr.","type":"autres","uuid":"7dlfuw"},{"allergens":[],"comment":"","name":"Sel","normalizedQuantity":0.4,"normalizedUnit":"gr.","originalQuantity":1,"originalUnit":"pincées","type":"epices","uuid":"2juq3x"},{"allergens":[],"comment":"(branche)","name":"Romarin","normalizedQuantity":1,"normalizedUnit":"unité","originalQuantity":1,"originalUnit":"unité","type":"epices","uuid":"6z655r"},{"allergens":[],"comment":"","name":"huile d'olive","normalizedQuantity":90,"normalizedUnit":"ml","originalQuantity":90,"originalUnit":"ml","type":"lof","uuid":"h3c8al"},{"allergens":[],"comment":"","name":"Fécule de maïs (Maïzena)","normalizedQuantity":30,"normalizedUnit":"gr.","originalQuantity":30,"originalUnit":"gr.","type":"lof","uuid":"8nbcjp"},{"allergens":[],"comment":"","name":"Farine de riz blanche","normalizedQuantity":120,"normalizedUnit":"gr.","originalQuantity":120,"originalUnit":"gr.","type":"lof","uuid":"1nb85u"},{"allergens":[],"comment":"","name":"Chocolat noir patissier 70p100","normalizedQuantity":50,"normalizedUnit":"gr.","originalQuantity":50,"originalUnit":"gr.","type":"sucres","uuid":"1e3zhq"},{"allergens":[],"comment":"","name":"Muscovado (sucre de canne complet)","normalizedQuantity":70,"normalizedUnit":"gr.","originalQuantity":70,"originalUnit":"gr.","type":"sucres","uuid":"l5w2jl"},{"allergens":["Fruit à coque"],"comment":"","name":"Poudre d'amandes","normalizedQuantity":100,"normalizedUnit":"gr.","originalQuantity":100,"originalUnit":"gr.","type":"sucres","uuid":"rmgr7l"}],
   "preparation": "\n\n\n\n* Mélanger tous les ingrédients secs (chocolat cassé en pépite et feuilles de romarin hachée) du biscuit dans un récipient. Ajoutez ensuite l’huile d'olive, la purée d’oléagineux  et mélanger bien jusqu’à obtenir une pâte homogène. Si la préparation colle trop, ajouter de la farine.\n* Verser la pâte dans un moule rectangulaire recouvert de papier cuisson et aplatir dans le fond du moule, piquer à l’aide d’une fourchette.\n* Enfourner environ 25minutes à 170°.\n* Si le biscuit colore trop, baisser légèrement la température, le biscuit doit être presque blanc.\n* Sortir du four et découper un fois presque refroidi.",
+  "preparation24h": null,
+  "astuces": null,
   "prepAlt": null,
   "permissionWrite": [],
-  "publishDate": "2024-06-18T12:29:00Z"
+  "publishedAt": "2025-01-01T00:00:00Z"
 }

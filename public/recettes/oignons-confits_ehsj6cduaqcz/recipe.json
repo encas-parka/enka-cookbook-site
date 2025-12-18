@@ -1,22 +1,26 @@
 
 {
-  "uuid": "ehsj6cduaqcz",
   "slug": "oignons-confits_ehsj6cduaqcz",
   "title": "Oignons Confits",
   "draft": false,
   "typeR": "entree",
   "categories": ["Accompagnement"],
+  "description": null,
+  "region": null,
+  "saison": null,
+  "auteur": null,
   "regime": ["vegetarien","vegan","sans-gluten","sans-lactose"],
   "cuisson": true,
   "serveHot": false,
   "plate": 20,
   "quantite_desc": null,
   "check": false,
-  "checkAlwaysOk": false,
   "materiel": ["Bruleur","Robot-coupe"],
   "ingredients": [{"allergens":[],"comment":"","name":"Oignon","normalizedQuantity":1000,"normalizedUnit":"gr.","originalQuantity":1,"originalUnit":"kg","type":"legumes","uuid":"rtavky"},{"allergens":[],"comment":"","name":"huile de tournesol","normalizedQuantity":1,"normalizedUnit":"au goût","originalQuantity":1,"originalUnit":"au goût","type":"lof","uuid":"c70jxb"},{"allergens":[],"comment":"","name":"Sucre en poudre","normalizedQuantity":15,"normalizedUnit":"gr.","originalQuantity":1,"originalUnit":"c. à soupe","type":"sucres","uuid":"u9z2he"}],
   "preparation": "* Couper les oignons\n* Faire chauffer de l'huile dans une gamelle\n* Faire revenir les oignons à feu moyen puis doux\n* Au bout d'un moment quand les oignons commencent à être cuits rajouter le sucre\n* Si ça brule au fond, rajouter de l'eau\n* Laisser cuire jusqu'à ce que les oignons soient confits",
+  "preparation24h": null,
+  "astuces": null,
   "prepAlt": null,
   "permissionWrite": [],
-  "publishDate": "2025-07-31T08:48:00Z"
+  "publishedAt": "2025-01-01T00:00:00Z"
 }

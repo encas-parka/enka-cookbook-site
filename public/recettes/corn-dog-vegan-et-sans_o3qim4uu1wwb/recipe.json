@@ -1,22 +1,26 @@
 
 {
-  "uuid": "o3qim4uu1wwb",
   "slug": "corn-dog-vegan-et-sans_o3qim4uu1wwb",
   "title": "Corn Dog Vegan Et Sans Gluten",
   "draft": false,
   "typeR": "plat",
   "categories": ["Friture"],
+  "description": "“Beignet de saucisse”, “Pogo” ou “Saucisse sur bâtonnet”. C’est une saucisse enrobée d’une pâte, ensuite frit puis zébrée de ketchup et moutarde. Recette pour un corndog par personne. Mais c'est tellement gourmand qu'il vaut mieux en faire 2 par personne.",
+  "region": "Corée",
+  "saison": null,
+  "auteur": "Les bretonnes",
   "regime": ["vegan","sans-gluten"],
   "cuisson": true,
   "serveHot": true,
   "plate": 100,
   "quantite_desc": null,
   "check": true,
-  "checkAlwaysOk": true,
   "materiel": ["Pique à brochette"],
   "ingredients": [{"allergens":[],"comment":"","name":"Saucisse végane","normalizedQuantity":100,"normalizedUnit":"au goût","originalQuantity":100,"originalUnit":"au goût","type":"autres","uuid":"y8g316"},{"allergens":[],"comment":"","name":"Eau","normalizedQuantity":375,"normalizedUnit":"ml","originalQuantity":375,"originalUnit":"ml","type":"autres","uuid":"ljzb7j"},{"allergens":[],"comment":"","name":"Moutarde douce en flacon ","normalizedQuantity":3,"normalizedUnit":"au goût","originalQuantity":3,"originalUnit":"au goût","type":"epices","uuid":"vu6frz"},{"allergens":[],"comment":"","name":"Ketchup","normalizedQuantity":2,"normalizedUnit":"au goût","originalQuantity":2,"originalUnit":"au goût","type":"epices","uuid":"ytlacu"},{"allergens":[],"comment":"","name":"Poivre","normalizedQuantity":13,"normalizedUnit":"gr.","originalQuantity":13,"originalUnit":"gr.","type":"epices","uuid":"2pps90"},{"allergens":["Alcool"],"comment":"","name":"Vinaigre de cidre","normalizedQuantity":62,"normalizedUnit":"gr.","originalQuantity":62,"originalUnit":"gr.","type":"epices","uuid":"7qo3ht"},{"allergens":["Alcool"],"comment":"","name":"Vinaigre de cidre","normalizedQuantity":190,"normalizedUnit":"ml","originalQuantity":190,"originalUnit":"ml","type":"epices","uuid":"7qo3ht"},{"allergens":[],"comment":"","name":"huile de tournesol","normalizedQuantity":12000,"normalizedUnit":"ml","originalQuantity":12,"originalUnit":"l.","type":"lof","uuid":"c70jxb"},{"allergens":[],"comment":"","name":"Bicarbonate alimentaire","normalizedQuantity":20,"normalizedUnit":"ml","originalQuantity":4,"originalUnit":"c. à café","type":"lof","uuid":"vf8140"},{"allergens":[],"comment":"","name":"Levure chimique sans gluten","normalizedQuantity":20,"normalizedUnit":"gr.","originalQuantity":20,"originalUnit":"gr.","type":"lof","uuid":"zb9tj8"},{"allergens":[],"comment":"","name":"Farine de riz","normalizedQuantity":1500,"normalizedUnit":"gr.","originalQuantity":1.5,"originalUnit":"kg","type":"lof","uuid":"oygozr"},{"allergens":[],"comment":"","name":"Lait végétal (au choix)","normalizedQuantity":3750,"normalizedUnit":"ml","originalQuantity":3.75,"originalUnit":"l.","type":"lof","uuid":"vw9d1a"},{"allergens":[],"comment":"","name":"Polenta fine","normalizedQuantity":2000,"normalizedUnit":"gr.","originalQuantity":2,"originalUnit":"kg","type":"sec","uuid":"9xvfud"},{"allergens":[],"comment":"","name":"Graines de lin","normalizedQuantity":125,"normalizedUnit":"gr.","originalQuantity":125,"originalUnit":"gr.","type":"lof","uuid":"km927d"},{"allergens":[],"comment":"","name":"Sirop d'agave","normalizedQuantity":190,"normalizedUnit":"ml","originalQuantity":190,"originalUnit":"ml","type":"sucres","uuid":"7cflkx"}],
   "preparation": "Dans un sceau, mélanger le lait végétal et le vinaigre. Mettre de côté. (Cela fait du babeurre végétalien)\n\nDans un autre petit bol, mélanger les graines de lin et l'eau. Mettre de côté. (Cela fait des œufs de lin végétaliens).\n\nRéserver le babeurre végétalien et l'œuf de lin pendant 10 minutes.\n\nPendant ce temps, piquer chaque soycisse d'une brochette en bois. ((( Pour une option végét gourmande : rouler ensuite une toastinette auteur de la knack )))\n\nAjouter la polenta, la farine de riz, le sel, la levure, le bicarbonate de soude et le poivre dans un saladier et fouetter.\n\nAjouter le babeurre végétalien, l'œuf de lin et l'agave. Fouetter jusqu'à ce que le tout soit homogène.\n\nAllumer la friteuse pour 190°C.\n\nVerser suffisamment de pâte pour presque remplir un grand verre doseur. Plonger chaque hot-dog végétalien dans la pâte à beignet et le tourner pour enrober le tout.\n\nTrès soigneusement, placer immédiatement le hot-dog dans l'huile. Répéter avec les hot-dogs restants. Ne surchargez pas la friteuse.\n\nCuire jusqu'à ce que l'enrobage soit doré, environ 3 à 5 minutes.\n\nTrès soigneusement, à l'aide de pinces, retirer sur une grille de refroidissement ou une assiette tapissée de papier absorbant.\n\nLaisser refroidir 5 minutes. Servir avec du ketchup et de la moutarde ou votre sauce préférée, en zebrant le corn dog.\n\nLes extras peuvent être conservés au réfrigérateur et réchauffés jusqu'à 5 jours.",
+  "preparation24h": null,
+  "astuces": [{"astuce":"Pour une option végétarienne au fromage. Enrouler la saucisse d'une tranche de toastinette avant de tremper le tout dans la pâte à beignet."}],
   "prepAlt": [],
   "permissionWrite": [],
-  "publishDate": "2024-03-31T15:50:00Z"
+  "publishedAt": "2025-01-01T00:00:00Z"
 }

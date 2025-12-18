@@ -1,22 +1,26 @@
 
 {
-  "uuid": "dw7yaqdlvjg9",
   "slug": "houmous-pois-chiche_dw7yaqdlvjg9",
   "title": "Houmous Pois Chiche",
   "draft": false,
   "typeR": "entree",
   "categories": ["Tartinade"],
+  "description": "Entrée pour le catering de la fête de la soupe 2025",
+  "region": "",
+  "saison": [],
+  "auteur": "Alio",
   "regime": null,
   "cuisson": true,
   "serveHot": false,
   "plate": 100,
   "quantite_desc": "",
   "check": true,
-  "checkAlwaysOk": null,
   "materiel": [],
   "ingredients": [{"allergens":[],"comment":"","name":"Ail","normalizedQuantity":39,"normalizedUnit":"gr.","originalQuantity":6,"originalUnit":"gousse·s","type":"legumes","uuid":"u2m28w"},{"allergens":[],"comment":"","name":"Sel","normalizedQuantity":40,"normalizedUnit":"gr.","originalQuantity":40,"originalUnit":"gr.","type":"epices","uuid":"2juq3x"},{"allergens":[],"comment":"","name":"huile d'olive","normalizedQuantity":450,"normalizedUnit":"ml","originalQuantity":0.45,"originalUnit":"l.","type":"lof","uuid":"h3c8al"},{"allergens":[],"comment":"","name":"Jus de citron","normalizedQuantity":225,"normalizedUnit":"ml","originalQuantity":225,"originalUnit":"ml","type":"sucres","uuid":"e4mjd1"},{"allergens":["Sésame"],"comment":"","name":"Tahin","normalizedQuantity":1000,"normalizedUnit":"gr.","originalQuantity":1,"originalUnit":"kg","type":"autres","uuid":"u33083"},{"allergens":[],"comment":"poids sec","name":"Pois chiches","normalizedQuantity":1800,"normalizedUnit":"gr.","originalQuantity":1.8,"originalUnit":"kg","type":"sec","uuid":"6a8w8k"}],
   "preparation": "\u003e Faire cuire les pois chiches\n\n\u003eDans un mixeur, mettre tous les ingrédients avec du cumin sauf l'huile\n\n(Faire attention à faire en plusieurs fois)\n\nMixer et rajouter l'huile progressivement pendant que le mix\n\nRectifier l'assaisonnement\n\nPossibilité de mettre du paprika (fumé ou non) en déco sur le houmous",
+  "preparation24h": "Faire tremper les pois chiches",
+  "astuces": [],
   "prepAlt": [],
   "permissionWrite": [],
-  "publishDate": "2025-10-19T20:27:00Z"
+  "publishedAt": "2025-01-01T00:00:00Z"
 }

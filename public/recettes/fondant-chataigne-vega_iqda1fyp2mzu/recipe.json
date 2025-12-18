@@ -1,22 +1,26 @@
 
 {
-  "uuid": "iqda1fyp2mzu",
   "slug": "fondant-chataigne-vega_iqda1fyp2mzu",
   "title": "Fondant Chataigne (Vegan Et Sans Gluten)",
   "draft": false,
   "typeR": "dessert",
   "categories": ["Gateau"],
+  "description": null,
+  "region": null,
+  "saison": null,
+  "auteur": null,
   "regime": ["sans-gluten","vegetarien","vegan"],
   "cuisson": true,
   "serveHot": false,
   "plate": 20,
   "quantite_desc": "24 parts par gastro (env. 9cmx8cm)",
   "check": true,
-  "checkAlwaysOk": false,
   "materiel": ["Gastro 1/1 (Normaux)","Four"],
   "ingredients": [{"allergens":["Fruit à coque"],"comment":"","name":"Poudre d'amandes","normalizedQuantity":400,"normalizedUnit":"gr.","originalQuantity":400,"originalUnit":"gr.","type":"sucres","uuid":"rmgr7l"},{"allergens":[],"comment":"","name":"Sucre en poudre","normalizedQuantity":400,"normalizedUnit":"gr.","originalQuantity":400,"originalUnit":"gr.","type":"sucres","uuid":"u9z2he"},{"allergens":[],"comment":"","name":"Confiture de chataigne (sans sucre)","normalizedQuantity":1500,"normalizedUnit":"gr.","originalQuantity":1.5,"originalUnit":"kg","type":"sucres","uuid":"q33x0k"},{"allergens":["Soja"],"comment":"","name":"Lait de soja","normalizedQuantity":600,"normalizedUnit":"ml","originalQuantity":600,"originalUnit":"ml","type":"lof","uuid":"gpeob7"},{"allergens":[],"comment":"","name":"Farine de tapioca","normalizedQuantity":70,"normalizedUnit":"gr.","originalQuantity":70,"originalUnit":"gr.","type":"lof","uuid":"v212im"},{"allergens":[],"comment":"","name":"Farine de riz gluant","normalizedQuantity":70,"normalizedUnit":"gr.","originalQuantity":70,"originalUnit":"gr.","type":"lof","uuid":"civ587"},{"allergens":[],"comment":"","name":"Sel","normalizedQuantity":7.5,"normalizedUnit":"gr.","originalQuantity":1.5,"originalUnit":"c. à café","type":"epices","uuid":"2juq3x"}],
   "preparation": "* Faire fondre le beurre.\n* Mélanger tout afin d'obtenir une pâte homogène.\n* Tapisser les gastro de papier sulfurisé et verser la pâte.\n* Cuire dans un four préchauffé à 200°, une vingtaine de minutes.\n* Le gateau gonfle, se fissure, le sortir quand le coeur est encore tremblotant, et le laisser refroidir completement avant de faire les parts.\n\n(24 parts par gastro. )",
+  "preparation24h": null,
+  "astuces": null,
   "prepAlt": [{"recetteAlt":"fondant-chataigne_tx71o7g8"}],
   "permissionWrite": [],
-  "publishDate": "2024-05-18T13:02:00Z"
+  "publishedAt": "2025-01-01T00:00:00Z"
 }

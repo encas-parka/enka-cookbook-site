@@ -1,22 +1,26 @@
 
 {
-  "uuid": "qrja5f4xfwen",
   "slug": "gateau-de-polenta-aux-_qrja5f4xfwen",
   "title": "Gateau De Polenta Aux Fruits",
   "draft": false,
   "typeR": "dessert",
   "categories": ["Gateau"],
+  "description": "Habituellement aux pêches, ce gâteau est pratique pour passer les restes de fruits",
+  "region": null,
+  "saison": null,
+  "auteur": null,
   "regime": ["vegetarien","sans-gluten"],
   "cuisson": true,
   "serveHot": false,
   "plate": 100,
   "quantite_desc": null,
   "check": true,
-  "checkAlwaysOk": true,
   "materiel": null,
   "ingredients": [{"allergens":["Produit laitier"],"comment":"nappage","name":"Yaourt grec de vache","normalizedQuantity":2000,"normalizedUnit":"gr.","originalQuantity":2,"originalUnit":"kg","type":"frais","uuid":"dzqmba"},{"allergens":["Produit laitier"],"comment":"","name":"Beurre demi-sel","normalizedQuantity":1000,"normalizedUnit":"gr.","originalQuantity":1,"originalUnit":"kg","type":"frais","uuid":"mxub21"},{"allergens":[],"comment":"","name":"Fruits divers","normalizedQuantity":2800,"normalizedUnit":"gr.","originalQuantity":2.8,"originalUnit":"kg","type":"legumes","uuid":"4stcxn"},{"allergens":[],"comment":"nappage","name":"Fruits divers","normalizedQuantity":1700,"normalizedUnit":"gr.","originalQuantity":1.7,"originalUnit":"kg","type":"legumes","uuid":"4stcxn"},{"allergens":[],"comment":"nappage","name":"Citron vert","normalizedQuantity":500,"normalizedUnit":"gr.","originalQuantity":5,"originalUnit":"unité","type":"legumes","uuid":"1koje1"},{"allergens":["Oeuf"],"comment":"","name":"Oeuf","normalizedQuantity":20,"normalizedUnit":"unité","originalQuantity":20,"originalUnit":"unité","type":"lof","uuid":"zf3zf8"},{"allergens":[],"comment":"","name":"Polenta fine","normalizedQuantity":1000,"normalizedUnit":"gr.","originalQuantity":1,"originalUnit":"kg","type":"sec","uuid":"9xvfud"},{"allergens":[],"comment":"","name":"Pistache émmondée","normalizedQuantity":400,"normalizedUnit":"gr.","originalQuantity":400,"originalUnit":"gr.","type":"sec","uuid":"q7adw3"},{"allergens":["Fruit à coque"],"comment":"","name":"Amande","normalizedQuantity":1000,"normalizedUnit":"gr.","originalQuantity":1,"originalUnit":"kg","type":"sec","uuid":"fuhtcw"},{"allergens":[],"comment":"nappage","name":"Miel","normalizedQuantity":260,"normalizedUnit":"gr.","originalQuantity":260,"originalUnit":"gr.","type":"sucres","uuid":"g0lph5"},{"allergens":[],"comment":"","name":"Sucre en poudre","normalizedQuantity":1400,"normalizedUnit":"gr.","originalQuantity":1.4,"originalUnit":"kg","type":"sucres","uuid":"u9z2he"}],
   "preparation": "**Gâteau** : Éplucher les pêches ou les fruits, si nécessaire les plonger dans l'eau bouillante quelques minutes pour aider. Oter les noyaux, mixer en purée.\n\nLaver les citrons et les zester (mettre de côté ceux réserver pour le nappage).\n\nHacher les amandes et les pistaches. Mettre un sixième de téco pour le nappage.\n\nPréchauffer le four et utiliser du papier sulfurisé pour les moules.\n\nBattre les œufs avec le sucre dans un saladier.\n\nAjouter les zestes comptés pour la pâte, puis la polenta et les pistaches/amandes. Mélanger. Verser le beurre fondu et la purée de pêches (fruits).\n\nEnfournez 45 min.\n\nLaissez refroidir.\n\n**Nappage** : À faire peu de temps avant le service.\n\nÉplucher les pêches (les fruits) et les couper en tranche.\n\nFaire légèrement torréfier les amandes/pistaches restantes.\n\n Au dernier moment : étaler le yaourt directement sur le gâteau, disposer des tranches de fruits, des pistaches concassées, le miel et le zeste des citrons restant sur le gâteau.",
+  "preparation24h": null,
+  "astuces": null,
   "prepAlt": null,
   "permissionWrite": [],
-  "publishDate": "2024-06-18T15:19:00Z"
+  "publishedAt": "2025-01-01T00:00:00Z"
 }

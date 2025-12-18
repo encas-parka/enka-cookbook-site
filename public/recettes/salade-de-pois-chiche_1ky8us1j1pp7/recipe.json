@@ -1,22 +1,26 @@
 
 {
-  "uuid": "1ky8us1j1pp7",
   "slug": "salade-de-pois-chiche_1ky8us1j1pp7",
   "title": "Salade De Pois-Chiche",
   "draft": false,
   "typeR": "entree",
   "categories": ["Salade"],
+  "description": null,
+  "region": null,
+  "saison": null,
+  "auteur": null,
   "regime": ["vegetarien","vegan","sans-gluten","sans-lactose"],
   "cuisson": true,
   "serveHot": false,
   "plate": 190,
   "quantite_desc": null,
   "check": true,
-  "checkAlwaysOk": null,
   "materiel": null,
   "ingredients": [{"allergens":[],"comment":"","name":"Ail","normalizedQuantity":52,"normalizedUnit":"gr.","originalQuantity":8,"originalUnit":"gousse·s","type":"legumes","uuid":"u2m28w"},{"allergens":[],"comment":"","name":"Oignon","normalizedQuantity":2000,"normalizedUnit":"gr.","originalQuantity":2,"originalUnit":"kg","type":"legumes","uuid":"rtavky"},{"allergens":[],"comment":"","name":"Tomate","normalizedQuantity":8000,"normalizedUnit":"gr.","originalQuantity":8,"originalUnit":"kg","type":"legumes","uuid":"ibtbnq"},{"allergens":[],"comment":"","name":"Courgette","normalizedQuantity":7000,"normalizedUnit":"gr.","originalQuantity":7,"originalUnit":"kg","type":"legumes","uuid":"9zozfk"},{"allergens":[],"comment":"","name":"Poivron","normalizedQuantity":5000,"normalizedUnit":"gr.","originalQuantity":5,"originalUnit":"kg","type":"legumes","uuid":"0lpad0"},{"allergens":[],"comment":"Pois-chiche secs","name":"Pois chiches","normalizedQuantity":6000,"normalizedUnit":"gr.","originalQuantity":6,"originalUnit":"kg","type":"sec","uuid":"6a8w8k"},{"allergens":[],"comment":"","name":"Cumin","normalizedQuantity":1,"normalizedUnit":"au goût","originalQuantity":1,"originalUnit":"au goût","type":"epices","uuid":"dc8855"},{"allergens":[],"comment":"1 ou 2 bottes de coriandre","name":"Coriandre fraîche","normalizedQuantity":2,"normalizedUnit":"bottes","originalQuantity":2,"originalUnit":"bottes","type":"epices","uuid":"fetrpe"},{"allergens":[],"comment":"","name":"Jus de citron","normalizedQuantity":1000,"normalizedUnit":"ml","originalQuantity":1,"originalUnit":"l.","type":"sucres","uuid":"e4mjd1"}],
   "preparation": "Faire cuire les pois chiche mais qu'ils restent fermes\n\n* Couper tous les legumes en petits dés ( 1cm pas plus)\n* Faire revenir ensembles courgettes, poivrons, oignons, rajouter l'ail à la fin.\n* Une fois tous les ingrédients refroidis mélanger tout avec les tomates et l'herbe.",
+  "preparation24h": "Mettre les pois chiche à tremper la veille.",
+  "astuces": null,
   "prepAlt": null,
   "permissionWrite": [],
-  "publishDate": "2022-11-23T22:44:10.332Z"
+  "publishedAt": "2025-01-01T00:00:00Z"
 }

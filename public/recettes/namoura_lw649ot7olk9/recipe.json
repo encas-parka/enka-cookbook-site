@@ -1,22 +1,26 @@
 
 {
-  "uuid": "lw649ot7olk9",
   "slug": "namoura_lw649ot7olk9",
   "title": "Namoura",
   "draft": false,
   "typeR": "dessert",
   "categories": ["Gateau"],
+  "description": "Petits gâteaux de semoule gourmands",
+  "region": null,
+  "saison": null,
+  "auteur": "ça vault le détour",
   "regime": ["vegan","sans-lactose"],
   "cuisson": true,
   "serveHot": false,
   "plate": 50,
   "quantite_desc": null,
   "check": false,
-  "checkAlwaysOk": true,
   "materiel": ["Four"],
   "ingredients": [{"allergens":[],"comment":"","name":"Eau","normalizedQuantity":135,"normalizedUnit":"ml","originalQuantity":9,"originalUnit":"c. à soupe","type":"autres","uuid":"ljzb7j"},{"allergens":[],"comment":"","name":"Eau","normalizedQuantity":600,"normalizedUnit":"gr.","originalQuantity":600,"originalUnit":"gr.","type":"autres","uuid":"ljzb7j"},{"allergens":[],"comment":"","name":"Bicarbonate de soude","normalizedQuantity":5,"normalizedUnit":"ml","originalQuantity":1,"originalUnit":"c. à café","type":"autres","uuid":"fnnx13"},{"allergens":["Gluten"],"comment":"","name":"Levure chimique","normalizedQuantity":30,"normalizedUnit":"gr.","originalQuantity":30,"originalUnit":"gr.","type":"lof","uuid":"vgec6e"},{"allergens":["Soja"],"comment":"","name":"Yaourt de soja","normalizedQuantity":1500,"normalizedUnit":"gr.","originalQuantity":1.5,"originalUnit":"kg","type":"frais","uuid":"hlbwfd"},{"allergens":[],"comment":"","name":"huile de colza","normalizedQuantity":300,"normalizedUnit":"ml","originalQuantity":0.3,"originalUnit":"l.","type":"lof","uuid":"eu7lc6"},{"allergens":["Gluten"],"comment":"","name":"Semoule fine (blé)","normalizedQuantity":750,"normalizedUnit":"gr.","originalQuantity":750,"originalUnit":"gr.","type":"sec","uuid":"mltl42"},{"allergens":[],"comment":"","name":"Jus de citron","normalizedQuantity":135,"normalizedUnit":"ml","originalQuantity":9,"originalUnit":"c. à soupe","type":"sucres","uuid":"e4mjd1"},{"allergens":[],"comment":"","name":"Sucre en poudre","normalizedQuantity":600,"normalizedUnit":"gr.","originalQuantity":0.6,"originalUnit":"kg","type":"sucres","uuid":"u9z2he"},{"allergens":[],"comment":"","name":"Sucre en poudre","normalizedQuantity":300,"normalizedUnit":"gr.","originalQuantity":0.3,"originalUnit":"kg","type":"sucres","uuid":"u9z2he"}],
   "preparation": "Mélanger tous les ingrédients de la pâte( semoule, yaourt, levure, bicarbonate, 1/3 de l'eau florale, l'huile, et la plus petite partie du sucre, et l'eau qui est noté en cuillère à soupe) et verser dans un plat allant au four, préalablement huilé ou chemisé de papier sulfurisé. La pâte a une consistance plus pâteuse que liquide.\n\nCuire environ 30 à 35 min à 180°C. Le gâteau est légèrement doré.\n\nPendant ce temps, préparer le sirop en versant la plus grosse partie du sucre, l'eau et le jus de citron dans une casserole et porter à ébullition. Le sucre doit être totalement dissout. puis y ajouter les 2/3 de l'eau florale.\n\nA la sortie du four, découper les parts de gâteau, y mettre une amande au centre de chaque part et puis verser une bonne dose de sirop sur le gâteau. Bien répartir pour que chaque partie du gâteau s'imbibe bien. Enfin, filmer de manière complètement hermétique jusqu'au moment de le servir.",
+  "preparation24h": null,
+  "astuces": null,
   "prepAlt": null,
   "permissionWrite": [],
-  "publishDate": "2024-03-27T19:32:00Z"
+  "publishedAt": "2025-01-01T00:00:00Z"
 }

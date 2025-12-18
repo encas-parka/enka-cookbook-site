@@ -1,22 +1,26 @@
 
 {
-  "uuid": "kuj2infwa1r1",
   "slug": "soupe-de-carottes-a-la_kuj2infwa1r1",
   "title": "Soupe De Carottes À La Coriandre",
   "draft": false,
   "typeR": "entree",
   "categories": ["Soupe"],
+  "description": " ",
+  "region": "Portugal",
+  "saison": null,
+  "auteur": null,
   "regime": ["vegan","sans-gluten","sans-lactose","vegetarien"],
   "cuisson": true,
   "serveHot": true,
   "plate": 100,
   "quantite_desc": "Un bol par personne",
   "check": false,
-  "checkAlwaysOk": false,
   "materiel": ["Bruleur","Marmitte","Giraffe (Bras Mixeur)"],
   "ingredients": [{"allergens":[],"comment":"Gouter en fin de cuisson (rectifier)","name":"Gros sel","normalizedQuantity":80,"normalizedUnit":"gr.","originalQuantity":80,"originalUnit":"gr.","type":"epices","uuid":"5dwrvm"},{"allergens":[],"comment":"","name":"Coriandre fraîche","normalizedQuantity":6,"normalizedUnit":"bottes","originalQuantity":6,"originalUnit":"bottes","type":"epices","uuid":"fetrpe"},{"allergens":[],"comment":"","name":"Ail","normalizedQuantity":160,"normalizedUnit":"gr.","originalQuantity":2,"originalUnit":"tête·s","type":"legumes","uuid":"u2m28w"},{"allergens":[],"comment":"","name":"Oignon","normalizedQuantity":2250,"normalizedUnit":"gr.","originalQuantity":2.25,"originalUnit":"kg","type":"legumes","uuid":"rtavky"},{"allergens":[],"comment":"","name":"Pomme de terre","normalizedQuantity":3000,"normalizedUnit":"gr.","originalQuantity":3,"originalUnit":"kg","type":"legumes","uuid":"18dy4e"},{"allergens":[],"comment":"","name":"Carotte","normalizedQuantity":12500,"normalizedUnit":"gr.","originalQuantity":12.5,"originalUnit":"kg","type":"legumes","uuid":"eouu0v"},{"allergens":[],"comment":"","name":"huile d'olive","normalizedQuantity":500,"normalizedUnit":"ml","originalQuantity":500,"originalUnit":"ml","type":"lof","uuid":"h3c8al"}],
   "preparation": "Eplucher carottes et patates, les laver et les couper en morceaux de taille moyenne.\n\nEcraser les gousses d'ail et couper les oignons en quartiers.\n\nTout mettre dans une marmite et couvrir d'eau froide, avec au moins 2cm d'eau au dessus.\n\nAjouter le sel et l'huile.\n\nMettre sur le feu pendant 30min.\n\nHacher la coriandre.\n\nVérifier si les carottes et patates sont cuites, et quand c'est le cas tout mixer en rajoutant un filet d'huile d'olive. Ajouter un peu d'eau pendant le mixage si nécessaire pour avoir une consistance de soupe veloutée\n\nMélanger la coriandre une fois le tout bien mixé.",
+  "preparation24h": null,
+  "astuces": null,
   "prepAlt": null,
   "permissionWrite": [],
-  "publishDate": "2024-06-07T16:19:00Z"
+  "publishedAt": "2025-01-01T00:00:00Z"
 }

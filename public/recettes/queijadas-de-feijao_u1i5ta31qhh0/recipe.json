@@ -1,22 +1,26 @@
 
 {
-  "uuid": "u1i5ta31qhh0",
   "slug": "queijadas-de-feijao_u1i5ta31qhh0",
   "title": "Queijadas De Feijao",
   "draft": false,
   "typeR": "dessert",
   "categories": ["Gateau"],
+  "description": "Gâteau portugais, légèrement moins connu que les légendaires Pastéis de nata",
+  "region": "Portugal",
+  "saison": null,
+  "auteur": "Auré",
   "regime": null,
   "cuisson": true,
   "serveHot": false,
   "plate": 100,
   "quantite_desc": null,
   "check": false,
-  "checkAlwaysOk": true,
   "materiel": ["Moule à muffin"],
   "ingredients": [{"allergens":[],"comment":"","name":"Eau","normalizedQuantity":950,"normalizedUnit":"gr.","originalQuantity":950,"originalUnit":"gr.","type":"autres","uuid":"ljzb7j"},{"allergens":["Gluten"],"comment":"","name":"Pate feuilletée","normalizedQuantity":2400,"normalizedUnit":"gr.","originalQuantity":2.4,"originalUnit":"kg","type":"frais","uuid":"h1levi"},{"allergens":[],"comment":"","name":"Cannelle","normalizedQuantity":25,"normalizedUnit":"ml","originalQuantity":5,"originalUnit":"c. à café","type":"epices","uuid":"sk1gbb"},{"allergens":[],"comment":"","name":"Citron non traité","normalizedQuantity":400,"normalizedUnit":"gr.","originalQuantity":4,"originalUnit":"unité","type":"legumes","uuid":"tobtbt"},{"allergens":["Oeuf"],"comment":"","name":"Oeuf","normalizedQuantity":27,"normalizedUnit":"unité","originalQuantity":27,"originalUnit":"unité","type":"lof","uuid":"zf3zf8"},{"allergens":[],"comment":"","name":"Haricots blancs en conserve","normalizedQuantity":1000,"normalizedUnit":"gr.","originalQuantity":1,"originalUnit":"kg","type":"sec","uuid":"g6ngse"},{"allergens":[],"comment":"pour saupoudrer","name":"Sucre glace","normalizedQuantity":100,"normalizedUnit":"gr.","originalQuantity":100,"originalUnit":"gr.","type":"sucres","uuid":"phv1to"},{"allergens":[],"comment":"","name":"Sucre en poudre","normalizedQuantity":2000,"normalizedUnit":"gr.","originalQuantity":2,"originalUnit":"kg","type":"sucres","uuid":"u9z2he"}],
   "preparation": "Dans une casserole faire un sirop avec le sucre et l’eau. Mélanger et laisser cuire pendant 15 minutes. Dans un blender, mettre les haricots bien rincés et le sirop de sucre. Mixer le tout et laisser refroidir.\n\nSéparer la pâte feuilletée en 4, saupoudrer le plan de travail avec de la farine et étirer les pâtes. Rouler ensuite la pâte feuilletée sur elle-même pour faire un rouleau. Faire des tronçons de 2 cm d’épaisseur. Placez chaque tranche dans le moule en silicone. Bien appuyer avec le pouce de manière à étirer la pâte vers le haut du moule.\n\nDans le sirop froid, ajouter le zeste de citron, la cannelle, les œufs. Mixer le tout dans le blender.\n\nRemplir les moules avec la crème obtenue.\n\nPréchauffer le four à 170° C et cuire environ 35 minutes. S'assurer que les gâteaux soient bien cuits en les piquant avec un cure-dent.\n\nLorsque les gâteaux sont cuits, les retirer, démouler et saupoudrer de sucre glace.",
+  "preparation24h": "",
+  "astuces": null,
   "prepAlt": [{"recetteAlt":"queijadas-de-feijao-vegan-et-sans-gluten_o0dav1ps"}],
   "permissionWrite": [],
-  "publishDate": "2024-05-23T00:01:00Z"
+  "publishedAt": "2025-01-01T00:00:00Z"
 }

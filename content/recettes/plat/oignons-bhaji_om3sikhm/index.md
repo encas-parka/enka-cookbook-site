@@ -47,7 +47,7 @@ ingredients:
     quantite: 80
     unit: gr.
     commentaire: ''
-  - ingredient: curry_7jceco
+  - ingredient: garam-masala_1akmaa
     quantite: 250
     unit: gr.
     commentaire: ''

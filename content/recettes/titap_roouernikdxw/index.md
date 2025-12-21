@@ -1,6 +1,6 @@
 ---
 title: Titap
-date: '2025-12-21T12:58:07.193Z'
+date: '2025-12-21T13:01:50.140Z'
 draft: true
 typeR: entree
 categories: []
@@ -14,10 +14,8 @@ check: false
 cuisson: true
 serveHot: true
 description: ''
-region: ''
 saison: []
 id: titap_roouernikdxw
-materiel: []
 ingredients:
   - uuid: gW2IchbW-XVTyr-yqwW6Y
     name: Algue kombu séchée
@@ -29,8 +27,8 @@ ingredients:
     allergens: []
     type: epices
 preparation: |-
-  1. **e**
-  2. **ds**
+  - **e**
+  - **ds**
 
   *itals*
 prepAlt: []
@@ -39,7 +37,7 @@ preparation24h: ''
 permissionWrite:
   - 693200b700222efe46a2
 createdAt: '2025-12-21T12:57:56.139+00:00'
-updatedAt: '2025-12-21T12:57:56.139+00:00'
+updatedAt: '2025-12-21T13:01:33.713+00:00'
 createdBy: 693200b700222efe46a2
 ---
 

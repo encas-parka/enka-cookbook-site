@@ -1,6 +1,6 @@
 ---
 title: Another petit test 2
-date: '2025-12-29T21:34:48.685Z'
+date: '2025-12-29T21:43:22.401Z'
 draft: true
 typeR: entree
 categories:
@@ -59,6 +59,15 @@ ingredients:
     allergens:
       - Produit laitier
     type: frais
+  - uuid: k_gYBnLa_INwGO_YKQf82
+    name: crêpes de sarrasin
+    originalQuantity: 3
+    originalUnit: gr.
+    normalizedQuantity: 3
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: autres
 preparation: |-
   - AHHH
   - BHHH
@@ -71,7 +80,7 @@ preparation24h: ''
 permissionWrite:
   - 693200b700222efe46a2
 createdAt: '2025-12-29T12:50:47.565+00:00'
-updatedAt: '2025-12-29T21:34:48.444+00:00'
+updatedAt: '2025-12-29T21:43:22.186+00:00'
 createdBy: 693200b700222efe46a2
 ---
 

@@ -1,35 +1,35 @@
 ---
 title: Another petit test
-date: '2025-12-29T13:02:05.464Z'
-draft: false
+date: '2025-12-29T16:18:02.267Z'
+draft: true
 typeR: entree
 categories:
   - Cake
+  - Gateau
 regime:
   - vegan
   - sans-gluten
   - sans-lactose
-plate: 100
+plate: 105
 quantite_desc: ''
 check: false
 cuisson: false
 serveHot: true
-description: ''
+description: desc desc desc
 saison: []
 id: another-petit-test_mgyr4ezh-iif
 ingredients:
   - uuid: _X4FUyvKiOjBte6Vu0sFZ
     name: Moutarde à l'ancienne
-    originalQuantity: 0
+    originalQuantity: 12
     originalUnit: gr.
-    normalizedQuantity: 0
+    normalizedQuantity: 12
     normalizedUnit: gr.
     comment: ''
     allergens: []
     type: epices
 preparation: |-
-
-  **grret**
+  grret
 
   - AHHH
   - BHHH
@@ -40,7 +40,7 @@ preparation24h: ''
 permissionWrite:
   - 693200b700222efe46a2
 createdAt: '2025-12-29T12:50:47.565+00:00'
-updatedAt: '2025-12-29T13:02:05.235+00:00'
+updatedAt: '2025-12-29T16:17:55.517+00:00'
 createdBy: 693200b700222efe46a2
 ---
 

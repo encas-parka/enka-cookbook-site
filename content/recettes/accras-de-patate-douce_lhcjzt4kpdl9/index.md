@@ -1,7 +1,7 @@
 ---
 title: Accras de patate douce (qaldek@gmx.com)
-date: '2025-01-01T00:00:00Z'
-draft: false
+date: '2025-12-29T18:57:52.804Z'
+draft: true
 typeR: plat
 categories:
   - Friture
@@ -18,9 +18,7 @@ region: Antilles
 saison:
   - ete
 id: accras-de-patate-douce_lhcjzt4kpdl9
-materiel:
-  - Friteuse
-  - Marmitte
+materiel: []
 ingredients:
   - uuid: 5cg0yu
     name: Citron jaune
@@ -154,7 +152,7 @@ preparation24h: null
 permissionWrite:
   - 693200b700222efe46a2
 createdAt: '2025-12-29T13:03:00.488+00:00'
-updatedAt: '2025-12-29T13:03:00.488+00:00'
+updatedAt: '2025-12-29T18:57:43.468+00:00'
 createdBy: 693200b700222efe46a2
 ---
 

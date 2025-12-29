@@ -1,6 +1,6 @@
 ---
 title: Another petit test 2
-date: '2025-12-29T22:39:12.713Z'
+date: '2025-12-29T22:39:55.076Z'
 draft: true
 typeR: entree
 categories:
@@ -34,9 +34,9 @@ ingredients:
   - uuid: 6GZ0T8ur8YsxXa7pT8ndk
     name: Philadelphia ou autre marque moins cher
     originalQuantity: 40
-    originalUnit: gr.
+    originalUnit: gousse·s
     normalizedQuantity: 40
-    normalizedUnit: gr.
+    normalizedUnit: gousse·s
     comment: ''
     allergens:
       - Produit laitier
@@ -53,7 +53,7 @@ ingredients:
 preparation: |-
   - AHHH
   - BHHH
-  - CHHHH
+  - *CHHHH*
 
   **ok ok**
 prepAlt: []
@@ -62,7 +62,7 @@ preparation24h: ''
 permissionWrite:
   - 693200b700222efe46a2
 createdAt: '2025-12-29T12:50:47.565+00:00'
-updatedAt: '2025-12-29T22:39:12.485+00:00'
+updatedAt: '2025-12-29T22:39:54.854+00:00'
 createdBy: 693200b700222efe46a2
 ---
 

@@ -1,9 +1,10 @@
 ---
 title: Q test
-date: '2025-12-29T11:38:09.019Z'
+date: '2025-12-29T11:38:13.987Z'
 draft: true
 typeR: plat
-categories: []
+categories:
+  - Boisson
 regime:
   - vegan
   - sans-gluten
@@ -33,7 +34,7 @@ preparation24h: ''
 permissionWrite:
   - 693200b700222efe46a2
 createdAt: '2025-12-29T11:37:44.822+00:00'
-updatedAt: '2025-12-29T11:38:08.765+00:00'
+updatedAt: '2025-12-29T11:38:13.750+00:00'
 createdBy: 693200b700222efe46a2
 ---
 

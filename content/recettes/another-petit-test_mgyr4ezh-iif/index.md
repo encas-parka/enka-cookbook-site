@@ -1,6 +1,6 @@
 ---
 title: Another petit test 2
-date: '2025-12-29T21:43:22.401Z'
+date: '2025-12-29T21:43:45.886Z'
 draft: true
 typeR: entree
 categories:
@@ -62,9 +62,9 @@ ingredients:
   - uuid: k_gYBnLa_INwGO_YKQf82
     name: crêpes de sarrasin
     originalQuantity: 3
-    originalUnit: gr.
+    originalUnit: unité
     normalizedQuantity: 3
-    normalizedUnit: gr.
+    normalizedUnit: unité
     comment: ''
     allergens: []
     type: autres
@@ -80,7 +80,7 @@ preparation24h: ''
 permissionWrite:
   - 693200b700222efe46a2
 createdAt: '2025-12-29T12:50:47.565+00:00'
-updatedAt: '2025-12-29T21:43:22.186+00:00'
+updatedAt: '2025-12-29T21:43:45.672+00:00'
 createdBy: 693200b700222efe46a2
 ---
 

@@ -1,15 +1,14 @@
 ---
 title: Another petit test
-date: '2025-12-29T21:23:50.012Z'
+date: '2025-12-29T21:26:32.460Z'
 draft: true
 typeR: entree
 categories:
   - Cake
   - Gateau
 regime:
-  - vegan
+  - végétarien
   - sans-gluten
-  - sans-lactose
 plate: 105
 quantite_desc: ''
 check: false
@@ -50,6 +49,16 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+  - uuid: 6GZ0T8ur8YsxXa7pT8ndk
+    name: Philadelphia ou autre marque moins cher
+    originalQuantity: 40
+    originalUnit: gr.
+    normalizedQuantity: 40
+    normalizedUnit: gr.
+    comment: ''
+    allergens:
+      - Produit laitier
+    type: frais
 preparation: |-
   - AHHH
   - BHHH
@@ -62,7 +71,7 @@ preparation24h: ''
 permissionWrite:
   - 693200b700222efe46a2
 createdAt: '2025-12-29T12:50:47.565+00:00'
-updatedAt: '2025-12-29T21:23:49.756+00:00'
+updatedAt: '2025-12-29T21:26:32.247+00:00'
 createdBy: 693200b700222efe46a2
 ---
 

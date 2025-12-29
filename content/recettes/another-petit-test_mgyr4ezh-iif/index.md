@@ -1,6 +1,6 @@
 ---
-title: Another petit test
-date: '2025-12-29T21:27:41.881Z'
+title: Another petit test 2
+date: '2025-12-29T21:33:04.648Z'
 draft: true
 typeR: entree
 categories:
@@ -71,7 +71,7 @@ preparation24h: ''
 permissionWrite:
   - 693200b700222efe46a2
 createdAt: '2025-12-29T12:50:47.565+00:00'
-updatedAt: '2025-12-29T21:27:41.522+00:00'
+updatedAt: '2025-12-29T21:33:04.383+00:00'
 createdBy: 693200b700222efe46a2
 ---
 

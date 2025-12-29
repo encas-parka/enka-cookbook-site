@@ -1,9 +1,10 @@
 ---
 title: Another petit test
-date: '2025-12-29T13:02:01.635Z'
+date: '2025-12-29T13:02:05.464Z'
 draft: false
 typeR: entree
-categories: []
+categories:
+  - Cake
 regime:
   - vegan
   - sans-gluten
@@ -39,7 +40,7 @@ preparation24h: ''
 permissionWrite:
   - 693200b700222efe46a2
 createdAt: '2025-12-29T12:50:47.565+00:00'
-updatedAt: '2025-12-29T13:02:01.369+00:00'
+updatedAt: '2025-12-29T13:02:05.235+00:00'
 createdBy: 693200b700222efe46a2
 ---
 

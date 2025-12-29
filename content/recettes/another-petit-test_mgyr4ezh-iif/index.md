@@ -1,6 +1,6 @@
 ---
 title: Another petit test
-date: '2025-12-29T18:04:12.852Z'
+date: '2025-12-29T21:19:45.413Z'
 draft: true
 typeR: entree
 categories:
@@ -15,7 +15,7 @@ quantite_desc: ''
 check: false
 cuisson: false
 serveHot: true
-description: desc desc desc
+description: desc desc desc modifier
 region: null
 saison: []
 id: another-petit-test_mgyr4ezh-iif
@@ -40,6 +40,15 @@ ingredients:
     allergens:
       - Fruit à coque
     type: sucres
+  - uuid: yt1laSQ936XDb91w7jYTm
+    name: compote de pomme
+    originalQuantity: 100
+    originalUnit: kg
+    normalizedQuantity: 100000
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: sucres
 preparation: |-
   grret
 
@@ -52,7 +61,7 @@ preparation24h: ''
 permissionWrite:
   - 693200b700222efe46a2
 createdAt: '2025-12-29T12:50:47.565+00:00'
-updatedAt: '2025-12-29T18:04:07.471+00:00'
+updatedAt: '2025-12-29T21:19:45.105+00:00'
 createdBy: 693200b700222efe46a2
 ---
 

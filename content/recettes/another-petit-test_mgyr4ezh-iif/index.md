@@ -1,6 +1,6 @@
 ---
 title: Another petit test
-date: '2025-12-29T21:26:32.460Z'
+date: '2025-12-29T21:27:41.881Z'
 draft: true
 typeR: entree
 categories:
@@ -14,7 +14,7 @@ quantite_desc: ''
 check: false
 cuisson: false
 serveHot: true
-description: desc desc desc modifier
+description: mod mod  desc modifier
 region: null
 saison:
   - hiver
@@ -71,7 +71,7 @@ preparation24h: ''
 permissionWrite:
   - 693200b700222efe46a2
 createdAt: '2025-12-29T12:50:47.565+00:00'
-updatedAt: '2025-12-29T21:26:32.247+00:00'
+updatedAt: '2025-12-29T21:27:41.522+00:00'
 createdBy: 693200b700222efe46a2
 ---
 

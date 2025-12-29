@@ -1,6 +1,6 @@
 ---
 title: Another petit test
-date: '2025-12-29T16:18:02.267Z'
+date: '2025-12-29T18:04:12.852Z'
 draft: true
 typeR: entree
 categories:
@@ -16,8 +16,10 @@ check: false
 cuisson: false
 serveHot: true
 description: desc desc desc
+region: null
 saison: []
 id: another-petit-test_mgyr4ezh-iif
+materiel: []
 ingredients:
   - uuid: _X4FUyvKiOjBte6Vu0sFZ
     name: Moutarde à l'ancienne
@@ -28,6 +30,16 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+  - uuid: WssXg5HuFxNNbue0uPRVF
+    name: Poudre de noisettes
+    originalQuantity: 0
+    originalUnit: gr.
+    normalizedQuantity: 0
+    normalizedUnit: gr.
+    comment: ''
+    allergens:
+      - Fruit à coque
+    type: sucres
 preparation: |-
   grret
 
@@ -40,7 +52,7 @@ preparation24h: ''
 permissionWrite:
   - 693200b700222efe46a2
 createdAt: '2025-12-29T12:50:47.565+00:00'
-updatedAt: '2025-12-29T16:17:55.517+00:00'
+updatedAt: '2025-12-29T18:04:07.471+00:00'
 createdBy: 693200b700222efe46a2
 ---
 

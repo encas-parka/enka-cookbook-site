@@ -1,6 +1,6 @@
 ---
 title: Another petit test
-date: '2025-12-29T12:58:19.409Z'
+date: '2025-12-29T13:02:01.635Z'
 draft: false
 typeR: entree
 categories: []
@@ -10,7 +10,7 @@ regime:
   - sans-lactose
 plate: 100
 quantite_desc: ''
-check: true
+check: false
 cuisson: false
 serveHot: true
 description: ''
@@ -27,7 +27,8 @@ ingredients:
     allergens: []
     type: epices
 preparation: |-
-  grret
+
+  **grret**
 
   - AHHH
   - BHHH
@@ -38,7 +39,7 @@ preparation24h: ''
 permissionWrite:
   - 693200b700222efe46a2
 createdAt: '2025-12-29T12:50:47.565+00:00'
-updatedAt: '2025-12-29T12:58:18.935+00:00'
+updatedAt: '2025-12-29T13:02:01.369+00:00'
 createdBy: 693200b700222efe46a2
 ---
 

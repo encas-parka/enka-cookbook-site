@@ -1,6 +1,6 @@
 ---
 title: Another petit test
-date: '2025-12-29T21:19:45.413Z'
+date: '2025-12-29T21:23:50.012Z'
 draft: true
 typeR: entree
 categories:
@@ -17,7 +17,8 @@ cuisson: false
 serveHot: true
 description: desc desc desc modifier
 region: null
-saison: []
+saison:
+  - hiver
 id: another-petit-test_mgyr4ezh-iif
 materiel: []
 ingredients:
@@ -50,18 +51,18 @@ ingredients:
     allergens: []
     type: sucres
 preparation: |-
-  grret
-
   - AHHH
   - BHHH
   - CHHHH
+
+  **ok ok**
 prepAlt: []
 astuces: []
 preparation24h: ''
 permissionWrite:
   - 693200b700222efe46a2
 createdAt: '2025-12-29T12:50:47.565+00:00'
-updatedAt: '2025-12-29T21:19:45.105+00:00'
+updatedAt: '2025-12-29T21:23:49.756+00:00'
 createdBy: 693200b700222efe46a2
 ---
 

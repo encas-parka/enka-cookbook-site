@@ -1,6 +1,6 @@
 ---
 title: Aooooooooo
-date: '2025-12-30T02:09:14.630Z'
+date: '2025-12-30T02:11:57.174Z'
 draft: true
 typeR: entree
 categories: []
@@ -12,7 +12,7 @@ quantite_desc: null
 check: false
 cuisson: true
 serveHot: true
-description: null
+description: mm
 region: null
 saison: []
 id: aooooooooo_nldcepf4qvee
@@ -35,7 +35,7 @@ preparation24h: null
 permissionWrite:
   - 68975cbc002469058f8b
 createdAt: '2025-12-30T02:09:14.341+00:00'
-updatedAt: '2025-12-30T02:09:14.341+00:00'
+updatedAt: '2025-12-30T02:11:56.941+00:00'
 createdBy: 68975cbc002469058f8b
 ---
 

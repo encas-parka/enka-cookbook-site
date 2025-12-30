@@ -1,6 +1,6 @@
 ---
 title: Bbbbb
-date: '2025-12-30T13:28:22.455Z'
+date: '2025-12-30T13:28:35.767Z'
 draft: true
 typeR: entree
 categories:
@@ -16,7 +16,8 @@ cuisson: false
 serveHot: true
 description: test refact
 region: null
-saison: []
+saison:
+  - hiver
 id: bbbbb_vfystaodnz1a
 materiel: []
 ingredients:
@@ -45,7 +46,7 @@ preparation24h: null
 permissionWrite:
   - 693200b700222efe46a2
 createdAt: '2025-12-30T13:27:12.618+00:00'
-updatedAt: '2025-12-30T13:28:20.161+00:00'
+updatedAt: '2025-12-30T13:28:35.556+00:00'
 createdBy: 693200b700222efe46a2
 ---
 

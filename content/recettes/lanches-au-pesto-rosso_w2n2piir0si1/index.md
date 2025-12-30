@@ -20,6 +20,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: h3c8al
     name: huile d'olive
     originalQuantity: 30
@@ -29,6 +31,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: hzwesd
     name: Lait de riz
     originalQuantity: 280
@@ -38,6 +42,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: 8nbcjp
     name: Fécule de maïs (Maïzena)
     originalQuantity: 80
@@ -47,6 +53,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: nxk1ar
     name: Farine de millet
     originalQuantity: 100
@@ -56,6 +64,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: oygozr
     name: Farine de riz
     originalQuantity: 300
@@ -65,6 +75,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: lz3awd
     name: Pesto Rosso végan
     originalQuantity: 400
@@ -74,6 +86,8 @@ ingredients:
     comment: ''
     allergens: []
     type: autres
+    pF: false
+    pS: false
   - uuid: 5le7rm
     name: Gomme de xanthane
     originalQuantity: 2
@@ -83,6 +97,8 @@ ingredients:
     comment: ''
     allergens: []
     type: autres
+    pF: false
+    pS: false
   - uuid: 9tn9mn
     name: Gomme de guar
     originalQuantity: 2
@@ -92,6 +108,8 @@ ingredients:
     comment: ''
     allergens: []
     type: autres
+    pF: false
+    pS: false
   - uuid: u9z2he
     name: Sucre en poudre
     originalQuantity: 60
@@ -101,6 +119,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
   - uuid: 2juq3x
     name: Sel
     originalQuantity: 2
@@ -110,6 +130,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
 preparation: |-
   Dans le bol du robot verser les farines, la fécule, les gommes.
 
@@ -129,8 +151,11 @@ preparation: |-
 
   Laisser pousser sur une plaque sulfurisée une seconde fois pendant 1 heure et mettre au four pour une 15/20 min  à 180 degrés. Vérifier la cuisson et laisser plus longtemps si nécessaire.
 preparation24h: Faire la pâte la veille et la première poussée dans la nuit au frigo.
-publishDate: 2024-05-23T22:54:00.000Z
+publishDate: '2024-05-23T22:54:00+00:00'
 serveHot: true
 uuid: w2n2piir0si1
-slug: lanches-au-pesto-rosso_w2n2piir0si1
+id: lanches-au-pesto-rosso_w2n2piir0si1
+createdAt: '2024-05-23T22:54:00+00:00'
+updatedAt: '2024-05-23T22:54:00+00:00'
+createdBy: Auré
 ---

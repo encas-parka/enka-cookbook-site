@@ -22,6 +22,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: yh2uod
     name: Orange
     originalQuantity: 13
@@ -31,6 +33,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: zf3zf8
     name: Oeuf
     originalQuantity: 39
@@ -41,6 +45,8 @@ ingredients:
     allergens:
       - Oeuf
     type: lof
+    pF: false
+    pS: false
   - uuid: h3c8al
     name: huile d'olive
     originalQuantity: 2.5
@@ -50,6 +56,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: n85gmi
     name: sucre de canne (blond)
     originalQuantity: 2.5
@@ -59,6 +67,8 @@ ingredients:
     comment: appareil
     allergens: []
     type: sucres
+    pF: false
+    pS: false
   - uuid: 5e0pcl
     name: Chapelure sans gluten
     originalQuantity: 300
@@ -68,6 +78,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
   - uuid: ikdk3g
     name: Eau de fleur d'oranger
     originalQuantity: 390
@@ -77,6 +89,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
   - uuid: n85gmi
     name: sucre de canne (blond)
     originalQuantity: 1
@@ -86,6 +100,8 @@ ingredients:
     comment: pour le sirop
     allergens: []
     type: sucres
+    pF: false
+    pS: false
   - uuid: rmgr7l
     name: Poudre d'amandes
     originalQuantity: 2.6
@@ -96,6 +112,8 @@ ingredients:
     allergens:
       - Fruit à coque
     type: sucres
+    pF: false
+    pS: false
   - uuid: psu3gg
     name: Chapelure
     originalQuantity: 650
@@ -106,6 +124,8 @@ ingredients:
     allergens:
       - Gluten
     type: autres
+    pF: false
+    pS: false
   - uuid: vgec6e
     name: Levure chimique
     originalQuantity: 13
@@ -116,6 +136,8 @@ ingredients:
     allergens:
       - Gluten
     type: lof
+    pF: false
+    pS: false
 preparation: |-
   Préchauffer le four à 180°
 
@@ -131,8 +153,11 @@ preparation: |-
   Attendre que les moelleux soient refroidis avant de portionner.
 
   **Version sans gluten** : remplacer la chapelure par le mix sans gluten
-publishDate: 2025-06-04T19:18:00.000Z
+publishDate: '2025-06-04T19:18:00+00:00'
 serveHot: false
 uuid: 5hcczovaonrt
-slug: moelleux-aux-agrumes_5hcczovaonrt
+id: moelleux-aux-agrumes_5hcczovaonrt
+createdAt: '2025-06-04T19:18:00+00:00'
+updatedAt: '2025-06-04T19:18:00+00:00'
+createdBy: frédo
 ---

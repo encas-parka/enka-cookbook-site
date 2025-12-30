@@ -27,6 +27,8 @@ ingredients:
       - Gluten
       - Soja
     type: epices
+    pF: false
+    pS: false
   - uuid: 1yqgar
     name: Shizo vert
     originalQuantity: 7
@@ -36,6 +38,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: true
+    pS: false
   - uuid: k2uthk
     name: Miso blanc
     originalQuantity: 2
@@ -45,6 +49,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: cd0g12
     name: Algue kombu séchée
     originalQuantity: 30
@@ -54,6 +60,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: hlihcc
     name: Champignon noir
     originalQuantity: 500
@@ -63,6 +71,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: 7sk3a5
     name: Aubergine
     originalQuantity: 18
@@ -72,6 +82,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: 7b8r4n
     name: Champignon shiitake séché
     originalQuantity: 500
@@ -81,6 +93,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: false
+    pS: false
   - uuid: ljzb7j
     name: Eau
     originalQuantity: 52
@@ -90,6 +104,8 @@ ingredients:
     comment: ''
     allergens: []
     type: autres
+    pF: false
+    pS: false
   - uuid: 3ahcls
     name: Tofu ferme
     originalQuantity: 4
@@ -99,6 +115,8 @@ ingredients:
     comment: ''
     allergens: []
     type: frais
+    pF: false
+    pS: false
 materiel:
   - Marmitte
   - Gastro 1/1 (Normaux)
@@ -124,8 +142,11 @@ preparation: |-
   Tremper une louche avec le miso dans la casserole et diluer la pâte. Ne surtout pas faire bouillir le miso, cela tuerait les bonnes bactéries et enlèverait les effets positifs.
 
   Au service poser une ou deux feuilles de shizo.
-publishDate: 2024-06-04T22:15:00.000Z
+publishDate: '2024-06-04T22:15:00+00:00'
 serveHot: true
 uuid: v0k2djqukga1
-slug: soupe-miso-aux-aubergi_v0k2djqukga1
+id: soupe-miso-aux-aubergi_v0k2djqukga1
+createdAt: '2024-06-04T22:15:00+00:00'
+updatedAt: '2024-06-04T22:15:00+00:00'
+createdBy: Auré
 ---

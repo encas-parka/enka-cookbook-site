@@ -21,6 +21,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: 77kyi3
     name: Cornichon
     originalQuantity: 1.5
@@ -30,6 +32,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: false
+    pS: false
   - uuid: u2m28w
     name: Ail
     originalQuantity: 2
@@ -39,6 +43,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: gpeob7
     name: Lait de soja
     originalQuantity: 1
@@ -49,6 +55,8 @@ ingredients:
     allergens:
       - Soja
     type: lof
+    pF: false
+    pS: false
   - uuid: atccqu
     name: Huile végétale
     originalQuantity: 1
@@ -58,6 +66,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: 1ej217
     name: huile de friture
     originalQuantity: 6
@@ -67,6 +77,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: o627mw
     name: Farine de pois chiche
     originalQuantity: 7.5
@@ -76,6 +88,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: ljzb7j
     name: Eau
     originalQuantity: 25
@@ -85,6 +99,8 @@ ingredients:
     comment: ''
     allergens: []
     type: autres
+    pF: false
+    pS: false
   - uuid: c88lz8
     name: Câpres
     originalQuantity: 800
@@ -94,6 +110,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: kt0wyw
     name: Estragon
     originalQuantity: 5
@@ -103,6 +121,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: hgfa4e
     name: Persil frais
     originalQuantity: 7
@@ -112,6 +132,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: true
+    pS: false
   - uuid: e4mjd1
     name: Jus de citron
     originalQuantity: 250
@@ -121,6 +143,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
   - uuid: 5c1b20
     name: Moutarde
     originalQuantity: 250
@@ -131,6 +155,8 @@ ingredients:
     allergens:
       - Moutarde
     type: epices
+    pF: false
+    pS: false
 preparation: |-
 
   1/ Préparation de panisse :
@@ -189,8 +215,11 @@ preparation: |-
 
 
   sel poivre
-publishDate: 2025-06-12T10:49:00.000Z
+publishDate: '2025-06-12T10:49:00+00:00'
 serveHot: true
 uuid: v6inzq555i7g
-slug: frites-de-panisse-sauc_v6inzq555i7g
+id: frites-de-panisse-sauc_v6inzq555i7g
+createdAt: '2025-06-12T10:49:00+00:00'
+updatedAt: '2025-06-12T10:49:00+00:00'
+createdBy: ''
 ---

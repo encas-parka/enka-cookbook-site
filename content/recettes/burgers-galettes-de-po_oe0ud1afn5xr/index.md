@@ -21,6 +21,8 @@ ingredients:
     comment: ''
     allergens: []
     type: autres
+    pF: false
+    pS: false
   - uuid: 1xyo35
     name: Pain Burger
     originalQuantity: 190
@@ -30,6 +32,8 @@ ingredients:
     comment: ''
     allergens: []
     type: autres
+    pF: false
+    pS: false
   - uuid: 0zasob
     name: Pain Burger Végan
     originalQuantity: 30
@@ -39,6 +43,8 @@ ingredients:
     comment: ''
     allergens: []
     type: autres
+    pF: false
+    pS: false
   - uuid: 18dy4e
     name: Pomme de terre
     originalQuantity: 50
@@ -48,6 +54,8 @@ ingredients:
     comment: Frites
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: ihweq6
     name: Salade Iceberg
     originalQuantity: 20
@@ -57,6 +65,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: ibtbnq
     name: Tomate
     originalQuantity: 45
@@ -66,6 +76,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: u2m28w
     name: Ail
     originalQuantity: 5
@@ -75,6 +87,8 @@ ingredients:
     comment: Sauce Végane
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: u2m28w
     name: Ail
     originalQuantity: 2
@@ -84,6 +98,8 @@ ingredients:
     comment: Sauce Végé
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: u2m28w
     name: Ail
     originalQuantity: 6
@@ -93,6 +109,8 @@ ingredients:
     comment: Galettes crique
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: rtavky
     name: Oignon
     originalQuantity: 5
@@ -102,6 +120,8 @@ ingredients:
     comment: Galettes crique
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: 18dy4e
     name: Pomme de terre
     originalQuantity: 35
@@ -111,6 +131,8 @@ ingredients:
     comment: Galettes crique
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: 1ej217
     name: huile de friture
     originalQuantity: 20
@@ -120,6 +142,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: zf3zf8
     name: Oeuf
     originalQuantity: 30
@@ -130,6 +154,8 @@ ingredients:
     allergens:
       - Oeuf
     type: lof
+    pF: false
+    pS: false
   - uuid: hgfa4e
     name: Persil frais
     originalQuantity: 1
@@ -139,6 +165,8 @@ ingredients:
     comment: Sauce Végane
     allergens: []
     type: epices
+    pF: true
+    pS: false
   - uuid: hgfa4e
     name: Persil frais
     originalQuantity: 7
@@ -148,6 +176,8 @@ ingredients:
     comment: Sauce Végé
     allergens: []
     type: epices
+    pF: true
+    pS: false
   - uuid: hgfa4e
     name: Persil frais
     originalQuantity: 10
@@ -157,6 +187,8 @@ ingredients:
     comment: Galettes crique
     allergens: []
     type: epices
+    pF: true
+    pS: false
   - uuid: qiji6w
     name: Yaourt Végétal
     originalQuantity: 1.2
@@ -166,6 +198,8 @@ ingredients:
     comment: Sauce Végane
     allergens: []
     type: frais
+    pF: true
+    pS: false
   - uuid: b2dxf8
     name: Fromage blanc
     originalQuantity: 8
@@ -176,6 +210,8 @@ ingredients:
     allergens:
       - Produit laitier
     type: frais
+    pF: true
+    pS: false
 preparation: |-
   Crique
 
@@ -184,8 +220,11 @@ preparation: |-
   Garniture
 
   Frites
-publishDate: 2025-06-19T11:10:00.000Z
+publishDate: '2025-06-19T11:10:00+00:00'
 serveHot: true
 uuid: oe0ud1afn5xr
-slug: burgers-galettes-de-po_oe0ud1afn5xr
+id: burgers-galettes-de-po_oe0ud1afn5xr
+createdAt: '2025-06-19T11:10:00+00:00'
+updatedAt: '2025-06-19T11:10:00+00:00'
+createdBy: Lucien
 ---

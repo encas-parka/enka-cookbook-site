@@ -24,6 +24,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: 0d1fzw
     name: Gingembre
     originalQuantity: 150
@@ -33,6 +35,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: u2m28w
     name: Ail
     originalQuantity: 20
@@ -42,6 +46,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: he3u48
     name: Cumin moulu
     originalQuantity: 5
@@ -51,6 +57,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: 2juq3x
     name: Sel
     originalQuantity: 50
@@ -60,6 +68,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: dr1bbg
     name: Piment vert
     originalQuantity: 3
@@ -69,6 +79,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: 7qo3ht
     name: Vinaigre de cidre
     originalQuantity: 50
@@ -79,6 +91,8 @@ ingredients:
     allergens:
       - Alcool
     type: epices
+    pF: false
+    pS: false
   - uuid: 2j9y2v
     name: Menthe
     originalQuantity: 5
@@ -88,6 +102,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: true
+    pS: false
   - uuid: fetrpe
     name: Coriandre fraîche
     originalQuantity: 10
@@ -97,6 +113,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: true
+    pS: false
   - uuid: mmvfvp
     name: purée de noix de cajou
     originalQuantity: 600
@@ -106,6 +124,8 @@ ingredients:
     comment: ''
     allergens: []
     type: autres
+    pF: false
+    pS: false
   - uuid: ljzb7j
     name: Eau
     originalQuantity: 1.2
@@ -115,15 +135,20 @@ ingredients:
     comment: ''
     allergens: []
     type: autres
+    pF: false
+    pS: false
 preparation: mixer finement le tout!!! et c'est tout!!!
 astuces:
   - astuce: ajouter l'eau au fur et à mesure
-publishDate: 2025-06-02T15:52:00.000Z
+publishDate: '2025-06-02T15:52:00+00:00'
 checkAlwaysOk: false
 regime:
   - vegan
   - sans-gluten
 serveHot: false
 uuid: 6vcsz1j2vzjr
-slug: chutney-menthe-coriand_6vcsz1j2vzjr
+id: chutney-menthe-coriand_6vcsz1j2vzjr
+createdAt: '2025-06-02T15:52:00+00:00'
+updatedAt: '2025-06-02T15:52:00+00:00'
+createdBy: Auré
 ---

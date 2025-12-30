@@ -22,6 +22,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: 5cg0yu
     name: Citron jaune
     originalQuantity: 4
@@ -31,6 +33,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: l3fs10
     name: Poireau
     originalQuantity: 52
@@ -40,6 +44,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: h3c8al
     name: huile d'olive
     originalQuantity: 750
@@ -49,6 +55,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: a16yd7
     name: Thym
     originalQuantity: 5
@@ -58,6 +66,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: 5c1b20
     name: Moutarde
     originalQuantity: 200
@@ -68,6 +78,8 @@ ingredients:
     allergens:
       - Moutarde
     type: epices
+    pF: false
+    pS: false
   - uuid: zkmmgt
     name: 'Sirop d''érable '
     originalQuantity: 150
@@ -77,6 +89,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
 preparation: |-
   Couper une fois dans la longueur les poireaux. Oter le cul et garder le vert.
 
@@ -87,8 +101,11 @@ preparation: |-
   Faire la vinaigrette.
 
   Les poireaux peuvent être servis tièdes ou froids.
-publishDate: 2025-01-05T20:40:00.000Z
+publishDate: '2025-01-05T20:40:00+00:00'
 serveHot: false
 uuid: hz79xqftpre2
-slug: poireaux-vinaigrette-c_hz79xqftpre2
+id: poireaux-vinaigrette-c_hz79xqftpre2
+createdAt: '2025-01-05T20:40:00+00:00'
+updatedAt: '2025-01-05T20:40:00+00:00'
+createdBy: Auré
 ---

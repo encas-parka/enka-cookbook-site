@@ -22,6 +22,8 @@ ingredients:
     allergens:
       - Sésame
     type: sec
+    pF: false
+    pS: false
   - uuid: ''
     name: ''
     originalQuantity: 250
@@ -31,6 +33,8 @@ ingredients:
     comment: ''
     allergens: []
     type: ''
+    pF: false
+    pS: false
   - uuid: ovewgk
     name: Flocons d'avoine
     originalQuantity: 1
@@ -41,6 +45,8 @@ ingredients:
     allergens:
       - Gluten
     type: sec
+    pF: false
+    pS: false
   - uuid: a16yd7
     name: Thym
     originalQuantity: 15
@@ -50,6 +56,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: bidsmu
     name: Paprika
     originalQuantity: 15
@@ -59,6 +67,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: mck2wl
     name: Concentré de tomate
     originalQuantity: 100
@@ -68,6 +78,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: z8jaad
     name: Miso d'orge
     originalQuantity: 100
@@ -78,6 +90,8 @@ ingredients:
     allergens:
       - Gluten
     type: epices
+    pF: false
+    pS: false
   - uuid: h3c8al
     name: huile d'olive
     originalQuantity: 180
@@ -87,6 +101,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: 7cflkx
     name: Sirop d'agave
     originalQuantity: 180
@@ -96,6 +112,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
 preparation: |-
   .....Mélanger les flocons d'avoine, les graines dans un saladier.
 
@@ -104,8 +122,11 @@ preparation: |-
   Étaler sur une plaque de cuisson recouverte de papier sulfurisé, en formant une couche de 2 mm d'épaisseur. Cuire au four à 180 °C pendant 15 minutes en surveillant attentivement la cuisson du granola pour éviter qu'il ne brûle. Remuer délicatement après 10 minutes de cuisson.
 
   Laisser refroidir et conserver dans un bocal. Parsemer sur des soupes, des salades, des bols de légumes, etc.
-publishDate: 2025-05-30T15:55:00.000Z
+publishDate: '2025-05-30T15:55:00+00:00'
 serveHot: false
 uuid: rxy4n63s6y4d
-slug: granola-sale-pour-soup_rxy4n63s6y4d
+id: granola-sale-pour-soup_rxy4n63s6y4d
+createdAt: '2025-05-30T15:55:00+00:00'
+updatedAt: '2025-05-30T15:55:00+00:00'
+createdBy: Auré
 ---

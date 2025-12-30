@@ -1,6 +1,6 @@
 
 {
-  "slug": "salade-fenouil-carotte_de5ciujr5g3p",
+  "id": "salade-fenouil-carotte_de5ciujr5g3p",
   "title": "Salade Fenouil-Carottes-Oranges",
   "draft": false,
   "typeR": "entree",
@@ -16,11 +16,14 @@
   "quantite_desc": null,
   "check": false,
   "materiel": null,
-  "ingredients": [{"allergens":[],"comment":"","name":"Carotte","normalizedQuantity":7000,"normalizedUnit":"gr.","originalQuantity":7,"originalUnit":"kg","type":"legumes","uuid":"eouu0v"},{"allergens":[],"comment":"","name":"Orange","normalizedQuantity":600,"normalizedUnit":"gr.","originalQuantity":3,"originalUnit":"unité","type":"legumes","uuid":"yh2uod"},{"allergens":[],"comment":"","name":"Fenouil","normalizedQuantity":4500,"normalizedUnit":"gr.","originalQuantity":4.5,"originalUnit":"kg","type":"legumes","uuid":"mhsals"},{"allergens":[],"comment":"","name":"huile d'olive","normalizedQuantity":76500,"normalizedUnit":"ml","originalQuantity":76.5,"originalUnit":"l.","type":"lof","uuid":"h3c8al"},{"allergens":[],"comment":"","name":"Jus d'orange","normalizedQuantity":32000,"normalizedUnit":"ml","originalQuantity":32,"originalUnit":"l.","type":"sucres","uuid":"gzi2ry"}],
+  "ingredients": [{"allergens":[],"comment":"","name":"Carotte","normalizedQuantity":7000,"normalizedUnit":"gr.","originalQuantity":7,"originalUnit":"kg","pF":true,"pS":false,"type":"legumes","uuid":"eouu0v"},{"allergens":[],"comment":"","name":"Orange","normalizedQuantity":600,"normalizedUnit":"gr.","originalQuantity":3,"originalUnit":"unité","pF":true,"pS":false,"type":"legumes","uuid":"yh2uod"},{"allergens":[],"comment":"","name":"Fenouil","normalizedQuantity":4500,"normalizedUnit":"gr.","originalQuantity":4.5,"originalUnit":"kg","pF":true,"pS":false,"type":"legumes","uuid":"mhsals"},{"allergens":[],"comment":"","name":"huile d'olive","normalizedQuantity":76500,"normalizedUnit":"ml","originalQuantity":76.5,"originalUnit":"l.","pF":false,"pS":false,"type":"lof","uuid":"h3c8al"},{"allergens":[],"comment":"","name":"Jus d'orange","normalizedQuantity":32000,"normalizedUnit":"ml","originalQuantity":32,"originalUnit":"l.","pF":false,"pS":false,"type":"sucres","uuid":"gzi2ry"}],
   "preparation": "Couper en finesse les fenouils.\n\nRaper gros les carottes.\n\nMettre le zeste des 3 oranges et éventuellement les sarments si y a la motive.\n\nAjouter l'huile et le jus d'orange, assaisonner avec sel et poivre à convenance .",
   "preparation24h": null,
   "astuces": null,
   "prepAlt": null,
   "permissionWrite": [],
-  "publishedAt": "2025-01-01T00:00:00Z"
+  "publishedAt": "2025-01-01T00:00:00Z",
+  "createdAt": "2024-03-26T18:34:06.792000+00:00",
+  "updatedAt": "2024-03-26T18:34:06.792000+00:00",
+  "createdBy": "mag"
 }

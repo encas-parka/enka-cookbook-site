@@ -21,6 +21,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: 163u4z
     name: Olives Vertes Dénoyautées
     originalQuantity: 4
@@ -30,6 +32,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: false
+    pS: false
   - uuid: 7dlfuw
     name: Purée d'amande
     originalQuantity: 300
@@ -39,6 +43,8 @@ ingredients:
     comment: ''
     allergens: []
     type: autres
+    pF: false
+    pS: false
   - uuid: c88lz8
     name: Câpres
     originalQuantity: 200
@@ -48,6 +54,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: h3c8al
     name: huile d'olive
     originalQuantity: 1.2
@@ -57,9 +65,14 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
 preparation: tout mixer sauf l'ail qui est pressée...et voilà!
-publishDate: 2025-06-15T19:47:00.000Z
+publishDate: '2025-06-15T19:47:00+00:00'
 serveHot: false
 uuid: p4gu4ctqvexm
-slug: tapenade-del-mar_p4gu4ctqvexm
+id: tapenade-del-mar_p4gu4ctqvexm
+createdAt: '2025-06-15T19:47:00+00:00'
+updatedAt: '2025-06-15T19:47:00+00:00'
+createdBy: ''
 ---

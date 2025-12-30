@@ -27,6 +27,8 @@ ingredients:
     allergens:
       - Soja
     type: autres
+    pF: false
+    pS: false
   - uuid: yat3fu
     name: Coriandre
     originalQuantity: 10
@@ -36,6 +38,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: 0d1fzw
     name: Gingembre
     originalQuantity: 650
@@ -45,6 +49,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: u2m28w
     name: Ail
     originalQuantity: 5
@@ -54,6 +60,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: 89945bda5f0b
     name: Véganaise
     originalQuantity: 3
@@ -63,6 +71,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: k2uthk
     name: Miso blanc
     originalQuantity: 850
@@ -72,6 +82,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: l5p1a5
     name: Concombre
     originalQuantity: 20
@@ -81,6 +93,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: jjrwlj
     name: Sauce soja
     originalQuantity: 3.5
@@ -91,6 +105,8 @@ ingredients:
     allergens:
       - Soja
     type: epices
+    pF: false
+    pS: false
   - uuid: nl2s2n
     name: Chou rouge
     originalQuantity: 3.5
@@ -100,6 +116,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: eouu0v
     name: Carotte
     originalQuantity: 5
@@ -109,6 +127,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: e7953e50480d
     name: Pain baguette
     originalQuantity: 50
@@ -118,6 +138,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sec
+    pF: false
+    pS: false
 materiel: []
 preparation: |-
   - Réhydrater les protéines de soja dans du bouillon de légumes
@@ -130,8 +152,11 @@ preparation: |-
 preparation24h: ''
 astuces: []
 prepAlt: []
-publishDate: 2025-10-16T16:18:00.000Z
+publishDate: '2025-10-16T16:18:00+00:00'
 serveHot: true
 uuid: go4i0y6buluy
-slug: bahn-mi-a-la-proteine-_go4i0y6buluy
+id: bahn-mi-a-la-proteine-_go4i0y6buluy
+createdAt: '2025-10-16T16:18:00+00:00'
+updatedAt: '2025-10-16T16:18:00+00:00'
+createdBy: Alio
 ---

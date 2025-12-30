@@ -21,6 +21,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: pvia1r
     name: Gruyère
     originalQuantity: 1.92
@@ -31,6 +33,8 @@ ingredients:
     allergens:
       - Produit laitier
     type: frais
+    pF: true
+    pS: false
   - uuid: pr1fiu
     name: Parmesan
     originalQuantity: 1.92
@@ -41,6 +45,8 @@ ingredients:
     allergens:
       - Produit laitier
     type: frais
+    pF: true
+    pS: false
   - uuid: c70jxb
     name: huile de tournesol
     originalQuantity: 720
@@ -50,6 +56,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: zf3zf8
     name: Oeuf
     originalQuantity: 39
@@ -60,6 +68,8 @@ ingredients:
     allergens:
       - Oeuf
     type: lof
+    pF: false
+    pS: false
   - uuid: x286pc
     name: Lait demi-écrémé
     originalQuantity: 1.92
@@ -70,6 +80,8 @@ ingredients:
     allergens:
       - Produit laitier
     type: lof
+    pF: false
+    pS: false
   - uuid: v212im
     name: Farine de tapioca
     originalQuantity: 4.8
@@ -79,6 +91,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
 preparation: |-
   * Raper puis hacher au couteau les fromages.
   * Faire chauffer dans une casserole le lait et l'huile jusqu'à ébulltion. Pendant ce temps verser la farine de manioc et le sel dans un saladier et bien mélanger. Verser dessus le mélange liquide très chaud puis mélanger vigoureusement.
@@ -89,12 +103,15 @@ preparation: |-
   **Obligatoirement au dernier moment :**
 
   Préchauffer le four à 180°C. Disposer sur une plaque recouverte de papier sulfurisé des boulettes de la taille d'une noix. On peut si on le souhaite laisser les boulettes formées une nuit au réfrigérateur. Enfourner 15 à 20 minutes. Se mange chaud.
-publishDate: 2024-05-23T13:58:00.000Z
+publishDate: '2024-05-23T13:58:00+00:00'
 checkAlwaysOk: false
 regime:
   - vegetarien
   - sans-gluten
 serveHot: true
 uuid: yeri55g540co
-slug: pao-de-qeijo_yeri55g540co
+id: pao-de-qeijo_yeri55g540co
+createdAt: '2024-05-23T13:58:00+00:00'
+updatedAt: '2024-05-23T13:58:00+00:00'
+createdBy: Adèle
 ---

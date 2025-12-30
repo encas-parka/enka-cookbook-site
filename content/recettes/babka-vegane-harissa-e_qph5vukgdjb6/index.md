@@ -21,6 +21,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: 4n95t5
     name: Harissa
     originalQuantity: 1
@@ -30,6 +32,8 @@ ingredients:
     comment: garniture. Si elle est trop forte, en mettre beaucoup moins et rallonger avec du concentré de tomate.
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: 7qqcwc
     name: Levure fraîche de boulanger
     originalQuantity: 300
@@ -39,6 +43,8 @@ ingredients:
     comment: ''
     allergens: []
     type: frais
+    pF: true
+    pS: false
   - uuid: atccqu
     name: Huile végétale
     originalQuantity: 2
@@ -48,6 +54,8 @@ ingredients:
     comment: garniture
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: atccqu
     name: Huile végétale
     originalQuantity: 1
@@ -57,6 +65,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: 2av6w8
     name: Farine de blé
     originalQuantity: 5.8
@@ -67,6 +77,8 @@ ingredients:
     allergens:
       - Gluten
     type: lof
+    pF: false
+    pS: false
   - uuid: gpeob7
     name: Lait de soja
     originalQuantity: 4
@@ -77,6 +89,8 @@ ingredients:
     allergens:
       - Soja
     type: lof
+    pF: false
+    pS: false
   - uuid: q7adw3
     name: Pistache émmondée
     originalQuantity: 1
@@ -86,6 +100,8 @@ ingredients:
     comment: garniture
     allergens: []
     type: sec
+    pF: false
+    pS: false
   - uuid: u9z2he
     name: Sucre en poudre
     originalQuantity: 800
@@ -95,6 +111,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
 preparation: |-
   Faire chauffer le lait jusqu’à ce qu’il soit tiède (si celui-ci est trop chaud, il tuera la levure donc il est important qu’il soit juste légèrement tiède) et y délayer la levure, laisser ensuite reposer 10/15 mn.
 
@@ -126,11 +144,14 @@ preparation: |-
 
   A la fin de la cuisson, les brioches doivent être bien dorées.
 preparation24h: Faire la pâte la veille.
-publishDate: 2024-06-14T23:13:00.000Z
+publishDate: '2024-06-14T23:13:00+00:00'
 checkAlwaysOk: true
 regime:
   - vegan
 serveHot: false
 uuid: qph5vukgdjb6
-slug: babka-vegane-harissa-e_qph5vukgdjb6
+id: babka-vegane-harissa-e_qph5vukgdjb6
+createdAt: '2024-06-14T23:13:00+00:00'
+updatedAt: '2024-06-14T23:13:00+00:00'
+createdBy: Auré
 ---

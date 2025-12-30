@@ -26,6 +26,8 @@ ingredients:
     allergens:
       - Gluten
     type: sec
+    pF: false
+    pS: false
   - uuid: 2juq3x
     name: Sel
     originalQuantity: 1
@@ -35,6 +37,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: 2av6w8
     name: Farine de blé
     originalQuantity: 40
@@ -45,6 +49,8 @@ ingredients:
     allergens:
       - Gluten
     type: lof
+    pF: false
+    pS: false
   - uuid: 6bm4lq
     name: huile de coco
     originalQuantity: 90
@@ -54,6 +60,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: cr4kiz
     name: Chocolat noir
     originalQuantity: 100
@@ -63,6 +71,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
   - uuid: r6792n
     name: Cacao
     originalQuantity: 1
@@ -72,6 +82,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
   - uuid: u9z2he
     name: Sucre en poudre
     originalQuantity: 170
@@ -81,6 +93,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
   - uuid: ljzb7j
     name: Eau
     originalQuantity: 100
@@ -90,6 +104,8 @@ ingredients:
     comment: ''
     allergens: []
     type: autres
+    pF: false
+    pS: false
   - uuid: u33083
     name: Tahin
     originalQuantity: 50
@@ -100,6 +116,8 @@ ingredients:
     allergens:
       - Sésame
     type: autres
+    pF: false
+    pS: false
   - uuid: 9yf54l
     name: Raisin sec
     originalQuantity: 50
@@ -109,6 +127,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: false
+    pS: false
 materiel:
   - Four
   - Gastro 1/1 (Fins)
@@ -124,8 +144,11 @@ preparation: |-
   7. Quand ça sera froid et durci, tu pourras facilement démouler grâce  aux pans de papier cuisson et découper en barres ou carrés (à l’aide d’un bon couteau si c'est bien cuit). Conserve dans un récipient hermétique.
 prepAlt:
   - recetteAlt: barres-cereales-gourmandes-flocons-davoine-chocolat-raisin-sec-sans-gluten_q1eozsxah1hwo7bnjp-huaaue2nr6dkbh2-t
-publishDate: 2025-07-24T16:34:00.000Z
+publishDate: '2025-07-24T16:34:00+00:00'
 serveHot: false
 uuid: b0vlij9ci4y8
-slug: barres-cereales-gourma_b0vlij9ci4y8
+id: barres-cereales-gourma_b0vlij9ci4y8
+createdAt: '2025-07-24T16:34:00+00:00'
+updatedAt: '2025-07-24T16:34:00+00:00'
+createdBy: ''
 ---

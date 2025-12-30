@@ -15,6 +15,8 @@ ingredients:
     comment: ''
     allergens: []
     type: autres
+    pF: false
+    pS: false
   - uuid: 2juq3x
     name: Sel
     originalQuantity: 1
@@ -24,6 +26,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: 6z655r
     name: Romarin
     originalQuantity: 1
@@ -33,6 +37,8 @@ ingredients:
     comment: (branche)
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: h3c8al
     name: huile d'olive
     originalQuantity: 90
@@ -42,6 +48,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: 8nbcjp
     name: Fécule de maïs (Maïzena)
     originalQuantity: 30
@@ -51,6 +59,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: 1nb85u
     name: Farine de riz blanche
     originalQuantity: 120
@@ -60,6 +70,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: 1e3zhq
     name: Chocolat noir patissier 70p100
     originalQuantity: 50
@@ -69,6 +81,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
   - uuid: l5w2jl
     name: Muscovado (sucre de canne complet)
     originalQuantity: 70
@@ -78,6 +92,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
   - uuid: rmgr7l
     name: Poudre d'amandes
     originalQuantity: 100
@@ -88,6 +104,8 @@ ingredients:
     allergens:
       - Fruit à coque
     type: sucres
+    pF: false
+    pS: false
 materiel:
   - Four
 plate: 10
@@ -101,7 +119,7 @@ preparation: |-
   * Enfourner environ 25minutes à 170°.
   * Si le biscuit colore trop, baisser légèrement la température, le biscuit doit être presque blanc.
   * Sortir du four et découper un fois presque refroidi.
-publishDate: 2024-06-18T12:29:00.000Z
+publishDate: '2024-06-18T12:29:00+00:00'
 regime:
   - vegetarien
   - sans-gluten
@@ -111,5 +129,8 @@ title: Shortbread huile d'olive, romarin et chocolat sans gluten
 typeR: dessert
 serveHot: false
 uuid: zhezz0eqtnme
-slug: shortbread-huile-doliv_zhezz0eqtnme
+id: shortbread-huile-doliv_zhezz0eqtnme
+createdAt: '2024-06-18T12:29:00+00:00'
+updatedAt: '2024-06-18T12:29:00+00:00'
+createdBy: ''
 ---

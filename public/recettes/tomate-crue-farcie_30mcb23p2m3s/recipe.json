@@ -1,6 +1,6 @@
 
 {
-  "slug": "tomate-crue-farcie_30mcb23p2m3s",
+  "id": "tomate-crue-farcie_30mcb23p2m3s",
   "title": "Tomate Crue Farcie",
   "draft": false,
   "typeR": "entree",
@@ -16,11 +16,14 @@
   "quantite_desc": null,
   "check": true,
   "materiel": null,
-  "ingredients": [{"allergens":[],"comment":"","name":"Tomate","normalizedQuantity":15000,"normalizedUnit":"gr.","originalQuantity":125,"originalUnit":"unité","type":"legumes","uuid":"ibtbnq"},{"allergens":[],"comment":"","name":"Oignon rouge","normalizedQuantity":3000,"normalizedUnit":"gr.","originalQuantity":3,"originalUnit":"kg","type":"legumes","uuid":"doxujz"},{"allergens":[],"comment":"","name":"Cornichon","normalizedQuantity":2000,"normalizedUnit":"gr.","originalQuantity":2,"originalUnit":"kg","type":"legumes","uuid":"77kyi3"},{"allergens":[],"comment":"","name":"Mâche (salade)","normalizedQuantity":1000,"normalizedUnit":"gr.","originalQuantity":1,"originalUnit":"kg","type":"legumes","uuid":"8og464"},{"allergens":[],"comment":"réhydratées","name":"Cranberries","normalizedQuantity":2000,"normalizedUnit":"gr.","originalQuantity":2,"originalUnit":"kg","type":"legumes","uuid":"tlytgh"},{"allergens":["Produit laitier"],"comment":"","name":"Ricotta","normalizedQuantity":2000,"normalizedUnit":"gr.","originalQuantity":2,"originalUnit":"kg","type":"frais","uuid":"q6t705"},{"allergens":[],"comment":"","name":"Sel","normalizedQuantity":250,"normalizedUnit":"gr.","originalQuantity":250,"originalUnit":"gr.","type":"epices","uuid":"2juq3x"},{"allergens":[],"comment":"","name":"Poivre noir moulu","normalizedQuantity":125,"normalizedUnit":"gr.","originalQuantity":125,"originalUnit":"gr.","type":"epices","uuid":"rgt7s4"}],
+  "ingredients": [{"allergens":[],"comment":"","name":"Tomate","normalizedQuantity":15000,"normalizedUnit":"gr.","originalQuantity":125,"originalUnit":"unité","pF":true,"pS":false,"type":"legumes","uuid":"ibtbnq"},{"allergens":[],"comment":"","name":"Oignon rouge","normalizedQuantity":3000,"normalizedUnit":"gr.","originalQuantity":3,"originalUnit":"kg","pF":true,"pS":false,"type":"legumes","uuid":"doxujz"},{"allergens":[],"comment":"","name":"Cornichon","normalizedQuantity":2000,"normalizedUnit":"gr.","originalQuantity":2,"originalUnit":"kg","pF":false,"pS":false,"type":"legumes","uuid":"77kyi3"},{"allergens":[],"comment":"","name":"Mâche (salade)","normalizedQuantity":1000,"normalizedUnit":"gr.","originalQuantity":1,"originalUnit":"kg","pF":true,"pS":false,"type":"legumes","uuid":"8og464"},{"allergens":[],"comment":"réhydratées","name":"Cranberries","normalizedQuantity":2000,"normalizedUnit":"gr.","originalQuantity":2,"originalUnit":"kg","pF":false,"pS":false,"type":"legumes","uuid":"tlytgh"},{"allergens":["Produit laitier"],"comment":"","name":"Ricotta","normalizedQuantity":2000,"normalizedUnit":"gr.","originalQuantity":2,"originalUnit":"kg","pF":true,"pS":false,"type":"frais","uuid":"q6t705"},{"allergens":[],"comment":"","name":"Sel","normalizedQuantity":250,"normalizedUnit":"gr.","originalQuantity":250,"originalUnit":"gr.","pF":false,"pS":false,"type":"epices","uuid":"2juq3x"},{"allergens":[],"comment":"","name":"Poivre noir moulu","normalizedQuantity":125,"normalizedUnit":"gr.","originalQuantity":125,"originalUnit":"gr.","pF":false,"pS":false,"type":"epices","uuid":"rgt7s4"}],
   "preparation": "* Couper en deux les tomates par la largeur. Évider et garder l'intérieur.\n* Couper menu menu l'intérieur des tomates, les oignons, les cornichons, les cranberrys et ajouter la mâche.\n* Réserver 800g de cette farce pour les tomates véganes. Pour 16 personnes.\n* Dans la garniture principale verser la ricotta et assaisonner de sel et poivre.\n* Assaisonner également la version végane avec aussi huile, vinaigre...\n* Garnir chaque tomate et réserver au frais.",
   "preparation24h": "Faire tremper les cranberrys à l'avance afin qu'elles ramollissent bien bien bien",
   "astuces": null,
   "prepAlt": null,
   "permissionWrite": [],
-  "publishedAt": "2025-01-01T00:00:00Z"
+  "publishedAt": "2025-01-01T00:00:00Z",
+  "createdAt": "2024-05-18T18:46:00+00:00",
+  "updatedAt": "2024-05-18T18:46:00+00:00",
+  "createdBy": ""
 }

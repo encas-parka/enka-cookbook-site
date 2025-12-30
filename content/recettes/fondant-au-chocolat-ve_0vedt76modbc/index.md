@@ -21,6 +21,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
   - uuid: 1e3zhq
     name: Chocolat noir patissier 70p100
     originalQuantity: 4
@@ -30,6 +32,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
   - uuid: hlbwfd
     name: Yaourt de soja
     originalQuantity: 1.8
@@ -40,6 +44,8 @@ ingredients:
     allergens:
       - Soja
     type: frais
+    pF: true
+    pS: false
   - uuid: chfwwq
     name: Crème soja
     originalQuantity: 2
@@ -50,6 +56,8 @@ ingredients:
     allergens:
       - Soja
     type: lof
+    pF: false
+    pS: false
   - uuid: iwdje3
     name: Haricots rouges cuits
     originalQuantity: 2.25
@@ -59,6 +67,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sec
+    pF: false
+    pS: false
 preparation: |-
   séparer le chocolat en deux, faire fondre une partie que l'on mélange ensuite avec la crème, c'est une ganache
 
@@ -69,8 +79,11 @@ preparation: |-
   attendre que ça refroidisse pour démouler ( ou pas ) pour recouvrir de ganache
 astuces:
   - astuce: faire le matin pour le soir ou le soir pour le lendemain matin
-publishDate: 2025-06-17T09:14:00.000Z
+publishDate: '2025-06-17T09:14:00+00:00'
 serveHot: false
 uuid: 0vedt76modbc
-slug: fondant-au-chocolat-ve_0vedt76modbc
+id: fondant-au-chocolat-ve_0vedt76modbc
+createdAt: '2025-06-17T09:14:00+00:00'
+updatedAt: '2025-06-17T09:14:00+00:00'
+createdBy: ''
 ---

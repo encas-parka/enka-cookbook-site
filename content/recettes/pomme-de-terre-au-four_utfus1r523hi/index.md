@@ -21,6 +21,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: u2m28w
     name: Ail
     originalQuantity: 5
@@ -30,6 +32,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: xqb8f5
     name: Tofu soyeux
     originalQuantity: 1
@@ -39,6 +43,8 @@ ingredients:
     comment: c'est pour l'option Vegan (la quantité est a déterminer en fonction du nombre)
     allergens: []
     type: frais
+    pF: true
+    pS: false
   - uuid: b2dxf8
     name: Fromage blanc
     originalQuantity: 15
@@ -49,6 +55,8 @@ ingredients:
     allergens:
       - Produit laitier
     type: frais
+    pF: true
+    pS: false
   - uuid: ique18
     name: Paprika fumé
     originalQuantity: 200
@@ -58,6 +66,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: a16yd7
     name: Thym
     originalQuantity: 200
@@ -67,6 +77,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: j84olg
     name: Feuille de laurier
     originalQuantity: 20
@@ -76,6 +88,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: 6z655r
     name: Romarin
     originalQuantity: 10
@@ -85,6 +99,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: fkftyb
     name: Origan
     originalQuantity: 200
@@ -94,6 +110,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: 22uzom
     name: Sariette
     originalQuantity: 200
@@ -103,6 +121,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: hgfa4e
     name: Persil frais
     originalQuantity: 10
@@ -112,6 +132,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: true
+    pS: false
   - uuid: mt22ff
     name: Ciboulette
     originalQuantity: 10
@@ -121,6 +143,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: true
+    pS: false
   - uuid: h3c8al
     name: huile d'olive
     originalQuantity: 1
@@ -130,6 +154,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: lny16c
     name: sucre blanc
     originalQuantity: 0.1
@@ -139,6 +165,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
 preparation: |-
   Plucher les pommes de terre et les couper en 4 dans le sens de la longueur.
 
@@ -154,12 +182,15 @@ preparation: |-
 
   Ajouter le sucre et rectifier l'assaisonnement sel/poivre
 prepAlt: []
-publishDate: 2025-06-04T18:15:00.000Z
+publishDate: '2025-06-04T18:15:00+00:00'
 checkfor: ''
 checkAlwaysOk: false
 regime:
   - sans-gluten
 serveHot: true
 uuid: utfus1r523hi
-slug: pomme-de-terre-au-four_utfus1r523hi
+id: pomme-de-terre-au-four_utfus1r523hi
+createdAt: '2025-06-04T18:15:00+00:00'
+updatedAt: '2025-06-04T18:15:00+00:00'
+createdBy: frédo
 ---

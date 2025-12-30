@@ -23,6 +23,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: rtavky
     name: Oignon
     originalQuantity: 25
@@ -32,6 +34,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: pvia1r
     name: Gruyère
     originalQuantity: 700
@@ -42,6 +46,8 @@ ingredients:
     allergens:
       - Produit laitier
     type: frais
+    pF: true
+    pS: false
   - uuid: dar9kl
     name: Beaufort
     originalQuantity: 700
@@ -52,6 +58,8 @@ ingredients:
     allergens:
       - Produit laitier
     type: frais
+    pF: true
+    pS: false
   - uuid: da93ql
     name: Comté
     originalQuantity: 700
@@ -62,6 +70,8 @@ ingredients:
     allergens:
       - Produit laitier
     type: frais
+    pF: true
+    pS: false
   - uuid: kmq1zb
     name: Beurre doux
     originalQuantity: 500
@@ -72,6 +82,8 @@ ingredients:
     allergens:
       - Produit laitier
     type: frais
+    pF: true
+    pS: false
   - uuid: tmk6ya
     name: Bouillon de légume (sans gluten)
     originalQuantity: 36
@@ -81,6 +93,8 @@ ingredients:
     comment: 2 par l.
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: 6z655r
     name: Romarin
     originalQuantity: 5
@@ -90,6 +104,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: a16yd7
     name: Thym
     originalQuantity: 15
@@ -99,6 +115,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: j84olg
     name: Feuille de laurier
     originalQuantity: 8
@@ -108,6 +126,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: ljzb7j
     name: Eau
     originalQuantity: 20
@@ -117,6 +137,8 @@ ingredients:
     comment: ''
     allergens: []
     type: autres
+    pF: false
+    pS: false
   - uuid: d66ur8
     name: Pain au levain
     originalQuantity: 2.3
@@ -126,6 +148,8 @@ ingredients:
     comment: ''
     allergens: []
     type: autres
+    pF: false
+    pS: false
   - uuid: h4obe8
     name: Madère
     originalQuantity: 150
@@ -135,6 +159,8 @@ ingredients:
     comment: au goût
     allergens: []
     type: autres
+    pF: false
+    pS: false
   - uuid: judtle
     name: Vin Blanc
     originalQuantity: 1.5
@@ -146,6 +172,8 @@ ingredients:
       - Sulfites
       - Alcool
     type: epices
+    pF: false
+    pS: false
 preparation: |-
   Mettre les oignons émincés et le beurre dans une casserole. Faire fondre.
   Ajouter l’ail, le thym, le romarin puis laisser caraméliser.
@@ -160,8 +188,11 @@ preparation: |-
   réchauffer le four à 220°C.
   Toaster le pain au levain et le frotter avec une demi-gousse d’ail.
   Râper grossièrement le comté, le beaufort et le gruyère : quantités et proportions selon votre goût.
-publishDate: 2025-01-05T20:23:00.000Z
+publishDate: '2025-01-05T20:23:00+00:00'
 serveHot: true
 uuid: u1jbtulbbr3r
-slug: soupe-a-loignon_u1jbtulbbr3r
+id: soupe-a-loignon_u1jbtulbbr3r
+createdAt: '2025-01-05T20:23:00+00:00'
+updatedAt: '2025-01-05T20:23:00+00:00'
+createdBy: Auré
 ---

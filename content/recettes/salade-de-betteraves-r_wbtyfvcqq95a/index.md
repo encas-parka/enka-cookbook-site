@@ -20,6 +20,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: m6gmgq
     name: Citron confit
     originalQuantity: 40
@@ -29,6 +31,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: false
+    pS: false
   - uuid: doxujz
     name: Oignon rouge
     originalQuantity: 1
@@ -38,6 +42,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: 7sc3uw
     name: Betterave rouge
     originalQuantity: 1
@@ -47,6 +53,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: h3c8al
     name: huile d'olive
     originalQuantity: 2
@@ -56,6 +64,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: dzqmba
     name: Yaourt grec de vache
     originalQuantity: 150
@@ -66,6 +76,8 @@ ingredients:
     allergens:
       - Produit laitier
     type: frais
+    pF: true
+    pS: false
   - uuid: nnkg8f
     name: Aneth aromatique
     originalQuantity: 15
@@ -75,6 +87,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: he3u48
     name: Cumin moulu
     originalQuantity: 1.5
@@ -84,6 +98,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: u33083
     name: Tahin
     originalQuantity: 1
@@ -94,9 +110,14 @@ ingredients:
     allergens:
       - Sésame
     type: autres
+    pF: false
+    pS: false
 preparation: je le fais la semaine pro
-publishDate: 2025-05-19T14:28:00.000Z
+publishDate: '2025-05-19T14:28:00+00:00'
 serveHot: false
 uuid: wbtyfvcqq95a
-slug: salade-de-betteraves-r_wbtyfvcqq95a
+id: salade-de-betteraves-r_wbtyfvcqq95a
+createdAt: '2025-05-19T14:28:00+00:00'
+updatedAt: '2025-05-19T14:28:00+00:00'
+createdBy: ''
 ---

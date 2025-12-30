@@ -25,6 +25,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: h3c8al
     name: huile d'olive
     originalQuantity: 800
@@ -34,6 +36,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: o627mw
     name: Farine de pois chiche
     originalQuantity: 4
@@ -43,6 +47,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: 2pps90
     name: Poivre
     originalQuantity: 1
@@ -52,6 +58,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: 2juq3x
     name: Sel
     originalQuantity: 40
@@ -61,6 +69,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: ljzb7j
     name: Eau
     originalQuantity: 13.5
@@ -70,6 +80,8 @@ ingredients:
     comment: ''
     allergens: []
     type: autres
+    pF: false
+    pS: false
 materiel:
   - Plateaux
   - Marmitte
@@ -91,8 +103,11 @@ preparation: |-
   **Obligatoirement au dernier moment :**
 
   * Saler, poivrer et servir bien chaud.
-publishDate: 2024-05-18T16:52:00.000Z
+publishDate: '2024-05-18T16:52:00+00:00'
 serveHot: true
 uuid: 45kdjv6ksr25
-slug: panisse_45kdjv6ksr25
+id: panisse_45kdjv6ksr25
+createdAt: '2024-05-18T16:52:00+00:00'
+updatedAt: '2024-05-18T16:52:00+00:00'
+createdBy: ''
 ---

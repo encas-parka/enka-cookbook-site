@@ -17,6 +17,8 @@ ingredients:
     comment: ''
     allergens: []
     type: autres
+    pF: false
+    pS: false
   - uuid: 2juq3x
     name: Sel
     originalQuantity: 4
@@ -26,6 +28,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: kmq1zb
     name: Beurre doux
     originalQuantity: 1.5
@@ -36,6 +40,8 @@ ingredients:
     allergens:
       - Produit laitier
     type: frais
+    pF: true
+    pS: false
   - uuid: zf3zf8
     name: Oeuf
     originalQuantity: 18
@@ -46,6 +52,8 @@ ingredients:
     allergens:
       - Oeuf
     type: lof
+    pF: false
+    pS: false
   - uuid: vf8140
     name: Bicarbonate alimentaire
     originalQuantity: 9
@@ -55,6 +63,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: 2av6w8
     name: Farine de blé
     originalQuantity: 2.4
@@ -65,6 +75,8 @@ ingredients:
     allergens:
       - Gluten
     type: lof
+    pF: false
+    pS: false
   - uuid: oskdzx
     name: Gingembre confit
     originalQuantity: 900
@@ -74,6 +86,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
   - uuid: fsz13t
     name: Chocolat blanc
     originalQuantity: 1.5
@@ -83,6 +97,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
   - uuid: znjs35
     name: Sucre brun Vergeoise
     originalQuantity: 1.2
@@ -92,6 +108,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
 plate: 100
 prepAlt:
   - recetteAlt: cookie-the-matcha-et-gingembre-confit-vegan-et-sans-gluten_jvdekkyz
@@ -108,10 +126,13 @@ preparation: |-
 
   Enfourner pendant 10-12 minutes.* Retirer du four et laisser les cookies reposer sur la plaque de cuisson pendant environ 10 minutes avant de les transférer sur une grille de refroidissement
 preparation24h: Faire la pâte à cookie la veille si possible.
-publishDate: 2024-05-24T00:23:00.000Z
+publishDate: '2024-05-24T00:23:00+00:00'
 title: Cookie the matcha, gingembre confit chocolat blanc
 typeR: dessert
 serveHot: false
 uuid: ngtmrdu8ama5
-slug: cookie-the-matcha-ging_ngtmrdu8ama5
+id: cookie-the-matcha-ging_ngtmrdu8ama5
+createdAt: '2024-05-24T00:23:00+00:00'
+updatedAt: '2024-05-24T00:23:00+00:00'
+createdBy: Auré
 ---

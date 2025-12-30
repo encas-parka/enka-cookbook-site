@@ -25,6 +25,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: 4totf1
     name: Epinard
     originalQuantity: 1
@@ -34,6 +36,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: j7as8d
     name: Cébette - Ciboule - Cive - Oignon vert
     originalQuantity: 2.5
@@ -43,6 +47,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: l3fs10
     name: Poireau
     originalQuantity: 2.5
@@ -52,6 +58,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: u2m28w
     name: Ail
     originalQuantity: 5
@@ -61,6 +69,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: 2pps90
     name: Poivre
     originalQuantity: 45
@@ -70,6 +80,8 @@ ingredients:
     comment: à ajuster au goût
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: 2juq3x
     name: Sel
     originalQuantity: 45
@@ -79,6 +91,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: 6izdfu
     name: Sumac
     originalQuantity: 45
@@ -88,6 +102,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: htp5ma
     name: Curcuma moulu
     originalQuantity: 45
@@ -97,6 +113,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: nnkg8f
     name: Aneth aromatique
     originalQuantity: 500
@@ -106,6 +124,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: fetrpe
     name: Coriandre fraîche
     originalQuantity: 1.5
@@ -115,6 +135,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: true
+    pS: false
   - uuid: hgfa4e
     name: Persil frais
     originalQuantity: 1.5
@@ -124,6 +146,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: true
+    pS: false
   - uuid: h3c8al
     name: huile d'olive
     originalQuantity: 750
@@ -133,6 +157,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: zf3zf8
     name: Oeuf
     originalQuantity: 85
@@ -143,6 +169,8 @@ ingredients:
     allergens:
       - Oeuf
     type: lof
+    pF: false
+    pS: false
 preparation: |-
   Préchauffer le four à 180 °C (th. 6).
 
@@ -156,8 +184,11 @@ preparation: |-
   Tapisser les plats gastro de papier sulfu, verser la préparation et enfourner pour 45 minutes.
 
   Calculer pour faire 15 part par plat gastro mais c'est sûr sûr que c'est ça. Déso
-publishDate: 2025-05-30T19:06:00.000Z
+publishDate: '2025-05-30T19:06:00+00:00'
 serveHot: true
 uuid: hantqxcehajy
-slug: kuku-sabzi_hantqxcehajy
+id: kuku-sabzi_hantqxcehajy
+createdAt: '2025-05-30T19:06:00+00:00'
+updatedAt: '2025-05-30T19:06:00+00:00'
+createdBy: Auré
 ---

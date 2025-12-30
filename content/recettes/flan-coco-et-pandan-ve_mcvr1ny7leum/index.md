@@ -23,6 +23,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: xdy736
     name: lait de coco
     originalQuantity: 1.5
@@ -32,6 +34,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: vw9d1a
     name: Lait végétal (au choix)
     originalQuantity: 1.2
@@ -41,6 +45,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: ruhtax
     name: Agar-agar
     originalQuantity: 10
@@ -50,6 +56,8 @@ ingredients:
     comment: ''
     allergens: []
     type: autres
+    pF: false
+    pS: false
   - uuid: 2juq3x
     name: Sel
     originalQuantity: 1
@@ -59,6 +67,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: krizq0
     name: Pandan (extrait de)
     originalQuantity: 1
@@ -68,6 +78,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: u9z2he
     name: Sucre en poudre
     originalQuantity: 400
@@ -77,13 +89,18 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
 preparation: |-
   * Dans une casserole, mélanger les laits végétal et de coco, le sucre, la fécule de maïs, l'agar agar, le pandan et le sel. Fouetter jusqu'à ce que le mélange soit homogène.
   * Faire chauffer à feu moyen jusqu'à ce que le mélange commence à bouillir et à épaissir.
   * Laisser bouillir 2min afin que l'agar agar fasse effet.
   * Répartir dans les ramequins et laisser refroidir avant de réserver au frigo au moins deux heures.
-publishDate: 2024-05-18T14:14:00.000Z
+publishDate: '2024-05-18T14:14:00+00:00'
 serveHot: false
 uuid: mcvr1ny7leum
-slug: flan-coco-et-pandan-ve_mcvr1ny7leum
+id: flan-coco-et-pandan-ve_mcvr1ny7leum
+createdAt: '2024-05-18T14:14:00+00:00'
+updatedAt: '2024-05-18T14:14:00+00:00'
+createdBy: ''
 ---

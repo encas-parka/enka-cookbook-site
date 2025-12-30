@@ -23,6 +23,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
   - uuid: ikdk3g
     name: Eau de fleur d'oranger
     originalQuantity: 150
@@ -32,6 +34,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
   - uuid: 8nbcjp
     name: Fécule de maïs (Maïzena)
     originalQuantity: 800
@@ -41,6 +45,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: u9z2he
     name: Sucre en poudre
     originalQuantity: 900
@@ -50,6 +56,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
   - uuid: hzwesd
     name: Lait de riz
     originalQuantity: 10
@@ -59,6 +67,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
 materiel: []
 preparation: |-
   Mettre tout les ingrédients ensemble dans une casserole et chauffer à feu doux en mélangeant avec un fouet.
@@ -71,8 +81,11 @@ preparation: |-
 preparation24h: ''
 astuces: []
 prepAlt: []
-publishDate: 2025-10-19T21:54:00.000Z
+publishDate: '2025-10-19T21:54:00+00:00'
 serveHot: false
 uuid: f78vjdcbl6k2
-slug: flan-libanais-vegan_f78vjdcbl6k2
+id: flan-libanais-vegan_f78vjdcbl6k2
+createdAt: '2025-10-19T21:54:00+00:00'
+updatedAt: '2025-10-19T21:54:00+00:00'
+createdBy: Alio
 ---

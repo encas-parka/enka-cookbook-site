@@ -1,6 +1,6 @@
 
 {
-  "slug": "tartinade-sale-a-la-ch_ereleew3m69x",
+  "id": "tartinade-sale-a-la-ch_ereleew3m69x",
   "title": "Tartinade Salé À La Chataigne (Végan)",
   "draft": false,
   "typeR": "entree",
@@ -16,11 +16,14 @@
   "quantite_desc": null,
   "check": true,
   "materiel": null,
-  "ingredients": [{"allergens":[],"comment":"","name":"Echalote","normalizedQuantity":150,"normalizedUnit":"gr.","originalQuantity":150,"originalUnit":"gr.","type":"legumes","uuid":"vwdomu"},{"allergens":[],"comment":"","name":"Ail","normalizedQuantity":13,"normalizedUnit":"gr.","originalQuantity":2,"originalUnit":"gousse·s","type":"legumes","uuid":"u2m28w"},{"allergens":[],"comment":"","name":"huile d'olive","normalizedQuantity":50,"normalizedUnit":"ml","originalQuantity":50,"originalUnit":"ml","type":"lof","uuid":"h3c8al"},{"allergens":["Soja"],"comment":"","name":"Yaourt de soja","normalizedQuantity":200,"normalizedUnit":"gr.","originalQuantity":200,"originalUnit":"gr.","type":"frais","uuid":"hlbwfd"},{"allergens":[],"comment":"","name":"Confiture de chataigne (sans sucre)","normalizedQuantity":750,"normalizedUnit":"gr.","originalQuantity":750,"originalUnit":"gr.","type":"sucres","uuid":"q33x0k"},{"allergens":[],"comment":"","name":"Paprika","normalizedQuantity":8,"normalizedUnit":"gr.","originalQuantity":8,"originalUnit":"gr.","type":"epices","uuid":"bidsmu"}],
+  "ingredients": [{"allergens":[],"comment":"","name":"Echalote","normalizedQuantity":150,"normalizedUnit":"gr.","originalQuantity":150,"originalUnit":"gr.","pF":true,"pS":false,"type":"legumes","uuid":"vwdomu"},{"allergens":[],"comment":"","name":"Ail","normalizedQuantity":13,"normalizedUnit":"gr.","originalQuantity":2,"originalUnit":"gousse·s","pF":true,"pS":false,"type":"legumes","uuid":"u2m28w"},{"allergens":[],"comment":"","name":"huile d'olive","normalizedQuantity":50,"normalizedUnit":"ml","originalQuantity":50,"originalUnit":"ml","pF":false,"pS":false,"type":"lof","uuid":"h3c8al"},{"allergens":["Soja"],"comment":"","name":"Yaourt de soja","normalizedQuantity":200,"normalizedUnit":"gr.","originalQuantity":200,"originalUnit":"gr.","pF":true,"pS":false,"type":"frais","uuid":"hlbwfd"},{"allergens":[],"comment":"","name":"Confiture de chataigne (sans sucre)","normalizedQuantity":750,"normalizedUnit":"gr.","originalQuantity":750,"originalUnit":"gr.","pF":false,"pS":false,"type":"sucres","uuid":"q33x0k"},{"allergens":[],"comment":"","name":"Paprika","normalizedQuantity":8,"normalizedUnit":"gr.","originalQuantity":8,"originalUnit":"gr.","pF":false,"pS":false,"type":"epices","uuid":"bidsmu"}],
   "preparation": "* Emincer très fin les échalottes, hacher l'ail et brasser tous les ingrédients ensemble à l'aide d'une spatule ou aux mains. La texture doit être épaisse.\n* Goûter et réajuster l'assaisonnement, sel, poivre, paprika, ail.",
   "preparation24h": null,
   "astuces": null,
   "prepAlt": [{"recetteAlt":"Tartinade salé a la chataigne"}],
   "permissionWrite": [],
-  "publishedAt": "2025-01-01T00:00:00Z"
+  "publishedAt": "2025-01-01T00:00:00Z",
+  "createdAt": "2024-05-18T16:05:00+00:00",
+  "updatedAt": "2024-05-18T16:05:00+00:00",
+  "createdBy": ""
 }

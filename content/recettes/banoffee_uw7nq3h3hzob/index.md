@@ -22,6 +22,8 @@ ingredients:
     allergens:
       - Produit laitier
     type: frais
+    pF: true
+    pS: false
   - uuid: 0tpvue
     name: Mascarpone
     originalQuantity: 1.5
@@ -32,6 +34,8 @@ ingredients:
     allergens:
       - Produit laitier
     type: frais
+    pF: true
+    pS: false
   - uuid: 9vpwp5
     name: Banane
     originalQuantity: 35
@@ -41,6 +45,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: 6tnb6h
     name: Crème fraiche liquide entière
     originalQuantity: 3.5
@@ -51,6 +57,8 @@ ingredients:
     allergens:
       - Produit laitier
     type: lof
+    pF: false
+    pS: false
   - uuid: 5dcfzk
     name: Lait concentré sucré
     originalQuantity: 5
@@ -61,6 +69,8 @@ ingredients:
     allergens:
       - Produit laitier
     type: lof
+    pF: false
+    pS: false
   - uuid: h6thsp
     name: Speculoos
     originalQuantity: 2.5
@@ -72,6 +82,8 @@ ingredients:
       - Gluten
       - Soja
     type: sucres
+    pF: false
+    pS: false
   - uuid: u9z2he
     name: Sucre en poudre
     originalQuantity: 280
@@ -81,6 +93,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
 materiel:
   - Gastro 1/1 (Normaux)
   - Frigo
@@ -120,11 +134,14 @@ preparation24h: |-
   Ouvrir toutes les boites de conserve, verser dans un gastro et mixer au plongeur pour assouplir la confiture.
 prepAlt:
   - recetteAlt: banoffee-vegan-et-sans-gluten_hm1nmbb6
-publishDate: 2024-05-17T18:26:00.000Z
+publishDate: '2024-05-17T18:26:00+00:00'
 checkAlwaysOk: false
 regime:
   - vegetarien
 serveHot: false
 uuid: uw7nq3h3hzob
-slug: banoffee_uw7nq3h3hzob
+id: banoffee_uw7nq3h3hzob
+createdAt: '2024-05-17T18:26:00+00:00'
+updatedAt: '2024-05-17T18:26:00+00:00'
+createdBy: ''
 ---

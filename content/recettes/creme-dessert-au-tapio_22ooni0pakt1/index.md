@@ -21,6 +21,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sec
+    pF: false
+    pS: false
   - uuid: n1vs7d
     name: Pêche
     originalQuantity: 600
@@ -30,6 +32,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: xdy736
     name: lait de coco
     originalQuantity: 600
@@ -39,6 +43,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: n818be
     name: vanille extrait concentré
     originalQuantity: 3
@@ -48,6 +54,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
   - uuid: lny16c
     name: sucre blanc
     originalQuantity: 30
@@ -57,6 +65,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
 preparation: |-
   1. Portez à ébullition le lait de coco et l'eau (100 ml).
   2. Ajoutez le tapioca et la noix de coco râpée.
@@ -64,11 +74,14 @@ preparation: |-
   4. Ensuite, ajoutez le sucre et la vanille.
   5. Répartissez le mélange dans les récipients en y mettant au fond les fruits.
   6. Placez-les au frais au moins 2 heures avant de les déguster.
-publishDate: 2025-05-15T16:47:00.000Z
+publishDate: '2025-05-15T16:47:00+00:00'
 checkAlwaysOk: false
 regime:
   - vegetarien
 serveHot: false
 uuid: 22ooni0pakt1
-slug: creme-dessert-au-tapio_22ooni0pakt1
+id: creme-dessert-au-tapio_22ooni0pakt1
+createdAt: '2025-05-15T16:47:00+00:00'
+updatedAt: '2025-05-15T16:47:00+00:00'
+createdBy: ''
 ---

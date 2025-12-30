@@ -15,6 +15,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: m5dxyo
     name: Feta
     originalQuantity: 3
@@ -25,6 +27,8 @@ ingredients:
     allergens:
       - Produit laitier
     type: frais
+    pF: true
+    pS: false
   - uuid: 9p3n36
     name: Olives noires à la grecque
     originalQuantity: 1
@@ -34,6 +38,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: false
+    pS: false
   - uuid: doxujz
     name: Oignon rouge
     originalQuantity: 4.5
@@ -43,6 +49,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: ibtbnq
     name: Tomate
     originalQuantity: 10
@@ -52,6 +60,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: l5p1a5
     name: Concombre
     originalQuantity: 16
@@ -61,6 +71,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: h3c8al
     name: huile d'olive
     originalQuantity: 3
@@ -70,11 +82,13 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
 materiel:
   - Grand Saladier
 plate: 180
 preparation: Coupez, mélanger.
-publishDate: 2024-06-18T12:39:00.000Z
+publishDate: '2024-06-18T12:39:00+00:00'
 regime:
   - vegetarien
   - sans-gluten
@@ -85,5 +99,8 @@ title: Salade grecque
 typeR: entree
 serveHot: false
 uuid: bh4kbowxwsfg
-slug: salade-grecque_bh4kbowxwsfg
+id: salade-grecque_bh4kbowxwsfg
+createdAt: '2024-06-18T12:39:00+00:00'
+updatedAt: '2024-06-18T12:39:00+00:00'
+createdBy: ''
 ---

@@ -21,6 +21,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: owsv5m
     name: échalote
     originalQuantity: 1.3
@@ -30,6 +32,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: 92zzps
     name: Champignon de Paris
     originalQuantity: 30
@@ -39,6 +43,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: h3c8al
     name: huile d'olive
     originalQuantity: 930
@@ -48,6 +54,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: 8nbcjp
     name: Fécule de maïs (Maïzena)
     originalQuantity: 620
@@ -57,6 +65,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: gpeob7
     name: Lait de soja
     originalQuantity: 6.2
@@ -67,6 +77,8 @@ ingredients:
     allergens:
       - Soja
     type: lof
+    pF: false
+    pS: false
   - uuid: chfwwq
     name: Crème soja
     originalQuantity: 6.2
@@ -77,6 +89,8 @@ ingredients:
     allergens:
       - Soja
     type: lof
+    pF: false
+    pS: false
   - uuid: 1ej217
     name: huile de friture
     originalQuantity: 5
@@ -86,6 +100,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: 2av6w8
     name: Farine de blé
     originalQuantity: 10
@@ -96,6 +112,8 @@ ingredients:
     allergens:
       - Gluten
     type: lof
+    pF: false
+    pS: false
   - uuid: ljzb7j
     name: Eau
     originalQuantity: 1
@@ -105,6 +123,8 @@ ingredients:
     comment: ''
     allergens: []
     type: autres
+    pF: false
+    pS: false
   - uuid: kp0srn
     name: corn flakes
     originalQuantity: 7
@@ -114,6 +134,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sec
+    pF: false
+    pS: false
   - uuid: 2pps90
     name: Poivre
     originalQuantity: 1
@@ -123,6 +145,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: mt22ff
     name: Ciboulette
     originalQuantity: 6
@@ -132,6 +156,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: true
+    pS: false
   - uuid: 2juq3x
     name: Sel
     originalQuantity: 1
@@ -141,6 +167,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
 preparation: |-
 
   Champignons de Paris panés :
@@ -152,8 +180,11 @@ preparation: |-
 
 
   Je tape la recette + précise dès que je peux
-publishDate: 2025-06-18T00:46:00.000Z
+publishDate: '2025-06-18T00:46:00+00:00'
 serveHot: true
 uuid: j71g5m5afdob
-slug: champignons-frits-et-s_j71g5m5afdob
+id: champignons-frits-et-s_j71g5m5afdob
+createdAt: '2025-06-18T00:46:00+00:00'
+updatedAt: '2025-06-18T00:46:00+00:00'
+createdBy: ''
 ---

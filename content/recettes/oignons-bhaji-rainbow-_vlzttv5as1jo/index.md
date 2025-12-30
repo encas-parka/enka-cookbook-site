@@ -22,6 +22,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: o627mw
     name: Farine de pois chiche
     originalQuantity: 3
@@ -31,6 +33,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: mwavdx
     name: piment rouge frais
     originalQuantity: 20
@@ -40,6 +44,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: u2m28w
     name: Ail
     originalQuantity: 7
@@ -49,6 +55,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: 0d1fzw
     name: Gingembre
     originalQuantity: 100
@@ -58,6 +66,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: rtavky
     name: Oignon
     originalQuantity: 9
@@ -67,6 +77,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: x7e30y
     name: fenouil graine
     originalQuantity: 50
@@ -76,6 +88,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: 2juq3x
     name: Sel
     originalQuantity: 80
@@ -85,6 +99,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: 7jceco
     name: Curry
     originalQuantity: 250
@@ -94,6 +110,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: l3esgp
     name: Cumin (graines)
     originalQuantity: 50
@@ -103,6 +121,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: nf05n7
     name: Coriandre en poudre
     originalQuantity: 50
@@ -112,6 +132,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: ljzb7j
     name: Eau
     originalQuantity: 2
@@ -121,6 +143,8 @@ ingredients:
     comment: ''
     allergens: []
     type: autres
+    pF: false
+    pS: false
 preparation: |-
   Mélanger dans un bol tous les ingrédients pour l'oignon bhaji - sauf l'eau, l'huile de tournesol.
 
@@ -137,12 +161,15 @@ preparation: |-
   Retirer les bhajis de l'huile et saupoudrer d'un peu de sel . Continuer jusqu'à ce que la pâte soit complètement épuisée.
 
   \
-publishDate: 2025-06-02T16:53:00.000Z
+publishDate: '2025-06-02T16:53:00+00:00'
 checkAlwaysOk: false
 regime:
   - vegan
   - sans-gluten
 serveHot: true
 uuid: vlzttv5as1jo
-slug: oignons-bhaji-rainbow-_vlzttv5as1jo
+id: oignons-bhaji-rainbow-_vlzttv5as1jo
+createdAt: '2025-06-02T16:53:00+00:00'
+updatedAt: '2025-06-02T16:53:00+00:00'
+createdBy: Auré
 ---

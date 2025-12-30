@@ -21,6 +21,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: csxbg6
     name: lait d’amande
     originalQuantity: 6.5
@@ -30,6 +32,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: n85gmi
     name: sucre de canne (blond)
     originalQuantity: 2.5
@@ -39,6 +43,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
   - uuid: ruhtax
     name: Agar-agar
     originalQuantity: 50
@@ -48,6 +54,8 @@ ingredients:
     comment: ''
     allergens: []
     type: autres
+    pF: false
+    pS: false
   - uuid: coa5dh
     name: Noix de coco râpée
     originalQuantity: 1
@@ -57,6 +65,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
 preparation: |-
   fouetter tous les ingrédients
 
@@ -69,8 +79,11 @@ preparation: |-
   puis mettre au frigo pendant minimum 3 h
 astuces:
   - astuce: a faire la veille pour le lendemain ou la matin pour la soir
-publishDate: 2025-06-17T09:33:00.000Z
+publishDate: '2025-06-17T09:33:00+00:00'
 serveHot: false
 uuid: 61r3u6w1p87e
-slug: blanc-manger_61r3u6w1p87e
+id: blanc-manger_61r3u6w1p87e
+createdAt: '2025-06-17T09:33:00+00:00'
+updatedAt: '2025-06-17T09:33:00+00:00'
+createdBy: ''
 ---

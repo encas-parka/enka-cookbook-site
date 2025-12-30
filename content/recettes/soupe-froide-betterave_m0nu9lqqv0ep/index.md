@@ -23,6 +23,8 @@ ingredients:
     comment: Crème aigre
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: z6hnb8
     name: Zestes d'orange
     originalQuantity: 4
@@ -32,6 +34,8 @@ ingredients:
     comment: nombre d'orange
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: bf44pm
     name: Orange non traitée
     originalQuantity: 4
@@ -41,6 +45,8 @@ ingredients:
     comment: garder les zestes
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: rtavky
     name: Oignon
     originalQuantity: 2
@@ -50,6 +56,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: 7sc3uw
     name: Betterave rouge
     originalQuantity: 7.5
@@ -59,6 +67,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: rgt7s4
     name: Poivre noir moulu
     originalQuantity: 1
@@ -68,6 +78,8 @@ ingredients:
     comment: Crème aigre
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: 2juq3x
     name: Sel
     originalQuantity: 2
@@ -77,6 +89,8 @@ ingredients:
     comment: Crème aigre
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: tmk6ya
     name: Bouillon de légume (sans gluten)
     originalQuantity: 30
@@ -86,6 +100,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: mt22ff
     name: Ciboulette
     originalQuantity: 5
@@ -95,6 +111,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: true
+    pS: false
   - uuid: h3c8al
     name: huile d'olive
     originalQuantity: 300
@@ -104,6 +122,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: ljzb7j
     name: Eau
     originalQuantity: 15
@@ -113,6 +133,8 @@ ingredients:
     comment: ''
     allergens: []
     type: autres
+    pF: false
+    pS: false
   - uuid: gzi2ry
     name: Jus d'orange
     originalQuantity: 2
@@ -122,6 +144,8 @@ ingredients:
     comment: 100% pur jus
     allergens: []
     type: sucres
+    pF: false
+    pS: false
   - uuid: izd01q
     name: Crème fraîche épaisse entière
     originalQuantity: 2.5
@@ -132,6 +156,8 @@ ingredients:
     allergens:
       - Produit laitier
     type: frais
+    pF: true
+    pS: false
 preparation: |-
   **Soupe** : Hacher les oignons. Peler et couper en morceaux les betteraves crues.
 
@@ -147,8 +173,11 @@ preparation: |-
 
   Servir un bol de soupe avec une cuillère à soupe de crème aigre et parsemer de ciboulette hachée.
 preparation24h: Faire cette soupe la veille car elle doit être servie très froide.
-publishDate: 2024-05-27T21:09:00.000Z
+publishDate: '2024-05-27T21:09:00+00:00'
 serveHot: false
 uuid: m0nu9lqqv0ep
-slug: soupe-froide-betterave_m0nu9lqqv0ep
+id: soupe-froide-betterave_m0nu9lqqv0ep
+createdAt: '2024-05-27T21:09:00+00:00'
+updatedAt: '2024-05-27T21:09:00+00:00'
+createdBy: Auré
 ---

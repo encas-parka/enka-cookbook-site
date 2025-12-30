@@ -21,6 +21,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: ibtbnq
     name: Tomate
     originalQuantity: 8
@@ -30,6 +32,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: rtavky
     name: Oignon
     originalQuantity: 1
@@ -39,6 +43,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: u2m28w
     name: Ail
     originalQuantity: 200
@@ -48,6 +54,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: wby30p
     name: Lasagnes
     originalQuantity: 4
@@ -58,6 +66,8 @@ ingredients:
     allergens:
       - Gluten
     type: sec
+    pF: false
+    pS: false
   - uuid: 7v72le
     name: Pois cassés
     originalQuantity: 4
@@ -67,6 +77,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sec
+    pF: false
+    pS: false
   - uuid: h3c8al
     name: huile d'olive
     originalQuantity: 600
@@ -76,6 +88,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: ue125d
     name: Lait écrémé
     originalQuantity: 1
@@ -86,6 +100,8 @@ ingredients:
     allergens:
       - Produit laitier
     type: lof
+    pF: false
+    pS: false
   - uuid: 2pps90
     name: Poivre
     originalQuantity: 8
@@ -95,6 +111,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: 2juq3x
     name: Sel
     originalQuantity: 80
@@ -104,6 +122,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
 preparation: |-
   Laver et couper en cubes les aubergines et les tomates; hacher l'ail, mélanger le tout avec la moitié de l'huile d'olive
 
@@ -124,8 +144,11 @@ preparation: |-
   Mettre au four 45mn environ à 170°C en surveillant la coloration.
 
   Si les légumes colorent trop vite, recouvrir les bacs de papier aluminium ou sulfurisé et poursuivre la cuisson.
-publishDate: 2025-05-14T13:07:00.000Z
+publishDate: '2025-05-14T13:07:00+00:00'
 serveHot: true
 uuid: awt6hr55alj7
-slug: lasagnes-de-pois-casse_awt6hr55alj7
+id: lasagnes-de-pois-casse_awt6hr55alj7
+createdAt: '2025-05-14T13:07:00+00:00'
+updatedAt: '2025-05-14T13:07:00+00:00'
+createdBy: Léon
 ---

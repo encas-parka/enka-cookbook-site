@@ -21,6 +21,8 @@ ingredients:
     allergens:
       - Viande
     type: animaux
+    pF: true
+    pS: false
   - uuid: rtavky
     name: Oignon
     originalQuantity: 500
@@ -30,6 +32,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: 9vpwp5
     name: Banane
     originalQuantity: 25
@@ -39,6 +43,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: doxujz
     name: Oignon rouge
     originalQuantity: 3
@@ -48,6 +54,8 @@ ingredients:
     comment: Ciselés
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: ibtbnq
     name: Tomate
     originalQuantity: 1.5
@@ -57,6 +65,8 @@ ingredients:
     comment: ce n'est pas une erreur il y a besoin deux fois de tomates dans cette recette
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: 0zglpj
     name: Poivron (rouge)
     originalQuantity: 1
@@ -66,6 +76,8 @@ ingredients:
     comment: Coupés en lamelle
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: ibtbnq
     name: Tomate
     originalQuantity: 25
@@ -75,6 +87,8 @@ ingredients:
     comment: ce n'est pas une erreur il y a besoin deux fois de tomates dans cette recette
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: a73fzw
     name: Yaourt brassé
     originalQuantity: 2
@@ -85,6 +99,8 @@ ingredients:
     allergens:
       - Produit laitier
     type: frais
+    pF: true
+    pS: false
   - uuid: mxub21
     name: Beurre demi-sel
     originalQuantity: 300
@@ -95,6 +111,8 @@ ingredients:
     allergens:
       - Produit laitier
     type: frais
+    pF: true
+    pS: false
   - uuid: xahmrh
     name: Yaourt de vache
     originalQuantity: 500
@@ -105,6 +123,8 @@ ingredients:
     allergens:
       - Produit laitier
     type: frais
+    pF: true
+    pS: false
   - uuid: 7jceco
     name: Curry
     originalQuantity: 25
@@ -114,6 +134,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: mck2wl
     name: Concentré de tomate
     originalQuantity: 500
@@ -123,6 +145,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: h3c8al
     name: huile d'olive
     originalQuantity: 5
@@ -132,6 +156,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: opblzb
     name: Riz basmati
     originalQuantity: 5
@@ -141,6 +167,8 @@ ingredients:
     comment: Sec (a cuire)
     allergens: []
     type: sec
+    pF: false
+    pS: false
   - uuid: e4mjd1
     name: Jus de citron
     originalQuantity: 5
@@ -150,6 +178,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
   - uuid: rxvf6y
     name: Noix de coco rapée
     originalQuantity: 500
@@ -159,6 +189,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
 preparation: |-
   #### La viande et sa sauce
 
@@ -221,8 +253,11 @@ preparation: |-
 
   Une fois cuit, égrainer le riz pour éviter qu'il ne colle. ensuite couvrir et maintenir au bain marie.
 astuces: []
-publishDate: 2025-05-14T10:52:00.000Z
+publishDate: '2025-05-14T10:52:00+00:00'
 serveHot: true
 uuid: lkzmwsmu2www
-slug: curry-de-boeuf_lkzmwsmu2www
+id: curry-de-boeuf_lkzmwsmu2www
+createdAt: '2025-05-14T10:52:00+00:00'
+updatedAt: '2025-05-14T10:52:00+00:00'
+createdBy: Léon
 ---

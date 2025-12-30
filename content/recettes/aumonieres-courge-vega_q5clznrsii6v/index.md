@@ -30,6 +30,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: 2pps90
     name: Poivre
     originalQuantity: 1
@@ -39,6 +41,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: 7qo3ht
     name: Vinaigre de cidre
     originalQuantity: 0.5
@@ -49,6 +53,8 @@ ingredients:
     allergens:
       - Alcool
     type: epices
+    pF: false
+    pS: false
   - uuid: 9o3793
     name: Baies roses
     originalQuantity: 50
@@ -58,6 +64,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: l3esgp
     name: Cumin (graines)
     originalQuantity: 50
@@ -67,6 +75,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: oa85mx
     name: Courge
     originalQuantity: 1
@@ -76,6 +86,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: rtavky
     name: Oignon
     originalQuantity: 0.41
@@ -85,6 +97,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: c70jxb
     name: huile de tournesol
     originalQuantity: 3.5
@@ -94,6 +108,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: u9z2he
     name: Sucre en poudre
     originalQuantity: 200
@@ -103,6 +119,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
   - uuid: 40wkon
     name: Pate feuilleté sans gluten et vegan
     originalQuantity: 5
@@ -112,6 +130,8 @@ ingredients:
     comment: ''
     allergens: []
     type: frais
+    pF: true
+    pS: false
 materiel:
   - Gastro 1/1 (Normaux)
   - Four
@@ -127,5 +147,8 @@ prepAlt: []
 publishDate: '2024-05-17T15:21:00.000Z'
 serveHot: true
 uuid: q5clznrsii6v
-slug: aumonieres-courge-vega_q5clznrsii6v
+id: aumonieres-courge-vega_q5clznrsii6v
+createdAt: '2024-05-17T15:21:00.000Z'
+updatedAt: '2024-05-17T15:21:00.000Z'
+createdBy: ''
 ---

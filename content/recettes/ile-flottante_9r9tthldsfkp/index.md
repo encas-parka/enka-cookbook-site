@@ -16,6 +16,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: z8uiyd
     name: Farine de maïs
     originalQuantity: 50
@@ -25,6 +27,8 @@ ingredients:
     comment: la quantité exact c'est 1 cuillere a café bombé par oeuf
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: zf3zf8
     name: Oeuf
     originalQuantity: 5
@@ -35,6 +39,8 @@ ingredients:
     allergens:
       - Oeuf
     type: lof
+    pF: false
+    pS: false
   - uuid: x286pc
     name: Lait demi-écrémé
     originalQuantity: 2
@@ -45,6 +51,8 @@ ingredients:
     allergens:
       - Produit laitier
     type: lof
+    pF: false
+    pS: false
   - uuid: phv1to
     name: Sucre glace
     originalQuantity: 20
@@ -54,6 +62,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
   - uuid: n818be
     name: vanille extrait concentré
     originalQuantity: 10
@@ -63,6 +73,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
   - uuid: 2a0lnj
     name: gousse de vanille
     originalQuantity: 1
@@ -72,6 +84,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
   - uuid: lny16c
     name: sucre blanc
     originalQuantity: 200
@@ -81,6 +95,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
 plate: 10
 preparation: |-
   faire chauffer le lait avec les gousse de vanille environ 15 min. il suffit que le lait soit chaud pour infuser la vanille attention a ne jamais faire bouillir. ajouter extrait de vanille
@@ -103,10 +119,13 @@ preparation: |-
 
   on peut egalement mettre de l'eau bouillante dans un gastro et mettre au four 5 min mais c'est un peu plus technique...
 preparation24h: la creme peut etre faite la veille  pour qu'elle refroidisse bien
-publishDate: 2024-06-13T08:06:00.000Z
+publishDate: '2024-06-13T08:06:00+00:00'
 title: Ile flottante
 typeR: dessert
 serveHot: false
 uuid: 9r9tthldsfkp
-slug: ile-flottante_9r9tthldsfkp
+id: ile-flottante_9r9tthldsfkp
+createdAt: '2024-06-13T08:06:00+00:00'
+updatedAt: '2024-06-13T08:06:00+00:00'
+createdBy: anliz
 ---

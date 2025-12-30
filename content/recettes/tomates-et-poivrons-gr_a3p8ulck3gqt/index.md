@@ -22,6 +22,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: 0lpad0
     name: Poivron
     originalQuantity: 5
@@ -31,6 +33,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: ique18
     name: Paprika fumé
     originalQuantity: 1
@@ -40,6 +44,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: a16yd7
     name: Thym
     originalQuantity: 2
@@ -49,6 +55,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: rgt7s4
     name: Poivre noir moulu
     originalQuantity: 1
@@ -58,6 +66,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: tjrhvg
     name: Fleur de sel
     originalQuantity: 1
@@ -67,6 +77,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: 6z655r
     name: Romarin
     originalQuantity: 2
@@ -76,6 +88,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: h3c8al
     name: huile d'olive
     originalQuantity: 0.25
@@ -85,6 +99,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
 preparation: |-
   Découper les tomates et poivrons en 2.
 
@@ -93,9 +109,12 @@ preparation: |-
   Déposer sur une plaque de four, saupoudrer les aromatiques et épices et enduir généreusement d'huile d'olive.
 
   Cuisson au four pregnant 30min
-publishDate: 2025-08-08T09:43:00.000Z
+publishDate: '2025-08-08T09:43:00+00:00'
 uuid: a3p8ulck3gqt
-titleslug: tomates-et-poivrons-grilles-au-four_11145755
+titleid: tomates-et-poivrons-grilles-au-four_11145755
 serveHot: true
-slug: tomates-et-poivrons-gr_a3p8ulck3gqt
+id: tomates-et-poivrons-gr_a3p8ulck3gqt
+createdAt: '2025-08-08T09:43:00+00:00'
+updatedAt: '2025-08-08T09:43:00+00:00'
+createdBy: ''
 ---

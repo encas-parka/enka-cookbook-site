@@ -1,6 +1,6 @@
 
 {
-  "slug": "pain-pita_28nzksb97gke",
+  "id": "pain-pita_28nzksb97gke",
   "title": "Pain Pita",
   "draft": false,
   "typeR": "plat",
@@ -16,11 +16,14 @@
   "quantite_desc": "1 par personne",
   "check": true,
   "materiel": null,
-  "ingredients": [{"allergens":["Gluten"],"comment":"","name":"Farine de blé","normalizedQuantity":15000,"normalizedUnit":"gr.","originalQuantity":15,"originalUnit":"kg","type":"lof","uuid":"2av6w8"},{"allergens":[],"comment":"","name":"Levure fraîche de boulanger","normalizedQuantity":15,"normalizedUnit":"unité","originalQuantity":15,"originalUnit":"unité","type":"frais","uuid":"7qqcwc"}],
+  "ingredients": [{"allergens":["Gluten"],"comment":"","name":"Farine de blé","normalizedQuantity":15000,"normalizedUnit":"gr.","originalQuantity":15,"originalUnit":"kg","pF":false,"pS":false,"type":"lof","uuid":"2av6w8"},{"allergens":[],"comment":"","name":"Levure fraîche de boulanger","normalizedQuantity":15,"normalizedUnit":"unité","originalQuantity":15,"originalUnit":"unité","pF":true,"pS":false,"type":"frais","uuid":"7qqcwc"}],
   "preparation": "c'est arnaud qui le fait",
   "preparation24h": null,
   "astuces": null,
   "prepAlt": null,
   "permissionWrite": [],
-  "publishedAt": "2025-01-01T00:00:00Z"
+  "publishedAt": "2025-01-01T00:00:00Z",
+  "createdAt": "2025-06-17T18:46:00+00:00",
+  "updatedAt": "2025-06-17T18:46:00+00:00",
+  "createdBy": ""
 }

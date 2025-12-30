@@ -24,6 +24,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
   - uuid: b83ol6
     name: Poire
     originalQuantity: 8
@@ -33,6 +35,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: i6jlwm
     name: Pomme
     originalQuantity: 8
@@ -42,6 +46,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
 materiel: []
 preparation: |-
   Éplucher et les pommes et poires et retirer les pépins
@@ -56,8 +62,11 @@ preparation: |-
 preparation24h: ''
 astuces: []
 prepAlt: []
-publishDate: 2025-10-19T19:18:00.000Z
+publishDate: '2025-10-19T19:18:00+00:00'
 serveHot: false
 uuid: huj97lsj1sfb
-slug: compote-pommes-poires_huj97lsj1sfb
+id: compote-pommes-poires_huj97lsj1sfb
+createdAt: '2025-10-19T19:18:00+00:00'
+updatedAt: '2025-10-19T19:18:00+00:00'
+createdBy: Alio
 ---

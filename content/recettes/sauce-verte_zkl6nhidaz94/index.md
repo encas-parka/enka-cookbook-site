@@ -23,6 +23,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sec
+    pF: false
+    pS: false
   - uuid: chfwwq
     name: Crème soja
     originalQuantity: 0.5
@@ -33,6 +35,8 @@ ingredients:
     allergens:
       - Soja
     type: lof
+    pF: false
+    pS: false
   - uuid: hlbwfd
     name: Yaourt de soja
     originalQuantity: 400
@@ -43,6 +47,8 @@ ingredients:
     allergens:
       - Soja
     type: frais
+    pF: true
+    pS: false
   - uuid: hgfa4e
     name: Persil frais
     originalQuantity: 4
@@ -52,6 +58,8 @@ ingredients:
     comment: ou fanes de carottes
     allergens: []
     type: epices
+    pF: true
+    pS: false
   - uuid: e4mjd1
     name: Jus de citron
     originalQuantity: 0.25
@@ -61,6 +69,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
   - uuid: 2pps90
     name: Poivre
     originalQuantity: 1
@@ -70,6 +80,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: 2juq3x
     name: Sel
     originalQuantity: 1
@@ -79,6 +91,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
 preparation: |-
   Dans un mixeur, hacher le persil avec les graines gonflées, ajouter la crème, le yaourt, le citron.
 
@@ -86,9 +100,12 @@ preparation: |-
 
   Saler et poivrer.
 preparation24h: Faire tremper les graines de tournesol dans de l'eau 8 à 12h avant.
-publishDate: 2025-08-08T08:26:00.000Z
+publishDate: '2025-08-08T08:26:00+00:00'
 uuid: zkl6nhidaz94
-titleslug: sauce-verte_23513512
+titleid: sauce-verte_23513512
 serveHot: false
-slug: sauce-verte_zkl6nhidaz94
+id: sauce-verte_zkl6nhidaz94
+createdAt: '2025-08-08T08:26:00+00:00'
+updatedAt: '2025-08-08T08:26:00+00:00'
+createdBy: ''
 ---

@@ -16,6 +16,8 @@ ingredients:
     comment: ''
     allergens: []
     type: autres
+    pF: false
+    pS: false
   - uuid: bidsmu
     name: Paprika
     originalQuantity: 10
@@ -25,6 +27,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: 2j9y2v
     name: Menthe
     originalQuantity: 0.5
@@ -34,6 +38,8 @@ ingredients:
     comment: moitié pour la soupe et moitié pour le service
     allergens: []
     type: epices
+    pF: true
+    pS: false
   - uuid: tmk6ya
     name: Bouillon de légume (sans gluten)
     originalQuantity: 1
@@ -43,6 +49,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: hlbwfd
     name: Yaourt de soja
     originalQuantity: 600
@@ -53,6 +61,8 @@ ingredients:
     allergens:
       - Soja
     type: frais
+    pF: true
+    pS: false
   - uuid: doxujz
     name: Oignon rouge
     originalQuantity: 1
@@ -62,6 +72,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: ep9gif
     name: Concombre sans traitement
     originalQuantity: 1.3
@@ -71,6 +83,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
 plate: 10
 prepAlt:
   - recetteAlt: soupe-froide-concombre-et-yaourt_2amw0731
@@ -87,7 +101,7 @@ preparation: |-
   Emincer très très finement les oignons rouges. Ciseler l'autre moitié de la menthe.
 
   Au service, verser une louche de soupe, parsemer de menthe, d'une pincée de paprika et d'oignon.
-publishDate: 2024-05-27T22:33:00.000Z
+publishDate: '2024-05-27T22:33:00+00:00'
 quantite_desc: un bol d'environ 225ml par personne
 regime:
   - vegan
@@ -96,5 +110,8 @@ title: Soupe froide concombre et yaourt vegan
 typeR: entree
 serveHot: false
 uuid: 4tg077f8luat
-slug: soupe-froide-concombre_4tg077f8luat
+id: soupe-froide-concombre_4tg077f8luat
+createdAt: '2024-05-27T22:33:00+00:00'
+updatedAt: '2024-05-27T22:33:00+00:00'
+createdBy: Auré
 ---

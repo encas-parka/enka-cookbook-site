@@ -27,6 +27,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: 1r89qf
     name: Protéines de soja (petites)
     originalQuantity: 3
@@ -36,6 +38,8 @@ ingredients:
     comment: Le poids triple avec la réhydratation
     allergens: []
     type: sec
+    pF: false
+    pS: false
   - uuid: 2av6w8
     name: Farine de blé
     originalQuantity: 900
@@ -46,6 +50,8 @@ ingredients:
     allergens:
       - Gluten
     type: lof
+    pF: false
+    pS: false
   - uuid: kmq1zb
     name: Beurre doux
     originalQuantity: 900
@@ -56,6 +62,8 @@ ingredients:
     allergens:
       - Produit laitier
     type: frais
+    pF: true
+    pS: false
   - uuid: u1fypr
     name: Fromage râpé
     originalQuantity: 3.5
@@ -66,6 +74,8 @@ ingredients:
     allergens:
       - Produit laitier
     type: frais
+    pF: true
+    pS: false
   - uuid: x286pc
     name: Lait demi-écrémé
     originalQuantity: 16
@@ -76,6 +86,8 @@ ingredients:
     allergens:
       - Produit laitier
     type: lof
+    pF: false
+    pS: false
   - uuid: h3c8al
     name: huile d'olive
     originalQuantity: 1
@@ -85,6 +97,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: msyocm
     name: Muscade
     originalQuantity: 1
@@ -94,6 +108,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: xdkeh3
     name: Sauce tomate mutti
     originalQuantity: 10
@@ -103,6 +119,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: 78fo97
     name: Céleri branche
     originalQuantity: 1.5
@@ -113,6 +131,8 @@ ingredients:
     allergens:
       - Céleri
     type: legumes
+    pF: true
+    pS: false
   - uuid: eouu0v
     name: Carotte
     originalQuantity: 3
@@ -122,6 +142,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: rtavky
     name: Oignon
     originalQuantity: 3
@@ -131,6 +153,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: wby30p
     name: Lasagnes
     originalQuantity: 10
@@ -141,6 +165,8 @@ ingredients:
     allergens:
       - Gluten
     type: sec
+    pF: false
+    pS: false
 materiel: []
 preparation: |-
   - Faire le soffrito (oignon, céleri, carottes)
@@ -154,8 +180,11 @@ preparation: |-
 preparation24h: ''
 astuces: []
 prepAlt: []
-publishDate: 2025-10-16T18:24:00.000Z
+publishDate: '2025-10-16T18:24:00+00:00'
 serveHot: true
 uuid: i8k8yewsk1g5
-slug: lasagne-bolognaise-veg_i8k8yewsk1g5
+id: lasagne-bolognaise-veg_i8k8yewsk1g5
+createdAt: '2025-10-16T18:24:00+00:00'
+updatedAt: '2025-10-16T18:24:00+00:00'
+createdBy: Alio
 ---

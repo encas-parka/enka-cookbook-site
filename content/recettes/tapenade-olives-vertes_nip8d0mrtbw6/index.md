@@ -23,6 +23,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: false
+    pS: false
   - uuid: u2m28w
     name: Ail
     originalQuantity: 1
@@ -32,6 +34,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: h3c8al
     name: huile d'olive
     originalQuantity: 2
@@ -41,12 +45,17 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
 materiel:
   - Robot Mixeur
 preparation: Dans un petit mixeur, ou à l'aide d'un mixeur plongeant, mixer les olives vertes avec l'ail grossièrement hâchée et l'huile d'olive.
 preparation24h: ''
-publishDate: 2024-03-18T13:28:23.107Z
+publishDate: '2024-03-18T13:28:23.107000+00:00'
 serveHot: false
 uuid: nip8d0mrtbw6
-slug: tapenade-olives-vertes_nip8d0mrtbw6
+id: tapenade-olives-vertes_nip8d0mrtbw6
+createdAt: '2024-03-18T13:28:23.107000+00:00'
+updatedAt: '2024-03-18T13:28:23.107000+00:00'
+createdBy: ''
 ---

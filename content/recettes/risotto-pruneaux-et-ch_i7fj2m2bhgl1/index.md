@@ -24,6 +24,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sec
+    pF: false
+    pS: false
   - uuid: ljzb7j
     name: Eau
     originalQuantity: 1.8
@@ -33,6 +35,8 @@ ingredients:
     comment: ''
     allergens: []
     type: autres
+    pF: false
+    pS: false
   - uuid: u2m28w
     name: Ail
     originalQuantity: 3
@@ -42,6 +46,8 @@ ingredients:
     comment: gousses
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: kndzid
     name: Pruneau
     originalQuantity: 250
@@ -51,6 +57,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: v9qhs9
     name: Champignons
     originalQuantity: 600
@@ -60,6 +68,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: rtavky
     name: Oignon
     originalQuantity: 200
@@ -69,6 +79,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: h3c8al
     name: huile d'olive
     originalQuantity: 250
@@ -78,6 +90,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: tmk6ya
     name: Bouillon de légume (sans gluten)
     originalQuantity: 2
@@ -87,6 +101,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: tkuufn
     name: Jus de raisin
     originalQuantity: 300
@@ -96,6 +112,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
 preparation: |-
   **Bouillon** : Faire chauffer l'eau et y ajouter les cubes de bouillon
 
@@ -108,8 +126,11 @@ preparation: |-
   Ajouter les champignons, quand ils sont tendres ajouter le bouillon au fur et à mesure de son absorption jusqu'à ce que le riz soit tendre.
 
   Hors du feu, saler, poivrer incorporer les morceaux de pruneaux. Mélanger, couvrir et laisser reposer.
-publishDate: 2024-05-27T20:27:00.000Z
+publishDate: '2024-05-27T20:27:00+00:00'
 serveHot: true
 uuid: i7fj2m2bhgl1
-slug: risotto-pruneaux-et-ch_i7fj2m2bhgl1
+id: risotto-pruneaux-et-ch_i7fj2m2bhgl1
+createdAt: '2024-05-27T20:27:00+00:00'
+updatedAt: '2024-05-27T20:27:00+00:00'
+createdBy: Auré
 ---

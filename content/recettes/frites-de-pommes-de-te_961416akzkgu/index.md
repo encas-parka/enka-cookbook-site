@@ -27,6 +27,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
 materiel: []
 preparation: |-
   Faire un premier bain à 140°
@@ -35,8 +37,11 @@ preparation: |-
 preparation24h: ''
 astuces: []
 prepAlt: []
-publishDate: 2025-10-16T17:21:00.000Z
+publishDate: '2025-10-16T17:21:00+00:00'
 serveHot: true
 uuid: 961416akzkgu
-slug: frites-de-pommes-de-te_961416akzkgu
+id: frites-de-pommes-de-te_961416akzkgu
+createdAt: '2025-10-16T17:21:00+00:00'
+updatedAt: '2025-10-16T17:21:00+00:00'
+createdBy: Alio
 ---

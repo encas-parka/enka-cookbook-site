@@ -20,6 +20,8 @@ ingredients:
     comment: ''
     allergens: []
     type: autres
+    pF: false
+    pS: false
   - uuid: gpeob7
     name: Lait de soja
     originalQuantity: 4.6
@@ -30,6 +32,8 @@ ingredients:
     allergens:
       - Soja
     type: lof
+    pF: false
+    pS: false
   - uuid: chfwwq
     name: Crème soja
     originalQuantity: 5
@@ -40,6 +44,8 @@ ingredients:
     allergens:
       - Soja
     type: lof
+    pF: false
+    pS: false
   - uuid: e4mjd1
     name: Jus de citron
     originalQuantity: 200
@@ -49,6 +55,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
   - uuid: pxtrie
     name: Jus de fraise
     originalQuantity: 1
@@ -58,6 +66,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
   - uuid: jf0jf7
     name: Confiture de fraises
     originalQuantity: 1.3
@@ -67,6 +77,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
   - uuid: 2a0lnj
     name: gousse de vanille
     originalQuantity: 4
@@ -76,6 +88,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
   - uuid: n818be
     name: vanille extrait concentré
     originalQuantity: 60
@@ -85,6 +99,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
   - uuid: u9z2he
     name: Sucre en poudre
     originalQuantity: 800
@@ -94,6 +110,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
 materiel:
   - ramequins
 preparation: |-
@@ -111,12 +129,15 @@ preparation: |-
 
   Verser une cuillère à soupe de gelée sur chaque panna cotta.
 preparation24h: A faire la veille si le service est à midi.
-publishDate: 2024-06-17T19:25:00.000Z
+publishDate: '2024-06-17T19:25:00+00:00'
 checkAlwaysOk: false
 regime:
   - vegan
   - sans-gluten
 serveHot: false
 uuid: kytwplnialyp
-slug: panna-cotta-vegan-vani_kytwplnialyp
+id: panna-cotta-vegan-vani_kytwplnialyp
+createdAt: '2024-06-17T19:25:00+00:00'
+updatedAt: '2024-06-17T19:25:00+00:00'
+createdBy: Auré
 ---

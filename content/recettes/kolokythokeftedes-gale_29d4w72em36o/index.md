@@ -27,6 +27,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: c70jxb
     name: huile de tournesol
     originalQuantity: 8
@@ -36,6 +38,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: zf3zf8
     name: Oeuf
     originalQuantity: 6
@@ -46,6 +50,8 @@ ingredients:
     allergens:
       - Oeuf
     type: lof
+    pF: false
+    pS: false
   - uuid: oygozr
     name: Farine de riz
     originalQuantity: 160
@@ -55,6 +61,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: dzqmba
     name: Yaourt grec de vache
     originalQuantity: 500
@@ -65,6 +73,8 @@ ingredients:
     allergens:
       - Produit laitier
     type: frais
+    pF: true
+    pS: false
   - uuid: m5dxyo
     name: Feta
     originalQuantity: 600
@@ -75,6 +85,8 @@ ingredients:
     allergens:
       - Produit laitier
     type: frais
+    pF: true
+    pS: false
   - uuid: 2pps90
     name: Poivre
     originalQuantity: 1
@@ -84,6 +96,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: 2juq3x
     name: Sel
     originalQuantity: 1
@@ -93,6 +107,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: bidsmu
     name: Paprika
     originalQuantity: 1
@@ -102,6 +118,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: nnkg8f
     name: Aneth aromatique
     originalQuantity: 1
@@ -111,6 +129,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: y16lzq
     name: Menthe fraîche
     originalQuantity: 2
@@ -120,6 +140,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: true
+    pS: false
   - uuid: s8j4ff
     name: Basilic
     originalQuantity: 1
@@ -129,6 +151,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: true
+    pS: false
   - uuid: he3u48
     name: Cumin moulu
     originalQuantity: 1
@@ -138,6 +162,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: g0lph5
     name: Miel
     originalQuantity: 2
@@ -147,6 +173,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
   - uuid: 1koje1
     name: Citron vert
     originalQuantity: 2
@@ -156,6 +184,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: 9zozfk
     name: Courgette
     originalQuantity: 2.25
@@ -165,6 +195,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
 materiel:
   - Four
   - Robot-coupe
@@ -177,8 +209,11 @@ preparation: |-
   Option vegan : remplacer les oeufs par des oeufs de lin (1 cuillère à soupe de lin moulu pour 2,5 CS d'eau tiède, attendre 10min) ou essayer avec de la farine de pois chiche; la feta par du yaourt de soja (en mettre moins); saler plus. Le yaourt grec par du yaourt de soja, le miel par du sirop d'agave.
 
   Option sans gluten : farine sans gluten (par exemple mélange farine riz maïs)
-publishDate: 2025-07-21T11:43:00.000Z
+publishDate: '2025-07-21T11:43:00+00:00'
 serveHot: true
 uuid: 29d4w72em36o
-slug: kolokythokeftedes-gale_29d4w72em36o
+id: kolokythokeftedes-gale_29d4w72em36o
+createdAt: '2025-07-21T11:43:00+00:00'
+updatedAt: '2025-07-21T11:43:00+00:00'
+createdBy: Marion
 ---

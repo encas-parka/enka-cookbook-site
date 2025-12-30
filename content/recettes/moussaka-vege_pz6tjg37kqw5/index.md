@@ -23,6 +23,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: 18dy4e
     name: Pomme de terre
     originalQuantity: 8
@@ -32,6 +34,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: rtavky
     name: Oignon
     originalQuantity: 6
@@ -41,6 +45,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: 7sk3a5
     name: Aubergine
     originalQuantity: 12.4
@@ -50,6 +56,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: mxub21
     name: Beurre demi-sel
     originalQuantity: 500
@@ -60,6 +68,8 @@ ingredients:
     allergens:
       - Produit laitier
     type: frais
+    pF: true
+    pS: false
   - uuid: cr4ai3
     name: Parmigiano
     originalQuantity: 1.5
@@ -70,6 +80,8 @@ ingredients:
     allergens:
       - Produit laitier
     type: frais
+    pF: true
+    pS: false
   - uuid: 5yety4
     name: Mozzarella
     originalQuantity: 40
@@ -80,6 +92,8 @@ ingredients:
     allergens:
       - Produit laitier
     type: frais
+    pF: true
+    pS: false
   - uuid: pbydyr
     name: Chunks (protéine de soja)
     originalQuantity: 6.8
@@ -90,6 +104,8 @@ ingredients:
     allergens:
       - Soja
     type: autres
+    pF: false
+    pS: false
   - uuid: 2av6w8
     name: Farine de blé
     originalQuantity: 500
@@ -100,6 +116,8 @@ ingredients:
     allergens:
       - Gluten
     type: lof
+    pF: false
+    pS: false
   - uuid: x286pc
     name: Lait demi-écrémé
     originalQuantity: 7
@@ -110,6 +128,8 @@ ingredients:
     allergens:
       - Produit laitier
     type: lof
+    pF: false
+    pS: false
   - uuid: xdkeh3
     name: Sauce tomate mutti
     originalQuantity: 11
@@ -119,6 +139,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: 5dwrvm
     name: Gros sel
     originalQuantity: 1
@@ -128,13 +150,18 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
 materiel:
   - Four
   - Gastro 1/1 (Normaux)
 preparation: "\n\n* Rincer et égoutter les aubergines\n* Cuire les aubergines sur grille dans four électriques et réserver\n* Griller les chunks a sec, les épicer (vinaigre balsa, sauce soja, épices), puis les réserver\n* Faire fondre les oignons, ajouter les chunks, puis la tomate, laisser mariner\n* Faire sauter les patates en petit des\n* Monter dans des gastros 1 : fond de patates. 2 : Couche aubergines. 3 : chunks Mariners 4 :\_ mozza en mietes. 5 : Couche aubergines. 6 : chunks Mariners. 7 : mozza en mietes. 8 : bechamel. 9 :\_ parmigiano\_ rape\n* Au four 180 degres 20 mins"
 preparation24h: Dégorger les aubergines au gros sel 6 heures
-publishDate: 2024-05-28T12:05:00.000Z
+publishDate: '2024-05-28T12:05:00+00:00'
 serveHot: true
 uuid: pz6tjg37kqw5
-slug: moussaka-vege_pz6tjg37kqw5
+id: moussaka-vege_pz6tjg37kqw5
+createdAt: '2024-05-28T12:05:00+00:00'
+updatedAt: '2024-05-28T12:05:00+00:00'
+createdBy: ''
 ---

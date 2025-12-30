@@ -22,6 +22,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: u2m28w
     name: Ail
     originalQuantity: 10
@@ -31,6 +33,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: h3c8al
     name: huile d'olive
     originalQuantity: 1.1
@@ -40,6 +44,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: bjuxby
     name: Vinaigre de vin
     originalQuantity: 1
@@ -50,6 +56,8 @@ ingredients:
     allergens:
       - Alcool
     type: epices
+    pF: false
+    pS: false
   - uuid: dr1bbg
     name: Piment vert
     originalQuantity: 17.1
@@ -59,6 +67,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: y16lzq
     name: Menthe fraîche
     originalQuantity: 5
@@ -68,6 +78,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: true
+    pS: false
   - uuid: fetrpe
     name: Coriandre fraîche
     originalQuantity: 5
@@ -77,6 +89,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: true
+    pS: false
   - uuid: nnkg8f
     name: Aneth aromatique
     originalQuantity: 5
@@ -86,6 +100,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: e4mjd1
     name: Jus de citron
     originalQuantity: 1
@@ -95,6 +111,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
 preparation: |-
   Préchauffer le four à 210°
 
@@ -118,8 +136,11 @@ preparation: |-
   Mélanger les aubergines, le vinaigre, les piments, 3 cuillères à soupe d'huile de friture.
 
   AU DERNIER MOMENT, ajouter les herbes hachées, le jus d e citron, l'ail frit.
-publishDate: 2025-06-04T19:09:00.000Z
+publishDate: '2025-06-04T19:09:00+00:00'
 serveHot: false
 uuid: ub2ro051nszz
-slug: salade-daubergine-aux-_ub2ro051nszz
+id: salade-daubergine-aux-_ub2ro051nszz
+createdAt: '2025-06-04T19:09:00+00:00'
+updatedAt: '2025-06-04T19:09:00+00:00'
+createdBy: frédo
 ---

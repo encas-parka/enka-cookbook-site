@@ -20,6 +20,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sec
+    pF: false
+    pS: false
   - uuid: zf3zf8
     name: Oeuf
     originalQuantity: 4
@@ -30,6 +32,8 @@ ingredients:
     allergens:
       - Oeuf
     type: lof
+    pF: false
+    pS: false
   - uuid: 2ej7fi
     name: Farine de blé noir (sarrasin)
     originalQuantity: 2
@@ -39,6 +43,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: mxub21
     name: Beurre demi-sel
     originalQuantity: 25
@@ -49,6 +55,8 @@ ingredients:
     allergens:
       - Produit laitier
     type: frais
+    pF: true
+    pS: false
   - uuid: mxub21
     name: Beurre demi-sel
     originalQuantity: 100
@@ -59,6 +67,8 @@ ingredients:
     allergens:
       - Produit laitier
     type: frais
+    pF: true
+    pS: false
   - uuid: q33x0k
     name: Confiture de chataigne (sans sucre)
     originalQuantity: 500
@@ -68,6 +78,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
   - uuid: 1e3zhq
     name: Chocolat noir patissier 70p100
     originalQuantity: 200
@@ -77,6 +89,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
 preparation: |-
   Mélanger tous les ingrédients
 
@@ -84,8 +98,11 @@ preparation: |-
 
   Après cuisson
   mettre le nappage (chocolat+beurre) et les graines de sarrasin torréfiées
-publishDate: 2025-05-22T16:47:00.000Z
+publishDate: '2025-05-22T16:47:00+00:00'
 serveHot: false
 uuid: ekh0zszezxh6
-slug: gateau-a-la-creme-de-m_ekh0zszezxh6
+id: gateau-a-la-creme-de-m_ekh0zszezxh6
+createdAt: '2025-05-22T16:47:00+00:00'
+updatedAt: '2025-05-22T16:47:00+00:00'
+createdBy: ''
 ---

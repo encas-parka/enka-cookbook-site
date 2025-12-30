@@ -23,6 +23,8 @@ ingredients:
     comment: ''
     allergens: []
     type: frais
+    pF: true
+    pS: false
   - uuid: n85gmi
     name: sucre de canne (blond)
     originalQuantity: 1.2
@@ -32,6 +34,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
   - uuid: wz2fkg
     name: compote de pomme
     originalQuantity: 500
@@ -41,6 +45,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
   - uuid: zb9tj8
     name: Levure chimique sans gluten
     originalQuantity: 50
@@ -50,6 +56,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: oygozr
     name: Farine de riz
     originalQuantity: 1.7
@@ -59,6 +67,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: coa5dh
     name: Noix de coco râpée
     originalQuantity: 1.3
@@ -68,6 +78,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
   - uuid: dukizx
     name: Colorants alimentaires
     originalQuantity: 1
@@ -77,6 +89,8 @@ ingredients:
     comment: ''
     allergens: []
     type: autres
+    pF: false
+    pS: false
   - uuid: 2juq3x
     name: Sel
     originalQuantity: 15
@@ -86,6 +100,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
 preparation: |-
   Préchauffer le four à 180°C (t6).
 
@@ -103,8 +119,11 @@ preparation: |-
   Enfourner 14 minutes à 180°C (t6). Les cookies brunissent très légèrement.
 
   Sortir les cookies du four. Attention, ils sont très friables, il faut les laisser reposer quelques minutes afin qu’ils durcissent.
-publishDate: 2025-06-01T22:06:00.000Z
+publishDate: '2025-06-01T22:06:00+00:00'
 serveHot: false
 uuid: k1vo2y406gq4
-slug: cookies-arc-en-ciel-ve_k1vo2y406gq4
+id: cookies-arc-en-ciel-ve_k1vo2y406gq4
+createdAt: '2025-06-01T22:06:00+00:00'
+updatedAt: '2025-06-01T22:06:00+00:00'
+createdBy: Auré
 ---

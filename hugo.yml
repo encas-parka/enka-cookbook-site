@@ -33,6 +33,7 @@ outputs:
     - REDIRECTS
     - HEADERS
     - dataJson
+
   page:
     - HTML
     - RecipeDetail
@@ -93,20 +94,7 @@ outputFormats:
     isPlainText: true
     notAlternative: true
 
-# LEGACY: USELESS
-  REDIRECTS:
-    mediatype: text/netlify
-    baseName: _redirects
-    isPlainText: true
-    notAlternative: true
-    permalinkable: false
-    isHTML: false
 
-  HEADERS:
-    mediatype: text/netlify
-    baseName: _headers
-    isPlainText: true
-    notAlternative: true
 
 
   RecipeDetail:
@@ -122,6 +110,8 @@ outputFormats:
     isPlainText: true
     notAlternative: true
     path: api/
+
+
 
 caches:
   getjson:

@@ -15,6 +15,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
   - uuid: h3c8al
     name: huile d'olive
     originalQuantity: 2
@@ -24,6 +26,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: vwdomu
     name: Echalote
     originalQuantity: 600
@@ -33,6 +37,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: ibtbnq
     name: Tomate
     originalQuantity: 10
@@ -42,6 +48,8 @@ ingredients:
     comment: grosses tomates de préférences
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: hgfa4e
     name: Persil frais
     originalQuantity: 6
@@ -51,6 +59,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: true
+    pS: false
   - uuid: 2j9y2v
     name: Menthe
     originalQuantity: 10
@@ -60,6 +70,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: true
+    pS: false
   - uuid: yx78ae
     name: Semoule moyenne (blé)
     originalQuantity: 1.2
@@ -70,6 +82,8 @@ ingredients:
     allergens:
       - Gluten
     type: sec
+    pF: false
+    pS: false
 title: Taboulé libanais
 typeR: entree
 categories:
@@ -91,8 +105,11 @@ preparation: |-
   * Réserver au frais.
 prepAlt: []
 astuces: []
-publishDate: 2023-04-13T14:12:56.856Z
+publishDate: '2023-04-13T14:12:56.856000+00:00'
 serveHot: false
 uuid: izh9n9l14w66
-slug: taboule-libanais_izh9n9l14w66
+id: taboule-libanais_izh9n9l14w66
+createdAt: '2023-04-13T14:12:56.856000+00:00'
+updatedAt: '2023-04-13T14:12:56.856000+00:00'
+createdBy: ''
 ---

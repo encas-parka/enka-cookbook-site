@@ -1,6 +1,6 @@
 
 {
-  "slug": "tapenade-del-mar_p4gu4ctqvexm",
+  "id": "tapenade-del-mar_p4gu4ctqvexm",
   "title": "Tapenade Del Mar",
   "draft": false,
   "typeR": "entree",
@@ -16,11 +16,14 @@
   "quantite_desc": null,
   "check": true,
   "materiel": null,
-  "ingredients": [{"allergens":[],"comment":"","name":"Ail","normalizedQuantity":162.5,"normalizedUnit":"gr.","originalQuantity":25,"originalUnit":"gousse·s","type":"legumes","uuid":"u2m28w"},{"allergens":[],"comment":"","name":"Olives Vertes Dénoyautées","normalizedQuantity":4000,"normalizedUnit":"gr.","originalQuantity":4,"originalUnit":"kg","type":"legumes","uuid":"163u4z"},{"allergens":[],"comment":"","name":"Purée d'amande","normalizedQuantity":300,"normalizedUnit":"gr.","originalQuantity":300,"originalUnit":"gr.","type":"autres","uuid":"7dlfuw"},{"allergens":[],"comment":"","name":"Câpres","normalizedQuantity":200,"normalizedUnit":"gr.","originalQuantity":200,"originalUnit":"gr.","type":"epices","uuid":"c88lz8"},{"allergens":[],"comment":"","name":"huile d'olive","normalizedQuantity":1200,"normalizedUnit":"ml","originalQuantity":1.2,"originalUnit":"l.","type":"lof","uuid":"h3c8al"}],
+  "ingredients": [{"allergens":[],"comment":"","name":"Ail","normalizedQuantity":162.5,"normalizedUnit":"gr.","originalQuantity":25,"originalUnit":"gousse·s","pF":true,"pS":false,"type":"legumes","uuid":"u2m28w"},{"allergens":[],"comment":"","name":"Olives Vertes Dénoyautées","normalizedQuantity":4000,"normalizedUnit":"gr.","originalQuantity":4,"originalUnit":"kg","pF":false,"pS":false,"type":"legumes","uuid":"163u4z"},{"allergens":[],"comment":"","name":"Purée d'amande","normalizedQuantity":300,"normalizedUnit":"gr.","originalQuantity":300,"originalUnit":"gr.","pF":false,"pS":false,"type":"autres","uuid":"7dlfuw"},{"allergens":[],"comment":"","name":"Câpres","normalizedQuantity":200,"normalizedUnit":"gr.","originalQuantity":200,"originalUnit":"gr.","pF":false,"pS":false,"type":"epices","uuid":"c88lz8"},{"allergens":[],"comment":"","name":"huile d'olive","normalizedQuantity":1200,"normalizedUnit":"ml","originalQuantity":1.2,"originalUnit":"l.","pF":false,"pS":false,"type":"lof","uuid":"h3c8al"}],
   "preparation": "tout mixer sauf l'ail qui est pressée...et voilà!",
   "preparation24h": null,
   "astuces": null,
   "prepAlt": null,
   "permissionWrite": [],
-  "publishedAt": "2025-01-01T00:00:00Z"
+  "publishedAt": "2025-01-01T00:00:00Z",
+  "createdAt": "2025-06-15T19:47:00+00:00",
+  "updatedAt": "2025-06-15T19:47:00+00:00",
+  "createdBy": ""
 }

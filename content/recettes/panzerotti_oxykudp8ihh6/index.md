@@ -21,6 +21,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: m42cma
     name: Pâte à pain
     originalQuantity: 15
@@ -31,6 +33,8 @@ ingredients:
     allergens:
       - Gluten
     type: autres
+    pF: false
+    pS: false
   - uuid: fkftyb
     name: Origan
     originalQuantity: 150
@@ -40,6 +44,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: xdkeh3
     name: Sauce tomate mutti
     originalQuantity: 4
@@ -49,6 +55,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: 5yety4
     name: Mozzarella
     originalQuantity: 5.5
@@ -59,6 +67,8 @@ ingredients:
     allergens:
       - Produit laitier
     type: frais
+    pF: true
+    pS: false
   - uuid: h3c8al
     name: huile d'olive
     originalQuantity: 500
@@ -68,6 +78,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
 preparation: |-
   Former des boules de pain d'environ 150gr chacune et les disposer bien espacées sur le plan de travail fariné. Laisser lever à nouveau jusqu’au double.
 
@@ -86,11 +98,14 @@ preparation: |-
   Farcir les panzerotti et les faire frire immédiatement pour que
   l’humidité ne casse pas la pâte. Les déguster bien chauds.
 preparation24h: ''
-publishDate: 2025-05-30T16:22:00.000Z
+publishDate: '2025-05-30T16:22:00+00:00'
 checkAlwaysOk: true
 regime:
   - vegetarien
 serveHot: true
 uuid: oxykudp8ihh6
-slug: panzerotti_oxykudp8ihh6
+id: panzerotti_oxykudp8ihh6
+createdAt: '2025-05-30T16:22:00+00:00'
+updatedAt: '2025-05-30T16:22:00+00:00'
+createdBy: ''
 ---

@@ -25,6 +25,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: l5p1a5
     name: Concombre
     originalQuantity: 23
@@ -34,6 +36,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: h3c8al
     name: huile d'olive
     originalQuantity: 400
@@ -43,6 +47,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: 2juq3x
     name: Sel
     originalQuantity: 100
@@ -52,6 +58,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: bjuxby
     name: Vinaigre de vin
     originalQuantity: 1.2
@@ -62,6 +70,8 @@ ingredients:
     allergens:
       - Alcool
     type: epices
+    pF: false
+    pS: false
   - uuid: u9z2he
     name: Sucre en poudre
     originalQuantity: 600
@@ -71,12 +81,17 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
 materiel:
   - Gastro 1/1 (Profond)
 preparation: Servir.
 preparation24h: '**La veille:** Eplucher et mandoliner les concombres, râper le gingembre. Tout mélanger.'
-publishDate: 2024-05-20T14:44:00.000Z
+publishDate: '2024-05-20T14:44:00+00:00'
 serveHot: false
 uuid: kobshcsn8ypy
-slug: concombre-marines-au-g_kobshcsn8ypy
+id: concombre-marines-au-g_kobshcsn8ypy
+createdAt: '2024-05-20T14:44:00+00:00'
+updatedAt: '2024-05-20T14:44:00+00:00'
+createdBy: ''
 ---

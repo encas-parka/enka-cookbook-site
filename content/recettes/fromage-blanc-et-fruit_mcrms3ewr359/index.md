@@ -21,6 +21,8 @@ ingredients:
     allergens:
       - Soja
     type: frais
+    pF: true
+    pS: false
   - uuid: b2dxf8
     name: Fromage blanc
     originalQuantity: 11
@@ -31,6 +33,8 @@ ingredients:
     allergens:
       - Produit laitier
     type: frais
+    pF: true
+    pS: false
   - uuid: n85gmi
     name: sucre de canne (blond)
     originalQuantity: 1
@@ -40,6 +44,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
   - uuid: rqmasf
     name: Fruits rouges
     originalQuantity: 3
@@ -49,10 +55,15 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
 preparation: Ne pas oublié la version végane !!
-publishDate: 2025-05-30T21:37:00.000Z
+publishDate: '2025-05-30T21:37:00+00:00'
 checkAlwaysOk: false
 serveHot: false
 uuid: mcrms3ewr359
-slug: fromage-blanc-et-fruit_mcrms3ewr359
+id: fromage-blanc-et-fruit_mcrms3ewr359
+createdAt: '2025-05-30T21:37:00+00:00'
+updatedAt: '2025-05-30T21:37:00+00:00'
+createdBy: Résistances 2025
 ---

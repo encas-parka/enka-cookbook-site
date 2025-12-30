@@ -20,6 +20,8 @@ ingredients:
     comment: chantilly
     allergens: []
     type: sucres
+    pF: false
+    pS: false
   - uuid: u9z2he
     name: Sucre en poudre
     originalQuantity: 2
@@ -29,6 +31,8 @@ ingredients:
     comment: caramel
     allergens: []
     type: sucres
+    pF: false
+    pS: false
   - uuid: ade8hh
     name: Biscuit vegan et sans gluten
     originalQuantity: 3
@@ -38,6 +42,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
   - uuid: 9vpwp5
     name: Banane
     originalQuantity: 35
@@ -47,6 +53,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: 8j3hna
     name: Margarine végétale spécial cuisson
     originalQuantity: 1
@@ -56,6 +64,8 @@ ingredients:
     comment: caramel
     allergens: []
     type: frais
+    pF: true
+    pS: false
   - uuid: hlbwfd
     name: Yaourt de soja
     originalQuantity: 5
@@ -66,6 +76,8 @@ ingredients:
     allergens:
       - Soja
     type: frais
+    pF: true
+    pS: false
   - uuid: chfwwq
     name: Crème soja
     originalQuantity: 250
@@ -76,6 +88,8 @@ ingredients:
     allergens:
       - Soja
     type: lof
+    pF: false
+    pS: false
   - uuid: ja17ja
     name: Huile de coco désodorisée
     originalQuantity: 500
@@ -85,6 +99,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: ja17ja
     name: Huile de coco désodorisée
     originalQuantity: 1
@@ -94,6 +110,8 @@ ingredients:
     comment: chantilly
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: 2juq3x
     name: Sel
     originalQuantity: 80
@@ -103,6 +121,8 @@ ingredients:
     comment: caramel
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: sk1gbb
     name: Cannelle
     originalQuantity: 15
@@ -112,6 +132,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
 materiel:
   - Gastro 1/1 (Normaux)
   - Frigo
@@ -151,8 +173,11 @@ preparation24h: |-
   Transvasez le tout dans un pot ou un bocal, fermez-le, et réfrigérez toute une nuit.
 
   La crème est prête à être utilisée lorsqu’elle est bien froide, pas avant.
-publishDate: 2024-05-18T16:26:00.000Z
+publishDate: '2024-05-18T16:26:00+00:00'
 serveHot: false
 uuid: 2h83u0xlel3u
-slug: banoffee-vegan-et-sans_2h83u0xlel3u
+id: banoffee-vegan-et-sans_2h83u0xlel3u
+createdAt: '2024-05-18T16:26:00+00:00'
+updatedAt: '2024-05-18T16:26:00+00:00'
+createdBy: ''
 ---

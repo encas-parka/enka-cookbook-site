@@ -23,6 +23,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: enbx1o
     name: lait de cajou
     originalQuantity: 800
@@ -32,6 +34,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: vw9d1a
     name: Lait végétal (au choix)
     originalQuantity: 800
@@ -41,6 +45,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: vf8140
     name: Bicarbonate alimentaire
     originalQuantity: 2
@@ -50,6 +56,8 @@ ingredients:
     comment: pâte à beignet
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: zb9tj8
     name: Levure chimique sans gluten
     originalQuantity: 10
@@ -59,6 +67,8 @@ ingredients:
     comment: pâte à beignet
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: oygozr
     name: Farine de riz
     originalQuantity: 1
@@ -68,6 +78,8 @@ ingredients:
     comment: pâte à beignet
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: km927d
     name: Graines de lin
     originalQuantity: 70
@@ -77,6 +89,8 @@ ingredients:
     comment: pâte à beignet
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: vw9d1a
     name: Lait végétal (au choix)
     originalQuantity: 2
@@ -86,6 +100,8 @@ ingredients:
     comment: pâte à beignet
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: k2uthk
     name: Miso blanc
     originalQuantity: 500
@@ -95,6 +111,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: 2juq3x
     name: Sel
     originalQuantity: 15
@@ -104,6 +122,8 @@ ingredients:
     comment: pâte à beignet
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: 7qo3ht
     name: Vinaigre de cidre
     originalQuantity: 100
@@ -114,6 +134,8 @@ ingredients:
     allergens:
       - Alcool
     type: epices
+    pF: false
+    pS: false
   - uuid: ljzb7j
     name: Eau
     originalQuantity: 200
@@ -123,6 +145,8 @@ ingredients:
     comment: pâte à beignet
     allergens: []
     type: autres
+    pF: false
+    pS: false
   - uuid: 9xvfud
     name: Polenta fine
     originalQuantity: 1
@@ -132,6 +156,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sec
+    pF: false
+    pS: false
   - uuid: lny16c
     name: sucre blanc
     originalQuantity: 1.4
@@ -141,6 +167,8 @@ ingredients:
     comment: caramel
     allergens: []
     type: sucres
+    pF: false
+    pS: false
   - uuid: u9z2he
     name: Sucre en poudre
     originalQuantity: 100
@@ -150,6 +178,8 @@ ingredients:
     comment: pâte à beignet
     allergens: []
     type: sucres
+    pF: false
+    pS: false
   - uuid: 8j3hna
     name: Margarine végétale spécial cuisson
     originalQuantity: 650
@@ -159,6 +189,8 @@ ingredients:
     comment: caramel
     allergens: []
     type: frais
+    pF: true
+    pS: false
 preparation: |-
   PÂTE A BEIGNET :
 
@@ -189,8 +221,11 @@ preparation: |-
   Incorporer le lait de cajou et laisser mijoter 1 à 2 minutes, jusqu'à ce que la sauce caramel épaississe.
 
   Retirez la casserole du feu et incorporez le miso en fouettant.
-publishDate: 2024-05-24T00:51:00.000Z
+publishDate: '2024-05-24T00:51:00+00:00'
 serveHot: true
 uuid: 7kxwcm4fzlbq
-slug: beignet-de-banane-et-c_7kxwcm4fzlbq
+id: beignet-de-banane-et-c_7kxwcm4fzlbq
+createdAt: '2024-05-24T00:51:00+00:00'
+updatedAt: '2024-05-24T00:51:00+00:00'
+createdBy: Auré
 ---

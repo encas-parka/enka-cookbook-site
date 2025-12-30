@@ -24,6 +24,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: zf3zf8
     name: Oeuf
     originalQuantity: 66
@@ -34,6 +36,8 @@ ingredients:
     allergens:
       - Oeuf
     type: lof
+    pF: false
+    pS: false
   - uuid: v212im
     name: Farine de tapioca
     originalQuantity: 2.2
@@ -43,6 +47,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: 1nb85u
     name: Farine de riz blanche
     originalQuantity: 450
@@ -52,6 +58,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: xdy736
     name: lait de coco
     originalQuantity: 4.45
@@ -61,6 +69,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: 2juq3x
     name: Sel
     originalQuantity: 10
@@ -70,6 +80,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: krizq0
     name: Pandan (extrait de)
     originalQuantity: 50
@@ -79,6 +91,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
 preparation: |-
 
 
@@ -91,8 +105,11 @@ preparation: |-
   * **Ne pas ouvrir le four durant cette période.**
   * Vérifier ensuite la cuisson à l'aide d'un couteau s'il ressort sec, le gâteau est cuit.
   * Il n'y a plus qu'à le sortir et le laisser reposer une dizaine de minutes avant de le démouler.
-publishDate: 2024-05-18T15:58:00.000Z
+publishDate: '2024-05-18T15:58:00+00:00'
 serveHot: false
 uuid: p1xs00gnpqe6
-slug: gateau-au-pandan-bahn-_p1xs00gnpqe6
+id: gateau-au-pandan-bahn-_p1xs00gnpqe6
+createdAt: '2024-05-18T15:58:00+00:00'
+updatedAt: '2024-05-18T15:58:00+00:00'
+createdBy: ''
 ---

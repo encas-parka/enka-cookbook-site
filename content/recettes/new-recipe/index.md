@@ -4,11 +4,11 @@ date: '2025-12-18T00:48:34.689Z'
 draft: true
 typeR: plat
 categories:
-  - Cake
+- Cake
 regime:
-  - vegan
-  - sans-gluten
-  - sans-lactose
+- vegan
+- sans-gluten
+- sans-lactose
 plate: 100
 quantite_desc: ''
 check: false
@@ -17,20 +17,20 @@ serveHot: true
 description: desc test
 region: ''
 saison: []
-slug: new-recipe
+id: new-recipe
 materiel:
-  - Bain Marie
-  - Bruleur
+- Bain Marie
+- Bruleur
 ingredients:
-  - uuid: MeJfBNagSe4kNhxr1srKz
-    name: Pomme de terre
-    originalQuantity: 100
-    originalUnit: gr.
-    normalizedQuantity: 100
-    normalizedUnit: gr.
-    comment: ''
-    allergens: []
-    type: legumes
+- uuid: MeJfBNagSe4kNhxr1srKz
+  name: Pomme de terre
+  originalQuantity: 100
+  originalUnit: gr.
+  normalizedQuantity: 100
+  normalizedUnit: gr.
+  comment: ''
+  allergens: []
+  type: legumes
 preparation: |-
   pou pouet
   poute pouet pouet
@@ -39,6 +39,9 @@ prepAlt: []
 astuces: []
 preparation24h: ''
 permissionWrite:
-  - 693200b700222efe46a2
+- 693200b700222efe46a2
+createdBy: ''
+publishDate: '2025-01-01T00:00:00Z'
+createdAt: '2025-01-01T00:00:00Z'
+updatedAt: '2025-01-01T00:00:00Z'
 ---
-

@@ -1,6 +1,6 @@
 
 {
-  "slug": "houmous_u0sj0q635j74",
+  "id": "houmous_u0sj0q635j74",
   "title": "Houmous",
   "draft": false,
   "typeR": "entree",
@@ -16,11 +16,14 @@
   "quantite_desc": null,
   "check": true,
   "materiel": ["Giraffe (Bras Mixeur)"],
-  "ingredients": [{"allergens":["Sésame"],"comment":"","name":"Tahin","normalizedQuantity":100,"normalizedUnit":"gr.","originalQuantity":100,"originalUnit":"gr.","type":"autres","uuid":"u33083"},{"allergens":[],"comment":"","name":"Eau","normalizedQuantity":45,"normalizedUnit":"ml","originalQuantity":3,"originalUnit":"c. à soupe","type":"autres","uuid":"ljzb7j"},{"allergens":[],"comment":"","name":"Paprika","normalizedQuantity":0.5,"normalizedUnit":"gr.","originalQuantity":0.5,"originalUnit":"gr.","type":"epices","uuid":"bidsmu"},{"allergens":[],"comment":"","name":"Ail","normalizedQuantity":6.5,"normalizedUnit":"gr.","originalQuantity":1,"originalUnit":"gousse·s","type":"legumes","uuid":"u2m28w"},{"allergens":[],"comment":"","name":"huile d'olive","normalizedQuantity":30,"normalizedUnit":"ml","originalQuantity":2,"originalUnit":"c. à soupe","type":"lof","uuid":"h3c8al"},{"allergens":[],"comment":"","name":"Pois chiche cuit","normalizedQuantity":300,"normalizedUnit":"gr.","originalQuantity":300,"originalUnit":"gr.","type":"sec","uuid":"wwl5vn"},{"allergens":[],"comment":"","name":"Jus de citron","normalizedQuantity":30,"normalizedUnit":"ml","originalQuantity":2,"originalUnit":"c. à soupe","type":"sucres","uuid":"e4mjd1"}],
+  "ingredients": [{"allergens":["Sésame"],"comment":"","name":"Tahin","normalizedQuantity":100,"normalizedUnit":"gr.","originalQuantity":100,"originalUnit":"gr.","pF":false,"pS":false,"type":"autres","uuid":"u33083"},{"allergens":[],"comment":"","name":"Eau","normalizedQuantity":45,"normalizedUnit":"ml","originalQuantity":3,"originalUnit":"c. à soupe","pF":false,"pS":false,"type":"autres","uuid":"ljzb7j"},{"allergens":[],"comment":"","name":"Paprika","normalizedQuantity":0.5,"normalizedUnit":"gr.","originalQuantity":0.5,"originalUnit":"gr.","pF":false,"pS":false,"type":"epices","uuid":"bidsmu"},{"allergens":[],"comment":"","name":"Ail","normalizedQuantity":6.5,"normalizedUnit":"gr.","originalQuantity":1,"originalUnit":"gousse·s","pF":true,"pS":false,"type":"legumes","uuid":"u2m28w"},{"allergens":[],"comment":"","name":"huile d'olive","normalizedQuantity":30,"normalizedUnit":"ml","originalQuantity":2,"originalUnit":"c. à soupe","pF":false,"pS":false,"type":"lof","uuid":"h3c8al"},{"allergens":[],"comment":"","name":"Pois chiche cuit","normalizedQuantity":300,"normalizedUnit":"gr.","originalQuantity":300,"originalUnit":"gr.","pF":false,"pS":false,"type":"sec","uuid":"wwl5vn"},{"allergens":[],"comment":"","name":"Jus de citron","normalizedQuantity":30,"normalizedUnit":"ml","originalQuantity":2,"originalUnit":"c. à soupe","pF":false,"pS":false,"type":"sucres","uuid":"e4mjd1"}],
   "preparation": "* Mixer tous les ingrédients sauf l'huile d'olive. Mais attention à ne pas tout mettre dès le début, saler et ajuster au gout\n* Mettre le houmous dans le bol ou l'assiette, de service, et verser un filer d'huile d'olive sur le dessus. Parsemer très légèrement de paprika pour la décoration",
   "preparation24h": "",
   "astuces": null,
   "prepAlt": null,
   "permissionWrite": [],
-  "publishedAt": "2025-01-01T00:00:00Z"
+  "publishedAt": "2025-01-01T00:00:00Z",
+  "createdAt": "2024-03-18T13:12:27.157000+00:00",
+  "updatedAt": "2024-03-18T13:12:27.157000+00:00",
+  "createdBy": ""
 }

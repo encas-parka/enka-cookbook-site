@@ -23,6 +23,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: 9zozfk
     name: Courgette
     originalQuantity: 0.7
@@ -32,6 +34,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: rtavky
     name: Oignon
     originalQuantity: 0.35
@@ -41,6 +45,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: u2m28w
     name: Ail
     originalQuantity: 1.2
@@ -50,6 +56,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: oygozr
     name: Farine de riz
     originalQuantity: 0.3
@@ -59,6 +67,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: o627mw
     name: Farine de pois chiche
     originalQuantity: 0.6
@@ -68,6 +78,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: c70jxb
     name: huile de tournesol
     originalQuantity: 0.2
@@ -77,6 +89,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: ekw33n
     name: Eau gazeuse
     originalQuantity: 0.8
@@ -86,6 +100,8 @@ ingredients:
     comment: ''
     allergens: []
     type: autres
+    pF: false
+    pS: false
 preparation: |-
   \- meilleur quand préparé un peu en avance (2/3h repos de la pâte) -
 
@@ -98,8 +114,11 @@ preparation: |-
   Faire chauffer une large quantité d'huile dans une grande poele
 
   Couler des grosses cuillers de pâte pour obtenir des beignets.
-publishDate: 2024-06-19T00:34:00.000Z
+publishDate: '2024-06-19T00:34:00+00:00'
 serveHot: true
 uuid: owxvq25uy3j3
-slug: pataniscas-de-legumes-_owxvq25uy3j3
+id: pataniscas-de-legumes-_owxvq25uy3j3
+createdAt: '2024-06-19T00:34:00+00:00'
+updatedAt: '2024-06-19T00:34:00+00:00'
+createdBy: ''
 ---

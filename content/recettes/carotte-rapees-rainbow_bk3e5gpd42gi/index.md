@@ -21,13 +21,18 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
 preparation: Pour l'assiette composée arc en ciel
 preparation24h: ''
-publishDate: 2025-06-19T19:04:00.000Z
+publishDate: '2025-06-19T19:04:00+00:00'
 checkAlwaysOk: false
 regime:
   - vegan
 serveHot: false
 uuid: bk3e5gpd42gi
-slug: carotte-rapees-rainbow_bk3e5gpd42gi
+id: carotte-rapees-rainbow_bk3e5gpd42gi
+createdAt: '2025-06-19T19:04:00+00:00'
+updatedAt: '2025-06-19T19:04:00+00:00'
+createdBy: ''
 ---

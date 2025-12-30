@@ -24,6 +24,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
   - uuid: ruhtax
     name: Agar-agar
     originalQuantity: 56
@@ -33,6 +35,8 @@ ingredients:
     comment: ''
     allergens: []
     type: autres
+    pF: false
+    pS: false
   - uuid: lny16c
     name: sucre blanc
     originalQuantity: 1.5
@@ -42,6 +46,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
   - uuid: xm77fg
     name: Purée chataîgne sans sucre
     originalQuantity: 4
@@ -51,6 +57,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: false
+    pS: false
   - uuid: csxbg6
     name: lait d’amande
     originalQuantity: 5
@@ -60,6 +68,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: chfwwq
     name: Crème soja
     originalQuantity: 5
@@ -70,6 +80,8 @@ ingredients:
     allergens:
       - Soja
     type: lof
+    pF: false
+    pS: false
 materiel: []
 preparation: |-
   - Faire bouillir le lait d'amande, la crème soja et le sucre
@@ -82,8 +94,11 @@ preparation: |-
 preparation24h: ''
 astuces: []
 prepAlt: []
-publishDate: 2025-10-16T18:01:00.000Z
+publishDate: '2025-10-16T18:01:00+00:00'
 serveHot: false
 uuid: 3k20oigwibrm
-slug: panna-cotta-vegan-a-la_3k20oigwibrm
+id: panna-cotta-vegan-a-la_3k20oigwibrm
+createdAt: '2025-10-16T18:01:00+00:00'
+updatedAt: '2025-10-16T18:01:00+00:00'
+createdBy: Alio
 ---

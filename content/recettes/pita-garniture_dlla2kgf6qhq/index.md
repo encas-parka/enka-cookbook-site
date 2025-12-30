@@ -20,6 +20,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: cg3wgm
     name: Salade verte (chêne)
     originalQuantity: 30
@@ -29,6 +31,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: u2m28w
     name: Ail
     originalQuantity: 5
@@ -38,6 +42,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: rtavky
     name: Oignon
     originalQuantity: 3
@@ -47,6 +53,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: ibtbnq
     name: Tomate
     originalQuantity: 6
@@ -56,6 +64,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: b2dxf8
     name: Fromage blanc
     originalQuantity: 10
@@ -66,6 +76,8 @@ ingredients:
     allergens:
       - Produit laitier
     type: frais
+    pF: true
+    pS: false
   - uuid: 2pps90
     name: Poivre
     originalQuantity: 60
@@ -75,6 +87,8 @@ ingredients:
     comment: sauce
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: 2juq3x
     name: Sel
     originalQuantity: 60
@@ -84,6 +98,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: 2juq3x
     name: Sel
     originalQuantity: 60
@@ -93,6 +109,8 @@ ingredients:
     comment: sauce
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: mt22ff
     name: Ciboulette
     originalQuantity: 6
@@ -102,6 +120,8 @@ ingredients:
     comment: sauce
     allergens: []
     type: epices
+    pF: true
+    pS: false
   - uuid: s8j4ff
     name: Basilic
     originalQuantity: 2
@@ -111,6 +131,8 @@ ingredients:
     comment: sauce
     allergens: []
     type: epices
+    pF: true
+    pS: false
   - uuid: hgfa4e
     name: Persil frais
     originalQuantity: 2
@@ -120,6 +142,8 @@ ingredients:
     comment: sauce
     allergens: []
     type: epices
+    pF: true
+    pS: false
   - uuid: u33083
     name: Tahin
     originalQuantity: 1
@@ -130,6 +154,8 @@ ingredients:
     allergens:
       - Sésame
     type: autres
+    pF: false
+    pS: false
   - uuid: h3c8al
     name: huile d'olive
     originalQuantity: 1
@@ -139,6 +165,8 @@ ingredients:
     comment: sauce
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: e4mjd1
     name: Jus de citron
     originalQuantity: 2
@@ -148,9 +176,14 @@ ingredients:
     comment: sauce
     allergens: []
     type: sucres
+    pF: false
+    pS: false
 preparation: ...
-publishDate: 2025-06-27T12:45:00.000Z
+publishDate: '2025-06-27T12:45:00+00:00'
 serveHot: false
 uuid: dlla2kgf6qhq
-slug: pita-garniture_dlla2kgf6qhq
+id: pita-garniture_dlla2kgf6qhq
+createdAt: '2025-06-27T12:45:00+00:00'
+updatedAt: '2025-06-27T12:45:00+00:00'
+createdBy: ''
 ---

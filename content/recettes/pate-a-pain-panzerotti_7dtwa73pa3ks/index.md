@@ -22,6 +22,8 @@ ingredients:
     allergens:
       - Gluten
     type: lof
+    pF: false
+    pS: false
   - uuid: 7qqcwc
     name: Levure fraîche de boulanger
     originalQuantity: 15
@@ -31,9 +33,14 @@ ingredients:
     comment: ''
     allergens: []
     type: frais
+    pF: true
+    pS: false
 preparation: c'est arnaud qui le fait
-publishDate: 2025-06-17T18:50:00.000Z
+publishDate: '2025-06-17T18:50:00+00:00'
 serveHot: true
 uuid: 7dtwa73pa3ks
-slug: pate-a-pain-panzerotti_7dtwa73pa3ks
+id: pate-a-pain-panzerotti_7dtwa73pa3ks
+createdAt: '2025-06-17T18:50:00+00:00'
+updatedAt: '2025-06-17T18:50:00+00:00'
+createdBy: ''
 ---

@@ -1,6 +1,6 @@
 
 {
-  "slug": "yahourt-de-brebis-a-la_pnx39d6vejqb",
+  "id": "yahourt-de-brebis-a-la_pnx39d6vejqb",
   "title": "Yahourt De Brebis À La Crème De Chataigne Et Son Alternative Vegan",
   "draft": false,
   "typeR": "dessert",
@@ -16,11 +16,14 @@
   "quantite_desc": null,
   "check": true,
   "materiel": null,
-  "ingredients": [{"allergens":["Produit laitier"],"comment":"","name":"yaourt de brebis","normalizedQuantity":11000,"normalizedUnit":"gr.","originalQuantity":11,"originalUnit":"kg","type":"frais","uuid":"cq437o"},{"allergens":["Soja"],"comment":"","name":"Yaourt de soja","normalizedQuantity":1200,"normalizedUnit":"gr.","originalQuantity":1.2,"originalUnit":"kg","type":"frais","uuid":"hlbwfd"},{"allergens":[],"comment":"","name":"sucre de canne (blond)","normalizedQuantity":1500,"normalizedUnit":"gr.","originalQuantity":1.5,"originalUnit":"kg","type":"sucres","uuid":"n85gmi"},{"allergens":[],"comment":"","name":"Crème de marron","normalizedQuantity":3000,"normalizedUnit":"gr.","originalQuantity":3,"originalUnit":"kg","type":"sucres","uuid":"dau8y8"}],
+  "ingredients": [{"allergens":["Produit laitier"],"comment":"","name":"yaourt de brebis","normalizedQuantity":11000,"normalizedUnit":"gr.","originalQuantity":11,"originalUnit":"kg","pF":true,"pS":false,"type":"frais","uuid":"cq437o"},{"allergens":["Soja"],"comment":"","name":"Yaourt de soja","normalizedQuantity":1200,"normalizedUnit":"gr.","originalQuantity":1.2,"originalUnit":"kg","pF":true,"pS":false,"type":"frais","uuid":"hlbwfd"},{"allergens":[],"comment":"","name":"sucre de canne (blond)","normalizedQuantity":1500,"normalizedUnit":"gr.","originalQuantity":1.5,"originalUnit":"kg","pF":false,"pS":false,"type":"sucres","uuid":"n85gmi"},{"allergens":[],"comment":"","name":"Crème de marron","normalizedQuantity":3000,"normalizedUnit":"gr.","originalQuantity":3,"originalUnit":"kg","pF":false,"pS":false,"type":"sucres","uuid":"dau8y8"}],
   "preparation": "répartir les yaourts, (séparément), dans les ramequins ( il faut une 30aine de vegan)avec une dose de 125gr par personne ( c'est la contenance d'un yaourt).\n\nmélanger la crème de châtaigne non sucrée avec le sucre\n\nmettre une cuillère à soupe de châtaigne sur le yaourt",
   "preparation24h": null,
   "astuces": null,
   "prepAlt": null,
   "permissionWrite": [],
-  "publishedAt": "2025-01-01T00:00:00Z"
+  "publishedAt": "2025-01-01T00:00:00Z",
+  "createdAt": "2025-06-15T13:19:00+00:00",
+  "updatedAt": "2025-06-15T13:19:00+00:00",
+  "createdBy": ""
 }

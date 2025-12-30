@@ -20,6 +20,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: csxbg6
     name: lait d’amande
     originalQuantity: 4
@@ -29,6 +31,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: h6thsp
     name: Speculoos
     originalQuantity: 1
@@ -40,6 +44,8 @@ ingredients:
       - Gluten
       - Soja
     type: sucres
+    pF: false
+    pS: false
   - uuid: n818be
     name: vanille extrait concentré
     originalQuantity: 40
@@ -49,6 +55,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
   - uuid: n85gmi
     name: sucre de canne (blond)
     originalQuantity: 900
@@ -58,6 +66,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
   - uuid: ruhtax
     name: Agar-agar
     originalQuantity: 16
@@ -67,6 +77,8 @@ ingredients:
     comment: ''
     allergens: []
     type: autres
+    pF: false
+    pS: false
 preparation: |-
 
   Épluchez et coupez la rhubarbe en petits tronçons et mettez-la dans
@@ -97,8 +109,11 @@ preparation: |-
 
 
   Une fois les panne cotte prêtes, répartir la compotée de rhubarbe.
-publishDate: 2025-06-13T14:40:00.000Z
+publishDate: '2025-06-13T14:40:00+00:00'
 serveHot: false
 uuid: pswmqzyh32eo
-slug: panacotta-rhubarbe-spe_pswmqzyh32eo
+id: panacotta-rhubarbe-spe_pswmqzyh32eo
+createdAt: '2025-06-13T14:40:00+00:00'
+updatedAt: '2025-06-13T14:40:00+00:00'
+createdBy: ''
 ---

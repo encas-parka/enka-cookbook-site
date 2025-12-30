@@ -15,6 +15,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: true
+    pS: false
   - uuid: u2m28w
     name: Ail
     originalQuantity: 36
@@ -24,6 +26,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: 9zozfk
     name: Courgette
     originalQuantity: 20
@@ -33,6 +37,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: h3c8al
     name: huile d'olive
     originalQuantity: 1
@@ -42,6 +48,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: e4mjd1
     name: Jus de citron
     originalQuantity: 600
@@ -51,6 +59,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
 plate: 100
 preparation: |-
   1. Couper les courgettes en cubes, râper l'ail, effeuiller et ciseler les bouquets de menthe.
@@ -69,5 +79,8 @@ title: Salade de courgettes à la menthe
 typeR: entree
 serveHot: false
 uuid: yx5v76raggif
-slug: salade-de-courgettes-a_yx5v76raggif
+id: salade-de-courgettes-a_yx5v76raggif
+createdAt: '2024-05-30T11:18:00.000Z'
+updatedAt: '2024-05-30T11:18:00.000Z'
+createdBy: ''
 ---

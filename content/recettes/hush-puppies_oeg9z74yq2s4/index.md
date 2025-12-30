@@ -21,6 +21,8 @@ ingredients:
     comment: finement haché
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: dx4nss
     name: Maïs en conserve égoutté
     originalQuantity: 2
@@ -30,6 +32,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: false
+    pS: false
   - uuid: rtavky
     name: Oignon
     originalQuantity: 2
@@ -39,6 +43,8 @@ ingredients:
     comment: finement haché
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: 1ej217
     name: huile de friture
     originalQuantity: 15
@@ -48,6 +54,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: vw9d1a
     name: Lait végétal (au choix)
     originalQuantity: 2.5
@@ -57,6 +65,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: vgec6e
     name: Levure chimique
     originalQuantity: 55
@@ -67,6 +77,8 @@ ingredients:
     allergens:
       - Gluten
     type: lof
+    pF: false
+    pS: false
   - uuid: 2av6w8
     name: Farine de blé
     originalQuantity: 900
@@ -77,6 +89,8 @@ ingredients:
     allergens:
       - Gluten
     type: lof
+    pF: false
+    pS: false
   - uuid: z8uiyd
     name: Farine de maïs
     originalQuantity: 3.6
@@ -86,6 +100,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: 7qo3ht
     name: Vinaigre de cidre
     originalQuantity: 225
@@ -96,6 +112,8 @@ ingredients:
     allergens:
       - Alcool
     type: epices
+    pF: false
+    pS: false
   - uuid: 2pps90
     name: Poivre
     originalQuantity: 20
@@ -105,6 +123,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: bidsmu
     name: Paprika
     originalQuantity: 50
@@ -114,6 +134,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: 2juq3x
     name: Sel
     originalQuantity: 30
@@ -123,6 +145,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
 preparation: |-
   Mélanger le lait non laitier et le vinaigre de cidre de pomme. Remuer et laisser reposer quelques minutes pour faire cailler le tout, créant ainsi un « babeurre » végétalien.
 
@@ -134,11 +158,14 @@ preparation: |-
 
   Faire frire les boulettes. Si elle est trop liquide, y allait à la cuillère à soupe. Vérifier que l'huile est prête en laissant tomber une petite quantité de pâte dans l'huile ; si elle grésille et flotte à la surface, l'huile est prête.
 preparation24h: ''
-publishDate: 2025-06-01T20:39:00.000Z
+publishDate: '2025-06-01T20:39:00+00:00'
 checkAlwaysOk: false
 regime:
   - vegan
 serveHot: true
 uuid: oeg9z74yq2s4
-slug: hush-puppies_oeg9z74yq2s4
+id: hush-puppies_oeg9z74yq2s4
+createdAt: '2025-06-01T20:39:00+00:00'
+updatedAt: '2025-06-01T20:39:00+00:00'
+createdBy: Auré
 ---

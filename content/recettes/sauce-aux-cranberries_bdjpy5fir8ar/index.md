@@ -17,6 +17,8 @@ ingredients:
       - Sulfites
       - Alcool
     type: epices
+    pF: false
+    pS: false
   - uuid: 8j3hna
     name: Margarine végétale spécial cuisson
     originalQuantity: 600
@@ -26,6 +28,8 @@ ingredients:
     comment: ''
     allergens: []
     type: frais
+    pF: true
+    pS: false
   - uuid: uja9ip
     name: Canneberge
     originalQuantity: 500
@@ -35,6 +39,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: vwdomu
     name: Echalote
     originalQuantity: 500
@@ -44,6 +50,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: 8nbcjp
     name: Fécule de maïs (Maïzena)
     originalQuantity: 5
@@ -53,6 +61,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: h3c8al
     name: huile d'olive
     originalQuantity: 5
@@ -62,6 +72,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: zkmmgt
     name: 'Sirop d''érable '
     originalQuantity: 300
@@ -71,6 +83,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
 plate: 100
 preparation: |-
   1. Émincer finement les échalotes.
@@ -88,5 +102,8 @@ title: Sauce aux cranberries
 typeR: plat
 serveHot: true
 uuid: bdjpy5fir8ar
-slug: sauce-aux-cranberries_bdjpy5fir8ar
+id: sauce-aux-cranberries_bdjpy5fir8ar
+createdAt: '2024-05-30T10:26:00.000Z'
+updatedAt: '2024-05-30T10:26:00.000Z'
+createdBy: ''
 ---

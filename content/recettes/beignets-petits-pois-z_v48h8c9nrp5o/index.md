@@ -21,6 +21,8 @@ ingredients:
     comment: Zeste pour la sauce, tranche pour la déco
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: m6gmgq
     name: Citron confit
     originalQuantity: 3.4
@@ -30,6 +32,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: false
+    pS: false
   - uuid: 8y3ngp
     name: Petits pois surgelés
     originalQuantity: 3.4
@@ -39,6 +43,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: false
+    pS: false
   - uuid: 4totf1
     name: Epinard
     originalQuantity: 1.7
@@ -48,6 +54,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: izd01q
     name: Crème fraîche épaisse entière
     originalQuantity: 3.4
@@ -58,6 +66,8 @@ ingredients:
     allergens:
       - Produit laitier
     type: frais
+    pF: true
+    pS: false
   - uuid: q6t705
     name: Ricotta
     originalQuantity: 1.19
@@ -68,6 +78,8 @@ ingredients:
     allergens:
       - Produit laitier
     type: frais
+    pF: true
+    pS: false
   - uuid: o627mw
     name: Farine de pois chiche
     originalQuantity: 260
@@ -77,6 +89,8 @@ ingredients:
     comment: pour la version vegan
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: chfwwq
     name: Crème soja
     originalQuantity: 850
@@ -87,6 +101,8 @@ ingredients:
     allergens:
       - Soja
     type: lof
+    pF: false
+    pS: false
   - uuid: 8nbcjp
     name: Fécule de maïs (Maïzena)
     originalQuantity: 680
@@ -96,6 +112,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: zf3zf8
     name: Oeuf
     originalQuantity: 41
@@ -106,6 +124,8 @@ ingredients:
     allergens:
       - Oeuf
     type: lof
+    pF: false
+    pS: false
   - uuid: l3esgp
     name: Cumin (graines)
     originalQuantity: 85
@@ -115,6 +135,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: 6izdfu
     name: Sumac
     originalQuantity: 51
@@ -124,6 +146,8 @@ ingredients:
     comment: à convenance, pour la sauce
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: hgfa4e
     name: Persil frais
     originalQuantity: 3.4
@@ -133,6 +157,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: true
+    pS: false
   - uuid: t3szad
     name: Anis vert en poudre
     originalQuantity: 17
@@ -142,6 +168,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: 2n9g9t
     name: Cardamone en poudre
     originalQuantity: 25.5
@@ -151,6 +179,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: hgfa4e
     name: Persil frais
     originalQuantity: 3.4
@@ -160,6 +190,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: true
+    pS: false
   - uuid: 5k7zz4
     name: Piment en flocons
     originalQuantity: 25.5
@@ -169,6 +201,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: 2j9y2v
     name: Menthe
     originalQuantity: 3.4
@@ -178,6 +212,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: true
+    pS: false
   - uuid: htp5ma
     name: Curcuma moulu
     originalQuantity: 17
@@ -187,6 +223,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: bidsmu
     name: Paprika
     originalQuantity: 17
@@ -196,6 +234,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: crkg3d
     name: graine de coriandre
     originalQuantity: 170
@@ -205,6 +245,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: wxocup
     name: Zaatar (zathar)
     originalQuantity: 680
@@ -215,6 +257,8 @@ ingredients:
     allergens:
       - Sésame
     type: epices
+    pF: false
+    pS: false
 materiel:
   - Four
 preparation: |-
@@ -240,12 +284,15 @@ preparation: |-
 
   * Au moment du service mettre 4-5min les beignets au four.
   * Au service rajouter sauce et une rondelle de citrons
-publishDate: 2024-05-23T14:10:00.000Z
+publishDate: '2024-05-23T14:10:00+00:00'
 checkAlwaysOk: false
 regime:
   - vegetarien
   - sans-gluten
 serveHot: true
 uuid: v48h8c9nrp5o
-slug: beignets-petits-pois-z_v48h8c9nrp5o
+id: beignets-petits-pois-z_v48h8c9nrp5o
+createdAt: '2024-05-23T14:10:00+00:00'
+updatedAt: '2024-05-23T14:10:00+00:00'
+createdBy: Ottolenghi
 ---

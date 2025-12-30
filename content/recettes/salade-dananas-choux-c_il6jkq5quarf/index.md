@@ -21,6 +21,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: 7aceyw
     name: Ananas
     originalQuantity: 10
@@ -30,6 +32,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: hz46f4
     name: Chou chinois
     originalQuantity: 10
@@ -39,6 +43,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: fetrpe
     name: Coriandre fraîche
     originalQuantity: 10
@@ -48,6 +54,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: true
+    pS: false
   - uuid: t5cuz3
     name: Sweet Chili Sauce
     originalQuantity: 4
@@ -57,6 +65,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: h3c8al
     name: huile d'olive
     originalQuantity: 1
@@ -66,6 +76,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
 preparation: |-
   Eplucher l'ananas, enlever le coeur et couper en morceaux cubes 3cm. Réserver
 
@@ -73,8 +85,11 @@ preparation: |-
   Enlever les premières feuilles des choux chinois et les couper en 4 dans le sens de la longueur. Emincer ensuite en fines lamelles dans le sens de la largeur. Réserver.
 
   Hacher la coriandre finement. Mélanger les ingrédients au dernier moment en y ajoutant la sauce Sweet chili
-publishDate: 2025-06-04T16:01:00.000Z
+publishDate: '2025-06-04T16:01:00+00:00'
 serveHot: false
 uuid: il6jkq5quarf
-slug: salade-dananas-choux-c_il6jkq5quarf
+id: salade-dananas-choux-c_il6jkq5quarf
+createdAt: '2025-06-04T16:01:00+00:00'
+updatedAt: '2025-06-04T16:01:00+00:00'
+createdBy: frédo
 ---

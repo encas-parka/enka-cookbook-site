@@ -16,6 +16,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: 2juq3x
     name: Sel
     originalQuantity: 10
@@ -25,6 +27,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: 2j9y2v
     name: Menthe
     originalQuantity: 30
@@ -34,6 +38,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: true
+    pS: false
   - uuid: hgfa4e
     name: Persil frais
     originalQuantity: 60
@@ -43,6 +49,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: true
+    pS: false
   - uuid: rtavky
     name: Oignon
     originalQuantity: 3
@@ -52,6 +60,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: ibtbnq
     name: Tomate
     originalQuantity: 8
@@ -61,6 +71,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: h3c8al
     name: huile d'olive
     originalQuantity: 1.5
@@ -70,6 +82,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: omf24t
     name: Boulgour
     originalQuantity: 1
@@ -79,6 +93,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sec
+    pF: false
+    pS: false
   - uuid: e4mjd1
     name: Jus de citron
     originalQuantity: 1
@@ -88,6 +104,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
 plate: 180
 prepAlt:
   - recetteAlt: taboulais-libanais-des-tarnais-sans-gluten_cp6n89pn
@@ -115,7 +133,7 @@ preparation: |-
   * Ajoutez les tomates, l'oignon la menthe et le persil.
   * **NE PAS MELANGER et laisser au réfrigérateur au moins une heure.**
   * Avant de servir, versez l'huile d'olive, salez, poivrez et mélangez.
-publishDate: 2024-05-18T16:14:00.000Z
+publishDate: '2024-05-18T16:14:00+00:00'
 regime:
   - vegetarien
   - vegan
@@ -126,5 +144,8 @@ title: Taboulais libanais des tarnais
 typeR: entree
 serveHot: false
 uuid: s5snphqzt474
-slug: taboulais-libanais-des_s5snphqzt474
+id: taboulais-libanais-des_s5snphqzt474
+createdAt: '2024-05-18T16:14:00+00:00'
+updatedAt: '2024-05-18T16:14:00+00:00'
+createdBy: ''
 ---

@@ -1,6 +1,6 @@
 
 {
-  "slug": "corn-dog-vegan-et-sans_o3qim4uu1wwb",
+  "id": "corn-dog-vegan-et-sans_o3qim4uu1wwb",
   "title": "Corn Dog Vegan Et Sans Gluten",
   "draft": false,
   "typeR": "plat",
@@ -22,5 +22,8 @@
   "astuces": [{"astuce":"Pour une option végétarienne au fromage. Enrouler la saucisse d'une tranche de toastinette avant de tremper le tout dans la pâte à beignet."}],
   "prepAlt": [],
   "permissionWrite": [],
-  "publishedAt": "2025-01-01T00:00:00Z"
+  "publishedAt": "2025-01-01T00:00:00Z",
+  "createdAt": "2024-03-31T15:50:00.000Z",
+  "updatedAt": "2024-03-31T15:50:00.000Z",
+  "createdBy": "Les bretonnes"
 }

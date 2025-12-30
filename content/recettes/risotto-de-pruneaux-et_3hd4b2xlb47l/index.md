@@ -17,6 +17,8 @@ ingredients:
     comment: ''
     allergens: []
     type: autres
+    pF: false
+    pS: false
   - uuid: tmk6ya
     name: Bouillon de légume (sans gluten)
     originalQuantity: 15
@@ -26,6 +28,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: pr1fiu
     name: Parmesan
     originalQuantity: 800
@@ -36,6 +40,8 @@ ingredients:
     allergens:
       - Produit laitier
     type: frais
+    pF: true
+    pS: false
   - uuid: kmq1zb
     name: Beurre doux
     originalQuantity: 800
@@ -46,6 +52,8 @@ ingredients:
     allergens:
       - Produit laitier
     type: frais
+    pF: true
+    pS: false
   - uuid: u2m28w
     name: Ail
     originalQuantity: 5
@@ -55,6 +63,8 @@ ingredients:
     comment: têtes
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: rtavky
     name: Oignon
     originalQuantity: 7
@@ -64,6 +74,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: kndzid
     name: Pruneau
     originalQuantity: 2.5
@@ -73,6 +85,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: v9qhs9
     name: Champignons
     originalQuantity: 5
@@ -82,6 +96,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: h3c8al
     name: huile d'olive
     originalQuantity: 250
@@ -91,6 +107,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: 8f86ou
     name: Riz pour risotto
     originalQuantity: 5
@@ -100,6 +118,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sec
+    pF: false
+    pS: false
   - uuid: tkuufn
     name: Jus de raisin
     originalQuantity: 1
@@ -109,6 +129,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
 plate: 100
 prepAlt:
   - recetteAlt: risotto-pruneaux-et-champignons-vegan_me07vdl3
@@ -124,7 +146,7 @@ preparation: |-
   Ajouter les champignons, quand ils sont tendres ajouter le bouillon au fur et à mesure de son absorption jusqu'à ce que le riz soit tendre.
 
   Hors du feu, saler, poivrer incorporer le reste beurre en morceaux, le parmesan râpé et les morceaux de pruneaux. Mélanger, couvrir et laisser reposer.
-publishDate: 2024-05-27T19:55:00.000Z
+publishDate: '2024-05-27T19:55:00+00:00'
 quantite_desc: Portion personne environ 300gr
 regime:
   - vegetarien
@@ -133,5 +155,8 @@ title: Risotto de pruneaux et champignons
 typeR: plat
 serveHot: true
 uuid: 3hd4b2xlb47l
-slug: risotto-de-pruneaux-et_3hd4b2xlb47l
+id: risotto-de-pruneaux-et_3hd4b2xlb47l
+createdAt: '2024-05-27T19:55:00+00:00'
+updatedAt: '2024-05-27T19:55:00+00:00'
+createdBy: Auré
 ---

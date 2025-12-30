@@ -17,6 +17,8 @@ ingredients:
     comment: ''
     allergens: []
     type: autres
+    pF: false
+    pS: false
   - uuid: mt22ff
     name: Ciboulette
     originalQuantity: 4
@@ -26,6 +28,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: true
+    pS: false
   - uuid: u2m28w
     name: Ail
     originalQuantity: 2
@@ -35,6 +39,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: eu7lc6
     name: huile de colza
     originalQuantity: 1
@@ -44,6 +50,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: e4mjd1
     name: Jus de citron
     originalQuantity: 0.15
@@ -53,6 +61,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
 plate: 50
 preparation: |-
 
@@ -70,7 +80,7 @@ preparation24h: |-
   Faire tremper les graines de tournesol dans de l'eau tiède pendant 12 heures. Puis égoutter, rincer, et placer dans le bol d'un blender ou dans un récipient pour utiliser le mixeur plongeant.
 
   Possible 2 J avant
-publishDate: 2024-03-26T18:42:55.847Z
+publishDate: '2024-03-26T18:42:55.847000+00:00'
 regime:
   - vegan
   - sans-gluten
@@ -79,5 +89,8 @@ title: Fromage frais ail - ciboulette vegan
 typeR: entree
 serveHot: false
 uuid: wnpqhq07loq7
-slug: fromage-frais-ail-cibo_wnpqhq07loq7
+id: fromage-frais-ail-cibo_wnpqhq07loq7
+createdAt: '2024-03-26T18:42:55.847000+00:00'
+updatedAt: '2024-03-26T18:42:55.847000+00:00'
+createdBy: 'ça vaut le détour '
 ---

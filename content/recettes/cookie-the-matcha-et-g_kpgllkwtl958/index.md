@@ -23,6 +23,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: zq1y8c
     name: Fécule de tapioca
     originalQuantity: 100
@@ -32,6 +34,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: 6bm4lq
     name: huile de coco
     originalQuantity: 150
@@ -41,6 +45,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: km927d
     name: Graines de lin
     originalQuantity: 30
@@ -50,6 +56,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: oskdzx
     name: Gingembre confit
     originalQuantity: 200
@@ -59,6 +67,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
   - uuid: rmgr7l
     name: Poudre d'amandes
     originalQuantity: 220
@@ -69,6 +79,8 @@ ingredients:
     allergens:
       - Fruit à coque
     type: sucres
+    pF: false
+    pS: false
   - uuid: znjs35
     name: Sucre brun Vergeoise
     originalQuantity: 80
@@ -78,6 +90,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
   - uuid: 2juq3x
     name: Sel
     originalQuantity: 1
@@ -87,6 +101,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: ljzb7j
     name: Eau
     originalQuantity: 2
@@ -96,6 +112,8 @@ ingredients:
     comment: ''
     allergens: []
     type: autres
+    pF: false
+    pS: false
   - uuid: giui8l
     name: Thé Matcha
     originalQuantity: 3
@@ -105,6 +123,8 @@ ingredients:
     comment: ''
     allergens: []
     type: autres
+    pF: false
+    pS: false
 preparation: |-
   Préparer l’œuf végan en mélangeant les graines de lin moulues avec l’eau. Laisser reposer quelques minutes.
 
@@ -117,8 +137,11 @@ preparation: |-
   Préchauffer le four à 180°C et foncer une plaque allant au four de papier sulfurisé. Réserver.
 
   Enfourner les cookies pour 12-13 minutes. Retirer du four et laisser refroidir sur la plaque pendant quelques minutes avant de transférer sur une grille pour les laisser refroidir complètement.
-publishDate: 2024-05-24T00:12:00.000Z
+publishDate: '2024-05-24T00:12:00+00:00'
 serveHot: false
 uuid: kpgllkwtl958
-slug: cookie-the-matcha-et-g_kpgllkwtl958
+id: cookie-the-matcha-et-g_kpgllkwtl958
+createdAt: '2024-05-24T00:12:00+00:00'
+updatedAt: '2024-05-24T00:12:00+00:00'
+createdBy: Auré
 ---

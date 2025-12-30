@@ -22,6 +22,8 @@ ingredients:
     allergens:
       - Fruit à coque
     type: sec
+    pF: false
+    pS: false
   - uuid: 02w66c
     name: Flocons d'avoine sans gluten
     originalQuantity: 135
@@ -31,6 +33,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sec
+    pF: false
+    pS: false
   - uuid: kp0srn
     name: corn flakes
     originalQuantity: 80
@@ -40,6 +44,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sec
+    pF: false
+    pS: false
   - uuid: 9yf54l
     name: Raisin sec
     originalQuantity: 50
@@ -49,6 +55,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: false
+    pS: false
   - uuid: 861x4y
     name: Farine d'épeautre
     originalQuantity: 80
@@ -59,6 +67,8 @@ ingredients:
     allergens:
       - Gluten
     type: lof
+    pF: false
+    pS: false
   - uuid: c70jxb
     name: huile de tournesol
     originalQuantity: 100
@@ -68,6 +78,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: 1e3zhq
     name: Chocolat noir patissier 70p100
     originalQuantity: 100
@@ -77,6 +89,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
   - uuid: zkmmgt
     name: 'Sirop d''érable '
     originalQuantity: 200
@@ -86,6 +100,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
   - uuid: dgwl19
     name: Sucre vanillé
     originalQuantity: 100
@@ -95,6 +111,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
   - uuid: 2juq3x
     name: Sel
     originalQuantity: 1
@@ -104,6 +122,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: ks3ocl
     name: Beurre de cacahuètes (salé)
     originalQuantity: 100
@@ -114,6 +134,8 @@ ingredients:
     allergens:
       - Arachides
     type: autres
+    pF: false
+    pS: false
 preparation: |-
   Préchauffer le four à 180C
 
@@ -126,9 +148,12 @@ preparation: |-
   Mettre au four 40min.
 
   Servir froid.
-publishDate: 2025-08-08T08:51:00.000Z
+publishDate: '2025-08-08T08:51:00+00:00'
 uuid: cu5wc60t605t
-titleslug: barre-cereales-noisettes_42230653
+titleid: barre-cereales-noisettes_42230653
 serveHot: false
-slug: barre-cereales-noisett_cu5wc60t605t
+id: barre-cereales-noisett_cu5wc60t605t
+createdAt: '2025-08-08T08:51:00+00:00'
+updatedAt: '2025-08-08T08:51:00+00:00'
+createdBy: ''
 ---

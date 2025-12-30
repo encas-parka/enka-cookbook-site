@@ -25,6 +25,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: rtavky
     name: Oignon
     originalQuantity: 5
@@ -34,6 +36,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: 0zglpj
     name: Poivron (rouge)
     originalQuantity: 20
@@ -43,6 +47,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: h3c8al
     name: huile d'olive
     originalQuantity: 1
@@ -52,6 +58,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: lny16c
     name: sucre blanc
     originalQuantity: 1
@@ -61,6 +69,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
   - uuid: bdx3gq
     name: Piment d'espelette
     originalQuantity: 25
@@ -70,6 +80,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: m5dxyo
     name: Feta
     originalQuantity: 2
@@ -80,6 +92,8 @@ ingredients:
     allergens:
       - Produit laitier
     type: frais
+    pF: true
+    pS: false
   - uuid: h6bpv4
     name: Pâte feuilletée
     originalQuantity: 13
@@ -89,6 +103,8 @@ ingredients:
     comment: grand format
     allergens: []
     type: frais
+    pF: true
+    pS: false
 preparation: |-
   Laver les légumes. Retirer des poivrons les membranes
   blanches et les graines à l’intérieur. Les tailler en gros
@@ -107,8 +123,11 @@ preparation: |-
    de minutes jusqu’à l’obtention d’une pâte colorée et cuite.
 
   Sortir les tartes du four, démouler en les retournant dans leur plat de service et parsemer de feta émiettée.  Un délice.
-publishDate: 2025-04-25T13:22:00.000Z
+publishDate: '2025-04-25T13:22:00+00:00'
 serveHot: false
 uuid: clbhirwdbtf7
-slug: tarte-tatin-aux-poivro_clbhirwdbtf7
+id: tarte-tatin-aux-poivro_clbhirwdbtf7
+createdAt: '2025-04-25T13:22:00+00:00'
+updatedAt: '2025-04-25T13:22:00+00:00'
+createdBy: Auré
 ---

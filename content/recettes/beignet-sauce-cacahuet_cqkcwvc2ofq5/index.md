@@ -24,6 +24,8 @@ ingredients:
     allergens:
       - Arachides
     type: lof
+    pF: false
+    pS: false
   - uuid: 7wpsj2
     name: Beurre de cacahuètes (sucré)
     originalQuantity: 1.8
@@ -34,6 +36,8 @@ ingredients:
     allergens:
       - Arachides
     type: autres
+    pF: false
+    pS: false
   - uuid: x286pc
     name: Lait demi-écrémé
     originalQuantity: 3
@@ -44,6 +48,8 @@ ingredients:
     allergens:
       - Produit laitier
     type: lof
+    pF: false
+    pS: false
   - uuid: u9z2he
     name: Sucre en poudre
     originalQuantity: 490
@@ -53,6 +59,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
   - uuid: 2juq3x
     name: Sel
     originalQuantity: 9
@@ -62,6 +70,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: vgec6e
     name: Levure chimique
     originalQuantity: 53
@@ -72,6 +82,8 @@ ingredients:
     allergens:
       - Gluten
     type: lof
+    pF: false
+    pS: false
   - uuid: q936bv
     name: Levure boulangère
     originalQuantity: 53
@@ -81,6 +93,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: 2av6w8
     name: Farine de blé
     originalQuantity: 4
@@ -91,6 +105,8 @@ ingredients:
     allergens:
       - Gluten
     type: lof
+    pF: false
+    pS: false
   - uuid: 1ej217
     name: huile de friture
     originalQuantity: 4.5
@@ -100,13 +116,18 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
 materiel: []
 preparation: "> Faire une pâte à beignet:\n\nDiluer la levure boulangère dans l'eau tiède.\n\nDans un cul de poule, ajouter tous les ingrédients sec (farine, levures, sel, sucre)\n\nDélayer en ajoutant le lait progressivement puis mélanger vigoureusement.\n\nCouvrir bien la pâte, afin que l'air ne puisse pas passer. Laisser reposer la pâte pendant 1 à 2 heures maximum pour qu'elle gonfle.\n\nFaire ensuite chauffer l'huile de friture. Tester si l'huile est chaude en essayant d'abord de faire frire 1 beignet. Si le beignet remonte directement a la surface, c'est que l'huile est chaude.\_L’huile ne doit pas être trop chaude car elle doit cuire l’intérieur des beignets mais sans brûler l’extérieur !\n\nPrendre une petite quantité de pâte avec la main et la couper dans l'huile. Le beignet doit former une boule de la taille d'une balle de ping pong. Faire tourner le beignet dans la friture. Tremper les mains dans l'eau à chaque fois, pour un autre tour de friture.\n\n> Faire la sauce cacahuète:\n\nMixer le beurre de cacahuète sucré avec l'huile d'arachide. Rectifier l'assaisonement.\n\nServir dans un bol 3 à 4 beignets. Ajouter la sauce cacahuète dessus. Possibilité de saupoudrer du sucre glace dessus.\n\nDessert maxi gourmand et grosse quantité!"
 preparation24h: ''
 astuces: []
 prepAlt: []
-publishDate: 2025-10-19T20:10:00.000Z
+publishDate: '2025-10-19T20:10:00+00:00'
 serveHot: true
 uuid: cqkcwvc2ofq5
-slug: beignet-sauce-cacahuet_cqkcwvc2ofq5
+id: beignet-sauce-cacahuet_cqkcwvc2ofq5
+createdAt: '2025-10-19T20:10:00+00:00'
+updatedAt: '2025-10-19T20:10:00+00:00'
+createdBy: Alio
 ---

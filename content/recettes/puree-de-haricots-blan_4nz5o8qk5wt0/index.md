@@ -15,6 +15,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: a16yd7
     name: Thym
     originalQuantity: 1
@@ -24,6 +26,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: 6z655r
     name: Romarin
     originalQuantity: 5
@@ -33,6 +37,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: u2m28w
     name: Ail
     originalQuantity: 10
@@ -42,6 +48,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: h3c8al
     name: huile d'olive
     originalQuantity: 500
@@ -51,6 +59,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: znpoor
     name: Haricots blancs
     originalQuantity: 2
@@ -60,6 +70,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sec
+    pF: false
+    pS: false
 plate: 100
 preparation: |-
   1. La veille, faire tremper les haricots.
@@ -78,5 +90,8 @@ title: Purée de haricots blancs
 typeR: plat
 serveHot: false
 uuid: 4nz5o8qk5wt0
-slug: puree-de-haricots-blan_4nz5o8qk5wt0
+id: puree-de-haricots-blan_4nz5o8qk5wt0
+createdAt: '2024-05-30T11:12:00.000Z'
+updatedAt: '2024-05-30T11:12:00.000Z'
+createdBy: ''
 ---

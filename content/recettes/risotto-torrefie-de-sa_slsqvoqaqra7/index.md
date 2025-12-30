@@ -21,6 +21,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sec
+    pF: false
+    pS: false
   - uuid: eipcl2
     name: Margarine
     originalQuantity: 500
@@ -30,6 +32,8 @@ ingredients:
     comment: ''
     allergens: []
     type: frais
+    pF: true
+    pS: false
   - uuid: owsv5m
     name: échalote
     originalQuantity: 20
@@ -39,6 +43,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: rtavky
     name: Oignon
     originalQuantity: 20
@@ -48,6 +54,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: 92zzps
     name: Champignon de Paris
     originalQuantity: 10
@@ -57,6 +65,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: 57xo8g
     name: bouillon cube
     originalQuantity: 15
@@ -66,6 +76,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: hgfa4e
     name: Persil frais
     originalQuantity: 3
@@ -75,6 +87,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: true
+    pS: false
   - uuid: 4be4ic
     name: Levure de bière
     originalQuantity: 200
@@ -84,6 +98,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: judtle
     name: Vin Blanc
     originalQuantity: 1
@@ -95,6 +111,8 @@ ingredients:
       - Sulfites
       - Alcool
     type: epices
+    pF: false
+    pS: false
   - uuid: ljzb7j
     name: Eau
     originalQuantity: 15
@@ -104,6 +122,8 @@ ingredients:
     comment: ''
     allergens: []
     type: autres
+    pF: false
+    pS: false
   - uuid: rmgr7l
     name: Poudre d'amandes
     originalQuantity: 400
@@ -114,6 +134,8 @@ ingredients:
     allergens:
       - Fruit à coque
     type: sucres
+    pF: false
+    pS: false
   - uuid: n85gmi
     name: sucre de canne (blond)
     originalQuantity: 100
@@ -123,6 +145,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
 preparation: |-
   Faire bouillir 15 l. d'eau
 
@@ -182,8 +206,11 @@ preparation: |-
   suinté et être cuit.
   Placer les oignons sur une plaque, la face non découpée posée sur
   la plaque. Saupoudrer légèrement la face découpée de sucre.
-publishDate: 2025-06-13T14:31:00.000Z
+publishDate: '2025-06-13T14:31:00+00:00'
 serveHot: true
 uuid: slsqvoqaqra7
-slug: risotto-torrefie-de-sa_slsqvoqaqra7
+id: risotto-torrefie-de-sa_slsqvoqaqra7
+createdAt: '2025-06-13T14:31:00+00:00'
+updatedAt: '2025-06-13T14:31:00+00:00'
+createdBy: ''
 ---

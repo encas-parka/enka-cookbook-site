@@ -23,6 +23,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: 7v72le
     name: Pois cassés
     originalQuantity: 3
@@ -32,6 +34,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sec
+    pF: false
+    pS: false
   - uuid: 2juq3x
     name: Sel
     originalQuantity: 1
@@ -41,6 +45,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: dc8855
     name: Cumin
     originalQuantity: 1
@@ -50,6 +56,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: bidsmu
     name: Paprika
     originalQuantity: 1
@@ -59,6 +67,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: qemlqs
     name: Vinaigre balsamique
     originalQuantity: 0.25
@@ -69,6 +79,8 @@ ingredients:
     allergens:
       - Sulfites
     type: epices
+    pF: false
+    pS: false
   - uuid: u9z2he
     name: Sucre en poudre
     originalQuantity: 250
@@ -78,6 +90,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
 materiel:
   - Bruleur
   - Marmitte
@@ -90,8 +104,11 @@ preparation: |-
   * Une fois translucides saupoudrer de sucre et laisser caraméliser en remuant de temps en temps. Quand c'est bien chaud, déglacer avec le vinaigre.
   * Laisser bouillir et évaporer le liquide avant de remuer.
   * Mixer les pois cassés et y ajouter les oignons.
-publishDate: 2023-01-11T14:25:46.288Z
+publishDate: '2023-01-11T14:25:46.288000+00:00'
 serveHot: false
 uuid: l6b3d9jb9pbn
-slug: tartinade-pois-casse-o_l6b3d9jb9pbn
+id: tartinade-pois-casse-o_l6b3d9jb9pbn
+createdAt: '2023-01-11T14:25:46.288000+00:00'
+updatedAt: '2023-01-11T14:25:46.288000+00:00'
+createdBy: Sylvain
 ---

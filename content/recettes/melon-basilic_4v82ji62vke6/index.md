@@ -26,6 +26,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: s8j4ff
     name: Basilic
     originalQuantity: 1
@@ -35,9 +37,14 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: true
+    pS: false
 preparation: ':)'
-publishDate: 2025-07-31T08:31:00.000Z
+publishDate: '2025-07-31T08:31:00+00:00'
 serveHot: false
 uuid: 4v82ji62vke6
-slug: melon-basilic_4v82ji62vke6
+id: melon-basilic_4v82ji62vke6
+createdAt: '2025-07-31T08:31:00+00:00'
+updatedAt: '2025-07-31T08:31:00+00:00'
+createdBy: ''
 ---

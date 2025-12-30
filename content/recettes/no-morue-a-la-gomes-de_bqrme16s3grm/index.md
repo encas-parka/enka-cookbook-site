@@ -23,6 +23,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: d5zbfl
     name: fenugrec moulu
     originalQuantity: 1
@@ -32,6 +34,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: hgfa4e
     name: Persil frais
     originalQuantity: 0.8
@@ -41,6 +45,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: true
+    pS: false
   - uuid: rgt7s4
     name: Poivre noir moulu
     originalQuantity: 1
@@ -50,6 +56,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: 3ahcls
     name: Tofu ferme
     originalQuantity: 1
@@ -59,6 +67,8 @@ ingredients:
     comment: ''
     allergens: []
     type: frais
+    pF: false
+    pS: false
   - uuid: 18dy4e
     name: Pomme de terre
     originalQuantity: 2.5
@@ -68,6 +78,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: rtavky
     name: Oignon
     originalQuantity: 3
@@ -77,6 +89,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: u2m28w
     name: Ail
     originalQuantity: 0.6
@@ -86,6 +100,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: 9p3n36
     name: Olives noires à la grecque
     originalQuantity: 0.16
@@ -95,6 +111,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: false
+    pS: false
   - uuid: c70jxb
     name: huile de tournesol
     originalQuantity: 30
@@ -104,6 +122,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: h3c8al
     name: huile d'olive
     originalQuantity: 20
@@ -113,6 +133,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
 preparation: |-
   3h AVANT - Faire mariner le tofu dans l'huile d'olive, le sel et le fenouil
 
@@ -129,8 +151,11 @@ preparation: |-
   Acompagner de salade verte.
 prepAlt:
   - recetteAlt: morue-a-la-gomes-de-sa-bacalhau-a-gomes-de-sa_4txgw862
-publishDate: 2024-06-19T01:00:00.000Z
+publishDate: '2024-06-19T01:00:00+00:00'
 serveHot: true
 uuid: bqrme16s3grm
-slug: no-morue-a-la-gomes-de_bqrme16s3grm
+id: no-morue-a-la-gomes-de_bqrme16s3grm
+createdAt: '2024-06-19T01:00:00+00:00'
+updatedAt: '2024-06-19T01:00:00+00:00'
+createdBy: ''
 ---

@@ -23,6 +23,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: false
+    pS: false
   - uuid: xdkeh3
     name: Sauce tomate mutti
     originalQuantity: 800
@@ -32,6 +34,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: c70jxb
     name: huile de tournesol
     originalQuantity: 1
@@ -41,6 +45,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: h3c8al
     name: huile d'olive
     originalQuantity: 2
@@ -50,6 +56,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: 2juq3x
     name: Sel
     originalQuantity: 100
@@ -59,6 +67,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: yx78ae
     name: Semoule moyenne (blé)
     originalQuantity: 8
@@ -69,6 +79,8 @@ ingredients:
     allergens:
       - Gluten
     type: sec
+    pF: false
+    pS: false
   - uuid: 2juq3x
     name: Sel
     originalQuantity: 130
@@ -78,6 +90,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: u2m28w
     name: Ail
     originalQuantity: 1
@@ -87,6 +101,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: rtavky
     name: Oignon
     originalQuantity: 2.6
@@ -96,6 +112,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: f5fy8w
     name: Navet
     originalQuantity: 1.7
@@ -105,6 +123,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: 78fo97
     name: Céleri branche
     originalQuantity: 900
@@ -115,6 +135,8 @@ ingredients:
     allergens:
       - Céleri
     type: legumes
+    pF: true
+    pS: false
   - uuid: oa85mx
     name: Courge
     originalQuantity: 3.9
@@ -124,6 +146,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: eouu0v
     name: Carotte
     originalQuantity: 3.9
@@ -133,6 +157,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: 18dy4e
     name: Pomme de terre
     originalQuantity: 7.7
@@ -142,6 +168,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: 6a8w8k
     name: Pois chiches
     originalQuantity: 1.3
@@ -151,6 +179,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sec
+    pF: false
+    pS: false
 materiel: []
 preparation: |-
   >Faire chauffer l'huile avec les épices : cumin, gingembre, paprika, curcuma, coriandre, clou de girofle, muscade, poivre
@@ -175,8 +205,11 @@ preparation: |-
 preparation24h: Faire tremper les pois chiches
 astuces: []
 prepAlt: []
-publishDate: 2025-10-19T20:53:00.000Z
+publishDate: '2025-10-19T20:53:00+00:00'
 serveHot: true
 uuid: tntsav2ghe2f
-slug: couscous-dautomne-vege_tntsav2ghe2f
+id: couscous-dautomne-vege_tntsav2ghe2f
+createdAt: '2025-10-19T20:53:00+00:00'
+updatedAt: '2025-10-19T20:53:00+00:00'
+createdBy: Alio
 ---

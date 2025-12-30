@@ -21,6 +21,8 @@ ingredients:
     comment: galettes
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: 7jceco
     name: Curry
     originalQuantity: 75
@@ -30,6 +32,8 @@ ingredients:
     comment: galettes
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: he3u48
     name: Cumin moulu
     originalQuantity: 75
@@ -39,6 +43,8 @@ ingredients:
     comment: galettes
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: hgfa4e
     name: Persil frais
     originalQuantity: 7
@@ -48,6 +54,8 @@ ingredients:
     comment: galettes
     allergens: []
     type: epices
+    pF: true
+    pS: false
   - uuid: hgfa4e
     name: Persil frais
     originalQuantity: 8
@@ -57,6 +65,8 @@ ingredients:
     comment: Sauce
     allergens: []
     type: epices
+    pF: true
+    pS: false
   - uuid: fetrpe
     name: Coriandre fraîche
     originalQuantity: 7
@@ -66,6 +76,8 @@ ingredients:
     comment: galettes
     allergens: []
     type: epices
+    pF: true
+    pS: false
   - uuid: 2juq3x
     name: Sel
     originalQuantity: 40
@@ -75,6 +87,8 @@ ingredients:
     comment: PM galettes
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: 2juq3x
     name: Sel
     originalQuantity: 50
@@ -84,6 +98,8 @@ ingredients:
     comment: PM Sauce
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: rgt7s4
     name: Poivre noir moulu
     originalQuantity: 20
@@ -93,6 +109,8 @@ ingredients:
     comment: PM galettes
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: rgt7s4
     name: Poivre noir moulu
     originalQuantity: 25
@@ -102,6 +120,8 @@ ingredients:
     comment: PM Sauce
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: b2dxf8
     name: Fromage blanc
     originalQuantity: 8
@@ -112,6 +132,8 @@ ingredients:
     allergens:
       - Produit laitier
     type: frais
+    pF: true
+    pS: false
   - uuid: hlbwfd
     name: Yaourt de soja
     originalQuantity: 500
@@ -122,6 +144,8 @@ ingredients:
     allergens:
       - Soja
     type: frais
+    pF: true
+    pS: false
   - uuid: ndu75n
     name: Patates douces
     originalQuantity: 6.5
@@ -131,6 +155,8 @@ ingredients:
     comment: galettes
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: rtavky
     name: Oignon
     originalQuantity: 1.95
@@ -140,6 +166,8 @@ ingredients:
     comment: galettes
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: u2m28w
     name: Ail
     originalQuantity: 13
@@ -149,6 +177,8 @@ ingredients:
     comment: galettes
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: ibtbnq
     name: Tomate
     originalQuantity: 5
@@ -158,6 +188,8 @@ ingredients:
     comment: Garniture
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: cg3wgm
     name: Salade verte (chêne)
     originalQuantity: 6
@@ -167,6 +199,8 @@ ingredients:
     comment: Iceberg Garniture
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: cg3wgm
     name: Salade verte (chêne)
     originalQuantity: 12
@@ -176,6 +210,8 @@ ingredients:
     comment: Accompagnement
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: vwdomu
     name: Echalote
     originalQuantity: 400
@@ -185,6 +221,8 @@ ingredients:
     comment: Sauce
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: u2m28w
     name: Ail
     originalQuantity: 16
@@ -194,6 +232,8 @@ ingredients:
     comment: Sauce
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: 18dy4e
     name: Pomme de terre
     originalQuantity: 25
@@ -203,6 +243,8 @@ ingredients:
     comment: Accompagnement Frites (agria, binjte)
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: h3c8al
     name: huile d'olive
     originalQuantity: 210
@@ -212,6 +254,8 @@ ingredients:
     comment: galettes
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: 2av6w8
     name: Farine de blé
     originalQuantity: 649.1
@@ -222,6 +266,8 @@ ingredients:
     allergens:
       - Gluten
     type: lof
+    pF: false
+    pS: false
   - uuid: toc8a7
     name: Lentilles corail
     originalQuantity: 1.3
@@ -231,6 +277,8 @@ ingredients:
     comment: galettes
     allergens: []
     type: sec
+    pF: false
+    pS: false
   - uuid: 51luzk
     name: Petits flocons d'avoine
     originalQuantity: 550
@@ -240,6 +288,8 @@ ingredients:
     comment: galettes
     allergens: []
     type: sec
+    pF: false
+    pS: false
   - uuid: usibcf
     name: Noix
     originalQuantity: 1
@@ -250,6 +300,8 @@ ingredients:
     allergens:
       - Fruit à coque
     type: sec
+    pF: false
+    pS: false
 preparation: |-
   **galettes patates douces lentilles:**
     - Éplucher les patates douces et les faire cuire à la vapeur pendant 20 minutes.
@@ -270,12 +322,15 @@ preparation: |-
     **montage:**
     - Déposer la sauce sur le pain, ajouter la salade, la galette, le chou, puis refermer le burger.
     - Servir avec la salade verte et les frites, accompagné de la sauce fromage blanc.
-publishDate: 2024-05-18T17:59:00.000Z
+publishDate: '2024-05-18T17:59:00+00:00'
 checkfor: 170
 checkAlwaysOk: false
 regime:
   - vegetarien
 serveHot: true
 uuid: itogd74f82aj
-slug: burger-vege-lentilles-_itogd74f82aj
+id: burger-vege-lentilles-_itogd74f82aj
+createdAt: '2024-05-18T17:59:00+00:00'
+updatedAt: '2024-05-18T17:59:00+00:00'
+createdBy: Lulu
 ---

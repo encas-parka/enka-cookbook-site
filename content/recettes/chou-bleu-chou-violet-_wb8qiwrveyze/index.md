@@ -21,6 +21,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: u2m28w
     name: Ail
     originalQuantity: 4
@@ -30,6 +32,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: rtavky
     name: Oignon
     originalQuantity: 4
@@ -39,6 +43,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: nl2s2n
     name: Chou rouge
     originalQuantity: 3.5
@@ -48,6 +54,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: atccqu
     name: Huile végétale
     originalQuantity: 200
@@ -57,6 +65,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: alwx6o
     name: Gingembre en poudre
     originalQuantity: 15
@@ -66,6 +76,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: l3esgp
     name: Cumin (graines)
     originalQuantity: 30
@@ -75,6 +87,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: m5zboz
     name: moutarde graine
     originalQuantity: 50
@@ -84,6 +98,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: sk1gbb
     name: Cannelle
     originalQuantity: 15
@@ -93,6 +109,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: nf05n7
     name: Coriandre en poudre
     originalQuantity: 30
@@ -102,6 +120,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: msyocm
     name: Muscade
     originalQuantity: 7
@@ -111,6 +131,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: bjuxby
     name: Vinaigre de vin
     originalQuantity: 150
@@ -121,6 +143,8 @@ ingredients:
     allergens:
       - Alcool
     type: epices
+    pF: false
+    pS: false
   - uuid: ywjjiv
     name: confiture de myrtille
     originalQuantity: 200
@@ -130,14 +154,19 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
 preparation: "A ABSOLUMENT FAIRE LA VEILLE\n\nEAU VIOLETTE :\n\nDans une grosse gamelle, faire blanchir à l'eau les choux rouges tronçonnés en gros morceaux.\n\nQuand l'eau est violette foncée, stopper la cuisson. Garder cette eau, elle servira de colorant bleu pour le chou blanc.\n\nSortir les choux, laisser refroidir.\n\nCHOU ROUGE:\n\nEmincer les choux blanchis ainsi que les oignons. Emincer l'ail.\n\nFaire griller les épices.\n\nDans les grands woks, faire d'abord fondre les oignons.\n\nEnsuite\_verser les épices, l'ail et le chou. Faire bien revenir.\n\nAjouter le sucre et le vinaigre. Saler, poivrer. Laisser confire au moins 30min en remuant fréquemment.\n\nAjouter la gelée de groseille, laisser cuire encore.\n\nRectifier l'assaisonnement. Rendre bien gourmand la chose avec tout ce qui inspire.\n\nServir chaud ou froid.\n\nCHOU BLEU:\n\nEmincer finement le chou blanc.\n\nTransformer l'eau violette en bleue en ajoutant quelques cuillères de bicarbonnate de soude.\n\nLaisser macérer les choux blancs dans l'eau bleue au minimum 24h au frais."
 preparation24h: ''
-publishDate: 2025-06-02T18:31:00.000Z
+publishDate: '2025-06-02T18:31:00+00:00'
 checkAlwaysOk: false
 regime:
   - vegan
   - sans-gluten
 serveHot: false
 uuid: wb8qiwrveyze
-slug: chou-bleu-chou-violet-_wb8qiwrveyze
+id: chou-bleu-chou-violet-_wb8qiwrveyze
+createdAt: '2025-06-02T18:31:00+00:00'
+updatedAt: '2025-06-02T18:31:00+00:00'
+createdBy: Auré
 ---

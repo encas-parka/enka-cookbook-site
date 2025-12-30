@@ -26,6 +26,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: u2m28w
     name: Ail
     originalQuantity: 12.5
@@ -35,6 +37,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: ibtbnq
     name: Tomate
     originalQuantity: 12.5
@@ -44,6 +48,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: 7sk3a5
     name: Aubergine
     originalQuantity: 8.5
@@ -53,6 +59,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: h3c8al
     name: huile d'olive
     originalQuantity: 2
@@ -62,6 +70,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: bidsmu
     name: Paprika
     originalQuantity: 40
@@ -71,6 +81,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: he3u48
     name: Cumin moulu
     originalQuantity: 40
@@ -80,6 +92,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
 preparation: |-
   * Ebouillanter les tomates pour les éplucher plus facilement
   * Couper les aubergines genre en 2 dans le sens de la longueur puis tranches sur chaque moitié, en gros pas trop petit
@@ -88,8 +102,11 @@ preparation: |-
   * Ajouter les tomates, 5mn
   * Verser le jus des citrons
   * Saler, poivrer. Ajouter le persil et la coriandre hachés
-publishDate: 2024-05-20T14:06:00.000Z
+publishDate: '2024-05-20T14:06:00+00:00'
 serveHot: false
 uuid: mag7yx4uufqe
-slug: zaalouk-salade-maroc-d_mag7yx4uufqe
+id: zaalouk-salade-maroc-d_mag7yx4uufqe
+createdAt: '2024-05-20T14:06:00+00:00'
+updatedAt: '2024-05-20T14:06:00+00:00'
+createdBy: ''
 ---

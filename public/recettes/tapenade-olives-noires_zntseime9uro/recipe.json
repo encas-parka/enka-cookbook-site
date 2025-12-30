@@ -1,6 +1,6 @@
 
 {
-  "slug": "tapenade-olives-noires_zntseime9uro",
+  "id": "tapenade-olives-noires_zntseime9uro",
   "title": "Tapenade Olives Noires",
   "draft": false,
   "typeR": "entree",
@@ -16,11 +16,14 @@
   "quantite_desc": null,
   "check": true,
   "materiel": ["Robot Mixeur"],
-  "ingredients": [{"allergens":[],"comment":"","name":"Ail","normalizedQuantity":6.5,"normalizedUnit":"gr.","originalQuantity":1,"originalUnit":"gousse·s","type":"legumes","uuid":"u2m28w"},{"allergens":[],"comment":"","name":"Olives noires à la grecque","normalizedQuantity":100,"normalizedUnit":"gr.","originalQuantity":100,"originalUnit":"gr.","type":"legumes","uuid":"9p3n36"},{"allergens":[],"comment":"","name":"huile d'olive","normalizedQuantity":30,"normalizedUnit":"ml","originalQuantity":2,"originalUnit":"c. à soupe","type":"lof","uuid":"h3c8al"}],
+  "ingredients": [{"allergens":[],"comment":"","name":"Ail","normalizedQuantity":6.5,"normalizedUnit":"gr.","originalQuantity":1,"originalUnit":"gousse·s","pF":true,"pS":false,"type":"legumes","uuid":"u2m28w"},{"allergens":[],"comment":"","name":"Olives noires à la grecque","normalizedQuantity":100,"normalizedUnit":"gr.","originalQuantity":100,"originalUnit":"gr.","pF":false,"pS":false,"type":"legumes","uuid":"9p3n36"},{"allergens":[],"comment":"","name":"huile d'olive","normalizedQuantity":30,"normalizedUnit":"ml","originalQuantity":2,"originalUnit":"c. à soupe","pF":false,"pS":false,"type":"lof","uuid":"h3c8al"}],
   "preparation": "Laisser tremper les olives noires pendant une demi heure puis rincez les bien. Mixer les avec l'ail et l'huile d'olive.",
   "preparation24h": "",
   "astuces": null,
   "prepAlt": null,
   "permissionWrite": [],
-  "publishedAt": "2025-01-01T00:00:00Z"
+  "publishedAt": "2025-01-01T00:00:00Z",
+  "createdAt": "2024-03-18T13:28:23.107000+00:00",
+  "updatedAt": "2024-03-18T13:28:23.107000+00:00",
+  "createdBy": ""
 }

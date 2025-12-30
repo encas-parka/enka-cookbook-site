@@ -15,6 +15,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: b2dxf8
     name: Fromage blanc
     originalQuantity: 1.2
@@ -25,6 +27,8 @@ ingredients:
     allergens:
       - Produit laitier
     type: frais
+    pF: true
+    pS: false
   - uuid: u2m28w
     name: Ail
     originalQuantity: 7
@@ -34,6 +38,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: e4mjd1
     name: Jus de citron
     originalQuantity: 0.3
@@ -43,6 +49,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
 plate: 40
 preparation: |-
   Mélanger tous les ingrédients (le jus de citron petit à petit pour ajuster au goût). Ajuster l'assaisonnement.
@@ -60,5 +68,8 @@ title: Sauce blanche citron ail
 typeR: plat
 serveHot: false
 uuid: qqiaqmznmcv5
-slug: sauce-blanche-citron-a_qqiaqmznmcv5
+id: sauce-blanche-citron-a_qqiaqmznmcv5
+createdAt: '2024-05-17T16:04:00.000Z'
+updatedAt: '2024-05-17T16:04:00.000Z'
+createdBy: ''
 ---

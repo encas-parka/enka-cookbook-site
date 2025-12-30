@@ -24,6 +24,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: rtavky
     name: Oignon
     originalQuantity: 4
@@ -33,6 +35,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: rl1e9p
     name: Poivron (vert)
     originalQuantity: 4
@@ -42,6 +46,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: 0zglpj
     name: Poivron (rouge)
     originalQuantity: 4
@@ -51,6 +57,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: h3c8al
     name: huile d'olive
     originalQuantity: 750
@@ -60,6 +68,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: j40pyf
     name: Ras el hanout
     originalQuantity: 100
@@ -70,6 +80,8 @@ ingredients:
     allergens:
       - Moutarde
     type: epices
+    pF: false
+    pS: false
   - uuid: ftj0mq
     name: Pulpe de tomate
     originalQuantity: 4
@@ -79,6 +91,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: u9z2he
     name: Sucre en poudre
     originalQuantity: 200
@@ -88,6 +102,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
 preparation: |-
   \    1 - Couper séparemment les oignons et les poivrons en petits dès. Hacher l'ail grossièrement.
 
@@ -98,8 +114,11 @@ preparation: |-
   \    4 - Ajouter tomates, poivrons, ail ainsi qu'une grosse rasade d'huile. Saler.
 
   \    5 - Laisser fondre le tout, rectifier l'assaisonement. Servir froid.
-publishDate: 2024-06-20T15:16:00.000Z
+publishDate: '2024-06-20T15:16:00+00:00'
 serveHot: false
 uuid: 0npa44oeo8ji
-slug: mechouia_0npa44oeo8ji
+id: mechouia_0npa44oeo8ji
+createdAt: '2024-06-20T15:16:00+00:00'
+updatedAt: '2024-06-20T15:16:00+00:00'
+createdBy: ''
 ---

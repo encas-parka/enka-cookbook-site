@@ -16,6 +16,8 @@ ingredients:
     allergens:
       - Gluten
     type: lof
+    pF: false
+    pS: false
   - uuid: hgfa4e
     name: Persil frais
     originalQuantity: 8
@@ -25,6 +27,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: true
+    pS: false
   - uuid: b2dxf8
     name: Fromage blanc
     originalQuantity: 17.5
@@ -35,6 +39,8 @@ ingredients:
     allergens:
       - Produit laitier
     type: frais
+    pF: true
+    pS: false
   - uuid: m6gmgq
     name: Citron confit
     originalQuantity: 400
@@ -44,6 +50,8 @@ ingredients:
     comment: sauce
     allergens: []
     type: legumes
+    pF: false
+    pS: false
   - uuid: u2m28w
     name: Ail
     originalQuantity: 320
@@ -53,6 +61,8 @@ ingredients:
     comment: ~ 4 têtes
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: rtavky
     name: Oignon
     originalQuantity: 14
@@ -62,6 +72,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: dkdml5
     name: Bette (blette)
     originalQuantity: 10
@@ -71,6 +83,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: 1ej217
     name: huile de friture
     originalQuantity: 5
@@ -80,6 +94,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: 2av6w8
     name: Farine de blé
     originalQuantity: 4
@@ -90,6 +106,8 @@ ingredients:
     allergens:
       - Gluten
     type: lof
+    pF: false
+    pS: false
   - uuid: x286pc
     name: Lait demi-écrémé
     originalQuantity: 7.5
@@ -100,6 +118,8 @@ ingredients:
     allergens:
       - Produit laitier
     type: lof
+    pF: false
+    pS: false
   - uuid: zf3zf8
     name: Oeuf
     originalQuantity: 46
@@ -110,6 +130,8 @@ ingredients:
     allergens:
       - Oeuf
     type: lof
+    pF: false
+    pS: false
 materiel:
   - Plat Paela
 plate: 220
@@ -133,7 +155,7 @@ preparation: |-
   * Hâcher très fin les citrons confits.
   * Mélanger tous les ingrédients et saler, poivrer.
   * Goûter !!
-publishDate: 2024-05-21T14:48:00.000Z
+publishDate: '2024-05-21T14:48:00+00:00'
 regime:
   - vegetarien
 region: Aveyrons
@@ -141,5 +163,8 @@ title: Farçous aveyronnais
 typeR: plat
 serveHot: true
 uuid: 1861nayj9xe4
-slug: farcous-aveyronnais_1861nayj9xe4
+id: farcous-aveyronnais_1861nayj9xe4
+createdAt: '2024-05-21T14:48:00+00:00'
+updatedAt: '2024-05-21T14:48:00+00:00'
+createdBy: ''
 ---

@@ -1,6 +1,6 @@
 
 {
-  "slug": "soupe-froide-concombre_e4nq5yl65mnx",
+  "id": "soupe-froide-concombre_e4nq5yl65mnx",
   "title": "Soupe Froide Concombre Et Yaourt",
   "draft": false,
   "typeR": "entree",
@@ -16,11 +16,14 @@
   "quantite_desc": "un bol d'environ 225 ml par personne",
   "check": false,
   "materiel": null,
-  "ingredients": [{"allergens":[],"comment":"","name":"Eau","normalizedQuantity":5000,"normalizedUnit":"ml","originalQuantity":5,"originalUnit":"l.","type":"autres","uuid":"ljzb7j"},{"allergens":[],"comment":"","name":"Paprika","normalizedQuantity":100,"normalizedUnit":"gr.","originalQuantity":100,"originalUnit":"gr.","type":"epices","uuid":"bidsmu"},{"allergens":[],"comment":"service","name":"Menthe","normalizedQuantity":3,"normalizedUnit":"bottes","originalQuantity":3,"originalUnit":"bottes","type":"epices","uuid":"2j9y2v"},{"allergens":[],"comment":"soupe","name":"Menthe","normalizedQuantity":3,"normalizedUnit":"bottes","originalQuantity":3,"originalUnit":"bottes","type":"epices","uuid":"2j9y2v"},{"allergens":[],"comment":"","name":"Bouillon de légume (sans gluten)","normalizedQuantity":10,"normalizedUnit":"unité","originalQuantity":10,"originalUnit":"unité","type":"epices","uuid":"tmk6ya"},{"allergens":["Produit laitier"],"comment":"","name":"Yaourt grec de vache","normalizedQuantity":6000,"normalizedUnit":"gr.","originalQuantity":6,"originalUnit":"kg","type":"frais","uuid":"dzqmba"},{"allergens":[],"comment":"","name":"Oignon rouge","normalizedQuantity":1500,"normalizedUnit":"gr.","originalQuantity":1.5,"originalUnit":"kg","type":"legumes","uuid":"doxujz"},{"allergens":[],"comment":"","name":"Concombre sans traitement","normalizedQuantity":13000,"normalizedUnit":"gr.","originalQuantity":13,"originalUnit":"kg","type":"legumes","uuid":"ep9gif"}],
+  "ingredients": [{"allergens":[],"comment":"","name":"Eau","normalizedQuantity":5000,"normalizedUnit":"ml","originalQuantity":5,"originalUnit":"l.","pF":false,"pS":false,"type":"autres","uuid":"ljzb7j"},{"allergens":[],"comment":"","name":"Paprika","normalizedQuantity":100,"normalizedUnit":"gr.","originalQuantity":100,"originalUnit":"gr.","pF":false,"pS":false,"type":"epices","uuid":"bidsmu"},{"allergens":[],"comment":"service","name":"Menthe","normalizedQuantity":3,"normalizedUnit":"bottes","originalQuantity":3,"originalUnit":"bottes","pF":true,"pS":false,"type":"epices","uuid":"2j9y2v"},{"allergens":[],"comment":"soupe","name":"Menthe","normalizedQuantity":3,"normalizedUnit":"bottes","originalQuantity":3,"originalUnit":"bottes","pF":true,"pS":false,"type":"epices","uuid":"2j9y2v"},{"allergens":[],"comment":"","name":"Bouillon de légume (sans gluten)","normalizedQuantity":10,"normalizedUnit":"unité","originalQuantity":10,"originalUnit":"unité","pF":false,"pS":false,"type":"epices","uuid":"tmk6ya"},{"allergens":["Produit laitier"],"comment":"","name":"Yaourt grec de vache","normalizedQuantity":6000,"normalizedUnit":"gr.","originalQuantity":6,"originalUnit":"kg","pF":true,"pS":false,"type":"frais","uuid":"dzqmba"},{"allergens":[],"comment":"","name":"Oignon rouge","normalizedQuantity":1500,"normalizedUnit":"gr.","originalQuantity":1.5,"originalUnit":"kg","pF":true,"pS":false,"type":"legumes","uuid":"doxujz"},{"allergens":[],"comment":"","name":"Concombre sans traitement","normalizedQuantity":13000,"normalizedUnit":"gr.","originalQuantity":13,"originalUnit":"kg","pF":true,"pS":false,"type":"legumes","uuid":"ep9gif"}],
   "preparation": "Epépiner les concombres et les hacher grossièrement. Les réduire en purée au mixeur jusqu'à obtention d'une texture lisse.\n\nAjouter le yaourt grec, l'eau froide et les bouillons cubes délayés d'une un peu d'eau chaude. Mixer par brèves impulsions.\n\nCiseler la menthe et l'ajouter à la soupe. Saler et poivrer au goût. \\\nBien mélanger.\n\nPlacer au moins 2h au frais. Rectifier l'assaisonnement.\n\nEmincer très très finement les oignons rouges. Ciseler l'autre moitié de la menthe.\n\nAu service, verser une louche de soupe, parsemer de menthe, d'une pincée de paprika et d'oignon.",
   "preparation24h": null,
   "astuces": null,
   "prepAlt": [{"recetteAlt":"SOUPE FROIDE CONCOMBRE ET YAOURT VEGAN"}],
   "permissionWrite": [],
-  "publishedAt": "2025-01-01T00:00:00Z"
+  "publishedAt": "2025-01-01T00:00:00Z",
+  "createdAt": "2024-05-27T22:14:00+00:00",
+  "updatedAt": "2024-05-27T22:14:00+00:00",
+  "createdBy": "Auré"
 }

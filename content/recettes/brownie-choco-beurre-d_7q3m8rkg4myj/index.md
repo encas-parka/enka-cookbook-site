@@ -24,6 +24,8 @@ ingredients:
     allergens:
       - Arachides
     type: autres
+    pF: false
+    pS: false
   - uuid: 2av6w8
     name: Farine de blé
     originalQuantity: 90
@@ -34,6 +36,8 @@ ingredients:
     allergens:
       - Gluten
     type: lof
+    pF: false
+    pS: false
   - uuid: lny16c
     name: sucre blanc
     originalQuantity: 330
@@ -43,6 +47,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
   - uuid: 1e3zhq
     name: Chocolat noir patissier 70p100
     originalQuantity: 230
@@ -52,6 +58,8 @@ ingredients:
     comment: (en pépites)
     allergens: []
     type: sucres
+    pF: false
+    pS: false
   - uuid: zf3zf8
     name: Oeuf
     originalQuantity: 6
@@ -62,6 +70,8 @@ ingredients:
     allergens:
       - Oeuf
     type: lof
+    pF: false
+    pS: false
   - uuid: 1e3zhq
     name: Chocolat noir patissier 70p100
     originalQuantity: 420
@@ -71,6 +81,8 @@ ingredients:
     comment: (fondu)
     allergens: []
     type: sucres
+    pF: false
+    pS: false
   - uuid: n818be
     name: vanille extrait concentré
     originalQuantity: 4
@@ -80,6 +92,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
   - uuid: 2juq3x
     name: Sel
     originalQuantity: 2
@@ -89,6 +103,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: eipcl2
     name: Margarine
     originalQuantity: 280
@@ -98,6 +114,8 @@ ingredients:
     comment: ''
     allergens: []
     type: frais
+    pF: true
+    pS: false
 materiel:
   - Four
   - Gastro 1/1 (Fins)
@@ -131,8 +149,11 @@ preparation: |-
 preparation24h: ''
 astuces: []
 prepAlt: []
-publishDate: 2025-09-05T16:25:00.000Z
+publishDate: '2025-09-05T16:25:00+00:00'
 serveHot: false
 uuid: 7q3m8rkg4myj
-slug: brownie-choco-beurre-d_7q3m8rkg4myj
+id: brownie-choco-beurre-d_7q3m8rkg4myj
+createdAt: '2025-09-05T16:25:00+00:00'
+updatedAt: '2025-09-05T16:25:00+00:00'
+createdBy: ''
 ---

@@ -21,6 +21,8 @@ ingredients:
     allergens:
       - Sésame
     type: autres
+    pF: false
+    pS: false
   - uuid: 2juq3x
     name: Sel
     originalQuantity: 28
@@ -30,6 +32,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: kmq1zb
     name: Beurre doux
     originalQuantity: 2.8
@@ -40,6 +44,8 @@ ingredients:
     allergens:
       - Produit laitier
     type: frais
+    pF: true
+    pS: false
   - uuid: zf3zf8
     name: Oeuf
     originalQuantity: 44
@@ -50,6 +56,8 @@ ingredients:
     allergens:
       - Oeuf
     type: lof
+    pF: false
+    pS: false
   - uuid: 2av6w8
     name: Farine de blé
     originalQuantity: 1.4
@@ -60,6 +68,8 @@ ingredients:
     allergens:
       - Gluten
     type: lof
+    pF: false
+    pS: false
   - uuid: 2cnk7l
     name: Halva
     originalQuantity: 2.2
@@ -70,6 +80,8 @@ ingredients:
     allergens:
       - Sésame
     type: sucres
+    pF: false
+    pS: false
   - uuid: u9z2he
     name: Sucre en poudre
     originalQuantity: 1.5
@@ -79,6 +91,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
   - uuid: 1e3zhq
     name: Chocolat noir patissier 70p100
     originalQuantity: 2.8
@@ -88,6 +102,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
   - uuid: r6792n
     name: Cacao
     originalQuantity: 335
@@ -97,6 +113,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
 materiel:
   - Four
 preparation: |-
@@ -108,11 +126,14 @@ preparation: |-
   * Ajouter les morceaux de halva. Verser dans les moules. Lisser la surface.
   * Répartir par touche à la petite cuillère le tahin sur l'ensemble des brownies. Avec un cure-dent ou un pic à brochette, faire des marbrures sur toute la surface de la pâte.
   * Enfourner pour environ 25 minutes. Le centre du brownie doit être à peine saisi quand à sa sortie du four. Ne pas oublier que les gâteaux continuent un peu à cuire, même après être sortis du four ! La texture va se raffermir en refroidissant.
-publishDate: 2024-06-18T10:55:00.000Z
+publishDate: '2024-06-18T10:55:00+00:00'
 checkAlwaysOk: false
 regime:
   - vegetarien
 serveHot: true
 uuid: zpfo9371zng6
-slug: brownie-a-lhalva-et-au_zpfo9371zng6
+id: brownie-a-lhalva-et-au_zpfo9371zng6
+createdAt: '2024-06-18T10:55:00+00:00'
+updatedAt: '2024-06-18T10:55:00+00:00'
+createdBy: Ottolenghi
 ---

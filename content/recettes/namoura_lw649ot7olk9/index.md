@@ -18,6 +18,8 @@ ingredients:
     comment: ''
     allergens: []
     type: autres
+    pF: false
+    pS: false
   - uuid: ljzb7j
     name: Eau
     originalQuantity: 600
@@ -27,6 +29,8 @@ ingredients:
     comment: ''
     allergens: []
     type: autres
+    pF: false
+    pS: false
   - uuid: fnnx13
     name: Bicarbonate de soude
     originalQuantity: 1
@@ -36,6 +40,8 @@ ingredients:
     comment: ''
     allergens: []
     type: autres
+    pF: false
+    pS: false
   - uuid: vgec6e
     name: Levure chimique
     originalQuantity: 30
@@ -46,6 +52,8 @@ ingredients:
     allergens:
       - Gluten
     type: lof
+    pF: false
+    pS: false
   - uuid: hlbwfd
     name: Yaourt de soja
     originalQuantity: 1.5
@@ -56,6 +64,8 @@ ingredients:
     allergens:
       - Soja
     type: frais
+    pF: true
+    pS: false
   - uuid: eu7lc6
     name: huile de colza
     originalQuantity: 0.3
@@ -65,6 +75,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: mltl42
     name: Semoule fine (blé)
     originalQuantity: 750
@@ -75,6 +87,8 @@ ingredients:
     allergens:
       - Gluten
     type: sec
+    pF: false
+    pS: false
   - uuid: e4mjd1
     name: Jus de citron
     originalQuantity: 9
@@ -84,6 +98,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
   - uuid: u9z2he
     name: Sucre en poudre
     originalQuantity: 0.6
@@ -93,6 +109,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
   - uuid: u9z2he
     name: Sucre en poudre
     originalQuantity: 0.3
@@ -102,6 +120,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
 materiel:
   - Four
 plate: 50
@@ -113,7 +133,7 @@ preparation: |-
   Pendant ce temps, préparer le sirop en versant la plus grosse partie du sucre, l'eau et le jus de citron dans une casserole et porter à ébullition. Le sucre doit être totalement dissout. puis y ajouter les 2/3 de l'eau florale.
 
   A la sortie du four, découper les parts de gâteau, y mettre une amande au centre de chaque part et puis verser une bonne dose de sirop sur le gâteau. Bien répartir pour que chaque partie du gâteau s'imbibe bien. Enfin, filmer de manière complètement hermétique jusqu'au moment de le servir.
-publishDate: 2024-03-27T19:32:00.000Z
+publishDate: '2024-03-27T19:32:00+00:00'
 regime:
   - vegan
   - sans-lactose
@@ -121,5 +141,8 @@ title: Namoura
 typeR: dessert
 serveHot: false
 uuid: lw649ot7olk9
-slug: namoura_lw649ot7olk9
+id: namoura_lw649ot7olk9
+createdAt: '2024-03-27T19:32:00+00:00'
+updatedAt: '2024-03-27T19:32:00+00:00'
+createdBy: ça vault le détour
 ---

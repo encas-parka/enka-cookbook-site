@@ -15,6 +15,8 @@ ingredients:
     comment: ''
     allergens: []
     type: frais
+    pF: true
+    pS: false
   - uuid: ade8hh
     name: Biscuit vegan et sans gluten
     originalQuantity: 195
@@ -24,6 +26,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
   - uuid: r6792n
     name: Cacao
     originalQuantity: 30
@@ -33,6 +37,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
   - uuid: cr4kiz
     name: Chocolat noir
     originalQuantity: 300
@@ -42,6 +48,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
   - uuid: u9z2he
     name: Sucre en poudre
     originalQuantity: 225
@@ -51,6 +59,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
 plate: 15
 preparation: |-
   Faire fondre le chocolat au bain marie.
@@ -68,7 +78,7 @@ preparation: |-
   Mettre au frigo pour que le salami se durcisse bien.
 
   Sortir du frigo 30 min avant de le couper et servir.
-publishDate: 2024-06-18T00:07:00.000Z
+publishDate: '2024-06-18T00:07:00+00:00'
 regime:
   - vegan
   - sans-gluten
@@ -79,5 +89,8 @@ title: Salami au chocolat - vegan sans gluten
 typeR: dessert
 serveHot: false
 uuid: gp22v4hamxcv
-slug: salami-au-chocolat-veg_gp22v4hamxcv
+id: salami-au-chocolat-veg_gp22v4hamxcv
+createdAt: '2024-06-18T00:07:00+00:00'
+updatedAt: '2024-06-18T00:07:00+00:00'
+createdBy: ''
 ---

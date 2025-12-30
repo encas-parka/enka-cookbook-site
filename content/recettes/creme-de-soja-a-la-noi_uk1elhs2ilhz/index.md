@@ -24,6 +24,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sec
+    pF: false
+    pS: false
   - uuid: z9plfy
     name: Graines de sésame blanc
     originalQuantity: 100
@@ -34,6 +36,8 @@ ingredients:
     allergens:
       - Sésame
     type: sec
+    pF: false
+    pS: false
   - uuid: 4vxqlr
     name: Graine de tournesol
     originalQuantity: 200
@@ -43,6 +47,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sec
+    pF: false
+    pS: false
   - uuid: xkijt9
     name: Amandes effilées
     originalQuantity: 200
@@ -53,6 +59,8 @@ ingredients:
     allergens:
       - Fruit à coque
     type: sec
+    pF: false
+    pS: false
   - uuid: gpeob7
     name: Lait de soja
     originalQuantity: 9
@@ -63,6 +71,8 @@ ingredients:
     allergens:
       - Soja
     type: lof
+    pF: false
+    pS: false
   - uuid: s0sjb1
     name: Crème de riz
     originalQuantity: 500
@@ -72,6 +82,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: lny16c
     name: sucre blanc
     originalQuantity: 200
@@ -81,6 +93,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
   - uuid: n85gmi
     name: sucre de canne (blond)
     originalQuantity: 1.4
@@ -90,6 +104,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
   - uuid: 0g08xt
     name: Poudre de noisettes
     originalQuantity: 1
@@ -100,6 +116,8 @@ ingredients:
     allergens:
       - Fruit à coque
     type: sucres
+    pF: false
+    pS: false
   - uuid: ruhtax
     name: Agar-agar
     originalQuantity: 14
@@ -109,6 +127,8 @@ ingredients:
     comment: ''
     allergens: []
     type: autres
+    pF: false
+    pS: false
 preparation: |-
   A faire la veille pour le midi ou le matin pour le soir.
 
@@ -122,8 +142,11 @@ preparation: |-
 
   Ajouter les graines caramélisées sur la crème
 preparation24h: A faire la veille pour le matin ou le matin pour le soir
-publishDate: 2025-06-05T07:55:00.000Z
+publishDate: '2025-06-05T07:55:00+00:00'
 serveHot: false
 uuid: uk1elhs2ilhz
-slug: creme-de-soja-a-la-noi_uk1elhs2ilhz
+id: creme-de-soja-a-la-noi_uk1elhs2ilhz
+createdAt: '2025-06-05T07:55:00+00:00'
+updatedAt: '2025-06-05T07:55:00+00:00'
+createdBy: frédo
 ---

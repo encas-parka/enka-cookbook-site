@@ -24,6 +24,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: 7sk3a5
     name: Aubergine
     originalQuantity: 5
@@ -33,6 +35,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: 9zozfk
     name: Courgette
     originalQuantity: 5
@@ -42,6 +46,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: ibtbnq
     name: Tomate
     originalQuantity: 15
@@ -51,6 +57,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: h3c8al
     name: huile d'olive
     originalQuantity: 1
@@ -60,6 +68,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: yjxnau
     name: Bûche de chèvre
     originalQuantity: 6.5
@@ -70,6 +80,8 @@ ingredients:
     allergens:
       - Produit laitier
     type: frais
+    pF: true
+    pS: false
   - uuid: g0lph5
     name: Miel
     originalQuantity: 600
@@ -79,6 +91,8 @@ ingredients:
     comment: environ
     allergens: []
     type: sucres
+    pF: false
+    pS: false
   - uuid: rgt7s4
     name: Poivre noir moulu
     originalQuantity: 10
@@ -88,6 +102,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: 2juq3x
     name: Sel
     originalQuantity: 30
@@ -97,6 +113,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
 materiel:
   - Four
 preparation: |-
@@ -110,8 +128,11 @@ preparation: |-
   * Montez les tians dans des plats à gratin ou des gastros, en intercalant à chaque fois une rangée de tranches de tomates, de chèvre et de figues.
   * Arrosez les tians d'huile d'olive et d'un peu de miel, salez, poivrez, saupoudrez de thym.
   * Mettez les tians à cuire pendant 10minutes sous le grill du four.
-publishDate: 2024-05-28T10:56:00.000Z
+publishDate: '2024-05-28T10:56:00+00:00'
 serveHot: true
 uuid: 2qpd2oh9c497
-slug: tian-tomate-figue-miel_2qpd2oh9c497
+id: tian-tomate-figue-miel_2qpd2oh9c497
+createdAt: '2024-05-28T10:56:00+00:00'
+updatedAt: '2024-05-28T10:56:00+00:00'
+createdBy: ''
 ---

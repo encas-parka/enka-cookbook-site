@@ -19,6 +19,8 @@ ingredients:
     comment: ''
     allergens: []
     type: autres
+    pF: false
+    pS: false
   - uuid: 2pps90
     name: Poivre
     originalQuantity: 1
@@ -28,6 +30,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: dc8855
     name: Cumin
     originalQuantity: 10
@@ -37,6 +41,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: ique18
     name: Paprika fumé
     originalQuantity: 70
@@ -46,6 +52,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: 5dwrvm
     name: Gros sel
     originalQuantity: 5
@@ -55,6 +63,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: jjrwlj
     name: Sauce soja
     originalQuantity: 1.3
@@ -65,6 +75,8 @@ ingredients:
     allergens:
       - Soja
     type: epices
+    pF: false
+    pS: false
   - uuid: u2m28w
     name: Ail
     originalQuantity: 26
@@ -74,6 +86,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: v9qhs9
     name: Champignons
     originalQuantity: 2
@@ -83,6 +97,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: rtavky
     name: Oignon
     originalQuantity: 4
@@ -92,6 +108,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: c70jxb
     name: huile de tournesol
     originalQuantity: 500
@@ -101,6 +119,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: usibcf
     name: Noix
     originalQuantity: 500
@@ -111,6 +131,8 @@ ingredients:
     allergens:
       - Fruit à coque
     type: sec
+    pF: false
+    pS: false
   - uuid: ovewgk
     name: Flocons d'avoine
     originalQuantity: 4.3
@@ -121,6 +143,8 @@ ingredients:
     allergens:
       - Gluten
     type: sec
+    pF: false
+    pS: false
 materiel:
   - Gastro 1/1 (Fins)
   - Four
@@ -139,7 +163,7 @@ preparation: |-
   * Laisser reposer au moins 20 minutes
   * Façonner (je ne me souviens plus le poids d'un steak individuel mais peser le tout et calculer, c'est assez généreux). Mettre de l'huile sur les deux faces du steak (au pinceau c'est le mieux)
   * Faire cuire à 180°C environ 30 minutes, jusqu'à ce qu'ils brunissent un peu. Retourner en milieu de cuisson.
-publishDate: 2024-03-08T10:19:47.990Z
+publishDate: '2024-03-08T10:19:47.990000+00:00'
 regime:
   - vegetarien
   - vegan
@@ -148,5 +172,8 @@ title: Steak végétarien champignons - noix - flocons d'avoine
 typeR: plat
 serveHot: true
 uuid: g288g77vujzb
-slug: steak-vegetarien-champ_g288g77vujzb
+id: steak-vegetarien-champ_g288g77vujzb
+createdAt: '2024-03-08T10:19:47.990000+00:00'
+updatedAt: '2024-03-08T10:19:47.990000+00:00'
+createdBy: Marion
 ---

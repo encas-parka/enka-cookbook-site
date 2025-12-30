@@ -23,6 +23,8 @@ ingredients:
     allergens:
       - Gluten
     type: lof
+    pF: false
+    pS: false
   - uuid: 7qqcwc
     name: Levure fraîche de boulanger
     originalQuantity: 15
@@ -32,9 +34,14 @@ ingredients:
     comment: ''
     allergens: []
     type: frais
+    pF: true
+    pS: false
 preparation: c'est arnaud qui le fait
-publishDate: 2025-06-17T18:46:00.000Z
+publishDate: '2025-06-17T18:46:00+00:00'
 serveHot: true
 uuid: 28nzksb97gke
-slug: pain-pita_28nzksb97gke
+id: pain-pita_28nzksb97gke
+createdAt: '2025-06-17T18:46:00+00:00'
+updatedAt: '2025-06-17T18:46:00+00:00'
+createdBy: ''
 ---

@@ -17,6 +17,8 @@ ingredients:
     allergens:
       - Gluten
     type: lof
+    pF: false
+    pS: false
   - uuid: z6747e
     name: Basilic sec
     originalQuantity: 1
@@ -26,6 +28,8 @@ ingredients:
     comment: sec
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: dc8855
     name: Cumin
     originalQuantity: 1
@@ -35,6 +39,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: 1e8unz
     name: Crème épaisse
     originalQuantity: 1
@@ -45,6 +51,8 @@ ingredients:
     allergens:
       - Produit laitier
     type: frais
+    pF: true
+    pS: false
   - uuid: da93ql
     name: Comté
     originalQuantity: 100
@@ -55,6 +63,8 @@ ingredients:
     allergens:
       - Produit laitier
     type: frais
+    pF: true
+    pS: false
   - uuid: yjxnau
     name: Bûche de chèvre
     originalQuantity: 180
@@ -65,6 +75,8 @@ ingredients:
     allergens:
       - Produit laitier
     type: frais
+    pF: true
+    pS: false
   - uuid: 9zozfk
     name: Courgette
     originalQuantity: 2
@@ -74,6 +86,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: u2m28w
     name: Ail
     originalQuantity: 1
@@ -83,6 +97,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: h3c8al
     name: huile d'olive
     originalQuantity: 50
@@ -92,6 +108,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: zf3zf8
     name: Oeuf
     originalQuantity: 3
@@ -102,6 +120,8 @@ ingredients:
     allergens:
       - Oeuf
     type: lof
+    pF: false
+    pS: false
   - uuid: 2av6w8
     name: Farine de blé
     originalQuantity: 170
@@ -112,6 +132,8 @@ ingredients:
     allergens:
       - Gluten
     type: lof
+    pF: false
+    pS: false
   - uuid: x286pc
     name: Lait demi-écrémé
     originalQuantity: 120
@@ -122,6 +144,8 @@ ingredients:
     allergens:
       - Produit laitier
     type: lof
+    pF: false
+    pS: false
 materiel:
   - moule a cake
   - Four
@@ -132,7 +156,7 @@ preparation: |-
   * Dans un saladier, mélanger la farine et la levure. Ajouter les œufs, bien mélanger, avec une spatule en bois. Ajouter le lait, petit à petit, bien mélanger régulièrement. Passer au fouet si il y a tout de même des grumeaux. Ajouter l'huile, bien mélanger. Enfin, ajouter la crème.
   * Ajouter tous les ingrédients à la pâte, mélanger. Saler au besoin (il faut goûter!!)
   * Beurrer et fariner le moule à cake. Verser la pâte dedans, mettre environ 50min au four préchauffé à 180°C. Vérifier la cuisson à la fin en plantant une lame de couteau dans le cake.
-publishDate: 2023-11-14T13:37:45.120Z
+publishDate: '2023-11-14T13:37:45.120000+00:00'
 regime:
   - vegetarien
 saison:
@@ -141,5 +165,8 @@ title: Cake courgette chêvre cumin basilic
 typeR: plat
 serveHot: false
 uuid: o0hmts3lks2w
-slug: cake-courgette-chevre-_o0hmts3lks2w
+id: cake-courgette-chevre-_o0hmts3lks2w
+createdAt: '2023-11-14T13:37:45.120000+00:00'
+updatedAt: '2023-11-14T13:37:45.120000+00:00'
+createdBy: N.R.
 ---

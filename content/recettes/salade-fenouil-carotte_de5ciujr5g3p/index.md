@@ -16,6 +16,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: yh2uod
     name: Orange
     originalQuantity: 3
@@ -25,6 +27,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: mhsals
     name: Fenouil
     originalQuantity: 4.5
@@ -34,6 +38,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: h3c8al
     name: huile d'olive
     originalQuantity: 76.5
@@ -43,6 +49,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: gzi2ry
     name: Jus d'orange
     originalQuantity: 32
@@ -52,6 +60,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
 plate: 50
 preparation: |-
   Couper en finesse les fenouils.
@@ -61,7 +71,7 @@ preparation: |-
   Mettre le zeste des 3 oranges et éventuellement les sarments si y a la motive.
 
   Ajouter l'huile et le jus d'orange, assaisonner avec sel et poivre à convenance .
-publishDate: 2024-03-26T18:34:06.792Z
+publishDate: '2024-03-26T18:34:06.792000+00:00'
 regime:
   - vegan
   - sans-gluten
@@ -72,5 +82,8 @@ title: Salade fenouil-carottes-oranges
 typeR: entree
 serveHot: false
 uuid: de5ciujr5g3p
-slug: salade-fenouil-carotte_de5ciujr5g3p
+id: salade-fenouil-carotte_de5ciujr5g3p
+createdAt: '2024-03-26T18:34:06.792000+00:00'
+updatedAt: '2024-03-26T18:34:06.792000+00:00'
+createdBy: mag
 ---

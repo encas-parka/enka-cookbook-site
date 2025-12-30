@@ -24,6 +24,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: z8uiyd
     name: Farine de maïs
     originalQuantity: 60
@@ -33,6 +35,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: 2a0lnj
     name: gousse de vanille
     originalQuantity: 1
@@ -42,6 +46,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
   - uuid: n818be
     name: vanille extrait concentré
     originalQuantity: 0.5
@@ -51,6 +57,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
   - uuid: lny16c
     name: sucre blanc
     originalQuantity: 200
@@ -60,6 +68,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
 preparation: |-
   a faire la veille :
 
@@ -74,8 +84,11 @@ preparation24h: |-
   melanger la maizena dans un peu de la preparation pour bien la diluer
 
   faire chauffer doucement en remuant jusqu'a fremissement. ca doit epaissir un peu. mettre dans des ramequins au frais.
-publishDate: 2024-06-13T08:46:00.000Z
+publishDate: '2024-06-13T08:46:00+00:00'
 serveHot: false
 uuid: nzjlrmlxvqyp
-slug: creme-dessert-vanille-_nzjlrmlxvqyp
+id: creme-dessert-vanille-_nzjlrmlxvqyp
+createdAt: '2024-06-13T08:46:00+00:00'
+updatedAt: '2024-06-13T08:46:00+00:00'
+createdBy: ''
 ---

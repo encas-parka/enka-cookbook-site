@@ -24,6 +24,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: 9zozfk
     name: Courgette
     originalQuantity: 12
@@ -33,6 +35,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: h3c8al
     name: huile d'olive
     originalQuantity: 380
@@ -42,6 +46,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: 7jceco
     name: Curry
     originalQuantity: 225
@@ -51,6 +57,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: 2pps90
     name: Poivre
     originalQuantity: 1
@@ -60,6 +68,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: 2juq3x
     name: Sel
     originalQuantity: 1
@@ -69,6 +79,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: bbwo4n
     name: Tamari (sauce)
     originalQuantity: 380
@@ -79,14 +91,19 @@ ingredients:
     allergens:
       - Soja
     type: epices
+    pF: false
+    pS: false
 preparation: '* Le lendemain rectifier l’assaisonnement.'
 preparation24h: |-
   ##### Préparation à faire la veille
 
   * Laver les courgettes, les couper soit en julienne soit en macédoine ou émincer avec une mandoline ou au robot, au choix mais un truc pas trop gros quoi.
   * Faire légèrement torréfier le curry. Prélever les zestes des citrons, les presser. Puis tout mélanger.
-publishDate: 2024-05-19T10:40:00.000Z
+publishDate: '2024-05-19T10:40:00+00:00'
 serveHot: false
 uuid: dkkwwc5hbgga
-slug: salade-courgette-curry_dkkwwc5hbgga
+id: salade-courgette-curry_dkkwwc5hbgga
+createdAt: '2024-05-19T10:40:00+00:00'
+updatedAt: '2024-05-19T10:40:00+00:00'
+createdBy: ''
 ---

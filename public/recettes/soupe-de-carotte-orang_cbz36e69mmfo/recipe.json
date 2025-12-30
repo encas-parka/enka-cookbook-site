@@ -1,6 +1,6 @@
 
 {
-  "slug": "soupe-de-carotte-orang_cbz36e69mmfo",
+  "id": "soupe-de-carotte-orang_cbz36e69mmfo",
   "title": "Soupe De Carotte Orange Épicée",
   "draft": false,
   "typeR": "entree",
@@ -16,11 +16,14 @@
   "quantite_desc": null,
   "check": true,
   "materiel": null,
-  "ingredients": [{"allergens":[],"comment":"","name":"Oignon","normalizedQuantity":5000,"normalizedUnit":"gr.","originalQuantity":5,"originalUnit":"kg","type":"legumes","uuid":"rtavky"},{"allergens":[],"comment":"","name":"Carotte","normalizedQuantity":12000,"normalizedUnit":"gr.","originalQuantity":12,"originalUnit":"kg","type":"legumes","uuid":"eouu0v"},{"allergens":["Soja"],"comment":"","name":"Crème soja","normalizedQuantity":1500,"normalizedUnit":"ml","originalQuantity":1.5,"originalUnit":"l.","type":"lof","uuid":"chfwwq"},{"allergens":[],"comment":"","name":"Huile végétale","normalizedQuantity":250,"normalizedUnit":"ml","originalQuantity":250,"originalUnit":"ml","type":"lof","uuid":"atccqu"},{"allergens":[],"comment":"","name":"mélange 4 épices","normalizedQuantity":75,"normalizedUnit":"gr.","originalQuantity":75,"originalUnit":"gr.","type":"epices","uuid":"dex52s"},{"allergens":[],"comment":"","name":"Curry","normalizedQuantity":75,"normalizedUnit":"gr.","originalQuantity":75,"originalUnit":"gr.","type":"epices","uuid":"7jceco"},{"allergens":[],"comment":"","name":"Jus d'orange","normalizedQuantity":4000,"normalizedUnit":"ml","originalQuantity":4,"originalUnit":"l.","type":"sucres","uuid":"gzi2ry"}],
+  "ingredients": [{"allergens":[],"comment":"","name":"Oignon","normalizedQuantity":5000,"normalizedUnit":"gr.","originalQuantity":5,"originalUnit":"kg","pF":true,"pS":false,"type":"legumes","uuid":"rtavky"},{"allergens":[],"comment":"","name":"Carotte","normalizedQuantity":12000,"normalizedUnit":"gr.","originalQuantity":12,"originalUnit":"kg","pF":true,"pS":false,"type":"legumes","uuid":"eouu0v"},{"allergens":["Soja"],"comment":"","name":"Crème soja","normalizedQuantity":1500,"normalizedUnit":"ml","originalQuantity":1.5,"originalUnit":"l.","pF":false,"pS":false,"type":"lof","uuid":"chfwwq"},{"allergens":[],"comment":"","name":"Huile végétale","normalizedQuantity":250,"normalizedUnit":"ml","originalQuantity":250,"originalUnit":"ml","pF":false,"pS":false,"type":"lof","uuid":"atccqu"},{"allergens":[],"comment":"","name":"mélange 4 épices","normalizedQuantity":75,"normalizedUnit":"gr.","originalQuantity":75,"originalUnit":"gr.","pF":false,"pS":false,"type":"epices","uuid":"dex52s"},{"allergens":[],"comment":"","name":"Curry","normalizedQuantity":75,"normalizedUnit":"gr.","originalQuantity":75,"originalUnit":"gr.","pF":false,"pS":false,"type":"epices","uuid":"7jceco"},{"allergens":[],"comment":"","name":"Jus d'orange","normalizedQuantity":4000,"normalizedUnit":"ml","originalQuantity":4,"originalUnit":"l.","pF":false,"pS":false,"type":"sucres","uuid":"gzi2ry"}],
   "preparation": "laver et brosser les carottes puis les râper .\n\ncouper les oignons pas forcément très finement\n\nfaire revenir les oignons et les épices dans l'huile quand il sont légèrement dorés ajouter les carottes\n\najouter l'eau et laisser cuire 30 mn\n\nmélanger le jus d'orange et la crème de soja les inclure dans la soupe et mixer le tout\n\nà faire refroidir au moins une heure si servie froide",
   "preparation24h": null,
   "astuces": null,
   "prepAlt": null,
   "permissionWrite": [],
-  "publishedAt": "2025-01-01T00:00:00Z"
+  "publishedAt": "2025-01-01T00:00:00Z",
+  "createdAt": "2025-06-15T12:40:00+00:00",
+  "updatedAt": "2025-06-15T12:40:00+00:00",
+  "createdBy": ""
 }

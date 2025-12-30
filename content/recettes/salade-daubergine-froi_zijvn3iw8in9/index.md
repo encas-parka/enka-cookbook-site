@@ -22,6 +22,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: u2m28w
     name: Ail
     originalQuantity: 3
@@ -31,6 +33,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: ibtbnq
     name: Tomate
     originalQuantity: 10
@@ -40,6 +44,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: 7sk3a5
     name: Aubergine
     originalQuantity: 12
@@ -49,6 +55,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: hgfa4e
     name: Persil frais
     originalQuantity: 10
@@ -58,6 +66,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: true
+    pS: false
   - uuid: h3c8al
     name: huile d'olive
     originalQuantity: 1.3
@@ -67,6 +77,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
 preparation: |-
 
 
@@ -76,8 +88,11 @@ preparation: |-
 
   Vinaigrette inutile. Voilà! Servir bien frais.
 preparation24h: "Laver les aubergines. Les couper en cubes d'1cm. Les faire cuire avec un peu d'huile dans les gros wok.\n\n(ne pas hésiter à égoutter/retirer le surplus de liquide)\n\nPendant ce temps, râper au robot l'ail et un quart des\_tomates.\n\nLes verser dans les aubergines toujours sur le feux.\_\n\nY ajouter\_sel, poivre, huile d'olive.\n\nFaire cuire\_en remuant bien."
-publishDate: 2025-05-30T20:24:00.000Z
+publishDate: '2025-05-30T20:24:00+00:00'
 serveHot: false
 uuid: zijvn3iw8in9
-slug: salade-daubergine-froi_zijvn3iw8in9
+id: salade-daubergine-froi_zijvn3iw8in9
+createdAt: '2025-05-30T20:24:00+00:00'
+updatedAt: '2025-05-30T20:24:00+00:00'
+createdBy: une p'tite cuillère de plus
 ---

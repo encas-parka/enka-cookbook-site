@@ -23,6 +23,8 @@ ingredients:
     comment: ''
     allergens: []
     type: autres
+    pF: false
+    pS: false
   - uuid: 2juq3x
     name: Sel
     originalQuantity: 20
@@ -32,6 +34,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: 1ej217
     name: huile de friture
     originalQuantity: 12
@@ -41,6 +45,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: atccqu
     name: Huile végétale
     originalQuantity: 50
@@ -50,6 +56,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: vgec6e
     name: Levure chimique
     originalQuantity: 50
@@ -60,6 +68,8 @@ ingredients:
     allergens:
       - Gluten
     type: lof
+    pF: false
+    pS: false
   - uuid: 2av6w8
     name: Farine de blé
     originalQuantity: 1.8
@@ -70,6 +80,8 @@ ingredients:
     allergens:
       - Gluten
     type: lof
+    pF: false
+    pS: false
   - uuid: u9z2he
     name: Sucre en poudre
     originalQuantity: 25
@@ -79,6 +91,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
 preparation: |-
   Dans un grand saladier, mélanger ensemble les ingrédients sec, puis ajouter ensuite le reste des ingrédients. Mélanger à la cuillère pour grossièrement combiner le tout, puis pétrir un peu à la main, juste assez pour ne plus qu'il y ait de farine sèche.
 
@@ -104,8 +118,11 @@ preparation: |-
 
   Déguster avec une soupe!
 preparation24h: Faire la pâte la veille c'est encore mieux !!
-publishDate: 2024-06-16T20:47:00.000Z
+publishDate: '2024-06-16T20:47:00+00:00'
 serveHot: true
 uuid: kvvs5bogscu7
-slug: pain-frit-chinois_kvvs5bogscu7
+id: pain-frit-chinois_kvvs5bogscu7
+createdAt: '2024-06-16T20:47:00+00:00'
+updatedAt: '2024-06-16T20:47:00+00:00'
+createdBy: Auré
 ---

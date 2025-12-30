@@ -22,6 +22,8 @@ ingredients:
     comment: sauce
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: ibtbnq
     name: Tomate
     originalQuantity: 2
@@ -31,6 +33,8 @@ ingredients:
     comment: sauce
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: rtavky
     name: Oignon
     originalQuantity: 500
@@ -40,6 +44,8 @@ ingredients:
     comment: sauce
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: 0zglpj
     name: Poivron (rouge)
     originalQuantity: 1
@@ -49,6 +55,8 @@ ingredients:
     comment: sauce
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: 77kyi3
     name: Cornichon
     originalQuantity: 2
@@ -58,6 +66,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: false
+    pS: false
   - uuid: doxujz
     name: Oignon rouge
     originalQuantity: 1.5
@@ -67,6 +77,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: ibtbnq
     name: Tomate
     originalQuantity: 14
@@ -76,6 +88,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: fqoi4u
     name: Vinaigre de Xérès
     originalQuantity: 200
@@ -85,6 +99,8 @@ ingredients:
     comment: sauce
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: s8j4ff
     name: Basilic
     originalQuantity: 3
@@ -94,6 +110,8 @@ ingredients:
     comment: grosses
     allergens: []
     type: epices
+    pF: true
+    pS: false
   - uuid: drjaa4
     name: Pain rassis sans gluten
     originalQuantity: 250
@@ -103,6 +121,8 @@ ingredients:
     comment: sauce
     allergens: []
     type: autres
+    pF: false
+    pS: false
   - uuid: fuhtcw
     name: Amande
     originalQuantity: 250
@@ -113,6 +133,8 @@ ingredients:
     allergens:
       - Fruit à coque
     type: sec
+    pF: false
+    pS: false
 preparation: |-
   SAUCE ROMESCO :
 
@@ -129,8 +151,11 @@ preparation: |-
   Laver les tomates, retirer le pédoncule et les couper en quartiers sans les épépiner.  Hacher grossièrement les cornichons. Émincer très finement les oignons rouges. Effeuiller es branches de basilic.
 
   Servir la sauce à part. Servir bien frais.
-publishDate: 2025-05-30T18:36:00.000Z
+publishDate: '2025-05-30T18:36:00+00:00'
 serveHot: false
 uuid: 39ncup00vuf9
-slug: salade-de-tomates-sauc_39ncup00vuf9
+id: salade-de-tomates-sauc_39ncup00vuf9
+createdAt: '2025-05-30T18:36:00+00:00'
+updatedAt: '2025-05-30T18:36:00+00:00'
+createdBy: Auré
 ---

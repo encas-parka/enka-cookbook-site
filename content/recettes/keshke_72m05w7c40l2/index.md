@@ -17,6 +17,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: dzqmba
     name: Yaourt grec de vache
     originalQuantity: 7.5
@@ -27,6 +29,8 @@ ingredients:
     allergens:
       - Produit laitier
     type: frais
+    pF: true
+    pS: false
   - uuid: rtavky
     name: Oignon
     originalQuantity: 1.5
@@ -36,6 +40,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: h3c8al
     name: huile d'olive
     originalQuantity: 12.5
@@ -45,6 +51,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: usibcf
     name: Noix
     originalQuantity: 750
@@ -55,6 +63,8 @@ ingredients:
     allergens:
       - Fruit à coque
     type: sec
+    pF: false
+    pS: false
   - uuid: omf24t
     name: Boulgour
     originalQuantity: 1.875
@@ -64,6 +74,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sec
+    pF: false
+    pS: false
 plate: 100
 prepAlt:
   - recetteAlt: keshke-vegan-et-sans-gluten_i8nbcodj
@@ -72,12 +84,15 @@ preparation: |-
 
   Le lendemain, ajouter le reste du yaourt et des noix hâchées, mélanger. Au dernier moment, décorer avec un filet d'huile d'olive, et parsemer d'un peu de noix grossièrement hâchées et de menthe séchée.
 preparation24h: 'La veille : hacher l''oignon finement et rincer abondamment le boulgour. Les mélanger avec la moitié du yaourt, la menthe séchée et la moitié des noix hâchées. Saler au gout, laisser reposer au moins 5heures au frais, filmé au contact.'
-publishDate: 2024-06-14T00:06:00.000Z
+publishDate: '2024-06-14T00:06:00+00:00'
 regime:
   - vegetarien
 title: Keshke
 typeR: entree
 serveHot: false
 uuid: 72m05w7c40l2
-slug: keshke_72m05w7c40l2
+id: keshke_72m05w7c40l2
+createdAt: '2024-06-14T00:06:00+00:00'
+updatedAt: '2024-06-14T00:06:00+00:00'
+createdBy: ça vaulx le détour
 ---

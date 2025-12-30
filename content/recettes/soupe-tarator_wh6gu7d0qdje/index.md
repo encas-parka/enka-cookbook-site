@@ -24,6 +24,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: l5p1a5
     name: Concombre
     originalQuantity: 15
@@ -33,6 +35,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: nnkg8f
     name: Aneth aromatique
     originalQuantity: 6
@@ -42,6 +46,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: yl86w7
     name: Yaourt nature
     originalQuantity: 10
@@ -52,6 +58,8 @@ ingredients:
     allergens:
       - Produit laitier
     type: frais
+    pF: false
+    pS: false
   - uuid: h3c8al
     name: huile d'olive
     originalQuantity: 1
@@ -61,6 +69,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
 preparation: |-
   * Fouetter les yaourts jusqu’à ce qu’ils deviennent bien liquides.
     Ajouter, au besoin un peu d’eau fraîche (pas trop non plus puisque l’eau
@@ -84,8 +94,11 @@ preparation: |-
   * Mélanger le tout et garder bien au frais avant de servir.
 
     Ne pas hésiter à même ajouter un ou deux glaçons pour rafraîchir le tarator.
-publishDate: 2025-05-30T12:11:00.000Z
+publishDate: '2025-05-30T12:11:00+00:00'
 serveHot: false
 uuid: wh6gu7d0qdje
-slug: soupe-tarator_wh6gu7d0qdje
+id: soupe-tarator_wh6gu7d0qdje
+createdAt: '2025-05-30T12:11:00+00:00'
+updatedAt: '2025-05-30T12:11:00+00:00'
+createdBy: Auré
 ---

@@ -18,6 +18,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: true
+    pS: false
   - uuid: u2m28w
     name: Ail
     originalQuantity: 3
@@ -27,6 +29,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: doxujz
     name: Oignon rouge
     originalQuantity: 1.5
@@ -36,6 +40,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: h3c8al
     name: huile d'olive
     originalQuantity: 0.5
@@ -45,6 +51,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: 6a8w8k
     name: Pois chiches
     originalQuantity: 4
@@ -54,6 +62,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sec
+    pF: false
+    pS: false
   - uuid: e4mjd1
     name: Jus de citron
     originalQuantity: 0.4
@@ -63,6 +73,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
 materiel:
   - Bruleur
   - Marmitte
@@ -86,11 +98,14 @@ preparation24h: |-
   24H AVANT CUISSON
 
   Tremper les pois-chiches dans un grand volume d'eau. Remplacer l'eau toutes les 6h, trois fois au moins.
-publishDate: 2024-06-18T23:36:00.000Z
+publishDate: '2024-06-18T23:36:00+00:00'
 region: Portugal
 title: Salade de pois-chiches portugaise
 typeR: entree
 serveHot: false
 uuid: po1ntxwnrt9r
-slug: salade-de-pois-chiches_po1ntxwnrt9r
+id: salade-de-pois-chiches_po1ntxwnrt9r
+createdAt: '2024-06-18T23:36:00+00:00'
+updatedAt: '2024-06-18T23:36:00+00:00'
+createdBy: ''
 ---

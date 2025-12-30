@@ -22,6 +22,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: h3c8al
     name: huile d'olive
     originalQuantity: 2
@@ -31,6 +33,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: 2pps90
     name: Poivre
     originalQuantity: 1
@@ -40,6 +44,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: 2juq3x
     name: Sel
     originalQuantity: 1
@@ -49,6 +55,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
 materiel:
   - Four
   - Gastro 1/1 (Fins)
@@ -60,8 +68,11 @@ preparation: |-
   * Verser un peu d'huile dans les gastro, y placer les pommes de terre et enfourner pour une trentaine de minutes à 170°. En tester une, au centre, avec un couteau, si celui-ci s’enfonce sans problème, montez le four à 190° une dizaine de minutes pour qu’elles dorent bien.
   * Si, en cours de cuisson, elles se dessèchent un peu, les arroser doucement d'huile d'olive.
   * Saupoudrer légèrement de fleur de sel et servir immédiatement, ou laisser dans le four, éteint, jusqu’au moment de servir.
-publishDate: 2024-05-18T10:57:00.000Z
+publishDate: '2024-05-18T10:57:00+00:00'
 serveHot: true
 uuid: j8t27ky5i3g8
-slug: pomme-de-terre-herisso_j8t27ky5i3g8
+id: pomme-de-terre-herisso_j8t27ky5i3g8
+createdAt: '2024-05-18T10:57:00+00:00'
+updatedAt: '2024-05-18T10:57:00+00:00'
+createdBy: ''
 ---

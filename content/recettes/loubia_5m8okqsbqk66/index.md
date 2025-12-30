@@ -23,6 +23,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sec
+    pF: false
+    pS: false
   - uuid: znpoor
     name: Haricots blancs
     originalQuantity: 5
@@ -32,6 +34,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sec
+    pF: false
+    pS: false
   - uuid: u2m28w
     name: Ail
     originalQuantity: 5
@@ -41,6 +45,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: eouu0v
     name: Carotte
     originalQuantity: 15
@@ -50,6 +56,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: rtavky
     name: Oignon
     originalQuantity: 10
@@ -59,6 +67,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: 24z2y0
     name: Tomate (conserve)
     originalQuantity: 5
@@ -68,6 +78,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: false
+    pS: false
   - uuid: h3c8al
     name: huile d'olive
     originalQuantity: 1.5
@@ -77,6 +89,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: hgfa4e
     name: Persil frais
     originalQuantity: 5
@@ -86,6 +100,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: true
+    pS: false
   - uuid: fetrpe
     name: Coriandre fraîche
     originalQuantity: 5
@@ -95,6 +111,8 @@ ingredients:
     comment: 'a ajouter ciselée sur le top selon les envies '
     allergens: []
     type: epices
+    pF: true
+    pS: false
   - uuid: bidsmu
     name: Paprika
     originalQuantity: 70
@@ -104,6 +122,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: j84olg
     name: Feuille de laurier
     originalQuantity: 8
@@ -113,6 +133,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: alwx6o
     name: Gingembre en poudre
     originalQuantity: 100
@@ -122,6 +144,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: dc8855
     name: Cumin
     originalQuantity: 70
@@ -131,6 +155,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
 preparation: |-
   ### Instructions
 
@@ -156,8 +182,11 @@ preparation: |-
 
   11 Faire le boulgour.
 preparation24h: Faire tremper les haricots blancs
-publishDate: 2025-05-14T08:43:00.000Z
+publishDate: '2025-05-14T08:43:00+00:00'
 serveHot: true
 uuid: 5m8okqsbqk66
-slug: loubia_5m8okqsbqk66
+id: loubia_5m8okqsbqk66
+createdAt: '2025-05-14T08:43:00+00:00'
+updatedAt: '2025-05-14T08:43:00+00:00'
+createdBy: ''
 ---

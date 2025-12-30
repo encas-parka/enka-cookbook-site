@@ -22,6 +22,8 @@ ingredients:
     allergens:
       - Gluten
     type: lof
+    pF: false
+    pS: false
   - uuid: eu7lc6
     name: huile de colza
     originalQuantity: 1.7
@@ -31,6 +33,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: 2av6w8
     name: Farine de blé
     originalQuantity: 3.4
@@ -41,6 +45,8 @@ ingredients:
     allergens:
       - Gluten
     type: lof
+    pF: false
+    pS: false
   - uuid: rmgr7l
     name: Poudre d'amandes
     originalQuantity: 450
@@ -51,6 +57,8 @@ ingredients:
     allergens:
       - Fruit à coque
     type: sucres
+    pF: false
+    pS: false
   - uuid: ikdk3g
     name: Eau de fleur d'oranger
     originalQuantity: 400
@@ -60,6 +68,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
   - uuid: phv1to
     name: Sucre glace
     originalQuantity: 1
@@ -69,6 +79,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
   - uuid: sk1gbb
     name: Cannelle
     originalQuantity: 30
@@ -78,6 +90,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
 preparation: |-
   Préchauffer le four à 170°C.
 
@@ -100,8 +114,11 @@ preparation: |-
 
 
   \
-publishDate: 2025-05-30T17:27:00.000Z
+publishDate: '2025-05-30T17:27:00+00:00'
 serveHot: false
 uuid: 2zwgan2pcikk
-slug: montecao_2zwgan2pcikk
+id: montecao_2zwgan2pcikk
+createdAt: '2025-05-30T17:27:00+00:00'
+updatedAt: '2025-05-30T17:27:00+00:00'
+createdBy: Auré
 ---

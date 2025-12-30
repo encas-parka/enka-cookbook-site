@@ -23,6 +23,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: u2m28w
     name: Ail
     originalQuantity: 5
@@ -32,6 +34,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: h3c8al
     name: huile d'olive
     originalQuantity: 2
@@ -41,6 +45,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: 2pps90
     name: Poivre
     originalQuantity: 30
@@ -50,6 +56,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: 2juq3x
     name: Sel
     originalQuantity: 50
@@ -59,6 +67,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: he3u48
     name: Cumin moulu
     originalQuantity: 150
@@ -68,6 +78,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: fetrpe
     name: Coriandre fraîche
     originalQuantity: 6
@@ -77,6 +89,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: true
+    pS: false
   - uuid: hgfa4e
     name: Persil frais
     originalQuantity: 10
@@ -86,6 +100,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: true
+    pS: false
   - uuid: rtavky
     name: Oignon
     originalQuantity: 2
@@ -95,6 +111,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: 6a8w8k
     name: Pois chiches
     originalQuantity: 8
@@ -104,14 +122,19 @@ ingredients:
     comment: ''
     allergens: []
     type: sec
+    pF: false
+    pS: false
 materiel:
   - Friteuse
 preparation: "Mixer les pois chiche avec de l'huile d'olive. La verser petit à petit, un peu comme la mayonnaise.\nIl faut obtenir une pâte très moussante.\n\n\_Ensuite, tout mixer avec les herbes, les oignons coupés, l'ail.\nMélanger le tout avec les épices. Goûter.\nCUMIN EN MASSE !!!\n\_\n\nPrendre les deux plus belles cuillères à soupe de la cuisine avec un pot d'eau chaude.\nFaire des quenelles pendant 5h et les disposer au dur (congélo) sur des plateaux.\nSi pas de congélateur, les frire directement en plongeant les quenelles directement.\nCes quenelles ne peuvent pas être façonner à la main.\nBON COURAGE !! Coeur Coeur"
 preparation24h: Au moins 17h avant, faire tremper les pois chiche.
 astuces: []
 prepAlt: []
-publishDate: 2025-10-16T16:10:00.000Z
+publishDate: '2025-10-16T16:10:00+00:00'
 serveHot: true
 uuid: wazz5ayuej01
-slug: falafel-de-lulu_wazz5ayuej01
+id: falafel-de-lulu_wazz5ayuej01
+createdAt: '2025-10-16T16:10:00+00:00'
+updatedAt: '2025-10-16T16:10:00+00:00'
+createdBy: ''
 ---

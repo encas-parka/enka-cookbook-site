@@ -24,6 +24,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sec
+    pF: false
+    pS: false
   - uuid: fazth1
     name: huile de sésame
     originalQuantity: 1
@@ -34,6 +36,8 @@ ingredients:
     allergens:
       - Sésame
     type: lof
+    pF: false
+    pS: false
   - uuid: t2e14k
     name: Citronnelle (bâton)
     originalQuantity: 0.2
@@ -43,6 +47,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: fetrpe
     name: Coriandre fraîche
     originalQuantity: 0.3
@@ -52,6 +58,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: true
+    pS: false
   - uuid: bbwo4n
     name: Tamari (sauce)
     originalQuantity: 1
@@ -62,6 +70,8 @@ ingredients:
     allergens:
       - Soja
     type: epices
+    pF: false
+    pS: false
   - uuid: ks3ocl
     name: Beurre de cacahuètes (salé)
     originalQuantity: 4
@@ -72,6 +82,8 @@ ingredients:
     allergens:
       - Arachides
     type: autres
+    pF: false
+    pS: false
   - uuid: ljzb7j
     name: Eau
     originalQuantity: 50
@@ -81,6 +93,8 @@ ingredients:
     comment: ''
     allergens: []
     type: autres
+    pF: false
+    pS: false
   - uuid: 1koje1
     name: Citron vert
     originalQuantity: 2
@@ -90,6 +104,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: 0zglpj
     name: Poivron (rouge)
     originalQuantity: 150
@@ -99,6 +115,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: eouu0v
     name: Carotte
     originalQuantity: 1
@@ -108,6 +126,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: bl8x51
     name: Avocat
     originalQuantity: 1
@@ -117,6 +137,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: mdoij4
     name: Mangue
     originalQuantity: 1
@@ -126,6 +148,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
 preparation: |-
 
 
@@ -143,8 +167,11 @@ preparation: |-
   * Cuire les nouilles (si besoin, les conserver dans l'eau froide jusqu'à moment de monter la salade).
   * Hacher la coriandre.
   * Mélanger légumes et nouilles, servir la sauce et la coriandre à côté.
-publishDate: 2024-05-20T15:21:00.000Z
+publishDate: '2024-05-20T15:21:00+00:00'
 serveHot: false
 uuid: rajq028r6egc
-slug: salade-thai-a-la-mangu_rajq028r6egc
+id: salade-thai-a-la-mangu_rajq028r6egc
+createdAt: '2024-05-20T15:21:00+00:00'
+updatedAt: '2024-05-20T15:21:00+00:00'
+createdBy: ''
 ---

@@ -26,6 +26,8 @@ ingredients:
     allergens:
       - Oeuf
     type: lof
+    pF: false
+    pS: false
   - uuid: x286pc
     name: Lait demi-écrémé
     originalQuantity: 1.625
@@ -36,6 +38,8 @@ ingredients:
     allergens:
       - Produit laitier
     type: lof
+    pF: false
+    pS: false
   - uuid: 1z66lc
     name: Levure fraîche
     originalQuantity: 250
@@ -46,6 +50,8 @@ ingredients:
     allergens:
       - Gluten
     type: frais
+    pF: true
+    pS: false
   - uuid: 2av6w8
     name: Farine de blé
     originalQuantity: 5
@@ -56,6 +62,8 @@ ingredients:
     allergens:
       - Gluten
     type: lof
+    pF: false
+    pS: false
   - uuid: u9z2he
     name: Sucre en poudre
     originalQuantity: 190
@@ -65,6 +73,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
   - uuid: 2juq3x
     name: Sel
     originalQuantity: 63
@@ -74,6 +84,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: aspkm2
     name: Gouda en tranche
     originalQuantity: 100
@@ -84,6 +96,8 @@ ingredients:
     allergens:
       - Produit laitier
     type: frais
+    pF: true
+    pS: false
   - uuid: kmq1zb
     name: Beurre doux
     originalQuantity: 310
@@ -94,6 +108,8 @@ ingredients:
     allergens:
       - Produit laitier
     type: frais
+    pF: true
+    pS: false
 preparation: |-
   Faire tiédir le lait et y diluer la levure. Attention température du lait entre 38 à 43 °C. Mélanger et laisser reposer 15 minutes.
 
@@ -108,8 +124,11 @@ preparation: |-
   Garnir un côté avec 2 tranches de chorizo ainsi qu'une tranche de fromage et replier la bande sur elle même.
 
   Laisser reposer 30 minutes, badigeonner d’un mélange lait/sucre et enfourner 20 minutes à 180° en surveillant la cuisson.
-publishDate: 2024-05-22T23:12:00.000Z
+publishDate: '2024-05-22T23:12:00+00:00'
 serveHot: true
 uuid: wmkp6dbwr3pj
-slug: lanches-portugaises-ch_wmkp6dbwr3pj
+id: lanches-portugaises-ch_wmkp6dbwr3pj
+createdAt: '2024-05-22T23:12:00+00:00'
+updatedAt: '2024-05-22T23:12:00+00:00'
+createdBy: Auré
 ---

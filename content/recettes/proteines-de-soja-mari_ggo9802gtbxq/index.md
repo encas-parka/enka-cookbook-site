@@ -18,6 +18,8 @@ ingredients:
     allergens:
       - Soja
     type: autres
+    pF: false
+    pS: false
   - uuid: ljzb7j
     name: Eau
     originalQuantity: 5.3
@@ -27,6 +29,8 @@ ingredients:
     comment: ''
     allergens: []
     type: autres
+    pF: false
+    pS: false
   - uuid: 09bywc
     name: Coulis de tomates
     originalQuantity: 4.8
@@ -36,6 +40,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: jjrwlj
     name: Sauce soja
     originalQuantity: 1.2
@@ -46,6 +52,8 @@ ingredients:
     allergens:
       - Soja
     type: epices
+    pF: false
+    pS: false
   - uuid: ique18
     name: Paprika fumé
     originalQuantity: 50
@@ -55,6 +63,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: yat3fu
     name: Coriandre
     originalQuantity: 50
@@ -64,6 +74,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: va2wu4
     name: Curcuma
     originalQuantity: 50
@@ -73,6 +85,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: dc8855
     name: Cumin
     originalQuantity: 50
@@ -82,6 +96,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
 materiel:
   - Marmitte
 plate: 120
@@ -92,7 +108,7 @@ preparation: |-
   * Couper le feu quand ça bout, et laisser les protéines absorber le liquide (pendant 30 minutes environ). Ajouter de l'eau bouillante si besoin.
   * Les protéines sont prêtes quand elles ont absorbé tout le liquide, elles doivent avoir une texture un peu comme de la viande (mou mais pas trop, un peu élastique). Si elles sont trop dures il faut rajouter de l'eau bouillante et re-mélanger.
   * Optionnel : faire sauter les protéines à la poêle dans un peu d'huile juste avant de servir pour qu'elles soient bien chaudes et un peu croustillantes
-publishDate: 2024-03-12T16:57:22.988Z
+publishDate: '2024-03-12T16:57:22.988000+00:00'
 regime:
   - vegetarien
   - vegan
@@ -102,5 +118,8 @@ title: Protéines de soja marinées
 typeR: plat
 serveHot: true
 uuid: ggo9802gtbxq
-slug: proteines-de-soja-mari_ggo9802gtbxq
+id: proteines-de-soja-mari_ggo9802gtbxq
+createdAt: '2024-03-12T16:57:22.988000+00:00'
+updatedAt: '2024-03-12T16:57:22.988000+00:00'
+createdBy: ''
 ---

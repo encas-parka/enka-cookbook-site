@@ -1,6 +1,6 @@
 
 {
-  "slug": "riz-au-lait-vegan-a-la_9s83dfrvgjcs",
+  "id": "riz-au-lait-vegan-a-la_9s83dfrvgjcs",
   "title": "Riz Au Lait Végan À La Chicorée",
   "draft": false,
   "typeR": "dessert",
@@ -16,11 +16,14 @@
   "quantite_desc": null,
   "check": true,
   "materiel": null,
-  "ingredients": [{"allergens":[],"comment":"","name":"Riz rond","normalizedQuantity":1700,"normalizedUnit":"gr.","originalQuantity":1.7,"originalUnit":"kg","type":"sec","uuid":"6azw4k"},{"allergens":["Gluten"],"comment":"","name":"Lait d'avoine","normalizedQuantity":17000,"normalizedUnit":"ml","originalQuantity":17,"originalUnit":"l.","type":"lof","uuid":"3eex0o"},{"allergens":[],"comment":"","name":"Sucre brun Vergeoise","normalizedQuantity":1500,"normalizedUnit":"gr.","originalQuantity":1.5,"originalUnit":"kg","type":"sucres","uuid":"znjs35"},{"allergens":[],"comment":"","name":"Sel","normalizedQuantity":8,"normalizedUnit":"gr.","originalQuantity":8,"originalUnit":"gr.","type":"epices","uuid":"2juq3x"},{"allergens":[],"comment":"","name":"chicorée soluble","normalizedQuantity":170,"normalizedUnit":"gr.","originalQuantity":170,"originalUnit":"gr.","type":"autres","uuid":"pss0bn"}],
+  "ingredients": [{"allergens":[],"comment":"","name":"Riz rond","normalizedQuantity":1700,"normalizedUnit":"gr.","originalQuantity":1.7,"originalUnit":"kg","pF":false,"pS":false,"type":"sec","uuid":"6azw4k"},{"allergens":["Gluten"],"comment":"","name":"Lait d'avoine","normalizedQuantity":17000,"normalizedUnit":"ml","originalQuantity":17,"originalUnit":"l.","pF":false,"pS":false,"type":"lof","uuid":"3eex0o"},{"allergens":[],"comment":"","name":"Sucre brun Vergeoise","normalizedQuantity":1500,"normalizedUnit":"gr.","originalQuantity":1.5,"originalUnit":"kg","pF":false,"pS":false,"type":"sucres","uuid":"znjs35"},{"allergens":[],"comment":"","name":"Sel","normalizedQuantity":8,"normalizedUnit":"gr.","originalQuantity":8,"originalUnit":"gr.","pF":false,"pS":false,"type":"epices","uuid":"2juq3x"},{"allergens":[],"comment":"","name":"chicorée soluble","normalizedQuantity":170,"normalizedUnit":"gr.","originalQuantity":170,"originalUnit":"gr.","pF":false,"pS":false,"type":"autres","uuid":"pss0bn"}],
   "preparation": "faire chauffer une grande quantité d'eau avec le sel, quand elle bout, ajouter le riz et faire cuire pendant 5 mn\n\nfaire chauffer 13 litres de lait d'avoine, juste avant l'ébullition ajouter le riz précuit, le sucre vergeoise et la chicorée, laisser cuire 30 mn en remuant régulièrement\n\n5 mn avant la fin de la cuisson, ajouter les 4 litres de lait restants\n\nrépartisser dans les ramequins et laisser tiédir",
   "preparation24h": null,
   "astuces": null,
   "prepAlt": null,
   "permissionWrite": [],
-  "publishedAt": "2025-01-01T00:00:00Z"
+  "publishedAt": "2025-01-01T00:00:00Z",
+  "createdAt": "2025-06-15T12:58:00+00:00",
+  "updatedAt": "2025-06-15T12:58:00+00:00",
+  "createdBy": ""
 }

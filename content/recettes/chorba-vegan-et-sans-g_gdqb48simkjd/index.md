@@ -16,6 +16,8 @@ ingredients:
     comment: ''
     allergens: []
     type: autres
+    pF: false
+    pS: false
   - uuid: bidsmu
     name: Paprika
     originalQuantity: 30
@@ -25,6 +27,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: 0p7ynz
     name: Piment doux
     originalQuantity: 15
@@ -34,6 +38,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: alwx6o
     name: Gingembre en poudre
     originalQuantity: 30
@@ -43,6 +49,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: j40pyf
     name: Ras el hanout
     originalQuantity: 140
@@ -53,6 +61,8 @@ ingredients:
     allergens:
       - Moutarde
     type: epices
+    pF: false
+    pS: false
   - uuid: 2j9y2v
     name: Menthe
     originalQuantity: 2
@@ -62,6 +72,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: true
+    pS: false
   - uuid: fetrpe
     name: Coriandre fraîche
     originalQuantity: 3
@@ -71,6 +83,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: true
+    pS: false
   - uuid: mck2wl
     name: Concentré de tomate
     originalQuantity: 550
@@ -80,6 +94,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: 09bywc
     name: Coulis de tomates
     originalQuantity: 4
@@ -89,6 +105,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: 9zozfk
     name: Courgette
     originalQuantity: 2
@@ -98,6 +116,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: 78fo97
     name: Céleri branche
     originalQuantity: 500
@@ -108,6 +128,8 @@ ingredients:
     allergens:
       - Céleri
     type: legumes
+    pF: true
+    pS: false
   - uuid: eouu0v
     name: Carotte
     originalQuantity: 3
@@ -117,6 +139,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: rtavky
     name: Oignon
     originalQuantity: 2
@@ -126,6 +150,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: h3c8al
     name: huile d'olive
     originalQuantity: 400
@@ -135,6 +161,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: 89m8hr
     name: Pâtes langues d'oiseaux sans gluten
     originalQuantity: 800
@@ -144,6 +172,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sec
+    pF: false
+    pS: false
   - uuid: 6a8w8k
     name: Pois chiches
     originalQuantity: 1.5
@@ -153,6 +183,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sec
+    pF: false
+    pS: false
 plate: 40
 preparation: |-
   Eplucher et émincer les carottes et les courgettes. Emincer une branche de céleri. Mettre le tout dans un saladier. Réserver.
@@ -167,7 +199,7 @@ preparation: |-
 
   Laisser cuire au moins 1h à frémissement. Ajouter les pâtes et laisser cuire quelques minutes à frémissement
 preparation24h: Faire tremper les pois chiche la veille.
-publishDate: 2024-06-14T21:50:00.000Z
+publishDate: '2024-06-14T21:50:00+00:00'
 quantite_desc: un bol d'environ 600ml par personne
 regime:
   - vegan
@@ -176,5 +208,8 @@ title: Chorba vegan et sans gluten
 typeR: plat
 serveHot: true
 uuid: gdqb48simkjd
-slug: chorba-vegan-et-sans-g_gdqb48simkjd
+id: chorba-vegan-et-sans-g_gdqb48simkjd
+createdAt: '2024-06-14T21:50:00+00:00'
+updatedAt: '2024-06-14T21:50:00+00:00'
+createdBy: 'Résistances 2024 '
 ---

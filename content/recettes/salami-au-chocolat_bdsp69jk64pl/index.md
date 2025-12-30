@@ -18,6 +18,8 @@ ingredients:
     allergens:
       - Produit laitier
     type: frais
+    pF: true
+    pS: false
   - uuid: i5hlq1
     name: Biscuit Petit Brun
     originalQuantity: 1.3
@@ -31,6 +33,8 @@ ingredients:
       - Sésame
       - Oeuf
     type: sucres
+    pF: false
+    pS: false
   - uuid: u9z2he
     name: Sucre en poudre
     originalQuantity: 1.5
@@ -40,6 +44,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
   - uuid: r6792n
     name: Cacao
     originalQuantity: 200
@@ -49,6 +55,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
   - uuid: cr4kiz
     name: Chocolat noir
     originalQuantity: 2
@@ -58,6 +66,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
 plate: 100
 prepAlt:
   - recetteAlt: salami-au-chocolat-vegan-sans-gluten_axcmr1dv_vj6ul9owdr-g
@@ -80,7 +90,7 @@ preparation: |-
 
   Sortir du frigo 30 min avant de le couper et servir.
 preparation24h: Possible de le faire la veille !
-publishDate: 2024-06-12T23:57:00.000Z
+publishDate: '2024-06-12T23:57:00+00:00'
 regime:
   - vegetarien
 region: Portugal
@@ -88,5 +98,8 @@ title: Salami au chocolat
 typeR: dessert
 serveHot: false
 uuid: bdsp69jk64pl
-slug: salami-au-chocolat_bdsp69jk64pl
+id: salami-au-chocolat_bdsp69jk64pl
+createdAt: '2024-06-12T23:57:00+00:00'
+updatedAt: '2024-06-12T23:57:00+00:00'
+createdBy: ''
 ---

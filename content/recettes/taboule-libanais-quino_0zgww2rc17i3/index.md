@@ -26,6 +26,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
   - uuid: h3c8al
     name: huile d'olive
     originalQuantity: 2
@@ -35,6 +37,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: vwdomu
     name: Echalote
     originalQuantity: 600
@@ -44,6 +48,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: ibtbnq
     name: Tomate
     originalQuantity: 10
@@ -53,6 +59,8 @@ ingredients:
     comment: grosses tomates de préférences
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: hgfa4e
     name: Persil frais
     originalQuantity: 6
@@ -62,6 +70,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: true
+    pS: false
   - uuid: 2j9y2v
     name: Menthe
     originalQuantity: 10
@@ -71,6 +81,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: true
+    pS: false
   - uuid: csxn1a
     name: Quinoa blanc
     originalQuantity: 1
@@ -80,6 +92,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sec
+    pF: false
+    pS: false
 preparation: |-
   * Précuire le quinoa ou le millet dans l’eau bouillante.
   * Laver le persil et couper le en FINE JULIENNE (1mm d'epaisseur)
@@ -95,8 +109,11 @@ prepAlt:
   - recetteAlt: taboulais-libanais-des-tarnais_os1bnq2l
   - recetteAlt: taboulais-libanais-des-tarnais-sans-gluten_cp6n89pn
   - recetteAlt: taboule-libanais_48lztgof
-publishDate: 2023-04-13T14:12:56.856Z
+publishDate: '2023-04-13T14:12:56.856000+00:00'
 serveHot: false
 uuid: 0zgww2rc17i3
-slug: taboule-libanais-quino_0zgww2rc17i3
+id: taboule-libanais-quino_0zgww2rc17i3
+createdAt: '2023-04-13T14:12:56.856000+00:00'
+updatedAt: '2023-04-13T14:12:56.856000+00:00'
+createdBy: ''
 ---

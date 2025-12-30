@@ -23,6 +23,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: vwdomu
     name: Echalote
     originalQuantity: 1.5
@@ -32,6 +34,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: rtavky
     name: Oignon
     originalQuantity: 2
@@ -41,6 +45,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: ndu75n
     name: Patates douces
     originalQuantity: 4
@@ -50,6 +56,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: gpeob7
     name: Lait de soja
     originalQuantity: 1
@@ -60,6 +68,8 @@ ingredients:
     allergens:
       - Soja
     type: lof
+    pF: false
+    pS: false
   - uuid: vgec6e
     name: Levure chimique
     originalQuantity: 100
@@ -70,6 +80,8 @@ ingredients:
     allergens:
       - Gluten
     type: lof
+    pF: false
+    pS: false
   - uuid: 1ej217
     name: huile de friture
     originalQuantity: 10
@@ -79,6 +91,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: zf3zf8
     name: Oeuf
     originalQuantity: 24
@@ -89,6 +103,8 @@ ingredients:
     allergens:
       - Oeuf
     type: lof
+    pF: false
+    pS: false
   - uuid: 2av6w8
     name: Farine de blé
     originalQuantity: 3
@@ -99,6 +115,8 @@ ingredients:
     allergens:
       - Gluten
     type: lof
+    pF: false
+    pS: false
   - uuid: e4mjd1
     name: Jus de citron
     originalQuantity: 500
@@ -108,6 +126,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
   - uuid: hgfa4e
     name: Persil frais
     originalQuantity: 1
@@ -117,6 +137,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: true
+    pS: false
   - uuid: 49iwdp
     name: tabasco
     originalQuantity: 5
@@ -126,6 +148,8 @@ ingredients:
     comment: au gout
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: 9qrveq
     name: Piment oiseau
     originalQuantity: 2
@@ -135,6 +159,8 @@ ingredients:
     comment: attention, très fort
     allergens: []
     type: epices
+    pF: false
+    pS: false
 materiel:
   - Friteuse
   - Marmitte
@@ -143,8 +169,11 @@ preparation: |-
   * Faire suer oignons, échalotes coupés en petite dans huile puis déglacer au jus de citron
   * Mélanger le tout. Mélanger le piment à l'oeil, faire gaffe au bon dosage !
   * La pate ne doit pas être trop liquide, hop passer en friture
-publishDate: 2024-05-28T11:09:00.000Z
+publishDate: '2024-05-28T11:09:00+00:00'
 serveHot: true
 uuid: 9ap8enawymli
-slug: accras-de-patate-douce_9ap8enawymli
+id: accras-de-patate-douce_9ap8enawymli
+createdAt: '2024-05-28T11:09:00+00:00'
+updatedAt: '2024-05-28T11:09:00+00:00'
+createdBy: ''
 ---

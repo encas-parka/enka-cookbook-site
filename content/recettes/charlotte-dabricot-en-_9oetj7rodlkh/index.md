@@ -22,6 +22,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: nz97kr
     name: boudoir
     originalQuantity: 100
@@ -31,6 +33,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
   - uuid: n818be
     name: vanille extrait concentré
     originalQuantity: 40
@@ -40,6 +44,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
   - uuid: n85gmi
     name: sucre de canne (blond)
     originalQuantity: 500
@@ -49,6 +55,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
   - uuid: n85gmi
     name: sucre de canne (blond)
     originalQuantity: 700
@@ -58,6 +66,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
   - uuid: 6z655r
     name: Romarin
     originalQuantity: 2
@@ -67,6 +77,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: 0tpvue
     name: Mascarpone
     originalQuantity: 3
@@ -77,6 +89,8 @@ ingredients:
     allergens:
       - Produit laitier
     type: frais
+    pF: true
+    pS: false
 preparation: |-
   \- Lavez, dénoyautez et coupez en quartier les abricots.
 
@@ -99,8 +113,11 @@ preparation: |-
 
   \- Pochez le tout de crème mascarpone chantilly. Sur le dessus,
   ajoutez des abricots rôtis
-publishDate: 2025-06-12T10:34:00.000Z
+publishDate: '2025-06-12T10:34:00+00:00'
 serveHot: false
 uuid: 9oetj7rodlkh
-slug: charlotte-dabricot-en-_9oetj7rodlkh
+id: charlotte-dabricot-en-_9oetj7rodlkh
+createdAt: '2025-06-12T10:34:00+00:00'
+updatedAt: '2025-06-12T10:34:00+00:00'
+createdBy: ''
 ---

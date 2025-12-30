@@ -22,6 +22,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
   - uuid: r6792n
     name: Cacao
     originalQuantity: 170
@@ -31,6 +33,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
   - uuid: n85gmi
     name: sucre de canne (blond)
     originalQuantity: 670
@@ -40,6 +44,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
   - uuid: 2s1qoq
     name: Philadelphia ou autre marque moins cher
     originalQuantity: 1.7
@@ -50,6 +56,8 @@ ingredients:
     allergens:
       - Produit laitier
     type: frais
+    pF: true
+    pS: false
   - uuid: q6t705
     name: Ricotta
     originalQuantity: 4.2
@@ -60,6 +68,8 @@ ingredients:
     allergens:
       - Produit laitier
     type: frais
+    pF: true
+    pS: false
   - uuid: kmq1zb
     name: Beurre doux
     originalQuantity: 670
@@ -70,6 +80,8 @@ ingredients:
     allergens:
       - Produit laitier
     type: frais
+    pF: true
+    pS: false
   - uuid: 8nbcjp
     name: Fécule de maïs (Maïzena)
     originalQuantity: 170
@@ -79,6 +91,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: 5dcfzk
     name: Lait concentré sucré
     originalQuantity: 1.4
@@ -89,6 +103,8 @@ ingredients:
     allergens:
       - Produit laitier
     type: lof
+    pF: false
+    pS: false
   - uuid: vgec6e
     name: Levure chimique
     originalQuantity: 22
@@ -99,6 +115,8 @@ ingredients:
     allergens:
       - Gluten
     type: lof
+    pF: false
+    pS: false
   - uuid: zf3zf8
     name: Oeuf
     originalQuantity: 50
@@ -109,6 +127,8 @@ ingredients:
     allergens:
       - Oeuf
     type: lof
+    pF: false
+    pS: false
   - uuid: 2av6w8
     name: Farine de blé
     originalQuantity: 1.25
@@ -119,6 +139,8 @@ ingredients:
     allergens:
       - Gluten
     type: lof
+    pF: false
+    pS: false
   - uuid: 2juq3x
     name: Sel
     originalQuantity: 16
@@ -128,6 +150,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: ndu75n
     name: Patates douces
     originalQuantity: 2.5
@@ -137,6 +161,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
 preparation: |-
   Peler et couper en dès les patates douces. Les faire cuire à la vapeur.
 
@@ -155,8 +181,11 @@ preparation: |-
   A l'aide d'une cuillère à soupe, déposer de petits morceaux du mélange de patates sur le mélange de fromage en respectant une distance d'environ 4 cm. Passer une fourchette en spirale dans les deux mélanges de manière à obtenir un léger marbrage.
 
   Cuise les cheesecake pendant 35-40 minutes (170°). Laisser refroidir avant de servir.
-publishDate: 2025-05-30T16:53:00.000Z
+publishDate: '2025-05-30T16:53:00+00:00'
 serveHot: false
 uuid: x7h5krcxz6de
-slug: cheesecake-a-la-patate_x7h5krcxz6de
+id: cheesecake-a-la-patate_x7h5krcxz6de
+createdAt: '2025-05-30T16:53:00+00:00'
+updatedAt: '2025-05-30T16:53:00+00:00'
+createdBy: Auré
 ---

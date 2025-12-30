@@ -17,6 +17,8 @@ ingredients:
     allergens:
       - Gluten
     type: autres
+    pF: false
+    pS: false
   - uuid: ljzb7j
     name: Eau
     originalQuantity: 2.5
@@ -26,6 +28,8 @@ ingredients:
     comment: sirop
     allergens: []
     type: autres
+    pF: false
+    pS: false
   - uuid: sk1gbb
     name: Cannelle
     originalQuantity: 5
@@ -35,6 +39,8 @@ ingredients:
     comment: sirop
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: j40pyf
     name: Ras el hanout
     originalQuantity: 35
@@ -45,6 +51,8 @@ ingredients:
     allergens:
       - Moutarde
     type: epices
+    pF: false
+    pS: false
   - uuid: sk1gbb
     name: Cannelle
     originalQuantity: 5
@@ -54,6 +62,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: 2pps90
     name: Poivre
     originalQuantity: 35
@@ -63,6 +73,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: mr7sd5
     name: Figues Sèches
     originalQuantity: 4
@@ -72,6 +84,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: false
+    pS: false
   - uuid: tobtbt
     name: Citron non traité
     originalQuantity: 13
@@ -81,6 +95,8 @@ ingredients:
     comment: sirop
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: u2m28w
     name: Ail
     originalQuantity: 2
@@ -90,6 +106,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: rtavky
     name: Oignon
     originalQuantity: 6
@@ -99,6 +117,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: 7sk3a5
     name: Aubergine
     originalQuantity: 15
@@ -108,6 +128,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: 1jfxgt
     name: Huile d'argan
     originalQuantity: 1
@@ -117,6 +139,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: atccqu
     name: Huile végétale
     originalQuantity: 2
@@ -126,6 +150,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: 82a9ot
     name: Pignon de pin
     originalQuantity: 950
@@ -136,6 +162,8 @@ ingredients:
     allergens:
       - Fruit à coque
     type: sec
+    pF: false
+    pS: false
   - uuid: fuhtcw
     name: Amande
     originalQuantity: 1.6
@@ -146,6 +174,8 @@ ingredients:
     allergens:
       - Fruit à coque
     type: sec
+    pF: false
+    pS: false
   - uuid: phv1to
     name: Sucre glace
     originalQuantity: 300
@@ -155,6 +185,8 @@ ingredients:
     comment: déco
     allergens: []
     type: sucres
+    pF: false
+    pS: false
   - uuid: u9z2he
     name: Sucre en poudre
     originalQuantity: 900
@@ -164,6 +196,8 @@ ingredients:
     comment: sirop
     allergens: []
     type: sucres
+    pF: false
+    pS: false
 materiel:
   - moule à tarte
 plate: 100
@@ -201,7 +235,7 @@ preparation: |-
   Démouler les pastillas sur le plat de service.
 
   Les décorer de demi-rondelles de citron confites et de pignons de pin grillés. il est possible de saupoudrer également de sucre glace et de cannelle.
-publishDate: 2024-06-13T17:39:00.000Z
+publishDate: '2024-06-13T17:39:00+00:00'
 quantite_desc: 8 parts par moule à tarte
 regime:
   - vegan
@@ -209,5 +243,8 @@ title: Pastilla vegan a l'aubergine
 typeR: plat
 serveHot: true
 uuid: fzejp2oz5xj2
-slug: pastilla-vegan-a-laube_fzejp2oz5xj2
+id: pastilla-vegan-a-laube_fzejp2oz5xj2
+createdAt: '2024-06-13T17:39:00+00:00'
+updatedAt: '2024-06-13T17:39:00+00:00'
+createdBy: Auré
 ---

@@ -23,6 +23,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: doxujz
     name: Oignon rouge
     originalQuantity: 20
@@ -32,6 +34,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: l5p1a5
     name: Concombre
     originalQuantity: 20
@@ -41,6 +45,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: eouu0v
     name: Carotte
     originalQuantity: 50
@@ -50,6 +56,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: hz46f4
     name: Chou chinois
     originalQuantity: 10
@@ -59,6 +67,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: y16lzq
     name: Menthe fraîche
     originalQuantity: 10
@@ -68,6 +78,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: true
+    pS: false
   - uuid: fetrpe
     name: Coriandre fraîche
     originalQuantity: 10
@@ -77,6 +89,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: true
+    pS: false
   - uuid: 5qtg4a
     name: Pâte de Curry Rouge
     originalQuantity: 100
@@ -86,6 +100,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: xdy736
     name: lait de coco
     originalQuantity: 8
@@ -95,6 +111,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: lny16c
     name: sucre blanc
     originalQuantity: 500
@@ -104,6 +122,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
 preparation: |-
   Zester les citrons. Réserver. Presser les citrons pour récupérer le jus. Réserver.
 
@@ -118,8 +138,11 @@ preparation: |-
   Enlever les premières feuilles des choux chinois et les couper en 4 dans le sens de la longueur. Les émincer ensuite en fines lamelles dans le sens de la largeur.
 
   Mélanger les zestes des citrons, la pâte de curry, le sucre et le lait de coco et ajouter cette sauce aux crudités mélangés intimement avant de servir.
-publishDate: 2025-06-04T16:41:00.000Z
+publishDate: '2025-06-04T16:41:00+00:00'
 serveHot: false
 uuid: n7f1c2c4gxvr
-slug: salade-exotique_n7f1c2c4gxvr
+id: salade-exotique_n7f1c2c4gxvr
+createdAt: '2025-06-04T16:41:00+00:00'
+updatedAt: '2025-06-04T16:41:00+00:00'
+createdBy: frédo
 ---

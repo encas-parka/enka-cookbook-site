@@ -16,6 +16,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: bidsmu
     name: Paprika
     originalQuantity: 30
@@ -25,6 +27,8 @@ ingredients:
     comment: a voir s'il est piquant ou pas, goutu ou pas
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: fmc1dm
     name: Piment en poudre
     originalQuantity: 10
@@ -34,6 +38,8 @@ ingredients:
     comment: à adapter en fonction du piquant
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: nnkg8f
     name: Aneth aromatique
     originalQuantity: 2
@@ -43,6 +49,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: fetrpe
     name: Coriandre fraîche
     originalQuantity: 2
@@ -52,6 +60,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: true
+    pS: false
   - uuid: sk1gbb
     name: Cannelle
     originalQuantity: 12
@@ -61,6 +71,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: ftj0mq
     name: Pulpe de tomate
     originalQuantity: 6.75
@@ -70,6 +82,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: dzqmba
     name: Yaourt grec de vache
     originalQuantity: 6
@@ -80,6 +94,8 @@ ingredients:
     allergens:
       - Produit laitier
     type: frais
+    pF: true
+    pS: false
   - uuid: kmq1zb
     name: Beurre doux
     originalQuantity: 2
@@ -90,6 +106,8 @@ ingredients:
     allergens:
       - Produit laitier
     type: frais
+    pF: true
+    pS: false
   - uuid: m5dxyo
     name: Feta
     originalQuantity: 3
@@ -100,6 +118,8 @@ ingredients:
     allergens:
       - Produit laitier
     type: frais
+    pF: true
+    pS: false
   - uuid: 7tvtlu
     name: Pâte filo
     originalQuantity: 3.7
@@ -110,6 +130,8 @@ ingredients:
     allergens:
       - Gluten
     type: frais
+    pF: true
+    pS: false
   - uuid: j7as8d
     name: Cébette - Ciboule - Cive - Oignon vert
     originalQuantity: 40
@@ -119,6 +141,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: u2m28w
     name: Ail
     originalQuantity: 1
@@ -128,6 +152,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: rtavky
     name: Oignon
     originalQuantity: 4.5
@@ -137,6 +163,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: 4totf1
     name: Epinard
     originalQuantity: 2.25
@@ -146,6 +174,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: h3c8al
     name: huile d'olive
     originalQuantity: 900
@@ -155,6 +185,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: wwl5vn
     name: Pois chiche cuit
     originalQuantity: 6
@@ -164,6 +196,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sec
+    pF: false
+    pS: false
 materiel:
   - Four
   - Gastro 1/1 (Normaux)
@@ -188,12 +222,15 @@ preparation: |-
     Entailler légèrement le dessus à la forme de découpe souhaiter, des pti losanges (on en servira plusieurs) ou en nombre de part désirées pour chaque plat, et verser dessus la fin du beure fondu, a défaut un filet d'huile d'olive
   * Enfourner 30 à 35 min, jusqu'à ce que ce soit doré et croustillant
   *  Le YAOURT d'accompagnement: ciseler les feuilles fraiches et emincer fin-fin les oignons nouveaux, mélanger au yaourt; ajouter piment de cayenne et/ou paprika, et saler à convenance personnelle!!
-publishDate: 2024-06-20T09:53:00.000Z
+publishDate: '2024-06-20T09:53:00+00:00'
 regime:
   - vegetarien
 title: Baklawa pois chiche feta
 typeR: entree
 serveHot: true
 uuid: uzt4957gbmcd
-slug: baklawa-pois-chiche-fe_uzt4957gbmcd
+id: baklawa-pois-chiche-fe_uzt4957gbmcd
+createdAt: '2024-06-20T09:53:00+00:00'
+updatedAt: '2024-06-20T09:53:00+00:00'
+createdBy: Ça vaulx le détour
 ---

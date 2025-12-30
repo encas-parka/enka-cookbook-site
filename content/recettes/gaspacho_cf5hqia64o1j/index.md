@@ -26,6 +26,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: doxujz
     name: Oignon rouge
     originalQuantity: 10
@@ -35,6 +37,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: rl1e9p
     name: Poivron (vert)
     originalQuantity: 2
@@ -44,6 +48,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: l5p1a5
     name: Concombre
     originalQuantity: 10
@@ -53,6 +59,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: ibtbnq
     name: Tomate
     originalQuantity: 10
@@ -62,6 +70,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: h3c8al
     name: huile d'olive
     originalQuantity: 2
@@ -71,6 +81,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: k8dala
     name: Pain rassis
     originalQuantity: 1.8
@@ -81,6 +93,8 @@ ingredients:
     allergens:
       - Gluten
     type: autres
+    pF: false
+    pS: false
   - uuid: fqoi4u
     name: Vinaigre de Xérès
     originalQuantity: 500
@@ -90,6 +104,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: z6747e
     name: Basilic sec
     originalQuantity: 30
@@ -99,6 +115,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: fkftyb
     name: Origan
     originalQuantity: 30
@@ -108,6 +126,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: 2juq3x
     name: Sel
     originalQuantity: 30
@@ -117,6 +137,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: rgt7s4
     name: Poivre noir moulu
     originalQuantity: 20
@@ -126,10 +148,15 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
 preparation: Le jour même mixer les légumes avec l'huile, le vinaigre et le pain... servir frais bien entendu!!!
 preparation24h: '**24h avant** : faire tremper les légumes prédécoupés petits avec l''huile assaisonnée.'
-publishDate: 2024-05-20T14:21:00.000Z
+publishDate: '2024-05-20T14:21:00+00:00'
 serveHot: false
 uuid: cf5hqia64o1j
-slug: gaspacho_cf5hqia64o1j
+id: gaspacho_cf5hqia64o1j
+createdAt: '2024-05-20T14:21:00+00:00'
+updatedAt: '2024-05-20T14:21:00+00:00'
+createdBy: ''
 ---

@@ -1,6 +1,6 @@
 
 {
-  "slug": "flan-libanais-vegan_f78vjdcbl6k2",
+  "id": "flan-libanais-vegan_f78vjdcbl6k2",
   "title": "Flan Libanais Vegan",
   "draft": false,
   "typeR": "dessert",
@@ -16,11 +16,14 @@
   "quantite_desc": "",
   "check": true,
   "materiel": [],
-  "ingredients": [{"allergens":[],"comment":"","name":"Eau de rose","normalizedQuantity":80,"normalizedUnit":"ml","originalQuantity":80,"originalUnit":"ml","type":"sucres","uuid":"ktlybm"},{"allergens":[],"comment":"","name":"Eau de fleur d'oranger","normalizedQuantity":150,"normalizedUnit":"ml","originalQuantity":150,"originalUnit":"ml","type":"sucres","uuid":"ikdk3g"},{"allergens":[],"comment":"","name":"Fécule de maïs (Maïzena)","normalizedQuantity":800,"normalizedUnit":"gr.","originalQuantity":800,"originalUnit":"gr.","type":"lof","uuid":"8nbcjp"},{"allergens":[],"comment":"","name":"Sucre en poudre","normalizedQuantity":900,"normalizedUnit":"gr.","originalQuantity":900,"originalUnit":"gr.","type":"sucres","uuid":"u9z2he"},{"allergens":[],"comment":"","name":"Lait de riz","normalizedQuantity":10000,"normalizedUnit":"ml","originalQuantity":10,"originalUnit":"l.","type":"lof","uuid":"hzwesd"}],
+  "ingredients": [{"allergens":[],"comment":"","name":"Eau de rose","normalizedQuantity":80,"normalizedUnit":"ml","originalQuantity":80,"originalUnit":"ml","pF":false,"pS":false,"type":"sucres","uuid":"ktlybm"},{"allergens":[],"comment":"","name":"Eau de fleur d'oranger","normalizedQuantity":150,"normalizedUnit":"ml","originalQuantity":150,"originalUnit":"ml","pF":false,"pS":false,"type":"sucres","uuid":"ikdk3g"},{"allergens":[],"comment":"","name":"Fécule de maïs (Maïzena)","normalizedQuantity":800,"normalizedUnit":"gr.","originalQuantity":800,"originalUnit":"gr.","pF":false,"pS":false,"type":"lof","uuid":"8nbcjp"},{"allergens":[],"comment":"","name":"Sucre en poudre","normalizedQuantity":900,"normalizedUnit":"gr.","originalQuantity":900,"originalUnit":"gr.","pF":false,"pS":false,"type":"sucres","uuid":"u9z2he"},{"allergens":[],"comment":"","name":"Lait de riz","normalizedQuantity":10000,"normalizedUnit":"ml","originalQuantity":10,"originalUnit":"l.","pF":false,"pS":false,"type":"lof","uuid":"hzwesd"}],
   "preparation": "Mettre tout les ingrédients ensemble dans une casserole et chauffer à feu doux en mélangeant avec un fouet.\n\nUne fois que la préparation s'est épaissie (consistance type yaourt liquide \"yop\"), couper la cuisson.\n\nDresser dans des ramequins et réserver au frais.\n\nPossible de mettre de la pistache en déco",
   "preparation24h": "",
   "astuces": [],
   "prepAlt": [],
   "permissionWrite": [],
-  "publishedAt": "2025-01-01T00:00:00Z"
+  "publishedAt": "2025-01-01T00:00:00Z",
+  "createdAt": "2025-10-19T21:54:00+00:00",
+  "updatedAt": "2025-10-19T21:54:00+00:00",
+  "createdBy": "Alio"
 }

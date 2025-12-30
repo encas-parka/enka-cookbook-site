@@ -23,6 +23,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sec
+    pF: false
+    pS: false
   - uuid: u2m28w
     name: Ail
     originalQuantity: 3
@@ -32,6 +34,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: j7as8d
     name: Cébette - Ciboule - Cive - Oignon vert
     originalQuantity: 1
@@ -41,6 +45,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: 78fo97
     name: Céleri branche
     originalQuantity: 500
@@ -51,6 +57,8 @@ ingredients:
     allergens:
       - Céleri
     type: legumes
+    pF: true
+    pS: false
   - uuid: rl1e9p
     name: Poivron (vert)
     originalQuantity: 5
@@ -60,6 +68,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: 0zglpj
     name: Poivron (rouge)
     originalQuantity: 5
@@ -69,6 +79,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: rtavky
     name: Oignon
     originalQuantity: 6
@@ -78,6 +90,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: f1xrxx
     name: Chorizo végan
     originalQuantity: 2
@@ -89,6 +103,8 @@ ingredients:
       - Gluten
       - Soja
     type: autres
+    pF: false
+    pS: false
   - uuid: hgfa4e
     name: Persil frais
     originalQuantity: 2
@@ -98,6 +114,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: true
+    pS: false
   - uuid: he3u48
     name: Cumin moulu
     originalQuantity: 10
@@ -107,6 +125,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: 2pps90
     name: Poivre
     originalQuantity: 20
@@ -116,6 +136,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: q28bck
     name: Oignon en poudre
     originalQuantity: 20
@@ -125,6 +147,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: vs2dfm
     name: Ail en poudre
     originalQuantity: 40
@@ -134,6 +158,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: a16yd7
     name: Thym
     originalQuantity: 40
@@ -143,6 +169,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: fkftyb
     name: Origan
     originalQuantity: 40
@@ -152,6 +180,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: bidsmu
     name: Paprika
     originalQuantity: 60
@@ -161,6 +191,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
 preparation: |-
   Trancher le chorizo végan et tout faire dorer à la poêle avec de l'huile.
 
@@ -179,8 +211,11 @@ preparation: |-
   Calculer 1,5 volume d'eau pour 1 volume de riz. Verser l'eau et porter à ébullition. Ajuster l'assaisonnement. Puis verser le riz et porter à ébullition. Réduire le feu et couvrir. Ne rien toucher pendant 10min. Refaire l'opération. Puis une troisième fois si le riz n'est pas parfait.
 
   Rajouter les tranches de chorizo et gardant quelques portions sans chorizo pour une version sans gluten.
-publishDate: 2025-06-01T19:44:00.000Z
+publishDate: '2025-06-01T19:44:00+00:00'
 serveHot: true
 uuid: jai01fvdixw5
-slug: jambalaya-vegan_jai01fvdixw5
+id: jambalaya-vegan_jai01fvdixw5
+createdAt: '2025-06-01T19:44:00+00:00'
+updatedAt: '2025-06-01T19:44:00+00:00'
+createdBy: Auré
 ---

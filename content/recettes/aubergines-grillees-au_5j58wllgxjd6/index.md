@@ -17,6 +17,8 @@ ingredients:
     allergens:
       - Soja
     type: autres
+    pF: false
+    pS: false
   - uuid: k6injl
     name: Vinaigre de riz
     originalQuantity: 50
@@ -26,6 +28,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: h138n7
     name: Sauce soja dark (foncé)
     originalQuantity: 15
@@ -36,6 +40,8 @@ ingredients:
     allergens:
       - Soja
     type: epices
+    pF: false
+    pS: false
   - uuid: h3g82r
     name: Sésame doré
     originalQuantity: 0.01
@@ -46,6 +52,8 @@ ingredients:
     allergens:
       - Sésame
     type: epices
+    pF: false
+    pS: false
   - uuid: jjrwlj
     name: Sauce soja
     originalQuantity: 1
@@ -56,6 +64,8 @@ ingredients:
     allergens:
       - Soja
     type: epices
+    pF: false
+    pS: false
   - uuid: j7as8d
     name: Cébette - Ciboule - Cive - Oignon vert
     originalQuantity: 50
@@ -65,6 +75,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: 7sk3a5
     name: Aubergine
     originalQuantity: 1.3
@@ -74,6 +86,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: c70jxb
     name: huile de tournesol
     originalQuantity: 6
@@ -83,6 +97,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: 7cflkx
     name: Sirop d'agave
     originalQuantity: 1
@@ -92,6 +108,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
   - uuid: e4mjd1
     name: Jus de citron
     originalQuantity: 1
@@ -101,6 +119,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
 materiel:
   - Four
 plate: 10
@@ -110,7 +130,7 @@ preparation: |-
   * Mélanger tous les ingrédients de la marinade.
   * Sortir les aubergines du four. Les retourner et les badigeonner avec la marinade. Saupourdrer de sésame et enfourner de nouveau pour 15-20 min (surveiller la cuisson).
   * Parsemer de ciboule ciselée avant de servir.
-publishDate: 2024-01-10T02:06:21.069Z
+publishDate: '2024-01-10T02:06:21.069000+00:00'
 regime:
   - vegetarien
   - vegan
@@ -120,5 +140,8 @@ title: Aubergines grillées au miso
 typeR: plat
 serveHot: true
 uuid: 5j58wllgxjd6
-slug: aubergines-grillees-au_5j58wllgxjd6
+id: aubergines-grillees-au_5j58wllgxjd6
+createdAt: '2024-01-10T02:06:21.069000+00:00'
+updatedAt: '2024-01-10T02:06:21.069000+00:00'
+createdBy: ''
 ---

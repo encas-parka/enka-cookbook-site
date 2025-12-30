@@ -16,6 +16,8 @@ ingredients:
     comment: ''
     allergens: []
     type: autres
+    pF: false
+    pS: false
   - uuid: bbwo4n
     name: Tamari (sauce)
     originalQuantity: 350
@@ -26,6 +28,8 @@ ingredients:
     allergens:
       - Soja
     type: epices
+    pF: false
+    pS: false
   - uuid: 7lakpz
     name: poivre blanc moulue
     originalQuantity: 15
@@ -35,6 +39,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: tmk6ya
     name: Bouillon de légume (sans gluten)
     originalQuantity: 16
@@ -44,6 +50,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: he3u48
     name: Cumin moulu
     originalQuantity: 20
@@ -53,6 +61,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: nf05n7
     name: Coriandre en poudre
     originalQuantity: 20
@@ -62,6 +72,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: t2e14k
     name: Citronnelle (bâton)
     originalQuantity: 3
@@ -71,6 +83,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: j84olg
     name: Feuille de laurier
     originalQuantity: 4
@@ -80,6 +94,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: 78fo97
     name: Céleri branche
     originalQuantity: 200
@@ -90,6 +106,8 @@ ingredients:
     allergens:
       - Céleri
     type: legumes
+    pF: true
+    pS: false
   - uuid: l3fs10
     name: Poireau
     originalQuantity: 500
@@ -99,6 +117,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: vwdomu
     name: Echalote
     originalQuantity: 1
@@ -108,6 +128,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: nz839c
     name: Gingembre bio
     originalQuantity: 100
@@ -117,6 +139,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: u2m28w
     name: Ail
     originalQuantity: 2
@@ -126,6 +150,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: e4mjd1
     name: Jus de citron
     originalQuantity: 350
@@ -135,6 +161,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
 plate: 40
 preparation: |-
   Mettre une gamelle d'eau sur le feux, faire bouillir.
@@ -156,7 +184,7 @@ preparation: |-
   Avant le service, ôter toute la citronnelle, feuilles de laurier.
 
   Bol de 25cl par personne.
-publishDate: 2024-06-17T22:01:00.000Z
+publishDate: '2024-06-17T22:01:00+00:00'
 quantite_desc: bol d'environ 25cl par personne
 regime:
   - vegan
@@ -166,5 +194,8 @@ title: Bouillon soto - version végane du bouillon de poulet à la javanaise
 typeR: entree
 serveHot: true
 uuid: rls5yc07k88e
-slug: bouillon-soto-version-_rls5yc07k88e
+id: bouillon-soto-version-_rls5yc07k88e
+createdAt: '2024-06-17T22:01:00+00:00'
+updatedAt: '2024-06-17T22:01:00+00:00'
+createdBy: Auré
 ---

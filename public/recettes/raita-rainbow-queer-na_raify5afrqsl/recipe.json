@@ -1,6 +1,6 @@
 
 {
-  "slug": "raita-rainbow-queer-na_raify5afrqsl",
+  "id": "raita-rainbow-queer-na_raify5afrqsl",
   "title": "Raïta (Rainbow Queer Naan)",
   "draft": false,
   "typeR": "entree",
@@ -16,11 +16,14 @@
   "quantite_desc": "",
   "check": true,
   "materiel": null,
-  "ingredients": [{"allergens":[],"comment":"","name":"Ail","normalizedQuantity":130,"normalizedUnit":"gr.","originalQuantity":20,"originalUnit":"gousse·s","type":"legumes","uuid":"u2m28w"},{"allergens":[],"comment":"","name":"Oignon","normalizedQuantity":500,"normalizedUnit":"gr.","originalQuantity":0.5,"originalUnit":"kg","type":"legumes","uuid":"rtavky"},{"allergens":[],"comment":"","name":"Concombre","normalizedQuantity":3000,"normalizedUnit":"gr.","originalQuantity":3,"originalUnit":"kg","type":"legumes","uuid":"l5p1a5"},{"allergens":["Produit laitier"],"comment":"","name":"Yaourt brassé","normalizedQuantity":6000,"normalizedUnit":"gr.","originalQuantity":6,"originalUnit":"kg","type":"frais","uuid":"a73fzw"},{"allergens":[],"comment":"","name":"Poivre noir moulu","normalizedQuantity":10,"normalizedUnit":"gr.","originalQuantity":10,"originalUnit":"gr.","type":"epices","uuid":"rgt7s4"},{"allergens":[],"comment":"","name":"Sel","normalizedQuantity":20,"normalizedUnit":"gr.","originalQuantity":20,"originalUnit":"gr.","type":"epices","uuid":"2juq3x"},{"allergens":[],"comment":"","name":"Cumin (graines)","normalizedQuantity":100,"normalizedUnit":"gr.","originalQuantity":100,"originalUnit":"gr.","type":"epices","uuid":"l3esgp"},{"allergens":[],"comment":"","name":"Coriandre fraîche","normalizedQuantity":1,"normalizedUnit":"bottes","originalQuantity":1,"originalUnit":"bottes","type":"epices","uuid":"fetrpe"}],
+  "ingredients": [{"allergens":[],"comment":"","name":"Ail","normalizedQuantity":130,"normalizedUnit":"gr.","originalQuantity":20,"originalUnit":"gousse·s","pF":true,"pS":false,"type":"legumes","uuid":"u2m28w"},{"allergens":[],"comment":"","name":"Oignon","normalizedQuantity":500,"normalizedUnit":"gr.","originalQuantity":0.5,"originalUnit":"kg","pF":true,"pS":false,"type":"legumes","uuid":"rtavky"},{"allergens":[],"comment":"","name":"Concombre","normalizedQuantity":3000,"normalizedUnit":"gr.","originalQuantity":3,"originalUnit":"kg","pF":true,"pS":false,"type":"legumes","uuid":"l5p1a5"},{"allergens":["Produit laitier"],"comment":"","name":"Yaourt brassé","normalizedQuantity":6000,"normalizedUnit":"gr.","originalQuantity":6,"originalUnit":"kg","pF":true,"pS":false,"type":"frais","uuid":"a73fzw"},{"allergens":[],"comment":"","name":"Poivre noir moulu","normalizedQuantity":10,"normalizedUnit":"gr.","originalQuantity":10,"originalUnit":"gr.","pF":false,"pS":false,"type":"epices","uuid":"rgt7s4"},{"allergens":[],"comment":"","name":"Sel","normalizedQuantity":20,"normalizedUnit":"gr.","originalQuantity":20,"originalUnit":"gr.","pF":false,"pS":false,"type":"epices","uuid":"2juq3x"},{"allergens":[],"comment":"","name":"Cumin (graines)","normalizedQuantity":100,"normalizedUnit":"gr.","originalQuantity":100,"originalUnit":"gr.","pF":false,"pS":false,"type":"epices","uuid":"l3esgp"},{"allergens":[],"comment":"","name":"Coriandre fraîche","normalizedQuantity":1,"normalizedUnit":"bottes","originalQuantity":1,"originalUnit":"bottes","pF":true,"pS":false,"type":"epices","uuid":"fetrpe"}],
   "preparation": "\\\n\nHâcher\n finement les oignons. Passer au presse ail les gousses. Et couper\ngrossièrement en petits dès les concombres. Saler, poivrer. Mélanger\ndans 2 gros gastros.\n\nFaire griller à la poêle les graines de cumin (+ pour la version végane). Puis les passer au pilon. Verser dans les légumes.\n\nAjouter au tout les yaourts et les feuilles de coriandre ciselées. Servir très frais.\n\n\\",
   "preparation24h": null,
   "astuces": null,
   "prepAlt": [],
   "permissionWrite": [],
-  "publishedAt": "2025-01-01T00:00:00Z"
+  "publishedAt": "2025-01-01T00:00:00Z",
+  "createdAt": "2025-06-02T18:02:00+00:00",
+  "updatedAt": "2025-06-02T18:02:00+00:00",
+  "createdBy": "Auré"
 }

@@ -23,6 +23,8 @@ ingredients:
     comment: coulis
     allergens: []
     type: sucres
+    pF: false
+    pS: false
   - uuid: ruhtax
     name: Agar-agar
     originalQuantity: 8
@@ -32,6 +34,8 @@ ingredients:
     comment: ''
     allergens: []
     type: autres
+    pF: false
+    pS: false
   - uuid: 65cee288c5d4
     name: Framboises surgelées
     originalQuantity: 500
@@ -41,6 +45,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: false
+    pS: true
   - uuid: 2a0lnj
     name: gousse de vanille
     originalQuantity: 5
@@ -50,6 +56,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
   - uuid: lny16c
     name: sucre blanc
     originalQuantity: 250
@@ -59,6 +67,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
   - uuid: 6tnb6h
     name: Crème fraiche liquide entière
     originalQuantity: 2
@@ -69,6 +79,8 @@ ingredients:
     allergens:
       - Produit laitier
     type: lof
+    pF: false
+    pS: false
 materiel:
   - ramequins
   - Giraffe (Bras Mixeur)
@@ -83,8 +95,11 @@ preparation: |-
 preparation24h: ''
 astuces: []
 prepAlt: []
-publishDate: 2025-09-08T13:57:00.000Z
+publishDate: '2025-09-08T13:57:00+00:00'
 serveHot: false
 uuid: pncip9db7opr
-slug: panacotta-vanille-et-c_pncip9db7opr
+id: panacotta-vanille-et-c_pncip9db7opr
+createdAt: '2025-09-08T13:57:00+00:00'
+updatedAt: '2025-09-08T13:57:00+00:00'
+createdBy: ''
 ---

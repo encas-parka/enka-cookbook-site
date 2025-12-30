@@ -16,6 +16,8 @@ ingredients:
     comment: ''
     allergens: []
     type: autres
+    pF: false
+    pS: false
   - uuid: 2juq3x
     name: Sel
     originalQuantity: 1
@@ -25,6 +27,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: oygozr
     name: Farine de riz
     originalQuantity: 500
@@ -34,6 +38,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: hzwesd
     name: Lait de riz
     originalQuantity: 8
@@ -43,6 +49,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: xkijt9
     name: Amandes effilées
     originalQuantity: 200
@@ -53,6 +61,8 @@ ingredients:
     allergens:
       - Fruit à coque
     type: sec
+    pF: false
+    pS: false
   - uuid: ikdk3g
     name: Eau de fleur d'oranger
     originalQuantity: 100
@@ -62,6 +72,8 @@ ingredients:
     comment: + quelques gouttes d'eau de rose
     allergens: []
     type: sucres
+    pF: false
+    pS: false
   - uuid: u9z2he
     name: Sucre en poudre
     originalQuantity: 500
@@ -71,6 +83,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
   - uuid: rmgr7l
     name: Poudre d'amandes
     originalQuantity: 1
@@ -81,6 +95,8 @@ ingredients:
     allergens:
       - Fruit à coque
     type: sucres
+    pF: false
+    pS: false
 plate: 100
 preparation: |-
   Mélanger la farine de riz, le sel et 2L de lait. Porter le reste du lait à ébullition. Au premier bouillon, baisser le feu. Il faut un feu large et doux. Ajouter le mélange de farine et de lait à la gamelle en remuant. Ajouter également le sucre, l'agar-agar. Remuer sans cesse.
@@ -90,7 +106,7 @@ preparation: |-
   Quand la préparation a épaissi, couper le feu puis ajouter la poudre d'amande. Laisser tiédir puis ajouter l'eau \[florale]. Mettre en pots et laisser complètement refroidir. \[ndt: verser avec un pichet c'est carrément plus pratique qu'une louche]
 
   ""On peut remplacer l'eau de rose par de la fleur d'oranger ou de l'amaretto. On peut également remplacer l'eau de rose et une partie du sucre par un sirop de rose (ou une autre saveur).""
-publishDate: 2024-06-18T12:28:00.000Z
+publishDate: '2024-06-18T12:28:00+00:00'
 regime:
   - vegan
   - sans-gluten
@@ -99,5 +115,8 @@ title: Creme de riz libanaise - mouhalabieh
 typeR: dessert
 serveHot: false
 uuid: k00sjxzgi6ql
-slug: creme-de-riz-libanaise_k00sjxzgi6ql
+id: creme-de-riz-libanaise_k00sjxzgi6ql
+createdAt: '2024-06-18T12:28:00+00:00'
+updatedAt: '2024-06-18T12:28:00+00:00'
+createdBy: Livre cantines
 ---

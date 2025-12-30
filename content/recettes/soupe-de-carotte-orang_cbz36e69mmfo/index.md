@@ -21,6 +21,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: eouu0v
     name: Carotte
     originalQuantity: 12
@@ -30,6 +32,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: chfwwq
     name: Crème soja
     originalQuantity: 1.5
@@ -40,6 +44,8 @@ ingredients:
     allergens:
       - Soja
     type: lof
+    pF: false
+    pS: false
   - uuid: atccqu
     name: Huile végétale
     originalQuantity: 250
@@ -49,6 +55,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: dex52s
     name: mélange 4 épices
     originalQuantity: 75
@@ -58,6 +66,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: 7jceco
     name: Curry
     originalQuantity: 75
@@ -67,6 +77,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: gzi2ry
     name: Jus d'orange
     originalQuantity: 4
@@ -76,6 +88,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
 preparation: |-
   laver et brosser les carottes puis les râper .
 
@@ -88,8 +102,11 @@ preparation: |-
   mélanger le jus d'orange et la crème de soja les inclure dans la soupe et mixer le tout
 
   à faire refroidir au moins une heure si servie froide
-publishDate: 2025-06-15T12:40:00.000Z
+publishDate: '2025-06-15T12:40:00+00:00'
 serveHot: true
 uuid: cbz36e69mmfo
-slug: soupe-de-carotte-orang_cbz36e69mmfo
+id: soupe-de-carotte-orang_cbz36e69mmfo
+createdAt: '2025-06-15T12:40:00+00:00'
+updatedAt: '2025-06-15T12:40:00+00:00'
+createdBy: ''
 ---

@@ -23,6 +23,8 @@ ingredients:
     comment: ''
     allergens: []
     type: autres
+    pF: false
+    pS: false
   - uuid: 2pps90
     name: Poivre
     originalQuantity: 3
@@ -32,6 +34,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: 2juq3x
     name: Sel
     originalQuantity: 3
@@ -41,6 +45,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: 5c1b20
     name: Moutarde
     originalQuantity: 200
@@ -51,6 +57,8 @@ ingredients:
     allergens:
       - Moutarde
     type: epices
+    pF: false
+    pS: false
   - uuid: qemlqs
     name: Vinaigre balsamique
     originalQuantity: 0.2
@@ -61,6 +69,8 @@ ingredients:
     allergens:
       - Sulfites
     type: epices
+    pF: false
+    pS: false
   - uuid: atccqu
     name: Huile végétale
     originalQuantity: 1.5
@@ -70,6 +80,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
 preparation: |-
   monter la sauce en commençant par la moutarde, et le vinaigre
 
@@ -79,5 +91,8 @@ preparation: |-
 publishDate: '2024-06-15T11:21:00.000Z'
 serveHot: false
 uuid: zv927zjg7x0k
-slug: vinaigrette_zv927zjg7x0k
+id: vinaigrette_zv927zjg7x0k
+createdAt: '2024-06-15T11:21:00.000Z'
+updatedAt: '2024-06-15T11:21:00.000Z'
+createdBy: ''
 ---

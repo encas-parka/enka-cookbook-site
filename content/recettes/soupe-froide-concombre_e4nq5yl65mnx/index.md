@@ -16,6 +16,8 @@ ingredients:
     comment: ''
     allergens: []
     type: autres
+    pF: false
+    pS: false
   - uuid: bidsmu
     name: Paprika
     originalQuantity: 100
@@ -25,6 +27,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: 2j9y2v
     name: Menthe
     originalQuantity: 3
@@ -34,6 +38,8 @@ ingredients:
     comment: service
     allergens: []
     type: epices
+    pF: true
+    pS: false
   - uuid: 2j9y2v
     name: Menthe
     originalQuantity: 3
@@ -43,6 +49,8 @@ ingredients:
     comment: soupe
     allergens: []
     type: epices
+    pF: true
+    pS: false
   - uuid: tmk6ya
     name: Bouillon de légume (sans gluten)
     originalQuantity: 10
@@ -52,6 +60,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: dzqmba
     name: Yaourt grec de vache
     originalQuantity: 6
@@ -62,6 +72,8 @@ ingredients:
     allergens:
       - Produit laitier
     type: frais
+    pF: true
+    pS: false
   - uuid: doxujz
     name: Oignon rouge
     originalQuantity: 1.5
@@ -71,6 +83,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: ep9gif
     name: Concombre sans traitement
     originalQuantity: 13
@@ -80,6 +94,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
 plate: 100
 prepAlt:
   - recetteAlt: SOUPE FROIDE CONCOMBRE ET YAOURT VEGAN
@@ -96,7 +112,7 @@ preparation: |-
   Emincer très très finement les oignons rouges. Ciseler l'autre moitié de la menthe.
 
   Au service, verser une louche de soupe, parsemer de menthe, d'une pincée de paprika et d'oignon.
-publishDate: 2024-05-27T22:14:00.000Z
+publishDate: '2024-05-27T22:14:00+00:00'
 quantite_desc: un bol d'environ 225 ml par personne
 regime:
   - sans-gluten
@@ -105,5 +121,8 @@ title: Soupe froide concombre et yaourt
 typeR: entree
 serveHot: false
 uuid: e4nq5yl65mnx
-slug: soupe-froide-concombre_e4nq5yl65mnx
+id: soupe-froide-concombre_e4nq5yl65mnx
+createdAt: '2024-05-27T22:14:00+00:00'
+updatedAt: '2024-05-27T22:14:00+00:00'
+createdBy: Auré
 ---

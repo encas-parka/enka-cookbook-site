@@ -18,6 +18,8 @@ ingredients:
     comment: ''
     allergens: []
     type: autres
+    pF: false
+    pS: false
   - uuid: h1levi
     name: Pate feuilletée
     originalQuantity: 2.4
@@ -28,6 +30,8 @@ ingredients:
     allergens:
       - Gluten
     type: frais
+    pF: true
+    pS: false
   - uuid: sk1gbb
     name: Cannelle
     originalQuantity: 5
@@ -37,6 +41,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: tobtbt
     name: Citron non traité
     originalQuantity: 4
@@ -46,6 +52,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: zf3zf8
     name: Oeuf
     originalQuantity: 27
@@ -56,6 +64,8 @@ ingredients:
     allergens:
       - Oeuf
     type: lof
+    pF: false
+    pS: false
   - uuid: g6ngse
     name: Haricots blancs en conserve
     originalQuantity: 1
@@ -65,6 +75,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sec
+    pF: false
+    pS: false
   - uuid: phv1to
     name: Sucre glace
     originalQuantity: 100
@@ -74,6 +86,8 @@ ingredients:
     comment: pour saupoudrer
     allergens: []
     type: sucres
+    pF: false
+    pS: false
   - uuid: u9z2he
     name: Sucre en poudre
     originalQuantity: 2
@@ -83,6 +97,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
 materiel:
   - Moule à muffin
 plate: 100
@@ -101,11 +117,14 @@ preparation: |-
 
   Lorsque les gâteaux sont cuits, les retirer, démouler et saupoudrer de sucre glace.
 preparation24h: ''
-publishDate: 2024-05-23T00:01:00.000Z
+publishDate: '2024-05-23T00:01:00+00:00'
 region: Portugal
 title: Queijadas de feijao
 typeR: dessert
 serveHot: false
 uuid: u1i5ta31qhh0
-slug: queijadas-de-feijao_u1i5ta31qhh0
+id: queijadas-de-feijao_u1i5ta31qhh0
+createdAt: '2024-05-23T00:01:00+00:00'
+updatedAt: '2024-05-23T00:01:00+00:00'
+createdBy: Auré
 ---

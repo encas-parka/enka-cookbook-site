@@ -23,6 +23,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: 18dy4e
     name: Pomme de terre
     originalQuantity: 5
@@ -32,6 +34,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: eouu0v
     name: Carotte
     originalQuantity: 5
@@ -41,6 +45,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: u2m28w
     name: Ail
     originalQuantity: 1
@@ -50,6 +56,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: nz839c
     name: Gingembre bio
     originalQuantity: 2
@@ -59,6 +67,8 @@ ingredients:
     comment: deux bouts de racine pour avoir en quantité de gingembre, l'équivalent d'une tète d'ail.
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: rtavky
     name: Oignon
     originalQuantity: 500
@@ -68,6 +78,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: 9vpwp5
     name: Banane
     originalQuantity: 25
@@ -77,6 +89,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: doxujz
     name: Oignon rouge
     originalQuantity: 3
@@ -86,6 +100,8 @@ ingredients:
     comment: Ciselés
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: ibtbnq
     name: Tomate
     originalQuantity: 1.5
@@ -95,6 +111,8 @@ ingredients:
     comment: ce n'est pas une erreur il y a besoin deux fois de tomates dans cette recette
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: 0zglpj
     name: Poivron (rouge)
     originalQuantity: 1
@@ -104,6 +122,8 @@ ingredients:
     comment: Coupés en lamelle
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: ibtbnq
     name: Tomate
     originalQuantity: 25
@@ -113,6 +133,8 @@ ingredients:
     comment: ce n'est pas une erreur il y a besoin deux fois de tomates dans cette recette
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: hlbwfd
     name: Yaourt de soja
     originalQuantity: 2
@@ -123,6 +145,8 @@ ingredients:
     allergens:
       - Soja
     type: frais
+    pF: true
+    pS: false
   - uuid: eipcl2
     name: Margarine
     originalQuantity: 300
@@ -132,6 +156,8 @@ ingredients:
     comment: margarine pour cuisson
     allergens: []
     type: frais
+    pF: true
+    pS: false
   - uuid: hlbwfd
     name: Yaourt de soja
     originalQuantity: 500
@@ -142,6 +168,8 @@ ingredients:
     allergens:
       - Soja
     type: frais
+    pF: true
+    pS: false
   - uuid: 7jceco
     name: Curry
     originalQuantity: 25
@@ -151,6 +179,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: mck2wl
     name: Concentré de tomate
     originalQuantity: 500
@@ -160,6 +190,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: h3c8al
     name: huile d'olive
     originalQuantity: 5
@@ -169,6 +201,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: opblzb
     name: Riz basmati
     originalQuantity: 5
@@ -178,6 +212,8 @@ ingredients:
     comment: Sec (a cuire)
     allergens: []
     type: sec
+    pF: false
+    pS: false
   - uuid: e4mjd1
     name: Jus de citron
     originalQuantity: 5
@@ -187,6 +223,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
   - uuid: rxvf6y
     name: Noix de coco rapée
     originalQuantity: 500
@@ -196,6 +234,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
 preparation: |-
   #### La viande et sa sauce
 
@@ -258,8 +298,11 @@ preparation: |-
 
   Une fois cuit, égrainer le riz pour éviter qu'il ne colle. ensuite couvrir et maintenir au bain marie.
 astuces: []
-publishDate: 2025-05-14T10:52:00.000Z
+publishDate: '2025-05-14T10:52:00+00:00'
 serveHot: true
 uuid: xnkksxn0t76q
-slug: curry-veg_xnkksxn0t76q
+id: curry-veg_xnkksxn0t76q
+createdAt: '2025-05-14T10:52:00+00:00'
+updatedAt: '2025-05-14T10:52:00+00:00'
+createdBy: Léon
 ---

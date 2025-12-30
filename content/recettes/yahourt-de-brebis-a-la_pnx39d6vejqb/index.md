@@ -21,6 +21,8 @@ ingredients:
     allergens:
       - Produit laitier
     type: frais
+    pF: true
+    pS: false
   - uuid: hlbwfd
     name: Yaourt de soja
     originalQuantity: 1.2
@@ -31,6 +33,8 @@ ingredients:
     allergens:
       - Soja
     type: frais
+    pF: true
+    pS: false
   - uuid: n85gmi
     name: sucre de canne (blond)
     originalQuantity: 1.5
@@ -40,6 +44,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
   - uuid: dau8y8
     name: Crème de marron
     originalQuantity: 3
@@ -49,14 +55,19 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
 preparation: |-
   répartir les yaourts, (séparément), dans les ramequins ( il faut une 30aine de vegan)avec une dose de 125gr par personne ( c'est la contenance d'un yaourt).
 
   mélanger la crème de châtaigne non sucrée avec le sucre
 
   mettre une cuillère à soupe de châtaigne sur le yaourt
-publishDate: 2025-06-15T13:19:00.000Z
+publishDate: '2025-06-15T13:19:00+00:00'
 serveHot: false
 uuid: pnx39d6vejqb
-slug: yahourt-de-brebis-a-la_pnx39d6vejqb
+id: yahourt-de-brebis-a-la_pnx39d6vejqb
+createdAt: '2025-06-15T13:19:00+00:00'
+updatedAt: '2025-06-15T13:19:00+00:00'
+createdBy: ''
 ---

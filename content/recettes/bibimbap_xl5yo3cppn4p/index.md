@@ -22,6 +22,8 @@ ingredients:
     allergens:
       - Sésame
     type: lof
+    pF: false
+    pS: false
   - uuid: atccqu
     name: Huile végétale
     originalQuantity: 1
@@ -31,6 +33,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: 8nbcjp
     name: Fécule de maïs (Maïzena)
     originalQuantity: 300
@@ -40,6 +44,8 @@ ingredients:
     comment: Tofu mariné
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: zf3zf8
     name: Oeuf
     originalQuantity: 102
@@ -50,6 +56,8 @@ ingredients:
     allergens:
       - Oeuf
     type: lof
+    pF: false
+    pS: false
   - uuid: nz839c
     name: Gingembre bio
     originalQuantity: 350
@@ -59,6 +67,8 @@ ingredients:
     comment: Sauce
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: u2m28w
     name: Ail
     originalQuantity: 3
@@ -68,6 +78,8 @@ ingredients:
     comment: Sauce
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: u2m28w
     name: Ail
     originalQuantity: 2
@@ -77,6 +89,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: c4z22l
     name: Epinards surgelés
     originalQuantity: 5
@@ -86,6 +100,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: 7b8r4n
     name: Champignon shiitake séché
     originalQuantity: 700
@@ -95,6 +111,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: false
+    pS: false
   - uuid: 92zzps
     name: Champignon de Paris
     originalQuantity: 4
@@ -104,6 +122,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: 9zozfk
     name: Courgette
     originalQuantity: 14
@@ -113,6 +133,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: eouu0v
     name: Carotte
     originalQuantity: 8
@@ -122,6 +144,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: z9plfy
     name: Graines de sésame blanc
     originalQuantity: 250
@@ -132,6 +156,8 @@ ingredients:
     allergens:
       - Sésame
     type: sec
+    pF: false
+    pS: false
   - uuid: z9plfy
     name: Graines de sésame blanc
     originalQuantity: 500
@@ -142,6 +168,8 @@ ingredients:
     allergens:
       - Sésame
     type: sec
+    pF: false
+    pS: false
   - uuid: atlkei
     name: Graines de sésame noir
     originalQuantity: 500
@@ -152,6 +180,8 @@ ingredients:
     allergens:
       - Sésame
     type: sec
+    pF: false
+    pS: false
   - uuid: 0uelc3
     name: Riz
     originalQuantity: 10
@@ -161,6 +191,8 @@ ingredients:
     comment: 300 gr de riz cuit par personne
     allergens: []
     type: sec
+    pF: false
+    pS: false
   - uuid: rv1rfv
     name: Gochujang
     originalQuantity: 1
@@ -172,6 +204,8 @@ ingredients:
       - Gluten
       - Soja
     type: epices
+    pF: false
+    pS: false
   - uuid: k6injl
     name: Vinaigre de riz
     originalQuantity: 1
@@ -181,6 +215,8 @@ ingredients:
     comment: sauce
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: vet0jj
     name: Doenjang
     originalQuantity: 1
@@ -192,6 +228,8 @@ ingredients:
       - Gluten
       - Soja
     type: epices
+    pF: false
+    pS: false
   - uuid: k6injl
     name: Vinaigre de riz
     originalQuantity: 250
@@ -201,6 +239,8 @@ ingredients:
     comment: Tofu mariné
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: vs2dfm
     name: Ail en poudre
     originalQuantity: 100
@@ -210,6 +250,8 @@ ingredients:
     comment: Tofu mariné
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: ytlacu
     name: Ketchup
     originalQuantity: 600
@@ -219,6 +261,8 @@ ingredients:
     comment: Tofu mariné
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: 28jpdi
     name: Gochujang sans gluten
     originalQuantity: 250
@@ -228,6 +272,8 @@ ingredients:
     comment: Tofu mariné
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: jjrwlj
     name: Sauce soja
     originalQuantity: 500
@@ -238,6 +284,8 @@ ingredients:
     allergens:
       - Soja
     type: epices
+    pF: false
+    pS: false
   - uuid: ljzb7j
     name: Eau
     originalQuantity: 2
@@ -247,6 +295,8 @@ ingredients:
     comment: Sauce
     allergens: []
     type: autres
+    pF: false
+    pS: false
   - uuid: 3ahcls
     name: Tofu ferme
     originalQuantity: 7
@@ -256,6 +306,8 @@ ingredients:
     comment: ''
     allergens: []
     type: frais
+    pF: false
+    pS: false
   - uuid: zkmmgt
     name: 'Sirop d''érable '
     originalQuantity: 500
@@ -265,6 +317,8 @@ ingredients:
     comment: Sauce
     allergens: []
     type: sucres
+    pF: false
+    pS: false
   - uuid: s80bet
     name: Soda au Gingembre - Ginger Beer
     originalQuantity: 1
@@ -274,6 +328,8 @@ ingredients:
     comment: Sauce
     allergens: []
     type: sucres
+    pF: false
+    pS: false
 preparation: |-
   **ŒUFS PARFAITS :**
 
@@ -344,12 +400,15 @@ astuces:
   - astuce: 'Attention : Il y a du sésame dans beaucoup de préparations. Et il y a du gluten dans le gochujan et le doenjang.'
 prepAlt:
   - recetteAlt: sauce-bibimbap-sans-allergenes_3n7u5n4d
-publishDate: 2025-05-04T21:01:00.000Z
+publishDate: '2025-05-04T21:01:00+00:00'
 checkAlwaysOk: false
 regime:
   - vegan
   - sans-gluten
 serveHot: true
 uuid: xl5yo3cppn4p
-slug: bibimbap_xl5yo3cppn4p
+id: bibimbap_xl5yo3cppn4p
+createdAt: '2025-05-04T21:01:00+00:00'
+updatedAt: '2025-05-04T21:01:00+00:00'
+createdBy: Auré
 ---

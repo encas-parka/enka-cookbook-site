@@ -16,6 +16,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: true
+    pS: false
   - uuid: n8iflg
     name: Pastèque
     originalQuantity: 6
@@ -25,6 +27,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: on84nb
     name: Melon
     originalQuantity: 8
@@ -34,14 +38,19 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
 plate: 100
 preparation: Blablabla
-publishDate: 2024-06-17T23:43:00.000Z
+publishDate: '2024-06-17T23:43:00+00:00'
 saison:
   - ete
 title: Salade de pasteque, melon et basilic
 typeR: dessert
 serveHot: false
 uuid: 7ti71zyu09ol
-slug: salade-de-pasteque-mel_7ti71zyu09ol
+id: salade-de-pasteque-mel_7ti71zyu09ol
+createdAt: '2024-06-17T23:43:00+00:00'
+updatedAt: '2024-06-17T23:43:00+00:00'
+createdBy: Auré
 ---

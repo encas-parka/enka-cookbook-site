@@ -1,6 +1,6 @@
 
 {
-  "slug": "salade-de-betteraves-r_wbtyfvcqq95a",
+  "id": "salade-de-betteraves-r_wbtyfvcqq95a",
   "title": "Salade De Betteraves Rôties Au Yaourt Et Au Citron Confit",
   "draft": false,
   "typeR": "entree",
@@ -16,11 +16,14 @@
   "quantite_desc": null,
   "check": true,
   "materiel": null,
-  "ingredients": [{"allergens":[],"comment":"","name":"Citron (jus)","normalizedQuantity":1,"normalizedUnit":"unité","originalQuantity":1,"originalUnit":"unité","type":"legumes","uuid":"bwkn34"},{"allergens":[],"comment":"","name":"Citron confit","normalizedQuantity":40,"normalizedUnit":"gr.","originalQuantity":40,"originalUnit":"gr.","type":"legumes","uuid":"m6gmgq"},{"allergens":[],"comment":"","name":"Oignon rouge","normalizedQuantity":120,"normalizedUnit":"gr.","originalQuantity":1,"originalUnit":"unité","type":"legumes","uuid":"doxujz"},{"allergens":[],"comment":"","name":"Betterave rouge","normalizedQuantity":1000,"normalizedUnit":"gr.","originalQuantity":1,"originalUnit":"kg","type":"legumes","uuid":"7sc3uw"},{"allergens":[],"comment":"","name":"huile d'olive","normalizedQuantity":30,"normalizedUnit":"ml","originalQuantity":2,"originalUnit":"c. à soupe","type":"lof","uuid":"h3c8al"},{"allergens":["Produit laitier"],"comment":"","name":"Yaourt grec de vache","normalizedQuantity":150,"normalizedUnit":"gr.","originalQuantity":150,"originalUnit":"gr.","type":"frais","uuid":"dzqmba"},{"allergens":[],"comment":"","name":"Aneth aromatique","normalizedQuantity":15,"normalizedUnit":"gr.","originalQuantity":15,"originalUnit":"gr.","type":"epices","uuid":"nnkg8f"},{"allergens":[],"comment":"","name":"Cumin moulu","normalizedQuantity":7.5,"normalizedUnit":"ml","originalQuantity":1.5,"originalUnit":"c. à café","type":"epices","uuid":"he3u48"},{"allergens":["Sésame"],"comment":"","name":"Tahin","normalizedQuantity":15,"normalizedUnit":"ml","originalQuantity":1,"originalUnit":"c. à soupe","type":"autres","uuid":"u33083"}],
+  "ingredients": [{"allergens":[],"comment":"","name":"Citron (jus)","normalizedQuantity":1,"normalizedUnit":"unité","originalQuantity":1,"originalUnit":"unité","pF":true,"pS":false,"type":"legumes","uuid":"bwkn34"},{"allergens":[],"comment":"","name":"Citron confit","normalizedQuantity":40,"normalizedUnit":"gr.","originalQuantity":40,"originalUnit":"gr.","pF":false,"pS":false,"type":"legumes","uuid":"m6gmgq"},{"allergens":[],"comment":"","name":"Oignon rouge","normalizedQuantity":120,"normalizedUnit":"gr.","originalQuantity":1,"originalUnit":"unité","pF":true,"pS":false,"type":"legumes","uuid":"doxujz"},{"allergens":[],"comment":"","name":"Betterave rouge","normalizedQuantity":1000,"normalizedUnit":"gr.","originalQuantity":1,"originalUnit":"kg","pF":true,"pS":false,"type":"legumes","uuid":"7sc3uw"},{"allergens":[],"comment":"","name":"huile d'olive","normalizedQuantity":30,"normalizedUnit":"ml","originalQuantity":2,"originalUnit":"c. à soupe","pF":false,"pS":false,"type":"lof","uuid":"h3c8al"},{"allergens":["Produit laitier"],"comment":"","name":"Yaourt grec de vache","normalizedQuantity":150,"normalizedUnit":"gr.","originalQuantity":150,"originalUnit":"gr.","pF":true,"pS":false,"type":"frais","uuid":"dzqmba"},{"allergens":[],"comment":"","name":"Aneth aromatique","normalizedQuantity":15,"normalizedUnit":"gr.","originalQuantity":15,"originalUnit":"gr.","pF":false,"pS":false,"type":"epices","uuid":"nnkg8f"},{"allergens":[],"comment":"","name":"Cumin moulu","normalizedQuantity":7.5,"normalizedUnit":"ml","originalQuantity":1.5,"originalUnit":"c. à café","pF":false,"pS":false,"type":"epices","uuid":"he3u48"},{"allergens":["Sésame"],"comment":"","name":"Tahin","normalizedQuantity":15,"normalizedUnit":"ml","originalQuantity":1,"originalUnit":"c. à soupe","pF":false,"pS":false,"type":"autres","uuid":"u33083"}],
   "preparation": "je le fais la semaine pro",
   "preparation24h": null,
   "astuces": null,
   "prepAlt": null,
   "permissionWrite": [],
-  "publishedAt": "2025-01-01T00:00:00Z"
+  "publishedAt": "2025-01-01T00:00:00Z",
+  "createdAt": "2025-05-19T14:28:00+00:00",
+  "updatedAt": "2025-05-19T14:28:00+00:00",
+  "createdBy": ""
 }

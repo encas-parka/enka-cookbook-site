@@ -1,6 +1,6 @@
 
 {
-  "slug": "tofu-grille_aqquiy1jal20",
+  "id": "tofu-grille_aqquiy1jal20",
   "title": "Tofu Grillé",
   "draft": false,
   "typeR": "plat",
@@ -16,11 +16,14 @@
   "quantite_desc": null,
   "check": true,
   "materiel": null,
-  "ingredients": [{"allergens":[],"comment":"","name":"huile de friture","normalizedQuantity":1000,"normalizedUnit":"ml","originalQuantity":1,"originalUnit":"l.","type":"lof","uuid":"1ej217"},{"allergens":[],"comment":"","name":"Fécule de maïs (Maïzena)","normalizedQuantity":300,"normalizedUnit":"gr.","originalQuantity":300,"originalUnit":"gr.","type":"lof","uuid":"8nbcjp"},{"allergens":[],"comment":"","name":"Tofu ferme","normalizedQuantity":3000,"normalizedUnit":"gr.","originalQuantity":3,"originalUnit":"kg","type":"frais","uuid":"3ahcls"},{"allergens":[],"comment":"","name":"Paprika fumé","normalizedQuantity":40,"normalizedUnit":"gr.","originalQuantity":40,"originalUnit":"gr.","type":"epices","uuid":"ique18"}],
+  "ingredients": [{"allergens":[],"comment":"","name":"huile de friture","normalizedQuantity":1000,"normalizedUnit":"ml","originalQuantity":1,"originalUnit":"l.","pF":false,"pS":false,"type":"lof","uuid":"1ej217"},{"allergens":[],"comment":"","name":"Fécule de maïs (Maïzena)","normalizedQuantity":300,"normalizedUnit":"gr.","originalQuantity":300,"originalUnit":"gr.","pF":false,"pS":false,"type":"lof","uuid":"8nbcjp"},{"allergens":[],"comment":"","name":"Tofu ferme","normalizedQuantity":3000,"normalizedUnit":"gr.","originalQuantity":3,"originalUnit":"kg","pF":false,"pS":false,"type":"frais","uuid":"3ahcls"},{"allergens":[],"comment":"","name":"Paprika fumé","normalizedQuantity":40,"normalizedUnit":"gr.","originalQuantity":40,"originalUnit":"gr.","pF":false,"pS":false,"type":"epices","uuid":"ique18"}],
   "preparation": "essorer le tofu avec du sopalin\n\ncouper le tofu en cube\n\nl'enrober de maïzena mélangée avec le paprika\n\nfrire jusqu'à ce que ce soit doré et croustillant",
   "preparation24h": null,
   "astuces": [{"astuce":"prévoir du sopalin"}],
   "prepAlt": null,
   "permissionWrite": [],
-  "publishedAt": "2025-01-01T00:00:00Z"
+  "publishedAt": "2025-01-01T00:00:00Z",
+  "createdAt": "2025-06-15T20:04:00+00:00",
+  "updatedAt": "2025-06-15T20:04:00+00:00",
+  "createdBy": ""
 }

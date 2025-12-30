@@ -1,1 +1,5322 @@
-[{"n":"Abricot","t":"legumes","u":"xo0ibs"},{"n":"Agar-agar","t":"autres","u":"ruhtax"},{"a":["Viande"],"n":"Agneau","t":"animaux","u":"mz93p4"},{"n":"Ail","t":"legumes","u":"u2m28w"},{"n":"Ail en poudre","t":"epices","u":"vs2dfm"},{"n":"Airelle","t":"legumes","u":"eyaozj"},{"n":"Algue Kombu","t":"legumes","u":"oafcb5"},{"n":"Algue kombu séchée","t":"epices","u":"cd0g12"},{"n":"Algue Nori","t":"legumes","u":"rtj08p"},{"n":"Algue nori feuille séchée","t":"epices","u":"ffafjo"},{"n":"Algue wakamé séchée","t":"epices","u":"m8rseq"},{"a":["Fruit à coque"],"n":"Amande","t":"sec","u":"fuhtcw"},{"a":["Fruit à coque"],"n":"Amandes effilées","t":"sec","u":"xkijt9"},{"n":"Ananas","t":"legumes","u":"7aceyw"},{"n":"Ananas (conserve)","t":"legumes","u":"ux53yb"},{"a":["Viande","Porc"],"n":"Andouille (charcuterie)","t":"animaux","u":"zgfqat"},{"a":["Viande","Porc"],"n":"Andouillette (charcuterie)","t":"animaux","u":"f7dxsh"},{"n":"Aneth aromatique","t":"epices","u":"nnkg8f"},{"a":["Poisson"],"n":"Anguille (poisson)","t":"animaux","u":"1g26bd"},{"n":"Anis étoilé","t":"epices","u":"esnwzi"},{"n":"Anis vert en poudre","t":"epices","u":"t3szad"},{"n":"Aquafaba - jus de pois chiche","t":"autres","u":"b624uv"},{"n":"Artichaut","t":"legumes","u":"uwpe3a"},{"n":"Asperge blanche","t":"legumes","u":"3ltjuq"},{"n":"Asperge verte","t":"legumes","u":"j8bbik"},{"n":"Aubergine","t":"legumes","u":"7sk3a5"},{"n":"Avocat","t":"legumes","u":"bl8x51"},{"a":["Produit laitier"],"n":"Babybel","t":"frais","u":"wb086z"},{"a":["Viande","Porc"],"n":"Bacon (charcuterie)","t":"animaux","u":"mv18mg"},{"n":"Baies roses","t":"epices","u":"9o3793"},{"n":"Banane","t":"legumes","u":"9vpwp5"},{"n":"Banane séchée","t":"legumes","u":"ad1kwx"},{"a":["Poisson"],"n":"Bar (poisson)","t":"animaux","u":"b7eftl"},{"n":"Basilic","t":"epices","u":"s8j4ff"},{"n":"Basilic sec","t":"epices","u":"z6747e"},{"n":"Bâtonnet de canelle","t":"epices","u":"b77daa7e0067"},{"a":["Poisson"],"n":"Baudroie (poisson)","t":"animaux","u":"7buymk"},{"a":["Viande"],"n":"Bavette (boeuf)","t":"animaux","u":"zuwedv"},{"a":["Produit laitier"],"n":"Beaufort","t":"frais","u":"dar9kl"},{"n":"Bette (blette)","t":"legumes","u":"dkdml5"},{"n":"Betterave cuite","t":"legumes","u":"i7psri"},{"n":"Betterave rouge","t":"legumes","u":"7sc3uw"},{"a":["Arachides"],"n":"Beurre de cacahuètes (salé)","t":"autres","u":"ks3ocl"},{"a":["Arachides"],"n":"Beurre de cacahuètes (sucré)","t":"autres","u":"7wpsj2"},{"a":["Produit laitier"],"n":"Beurre demi-sel","t":"frais","u":"mxub21"},{"a":["Produit laitier"],"n":"Beurre doux","t":"frais","u":"kmq1zb"},{"n":"Bicarbonate alimentaire","t":"lof","u":"vf8140"},{"n":"Bicarbonate de soude","t":"autres","u":"fnnx13"},{"a":["Viande"],"n":"Biche (volaille et gibier)","t":"animaux","u":"m62ark"},{"a":["Viande"],"n":"Bifteck (boeuf)","t":"animaux","u":"oe4cqe"},{"a":["Mollusque"],"n":"Bigorneaux (fruits de mer)","t":"animaux","u":"ppk4ed"},{"a":["Gluten","Produit laitier","Sésame","Oeuf"],"n":"Biscuit Petit Brun","t":"sucres","u":"i5hlq1"},{"n":"Biscuit vegan et sans gluten","t":"sucres","u":"ade8hh"},{"a":["Viande"],"n":"Blanc de poulet (volaille et gibier)","t":"animaux","u":"ywsa1s"},{"a":["Gluten"],"n":"Blé","t":"sec","u":"wsjxq7"},{"a":["Produit laitier"],"n":"Bleu","t":"frais","u":"zin8ws"},{"a":["Viande","Porc"],"n":"Boudin blanc (charcuterie)","t":"animaux","u":"70q6zb"},{"a":["Viande","Porc"],"n":"Boudin noir (charcuterie)","t":"animaux","u":"442u8i"},{"n":"boudoir","t":"sucres","u":"nz97kr"},{"n":"bouillon cube","t":"epices","u":"57xo8g"},{"n":"Bouillon de légume (sans gluten)","t":"epices","u":"tmk6ya"},{"a":["gluten"],"n":"Bouillon de légumes","t":"epices","u":"3n8509"},{"n":"Boulgour","t":"sec","u":"omf24t"},{"a":["Gluten"],"n":"Boulgour fin","t":"sec","u":"s0hv5y"},{"n":"Bouquet garni","t":"epices","u":"x0ewxp"},{"a":["Viande"],"n":"Bourguignon (boeuf)","t":"animaux","u":"70v04n"},{"a":["Produit laitier"],"n":"Brie-Beaufort","t":"frais","u":"gjww01"},{"a":["Poisson"],"n":"Brochet (poisson)","t":"animaux","u":"5jguvn"},{"n":"Brocoli","t":"legumes","u":"ix43bo"},{"a":["Produit laitier"],"n":"Bûche de chèvre","t":"frais","u":"yjxnau"},{"a":["Mollusque"],"n":"Bulot (fruits de mer)","t":"animaux","u":"91je3t"},{"a":["Poisson"],"n":"Cabillaud (poisson)","t":"animaux","u":"ngl32x"},{"a":["Arachide"],"n":"Cacahuète","t":"sec","u":"73ikep"},{"n":"Cacao","t":"sucres","u":"r6792n"},{"n":"Café moulu","t":"autres","u":"86z19m"},{"a":["Viande"],"n":"Caille (volaille et gibier)","t":"animaux","u":"279ad0"},{"a":["Crustacé"],"n":"Calamar (fruits de mer)","t":"animaux","u":"cxldjv"},{"a":["Produit laitier"],"n":"Camembert","t":"frais","u":"2soph2"},{"a":["Viande"],"n":"Canard (volaille et gibier)","t":"animaux","u":"5yclak"},{"n":"Canneberge","t":"legumes","u":"uja9ip"},{"n":"Cannelle","t":"epices","u":"sk1gbb"},{"a":["Produit laitier"],"n":"Cantal","t":"frais","u":"chmx44"},{"n":"Câpres","t":"epices","u":"c88lz8"},{"n":"Cardamome","t":"epices","u":"azpv5r"},{"n":"Cardamone en poudre","t":"epices","u":"2n9g9t"},{"n":"Carotte","t":"legumes","u":"eouu0v"},{"a":["Poisson"],"n":"Carpe (poisson)","t":"animaux","u":"yb5s26"},{"a":["Poisson"],"n":"Carrelet (poisson)","t":"animaux","u":"110zbn"},{"n":"Cassis","t":"legumes","u":"un0thk"},{"n":"Cassonade","t":"sucres","u":"gk7kod"},{"n":"Catalonia","t":"legumes","u":"pi7nqu"},{"n":"Cébette - Ciboule - Cive - Oignon vert","t":"legumes","u":"j7as8d"},{"n":"Cébettes","t":"legumes","u":"j2l8hj"},{"a":["Céleri"],"n":"Céleri","t":"legumes","u":"qagkr3"},{"a":["Céleri"],"n":"Céleri branche","t":"legumes","u":"78fo97"},{"a":["Céleri"],"n":"Céleri rave","t":"legumes","u":"2145vg"},{"n":"Cerfeuil","t":"epices","u":"uak5z9"},{"n":"Cerise","t":"legumes","u":"2f2o9o"},{"n":"Cerise aux sirop","t":"legumes","u":"dzwb3b"},{"n":"Cerises Griottes","t":"legumes","u":"04loak"},{"a":["Viande"],"n":"Cerises griottes (abats)","t":"animaux","u":"xm058a"},{"a":["Viande","Porc"],"n":"Cervelas (charcuterie)","t":"animaux","u":"ufwzvi"},{"a":["Viande"],"n":"Cervelle (abats)","t":"animaux","u":"70y1z0"},{"a":["Viande","Porc"],"n":"Chair à saucisse (charcuterie)","t":"animaux","u":"xpw7ri"},{"n":"Champignon de Paris","t":"legumes","u":"92zzps"},{"n":"Champignon noir","t":"legumes","u":"hlihcc"},{"n":"Champignon shiitake séché","t":"legumes","u":"7b8r4n"},{"n":"Champignons","t":"legumes","u":"v9qhs9"},{"n":"Champignons (conserve)","t":"legumes","u":"ir893w"},{"n":"champignons de paris surgelés","t":"legumes","u":"whpsd8"},{"n":"Champignons séchés","t":"legumes","u":"wcvin0"},{"n":"Chantifix","t":"autres","u":"aujuzx"},{"a":["Gluten"],"n":"Chapelure","t":"autres","u":"psu3gg"},{"n":"Chapelure sans gluten","t":"sucres","u":"5e0pcl"},{"a":["Produit laitier"],"n":"Cheddar","t":"frais","u":"laq4wn"},{"a":["Viande"],"n":"Chevreuil (volaille et gibier)","t":"animaux","u":"upmilx"},{"n":"chicorée soluble","t":"autres","u":"pss0bn"},{"n":"Chocolat amer en poudre","t":"sucres","u":"8kw83v"},{"n":"Chocolat au lait","t":"sucres","u":"c45liy"},{"n":"Chocolat blanc","t":"sucres","u":"fsz13t"},{"n":"Chocolat noir","t":"sucres","u":"cr4kiz"},{"n":"Chocolat noir patissier 70p100","t":"sucres","u":"1e3zhq"},{"n":"Chocolat praliné","t":"sucres","u":"h58dek"},{"a":["Viande","Porc"],"n":"Chorizo (charcuterie)","t":"animaux","u":"dsiv59"},{"a":["Gluten","Soja"],"n":"Chorizo végan","t":"autres","u":"f1xrxx"},{"n":"Chou blanc","t":"legumes","u":"mlukbi"},{"n":"Chou chinois","t":"legumes","u":"hz46f4"},{"n":"Chou de Bruxelles","t":"legumes","u":"asdz59"},{"n":"Chou frisé","t":"legumes","u":"2hh55e"},{"n":"Chou Romanesco","t":"legumes","u":"xdl5a1"},{"n":"Chou rouge","t":"legumes","u":"nl2s2n"},{"n":"Chou vert","t":"legumes","u":"jrqk2q"},{"n":"Chou-chinois","t":"legumes","u":"dd3zbj"},{"n":"Chou-fleur","t":"legumes","u":"nml8fs"},{"n":"Chou-rave","t":"legumes","u":"cabud5"},{"a":["Soja"],"n":"Chunks (protéine de soja)","t":"autres","u":"pbydyr"},{"n":"Ciboulette","t":"epices","u":"mt22ff"},{"n":"Cima di Rapa","t":"legumes","u":"z7il6a"},{"n":"Citron (jus)","t":"legumes","u":"bwkn34"},{"n":"Citron confit","t":"legumes","u":"m6gmgq"},{"n":"Citron jaune","t":"legumes","u":"5cg0yu"},{"n":"Citron non traité","t":"legumes","u":"tobtbt"},{"n":"Citron vert","t":"legumes","u":"1koje1"},{"n":"Citronelle","t":"epices","u":"og3g25"},{"n":"Citronnelle (bâton)","t":"epices","u":"t2e14k"},{"n":"Citrouille","t":"legumes","u":"sapd2n"},{"n":"Clémentine","t":"legumes","u":"ludsgj"},{"n":"Clou de girofle","t":"epices","u":"rk54ar"},{"n":"clou de girofle poudre","t":"epices","u":"yynfo5"},{"a":["Viande"],"n":"Coeur (abats)","t":"animaux","u":"pny4sg"},{"n":"Coing","t":"legumes","u":"go4nam"},{"a":["Poisson"],"n":"Colin (poisson)","t":"animaux","u":"dmlfsq"},{"a":["Viande"],"n":"Collier (agneau)","t":"animaux","u":"8bssc5"},{"a":["Viande"],"n":"Collier (blanquette) (veau)","t":"animaux","u":"i7dbn1"},{"n":"Colorants alimentaires","t":"autres","u":"dukizx"},{"n":"Colorants alimentaires en poudre","t":"autres","u":"3siurf"},{"n":"compote de pomme","t":"sucres","u":"wz2fkg"},{"a":["Produit laitier"],"n":"Comté","t":"frais","u":"da93ql"},{"n":"Concentré de tomate","t":"epices","u":"mck2wl"},{"n":"Concombre","t":"legumes","u":"l5p1a5"},{"n":"Concombre sans traitement","t":"legumes","u":"ep9gif"},{"n":"Confiture de chataigne (sans sucre)","t":"sucres","u":"q33x0k"},{"n":"Confiture de fraises","t":"sucres","u":"jf0jf7"},{"n":"confiture de myrtille","t":"sucres","u":"ywjjiv"},{"a":["Viande","Porc"],"n":"Coppa (charcuterie)","t":"animaux","u":"68uuc3"},{"a":["Mollusque"],"n":"Coque (fruits de mer)","t":"animaux","u":"vfk7w4"},{"n":"Coriandre","t":"epices","u":"yat3fu"},{"n":"Coriandre en poudre","t":"epices","u":"nf05n7"},{"n":"Coriandre fraîche","t":"epices","u":"fetrpe"},{"n":"coriandre graine","t":"epices","u":"bvzdfn"},{"n":"corn flakes","t":"sec","u":"kp0srn"},{"n":"Cornflakes (sans gluten)","t":"sucres","u":"hyp3th"},{"n":"Cornichon","t":"legumes","u":"77kyi3"},{"n":"Cornichons","t":"autres","u":"p200bb"},{"n":"Cornichons aigre-doux","t":"autres","u":"eaudjn"},{"a":["Viande"],"n":"Côte (agneau)","t":"animaux","u":"sip7kr"},{"a":["Viande"],"n":"Côte (veau)","t":"animaux","u":"o2eixm"},{"a":["Porc"],"n":"Côte échine (porc)","t":"animaux","u":"ip42wi"},{"a":["Porc"],"n":"Côte première (porc)","t":"animaux","u":"b8axth"},{"a":["Viande"],"n":"Côtelette (agneau)","t":"animaux","u":"q890ia"},{"a":["Porc"],"n":"Côtelette (porc)","t":"animaux","u":"8ctt74"},{"n":"Coulis de tomates","t":"epices","u":"09bywc"},{"n":"Courge","t":"legumes","u":"oa85mx"},{"n":"Courge Butternut","t":"legumes","u":"n8zdhc"},{"n":"Courgette","t":"legumes","u":"9zozfk"},{"n":"Couscous de Mais-Riz","t":"sec","u":"f9hmrv"},{"a":["Crustacé"],"n":"Crabe (fruits de mer)","t":"animaux","u":"xjwtly"},{"n":"Cranberries","t":"legumes","u":"tlytgh"},{"n":"Cranberries séchées","t":"sucres","u":"rn44lx"},{"a":["Produit laitier"],"n":"Crème Chantilly","t":"frais","u":"lk4tk0"},{"n":"Crème d'amande","t":"lof","u":"geh6n8"},{"n":"Crème d'orge","t":"lof","u":"xc0m2b"},{"n":"creme de coco","t":"lof","u":"bnmw1o"},{"n":"Crème de marron","t":"sucres","u":"dau8y8"},{"n":"Crème de riz","t":"lof","u":"s0sjb1"},{"a":["Produit laitier"],"n":"Crème épaisse","t":"frais","u":"1e8unz"},{"a":["Produit laitier"],"n":"Crème florette","t":"frais","u":"k6zm70"},{"a":["Produit laitier"],"n":"Crème fraîche épaisse entière","t":"frais","u":"izd01q"},{"a":["Produit laitier"],"n":"Crème fraiche liquide entière","t":"lof","u":"6tnb6h"},{"a":["Produit laitier"],"n":"Crème glacée","t":"frais","u":"aq6040"},{"a":["Produit laitier"],"n":"Crème glacée chocolat","t":"frais","u":"ydouo9"},{"a":["Produit laitier"],"n":"Crème glacée fraise","t":"frais","u":"yyo2yt"},{"a":["Produit laitier"],"n":"Crème glacée vanille","t":"frais","u":"xssjj3"},{"a":["Produit laitier"],"n":"Crème liquide","t":"lof","u":"nvzduo"},{"a":["Soja"],"n":"Crème soja","t":"lof","u":"chfwwq"},{"a":["Soja"],"n":"Crème Végétale","t":"lof","u":"aq796v"},{"n":"crêpes de sarrasin","t":"autres","u":"0keyhv"},{"a":["Crustacé"],"n":"Crevette (fruits de mer)","t":"animaux","u":"niic2i"},{"a":["Viande"],"n":"Cuisse de dinde (volaille et gibier)","t":"animaux","u":"q6h1hp"},{"a":["Viande"],"n":"Cuisse de poulet (volaille et gibier)","t":"animaux","u":"xavxvy"},{"n":"Cumin","t":"epices","u":"dc8855"},{"n":"Cumin (graines)","t":"epices","u":"l3esgp"},{"n":"Cumin moulu","t":"epices","u":"he3u48"},{"n":"Curcuma","t":"epices","u":"va2wu4"},{"n":"Curcuma moulu","t":"epices","u":"htp5ma"},{"n":"Curry","t":"epices","u":"7jceco"},{"n":"curry feuilles","t":"epices","u":"xqmcoe"},{"n":"Datte","t":"legumes","u":"0fc41p"},{"a":["Viande"],"n":"Dindonneau (volaille et gibier)","t":"animaux","u":"d0ba1k"},{"a":["Gluten","Soja"],"n":"Doenjang","t":"epices","u":"vet0jj"},{"a":["Poisson"],"n":"Dorade (poisson)","t":"animaux","u":"qf8h6r"},{"n":"Eau","t":"autres","u":"ljzb7j"},{"n":"Eau de coco","t":"sucres","u":"x8bakh"},{"n":"Eau de fleur d'oranger","t":"sucres","u":"ikdk3g"},{"n":"Eau de rose","t":"sucres","u":"ktlybm"},{"n":"Eau gazeuse","t":"autres","u":"ekw33n"},{"n":"Echalote","t":"legumes","u":"vwdomu"},{"n":"échalote","t":"legumes","u":"owsv5m"},{"a":["Porc"],"n":"échine (porc)","t":"animaux","u":"44eutn"},{"n":"Écorce d'orange séchée ","t":"autres","u":"0tlmi4"},{"a":["Produit laitier"],"n":"Edam","t":"frais","u":"7l4sfz"},{"a":["Poisson"],"n":"églefin ou aiglefin (poisson)","t":"animaux","u":"7sejg1"},{"a":["Viande"],"n":"Emincés de poulet (volaille et gibier)","t":"animaux","u":"a3widy"},{"a":["Produit laitier"],"n":"Emmental","t":"frais","u":"36vcgl"},{"n":"Endive","t":"legumes","u":"u21jed"},{"a":["Viande"],"n":"Entrecôte (boeuf)","t":"animaux","u":"nlcs1b"},{"a":["Viande"],"n":"épaule (agneau)","t":"animaux","u":"9j4s8v"},{"a":["Viande"],"n":"épaule (veau)","t":"animaux","u":"l5wy0o"},{"a":["Porc"],"n":"épaule cuite dégraissée (porc)","t":"animaux","u":"aqc9d4"},{"a":["Poisson"],"n":"éperlan (poisson)","t":"animaux","u":"4qtoii"},{"n":"Epinard","t":"legumes","u":"4totf1"},{"n":"Epinards surgelés","t":"legumes","u":"c4z22l"},{"a":["Viande"],"n":"Escalope (veau)","t":"animaux","u":"blwjma"},{"a":["Viande"],"n":"Escalope de dinde (volaille et gibier)","t":"animaux","u":"e22a1q"},{"a":["Viande"],"n":"Escalope de poulet (volaille et gibier)","t":"animaux","u":"lwj6za"},{"a":["Poisson"],"n":"Espadon (poisson)","t":"animaux","u":"c2awx6"},{"n":"Estragon","t":"epices","u":"kt0wyw"},{"n":"Estragon séché","t":"epices","u":"cgk776"},{"a":["Viande"],"n":"Faisan (volaille et gibier)","t":"animaux","u":"fv4y9f"},{"n":"Farine d'amande","t":"lof","u":"5dztep"},{"a":["Gluten"],"n":"Farine d'avoine","t":"lof","u":"ab50bc"},{"a":["Gluten"],"n":"Farine d'épeautre","t":"lof","u":"861x4y"},{"a":["Gluten"],"n":"Farine d'orge","t":"lof","u":"fqilxx"},{"n":"Farine d’amarante","t":"lof","u":"0qfm7z"},{"a":["Gluten"],"n":"Farine de blé","t":"lof","u":"2av6w8"},{"n":"Farine de blé noir (sarrasin)","t":"lof","u":"2ej7fi"},{"n":"Farine de châtaigne","t":"lof","u":"lhdqvi"},{"n":"Farine de coco","t":"lof","u":"210swc"},{"a":["Gluten"],"n":"Farine de kamut","t":"lof","u":"w9cfv1"},{"n":"Farine de lentilles","t":"lof","u":"aau6r8"},{"n":"Farine de maïs","t":"lof","u":"z8uiyd"},{"n":"Farine de millet","t":"lof","u":"nxk1ar"},{"n":"Farine de pois chiche","t":"lof","u":"o627mw"},{"n":"Farine de quinoa","t":"lof","u":"xfon4f"},{"n":"Farine de riz","t":"lof","u":"oygozr"},{"n":"Farine de riz blanche","t":"lof","u":"1nb85u"},{"n":"Farine de riz gluant","t":"lof","u":"civ587"},{"a":["Gluten"],"n":"Farine de seigle","t":"lof","u":"5ryt7y"},{"a":["Soja"],"n":"Farine de soja","t":"lof","u":"p4tg0v"},{"n":"Farine de tapioca","t":"lof","u":"v212im"},{"a":["Viande"],"n":"Faux filet (boeuf)","t":"animaux","u":"j6m21g"},{"n":"Fécule de maïs (Maïzena)","t":"lof","u":"8nbcjp"},{"n":"Fécule de pomme de terre","t":"lof","u":"g56l9d"},{"n":"Fécule de tapioca","t":"lof","u":"zq1y8c"},{"n":"Fenouil","t":"legumes","u":"mhsals"},{"n":"fenouil graine","t":"epices","u":"x7e30y"},{"n":"Fenugrec","t":"epices","u":"zoxy2t"},{"n":"fenugrec moulu","t":"epices","u":"d5zbfl"},{"a":["Produit laitier"],"n":"Feta","t":"frais","u":"m5dxyo"},{"n":"Feuille de citron combava","t":"epices","u":"cydiwr"},{"n":"Feuille de gélatine","t":"autres","u":"u1ctdb"},{"n":"Feuille de laurier","t":"epices","u":"j84olg"},{"a":["Gluten"],"n":"Feuilles de brick","t":"autres","u":"36uk6j"},{"n":"Feuilles de riz (galettes)","t":"autres","u":"234nl4"},{"n":"Fêves","t":"sec","u":"r7zz4s"},{"n":"Figue","t":"legumes","u":"a8y11s"},{"n":"Figues Sèches","t":"legumes","u":"mr7sd5"},{"a":["Viande"],"n":"Filet (veau)","t":"animaux","u":"bewdsh"},{"a":["Viande"],"n":"Filet d'autruche (volaille et gibier)","t":"animaux","u":"ipfqx8"},{"a":["Porc"],"n":"Filet mignon (porc)","t":"animaux","u":"63dvqz"},{"a":["Viande"],"n":"Flanchet (boeuf)","t":"animaux","u":"zrixbv"},{"a":["Poisson"],"n":"Flétan (poisson)","t":"animaux","u":"ucayk1"},{"n":"Fleur de sel","t":"epices","u":"tjrhvg"},{"a":["Gluten"],"n":"Flocons d'avoine","t":"sec","u":"ovewgk"},{"n":"Flocons d'avoine sans gluten","t":"sec","u":"02w66c"},{"a":["Viande"],"n":"Foie (abats)","t":"animaux","u":"kmwg8w"},{"a":["Viande"],"n":"Foie gras (charcuterie)","t":"animaux","u":"lmav2h"},{"a":["Produit laitier"],"n":"Fourme d'Ambert","t":"frais","u":"ta6o8n"},{"n":"Fraise","t":"legumes","u":"57f42g"},{"n":"Fraise des bois","t":"legumes","u":"m1hioo"},{"n":"Framboise","t":"legumes","u":"s8kuh9"},{"n":"Framboises surgelées","t":"legumes","u":"65cee288c5d4"},{"a":["Produit laitier"],"n":"Fromage à raclette","t":"frais","u":"onfvly"},{"a":["Produit laitier"],"n":"Fromage blanc","t":"frais","u":"b2dxf8"},{"a":["Produit laitier"],"n":"Fromage de chèvre frais","t":"frais","u":"cnhs2e"},{"a":["Produit laitier"],"n":"Fromage frais","t":"frais","u":"0d5y4q"},{"a":["Produit laitier"],"n":"Fromage râpé","t":"frais","u":"u1fypr"},{"n":"Fruit de la passion","t":"legumes","u":"84w3ha"},{"n":"fruit du dragon","t":"legumes","u":"0u1nxk"},{"n":"Fruits divers","t":"legumes","u":"4stcxn"},{"n":"Fruits rouges","t":"legumes","u":"rqmasf"},{"n":"Galanga","t":"legumes","u":"equ6wc"},{"n":"Galanga séché","t":"epices","u":"j02oky"},{"n":"Garam Masala","t":"epices","u":"1akmaa"},{"n":"Genévrier","t":"epices","u":"oyfglz"},{"a":["Viande"],"n":"Gigot (agneau)","t":"animaux","u":"mt0iyq"},{"n":"Gingembre","t":"legumes","u":"0d1fzw"},{"n":"Gingembre bio","t":"legumes","u":"nz839c"},{"n":"Gingembre confit","t":"sucres","u":"oskdzx"},{"n":"Gingembre en poudre","t":"epices","u":"alwx6o"},{"n":"Glucose","t":"sucres","u":"lm7zqh"},{"a":["Gluten"],"n":"Gluten pur","t":"lof","u":"946ddw"},{"a":["Gluten","Soja"],"n":"Gochujang","t":"epices","u":"rv1rfv"},{"n":"Gochujang sans gluten","t":"epices","u":"28jpdi"},{"n":"Gomme de guar","t":"autres","u":"9tn9mn"},{"n":"Gomme de xanthane","t":"autres","u":"5le7rm"},{"a":["Produit laitier"],"n":"Gouda","t":"frais","u":"qikzlk"},{"a":["Produit laitier"],"n":"Gouda en tranche","t":"frais","u":"aspkm2"},{"n":"Gousse d'ail","t":"epices","u":"v1kli8"},{"n":"gousse de vanille","t":"sucres","u":"2a0lnj"},{"n":"graine de coriandre","t":"epices","u":"crkg3d"},{"n":"graine de nigelle","t":"sec","u":"obd7fb"},{"n":"Graine de tournesol","t":"sec","u":"4vxqlr"},{"n":"Graines de courge","t":"sec","u":"qzrsoa"},{"n":"Graines de lin","t":"lof","u":"km927d"},{"n":"Graines de nigelle","t":"sec","u":"5muly5"},{"a":["Sésame"],"n":"Graines de sésame blanc","t":"sec","u":"z9plfy"},{"a":["Sésame"],"n":"Graines de sésame noir","t":"sec","u":"atlkei"},{"n":"Grenade","t":"legumes","u":"j3mr9h"},{"n":"Gros sel","t":"epices","u":"5dwrvm"},{"n":"Groseille","t":"legumes","u":"3h1ucp"},{"a":["Produit laitier"],"n":"Gruyère","t":"frais","u":"pvia1r"},{"n":"Guacamole","t":"epices","u":"sg5bm9"},{"a":["Sésame"],"n":"Halva","t":"sucres","u":"2cnk7l"},{"a":["Viande"],"n":"Hampe grillée (boeuf)","t":"animaux","u":"titfjt"},{"a":["Poisson"],"n":"Hareng (poisson)","t":"animaux","u":"o483rs"},{"n":"Haricots beurre","t":"legumes","u":"ufj8fy"},{"n":"Haricots blancs","t":"sec","u":"znpoor"},{"n":"Haricots blancs en conserve","t":"sec","u":"g6ngse"},{"n":"Haricots plats","t":"legumes","u":"2y941t"},{"n":"Haricots rouges","t":"sec","u":"dr1py6"},{"n":"Haricots rouges cuits","t":"sec","u":"iwdje3"},{"n":"Haricots verts","t":"legumes","u":"mckmta"},{"n":"Harissa","t":"epices","u":"4n95t5"},{"n":"Herbes de Provence","t":"epices","u":"a8dxd8"},{"a":["Crustacé"],"n":"Homard (fruits de mer)","t":"animaux","u":"tnlr3b"},{"a":["Arachides"],"n":"Huile d'arachide","t":"lof","u":"8d1cfa5bf2ae"},{"n":"Huile d'argan","t":"lof","u":"1jfxgt"},{"n":"huile d'olive","t":"lof","u":"h3c8al"},{"n":"huile de chanvre","t":"lof","u":"kpwakb"},{"n":"huile de coco","t":"lof","u":"6bm4lq"},{"n":"Huile de coco désodorisée","t":"lof","u":"ja17ja"},{"n":"huile de colza","t":"lof","u":"eu7lc6"},{"n":"huile de friture","t":"lof","u":"1ej217"},{"n":"huile de lin","t":"lof","u":"ypd41e"},{"a":["Fruit à coque"],"n":"huile de noisette","t":"lof","u":"yff0vs"},{"a":["Fruit à coque"],"n":"huile de noix","t":"lof","u":"rfa985"},{"n":"huile de pépins de courge","t":"lof","u":"1f2yje"},{"n":"huile de pépins de raisin","t":"lof","u":"bwjxy3"},{"a":["Sésame"],"n":"huile de sésame","t":"lof","u":"fazth1"},{"n":"huile de tournesol","t":"lof","u":"c70jxb"},{"n":"Huile végétale","t":"lof","u":"atccqu"},{"a":["Mollusque"],"n":"Huïtre (fruits de mer)","t":"animaux","u":"lgcsqd"},{"a":["Viande","Porc"],"n":"Jambon blanc (charcuterie)","t":"animaux","u":"j6ngb8"},{"a":["Viande","Porc"],"n":"Jambon cru (charcuterie)","t":"animaux","u":"np0cbk"},{"a":["Viande","Porc"],"n":"Jambon de Bayonne (charcuterie)","t":"animaux","u":"h32yhh"},{"a":["Viande"],"n":"Jambon de dinde (charcuterie)","t":"animaux","u":"ich6gs"},{"a":["Viande","Porc"],"n":"Jambonneau (charcuterie)","t":"animaux","u":"hok8fa"},{"a":["Viande"],"n":"Jarret (osso bucco) (veau)","t":"animaux","u":"2ofoh1"},{"a":["Viande"],"n":"Jarret pot au feu (boeuf)","t":"animaux","u":"b3wxxe"},{"n":"Jus d'orange","t":"sucres","u":"gzi2ry"},{"n":"Jus de canneberge","t":"sucres","u":"xfx455"},{"n":"Jus de cerise","t":"sucres","u":"0iywi5"},{"n":"Jus de citron","t":"sucres","u":"e4mjd1"},{"n":"Jus de citron vert","t":"sucres","u":"rdw6xn"},{"n":"Jus de fraise","t":"sucres","u":"pxtrie"},{"n":"Jus de fruits","t":"sucres","u":"ldfjmr"},{"n":"jus de goyage","t":"autres","u":"rjm0v6"},{"n":"Jus de poire","t":"sucres","u":"k3bg0l"},{"n":"Jus de pomme","t":"sucres","u":"r6q0pt"},{"n":"Jus de raisin","t":"sucres","u":"tkuufn"},{"n":"Jus de tomate","t":"sucres","u":"yi3hj9"},{"n":"Kaki","t":"legumes","u":"1c03zm"},{"n":"Ketchup","t":"epices","u":"ytlacu"},{"n":"kiri ou autre du genre","t":"frais","u":"bppied"},{"n":"Kiwi","t":"legumes","u":"j6ze18"},{"n":"Kumquat","t":"legumes","u":"cc8tfg"},{"a":["Produit laitier"],"n":"lait (chèvres)","t":"lof","u":"pvc3gi"},{"a":["Produit laitier"],"n":"Lait concentré (non sucré)","t":"lof","u":"zat1zc"},{"a":["Produit laitier"],"n":"Lait concentré sucré","t":"lof","u":"5dcfzk"},{"a":["Gluten"],"n":"Lait d'avoine","t":"lof","u":"3eex0o"},{"n":"lait d'épeautre","t":"lof","u":"v08e8s"},{"n":"lait d’amande","t":"lof","u":"csxbg6"},{"n":"lait d’avoine","t":"lof","u":"eyngab"},{"n":"lait de cajou","t":"lof","u":"enbx1o"},{"n":"lait de coco","t":"lof","u":"xdy736"},{"n":"lait de noisette","t":"lof","u":"y0en3x"},{"n":"Lait de riz","t":"lof","u":"hzwesd"},{"a":["Soja"],"n":"lait de soja","t":"lof","u":"9uc01w"},{"a":["Soja"],"n":"Lait de soja","t":"lof","u":"gpeob7"},{"a":["Soja"],"n":"Lait de soja à la vanille","t":"lof","u":"83ji4x"},{"a":["Produit laitier"],"n":"Lait demi-écrémé","t":"lof","u":"x286pc"},{"a":["Produit laitier"],"n":"Lait écrémé","t":"lof","u":"ue125d"},{"a":["Produit laitier"],"n":"Lait entier","t":"lof","u":"dbbjuu"},{"n":"Lait végétal (au choix)","t":"lof","u":"vw9d1a"},{"n":"Laitue romaine","t":"legumes","u":"l0yikk"},{"a":["Crustacé"],"n":"Langouste (fruits de mer)","t":"animaux","u":"t34cw9"},{"a":["Crustacé"],"n":"Langoustine (fruits de mer)","t":"animaux","u":"2l6t56"},{"a":["Viande"],"n":"Langue de boeuf (abats)","t":"animaux","u":"i0x1yw"},{"a":["Viande"],"n":"Langue de veau (abats)","t":"animaux","u":"lu4rod"},{"a":["Viande"],"n":"Lapin (volaille et gibier)","t":"animaux","u":"zuu48m"},{"a":["Viande","Porc"],"n":"Lard (charcuterie)","t":"animaux","u":"5mdklh"},{"a":["Viande","Porc"],"n":"Lardons (charcuterie)","t":"animaux","u":"53lsas"},{"a":["Gluten"],"n":"Lasagnes","t":"sec","u":"wby30p"},{"a":["Produit laitier"],"n":"Leerdammer","t":"frais","u":"95lffa"},{"n":"Lentilles","t":"sec","u":"khdlkd"},{"n":"lentilles blondes","t":"sec","u":"yuhu9b"},{"n":"Lentilles corail","t":"sec","u":"toc8a7"},{"n":"Lentilles vertes","t":"sec","u":"ogtomg"},{"n":"Levure boulangère","t":"lof","u":"q936bv"},{"n":"Levure boulangère sans gluten","t":"lof","u":"ec0v6n"},{"a":["Gluten"],"n":"Levure chimique","t":"lof","u":"vgec6e"},{"n":"Levure chimique sans gluten","t":"lof","u":"zb9tj8"},{"n":"Levure de bière","t":"lof","u":"4be4ic"},{"n":"Levure de boulanger","t":"lof","u":"abzedk"},{"a":["Gluten"],"n":"Levure fraîche","t":"frais","u":"1z66lc"},{"n":"Levure fraîche de boulanger","t":"frais","u":"7qqcwc"},{"a":["Poisson"],"n":"Lieu (poisson)","t":"animaux","u":"rcbo9g"},{"a":["Viande"],"n":"Lièvre (volaille et gibier)","t":"animaux","u":"vn8xan"},{"a":["Poisson"],"n":"Limande (poisson)","t":"animaux","u":"pgb7lh"},{"n":"Liquid smoke","t":"epices","u":"effe0c"},{"n":"Litchi","t":"legumes","u":"xtu4hf"},{"a":["Produit laitier"],"n":"Livarot","t":"frais","u":"swnonq"},{"a":["Poisson"],"n":"Lotte (poisson)","t":"animaux","u":"fimllx"},{"n":"Mâche (salade)","t":"legumes","u":"8og464"},{"n":"Madère","t":"autres","u":"h4obe8"},{"a":["Viande"],"n":"Magret de canard fumé (charcuterie)","t":"animaux","u":"qr5k9j"},{"n":"Maïs","t":"sec","u":"hhdjkd"},{"n":"Maïs en conserve égoutté","t":"legumes","u":"dx4nss"},{"n":"Mandarine","t":"legumes","u":"mwrts8"},{"n":"Mangue","t":"legumes","u":"mdoij4"},{"a":["Poisson"],"n":"Maquereau (poisson)","t":"animaux","u":"hieeea"},{"n":"Margarine","t":"frais","u":"eipcl2"},{"n":"Margarine végétale spécial cuisson","t":"frais","u":"8j3hna"},{"a":["Produit laitier"],"n":"Maroilles","t":"frais","u":"0vyz4s"},{"n":"Marron","t":"legumes","u":"ryxwf0"},{"a":["Produit laitier"],"n":"Mascarpone","t":"frais","u":"0tpvue"},{"a":["Oeuf","Moutarde"],"n":"Mayonnaise","t":"epices","u":"1ijv6u"},{"n":"Mayonnaise maison","t":"epices","u":"fe69a72c47c3"},{"n":"mélange 4 épices","t":"epices","u":"dex52s"},{"n":"Mélasse","t":"sucres","u":"9x2uyr"},{"n":"Melasse de grenade","t":"epices","u":"ia5a5o"},{"n":"Mélasse de grenade","t":"epices","u":"cl88ye"},{"n":"Melon","t":"legumes","u":"on84nb"},{"n":"Menthe","t":"epices","u":"2j9y2v"},{"n":"Menthe fraîche","t":"epices","u":"y16lzq"},{"n":"Menthe glaciale","t":"epices","u":"zo92gu"},{"n":"Menthe séchée","t":"epices","u":"uid60d"},{"a":["Poisson"],"n":"Merlan (poisson)","t":"animaux","u":"x7wu93"},{"a":["Poisson"],"n":"Merlu (poisson)","t":"animaux","u":"lkwgh4"},{"n":"Miel","t":"sucres","u":"g0lph5"},{"n":"Mirabelle","t":"legumes","u":"pbo6jk"},{"a":["Soja"],"n":"Miso","t":"autres","u":"3zdyyy"},{"n":"Miso blanc","t":"epices","u":"k2uthk"},{"a":["Gluten"],"n":"Miso d'orge","t":"epices","u":"z8jaad"},{"a":["Viande","Porc"],"n":"Mortadelle (charcuterie)","t":"animaux","u":"bucais"},{"a":["Poisson"],"n":"Morue (poisson)","t":"animaux","u":"d73rvh"},{"a":["Crustacé"],"n":"Moule (fruits de mer)","t":"animaux","u":"fgawbx"},{"a":["Moutarde"],"n":"Moutarde","t":"epices","u":"5c1b20"},{"n":"Moutarde à l'ancienne","t":"epices","u":"15qnl9"},{"n":"Moutarde douce en flacon ","t":"epices","u":"vu6frz"},{"n":"moutarde graine","t":"epices","u":"m5zboz"},{"a":["Produit laitier"],"n":"Mozzarella","t":"frais","u":"5yety4"},{"a":["Poisson"],"n":"Mulet (poisson)","t":"animaux","u":"yonror"},{"a":["Produit laitier"],"n":"Munster","t":"frais","u":"ezhrgx"},{"n":"Muscade","t":"epices","u":"msyocm"},{"n":"Muscovado (sucre de canne complet)","t":"sucres","u":"l5w2jl"},{"n":"Myrtille","t":"legumes","u":"ahby2f"},{"n":"Navet","t":"legumes","u":"f5fy8w"},{"n":"Nectar d'abricot","t":"sucres","u":"l33ljf"},{"n":"Nectarine","t":"legumes","u":"ulxpdt"},{"a":["Fruit à coque"],"n":"Noisette","t":"sec","u":"ut0l0k"},{"a":["Fruit à coque"],"n":"Noix","t":"sec","u":"usibcf"},{"a":["Viande"],"n":"Noix (veau)","t":"animaux","u":"j18saz"},{"a":["Fruit à coque"],"n":"Noix de cajou","t":"sec","u":"5rkq49"},{"n":"Noix de coco","t":"legumes","u":"ntv7i3"},{"n":"Noix de coco rapée","t":"sucres","u":"rxvf6y"},{"n":"Noix de coco râpée","t":"sucres","u":"coa5dh"},{"a":["Fruit à coque"],"n":"Noix de macadamia","t":"sec","u":"ujh8v5"},{"a":["Fruit à coque"],"n":"Noix de pécan","t":"sec","u":"1ngabw"},{"a":["Mollusque"],"n":"Noix de Saint-Jacques (fruits de mer)","t":"animaux","u":"joq11n"},{"n":"Nouilles chinoises","t":"sec","u":"vu8y8c"},{"a":["Gluten"],"n":"Nouilles de blé ondulées Ramen","t":"sec","u":"ul46ke"},{"n":"Nouilles de riz","t":"sec","u":"mesg7t"},{"n":"Nouilles de riz Phö","t":"sec","u":"oyjc63"},{"a":["Oeuf"],"n":"Oeuf","t":"lof","u":"zf3zf8"},{"a":["Oeuf"],"n":"Oeuf d'autruche","t":"lof","u":"o78frv"},{"a":["Oeuf"],"n":"Oeuf d'oie","t":"lof","u":"xhd36o"},{"a":["Oeuf"],"n":"Oeuf de caille","t":"lof","u":"7y1kd8"},{"a":["Oeuf"],"n":"Oeuf de cane","t":"lof","u":"4gcm9q"},{"a":["Viande"],"n":"Oie (volaille et gibier)","t":"animaux","u":"uitxe2"},{"n":"Oignon","t":"legumes","u":"rtavky"},{"n":"Oignon en poudre","t":"epices","u":"q28bck"},{"n":"Oignon rouge","t":"legumes","u":"doxujz"},{"n":"Olives","t":"legumes","u":"75wo2d"},{"n":"Olives noires à la grecque","t":"legumes","u":"9p3n36"},{"n":"Olives Noires Dénoyautées","t":"legumes","u":"7ahzm0"},{"n":"Olives noires entières","t":"legumes","u":"yeske5"},{"n":"Olives Vertes Dénoyautées","t":"legumes","u":"163u4z"},{"n":"Orange","t":"legumes","u":"yh2uod"},{"n":"Orange confite","t":"legumes","u":"nev77b"},{"n":"Orange non traitée","t":"legumes","u":"bf44pm"},{"n":"Orange sanguine","t":"legumes","u":"4yrb7z"},{"n":"Origan","t":"epices","u":"fkftyb"},{"n":"Origan frais","t":"legumes","u":"iu5sb3"},{"a":["Gluten"],"n":"Pain","t":"autres","u":"yr392x"},{"n":"Pain au levain","t":"autres","u":"d66ur8"},{"n":"Pain baguette","t":"sec","u":"e7953e50480d"},{"n":"Pain Burger","t":"autres","u":"1xyo35"},{"n":"Pain Burger Végan","t":"autres","u":"0zasob"},{"a":["Gluten"],"n":"Pain de mie","t":"autres","u":"kg0mr1"},{"a":["Gluten"],"n":"Pain pita","t":"autres","u":"wqwn2f"},{"a":["Gluten"],"n":"Pain rassis","t":"autres","u":"k8dala"},{"n":"Pain rassis sans gluten","t":"autres","u":"drjaa4"},{"a":["Viande"],"n":"Paleron, macreuse (boeuf)","t":"animaux","u":"3umx7k"},{"a":["Mollusque"],"n":"Palourde (fruits de mer)","t":"animaux","u":"q44d8f"},{"n":"Pamplemousse","t":"legumes","u":"7skune"},{"n":"Panais","t":"legumes","u":"58bi18"},{"a":["Viande","Porc"],"n":"Pancetta (charcuterie)","t":"animaux","u":"g7zmx1"},{"n":"Pandan","t":"epices","u":"2ik9h7"},{"n":"Pandan (extrait de)","t":"epices","u":"krizq0"},{"n":"Papaye","t":"legumes","u":"un3m8y"},{"n":"Paprika","t":"epices","u":"bidsmu"},{"n":"Paprika fumé","t":"epices","u":"ique18"},{"a":["Produit laitier"],"n":"Parmesan","t":"frais","u":"pr1fiu"},{"a":["Produit laitier"],"n":"Parmigiano","t":"frais","u":"cr4ai3"},{"n":"Pastèque","t":"legumes","u":"n8iflg"},{"n":"patate","t":"legumes","u":"bq423s"},{"n":"Patates douces","t":"legumes","u":"ndu75n"},{"a":["Gluten"],"n":"Pâte à pain","t":"autres","u":"m42cma"},{"n":"Pâte brisée sans gluten","t":"frais","u":"86cony"},{"a":["Arachides"],"n":"Pâte d'arachide","t":"autres","u":"6778796eb8d8"},{"a":["Viande","Porc"],"n":"Pâté de campagne (charcuterie)","t":"animaux","u":"k1dfh3"},{"n":"Pâte de Curry Rouge","t":"epices","u":"5qtg4a"},{"a":["Viande","Porc"],"n":"Pâté de foie (charcuterie)","t":"animaux","u":"6izg8x"},{"n":"Pâte de poivron","t":"epices","u":"sfcy1d"},{"n":"Pate feuilleté sans gluten et vegan","t":"frais","u":"40wkon"},{"a":["Gluten"],"n":"Pate feuilletée","t":"frais","u":"h1levi"},{"n":"Pâte feuilletée","t":"frais","u":"h6bpv4"},{"n":"Pate feuilletée sans gluten","t":"frais","u":"abcrsf"},{"n":"Pâte feuilletée végane sans gluten","t":"frais","u":"n2l0fi"},{"a":["Gluten"],"n":"Pâte filo","t":"frais","u":"7tvtlu"},{"a":["Gluten"],"n":"Pate filo (1 feuille)","t":"autres","u":"x6je0g"},{"a":["Gluten"],"n":"Pâtes","t":"sec","u":"0o00h5"},{"a":["Gluten"],"n":"Pâtes - langue d'oiseau","t":"sec","u":"hlx995"},{"n":"Pâtes langues d'oiseaux sans gluten","t":"sec","u":"89m8hr"},{"n":"Pâtes Penne","t":"sec","u":"1fdvtx"},{"a":["Viande"],"n":"Paupiette (veau)","t":"animaux","u":"2iyyi9"},{"n":"Pavot","t":"epices","u":"l1e82o"},{"n":"Pêche","t":"legumes","u":"n1vs7d"},{"n":"Pépites de chocolat","t":"sucres","u":"39ydlo"},{"a":["Viande","Porc"],"n":"Pepperoni (charcuterie)","t":"animaux","u":"wdq9sd"},{"a":["Poisson"],"n":"Perche (poisson)","t":"animaux","u":"y41a1c"},{"n":"Persil frais","t":"epices","u":"hgfa4e"},{"n":"Persil sec","t":"epices","u":"p1kujv"},{"n":"Pesto","t":"epices","u":"d3kydo"},{"n":"Pesto Rosso végan","t":"autres","u":"lz3awd"},{"n":"Petit oignon blanc","t":"legumes","u":"9nbd98"},{"a":["Viande","Porc"],"n":"Petit salé (charcuterie)","t":"animaux","u":"hk4zd0"},{"n":"Petits flocons d'avoine","t":"sec","u":"51luzk"},{"n":"Petits pois","t":"legumes","u":"8doafu"},{"n":"Petits pois surgelés","t":"legumes","u":"8y3ngp"},{"a":["Produit laitier"],"n":"Philadelphia","t":"frais","u":"vglv14"},{"a":["Produit laitier"],"n":"Philadelphia ou autre marque moins cher","t":"frais","u":"2s1qoq"},{"a":["Viande"],"n":"Pigeon (volaille et gibier)","t":"animaux","u":"2g1ps2"},{"a":["Fruit à coque"],"n":"Pignon de pin","t":"sec","u":"82a9ot"},{"n":"Piment (autre)","t":"epices","u":"nxdt78"},{"n":"Piment d'espelette","t":"epices","u":"bdx3gq"},{"n":"Piment doux","t":"epices","u":"0p7ynz"},{"n":"Piment en flocons","t":"epices","u":"5k7zz4"},{"n":"Piment en poudre","t":"epices","u":"fmc1dm"},{"n":"Piment oiseau","t":"epices","u":"9qrveq"},{"n":"Piment oiseau frais ","t":"epices","u":"smh61n"},{"n":"piment rouge frais","t":"legumes","u":"mwavdx"},{"n":"Piment vert","t":"epices","u":"dr1bbg"},{"a":["Viande"],"n":"Pintade (volaille et gibier)","t":"animaux","u":"aw3xhp"},{"n":"Pistache émmondée","t":"sec","u":"q7adw3"},{"n":"Pistaches","t":"legumes","u":"qqc6u0"},{"n":"Poire","t":"legumes","u":"b83ol6"},{"n":"Poireau","t":"legumes","u":"l3fs10"},{"n":"Pois cassés","t":"sec","u":"7v72le"},{"n":"Pois chiche cuit","t":"sec","u":"wwl5vn"},{"n":"Pois chiches","t":"sec","u":"6a8w8k"},{"n":"Pois mange-tout","t":"legumes","u":"6k62ci"},{"a":["Porc"],"n":"Poitrine (porc)","t":"animaux","u":"8uw1t6"},{"a":["Viande"],"n":"Poitrine (veau)","t":"animaux","u":"8h4kzl"},{"n":"Poivre","t":"epices","u":"2pps90"},{"n":"poivre blanc moulue","t":"epices","u":"7lakpz"},{"n":"Poivre de Jamaïque","t":"epices","u":"9eepba"},{"n":"Poivre de Sichuan","t":"epices","u":"93rauy"},{"n":"poivre en graine","t":"epices","u":"2dirai"},{"n":"poivre moulue","t":"epices","u":"3bg9f8"},{"n":"Poivre noir moulu","t":"epices","u":"rgt7s4"},{"n":"Poivron","t":"legumes","u":"0lpad0"},{"n":"Poivron (jaune)","t":"legumes","u":"4wi7ja"},{"n":"Poivron (rouge)","t":"legumes","u":"0zglpj"},{"n":"Poivron (vert)","t":"legumes","u":"rl1e9p"},{"n":"Poivron long vert (corne de boeuf)","t":"legumes","u":"rniow3"},{"n":"Polenta (semoule de maïs)","t":"sec","u":"s2mgp0"},{"n":"Polenta fine","t":"sec","u":"9xvfud"},{"n":"Pomme","t":"legumes","u":"i6jlwm"},{"n":"Pomme de terre","t":"legumes","u":"18dy4e"},{"a":["Viande"],"n":"Pot au feu (boeuf)","t":"animaux","u":"o6snoi"},{"n":"Potimarron","t":"legumes","u":"gfo28q"},{"n":"Potiron","t":"legumes","u":"tnbcf6"},{"a":["Fruits à coque"],"n":"Poudre d'amande","t":"sec","u":"abl0tz"},{"a":["Fruit à coque"],"n":"Poudre d'amandes","t":"sucres","u":"rmgr7l"},{"a":["Fruit à coque"],"n":"Poudre de noisettes","t":"sucres","u":"0g08xt"},{"a":["Viande"],"n":"Poule (volaille et gibier)","t":"animaux","u":"200qgv"},{"a":["Viande"],"n":"Poulet (volaille et gibier)","t":"animaux","u":"11b1e0"},{"a":["Viande"],"n":"Poulet rôti (volaille et gibier)","t":"animaux","u":"ig2rla"},{"a":["Soja"],"n":"Pousses de soja","t":"legumes","u":"4wa1jr"},{"n":"Pralines roses de Lyon","t":"sucres","u":"31bhpd"},{"a":["Fruit à coque"],"n":"Praslin en poudre","t":"sucres","u":"ybc4p4"},{"a":["Viande","Porc"],"n":"Prosciutto (charcuterie)","t":"animaux","u":"dmmv7e"},{"a":["Soja"],"n":"Protéines de soja","t":"autres","u":"6m90g7"},{"n":"Protéines de soja (grosses)","t":"sec","u":"s4vjqq"},{"n":"Protéines de soja (moyennes)","t":"sec","u":"w78ctq"},{"n":"Protéines de soja (petites)","t":"sec","u":"1r89qf"},{"n":"Prune","t":"legumes","u":"m2z4tw"},{"n":"Pruneau","t":"legumes","u":"kndzid"},{"n":"Pulpe de tomate","t":"epices","u":"ftj0mq"},{"n":"Purée chataîgne sans sucre","t":"legumes","u":"xm77fg"},{"n":"Purée d'ail noir","t":"epices","u":"veh1lf"},{"n":"Purée d'amande","t":"autres","u":"7dlfuw"},{"n":"purée de noix de cajou","t":"autres","u":"mmvfvp"},{"a":["Sésame"],"n":"Purée de sésame noir","t":"autres","u":"9d8hxn"},{"n":"Quetsche","t":"legumes","u":"6uewl7"},{"a":["Viande"],"n":"Queue bouillie (boeuf)","t":"animaux","u":"az6k3k"},{"n":"Quinoa","t":"sec","u":"staxxt"},{"n":"Quinoa blanc","t":"sec","u":"csxn1a"},{"n":"Radis","t":"legumes","u":"4il0xo"},{"n":"Radis long","t":"legumes","u":"yyw6b1"},{"n":"Radis noir","t":"legumes","u":"uz0zbw"},{"a":["Poisson"],"n":"Raie (poisson)","t":"animaux","u":"zuoe9n"},{"n":"Raifort en poudre","t":"epices","u":"yi8qce"},{"n":"Raisin","t":"legumes","u":"n99nt2"},{"n":"Raisin sec","t":"legumes","u":"9yf54l"},{"a":["Moutarde"],"n":"Ras el hanout","t":"epices","u":"j40pyf"},{"a":["Poisson"],"n":"Rascasse (poisson)","t":"animaux","u":"f9y4lu"},{"a":["Produit laitier"],"n":"Reblochon","t":"frais","u":"ob3net"},{"n":"Rhubarbe","t":"legumes","u":"f7wbmo"},{"a":["Produit laitier"],"n":"Ricotta","t":"frais","u":"q6t705"},{"a":["Viande"],"n":"Rillettes d'oie (charcuterie)","t":"animaux","u":"jrxvb9"},{"a":["Viande"],"n":"Rillettes de canard (charcuterie)","t":"animaux","u":"23wvxs"},{"a":["Viande","Porc"],"n":"Rillettes de porc (charcuterie)","t":"animaux","u":"33djub"},{"a":["Poisson"],"n":"Rillettes de thon","t":"animaux","u":"p1unld"},{"a":["Viande"],"n":"Ris (abats)","t":"animaux","u":"ml02ss"},{"n":"Riz","t":"sec","u":"0uelc3"},{"n":"Riz basmati","t":"sec","u":"opblzb"},{"n":"Riz pour risotto","t":"sec","u":"8f86ou"},{"n":"Riz rond","t":"sec","u":"6azw4k"},{"a":["Viande"],"n":"Rognon boeuf (abats)","t":"animaux","u":"cuqv5x"},{"a":["Viande"],"n":"Rognons de porc (abats)","t":"animaux","u":"wrvr6h"},{"n":"Romarin","t":"epices","u":"6z655r"},{"a":["Produit laitier"],"n":"Roquefort","t":"frais","u":"ey6c9e"},{"a":["Viande"],"n":"Rosbif (boeuf)","t":"animaux","u":"23hi37"},{"a":["Viande","Porc"],"n":"Rosette (charcuterie)","t":"animaux","u":"i8uddf"},{"a":["Porc"],"n":"Rôti (porc)","t":"animaux","u":"b2ei4f"},{"a":["Viande"],"n":"Rôti (veau)","t":"animaux","u":"l9h5zr"},{"a":["Porc"],"n":"Rôti cuit (porc)","t":"animaux","u":"nj4357"},{"a":["Viande"],"n":"Rôti de dinde (volaille et gibier)","t":"animaux","u":"dj9knx"},{"a":["Viande"],"n":"Rôti Orloff (veau)","t":"animaux","u":"n5xlof"},{"a":["Poisson"],"n":"Rouget (poisson)","t":"animaux","u":"g7qh6e"},{"a":["Poisson"],"n":"Roussette (poisson)","t":"animaux","u":"f3qcec"},{"a":["Viande"],"n":"Rumsteak (boeuf)","t":"animaux","u":"xi7biw"},{"n":"Safran","t":"epices","u":"zl7cx2"},{"a":["Produit laitier"],"n":"Saint-Paulin","t":"frais","u":"mfjyx5"},{"n":"Salade","t":"legumes","u":"j1vp47"},{"n":"Salade Iceberg","t":"legumes","u":"ihweq6"},{"n":"Salade verte (chêne)","t":"legumes","u":"cg3wgm"},{"a":["Viande","Porc"],"n":"Salami (charcuterie)","t":"animaux","u":"q3efpw"},{"n":"Salsifis","t":"legumes","u":"7hmy3k"},{"n":"Sambal oelek","t":"epices","u":"kzomvp"},{"a":["Poisson"],"n":"Sandre (poisson)","t":"animaux","u":"im46yu"},{"a":["Viande"],"n":"Sanglier (volaille et gibier)","t":"animaux","u":"7q9ad3"},{"a":["Poisson"],"n":"Sardine (poisson)","t":"animaux","u":"5jsoge"},{"n":"Sariette","t":"epices","u":"22uzom"},{"n":"Sarrasin","t":"sec","u":"9f35oz"},{"n":"Sauce piment chipotle","t":"epices","u":"8u0rev"},{"a":["Soja"],"n":"Sauce soja","t":"epices","u":"jjrwlj"},{"a":["Soja"],"n":"Sauce soja dark (foncé)","t":"epices","u":"h138n7"},{"n":"Sauce tomate mutti","t":"epices","u":"xdkeh3"},{"a":["Viande","Porc"],"n":"Saucisse (charcuterie)","t":"animaux","u":"3shjj4"},{"n":"Saucisse végane","t":"autres","u":"y8g316"},{"a":["Viande","Porc"],"n":"Saucisson (charcuterie)","t":"animaux","u":"vt8q9x"},{"n":"Sauge","t":"epices","u":"crbm3g"},{"a":["Poisson"],"n":"Saumon (poisson)","t":"animaux","u":"yq993x"},{"a":["Poisson"],"n":"Seiche (poisson)","t":"animaux","u":"lire4e"},{"n":"Sel","t":"epices","u":"2juq3x"},{"n":"Semoule couscous sans gluten","t":"sec","u":"o5vfrd"},{"n":"Semoule de manioc","t":"sec","u":"4q9l1e"},{"n":"Semoule de riz","t":"sec","u":"yqj5le"},{"a":["Gluten"],"n":"Semoule fine (blé)","t":"sec","u":"mltl42"},{"a":["Gluten"],"n":"Semoule grosse (blé)","t":"sec","u":"gluv4i"},{"a":["Gluten"],"n":"Semoule moyenne (blé)","t":"sec","u":"yx78ae"},{"n":"Sept épices libanais","t":"epices","u":"qf36yq"},{"n":"Sésame","t":"epices","u":"mo4efz"},{"a":["Sésame"],"n":"Sésame blanc","t":"epices","u":"1uz8x5"},{"a":["Sésame"],"n":"Sésame brun","t":"epices","u":"0m7btx"},{"a":["Sésame"],"n":"Sésame doré","t":"epices","u":"h3g82r"},{"a":["Sésame"],"n":"Sésame noir","t":"epices","u":"9bdo2l"},{"n":"Shiro miso","t":"epices","u":"dx771g"},{"n":"Shizo vert","t":"epices","u":"1yqgar"},{"n":"Sirop d'agave","t":"sucres","u":"7cflkx"},{"n":"Sirop d'érable ","t":"sucres","u":"zkmmgt"},{"n":"Sirop de sureau","t":"sucres","u":"k2rneh"},{"n":"Soda au Gingembre - Ginger Beer","t":"sucres","u":"s80bet"},{"a":["Poisson"],"n":"Sole (poisson)","t":"animaux","u":"qr0xwp"},{"n":"Spaguetti de Mais-Riz","t":"sec","u":"6ws6f5"},{"a":["Gluten","Soja"],"n":"Speculoos","t":"sucres","u":"h6thsp"},{"n":"Sriracha","t":"epices","u":"oxiae3"},{"a":["Viande"],"n":"Steak haché (boeuf)","t":"animaux","u":"hxqhsf"},{"n":"sucre blanc","t":"sucres","u":"lny16c"},{"n":"Sucre brun Vergeoise","t":"sucres","u":"znjs35"},{"n":"Sucre complet","t":"sucres","u":"njgchn"},{"n":"sucre de canne (blond)","t":"sucres","u":"n85gmi"},{"n":"sucre de palme","t":"sucres","u":"cvd8ul"},{"n":"Sucre en poudre","t":"sucres","u":"u9z2he"},{"n":"Sucre glace","t":"sucres","u":"phv1to"},{"n":"Sucre vanillé","t":"sucres","u":"dgwl19"},{"n":"Sumac","t":"epices","u":"6izdfu"},{"n":"Sweet Chili Sauce","t":"epices","u":"t5cuz3"},{"n":"tabasco","t":"epices","u":"49iwdp"},{"a":["Sésame"],"n":"Tahin","t":"autres","u":"u33083"},{"a":["Soja"],"n":"Tamari (sauce)","t":"epices","u":"bbwo4n"},{"n":"tamarin liquide","t":"epices","u":"7la29q"},{"n":"Tapioca perlée","t":"sec","u":"mkttuh"},{"n":"Tête d 'ail","t":"epices","u":"i62a51"},{"a":["Viande"],"n":"Tête de veau (abats)","t":"animaux","u":"svrouu"},{"n":"Thé Matcha","t":"autres","u":"giui8l"},{"a":["Poisson"],"n":"Thon (poisson)","t":"animaux","u":"egpiw1"},{"n":"Thym","t":"epices","u":"a16yd7"},{"a":["Produit laitier"],"n":"Toastinette fromage burger","t":"frais","u":"6ezq59"},{"n":"Tofu ferme","t":"frais","u":"3ahcls"},{"n":"Tofu soyeux","t":"frais","u":"xqb8f5"},{"n":"Tomate","t":"legumes","u":"ibtbnq"},{"n":"Tomate (conserve)","t":"legumes","u":"24z2y0"},{"n":"Tomate séchée","t":"legumes","u":"s60hol"},{"n":"Tomates cerises","t":"legumes","u":"egkb0a"},{"n":"Topinambour","t":"legumes","u":"2xg37a"},{"a":["Porc"],"n":"Travers (porc)","t":"animaux","u":"2wbi6u"},{"a":["Viande"],"n":"Tripes (abats)","t":"animaux","u":"8jb1js"},{"a":["Poisson"],"n":"Truite (poisson)","t":"animaux","u":"qgsomm"},{"a":["Poisson"],"n":"Turbot (poisson)","t":"animaux","u":"b42j4r"},{"n":"vanille extrait concentré","t":"sucres","u":"n818be"},{"n":"Véganaise","t":"epices","u":"89945bda5f0b"},{"n":"Vermicelle de Riz","t":"sec","u":"3tifny"},{"n":"Verveine","t":"epices","u":"9fa412"},{"a":["Viande"],"n":"Viande hachée (boeuf)","t":"animaux","u":"gnbf8z"},{"a":["Porc"],"n":"Viande hachée (porc)","t":"animaux","u":"ibn1yk"},{"a":["Viande"],"n":"Viande hachée (veau)","t":"animaux","u":"sb5cr6"},{"a":["Sulfites","Alcool"],"n":"Vin Blanc","t":"epices","u":"judtle"},{"a":["Sulfites","Alcool"],"n":"Vin Rouge","t":"epices","u":"ruvnjp"},{"a":["Sulfites"],"n":"Vinaigre balsamique","t":"epices","u":"qemlqs"},{"a":["Alcool"],"n":"Vinaigre de cidre","t":"epices","u":"7qo3ht"},{"n":"Vinaigre de riz","t":"epices","u":"k6injl"},{"n":"Vinaigre de riz noir","t":"epices","u":"cx8yxn"},{"a":["Alcool"],"n":"Vinaigre de vin","t":"epices","u":"bjuxby"},{"n":"Vinaigre de Xérès","t":"epices","u":"fqoi4u"},{"n":"Vinaigrette","t":"epices","u":"86m6ez"},{"a":["Produit laitier"],"n":"Yaourt brassé","t":"frais","u":"a73fzw"},{"a":["Fruit à coque"],"n":"Yaourt d'Amande","t":"frais","u":"k3hbhs"},{"a":["Produit laitier"],"n":"yaourt de brebis","t":"frais","u":"cq437o"},{"a":["Soja"],"n":"Yaourt de soja","t":"frais","u":"hlbwfd"},{"a":["Produit laitier"],"n":"Yaourt de vache","t":"frais","u":"xahmrh"},{"a":["Produit laitier"],"n":"Yaourt grec de vache","t":"frais","u":"dzqmba"},{"a":["Produit laitier"],"n":"Yaourt nature","t":"frais","u":"yl86w7"},{"n":"Yaourt Végétal","t":"frais","u":"qiji6w"},{"a":["Sésame"],"n":"Zaatar (zathar)","t":"epices","u":"wxocup"},{"n":"Zestes d'orange","t":"legumes","u":"z6hnb8"},{"n":"Zestes de citron séchés","t":"legumes","u":"w9kkd2"}]
+[
+  {
+    "n": "Abricot",
+    "t": "legumes",
+    "u": "xo0ibs",
+    "pF": true
+  },
+  {
+    "n": "Agar-agar",
+    "t": "autres",
+    "u": "ruhtax"
+  },
+  {
+    "n": "Agneau",
+    "t": "animaux",
+    "u": "mz93p4",
+    "pF": true,
+    "a": [
+      "Viande"
+    ]
+  },
+  {
+    "n": "Ail en poudre",
+    "t": "epices",
+    "u": "vs2dfm"
+  },
+  {
+    "n": "Ail",
+    "t": "legumes",
+    "u": "u2m28w",
+    "pF": true
+  },
+  {
+    "n": "Airelle",
+    "t": "legumes",
+    "u": "eyaozj",
+    "pF": true
+  },
+  {
+    "n": "Algue kombu séchée",
+    "t": "epices",
+    "u": "cd0g12"
+  },
+  {
+    "n": "Algue Kombu",
+    "t": "legumes",
+    "u": "oafcb5"
+  },
+  {
+    "n": "Algue nori feuille séchée",
+    "t": "epices",
+    "u": "ffafjo"
+  },
+  {
+    "n": "Algue Nori",
+    "t": "legumes",
+    "u": "rtj08p"
+  },
+  {
+    "n": "Algue wakamé séchée",
+    "t": "epices",
+    "u": "m8rseq"
+  },
+  {
+    "n": "Amande",
+    "t": "sec",
+    "u": "fuhtcw",
+    "a": [
+      "Fruit à coque"
+    ]
+  },
+  {
+    "n": "Amandes effilées",
+    "t": "sec",
+    "u": "xkijt9",
+    "a": [
+      "Fruit à coque"
+    ]
+  },
+  {
+    "n": "Ananas (conserve)",
+    "t": "legumes",
+    "u": "ux53yb"
+  },
+  {
+    "n": "Ananas",
+    "t": "legumes",
+    "u": "7aceyw",
+    "pF": true
+  },
+  {
+    "n": "Andouille (charcuterie)",
+    "t": "animaux",
+    "u": "zgfqat",
+    "pF": true,
+    "a": [
+      "Viande",
+      "Porc"
+    ]
+  },
+  {
+    "n": "Andouillette (charcuterie)",
+    "t": "animaux",
+    "u": "f7dxsh",
+    "pF": true,
+    "a": [
+      "Viande",
+      "Porc"
+    ]
+  },
+  {
+    "n": "Aneth aromatique",
+    "t": "epices",
+    "u": "nnkg8f"
+  },
+  {
+    "n": "Anguille (poisson)",
+    "t": "animaux",
+    "u": "1g26bd",
+    "pF": true,
+    "a": [
+      "Poisson"
+    ]
+  },
+  {
+    "n": "Anis étoilé",
+    "t": "epices",
+    "u": "esnwzi"
+  },
+  {
+    "n": "Anis vert en poudre",
+    "t": "epices",
+    "u": "t3szad"
+  },
+  {
+    "n": "Aquafaba - jus de pois chiche",
+    "t": "autres",
+    "u": "b624uv"
+  },
+  {
+    "n": "Artichaut",
+    "t": "legumes",
+    "u": "uwpe3a",
+    "pF": true
+  },
+  {
+    "n": "Asperge blanche",
+    "t": "legumes",
+    "u": "3ltjuq",
+    "pF": true
+  },
+  {
+    "n": "Asperge verte",
+    "t": "legumes",
+    "u": "j8bbik",
+    "pF": true
+  },
+  {
+    "n": "Aubergine",
+    "t": "legumes",
+    "u": "7sk3a5",
+    "pF": true
+  },
+  {
+    "n": "Avocat",
+    "t": "legumes",
+    "u": "bl8x51",
+    "pF": true
+  },
+  {
+    "n": "Babybel",
+    "t": "frais",
+    "u": "wb086z",
+    "pF": true,
+    "a": [
+      "Produit laitier"
+    ]
+  },
+  {
+    "n": "Bacon (charcuterie)",
+    "t": "animaux",
+    "u": "mv18mg",
+    "pF": true,
+    "a": [
+      "Viande",
+      "Porc"
+    ]
+  },
+  {
+    "n": "Baies roses",
+    "t": "epices",
+    "u": "9o3793"
+  },
+  {
+    "n": "Banane séchée",
+    "t": "legumes",
+    "u": "ad1kwx"
+  },
+  {
+    "n": "Banane",
+    "t": "legumes",
+    "u": "9vpwp5",
+    "pF": true
+  },
+  {
+    "n": "Bar (poisson)",
+    "t": "animaux",
+    "u": "b7eftl",
+    "pF": true,
+    "a": [
+      "Poisson"
+    ]
+  },
+  {
+    "n": "Basilic sec",
+    "t": "epices",
+    "u": "z6747e"
+  },
+  {
+    "n": "Basilic",
+    "t": "epices",
+    "u": "s8j4ff",
+    "pF": true
+  },
+  {
+    "n": "Bâtonnet de canelle",
+    "t": "epices",
+    "u": "b77daa7e0067"
+  },
+  {
+    "n": "Baudroie (poisson)",
+    "t": "animaux",
+    "u": "7buymk",
+    "pF": true,
+    "a": [
+      "Poisson"
+    ]
+  },
+  {
+    "n": "Bavette (boeuf)",
+    "t": "animaux",
+    "u": "zuwedv",
+    "pF": true,
+    "a": [
+      "Viande"
+    ]
+  },
+  {
+    "n": "Beaufort",
+    "t": "frais",
+    "u": "dar9kl",
+    "pF": true,
+    "a": [
+      "Produit laitier"
+    ]
+  },
+  {
+    "n": "Bette (blette)",
+    "t": "legumes",
+    "u": "dkdml5",
+    "pF": true
+  },
+  {
+    "n": "Betterave cuite",
+    "t": "legumes",
+    "u": "i7psri"
+  },
+  {
+    "n": "Betterave rouge",
+    "t": "legumes",
+    "u": "7sc3uw",
+    "pF": true
+  },
+  {
+    "n": "Beurre de cacahuètes (salé)",
+    "t": "autres",
+    "u": "ks3ocl",
+    "a": [
+      "Arachides"
+    ]
+  },
+  {
+    "n": "Beurre de cacahuètes (sucré)",
+    "t": "autres",
+    "u": "7wpsj2",
+    "a": [
+      "Arachides"
+    ]
+  },
+  {
+    "n": "Beurre demi-sel",
+    "t": "frais",
+    "u": "mxub21",
+    "pF": true,
+    "a": [
+      "Produit laitier"
+    ]
+  },
+  {
+    "n": "Beurre doux",
+    "t": "frais",
+    "u": "kmq1zb",
+    "pF": true,
+    "a": [
+      "Produit laitier"
+    ]
+  },
+  {
+    "n": "Bicarbonate alimentaire",
+    "t": "lof",
+    "u": "vf8140"
+  },
+  {
+    "n": "Bicarbonate de soude",
+    "t": "autres",
+    "u": "fnnx13"
+  },
+  {
+    "n": "Biche (volaille et gibier)",
+    "t": "animaux",
+    "u": "m62ark",
+    "pF": true,
+    "a": [
+      "Viande"
+    ]
+  },
+  {
+    "n": "Bifteck (boeuf)",
+    "t": "animaux",
+    "u": "oe4cqe",
+    "pF": true,
+    "a": [
+      "Viande"
+    ]
+  },
+  {
+    "n": "Bigorneaux (fruits de mer)",
+    "t": "animaux",
+    "u": "ppk4ed",
+    "pF": true,
+    "a": [
+      "Mollusque"
+    ]
+  },
+  {
+    "n": "Biscuit Petit Brun",
+    "t": "sucres",
+    "u": "i5hlq1",
+    "a": [
+      "Gluten",
+      "Produit laitier",
+      "Sésame",
+      "Oeuf"
+    ]
+  },
+  {
+    "n": "Biscuit vegan et sans gluten",
+    "t": "sucres",
+    "u": "ade8hh"
+  },
+  {
+    "n": "Blanc de poulet (volaille et gibier)",
+    "t": "animaux",
+    "u": "ywsa1s",
+    "pF": true,
+    "a": [
+      "Viande"
+    ]
+  },
+  {
+    "n": "Blé",
+    "t": "sec",
+    "u": "wsjxq7",
+    "a": [
+      "Gluten"
+    ]
+  },
+  {
+    "n": "Bleu",
+    "t": "frais",
+    "u": "zin8ws",
+    "pF": true,
+    "a": [
+      "Produit laitier"
+    ]
+  },
+  {
+    "n": "Boudin blanc (charcuterie)",
+    "t": "animaux",
+    "u": "70q6zb",
+    "pF": true,
+    "a": [
+      "Viande",
+      "Porc"
+    ]
+  },
+  {
+    "n": "Boudin noir (charcuterie)",
+    "t": "animaux",
+    "u": "442u8i",
+    "pF": true,
+    "a": [
+      "Viande",
+      "Porc"
+    ]
+  },
+  {
+    "n": "boudoir",
+    "t": "sucres",
+    "u": "nz97kr"
+  },
+  {
+    "n": "bouillon cube",
+    "t": "epices",
+    "u": "57xo8g"
+  },
+  {
+    "n": "Bouillon de légume (sans gluten)",
+    "t": "epices",
+    "u": "tmk6ya"
+  },
+  {
+    "n": "Bouillon de légumes",
+    "t": "epices",
+    "u": "3n8509",
+    "a": [
+      "gluten"
+    ]
+  },
+  {
+    "n": "Boulgour fin",
+    "t": "sec",
+    "u": "s0hv5y",
+    "a": [
+      "Gluten"
+    ]
+  },
+  {
+    "n": "Boulgour",
+    "t": "sec",
+    "u": "omf24t"
+  },
+  {
+    "n": "Bouquet garni",
+    "t": "epices",
+    "u": "x0ewxp"
+  },
+  {
+    "n": "Bourguignon (boeuf)",
+    "t": "animaux",
+    "u": "70v04n",
+    "pF": true,
+    "a": [
+      "Viande"
+    ]
+  },
+  {
+    "n": "Brie-Beaufort",
+    "t": "frais",
+    "u": "gjww01",
+    "pF": true,
+    "a": [
+      "Produit laitier"
+    ]
+  },
+  {
+    "n": "Brochet (poisson)",
+    "t": "animaux",
+    "u": "5jguvn",
+    "pF": true,
+    "a": [
+      "Poisson"
+    ]
+  },
+  {
+    "n": "Brocoli",
+    "t": "legumes",
+    "u": "ix43bo",
+    "pF": true
+  },
+  {
+    "n": "Bûche de chèvre",
+    "t": "frais",
+    "u": "yjxnau",
+    "pF": true,
+    "a": [
+      "Produit laitier"
+    ]
+  },
+  {
+    "n": "Bulot (fruits de mer)",
+    "t": "animaux",
+    "u": "91je3t",
+    "pF": true,
+    "a": [
+      "Mollusque"
+    ]
+  },
+  {
+    "n": "Cabillaud (poisson)",
+    "t": "animaux",
+    "u": "ngl32x",
+    "pF": true,
+    "a": [
+      "Poisson"
+    ]
+  },
+  {
+    "n": "Cacahuète",
+    "t": "sec",
+    "u": "73ikep",
+    "a": [
+      "Arachide"
+    ]
+  },
+  {
+    "n": "Cacao",
+    "t": "sucres",
+    "u": "r6792n"
+  },
+  {
+    "n": "Café moulu",
+    "t": "autres",
+    "u": "86z19m"
+  },
+  {
+    "n": "Caille (volaille et gibier)",
+    "t": "animaux",
+    "u": "279ad0",
+    "pF": true,
+    "a": [
+      "Viande"
+    ]
+  },
+  {
+    "n": "Calamar (fruits de mer)",
+    "t": "animaux",
+    "u": "cxldjv",
+    "pF": true,
+    "a": [
+      "Crustacé"
+    ]
+  },
+  {
+    "n": "Camembert",
+    "t": "frais",
+    "u": "2soph2",
+    "pF": true,
+    "a": [
+      "Produit laitier"
+    ]
+  },
+  {
+    "n": "Canard (volaille et gibier)",
+    "t": "animaux",
+    "u": "5yclak",
+    "pF": true,
+    "a": [
+      "Viande"
+    ]
+  },
+  {
+    "n": "Canneberge",
+    "t": "legumes",
+    "u": "uja9ip",
+    "pF": true
+  },
+  {
+    "n": "Cannelle",
+    "t": "epices",
+    "u": "sk1gbb"
+  },
+  {
+    "n": "Cantal",
+    "t": "frais",
+    "u": "chmx44",
+    "pF": true,
+    "a": [
+      "Produit laitier"
+    ]
+  },
+  {
+    "n": "Câpres",
+    "t": "epices",
+    "u": "c88lz8"
+  },
+  {
+    "n": "Cardamome",
+    "t": "epices",
+    "u": "azpv5r"
+  },
+  {
+    "n": "Cardamone en poudre",
+    "t": "epices",
+    "u": "2n9g9t"
+  },
+  {
+    "n": "Carotte",
+    "t": "legumes",
+    "u": "eouu0v",
+    "pF": true
+  },
+  {
+    "n": "Carpe (poisson)",
+    "t": "animaux",
+    "u": "yb5s26",
+    "pF": true,
+    "a": [
+      "Poisson"
+    ]
+  },
+  {
+    "n": "Carrelet (poisson)",
+    "t": "animaux",
+    "u": "110zbn",
+    "pF": true,
+    "a": [
+      "Poisson"
+    ]
+  },
+  {
+    "n": "Cassis",
+    "t": "legumes",
+    "u": "un0thk",
+    "pF": true
+  },
+  {
+    "n": "Cassonade",
+    "t": "sucres",
+    "u": "gk7kod"
+  },
+  {
+    "n": "Catalonia",
+    "t": "legumes",
+    "u": "pi7nqu",
+    "pF": true
+  },
+  {
+    "n": "Cébette - Ciboule - Cive - Oignon vert",
+    "t": "legumes",
+    "u": "j7as8d",
+    "pF": true
+  },
+  {
+    "n": "Cébettes",
+    "t": "legumes",
+    "u": "j2l8hj",
+    "pF": true
+  },
+  {
+    "n": "Céleri branche",
+    "t": "legumes",
+    "u": "78fo97",
+    "pF": true,
+    "a": [
+      "Céleri"
+    ]
+  },
+  {
+    "n": "Céleri rave",
+    "t": "legumes",
+    "u": "2145vg",
+    "pF": true,
+    "a": [
+      "Céleri"
+    ]
+  },
+  {
+    "n": "Céleri",
+    "t": "legumes",
+    "u": "qagkr3",
+    "pF": true,
+    "a": [
+      "Céleri"
+    ]
+  },
+  {
+    "n": "Cerfeuil",
+    "t": "epices",
+    "u": "uak5z9"
+  },
+  {
+    "n": "Cerise aux sirop",
+    "t": "legumes",
+    "u": "dzwb3b"
+  },
+  {
+    "n": "Cerise",
+    "t": "legumes",
+    "u": "2f2o9o",
+    "pF": true
+  },
+  {
+    "n": "Cerises griottes (abats)",
+    "t": "animaux",
+    "u": "xm058a",
+    "pF": true,
+    "a": [
+      "Viande"
+    ]
+  },
+  {
+    "n": "Cerises Griottes",
+    "t": "legumes",
+    "u": "04loak",
+    "pF": true
+  },
+  {
+    "n": "Cervelas (charcuterie)",
+    "t": "animaux",
+    "u": "ufwzvi",
+    "pF": true,
+    "a": [
+      "Viande",
+      "Porc"
+    ]
+  },
+  {
+    "n": "Cervelle (abats)",
+    "t": "animaux",
+    "u": "70y1z0",
+    "pF": true,
+    "a": [
+      "Viande"
+    ]
+  },
+  {
+    "n": "Chair à saucisse (charcuterie)",
+    "t": "animaux",
+    "u": "xpw7ri",
+    "pF": true,
+    "a": [
+      "Viande",
+      "Porc"
+    ]
+  },
+  {
+    "n": "Champignon de Paris",
+    "t": "legumes",
+    "u": "92zzps",
+    "pF": true
+  },
+  {
+    "n": "Champignon noir",
+    "t": "legumes",
+    "u": "hlihcc",
+    "pF": true
+  },
+  {
+    "n": "Champignon shiitake séché",
+    "t": "legumes",
+    "u": "7b8r4n"
+  },
+  {
+    "n": "Champignons (conserve)",
+    "t": "legumes",
+    "u": "ir893w"
+  },
+  {
+    "n": "champignons de paris surgelés",
+    "t": "legumes",
+    "u": "whpsd8",
+    "pF": true
+  },
+  {
+    "n": "Champignons séchés",
+    "t": "legumes",
+    "u": "wcvin0"
+  },
+  {
+    "n": "Champignons",
+    "t": "legumes",
+    "u": "v9qhs9",
+    "pF": true
+  },
+  {
+    "n": "Chantifix",
+    "t": "autres",
+    "u": "aujuzx"
+  },
+  {
+    "n": "Chapelure sans gluten",
+    "t": "sucres",
+    "u": "5e0pcl"
+  },
+  {
+    "n": "Chapelure",
+    "t": "autres",
+    "u": "psu3gg",
+    "a": [
+      "Gluten"
+    ]
+  },
+  {
+    "n": "Cheddar",
+    "t": "frais",
+    "u": "laq4wn",
+    "pF": true,
+    "a": [
+      "Produit laitier"
+    ]
+  },
+  {
+    "n": "Chevreuil (volaille et gibier)",
+    "t": "animaux",
+    "u": "upmilx",
+    "pF": true,
+    "a": [
+      "Viande"
+    ]
+  },
+  {
+    "n": "chicorée soluble",
+    "t": "autres",
+    "u": "pss0bn"
+  },
+  {
+    "n": "Chocolat amer en poudre",
+    "t": "sucres",
+    "u": "8kw83v"
+  },
+  {
+    "n": "Chocolat au lait",
+    "t": "sucres",
+    "u": "c45liy"
+  },
+  {
+    "n": "Chocolat blanc",
+    "t": "sucres",
+    "u": "fsz13t"
+  },
+  {
+    "n": "Chocolat noir patissier 70p100",
+    "t": "sucres",
+    "u": "1e3zhq"
+  },
+  {
+    "n": "Chocolat noir",
+    "t": "sucres",
+    "u": "cr4kiz"
+  },
+  {
+    "n": "Chocolat praliné",
+    "t": "sucres",
+    "u": "h58dek"
+  },
+  {
+    "n": "Chorizo (charcuterie)",
+    "t": "animaux",
+    "u": "dsiv59",
+    "pF": true,
+    "a": [
+      "Viande",
+      "Porc"
+    ]
+  },
+  {
+    "n": "Chorizo végan",
+    "t": "autres",
+    "u": "f1xrxx",
+    "a": [
+      "Gluten",
+      "Soja"
+    ]
+  },
+  {
+    "n": "Chou blanc",
+    "t": "legumes",
+    "u": "mlukbi",
+    "pF": true
+  },
+  {
+    "n": "Chou-chinois",
+    "t": "legumes",
+    "u": "dd3zbj",
+    "pF": true
+  },
+  {
+    "n": "Chou chinois",
+    "t": "legumes",
+    "u": "hz46f4",
+    "pF": true
+  },
+  {
+    "n": "Chou de Bruxelles",
+    "t": "legumes",
+    "u": "asdz59",
+    "pF": true
+  },
+  {
+    "n": "Chou-fleur",
+    "t": "legumes",
+    "u": "nml8fs",
+    "pF": true
+  },
+  {
+    "n": "Chou frisé",
+    "t": "legumes",
+    "u": "2hh55e",
+    "pF": true
+  },
+  {
+    "n": "Chou-rave",
+    "t": "legumes",
+    "u": "cabud5",
+    "pF": true
+  },
+  {
+    "n": "Chou Romanesco",
+    "t": "legumes",
+    "u": "xdl5a1",
+    "pF": true
+  },
+  {
+    "n": "Chou rouge",
+    "t": "legumes",
+    "u": "nl2s2n",
+    "pF": true
+  },
+  {
+    "n": "Chou vert",
+    "t": "legumes",
+    "u": "jrqk2q",
+    "pF": true
+  },
+  {
+    "n": "Chunks (protéine de soja)",
+    "t": "autres",
+    "u": "pbydyr",
+    "a": [
+      "Soja"
+    ]
+  },
+  {
+    "n": "Ciboulette",
+    "t": "epices",
+    "u": "mt22ff",
+    "pF": true
+  },
+  {
+    "n": "Cima di Rapa",
+    "t": "legumes",
+    "u": "z7il6a",
+    "pF": true
+  },
+  {
+    "n": "Citron confit",
+    "t": "legumes",
+    "u": "m6gmgq"
+  },
+  {
+    "n": "Citron jaune",
+    "t": "legumes",
+    "u": "5cg0yu",
+    "pF": true
+  },
+  {
+    "n": "Citron (jus)",
+    "t": "legumes",
+    "u": "bwkn34",
+    "pF": true
+  },
+  {
+    "n": "Citron non traité",
+    "t": "legumes",
+    "u": "tobtbt",
+    "pF": true
+  },
+  {
+    "n": "Citron vert",
+    "t": "legumes",
+    "u": "1koje1",
+    "pF": true
+  },
+  {
+    "n": "Citronelle",
+    "t": "epices",
+    "u": "og3g25"
+  },
+  {
+    "n": "Citronnelle (bâton)",
+    "t": "epices",
+    "u": "t2e14k"
+  },
+  {
+    "n": "Citrouille",
+    "t": "legumes",
+    "u": "sapd2n",
+    "pF": true
+  },
+  {
+    "n": "Clémentine",
+    "t": "legumes",
+    "u": "ludsgj",
+    "pF": true
+  },
+  {
+    "n": "clou de girofle poudre",
+    "t": "epices",
+    "u": "yynfo5"
+  },
+  {
+    "n": "Clou de girofle",
+    "t": "epices",
+    "u": "rk54ar"
+  },
+  {
+    "n": "Coeur (abats)",
+    "t": "animaux",
+    "u": "pny4sg",
+    "pF": true,
+    "a": [
+      "Viande"
+    ]
+  },
+  {
+    "n": "Coing",
+    "t": "legumes",
+    "u": "go4nam",
+    "pF": true
+  },
+  {
+    "n": "Colin (poisson)",
+    "t": "animaux",
+    "u": "dmlfsq",
+    "pF": true,
+    "a": [
+      "Poisson"
+    ]
+  },
+  {
+    "n": "Collier (agneau)",
+    "t": "animaux",
+    "u": "8bssc5",
+    "pF": true,
+    "a": [
+      "Viande"
+    ]
+  },
+  {
+    "n": "Collier (blanquette) (veau)",
+    "t": "animaux",
+    "u": "i7dbn1",
+    "pF": true,
+    "a": [
+      "Viande"
+    ]
+  },
+  {
+    "n": "Colorants alimentaires en poudre",
+    "t": "autres",
+    "u": "3siurf"
+  },
+  {
+    "n": "Colorants alimentaires",
+    "t": "autres",
+    "u": "dukizx"
+  },
+  {
+    "n": "compote de pomme",
+    "t": "sucres",
+    "u": "wz2fkg"
+  },
+  {
+    "n": "Comté",
+    "t": "frais",
+    "u": "da93ql",
+    "pF": true,
+    "a": [
+      "Produit laitier"
+    ]
+  },
+  {
+    "n": "Concentré de tomate",
+    "t": "epices",
+    "u": "mck2wl"
+  },
+  {
+    "n": "Concombre sans traitement",
+    "t": "legumes",
+    "u": "ep9gif",
+    "pF": true
+  },
+  {
+    "n": "Concombre",
+    "t": "legumes",
+    "u": "l5p1a5",
+    "pF": true
+  },
+  {
+    "n": "Confiture de chataigne (sans sucre)",
+    "t": "sucres",
+    "u": "q33x0k"
+  },
+  {
+    "n": "Confiture de fraises",
+    "t": "sucres",
+    "u": "jf0jf7"
+  },
+  {
+    "n": "confiture de myrtille",
+    "t": "sucres",
+    "u": "ywjjiv"
+  },
+  {
+    "n": "Coppa (charcuterie)",
+    "t": "animaux",
+    "u": "68uuc3",
+    "pF": true,
+    "a": [
+      "Viande",
+      "Porc"
+    ]
+  },
+  {
+    "n": "Coque (fruits de mer)",
+    "t": "animaux",
+    "u": "vfk7w4",
+    "pF": true,
+    "a": [
+      "Mollusque"
+    ]
+  },
+  {
+    "n": "Coriandre en poudre",
+    "t": "epices",
+    "u": "nf05n7"
+  },
+  {
+    "n": "Coriandre fraîche",
+    "t": "epices",
+    "u": "fetrpe",
+    "pF": true
+  },
+  {
+    "n": "coriandre graine",
+    "t": "epices",
+    "u": "bvzdfn"
+  },
+  {
+    "n": "Coriandre",
+    "t": "epices",
+    "u": "yat3fu"
+  },
+  {
+    "n": "corn flakes",
+    "t": "sec",
+    "u": "kp0srn"
+  },
+  {
+    "n": "Cornflakes (sans gluten)",
+    "t": "sucres",
+    "u": "hyp3th"
+  },
+  {
+    "n": "Cornichon",
+    "t": "legumes",
+    "u": "77kyi3"
+  },
+  {
+    "n": "Cornichons aigre-doux",
+    "t": "autres",
+    "u": "eaudjn"
+  },
+  {
+    "n": "Cornichons",
+    "t": "autres",
+    "u": "p200bb"
+  },
+  {
+    "n": "Côte (agneau)",
+    "t": "animaux",
+    "u": "sip7kr",
+    "pF": true,
+    "a": [
+      "Viande"
+    ]
+  },
+  {
+    "n": "Côte échine (porc)",
+    "t": "animaux",
+    "u": "ip42wi",
+    "pF": true,
+    "a": [
+      "Porc"
+    ]
+  },
+  {
+    "n": "Côte première (porc)",
+    "t": "animaux",
+    "u": "b8axth",
+    "pF": true,
+    "a": [
+      "Porc"
+    ]
+  },
+  {
+    "n": "Côte (veau)",
+    "t": "animaux",
+    "u": "o2eixm",
+    "pF": true,
+    "a": [
+      "Viande"
+    ]
+  },
+  {
+    "n": "Côtelette (agneau)",
+    "t": "animaux",
+    "u": "q890ia",
+    "pF": true,
+    "a": [
+      "Viande"
+    ]
+  },
+  {
+    "n": "Côtelette (porc)",
+    "t": "animaux",
+    "u": "8ctt74",
+    "pF": true,
+    "a": [
+      "Porc"
+    ]
+  },
+  {
+    "n": "Coulis de tomates",
+    "t": "epices",
+    "u": "09bywc"
+  },
+  {
+    "n": "Courge Butternut",
+    "t": "legumes",
+    "u": "n8zdhc",
+    "pF": true
+  },
+  {
+    "n": "Courge",
+    "t": "legumes",
+    "u": "oa85mx",
+    "pF": true
+  },
+  {
+    "n": "Courgette",
+    "t": "legumes",
+    "u": "9zozfk",
+    "pF": true
+  },
+  {
+    "n": "Couscous de Mais-Riz",
+    "t": "sec",
+    "u": "f9hmrv"
+  },
+  {
+    "n": "Crabe (fruits de mer)",
+    "t": "animaux",
+    "u": "xjwtly",
+    "pF": true,
+    "a": [
+      "Crustacé"
+    ]
+  },
+  {
+    "n": "Cranberries séchées",
+    "t": "sucres",
+    "u": "rn44lx"
+  },
+  {
+    "n": "Cranberries",
+    "t": "legumes",
+    "u": "tlytgh"
+  },
+  {
+    "n": "Crème Chantilly",
+    "t": "frais",
+    "u": "lk4tk0",
+    "pF": true,
+    "a": [
+      "Produit laitier"
+    ]
+  },
+  {
+    "n": "Crème d'amande",
+    "t": "lof",
+    "u": "geh6n8"
+  },
+  {
+    "n": "creme de coco",
+    "t": "lof",
+    "u": "bnmw1o"
+  },
+  {
+    "n": "Crème de marron",
+    "t": "sucres",
+    "u": "dau8y8"
+  },
+  {
+    "n": "Crème de riz",
+    "t": "lof",
+    "u": "s0sjb1"
+  },
+  {
+    "n": "Crème d'orge",
+    "t": "lof",
+    "u": "xc0m2b"
+  },
+  {
+    "n": "Crème épaisse",
+    "t": "frais",
+    "u": "1e8unz",
+    "pF": true,
+    "a": [
+      "Produit laitier"
+    ]
+  },
+  {
+    "n": "Crème florette",
+    "t": "frais",
+    "u": "k6zm70",
+    "a": [
+      "Produit laitier"
+    ]
+  },
+  {
+    "n": "Crème fraîche épaisse entière",
+    "t": "frais",
+    "u": "izd01q",
+    "pF": true,
+    "a": [
+      "Produit laitier"
+    ]
+  },
+  {
+    "n": "Crème fraiche liquide entière",
+    "t": "lof",
+    "u": "6tnb6h",
+    "a": [
+      "Produit laitier"
+    ]
+  },
+  {
+    "n": "Crème glacée chocolat",
+    "t": "frais",
+    "u": "ydouo9",
+    "pF": true,
+    "a": [
+      "Produit laitier"
+    ]
+  },
+  {
+    "n": "Crème glacée fraise",
+    "t": "frais",
+    "u": "yyo2yt",
+    "pF": true,
+    "a": [
+      "Produit laitier"
+    ]
+  },
+  {
+    "n": "Crème glacée vanille",
+    "t": "frais",
+    "u": "xssjj3",
+    "pF": true,
+    "a": [
+      "Produit laitier"
+    ]
+  },
+  {
+    "n": "Crème glacée",
+    "t": "frais",
+    "u": "aq6040",
+    "pF": true,
+    "a": [
+      "Produit laitier"
+    ]
+  },
+  {
+    "n": "Crème liquide",
+    "t": "lof",
+    "u": "nvzduo",
+    "a": [
+      "Produit laitier"
+    ]
+  },
+  {
+    "n": "Crème soja",
+    "t": "lof",
+    "u": "chfwwq",
+    "a": [
+      "Soja"
+    ]
+  },
+  {
+    "n": "Crème Végétale",
+    "t": "lof",
+    "u": "aq796v",
+    "a": [
+      "Soja"
+    ]
+  },
+  {
+    "n": "crêpes de sarrasin",
+    "t": "autres",
+    "u": "0keyhv",
+    "pF": true
+  },
+  {
+    "n": "Crevette (fruits de mer)",
+    "t": "animaux",
+    "u": "niic2i",
+    "pF": true,
+    "a": [
+      "Crustacé"
+    ]
+  },
+  {
+    "n": "Cuisse de dinde (volaille et gibier)",
+    "t": "animaux",
+    "u": "q6h1hp",
+    "pF": true,
+    "a": [
+      "Viande"
+    ]
+  },
+  {
+    "n": "Cuisse de poulet (volaille et gibier)",
+    "t": "animaux",
+    "u": "xavxvy",
+    "pF": true,
+    "a": [
+      "Viande"
+    ]
+  },
+  {
+    "n": "Cumin (graines)",
+    "t": "epices",
+    "u": "l3esgp"
+  },
+  {
+    "n": "Cumin moulu",
+    "t": "epices",
+    "u": "he3u48"
+  },
+  {
+    "n": "Cumin",
+    "t": "epices",
+    "u": "dc8855"
+  },
+  {
+    "n": "Curcuma moulu",
+    "t": "epices",
+    "u": "htp5ma"
+  },
+  {
+    "n": "Curcuma",
+    "t": "epices",
+    "u": "va2wu4"
+  },
+  {
+    "n": "curry feuilles",
+    "t": "epices",
+    "u": "xqmcoe"
+  },
+  {
+    "n": "Curry",
+    "t": "epices",
+    "u": "7jceco"
+  },
+  {
+    "n": "Datte",
+    "t": "legumes",
+    "u": "0fc41p",
+    "pF": true
+  },
+  {
+    "n": "Dindonneau (volaille et gibier)",
+    "t": "animaux",
+    "u": "d0ba1k",
+    "pF": true,
+    "a": [
+      "Viande"
+    ]
+  },
+  {
+    "n": "Doenjang",
+    "t": "epices",
+    "u": "vet0jj",
+    "a": [
+      "Gluten",
+      "Soja"
+    ]
+  },
+  {
+    "n": "Dorade (poisson)",
+    "t": "animaux",
+    "u": "qf8h6r",
+    "pF": true,
+    "a": [
+      "Poisson"
+    ]
+  },
+  {
+    "n": "Eau de coco",
+    "t": "sucres",
+    "u": "x8bakh"
+  },
+  {
+    "n": "Eau de fleur d'oranger",
+    "t": "sucres",
+    "u": "ikdk3g"
+  },
+  {
+    "n": "Eau de rose",
+    "t": "sucres",
+    "u": "ktlybm"
+  },
+  {
+    "n": "Eau gazeuse",
+    "t": "autres",
+    "u": "ekw33n"
+  },
+  {
+    "n": "Eau",
+    "t": "autres",
+    "u": "ljzb7j"
+  },
+  {
+    "n": "échalote",
+    "t": "legumes",
+    "u": "owsv5m",
+    "pF": true
+  },
+  {
+    "n": "Echalote",
+    "t": "legumes",
+    "u": "vwdomu",
+    "pF": true
+  },
+  {
+    "n": "échine (porc)",
+    "t": "animaux",
+    "u": "44eutn",
+    "pF": true,
+    "a": [
+      "Porc"
+    ]
+  },
+  {
+    "n": "Écorce d'orange séchée ",
+    "t": "autres",
+    "u": "0tlmi4"
+  },
+  {
+    "n": "Edam",
+    "t": "frais",
+    "u": "7l4sfz",
+    "pF": true,
+    "a": [
+      "Produit laitier"
+    ]
+  },
+  {
+    "n": "églefin ou aiglefin (poisson)",
+    "t": "animaux",
+    "u": "7sejg1",
+    "pF": true,
+    "a": [
+      "Poisson"
+    ]
+  },
+  {
+    "n": "Emincés de poulet (volaille et gibier)",
+    "t": "animaux",
+    "u": "a3widy",
+    "pF": true,
+    "a": [
+      "Viande"
+    ]
+  },
+  {
+    "n": "Emmental",
+    "t": "frais",
+    "u": "36vcgl",
+    "pF": true,
+    "a": [
+      "Produit laitier"
+    ]
+  },
+  {
+    "n": "Endive",
+    "t": "legumes",
+    "u": "u21jed",
+    "pF": true
+  },
+  {
+    "n": "Entrecôte (boeuf)",
+    "t": "animaux",
+    "u": "nlcs1b",
+    "pF": true,
+    "a": [
+      "Viande"
+    ]
+  },
+  {
+    "n": "épaule (agneau)",
+    "t": "animaux",
+    "u": "9j4s8v",
+    "pF": true,
+    "a": [
+      "Viande"
+    ]
+  },
+  {
+    "n": "épaule cuite dégraissée (porc)",
+    "t": "animaux",
+    "u": "aqc9d4",
+    "pF": true,
+    "a": [
+      "Porc"
+    ]
+  },
+  {
+    "n": "épaule (veau)",
+    "t": "animaux",
+    "u": "l5wy0o",
+    "pF": true,
+    "a": [
+      "Viande"
+    ]
+  },
+  {
+    "n": "éperlan (poisson)",
+    "t": "animaux",
+    "u": "4qtoii",
+    "pF": true,
+    "a": [
+      "Poisson"
+    ]
+  },
+  {
+    "n": "Epinard",
+    "t": "legumes",
+    "u": "4totf1",
+    "pF": true
+  },
+  {
+    "n": "Epinards surgelés",
+    "t": "legumes",
+    "u": "c4z22l",
+    "pF": true
+  },
+  {
+    "n": "Escalope de dinde (volaille et gibier)",
+    "t": "animaux",
+    "u": "e22a1q",
+    "pF": true,
+    "a": [
+      "Viande"
+    ]
+  },
+  {
+    "n": "Escalope de poulet (volaille et gibier)",
+    "t": "animaux",
+    "u": "lwj6za",
+    "pF": true,
+    "a": [
+      "Viande"
+    ]
+  },
+  {
+    "n": "Escalope (veau)",
+    "t": "animaux",
+    "u": "blwjma",
+    "pF": true,
+    "a": [
+      "Viande"
+    ]
+  },
+  {
+    "n": "Espadon (poisson)",
+    "t": "animaux",
+    "u": "c2awx6",
+    "pF": true,
+    "a": [
+      "Poisson"
+    ]
+  },
+  {
+    "n": "Estragon séché",
+    "t": "epices",
+    "u": "cgk776"
+  },
+  {
+    "n": "Estragon",
+    "t": "epices",
+    "u": "kt0wyw"
+  },
+  {
+    "n": "Faisan (volaille et gibier)",
+    "t": "animaux",
+    "u": "fv4y9f",
+    "pF": true,
+    "a": [
+      "Viande"
+    ]
+  },
+  {
+    "n": "Farine d'amande",
+    "t": "lof",
+    "u": "5dztep"
+  },
+  {
+    "n": "Farine d’amarante",
+    "t": "lof",
+    "u": "0qfm7z"
+  },
+  {
+    "n": "Farine d'avoine",
+    "t": "lof",
+    "u": "ab50bc",
+    "a": [
+      "Gluten"
+    ]
+  },
+  {
+    "n": "Farine de blé noir (sarrasin)",
+    "t": "lof",
+    "u": "2ej7fi"
+  },
+  {
+    "n": "Farine de blé",
+    "t": "lof",
+    "u": "2av6w8",
+    "a": [
+      "Gluten"
+    ]
+  },
+  {
+    "n": "Farine de châtaigne",
+    "t": "lof",
+    "u": "lhdqvi"
+  },
+  {
+    "n": "Farine de coco",
+    "t": "lof",
+    "u": "210swc"
+  },
+  {
+    "n": "Farine de kamut",
+    "t": "lof",
+    "u": "w9cfv1",
+    "a": [
+      "Gluten"
+    ]
+  },
+  {
+    "n": "Farine de lentilles",
+    "t": "lof",
+    "u": "aau6r8"
+  },
+  {
+    "n": "Farine de maïs",
+    "t": "lof",
+    "u": "z8uiyd"
+  },
+  {
+    "n": "Farine de millet",
+    "t": "lof",
+    "u": "nxk1ar"
+  },
+  {
+    "n": "Farine de pois chiche",
+    "t": "lof",
+    "u": "o627mw"
+  },
+  {
+    "n": "Farine de quinoa",
+    "t": "lof",
+    "u": "xfon4f"
+  },
+  {
+    "n": "Farine de riz blanche",
+    "t": "lof",
+    "u": "1nb85u"
+  },
+  {
+    "n": "Farine de riz gluant",
+    "t": "lof",
+    "u": "civ587"
+  },
+  {
+    "n": "Farine de riz",
+    "t": "lof",
+    "u": "oygozr"
+  },
+  {
+    "n": "Farine de seigle",
+    "t": "lof",
+    "u": "5ryt7y",
+    "a": [
+      "Gluten"
+    ]
+  },
+  {
+    "n": "Farine de soja",
+    "t": "lof",
+    "u": "p4tg0v",
+    "a": [
+      "Soja"
+    ]
+  },
+  {
+    "n": "Farine de tapioca",
+    "t": "lof",
+    "u": "v212im"
+  },
+  {
+    "n": "Farine d'épeautre",
+    "t": "lof",
+    "u": "861x4y",
+    "a": [
+      "Gluten"
+    ]
+  },
+  {
+    "n": "Farine d'orge",
+    "t": "lof",
+    "u": "fqilxx",
+    "a": [
+      "Gluten"
+    ]
+  },
+  {
+    "n": "Faux filet (boeuf)",
+    "t": "animaux",
+    "u": "j6m21g",
+    "pF": true,
+    "a": [
+      "Viande"
+    ]
+  },
+  {
+    "n": "Fécule de maïs (Maïzena)",
+    "t": "lof",
+    "u": "8nbcjp"
+  },
+  {
+    "n": "Fécule de pomme de terre",
+    "t": "lof",
+    "u": "g56l9d"
+  },
+  {
+    "n": "Fécule de tapioca",
+    "t": "lof",
+    "u": "zq1y8c"
+  },
+  {
+    "n": "fenouil graine",
+    "t": "epices",
+    "u": "x7e30y"
+  },
+  {
+    "n": "Fenouil",
+    "t": "legumes",
+    "u": "mhsals",
+    "pF": true
+  },
+  {
+    "n": "fenugrec moulu",
+    "t": "epices",
+    "u": "d5zbfl"
+  },
+  {
+    "n": "Fenugrec",
+    "t": "epices",
+    "u": "zoxy2t"
+  },
+  {
+    "n": "Feta",
+    "t": "frais",
+    "u": "m5dxyo",
+    "pF": true,
+    "a": [
+      "Produit laitier"
+    ]
+  },
+  {
+    "n": "Feuille de citron combava",
+    "t": "epices",
+    "u": "cydiwr"
+  },
+  {
+    "n": "Feuille de gélatine",
+    "t": "autres",
+    "u": "u1ctdb"
+  },
+  {
+    "n": "Feuille de laurier",
+    "t": "epices",
+    "u": "j84olg"
+  },
+  {
+    "n": "Feuilles de brick",
+    "t": "autres",
+    "u": "36uk6j",
+    "a": [
+      "Gluten"
+    ]
+  },
+  {
+    "n": "Feuilles de riz (galettes)",
+    "t": "autres",
+    "u": "234nl4"
+  },
+  {
+    "n": "Fêves",
+    "t": "sec",
+    "u": "r7zz4s"
+  },
+  {
+    "n": "Figue",
+    "t": "legumes",
+    "u": "a8y11s",
+    "pF": true
+  },
+  {
+    "n": "Figues Sèches",
+    "t": "legumes",
+    "u": "mr7sd5"
+  },
+  {
+    "n": "Filet d'autruche (volaille et gibier)",
+    "t": "animaux",
+    "u": "ipfqx8",
+    "pF": true,
+    "a": [
+      "Viande"
+    ]
+  },
+  {
+    "n": "Filet mignon (porc)",
+    "t": "animaux",
+    "u": "63dvqz",
+    "pF": true,
+    "a": [
+      "Porc"
+    ]
+  },
+  {
+    "n": "Filet (veau)",
+    "t": "animaux",
+    "u": "bewdsh",
+    "pF": true,
+    "a": [
+      "Viande"
+    ]
+  },
+  {
+    "n": "Flanchet (boeuf)",
+    "t": "animaux",
+    "u": "zrixbv",
+    "pF": true,
+    "a": [
+      "Viande"
+    ]
+  },
+  {
+    "n": "Flétan (poisson)",
+    "t": "animaux",
+    "u": "ucayk1",
+    "pF": true,
+    "a": [
+      "Poisson"
+    ]
+  },
+  {
+    "n": "Fleur de sel",
+    "t": "epices",
+    "u": "tjrhvg"
+  },
+  {
+    "n": "Flocons d'avoine sans gluten",
+    "t": "sec",
+    "u": "02w66c"
+  },
+  {
+    "n": "Flocons d'avoine",
+    "t": "sec",
+    "u": "ovewgk",
+    "a": [
+      "Gluten"
+    ]
+  },
+  {
+    "n": "Foie (abats)",
+    "t": "animaux",
+    "u": "kmwg8w",
+    "pF": true,
+    "a": [
+      "Viande"
+    ]
+  },
+  {
+    "n": "Foie gras (charcuterie)",
+    "t": "animaux",
+    "u": "lmav2h",
+    "pF": true,
+    "a": [
+      "Viande"
+    ]
+  },
+  {
+    "n": "Fourme d'Ambert",
+    "t": "frais",
+    "u": "ta6o8n",
+    "pF": true,
+    "a": [
+      "Produit laitier"
+    ]
+  },
+  {
+    "n": "Fraise des bois",
+    "t": "legumes",
+    "u": "m1hioo",
+    "pF": true
+  },
+  {
+    "n": "Fraise",
+    "t": "legumes",
+    "u": "57f42g",
+    "pF": true
+  },
+  {
+    "n": "Framboise",
+    "t": "legumes",
+    "u": "s8kuh9",
+    "pF": true
+  },
+  {
+    "n": "Framboises surgelées",
+    "t": "legumes",
+    "u": "65cee288c5d4",
+    "pS": true
+  },
+  {
+    "n": "Fromage à raclette",
+    "t": "frais",
+    "u": "onfvly",
+    "pF": true,
+    "a": [
+      "Produit laitier"
+    ]
+  },
+  {
+    "n": "Fromage blanc",
+    "t": "frais",
+    "u": "b2dxf8",
+    "pF": true,
+    "a": [
+      "Produit laitier"
+    ]
+  },
+  {
+    "n": "Fromage de chèvre frais",
+    "t": "frais",
+    "u": "cnhs2e",
+    "pF": true,
+    "a": [
+      "Produit laitier"
+    ]
+  },
+  {
+    "n": "Fromage frais",
+    "t": "frais",
+    "u": "0d5y4q",
+    "pF": true,
+    "a": [
+      "Produit laitier"
+    ]
+  },
+  {
+    "n": "Fromage râpé",
+    "t": "frais",
+    "u": "u1fypr",
+    "pF": true,
+    "a": [
+      "Produit laitier"
+    ]
+  },
+  {
+    "n": "Fruit de la passion",
+    "t": "legumes",
+    "u": "84w3ha",
+    "pF": true
+  },
+  {
+    "n": "fruit du dragon",
+    "t": "legumes",
+    "u": "0u1nxk",
+    "pF": true
+  },
+  {
+    "n": "Fruits divers",
+    "t": "legumes",
+    "u": "4stcxn",
+    "pF": true
+  },
+  {
+    "n": "Fruits rouges",
+    "t": "legumes",
+    "u": "rqmasf",
+    "pF": true
+  },
+  {
+    "n": "Galanga séché",
+    "t": "epices",
+    "u": "j02oky"
+  },
+  {
+    "n": "Galanga",
+    "t": "legumes",
+    "u": "equ6wc",
+    "pF": true
+  },
+  {
+    "n": "Garam Masala",
+    "t": "epices",
+    "u": "1akmaa"
+  },
+  {
+    "n": "Genévrier",
+    "t": "epices",
+    "u": "oyfglz"
+  },
+  {
+    "n": "Gigot (agneau)",
+    "t": "animaux",
+    "u": "mt0iyq",
+    "pF": true,
+    "a": [
+      "Viande"
+    ]
+  },
+  {
+    "n": "Gingembre bio",
+    "t": "legumes",
+    "u": "nz839c",
+    "pF": true
+  },
+  {
+    "n": "Gingembre confit",
+    "t": "sucres",
+    "u": "oskdzx"
+  },
+  {
+    "n": "Gingembre en poudre",
+    "t": "epices",
+    "u": "alwx6o"
+  },
+  {
+    "n": "Gingembre",
+    "t": "legumes",
+    "u": "0d1fzw",
+    "pF": true
+  },
+  {
+    "n": "Glucose",
+    "t": "sucres",
+    "u": "lm7zqh"
+  },
+  {
+    "n": "Gluten pur",
+    "t": "lof",
+    "u": "946ddw",
+    "a": [
+      "Gluten"
+    ]
+  },
+  {
+    "n": "Gochujang sans gluten",
+    "t": "epices",
+    "u": "28jpdi"
+  },
+  {
+    "n": "Gochujang",
+    "t": "epices",
+    "u": "rv1rfv",
+    "a": [
+      "Gluten",
+      "Soja"
+    ]
+  },
+  {
+    "n": "Gomme de guar",
+    "t": "autres",
+    "u": "9tn9mn"
+  },
+  {
+    "n": "Gomme de xanthane",
+    "t": "autres",
+    "u": "5le7rm"
+  },
+  {
+    "n": "Gouda en tranche",
+    "t": "frais",
+    "u": "aspkm2",
+    "pF": true,
+    "a": [
+      "Produit laitier"
+    ]
+  },
+  {
+    "n": "Gouda",
+    "t": "frais",
+    "u": "qikzlk",
+    "pF": true,
+    "a": [
+      "Produit laitier"
+    ]
+  },
+  {
+    "n": "Gousse d'ail",
+    "t": "epices",
+    "u": "v1kli8"
+  },
+  {
+    "n": "gousse de vanille",
+    "t": "sucres",
+    "u": "2a0lnj"
+  },
+  {
+    "n": "graine de coriandre",
+    "t": "epices",
+    "u": "crkg3d"
+  },
+  {
+    "n": "graine de nigelle",
+    "t": "sec",
+    "u": "obd7fb"
+  },
+  {
+    "n": "Graine de tournesol",
+    "t": "sec",
+    "u": "4vxqlr"
+  },
+  {
+    "n": "Graines de courge",
+    "t": "sec",
+    "u": "qzrsoa"
+  },
+  {
+    "n": "Graines de lin",
+    "t": "lof",
+    "u": "km927d"
+  },
+  {
+    "n": "Graines de nigelle",
+    "t": "sec",
+    "u": "5muly5"
+  },
+  {
+    "n": "Graines de sésame blanc",
+    "t": "sec",
+    "u": "z9plfy",
+    "a": [
+      "Sésame"
+    ]
+  },
+  {
+    "n": "Graines de sésame noir",
+    "t": "sec",
+    "u": "atlkei",
+    "a": [
+      "Sésame"
+    ]
+  },
+  {
+    "n": "Grenade",
+    "t": "legumes",
+    "u": "j3mr9h",
+    "pF": true
+  },
+  {
+    "n": "Gros sel",
+    "t": "epices",
+    "u": "5dwrvm"
+  },
+  {
+    "n": "Groseille",
+    "t": "legumes",
+    "u": "3h1ucp",
+    "pF": true
+  },
+  {
+    "n": "Gruyère",
+    "t": "frais",
+    "u": "pvia1r",
+    "pF": true,
+    "a": [
+      "Produit laitier"
+    ]
+  },
+  {
+    "n": "Guacamole",
+    "t": "epices",
+    "u": "sg5bm9"
+  },
+  {
+    "n": "Halva",
+    "t": "sucres",
+    "u": "2cnk7l",
+    "a": [
+      "Sésame"
+    ]
+  },
+  {
+    "n": "Hampe grillée (boeuf)",
+    "t": "animaux",
+    "u": "titfjt",
+    "pF": true,
+    "a": [
+      "Viande"
+    ]
+  },
+  {
+    "n": "Hareng (poisson)",
+    "t": "animaux",
+    "u": "o483rs",
+    "pF": true,
+    "a": [
+      "Poisson"
+    ]
+  },
+  {
+    "n": "Haricots beurre",
+    "t": "legumes",
+    "u": "ufj8fy",
+    "pF": true
+  },
+  {
+    "n": "Haricots blancs en conserve",
+    "t": "sec",
+    "u": "g6ngse"
+  },
+  {
+    "n": "Haricots blancs",
+    "t": "sec",
+    "u": "znpoor"
+  },
+  {
+    "n": "Haricots plats",
+    "t": "legumes",
+    "u": "2y941t",
+    "pF": true
+  },
+  {
+    "n": "Haricots rouges cuits",
+    "t": "sec",
+    "u": "iwdje3"
+  },
+  {
+    "n": "Haricots rouges",
+    "t": "sec",
+    "u": "dr1py6"
+  },
+  {
+    "n": "Haricots verts",
+    "t": "legumes",
+    "u": "mckmta",
+    "pF": true
+  },
+  {
+    "n": "Harissa",
+    "t": "epices",
+    "u": "4n95t5"
+  },
+  {
+    "n": "Herbes de Provence",
+    "t": "epices",
+    "u": "a8dxd8"
+  },
+  {
+    "n": "Homard (fruits de mer)",
+    "t": "animaux",
+    "u": "tnlr3b",
+    "pF": true,
+    "a": [
+      "Crustacé"
+    ]
+  },
+  {
+    "n": "Huile d'arachide",
+    "t": "lof",
+    "u": "8d1cfa5bf2ae",
+    "a": [
+      "Arachides"
+    ]
+  },
+  {
+    "n": "Huile d'argan",
+    "t": "lof",
+    "u": "1jfxgt"
+  },
+  {
+    "n": "huile de chanvre",
+    "t": "lof",
+    "u": "kpwakb"
+  },
+  {
+    "n": "Huile de coco désodorisée",
+    "t": "lof",
+    "u": "ja17ja"
+  },
+  {
+    "n": "huile de coco",
+    "t": "lof",
+    "u": "6bm4lq"
+  },
+  {
+    "n": "huile de colza",
+    "t": "lof",
+    "u": "eu7lc6"
+  },
+  {
+    "n": "huile de friture",
+    "t": "lof",
+    "u": "1ej217"
+  },
+  {
+    "n": "huile de lin",
+    "t": "lof",
+    "u": "ypd41e"
+  },
+  {
+    "n": "huile de noisette",
+    "t": "lof",
+    "u": "yff0vs",
+    "a": [
+      "Fruit à coque"
+    ]
+  },
+  {
+    "n": "huile de noix",
+    "t": "lof",
+    "u": "rfa985",
+    "a": [
+      "Fruit à coque"
+    ]
+  },
+  {
+    "n": "huile de pépins de courge",
+    "t": "lof",
+    "u": "1f2yje"
+  },
+  {
+    "n": "huile de pépins de raisin",
+    "t": "lof",
+    "u": "bwjxy3"
+  },
+  {
+    "n": "huile de sésame",
+    "t": "lof",
+    "u": "fazth1",
+    "a": [
+      "Sésame"
+    ]
+  },
+  {
+    "n": "huile de tournesol",
+    "t": "lof",
+    "u": "c70jxb"
+  },
+  {
+    "n": "huile d'olive",
+    "t": "lof",
+    "u": "h3c8al"
+  },
+  {
+    "n": "Huile végétale",
+    "t": "lof",
+    "u": "atccqu"
+  },
+  {
+    "n": "Huïtre (fruits de mer)",
+    "t": "animaux",
+    "u": "lgcsqd",
+    "pF": true,
+    "a": [
+      "Mollusque"
+    ]
+  },
+  {
+    "n": "Jambon blanc (charcuterie)",
+    "t": "animaux",
+    "u": "j6ngb8",
+    "pF": true,
+    "a": [
+      "Viande",
+      "Porc"
+    ]
+  },
+  {
+    "n": "Jambon cru (charcuterie)",
+    "t": "animaux",
+    "u": "np0cbk",
+    "pF": true,
+    "a": [
+      "Viande",
+      "Porc"
+    ]
+  },
+  {
+    "n": "Jambon de Bayonne (charcuterie)",
+    "t": "animaux",
+    "u": "h32yhh",
+    "pF": true,
+    "a": [
+      "Viande",
+      "Porc"
+    ]
+  },
+  {
+    "n": "Jambon de dinde (charcuterie)",
+    "t": "animaux",
+    "u": "ich6gs",
+    "pF": true,
+    "a": [
+      "Viande"
+    ]
+  },
+  {
+    "n": "Jambonneau (charcuterie)",
+    "t": "animaux",
+    "u": "hok8fa",
+    "pF": true,
+    "a": [
+      "Viande",
+      "Porc"
+    ]
+  },
+  {
+    "n": "Jarret (osso bucco) (veau)",
+    "t": "animaux",
+    "u": "2ofoh1",
+    "pF": true,
+    "a": [
+      "Viande"
+    ]
+  },
+  {
+    "n": "Jarret pot au feu (boeuf)",
+    "t": "animaux",
+    "u": "b3wxxe",
+    "pF": true,
+    "a": [
+      "Viande"
+    ]
+  },
+  {
+    "n": "Jus de canneberge",
+    "t": "sucres",
+    "u": "xfx455"
+  },
+  {
+    "n": "Jus de cerise",
+    "t": "sucres",
+    "u": "0iywi5"
+  },
+  {
+    "n": "Jus de citron vert",
+    "t": "sucres",
+    "u": "rdw6xn"
+  },
+  {
+    "n": "Jus de citron",
+    "t": "sucres",
+    "u": "e4mjd1"
+  },
+  {
+    "n": "Jus de fraise",
+    "t": "sucres",
+    "u": "pxtrie"
+  },
+  {
+    "n": "Jus de fruits",
+    "t": "sucres",
+    "u": "ldfjmr"
+  },
+  {
+    "n": "jus de goyage",
+    "t": "autres",
+    "u": "rjm0v6"
+  },
+  {
+    "n": "Jus de poire",
+    "t": "sucres",
+    "u": "k3bg0l"
+  },
+  {
+    "n": "Jus de pomme",
+    "t": "sucres",
+    "u": "r6q0pt"
+  },
+  {
+    "n": "Jus de raisin",
+    "t": "sucres",
+    "u": "tkuufn"
+  },
+  {
+    "n": "Jus de tomate",
+    "t": "sucres",
+    "u": "yi3hj9"
+  },
+  {
+    "n": "Jus d'orange",
+    "t": "sucres",
+    "u": "gzi2ry"
+  },
+  {
+    "n": "Kaki",
+    "t": "legumes",
+    "u": "1c03zm",
+    "pF": true
+  },
+  {
+    "n": "Ketchup",
+    "t": "epices",
+    "u": "ytlacu"
+  },
+  {
+    "n": "kiri ou autre du genre",
+    "t": "frais",
+    "u": "bppied",
+    "pF": true
+  },
+  {
+    "n": "Kiwi",
+    "t": "legumes",
+    "u": "j6ze18",
+    "pF": true
+  },
+  {
+    "n": "Kumquat",
+    "t": "legumes",
+    "u": "cc8tfg",
+    "pF": true
+  },
+  {
+    "n": "lait (chèvres)",
+    "t": "lof",
+    "u": "pvc3gi",
+    "a": [
+      "Produit laitier"
+    ]
+  },
+  {
+    "n": "Lait concentré (non sucré)",
+    "t": "lof",
+    "u": "zat1zc",
+    "a": [
+      "Produit laitier"
+    ]
+  },
+  {
+    "n": "Lait concentré sucré",
+    "t": "lof",
+    "u": "5dcfzk",
+    "a": [
+      "Produit laitier"
+    ]
+  },
+  {
+    "n": "lait d’amande",
+    "t": "lof",
+    "u": "csxbg6"
+  },
+  {
+    "n": "Lait d'avoine",
+    "t": "lof",
+    "u": "3eex0o",
+    "a": [
+      "Gluten"
+    ]
+  },
+  {
+    "n": "lait d’avoine",
+    "t": "lof",
+    "u": "eyngab"
+  },
+  {
+    "n": "lait de cajou",
+    "t": "lof",
+    "u": "enbx1o"
+  },
+  {
+    "n": "lait de coco",
+    "t": "lof",
+    "u": "xdy736"
+  },
+  {
+    "n": "lait de noisette",
+    "t": "lof",
+    "u": "y0en3x"
+  },
+  {
+    "n": "Lait de riz",
+    "t": "lof",
+    "u": "hzwesd"
+  },
+  {
+    "n": "Lait de soja à la vanille",
+    "t": "lof",
+    "u": "83ji4x",
+    "a": [
+      "Soja"
+    ]
+  },
+  {
+    "n": "lait de soja",
+    "t": "lof",
+    "u": "9uc01w",
+    "a": [
+      "Soja"
+    ]
+  },
+  {
+    "n": "Lait de soja",
+    "t": "lof",
+    "u": "gpeob7",
+    "a": [
+      "Soja"
+    ]
+  },
+  {
+    "n": "Lait demi-écrémé",
+    "t": "lof",
+    "u": "x286pc",
+    "a": [
+      "Produit laitier"
+    ]
+  },
+  {
+    "n": "lait d'épeautre",
+    "t": "lof",
+    "u": "v08e8s"
+  },
+  {
+    "n": "Lait écrémé",
+    "t": "lof",
+    "u": "ue125d",
+    "a": [
+      "Produit laitier"
+    ]
+  },
+  {
+    "n": "Lait entier",
+    "t": "lof",
+    "u": "dbbjuu",
+    "a": [
+      "Produit laitier"
+    ]
+  },
+  {
+    "n": "Lait végétal (au choix)",
+    "t": "lof",
+    "u": "vw9d1a"
+  },
+  {
+    "n": "Laitue romaine",
+    "t": "legumes",
+    "u": "l0yikk",
+    "pF": true
+  },
+  {
+    "n": "Langouste (fruits de mer)",
+    "t": "animaux",
+    "u": "t34cw9",
+    "pF": true,
+    "a": [
+      "Crustacé"
+    ]
+  },
+  {
+    "n": "Langoustine (fruits de mer)",
+    "t": "animaux",
+    "u": "2l6t56",
+    "pF": true,
+    "a": [
+      "Crustacé"
+    ]
+  },
+  {
+    "n": "Langue de boeuf (abats)",
+    "t": "animaux",
+    "u": "i0x1yw",
+    "pF": true,
+    "a": [
+      "Viande"
+    ]
+  },
+  {
+    "n": "Langue de veau (abats)",
+    "t": "animaux",
+    "u": "lu4rod",
+    "pF": true,
+    "a": [
+      "Viande"
+    ]
+  },
+  {
+    "n": "Lapin (volaille et gibier)",
+    "t": "animaux",
+    "u": "zuu48m",
+    "pF": true,
+    "a": [
+      "Viande"
+    ]
+  },
+  {
+    "n": "Lard (charcuterie)",
+    "t": "animaux",
+    "u": "5mdklh",
+    "pF": true,
+    "a": [
+      "Viande",
+      "Porc"
+    ]
+  },
+  {
+    "n": "Lardons (charcuterie)",
+    "t": "animaux",
+    "u": "53lsas",
+    "pF": true,
+    "a": [
+      "Viande",
+      "Porc"
+    ]
+  },
+  {
+    "n": "Lasagnes",
+    "t": "sec",
+    "u": "wby30p",
+    "a": [
+      "Gluten"
+    ]
+  },
+  {
+    "n": "Leerdammer",
+    "t": "frais",
+    "u": "95lffa",
+    "pF": true,
+    "a": [
+      "Produit laitier"
+    ]
+  },
+  {
+    "n": "lentilles blondes",
+    "t": "sec",
+    "u": "yuhu9b"
+  },
+  {
+    "n": "Lentilles corail",
+    "t": "sec",
+    "u": "toc8a7"
+  },
+  {
+    "n": "Lentilles vertes",
+    "t": "sec",
+    "u": "ogtomg"
+  },
+  {
+    "n": "Lentilles",
+    "t": "sec",
+    "u": "khdlkd"
+  },
+  {
+    "n": "Levure boulangère sans gluten",
+    "t": "lof",
+    "u": "ec0v6n"
+  },
+  {
+    "n": "Levure boulangère",
+    "t": "lof",
+    "u": "q936bv"
+  },
+  {
+    "n": "Levure chimique sans gluten",
+    "t": "lof",
+    "u": "zb9tj8"
+  },
+  {
+    "n": "Levure chimique",
+    "t": "lof",
+    "u": "vgec6e",
+    "a": [
+      "Gluten"
+    ]
+  },
+  {
+    "n": "Levure de bière",
+    "t": "lof",
+    "u": "4be4ic"
+  },
+  {
+    "n": "Levure de boulanger",
+    "t": "lof",
+    "u": "abzedk"
+  },
+  {
+    "n": "Levure fraîche de boulanger",
+    "t": "frais",
+    "u": "7qqcwc",
+    "pF": true
+  },
+  {
+    "n": "Levure fraîche",
+    "t": "frais",
+    "u": "1z66lc",
+    "pF": true,
+    "a": [
+      "Gluten"
+    ]
+  },
+  {
+    "n": "Lieu (poisson)",
+    "t": "animaux",
+    "u": "rcbo9g",
+    "pF": true,
+    "a": [
+      "Poisson"
+    ]
+  },
+  {
+    "n": "Lièvre (volaille et gibier)",
+    "t": "animaux",
+    "u": "vn8xan",
+    "pF": true,
+    "a": [
+      "Viande"
+    ]
+  },
+  {
+    "n": "Limande (poisson)",
+    "t": "animaux",
+    "u": "pgb7lh",
+    "pF": true,
+    "a": [
+      "Poisson"
+    ]
+  },
+  {
+    "n": "Liquid smoke",
+    "t": "epices",
+    "u": "effe0c"
+  },
+  {
+    "n": "Litchi",
+    "t": "legumes",
+    "u": "xtu4hf",
+    "pF": true
+  },
+  {
+    "n": "Livarot",
+    "t": "frais",
+    "u": "swnonq",
+    "pF": true,
+    "a": [
+      "Produit laitier"
+    ]
+  },
+  {
+    "n": "Lotte (poisson)",
+    "t": "animaux",
+    "u": "fimllx",
+    "pF": true,
+    "a": [
+      "Poisson"
+    ]
+  },
+  {
+    "n": "Mâche (salade)",
+    "t": "legumes",
+    "u": "8og464",
+    "pF": true
+  },
+  {
+    "n": "Madère",
+    "t": "autres",
+    "u": "h4obe8"
+  },
+  {
+    "n": "Magret de canard fumé (charcuterie)",
+    "t": "animaux",
+    "u": "qr5k9j",
+    "pF": true,
+    "a": [
+      "Viande"
+    ]
+  },
+  {
+    "n": "Maïs en conserve égoutté",
+    "t": "legumes",
+    "u": "dx4nss"
+  },
+  {
+    "n": "Maïs",
+    "t": "sec",
+    "u": "hhdjkd"
+  },
+  {
+    "n": "Mandarine",
+    "t": "legumes",
+    "u": "mwrts8",
+    "pF": true
+  },
+  {
+    "n": "Mangue",
+    "t": "legumes",
+    "u": "mdoij4",
+    "pF": true
+  },
+  {
+    "n": "Maquereau (poisson)",
+    "t": "animaux",
+    "u": "hieeea",
+    "pF": true,
+    "a": [
+      "Poisson"
+    ]
+  },
+  {
+    "n": "Margarine végétale spécial cuisson",
+    "t": "frais",
+    "u": "8j3hna",
+    "pF": true
+  },
+  {
+    "n": "Margarine",
+    "t": "frais",
+    "u": "eipcl2",
+    "pF": true
+  },
+  {
+    "n": "Maroilles",
+    "t": "frais",
+    "u": "0vyz4s",
+    "pF": true,
+    "a": [
+      "Produit laitier"
+    ]
+  },
+  {
+    "n": "Marron",
+    "t": "legumes",
+    "u": "ryxwf0",
+    "pF": true
+  },
+  {
+    "n": "Mascarpone",
+    "t": "frais",
+    "u": "0tpvue",
+    "pF": true,
+    "a": [
+      "Produit laitier"
+    ]
+  },
+  {
+    "n": "Mayonnaise maison",
+    "t": "epices",
+    "u": "fe69a72c47c3"
+  },
+  {
+    "n": "Mayonnaise",
+    "t": "epices",
+    "u": "1ijv6u",
+    "a": [
+      "Oeuf",
+      "Moutarde"
+    ]
+  },
+  {
+    "n": "mélange 4 épices",
+    "t": "epices",
+    "u": "dex52s"
+  },
+  {
+    "n": "Mélasse de grenade",
+    "t": "epices",
+    "u": "cl88ye"
+  },
+  {
+    "n": "Melasse de grenade",
+    "t": "epices",
+    "u": "ia5a5o"
+  },
+  {
+    "n": "Mélasse",
+    "t": "sucres",
+    "u": "9x2uyr"
+  },
+  {
+    "n": "Melon",
+    "t": "legumes",
+    "u": "on84nb",
+    "pF": true
+  },
+  {
+    "n": "Menthe fraîche",
+    "t": "epices",
+    "u": "y16lzq",
+    "pF": true
+  },
+  {
+    "n": "Menthe glaciale",
+    "t": "epices",
+    "u": "zo92gu",
+    "pF": true
+  },
+  {
+    "n": "Menthe séchée",
+    "t": "epices",
+    "u": "uid60d"
+  },
+  {
+    "n": "Menthe",
+    "t": "epices",
+    "u": "2j9y2v",
+    "pF": true
+  },
+  {
+    "n": "Merlan (poisson)",
+    "t": "animaux",
+    "u": "x7wu93",
+    "pF": true,
+    "a": [
+      "Poisson"
+    ]
+  },
+  {
+    "n": "Merlu (poisson)",
+    "t": "animaux",
+    "u": "lkwgh4",
+    "pF": true,
+    "a": [
+      "Poisson"
+    ]
+  },
+  {
+    "n": "Miel",
+    "t": "sucres",
+    "u": "g0lph5"
+  },
+  {
+    "n": "Mirabelle",
+    "t": "legumes",
+    "u": "pbo6jk",
+    "pF": true
+  },
+  {
+    "n": "Miso blanc",
+    "t": "epices",
+    "u": "k2uthk"
+  },
+  {
+    "n": "Miso d'orge",
+    "t": "epices",
+    "u": "z8jaad",
+    "a": [
+      "Gluten"
+    ]
+  },
+  {
+    "n": "Miso",
+    "t": "autres",
+    "u": "3zdyyy",
+    "a": [
+      "Soja"
+    ]
+  },
+  {
+    "n": "Mortadelle (charcuterie)",
+    "t": "animaux",
+    "u": "bucais",
+    "pF": true,
+    "a": [
+      "Viande",
+      "Porc"
+    ]
+  },
+  {
+    "n": "Morue (poisson)",
+    "t": "animaux",
+    "u": "d73rvh",
+    "pF": true,
+    "a": [
+      "Poisson"
+    ]
+  },
+  {
+    "n": "Moule (fruits de mer)",
+    "t": "animaux",
+    "u": "fgawbx",
+    "pF": true,
+    "a": [
+      "Crustacé"
+    ]
+  },
+  {
+    "n": "Moutarde à l'ancienne",
+    "t": "epices",
+    "u": "15qnl9"
+  },
+  {
+    "n": "Moutarde douce en flacon ",
+    "t": "epices",
+    "u": "vu6frz"
+  },
+  {
+    "n": "moutarde graine",
+    "t": "epices",
+    "u": "m5zboz"
+  },
+  {
+    "n": "Moutarde",
+    "t": "epices",
+    "u": "5c1b20",
+    "a": [
+      "Moutarde"
+    ]
+  },
+  {
+    "n": "Mozzarella",
+    "t": "frais",
+    "u": "5yety4",
+    "pF": true,
+    "a": [
+      "Produit laitier"
+    ]
+  },
+  {
+    "n": "Mulet (poisson)",
+    "t": "animaux",
+    "u": "yonror",
+    "pF": true,
+    "a": [
+      "Poisson"
+    ]
+  },
+  {
+    "n": "Munster",
+    "t": "frais",
+    "u": "ezhrgx",
+    "pF": true,
+    "a": [
+      "Produit laitier"
+    ]
+  },
+  {
+    "n": "Muscade",
+    "t": "epices",
+    "u": "msyocm"
+  },
+  {
+    "n": "Muscovado (sucre de canne complet)",
+    "t": "sucres",
+    "u": "l5w2jl"
+  },
+  {
+    "n": "Myrtille",
+    "t": "legumes",
+    "u": "ahby2f",
+    "pF": true
+  },
+  {
+    "n": "Navet",
+    "t": "legumes",
+    "u": "f5fy8w",
+    "pF": true
+  },
+  {
+    "n": "Nectar d'abricot",
+    "t": "sucres",
+    "u": "l33ljf"
+  },
+  {
+    "n": "Nectarine",
+    "t": "legumes",
+    "u": "ulxpdt",
+    "pF": true
+  },
+  {
+    "n": "Noisette",
+    "t": "sec",
+    "u": "ut0l0k",
+    "a": [
+      "Fruit à coque"
+    ]
+  },
+  {
+    "n": "Noix de cajou",
+    "t": "sec",
+    "u": "5rkq49",
+    "a": [
+      "Fruit à coque"
+    ]
+  },
+  {
+    "n": "Noix de coco râpée",
+    "t": "sucres",
+    "u": "coa5dh"
+  },
+  {
+    "n": "Noix de coco rapée",
+    "t": "sucres",
+    "u": "rxvf6y"
+  },
+  {
+    "n": "Noix de coco",
+    "t": "legumes",
+    "u": "ntv7i3",
+    "pF": true
+  },
+  {
+    "n": "Noix de macadamia",
+    "t": "sec",
+    "u": "ujh8v5",
+    "a": [
+      "Fruit à coque"
+    ]
+  },
+  {
+    "n": "Noix de pécan",
+    "t": "sec",
+    "u": "1ngabw",
+    "a": [
+      "Fruit à coque"
+    ]
+  },
+  {
+    "n": "Noix de Saint-Jacques (fruits de mer)",
+    "t": "animaux",
+    "u": "joq11n",
+    "pF": true,
+    "a": [
+      "Mollusque"
+    ]
+  },
+  {
+    "n": "Noix (veau)",
+    "t": "animaux",
+    "u": "j18saz",
+    "pF": true,
+    "a": [
+      "Viande"
+    ]
+  },
+  {
+    "n": "Noix",
+    "t": "sec",
+    "u": "usibcf",
+    "a": [
+      "Fruit à coque"
+    ]
+  },
+  {
+    "n": "Nouilles chinoises",
+    "t": "sec",
+    "u": "vu8y8c"
+  },
+  {
+    "n": "Nouilles de blé ondulées Ramen",
+    "t": "sec",
+    "u": "ul46ke",
+    "a": [
+      "Gluten"
+    ]
+  },
+  {
+    "n": "Nouilles de riz Phö",
+    "t": "sec",
+    "u": "oyjc63"
+  },
+  {
+    "n": "Nouilles de riz",
+    "t": "sec",
+    "u": "mesg7t"
+  },
+  {
+    "n": "Oeuf d'autruche",
+    "t": "lof",
+    "u": "o78frv",
+    "a": [
+      "Oeuf"
+    ]
+  },
+  {
+    "n": "Oeuf de caille",
+    "t": "lof",
+    "u": "7y1kd8",
+    "a": [
+      "Oeuf"
+    ]
+  },
+  {
+    "n": "Oeuf de cane",
+    "t": "lof",
+    "u": "4gcm9q",
+    "a": [
+      "Oeuf"
+    ]
+  },
+  {
+    "n": "Oeuf d'oie",
+    "t": "lof",
+    "u": "xhd36o",
+    "a": [
+      "Oeuf"
+    ]
+  },
+  {
+    "n": "Oeuf",
+    "t": "lof",
+    "u": "zf3zf8",
+    "a": [
+      "Oeuf"
+    ]
+  },
+  {
+    "n": "Oie (volaille et gibier)",
+    "t": "animaux",
+    "u": "uitxe2",
+    "pF": true,
+    "a": [
+      "Viande"
+    ]
+  },
+  {
+    "n": "Oignon en poudre",
+    "t": "epices",
+    "u": "q28bck"
+  },
+  {
+    "n": "Oignon rouge",
+    "t": "legumes",
+    "u": "doxujz",
+    "pF": true
+  },
+  {
+    "n": "Oignon",
+    "t": "legumes",
+    "u": "rtavky",
+    "pF": true
+  },
+  {
+    "n": "Olives noires à la grecque",
+    "t": "legumes",
+    "u": "9p3n36"
+  },
+  {
+    "n": "Olives Noires Dénoyautées",
+    "t": "legumes",
+    "u": "7ahzm0",
+    "pF": true
+  },
+  {
+    "n": "Olives noires entières",
+    "t": "legumes",
+    "u": "yeske5",
+    "pF": true
+  },
+  {
+    "n": "Olives Vertes Dénoyautées",
+    "t": "legumes",
+    "u": "163u4z"
+  },
+  {
+    "n": "Olives",
+    "t": "legumes",
+    "u": "75wo2d",
+    "pF": true
+  },
+  {
+    "n": "Orange confite",
+    "t": "legumes",
+    "u": "nev77b",
+    "pF": true
+  },
+  {
+    "n": "Orange non traitée",
+    "t": "legumes",
+    "u": "bf44pm",
+    "pF": true
+  },
+  {
+    "n": "Orange sanguine",
+    "t": "legumes",
+    "u": "4yrb7z",
+    "pF": true
+  },
+  {
+    "n": "Orange",
+    "t": "legumes",
+    "u": "yh2uod",
+    "pF": true
+  },
+  {
+    "n": "Origan frais",
+    "t": "legumes",
+    "u": "iu5sb3",
+    "pF": true
+  },
+  {
+    "n": "Origan",
+    "t": "epices",
+    "u": "fkftyb"
+  },
+  {
+    "n": "Pain au levain",
+    "t": "autres",
+    "u": "d66ur8"
+  },
+  {
+    "n": "Pain baguette",
+    "t": "sec",
+    "u": "e7953e50480d"
+  },
+  {
+    "n": "Pain Burger Végan",
+    "t": "autres",
+    "u": "0zasob"
+  },
+  {
+    "n": "Pain Burger",
+    "t": "autres",
+    "u": "1xyo35"
+  },
+  {
+    "n": "Pain de mie",
+    "t": "autres",
+    "u": "kg0mr1",
+    "a": [
+      "Gluten"
+    ]
+  },
+  {
+    "n": "Pain pita",
+    "t": "autres",
+    "u": "wqwn2f",
+    "a": [
+      "Gluten"
+    ]
+  },
+  {
+    "n": "Pain rassis sans gluten",
+    "t": "autres",
+    "u": "drjaa4"
+  },
+  {
+    "n": "Pain rassis",
+    "t": "autres",
+    "u": "k8dala",
+    "a": [
+      "Gluten"
+    ]
+  },
+  {
+    "n": "Pain",
+    "t": "autres",
+    "u": "yr392x",
+    "a": [
+      "Gluten"
+    ]
+  },
+  {
+    "n": "Paleron, macreuse (boeuf)",
+    "t": "animaux",
+    "u": "3umx7k",
+    "pF": true,
+    "a": [
+      "Viande"
+    ]
+  },
+  {
+    "n": "Palourde (fruits de mer)",
+    "t": "animaux",
+    "u": "q44d8f",
+    "pF": true,
+    "a": [
+      "Mollusque"
+    ]
+  },
+  {
+    "n": "Pamplemousse",
+    "t": "legumes",
+    "u": "7skune",
+    "pF": true
+  },
+  {
+    "n": "Panais",
+    "t": "legumes",
+    "u": "58bi18",
+    "pF": true
+  },
+  {
+    "n": "Pancetta (charcuterie)",
+    "t": "animaux",
+    "u": "g7zmx1",
+    "pF": true,
+    "a": [
+      "Viande",
+      "Porc"
+    ]
+  },
+  {
+    "n": "Pandan (extrait de)",
+    "t": "epices",
+    "u": "krizq0"
+  },
+  {
+    "n": "Pandan",
+    "t": "epices",
+    "u": "2ik9h7"
+  },
+  {
+    "n": "Papaye",
+    "t": "legumes",
+    "u": "un3m8y",
+    "pF": true
+  },
+  {
+    "n": "Paprika fumé",
+    "t": "epices",
+    "u": "ique18"
+  },
+  {
+    "n": "Paprika",
+    "t": "epices",
+    "u": "bidsmu"
+  },
+  {
+    "n": "Parmesan",
+    "t": "frais",
+    "u": "pr1fiu",
+    "pF": true,
+    "a": [
+      "Produit laitier"
+    ]
+  },
+  {
+    "n": "Parmigiano",
+    "t": "frais",
+    "u": "cr4ai3",
+    "pF": true,
+    "a": [
+      "Produit laitier"
+    ]
+  },
+  {
+    "n": "Pastèque",
+    "t": "legumes",
+    "u": "n8iflg",
+    "pF": true
+  },
+  {
+    "n": "patate",
+    "t": "legumes",
+    "u": "bq423s",
+    "pF": true
+  },
+  {
+    "n": "Patates douces",
+    "t": "legumes",
+    "u": "ndu75n",
+    "pF": true
+  },
+  {
+    "n": "Pâte à pain",
+    "t": "autres",
+    "u": "m42cma",
+    "a": [
+      "Gluten"
+    ]
+  },
+  {
+    "n": "Pâte brisée sans gluten",
+    "t": "frais",
+    "u": "86cony",
+    "pF": true
+  },
+  {
+    "n": "Pâte d'arachide",
+    "t": "autres",
+    "u": "6778796eb8d8",
+    "a": [
+      "Arachides"
+    ]
+  },
+  {
+    "n": "Pâté de campagne (charcuterie)",
+    "t": "animaux",
+    "u": "k1dfh3",
+    "pF": true,
+    "a": [
+      "Viande",
+      "Porc"
+    ]
+  },
+  {
+    "n": "Pâte de Curry Rouge",
+    "t": "epices",
+    "u": "5qtg4a"
+  },
+  {
+    "n": "Pâté de foie (charcuterie)",
+    "t": "animaux",
+    "u": "6izg8x",
+    "pF": true,
+    "a": [
+      "Viande",
+      "Porc"
+    ]
+  },
+  {
+    "n": "Pâte de poivron",
+    "t": "epices",
+    "u": "sfcy1d"
+  },
+  {
+    "n": "Pate feuilleté sans gluten et vegan",
+    "t": "frais",
+    "u": "40wkon",
+    "pF": true
+  },
+  {
+    "n": "Pate feuilletée sans gluten",
+    "t": "frais",
+    "u": "abcrsf",
+    "pF": true
+  },
+  {
+    "n": "Pâte feuilletée végane sans gluten",
+    "t": "frais",
+    "u": "n2l0fi",
+    "pF": true
+  },
+  {
+    "n": "Pate feuilletée",
+    "t": "frais",
+    "u": "h1levi",
+    "pF": true,
+    "a": [
+      "Gluten"
+    ]
+  },
+  {
+    "n": "Pâte feuilletée",
+    "t": "frais",
+    "u": "h6bpv4",
+    "pF": true
+  },
+  {
+    "n": "Pate filo (1 feuille)",
+    "t": "autres",
+    "u": "x6je0g",
+    "pF": true,
+    "a": [
+      "Gluten"
+    ]
+  },
+  {
+    "n": "Pâte filo",
+    "t": "frais",
+    "u": "7tvtlu",
+    "pF": true,
+    "a": [
+      "Gluten"
+    ]
+  },
+  {
+    "n": "Pâtes - langue d'oiseau",
+    "t": "sec",
+    "u": "hlx995",
+    "a": [
+      "Gluten"
+    ]
+  },
+  {
+    "n": "Pâtes langues d'oiseaux sans gluten",
+    "t": "sec",
+    "u": "89m8hr"
+  },
+  {
+    "n": "Pâtes Penne",
+    "t": "sec",
+    "u": "1fdvtx"
+  },
+  {
+    "n": "Pâtes",
+    "t": "sec",
+    "u": "0o00h5",
+    "a": [
+      "Gluten"
+    ]
+  },
+  {
+    "n": "Paupiette (veau)",
+    "t": "animaux",
+    "u": "2iyyi9",
+    "pF": true,
+    "a": [
+      "Viande"
+    ]
+  },
+  {
+    "n": "Pavot",
+    "t": "epices",
+    "u": "l1e82o"
+  },
+  {
+    "n": "Pêche",
+    "t": "legumes",
+    "u": "n1vs7d",
+    "pF": true
+  },
+  {
+    "n": "Pépites de chocolat",
+    "t": "sucres",
+    "u": "39ydlo"
+  },
+  {
+    "n": "Pepperoni (charcuterie)",
+    "t": "animaux",
+    "u": "wdq9sd",
+    "pF": true,
+    "a": [
+      "Viande",
+      "Porc"
+    ]
+  },
+  {
+    "n": "Perche (poisson)",
+    "t": "animaux",
+    "u": "y41a1c",
+    "pF": true,
+    "a": [
+      "Poisson"
+    ]
+  },
+  {
+    "n": "Persil frais",
+    "t": "epices",
+    "u": "hgfa4e",
+    "pF": true
+  },
+  {
+    "n": "Persil sec",
+    "t": "epices",
+    "u": "p1kujv"
+  },
+  {
+    "n": "Pesto Rosso végan",
+    "t": "autres",
+    "u": "lz3awd"
+  },
+  {
+    "n": "Pesto",
+    "t": "epices",
+    "u": "d3kydo"
+  },
+  {
+    "n": "Petit oignon blanc",
+    "t": "legumes",
+    "u": "9nbd98",
+    "pF": true
+  },
+  {
+    "n": "Petit salé (charcuterie)",
+    "t": "animaux",
+    "u": "hk4zd0",
+    "pF": true,
+    "a": [
+      "Viande",
+      "Porc"
+    ]
+  },
+  {
+    "n": "Petits flocons d'avoine",
+    "t": "sec",
+    "u": "51luzk"
+  },
+  {
+    "n": "Petits pois surgelés",
+    "t": "legumes",
+    "u": "8y3ngp"
+  },
+  {
+    "n": "Petits pois",
+    "t": "legumes",
+    "u": "8doafu",
+    "pF": true
+  },
+  {
+    "n": "Philadelphia ou autre marque moins cher",
+    "t": "frais",
+    "u": "2s1qoq",
+    "pF": true,
+    "a": [
+      "Produit laitier"
+    ]
+  },
+  {
+    "n": "Philadelphia",
+    "t": "frais",
+    "u": "vglv14",
+    "pF": true,
+    "a": [
+      "Produit laitier"
+    ]
+  },
+  {
+    "n": "Pigeon (volaille et gibier)",
+    "t": "animaux",
+    "u": "2g1ps2",
+    "pF": true,
+    "a": [
+      "Viande"
+    ]
+  },
+  {
+    "n": "Pignon de pin",
+    "t": "sec",
+    "u": "82a9ot",
+    "a": [
+      "Fruit à coque"
+    ]
+  },
+  {
+    "n": "Piment (autre)",
+    "t": "epices",
+    "u": "nxdt78"
+  },
+  {
+    "n": "Piment d'espelette",
+    "t": "epices",
+    "u": "bdx3gq"
+  },
+  {
+    "n": "Piment doux",
+    "t": "epices",
+    "u": "0p7ynz"
+  },
+  {
+    "n": "Piment en flocons",
+    "t": "epices",
+    "u": "5k7zz4"
+  },
+  {
+    "n": "Piment en poudre",
+    "t": "epices",
+    "u": "fmc1dm"
+  },
+  {
+    "n": "Piment oiseau frais ",
+    "t": "epices",
+    "u": "smh61n",
+    "pF": true
+  },
+  {
+    "n": "Piment oiseau",
+    "t": "epices",
+    "u": "9qrveq"
+  },
+  {
+    "n": "piment rouge frais",
+    "t": "legumes",
+    "u": "mwavdx",
+    "pF": true
+  },
+  {
+    "n": "Piment vert",
+    "t": "epices",
+    "u": "dr1bbg"
+  },
+  {
+    "n": "Pintade (volaille et gibier)",
+    "t": "animaux",
+    "u": "aw3xhp",
+    "pF": true,
+    "a": [
+      "Viande"
+    ]
+  },
+  {
+    "n": "Pistache émmondée",
+    "t": "sec",
+    "u": "q7adw3"
+  },
+  {
+    "n": "Pistaches",
+    "t": "legumes",
+    "u": "qqc6u0",
+    "pF": true
+  },
+  {
+    "n": "Poire",
+    "t": "legumes",
+    "u": "b83ol6",
+    "pF": true
+  },
+  {
+    "n": "Poireau",
+    "t": "legumes",
+    "u": "l3fs10",
+    "pF": true
+  },
+  {
+    "n": "Pois cassés",
+    "t": "sec",
+    "u": "7v72le"
+  },
+  {
+    "n": "Pois chiche cuit",
+    "t": "sec",
+    "u": "wwl5vn"
+  },
+  {
+    "n": "Pois chiches",
+    "t": "sec",
+    "u": "6a8w8k"
+  },
+  {
+    "n": "Pois mange-tout",
+    "t": "legumes",
+    "u": "6k62ci",
+    "pF": true
+  },
+  {
+    "n": "Poitrine (porc)",
+    "t": "animaux",
+    "u": "8uw1t6",
+    "pF": true,
+    "a": [
+      "Porc"
+    ]
+  },
+  {
+    "n": "Poitrine (veau)",
+    "t": "animaux",
+    "u": "8h4kzl",
+    "pF": true,
+    "a": [
+      "Viande"
+    ]
+  },
+  {
+    "n": "poivre blanc moulue",
+    "t": "epices",
+    "u": "7lakpz"
+  },
+  {
+    "n": "Poivre de Jamaïque",
+    "t": "epices",
+    "u": "9eepba"
+  },
+  {
+    "n": "Poivre de Sichuan",
+    "t": "epices",
+    "u": "93rauy"
+  },
+  {
+    "n": "poivre en graine",
+    "t": "epices",
+    "u": "2dirai"
+  },
+  {
+    "n": "poivre moulue",
+    "t": "epices",
+    "u": "3bg9f8"
+  },
+  {
+    "n": "Poivre noir moulu",
+    "t": "epices",
+    "u": "rgt7s4"
+  },
+  {
+    "n": "Poivre",
+    "t": "epices",
+    "u": "2pps90"
+  },
+  {
+    "n": "Poivron (jaune)",
+    "t": "legumes",
+    "u": "4wi7ja",
+    "pF": true
+  },
+  {
+    "n": "Poivron long vert (corne de boeuf)",
+    "t": "legumes",
+    "u": "rniow3",
+    "pF": true
+  },
+  {
+    "n": "Poivron (rouge)",
+    "t": "legumes",
+    "u": "0zglpj",
+    "pF": true
+  },
+  {
+    "n": "Poivron (vert)",
+    "t": "legumes",
+    "u": "rl1e9p",
+    "pF": true
+  },
+  {
+    "n": "Poivron",
+    "t": "legumes",
+    "u": "0lpad0",
+    "pF": true
+  },
+  {
+    "n": "Polenta fine",
+    "t": "sec",
+    "u": "9xvfud"
+  },
+  {
+    "n": "Polenta (semoule de maïs)",
+    "t": "sec",
+    "u": "s2mgp0"
+  },
+  {
+    "n": "Pomme de terre",
+    "t": "legumes",
+    "u": "18dy4e",
+    "pF": true
+  },
+  {
+    "n": "Pomme",
+    "t": "legumes",
+    "u": "i6jlwm",
+    "pF": true
+  },
+  {
+    "n": "Pot au feu (boeuf)",
+    "t": "animaux",
+    "u": "o6snoi",
+    "pF": true,
+    "a": [
+      "Viande"
+    ]
+  },
+  {
+    "n": "Potimarron",
+    "t": "legumes",
+    "u": "gfo28q",
+    "pF": true
+  },
+  {
+    "n": "Potiron",
+    "t": "legumes",
+    "u": "tnbcf6",
+    "pF": true
+  },
+  {
+    "n": "Poudre d'amande",
+    "t": "sec",
+    "u": "abl0tz",
+    "a": [
+      "Fruits à coque"
+    ]
+  },
+  {
+    "n": "Poudre d'amandes",
+    "t": "sucres",
+    "u": "rmgr7l",
+    "a": [
+      "Fruit à coque"
+    ]
+  },
+  {
+    "n": "Poudre de noisettes",
+    "t": "sucres",
+    "u": "0g08xt",
+    "a": [
+      "Fruit à coque"
+    ]
+  },
+  {
+    "n": "Poule (volaille et gibier)",
+    "t": "animaux",
+    "u": "200qgv",
+    "pF": true,
+    "a": [
+      "Viande"
+    ]
+  },
+  {
+    "n": "Poulet rôti (volaille et gibier)",
+    "t": "animaux",
+    "u": "ig2rla",
+    "pF": true,
+    "a": [
+      "Viande"
+    ]
+  },
+  {
+    "n": "Poulet (volaille et gibier)",
+    "t": "animaux",
+    "u": "11b1e0",
+    "pF": true,
+    "a": [
+      "Viande"
+    ]
+  },
+  {
+    "n": "Pousses de soja",
+    "t": "legumes",
+    "u": "4wa1jr",
+    "pF": true,
+    "a": [
+      "Soja"
+    ]
+  },
+  {
+    "n": "Pralines roses de Lyon",
+    "t": "sucres",
+    "u": "31bhpd"
+  },
+  {
+    "n": "Praslin en poudre",
+    "t": "sucres",
+    "u": "ybc4p4",
+    "a": [
+      "Fruit à coque"
+    ]
+  },
+  {
+    "n": "Prosciutto (charcuterie)",
+    "t": "animaux",
+    "u": "dmmv7e",
+    "pF": true,
+    "a": [
+      "Viande",
+      "Porc"
+    ]
+  },
+  {
+    "n": "Protéines de soja (grosses)",
+    "t": "sec",
+    "u": "s4vjqq"
+  },
+  {
+    "n": "Protéines de soja (moyennes)",
+    "t": "sec",
+    "u": "w78ctq"
+  },
+  {
+    "n": "Protéines de soja (petites)",
+    "t": "sec",
+    "u": "1r89qf"
+  },
+  {
+    "n": "Protéines de soja",
+    "t": "autres",
+    "u": "6m90g7",
+    "a": [
+      "Soja"
+    ]
+  },
+  {
+    "n": "Prune",
+    "t": "legumes",
+    "u": "m2z4tw",
+    "pF": true
+  },
+  {
+    "n": "Pruneau",
+    "t": "legumes",
+    "u": "kndzid",
+    "pF": true
+  },
+  {
+    "n": "Pulpe de tomate",
+    "t": "epices",
+    "u": "ftj0mq"
+  },
+  {
+    "n": "Purée chataîgne sans sucre",
+    "t": "legumes",
+    "u": "xm77fg"
+  },
+  {
+    "n": "Purée d'ail noir",
+    "t": "epices",
+    "u": "veh1lf"
+  },
+  {
+    "n": "Purée d'amande",
+    "t": "autres",
+    "u": "7dlfuw"
+  },
+  {
+    "n": "purée de noix de cajou",
+    "t": "autres",
+    "u": "mmvfvp"
+  },
+  {
+    "n": "Purée de sésame noir",
+    "t": "autres",
+    "u": "9d8hxn",
+    "a": [
+      "Sésame"
+    ]
+  },
+  {
+    "n": "Quetsche",
+    "t": "legumes",
+    "u": "6uewl7",
+    "pF": true
+  },
+  {
+    "n": "Queue bouillie (boeuf)",
+    "t": "animaux",
+    "u": "az6k3k",
+    "pF": true,
+    "a": [
+      "Viande"
+    ]
+  },
+  {
+    "n": "Quinoa blanc",
+    "t": "sec",
+    "u": "csxn1a"
+  },
+  {
+    "n": "Quinoa",
+    "t": "sec",
+    "u": "staxxt"
+  },
+  {
+    "n": "Radis long",
+    "t": "legumes",
+    "u": "yyw6b1",
+    "pF": true
+  },
+  {
+    "n": "Radis noir",
+    "t": "legumes",
+    "u": "uz0zbw",
+    "pF": true
+  },
+  {
+    "n": "Radis",
+    "t": "legumes",
+    "u": "4il0xo",
+    "pF": true
+  },
+  {
+    "n": "Raie (poisson)",
+    "t": "animaux",
+    "u": "zuoe9n",
+    "pF": true,
+    "a": [
+      "Poisson"
+    ]
+  },
+  {
+    "n": "Raifort en poudre",
+    "t": "epices",
+    "u": "yi8qce"
+  },
+  {
+    "n": "Raisin sec",
+    "t": "legumes",
+    "u": "9yf54l"
+  },
+  {
+    "n": "Raisin",
+    "t": "legumes",
+    "u": "n99nt2",
+    "pF": true
+  },
+  {
+    "n": "Ras el hanout",
+    "t": "epices",
+    "u": "j40pyf",
+    "a": [
+      "Moutarde"
+    ]
+  },
+  {
+    "n": "Rascasse (poisson)",
+    "t": "animaux",
+    "u": "f9y4lu",
+    "pF": true,
+    "a": [
+      "Poisson"
+    ]
+  },
+  {
+    "n": "Reblochon",
+    "t": "frais",
+    "u": "ob3net",
+    "pF": true,
+    "a": [
+      "Produit laitier"
+    ]
+  },
+  {
+    "n": "Rhubarbe",
+    "t": "legumes",
+    "u": "f7wbmo",
+    "pF": true
+  },
+  {
+    "n": "Ricotta",
+    "t": "frais",
+    "u": "q6t705",
+    "pF": true,
+    "a": [
+      "Produit laitier"
+    ]
+  },
+  {
+    "n": "Rillettes de canard (charcuterie)",
+    "t": "animaux",
+    "u": "23wvxs",
+    "pF": true,
+    "a": [
+      "Viande"
+    ]
+  },
+  {
+    "n": "Rillettes de porc (charcuterie)",
+    "t": "animaux",
+    "u": "33djub",
+    "pF": true,
+    "a": [
+      "Viande",
+      "Porc"
+    ]
+  },
+  {
+    "n": "Rillettes de thon",
+    "t": "animaux",
+    "u": "p1unld",
+    "pF": true,
+    "a": [
+      "Poisson"
+    ]
+  },
+  {
+    "n": "Rillettes d'oie (charcuterie)",
+    "t": "animaux",
+    "u": "jrxvb9",
+    "pF": true,
+    "a": [
+      "Viande"
+    ]
+  },
+  {
+    "n": "Ris (abats)",
+    "t": "animaux",
+    "u": "ml02ss",
+    "pF": true,
+    "a": [
+      "Viande"
+    ]
+  },
+  {
+    "n": "Riz basmati",
+    "t": "sec",
+    "u": "opblzb"
+  },
+  {
+    "n": "Riz pour risotto",
+    "t": "sec",
+    "u": "8f86ou"
+  },
+  {
+    "n": "Riz rond",
+    "t": "sec",
+    "u": "6azw4k"
+  },
+  {
+    "n": "Riz",
+    "t": "sec",
+    "u": "0uelc3"
+  },
+  {
+    "n": "Rognon boeuf (abats)",
+    "t": "animaux",
+    "u": "cuqv5x",
+    "pF": true,
+    "a": [
+      "Viande"
+    ]
+  },
+  {
+    "n": "Rognons de porc (abats)",
+    "t": "animaux",
+    "u": "wrvr6h",
+    "pF": true,
+    "a": [
+      "Viande"
+    ]
+  },
+  {
+    "n": "Romarin",
+    "t": "epices",
+    "u": "6z655r"
+  },
+  {
+    "n": "Roquefort",
+    "t": "frais",
+    "u": "ey6c9e",
+    "pF": true,
+    "a": [
+      "Produit laitier"
+    ]
+  },
+  {
+    "n": "Rosbif (boeuf)",
+    "t": "animaux",
+    "u": "23hi37",
+    "pF": true,
+    "a": [
+      "Viande"
+    ]
+  },
+  {
+    "n": "Rosette (charcuterie)",
+    "t": "animaux",
+    "u": "i8uddf",
+    "pF": true,
+    "a": [
+      "Viande",
+      "Porc"
+    ]
+  },
+  {
+    "n": "Rôti cuit (porc)",
+    "t": "animaux",
+    "u": "nj4357",
+    "pF": true,
+    "a": [
+      "Porc"
+    ]
+  },
+  {
+    "n": "Rôti de dinde (volaille et gibier)",
+    "t": "animaux",
+    "u": "dj9knx",
+    "pF": true,
+    "a": [
+      "Viande"
+    ]
+  },
+  {
+    "n": "Rôti Orloff (veau)",
+    "t": "animaux",
+    "u": "n5xlof",
+    "pF": true,
+    "a": [
+      "Viande"
+    ]
+  },
+  {
+    "n": "Rôti (porc)",
+    "t": "animaux",
+    "u": "b2ei4f",
+    "pF": true,
+    "a": [
+      "Porc"
+    ]
+  },
+  {
+    "n": "Rôti (veau)",
+    "t": "animaux",
+    "u": "l9h5zr",
+    "pF": true,
+    "a": [
+      "Viande"
+    ]
+  },
+  {
+    "n": "Rouget (poisson)",
+    "t": "animaux",
+    "u": "g7qh6e",
+    "pF": true,
+    "a": [
+      "Poisson"
+    ]
+  },
+  {
+    "n": "Roussette (poisson)",
+    "t": "animaux",
+    "u": "f3qcec",
+    "pF": true,
+    "a": [
+      "Poisson"
+    ]
+  },
+  {
+    "n": "Rumsteak (boeuf)",
+    "t": "animaux",
+    "u": "xi7biw",
+    "pF": true,
+    "a": [
+      "Viande"
+    ]
+  },
+  {
+    "n": "Safran",
+    "t": "epices",
+    "u": "zl7cx2"
+  },
+  {
+    "n": "Saint-Paulin",
+    "t": "frais",
+    "u": "mfjyx5",
+    "pF": true,
+    "a": [
+      "Produit laitier"
+    ]
+  },
+  {
+    "n": "Salade Iceberg",
+    "t": "legumes",
+    "u": "ihweq6",
+    "pF": true
+  },
+  {
+    "n": "Salade verte (chêne)",
+    "t": "legumes",
+    "u": "cg3wgm",
+    "pF": true
+  },
+  {
+    "n": "Salade",
+    "t": "legumes",
+    "u": "j1vp47",
+    "pF": true
+  },
+  {
+    "n": "Salami (charcuterie)",
+    "t": "animaux",
+    "u": "q3efpw",
+    "pF": true,
+    "a": [
+      "Viande",
+      "Porc"
+    ]
+  },
+  {
+    "n": "Salsifis",
+    "t": "legumes",
+    "u": "7hmy3k",
+    "pF": true
+  },
+  {
+    "n": "Sambal oelek",
+    "t": "epices",
+    "u": "kzomvp"
+  },
+  {
+    "n": "Sandre (poisson)",
+    "t": "animaux",
+    "u": "im46yu",
+    "pF": true,
+    "a": [
+      "Poisson"
+    ]
+  },
+  {
+    "n": "Sanglier (volaille et gibier)",
+    "t": "animaux",
+    "u": "7q9ad3",
+    "pF": true,
+    "a": [
+      "Viande"
+    ]
+  },
+  {
+    "n": "Sardine (poisson)",
+    "t": "animaux",
+    "u": "5jsoge",
+    "pF": true,
+    "a": [
+      "Poisson"
+    ]
+  },
+  {
+    "n": "Sariette",
+    "t": "epices",
+    "u": "22uzom"
+  },
+  {
+    "n": "Sarrasin",
+    "t": "sec",
+    "u": "9f35oz"
+  },
+  {
+    "n": "Sauce piment chipotle",
+    "t": "epices",
+    "u": "8u0rev"
+  },
+  {
+    "n": "Sauce soja dark (foncé)",
+    "t": "epices",
+    "u": "h138n7",
+    "a": [
+      "Soja"
+    ]
+  },
+  {
+    "n": "Sauce soja",
+    "t": "epices",
+    "u": "jjrwlj",
+    "a": [
+      "Soja"
+    ]
+  },
+  {
+    "n": "Sauce tomate mutti",
+    "t": "epices",
+    "u": "xdkeh3"
+  },
+  {
+    "n": "Saucisse (charcuterie)",
+    "t": "animaux",
+    "u": "3shjj4",
+    "pF": true,
+    "a": [
+      "Viande",
+      "Porc"
+    ]
+  },
+  {
+    "n": "Saucisse végane",
+    "t": "autres",
+    "u": "y8g316"
+  },
+  {
+    "n": "Saucisson (charcuterie)",
+    "t": "animaux",
+    "u": "vt8q9x",
+    "pF": true,
+    "a": [
+      "Viande",
+      "Porc"
+    ]
+  },
+  {
+    "n": "Sauge",
+    "t": "epices",
+    "u": "crbm3g"
+  },
+  {
+    "n": "Saumon (poisson)",
+    "t": "animaux",
+    "u": "yq993x",
+    "pF": true,
+    "a": [
+      "Poisson"
+    ]
+  },
+  {
+    "n": "Seiche (poisson)",
+    "t": "animaux",
+    "u": "lire4e",
+    "pF": true,
+    "a": [
+      "Poisson"
+    ]
+  },
+  {
+    "n": "Sel",
+    "t": "epices",
+    "u": "2juq3x"
+  },
+  {
+    "n": "Semoule couscous sans gluten",
+    "t": "sec",
+    "u": "o5vfrd"
+  },
+  {
+    "n": "Semoule de manioc",
+    "t": "sec",
+    "u": "4q9l1e"
+  },
+  {
+    "n": "Semoule de riz",
+    "t": "sec",
+    "u": "yqj5le"
+  },
+  {
+    "n": "Semoule fine (blé)",
+    "t": "sec",
+    "u": "mltl42",
+    "a": [
+      "Gluten"
+    ]
+  },
+  {
+    "n": "Semoule grosse (blé)",
+    "t": "sec",
+    "u": "gluv4i",
+    "a": [
+      "Gluten"
+    ]
+  },
+  {
+    "n": "Semoule moyenne (blé)",
+    "t": "sec",
+    "u": "yx78ae",
+    "a": [
+      "Gluten"
+    ]
+  },
+  {
+    "n": "Sept épices libanais",
+    "t": "epices",
+    "u": "qf36yq"
+  },
+  {
+    "n": "Sésame blanc",
+    "t": "epices",
+    "u": "1uz8x5",
+    "a": [
+      "Sésame"
+    ]
+  },
+  {
+    "n": "Sésame brun",
+    "t": "epices",
+    "u": "0m7btx",
+    "a": [
+      "Sésame"
+    ]
+  },
+  {
+    "n": "Sésame doré",
+    "t": "epices",
+    "u": "h3g82r",
+    "a": [
+      "Sésame"
+    ]
+  },
+  {
+    "n": "Sésame noir",
+    "t": "epices",
+    "u": "9bdo2l",
+    "a": [
+      "Sésame"
+    ]
+  },
+  {
+    "n": "Sésame",
+    "t": "epices",
+    "u": "mo4efz"
+  },
+  {
+    "n": "Shiro miso",
+    "t": "epices",
+    "u": "dx771g"
+  },
+  {
+    "n": "Shizo vert",
+    "t": "epices",
+    "u": "1yqgar",
+    "pF": true
+  },
+  {
+    "n": "Sirop d'agave",
+    "t": "sucres",
+    "u": "7cflkx"
+  },
+  {
+    "n": "Sirop de sureau",
+    "t": "sucres",
+    "u": "k2rneh"
+  },
+  {
+    "n": "Sirop d'érable ",
+    "t": "sucres",
+    "u": "zkmmgt"
+  },
+  {
+    "n": "Soda au Gingembre - Ginger Beer",
+    "t": "sucres",
+    "u": "s80bet"
+  },
+  {
+    "n": "Sole (poisson)",
+    "t": "animaux",
+    "u": "qr0xwp",
+    "pF": true,
+    "a": [
+      "Poisson"
+    ]
+  },
+  {
+    "n": "Spaguetti de Mais-Riz",
+    "t": "sec",
+    "u": "6ws6f5"
+  },
+  {
+    "n": "Speculoos",
+    "t": "sucres",
+    "u": "h6thsp",
+    "a": [
+      "Gluten",
+      "Soja"
+    ]
+  },
+  {
+    "n": "Sriracha",
+    "t": "epices",
+    "u": "oxiae3"
+  },
+  {
+    "n": "Steak haché (boeuf)",
+    "t": "animaux",
+    "u": "hxqhsf",
+    "pF": true,
+    "a": [
+      "Viande"
+    ]
+  },
+  {
+    "n": "sucre blanc",
+    "t": "sucres",
+    "u": "lny16c"
+  },
+  {
+    "n": "Sucre brun Vergeoise",
+    "t": "sucres",
+    "u": "znjs35"
+  },
+  {
+    "n": "Sucre complet",
+    "t": "sucres",
+    "u": "njgchn"
+  },
+  {
+    "n": "sucre de canne (blond)",
+    "t": "sucres",
+    "u": "n85gmi"
+  },
+  {
+    "n": "sucre de palme",
+    "t": "sucres",
+    "u": "cvd8ul"
+  },
+  {
+    "n": "Sucre en poudre",
+    "t": "sucres",
+    "u": "u9z2he"
+  },
+  {
+    "n": "Sucre glace",
+    "t": "sucres",
+    "u": "phv1to"
+  },
+  {
+    "n": "Sucre vanillé",
+    "t": "sucres",
+    "u": "dgwl19"
+  },
+  {
+    "n": "Sumac",
+    "t": "epices",
+    "u": "6izdfu"
+  },
+  {
+    "n": "Sweet Chili Sauce",
+    "t": "epices",
+    "u": "t5cuz3"
+  },
+  {
+    "n": "tabasco",
+    "t": "epices",
+    "u": "49iwdp"
+  },
+  {
+    "n": "Tahin",
+    "t": "autres",
+    "u": "u33083",
+    "a": [
+      "Sésame"
+    ]
+  },
+  {
+    "n": "Tamari (sauce)",
+    "t": "epices",
+    "u": "bbwo4n",
+    "a": [
+      "Soja"
+    ]
+  },
+  {
+    "n": "tamarin liquide",
+    "t": "epices",
+    "u": "7la29q"
+  },
+  {
+    "n": "Tapioca perlée",
+    "t": "sec",
+    "u": "mkttuh"
+  },
+  {
+    "n": "Tête d 'ail",
+    "t": "epices",
+    "u": "i62a51"
+  },
+  {
+    "n": "Tête de veau (abats)",
+    "t": "animaux",
+    "u": "svrouu",
+    "pF": true,
+    "a": [
+      "Viande"
+    ]
+  },
+  {
+    "n": "Thé Matcha",
+    "t": "autres",
+    "u": "giui8l"
+  },
+  {
+    "n": "Thon (poisson)",
+    "t": "animaux",
+    "u": "egpiw1",
+    "pF": true,
+    "a": [
+      "Poisson"
+    ]
+  },
+  {
+    "n": "Thym",
+    "t": "epices",
+    "u": "a16yd7"
+  },
+  {
+    "n": "Toastinette fromage burger",
+    "t": "frais",
+    "u": "6ezq59",
+    "pF": true,
+    "a": [
+      "Produit laitier"
+    ]
+  },
+  {
+    "n": "Tofu ferme",
+    "t": "frais",
+    "u": "3ahcls"
+  },
+  {
+    "n": "Tofu soyeux",
+    "t": "frais",
+    "u": "xqb8f5",
+    "pF": true
+  },
+  {
+    "n": "Tomate (conserve)",
+    "t": "legumes",
+    "u": "24z2y0"
+  },
+  {
+    "n": "Tomate séchée",
+    "t": "legumes",
+    "u": "s60hol"
+  },
+  {
+    "n": "Tomate",
+    "t": "legumes",
+    "u": "ibtbnq",
+    "pF": true
+  },
+  {
+    "n": "Tomates cerises",
+    "t": "legumes",
+    "u": "egkb0a",
+    "pF": true
+  },
+  {
+    "n": "Topinambour",
+    "t": "legumes",
+    "u": "2xg37a",
+    "pF": true
+  },
+  {
+    "n": "Travers (porc)",
+    "t": "animaux",
+    "u": "2wbi6u",
+    "pF": true,
+    "a": [
+      "Porc"
+    ]
+  },
+  {
+    "n": "Tripes (abats)",
+    "t": "animaux",
+    "u": "8jb1js",
+    "pF": true,
+    "a": [
+      "Viande"
+    ]
+  },
+  {
+    "n": "Truite (poisson)",
+    "t": "animaux",
+    "u": "qgsomm",
+    "pF": true,
+    "a": [
+      "Poisson"
+    ]
+  },
+  {
+    "n": "Turbot (poisson)",
+    "t": "animaux",
+    "u": "b42j4r",
+    "pF": true,
+    "a": [
+      "Poisson"
+    ]
+  },
+  {
+    "n": "vanille extrait concentré",
+    "t": "sucres",
+    "u": "n818be"
+  },
+  {
+    "n": "Véganaise",
+    "t": "epices",
+    "u": "89945bda5f0b"
+  },
+  {
+    "n": "Vermicelle de Riz",
+    "t": "sec",
+    "u": "3tifny"
+  },
+  {
+    "n": "Verveine",
+    "t": "epices",
+    "u": "9fa412"
+  },
+  {
+    "n": "Viande hachée (boeuf)",
+    "t": "animaux",
+    "u": "gnbf8z",
+    "pF": true,
+    "a": [
+      "Viande"
+    ]
+  },
+  {
+    "n": "Viande hachée (porc)",
+    "t": "animaux",
+    "u": "ibn1yk",
+    "pF": true,
+    "a": [
+      "Porc"
+    ]
+  },
+  {
+    "n": "Viande hachée (veau)",
+    "t": "animaux",
+    "u": "sb5cr6",
+    "pF": true,
+    "a": [
+      "Viande"
+    ]
+  },
+  {
+    "n": "Vin Blanc",
+    "t": "epices",
+    "u": "judtle",
+    "a": [
+      "Sulfites",
+      "Alcool"
+    ]
+  },
+  {
+    "n": "Vin Rouge",
+    "t": "epices",
+    "u": "ruvnjp",
+    "a": [
+      "Sulfites",
+      "Alcool"
+    ]
+  },
+  {
+    "n": "Vinaigre balsamique",
+    "t": "epices",
+    "u": "qemlqs",
+    "a": [
+      "Sulfites"
+    ]
+  },
+  {
+    "n": "Vinaigre de cidre",
+    "t": "epices",
+    "u": "7qo3ht",
+    "a": [
+      "Alcool"
+    ]
+  },
+  {
+    "n": "Vinaigre de riz noir",
+    "t": "epices",
+    "u": "cx8yxn"
+  },
+  {
+    "n": "Vinaigre de riz",
+    "t": "epices",
+    "u": "k6injl"
+  },
+  {
+    "n": "Vinaigre de vin",
+    "t": "epices",
+    "u": "bjuxby",
+    "a": [
+      "Alcool"
+    ]
+  },
+  {
+    "n": "Vinaigre de Xérès",
+    "t": "epices",
+    "u": "fqoi4u"
+  },
+  {
+    "n": "Vinaigrette",
+    "t": "epices",
+    "u": "86m6ez"
+  },
+  {
+    "n": "Yaourt brassé",
+    "t": "frais",
+    "u": "a73fzw",
+    "pF": true,
+    "a": [
+      "Produit laitier"
+    ]
+  },
+  {
+    "n": "Yaourt d'Amande",
+    "t": "frais",
+    "u": "k3hbhs",
+    "pF": true,
+    "a": [
+      "Fruit à coque"
+    ]
+  },
+  {
+    "n": "yaourt de brebis",
+    "t": "frais",
+    "u": "cq437o",
+    "pF": true,
+    "a": [
+      "Produit laitier"
+    ]
+  },
+  {
+    "n": "Yaourt de soja",
+    "t": "frais",
+    "u": "hlbwfd",
+    "pF": true,
+    "a": [
+      "Soja"
+    ]
+  },
+  {
+    "n": "Yaourt de vache",
+    "t": "frais",
+    "u": "xahmrh",
+    "pF": true,
+    "a": [
+      "Produit laitier"
+    ]
+  },
+  {
+    "n": "Yaourt grec de vache",
+    "t": "frais",
+    "u": "dzqmba",
+    "pF": true,
+    "a": [
+      "Produit laitier"
+    ]
+  },
+  {
+    "n": "Yaourt nature",
+    "t": "frais",
+    "u": "yl86w7",
+    "a": [
+      "Produit laitier"
+    ]
+  },
+  {
+    "n": "Yaourt Végétal",
+    "t": "frais",
+    "u": "qiji6w",
+    "pF": true
+  },
+  {
+    "n": "Zaatar (zathar)",
+    "t": "epices",
+    "u": "wxocup",
+    "a": [
+      "Sésame"
+    ]
+  },
+  {
+    "n": "Zestes de citron séchés",
+    "t": "legumes",
+    "u": "w9kkd2"
+  },
+  {
+    "n": "Zestes d'orange",
+    "t": "legumes",
+    "u": "z6hnb8",
+    "pF": true
+  }
+]

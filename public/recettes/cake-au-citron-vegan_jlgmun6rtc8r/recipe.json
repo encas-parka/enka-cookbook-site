@@ -1,6 +1,6 @@
 
 {
-  "slug": "cake-au-citron-vegan_jlgmun6rtc8r",
+  "id": "cake-au-citron-vegan_jlgmun6rtc8r",
   "title": "Cake Au Citron Végan",
   "draft": false,
   "typeR": "dessert",
@@ -16,11 +16,14 @@
   "quantite_desc": null,
   "check": true,
   "materiel": ["moule a cake","Four"],
-  "ingredients": [{"allergens":[],"comment":"","name":"Bicarbonate de soude","normalizedQuantity":1.25,"normalizedUnit":"ml","originalQuantity":0.25,"originalUnit":"c. à café","type":"autres","uuid":"fnnx13"},{"allergens":[],"comment":"","name":"Gomme de xanthane","normalizedQuantity":1.25,"normalizedUnit":"ml","originalQuantity":0.25,"originalUnit":"c. à café","type":"autres","uuid":"5le7rm"},{"allergens":[],"comment":"","name":"Sel","normalizedQuantity":0.5,"normalizedUnit":"gr.","originalQuantity":0.1,"originalUnit":"c. à café","type":"epices","uuid":"2juq3x"},{"allergens":["Soja"],"comment":"","name":"Yaourt de soja","normalizedQuantity":250,"normalizedUnit":"gr.","originalQuantity":250,"originalUnit":"gr.","type":"frais","uuid":"hlbwfd"},{"allergens":[],"comment":"zeste","name":"Citron jaune","normalizedQuantity":120,"normalizedUnit":"gr.","originalQuantity":120,"originalUnit":"gr.","type":"legumes","uuid":"5cg0yu"},{"allergens":[],"comment":"","name":"huile de tournesol","normalizedQuantity":110,"normalizedUnit":"ml","originalQuantity":0.11,"originalUnit":"l.","type":"lof","uuid":"c70jxb"},{"allergens":["Gluten"],"comment":"","name":"Farine de blé","normalizedQuantity":250,"normalizedUnit":"gr.","originalQuantity":250,"originalUnit":"gr.","type":"lof","uuid":"2av6w8"},{"allergens":[],"comment":"","name":"Jus de citron","normalizedQuantity":800,"normalizedUnit":"ml","originalQuantity":0.8,"originalUnit":"l.","type":"sucres","uuid":"e4mjd1"},{"allergens":[],"comment":"","name":"sucre de canne (blond)","normalizedQuantity":280,"normalizedUnit":"gr.","originalQuantity":280,"originalUnit":"gr.","type":"sucres","uuid":"n85gmi"}],
+  "ingredients": [{"allergens":[],"comment":"","name":"Bicarbonate de soude","normalizedQuantity":1.25,"normalizedUnit":"ml","originalQuantity":0.25,"originalUnit":"c. à café","pF":false,"pS":false,"type":"autres","uuid":"fnnx13"},{"allergens":[],"comment":"","name":"Gomme de xanthane","normalizedQuantity":1.25,"normalizedUnit":"ml","originalQuantity":0.25,"originalUnit":"c. à café","pF":false,"pS":false,"type":"autres","uuid":"5le7rm"},{"allergens":[],"comment":"","name":"Sel","normalizedQuantity":0.5,"normalizedUnit":"gr.","originalQuantity":0.1,"originalUnit":"c. à café","pF":false,"pS":false,"type":"epices","uuid":"2juq3x"},{"allergens":["Soja"],"comment":"","name":"Yaourt de soja","normalizedQuantity":250,"normalizedUnit":"gr.","originalQuantity":250,"originalUnit":"gr.","pF":true,"pS":false,"type":"frais","uuid":"hlbwfd"},{"allergens":[],"comment":"zeste","name":"Citron jaune","normalizedQuantity":120,"normalizedUnit":"gr.","originalQuantity":120,"originalUnit":"gr.","pF":true,"pS":false,"type":"legumes","uuid":"5cg0yu"},{"allergens":[],"comment":"","name":"huile de tournesol","normalizedQuantity":110,"normalizedUnit":"ml","originalQuantity":0.11,"originalUnit":"l.","pF":false,"pS":false,"type":"lof","uuid":"c70jxb"},{"allergens":["Gluten"],"comment":"","name":"Farine de blé","normalizedQuantity":250,"normalizedUnit":"gr.","originalQuantity":250,"originalUnit":"gr.","pF":false,"pS":false,"type":"lof","uuid":"2av6w8"},{"allergens":[],"comment":"","name":"Jus de citron","normalizedQuantity":800,"normalizedUnit":"ml","originalQuantity":0.8,"originalUnit":"l.","pF":false,"pS":false,"type":"sucres","uuid":"e4mjd1"},{"allergens":[],"comment":"","name":"sucre de canne (blond)","normalizedQuantity":280,"normalizedUnit":"gr.","originalQuantity":280,"originalUnit":"gr.","pF":false,"pS":false,"type":"sucres","uuid":"n85gmi"}],
   "preparation": "\n\n* Mélanger le sucre et le yaourt.\n* Ajouter zeste et farine, et mélanger au fouet.\n* Incorporer le jus de citron et l'huile.\n* Ajouter levure, bicar, gomme et sel.\n* Graisser un moule à cake, enfourner pou 50 min à 170° et attendre que ça refroidisse avant de démouler.",
   "preparation24h": null,
   "astuces": null,
   "prepAlt": null,
   "permissionWrite": [],
-  "publishedAt": "2025-01-01T00:00:00Z"
+  "publishedAt": "2025-01-01T00:00:00Z",
+  "createdAt": "2023-11-13T14:16:06.322000+00:00",
+  "updatedAt": "2023-11-13T14:16:06.322000+00:00",
+  "createdBy": ""
 }

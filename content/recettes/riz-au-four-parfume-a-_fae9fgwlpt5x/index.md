@@ -25,6 +25,8 @@ ingredients:
     allergens:
       - Fruit à coque
     type: sec
+    pF: false
+    pS: false
   - uuid: 0uelc3
     name: Riz
     originalQuantity: 400
@@ -34,6 +36,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sec
+    pF: false
+    pS: false
   - uuid: u2m28w
     name: Ail
     originalQuantity: 1
@@ -43,6 +47,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: j3mr9h
     name: Grenade
     originalQuantity: 90
@@ -52,6 +58,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: 75wo2d
     name: Olives
     originalQuantity: 40
@@ -61,6 +69,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: h3c8al
     name: huile d'olive
     originalQuantity: 3
@@ -70,6 +80,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: m5dxyo
     name: Feta
     originalQuantity: 150
@@ -80,6 +92,8 @@ ingredients:
     allergens:
       - Produit laitier
     type: frais
+    pF: true
+    pS: false
   - uuid: kmq1zb
     name: Beurre doux
     originalQuantity: 50
@@ -90,6 +104,8 @@ ingredients:
     allergens:
       - Produit laitier
     type: frais
+    pF: true
+    pS: false
   - uuid: ia5a5o
     name: Melasse de grenade
     originalQuantity: 1
@@ -99,6 +115,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: 2j9y2v
     name: Menthe
     originalQuantity: 50
@@ -108,6 +126,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: true
+    pS: false
 preparation: |-
   I. Préchauffez le four à à 230 'C (chaleur tournante) ou plus si votre four le permet.
 
@@ -120,8 +140,11 @@ preparation: |-
   3. Pendant que le riz cuit, versez tous les ingrédients prévus pour la garniture sauf les 10 g de menthe ciselée dans un cul-depoule, ajoutez ¼ de cuillère à café de sel, mélangez et réservez.
 
   4. Sortez le riz du four et retirez le papier d'aluminium. Prélevez les feuilles sur les brins de menthe (jetez les tiges) et déposez-les sur le riz, puis parseme de feta. Juste avant de servir, incorporez les 10 g de menthe ciselée dans la garniture et versez sur le riz de manière homogène. Servez chaud.
-publishDate: 2024-05-29T20:01:00.000Z
+publishDate: '2024-05-29T20:01:00+00:00'
 serveHot: true
 uuid: fae9fgwlpt5x
-slug: riz-au-four-parfume-a-_fae9fgwlpt5x
+id: riz-au-four-parfume-a-_fae9fgwlpt5x
+createdAt: '2024-05-29T20:01:00+00:00'
+updatedAt: '2024-05-29T20:01:00+00:00'
+createdBy: Ottolenghi
 ---

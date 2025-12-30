@@ -23,6 +23,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: 2juq3x
     name: Sel
     originalQuantity: 40
@@ -32,6 +34,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: h3c8al
     name: huile d'olive
     originalQuantity: 0.45
@@ -41,6 +45,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: e4mjd1
     name: Jus de citron
     originalQuantity: 225
@@ -50,6 +56,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
   - uuid: u33083
     name: Tahin
     originalQuantity: 1
@@ -60,6 +68,8 @@ ingredients:
     allergens:
       - Sésame
     type: autres
+    pF: false
+    pS: false
   - uuid: 6a8w8k
     name: Pois chiches
     originalQuantity: 1.8
@@ -69,6 +79,8 @@ ingredients:
     comment: poids sec
     allergens: []
     type: sec
+    pF: false
+    pS: false
 materiel: []
 preparation: |-
   > Faire cuire les pois chiches
@@ -85,8 +97,11 @@ preparation: |-
 preparation24h: Faire tremper les pois chiches
 astuces: []
 prepAlt: []
-publishDate: 2025-10-19T20:27:00.000Z
+publishDate: '2025-10-19T20:27:00+00:00'
 serveHot: false
 uuid: dw7yaqdlvjg9
-slug: houmous-pois-chiche_dw7yaqdlvjg9
+id: houmous-pois-chiche_dw7yaqdlvjg9
+createdAt: '2025-10-19T20:27:00+00:00'
+updatedAt: '2025-10-19T20:27:00+00:00'
+createdBy: Alio
 ---

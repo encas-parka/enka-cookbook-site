@@ -21,6 +21,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sec
+    pF: false
+    pS: false
   - uuid: 3eex0o
     name: Lait d'avoine
     originalQuantity: 17
@@ -31,6 +33,8 @@ ingredients:
     allergens:
       - Gluten
     type: lof
+    pF: false
+    pS: false
   - uuid: znjs35
     name: Sucre brun Vergeoise
     originalQuantity: 1.5
@@ -40,6 +44,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
   - uuid: 2juq3x
     name: Sel
     originalQuantity: 8
@@ -49,6 +55,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: pss0bn
     name: chicorée soluble
     originalQuantity: 170
@@ -58,6 +66,8 @@ ingredients:
     comment: ''
     allergens: []
     type: autres
+    pF: false
+    pS: false
 preparation: |-
   faire chauffer une grande quantité d'eau avec le sel, quand elle bout, ajouter le riz et faire cuire pendant 5 mn
 
@@ -66,8 +76,11 @@ preparation: |-
   5 mn avant la fin de la cuisson, ajouter les 4 litres de lait restants
 
   répartisser dans les ramequins et laisser tiédir
-publishDate: 2025-06-15T12:58:00.000Z
+publishDate: '2025-06-15T12:58:00+00:00'
 serveHot: false
 uuid: 9s83dfrvgjcs
-slug: riz-au-lait-vegan-a-la_9s83dfrvgjcs
+id: riz-au-lait-vegan-a-la_9s83dfrvgjcs
+createdAt: '2025-06-15T12:58:00+00:00'
+updatedAt: '2025-06-15T12:58:00+00:00'
+createdBy: ''
 ---

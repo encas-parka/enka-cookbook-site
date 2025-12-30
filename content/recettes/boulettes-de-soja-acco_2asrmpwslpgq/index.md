@@ -22,6 +22,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: u2m28w
     name: Ail
     originalQuantity: 25
@@ -31,6 +33,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: vwdomu
     name: Echalote
     originalQuantity: 25
@@ -40,6 +44,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: ljzb7j
     name: Eau
     originalQuantity: 7
@@ -49,6 +55,8 @@ ingredients:
     comment: ''
     allergens: []
     type: autres
+    pF: false
+    pS: false
   - uuid: u33083
     name: Tahin
     originalQuantity: 1.13
@@ -59,6 +67,8 @@ ingredients:
     allergens:
       - Sésame
     type: autres
+    pF: false
+    pS: false
   - uuid: 6m90g7
     name: Protéines de soja
     originalQuantity: 1.7
@@ -69,6 +79,8 @@ ingredients:
     allergens:
       - Soja
     type: autres
+    pF: false
+    pS: false
   - uuid: 2pps90
     name: Poivre
     originalQuantity: 1
@@ -78,6 +90,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: 2juq3x
     name: Sel
     originalQuantity: 1
@@ -87,6 +101,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: hgfa4e
     name: Persil frais
     originalQuantity: 1.5
@@ -96,6 +112,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: true
+    pS: false
   - uuid: bbwo4n
     name: Tamari (sauce)
     originalQuantity: 380
@@ -106,6 +124,8 @@ ingredients:
     allergens:
       - Soja
     type: epices
+    pF: false
+    pS: false
   - uuid: tmk6ya
     name: Bouillon de légume (sans gluten)
     originalQuantity: 16
@@ -115,6 +135,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: 1nb85u
     name: Farine de riz blanche
     originalQuantity: 550
@@ -124,6 +146,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
 materiel:
   - Four
   - Marmitte
@@ -136,7 +160,7 @@ preparation: |-
   * Faire chauffer le four à 200 °. Préparer une plaque à four recouverte de papier cuisson ou graisser légèrement un plat.
   * Mouiller ses mains, prendre la valeur d'une cuillère à soupe de préparation, former une boule de la grosseur d'une noix en pressant un peu. Posez sur la plaque de cuisson.
   * Faites cuire 15 à 20 minutes voire plus. Elles doivent être légèrement dorées.
-publishDate: 2024-05-18T13:54:00.000Z
+publishDate: '2024-05-18T13:54:00+00:00'
 checkfor: 170
 checkAlwaysOk: false
 regime:
@@ -146,5 +170,8 @@ regime:
   - sans-lactose
 serveHot: true
 uuid: 2asrmpwslpgq
-slug: boulettes-de-soja-acco_2asrmpwslpgq
+id: boulettes-de-soja-acco_2asrmpwslpgq
+createdAt: '2024-05-18T13:54:00+00:00'
+updatedAt: '2024-05-18T13:54:00+00:00'
+createdBy: Auré
 ---

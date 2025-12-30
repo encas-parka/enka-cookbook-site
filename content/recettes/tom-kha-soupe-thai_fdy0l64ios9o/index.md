@@ -26,6 +26,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: rtavky
     name: Oignon
     originalQuantity: 5
@@ -35,6 +37,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: ibtbnq
     name: Tomate
     originalQuantity: 8
@@ -44,6 +48,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: v9qhs9
     name: Champignons
     originalQuantity: 4
@@ -53,6 +59,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: vwdomu
     name: Echalote
     originalQuantity: 3
@@ -62,6 +70,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: u2m28w
     name: Ail
     originalQuantity: 6
@@ -71,6 +81,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: tmk6ya
     name: Bouillon de légume (sans gluten)
     originalQuantity: 40
@@ -80,6 +92,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: fetrpe
     name: Coriandre fraîche
     originalQuantity: 10
@@ -89,6 +103,8 @@ ingredients:
     comment: au service
     allergens: []
     type: epices
+    pF: true
+    pS: false
   - uuid: kzomvp
     name: Sambal oelek
     originalQuantity: 500
@@ -98,6 +114,8 @@ ingredients:
     comment: au service
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: bbwo4n
     name: Tamari (sauce)
     originalQuantity: 500
@@ -108,6 +126,8 @@ ingredients:
     allergens:
       - Soja
     type: epices
+    pF: false
+    pS: false
   - uuid: nz839c
     name: Gingembre bio
     originalQuantity: 600
@@ -117,6 +137,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: cydiwr
     name: Feuille de citron combava
     originalQuantity: 50
@@ -126,6 +148,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: smh61n
     name: 'Piment oiseau frais '
     originalQuantity: 5
@@ -135,6 +159,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: true
+    pS: false
   - uuid: equ6wc
     name: Galanga
     originalQuantity: 300
@@ -144,6 +170,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: t2e14k
     name: Citronnelle (bâton)
     originalQuantity: 8
@@ -153,6 +181,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: ljzb7j
     name: Eau
     originalQuantity: 52
@@ -162,6 +192,8 @@ ingredients:
     comment: ''
     allergens: []
     type: autres
+    pF: false
+    pS: false
   - uuid: rdw6xn
     name: Jus de citron vert
     originalQuantity: 2
@@ -171,6 +203,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
   - uuid: n85gmi
     name: sucre de canne (blond)
     originalQuantity: 300
@@ -180,6 +214,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
   - uuid: xdy736
     name: lait de coco
     originalQuantity: 8
@@ -189,6 +225,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: oyjc63
     name: Nouilles de riz Phö
     originalQuantity: 7
@@ -198,6 +236,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sec
+    pF: false
+    pS: false
 preparation: |-
   Dans une très grosse gamelle, la remplir de toute l'eau bouillante ( à la bouilloire c'est moins long et ça économise le gaz).
 
@@ -230,8 +270,11 @@ preparation: |-
   Au service, verser une grosse louche de soupe (env. 600gr) et y plonger les nouilles (env. 150gr). Décorer d'une bonne cuillère de coriandre et d'un quartier de citron.
 
   Proposer une cuillère à café de Sambal Oelek (sauce piment).
-publishDate: 2024-06-04T10:56:00.000Z
+publishDate: '2024-06-04T10:56:00+00:00'
 serveHot: true
 uuid: fdy0l64ios9o
-slug: tom-kha-soupe-thai_fdy0l64ios9o
+id: tom-kha-soupe-thai_fdy0l64ios9o
+createdAt: '2024-06-04T10:56:00+00:00'
+updatedAt: '2024-06-04T10:56:00+00:00'
+createdBy: Auré
 ---

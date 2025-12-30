@@ -25,6 +25,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: ljzb7j
     name: Eau
     originalQuantity: 60
@@ -34,6 +36,8 @@ ingredients:
     comment: ''
     allergens: []
     type: autres
+    pF: false
+    pS: false
   - uuid: he3u48
     name: Cumin moulu
     originalQuantity: 1
@@ -43,6 +47,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: ique18
     name: Paprika fumé
     originalQuantity: 1
@@ -52,6 +58,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: fkftyb
     name: Origan
     originalQuantity: 1
@@ -61,6 +69,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: 5c1b20
     name: Moutarde
     originalQuantity: 1
@@ -71,6 +81,8 @@ ingredients:
     allergens:
       - Moutarde
     type: epices
+    pF: false
+    pS: false
   - uuid: oxiae3
     name: Sriracha
     originalQuantity: 1
@@ -80,6 +92,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: jjrwlj
     name: Sauce soja
     originalQuantity: 40
@@ -90,6 +104,8 @@ ingredients:
     allergens:
       - Soja
     type: epices
+    pF: false
+    pS: false
   - uuid: rtavky
     name: Oignon
     originalQuantity: 150
@@ -99,6 +115,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: 7sk3a5
     name: Aubergine
     originalQuantity: 150
@@ -108,6 +126,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: v9qhs9
     name: Champignons
     originalQuantity: 150
@@ -117,6 +137,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: 02w66c
     name: Flocons d'avoine sans gluten
     originalQuantity: 150
@@ -126,6 +148,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sec
+    pF: false
+    pS: false
   - uuid: usibcf
     name: Noix
     originalQuantity: 30
@@ -136,6 +160,8 @@ ingredients:
     allergens:
       - Fruit à coque
     type: sec
+    pF: false
+    pS: false
   - uuid: iwdje3
     name: Haricots rouges cuits
     originalQuantity: 150
@@ -145,6 +171,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sec
+    pF: false
+    pS: false
 materiel:
   - Four
 preparation: |-
@@ -160,5 +188,8 @@ preparation: |-
 publishDate: '2024-06-02T12:12:00.000Z'
 serveHot: true
 uuid: clxhcyzv3p5y
-slug: steak-vege-champignons_clxhcyzv3p5y
+id: steak-vege-champignons_clxhcyzv3p5y
+createdAt: '2024-06-02T12:12:00.000Z'
+updatedAt: '2024-06-02T12:12:00.000Z'
+createdBy: ''
 ---

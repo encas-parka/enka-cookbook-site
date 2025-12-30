@@ -16,6 +16,8 @@ ingredients:
     comment: ''
     allergens: []
     type: autres
+    pF: false
+    pS: false
   - uuid: sk1gbb
     name: Cannelle
     originalQuantity: 1
@@ -25,6 +27,8 @@ ingredients:
     comment: sirop
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: sk1gbb
     name: Cannelle
     originalQuantity: 1
@@ -34,6 +38,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: n2l0fi
     name: Pâte feuilletée végane sans gluten
     originalQuantity: 4
@@ -43,6 +49,8 @@ ingredients:
     comment: ''
     allergens: []
     type: frais
+    pF: true
+    pS: false
   - uuid: 5cg0yu
     name: Citron jaune
     originalQuantity: 2
@@ -52,6 +60,8 @@ ingredients:
     comment: sirop
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: mr7sd5
     name: Figues Sèches
     originalQuantity: 400
@@ -61,6 +71,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: false
+    pS: false
   - uuid: rtavky
     name: Oignon
     originalQuantity: 500
@@ -70,6 +82,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: u2m28w
     name: Ail
     originalQuantity: 3
@@ -79,6 +93,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: 7sk3a5
     name: Aubergine
     originalQuantity: 1.5
@@ -88,6 +104,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: 1jfxgt
     name: Huile d'argan
     originalQuantity: 100
@@ -97,6 +115,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: atccqu
     name: Huile végétale
     originalQuantity: 200
@@ -106,6 +126,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: fuhtcw
     name: Amande
     originalQuantity: 160
@@ -116,6 +138,8 @@ ingredients:
     allergens:
       - Fruit à coque
     type: sec
+    pF: false
+    pS: false
   - uuid: 82a9ot
     name: Pignon de pin
     originalQuantity: 100
@@ -126,6 +150,8 @@ ingredients:
     allergens:
       - Fruit à coque
     type: sec
+    pF: false
+    pS: false
   - uuid: phv1to
     name: Sucre glace
     originalQuantity: 30
@@ -135,6 +161,8 @@ ingredients:
     comment: déco
     allergens: []
     type: sucres
+    pF: false
+    pS: false
   - uuid: u9z2he
     name: Sucre en poudre
     originalQuantity: 100
@@ -144,6 +172,8 @@ ingredients:
     comment: sirop
     allergens: []
     type: sucres
+    pF: false
+    pS: false
 plate: 16
 preparation: |-
   La farce est exactement la même que dans la pastilla végane à l'aubergine. Donc cuisiner les deux farces dans le même récipient.
@@ -151,7 +181,7 @@ preparation: |-
   Mélanger le tout ensemble et monter les tourtes avec une pâte feuilletée en dessous et une au dessus. Et bien colmater. Percer une petite cheminée au centre de la tourte avant cuisson.
 
   Cuire selon les instructions de l'emballage.
-publishDate: 2024-06-17T22:22:00.000Z
+publishDate: '2024-06-17T22:22:00+00:00'
 quantite_desc: un moule à tarte = 8 parts
 regime:
   - vegan
@@ -160,5 +190,8 @@ title: Pastilla  vegan a l'aubergine - version tourte sans gluten
 typeR: plat
 serveHot: true
 uuid: do1dg0nokwpd
-slug: pastilla-vegan-a-laube_do1dg0nokwpd
+id: pastilla-vegan-a-laube_do1dg0nokwpd
+createdAt: '2024-06-17T22:22:00+00:00'
+updatedAt: '2024-06-17T22:22:00+00:00'
+createdBy: Auré
 ---

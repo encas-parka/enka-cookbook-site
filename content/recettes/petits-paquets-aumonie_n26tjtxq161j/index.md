@@ -19,6 +19,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: 2pps90
     name: Poivre
     originalQuantity: 1
@@ -28,6 +30,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: 7qo3ht
     name: Vinaigre de cidre
     originalQuantity: 0.5
@@ -38,6 +42,8 @@ ingredients:
     allergens:
       - Alcool
     type: epices
+    pF: false
+    pS: false
   - uuid: 9o3793
     name: Baies roses
     originalQuantity: 50
@@ -47,6 +53,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: l3esgp
     name: Cumin (graines)
     originalQuantity: 50
@@ -56,6 +64,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: m5dxyo
     name: Feta
     originalQuantity: 3
@@ -66,6 +76,8 @@ ingredients:
     allergens:
       - Produit laitier
     type: frais
+    pF: true
+    pS: false
   - uuid: oa85mx
     name: Courge
     originalQuantity: 10
@@ -75,6 +87,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: rtavky
     name: Oignon
     originalQuantity: 4.1
@@ -84,6 +98,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: c70jxb
     name: huile de tournesol
     originalQuantity: 3.5
@@ -93,6 +109,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: x6je0g
     name: Pate filo (1 feuille)
     originalQuantity: 200
@@ -103,6 +121,8 @@ ingredients:
     allergens:
       - Gluten
     type: autres
+    pF: true
+    pS: false
   - uuid: u9z2he
     name: Sucre en poudre
     originalQuantity: 200
@@ -112,6 +132,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
 materiel:
   - Gastro 1/1 (Normaux)
   - Four
@@ -140,5 +162,8 @@ title: Petits paquets - aumonières courge feta
 typeR: entree
 serveHot: true
 uuid: n26tjtxq161j
-slug: petits-paquets-aumonie_n26tjtxq161j
+id: petits-paquets-aumonie_n26tjtxq161j
+createdAt: '2024-05-17T15:21:00.000Z'
+updatedAt: '2024-05-17T15:21:00.000Z'
+createdBy: ''
 ---

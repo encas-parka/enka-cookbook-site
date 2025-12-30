@@ -1,6 +1,6 @@
 
 {
-  "slug": "vinaigrette_zv927zjg7x0k",
+  "id": "vinaigrette_zv927zjg7x0k",
   "title": "Vinaigrette",
   "draft": false,
   "typeR": "entree",
@@ -16,11 +16,14 @@
   "quantite_desc": null,
   "check": true,
   "materiel": null,
-  "ingredients": [{"allergens":[],"comment":"","name":"Eau","normalizedQuantity":200,"normalizedUnit":"ml","originalQuantity":0.2,"originalUnit":"l.","type":"autres","uuid":"ljzb7j"},{"allergens":[],"comment":"","name":"Poivre","normalizedQuantity":3,"normalizedUnit":"gr.","originalQuantity":3,"originalUnit":"gr.","type":"epices","uuid":"2pps90"},{"allergens":[],"comment":"","name":"Sel","normalizedQuantity":3,"normalizedUnit":"gr.","originalQuantity":3,"originalUnit":"gr.","type":"epices","uuid":"2juq3x"},{"allergens":["Moutarde"],"comment":"","name":"Moutarde","normalizedQuantity":200,"normalizedUnit":"gr.","originalQuantity":200,"originalUnit":"gr.","type":"epices","uuid":"5c1b20"},{"allergens":["Sulfites"],"comment":"","name":"Vinaigre balsamique","normalizedQuantity":200,"normalizedUnit":"ml","originalQuantity":0.2,"originalUnit":"l.","type":"epices","uuid":"qemlqs"},{"allergens":[],"comment":"","name":"Huile végétale","normalizedQuantity":1500,"normalizedUnit":"ml","originalQuantity":1.5,"originalUnit":"l.","type":"lof","uuid":"atccqu"}],
+  "ingredients": [{"allergens":[],"comment":"","name":"Eau","normalizedQuantity":200,"normalizedUnit":"ml","originalQuantity":0.2,"originalUnit":"l.","pF":false,"pS":false,"type":"autres","uuid":"ljzb7j"},{"allergens":[],"comment":"","name":"Poivre","normalizedQuantity":3,"normalizedUnit":"gr.","originalQuantity":3,"originalUnit":"gr.","pF":false,"pS":false,"type":"epices","uuid":"2pps90"},{"allergens":[],"comment":"","name":"Sel","normalizedQuantity":3,"normalizedUnit":"gr.","originalQuantity":3,"originalUnit":"gr.","pF":false,"pS":false,"type":"epices","uuid":"2juq3x"},{"allergens":["Moutarde"],"comment":"","name":"Moutarde","normalizedQuantity":200,"normalizedUnit":"gr.","originalQuantity":200,"originalUnit":"gr.","pF":false,"pS":false,"type":"epices","uuid":"5c1b20"},{"allergens":["Sulfites"],"comment":"","name":"Vinaigre balsamique","normalizedQuantity":200,"normalizedUnit":"ml","originalQuantity":0.2,"originalUnit":"l.","pF":false,"pS":false,"type":"epices","uuid":"qemlqs"},{"allergens":[],"comment":"","name":"Huile végétale","normalizedQuantity":1500,"normalizedUnit":"ml","originalQuantity":1.5,"originalUnit":"l.","pF":false,"pS":false,"type":"lof","uuid":"atccqu"}],
   "preparation": "monter la sauce en commençant par la moutarde, et le vinaigre\n\npuis ajouter petit à petit l'huile\n\net en enfin l'eau",
   "preparation24h": null,
   "astuces": null,
   "prepAlt": null,
   "permissionWrite": [],
-  "publishedAt": "2025-01-01T00:00:00Z"
+  "publishedAt": "2025-01-01T00:00:00Z",
+  "createdAt": "2024-06-15T11:21:00.000Z",
+  "updatedAt": "2024-06-15T11:21:00.000Z",
+  "createdBy": ""
 }

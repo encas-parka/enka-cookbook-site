@@ -22,6 +22,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: zf3zf8
     name: Oeuf
     originalQuantity: 40
@@ -32,6 +34,8 @@ ingredients:
     allergens:
       - Oeuf
     type: lof
+    pF: false
+    pS: false
   - uuid: k6zm70
     name: Crème florette
     originalQuantity: 2.5
@@ -42,6 +46,8 @@ ingredients:
     allergens:
       - Produit laitier
     type: frais
+    pF: false
+    pS: false
   - uuid: s8j4ff
     name: Basilic
     originalQuantity: 5
@@ -51,6 +57,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: true
+    pS: false
 preparation: |-
 
   Lavez les courgettes, les couper en lamelles. Plongez-les dans un
@@ -68,8 +76,11 @@ preparation: |-
 
 
   Verser dans des moules individuels 30 min.
-publishDate: 2025-06-12T10:02:00.000Z
+publishDate: '2025-06-12T10:02:00+00:00'
 serveHot: false
 uuid: qyi5426r2gnp
-slug: flan-de-courgettes-au-_qyi5426r2gnp
+id: flan-de-courgettes-au-_qyi5426r2gnp
+createdAt: '2025-06-12T10:02:00+00:00'
+updatedAt: '2025-06-12T10:02:00+00:00'
+createdBy: ''
 ---

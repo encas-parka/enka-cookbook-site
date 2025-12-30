@@ -23,6 +23,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: eouu0v
     name: Carotte
     originalQuantity: 13
@@ -32,6 +34,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: atccqu
     name: Huile végétale
     originalQuantity: 1
@@ -41,9 +45,14 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
 preparation: Raper et assaisonner à convenance
 publishDate: '2024-06-14T13:22:00.000Z'
 serveHot: false
 uuid: 82mg6v2cynff
-slug: carottes-rapees_82mg6v2cynff
+id: carottes-rapees_82mg6v2cynff
+createdAt: '2024-06-14T13:22:00.000Z'
+updatedAt: '2024-06-14T13:22:00.000Z'
+createdBy: ''
 ---

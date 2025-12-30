@@ -15,6 +15,8 @@ ingredients:
     comment: appareil
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: 8j3hna
     name: Margarine végétale spécial cuisson
     originalQuantity: 1.5
@@ -24,6 +26,8 @@ ingredients:
     comment: appareil
     allergens: []
     type: frais
+    pF: true
+    pS: false
   - uuid: 8j3hna
     name: Margarine végétale spécial cuisson
     originalQuantity: 1.8
@@ -33,6 +37,8 @@ ingredients:
     comment: pâte
     allergens: []
     type: frais
+    pF: true
+    pS: false
   - uuid: 8nbcjp
     name: Fécule de maïs (Maïzena)
     originalQuantity: 550
@@ -42,6 +48,8 @@ ingredients:
     comment: appareil
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: gpeob7
     name: Lait de soja
     originalQuantity: 2.2
@@ -52,6 +60,8 @@ ingredients:
     allergens:
       - Soja
     type: lof
+    pF: false
+    pS: false
   - uuid: gpeob7
     name: Lait de soja
     originalQuantity: 640
@@ -62,6 +72,8 @@ ingredients:
     allergens:
       - Soja
     type: lof
+    pF: false
+    pS: false
   - uuid: 2av6w8
     name: Farine de blé
     originalQuantity: 3.7
@@ -72,6 +84,8 @@ ingredients:
     allergens:
       - Gluten
     type: lof
+    pF: false
+    pS: false
   - uuid: u9z2he
     name: Sucre en poudre
     originalQuantity: 2
@@ -81,6 +95,8 @@ ingredients:
     comment: appareil
     allergens: []
     type: sucres
+    pF: false
+    pS: false
   - uuid: e4mjd1
     name: Jus de citron
     originalQuantity: 3.7
@@ -90,6 +106,8 @@ ingredients:
     comment: appareil
     allergens: []
     type: sucres
+    pF: false
+    pS: false
   - uuid: rmgr7l
     name: Poudre d'amandes
     originalQuantity: 550
@@ -100,6 +118,8 @@ ingredients:
     allergens:
       - Fruit à coque
     type: sucres
+    pF: false
+    pS: false
   - uuid: u9z2he
     name: Sucre en poudre
     originalQuantity: 1.1
@@ -109,6 +129,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
 plate: 100
 preparation: |-
   Dans un récipient mélanger la farine, le sucre glace, la poudre d’amandes et le sel. Ajouter la margarine coupée en morceaux et mélanger l’ensemble du bout des doigts jusqu’à obtenir une pâte sableuse. Incorporer ensuite le lait et mélanger bien de façon à obtenir une pâte homogène et former autant de boules qu'il ne faut de tartes. Mettre au frais enveloppé de film alimentaire pendant 30min.
@@ -123,7 +145,7 @@ preparation: |-
 
   Versez la crème sur le fond de tarte, laisser refroidir à température ambiante puis placer au réfrigérateur pour 2 heures.
 preparation24h: La pâte peut être faite la veille.
-publishDate: 2024-06-17T20:06:00.000Z
+publishDate: '2024-06-17T20:06:00+00:00'
 quantite_desc: un moule d'env. 30cm = 8 parts
 regime:
   - vegan
@@ -131,5 +153,8 @@ title: Tarte au citron vegane
 typeR: dessert
 serveHot: false
 uuid: mw6a5i2da5hf
-slug: tarte-au-citron-vegane_mw6a5i2da5hf
+id: tarte-au-citron-vegane_mw6a5i2da5hf
+createdAt: '2024-06-17T20:06:00+00:00'
+updatedAt: '2024-06-17T20:06:00+00:00'
+createdBy: ''
 ---

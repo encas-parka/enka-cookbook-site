@@ -23,6 +23,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: 9p3n36
     name: Olives noires à la grecque
     originalQuantity: 100
@@ -32,6 +34,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: false
+    pS: false
   - uuid: h3c8al
     name: huile d'olive
     originalQuantity: 2
@@ -41,12 +45,17 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
 materiel:
   - Robot Mixeur
 preparation: Laisser tremper les olives noires pendant une demi heure puis rincez les bien. Mixer les avec l'ail et l'huile d'olive.
 preparation24h: ''
-publishDate: 2024-03-18T13:28:23.107Z
+publishDate: '2024-03-18T13:28:23.107000+00:00'
 serveHot: false
 uuid: zntseime9uro
-slug: tapenade-olives-noires_zntseime9uro
+id: tapenade-olives-noires_zntseime9uro
+createdAt: '2024-03-18T13:28:23.107000+00:00'
+updatedAt: '2024-03-18T13:28:23.107000+00:00'
+createdBy: ''
 ---

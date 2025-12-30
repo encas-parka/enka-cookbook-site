@@ -22,6 +22,8 @@ ingredients:
     comment: pour moi il s'agit des perles du japon
     allergens: []
     type: sec
+    pF: false
+    pS: false
   - uuid: 5cg0yu
     name: Citron jaune
     originalQuantity: 10
@@ -31,6 +33,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: 9vpwp5
     name: Banane
     originalQuantity: 25
@@ -40,6 +44,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: hzwesd
     name: Lait de riz
     originalQuantity: 9
@@ -49,6 +55,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: rn44lx
     name: Cranberries séchées
     originalQuantity: 1
@@ -58,6 +66,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
   - uuid: lny16c
     name: sucre blanc
     originalQuantity: 1
@@ -67,6 +77,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
   - uuid: oskdzx
     name: Gingembre confit
     originalQuantity: 800
@@ -76,6 +88,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
   - uuid: e4mjd1
     name: Jus de citron
     originalQuantity: 500
@@ -85,6 +99,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
   - uuid: n818be
     name: vanille extrait concentré
     originalQuantity: 10
@@ -94,6 +110,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
 preparation: |-
   Eplucher les bananes, les couper en 2 dans le sens de la longueur puis en 2 pour obtenir 4 morceaux/personne. Les arroser de jus de citron pour qu'elles ne noircissent pas. Réserver.
 
@@ -105,8 +123,11 @@ preparation: |-
 
   Dans les verrines ou autres contenants, répartir au fond la banane, ajouter les perles du japon puis le mélange haché gingembre/cranberries. Stocker au froid
 preparation24h: On peut faire cette préparation la veille
-publishDate: 2025-06-04T18:43:00.000Z
+publishDate: '2025-06-04T18:43:00+00:00'
 serveHot: false
 uuid: euzk0cqi0woy
-slug: perles-du-japon-vanill_euzk0cqi0woy
+id: perles-du-japon-vanill_euzk0cqi0woy
+createdAt: '2025-06-04T18:43:00+00:00'
+updatedAt: '2025-06-04T18:43:00+00:00'
+createdBy: frédo
 ---

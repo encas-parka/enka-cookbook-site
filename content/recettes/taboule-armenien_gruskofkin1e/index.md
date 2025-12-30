@@ -19,6 +19,8 @@ ingredients:
     allergens:
       - Gluten
     type: sec
+    pF: false
+    pS: false
   - uuid: bwkn34
     name: Citron (jus)
     originalQuantity: 3
@@ -28,6 +30,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: ibtbnq
     name: Tomate
     originalQuantity: 1
@@ -37,6 +41,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: 0lpad0
     name: Poivron
     originalQuantity: 1
@@ -46,6 +52,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: rtavky
     name: Oignon
     originalQuantity: 1
@@ -55,6 +63,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: h3c8al
     name: huile d'olive
     originalQuantity: 7
@@ -64,6 +74,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: j2l8hj
     name: Cébettes
     originalQuantity: 0.4
@@ -73,6 +85,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: sfcy1d
     name: Pâte de poivron
     originalQuantity: 1
@@ -82,6 +96,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: ia5a5o
     name: Melasse de grenade
     originalQuantity: 1
@@ -91,6 +107,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: 6izdfu
     name: Sumac
     originalQuantity: 1
@@ -100,6 +118,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: uid60d
     name: Menthe séchée
     originalQuantity: 1
@@ -109,6 +129,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: hgfa4e
     name: Persil frais
     originalQuantity: 1
@@ -118,6 +140,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: true
+    pS: false
   - uuid: dc8855
     name: Cumin
     originalQuantity: 1
@@ -127,6 +151,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: bidsmu
     name: Paprika
     originalQuantity: 1
@@ -136,6 +162,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: 2pps90
     name: Poivre
     originalQuantity: 1
@@ -145,6 +173,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: mck2wl
     name: Concentré de tomate
     originalQuantity: 1
@@ -154,9 +184,14 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
 preparation: "faire gonfler le boulgour :\n\n* 400 g de boulgour fin + volume équivalent en eau chaude salée (pour le faire gonfler)\n* 12 cl huile d'O\n* 1 c à soupe de concentré de tomate\n* 1 c à soupe de pate de poivron et tomate (achat ds magasin de produits exotiques)\n* 1 oignon haché\n* 1 poivron haché\n* 1 c à café de sel\_ / de poivre / de paprika / de cumin poudre /\_\n* le zeste d'1 citron\n* 1/2 bottes de cébettes\n* 1 tomate\n* 1/2 botte de persil plat\n* jus du citron\n* 1 c à soupe de mélasse de grenade\n* 1 c à café de sumac / de menthe séchée\n* MELANGER LE BOULGOUR, LA PREPARATION CUITE, ET LA PREPARATION CRUE, SALER POIVRER HUILER SI BESOIN\n\nfaire revenir :dans un autre contenant couper e mélanger :\n1/2 bottes de cébettes\n\n* 1 tomate\n\n* 1/2 botte de persil plat\n\n* jus du citron\n\n* 1 c à soupe de mélasse de grenade\n\n* 1 c à café de sumac / de menthe séchée\n\n* MELANGER LE BOULGOUR, LA PREPARATION CUITE, ET LA PREPARATION CRUE, SALER POIVRER HUILER SI BESOIN"
-publishDate: 2025-05-14T08:59:00.000Z
+publishDate: '2025-05-14T08:59:00+00:00'
 serveHot: false
 uuid: gruskofkin1e
-slug: taboule-armenien_gruskofkin1e
+id: taboule-armenien_gruskofkin1e
+createdAt: '2025-05-14T08:59:00+00:00'
+updatedAt: '2025-05-14T08:59:00+00:00'
+createdBy: ''
 ---

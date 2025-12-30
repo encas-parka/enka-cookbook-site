@@ -24,6 +24,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: rtavky
     name: Oignon
     originalQuantity: 0.5
@@ -33,6 +35,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: l5p1a5
     name: Concombre
     originalQuantity: 3
@@ -42,6 +46,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: a73fzw
     name: Yaourt brassé
     originalQuantity: 6
@@ -52,6 +58,8 @@ ingredients:
     allergens:
       - Produit laitier
     type: frais
+    pF: true
+    pS: false
   - uuid: rgt7s4
     name: Poivre noir moulu
     originalQuantity: 10
@@ -61,6 +69,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: 2juq3x
     name: Sel
     originalQuantity: 20
@@ -70,6 +80,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: l3esgp
     name: Cumin (graines)
     originalQuantity: 100
@@ -79,6 +91,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: fetrpe
     name: Coriandre fraîche
     originalQuantity: 1
@@ -88,6 +102,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: true
+    pS: false
 preparation: |-
   \
 
@@ -102,11 +118,14 @@ preparation: |-
 
   \
 prepAlt: []
-publishDate: 2025-06-02T18:02:00.000Z
+publishDate: '2025-06-02T18:02:00+00:00'
 checkAlwaysOk: false
 regime:
   - vegetarien
 serveHot: false
 uuid: raify5afrqsl
-slug: raita-rainbow-queer-na_raify5afrqsl
+id: raita-rainbow-queer-na_raify5afrqsl
+createdAt: '2025-06-02T18:02:00+00:00'
+updatedAt: '2025-06-02T18:02:00+00:00'
+createdBy: Auré
 ---

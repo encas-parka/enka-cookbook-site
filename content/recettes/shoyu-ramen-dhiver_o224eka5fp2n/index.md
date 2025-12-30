@@ -24,6 +24,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: ffafjo
     name: Algue nori feuille séchée
     originalQuantity: 22
@@ -33,6 +35,8 @@ ingredients:
     comment: coupées en languettes 16/feuilles
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: jjrwlj
     name: Sauce soja
     originalQuantity: 75
@@ -43,6 +47,8 @@ ingredients:
     allergens:
       - Soja
     type: epices
+    pF: false
+    pS: false
   - uuid: 2juq3x
     name: Sel
     originalQuantity: 10
@@ -52,6 +58,8 @@ ingredients:
     comment: Taré
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: k6injl
     name: Vinaigre de riz
     originalQuantity: 200
@@ -61,6 +69,8 @@ ingredients:
     comment: Taré
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: jjrwlj
     name: Sauce soja
     originalQuantity: 1.5
@@ -71,6 +81,8 @@ ingredients:
     allergens:
       - Soja
     type: epices
+    pF: false
+    pS: false
   - uuid: cd0g12
     name: Algue kombu séchée
     originalQuantity: 15
@@ -80,6 +92,8 @@ ingredients:
     comment: Taré
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: cd0g12
     name: Algue kombu séchée
     originalQuantity: 15
@@ -89,6 +103,8 @@ ingredients:
     comment: Dashi
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: ljzb7j
     name: Eau
     originalQuantity: 1.5
@@ -98,6 +114,8 @@ ingredients:
     comment: Oeufs mollets Ajitama
     allergens: []
     type: autres
+    pF: false
+    pS: false
   - uuid: ljzb7j
     name: Eau
     originalQuantity: 35
@@ -107,6 +125,8 @@ ingredients:
     comment: Dashi
     allergens: []
     type: autres
+    pF: false
+    pS: false
   - uuid: w9kkd2
     name: Zestes de citron séchés
     originalQuantity: 5
@@ -116,6 +136,8 @@ ingredients:
     comment: ou Yuzu. Mixé très fin
     allergens: []
     type: legumes
+    pF: false
+    pS: false
   - uuid: j7as8d
     name: Cébette - Ciboule - Cive - Oignon vert
     originalQuantity: 750
@@ -125,6 +147,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: u2m28w
     name: Ail
     originalQuantity: 30
@@ -134,6 +158,8 @@ ingredients:
     comment: Bouillon final
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: nz839c
     name: Gingembre bio
     originalQuantity: 300
@@ -143,6 +169,8 @@ ingredients:
     comment: Bouillon final
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: v9qhs9
     name: Champignons
     originalQuantity: 1
@@ -152,6 +180,8 @@ ingredients:
     comment: Bouillon final
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: l3fs10
     name: Poireau
     originalQuantity: 3
@@ -161,6 +191,8 @@ ingredients:
     comment: Bouillon final
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: rtavky
     name: Oignon
     originalQuantity: 3
@@ -170,6 +202,8 @@ ingredients:
     comment: Bouillon final
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: 7b8r4n
     name: Champignon shiitake séché
     originalQuantity: 125
@@ -179,6 +213,8 @@ ingredients:
     comment: Taré
     allergens: []
     type: legumes
+    pF: false
+    pS: false
   - uuid: u2m28w
     name: Ail
     originalQuantity: 10
@@ -188,6 +224,8 @@ ingredients:
     comment: Taré
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: nz839c
     name: Gingembre bio
     originalQuantity: 120
@@ -197,6 +235,8 @@ ingredients:
     comment: Taré
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: 7b8r4n
     name: Champignon shiitake séché
     originalQuantity: 250
@@ -206,6 +246,8 @@ ingredients:
     comment: Dashi
     allergens: []
     type: legumes
+    pF: false
+    pS: false
   - uuid: lny16c
     name: sucre blanc
     originalQuantity: 250
@@ -215,6 +257,8 @@ ingredients:
     comment: Oeufs mollets Ajitama
     allergens: []
     type: sucres
+    pF: false
+    pS: false
   - uuid: lny16c
     name: sucre blanc
     originalQuantity: 100
@@ -224,6 +268,8 @@ ingredients:
     comment: Taré
     allergens: []
     type: sucres
+    pF: false
+    pS: false
   - uuid: fazth1
     name: huile de sésame
     originalQuantity: 50
@@ -234,6 +280,8 @@ ingredients:
     allergens:
       - Sésame
     type: lof
+    pF: false
+    pS: false
   - uuid: zf3zf8
     name: Oeuf
     originalQuantity: 54
@@ -244,6 +292,8 @@ ingredients:
     allergens:
       - Oeuf
     type: lof
+    pF: false
+    pS: false
   - uuid: mesg7t
     name: Nouilles de riz
     originalQuantity: 1.5
@@ -253,6 +303,8 @@ ingredients:
     comment: Version sans gluten
     allergens: []
     type: sec
+    pF: false
+    pS: false
   - uuid: ul46ke
     name: Nouilles de blé ondulées Ramen
     originalQuantity: 3.25
@@ -263,12 +315,17 @@ ingredients:
     allergens:
       - Gluten
     type: sec
+    pF: false
+    pS: false
 preparation: "**Le BOUILLON FINAL :**\n\nÉmincer les oignons, les faire revenir, déglacer à la sauce soja sans gluten puis légèrement caraméliser avec du sucre.\n\nAjouter les champignons coupés en lamelles, puis l’ail et le gingembre hachés + ceux des taré et dashi.\n\n\_Verser tout le\_dashi préparé la veille et le faire chauffer à feu **très** doux. Avant l’ébullition (vers 80°C)\n\nAjouter les poireaux (blancs et verts) éffilés finement dans la longueur, comme des tagliatelles.\n\nUne fois cuits, retirer\_tous les légumes du bouillon. Réserver.\n\nLaisser cuire à feu doux encore 1 à 2h à découvert.\n\nENFIN seulement ajouter le taré.\n\n\n**NOUILLES :**\n\nCuire les nouilles selon instructions. A la sortie de cuisson, les rincer à l'eau afin qu'elles collent moins.\n\n\n**MONTAGE D'UN BOL :**\n\nDéposer les nouilles dans le bol et les mélanger dans le bouillon + la cuillère d’huile aromatique,\n\nles relever et les replacer au centre du bouillon.\n\nDéposer les accompagnements, racler une cuillère de miso sur le bord du bol !!! YUMMI YUMMI !!"
 preparation24h: "**LE DASHI\_:**\n\n\n*Le dashi est un bouillon japonais qui est la base de nombreux plats et est\n indispensable pour donner à vos plats ce goût japonais authentique.*\n\nDans un récipient avec couvercle, mélanger dans l’eau froide les shitaké\n et le kombu. Laisser reposer au moins 4h, de préférence 12 à 24h.\n\nIl\_sera ensuite ajouté au bouillon.\n\nRécupérer les shiitakés et les trancher assez finement.\n\n\n\n**LE TARE (sauce) :**\n\nCouper des tranches de gingembre (ce n’est pas nécessaire de le peler \ns'il est bio). Dans une casserole, ajouter tous les ingrédients du taré \net mélanger.\n\nFaire chauffer à feu très doux (le minimum), dès l’apparition des premières petite bulles signe d’un début d’ébullition.\n\n\_Laisser mariner à température ambiante jusqu’au lendemain.\n\nRécupérer gingembre, ail et shiitakés et les émincer finement\n\n\n**OEUF AJITAMA :**\n\nMélanger l’eau, la sauce soja sans gluten et le sucre.\n\nFaire bouillir quelques secondes et bien mélanger.\n\n(Si l'on souhaite,\_ajouter 1-2 cs de katsuobushi puis retirer du feux et laisser redescendre à température ambiante.)\n\nFaire bouillir une casserole d’eau avec quelques cuillères à soupe de \nvinaigre. Ajouter les œufs (qui sortent du frigo) et les cuire 6 minutes\n 30 secondes.\n\nTremper les\_œufs dans un bol d’eau glacée pour stopper la cuisson. Les laisser bien bien refroidir puis les peler.\n\nDans des sacs congélation verser la marinade et y déposer les œufs. \nLaisser mariner 12 à 24 h en retournant les sachets délicatement de \ntemps en temps."
 astuces:
   - astuce: A la place de la Sauce Soja, on peut remplacerr par de la Sauce Tamari pour les histoires de gluten. A la place du Mirin, j'ai proposé  du Vinaigre de Riz + Sucre dans le Taré pour les histoires d'alcool.
-publishDate: 2025-05-04T17:10:00.000Z
+publishDate: '2025-05-04T17:10:00+00:00'
 serveHot: true
 uuid: o224eka5fp2n
-slug: shoyu-ramen-dhiver_o224eka5fp2n
+id: shoyu-ramen-dhiver_o224eka5fp2n
+createdAt: '2025-05-04T17:10:00+00:00'
+updatedAt: '2025-05-04T17:10:00+00:00'
+createdBy: Auré
 ---

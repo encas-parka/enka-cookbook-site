@@ -17,6 +17,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: u2m28w
     name: Ail
     originalQuantity: 5
@@ -26,6 +28,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: rtavky
     name: Oignon
     originalQuantity: 500
@@ -35,6 +39,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: 4totf1
     name: Epinard
     originalQuantity: 1
@@ -44,6 +50,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: c70jxb
     name: huile de tournesol
     originalQuantity: 200
@@ -53,6 +61,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: 2ej7fi
     name: Farine de blé noir (sarrasin)
     originalQuantity: 150
@@ -62,6 +72,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: 4vxqlr
     name: Graine de tournesol
     originalQuantity: 50
@@ -71,6 +83,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sec
+    pF: false
+    pS: false
   - uuid: usibcf
     name: Noix
     originalQuantity: 200
@@ -81,6 +95,8 @@ ingredients:
     allergens:
       - Fruit à coque
     type: sec
+    pF: false
+    pS: false
 materiel:
   - Four
   - Gastro 1/1 (Normaux)
@@ -90,7 +106,7 @@ preparation: |-
   2. Ajouter les épinards surgelés, s'ils rendent trop d'eau, les égoutter avant de les disposer dans des ramequins
   3. Faire la pâte à crumble avec le reste des ingredients, former de petits agglomérats les disposer sur les ramequins
   4. Mettre au four à 200 degrès 15 mn jusqu'à ce qu'ils soient gratinés
-publishDate: 2024-06-12T12:37:00.000Z
+publishDate: '2024-06-12T12:37:00+00:00'
 quantite_desc: ''
 regime:
   - vegetarien
@@ -101,5 +117,8 @@ title: Crumble salé épinards vegan sans gluten
 typeR: entree
 serveHot: true
 uuid: th3vfmbys0kd
-slug: crumble-sale-epinards-_th3vfmbys0kd
+id: crumble-sale-epinards-_th3vfmbys0kd
+createdAt: '2024-06-12T12:37:00+00:00'
+updatedAt: '2024-06-12T12:37:00+00:00'
+createdBy: ''
 ---

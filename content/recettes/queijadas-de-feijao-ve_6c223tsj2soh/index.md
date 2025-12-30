@@ -16,6 +16,8 @@ ingredients:
     comment: ''
     allergens: []
     type: autres
+    pF: false
+    pS: false
   - uuid: 40wkon
     name: Pate feuilleté sans gluten et vegan
     originalQuantity: 2
@@ -25,6 +27,8 @@ ingredients:
     comment: ''
     allergens: []
     type: frais
+    pF: true
+    pS: false
   - uuid: sk1gbb
     name: Cannelle
     originalQuantity: 1
@@ -34,6 +38,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: 8j3hna
     name: Margarine végétale spécial cuisson
     originalQuantity: 35
@@ -43,6 +49,8 @@ ingredients:
     comment: ''
     allergens: []
     type: frais
+    pF: true
+    pS: false
   - uuid: tobtbt
     name: Citron non traité
     originalQuantity: 1
@@ -52,6 +60,8 @@ ingredients:
     comment: zeste
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: 8nbcjp
     name: Fécule de maïs (Maïzena)
     originalQuantity: 35
@@ -61,6 +71,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: chfwwq
     name: Crème soja
     originalQuantity: 40
@@ -71,6 +83,8 @@ ingredients:
     allergens:
       - Soja
     type: lof
+    pF: false
+    pS: false
   - uuid: gpeob7
     name: Lait de soja
     originalQuantity: 375
@@ -81,6 +95,8 @@ ingredients:
     allergens:
       - Soja
     type: lof
+    pF: false
+    pS: false
   - uuid: g6ngse
     name: Haricots blancs en conserve
     originalQuantity: 200
@@ -90,6 +106,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sec
+    pF: false
+    pS: false
   - uuid: u9z2he
     name: Sucre en poudre
     originalQuantity: 85
@@ -99,6 +117,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
 materiel:
   - Moule à muffin
 plate: 20
@@ -119,7 +139,7 @@ preparation: |-
   * Remplir les moules avec la crème obtenue.
   * Enfourner et cuire pendant 35min (la durée varie selon les fours) le flan est prêt lorsqu’il est très peu tremblotant, bien levé et que la surface est bien coloré (il va beaucoup gonfler durant la cuisson mais pas de panique c’est normal, il retombera à la sortie du four).
   * Lorsque les gâteaux sont cuits, les retirer, démouler et saupoudrer de sucre glace.
-publishDate: 2024-05-23T22:19:00.000Z
+publishDate: '2024-05-23T22:19:00+00:00'
 quantite_desc: 1 petit flan par personne
 regime:
   - sans-gluten
@@ -129,5 +149,8 @@ title: Queijadas de feijao végan et sans gluten
 typeR: dessert
 serveHot: false
 uuid: 6c223tsj2soh
-slug: queijadas-de-feijao-ve_6c223tsj2soh
+id: queijadas-de-feijao-ve_6c223tsj2soh
+createdAt: '2024-05-23T22:19:00+00:00'
+updatedAt: '2024-05-23T22:19:00+00:00'
+createdBy: Auré
 ---

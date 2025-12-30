@@ -22,6 +22,8 @@ ingredients:
     comment: ''
     allergens: []
     type: autres
+    pF: true
+    pS: false
   - uuid: rtavky
     name: Oignon
     originalQuantity: 25
@@ -31,6 +33,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: c4z22l
     name: Epinards surgelés
     originalQuantity: 8
@@ -40,6 +44,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: ''
     name: ''
     originalQuantity: 8
@@ -49,6 +55,8 @@ ingredients:
     comment: ''
     allergens: []
     type: ''
+    pF: false
+    pS: false
   - uuid: dbbjuu
     name: Lait entier
     originalQuantity: 5
@@ -59,6 +67,8 @@ ingredients:
     allergens:
       - Produit laitier
     type: lof
+    pF: false
+    pS: false
   - uuid: c70jxb
     name: huile de tournesol
     originalQuantity: 500
@@ -68,6 +78,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: 8nbcjp
     name: Fécule de maïs (Maïzena)
     originalQuantity: 500
@@ -77,6 +89,8 @@ ingredients:
     comment: la maïzena est pour la béchamel sans gluten
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: 2av6w8
     name: Farine de blé
     originalQuantity: 200
@@ -87,6 +101,8 @@ ingredients:
     allergens:
       - Gluten
     type: lof
+    pF: false
+    pS: false
   - uuid: eipcl2
     name: Margarine
     originalQuantity: 500
@@ -96,6 +112,8 @@ ingredients:
     comment: ''
     allergens: []
     type: frais
+    pF: true
+    pS: false
   - uuid: 3ahcls
     name: Tofu ferme
     originalQuantity: 1
@@ -105,6 +123,8 @@ ingredients:
     comment: ''
     allergens: []
     type: frais
+    pF: false
+    pS: false
   - uuid: q6t705
     name: Ricotta
     originalQuantity: 4.5
@@ -115,6 +135,8 @@ ingredients:
     allergens:
       - Produit laitier
     type: frais
+    pF: true
+    pS: false
   - uuid: tmk6ya
     name: Bouillon de légume (sans gluten)
     originalQuantity: 2
@@ -124,6 +146,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: msyocm
     name: Muscade
     originalQuantity: 50
@@ -133,6 +157,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
 preparation: |-
   La veille, penser à décongeler les épinards et les champignons dans des gastros à trous pour qu'ils puissent s'égoutter et les stocker en frigo.
 
@@ -151,8 +177,11 @@ preparation: |-
   Etape 4
 
   Passer les crêpes à la bilik pour cuire 1 face puis les garnir du mélange épinards etc... les rouler et les placer dans les gastros sur papier sulfurisé. Maintenir au four à 100° jusqu'au moment du service.
-publishDate: 2025-06-04T18:10:00.000Z
+publishDate: '2025-06-04T18:10:00+00:00'
 serveHot: true
 uuid: xtrjccmif4pp
-slug: crepes-de-sarrasin-ric_xtrjccmif4pp
+id: crepes-de-sarrasin-ric_xtrjccmif4pp
+createdAt: '2025-06-04T18:10:00+00:00'
+updatedAt: '2025-06-04T18:10:00+00:00'
+createdBy: frédo
 ---

@@ -1,6 +1,6 @@
 
 {
-  "slug": "tzatziki_rw6fjexd723i",
+  "id": "tzatziki_rw6fjexd723i",
   "title": "Tzatziki",
   "draft": false,
   "typeR": "entree",
@@ -16,11 +16,14 @@
   "quantite_desc": null,
   "check": true,
   "materiel": null,
-  "ingredients": [{"allergens":[],"comment":"","name":"Ail","normalizedQuantity":227.5,"normalizedUnit":"gr.","originalQuantity":35,"originalUnit":"gousse·s","type":"legumes","uuid":"u2m28w"},{"allergens":[],"comment":"","name":"Concombre","normalizedQuantity":7000,"normalizedUnit":"gr.","originalQuantity":7,"originalUnit":"kg","type":"legumes","uuid":"l5p1a5"},{"allergens":[],"comment":"","name":"Menthe","normalizedQuantity":12,"normalizedUnit":"bottes","originalQuantity":12,"originalUnit":"bottes","type":"epices","uuid":"2j9y2v"},{"allergens":["Produit laitier"],"comment":"","name":"Fromage blanc","normalizedQuantity":6000,"normalizedUnit":"gr.","originalQuantity":6,"originalUnit":"kg","type":"frais","uuid":"b2dxf8"},{"allergens":[],"comment":"","name":"huile d'olive","normalizedQuantity":2500,"normalizedUnit":"ml","originalQuantity":2.5,"originalUnit":"l.","type":"lof","uuid":"h3c8al"},{"allergens":[],"comment":"","name":"Jus de citron","normalizedQuantity":2500,"normalizedUnit":"ml","originalQuantity":2.5,"originalUnit":"l.","type":"sucres","uuid":"e4mjd1"}],
+  "ingredients": [{"allergens":[],"comment":"","name":"Ail","normalizedQuantity":227.5,"normalizedUnit":"gr.","originalQuantity":35,"originalUnit":"gousse·s","pF":true,"pS":false,"type":"legumes","uuid":"u2m28w"},{"allergens":[],"comment":"","name":"Concombre","normalizedQuantity":7000,"normalizedUnit":"gr.","originalQuantity":7,"originalUnit":"kg","pF":true,"pS":false,"type":"legumes","uuid":"l5p1a5"},{"allergens":[],"comment":"","name":"Menthe","normalizedQuantity":12,"normalizedUnit":"bottes","originalQuantity":12,"originalUnit":"bottes","pF":true,"pS":false,"type":"epices","uuid":"2j9y2v"},{"allergens":["Produit laitier"],"comment":"","name":"Fromage blanc","normalizedQuantity":6000,"normalizedUnit":"gr.","originalQuantity":6,"originalUnit":"kg","pF":true,"pS":false,"type":"frais","uuid":"b2dxf8"},{"allergens":[],"comment":"","name":"huile d'olive","normalizedQuantity":2500,"normalizedUnit":"ml","originalQuantity":2.5,"originalUnit":"l.","pF":false,"pS":false,"type":"lof","uuid":"h3c8al"},{"allergens":[],"comment":"","name":"Jus de citron","normalizedQuantity":2500,"normalizedUnit":"ml","originalQuantity":2.5,"originalUnit":"l.","pF":false,"pS":false,"type":"sucres","uuid":"e4mjd1"}],
   "preparation": "Couper très fin (cube) ou hacher gros les concombres, mettre dans une passoire 30 minutes avec du sel. Rincer, sécher, ajouter le reste avec herbes hâchées à la main.",
   "preparation24h": null,
   "astuces": null,
   "prepAlt": null,
   "permissionWrite": [],
-  "publishedAt": "2025-01-01T00:00:00Z"
+  "publishedAt": "2025-01-01T00:00:00Z",
+  "createdAt": "2024-06-20T15:11:00+00:00",
+  "updatedAt": "2024-06-20T15:11:00+00:00",
+  "createdBy": ""
 }

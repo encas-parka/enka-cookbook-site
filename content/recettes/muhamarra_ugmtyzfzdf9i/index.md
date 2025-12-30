@@ -27,6 +27,8 @@ ingredients:
     allergens:
       - Gluten
     type: autres
+    pF: false
+    pS: false
   - uuid: 86z19m
     name: Café moulu
     originalQuantity: 20
@@ -36,6 +38,8 @@ ingredients:
     comment: ''
     allergens: []
     type: autres
+    pF: false
+    pS: false
   - uuid: u33083
     name: Tahin
     originalQuantity: 250
@@ -46,6 +50,8 @@ ingredients:
     allergens:
       - Sésame
     type: autres
+    pF: false
+    pS: false
   - uuid: cl88ye
     name: Mélasse de grenade
     originalQuantity: 1
@@ -55,6 +61,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: fmc1dm
     name: Piment en poudre
     originalQuantity: 125
@@ -64,6 +72,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: 2juq3x
     name: Sel
     originalQuantity: 40
@@ -73,6 +83,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: he3u48
     name: Cumin moulu
     originalQuantity: 20
@@ -82,6 +94,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: bidsmu
     name: Paprika
     originalQuantity: 75
@@ -91,6 +105,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: 0zglpj
     name: Poivron (rouge)
     originalQuantity: 8
@@ -100,6 +116,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: h3c8al
     name: huile d'olive
     originalQuantity: 60
@@ -109,6 +127,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: usibcf
     name: Noix
     originalQuantity: 2.5
@@ -119,6 +139,8 @@ ingredients:
     allergens:
       - Fruit à coque
     type: sec
+    pF: false
+    pS: false
   - uuid: g0lph5
     name: Miel
     originalQuantity: 250
@@ -128,6 +150,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
 materiel:
   - Robot Mixeur
 preparation: |-
@@ -135,8 +159,11 @@ preparation: |-
   2. Mixer tous les ingrédients sauf les noix et un peu d'huile d'olive pour le service. Attention à laisser une part sans chapelure pour sans gluten.
   3. Concasser les noix grossièrement, après en avoir qq'unes de côté, les ajouter au melange.
   4. Transférer dans le plat de service, arroser un peu d'huile d'olives et décorer avec les noix restantes.
-publishDate: 2024-06-04T16:31:00.000Z
+publishDate: '2024-06-04T16:31:00+00:00'
 serveHot: false
 uuid: ugmtyzfzdf9i
-slug: muhamarra_ugmtyzfzdf9i
+id: muhamarra_ugmtyzfzdf9i
+createdAt: '2024-06-04T16:31:00+00:00'
+updatedAt: '2024-06-04T16:31:00+00:00'
+createdBy: ''
 ---

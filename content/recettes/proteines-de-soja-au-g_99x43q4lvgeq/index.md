@@ -16,6 +16,8 @@ ingredients:
     comment: ''
     allergens: []
     type: autres
+    pF: false
+    pS: false
   - uuid: u33083
     name: Tahin
     originalQuantity: 500
@@ -26,6 +28,8 @@ ingredients:
     allergens:
       - Sésame
     type: autres
+    pF: false
+    pS: false
   - uuid: fetrpe
     name: Coriandre fraîche
     originalQuantity: 2
@@ -35,6 +39,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: true
+    pS: false
   - uuid: mo4efz
     name: Sésame
     originalQuantity: 200
@@ -44,6 +50,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: bdx3gq
     name: Piment d'espelette
     originalQuantity: 20
@@ -53,6 +61,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: 93rauy
     name: Poivre de Sichuan
     originalQuantity: 40
@@ -62,6 +72,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: bbwo4n
     name: Tamari (sauce)
     originalQuantity: 1
@@ -72,6 +84,8 @@ ingredients:
     allergens:
       - Soja
     type: epices
+    pF: false
+    pS: false
   - uuid: cx8yxn
     name: Vinaigre de riz noir
     originalQuantity: 800
@@ -81,6 +95,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: rtavky
     name: Oignon
     originalQuantity: 8
@@ -90,6 +106,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: fazth1
     name: huile de sésame
     originalQuantity: 200
@@ -100,6 +118,8 @@ ingredients:
     allergens:
       - Sésame
     type: lof
+    pF: false
+    pS: false
   - uuid: w78ctq
     name: Protéines de soja (moyennes)
     originalQuantity: 1
@@ -109,6 +129,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sec
+    pF: false
+    pS: false
   - uuid: u9z2he
     name: Sucre en poudre
     originalQuantity: 100
@@ -118,6 +140,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
 plate: 40
 prepAlt:
   - recetteAlt: poulet-au-gout-insolite-guai-wei-ji_18c7udz6
@@ -133,7 +157,7 @@ preparation: |-
   Mélanger les chunks et les oignons avec la sauce.
 
   Au service, décorer de coriandre ciselée et de graines de sésame.
-publishDate: 2024-06-16T23:49:00.000Z
+publishDate: '2024-06-16T23:49:00+00:00'
 regime:
   - vegan
   - sans-gluten
@@ -142,5 +166,8 @@ title: Proteines de soja au goût insolite - version végan du poulet guai wei j
 typeR: plat
 serveHot: true
 uuid: 99x43q4lvgeq
-slug: proteines-de-soja-au-g_99x43q4lvgeq
+id: proteines-de-soja-au-g_99x43q4lvgeq
+createdAt: '2024-06-16T23:49:00+00:00'
+updatedAt: '2024-06-16T23:49:00+00:00'
+createdBy: Auré
 ---

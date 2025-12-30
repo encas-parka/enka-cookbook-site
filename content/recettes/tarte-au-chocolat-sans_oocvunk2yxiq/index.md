@@ -17,6 +17,8 @@ ingredients:
     allergens:
       - Soja
     type: lof
+    pF: false
+    pS: false
   - uuid: c70jxb
     name: huile de tournesol
     originalQuantity: 50
@@ -26,6 +28,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: 6bm4lq
     name: huile de coco
     originalQuantity: 75
@@ -35,6 +39,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: lm7zqh
     name: Glucose
     originalQuantity: 20
@@ -44,6 +50,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
   - uuid: 1e3zhq
     name: Chocolat noir patissier 70p100
     originalQuantity: 250
@@ -53,6 +61,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
   - uuid: hyp3th
     name: Cornflakes (sans gluten)
     originalQuantity: 150
@@ -62,6 +72,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
   - uuid: ade8hh
     name: Biscuit vegan et sans gluten
     originalQuantity: 200
@@ -71,6 +83,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
 materiel:
   - Gastro 1/1 (Normaux)
 plate: 12
@@ -83,7 +97,7 @@ preparation: |-
 
 
   * Laisser refroidir, placer au frigo. Pour démouler, poser le plat cinq seconde dans un bain marie.
-publishDate: 2024-06-18T11:58:00.000Z
+publishDate: '2024-06-18T11:58:00+00:00'
 regime:
   - vegetarien
   - vegan
@@ -94,5 +108,8 @@ title: Tarte au chocolat sans cuisson végan et sans gluten
 typeR: dessert
 serveHot: false
 uuid: oocvunk2yxiq
-slug: tarte-au-chocolat-sans_oocvunk2yxiq
+id: tarte-au-chocolat-sans_oocvunk2yxiq
+createdAt: '2024-06-18T11:58:00+00:00'
+updatedAt: '2024-06-18T11:58:00+00:00'
+createdBy: Ça vaulx le détour
 ---

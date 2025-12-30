@@ -17,6 +17,8 @@ ingredients:
     allergens:
       - Gluten
     type: lof
+    pF: false
+    pS: false
   - uuid: hgfa4e
     name: Persil frais
     originalQuantity: 1
@@ -26,6 +28,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: true
+    pS: false
   - uuid: hlbwfd
     name: Yaourt de soja
     originalQuantity: 1.6
@@ -36,6 +40,8 @@ ingredients:
     allergens:
       - Soja
     type: frais
+    pF: true
+    pS: false
   - uuid: m6gmgq
     name: Citron confit
     originalQuantity: 35
@@ -45,6 +51,8 @@ ingredients:
     comment: sauce
     allergens: []
     type: legumes
+    pF: false
+    pS: false
   - uuid: u2m28w
     name: Ail
     originalQuantity: 5
@@ -54,6 +62,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: rtavky
     name: Oignon
     originalQuantity: 2
@@ -63,6 +73,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: dkdml5
     name: Bette (blette)
     originalQuantity: 1
@@ -72,6 +84,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: 1ej217
     name: huile de friture
     originalQuantity: 1
@@ -81,6 +95,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: 8nbcjp
     name: Fécule de maïs (Maïzena)
     originalQuantity: 200
@@ -90,6 +106,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: o627mw
     name: Farine de pois chiche
     originalQuantity: 200
@@ -99,6 +117,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: vw9d1a
     name: Lait végétal (au choix)
     originalQuantity: 700
@@ -108,6 +128,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
 materiel:
   - Plat Paela
 plate: 20
@@ -129,7 +151,7 @@ preparation: |-
   * Hâcher finement le citron confit.
   * Mélanger tous les ingrédients. Saler et poivrer.
   * Goûter !!
-publishDate: 2024-05-21T15:00:00.000Z
+publishDate: '2024-05-21T15:00:00+00:00'
 regime:
   - vegan
   - vegetarien
@@ -140,5 +162,8 @@ title: Farçous aveyronnais (végan et sans gluten)
 typeR: plat
 serveHot: true
 uuid: qkg9uq40i7t0
-slug: farcous-aveyronnais-ve_qkg9uq40i7t0
+id: farcous-aveyronnais-ve_qkg9uq40i7t0
+createdAt: '2024-05-21T15:00:00+00:00'
+updatedAt: '2024-05-21T15:00:00+00:00'
+createdBy: ''
 ---

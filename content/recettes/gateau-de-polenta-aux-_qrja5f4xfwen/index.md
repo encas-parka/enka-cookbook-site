@@ -23,6 +23,8 @@ ingredients:
     allergens:
       - Produit laitier
     type: frais
+    pF: true
+    pS: false
   - uuid: mxub21
     name: Beurre demi-sel
     originalQuantity: 1
@@ -33,6 +35,8 @@ ingredients:
     allergens:
       - Produit laitier
     type: frais
+    pF: true
+    pS: false
   - uuid: 4stcxn
     name: Fruits divers
     originalQuantity: 2.8
@@ -42,6 +46,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: 4stcxn
     name: Fruits divers
     originalQuantity: 1.7
@@ -51,6 +57,8 @@ ingredients:
     comment: nappage
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: 1koje1
     name: Citron vert
     originalQuantity: 5
@@ -60,6 +68,8 @@ ingredients:
     comment: nappage
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: zf3zf8
     name: Oeuf
     originalQuantity: 20
@@ -70,6 +80,8 @@ ingredients:
     allergens:
       - Oeuf
     type: lof
+    pF: false
+    pS: false
   - uuid: 9xvfud
     name: Polenta fine
     originalQuantity: 1
@@ -79,6 +91,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sec
+    pF: false
+    pS: false
   - uuid: q7adw3
     name: Pistache émmondée
     originalQuantity: 400
@@ -88,6 +102,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sec
+    pF: false
+    pS: false
   - uuid: fuhtcw
     name: Amande
     originalQuantity: 1
@@ -98,6 +114,8 @@ ingredients:
     allergens:
       - Fruit à coque
     type: sec
+    pF: false
+    pS: false
   - uuid: g0lph5
     name: Miel
     originalQuantity: 260
@@ -107,6 +125,8 @@ ingredients:
     comment: nappage
     allergens: []
     type: sucres
+    pF: false
+    pS: false
   - uuid: u9z2he
     name: Sucre en poudre
     originalQuantity: 1.4
@@ -116,6 +136,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
 preparation: |-
   **Gâteau** : Éplucher les pêches ou les fruits, si nécessaire les plonger dans l'eau bouillante quelques minutes pour aider. Oter les noyaux, mixer en purée.
 
@@ -140,8 +162,11 @@ preparation: |-
   Faire légèrement torréfier les amandes/pistaches restantes.
 
    Au dernier moment : étaler le yaourt directement sur le gâteau, disposer des tranches de fruits, des pistaches concassées, le miel et le zeste des citrons restant sur le gâteau.
-publishDate: 2024-06-18T15:19:00.000Z
+publishDate: '2024-06-18T15:19:00+00:00'
 serveHot: false
 uuid: qrja5f4xfwen
-slug: gateau-de-polenta-aux-_qrja5f4xfwen
+id: gateau-de-polenta-aux-_qrja5f4xfwen
+createdAt: '2024-06-18T15:19:00+00:00'
+updatedAt: '2024-06-18T15:19:00+00:00'
+createdBy: ''
 ---

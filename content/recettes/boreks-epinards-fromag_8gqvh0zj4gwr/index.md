@@ -24,6 +24,8 @@ ingredients:
     allergens:
       - Sésame
     type: epices
+    pF: false
+    pS: false
   - uuid: 0d5y4q
     name: Fromage frais
     originalQuantity: 700
@@ -34,6 +36,8 @@ ingredients:
     allergens:
       - Produit laitier
     type: frais
+    pF: true
+    pS: false
   - uuid: u2m28w
     name: Ail
     originalQuantity: 5
@@ -43,6 +47,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: rtavky
     name: Oignon
     originalQuantity: 500
@@ -52,6 +58,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: 4totf1
     name: Epinard
     originalQuantity: 1
@@ -61,6 +69,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: c70jxb
     name: huile de tournesol
     originalQuantity: 200
@@ -70,6 +80,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: dbbjuu
     name: Lait entier
     originalQuantity: 0.33
@@ -80,6 +92,8 @@ ingredients:
     allergens:
       - Produit laitier
     type: lof
+    pF: false
+    pS: false
   - uuid: x6je0g
     name: Pate filo (1 feuille)
     originalQuantity: 15
@@ -90,6 +104,8 @@ ingredients:
     allergens:
       - Gluten
     type: autres
+    pF: true
+    pS: false
 materiel:
   - Gastro 1/1 (Normaux)
   - Four
@@ -102,11 +118,14 @@ preparation: |-
   Au four à 200 jusqu'à ce que tout soit doré, genre 30mn
 prepAlt:
   - recetteAlt: Boreks épinards vegan
-publishDate: 2024-06-12T12:24:00.000Z
+publishDate: '2024-06-12T12:24:00+00:00'
 checkAlwaysOk: true
 regime:
   - vegetarien
 serveHot: true
 uuid: 8gqvh0zj4gwr
-slug: boreks-epinards-fromag_8gqvh0zj4gwr
+id: boreks-epinards-fromag_8gqvh0zj4gwr
+createdAt: '2024-06-12T12:24:00+00:00'
+updatedAt: '2024-06-12T12:24:00+00:00'
+createdBy: ''
 ---

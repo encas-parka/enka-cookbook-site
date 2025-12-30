@@ -23,6 +23,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sec
+    pF: false
+    pS: false
   - uuid: rtavky
     name: Oignon
     originalQuantity: 10
@@ -32,6 +34,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: u2m28w
     name: Ail
     originalQuantity: 10
@@ -41,6 +45,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: 92zzps
     name: Champignon de Paris
     originalQuantity: 9
@@ -50,6 +56,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: c70jxb
     name: huile de tournesol
     originalQuantity: 1
@@ -59,6 +67,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: rgt7s4
     name: Poivre noir moulu
     originalQuantity: 1
@@ -68,6 +78,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: 2juq3x
     name: Sel
     originalQuantity: 1
@@ -77,6 +89,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: hgfa4e
     name: Persil frais
     originalQuantity: 10
@@ -86,6 +100,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: true
+    pS: false
   - uuid: 4be4ic
     name: Levure de bière
     originalQuantity: 300
@@ -95,6 +111,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: lny16c
     name: sucre blanc
     originalQuantity: 400
@@ -104,6 +122,8 @@ ingredients:
     comment: Quantité approximative
     allergens: []
     type: sucres
+    pF: false
+    pS: false
 preparation: |-
   Pour le risotto:
 
@@ -126,8 +146,11 @@ preparation: |-
   Pour le Parmesan Vegan:
 
   Mélanger la poudre d'amande la levure maltée et du sel au goût (ça doit être bien salé)
-publishDate: 2025-05-05T12:41:00.000Z
+publishDate: '2025-05-05T12:41:00+00:00'
 serveHot: true
 uuid: 0ay8dp7smyrw
-slug: risotto-sarrasin-torre_0ay8dp7smyrw
+id: risotto-sarrasin-torre_0ay8dp7smyrw
+createdAt: '2025-05-05T12:41:00+00:00'
+updatedAt: '2025-05-05T12:41:00+00:00'
+createdBy: ''
 ---

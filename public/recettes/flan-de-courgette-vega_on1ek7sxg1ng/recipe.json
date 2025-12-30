@@ -1,6 +1,6 @@
 
 {
-  "slug": "flan-de-courgette-vega_on1ek7sxg1ng",
+  "id": "flan-de-courgette-vega_on1ek7sxg1ng",
   "title": "Flan De Courgette Vegan",
   "draft": false,
   "typeR": "entree",
@@ -16,11 +16,14 @@
   "quantite_desc": "",
   "check": true,
   "materiel": null,
-  "ingredients": [{"allergens":[],"comment":"","name":"Oignon","normalizedQuantity":1000,"normalizedUnit":"gr.","originalQuantity":1,"originalUnit":"kg","type":"legumes","uuid":"rtavky"},{"allergens":[],"comment":"","name":"Courgette","normalizedQuantity":3000,"normalizedUnit":"gr.","originalQuantity":3,"originalUnit":"kg","type":"legumes","uuid":"9zozfk"},{"allergens":[],"comment":"","name":"huile d'olive","normalizedQuantity":20,"normalizedUnit":"ml","originalQuantity":20,"originalUnit":"ml","type":"lof","uuid":"h3c8al"},{"allergens":["Soja"],"comment":"","name":"Crème soja","normalizedQuantity":750,"normalizedUnit":"ml","originalQuantity":750,"originalUnit":"ml","type":"lof","uuid":"chfwwq"},{"allergens":[],"comment":"","name":"Fécule de maïs (Maïzena)","normalizedQuantity":75,"normalizedUnit":"gr.","originalQuantity":75,"originalUnit":"gr.","type":"lof","uuid":"8nbcjp"},{"allergens":[],"comment":"","name":"Basilic","normalizedQuantity":2,"normalizedUnit":"bottes","originalQuantity":2,"originalUnit":"bottes","type":"epices","uuid":"s8j4ff"},{"allergens":[],"comment":"","name":"Levure de bière","normalizedQuantity":40,"normalizedUnit":"gr.","originalQuantity":40,"originalUnit":"gr.","type":"lof","uuid":"4be4ic"}],
+  "ingredients": [{"allergens":[],"comment":"","name":"Oignon","normalizedQuantity":1000,"normalizedUnit":"gr.","originalQuantity":1,"originalUnit":"kg","pF":true,"pS":false,"type":"legumes","uuid":"rtavky"},{"allergens":[],"comment":"","name":"Courgette","normalizedQuantity":3000,"normalizedUnit":"gr.","originalQuantity":3,"originalUnit":"kg","pF":true,"pS":false,"type":"legumes","uuid":"9zozfk"},{"allergens":[],"comment":"","name":"huile d'olive","normalizedQuantity":20,"normalizedUnit":"ml","originalQuantity":20,"originalUnit":"ml","pF":false,"pS":false,"type":"lof","uuid":"h3c8al"},{"allergens":["Soja"],"comment":"","name":"Crème soja","normalizedQuantity":750,"normalizedUnit":"ml","originalQuantity":750,"originalUnit":"ml","pF":false,"pS":false,"type":"lof","uuid":"chfwwq"},{"allergens":[],"comment":"","name":"Fécule de maïs (Maïzena)","normalizedQuantity":75,"normalizedUnit":"gr.","originalQuantity":75,"originalUnit":"gr.","pF":false,"pS":false,"type":"lof","uuid":"8nbcjp"},{"allergens":[],"comment":"","name":"Basilic","normalizedQuantity":2,"normalizedUnit":"bottes","originalQuantity":2,"originalUnit":"bottes","pF":true,"pS":false,"type":"epices","uuid":"s8j4ff"},{"allergens":[],"comment":"","name":"Levure de bière","normalizedQuantity":40,"normalizedUnit":"gr.","originalQuantity":40,"originalUnit":"gr.","pF":false,"pS":false,"type":"lof","uuid":"4be4ic"}],
   "preparation": "râper les courgettes, émincer les oignons et faire cuire pendant 15mn, réserver dans un saladier\n\nrajouter tous les autres ingrédients\n\nremplir les ramequins au 3/4 car ça gonfle\n\nmettre au four préchauffé à 180° avec un bol d'eau pendant 35mn\n\nsi démoulé alors il faut bien attendre que cela refroidisse",
   "preparation24h": null,
   "astuces": null,
   "prepAlt": null,
   "permissionWrite": [],
-  "publishedAt": "2025-01-01T00:00:00Z"
+  "publishedAt": "2025-01-01T00:00:00Z",
+  "createdAt": "2025-06-15T15:19:00+00:00",
+  "updatedAt": "2025-06-15T15:19:00+00:00",
+  "createdBy": ""
 }

@@ -22,6 +22,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: h3c8al
     name: huile d'olive
     originalQuantity: 1
@@ -31,6 +33,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: e4mjd1
     name: Jus de citron
     originalQuantity: 0.4
@@ -40,6 +44,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
   - uuid: u33083
     name: Tahin
     originalQuantity: 400
@@ -50,6 +56,8 @@ ingredients:
     allergens:
       - Sésame
     type: autres
+    pF: false
+    pS: false
   - uuid: 2pps90
     name: Poivre
     originalQuantity: 1
@@ -59,6 +67,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: 2juq3x
     name: Sel
     originalQuantity: 1
@@ -68,6 +78,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
 materiel:
   - Bruleur
   - Plat Paela
@@ -78,7 +90,7 @@ preparation: |-
   * Enlever la peau. Et rincer la chair à l'eau pour nettoyer les petits bouts de cramé.
   * Mixer tous les ingrédients dans un gros gastro. Attention de ne pas mettre trop de citron. Rectifier l'assaisonnement. Servir froid.
 preparation24h: ''
-publishDate: 2023-06-25T13:04:00.526Z
+publishDate: '2023-06-25T13:04:00.526000+00:00'
 regime:
   - vegan
   - vegetarien
@@ -86,5 +98,8 @@ regime:
   - sans-lactose
 serveHot: false
 uuid: hipqpgnlh7ri
-slug: caviar-daubergines-fum_hipqpgnlh7ri
+id: caviar-daubergines-fum_hipqpgnlh7ri
+createdAt: '2023-06-25T13:04:00.526000+00:00'
+updatedAt: '2023-06-25T13:04:00.526000+00:00'
+createdBy: Auré
 ---

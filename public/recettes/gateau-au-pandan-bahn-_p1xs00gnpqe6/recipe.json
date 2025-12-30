@@ -1,6 +1,6 @@
 
 {
-  "slug": "gateau-au-pandan-bahn-_p1xs00gnpqe6",
+  "id": "gateau-au-pandan-bahn-_p1xs00gnpqe6",
   "title": "Gateau Au Pandan Bahn Bo Nuong",
   "draft": false,
   "typeR": "dessert",
@@ -16,11 +16,14 @@
   "quantite_desc": null,
   "check": true,
   "materiel": null,
-  "ingredients": [{"allergens":[],"comment":"","name":"Levure chimique sans gluten","normalizedQuantity":122,"normalizedUnit":"gr.","originalQuantity":122,"originalUnit":"gr.","type":"lof","uuid":"zb9tj8"},{"allergens":["Oeuf"],"comment":"","name":"Oeuf","normalizedQuantity":66,"normalizedUnit":"unité","originalQuantity":66,"originalUnit":"unité","type":"lof","uuid":"zf3zf8"},{"allergens":[],"comment":"","name":"Farine de tapioca","normalizedQuantity":2200,"normalizedUnit":"gr.","originalQuantity":2.2,"originalUnit":"kg","type":"lof","uuid":"v212im"},{"allergens":[],"comment":"","name":"Farine de riz blanche","normalizedQuantity":450,"normalizedUnit":"gr.","originalQuantity":450,"originalUnit":"gr.","type":"lof","uuid":"1nb85u"},{"allergens":[],"comment":"","name":"lait de coco","normalizedQuantity":4450,"normalizedUnit":"ml","originalQuantity":4.45,"originalUnit":"l.","type":"lof","uuid":"xdy736"},{"allergens":[],"comment":"","name":"Sel","normalizedQuantity":10,"normalizedUnit":"gr.","originalQuantity":10,"originalUnit":"gr.","type":"epices","uuid":"2juq3x"},{"allergens":[],"comment":"","name":"Pandan (extrait de)","normalizedQuantity":50,"normalizedUnit":"ml","originalQuantity":50,"originalUnit":"ml","type":"epices","uuid":"krizq0"}],
+  "ingredients": [{"allergens":[],"comment":"","name":"Levure chimique sans gluten","normalizedQuantity":122,"normalizedUnit":"gr.","originalQuantity":122,"originalUnit":"gr.","pF":false,"pS":false,"type":"lof","uuid":"zb9tj8"},{"allergens":["Oeuf"],"comment":"","name":"Oeuf","normalizedQuantity":66,"normalizedUnit":"unité","originalQuantity":66,"originalUnit":"unité","pF":false,"pS":false,"type":"lof","uuid":"zf3zf8"},{"allergens":[],"comment":"","name":"Farine de tapioca","normalizedQuantity":2200,"normalizedUnit":"gr.","originalQuantity":2.2,"originalUnit":"kg","pF":false,"pS":false,"type":"lof","uuid":"v212im"},{"allergens":[],"comment":"","name":"Farine de riz blanche","normalizedQuantity":450,"normalizedUnit":"gr.","originalQuantity":450,"originalUnit":"gr.","pF":false,"pS":false,"type":"lof","uuid":"1nb85u"},{"allergens":[],"comment":"","name":"lait de coco","normalizedQuantity":4450,"normalizedUnit":"ml","originalQuantity":4.45,"originalUnit":"l.","pF":false,"pS":false,"type":"lof","uuid":"xdy736"},{"allergens":[],"comment":"","name":"Sel","normalizedQuantity":10,"normalizedUnit":"gr.","originalQuantity":10,"originalUnit":"gr.","pF":false,"pS":false,"type":"epices","uuid":"2juq3x"},{"allergens":[],"comment":"","name":"Pandan (extrait de)","normalizedQuantity":50,"normalizedUnit":"ml","originalQuantity":50,"originalUnit":"ml","pF":false,"pS":false,"type":"epices","uuid":"krizq0"}],
   "preparation": "\n\n* Faire chauffer le lait de coco dans une casserole à feu doux sans le faire bouillir, ajouter le sucre et remuer jusqu'à dissolution de celui-ci. Couper le feu.\n* Mélanger l'extrait de pandan au lait de coco sucré.\n* Mélanger la farine de riz à la fécule de tapioca, ajouter la levure, le sel et réserver.\n* Casser les œufs dans un saladier et les battre délicatement en prenant soin de ne pas incorporer d'air. Ajouter ensuite le mélange liquide (lait de coco - sucre - pandan) toujours délicatement et sans incorporer d'air, puis ensuite ajouter le mélange de farine petit à petit (ne pas faire attention aux grumeaux).\n* Préchauffer le four à 180°, huiler les moules à gâteaux et l'enfourner 5 minutes.\n* Verser ensuite le mélange en le filtrant dans une passoire et enfourner pour 45 minutes de cuisson.\n* **Ne pas ouvrir le four durant cette période.**\n* Vérifier ensuite la cuisson à l'aide d'un couteau s'il ressort sec, le gâteau est cuit.\n* Il n'y a plus qu'à le sortir et le laisser reposer une dizaine de minutes avant de le démouler.",
   "preparation24h": null,
   "astuces": null,
   "prepAlt": null,
   "permissionWrite": [],
-  "publishedAt": "2025-01-01T00:00:00Z"
+  "publishedAt": "2025-01-01T00:00:00Z",
+  "createdAt": "2024-05-18T15:58:00+00:00",
+  "updatedAt": "2024-05-18T15:58:00+00:00",
+  "createdBy": ""
 }

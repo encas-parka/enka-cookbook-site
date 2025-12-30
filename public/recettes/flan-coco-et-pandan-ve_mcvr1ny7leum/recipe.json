@@ -1,6 +1,6 @@
 
 {
-  "slug": "flan-coco-et-pandan-ve_mcvr1ny7leum",
+  "id": "flan-coco-et-pandan-ve_mcvr1ny7leum",
   "title": "Flan Coco Et Pandan (Végan)",
   "draft": false,
   "typeR": "dessert",
@@ -16,11 +16,14 @@
   "quantite_desc": "Pour 20 ramequins",
   "check": true,
   "materiel": null,
-  "ingredients": [{"allergens":[],"comment":"","name":"Fécule de maïs (Maïzena)","normalizedQuantity":130,"normalizedUnit":"gr.","originalQuantity":130,"originalUnit":"gr.","type":"lof","uuid":"8nbcjp"},{"allergens":[],"comment":"","name":"lait de coco","normalizedQuantity":1500,"normalizedUnit":"ml","originalQuantity":1.5,"originalUnit":"l.","type":"lof","uuid":"xdy736"},{"allergens":[],"comment":"","name":"Lait végétal (au choix)","normalizedQuantity":1200,"normalizedUnit":"ml","originalQuantity":1.2,"originalUnit":"l.","type":"lof","uuid":"vw9d1a"},{"allergens":[],"comment":"","name":"Agar-agar","normalizedQuantity":10,"normalizedUnit":"gr.","originalQuantity":10,"originalUnit":"gr.","type":"autres","uuid":"ruhtax"},{"allergens":[],"comment":"","name":"Sel","normalizedQuantity":5,"normalizedUnit":"gr.","originalQuantity":1,"originalUnit":"c. à café","type":"epices","uuid":"2juq3x"},{"allergens":[],"comment":"","name":"Pandan (extrait de)","normalizedQuantity":15,"normalizedUnit":"ml","originalQuantity":1,"originalUnit":"c. à soupe","type":"epices","uuid":"krizq0"},{"allergens":[],"comment":"","name":"Sucre en poudre","normalizedQuantity":400,"normalizedUnit":"gr.","originalQuantity":400,"originalUnit":"gr.","type":"sucres","uuid":"u9z2he"}],
+  "ingredients": [{"allergens":[],"comment":"","name":"Fécule de maïs (Maïzena)","normalizedQuantity":130,"normalizedUnit":"gr.","originalQuantity":130,"originalUnit":"gr.","pF":false,"pS":false,"type":"lof","uuid":"8nbcjp"},{"allergens":[],"comment":"","name":"lait de coco","normalizedQuantity":1500,"normalizedUnit":"ml","originalQuantity":1.5,"originalUnit":"l.","pF":false,"pS":false,"type":"lof","uuid":"xdy736"},{"allergens":[],"comment":"","name":"Lait végétal (au choix)","normalizedQuantity":1200,"normalizedUnit":"ml","originalQuantity":1.2,"originalUnit":"l.","pF":false,"pS":false,"type":"lof","uuid":"vw9d1a"},{"allergens":[],"comment":"","name":"Agar-agar","normalizedQuantity":10,"normalizedUnit":"gr.","originalQuantity":10,"originalUnit":"gr.","pF":false,"pS":false,"type":"autres","uuid":"ruhtax"},{"allergens":[],"comment":"","name":"Sel","normalizedQuantity":5,"normalizedUnit":"gr.","originalQuantity":1,"originalUnit":"c. à café","pF":false,"pS":false,"type":"epices","uuid":"2juq3x"},{"allergens":[],"comment":"","name":"Pandan (extrait de)","normalizedQuantity":15,"normalizedUnit":"ml","originalQuantity":1,"originalUnit":"c. à soupe","pF":false,"pS":false,"type":"epices","uuid":"krizq0"},{"allergens":[],"comment":"","name":"Sucre en poudre","normalizedQuantity":400,"normalizedUnit":"gr.","originalQuantity":400,"originalUnit":"gr.","pF":false,"pS":false,"type":"sucres","uuid":"u9z2he"}],
   "preparation": "* Dans une casserole, mélanger les laits végétal et de coco, le sucre, la fécule de maïs, l'agar agar, le pandan et le sel. Fouetter jusqu'à ce que le mélange soit homogène.\n* Faire chauffer à feu moyen jusqu'à ce que le mélange commence à bouillir et à épaissir.\n* Laisser bouillir 2min afin que l'agar agar fasse effet.\n* Répartir dans les ramequins et laisser refroidir avant de réserver au frigo au moins deux heures.",
   "preparation24h": null,
   "astuces": null,
   "prepAlt": null,
   "permissionWrite": [],
-  "publishedAt": "2025-01-01T00:00:00Z"
+  "publishedAt": "2025-01-01T00:00:00Z",
+  "createdAt": "2024-05-18T14:14:00+00:00",
+  "updatedAt": "2024-05-18T14:14:00+00:00",
+  "createdBy": ""
 }

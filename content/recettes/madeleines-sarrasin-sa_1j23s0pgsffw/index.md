@@ -17,6 +17,8 @@ ingredients:
     allergens:
       - Alcool
     type: epices
+    pF: false
+    pS: false
   - uuid: crbm3g
     name: Sauge
     originalQuantity: 140
@@ -26,6 +28,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: tjrhvg
     name: Fleur de sel
     originalQuantity: 4
@@ -35,6 +39,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: hlbwfd
     name: Yaourt de soja
     originalQuantity: 700
@@ -45,6 +51,8 @@ ingredients:
     allergens:
       - Soja
     type: frais
+    pF: true
+    pS: false
   - uuid: u2m28w
     name: Ail
     originalQuantity: 80
@@ -54,6 +62,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: vf8140
     name: Bicarbonate alimentaire
     originalQuantity: 10
@@ -63,6 +73,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: c70jxb
     name: huile de tournesol
     originalQuantity: 940
@@ -72,6 +84,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: vw9d1a
     name: Lait végétal (au choix)
     originalQuantity: 1.46
@@ -81,6 +95,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: zb9tj8
     name: Levure chimique sans gluten
     originalQuantity: 140
@@ -90,6 +106,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: 2ej7fi
     name: Farine de blé noir (sarrasin)
     originalQuantity: 1600
@@ -99,6 +117,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: ut0l0k
     name: Noisette
     originalQuantity: 320
@@ -109,6 +129,8 @@ ingredients:
     allergens:
       - Fruit à coque
     type: sec
+    pF: false
+    pS: false
   - uuid: 0g08xt
     name: Poudre de noisettes
     originalQuantity: 320
@@ -119,6 +141,8 @@ ingredients:
     allergens:
       - Fruit à coque
     type: sucres
+    pF: false
+    pS: false
 materiel:
   - Four
 plate: 100
@@ -144,5 +168,8 @@ title: Madeleines sarrasin sauge noisette
 typeR: entree
 serveHot: false
 uuid: 1j23s0pgsffw
-slug: madeleines-sarrasin-sa_1j23s0pgsffw
+id: madeleines-sarrasin-sa_1j23s0pgsffw
+createdAt: '2024-05-27T18:45:00.000Z'
+updatedAt: '2024-05-27T18:45:00.000Z'
+createdBy: ''
 ---

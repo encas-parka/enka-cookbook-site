@@ -17,6 +17,8 @@ ingredients:
     allergens:
       - Viande
     type: animaux
+    pF: true
+    pS: false
   - uuid: ljzb7j
     name: Eau
     originalQuantity: 30
@@ -26,6 +28,8 @@ ingredients:
     comment: ''
     allergens: []
     type: autres
+    pF: false
+    pS: false
   - uuid: 0p7ynz
     name: Piment doux
     originalQuantity: 35
@@ -35,6 +39,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: bidsmu
     name: Paprika
     originalQuantity: 75
@@ -44,6 +50,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: alwx6o
     name: Gingembre en poudre
     originalQuantity: 75
@@ -53,6 +61,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: j40pyf
     name: Ras el hanout
     originalQuantity: 350
@@ -63,6 +73,8 @@ ingredients:
     allergens:
       - Moutarde
     type: epices
+    pF: false
+    pS: false
   - uuid: 2j9y2v
     name: Menthe
     originalQuantity: 5
@@ -72,6 +84,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: true
+    pS: false
   - uuid: fetrpe
     name: Coriandre fraîche
     originalQuantity: 8
@@ -81,6 +95,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: true
+    pS: false
   - uuid: mck2wl
     name: Concentré de tomate
     originalQuantity: 1.5
@@ -90,6 +106,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: 09bywc
     name: Coulis de tomates
     originalQuantity: 10
@@ -99,6 +117,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: 9zozfk
     name: Courgette
     originalQuantity: 3
@@ -108,6 +128,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: 78fo97
     name: Céleri branche
     originalQuantity: 1
@@ -118,6 +140,8 @@ ingredients:
     allergens:
       - Céleri
     type: legumes
+    pF: true
+    pS: false
   - uuid: eouu0v
     name: Carotte
     originalQuantity: 5
@@ -127,6 +151,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: rtavky
     name: Oignon
     originalQuantity: 5
@@ -136,6 +162,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: h3c8al
     name: huile d'olive
     originalQuantity: 1
@@ -145,6 +173,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: hlx995
     name: Pâtes - langue d'oiseau
     originalQuantity: 2
@@ -155,6 +185,8 @@ ingredients:
     allergens:
       - Gluten
     type: sec
+    pF: false
+    pS: false
   - uuid: 6a8w8k
     name: Pois chiches
     originalQuantity: 2.5
@@ -164,6 +196,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sec
+    pF: false
+    pS: false
 plate: 100
 preparation: |-
   Eplucher et émincer les carottes et les courgettes. Emincer les branches de céleri. Mettre le tout dans un saladier. Réserver.
@@ -182,7 +216,7 @@ preparation: |-
 
   Un peu avant le service, ajouter les langues d'oiseaux. Laisser cuire quelques minutes à frémissement. Servir.
 preparation24h: Faire tremper les pois chiche la veille.
-publishDate: 2024-06-14T21:09:00.000Z
+publishDate: '2024-06-14T21:09:00+00:00'
 quantite_desc: un bol d'environ 600ml par personne
 regime:
   - sans-lactose
@@ -191,5 +225,8 @@ title: Chorba  agneau et langue d'oiseaux
 typeR: plat
 serveHot: true
 uuid: duj2ar8i9twp
-slug: chorba-agneau-et-langu_duj2ar8i9twp
+id: chorba-agneau-et-langu_duj2ar8i9twp
+createdAt: '2024-06-14T21:09:00+00:00'
+updatedAt: '2024-06-14T21:09:00+00:00'
+createdBy: Résistances 2024
 ---

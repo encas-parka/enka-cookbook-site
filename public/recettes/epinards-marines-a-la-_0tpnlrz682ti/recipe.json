@@ -1,6 +1,6 @@
 
 {
-  "slug": "epinards-marines-a-la-_0tpnlrz682ti",
+  "id": "epinards-marines-a-la-_0tpnlrz682ti",
   "title": "Épinards Marinés À La Coréenne - Sigeumchi Namul",
   "draft": false,
   "typeR": "entree",
@@ -16,11 +16,14 @@
   "quantite_desc": "",
   "check": true,
   "materiel": ["Bruleur"],
-  "ingredients": [{"allergens":[],"comment":"","name":"Poivre","normalizedQuantity":5,"normalizedUnit":"ml","originalQuantity":1,"originalUnit":"c. à café","type":"epices","uuid":"2pps90"},{"allergens":[],"comment":"","name":"Sésame","normalizedQuantity":45,"normalizedUnit":"ml","originalQuantity":3,"originalUnit":"c. à soupe","type":"epices","uuid":"mo4efz"},{"allergens":["Sésame"],"comment":"","name":"huile de sésame","normalizedQuantity":30,"normalizedUnit":"ml","originalQuantity":30,"originalUnit":"ml","type":"lof","uuid":"fazth1"},{"allergens":[],"comment":"","name":"sucre blanc","normalizedQuantity":25,"normalizedUnit":"gr.","originalQuantity":5,"originalUnit":"c. à café","type":"sucres","uuid":"lny16c"},{"allergens":[],"comment":"","name":"Gousse d'ail","normalizedQuantity":3,"normalizedUnit":"unité","originalQuantity":3,"originalUnit":"unité","type":"epices","uuid":"v1kli8"},{"allergens":["Soja"],"comment":"","name":"Sauce soja","normalizedQuantity":75,"normalizedUnit":"ml","originalQuantity":75,"originalUnit":"ml","type":"epices","uuid":"jjrwlj"},{"allergens":[],"comment":"","name":"échalote","normalizedQuantity":30,"normalizedUnit":"gr.","originalQuantity":1,"originalUnit":"unité","type":"legumes","uuid":"owsv5m"},{"allergens":[],"comment":"","name":"Epinard","normalizedQuantity":2000,"normalizedUnit":"gr.","originalQuantity":2,"originalUnit":"kg","type":"legumes","uuid":"4totf1"}],
+  "ingredients": [{"allergens":[],"comment":"","name":"Poivre","normalizedQuantity":5,"normalizedUnit":"ml","originalQuantity":1,"originalUnit":"c. à café","pF":false,"pS":false,"type":"epices","uuid":"2pps90"},{"allergens":[],"comment":"","name":"Sésame","normalizedQuantity":45,"normalizedUnit":"ml","originalQuantity":3,"originalUnit":"c. à soupe","pF":false,"pS":false,"type":"epices","uuid":"mo4efz"},{"allergens":["Sésame"],"comment":"","name":"huile de sésame","normalizedQuantity":30,"normalizedUnit":"ml","originalQuantity":30,"originalUnit":"ml","pF":false,"pS":false,"type":"lof","uuid":"fazth1"},{"allergens":[],"comment":"","name":"sucre blanc","normalizedQuantity":25,"normalizedUnit":"gr.","originalQuantity":5,"originalUnit":"c. à café","pF":false,"pS":false,"type":"sucres","uuid":"lny16c"},{"allergens":[],"comment":"","name":"Gousse d'ail","normalizedQuantity":3,"normalizedUnit":"unité","originalQuantity":3,"originalUnit":"unité","pF":false,"pS":false,"type":"epices","uuid":"v1kli8"},{"allergens":["Soja"],"comment":"","name":"Sauce soja","normalizedQuantity":75,"normalizedUnit":"ml","originalQuantity":75,"originalUnit":"ml","pF":false,"pS":false,"type":"epices","uuid":"jjrwlj"},{"allergens":[],"comment":"","name":"échalote","normalizedQuantity":30,"normalizedUnit":"gr.","originalQuantity":1,"originalUnit":"unité","pF":true,"pS":false,"type":"legumes","uuid":"owsv5m"},{"allergens":[],"comment":"","name":"Epinard","normalizedQuantity":2000,"normalizedUnit":"gr.","originalQuantity":2,"originalUnit":"kg","pF":true,"pS":false,"type":"legumes","uuid":"4totf1"}],
   "preparation": "Couper les racines des épinards. Les laver puis les blanchir dans de l'eau bouillante jusqu'à ce qu'ils flétrissent (30 secondes - 1 minute selon la quantité d'eau et d'épinard)\n\nEnlever les épinards vite et les mettre dans de l'eau glacée (préparée à l'avance) pour arrêter la cuisson.\n\nÉgoutter et enlever doucement l'excès d'eau. Couper en tronçons de 5cm.\n\nAjouter le reste des ingrédients (= la marinade) et tout bien mélanger à la main.\n\nAttendre au moins 10 min avant de servir.",
   "preparation24h": "",
   "astuces": [],
   "prepAlt": [],
   "permissionWrite": [],
-  "publishedAt": "2025-01-01T00:00:00Z"
+  "publishedAt": "2025-01-01T00:00:00Z",
+  "createdAt": "2025-09-01T08:08:00+00:00",
+  "updatedAt": "2025-09-01T08:08:00+00:00",
+  "createdBy": ""
 }

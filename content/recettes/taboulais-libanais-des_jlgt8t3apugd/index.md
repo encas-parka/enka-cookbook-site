@@ -27,6 +27,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: ibtbnq
     name: Tomate
     originalQuantity: 1.2
@@ -36,6 +38,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: h3c8al
     name: huile d'olive
     originalQuantity: 250
@@ -45,6 +49,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: csxn1a
     name: Quinoa blanc
     originalQuantity: 150
@@ -54,6 +60,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sec
+    pF: false
+    pS: false
   - uuid: 2pps90
     name: Poivre
     originalQuantity: 1
@@ -63,6 +71,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: 2juq3x
     name: Sel
     originalQuantity: 1
@@ -72,6 +82,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: 2j9y2v
     name: Menthe
     originalQuantity: 4
@@ -81,6 +93,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: true
+    pS: false
   - uuid: hgfa4e
     name: Persil frais
     originalQuantity: 9
@@ -90,6 +104,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: true
+    pS: false
   - uuid: e4mjd1
     name: Jus de citron
     originalQuantity: 150
@@ -99,6 +115,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
 preparation: |-
   * Précuire le quinoa ou le millet dans l'eau bouillante.
   * Lavez le persil et hachez le finement.
@@ -110,8 +128,11 @@ preparation: |-
   * **NE PAS MELANGER et laisser au réfrigérateur au moins une heure.**
   * Avant de servir, versez l'huile d'olive, salez, poivrez et mélangez.
 astuces: []
-publishDate: 2024-05-18T16:14:00.000Z
+publishDate: '2024-05-18T16:14:00+00:00'
 serveHot: false
 uuid: jlgt8t3apugd
-slug: taboulais-libanais-des_jlgt8t3apugd
+id: taboulais-libanais-des_jlgt8t3apugd
+createdAt: '2024-05-18T16:14:00+00:00'
+updatedAt: '2024-05-18T16:14:00+00:00'
+createdBy: ''
 ---

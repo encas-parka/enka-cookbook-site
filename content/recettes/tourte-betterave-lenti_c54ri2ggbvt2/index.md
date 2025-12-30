@@ -15,6 +15,8 @@ ingredients:
     comment: ''
     allergens: []
     type: frais
+    pF: true
+    pS: false
   - uuid: 2pps90
     name: Poivre
     originalQuantity: 1
@@ -24,6 +26,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: 2juq3x
     name: Sel
     originalQuantity: 1
@@ -33,6 +37,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: yi8qce
     name: Raifort en poudre
     originalQuantity: 3
@@ -42,6 +48,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: j84olg
     name: Feuille de laurier
     originalQuantity: 1
@@ -51,6 +59,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: cgk776
     name: Estragon séché
     originalQuantity: 3
@@ -60,6 +70,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: rtavky
     name: Oignon
     originalQuantity: 2
@@ -69,6 +81,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: i7psri
     name: Betterave cuite
     originalQuantity: 1.2
@@ -78,6 +92,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: false
+    pS: false
   - uuid: ogtomg
     name: Lentilles vertes
     originalQuantity: 300
@@ -87,6 +103,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sec
+    pF: false
+    pS: false
 materiel:
   - Four
   - Marmitte
@@ -117,7 +135,7 @@ preparation: |-
   Dorer la surface de la tourte au café avec un pinceau.
 
   Faire une cheminée au centre. Enfourner 30/35min.
-publishDate: 2024-05-18T15:49:00.000Z
+publishDate: '2024-05-18T15:49:00+00:00'
 quantite_desc: 8 parts par tourte • 3 tourtes pour 20 personnes.
 regime:
   - vegan
@@ -128,5 +146,8 @@ title: Tourte betterave lentille (vegan et sans gluten)
 typeR: entree
 serveHot: true
 uuid: c54ri2ggbvt2
-slug: tourte-betterave-lenti_c54ri2ggbvt2
+id: tourte-betterave-lenti_c54ri2ggbvt2
+createdAt: '2024-05-18T15:49:00+00:00'
+updatedAt: '2024-05-18T15:49:00+00:00'
+createdBy: ''
 ---

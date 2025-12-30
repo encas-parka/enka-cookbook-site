@@ -15,6 +15,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: hzwesd
     name: Lait de riz
     originalQuantity: 10
@@ -24,6 +26,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: gpeob7
     name: Lait de soja
     originalQuantity: 10
@@ -34,6 +38,8 @@ ingredients:
     allergens:
       - Soja
     type: lof
+    pF: false
+    pS: false
   - uuid: 3eex0o
     name: Lait d'avoine
     originalQuantity: 10
@@ -44,6 +50,8 @@ ingredients:
     allergens:
       - Gluten
     type: lof
+    pF: false
+    pS: false
   - uuid: k2rneh
     name: Sirop de sureau
     originalQuantity: 6
@@ -53,6 +61,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
 materiel:
   - Bruleur
 plate: 300
@@ -60,7 +70,7 @@ preparation: |-
   1. Tout mélanger à froid
   2. Faire chauffer à feu doux jusqu'à épaississement
   3. Mettre en ramequins
-publishDate: 2024-06-19T19:02:00.000Z
+publishDate: '2024-06-19T19:02:00+00:00'
 regime:
   - vegetarien
   - vegan
@@ -69,5 +79,8 @@ title: Crème végan au sureau
 typeR: dessert
 serveHot: false
 uuid: lds9ghlhjlwn
-slug: creme-vegan-au-sureau_lds9ghlhjlwn
+id: creme-vegan-au-sureau_lds9ghlhjlwn
+createdAt: '2024-06-19T19:02:00+00:00'
+updatedAt: '2024-06-19T19:02:00+00:00'
+createdBy: ''
 ---

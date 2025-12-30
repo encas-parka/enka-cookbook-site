@@ -21,6 +21,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: kmq1zb
     name: Beurre doux
     originalQuantity: 2
@@ -31,6 +33,8 @@ ingredients:
     allergens:
       - Produit laitier
     type: frais
+    pF: true
+    pS: false
   - uuid: 6tnb6h
     name: Crème fraiche liquide entière
     originalQuantity: 8.275
@@ -41,6 +45,8 @@ ingredients:
     allergens:
       - Produit laitier
     type: lof
+    pF: false
+    pS: false
   - uuid: zf3zf8
     name: Oeuf
     originalQuantity: 15
@@ -51,6 +57,8 @@ ingredients:
     allergens:
       - Oeuf
     type: lof
+    pF: false
+    pS: false
   - uuid: 2av6w8
     name: Farine de blé
     originalQuantity: 3.7
@@ -61,6 +69,8 @@ ingredients:
     allergens:
       - Gluten
     type: lof
+    pF: false
+    pS: false
   - uuid: lm7zqh
     name: Glucose
     originalQuantity: 825
@@ -70,6 +80,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
   - uuid: 31bhpd
     name: Pralines roses de Lyon
     originalQuantity: 8.275
@@ -79,6 +91,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
   - uuid: rmgr7l
     name: Poudre d'amandes
     originalQuantity: 550
@@ -89,6 +103,8 @@ ingredients:
     allergens:
       - Fruit à coque
     type: sucres
+    pF: false
+    pS: false
   - uuid: u9z2he
     name: Sucre en poudre
     originalQuantity: 1.5
@@ -98,6 +114,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
 materiel:
   - moule à tarte
 preparation: |-
@@ -137,10 +155,13 @@ preparation: |-
 
   Il ne reste plus qu'à garder au frais afin de faire refroidir
 preparation24h: Faire la pâte sucrée la veille et réserver toute une nuit au frais.
-publishDate: 2024-06-16T21:22:00.000Z
+publishDate: '2024-06-16T21:22:00+00:00'
 checkAlwaysOk: true
 regime: null
 serveHot: false
 uuid: jnu5fuzbjhg2
-slug: tarte-aux-pralines-ros_jnu5fuzbjhg2
+id: tarte-aux-pralines-ros_jnu5fuzbjhg2
+createdAt: '2024-06-16T21:22:00+00:00'
+updatedAt: '2024-06-16T21:22:00+00:00'
+createdBy: Auré
 ---

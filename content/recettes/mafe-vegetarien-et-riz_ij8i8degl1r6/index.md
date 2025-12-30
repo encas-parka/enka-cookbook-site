@@ -28,6 +28,8 @@ ingredients:
     allergens:
       - Arachides
     type: autres
+    pF: false
+    pS: false
   - uuid: opblzb
     name: Riz basmati
     originalQuantity: 8
@@ -37,6 +39,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sec
+    pF: false
+    pS: false
   - uuid: 0d1fzw
     name: Gingembre
     originalQuantity: 35
@@ -46,6 +50,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: 57xo8g
     name: bouillon cube
     originalQuantity: 13
@@ -55,6 +61,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: mlukbi
     name: Chou blanc
     originalQuantity: 7
@@ -64,6 +72,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: eouu0v
     name: Carotte
     originalQuantity: 7
@@ -73,6 +83,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: u2m28w
     name: Ail
     originalQuantity: 2
@@ -82,6 +94,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: rtavky
     name: Oignon
     originalQuantity: 7
@@ -91,6 +105,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: mck2wl
     name: Concentré de tomate
     originalQuantity: 225
@@ -100,6 +116,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: ibtbnq
     name: Tomate
     originalQuantity: 3.5
@@ -109,6 +127,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
 materiel: []
 preparation: |-
   > Faire chauffer l'huile avec les épices poivre et curcuma
@@ -139,8 +159,11 @@ preparation: |-
 preparation24h: ''
 astuces: []
 prepAlt: []
-publishDate: 2025-10-19T18:50:00.000Z
+publishDate: '2025-10-19T18:50:00+00:00'
 serveHot: true
 uuid: ij8i8degl1r6
-slug: mafe-vegetarien-et-riz_ij8i8degl1r6
+id: mafe-vegetarien-et-riz_ij8i8degl1r6
+createdAt: '2025-10-19T18:50:00+00:00'
+updatedAt: '2025-10-19T18:50:00+00:00'
+createdBy: Alio
 ---

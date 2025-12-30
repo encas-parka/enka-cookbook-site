@@ -1,6 +1,6 @@
 
 {
-  "slug": "salade-de-pois-chiches_po1ntxwnrt9r",
+  "id": "salade-de-pois-chiches_po1ntxwnrt9r",
   "title": "Salade De Pois-Chiches Portugaise",
   "draft": false,
   "typeR": "entree",
@@ -16,11 +16,14 @@
   "quantite_desc": null,
   "check": false,
   "materiel": ["Bruleur","Marmitte","Gastro 1/1 (Normaux)","Gastro Perforé 1/1 (Profonds)","Robot Mixeur"],
-  "ingredients": [{"allergens":[],"comment":"","name":"Coriandre fraîche","normalizedQuantity":6,"normalizedUnit":"bottes","originalQuantity":6,"originalUnit":"bottes","type":"epices","uuid":"fetrpe"},{"allergens":[],"comment":"","name":"Ail","normalizedQuantity":240,"normalizedUnit":"gr.","originalQuantity":3,"originalUnit":"tête·s","type":"legumes","uuid":"u2m28w"},{"allergens":[],"comment":"","name":"Oignon rouge","normalizedQuantity":1500,"normalizedUnit":"gr.","originalQuantity":1.5,"originalUnit":"kg","type":"legumes","uuid":"doxujz"},{"allergens":[],"comment":"","name":"huile d'olive","normalizedQuantity":500,"normalizedUnit":"ml","originalQuantity":0.5,"originalUnit":"l.","type":"lof","uuid":"h3c8al"},{"allergens":[],"comment":"","name":"Pois chiches","normalizedQuantity":4000,"normalizedUnit":"gr.","originalQuantity":4,"originalUnit":"kg","type":"sec","uuid":"6a8w8k"},{"allergens":[],"comment":"","name":"Jus de citron","normalizedQuantity":400,"normalizedUnit":"ml","originalQuantity":0.4,"originalUnit":"l.","type":"sucres","uuid":"e4mjd1"}],
+  "ingredients": [{"allergens":[],"comment":"","name":"Coriandre fraîche","normalizedQuantity":6,"normalizedUnit":"bottes","originalQuantity":6,"originalUnit":"bottes","pF":true,"pS":false,"type":"epices","uuid":"fetrpe"},{"allergens":[],"comment":"","name":"Ail","normalizedQuantity":240,"normalizedUnit":"gr.","originalQuantity":3,"originalUnit":"tête·s","pF":true,"pS":false,"type":"legumes","uuid":"u2m28w"},{"allergens":[],"comment":"","name":"Oignon rouge","normalizedQuantity":1500,"normalizedUnit":"gr.","originalQuantity":1.5,"originalUnit":"kg","pF":true,"pS":false,"type":"legumes","uuid":"doxujz"},{"allergens":[],"comment":"","name":"huile d'olive","normalizedQuantity":500,"normalizedUnit":"ml","originalQuantity":0.5,"originalUnit":"l.","pF":false,"pS":false,"type":"lof","uuid":"h3c8al"},{"allergens":[],"comment":"","name":"Pois chiches","normalizedQuantity":4000,"normalizedUnit":"gr.","originalQuantity":4,"originalUnit":"kg","pF":false,"pS":false,"type":"sec","uuid":"6a8w8k"},{"allergens":[],"comment":"","name":"Jus de citron","normalizedQuantity":400,"normalizedUnit":"ml","originalQuantity":0.4,"originalUnit":"l.","pF":false,"pS":false,"type":"sucres","uuid":"e4mjd1"}],
   "preparation": "2-3H AVANT - Hacher les oignons et l'ail, les faire mariner dans le l'huile d'olive et le jus de citron -\n\nCuire à partir d'eau froide les pois-chiches trempés la veille. Les égouter quand la chair est bien fondante.\n\nHacher la coriandre\n\nMélanger les pois-chiches (froids) la coriandre et la marinade\n\nSaler poivrer au choix",
   "preparation24h": "TREMPER LES POIS CHICHES !\n\n24H AVANT CUISSON\n\nTremper les pois-chiches dans un grand volume d'eau. Remplacer l'eau toutes les 6h, trois fois au moins.",
   "astuces": null,
   "prepAlt": null,
   "permissionWrite": [],
-  "publishedAt": "2025-01-01T00:00:00Z"
+  "publishedAt": "2025-01-01T00:00:00Z",
+  "createdAt": "2024-06-18T23:36:00+00:00",
+  "updatedAt": "2024-06-18T23:36:00+00:00",
+  "createdBy": ""
 }

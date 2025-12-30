@@ -20,6 +20,8 @@ ingredients:
     allergens:
       - Céleri
     type: legumes
+    pF: true
+    pS: false
   - uuid: eouu0v
     name: Carotte
     originalQuantity: 6
@@ -29,6 +31,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: rtavky
     name: Oignon
     originalQuantity: 5
@@ -38,6 +42,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: 9zozfk
     name: Courgette
     originalQuantity: 5
@@ -47,6 +53,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: ibtbnq
     name: Tomate
     originalQuantity: 16
@@ -56,6 +64,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: hlx995
     name: Pâtes - langue d'oiseau
     originalQuantity: 3.5
@@ -66,6 +76,8 @@ ingredients:
     allergens:
       - Gluten
     type: sec
+    pF: false
+    pS: false
   - uuid: 6a8w8k
     name: Pois chiches
     originalQuantity: 2
@@ -75,6 +87,8 @@ ingredients:
     comment: Secs
     allergens: []
     type: sec
+    pF: false
+    pS: false
   - uuid: ogtomg
     name: Lentilles vertes
     originalQuantity: 2
@@ -84,6 +98,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sec
+    pF: false
+    pS: false
   - uuid: mck2wl
     name: Concentré de tomate
     originalQuantity: 1
@@ -93,6 +109,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: mz93p4
     name: Agneau
     originalQuantity: 7
@@ -103,6 +121,8 @@ ingredients:
     allergens:
       - Viande
     type: animaux
+    pF: true
+    pS: false
   - uuid: dc8855
     name: Cumin
     originalQuantity: 1
@@ -112,6 +132,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: j40pyf
     name: Ras el hanout
     originalQuantity: 1
@@ -122,6 +144,8 @@ ingredients:
     allergens:
       - Moutarde
     type: epices
+    pF: false
+    pS: false
   - uuid: sk1gbb
     name: Cannelle
     originalQuantity: 1
@@ -131,6 +155,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: 2pps90
     name: Poivre
     originalQuantity: 1
@@ -140,6 +166,8 @@ ingredients:
     comment: noir
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: fetrpe
     name: Coriandre fraîche
     originalQuantity: 8
@@ -149,6 +177,8 @@ ingredients:
     comment: fraiche
     allergens: []
     type: epices
+    pF: true
+    pS: false
   - uuid: h3c8al
     name: huile d'olive
     originalQuantity: 1
@@ -158,6 +188,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
 materiel:
   - Marmitte
 preparation: |-
@@ -172,8 +204,11 @@ preparation: |-
   * On ajoute en dernier les langues d'oiseau et on laisse mijoter jusqu'au service ! (ne pas oublier d'ajouter la coriandre hachée vers la fin, on peut aussi en garder pour saupoudrer sur les bols !)
 categories:
   - Soupe
-publishDate: 2023-01-11T14:12:52.682Z
+publishDate: '2023-01-11T14:12:52.682000+00:00'
 serveHot: true
 uuid: ox7o2xg5uni7
-slug: chorba-a-lagneau-ou-mo_ox7o2xg5uni7
+id: chorba-a-lagneau-ou-mo_ox7o2xg5uni7
+createdAt: '2023-01-11T14:12:52.682000+00:00'
+updatedAt: '2023-01-11T14:12:52.682000+00:00'
+createdBy: Sylvain
 ---

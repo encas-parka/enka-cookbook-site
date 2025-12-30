@@ -25,12 +25,17 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
 preparation: |-
   \- laver la salade
 
   ...
-publishDate: 2024-06-19T20:27:00.000Z
+publishDate: '2024-06-19T20:27:00+00:00'
 serveHot: false
 uuid: r8q91mhhjzlc
-slug: salade-verte_r8q91mhhjzlc
+id: salade-verte_r8q91mhhjzlc
+createdAt: '2024-06-19T20:27:00+00:00'
+updatedAt: '2024-06-19T20:27:00+00:00'
+createdBy: ''
 ---

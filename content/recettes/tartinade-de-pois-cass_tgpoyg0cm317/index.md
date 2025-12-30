@@ -21,6 +21,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sec
+    pF: false
+    pS: false
   - uuid: 8y3ngp
     name: Petits pois surgelés
     originalQuantity: 7
@@ -30,6 +32,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: false
+    pS: false
   - uuid: ks3ocl
     name: Beurre de cacahuètes (salé)
     originalQuantity: 1.75
@@ -40,6 +44,8 @@ ingredients:
     allergens:
       - Arachides
     type: autres
+    pF: false
+    pS: false
   - uuid: j84olg
     name: Feuille de laurier
     originalQuantity: 35
@@ -49,6 +55,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
 preparation: '* Le jour même, mélanger les deux sortes de pois, ajouter le beurre de cacahuète et corriger sel et poivre.'
 preparation24h: |-
   **2 jours avant :**
@@ -61,8 +69,11 @@ preparation24h: |-
   * Sortir les petits pois surgelés du congélateur
 astuces:
   - astuce: laurier → quantité en feuilles
-publishDate: 2024-05-18T13:18:00.000Z
+publishDate: '2024-05-18T13:18:00+00:00'
 serveHot: false
 uuid: tgpoyg0cm317
-slug: tartinade-de-pois-cass_tgpoyg0cm317
+id: tartinade-de-pois-cass_tgpoyg0cm317
+createdAt: '2024-05-18T13:18:00+00:00'
+updatedAt: '2024-05-18T13:18:00+00:00'
+createdBy: ''
 ---

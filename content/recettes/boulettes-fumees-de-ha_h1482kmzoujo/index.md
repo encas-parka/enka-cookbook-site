@@ -17,6 +17,8 @@ ingredients:
     comment: ''
     allergens: []
     type: autres
+    pF: false
+    pS: false
   - uuid: ruvnjp
     name: Vin Rouge
     originalQuantity: 60
@@ -28,6 +30,8 @@ ingredients:
       - Sulfites
       - Alcool
     type: epices
+    pF: false
+    pS: false
   - uuid: 7qo3ht
     name: Vinaigre de cidre
     originalQuantity: 2
@@ -38,6 +42,8 @@ ingredients:
     allergens:
       - Alcool
     type: epices
+    pF: false
+    pS: false
   - uuid: hgfa4e
     name: Persil frais
     originalQuantity: 1
@@ -47,6 +53,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: true
+    pS: false
   - uuid: bbwo4n
     name: Tamari (sauce)
     originalQuantity: 4
@@ -57,6 +65,8 @@ ingredients:
     allergens:
       - Soja
     type: epices
+    pF: false
+    pS: false
   - uuid: effe0c
     name: Liquid smoke
     originalQuantity: 4
@@ -66,6 +76,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: u2m28w
     name: Ail
     originalQuantity: 4
@@ -75,6 +87,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: rtavky
     name: Oignon
     originalQuantity: 200
@@ -84,6 +98,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: wcvin0
     name: Champignons séchés
     originalQuantity: 40
@@ -93,6 +109,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: false
+    pS: false
   - uuid: 8nbcjp
     name: Fécule de maïs (Maïzena)
     originalQuantity: 2
@@ -102,6 +120,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: c70jxb
     name: huile de tournesol
     originalQuantity: 2
@@ -111,6 +131,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: opblzb
     name: Riz basmati
     originalQuantity: 100
@@ -120,6 +142,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sec
+    pF: false
+    pS: false
   - uuid: iwdje3
     name: Haricots rouges cuits
     originalQuantity: 500
@@ -129,6 +153,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sec
+    pF: false
+    pS: false
   - uuid: njgchn
     name: Sucre complet
     originalQuantity: 6
@@ -138,6 +164,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
 materiel:
   - Four
   - Gastro 1/1 (Fins)
@@ -158,5 +186,8 @@ title: Boulettes fumées de haricots rouges et champignons
 typeR: plat
 serveHot: true
 uuid: h1482kmzoujo
-slug: boulettes-fumees-de-ha_h1482kmzoujo
+id: boulettes-fumees-de-ha_h1482kmzoujo
+createdAt: '2024-05-28T15:18:00.000Z'
+updatedAt: '2024-05-28T15:18:00.000Z'
+createdBy: ''
 ---

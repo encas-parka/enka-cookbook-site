@@ -18,6 +18,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sec
+    pF: false
+    pS: false
   - uuid: kp0srn
     name: corn flakes
     originalQuantity: 40
@@ -27,6 +29,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sec
+    pF: false
+    pS: false
   - uuid: ovewgk
     name: Flocons d'avoine
     originalQuantity: 100
@@ -37,6 +41,8 @@ ingredients:
     allergens:
       - Gluten
     type: sec
+    pF: false
+    pS: false
   - uuid: rtavky
     name: Oignon
     originalQuantity: 1
@@ -46,6 +52,8 @@ ingredients:
     comment: gros
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: ibtbnq
     name: Tomate
     originalQuantity: 8
@@ -55,6 +63,8 @@ ingredients:
     comment: grosses tomates charnues
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: h3c8al
     name: huile d'olive
     originalQuantity: 0.25
@@ -64,6 +74,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: hgfa4e
     name: Persil frais
     originalQuantity: 1
@@ -73,6 +85,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: true
+    pS: false
   - uuid: 3bg9f8
     name: poivre moulue
     originalQuantity: 1
@@ -82,6 +96,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: 2juq3x
     name: Sel
     originalQuantity: 1
@@ -91,6 +107,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: he3u48
     name: Cumin moulu
     originalQuantity: 2
@@ -100,6 +118,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: xqb8f5
     name: Tofu soyeux
     originalQuantity: 400
@@ -109,6 +129,8 @@ ingredients:
     comment: ''
     allergens: []
     type: frais
+    pF: true
+    pS: false
 preparation: |-
   Couper les chapeaux des tomates et les vider de leur chaire. La couper en petits morceaux et la réserver.
 
@@ -121,9 +143,12 @@ preparation: |-
   Verser de l'eau sur le riz jusqu'à une phalange eu dessus du niveau de riz.
 
   Mettre au four pendant 45min. Vérifier cuisson du riz, rajouter eau si nécessaire et remettre 15min à la cuisson si besoin.
-publishDate: 2025-08-08T09:24:00.000Z
+publishDate: '2025-08-08T09:24:00+00:00'
 uuid: m75nlakbryyk
-titleslug: tomates-farcies-et-riz_57663707
+titleid: tomates-farcies-et-riz_57663707
 serveHot: true
-slug: tomates-farcies-et-riz_m75nlakbryyk
+id: tomates-farcies-et-riz_m75nlakbryyk
+createdAt: '2025-08-08T09:24:00+00:00'
+updatedAt: '2025-08-08T09:24:00+00:00'
+createdBy: ''
 ---

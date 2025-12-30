@@ -23,6 +23,8 @@ ingredients:
     comment: ''
     allergens: []
     type: autres
+    pF: false
+    pS: false
   - uuid: vs2dfm
     name: Ail en poudre
     originalQuantity: 2
@@ -32,6 +34,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: 2juq3x
     name: Sel
     originalQuantity: 4
@@ -41,6 +45,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: 18dy4e
     name: Pomme de terre
     originalQuantity: 400
@@ -50,6 +56,8 @@ ingredients:
     comment: en purée
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: v212im
     name: Farine de tapioca
     originalQuantity: 250
@@ -59,6 +67,8 @@ ingredients:
     comment: pour travailler la pâte
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: atccqu
     name: Huile végétale
     originalQuantity: 165
@@ -68,6 +78,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: vw9d1a
     name: Lait végétal (au choix)
     originalQuantity: 125
@@ -77,6 +89,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: v212im
     name: Farine de tapioca
     originalQuantity: 1
@@ -86,6 +100,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
 preparation: |-
   Chauffer les ingrédients humides : Dans une casserole à feu moyen-vif, mélanger l'eau, l'huile, le lait végétal et le sel. Faites chauffer jusqu'à formation de petites bulles (ne pas laisser bouillir), puis verser lentement sur la farine de tapioca. A l'aide d'une cuillère en bois, remuer la pâte jusqu'à ce qu'elle devienne élastique.
 
@@ -102,8 +118,11 @@ preparation: |-
   Cuire au four : Préchauffer à 180°. Transférer les boules dans un plat allant au four huilé (ou du papier sulfurisé huilé) et cuire au four pendant 30 minutes. Le pao de queijo végétalien doit être doré à l’extérieur et cuit mais moelleux à l’intérieur.
 prepAlt:
   - recetteAlt: pao-de-qeijo_0rq586k4
-publishDate: 2024-06-18T11:51:00.000Z
+publishDate: '2024-06-18T11:51:00+00:00'
 serveHot: true
 uuid: hycxy4esy2bt
-slug: pao-sin-queijo-version_hycxy4esy2bt
+id: pao-sin-queijo-version_hycxy4esy2bt
+createdAt: '2024-06-18T11:51:00+00:00'
+updatedAt: '2024-06-18T11:51:00+00:00'
+createdBy: ''
 ---

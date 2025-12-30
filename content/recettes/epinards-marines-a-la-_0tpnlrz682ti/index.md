@@ -26,6 +26,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: mo4efz
     name: Sésame
     originalQuantity: 3
@@ -35,6 +37,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: fazth1
     name: huile de sésame
     originalQuantity: 30
@@ -45,6 +49,8 @@ ingredients:
     allergens:
       - Sésame
     type: lof
+    pF: false
+    pS: false
   - uuid: lny16c
     name: sucre blanc
     originalQuantity: 5
@@ -54,6 +60,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
   - uuid: v1kli8
     name: Gousse d'ail
     originalQuantity: 3
@@ -63,6 +71,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: jjrwlj
     name: Sauce soja
     originalQuantity: 75
@@ -73,6 +83,8 @@ ingredients:
     allergens:
       - Soja
     type: epices
+    pF: false
+    pS: false
   - uuid: owsv5m
     name: échalote
     originalQuantity: 1
@@ -82,6 +94,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: 4totf1
     name: Epinard
     originalQuantity: 2
@@ -91,6 +105,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
 materiel:
   - Bruleur
 preparation: |-
@@ -106,8 +122,11 @@ preparation: |-
 preparation24h: ''
 astuces: []
 prepAlt: []
-publishDate: 2025-09-01T08:08:00.000Z
+publishDate: '2025-09-01T08:08:00+00:00'
 serveHot: false
 uuid: 0tpnlrz682ti
-slug: epinards-marines-a-la-_0tpnlrz682ti
+id: epinards-marines-a-la-_0tpnlrz682ti
+createdAt: '2025-09-01T08:08:00+00:00'
+updatedAt: '2025-09-01T08:08:00+00:00'
+createdBy: ''
 ---

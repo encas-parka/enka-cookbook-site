@@ -22,6 +22,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: h3c8al
     name: huile d'olive
     originalQuantity: 220
@@ -31,6 +33,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: 946ddw
     name: Gluten pur
     originalQuantity: 1200
@@ -41,6 +45,8 @@ ingredients:
     allergens:
       - Gluten
     type: lof
+    pF: false
+    pS: false
   - uuid: bidsmu
     name: Paprika
     originalQuantity: 12
@@ -50,6 +56,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: effe0c
     name: Liquid smoke
     originalQuantity: 5
@@ -59,6 +67,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: bidsmu
     name: Paprika
     originalQuantity: 22
@@ -68,6 +78,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: vs2dfm
     name: Ail en poudre
     originalQuantity: 65
@@ -77,6 +89,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: 8u0rev
     name: Sauce piment chipotle
     originalQuantity: 250
@@ -86,6 +100,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: dx771g
     name: Shiro miso
     originalQuantity: 160
@@ -95,6 +111,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: z8jaad
     name: Miso d'orge
     originalQuantity: 160
@@ -105,6 +123,8 @@ ingredients:
     allergens:
       - Gluten
     type: epices
+    pF: false
+    pS: false
   - uuid: jjrwlj
     name: Sauce soja
     originalQuantity: 260
@@ -115,6 +135,8 @@ ingredients:
     allergens:
       - Soja
     type: epices
+    pF: false
+    pS: false
   - uuid: ljzb7j
     name: Eau
     originalQuantity: 800
@@ -124,6 +146,8 @@ ingredients:
     comment: chaude
     allergens: []
     type: autres
+    pF: false
+    pS: false
 materiel:
   - Ficelle
 preparation: |-
@@ -141,8 +165,11 @@ preparation: |-
 
   Emballer dans du cello et conserver 24h au frais avant de consommer.
 preparation24h: A cuisiner la veille !!
-publishDate: 2024-05-22T22:24:00.000Z
+publishDate: '2024-05-22T22:24:00+00:00'
 serveHot: false
 uuid: gqf4yi01uime
-slug: chorizo-vegan_gqf4yi01uime
+id: chorizo-vegan_gqf4yi01uime
+createdAt: '2024-05-22T22:24:00+00:00'
+updatedAt: '2024-05-22T22:24:00+00:00'
+createdBy: Auré
 ---

@@ -15,6 +15,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: 9p3n36
     name: Olives noires à la grecque
     originalQuantity: 1
@@ -24,6 +26,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: false
+    pS: false
   - uuid: doxujz
     name: Oignon rouge
     originalQuantity: 4.5
@@ -33,6 +37,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: ibtbnq
     name: Tomate
     originalQuantity: 10
@@ -42,6 +48,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: l5p1a5
     name: Concombre
     originalQuantity: 16
@@ -51,6 +59,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: h3c8al
     name: huile d'olive
     originalQuantity: 3
@@ -60,11 +70,13 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
 materiel:
   - Grand Saladier
 plate: 180
 preparation: Coupez, mélanger.
-publishDate: 2024-06-18T12:39:00.000Z
+publishDate: '2024-06-18T12:39:00+00:00'
 regime:
   - vegetarien
   - sans-gluten
@@ -77,5 +89,8 @@ title: Salade grecque végan
 typeR: entree
 serveHot: false
 uuid: twvpx3jyr0rn
-slug: salade-grecque-vegan_twvpx3jyr0rn
+id: salade-grecque-vegan_twvpx3jyr0rn
+createdAt: '2024-06-18T12:39:00+00:00'
+updatedAt: '2024-06-18T12:39:00+00:00'
+createdBy: ''
 ---

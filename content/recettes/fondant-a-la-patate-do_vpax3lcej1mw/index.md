@@ -22,6 +22,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: n818be
     name: vanille extrait concentré
     originalQuantity: 5
@@ -31,6 +33,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
   - uuid: n85gmi
     name: sucre de canne (blond)
     originalQuantity: 300
@@ -40,6 +44,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
   - uuid: rmgr7l
     name: Poudre d'amandes
     originalQuantity: 500
@@ -50,6 +56,8 @@ ingredients:
     allergens:
       - Fruit à coque
     type: sucres
+    pF: false
+    pS: false
   - uuid: gpeob7
     name: Lait de soja
     originalQuantity: 750
@@ -60,6 +68,8 @@ ingredients:
     allergens:
       - Soja
     type: lof
+    pF: false
+    pS: false
   - uuid: v212im
     name: Farine de tapioca
     originalQuantity: 250
@@ -69,13 +79,18 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
 preparation: |-
   * Écraser à la fourchette les patates douces bien cuites pour en faire une purée.
   * Mélanger la poudre d'amande, les sucres et la farine.
   * Ajouter le mélange à la purée de patate douce et délayer avec le lait de soja jusqu'à ce que la consistance soit bien homogène.
   * Verser dans le moule à gâteau, et placer au four préchauffé à 200° pendant 35 min au moins.
-publishDate: 2025-05-30T17:18:00.000Z
+publishDate: '2025-05-30T17:18:00+00:00'
 serveHot: false
 uuid: vpax3lcej1mw
-slug: fondant-a-la-patate-do_vpax3lcej1mw
+id: fondant-a-la-patate-do_vpax3lcej1mw
+createdAt: '2025-05-30T17:18:00+00:00'
+updatedAt: '2025-05-30T17:18:00+00:00'
+createdBy: Auré
 ---

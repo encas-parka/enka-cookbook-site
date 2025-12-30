@@ -16,6 +16,8 @@ ingredients:
     allergens:
       - Sésame
     type: autres
+    pF: false
+    pS: false
   - uuid: 2juq3x
     name: Sel
     originalQuantity: 1.5
@@ -25,6 +27,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: vw9d1a
     name: Lait végétal (au choix)
     originalQuantity: 400
@@ -34,6 +38,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: c70jxb
     name: huile de tournesol
     originalQuantity: 200
@@ -43,6 +49,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: 2ej7fi
     name: Farine de blé noir (sarrasin)
     originalQuantity: 270
@@ -52,6 +60,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: 2cnk7l
     name: Halva
     originalQuantity: 400
@@ -62,6 +72,8 @@ ingredients:
     allergens:
       - Sésame
     type: sucres
+    pF: false
+    pS: false
   - uuid: wz2fkg
     name: compote de pomme
     originalQuantity: 400
@@ -71,6 +83,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
   - uuid: u9z2he
     name: Sucre en poudre
     originalQuantity: 150
@@ -80,6 +94,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
   - uuid: 1e3zhq
     name: Chocolat noir patissier 70p100
     originalQuantity: 400
@@ -89,6 +105,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
   - uuid: r6792n
     name: Cacao
     originalQuantity: 70
@@ -98,6 +116,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
 materiel:
   - Four
 plate: 20
@@ -108,7 +128,7 @@ preparation: |-
   * Ajoutez le chocolat fondu. Mélanger jusqu’à obtention une pâte homogène. Puis ajouter les morceaux d'halva.
   * Chemiser un moule à gâteau de papier cuisson et répartir la pâte. Répartir par touche à la petite cuillère le tahin sur l'ensemble du brownie. Avec un cure-dent ou un pic à brochette, faire des marbrures sur toute la surface de la pâte.
   * Cuire pendant 15 minutes. A la sortie du four, le brownie est juste cuit voir encore un peu mou. Laissez refroidir et placez au frigo pour 1h avant de démouler.
-publishDate: 2024-06-18T11:29:00.000Z
+publishDate: '2024-06-18T11:29:00+00:00'
 regime:
   - vegetarien
   - vegan
@@ -118,5 +138,8 @@ title: Brownie halva et tahin végan et sans gluten
 typeR: dessert
 serveHot: true
 uuid: o8aipucny2yp
-slug: brownie-halva-et-tahin_o8aipucny2yp
+id: brownie-halva-et-tahin_o8aipucny2yp
+createdAt: '2024-06-18T11:29:00+00:00'
+updatedAt: '2024-06-18T11:29:00+00:00'
+createdBy: ''
 ---

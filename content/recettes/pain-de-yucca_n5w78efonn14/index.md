@@ -15,6 +15,8 @@ ingredients:
     allergens:
       - Gluten
     type: lof
+    pF: false
+    pS: false
   - uuid: 2juq3x
     name: Sel
     originalQuantity: 80
@@ -24,6 +26,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: m5dxyo
     name: Feta
     originalQuantity: 4
@@ -34,6 +38,8 @@ ingredients:
     allergens:
       - Produit laitier
     type: frais
+    pF: true
+    pS: false
   - uuid: mxub21
     name: Beurre demi-sel
     originalQuantity: 1
@@ -44,6 +50,8 @@ ingredients:
     allergens:
       - Produit laitier
     type: frais
+    pF: true
+    pS: false
   - uuid: zf3zf8
     name: Oeuf
     originalQuantity: 17
@@ -54,6 +62,8 @@ ingredients:
     allergens:
       - Oeuf
     type: lof
+    pF: false
+    pS: false
   - uuid: v212im
     name: Farine de tapioca
     originalQuantity: 2.7
@@ -63,6 +73,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
 materiel:
   - Four
 plate: 170
@@ -74,7 +86,7 @@ preparation: |-
   * Mélanger jusqu'a former une boule.
   * Rouler des petites boules avec la pate et les placer sur une plaque recouvert de papier sulfu.
   * Enfourner 8 minutes et deguster immediatement.
-publishDate: 2022-11-23T20:23:25.888Z
+publishDate: '2022-11-23T20:23:25.888000+00:00'
 regime:
   - vegetarien
   - sans-gluten
@@ -82,5 +94,8 @@ title: Pain de yucca
 typeR: plat
 serveHot: true
 uuid: n5w78efonn14
-slug: pain-de-yucca_n5w78efonn14
+id: pain-de-yucca_n5w78efonn14
+createdAt: '2022-11-23T20:23:25.888000+00:00'
+updatedAt: '2022-11-23T20:23:25.888000+00:00'
+createdBy: ''
 ---

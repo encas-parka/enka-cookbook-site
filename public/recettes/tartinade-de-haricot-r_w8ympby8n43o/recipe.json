@@ -1,6 +1,6 @@
 
 {
-  "slug": "tartinade-de-haricot-r_w8ympby8n43o",
+  "id": "tartinade-de-haricot-r_w8ympby8n43o",
   "title": "Tartinade De Haricot Rouge - Basilic",
   "draft": false,
   "typeR": "entree",
@@ -16,11 +16,14 @@
   "quantite_desc": null,
   "check": true,
   "materiel": ["Marmitte"],
-  "ingredients": [{"allergens":[],"comment":"","name":"Haricots rouges","normalizedQuantity":6300,"normalizedUnit":"gr.","originalQuantity":6.3,"originalUnit":"kg","type":"sec","uuid":"dr1py6"},{"allergens":[],"comment":"","name":"Ail","normalizedQuantity":195,"normalizedUnit":"gr.","originalQuantity":30,"originalUnit":"gousse·s","type":"legumes","uuid":"u2m28w"},{"allergens":[],"comment":"","name":"huile d'olive","normalizedQuantity":1800,"normalizedUnit":"ml","originalQuantity":1.8,"originalUnit":"l.","type":"lof","uuid":"h3c8al"},{"allergens":[],"comment":"","name":"Jus de citron","normalizedQuantity":900,"normalizedUnit":"ml","originalQuantity":900,"originalUnit":"ml","type":"sucres","uuid":"e4mjd1"},{"allergens":[],"comment":"","name":"Basilic","normalizedQuantity":9,"normalizedUnit":"bottes","originalQuantity":9,"originalUnit":"bottes","type":"epices","uuid":"s8j4ff"},{"allergens":[],"comment":"","name":"Poivre","normalizedQuantity":1,"normalizedUnit":"au goût","originalQuantity":1,"originalUnit":"au goût","type":"epices","uuid":"2pps90"},{"allergens":[],"comment":"","name":"Sel","normalizedQuantity":1,"normalizedUnit":"au goût","originalQuantity":1,"originalUnit":"au goût","type":"epices","uuid":"2juq3x"},{"allergens":[],"comment":"","name":"Bicarbonate de soude","normalizedQuantity":90,"normalizedUnit":"ml","originalQuantity":90,"originalUnit":"ml","type":"autres","uuid":"fnnx13"}],
+  "ingredients": [{"allergens":[],"comment":"","name":"Haricots rouges","normalizedQuantity":6300,"normalizedUnit":"gr.","originalQuantity":6.3,"originalUnit":"kg","pF":false,"pS":false,"type":"sec","uuid":"dr1py6"},{"allergens":[],"comment":"","name":"Ail","normalizedQuantity":195,"normalizedUnit":"gr.","originalQuantity":30,"originalUnit":"gousse·s","pF":true,"pS":false,"type":"legumes","uuid":"u2m28w"},{"allergens":[],"comment":"","name":"huile d'olive","normalizedQuantity":1800,"normalizedUnit":"ml","originalQuantity":1.8,"originalUnit":"l.","pF":false,"pS":false,"type":"lof","uuid":"h3c8al"},{"allergens":[],"comment":"","name":"Jus de citron","normalizedQuantity":900,"normalizedUnit":"ml","originalQuantity":900,"originalUnit":"ml","pF":false,"pS":false,"type":"sucres","uuid":"e4mjd1"},{"allergens":[],"comment":"","name":"Basilic","normalizedQuantity":9,"normalizedUnit":"bottes","originalQuantity":9,"originalUnit":"bottes","pF":true,"pS":false,"type":"epices","uuid":"s8j4ff"},{"allergens":[],"comment":"","name":"Poivre","normalizedQuantity":1,"normalizedUnit":"au goût","originalQuantity":1,"originalUnit":"au goût","pF":false,"pS":false,"type":"epices","uuid":"2pps90"},{"allergens":[],"comment":"","name":"Sel","normalizedQuantity":1,"normalizedUnit":"au goût","originalQuantity":1,"originalUnit":"au goût","pF":false,"pS":false,"type":"epices","uuid":"2juq3x"},{"allergens":[],"comment":"","name":"Bicarbonate de soude","normalizedQuantity":90,"normalizedUnit":"ml","originalQuantity":90,"originalUnit":"ml","pF":false,"pS":false,"type":"autres","uuid":"fnnx13"}],
   "preparation": "* Rectifier l'assaisonement le jour j",
   "preparation24h": "**Obligatoirement 2 J avant**\n\n* Faire tremper les haricots l'avant veille.\n\n\n\n**Obligatoirement 1 J avant**\n\n* Bien cuire les haricots la veille avec le bicarbonate et du sel. Puis mixer avec tout le reste.",
   "astuces": null,
   "prepAlt": null,
   "permissionWrite": [],
-  "publishedAt": "2025-01-01T00:00:00Z"
+  "publishedAt": "2025-01-01T00:00:00Z",
+  "createdAt": "2024-05-18T10:52:00+00:00",
+  "updatedAt": "2024-05-18T10:52:00+00:00",
+  "createdBy": ""
 }

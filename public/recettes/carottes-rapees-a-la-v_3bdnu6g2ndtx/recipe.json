@@ -1,6 +1,6 @@
 
 {
-  "slug": "carottes-rapees-a-la-v_3bdnu6g2ndtx",
+  "id": "carottes-rapees-a-la-v_3bdnu6g2ndtx",
   "title": "Carottes Râpées À La Verveine Et À L'orange",
   "draft": false,
   "typeR": "entree",
@@ -16,11 +16,14 @@
   "quantite_desc": null,
   "check": true,
   "materiel": null,
-  "ingredients": [{"allergens":[],"comment":"","name":"Carotte","normalizedQuantity":1400,"normalizedUnit":"gr.","originalQuantity":1.4,"originalUnit":"kg","type":"legumes","uuid":"eouu0v"},{"allergens":[],"comment":"","name":"huile d'olive","normalizedQuantity":150,"normalizedUnit":"ml","originalQuantity":150,"originalUnit":"ml","type":"lof","uuid":"h3c8al"},{"allergens":[],"comment":"","name":"Poivre noir moulu","normalizedQuantity":1.6,"normalizedUnit":"gr.","originalQuantity":4,"originalUnit":"pincées","type":"epices","uuid":"rgt7s4"},{"allergens":["Moutarde"],"comment":"","name":"Moutarde","normalizedQuantity":15,"normalizedUnit":"ml","originalQuantity":1,"originalUnit":"c. à soupe","type":"epices","uuid":"5c1b20"},{"allergens":[],"comment":"","name":"Verveine","normalizedQuantity":15,"normalizedUnit":"gr.","originalQuantity":15,"originalUnit":"gr.","type":"epices","uuid":"9fa412"},{"allergens":[],"comment":"","name":"Jus d'orange","normalizedQuantity":300,"normalizedUnit":"ml","originalQuantity":300,"originalUnit":"ml","type":"sucres","uuid":"gzi2ry"},{"allergens":[],"comment":"","name":"Écorce d'orange séchée ","normalizedQuantity":2,"normalizedUnit":"gr.","originalQuantity":2,"originalUnit":"gr.","type":"autres","uuid":"0tlmi4"}],
+  "ingredients": [{"allergens":[],"comment":"","name":"Carotte","normalizedQuantity":1400,"normalizedUnit":"gr.","originalQuantity":1.4,"originalUnit":"kg","pF":true,"pS":false,"type":"legumes","uuid":"eouu0v"},{"allergens":[],"comment":"","name":"huile d'olive","normalizedQuantity":150,"normalizedUnit":"ml","originalQuantity":150,"originalUnit":"ml","pF":false,"pS":false,"type":"lof","uuid":"h3c8al"},{"allergens":[],"comment":"","name":"Poivre noir moulu","normalizedQuantity":1.6,"normalizedUnit":"gr.","originalQuantity":4,"originalUnit":"pincées","pF":false,"pS":false,"type":"epices","uuid":"rgt7s4"},{"allergens":["Moutarde"],"comment":"","name":"Moutarde","normalizedQuantity":15,"normalizedUnit":"ml","originalQuantity":1,"originalUnit":"c. à soupe","pF":false,"pS":false,"type":"epices","uuid":"5c1b20"},{"allergens":[],"comment":"","name":"Verveine","normalizedQuantity":15,"normalizedUnit":"gr.","originalQuantity":15,"originalUnit":"gr.","pF":false,"pS":false,"type":"epices","uuid":"9fa412"},{"allergens":[],"comment":"","name":"Jus d'orange","normalizedQuantity":300,"normalizedUnit":"ml","originalQuantity":300,"originalUnit":"ml","pF":false,"pS":false,"type":"sucres","uuid":"gzi2ry"},{"allergens":[],"comment":"","name":"Écorce d'orange séchée ","normalizedQuantity":2,"normalizedUnit":"gr.","originalQuantity":2,"originalUnit":"gr.","pF":false,"pS":false,"type":"autres","uuid":"0tlmi4"}],
   "preparation": "Le lendemain, faire la sauce en mélangeant tous les autres ingrédients.\n\nAujoutez la sauce aux carottes.\n\n\\",
   "preparation24h": "**Obligatoirement 1 J avant :** Laver puis râper les carottes. Hacher la verveine. Les mélanger ensemble.",
   "astuces": null,
   "prepAlt": null,
   "permissionWrite": [],
-  "publishedAt": "2025-01-01T00:00:00Z"
+  "publishedAt": "2025-01-01T00:00:00Z",
+  "createdAt": "2025-06-19T03:56:00+00:00",
+  "updatedAt": "2025-06-19T03:56:00+00:00",
+  "createdBy": ""
 }

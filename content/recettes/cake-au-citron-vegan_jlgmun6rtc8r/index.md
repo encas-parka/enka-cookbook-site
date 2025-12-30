@@ -16,6 +16,8 @@ ingredients:
     comment: ''
     allergens: []
     type: autres
+    pF: false
+    pS: false
   - uuid: 5le7rm
     name: Gomme de xanthane
     originalQuantity: 0.25
@@ -25,6 +27,8 @@ ingredients:
     comment: ''
     allergens: []
     type: autres
+    pF: false
+    pS: false
   - uuid: 2juq3x
     name: Sel
     originalQuantity: 0.1
@@ -34,6 +38,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: hlbwfd
     name: Yaourt de soja
     originalQuantity: 250
@@ -44,6 +50,8 @@ ingredients:
     allergens:
       - Soja
     type: frais
+    pF: true
+    pS: false
   - uuid: 5cg0yu
     name: Citron jaune
     originalQuantity: 120
@@ -53,6 +61,8 @@ ingredients:
     comment: zeste
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: c70jxb
     name: huile de tournesol
     originalQuantity: 0.11
@@ -62,6 +72,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: 2av6w8
     name: Farine de blé
     originalQuantity: 250
@@ -72,6 +84,8 @@ ingredients:
     allergens:
       - Gluten
     type: lof
+    pF: false
+    pS: false
   - uuid: e4mjd1
     name: Jus de citron
     originalQuantity: 0.8
@@ -81,6 +95,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
   - uuid: n85gmi
     name: sucre de canne (blond)
     originalQuantity: 280
@@ -90,6 +106,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
 materiel:
   - moule a cake
   - Four
@@ -102,7 +120,7 @@ preparation: |-
   * Incorporer le jus de citron et l'huile.
   * Ajouter levure, bicar, gomme et sel.
   * Graisser un moule à cake, enfourner pou 50 min à 170° et attendre que ça refroidisse avant de démouler.
-publishDate: 2023-11-13T14:16:06.322Z
+publishDate: '2023-11-13T14:16:06.322000+00:00'
 regime:
   - vegan
   - vegetarien
@@ -110,5 +128,8 @@ title: Cake au citron végan
 typeR: dessert
 serveHot: false
 uuid: jlgmun6rtc8r
-slug: cake-au-citron-vegan_jlgmun6rtc8r
+id: cake-au-citron-vegan_jlgmun6rtc8r
+createdAt: '2023-11-13T14:16:06.322000+00:00'
+updatedAt: '2023-11-13T14:16:06.322000+00:00'
+createdBy: ''
 ---

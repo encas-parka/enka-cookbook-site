@@ -23,6 +23,8 @@ ingredients:
     comment: ''
     allergens: []
     type: autres
+    pF: false
+    pS: false
   - uuid: vgec6e
     name: Levure chimique
     originalQuantity: 35
@@ -33,6 +35,8 @@ ingredients:
     allergens:
       - Gluten
     type: lof
+    pF: false
+    pS: false
   - uuid: 2juq3x
     name: Sel
     originalQuantity: 1
@@ -42,6 +46,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: rgt7s4
     name: Poivre noir moulu
     originalQuantity: 15
@@ -51,6 +57,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: htp5ma
     name: Curcuma moulu
     originalQuantity: 30
@@ -60,6 +68,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: hgfa4e
     name: Persil frais
     originalQuantity: 6
@@ -69,6 +79,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: true
+    pS: false
   - uuid: u2m28w
     name: Ail
     originalQuantity: 6
@@ -78,6 +90,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: rtavky
     name: Oignon
     originalQuantity: 1.7
@@ -87,6 +101,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: 9zozfk
     name: Courgette
     originalQuantity: 3
@@ -96,6 +112,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: eouu0v
     name: Carotte
     originalQuantity: 1.7
@@ -105,6 +123,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: c70jxb
     name: huile de tournesol
     originalQuantity: 3
@@ -114,6 +134,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: zf3zf8
     name: Oeuf
     originalQuantity: 25
@@ -124,6 +146,8 @@ ingredients:
     allergens:
       - Oeuf
     type: lof
+    pF: false
+    pS: false
   - uuid: 2av6w8
     name: Farine de blé
     originalQuantity: 4
@@ -134,6 +158,8 @@ ingredients:
     allergens:
       - Gluten
     type: lof
+    pF: false
+    pS: false
 materiel:
   - Bruleur
   - Gastro 1/1 (Fins)
@@ -150,8 +176,11 @@ preparation: |-
   Faire chauffer une large quantité d'huile dans une grande poele
 
   Couler des grosses cuillers de pâte pour obtenir des beignets.
-publishDate: 2024-06-19T00:00:00.000Z
+publishDate: '2024-06-19T00:00:00+00:00'
 serveHot: true
 uuid: 2ybsetsx27nm
-slug: pataniscas-de-legumes_2ybsetsx27nm
+id: pataniscas-de-legumes_2ybsetsx27nm
+createdAt: '2024-06-19T00:00:00+00:00'
+updatedAt: '2024-06-19T00:00:00+00:00'
+createdBy: ''
 ---

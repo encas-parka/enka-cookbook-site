@@ -25,6 +25,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: 2pps90
     name: Poivre
     originalQuantity: 1
@@ -34,6 +36,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: 2juq3x
     name: Sel
     originalQuantity: 1
@@ -43,6 +47,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: nnkg8f
     name: Aneth aromatique
     originalQuantity: 2
@@ -52,6 +58,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: hlbwfd
     name: Yaourt de soja
     originalQuantity: 550
@@ -62,6 +70,8 @@ ingredients:
     allergens:
       - Soja
     type: frais
+    pF: true
+    pS: false
   - uuid: h3c8al
     name: huile d'olive
     originalQuantity: 300
@@ -71,6 +81,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: xkijt9
     name: Amandes effilées
     originalQuantity: 200
@@ -81,6 +93,8 @@ ingredients:
     allergens:
       - Fruit à coque
     type: sec
+    pF: false
+    pS: false
 preparation: |-
   Mandoliner le concombre au robocoupe (si vous en avez un :p)
 
@@ -89,8 +103,11 @@ preparation: |-
   Tout mélanger
 
   (possible de remplacer les amandes effilées par amandes concassées)
-publishDate: 2025-07-31T08:37:00.000Z
+publishDate: '2025-07-31T08:37:00+00:00'
 serveHot: false
 uuid: ktvstlm6e9wm
-slug: salade-de-concombre-a-_ktvstlm6e9wm
+id: salade-de-concombre-a-_ktvstlm6e9wm
+createdAt: '2025-07-31T08:37:00+00:00'
+updatedAt: '2025-07-31T08:37:00+00:00'
+createdBy: ''
 ---

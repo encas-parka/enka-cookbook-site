@@ -27,6 +27,8 @@ ingredients:
     allergens:
       - Sulfites
     type: epices
+    pF: false
+    pS: false
   - uuid: ibtbnq
     name: Tomate
     originalQuantity: 17
@@ -36,6 +38,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: atccqu
     name: Huile végétale
     originalQuantity: 0.5
@@ -45,14 +49,19 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
 preparation: |-
   couper les tomates
 
   assaisonner d'huile, sel et poivre...
 
   et une herbe fraiche, ou des olives (ratio 600g dénoyautées pour 100p) si le coeur vous en dit...
-publishDate: 2024-06-23T13:27:00.000Z
+publishDate: '2024-06-23T13:27:00+00:00'
 serveHot: false
 uuid: 61qzivzu1bhv
-slug: salade-de-tomates_61qzivzu1bhv
+id: salade-de-tomates_61qzivzu1bhv
+createdAt: '2024-06-23T13:27:00+00:00'
+updatedAt: '2024-06-23T13:27:00+00:00'
+createdBy: ''
 ---

@@ -17,6 +17,8 @@ ingredients:
     comment: ''
     allergens: []
     type: autres
+    pF: false
+    pS: false
   - uuid: hzwesd
     name: Lait de riz
     originalQuantity: 2
@@ -26,6 +28,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: g56l9d
     name: Fécule de pomme de terre
     originalQuantity: 120
@@ -35,6 +39,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: 1nb85u
     name: Farine de riz blanche
     originalQuantity: 160
@@ -44,6 +50,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: 31bhpd
     name: Pralines roses de Lyon
     originalQuantity: 265
@@ -53,6 +61,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
   - uuid: u9z2he
     name: Sucre en poudre
     originalQuantity: 265
@@ -62,6 +72,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
 materiel:
   - ramequins
 plate: 20
@@ -81,7 +93,7 @@ preparation: |-
    Lorsque la crème a correctement épaissi, la transvaser dans un gastro. Placer un film étirable au contact de la crème pour éviter la formation d’une fine pellicule de peau. Et mettre au frais ou dehors si c'est l'hiver ^^
 
   Servir en ramequin et déposer quelques amandes des pralines sur la crème.
-publishDate: 2024-06-13T14:27:00.000Z
+publishDate: '2024-06-13T14:27:00+00:00'
 regime:
   - vegan
   - sans-gluten
@@ -89,5 +101,8 @@ title: Crème dessert aux pralines roses
 typeR: dessert
 serveHot: false
 uuid: y9t03vab458e
-slug: creme-dessert-aux-pral_y9t03vab458e
+id: creme-dessert-aux-pral_y9t03vab458e
+createdAt: '2024-06-13T14:27:00+00:00'
+updatedAt: '2024-06-13T14:27:00+00:00'
+createdBy: Auré
 ---

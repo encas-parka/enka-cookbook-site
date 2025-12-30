@@ -22,6 +22,8 @@ ingredients:
     comment: pour la version sans gluten, utiliser des pates sans gluten
     allergens: []
     type: sec
+    pF: false
+    pS: false
   - uuid: ibtbnq
     name: Tomate
     originalQuantity: 100
@@ -31,6 +33,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: 163u4z
     name: Olives Vertes Dénoyautées
     originalQuantity: 5
@@ -40,6 +44,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: false
+    pS: false
   - uuid: 7ahzm0
     name: Olives Noires Dénoyautées
     originalQuantity: 5
@@ -49,6 +55,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: u2m28w
     name: Ail
     originalQuantity: 2
@@ -58,6 +66,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: c88lz8
     name: Câpres
     originalQuantity: 1
@@ -67,6 +77,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: s8j4ff
     name: Basilic
     originalQuantity: 10
@@ -76,6 +88,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: true
+    pS: false
   - uuid: h3c8al
     name: huile d'olive
     originalQuantity: 1
@@ -85,6 +99,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
 preparation: |-
   Faire cuire les pennes al dente dans beaucoup d'eau salée.
 
@@ -99,8 +115,11 @@ preparation: |-
   Rectifier l'assaisonement
 
   Servir avec du parmesan ou grana ou pecorino râpé.
-publishDate: 2025-06-04T17:18:00.000Z
+publishDate: '2025-06-04T17:18:00+00:00'
 serveHot: true
 uuid: qavmivpa5mfj
-slug: penne-cruda_qavmivpa5mfj
+id: penne-cruda_qavmivpa5mfj
+createdAt: '2025-06-04T17:18:00+00:00'
+updatedAt: '2025-06-04T17:18:00+00:00'
+createdBy: frédo
 ---

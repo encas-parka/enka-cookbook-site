@@ -22,6 +22,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: civ587
     name: Farine de riz gluant
     originalQuantity: 150
@@ -31,6 +33,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: zf3zf8
     name: Oeuf
     originalQuantity: 30
@@ -41,6 +45,8 @@ ingredients:
     allergens:
       - Oeuf
     type: lof
+    pF: false
+    pS: false
   - uuid: u9z2he
     name: Sucre en poudre
     originalQuantity: 1.5
@@ -50,6 +56,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
   - uuid: q33x0k
     name: Confiture de chataigne (sans sucre)
     originalQuantity: 2.3
@@ -59,6 +67,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
   - uuid: kmq1zb
     name: Beurre doux
     originalQuantity: 1
@@ -69,6 +79,8 @@ ingredients:
     allergens:
       - Produit laitier
     type: frais
+    pF: true
+    pS: false
 materiel:
   - Gastro 1/1 (Normaux)
   - Four
@@ -82,8 +94,11 @@ preparation: |-
   (24 parts par gastro. )
 prepAlt:
   - recetteAlt: '-fondant-chataigne-vegan-et-sans-gluten_i1caicq2'
-publishDate: 2024-05-18T13:02:00.000Z
+publishDate: '2024-05-18T13:02:00+00:00'
 serveHot: false
 uuid: bkfsefrcm5wj
-slug: fondant-chataigne_bkfsefrcm5wj
+id: fondant-chataigne_bkfsefrcm5wj
+createdAt: '2024-05-18T13:02:00+00:00'
+updatedAt: '2024-05-18T13:02:00+00:00'
+createdBy: ''
 ---

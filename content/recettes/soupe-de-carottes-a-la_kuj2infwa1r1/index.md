@@ -17,6 +17,8 @@ ingredients:
     comment: Gouter en fin de cuisson (rectifier)
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: fetrpe
     name: Coriandre fraîche
     originalQuantity: 6
@@ -26,6 +28,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: true
+    pS: false
   - uuid: u2m28w
     name: Ail
     originalQuantity: 2
@@ -35,6 +39,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: rtavky
     name: Oignon
     originalQuantity: 2.25
@@ -44,6 +50,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: 18dy4e
     name: Pomme de terre
     originalQuantity: 3
@@ -53,6 +61,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: eouu0v
     name: Carotte
     originalQuantity: 12.5
@@ -62,6 +72,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: h3c8al
     name: huile d'olive
     originalQuantity: 500
@@ -71,6 +83,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
 materiel:
   - Bruleur
   - Marmitte
@@ -92,7 +106,7 @@ preparation: |-
   Vérifier si les carottes et patates sont cuites, et quand c'est le cas tout mixer en rajoutant un filet d'huile d'olive. Ajouter un peu d'eau pendant le mixage si nécessaire pour avoir une consistance de soupe veloutée
 
   Mélanger la coriandre une fois le tout bien mixé.
-publishDate: 2024-06-07T16:19:00.000Z
+publishDate: '2024-06-07T16:19:00+00:00'
 quantite_desc: Un bol par personne
 regime:
   - vegan
@@ -104,5 +118,8 @@ title: Soupe de carottes à la coriandre
 typeR: entree
 serveHot: true
 uuid: kuj2infwa1r1
-slug: soupe-de-carottes-a-la_kuj2infwa1r1
+id: soupe-de-carottes-a-la_kuj2infwa1r1
+createdAt: '2024-06-07T16:19:00+00:00'
+updatedAt: '2024-06-07T16:19:00+00:00'
+createdBy: ''
 ---

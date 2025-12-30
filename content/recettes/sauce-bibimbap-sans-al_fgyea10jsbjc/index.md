@@ -22,6 +22,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: 28jpdi
     name: Gochujang sans gluten
     originalQuantity: 250
@@ -31,6 +33,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: zkmmgt
     name: 'Sirop d''érable '
     originalQuantity: 125
@@ -40,6 +44,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
   - uuid: s80bet
     name: Soda au Gingembre - Ginger Beer
     originalQuantity: 250
@@ -49,6 +55,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
   - uuid: c70jxb
     name: huile de tournesol
     originalQuantity: 250
@@ -58,6 +66,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: nz839c
     name: Gingembre bio
     originalQuantity: 80
@@ -67,6 +77,8 @@ ingredients:
     comment: râpé
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: u2m28w
     name: Ail
     originalQuantity: 8
@@ -76,6 +88,8 @@ ingredients:
     comment: haché
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: ljzb7j
     name: Eau
     originalQuantity: 500
@@ -85,12 +99,17 @@ ingredients:
     comment: ''
     allergens: []
     type: autres
+    pF: false
+    pS: false
 preparation: |-
   Tout mixer !!
 
   Goûter car peut être il faut saler.
-publishDate: 2025-05-04T21:30:00.000Z
+publishDate: '2025-05-04T21:30:00+00:00'
 serveHot: false
 uuid: fgyea10jsbjc
-slug: sauce-bibimbap-sans-al_fgyea10jsbjc
+id: sauce-bibimbap-sans-al_fgyea10jsbjc
+createdAt: '2025-05-04T21:30:00+00:00'
+updatedAt: '2025-05-04T21:30:00+00:00'
+createdBy: Auré
 ---

@@ -22,6 +22,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: u2m28w
     name: Ail
     originalQuantity: 2
@@ -31,6 +33,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: h3c8al
     name: huile d'olive
     originalQuantity: 50
@@ -40,6 +44,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: hlbwfd
     name: Yaourt de soja
     originalQuantity: 200
@@ -50,6 +56,8 @@ ingredients:
     allergens:
       - Soja
     type: frais
+    pF: true
+    pS: false
   - uuid: q33x0k
     name: Confiture de chataigne (sans sucre)
     originalQuantity: 750
@@ -59,6 +67,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
   - uuid: bidsmu
     name: Paprika
     originalQuantity: 8
@@ -68,13 +78,18 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
 preparation: |-
   * Emincer très fin les échalottes, hacher l'ail et brasser tous les ingrédients ensemble à l'aide d'une spatule ou aux mains. La texture doit être épaisse.
   * Goûter et réajuster l'assaisonnement, sel, poivre, paprika, ail.
 prepAlt:
   - recetteAlt: Tartinade salé a la chataigne
-publishDate: 2024-05-18T16:05:00.000Z
+publishDate: '2024-05-18T16:05:00+00:00'
 serveHot: false
 uuid: ereleew3m69x
-slug: tartinade-sale-a-la-ch_ereleew3m69x
+id: tartinade-sale-a-la-ch_ereleew3m69x
+createdAt: '2024-05-18T16:05:00+00:00'
+updatedAt: '2024-05-18T16:05:00+00:00'
+createdBy: ''
 ---

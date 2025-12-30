@@ -26,6 +26,8 @@ ingredients:
     allergens:
       - Gluten
     type: sec
+    pF: false
+    pS: false
   - uuid: 2juq3x
     name: Sel
     originalQuantity: 130
@@ -35,6 +37,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: h3c8al
     name: huile d'olive
     originalQuantity: 1
@@ -44,6 +48,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: tobtbt
     name: Citron non traité
     originalQuantity: 10
@@ -53,6 +59,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: hgfa4e
     name: Persil frais
     originalQuantity: 9
@@ -62,6 +70,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: true
+    pS: false
   - uuid: u2m28w
     name: Ail
     originalQuantity: 3
@@ -71,6 +81,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: rtavky
     name: Oignon
     originalQuantity: 9
@@ -80,6 +92,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: eouu0v
     name: Carotte
     originalQuantity: 5
@@ -89,6 +103,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: 163u4z
     name: Olives Vertes Dénoyautées
     originalQuantity: 5.3
@@ -98,6 +114,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: false
+    pS: false
 materiel: []
 preparation: |-
   >Faire chauffer l'huile avec les épices : curcuma et gingembre
@@ -120,8 +138,11 @@ preparation: |-
 preparation24h: ''
 astuces: []
 prepAlt: []
-publishDate: 2025-10-19T19:26:00.000Z
+publishDate: '2025-10-19T19:26:00+00:00'
 serveHot: true
 uuid: 0vwuvf5pb2ba
-slug: tajine-olives-citron-a_0vwuvf5pb2ba
+id: tajine-olives-citron-a_0vwuvf5pb2ba
+createdAt: '2025-10-19T19:26:00+00:00'
+updatedAt: '2025-10-19T19:26:00+00:00'
+createdBy: Alio
 ---

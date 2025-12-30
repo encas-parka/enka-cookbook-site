@@ -23,6 +23,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: 4totf1
     name: Epinard
     originalQuantity: 250
@@ -32,6 +34,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: j7as8d
     name: Cébette - Ciboule - Cive - Oignon vert
     originalQuantity: 600
@@ -41,6 +45,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: l3fs10
     name: Poireau
     originalQuantity: 600
@@ -50,6 +56,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: u2m28w
     name: Ail
     originalQuantity: 1
@@ -59,6 +67,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: 2pps90
     name: Poivre
     originalQuantity: 12
@@ -68,6 +78,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: 2juq3x
     name: Sel
     originalQuantity: 12
@@ -77,6 +89,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: 6izdfu
     name: Sumac
     originalQuantity: 12
@@ -86,6 +100,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: htp5ma
     name: Curcuma moulu
     originalQuantity: 12
@@ -95,6 +111,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: nnkg8f
     name: Aneth aromatique
     originalQuantity: 125
@@ -104,6 +122,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: hgfa4e
     name: Persil frais
     originalQuantity: 800
@@ -113,6 +133,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: true
+    pS: false
   - uuid: chfwwq
     name: Crème soja
     originalQuantity: 300
@@ -123,6 +145,8 @@ ingredients:
     allergens:
       - Soja
     type: lof
+    pF: false
+    pS: false
   - uuid: o627mw
     name: Farine de pois chiche
     originalQuantity: 1
@@ -132,6 +156,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: h3c8al
     name: huile d'olive
     originalQuantity: 150
@@ -141,6 +167,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: km927d
     name: Graines de lin
     originalQuantity: 100
@@ -150,6 +178,8 @@ ingredients:
     comment: moulues
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: ljzb7j
     name: Eau
     originalQuantity: 1
@@ -159,6 +189,8 @@ ingredients:
     comment: ''
     allergens: []
     type: autres
+    pF: false
+    pS: false
   - uuid: ljzb7j
     name: Eau
     originalQuantity: 400
@@ -168,6 +200,8 @@ ingredients:
     comment: avec le lin
     allergens: []
     type: autres
+    pF: false
+    pS: false
 preparation: |-
   Pour préparer un kuku sabzi, commencer par laver délicatement les herbes puis émincer tout.  Le hachis ne doit pas ressembler à une purée d’herbes.
 
@@ -180,8 +214,11 @@ preparation: |-
   soigneusement tout en incorporant l’eau petit à petit.
 
   Verser dans le plat préalablement sulfurisé. Enfourner 45 minutes en vérifiant de temps en temps.
-publishDate: 2025-05-30T20:10:00.000Z
+publishDate: '2025-05-30T20:10:00+00:00'
 serveHot: true
 uuid: kvtvcpi3lwg1
-slug: kuku-sabzi-vegan_kvtvcpi3lwg1
+id: kuku-sabzi-vegan_kvtvcpi3lwg1
+createdAt: '2025-05-30T20:10:00+00:00'
+updatedAt: '2025-05-30T20:10:00+00:00'
+createdBy: Auré
 ---

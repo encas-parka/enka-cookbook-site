@@ -1,6 +1,6 @@
 
 {
-  "slug": "flan-de-courgettes-au-_qyi5426r2gnp",
+  "id": "flan-de-courgettes-au-_qyi5426r2gnp",
   "title": "Flan De Courgettes Au Basilic",
   "draft": false,
   "typeR": "entree",
@@ -16,11 +16,14 @@
   "quantite_desc": null,
   "check": true,
   "materiel": null,
-  "ingredients": [{"allergens":[],"comment":"","name":"Courgette","normalizedQuantity":11000,"normalizedUnit":"gr.","originalQuantity":11,"originalUnit":"kg","type":"legumes","uuid":"9zozfk"},{"allergens":["Oeuf"],"comment":"","name":"Oeuf","normalizedQuantity":40,"normalizedUnit":"unité","originalQuantity":40,"originalUnit":"unité","type":"lof","uuid":"zf3zf8"},{"allergens":["Produit laitier"],"comment":"","name":"Crème florette","normalizedQuantity":2500,"normalizedUnit":"ml","originalQuantity":2.5,"originalUnit":"l.","type":"frais","uuid":"k6zm70"},{"allergens":[],"comment":"","name":"Basilic","normalizedQuantity":5,"normalizedUnit":"bottes","originalQuantity":5,"originalUnit":"bottes","type":"epices","uuid":"s8j4ff"}],
+  "ingredients": [{"allergens":[],"comment":"","name":"Courgette","normalizedQuantity":11000,"normalizedUnit":"gr.","originalQuantity":11,"originalUnit":"kg","pF":true,"pS":false,"type":"legumes","uuid":"9zozfk"},{"allergens":["Oeuf"],"comment":"","name":"Oeuf","normalizedQuantity":40,"normalizedUnit":"unité","originalQuantity":40,"originalUnit":"unité","pF":false,"pS":false,"type":"lof","uuid":"zf3zf8"},{"allergens":["Produit laitier"],"comment":"","name":"Crème florette","normalizedQuantity":2500,"normalizedUnit":"ml","originalQuantity":2.5,"originalUnit":"l.","pF":false,"pS":false,"type":"frais","uuid":"k6zm70"},{"allergens":[],"comment":"","name":"Basilic","normalizedQuantity":5,"normalizedUnit":"bottes","originalQuantity":5,"originalUnit":"bottes","pF":true,"pS":false,"type":"epices","uuid":"s8j4ff"}],
   "preparation": "\nLavez les courgettes, les couper en lamelles. Plongez-les dans un\ngrand volume d'eau salée pendant 10min.\n\n\nPréchauffez le four à 180 degrés.\n\n\nDans un saladier, battez les oeufs avec la crème. Salez, poivrer.\n\n\nMixer les courgettes et le basilic puis ajouter-les à la\npréparation.\n\n\nVerser dans des moules individuels 30 min.",
   "preparation24h": null,
   "astuces": null,
   "prepAlt": null,
   "permissionWrite": [],
-  "publishedAt": "2025-01-01T00:00:00Z"
+  "publishedAt": "2025-01-01T00:00:00Z",
+  "createdAt": "2025-06-12T10:02:00+00:00",
+  "updatedAt": "2025-06-12T10:02:00+00:00",
+  "createdBy": ""
 }

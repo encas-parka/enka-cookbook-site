@@ -25,6 +25,8 @@ ingredients:
     comment: ou yuzu. Mixé très fin
     allergens: []
     type: legumes
+    pF: false
+    pS: false
   - uuid: rtj08p
     name: Algue Nori
     originalQuantity: 45
@@ -34,6 +36,8 @@ ingredients:
     comment: coupées en languettes. 16/feuilles
     allergens: []
     type: legumes
+    pF: false
+    pS: false
   - uuid: j7as8d
     name: Cébette - Ciboule - Cive - Oignon vert
     originalQuantity: 1.5
@@ -43,6 +47,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: 4totf1
     name: Epinard
     originalQuantity: 2
@@ -52,6 +58,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: ibtbnq
     name: Tomate
     originalQuantity: 8
@@ -61,6 +69,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: u2m28w
     name: Ail
     originalQuantity: 5
@@ -70,6 +80,8 @@ ingredients:
     comment: Bouillon final
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: nz839c
     name: Gingembre bio
     originalQuantity: 600
@@ -79,6 +91,8 @@ ingredients:
     comment: Bouillon final
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: v9qhs9
     name: Champignons
     originalQuantity: 2
@@ -88,6 +102,8 @@ ingredients:
     comment: Bouillon final
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: rtavky
     name: Oignon
     originalQuantity: 12
@@ -97,6 +113,8 @@ ingredients:
     comment: Bouillon final
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: 7b8r4n
     name: Champignon shiitake séché
     originalQuantity: 250
@@ -106,6 +124,8 @@ ingredients:
     comment: Taré
     allergens: []
     type: legumes
+    pF: false
+    pS: false
   - uuid: u2m28w
     name: Ail
     originalQuantity: 20
@@ -115,6 +135,8 @@ ingredients:
     comment: Taré
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: nz839c
     name: Gingembre bio
     originalQuantity: 240
@@ -124,6 +146,8 @@ ingredients:
     comment: Taré
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: oafcb5
     name: Algue Kombu
     originalQuantity: 30
@@ -133,6 +157,8 @@ ingredients:
     comment: Taré à faire la veille
     allergens: []
     type: legumes
+    pF: false
+    pS: false
   - uuid: 7b8r4n
     name: Champignon shiitake séché
     originalQuantity: 500
@@ -142,6 +168,8 @@ ingredients:
     comment: Dashi
     allergens: []
     type: legumes
+    pF: false
+    pS: false
   - uuid: oafcb5
     name: Algue Kombu
     originalQuantity: 30
@@ -151,6 +179,8 @@ ingredients:
     comment: Dashi à faire la veille
     allergens: []
     type: legumes
+    pF: false
+    pS: false
   - uuid: ljzb7j
     name: Eau
     originalQuantity: 3
@@ -160,6 +190,8 @@ ingredients:
     comment: Oeufs mollés Ajitama
     allergens: []
     type: autres
+    pF: false
+    pS: false
   - uuid: ljzb7j
     name: Eau
     originalQuantity: 70
@@ -169,6 +201,8 @@ ingredients:
     comment: Dashi
     allergens: []
     type: autres
+    pF: false
+    pS: false
   - uuid: k2uthk
     name: Miso blanc
     originalQuantity: 400
@@ -178,6 +212,8 @@ ingredients:
     comment: 4gr à racler sur le bords du bol
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: bbwo4n
     name: Tamari (sauce)
     originalQuantity: 150
@@ -188,6 +224,8 @@ ingredients:
     allergens:
       - Soja
     type: epices
+    pF: false
+    pS: false
   - uuid: 2juq3x
     name: Sel
     originalQuantity: 20
@@ -197,6 +235,8 @@ ingredients:
     comment: Taré
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: k6injl
     name: Vinaigre de riz
     originalQuantity: 400
@@ -206,6 +246,8 @@ ingredients:
     comment: Taré
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: bbwo4n
     name: Tamari (sauce)
     originalQuantity: 3
@@ -216,6 +258,8 @@ ingredients:
     allergens:
       - Soja
     type: epices
+    pF: false
+    pS: false
   - uuid: u9z2he
     name: Sucre en poudre
     originalQuantity: 500
@@ -225,6 +269,8 @@ ingredients:
     comment: Oeufs mollés Ajitama
     allergens: []
     type: sucres
+    pF: false
+    pS: false
   - uuid: u9z2he
     name: Sucre en poudre
     originalQuantity: 200
@@ -234,6 +280,8 @@ ingredients:
     comment: Taré
     allergens: []
     type: sucres
+    pF: false
+    pS: false
   - uuid: 3ahcls
     name: Tofu ferme
     originalQuantity: 5
@@ -243,6 +291,8 @@ ingredients:
     comment: à laquer à la poêle ou plancha. Faire revenir dans l'huile puis déglacer à la sauce soja.
     allergens: []
     type: frais
+    pF: false
+    pS: false
   - uuid: fazth1
     name: huile de sésame
     originalQuantity: 100
@@ -253,6 +303,8 @@ ingredients:
     allergens:
       - Sésame
     type: lof
+    pF: false
+    pS: false
   - uuid: zf3zf8
     name: Oeuf
     originalQuantity: 105
@@ -263,6 +315,8 @@ ingredients:
     allergens:
       - Oeuf
     type: lof
+    pF: false
+    pS: false
   - uuid: mesg7t
     name: Nouilles de riz
     originalQuantity: 2.5
@@ -272,6 +326,8 @@ ingredients:
     comment: pour les sans gluten
     allergens: []
     type: sec
+    pF: false
+    pS: false
   - uuid: ul46ke
     name: Nouilles de blé ondulées Ramen
     originalQuantity: 7
@@ -282,6 +338,8 @@ ingredients:
     allergens:
       - Gluten
     type: sec
+    pF: false
+    pS: false
 preparation: |-
   Récupérer les shiitakés du dashi, les essorer à la main et les trancher assez finement.
 
@@ -348,8 +406,11 @@ preparation24h: |-
   La marinade pourra être reversée dans la bouillon s'il n'est pas destiné à être végan.
 astuces:
   - astuce: A la place de la Sauce Soja, j'ai proposé de la Sauce Tamari pour les histoires de gluten. A la place du Mirin, j'ai proposé  du Vinaigre de Riz + Sucre dans le Taré pour les histoires d'alcool.
-publishDate: 2024-09-04T21:09:00.000Z
+publishDate: '2024-09-04T21:09:00+00:00'
 serveHot: true
 uuid: jh7vfks0350f
-slug: ramen-shoyu-dete_jh7vfks0350f
+id: ramen-shoyu-dete_jh7vfks0350f
+createdAt: '2024-09-04T21:09:00+00:00'
+updatedAt: '2024-09-04T21:09:00+00:00'
+createdBy: Auré
 ---

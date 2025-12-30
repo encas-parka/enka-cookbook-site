@@ -1,6 +1,6 @@
 
 {
-  "slug": "gateau-jako-au-chocola_777ohr82xysb",
+  "id": "gateau-jako-au-chocola_777ohr82xysb",
   "title": "Gateau Jako Au Chocolat",
   "draft": false,
   "typeR": "dessert",
@@ -16,11 +16,14 @@
   "quantite_desc": "20 parts par gastro",
   "check": true,
   "materiel": null,
-  "ingredients": [{"allergens":["Oeuf"],"comment":"","name":"Oeuf","normalizedQuantity":35,"normalizedUnit":"unité","originalQuantity":35,"originalUnit":"unité","type":"lof","uuid":"zf3zf8"},{"allergens":["Produit laitier"],"comment":"","name":"Beurre doux","normalizedQuantity":1000,"normalizedUnit":"gr.","originalQuantity":1,"originalUnit":"kg","type":"frais","uuid":"kmq1zb"},{"allergens":[],"comment":"","name":"Chocolat noir patissier 70p100","normalizedQuantity":1500,"normalizedUnit":"gr.","originalQuantity":1.5,"originalUnit":"kg","type":"sucres","uuid":"1e3zhq"},{"allergens":[],"comment":"","name":"Crème de marron","normalizedQuantity":5000,"normalizedUnit":"gr.","originalQuantity":5,"originalUnit":"kg","type":"sucres","uuid":"dau8y8"}],
+  "ingredients": [{"allergens":["Oeuf"],"comment":"","name":"Oeuf","normalizedQuantity":35,"normalizedUnit":"unité","originalQuantity":35,"originalUnit":"unité","pF":false,"pS":false,"type":"lof","uuid":"zf3zf8"},{"allergens":["Produit laitier"],"comment":"","name":"Beurre doux","normalizedQuantity":1000,"normalizedUnit":"gr.","originalQuantity":1,"originalUnit":"kg","pF":true,"pS":false,"type":"frais","uuid":"kmq1zb"},{"allergens":[],"comment":"","name":"Chocolat noir patissier 70p100","normalizedQuantity":1500,"normalizedUnit":"gr.","originalQuantity":1.5,"originalUnit":"kg","pF":false,"pS":false,"type":"sucres","uuid":"1e3zhq"},{"allergens":[],"comment":"","name":"Crème de marron","normalizedQuantity":5000,"normalizedUnit":"gr.","originalQuantity":5,"originalUnit":"kg","pF":false,"pS":false,"type":"sucres","uuid":"dau8y8"}],
   "preparation": "Préchauffer le four à 160°.\n\nFondre dans un cul de poule au bain-marie le chocolat additionné du beurre, ajouter la crème de marron. Lorsque le mélange est presque froid y ajouter les oeufs entiers. Bien mélanger. Portionner en gastros plats tapissés de papier sulfurisé.\n\nEnfourner pour 30 mn",
   "preparation24h": null,
   "astuces": null,
   "prepAlt": null,
   "permissionWrite": [],
-  "publishedAt": "2025-01-01T00:00:00Z"
+  "publishedAt": "2025-01-01T00:00:00Z",
+  "createdAt": "2025-06-05T07:22:00+00:00",
+  "updatedAt": "2025-06-05T07:22:00+00:00",
+  "createdBy": "frédo"
 }

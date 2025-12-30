@@ -26,6 +26,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: l5p1a5
     name: Concombre
     originalQuantity: 4.5
@@ -35,6 +37,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: vwdomu
     name: Echalote
     originalQuantity: 1.5
@@ -44,6 +48,8 @@ ingredients:
     comment: sauce
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: eouu0v
     name: Carotte
     originalQuantity: 6.5
@@ -53,6 +59,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: oafcb5
     name: Algue Kombu
     originalQuantity: 15
@@ -62,6 +70,8 @@ ingredients:
     comment: sauce
     allergens: []
     type: legumes
+    pF: false
+    pS: false
   - uuid: 0d1fzw
     name: Gingembre
     originalQuantity: 150
@@ -71,6 +81,8 @@ ingredients:
     comment: sauce
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: u2m28w
     name: Ail
     originalQuantity: 420
@@ -80,6 +92,8 @@ ingredients:
     comment: sauce
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: u2m28w
     name: Ail
     originalQuantity: 18
@@ -89,6 +103,8 @@ ingredients:
     comment: Chunks laqués
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: ljzb7j
     name: Eau
     originalQuantity: 20
@@ -98,6 +114,8 @@ ingredients:
     comment: chaude
     allergens: []
     type: autres
+    pF: false
+    pS: false
   - uuid: 6m90g7
     name: Protéines de soja
     originalQuantity: 1.5
@@ -108,6 +126,8 @@ ingredients:
     allergens:
       - Soja
     type: autres
+    pF: false
+    pS: false
   - uuid: 73ikep
     name: Cacahuète
     originalQuantity: 1.5
@@ -118,6 +138,8 @@ ingredients:
     allergens:
       - Arachide
     type: sec
+    pF: false
+    pS: false
   - uuid: 3tifny
     name: Vermicelle de Riz
     originalQuantity: 8.7
@@ -127,6 +149,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sec
+    pF: false
+    pS: false
   - uuid: gzi2ry
     name: Jus d'orange
     originalQuantity: 3
@@ -136,6 +160,8 @@ ingredients:
     comment: chunks laqués
     allergens: []
     type: sucres
+    pF: false
+    pS: false
   - uuid: u9z2he
     name: Sucre en poudre
     originalQuantity: 3
@@ -145,6 +171,8 @@ ingredients:
     comment: sauce
     allergens: []
     type: sucres
+    pF: false
+    pS: false
   - uuid: u9z2he
     name: Sucre en poudre
     originalQuantity: 250
@@ -154,6 +182,8 @@ ingredients:
     comment: chunks laqués
     allergens: []
     type: sucres
+    pF: false
+    pS: false
   - uuid: k6injl
     name: Vinaigre de riz
     originalQuantity: 3
@@ -163,6 +193,8 @@ ingredients:
     comment: sauce
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: rgt7s4
     name: Poivre noir moulu
     originalQuantity: 12
@@ -172,6 +204,8 @@ ingredients:
     comment: chunks laqués
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: dex52s
     name: mélange 4 épices
     originalQuantity: 20
@@ -181,6 +215,8 @@ ingredients:
     comment: chunks laqués
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: 2j9y2v
     name: Menthe
     originalQuantity: 5
@@ -190,6 +226,8 @@ ingredients:
     comment: Grosse botte
     allergens: []
     type: epices
+    pF: true
+    pS: false
   - uuid: fetrpe
     name: Coriandre fraîche
     originalQuantity: 5
@@ -199,6 +237,8 @@ ingredients:
     comment: Grosses bottes
     allergens: []
     type: epices
+    pF: true
+    pS: false
   - uuid: bbwo4n
     name: Tamari (sauce)
     originalQuantity: 1.5
@@ -209,6 +249,8 @@ ingredients:
     allergens:
       - Soja
     type: epices
+    pF: false
+    pS: false
 materiel:
   - Plat Paela
 preparation: |-
@@ -257,8 +299,11 @@ preparation: |-
   \- les légumes crus (carottes, concombre et salade) autour des nouilles ainsi que les chunks, cacahuètes et coriandre et menthe.
 astuces:
   - astuce: S'accompagne de nems
-publishDate: 2024-05-20T14:53:00.000Z
+publishDate: '2024-05-20T14:53:00+00:00'
 serveHot: false
 uuid: bg99tl1koegs
-slug: bo-bun-vege_bg99tl1koegs
+id: bo-bun-vege_bg99tl1koegs
+createdAt: '2024-05-20T14:53:00+00:00'
+updatedAt: '2024-05-20T14:53:00+00:00'
+createdBy: ''
 ---

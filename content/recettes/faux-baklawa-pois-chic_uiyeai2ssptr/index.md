@@ -16,6 +16,8 @@ ingredients:
     comment: ''
     allergens: []
     type: frais
+    pF: true
+    pS: false
   - uuid: bidsmu
     name: Paprika
     originalQuantity: 2
@@ -25,6 +27,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: fetrpe
     name: Coriandre fraîche
     originalQuantity: 1
@@ -34,6 +38,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: true
+    pS: false
   - uuid: nnkg8f
     name: Aneth aromatique
     originalQuantity: 1.5
@@ -43,6 +49,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: mck2wl
     name: Concentré de tomate
     originalQuantity: 80
@@ -52,6 +60,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: 09bywc
     name: Coulis de tomates
     originalQuantity: 1.5
@@ -61,6 +71,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: he3u48
     name: Cumin moulu
     originalQuantity: 4
@@ -70,6 +82,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: sk1gbb
     name: Cannelle
     originalQuantity: 3
@@ -79,6 +93,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: hlbwfd
     name: Yaourt de soja
     originalQuantity: 800
@@ -89,6 +105,8 @@ ingredients:
     allergens:
       - Soja
     type: frais
+    pF: true
+    pS: false
   - uuid: j7as8d
     name: Cébette - Ciboule - Cive - Oignon vert
     originalQuantity: 5
@@ -98,6 +116,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: 4totf1
     name: Epinard
     originalQuantity: 450
@@ -107,6 +127,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: u2m28w
     name: Ail
     originalQuantity: 1
@@ -116,6 +138,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: rtavky
     name: Oignon
     originalQuantity: 6
@@ -125,6 +149,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: h3c8al
     name: huile d'olive
     originalQuantity: 180
@@ -134,6 +160,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: wwl5vn
     name: Pois chiche cuit
     originalQuantity: 1.2
@@ -143,6 +171,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sec
+    pF: false
+    pS: false
   - uuid: u9z2he
     name: Sucre en poudre
     originalQuantity: 3
@@ -152,11 +182,13 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
 materiel:
   - Four
 plate: 16
 preparation: Comme la recette de baklawa pois chiche ?
-publishDate: 2024-06-20T10:04:00.000Z
+publishDate: '2024-06-20T10:04:00+00:00'
 regime:
   - vegetarien
   - vegan
@@ -166,5 +198,8 @@ title: Faux baklawa pois chiche végan
 typeR: entree
 serveHot: true
 uuid: uiyeai2ssptr
-slug: faux-baklawa-pois-chic_uiyeai2ssptr
+id: faux-baklawa-pois-chic_uiyeai2ssptr
+createdAt: '2024-06-20T10:04:00+00:00'
+updatedAt: '2024-06-20T10:04:00+00:00'
+createdBy: Ça vaulx le détour
 ---

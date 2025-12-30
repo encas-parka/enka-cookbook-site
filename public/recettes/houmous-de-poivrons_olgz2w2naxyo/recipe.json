@@ -1,6 +1,6 @@
 
 {
-  "slug": "houmous-de-poivrons_olgz2w2naxyo",
+  "id": "houmous-de-poivrons_olgz2w2naxyo",
   "title": "Houmous De Poivrons",
   "draft": false,
   "typeR": null,
@@ -16,11 +16,14 @@
   "quantite_desc": null,
   "check": null,
   "materiel": null,
-  "ingredients": [{"allergens":[],"comment":"","name":"Pois chiches","normalizedQuantity":1500,"normalizedUnit":"gr.","originalQuantity":1.5,"originalUnit":"kg","type":"sec","uuid":"6a8w8k"},{"allergens":[],"comment":"","name":"Ail","normalizedQuantity":39,"normalizedUnit":"gr.","originalQuantity":6,"originalUnit":"gousse·s","type":"legumes","uuid":"u2m28w"},{"allergens":[],"comment":"","name":"huile d'olive","normalizedQuantity":750,"normalizedUnit":"ml","originalQuantity":0.75,"originalUnit":"l.","type":"lof","uuid":"h3c8al"},{"allergens":["Sésame"],"comment":"","name":"Tahin","normalizedQuantity":2000,"normalizedUnit":"gr.","originalQuantity":2,"originalUnit":"kg","type":"autres","uuid":"u33083"},{"allergens":[],"comment":"","name":"Paprika","normalizedQuantity":100,"normalizedUnit":"gr.","originalQuantity":100,"originalUnit":"gr.","type":"epices","uuid":"bidsmu"},{"allergens":[],"comment":"","name":"Sel","normalizedQuantity":1,"normalizedUnit":"au goût","originalQuantity":1,"originalUnit":"au goût","type":"epices","uuid":"2juq3x"},{"allergens":[],"comment":"","name":"Poivre","normalizedQuantity":1,"normalizedUnit":"au goût","originalQuantity":1,"originalUnit":"au goût","type":"epices","uuid":"2pps90"},{"allergens":[],"comment":"","name":"Jus de citron","normalizedQuantity":750,"normalizedUnit":"ml","originalQuantity":0.75,"originalUnit":"l.","type":"sucres","uuid":"e4mjd1"}],
+  "ingredients": [{"allergens":[],"comment":"","name":"Pois chiches","normalizedQuantity":1500,"normalizedUnit":"gr.","originalQuantity":1.5,"originalUnit":"kg","pF":false,"pS":false,"type":"sec","uuid":"6a8w8k"},{"allergens":[],"comment":"","name":"Ail","normalizedQuantity":39,"normalizedUnit":"gr.","originalQuantity":6,"originalUnit":"gousse·s","pF":true,"pS":false,"type":"legumes","uuid":"u2m28w"},{"allergens":[],"comment":"","name":"huile d'olive","normalizedQuantity":750,"normalizedUnit":"ml","originalQuantity":0.75,"originalUnit":"l.","pF":false,"pS":false,"type":"lof","uuid":"h3c8al"},{"allergens":["Sésame"],"comment":"","name":"Tahin","normalizedQuantity":2000,"normalizedUnit":"gr.","originalQuantity":2,"originalUnit":"kg","pF":false,"pS":false,"type":"autres","uuid":"u33083"},{"allergens":[],"comment":"","name":"Paprika","normalizedQuantity":100,"normalizedUnit":"gr.","originalQuantity":100,"originalUnit":"gr.","pF":false,"pS":false,"type":"epices","uuid":"bidsmu"},{"allergens":[],"comment":"","name":"Sel","normalizedQuantity":1,"normalizedUnit":"au goût","originalQuantity":1,"originalUnit":"au goût","pF":false,"pS":false,"type":"epices","uuid":"2juq3x"},{"allergens":[],"comment":"","name":"Poivre","normalizedQuantity":1,"normalizedUnit":"au goût","originalQuantity":1,"originalUnit":"au goût","pF":false,"pS":false,"type":"epices","uuid":"2pps90"},{"allergens":[],"comment":"","name":"Jus de citron","normalizedQuantity":750,"normalizedUnit":"ml","originalQuantity":0.75,"originalUnit":"l.","pF":false,"pS":false,"type":"sucres","uuid":"e4mjd1"}],
   "preparation": "• Épépinez et coupez les poivrons. Arrosez d'un bon filet d’huile d’olive. Faire cuire au four à 200° pendant 45 mn en les retournant deux ou trois fois pendant la cuisson.\n• Après cuisson, les faire refroidir (dans un sac plastique, c'est plus facile pour enlever la peau) et enlever la peau.\n• Égoutter les pois chiches et les mixer avec le tahine le jus de citron et de l'ail.\n• Rajouter les poivrons, l'huile d'olive, le paprika, le sel, le poivre et finir de mixer.\n• Au dressage, saupoudrer de graines de sésame.",
   "preparation24h": "**24H avant**, FAIRE TREMPER LES POIS CHICHES dans 3 fois leur volume d'eau et changer l'eau le matin pour éviter que ça fermente. \n\n**Obligatoirement 1 J avant**",
   "astuces": null,
   "prepAlt": null,
   "permissionWrite": [],
-  "publishedAt": "2025-01-01T00:00:00Z"
+  "publishedAt": "2025-01-01T00:00:00Z",
+  "createdAt": "2023-06-21T09:47:13.131000+00:00",
+  "updatedAt": "2023-06-21T09:47:13.131000+00:00",
+  "createdBy": ""
 }

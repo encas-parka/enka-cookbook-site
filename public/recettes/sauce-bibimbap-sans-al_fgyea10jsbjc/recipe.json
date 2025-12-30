@@ -1,6 +1,6 @@
 
 {
-  "slug": "sauce-bibimbap-sans-al_fgyea10jsbjc",
+  "id": "sauce-bibimbap-sans-al_fgyea10jsbjc",
   "title": "Sauce Bibimbap Sans Allergenes",
   "draft": false,
   "typeR": "plat",
@@ -16,11 +16,14 @@
   "quantite_desc": null,
   "check": false,
   "materiel": null,
-  "ingredients": [{"allergens":[],"comment":"","name":"Vinaigre de riz","normalizedQuantity":300,"normalizedUnit":"ml","originalQuantity":300,"originalUnit":"ml","type":"epices","uuid":"k6injl"},{"allergens":[],"comment":"","name":"Gochujang sans gluten","normalizedQuantity":250,"normalizedUnit":"gr.","originalQuantity":250,"originalUnit":"gr.","type":"epices","uuid":"28jpdi"},{"allergens":[],"comment":"","name":"Sirop d'érable ","normalizedQuantity":125,"normalizedUnit":"ml","originalQuantity":125,"originalUnit":"ml","type":"sucres","uuid":"zkmmgt"},{"allergens":[],"comment":"","name":"Soda au Gingembre - Ginger Beer","normalizedQuantity":250,"normalizedUnit":"ml","originalQuantity":250,"originalUnit":"ml","type":"sucres","uuid":"s80bet"},{"allergens":[],"comment":"","name":"huile de tournesol","normalizedQuantity":250,"normalizedUnit":"ml","originalQuantity":250,"originalUnit":"ml","type":"lof","uuid":"c70jxb"},{"allergens":[],"comment":"râpé","name":"Gingembre bio","normalizedQuantity":80,"normalizedUnit":"gr.","originalQuantity":80,"originalUnit":"gr.","type":"legumes","uuid":"nz839c"},{"allergens":[],"comment":"haché","name":"Ail","normalizedQuantity":52,"normalizedUnit":"gr.","originalQuantity":8,"originalUnit":"gousse·s","type":"legumes","uuid":"u2m28w"},{"allergens":[],"comment":"","name":"Eau","normalizedQuantity":500,"normalizedUnit":"ml","originalQuantity":500,"originalUnit":"ml","type":"autres","uuid":"ljzb7j"}],
+  "ingredients": [{"allergens":[],"comment":"","name":"Vinaigre de riz","normalizedQuantity":300,"normalizedUnit":"ml","originalQuantity":300,"originalUnit":"ml","pF":false,"pS":false,"type":"epices","uuid":"k6injl"},{"allergens":[],"comment":"","name":"Gochujang sans gluten","normalizedQuantity":250,"normalizedUnit":"gr.","originalQuantity":250,"originalUnit":"gr.","pF":false,"pS":false,"type":"epices","uuid":"28jpdi"},{"allergens":[],"comment":"","name":"Sirop d'érable ","normalizedQuantity":125,"normalizedUnit":"ml","originalQuantity":125,"originalUnit":"ml","pF":false,"pS":false,"type":"sucres","uuid":"zkmmgt"},{"allergens":[],"comment":"","name":"Soda au Gingembre - Ginger Beer","normalizedQuantity":250,"normalizedUnit":"ml","originalQuantity":250,"originalUnit":"ml","pF":false,"pS":false,"type":"sucres","uuid":"s80bet"},{"allergens":[],"comment":"","name":"huile de tournesol","normalizedQuantity":250,"normalizedUnit":"ml","originalQuantity":250,"originalUnit":"ml","pF":false,"pS":false,"type":"lof","uuid":"c70jxb"},{"allergens":[],"comment":"râpé","name":"Gingembre bio","normalizedQuantity":80,"normalizedUnit":"gr.","originalQuantity":80,"originalUnit":"gr.","pF":true,"pS":false,"type":"legumes","uuid":"nz839c"},{"allergens":[],"comment":"haché","name":"Ail","normalizedQuantity":52,"normalizedUnit":"gr.","originalQuantity":8,"originalUnit":"gousse·s","pF":true,"pS":false,"type":"legumes","uuid":"u2m28w"},{"allergens":[],"comment":"","name":"Eau","normalizedQuantity":500,"normalizedUnit":"ml","originalQuantity":500,"originalUnit":"ml","pF":false,"pS":false,"type":"autres","uuid":"ljzb7j"}],
   "preparation": "Tout mixer !!\n\nGoûter car peut être il faut saler.",
   "preparation24h": null,
   "astuces": null,
   "prepAlt": null,
   "permissionWrite": [],
-  "publishedAt": "2025-01-01T00:00:00Z"
+  "publishedAt": "2025-01-01T00:00:00Z",
+  "createdAt": "2025-05-04T21:30:00+00:00",
+  "updatedAt": "2025-05-04T21:30:00+00:00",
+  "createdBy": "Auré"
 }

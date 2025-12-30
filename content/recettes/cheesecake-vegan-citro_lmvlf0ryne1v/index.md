@@ -23,6 +23,8 @@ ingredients:
     comment: (crème)
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: xdy736
     name: lait de coco
     originalQuantity: 300
@@ -32,6 +34,8 @@ ingredients:
     comment: (crème)
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: zkmmgt
     name: 'Sirop d''érable '
     originalQuantity: 240
@@ -41,6 +45,8 @@ ingredients:
     comment: (crème)
     allergens: []
     type: sucres
+    pF: false
+    pS: false
   - uuid: 5rkq49
     name: Noix de cajou
     originalQuantity: 450
@@ -51,6 +57,8 @@ ingredients:
     allergens:
       - Fruit à coque
     type: sec
+    pF: false
+    pS: false
   - uuid: lny16c
     name: sucre blanc
     originalQuantity: 100
@@ -60,6 +68,8 @@ ingredients:
     comment: (top)
     allergens: []
     type: sucres
+    pF: false
+    pS: false
   - uuid: ruhtax
     name: Agar-agar
     originalQuantity: 4
@@ -69,6 +79,8 @@ ingredients:
     comment: top
     allergens: []
     type: autres
+    pF: false
+    pS: false
   - uuid: e4mjd1
     name: Jus de citron
     originalQuantity: 50
@@ -78,6 +90,8 @@ ingredients:
     comment: (top) (à ajuster au gout)
     allergens: []
     type: sucres
+    pF: false
+    pS: false
   - uuid: e4mjd1
     name: Jus de citron
     originalQuantity: 100
@@ -87,6 +101,8 @@ ingredients:
     comment: (crème) (à ajuster au gout)
     allergens: []
     type: sucres
+    pF: false
+    pS: false
   - uuid: ljzb7j
     name: Eau
     originalQuantity: 250
@@ -96,6 +112,8 @@ ingredients:
     comment: (top)
     allergens: []
     type: autres
+    pF: false
+    pS: false
   - uuid: 65cee288c5d4
     name: Framboises surgelées
     originalQuantity: 1
@@ -105,6 +123,8 @@ ingredients:
     comment: (top)
     allergens: []
     type: legumes
+    pF: false
+    pS: true
   - uuid: 6bm4lq
     name: huile de coco
     originalQuantity: 190
@@ -114,6 +134,8 @@ ingredients:
     comment: (base)
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: h6thsp
     name: Speculoos
     originalQuantity: 500
@@ -125,6 +147,8 @@ ingredients:
       - Gluten
       - Soja
     type: sucres
+    pF: false
+    pS: false
 materiel:
   - Giraffe (Bras Mixeur)
 preparation: |-
@@ -140,8 +164,11 @@ preparation24h: |-
   Si c'est pour le midi le lendemain, faire la base : écraser les spéculoos, mélanger avec l'huile de coco fondue, tasser au fond d'un plat démoulable ou sur une plaque recouverte de papier sulfurisé. Mettre au frigo.
 astuces: []
 prepAlt: []
-publishDate: 2025-09-08T11:24:00.000Z
+publishDate: '2025-09-08T11:24:00+00:00'
 serveHot: false
 uuid: lmvlf0ryne1v
-slug: cheesecake-vegan-citro_lmvlf0ryne1v
+id: cheesecake-vegan-citro_lmvlf0ryne1v
+createdAt: '2025-09-08T11:24:00+00:00'
+updatedAt: '2025-09-08T11:24:00+00:00'
+createdBy: Miki
 ---

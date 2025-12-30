@@ -23,6 +23,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: u2m28w
     name: Ail
     originalQuantity: 3
@@ -32,6 +34,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: bq423s
     name: patate
     originalQuantity: 25
@@ -41,6 +45,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: c70jxb
     name: huile de tournesol
     originalQuantity: 2
@@ -50,6 +56,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: h3c8al
     name: huile d'olive
     originalQuantity: 1
@@ -59,6 +67,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: hlbwfd
     name: Yaourt de soja
     originalQuantity: 3
@@ -69,6 +79,8 @@ ingredients:
     allergens:
       - Soja
     type: frais
+    pF: true
+    pS: false
   - uuid: ique18
     name: Paprika fumé
     originalQuantity: 150
@@ -78,6 +90,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: rgt7s4
     name: Poivre noir moulu
     originalQuantity: 1
@@ -87,6 +101,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: 2juq3x
     name: Sel
     originalQuantity: 1
@@ -96,6 +112,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: mt22ff
     name: Ciboulette
     originalQuantity: 10
@@ -105,6 +123,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: true
+    pS: false
 preparation: |-
   Pour les smashed potatoes:
   Lavez les pommes de terre.
@@ -139,8 +159,11 @@ preparation: |-
   Pour la Crème Sour Vegan:
 
   Mélanger les yaourts, la ciboulette hachée, le jus de citron (jauger au goût le jus de citron est là pour donner un goût "laitier" que le yaourt de soja n'a pas), le sel et le poivre
-publishDate: 2025-05-05T16:07:00.000Z
+publishDate: '2025-05-05T16:07:00+00:00'
 serveHot: true
 uuid: clojw2gbb3cz
-slug: smashed-potatoes-et-cr_clojw2gbb3cz
+id: smashed-potatoes-et-cr_clojw2gbb3cz
+createdAt: '2025-05-05T16:07:00+00:00'
+updatedAt: '2025-05-05T16:07:00+00:00'
+createdBy: ''
 ---

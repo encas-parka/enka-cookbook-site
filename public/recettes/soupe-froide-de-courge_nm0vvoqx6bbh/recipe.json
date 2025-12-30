@@ -1,6 +1,6 @@
 
 {
-  "slug": "soupe-froide-de-courge_nm0vvoqx6bbh",
+  "id": "soupe-froide-de-courge_nm0vvoqx6bbh",
   "title": "Soupe Froide De Courgettes À La Menthe V2",
   "draft": false,
   "typeR": "entree",
@@ -16,11 +16,14 @@
   "quantite_desc": "...",
   "check": false,
   "materiel": null,
-  "ingredients": [{"allergens":[],"comment":"","name":"Courgette","normalizedQuantity":37000,"normalizedUnit":"gr.","originalQuantity":37,"originalUnit":"kg","type":"legumes","uuid":"9zozfk"},{"allergens":[],"comment":"","name":"Eau","normalizedQuantity":4400,"normalizedUnit":"ml","originalQuantity":4.4,"originalUnit":"l.","type":"autres","uuid":"ljzb7j"},{"allergens":[],"comment":"dont éventuellement qqs feuilles de menthe glaciale","name":"Menthe fraîche","normalizedQuantity":20,"normalizedUnit":"bottes","originalQuantity":20,"originalUnit":"bottes","type":"epices","uuid":"y16lzq"},{"allergens":[],"comment":"","name":"huile d'olive","normalizedQuantity":880,"normalizedUnit":"ml","originalQuantity":880,"originalUnit":"ml","type":"lof","uuid":"h3c8al"},{"allergens":["Soja"],"comment":"","name":"Lait de soja","normalizedQuantity":20000,"normalizedUnit":"ml","originalQuantity":20,"originalUnit":"l.","type":"lof","uuid":"gpeob7"}],
+  "ingredients": [{"allergens":[],"comment":"","name":"Courgette","normalizedQuantity":37000,"normalizedUnit":"gr.","originalQuantity":37,"originalUnit":"kg","pF":true,"pS":false,"type":"legumes","uuid":"9zozfk"},{"allergens":[],"comment":"","name":"Eau","normalizedQuantity":4400,"normalizedUnit":"ml","originalQuantity":4.4,"originalUnit":"l.","pF":false,"pS":false,"type":"autres","uuid":"ljzb7j"},{"allergens":[],"comment":"dont éventuellement qqs feuilles de menthe glaciale","name":"Menthe fraîche","normalizedQuantity":20,"normalizedUnit":"bottes","originalQuantity":20,"originalUnit":"bottes","pF":true,"pS":false,"type":"epices","uuid":"y16lzq"},{"allergens":[],"comment":"","name":"huile d'olive","normalizedQuantity":880,"normalizedUnit":"ml","originalQuantity":880,"originalUnit":"ml","pF":false,"pS":false,"type":"lof","uuid":"h3c8al"},{"allergens":["Soja"],"comment":"","name":"Lait de soja","normalizedQuantity":20000,"normalizedUnit":"ml","originalQuantity":20,"originalUnit":"l.","pF":false,"pS":false,"type":"lof","uuid":"gpeob7"}],
   "preparation": "Le lendemain ajouter le lait de soja et mixer l'ensemble jusqu'à ce que la texture soit bien lisse (rajouter éventuelement un peu d'eau selon la texture souhaitée).  rectifier son assaisonement. Puis juste avant de servir verser dans les verres et mettre un filet d'huile d'olive et une feuille de menthe par verre.",
   "preparation24h": "**Obligatoirement 1 J avant**\n\nLaver les courgettes. Couper les en gros morceaux. Les faire revenir rapidemment à feu fort dans 2 càs d'huile d'olive. Puis mettre sur feu doux, ajouter 20cL d'eau et placer la gaze de menthe sous les courgettes, saler, poivrer. Couvrir et laisser mijoter.\n\nPendant ce temps, laver la menthe puis ficeler la en bouquet. Mettre de côté 20 petites feuilles de menthe pour la déco.\n\nQuand les courgettes sont tendres, les verser sur le bouquet de menthe. Refroidir et mettre au frais toute la nuit.",
   "astuces": null,
   "prepAlt": null,
   "permissionWrite": [],
-  "publishedAt": "2025-01-01T00:00:00Z"
+  "publishedAt": "2025-01-01T00:00:00Z",
+  "createdAt": "2025-06-19T15:32:00+00:00",
+  "updatedAt": "2025-06-19T15:32:00+00:00",
+  "createdBy": ""
 }

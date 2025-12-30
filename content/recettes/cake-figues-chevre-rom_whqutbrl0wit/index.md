@@ -16,6 +16,8 @@ ingredients:
     allergens:
       - Gluten
     type: lof
+    pF: false
+    pS: false
   - uuid: 6z655r
     name: Romarin
     originalQuantity: 2
@@ -25,6 +27,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: da93ql
     name: Comté
     originalQuantity: 100
@@ -35,6 +39,8 @@ ingredients:
     allergens:
       - Produit laitier
     type: frais
+    pF: true
+    pS: false
   - uuid: yjxnau
     name: Bûche de chèvre
     originalQuantity: 150
@@ -45,6 +51,8 @@ ingredients:
     allergens:
       - Produit laitier
     type: frais
+    pF: true
+    pS: false
   - uuid: 2av6w8
     name: Farine de blé
     originalQuantity: 180
@@ -55,6 +63,8 @@ ingredients:
     allergens:
       - Gluten
     type: lof
+    pF: false
+    pS: false
   - uuid: h3c8al
     name: huile d'olive
     originalQuantity: 0.1
@@ -64,6 +74,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: zf3zf8
     name: Oeuf
     originalQuantity: 3
@@ -74,6 +86,8 @@ ingredients:
     allergens:
       - Oeuf
     type: lof
+    pF: false
+    pS: false
   - uuid: x286pc
     name: Lait demi-écrémé
     originalQuantity: 0.12
@@ -84,6 +98,8 @@ ingredients:
     allergens:
       - Produit laitier
     type: lof
+    pF: false
+    pS: false
   - uuid: mr7sd5
     name: Figues Sèches
     originalQuantity: 150
@@ -93,6 +109,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: false
+    pS: false
 materiel:
   - moule a cake
   - Grand Saladier
@@ -103,12 +121,15 @@ preparation: |-
   * Dans un saladier, mélanger la farine et la levure. Ajouter les œufs, bien mélanger, avec une spatule en bois. Ajouter le lait, petit à petit, bien mélanger régulièrement. Passer au fouet si il y a tout de même des grumeaux. Ajouter l'huile, bien mélanger.
   * Ajouter à la pâte le comté râpé, ainsi que les autres ingrédient du cake, mélanger. Saler au goût
   * Beurrer et fariner le moule à cake. Verser la pâte dedans, mettre environ 45min au four préchauffé à 180°C. Vérifier la cuisson à la fin en plantant une lame de couteau dans le cake.
-publishDate: 2023-11-13T13:54:36.088Z
+publishDate: '2023-11-13T13:54:36.088000+00:00'
 regime:
   - vegetarien
 title: Cake figues, chèvre, romarin
 typeR: plat
 serveHot: false
 uuid: whqutbrl0wit
-slug: cake-figues-chevre-rom_whqutbrl0wit
+id: cake-figues-chevre-rom_whqutbrl0wit
+createdAt: '2023-11-13T13:54:36.088000+00:00'
+updatedAt: '2023-11-13T13:54:36.088000+00:00'
+createdBy: N.R.
 ---

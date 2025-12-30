@@ -1,6 +1,6 @@
 
 {
-  "slug": "tajine-olives-citron-a_0vwuvf5pb2ba",
+  "id": "tajine-olives-citron-a_0vwuvf5pb2ba",
   "title": "Tajine Olives Citron Avec Pâte Langues D'oiseaux (Orzo)",
   "draft": false,
   "typeR": "plat",
@@ -16,11 +16,14 @@
   "quantite_desc": "",
   "check": false,
   "materiel": [],
-  "ingredients": [{"allergens":["Gluten"],"comment":"","name":"Pâtes - langue d'oiseau","normalizedQuantity":8000,"normalizedUnit":"gr.","originalQuantity":8,"originalUnit":"kg","type":"sec","uuid":"hlx995"},{"allergens":[],"comment":"","name":"Sel","normalizedQuantity":130,"normalizedUnit":"gr.","originalQuantity":130,"originalUnit":"gr.","type":"epices","uuid":"2juq3x"},{"allergens":[],"comment":"","name":"huile d'olive","normalizedQuantity":1000,"normalizedUnit":"ml","originalQuantity":1,"originalUnit":"l.","type":"lof","uuid":"h3c8al"},{"allergens":[],"comment":"","name":"Citron non traité","normalizedQuantity":1000,"normalizedUnit":"gr.","originalQuantity":10,"originalUnit":"unité","type":"legumes","uuid":"tobtbt"},{"allergens":[],"comment":"","name":"Persil frais","normalizedQuantity":9,"normalizedUnit":"bottes","originalQuantity":9,"originalUnit":"bottes","type":"epices","uuid":"hgfa4e"},{"allergens":[],"comment":"","name":"Ail","normalizedQuantity":240,"normalizedUnit":"gr.","originalQuantity":3,"originalUnit":"tête·s","type":"legumes","uuid":"u2m28w"},{"allergens":[],"comment":"","name":"Oignon","normalizedQuantity":9000,"normalizedUnit":"gr.","originalQuantity":9,"originalUnit":"kg","type":"legumes","uuid":"rtavky"},{"allergens":[],"comment":"","name":"Carotte","normalizedQuantity":5000,"normalizedUnit":"gr.","originalQuantity":5,"originalUnit":"kg","type":"legumes","uuid":"eouu0v"},{"allergens":[],"comment":"","name":"Olives Vertes Dénoyautées","normalizedQuantity":5300,"normalizedUnit":"gr.","originalQuantity":5.3,"originalUnit":"kg","type":"legumes","uuid":"163u4z"}],
+  "ingredients": [{"allergens":["Gluten"],"comment":"","name":"Pâtes - langue d'oiseau","normalizedQuantity":8000,"normalizedUnit":"gr.","originalQuantity":8,"originalUnit":"kg","pF":false,"pS":false,"type":"sec","uuid":"hlx995"},{"allergens":[],"comment":"","name":"Sel","normalizedQuantity":130,"normalizedUnit":"gr.","originalQuantity":130,"originalUnit":"gr.","pF":false,"pS":false,"type":"epices","uuid":"2juq3x"},{"allergens":[],"comment":"","name":"huile d'olive","normalizedQuantity":1000,"normalizedUnit":"ml","originalQuantity":1,"originalUnit":"l.","pF":false,"pS":false,"type":"lof","uuid":"h3c8al"},{"allergens":[],"comment":"","name":"Citron non traité","normalizedQuantity":1000,"normalizedUnit":"gr.","originalQuantity":10,"originalUnit":"unité","pF":true,"pS":false,"type":"legumes","uuid":"tobtbt"},{"allergens":[],"comment":"","name":"Persil frais","normalizedQuantity":9,"normalizedUnit":"bottes","originalQuantity":9,"originalUnit":"bottes","pF":true,"pS":false,"type":"epices","uuid":"hgfa4e"},{"allergens":[],"comment":"","name":"Ail","normalizedQuantity":240,"normalizedUnit":"gr.","originalQuantity":3,"originalUnit":"tête·s","pF":true,"pS":false,"type":"legumes","uuid":"u2m28w"},{"allergens":[],"comment":"","name":"Oignon","normalizedQuantity":9000,"normalizedUnit":"gr.","originalQuantity":9,"originalUnit":"kg","pF":true,"pS":false,"type":"legumes","uuid":"rtavky"},{"allergens":[],"comment":"","name":"Carotte","normalizedQuantity":5000,"normalizedUnit":"gr.","originalQuantity":5,"originalUnit":"kg","pF":true,"pS":false,"type":"legumes","uuid":"eouu0v"},{"allergens":[],"comment":"","name":"Olives Vertes Dénoyautées","normalizedQuantity":5300,"normalizedUnit":"gr.","originalQuantity":5.3,"originalUnit":"kg","pF":false,"pS":false,"type":"legumes","uuid":"163u4z"}],
   "preparation": "\u003eFaire chauffer l'huile avec les épices : curcuma et gingembre\n\nFaire suer les oignons et l'ail\n\nAjouter les carottes et le sel. Faire rissoler.\n\nZester les citrons. Les presser et ajouter le jus dans les légumes\n\nLaisser mijoter\n\nRajouter le persil sur l'assiette\n\n\u003e Faire bouillir de l'eau avec 9gr de gros sel par litre\n\nAjouter les pâtes langue d'oiseau et laisser cuire 11 minutes\n\nÉgoutter et rincer",
   "preparation24h": "",
   "astuces": [],
   "prepAlt": [],
   "permissionWrite": [],
-  "publishedAt": "2025-01-01T00:00:00Z"
+  "publishedAt": "2025-01-01T00:00:00Z",
+  "createdAt": "2025-10-19T19:26:00+00:00",
+  "updatedAt": "2025-10-19T19:26:00+00:00",
+  "createdBy": "Alio"
 }

@@ -27,6 +27,8 @@ ingredients:
     allergens:
       - Alcool
     type: epices
+    pF: false
+    pS: false
   - uuid: s8j4ff
     name: Basilic
     originalQuantity: 2
@@ -36,6 +38,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: true
+    pS: false
   - uuid: eouu0v
     name: Carotte
     originalQuantity: 5.5
@@ -45,6 +49,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: nl2s2n
     name: Chou rouge
     originalQuantity: 5.5
@@ -54,6 +60,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
 materiel: []
 preparation: |-
   Râper les carottes
@@ -66,8 +74,11 @@ preparation: |-
 preparation24h: ''
 astuces: []
 prepAlt: []
-publishDate: 2025-10-19T18:40:00.000Z
+publishDate: '2025-10-19T18:40:00+00:00'
 serveHot: false
 uuid: lchyie9h1wgh
-slug: salade-chou-rouge-caro_lchyie9h1wgh
+id: salade-chou-rouge-caro_lchyie9h1wgh
+createdAt: '2025-10-19T18:40:00+00:00'
+updatedAt: '2025-10-19T18:40:00+00:00'
+createdBy: Alio
 ---

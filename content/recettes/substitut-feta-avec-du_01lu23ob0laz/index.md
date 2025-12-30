@@ -23,6 +23,8 @@ ingredients:
     comment: ''
     allergens: []
     type: frais
+    pF: false
+    pS: false
   - uuid: 2pps90
     name: Poivre
     originalQuantity: 0.5
@@ -32,6 +34,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: 2juq3x
     name: Sel
     originalQuantity: 0.5
@@ -41,6 +45,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: fkftyb
     name: Origan
     originalQuantity: 1
@@ -50,6 +56,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: vs2dfm
     name: Ail en poudre
     originalQuantity: 0.5
@@ -59,6 +67,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: e4mjd1
     name: Jus de citron
     originalQuantity: 60
@@ -68,6 +78,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
   - uuid: k2uthk
     name: Miso blanc
     originalQuantity: 38
@@ -77,6 +89,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: 7qo3ht
     name: Vinaigre de cidre
     originalQuantity: 80
@@ -87,6 +101,8 @@ ingredients:
     allergens:
       - Alcool
     type: epices
+    pF: false
+    pS: false
   - uuid: c70jxb
     name: huile de tournesol
     originalQuantity: 30
@@ -96,6 +112,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: 4be4ic
     name: Levure de bière
     originalQuantity: 2
@@ -105,6 +123,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
 preparation: |-
   * Pressez le tofu pour éliminer l'excès d'humidité
   * Pendant que le tofu est pressé, préparez la marinade. Placez la pâte de miso, le vinaigre, le jus de citron, l'huile d'olive, la poudre d'ail, l'origan séché, la levure nutritionnelle, le sel, le poivre noir dans un grand bol
@@ -116,8 +136,11 @@ preparation24h: |-
   de commencer la recette
 
   Toute la recette doit être faite la veille idéalement
-publishDate: 2025-07-31T08:27:00.000Z
+publishDate: '2025-07-31T08:27:00+00:00'
 serveHot: false
 uuid: 01lu23ob0laz
-slug: substitut-feta-avec-du_01lu23ob0laz
+id: substitut-feta-avec-du_01lu23ob0laz
+createdAt: '2025-07-31T08:27:00+00:00'
+updatedAt: '2025-07-31T08:27:00+00:00'
+createdBy: ''
 ---

@@ -20,6 +20,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: eouu0v
     name: Carotte
     originalQuantity: 10
@@ -29,6 +31,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: zkmmgt
     name: 'Sirop d''érable '
     originalQuantity: 4
@@ -38,6 +42,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
   - uuid: hgfa4e
     name: Persil frais
     originalQuantity: 1
@@ -47,6 +53,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: true
+    pS: false
   - uuid: l3esgp
     name: Cumin (graines)
     originalQuantity: 2
@@ -56,6 +64,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: e4mjd1
     name: Jus de citron
     originalQuantity: 200
@@ -65,6 +75,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
 preparation: |-
   Laver et peler les légumes.
 
@@ -74,9 +86,12 @@ preparation: |-
 
   Mélanger les tout au moment du service
 preparation24h: Mélanger jus de citron, cumin en graines, sirop d'érables et ajuster la consistance avec l'huile d'olive.
-publishDate: 2025-08-08T09:35:00.000Z
+publishDate: '2025-08-08T09:35:00+00:00'
 uuid: e8cfx1kz9w9w
-titleslug: salade-carottes-betteraves-au-cumin_75572676
+titleid: salade-carottes-betteraves-au-cumin_75572676
 serveHot: false
-slug: salade-carottes-better_e8cfx1kz9w9w
+id: salade-carottes-better_e8cfx1kz9w9w
+createdAt: '2025-08-08T09:35:00+00:00'
+updatedAt: '2025-08-08T09:35:00+00:00'
+createdBy: ''
 ---

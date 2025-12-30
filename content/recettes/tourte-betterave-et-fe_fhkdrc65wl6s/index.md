@@ -17,6 +17,8 @@ ingredients:
     allergens:
       - Gluten
     type: frais
+    pF: true
+    pS: false
   - uuid: 2pps90
     name: Poivre
     originalQuantity: 1
@@ -26,6 +28,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: 2juq3x
     name: Sel
     originalQuantity: 1
@@ -35,6 +39,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: 5k7zz4
     name: Piment en flocons
     originalQuantity: 6
@@ -44,6 +50,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: fkftyb
     name: Origan
     originalQuantity: 13
@@ -53,6 +61,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: m5dxyo
     name: Feta
     originalQuantity: 3.75
@@ -63,6 +73,8 @@ ingredients:
     allergens:
       - Produit laitier
     type: frais
+    pF: true
+    pS: false
   - uuid: 7sc3uw
     name: Betterave rouge
     originalQuantity: 5
@@ -72,6 +84,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
 materiel:
   - Four
   - Grand Saladier
@@ -88,7 +102,7 @@ preparation: |-
   * Disposer l'appareil à betterave en cercle en laissant 1cm de bords libre pour sceller avec la deuxième pâte.
   * Dorer la surface de la tourte au café avec un pinceau.
   * Faire une cheminée au centre. Enfourner 30/35min
-publishDate: 2024-05-18T15:41:00.000Z
+publishDate: '2024-05-18T15:41:00+00:00'
 quantite_desc: ' 8 parts par tourte'
 regime:
   - vegetarien
@@ -96,5 +110,8 @@ title: Tourte betterave et feta
 typeR: entree
 serveHot: true
 uuid: fhkdrc65wl6s
-slug: tourte-betterave-et-fe_fhkdrc65wl6s
+id: tourte-betterave-et-fe_fhkdrc65wl6s
+createdAt: '2024-05-18T15:41:00+00:00'
+updatedAt: '2024-05-18T15:41:00+00:00'
+createdBy: ''
 ---

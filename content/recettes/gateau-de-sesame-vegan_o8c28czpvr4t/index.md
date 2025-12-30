@@ -16,6 +16,8 @@ ingredients:
     comment: ''
     allergens: []
     type: autres
+    pF: false
+    pS: false
   - uuid: 9d8hxn
     name: Purée de sésame noir
     originalQuantity: 150
@@ -26,6 +28,8 @@ ingredients:
     allergens:
       - Sésame
     type: autres
+    pF: false
+    pS: false
   - uuid: 2juq3x
     name: Sel
     originalQuantity: 1
@@ -35,6 +39,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: 8nbcjp
     name: Fécule de maïs (Maïzena)
     originalQuantity: 200
@@ -44,6 +50,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: geh6n8
     name: Crème d'amande
     originalQuantity: 0.2
@@ -53,6 +61,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: csxbg6
     name: lait d’amande
     originalQuantity: 0.8
@@ -62,6 +72,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: c70jxb
     name: huile de tournesol
     originalQuantity: 0.4
@@ -71,6 +83,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: cr4kiz
     name: Chocolat noir
     originalQuantity: 400
@@ -80,6 +94,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
   - uuid: u9z2he
     name: Sucre en poudre
     originalQuantity: 700
@@ -89,6 +105,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
 materiel:
   - Gastro 1/1 (Fins)
   - Four
@@ -96,7 +114,7 @@ plate: 25
 prepAlt:
   - recetteAlt: 'Gateau de sésame '
 preparation: "* Four 170°. Le gastro devra être sulfurisé.\n* Fouettez l’huile, le lait et la purée de sésame. Dans un autre récipient, mélangez la poudre d’amande, le sucre et la maïzena. Versez le mélange des liquides dans le mélange d’ingrédients secs et mélangez bien jusqu’à ce que l’appareil soit homogène (le mélange obtenu est assez liquide, c’est normal) Verser dans le gastro sulfurisé.\_\n* Enfourner 40 min à 1h. Si la surface du gâteau est déjà bien doré avant la fin de la cuisson, recouvrez-le d’une feuille d’aluminium et poursuivez la cuisson. Test à la pointe du couteau qui doit être sèche.\n* Laisser reposer 15 min avant de démouler à l'envers sur les plateaux. Faire chauffer la crème liquide.\_\n* Dans un saladier, verser la crème très chaude sur les carreaux de chocolat. Enfin, glacer le gâteau!"
-publishDate: 2023-04-27T10:04:16.372Z
+publishDate: '2023-04-27T10:04:16.372000+00:00'
 regime:
   - vegetarien
   - vegan
@@ -106,5 +124,8 @@ title: Gateau de sésame (végan et sans-gluten)
 typeR: dessert
 serveHot: false
 uuid: o8c28czpvr4t
-slug: gateau-de-sesame-vegan_o8c28czpvr4t
+id: gateau-de-sesame-vegan_o8c28czpvr4t
+createdAt: '2023-04-27T10:04:16.372000+00:00'
+updatedAt: '2023-04-27T10:04:16.372000+00:00'
+createdBy: Auré
 ---

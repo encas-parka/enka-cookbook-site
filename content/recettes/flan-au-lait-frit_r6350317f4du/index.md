@@ -22,6 +22,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: 2av6w8
     name: Farine de blé
     originalQuantity: 1.7
@@ -32,6 +34,8 @@ ingredients:
     allergens:
       - Gluten
     type: lof
+    pF: false
+    pS: false
   - uuid: z8uiyd
     name: Farine de maïs
     originalQuantity: 600
@@ -41,6 +45,8 @@ ingredients:
     comment: Pâte
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: z8uiyd
     name: Farine de maïs
     originalQuantity: 1.3
@@ -50,6 +56,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: zat1zc
     name: Lait concentré (non sucré)
     originalQuantity: 4
@@ -60,6 +68,8 @@ ingredients:
     allergens:
       - Produit laitier
     type: lof
+    pF: false
+    pS: false
   - uuid: x286pc
     name: Lait demi-écrémé
     originalQuantity: 7.7
@@ -70,6 +80,8 @@ ingredients:
     allergens:
       - Produit laitier
     type: lof
+    pF: false
+    pS: false
   - uuid: ljzb7j
     name: Eau
     originalQuantity: 3.3
@@ -79,6 +91,8 @@ ingredients:
     comment: Pâte
     allergens: []
     type: autres
+    pF: false
+    pS: false
   - uuid: vgec6e
     name: Levure chimique
     originalQuantity: 100
@@ -89,6 +103,8 @@ ingredients:
     allergens:
       - Gluten
     type: lof
+    pF: false
+    pS: false
   - uuid: 2juq3x
     name: Sel
     originalQuantity: 200
@@ -98,6 +114,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: 7lakpz
     name: poivre blanc moulue
     originalQuantity: 75
@@ -107,6 +125,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: u9z2he
     name: Sucre en poudre
     originalQuantity: 1
@@ -116,6 +136,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
 materiel:
   - Friteuse
   - Gastro 1/1 (Fins)
@@ -150,11 +172,14 @@ preparation: |-
   \- Les égoutter sur du papier sopalin.
 
   \- Et les saupoudrer d'un peu de sucre.
-publishDate: 2024-05-18T15:27:00.000Z
+publishDate: '2024-05-18T15:27:00+00:00'
 checkAlwaysOk: false
 regime:
   - vegetarien
 serveHot: true
 uuid: r6350317f4du
-slug: flan-au-lait-frit_r6350317f4du
+id: flan-au-lait-frit_r6350317f4du
+createdAt: '2024-05-18T15:27:00+00:00'
+updatedAt: '2024-05-18T15:27:00+00:00'
+createdBy: Auré
 ---

@@ -1,6 +1,6 @@
 
 {
-  "slug": "salade-fatouche_whssdyoowqnq",
+  "id": "salade-fatouche_whssdyoowqnq",
   "title": "Salade Fatouche",
   "draft": false,
   "typeR": "entree",
@@ -16,11 +16,14 @@
   "quantite_desc": "",
   "check": true,
   "materiel": [],
-  "ingredients": [{"allergens":[],"comment":"","name":"Graine de tournesol","normalizedQuantity":400,"normalizedUnit":"gr.","originalQuantity":400,"originalUnit":"gr.","type":"sec","uuid":"4vxqlr"},{"allergens":[],"comment":"","name":"Graines de courge","normalizedQuantity":400,"normalizedUnit":"gr.","originalQuantity":400,"originalUnit":"gr.","type":"sec","uuid":"qzrsoa"},{"allergens":[],"comment":"","name":"huile d'olive","normalizedQuantity":1000,"normalizedUnit":"ml","originalQuantity":1,"originalUnit":"l.","type":"lof","uuid":"h3c8al"},{"allergens":[],"comment":"","name":"Laitue romaine","normalizedQuantity":10,"normalizedUnit":"unité","originalQuantity":10,"originalUnit":"unité","type":"legumes","uuid":"l0yikk"},{"allergens":[],"comment":"","name":"Menthe fraîche","normalizedQuantity":6,"normalizedUnit":"bottes","originalQuantity":6,"originalUnit":"bottes","type":"epices","uuid":"y16lzq"},{"allergens":[],"comment":"","name":"Persil frais","normalizedQuantity":6,"normalizedUnit":"bottes","originalQuantity":6,"originalUnit":"bottes","type":"epices","uuid":"hgfa4e"},{"allergens":[],"comment":"","name":"Ail","normalizedQuantity":160,"normalizedUnit":"gr.","originalQuantity":2,"originalUnit":"tête·s","type":"legumes","uuid":"u2m28w"},{"allergens":[],"comment":"","name":"Oignon","normalizedQuantity":2000,"normalizedUnit":"gr.","originalQuantity":2,"originalUnit":"kg","type":"legumes","uuid":"rtavky"},{"allergens":[],"comment":"","name":"Radis","normalizedQuantity":2000,"normalizedUnit":"gr.","originalQuantity":2,"originalUnit":"kg","type":"legumes","uuid":"4il0xo"},{"allergens":[],"comment":"","name":"Concombre","normalizedQuantity":4000,"normalizedUnit":"gr.","originalQuantity":20,"originalUnit":"unité","type":"legumes","uuid":"l5p1a5"},{"allergens":[],"comment":"","name":"Tomate","normalizedQuantity":8000,"normalizedUnit":"gr.","originalQuantity":8,"originalUnit":"kg","type":"legumes","uuid":"ibtbnq"}],
+  "ingredients": [{"allergens":[],"comment":"","name":"Graine de tournesol","normalizedQuantity":400,"normalizedUnit":"gr.","originalQuantity":400,"originalUnit":"gr.","pF":false,"pS":false,"type":"sec","uuid":"4vxqlr"},{"allergens":[],"comment":"","name":"Graines de courge","normalizedQuantity":400,"normalizedUnit":"gr.","originalQuantity":400,"originalUnit":"gr.","pF":false,"pS":false,"type":"sec","uuid":"qzrsoa"},{"allergens":[],"comment":"","name":"huile d'olive","normalizedQuantity":1000,"normalizedUnit":"ml","originalQuantity":1,"originalUnit":"l.","pF":false,"pS":false,"type":"lof","uuid":"h3c8al"},{"allergens":[],"comment":"","name":"Laitue romaine","normalizedQuantity":10,"normalizedUnit":"unité","originalQuantity":10,"originalUnit":"unité","pF":true,"pS":false,"type":"legumes","uuid":"l0yikk"},{"allergens":[],"comment":"","name":"Menthe fraîche","normalizedQuantity":6,"normalizedUnit":"bottes","originalQuantity":6,"originalUnit":"bottes","pF":true,"pS":false,"type":"epices","uuid":"y16lzq"},{"allergens":[],"comment":"","name":"Persil frais","normalizedQuantity":6,"normalizedUnit":"bottes","originalQuantity":6,"originalUnit":"bottes","pF":true,"pS":false,"type":"epices","uuid":"hgfa4e"},{"allergens":[],"comment":"","name":"Ail","normalizedQuantity":160,"normalizedUnit":"gr.","originalQuantity":2,"originalUnit":"tête·s","pF":true,"pS":false,"type":"legumes","uuid":"u2m28w"},{"allergens":[],"comment":"","name":"Oignon","normalizedQuantity":2000,"normalizedUnit":"gr.","originalQuantity":2,"originalUnit":"kg","pF":true,"pS":false,"type":"legumes","uuid":"rtavky"},{"allergens":[],"comment":"","name":"Radis","normalizedQuantity":2000,"normalizedUnit":"gr.","originalQuantity":2,"originalUnit":"kg","pF":true,"pS":false,"type":"legumes","uuid":"4il0xo"},{"allergens":[],"comment":"","name":"Concombre","normalizedQuantity":4000,"normalizedUnit":"gr.","originalQuantity":20,"originalUnit":"unité","pF":true,"pS":false,"type":"legumes","uuid":"l5p1a5"},{"allergens":[],"comment":"","name":"Tomate","normalizedQuantity":8000,"normalizedUnit":"gr.","originalQuantity":8,"originalUnit":"kg","pF":true,"pS":false,"type":"legumes","uuid":"ibtbnq"}],
   "preparation": "\u003eCouper les tomates et concombres en dés\n\nÉmincer les radis et l'oignon\n\nLaver et émincer la salade\n\nHacher la menthe et le persil\n\nAssaisonner avec l'huile, du sel, poivre, de la menthe séchée et du sumac\n\nAjouter les graines de courges et tournesol\n\nRectifier l'assaisonnement",
   "preparation24h": "",
   "astuces": [],
   "prepAlt": [],
   "permissionWrite": [],
-  "publishedAt": "2025-01-01T00:00:00Z"
+  "publishedAt": "2025-01-01T00:00:00Z",
+  "createdAt": "2025-10-19T20:35:00+00:00",
+  "updatedAt": "2025-10-19T20:35:00+00:00",
+  "createdBy": "Alio"
 }

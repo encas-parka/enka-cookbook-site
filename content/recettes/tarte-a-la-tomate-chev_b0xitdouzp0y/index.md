@@ -24,6 +24,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: ibtbnq
     name: Tomate
     originalQuantity: 65
@@ -33,6 +35,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: 6tnb6h
     name: Crème fraiche liquide entière
     originalQuantity: 2
@@ -43,6 +47,8 @@ ingredients:
     allergens:
       - Produit laitier
     type: lof
+    pF: false
+    pS: false
   - uuid: zf3zf8
     name: Oeuf
     originalQuantity: 30
@@ -53,6 +59,8 @@ ingredients:
     allergens:
       - Oeuf
     type: lof
+    pF: false
+    pS: false
   - uuid: c70jxb
     name: huile de tournesol
     originalQuantity: 1
@@ -62,6 +70,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: 2av6w8
     name: Farine de blé
     originalQuantity: 2
@@ -72,6 +82,8 @@ ingredients:
     allergens:
       - Gluten
     type: lof
+    pF: false
+    pS: false
   - uuid: yjxnau
     name: Bûche de chèvre
     originalQuantity: 13
@@ -82,6 +94,8 @@ ingredients:
     allergens:
       - Produit laitier
     type: frais
+    pF: true
+    pS: false
   - uuid: hlbwfd
     name: Yaourt de soja
     originalQuantity: 24
@@ -92,6 +106,8 @@ ingredients:
     allergens:
       - Soja
     type: frais
+    pF: true
+    pS: false
   - uuid: 86cony
     name: Pâte brisée sans gluten
     originalQuantity: 4
@@ -101,6 +117,8 @@ ingredients:
     comment: ''
     allergens: []
     type: frais
+    pF: true
+    pS: false
   - uuid: g0lph5
     name: Miel
     originalQuantity: 500
@@ -110,6 +128,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
   - uuid: a16yd7
     name: Thym
     originalQuantity: 100
@@ -119,6 +139,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: 15qnl9
     name: Moutarde à l'ancienne
     originalQuantity: 1
@@ -128,6 +150,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: u33083
     name: Tahin
     originalQuantity: 500
@@ -138,6 +162,8 @@ ingredients:
     allergens:
       - Sésame
     type: autres
+    pF: false
+    pS: false
   - uuid: vgec6e
     name: Levure chimique
     originalQuantity: 4
@@ -148,6 +174,8 @@ ingredients:
     allergens:
       - Gluten
     type: lof
+    pF: false
+    pS: false
   - uuid: ljzb7j
     name: Eau
     originalQuantity: 1
@@ -157,6 +185,8 @@ ingredients:
     comment: ''
     allergens: []
     type: autres
+    pF: false
+    pS: false
 materiel:
   - moule à tarte
 preparation: |-
@@ -183,8 +213,11 @@ preparation: |-
   Pour la version végan ne pas mettre de chèvre et un peu plus de tomates. Réaliser un appareil avec yaourt de soja et tahin.
 
   Enfourner 30 minutes environ
-publishDate: 2025-06-05T12:01:00.000Z
+publishDate: '2025-06-05T12:01:00+00:00'
 serveHot: false
 uuid: b0xitdouzp0y
-slug: tarte-a-la-tomate-chev_b0xitdouzp0y
+id: tarte-a-la-tomate-chev_b0xitdouzp0y
+createdAt: '2025-06-05T12:01:00+00:00'
+updatedAt: '2025-06-05T12:01:00+00:00'
+createdBy: Frédo
 ---

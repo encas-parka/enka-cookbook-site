@@ -23,6 +23,8 @@ ingredients:
     allergens:
       - Poisson
     type: animaux
+    pF: true
+    pS: false
   - uuid: rgt7s4
     name: Poivre noir moulu
     originalQuantity: 1
@@ -32,6 +34,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: hgfa4e
     name: Persil frais
     originalQuantity: 8
@@ -41,6 +45,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: true
+    pS: false
   - uuid: 9p3n36
     name: Olives noires à la grecque
     originalQuantity: 1.6
@@ -50,6 +56,8 @@ ingredients:
     comment: Dénouyauté
     allergens: []
     type: legumes
+    pF: false
+    pS: false
   - uuid: u2m28w
     name: Ail
     originalQuantity: 6
@@ -59,6 +67,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: rtavky
     name: Oignon
     originalQuantity: 3
@@ -68,6 +78,8 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: 18dy4e
     name: Pomme de terre
     originalQuantity: 25
@@ -77,6 +89,8 @@ ingredients:
     comment: Chair ferme
     allergens: []
     type: legumes
+    pF: true
+    pS: false
   - uuid: h3c8al
     name: huile d'olive
     originalQuantity: 200
@@ -86,6 +100,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: c70jxb
     name: huile de tournesol
     originalQuantity: 300
@@ -95,6 +111,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: zf3zf8
     name: Oeuf
     originalQuantity: 50
@@ -105,6 +123,8 @@ ingredients:
     allergens:
       - Oeuf
     type: lof
+    pF: false
+    pS: false
 materiel:
   - Gastro 1/1 (Normaux)
   - Four
@@ -142,7 +162,7 @@ preparation24h: |-
   Les gros bouts peuvent être mis à tremper 36h avant, ou il faut leur changer l'eau plus souvent.
 
   Changer l'eau toutes les 6h, ou au moins le soir puis le lendemain matin.
-publishDate: 2024-06-07T16:49:00.000Z
+publishDate: '2024-06-07T16:49:00+00:00'
 regime:
   - sans-gluten
   - sans-lactose
@@ -151,5 +171,8 @@ title: Morue à la gomes de sa (bacalhau à gomes de sa)
 typeR: plat
 serveHot: true
 uuid: 6r3qdcfiyjbi
-slug: morue-a-la-gomes-de-sa_6r3qdcfiyjbi
+id: morue-a-la-gomes-de-sa_6r3qdcfiyjbi
+createdAt: '2024-06-07T16:49:00+00:00'
+updatedAt: '2024-06-07T16:49:00+00:00'
+createdBy: ''
 ---

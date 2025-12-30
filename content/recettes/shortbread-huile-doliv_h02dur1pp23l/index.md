@@ -15,6 +15,8 @@ ingredients:
     comment: (branches pas enormes)
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: 2juq3x
     name: Sel
     originalQuantity: 1
@@ -24,6 +26,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: h3c8al
     name: huile d'olive
     originalQuantity: 500
@@ -33,6 +37,8 @@ ingredients:
     comment: max
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: 2av6w8
     name: Farine de blé
     originalQuantity: 1
@@ -43,6 +49,8 @@ ingredients:
     allergens:
       - Gluten
     type: lof
+    pF: false
+    pS: false
   - uuid: 1e3zhq
     name: Chocolat noir patissier 70p100
     originalQuantity: 300
@@ -52,6 +60,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
   - uuid: l5w2jl
     name: Muscovado (sucre de canne complet)
     originalQuantity: 130
@@ -61,6 +71,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
   - uuid: n85gmi
     name: sucre de canne (blond)
     originalQuantity: 300
@@ -70,6 +82,8 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+    pF: false
+    pS: false
 materiel:
   - Four
 plate: 100
@@ -82,7 +96,7 @@ preparation: |-
     Les placer entre deux feuilles de papier cuisson, et  les étaler en un rectangle épais à l'aide d'un rouleau à pâtisserie. Le biscuit doit faire  un 1cm d'épaisseur.
   * Faire cuire 20-25 minutes à 180°C (thermostat 6).
   * Sortir la plaque du four, et découper en rectangles fin à l'aide d'un couteau pointu tant que la pâte est encore chaude. Laisser refroidir, puis séparer les biscuits.
-publishDate: 2024-06-18T11:56:00.000Z
+publishDate: '2024-06-18T11:56:00+00:00'
 regime:
   - vegan
   - vegetarien
@@ -91,5 +105,8 @@ title: Shortbread huile d'olive, romarin et chocolat
 typeR: dessert
 serveHot: false
 uuid: h02dur1pp23l
-slug: shortbread-huile-doliv_h02dur1pp23l
+id: shortbread-huile-doliv_h02dur1pp23l
+createdAt: '2024-06-18T11:56:00+00:00'
+updatedAt: '2024-06-18T11:56:00+00:00'
+createdBy: ''
 ---

@@ -1,6 +1,6 @@
 ---
 title: Agggg
-date: '2025-12-30T01:46:49.597Z'
+date: '2025-12-30T01:47:24.906Z'
 draft: true
 typeR: entree
 categories: []
@@ -13,7 +13,7 @@ quantite_desc: null
 check: false
 cuisson: false
 serveHot: true
-description: null
+description: aaaaaaa
 region: null
 saison:
   - automne
@@ -37,7 +37,7 @@ preparation24h: null
 permissionWrite:
   - 68975cbc002469058f8b
 createdAt: '2025-12-30T01:46:06.352+00:00'
-updatedAt: '2025-12-30T01:46:49.373+00:00'
+updatedAt: '2025-12-30T01:47:24.678+00:00'
 createdBy: 68975cbc002469058f8b
 ---
 

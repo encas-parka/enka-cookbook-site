@@ -1,6 +1,6 @@
 ---
-title: Aiiiiiiiiiiiii
-date: '2025-12-30T01:51:40.689Z'
+title: Aiiiiiiiiiiiiie
+date: '2025-12-30T01:54:16.640Z'
 draft: true
 typeR: entree
 categories:
@@ -36,7 +36,7 @@ preparation24h: null
 permissionWrite:
   - 68975cbc002469058f8b
 createdAt: '2025-12-30T01:51:40.372+00:00'
-updatedAt: '2025-12-30T01:51:40.372+00:00'
+updatedAt: '2025-12-30T01:54:16.353+00:00'
 createdBy: 68975cbc002469058f8b
 ---
 

@@ -1,9 +1,10 @@
 ---
 title: Bbbbb
-date: '2025-12-30T13:27:17.805Z'
+date: '2025-12-30T13:28:22.455Z'
 draft: true
 typeR: entree
-categories: []
+categories:
+  - Cake
 regime:
   - vegan
   - sans-gluten
@@ -13,7 +14,7 @@ quantite_desc: null
 check: false
 cuisson: false
 serveHot: true
-description: null
+description: test refact
 region: null
 saison: []
 id: bbbbb_vfystaodnz1a
@@ -21,13 +22,22 @@ materiel: []
 ingredients:
   - uuid: lNtaOelzhtawUmxf5nBSH
     name: Moutarde à l'ancienne
-    originalQuantity: 0
+    originalQuantity: 100
     originalUnit: gr.
-    normalizedQuantity: 0
+    normalizedQuantity: 100
     normalizedUnit: gr.
     comment: ''
     allergens: []
     type: epices
+  - uuid: Q15RX11bvnytM2kzYOzgF
+    name: Flocons d'avoine sans gluten
+    originalQuantity: 20
+    originalUnit: gr.
+    normalizedQuantity: 20
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: sec
 preparation: po
 prepAlt: []
 astuces: []
@@ -35,7 +45,7 @@ preparation24h: null
 permissionWrite:
   - 693200b700222efe46a2
 createdAt: '2025-12-30T13:27:12.618+00:00'
-updatedAt: '2025-12-30T13:27:12.618+00:00'
+updatedAt: '2025-12-30T13:28:20.161+00:00'
 createdBy: 693200b700222efe46a2
 ---
 

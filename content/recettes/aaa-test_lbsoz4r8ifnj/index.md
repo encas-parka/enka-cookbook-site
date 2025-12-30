@@ -1,6 +1,6 @@
 ---
-title: Abbb test
-date: '2025-12-30T01:08:01.198Z'
+title: Abbb testss
+date: '2025-12-30T01:48:14.721Z'
 draft: true
 typeR: plat
 categories: []
@@ -35,7 +35,7 @@ preparation24h: ''
 permissionWrite:
   - 68975cbc002469058f8b
 createdAt: '2025-12-30T01:07:12.776+00:00'
-updatedAt: '2025-12-30T01:08:00.998+00:00'
+updatedAt: '2025-12-30T01:48:14.486+00:00'
 createdBy: 68975cbc002469058f8b
 ---
 

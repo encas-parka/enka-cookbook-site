@@ -1,6 +1,6 @@
 ---
 title: Bbbbb
-date: '2025-12-30T13:28:35.767Z'
+date: '2025-12-30T13:33:17.338Z'
 draft: true
 typeR: entree
 categories:
@@ -14,7 +14,7 @@ quantite_desc: null
 check: false
 cuisson: false
 serveHot: true
-description: test refact
+description: 'RecipeCreatePage** : Désactivé après sauvegarde réussie (`!saveSuccessful`) - **RecipeEditPage** : Toujours actif si modifications non sauvegardées'
 region: null
 saison:
   - hiver
@@ -46,7 +46,7 @@ preparation24h: null
 permissionWrite:
   - 693200b700222efe46a2
 createdAt: '2025-12-30T13:27:12.618+00:00'
-updatedAt: '2025-12-30T13:28:35.556+00:00'
+updatedAt: '2025-12-30T13:33:17.115+00:00'
 createdBy: 693200b700222efe46a2
 ---
 

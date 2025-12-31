@@ -1,11 +1,12 @@
 ---
 title: Another petit test 2
-date: '2025-12-31T18:03:22.831Z'
+date: '2025-12-31T18:11:47.606Z'
 draft: true
 typeR: entree
 categories:
   - Cake
   - Gateau
+  - Boisson
 regime:
   - vegetarien
   - sans-gluten
@@ -63,7 +64,7 @@ permissionWrite:
   - 693200b700222efe46a2
   - 692c64f9d76f505c0798
 createdAt: '2025-12-29T12:50:47.565+00:00'
-updatedAt: '2025-12-31T18:03:17.507+00:00'
+updatedAt: '2025-12-31T18:11:47.350+00:00'
 createdBy: 693200b700222efe46a2
 ---
 

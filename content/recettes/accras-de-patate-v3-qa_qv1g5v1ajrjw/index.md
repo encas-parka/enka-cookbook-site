@@ -1,6 +1,6 @@
 ---
-title: Accras de patate douce - et
-date: '2026-01-05T20:01:27.913Z'
+title: Accras de patate douce - etqq
+date: '2026-01-05T20:06:42.825Z'
 draft: true
 typeR: plat
 categories:
@@ -11,7 +11,7 @@ regime:
   - sans-lactose
 plate: 100
 quantite_desc: null
-check: true
+check: false
 cuisson: true
 serveHot: true
 description: test v3 accras
@@ -97,7 +97,7 @@ preparation24h: null
 permissionWrite:
   - 693200b700222efe46a2
 createdAt: '2026-01-05T18:28:49.873+00:00'
-updatedAt: '2026-01-05T20:01:27.628+00:00'
+updatedAt: '2026-01-05T20:06:42.600+00:00'
 createdBy: 693200b700222efe46a2
 ---
 

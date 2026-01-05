@@ -1,6 +1,6 @@
 ---
 title: Accras de patate douce - etqq
-date: '2026-01-05T20:06:42.825Z'
+date: '2026-01-05T20:06:51.657Z'
 draft: true
 typeR: plat
 categories:
@@ -97,7 +97,7 @@ preparation24h: null
 permissionWrite:
   - 693200b700222efe46a2
 createdAt: '2026-01-05T18:28:49.873+00:00'
-updatedAt: '2026-01-05T20:06:42.600+00:00'
+updatedAt: '2026-01-05T20:06:51.444+00:00'
 createdBy: 693200b700222efe46a2
 ---
 

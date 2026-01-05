@@ -1,6 +1,6 @@
 ---
 title: Accras de patate douce vv
-date: '2026-01-05T18:18:37.686Z'
+date: '2026-01-05T18:58:38.765Z'
 draft: true
 typeR: plat
 categories:
@@ -18,9 +18,7 @@ region: Antilles
 saison:
   - ete
 id: accras-de-patate-v2-qa_etrgagvxcg5-
-materiel:
-  - Friteuse
-  - Marmitte
+materiel: []
 ingredients:
   - uuid: 5cg0yu
     name: Citron jaune
@@ -179,7 +177,7 @@ preparation24h: null
 permissionWrite:
   - 693200b700222efe46a2
 createdAt: '2026-01-05T18:18:37.355+00:00'
-updatedAt: '2026-01-05T18:18:37.355+00:00'
+updatedAt: '2026-01-05T18:58:38.517+00:00'
 createdBy: 693200b700222efe46a2
 ---
 

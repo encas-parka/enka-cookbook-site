@@ -1,6 +1,6 @@
 ---
-title: Accras de patate douce ""
-date: '2026-01-05T18:28:50.085Z'
+title: Accras de patate douce - et
+date: '2026-01-05T20:01:27.913Z'
 draft: true
 typeR: plat
 categories:
@@ -97,7 +97,7 @@ preparation24h: null
 permissionWrite:
   - 693200b700222efe46a2
 createdAt: '2026-01-05T18:28:49.873+00:00'
-updatedAt: '2026-01-05T18:28:49.873+00:00'
+updatedAt: '2026-01-05T20:01:27.628+00:00'
 createdBy: 693200b700222efe46a2
 ---
 

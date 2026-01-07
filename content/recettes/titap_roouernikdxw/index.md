@@ -1,6 +1,6 @@
 ---
 title: Titap
-date: '2025-12-21T13:01:50.140Z'
+date: '2025-12-21T13:14:33.425Z'
 draft: true
 typeR: entree
 categories: []
@@ -27,17 +27,19 @@ ingredients:
     allergens: []
     type: epices
 preparation: |-
-  - **e**
-  - **ds**
-
-  *itals*
+  - Tailler le chou chinois finement
+  - Éplucher et enlever les pépins des pommes. Les couper en morceaux de tailles approximatives
+  - Couper les betteraves en dés
+  - Éplucher et râper les carottes
+  - Mélanger avec l’huile, le vinaigre, et la sauce soja
+  - Rectifier l’assaisonnement
 prepAlt: []
 astuces: []
 preparation24h: ''
 permissionWrite:
   - 693200b700222efe46a2
 createdAt: '2025-12-21T12:57:56.139+00:00'
-updatedAt: '2025-12-21T13:01:33.713+00:00'
+updatedAt: '2025-12-21T13:14:32.874+00:00'
 createdBy: 693200b700222efe46a2
 ---
 

@@ -1,6 +1,6 @@
 ---
-title: Accras de patate douce r
-date: '2026-01-15T18:20:51.469Z'
+title: Accras de patate douce rfd
+date: '2026-01-15T18:21:29.383Z'
 draft: true
 typeR: plat
 categories:
@@ -135,9 +135,9 @@ permissionWrite:
   - 68975cbc002469058f8b
   - 692ef7a70003bf3b0916
 createdAt: '2026-01-05T20:36:41.459+00:00'
-updatedAt: '2026-01-15T18:20:50.846+00:00'
+updatedAt: '2026-01-15T18:21:29.100+00:00'
 createdBy: 693200b700222efe46a2
-teams: null
+teams: []
 status: public
 rootRecipeId: null
 versionLabel: null

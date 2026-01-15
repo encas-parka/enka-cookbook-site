@@ -1,6 +1,6 @@
 ---
 title: Accras de patate douce r
-date: '2026-01-05T20:36:41.692Z'
+date: '2026-01-15T18:20:51.469Z'
 draft: true
 typeR: plat
 categories:
@@ -79,8 +79,8 @@ ingredients:
   - uuid: 2av6w8
     name: Farine de blé
     originalQuantity: 3
-    originalUnit: kg
-    normalizedQuantity: 3000
+    originalUnit: gr.
+    normalizedQuantity: 3
     normalizedUnit: gr.
     comment: ''
     allergens:
@@ -112,13 +112,15 @@ ingredients:
     pS: false
   - uuid: b2fF-QjBgbUIvZW6KPydZ
     name: patate
-    originalQuantity: 2
+    originalQuantity: null
     originalUnit: gr.
-    normalizedQuantity: 2
+    normalizedQuantity: 0
     normalizedUnit: gr.
     comment: ''
     allergens: []
     type: legumes
+    pF: false
+    pS: false
 preparation: |-
   - **TEST Variante**
   - Faire bouillir les patates douces pour en faire un purée bien sèche. Eplucher entre bouillon et écrasement.
@@ -130,8 +132,14 @@ astuces: []
 preparation24h: null
 permissionWrite:
   - 693200b700222efe46a2
+  - 68975cbc002469058f8b
+  - 692ef7a70003bf3b0916
 createdAt: '2026-01-05T20:36:41.459+00:00'
-updatedAt: '2026-01-05T20:36:41.459+00:00'
+updatedAt: '2026-01-15T18:20:50.846+00:00'
 createdBy: 693200b700222efe46a2
+teams: null
+status: public
+rootRecipeId: null
+versionLabel: null
 ---
 

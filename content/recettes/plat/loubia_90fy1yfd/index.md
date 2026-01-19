@@ -6,20 +6,14 @@ layout: recettes
 type: plat
 categories:
   - Plat chaud
-regime:
-  - vegetarien
+auteur: ''
 region: Tunisie
 cuisson: Oui
 temperature: Chaud
 plate: 100
+quantite_desc: ''
 check: Oui
-checkAlwaysOk: false
-checkfor: ''
 ingredients:
-  - ingredient: boulgour_omf24t
-    quantite: 5
-    unit: Kg
-    commentaire: ''
   - ingredient: haricots-blancs_znpoor
     quantite: 5
     unit: Kg
@@ -51,7 +45,7 @@ ingredients:
   - ingredient: coriandre-fraiche_fetrpe
     quantite: 5
     unit: bottes
-    commentaire: 'a ajouter ciselée sur le top selon les envies '
+    commentaire: a ajouter ciselée sur le top selon les envies
   - ingredient: paprika_bidsmu
     quantite: 70
     unit: gr.
@@ -90,8 +84,11 @@ preparation: |-
   9  Faites cuire à feu moyen / doux et à couvert pendant 1 heure 30 minutes.
 
   10  En fin de cuisson, ajustez l'assaisonnement.
-
-  11 Faire le boulgour.
 preparation24h: Faire tremper les haricots blancs
 publishDate: 2025-05-14T08:43:00.000Z
+checkfor: ''
+checkAlwaysOk: false
+regime:
+  - vegetarien
 ---
+

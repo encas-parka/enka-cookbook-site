@@ -29,16 +29,10 @@ pagination:
 
 outputs:
   home:
-    - HTML
-    - REDIRECTS
-    - HEADERS
-    - dataJson
+      - dataJson
 
   page:
-    - HTML
     - RecipeDetail
-  section:
-    - HTML
 
 
 mediaTypes:
@@ -51,50 +45,6 @@ mediaTypes:
     delimiter: ""
 
 outputFormats:
-  # Pages et json lié aux evenement
-  Poster:
-    mediaType: "text/html"
-    baseName: "poster/index"
-    isHTML: true
-    permalinkable: true
-
-  Menus:
-    mediaType: "text/html"
-    baseName: "menus/index"
-    isHTML: true
-    permalinkable: true
-
-  Ingredients:
-    mediaType: "text/html"
-    baseName: "ingredients/index"
-    isHTML: true
-    permalinkable: true
-
-  IngredientsJSON:
-    mediaType: "application/json"
-    baseName: "ingredients/index"
-    isPlainText: true
-    notAlternative: true
-
-  ingredients_aw:
-    mediaType: "application/json"
-    baseName: "ingredients_aw/index"
-    isPlainText: true
-    notAlternative: true
-
-  metadata:
-    mediaType: "application/json"
-    baseName: "metadata"
-    isPlainText: true
-    notAlternative: true
-
-  JSON:
-    mediaType: application/json
-    baseName: index
-    isPlainText: true
-    notAlternative: true
-
-
 
 
   RecipeDetail:

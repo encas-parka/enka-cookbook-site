@@ -25,5 +25,9 @@
   "publishedAt": "2025-01-01T00:00:00Z",
   "createdAt": "2024-03-27T19:32:00+00:00",
   "updatedAt": "2024-03-27T19:32:00+00:00",
-  "createdBy": "ça vault le détour"
+  "createdBy": "ça vault le détour",
+  "rootRecipeId": "",
+  "versionLabel": "",
+  "teams": "",
+  "status": "public"
 }

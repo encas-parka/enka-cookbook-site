@@ -25,5 +25,9 @@
   "publishedAt": "2025-01-01T00:00:00Z",
   "createdAt": "2022-11-23T04:52:56.219000+00:00",
   "updatedAt": "2022-11-23T04:52:56.219000+00:00",
-  "createdBy": ""
+  "createdBy": "",
+  "rootRecipeId": "",
+  "versionLabel": "",
+  "teams": "",
+  "status": "public"
 }

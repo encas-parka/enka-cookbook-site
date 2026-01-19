@@ -25,5 +25,9 @@
   "publishedAt": "2025-01-01T00:00:00Z",
   "createdAt": "2024-06-14T00:06:00+00:00",
   "updatedAt": "2024-06-14T00:06:00+00:00",
-  "createdBy": "ça vaulx le détour"
+  "createdBy": "ça vaulx le détour",
+  "rootRecipeId": "",
+  "versionLabel": "",
+  "teams": "",
+  "status": "public"
 }

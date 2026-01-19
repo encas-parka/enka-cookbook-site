@@ -3,2003 +3,1954 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>//localhost:1313/docs/decouvrir/</loc>
-    <lastmod>2024-03-28T17:01:14+01:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>//localhost:1313/docs/editer/</loc>
-    <lastmod>2024-01-30T05:58:16+01:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>//localhost:1313/docs/editer/commencer/</loc>
-    <lastmod>2024-03-20T10:35:31+01:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>//localhost:1313/docs/editer/recettes/</loc>
-    <lastmod>2025-09-21T17:15:13+02:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>//localhost:1313/docs/editer/evenements/</loc>
-    <lastmod>2024-03-28T17:01:14+01:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>//localhost:1313/docs/editer/autres/</loc>
-    <lastmod>2024-03-28T03:50:12+01:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>//localhost:1313/docs/web-tools/</loc>
-    <lastmod>2024-01-30T05:58:16+01:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
     <loc>//localhost:1313/</loc>
-    <lastmod>2025-12-21T14:01:51+01:00</lastmod>
+    <lastmod>2026-01-05T21:36:42+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/flan-libanais-vegan_f78vjdcbl6k2/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/couscous-dautomne-vege_tntsav2ghe2f/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/salade-de-crudites-cho_cnzi5h85cw1f/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/salade-fatouche_whssdyoowqnq/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/houmous-pois-chiche_dw7yaqdlvjg9/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/beignet-sauce-cacahuet_cqkcwvc2ofq5/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/tajine-olives-citron-a_0vwuvf5pb2ba/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/compote-pommes-poires_huj97lsj1sfb/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/mafe-vegetarien-et-riz_ij8i8degl1r6/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/salade-chou-rouge-caro_lchyie9h1wgh/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/lasagne-bolognaise-veg_i8k8yewsk1g5/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/lassi-vegan-a-la-mangu_szk3bdykgyra/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/panna-cotta-vegan-a-la_3k20oigwibrm/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/frites-de-pommes-de-te_961416akzkgu/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/bahn-mi-a-la-proteine-_go4i0y6buluy/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/falafel-de-lulu_wazz5ayuej01/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/panacotta-vanille-et-c_pncip9db7opr/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/melomakarona_7b2bxksa9t2i/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/cheesecake-vegan-citro_lmvlf0ryne1v/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/brownie-choco-beurre-d_7q3m8rkg4myj/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/epinards-marines-a-la-_0tpnlrz682ti/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/tomates-et-poivrons-gr_a3p8ulck3gqt/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/salade-carottes-better_e8cfx1kz9w9w/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/tomates-farcies-et-riz_m75nlakbryyk/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/barre-cereales-noisett_cu5wc60t605t/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/sauce-verte_zkl6nhidaz94/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/oignons-confits_ehsj6cduaqcz/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/pommes-de-terres-au-fo_jtdp6b1yj3v8/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/salade-de-concombre-a-_ktvstlm6e9wm/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/melon-basilic_4v82ji62vke6/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/substitut-feta-avec-du_01lu23ob0laz/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/sauce-blanche-tahin-ci_lt3yweiyoll3/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/barres-cereales-gourma_b0vlij9ci4y8/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/barres-cereales-gourma_lgphjgfs7ofv/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/kolokythokeftedes-gale_is23ojeuywj8/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/kolokythokeftedes-gale_29d4w72em36o/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/kolokythopita-tarte-fi_o7xqvqjv088z/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/tapioca-perlee-au-choc_cdgi7zr74m9y/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/pita-garniture_dlla2kgf6qhq/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/carotte-rapees-rainbow_bk3e5gpd42gi/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/soupe-froide-de-courge_hn40674kizr0/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/soupe-froide-de-courge_nm0vvoqx6bbh/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/burgers-galettes-de-po_oe0ud1afn5xr/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/carottes-rapees-a-la-v_3bdnu6g2ndtx/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/champignons-frits-et-s_j71g5m5afdob/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/pate-a-pain-panzerotti_7dtwa73pa3ks/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/pain-pita_28nzksb97gke/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/soupe-au-pistou_uv4v4hkjl3s7/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/blanc-manger_61r3u6w1p87e/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/fondant-au-chocolat-ve_0vedt76modbc/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/tofu-grille_aqquiy1jal20/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/tapenade-del-mar_p4gu4ctqvexm/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/flan-de-courgette-vega_on1ek7sxg1ng/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/yahourt-de-brebis-a-la_pnx39d6vejqb/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/riz-au-lait-vegan-a-la_9s83dfrvgjcs/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/soupe-de-carotte-orang_cbz36e69mmfo/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/panacotta-rhubarbe-spe_pswmqzyh32eo/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/risotto-torrefie-de-sa_slsqvoqaqra7/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/frites-de-panisse-sauc_v6inzq555i7g/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/charlotte-dabricot-en-_9oetj7rodlkh/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/escalope-de-seitan_ly3x5wxnq3ve/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/flan-de-courgettes-au-_qyi5426r2gnp/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/blanquette-de-soja-tex_1oq9igtwzpr2/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/tarte-a-la-tomate-chev_b0xitdouzp0y/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/creme-de-soja-a-la-noi_uk1elhs2ilhz/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/gateau-jako-au-chocola_777ohr82xysb/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/moelleux-aux-agrumes_5hcczovaonrt/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/salade-daubergine-aux-_ub2ro051nszz/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/perles-du-japon-vanill_euzk0cqi0woy/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/pomme-de-terre-au-four_utfus1r523hi/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/crepes-de-sarrasin-ric_xtrjccmif4pp/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/penne-cruda_qavmivpa5mfj/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/salade-exotique_n7f1c2c4gxvr/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/salade-dananas-choux-c_il6jkq5quarf/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/galette-indienne-vegan_ngc8x1hl8xfc/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/naan-gros-gros-format-_o4djbkawa7z8/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/naan-a-lail-vegan-rain_zibvzer1c8v2/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/chou-bleu-chou-violet-_wb8qiwrveyze/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/raita-vegane-rainbow-q_u2rslq2u1bua/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/raita-rainbow-queer-na_raify5afrqsl/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/sauce-korma-et-bettera_fjj6w1cw7afi/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/khadai-tofu-rainbow-qu_n5yg3rpug5y6/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/oignons-bhaji-rainbow-_vlzttv5as1jo/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/urulai-sukka-rainbow-q_8eklhxd9cx11/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/chutney-menthe-coriand_6vcsz1j2vzjr/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/cookies-arc-en-ciel-ve_k1vo2y406gq4/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/rainbow-cake-rainbow-q_mtefial41qqz/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/hush-puppies_oeg9z74yq2s4/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/jambalaya-vegan_jai01fvdixw5/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/jambalaya_roe65yr7m7z0/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/fromage-blanc-et-fruit_mcrms3ewr359/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/salade-daubergine-froi_zijvn3iw8in9/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/kuku-sabzi-vegan_kvtvcpi3lwg1/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/kuku-sabzi_hantqxcehajy/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/salade-de-tomates-sauc_39ncup00vuf9/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/montecao-sans-gluten_xlwbozfo1um2/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/montecao_2zwgan2pcikk/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/fondant-a-la-patate-do_vpax3lcej1mw/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/cheesecake-a-la-patate_x7h5krcxz6de/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/panzerotti_oxykudp8ihh6/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/granola-sale-pour-soup_rxy4n63s6y4d/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/soupe-tarator_wh6gu7d0qdje/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/gateau-a-la-creme-de-m_xezil66i6mv7/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/gateau-a-la-creme-de-m_ekh0zszezxh6/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/salade-de-betteraves-r_wbtyfvcqq95a/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/creme-dessert-au-tapio_22ooni0pakt1/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/ragout-de-lentilles-au_v1lrbda8vu4s/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/lasagnes-de-pois-casse_awt6hr55alj7/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/curry-de-boeuf_lkzmwsmu2www/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/curry-de-boeuf_ukss95zrlm8q/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/curry-veg_xnkksxn0t76q/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/taboule-armenien_gruskofkin1e/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/loubia_5m8okqsbqk66/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/tartinade-chataigne-et_1xi8sogude9r/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/smashed-potatoes-et-cr_clojw2gbb3cz/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/risotto-sarrasin-torre_0ay8dp7smyrw/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/sauce-bibimbap-sans-al_fgyea10jsbjc/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/bibimbap_xl5yo3cppn4p/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/shoyu-ramen-dhiver_o224eka5fp2n/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/tarte-tatin-aux-poivro_d2zi0rd1nkc0/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/tarte-tatin-aux-poivro_clbhirwdbtf7/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/poireaux-vinaigrette-c_hz79xqftpre2/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/soupe-a-loignon_u1jbtulbbr3r/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/salade-quinoa-pamplemo_g4pi80p7vxut/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/falafel_n9qzdiwbz4dp/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/ramen-shoyu-dete_jh7vfks0350f/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/salade-de-tomates_61qzivzu1bhv/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/mechouia_0npa44oeo8ji/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/tzatziki_rw6fjexd723i/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/faux-baklawa-pois-chic_uiyeai2ssptr/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/baklawa-pois-chiche-fe_uzt4957gbmcd/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/salade-verte_r8q91mhhjzlc/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/creme-vegan-au-sureau_lds9ghlhjlwn/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/no-morue-a-la-gomes-de_bqrme16s3grm/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/pataniscas-de-legumes-_owxvq25uy3j3/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/pataniscas-de-legumes_2ybsetsx27nm/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/salade-de-pois-chiches_po1ntxwnrt9r/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/gateau-de-polenta-aux-_qrja5f4xfwen/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/salade-grecque_bh4kbowxwsfg/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/salade-grecque-vegan_twvpx3jyr0rn/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/shortbread-huile-doliv_zhezz0eqtnme/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/creme-de-riz-libanaise_k00sjxzgi6ql/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/tarte-au-chocolat-sans_oocvunk2yxiq/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/shortbread-huile-doliv_h02dur1pp23l/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/pao-sin-queijo-version_hycxy4esy2bt/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/creme-caramel-saveur-c_4w3rdggo8i7y/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/brownie-halva-et-tahin_o8aipucny2yp/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/brownie-a-lhalva-et-au_zpfo9371zng6/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/salade-de-peche-a-la-m_8e4nztgqspo6/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/salami-au-chocolat-veg_gp22v4hamxcv/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/salade-de-pasteque-mel_7ti71zyu09ol/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/pastilla-vegan-a-laube_do1dg0nokwpd/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/bouillon-soto-version-_rls5yc07k88e/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/lemon-curd-vegan-versi_cxpu5hholt9i/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/tarte-au-citron-vegane_mw6a5i2da5hf/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/panna-cotta-vegan-vani_kytwplnialyp/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/salade-de-betterave-ya_i4fa82xvafvw/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/proteines-de-soja-au-g_99x43q4lvgeq/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/poulet-au-gout-insolit_sk9q2o97npmm/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/tarte-aux-pralines-ros_jnu5fuzbjhg2/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/pain-frit-chinois_kvvs5bogscu7/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/pimientos-de-padron-po_vuqvsgskn1e7/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/peixinhos-de-horta-tem_4h0vc8tek74i/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/vinaigrette_zv927zjg7x0k/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/babka-vegane-harissa-e_qph5vukgdjb6/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/chorba-vegan-et-sans-g_gdqb48simkjd/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/chorba-agneau-et-langu_duj2ar8i9twp/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/carottes-rapees_82mg6v2cynff/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/keshke_72m05w7c40l2/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/pastilla-vegan-a-laube_fzejp2oz5xj2/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/creme-dessert-aux-pral_y9t03vab458e/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/creme-dessert-vanille-_nzjlrmlxvqyp/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/ile-flottante_9r9tthldsfkp/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/salami-au-chocolat_bdsp69jk64pl/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/crumble-sale-epinards-_th3vfmbys0kd/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/boreks-epinards-fromag_8gqvh0zj4gwr/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/morue-a-la-gomes-de-sa_6r3qdcfiyjbi/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/soupe-de-carottes-a-la_kuj2infwa1r1/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/pita-falafel_ht0m8mfg7p7b/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/soupe-miso-aux-aubergi_v0k2djqukga1/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/keshke-vegan-et-sans-g_3yn2db59qug9/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/muhamarra_ugmtyzfzdf9i/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/tom-kha-soupe-thai_fdy0l64ios9o/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/steak-vege-champignons_clxhcyzv3p5y/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/salade-de-courgettes-a_yx5v76raggif/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/puree-de-haricots-blan_4nz5o8qk5wt0/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/houmous-de-betterave-a_7c1hbo8nci50/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/sauce-aux-cranberries_bdjpy5fir8ar/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/riz-au-four-parfume-a-_fae9fgwlpt5x/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/boulettes-fumees-de-ha_h1482kmzoujo/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/aubergines-grillees-ca_3y287nb3wv9b/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/tartinade-lentilles-co_qh5km6aj87d9/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/moussaka-vege_pz6tjg37kqw5/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/salade-thai-aux-nouill_qv7cxgmhdwiy/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/focaccia_9g9emazn3kve/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/accras-de-patate-douce_9ap8enawymli/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/tian-tomate-figue-miel_2qpd2oh9c497/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/soupe-froide-concombre_4tg077f8luat/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/soupe-froide-concombre_e4nq5yl65mnx/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/soupe-froide-betterave_m0nu9lqqv0ep/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/risotto-pruneaux-et-ch_i7fj2m2bhgl1/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/risotto-de-pruneaux-et_3hd4b2xlb47l/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/madeleines-sarrasin-sa_1j23s0pgsffw/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/beignet-de-banane-et-c_7kxwcm4fzlbq/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/cookie-the-matcha-ging_ngtmrdu8ama5/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/cookie-the-matcha-et-g_kpgllkwtl958/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/lanches-au-pesto-rosso_w2n2piir0si1/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/queijadas-de-feijao-ve_6c223tsj2soh/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/beignets-petits-pois-z_v48h8c9nrp5o/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/pao-de-qeijo_yeri55g540co/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/queijadas-de-feijao_u1i5ta31qhh0/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/lanches-portugaises-ch_wmkp6dbwr3pj/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/chorizo-vegan_gqf4yi01uime/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/mouse-au-citron-vegan_1z59z0x2f27d/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/farcous-aveyronnais-ve_qkg9uq40i7t0/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/farcous-aveyronnais_1861nayj9xe4/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/salade-thai-a-la-mangu_rajq028r6egc/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/bo-bun-vege_bg99tl1koegs/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/concombre-marines-au-g_kobshcsn8ypy/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/gaspacho_cf5hqia64o1j/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/zaalouk-salade-maroc-d_mag7yx4uufqe/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/salade-courgette-curry_dkkwwc5hbgga/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/tomate-crue-farcie_30mcb23p2m3s/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/abricots-poches-vervei_izz7yef86m3j/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/risotto-a-lail-et-a-la_hlzs17inqand/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/burger-vege-lentilles-_itogd74f82aj/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/panisse_45kdjv6ksr25/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/banoffee-vegan-et-sans_2h83u0xlel3u/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/taboulais-libanais-des_s5snphqzt474/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/taboulais-libanais-des_jlgt8t3apugd/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/tartinade-sale-a-la-ch_jznfnnxicx7m/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/tartinade-sale-a-la-ch_ereleew3m69x/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/gateau-au-pandan-bahn-_p1xs00gnpqe6/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/tourte-betterave-lenti_c54ri2ggbvt2/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/tourte-betterave-et-fe_fhkdrc65wl6s/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/flan-au-lait-frit_r6350317f4du/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/flan-coco-et-pandan-ve_mcvr1ny7leum/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/boulettes-de-soja-acco_2asrmpwslpgq/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/salade-concombre-pomme_6l7ts740zyyn/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/tartinade-de-pois-cass_tgpoyg0cm317/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/fondant-chataigne_bkfsefrcm5wj/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/fondant-chataigne-vega_iqda1fyp2mzu/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/pomme-de-terre-herisso_j8t27ky5i3g8/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/tartinade-de-haricot-r_w8ympby8n43o/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/banoffee_uw7nq3h3hzob/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/sauce-blanche-citron-a_qqiaqmznmcv5/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/aumonieres-courge-vega_q5clznrsii6v/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/petits-paquets-aumonie_n26tjtxq161j/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/tarte-au-chocolat-sans_ts63c8nje4n5/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/corn-dog-vegan-et-sans_o3qim4uu1wwb/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/namoura_lw649ot7olk9/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/puree-de-haricots-blan_3g0xjguo7g5z/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/betteraves-fermentees_byz4qnihgdan/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/fromage-frais-ail-cibo_wnpqhq07loq7/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/salade-fenouil-carotte_de5ciujr5g3p/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/tapenade-olives-noires_zntseime9uro/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/tapenade-olives-vertes_nip8d0mrtbw6/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/houmous_u0sj0q635j74/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/proteines-de-soja-mari_ggo9802gtbxq/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/veganaise-rapide_od3r5jza14im/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/steak-vegetarien-champ_g288g77vujzb/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/aubergines-grillees-au_5j58wllgxjd6/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/chou-marine-a-la-japon_8cor16dl48ob/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/cake-courgette-chevre-_o0hmts3lks2w/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/cake-au-citron-vegan_jlgmun6rtc8r/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/cake-figues-chevre-rom_whqutbrl0wit/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/caviar-daubergines-fum_hipqpgnlh7ri/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/houmous-de-poivrons_olgz2w2naxyo/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/gateau-de-sesame-vegan_o8c28czpvr4t/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/gateau-de-sesame_y3s38qkd0bc7/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/taboule-libanais_izh9n9l14w66/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/taboule-libanais-quino_0zgww2rc17i3/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/nems_d28ow20pnpzc/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/tartinade-pois-casse-o_l6b3d9jb9pbn/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/chorba-a-lagneau-ou-mo_ox7o2xg5uni7/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/salade-de-pois-chiche_1ky8us1j1pp7/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/pain-de-yucca_n5w78efonn14/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>//localhost:1313/recettes/tartinade-petits-pois-_viqqkj3nf3q7/</loc>
-    <lastmod>2025-12-16T01:01:34+01:00</lastmod>
+    <lastmod>2025-12-30T18:56:35+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -2020,13 +1971,6 @@
   
   <url>
     <loc></loc>
-    <lastmod>2024-01-10T06:33:46+01:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc></loc>
     <lastmod>2025-08-22T21:17:09+02:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
@@ -2166,12 +2110,6 @@
   </url>
   
   <url>
-    <loc>//localhost:1313/app/</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
     <loc></loc>
     <lastmod>2025-08-22T21:17:09+02:00</lastmod>
     <changefreq>monthly</changefreq>
@@ -2202,13 +2140,6 @@
   <url>
     <loc></loc>
     <lastmod>2025-08-22T21:17:09+02:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc></loc>
-    <lastmod>2024-05-18T18:57:10+02:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -2404,13 +2335,6 @@
   
   <url>
     <loc></loc>
-    <lastmod>2024-06-18T10:30:24+00:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc></loc>
     <lastmod>2025-08-22T21:17:09+02:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
@@ -2419,20 +2343,6 @@
   <url>
     <loc></loc>
     <lastmod>2025-08-22T21:17:09+02:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc></loc>
-    <lastmod>2025-08-22T21:17:09+02:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc></loc>
-    <lastmod>2023-12-18T22:38:51+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -2579,7 +2489,7 @@
   
   <url>
     <loc></loc>
-    <lastmod>2023-12-18T22:38:51+01:00</lastmod>
+    <lastmod>2025-08-22T21:17:09+02:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -3124,12 +3034,6 @@
   </url>
   
   <url>
-    <loc>//localhost:1313/app/ingredients-collaborative_bak/</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
     <loc></loc>
     <lastmod>2025-08-22T21:17:09+02:00</lastmod>
     <changefreq>monthly</changefreq>
@@ -3594,20 +3498,6 @@
   <url>
     <loc></loc>
     <lastmod>2025-08-22T21:17:09+02:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>//localhost:1313/docs/</loc>
-    <lastmod>2024-01-30T05:58:16+01:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>//localhost:1313/documentation/</loc>
-    <lastmod>2024-05-28T14:47:04+02:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -4083,13 +3973,6 @@
   
   <url>
     <loc></loc>
-    <lastmod>2024-05-22T20:42:56+00:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc></loc>
     <lastmod>2025-08-22T21:17:09+02:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
@@ -4209,20 +4092,6 @@
   
   <url>
     <loc></loc>
-    <lastmod>2024-05-18T18:57:10+02:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc></loc>
-    <lastmod>2023-12-18T22:38:51+01:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc></loc>
     <lastmod>2025-08-22T21:17:09+02:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
@@ -4301,13 +4170,6 @@
   <url>
     <loc></loc>
     <lastmod>2025-08-22T21:17:09+02:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc></loc>
-    <lastmod>2023-12-18T22:38:51+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -5125,13 +4987,6 @@
   </url>
   
   <url>
-    <loc>//localhost:1313/documentation/evenements/</loc>
-    <lastmod>2024-05-28T14:47:04+02:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
     <loc></loc>
     <lastmod>2025-08-22T21:17:09+02:00</lastmod>
     <changefreq>monthly</changefreq>
@@ -5483,27 +5338,6 @@
   
   <url>
     <loc></loc>
-    <lastmod>2023-12-18T22:38:51+01:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc></loc>
-    <lastmod>2024-05-22T22:12:02+00:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc></loc>
-    <lastmod>2024-06-13T15:07:57+00:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc></loc>
     <lastmod>2025-08-22T21:17:09+02:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
@@ -5827,13 +5661,6 @@
   <url>
     <loc></loc>
     <lastmod>2025-08-22T21:17:09+02:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc></loc>
-    <lastmod>2023-12-18T22:38:51+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -6337,13 +6164,6 @@
   
   <url>
     <loc></loc>
-    <lastmod>2024-03-31T15:54:55+02:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc></loc>
     <lastmod>2025-08-22T21:17:09+02:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
@@ -6352,20 +6172,6 @@
   <url>
     <loc></loc>
     <lastmod>2025-08-22T21:17:09+02:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc></loc>
-    <lastmod>2024-05-18T18:57:10+02:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc></loc>
-    <lastmod>2024-05-18T18:57:10+02:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -6618,13 +6424,6 @@
   <url>
     <loc></loc>
     <lastmod>2025-08-22T21:17:09+02:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>//localhost:1313/sv_products/</loc>
-    <lastmod>2025-11-11T15:26:09+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -6793,13 +6592,6 @@
   <url>
     <loc></loc>
     <lastmod>2025-08-22T21:17:09+02:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc></loc>
-    <lastmod>2024-06-13T12:42:32+00:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -6821,13 +6613,6 @@
   <url>
     <loc></loc>
     <lastmod>2025-08-22T21:17:09+02:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>//localhost:1313/documentation/recette/</loc>
-    <lastmod>2024-05-28T14:47:04+02:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -6939,13 +6724,6 @@
   
   <url>
     <loc></loc>
-    <lastmod>2024-03-08T12:37:13+01:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc></loc>
     <lastmod>2025-08-22T21:17:09+02:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
@@ -7058,13 +6836,6 @@
   
   <url>
     <loc></loc>
-    <lastmod>2023-12-18T22:38:51+01:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc></loc>
     <lastmod>2025-08-22T21:17:09+02:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
@@ -7136,13 +6907,6 @@
   <url>
     <loc></loc>
     <lastmod>2025-08-22T21:17:09+02:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc></loc>
-    <lastmod>2023-12-18T22:38:51+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -7339,13 +7103,6 @@
   <url>
     <loc></loc>
     <lastmod>2025-08-22T21:17:09+02:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc></loc>
-    <lastmod>2023-12-18T22:38:51+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -7360,13 +7117,6 @@
   <url>
     <loc></loc>
     <lastmod>2025-08-22T21:17:09+02:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc></loc>
-    <lastmod>2023-12-18T22:38:51+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -7451,13 +7201,6 @@
   <url>
     <loc></loc>
     <lastmod>2025-08-22T21:17:09+02:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc></loc>
-    <lastmod>2024-05-28T14:47:04+02:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -7507,27 +7250,6 @@
   <url>
     <loc></loc>
     <lastmod>2025-08-22T21:17:09+02:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc></loc>
-    <lastmod>2023-12-18T22:38:51+01:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc></loc>
-    <lastmod>2023-12-18T22:38:51+01:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc></loc>
-    <lastmod>2023-12-18T22:38:51+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>

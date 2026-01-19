@@ -25,5 +25,9 @@
   "publishedAt": "2025-01-01T00:00:00Z",
   "createdAt": "2024-06-04T22:15:00+00:00",
   "updatedAt": "2024-06-04T22:15:00+00:00",
-  "createdBy": "Auré"
+  "createdBy": "Auré",
+  "rootRecipeId": "",
+  "versionLabel": "",
+  "teams": "",
+  "status": "public"
 }

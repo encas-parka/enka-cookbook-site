@@ -48,7 +48,7 @@
   "regimes": [
     "vegan",
     "vegetarien",
-    "sans lactose",
-    "sans gluten"
+    "sans-lactose",
+    "sans-gluten"
   ]
 }

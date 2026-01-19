@@ -25,5 +25,9 @@
   "publishedAt": "2025-01-01T00:00:00Z",
   "createdAt": "2025-05-30T21:37:00+00:00",
   "updatedAt": "2025-05-30T21:37:00+00:00",
-  "createdBy": "Résistances 2025"
+  "createdBy": "Résistances 2025",
+  "rootRecipeId": "",
+  "versionLabel": "",
+  "teams": "",
+  "status": "public"
 }

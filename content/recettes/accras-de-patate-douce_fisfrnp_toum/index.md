@@ -1,5 +1,5 @@
 ---
-title: Accras de patate douce (v-qaldek@gmx.com)
+title: Accras de patate douce (v-q)
 date: '2025-01-01T00:00:00Z'
 draft: true
 typeR: plat
@@ -157,4 +157,3 @@ createdAt: '2025-12-29T14:05:43.487+00:00'
 updatedAt: '2025-12-29T14:05:43.487+00:00'
 createdBy: 693200b700222efe46a2
 ---
-

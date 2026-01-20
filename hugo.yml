@@ -29,6 +29,7 @@ disableKinds:
 
 outputs:
   home:
+      - HTML
       - dataJson
 
   page:

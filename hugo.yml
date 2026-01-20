@@ -22,10 +22,10 @@ disableKinds:
   - taxonomy
   - term
 
-pagination:
-  disableAliases: false
-  pagerSize: 500
-  path: page
+# pagination:
+#   disableAliases: false
+#   pagerSize: 500
+#   path: page
 
 outputs:
   home:
@@ -39,13 +39,8 @@ mediaTypes:
   application/json:
     suffixes:
       - json
-  text/netlify:
-    suffixes:
-      - ""
-    delimiter: ""
 
 outputFormats:
-
 
   RecipeDetail:
     mediaType: application/json
@@ -62,15 +57,14 @@ outputFormats:
     path: api/
 
 
-
 caches:
   getjson:
     dir: :cacheDir/:project
     maxAge: 10s
-sitemap:
-  changefreq: monthly
-  filename: sitemap.xml
-  priority: 0.5
+# sitemap:
+#   changefreq: monthly
+#   filename: sitemap.xml
+#   priority: 0.5
 
 permalinks:
   blog: /:title/
@@ -128,9 +122,9 @@ markup:
 # Import du theme (layouts, assets, static, ...js, css and default images & icons)
 module:
   # Import assets from hugo-enka-cookbook theme (bootstrap, vue, vuetify, flatpickr, ...js, css and default images & icons)
-  hugoVersion:
-    extended: true
-    min: "0.142.0"
+  # hugoVersion:
+  #   extended: true
+  #   min: "0.142.0"
 
   imports:
     - path: "github.com/encas-parka/hugo-cookbook-theme"

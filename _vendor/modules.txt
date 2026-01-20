@@ -1,0 +1,1 @@
+# github.com/encas-parka/hugo-cookbook-theme v0.0.0-20260120021705-0b46291953a1

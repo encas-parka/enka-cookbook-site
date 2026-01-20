@@ -6,7 +6,7 @@ module github.com/encas-parka/enka-cookbook-site
 go 1.25
 
 // update theme from branch:
-// hugo mod clean
+//// hugo mod clean
 // go get github.com/encas-parka/hugo-cookbook-theme@enka-next
 //ou ? 
 // hugo mod get -u github.com/votre-user/votre-theme@nom-de-votre-branche

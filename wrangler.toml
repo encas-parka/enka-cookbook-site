@@ -1,7 +1,0 @@
-name = 'enka-cookbook-next'
-compatibility_date = "2026-01-20"
-workers_dev = false  # Important !
-
-
-[assets]
-directory = "./public"

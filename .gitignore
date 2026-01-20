@@ -7,7 +7,6 @@ public
 .netlify
 .hugo_build.lock
 .vscode
-_vendor
 node_modules
 content/recettes/uuid.sh
 *.code-workspace

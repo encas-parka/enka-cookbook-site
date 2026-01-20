@@ -6,11 +6,21 @@ module github.com/encas-parka/enka-cookbook-site
 go 1.25
 
 // update theme from branch:
-//// hugo mod clean
-// go get github.com/encas-parka/hugo-cookbook-theme@enka-next
-//ou ? 
+// hugo mod clean
+
 // hugo mod get -u github.com/votre-user/votre-theme@nom-de-votre-branche
-// hugo mod vendor
+//
+//# 1. Nettoyer complètement si probleme
+// rm -rf vendor/
+// rm -rf _vendor/
+
+//# 3. Récupérer les modules
+//hugo mod get -u
+
+//# 4. Tidy pour nettoyer go.mod
 // hugo mod tidy
 
-require github.com/encas-parka/hugo-cookbook-theme v0.0.0-20260120100614-59fc84504d92 // indirect
+//# 5. Vendoriser
+// hugo mod vendor
+
+require github.com/encas-parka/hugo-cookbook-theme v0.0.0-20260120104932-7c8e07ab90a0 // indirect

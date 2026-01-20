@@ -122,10 +122,9 @@ markup:
 
 # Import du theme (layouts, assets, static, ...js, css and default images & icons)
 module:
-  # Import assets from hugo-enka-cookbook theme (bootstrap, vue, vuetify, flatpickr, ...js, css and default images & icons)
+
   hugoVersion:
     extended: true
-    min: "0.152.2"
 
   imports:
     - path: "github.com/encas-parka/hugo-cookbook-theme"

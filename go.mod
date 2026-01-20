@@ -10,4 +10,4 @@ go 1.25
 // go get github.com/encas-parka/hugo-cookbook-theme@enka-next
 // hugo mod tidy
 
-require github.com/encas-parka/hugo-cookbook-theme v0.0.0-20251204214933-25586c2e961b // indirect
+require github.com/encas-parka/hugo-cookbook-theme v0.0.0-20260120010647-c1bb3649d8cc // indirect

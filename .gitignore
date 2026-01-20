@@ -12,3 +12,4 @@ node_modules
 content/recettes/uuid.sh
 *.code-workspace
 backups
+.zed

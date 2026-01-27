@@ -159,4 +159,6 @@ id: risotto-de-pruneaux-et_3hd4b2xlb47l
 createdAt: '2024-05-27T19:55:00+00:00'
 updatedAt: '2024-05-27T19:55:00+00:00'
 createdBy: Auré
+permissionWrite:
+  - 696faf80000078153479
 ---

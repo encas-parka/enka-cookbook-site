@@ -6,6 +6,7 @@ categories:
   - Gateau
 regime:
   - sans-gluten
+  - vegetarien
 cuisson: true
 plate: 12
 check: true
@@ -105,4 +106,6 @@ id: gateau-a-la-creme-de-m_ekh0zszezxh6
 createdAt: '2025-05-22T16:47:00+00:00'
 updatedAt: '2025-05-22T16:47:00+00:00'
 createdBy: ''
+materiel:
+  - Four
 ---

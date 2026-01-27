@@ -132,7 +132,8 @@ preparation: |-
   * Parsemer de ciboule ciselée avant de servir.
 publishDate: '2024-01-10T02:06:21.069000+00:00'
 regime:
-  - vegetarien
+  - sans-gluten
+  - sans-lactose
   - vegan
 saison:
   - ete

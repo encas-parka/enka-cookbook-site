@@ -80,8 +80,9 @@ preparation: |-
   Sortir du frigo 30 min avant de le couper et servir.
 publishDate: '2024-06-18T00:07:00+00:00'
 regime:
-  - vegan
   - sans-gluten
+  - sans-lactose
+  - vegan
 region: Portugal
 saison:
   - printemps
@@ -93,4 +94,6 @@ id: salami-au-chocolat-veg_gp22v4hamxcv
 createdAt: '2024-06-18T00:07:00+00:00'
 updatedAt: '2024-06-18T00:07:00+00:00'
 createdBy: ''
+materiel:
+  - Frigo
 ---

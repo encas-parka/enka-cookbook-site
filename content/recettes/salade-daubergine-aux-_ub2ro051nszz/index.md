@@ -7,6 +7,7 @@ categories:
 auteur: frédo
 regime:
   - sans-gluten
+  - sans-lactose
   - vegan
 cuisson: true
 plate: 100
@@ -143,4 +144,7 @@ id: salade-daubergine-aux-_ub2ro051nszz
 createdAt: '2025-06-04T19:09:00+00:00'
 updatedAt: '2025-06-04T19:09:00+00:00'
 createdBy: frédo
+materiel:
+  - Four
+  - Friteuse
 ---

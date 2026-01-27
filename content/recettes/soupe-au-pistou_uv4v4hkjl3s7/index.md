@@ -6,6 +6,7 @@ categories:
   - Soupe
 auteur: Auré
 regime:
+  - sans-gluten
   - vegetarien
 cuisson: true
 plate: 100
@@ -198,4 +199,6 @@ id: soupe-au-pistou_uv4v4hkjl3s7
 createdAt: '2025-06-17T16:16:00+00:00'
 updatedAt: '2025-06-17T16:16:00+00:00'
 createdBy: Auré
+permissionWrite:
+  - 696faf80000078153479
 ---

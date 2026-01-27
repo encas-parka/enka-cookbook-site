@@ -6,7 +6,8 @@ categories:
   - Plat chaud
 auteur: Auré
 regime:
-  - vegan
+  - sans-lactose
+  - vegetarien
 region: Japon
 saison:
   - ete
@@ -413,4 +414,8 @@ id: ramen-shoyu-dete_jh7vfks0350f
 createdAt: '2024-09-04T21:09:00+00:00'
 updatedAt: '2024-09-04T21:09:00+00:00'
 createdBy: Auré
+permissionWrite:
+  - 696faf80000078153479
+materiel:
+  - Frigo
 ---

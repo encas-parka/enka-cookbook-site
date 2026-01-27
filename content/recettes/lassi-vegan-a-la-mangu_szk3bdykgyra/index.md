@@ -100,4 +100,10 @@ id: lassi-vegan-a-la-mangu_szk3bdykgyra
 createdAt: '2025-10-16T18:21:00+00:00'
 updatedAt: '2025-10-16T18:21:00+00:00'
 createdBy: Auré
+regime:
+  - sans-gluten
+  - sans-lactose
+  - vegan
+permissionWrite:
+  - 696faf80000078153479
 ---

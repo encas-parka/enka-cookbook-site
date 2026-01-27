@@ -5,6 +5,7 @@ typeR: plat
 categories:
   - Snacking
 regime:
+  - sans-gluten
   - vegetarien
 cuisson: false
 plate: 190

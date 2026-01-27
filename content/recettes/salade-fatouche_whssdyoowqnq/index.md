@@ -160,4 +160,8 @@ id: salade-fatouche_whssdyoowqnq
 createdAt: '2025-10-19T20:35:00+00:00'
 updatedAt: '2025-10-19T20:35:00+00:00'
 createdBy: Alio
+regime:
+  - sans-gluten
+  - sans-lactose
+  - vegan
 ---

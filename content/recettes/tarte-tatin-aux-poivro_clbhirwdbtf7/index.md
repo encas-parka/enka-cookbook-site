@@ -6,6 +6,7 @@ categories:
   - Tarte (salée)
 auteur: Auré
 regime:
+  - sans-gluten
   - vegetarien
 saison:
   - ete
@@ -130,4 +131,8 @@ id: tarte-tatin-aux-poivro_clbhirwdbtf7
 createdAt: '2025-04-25T13:22:00+00:00'
 updatedAt: '2025-04-25T13:22:00+00:00'
 createdBy: Auré
+permissionWrite:
+  - 696faf80000078153479
+materiel:
+  - Four
 ---

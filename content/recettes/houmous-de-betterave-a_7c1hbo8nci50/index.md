@@ -94,10 +94,9 @@ preparation: Mettre tous les ingrédients dans un blender et mixer jusqu'à l'ob
 publishDate: '2024-05-30T10:42:00+00:00'
 checkAlwaysOk: false
 regime:
-  - vegetarien
-  - vegan
   - sans-gluten
   - sans-lactose
+  - vegan
 serveHot: false
 uuid: 7c1hbo8nci50
 id: houmous-de-betterave-a_7c1hbo8nci50

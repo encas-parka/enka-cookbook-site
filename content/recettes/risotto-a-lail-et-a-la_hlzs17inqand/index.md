@@ -105,4 +105,9 @@ id: risotto-a-lail-et-a-la_hlzs17inqand
 createdAt: '2024-05-18T18:14:00+00:00'
 updatedAt: '2024-05-18T18:14:00+00:00'
 createdBy: ''
+regime:
+  - sans-gluten
+  - vegetarien
+materiel:
+  - Four
 ---

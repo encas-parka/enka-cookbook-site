@@ -5,8 +5,9 @@ typeR: entree
 categories:
   - Bouchées salées
 regime:
-  - vegan
   - sans-gluten
+  - sans-lactose
+  - vegan
 cuisson: true
 plate: 30
 quantite_desc: ''
@@ -108,4 +109,6 @@ id: flan-de-courgette-vega_on1ek7sxg1ng
 createdAt: '2025-06-15T15:19:00+00:00'
 updatedAt: '2025-06-15T15:19:00+00:00'
 createdBy: ''
+materiel:
+  - Four
 ---

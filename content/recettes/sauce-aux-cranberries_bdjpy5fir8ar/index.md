@@ -94,10 +94,9 @@ preparation: |-
   5. Ajouter la fécule de maïs diluée dans un peu d'eau, bien mélanger au fouet, saler, poivrer lelon le goût, porter à feu vif et cuire 2 minutes.
 publishDate: '2024-05-30T10:26:00.000Z'
 regime:
-  - vegetarien
   - sans-gluten
-  - vegan
   - sans-lactose
+  - vegan
 title: Sauce aux cranberries
 typeR: plat
 serveHot: true

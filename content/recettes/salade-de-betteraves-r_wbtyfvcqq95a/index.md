@@ -5,6 +5,7 @@ typeR: entree
 categories:
   - Salade
 regime:
+  - sans-gluten
   - vegetarien
 cuisson: true
 plate: 4

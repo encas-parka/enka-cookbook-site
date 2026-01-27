@@ -119,7 +119,7 @@ preparation: |-
   *  Pour démouler, poser le plat cinq seconde dans un bain marie.
 publishDate: '2024-04-22T10:22:00+00:00'
 regime:
-  - vegan
+  - vegetarien
 title: Tarte au chocolat sans cuisson
 typeR: dessert
 serveHot: false
@@ -128,4 +128,6 @@ id: tarte-au-chocolat-sans_ts63c8nje4n5
 createdAt: '2024-04-22T10:22:00+00:00'
 updatedAt: '2024-04-22T10:22:00+00:00'
 createdBy: AdL
+permissionWrite:
+  - 696fb020002ff0d0a312
 ---

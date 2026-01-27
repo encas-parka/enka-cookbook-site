@@ -187,4 +187,6 @@ id: lasagne-bolognaise-veg_i8k8yewsk1g5
 createdAt: '2025-10-16T18:24:00+00:00'
 updatedAt: '2025-10-16T18:24:00+00:00'
 createdBy: Alio
+regime:
+  - vegetarien
 ---

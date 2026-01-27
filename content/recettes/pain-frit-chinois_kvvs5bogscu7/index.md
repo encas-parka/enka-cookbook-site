@@ -125,4 +125,12 @@ id: pain-frit-chinois_kvvs5bogscu7
 createdAt: '2024-06-16T20:47:00+00:00'
 updatedAt: '2024-06-16T20:47:00+00:00'
 createdBy: Auré
+regime:
+  - sans-lactose
+  - vegan
+permissionWrite:
+  - 696faf80000078153479
+materiel:
+  - Frigo
+  - Friteuse
 ---

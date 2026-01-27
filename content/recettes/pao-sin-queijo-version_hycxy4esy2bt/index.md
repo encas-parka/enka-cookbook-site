@@ -5,8 +5,9 @@ typeR: entree
 categories:
   - Bouchées salées
 regime:
-  - vegan
   - sans-gluten
+  - sans-lactose
+  - vegan
 region: Brésil
 cuisson: true
 plate: 16
@@ -125,4 +126,6 @@ id: pao-sin-queijo-version_hycxy4esy2bt
 createdAt: '2024-06-18T11:51:00+00:00'
 updatedAt: '2024-06-18T11:51:00+00:00'
 createdBy: ''
+materiel:
+  - Four
 ---

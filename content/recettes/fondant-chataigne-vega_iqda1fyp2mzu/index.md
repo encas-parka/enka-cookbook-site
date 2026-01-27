@@ -6,7 +6,7 @@ categories:
   - Gateau
 regime:
   - sans-gluten
-  - vegetarien
+  - sans-lactose
   - vegan
 cuisson: true
 plate: 20

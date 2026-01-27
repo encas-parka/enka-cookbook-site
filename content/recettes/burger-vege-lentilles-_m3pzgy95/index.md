@@ -15,7 +15,8 @@ serveHot: true
 plate: 60
 quantite_desc: 1 burger par personne
 check: true
-materiel: []
+materiel:
+  - Friteuse
 ingredients:
   - uuid: htp5ma
     name: Curcuma moulu

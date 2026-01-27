@@ -6,8 +6,8 @@ categories:
   - Pain
 auteur: elmar
 regime:
+  - sans-lactose
   - vegan
-  - vegetarien
 region: Italie
 cuisson: true
 plate: 100
@@ -118,6 +118,7 @@ ingredients:
     pS: false
 materiel:
   - Four
+  - Frigo
 preparation: |-
   Faire par deux kg de farine ce sera plus simple (60g sel, 10g levure, environ un l. d'eau et 10cl d'huile d'olive).
 

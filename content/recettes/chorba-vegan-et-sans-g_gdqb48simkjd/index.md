@@ -202,8 +202,9 @@ preparation24h: Faire tremper les pois chiche la veille.
 publishDate: '2024-06-14T21:50:00+00:00'
 quantite_desc: un bol d'environ 600ml par personne
 regime:
-  - vegan
   - sans-gluten
+  - sans-lactose
+  - vegan
 title: Chorba vegan et sans gluten
 typeR: plat
 serveHot: true
@@ -212,4 +213,6 @@ id: chorba-vegan-et-sans-g_gdqb48simkjd
 createdAt: '2024-06-14T21:50:00+00:00'
 updatedAt: '2024-06-14T21:50:00+00:00'
 createdBy: 'Résistances 2024 '
+permissionWrite:
+  - 696faf80000078153479
 ---

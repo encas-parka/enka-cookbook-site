@@ -145,4 +145,7 @@ id: tajine-olives-citron-a_0vwuvf5pb2ba
 createdAt: '2025-10-19T19:26:00+00:00'
 updatedAt: '2025-10-19T19:26:00+00:00'
 createdBy: Alio
+regime:
+  - sans-lactose
+  - vegan
 ---

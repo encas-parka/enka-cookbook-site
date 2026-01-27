@@ -151,4 +151,8 @@ id: lasagnes-de-pois-casse_awt6hr55alj7
 createdAt: '2025-05-14T13:07:00+00:00'
 updatedAt: '2025-05-14T13:07:00+00:00'
 createdBy: Léon
+permissionWrite:
+  - 696fafd200181df81f0d
+materiel:
+  - Four
 ---

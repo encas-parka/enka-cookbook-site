@@ -86,6 +86,7 @@ ingredients:
     pF: false
     pS: false
 materiel:
+  - Frigo
   - Gastro 1/1 (Normaux)
 plate: 12
 preparation: |-
@@ -99,10 +100,9 @@ preparation: |-
   * Laisser refroidir, placer au frigo. Pour démouler, poser le plat cinq seconde dans un bain marie.
 publishDate: '2024-06-18T11:58:00+00:00'
 regime:
-  - vegetarien
-  - vegan
   - sans-gluten
   - sans-lactose
+  - vegan
 region: ''
 title: Tarte au chocolat sans cuisson végan et sans gluten
 typeR: dessert
@@ -112,4 +112,6 @@ id: tarte-au-chocolat-sans_oocvunk2yxiq
 createdAt: '2024-06-18T11:58:00+00:00'
 updatedAt: '2024-06-18T11:58:00+00:00'
 createdBy: Ça vaulx le détour
+permissionWrite:
+  - 696faf80000078153479
 ---

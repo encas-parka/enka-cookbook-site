@@ -169,4 +169,6 @@ id: gateau-de-polenta-aux-_qrja5f4xfwen
 createdAt: '2024-06-18T15:19:00+00:00'
 updatedAt: '2024-06-18T15:19:00+00:00'
 createdBy: ''
+materiel:
+  - Four
 ---

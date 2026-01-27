@@ -114,4 +114,9 @@ id: pao-de-qeijo_yeri55g540co
 createdAt: '2024-05-23T13:58:00+00:00'
 updatedAt: '2024-05-23T13:58:00+00:00'
 createdBy: Adèle
+permissionWrite:
+  - 696fb020002ff0d0a312
+materiel:
+  - Four
+  - Frigo
 ---

@@ -1,9 +1,8 @@
 ---
 draft: false
 regime:
-  - vegetarien
-  - vegan
   - sans-lactose
+  - vegan
 region: Liban
 ingredients:
   - uuid: e4mjd1

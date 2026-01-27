@@ -6,6 +6,7 @@ categories:
   - Biscuits
 auteur: Auré
 regime:
+  - sans-lactose
   - vegan
 cuisson: true
 plate: 100
@@ -121,4 +122,8 @@ id: montecao_2zwgan2pcikk
 createdAt: '2025-05-30T17:27:00+00:00'
 updatedAt: '2025-05-30T17:27:00+00:00'
 createdBy: Auré
+permissionWrite:
+  - 696faf80000078153479
+materiel:
+  - Four
 ---

@@ -159,8 +159,9 @@ preparation: |-
   Au service, décorer de coriandre ciselée et de graines de sésame.
 publishDate: '2024-06-16T23:49:00+00:00'
 regime:
-  - vegan
   - sans-gluten
+  - sans-lactose
+  - vegan
 region: Chine -Sichuan
 title: Proteines de soja au goût insolite - version végan du poulet guai wei ji
 typeR: plat
@@ -170,4 +171,6 @@ id: proteines-de-soja-au-g_99x43q4lvgeq
 createdAt: '2024-06-16T23:49:00+00:00'
 updatedAt: '2024-06-16T23:49:00+00:00'
 createdBy: Auré
+permissionWrite:
+  - 696faf80000078153479
 ---

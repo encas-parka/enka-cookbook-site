@@ -5,8 +5,9 @@ typeR: plat
 categories:
   - Accompagnement
 regime:
-  - vegan
   - sans-gluten
+  - sans-lactose
+  - vegan
 cuisson: true
 plate: 30
 check: true
@@ -73,4 +74,6 @@ id: tofu-grille_aqquiy1jal20
 createdAt: '2025-06-15T20:04:00+00:00'
 updatedAt: '2025-06-15T20:04:00+00:00'
 createdBy: ''
+materiel:
+  - Friteuse
 ---

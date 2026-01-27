@@ -121,10 +121,9 @@ preparation: |-
   * Sortir du four et découper un fois presque refroidi.
 publishDate: '2024-06-18T12:29:00+00:00'
 regime:
-  - vegetarien
   - sans-gluten
-  - vegan
   - sans-lactose
+  - vegan
 title: Shortbread huile d'olive, romarin et chocolat sans gluten
 typeR: dessert
 serveHot: false

@@ -6,8 +6,9 @@ categories:
   - Plat chaud
 auteur: Léon
 regime:
+  - sans-gluten
+  - sans-lactose
   - vegan
-  - vegetarien
 region: ''
 cuisson: true
 plate: 100
@@ -305,4 +306,8 @@ id: curry-veg_xnkksxn0t76q
 createdAt: '2025-05-14T10:52:00+00:00'
 updatedAt: '2025-05-14T10:52:00+00:00'
 createdBy: Léon
+permissionWrite:
+  - 696fafd200181df81f0d
+materiel:
+  - Four
 ---

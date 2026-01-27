@@ -153,4 +153,6 @@ id: risotto-sarrasin-torre_0ay8dp7smyrw
 createdAt: '2025-05-05T12:41:00+00:00'
 updatedAt: '2025-05-05T12:41:00+00:00'
 createdBy: ''
+materiel:
+  - Four
 ---

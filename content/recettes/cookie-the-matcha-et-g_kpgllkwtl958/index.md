@@ -6,8 +6,9 @@ categories:
   - Gateau
 auteur: Auré
 regime:
-  - vegan
   - sans-gluten
+  - sans-lactose
+  - vegan
 cuisson: true
 plate: 20
 check: true
@@ -144,4 +145,8 @@ id: cookie-the-matcha-et-g_kpgllkwtl958
 createdAt: '2024-05-24T00:12:00+00:00'
 updatedAt: '2024-05-24T00:12:00+00:00'
 createdBy: Auré
+permissionWrite:
+  - 696faf80000078153479
+materiel:
+  - Four
 ---

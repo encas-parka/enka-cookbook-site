@@ -6,6 +6,7 @@ categories:
   - Sucrée
 auteur: frédo
 regime:
+  - sans-lactose
   - vegetarien
 cuisson: true
 plate: 100
@@ -160,4 +161,6 @@ id: moelleux-aux-agrumes_5hcczovaonrt
 createdAt: '2025-06-04T19:18:00+00:00'
 updatedAt: '2025-06-04T19:18:00+00:00'
 createdBy: frédo
+materiel:
+  - Four
 ---

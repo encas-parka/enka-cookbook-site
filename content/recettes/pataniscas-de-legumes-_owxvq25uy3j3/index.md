@@ -6,8 +6,9 @@ categories:
   - Bouchées salées
   - Snacking
 regime:
-  - vegan
   - sans-gluten
+  - sans-lactose
+  - vegan
 region: Portugal
 cuisson: true
 plate: 20

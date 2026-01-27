@@ -7,7 +7,6 @@ categories:
 auteur: Arnaud
 regime:
   - vegetarien
-  - vegan
 saison:
   - ete
 cuisson: true

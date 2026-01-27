@@ -7,8 +7,9 @@ categories:
   - Accompagnement
 auteur: Auré
 regime:
-  - vegan
   - sans-gluten
+  - sans-lactose
+  - vegan
 cuisson: true
 plate: 10
 quantite_desc: Portion par personne d'environ 300gr
@@ -133,4 +134,6 @@ id: risotto-pruneaux-et-ch_i7fj2m2bhgl1
 createdAt: '2024-05-27T20:27:00+00:00'
 updatedAt: '2024-05-27T20:27:00+00:00'
 createdBy: Auré
+permissionWrite:
+  - 696faf80000078153479
 ---

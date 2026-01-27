@@ -82,10 +82,9 @@ preparation: |-
 preparation24h: Faire tremper les haricots
 publishDate: '2024-05-30T11:12:00.000Z'
 regime:
-  - vegan
-  - vegetarien
   - sans-gluten
   - sans-lactose
+  - vegan
 title: Purée de haricots blancs
 typeR: plat
 serveHot: false

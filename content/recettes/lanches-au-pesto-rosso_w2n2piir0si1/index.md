@@ -158,4 +158,13 @@ id: lanches-au-pesto-rosso_w2n2piir0si1
 createdAt: '2024-05-23T22:54:00+00:00'
 updatedAt: '2024-05-23T22:54:00+00:00'
 createdBy: Auré
+regime:
+  - sans-gluten
+  - sans-lactose
+  - vegan
+permissionWrite:
+  - 696faf80000078153479
+materiel:
+  - Four
+  - Frigo
 ---

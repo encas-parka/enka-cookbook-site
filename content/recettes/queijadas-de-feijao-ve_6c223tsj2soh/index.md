@@ -120,6 +120,7 @@ ingredients:
     pF: false
     pS: false
 materiel:
+  - Four
   - Moule à muffin
 plate: 20
 preparation: |-
@@ -143,6 +144,7 @@ publishDate: '2024-05-23T22:19:00+00:00'
 quantite_desc: 1 petit flan par personne
 regime:
   - sans-gluten
+  - sans-lactose
   - vegan
 region: Portugal
 title: Queijadas de feijao végan et sans gluten
@@ -153,4 +155,6 @@ id: queijadas-de-feijao-ve_6c223tsj2soh
 createdAt: '2024-05-23T22:19:00+00:00'
 updatedAt: '2024-05-23T22:19:00+00:00'
 createdBy: Auré
+permissionWrite:
+  - 696faf80000078153479
 ---

@@ -229,4 +229,6 @@ id: chorba-agneau-et-langu_duj2ar8i9twp
 createdAt: '2024-06-14T21:09:00+00:00'
 updatedAt: '2024-06-14T21:09:00+00:00'
 createdBy: Résistances 2024
+permissionWrite:
+  - 696faf80000078153479
 ---

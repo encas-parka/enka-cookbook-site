@@ -135,7 +135,8 @@ preparation: |-
   * Avant de servir, versez l'huile d'olive, salez, poivrez et mélangez.
 publishDate: '2024-05-18T16:14:00+00:00'
 regime:
-  - vegetarien
+  - sans-gluten
+  - sans-lactose
   - vegan
 region: Liban
 saison:
@@ -148,4 +149,6 @@ id: taboulais-libanais-des_s5snphqzt474
 createdAt: '2024-05-18T16:14:00+00:00'
 updatedAt: '2024-05-18T16:14:00+00:00'
 createdBy: ''
+materiel:
+  - Frigo
 ---

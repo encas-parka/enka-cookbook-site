@@ -194,4 +194,7 @@ id: taboule-armenien_gruskofkin1e
 createdAt: '2025-05-14T08:59:00+00:00'
 updatedAt: '2025-05-14T08:59:00+00:00'
 createdBy: ''
+regime:
+  - sans-lactose
+  - vegan
 ---

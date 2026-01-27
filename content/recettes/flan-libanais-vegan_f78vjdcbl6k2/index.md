@@ -88,4 +88,8 @@ id: flan-libanais-vegan_f78vjdcbl6k2
 createdAt: '2025-10-19T21:54:00+00:00'
 updatedAt: '2025-10-19T21:54:00+00:00'
 createdBy: Alio
+regime:
+  - sans-gluten
+  - sans-lactose
+  - vegan
 ---

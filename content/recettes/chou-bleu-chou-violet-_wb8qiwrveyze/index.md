@@ -161,12 +161,15 @@ preparation24h: ''
 publishDate: '2025-06-02T18:31:00+00:00'
 checkAlwaysOk: false
 regime:
-  - vegan
   - sans-gluten
+  - sans-lactose
+  - vegan
 serveHot: false
 uuid: wb8qiwrveyze
 id: chou-bleu-chou-violet-_wb8qiwrveyze
 createdAt: '2025-06-02T18:31:00+00:00'
 updatedAt: '2025-06-02T18:31:00+00:00'
 createdBy: Auré
+permissionWrite:
+  - 696faf80000078153479
 ---

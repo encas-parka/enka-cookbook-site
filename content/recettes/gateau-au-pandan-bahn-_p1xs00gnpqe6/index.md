@@ -112,4 +112,6 @@ id: gateau-au-pandan-bahn-_p1xs00gnpqe6
 createdAt: '2024-05-18T15:58:00+00:00'
 updatedAt: '2024-05-18T15:58:00+00:00'
 createdBy: ''
+materiel:
+  - Four
 ---

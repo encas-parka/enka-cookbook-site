@@ -6,6 +6,8 @@ typeR: entree
 categories:
   - Sauce
 regime:
+  - sans-gluten
+  - sans-lactose
   - vegan
 cuisson: false
 plate: 20

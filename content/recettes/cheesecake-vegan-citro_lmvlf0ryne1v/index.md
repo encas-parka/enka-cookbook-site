@@ -150,6 +150,7 @@ ingredients:
     pF: false
     pS: false
 materiel:
+  - Frigo
   - Giraffe (Bras Mixeur)
 preparation: |-
   - Égoutter les noix de cajou trempées la veille
@@ -171,4 +172,9 @@ id: cheesecake-vegan-citro_lmvlf0ryne1v
 createdAt: '2025-09-08T11:24:00+00:00'
 updatedAt: '2025-09-08T11:24:00+00:00'
 createdBy: Miki
+regime:
+  - sans-lactose
+  - vegan
+permissionWrite:
+  - 696fb1cc000eb33adee7
 ---

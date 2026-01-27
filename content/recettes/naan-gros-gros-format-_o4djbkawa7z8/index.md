@@ -123,4 +123,10 @@ id: naan-gros-gros-format-_o4djbkawa7z8
 createdAt: '2025-06-02T19:02:00+00:00'
 updatedAt: '2025-06-02T19:02:00+00:00'
 createdBy: Auré
+regime:
+  - vegetarien
+permissionWrite:
+  - 696faf80000078153479
+materiel:
+  - Four
 ---

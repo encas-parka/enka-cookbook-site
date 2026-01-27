@@ -108,4 +108,8 @@ id: salade-de-pois-chiches_po1ntxwnrt9r
 createdAt: '2024-06-18T23:36:00+00:00'
 updatedAt: '2024-06-18T23:36:00+00:00'
 createdBy: ''
+regime:
+  - sans-gluten
+  - sans-lactose
+  - vegan
 ---

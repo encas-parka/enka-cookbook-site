@@ -164,12 +164,17 @@ preparation: |-
 publishDate: '2025-06-02T16:53:00+00:00'
 checkAlwaysOk: false
 regime:
-  - vegan
   - sans-gluten
+  - sans-lactose
+  - vegan
 serveHot: true
 uuid: vlzttv5as1jo
 id: oignons-bhaji-rainbow-_vlzttv5as1jo
 createdAt: '2025-06-02T16:53:00+00:00'
 updatedAt: '2025-06-02T16:53:00+00:00'
 createdBy: Auré
+permissionWrite:
+  - 696faf80000078153479
+materiel:
+  - Friteuse
 ---

@@ -135,4 +135,11 @@ id: cookie-the-matcha-ging_ngtmrdu8ama5
 createdAt: '2024-05-24T00:23:00+00:00'
 updatedAt: '2024-05-24T00:23:00+00:00'
 createdBy: Auré
+regime:
+  - vegetarien
+permissionWrite:
+  - 696faf80000078153479
+materiel:
+  - Four
+  - Frigo
 ---

@@ -5,9 +5,9 @@ typeR: dessert
 categories:
   - Sucrée
 regime:
-  - vegan
-  - vegetarien
+  - sans-gluten
   - sans-lactose
+  - vegan
 cuisson: true
 plate: 24
 check: true

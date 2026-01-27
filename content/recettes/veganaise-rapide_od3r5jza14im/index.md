@@ -62,10 +62,9 @@ preparation: |-
 preparation24h: Mettre la crème soja au frais, la recette marche mieux si elle est froide (pas testé autrement)
 publishDate: '2024-03-08T11:49:45.632000+00:00'
 regime:
-  - vegetarien
-  - vegan
   - sans-gluten
   - sans-lactose
+  - vegan
 title: Véganaise rapide
 typeR: plat
 serveHot: false
@@ -74,4 +73,6 @@ id: veganaise-rapide_od3r5jza14im
 createdAt: '2024-03-08T11:49:45.632000+00:00'
 updatedAt: '2024-03-08T11:49:45.632000+00:00'
 createdBy: Marion
+permissionWrite:
+  - 6931ecdccd2c8d8d15e5
 ---

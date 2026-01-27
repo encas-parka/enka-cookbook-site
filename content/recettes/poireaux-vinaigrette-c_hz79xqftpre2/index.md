@@ -6,6 +6,8 @@ categories:
   - Salade
 auteur: Auré
 regime:
+  - sans-gluten
+  - sans-lactose
   - vegan
 cuisson: true
 plate: 50
@@ -108,4 +110,6 @@ id: poireaux-vinaigrette-c_hz79xqftpre2
 createdAt: '2025-01-05T20:40:00+00:00'
 updatedAt: '2025-01-05T20:40:00+00:00'
 createdBy: Auré
+permissionWrite:
+  - 696faf80000078153479
 ---

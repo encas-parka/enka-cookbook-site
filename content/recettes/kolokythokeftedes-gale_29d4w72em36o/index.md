@@ -216,4 +216,6 @@ id: kolokythokeftedes-gale_29d4w72em36o
 createdAt: '2025-07-21T11:43:00+00:00'
 updatedAt: '2025-07-21T11:43:00+00:00'
 createdBy: Marion
+permissionWrite:
+  - 6931ecdccd2c8d8d15e5
 ---

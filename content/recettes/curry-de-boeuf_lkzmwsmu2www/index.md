@@ -260,4 +260,10 @@ id: curry-de-boeuf_lkzmwsmu2www
 createdAt: '2025-05-14T10:52:00+00:00'
 updatedAt: '2025-05-14T10:52:00+00:00'
 createdBy: Léon
+regime:
+  - sans-gluten
+permissionWrite:
+  - 696fafd200181df81f0d
+materiel:
+  - Four
 ---

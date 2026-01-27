@@ -6,6 +6,7 @@ categories:
   - Snacking
 auteur: Auré
 regime:
+  - sans-lactose
   - vegan
 cuisson: true
 plate: 100
@@ -172,4 +173,6 @@ id: chorizo-vegan_gqf4yi01uime
 createdAt: '2024-05-22T22:24:00+00:00'
 updatedAt: '2024-05-22T22:24:00+00:00'
 createdBy: Auré
+permissionWrite:
+  - 696faf80000078153479
 ---

@@ -6,8 +6,9 @@ categories:
   - Salade
 auteur: Auré
 regime:
-  - vegan
   - sans-gluten
+  - sans-lactose
+  - vegan
 cuisson: true
 plate: 100
 check: false
@@ -158,4 +159,8 @@ id: salade-de-tomates-sauc_39ncup00vuf9
 createdAt: '2025-05-30T18:36:00+00:00'
 updatedAt: '2025-05-30T18:36:00+00:00'
 createdBy: Auré
+permissionWrite:
+  - 696faf80000078153479
+materiel:
+  - Four
 ---

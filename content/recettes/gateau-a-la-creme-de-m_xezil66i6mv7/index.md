@@ -5,6 +5,7 @@ typeR: dessert
 categories:
   - Gateau
 regime:
+  - sans-lactose
   - vegan
 cuisson: true
 plate: 12
@@ -117,4 +118,6 @@ id: gateau-a-la-creme-de-m_xezil66i6mv7
 createdAt: '2025-05-22T17:00:00+00:00'
 updatedAt: '2025-05-22T17:00:00+00:00'
 createdBy: ''
+materiel:
+  - Four
 ---

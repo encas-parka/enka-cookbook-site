@@ -184,8 +184,9 @@ preparation: |-
 publishDate: '2024-06-17T22:22:00+00:00'
 quantite_desc: un moule à tarte = 8 parts
 regime:
-  - vegan
   - sans-gluten
+  - sans-lactose
+  - vegan
 title: Pastilla  vegan a l'aubergine - version tourte sans gluten
 typeR: plat
 serveHot: true
@@ -194,4 +195,6 @@ id: pastilla-vegan-a-laube_do1dg0nokwpd
 createdAt: '2024-06-17T22:22:00+00:00'
 updatedAt: '2024-06-17T22:22:00+00:00'
 createdBy: Auré
+permissionWrite:
+  - 696faf80000078153479
 ---

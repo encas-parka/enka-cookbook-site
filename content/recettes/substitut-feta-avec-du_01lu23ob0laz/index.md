@@ -5,10 +5,9 @@ typeR: plat
 categories:
   - Autre
 regime:
-  - vegan
-  - vegetarien
   - sans-gluten
   - sans-lactose
+  - vegan
 cuisson: false
 plate: 8
 check: false
@@ -143,4 +142,6 @@ id: substitut-feta-avec-du_01lu23ob0laz
 createdAt: '2025-07-31T08:27:00+00:00'
 updatedAt: '2025-07-31T08:27:00+00:00'
 createdBy: ''
+materiel:
+  - Frigo
 ---

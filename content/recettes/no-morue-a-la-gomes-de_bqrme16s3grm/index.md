@@ -6,8 +6,9 @@ typeR: plat
 categories:
   - Plat chaud
 regime:
-  - vegan
   - sans-gluten
+  - sans-lactose
+  - vegan
 region: Portugal
 cuisson: true
 plate: 10
@@ -158,4 +159,6 @@ id: no-morue-a-la-gomes-de_bqrme16s3grm
 createdAt: '2024-06-19T01:00:00+00:00'
 updatedAt: '2024-06-19T01:00:00+00:00'
 createdBy: ''
+materiel:
+  - Four
 ---

@@ -5,6 +5,7 @@ typeR: plat
 categories:
   - Accompagnement
 regime:
+  - sans-lactose
   - vegan
 cuisson: true
 plate: 250

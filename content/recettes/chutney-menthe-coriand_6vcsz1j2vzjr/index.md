@@ -143,12 +143,15 @@ astuces:
 publishDate: '2025-06-02T15:52:00+00:00'
 checkAlwaysOk: false
 regime:
-  - vegan
   - sans-gluten
+  - sans-lactose
+  - vegan
 serveHot: false
 uuid: 6vcsz1j2vzjr
 id: chutney-menthe-coriand_6vcsz1j2vzjr
 createdAt: '2025-06-02T15:52:00+00:00'
 updatedAt: '2025-06-02T15:52:00+00:00'
 createdBy: Auré
+permissionWrite:
+  - 696faf80000078153479
 ---

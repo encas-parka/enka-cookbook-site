@@ -139,12 +139,15 @@ preparation: "Faire une pâte d'oignon en les hachant finement. Puis les faire s
 publishDate: '2025-06-02T17:53:00+00:00'
 checkAlwaysOk: false
 regime:
-  - vegan
   - sans-gluten
+  - sans-lactose
+  - vegan
 serveHot: false
 uuid: fjj6w1cw7afi
 id: sauce-korma-et-bettera_fjj6w1cw7afi
 createdAt: '2025-06-02T17:53:00+00:00'
 updatedAt: '2025-06-02T17:53:00+00:00'
 createdBy: Auré
+permissionWrite:
+  - 696faf80000078153479
 ---

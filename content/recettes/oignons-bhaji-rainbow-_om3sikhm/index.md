@@ -10,14 +10,16 @@ description: null
 region: Inde
 saison: []
 regime:
-  - vegan
   - sans-gluten
+  - sans-lactose
+  - vegan
 cuisson: true
 serveHot: true
 plate: 130
 quantite_desc: null
 check: true
-materiel: []
+materiel:
+  - Friteuse
 ingredients:
   - uuid: 3c4d381268f4
     name: Sel de Kala Namak

@@ -161,6 +161,7 @@ preparation24h: ''
 publishDate: '2025-06-01T20:39:00+00:00'
 checkAlwaysOk: false
 regime:
+  - sans-lactose
   - vegan
 serveHot: true
 uuid: oeg9z74yq2s4
@@ -168,4 +169,8 @@ id: hush-puppies_oeg9z74yq2s4
 createdAt: '2025-06-01T20:39:00+00:00'
 updatedAt: '2025-06-01T20:39:00+00:00'
 createdBy: Auré
+permissionWrite:
+  - 696faf80000078153479
+materiel:
+  - Friteuse
 ---

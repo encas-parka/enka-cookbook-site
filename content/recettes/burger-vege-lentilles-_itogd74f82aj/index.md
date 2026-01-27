@@ -333,4 +333,6 @@ id: burger-vege-lentilles-_itogd74f82aj
 createdAt: '2024-05-18T17:59:00+00:00'
 updatedAt: '2024-05-18T17:59:00+00:00'
 createdBy: Lulu
+materiel:
+  - Friteuse
 ---

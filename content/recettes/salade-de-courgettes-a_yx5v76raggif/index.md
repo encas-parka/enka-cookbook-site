@@ -69,10 +69,9 @@ preparation: |-
   4. Verser dans un saladier et mélanger avec le jus de itron et la menthe.
 publishDate: '2024-05-30T11:18:00.000Z'
 regime:
-  - vegetarien
-  - vegan
   - sans-gluten
   - sans-lactose
+  - vegan
 saison:
   - ete
 title: Salade de courgettes à la menthe
@@ -83,4 +82,7 @@ id: salade-de-courgettes-a_yx5v76raggif
 createdAt: '2024-05-30T11:18:00.000Z'
 updatedAt: '2024-05-30T11:18:00.000Z'
 createdBy: ''
+materiel:
+  - Four
+  - Frigo
 ---

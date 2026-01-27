@@ -178,10 +178,9 @@ preparation: |-
   5. Passer les boulettes au four une première fois pendant 20 minutes à 180°C, puis les badigeonner de sauce nappante. Les repasser au four 20 minutes à 180°C.
 publishDate: '2024-05-28T15:18:00.000Z'
 regime:
-  - vegetarien
   - sans-gluten
-  - vegan
   - sans-lactose
+  - vegan
 title: Boulettes fumées de haricots rouges et champignons
 typeR: plat
 serveHot: true

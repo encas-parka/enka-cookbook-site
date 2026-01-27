@@ -4,7 +4,7 @@ draft: true
 description: Une petite part par personne
 typeR: dessert
 categories:
-- Biscuits
+  - Biscuits
 auteur: Auré
 region: Palestine
 cuisson: true
@@ -12,46 +12,46 @@ plate: 200
 quantite_desc: ''
 check: true
 ingredients:
-- ingredient: semoule-fine-ble_mltl42
-  quantite: 2
-  unit: Kg
-  commentaire: ''
-- ingredient: huile-dolive_h3c8al
-  quantite: 1.5
-  unit: l.
-  commentaire: ''
-- ingredient: sucre-de-canne-blond_n85gmi
-  quantite: 1.5
-  unit: Kg
-  commentaire: ''
-- ingredient: jus-de-citron_e4mjd1
-  quantite: 180
-  unit: ml
-  commentaire: ''
-- ingredient: eau-de-rose_ktlybm
-  quantite: 90
-  unit: ml
-  commentaire: ''
-- ingredient: eau_ljzb7j
-  quantite: 3
-  unit: l.
-  commentaire: ''
-- ingredient: graine-de-nigelle_obd7fb
-  quantite: 1
-  unit: Kg
-  commentaire: ''
-- ingredient: amande_fuhtcw
-  quantite: 500
-  unit: gr.
-  commentaire: ''
-- ingredient: levure-chimique_vgec6e
-  quantite: 50
-  unit: gr.
-  commentaire: ''
-- ingredient: farine-de-ble_2av6w8
-  quantite: 500
-  unit: gr.
-  commentaire: ''
+  - ingredient: semoule-fine-ble_mltl42
+    quantite: 2
+    unit: Kg
+    commentaire: ''
+  - ingredient: huile-dolive_h3c8al
+    quantite: 1.5
+    unit: l.
+    commentaire: ''
+  - ingredient: sucre-de-canne-blond_n85gmi
+    quantite: 1.5
+    unit: Kg
+    commentaire: ''
+  - ingredient: jus-de-citron_e4mjd1
+    quantite: 180
+    unit: ml
+    commentaire: ''
+  - ingredient: eau-de-rose_ktlybm
+    quantite: 90
+    unit: ml
+    commentaire: ''
+  - ingredient: eau_ljzb7j
+    quantite: 3
+    unit: l.
+    commentaire: ''
+  - ingredient: graine-de-nigelle_obd7fb
+    quantite: 1
+    unit: Kg
+    commentaire: ''
+  - ingredient: amande_fuhtcw
+    quantite: 500
+    unit: gr.
+    commentaire: ''
+  - ingredient: levure-chimique_vgec6e
+    quantite: 50
+    unit: gr.
+    commentaire: ''
+  - ingredient: farine-de-ble_2av6w8
+    quantite: 500
+    unit: gr.
+    commentaire: ''
 preparation: |-
   ### Préparation
 
@@ -95,11 +95,17 @@ preparation: |-
 publishDate: '2025-06-17T19:05:00+00:00'
 checkAlwaysOk: false
 regime:
-- vegan
+  - sans-gluten
+  - sans-lactose
+  - vegan
 serveHot: false
 uuid: d6rtsw5mg3rx
 id: qizha_d6rtsw5mg3rx
 createdAt: '2025-06-17T19:05:00+00:00'
 updatedAt: '2025-06-17T19:05:00+00:00'
 createdBy: Auré
+permissionWrite:
+  - 696faf80000078153479
+materiel:
+  - Four
 ---

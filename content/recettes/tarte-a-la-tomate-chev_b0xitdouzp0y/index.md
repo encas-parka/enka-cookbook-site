@@ -7,7 +7,6 @@ categories:
 auteur: Frédo
 regime:
   - vegetarien
-  - sans-gluten
 cuisson: true
 plate: 100
 quantite_desc: 8 parts par tarte
@@ -188,6 +187,7 @@ ingredients:
     pF: false
     pS: false
 materiel:
+  - Four
   - moule à tarte
 preparation: |-
   Préchauffer le four à 200°

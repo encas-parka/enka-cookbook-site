@@ -81,4 +81,8 @@ id: salade-chou-rouge-caro_lchyie9h1wgh
 createdAt: '2025-10-19T18:40:00+00:00'
 updatedAt: '2025-10-19T18:40:00+00:00'
 createdBy: Alio
+regime:
+  - sans-gluten
+  - sans-lactose
+  - vegan
 ---

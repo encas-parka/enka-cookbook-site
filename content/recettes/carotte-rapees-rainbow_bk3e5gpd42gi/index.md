@@ -28,6 +28,8 @@ preparation24h: ''
 publishDate: '2025-06-19T19:04:00+00:00'
 checkAlwaysOk: false
 regime:
+  - sans-gluten
+  - sans-lactose
   - vegan
 serveHot: false
 uuid: bk3e5gpd42gi

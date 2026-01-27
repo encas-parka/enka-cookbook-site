@@ -5,10 +5,9 @@ typeR: entree
 categories:
   - Salade
 regime:
-  - vegetarien
-  - vegan
   - sans-gluten
   - sans-lactose
+  - vegan
 saison:
   - ete
 cuisson: false

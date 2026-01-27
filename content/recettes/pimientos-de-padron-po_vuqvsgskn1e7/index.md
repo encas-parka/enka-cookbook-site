@@ -67,6 +67,8 @@ preparation: |-
 publishDate: '2024-06-16T16:11:00+00:00'
 quantite_desc: un demi poivron long par personne
 regime:
+  - sans-gluten
+  - sans-lactose
   - vegan
 region: Portugal
 title: Pimientos de padron - poivron vert à l'huile
@@ -77,4 +79,8 @@ id: pimientos-de-padron-po_vuqvsgskn1e7
 createdAt: '2024-06-16T16:11:00+00:00'
 updatedAt: '2024-06-16T16:11:00+00:00'
 createdBy: Auré
+permissionWrite:
+  - 696faf80000078153479
+materiel:
+  - Four
 ---

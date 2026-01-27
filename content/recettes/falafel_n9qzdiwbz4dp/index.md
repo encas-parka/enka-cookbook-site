@@ -140,4 +140,8 @@ id: falafel_n9qzdiwbz4dp
 createdAt: '2024-09-05T19:40:00+00:00'
 updatedAt: '2024-09-05T19:40:00+00:00'
 createdBy: ''
+regime:
+  - sans-gluten
+  - sans-lactose
+  - vegan
 ---

@@ -110,10 +110,9 @@ preparation: |-
   * Optionnel : faire sauter les protéines à la poêle dans un peu d'huile juste avant de servir pour qu'elles soient bien chaudes et un peu croustillantes
 publishDate: '2024-03-12T16:57:22.988000+00:00'
 regime:
-  - vegetarien
-  - vegan
   - sans-gluten
   - sans-lactose
+  - vegan
 title: Protéines de soja marinées
 typeR: plat
 serveHot: true

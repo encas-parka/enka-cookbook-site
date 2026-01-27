@@ -261,6 +261,7 @@ ingredients:
     pS: false
 materiel:
   - Four
+  - Friteuse
 preparation: |-
   *Faire à part, une portion pour la version **vegan**, où l'oeuf et la maizena sont remplacé par de la farine de pois chiche*
 

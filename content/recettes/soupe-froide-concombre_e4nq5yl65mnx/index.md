@@ -125,4 +125,6 @@ id: soupe-froide-concombre_e4nq5yl65mnx
 createdAt: '2024-05-27T22:14:00+00:00'
 updatedAt: '2024-05-27T22:14:00+00:00'
 createdBy: Auré
+permissionWrite:
+  - 696faf80000078153479
 ---

@@ -157,11 +157,14 @@ preparation: |-
 preparation24h: Faire la pâte sucrée la veille et réserver toute une nuit au frais.
 publishDate: '2024-06-16T21:22:00+00:00'
 checkAlwaysOk: true
-regime: null
+regime:
+  - vegetarien
 serveHot: false
 uuid: jnu5fuzbjhg2
 id: tarte-aux-pralines-ros_jnu5fuzbjhg2
 createdAt: '2024-06-16T21:22:00+00:00'
 updatedAt: '2024-06-16T21:22:00+00:00'
 createdBy: Auré
+permissionWrite:
+  - 696faf80000078153479
 ---

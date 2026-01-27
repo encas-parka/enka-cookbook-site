@@ -78,10 +78,9 @@ plate: 180
 preparation: Coupez, mélanger.
 publishDate: '2024-06-18T12:39:00+00:00'
 regime:
-  - vegetarien
   - sans-gluten
-  - vegan
   - sans-lactose
+  - vegan
 region: Grece
 saison:
   - ete

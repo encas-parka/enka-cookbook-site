@@ -6,8 +6,9 @@ categories:
   - Friture
 auteur: Auré
 regime:
-  - vegan
   - sans-gluten
+  - sans-lactose
+  - vegan
 cuisson: true
 plate: 100
 quantite_desc: 3 beignets par personne, en coupant la banane en 4
@@ -228,4 +229,8 @@ id: beignet-de-banane-et-c_7kxwcm4fzlbq
 createdAt: '2024-05-24T00:51:00+00:00'
 updatedAt: '2024-05-24T00:51:00+00:00'
 createdBy: Auré
+permissionWrite:
+  - 696faf80000078153479
+materiel:
+  - Friteuse
 ---

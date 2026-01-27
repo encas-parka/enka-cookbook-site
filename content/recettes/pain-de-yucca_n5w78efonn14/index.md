@@ -89,7 +89,6 @@ preparation: |-
 publishDate: '2022-11-23T20:23:25.888000+00:00'
 regime:
   - vegetarien
-  - sans-gluten
 title: Pain de yucca
 typeR: plat
 serveHot: true

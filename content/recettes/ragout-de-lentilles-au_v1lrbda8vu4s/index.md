@@ -142,4 +142,9 @@ id: ragout-de-lentilles-au_v1lrbda8vu4s
 createdAt: '2025-05-15T16:33:00+00:00'
 updatedAt: '2025-05-15T16:33:00+00:00'
 createdBy: ''
+regime:
+  - sans-gluten
+  - vegetarien
+materiel:
+  - Four
 ---

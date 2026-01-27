@@ -5,8 +5,9 @@ typeR: dessert
 categories:
   - Sucrée
 regime:
-  - vegan
   - sans-gluten
+  - sans-lactose
+  - vegan
 cuisson: true
 plate: 100
 check: true
@@ -86,4 +87,6 @@ id: blanc-manger_61r3u6w1p87e
 createdAt: '2025-06-17T09:33:00+00:00'
 updatedAt: '2025-06-17T09:33:00+00:00'
 createdBy: ''
+materiel:
+  - Frigo
 ---

@@ -5,7 +5,8 @@ typeR: dessert
 categories:
   - Sucrée
 regime:
-  - vegetarien
+  - sans-gluten
+  - sans-lactose
   - vegan
 saison:
   - ete

@@ -5,8 +5,8 @@ typeR: entree
 categories:
   - Tartinade
 regime:
-  - vegetarien
   - sans-gluten
+  - sans-lactose
   - vegan
 cuisson: false
 plate: 20

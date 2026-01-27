@@ -8,10 +8,9 @@ categories:
   - Snacking
 auteur: ''
 regime:
-  - vegetarien
-  - vegan
   - sans-gluten
   - sans-lactose
+  - vegan
 saison:
   - hiver
   - automne

@@ -6,7 +6,9 @@ typeR: plat
 categories:
   - Plat chaud
 regime:
-  - vegetarien
+  - sans-gluten
+  - sans-lactose
+  - vegan
 region: Tunisie
 cuisson: true
 plate: 100

@@ -6,6 +6,7 @@ categories:
   - Bouchées salées
   - Snacking
 regime:
+  - sans-lactose
   - vegetarien
 region: Portugal
 cuisson: true

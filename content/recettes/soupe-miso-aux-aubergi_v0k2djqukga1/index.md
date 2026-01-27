@@ -7,8 +7,8 @@ categories:
   - Soupe
 auteur: Auré
 regime:
+  - sans-lactose
   - vegan
-  - sans-gluten
 region: Japon
 cuisson: true
 plate: 100
@@ -118,8 +118,9 @@ ingredients:
     pF: false
     pS: false
 materiel:
-  - Marmitte
+  - Four
   - Gastro 1/1 (Normaux)
+  - Marmitte
 preparation: |-
   **DASHI aux shiitaké et kombu** : Verser toute l'eau froide dans la gamelle avec l'algue et tous les champignons et laisser tremper toute la nuit à couvert.
 
@@ -149,4 +150,6 @@ id: soupe-miso-aux-aubergi_v0k2djqukga1
 createdAt: '2024-06-04T22:15:00+00:00'
 updatedAt: '2024-06-04T22:15:00+00:00'
 createdBy: Auré
+permissionWrite:
+  - 696faf80000078153479
 ---

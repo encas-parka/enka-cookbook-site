@@ -113,6 +113,7 @@ ingredients:
     pF: false
     pS: false
 materiel:
+  - Frigo
   - ramequins
 preparation: |-
   Dans une casserole, mélanger le sucre, l'extrait de vanille, les gousses de vanille fendues et raclées, la crème soja et le lait de soja.
@@ -132,12 +133,15 @@ preparation24h: A faire la veille si le service est à midi.
 publishDate: '2024-06-17T19:25:00+00:00'
 checkAlwaysOk: false
 regime:
-  - vegan
   - sans-gluten
+  - sans-lactose
+  - vegan
 serveHot: false
 uuid: kytwplnialyp
 id: panna-cotta-vegan-vani_kytwplnialyp
 createdAt: '2024-06-17T19:25:00+00:00'
 updatedAt: '2024-06-17T19:25:00+00:00'
 createdBy: Auré
+permissionWrite:
+  - 696faf80000078153479
 ---

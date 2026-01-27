@@ -184,4 +184,7 @@ id: crepes-de-sarrasin-ric_xtrjccmif4pp
 createdAt: '2025-06-04T18:10:00+00:00'
 updatedAt: '2025-06-04T18:10:00+00:00'
 createdBy: frédo
+materiel:
+  - Four
+  - Frigo
 ---

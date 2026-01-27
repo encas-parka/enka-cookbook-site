@@ -6,6 +6,8 @@ typeR: dessert
 categories:
   - Sucrée
 regime:
+  - sans-gluten
+  - sans-lactose
   - vegan
 cuisson: true
 plate: 8
@@ -58,6 +60,7 @@ ingredients:
     pS: false
 materiel:
   - Bain Marie
+  - Frigo
 preparation: |-
   1 - A feu moyen, faire fondre le chocolat dans le lait de riz pour obtenir un chocolat au lait. ( ne pas faire bouillir)
 

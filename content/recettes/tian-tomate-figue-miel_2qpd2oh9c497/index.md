@@ -6,6 +6,7 @@ typeR: plat
 categories:
   - Plat chaud
 regime:
+  - sans-gluten
   - vegetarien
 region: Provence
 saison:

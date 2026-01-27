@@ -64,6 +64,7 @@ preparation: |-
 publishDate: '2024-06-16T13:01:00+00:00'
 quantite_desc: environ 120gr de friture par personne
 regime:
+  - sans-lactose
   - vegan
 region: Portugal
 title: Peixinhos de horta - tempura d'haricots plats
@@ -74,4 +75,6 @@ id: peixinhos-de-horta-tem_4h0vc8tek74i
 createdAt: '2024-06-16T13:01:00+00:00'
 updatedAt: '2024-06-16T13:01:00+00:00'
 createdBy: Auré
+permissionWrite:
+  - 696faf80000078153479
 ---

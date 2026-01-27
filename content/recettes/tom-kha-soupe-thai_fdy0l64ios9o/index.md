@@ -8,8 +8,9 @@ categories:
   - Soupe
 auteur: Auré
 regime:
-  - vegan
   - sans-gluten
+  - sans-lactose
+  - vegan
 region: Thaïlande
 cuisson: true
 plate: 100
@@ -277,4 +278,6 @@ id: tom-kha-soupe-thai_fdy0l64ios9o
 createdAt: '2024-06-04T10:56:00+00:00'
 updatedAt: '2024-06-04T10:56:00+00:00'
 createdBy: Auré
+permissionWrite:
+  - 696faf80000078153479
 ---

@@ -6,8 +6,8 @@ typeR: entree
 categories:
   - Tartinade
 regime:
+  - sans-gluten
   - vegetarien
-  - vegan
 cuisson: true
 plate: 380
 ingredients:

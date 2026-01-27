@@ -52,10 +52,9 @@ preparation: |-
   Ensuite les mixer avec le jus de citron, l 'huile, sans oublier de saler. Ici on peut rajouter un peu d 'eau, selon l'égouttage opéré. On voudra que la purée soit bien lisse et pas sèche.
 publishDate: '2024-03-27T08:07:20.474000+00:00'
 regime:
-  - vegan
-  - vegetarien
   - sans-gluten
   - sans-lactose
+  - vegan
 title: Purée de haricots blancs (v2)
 typeR: plat
 serveHot: true

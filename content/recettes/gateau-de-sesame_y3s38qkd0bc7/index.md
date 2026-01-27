@@ -130,4 +130,6 @@ id: gateau-de-sesame_y3s38qkd0bc7
 createdAt: '2023-04-27T09:32:43.801000+00:00'
 updatedAt: '2023-04-27T09:32:43.801000+00:00'
 createdBy: Auré
+permissionWrite:
+  - 696faf80000078153479
 ---

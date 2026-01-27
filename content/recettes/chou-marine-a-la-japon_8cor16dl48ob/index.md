@@ -84,9 +84,9 @@ preparation: |-
   * Égoutter le choux en le pressant dans ses mains. Jeter la marinade. Assaisonner avec l'huile et le tamari, ajouter les graines de sésame.
 publishDate: '2024-01-08T21:53:45.314000+00:00'
 regime:
-  - vegetarien
-  - vegan
+  - sans-gluten
   - sans-lactose
+  - vegan
 region: Japon
 saison:
   - automne

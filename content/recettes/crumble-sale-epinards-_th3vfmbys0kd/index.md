@@ -109,10 +109,9 @@ preparation: |-
 publishDate: '2024-06-12T12:37:00+00:00'
 quantite_desc: ''
 regime:
-  - vegetarien
-  - vegan
   - sans-gluten
   - sans-lactose
+  - vegan
 title: Crumble salé épinards vegan sans gluten
 typeR: entree
 serveHot: true

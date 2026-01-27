@@ -9,8 +9,9 @@ description: null
 region: null
 saison: []
 regime:
-  - vegan
   - sans-gluten
+  - sans-lactose
+  - vegan
 cuisson: true
 serveHot: false
 plate: 100

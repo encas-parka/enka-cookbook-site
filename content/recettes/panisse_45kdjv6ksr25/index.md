@@ -6,10 +6,9 @@ categories:
   - Friture
   - Accompagnement
 regime:
-  - vegetarien
-  - vegan
   - sans-gluten
   - sans-lactose
+  - vegan
 region: Provencale
 cuisson: true
 plate: 100

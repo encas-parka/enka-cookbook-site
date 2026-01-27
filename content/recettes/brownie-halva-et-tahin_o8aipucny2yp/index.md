@@ -120,6 +120,7 @@ ingredients:
     pS: false
 materiel:
   - Four
+  - Frigo
 plate: 20
 preparation: |-
   * Préchauffez le four à 180°C.
@@ -130,10 +131,9 @@ preparation: |-
   * Cuire pendant 15 minutes. A la sortie du four, le brownie est juste cuit voir encore un peu mou. Laissez refroidir et placez au frigo pour 1h avant de démouler.
 publishDate: '2024-06-18T11:29:00+00:00'
 regime:
-  - vegetarien
-  - vegan
   - sans-gluten
   - sans-lactose
+  - vegan
 title: Brownie halva et tahin végan et sans gluten
 typeR: dessert
 serveHot: true

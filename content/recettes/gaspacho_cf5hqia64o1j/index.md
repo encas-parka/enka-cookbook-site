@@ -5,10 +5,8 @@ typeR: entree
 categories:
   - Soupe
 regime:
-  - vegetarien
-  - vegan
   - sans-lactose
-  - sans-gluten
+  - vegan
 region: Espagne
 saison:
   - ete

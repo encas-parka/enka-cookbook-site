@@ -98,8 +98,9 @@ preparation: |-
   Verser la préparation dans les moules, sur le caramel. Laisser reposer au frais pendant quelques heures ou jusqu’au lendemain.
 publishDate: '2024-06-18T11:33:00+00:00'
 regime:
-  - vegan
   - sans-gluten
+  - sans-lactose
+  - vegan
 title: Creme caramel saveur coco vegane
 typeR: dessert
 serveHot: false
@@ -108,4 +109,6 @@ id: creme-caramel-saveur-c_4w3rdggo8i7y
 createdAt: '2024-06-18T11:33:00+00:00'
 updatedAt: '2024-06-18T11:33:00+00:00'
 createdBy: Auré
+permissionWrite:
+  - 696faf80000078153479
 ---

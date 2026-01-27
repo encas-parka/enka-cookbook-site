@@ -5,6 +5,8 @@ typeR: plat
 categories:
   - Plat chaud
 regime:
+  - sans-gluten
+  - sans-lactose
   - vegan
 saison:
   - ete
@@ -117,4 +119,6 @@ id: tomates-et-poivrons-gr_a3p8ulck3gqt
 createdAt: '2025-08-08T09:43:00+00:00'
 updatedAt: '2025-08-08T09:43:00+00:00'
 createdBy: ''
+materiel:
+  - Four
 ---

@@ -82,6 +82,7 @@ ingredients:
     pS: false
 materiel:
   - Bruleur
+  - Four
   - Plat Paela
 preparation: |-
   * Coucher à même le gaz le maximum d'aubergines. Plus y a de brûleurs, mieux c'est ! Laisser cuire 10 min et retourner les pour encore 10 min.
@@ -92,14 +93,15 @@ preparation: |-
 preparation24h: ''
 publishDate: '2023-06-25T13:04:00.526000+00:00'
 regime:
-  - vegan
-  - vegetarien
   - sans-gluten
   - sans-lactose
+  - vegan
 serveHot: false
 uuid: hipqpgnlh7ri
 id: caviar-daubergines-fum_hipqpgnlh7ri
 createdAt: '2023-06-25T13:04:00.526000+00:00'
 updatedAt: '2023-06-25T13:04:00.526000+00:00'
 createdBy: Auré
+permissionWrite:
+  - 696faf80000078153479
 ---

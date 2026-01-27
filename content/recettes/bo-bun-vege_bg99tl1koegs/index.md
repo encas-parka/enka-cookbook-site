@@ -5,10 +5,9 @@ typeR: entree
 categories:
   - Salade
 regime:
-  - vegan
-  - vegetarien
   - sans-gluten
   - sans-lactose
+  - vegan
 region: Vietnam
 saison:
   - ete

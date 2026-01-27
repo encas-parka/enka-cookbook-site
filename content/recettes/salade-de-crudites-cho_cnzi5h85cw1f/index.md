@@ -116,4 +116,8 @@ id: salade-de-crudites-cho_cnzi5h85cw1f
 createdAt: '2025-10-19T20:46:00+00:00'
 updatedAt: '2025-10-19T20:46:00+00:00'
 createdBy: Alio
+regime:
+  - sans-gluten
+  - sans-lactose
+  - vegan
 ---

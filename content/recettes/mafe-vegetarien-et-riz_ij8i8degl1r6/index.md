@@ -166,4 +166,8 @@ id: mafe-vegetarien-et-riz_ij8i8degl1r6
 createdAt: '2025-10-19T18:50:00+00:00'
 updatedAt: '2025-10-19T18:50:00+00:00'
 createdBy: Alio
+regime:
+  - sans-gluten
+  - sans-lactose
+  - vegan
 ---

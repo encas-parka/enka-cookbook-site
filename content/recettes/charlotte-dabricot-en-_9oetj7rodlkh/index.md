@@ -5,6 +5,7 @@ typeR: dessert
 categories:
   - Sucrée
 regime:
+  - sans-gluten
   - vegetarien
 saison:
   - ete
@@ -120,4 +121,6 @@ id: charlotte-dabricot-en-_9oetj7rodlkh
 createdAt: '2025-06-12T10:34:00+00:00'
 updatedAt: '2025-06-12T10:34:00+00:00'
 createdBy: ''
+materiel:
+  - Frigo
 ---

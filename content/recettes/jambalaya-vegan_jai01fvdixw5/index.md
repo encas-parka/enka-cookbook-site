@@ -6,8 +6,8 @@ categories:
   - Plat chaud
 auteur: Auré
 regime:
+  - sans-lactose
   - vegan
-  - sans-gluten
 region: Nouvelle Orléans
 cuisson: true
 plate: 50
@@ -218,4 +218,6 @@ id: jambalaya-vegan_jai01fvdixw5
 createdAt: '2025-06-01T19:44:00+00:00'
 updatedAt: '2025-06-01T19:44:00+00:00'
 createdBy: Auré
+permissionWrite:
+  - 696faf80000078153479
 ---

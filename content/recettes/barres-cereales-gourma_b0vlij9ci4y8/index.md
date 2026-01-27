@@ -7,9 +7,8 @@ categories:
   - Autre
 auteur: ''
 regime:
-  - vegan
   - sans-lactose
-  - vegetarien
+  - vegan
 cuisson: true
 plate: 12
 quantite_desc: ''

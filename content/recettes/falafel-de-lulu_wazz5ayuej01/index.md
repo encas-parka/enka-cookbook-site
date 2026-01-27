@@ -125,6 +125,7 @@ ingredients:
     pF: false
     pS: false
 materiel:
+  - Congelateur
   - Friteuse
 preparation: "Mixer les pois chiche avec de l'huile d'olive. La verser petit à petit, un peu comme la mayonnaise.\nIl faut obtenir une pâte très moussante.\n\n\_Ensuite, tout mixer avec les herbes, les oignons coupés, l'ail.\nMélanger le tout avec les épices. Goûter.\nCUMIN EN MASSE !!!\n\_\n\nPrendre les deux plus belles cuillères à soupe de la cuisine avec un pot d'eau chaude.\nFaire des quenelles pendant 5h et les disposer au dur (congélo) sur des plateaux.\nSi pas de congélateur, les frire directement en plongeant les quenelles directement.\nCes quenelles ne peuvent pas être façonner à la main.\nBON COURAGE !! Coeur Coeur"
 preparation24h: Au moins 17h avant, faire tremper les pois chiche.
@@ -137,4 +138,8 @@ id: falafel-de-lulu_wazz5ayuej01
 createdAt: '2025-10-16T16:10:00+00:00'
 updatedAt: '2025-10-16T16:10:00+00:00'
 createdBy: ''
+regime:
+  - sans-gluten
+  - sans-lactose
+  - vegan
 ---

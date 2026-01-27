@@ -144,6 +144,7 @@ ingredients:
     pF: false
     pS: false
 materiel:
+  - Congelateur
   - Four
 plate: 100
 preparation: |-
@@ -160,10 +161,9 @@ preparation: |-
 preparation24h: Faire la pâte la veille
 publishDate: '2024-05-27T18:45:00.000Z'
 regime:
-  - vegan
   - sans-gluten
   - sans-lactose
-  - vegetarien
+  - vegan
 title: Madeleines sarrasin sauge noisette
 typeR: entree
 serveHot: false

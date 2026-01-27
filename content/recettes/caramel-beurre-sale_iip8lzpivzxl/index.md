@@ -4,10 +4,11 @@ draft: true
 description: Pour mettre sur un dessert par exemple. Consistence un peu élastique.
 typeR: dessert
 categories:
-- Sauce
+  - Sauce
 regime:
-- vegetarien
-- sans-gluten
+  - sans-gluten
+  - sans-lactose
+  - vegan
 cuisson: true
 plate: 100
 check: true

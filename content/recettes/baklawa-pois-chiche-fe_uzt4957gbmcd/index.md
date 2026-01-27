@@ -233,4 +233,6 @@ id: baklawa-pois-chiche-fe_uzt4957gbmcd
 createdAt: '2024-06-20T09:53:00+00:00'
 updatedAt: '2024-06-20T09:53:00+00:00'
 createdBy: Ça vaulx le détour
+permissionWrite:
+  - 696faf80000078153479
 ---

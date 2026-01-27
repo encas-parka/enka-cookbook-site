@@ -93,4 +93,8 @@ id: fromage-frais-ail-cibo_wnpqhq07loq7
 createdAt: '2024-03-26T18:42:55.847000+00:00'
 updatedAt: '2024-03-26T18:42:55.847000+00:00'
 createdBy: 'ça vaut le détour '
+permissionWrite:
+  - 696faf80000078153479
+materiel:
+  - Robot Mixeur
 ---

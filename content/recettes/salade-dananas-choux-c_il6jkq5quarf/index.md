@@ -6,7 +6,9 @@ categories:
   - Salade
 auteur: frédo
 regime:
-  - vegetarien
+  - sans-gluten
+  - sans-lactose
+  - vegan
 cuisson: false
 plate: 100
 check: false

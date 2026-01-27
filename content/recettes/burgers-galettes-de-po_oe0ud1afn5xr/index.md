@@ -6,6 +6,7 @@ categories:
   - Snacking
 auteur: Lucien
 regime:
+  - sans-gluten
   - vegetarien
 cuisson: true
 plate: 220

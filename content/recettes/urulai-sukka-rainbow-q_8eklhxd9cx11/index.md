@@ -161,8 +161,9 @@ publishDate: '2025-06-02T16:27:00+00:00'
 checkAlwaysOk: false
 checkfor: null
 regime:
-  - vegan
   - sans-gluten
+  - sans-lactose
+  - vegan
 uuid: 8eklhxd9cx11
 titleid: urulai-sukka_5ru2hn6h
 serveHot: true
@@ -170,4 +171,6 @@ id: urulai-sukka-rainbow-q_8eklhxd9cx11
 createdAt: '2025-06-02T16:27:00+00:00'
 updatedAt: '2025-06-02T16:27:00+00:00'
 createdBy: Auré
+permissionWrite:
+  - 696faf80000078153479
 ---

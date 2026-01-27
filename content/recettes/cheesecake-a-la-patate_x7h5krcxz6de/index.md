@@ -188,4 +188,8 @@ id: cheesecake-a-la-patate_x7h5krcxz6de
 createdAt: '2025-05-30T16:53:00+00:00'
 updatedAt: '2025-05-30T16:53:00+00:00'
 createdBy: Auré
+permissionWrite:
+  - 696faf80000078153479
+materiel:
+  - Four
 ---

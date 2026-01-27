@@ -5,8 +5,9 @@ typeR: plat
 categories:
   - Plat chaud
 regime:
-  - vegetarien
   - sans-gluten
+  - sans-lactose
+  - vegan
 cuisson: true
 plate: 100
 check: true
@@ -213,4 +214,6 @@ id: risotto-torrefie-de-sa_slsqvoqaqra7
 createdAt: '2025-06-13T14:31:00+00:00'
 updatedAt: '2025-06-13T14:31:00+00:00'
 createdBy: ''
+materiel:
+  - Four
 ---

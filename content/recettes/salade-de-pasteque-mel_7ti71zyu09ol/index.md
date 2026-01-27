@@ -53,4 +53,10 @@ id: salade-de-pasteque-mel_7ti71zyu09ol
 createdAt: '2024-06-17T23:43:00+00:00'
 updatedAt: '2024-06-17T23:43:00+00:00'
 createdBy: Auré
+regime:
+  - sans-gluten
+  - sans-lactose
+  - vegan
+permissionWrite:
+  - 696faf80000078153479
 ---

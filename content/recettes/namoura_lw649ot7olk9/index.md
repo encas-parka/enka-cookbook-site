@@ -145,4 +145,6 @@ id: namoura_lw649ot7olk9
 createdAt: '2024-03-27T19:32:00+00:00'
 updatedAt: '2024-03-27T19:32:00+00:00'
 createdBy: ça vault le détour
+permissionWrite:
+  - 696faf80000078153479
 ---

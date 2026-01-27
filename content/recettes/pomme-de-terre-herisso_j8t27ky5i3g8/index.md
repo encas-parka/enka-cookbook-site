@@ -6,8 +6,9 @@ typeR: plat
 categories:
   - Accompagnement
 regime:
+  - sans-gluten
+  - sans-lactose
   - vegan
-  - vegetarien
 cuisson: true
 plate: 100
 check: true

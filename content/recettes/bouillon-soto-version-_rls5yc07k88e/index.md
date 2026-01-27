@@ -187,8 +187,9 @@ preparation: |-
 publishDate: '2024-06-17T22:01:00+00:00'
 quantite_desc: bol d'environ 25cl par personne
 regime:
-  - vegan
   - sans-gluten
+  - sans-lactose
+  - vegan
 region: Java
 title: Bouillon soto - version végane du bouillon de poulet à la javanaise
 typeR: entree
@@ -198,4 +199,6 @@ id: bouillon-soto-version-_rls5yc07k88e
 createdAt: '2024-06-17T22:01:00+00:00'
 updatedAt: '2024-06-17T22:01:00+00:00'
 createdBy: Auré
+permissionWrite:
+  - 696faf80000078153479
 ---

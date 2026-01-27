@@ -128,4 +128,10 @@ id: ile-flottante_9r9tthldsfkp
 createdAt: '2024-06-13T08:06:00+00:00'
 updatedAt: '2024-06-13T08:06:00+00:00'
 createdBy: anliz
+regime:
+  - sans-gluten
+  - vegetarien
+materiel:
+  - Four
+  - Frigo
 ---

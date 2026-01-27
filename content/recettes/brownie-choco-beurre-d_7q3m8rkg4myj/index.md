@@ -156,4 +156,7 @@ id: brownie-choco-beurre-d_7q3m8rkg4myj
 createdAt: '2025-09-05T16:25:00+00:00'
 updatedAt: '2025-09-05T16:25:00+00:00'
 createdBy: ''
+regime:
+  - sans-lactose
+  - vegetarien
 ---

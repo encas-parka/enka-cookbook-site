@@ -108,4 +108,6 @@ id: panzerotti_oxykudp8ihh6
 createdAt: '2025-05-30T16:22:00+00:00'
 updatedAt: '2025-05-30T16:22:00+00:00'
 createdBy: ''
+materiel:
+  - Friteuse
 ---

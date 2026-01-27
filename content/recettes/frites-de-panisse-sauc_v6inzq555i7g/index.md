@@ -5,8 +5,9 @@ typeR: entree
 categories:
   - Bouchées salées
 regime:
-  - vegan
   - sans-gluten
+  - sans-lactose
+  - vegan
 cuisson: true
 plate: 100
 check: true
@@ -222,4 +223,7 @@ id: frites-de-panisse-sauc_v6inzq555i7g
 createdAt: '2025-06-12T10:49:00+00:00'
 updatedAt: '2025-06-12T10:49:00+00:00'
 createdBy: ''
+materiel:
+  - Frigo
+  - Friteuse
 ---

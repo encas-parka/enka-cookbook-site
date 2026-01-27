@@ -102,4 +102,6 @@ id: salami-au-chocolat_bdsp69jk64pl
 createdAt: '2024-06-12T23:57:00+00:00'
 updatedAt: '2024-06-12T23:57:00+00:00'
 createdBy: ''
+materiel:
+  - Frigo
 ---

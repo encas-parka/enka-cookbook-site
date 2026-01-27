@@ -6,8 +6,9 @@ categories:
   - Biscuits
 auteur: Auré
 regime:
-  - vegan
   - sans-gluten
+  - sans-lactose
+  - vegan
 cuisson: true
 plate: 20
 check: true
@@ -98,4 +99,8 @@ id: montecao-sans-gluten_xlwbozfo1um2
 createdAt: '2025-05-30T17:34:00+00:00'
 updatedAt: '2025-05-30T17:34:00+00:00'
 createdBy: Auré
+permissionWrite:
+  - 696faf80000078153479
+materiel:
+  - Four
 ---

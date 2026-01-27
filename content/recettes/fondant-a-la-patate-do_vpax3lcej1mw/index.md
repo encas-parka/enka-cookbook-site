@@ -6,8 +6,9 @@ categories:
   - Gateau
 auteur: Auré
 regime:
-  - vegan
   - sans-gluten
+  - sans-lactose
+  - vegan
 cuisson: true
 plate: 25
 check: false
@@ -93,4 +94,8 @@ id: fondant-a-la-patate-do_vpax3lcej1mw
 createdAt: '2025-05-30T17:18:00+00:00'
 updatedAt: '2025-05-30T17:18:00+00:00'
 createdBy: Auré
+permissionWrite:
+  - 696faf80000078153479
+materiel:
+  - Four
 ---

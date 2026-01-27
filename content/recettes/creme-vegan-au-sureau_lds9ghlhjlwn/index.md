@@ -72,9 +72,8 @@ preparation: |-
   3. Mettre en ramequins
 publishDate: '2024-06-19T19:02:00+00:00'
 regime:
-  - vegetarien
-  - vegan
   - sans-lactose
+  - vegan
 title: Crème végan au sureau
 typeR: dessert
 serveHot: false

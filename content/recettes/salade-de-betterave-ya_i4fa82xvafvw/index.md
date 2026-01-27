@@ -83,4 +83,6 @@ id: salade-de-betterave-ya_i4fa82xvafvw
 createdAt: '2024-06-17T18:02:00+00:00'
 updatedAt: '2024-06-17T18:02:00+00:00'
 createdBy: une p'tite cuillère de plus
+permissionWrite:
+  - 696faf80000078153479
 ---

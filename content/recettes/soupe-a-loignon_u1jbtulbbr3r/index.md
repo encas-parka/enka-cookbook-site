@@ -7,6 +7,7 @@ categories:
   - Soupe
 auteur: Auré
 regime:
+  - sans-gluten
   - vegetarien
 region: France
 cuisson: true
@@ -195,4 +196,8 @@ id: soupe-a-loignon_u1jbtulbbr3r
 createdAt: '2025-01-05T20:23:00+00:00'
 updatedAt: '2025-01-05T20:23:00+00:00'
 createdBy: Auré
+permissionWrite:
+  - 696faf80000078153479
+materiel:
+  - Four
 ---

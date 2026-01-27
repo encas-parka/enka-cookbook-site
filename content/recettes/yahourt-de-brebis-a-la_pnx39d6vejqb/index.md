@@ -5,6 +5,7 @@ typeR: dessert
 categories:
   - Autre
 regime:
+  - sans-gluten
   - vegetarien
 cuisson: false
 plate: 100

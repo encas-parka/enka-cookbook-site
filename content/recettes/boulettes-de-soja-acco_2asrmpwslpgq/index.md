@@ -164,14 +164,15 @@ publishDate: '2024-05-18T13:54:00+00:00'
 checkfor: 170
 checkAlwaysOk: false
 regime:
-  - vegetarien
-  - vegan
   - sans-gluten
   - sans-lactose
+  - vegan
 serveHot: true
 uuid: 2asrmpwslpgq
 id: boulettes-de-soja-acco_2asrmpwslpgq
 createdAt: '2024-05-18T13:54:00+00:00'
 updatedAt: '2024-05-18T13:54:00+00:00'
 createdBy: Auré
+permissionWrite:
+  - 696faf80000078153479
 ---

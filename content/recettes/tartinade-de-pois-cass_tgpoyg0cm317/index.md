@@ -5,7 +5,8 @@ typeR: entree
 categories:
   - Tartinade
 regime:
-  - vegetarien
+  - sans-gluten
+  - sans-lactose
   - vegan
 cuisson: true
 plate: 350
@@ -76,4 +77,6 @@ id: tartinade-de-pois-cass_tgpoyg0cm317
 createdAt: '2024-05-18T13:18:00+00:00'
 updatedAt: '2024-05-18T13:18:00+00:00'
 createdBy: ''
+materiel:
+  - Congelateur
 ---

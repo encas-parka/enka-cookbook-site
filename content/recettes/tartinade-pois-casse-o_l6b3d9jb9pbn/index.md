@@ -6,10 +6,9 @@ categories:
   - Tartinade
 auteur: Sylvain
 regime:
-  - vegetarien
-  - vegan
   - sans-gluten
   - sans-lactose
+  - vegan
 cuisson: true
 plate: 190
 check: true

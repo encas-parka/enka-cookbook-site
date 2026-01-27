@@ -6,7 +6,8 @@ typeR: plat
 categories:
   - Plat chaud
 auteur: Auré
-regime: null
+regime:
+  - sans-lactose
 region: Nouvelle Orléans
 cuisson: true
 plate: 100
@@ -243,4 +244,6 @@ id: jambalaya_roe65yr7m7z0
 createdAt: '2025-06-01T19:06:00+00:00'
 updatedAt: '2025-06-01T19:06:00+00:00'
 createdBy: Auré
+permissionWrite:
+  - 696faf80000078153479
 ---

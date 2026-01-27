@@ -148,6 +148,7 @@ preparation24h: La pâte peut être faite la veille.
 publishDate: '2024-06-17T20:06:00+00:00'
 quantite_desc: un moule d'env. 30cm = 8 parts
 regime:
+  - sans-lactose
   - vegan
 title: Tarte au citron vegane
 typeR: dessert
@@ -157,4 +158,7 @@ id: tarte-au-citron-vegane_mw6a5i2da5hf
 createdAt: '2024-06-17T20:06:00+00:00'
 updatedAt: '2024-06-17T20:06:00+00:00'
 createdBy: ''
+materiel:
+  - Four
+  - Frigo
 ---

@@ -104,4 +104,8 @@ id: houmous-pois-chiche_dw7yaqdlvjg9
 createdAt: '2025-10-19T20:27:00+00:00'
 updatedAt: '2025-10-19T20:27:00+00:00'
 createdBy: Alio
+regime:
+  - sans-gluten
+  - sans-lactose
+  - vegan
 ---

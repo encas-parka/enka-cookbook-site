@@ -6,7 +6,8 @@ categories:
   - Soupe
 auteur: Auré
 regime:
-  - vegan
+  - sans-lactose
+  - vegetarien
 region: Japon
 saison: null
 cuisson: true
@@ -328,4 +329,8 @@ id: shoyu-ramen-dhiver_o224eka5fp2n
 createdAt: '2025-05-04T17:10:00+00:00'
 updatedAt: '2025-05-04T17:10:00+00:00'
 createdBy: Auré
+permissionWrite:
+  - 696faf80000078153479
+materiel:
+  - Frigo
 ---

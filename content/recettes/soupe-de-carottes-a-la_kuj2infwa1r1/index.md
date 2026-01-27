@@ -109,10 +109,9 @@ preparation: |-
 publishDate: '2024-06-07T16:19:00+00:00'
 quantite_desc: Un bol par personne
 regime:
-  - vegan
   - sans-gluten
   - sans-lactose
-  - vegetarien
+  - vegan
 region: Portugal
 title: Soupe de carottes à la coriandre
 typeR: entree

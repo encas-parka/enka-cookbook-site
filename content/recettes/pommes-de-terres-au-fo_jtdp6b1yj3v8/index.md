@@ -5,10 +5,9 @@ typeR: plat
 categories:
   - Accompagnement
 regime:
-  - vegetarien
-  - vegan
   - sans-gluten
   - sans-lactose
+  - vegan
 cuisson: true
 plate: 50
 quantite_desc: Pour une bonne portion

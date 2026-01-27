@@ -190,10 +190,9 @@ plate: 16
 preparation: Comme la recette de baklawa pois chiche ?
 publishDate: '2024-06-20T10:04:00+00:00'
 regime:
-  - vegetarien
-  - vegan
   - sans-gluten
   - sans-lactose
+  - vegan
 title: Faux baklawa pois chiche végan
 typeR: entree
 serveHot: true
@@ -202,4 +201,6 @@ id: faux-baklawa-pois-chic_uiyeai2ssptr
 createdAt: '2024-06-20T10:04:00+00:00'
 updatedAt: '2024-06-20T10:04:00+00:00'
 createdBy: Ça vaulx le détour
+permissionWrite:
+  - 696faf80000078153479
 ---

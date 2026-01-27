@@ -7,10 +7,9 @@ categories:
   - Sauce
 auteur: Marion
 regime:
-  - vegetarien
-  - vegan
   - sans-gluten
   - sans-lactose
+  - vegan
 cuisson: false
 plate: 50
 check: false
@@ -95,4 +94,6 @@ id: sauce-blanche-tahin-ci_lt3yweiyoll3
 createdAt: '2025-07-30T14:55:00+00:00'
 updatedAt: '2025-07-30T14:55:00+00:00'
 createdBy: Marion
+permissionWrite:
+  - 6931ecdccd2c8d8d15e5
 ---

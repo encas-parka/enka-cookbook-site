@@ -101,4 +101,6 @@ id: soupe-tarator_wh6gu7d0qdje
 createdAt: '2025-05-30T12:11:00+00:00'
 updatedAt: '2025-05-30T12:11:00+00:00'
 createdBy: Auré
+permissionWrite:
+  - 696faf80000078153479
 ---

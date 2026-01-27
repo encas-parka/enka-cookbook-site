@@ -83,6 +83,8 @@ preparation: "\\\n\n* 1 - Hâcher finement les oignons. Passer au presse ail les
 publishDate: '2025-06-02T18:09:00+00:00'
 checkAlwaysOk: false
 regime:
+  - sans-gluten
+  - sans-lactose
   - vegan
 serveHot: false
 uuid: u2rslq2u1bua
@@ -90,4 +92,6 @@ id: raita-vegane-rainbow-q_u2rslq2u1bua
 createdAt: '2025-06-02T18:09:00+00:00'
 updatedAt: '2025-06-02T18:09:00+00:00'
 createdBy: Auré
+permissionWrite:
+  - 696faf80000078153479
 ---

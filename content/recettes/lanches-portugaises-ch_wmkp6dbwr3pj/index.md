@@ -131,4 +131,8 @@ id: lanches-portugaises-ch_wmkp6dbwr3pj
 createdAt: '2024-05-22T23:12:00+00:00'
 updatedAt: '2024-05-22T23:12:00+00:00'
 createdBy: Auré
+permissionWrite:
+  - 696faf80000078153479
+materiel:
+  - Four
 ---

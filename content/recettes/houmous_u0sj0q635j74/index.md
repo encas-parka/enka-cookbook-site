@@ -93,8 +93,9 @@ preparation: |-
 preparation24h: ''
 publishDate: '2024-03-18T13:12:27.157000+00:00'
 regime:
+  - sans-gluten
+  - sans-lactose
   - vegan
-  - vegetarien
 title: Houmous
 typeR: entree
 serveHot: false

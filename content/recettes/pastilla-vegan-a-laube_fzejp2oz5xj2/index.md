@@ -199,6 +199,7 @@ ingredients:
     pF: false
     pS: false
 materiel:
+  - Four
   - moule à tarte
 plate: 100
 preparation: |-
@@ -238,6 +239,7 @@ preparation: |-
 publishDate: '2024-06-13T17:39:00+00:00'
 quantite_desc: 8 parts par moule à tarte
 regime:
+  - sans-lactose
   - vegan
 title: Pastilla vegan a l'aubergine
 typeR: plat
@@ -247,4 +249,6 @@ id: pastilla-vegan-a-laube_fzejp2oz5xj2
 createdAt: '2024-06-13T17:39:00+00:00'
 updatedAt: '2024-06-13T17:39:00+00:00'
 createdBy: Auré
+permissionWrite:
+  - 696faf80000078153479
 ---

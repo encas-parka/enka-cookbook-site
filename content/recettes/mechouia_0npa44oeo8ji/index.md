@@ -5,10 +5,9 @@ typeR: entree
 categories:
   - Salade
 regime:
-  - vegan
-  - vegetarien
-  - sans-lactose
   - sans-gluten
+  - sans-lactose
+  - vegan
 region: Algérie
 cuisson: true
 plate: 100

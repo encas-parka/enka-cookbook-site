@@ -6,6 +6,7 @@ categories:
   - Soupe
 auteur: Auré
 regime:
+  - sans-lactose
   - vegan
 cuisson: true
 plate: 100
@@ -129,4 +130,8 @@ id: granola-sale-pour-soup_rxy4n63s6y4d
 createdAt: '2025-05-30T15:55:00+00:00'
 updatedAt: '2025-05-30T15:55:00+00:00'
 createdBy: Auré
+permissionWrite:
+  - 696faf80000078153479
+materiel:
+  - Four
 ---

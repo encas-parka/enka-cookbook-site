@@ -138,10 +138,9 @@ preparation: |-
 publishDate: '2024-05-18T15:49:00+00:00'
 quantite_desc: 8 parts par tourte • 3 tourtes pour 20 personnes.
 regime:
-  - vegan
-  - vegetarien
-  - sans-lactose
   - sans-gluten
+  - sans-lactose
+  - vegan
 title: Tourte betterave lentille (vegan et sans gluten)
 typeR: entree
 serveHot: true

@@ -7,9 +7,8 @@ categories:
   - Accompagnement
 auteur: ''
 regime:
-  - vegetarien
-  - vegan
   - sans-lactose
+  - vegan
 saison:
   - ete
 cuisson: true

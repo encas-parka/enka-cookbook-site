@@ -102,4 +102,7 @@ id: panacotta-vanille-et-c_pncip9db7opr
 createdAt: '2025-09-08T13:57:00+00:00'
 updatedAt: '2025-09-08T13:57:00+00:00'
 createdBy: ''
+regime:
+  - sans-gluten
+  - vegetarien
 ---

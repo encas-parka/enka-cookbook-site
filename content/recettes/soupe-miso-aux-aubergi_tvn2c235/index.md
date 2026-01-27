@@ -9,16 +9,18 @@ description: 'La soupe miso de base est constituée de 4 éléments de base : le
 region: Japon
 saison: []
 regime:
-  - vegan
   - sans-gluten
+  - sans-lactose
+  - vegan
 cuisson: true
 serveHot: true
 plate: 100
 quantite_desc: environ 600ml par personne
 check: false
 materiel:
-  - Marmitte
+  - Four
   - Gastro 1/1 (Normaux)
+  - Marmitte
 ingredients:
   - uuid: 1yqgar
     name: Shizo vert

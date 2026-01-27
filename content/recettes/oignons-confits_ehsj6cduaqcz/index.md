@@ -5,10 +5,9 @@ typeR: entree
 categories:
   - Accompagnement
 regime:
-  - vegetarien
-  - vegan
   - sans-gluten
   - sans-lactose
+  - vegan
 cuisson: true
 plate: 20
 check: false

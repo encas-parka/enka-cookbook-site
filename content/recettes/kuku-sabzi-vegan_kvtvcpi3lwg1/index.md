@@ -6,8 +6,9 @@ categories:
   - Plat chaud
 auteur: Auré
 regime:
-  - vegan
   - sans-gluten
+  - sans-lactose
+  - vegan
 region: Iran
 cuisson: true
 plate: 25
@@ -221,4 +222,8 @@ id: kuku-sabzi-vegan_kvtvcpi3lwg1
 createdAt: '2025-05-30T20:10:00+00:00'
 updatedAt: '2025-05-30T20:10:00+00:00'
 createdBy: Auré
+permissionWrite:
+  - 696faf80000078153479
+materiel:
+  - Four
 ---

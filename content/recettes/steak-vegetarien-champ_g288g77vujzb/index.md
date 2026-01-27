@@ -165,9 +165,8 @@ preparation: |-
   * Faire cuire à 180°C environ 30 minutes, jusqu'à ce qu'ils brunissent un peu. Retourner en milieu de cuisson.
 publishDate: '2024-03-08T10:19:47.990000+00:00'
 regime:
-  - vegetarien
-  - vegan
   - sans-lactose
+  - vegan
 title: Steak végétarien champignons - noix - flocons d'avoine
 typeR: plat
 serveHot: true
@@ -176,4 +175,6 @@ id: steak-vegetarien-champ_g288g77vujzb
 createdAt: '2024-03-08T10:19:47.990000+00:00'
 updatedAt: '2024-03-08T10:19:47.990000+00:00'
 createdBy: Marion
+permissionWrite:
+  - 6931ecdccd2c8d8d15e5
 ---

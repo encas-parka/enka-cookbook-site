@@ -58,4 +58,8 @@ id: salade-de-peche-a-la-m_8e4nztgqspo6
 createdAt: '2024-06-18T00:10:00+00:00'
 updatedAt: '2024-06-18T00:10:00+00:00'
 createdBy: ''
+regime:
+  - sans-gluten
+  - sans-lactose
+  - vegan
 ---

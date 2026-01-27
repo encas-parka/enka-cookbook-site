@@ -6,10 +6,8 @@ categories:
   - Plat chaud
 auteur: frédo
 regime:
-  - vegetarien
-  - sans-gluten
-  - vegan
   - sans-lactose
+  - vegan
 cuisson: true
 plate: 100
 check: false

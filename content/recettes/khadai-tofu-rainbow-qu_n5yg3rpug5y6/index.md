@@ -171,12 +171,15 @@ preparation24h: ''
 publishDate: '2025-06-02T17:33:00+00:00'
 checkAlwaysOk: false
 regime:
-  - vegan
   - sans-gluten
+  - sans-lactose
+  - vegan
 serveHot: true
 uuid: n5yg3rpug5y6
 id: khadai-tofu-rainbow-qu_n5yg3rpug5y6
 createdAt: '2025-06-02T17:33:00+00:00'
 updatedAt: '2025-06-02T17:33:00+00:00'
 createdBy: Auré
+permissionWrite:
+  - 696faf80000078153479
 ---

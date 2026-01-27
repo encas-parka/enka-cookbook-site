@@ -187,10 +187,13 @@ checkfor: ''
 checkAlwaysOk: false
 regime:
   - sans-gluten
+  - vegetarien
 serveHot: true
 uuid: utfus1r523hi
 id: pomme-de-terre-au-four_utfus1r523hi
 createdAt: '2025-06-04T18:15:00+00:00'
 updatedAt: '2025-06-04T18:15:00+00:00'
 createdBy: frédo
+materiel:
+  - Four
 ---

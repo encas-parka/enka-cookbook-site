@@ -5,7 +5,9 @@ typeR: dessert
 categories:
   - Gateau
 regime:
-  - vegetarien
+  - sans-gluten
+  - sans-lactose
+  - vegan
 cuisson: true
 plate: 100
 check: true
@@ -135,8 +137,9 @@ ingredients:
     pF: false
     pS: false
 materiel:
-  - Gastro 1/1 (Normaux)
   - Frigo
+  - Gastro 1/1 (Normaux)
+  - Robot Mixeur
 preparation: |-
   **FOND DE TARTE :**
 

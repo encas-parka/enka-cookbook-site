@@ -77,7 +77,9 @@ preparation: |-
 publishDate: '2025-05-15T16:47:00+00:00'
 checkAlwaysOk: false
 regime:
-  - vegetarien
+  - sans-gluten
+  - sans-lactose
+  - vegan
 serveHot: false
 uuid: 22ooni0pakt1
 id: creme-dessert-au-tapio_22ooni0pakt1

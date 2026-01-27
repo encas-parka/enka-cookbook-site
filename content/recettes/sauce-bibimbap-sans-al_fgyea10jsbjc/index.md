@@ -6,6 +6,8 @@ categories:
   - Plat chaud
 auteur: Auré
 regime:
+  - sans-gluten
+  - sans-lactose
   - vegan
 region: Corée
 cuisson: false
@@ -112,4 +114,6 @@ id: sauce-bibimbap-sans-al_fgyea10jsbjc
 createdAt: '2025-05-04T21:30:00+00:00'
 updatedAt: '2025-05-04T21:30:00+00:00'
 createdBy: Auré
+permissionWrite:
+  - 696faf80000078153479
 ---

@@ -8,7 +8,9 @@ categories:
 description: Elles sont un classique des restaurants à Dim Sum, car elles sont délicieuses!
 region: Chine
 saison: []
-regime: []
+regime:
+  - sans-lactose
+  - vegan
 cuisson: true
 serveHot: true
 plate: 100
@@ -113,7 +115,7 @@ ingredients:
     normalizedQuantity: 150
     normalizedUnit: gr.
     comment: huile aromatisée
-    allergens: &ref_0
+    allergens:
       - Gluten
     type: lof
     pF: false
@@ -158,7 +160,8 @@ ingredients:
     normalizedQuantity: 5250
     normalizedUnit: gr.
     comment: ''
-    allergens: *ref_0
+    allergens:
+      - Gluten
     type: lof
     pF: false
     pS: false

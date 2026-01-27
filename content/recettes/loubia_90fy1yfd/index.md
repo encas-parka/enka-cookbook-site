@@ -9,7 +9,9 @@ description: Ragout d'haricots blancs
 region: Tunisie
 saison: []
 regime:
-  - vegetarien
+  - sans-gluten
+  - sans-lactose
+  - vegan
 cuisson: true
 serveHot: true
 plate: 100

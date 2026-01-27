@@ -104,8 +104,9 @@ preparation: |-
 publishDate: '2024-05-27T22:33:00+00:00'
 quantite_desc: un bol d'environ 225ml par personne
 regime:
-  - vegan
   - sans-gluten
+  - sans-lactose
+  - vegan
 title: Soupe froide concombre et yaourt vegan
 typeR: entree
 serveHot: false
@@ -114,4 +115,6 @@ id: soupe-froide-concombre_4tg077f8luat
 createdAt: '2024-05-27T22:33:00+00:00'
 updatedAt: '2024-05-27T22:33:00+00:00'
 createdBy: Auré
+permissionWrite:
+  - 696faf80000078153479
 ---

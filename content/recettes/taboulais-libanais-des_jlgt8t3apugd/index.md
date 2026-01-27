@@ -6,10 +6,9 @@ typeR: entree
 categories:
   - Salade
 regime:
-  - vegetarien
-  - vegan
-  - sans-lactose
   - sans-gluten
+  - sans-lactose
+  - vegan
 region: Liban
 saison:
   - ete
@@ -135,4 +134,6 @@ id: taboulais-libanais-des_jlgt8t3apugd
 createdAt: '2024-05-18T16:14:00+00:00'
 updatedAt: '2024-05-18T16:14:00+00:00'
 createdBy: ''
+materiel:
+  - Frigo
 ---

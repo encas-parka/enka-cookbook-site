@@ -5,6 +5,7 @@ typeR: entree
 categories:
   - Bouchées salées
 regime:
+  - sans-gluten
   - vegetarien
 saison:
   - ete
@@ -83,4 +84,6 @@ id: flan-de-courgettes-au-_qyi5426r2gnp
 createdAt: '2025-06-12T10:02:00+00:00'
 updatedAt: '2025-06-12T10:02:00+00:00'
 createdBy: ''
+materiel:
+  - Four
 ---

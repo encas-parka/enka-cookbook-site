@@ -6,10 +6,9 @@ typeR: plat
 categories:
   - Friture
 regime:
-  - vegetarien
-  - vegan
   - sans-gluten
   - sans-lactose
+  - vegan
 region: Asie
 cuisson: true
 plate: 150

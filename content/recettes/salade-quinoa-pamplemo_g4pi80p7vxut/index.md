@@ -133,4 +133,6 @@ id: salade-quinoa-pamplemo_g4pi80p7vxut
 createdAt: '2025-01-05T13:17:00+00:00'
 updatedAt: '2025-01-05T13:17:00+00:00'
 createdBy: Auré
+permissionWrite:
+  - 696faf80000078153479
 ---

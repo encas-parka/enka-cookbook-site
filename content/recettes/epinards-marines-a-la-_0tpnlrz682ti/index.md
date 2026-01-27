@@ -129,4 +129,8 @@ id: epinards-marines-a-la-_0tpnlrz682ti
 createdAt: '2025-09-01T08:08:00+00:00'
 updatedAt: '2025-09-01T08:08:00+00:00'
 createdBy: ''
+regime:
+  - sans-gluten
+  - sans-lactose
+  - vegan
 ---

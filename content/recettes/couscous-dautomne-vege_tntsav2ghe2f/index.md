@@ -212,4 +212,7 @@ id: couscous-dautomne-vege_tntsav2ghe2f
 createdAt: '2025-10-19T20:53:00+00:00'
 updatedAt: '2025-10-19T20:53:00+00:00'
 createdBy: Alio
+regime:
+  - sans-lactose
+  - vegan
 ---

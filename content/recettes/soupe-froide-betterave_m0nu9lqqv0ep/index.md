@@ -180,4 +180,6 @@ id: soupe-froide-betterave_m0nu9lqqv0ep
 createdAt: '2024-05-27T21:09:00+00:00'
 updatedAt: '2024-05-27T21:09:00+00:00'
 createdBy: Auré
+permissionWrite:
+  - 696faf80000078153479
 ---

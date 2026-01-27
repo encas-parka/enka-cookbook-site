@@ -4,10 +4,9 @@ draft: false
 categories:
   - Tartinade
 regime:
-  - vegan
-  - vegetarien
   - sans-gluten
   - sans-lactose
+  - vegan
 cuisson: true
 plate: 100
 ingredients:
@@ -109,4 +108,6 @@ id: houmous-de-poivrons_olgz2w2naxyo
 createdAt: '2023-06-21T09:47:13.131000+00:00'
 updatedAt: '2023-06-21T09:47:13.131000+00:00'
 createdBy: ''
+materiel:
+  - Four
 ---

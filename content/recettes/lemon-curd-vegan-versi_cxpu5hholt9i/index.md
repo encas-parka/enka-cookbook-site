@@ -85,8 +85,9 @@ preparation: |-
 publishDate: '2024-06-17T20:30:00+00:00'
 quantite_desc: un ramequin + un biscuit par personnes
 regime:
-  - vegan
   - sans-gluten
+  - sans-lactose
+  - vegan
 title: Lemon curd vegan - version tarte au citron sans gluten
 typeR: dessert
 serveHot: false

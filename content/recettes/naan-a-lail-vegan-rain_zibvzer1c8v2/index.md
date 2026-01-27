@@ -105,6 +105,7 @@ preparation: "possible de faire la veille mais pas obligatoire\n\nattention à l
 publishDate: '2025-06-02T18:49:00+00:00'
 checkAlwaysOk: false
 regime:
+  - sans-lactose
   - vegan
 serveHot: false
 uuid: zibvzer1c8v2
@@ -112,4 +113,6 @@ id: naan-a-lail-vegan-rain_zibvzer1c8v2
 createdAt: '2025-06-02T18:49:00+00:00'
 updatedAt: '2025-06-02T18:49:00+00:00'
 createdBy: Auré
+permissionWrite:
+  - 696faf80000078153479
 ---

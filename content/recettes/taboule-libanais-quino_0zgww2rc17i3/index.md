@@ -5,10 +5,9 @@ typeR: entree
 categories:
   - Salade
 regime:
-  - vegetarien
-  - vegan
-  - sans-lactose
   - sans-gluten
+  - sans-lactose
+  - vegan
 region: Liban
 saison:
   - ete

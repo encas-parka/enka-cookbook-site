@@ -147,4 +147,6 @@ id: riz-au-four-parfume-a-_fae9fgwlpt5x
 createdAt: '2024-05-29T20:01:00+00:00'
 updatedAt: '2024-05-29T20:01:00+00:00'
 createdBy: Ottolenghi
+materiel:
+  - Four
 ---

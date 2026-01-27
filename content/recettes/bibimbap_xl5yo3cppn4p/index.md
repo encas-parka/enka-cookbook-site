@@ -403,12 +403,16 @@ prepAlt:
 publishDate: '2025-05-04T21:01:00+00:00'
 checkAlwaysOk: false
 regime:
-  - vegan
-  - sans-gluten
+  - sans-lactose
+  - vegetarien
 serveHot: true
 uuid: xl5yo3cppn4p
 id: bibimbap_xl5yo3cppn4p
 createdAt: '2025-05-04T21:01:00+00:00'
 updatedAt: '2025-05-04T21:01:00+00:00'
 createdBy: Auré
+permissionWrite:
+  - 696faf80000078153479
+materiel:
+  - Four
 ---

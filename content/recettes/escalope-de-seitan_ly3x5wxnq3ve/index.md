@@ -5,6 +5,7 @@ typeR: plat
 categories:
   - Plat chaud
 regime:
+  - sans-lactose
   - vegan
 cuisson: true
 plate: 100
@@ -120,4 +121,6 @@ id: escalope-de-seitan_ly3x5wxnq3ve
 createdAt: '2025-06-12T10:12:00+00:00'
 updatedAt: '2025-06-12T10:12:00+00:00'
 createdBy: ''
+materiel:
+  - Friteuse
 ---

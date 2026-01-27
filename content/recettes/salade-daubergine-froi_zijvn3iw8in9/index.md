@@ -6,8 +6,9 @@ categories:
   - Salade
 auteur: une p'tite cuillère de plus
 regime:
-  - vegan
   - sans-gluten
+  - sans-lactose
+  - vegan
 cuisson: true
 plate: 100
 check: true
@@ -95,4 +96,6 @@ id: salade-daubergine-froi_zijvn3iw8in9
 createdAt: '2025-05-30T20:24:00+00:00'
 updatedAt: '2025-05-30T20:24:00+00:00'
 createdBy: une p'tite cuillère de plus
+permissionWrite:
+  - 696faf80000078153479
 ---

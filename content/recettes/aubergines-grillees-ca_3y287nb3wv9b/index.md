@@ -103,10 +103,9 @@ preparation24h: ''
 publishDate: '2024-05-28T14:50:00+00:00'
 checkAlwaysOk: false
 regime:
-  - vegetarien
-  - vegan
   - sans-gluten
   - sans-lactose
+  - vegan
 serveHot: true
 uuid: 3y287nb3wv9b
 id: aubergines-grillees-ca_3y287nb3wv9b

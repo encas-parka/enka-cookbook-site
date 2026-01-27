@@ -6,10 +6,9 @@ typeR: entree
 categories:
   - Tartinade
 regime:
-  - vegetarien
-  - vegan
   - sans-gluten
   - sans-lactose
+  - vegan
 cuisson: true
 plate: 8
 quantite_desc: Une grosse cuillère à soupe par personne.

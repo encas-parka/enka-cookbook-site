@@ -191,4 +191,8 @@ id: kuku-sabzi_hantqxcehajy
 createdAt: '2025-05-30T19:06:00+00:00'
 updatedAt: '2025-05-30T19:06:00+00:00'
 createdBy: Auré
+permissionWrite:
+  - 696faf80000078153479
+materiel:
+  - Four
 ---

@@ -98,9 +98,8 @@ preparation: |-
   * Sortir la plaque du four, et découper en rectangles fin à l'aide d'un couteau pointu tant que la pâte est encore chaude. Laisser refroidir, puis séparer les biscuits.
 publishDate: '2024-06-18T11:56:00+00:00'
 regime:
-  - vegan
-  - vegetarien
   - sans-lactose
+  - vegan
 title: Shortbread huile d'olive, romarin et chocolat
 typeR: dessert
 serveHot: false

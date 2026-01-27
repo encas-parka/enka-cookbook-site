@@ -82,7 +82,8 @@ ingredients:
     type: lof
     pF: false
     pS: false
-materiel: []
+materiel:
+  - Frigo
 preparation: |-
   - Faire bouillir le lait d'amande, la crème soja et le sucre
   - Ajouter l'agar-agar et laisser bouillir 2 minutes
@@ -101,4 +102,8 @@ id: panna-cotta-vegan-a-la_3k20oigwibrm
 createdAt: '2025-10-16T18:01:00+00:00'
 updatedAt: '2025-10-16T18:01:00+00:00'
 createdBy: Alio
+regime:
+  - sans-gluten
+  - sans-lactose
+  - vegan
 ---

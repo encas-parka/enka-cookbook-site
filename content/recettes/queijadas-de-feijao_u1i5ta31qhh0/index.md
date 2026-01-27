@@ -100,6 +100,7 @@ ingredients:
     pF: false
     pS: false
 materiel:
+  - Four
   - Moule à muffin
 plate: 100
 prepAlt:
@@ -127,4 +128,9 @@ id: queijadas-de-feijao_u1i5ta31qhh0
 createdAt: '2024-05-23T00:01:00+00:00'
 updatedAt: '2024-05-23T00:01:00+00:00'
 createdBy: Auré
+regime:
+  - sans-lactose
+  - vegetarien
+permissionWrite:
+  - 696faf80000078153479
 ---

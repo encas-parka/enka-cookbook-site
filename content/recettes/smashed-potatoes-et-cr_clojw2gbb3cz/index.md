@@ -166,4 +166,6 @@ id: smashed-potatoes-et-cr_clojw2gbb3cz
 createdAt: '2025-05-05T16:07:00+00:00'
 updatedAt: '2025-05-05T16:07:00+00:00'
 createdBy: ''
+materiel:
+  - Four
 ---

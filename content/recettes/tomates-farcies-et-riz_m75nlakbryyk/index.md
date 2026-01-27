@@ -151,4 +151,9 @@ id: tomates-farcies-et-riz_m75nlakbryyk
 createdAt: '2025-08-08T09:24:00+00:00'
 updatedAt: '2025-08-08T09:24:00+00:00'
 createdBy: ''
+regime:
+  - sans-lactose
+  - vegan
+materiel:
+  - Four
 ---

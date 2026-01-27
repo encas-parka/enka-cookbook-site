@@ -5,6 +5,7 @@ typeR: dessert
 categories:
   - Biscuits
 regime:
+  - sans-lactose
   - vegan
 cuisson: true
 plate: 20
@@ -156,4 +157,6 @@ id: barre-cereales-noisett_cu5wc60t605t
 createdAt: '2025-08-08T08:51:00+00:00'
 updatedAt: '2025-08-08T08:51:00+00:00'
 createdBy: ''
+materiel:
+  - Four
 ---

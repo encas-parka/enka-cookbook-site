@@ -139,6 +139,7 @@ ingredients:
     pF: false
     pS: false
 materiel:
+  - Frigo
   - Friteuse
   - Gastro 1/1 (Fins)
   - Marmitte
@@ -182,4 +183,6 @@ id: flan-au-lait-frit_r6350317f4du
 createdAt: '2024-05-18T15:27:00+00:00'
 updatedAt: '2024-05-18T15:27:00+00:00'
 createdBy: Auré
+permissionWrite:
+  - 696faf80000078153479
 ---

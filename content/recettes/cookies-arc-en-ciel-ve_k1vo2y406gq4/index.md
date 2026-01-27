@@ -6,8 +6,9 @@ categories:
   - Biscuits
 auteur: Auré
 regime:
-  - vegan
   - sans-gluten
+  - sans-lactose
+  - vegan
 cuisson: true
 plate: 50
 quantite_desc: 2 biscuits par personne
@@ -126,4 +127,8 @@ id: cookies-arc-en-ciel-ve_k1vo2y406gq4
 createdAt: '2025-06-01T22:06:00+00:00'
 updatedAt: '2025-06-01T22:06:00+00:00'
 createdBy: Auré
+permissionWrite:
+  - 696faf80000078153479
+materiel:
+  - Four
 ---

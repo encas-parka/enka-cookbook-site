@@ -5,6 +5,7 @@ typeR: plat
 categories:
   - Friture
 regime:
+  - sans-lactose
   - vegetarien
 region: Antilles
 saison:

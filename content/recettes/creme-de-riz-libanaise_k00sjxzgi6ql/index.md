@@ -108,8 +108,9 @@ preparation: |-
   ""On peut remplacer l'eau de rose par de la fleur d'oranger ou de l'amaretto. On peut également remplacer l'eau de rose et une partie du sucre par un sirop de rose (ou une autre saveur).""
 publishDate: '2024-06-18T12:28:00+00:00'
 regime:
-  - vegan
   - sans-gluten
+  - sans-lactose
+  - vegan
 region: Liban
 title: Creme de riz libanaise - mouhalabieh
 typeR: dessert

@@ -121,6 +121,7 @@ prepAlt: []
 publishDate: '2025-06-02T18:02:00+00:00'
 checkAlwaysOk: false
 regime:
+  - sans-gluten
   - vegetarien
 serveHot: false
 uuid: raify5afrqsl
@@ -128,4 +129,6 @@ id: raita-rainbow-queer-na_raify5afrqsl
 createdAt: '2025-06-02T18:02:00+00:00'
 updatedAt: '2025-06-02T18:02:00+00:00'
 createdBy: Auré
+permissionWrite:
+  - 696faf80000078153479
 ---

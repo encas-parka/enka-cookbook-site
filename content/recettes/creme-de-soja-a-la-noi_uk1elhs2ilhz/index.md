@@ -6,10 +6,9 @@ categories:
   - Sucrée
 auteur: frédo
 regime:
-  - vegetarien
-  - vegan
   - sans-gluten
   - sans-lactose
+  - vegan
 cuisson: true
 plate: 100
 check: true

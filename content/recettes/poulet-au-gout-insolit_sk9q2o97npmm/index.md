@@ -353,4 +353,6 @@ id: poulet-au-gout-insolit_sk9q2o97npmm
 createdAt: '2024-06-16T22:24:00+00:00'
 updatedAt: '2024-06-16T22:24:00+00:00'
 createdBy: Auré
+permissionWrite:
+  - 696faf80000078153479
 ---

@@ -73,4 +73,6 @@ id: gateau-jako-au-chocola_777ohr82xysb
 createdAt: '2025-06-05T07:22:00+00:00'
 updatedAt: '2025-06-05T07:22:00+00:00'
 createdBy: frédo
+materiel:
+  - Four
 ---

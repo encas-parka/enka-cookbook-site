@@ -5,6 +5,8 @@ typeR: entree
 categories:
   - Salade
 regime:
+  - sans-gluten
+  - sans-lactose
   - vegan
 cuisson: false
 plate: 12

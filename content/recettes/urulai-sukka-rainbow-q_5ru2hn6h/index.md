@@ -9,8 +9,9 @@ description: Quantité pour accompagnement et non plat principal
 region: Inde
 saison: []
 regime:
-  - vegan
   - sans-gluten
+  - sans-lactose
+  - vegan
 cuisson: true
 serveHot: true
 plate: 150

@@ -147,6 +147,7 @@ preparation24h: Faire la pâte la veille.
 publishDate: '2024-06-14T23:13:00+00:00'
 checkAlwaysOk: true
 regime:
+  - sans-lactose
   - vegan
 serveHot: false
 uuid: qph5vukgdjb6
@@ -154,4 +155,9 @@ id: babka-vegane-harissa-e_qph5vukgdjb6
 createdAt: '2024-06-14T23:13:00+00:00'
 updatedAt: '2024-06-14T23:13:00+00:00'
 createdBy: Auré
+permissionWrite:
+  - 696faf80000078153479
+materiel:
+  - Four
+  - Frigo
 ---

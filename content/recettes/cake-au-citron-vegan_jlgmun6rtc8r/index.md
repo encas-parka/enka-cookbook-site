@@ -122,8 +122,8 @@ preparation: |-
   * Graisser un moule à cake, enfourner pou 50 min à 170° et attendre que ça refroidisse avant de démouler.
 publishDate: '2023-11-13T14:16:06.322000+00:00'
 regime:
+  - sans-lactose
   - vegan
-  - vegetarien
 title: Cake au citron végan
 typeR: dessert
 serveHot: false

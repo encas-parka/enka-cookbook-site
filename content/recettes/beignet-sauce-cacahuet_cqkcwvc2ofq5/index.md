@@ -118,7 +118,8 @@ ingredients:
     type: lof
     pF: false
     pS: false
-materiel: []
+materiel:
+  - Friteuse
 preparation: "> Faire une pâte à beignet:\n\nDiluer la levure boulangère dans l'eau tiède.\n\nDans un cul de poule, ajouter tous les ingrédients sec (farine, levures, sel, sucre)\n\nDélayer en ajoutant le lait progressivement puis mélanger vigoureusement.\n\nCouvrir bien la pâte, afin que l'air ne puisse pas passer. Laisser reposer la pâte pendant 1 à 2 heures maximum pour qu'elle gonfle.\n\nFaire ensuite chauffer l'huile de friture. Tester si l'huile est chaude en essayant d'abord de faire frire 1 beignet. Si le beignet remonte directement a la surface, c'est que l'huile est chaude.\_L’huile ne doit pas être trop chaude car elle doit cuire l’intérieur des beignets mais sans brûler l’extérieur !\n\nPrendre une petite quantité de pâte avec la main et la couper dans l'huile. Le beignet doit former une boule de la taille d'une balle de ping pong. Faire tourner le beignet dans la friture. Tremper les mains dans l'eau à chaque fois, pour un autre tour de friture.\n\n> Faire la sauce cacahuète:\n\nMixer le beurre de cacahuète sucré avec l'huile d'arachide. Rectifier l'assaisonement.\n\nServir dans un bol 3 à 4 beignets. Ajouter la sauce cacahuète dessus. Possibilité de saupoudrer du sucre glace dessus.\n\nDessert maxi gourmand et grosse quantité!"
 preparation24h: ''
 astuces: []
@@ -130,4 +131,6 @@ id: beignet-sauce-cacahuet_cqkcwvc2ofq5
 createdAt: '2025-10-19T20:10:00+00:00'
 updatedAt: '2025-10-19T20:10:00+00:00'
 createdBy: Alio
+regime:
+  - vegetarien
 ---

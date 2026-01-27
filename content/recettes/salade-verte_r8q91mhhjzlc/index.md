@@ -6,10 +6,9 @@ typeR: entree
 categories:
   - Accompagnement
 regime:
-  - vegetarien
-  - vegan
   - sans-gluten
   - sans-lactose
+  - vegan
 cuisson: false
 plate: 100
 quantite_desc: on compte une salade pour 10personnes, mais tout dépend de sa taille. La taille de référence est plutôt celle que l'on trouve basiquement au supermarché

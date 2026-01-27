@@ -66,4 +66,9 @@ id: fromage-blanc-et-fruit_mcrms3ewr359
 createdAt: '2025-05-30T21:37:00+00:00'
 updatedAt: '2025-05-30T21:37:00+00:00'
 createdBy: Résistances 2025
+regime:
+  - sans-gluten
+  - vegetarien
+permissionWrite:
+  - 696faf80000078153479
 ---

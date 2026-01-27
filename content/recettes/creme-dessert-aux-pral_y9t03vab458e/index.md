@@ -75,6 +75,7 @@ ingredients:
     pF: false
     pS: false
 materiel:
+  - Four
   - ramequins
 plate: 20
 preparation: |-
@@ -95,8 +96,9 @@ preparation: |-
   Servir en ramequin et déposer quelques amandes des pralines sur la crème.
 publishDate: '2024-06-13T14:27:00+00:00'
 regime:
-  - vegan
   - sans-gluten
+  - sans-lactose
+  - vegan
 title: Crème dessert aux pralines roses
 typeR: dessert
 serveHot: false
@@ -105,4 +107,6 @@ id: creme-dessert-aux-pral_y9t03vab458e
 createdAt: '2024-06-13T14:27:00+00:00'
 updatedAt: '2024-06-13T14:27:00+00:00'
 createdBy: Auré
+permissionWrite:
+  - 696faf80000078153479
 ---

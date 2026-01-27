@@ -5,9 +5,9 @@ typeR: dessert
 categories:
   - Sucrée
 regime:
-  - vegetarien
-  - vegan
+  - sans-gluten
   - sans-lactose
+  - vegan
 cuisson: true
 plate: 20
 quantite_desc: Pour 20 ramequins
@@ -103,4 +103,6 @@ id: flan-coco-et-pandan-ve_mcvr1ny7leum
 createdAt: '2024-05-18T14:14:00+00:00'
 updatedAt: '2024-05-18T14:14:00+00:00'
 createdBy: ''
+materiel:
+  - Frigo
 ---

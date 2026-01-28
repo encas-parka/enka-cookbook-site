@@ -1,5 +1,6 @@
 module github.com/encas-parka/enka-cookbook-site
 
+go 1.25.5
 
 //uncomment for dev
 //replace github.com/encas-parka/hugo-cookbook-theme => ../hugo-cookbook-theme
@@ -23,4 +24,4 @@ module github.com/encas-parka/enka-cookbook-site
 //# 5. Vendoriser
 // hugo mod vendor
 
-require github.com/encas-parka/hugo-cookbook-theme v0.0.0-20260128224523-735eef582931 // indirect
+require github.com/encas-parka/hugo-cookbook-theme v0.0.0-20260128224832-72eda85a7b14 // indirect

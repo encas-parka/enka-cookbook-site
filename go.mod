@@ -1,9 +1,11 @@
 module github.com/encas-parka/enka-cookbook-site
 
+go 1.25.5
+
 //uncomment for dev
 //replace github.com/encas-parka/hugo-cookbook-theme => ../hugo-cookbook-theme
 
-go 1.25
+//go 1.25
 
 // update theme from branch:
 // hugo mod clean
@@ -22,5 +24,4 @@ go 1.25
 //# 5. Vendoriser
 // hugo mod vendor
 
-
-require github.com/encas-parka/hugo-cookbook-theme v0.0.0-20251204214933-25586c2e961b // indirect
+require github.com/encas-parka/hugo-cookbook-theme v0.0.0-20260128213721-9b9c7a7dcc0b // indirect

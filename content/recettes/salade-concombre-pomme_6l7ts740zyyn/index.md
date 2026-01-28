@@ -1,5 +1,5 @@
 ---
-title: 'Salade concombre, pommes et nigelle à l''aneth '
+title: Salade concombre, pommes et nigelle à l'aneth
 draft: false
 typeR: entree
 categories:

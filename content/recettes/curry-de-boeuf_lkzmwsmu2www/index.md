@@ -1,5 +1,5 @@
 ---
-title: 'Curry de boeuf '
+title: 'Curry de boeuf'
 draft: false
 typeR: plat
 categories:

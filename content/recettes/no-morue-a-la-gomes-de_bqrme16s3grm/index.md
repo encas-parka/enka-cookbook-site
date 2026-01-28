@@ -1,5 +1,5 @@
 ---
-title: 'No-morue à la gomes de sa (bacalhau à gomes de sa) - vegan '
+title: 'No-morue à la gomes de sa (bacalhau à gomes de sa) - vegan'
 draft: false
 description: ce n'est plus un plat de morue mais une tentative de substitution
 typeR: plat

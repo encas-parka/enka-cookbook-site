@@ -1,5 +1,5 @@
 ---
-title: 'Tartinade chataigne et oignons '
+title: 'Tartinade chataigne et oignons'
 draft: false
 typeR: plat
 categories:

@@ -1,5 +1,5 @@
 ---
-title: 'Tartinade pois cassé - oignon caramélisé '
+title: 'Tartinade pois cassé - oignon caramélisé'
 draft: false
 typeR: entree
 categories:

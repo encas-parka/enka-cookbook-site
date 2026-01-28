@@ -1,5 +1,5 @@
 ---
-title: 'Charlotte d''abricot en verrine '
+title: Charlotte d'abricot en verrine
 draft: false
 typeR: dessert
 categories:

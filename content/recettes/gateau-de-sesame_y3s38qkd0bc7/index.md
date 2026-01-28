@@ -122,7 +122,7 @@ preparation: "* Four à 180°. Les gastros devront être sulfurisés.\n* Faire f
 publishDate: '2023-04-27T09:32:43.801000+00:00'
 regime:
   - vegetarien
-title: 'Gateau de sésame '
+title: 'Gateau de sésame'
 typeR: dessert
 serveHot: true
 uuid: y3s38qkd0bc7

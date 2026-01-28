@@ -1,5 +1,5 @@
 ---
-title: 'Ramen shoyu d''été '
+title: Ramen shoyu d''été
 draft: false
 typeR: plat
 categories:

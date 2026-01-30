@@ -1,6 +1,6 @@
 ---
 title: Abricots pochés verveine
-date: '2026-01-30T14:14:21.710Z'
+date: '2026-01-30T14:15:09.815Z'
 draft: true
 typeR: dessert
 categories:
@@ -14,13 +14,12 @@ quantite_desc: null
 check: true
 cuisson: false
 serveHot: false
-description: null
+description: aze
 region: null
 saison:
   - ete
 id: abricots-poches--v2-qa_wm7kqqntgpae
-materiel:
-  - Marmitte
+materiel: []
 ingredients:
   - uuid: xo0ibs
     name: Abricot
@@ -77,9 +76,9 @@ preparation24h: null
 permissionWrite:
   - 693200b700222efe46a2
 createdAt: '2026-01-30T14:14:19.614+00:00'
-updatedAt: '2026-01-30T14:14:19.614+00:00'
+updatedAt: '2026-01-30T14:15:09.634+00:00'
 createdBy: 693200b700222efe46a2
-teams: null
+teams: []
 status: public
 rootRecipeId: abricots-poches-vervei_izz7yef86m3j
 versionLabel: v2 - qaldek

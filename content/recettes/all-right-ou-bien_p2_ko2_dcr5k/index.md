@@ -1,16 +1,17 @@
 ---
 title: All right ou bien
-date: '2026-02-02T20:36:37.622Z'
-draft: false
+date: '2026-02-02T20:38:43.792Z'
+draft: true
 typeR: plat
 categories:
   - Cake
+  - Crèmes dessert
 regime:
   - sans-gluten
   - sans-lactose
 plate: 1999
 quantite_desc: que dal
-check: true
+check: false
 cuisson: false
 serveHot: true
 description: vla @la recietùml to publish
@@ -93,7 +94,7 @@ preparation24h: |2-
 permissionWrite:
   - 6980fdeb3f7b3fd20f09
 createdAt: '2026-02-02T20:35:50.579+00:00'
-updatedAt: '2026-02-02T20:36:37.396+00:00'
+updatedAt: '2026-02-02T20:38:43.501+00:00'
 createdBy: 6980fdeb3f7b3fd20f09
 teams: []
 status: public

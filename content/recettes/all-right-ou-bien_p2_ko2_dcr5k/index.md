@@ -1,12 +1,11 @@
 ---
 title: All right ou bien
-date: '2026-02-02T20:35:52.736Z'
+date: '2026-02-02T20:36:37.622Z'
 draft: false
 typeR: plat
 categories:
   - Cake
 regime:
-  - vegan
   - sans-gluten
   - sans-lactose
 plate: 1999
@@ -19,8 +18,7 @@ region: pouet
 saison:
   - hiver
 id: all-right-ou-bien_p2_ko2_dcr5k
-materiel:
-  - Gastro Perforé 1/1 (25cm)
+materiel: []
 ingredients:
   - uuid: Z5BdTPFVyOMrKoOe5KKNd
     name: Agar-agar
@@ -31,6 +29,16 @@ ingredients:
     comment: ''
     allergens: []
     type: autres
+  - uuid: fPvhaQcHrAvzEMhw89u7Q
+    name: Agneau
+    originalQuantity: 0
+    originalUnit: gr.
+    normalizedQuantity: 0
+    normalizedUnit: gr.
+    comment: ''
+    allergens:
+      - Viande
+    type: animaux
 preparation: |2-
       // Sinon filtrer par la recherche
 
@@ -85,9 +93,9 @@ preparation24h: |2-
 permissionWrite:
   - 6980fdeb3f7b3fd20f09
 createdAt: '2026-02-02T20:35:50.579+00:00'
-updatedAt: '2026-02-02T20:35:50.579+00:00'
+updatedAt: '2026-02-02T20:36:37.396+00:00'
 createdBy: 6980fdeb3f7b3fd20f09
-teams: null
+teams: []
 status: public
 rootRecipeId: null
 versionLabel: null

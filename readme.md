@@ -2,7 +2,7 @@
 
 ## Présentation
 
-Ce dépôt héberge un site permettant le partage de recettes de cuisine. Il est construit à partir du thème [hugo-cookbook-theme](https://github.com/encas-parka/hugo-cookbook-theme), et est consultable sur  [enka-cookbook.netlify.app](https://enka-cookbook.netlify.app). Un site de démonstration/bac-à-sable est disponible pour tester le site sur [hugo-cookbook-demo](https://hugo-cookbook-demo.netlify.app/). Pour participer à ce site, voir la [documentation d'enka-cookbook](). Pour dupliquer ce site, voir [hugo-cookbook-theme](https://github.com/encas-parka/hugo-cookbook-theme).
+Ce dépôt héberge un site permettant le partage de recettes de cuisine. Il est construit à partir du thème [hugo-cookbook-theme](https://github.com/encas-parka/hugo-cookbook-theme), et est consultable sur  [enka-cookbook.oupla.net](https://enka-cookbook.oupla.net/). 
 
 Il vise à être un outil pour les collectifs cuisinant à l'occasion d'événements militants/solidaires. Il permet le partage de recettes de cuisine (avec calcul des quantités en fonction du nombre de couverts prévus) et la création de menus et séries de menus pour des événements se déroulant sur plusieurs jours. 
 

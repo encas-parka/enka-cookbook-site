@@ -1,0 +1,136 @@
+name: Build Hugo (Cron si modifications dans /content)
+
+on:
+  schedule:
+    # Exécution toutes les 3 heures (cron basé sur UTC)
+    - cron: '0 */3 * * *'
+  
+  # Permet aussi un déclenchement manuel depuis l'interface GitHub
+  workflow_dispatch:
+
+permissions:
+  contents: write  # Nécessaire pour commit le fichier last-sha.txt
+
+jobs:
+  check-and-build:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout du code
+        uses: actions/checkout@v4
+        with:
+          ref: enka-next
+          fetch-depth: 0  # Nécessaire pour git diff sur l'historique complet
+      
+      - name: Récupérer le dernier SHA réussi
+        id: last-sha
+        run: |
+          # Lire le SHA depuis le fichier last-sha.txt
+          if [ -f "last-sha.txt" ]; then
+            LAST_SHA=$(cat last-sha.txt)
+            
+            # Vérifier si le SHA est valide (existe dans le repo)
+            if git rev-parse "$LAST_SHA" >/dev/null 2>&1; then
+              echo "sha=$LAST_SHA" >> $GITHUB_OUTPUT
+              echo "Dernier build réussi (lu depuis last-sha.txt) : $LAST_SHA"
+            else
+              echo "SHA invalide dans last-sha.txt, utilisation de HEAD~1"
+              LAST_SHA=$(git rev-parse HEAD~1)
+              echo "sha=$LAST_SHA" >> $GITHUB_OUTPUT
+            fi
+          else
+            echo "Fichier last-sha.txt introuvable, première exécution"
+            LAST_SHA=$(git rev-parse HEAD~1)
+            echo "sha=$LAST_SHA" >> $GITHUB_OUTPUT
+            echo "Dernier build réussi : $LAST_SHA (défaut : HEAD~1)"
+          fi
+      
+      - name: Détecter les changements dans /content
+        id: detect-changes
+        run: |
+          LAST_SHA="${{ steps.last-sha.outputs.sha }}"
+          CURRENT_SHA=$(git rev-parse HEAD)
+          
+          echo "Vérification des changements entre $LAST_SHA et $CURRENT_SHA"
+          
+          # Vérifier s'il y a des changements dans le dossier content/
+          if git diff --name-only "$LAST_SHA" "$CURRENT_SHA" | grep -q "^content/"; then
+            echo "has_changes=true" >> $GITHUB_OUTPUT
+            echo "changed_files=$(git diff --name-only "$LAST_SHA" "$CURRENT_SHA" | grep "^content/" | wc -l)" >> $GITHUB_OUTPUT
+            
+            echo "✅ Changements détectés dans /content/ :"
+            git diff --name-only "$LAST_SHA" "$CURRENT_SHA" | grep "^content/"
+          else
+            echo "has_changes=false" >> $GITHUB_OUTPUT
+            echo "ℹ️ Aucun changement dans /content/ depuis le dernier build"
+          fi
+      
+      - name: Afficher les fichiers modifiés (debug)
+        if: steps.detect-changes.outputs.has_changes == 'true'
+        run: |
+          echo "Tous les fichiers modifiés depuis le dernier build :"
+          git diff --name-only "${{ steps.last-sha.outputs.sha }}" HEAD
+      
+      - name: Déclencher le build Cloudflare
+        if: steps.detect-changes.outputs.has_changes == 'true'
+        run: |
+          echo "🚀 Déclenchement du webhook Cloudflare Pages..."
+          
+          # Remplacez URL par votre véritable webhook Cloudflare
+          WEBHOOK_URL="${{ secrets.CLOUDFLARE_BUILD_WEBHOOK }}"
+          
+          if [ -z "$WEBHOOK_URL" ]; then
+            echo "❌ Erreur : La variable CLOUDFLARE_BUILD_WEBHOOK n'est pas configurée"
+            echo "Veuillez l'ajouter dans : Settings → Secrets and variables → Actions"
+            exit 1
+          fi
+          
+          # Appel du webhook avec les informations de build
+          RESPONSE=$(curl -X POST "$WEBHOOK_URL" \
+            -H "Content-Type: application/json" \
+            -d '{
+              "branch": "enka-next",
+              "trigger": "github-cron",
+              "commit_sha": "'"$(git rev-parse HEAD)"'"
+            }' \
+            -w "\n%{http_code}" \
+            -s)
+          
+          HTTP_CODE=$(echo "$RESPONSE" | tail -n1)
+          BODY=$(echo "$RESPONSE" | sed '$d')
+          
+          echo "Réponse du webhook : $BODY"
+          echo "Code HTTP : $HTTP_CODE"
+          
+          if [ "$HTTP_CODE" -ge 200 ] && [ "$HTTP_CODE" -lt 300 ]; then
+            echo "✅ Webhook appelé avec succès"
+          else
+            echo "⚠️ Le webhook a répondu avec le code $HTTP_CODE"
+          fi
+      
+      - name: Mettre à jour le SHA du dernier build réussi
+        if: steps.detect-changes.outputs.has_changes == 'true'
+        run: |
+          CURRENT_SHA=$(git rev-parse HEAD)
+          echo "Mise à jour de last-sha.txt avec le SHA : $CURRENT_SHA"
+          
+          # Écrire le nouveau SHA dans le fichier
+          echo "$CURRENT_SHA" > last-sha.txt
+          
+          # Configurer git pour le commit automatique
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          
+          # Commit et push du fichier mis à jour
+          git add last-sha.txt
+          git commit -m "chore: update last-sha.txt to $CURRENT_SHA"
+          git push
+      
+      - name: Résumé
+        if: always()
+        run: |
+          if [ "${{ steps.detect-changes.outputs.has_changes }}" = "true" ]; then
+            echo "🎉 Build déclenché : ${{ steps.detect-changes.outputs.changed_files }} fichiers modifiés"
+          else
+            echo "😴 Aucun build nécessaire : pas de changements dans /content/"
+          fi

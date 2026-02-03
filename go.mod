@@ -24,4 +24,4 @@ go 1.25.5
 //# 5. Vendoriser
 // hugo mod vendor
 
-require github.com/encas-parka/hugo-cookbook-theme v0.0.0-20260203165309-2bd6592d5b52 // indirect
+require github.com/encas-parka/hugo-cookbook-theme v0.0.0-20260203170648-5d799813c64f // indirect

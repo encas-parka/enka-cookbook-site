@@ -21,6 +21,8 @@ rssLimit: 10
 disableKinds:
   - taxonomy
   - term
+  - section
+  - 404  # Désactiver la génération de 404.html pour activer le mode SPA automatique de Cloudflare Pages
 
 # pagination:
 #   disableAliases: false

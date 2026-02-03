@@ -1,5 +1,5 @@
 ---
-title: A test
+title: A test c
 date: '2026-02-03T20:08:48.677Z'
 draft: true
 typeR: plat

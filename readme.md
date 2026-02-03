@@ -30,4 +30,4 @@ Une attention particulière à été apporté à la facilitation des impressions
 
 ### License
 
-Ce site est diffusé sous licence [GPL-3.0](https://opensource.org/license/gpl-3-0/). En publiant des recettes sur celui-ci, vous acceptez que celle-ci hérite de cette licence. 
+Ce site est diffusé sous licence [GPL-3.0](https://opensource.org/license/gpl-3-0/). En publiant des recettes sur celui-ci, vous acceptez que celle-ci hérite de cette licence...

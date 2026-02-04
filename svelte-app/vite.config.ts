@@ -5,9 +5,10 @@ import path from "path";
 import { visualizer } from "rollup-plugin-visualizer";
 
 // https://vite.dev/config/
-export default defineConfig({
-  // comment in dev
-  // base: "/app/",
+export default defineConfig(({ mode }) => ({
+  // En dev: "/" (serveur Vite), en prod: "/app/" (chemin Hugo)
+  base: mode === "development" ? "/" : "/app/",
+
   plugins: [
     tailwindcss(),
     svelte(),
@@ -101,4 +102,4 @@ export default defineConfig({
       },
     },
   },
-});
+}));

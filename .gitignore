@@ -16,3 +16,4 @@ appwrite
 appwrite-ec-dev
 docs/*
 .vite
+.claude

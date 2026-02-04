@@ -257,7 +257,7 @@
 </script>
 
 {#snippet navActions()}
-  <div class="flex gap-2">
+  <div class="flex gap-2 max-sm:hidden">
     <button class="btn btn-circle btn-primary" onclick={() => window.print()}
       ><Printer size={18} /></button
     >

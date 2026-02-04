@@ -60,7 +60,7 @@
 </script>
 
 {#snippet navActions()}
-  <div class="flex gap-2">
+  <div class="flex gap-2 {globalState.isMobile && 'hidden'}">
     <button
       class="btn btn-primary btn-sm"
       onclick={() => navigate("/dashboard/eventCreate")}
@@ -90,7 +90,7 @@
   </div>
 
   <!-- Contenu principal -->
-  <div class="mx-auto max-w-7xl px-4 py-8">
+  <div class="mx-auto max-w-7xl px-1 py-8 sm:px-4">
     {#if !globalState.isAuthenticated}
       <!-- État non connecté -->
       <div
@@ -177,7 +177,7 @@
 
       <!-- SECTION 1: Événements personnels (invitations externes) -->
       <section class="bg-base-200 py-8">
-        <div class="container mx-auto">
+        <div class=" mx-auto">
           <ExternalEventsCard
             currentEvents={eventsStore.currentEvents}
             userTeamIds={globalState.userTeams}
@@ -189,7 +189,7 @@
       <!-- SECTION 2: Team Cards (uniquement si authentifié avec équipes) -->
       {#if globalState.userTeams.length > 0}
         <section class="bg-base-200 py-8">
-          <div class="container mx-auto px-4">
+          <div class="mx-auto">
             <div class="grid grid-cols-1 gap-6">
               {#each globalState.userTeams as teamId (teamId)}
                 {@const team = nativeTeamsStore.getTeamById(teamId)}

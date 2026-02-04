@@ -99,7 +99,7 @@
 </script>
 
 <div class="card bg-base-100 border-base-200 border shadow-xl">
-  <div class="card-body gap-4">
+  <div class="card-body gap-4 max-sm:px-2">
     <!-- === HEADER PRINCIPAL === -->
     <div class="flex items-start justify-between gap-2">
       <!-- Nom + Localisation -->
@@ -177,7 +177,7 @@
               <p>inventaire, gestion des emprunt, partage, etc.</p>
             </div>
           </div>
-          <div class="flex w-full justify-around gap-2">
+          <div class="flex w-full flex-wrap justify-around gap-2">
             <button
               class="btn btn-primary btn-soft flex-1"
               onclick={goToInventory}

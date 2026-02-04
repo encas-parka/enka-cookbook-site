@@ -6,7 +6,7 @@
     Filter,
     Funnel,
   } from "@lucide/svelte";
-  import { navigate } from '$lib/router';
+  import { navigate } from "$lib/router";
   import { globalState } from "$lib/stores/GlobalState.svelte";
 
   type SortBy = "title" | "$createdAt" | "$updatedAt";
@@ -84,7 +84,7 @@
       ><ArrowDownNarrowWide class="inline size-4" /> Trier par :</legend
     >
 
-    <div class="btn-group">
+    <div class="flex flex-wrap items-center gap-2">
       <button
         class={getButtonSortClasses("title")}
         onclick={() => handleSortClick("title")}

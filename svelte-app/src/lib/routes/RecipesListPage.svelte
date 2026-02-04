@@ -308,7 +308,7 @@
       onclick={() => navigate("/recipe/new")}
     >
       <PlusIcon size={18} />
-      Créer une recette
+      <span class="hidden sm:inline"> Créer une recette</span>
     </button>
   {/if}
 {/snippet}
@@ -326,7 +326,7 @@
 </LeftPanel>
 
 <!-- Contenu principal -->
-<div class="p-4 lg:ml-100" in:fade>
+<div class="relative z-0 p-4 lg:ml-100" in:fade>
   <div class="mx-auto max-w-4xl">
     <div class="mb-10 space-y-6">
       <!-- Tabs de filtrage par type -->

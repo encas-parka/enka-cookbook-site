@@ -222,7 +222,7 @@
 
 <HeaderNav />
 
-<div class="bg-base-200 min-h-screen">
+<div class="bg-base-200">
   {#if appState === "ERROR"}
     <div class="flex h-[50vh] items-center justify-center">
       <ErrorAlert message={displayError || "Erreur inconnue"} />

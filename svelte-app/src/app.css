@@ -1,28 +1,4 @@
 /* ==========================================================================
-   RESET CSS DE BASE
-   Évite les problèmes de marge/overflow sur mobile
-   ========================================================================== */
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
-
-html {
-  line-height: 1.15;
-  -webkit-text-size-adjust: 100%;
-  overflow-x: hidden;
-}
-
-body {
-  margin: 0;
-  padding: 0;
-  overflow-x: hidden;
-  min-height: 100vh;
-  width: 100%;
-}
-
-/* ==========================================================================
    IMPORTS ET POLICES
    ========================================================================== */
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");

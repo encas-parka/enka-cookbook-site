@@ -43,7 +43,7 @@
   </div>
 
   <!-- FAB flottant pour mobile -->
-  <div class="fixed bottom-10 left-4 z-50 print:hidden">
+  <div class="fixed bottom-10 left-[2%] z-50 print:hidden">
     <label
       for="filters-drawer"
       class="btn btn-primary btn-circle btn-lg shadow-lg"

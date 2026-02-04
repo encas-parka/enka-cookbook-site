@@ -6,30 +6,30 @@
     "Four",
     "Frigo",
     "Friteuse",
-    "Gastro 1/1 (5cm)",
     "Gastro 1/1 (10cm)",
     "Gastro 1/1 (15cm)",
     "Gastro 1/1 (20cm)",
+    "Gastro 1/1 (5cm)",
     "Gastro 1/3",
     "Gastro 1/6",
-    "Gastro Perforé 1/1 (25cm)",
     "Gastro Perforé 1/1 (10cm)",
+    "Gastro Perforé 1/1 (25cm)",
     "Giraffe (Bras Mixeur)",
     "Grand Saladier",
     "Marmitte",
+    "Moule a cake",
+    "Moule à muffin",
+    "Moule à tarte",
     "Pique à brochette",
     "Plat Paela",
     "Plateaux",
+    "Ramequins",
     "Robot Mixeur",
-    "Robot-coupe",
-    "Moule à muffin",
-    "Moule a cake",
-    "Moule à tarte",
-    "Ramequins"
+    "Robot-coupe"
   ],
   "categories": [
-    "Bouchées salées",
     "Boisson",
+    "Bouchées salées",
     "Cake",
     "Crèmes dessert",
     "Friture",
@@ -43,12 +43,13 @@
     "Soupe",
     "Tarte (salée)",
     "Tarte (sucrée)",
-    "Tartinade"
+    "Tartinade",
+    "test"
   ],
   "regimes": [
-    "vegan",
-    "vegetarien",
+    "sans-gluten",
     "sans-lactose",
-    "sans-gluten"
+    "vegan",
+    "vegetarien"
   ]
 }

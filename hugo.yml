@@ -57,7 +57,7 @@ outputFormats:
     baseName: data
     isPlainText: true
     notAlternative: true
-    path: api/
+    path: data/
 
 
 caches:
@@ -69,8 +69,6 @@ caches:
 #   filename: sitemap.xml
 #   priority: 0.5
 
-permalinks:
-  blog: /:title/
 
 # Opengraph
 ogLocale: fr
@@ -126,8 +124,8 @@ markup:
 module:
 
   hugoVersion:
-    extended: true
+    version: "0.152.2"
 
-  imports:
-    - path: "github.com/encas-parka/hugo-cookbook-theme"
-      disable: false
+  # imports:
+  #   - path: "github.com/encas-parka/hugo-cookbook-theme"
+  #     disable: false

@@ -1,0 +1,37 @@
+{{/*  DOCUMENTATION
+  La base qui définie la façon dont sont construite chacune des pages.
+*/}}
+
+<!doctype html>
+<html lang="{{ .Site.LanguageCode | default "fr" }}">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{ .Site.Title }}</title>
+    <link rel="stylesheet" href="/app/assets/index.css">
+    <link rel="icon" href="/images/favicon.png" type="image/png" />
+    <script type="module" src="/app/assets/index.js"></script>
+    <!--<style>
+      /* CSS critique - évite le flash de contenu non stylisé (FOUC) */
+      #app {
+        display: none;
+      }
+      /* Révéler l'app quand Svelte est prêt */
+      #app.svelte-ready {
+        display: block;
+      }
+    </style>-->
+  </head>
+  <body>
+
+  <div id="app"></div>
+
+    <div class="" role="document">
+        {{ block "main" . }}{{ end }}
+    </div>
+
+  <!-- Charge l'app Svelte -->
+
+
+  </body>
+</html>

@@ -1,0 +1,48 @@
+{{/* Nouveau template simplifié - toutes les données sont déjà dans le frontmatter */}}
+{{- $recipes := slice -}}
+{{- range where .Site.RegularPages "Section" "recettes" -}}
+  {{- if .Title -}}
+
+    {{/* Extraire les noms des ingrédients directement depuis le frontmatter */}}
+    {{- $ingredientNames := slice -}}
+    {{- range .Params.ingredients -}}
+      {{- $ingredientNames = $ingredientNames | append .name -}}
+    {{- end -}}
+
+    {{- $permissionWrite := .Params.permissionWrite | default slice -}}
+
+    {{/* Build recipe object with abbreviated keys - métadonnées essentielles pour l'index */}}
+    {{- $recipe := dict
+      "id" .Params.id
+      "title" .Title
+      "draft" .Draft
+      "typeR" .Params.typeR
+      "categories" .Params.categories
+      "regime" .Params.regime
+      "cuisson" .Params.cuisson
+      "auteur" .Params.auteur
+      "serveHot" .Params.serveHot
+      "plates" .Params.plate
+      "check" .Params.check
+      "publishedAt" (.Params.publishedAt | default "2025-01-01T00:00:00Z")
+      "materiel" .Params.materiel
+      "saison" .Params.saison
+      "region" .Params.region
+      "ingredients" $ingredientNames
+      "permissionWrite" (.Params.permissionWrite | default (slice) )
+      "createdAt" (.Params.createdAt | default .Params.publishDate | default "2025-01-01T00:00:00Z")
+      "updatedAt" (.Params.updatedAt | default .Params.publishDate | default "2025-01-01T00:00:00Z")
+      "createdBy" (.Params.createdBy | default .Params.auteur | default "")
+      "rootRecipeId" (.Params.rootRecipeId | default "")
+      "versionLabel" (.Params.versionLabel | default "")
+      "teams" (.Params.teams | default "")
+      "status" (.Params.status | default "public")
+    -}}
+    {{- $recipes = $recipes | append $recipe -}}
+  {{- end -}}
+{{- end -}}
+
+
+{{/* Generate unified JSON output */}}
+{{- $meta := dict "timestamp" now.Unix "date" (now.Format "2006-01-02T15:04:05Z07:00") -}}
+{{- dict "meta" $meta "recipes" $recipes | jsonify -}}

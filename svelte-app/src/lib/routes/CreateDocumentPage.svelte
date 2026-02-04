@@ -56,8 +56,10 @@
   const isValid = $derived(title.trim().length > 0 && team !== undefined);
 
   // Détection des modifications non sauvegardées
+  // Retourne false pendant la sauvegarde pour autoriser la navigation
   const hasUnsavedChanges = $derived(
-    title.trim().length > 0 || content.trim().length > 0 || tags.length > 0,
+    !isSaving &&
+      (title.trim().length > 0 || content.trim().length > 0 || tags.length > 0),
   );
 
   // ============================================================================

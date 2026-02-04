@@ -112,7 +112,7 @@
 </script>
 
 <div class="relative">
-  <label class="input w-full {inputSize}">
+  <label class="input w-full max-w-[88dvw] {inputSize}">
     <Search class="h-4 w-4 opacity-50" />
     <input
       type="text"

@@ -293,7 +293,9 @@
       </div>
 
       <!-- Sommaire réactif des recettes avec filtrage -->
-      <ul class="menu bg-base-100 rounded-box w-100 drop-shadow-lg">
+      <ul
+        class="menu bg-base-100 rounded-box w-100 max-w-[88dvw] drop-shadow-lg"
+      >
         {#each Array.from(mealsByDate.entries()) as [date, times] (date)}
           <li>
             <button
@@ -648,7 +650,7 @@
                   <!-- Date break -->
                   <div
                     id="meal-{meal.date}"
-                    class="card bg-primary text-primary-content flex flex-row items-center justify-center gap-6 p-4 text-lg font-black shadow-lg print:hidden"
+                    class="card bg-primary text-primary-content flex flex-row flex-wrap items-center justify-center gap-6 p-4 text-lg font-black shadow-lg print:hidden"
                   >
                     <div class="">
                       {formatDateWdDayMonth(meal.date)}

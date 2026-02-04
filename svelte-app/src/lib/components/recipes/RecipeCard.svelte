@@ -156,7 +156,7 @@
       <span class="font-semibold">Ingrédients : </span>
       {#each recipe.ingredients as ingredient, index}
         <span
-          class="me-1"
+          class="me-1 wrap-break-word"
           class:font-bold={highlightedIngredients.includes(ingredient)}
           class:underline={highlightedIngredients.includes(ingredient)}
         >

@@ -36,7 +36,7 @@
     <div class="drawer-side">
       <label for="filters-drawer" class="drawer-overlay"></label>
 
-      <div class="menu bg-base-200 h-vh w-[95vw] p-4">
+      <div class="menu bg-base-200 h-screen w-[95vw] p-4">
         {@render children?.()}
       </div>
     </div>

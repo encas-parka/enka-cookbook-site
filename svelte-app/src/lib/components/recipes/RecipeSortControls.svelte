@@ -125,7 +125,7 @@
       <legend class="legend label"
         ><Funnel class="inline h-4 w-4" /> Filtrer :</legend
       >
-      <div class="btn-group">
+      <div class="flex flex-wrap gap-2">
         <button
           class={getScopeButtonClasses("all")}
           onclick={() => navigate("/recipe")}

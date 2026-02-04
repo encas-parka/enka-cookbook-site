@@ -100,14 +100,14 @@ jobs:
       
       # Sauvegarder le SHA dans le cache (que des changements aient été détectés ou non)
       - name: Sauvegarder le SHA actuel dans le cache
-        if: always()
+        if: success()  # ← Seulement si tout s'est bien passé
         run: |
           CURRENT_SHA=$(git rev-parse HEAD)
           echo "$CURRENT_SHA" > last-sha.txt
           echo "💾 SHA sauvegardé pour la prochaine exécution : $CURRENT_SHA"
       
       - name: Mettre à jour le cache
-        if: always()
+        if: success()  # ← Seulement si tout s'est bien passé
         uses: actions/cache/save@v4
         with:
           path: last-sha.txt

@@ -320,7 +320,7 @@
         >
           <!-- Ingrédients (1/3 à l'écran, 3/10 à l'impression) -->
           <div class=" lg:col-span-1 print:col-span-3">
-            <div class="sticky top-4 print:static">
+            <div class="">
               <RecipeIngredientsList
                 ingredients={recipeDetails.ingredients}
                 servings={currentServings}

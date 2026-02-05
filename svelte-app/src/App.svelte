@@ -220,25 +220,28 @@
   rel="stylesheet"
 />
 
-<HeaderNav />
-
-<div class="bg-base-200">
-  {#if appState === "ERROR"}
-    <div class="flex h-[50vh] items-center justify-center">
-      <ErrorAlert message={displayError || "Erreur inconnue"} />
-    </div>
-  {:else if appState === "BOOTING"}
-    <div class="flex h-[80vh] flex-col items-center justify-center gap-4">
-      <div class="loading loading-spinner loading-lg text-primary"></div>
-      <p class="text-base-content/70 animate-pulse font-medium">Démarrage...</p>
-    </div>
-  {:else}
-    <!-- ✅ sv-router -->
-    <Router>
-      <!-- Les composants de route sont rendus ici par sv-router -->
-      <!-- Ils accèdent aux params via route.params et route.search -->
-    </Router>
-  {/if}
+<div class="grid min-h-screen grid-rows-[auto_1fr]">
+  <HeaderNav />
+  <div class="bg-base-200">
+    {#if appState === "ERROR"}
+      <div class="flex h-[50vh] items-center justify-center">
+        <ErrorAlert message={displayError || "Erreur inconnue"} />
+      </div>
+    {:else if appState === "BOOTING"}
+      <div class="flex h-[80vh] flex-col items-center justify-center gap-4">
+        <div class="loading loading-spinner loading-lg text-primary"></div>
+        <p class="text-base-content/70 animate-pulse font-medium">
+          Démarrage...
+        </p>
+      </div>
+    {:else}
+      <!-- ✅ sv-router -->
+      <Router>
+        <!-- Les composants de route sont rendus ici par sv-router -->
+        <!-- Ils accèdent aux params via route.params et route.search -->
+      </Router>
+    {/if}
+  </div>
 </div>
 
 <Toast />

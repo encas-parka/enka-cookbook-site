@@ -26,6 +26,22 @@
   --color-cream: oklch(94% 0.035 85.43); /* Cream plus intense - jaune clair */
 }
 
+/* ==========================================================================
+   FULL-HEIGHT APP BASE STYLES
+   ========================================================================== */
+/* Pour les applications qui occupent toute la hauteur de la fenêtre */
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* Le conteneur racine de l'application Svelte */
+#app {
+  height: 100%;
+}
+
 @layer components {
   .prose p {
     @apply leading-snug;

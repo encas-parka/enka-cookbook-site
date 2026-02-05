@@ -1,28 +1,25 @@
 <script lang="ts">
+  import { navigate, p, route } from "$lib/router";
+  import { refreshAllStores } from "$lib/utils/storesReload";
   import { globalState } from "../stores/GlobalState.svelte";
-  import { route, p, navigate } from "$lib/router";
   import { navBarStore } from "../stores/NavBarStore.svelte";
   import { recipesStore } from "../stores/RecipesStore.svelte";
+  import DocumentTabs from "./documents/DocumentTabs.svelte";
   import EventTabs from "./eventEdit/EventTabs.svelte";
   import MaterielTabs from "./MaterielTabs.svelte";
-  import DocumentTabs from "./documents/DocumentTabs.svelte";
-  import { refreshAllStores } from "$lib/utils/storesReload";
 
   import {
+    BookOpenIcon,
+    CookingPot,
+    DatabaseIcon,
+    LayoutDashboardIcon,
+    LockIcon,
     LogInIcon,
     LogOutIcon,
-    LayoutDashboardIcon,
-    UsersIcon,
-    BookOpenIcon,
-    ChevronLeftIcon,
     PlusIcon,
-    SearchIcon,
-    CircleStar,
-    LockIcon,
     RefreshCwIcon,
-    DatabaseIcon,
-    ChefHat,
-    CookingPot,
+    UserIcon,
+    UsersIcon,
   } from "@lucide/svelte";
 
   let showDropdown = $state(false);
@@ -296,6 +293,14 @@
               class="flex items-center gap-2"
             >
               <UsersIcon size={16} /> Équipes
+            </button>
+          </li>
+          <li>
+            <button
+              onclick={() => navigate("/dashboard/user")}
+              class="flex items-center gap-2"
+            >
+              <UserIcon size={16} /> Mon compte
             </button>
           </li>
           <li>

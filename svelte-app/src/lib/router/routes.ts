@@ -60,6 +60,7 @@ export const routes: Routes = {
   "/dashboard": {
     hooks: authGuard,
     "/": () => import("$lib/routes/DashboardPage.svelte"),
+    "/user": () => import("$lib/routes/UserPage.svelte"),
     "/teams": () => import("$lib/routes/TeamsManagement.svelte"),
     "/eventCreate": () => import("$lib/routes/EventCreatePage.svelte"),
     "/eventCreate/:teamId": () => import("$lib/routes/EventCreatePage.svelte"),

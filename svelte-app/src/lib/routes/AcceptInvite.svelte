@@ -7,33 +7,29 @@
   import { TriangleAlert } from "@lucide/svelte";
   import { navBarStore } from "../stores/NavBarStore.svelte";
   import { onDestroy } from "svelte";
-  import { warmUpUsersTeamsManager } from "$lib/services/appwrite-warmup";
 
   // États (Svelte 5 Runes)
   let loading = $state(true);
   let step = $state<"verifying" | "set-password" | "error">("verifying");
   let errorMsg = $state("");
+  let membershipRevoked = $state(false);
+  let teamName = $state("");
 
   // Formulaire
   let password = $state("");
+  let passwordConfirm = $state("");
   let name = $state("");
 
-  // Params (récupérés via le Custom Router)
-  // L'URL ressemble à : #/accept-invite?userId=xyz&eventId=abc OU #/accept-invite?userId=xyz&teamId=123
-  let userId = "";
-  let eventId = "";
-  let teamId = "";
+  // L'URL ressemble à : #/accept-invite?userId=xyz&teamId=123
+  let userId = $state("");
+  let teamId = $state("");
 
   onMount(async () => {
-    // 0. Warm-up de la fonction usersTeamsManager
-    // warmUpUsersTeamsManager();
-
     // 1. Récupération des paramètres via sv-router
-    userId = route.search.userId || "";
-    eventId = route.search.eventId || "";
-    teamId = route.search.teamId || "";
+    userId = (route.search.userId as string) || "";
+    teamId = (route.search.teamId as string) || "";
 
-    if (!userId || (!eventId && !teamId)) {
+    if (!userId || !teamId) {
       step = "error";
       errorMsg = "Lien d'invitation incomplet ou invalide.";
       loading = false;
@@ -43,22 +39,27 @@
     try {
       console.log("[AcceptInvite] Initialisation...", {
         userId,
-        eventId,
         teamId,
       });
 
       const { client, account } = await getAppwriteInstances();
 
       // 2. Vérification de l'invitation et récupération d'un Token Appwrite
-      // La fonction vérifie que l'utilisateur a le Label (event) ou la membership (team)
+      // La fonction vérifie si l'utilisateur a une membership dans la team (non-bloquant)
       // et nous renvoie un token Appwrite
-      const { token } = await validateInvitation(userId, eventId, teamId);
+      const result = await validateInvitation(userId, teamId);
+
+      // Stocker l'info sur la membership révoquée si présente
+      if (result.membershipRevoked) {
+        membershipRevoked = true;
+        teamName = result.teamName || "l'équipe";
+      }
 
       console.log("[AcceptInvite] Token reçu, création session...");
 
       // 3. Création de la session persistante (Login)
       // C'est ici que l'utilisateur est réellement connecté
-      await account.createSession({ userId: userId, secret: token });
+      await account.createSession({ userId: userId, secret: result.token });
 
       // 4. Récupération des infos utilisateur
       const user = await account.get();
@@ -95,6 +96,11 @@
       return;
     }
 
+    if (password !== passwordConfirm) {
+      alert("Les mots de passe ne correspondent pas.");
+      return;
+    }
+
     loading = true;
     try {
       const { client, account } = await getAppwriteInstances();
@@ -106,10 +112,18 @@
       // Mise à jour du nom si modifié par l'utilisateur
       if (name) await account.updateName({ name });
 
-      console.log("[AcceptInvite] Session créée, redirection...");
+      console.log(
+        "[AcceptInvite] Mot de passe défini, rafraîchissement auth...",
+      );
+
+      // 5. Rafraîchir l'état d'authentification et charger les stores
+      // Cette étape est cruciale pour initialiser tous les stores utilisateur
+      const { globalState } = await import("$lib/stores/GlobalState.svelte");
+      await globalState.refreshAuthAfterLogin();
+
+      console.log("[AcceptInvite] Auth rafraîchie, redirection...");
 
       // 6. Redirection vers le dashboard via le routeur
-      // Utilisation de "/dashboard" qui est la route définie dans App.svelte
       navigate("/dashboard");
     } catch (e: any) {
       console.error("[AcceptInvite] Erreur finalisation:", e);
@@ -129,7 +143,7 @@
 </script>
 
 <div
-  class="bg-base-200 flex min-h-screen items-center justify-center p-4"
+  class="bg-base-200 flex h-full items-center justify-center p-4"
   transition:fade
 >
   <div class="card bg-base-100 w-full max-w-md shadow-xl">
@@ -153,6 +167,28 @@
           Veuillez définir un mot de passe.
         </p>
 
+        {#if membershipRevoked}
+          <div class="alert alert-warning mb-4" role="alert">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-6 w-6 shrink-0 stroke-current"
+              fill="none"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+              />
+            </svg>
+            <span>
+              <strong>Information :</strong> Votre accès à {teamName} a été révoqué.
+              Vous pouvez tout de même créer votre compte et vous connecter.
+            </span>
+          </div>
+        {/if}
+
         <label class="w-full text-left">
           <div class="label">
             <span class="label-text">Votre Pseudo / Nom</span>
@@ -175,6 +211,18 @@
             type="password"
             bind:value={password}
             placeholder="Minimum 8 caractères"
+            class="input w-full"
+          />
+        </label>
+
+        <label class="mt-3 w-full text-left">
+          <div class="label">
+            <span class="label-text">Confirmer le mot de passe</span>
+          </div>
+          <input
+            type="password"
+            bind:value={passwordConfirm}
+            placeholder="Ressaisissez le mot de passe"
             class="input w-full"
           />
         </label>

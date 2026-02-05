@@ -58,16 +58,16 @@
       return;
     }
 
-    // Vérifier si déjà membre ou déjà invité
-    const alreadyStatus = team.members.some(
-      (m) =>
-        m.name.toLowerCase() === trimmedEmail ||
-        m.userEmail.toLowerCase() === trimmedEmail,
-    );
-    if (alreadyStatus) {
-      error = "Cette personne est déjà membre ou invitée dans l'équipe";
-      return;
-    }
+    // Vérifier si déjà membre ou déjà invité (on renvoie quand meme)
+    // const alreadyStatus = team.members.some(
+    //   (m) =>
+    //     m.name.toLowerCase() === trimmedEmail ||
+    //     m.userEmail.toLowerCase() === trimmedEmail,
+    // );
+    // if (alreadyStatus) {
+    //   error = "Cette personne est déjà membre ou invitée dans l'équipe";
+    //   return;
+    // }
 
     invitedEmails.push(trimmedEmail);
     emailInput = "";

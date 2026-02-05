@@ -10,6 +10,7 @@
     "**/.obsidian",
     "/.obsidian/*",
   ],
+  "file_scan_inclusions": ["appwrite/*", "appwrite-ec-dev/*"],
   "languages": {
     "HTML": {
       "prettier": {

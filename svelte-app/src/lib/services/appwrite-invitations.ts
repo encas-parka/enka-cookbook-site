@@ -12,32 +12,40 @@ import { getAppwriteConfig } from "$lib/services/appwrite";
 const APPWRITE_CONFIG = getAppwriteConfig().APPWRITE_CONFIG;
 
 /**
- * Valide une invitation et récupère un token de session
+ * Valide une invitation de team native et récupère un token de session
  * Utilisé dans le workflow d'invitation par email (AcceptInvite.svelte)
  *
  * La vérification se fait via:
- * - Pour les EVENTS: vérifier que l'utilisateur a le Label de l'événement
- * - Pour les TEAMS: vérifier que l'utilisateur a une membership dans la team
+ * - Vérifier que l'utilisateur a une membership dans la team (non-bloquant)
+ *
+ * NOTE: Cette fonction utilise la Cloud Function 'invitation' avec le scope 'any'
+ * pour pouvoir être appelée par des utilisateurs non connectés.
+ *
+ * IMPORTANT: L'utilisateur peut finaliser son compte même si la membership a été
+ * révoquée. Le champ membershipRevoked est informatif seulement.
  *
  * @param userId - ID de l'utilisateur
- * @param eventId - ID de l'événement (optionnel, si invitation à un event)
- * @param teamId - ID de la team native (optionnel, si invitation à une team)
- * @returns Token de session Appwrite
+ * @param teamId - ID de la team native
+ * @returns Token de session Appwrite + infos sur la membership
  */
 export async function validateInvitation(
   userId: string,
-  eventId?: string,
-  teamId?: string,
-): Promise<{ token: string; userId: string }> {
+  teamId: string,
+): Promise<{
+  token: string;
+  userId: string;
+  hasMembership: boolean;
+  membershipRevoked: boolean;
+  teamName: string | null;
+}> {
   try {
     const { functions } = await getAppwriteInstances();
 
     const response = await functions.createExecution({
-      functionId: APPWRITE_CONFIG.functions.usersTeamsManager,
+      functionId: APPWRITE_CONFIG.functions.invitation,
       body: JSON.stringify({
         action: "exchange-invite",
         userId,
-        eventId,
         teamId,
       }),
     });
@@ -48,7 +56,13 @@ export async function validateInvitation(
       throw new Error(result.error || "L'invitation est invalide.");
     }
 
-    return { token: result.token, userId: result.userId };
+    return {
+      token: result.token,
+      userId: result.userId,
+      hasMembership: result.hasMembership || false,
+      membershipRevoked: result.membershipRevoked || false,
+      teamName: result.teamName || null,
+    };
   } catch (error) {
     console.error("[invitations] Error validating invitation:", error);
     throw error;

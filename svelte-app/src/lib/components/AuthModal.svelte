@@ -140,7 +140,45 @@
       }, 1000);
     } catch (error: any) {
       console.error("Erreur d'inscription:", error);
-      errorMessage = error.message || "Erreur lors de la création du compte";
+
+      // Vérifier si l'email existe déjà
+      // Appwrite renvoie une erreur avec code 409 et message contenant "already registered"
+      if (
+        error.response?.code === 409 ||
+        error.message?.includes("already registered") ||
+        error.message?.includes("already exists")
+      ) {
+        try {
+          const { account } = await getAppwriteInstances();
+
+          // L'email existe déjà : envoyer un email de récupération de mot de passe
+          await account.createRecovery({
+            email: registerEmail,
+            url: `${window.location.origin}/reset-password`,
+          });
+
+          // Message informatif pour l'utilisateur
+          successMessage =
+            "Un compte avec cet email existe déjà. Un email de réinitialisation de mot de passe vous a été envoyé.";
+
+          // Basculer vers le mode login après 3 secondes
+          setTimeout(() => {
+            showLogin = true;
+            successMessage = "";
+            // Pré-remplir l'email dans le formulaire de login
+            loginEmail = registerEmail;
+          }, 4000);
+        } catch (recoveryError: any) {
+          console.error(
+            "Erreur lors de l'envoi de l'email de récupération:",
+            recoveryError,
+          );
+          errorMessage =
+            "Un compte avec cet email existe déjà, mais nous n'avons pas pu vous envoyer l'email de réinitialisation. Utilisez l'option 'Mot de passe oublié ?'.";
+        }
+      } else {
+        errorMessage = error.message || "Erreur lors de la création du compte";
+      }
     } finally {
       isLoading = false;
     }
@@ -154,7 +192,7 @@
 
       await account.createRecovery({
         email: forgotEmail,
-        url: `${window.location.origin}/#/reset-password`,
+        url: `${window.location.origin}/reset-password`,
       });
 
       successMessage = "Email de réinitialisation envoyé !";

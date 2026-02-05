@@ -24,17 +24,16 @@ import type { AppwriteConfig } from "../types/global";
  */
 const isDevLocal = import.meta.env.DEV && typeof window !== "undefined";
 
-const APPWRITE_CONFIG: AppwriteConfig = {
+const APPWRITE_CONFIG = {
   endpoint: "https://aw.oupla.net/v1",
   // Utilisation du projet de développement en local, production en build
   projectId: isDevLocal ? "697a1fcf0005e3703e25" : "696b7acb0037bde79e3f",
   databaseId: "689d15b10003a5a13636",
   functions: {
-    cmsAuth: "68976500002eb5c6ee4f",
-    accessRequest: "689cdea5001a4d74549d",
     batchUpdate: "68f00487000c624533a3",
     usersTeamsManager: "692cb2cd000cbb24549c",
     enkaData: "68f00487000c624533a3", // ID fusionné (enka-products)
+    invitation: "6984cf4100311dcd7dd2",
   },
   collections: {
     events: "main", // TOCHECK

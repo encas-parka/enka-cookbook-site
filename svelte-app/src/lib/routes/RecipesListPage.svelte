@@ -327,7 +327,7 @@
 
 <!-- Contenu principal -->
 <div class="relative z-0 p-4 lg:ml-100" in:fade>
-  <div class="mx-auto max-w-4xl">
+  <div class="mx-auto h-full max-w-4xl">
     <div class="mb-10 space-y-6">
       <!-- Tabs de filtrage par type -->
       <div class="tabs tabs-border tabs-lg mb-6 font-bold">

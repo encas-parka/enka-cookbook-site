@@ -180,10 +180,9 @@
 </script>
 
 <div
-  class="navbar bg-base-100 border-base-300 sticky top-0 z-1000 min-h-13 border-b px-4 py-0 shadow-sm print:hidden {globalState.isMobile &&
-    'min-h-11'} {globalState.isMobile &&
-    !globalState.headerVisible &&
-    '-translate-y-full'} transition-transform duration-300"
+  class="navbar bg-base-100 border-base-300 sticky top-0 z-1000 min-h-13 border-b px-4 py-0 shadow-sm transition-transform duration-300 print:hidden {globalState.isMobile &&
+    'min-h-11'}
+    {globalState.isMobile && !globalState.headerVisible && '-translate-y-full'}"
 >
   <div class="navbar-start w-fit shrink-0 gap-1">
     <!-- Brand -->

@@ -1,6 +1,7 @@
 <script lang="ts">
+  import { onMount } from "svelte";
   import { getAppwriteInstances } from "../services/appwrite";
-  import { navigate } from "$lib/router";
+  import { navigate, route } from "$lib/router";
 
   import {
     AlertCircle,
@@ -18,11 +19,15 @@
   let confirmPassword = $state("");
   let isValidLink = $state(false);
   let isProcessing = $state(true);
+  let userId = $state("");
+  let secret = $state("");
 
-  // Récupérer userId et secret depuis l'URL
-  const urlParams = new URLSearchParams(window.location.search);
-  const userId = urlParams.get("userId");
-  const secret = urlParams.get("secret");
+  // Récupérer userId et secret depuis l'URL via sv-router
+  onMount(() => {
+    userId = route.search.userId || "";
+    secret = route.search.secret || "";
+    validateRecoveryLink();
+  });
 
   // Valider le lien
   async function validateRecoveryLink() {
@@ -36,9 +41,6 @@
     isValidLink = true;
     isProcessing = false;
   }
-
-  // Appeler la validation au montage
-  validateRecoveryLink();
 
   async function handleResetPassword(event: Event) {
     event.preventDefault();
@@ -99,7 +101,7 @@
   }
 </script>
 
-<div class="bg-base-200 flex items-center justify-center p-4">
+<div class="bg-base-200 flex h-full items-center justify-center p-4">
   <div class="card bg-base-100 w-full max-w-md shadow-xl">
     <!-- Header -->
     <div class="card-body">

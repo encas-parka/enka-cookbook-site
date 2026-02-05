@@ -12,3 +12,5 @@ content/recettes/uuid.sh
 *.code-workspace
 backups
 .zed
+appwrite
+appwrite-ec-dev

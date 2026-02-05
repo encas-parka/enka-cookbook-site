@@ -15,9 +15,10 @@
         m.getAppwriteInstances(),
       );
 
-      // Créer une verification avec URL de redirection (format hash pour le router)
+      // Créer une verification avec URL de redirection
+      // Le router est en mode path-based, Appwrite ajoutera ?userId=xxx&secret=xxx
       const token = await account.createEmailVerification({
-        url: window.location.origin + "/#/verify-email",
+        url: window.location.origin + "/verify-email",
       });
 
       toastService.success(

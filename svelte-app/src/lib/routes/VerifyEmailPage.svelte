@@ -10,18 +10,10 @@
   let message = $state("");
 
   onMount(async () => {
-    // Extraire userId et secret de l'URL
-    // Appwrite place les params AVANT le hash : /?userId=xxx&secret=yyy#/verify-email
-    // On doit donc vérifier window.location.search en PRIORITÉ
-    let userId = route.search.userId;
-    let secret = route.search.secret;
-
-    // Fallback : vérifier window.location.search (format Appwrite)
-    if (!userId || !secret) {
-      const urlParams = new URLSearchParams(window.location.search);
-      userId = urlParams.get("userId");
-      secret = urlParams.get("secret");
-    }
+    // Appwrite ajoute les query params à l'URL : /verify-email?userId=xxx&secret=yyy
+    // Le router sv-router les expose via route.search
+    const userId = route.search.userId as string;
+    const secret = route.search.secret as string;
 
     if (!userId || !secret) {
       status = "error";
@@ -36,7 +28,7 @@
         m.getAppwriteInstances(),
       );
 
-      await (await account).updateVerification(userId, secret);
+      await account.updateEmailVerification({ userId, secret });
 
       // Rafraîchir les infos utilisateur
       await globalState.refreshAuthAfterLogin();

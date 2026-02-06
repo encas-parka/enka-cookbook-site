@@ -19,7 +19,7 @@ export default defineConfig(({ mode }) => ({
     // }),
   ],
   build: {
-    // Cible le dossier static/dist de votre thème Hugo
+    // Cible le dossier static/app de votre thème Hugo
     outDir: "../static/app/",
     emptyOutDir: true, // Vide le dossier à chaque build (utile pour le dev)
 
@@ -28,11 +28,15 @@ export default defineConfig(({ mode }) => ({
     // Important pour le code splitting
     target: "es2020",
 
+    // Générer un manifest pour le cache-busting
+    manifest: "manifest.json",
+
     rollupOptions: {
       output: {
-        entryFileNames: "assets/[name].js",
-        chunkFileNames: "assets/[name].js",
-        assetFileNames: "assets/[name].[ext]",
+        // Ajout de hash pour le cache-busting
+        entryFileNames: "assets/[name]-[hash].js",
+        chunkFileNames: "assets/[name]-[hash].js",
+        assetFileNames: "assets/[name]-[hash].[ext]",
 
         manualChunks(id) {
           // Icons Lucide (gros morceau)
@@ -72,7 +76,7 @@ export default defineConfig(({ mode }) => ({
           });
         },
       },
-       // Rediriger /data/ vers le dossier static/data de Hugo
+      // Rediriger /data/ vers le dossier static/data de Hugo
       "/data": {
         target: "http://localhost:1313",
         changeOrigin: true,

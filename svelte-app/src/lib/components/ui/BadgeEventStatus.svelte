@@ -49,12 +49,12 @@
 </script>
 
 <div class="badge {size} {badgeConfig.colorClass} gap-2 {className}">
-  {badgeConfig.label}
   {#if badgeConfig.icon === CheckCircle2}
-    <CheckCircle2 class="size-5" />
+    <CheckCircle2 class="size-4" />
   {:else if badgeConfig.icon === Clock}
-    <Clock class="size-5" />
+    <Clock class="size-4" />
   {:else}
-    <AlertTriangle class="size-5" />
+    <AlertTriangle class="size-4" />
   {/if}
+  {badgeConfig.label}
 </div>

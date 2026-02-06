@@ -61,7 +61,9 @@
   }
 
   // Callback après mise à jour d'un membre
-  function handleMemberUpdated() {
+  async function handleMemberUpdated() {
+    // Recharger les données de la team pour refléter les modifications
+    await teamsStore.fetchTeam(team.$id);
     onMemberRemoved?.();
     manageMemberModal = { isOpen: false, member: null };
   }

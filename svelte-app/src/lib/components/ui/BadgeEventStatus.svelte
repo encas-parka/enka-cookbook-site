@@ -48,13 +48,13 @@
   });
 </script>
 
-<div class="badge {size} {badgeConfig.colorClass} gap-1 {className}">
-  {#if badgeConfig.icon === CheckCircle2}
-    <CheckCircle2 class="h-3 w-3" />
-  {:else if badgeConfig.icon === Clock}
-    <Clock class="h-3 w-3" />
-  {:else}
-    <AlertTriangle class="h-3 w-3" />
-  {/if}
+<div class="badge {size} {badgeConfig.colorClass} gap-2 {className}">
   {badgeConfig.label}
+  {#if badgeConfig.icon === CheckCircle2}
+    <CheckCircle2 class="size-5" />
+  {:else if badgeConfig.icon === Clock}
+    <Clock class="size-5" />
+  {:else}
+    <AlertTriangle class="size-5" />
+  {/if}
 </div>

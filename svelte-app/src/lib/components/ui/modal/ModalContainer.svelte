@@ -85,16 +85,6 @@
     window.addEventListener("keydown", handleEscape);
     return () => window.removeEventListener("keydown", handleEscape);
   });
-
-  // Bloquer le scroll du body quand le modal est ouvert
-  $effect(() => {
-    if (isOpen) {
-      document.body.style.overflow = "hidden";
-      return () => {
-        document.body.style.overflow = "";
-      };
-    }
-  });
 </script>
 
 <div class="modal {isOpen && 'modal-open'} ">
@@ -104,10 +94,11 @@
       class="modal-box flex flex-col p-0 {modalClass} {fullscreenOnMobile &&
       globalState.isMobile
         ? 'fixed inset-0 m-0 h-lvh w-lvw rounded-none'
-        : 'fixed top-10 m-auto '} {!(fullscreenOnMobile &&
-        globalState.isMobile) &&
-        getSizeClass(maxWidth, 'max-w')} {!(fullscreenOnMobile &&
-        globalState.isMobile) &&
+        : 'fixed top-10 m-auto '} {!(
+        fullscreenOnMobile && globalState.isMobile
+      ) && getSizeClass(maxWidth, 'max-w')} {!(
+        fullscreenOnMobile && globalState.isMobile
+      ) &&
         !modalClass &&
         'max-h-[85dvh]'}"
       role="dialog"

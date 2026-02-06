@@ -165,10 +165,10 @@
       </div>
 
       <div
-        class="card border-neutral/20 card-sm flex w-full justify-center border shadow-sm"
+        class="card border-neutral/20 card-sm mb-auto flex w-full justify-center border shadow-sm"
       >
         <!-- Actions Matériel -->
-        <div class="card-body">
+        <div class="card-body place-content-center">
           <div class="card card-sm bg-base-300/60">
             <div class="card-body text-center">
               <p class="font-semibold">

@@ -1,1 +1,0 @@
-import{d as t,p as s,c as n,aL as r}from"./appwrite.js";function c(i,e){t(e,!0);let o=s(e,"message",3,"Vous avez des modifications non sauvegardées. Voulez-vous quitter sans enregistrer ?");r(()=>{if(!e.shouldProtect())return!0;const a=confirm(o());return a&&e.onLeaveWithoutSave&&e.onLeaveWithoutSave(),a}),n()}export{c as U};

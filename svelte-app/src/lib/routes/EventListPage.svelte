@@ -1,6 +1,7 @@
 <script lang="ts">
   import { onMount } from "svelte";
   import { fade } from "svelte/transition";
+  import { navBarStore } from "$lib/stores/NavBarStore.svelte";
   import { eventsStore } from "$lib/stores/EventsStore.svelte";
   import { ArrowLeft, Calendar } from "@lucide/svelte";
   import { navigate } from "$lib/router";
@@ -16,6 +17,7 @@
 
   // Charger tous les événements passés au montage
   onMount(async () => {
+    navBarStore.reset();
     loading = true;
     try {
       await eventsStore.loadAllPastEvents();

@@ -53,10 +53,6 @@
       actions: navActions,
     });
   });
-
-  onDestroy(() => {
-    navBarStore.reset();
-  });
 </script>
 
 {#snippet navActions()}

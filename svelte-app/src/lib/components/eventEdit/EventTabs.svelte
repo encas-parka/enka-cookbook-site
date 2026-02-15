@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { navigate, route } from "$lib/router";
+  import { route } from "$lib/router";
 
   // Props : eventId et basePath optionnel
   let {
@@ -32,28 +32,28 @@
     return 0; // Défaut
   });
 
-  function navigateToTab(index: number) {
-    if (!eventId) return;
+  function getTabPath(index: number) {
+    if (!eventId) return "#";
 
     const relativePath = eventTabs[index].relativePath;
 
-    const fullPath = relativePath
+    return relativePath
       ? `${basePath}/${eventId}/${relativePath}`
       : `${basePath}/${eventId}`;
-
-    navigate(fullPath);
   }
 </script>
 
-<div class="rounded-box bg-secondary/10 px-4 py-1">
-  <div class="tabs tabs-border justify-center">
+<div class="rounded-box bg-accent/10 px-4 py-0">
+  <div class="tabs justify-center py-1">
     {#each eventTabs as tab, index (index)}
-      <button
-        class="tab font-semibold {index === activeTab ? 'tab-active' : ''}"
-        onclick={() => navigateToTab(index)}
+      <a
+        class="tab rounded-box {index === activeTab
+          ? 'text-base-content/80  bg-accent/30 font-bold'
+          : 'text-accent  font-medium '}"
+        href={getTabPath(index)}
       >
         {tab.label}
-      </button>
+      </a>
     {/each}
   </div>
 </div>

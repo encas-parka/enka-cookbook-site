@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { navigate } from '$lib/router';
+  import { navigate, p } from "$lib/router";
 
   interface Alternative {
     recetteAlt: string;
@@ -15,10 +15,6 @@
   function getRecipeName(uuid: string): string {
     return recipesIndex.get(uuid)?.n || "Recette inconnue";
   }
-
-  function handleClick(uuid: string) {
-    navigate(`/recipe/${uuid}`);
-  }
 </script>
 
 {#if alternatives.length > 0}
@@ -28,12 +24,9 @@
       <ul class="space-y-1">
         {#each alternatives as { recetteAlt }}
           <li>
-            <button
-              class="link link-primary"
-              onclick={() => handleClick(recetteAlt)}
-            >
+            <a class="link link-primary" href={p(`/recipe/${recetteAlt}`)}>
               {getRecipeName(recetteAlt)}
-            </button>
+            </a>
           </li>
         {/each}
       </ul>

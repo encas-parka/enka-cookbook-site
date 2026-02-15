@@ -26,6 +26,12 @@
     getMaterielTypeColorClass,
     getMaterielTypeConfig,
   } from "$lib/utils/materiel.utils";
+  import { onMount } from "svelte";
+  import { navBarStore } from "$lib/stores/NavBarStore.svelte";
+
+  onMount(() => {
+    navBarStore.reset();
+  });
 
   // État
   const loanId = $derived(route.params.loanId);

@@ -12,7 +12,7 @@
     NotebookPen,
   } from "@lucide/svelte";
   import { nativeTeamsStore } from "$lib/stores/NativeTeamsStore.svelte";
-  import { navigate } from "$lib/router";
+  import { p } from "$lib/router";
   import TeamDetailModal from "$lib/components/teams/TeamDetailModal.svelte";
   import ListEventCard from "./ListEventCard.svelte";
   import type { EnrichedNativeTeam } from "$lib/types/aw_native_team.d";
@@ -78,23 +78,6 @@
   function inviteMember() {
     teamModalTab = "invitations";
     showTeamModal = true;
-  }
-
-  // fixit
-  function goToCreateEvent() {
-    navigate(`/dashboard/eventCreate/${team.$id}`);
-  }
-
-  function goToInventory() {
-    navigate(`/dashboard/materiel/${team.$id}`);
-  }
-
-  function goToReservations() {
-    navigate(`/dashboard/loans/${team.$id}`);
-  }
-
-  function goToPastEvents() {
-    navigate("/eventList");
   }
 </script>
 
@@ -178,20 +161,20 @@
             </div>
           </div>
           <div class="flex w-full flex-wrap justify-around gap-2">
-            <button
+            <a
               class="btn btn-primary btn-soft flex-1"
-              onclick={goToInventory}
+              href={p(`/dashboard/materiel/${team.$id}`)}
             >
               <NotebookPen class="size-4" />
               Inventaire
-            </button>
-            <button
+            </a>
+            <a
               class="btn btn-primary btn-soft flex-1"
-              onclick={goToReservations}
+              href={p(`/dashboard/loans/${team.$id}`)}
             >
               <ScrollText class="size-4" />
               Réservations
-            </button>
+            </a>
           </div>
         </div>
       </div>
@@ -205,10 +188,10 @@
             <h3 class="card-title items-center">
               <Calendar class="text-primary inline size-5" /> Événements
             </h3>
-            <button class="btn btn-sm" onclick={goToPastEvents}>
+            <a class="btn btn-sm" href={p("/eventList")}>
               Voir les événements passés
               <ArrowRight class="ml-2 h-4 w-4" />
-            </button>
+            </a>
           </div>
           <!-- Événements à venir -->
           <ListEventCard
@@ -224,13 +207,13 @@
           {/if}
           <div class="card-actions mt-auto items-center justify-end">
             <!-- Bouton Créer un événement -->
-            <button
+            <a
               class="btn btn-primary btn-soft btn-sm ml-auto"
-              onclick={goToCreateEvent}
+              href={p(`/dashboard/eventCreate/${team.$id}`)}
             >
               <Plus class="h-4 w-4" />
               Créer un événement
-            </button>
+            </a>
           </div>
         </div>
       </div>

@@ -6,7 +6,7 @@
     Filter,
     Funnel,
   } from "@lucide/svelte";
-  import { navigate } from "$lib/router";
+  import { navigate, p } from "$lib/router";
   import { globalState } from "$lib/stores/GlobalState.svelte";
 
   type SortBy = "title" | "$createdAt" | "$updatedAt";
@@ -126,24 +126,13 @@
         ><Funnel class="inline h-4 w-4" /> Filtrer :</legend
       >
       <div class="flex flex-wrap gap-2">
-        <button
-          class={getScopeButtonClasses("all")}
-          onclick={() => navigate("/recipe")}
-        >
-          Tout
-        </button>
-        <button
-          class={getScopeButtonClasses("mine")}
-          onclick={() => navigate("/recipe/my")}
-        >
+        <a class={getScopeButtonClasses("all")} href={p("/recipe")}> Tout </a>
+        <a class={getScopeButtonClasses("mine")} href={p("/recipe/my")}>
           Mes recettes
-        </button>
-        <button
-          class={getScopeButtonClasses("drafts")}
-          onclick={() => navigate("/recipe/my/draft")}
-        >
+        </a>
+        <a class={getScopeButtonClasses("drafts")} href={p("/recipe/my/draft")}>
           Mes brouillons
-        </button>
+        </a>
       </div>
     </fieldset>
   {/if}

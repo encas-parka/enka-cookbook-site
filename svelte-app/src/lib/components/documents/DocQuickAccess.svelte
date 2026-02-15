@@ -1,6 +1,6 @@
 <script lang="ts">
   import { teamdocsStore } from "$lib/stores/TeamdocsStore.svelte";
-  import { navigate } from '$lib/router';
+  import { p } from "$lib/router";
   import {
     FileText,
     ArrowBigRight,
@@ -31,14 +31,6 @@
       })
       .slice(0, 5);
   });
-
-  function viewAll() {
-    navigate(`/documents/${teamId}`);
-  }
-
-  function createDocument() {
-    navigate(`/createdocument/${teamId}/new`);
-  }
 </script>
 
 <div class="card bg-base-100 card-sm border-neutral/20 border shadow-sm">
@@ -48,14 +40,14 @@
         <FileText class="text-primary h-5 w-5" />
         Documents récents
       </h2>
-      <button
+      <a
         class="btn btn-sm"
-        onclick={viewAll}
+        href={p(`/documents/${teamId}`)}
         title="Voir tous les documents"
       >
         Voir tout
         <ArrowBigRight size={16} />
-      </button>
+      </a>
     </div>
 
     {#if teamdocsStore.loading}
@@ -86,10 +78,13 @@
     {/if}
     <!-- Bouton Créer -->
     <div class="card-actions mt-4 justify-end pt-4">
-      <button class="btn btn-primary btn-soft btn-sm" onclick={createDocument}>
+      <a
+        class="btn btn-primary btn-soft btn-sm"
+        href={p(`/createdocument/${teamId}/new`)}
+      >
         <Plus class="h-4 w-4" />
         Créer un document
-      </button>
+      </a>
     </div>
   </div>
 </div>

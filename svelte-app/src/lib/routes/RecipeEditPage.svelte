@@ -181,7 +181,6 @@
   });
 
   onDestroy(async () => {
-    navBarStore.reset();
     stopHeartbeat();
     if (isLockedByMe && !isSaving) {
       await releaseLock();

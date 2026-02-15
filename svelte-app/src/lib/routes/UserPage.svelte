@@ -3,8 +3,14 @@
   import { route, navigate, p } from "$lib/router";
   import { toastService } from "$lib/services/toast.service.svelte";
   import { getAppwriteInstances } from "$lib/services/appwrite";
+  import { onMount } from "svelte";
+  import { navBarStore } from "$lib/stores/NavBarStore.svelte";
 
   import { User, Lock, Key, Save, ArrowLeft } from "@lucide/svelte";
+
+  onMount(() => {
+    navBarStore.reset();
+  });
 
   // =============================================================================
   // STATE

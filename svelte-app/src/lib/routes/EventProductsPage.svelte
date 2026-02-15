@@ -55,7 +55,7 @@
 
   import LeftPanel from "$lib/components/ui/LeftPanel.svelte";
 
-  import { onMount, onDestroy } from "svelte";
+  import { onMount } from "svelte";
   import { fade } from "svelte/transition";
   import { eventsStore } from "$lib/stores/EventsStore.svelte";
 
@@ -322,10 +322,6 @@
     navBarStore.setConfig({
       actions: navActions,
     });
-  });
-
-  onDestroy(() => {
-    navBarStore.reset();
   });
 
   //

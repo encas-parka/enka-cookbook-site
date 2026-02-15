@@ -187,10 +187,6 @@
     }
   });
 
-  onDestroy(() => {
-    navBarStore.reset();
-  });
-
   onMount(async () => {
     // Note: teamdocsStore est déjà initialisé via App.svelte
     // Mais on s'assure qu'il est bien chargé

@@ -1,6 +1,6 @@
 ---
 title: Chorba  agneau boulgour
-date: '2026-02-15T17:56:10.712Z'
+date: '2026-02-15T17:56:48.388Z'
 draft: true
 typeR: plat
 categories:
@@ -17,10 +17,7 @@ description: null
 region: Algérie
 saison: []
 id: chorba-agneau-bo-v2_9opwp49wzltj
-materiel:
-  - Marmitte
-  - Bruleur
-  - Poêle
+materiel: []
 ingredients:
   - uuid: mz93p4
     name: Agneau
@@ -179,6 +176,24 @@ ingredients:
     type: sec
     pF: false
     pS: false
+  - uuid: rFuTuJv6Su3HnTJI_qTWO
+    name: Navet
+    originalQuantity: 300
+    originalUnit: gr.
+    normalizedQuantity: 300
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: jU4Z5rXlcHLtxRyuZ9baT
+    name: Boulgour
+    originalQuantity: 150
+    originalUnit: gr.
+    normalizedQuantity: 150
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: sec
 preparation: |-
   Eplucher et émincer les carottes et les courgettes. Emincer les branches de céleri. Mettre le tout dans un saladier. Réserver.
 
@@ -201,9 +216,9 @@ preparation24h: Faire tremper les pois chiche la veille.
 permissionWrite:
   - 6931ecdccd2c8d8d15e5
 createdAt: '2026-02-15T17:56:10.312+00:00'
-updatedAt: '2026-02-15T17:56:10.312+00:00'
+updatedAt: '2026-02-15T17:56:47.764+00:00'
 createdBy: 6931ecdccd2c8d8d15e5
-teams: null
+teams: []
 status: public
 rootRecipeId: chorba-agneau-et-langu_duj2ar8i9twp
 versionLabel: 'v2 - '

@@ -1055,6 +1055,14 @@ class ProductsStore {
    * Gère la mise à jour d'un purchase (payload partiel possible)
    */
   async #applyPurchaseUpdated(purchase: Purchases): Promise<string[]> {
+    // Si le statut passe à "deleted", traiter comme une suppression
+    if (purchase.status === "deleted") {
+      console.log(
+        `[ProductsStore] Purchase ${purchase.$id} marqué comme supprimé, retrait...`,
+      );
+      return await this.#applyPurchaseDeleted(purchase.$id);
+    }
+
     // Si products[] est dans le payload, on peut procéder directement
     // TOCHECK : normalement n'y ait jamais, sauf peut etre lorsque l'on mergera des products ??
     if (purchase.products?.length) {
@@ -1819,32 +1827,10 @@ class ProductsStore {
   }
 
   /**
-   * Supprime un purchase en mode local
+   * Supprime un purchase en mode local (pseudo-suppression)
    */
   async deletePurchaseLocal(purchaseId: string): Promise<void> {
-    // 1. Trouver le produit qui contient ce purchase
-    let targetProductId: string | null = null;
-    for (const [productId, productModel] of this.#enrichedProducts) {
-      if (productModel.data.purchases?.some((p) => p.$id === purchaseId)) {
-        targetProductId = productId;
-        break;
-      }
-    }
-
-    if (!targetProductId) {
-      throw new Error(`Purchase ${purchaseId} introuvable`);
-    }
-
-    // 2. Filtrer pour retirer le purchase
-    const productModel = this.#enrichedProducts.get(targetProductId);
-    const updatedPurchases = productModel.data.purchases.filter(
-      (p) => p.$id !== purchaseId,
-    );
-
-    // 3. Mettre à jour via la méthode générique
-    await this.updateProductLocal(targetProductId, {
-      purchases: updatedPurchases,
-    });
+    await this.updatePurchaseLocal(purchaseId, { status: "deleted" });
   }
 
   // =========================================================================
@@ -1900,14 +1886,15 @@ class ProductsStore {
   }
 
   /**
-   * Supprime un purchase (avec détection automatique du mode)
+   * Supprime un purchase (pseudo-suppression via status: 'deleted')
    */
   async deletePurchase(purchaseId: string): Promise<void> {
     if (isDemoEvent(this.#currentEventId)) {
       return await this.deletePurchaseLocal(purchaseId);
     } else {
-      const { deletePurchase } = await import("../services/appwrite-products");
-      await deletePurchase(purchaseId);
+      // Pseudo-suppression : on met à jour le statut au lieu de supprimer physiquement
+      const { updatePurchase } = await import("../services/appwrite-products");
+      await updatePurchase(purchaseId, { status: "deleted" });
     }
   }
 
@@ -2230,6 +2217,7 @@ class ProductsStore {
 
     // 1. Ajouter les dépenses orphelines
     for (const purchase of this.#orphanPurchases.values()) {
+      if (purchase.status === "deleted") continue;
       const amount = purchase.invoiceTotal || purchase.price || 0;
       totalGlobal += amount;
 

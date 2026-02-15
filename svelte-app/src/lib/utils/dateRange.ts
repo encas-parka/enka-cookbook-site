@@ -359,8 +359,8 @@ function isPurchaseAvailableInRange(
   endDate: string,
   stockReferenceDate: string = "",
 ): boolean {
-  // Annulé = jamais compté
-  if (purchase.status === "cancelled") {
+  // Annulé ou supprimé = jamais compté
+  if (purchase.status === "cancelled" || purchase.status === "deleted") {
     return false;
   }
 

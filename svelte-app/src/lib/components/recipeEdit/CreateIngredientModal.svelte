@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { untrack } from "svelte";
   import {
     Plus,
     X,
@@ -49,7 +50,7 @@
     type: "",
     allergens: [],
     pF: null,
-    pS: false,
+    pS: null,
     saisons: [],
   });
 
@@ -251,11 +252,13 @@
   // Reset du formulaire à l'ouverture du modal
   $effect(() => {
     if (open) {
-      resetForm();
-      // Appliquer initialName si fourni
-      if (initialName) {
-        formData.name = initialName;
-      }
+      untrack(() => {
+        resetForm();
+        // Appliquer initialName si fourni
+        if (initialName) {
+          formData.name = initialName;
+        }
+      });
       // Focus automatique
       setTimeout(() => {
         document.getElementById("ingredient-name-input")?.focus();

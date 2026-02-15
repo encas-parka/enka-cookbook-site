@@ -10,6 +10,7 @@
   } from "@lucide/svelte";
   import { productsStore } from "$lib/stores/ProductsStore.svelte";
   import { createManualProduct } from "$lib/services/appwrite-products";
+  import { toastService } from "$lib/services/toast.service.svelte";
   import Suggestions from "../ui/Suggestions.svelte";
   import QuantityInput from "../ui/QuantityInput.svelte";
   import StoreInput from "../ui/StoreInput.svelte";
@@ -27,6 +28,11 @@
   let loading = $state(false);
   let error = $state<string | null>(null);
   let success = $state(false);
+  let showErrors = $state(false);
+  let validationErrors = $state<{
+    productName?: string;
+    productType?: string;
+  }>({});
 
   let formData = $state<{
     productName: string;
@@ -49,6 +55,19 @@
   });
 
   // Validation
+  function validateForm() {
+    const errors: { productName?: string; productType?: string } = {};
+
+    if (!formData.productName.trim()) {
+      errors.productName = "Le nom du produit est requis";
+    }
+    if (!formData.productType.trim()) {
+      errors.productType = "Le type/catégorie est requis";
+    }
+
+    return errors;
+  }
+
   const isFormValid = $derived(
     formData.productName.trim().length > 0 &&
       formData.productType.trim().length > 0,
@@ -64,7 +83,15 @@
   let isArchiveMode = $derived(productsStore.isEventPassed);
 
   async function handleSubmit(keepOpen: boolean = false) {
-    if (!isFormValid || loading) return;
+    if (loading) return;
+
+    showErrors = true;
+    validationErrors = validateForm();
+
+    if (Object.keys(validationErrors).length > 0) {
+      toastService.error("Veuillez remplir les champs obligatoires");
+      return;
+    }
 
     loading = true;
     error = null;
@@ -92,6 +119,7 @@
       await createManualProduct(productData, productsStore.currentMainId!);
 
       success = true;
+      toastService.success(`Produit "${productData.productName}" ajouté`);
 
       // Reset form after short delay and close
       // Reset form but keep some values
@@ -101,6 +129,8 @@
         formData.unit = "";
         formData.pF = false;
         formData.pS = false;
+        showErrors = false;
+        validationErrors = {};
 
         // Focus on product name input
         setTimeout(() => {
@@ -109,20 +139,12 @@
         }, 100);
       } else {
         open = false;
-        formData = {
-          productName: "",
-          productType: "",
-          store: "",
-          who: "",
-          pF: false,
-          pS: false,
-          quantity: null,
-          unit: "",
-        };
+        handleClose();
       }
     } catch (err) {
       console.error("Error creating product:", err);
       error = "Erreur lors de la création du produit. Veuillez réessayer.";
+      toastService.error(error);
     } finally {
       loading = false;
     }
@@ -141,6 +163,8 @@
       unit: "",
     };
     error = null;
+    showErrors = false;
+    validationErrors = {};
   }
 
   $effect(() => {
@@ -192,7 +216,12 @@
         <div class="flex flex-wrap gap-4">
           <!-- Nom du produit -->
           <fieldset class="fieldset">
-            <label class="input w-72">
+            <label
+              class="input required w-72 {showErrors &&
+              validationErrors.productName
+                ? 'input-error'
+                : ''}"
+            >
               <PackagePlus class="text-base-content/50 h-5 w-5" />
               <input
                 id="product-name"
@@ -202,6 +231,9 @@
                 disabled={loading}
               />
             </label>
+            {#if showErrors && validationErrors.productName}
+              <p class="text-error text-xs">{validationErrors.productName}</p>
+            {/if}
           </fieldset>
           <!-- Quantité et Unité -->
           <QuantityInput
@@ -214,7 +246,11 @@
         <!-- Type de produit -->
         <fieldset class="fieldset">
           <div class="flex flex-wrap items-baseline gap-2">
-            <label class="input w-72">
+            <label
+              class="input w-72 required {showErrors && validationErrors.productType
+                ? 'input-error'
+                : ''}"
+            >
               <input
                 id="product-type"
                 type="text"
@@ -229,6 +265,9 @@
               disabled={loading}
             />
           </div>
+          {#if showErrors && validationErrors.productType}
+            <p class="text-error text-xs">{validationErrors.productType}</p>
+          {/if}
         </fieldset>
 
         <!-- Magasin -->
@@ -293,7 +332,7 @@
               type="button"
               class="btn btn-secondary"
               onclick={() => handleSubmit(true)}
-              disabled={loading || !formData.productName || isArchiveMode}
+              disabled={loading || isArchiveMode}
             >
               {#if loading}
                 <span class="loading loading-spinner"></span>
@@ -305,7 +344,7 @@
             <button
               type="submit"
               class="btn btn-primary"
-              disabled={loading || !formData.productName || isArchiveMode}
+              disabled={loading || isArchiveMode}
             >
               {#if loading}
                 <span class="loading loading-spinner"></span>

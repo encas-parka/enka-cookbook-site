@@ -1,6 +1,6 @@
 ---
 title: Chorba  agneau boulgour
-date: '2026-02-15T17:56:48.388Z'
+date: '2026-02-15T17:58:20.769Z'
 draft: true
 typeR: plat
 categories:
@@ -195,28 +195,28 @@ ingredients:
     allergens: []
     type: sec
 preparation: |-
-  Eplucher et émincer les carottes et les courgettes. Emincer les branches de céleri. Mettre le tout dans un saladier. Réserver.
+  Eplucher et émincer les carottes et les navets. Emincer les branches de céleri. Mettre le tout dans un saladier. Réserver.
 
   Eplucher et émincer grossièrement les oignons.
 
-  Couper la viande en morceaux. Dans une gamelle : verser un filet d'huile d'olive et y faire cuire les morceaux de viande en ajoutant les oignons.
+  Couper la viande en morceaux. Dans une gamelle (ou poêle) : verser un filet d'huile d'olive et y faire cuire les morceaux de viande en ajoutant les oignons.
 
-  Assaisonner avec le ras el hanout, le gingembre en poudre, le paprika et le piment doux.
+  Dans la gamelle : assaisonner avec le ras el hanout, le gingembre en poudre, le paprika et le piment doux.
 
-   Déposer, les carottes, les courgettes, le céleri et les pois chiche dans la gamelle.
+  Déposer, les carottes, les navets, le céleri et les pois chiches dans la gamelle.
 
   Ajouter le concentré de tomates, l'eau et le coulis de tomate. Assaisonner de sel et de poivre.
 
   Plonger une botte entière de coriandre dans la gamelle. Remuer le tout. Laisser cuire au moins 1h à frémissement.
 
-  Un peu avant le service, ajouter les langues d'oiseaux. Laisser cuire quelques minutes à frémissement. Servir.
+  Un peu avant le service, ajouter le boulgour. Laisser cuire quelques minutes à frémissement. Servir.
 prepAlt: []
 astuces: []
 preparation24h: Faire tremper les pois chiche la veille.
 permissionWrite:
   - 6931ecdccd2c8d8d15e5
 createdAt: '2026-02-15T17:56:10.312+00:00'
-updatedAt: '2026-02-15T17:56:47.764+00:00'
+updatedAt: '2026-02-15T17:58:20.336+00:00'
 createdBy: 6931ecdccd2c8d8d15e5
 teams: []
 status: public

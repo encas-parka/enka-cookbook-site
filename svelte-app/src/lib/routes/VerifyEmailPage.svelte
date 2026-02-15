@@ -1,6 +1,7 @@
 <script lang="ts">
   import { onMount } from "svelte";
   import { globalState } from "$lib/stores/GlobalState.svelte";
+  import { navBarStore } from "$lib/stores/NavBarStore.svelte";
   import { toastService } from "$lib/services/toast.service.svelte";
   import { MailCheck, XCircle, Loader2 } from "@lucide/svelte";
   import { fade } from "svelte/transition";
@@ -10,6 +11,7 @@
   let message = $state("");
 
   onMount(async () => {
+    navBarStore.reset();
     // Appwrite ajoute les query params à l'URL : /verify-email?userId=xxx&secret=yyy
     // Le router sv-router les expose via route.search
     const userId = route.search.userId as string;

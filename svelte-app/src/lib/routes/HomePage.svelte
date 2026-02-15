@@ -53,6 +53,13 @@
     }
   }
 
+  import { onMount } from "svelte";
+  import { navBarStore } from "$lib/stores/NavBarStore.svelte";
+
+  onMount(() => {
+    navBarStore.reset();
+  });
+
   const features = [
     {
       id: "feature-1",

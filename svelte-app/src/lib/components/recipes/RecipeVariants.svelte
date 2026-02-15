@@ -1,7 +1,7 @@
 <script lang="ts">
   import { recipesStore } from "$lib/stores/RecipesStore.svelte";
   import type { RecipeIndexEntry } from "$lib/types/recipes.types";
-  import { navigate } from "$lib/router";
+  import { navigate, p } from "$lib/router";
 
   import { onMount } from "svelte";
   import { Copy } from "@lucide/svelte";
@@ -59,10 +59,7 @@
 
       <div class="flex flex-wrap gap-x-4 gap-y-2">
         {#each displayVariants as variant}
-          <button
-            class="btn btn-ghost"
-            onclick={() => navigate(`/recipe/${variant.$id}`)}
-          >
+          <a class="btn btn-ghost" href={p(`/recipe/${variant.$id}`)}>
             <div class="flex items-center gap-2 text-sm">
               {variant.title}
 
@@ -77,7 +74,7 @@
                 >
               {/if}
             </div>
-          </button>
+          </a>
         {/each}
       </div>
     </div>

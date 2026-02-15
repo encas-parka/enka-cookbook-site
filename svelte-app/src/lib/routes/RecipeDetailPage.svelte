@@ -111,10 +111,6 @@
     });
   });
 
-  onDestroy(() => {
-    navBarStore.reset();
-  });
-
   // Récupérer l'affichage avec la priorité : catégorie > type
   const typeDisplay = $derived.by(() =>
     recipeDetails

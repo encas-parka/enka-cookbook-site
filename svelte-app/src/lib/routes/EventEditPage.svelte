@@ -324,9 +324,6 @@
       console.log("🚪 Démontage du composant, libération du lock...");
       releaseLock();
     }
-
-    // 4. Reset de la navbar
-    navBarStore.reset();
   });
 
   // ============================================================================

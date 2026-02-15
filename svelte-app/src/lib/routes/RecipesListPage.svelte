@@ -11,7 +11,7 @@
   import { recipeDataStore } from "$lib/stores/RecipeDataStore.svelte";
   import { navBarStore } from "../stores/NavBarStore.svelte";
   import { PlusIcon } from "@lucide/svelte";
-  import { navigate, route } from "$lib/router";
+  import { navigate, p, route } from "$lib/router";
   import { globalState } from "../stores/GlobalState.svelte";
   import { onDestroy } from "svelte";
   import { fade } from "svelte/transition";
@@ -287,10 +287,6 @@
     });
   });
 
-  onDestroy(() => {
-    navBarStore.reset();
-  });
-
   onMount(async () => {
     // Note: recipesStore est déjà initialisé via App.svelte (loadCache + syncFromRemote)
 
@@ -303,13 +299,10 @@
 
 {#snippet navActions()}
   {#if globalState.isAuthenticated}
-    <button
-      class="btn btn-primary btn-sm"
-      onclick={() => navigate("/recipe/new")}
-    >
+    <a class="btn btn-primary btn-sm" href={p("/recipe/new")}>
       <PlusIcon size={18} />
       <span class="hidden sm:inline"> Créer une recette</span>
-    </button>
+    </a>
   {/if}
 {/snippet}
 

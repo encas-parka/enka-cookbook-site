@@ -136,10 +136,6 @@
       title: "Rejoindre l'équipe",
     });
   });
-
-  onDestroy(() => {
-    navBarStore.reset();
-  });
 </script>
 
 <div

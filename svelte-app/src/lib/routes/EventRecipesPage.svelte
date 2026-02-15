@@ -6,7 +6,7 @@
     getTotalRecipes,
   } from "$lib/utils/event-stats-helpers";
   import { navigate, route } from "$lib/router";
-  import { onMount, onDestroy, tick } from "svelte";
+  import { onMount, tick } from "svelte";
   import EventStats from "$lib/components/EventStats.svelte";
   import EventRecipeCard from "$lib/components/eventEdit/EventRecipeCard.svelte";
   import LeftPanel from "$lib/components/ui/LeftPanel.svelte";
@@ -236,10 +236,6 @@
     navBarStore.setConfig({
       actions: navActions,
     });
-  });
-
-  onDestroy(() => {
-    navBarStore.reset();
   });
 
   // Gestion de l'ingrédient sélectionné

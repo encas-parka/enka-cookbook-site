@@ -1,7 +1,7 @@
 <script lang="ts">
   import type { EnrichedTeamdoc } from "$lib/stores/TeamdocsStore.svelte";
   import { formatDateRelative } from "$lib/utils/date-helpers";
-  import { navigate } from '$lib/router';
+  import { p } from "$lib/router";
   import { FileText, Calendar, Clock, ArrowRight } from "@lucide/svelte";
 
   interface Props {
@@ -17,29 +17,17 @@
     highlightedTags = [],
     bgClass = "bg-base-200/60",
   }: Props = $props();
-
-  function handleClick() {
-    // Open in preview mode (EditDocumentPage with mode preview)
-    navigate(`/editdocument/${teamId}/${doc.$id}`);
-  }
 </script>
 
-<div
+<a
   class="{bgClass} hover:bg-base-200 flex cursor-pointer items-start gap-3 rounded-lg p-4 transition-colors hover:shadow-sm"
-  onclick={handleClick}
-  role="button"
-  tabindex="0"
-  onkeydown={(e) => {
-    if (e.key === "Enter" || e.key === " ") {
-      handleClick();
-    }
-  }}
+  href={p(`/editdocument/${teamId}/${doc.$id}`)}
 >
   <div class="min-w-0 flex-1">
     <div class="flex flex-wrap items-center gap-x-10 gap-y-2">
       <!-- Title with icon -->
       <div class="text-primary flex items-center gap-2">
-        <FileText class="h-4 w-4 flex-shrink-0" />
+        <FileText class="text-primary h-4 w-4 shrink-0" />
         <div class="truncate text-sm font-medium">
           {doc.title}
         </div>
@@ -90,5 +78,5 @@
     </div>
   </div>
 
-  <ArrowRight class="mt-1 h-4 w-4 flex-shrink-0 opacity-40" />
-</div>
+  <ArrowRight class="mt-1 h-4 w-4 shrink-0 opacity-40" />
+</a>

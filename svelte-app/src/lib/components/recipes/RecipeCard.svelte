@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { RecipeIndexEntry } from "$lib/types/recipes.types";
-  import { navigate } from "$lib/router";
+  import { p } from "$lib/router";
   import RecipeRegimeBadges from "./RecipeRegimeBadges.svelte";
   import { getTypeDisplay } from "$lib/utils/recipeUtils";
   import { globalState } from "@/lib/stores/GlobalState.svelte";
@@ -12,27 +12,17 @@
 
   let { recipe, highlightedIngredients = [] }: Props = $props();
 
-  function handleClick() {
-    navigate(`/recipe/${recipe.$id}`);
-  }
-
   // Récupérer l'affichage avec la priorité : catégorie > type
   const typeDisplay = $derived(
     getTypeDisplay(recipe.typeR, recipe.categories || undefined),
   );
 </script>
 
-<div
+<a
   class="card bg-base-100 cursor-pointer p-4 shadow-sm transition-shadow hover:shadow-md {recipe.auteur ===
     globalState.userName && 'border-accent/60 border-l-3'}"
-  onclick={handleClick}
+  href={p(`/recipe/${recipe.$id}`)}
   role="button"
-  tabindex="0"
-  onkeydown={(e) => {
-    if (e.key === "Enter" || e.key === " ") {
-      handleClick();
-    }
-  }}
 >
   <!-- Absolute top @md -->
   {#if globalState.isDesktop}
@@ -178,4 +168,4 @@
       {/each}
     </div>
   {/if}
-</div>
+</a>

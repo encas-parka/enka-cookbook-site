@@ -1,6 +1,6 @@
 <script lang="ts">
   import { Users, Calendar, CheckCircle, XCircle, Plus } from "@lucide/svelte";
-  import { navigate } from "$lib/router";
+  import { p } from "$lib/router";
   import { globalState } from "$lib/stores/GlobalState.svelte";
   import TeamDetailModal from "$lib/components/teams/TeamDetailModal.svelte";
   import { nativeTeamsStore as teamsStore } from "$lib/stores/NativeTeamsStore.svelte";
@@ -46,10 +46,6 @@
     openTeamDetailModal(teamId);
   }
 
-  function goToTeamsManagement() {
-    navigate("/dashboard/teams");
-  }
-
   function openTeamDetailModal(teamId: string) {
     selectedTeamId = teamId;
   }
@@ -66,13 +62,13 @@
         <Users class="text-primary h-5 w-5" />
         Mes Équipes
       </h2>
-      <button
+      <a
         class="btn btn-ghost btn-sm"
-        onclick={goToTeamsManagement}
+        href={p("/dashboard/teams")}
         title="Voir toutes les équipes"
       >
         Voir tout
-      </button>
+      </a>
     </div>
 
     {#if loading}
@@ -86,12 +82,9 @@
       <div class="py-6 text-center">
         <Users class="mx-auto mb-3 h-12 w-12 opacity-20" />
         <p class="text-base-content/60 text-sm">Aucune équipe ou invitation</p>
-        <button
-          class="btn btn-primary btn-sm mt-3"
-          onclick={goToTeamsManagement}
-        >
+        <a class="btn btn-primary btn-sm mt-3" href={p("/dashboard/teams")}>
           Créer une équipe
-        </button>
+        </a>
       </div>
     {:else}
       <div class="space-y-4">

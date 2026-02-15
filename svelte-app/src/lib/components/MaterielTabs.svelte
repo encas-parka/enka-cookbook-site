@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { navigate, route } from "$lib/router";
+  import { route } from "$lib/router";
   import { nativeTeamsStore as teamsStore } from "$lib/stores/NativeTeamsStore.svelte";
   import { globalState } from "$lib/stores/GlobalState.svelte";
 
@@ -60,20 +60,15 @@
     // Fallback
     return "/dashboard/loans";
   }
-
-  function navigateToTab(index: number) {
-    const path = tabs[index].getPath();
-    navigate(path);
-  }
 </script>
 
 <div class="tabs tabs-lg tabs-border justify-center">
   {#each tabs as tab, index (index)}
-    <button
+    <a
       class="tab font-medium {index === activeTab ? 'tab-active' : ''}"
-      onclick={() => navigateToTab(index)}
+      href={tab.getPath()}
     >
       {tab.label}
-    </button>
+    </a>
   {/each}
 </div>

@@ -190,22 +190,19 @@
     <!-- Permanent Nav Links -->
     <div class=" flex items-center gap-1">
       {#if globalState.isAuthenticated}
-        <button
-          onclick={() => navigate("/dashboard")}
+        <a
+          href={p("/dashboard")}
           class="btn btn-ghost not-md:btn-square md:gap-2"
         >
           <LayoutDashboardIcon size={18} />
           <span class="hidden md:inline">Tableau de bord</span>
-        </button>
+        </a>
       {/if}
 
-      <button
-        onclick={() => navigate("/recipe")}
-        class="btn btn-ghost not-md:btn-square md:gap-2"
-      >
+      <a href={p("/recipe")} class="btn btn-ghost not-md:btn-square md:gap-2">
         <CookingPot size={18} />
         <span class="hidden md:inline">Recettes</span>
-      </button>
+      </a>
     </div>
 
     <!-- Back button (Keep if really needed by some specific page logic) -->
@@ -280,44 +277,32 @@
             </span>
           </li>
           <li>
-            <button
-              onclick={() => navigate("/dashboard")}
-              class="flex items-center gap-2"
-            >
+            <a href={p("/dashboard")} class="flex items-center gap-2">
               <LayoutDashboardIcon size={16} /> Dashboard
-            </button>
+            </a>
           </li>
           <li>
-            <button
-              onclick={() => navigate("/dashboard/teams")}
-              class="flex items-center gap-2"
-            >
+            <a href={p("/dashboard/teams")} class="flex items-center gap-2">
               <UsersIcon size={16} /> Équipes
-            </button>
+            </a>
           </li>
           <li>
-            <button
-              onclick={() => navigate("/dashboard/user")}
-              class="flex items-center gap-2"
-            >
+            <a href={p("/dashboard/user")} class="flex items-center gap-2">
               <UserIcon size={16} /> Mon compte
-            </button>
+            </a>
           </li>
           <li>
-            <button
-              onclick={() => navigate("/dashboard/eventCreate")}
+            <a
+              href={p("/dashboard/eventCreate")}
               class="flex items-center gap-2"
             >
               <PlusIcon size={16} /> Nouvel événement
-            </button>
+            </a>
           </li>
           <li>
-            <button
-              onclick={() => navigate("/recipe")}
-              class="flex items-center gap-2"
-            >
+            <a href={p("/recipe")} class="flex items-center gap-2">
               <BookOpenIcon size={16} /> Recettes
-            </button>
+            </a>
           </li>
           <li>
             <button

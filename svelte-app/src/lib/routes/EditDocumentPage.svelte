@@ -349,10 +349,6 @@
     });
   });
 
-  onDestroy(() => {
-    navBarStore.reset();
-  });
-
   // Enregistrer le gestionnaire de clavier
   $effect(() => {
     window.addEventListener("keydown", handleKeydown);

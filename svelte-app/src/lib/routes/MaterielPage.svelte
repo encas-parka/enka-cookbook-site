@@ -194,10 +194,6 @@
       title: teamName,
     });
   });
-
-  onDestroy(() => {
-    navBarStore.reset();
-  });
 </script>
 
 <!-- Filtres - Sidebar Desktop / Drawer Mobile -->

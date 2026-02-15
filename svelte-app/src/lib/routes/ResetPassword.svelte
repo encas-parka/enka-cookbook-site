@@ -1,5 +1,6 @@
 <script lang="ts">
   import { onMount } from "svelte";
+  import { navBarStore } from "$lib/stores/NavBarStore.svelte";
   import { getAppwriteInstances } from "../services/appwrite";
   import { navigate, route } from "$lib/router";
 
@@ -24,6 +25,7 @@
 
   // Récupérer userId et secret depuis l'URL via sv-router
   onMount(() => {
+    navBarStore.reset();
     userId = route.search.userId || "";
     secret = route.search.secret || "";
     validateRecoveryLink();

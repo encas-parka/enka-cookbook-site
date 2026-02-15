@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { onDestroy, onMount, tick } from "svelte";
+  import { onMount, tick } from "svelte";
   import { SvelteMap } from "svelte/reactivity";
   import { eventsStore } from "$lib/stores/EventsStore.svelte";
   import { recipesStore } from "$lib/stores/RecipesStore.svelte";
@@ -447,11 +447,6 @@
         actions: navActions,
       });
     }
-  });
-
-  // Cleanup nav bar on unmount
-  onDestroy(() => {
-    navBarStore.reset();
   });
 </script>
 

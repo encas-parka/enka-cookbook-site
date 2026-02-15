@@ -28,6 +28,7 @@
     Store,
     UserPlus,
     Users,
+    Printer,
   } from "@lucide/svelte";
   // Store and global state
   import { productsStore } from "$lib/stores/ProductsStore.svelte";
@@ -45,6 +46,7 @@
   import EventStats from "$lib/components/EventStats.svelte";
   import EventInvitationAlert from "$lib/components/EventInvitationAlert.svelte";
   import ActiveFiltersIndicator from "$lib/components/eventProducts/ActiveFiltersIndicator.svelte";
+  import ConfirmModal from "$lib/components/ui/ConfirmModal.svelte";
 
   // Services
   import { UnitConverter } from "$lib/utils/UnitConverter";
@@ -98,6 +100,9 @@
 
   // État local pour le modal d'achat groupé
   let groupPurchaseModalOpen = $state(false);
+
+  // État pour le modal d'impression
+  let printModalOpen = $state(false);
   let groupPurchaseProducts = $state<any[]>([]);
 
   // État local pour le modal d'ajout de produit
@@ -329,6 +334,13 @@
 {#snippet navActions()}
   <div class="flex gap-2">
     <button
+      class="btn btn-circle btn-primary btn-sm"
+      onclick={() => (printModalOpen = true)}
+      title="Imprimer la liste"
+    >
+      <Printer size={18} />
+    </button>
+    <button
       class="btn btn-primary btn-sm"
       onclick={handleOpenAddProductModal}
       title="Ajouter un produit manuellement"
@@ -435,7 +447,7 @@
 
     <!-- Contenu une fois chargé -->
     <div
-      class="rounded-box border-base-300 bg-base-100 flex flex-wrap items-baseline justify-between gap-4 border-2 p-4"
+      class="rounded-box border-base-300 bg-base-100 flex flex-wrap items-baseline justify-between gap-4 border-2 p-4 print:hidden"
     >
       <div class="flex w-full flex-wrap justify-between gap-6">
         <div class="flex flex-wrap items-center gap-8">
@@ -548,7 +560,7 @@
     <InfoCollapse
       title="Aide"
       contentVisible="Page de gestion des produits nécéssaire pour l'événement. Cliquer pour découvrir ce que vous pouvez y faire..."
-      class="shadow-info shadow"
+      class="shadow-info shadow print:hidden"
     >
       <p class="">
         Cette page liste l'ensemble des produits présent dans les recettes de
@@ -619,6 +631,15 @@
       </p>
     </InfoCollapse>
 
+    <!-- header print -->
+    <div class="print-only">
+      <h2 class="text-lg font-bold">
+        Produits pour {eventName}, du {formatDateShort(startDate)} au {formatDateShort(
+          endDate,
+        )}
+      </h2>
+    </div>
+
     <ProductsCards
       {currentEvent}
       onOpenModal={openModal}
@@ -668,7 +689,7 @@
   <GlobalPurchasesModal bind:isOpen={GlobalPurchasesModalisOpen} />
 
   {#if globalState.isDesktop}
-    <div class="fixed bottom-0 left-0 z-50 transition-all">
+    <div class="fixed bottom-0 left-0 z-50 transition-all print:hidden">
       <div
         class="rounded-tr-box bg-blue-100 text-blue-800 {hoverHelp.isExpanded
           ? ' w-fit px-4 py-2'
@@ -707,6 +728,22 @@
     </div>
   {/if}
 </div>
+
+<ConfirmModal
+  isOpen={printModalOpen}
+  title="Imprimer la liste de courses"
+  message="Vous pouvez affiner les produits à imprimer en utilisant les filtres (dates, type, magasin, responsable…). Lors de l'impression, ajustez les options « Marges » et « Échelle » du navigateur pour un rendu optimal."
+  variant="info"
+  confirmLabel="Imprimer"
+  cancelLabel="Annuler"
+  onConfirm={() => {
+    printModalOpen = false;
+    setTimeout(() => {
+      window.print();
+    }, 300);
+  }}
+  onCancel={() => (printModalOpen = false)}
+/>
 
 <style>
   ul {

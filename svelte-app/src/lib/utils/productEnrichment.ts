@@ -45,9 +45,12 @@ export function createEnrichedProductFromAppwrite(
   // Parser les specs (métadonnées manuelles)
   const specsParsed = safeJsonParse<ManualSpecs>(product.specs) ?? null;
 
-  // Calculer depuis purchases
+  // Calculer depuis purchases (en filtrant les supprimés)
+  const activePurchases = (product.purchases ?? []).filter(
+    (p) => p.status !== "deleted",
+  );
   const totalPurchasesArray = calculateTotalQuantityArray(
-    transformPurchasesToNumericQuantity(product.purchases ?? []),
+    transformPurchasesToNumericQuantity(activePurchases),
   );
 
   // byDate manquant = pas de totalNeededArray par défaut
@@ -165,8 +168,11 @@ export function updateExistingProduct(
   // Utiliser les nouvelles valeurs si présentes, sinon garder les anciennes
   // Cela protège contre l'écrasement par les payloads partiels du realtime
 
-  // Fusion intelligente des purchases
-  const mergedPurchases = product.purchases ?? existing.purchases;
+  // Fusion intelligente des purchases (en filtrant les supprimés)
+  const rawPurchases = product.purchases ?? existing.purchases;
+  const mergedPurchases = (rawPurchases ?? []).filter(
+    (p) => p.status !== "deleted",
+  );
 
   // Fusion intelligente des specs
   const mergedSpecs = product.specs ?? existing.specs;
@@ -176,7 +182,7 @@ export function updateExistingProduct(
 
   // Calculer totalPurchasesArray depuis les purchases fusionnées
   const totalPurchasesArray = calculateTotalQuantityArray(
-    transformPurchasesToNumericQuantity(mergedPurchases ?? []),
+    transformPurchasesToNumericQuantity(mergedPurchases),
   );
   const displayTotalPurchases = formatTotalQuantity(totalPurchasesArray);
 
@@ -298,9 +304,12 @@ export function updateExistingProduct(
  * Recalcule les dépendances liées aux purchases pour un produit
  */
 export function recalculatePurchaseDependents(product: EnrichedProduct): void {
-  // Recalculer totalPurchasesArray
+  // Recalculer totalPurchasesArray (en filtrant les supprimés)
+  const activePurchases = (product.purchases ?? []).filter(
+    (p) => p.status !== "deleted",
+  );
   product.totalPurchasesArray = calculateTotalQuantityArray(
-    transformPurchasesToNumericQuantity(product.purchases ?? []),
+    transformPurchasesToNumericQuantity(activePurchases),
   );
 
   // 🎯 Priorité : Override manuel > Calcul auto

@@ -1,7 +1,7 @@
 ---
 title: Chorba  agneau boulgour
-date: '2026-02-15T18:01:08.568Z'
-draft: false
+date: '2026-02-15T18:01:27.576Z'
+draft: true
 typeR: plat
 categories:
   - Soupe
@@ -216,7 +216,7 @@ preparation24h: Faire tremper les pois chiche la veille.
 permissionWrite:
   - 6931ecdccd2c8d8d15e5
 createdAt: '2026-02-15T17:56:10.312+00:00'
-updatedAt: '2026-02-15T18:01:08.185+00:00'
+updatedAt: '2026-02-15T18:01:27.219+00:00'
 createdBy: 6931ecdccd2c8d8d15e5
 teams: []
 status: public

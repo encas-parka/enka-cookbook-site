@@ -24,7 +24,7 @@
   const isSearchActive = $derived(productsStore.isSearchActive);
 </script>
 
-<div class="mt-16 mb-4 flex items-center justify-between">
+<div class="my-4 mt-12 flex items-center justify-between">
   <h3 class="flex items-center gap-2 text-lg font-semibold">
     <FunnelIcon class="h-5 w-5" />
     Filtres
@@ -93,7 +93,7 @@
         <span class="label-text">Statut :</span>
       </label>
       <div
-        class="bg-base-100 flex gap-1 rounded-xl p-2 font-semibold"
+        class="bg-base-100 flex flex-wrap gap-1 rounded-xl p-2 font-semibold"
         id="completion-status"
       >
         <button

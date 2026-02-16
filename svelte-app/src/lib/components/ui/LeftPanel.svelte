@@ -1,7 +1,13 @@
 <script lang="ts">
   import type { Snippet } from "svelte";
-  import { FunnelIcon, FunnelX, PanelLeftClose, X } from "@lucide/svelte";
+  import { FunnelIcon, PanelLeftClose } from "@lucide/svelte";
   import { globalState } from "$lib/stores/GlobalState.svelte";
+  import {
+    Drawer,
+    DrawerOverlay,
+    DrawerContent,
+    DrawerHandle,
+  } from "@abhivarde/svelte-drawer";
 
   let filtersDrawerOpen = $state(false);
 
@@ -12,47 +18,45 @@
   }
   let { children, width = "80", bgClass = "bg-base-200" }: Props = $props();
 
-  const panelWidth = $derived("w-" + width);
+  // On supporte soit les classes Tailwind standards (w-80), soit des valeurs arbitraires (w-[120px])
+  const panelWidth = $derived(width.includes("[") ? width : "w-" + width);
 </script>
 
 {#if globalState.isDesktop}
   <!-- Conteneur fixe à gauche avec overflow -->
   <div
-    class="{bgClass} {panelWidth
-      ? panelWidth
-      : 'w-100'} fixed top-0 left-0 z-40 h-dvh overflow-y-auto p-4 pb-12 print:hidden"
+    class="{bgClass} {panelWidth} fixed top-0 left-0 z-40 h-dvh overflow-y-auto p-4 pb-12 print:hidden"
   >
     {@render children?.()}
   </div>
 {:else}
-  <div class="drawer">
-    <input
-      id="filters-drawer"
-      type="checkbox"
-      class="drawer-toggle"
-      bind:checked={filtersDrawerOpen}
-    />
-
-    <div class="drawer-side">
-      <label for="filters-drawer" class="drawer-overlay"></label>
-
-      <div class="menu bg-base-200 h-screen w-[95vw] p-4">
+  <!-- Implementation Mobile via svelte-drawer (Portal) -->
+  <Drawer bind:open={filtersDrawerOpen} direction="left">
+    <DrawerOverlay class="fixed inset-0 z-50 bg-black/40 backdrop-blur-sm" />
+    <DrawerContent
+      class="fixed top-0 bottom-0 left-0 z-50 flex w-[90vw] max-w-[400px] flex-col shadow-2xl {bgClass}"
+    >
+      <div class="h-full overflow-y-auto p-4 pb-24">
+        <div class="mb-4 flex justify-center">
+          <DrawerHandle />
+        </div>
         {@render children?.()}
       </div>
-    </div>
-  </div>
+    </DrawerContent>
+  </Drawer>
 
   <!-- FAB flottant pour mobile -->
   <div class="fixed bottom-10 left-[2%] z-50 print:hidden">
-    <label
-      for="filters-drawer"
+    <button
       class="btn btn-primary btn-circle btn-lg shadow-lg"
+      onclick={() => (filtersDrawerOpen = !filtersDrawerOpen)}
+      aria-label="Ouvrir les filtres"
     >
       {#if filtersDrawerOpen}
         <PanelLeftClose class="h-6 w-6" />
       {:else}
         <FunnelIcon class="h-6 w-6" />
       {/if}
-    </label>
+    </button>
   </div>
 {/if}

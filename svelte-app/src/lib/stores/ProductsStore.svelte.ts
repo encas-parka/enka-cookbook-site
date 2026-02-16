@@ -1102,13 +1102,36 @@ class ProductsStore {
    * Gère la suppression d'un purchase (marqué deleted = true)
    */
   async #applyPurchaseDeleted(purchaseId: string): Promise<string[]> {
-    // Trouver et re-enrichir les produits affectés
+    // 0. Gérer les achats orphelins (dépenses)
+    if (this.#orphanPurchases.has(purchaseId)) {
+      this.#orphanPurchases.delete(purchaseId);
+    }
+
+    // 1. Trouver les produits affectés
     const affectedProducts = Array.from(this.#enrichedProducts.values())
       .map((m) => m.data)
       .filter((p) => p.purchases?.some((pur) => pur.$id === purchaseId));
 
     affectedProducts.forEach((product) => {
-      this.#upsertEnrichedProduct(product as any);
+      // Créer une nouvelle liste sans le purchase supprimé
+      const updatedPurchases = (product.purchases || []).filter(
+        (p) => p.$id !== purchaseId,
+      );
+
+      // Recalculer le produit enrichi sans ce purchase
+      const updatedProduct = updateExistingProduct(
+        {
+          ...product,
+          purchases: updatedPurchases,
+        },
+        product,
+      );
+
+      // Mettre à jour le modèle (réactif)
+      const model = this.#enrichedProducts.get(product.$id);
+      if (model) {
+        model.update(updatedProduct);
+      }
     });
 
     // Retourner les IDs des produits affectés pour persistence
@@ -1275,10 +1298,6 @@ class ProductsStore {
 
       // TODO: on ne delete pas les purchase, on les marque deleted = true
       onPurchaseDelete: async (purchaseId: string) => {
-        if (this.#orphanPurchases.has(purchaseId)) {
-          this.#orphanPurchases.delete(purchaseId);
-          return;
-        }
         const affectedIds = await this.#applyPurchaseDeleted(purchaseId);
         await this.#persistAffectedProducts(affectedIds);
       },
@@ -1809,6 +1828,22 @@ class ProductsStore {
     }
 
     if (!targetProductId) {
+      // Vérifier si c'est un achat orphelin (dépense)
+      if (this.#orphanPurchases.has(purchaseId)) {
+        const existing = this.#orphanPurchases.get(purchaseId)!;
+        const updated = {
+          ...existing,
+          ...updates,
+          $updatedAt: new Date().toISOString(),
+        };
+
+        if (updated.status === "deleted") {
+          this.#orphanPurchases.delete(purchaseId);
+        } else {
+          this.#orphanPurchases.set(purchaseId, updated);
+        }
+        return;
+      }
       throw new Error(`Purchase ${purchaseId} introuvable`);
     }
 
@@ -1892,6 +1927,16 @@ class ProductsStore {
     if (isDemoEvent(this.#currentEventId)) {
       return await this.deletePurchaseLocal(purchaseId);
     } else {
+      // Optimistic update : on applique localement immédiatement pour la réactivité
+      try {
+        await this.deletePurchaseLocal(purchaseId);
+      } catch (err) {
+        console.warn(
+          "[ProductsStore] Optimistic delete failed or purchase not found locally:",
+          err,
+        );
+      }
+
       // Pseudo-suppression : on met à jour le statut au lieu de supprimer physiquement
       const { updatePurchase } = await import("../services/appwrite-products");
       await updatePurchase(purchaseId, { status: "deleted" });

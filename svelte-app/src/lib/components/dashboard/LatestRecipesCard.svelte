@@ -107,11 +107,11 @@
   >
     <div class="min-w-0 flex-1">
       <div class="flex flex-wrap items-center gap-x-10 gap-y-2">
-        <div class="text-primary flex items-center gap-2">
+        <div class="text-primary flex flex-wrap items-center gap-x-2">
           <svg class="text-primary h-4 w-4 shrink-0">
             <use href={`/icons/sprite.svg#${iconInfo.iconId}`} />
           </svg>
-          <div class="truncate text-sm font-medium">
+          <div class="truncate text-sm font-medium text-wrap">
             {recipe.title}
           </div>
           {#if recipe.versionLabel}

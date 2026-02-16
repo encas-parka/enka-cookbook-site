@@ -323,7 +323,7 @@
   <div class="mx-auto h-full max-w-4xl">
     <div class="mb-10 space-y-6">
       <!-- Tabs de filtrage par type -->
-      <div class="tabs tabs-border tabs-lg mb-6 font-bold">
+      <div class="tabs tabs-border tabs-lg mb-6 flex-wrap font-bold">
         <button
           class="tab {filters.typeR === '' ? 'tab-active' : ''}"
           onclick={() => (filters.typeR = "")}

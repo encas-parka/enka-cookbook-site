@@ -265,7 +265,7 @@
   <div class="print:hidden">
     <LeftPanel width="120">
       <!-- Champ de recherche par ingrédient avec autocomplétion -->
-      <div class="mt-16 mb-6">
+      <div class="my-6">
         <h3 class="mb-3 text-lg font-semibold">Rechercher par ingrédient</h3>
 
         <div class="relative">
@@ -289,9 +289,7 @@
       </div>
 
       <!-- Sommaire réactif des recettes avec filtrage -->
-      <ul
-        class="menu bg-base-100 rounded-box w-100 max-w-[88dvw] drop-shadow-lg"
-      >
+      <ul class="menu bg-base-100 rounded-box drop-shadow-lg">
         {#each Array.from(mealsByDate.entries()) as [date, times] (date)}
           <li>
             <button
@@ -314,7 +312,7 @@
             {#each Array.from((times as Map<string, any[]>).entries()) as [time, meals] (time)}
               <li>
                 <button
-                  class="btn btn-sm justify-start pl-4 {selectedDateFilter ===
+                  class="btn btn-sm mb-1 h-auto justify-start pl-4 {selectedDateFilter ===
                     date && selectedTimeFilter === time
                     ? 'btn-accent'
                     : 'btn-ghost '}"
@@ -344,7 +342,7 @@
                   {#if recipe}
                     <li>
                       <button
-                        class="btn btn-sm ml-8 justify-start {selectedMealRecipeFilter ===
+                        class="btn btn-sm mb-1 ml-8 justify-start {selectedMealRecipeFilter ===
                         mealRecipeKey
                           ? 'btn-accent'
                           : 'btn-ghost'}"
@@ -358,7 +356,7 @@
                           selectedIngredient = ""; // Réinitialiser le filtre d'ingrédient
                         }}
                       >
-                        <span class="max-w-75 truncate text-left">
+                        <span class="truncate text-left text-wrap">
                           {recipe.title}
                         </span>
                       </button>
@@ -514,7 +512,7 @@
 
           <!-- filtre en cours -->
           {#if selectedDateFilter || selectedTimeFilter || selectedMealRecipeFilter || selectedIngredient}
-            <div class="m-4 flex items-center justify-center gap-2">
+            <div class="m-4 flex flex-wrap items-center justify-center gap-2">
               <div class="badge badge-xl badge-primary">
                 <Funnel class="mr-1 h-4 w-4" />
                 filtre :

@@ -29,7 +29,9 @@
   );
 </script>
 
-<div class="flex flex-wrap items-center justify-end gap-x-2 gap-y-1 text-sm">
+<div
+  class="ms-auto flex flex-wrap items-center justify-end gap-x-2 gap-y-1 text-sm"
+>
   <!-- Badges Régimes -->
   {#each filteredRegimes as regime, index (index)}
     <span

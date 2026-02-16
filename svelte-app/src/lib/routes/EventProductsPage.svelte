@@ -1,78 +1,60 @@
 <script lang="ts">
   import {
     BadgeEuro,
+    Calendar,
+    CircleAlert,
     CircleCheck,
     CircleX,
     ClipboardCheck,
     Clock,
-    LayoutList,
-    Loader2,
+    Funnel,
+    Info,
     MessageCircleQuestionMark,
     Package,
     PackageCheck,
-    Receipt,
-    ShoppingCart,
-    SquarePen,
     Plus,
-    Calendar,
-    CircleHelp,
-    HelpCircle,
-    Info,
-    X,
-    PanelRightClose,
-    EyeClosed,
-    SquareArrowOutUpRight,
-    Triangle,
-    CircleAlert,
-    Funnel,
-    Store,
-    UserPlus,
-    Users,
     Printer,
+    ShoppingCart,
+    Store,
+    Users,
+    X,
   } from "@lucide/svelte";
   // Store and global state
   import { productsStore } from "$lib/stores/ProductsStore.svelte";
 
   // Components
-  import { globalState, hoverHelp } from "$lib/stores/GlobalState.svelte";
-  import GroupPurchaseModal from "$lib/components/eventProducts/GroupPurchaseModal.svelte";
-  import AddProductModal from "$lib/components/eventProducts/AddProductModal.svelte";
-  import ProductModal from "$lib/components/eventProducts/ProductModal.svelte";
-  import ProductsFilters from "$lib/components/eventProducts/ProductsFilters.svelte";
-  import ProductsCards from "$lib/components/eventProducts/ProductsCards.svelte";
-  import StoreBatchEditModal from "$lib/components/eventProducts/StoreBatchEditModal.svelte";
-  import WhoBatchEditModal from "$lib/components/eventProducts/WhoBatchEditModal.svelte";
-  import GlobalPurchasesModal from "$lib/components/eventProducts/GlobalPurchasesModal.svelte";
-  import EventStats from "$lib/components/EventStats.svelte";
   import EventInvitationAlert from "$lib/components/EventInvitationAlert.svelte";
   import ActiveFiltersIndicator from "$lib/components/eventProducts/ActiveFiltersIndicator.svelte";
+  import AddProductModal from "$lib/components/eventProducts/AddProductModal.svelte";
+  import GlobalPurchasesModal from "$lib/components/eventProducts/GlobalPurchasesModal.svelte";
+  import GroupPurchaseModal from "$lib/components/eventProducts/GroupPurchaseModal.svelte";
+  import ProductModal from "$lib/components/eventProducts/ProductModal.svelte";
+  import ProductsCards from "$lib/components/eventProducts/ProductsCards.svelte";
+  import ProductsFilters from "$lib/components/eventProducts/ProductsFilters.svelte";
+  import StoreBatchEditModal from "$lib/components/eventProducts/StoreBatchEditModal.svelte";
+  import WhoBatchEditModal from "$lib/components/eventProducts/WhoBatchEditModal.svelte";
+  import EventStats from "$lib/components/EventStats.svelte";
   import ConfirmModal from "$lib/components/ui/ConfirmModal.svelte";
-
+  import { globalState, hoverHelp } from "$lib/stores/GlobalState.svelte";
   // Services
-  import { UnitConverter } from "$lib/utils/UnitConverter";
-  import { warmUpEnkaData } from "$lib/services/appwrite-warmup";
   import { toastService } from "$lib/services/toast.service.svelte";
+  import { UnitConverter } from "$lib/utils/UnitConverter";
 
   import LeftPanel from "$lib/components/ui/LeftPanel.svelte";
 
+  import { eventsStore } from "$lib/stores/EventsStore.svelte";
   import { onMount } from "svelte";
   import { fade } from "svelte/transition";
-  import { eventsStore } from "$lib/stores/EventsStore.svelte";
 
-  import { route, navigate } from "$lib/router";
+  import { route } from "$lib/router";
 
   import { navBarStore } from "../stores/NavBarStore.svelte";
   import { formatDateShort } from "../utils/products-display";
 
-  import InfoCollapse from "../components/ui/InfoCollapse.svelte";
   import BadgeEventStatus from "../components/ui/BadgeEventStatus.svelte";
+  import InfoCollapse from "../components/ui/InfoCollapse.svelte";
   import { isDemoEvent } from "../data/demo-event-config";
 
-  // Dont work properly
-  const PANEL_WIDTH = "100";
-  const PANEL_SIDE = "ml";
-  const PANEL_SIDE_WIDTH = PANEL_SIDE + "-" + PANEL_WIDTH;
-  // console.log("PANEL_SIDE_WIDTH →", PANEL_SIDE_WIDTH);
   // Mapping des icônes pour les statuts d'achat
   const statusIcons = {
     Package,
@@ -347,7 +329,7 @@
     </button>
   </div>
 {/snippet}
-<LeftPanel width={PANEL_WIDTH}>
+<LeftPanel>
   <ProductsFilters />
 </LeftPanel>
 <ActiveFiltersIndicator />

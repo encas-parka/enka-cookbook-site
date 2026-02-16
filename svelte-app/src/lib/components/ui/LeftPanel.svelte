@@ -14,18 +14,14 @@
   interface Props {
     children?: Snippet;
     bgClass?: string;
-    width?: string;
   }
-  let { children, width = "80", bgClass = "bg-base-200" }: Props = $props();
-
-  // On supporte soit les classes Tailwind standards (w-80), soit des valeurs arbitraires (w-[120px])
-  const panelWidth = $derived(width.includes("[") ? width : "w-" + width);
+  let { children, bgClass = "bg-base-200" }: Props = $props();
 </script>
 
 {#if globalState.isDesktop}
   <!-- Conteneur fixe à gauche avec overflow -->
   <div
-    class="{bgClass} {panelWidth} fixed top-0 left-0 z-40 h-dvh overflow-y-auto p-4 pb-12 print:hidden"
+    class="{bgClass} fixed top-0 left-0 z-40 h-dvh w-md overflow-y-auto p-4 pb-12 print:hidden"
   >
     {@render children?.()}
   </div>
@@ -34,7 +30,7 @@
   <Drawer bind:open={filtersDrawerOpen} direction="left">
     <DrawerOverlay class="fixed inset-0 z-50 bg-black/40 backdrop-blur-sm" />
     <DrawerContent
-      class="fixed top-0 bottom-0 left-0 z-50 flex w-[90vw] max-w-[400px] flex-col shadow-2xl {bgClass}"
+      class="fixed top-0 bottom-0 left-0 z-50 flex w-[90vw] max-w-100 flex-col shadow-2xl {bgClass}"
     >
       <div class="h-full overflow-y-auto p-4 pb-24">
         <div class="mb-4 flex justify-center">

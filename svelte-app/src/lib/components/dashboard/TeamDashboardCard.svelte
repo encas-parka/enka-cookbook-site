@@ -84,7 +84,7 @@
 <div class="card bg-base-100 border-base-200 border shadow-xl">
   <div class="card-body gap-4 max-sm:px-2">
     <!-- === HEADER PRINCIPAL === -->
-    <div class="flex items-start justify-between gap-2">
+    <div class="flex flex-wrap items-start justify-between gap-2">
       <!-- Nom + Localisation -->
       <div class="flex items-center gap-2">
         <Users class="text-primary size-6 shrink-0 stroke-3" />

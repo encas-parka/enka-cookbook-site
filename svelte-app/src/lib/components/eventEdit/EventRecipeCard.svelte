@@ -119,7 +119,7 @@
         class="flex flex-wrap items-baseline justify-between gap-4 print:gap-1"
       >
         <div class="flex min-w-2/3 flex-1 gap-2">
-          <svg class="size-6">
+          <svg class="size-6 shrink-0">
             <use href={`/icons/sprite.svg#${typeDisplay.iconId}`} />
           </svg>
           <div class="text-xl font-bold">{recipe.title}</div>

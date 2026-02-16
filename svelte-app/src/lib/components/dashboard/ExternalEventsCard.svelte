@@ -93,7 +93,7 @@
   <!-- Affichage normal avec événements -->
   <div class="card bg-base-100 border-base-200 mb-6 border shadow-xl">
     <div class="card-body">
-      <div class="mb-4 flex items-center justify-between">
+      <div class="mb-4 flex flex-wrap items-center justify-between">
         <div class="flex items-center gap-3">
           <Calendar class="text-primary h-6 w-6 stroke-3" />
           <div>
@@ -116,7 +116,7 @@
 
         <!-- Bouton toggle -->
         {#if teamEvents.length > 0}
-          <button class="btn btn-sm" onclick={toggleEventsView}>
+          <button class="btn btn-sm ms-auto" onclick={toggleEventsView}>
             {#if showAllEvents}
               Voir les invitations externes uniquement
             {:else}

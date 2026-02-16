@@ -328,9 +328,9 @@
 </script>
 
 {#snippet navActions()}
-  <div class="flex gap-2">
+  <div class="flex items-center gap-2">
     <button
-      class="btn btn-circle btn-primary btn-sm"
+      class="btn btn-circle btn-primary"
       onclick={() => (printModalOpen = true)}
       title="Imprimer la liste"
     >

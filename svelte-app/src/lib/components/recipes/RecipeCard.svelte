@@ -29,7 +29,7 @@
     <h3
       class="text-primary bg-base-100 rounded-t-box border-t-base-300 absolute -top-4 left-0 flex max-w-4/5 items-center-safe gap-3 border-t py-0.5 ps-4 pe-6"
     >
-      <svg class="inline size-6 shrink-0">
+      <svg class="inline size-6">
         <use href={`/icons/sprite.svg#${typeDisplay.iconId}`} />
       </svg>
       {recipe.title}
@@ -39,7 +39,7 @@
     </h3>
 
     <div
-      class="bg-base-100 rounded-t-box border-base-300 absolute -top-4 right-0 border-t-1 px-1"
+      class="bg-base-100 rounded-t-box border-base-300 absolute -top-4 right-0 border-t px-1"
     >
       {#if recipe.regime}
         <RecipeRegimeBadges regimes={recipe.regime} iconOnly />
@@ -49,18 +49,21 @@
 
   <!-- Header -->
   <div class=" flex flex-wrap items-center justify-between gap-4 @md:my-2">
-    <div class="min-w-72 flex-1">
+    <div class="min-w-1/2 flex-1">
       <!-- title mobile-->
       {#if !globalState.isDesktop}
         <div class="flex gap-4">
           <div
             class="text-primary mb-2 inline-flex flex-wrap items-center-safe gap-2 text-lg font-semibold"
           >
-            <div class="items-start-safe inline-flex gap-2">
-              <svg class="mt-0.5 size-6 min-w-6">
+            <div class="inline-flex items-start gap-x-2 leading-5">
+              <svg class="size-6 shrink-0 sm:mt-0.5">
                 <use href={`/icons/sprite.svg#${typeDisplay.iconId}`} />
               </svg>
               {recipe.title}
+              {#if recipe.versionLabel}
+                • {recipe.versionLabel}
+              {/if}
             </div>
             {#if recipe.draft}
               <div class="badge badge-accent badge-outline badge-sm">
@@ -75,11 +78,6 @@
       {/if}
       <div class=" flex flex-col">
         <div class="">
-          {#if recipe.versionLabel}
-            <span class="text-primary text-base font-bold">
-              {recipe.versionLabel}
-            </span>
-          {/if}
           {#if recipe.auteur}
             <span
               class={recipe.auteur === globalState.userName
@@ -88,7 +86,7 @@
             >
           {/if}
         </div>
-        <div class="text-base-content/60 text-sm">
+        <div class="text-base-content/60 text-sm text-wrap">
           {#if recipe.check}
             <p>
               testée pour {recipe.plate}

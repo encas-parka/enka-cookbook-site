@@ -1,6 +1,6 @@
 ---
 title: A nouvelle recette locale de qaldek
-date: '2026-02-16T11:29:34.374Z'
+date: '2026-02-16T11:30:05.949Z'
 draft: true
 typeR: plat
 categories:
@@ -10,7 +10,7 @@ regime:
   - sans-gluten
   - sans-lactose
 plate: 100
-quantite_desc: null
+quantite_desc: desc desc
 check: true
 cuisson: false
 serveHot: true
@@ -76,7 +76,7 @@ preparation24h: null
 permissionWrite:
   - 693200b700222efe46a2
 createdAt: '2026-01-29T14:27:07.485+00:00'
-updatedAt: '2026-02-16T11:29:33.732+00:00'
+updatedAt: '2026-02-16T11:30:05.074+00:00'
 createdBy: 693200b700222efe46a2
 teams: []
 status: public

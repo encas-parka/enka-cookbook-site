@@ -197,7 +197,7 @@
 </script>
 
 <!-- Filtres - Sidebar Desktop / Drawer Mobile -->
-<LeftPanel width="100">
+<LeftPanel>
   <MaterielFilters
     bind:filters
     disabled={false}
@@ -209,7 +209,7 @@
 </LeftPanel>
 
 <!-- Contenu principal -->
-<div class="p-4 lg:ml-100" transition:fade>
+<div class="p-4 lg:ml-120" transition:fade>
   <div class="mx-auto max-w-7xl px-4 py-8">
     <!-- Tabs par équipe (seulement si plus d'une équipe) -->
     {#if userTeams.length > 1}

@@ -307,7 +307,7 @@
 {/snippet}
 
 <!-- Filtres - Sidebar Desktop / Drawer Mobile -->
-<LeftPanel width="100">
+<LeftPanel>
   <RecipeFilters
     bind:filters
     disabled={filtersDisabled}
@@ -319,8 +319,9 @@
 </LeftPanel>
 
 <!-- Contenu principal -->
-<div class="relative z-0 p-4 lg:ml-100" in:fade>
+<div class="relative z-0 p-4 lg:ml-120" in:fade>
   <div class="mx-auto h-full max-w-4xl">
+    <!-- header -->
     <div class="mb-10 space-y-6">
       <!-- Tabs de filtrage par type -->
       <div class="tabs tabs-border tabs-lg mb-6 flex-wrap font-bold">

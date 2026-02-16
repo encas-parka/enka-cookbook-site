@@ -477,7 +477,7 @@
   </div>
 {:else if event}
   <!-- Left Panel for Configuration -->
-  <LeftPanel bgClass="bg-base-200" width="120">
+  <LeftPanel bgClass="bg-base-200">
     <PosterConfiguration
       bind:config
       {versions}

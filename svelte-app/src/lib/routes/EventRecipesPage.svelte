@@ -263,7 +263,7 @@
 <div class="bg-base-200 min-h-screen" in:fade>
   <!-- LeftPanel avec recherche et sommaire -->
   <div class="print:hidden">
-    <LeftPanel width="120">
+    <LeftPanel>
       <!-- Champ de recherche par ingrédient avec autocomplétion -->
       <div class="my-6">
         <h3 class="mb-3 text-lg font-semibold">Rechercher par ingrédient</h3>

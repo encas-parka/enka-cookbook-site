@@ -1,6 +1,6 @@
 ---
 title: A nouvelle recette locale de qaldek
-date: '2026-02-16T11:08:15.617Z'
+date: '2026-02-16T11:11:47.958Z'
 draft: true
 typeR: plat
 categories:
@@ -15,7 +15,7 @@ check: true
 cuisson: false
 serveHot: true
 description: 'test : sur quelle branche c''est git en local dse '
-region: run
+region: run TTT
 saison:
   - ete
 id: a-nouvelle-recette-loc_aw4xvwe0tyhf
@@ -76,7 +76,7 @@ preparation24h: null
 permissionWrite:
   - 693200b700222efe46a2
 createdAt: '2026-01-29T14:27:07.485+00:00'
-updatedAt: '2026-02-16T11:08:15.103+00:00'
+updatedAt: '2026-02-16T11:11:47.638+00:00'
 createdBy: 693200b700222efe46a2
 teams: []
 status: public

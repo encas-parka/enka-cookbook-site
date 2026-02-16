@@ -4,6 +4,7 @@
   import RecipeRegimeBadges from "./RecipeRegimeBadges.svelte";
   import { getTypeDisplay } from "$lib/utils/recipeUtils";
   import { globalState } from "@/lib/stores/GlobalState.svelte";
+  import { formatAuthorForDisplay } from "$lib/utils/utils";
 
   interface Props {
     recipe: RecipeIndexEntry;
@@ -15,6 +16,11 @@
   // Récupérer l'affichage avec la priorité : catégorie > type
   const typeDisplay = $derived(
     getTypeDisplay(recipe.typeR, recipe.categories || undefined),
+  );
+
+  // Formater l'auteur en masquant les emails
+  const formattedAuthor = $derived(
+    recipe.auteur ? formatAuthorForDisplay(recipe.auteur) : "",
   );
 </script>
 
@@ -48,8 +54,8 @@
   {/if}
 
   <!-- Header -->
-  <div class=" flex flex-wrap items-center justify-between gap-4 @md:my-2">
-    <div class="min-w-2/3 flex-1">
+  <div class=" flex flex-wrap items-start justify-between gap-4 align-top">
+    <div class="flex-1 max-sm:min-w-2/3">
       <!-- title mobile-->
       {#if !globalState.isDesktop}
         <div class="flex gap-4">
@@ -65,13 +71,13 @@
                 {#if recipe.versionLabel}
                   • {recipe.versionLabel}
                 {/if}
+                {#if recipe.draft}
+                  <div class="badge badge-accent badge-outline badge-sm ms-1">
+                    brouillon
+                  </div>
+                {/if}
               </div>
             </div>
-            {#if recipe.draft}
-              <div class="badge badge-accent badge-outline badge-sm">
-                brouillon
-              </div>
-            {/if}
           </div>
           {#if recipe.regime}
             <RecipeRegimeBadges regimes={recipe.regime} iconOnly />
@@ -80,11 +86,11 @@
       {/if}
       <div class=" flex flex-col">
         <div class="">
-          {#if recipe.auteur}
+          {#if formattedAuthor}
             <span
               class={recipe.auteur === globalState.userName
                 ? "text-accent font-semibold"
-                : "text-base-content/70 "}>de {recipe.auteur}</span
+                : "text-base-content/70 "}>de {formattedAuthor}</span
             >
           {/if}
         </div>
@@ -131,9 +137,13 @@
         {/if}
 
         {#if recipe.saison}
-          {#each recipe.saison as saison}
-            <span class="badge badge-soft badge-accent">{saison}</span>
-          {/each}
+          {#if recipe.saison.length === 4}
+            <span class="badge badge-soft badge-accent">Toutes saisons</span>
+          {:else}
+            {#each recipe.saison as saison}
+              <span class="badge badge-soft badge-accent">{saison}</span>
+            {/each}
+          {/if}
         {/if}
       </div>
     </div>

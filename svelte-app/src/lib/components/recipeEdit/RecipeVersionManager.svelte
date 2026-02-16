@@ -11,6 +11,7 @@
     formatDateWdDayMonthShort,
   } from "$lib/utils/date-helpers";
   import { p } from "$lib/router";
+  import { formatAuthorForDisplay } from "$lib/utils/utils";
 
   interface Props {
     recipe: any;
@@ -313,7 +314,11 @@
 
                 <!-- Auteur et date de création -->
                 <div class="flex items-center gap-2 text-xs opacity-60">
-                  <span>Par {variant.auteur || "inconnu"}</span>
+                  <span
+                    >Par {formatAuthorForDisplay(
+                      variant.auteur || "inconnu",
+                    )}</span
+                  >
                   <span>•</span>
                   <span title={variant.$createdAt}>
                     {formatDateRelative(variant.$createdAt || "")}

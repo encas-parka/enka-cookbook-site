@@ -47,11 +47,31 @@ export function createStorageKey(baseKey: string, mainId: string): string {
   return `${baseKey}_${mainId}`;
 }
 
-
 /**
  * Vérifie si une adresse email est valide
  */
 export function isValidEmail(email: string): boolean {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   return emailRegex.test(email);
+}
+
+/**
+ * Formate l'auteur pour l'affichage en extrayant la partie avant l'@
+ * @param author - Nom d'utilisateur ou email de l'auteur
+ * @returns Le nom d'utilisateur ou la partie avant l'@
+ * @example
+ * formatAuthorForDisplay("jean.dupont") // "jean.dupont"
+ * formatAuthorForDisplay("jean@example.com") // "jean"
+ */
+export function formatAuthorForDisplay(author: string): string {
+  if (!author) return "";
+
+  // Si c'est un email, extraire uniquement la partie avant l'@
+  if (isValidEmail(author)) {
+    const [localPart] = author.split("@");
+    return localPart || author;
+  }
+
+  // Ce n'est pas un email, retourner tel quel (nom d'utilisateur)
+  return author;
 }

@@ -307,7 +307,7 @@
         saison: recipe.saison,
         ingredients: ingredientsToAppwrite(recipe.ingredients),
         quantite_desc: recipe.quantite_desc,
-        auteur: recipe.auteur,
+        auteur: globalState.userName, // Utiliser le userName actuel plutôt que l'ancienne valeur
         preparation24h: recipe.preparation24h,
         astuces: astucesToAppwrite(recipe.astuces),
         prepAlt: recipe.prepAlt,

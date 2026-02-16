@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { formatAuthorForDisplay } from "$lib/utils/utils";
+
   interface Props {
     auteur?: string | null;
     createdBy?: string | null;
@@ -8,6 +10,14 @@
   }
 
   let { auteur, createdBy, id, createdAt, updatedAt }: Props = $props();
+
+  // Formater l'auteur en masquant les emails
+  const formattedAuthor = $derived(
+    auteur ? formatAuthorForDisplay(auteur) : null,
+  );
+  const formattedCreatedBy = $derived(
+    createdBy ? formatAuthorForDisplay(createdBy) : null,
+  );
 </script>
 
 <div class="bg-base-200 rounded-box mt-12 p-6 text-sm opacity-60 print:hidden">
@@ -16,7 +26,7 @@
   >
     <div>
       <span class="font-semibold">Auteur :</span>
-      {auteur || createdBy || "Inconnu"}
+      {formattedAuthor || formattedCreatedBy || "Inconnu"}
     </div>
     <div>
       <span class="font-semibold">ID :</span>

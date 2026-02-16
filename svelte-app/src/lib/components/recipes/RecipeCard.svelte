@@ -49,21 +49,23 @@
 
   <!-- Header -->
   <div class=" flex flex-wrap items-center justify-between gap-4 @md:my-2">
-    <div class="min-w-1/2 flex-1">
+    <div class="min-w-2/3 flex-1">
       <!-- title mobile-->
       {#if !globalState.isDesktop}
         <div class="flex gap-4">
           <div
-            class="text-primary mb-2 inline-flex flex-wrap items-center-safe gap-2 text-lg font-semibold"
+            class="text-primary mb-2 inline-flex flex-wrap items-start gap-2 text-lg font-semibold"
           >
             <div class="inline-flex items-start gap-x-2 leading-5">
-              <svg class="size-6 shrink-0 sm:mt-0.5">
+              <svg class="mt-0.5 size-6 shrink-0">
                 <use href={`/icons/sprite.svg#${typeDisplay.iconId}`} />
               </svg>
-              {recipe.title}
-              {#if recipe.versionLabel}
-                • {recipe.versionLabel}
-              {/if}
+              <div>
+                {recipe.title}
+                {#if recipe.versionLabel}
+                  • {recipe.versionLabel}
+                {/if}
+              </div>
             </div>
             {#if recipe.draft}
               <div class="badge badge-accent badge-outline badge-sm">
@@ -142,15 +144,13 @@
   {#if recipe.ingredients && recipe.ingredients.length > 0}
     <div class="my-1 text-sm">
       <span class="font-semibold">Ingrédients : </span>
-      {#each recipe.ingredients as ingredient, index}
-        <span
-          class="me-1 wrap-break-word"
-          class:font-bold={highlightedIngredients.includes(ingredient)}
-          class:underline={highlightedIngredients.includes(ingredient)}
-        >
-          {ingredient}{#if index < recipe.ingredients.length - 1},{/if}
-        </span>
-      {/each}
+      <div class="flex flex-wrap">
+        {#each recipe.ingredients as ingredient, index}
+          <span class="break-word me-1">
+            {ingredient}{#if index < recipe.ingredients.length - 1},{/if}
+          </span>
+        {/each}
+      </div>
     </div>
   {/if}
 
@@ -158,12 +158,13 @@
   {#if recipe.materiel && recipe.materiel.length > 0}
     <div class="text-sm">
       <span class="font-semibold">Matériel : </span>
-      {#each recipe.materiel as item, index}
-        <span class="me-1">
-          {item}{#if index < recipe.materiel.length - 1},
-          {/if}
-        </span>
-      {/each}
+      <div class="flex flex-wrap">
+        {#each recipe.materiel as item, index}
+          <span class="break-word me-1">
+            {item}{#if index < recipe.materiel.length - 1},{/if}
+          </span>
+        {/each}
+      </div>
     </div>
   {/if}
 </a>

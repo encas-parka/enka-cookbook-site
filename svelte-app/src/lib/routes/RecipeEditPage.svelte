@@ -312,6 +312,8 @@
         astuces: astucesToAppwrite(recipe.astuces),
         prepAlt: recipe.prepAlt,
         $id: recipe.$id,
+        // Libérer le lock atomiquement avec la sauvegarde
+        lockedBy: null,
       };
 
       const updated = await updateRecipeAppwrite(
@@ -346,8 +348,12 @@
         message: "Recette sauvegardée !",
       });
 
-      // Libérer le verrou
-      await releaseLock();
+      // Attendre que le realtime propage la mise à jour avant de rediriger
+      // pour éviter les race conditions avec le cache
+      await new Promise((resolve) => setTimeout(resolve, 500));
+
+      // Rediriger vers la page de consultation
+      navigate(`/recipe/${recipeId}`);
     } catch (error) {
       console.error("Erreur sauvegarde:", error);
       toastService.update(toastId, {

@@ -1,6 +1,6 @@
 ---
 title: A nouvelle recette locale de qaldek
-date: '2026-02-16T11:30:18.199Z'
+date: '2026-02-16T11:30:37.286Z'
 draft: true
 typeR: plat
 categories:
@@ -11,9 +11,9 @@ regime:
   - sans-lactose
 plate: 100
 quantite_desc: desc desc
-check: false
-cuisson: false
-serveHot: true
+check: true
+cuisson: true
+serveHot: false
 description: 'test : sur quelle branche c''est git en local dse '
 region: run TTT
 saison:
@@ -72,11 +72,11 @@ preparation: |-
   \### 🎯 Avantages
 prepAlt: []
 astuces: []
-preparation24h: null
+preparation24h: 'ah ah ah '
 permissionWrite:
   - 693200b700222efe46a2
 createdAt: '2026-01-29T14:27:07.485+00:00'
-updatedAt: '2026-02-16T11:30:17.514+00:00'
+updatedAt: '2026-02-16T11:30:36.648+00:00'
 createdBy: 693200b700222efe46a2
 teams: []
 status: public

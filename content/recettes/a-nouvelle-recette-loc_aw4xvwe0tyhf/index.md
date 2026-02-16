@@ -1,6 +1,6 @@
 ---
 title: A nouvelle recette locale de qaldek
-date: '2026-02-16T10:55:43.342Z'
+date: '2026-02-16T11:02:56.219Z'
 draft: true
 typeR: plat
 categories:
@@ -76,7 +76,7 @@ preparation24h: null
 permissionWrite:
   - 693200b700222efe46a2
 createdAt: '2026-01-29T14:27:07.485+00:00'
-updatedAt: '2026-02-16T10:55:43.119+00:00'
+updatedAt: '2026-02-16T11:02:55.570+00:00'
 createdBy: 693200b700222efe46a2
 teams: []
 status: public

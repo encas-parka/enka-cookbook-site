@@ -1,7 +1,7 @@
 ---
 title: A nouvelle recette locale de qaldek
-date: '2026-02-16T11:05:02.151Z'
-draft: false
+date: '2026-02-16T11:06:20.529Z'
+draft: true
 typeR: plat
 categories:
   - Cake
@@ -76,7 +76,7 @@ preparation24h: null
 permissionWrite:
   - 693200b700222efe46a2
 createdAt: '2026-01-29T14:27:07.485+00:00'
-updatedAt: '2026-02-16T11:05:01.634+00:00'
+updatedAt: '2026-02-16T11:06:19.925+00:00'
 createdBy: 693200b700222efe46a2
 teams: []
 status: public

@@ -4,9 +4,7 @@ import { svelte } from "@sveltejs/vite-plugin-svelte";
 import path from "path";
 import { visualizer } from "rollup-plugin-visualizer";
 
-// https://vite.dev/config/
 export default defineConfig(({ mode }) => ({
-  // En dev: "/" (serveur Vite), en prod: "/app/" (chemin Hugo)
   base: mode === "development" ? "/" : "/app/",
 
   plugins: [
@@ -18,35 +16,47 @@ export default defineConfig(({ mode }) => ({
     //   filename: "./dist/stats.html",
     // }),
   ],
+
   build: {
-    // Cible le dossier static/app de votre thème Hugo
     outDir: "../static/app/",
-    emptyOutDir: true, // Vide le dossier à chaque build (utile pour le dev)
+    emptyOutDir: true,
 
-    // Optimisations importantes
-    minify: "esbuild",
-    // Important pour le code splitting
+    // ⭐ CHANGEMENT 1 : Terser basique
+    minify: "terser",
+    terserOptions: {
+      compress: {
+        drop_console: ["log"], // Supprime console.log
+        pure_funcs: ["console.log"],
+        drop_debugger: true, // Supprime debugger
+        passes: 1, // 1 passe pour commencer
+      },
+      mangle: {
+        keep_classnames: true, // CRUCIAL pour Svelte 5
+      },
+      format: {
+        comments: false, // Supprime tous les commentaires
+      },
+    },
+
     target: "es2020",
-
-    // Générer un manifest pour le cache-busting
     manifest: "manifest.json",
 
     rollupOptions: {
       output: {
-        // Ajout de hash pour le cache-busting
         entryFileNames: "assets/[name]-[hash].js",
         chunkFileNames: "assets/[name]-[hash].js",
         assetFileNames: "assets/[name]-[hash].[ext]",
 
         manualChunks(id) {
-          // Icons Lucide (gros morceau)
           if (id.includes("@lucide/svelte")) {
             return "icons";
           }
-
-          // Appwrite SDK
           if (id.includes("appwrite")) {
             return "appwrite";
+          }
+          // ⭐ AJOUT : Séparer Tiptap (gros paquet)
+          if (id.includes("@tiptap")) {
+            return "tiptap";
           }
         },
       },
@@ -60,13 +70,10 @@ export default defineConfig(({ mode }) => ({
     },
   },
 
-  // --- Configuration du serveur de développement ---
   server: {
-    // Proxy pour accéder aux données Hugo en mode dev
     proxy: {
-      // Rediriger /recettes/ vers le serveur Hugo
       "/recettes": {
-        target: "http://localhost:1313", // Serveur Hugo par défaut
+        target: "http://localhost:1313",
         changeOrigin: true,
         configure: (proxy, _options) => {
           proxy.on("error", (_err, _req, _res) => {
@@ -76,7 +83,6 @@ export default defineConfig(({ mode }) => ({
           });
         },
       },
-      // Rediriger /data/ vers le dossier static/data de Hugo
       "/data": {
         target: "http://localhost:1313",
         changeOrigin: true,

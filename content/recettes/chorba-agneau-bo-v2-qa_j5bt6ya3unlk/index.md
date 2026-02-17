@@ -1,11 +1,12 @@
 ---
 title: Chorba  agneau boulgour
-date: '2026-02-17T10:49:48.239Z'
+date: '2026-02-17T10:49:58.095Z'
 draft: true
 typeR: plat
 categories:
   - Soupe
 regime:
+  - sans-gluten
   - sans-lactose
 plate: 12
 quantite_desc: un bol d'environ 600ml par personne
@@ -197,16 +198,6 @@ ingredients:
     type: sec
     pF: false
     pS: false
-  - uuid: 0ChMntyOcIH58ckVRyCTp
-    name: Boulgour fin
-    originalQuantity: 0.7
-    originalUnit: gr.
-    normalizedQuantity: 0.7
-    normalizedUnit: gr.
-    comment: ''
-    allergens:
-      - Gluten
-    type: sec
 preparation: |-
   Eplucher et émincer les carottes et les navets. Emincer les branches de céleri. Mettre le tout dans un saladier. Réserver.
 
@@ -230,7 +221,7 @@ permissionWrite:
   - 693200b700222efe46a2
 auteur: qaldek
 createdAt: '2026-02-17T10:33:53.314+00:00'
-updatedAt: '2026-02-17T10:49:47.958+00:00'
+updatedAt: '2026-02-17T10:49:57.904+00:00'
 createdBy: 693200b700222efe46a2
 teams: []
 status: public

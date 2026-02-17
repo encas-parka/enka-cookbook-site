@@ -1,6 +1,6 @@
 ---
 title: Chorba  agneau boulgour
-date: '2026-02-17T10:33:55.478Z'
+date: '2026-02-17T10:41:45.818Z'
 draft: true
 typeR: plat
 categories:
@@ -189,9 +189,9 @@ ingredients:
     pS: false
   - uuid: jU4Z5rXlcHLtxRyuZ9baT
     name: Boulgour
-    originalQuantity: 150
+    originalQuantity: 150.1
     originalUnit: gr.
-    normalizedQuantity: 150
+    normalizedQuantity: 150.1
     normalizedUnit: gr.
     comment: ''
     allergens: []
@@ -219,11 +219,11 @@ astuces: []
 preparation24h: Faire tremper les pois chiche la veille.
 permissionWrite:
   - 693200b700222efe46a2
-auteur: null
+auteur: qaldek
 createdAt: '2026-02-17T10:33:53.314+00:00'
-updatedAt: '2026-02-17T10:33:53.314+00:00'
+updatedAt: '2026-02-17T10:41:44.263+00:00'
 createdBy: 693200b700222efe46a2
-teams: null
+teams: []
 status: public
 rootRecipeId: chorba-agneau-et-langu_duj2ar8i9twp
 versionLabel: v2 - qaldek

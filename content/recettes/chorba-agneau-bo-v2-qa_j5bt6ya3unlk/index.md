@@ -1,6 +1,6 @@
 ---
 title: Chorba  agneau boulgour
-date: '2026-02-17T10:41:45.818Z'
+date: '2026-02-17T10:45:47.224Z'
 draft: true
 typeR: plat
 categories:
@@ -10,7 +10,7 @@ regime:
   - sans-lactose
 plate: 12
 quantite_desc: un bol d'environ 600ml par personne
-check: true
+check: false
 cuisson: true
 serveHot: true
 description: testalergenes mis a jour
@@ -221,7 +221,7 @@ permissionWrite:
   - 693200b700222efe46a2
 auteur: qaldek
 createdAt: '2026-02-17T10:33:53.314+00:00'
-updatedAt: '2026-02-17T10:41:44.263+00:00'
+updatedAt: '2026-02-17T10:45:46.990+00:00'
 createdBy: 693200b700222efe46a2
 teams: []
 status: public

@@ -195,13 +195,20 @@ function determineRegimes(ingredients) {
 /**
  * Met à jour un ingrédient avec les données fraîches d'ingredients.json
  */
-function updateIngredient(ingredient, ingredientsMap) {
+function updateIngredient(ingredient, ingredientsMap, recipeDir = "") {
   const freshIngredient = ingredientsMap.get(ingredient.uuid);
 
   if (!freshIngredient) {
-    console.warn(
-      `  ⚠️  Ingrédient ${ingredient.uuid} (${ingredient.name}) non trouvé dans ingredients.json`,
-    );
+    const prefix = recipeDir ? `[${recipeDir}] ` : "";
+    if (!ingredient.uuid || !ingredient.name) {
+      console.warn(
+        `  ⚠️  ${prefix}Ingrédient invalide: uuid="${ingredient.uuid}", name="${ingredient.name}"`,
+      );
+    } else {
+      console.warn(
+        `  ⚠️  ${prefix}Ingrédient ${ingredient.uuid} (${ingredient.name}) non trouvé dans ingredients.json`,
+      );
+    }
     return { updated: false, ingredient };
   }
 
@@ -235,7 +242,7 @@ function updateIngredient(ingredient, ingredientsMap) {
 /**
  * Met à jour une recette
  */
-function updateRecipe(recipePath, ingredientsMap, dryRun) {
+function updateRecipe(recipePath, ingredientsMap, dryRun, recipeDir = "") {
   const content = fs.readFileSync(recipePath, "utf-8");
 
   // Parser le frontmatter YAML
@@ -256,7 +263,7 @@ function updateRecipe(recipePath, ingredientsMap, dryRun) {
 
   // Mettre à jour chaque ingrédient
   yamlData.ingredients = yamlData.ingredients.map((ing) => {
-    const result = updateIngredient(ing, ingredientsMap);
+    const result = updateIngredient(ing, ingredientsMap, recipeDir);
 
     if (result.updated) {
       ingredientsUpdated++;
@@ -389,7 +396,7 @@ async function main() {
 
     stats.recipesProcessed++;
 
-    const result = updateRecipe(recipePath, ingredientsMap, dryRun);
+    const result = updateRecipe(recipePath, ingredientsMap, dryRun, recipeDir);
 
     if (result && result.updated) {
       stats.recipesUpdated++;

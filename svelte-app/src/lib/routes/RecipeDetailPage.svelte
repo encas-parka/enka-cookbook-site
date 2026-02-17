@@ -170,12 +170,16 @@
       <div class="card-body not-md:px-1">
         <!-- En-tête -->
         <div class="mb-4 print:mb-2">
-          <div class="flex items-center justify-between gap-x-10 gap-y-4">
-            <div class="flex flex-wrap items-center gap-4">
+          <div
+            class="flex items-center justify-between gap-x-4 gap-y-2 sm:gap-x-10 sm:gap-y-4"
+          >
+            <div class="flex flex-wrap items-center gap-x-4 gap-y-1">
               <h1
                 class="text-primary flex items-center gap-3 print:text-xl print:text-black"
               >
-                <svg class="me-2 size-9 shrink-0 stroke-3 print:stroke-black">
+                <svg
+                  class="me-2 size-6 shrink-0 stroke-3 sm:size-9 print:stroke-black"
+                >
                   <use href={`/icons/sprite.svg#${typeDisplay.iconId}`} />
                 </svg>
                 {recipeDetails.title}
@@ -208,9 +212,9 @@
 
         <!-- Description -->
         {#if recipeDetails.description || (recipeDetails.categories && recipeDetails.categories.length > 0)}
-          <div class="mb-2 flex flex-wrap gap-2 print:hidden">
+          <div class="flex flex-wrap gap-2 print:hidden">
             {#each recipeDetails.categories as category}
-              <div class="mb-2">
+              <div>
                 <span class="badge badge-primary badge-soft">{category}</span>
               </div>
             {/each}
@@ -221,14 +225,14 @@
         {/if}
 
         <!-- badge info -->
-        <div class="border-base-300 mb-6 border-b pb-4 print:mb-1 print:pb-2">
-          <div class="flex flex-wrap items-center justify-between gap-4">
-            <!-- Badges allergènes -->
-
+        <div class="border-base-300 mb-6 border-b py-4 print:mb-1 print:pb-2">
+          <div
+            class="flex flex-wrap items-center justify-between gap-x-4 gap-y-2"
+          >
             <div class="flex gap-2">
               <!-- Badges température -->
               {#if recipeDetails?.serveHot !== undefined}
-                <div class="mb-2">
+                <div class="">
                   {#if recipeDetails.serveHot}
                     <span class="badge badge-warning">Servir Chaud</span>
                   {:else}
@@ -239,7 +243,7 @@
 
               <!-- Badges cuisson -->
               {#if recipeDetails?.cuisson !== undefined}
-                <div class="mb-2">
+                <div class="">
                   {#if recipeDetails.cuisson}
                     <span class="badge badge-warning">Avec Cuisson</span>
                   {:else}
@@ -248,6 +252,8 @@
                 </div>
               {/if}
             </div>
+
+            <!-- Badges allergènes -->
 
             {#if allergens.length > 0}
               <div class="flex w-fit flex-wrap items-center gap-2">
@@ -343,12 +349,14 @@
       </div>
     {/if}
     <!-- Métadonnées -->
-    <RecipeMetadata
-      auteur={recipeDetails.auteur}
-      createdBy={recipeDetails.createdBy}
-      id={recipeDetails.$id}
-      createdAt={recipeDetails.$createdAt}
-      updatedAt={recipeDetails.$updatedAt}
-    />
+    {#if globalState.isAuthenticated}
+      <RecipeMetadata
+        auteur={recipeDetails.auteur}
+        createdBy={recipeDetails.createdBy}
+        id={recipeDetails.$id}
+        createdAt={recipeDetails.$createdAt}
+        updatedAt={recipeDetails.$updatedAt}
+      />
+    {/if}
   {/if}
 </div>

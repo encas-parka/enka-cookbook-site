@@ -59,8 +59,8 @@
 
       <div class="flex flex-wrap gap-x-4 gap-y-2">
         {#each displayVariants as variant}
-          <a class="btn btn-ghost" href={p(`/recipe/${variant.$id}`)}>
-            <div class="flex items-center gap-2 text-sm">
+          <a class="btn btn-ghost h-auto" href={p(`/recipe/${variant.$id}`)}>
+            <div class="flex flex-wrap items-center gap-2 text-sm text-wrap">
               {variant.title}
 
               {#if variant.versionLabel}

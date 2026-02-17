@@ -1,0 +1,1 @@
+function a(t){return r=>{const e=r;t.shouldFocus&&requestAnimationFrame(()=>{e.focus()});const o=n=>{(n.key==="Enter"||n.key==="Tab")&&e instanceof HTMLInputElement&&e.value.trim()===""&&(n.preventDefault(),t.onEmptySubmit?.())};return e.addEventListener("keydown",o),()=>{e.removeEventListener("keydown",o)}}}export{a as k};

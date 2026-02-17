@@ -1,6 +1,5 @@
 .directory
 resources
-public
 **/jsconfig.json
 *bak
 *BAK
@@ -17,3 +16,5 @@ appwrite-ec-dev
 docs/*
 .vite
 .claude
+
+#public

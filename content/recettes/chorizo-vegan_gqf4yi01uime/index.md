@@ -6,8 +6,8 @@ categories:
   - Snacking
 auteur: Auré
 regime:
-  - sans-lactose
   - vegan
+  - sans-lactose
 cuisson: true
 plate: 100
 quantite_desc: 2 tranches par personne
@@ -20,7 +20,7 @@ ingredients:
     originalUnit: gr.
     normalizedQuantity: 70
     normalizedUnit: gr.
-    comment: ''
+    comment: ""
     allergens: []
     type: lof
     pF: false
@@ -31,7 +31,7 @@ ingredients:
     originalUnit: gr.
     normalizedQuantity: 220
     normalizedUnit: gr.
-    comment: ''
+    comment: ""
     allergens: []
     type: lof
     pF: false
@@ -42,7 +42,7 @@ ingredients:
     originalUnit: gr.
     normalizedQuantity: 1200
     normalizedUnit: gr.
-    comment: ''
+    comment: ""
     allergens:
       - Gluten
     type: lof
@@ -54,7 +54,7 @@ ingredients:
     originalUnit: gr.
     normalizedQuantity: 12
     normalizedUnit: gr.
-    comment: ''
+    comment: ""
     allergens: []
     type: epices
     pF: false
@@ -65,7 +65,7 @@ ingredients:
     originalUnit: c. à café
     normalizedQuantity: 25
     normalizedUnit: ml
-    comment: ''
+    comment: ""
     allergens: []
     type: epices
     pF: false
@@ -76,7 +76,7 @@ ingredients:
     originalUnit: gr.
     normalizedQuantity: 22
     normalizedUnit: gr.
-    comment: ''
+    comment: ""
     allergens: []
     type: epices
     pF: false
@@ -87,7 +87,7 @@ ingredients:
     originalUnit: gr.
     normalizedQuantity: 65
     normalizedUnit: gr.
-    comment: ''
+    comment: ""
     allergens: []
     type: epices
     pF: false
@@ -98,7 +98,7 @@ ingredients:
     originalUnit: gr.
     normalizedQuantity: 250
     normalizedUnit: gr.
-    comment: ''
+    comment: ""
     allergens: []
     type: epices
     pF: false
@@ -109,8 +109,9 @@ ingredients:
     originalUnit: gr.
     normalizedQuantity: 160
     normalizedUnit: gr.
-    comment: ''
-    allergens: []
+    comment: ""
+    allergens:
+      - Soja
     type: epices
     pF: false
     pS: false
@@ -120,7 +121,7 @@ ingredients:
     originalUnit: gr.
     normalizedQuantity: 160
     normalizedUnit: gr.
-    comment: ''
+    comment: ""
     allergens:
       - Gluten
     type: epices
@@ -132,7 +133,7 @@ ingredients:
     originalUnit: gr.
     normalizedQuantity: 260
     normalizedUnit: gr.
-    comment: ''
+    comment: ""
     allergens:
       - Soja
     type: epices
@@ -166,13 +167,14 @@ preparation: |-
 
   Emballer dans du cello et conserver 24h au frais avant de consommer.
 preparation24h: A cuisiner la veille !!
-publishDate: '2024-05-22T22:24:00+00:00'
+publishDate: "2024-05-22T22:24:00+00:00"
 serveHot: false
 uuid: gqf4yi01uime
 id: chorizo-vegan_gqf4yi01uime
-createdAt: '2024-05-22T22:24:00+00:00'
-updatedAt: '2024-05-22T22:24:00+00:00'
+createdAt: "2024-05-22T22:24:00+00:00"
+updatedAt: "2024-05-22T22:24:00+00:00"
 createdBy: Auré
 permissionWrite:
   - 696faf80000078153479
 ---
+

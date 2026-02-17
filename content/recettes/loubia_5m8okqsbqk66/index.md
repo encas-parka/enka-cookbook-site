@@ -6,15 +6,14 @@ typeR: plat
 categories:
   - Plat chaud
 regime:
-  - sans-gluten
-  - sans-lactose
   - vegan
+  - sans-lactose
 region: Tunisie
 cuisson: true
 plate: 100
 check: true
 checkAlwaysOk: false
-checkfor: ''
+checkfor: ""
 ingredients:
   - uuid: omf24t
     name: Boulgour
@@ -22,8 +21,9 @@ ingredients:
     originalUnit: kg
     normalizedQuantity: 5000
     normalizedUnit: gr.
-    comment: ''
-    allergens: []
+    comment: ""
+    allergens:
+      - Gluten
     type: sec
     pF: false
     pS: false
@@ -33,7 +33,7 @@ ingredients:
     originalUnit: kg
     normalizedQuantity: 5000
     normalizedUnit: gr.
-    comment: ''
+    comment: ""
     allergens: []
     type: sec
     pF: false
@@ -44,7 +44,7 @@ ingredients:
     originalUnit: tête·s
     normalizedQuantity: 400
     normalizedUnit: gr.
-    comment: ''
+    comment: ""
     allergens: []
     type: legumes
     pF: true
@@ -55,7 +55,7 @@ ingredients:
     originalUnit: kg
     normalizedQuantity: 15000
     normalizedUnit: gr.
-    comment: ''
+    comment: ""
     allergens: []
     type: legumes
     pF: true
@@ -66,7 +66,7 @@ ingredients:
     originalUnit: kg
     normalizedQuantity: 10000
     normalizedUnit: gr.
-    comment: ''
+    comment: ""
     allergens: []
     type: legumes
     pF: true
@@ -77,7 +77,7 @@ ingredients:
     originalUnit: kg
     normalizedQuantity: 5000
     normalizedUnit: gr.
-    comment: ''
+    comment: ""
     allergens: []
     type: legumes
     pF: false
@@ -88,7 +88,7 @@ ingredients:
     originalUnit: l.
     normalizedQuantity: 1500
     normalizedUnit: ml
-    comment: ''
+    comment: ""
     allergens: []
     type: lof
     pF: false
@@ -99,7 +99,7 @@ ingredients:
     originalUnit: bottes
     normalizedQuantity: 5
     normalizedUnit: bottes
-    comment: ''
+    comment: ""
     allergens: []
     type: epices
     pF: true
@@ -110,7 +110,7 @@ ingredients:
     originalUnit: bottes
     normalizedQuantity: 5
     normalizedUnit: bottes
-    comment: 'a ajouter ciselée sur le top selon les envies '
+    comment: "a ajouter ciselée sur le top selon les envies "
     allergens: []
     type: epices
     pF: true
@@ -121,7 +121,7 @@ ingredients:
     originalUnit: gr.
     normalizedQuantity: 70
     normalizedUnit: gr.
-    comment: ''
+    comment: ""
     allergens: []
     type: epices
     pF: false
@@ -132,7 +132,7 @@ ingredients:
     originalUnit: unité
     normalizedQuantity: 8
     normalizedUnit: unité
-    comment: ''
+    comment: ""
     allergens: []
     type: epices
     pF: false
@@ -143,7 +143,7 @@ ingredients:
     originalUnit: gr.
     normalizedQuantity: 100
     normalizedUnit: gr.
-    comment: ''
+    comment: ""
     allergens: []
     type: epices
     pF: false
@@ -154,7 +154,7 @@ ingredients:
     originalUnit: gr.
     normalizedQuantity: 70
     normalizedUnit: gr.
-    comment: ''
+    comment: ""
     allergens: []
     type: epices
     pF: false
@@ -184,11 +184,12 @@ preparation: |-
 
   11 Faire le boulgour.
 preparation24h: Faire tremper les haricots blancs
-publishDate: '2025-05-14T08:43:00+00:00'
+publishDate: "2025-05-14T08:43:00+00:00"
 serveHot: true
 uuid: 5m8okqsbqk66
 id: loubia_5m8okqsbqk66
-createdAt: '2025-05-14T08:43:00+00:00'
-updatedAt: '2025-05-14T08:43:00+00:00'
-createdBy: ''
+createdAt: "2025-05-14T08:43:00+00:00"
+updatedAt: "2025-05-14T08:43:00+00:00"
+createdBy: ""
 ---
+

@@ -1,7 +1,7 @@
 ---
 title: Bahn mi à la protéine de soja
 draft: false
-img: ''
+img: ""
 description: Sandwich végan
 typeR: plat
 categories:
@@ -23,7 +23,7 @@ ingredients:
     originalUnit: kg
     normalizedQuantity: 3000
     normalizedUnit: gr.
-    comment: ''
+    comment: ""
     allergens:
       - Soja
     type: autres
@@ -35,7 +35,7 @@ ingredients:
     originalUnit: bottes
     normalizedQuantity: 10
     normalizedUnit: bottes
-    comment: ''
+    comment: ""
     allergens: []
     type: epices
     pF: false
@@ -46,7 +46,7 @@ ingredients:
     originalUnit: gr.
     normalizedQuantity: 650
     normalizedUnit: gr.
-    comment: ''
+    comment: ""
     allergens: []
     type: legumes
     pF: true
@@ -57,7 +57,7 @@ ingredients:
     originalUnit: tête·s
     normalizedQuantity: 400
     normalizedUnit: gr.
-    comment: ''
+    comment: ""
     allergens: []
     type: legumes
     pF: true
@@ -68,7 +68,7 @@ ingredients:
     originalUnit: kg
     normalizedQuantity: 3000
     normalizedUnit: gr.
-    comment: ''
+    comment: ""
     allergens: []
     type: epices
     pF: false
@@ -79,7 +79,7 @@ ingredients:
     originalUnit: gr.
     normalizedQuantity: 850
     normalizedUnit: gr.
-    comment: ''
+    comment: ""
     allergens: []
     type: epices
     pF: false
@@ -90,7 +90,7 @@ ingredients:
     originalUnit: unité
     normalizedQuantity: 4000
     normalizedUnit: gr.
-    comment: ''
+    comment: ""
     allergens: []
     type: legumes
     pF: true
@@ -101,7 +101,7 @@ ingredients:
     originalUnit: l.
     normalizedQuantity: 3500
     normalizedUnit: ml
-    comment: ''
+    comment: ""
     allergens:
       - Soja
     type: epices
@@ -113,7 +113,7 @@ ingredients:
     originalUnit: kg
     normalizedQuantity: 3500
     normalizedUnit: gr.
-    comment: ''
+    comment: ""
     allergens: []
     type: legumes
     pF: true
@@ -124,7 +124,7 @@ ingredients:
     originalUnit: kg
     normalizedQuantity: 5000
     normalizedUnit: gr.
-    comment: ''
+    comment: ""
     allergens: []
     type: legumes
     pF: true
@@ -135,8 +135,9 @@ ingredients:
     originalUnit: unité
     normalizedQuantity: 50
     normalizedUnit: unité
-    comment: ''
-    allergens: []
+    comment: ""
+    allergens:
+      - Gluten
     type: sec
     pF: false
     pS: false
@@ -149,18 +150,18 @@ preparation: |-
   - Mixer la véganaise avec la sauce soja, le gingembre et ail râpés.
 
   Possibilité de rajouter des légumes lactofermentés.
-preparation24h: ''
+preparation24h: ""
 astuces: []
 prepAlt: []
-publishDate: '2025-10-16T16:18:00+00:00'
+publishDate: "2025-10-16T16:18:00+00:00"
 serveHot: true
 uuid: go4i0y6buluy
 id: bahn-mi-a-la-proteine-_go4i0y6buluy
-createdAt: '2025-10-16T16:18:00+00:00'
-updatedAt: '2025-10-16T16:18:00+00:00'
+createdAt: "2025-10-16T16:18:00+00:00"
+updatedAt: "2025-10-16T16:18:00+00:00"
 createdBy: Alio
 regime:
-  - sans-gluten
-  - sans-lactose
   - vegan
+  - sans-lactose
 ---
+

@@ -6,9 +6,9 @@ categories:
   - Sucrée
 auteur: frédo
 regime:
+  - vegan
   - sans-gluten
   - sans-lactose
-  - vegan
 cuisson: true
 plate: 100
 check: true
@@ -20,8 +20,9 @@ ingredients:
     originalUnit: gr.
     normalizedQuantity: 100
     normalizedUnit: gr.
-    comment: ''
-    allergens: []
+    comment: ""
+    allergens:
+      - Fruit à coque
     type: sec
     pF: false
     pS: false
@@ -31,7 +32,7 @@ ingredients:
     originalUnit: gr.
     normalizedQuantity: 100
     normalizedUnit: gr.
-    comment: ''
+    comment: ""
     allergens:
       - Sésame
     type: sec
@@ -43,7 +44,7 @@ ingredients:
     originalUnit: gr.
     normalizedQuantity: 200
     normalizedUnit: gr.
-    comment: ''
+    comment: ""
     allergens: []
     type: sec
     pF: false
@@ -54,7 +55,7 @@ ingredients:
     originalUnit: gr.
     normalizedQuantity: 200
     normalizedUnit: gr.
-    comment: ''
+    comment: ""
     allergens:
       - Fruit à coque
     type: sec
@@ -66,7 +67,7 @@ ingredients:
     originalUnit: l.
     normalizedQuantity: 9000
     normalizedUnit: ml
-    comment: ''
+    comment: ""
     allergens:
       - Soja
     type: lof
@@ -78,7 +79,7 @@ ingredients:
     originalUnit: gr.
     normalizedQuantity: 500
     normalizedUnit: gr.
-    comment: ''
+    comment: ""
     allergens: []
     type: lof
     pF: false
@@ -89,7 +90,7 @@ ingredients:
     originalUnit: gr.
     normalizedQuantity: 200
     normalizedUnit: gr.
-    comment: ''
+    comment: ""
     allergens: []
     type: sucres
     pF: false
@@ -100,7 +101,7 @@ ingredients:
     originalUnit: kg
     normalizedQuantity: 1400
     normalizedUnit: gr.
-    comment: ''
+    comment: ""
     allergens: []
     type: sucres
     pF: false
@@ -111,7 +112,7 @@ ingredients:
     originalUnit: kg
     normalizedQuantity: 1000
     normalizedUnit: gr.
-    comment: ''
+    comment: ""
     allergens:
       - Fruit à coque
     type: sucres
@@ -123,7 +124,7 @@ ingredients:
     originalUnit: c. à café
     normalizedQuantity: 70
     normalizedUnit: ml
-    comment: ''
+    comment: ""
     allergens: []
     type: autres
     pF: false
@@ -141,11 +142,12 @@ preparation: |-
 
   Ajouter les graines caramélisées sur la crème
 preparation24h: A faire la veille pour le matin ou le matin pour le soir
-publishDate: '2025-06-05T07:55:00+00:00'
+publishDate: "2025-06-05T07:55:00+00:00"
 serveHot: false
 uuid: uk1elhs2ilhz
 id: creme-de-soja-a-la-noi_uk1elhs2ilhz
-createdAt: '2025-06-05T07:55:00+00:00'
-updatedAt: '2025-06-05T07:55:00+00:00'
+createdAt: "2025-06-05T07:55:00+00:00"
+updatedAt: "2025-06-05T07:55:00+00:00"
 createdBy: frédo
 ---
+

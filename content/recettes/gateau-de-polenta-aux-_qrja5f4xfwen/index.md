@@ -31,7 +31,7 @@ ingredients:
     originalUnit: kg
     normalizedQuantity: 1000
     normalizedUnit: gr.
-    comment: ''
+    comment: ""
     allergens:
       - Produit laitier
     type: frais
@@ -43,7 +43,7 @@ ingredients:
     originalUnit: kg
     normalizedQuantity: 2800
     normalizedUnit: gr.
-    comment: ''
+    comment: ""
     allergens: []
     type: legumes
     pF: true
@@ -76,7 +76,7 @@ ingredients:
     originalUnit: unité
     normalizedQuantity: 20
     normalizedUnit: unité
-    comment: ''
+    comment: ""
     allergens:
       - Oeuf
     type: lof
@@ -88,7 +88,7 @@ ingredients:
     originalUnit: kg
     normalizedQuantity: 1000
     normalizedUnit: gr.
-    comment: ''
+    comment: ""
     allergens: []
     type: sec
     pF: false
@@ -99,8 +99,9 @@ ingredients:
     originalUnit: gr.
     normalizedQuantity: 400
     normalizedUnit: gr.
-    comment: ''
-    allergens: []
+    comment: ""
+    allergens:
+      - Fruit à coque
     type: sec
     pF: false
     pS: false
@@ -110,7 +111,7 @@ ingredients:
     originalUnit: kg
     normalizedQuantity: 1000
     normalizedUnit: gr.
-    comment: ''
+    comment: ""
     allergens:
       - Fruit à coque
     type: sec
@@ -133,7 +134,7 @@ ingredients:
     originalUnit: kg
     normalizedQuantity: 1400
     normalizedUnit: gr.
-    comment: ''
+    comment: ""
     allergens: []
     type: sucres
     pF: false
@@ -162,13 +163,14 @@ preparation: |-
   Faire légèrement torréfier les amandes/pistaches restantes.
 
    Au dernier moment : étaler le yaourt directement sur le gâteau, disposer des tranches de fruits, des pistaches concassées, le miel et le zeste des citrons restant sur le gâteau.
-publishDate: '2024-06-18T15:19:00+00:00'
+publishDate: "2024-06-18T15:19:00+00:00"
 serveHot: false
 uuid: qrja5f4xfwen
 id: gateau-de-polenta-aux-_qrja5f4xfwen
-createdAt: '2024-06-18T15:19:00+00:00'
-updatedAt: '2024-06-18T15:19:00+00:00'
-createdBy: ''
+createdAt: "2024-06-18T15:19:00+00:00"
+updatedAt: "2024-06-18T15:19:00+00:00"
+createdBy: ""
 materiel:
   - Four
 ---
+

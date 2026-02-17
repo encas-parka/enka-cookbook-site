@@ -5,8 +5,8 @@ typeR: plat
 categories:
   - Accompagnement
 regime:
-  - sans-lactose
   - vegan
+  - sans-lactose
 cuisson: true
 plate: 250
 quantite_desc: 2 champis par personne
@@ -19,7 +19,7 @@ ingredients:
     originalUnit: tête·s
     normalizedQuantity: 320
     normalizedUnit: gr.
-    comment: ''
+    comment: ""
     allergens: []
     type: legumes
     pF: true
@@ -30,7 +30,7 @@ ingredients:
     originalUnit: kg
     normalizedQuantity: 1300
     normalizedUnit: gr.
-    comment: ''
+    comment: ""
     allergens: []
     type: legumes
     pF: true
@@ -41,7 +41,7 @@ ingredients:
     originalUnit: kg
     normalizedQuantity: 30000
     normalizedUnit: gr.
-    comment: ''
+    comment: ""
     allergens: []
     type: legumes
     pF: true
@@ -52,7 +52,7 @@ ingredients:
     originalUnit: ml
     normalizedQuantity: 930
     normalizedUnit: ml
-    comment: ''
+    comment: ""
     allergens: []
     type: lof
     pF: false
@@ -63,7 +63,7 @@ ingredients:
     originalUnit: gr.
     normalizedQuantity: 620
     normalizedUnit: gr.
-    comment: ''
+    comment: ""
     allergens: []
     type: lof
     pF: false
@@ -74,7 +74,7 @@ ingredients:
     originalUnit: l.
     normalizedQuantity: 6200
     normalizedUnit: ml
-    comment: ''
+    comment: ""
     allergens:
       - Soja
     type: lof
@@ -86,7 +86,7 @@ ingredients:
     originalUnit: l.
     normalizedQuantity: 6200
     normalizedUnit: ml
-    comment: ''
+    comment: ""
     allergens:
       - Soja
     type: lof
@@ -98,7 +98,7 @@ ingredients:
     originalUnit: l.
     normalizedQuantity: 5000
     normalizedUnit: ml
-    comment: ''
+    comment: ""
     allergens: []
     type: lof
     pF: false
@@ -109,7 +109,7 @@ ingredients:
     originalUnit: kg
     normalizedQuantity: 10000
     normalizedUnit: gr.
-    comment: ''
+    comment: ""
     allergens:
       - Gluten
     type: lof
@@ -121,7 +121,7 @@ ingredients:
     originalUnit: au goût
     normalizedQuantity: 1
     normalizedUnit: au goût
-    comment: ''
+    comment: ""
     allergens: []
     type: autres
     pF: false
@@ -132,8 +132,9 @@ ingredients:
     originalUnit: kg
     normalizedQuantity: 7000
     normalizedUnit: gr.
-    comment: ''
-    allergens: []
+    comment: ""
+    allergens:
+      - Gluten
     type: sec
     pF: false
     pS: false
@@ -143,7 +144,7 @@ ingredients:
     originalUnit: au goût
     normalizedQuantity: 1
     normalizedUnit: au goût
-    comment: ''
+    comment: ""
     allergens: []
     type: epices
     pF: false
@@ -154,7 +155,7 @@ ingredients:
     originalUnit: bottes
     normalizedQuantity: 6
     normalizedUnit: bottes
-    comment: ''
+    comment: ""
     allergens: []
     type: epices
     pF: true
@@ -165,7 +166,7 @@ ingredients:
     originalUnit: au goût
     normalizedQuantity: 1
     normalizedUnit: au goût
-    comment: ''
+    comment: ""
     allergens: []
     type: epices
     pF: false
@@ -181,11 +182,12 @@ preparation: |-
 
 
   Je tape la recette + précise dès que je peux
-publishDate: '2025-06-18T00:46:00+00:00'
+publishDate: "2025-06-18T00:46:00+00:00"
 serveHot: true
 uuid: j71g5m5afdob
 id: champignons-frits-et-s_j71g5m5afdob
-createdAt: '2025-06-18T00:46:00+00:00'
-updatedAt: '2025-06-18T00:46:00+00:00'
-createdBy: ''
+createdAt: "2025-06-18T00:46:00+00:00"
+updatedAt: "2025-06-18T00:46:00+00:00"
+createdBy: ""
 ---
+

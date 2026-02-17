@@ -5,7 +5,6 @@ typeR: dessert
 categories:
   - Sucrée
 regime:
-  - sans-gluten
   - vegetarien
 saison:
   - ete
@@ -20,7 +19,7 @@ ingredients:
     originalUnit: kg
     normalizedQuantity: 12000
     normalizedUnit: gr.
-    comment: ''
+    comment: ""
     allergens: []
     type: legumes
     pF: true
@@ -31,8 +30,11 @@ ingredients:
     originalUnit: unité
     normalizedQuantity: 100
     normalizedUnit: unité
-    comment: ''
-    allergens: []
+    comment: ""
+    allergens:
+      - Produit laitier
+      - Gluten
+      - Oeuf
     type: sucres
     pF: false
     pS: false
@@ -42,7 +44,7 @@ ingredients:
     originalUnit: ml
     normalizedQuantity: 40
     normalizedUnit: ml
-    comment: ''
+    comment: ""
     allergens: []
     type: sucres
     pF: false
@@ -53,7 +55,7 @@ ingredients:
     originalUnit: gr.
     normalizedQuantity: 500
     normalizedUnit: gr.
-    comment: ''
+    comment: ""
     allergens: []
     type: sucres
     pF: false
@@ -64,7 +66,7 @@ ingredients:
     originalUnit: gr.
     normalizedQuantity: 700
     normalizedUnit: gr.
-    comment: ''
+    comment: ""
     allergens: []
     type: sucres
     pF: false
@@ -75,7 +77,7 @@ ingredients:
     originalUnit: bottes
     normalizedQuantity: 2
     normalizedUnit: bottes
-    comment: ''
+    comment: ""
     allergens: []
     type: epices
     pF: false
@@ -86,7 +88,7 @@ ingredients:
     originalUnit: kg
     normalizedQuantity: 3000
     normalizedUnit: gr.
-    comment: ''
+    comment: ""
     allergens:
       - Produit laitier
     type: frais
@@ -114,13 +116,14 @@ preparation: |-
 
   \- Pochez le tout de crème mascarpone chantilly. Sur le dessus,
   ajoutez des abricots rôtis
-publishDate: '2025-06-12T10:34:00+00:00'
+publishDate: "2025-06-12T10:34:00+00:00"
 serveHot: false
 uuid: 9oetj7rodlkh
 id: charlotte-dabricot-en-_9oetj7rodlkh
-createdAt: '2025-06-12T10:34:00+00:00'
-updatedAt: '2025-06-12T10:34:00+00:00'
-createdBy: ''
+createdAt: "2025-06-12T10:34:00+00:00"
+updatedAt: "2025-06-12T10:34:00+00:00"
+createdBy: ""
 materiel:
   - Frigo
 ---
+

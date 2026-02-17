@@ -13,7 +13,7 @@ ingredients:
     originalUnit: au goût
     normalizedQuantity: 1
     normalizedUnit: au goût
-    comment: ''
+    comment: ""
     allergens: []
     type: epices
     pF: false
@@ -24,7 +24,7 @@ ingredients:
     originalUnit: gr.
     normalizedQuantity: 10
     normalizedUnit: gr.
-    comment: ''
+    comment: ""
     allergens: []
     type: epices
     pF: false
@@ -35,7 +35,7 @@ ingredients:
     originalUnit: bottes
     normalizedQuantity: 30
     normalizedUnit: bottes
-    comment: ''
+    comment: ""
     allergens: []
     type: epices
     pF: true
@@ -46,7 +46,7 @@ ingredients:
     originalUnit: bottes
     normalizedQuantity: 60
     normalizedUnit: bottes
-    comment: ''
+    comment: ""
     allergens: []
     type: epices
     pF: true
@@ -57,7 +57,7 @@ ingredients:
     originalUnit: kg
     normalizedQuantity: 3000
     normalizedUnit: gr.
-    comment: ''
+    comment: ""
     allergens: []
     type: legumes
     pF: true
@@ -68,7 +68,7 @@ ingredients:
     originalUnit: kg
     normalizedQuantity: 8000
     normalizedUnit: gr.
-    comment: ''
+    comment: ""
     allergens: []
     type: legumes
     pF: true
@@ -79,7 +79,7 @@ ingredients:
     originalUnit: l.
     normalizedQuantity: 1500
     normalizedUnit: ml
-    comment: ''
+    comment: ""
     allergens: []
     type: lof
     pF: false
@@ -90,8 +90,9 @@ ingredients:
     originalUnit: kg
     normalizedQuantity: 1000
     normalizedUnit: gr.
-    comment: ''
-    allergens: []
+    comment: ""
+    allergens:
+      - Gluten
     type: sec
     pF: false
     pS: false
@@ -101,7 +102,7 @@ ingredients:
     originalUnit: l.
     normalizedQuantity: 1000
     normalizedUnit: ml
-    comment: ''
+    comment: ""
     allergens: []
     type: sucres
     pF: false
@@ -133,11 +134,10 @@ preparation: |-
   * Ajoutez les tomates, l'oignon la menthe et le persil.
   * **NE PAS MELANGER et laisser au réfrigérateur au moins une heure.**
   * Avant de servir, versez l'huile d'olive, salez, poivrez et mélangez.
-publishDate: '2024-05-18T16:14:00+00:00'
+publishDate: "2024-05-18T16:14:00+00:00"
 regime:
-  - sans-gluten
-  - sans-lactose
   - vegan
+  - sans-lactose
 region: Liban
 saison:
   - ete
@@ -146,9 +146,10 @@ typeR: entree
 serveHot: false
 uuid: s5snphqzt474
 id: taboulais-libanais-des_s5snphqzt474
-createdAt: '2024-05-18T16:14:00+00:00'
-updatedAt: '2024-05-18T16:14:00+00:00'
-createdBy: ''
+createdAt: "2024-05-18T16:14:00+00:00"
+updatedAt: "2024-05-18T16:14:00+00:00"
+createdBy: ""
 materiel:
   - Frigo
 ---
+

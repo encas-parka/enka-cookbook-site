@@ -404,10 +404,10 @@ body {
     break-inside: avoid;
   }
 
-  /* Permettre la coupe partout dans la carte */
-  .card,
-  .card-body,
-  .card-body > div {
+  /* Permettre la coupe partout dans la carte SAUF pour page-break-after */
+  .card:not(.page-break-after),
+  .card-body:not(.page-break-after .card-body),
+  .card-body > div:not(.page-break-after .card-body > div) {
     break-inside: auto;
   }
 
@@ -416,6 +416,17 @@ body {
     orphans: 3;
     widows: 3;
   }*/
+
+  /* tye fix recipe break */
+  /* Forcer le layout block pour les conteneurs avec espacement Tailwind */
+  .space-y-10 {
+    display: block !important;
+  }
+
+  /* Conserver l'espacement vertical en impression */
+  .space-y-10 > * + * {
+    margin-top: 2.5rem !important; /* space-y-10 = 2.5rem = 40px */
+  }
 
   .print-break-auto {
     break-inside: auto;

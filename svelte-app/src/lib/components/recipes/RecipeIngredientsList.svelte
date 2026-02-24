@@ -58,11 +58,12 @@
       hasDifferentQuantities:
         scaledOriginal.formattedNumber !== scaledNormalized.formattedNumber ||
         scaledOriginal.unit !== scaledNormalized.unit,
+
     };
   }
 </script>
 
-<div class="print-xs space-y-6 print:space-y-2">
+<div class="print-xs mb-10 space-y-6 print:space-y-2">
   {#each [...groupedIngredients] as [type, items] (type)}
     {@const typeInfo = getProductTypeInfo(type)}
     <Fieldset

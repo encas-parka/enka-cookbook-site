@@ -588,7 +588,7 @@
                     {@const recipe = recipesDetails.find(
                       (r) => r.$id === mealRecipe.recipeUuid,
                     )}
-                    <div class="page-break-after">
+                    <div class="">
                       {#if recipe}
                         <EventRecipeCard
                           {recipe}
@@ -644,7 +644,7 @@
                   <!-- Date break -->
                   <div
                     id="meal-{meal.date}"
-                    class="card bg-primary text-primary-content flex flex-row flex-wrap items-center justify-center gap-6 p-4 text-lg font-black shadow-lg print:hidden"
+                    class="card bg-primary text-primary-content flex flex-row flex-wrap items-center justify-center gap-4 p-2 text-lg font-black shadow-lg sm:gap-6 sm:p-4 print:hidden"
                   >
                     <div class="">
                       {formatDateWdDayMonth(meal.date)}
@@ -665,7 +665,7 @@
                     {@const recipe = recipesDetails.find(
                       (r) => r.$id === mealRecipe.recipeUuid,
                     )}
-                    <div class="page-break-after mb-14">
+                    <div>
                       {#if recipe}
                         <EventRecipeCard
                           {recipe}

@@ -17,4 +17,5 @@ docs/*
 .vite
 .claude
 
-#public
+content
+public

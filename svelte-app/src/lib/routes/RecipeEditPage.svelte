@@ -16,12 +16,10 @@
   import { navBarStore } from "../stores/NavBarStore.svelte";
   import RecipeHeaderForm from "$lib/components/recipeEdit/RecipeHeaderForm.svelte";
   import RecipePrepaForm from "$lib/components/recipeEdit/RecipePrepaForm.svelte";
-  import RecipeVersionManager from "$lib/components/recipeEdit/RecipeVersionManager.svelte";
   import RecipePermissionsManager from "$lib/components/recipeEdit/RecipePermissionsManager.svelte";
   import UnsavedChangesGuard from "$lib/components/ui/UnsavedChangesGuard.svelte";
   import RecipeMetadata from "$lib/components/recipes/RecipeMetadata.svelte";
   import ConfirmModal from "$lib/components/ui/ConfirmModal.svelte";
-  import { warmUpEnkaData } from "$lib/services/appwrite-warmup";
   import {
     type RecipeFormState,
     type ValidationError,
@@ -29,7 +27,6 @@
     createRecipeSnapshot,
     normalizeRecipeForAppwrite,
     prepareHugoData,
-    normalizeAllIngredients,
     determineAllergensAndRegimes,
     validateRecipe,
     deleteRecipe,

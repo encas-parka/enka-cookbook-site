@@ -11,7 +11,12 @@
     "/.obsidian/*",
     "**/static/app/*",
   ],
-  "file_scan_inclusions": ["appwrite/*", "appwrite-ec-dev/*", "docs/*"],
+  "file_scan_inclusions": [
+    "appwrite/*",
+    "appwrite-ec-dev/*",
+    "docs/*",
+    "content/*",
+  ],
   "languages": {
     "HTML": {
       "prettier": {

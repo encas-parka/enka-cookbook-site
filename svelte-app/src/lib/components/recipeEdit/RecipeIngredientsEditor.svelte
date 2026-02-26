@@ -128,7 +128,7 @@
     if (!ingredientData) return;
 
     const newIngredient: RecipeIngredient = {
-      uuid: nanoid(),
+      uuid: ingredientUuid,
       name: ingredientData.n,
       originalQuantity: 0,
       originalUnit: "gr.",

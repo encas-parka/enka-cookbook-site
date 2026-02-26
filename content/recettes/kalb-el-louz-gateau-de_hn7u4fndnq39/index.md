@@ -1,6 +1,6 @@
 ---
 title: Kalb el louz - gâteau de semoule
-date: '2026-02-15T18:24:03.520Z'
+date: "2026-02-15T18:24:03.520Z"
 draft: false
 typeR: dessert
 categories:
@@ -21,7 +21,7 @@ materiel:
   - Four
   - Gastro 1/1 (5cm)
 ingredients:
-  - uuid: xoyKa4SWFU-_yQMq6kvJj
+  - uuid: gluv4i
     name: Semoule grosse (blé)
     originalQuantity: 500
     originalUnit: gr.
@@ -31,7 +31,7 @@ ingredients:
     allergens:
       - Gluten
     type: sec
-  - uuid: Yxw97uzjJ5_sRA_5lt_ew
+  - uuid: ljzb7j
     name: Eau
     originalQuantity: 60
     originalUnit: ml
@@ -40,7 +40,7 @@ ingredients:
     comment: gâteau
     allergens: []
     type: autres
-  - uuid: AzVPy6kXWzZhHkBBDQ724
+  - uuid: lny16c
     name: sucre blanc
     originalQuantity: 250
     originalUnit: gr.
@@ -49,7 +49,7 @@ ingredients:
     comment: gâteau
     allergens: []
     type: sucres
-  - uuid: 9pVL5zIkjAZQxJstv_qPm
+  - uuid: eipcl2
     name: Margarine
     originalQuantity: 125
     originalUnit: gr.
@@ -58,7 +58,7 @@ ingredients:
     comment: gâteau
     allergens: []
     type: frais
-  - uuid: gC60HmTQ3xx0SFskdZeS0
+  - uuid: ikdk3g
     name: Eau de fleur d'oranger
     originalQuantity: 65
     originalUnit: ml
@@ -67,7 +67,7 @@ ingredients:
     comment: gâteau
     allergens: []
     type: sucres
-  - uuid: YDAaq-Hyvu1MFchSGvxMb
+  - uuid: eipcl2
     name: Margarine
     originalQuantity: 100
     originalUnit: gr.
@@ -76,7 +76,7 @@ ingredients:
     comment: badigeonnage du gâteau avant cuisson
     allergens: []
     type: frais
-  - uuid: zqLXJvFaNkBMeVRPsUO8B
+  - uuid: ljzb7j
     name: Eau
     originalQuantity: 600
     originalUnit: ml
@@ -85,7 +85,7 @@ ingredients:
     comment: sirop
     allergens: []
     type: autres
-  - uuid: AWzt4YoS1-5R-YIN9GQjL
+  - uuid: lny16c
     name: sucre blanc
     originalQuantity: 270
     originalUnit: gr.
@@ -94,7 +94,7 @@ ingredients:
     comment: sirop
     allergens: []
     type: sucres
-  - uuid: hWq5pzFEcDqo9yABy_cYj
+  - uuid: e4mjd1
     name: Jus de citron
     originalQuantity: 10
     originalUnit: ml
@@ -103,7 +103,7 @@ ingredients:
     comment: sirop
     allergens: []
     type: sucres
-  - uuid: 2elb_Pmd_WpGMj4pOkuWO
+  - uuid: ikdk3g
     name: Eau de fleur d'oranger
     originalQuantity: 45
     originalUnit: ml
@@ -112,7 +112,7 @@ ingredients:
     comment: sirop
     allergens: []
     type: sucres
-  - uuid: pQ3GgZQaU3Aalb3x0jDAn
+  - uuid: fuhtcw
     name: Amande
     originalQuantity: 16
     originalUnit: unité
@@ -167,12 +167,13 @@ astuces: []
 preparation24h: "La veille de la préparation (avant-veille du service)\n\n1. Dans un grand saladier, mélangez **la semoule** et **le sucre** (du gâteau)\n2. Ajoutez **la margarine fondue** (du gâteau, tiède) et travaillez **du bout des doigts** jusqu’à obtenir une texture sableuse.\n3. Versez **la moitié** du mélange **eau + eau de fleur d’oranger** (du gâteau - gardez le reste pour le lendemain).\n4. Humidifiez comme pour le couscous : **soulever, frotter, aérer**, pendant **au moins 10 minutes**, jusqu’à ce que le sucre soit bien fondu.\_**Ne pétrissez pas.**\n5. Couvrez et laissez reposer **toute la nuit** (idéalement **24 h**), à l’abri des courants d’air.\n\n**Remarque** :\_Pensez surtout à **bien travailler la semoule** lors de l’humidification : plus vous l’égrenez et vous la frottez longuement (sans pétrir), plus le sucre se répartit et fond correctement, et **moins la sensation de “trop sucré” ressort** à la dégustation."
 permissionWrite:
   - 6931ecdccd2c8d8d15e5
-createdAt: '2026-02-15T18:24:03.071+00:00'
-updatedAt: '2026-02-15T18:24:03.071+00:00'
+createdAt: "2026-02-15T18:24:03.071+00:00"
+updatedAt: "2026-02-15T18:24:03.071+00:00"
 createdBy: 6931ecdccd2c8d8d15e5
 teams: null
 status: public
 rootRecipeId: null
 versionLabel: null
 ---
+
 

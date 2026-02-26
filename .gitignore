@@ -9,6 +9,12 @@ public
 .vscode
 node_modules
 content/recettes/uuid.sh
+content/
 *.code-workspace
 backups
 .zed
+.vite
+docs/
+.claude
+appwrite
+appwrite-ec-dev

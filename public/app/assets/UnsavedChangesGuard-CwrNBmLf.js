@@ -1,1 +1,0 @@
-import{d as e,p as s,c as o,aL as t}from"./appwrite-kfG7DdOO.js";function a(a,r){e(r,!0);let n=s(r,"message",3,"Vous avez des modifications non sauvegardées. Voulez-vous quitter sans enregistrer ?");t(()=>{if(!r.shouldProtect())return!0;const e=confirm(n());return e&&r.onLeaveWithoutSave&&r.onLeaveWithoutSave(),e}),o()}export{a as U};

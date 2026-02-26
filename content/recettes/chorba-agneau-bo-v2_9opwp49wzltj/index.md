@@ -6,7 +6,6 @@ typeR: plat
 categories:
   - Soupe
 regime:
-  - sans-gluten
   - sans-lactose
 plate: 12
 quantite_desc: un bol d'environ 600ml par personne
@@ -192,8 +191,11 @@ ingredients:
     normalizedQuantity: 150
     normalizedUnit: gr.
     comment: ""
-    allergens: []
+    allergens:
+      - Gluten
     type: sec
+    pF: false
+    pS: false
 preparation: |-
   Eplucher et émincer les carottes et les navets. Emincer les branches de céleri. Mettre le tout dans un saladier. Réserver.
 
@@ -223,5 +225,6 @@ status: public
 rootRecipeId: chorba-agneau-et-langu_duj2ar8i9twp
 versionLabel: "v2 - "
 ---
+
 
 

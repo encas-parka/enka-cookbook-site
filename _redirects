@@ -1,0 +1,18 @@
+# Redirections pour Cloudflare Pages - Architecture SPA Svelte
+# Documentation : https://developers.cloudflare.com/pages/configuration/redirects/
+
+# Routes API et données Hugo (fichiers réels - PAS de redirection)
+/api/* /api/:splat 200
+/recettes/* /recettes/:splat 200
+/data/* /data/:splat 200
+/images/* /images/:splat 200
+/icons/* /icons/:splat 200
+/evenements/* /evenements/:splat 200
+/app/* /app/:splat 200
+
+# Fichiers spéciaux
+/robots.txt /robots.txt 200
+/sitemap.xml /sitemap.xml 200
+
+# SPA Fallback - Toutes les autres routes vers index.html
+/* /index.html 200

@@ -5,8 +5,8 @@ typeR: dessert
 categories:
   - Biscuits
 regime:
-  - sans-lactose
   - vegan
+  - sans-lactose
 cuisson: true
 plate: 20
 check: true
@@ -19,7 +19,7 @@ ingredients:
     originalUnit: gr.
     normalizedQuantity: 50
     normalizedUnit: gr.
-    comment: ''
+    comment: ""
     allergens:
       - Fruit à coque
     type: sec
@@ -31,7 +31,7 @@ ingredients:
     originalUnit: gr.
     normalizedQuantity: 135
     normalizedUnit: gr.
-    comment: ''
+    comment: ""
     allergens: []
     type: sec
     pF: false
@@ -42,8 +42,9 @@ ingredients:
     originalUnit: gr.
     normalizedQuantity: 80
     normalizedUnit: gr.
-    comment: ''
-    allergens: []
+    comment: ""
+    allergens:
+      - Gluten
     type: sec
     pF: false
     pS: false
@@ -53,7 +54,7 @@ ingredients:
     originalUnit: gr.
     normalizedQuantity: 50
     normalizedUnit: gr.
-    comment: ''
+    comment: ""
     allergens: []
     type: legumes
     pF: false
@@ -64,7 +65,7 @@ ingredients:
     originalUnit: gr.
     normalizedQuantity: 80
     normalizedUnit: gr.
-    comment: ''
+    comment: ""
     allergens:
       - Gluten
     type: lof
@@ -76,7 +77,7 @@ ingredients:
     originalUnit: gr.
     normalizedQuantity: 100
     normalizedUnit: gr.
-    comment: ''
+    comment: ""
     allergens: []
     type: lof
     pF: false
@@ -87,18 +88,18 @@ ingredients:
     originalUnit: gr.
     normalizedQuantity: 100
     normalizedUnit: gr.
-    comment: ''
+    comment: ""
     allergens: []
     type: sucres
     pF: false
     pS: false
   - uuid: zkmmgt
-    name: 'Sirop d''érable '
+    name: "Sirop d'érable "
     originalQuantity: 200
     originalUnit: gr.
     normalizedQuantity: 200
     normalizedUnit: gr.
-    comment: ''
+    comment: ""
     allergens: []
     type: sucres
     pF: false
@@ -109,7 +110,7 @@ ingredients:
     originalUnit: gr.
     normalizedQuantity: 100
     normalizedUnit: gr.
-    comment: ''
+    comment: ""
     allergens: []
     type: sucres
     pF: false
@@ -120,7 +121,7 @@ ingredients:
     originalUnit: c. à café
     normalizedQuantity: 5
     normalizedUnit: gr.
-    comment: ''
+    comment: ""
     allergens: []
     type: epices
     pF: false
@@ -131,7 +132,7 @@ ingredients:
     originalUnit: gr.
     normalizedQuantity: 100
     normalizedUnit: gr.
-    comment: ''
+    comment: ""
     allergens:
       - Arachides
     type: autres
@@ -149,14 +150,15 @@ preparation: |-
   Mettre au four 40min.
 
   Servir froid.
-publishDate: '2025-08-08T08:51:00+00:00'
+publishDate: "2025-08-08T08:51:00+00:00"
 uuid: cu5wc60t605t
 titleid: barre-cereales-noisettes_42230653
 serveHot: false
 id: barre-cereales-noisett_cu5wc60t605t
-createdAt: '2025-08-08T08:51:00+00:00'
-updatedAt: '2025-08-08T08:51:00+00:00'
-createdBy: ''
+createdAt: "2025-08-08T08:51:00+00:00"
+updatedAt: "2025-08-08T08:51:00+00:00"
+createdBy: ""
 materiel:
   - Four
 ---
+

@@ -1,0 +1,21 @@
+{
+  "name": "scripts_dev",
+  "version": "1.0.0",
+  "description": "Scripts de développement pour ENKA COOKBOOK",
+  "type": "module",
+  "main": "update-recipe-allergens.js",
+  "scripts": {
+    "update-allergens": "node update-recipe-allergens.js",
+    "update-allergens:dry": "node update-recipe-allergens.js --dry-run --yes"
+  },
+  "keywords": [
+    "hugo",
+    "recipes",
+    "allergens"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "js-yaml": "^4.1.1"
+  }
+}

@@ -1,0 +1,51 @@
+{{/* DOCUMENTATION
+  La base qui définie la façon dont sont construite chacune des pages.
+*/}}
+
+{{/* Lire le manifest Vite pour le cache-busting */}}
+{{ $manifest := readFile "static/app/manifest.json" | unmarshal }}
+
+
+<!doctype html>
+<html lang="{{ .Site.LanguageCode | default "fr" }}">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{ .Site.Title }}</title>
+    {{/* Utiliser les chemins avec hash depuis le manifest */}}
+    {{ with $manifest }}
+      {{ with index . "index.html" }}
+        {{/* Charger le CSS principal */}}
+        {{ range .css }}
+          <link rel="stylesheet" href="/app/{{ . }}" />
+        {{ end }}
+        {{/* Charger le JS principal */}}
+        <script type="module" src="/app/{{ .file }}"></script>
+        {{/* Précharger les dépendances pour de meilleures performances */}}
+        {{ range .imports }}
+          {{/* Ne précharger que les fichiers JS (pas index.html) */}}
+          {{ if ne . "index.html" }}
+            {{ with index $manifest . }}
+              <link rel="modulepreload" href="/app/{{ .file }}" />
+            {{ end }}
+          {{ end }}
+        {{ end }}
+      {{ end }}
+    {{ end }}
+    <link rel="icon" href="/images/favicon.png" type="image/png" />
+    <!--<style>
+      /* CSS critique - évite le flash de contenu non stylisé (FOUC) */
+      #app {
+        display: none;
+      }
+      /* Révéler l'app quand Svelte est prêt */
+      #app.svelte-ready {
+        display: block;
+      }
+    </style>-->
+  </head>
+  <body>
+    <div id="app"></div>
+    {{ block "main" . }}{{ end }}
+  </body>
+</html>

@@ -14,7 +14,7 @@ ingredients:
     originalUnit: gr.
     normalizedQuantity: 125
     normalizedUnit: gr.
-    comment: ''
+    comment: ""
     allergens: []
     type: epices
     pF: false
@@ -25,7 +25,7 @@ ingredients:
     originalUnit: kg
     normalizedQuantity: 7500
     normalizedUnit: gr.
-    comment: ''
+    comment: ""
     allergens:
       - Produit laitier
     type: frais
@@ -37,7 +37,7 @@ ingredients:
     originalUnit: kg
     normalizedQuantity: 1500
     normalizedUnit: gr.
-    comment: ''
+    comment: ""
     allergens: []
     type: legumes
     pF: true
@@ -48,7 +48,7 @@ ingredients:
     originalUnit: c. à soupe
     normalizedQuantity: 187.5
     normalizedUnit: ml
-    comment: ''
+    comment: ""
     allergens: []
     type: lof
     pF: false
@@ -59,7 +59,7 @@ ingredients:
     originalUnit: gr.
     normalizedQuantity: 750
     normalizedUnit: gr.
-    comment: ''
+    comment: ""
     allergens:
       - Fruit à coque
     type: sec
@@ -71,8 +71,9 @@ ingredients:
     originalUnit: kg
     normalizedQuantity: 1875
     normalizedUnit: gr.
-    comment: ''
-    allergens: []
+    comment: ""
+    allergens:
+      - Gluten
     type: sec
     pF: false
     pS: false
@@ -83,19 +84,19 @@ preparation: |-
   La veille : hâcher l'oignon finement et rincer abondamment le boulgour. Les mélanger avec la moitié du yaourt, la menthe séchée et la moitié des noix hâchées. Saler au gout, laisser reposer au moins 5heures au frais, filmé au contact.
 
   Le lendemain, ajouter le reste du yaourt et des noix hâchées, mélanger. Au dernier moment, décorer avec un filet d'huile d'olive, et parsemer d'un peu de noix grossièrement hâchées et de menthe séchée.
-preparation24h: 'La veille : hacher l''oignon finement et rincer abondamment le boulgour. Les mélanger avec la moitié du yaourt, la menthe séchée et la moitié des noix hâchées. Saler au gout, laisser reposer au moins 5heures au frais, filmé au contact.'
-publishDate: '2024-06-14T00:06:00+00:00'
+preparation24h: "La veille : hacher l'oignon finement et rincer abondamment le boulgour. Les mélanger avec la moitié du yaourt, la menthe séchée et la moitié des noix hâchées. Saler au gout, laisser reposer au moins 5heures au frais, filmé au contact."
+publishDate: "2024-06-14T00:06:00+00:00"
 regime:
-  - sans-gluten
   - vegetarien
 title: Keshke
 typeR: entree
 serveHot: false
 uuid: 72m05w7c40l2
 id: keshke_72m05w7c40l2
-createdAt: '2024-06-14T00:06:00+00:00'
-updatedAt: '2024-06-14T00:06:00+00:00'
+createdAt: "2024-06-14T00:06:00+00:00"
+updatedAt: "2024-06-14T00:06:00+00:00"
 createdBy: ça vaulx le détour
 permissionWrite:
   - 696faf80000078153479
 ---
+

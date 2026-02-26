@@ -6,7 +6,7 @@ typeR: entree
 categories:
   - Autre
 auteur: Auré
-region: ''
+region: ""
 cuisson: true
 plate: 100
 quantite_desc: 1 babka par personne
@@ -18,7 +18,7 @@ ingredients:
     originalUnit: gr.
     normalizedQuantity: 65
     normalizedUnit: gr.
-    comment: ''
+    comment: ""
     allergens: []
     type: epices
     pF: false
@@ -40,7 +40,7 @@ ingredients:
     originalUnit: gr.
     normalizedQuantity: 300
     normalizedUnit: gr.
-    comment: ''
+    comment: ""
     allergens: []
     type: frais
     pF: true
@@ -62,7 +62,7 @@ ingredients:
     originalUnit: l.
     normalizedQuantity: 1000
     normalizedUnit: ml
-    comment: ''
+    comment: ""
     allergens: []
     type: lof
     pF: false
@@ -73,7 +73,7 @@ ingredients:
     originalUnit: kg
     normalizedQuantity: 5800
     normalizedUnit: gr.
-    comment: ''
+    comment: ""
     allergens:
       - Gluten
     type: lof
@@ -85,7 +85,7 @@ ingredients:
     originalUnit: l.
     normalizedQuantity: 4000
     normalizedUnit: ml
-    comment: ''
+    comment: ""
     allergens:
       - Soja
     type: lof
@@ -98,7 +98,8 @@ ingredients:
     normalizedQuantity: 1000
     normalizedUnit: gr.
     comment: garniture
-    allergens: []
+    allergens:
+      - Fruit à coque
     type: sec
     pF: false
     pS: false
@@ -108,7 +109,7 @@ ingredients:
     originalUnit: gr.
     normalizedQuantity: 800
     normalizedUnit: gr.
-    comment: ''
+    comment: ""
     allergens: []
     type: sucres
     pF: false
@@ -144,16 +145,16 @@ preparation: |-
 
   A la fin de la cuisson, les brioches doivent être bien dorées.
 preparation24h: Faire la pâte la veille.
-publishDate: '2024-06-14T23:13:00+00:00'
+publishDate: "2024-06-14T23:13:00+00:00"
 checkAlwaysOk: true
 regime:
-  - sans-lactose
   - vegan
+  - sans-lactose
 serveHot: false
 uuid: qph5vukgdjb6
 id: babka-vegane-harissa-e_qph5vukgdjb6
-createdAt: '2024-06-14T23:13:00+00:00'
-updatedAt: '2024-06-14T23:13:00+00:00'
+createdAt: "2024-06-14T23:13:00+00:00"
+updatedAt: "2024-06-14T23:13:00+00:00"
 createdBy: Auré
 permissionWrite:
   - 696faf80000078153479
@@ -161,3 +162,4 @@ materiel:
   - Four
   - Frigo
 ---
+

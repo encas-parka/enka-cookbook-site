@@ -1,6 +1,5 @@
 .directory
 resources
-public
 **/jsconfig.json
 *bak
 *BAK
@@ -13,8 +12,11 @@ content/
 *.code-workspace
 backups
 .zed
-.vite
-docs/
-.claude
 appwrite
 appwrite-ec-dev
+docs/*
+.vite
+.claude
+
+content
+public

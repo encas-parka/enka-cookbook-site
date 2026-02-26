@@ -1,7 +1,7 @@
 ---
 title: Naan gros gros format (rainbow queer naan)
 draft: false
-description: ''
+description: ""
 typeR: entree
 categories:
   - Pain
@@ -18,7 +18,7 @@ ingredients:
     originalUnit: ml
     normalizedQuantity: 80
     normalizedUnit: ml
-    comment: ''
+    comment: ""
     allergens: []
     type: lof
     pF: false
@@ -29,7 +29,7 @@ ingredients:
     originalUnit: kg
     normalizedQuantity: 8000
     normalizedUnit: gr.
-    comment: ''
+    comment: ""
     allergens:
       - Gluten
     type: lof
@@ -41,7 +41,7 @@ ingredients:
     originalUnit: gr.
     normalizedQuantity: 80
     normalizedUnit: gr.
-    comment: ''
+    comment: ""
     allergens: []
     type: epices
     pF: false
@@ -52,7 +52,7 @@ ingredients:
     originalUnit: ml
     normalizedQuantity: 300
     normalizedUnit: ml
-    comment: ''
+    comment: ""
     allergens: []
     type: autres
     pF: false
@@ -63,7 +63,7 @@ ingredients:
     originalUnit: gr.
     normalizedQuantity: 135
     normalizedUnit: gr.
-    comment: ''
+    comment: ""
     allergens: []
     type: lof
     pF: false
@@ -74,7 +74,7 @@ ingredients:
     originalUnit: gr.
     normalizedQuantity: 35
     normalizedUnit: gr.
-    comment: ''
+    comment: ""
     allergens:
       - Gluten
     type: lof
@@ -86,7 +86,7 @@ ingredients:
     originalUnit: gr.
     normalizedQuantity: 80
     normalizedUnit: gr.
-    comment: ''
+    comment: ""
     allergens: []
     type: sucres
     pF: false
@@ -97,8 +97,9 @@ ingredients:
     originalUnit: unité
     normalizedQuantity: 200
     normalizedUnit: unité
-    comment: ''
-    allergens: []
+    comment: ""
+    allergens:
+      - Produit laitier
     type: frais
     pF: true
     pS: false
@@ -108,20 +109,20 @@ ingredients:
     originalUnit: kg
     normalizedQuantity: 2000
     normalizedUnit: gr.
-    comment: ''
+    comment: ""
     allergens:
       - Produit laitier
     type: frais
     pF: true
     pS: false
 preparation: "Mélanger tous les ingrédients secs : farine, levure de boulanger, levure chimique, sel & sucre.\n\nFaire un puit dans cette farine, et ajoutez les ingrédients liquides : huile, yaourt, eau.\n\nPétrir la pâte 10 à 15 minutes.\n\nLaisser lever la pâte au minimum 1 h 30 dans un endroit tempéré en la recouvrant d'un torchon.\n\nElle doit gonfler un max.\n\n\_Former\n 100 petites boules de taille identique (pour 50 personnes, 2 par\npersonne), les étaler très finement au rouleau à pâtisserie fariné sur\nle plan de travail fariné ou à la main.\n\nDéposer\n 2 portions de vache qui rit sur un disque de pâte, en laissant,\ndisposez un second disque de pâte par dessus et soudez les bords en\nappuyant bien avec les doigts.\n\nPasser le rouleau ou les mains sur la galette pour étaler la vache qui rit.\n\nFaire cuire 5 minutes le naan à la bilig, ou dans une poêle à crêpes ou au four à 180°.\n\nServir chaud.\n\n\\"
-publishDate: '2025-06-02T19:02:00+00:00'
+publishDate: "2025-06-02T19:02:00+00:00"
 checkAlwaysOk: false
 serveHot: true
 uuid: o4djbkawa7z8
 id: naan-gros-gros-format-_o4djbkawa7z8
-createdAt: '2025-06-02T19:02:00+00:00'
-updatedAt: '2025-06-02T19:02:00+00:00'
+createdAt: "2025-06-02T19:02:00+00:00"
+updatedAt: "2025-06-02T19:02:00+00:00"
 createdBy: Auré
 regime:
   - vegetarien
@@ -130,3 +131,4 @@ permissionWrite:
 materiel:
   - Four
 ---
+

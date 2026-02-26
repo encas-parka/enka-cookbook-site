@@ -15,7 +15,7 @@ ingredients:
     originalUnit: gr.
     normalizedQuantity: 373.1
     normalizedUnit: gr.
-    comment: ''
+    comment: ""
     allergens: []
     type: sec
     pF: false
@@ -26,8 +26,9 @@ ingredients:
     originalUnit: gr.
     normalizedQuantity: 40
     normalizedUnit: gr.
-    comment: ''
-    allergens: []
+    comment: ""
+    allergens:
+      - Gluten
     type: sec
     pF: false
     pS: false
@@ -37,7 +38,7 @@ ingredients:
     originalUnit: gr.
     normalizedQuantity: 100
     normalizedUnit: gr.
-    comment: ''
+    comment: ""
     allergens:
       - Gluten
     type: sec
@@ -71,7 +72,7 @@ ingredients:
     originalUnit: l.
     normalizedQuantity: 250
     normalizedUnit: ml
-    comment: ''
+    comment: ""
     allergens: []
     type: lof
     pF: false
@@ -82,7 +83,7 @@ ingredients:
     originalUnit: bottes
     normalizedQuantity: 1
     normalizedUnit: bottes
-    comment: ''
+    comment: ""
     allergens: []
     type: epices
     pF: true
@@ -93,7 +94,7 @@ ingredients:
     originalUnit: c. à café
     normalizedQuantity: 5
     normalizedUnit: ml
-    comment: ''
+    comment: ""
     allergens: []
     type: epices
     pF: false
@@ -104,7 +105,7 @@ ingredients:
     originalUnit: c. à soupe
     normalizedQuantity: 15
     normalizedUnit: gr.
-    comment: ''
+    comment: ""
     allergens: []
     type: epices
     pF: false
@@ -115,7 +116,7 @@ ingredients:
     originalUnit: c. à soupe
     normalizedQuantity: 30
     normalizedUnit: ml
-    comment: ''
+    comment: ""
     allergens: []
     type: epices
     pF: false
@@ -126,7 +127,7 @@ ingredients:
     originalUnit: gr.
     normalizedQuantity: 400
     normalizedUnit: gr.
-    comment: ''
+    comment: ""
     allergens: []
     type: frais
     pF: true
@@ -143,17 +144,18 @@ preparation: |-
   Verser de l'eau sur le riz jusqu'à une phalange eu dessus du niveau de riz.
 
   Mettre au four pendant 45min. Vérifier cuisson du riz, rajouter eau si nécessaire et remettre 15min à la cuisson si besoin.
-publishDate: '2025-08-08T09:24:00+00:00'
+publishDate: "2025-08-08T09:24:00+00:00"
 uuid: m75nlakbryyk
 titleid: tomates-farcies-et-riz_57663707
 serveHot: true
 id: tomates-farcies-et-riz_m75nlakbryyk
-createdAt: '2025-08-08T09:24:00+00:00'
-updatedAt: '2025-08-08T09:24:00+00:00'
-createdBy: ''
+createdAt: "2025-08-08T09:24:00+00:00"
+updatedAt: "2025-08-08T09:24:00+00:00"
+createdBy: ""
 regime:
-  - sans-lactose
   - vegan
+  - sans-lactose
 materiel:
   - Four
 ---
+

@@ -5,7 +5,7 @@ description: Site collaboratif de partage de recettes et d'organisation d'évèn
 baseURL: "/"
 
 titleSeparator: "-"
-relativeURLs: true
+relativeURLs: false
 canonifyURLs: false
 disableAliases: true
 # disableHugoGeneratorInject: true
@@ -36,6 +36,7 @@ outputs:
 
   page:
     - RecipeDetail
+    - HTML  # Désactivé temporairement pour les recettes
 
 
 mediaTypes:

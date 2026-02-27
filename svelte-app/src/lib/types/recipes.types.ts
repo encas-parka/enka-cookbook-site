@@ -170,8 +170,7 @@ export interface RecipesCacheMetadata {
   buildTimestamp: number | null; // Timestamp du dernier build Hugo traité
   lastAppwriteSync: string | null; // Timestamp de la dernière sync Appwrite réussie
   recipesCount: number;
-  cacheVersion: number; // Version du format de cache
-  migrationVersion: number; // Version de migration pour forcer l'invalidation
+  cacheVersion?: number; // Version du format de cache
 }
 
 // =============================================================================

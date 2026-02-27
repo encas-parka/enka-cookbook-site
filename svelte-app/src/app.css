@@ -26,20 +26,64 @@
   --color-cream: oklch(94% 0.035 85.43); /* Cream plus intense - jaune clair */
 }
 
-/* ==========================================================================
-   FULL-HEIGHT APP BASE STYLES
-   ========================================================================== */
-/* Pour les applications qui occupent toute la hauteur de la fenêtre */
-html,
-body {
-  height: 100%;
-  margin: 0;
-  padding: 0;
-}
+@layer base {
+  html {
+    font-size: clamp(14px, 1.1vw, 18px);
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
 
-/* Le conteneur racine de l'application Svelte */
-#app {
-  height: 100%;
+  body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  #app {
+    height: 100%;
+  }
+
+  :root {
+    --color-lavender: oklch(85% 0.06 298.69);
+    --color-lavender-content: oklch(20% 0.02 298.69);
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: "Fredoka", sans-serif;
+    letter-spacing: 0.03em;
+    line-height: 1;
+  }
+
+  h1 {
+    font-size: 1.3rem;
+    font-weight: 900;
+  }
+  h2 {
+    font-size: 1.25rem;
+    font-weight: 800;
+  }
+  h3 {
+    font-size: 1.125rem;
+    font-weight: 600;
+  }
+  h4 {
+    font-size: 1rem;
+    font-weight: 500;
+  }
+  h5 {
+    font-size: 0.9375rem;
+    font-weight: 500;
+  }
+  h6 {
+    font-size: 0.875rem;
+    font-weight: 400;
+  }
 }
 
 @layer components {
@@ -67,131 +111,6 @@ body {
     font-family: "Fredoka", sans-serif;
     font-weight: 500;
   }
-
-  /* Headings avec hiérarchie claire et responsive */
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    font-family: "Fredoka", sans-serif;
-    letter-spacing: 0.03em;
-    line-height: 1;
-  }
-
-  /* h1 - Titre principal, 2rem à partir de lg, font-weight 900 */
-  h1 {
-    font-size: 1.4rem;
-    font-weight: 900;
-  }
-
-  @media (min-width: 640px) {
-    h1 {
-      font-size: 1.75rem;
-    }
-  }
-
-  @media (min-width: 1024px) {
-    h1 {
-      font-size: 2rem;
-    }
-  }
-
-  /* h2 - Titre secondaire, légèrement plus petit */
-  h2 {
-    font-size: 1.25rem;
-    font-weight: 800;
-  }
-
-  @media (min-width: 640px) {
-    h2 {
-      font-size: 1.375rem;
-    }
-  }
-
-  @media (min-width: 1024px) {
-    h2 {
-      font-size: 1.5rem;
-    }
-  }
-
-  /* h3 - Titre tertiaire */
-  h3 {
-    font-size: 1rem;
-    font-weight: 600;
-  }
-
-  @media (min-width: 640px) {
-    h3 {
-      font-size: 1.15rem;
-    }
-  }
-
-  @media (min-width: 1024px) {
-    h3 {
-      font-size: 1.275rem;
-    }
-  }
-
-  /* h4 - Titre de quatrième niveau */
-  h4 {
-    font-size: 1rem;
-    font-weight: 500;
-  }
-
-  @media (min-width: 640px) {
-    h4 {
-      font-size: 1.125rem;
-    }
-  }
-
-  @media (min-width: 1024px) {
-    h4 {
-      font-size: 1.25rem;
-    }
-  }
-
-  /* h5 - Titre de cinquième niveau */
-  h5 {
-    font-size: 0.9375rem;
-    font-weight: 500;
-  }
-
-  @media (min-width: 640px) {
-    h5 {
-      font-size: 1rem;
-    }
-  }
-
-  @media (min-width: 1024px) {
-    h5 {
-      font-size: 1.125rem;
-    }
-  }
-
-  /* h6 - Titre de sixième niveau */
-  h6 {
-    font-size: 0.875rem;
-    font-weight: 400;
-  }
-
-  @media (min-width: 640px) {
-    h6 {
-      font-size: 0.9375rem;
-    }
-  }
-
-  @media (min-width: 1024px) {
-    h6 {
-      font-size: 1rem;
-    }
-  }
-
-  /*
-  .btn {
-    font-family: "Fredoka", sans-serif;
-  }*/
 }
 
 @plugin "daisyui/theme" {
@@ -262,11 +181,6 @@ body {
   --border: 1px;
   --depth: 0;
   --noise: 0;
-}
-
-:root {
-  --color-lavender: oklch(85% 0.06 298.69);
-  --color-lavender-content: oklch(20% 0.02 298.69);
 }
 
 .custom-select {

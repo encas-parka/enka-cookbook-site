@@ -493,9 +493,14 @@ class RecipesStore {
         for (const uuid of updatedIds) {
           try {
             await this.#cache.deleteRecipeDetail(uuid);
-            console.log(`[RecipesStore] Détails obsolètes supprimés pour ${uuid}`);
+            console.log(
+              `[RecipesStore] Détails obsolètes supprimés pour ${uuid}`,
+            );
           } catch (err) {
-            console.warn(`[RecipesStore] Erreur suppression détails ${uuid}:`, err);
+            console.warn(
+              `[RecipesStore] Erreur suppression détails ${uuid}:`,
+              err,
+            );
           }
         }
 

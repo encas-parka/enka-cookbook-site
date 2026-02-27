@@ -27,12 +27,15 @@
   <!-- Absolute top @md -->
   {#if globalState.isDesktop}
     <h3
-      class="text-primary bg-base-100 rounded-t-box border-t-base-300 absolute -top-4 left-0 flex max-w-4/5 items-center-safe gap-3 border-t py-0.5 ps-4 pe-6"
+      class="text-primary bg-base-100 rounded-t-box border-t-base-300 absolute -top-4 left-0 flex max-w-5/6 items-center-safe gap-3 border-t py-1 ps-4 pe-6"
     >
-      <svg class="inline size-6">
+      <svg class="inline size-6 stroke-3">
         <use href={`/icons/sprite.svg#${typeDisplay.iconId}`} />
       </svg>
       {recipe.title}
+      {#if recipe.versionLabel}
+        <span class="text-sm">{recipe.versionLabel}</span>
+      {/if}
       {#if recipe.draft}
         <div class="badge badge-accent badge-outline badge-sm">brouillon</div>
       {/if}
@@ -48,22 +51,22 @@
   {/if}
 
   <!-- Header -->
-  <div class=" flex flex-wrap items-center justify-between gap-4 @md:my-2">
+  <div class=" flex flex-wrap items-start justify-between gap-4 @md:my-2">
     <div class="min-w-2/3 flex-1">
       <!-- title mobile-->
       {#if !globalState.isDesktop}
         <div class="flex gap-4">
           <div
-            class="text-primary mb-2 inline-flex flex-wrap items-start gap-2 text-lg font-semibold"
+            class="text-primary mb-2 inline-flex flex-wrap items-center gap-2 font-bold"
           >
-            <div class="inline-flex items-start gap-x-2 leading-5">
-              <svg class="mt-0.5 size-6 shrink-0">
+            <div class="inline-flex items-center gap-x-2 leading-5">
+              <svg class=" size-6 shrink-0 self-start stroke-3">
                 <use href={`/icons/sprite.svg#${typeDisplay.iconId}`} />
               </svg>
               <div>
                 {recipe.title}
                 {#if recipe.versionLabel}
-                  • {recipe.versionLabel}
+                  <span class="text-sm"> • {recipe.versionLabel}</span>
                 {/if}
               </div>
             </div>
@@ -78,7 +81,7 @@
           {/if}
         </div>
       {/if}
-      <div class=" flex flex-col">
+      <div class="flex flex-col items-start">
         <div class="">
           {#if recipe.auteur}
             <span
@@ -142,29 +145,25 @@
 
   <!-- Ingrédients -->
   {#if recipe.ingredients && recipe.ingredients.length > 0}
-    <div class="my-1 text-sm">
-      <span class="font-semibold">Ingrédients : </span>
-      <div class="flex flex-wrap">
-        {#each recipe.ingredients as ingredient, index}
-          <span class="break-word me-1">
-            {ingredient}{#if index < recipe.ingredients.length - 1},{/if}
-          </span>
-        {/each}
-      </div>
+    <div class="my-1 flex flex-wrap text-sm">
+      <span class="me-2 font-semibold">Ingrédients : </span>
+      {#each recipe.ingredients as ingredient, index}
+        <span class="break-word me-1">
+          {ingredient}{#if index < recipe.ingredients.length - 1},{/if}
+        </span>
+      {/each}
     </div>
   {/if}
 
   <!-- Matériel -->
   {#if recipe.materiel && recipe.materiel.length > 0}
-    <div class="text-sm">
-      <span class="font-semibold">Matériel : </span>
-      <div class="flex flex-wrap">
-        {#each recipe.materiel as item, index}
-          <span class="break-word me-1">
-            {item}{#if index < recipe.materiel.length - 1},{/if}
-          </span>
-        {/each}
-      </div>
+    <div class="flex flex-wrap text-sm">
+      <span class="me-2 font-semibold">Matériel : </span>
+      {#each recipe.materiel as item, index}
+        <span class="break-word me-1">
+          {item}{#if index < recipe.materiel.length - 1},{/if}
+        </span>
+      {/each}
     </div>
   {/if}
 </a>

@@ -177,7 +177,7 @@
 </script>
 
 <div
-  class="navbar bg-base-100 border-base-300 sticky top-0 z-1000 min-h-13 border-b px-4 py-0 shadow-sm transition-transform duration-300 print:hidden {globalState.isMobile &&
+  class="navbar bg-base-100 border-base-300 sticky top-0 z-1000 min-h-11 border-b px-4 py-0 shadow-sm transition-transform duration-300 print:hidden {globalState.isMobile &&
     'min-h-11'}
     {globalState.isMobile && !globalState.headerVisible && '-translate-y-full'}"
 >
@@ -192,14 +192,17 @@
       {#if globalState.isAuthenticated}
         <a
           href={p("/dashboard")}
-          class="btn btn-ghost not-md:btn-square md:gap-2"
+          class="btn btn-ghost btn-sm not-md:btn-square md:gap-2"
         >
           <LayoutDashboardIcon size={18} />
           <span class="hidden md:inline">Tableau de bord</span>
         </a>
       {/if}
 
-      <a href={p("/recipe")} class="btn btn-ghost not-md:btn-square md:gap-2">
+      <a
+        href={p("/recipe")}
+        class="btn btn-sm btn-ghost not-md:btn-square md:gap-2"
+      >
         <CookingPot size={18} />
         <span class="hidden md:inline">Recettes</span>
       </a>
@@ -258,7 +261,7 @@
         <div
           tabindex="0"
           role="button"
-          class="btn btn-ghost btn-circle avatar bg-primary/10 text-primary border-primary/20 border"
+          class="btn btn-sm btn-ghost btn-circle avatar bg-primary/10 text-primary border-primary/20 border"
         >
           <div
             class="flex w-10 items-center justify-center rounded-full text-lg font-bold"
@@ -352,7 +355,7 @@
 
 <!-- SECTION SÉPARÉE : SEULEMENT SUR MOBILE (NON-STICKY) -->
 {#if !globalState.isDesktop}
-  <div class="border-base-300 bg-base-100 border-b px-4 py-3">
+  <div class="border-base-300 bg-base-100 border-b px-4 py-3 print:hidden">
     {#if context?.type === "materiel" || context?.type === "loans"}
       <MaterielTabs currentTeamId={context.teamId} />
     {:else if context?.type === "eventEdit"}

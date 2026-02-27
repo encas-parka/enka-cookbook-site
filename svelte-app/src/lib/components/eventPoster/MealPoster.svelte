@@ -440,29 +440,7 @@
   @media print {
     @page {
       size: A4;
-      margin: 0;
-    }
-
-    /* APLATIR LA STRUCTURE : Le grid disparaît, les enfants deviennent frères */
-    .grid.grid-cols-\[1fr_auto\] {
-      display: contents !important;
-    }
-
-    /* La colonne gauche (flex) devient block simple */
-    .grid.grid-cols-\[1fr_auto\] > .flex {
-      display: block !important;
-    }
-
-    /* Supprimer gap-8 et autres espacements */
-    .grid.grid-cols-\[1fr_auto\] > .flex {
-      gap: 0 !important;
-      margin: 0 !important;
-      padding: 0 !important;
-    }
-
-    /* CACHER la colonne de droite (boutons de restauration) */
-    .grid.grid-cols-\[1fr_auto\] > div:last-child {
-      display: none !important;
+      margin: 0 auto;
     }
 
     /* Styles d'impression pour les sections */
@@ -470,7 +448,7 @@
       box-shadow: none !important;
       border: none !important;
       padding: 20mm !important;
-      margin: 0 !important;
+      margin: 0 auto !important;
       width: 210mm !important;
       height: 297mm !important;
       overflow: hidden !important;

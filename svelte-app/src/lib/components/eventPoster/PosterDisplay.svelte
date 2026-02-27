@@ -65,9 +65,11 @@
 </script>
 
 <div
-  class="bg-base-200 flex-1 overflow-auto p-4 print:m-0 print:overflow-visible print:p-0"
+  class="bg-base-200 flex-1 overflow-auto p-4 print:mx-auto print:overflow-visible print:p-0"
 >
-  <div class="mx-auto max-w-5xl print:m-0 print:w-full print:max-w-none">
+  <div
+    class="mx-auto max-w-5xl print:mx-auto print:my-0 print:w-full print:max-w-none"
+  >
     {#each flatMeals as mealGroup (mealGroup.dateKey + mealGroup.horaire)}
       {@const sectionId = `affiche${mealGroup.dateKey}${mealGroup.horaire}`}
       <MealPoster

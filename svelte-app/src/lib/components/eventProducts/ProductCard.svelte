@@ -281,7 +281,7 @@
     {/if}
 
     <!-- Deuxième ligne: Groupe Besoins + Achats + Manquants (flex wrap) -->
-    <div class="flex min-h-14 flex-wrap gap-3" id="card-needs-missing">
+    <div class="flex min-h-12 flex-wrap gap-3" id="card-needs-missing">
       <!-- Besoins -->
       <div class="flex min-w-75 flex-1 flex-col">
         <div class="text-base-content/60 ms-1 text-sm">
@@ -291,7 +291,7 @@
           id="needs-card"
           role="button"
           tabindex="0"
-          class=" bg-base-300/80 group hover:ring-accent/60 relative flex flex-1 cursor-pointer flex-wrap items-center justify-between gap-x-4 gap-y-1 rounded-lg p-3 shadow-sm hover:ring-2"
+          class=" bg-base-300/80 group hover:ring-accent/60 relative flex flex-1 cursor-pointer flex-wrap items-center justify-between gap-x-4 gap-y-1 rounded-lg p-2 shadow-sm hover:ring-2"
           onclick={() => onOpenModal(product.$id, "recettes")}
           onkeydown={(e) =>
             e.key === "Enter" && onOpenModal(product.$id, "recettes")}
@@ -301,7 +301,7 @@
         >
           <div class="ms-2 flex items-end justify-center gap-4">
             <div
-              class="text-base font-bold {productInDateRange.hasMissing &&
+              class="text-base font-semibold {productInDateRange.hasMissing &&
               shouldShowActionButtons
                 ? 'text-error'
                 : 'text-success'}"
@@ -385,13 +385,13 @@
       </div>
 
       <!-- Achats -->
-      <div class="flex min-w-[300px] flex-1 flex-col">
+      <div class="flex flex-1 flex-col md:min-w-75">
         <div class="text-base-content/60 ms-1 text-sm">
           Achat / reccup effectué
         </div>
 
         <div
-          class="group hover:ring-accent/60 bg-base-300/80 relative flex flex-1 cursor-pointer items-start justify-between gap-2 rounded-lg p-3 shadow-sm transition-colors hover:ring-2"
+          class="group hover:ring-accent/60 bg-base-300/80 relative flex flex-1 cursor-pointer items-start justify-between gap-2 rounded-lg p-2 shadow-sm transition-colors hover:ring-2"
           role="button"
           tabindex="0"
           onclick={() => onOpenModal(product.$id, "achats")}

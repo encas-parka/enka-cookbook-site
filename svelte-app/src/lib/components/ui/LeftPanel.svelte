@@ -21,7 +21,7 @@
 {#if globalState.isDesktop}
   <!-- Conteneur fixe à gauche avec overflow -->
   <div
-    class="{bgClass} fixed top-0 left-0 z-40 h-dvh w-md overflow-y-auto p-4 pb-12 print:hidden"
+    class="{bgClass} fixed top-0 left-0 z-40 h-dvh w-sm overflow-y-auto p-4 pb-12 print:hidden"
   >
     {@render children?.()}
   </div>

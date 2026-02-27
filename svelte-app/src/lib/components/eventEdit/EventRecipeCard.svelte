@@ -110,8 +110,7 @@
 
 <div
   id="recipe-{recipe.$id}"
-  class="card bg-base-100 border-base-300 page-break-after border shadow-lg print:border-none print:shadow-none"
-  style="break-inside: avoid;  break-after: always;"
+  class="card bg-base-100 border-base-300 border shadow-lg print:border-none print:shadow-none"
 >
   <div class="card-body p-2 md:p-6">
     <!-- En-tête de la carte -->
@@ -119,7 +118,7 @@
       <div
         class="flex flex-wrap items-baseline justify-between gap-4 print:gap-1"
       >
-        <div class="flex min-w-2/3 flex-1 gap-2">
+        <div class="flex min-w-3/5 flex-1 gap-2">
           <svg class="size-6 shrink-0">
             <use href={`/icons/sprite.svg#${typeDisplay.iconId}`} />
           </svg>

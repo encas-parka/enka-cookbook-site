@@ -133,7 +133,7 @@
         >
           <!-- Nom du groupe -->
           <div
-            class="flex items-center gap-2 font-bold text-shadow-md/20 md:text-lg @md:min-w-48"
+            class="flex items-center gap-2 font-bold text-shadow-md/20 @md:min-w-48"
           >
             {#if filters.groupBy === "store"}
               <div class="text-primary-content flex items-center gap-2">
@@ -153,7 +153,7 @@
           </div>
 
           {#if !globalState.isMobile}
-            <div class="text-primary-content px-2 text-shadow-md">
+            <div class="text-primary-content px-2 text-sm text-shadow-md">
               {#if productsStore.dateStore.isFullRange && productsStore.dateStore.start !== productsStore.dateStore.end}
                 <div class="font-semibold">Sur toute la période</div>
               {:else if productsStore.dateStore.start !== productsStore.dateStore.end}

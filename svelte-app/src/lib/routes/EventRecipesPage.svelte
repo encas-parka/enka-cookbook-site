@@ -260,7 +260,7 @@
   </div>
 {/snippet}
 
-<div class="bg-base-200 min-h-screen" in:fade>
+<div class="bg-base-200" in:fade>
   <!-- LeftPanel avec recherche et sommaire -->
   <div class="print:hidden">
     <LeftPanel>
@@ -289,7 +289,7 @@
       </div>
 
       <!-- Sommaire réactif des recettes avec filtrage -->
-      <ul class="menu bg-base-100 rounded-box drop-shadow-lg">
+      <ul class="menu bg-base-100 rounded-box w-full drop-shadow-lg">
         {#each Array.from(mealsByDate.entries()) as [date, times] (date)}
           <li>
             <button
@@ -406,7 +406,7 @@
         </div>
 
         <!-- Skeleton des cartes de recettes -->
-        <div class="space-y-10 print:space-y-0">
+        <div class="space-y-10 print:hidden">
           {#each Array(3) as _, i}
             <div class="space-y-6">
               <!-- Skeleton de l'en-tête de repas -->
@@ -488,8 +488,8 @@
           </div>
         </div>
       {:else if eventName}
+        <!-- Informations principales -->
         <div class="mb-8 space-y-4 print:hidden">
-          <!-- Informations principales -->
           <div class="flex flex-wrap items-center justify-between gap-4">
             <div>
               <h1 class="">{eventName}</h1>
@@ -551,7 +551,7 @@
           <!-- Mode recherche par ingrédient : afficher les recettes filtrées -->
           {#if filteredRecipes.length === 0}
             <div
-              class="bg-base-100 border-base-300 rounded-xl border p-8 text-center"
+              class="bg-base-100 border-base-300 rounded-xl border p-8 text-center print:hidden"
             >
               <p class="text-base-content/60 text-lg">
                 Aucune recette ne contient l'ingrédient "{selectedIngredient}".
@@ -567,7 +567,7 @@
                   <!-- Date break -->
                   <div
                     id="meal-{meal.date}"
-                    class="card bg-accent text-accent-content flex flex-row items-center justify-center gap-6 p-4 text-lg font-black print:hidden"
+                    class="card bg-accent text-accent-content my-4 flex flex-row items-center justify-center gap-6 px-4 py-2 font-black print:hidden"
                   >
                     <div class="">
                       {formatDateWdDayMonth(meal.date)}
@@ -588,7 +588,7 @@
                     {@const recipe = recipesDetails.find(
                       (r) => r.$id === mealRecipe.recipeUuid,
                     )}
-                    <div class="">
+                    <div class="page-break-after mb-8">
                       {#if recipe}
                         <EventRecipeCard
                           {recipe}
@@ -644,7 +644,7 @@
                   <!-- Date break -->
                   <div
                     id="meal-{meal.date}"
-                    class="card bg-primary text-primary-content flex flex-row flex-wrap items-center justify-center gap-4 p-2 text-lg font-black shadow-lg sm:gap-6 sm:p-4 print:hidden"
+                    class="card bg-primary text-primary-content my-4 flex flex-row flex-wrap items-center justify-center gap-4 p-2 font-black shadow-lg sm:gap-6 sm:px-4 sm:py-2 print:hidden"
                   >
                     <div class="">
                       {formatDateWdDayMonth(meal.date)}
@@ -665,7 +665,7 @@
                     {@const recipe = recipesDetails.find(
                       (r) => r.$id === mealRecipe.recipeUuid,
                     )}
-                    <div>
+                    <div class="page-break-after">
                       {#if recipe}
                         <EventRecipeCard
                           {recipe}

@@ -48,10 +48,10 @@
 >
   <div class="min-w-0 flex-1 space-y-4">
     <div class="flex flex-wrap items-center gap-4">
-      <div class="text-primary truncate text-lg font-semibold">
+      <div class="text-primary truncate text-base font-semibold">
         {event.name}
       </div>
-      <div class="badge badge-lg h-auto font-medium">
+      <div class="badge h-auto font-medium">
         {#if event.allDates && event.allDates.length > 1 && event.dateStart && event.dateEnd}
           <Calendar class="h-4 w-4" />
           {formatDateShort(event.dateStart)} au {formatDateShort(event.dateEnd)}
@@ -118,7 +118,7 @@
     <!-- Actions -->
     <div class="mt-6 flex flex-wrap justify-end gap-2">
       <button
-        class="btn btn-outline btn-secondary @max-sm:btn-xs btn-sm"
+        class="btn btn-outline btn-secondary @max-sm:btn-xs btn-xs"
         onclick={(e) => {
           e.stopPropagation();
           navigate(`/event/${event.$id}`);
@@ -129,7 +129,7 @@
       </button>
 
       <button
-        class="btn btn-outline btn-secondary @max-sm:btn-xs btn-sm"
+        class="btn btn-outline btn-secondary @max-sm:btn-xs btn-xs"
         onclick={(e) => {
           e.stopPropagation();
           navigate(`/event/${event.$id}/recipes`);
@@ -140,7 +140,7 @@
       </button>
 
       <button
-        class="btn btn-outline btn-secondary @max-sm:btn-xs btn-sm"
+        class="btn btn-outline btn-secondary @max-sm:btn-xs btn-xs"
         onclick={(e) => {
           e.stopPropagation();
           navigate(`/event/${event.$id}/products`);
@@ -151,7 +151,7 @@
       </button>
 
       <button
-        class="btn btn-outline btn-secondary @max-sm:btn-xs btn-sm"
+        class="btn btn-outline btn-secondary @max-sm:btn-xs btn-xs"
         onclick={(e) => {
           e.stopPropagation();
           navigate(`/event/${event.$id}/posters`);

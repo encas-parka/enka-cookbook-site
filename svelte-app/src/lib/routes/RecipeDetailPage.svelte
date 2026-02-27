@@ -126,7 +126,7 @@
   {#if globalState.isAuthenticated && recipeDetails}
     <div class="flex items-center gap-4">
       <button
-        class="btn btn-circle btn-primary max-sm:hidden"
+        class="btn btn-sm btn-circle btn-primary max-sm:hidden"
         onclick={() => window.print()}><Printer size={18} /></button
       >
       <!-- Bouton Créer une version alternative (disponible pour tous) -->

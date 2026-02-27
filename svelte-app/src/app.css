@@ -240,6 +240,26 @@
     margin: 1cm;
   }
 
+  /* Libérer les contraintes de hauteur pour permettre la fragmentation */
+  .min-h-screen,
+  /* Neutraliser les contextes grid/flex — les seuls vrais bloquants */
+  .grid, .flex, .inline-flex {
+    display: block !important;
+  }
+  /* min-height bloquant */
+  .min-h-screen {
+    min-height: 0 !important;
+  }
+
+  /* Les éléments avec overflow bloquent la fragmentation */
+  * {
+    overflow: visible !important;
+  }
+  .page-break-after {
+    break-after: page !important;
+    page-break-after: always !important; /* compatibilité anciens navigateurs */
+  }
+
   /* Cache les éléments globaux */
   header,
   footer,

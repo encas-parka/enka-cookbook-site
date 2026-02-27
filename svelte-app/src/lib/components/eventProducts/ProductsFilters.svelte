@@ -97,14 +97,14 @@
         id="completion-status"
       >
         <button
-          class="btn flex-1 {filters.completionStatus === 'all' &&
+          class="btn btn-sm flex-1 {filters.completionStatus === 'all' &&
             'btn-primary'}"
           type="button"
           aria-label="Tous"
           onclick={() => productsStore.setCompletionStatus("all")}>Tous</button
         >
         <button
-          class="btn flex-1 {filters.completionStatus === 'incomplete' &&
+          class="btn btn-sm flex-1 {filters.completionStatus === 'incomplete' &&
             'btn-warning'}"
           type="button"
           aria-label="Incomplets"
@@ -112,7 +112,7 @@
           ><span class="add-to-cart"></span> Manque</button
         >
         <button
-          class="btn flex-1 {filters.completionStatus === 'completed' &&
+          class="btn btn-sm flex-1 {filters.completionStatus === 'completed' &&
             'btn-success'}"
           type="button"
           aria-label="Complétés"
@@ -132,19 +132,21 @@
         id="grouping-select"
       >
         <button
-          class="btn flex-1 {filters.groupBy === 'none' && 'btn-secondary'}"
+          class="btn btn-sm flex-1 {filters.groupBy === 'none' &&
+            'btn-secondary'}"
           type="button"
           aria-label="Aucun"
           onclick={() => productsStore.setGroupBy("none")}>Aucun</button
         >
         <button
-          class="btn flex-1 {filters.groupBy === 'store' && 'btn-secondary'}"
+          class="btn btn-sm flex-1 {filters.groupBy === 'store' &&
+            'btn-secondary'}"
           type="button"
           aria-label="Par magasin"
           onclick={() => productsStore.setGroupBy("store")}>Magasins</button
         >
         <button
-          class="btn flex-1 {filters.groupBy === 'productType' &&
+          class="btn btn-sm flex-1 {filters.groupBy === 'productType' &&
             'btn-secondary'}"
           type="button"
           aria-label="Par type"

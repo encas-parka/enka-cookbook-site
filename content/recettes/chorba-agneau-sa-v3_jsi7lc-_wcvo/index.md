@@ -207,12 +207,10 @@ preparation24h: Faire tremper les pois chiche la veille.
 permissionWrite:
   - 6931ecdccd2c8d8d15e5
 createdAt: "2026-02-15T18:03:44.319+00:00"
-updatedAt: "2026-02-15T18:34:58.473+00:00"
+updatedAt: "2026-02-27T02:00:00.000+00:00"
 createdBy: 6931ecdccd2c8d8d15e5
 teams: []
 status: public
 rootRecipeId: chorba-agneau-et-langu_duj2ar8i9twp
 versionLabel: "v3 - "
 ---
-
-

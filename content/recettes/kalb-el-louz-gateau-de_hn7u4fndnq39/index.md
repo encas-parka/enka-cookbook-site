@@ -168,12 +168,10 @@ preparation24h: "La veille de la préparation (avant-veille du service)\n\n1. Da
 permissionWrite:
   - 6931ecdccd2c8d8d15e5
 createdAt: "2026-02-15T18:24:03.071+00:00"
-updatedAt: "2026-02-15T18:24:03.071+00:00"
+updatedAt: "2026-02-27T02:00:00.000+00:00"
 createdBy: 6931ecdccd2c8d8d15e5
 teams: null
 status: public
 rootRecipeId: null
 versionLabel: null
 ---
-
-

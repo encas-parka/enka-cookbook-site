@@ -90,6 +90,10 @@ import { setupProductsRealtimeHandler } from "../services/products-realtime.serv
 const BATCH_LIMIT = 1000;
 const SYNC_DEBOUNCE_MS = 500;
 
+// Version de migration actuelle - À incrémenter lors des changements de structure
+// qui nécessitent d'invalider les caches existants
+const CURRENT_MIGRATION_VERSION = 1;
+
 // =============================================================================
 // STORE SINGLETON
 // =============================================================================
@@ -772,7 +776,19 @@ class ProductsStore {
     if (!this.#idbCache) return;
 
     try {
-      // Charger les produits
+      // 1. Charger les métadonnées D'ABORD pour vérifier la version
+      const metadata = await this.#idbCache.loadMetadata();
+
+      // 2. Vérifier la version de migration
+      if (metadata.migrationVersion !== CURRENT_MIGRATION_VERSION) {
+        console.log(
+          `[ProductsStore] ⚠️ Cache invalide : version de migration obsolète (${metadata.migrationVersion} ≠ ${CURRENT_MIGRATION_VERSION})`,
+        );
+        console.log(`[ProductsStore] Le cache sera ignoré et les produits seront recalculés`);
+        return; // Ne pas charger le cache
+      }
+
+      // 3. Charger les produits
       const productsMap = await this.#idbCache.loadProducts();
 
       productsMap.forEach((product, id) => {
@@ -786,13 +802,11 @@ class ProductsStore {
         );
       });
 
-      // Charger les métadonnées
-      const metadata = await this.#idbCache.loadMetadata();
       this.#lastSync = metadata.lastSync;
       this.dateStore.setAvailableDates([...metadata.allDates]);
 
       console.log(
-        `[ProductsStore] ${productsMap.size} produits chargés du cache IDB, lastSync: ${metadata.lastSync}`,
+        `[ProductsStore] ${productsMap.size} produits chargés du cache IDB (v${metadata.migrationVersion}), lastSync: ${metadata.lastSync}`,
       );
     } catch (err) {
       console.warn("[ProductsStore] Erreur lecture cache IDB, ignoré:", err);
@@ -912,13 +926,14 @@ class ProductsStore {
       });
       await this.#idbCache.saveProducts(productsToSave);
 
-      // Sauvegarder les métadonnées
+      // Sauvegarder les métadonnées avec la version de migration actuelle
       await this.#idbCache.saveMetadata({
         lastSync: this.#lastSync,
         allDates: [...this.dateStore.dates],
+        migrationVersion: CURRENT_MIGRATION_VERSION,
       });
 
-      console.log("[ProductsStore] Cache IDB persisté");
+      console.log(`[ProductsStore] Cache IDB persisté (v${CURRENT_MIGRATION_VERSION})`);
     } catch (err) {
       console.error("[ProductsStore] Erreur persist cache IDB:", err);
     }

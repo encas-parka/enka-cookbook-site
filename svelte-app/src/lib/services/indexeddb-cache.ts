@@ -25,6 +25,7 @@ interface CacheMetadata {
   lastSync: string | null;
   allDates: string[];
   hugoContentHash?: string | null;
+  migrationVersion: number;
 }
 
 export interface IDBCache {
@@ -59,6 +60,7 @@ class IndexedDBCache implements IDBCache {
   private readonly LAST_SYNC_KEY = "lastSync";
   private readonly ALL_DATES_KEY = "allDates";
   private readonly HUGO_HASH_KEY = "hugoContentHash";
+  private readonly MIGRATION_VERSION_KEY = "migrationVersion";
 
   constructor(mainId: string) {
     this.dbName = `products-cache-${mainId}`;
@@ -144,6 +146,7 @@ class IndexedDBCache implements IDBCache {
           lastSync: null,
           allDates: [],
           hugoContentHash: null,
+          migrationVersion: 0, // 0 = version par défaut pour les caches anciens
         };
 
         allEntries.forEach((entry) => {
@@ -152,10 +155,12 @@ class IndexedDBCache implements IDBCache {
             metadata.allDates = entry.value || [];
           else if (entry.key === this.HUGO_HASH_KEY)
             metadata.hugoContentHash = entry.value;
+          else if (entry.key === this.MIGRATION_VERSION_KEY)
+            metadata.migrationVersion = entry.value || 0;
         });
 
         console.log(
-          `[IDBCache] Metadata chargées: lastSync=${metadata.lastSync}, dates=${metadata.allDates?.length || 0}, hash=${metadata.hugoContentHash}`,
+          `[IDBCache] Metadata chargées: lastSync=${metadata.lastSync}, dates=${metadata.allDates?.length || 0}, hash=${metadata.hugoContentHash}, migrationVersion=${metadata.migrationVersion}`,
         );
         resolve(metadata);
       };
@@ -207,6 +212,8 @@ class IndexedDBCache implements IDBCache {
       if (metadata.hugoContentHash !== undefined) {
         store.put({ key: this.HUGO_HASH_KEY, value: metadata.hugoContentHash });
       }
+      // Toujours sauvegarder la version de migration
+      store.put({ key: this.MIGRATION_VERSION_KEY, value: metadata.migrationVersion });
 
       tx.oncomplete = () => {
         console.log(`[IDBCache] Metadata sauvegardées (objets {key, value})`);
@@ -273,6 +280,27 @@ class IndexedDBCache implements IDBCache {
 
       request.onsuccess = () => {
         console.log(`[IDBCache] hugoContentHash mis à jour: ${hash}`);
+        resolve();
+      };
+
+      request.onerror = () => reject(request.error);
+    });
+  }
+
+  /**
+   * Met à jour uniquement migrationVersion (optimisé pour les migrations)
+   * 🎯 Utilisé lors des migrations de données pour marquer les caches comme à jour
+   */
+  async updateMigrationVersion(version: number): Promise<void> {
+    if (!this.db) throw new Error("DB non ouverte");
+
+    return new Promise((resolve, reject) => {
+      const tx = this.db!.transaction(this.METADATA_STORE, "readwrite");
+      const store = tx.objectStore(this.METADATA_STORE);
+      const request = store.put({ key: this.MIGRATION_VERSION_KEY, value: version });
+
+      request.onsuccess = () => {
+        console.log(`[IDBCache] migrationVersion mis à jour: ${version}`);
         resolve();
       };
 

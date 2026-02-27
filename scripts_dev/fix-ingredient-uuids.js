@@ -200,6 +200,10 @@ function fixRecipe(filePath, analysis, ingredientsIndex) {
 
   analysis.recipe.ingredients = updatedIngredients;
 
+  // 🔧 IMPORTANT: Mettre à jour le champ updatedAt pour forcer Hugo à prendre le dessus
+  // sur Appwrite lors du Smart Merge (le plus récent gagne)
+  analysis.recipe.updatedAt = new Date().toISOString();
+
   // Lire le contenu original pour préserver le body
   const originalContent = fs.readFileSync(filePath, 'utf8');
   const newContent = generateRecipeContent(originalContent, analysis.recipe);

@@ -171,6 +171,7 @@ export interface RecipesCacheMetadata {
   lastAppwriteSync: string | null; // Timestamp de la dernière sync Appwrite réussie
   recipesCount: number;
   cacheVersion: number; // Version du format de cache
+  migrationVersion: number; // Version de migration pour forcer l'invalidation
 }
 
 // =============================================================================

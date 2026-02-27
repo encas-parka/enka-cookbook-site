@@ -44,6 +44,7 @@ export interface RecipesIDBCache {
 
   loadMetadata(): Promise<RecipesCacheMetadata>;
   saveMetadata(metadata: RecipesCacheMetadata): Promise<void>;
+  updateMigrationVersion(version: number): Promise<void>;
 
   // Utilitaires
   deleteRecipeDetail(uuid: string): Promise<void>;
@@ -70,6 +71,7 @@ class RecipesIndexedDBCache implements RecipesIDBCache {
   private readonly BUILD_TIMESTAMP_KEY = "buildTimestamp";
   private readonly LAST_APPWRITE_SYNC_KEY = "lastAppwriteSync";
   private readonly RECIPES_COUNT_KEY = "recipesCount";
+  private readonly MIGRATION_VERSION_KEY = "migrationVersion";
 
   /**
    * Ouvre/crée la base IndexedDB
@@ -474,6 +476,7 @@ class RecipesIndexedDBCache implements RecipesIDBCache {
           lastAppwriteSync: null,
           recipesCount: 0,
           cacheVersion: 1,
+          migrationVersion: 0, // Default pour les anciens caches
         };
 
         allEntries.forEach((entry) => {
@@ -483,6 +486,8 @@ class RecipesIndexedDBCache implements RecipesIDBCache {
             metadata.buildTimestamp = entry.value;
           else if (entry.key === this.LAST_APPWRITE_SYNC_KEY)
             metadata.lastAppwriteSync = entry.value;
+          else if (entry.key === this.MIGRATION_VERSION_KEY)
+            metadata.migrationVersion = entry.value || 0;
         });
 
         console.log(
@@ -514,6 +519,7 @@ class RecipesIndexedDBCache implements RecipesIDBCache {
         value: metadata.lastAppwriteSync,
       });
       store.put({ key: this.RECIPES_COUNT_KEY, value: metadata.recipesCount });
+      store.put({ key: this.MIGRATION_VERSION_KEY, value: metadata.migrationVersion });
 
       tx.oncomplete = () => {
         console.log(`[RecipesIDBCache] Metadata sauvegardées`);
@@ -521,6 +527,26 @@ class RecipesIndexedDBCache implements RecipesIDBCache {
       };
 
       tx.onerror = () => reject(tx.error);
+    });
+  }
+
+  /**
+   * Met à jour la version de migration (pour forcer le rechargement des recettes)
+   */
+  async updateMigrationVersion(version: number): Promise<void> {
+    if (!this.db) throw new Error("DB non ouverte");
+
+    return new Promise((resolve, reject) => {
+      const tx = this.db!.transaction(this.METADATA_STORE, "readwrite");
+      const store = tx.objectStore(this.METADATA_STORE);
+      const request = store.put({ key: this.MIGRATION_VERSION_KEY, value: version });
+
+      request.onsuccess = () => {
+        console.log(`[RecipesIDBCache] migrationVersion mis à jour: ${version}`);
+        resolve();
+      };
+
+      request.onerror = () => reject(request.error);
     });
   }
   // =============================================================================

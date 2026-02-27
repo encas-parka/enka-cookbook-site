@@ -61,6 +61,10 @@ import { realtimeManager } from "./RealtimeManager.svelte";
 
 const DATA_JSON_URL = "/data/data.json";
 
+// Version de migration actuelle - À incrémenter lors des changements de structure
+// qui nécessitent d'invalider les caches existants
+const CURRENT_MIGRATION_VERSION = 1;
+
 // =============================================================================
 // STORE SINGLETON
 // =============================================================================
@@ -422,6 +426,7 @@ class RecipesStore {
       // 3. Smart Merge (Index en mémoire vs Nouvelles données)
       const recipes = data.recipes.map((r: any) => parseRecipeIndexEntry(r));
       let updatedCount = 0;
+      const updatedIds: string[] = []; // Track des recettes mises à jour
 
       recipes.forEach((newRecipe: RecipeIndexEntry) => {
         const existing = this.#recipesIndex.get(newRecipe.$id);
@@ -441,6 +446,7 @@ class RecipesStore {
 
         if (shouldUpdate) {
           this.#recipesIndex.set(newRecipe.$id, newRecipe);
+          updatedIds.push(newRecipe.$id);
           updatedCount++;
         }
       });
@@ -451,6 +457,17 @@ class RecipesStore {
 
       // 4. Mise à jour du cache
       if (this.#cache) {
+        // 🔧 IMPORTANT: Supprimer les détails obsolètes des recettes mises à jour
+        // pour forcer le rechargement depuis Hugo (qui contient les bons UUIDs)
+        for (const uuid of updatedIds) {
+          try {
+            await this.#cache.deleteRecipeDetail(uuid);
+            console.log(`[RecipesStore] Détails obsolètes supprimés pour ${uuid}`);
+          } catch (err) {
+            console.warn(`[RecipesStore] Erreur suppression détails ${uuid}:`, err);
+          }
+        }
+
         // Sauvegarder l'index complet (mémoire)
         await this.#cache.saveRecipesIndex(this.#recipesIndex);
         await this.#cache.saveMetadata({

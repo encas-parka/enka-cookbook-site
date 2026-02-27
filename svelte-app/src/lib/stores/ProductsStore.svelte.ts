@@ -586,6 +586,15 @@ class ProductsStore {
       if (this.#enrichedProducts.size === 0) {
         console.log("[ProductsStore] Cache vide, calcul depuis event.meals...");
 
+        // ⚠️ IMPORTANT : Attendre que RecipesStore ait terminé sa synchronisation
+        // distante avant de calculer les produits. Sans cela, en cas d'accès direct
+        // à la page (sans passer par la homepage), les details IDB de recettes
+        // obsolètes pourraient être utilisés avant que RecipesStore ait eu le temps
+        // de les invalider (race condition entre loadCache+syncFromRemote et ProductsStore.initialize).
+        console.log("[ProductsStore] Attente de recipesStore.syncReady...");
+        await recipesStore.syncReady;
+        console.log("[ProductsStore] recipesStore.syncReady → calcul des produits");
+
         await this.#calculateProductsFromEvent(event);
 
         // Persister le cache

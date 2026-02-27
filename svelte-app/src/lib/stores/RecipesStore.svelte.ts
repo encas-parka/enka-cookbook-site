@@ -89,6 +89,11 @@ class RecipesStore {
   #initPromise: Promise<void> | null = null;
   #realtimeInitialized = false;
 
+  // Promise résolue quand syncFromRemote() a terminé (invalide les caches obsolètes)
+  // ProductsStore l'attend avant de calculer les produits depuis les recettes
+  #syncPromise: Promise<void> = Promise.resolve();
+  #syncResolve: (() => void) | null = null;
+
   // Getters publics
   get loading() {
     return this.#loading;
@@ -100,6 +105,15 @@ class RecipesStore {
 
   get isInitialized() {
     return this.#isInitialized;
+  }
+
+  /**
+   * Promise résolue quand syncFromRemote() (ou la variante publique) a terminé.
+   * Garantit que les details IDB obsolètes ont été supprimés avant tout calcul de produits.
+   * ProductsStore l'attend avant de recalculer les produits depuis les recettes.
+   */
+  get syncReady(): Promise<void> {
+    return this.#syncPromise;
   }
 
   /**
@@ -183,6 +197,11 @@ class RecipesStore {
       return;
     }
 
+    // Créer une nouvelle Promise non-résolue pour signaler que le sync est en cours
+    this.#syncPromise = new Promise<void>((resolve) => {
+      this.#syncResolve = resolve;
+    });
+
     console.log("[RecipesStore] Synchronisation depuis sources distantes...");
     this.#loading = true;
 
@@ -222,6 +241,10 @@ class RecipesStore {
       throw err;
     } finally {
       this.#loading = false;
+      // Résoudre la promise pour signaler que le sync est terminé
+      // (quelles que soient les erreurs partielles)
+      this.#syncResolve?.();
+      this.#syncResolve = null;
     }
   }
 
@@ -234,6 +257,11 @@ class RecipesStore {
       console.warn("[RecipesStore] Impossible de sync : cache non initialisé");
       return;
     }
+
+    // Créer une nouvelle Promise non-résolue pour signaler que le sync est en cours
+    this.#syncPromise = new Promise<void>((resolve) => {
+      this.#syncResolve = resolve;
+    });
 
     console.log("[RecipesStore] Synchronisation publique (Hugo uniquement)...");
     this.#loading = true;
@@ -265,6 +293,9 @@ class RecipesStore {
       throw err;
     } finally {
       this.#loading = false;
+      // Résoudre la promise pour signaler que le sync est terminé
+      this.#syncResolve?.();
+      this.#syncResolve = null;
     }
   }
 

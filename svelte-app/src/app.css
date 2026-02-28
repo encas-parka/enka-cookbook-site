@@ -243,7 +243,7 @@
   /* Libérer les contraintes de hauteur pour permettre la fragmentation */
   .min-h-screen,
   /* Neutraliser les contextes grid/flex — les seuls vrais bloquants */
-  .grid, .flex, .inline-flex {
+  .grid {
     display: block !important;
   }
   /* min-height bloquant */

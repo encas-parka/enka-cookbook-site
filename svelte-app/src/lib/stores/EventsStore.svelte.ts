@@ -53,6 +53,7 @@ import {
 import { getAppwriteInstances, getDatabaseId } from "$lib/services/appwrite";
 import { realtimeManager } from "./RealtimeManager.svelte";
 import { generateAllDemoEvents } from "$lib/data/demo-events";
+import { toastService } from "$lib/services/toast.service.svelte";
 
 // =============================================================================
 // STORE SINGLETON
@@ -1364,17 +1365,17 @@ export class EventsStore {
       });
 
       console.log(
-        `[EventsStore] Invitation result: ${result.processed} traités`,
+        `[EventsStore] Invitation déclenchée: ${result.executionId}`,
       );
 
-      // Recharger avec délai adaptatif (plus long pour les teams car batch update)
-      const delay = teamIds.length > 0 ? 2000 : 500;
-      await new Promise((resolve) => setTimeout(resolve, delay));
+      // ✅ La fonction est maintenant async, le reload se fera via realtime
+      // Afficher un toast pour informer que c'est en cours
+      if (result.message) {
+        toastService.info(result.message, { autoCloseDelay: 5000 });
+      }
 
-      const updatedEvent = await this.fetchEvent(eventId);
-      if (!updatedEvent) throw new Error("Impossible de recharger l'événement");
-
-      return updatedEvent;
+      // Retourner l'événement actuel (sera mis à jour via realtime)
+      return event;
     } catch (err) {
       console.error(`[EventsStore] Erreur invitation participants:`, err);
       throw err;

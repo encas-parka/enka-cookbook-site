@@ -4,6 +4,7 @@
 
 import { getAppwriteInstances, getAppwriteConfig } from "./appwrite";
 import { safeOperation, safeJsonParse } from "$lib/utils/safe-operation";
+import { globalState } from "$lib/stores/GlobalState.svelte";
 
 const { APPWRITE_CONFIG } = getAppwriteConfig();
 
@@ -104,7 +105,7 @@ export async function checkUserEmails(
  *   @param options.message - Message personnalisé (optionnel)
  *   @param options.sendEmailToExistingMembers - Envoyer un email aux membres existants (défaut: true)
  *
- * @returns { success: boolean, processed: number, emailResults?: any }
+ * @returns { success: boolean, executionId?: string, message?: string }
  */
 export async function inviteParticipantsToEvent(
   eventId: string,
@@ -116,7 +117,7 @@ export async function inviteParticipantsToEvent(
     message?: string;
     sendEmailToExistingMembers?: boolean;
   },
-): Promise<{ success: boolean; processed: number; emailResults?: any }> {
+): Promise<{ success: boolean; executionId?: string; message?: string }> {
   const {
     teamIds = [],
     emails = [],
@@ -143,30 +144,28 @@ export async function inviteParticipantsToEvent(
           userIds,
           message,
           sendEmailToExistingMembers,
+          requestedBy: globalState.userId, // ✅ AJOUTER
         }),
-        async: false,
+        async: true, // ✅ CHANGER : async: false → async: true
       });
 
-      const result = safeJsonParse<any>(response.responseBody, {
-        context: "inviteParticipantsToEvent",
-        fallback: null,
-      });
-
-      if (!result || !result.success) {
-        throw new Error(result?.error || "Erreur lors de l'invitation");
-      }
+      const executionId = response.$id;
 
       console.log(
-        `[appwrite-functions] ${result.processed} invitations traitées pour ${eventName}`,
+        `[appwrite-functions] Invitation déclenchée pour ${eventName} (execution: ${executionId})`,
       );
 
-      // ✅ Retourner le résultat détaillé
-      return result;
+      // ✅ Retour immédiat avec l'ID d'exécution
+      return {
+        success: true,
+        executionId,
+        message: "Invitation en cours, vous serez notifié une fois terminée",
+      };
     },
     {
       context: "AppwriteFunctions.inviteParticipantsToEvent",
-      timeout: 60000, // 60s car batch update peut être long avec les teams
-      errorMessage: "Erreur lors de l'invitation",
+      timeout: 10000, // ✅ CHANGER : 60000 → 10000 (10s suffit pour déclencher)
+      errorMessage: "Erreur lors du déclenchement de l'invitation",
     },
   );
 }

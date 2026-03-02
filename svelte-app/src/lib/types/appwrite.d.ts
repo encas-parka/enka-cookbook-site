@@ -46,6 +46,7 @@ export enum UserNotificationsNotificationType {
   EVENT_ACCESS_GRANTED = "event_access_granted",
   BATCH_PURCHASES_UPDATE = "batch_purchases_update",
   BATCH_PRODUCTS_UPDATE = "batch_products_update",
+  INVITE_FAILED = "invite_failed",
 }
 
 export enum EventTodoPriority {

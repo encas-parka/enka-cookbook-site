@@ -20,13 +20,20 @@ import type { AppwriteConfig } from "../types/global";
 // =============================================================================
 
 /**
- * Détection de l'environnement de développement local
+ * Détection de l'environnement de développement
+ * - Local : import.meta.env.DEV (Vite dev server)
+ * - Cloudflare Pages : hostname contient ".pages.dev"
+ * - Variable d'environnement : VITE_APP_ENV=dev
  */
-const isDevLocal = import.meta.env.DEV && typeof window !== "undefined";
+const isDevLocal =
+  import.meta.env.DEV ||
+  (typeof window !== "undefined" &&
+    (window.location.hostname.includes(".enka-cookbook-site.pages.dev") ||
+      import.meta.env.VITE_APP_ENV === "dev"));
 
 const APPWRITE_CONFIG = {
   endpoint: "https://aw.oupla.net/v1",
-  // Utilisation du projet de développement en local, production en build
+  // Utilisation du projet de développement en local ou branche de dev Cloudflare Pages
   projectId: isDevLocal ? "697a1fcf0005e3703e25" : "696b7acb0037bde79e3f",
   databaseId: "689d15b10003a5a13636",
   functions: {

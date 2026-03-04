@@ -120,6 +120,7 @@ export type Main = Models.Row & {
   minContrib: number;
   todos: string[] | null;
   teamsId: string[] | null;
+  shareLinks: string[] | null;
 };
 
 export type Products = Models.Row & {
@@ -275,4 +276,15 @@ export type Teamdocs = Models.Row & {
   teamId: string;
   status: string;
   lockedBy: string | null;
+};
+
+export type ShareLinks = Models.Row & {
+  link_type: string;       // "event" pour l'instant
+  target_id: string;       // $id du document main
+  access_level: string;    // "write"
+  createdBy: string;
+  expiresAt: string | null;
+  maxUses: number | null;
+  useCount: number;
+  isActive: boolean;
 };

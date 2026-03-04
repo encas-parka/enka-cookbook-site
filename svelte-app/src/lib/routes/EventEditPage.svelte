@@ -1,6 +1,7 @@
 <script lang="ts">
   import EventMealCard from "$lib/components/eventEdit/EventMealCard.svelte";
   import PermissionsManager from "$lib/components/PermissionsManager.svelte";
+  import EventShareLinks from "$lib/components/eventEdit/EventShareLinks.svelte";
   import EventInvitationAlert from "$lib/components/EventInvitationAlert.svelte";
   import { toastService } from "$lib/services/toast.service.svelte";
   import { eventsStore } from "$lib/stores/EventsStore.svelte";
@@ -917,6 +918,10 @@
             {eventId}
             onStartEdit={startEditing}
           />
+
+          {#if canEdit}
+            <EventShareLinks event={currentEvent} />
+          {/if}
         {/if}
 
         <!-- Liste des Tâches (TODO) -->

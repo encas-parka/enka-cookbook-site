@@ -106,6 +106,10 @@ export async function checkUserEmails(
  *   @param options.sendEmailToExistingMembers - Envoyer un email aux membres existants (défaut: true)
  *
  * @returns { success: boolean, executionId?: string, message?: string }
+ *
+ * NOTE : Cette fonction est appelée en mode async (async: true) pour éviter de bloquer le client.
+ * Le retry est désactivé côté client pour éviter d'envoyer plusieurs fois les mêmes emails.
+ * La cloud function gère elle-même le retry pour l'envoi d'emails en cas d'échec.
  */
 export async function inviteParticipantsToEvent(
   eventId: string,
@@ -126,48 +130,51 @@ export async function inviteParticipantsToEvent(
     sendEmailToExistingMembers = true,
   } = options;
 
-  return safeOperation(
-    async () => {
-      const { functions } = await getAppwriteInstances();
+  try {
+    const { functions } = await getAppwriteInstances();
 
-      const response = await functions.createExecution({
-        functionId: APPWRITE_CONFIG.functions.usersTeamsManager,
-        body: JSON.stringify({
-          action: "invite",
-          context: {
-            type: "event",
-            id: eventId,
-            name: eventName,
-          },
-          teamIds,
-          emails,
-          userIds,
-          message,
-          sendEmailToExistingMembers,
-          requestedBy: globalState.userId, // ✅ AJOUTER
-        }),
-        async: true, // ✅ CHANGER : async: false → async: true
-      });
+    const response = await functions.createExecution({
+      functionId: APPWRITE_CONFIG.functions.usersTeamsManager,
+      body: JSON.stringify({
+        action: "invite",
+        context: {
+          type: "event",
+          id: eventId,
+          name: eventName,
+        },
+        teamIds,
+        emails,
+        userIds,
+        message,
+        sendEmailToExistingMembers,
+        requestedBy: globalState.userId,
+      }),
+      async: true, // Non-bloquant : retourne immédiatement avec l'ID d'exécution
+    });
 
-      const executionId = response.$id;
+    const executionId = response.$id;
 
-      console.log(
-        `[appwrite-functions] Invitation déclenchée pour ${eventName} (execution: ${executionId})`,
-      );
+    console.log(
+      `[appwrite-functions] Invitation déclenchée pour ${eventName} (execution: ${executionId})`,
+    );
 
-      // ✅ Retour immédiat avec l'ID d'exécution
-      return {
-        success: true,
-        executionId,
-        message: "Invitation en cours, vous serez notifié une fois terminée",
-      };
-    },
-    {
-      context: "AppwriteFunctions.inviteParticipantsToEvent",
-      timeout: 10000, // ✅ CHANGER : 60000 → 10000 (10s suffit pour déclencher)
-      errorMessage: "Erreur lors du déclenchement de l'invitation",
-    },
-  );
+    return {
+      success: true,
+      executionId,
+      message: "Invitation en cours, vous serez notifié une fois terminée",
+    };
+  } catch (error) {
+    // Gestion simple d'erreur (pas de retry pour éviter d'envoyer plusieurs fois les emails)
+    console.error(
+      `[appwrite-functions] Erreur lors du déclenchement de l'invitation:`,
+      error,
+    );
+
+    return {
+      success: false,
+      message: "Erreur lors du déclenchement de l'invitation",
+    };
+  }
 }
 
 /**

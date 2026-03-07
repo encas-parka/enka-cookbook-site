@@ -1,7 +1,7 @@
 import { getAppwriteInstances, getFunctionId } from "./appwrite";
 import type { Models } from "appwrite";
 import { ID, Query } from "appwrite";
-import type { InviteResult } from "../types/aw_native_team";
+import type { InviteResult, AsyncInviteResult } from "../types/aw_native_team";
 
 /**
  * Liste les équipes de l'utilisateur actuel
@@ -86,12 +86,16 @@ export async function getMember(
 
 /**
  * Invite des membres via une Cloud Function pour envoyer des emails personnalisés
+ *
+ * NOTE : Cette fonction est appelée en mode async (async: true) pour éviter de bloquer le client.
+ * Le retour immédiat avec executionId permet au client de ne pas attendre l'envoi des emails.
+ * La cloud function gère elle-même le retry pour l'envoi d'emails en cas d'échec.
  */
 export async function inviteMembers(
   teamId: string,
   emails: string[],
   message?: string,
-): Promise<InviteResult> {
+): Promise<AsyncInviteResult> {
   const { functions } = await getAppwriteInstances();
   const functionId = getFunctionId("usersTeamsManager");
 
@@ -105,13 +109,20 @@ export async function inviteMembers(
   const response = await functions.createExecution({
     functionId,
     body: JSON.stringify(payload),
+    async: true, // Non-bloquant : retourne immédiatement avec l'ID d'exécution
   });
 
-  if (response.status !== "completed") {
-    throw new Error(`Erreur lors de l'invitation : ${response.errors}`);
-  }
+  const executionId = response.$id;
 
-  return JSON.parse(response.responseBody);
+  console.log(
+    `[appwrite-native-teams] Invitation déclenchée pour la team ${teamId} (execution: ${executionId})`,
+  );
+
+  return {
+    success: true,
+    executionId,
+    message: "Invitation en cours, vous serez notifié une fois terminée",
+  };
 }
 
 /**

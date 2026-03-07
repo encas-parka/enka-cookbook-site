@@ -7,7 +7,7 @@
   import { toastService } from "$lib/services/toast.service.svelte";
   import { navBarStore } from "$lib/stores/NavBarStore.svelte";
   import AuthModal from "$lib/components/AuthModal.svelte";
-  import { PartyPopper, TriangleAlert } from "lucide-svelte";
+  import { PartyPopper, TriangleAlert } from "@lucide/svelte";
 
   const SESSION_STORAGE_KEY = "pending_join_link";
 
@@ -45,6 +45,10 @@
    */
   async function handleAuthSuccess() {
     authModalOpen = false;
+
+    // FORCER le rafraîchissement de l'état global pour récupérer l'utilisateur connecté
+    await globalState.refreshAuthAfterLogin();
+
     const pendingLinkId = sessionStorage.getItem(SESSION_STORAGE_KEY);
     if (pendingLinkId && globalState.userId) {
       sessionStorage.removeItem(SESSION_STORAGE_KEY);
@@ -61,9 +65,9 @@
       step = "loading";
       const { eventId } = await redeemShareLink(id, userId);
 
-      // Réinitialiser le store events pour recharger avec le nouveau label
+      // FORCER la synchronisation avec Appwrite pour obtenir la nouvelle liste des contributeurs (sinon le cache idb est utilisé)
       const { eventsStore } = await import("$lib/stores/EventsStore.svelte");
-      await eventsStore.initialize();
+      await eventsStore.syncFromRemote();
 
       step = "success";
       toastService.success("Accès accordé ! Redirection en cours...");

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Shield, Link as LinkIcon, Copy, Plus } from "lucide-svelte";
+  import { Shield, Link as LinkIcon, Copy, Plus } from "@lucide/svelte";
   import Fieldset from "$lib/components/ui/Fieldset.svelte";
   import { createShareLink } from "$lib/services/appwrite-invitations";
   import { globalState } from "$lib/stores/GlobalState.svelte";
@@ -48,7 +48,9 @@
           <div
             class="bg-base-200 flex items-center justify-between gap-2 rounded-md p-2"
           >
-            <div class="text-base-content/80 flex-1 truncate font-mono text-xs">
+            <div
+              class="text-base-content/80 flex-1 overflow-auto font-mono text-xs"
+            >
               {window.location.origin}/join/{linkId}
             </div>
             <button

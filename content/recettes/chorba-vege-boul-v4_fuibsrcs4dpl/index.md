@@ -1,12 +1,13 @@
 ---
 title: Chorba végé boulgour
-date: "2026-02-15T18:05:14.491Z"
+date: '2026-03-07T13:38:02.659Z'
 draft: true
 typeR: plat
 categories:
   - Soupe
 regime:
   - vegan
+  - sans-gluten
   - sans-lactose
 plate: 12
 quantite_desc: un bol d'environ 600ml par personne
@@ -25,7 +26,7 @@ ingredients:
     originalUnit: l.
     normalizedQuantity: 3000
     normalizedUnit: ml
-    comment: ""
+    comment: ''
     allergens: []
     type: autres
     pF: false
@@ -36,7 +37,7 @@ ingredients:
     originalUnit: gr.
     normalizedQuantity: 10
     normalizedUnit: gr.
-    comment: ""
+    comment: ''
     allergens: []
     type: epices
     pF: false
@@ -47,7 +48,7 @@ ingredients:
     originalUnit: gr.
     normalizedQuantity: 8
     normalizedUnit: gr.
-    comment: ""
+    comment: ''
     allergens: []
     type: epices
     pF: false
@@ -58,7 +59,7 @@ ingredients:
     originalUnit: gr.
     normalizedQuantity: 30
     normalizedUnit: gr.
-    comment: ""
+    comment: ''
     allergens:
       - Moutarde
     type: epices
@@ -70,7 +71,7 @@ ingredients:
     originalUnit: bottes
     normalizedQuantity: 0.5
     normalizedUnit: bottes
-    comment: ""
+    comment: ''
     allergens: []
     type: epices
     pF: true
@@ -81,7 +82,7 @@ ingredients:
     originalUnit: bottes
     normalizedQuantity: 1
     normalizedUnit: bottes
-    comment: ""
+    comment: ''
     allergens: []
     type: epices
     pF: true
@@ -92,7 +93,7 @@ ingredients:
     originalUnit: gr.
     normalizedQuantity: 100
     normalizedUnit: gr.
-    comment: ""
+    comment: ''
     allergens: []
     type: epices
     pF: false
@@ -103,7 +104,7 @@ ingredients:
     originalUnit: gr.
     normalizedQuantity: 800
     normalizedUnit: gr.
-    comment: ""
+    comment: ''
     allergens: []
     type: epices
     pF: false
@@ -114,7 +115,7 @@ ingredients:
     originalUnit: gr.
     normalizedQuantity: 140
     normalizedUnit: gr.
-    comment: ""
+    comment: ''
     allergens:
       - Céleri
     type: legumes
@@ -126,7 +127,7 @@ ingredients:
     originalUnit: gr.
     normalizedQuantity: 500
     normalizedUnit: gr.
-    comment: ""
+    comment: ''
     allergens: []
     type: legumes
     pF: true
@@ -137,7 +138,7 @@ ingredients:
     originalUnit: gr.
     normalizedQuantity: 600
     normalizedUnit: gr.
-    comment: ""
+    comment: ''
     allergens: []
     type: legumes
     pF: true
@@ -148,55 +149,52 @@ ingredients:
     originalUnit: ml
     normalizedQuantity: 100
     normalizedUnit: ml
-    comment: ""
+    comment: ''
     allergens: []
     type: lof
     pF: false
     pS: false
   - uuid: 6a8w8k
     name: Pois chiches
-    originalQuantity: 400
+    originalQuantity: 300
     originalUnit: gr.
-    normalizedQuantity: 400
+    normalizedQuantity: 300
     normalizedUnit: gr.
     comment: secs
     allergens: []
     type: sec
     pF: false
     pS: false
-  - uuid: f5fy8w
+  - uuid: rFuTuJv6Su3HnTJI_qTWO
     name: Navet
     originalQuantity: 300
     originalUnit: gr.
     normalizedQuantity: 300
     normalizedUnit: gr.
-    comment: ""
+    comment: ''
     allergens: []
     type: legumes
-  - uuid: omf24t
+  - uuid: jU4Z5rXlcHLtxRyuZ9baT
     name: Boulgour
     originalQuantity: 150
     originalUnit: gr.
     normalizedQuantity: 150
     normalizedUnit: gr.
-    comment: ""
-    allergens:
-      - Gluten
+    comment: ''
+    allergens: []
     type: sec
-    pF: false
-    pS: false
 preparation: |-
   Eplucher et émincer les carottes et les navets. Emincer les branches de céleri. Mettre le tout dans un saladier. Réserver.
 
   Eplucher et émincer grossièrement les oignons.
 
-  Couper la viande en morceaux. Dans une gamelle (ou poêle) : verser un filet d'huile d'olive et y faire cuire les morceaux de viande en ajoutant les oignons.
+  Dans une gamelle (ou poêle) : verser un filet d'huile d'olive et y faire cuire les oignons.
 
   Dans la gamelle : assaisonner avec le ras el hanout, le gingembre en poudre, le paprika et le piment doux.
 
   Déposer, les carottes, les navets, le céleri et les pois chiches dans la gamelle.
 
-  Ajouter le concentré de tomates, l'eau et le coulis de tomate. Assaisonner de sel et de poivre.
+  Ajouter le concentré de tomates, l'eau et le coulis de tomate. Assaisonner de sel (non! Le sel a la fin car ca ralentit la cuisson des legumineuses) et de poivre.
 
   Plonger une botte entière de coriandre dans la gamelle. Remuer le tout. Laisser cuire au moins 1h à frémissement.
 
@@ -206,11 +204,13 @@ astuces: []
 preparation24h: Faire tremper les pois chiche la veille.
 permissionWrite:
   - 6931ecdccd2c8d8d15e5
-createdAt: "2026-02-15T18:05:14.180+00:00"
-updatedAt: "2026-02-27T02:00:00.000+00:00"
+auteur: Marion
+createdAt: '2026-02-15T18:05:14.180+00:00'
+updatedAt: '2026-03-07T13:37:59.729+00:00'
 createdBy: 6931ecdccd2c8d8d15e5
 teams: []
 status: public
 rootRecipeId: chorba-agneau-et-langu_duj2ar8i9twp
-versionLabel: "v4 - "
+versionLabel: 'v4 - '
 ---
+

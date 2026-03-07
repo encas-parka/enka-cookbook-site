@@ -918,10 +918,6 @@
             {eventId}
             onStartEdit={startEditing}
           />
-
-          {#if canEdit}
-            <EventShareLinks event={currentEvent} />
-          {/if}
         {/if}
 
         <!-- Liste des Tâches (TODO) -->

@@ -1364,15 +1364,7 @@ export class EventsStore {
         sendEmailToExistingMembers,
       });
 
-      console.log(
-        `[EventsStore] Invitation déclenchée: ${result.executionId}`,
-      );
-
-      // ✅ La fonction est maintenant async, le reload se fera via realtime
-      // Afficher un toast pour informer que c'est en cours
-      if (result.message) {
-        toastService.info(result.message, { autoCloseDelay: 5000 });
-      }
+      console.log(`[EventsStore] Invitation déclenchée: ${result.executionId}`);
 
       // Retourner l'événement actuel (sera mis à jour via realtime)
       return event;

@@ -121,7 +121,7 @@ export async function inviteMembers(
   return {
     success: true,
     executionId,
-    message: "Invitation en cours, vous serez notifié une fois terminée",
+    message: "Invitation en cours",
   };
 }
 

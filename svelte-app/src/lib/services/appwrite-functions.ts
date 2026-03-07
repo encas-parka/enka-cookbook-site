@@ -130,51 +130,38 @@ export async function inviteParticipantsToEvent(
     sendEmailToExistingMembers = true,
   } = options;
 
-  try {
-    const { functions } = await getAppwriteInstances();
+  const { functions } = await getAppwriteInstances();
 
-    const response = await functions.createExecution({
-      functionId: APPWRITE_CONFIG.functions.usersTeamsManager,
-      body: JSON.stringify({
-        action: "invite",
-        context: {
-          type: "event",
-          id: eventId,
-          name: eventName,
-        },
-        teamIds,
-        emails,
-        userIds,
-        message,
-        sendEmailToExistingMembers,
-        requestedBy: globalState.userId,
-      }),
-      async: true, // Non-bloquant : retourne immédiatement avec l'ID d'exécution
-    });
+  const response = await functions.createExecution({
+    functionId: APPWRITE_CONFIG.functions.usersTeamsManager,
+    body: JSON.stringify({
+      action: "invite",
+      context: {
+        type: "event",
+        id: eventId,
+        name: eventName,
+      },
+      teamIds,
+      emails,
+      userIds,
+      message,
+      sendEmailToExistingMembers,
+      requestedBy: globalState.userId,
+    }),
+    async: true, // Non-bloquant : retourne immédiatement avec l'ID d'exécution
+  });
 
-    const executionId = response.$id;
+  const executionId = response.$id;
 
-    console.log(
-      `[appwrite-functions] Invitation déclenchée pour ${eventName} (execution: ${executionId})`,
-    );
+  console.log(
+    `[appwrite-functions] Invitation déclenchée pour ${eventName} (execution: ${executionId})`,
+  );
 
-    return {
-      success: true,
-      executionId,
-      message: "Invitation en cours, vous serez notifié une fois terminée",
-    };
-  } catch (error) {
-    // Gestion simple d'erreur (pas de retry pour éviter d'envoyer plusieurs fois les emails)
-    console.error(
-      `[appwrite-functions] Erreur lors du déclenchement de l'invitation:`,
-      error,
-    );
-
-    return {
-      success: false,
-      message: "Erreur lors du déclenchement de l'invitation",
-    };
-  }
+  return {
+    success: true,
+    executionId,
+    message: "Invitation en cours",
+  };
 }
 
 /**

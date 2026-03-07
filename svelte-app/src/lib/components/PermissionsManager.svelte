@@ -7,17 +7,21 @@
     PencilLine,
     Plus,
     X,
+    Link as LinkIcon,
+    Copy,
   } from "@lucide/svelte";
   import type { EventContributor } from "$lib/types/events";
   import type { NativeTeamsStore } from "$lib/stores/NativeTeamsStore.svelte";
   import type { EventsStore } from "$lib/stores/EventsStore.svelte";
   import { nanoid } from "nanoid";
   import { toastService } from "$lib/services/toast.service.svelte";
+  import { createShareLink } from "$lib/services/appwrite-invitations";
   import ModalContainer from "$lib/components/ui/modal/ModalContainer.svelte";
   import ModalHeader from "$lib/components/ui/modal/ModalHeader.svelte";
   import ModalContent from "$lib/components/ui/modal/ModalContent.svelte";
   import ModalFooter from "$lib/components/ui/modal/ModalFooter.svelte";
   import Fieldset from "$lib/components/ui/Fieldset.svelte";
+  import { fade } from "svelte/transition";
 
   // Interface des props
   interface Props {
@@ -46,7 +50,7 @@
   // État local - géré entièrement dans ce composant
   let selectedTeams = $state<string[]>([]);
   let newContributors = $state<EventContributor[]>([]);
-  let sendEmailToExistingMembers = $state(false);
+  let sendEmailToExistingMembers = $state(true);
 
   // État local pour le modal
   let showInviteModal = $state(false);
@@ -85,6 +89,7 @@
 
   let emailInput = $state("");
   let inviteError = $state<string | null>(null);
+  let isGenerating = $state(false);
 
   // Groupes de contributeurs pour l'affichage
   let acceptedContributors = $derived(
@@ -183,7 +188,6 @@
         }),
         {
           loading: "Envoi des invitations en cours...",
-          success: `invitation envoyé avec succès`,
           error: "Erreur lors de l'envoi des invitations",
         },
       );
@@ -254,6 +258,26 @@
     } catch (error) {
       console.error("Erreur lors de la désinscription:", error);
     }
+  }
+
+  async function handleGenerateLink() {
+    if (!userId || !eventId) return;
+    try {
+      isGenerating = true;
+      const result = await createShareLink(eventId, userId);
+      toastService.success("Lien généré avec succès !");
+    } catch (e: any) {
+      toastService.error(e.message || "Erreur lors de la génération du lien");
+    } finally {
+      isGenerating = false;
+    }
+  }
+
+  function copyToClipboard(linkId: string) {
+    const url = `${window.location.origin}/join/${linkId}`;
+    navigator.clipboard.writeText(url).then(() => {
+      toastService.success("Lien copié dans le presse-papier !");
+    });
   }
 </script>
 
@@ -407,6 +431,71 @@
       </button>
     </div>
   {/if}
+
+  <!-- Section Liens de partage -->
+  {#if eventId}
+    <div class="divider"></div>
+
+    <div class="flex items-center gap-2 text-base font-medium">
+      <LinkIcon class="inline size-4 shrink-0" /> Lien de partage
+    </div>
+
+    <div class="alert alert-info mt-6">
+      <div class="text-sm">
+        <p>
+          Les liens de partage permettent à n'importe qui d'accéder à
+          l'événement et de le modifier en un clic. Partagez-les uniquement avec
+          les personnes de confiance. Les personnes accèdant à ce lien qui n'ont
+          pas de compte enka-cookbook seront invité à en créer un.
+        </p>
+      </div>
+    </div>
+
+    <!-- Liste des liens déjà générés -->
+    {@const event = eventsStore.getEventById(eventId)}
+    {#if event?.shareLinks && event.shareLinks.length > 0}
+      <div class="mt-4 space-y-2">
+        {#each event.shareLinks as linkId (linkId)}
+          <div
+            class="bg-base-200 flex items-center justify-between gap-2 rounded-md p-2"
+          >
+            <div
+              class="text-base-content/80 flex-1 overflow-auto font-mono text-xs"
+            >
+              {window.location.origin}/join/{linkId}
+            </div>
+            <button
+              class="btn btn-ghost btn-xs text-primary"
+              aria-label="Copier"
+              title="Copier le lien"
+              onclick={() => copyToClipboard(linkId)}
+            >
+              <Copy class="h-4 w-4" />
+            </button>
+          </div>
+        {/each}
+      </div>
+    {:else}
+      <p class="text-base-content/50 mt-2 py-4 text-sm italic">
+        Aucun lien de partage généré pour le moment.
+      </p>
+      <button
+        class="btn btn-outline btn-primary mt-4 w-full"
+        onclick={handleGenerateLink}
+        disabled={isGenerating}
+      >
+        {#if isGenerating}
+          <span
+            class="loading loading-spinner loading-xs hidden md:inline-block"
+          ></span>
+          Génération...
+        {:else}
+          <LinkIcon class="mr-1 h-4 w-4" />
+          Nouveau lien de partage
+        {/if}
+      </button>
+    {/if}
+  {/if}
 </Fieldset>
 
 <!-- Modal d'invitation -->
@@ -515,26 +604,6 @@
                 </label>
               {/each}
             </div>
-
-            <!-- ✅ NOUVEAU: Contrôle de l'envoi d'emails aux membres existants -->
-            {#if selectedTeams.length > 0}
-              <label class="mt-4 cursor-pointer justify-center gap-4">
-                <input
-                  type="checkbox"
-                  class="checkbox checkbox-sm"
-                  bind:checked={sendEmailToExistingMembers}
-                />
-                <span class="font-base ms-1">
-                  Envoyer un email de notification
-                </span>
-              </label>
-              <p class="text-base-content/60 mt-1 text-xs">
-                Si désactivé, les membres auront accès à l'événement mais ne
-                recevront pas d'email. Les personnes invitées n'ayant pas de
-                compte recevront toujours un email pour la création de leur
-                compte.
-              </p>
-            {/if}
           {:else}
             <p class="text-sm italic opacity-60">
               Toutes vos équipes sont déjà invitées.
@@ -545,6 +614,31 @@
             Vous ne faites partie d'aucune équipe. Créez une équipe pour inviter
             plusieurs personnes.
           </p>
+        {/if}
+        <!-- ✅ NOUVEAU: Contrôle de l'envoi d'emails aux membres existants -->
+        {#if selectedTeams.length > 0 || newContributors.length > 0}
+          <label
+            class="label border-base-300 mt-4 cursor-pointer gap-4 rounded border p-2"
+            transition:fade
+          >
+            <input
+              type="checkbox"
+              class="checkbox"
+              bind:checked={sendEmailToExistingMembers}
+              aria-label="Envoyer un email de notification"
+            />
+            <div class="flex flex-col gap-1">
+              <span class="label-text text-base"
+                >Envoyer un email de notification</span
+              >
+              <p class="label-text text-xs text-wrap">
+                Si désactivé, les membres auront accès à l'événement mais ne
+                recevront pas d'email. Les personnes invitées n'ayant pas de
+                compte enka-cookbook recevront toujours un email pour la
+                création de leur compte.
+              </p>
+            </div>
+          </label>
         {/if}
       </fieldset>
     </div>

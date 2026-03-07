@@ -293,11 +293,6 @@ export class NativeTeamsStore {
     const result = await inviteMembers(teamId, emails, message);
 
     // ✅ La fonction est maintenant async, le reload se fera via realtime
-    // Afficher un toast pour informer que c'est en cours
-    if (result.message) {
-      toastService.info(result.message, { autoCloseDelay: 5000 });
-    }
-
     // Ne pas faire await this.fetchTeam() immédiatement
     // Les membres apparaîtront automatiquement via realtime
   }

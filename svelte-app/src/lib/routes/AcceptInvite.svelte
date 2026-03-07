@@ -12,24 +12,26 @@
   let loading = $state(true);
   let step = $state<"verifying" | "set-password" | "error">("verifying");
   let errorMsg = $state("");
-  let membershipRevoked = $state(false);
-  let teamName = $state("");
+  let accessRevoked = $state(false);
+  let contextName = $state("");
 
   // Formulaire
   let password = $state("");
   let passwordConfirm = $state("");
   let name = $state("");
 
-  // L'URL ressemble à : #/accept-invite?userId=xyz&teamId=123
+  // L'URL ressemble à : #/accept-invite?userId=xyz&teamId=123 OU eventId=456
   let userId = $state("");
   let teamId = $state("");
+  let eventId = $state("");
 
   onMount(async () => {
     // 1. Récupération des paramètres via sv-router
     userId = (route.search.userId as string) || "";
     teamId = (route.search.teamId as string) || "";
+    eventId = (route.search.eventId as string) || "";
 
-    if (!userId || !teamId) {
+    if (!userId || (!teamId && !eventId)) {
       step = "error";
       errorMsg = "Lien d'invitation incomplet ou invalide.";
       loading = false;
@@ -40,19 +42,20 @@
       console.log("[AcceptInvite] Initialisation...", {
         userId,
         teamId,
+        eventId,
       });
 
       const { client, account } = await getAppwriteInstances();
 
       // 2. Vérification de l'invitation et récupération d'un Token Appwrite
-      // La fonction vérifie si l'utilisateur a une membership dans la team (non-bloquant)
+      // La fonction vérifie si l'utilisateur a une membership dans la team OU un accès à l'event (non-bloquant)
       // et nous renvoie un token Appwrite
-      const result = await validateInvitation(userId, teamId);
+      const result = await validateInvitation(userId, teamId, eventId);
 
-      // Stocker l'info sur la membership révoquée si présente
-      if (result.membershipRevoked) {
-        membershipRevoked = true;
-        teamName = result.teamName || "l'équipe";
+      // Stocker l'info sur l'accès révoqué si présente
+      if (result.accessRevoked) {
+        accessRevoked = true;
+        contextName = result.contextName || "l'équipe";
       }
 
       console.log("[AcceptInvite] Token reçu, création session...");
@@ -69,7 +72,7 @@
       name = user.name;
 
       // Cas particulier : Si l'utilisateur a déjà un mot de passe
-      if (user.passwordUpdate) {
+      if (user.passwordUpdate && user.emailVerification === true) {
         // L'utilisateur a déjà un mot de passe, on le redirige vers le dashboard
         navigate("/dashboard");
         return;
@@ -133,7 +136,7 @@
   }
   $effect(() => {
     navBarStore.setConfig({
-      title: "Rejoindre l'équipe",
+      title: teamId ? "Rejoindre l'équipe" : "Rejoindre l'événement",
     });
   });
 </script>
@@ -163,7 +166,7 @@
           Veuillez définir un mot de passe.
         </p>
 
-        {#if membershipRevoked}
+        {#if accessRevoked}
           <div class="alert alert-warning mb-4" role="alert">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -179,7 +182,7 @@
               />
             </svg>
             <span>
-              <strong>Information :</strong> Votre accès à {teamName} a été révoqué.
+              <strong>Information :</strong> Votre accès à {contextName} a été révoqué.
               Vous pouvez tout de même créer votre compte et vous connecter.
             </span>
           </div>

@@ -12,59 +12,52 @@ import { getAppwriteConfig } from "$lib/services/appwrite";
 const APPWRITE_CONFIG = getAppwriteConfig().APPWRITE_CONFIG;
 
 /**
- * Valide une invitation de team native et récupère un token de session
+ * Valide une invitation (team native OU event) et récupère un token de session
  * Utilisé dans le workflow d'invitation par email (AcceptInvite.svelte)
  *
  * La vérification se fait via:
- * - Vérifier que l'utilisateur a une membership dans la team (non-bloquant)
+ * - Team native : Vérifier que l'utilisateur a une membership dans la team
+ * - Event : Vérifier/Rajouter le label eventId et les contributors[] (défensif)
  *
  * NOTE: Cette fonction utilise la Cloud Function 'invitation' avec le scope 'any'
  * pour pouvoir être appelée par des utilisateurs non connectés.
  *
  * IMPORTANT: L'utilisateur peut finaliser son compte même si la membership a été
- * révoquée. Le champ membershipRevoked est informatif seulement.
+ * révoquée. Le champ accessRevoked est informatif seulement.
  *
  * @param userId - ID de l'utilisateur
- * @param teamId - ID de la team native
- * @returns Token de session Appwrite + infos sur la membership
- */
-/**
- * Valide une invitation de team native et récupère un token de session
- * Utilisé dans le workflow d'invitation par email (AcceptInvite.svelte)
- *
- * La vérification se fait via:
- * - Vérifier que l'utilisateur a une membership dans la team (non-bloquant)
- *
- * NOTE: Cette fonction utilise la Cloud Function 'invitation' avec le scope 'any'
- * pour pouvoir être appelée par des utilisateurs non connectés.
- *
- * IMPORTANT: L'utilisateur peut finaliser son compte même si la membership a été
- * révoquée. Le champ membershipRevoked est informatif seulement.
- *
- * @param userId - ID de l'utilisateur
- * @param teamId - ID de la team native
- * @returns Token de session Appwrite + infos sur la membership
+ * @param teamId - ID de la team native (optionnel)
+ * @param eventId - ID de l'event (optionnel)
+ * @returns Token de session Appwrite + infos sur l'invitation
  */
 export async function validateInvitation(
   userId: string,
-  teamId: string,
+  teamId?: string,
+  eventId?: string,
 ): Promise<{
   token: string;
   userId: string;
-  hasMembership: boolean;
-  membershipRevoked: boolean;
-  teamName: string | null;
+  hasAccess: boolean;
+  accessRevoked: boolean;
+  contextName: string | null;
 }> {
   try {
     const { functions } = await getAppwriteInstances();
 
+    // Déterminer l'action selon le paramètre fourni
+    const action = teamId ? "exchange-invite" : "exchange-event-invite";
+
+    const payload: any = {
+      action,
+      userId,
+    };
+
+    if (teamId) payload.teamId = teamId;
+    if (eventId) payload.eventId = eventId;
+
     const response = await functions.createExecution({
       functionId: APPWRITE_CONFIG.functions.invitation,
-      body: JSON.stringify({
-        action: "exchange-invite",
-        userId,
-        teamId,
-      }),
+      body: JSON.stringify(payload),
     });
 
     const result = JSON.parse(response.responseBody);
@@ -76,9 +69,9 @@ export async function validateInvitation(
     return {
       token: result.token,
       userId: result.userId,
-      hasMembership: result.hasMembership || false,
-      membershipRevoked: result.membershipRevoked || false,
-      teamName: result.teamName || null,
+      hasAccess: result.hasAccess ?? result.hasMembership ?? false,
+      accessRevoked: result.accessRevoked ?? result.membershipRevoked ?? false,
+      contextName: result.contextName ?? result.teamName ?? null,
     };
   } catch (error) {
     console.error("[invitations] Error validating invitation:", error);
@@ -150,4 +143,3 @@ export async function redeemShareLink(
 
   return { eventId: result.eventId };
 }
-

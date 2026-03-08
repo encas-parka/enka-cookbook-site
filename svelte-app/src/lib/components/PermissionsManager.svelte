@@ -534,7 +534,7 @@
           <p class="text-error mt-1 text-xs">{inviteError}</p>
         {/if}
 
-        <div>
+        <div class="flex flex-wrap gap-2">
           {#each newContributors as contributor}
             <p>{contributor.email}</p>
           {/each}

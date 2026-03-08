@@ -10,11 +10,7 @@
   // États (Svelte 5 Runes)
   let loading = $state(true);
   let step = $state<
-    | "verifying"
-    | "set-password"
-    | "error"
-    | "already-accepted"
-    | "wrong-user"
+    "verifying" | "set-password" | "error" | "already-accepted" | "wrong-user"
   >("verifying");
   let errorMsg = $state("");
   let accessRevoked = $state(false);
@@ -84,9 +80,9 @@
           invitedUserName = existingSession.name;
 
           // Redirection automatique après 3 secondes
-          const destination = (eventId
-            ? `/event/${eventId}`
-            : "/dashboard") as `/${string}`;
+          const destination = (
+            eventId ? `/event/${eventId}` : "/dashboard"
+          ) as `/${string}`;
           setTimeout(() => {
             navigate(destination);
           }, 3000);
@@ -231,10 +227,8 @@
       {:else if step === "wrong-user"}
         <TriangleAlert class="text-warning mb-2 size-7" />
         <h2 class="text-warning text-xl font-bold">Compte différent</h2>
-        <p class="py-4">
-          Vous êtes actuellement connecté en tant que :
-        </p>
-        <p class="text-primary font-semibold mb-4">{currentUserEmail}</p>
+        <p class="py-4">Vous êtes actuellement connecté en tant que :</p>
+        <p class="text-primary mb-4 font-semibold">{currentUserEmail}</p>
         <p class="text-base-content/70 mb-6">
           Mais ce lien d'invitation est destiné à un autre utilisateur.
         </p>
@@ -266,7 +260,9 @@
         <button
           class="btn btn-primary w-full"
           onclick={() =>
-            navigate((eventId ? `/event/${eventId}` : "/dashboard") as `/${string}`)}
+            navigate(
+              (eventId ? `/event/${eventId}` : "/dashboard") as `/${string}`,
+            )}
         >
           Y aller maintenant
         </button>
@@ -275,7 +271,7 @@
         <h2 class="card-title justify-center text-2xl">Bienvenue !</h2>
         <p class="text-base-content/70 mb-6 text-sm">
           Votre invitation est validée. <br />
-          Veuillez définir un mot de passe.
+          Pour finaliser la création de votre compte, veuillez définir un mot de passe.
         </p>
 
         {#if accessRevoked}

@@ -81,7 +81,7 @@
   );
 </script>
 
-<div class="space-y-4 sm:mt-12" class:opacity-30={disabled}>
+<div class="flex flex-col min-h-0 space-y-4 sm:mt-12" class:opacity-30={disabled}>
   <div class="mb-4 flex items-center justify-between">
     <h4 class="text-lg font-bold">Filtres</h4>
     <button class="btn btn-warning btn-sm" onclick={onReset} {disabled}>

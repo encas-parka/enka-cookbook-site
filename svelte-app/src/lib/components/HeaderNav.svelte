@@ -355,7 +355,9 @@
 
 <!-- SECTION SÉPARÉE : SEULEMENT SUR MOBILE (NON-STICKY) -->
 {#if !globalState.isDesktop}
-  <div class="border-base-300 bg-base-100 border-b px-4 py-3 print:hidden">
+  <div
+    class="border-base-300 bg-base-100 h-fit border-b px-4 py-2 print:hidden"
+  >
     {#if context?.type === "materiel" || context?.type === "loans"}
       <MaterielTabs currentTeamId={context.teamId} />
     {:else if context?.type === "eventEdit"}

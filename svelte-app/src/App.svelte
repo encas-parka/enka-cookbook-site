@@ -220,8 +220,8 @@
   rel="stylesheet"
 />
 
-<div class="grid min-h-screen grid-rows-[auto_1fr]">
-  <HeaderNav />
+<div class="grid min-h-dvh grid-rows-[auto_1fr]">
+  <div class="h-fit"><HeaderNav /></div>
   <div class="bg-base-200">
     {#if appState === "ERROR"}
       <div class="flex h-[50vh] items-center justify-center">

@@ -32,7 +32,7 @@
     <DrawerContent
       class="fixed top-0 bottom-0 left-0 z-50 flex w-[90vw] max-w-100 flex-col shadow-2xl {bgClass}"
     >
-      <div class="h-full overflow-y-auto p-4 pb-24">
+      <div class="flex-1 min-h-0 overflow-y-auto p-4 pb-24">
         <div class="mb-4 flex justify-center">
           <DrawerHandle />
         </div>

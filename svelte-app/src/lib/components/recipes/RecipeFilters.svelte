@@ -81,7 +81,7 @@
   );
 </script>
 
-<div class="flex flex-col min-h-0 overflow-y-auto space-y-4 sm:mt-12" class:opacity-30={disabled}>
+<div class="sm:mt-12" class:opacity-30={disabled}>
   <div class="mb-4 flex items-center justify-between">
     <h4 class="text-lg font-bold">Filtres</h4>
     <button class="btn btn-warning btn-sm" onclick={onReset} {disabled}>
@@ -91,7 +91,8 @@
   </div>
 
   <!-- Catégories -->
-  <Fieldset legend="Catégories" iconComponent={UtensilsCrossed}>
+  <div class="mb-4">
+    <Fieldset legend="Catégories" iconComponent={UtensilsCrossed}>
     <div class="flex flex-wrap gap-3">
       {#each availableCategories as category}
         <CheckboxBadge
@@ -103,9 +104,11 @@
       {/each}
     </div>
   </Fieldset>
+  </div>
 
   <!-- Régimes -->
-  <Fieldset legend="Régimes" iconComponent={Salad}>
+  <div class="mb-4">
+    <Fieldset legend="Régimes" iconComponent={Salad}>
     <div class="flex flex-wrap gap-3">
       {#each availableRegimes as regime}
         <CheckboxBadge
@@ -117,9 +120,11 @@
       {/each}
     </div>
   </Fieldset>
+  </div>
 
   <!-- Ingrédients -->
-  <Fieldset legend="Ingrédients" iconComponent={Cookie}>
+  <div class="mb-4">
+    <Fieldset legend="Ingrédients" iconComponent={Cookie}>
     <!-- Input avec autocomplétion -->
     <div class="mb-3">
       <AutocompleteInput
@@ -146,9 +151,11 @@
       />
     </div>
   </Fieldset>
+  </div>
 
   <!-- Recettes testées -->
-  <Fieldset legend="Testé">
+  <div class="mb-4">
+    <Fieldset legend="Testé">
     <div class="bg-base-100 flex gap-1 rounded-xl p-2 font-semibold">
       <button
         class="btn btn-sm flex-1 {filters.testedStatus === 'all' &&
@@ -173,9 +180,11 @@
       >
     </div>
   </Fieldset>
+  </div>
 
   <!-- Service (Température) -->
-  <Fieldset legend="Service" iconComponent={Flame}>
+  <div class="mb-4">
+    <Fieldset legend="Service" iconComponent={Flame}>
     <div class="bg-base-100 flex gap-1 rounded-xl p-2 font-semibold">
       <button
         class="btn btn-sm flex-1 {filters.temperature === '' &&
@@ -200,9 +209,11 @@
       >
     </div>
   </Fieldset>
+  </div>
 
   <!-- Cuisson -->
-  <Fieldset legend="Cuisson" iconComponent={Cloud}>
+  <div class="mb-4">
+    <Fieldset legend="Cuisson" iconComponent={Cloud}>
     <div class="bg-base-100 flex gap-1 rounded-xl p-2 font-semibold">
       <button
         class="btn btn-sm flex-1 {filters.cuisson === '' && 'btn-secondary'}"
@@ -224,9 +235,11 @@
       >
     </div>
   </Fieldset>
+  </div>
 
   <!-- Saison -->
-  <Fieldset legend="Saison" iconComponent={Calendar}>
+  <div class="mb-4">
+    <Fieldset legend="Saison" iconComponent={Calendar}>
     <div class="bg-base-100 flex flex-wrap gap-1 rounded-xl p-2 font-semibold">
       <button
         class="btn btn-sm flex-1 {filters.saison === '' && 'btn-secondary'}"
@@ -261,4 +274,5 @@
       >
     </div>
   </Fieldset>
+  </div>
 </div>

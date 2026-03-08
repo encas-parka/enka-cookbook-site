@@ -58,7 +58,7 @@
   }
 </script>
 
-<div class="card bg-base-100 shadow-xl">
+<div class="card bg-base-100 max-sm:card-sm shadow-xl">
   <div class="card-body">
     <h2 class="card-title mb-4">
       <BookOpen class="h-5 w-5" />
@@ -68,13 +68,13 @@
     <div class="flex flex-col gap-4">
       <!-- Titre et description -->
       <div class="flex flex-col gap-x-10 gap-y-2">
-        <div class="flex flex-wrap items-start gap-x-10">
+        <div class="flex flex-wrap items-start gap-x-6 sm:gap-x-10">
           <!-- Titre -->
-          <fieldset class="fieldset min-w-3/5 flex-1">
+          <fieldset class="fieldset w-full min-w-3/5 flex-1">
             <legend class="fieldset-legend required">Titre de la recette</legend
             >
             <label
-              class="input input-lg w-full {validationErrors.title
+              class="input input-lg w-full flex-1 {validationErrors.title
                 ? 'input-error'
                 : ''}"
             >
@@ -107,9 +107,9 @@
                 ? parseInt(recipe.versionLabel.match(/^v(\d+)/)[1])
                 : null}
               {#if versionNumber}
-                <fieldset class="fieldset min-w-1/5">
+                <fieldset class="fieldset w-full flex-1 sm:min-w-1/5">
                   <legend class="fieldset-legend">Version</legend>
-                  <label class="input input-lg w-full">
+                  <label class="input input-lg w-max">
                     <span class="badge badge-ghost font-mono"
                       >v{versionNumber}</span
                     >
@@ -158,7 +158,7 @@
             bind:value={recipe.description}
             placeholder="Brève description de la recette"
             disabled={!canEdit}
-            class="input w-full {validationErrors.description
+            class="input sm:w-full {validationErrors.description
               ? 'input-error'
               : ''}"
           />
@@ -201,7 +201,7 @@
           <fieldset class="fieldset flex-1">
             <legend class="fieldset-legend">Description des quantités</legend>
             <label
-              class="input w-full min-w-lg {validationErrors.quantite_desc
+              class="input w-full min-w-2xs sm:min-w-lg {validationErrors.quantite_desc
                 ? 'input-error'
                 : ''}"
             >
@@ -277,7 +277,7 @@
             <span>Température de service</span>
           </legend>
           <label
-            class="select w-full {validationErrors.serveHot
+            class="select sm:w-full {validationErrors.serveHot
               ? 'select-error'
               : ''}"
           >
@@ -304,7 +304,7 @@
             <span>Nécessite une cuisson</span>
           </legend>
           <label
-            class="select w-full {validationErrors.cuisson
+            class="select sm:w-full {validationErrors.cuisson
               ? 'select-error'
               : ''}"
           >
@@ -389,11 +389,11 @@
       </div>
       <div
         id="recipe-check-fieldset"
-        class=" my-4 flex w-full flex-wrap space-y-6 rounded-xl border p-4 {validationErrors.check
+        class=" my-4 flex flex-wrap space-y-6 rounded-xl border p-4 sm:w-full {validationErrors.check
           ? 'border-error'
           : 'border-base-300'}"
       >
-        <div class="flex w-full flex-wrap gap-x-6 gap-y-2">
+        <div class="flex flex-wrap gap-x-6 gap-y-2 sm:w-full">
           <div class="required">
             Avez-vous testé la recette pour le nombre de couverts indiqué ?
           </div>
@@ -427,7 +427,7 @@
             <span class="text-error">{validationErrors.check}</span>
           </div>
         {/if}
-        <label class="flex w-full cursor-pointer gap-3">
+        <label class="flex cursor-pointer gap-3 sm:w-full">
           <input
             type="checkbox"
             class="checkbox checkbox-primary checkbox-sm mt-1"

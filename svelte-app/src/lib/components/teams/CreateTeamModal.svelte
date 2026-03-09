@@ -98,7 +98,6 @@
         teamsStore.inviteTeamMember(teamId, emails, message),
         {
           loading: "Envoi des invitations en cours...",
-          success: `${emails.length} invitation${emails.length > 1 ? "s" : ""} envoyée${emails.length > 1 ? "s" : ""} avec succès`,
           error: "Erreur lors de l'envoi des invitations",
         },
       );

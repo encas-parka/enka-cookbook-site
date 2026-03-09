@@ -28,9 +28,11 @@
     <CircleAlert class="h-6 w-6 shrink-0" />
     <div>
       <h3 class="font-bold">Invitation à participer</h3>
-      <div class="text-xs">
-        Vous avez été invité à participer à cet événement. Acceptez pour pouvoir
-        modifier le menu et les repas.
+      <div class="text-sm">
+        Vous avez été invité à participer à cet événement. Cliquez sur
+        "Accepter" si vous souhaitez participer. Vous pourrez alors modifier le
+        menu et les repas, vous inscrire à des tâche, compléter la listes des
+        achats...
       </div>
     </div>
     <div class="flex gap-2">

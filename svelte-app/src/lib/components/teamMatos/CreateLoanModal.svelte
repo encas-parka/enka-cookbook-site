@@ -18,6 +18,10 @@
     LoaderCircle,
   } from "@lucide/svelte";
   import AutocompleteInput from "../ui/AutocompleteInput.svelte";
+  import ModalContainer from "../ui/modal/ModalContainer.svelte";
+  import ModalHeader from "../ui/modal/ModalHeader.svelte";
+  import ModalContent from "../ui/modal/ModalContent.svelte";
+  import ModalFooter from "../ui/modal/ModalFooter.svelte";
   import { materielStore } from "$lib/stores/MaterielStore.svelte";
   import type {
     EnrichedMateriel,
@@ -394,29 +398,17 @@
   }
 </script>
 
-<div class="modal {isOpen && 'modal-open'}">
-  <div
-    class="modal-box fixed top-0 flex h-lvh w-lvw flex-col overflow-auto md:top-10 md:h-full md:max-h-11/12 md:w-full md:max-w-4xl"
-  >
-    <!-- Header -->
-    <div class="flex items-center justify-between border-b p-4 pt-0">
-      <h3 class="flex items-center gap-2 text-lg font-bold">
-        <Package class="h-5 w-5" />
-        {mode === "create"
-          ? `Nouvelle réservation - ${ownerName}`
-          : `Modifier la réservation - ${ownerName}`}
-      </h3>
-      <button
-        class="btn btn-circle btn-ghost btn-sm absolute top-2 right-2"
-        onclick={handleClose}
-        aria-label="Fermer"
-      >
-        <X class="h-4 w-4" />
-      </button>
-    </div>
+<ModalContainer {isOpen} onClose={handleClose} maxWidth="xl">
+  <ModalHeader
+    title={mode === "create"
+      ? `Nouvelle réservation - ${ownerName}`
+      : `Modifier la réservation - ${ownerName}`}
+    onClose={handleClose}
+    showBackButton={false}
+  />
 
-    <!-- Contenu principal -->
-    <div class="flex-1 space-y-6 overflow-y-auto p-4">
+  <ModalContent>
+    <div class="space-y-6">
       <!-- État de chargement initial en mode édition -->
       {#if mode === "edit" && loadingLoan}
         <div class="flex items-center justify-center py-12">
@@ -683,42 +675,39 @@
         </div>
       {/if}
     </div>
+  </ModalContent>
 
-    <!-- Footer -->
-    <div class="border-base-300 flex-none border-t px-4 py-3">
-      <div class="flex flex-wrap items-center justify-end gap-2">
-        <button
-          class="btn btn-ghost"
-          onclick={handleClose}
-          disabled={loading || loadingLoan}
-        >
-          <X class="h-5 w-5" />
-          Annuler
-        </button>
-        <button
-          class="btn btn-primary"
-          onclick={handleSubmit}
-          disabled={!isValid}
-        >
-          {#if loading}
-            <span class="loading loading-spinner loading-sm"></span>
-          {:else}
-            <Check class="h-5 w-5" />
-          {/if}
-          {mode === "create" ? "Créer l'emprunt" : "Sauvegarder"}
-        </button>
-      </div>
-    </div>
-  </div>
+  <ModalFooter>
+    <button
+      class="btn btn-ghost btn-sm"
+      onclick={handleClose}
+      disabled={loading || loadingLoan}
+    >
+      <X class="h-5 w-5" />
+      Annuler
+    </button>
+    <button
+      class="btn btn-primary btn-sm"
+      onclick={handleSubmit}
+      disabled={!isValid}
+    >
+      {#if loading}
+        <span class="loading loading-spinner loading-sm"></span>
+      {:else}
+        <Check class="h-5 w-5" />
+      {/if}
+      {mode === "create" ? "Créer" : "Sauvegarder"}
+    </button>
+  </ModalFooter>
+</ModalContainer>
 
-  <!-- Modal de sélection rapide -->
-  {#if showQuickSelection}
-    <QuickMaterielSelectionModal
-      isOpen={showQuickSelection}
-      onClose={() => (showQuickSelection = false)}
-      onAdd={handleQuickSelectionAdd}
-      selectedIds={new Set(selectedMateriels.map((m) => m.materielId))}
-      materiels={allMaterielsWithAvailability}
-    />
-  {/if}
-</div>
+<!-- Modal de sélection rapide -->
+{#if showQuickSelection}
+  <QuickMaterielSelectionModal
+    isOpen={showQuickSelection}
+    onClose={() => (showQuickSelection = false)}
+    onAdd={handleQuickSelectionAdd}
+    selectedIds={new Set(selectedMateriels.map((m) => m.materielId))}
+    materiels={allMaterielsWithAvailability}
+  />
+{/if}

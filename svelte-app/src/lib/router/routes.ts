@@ -49,6 +49,10 @@ export const routes: Routes = {
   // Acceptation d'invitation
   "/accept-invite": () => import("$lib/routes/AcceptInvite.svelte"),
 
+  // Magic link de partage event (public, sans guard)
+  "/join/:linkId": () => import("$lib/routes/JoinPage.svelte"),
+
+
   // Reset password
   "/reset-password": () => import("$lib/routes/ResetPassword.svelte"),
 

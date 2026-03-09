@@ -265,6 +265,11 @@
   <div class="print:hidden">
     <LeftPanel>
       <!-- Champ de recherche par ingrédient avec autocomplétion -->
+      <button
+        class="absolute -z-50 size-0 opacity-0"
+        tabindex="-1"
+        aria-hidden="true"
+      />
       <div class="my-6">
         <h3 class="mb-3 text-lg font-semibold">Rechercher par ingrédient</h3>
 

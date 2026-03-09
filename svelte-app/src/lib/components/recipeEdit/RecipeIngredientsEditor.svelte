@@ -464,11 +464,63 @@
                     <div class="flex-1 space-y-2">
                       <!-- Nom + quantité & unit -->
                       <div class="flex flex-wrap gap-2">
-                        <div
-                          class="item-start flex min-w-1/2 flex-1 justify-between"
-                        >
-                          <div class="text-base font-medium">
-                            {ingredient.name}
+                        <div class="item-start flex flex-1 justify-between">
+                          <div
+                            class="flex flex-wrap items-center gap-x-4 gap-y-2"
+                          >
+                            <div class="text-sm font-medium">
+                              {ingredient.name}
+                            </div>
+
+                            <div class="flex flex-wrap items-center gap-2">
+                              <label class="input input-sm w-fit">
+                                <span class="label text-base-content/80"
+                                  >Quantité</span
+                                >
+                                <div class="flex items-center gap-1">
+                                  <input
+                                    type="number"
+                                    class="w-16"
+                                    bind:value={ingredient.originalQuantity}
+                                    min="0"
+                                    step="0.1"
+                                    placeholder="0"
+                                    onblur={() =>
+                                      handleQuantityBlur(ingredient)}
+                                    disabled={ingredient.originalUnit ===
+                                      "au goût"}
+                                  />
+                                </div>
+                              </label>
+                              <label class="select select-sm w-fit">
+                                <span class="label text-base-content/80"
+                                  >unité</span
+                                >
+                                <select
+                                  bind:value={ingredient.originalUnit}
+                                  class="text-center"
+                                  {disabled}
+                                  onblur={() => handleQuantityBlur(ingredient)}
+                                  onchange={() => {
+                                    if (ingredient.originalUnit === "au goût")
+                                      ingredient.originalQuantity = 1;
+                                  }}
+                                >
+                                  <option value="kg">Kg</option>
+                                  <option value="gr.">gr.</option>
+                                  <option value="unité">unité</option>
+                                  <option value="l.">l.</option>
+                                  <option value="ml">ml</option>
+                                  <option value="c. à soupe">c. à soupe</option>
+                                  <option value="c. à café">c. à café</option>
+                                  <option value="pincées">pincées</option>
+                                  <option value="tête·s">tête·s</option>
+                                  <option value="gousse·s">gousse·s</option>
+                                  <option value="bottes">bottes</option>
+                                  <option value="au goût">au goût</option>
+                                </select>
+                              </label>
+                            </div>
                           </div>
                           <!-- Bouton supprimer -->
                           <button
@@ -480,52 +532,7 @@
                             <Trash2 class="h-4 w-4" />
                           </button>
                         </div>
-                        <div class="flex flex-wrap gap-2">
-                          <label class="input input-sm w-44">
-                            <span class="label text-base-content/80"
-                              >Quantité</span
-                            >
-                            <div class="flex items-center gap-1">
-                              <input
-                                type="number"
-                                class="text-center"
-                                bind:value={ingredient.originalQuantity}
-                                min="0"
-                                step="0.1"
-                                placeholder="0"
-                                onblur={() => handleQuantityBlur(ingredient)}
-                                disabled={ingredient.originalUnit === "au goût"}
-                              />
-                            </div>
-                          </label>
-                          <label class="select select-sm w-44">
-                            <span class="label text-base-content/80">unité</span
-                            >
-                            <select
-                              bind:value={ingredient.originalUnit}
-                              class="text-center"
-                              {disabled}
-                              onblur={() => handleQuantityBlur(ingredient)}
-                              onchange={() => {
-                                if (ingredient.originalUnit === "au goût")
-                                  ingredient.originalQuantity = 1;
-                              }}
-                            >
-                              <option value="kg">Kg</option>
-                              <option value="gr.">gr.</option>
-                              <option value="unité">unité</option>
-                              <option value="l.">l.</option>
-                              <option value="ml">ml</option>
-                              <option value="c. à soupe">c. à soupe</option>
-                              <option value="c. à café">c. à café</option>
-                              <option value="pincées">pincées</option>
-                              <option value="tête·s">tête·s</option>
-                              <option value="gousse·s">gousse·s</option>
-                              <option value="bottes">bottes</option>
-                              <option value="au goût">au goût</option>
-                            </select>
-                          </label>
-                        </div>
+
                         <!-- Aperçu de la normalisation -->
                         {#if preview}
                           <div class="text-base-content/60 text-xs italic">

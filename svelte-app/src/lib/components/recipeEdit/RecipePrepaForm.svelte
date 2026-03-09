@@ -22,7 +22,7 @@
 <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
   <!-- Ingrédients -->
   <div
-    class="card bg-base-100 shadow-xl {validationErrors.ingredients
+    class="card bg-base-100 max-sm:card-sm shadow-xl {validationErrors.ingredients
       ? 'ring-error ring-2'
       : ''}"
   >
@@ -45,7 +45,7 @@
   </div>
 
   <!-- Préparation -->
-  <div class="card bg-base-100 shadow-xl">
+  <div class="card bg-base-100 max-sm:card-sm shadow-xl">
     <div class="card-body">
       <h2 class="card-title mb-4">
         <FileText class="h-5 w-4" />

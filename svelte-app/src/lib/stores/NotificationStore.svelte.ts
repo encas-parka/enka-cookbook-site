@@ -31,7 +31,8 @@ interface Notification {
   type:
     | "event_access_granted"
     | "team_access_granted"
-    | "batch_products_update";
+    | "batch_products_update"
+    | "invite_failed";
   targetCollection: string;
   targetDocumentId: string;
   createdAt: string;
@@ -273,6 +274,14 @@ class NotificationStore {
             currentMain: globalState.currentMainId,
           });
         }
+        break;
+
+      case "invite_failed":
+        console.error("[NotificationStore] ❌ Invitation failed:", notif);
+        toastService.error(
+          "Erreur lors de l'envoi des invitations. Vérifiez que tous les emails ont été correctement invités.",
+          { autoCloseDelay: 10000 },
+        );
         break;
 
       default:

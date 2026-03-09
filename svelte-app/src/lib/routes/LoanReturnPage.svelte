@@ -232,7 +232,7 @@
 <div class="container mx-auto p-4" transition:fade>
   <div class="mx-auto max-w-4xl">
     <!-- Header -->
-    <div class="mb-6 flex items-center gap-4">
+    <div class="mb-6 flex flex-wrap items-center gap-x-4 gap-y-2">
       <button
         class="btn btn-circle btn-ghost"
         onclick={goBack}
@@ -240,8 +240,8 @@
       >
         <ArrowLeft class="h-5 w-5" />
       </button>
-      <div class="flex-1">
-        <h1 class="text-2xl font-bold">Fiche de retour</h1>
+      <div class="min-w-2/3 flex-1">
+        <h1 class="text-xl font-bold sm:text-2xl">Fiche de retour</h1>
         {#if loan}
           <p class="text-sm opacity-70">
             Emprunt du {formatDateDayMonthShort(loan.startDate)} au{" "}
@@ -256,7 +256,7 @@
 
     {#if loan}
       <!-- Info emprunt -->
-      <div class="card bg-base-100 mb-6 shadow-sm">
+      <div class="card bg-base-100 max-sm:card-xs mb-6 shadow-sm">
         <div class="card-body">
           {#if isReadOnly && returnedAt}
             <div class="alert alert-info max-md:alert-vertical mb-4">
@@ -282,19 +282,25 @@
                 item.lostQuantity === 0 && item.brokenQuantity === 0}
 
               <div
-                class="bg-base-200 rounded-box flex flex-wrap items-center justify-between px-4 py-1"
+                class="bg-base-200 rounded-box flex flex-wrap items-center justify-between px-2 py-1 sm:px-4"
               >
                 <!-- Nom du matériel -->
-                <div class="flex items-center gap-4">
+                <div class="mb-2 flex items-center gap-4">
                   {#snippet typeIcon(type)}
                     {@const Icon = getTypeIcon(type)}
                     <div class="{getMaterielTypeBgClass(type)} rounded-lg p-2">
-                      <Icon class="{getMaterielTypeColorClass(type)} size-5" />
+                      <Icon
+                        class="{getMaterielTypeColorClass(
+                          type,
+                        )} size-4 sm:size-5"
+                      />
                     </div>
                   {/snippet}
 
                   {@render typeIcon(item.materielType)}
-                  <div class="text-base font-medium">{item.materielName}</div>
+                  <div class="font-medium sm:text-base">
+                    {item.materielName}
+                  </div>
                   <div class="font-semibold opacity-70">
                     ({item.quantity})
                   </div>
@@ -304,7 +310,9 @@
                 {#if item.quantity === 1}
                   {#if isReadOnly}
                     <!-- Mode lecture seule : afficher l'état -->
-                    <div class="flex items-center gap-6 p-2">
+                    <div
+                      class="ms-auto flex items-center justify-end gap-6 p-2"
+                    >
                       {#if item.brokenQuantity > 0}
                         <div class="badge badge-warning gap-2">
                           <AlertTriangle class="h-4 w-4" />

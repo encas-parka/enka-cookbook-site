@@ -24,6 +24,12 @@
   const isSearchActive = $derived(productsStore.isSearchActive);
 </script>
 
+<button
+  class="absolute -z-50 size-0 opacity-0"
+  tabindex="-1"
+  aria-hidden="true"
+/>
+
 <div class="my-4 mt-12 flex items-center justify-between">
   <h3 class="flex items-center gap-2 text-lg font-semibold">
     <FunnelIcon class="h-5 w-5" />

@@ -62,7 +62,7 @@
   }
 </script>
 
-<div class="tabs tabs-lg tabs-border justify-center">
+<div class="tabs sm:tabs-lg tabs-border justify-center">
   {#each tabs as tab, index (index)}
     <a
       class="tab font-medium {index === activeTab ? 'tab-active' : ''}"

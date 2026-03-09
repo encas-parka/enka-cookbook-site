@@ -288,9 +288,9 @@
         <!-- Matériels -->
         <div class="flex flex-wrap gap-2">
           {#each materiels as m}
-            <span class="badge badge-sm badge-soft {getBadgeClass(m)}">
+            <span class="badge badge-sm badge-soft h-auto {getBadgeClass(m)}">
               <span class="font-medium"> {m.materielName} </span>
-              × {m.quantity}
+              <span class="font-bold text-nowrap"> × {m.quantity}</span>
             </span>
           {/each}
         </div>

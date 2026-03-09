@@ -18,6 +18,7 @@
   let isLoading = $state(false);
   let errorMessage = $state("");
   let successMessage = $state("");
+  let reinitPwd = $state(false);
 
   // Synchroniser showLogin avec la prop quand isOpen change
   $effect(() => {
@@ -159,15 +160,15 @@
 
           // Message informatif pour l'utilisateur
           successMessage =
-            "Un compte avec cet email existe déjà. Un email de réinitialisation de mot de passe vous a été envoyé.";
+            "Un compte avec cet email existe déjà. Un email pour réinitialiser votre mot de passe vous a été envoyé.";
 
           // Basculer vers le mode login après 3 secondes
-          setTimeout(() => {
-            showLogin = true;
-            successMessage = "";
-            // Pré-remplir l'email dans le formulaire de login
-            loginEmail = registerEmail;
-          }, 4000);
+          // setTimeout(() => {
+          //   showLogin = true;
+          //   // successMessage = "";
+          //   // Pré-remplir l'email dans le formulaire de login
+          //   loginEmail = registerEmail;
+          // }, 4000);
         } catch (recoveryError: any) {
           console.error(
             "Erreur lors de l'envoi de l'email de récupération:",

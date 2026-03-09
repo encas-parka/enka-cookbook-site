@@ -230,7 +230,7 @@
         <DocumentTabs />
       {:else}
         <h1
-          class="font-family-fredoka truncate text-sm font-bold tracking-wider uppercase opacity-70"
+          class="font-family-fredoka mx-auto truncate text-sm font-bold tracking-wider uppercase opacity-70"
           title={navBarStore.title}
         >
           {navBarStore.title}
@@ -239,7 +239,7 @@
     </div>
   {/if}
 
-  <div class="navbar-end ms-auto w-fit shrink-0 gap-4">
+  <div class="navbar-end z-10 ms-auto w-fit shrink-0 gap-4 ps-11">
     {#if navBarStore.isLockedByOthers}
       <div class="badge badge-warning flex items-center gap-1 py-3 font-medium">
         <LockIcon size={14} />

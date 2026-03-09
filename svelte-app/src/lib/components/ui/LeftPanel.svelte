@@ -41,9 +41,7 @@
       >
         {@render children?.()}
       </div>
-      <div class="flex items-center px-1">
-        <DrawerHandle />
-      </div>
+      <DrawerHandle class="mx-1 my-auto items-center bg-black/20 px-1 " />
     </DrawerContent>
   </Drawer>
 

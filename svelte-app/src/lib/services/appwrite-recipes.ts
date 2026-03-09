@@ -259,7 +259,8 @@ export async function createRecipeAppwrite(
 }
 
 /**
- * Met à jour une recette existante
+ * Met à jour une recette existante (ou la crée si elle n'existe pas)
+ * Utilise upsertRow pour gérer le cas des recettes Hugo qui n'existent pas encore dans Appwrite
  * Note: Le realtime se chargera de mettre à jour le store automatiquement
  */
 export async function updateRecipeAppwrite(
@@ -274,21 +275,23 @@ export async function updateRecipeAppwrite(
     const updateData = {
       ...data,
       check: data.check ?? false,
+      // createdBy est requis pour la création (upsert)
+      createdBy: data.createdBy || userId,
       // Date au format Appwrite si fournie
       ...(data.publishedAt && { publishedAt: data.publishedAt }),
     };
 
-    const recipe = await tables.updateRow({
+    const recipe = await tables.upsertRow({
       databaseId: config.databaseId,
       tableId: RECIPES_COLLECTION_ID,
       rowId: uuid,
       data: updateData,
     });
 
-    console.log(`[appwrite-recipes] Recipe updated: ${uuid}`);
+    console.log(`[appwrite-recipes] Recipe upserted: ${uuid}`);
     return recipe as unknown as Recettes;
   } catch (error) {
-    console.error(`[appwrite-recipes] Error updating recipe ${uuid}:`, error);
+    console.error(`[appwrite-recipes] Error upserting recipe ${uuid}:`, error);
     throw error;
   }
 }

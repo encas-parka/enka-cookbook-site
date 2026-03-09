@@ -125,6 +125,7 @@
               $updatedAt: undefined,
               lockedBy: null,
               createdBy: globalState.userId || "",
+              auteur: userName, // IMPORTANT: Nouvel auteur pour la duplication
               permissionWrite: [globalState.userId || ""],
               check: null,
               draft: true,

@@ -1,21 +1,25 @@
 ---
 title: Kolokythopita - tarte filo courgette feta grecque
+date: '2026-03-09T20:38:34.058Z'
 draft: false
-description: ''
 typeR: plat
 categories:
   - Snacking
-auteur: Marion
 regime:
   - vegetarien
-region: Grèce
-saison:
-  - ete
-cuisson: true
 plate: 8
 quantite_desc: ''
 check: true
-checkAlwaysOk: true
+cuisson: true
+serveHot: true
+description: null
+region: Grèce
+saison:
+  - ete
+id: kolokythopita-tarte-fi_o7xqvqjv088z
+materiel:
+  - Four
+  - Robot-coupe
 ingredients:
   - uuid: x6je0g
     name: Pate filo (1 feuille)
@@ -42,9 +46,9 @@ ingredients:
     pS: false
   - uuid: zf3zf8
     name: Oeuf
-    originalQuantity: 4
+    originalQuantity: 1
     originalUnit: unité
-    normalizedQuantity: 4
+    normalizedQuantity: 1
     normalizedUnit: unité
     comment: ''
     allergens:
@@ -153,9 +157,6 @@ ingredients:
     type: legumes
     pF: true
     pS: false
-materiel:
-  - Four
-  - Robot-coupe
 preparation: |-
   * Râper les courgettes. Les saler et laisser égoutter 15 min. Bien essorer les courgettes râpées avec l'aide d'un torchon.
   * Mélanger avec tous les autres ingrédients. Normalement pas besoin de re saler, la feta sale  beaucoup et les courgettes sont salées par la première étape.
@@ -168,13 +169,18 @@ preparation: |-
   Option vegan : remplacer les oeufs par des oeufs de lin (1 cuillère à soupe de lin moulu pour 2,5 CS d'eau tiède, attendre 10min) ou essayer avec de la farine de pois chiche; la feta par du yaourt de soja (en mettre moins); saler plus.
 
   Option sans gluten : voir recette koloythokeftedes pour les galettes où on peut remplacer la farine par de la farine sans gluten
-publishDate: '2025-07-21T11:43:00+00:00'
-serveHot: true
-uuid: o7xqvqjv088z
-id: kolokythopita-tarte-fi_o7xqvqjv088z
-createdAt: '2025-07-21T11:43:00+00:00'
-updatedAt: '2025-07-21T11:43:00+00:00'
-createdBy: Marion
+prepAlt: []
+astuces: []
+preparation24h: null
 permissionWrite:
   - 6931ecdccd2c8d8d15e5
+auteur: Marion
+createdAt: '2026-03-09T20:38:31.117+00:00'
+updatedAt: '2026-03-09T20:38:31.117+00:00'
+createdBy: Marion
+teams: null
+status: public
+rootRecipeId: null
+versionLabel: null
 ---
+

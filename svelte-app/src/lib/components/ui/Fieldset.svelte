@@ -23,7 +23,6 @@
 
 <fieldset
   class="text-sm {bgClass}  rounded-box border-neutral/20 border-y-2 p-4 md:border print:p-2"
-  data-vaul-no-drag
 >
   <legend
     class="fieldset-legend {legendFont} {bgClass} rounded-box border-neutral/20 text-base-content/80 border-t-1 px-4 py-1 print:text-sm {legendSize}"

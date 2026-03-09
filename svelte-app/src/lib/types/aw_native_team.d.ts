@@ -36,6 +36,16 @@ export interface InviteResult {
 }
 
 /**
+ * Résultat d'une invitation asynchrone (non-bloquante)
+ * Retourné immédiatement après le déclenchement de la cloud function
+ */
+export interface AsyncInviteResult {
+  success: boolean;
+  executionId?: string;
+  message?: string;
+}
+
+/**
  * Préférences d'équipe
  */
 export interface TeamPrefs {

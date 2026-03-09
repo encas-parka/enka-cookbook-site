@@ -30,14 +30,18 @@
   <Drawer bind:open={filtersDrawerOpen} direction="left">
     <DrawerOverlay class="fixed inset-0 z-50 bg-black/40 backdrop-blur-sm" />
     <DrawerContent
-      class="fixed top-0 bottom-0 left-0 z-50 flex w-[90vw] max-w-100 flex-col shadow-2xl {bgClass}"
+      class="fixed top-0 bottom-0 left-0 z-50 flex w-[90vw] max-w-100 flex-row shadow-2xl {bgClass}"
     >
-      <div class="h-full overflow-y-auto p-4 pb-24">
-        <div class="mb-4 flex justify-center">
-          <DrawerHandle />
-        </div>
+      <div
+        class="min-h-0 flex-1 overflow-y-auto p-4 pb-24"
+        style="touch-action: pan-y;"
+        role="presentation"
+        onpointerdown={(e) => e.stopPropagation()}
+        ontouchstart={(e) => e.stopPropagation()}
+      >
         {@render children?.()}
       </div>
+      <DrawerHandle class="mx-1 my-auto items-center bg-black/20 px-1 " />
     </DrawerContent>
   </Drawer>
 

@@ -4,6 +4,7 @@
 
 import { getAppwriteInstances, getAppwriteConfig } from "./appwrite";
 import { safeOperation, safeJsonParse } from "$lib/utils/safe-operation";
+import { globalState } from "$lib/stores/GlobalState.svelte";
 
 const { APPWRITE_CONFIG } = getAppwriteConfig();
 
@@ -104,7 +105,11 @@ export async function checkUserEmails(
  *   @param options.message - Message personnalisé (optionnel)
  *   @param options.sendEmailToExistingMembers - Envoyer un email aux membres existants (défaut: true)
  *
- * @returns { success: boolean, processed: number, emailResults?: any }
+ * @returns { success: boolean, executionId?: string, message?: string }
+ *
+ * NOTE : Cette fonction est appelée en mode async (async: true) pour éviter de bloquer le client.
+ * Le retry est désactivé côté client pour éviter d'envoyer plusieurs fois les mêmes emails.
+ * La cloud function gère elle-même le retry pour l'envoi d'emails en cas d'échec.
  */
 export async function inviteParticipantsToEvent(
   eventId: string,
@@ -116,7 +121,7 @@ export async function inviteParticipantsToEvent(
     message?: string;
     sendEmailToExistingMembers?: boolean;
   },
-): Promise<{ success: boolean; processed: number; emailResults?: any }> {
+): Promise<{ success: boolean; executionId?: string; message?: string }> {
   const {
     teamIds = [],
     emails = [],
@@ -125,50 +130,38 @@ export async function inviteParticipantsToEvent(
     sendEmailToExistingMembers = true,
   } = options;
 
-  return safeOperation(
-    async () => {
-      const { functions } = await getAppwriteInstances();
+  const { functions } = await getAppwriteInstances();
 
-      const response = await functions.createExecution({
-        functionId: APPWRITE_CONFIG.functions.usersTeamsManager,
-        body: JSON.stringify({
-          action: "invite",
-          context: {
-            type: "event",
-            id: eventId,
-            name: eventName,
-          },
-          teamIds,
-          emails,
-          userIds,
-          message,
-          sendEmailToExistingMembers,
-        }),
-        async: false,
-      });
+  const response = await functions.createExecution({
+    functionId: APPWRITE_CONFIG.functions.usersTeamsManager,
+    body: JSON.stringify({
+      action: "invite",
+      context: {
+        type: "event",
+        id: eventId,
+        name: eventName,
+      },
+      teamIds,
+      emails,
+      userIds,
+      message,
+      sendEmailToExistingMembers,
+      requestedBy: globalState.userId,
+    }),
+    async: true, // Non-bloquant : retourne immédiatement avec l'ID d'exécution
+  });
 
-      const result = safeJsonParse<any>(response.responseBody, {
-        context: "inviteParticipantsToEvent",
-        fallback: null,
-      });
+  const executionId = response.$id;
 
-      if (!result || !result.success) {
-        throw new Error(result?.error || "Erreur lors de l'invitation");
-      }
-
-      console.log(
-        `[appwrite-functions] ${result.processed} invitations traitées pour ${eventName}`,
-      );
-
-      // ✅ Retourner le résultat détaillé
-      return result;
-    },
-    {
-      context: "AppwriteFunctions.inviteParticipantsToEvent",
-      timeout: 60000, // 60s car batch update peut être long avec les teams
-      errorMessage: "Erreur lors de l'invitation",
-    },
+  console.log(
+    `[appwrite-functions] Invitation déclenchée pour ${eventName} (execution: ${executionId})`,
   );
+
+  return {
+    success: true,
+    executionId,
+    message: "Invitation en cours",
+  };
 }
 
 /**

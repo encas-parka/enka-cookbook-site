@@ -309,6 +309,8 @@
         astuces: astucesToAppwrite(recipe.astuces),
         prepAlt: recipe.prepAlt,
         $id: recipe.$id,
+        // Conserver createdBy pour l'upsert (création si nécessaire)
+        createdBy: recipe.createdBy || globalState.userId,
         // Libérer le lock atomiquement avec la sauvegarde
         lockedBy: null,
       };

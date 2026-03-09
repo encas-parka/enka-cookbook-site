@@ -8,16 +8,12 @@
   import { navBarStore } from "../stores/NavBarStore.svelte";
   import CreateLoanModal from "$lib/components/teamMatos/CreateLoanModal.svelte";
   import LoanCard from "$lib/components/teamMatos/LoanCard.svelte";
-  import type { EnrichedMaterielLoan } from "$lib/types/materiel.types";
-  import ReturnLoanModal from "$lib/components/teamMatos/ReturnLoanModal.svelte";
   import { route, navigate } from "$lib/router";
   import { toastService } from "$lib/services/toast.service.svelte";
 
   // État de la page
   let createLoanModalOpen = $state(false);
   let activeTeamId = $state<string | null>(null);
-  let showReturnModal = $state(false);
-  let selectedLoan = $state<EnrichedMaterielLoan | null>(null);
   let isRedirecting = $state(false);
   let editingLoanId = $state<string | null>(null); // ID du loan en édition
 
@@ -82,12 +78,6 @@
   // Ouvrir la fiche de retour
   function openReturnForm(loanId: string) {
     navigate(`/dashboard/loans/return/${loanId}`);
-  }
-
-  // Fermer le modal de retour
-  function closeReturnModal() {
-    showReturnModal = false;
-    selectedLoan = null;
   }
 
   // Actions sur les emprunts
@@ -213,11 +203,11 @@
   // Cleanup
 </script>
 
-<div class="container mx-auto p-4" transition:fade>
-  <div class="mx-auto max-w-7xl px-4 py-8">
+<div class="container mx-auto p-2 sm:p-4" transition:fade>
+  <div class="mx-auto max-w-7xl sm:px-4 sm:py-8">
     <!-- Tabs par équipe (seulement si plus d'une équipe) -->
     {#if userTeams.length > 1}
-      <div class="tabs tabs-border bg-base-200 tabs-lg mb-6 font-medium">
+      <div class="tabs tabs-border bg-base-200 sm:tabs-lg mb-6 font-medium">
         {#each userTeams as team (team.$id)}
           {@const loansCount = materielStore.loans.filter(
             (loan) => loan.ownerId === team.$id,
@@ -302,14 +292,5 @@
     ownerId={activeTeam.$id}
     ownerName={activeTeam.name}
     loanId={editingLoanId ?? undefined}
-  />
-{/if}
-
-<!-- Modal de retour d'emprunt -->
-{#if showReturnModal && selectedLoan}
-  <ReturnLoanModal
-    loan={selectedLoan}
-    isOpen={showReturnModal}
-    onClose={closeReturnModal}
   />
 {/if}

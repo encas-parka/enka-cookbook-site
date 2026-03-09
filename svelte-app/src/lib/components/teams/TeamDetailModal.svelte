@@ -133,7 +133,6 @@
         ),
         {
           loading: "Envoi des invitations en cours...",
-          success: `${invitedEmails.length} invitation${invitedEmails.length > 1 ? "s" : ""} envoyée${invitedEmails.length > 1 ? "s" : ""} avec succès`,
           error: "Erreur lors de l'envoi des invitations",
         },
       );

@@ -4,7 +4,9 @@ import type {
   EnrichedNativeTeam,
   NativeTeamMember,
   InviteResult,
+  AsyncInviteResult,
 } from "$lib/types/aw_native_team.d";
+import { toastService } from "$lib/services/toast.service.svelte";
 import {
   listUserTeams,
   getTeam,
@@ -288,8 +290,11 @@ export class NativeTeamsStore {
     emails: string[],
     message?: string,
   ): Promise<void> {
-    await inviteMembers(teamId, emails, message);
-    await this.fetchTeam(teamId);
+    const result = await inviteMembers(teamId, emails, message);
+
+    // ✅ La fonction est maintenant async, le reload se fera via realtime
+    // Ne pas faire await this.fetchTeam() immédiatement
+    // Les membres apparaîtront automatiquement via realtime
   }
 
   async removeMember(teamId: string, membershipId: string): Promise<void> {

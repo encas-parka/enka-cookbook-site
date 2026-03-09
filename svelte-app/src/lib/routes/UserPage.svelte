@@ -126,6 +126,7 @@
   }
 </script>
 
+<!-- TODO : ajouter un lien de reinitialisation du mot de passe -->
 <div class="container mx-auto max-w-2xl p-4">
   <!-- Header -->
   <div class="mb-6 flex items-center gap-4">

@@ -125,6 +125,7 @@
               $updatedAt: undefined,
               lockedBy: null,
               createdBy: globalState.userId || "",
+              auteur: userName, // IMPORTANT: Nouvel auteur pour la duplication
               permissionWrite: [globalState.userId || ""],
               check: null,
               draft: true,
@@ -279,7 +280,7 @@
 <!-- TEMPLATE -->
 <!-- ============================================================================ -->
 
-<div class="max-w-9xl container mx-auto px-4 py-8" in:fade>
+<div class="max-w-9xl container mx-auto px-2 py-8 sm:px-4" in:fade>
   {#if !loaded}
     <div class="flex items-center justify-center py-20">
       <div class="loading loading-spinner loading-lg"></div>

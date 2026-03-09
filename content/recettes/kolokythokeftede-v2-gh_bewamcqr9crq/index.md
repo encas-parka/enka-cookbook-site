@@ -1,6 +1,6 @@
 ---
 title: Kolokythokeftedes - galettes courgette feta grecques - avec sauce blanche
-date: '2026-03-09T12:23:33.305Z'
+date: '2026-03-09T12:26:40.872Z'
 draft: true
 typeR: entree
 categories:
@@ -12,14 +12,12 @@ quantite_desc: Pour 3 galettes par personnes
 check: true
 cuisson: true
 serveHot: true
-description: test
+description: test 2
 region: Grèce
 saison:
   - ete
 id: kolokythokeftede-v2-gh_bewamcqr9crq
-materiel:
-  - Four
-  - Robot-coupe
+materiel: []
 ingredients:
   - uuid: c70jxb
     name: huile de tournesol
@@ -204,11 +202,11 @@ astuces: []
 preparation24h: null
 permissionWrite:
   - 68975cbc002469058f8b
-auteur: Marion
+auteur: ghald
 createdAt: '2026-03-09T12:23:29.884+00:00'
-updatedAt: '2026-03-09T12:23:29.884+00:00'
+updatedAt: '2026-03-09T12:26:40.614+00:00'
 createdBy: 68975cbc002469058f8b
-teams: null
+teams: []
 status: public
 rootRecipeId: kolokythokeftedes-gale_is23ojeuywj8
 versionLabel: v2 - ghald

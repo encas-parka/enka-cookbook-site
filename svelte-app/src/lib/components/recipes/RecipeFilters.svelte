@@ -82,6 +82,13 @@
 </script>
 
 <div class="sm:mt-12" class:opacity-30={disabled}>
+  <!-- Bouton invisible pour empêcher la capture du focus lors de l'ouverture du drawer -->
+  <button
+    class="absolute -z-50 size-0 opacity-0"
+    tabindex="-1"
+    aria-hidden="true"
+  />
+
   <div class="mb-4 flex items-center justify-between">
     <h4 class="text-lg font-bold">Filtres</h4>
     <button class="btn btn-warning btn-sm" onclick={onReset} {disabled}>

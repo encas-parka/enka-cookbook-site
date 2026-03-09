@@ -1,6 +1,6 @@
 ---
 title: A nouvelle recette locale de qaldek
-date: '2026-03-09T13:16:23.608Z'
+date: '2026-03-09T13:18:34.354Z'
 draft: true
 typeR: plat
 categories:
@@ -14,7 +14,7 @@ quantite_desc: desc desc
 check: true
 cuisson: true
 serveHot: false
-description: test édition
+description: 'test édition 2 '
 region: run TTT
 saison:
   - ete
@@ -76,8 +76,8 @@ preparation24h: ah ah ah
 permissionWrite:
   - 693200b700222efe46a2
 auteur: qaldek@gmx.com
-createdAt: '2026-01-29T14:27:07.485+00:00'
-updatedAt: '2026-03-09T13:16:23.258+00:00'
+createdAt: '2026-03-09T13:18:34.040+00:00'
+updatedAt: '2026-03-09T13:18:34.040+00:00'
 createdBy: 693200b700222efe46a2
 teams: []
 status: public

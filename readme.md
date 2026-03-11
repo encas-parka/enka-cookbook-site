@@ -2,7 +2,7 @@
 
 ## Présentation
 
-Ce dépôt héberge un site permettant le partage de recettes de cuisine. Il est construit à partir du thème [hugo-cookbook-theme](https://github.com/encas-parka/hugo-cookbook-theme). Hugo sert ici principalement à la génération de json, consommés par une app svelte 5.
+Ce dépôt héberge un site permettant le partage de recettes de cuisine et d'organisation collective de cantine militante [https://enka-cookbook.oupla.net/](https://enka-cookbook.oupla.net/)
 
 Enka cookbook est un outil pour les collectifs cuisinant à l'occasion d'événements militants/solidaires. Il permet notamment le partage de recettes de cuisine (avec calcul des quantités en fonction du nombre de couverts prévus), la création de menus et séries de menus pour des événements se déroulant sur plusieurs jours, la gestion du liste de course collaboratives, la reparition des tache.
 

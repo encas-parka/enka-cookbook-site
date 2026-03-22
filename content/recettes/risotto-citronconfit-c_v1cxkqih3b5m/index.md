@@ -1,12 +1,13 @@
 ---
 title: Risotto citronconfit cranberries et olives vertes au four
-date: '2026-03-22T09:32:18.362Z'
+date: '2026-03-22T09:33:38.540Z'
 draft: true
 typeR: plat
 categories:
   - Plat au Four
 regime:
   - vegan
+  - sans-gluten
   - sans-lactose
 plate: 50
 quantite_desc: a tester le nombre de parts par gastro
@@ -17,10 +18,7 @@ description: null
 region: null
 saison: []
 id: risotto-citronconfit-c_v1cxkqih3b5m
-materiel:
-  - Four
-  - rondo
-  - Gastro 1/1 (15cm)
+materiel: []
 ingredients:
   - uuid: 6azw4k
     name: Riz rond
@@ -96,15 +94,14 @@ ingredients:
     comment: ''
     allergens: []
     type: autres
-  - uuid: 3n8509
-    name: Bouillon de légumes
+  - uuid: tmk6ya
+    name: Bouillon de légume (sans gluten)
     originalQuantity: 5
     originalUnit: unité
     normalizedQuantity: 5
     normalizedUnit: unité
     comment: méditérannéens c'est meilleur
-    allergens:
-      - Gluten
+    allergens: []
     type: epices
 preparation: a venir
 prepAlt: []
@@ -112,11 +109,11 @@ astuces: []
 preparation24h: null
 permissionWrite:
   - 696fb1cc000eb33adee7
-auteur: null
+auteur: Miki
 createdAt: '2026-03-22T09:32:18.088+00:00'
-updatedAt: '2026-03-22T09:32:18.088+00:00'
+updatedAt: '2026-03-22T09:33:38.217+00:00'
 createdBy: 696fb1cc000eb33adee7
-teams: null
+teams: []
 status: public
 rootRecipeId: null
 versionLabel: null

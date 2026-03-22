@@ -1,11 +1,12 @@
 ---
 title: Cookies style americain vegan sans gluten
-date: '2026-03-22T09:50:24.367Z'
+date: '2026-03-22T09:51:32.990Z'
 draft: true
 typeR: dessert
 categories: []
 regime:
   - vegan
+  - sans-gluten
   - sans-lactose
 plate: 18
 quantite_desc: 1grand cookie par personne
@@ -50,16 +51,6 @@ ingredients:
     allergens:
       - Fruits à coque
     type: sec
-  - uuid: vgec6e
-    name: Levure chimique
-    originalQuantity: 1.5
-    originalUnit: unité
-    normalizedQuantity: 16.5
-    normalizedUnit: gr.
-    comment: ''
-    allergens:
-      - Gluten
-    type: lof
   - uuid: ljzb7j
     name: Eau
     originalQuantity: 90
@@ -115,6 +106,15 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+  - uuid: zb9tj8
+    name: Levure chimique sans gluten
+    originalQuantity: 1.5
+    originalUnit: unité
+    normalizedQuantity: 1.5
+    normalizedUnit: unité
+    comment: ''
+    allergens: []
+    type: lof
 preparation: |-
   Mettre le four à préchauffer à 180°C
 
@@ -132,11 +132,11 @@ permissionWrite:
   - 696fb1cc000eb33adee7
 auteur: Miki
 createdAt: '2026-03-22T09:50:22.285+00:00'
-updatedAt: '2026-03-22T09:50:22.285+00:00'
+updatedAt: '2026-03-22T09:51:32.806+00:00'
 createdBy: 696fb1cc000eb33adee7
 teams: []
 status: public
 rootRecipeId: cookies-style-americai_wmj4thtl7q5u
-versionLabel: v2 - Miki
+versionLabel: v2 - sans gluten
 ---
 

@@ -1,6 +1,6 @@
 ---
 title: Cookies style americain vegan sans gluten
-date: '2026-03-22T09:51:32.990Z'
+date: '2026-03-22T09:52:12.652Z'
 draft: true
 typeR: dessert
 categories: []
@@ -118,13 +118,13 @@ ingredients:
 preparation: |-
   Mettre le four à préchauffer à 180°C
 
-  Mélanger dans un saladier l'huile, la poudre d'amande, le sucre, le sel, et l'eau que ça soit homogène!
+  Mélanger dans un saladier l'huile, la poudre d'amande, le sucre, le sel, et l'eau que ça soit homogène
 
-  Rajouter la farine, la levure, le chocolat et les cacahuètes 
+  Rajouter la farine, la levure, le chocolat et les cacahuètes
 
   Former des boules légèrement aplaties
 
-  Enfourner pour environ 10, les bords doivent être dorés mais le coeur tendre
+  Enfourner pour environ 10min , les bords doivent être dorés mais le cœur tendre
 prepAlt: []
 astuces: []
 preparation24h: null
@@ -132,7 +132,7 @@ permissionWrite:
   - 696fb1cc000eb33adee7
 auteur: Miki
 createdAt: '2026-03-22T09:50:22.285+00:00'
-updatedAt: '2026-03-22T09:51:32.806+00:00'
+updatedAt: '2026-03-22T09:52:12.490+00:00'
 createdBy: 696fb1cc000eb33adee7
 teams: []
 status: public

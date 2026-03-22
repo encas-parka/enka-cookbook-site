@@ -1,7 +1,7 @@
 ---
 title: Cookies style americain vegan
-date: '2026-03-22T09:53:07.498Z'
-draft: true
+date: '2026-03-22T09:57:30.535Z'
+draft: false
 typeR: dessert
 categories: []
 regime:
@@ -133,7 +133,7 @@ permissionWrite:
   - 696fb1cc000eb33adee7
 auteur: Miki
 createdAt: '2026-03-12T16:28:00.085+00:00'
-updatedAt: '2026-03-22T09:53:07.332+00:00'
+updatedAt: '2026-03-22T09:57:30.231+00:00'
 createdBy: 696fb1cc000eb33adee7
 teams: []
 status: public

@@ -1,7 +1,7 @@
 ---
 title: Risotto citronconfit cranberries et olives vertes au four
-date: '2026-03-22T09:33:38.540Z'
-draft: true
+date: '2026-03-22T09:58:10.549Z'
+draft: false
 typeR: plat
 categories:
   - Plat au Four
@@ -111,7 +111,7 @@ permissionWrite:
   - 696fb1cc000eb33adee7
 auteur: Miki
 createdAt: '2026-03-22T09:32:18.088+00:00'
-updatedAt: '2026-03-22T09:33:38.217+00:00'
+updatedAt: '2026-03-22T09:58:10.377+00:00'
 createdBy: 696fb1cc000eb33adee7
 teams: []
 status: public

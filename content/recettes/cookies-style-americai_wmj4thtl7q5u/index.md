@@ -1,6 +1,6 @@
 ---
 title: Cookies style americain vegan
-date: '2026-03-12T16:28:00.622Z'
+date: '2026-03-22T09:53:07.498Z'
 draft: true
 typeR: dessert
 categories: []
@@ -20,10 +20,7 @@ saison:
   - automne
   - hiver
 id: cookies-style-americai_wmj4thtl7q5u
-materiel:
-  - Four
-  - Grand Saladier
-  - lèche frite ou plaque de cuisson
+materiel: []
 ingredients:
   - uuid: 2av6w8
     name: Farine de blé
@@ -122,23 +119,23 @@ ingredients:
 preparation: |-
   Mettre le four à préchauffer à 180°C
 
-  Mélanger dans un saladier l'huile, la poudre d'amande, le sucre, le sel, et l'eau que ça soit homogène!
+  Mélanger dans un saladier l'huile, la poudre d'amande, le sucre, le sel, et l'eau que ça soit homogène
 
-  Rajouter la farine, la levure, le chocolat et les cacahuètes 
+  Rajouter la farine, la levure, le chocolat et les cacahuètes
 
   Former des boules légèrement aplaties
 
-  Enfourner pour environ 10, les bords doivent être dorés mais le coeur tendre
+  Enfourner pour environ 10min , les bords doivent être dorés mais le cœur tendre
 prepAlt: []
 astuces: []
 preparation24h: null
 permissionWrite:
   - 696fb1cc000eb33adee7
-auteur: null
+auteur: Miki
 createdAt: '2026-03-12T16:28:00.085+00:00'
-updatedAt: '2026-03-12T16:28:00.085+00:00'
+updatedAt: '2026-03-22T09:53:07.332+00:00'
 createdBy: 696fb1cc000eb33adee7
-teams: null
+teams: []
 status: public
 rootRecipeId: null
 versionLabel: null

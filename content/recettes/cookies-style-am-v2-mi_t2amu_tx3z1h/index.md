@@ -1,7 +1,7 @@
 ---
 title: Cookies style americain vegan sans gluten
-date: '2026-03-22T09:52:12.652Z'
-draft: true
+date: '2026-03-22T09:58:47.330Z'
+draft: false
 typeR: dessert
 categories: []
 regime:
@@ -132,7 +132,7 @@ permissionWrite:
   - 696fb1cc000eb33adee7
 auteur: Miki
 createdAt: '2026-03-22T09:50:22.285+00:00'
-updatedAt: '2026-03-22T09:52:12.490+00:00'
+updatedAt: '2026-03-22T09:58:47.124+00:00'
 createdBy: 696fb1cc000eb33adee7
 teams: []
 status: public

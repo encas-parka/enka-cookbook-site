@@ -1,6 +1,6 @@
 ---
 title: Tarte pistache fleur d oranger
-date: '2026-03-17T09:34:58.360Z'
+date: '2026-03-24T10:03:55.213Z'
 draft: false
 typeR: dessert
 categories:
@@ -22,23 +22,27 @@ materiel:
 ingredients:
   - uuid: vw9d1a
     name: Lait végétal (au choix)
-    originalQuantity: 500
+    originalQuantity: 350
     originalUnit: ml
-    normalizedQuantity: 500
+    normalizedQuantity: 350
     normalizedUnit: ml
     comment: ganache
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: 5xh7vq
     name: purée de pistache
-    originalQuantity: 120
+    originalQuantity: 60
     originalUnit: gr.
-    normalizedQuantity: 120
+    normalizedQuantity: 60
     normalizedUnit: gr.
     comment: ganache
     allergens:
       - Fruits à coque
     type: autres
+    pF: false
+    pS: false
   - uuid: 8nbcjp
     name: Fécule de maïs (Maïzena)
     originalQuantity: 35
@@ -48,24 +52,30 @@ ingredients:
     comment: ganache
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: u9z2he
     name: Sucre en poudre
-    originalQuantity: 160
+    originalQuantity: 120
     originalUnit: gr.
-    normalizedQuantity: 160
+    normalizedQuantity: 120
     normalizedUnit: gr.
     comment: ganache
     allergens: []
     type: sucres
+    pF: false
+    pS: false
   - uuid: 6bm4lq
     name: huile de coco
-    originalQuantity: 60
+    originalQuantity: 50
     originalUnit: gr.
-    normalizedQuantity: 60
+    normalizedQuantity: 50
     normalizedUnit: gr.
     comment: ganache
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: 37gzkn
     name: crème coco
     originalQuantity: 200
@@ -75,6 +85,8 @@ ingredients:
     comment: chantilly coco
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: aujuzx
     name: Chantifix
     originalQuantity: 1
@@ -84,6 +96,8 @@ ingredients:
     comment: chantilly coco
     allergens: []
     type: autres
+    pF: false
+    pS: false
   - uuid: phv1to
     name: Sucre glace
     originalQuantity: 70
@@ -93,6 +107,8 @@ ingredients:
     comment: pâte
     allergens: []
     type: sucres
+    pF: false
+    pS: false
   - uuid: ikdk3g
     name: Eau de fleur d'oranger
     originalQuantity: 3
@@ -102,6 +118,8 @@ ingredients:
     comment: chantilly coco
     allergens: []
     type: sucres
+    pF: false
+    pS: false
   - uuid: 2av6w8
     name: Farine de blé
     originalQuantity: 190
@@ -112,6 +130,8 @@ ingredients:
     allergens:
       - Gluten
     type: lof
+    pF: false
+    pS: false
   - uuid: eipcl2
     name: Margarine
     originalQuantity: 100
@@ -121,6 +141,8 @@ ingredients:
     comment: pâte
     allergens: []
     type: frais
+    pF: false
+    pS: false
   - uuid: abl0tz
     name: Poudre d'amande
     originalQuantity: 40
@@ -131,6 +153,8 @@ ingredients:
     allergens:
       - Fruits à coque
     type: sec
+    pF: false
+    pS: false
   - uuid: zf3zf8
     name: Oeuf
     originalQuantity: 1
@@ -141,6 +165,8 @@ ingredients:
     allergens:
       - Oeuf
     type: lof
+    pF: false
+    pS: false
   - uuid: phv1to
     name: Sucre glace
     originalQuantity: 20
@@ -150,6 +176,8 @@ ingredients:
     comment: chantilly coco
     allergens: []
     type: sucres
+    pF: false
+    pS: false
   - uuid: 2juq3x
     name: Sel
     originalQuantity: 1
@@ -159,6 +187,8 @@ ingredients:
     comment: pâte
     allergens: []
     type: epices
+    pF: false
+    pS: false
 preparation: |-
   ### Pâte à tarte : 
 
@@ -192,7 +222,7 @@ permissionWrite:
   - 6931ecdccd2c8d8d15e5
 auteur: null
 createdAt: '2026-03-17T09:34:57.758+00:00'
-updatedAt: '2026-03-17T09:34:57.758+00:00'
+updatedAt: '2026-03-24T10:03:54.847+00:00'
 createdBy: 6931ecdccd2c8d8d15e5
 teams: null
 status: public

@@ -1,6 +1,6 @@
 ---
 title: Cake ultime au citron
-date: '2026-03-24T10:44:25.991Z'
+date: '2026-03-24T10:45:26.181Z'
 draft: false
 typeR: dessert
 categories:
@@ -16,8 +16,7 @@ description: cuisine de bernard
 region: null
 saison: []
 id: cake-ultime-au-citron_4z7q0c4naanl
-materiel:
-  - Four
+materiel: []
 ingredients:
   - uuid: u9z2he
     name: Sucre en poudre
@@ -88,18 +87,18 @@ ingredients:
     type: lof
   - uuid: e4mjd1
     name: Jus de citron
-    originalQuantity: 0
+    originalQuantity: 20
     originalUnit: gr.
-    normalizedQuantity: 0
+    normalizedQuantity: 20
     normalizedUnit: gr.
     comment: glaçage
     allergens: []
     type: sucres
   - uuid: phv1to
     name: Sucre glace
-    originalQuantity: 0
+    originalQuantity: 105
     originalUnit: gr.
-    normalizedQuantity: 0
+    normalizedQuantity: 105
     normalizedUnit: gr.
     comment: glaçage
     allergens: []
@@ -141,11 +140,11 @@ astuces: []
 preparation24h: null
 permissionWrite:
   - 6931ecdccd2c8d8d15e5
-auteur: null
+auteur: Marion
 createdAt: '2026-03-24T10:44:22.169+00:00'
-updatedAt: '2026-03-24T10:44:22.169+00:00'
+updatedAt: '2026-03-24T10:45:25.763+00:00'
 createdBy: 6931ecdccd2c8d8d15e5
-teams: null
+teams: []
 status: public
 rootRecipeId: null
 versionLabel: null

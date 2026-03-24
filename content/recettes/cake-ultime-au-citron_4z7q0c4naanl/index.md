@@ -1,6 +1,6 @@
 ---
 title: Cake ultime au citron
-date: '2026-03-24T10:45:26.181Z'
+date: '2026-03-24T10:45:45.869Z'
 draft: false
 typeR: dessert
 categories:
@@ -12,7 +12,7 @@ quantite_desc: null
 check: true
 cuisson: true
 serveHot: false
-description: cuisine de bernard
+description: délicieuse recette de la cuisine de bernard
 region: null
 saison: []
 id: cake-ultime-au-citron_4z7q0c4naanl
@@ -142,7 +142,7 @@ permissionWrite:
   - 6931ecdccd2c8d8d15e5
 auteur: Marion
 createdAt: '2026-03-24T10:44:22.169+00:00'
-updatedAt: '2026-03-24T10:45:25.763+00:00'
+updatedAt: '2026-03-24T10:45:45.328+00:00'
 createdBy: 6931ecdccd2c8d8d15e5
 teams: []
 status: public

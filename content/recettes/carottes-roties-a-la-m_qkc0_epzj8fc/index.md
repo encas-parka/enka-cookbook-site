@@ -1,7 +1,7 @@
 ---
 title: Carottes roties à la mélasse de grenade
-date: '2026-03-17T09:47:27.097Z'
-draft: true
+date: '2026-03-24T10:01:00.946Z'
+draft: false
 typeR: entree
 categories:
   - Mezze
@@ -11,15 +11,14 @@ regime:
   - sans-lactose
 plate: 7
 quantite_desc: null
-check: false
+check: true
 cuisson: true
 serveHot: true
 description: livre méditerranée
 region: Liban
 saison: []
 id: carottes-roties-a-la-m_qkc0_epzj8fc
-materiel:
-  - Four
+materiel: []
 ingredients:
   - uuid: eouu0v
     name: Carotte
@@ -120,11 +119,11 @@ astuces: []
 preparation24h: null
 permissionWrite:
   - 6931ecdccd2c8d8d15e5
-auteur: null
+auteur: Marion
 createdAt: '2026-03-17T09:47:26.748+00:00'
-updatedAt: '2026-03-17T09:47:26.748+00:00'
+updatedAt: '2026-03-24T10:00:56.453+00:00'
 createdBy: 6931ecdccd2c8d8d15e5
-teams: null
+teams: []
 status: public
 rootRecipeId: null
 versionLabel: null

@@ -1,6 +1,6 @@
 ---
 title: Tajine avec orange à adapter suivant les fruits et légumes de saison
-date: '2026-03-11T14:21:30.601Z'
+date: '2026-03-26T14:27:21.969Z'
 draft: true
 typeR: plat
 categories: []
@@ -20,38 +20,38 @@ materiel: []
 ingredients:
   - uuid: rtavky
     name: Oignon
-    originalQuantity: 0
+    originalQuantity: 42
     originalUnit: gr.
-    normalizedQuantity: 0
+    normalizedQuantity: 42
     normalizedUnit: gr.
-    comment: ''
+    comment: 14 à couper en lamelles pour le tajine et 28 à couper en plus petits morceaux pour les caraméliser
     allergens: []
     type: legumes
   - uuid: n8zdhc
     name: Courge Butternut
-    originalQuantity: 0
+    originalQuantity: 12
     originalUnit: gr.
-    normalizedQuantity: 0
+    normalizedQuantity: 12
     normalizedUnit: gr.
-    comment: ''
+    comment: À couper en grosses lamelles
     allergens: []
     type: legumes
   - uuid: 18dy4e
     name: Pomme de terre
-    originalQuantity: 0
+    originalQuantity: 56
     originalUnit: gr.
-    normalizedQuantity: 0
+    normalizedQuantity: 56
     normalizedUnit: gr.
-    comment: ''
+    comment: À couper en gros morceaux
     allergens: []
     type: legumes
   - uuid: eouu0v
     name: Carotte
-    originalQuantity: 0
+    originalQuantity: 70
     originalUnit: gr.
-    normalizedQuantity: 0
+    normalizedQuantity: 70
     normalizedUnit: gr.
-    comment: ''
+    comment: À couper en gros morceaux
     allergens: []
     type: legumes
   - uuid: 2juq3x
@@ -83,40 +83,40 @@ ingredients:
     type: epices
   - uuid: hgfa4e
     name: Persil frais
-    originalQuantity: 0
+    originalQuantity: 2
     originalUnit: gr.
-    normalizedQuantity: 0
+    normalizedQuantity: 2
     normalizedUnit: gr.
-    comment: ''
+    comment: '2 bouquets à hacher et servis à côté du tajine '
     allergens: []
     type: epices
   - uuid: xkijt9
     name: Amandes effilées
-    originalQuantity: 0
+    originalQuantity: 500
     originalUnit: gr.
-    normalizedQuantity: 0
+    normalizedQuantity: 500
     normalizedUnit: gr.
-    comment: ''
+    comment: À faire torréfier dans une poêle sans rajout de matière grasse
     allergens:
       - Fruit à coque
     type: sec
   - uuid: 3n8509
     name: Bouillon de légumes
-    originalQuantity: 0
+    originalQuantity: 10
     originalUnit: gr.
-    normalizedQuantity: 0
+    normalizedQuantity: 10
     normalizedUnit: gr.
-    comment: ''
+    comment: La quantité est en nombre de bouillon cubes
     allergens:
       - Gluten
     type: epices
   - uuid: wwl5vn
     name: Pois chiche cuit
-    originalQuantity: 0
+    originalQuantity: 3500
     originalUnit: gr.
-    normalizedQuantity: 0
+    normalizedQuantity: 3500
     normalizedUnit: gr.
-    comment: ''
+    comment: À préparer la veille et rajouter à la préparation une fois que tout est déjà cuit
     allergens: []
     type: sec
   - uuid: h3c8al
@@ -130,24 +130,33 @@ ingredients:
     type: lof
   - uuid: v1kli8
     name: Gousse d'ail
-    originalQuantity: 0
+    originalQuantity: 42
     originalUnit: gr.
-    normalizedQuantity: 0
+    normalizedQuantity: 42
     normalizedUnit: gr.
-    comment: ''
+    comment: À râper ou presser
     allergens: []
     type: epices
   - uuid: yh2uod
     name: Orange
-    originalQuantity: 0
+    originalQuantity: 14
     originalUnit: gr.
-    normalizedQuantity: 0
+    normalizedQuantity: 14
     normalizedUnit: gr.
-    comment: ''
+    comment: Jus + zeste
+    allergens: []
+    type: legumes
+  - uuid: 9yf54l
+    name: Raisin sec
+    originalQuantity: 500
+    originalUnit: gr.
+    normalizedQuantity: 500
+    normalizedUnit: gr.
+    comment: À rajouter à la fin ou servir à côté
     allergens: []
     type: legumes
 preparation: |-
-  Recette testée pour 4 personnes d'abord dans un plat à tajine puis pour 50 personnes avec une grande casserole/marmitte. 
+  Recette testée pour 4 personnes d'abord dans un plat à tajine puis pour 50 personnes avec une grande casserole/marmitte.
 
   Les quantités ici ont donc été adaptées pour 100 personnes, et la description de la recette se base sur celle faite pour 50 personnes.
 
@@ -158,19 +167,19 @@ preparation: |-
   - Rajouter les pois chiches cuits à la marmitte de légumes, ainsi que le jus et les zestes d'orange.
   - Faire torréfier les amandes dans une poêle et hâcher le persil.
   - 30min avant de servir : Préparer la semoule qui accompnera le tajine.
-  - Disposer à côté du tajine et de la semoule, les oignons confits, les amandes torréfiées et le persil pour que chacun.e puisse en mettre à sa guise.
+  - Disposer à côté du tajine et de la semoule, les oignons confits, les amandes torréfiées, les raisins secs si pas mis dans le plat, et le persil pour que chacun.e puisse en mettre à sa guise.
 
   Et bon appétit !
 prepAlt: []
 astuces: []
-preparation24h: null
+preparation24h: Si achat de pois chiche pas cuits, alors les faire tremper 12 à 24h avant le commencement de la préparation, dans un grand volume d’eau froide. Puis les rincer et les faire cuire avec les autres légumes, au même moment que l’ajout les butternuts
 permissionWrite:
   - 69b01d0a001a6848cc4c
-auteur: null
+auteur: chrismino28
 createdAt: '2026-03-11T14:21:26.193+00:00'
-updatedAt: '2026-03-11T14:21:26.193+00:00'
+updatedAt: '2026-03-26T14:27:18.515+00:00'
 createdBy: 69b01d0a001a6848cc4c
-teams: null
+teams: []
 status: public
 rootRecipeId: null
 versionLabel: null

@@ -1,6 +1,6 @@
 ---
 title: Tajine avec orange à adapter suivant les fruits et légumes de saison
-date: '2026-03-26T14:27:21.969Z'
+date: '2026-03-26T14:29:42.917Z'
 draft: true
 typeR: plat
 categories: []
@@ -21,8 +21,8 @@ ingredients:
   - uuid: rtavky
     name: Oignon
     originalQuantity: 42
-    originalUnit: gr.
-    normalizedQuantity: 42
+    originalUnit: unité
+    normalizedQuantity: 5040
     normalizedUnit: gr.
     comment: 14 à couper en lamelles pour le tajine et 28 à couper en plus petits morceaux pour les caraméliser
     allergens: []
@@ -30,26 +30,26 @@ ingredients:
   - uuid: n8zdhc
     name: Courge Butternut
     originalQuantity: 12
-    originalUnit: gr.
+    originalUnit: unité
     normalizedQuantity: 12
-    normalizedUnit: gr.
+    normalizedUnit: unité
     comment: À couper en grosses lamelles
     allergens: []
     type: legumes
   - uuid: 18dy4e
     name: Pomme de terre
     originalQuantity: 56
-    originalUnit: gr.
+    originalUnit: unité
     normalizedQuantity: 56
-    normalizedUnit: gr.
+    normalizedUnit: unité
     comment: À couper en gros morceaux
     allergens: []
     type: legumes
   - uuid: eouu0v
     name: Carotte
     originalQuantity: 70
-    originalUnit: gr.
-    normalizedQuantity: 70
+    originalUnit: unité
+    normalizedQuantity: 8750
     normalizedUnit: gr.
     comment: À couper en gros morceaux
     allergens: []
@@ -84,10 +84,10 @@ ingredients:
   - uuid: hgfa4e
     name: Persil frais
     originalQuantity: 2
-    originalUnit: gr.
+    originalUnit: bottes
     normalizedQuantity: 2
-    normalizedUnit: gr.
-    comment: '2 bouquets à hacher et servis à côté du tajine '
+    normalizedUnit: bottes
+    comment: 'À hacher et servis à côté du tajine '
     allergens: []
     type: epices
   - uuid: xkijt9
@@ -103,9 +103,9 @@ ingredients:
   - uuid: 3n8509
     name: Bouillon de légumes
     originalQuantity: 10
-    originalUnit: gr.
+    originalUnit: unité
     normalizedQuantity: 10
-    normalizedUnit: gr.
+    normalizedUnit: unité
     comment: La quantité est en nombre de bouillon cubes
     allergens:
       - Gluten
@@ -122,26 +122,26 @@ ingredients:
   - uuid: h3c8al
     name: huile d'olive
     originalQuantity: 0
-    originalUnit: gr.
+    originalUnit: l.
     normalizedQuantity: 0
-    normalizedUnit: gr.
+    normalizedUnit: l.
     comment: ''
     allergens: []
     type: lof
   - uuid: v1kli8
     name: Gousse d'ail
     originalQuantity: 42
-    originalUnit: gr.
+    originalUnit: unité
     normalizedQuantity: 42
-    normalizedUnit: gr.
+    normalizedUnit: unité
     comment: À râper ou presser
     allergens: []
     type: epices
   - uuid: yh2uod
     name: Orange
     originalQuantity: 14
-    originalUnit: gr.
-    normalizedQuantity: 14
+    originalUnit: unité
+    normalizedQuantity: 2800
     normalizedUnit: gr.
     comment: Jus + zeste
     allergens: []
@@ -177,7 +177,7 @@ permissionWrite:
   - 69b01d0a001a6848cc4c
 auteur: chrismino28
 createdAt: '2026-03-11T14:21:26.193+00:00'
-updatedAt: '2026-03-26T14:27:18.515+00:00'
+updatedAt: '2026-03-26T14:29:42.535+00:00'
 createdBy: 69b01d0a001a6848cc4c
 teams: []
 status: public

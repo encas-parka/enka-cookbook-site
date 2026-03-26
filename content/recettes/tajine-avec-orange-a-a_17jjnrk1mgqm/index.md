@@ -1,7 +1,7 @@
 ---
 title: Tajine avec orange à adapter suivant les fruits et légumes de saison
-date: '2026-03-26T14:29:42.917Z'
-draft: true
+date: '2026-03-26T14:55:05.190Z'
+draft: false
 typeR: plat
 categories: []
 regime:
@@ -177,7 +177,7 @@ permissionWrite:
   - 69b01d0a001a6848cc4c
 auteur: chrismino28
 createdAt: '2026-03-11T14:21:26.193+00:00'
-updatedAt: '2026-03-26T14:29:42.535+00:00'
+updatedAt: '2026-03-26T14:55:02.374+00:00'
 createdBy: 69b01d0a001a6848cc4c
 teams: []
 status: public

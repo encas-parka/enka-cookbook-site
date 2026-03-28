@@ -1,6 +1,6 @@
 ---
 title: Carottes roties à la mélasse de grenade
-date: '2026-03-24T10:01:00.946Z'
+date: '2026-03-28T11:27:14.204Z'
 draft: false
 typeR: entree
 categories:
@@ -9,7 +9,7 @@ regime:
   - vegan
   - sans-gluten
   - sans-lactose
-plate: 7
+plate: 5
 quantite_desc: null
 check: true
 cuisson: true
@@ -121,7 +121,7 @@ permissionWrite:
   - 6931ecdccd2c8d8d15e5
 auteur: Marion
 createdAt: '2026-03-17T09:47:26.748+00:00'
-updatedAt: '2026-03-24T10:00:56.453+00:00'
+updatedAt: '2026-03-28T11:27:13.696+00:00'
 createdBy: 6931ecdccd2c8d8d15e5
 teams: []
 status: public

@@ -1,6 +1,6 @@
 ---
 title: Boulettes de kasha
-date: '2026-03-28T15:18:04.328Z'
+date: '2026-03-28T15:32:31.053Z'
 draft: true
 typeR: plat
 categories:
@@ -18,8 +18,7 @@ description: null
 region: null
 saison: []
 id: boulettes-de-kasha_0tffvh1bmxwr
-materiel:
-  - Four
+materiel: []
 ingredients:
   - uuid: 9f35oz
     name: Sarrasin
@@ -137,7 +136,7 @@ preparation: |-
 
   Pendant ce temps, faire revenir les oignons à feu doux sans coloration puis ajouter l'ail et les épices, laisser 2 min et couper le feu.
 
-  Mettre dans un gros saladier, incorporer le sarrasin grillé et tous les condiments (assaissonner à votre goût).
+  Mettre dans un gros saladier, incorporer le sarrasin grillé et tous les condiments (assaissonner à votre goût) et l'oeuf.
 
   Façonner en boulettes, huiler au pinceau, mettre au four à 200°C (environ 20-30 min avec un bon four).
 prepAlt: []
@@ -145,11 +144,11 @@ astuces: []
 preparation24h: null
 permissionWrite:
   - 6931ecdccd2c8d8d15e5
-auteur: null
+auteur: Marion
 createdAt: '2026-03-28T15:18:03.822+00:00'
-updatedAt: '2026-03-28T15:18:03.822+00:00'
+updatedAt: '2026-03-28T15:32:30.642+00:00'
 createdBy: 6931ecdccd2c8d8d15e5
-teams: null
+teams: []
 status: public
 rootRecipeId: null
 versionLabel: null

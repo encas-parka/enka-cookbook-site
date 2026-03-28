@@ -1,7 +1,7 @@
 ---
-title: Pain burger georgette
-date: '2026-03-28T10:04:31.293Z'
-draft: true
+title: Pain burger
+date: '2026-03-28T10:21:25.888Z'
+draft: false
 typeR: plat
 categories:
   - Pain
@@ -21,13 +21,7 @@ saison:
   - automne
   - hiver
 id: pain-burger-georgette_h8m3v0lbcbno
-materiel:
-  - Four
-  - Frigo
-  - pétrin
-  - bassine de boulangerie
-  - plaque de cuisson
-  - pinceau alimentaire
+materiel: []
 ingredients:
   - uuid: 2av6w8
     name: Farine de blé
@@ -139,11 +133,11 @@ preparation24h: |-
   Possibilité de préparer la pate la veille avec beaucoup moins de levure et la réserver au frigo, bouler les patons le lendemain matin.
 permissionWrite:
   - 69a063c400308d84e961
-auteur: null
+auteur: georgetteetnono
 createdAt: '2026-03-28T10:04:30.735+00:00'
-updatedAt: '2026-03-28T10:04:30.735+00:00'
+updatedAt: '2026-03-28T10:21:25.422+00:00'
 createdBy: 69a063c400308d84e961
-teams: null
+teams: []
 status: public
 rootRecipeId: null
 versionLabel: null

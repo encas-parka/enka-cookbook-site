@@ -1,7 +1,7 @@
 ---
-title: Falafels georgette
-date: '2026-03-28T09:32:09.563Z'
-draft: true
+title: Falafels
+date: '2026-03-28T10:22:06.867Z'
+draft: false
 typeR: plat
 categories:
   - Friture
@@ -22,12 +22,7 @@ saison:
   - ete
   - automne
 id: falafels-georgette_bdut81lbkyk4
-materiel:
-  - Friteuse
-  - Robot Mixeur
-  - Robot-coupe
-  - Gastro 1/1 (20cm)
-  - Grand Saladier
+materiel: []
 ingredients:
   - uuid: 7fwepk
     name: pois chiche secs
@@ -122,11 +117,11 @@ astuces:
 preparation24h: Mettre à tremper les pois chiches la veille
 permissionWrite:
   - 69a063c400308d84e961
-auteur: null
+auteur: georgetteetnono
 createdAt: '2026-03-28T09:32:09.107+00:00'
-updatedAt: '2026-03-28T09:32:09.107+00:00'
+updatedAt: '2026-03-28T10:22:06.506+00:00'
 createdBy: 69a063c400308d84e961
-teams: null
+teams: []
 status: public
 rootRecipeId: null
 versionLabel: null

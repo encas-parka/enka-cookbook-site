@@ -1,6 +1,6 @@
 ---
 title: Boulettes de kasha
-date: '2026-03-29T10:17:54.064Z'
+date: '2026-03-29T10:21:57.496Z'
 draft: true
 typeR: plat
 categories:
@@ -96,9 +96,9 @@ ingredients:
     type: epices
   - uuid: 2pps90
     name: Poivre
-    originalQuantity: 1
-    originalUnit: c. à café
-    normalizedQuantity: 2.5
+    originalQuantity: 2
+    originalUnit: gr.
+    normalizedQuantity: 2
     normalizedUnit: gr.
     comment: ''
     allergens: []
@@ -124,9 +124,9 @@ ingredients:
     type: lof
   - uuid: he3u48
     name: Cumin moulu
-    originalQuantity: 1
-    originalUnit: c. à soupe
-    normalizedQuantity: 6
+    originalQuantity: 3
+    originalUnit: gr.
+    normalizedQuantity: 3
     normalizedUnit: gr.
     comment: ''
     allergens: []
@@ -155,7 +155,7 @@ permissionWrite:
   - 6931ecdccd2c8d8d15e5
 auteur: Marion
 createdAt: '2026-03-28T15:18:03.822+00:00'
-updatedAt: '2026-03-29T10:17:53.721+00:00'
+updatedAt: '2026-03-29T10:21:57.088+00:00'
 createdBy: 6931ecdccd2c8d8d15e5
 teams: []
 status: public

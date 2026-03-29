@@ -1,6 +1,6 @@
 ---
 title: Boulettes de kasha
-date: '2026-03-28T15:32:31.053Z'
+date: '2026-03-29T10:09:42.408Z'
 draft: true
 typeR: plat
 categories:
@@ -131,8 +131,17 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+  - uuid: 7jceco
+    name: Curry
+    originalQuantity: 1
+    originalUnit: c. à café
+    normalizedQuantity: 2
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: epices
 preparation: |-
-  Faire griller le sarrasin à sec jusqu'à ce qu'il fonce (sans noircir). Ajouter de l'eau (2x le volume de sarrasin, voire plus si besoin). Une fois cuit, laisser refroidir en l'étalant dans des gastros.
+  Faire griller le sarrasin à sec jusqu'à ce qu'il fonce (sans noircir). Ajouter de l'eau (2x le volume de sarrasin, voire plus si besoin), couvrir pour cuire a l'étouffée. Une fois cuit, laisser refroidir en l'étalant dans des gastros.
 
   Pendant ce temps, faire revenir les oignons à feu doux sans coloration puis ajouter l'ail et les épices, laisser 2 min et couper le feu.
 
@@ -146,7 +155,7 @@ permissionWrite:
   - 6931ecdccd2c8d8d15e5
 auteur: Marion
 createdAt: '2026-03-28T15:18:03.822+00:00'
-updatedAt: '2026-03-28T15:32:30.642+00:00'
+updatedAt: '2026-03-29T10:09:39.277+00:00'
 createdBy: 6931ecdccd2c8d8d15e5
 teams: []
 status: public

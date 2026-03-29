@@ -1,7 +1,7 @@
 ---
 title: Boulettes de kasha
-date: '2026-03-29T11:17:40.454Z'
-draft: true
+date: '2026-03-29T11:17:48.595Z'
+draft: false
 typeR: plat
 categories:
   - Bouchées salées
@@ -11,7 +11,7 @@ regime:
   - sans-lactose
 plate: 6
 quantite_desc: null
-check: false
+check: true
 cuisson: true
 serveHot: true
 description: null
@@ -155,7 +155,7 @@ permissionWrite:
   - 6931ecdccd2c8d8d15e5
 auteur: Marion
 createdAt: '2026-03-28T15:18:03.822+00:00'
-updatedAt: '2026-03-29T11:17:36.816+00:00'
+updatedAt: '2026-03-29T11:17:48.096+00:00'
 createdBy: 6931ecdccd2c8d8d15e5
 teams: []
 status: public

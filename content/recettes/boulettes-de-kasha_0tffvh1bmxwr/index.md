@@ -1,6 +1,6 @@
 ---
 title: Boulettes de kasha
-date: '2026-03-29T10:15:01.038Z'
+date: '2026-03-29T10:17:38.216Z'
 draft: true
 typeR: plat
 categories:
@@ -143,7 +143,7 @@ ingredients:
 preparation: |-
   Faire griller le sarrasin à sec jusqu'à ce qu'il fonce (sans noircir). Ajouter de l'eau (2x le volume de sarrasin, voire plus si besoin), couvrir pour cuire a l'étouffée. Une fois cuit, laisser refroidir en l'étalant dans des gastros.
 
-  Pendant ce temps, faire dorer les oignons puis ajouter les épices, laisser s'infuser 2 min et couper le feu.
+  Pendant ce temps, faire dorer-fondre les oignons puis ajouter les épices, laisser s'infuser 2 min et couper le feu.
 
   Mettre dans un gros saladier, incorporer le sarrasin grillé et tous les condiments (assaissonner à votre goût) et l'oeuf.
 
@@ -155,7 +155,7 @@ permissionWrite:
   - 6931ecdccd2c8d8d15e5
 auteur: Marion
 createdAt: '2026-03-28T15:18:03.822+00:00'
-updatedAt: '2026-03-29T10:15:00.511+00:00'
+updatedAt: '2026-03-29T10:17:37.674+00:00'
 createdBy: 6931ecdccd2c8d8d15e5
 teams: []
 status: public

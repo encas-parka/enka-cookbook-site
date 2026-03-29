@@ -1,6 +1,6 @@
 ---
 title: Boulettes de kasha
-date: '2026-03-29T10:24:24.654Z'
+date: '2026-03-29T10:27:42.748Z'
 draft: true
 typeR: plat
 categories:
@@ -78,9 +78,9 @@ ingredients:
     type: epices
   - uuid: mck2wl
     name: Concentré de tomate
-    originalQuantity: 2
+    originalQuantity: 1
     originalUnit: c. à soupe
-    normalizedQuantity: 30
+    normalizedQuantity: 15
     normalizedUnit: ml
     comment: ''
     allergens: []
@@ -155,7 +155,7 @@ permissionWrite:
   - 6931ecdccd2c8d8d15e5
 auteur: Marion
 createdAt: '2026-03-28T15:18:03.822+00:00'
-updatedAt: '2026-03-29T10:24:24.335+00:00'
+updatedAt: '2026-03-29T10:27:42.283+00:00'
 createdBy: 6931ecdccd2c8d8d15e5
 teams: []
 status: public

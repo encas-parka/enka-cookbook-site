@@ -1,6 +1,6 @@
 ---
 title: Boulettes de kasha
-date: '2026-03-29T10:27:42.748Z'
+date: '2026-03-29T11:17:40.454Z'
 draft: true
 typeR: plat
 categories:
@@ -147,7 +147,7 @@ preparation: |-
 
   Mettre dans un gros saladier, incorporer le sarrasin grillé refroidi, assaissonner à votre goût, et l'oeuf.
 
-  Façonner en boulettes, huiler au pinceau, mettre au four à 200°C (environ 20-30 min avec un bon four).
+  Façonner en boulettes, huiler au pinceau, mettre au four à 200°C (environ 30 min, retourner autour de la mi cuisson).
 prepAlt: []
 astuces: []
 preparation24h: null
@@ -155,7 +155,7 @@ permissionWrite:
   - 6931ecdccd2c8d8d15e5
 auteur: Marion
 createdAt: '2026-03-28T15:18:03.822+00:00'
-updatedAt: '2026-03-29T10:27:42.283+00:00'
+updatedAt: '2026-03-29T11:17:36.816+00:00'
 createdBy: 6931ecdccd2c8d8d15e5
 teams: []
 status: public

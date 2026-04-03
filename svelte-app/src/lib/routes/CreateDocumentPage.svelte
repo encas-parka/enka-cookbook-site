@@ -36,7 +36,7 @@
 
   // Tags disponibles depuis le store + tags ajoutés par l'utilisateur
   let availableTags = $derived.by(() => {
-    const teamTags = teamdocsStore.getTeamTags(teamId);
+    const teamTags = teamId ? teamdocsStore.getTeamTags(teamId) : [];
     const allTags = new Set([...teamTags, ...tags]);
 
     return Array.from(allTags).map((tag) => ({
@@ -139,7 +139,7 @@
    * Crée le document
    */
   async function handleCreate() {
-    if (!isValid || isSaving || !team) return;
+    if (!isValid || isSaving || !team || !teamId) return;
 
     isSaving = true;
 

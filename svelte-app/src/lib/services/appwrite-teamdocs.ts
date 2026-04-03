@@ -83,6 +83,43 @@ export async function getDocument(id: string): Promise<Teamdocs | null> {
 }
 
 /**
+ * Crée un nouveau document avec permissions label (liés à un événement)
+ */
+export async function createEventDocument(
+  data: Partial<Teamdocs>,
+  eventId: string,
+  userId: string,
+): Promise<Teamdocs> {
+  try {
+    const { tables, config } = await getAppwriteInstances();
+
+    const permissions = [
+      Permission.read(Role.label(eventId)),
+      Permission.update(Role.label(eventId)),
+      Permission.delete(Role.label(eventId)),
+    ];
+
+    const document = await tables.createRow({
+      databaseId: config.databaseId,
+      tableId: TEAMDOCS_COLLECTION_ID,
+      rowId: ID.unique(),
+      data: {
+        ...data,
+        eventId,
+        status: "doc",
+      },
+      permissions,
+    });
+
+    console.log(`[appwrite-teamdocs] Event document created: ${document.$id}`);
+    return document as unknown as Teamdocs;
+  } catch (error) {
+    console.error("[appwrite-teamdocs] Error creating event document:", error);
+    throw error;
+  }
+}
+
+/**
  * Crée un nouveau document avec permissions team
  */
 export async function createDocument(
@@ -171,16 +208,18 @@ export async function deleteDocument(id: string): Promise<void> {
 
 /**
  * Met à jour le lock d'un document (heartbeat)
- * Le lock est stocké directement dans le champ lockedBy du document
+ * Le lock est stocké dans les champs lockedBy et lockedByName du document
  * @param docId - ID du document
  * @param lockedBy - userId pour verrouiller, null pour libérer
+ * @param lockedByName - nom du détenteur, null pour libérer
  */
 export async function updateDocumentLock(
   docId: string,
   lockedBy: string | null,
+  lockedByName: string | null = null,
 ): Promise<void> {
   try {
-    await updateDocument(docId, { lockedBy });
+    await updateDocument(docId, { lockedBy, lockedByName });
     console.log(
       `[appwrite-teamdocs] Lock ${docId} mis à jour: ${lockedBy || "libéré"}`,
     );
@@ -195,15 +234,26 @@ export async function updateDocumentLock(
 // =============================================================================
 
 /**
- * S'abonne aux événements realtime des documents
- * Note: Cette fonction doit être appelée après initialisation du store
+ * Récupère les channels realtime pour les documents
+ * Utilisé par le RealtimeManager pour la souscription multiplexée
+ */
+export function getDocumentsRealtimeChannels(): string[] {
+  const { config } = getAppwriteInstances() as any;
+  return [
+    `databases.${config.databaseId}.collections.${TEAMDOCS_COLLECTION_ID}.documents`,
+  ];
+}
+
+/**
+ * S'abonne aux événements realtime des documents (standalone, sans RealtimeManager)
+ * @deprecated — Préférer l'utilisation de RealtimeManager via le store
  */
 export function subscribeToDocuments(
   callback: (payload: any) => void,
 ): () => void {
-  const { client } = getAppwriteInstances() as any;
+  const { client, config } = getAppwriteInstances() as any;
 
-  const channel = `databases.*.collections.${TEAMDOCS_COLLECTION_ID}`;
+  const channel = `databases.${config.databaseId}.collections.${TEAMDOCS_COLLECTION_ID}.documents`;
   const unsubscribe = client.subscribe([channel], callback);
 
   console.log("[appwrite-teamdocs] Subscribed to documents realtime");

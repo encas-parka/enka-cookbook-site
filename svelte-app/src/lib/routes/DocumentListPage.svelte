@@ -51,7 +51,7 @@
 
   // Récupérer tous les documents de l'équipe depuis le store
   const allDocs = $derived.by(() => {
-    if (!teamdocsStore.isInitialized) {
+    if (!teamdocsStore.isInitialized || !teamId) {
       return [];
     }
     return teamdocsStore.getTeamDocuments(teamId);
@@ -59,7 +59,7 @@
 
   // Extraire les valeurs uniques pour les filtres
   const availableTags = $derived.by(() => {
-    return teamdocsStore.getTeamTags(teamId);
+    return teamId ? teamdocsStore.getTeamTags(teamId) : [];
   });
 
   // Logique de filtrage

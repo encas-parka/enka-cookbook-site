@@ -6,7 +6,8 @@
 
   interface Props {
     doc: EnrichedTeamdoc;
-    teamId: string;
+    teamId?: string;
+    eventId?: string;
     highlightedTags?: string[];
     bgClass?: string;
   }
@@ -14,14 +15,23 @@
   let {
     doc,
     teamId,
+    eventId,
     highlightedTags = [],
     bgClass = "bg-base-200/60",
   }: Props = $props();
+
+  const href = $derived(
+    eventId
+      ? p(`/event/${eventId}/document/${doc.$id}`)
+      : teamId
+        ? p(`/editdocument/${teamId}/${doc.$id}`)
+        : "#",
+  );
 </script>
 
 <a
-  class="{bgClass} hover:bg-base-200 flex cursor-pointer items-start gap-3 rounded-lg p-4 transition-colors hover:shadow-sm"
-  href={p(`/editdocument/${teamId}/${doc.$id}`)}
+  class="{bgClass} hover:bg-base-200 flex cursor-pointer items-start gap-3 rounded-lg p-4 shadow-sm transition-colors hover:shadow-md"
+  {href}
 >
   <div class="min-w-0 flex-1">
     <div class="flex flex-wrap items-center gap-x-10 gap-y-2">

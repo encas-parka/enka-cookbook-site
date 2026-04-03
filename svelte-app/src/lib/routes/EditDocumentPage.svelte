@@ -11,7 +11,6 @@
   import BtnGroupCheck from "$lib/components/ui/BtnGroupCheck.svelte";
   import UnsavedChangesGuard from "$lib/components/ui/UnsavedChangesGuard.svelte";
   import SvelteMarkdown from "@humanspeak/svelte-markdown";
-  import type { Teamdocs } from "$lib/types/appwrite.d";
   import { navBarStore } from "$lib/stores/NavBarStore.svelte";
 
   // ============================================================================
@@ -27,7 +26,6 @@
   // ÉTAT LOCAL
   // ============================================================================
 
-  let document = $state<Teamdocs | null>(null);
   let title = $state("");
   let content = $state("");
   let tags = $state<string[]>([]);
@@ -36,10 +34,25 @@
 
   let isLoading = $state(true);
   let isSaving = $state(false);
-  let lockedBy = $state<string | null>(null);
-  let lockedByName = $state<string>("");
+  let iHoldLock = $state(false);
   let heartbeatInterval: ReturnType<typeof setInterval> | null = null;
   let initialDocumentSnapshot = $state<string>("");
+
+  // ============================================================================
+  // LECTURE RÉACTIVE DU STORE (pour le lock)
+  // ============================================================================
+
+  /**
+   * Document lu depuis le store — réactif aux mises à jour realtime
+   * Permet de détecter les changements de lock par d'autres utilisateurs
+   */
+  const storeDoc = $derived(docId ? teamdocsStore.getDocumentById(docId) : undefined);
+
+  /**
+   * État du lock lu réactivement depuis le store
+   */
+  const storeLockedBy = $derived(storeDoc?.lockedBy ?? null);
+  const storeLockedByName = $derived(storeDoc?.lockedByName ?? null);
 
   // Mode édition ou preview - lu depuis les query params
   const mode = $derived(
@@ -51,7 +64,7 @@
 
   // Tags disponibles depuis le store + tags ajoutés par l'utilisateur
   let availableTags = $derived.by(() => {
-    const teamTags = teamdocsStore.getTeamTags(teamId);
+    const teamTags = teamId ? teamdocsStore.getTeamTags(teamId) : [];
     const allTags = new Set([...teamTags, ...tags]);
 
     return Array.from(allTags).map((tag) => ({
@@ -72,9 +85,9 @@
   // ============================================================================
 
   const isLockedByOthers = $derived(
-    !!lockedBy && lockedBy !== globalState.userId,
+    !!storeLockedBy && storeLockedBy !== globalState.userId && !iHoldLock,
   );
-  const isLockedByMe = $derived(!!lockedBy && lockedBy === globalState.userId);
+  const isLockedByMe = $derived(iHoldLock);
   const canEdit = $derived(!isLockedByOthers && !isLoading && !isSaving);
 
   // Validation
@@ -89,13 +102,13 @@
    * Pattern RecipeEditPage : lock basé sur lockedBy + expiration $updatedAt
    */
   async function acquireLock(): Promise<boolean> {
-    if (!docId || !globalState.userId || !document) return false;
+    if (!docId || !globalState.userId || !storeDoc) return false;
 
     try {
       // Vérifier si le verrou actuel est expiré (plus de 5 minutes)
-      const currentLockedBy = document.lockedBy;
-      const lastUpdate = document.$updatedAt
-        ? new Date(document.$updatedAt)
+      const currentLockedBy = storeDoc.lockedBy;
+      const lastUpdate = storeDoc.$updatedAt
+        ? new Date(storeDoc.$updatedAt)
         : null;
       const isExpired =
         lastUpdate && Date.now() - lastUpdate.getTime() > 300000; // 5 min
@@ -106,16 +119,18 @@
             "[EditDocumentPage] Verrou précédent expiré, reprise de contrôle...",
           );
         } else {
-          lockedBy = currentLockedBy;
           console.warn("[EditDocumentPage] Document déjà verrouillé");
           return false;
         }
       }
 
       // Acquérir le lock
-      await teamdocsStore.updateDocumentLock(docId, globalState.userId);
-      lockedBy = globalState.userId;
-      lockedByName = globalState.userName || "";
+      await teamdocsStore.updateDocumentLock(
+        docId,
+        globalState.userId,
+        globalState.userName || null,
+      );
+      iHoldLock = true;
       startHeartbeat();
       console.log(`[EditDocumentPage] Lock acquis pour ${docId}`);
       return true;
@@ -135,9 +150,13 @@
 
     // Heartbeat toutes les 2 minutes
     heartbeatInterval = setInterval(async () => {
-      if (lockedBy === globalState.userId && docId) {
+      if (iHoldLock && docId) {
         try {
-          await teamdocsStore.updateDocumentLock(docId, globalState.userId);
+          await teamdocsStore.updateDocumentLock(
+            docId,
+            globalState.userId,
+            globalState.userName || null,
+          );
           console.log(`[EditDocumentPage] Heartbeat envoyé pour ${docId}`);
         } catch (error) {
           console.error("[EditDocumentPage] Erreur heartbeat:", error);
@@ -158,22 +177,21 @@
 
   /**
    * Libère le lock
+   * Cleanup local synchrone + release serveur fire-and-forget
    */
-  async function releaseLock(): Promise<void> {
-    if (!docId) return;
+  function releaseLock(): void {
+    if (!docId || !iHoldLock) return;
 
+    // 1. Cleanup local IMMÉDIAT (synchrone)
     stopHeartbeat();
+    iHoldLock = false;
 
-    if (isLockedByMe) {
-      try {
-        await teamdocsStore.updateDocumentLock(docId, null);
-        lockedBy = null;
-        lockedByName = "";
-        console.log(`[EditDocumentPage] Lock libéré pour ${docId}`);
-      } catch (error) {
+    // 2. Release serveur (fire-and-forget)
+    teamdocsStore
+      .updateDocumentLock(docId, null, null)
+      .catch((error) => {
         console.error("[EditDocumentPage] Erreur libération lock:", error);
-      }
-    }
+      });
   }
 
   // ============================================================================
@@ -202,6 +220,12 @@
     // Charger le document
     isLoading = true;
     try {
+      if (!docId) {
+        toastService.error("Document introuvable");
+        navigate(`/teams/${teamId}`);
+        return;
+      }
+
       const doc = teamdocsStore.getDocumentById(docId);
 
       if (!doc) {
@@ -210,7 +234,6 @@
         return;
       }
 
-      document = doc;
       title = doc.title || "";
       content = doc.content || "";
       tags = doc.tags || [];
@@ -224,8 +247,8 @@
         isPublic,
       });
 
-      // Tenter d'acquérir le lock
-      await acquireLock();
+      // Le lock est acquis réactivement via le $effect ci-dessous,
+      // uniquement si le mode initial est "edit"
     } catch (error) {
       console.error("[EditDocumentPage] Erreur chargement document:", error);
       toastService.error("Erreur lors du chargement du document");
@@ -235,8 +258,27 @@
   });
 
   // Libérer le lock à la destruction
-  onDestroy(async () => {
-    await releaseLock();
+  onDestroy(() => {
+    releaseLock();
+  });
+
+  // Lock réactif au mode
+  $effect(() => {
+    if (isLoading || !storeDoc) return;
+
+    // Forcer le mode preview quand le document est locké par un autre
+    if (isLockedByOthers && mode === "edit") {
+      searchParams.set("mode", "preview");
+      return;
+    }
+
+    if (mode === "edit" && !isLockedByOthers && !iHoldLock) {
+      acquireLock();
+    }
+
+    if (mode === "preview" && iHoldLock && !isDirty) {
+      releaseLock();
+    }
   });
 
   // Guard avant de quitter
@@ -292,7 +334,7 @@
    * Sauvegarde le document
    */
   async function handleSave() {
-    if (!isValid || isSaving || !document) return;
+    if (!isValid || isSaving || !storeDoc || !docId) return;
 
     isSaving = true;
 
@@ -336,16 +378,12 @@
   // NAVBAR CONFIGURATION
   // ============================================================================
 
-  const navTitle = $derived(
-    document ? `Document: ${document.title}` : "Modifier le document",
-  );
-
   $effect(() => {
     navBarStore.setConfig({
-      title: navTitle,
+      title: storeDoc ? `Document: ${storeDoc.title}` : "Modifier le document",
       actions: navActions,
       isLockedByOthers: isLockedByOthers,
-      lockedByUserName: lockedByName,
+      lockedByUserName: storeLockedByName || undefined,
     });
   });
 
@@ -393,9 +431,9 @@
         <h4 class="font-bold">Document verrouillé</h4>
         <p class="text-sm">
           Ce document est actuellement édité par
-          <span class="font-bold">{lockedByName || "un autre utilisateur"}</span
-          >
-          . Vous ne pouvez pas le modifier pour le moment.
+          <span class="font-bold"
+            >{storeLockedByName || "un autre utilisateur"}</span
+          >. Vous ne pouvez pas le modifier pour le moment.
         </p>
       </div>
     </div>
@@ -406,7 +444,7 @@
     <div class="flex justify-center py-20">
       <div class="loading loading-spinner loading-lg"></div>
     </div>
-  {:else if document}
+  {:else if storeDoc}
     <div class="space-y-4">
       {#if mode === "edit"}
         <!-- Titre -->
@@ -490,29 +528,21 @@
         </fieldset> -->
       {:else}
         <!-- Mode preview -->
-        <!-- Header -->
         <div class="mb-6 flex items-center justify-between">
           <div class="flex-1">
-            {#if isLoading}
-              <div class="flex items-center gap-2">
-                <Loader2 class="h-5 w-5 animate-spin" />
-                <span>Chargement...</span>
-              </div>
-            {:else if document}
-              <div
-                class="flex flex-wrap items-center justify-between gap-x-4 gap-y-2"
-              >
-                <h1 class="text-2xl font-bold">{title}</h1>
-                <p class="text-sm opacity-70">
-                  Équipe : <span class="font-medium">{team?.name}</span>
-                </p>
-              </div>
-              <div class="flex flex-wrap gap-2">
-                {#each tags as tag, index (index)}
-                  <span class="badge badge-secondary badge-soft">#{tag}</span>
-                {/each}
-              </div>
-            {/if}
+            <div
+              class="flex flex-wrap items-center justify-between gap-x-4 gap-y-2"
+            >
+              <h1 class="text-2xl font-bold">{title}</h1>
+              <p class="text-sm opacity-70">
+                Équipe : <span class="font-medium">{team?.name}</span>
+              </p>
+            </div>
+            <div class="flex flex-wrap gap-2">
+              {#each tags as tag, index (index)}
+                <span class="badge badge-secondary badge-soft">#{tag}</span>
+              {/each}
+            </div>
           </div>
         </div>
         <div class="prose bg-base-100 max-w-none rounded-lg p-6 shadow-lg">

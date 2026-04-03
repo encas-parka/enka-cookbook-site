@@ -52,7 +52,6 @@ export const routes: Routes = {
   // Magic link de partage event (public, sans guard)
   "/join/:linkId": () => import("$lib/routes/JoinPage.svelte"),
 
-
   // Reset password
   "/reset-password": () => import("$lib/routes/ResetPassword.svelte"),
 
@@ -137,6 +136,11 @@ export const routes: Routes = {
     "/recipes": () => import("$lib/routes/EventRecipesPage.svelte"),
     "/products": () => import("$lib/routes/EventProductsPage.svelte"),
     "/posters": () => import("$lib/routes/EventPosterPage.svelte"),
+    "/todos": () => import("$lib/routes/EventTodosPage.svelte"),
+    "/documents": () => import("$lib/routes/EventDocumentsPage.svelte"),
+    "/document/new": () => import("$lib/routes/EventDocumentCreatePage.svelte"),
+    "/document/:docId/edit": () =>
+      import("$lib/routes/EventDocumentEditPage.svelte"),
   },
 
   // ============================================

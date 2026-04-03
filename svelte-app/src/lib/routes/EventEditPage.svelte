@@ -27,7 +27,7 @@
   import { flip } from "svelte/animate";
   import { untrack, onDestroy, onMount } from "svelte";
   import EventStats from "../components/EventStats.svelte";
-  import EventTodoList from "../components/eventTodo/EventTodoList.svelte";
+  import EventDocumentsFieldset from "../components/eventEdit/EventDocumentsFieldset.svelte";
   import { navBarStore } from "../stores/NavBarStore.svelte";
   import { locksService, type AppwriteLock } from "../services/appwrite-locks";
   import UnsavedChangesGuard from "../components/ui/UnsavedChangesGuard.svelte";
@@ -920,12 +920,11 @@
           />
         {/if}
 
-        <!-- Liste des Tâches (TODO) -->
+        <!-- Documents liés à l'événement -->
         {#if currentEvent}
-          <EventTodoList
-            event={currentEvent}
-            {contributors}
-            disabled={!canEdit || isLockedByOthers}
+          <EventDocumentsFieldset
+            eventId={currentEvent.$id}
+            canEdit={canEdit && !isLockedByOthers}
           />
         {/if}
       </div>

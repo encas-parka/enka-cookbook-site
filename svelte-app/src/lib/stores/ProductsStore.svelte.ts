@@ -2006,12 +2006,22 @@ class ProductsStore {
     if (isDemoEvent(this.#currentEventId)) {
       return await this.updateProductLocal(productId, updates);
     } else {
-      // Mode normal : passer updates direct à Appwrite (sérialisation automatique)
-      const { updateProduct: updateProductAppwrite } =
-        await import("../services/appwrite-products");
-      // ⚡ SIMPLIFICATION 2026-01-21 : Plus de #transformToAppwriteFormat()
-      // Appwrite client fait le JSON.stringify automatiquement des objets
-      await updateProductAppwrite(productId, updates);
+      const {
+        updateProduct: updateProductAppwrite,
+        upsertProduct,
+      } = await import("../services/appwrite-products");
+
+      // Vérifier si le produit est synchronisé avec Appwrite
+      const enrichedProduct = this.getEnrichedProductById(productId);
+      if (enrichedProduct && !enrichedProduct.isSynced) {
+        // Produit local uniquement : créer sur Appwrite via upsert
+        await upsertProduct(productId, updates, (id: string) =>
+          this.getEnrichedProductById(id),
+        );
+      } else {
+        // Produit déjà synchronisé : update normal
+        await updateProductAppwrite(productId, updates);
+      }
     }
   }
 

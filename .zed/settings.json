@@ -9,7 +9,7 @@
     "/.claude/*",
     "**/.obsidian",
     "/.obsidian/*",
-    // "**/static/app/*",
+    "**/static/app/*",
   ],
   "file_scan_inclusions": [
     "appwrite/*",

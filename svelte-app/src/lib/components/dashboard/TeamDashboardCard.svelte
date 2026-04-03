@@ -81,7 +81,7 @@
   }
 </script>
 
-<div class="card bg-base-100 border-base-200 border shadow-xl">
+<div class="card bg-base-100/70 border-base-200 border shadow-xl">
   <div class="card-body gap-4 max-sm:px-2">
     <!-- === HEADER PRINCIPAL === -->
     <div class="flex flex-wrap items-start justify-between gap-2">
@@ -110,7 +110,7 @@
     <!-- === SOUS-CARD MEMBRES | materiel  -->
     <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
       <div
-        class="card card-sm border-neutral/20 shoadow-sm self-start border shadow"
+        class="card bg-base-100 card-sm border-neutral/20 shoadow-sm self-start border shadow"
       >
         <div class="card-body">
           <div
@@ -148,7 +148,7 @@
       </div>
 
       <div
-        class="card border-neutral/20 card-sm mb-auto flex w-full justify-center border shadow-sm"
+        class="card border-neutral/20 bg-base-100 card-sm mb-auto flex w-full justify-center border shadow-sm"
       >
         <!-- Actions Matériel -->
         <div class="card-body place-content-center">
@@ -182,7 +182,7 @@
 
     <div class="card grid grid-cols-1 gap-6 text-sm">
       <!-- === ÉVÉNEMENTS === -->
-      <div class="card card-sm border-neutral/20 border shadow-sm">
+      <div class="card bg-base-100 card-sm border-neutral/20 border shadow-sm">
         <div class="card-body">
           <div class="flex flex-wrap justify-between gap-2">
             <h3 class="card-title items-center">

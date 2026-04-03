@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { onMount } from "svelte";
   import { teamdocsStore } from "$lib/stores/TeamdocsStore.svelte";
   import { p } from "$lib/router";
   import {
@@ -30,6 +31,13 @@
         return dateB - dateA; // Plus récent d'abord
       })
       .slice(0, 5);
+  });
+
+  // Initialiser le store si nécessaire
+  onMount(async () => {
+    if (!teamdocsStore.isInitialized) {
+      await teamdocsStore.initialize();
+    }
   });
 </script>
 

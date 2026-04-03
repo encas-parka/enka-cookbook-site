@@ -186,7 +186,7 @@
       {#if globalState.userTeams.length > 0}
         <section class="bg-base-200 py-8">
           <div class="mx-auto">
-            <div class="grid grid-cols-1 gap-6">
+            <div class="grid grid-cols-1 gap-16">
               {#each globalState.userTeams as teamId (teamId)}
                 {@const team = nativeTeamsStore.getTeamById(teamId)}
                 {#if team}

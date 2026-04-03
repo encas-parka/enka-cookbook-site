@@ -105,9 +105,6 @@
   let activeIndex = $state(0);
   let continuousProgress = $state(0); // Progression continue 0-4
 
-  // Initialiser le smart header de GlobalState
-  globalState.initializeScrollDirection();
-
   // Direction du scroll depuis GlobalState
   const isScrollingDown = $derived(globalState.scrollDirection === "down");
 

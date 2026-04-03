@@ -1,5 +1,4 @@
 import { MediaQuery } from "svelte/reactivity";
-import { scrollY } from "svelte/reactivity/window";
 
 import { toastService } from "../services/toast.service.svelte";
 import { getAppwriteInstances, clearAppwriteCache } from "../services/appwrite";
@@ -298,9 +297,10 @@ class GlobalState {
   // SMART HEADER STATE (Mobile only)
   // =============================================================================
 
-  #lastScrollY = $state(0);
+  #lastScrollY = 0;
   #headerVisible = $state(true);
   #scrollDirection = $state<"up" | "down">("down");
+  #scrollHandler: (() => void) | null = null;
 
   get headerVisible() {
     return this.#headerVisible;
@@ -312,12 +312,15 @@ class GlobalState {
 
   /**
    * Initialise la détection de scroll pour le smart header
-   * Seulement actif sur mobile
-   * Expose aussi la direction du scroll pour tous les composants
+   * Utilise un event listener natif car scrollY de svelte/reactivity/window
+   * ne se met pas à jour après les navigations côté client (bug Svelte 5 #17412)
    */
   initializeScrollDirection() {
-    $effect(() => {
-      const currentScroll = scrollY.current ?? 0;
+    // Éviter les doublons
+    if (this.#scrollHandler) return;
+
+    this.#scrollHandler = () => {
+      const currentScroll = window.scrollY ?? 0;
 
       // Calcul de la direction du scroll
       if (currentScroll > this.#lastScrollY) {
@@ -344,7 +347,19 @@ class GlobalState {
 
       // Mettre à jour la dernière position
       this.#lastScrollY = currentScroll;
-    });
+    };
+
+    window.addEventListener("scroll", this.#scrollHandler, { passive: true });
+  }
+
+  /**
+   * Nettoie l'event listener de détection de scroll
+   */
+  destroyScrollDirection() {
+    if (this.#scrollHandler) {
+      window.removeEventListener("scroll", this.#scrollHandler);
+      this.#scrollHandler = null;
+    }
   }
 
   get userName() {

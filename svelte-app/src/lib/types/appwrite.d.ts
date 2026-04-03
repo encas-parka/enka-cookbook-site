@@ -274,14 +274,16 @@ export type Teamdocs = Models.Row & {
   isPublic: boolean;
   teamName: string;
   teamId: string;
+  eventId: string | null;
   status: string;
   lockedBy: string | null;
+  lockedByName: string | null;
 };
 
 export type ShareLinks = Models.Row & {
-  link_type: string;       // "event" pour l'instant
-  target_id: string;       // $id du document main
-  access_level: string;    // "write"
+  link_type: string; // "event" pour l'instant
+  target_id: string; // $id du document main
+  access_level: string; // "write"
   createdBy: string;
   expiresAt: string | null;
   maxUses: number | null;

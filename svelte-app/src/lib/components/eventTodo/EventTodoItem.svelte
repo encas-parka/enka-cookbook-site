@@ -199,7 +199,7 @@
                     (assignee.isCurrentUser ? " (vous)" : "")}
                 >
                   <div
-                    class="badge badge-soft badge-info {assignee.isCurrentUser &&
+                    class="badge badge-soft badge-sm badge-info {assignee.isCurrentUser &&
                       'ring-info font-semibold ring-1'}"
                   >
                     <span>{assignee.name}</span>
@@ -216,14 +216,15 @@
               {/if}
 
               {#if assigneeInfos.length === 0}
-                <span class="text-warning mx-1 text-base italic">
+                <span class="text-warning mx-1 text-sm italic">
                   Non assigné
                 </span>
               {/if}
             </div>
 
             <span
-              class="mx-1 {assigneeInfos.length < (todo.requiredPeopleNb || 1)
+              class="mx-1 text-sm {assigneeInfos.length <
+              (todo.requiredPeopleNb || 1)
                 ? 'text-warning'
                 : 'text-success'} font-medium"
             >

@@ -289,7 +289,7 @@
 {/snippet}
 
 <div class="bg-base-200 min-h-lvh space-y-10 px-2 pt-4 pb-20 md:px-30 md:pb-20">
-  <div class="card bg-base-100">
+  <div class="card card-sm bg-base-100">
     <div class="card-body">
       <div class="card-title mb-4">
         <CalendarPlus2 /> Création d'un événement

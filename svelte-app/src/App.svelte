@@ -31,6 +31,8 @@
 
       // ✅ Afficher IMMÉDIATEMENT l'UI (quel que soit l'état auth)
       appState = "READY";
+      // ✅ Synchroniser l'état de référence pour éviter un faux "changement" dans l'effet
+      wasAuthenticated = globalState.isAuthenticated;
 
       if (globalState.isAuthenticated) {
         // ============================================
@@ -191,18 +193,22 @@
 
   onMount(() => {
     initializeApp();
+    // Initialiser la détection de scroll pour le smart header mobile
+    globalState.initializeScrollDirection();
   });
 
-  onDestroy(() => {
-    console.log("[App] Destruction de l'application - Nettoyage des stores...");
-    notificationStore.destroy();
-    teamsStore.destroy();
-    eventsStore.destroy();
-    recipesStore.destroy();
-    materielStore.destroy();
-    teamdocsStore.destroy();
-    realtimeManager.destroy();
-  });
+  // USELESS en spa
+  // onDestroy(() => {
+  //   console.log("[App] Destruction de l'application - Nettoyage des stores...");
+  //   notificationStore.destroy();
+  //   teamsStore.destroy();
+  //   eventsStore.destroy();
+  //   recipesStore.destroy();
+  //   materielStore.destroy();
+  //   teamdocsStore.destroy();
+  //   realtimeManager.destroy();
+  //   globalState.destroyScrollDirection();
+  // });
 
   let displayError = $derived(initError || productsStore.error);
 

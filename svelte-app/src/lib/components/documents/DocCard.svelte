@@ -80,11 +80,6 @@
           </div>
         {/if}
       </div>
-
-      <!-- Lock indicator -->
-      {#if doc.lockedBy}
-        <div class="badge badge-warning badge-xs">Verrouillé</div>
-      {/if}
     </div>
   </div>
 

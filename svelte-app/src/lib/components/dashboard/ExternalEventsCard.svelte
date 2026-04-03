@@ -67,7 +67,7 @@
   <!-- Pas d'événements du tout -->
 {:else if externalEvents.length === 0 && !showAllEvents}
   <!-- Affichage minimaliste : pas d'invitations externes -->
-  <div class="card bg-base-100 border-base-200 mb-6 border shadow-xl">
+  <div class="card bg-base-300 border-base-200 border shadow-xl">
     <div class="card-body">
       <div class="flex items-center justify-between">
         <div class="flex items-center gap-3">

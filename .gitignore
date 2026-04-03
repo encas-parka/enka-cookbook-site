@@ -15,5 +15,8 @@ backups
 docs
 svelte-app/.vite
 *.claude
+*.opencode
+*.agents
+*skills-lock.json
 appwrite
 appwrite-ec-dev

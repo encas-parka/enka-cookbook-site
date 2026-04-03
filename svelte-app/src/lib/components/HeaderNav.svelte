@@ -33,6 +33,8 @@
   // Extrait toutes les informations de contexte depuis l'URL courante
   type ContextType =
     | { type: "eventEdit"; basePath: string; eventId: string }
+    | { type: "eventDocumentEdit"; eventId: string; docId: string }
+    | { type: "eventDocumentCreate"; eventId: string }
     | { type: "materiel"; teamId: string }
     | { type: "loans"; teamId: string }
     | { type: "documentEdit"; teamId: string; docId: string }
@@ -41,6 +43,45 @@
   const context: ContextType = $derived.by(() => {
     const pathname = route.pathname;
     const params = route.params;
+
+    // Routes documents événement: /event/:id/document/:docId/edit
+    if (
+      pathname.includes("/event/") &&
+      pathname.includes("/document/") &&
+      params.id &&
+      params.docId
+    ) {
+      return {
+        type: "eventDocumentEdit",
+        eventId: params.id as string,
+        docId: params.docId as string,
+      };
+    }
+
+    // Routes création document événement: /event/:id/document/new
+    if (
+      pathname.includes("/event/") &&
+      pathname.includes("/document/new") &&
+      params.id
+    ) {
+      return {
+        type: "eventDocumentCreate",
+        eventId: params.id as string,
+      };
+    }
+
+    // Routes documents événement (liste): /event/:id/documents
+    if (
+      pathname.includes("/event/") &&
+      pathname.endsWith("/documents") &&
+      params.id
+    ) {
+      return {
+        type: "eventEdit",
+        basePath: "/event",
+        eventId: params.id as string,
+      };
+    }
 
     // Routes dashboard: /event/:id, /event/:id/recipes, /event/:id/products, /event/:id/posters
     if (pathname.includes("/event/") && params.id) {
@@ -87,12 +128,6 @@
 
     return null;
   });
-
-  // Initialiser le smart header
-
-  if (globalState.isMobile) {
-    globalState.initializeScrollDirection();
-  }
 
   function toggleDropdown() {
     showDropdown = !showDropdown;
@@ -179,7 +214,9 @@
 <div
   class="navbar bg-base-100 border-base-300 sticky top-0 z-1000 min-h-11 border-b px-4 py-0 shadow-sm transition-transform duration-300 print:hidden {globalState.isMobile &&
     'min-h-11'}
-    {globalState.isMobile && !globalState.headerVisible && '-translate-y-full'}"
+    {globalState.isMobile && !globalState.headerVisible
+    ? '-translate-y-full'
+    : ''}"
 >
   <div class="navbar-start w-fit shrink-0 gap-1">
     <!-- Brand -->
@@ -224,8 +261,13 @@
     <div class="navbar-center absolute left-1/2 -translate-x-1/2 transform">
       {#if context?.type === "materiel" || context?.type === "loans"}
         <MaterielTabs currentTeamId={context.teamId} />
-      {:else if context?.type === "eventEdit"}
-        <EventTabs eventId={context.eventId} basePath={context.basePath} />
+      {:else if context?.type === "eventEdit" || context?.type === "eventDocumentEdit" || context?.type === "eventDocumentCreate"}
+        <EventTabs
+          eventId={context.eventId}
+          basePath={context && "basePath" in context
+            ? context.basePath
+            : "/event"}
+        />
       {:else if context?.type === "documentEdit"}
         <DocumentTabs />
       {:else}
@@ -360,8 +402,13 @@
   >
     {#if context?.type === "materiel" || context?.type === "loans"}
       <MaterielTabs currentTeamId={context.teamId} />
-    {:else if context?.type === "eventEdit"}
-      <EventTabs eventId={context.eventId} basePath={context.basePath} />
+    {:else if context?.type === "eventEdit" || context?.type === "eventDocumentEdit" || context?.type === "eventDocumentCreate"}
+      <EventTabs
+        eventId={context.eventId}
+        basePath={context && "basePath" in context
+          ? context.basePath
+          : "/event"}
+      />
     {:else if context?.type === "documentEdit"}
       <DocumentTabs />
     {:else if navBarStore.title}

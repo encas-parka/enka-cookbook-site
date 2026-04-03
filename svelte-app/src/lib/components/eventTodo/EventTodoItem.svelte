@@ -144,7 +144,7 @@
         <!-- Title + Priority -->
         <div class="flex flex-wrap items-start justify-between gap-x-4 gap-y-2">
           <div
-            class="text-base font-medium {todo.status === 'done'
+            class="text-sm font-medium {todo.status === 'done'
               ? 'line-through opacity-50'
               : ''}"
           >
@@ -152,7 +152,7 @@
           </div>
 
           <div
-            class="card card-sm {taskOnCardConfig.bg} ms-auto flex flex-col justify-end px-4 py-1"
+            class="card {taskOnCardConfig.bg} ms-auto flex flex-col justify-end px-2 py-0.5 text-sm"
           >
             <!-- Priority Badge -->
             {#if todo.priority && todo.priority !== "low"}

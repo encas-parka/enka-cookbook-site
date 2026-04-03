@@ -1,6 +1,7 @@
 <script lang="ts">
   import { onMount } from "svelte";
   import { fade } from "svelte/transition";
+  import { SvelteSet } from "svelte/reactivity";
   import { eventsStore } from "$lib/stores/EventsStore.svelte";
   import { globalState } from "$lib/stores/GlobalState.svelte";
   import { navBarStore } from "$lib/stores/NavBarStore.svelte";
@@ -26,6 +27,22 @@
     (currentEvent && isDemoEvent(currentEvent.$id)) ||
       (eventsStore.canUserEditEvent(eventId || "", globalState.userId || "") &&
         currentEvent?.status !== "canceled"),
+  );
+
+  // Unique taskOn types in event todos
+  const uniqueTaskOnTypes = $derived.by(() => {
+    if (!currentEvent?.todos) return [];
+    const types = new SvelteSet<string>();
+    currentEvent.todos.forEach((todo: any) => {
+      if (todo.taskOn) types.add(todo.taskOn);
+    });
+    return Array.from(types);
+  });
+
+  // Max-width based on number of types
+  const maxWidthClass = $derived(
+    uniqueTaskOnTypes.length >= 3 ? "max-w-5xl" : 
+    uniqueTaskOnTypes.length >= 2 ? "max-w-4xl" : "max-w-3xl"
   );
 
   // Navbar configuration
@@ -71,7 +88,7 @@
 
   <!-- Todo List -->
   {#if currentEvent}
-    <div class="mx-auto mt-6 max-w-4xl">
+    <div class="mx-auto mt-6 {maxWidthClass}">
       <EventTodoList
         event={currentEvent}
         {contributors}

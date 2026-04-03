@@ -226,9 +226,9 @@
   rel="stylesheet"
 />
 
-<div class="grid min-h-dvh grid-rows-[auto_1fr]">
-  <div class="h-fit"><HeaderNav /></div>
-  <div class="bg-base-200">
+<div class="flex min-h-dvh flex-col">
+  <HeaderNav />
+  <div class="bg-base-200 flex-1">
     {#if appState === "ERROR"}
       <div class="flex h-[50vh] items-center justify-center">
         <ErrorAlert message={displayError || "Erreur inconnue"} />

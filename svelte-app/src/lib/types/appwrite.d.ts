@@ -278,6 +278,7 @@ export type Teamdocs = Models.Row & {
   status: string;
   lockedBy: string | null;
   lockedByName: string | null;
+  createdBy: string;
 };
 
 export type ShareLinks = Models.Row & {

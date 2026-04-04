@@ -93,19 +93,24 @@
     const currentMeals = currentEvent.meals || [];
     if (meals.length !== currentMeals.length) return true;
 
-    // Comparer les métadonnées de chaque meal (pas les objets recipes complets)
-    for (let i = 0; i < meals.length; i++) {
-      const currentMeal = currentMeals[i];
-      const localMeal = meals[i];
+    // Comparer chaque meal via une signature légère (id, date, guests, recipes)
+    const mealSig = (m: EventMeal) => ({
+      id: m.id,
+      date: m.date,
+      guests: m.guests,
+      recipes: m.recipes?.map((r) => [
+        r.recipeUuid,
+        r.typeR,
+        r.plates,
+        r.hasOwnPlatesNb,
+      ]),
+    });
 
-      if (localMeal.id !== currentMeal.id) return true;
-      if (localMeal.date !== currentMeal.date) return true;
-      if (localMeal.guests !== currentMeal.guests) return true;
-      if (
-        (localMeal.recipes?.length || 0) !== (currentMeal.recipes?.length || 0)
-      )
-        return true;
-    }
+    if (
+      JSON.stringify(meals.map(mealSig)) !==
+      JSON.stringify(currentMeals.map(mealSig))
+    )
+      return true;
 
     return false;
   });

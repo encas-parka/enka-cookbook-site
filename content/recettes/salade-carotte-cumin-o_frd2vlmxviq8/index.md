@@ -1,6 +1,6 @@
 ---
 title: Salade carotte cumin orange
-date: '2026-04-03T17:08:42.973Z'
+date: '2026-04-04T08:47:29.994Z'
 draft: true
 typeR: entree
 categories: []
@@ -10,18 +10,14 @@ regime:
   - sans-lactose
 plate: 100
 quantite_desc: 50 part /gastro (x2 pour 100 couvert)
-check: false
+check: true
 cuisson: false
 serveHot: false
-description: Salade carotte rapées cumin orange
+description: testée pour 3 couvert
 region: null
 saison: []
 id: salade-carotte-cumin-o_frd2vlmxviq8
-materiel:
-  - Robot-coupe
-  - Gastro 1/1 (20cm)
-  - Grand Saladier
-  - Frigo
+materiel: []
 ingredients:
   - uuid: eouu0v
     name: Carotte
@@ -107,11 +103,11 @@ astuces:
 preparation24h: null
 permissionWrite:
   - 698a40da4679cd55596b
-auteur: null
+auteur: mara
 createdAt: '2026-04-03T17:08:39.723+00:00'
-updatedAt: '2026-04-03T17:08:39.723+00:00'
+updatedAt: '2026-04-04T08:47:29.591+00:00'
 createdBy: 698a40da4679cd55596b
-teams: null
+teams: []
 status: public
 rootRecipeId: null
 versionLabel: null

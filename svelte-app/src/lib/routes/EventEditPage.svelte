@@ -92,7 +92,17 @@
     mealId: string;
     recipeUuid: string;
     typeR: RecettesTypeR;
+    sourceHasDate: boolean;
   } | null>(null);
+
+  // Meals datés pour le modal (exclut le meal source si on réassigne depuis un meal daté)
+  const modalDatedMeals = $derived.by(() => {
+    const assigning = assigningRecipe;
+    if (assigning?.sourceHasDate) {
+      return sortedDatedMeals.filter((m) => m.id !== assigning.mealId);
+    }
+    return sortedDatedMeals;
+  });
 
   // État du verrou externe (via locksService)
   let activeLock = $state<AppwriteLock | null>(null);
@@ -717,58 +727,112 @@
     recipeUuid: string,
     typeR: RecettesTypeR,
   ) {
-    assigningRecipe = { mealId, recipeUuid, typeR };
+    assigningRecipe = { mealId, recipeUuid, typeR, sourceHasDate: false };
     showAssignDateModal = true;
   }
 
-  function handleAssignDate(targetMealId: string) {
+  function openReassignModal(
+    mealId: string,
+    recipeUuid: string,
+    typeR: RecettesTypeR,
+  ) {
+    assigningRecipe = { mealId, recipeUuid, typeR, sourceHasDate: true };
+    showAssignDateModal = true;
+  }
+
+  function handleAssignDateRecipe(targetMealId: string) {
     if (!assigningRecipe) return;
 
-    const { mealId: sourceMealId, recipeUuid, typeR } = assigningRecipe;
+    const {
+      mealId: sourceMealId,
+      recipeUuid,
+      typeR,
+      sourceHasDate,
+    } = assigningRecipe;
 
-    // Trouver le meal source (sans date)
+    // Trouver le meal source
     const sourceIdx = meals.findIndex((m) => m.id === sourceMealId);
     if (sourceIdx === -1) return;
 
     const sourceMeal = meals[sourceIdx];
 
-    // Trouver le meal cible (daté)
-    const targetIdx = meals.findIndex((m) => m.id === targetMealId);
-    if (targetIdx === -1) return;
-
-    const targetMeal = meals[targetIdx];
-
-    // 1. Retirer la recette du meal sans date
+    // 1. Retirer la recette du meal source
     const updatedSourceRecipes = sourceMeal.recipes.filter(
       (r) => r.recipeUuid !== recipeUuid,
     );
 
-    // 2. Ajouter la recette au meal cible avec guests comme plates par défaut
-    const updatedTargetRecipes = [
-      ...targetMeal.recipes,
-      {
+    let newMeals = [...meals];
+
+    if (targetMealId === "__undated__") {
+      // Mettre de côté : rejoindre ou créer un meal undated
+      let undatedIdx = newMeals.findIndex((m) => m.date === "");
+
+      const newRecipe: EventMealRecipe = {
         recipeUuid,
-        plates: targetMeal.guests,
+        plates: 0,
         typeR,
         hasOwnPlatesNb: false,
-      } satisfies EventMealRecipe,
-    ];
-
-    // 3. Construire le nouveau tableau de meals
-    const newMeals = [...meals];
-    newMeals[targetIdx] = {
-      ...targetMeal,
-      recipes: updatedTargetRecipes,
-    };
-
-    // Si le meal sans date est vide → le supprimer
-    if (updatedSourceRecipes.length === 0) {
-      newMeals.splice(sourceIdx, 1);
-    } else {
-      newMeals[sourceIdx] = {
-        ...sourceMeal,
-        recipes: updatedSourceRecipes,
       };
+
+      if (undatedIdx !== -1) {
+        // Meal undated existant → ajouter la recette
+        const existingUndated = newMeals[undatedIdx];
+        newMeals[undatedIdx] = {
+          ...existingUndated,
+          recipes: [...existingUndated.recipes, newRecipe],
+        };
+      } else {
+        // Créer un nouveau meal undated
+        const newUndatedMeal: EventMeal = {
+          id: nanoid(6),
+          date: "",
+          guests: 0,
+          recipes: [newRecipe],
+        };
+        newMeals = [...newMeals, newUndatedMeal];
+      }
+    } else {
+      // Cible datée
+      const targetIdx = newMeals.findIndex((m) => m.id === targetMealId);
+      if (targetIdx === -1) return;
+
+      const targetMeal = newMeals[targetIdx];
+
+      const updatedTargetRecipes = [
+        ...targetMeal.recipes,
+        {
+          recipeUuid,
+          plates: targetMeal.guests,
+          typeR,
+          hasOwnPlatesNb: false,
+        } satisfies EventMealRecipe,
+      ];
+
+      newMeals[targetIdx] = {
+        ...targetMeal,
+        recipes: updatedTargetRecipes,
+      };
+    }
+
+    // Gérer le meal source vide après retrait
+    const updatedSourceIdx = newMeals.findIndex((m) => m.id === sourceMealId);
+    if (updatedSourceIdx !== -1) {
+      const updatedSource = newMeals[updatedSourceIdx];
+      if (updatedSource.recipes.length === 0) {
+        if (sourceHasDate) {
+          // dated → autre : garder le meal vide
+          // Ne rien faire, le meal reste
+        } else {
+          // undated → dated : supprimer le meal source vide
+          newMeals.splice(updatedSourceIdx, 1);
+        }
+      } else {
+        // Meal source a encore des recettes → mettre à jour
+        newMeals[updatedSourceIdx] = {
+          ...updatedSource,
+          recipes: updatedSourceRecipes,
+        };
+      }
     }
 
     meals = newMeals;
@@ -1061,7 +1125,7 @@
                   {@const recipeName =
                     recipeIndex?.title ?? recipe.recipeUuid.slice(0, 8)}
                   <div
-                    class="badge badge-lg bg-base-100 h-auto gap-2 py-2 font-medium"
+                    class="badge badge-lg bg-base-100 h-auto gap-3 py-2 font-medium"
                     transition:slide
                   >
                     <ChefHat class="size-4 shrink-0" />
@@ -1113,6 +1177,7 @@
                   onDelete={() => removeMeal(meal.id || "")}
                   allDates={meals.map((m) => m.date)}
                   disabled={!canEdit || isLockedByOthers}
+                  onOpenReassignMealDate={openReassignModal}
                 />
               </div>
             {/each}
@@ -1166,8 +1231,9 @@
     }}
     recipeName={recipesStore.getRecipeIndexByUuid(assigningRecipe.recipeUuid)
       ?.title ?? "Recette"}
-    datedMeals={sortedDatedMeals}
-    onAssign={handleAssignDate}
+    datedMeals={modalDatedMeals}
+    onAssign={handleAssignDateRecipe}
+    allowSetAside={assigningRecipe.sourceHasDate}
   />
 {/if}
 

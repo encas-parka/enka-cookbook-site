@@ -1,6 +1,6 @@
 ---
 title: Chili sin carne
-date: '2026-04-05T14:13:25.048Z'
+date: '2026-04-05T14:15:46.579Z'
 draft: true
 typeR: plat
 categories:
@@ -76,10 +76,10 @@ ingredients:
     type: legumes
   - uuid: 78fo97
     name: Céleri branche
-    originalQuantity: 25
-    originalUnit: unité
-    normalizedQuantity: 25
-    normalizedUnit: unité
+    originalQuantity: 7.5
+    originalUnit: kg
+    normalizedQuantity: 7500
+    normalizedUnit: gr.
     comment: ''
     allergens:
       - Céleri
@@ -208,11 +208,11 @@ preparation24h: |-
   Mettre les bouillon cube dans le volume d'eau bouillant indiqué et remuer jusqu'à ce qu'ils soient bien dilué.
 permissionWrite:
   - 698a40da4679cd55596b
-auteur: null
+auteur: mara
 createdAt: '2026-04-05T14:13:24.485+00:00'
-updatedAt: '2026-04-05T14:13:24.485+00:00'
+updatedAt: '2026-04-05T14:15:46.092+00:00'
 createdBy: 698a40da4679cd55596b
-teams: null
+teams: []
 status: public
 rootRecipeId: null
 versionLabel: null

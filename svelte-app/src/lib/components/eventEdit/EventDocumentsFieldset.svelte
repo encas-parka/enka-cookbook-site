@@ -20,7 +20,7 @@
     {#if docs.length > 0}
       {#each docs as doc (doc.$id)}
         <a
-          class="bg-base-200/60 hover:bg-base-200 flex cursor-pointer items-center gap-2 rounded-lg px-3 py-2 text-sm transition-colors"
+          class="bg-base-200/60 hover:bg-base-200 flex cursor-pointer items-center gap-2 rounded-lg p-4 transition-colors"
           href={`/event/${eventId}/document/${doc.$id}/edit`}
         >
           <FileText class="text-primary h-4 w-4 shrink-0" />

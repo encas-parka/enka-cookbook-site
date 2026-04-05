@@ -569,8 +569,8 @@
                   ? 'ring-error ring-1'
                   : ''}"
               >
-                <ChefHat class="h-4 w-4" />
-                <span
+                <ChefHat class="size-4 shrink-0" />
+                <span class="leading-none"
                   >{recipeIndex?.title ||
                     getRecipeShortUuid(recipe.recipeUuid)}</span
                 >

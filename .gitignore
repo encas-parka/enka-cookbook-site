@@ -17,6 +17,7 @@ svelte-app/.vite
 *.claude
 *.opencode
 *.agents
+agent
 *skills-lock.json
 appwrite
 appwrite-ec-dev

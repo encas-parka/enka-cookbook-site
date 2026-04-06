@@ -1,7 +1,7 @@
 ---
 title: Salade de chou pommes
-date: '2026-04-06T11:41:40.789Z'
-draft: true
+date: '2026-04-06T12:04:30.732Z'
+draft: false
 typeR: entree
 categories:
   - Salade
@@ -129,7 +129,7 @@ permissionWrite:
   - 68975cbc002469058f8b
 auteur: ghald
 createdAt: '2026-04-06T10:22:49.674+00:00'
-updatedAt: '2026-04-06T11:41:40.570+00:00'
+updatedAt: '2026-04-06T12:04:30.381+00:00'
 createdBy: 68975cbc002469058f8b
 teams: []
 status: public

@@ -1,6 +1,6 @@
 ---
 title: Salade de chou pommes
-date: '2026-04-06T10:22:54.119Z'
+date: '2026-04-06T10:28:11.820Z'
 draft: true
 typeR: entree
 categories:
@@ -18,8 +18,7 @@ description: 'version économe: '
 region: null
 saison: []
 id: salade-de-chou-pommes_ylnlxeq9inpd
-materiel:
-  - Grand Saladier
+materiel: []
 ingredients:
   - uuid: mlukbi
     name: Chou blanc
@@ -50,10 +49,10 @@ ingredients:
     type: legumes
   - uuid: 2juq3x
     name: Sel
-    originalQuantity: 1
-    originalUnit: au goût
-    normalizedQuantity: 1
-    normalizedUnit: au goût
+    originalQuantity: 7
+    originalUnit: gr.
+    normalizedQuantity: 7
+    normalizedUnit: gr.
     comment: ''
     allergens: []
     type: epices
@@ -105,9 +104,9 @@ ingredients:
     type: sucres
   - uuid: atlkei
     name: Graines de sésame noir
-    originalQuantity: 0
+    originalQuantity: 40
     originalUnit: gr.
-    normalizedQuantity: 0
+    normalizedQuantity: 40
     normalizedUnit: gr.
     comment: ''
     allergens:
@@ -120,17 +119,15 @@ preparation: |-
   - Tout rassembler, bien mélanger, et laisser reposer au réfrigérateur au moins une heure.
 prepAlt: []
 astuces:
-  - '{"astuce":"Les pommes croquant et acidulé c''est mieux (type granny smith)"}'
-  - '{"astuce":"La salade peut se préparer la veille sans problème — le chou va s''attendrir davantage."}'
-  - '{"astuce":"Possibilité d''ajouter de la ciboulette ou persil cisellé avant de servir"}'
+  - '{"astuce":"Les pommes croquant et acidulé c''est mieux (type granny smith)\nLa salade peut se préparer la veille sans problème — le chou va s''attendrir davantage.\nPossibilité d''ajouter de la ciboulette ou persil ciselé avant de servir"}'
 preparation24h: null
 permissionWrite:
   - 68975cbc002469058f8b
-auteur: null
+auteur: ghald
 createdAt: '2026-04-06T10:22:49.674+00:00'
-updatedAt: '2026-04-06T10:22:49.674+00:00'
+updatedAt: '2026-04-06T10:28:11.319+00:00'
 createdBy: 68975cbc002469058f8b
-teams: null
+teams: []
 status: public
 rootRecipeId: null
 versionLabel: null

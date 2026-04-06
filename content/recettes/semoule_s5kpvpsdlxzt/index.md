@@ -1,6 +1,6 @@
 ---
 title: Semoule
-date: '2026-04-06T11:03:02.062Z'
+date: '2026-04-06T11:41:56.128Z'
 draft: true
 typeR: plat
 categories:
@@ -10,15 +10,14 @@ regime:
   - sans-lactose
 plate: 100
 quantite_desc: Pour accompagnement, 80 gr./pers (monter à 90 ou 100 gr. si plat leger)
-check: false
+check: true
 cuisson: true
 serveHot: true
 description: en bac gastro
 region: null
 saison: []
 id: semoule_s5kpvpsdlxzt
-materiel:
-  - Gastro 1/1 (5cm)
+materiel: []
 ingredients:
   - uuid: yx78ae
     name: Semoule moyenne (blé)
@@ -63,11 +62,11 @@ astuces: []
 preparation24h: null
 permissionWrite:
   - 68975cbc002469058f8b
-auteur: null
+auteur: ghald
 createdAt: '2026-04-06T11:03:01.685+00:00'
-updatedAt: '2026-04-06T11:03:01.685+00:00'
+updatedAt: '2026-04-06T11:41:55.873+00:00'
 createdBy: 68975cbc002469058f8b
-teams: null
+teams: []
 status: public
 rootRecipeId: null
 versionLabel: null

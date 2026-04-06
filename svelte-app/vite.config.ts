@@ -91,7 +91,7 @@ export default defineConfig(({ mode }) => ({
     },
 
     target: "es2020",
-    manifest: "manifest.json",
+    manifest: ".vite-manifest.json",
 
     rollupOptions: {
       output: {

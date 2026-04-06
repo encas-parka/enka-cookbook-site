@@ -9,6 +9,12 @@ if ("serviceWorker" in navigator && import.meta.env.PROD) {
       console.warn("[PWA] Échec de l'enregistrement du Service Worker:", err);
     });
   });
+
+  // Notifier l'utilisateur quand une nouvelle version du SW est activée
+  navigator.serviceWorker.addEventListener("controllerchange", () => {
+    console.log("[PWA] Nouvelle version activée — rechargement de la page");
+    window.location.reload();
+  });
 }
 
 const app = mount(App, {

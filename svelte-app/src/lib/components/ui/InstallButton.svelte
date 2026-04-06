@@ -12,11 +12,6 @@
   let isInstallable = $state(false);
   let isInstalled = $state(false);
 
-  // Vérifier si déjà installé (mode standalone)
-  isInstalled =
-    window.matchMedia("(display-mode: standalone)").matches ||
-    (navigator as any).standalone === true;
-
   function handleBeforeInstallPrompt(e: Event) {
     e.preventDefault();
     deferredPrompt = e as BeforeInstallPromptEvent;
@@ -41,6 +36,10 @@
   }
 
   onMount(() => {
+    isInstalled =
+      window.matchMedia("(display-mode: standalone)").matches ||
+      (navigator as any).standalone === true;
+
     window.addEventListener("beforeinstallprompt", handleBeforeInstallPrompt);
     window.addEventListener("appinstalled", handleAppInstalled);
 

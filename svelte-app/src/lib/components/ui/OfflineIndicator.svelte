@@ -1,8 +1,13 @@
 <script lang="ts">
+  import { onMount } from "svelte";
   import { WifiOff } from "@lucide/svelte";
 
-  let showOffline = $state(!navigator.onLine);
+  let showOffline = $state(false);
   let hideTimer: ReturnType<typeof setTimeout> | null = null;
+
+  onMount(() => {
+    showOffline = !navigator.onLine;
+  });
 
   function handleOffline() {
     if (hideTimer) clearTimeout(hideTimer);

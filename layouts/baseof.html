@@ -3,7 +3,7 @@
 */}}
 
 {{/* Lire le manifest Vite pour le cache-busting */}}
-{{ $manifest := readFile "static/app/manifest.json" | unmarshal }}
+{{ $manifest := readFile "static/app/.vite-manifest.json" | unmarshal }}
 
 
 <!doctype html>

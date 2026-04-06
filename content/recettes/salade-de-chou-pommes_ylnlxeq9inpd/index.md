@@ -1,6 +1,6 @@
 ---
 title: Salade de chou pommes
-date: '2026-04-06T10:34:54.801Z'
+date: '2026-04-06T11:13:09.352Z'
 draft: true
 typeR: entree
 categories:
@@ -10,11 +10,11 @@ regime:
   - sans-gluten
   - sans-lactose
 plate: 10
-quantite_desc: Pensée pour une entrée, ~130 gr/p
+quantite_desc: 'Pensée pour une entrée légère, ~70 gr/p '
 check: false
 cuisson: false
 serveHot: false
-description: version économe. Peu de pommes.
+description: 'version économe. Peu de pommes. '
 region: null
 saison: []
 id: salade-de-chou-pommes_ylnlxeq9inpd
@@ -22,72 +22,72 @@ materiel: []
 ingredients:
   - uuid: mlukbi
     name: Chou blanc
-    originalQuantity: 700
+    originalQuantity: 350
     originalUnit: gr.
-    normalizedQuantity: 700
+    normalizedQuantity: 350
     normalizedUnit: gr.
     comment: ''
     allergens: []
     type: legumes
   - uuid: nl2s2n
     name: Chou rouge
-    originalQuantity: 300
+    originalQuantity: 150
     originalUnit: gr.
-    normalizedQuantity: 300
+    normalizedQuantity: 150
     normalizedUnit: gr.
     comment: ''
     allergens: []
     type: legumes
   - uuid: i6jlwm
     name: Pomme
-    originalQuantity: 300
+    originalQuantity: 150
     originalUnit: gr.
-    normalizedQuantity: 300
+    normalizedQuantity: 150
     normalizedUnit: gr.
     comment: ''
     allergens: []
     type: legumes
   - uuid: 2juq3x
     name: Sel
-    originalQuantity: 7
+    originalQuantity: 3.5
     originalUnit: gr.
-    normalizedQuantity: 7
+    normalizedQuantity: 3.5
     normalizedUnit: gr.
     comment: ''
     allergens: []
     type: epices
   - uuid: 2pps90
     name: Poivre
-    originalQuantity: 3
+    originalQuantity: 2
     originalUnit: gr.
-    normalizedQuantity: 3
+    normalizedQuantity: 2
     normalizedUnit: gr.
     comment: ''
     allergens: []
     type: epices
   - uuid: eu7lc6
     name: huile de colza
-    originalQuantity: 75
+    originalQuantity: 37
     originalUnit: ml
-    normalizedQuantity: 75
+    normalizedQuantity: 37
     normalizedUnit: ml
     comment: ''
     allergens: []
     type: lof
   - uuid: e4mjd1
     name: Jus de citron
-    originalQuantity: 60
+    originalQuantity: 30
     originalUnit: ml
-    normalizedQuantity: 60
+    normalizedQuantity: 30
     normalizedUnit: ml
     comment: ''
     allergens: []
     type: sucres
   - uuid: 7qo3ht
     name: Vinaigre de cidre
-    originalQuantity: 50
+    originalQuantity: 25
     originalUnit: ml
-    normalizedQuantity: 50
+    normalizedQuantity: 25
     normalizedUnit: ml
     comment: ''
     allergens:
@@ -95,18 +95,18 @@ ingredients:
     type: epices
   - uuid: lny16c
     name: sucre blanc
-    originalQuantity: 10
+    originalQuantity: 5
     originalUnit: gr.
-    normalizedQuantity: 10
+    normalizedQuantity: 5
     normalizedUnit: gr.
     comment: ''
     allergens: []
     type: sucres
   - uuid: atlkei
     name: Graines de sésame noir
-    originalQuantity: 40
+    originalQuantity: 20
     originalUnit: gr.
-    normalizedQuantity: 40
+    normalizedQuantity: 20
     normalizedUnit: gr.
     comment: ''
     allergens:
@@ -127,10 +127,9 @@ astuces:
 preparation24h: null
 permissionWrite:
   - 68975cbc002469058f8b
-  - 6931ecdccd2c8d8d15e5
 auteur: ghald
 createdAt: '2026-04-06T10:22:49.674+00:00'
-updatedAt: '2026-04-06T10:34:54.488+00:00'
+updatedAt: '2026-04-06T11:13:08.950+00:00'
 createdBy: 68975cbc002469058f8b
 teams: []
 status: public

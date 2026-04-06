@@ -1,6 +1,6 @@
 ---
 title: Salade de chou pommes
-date: '2026-04-06T10:32:42.984Z'
+date: '2026-04-06T10:33:03.629Z'
 draft: true
 typeR: entree
 categories:
@@ -120,14 +120,16 @@ preparation: |-
   - Parsemer les graines de sésame noir juste avant de servir
 prepAlt: []
 astuces:
-  - '{"astuce":"Les pommes croquant et acidulé c''est mieux (type granny smith)\nLa salade peut se préparer la veille sans problème — le chou va s''attendrir davantage.\nPossibilité d''ajouter de la ciboulette ou persil ciselé avant de servir"}'
+  - '{"astuce":"Les pommes croquant et acidulé c''est mieux (type granny smith)\n\n"}'
   - '{"astuce":"Il est possible de faire griller légèrement les graines de sésame à sec (plus d''arome)"}'
+  - '{"astuce":"La salade peut se préparer la veille sans problème — le chou va s''attendrir davantage."}'
+  - '{"astuce":"Possibilité d''ajouter de la ciboulette ou persil ciselé avant de servir"}'
 preparation24h: null
 permissionWrite:
   - 68975cbc002469058f8b
 auteur: ghald
 createdAt: '2026-04-06T10:22:49.674+00:00'
-updatedAt: '2026-04-06T10:32:42.672+00:00'
+updatedAt: '2026-04-06T10:33:03.397+00:00'
 createdBy: 68975cbc002469058f8b
 teams: []
 status: public

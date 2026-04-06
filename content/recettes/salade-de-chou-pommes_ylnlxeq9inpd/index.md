@@ -1,6 +1,6 @@
 ---
 title: Salade de chou pommes
-date: '2026-04-06T10:28:11.820Z'
+date: '2026-04-06T10:32:42.984Z'
 draft: true
 typeR: entree
 categories:
@@ -115,17 +115,19 @@ ingredients:
 preparation: |-
   - Émincer finement le choux (mandoline), saler et masser pour attendrir.
   - Éplucher et couper les pommes en fine lamelles ou julienne. Arroser avec la moitié du jus de citron pour éviter l'oxydation
-  - Mélanger le reste du jus de citron au vinaigre, huile de colza, sucre,  sel et poivre.
+  - Mélanger le reste du jus de citron au vinaigre, huile de colza, sucre, sel et poivre.
   - Tout rassembler, bien mélanger, et laisser reposer au réfrigérateur au moins une heure.
+  - Parsemer les graines de sésame noir juste avant de servir
 prepAlt: []
 astuces:
   - '{"astuce":"Les pommes croquant et acidulé c''est mieux (type granny smith)\nLa salade peut se préparer la veille sans problème — le chou va s''attendrir davantage.\nPossibilité d''ajouter de la ciboulette ou persil ciselé avant de servir"}'
+  - '{"astuce":"Il est possible de faire griller légèrement les graines de sésame à sec (plus d''arome)"}'
 preparation24h: null
 permissionWrite:
   - 68975cbc002469058f8b
 auteur: ghald
 createdAt: '2026-04-06T10:22:49.674+00:00'
-updatedAt: '2026-04-06T10:28:11.319+00:00'
+updatedAt: '2026-04-06T10:32:42.672+00:00'
 createdBy: 68975cbc002469058f8b
 teams: []
 status: public

@@ -1,6 +1,6 @@
 ---
 title: 01 test
-date: '2026-04-05T10:37:55.689Z'
+date: '2026-04-06T18:40:32.149Z'
 draft: true
 typeR: entree
 categories:
@@ -36,11 +36,12 @@ astuces: []
 preparation24h: null
 permissionWrite:
   - 68975cbc002469058f8b
-auteur: null
+  - 693200b700222efe46a2
+auteur: ghald
 createdAt: '2026-04-05T10:37:52.217+00:00'
-updatedAt: '2026-04-05T10:37:52.217+00:00'
+updatedAt: '2026-04-06T18:40:28.792+00:00'
 createdBy: 68975cbc002469058f8b
-teams: null
+teams: []
 status: public
 rootRecipeId: null
 versionLabel: null

@@ -1,6 +1,7 @@
 import tailwindcss from "@tailwindcss/vite";
 import { defineConfig } from "vite";
 import { svelte } from "@sveltejs/vite-plugin-svelte";
+import { VitePWA } from "vite-plugin-pwa";
 import path from "path";
 import { fileURLToPath } from "url";
 import { visualizer } from "rollup-plugin-visualizer";
@@ -15,6 +16,52 @@ export default defineConfig(({ mode }) => ({
   plugins: [
     tailwindcss(),
     svelte(),
+    VitePWA({
+      registerType: "autoUpdate",
+      injectRegister: false, // Hugo contrôle le HTML, on enregistre le SW manuellement
+      manifest: {
+        name: "Enka Cookbook",
+        short_name: "Enka",
+        description:
+          "Recettes collaboratives et gestion d'événements pour cantines autogérées",
+        theme_color: "#ffffff",
+        background_color: "#ffffff",
+        lang: "fr",
+        display: "standalone",
+        start_url: "/app/",
+        scope: "/app/",
+        icons: [
+          {
+            src: "pwa-192x192.png",
+            sizes: "192x192",
+            type: "image/png",
+          },
+          {
+            src: "pwa-512x512.png",
+            sizes: "512x512",
+            type: "image/png",
+          },
+          {
+            src: "pwa-512x512.png",
+            sizes: "512x512",
+            type: "image/png",
+            purpose: "maskable",
+          },
+        ],
+      },
+      workbox: {
+        // Seuls les assets hashés (JS/CSS) sont pré-cachés
+        globPatterns: ["assets/**/*.{js,css,woff2}"],
+        // Les assets ont déjà un hash dans leur nom, pas besoin de cache-busting
+        dontCacheBustURLsMatching: /-[a-f0-9]{8}\./,
+        cleanupOutdatedCaches: true,
+        skipWaiting: true,
+        clientsClaim: true,
+      },
+      devOptions: {
+        enabled: false,
+      },
+    }),
     // visualizer({
     //   open: true,
     //   gzipSize: true,

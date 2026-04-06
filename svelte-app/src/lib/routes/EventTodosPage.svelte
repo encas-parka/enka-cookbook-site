@@ -12,6 +12,7 @@
   import EventTabs from "$lib/components/eventEdit/EventTabs.svelte";
   import EventTodoList from "$lib/components/eventTodo/EventTodoList.svelte";
   import { ListTodo } from "@lucide/svelte";
+  import { online } from "svelte/reactivity/window";
 
   // Event data
   let eventId = $derived(route.params.id);
@@ -25,7 +26,8 @@
   // Permissions
   const canEdit = $derived(
     (currentEvent && isDemoEvent(currentEvent.$id)) ||
-      (eventsStore.canUserEditEvent(eventId || "", globalState.userId || "") &&
+      (online.current &&
+        eventsStore.canUserEditEvent(eventId || "", globalState.userId || "") &&
         currentEvent?.status !== "canceled"),
   );
 
@@ -41,8 +43,11 @@
 
   // Max-width based on number of types
   const maxWidthClass = $derived(
-    uniqueTaskOnTypes.length >= 3 ? "max-w-5xl" : 
-    uniqueTaskOnTypes.length >= 2 ? "max-w-4xl" : "max-w-3xl"
+    uniqueTaskOnTypes.length >= 3
+      ? "max-w-5xl"
+      : uniqueTaskOnTypes.length >= 2
+        ? "max-w-4xl"
+        : "max-w-3xl",
   );
 
   // Navbar configuration

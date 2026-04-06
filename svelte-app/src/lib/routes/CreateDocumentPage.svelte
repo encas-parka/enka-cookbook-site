@@ -11,6 +11,7 @@
   import BtnGroupCheck from "$lib/components/ui/BtnGroupCheck.svelte";
   import UnsavedChangesGuard from "$lib/components/ui/UnsavedChangesGuard.svelte";
   import { navBarStore } from "$lib/stores/NavBarStore.svelte";
+  import { online } from "svelte/reactivity/window";
 
   // ============================================================================
   // PROPS & ROUTE
@@ -50,7 +51,7 @@
   // DERIVED STATES
   // ============================================================================
 
-  const canEdit = $derived(!isSaving);
+  const canEdit = $derived(online.current && !isSaving);
 
   // Validation
   const isValid = $derived(title.trim().length > 0 && team !== undefined);

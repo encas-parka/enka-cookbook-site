@@ -10,6 +10,7 @@
   import DocCard from "$lib/components/documents/DocCard.svelte";
   import DocumentSearchBar from "$lib/components/documents/DocumentSearchBar.svelte";
   import EventTabs from "$lib/components/eventEdit/EventTabs.svelte";
+  import { online } from "svelte/reactivity/window";
 
   import { route } from "$lib/router";
 
@@ -25,7 +26,8 @@
   const currentEvent = $derived(eventsStore.getEventById(eventId));
   const canEdit = $derived(
     currentEvent
-      ? eventsStore.canUserEditEvent(eventId, globalState.userId || "")
+      ? online.current &&
+          eventsStore.canUserEditEvent(eventId, globalState.userId || "")
       : false,
   );
 

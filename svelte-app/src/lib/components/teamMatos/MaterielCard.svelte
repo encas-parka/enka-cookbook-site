@@ -22,6 +22,7 @@
   import type { EnrichedMateriel } from "$lib/types/materiel.types";
   import type { MaterielStatus } from "$lib/types/appwrite";
   import { globalState } from "$lib/stores/GlobalState.svelte";
+  import { online } from "svelte/reactivity/window";
   import { formatDateDayMonthShort } from "$lib/utils/date-helpers";
   import {
     getMaterielTypeLabel,
@@ -112,6 +113,7 @@
 
   // L'utilisateur peut-il éditer ?
   const canEdit = $derived.by(() => {
+    if (!online.current) return false;
     if (!globalState.userId) return false;
 
     // Owner = user

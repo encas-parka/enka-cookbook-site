@@ -1,6 +1,6 @@
 ---
 title: Salade de chou pommes
-date: '2026-04-06T11:40:07.078Z'
+date: '2026-04-06T11:40:35.405Z'
 draft: true
 typeR: entree
 categories:
@@ -11,7 +11,7 @@ regime:
   - sans-lactose
 plate: 10
 quantite_desc: 'Pensée pour une entrée légère, ~70 gr/p '
-check: true
+check: false
 cuisson: false
 serveHot: false
 description: 'version économe. Peu de pommes. '
@@ -129,7 +129,7 @@ permissionWrite:
   - 68975cbc002469058f8b
 auteur: ghald
 createdAt: '2026-04-06T10:22:49.674+00:00'
-updatedAt: '2026-04-06T11:40:04.149+00:00'
+updatedAt: '2026-04-06T11:40:35.140+00:00'
 createdBy: 68975cbc002469058f8b
 teams: []
 status: public

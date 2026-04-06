@@ -1,6 +1,6 @@
 ---
 title: Abricots pochés verveine testes
-date: '2026-04-06T19:32:17.436Z'
+date: '2026-04-06T19:41:07.415Z'
 draft: true
 typeR: dessert
 categories:
@@ -15,7 +15,7 @@ check: false
 cuisson: false
 serveHot: false
 description: aze
-region: null
+region: test
 saison:
   - ete
 id: abricots-poches--v3-gh_msojcoxfdo2o
@@ -67,7 +67,7 @@ permissionWrite:
   - 693200b700222efe46a2
 auteur: ghald
 createdAt: '2026-02-02T13:15:09.609+00:00'
-updatedAt: '2026-04-06T19:32:14.807+00:00'
+updatedAt: '2026-04-06T19:41:04.864+00:00'
 createdBy: 68975cbc002469058f8b
 teams: []
 status: public

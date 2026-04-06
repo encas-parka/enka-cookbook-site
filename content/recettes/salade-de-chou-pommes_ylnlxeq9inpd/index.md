@@ -1,6 +1,6 @@
 ---
 title: Salade de chou pommes
-date: '2026-04-06T10:33:03.629Z'
+date: '2026-04-06T10:34:54.801Z'
 draft: true
 typeR: entree
 categories:
@@ -10,11 +10,11 @@ regime:
   - sans-gluten
   - sans-lactose
 plate: 10
-quantite_desc: Pensée pour une entrée, ~100 gr/p
+quantite_desc: Pensée pour une entrée, ~130 gr/p
 check: false
 cuisson: false
 serveHot: false
-description: 'version économe: '
+description: version économe. Peu de pommes.
 region: null
 saison: []
 id: salade-de-chou-pommes_ylnlxeq9inpd
@@ -58,10 +58,10 @@ ingredients:
     type: epices
   - uuid: 2pps90
     name: Poivre
-    originalQuantity: 1
-    originalUnit: au goût
-    normalizedQuantity: 1
-    normalizedUnit: au goût
+    originalQuantity: 3
+    originalUnit: gr.
+    normalizedQuantity: 3
+    normalizedUnit: gr.
     comment: ''
     allergens: []
     type: epices
@@ -127,9 +127,10 @@ astuces:
 preparation24h: null
 permissionWrite:
   - 68975cbc002469058f8b
+  - 6931ecdccd2c8d8d15e5
 auteur: ghald
 createdAt: '2026-04-06T10:22:49.674+00:00'
-updatedAt: '2026-04-06T10:33:03.397+00:00'
+updatedAt: '2026-04-06T10:34:54.488+00:00'
 createdBy: 68975cbc002469058f8b
 teams: []
 status: public

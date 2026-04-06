@@ -85,17 +85,35 @@ export const RECIPES_COLLECTION_ID = "recettes";
 /**
  * Liste TOUTES les recettes Appwrite (accès global en lecture)
  * Utilisé pour : duplication, ajout à événement, consultation, rechargement forcé
+ * Utilise la pagination par cursor pour récupérer tous les documents quel que soit le nombre.
  */
 export async function forceReloadAllAppwriteRecipes(): Promise<Recettes[]> {
   try {
     const { tables, config } = await getAppwriteInstances();
 
-    const response = await tables.listRows({
-      databaseId: config.databaseId,
-      tableId: RECIPES_COLLECTION_ID,
-    });
+    const allRecipes: Recettes[] = [];
+    let cursor: string | undefined;
 
-    return response.rows as unknown as Recettes[];
+    do {
+      const queries = [Query.limit(200)];
+      if (cursor) {
+        queries.push(Query.cursorAfter(cursor));
+      }
+
+      const response = await tables.listRows({
+        databaseId: config.databaseId,
+        tableId: RECIPES_COLLECTION_ID,
+        queries,
+      });
+
+      allRecipes.push(...(response.rows as unknown as Recettes[]));
+
+      // Le curseur est le $id de la dernière ligne de cette page
+      const rows = response.rows as unknown as Recettes[];
+      cursor = rows.length > 0 ? rows[rows.length - 1].$id : undefined;
+    } while (cursor);
+
+    return allRecipes;
   } catch (error) {
     console.error("[appwrite-recipes] Error listing all recipes:", error);
     throw error;
@@ -109,7 +127,7 @@ export async function listUpdatedRecipes(since: string): Promise<Recettes[]> {
   try {
     const { tables, config } = await getAppwriteInstances();
 
-    const queries = [Query.greaterThan("$updatedAt", since)];
+    const queries = [Query.greaterThan("$updatedAt", since), Query.limit(200)];
 
     const response = await tables.listRows({
       databaseId: config.databaseId,

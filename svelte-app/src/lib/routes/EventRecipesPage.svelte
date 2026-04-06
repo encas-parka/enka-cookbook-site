@@ -70,12 +70,17 @@
   let selectedDateFilter = $state<string | null>(null);
   let selectedTimeFilter = $state<string | null>(null);
   let selectedMealRecipeFilter = $state<string | null>(null); // Format: "mealId-recipeIndex"
+  let selectedUndatedFilter = $state<boolean>(false); // Filtre "mise de côté"
 
   // Repas filtrés par date et moment (pour l'affichage principal)
   const filteredMeals = $derived.by(() => {
-    if (!selectedDateFilter) return eventMeals;
+    if (selectedUndatedFilter) {
+      return eventMeals.filter((meal) => meal.date === "");
+    }
+    if (!selectedDateFilter) return eventMeals.filter((meal) => meal.date !== "");
 
     return eventMeals.filter((meal) => {
+      if (meal.date === "") return false;
       const date = formatDateShort(meal.date);
       const time = extractTime(meal.date);
 
@@ -85,6 +90,9 @@
       return dateMatch && timeMatch;
     });
   });
+
+  // Recettes mises de côté (meals sans date)
+  const undatedMeals = $derived(eventMeals.filter((meal) => meal.date === ""));
 
   // Recettes filtrées par ingrédients ET par filtres de date/moment
   const filteredRecipes = $derived.by(() => {
@@ -118,10 +126,12 @@
     return recipes;
   });
 
-  // Organisation des repas pour le sommaire (par date et moment)
+  // Organisation des repas pour le sommaire (par date et moment, exclut les meals sans date)
   const mealsByDate = $derived.by(() => {
     const groups = new Map();
     eventMeals.forEach((meal) => {
+      if (meal.date === "") return;
+
       const date = formatDateShort(meal.date);
       const time = extractTime(meal.date);
 
@@ -241,10 +251,11 @@
   // Gestion de l'ingrédient sélectionné
   function selectIngredient(ingredient: string) {
     selectedIngredient = ingredient;
-    // Reset les filtres de date/recette
+    // Reset les filtres de date/recette/mise de côté
     selectedDateFilter = null;
     selectedTimeFilter = null;
     selectedMealRecipeFilter = null;
+    selectedUndatedFilter = false;
   }
 
   function resetIngredientFilter() {
@@ -306,6 +317,7 @@
                 selectedTimeFilter = null; // Réinitialiser le filtre de temps
                 selectedMealRecipeFilter = null; // Réinitialiser le filtre de recette
                 selectedIngredient = ""; // Réinitialiser le filtre d'ingrédient
+                selectedUndatedFilter = false; // Réinitialiser le filtre mise de côté
                 selectedDateFilter = selectedDateFilter === date ? null : date;
               }}
             >
@@ -327,6 +339,7 @@
                       selectedTimeFilter === time ? null : time;
                     selectedMealRecipeFilter = null; // Réinitialiser le filtre de recette
                     selectedIngredient = ""; // Réinitialiser le filtre d'ingrédient
+                    selectedUndatedFilter = false; // Réinitialiser le filtre mise de côté
                   }}
                 >
                   <span class="flex w-full items-center justify-between">
@@ -359,6 +372,7 @@
                               ? null
                               : mealRecipeKey;
                           selectedIngredient = ""; // Réinitialiser le filtre d'ingrédient
+                          selectedUndatedFilter = false; // Réinitialiser le filtre mise de côté
                         }}
                       >
                         <span class="truncate text-left text-wrap">
@@ -372,9 +386,66 @@
             {/each}
           </ul>
         {/each}
+
+        <!-- Section "Mise de côté" dans le sommaire -->
+        {#if undatedMeals.length > 0}
+          <li class="mt-2">
+            <button
+              class="btn btn-sm justify-start {selectedUndatedFilter
+                ? 'btn-accent'
+                : 'btn-ghost'}"
+              onclick={() => {
+                selectedDateFilter = null;
+                selectedTimeFilter = null;
+                selectedMealRecipeFilter = null;
+                selectedIngredient = "";
+                selectedUndatedFilter = !selectedUndatedFilter;
+              }}
+            >
+              <span>📌 Mise de côté ({undatedMeals.reduce((count, m) => count + m.recipes.length, 0)})</span>
+            </button>
+          </li>
+          {#if selectedUndatedFilter}
+            <ul>
+              {#each undatedMeals as undatedMeal (undatedMeal.id)}
+                {#each undatedMeal.recipes as mealRecipe, recipeIndex (mealRecipe.recipeUuid + "-" + recipeIndex)}
+                  {@const recipe = recipesDetails.find(
+                    (r) => r.$id === mealRecipe.recipeUuid,
+                  )}
+                  {@const mealRecipeKey =
+                    "undated_" + undatedMeal.id + "_" + recipeIndex}
+                  {#if recipe}
+                    <li>
+                      <button
+                        class="btn btn-sm mb-1 ml-4 justify-start {selectedMealRecipeFilter ===
+                        mealRecipeKey
+                          ? 'btn-accent'
+                          : 'btn-ghost'}"
+                        onclick={() => {
+                          selectedDateFilter = null;
+                          selectedTimeFilter = null;
+                          selectedUndatedFilter = false;
+                          selectedIngredient = "";
+                          selectedMealRecipeFilter =
+                            selectedMealRecipeFilter === mealRecipeKey
+                              ? null
+                              : mealRecipeKey;
+                        }}
+                      >
+                        <span class="truncate text-left text-wrap">
+                          {recipe.title}
+                        </span>
+                      </button>
+                    </li>
+                  {/if}
+                {/each}
+              {/each}
+            </ul>
+          {/if}
+        {/if}
       </ul>
 
-      {#if selectedDateFilter || selectedTimeFilter || selectedMealRecipeFilter}
+      {#if selectedDateFilter || selectedTimeFilter || selectedMealRecipeFilter || selectedUndatedFilter}
         <div class="my-4">
           <button
             class="btn btn-dash btn-block btn-primary"
@@ -382,6 +453,7 @@
               selectedDateFilter = null;
               selectedTimeFilter = null;
               selectedMealRecipeFilter = null;
+              selectedUndatedFilter = false;
             }}
             aria-label="Afficher toutes les recettes"
           >
@@ -516,11 +588,14 @@
           </div>
 
           <!-- filtre en cours -->
-          {#if selectedDateFilter || selectedTimeFilter || selectedMealRecipeFilter || selectedIngredient}
+          {#if selectedDateFilter || selectedTimeFilter || selectedMealRecipeFilter || selectedIngredient || selectedUndatedFilter}
             <div class="m-4 flex flex-wrap items-center justify-center gap-2">
               <div class="badge badge-xl badge-primary">
                 <Funnel class="mr-1 h-4 w-4" />
                 filtre :
+                {#if selectedUndatedFilter}
+                  <span class="mr-1">📌 Mise de côté</span>
+                {/if}
                 {#if selectedDateFilter}
                   <span class="mr-1">{selectedDateFilter}</span>
                 {/if}
@@ -540,6 +615,7 @@
                   selectedDateFilter = null;
                   selectedTimeFilter = null;
                   selectedMealRecipeFilter = null;
+                  selectedUndatedFilter = false;
                   selectedIngredient = "";
                 }}
                 aria-label="Afficher toutes les recettes"
@@ -569,15 +645,24 @@
                   filteredRecipes.some((fr) => fr.$id === mr.recipeUuid),
                 )}
                 {#if recipesMatchingSearch.length > 0}
-                  <!-- Date break -->
+                  <!-- Date break / Mise de côté header -->
                   <div
-                    id="meal-{meal.date}"
-                    class="card bg-accent text-accent-content my-4 flex flex-row items-center justify-center gap-6 px-4 py-2 font-black print:hidden"
+                    id="meal-{meal.date || 'undated'}"
+                    class="card my-4 flex flex-row items-center justify-center gap-6 px-4 py-2 font-black print:hidden {meal.date
+                      ? 'bg-accent text-accent-content'
+                      : 'bg-warning/20 text-warning-content'}"
                   >
-                    <div class="">
-                      {formatDateWdDayMonth(meal.date)}
-                    </div>
-                    <div>{extractTime(meal.date)}</div>
+                    {#if meal.date}
+                      <div class="">
+                        {formatDateWdDayMonth(meal.date)}
+                      </div>
+                      <div>{extractTime(meal.date)}</div>
+                    {:else}
+                      <div class="flex items-center gap-2">
+                        <span>📌</span>
+                        <span>Mise de côté</span>
+                      </div>
+                    {/if}
                     <div class="badge badge-outline">
                       <Utensils size={16} />
                       {meal.guests}
@@ -636,6 +721,14 @@
                   ? (() => {
                       const [mealId, recipeIndex] =
                         selectedMealRecipeFilter.split("_");
+                      if (mealId === "undated") {
+                        const currentMealId = meal.id;
+                        if (mealId !== "undated_" + currentMealId) return [];
+                        return meal.recipes.filter(
+                          (_mr: any, idx: number) =>
+                            idx === parseInt(recipeIndex),
+                        );
+                      }
                       const currentMealId = meal.id || meal.date;
                       if (mealId !== currentMealId.toString()) return [];
                       return meal.recipes.filter(
@@ -646,15 +739,24 @@
                   : meal.recipes}
 
                 {#if mealRecipesToDisplay.length > 0}
-                  <!-- Date break -->
+                  <!-- Date break / Mise de côté header -->
                   <div
-                    id="meal-{meal.date}"
-                    class="card bg-primary text-primary-content my-4 flex flex-row flex-wrap items-center justify-center gap-4 p-2 font-black shadow-lg sm:gap-6 sm:px-4 sm:py-2 print:hidden"
+                    id="meal-{meal.date || 'undated'}"
+                    class="card my-4 flex flex-row flex-wrap items-center justify-center gap-4 p-2 font-black shadow-lg sm:gap-6 sm:px-4 sm:py-2 print:hidden {meal.date
+                      ? 'bg-primary text-primary-content'
+                      : 'bg-warning/20 text-warning-content'}"
                   >
-                    <div class="">
-                      {formatDateWdDayMonth(meal.date)}
-                    </div>
-                    <div>{extractTime(meal.date)}</div>
+                    {#if meal.date}
+                      <div class="">
+                        {formatDateWdDayMonth(meal.date)}
+                      </div>
+                      <div>{extractTime(meal.date)}</div>
+                    {:else}
+                      <div class="flex items-center gap-2">
+                        <span>📌</span>
+                        <span>Mise de côté</span>
+                      </div>
+                    {/if}
                     <div class="badge badge-outline">
                       <Utensils size={16} />
                       {meal.guests}
@@ -684,13 +786,14 @@
                 {/if}
               {/each}
             </div>
-            {#if selectedDateFilter || selectedTimeFilter || selectedMealRecipeFilter}
+            {#if selectedDateFilter || selectedTimeFilter || selectedMealRecipeFilter || selectedUndatedFilter}
               <button
                 class="btn btn-dash btn-block my-5"
                 onclick={() => {
                   selectedDateFilter = null;
                   selectedTimeFilter = null;
                   selectedMealRecipeFilter = null;
+                  selectedUndatedFilter = false;
                   selectedIngredient = "";
                 }}
                 aria-label="Afficher toutes les recettes"

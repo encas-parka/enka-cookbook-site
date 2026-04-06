@@ -1,4 +1,3 @@
-<!-- FIXIT : il existe maintenant des meals sans date ! a gérer. -->
 <script lang="ts">
   import { onMount, tick } from "svelte";
   import { SvelteMap } from "svelte/reactivity";
@@ -129,6 +128,8 @@
     >();
 
     event.meals.forEach((meal) => {
+      if (!meal.date) return;
+
       const date = new Date(meal.date);
       const dateKey = date.toISOString().split("T")[0]; // YYYY-MM-DD
 
@@ -352,6 +353,8 @@
     if (!event?.meals) return;
 
     event.meals.forEach((meal) => {
+      if (!meal.date) return;
+
       const date = new Date(meal.date);
       const dateKey = date.toISOString().split("T")[0];
       const hours = date.getHours();

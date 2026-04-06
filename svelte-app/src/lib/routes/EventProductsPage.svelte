@@ -142,6 +142,12 @@
 
   const eventIsPassed = $derived(endDate && new Date() > new Date(endDate));
 
+  const hasUndatedRecipes = $derived(
+    currentEvent?.meals?.some(
+      (meal) => meal.date === "" && meal.recipes?.length > 0,
+    ) ?? false,
+  );
+
   onMount(async () => {
     try {
       if (!eventId) {
@@ -484,6 +490,20 @@
       {#if currentEvent}
         <div class="grow py-4 print:hidden">
           <EventStats {currentEvent} />
+        </div>
+      {/if}
+
+      {#if hasUndatedRecipes}
+        <div class="alert alert-warning alert-soft w-full max-sm:alert-vertical">
+          <CircleAlert size={20} class="shrink-0" />
+          <div>
+            <span class="font-bold">Recettes non planifiées</span>
+            <p class="text-sm">
+              Cet événement contient des recettes « mise de côté » sans date
+              attribuée. Leurs ingrédients ne sont pas comptabilisés dans les
+              besoins affichés ci-dessous.
+            </p>
+          </div>
         </div>
       {/if}
 

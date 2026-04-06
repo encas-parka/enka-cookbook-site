@@ -10,7 +10,7 @@ export class DateRangeStore {
   #end = $state<string | null>(null);
 
   constructor(initialDates: string[] = []) {
-    this.#availableDates = initialDates;
+    this.#availableDates = initialDates.filter((d) => d !== "");
     this.initializeSmartRange();
   }
 
@@ -101,7 +101,7 @@ export class DateRangeStore {
 
   // Actions
   setAvailableDates(dates: string[]) {
-    this.#availableDates = dates;
+    this.#availableDates = dates.filter((d) => d !== "");
     this.initializeSmartRange();
   }
 

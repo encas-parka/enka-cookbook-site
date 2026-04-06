@@ -63,6 +63,8 @@ export interface ProductStatsForDateRange {
  * Détermine l'icône à afficher selon l'heure de la date
  */
 export function getTimeIcon(dateStr: string): "sun" | "moon" | "cloud" | null {
+  if (!dateStr) return null;
+
   const date = new Date(dateStr);
   const hour = date.getHours(); // Utiliser l'heure locale
 
@@ -81,6 +83,10 @@ export function calculateDateDisplayInfo(dateStr: string): {
   formattedDate: string;
   timeIcon: "sun" | "moon" | "cloud" | null;
 } {
+  if (!dateStr) {
+    return { formattedDate: "Mise de côté", timeIcon: null };
+  }
+
   const date = new Date(dateStr);
 
   return {

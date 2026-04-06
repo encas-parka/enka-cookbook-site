@@ -7,6 +7,7 @@
     Cloud,
     UtensilsCrossed,
     Utensils,
+    Pin,
   } from "@lucide/svelte";
   import OverrideManager from "./OverrideManager.svelte";
   import type { ProductModalStateType } from "$lib/types/store.types.js";
@@ -71,15 +72,20 @@
                 <div
                   class="flex min-w-fit items-center gap-1 text-base font-medium"
                 >
-                  {formatDateWdDayMonthShort(recipe.date)} - {extractTime(
-                    recipe.date,
-                  )}
-                  {#if getTimeIcon(recipe.dateTimeService) === "sun"}
-                    <Sun class="h-4 w-4 text-amber-500" />
-                  {:else if getTimeIcon(recipe.dateTimeService) === "moon"}
-                    <Moon class="h-4 w-4 text-indigo-500" />
-                  {:else if getTimeIcon(recipe.dateTimeService) === "cloud"}
-                    <Cloud class="h-4 w-4 text-sky-500" />
+                  {#if recipe.date}
+                    {formatDateWdDayMonthShort(recipe.date)} - {extractTime(
+                      recipe.date,
+                    )}
+                    {#if getTimeIcon(recipe.dateTimeService) === "sun"}
+                      <Sun class="h-4 w-4 text-amber-500" />
+                    {:else if getTimeIcon(recipe.dateTimeService) === "moon"}
+                      <Moon class="h-4 w-4 text-indigo-500" />
+                    {:else if getTimeIcon(recipe.dateTimeService) === "cloud"}
+                      <Cloud class="h-4 w-4 text-sky-500" />
+                    {/if}
+                  {:else}
+                    <Pin class="h-4 w-4" />
+                    <span>Mise de côté</span>
                   {/if}
                 </div>
               </div>

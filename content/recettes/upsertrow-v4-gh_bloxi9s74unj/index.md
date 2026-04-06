@@ -1,6 +1,6 @@
 ---
 title: Upsertrow
-date: '2026-04-06T19:59:18.268Z'
+date: '2026-04-06T20:11:19.097Z'
 draft: true
 typeR: entree
 categories:
@@ -36,9 +36,10 @@ preparation24h: null
 permissionWrite:
   - 68975cbc002469058f8b
   - 693200b700222efe46a2
+  - 69a598bd000319adc206
 auteur: ghald
 createdAt: '2026-04-06T19:58:56.075+00:00'
-updatedAt: '2026-04-06T19:59:17.941+00:00'
+updatedAt: '2026-04-06T20:11:18.412+00:00'
 createdBy: 68975cbc002469058f8b
 teams: []
 status: public

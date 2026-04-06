@@ -1,6 +1,6 @@
 ---
 title: Upsertrow
-date: '2026-04-06T19:58:59.333Z'
+date: '2026-04-06T19:59:18.268Z'
 draft: true
 typeR: entree
 categories:
@@ -18,8 +18,7 @@ description: null
 region: null
 saison: []
 id: upsertrow-v4-gh_bloxi9s74unj
-materiel:
-  - Bruleur
+materiel: []
 ingredients:
   - uuid: vs2dfm
     name: Ail en poudre
@@ -36,9 +35,10 @@ astuces: []
 preparation24h: null
 permissionWrite:
   - 68975cbc002469058f8b
+  - 693200b700222efe46a2
 auteur: ghald
 createdAt: '2026-04-06T19:58:56.075+00:00'
-updatedAt: '2026-04-06T19:58:56.075+00:00'
+updatedAt: '2026-04-06T19:59:17.941+00:00'
 createdBy: 68975cbc002469058f8b
 teams: []
 status: public

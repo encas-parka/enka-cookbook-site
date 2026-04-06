@@ -152,7 +152,7 @@
           <div class="mt-1 space-y-1">
             <div class="flex items-center gap-2">
               <span class="text-base-content/70">
-                Au moment de laa modification manuelle :
+                Au moment de la modification manuelle :
                 <strong class="text-base-content">
                   {overrideMismatch.details.oldPlates} couverts,
                   {overrideMismatch.details.oldRecipes} recettes

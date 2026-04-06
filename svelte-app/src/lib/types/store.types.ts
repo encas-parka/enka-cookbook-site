@@ -25,6 +25,11 @@ export interface ProductRangeStats {
   /** Total d'assiettes dans la plage */
   totalAssiettes: number;
 
+  /** Quantités acquises (stock + purchases) */
+  acquiredQuantities: NumericQuantity[];
+  /** Quantités acquises formatées pour affichage */
+  formattedAcquiredQuantities: string;
+
   /** Résultat brut du calcul de stock (positifs ET négatifs) */
   stockResult: NumericQuantity[];
   /** Quantités disponibles (uniquement positifs) */

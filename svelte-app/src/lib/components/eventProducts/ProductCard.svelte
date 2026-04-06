@@ -363,7 +363,7 @@
           {#if shouldShowActionButtons && overrideMismatch?.hasMismatch}
             <div
               id="override_alert"
-              class="alert alert-warning alert-outline mt-1"
+              class="alert alert-warning alert-outline mt-1 px-2 py-1 text-xs"
             >
               <CircleAlert size={18} />
               <span>

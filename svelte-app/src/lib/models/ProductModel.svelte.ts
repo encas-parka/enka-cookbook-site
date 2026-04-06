@@ -105,6 +105,8 @@ export class ProductModel {
         formattedQuantities: "",
         nbRecipes: 0,
         totalAssiettes: 0,
+        acquiredQuantities: [],
+        formattedAcquiredQuantities: "",
         stockResult: [],
         availableQuantities: [],
         missingQuantities: [],
@@ -123,6 +125,9 @@ export class ProductModel {
       formattedQuantities: productStats.requiredQuantitiesFormatted,
       nbRecipes: productStats.totalRecipesInRange,
       totalAssiettes: productStats.totalPortionsInRange,
+
+      acquiredQuantities: productStats.acquiredQuantities,
+      formattedAcquiredQuantities: productStats.acquiredFormatted,
 
       stockResult: productStats.stockBalance,
       availableQuantities: productStats.availableStockQuantities,

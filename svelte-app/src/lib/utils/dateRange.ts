@@ -35,6 +35,10 @@ export interface ProductStatsForDateRange {
   requiredQuantities: NumericQuantity[]; // Quantités requises pour les recettes
   requiredQuantitiesFormatted: string; // Format d'affichage des besoins
 
+  // Acquisitions sur la plage (stock déclaré + purchases)
+  acquiredQuantities: NumericQuantity[]; // Total des ressources acquises
+  acquiredFormatted: string; // Format d'affichage des acquisitions
+
   // Résultats de stock
   stockBalance: NumericQuantity[]; // Équilibre stock - besoins (positif/négatif)
   availableStockQuantities: NumericQuantity[]; // Stock disponible (positif seulement)
@@ -141,6 +145,8 @@ export function calculateProductStatsForDateRange(
     return {
       requiredQuantities: [],
       requiredQuantitiesFormatted: "-",
+      acquiredQuantities: [],
+      acquiredFormatted: "-",
       stockBalance: [],
       availableStockQuantities: [],
       missingStockQuantities: [],
@@ -168,18 +174,26 @@ export function calculateProductStatsForDateRange(
         : "-";
 
     // Calcul du stock (achats existants - besoins)
-    const stockBalance = calculateStockBalanceForDateRange(
+    const stockResult = calculateStockBalanceForDateRange(
       product,
       startDate,
       endDate,
       requiredQuantities,
     );
+    const stockBalance = stockResult.balance;
+    const acquiredQuantities = stockResult.acquired;
+    const acquiredFormatted =
+      acquiredQuantities.length > 0
+        ? formatTotalQuantityFromFormatter(acquiredQuantities)
+        : "-";
     const availableStockQuantities = stockBalance.filter((item) => item.q > 0);
     const missingStockQuantities = stockBalance.filter((item) => item.q < 0);
 
     return {
       requiredQuantities,
       requiredQuantitiesFormatted,
+      acquiredQuantities,
+      acquiredFormatted,
       stockBalance,
       availableStockQuantities,
       missingStockQuantities,
@@ -250,12 +264,14 @@ export function calculateProductStatsForDateRange(
     : requiredQuantities;
 
   // Calcul du stock pour CETTE plage
-  const stockBalance = calculateStockBalanceForDateRange(
+  const stockResult = calculateStockBalanceForDateRange(
     product,
     startDate,
     endDate,
     quantitiesForStockCalc,
   );
+  const stockBalance = stockResult.balance;
+  const acquiredQuantities = stockResult.acquired;
   const availableStockQuantities = stockBalance.filter((item) => item.q > 0);
 
   // Pour les plages entièrement passées : pas de manquants calculés
@@ -268,6 +284,11 @@ export function calculateProductStatsForDateRange(
   return {
     requiredQuantities,
     requiredQuantitiesFormatted,
+    acquiredQuantities,
+    acquiredFormatted:
+      acquiredQuantities.length > 0
+        ? formatTotalQuantityFromFormatter(acquiredQuantities)
+        : "-",
     stockBalance,
     availableStockQuantities,
     missingStockQuantities,
@@ -293,14 +314,14 @@ export function calculateProductStatsForDateRange(
  * @param startDate - Date de début de la plage
  * @param endDate - Date de fin de la plage
  * @param requiredQuantities - Quantités requises sur la plage (déjà calculées)
- * @returns NumericQuantity[] avec valeurs positives (disponible) et négatives (manquant)
+ * @returns Objet avec le balance (stock - besoins) et les acquired (total des ressources)
  */
 function calculateStockBalanceForDateRange(
   product: any,
   startDate: string,
   endDate: string,
   requiredQuantities: NumericQuantity[],
-): NumericQuantity[] {
+): { balance: NumericQuantity[]; acquired: NumericQuantity[] } {
   // 1. Stock de base disponible AVANT la plage
   let baseStock: NumericQuantity[] = [];
   let stockReferenceDate = "";
@@ -342,7 +363,10 @@ function calculateStockBalanceForDateRange(
   const allResources = [...baseStock, ...additionalPurchases];
   const totalResources = aggregateByUnit(allResources);
 
-  return subtractQuantities(totalResources, requiredQuantities);
+  return {
+    balance: subtractQuantities(totalResources, requiredQuantities),
+    acquired: totalResources,
+  };
 }
 
 /**

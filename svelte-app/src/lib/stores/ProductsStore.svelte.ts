@@ -256,6 +256,95 @@ class ProductsStore {
     return this.#groupedFilteredProducts;
   }
 
+  // =========================================================================
+  // EXPORT MARKDOWN
+  // =========================================================================
+
+  /**
+   * Exporte les produits filtrés et groupés au format Markdown
+   * Le format respecte la structure :
+   * ---
+   * # EventTitle - période (dates filtrées)
+   *
+   * ## Group label
+   * - productName: besoin | acquis | manque
+   * ...
+   *
+   * @param eventName - Nom de l'événement
+   * @returns Chaîne Markdown prête à être téléchargée
+   */
+  exportToMarkdown(eventName: string): string {
+    const lines: string[] = [];
+
+    // En-tête
+    lines.push("---");
+    lines.push(`# ${eventName}`);
+
+    // Dates filtrées (depuis dateStore, pas les params de l'événement)
+    const { start, end } = this.dateStore.current;
+    if (start && end) {
+      const startStr = new Date(start).toLocaleDateString("fr-FR", {
+        day: "numeric",
+        month: "long",
+      });
+      const endStr = new Date(end).toLocaleDateString("fr-FR", {
+        day: "numeric",
+        month: "long",
+      });
+      lines.push(`- ${startStr} au ${endStr}`);
+    } else if (start) {
+      const dateStr = new Date(start).toLocaleDateString("fr-FR", {
+        day: "numeric",
+        month: "long",
+        year: "numeric",
+      });
+      lines.push(`- ${dateStr}`);
+    }
+
+    lines.push("");
+
+    // Produits groupés
+    const groups = this.#groupedFilteredProducts;
+    const groupKeys = Object.keys(groups);
+
+    if (groupKeys.length === 0) {
+      lines.push("_Aucun produit ne correspond aux filtres actuels._");
+    } else {
+      for (const groupLabel of groupKeys) {
+        const models = groups[groupLabel]!;
+
+        // Titre de groupe (sauf si groupBy === "none")
+        if (groupLabel) {
+          lines.push(`## ${groupLabel}`);
+          lines.push("");
+        }
+
+        for (const model of models) {
+          const name = model.productName;
+          const total = model.stats.formattedQuantities || "-";
+          const hasAcquired = model.stats.acquiredQuantities.length > 0;
+          const hasMissing = model.stats.missingQuantities.length > 0;
+
+          let line = `- ${name}: ${total}`;
+          if (hasAcquired) {
+            const acquired = model.stats.formattedAcquiredQuantities || "-";
+            line += ` | acquis ${acquired}`;
+            if (hasMissing) {
+              const missing = model.stats.formattedMissingQuantities || "-";
+              line += ` | manque ${missing}`;
+            }
+          }
+
+          lines.push(line);
+        }
+
+        lines.push("");
+      }
+    }
+
+    return lines.join("\n");
+  }
+
   get loading() {
     return this.#loading;
   }
@@ -594,7 +683,9 @@ class ProductsStore {
         // de les invalider (race condition entre loadCache+syncFromRemote et ProductsStore.initialize).
         console.log("[ProductsStore] Attente de recipesStore.syncReady...");
         await recipesStore.syncReady;
-        console.log("[ProductsStore] recipesStore.syncReady → calcul des produits");
+        console.log(
+          "[ProductsStore] recipesStore.syncReady → calcul des produits",
+        );
 
         await this.#calculateProductsFromEvent(event);
 
@@ -794,7 +885,9 @@ class ProductsStore {
         console.log(
           `[ProductsStore] ⚠️ Cache invalide : version de migration obsolète (${metadata.migrationVersion} ≠ ${CURRENT_MIGRATION_VERSION})`,
         );
-        console.log(`[ProductsStore] Le cache sera ignoré et les produits seront recalculés`);
+        console.log(
+          `[ProductsStore] Le cache sera ignoré et les produits seront recalculés`,
+        );
         return; // Ne pas charger le cache
       }
 
@@ -943,7 +1036,9 @@ class ProductsStore {
         migrationVersion: CURRENT_MIGRATION_VERSION,
       });
 
-      console.log(`[ProductsStore] Cache IDB persisté (v${CURRENT_MIGRATION_VERSION})`);
+      console.log(
+        `[ProductsStore] Cache IDB persisté (v${CURRENT_MIGRATION_VERSION})`,
+      );
     } catch (err) {
       console.error("[ProductsStore] Erreur persist cache IDB:", err);
     }
@@ -1990,10 +2085,8 @@ class ProductsStore {
     if (isDemoEvent(this.#currentEventId)) {
       return await this.updateProductLocal(productId, updates);
     } else {
-      const {
-        updateProduct: updateProductAppwrite,
-        upsertProduct,
-      } = await import("../services/appwrite-products");
+      const { updateProduct: updateProductAppwrite, upsertProduct } =
+        await import("../services/appwrite-products");
 
       // Vérifier si le produit est synchronisé avec Appwrite
       const enrichedProduct = this.getEnrichedProductById(productId);

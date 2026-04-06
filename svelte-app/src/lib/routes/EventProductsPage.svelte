@@ -7,6 +7,7 @@
     CircleX,
     ClipboardCheck,
     Clock,
+    Download,
     Funnel,
     Info,
     MessageCircleQuestionMark,
@@ -87,6 +88,30 @@
   // État pour le modal d'impression
   let printModalOpen = $state(false);
   let groupPurchaseProducts = $state<any[]>([]);
+
+  // =========================================================================
+  // EXPORT MARKDOWN
+  // =========================================================================
+
+  function handleExportMarkdown() {
+    const markdown = productsStore.exportToMarkdown(eventName);
+
+    const blob = new Blob([markdown], { type: "text/markdown;charset=utf-8" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    const slug = eventName
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-|-$/g, "");
+    a.download = `${slug || "produits"}-courses.md`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+
+    toastService.success("Liste de courses exportée en Markdown");
+  }
 
   // État local pour le modal d'ajout de produit
   let isAddProductModalOpen = $state(false);
@@ -313,6 +338,13 @@
 
 {#snippet navActions()}
   <div class="flex items-center gap-2">
+    <button
+      class="btn btn-circle btn-primary"
+      onclick={handleExportMarkdown}
+      title="Exporter en Markdown"
+    >
+      <Download size={18} />
+    </button>
     <button
       class="btn btn-circle btn-primary"
       onclick={() => (printModalOpen = true)}

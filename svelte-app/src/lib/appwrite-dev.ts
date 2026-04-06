@@ -11,8 +11,6 @@ const APPWRITE_CONFIG = {
   projectId: "689725820024e81781b7",
   databaseId: "689d15b10003a5a13636",
   functions: {
-    cmsAuth: "68976500002eb5c6ee4f",
-    accessRequest: "689cdea5001a4d74549d",
     batchUpdate: "68f00487000c624533a3",
   },
   collections: {
@@ -92,8 +90,6 @@ export const AppwriteClient = {
     return {
       APPWRITE_ENDPOINT: APPWRITE_CONFIG.endpoint,
       APPWRITE_PROJECT_ID: APPWRITE_CONFIG.projectId,
-      APPWRITE_FUNCTION_ID: APPWRITE_CONFIG.functions.cmsAuth,
-      ACCESS_REQUEST_FUNCTION_ID: APPWRITE_CONFIG.functions.accessRequest,
       APPWRITE_CONFIG,
     };
   },
@@ -241,12 +237,9 @@ export const AppwriteClient = {
     localStorage.removeItem("emailVerificationStatus");
   },
 
-  setAuthData(email: string, name: string, cmsAuth?: any) {
+  setAuthData(email: string, name: string) {
     const userData = { email, name };
     localStorage.setItem("cmsUser", JSON.stringify(userData));
-    if (cmsAuth) {
-      localStorage.setItem("sveltia-cms.user", JSON.stringify(cmsAuth));
-    }
   },
 
   async logoutGlobal() {

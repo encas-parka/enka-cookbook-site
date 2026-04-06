@@ -319,11 +319,5 @@
     ? `/recipe/${sourceRecipeId}/duplicate`
     : "/recipe/new"}
   shouldProtect={() => isDirty && !saveSuccessful}
-  onLeaveWithoutSave={() => {}}
-  onSaveAndLeave={async () => {
-    // Sauvegarder et autoriser la navigation
-    await save();
-    // Le guard sera notifié du succès via saveSuccessful
-  }}
   message="Vous avez des modifications non sauvegardées. Voulez-vous vraiment quitter ?"
 />

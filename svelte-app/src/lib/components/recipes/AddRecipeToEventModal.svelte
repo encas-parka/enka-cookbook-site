@@ -22,7 +22,7 @@
   let { isOpen, onClose, recipeId, recipeTitle, recipeTypeR, events }: Props =
     $props();
 
-  let selectedEventId = $state(events[0]?.$id ?? "");
+  let selectedEventId = $state("");
   let isSubmitting = $state(false);
 
   // Réinitialiser la sélection quand le modal s'ouvre

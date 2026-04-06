@@ -26,8 +26,8 @@
   // Récupérer userId et secret depuis l'URL via sv-router
   onMount(() => {
     navBarStore.reset();
-    userId = route.search.userId || "";
-    secret = route.search.secret || "";
+    userId = typeof route.search.userId === "string" ? route.search.userId : "";
+    secret = typeof route.search.secret === "string" ? route.search.secret : "";
     validateRecoveryLink();
   });
 

@@ -32,12 +32,13 @@
     deleteRecipe,
   } from "./RecipeEditPage";
   import RecipeVariants from "../components/recipes/RecipeVariants.svelte";
+  import { online } from "svelte/reactivity/window";
 
   // ============================================================================
   // INITIALISATION
   // ============================================================================
 
-  const recipeId = $derived(route.params.uuid);
+  const recipeId = $derived(route.params.uuid as string);
 
   // svelte-ignore state_referenced_locally
   if (!recipeId) {
@@ -90,7 +91,7 @@
   const isLockedByMe = $derived.by(
     () => !!lockedBy && lockedBy === globalState.userId,
   );
-  const canEdit = $derived(!isLockedByOthers && !isLoading);
+  const canEdit = $derived(!!online.current && !isLockedByOthers && !isLoading);
 
   // Données de référence depuis RecipeDataStore
   const recipeInfo = $derived.by(() => ({
@@ -535,11 +536,6 @@
     if (isLockedByMe) {
       await releaseLock();
     }
-  }}
-  onSaveAndLeave={async () => {
-    // Sauvegarder et autoriser la navigation
-    await save();
-    // Le guard sera notifié du succès via le return implicite
   }}
   message="Vous avez des modifications non sauvegardées. Voulez-vous vraiment quitter ?"
 />

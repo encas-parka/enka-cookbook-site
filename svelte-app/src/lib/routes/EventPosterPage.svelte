@@ -1,3 +1,4 @@
+<!-- FIXIT : il existe maintenant des meals sans date ! a gérer. -->
 <script lang="ts">
   import { onMount, tick } from "svelte";
   import { SvelteMap } from "svelte/reactivity";
@@ -8,6 +9,7 @@
   import { globalState } from "$lib/stores/GlobalState.svelte";
   import { navigate, route } from "$lib/router";
   import { AlertCircle, Info, Printer } from "@lucide/svelte";
+  import { online } from "svelte/reactivity/window";
   import { navBarStore } from "$lib/stores/NavBarStore.svelte";
   import { isDemoEvent } from "../data/demo-event-config";
   import LeftPanel from "../components/ui/LeftPanel.svelte";
@@ -17,9 +19,9 @@
   import { fade } from "svelte/transition";
 
   // Event data
-  let eventId = $derived(route.params.id);
+  const eventId = $derived(route.params.id ?? "");
 
-  let event = $derived(eventId && eventsStore.getEventById(eventId));
+  let event = $derived(eventId ? eventsStore.getEventById(eventId) : null);
 
   let eventLoading = $state(false);
   let eventError = $state<string | null>(null);
@@ -97,6 +99,7 @@
   // Check if user has accepted invitation
   const canEdit = $derived.by(() => {
     if (!event) return false;
+    if (!online.current) return false;
 
     const userId = globalState.userId || "";
 
@@ -162,7 +165,7 @@
       if (!event) {
         eventLoading = true;
         try {
-          await eventsStore.fetchEvent(route.params.id);
+          await eventsStore.fetchEvent(eventId);
           // event is automatically updated via $derived after fetch
         } catch (err) {
           eventError =
@@ -179,7 +182,7 @@
 
   async function loadSavedConfig() {
     try {
-      const container = await eventsStore.loadPosterConfig(route.params.id);
+      const container = await eventsStore.loadPosterConfig(eventId);
       if (container) {
         console.log("[EventPoster] Configuration chargée depuis le cache");
         // Si c'est un container V2
@@ -200,7 +203,7 @@
   async function saveConfig() {
     try {
       await eventsStore.savePosterConfig(
-        route.params.id,
+        eventId,
         $state.snapshot(config),
       );
       globalState.toast.success("Configuration sauvegardée", {
@@ -224,7 +227,7 @@
       const name = `Version du ${formattedDate}`;
 
       const newVersion = await eventsStore.createPosterVersion(
-        route.params.id,
+        eventId,
         $state.snapshot(config),
         name,
       );
@@ -249,7 +252,7 @@
 
   async function deleteVersion(versionId: string) {
     try {
-      await eventsStore.deletePosterVersion(route.params.id, versionId);
+      await eventsStore.deletePosterVersion(eventId, versionId);
 
       // Update local state directly to avoid full reload flicker
       versions = versions.filter((v) => v.id !== versionId);

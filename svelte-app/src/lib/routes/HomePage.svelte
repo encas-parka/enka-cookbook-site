@@ -433,7 +433,7 @@
                   </ul>
                 {/if}
 
-                {#if feature.buttonText && feature.buttonAction}
+                {#if feature.buttonText}
                   <!-- Bouton avec dernier délai -->
                   <div
                     class="mt-8"

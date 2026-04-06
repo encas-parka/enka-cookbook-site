@@ -69,7 +69,7 @@
   }
 
   function getRecipeIcon(recipe: RecipeIndexEntry) {
-    return getTypeDisplay(recipe.typeR, recipe.categories);
+    return getTypeDisplay(recipe.typeR, recipe.categories ?? undefined);
   }
 
   // État de chargement combiné

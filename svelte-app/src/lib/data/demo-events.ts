@@ -272,6 +272,7 @@ export async function generateDemoEvent(
     originalDataHash: null,
     error: null,
     minContrib: 1,
+    shareLinks: null,
     $sequence: 0,
     $tableId: "",
     $databaseId: "",

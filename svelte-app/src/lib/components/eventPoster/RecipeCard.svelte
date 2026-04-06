@@ -196,7 +196,7 @@
       font,
       bold && 'font-bold',
       italic && 'italic'
-    ].filter(Boolean);
+    ].filter((c): c is string => !!c);
   }
 
   // Font classes for each element type

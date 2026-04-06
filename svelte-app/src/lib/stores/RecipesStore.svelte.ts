@@ -648,6 +648,7 @@ class RecipesStore {
           lastAppwriteSync: now,
           recipesCount: this.#recipesIndex.size,
           cacheVersion: 1,
+          migrationVersion: 0,
         });
         console.log("[RecipesStore] Cache IDB recréé");
       }

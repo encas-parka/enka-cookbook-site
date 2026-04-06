@@ -79,8 +79,15 @@ import type { EnrichedEvent } from "../types/events.d";
 // TYPES INTERNE (utilise les types générés automatiquement ??)
 // =============================================================================
 
+/**
+ * Type interne pour les produits bruts venant d'Appwrite.
+ * Appwrite retourne `purchases` comme `string[]` (IDs), mais ce champ n'est pas
+ * dans le type auto-généré `Products` car la relation inverse n'existe pas.
+ */
+type ProductsRaw = Products & { purchases?: string[] };
+
 export type ProductUpdate = Partial<
-  Omit<Products, "$id" | keyof Models.Row | "purchases" | "mainId">
+  Omit<Products, "$id" | keyof Models.Row | "mainId">
 >;
 
 export type PurchaseCreate = Omit<
@@ -344,7 +351,7 @@ export async function loadProductsWithPurchases(
         Query.limit(limit),
       ],
     });
-    const products = productsResponse.rows as unknown as Products[];
+    const products = productsResponse.rows as unknown as ProductsRaw[];
 
     // 2. Extraire tous les IDs de purchases uniques
     const allPurchaseIds = new Set<string>();
@@ -546,7 +553,7 @@ export async function syncProductsWithPurchases(
         tableId: config.collections.products,
         queries: [Query.equal("mainId", mainId), Query.limit(limit)],
       });
-      const products = productsResponse.rows as unknown as Products[];
+      const products = productsResponse.rows as unknown as ProductsRaw[];
 
       // 2. Charger les purchases
       const purchasesResponse = await tables.listRows({
@@ -593,7 +600,7 @@ export async function syncProductsWithPurchases(
         Query.limit(limit),
       ],
     });
-    const products = productsResponse.rows as unknown as Products[];
+    const products = productsResponse.rows as unknown as ProductsRaw[];
 
     // Charger aussi les purchases modifiées
     const purchasesResponse = await tables.listRows({

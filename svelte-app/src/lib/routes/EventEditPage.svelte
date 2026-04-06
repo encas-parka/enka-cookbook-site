@@ -39,6 +39,7 @@
   import BadgeEventStatus from "../components/ui/BadgeEventStatus.svelte";
   import AssignDateModal from "../components/eventEdit/AssignDateModal.svelte";
   import { recipesStore } from "../stores/RecipesStore.svelte";
+  import { online } from "svelte/reactivity/window";
 
   // ============================================================================
   // PROPS & INITIALISATION
@@ -48,7 +49,7 @@
   import { slide } from "svelte/transition";
 
   // Rendre eventId entièrement réactif aux changements de params
-  let eventId = $derived(route.params.id);
+  const eventId = $derived(route.params.id ?? "");
 
   // Shadow Draft permanent (jamais null)
   // NOTE: meals est un $state brut (non trié) pour permettre les mutations
@@ -200,8 +201,9 @@
   const canEdit = $derived(
     // ✅ Mode démo : toujours éditable
     (currentEvent && isDemoEvent(currentEvent.$id)) ||
-      // Mode normal : vérifier les permissions
-      (eventsStore.canUserEditEvent(eventId, globalState.userId || "") &&
+      // Mode normal : vérifier les permissions + en ligne
+      (!!online.current &&
+        eventsStore.canUserEditEvent(eventId, globalState.userId || "") &&
         !isLockedByOthers &&
         !isBusy),
   );
@@ -1241,7 +1243,5 @@
 <UnsavedChangesGuard
   routeKey={`/event/${eventId}`}
   shouldProtect={() => isDirty}
-  onLeaveWithoutSave={handleLeaveWithoutSave}
-  onSaveAndLeave={handleSaveAndLeave}
   message="Vous avez des modifications non sauvegardées. Voulez-vous vraiment quitter ?"
 />

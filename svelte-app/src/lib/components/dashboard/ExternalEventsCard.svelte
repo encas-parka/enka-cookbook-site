@@ -32,7 +32,7 @@
 
       // L'utilisateur est dans les contributors
       const isContributor = event.contributors?.some(
-        (c) => c.userId === userId || c.id === userId,
+        (c) => c.id === userId,
       );
 
       return isContributor;

@@ -54,6 +54,7 @@
   import BadgeEventStatus from "../components/ui/BadgeEventStatus.svelte";
   import InfoCollapse from "../components/ui/InfoCollapse.svelte";
   import { isDemoEvent } from "../data/demo-event-config";
+  import { online } from "svelte/reactivity/window";
 
   // Mapping des icônes pour les statuts d'achat
   const statusIcons = {
@@ -264,7 +265,8 @@
    */
   const canEdit = $derived(
     (currentEvent && isDemoEvent(currentEvent.$id)) ||
-      (eventsStore.canUserEditEvent(eventId || "", globalState.userId || "") &&
+      (online.current &&
+        eventsStore.canUserEditEvent(eventId || "", globalState.userId || "") &&
         currentEvent?.status !== "canceled"),
   );
 
@@ -612,8 +614,8 @@
     <!-- header print -->
     <div class="print-only">
       <h2 class="text-lg font-bold">
-        Produits pour {eventName}, du {formatDateShort(startDate)} au {formatDateShort(
-          endDate,
+        Produits pour {eventName}, du {formatDateShort(startDate ?? "")} au {formatDateShort(
+          endDate ?? "",
         )}
       </h2>
     </div>

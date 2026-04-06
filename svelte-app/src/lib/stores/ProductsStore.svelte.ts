@@ -1,6 +1,7 @@
 import { SvelteMap } from "svelte/reactivity";
 import { useDebounce } from "runed";
 import type { Products, Purchases } from "../types/appwrite.d";
+import type { ProductWithPurchases } from "../services/appwrite-products";
 
 import {
   matchesFilters,
@@ -1004,14 +1005,12 @@ class ProductsStore {
    *   - Recalculer les dérivés concernés
    */
   #enrichProduct(
-    product: Products,
+    product: Products & { purchases?: Purchases[] },
     existing?: EnrichedProduct,
   ): EnrichedProduct {
     if (existing) {
-      // Mise à jour d'un produit existant
       return updateExistingProduct(product, existing);
     } else {
-      // Initialisation complète d'un nouveau produit
       return createEnrichedProductFromAppwrite(product);
     }
   }
@@ -1465,29 +1464,6 @@ class ProductsStore {
     };
   }
 
-  // Trier les produits
-  sortProducts(products: Products[]): Products[] {
-    if (!this.#filters.sortColumn) return products;
-
-    return [...products].sort((a, b) => {
-      let aVal: any = a[this.#filters.sortColumn as keyof Products];
-      let bVal: any = b[this.#filters.sortColumn as keyof Products];
-
-      // Gérer les cas spéciaux
-      if (this.#filters.sortColumn === "totalNeededConsolidated") {
-        aVal = parseFloat(aVal) || 0;
-        bVal = parseFloat(bVal) || 0;
-      } else if (this.#filters.sortColumn === "purchases") {
-        aVal = a.purchases?.length || 0;
-        bVal = b.purchases?.length || 0;
-      }
-
-      if (aVal < bVal) return this.#filters.sortDirection === "asc" ? -1 : 1;
-      if (aVal > bVal) return this.#filters.sortDirection === "asc" ? 1 : -1;
-      return 0;
-    });
-  }
-
   // =========================================================================
   // UTILITAIRES PUBLICS
   // =========================================================================
@@ -1754,19 +1730,26 @@ class ProductsStore {
       mergedFrom: null,
       mergeDate: null,
       mergeReason: null,
-      isLocal: true,
       mergedInto: null,
       totalNeededOverride: null,
       updatedBy: null,
       specs: null,
       // Données enrichies
       purchases: [],
-      pL: null,
       byDate: {},
       storeInfo: null,
+      stockParsed: null,
+      totalNeededArray: [],
+      totalPurchasesArray: [],
+      stockOrTotalPurchases: "",
+      displayTotalNeeded: "",
+      displayTotalPurchases: "",
+      displayMissingQuantity: "",
+      displayTotalOverride: "",
       totalNeededOverrideParsed: null,
-      displayMissingQuantity: null,
-      missingQuantityArray: null,
+      missingQuantityArray: [],
+      dateDisplayInfo: {},
+      specsParsed: null,
     };
 
     // 2. Créer le ProductModel et l'ajouter à la Map
@@ -1873,6 +1856,7 @@ class ProductsStore {
 
     // 2. Mettre à jour le purchase dans la liste
     const productModel = this.#enrichedProducts.get(targetProductId);
+    if (!productModel) return;
     const updatedPurchases = productModel.data.purchases.map((p) =>
       p.$id === purchaseId
         ? { ...p, ...updates, $updatedAt: new Date().toISOString() }
@@ -1940,7 +1924,7 @@ class ProductsStore {
       return await this.updatePurchaseLocal(purchaseId, updates);
     } else {
       const { updatePurchase } = await import("../services/appwrite-products");
-      await updatePurchase(purchaseId, updates);
+      await updatePurchase(purchaseId, updates as Parameters<typeof updatePurchase>[1]);
     }
   }
 

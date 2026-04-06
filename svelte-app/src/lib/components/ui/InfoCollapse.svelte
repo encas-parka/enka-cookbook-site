@@ -58,7 +58,7 @@
       {/if}
     </div>
     {#if hasChildren}
-      <div class="absolute top-4 right-4 flex items-center gap-1">
+      <div class="absolute top-0 right-2 flex items-center gap-1">
         <div class="text-base-content/70 text-sm italic">
           {#if !isOpen}
             en savoir plus

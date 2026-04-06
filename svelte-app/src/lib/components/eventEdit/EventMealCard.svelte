@@ -15,6 +15,7 @@
     type Icon as IconType,
     Check,
     RefreshCcw,
+    CalendarCog,
   } from "@lucide/svelte";
   import type { EventMeal, EventMealRecipe } from "$lib/types/events.d";
   import type {
@@ -44,6 +45,11 @@
     allDates?: string[];
     onEmptySearchSubmit?: () => void;
     disabled?: boolean;
+    onOpenReassignMealDate?: (
+      mealId: string,
+      recipeUuid: string,
+      typeR: RecettesTypeR,
+    ) => void;
   }
 
   let {
@@ -55,6 +61,7 @@
     allDates = [],
     onEmptySearchSubmit,
     disabled = false,
+    onOpenReassignMealDate,
   }: Props = $props();
 
   // Forcer le mode preview si disabled
@@ -461,7 +468,7 @@
                   <!-- Contrôles d'édition -->
                   <div class="me-10 flex items-center gap-2">
                     <!-- Type -->
-                    <select class="select w-24" bind:value={recipe.typeR}>
+                    <select class="select w-28" bind:value={recipe.typeR}>
                       <option value="entree">Entrée</option>
                       <option value="plat">Plat</option>
                       <option value="dessert">Dessert</option>
@@ -528,6 +535,23 @@
                         />
                       </button>
                     {/if}
+
+                    <!-- Changer de repas / Mettre de côté -->
+                    {#if onOpenReassignMealDate && meal.id}
+                      {@const mealId = meal.id}
+                      <button
+                        class="btn btn-ghost btn-sm btn-square"
+                        onclick={() =>
+                          onOpenReassignMealDate(
+                            mealId,
+                            recipe.recipeUuid,
+                            recipe.typeR,
+                          )}
+                        title="Changer de repas ou mettre de côté"
+                      >
+                        <CalendarCog class="h-4 w-4" />
+                      </button>
+                    {/if}
                   </div>
                   <div class="ms-auto">
                     <!-- Supprimer -->
@@ -569,8 +593,8 @@
                   ? 'ring-error ring-1'
                   : ''}"
               >
-                <ChefHat class="h-4 w-4" />
-                <span
+                <ChefHat class="size-4 shrink-0" />
+                <span class="leading-none"
                   >{recipeIndex?.title ||
                     getRecipeShortUuid(recipe.recipeUuid)}</span
                 >

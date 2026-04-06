@@ -12,6 +12,7 @@
   import UnsavedChangesGuard from "$lib/components/ui/UnsavedChangesGuard.svelte";
   import SvelteMarkdown from "@humanspeak/svelte-markdown";
   import { navBarStore } from "$lib/stores/NavBarStore.svelte";
+  import { online } from "svelte/reactivity/window";
 
   // ============================================================================
   // ROUTE PARAMETERS
@@ -46,7 +47,9 @@
    * Document lu depuis le store — réactif aux mises à jour realtime
    * Permet de détecter les changements de lock par d'autres utilisateurs
    */
-  const storeDoc = $derived(docId ? teamdocsStore.getDocumentById(docId) : undefined);
+  const storeDoc = $derived(
+    docId ? teamdocsStore.getDocumentById(docId) : undefined,
+  );
 
   /**
    * État du lock lu réactivement depuis le store
@@ -88,7 +91,9 @@
     !!storeLockedBy && storeLockedBy !== globalState.userId && !iHoldLock,
   );
   const isLockedByMe = $derived(iHoldLock);
-  const canEdit = $derived(!isLockedByOthers && !isLoading && !isSaving);
+  const canEdit = $derived(
+    online.current && !isLockedByOthers && !isLoading && !isSaving,
+  );
 
   // Validation
   const isValid = $derived(title.trim().length > 0 && team !== undefined);
@@ -187,11 +192,9 @@
     iHoldLock = false;
 
     // 2. Release serveur (fire-and-forget)
-    teamdocsStore
-      .updateDocumentLock(docId, null, null)
-      .catch((error) => {
-        console.error("[EditDocumentPage] Erreur libération lock:", error);
-      });
+    teamdocsStore.updateDocumentLock(docId, null, null).catch((error) => {
+      console.error("[EditDocumentPage] Erreur libération lock:", error);
+    });
   }
 
   // ============================================================================
@@ -561,11 +564,6 @@
 <UnsavedChangesGuard
   routeKey={`editdocument/${teamId}/${docId}`}
   shouldProtect={() => isDirty && isLockedByMe}
-  onLeaveWithoutSave={() => {}}
-  onSaveAndLeave={async () => {
-    await handleSave();
-    return true;
-  }}
   message="Vous avez des modifications non sauvegardées. Voulez-vous quitter sans enregistrer ?"
 />
 

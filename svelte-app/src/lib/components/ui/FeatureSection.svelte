@@ -19,12 +19,14 @@
   let { features }: Props = $props();
 
   // Refs pour chaque section
+  // svelte-ignore state_referenced_locally
   let sectionRefs: (HTMLElement | undefined)[] = $state(
     new Array(features.length).fill(undefined),
   );
   let activeIndex = $state(0);
 
   // Créer un observer pour chaque section
+  // svelte-ignore state_referenced_locally
   features.forEach((_, index) => {
     useIntersectionObserver(
       () => sectionRefs[index],

@@ -13,6 +13,7 @@
   import HeaderNav from "./lib/components/HeaderNav.svelte";
   import Toast from "./lib/components/ui/Toast.svelte";
   import ScrollToTopButton from "./lib/components/ui/ScrollToTopButton.svelte";
+  import OfflineIndicator from "./lib/components/ui/OfflineIndicator.svelte";
   import OverrideConflictModal from "./lib/components/OverrideConflictModal.svelte";
   import AuthModal from "./lib/components/AuthModal.svelte";
   import { globalState } from "./lib/stores/GlobalState.svelte";
@@ -220,7 +221,7 @@
 </script>
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
 <link
   href="https://fonts.googleapis.com/css2?family=Cherry+Bomb+One&family=Fredoka:wght@300..700&display=swap&family=Sora:wght@100..800&display=swap"
   rel="stylesheet"
@@ -252,6 +253,7 @@
 
 <Toast />
 <ScrollToTopButton />
+<OfflineIndicator />
 
 {#if globalState.isAuthenticated}
   {#if displayError}

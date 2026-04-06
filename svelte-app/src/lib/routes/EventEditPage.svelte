@@ -8,7 +8,8 @@
   import { nativeTeamsStore } from "$lib/stores/NativeTeamsStore.svelte";
   import { getContributors } from "$lib/utils/event-stats-helpers";
   import { globalState } from "$lib/stores/GlobalState.svelte";
-  import type { EventMeal } from "$lib/types/events";
+  import type { EventMeal, EventMealRecipe } from "$lib/types/events";
+  import type { RecettesTypeR } from "$lib/types/recipes.types";
   import { isDemoEvent } from "$lib/data/demo-event-config";
 
   import {
@@ -22,6 +23,8 @@
     AlertTriangle,
     Users,
     Info,
+    ChefHat,
+    CalendarPlus,
   } from "@lucide/svelte";
   import { nanoid } from "nanoid";
   import { flip } from "svelte/animate";
@@ -34,15 +37,19 @@
   import Fieldset from "../components/ui/Fieldset.svelte";
   import ConfirmModal from "../components/ui/ConfirmModal.svelte";
   import BadgeEventStatus from "../components/ui/BadgeEventStatus.svelte";
+  import AssignDateModal from "../components/eventEdit/AssignDateModal.svelte";
+  import { recipesStore } from "../stores/RecipesStore.svelte";
+  import { online } from "svelte/reactivity/window";
 
   // ============================================================================
   // PROPS & INITIALISATION
   // ============================================================================
 
   import { route } from "$lib/router";
+  import { slide } from "svelte/transition";
 
   // Rendre eventId entièrement réactif aux changements de params
-  let eventId = $derived(route.params.id);
+  const eventId = $derived(route.params.id ?? "");
 
   // Shadow Draft permanent (jamais null)
   // NOTE: meals est un $state brut (non trié) pour permettre les mutations
@@ -54,12 +61,18 @@
   >("proposition");
   let minContrib = $state<number>(1);
 
-  // Meals triés par date pour l'affichage et la sauvegarde (computed réactif)
-  const sortedMeals = $derived(
-    [...meals].sort(
+  // Meals sans date (recettes à planifier)
+  const undatedMeals = $derived(meals.filter((m) => m.date === ""));
+
+  // Meals datés triés par date (pour l'affichage)
+  const sortedDatedMeals = $derived(
+    [...meals.filter((m) => m.date !== "")].sort(
       (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime(),
     ),
   );
+
+  // Meals triés : datés en premier (triés par date), puis non-datés
+  const sortedMeals = $derived([...sortedDatedMeals, ...undatedMeals]);
 
   // État UI
   let isInitialised = $state(false);
@@ -74,6 +87,24 @@
   let showConfirmStatusModal = $state(false);
   let showCancelStatusModal = $state(false);
 
+  // Assignation de date (recettes à planifier)
+  let showAssignDateModal = $state(false);
+  let assigningRecipe = $state<{
+    mealId: string;
+    recipeUuid: string;
+    typeR: RecettesTypeR;
+    sourceHasDate: boolean;
+  } | null>(null);
+
+  // Meals datés pour le modal (exclut le meal source si on réassigne depuis un meal daté)
+  const modalDatedMeals = $derived.by(() => {
+    const assigning = assigningRecipe;
+    if (assigning?.sourceHasDate) {
+      return sortedDatedMeals.filter((m) => m.id !== assigning.mealId);
+    }
+    return sortedDatedMeals;
+  });
+
   // État du verrou externe (via locksService)
   let activeLock = $state<AppwriteLock | null>(null);
   let lockUnsub: (() => void) | null = null;
@@ -81,7 +112,7 @@
   // isDirty est calculé par comparaison avec currentEvent (la référence)
   const isDirty = $derived.by(() => {
     if (eventName === "" && meals.length === 0) return false;
-    if (!isInitialised || !isEditing || !currentEvent) return false;
+    if (!isInitialised || !currentEvent) return false;
 
     // Comparaison des valeurs scalaires
     if (eventName !== currentEvent.name) return true;
@@ -93,19 +124,24 @@
     const currentMeals = currentEvent.meals || [];
     if (meals.length !== currentMeals.length) return true;
 
-    // Comparer les métadonnées de chaque meal (pas les objets recipes complets)
-    for (let i = 0; i < meals.length; i++) {
-      const currentMeal = currentMeals[i];
-      const localMeal = meals[i];
+    // Comparer chaque meal via une signature légère (id, date, guests, recipes)
+    const mealSig = (m: EventMeal) => ({
+      id: m.id,
+      date: m.date,
+      guests: m.guests,
+      recipes: m.recipes?.map((r) => [
+        r.recipeUuid,
+        r.typeR,
+        r.plates,
+        r.hasOwnPlatesNb,
+      ]),
+    });
 
-      if (localMeal.id !== currentMeal.id) return true;
-      if (localMeal.date !== currentMeal.date) return true;
-      if (localMeal.guests !== currentMeal.guests) return true;
-      if (
-        (localMeal.recipes?.length || 0) !== (currentMeal.recipes?.length || 0)
-      )
-        return true;
-    }
+    if (
+      JSON.stringify(meals.map(mealSig)) !==
+      JSON.stringify(currentMeals.map(mealSig))
+    )
+      return true;
 
     return false;
   });
@@ -165,8 +201,9 @@
   const canEdit = $derived(
     // ✅ Mode démo : toujours éditable
     (currentEvent && isDemoEvent(currentEvent.$id)) ||
-      // Mode normal : vérifier les permissions
-      (eventsStore.canUserEditEvent(eventId, globalState.userId || "") &&
+      // Mode normal : vérifier les permissions + en ligne
+      (!!online.current &&
+        eventsStore.canUserEditEvent(eventId, globalState.userId || "") &&
         !isLockedByOthers &&
         !isBusy),
   );
@@ -481,7 +518,7 @@
     const contributorsToSave = contributors;
 
     const allDatesSorted = Array.from(
-      new Set(sortedMeals.map((m) => m.date)),
+      new Set(sortedMeals.filter((m) => m.date !== "").map((m) => m.date)),
     ).sort();
 
     // Récupérer les noms des teams sélectionnés
@@ -643,13 +680,13 @@
     // Déterminer la date par défaut
     let defaultDateTime: string;
 
-    if (sortedMeals.length === 0) {
+    if (sortedDatedMeals.length === 0) {
       const today = new Date();
       today.setDate(today.getDate() + 7);
       today.setHours(20, 0, 0, 0);
       defaultDateTime = today.toISOString();
     } else {
-      const lastMeal = sortedMeals[sortedMeals.length - 1];
+      const lastMeal = sortedDatedMeals[sortedDatedMeals.length - 1];
       const lastDate = new Date(lastMeal.date);
       const lastHour = lastDate.getHours();
 
@@ -681,6 +718,128 @@
 
   function toggleEditMeal(mealId: string) {
     editingMealIndex = editingMealIndex === mealId ? null : mealId;
+  }
+
+  // ============================================================================
+  // ASSIGNATION DE DATE (recettes à planifier)
+  // ============================================================================
+
+  function openAssignDateModal(
+    mealId: string,
+    recipeUuid: string,
+    typeR: RecettesTypeR,
+  ) {
+    assigningRecipe = { mealId, recipeUuid, typeR, sourceHasDate: false };
+    showAssignDateModal = true;
+  }
+
+  function openReassignModal(
+    mealId: string,
+    recipeUuid: string,
+    typeR: RecettesTypeR,
+  ) {
+    assigningRecipe = { mealId, recipeUuid, typeR, sourceHasDate: true };
+    showAssignDateModal = true;
+  }
+
+  function handleAssignDateRecipe(targetMealId: string) {
+    if (!assigningRecipe) return;
+
+    const {
+      mealId: sourceMealId,
+      recipeUuid,
+      typeR,
+      sourceHasDate,
+    } = assigningRecipe;
+
+    // Trouver le meal source
+    const sourceIdx = meals.findIndex((m) => m.id === sourceMealId);
+    if (sourceIdx === -1) return;
+
+    const sourceMeal = meals[sourceIdx];
+
+    // 1. Retirer la recette du meal source
+    const updatedSourceRecipes = sourceMeal.recipes.filter(
+      (r) => r.recipeUuid !== recipeUuid,
+    );
+
+    let newMeals = [...meals];
+
+    if (targetMealId === "__undated__") {
+      // Mettre de côté : rejoindre ou créer un meal undated
+      let undatedIdx = newMeals.findIndex((m) => m.date === "");
+
+      const newRecipe: EventMealRecipe = {
+        recipeUuid,
+        plates: 0,
+        typeR,
+        hasOwnPlatesNb: false,
+      };
+
+      if (undatedIdx !== -1) {
+        // Meal undated existant → ajouter la recette
+        const existingUndated = newMeals[undatedIdx];
+        newMeals[undatedIdx] = {
+          ...existingUndated,
+          recipes: [...existingUndated.recipes, newRecipe],
+        };
+      } else {
+        // Créer un nouveau meal undated
+        const newUndatedMeal: EventMeal = {
+          id: nanoid(6),
+          date: "",
+          guests: 0,
+          recipes: [newRecipe],
+        };
+        newMeals = [...newMeals, newUndatedMeal];
+      }
+    } else {
+      // Cible datée
+      const targetIdx = newMeals.findIndex((m) => m.id === targetMealId);
+      if (targetIdx === -1) return;
+
+      const targetMeal = newMeals[targetIdx];
+
+      const updatedTargetRecipes = [
+        ...targetMeal.recipes,
+        {
+          recipeUuid,
+          plates: targetMeal.guests,
+          typeR,
+          hasOwnPlatesNb: false,
+        } satisfies EventMealRecipe,
+      ];
+
+      newMeals[targetIdx] = {
+        ...targetMeal,
+        recipes: updatedTargetRecipes,
+      };
+    }
+
+    // Gérer le meal source vide après retrait
+    const updatedSourceIdx = newMeals.findIndex((m) => m.id === sourceMealId);
+    if (updatedSourceIdx !== -1) {
+      const updatedSource = newMeals[updatedSourceIdx];
+      if (updatedSource.recipes.length === 0) {
+        if (sourceHasDate) {
+          // dated → autre : garder le meal vide
+          // Ne rien faire, le meal reste
+        } else {
+          // undated → dated : supprimer le meal source vide
+          newMeals.splice(updatedSourceIdx, 1);
+        }
+      } else {
+        // Meal source a encore des recettes → mettre à jour
+        newMeals[updatedSourceIdx] = {
+          ...updatedSource,
+          recipes: updatedSourceRecipes,
+        };
+      }
+    }
+
+    meals = newMeals;
+    showAssignDateModal = false;
+    assigningRecipe = null;
   }
 
   // ============================================================================
@@ -947,7 +1106,7 @@
 
         <div class="mb-6 flex items-center justify-between">
           <h3 class="card-title text-lg">
-            Repas & Menus ({sortedMeals.length})
+            Repas & Menus ({sortedDatedMeals.length})
           </h3>
           <button class="btn btn-primary" onclick={addMeal} disabled={!canEdit}>
             <Plus class="mr-1 h-4 w-4" />
@@ -955,7 +1114,46 @@
           </button>
         </div>
 
-        {#if sortedMeals.length === 0}
+        <!-- Recettes à planifier (meals sans date) -->
+        {#if undatedMeals.length > 0}
+          <fieldset class="fieldset bg-base-200 rounded-box mb-4">
+            <legend class="fieldset-legend">Recettes à planifier</legend>
+            <div class="flex flex-wrap gap-2 p-2">
+              {#each undatedMeals as undatedMeal}
+                {#each undatedMeal.recipes as recipe}
+                  {@const recipeIndex = recipesStore.getRecipeIndexByUuid(
+                    recipe.recipeUuid,
+                  )}
+                  {@const recipeName =
+                    recipeIndex?.title ?? recipe.recipeUuid.slice(0, 8)}
+                  <div
+                    class="badge badge-lg bg-base-100 h-auto gap-3 py-2 font-medium"
+                    transition:slide
+                  >
+                    <ChefHat class="size-4 shrink-0" />
+                    <span class="leading-none">{recipeName}</span>
+                    {#if sortedDatedMeals.length > 0}
+                      <button
+                        class="btn btn-sm btn-square btn-outline btn-primary"
+                        onclick={() =>
+                          openAssignDateModal(
+                            undatedMeal.id || "",
+                            recipe.recipeUuid,
+                            recipe.typeR,
+                          )}
+                        title="Assigner une date"
+                      >
+                        <CalendarPlus class="" />
+                      </button>
+                    {/if}
+                  </div>
+                {/each}
+              {/each}
+            </div>
+          </fieldset>
+        {/if}
+
+        {#if sortedDatedMeals.length === 0}
           <div
             class="text-base-content/60 bg-base-200 rounded-box border-base-200 flex flex-col items-center justify-center border-2 border-dashed py-12"
           >
@@ -969,7 +1167,7 @@
           </div>
         {:else}
           <div class="space-y-4">
-            {#each sortedMeals as meal (meal.id + "-" + currentEvent?.$updatedAt)}
+            {#each sortedDatedMeals as meal (meal.id + "-" + currentEvent?.$updatedAt)}
               <div animate:flip={{ delay: 100, duration: 400 }}>
                 <EventMealCard
                   bind:meal={meals[meals.findIndex((m) => m.id === meal.id)]}
@@ -981,6 +1179,7 @@
                   onDelete={() => removeMeal(meal.id || "")}
                   allDates={meals.map((m) => m.date)}
                   disabled={!canEdit || isLockedByOthers}
+                  onOpenReassignMealDate={openReassignModal}
                 />
               </div>
             {/each}
@@ -1024,11 +1223,25 @@
   onCancel={() => (showCancelStatusModal = false)}
 />
 
+<!-- Modal d'assignation de date pour les recettes à planifier -->
+{#if showAssignDateModal && assigningRecipe}
+  <AssignDateModal
+    isOpen={showAssignDateModal}
+    onClose={() => {
+      showAssignDateModal = false;
+      assigningRecipe = null;
+    }}
+    recipeName={recipesStore.getRecipeIndexByUuid(assigningRecipe.recipeUuid)
+      ?.title ?? "Recette"}
+    datedMeals={modalDatedMeals}
+    onAssign={handleAssignDateRecipe}
+    allowSetAside={assigningRecipe.sourceHasDate}
+  />
+{/if}
+
 <!-- Guard de navigation pour modifications non sauvegardées -->
 <UnsavedChangesGuard
   routeKey={`/event/${eventId}`}
   shouldProtect={() => isDirty}
-  onLeaveWithoutSave={handleLeaveWithoutSave}
-  onSaveAndLeave={handleSaveAndLeave}
   message="Vous avez des modifications non sauvegardées. Voulez-vous vraiment quitter ?"
 />

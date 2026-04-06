@@ -159,6 +159,7 @@ export interface EnrichedProduct {
   mergeReason: string | null;
   mergedInto: string | null;
   totalNeededOverride: string | null; // ← Brut JSON
+  updatedBy: string | null; // ← Dernier utilisateur ayant modifié (Appwrite)
 
   // RELATIONS (brutes Appwrite)
   purchases: Purchases[];

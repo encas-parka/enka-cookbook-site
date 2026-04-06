@@ -7,7 +7,7 @@
   import RecipePreparation from "$lib/components/recipes/RecipePreparation.svelte";
   import RecipeAlerts from "$lib/components/recipes/RecipeAlerts.svelte";
   import RecipeVariants from "$lib/components/recipes/RecipeVariants.svelte";
-  import { ChefHat, PencilIcon, Copy } from "@lucide/svelte";
+  import { ChefHat, PencilIcon, Copy, CalendarPlus } from "@lucide/svelte";
   import { navigate } from "$lib/router";
   import { navBarStore } from "../stores/NavBarStore.svelte";
   import { globalState } from "../stores/GlobalState.svelte";
@@ -16,6 +16,8 @@
   import RecipeMetadata from "$lib/components/recipes/RecipeMetadata.svelte";
   import { fade } from "svelte/transition";
   import { route } from "$lib/router";
+  import { eventsStore } from "$lib/stores/EventsStore.svelte";
+  import AddRecipeToEventModal from "$lib/components/recipes/AddRecipeToEventModal.svelte";
 
   // ✅ sv-router : les params sont accessibles via route.params
   let recipeId = $derived(route.params.uuid);
@@ -25,6 +27,10 @@
   let error = $state<string | null>(null);
   let recipeDetails = $state<RecipeForDisplay | null>(null);
   let currentServings = $state(4); // Valeur par défaut
+
+  // Modal ajout à un événement
+  let showAddToEventModal = $state(false);
+  const upcomingEvents = $derived(eventsStore.getUpcomingEventsForUser());
 
   // Réactivité du lock depuis le store (seule info venant de l'index en temps réel)
   const lockedBy = $derived(
@@ -342,6 +348,20 @@
         </div>
       </div>
     </div>
+
+    <!-- Bouton Ajouter à un événement -->
+    {#if globalState.isAuthenticated && upcomingEvents.length > 0}
+      <div class="mt-6 print:hidden">
+        <button
+          class="btn btn-outline btn-primary btn-sm"
+          onclick={() => (showAddToEventModal = true)}
+        >
+          <CalendarPlus class="h-4 w-4" />
+          Ajouter à un événement
+        </button>
+      </div>
+    {/if}
+
     <!-- Variantes de la recette -->
     {#if recipeId}
       <div class="mt-8 print:hidden">
@@ -360,3 +380,14 @@
     {/if}
   {/if}
 </div>
+
+{#if recipeDetails}
+  <AddRecipeToEventModal
+    isOpen={showAddToEventModal}
+    onClose={() => (showAddToEventModal = false)}
+    recipeId={recipeDetails.$id}
+    recipeTitle={recipeDetails.title}
+    recipeTypeR={recipeDetails.typeR}
+    events={upcomingEvents}
+  />
+{/if}

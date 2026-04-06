@@ -87,7 +87,7 @@
     class="absolute -z-50 size-0 opacity-0"
     tabindex="-1"
     aria-hidden="true"
-  />
+  ></button>
 
   <div class="mb-4 flex items-center justify-between">
     <h4 class="text-lg font-bold">Filtres</h4>

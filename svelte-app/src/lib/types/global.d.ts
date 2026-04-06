@@ -3,11 +3,10 @@ export interface AppwriteConfig {
   projectId: string;
   databaseId: string;
   functions: {
-    cmsAuth: string;
-    accessRequest: string;
     batchUpdate: string;
     usersTeamsManager: string;
     enkaData: string;
+    invitation: string;
   };
   collections: {
     events: string;
@@ -38,8 +37,6 @@ interface AppwriteClientGlobal {
   getConfig: () => {
     APPWRITE_ENDPOINT: string;
     APPWRITE_PROJECT_ID: string;
-    APPWRITE_FUNCTION_ID: string;
-    ACCESS_REQUEST_FUNCTION_ID: string;
     APPWRITE_CONFIG: AppwriteConfig;
   };
   isInitialized: () => boolean;
@@ -51,7 +48,7 @@ interface AppwriteClientGlobal {
   getUserEmail: () => string | null;
   getUserName: () => string | null;
   clearAuthData: () => void;
-  setAuthData: (email: string, name: string, cmsAuth?: any) => void;
+  setAuthData: (email: string, name: string) => void;
   logoutGlobal: () => Promise<void>;
   isEmailVerified: () => Promise<boolean>;
   sendVerificationEmail: () => Promise<void>;

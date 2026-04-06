@@ -3,7 +3,7 @@
 */}}
 
 {{/* Lire le manifest Vite pour le cache-busting */}}
-{{ $manifest := readFile "static/app/manifest.json" | unmarshal }}
+{{ $manifest := readFile "static/app/.vite-manifest.json" | unmarshal }}
 
 
 <!doctype html>
@@ -33,6 +33,9 @@
       {{ end }}
     {{ end }}
     <link rel="icon" href="/images/favicon.png" type="image/png" />
+    <link rel="manifest" href="/app/manifest.webmanifest" />
+    <link rel="apple-touch-icon" href="/app/pwa-192x192.png" />
+    <meta name="theme-color" content="#ffffff" />
     <!--<style>
       /* CSS critique - évite le flash de contenu non stylisé (FOUC) */
       #app {

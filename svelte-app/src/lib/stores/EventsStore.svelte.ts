@@ -24,11 +24,14 @@ import type {
   UpdateEventData,
   EnrichedEvent,
   EventMeal,
+  EventMealRecipe,
   EventContributor,
   EventTodo,
   EventTodoStatus,
   EventStatus,
 } from "../types/events.d";
+import type { RecettesTypeR } from "$lib/types/recipes.types";
+import { nanoid } from "nanoid";
 import { isDemoEvent } from "$lib/data/demo-event-config";
 
 import {
@@ -167,6 +170,37 @@ export class EventsStore {
    */
   get pastEventsCount() {
     return this.#pastEvents.length;
+  }
+
+  /**
+   * Événements à venir où l'utilisateur est participant accepté
+   * Exclut les événements annulés et archivés
+   */
+  getUpcomingEventsForUser(): EnrichedEvent[] {
+    if (!this.#userId) return [];
+
+    return this.#currentEvents.filter((event) => {
+      // Exclure les événements annulés ou archivés
+      if (event.status === "canceled" || event.status === "archive")
+        return false;
+
+      // Créateur → inclus
+      if (event.createdBy === this.#userId) return true;
+
+      // Contributeur accepté → inclus
+      if (
+        event.contributors?.some(
+          (c) => c.id === this.#userId && c.status === "accepted",
+        )
+      )
+        return true;
+
+      // Membre d'une équipe de l'événement → inclus
+      if (event.teamsId?.some((teamId) => this.#userTeams.includes(teamId)))
+        return true;
+
+      return false;
+    });
   }
 
   // =============================================================================
@@ -1534,6 +1568,65 @@ export class EventsStore {
       console.error(`[EventsStore] Erreur suppression meal:`, err);
       throw err;
     }
+  }
+
+  /**
+   * Ajoute une recette à un événement sans date (meal avec date: "")
+   * Utilisé depuis RecipeDetailPage pour "mettre de côté" une recette
+   */
+  async addRecipeToEvent(
+    eventId: string,
+    recipeUuid: string,
+    typeR: RecettesTypeR,
+  ): Promise<EnrichedEvent> {
+    const event = this.#events.get(eventId);
+    if (!event) throw new Error("Événement introuvable");
+
+    const meals = [...event.meals];
+
+    // Chercher un meal existant sans date
+    let undatedMeal = meals.find((m) => m.date === "");
+
+    if (undatedMeal) {
+      // Vérifier si la recette y est déjà
+      if (undatedMeal.recipes.some((r) => r.recipeUuid === recipeUuid)) {
+        throw new Error("Recette déjà mise de côté pour cet événement");
+      }
+      // Ajouter la recette au meal existant
+      undatedMeal = {
+        ...undatedMeal,
+        recipes: [
+          ...undatedMeal.recipes,
+          {
+            recipeUuid,
+            plates: 0,
+            typeR,
+            hasOwnPlatesNb: false,
+          } satisfies EventMealRecipe,
+        ],
+      };
+      // Remplacer dans le tableau
+      const idx = meals.findIndex((m) => m.date === "");
+      meals[idx] = undatedMeal;
+    } else {
+      // Créer un nouveau meal sans date
+      const newMeal: EventMeal = {
+        id: nanoid(6),
+        date: "",
+        guests: 0,
+        recipes: [
+          {
+            recipeUuid,
+            plates: 0,
+            typeR,
+            hasOwnPlatesNb: false,
+          } satisfies EventMealRecipe,
+        ],
+      };
+      meals.push(newMeal);
+    }
+
+    return await this.updateEvent(eventId, { meals });
   }
 
   // =============================================================================

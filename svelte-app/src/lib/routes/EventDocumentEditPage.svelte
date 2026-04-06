@@ -11,6 +11,7 @@
   import UnsavedChangesGuard from "$lib/components/ui/UnsavedChangesGuard.svelte";
   import SvelteMarkdown from "@humanspeak/svelte-markdown";
   import { navBarStore } from "$lib/stores/NavBarStore.svelte";
+  import { online } from "svelte/reactivity/window";
   import { route, searchParams } from "$lib/router";
 
   let eventId = $derived(route.params.id || "");
@@ -56,7 +57,9 @@
   const isLockedByOthers = $derived(
     !!lockHolder && lockHolder !== globalState.userId && !iHoldLock,
   );
-  const canEdit = $derived(!isLockedByOthers && !isLoading && !isSaving);
+  const canEdit = $derived(
+    online.current && !isLockedByOthers && !isLoading && !isSaving,
+  );
   const isValid = $derived(title.trim().length > 0);
 
   // ============================================================================
@@ -134,11 +137,9 @@
     iHoldLock = false;
 
     // 2. Release serveur (fire-and-forget)
-    teamdocsStore
-      .updateDocumentLock(docId, null, null)
-      .catch((error) => {
-        console.error("[EventDocumentEditPage] Erreur libération lock:", error);
-      });
+    teamdocsStore.updateDocumentLock(docId, null, null).catch((error) => {
+      console.error("[EventDocumentEditPage] Erreur libération lock:", error);
+    });
   }
 
   // ============================================================================

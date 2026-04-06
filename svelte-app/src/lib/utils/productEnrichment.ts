@@ -3,7 +3,8 @@
  * Logique de transformation Products → EnrichedProduct
  */
 
-import type { Products, Purchases } from "$lib/types/appwrite";
+import type { Models } from "appwrite";
+import type { Products, Purchases, Main } from "$lib/types/appwrite";
 import type {
   EnrichedProduct,
   NumericQuantity,
@@ -34,13 +35,42 @@ import {
 import { UnitConverter } from "./UnitConverter";
 import { calculateAllDateDisplayInfo } from "./dateRange";
 import { recipesStore } from "$lib/stores/RecipesStore.svelte";
+import type { ProductWithPurchases } from "../services/appwrite-products";
+
+/**
+ * Type interne pour les produits avec purchases optionnel.
+ * Permet d'accepter à la fois Products brut (sans purchases), ProductWithPurchases,
+ * et EnrichedProduct (qui a des champs optionnels comme $sequence).
+ */
+type ProductWithOptionalPurchases = Partial<Models.Row> & {
+  $id: string;
+  purchases?: Purchases[];
+  productName: string;
+  productHugoUuid: string | null;
+  status: string;
+  who: string[] | null;
+  store: string;
+  stockReel: string | null;
+  previousNames: string[] | null;
+  isMerged: boolean;
+  mergedFrom: string[] | null;
+  mergeDate: string | null;
+  mergeReason: string | null;
+  mergedInto: string | null;
+  totalNeededOverride: string | null;
+  updatedBy: string | null;
+  isSynced: boolean;
+  mainId: string | Main;
+  productType: string | null;
+  specs: string | null;
+};
 
 /**
  * Crée un EnrichedProduct depuis un Products Appwrite seul
  * ⚠️ Utilisé au sync si le produit n'existe pas localement (cas rare)
  */
 export function createEnrichedProductFromAppwrite(
-  product: Products,
+  product: ProductWithOptionalPurchases,
 ): EnrichedProduct {
   // Parser les specs (métadonnées manuelles)
   const specsParsed = safeJsonParse<ManualSpecs>(product.specs) ?? null;
@@ -127,7 +157,8 @@ export function createEnrichedProductFromAppwrite(
     mergeReason: product.mergeReason,
     mergedInto: product.mergedInto,
     totalNeededOverride: product.totalNeededOverride,
-    purchases: product.purchases,
+    updatedBy: product.updatedBy ?? null,
+    purchases: product.purchases ?? [],
     specs: product.specs,
 
     // Hugo (⚠️ manquant, sera vide)
@@ -162,7 +193,7 @@ export function createEnrichedProductFromAppwrite(
  * - Recalculer les dérivés
  */
 export function updateExistingProduct(
-  product: Products | EnrichedProduct,
+  product: ProductWithOptionalPurchases,
   existing: EnrichedProduct,
 ): EnrichedProduct {
   // Utiliser les nouvelles valeurs si présentes, sinon garder les anciennes
@@ -624,6 +655,7 @@ function createEnrichedProductFromAggregation(
     stockReel: "" as any,
     stockParsed: null,
     totalNeededOverride: null,
+    updatedBy: null,
     totalNeededOverrideParsed: null,
     displayTotalOverride: "",
     stockOrTotalPurchases: "",

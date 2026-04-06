@@ -16,6 +16,7 @@
     "appwrite-ec-dev/*",
     "docs/*",
     "content/*",
+    "agent/*",
   ],
   "languages": {
     "HTML": {

@@ -1,3 +1,5 @@
+<!-- DEPRECATED: Abandonné au profit du confirm() natif dans UnsavedChangesGuard.
+     Ce composant n'est plus utilisé et peut être supprimé lors d'un futur nettoyage. -->
 <script lang="ts">
   import { TriangleAlert, Save, X } from "@lucide/svelte";
   import ModalContainer from "$lib/components/ui/modal/ModalContainer.svelte";

@@ -1,6 +1,6 @@
 ---
 title: '000'
-date: '2026-04-07T10:32:30.915Z'
+date: '2026-04-07T10:39:54.145Z'
 draft: true
 typeR: plat
 categories:
@@ -104,13 +104,15 @@ preparation: |-
   2. Les enduire de 600 ml d'huile (ou la moitié) avec du sel et les passer 10 minutes au four à 200°C
   3. Mélanger le reste des ingrédients (dont le reste de l'huile) et enduire les aubergines avec puis les remettre à cuire 10 à 15 minutes.
 prepAlt: []
-astuces: []
+astuces:
+  - '{"astuce":"astuce A\n"}'
+  - '{"astuce":"Deuxieme astuces"}'
 preparation24h: null
 permissionWrite:
   - 68975cbc002469058f8b
 auteur: ghald
 createdAt: '2026-02-04T00:51:50.602+00:00'
-updatedAt: '2026-04-07T10:32:27.726+00:00'
+updatedAt: '2026-04-07T10:39:51.215+00:00'
 createdBy: 68975cbc002469058f8b
 teams: []
 status: public

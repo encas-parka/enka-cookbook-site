@@ -131,7 +131,7 @@
     if (recipeId && !loaded && isLoading) {
       recipesStore
         .getRecipeByUuid(recipeId)
-        .then(async (data) => {
+        .then((data) => {
           if (data) {
             recipe = transformStoreDataToForm(data, {
               $createdAt: data.$createdAt,
@@ -141,9 +141,6 @@
             lockedBy = data.lockedBy || null;
             loaded = true;
             isLoading = false;
-
-            // Acquérir le verrou après chargement
-            await acquireLock();
           } else {
             toastService.error("Recette introuvable");
             navigate("/recipe");
@@ -160,10 +157,26 @@
     }
   });
 
+  // FIXIT: la reaquisition du lock ne fonctionne pas
   // Capturer le snapshot initial quand la recette est chargée
   $effect(() => {
     if (recipe && loaded && !initialRecipeSnapshot) {
       initialRecipeSnapshot = createRecipeSnapshot(recipe);
+    }
+  });
+
+  // Synchroniser le lock depuis le store (realtime)
+  $effect(() => {
+    if (!recipeId || !loaded) return;
+    lockedBy = recipesStore.getRecipeIndexByUuid(recipeId)?.lockedBy || null;
+  });
+
+  // Acquérir le lock quand il est disponible et non détenu
+  $effect(() => {
+    if (loaded && !isLockedByOthers && !isLockedByMe) {
+      acquireLock().catch((err) =>
+        console.error("[RecipeEditPage] Auto-acquire lock failed:", err),
+      );
     }
   });
 

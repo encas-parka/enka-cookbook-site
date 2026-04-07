@@ -293,23 +293,46 @@ export async function updateRecipeAppwrite(
     const updateData = {
       ...data,
       check: data.check ?? false,
-      // createdBy est requis pour la création (upsert)
       createdBy: data.createdBy || userId,
-      // Date au format Appwrite si fournie
       ...(data.publishedAt && { publishedAt: data.publishedAt }),
     };
 
-    const recipe = await tables.upsertRow({
-      databaseId: config.databaseId,
-      tableId: RECIPES_COLLECTION_ID,
-      rowId: uuid,
-      data: updateData,
-    });
+    // updateRow préserve les permissions existantes (contrairement à upsertRow
+    // qui envoie permissions:null et fait échouer la requête avec TablesDB)
+    let recipe;
+    try {
+      recipe = await tables.updateRow({
+        databaseId: config.databaseId,
+        tableId: RECIPES_COLLECTION_ID,
+        rowId: uuid,
+        data: updateData,
+      });
+      console.log(`[appwrite-recipes] Recipe updated: ${uuid}`);
+    } catch (error: any) {
+      // Si la recette n'existe pas encore, la créer
+      if (error?.code === 404) {
+        const ownerId = data.createdBy || userId || "";
+        const permissions = [
+          Permission.read(Role.users()),
+          Permission.update(Role.user(ownerId)),
+          Permission.delete(Role.user(ownerId)),
+        ];
+        recipe = await tables.createRow({
+          databaseId: config.databaseId,
+          tableId: RECIPES_COLLECTION_ID,
+          rowId: uuid,
+          data: updateData,
+          permissions,
+        });
+        console.log(`[appwrite-recipes] Recipe created (fallback): ${uuid}`);
+      } else {
+        throw error;
+      }
+    }
 
-    console.log(`[appwrite-recipes] Recipe upserted: ${uuid}`);
     return recipe as unknown as Recettes;
   } catch (error) {
-    console.error(`[appwrite-recipes] Error upserting recipe ${uuid}:`, error);
+    console.error(`[appwrite-recipes] Error updating recipe ${uuid}:`, error);
     throw error;
   }
 }

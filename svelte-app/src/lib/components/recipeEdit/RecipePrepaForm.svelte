@@ -19,6 +19,26 @@
   let { recipe = $bindable(), validationErrors, canEdit }: Props = $props();
 </script>
 
+<div class="alert alert-info mb-4">
+  <span>
+    <ul class="mt-1 list-disc pl-5 text-sm">
+      <li>
+        <strong
+          >Ne renseignez pas de quantités dans les préparations ni dans les
+          notes des ingrédients
+        </strong>: ces données ne sont pas ajustées lorsque le nombre de
+        couverts est modifié.
+      </li>
+      <li>
+        Privilégiez les quantités en gramme (g), kilogramme (kg), litre (L) et
+        millilitre (mL) plutôt que les unités imprécises (notamment « unité »
+        pour les fruits et légumes, dont les tailles et poids varient souvent du
+        simple au double).
+      </li>
+    </ul>
+  </span>
+</div>
+
 <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
   <!-- Ingrédients -->
   <div
@@ -60,6 +80,7 @@
             bind:value={recipe.preparation}
             error={validationErrors.preparation}
             placeholder="Décrivez les étapes de préparation..."
+            disabled={!canEdit}
           />
         </div>
         <div>
@@ -70,6 +91,7 @@
               bind:value={recipe.preparation24h}
               error={validationErrors.preparation24h}
               placeholder="Étapes à réaliser avant le jour j..."
+              disabled={!canEdit}
             />
           </div>
           <p class="text-end text-xs italic opacity-60">

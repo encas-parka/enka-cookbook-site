@@ -19,6 +19,7 @@
     label?: string;
     error?: string;
     id?: string;
+    disabled?: boolean;
   }
 
   let {
@@ -27,6 +28,7 @@
     label,
     error,
     id,
+    disabled = false,
   }: Props = $props();
 
   let element = $state<HTMLElement | null>(null);
@@ -42,6 +44,7 @@
     if (element) {
       editor = new Editor({
         element,
+        editable: !disabled,
         extensions: [
           StarterKit.configure({
             // On peut désactiver ce dont on n'a pas besoin
@@ -84,6 +87,16 @@
     }
   });
 
+  // Bascule le mode édition du TipTap editor selon le prop disabled
+  $effect(() => {
+    if (editor) {
+      const shouldBeEditable = !disabled;
+      if (shouldBeEditable !== editor.isEditable) {
+        editor.setEditable(shouldBeEditable);
+      }
+    }
+  });
+
   // NOTE: Pas besoin de $effect pour la synchronisation descendante
   // value utilise $bindable() qui gère déjà la synchro automatiquement
   // Un $effect ici créerait une boucle infinie avec onUpdate -> onTransaction -> updateTrigger
@@ -97,8 +110,10 @@
   {/if}
 
   <div
-    class="bg-base-100 overflow-hidden rounded-lg border-2 transition-all"
-    class:border-primary={isFocused}
+    class="bg-base-100 overflow-hidden rounded-lg border-2 transition-all {disabled
+      ? 'pointer-events-none opacity-60'
+      : ''}"
+    class:border-primary={isFocused && !disabled}
     class:border-error={error}
     class:border-base-300={!isFocused && !error}
   >

@@ -1,6 +1,6 @@
 ---
 title: Upsertrow
-date: '2026-04-06T19:48:52.377Z'
+date: '2026-04-07T07:24:59.154Z'
 draft: true
 typeR: entree
 categories:
@@ -14,7 +14,7 @@ quantite_desc: null
 check: false
 cuisson: true
 serveHot: false
-description: null
+description: tt
 region: null
 saison: []
 id: upsertrow_pppznm8i15ry
@@ -32,14 +32,14 @@ ingredients:
 preparation: pouet
 prepAlt: []
 astuces: []
-preparation24h: null
+preparation24h: ''
 permissionWrite:
   - 68975cbc002469058f8b
   - 693200b700222efe46a2
 auteur: ghald
 createdAt: '2026-04-06T19:48:39.647+00:00'
-updatedAt: '2026-04-06T19:48:52.138+00:00'
-createdBy: 68975cbc002469058f8b
+updatedAt: '2026-04-07T07:24:55.438+00:00'
+createdBy: 693200b700222efe46a2
 teams: []
 status: public
 rootRecipeId: null

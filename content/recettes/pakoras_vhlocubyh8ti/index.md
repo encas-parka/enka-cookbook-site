@@ -1,6 +1,6 @@
 ---
 title: Pakoras
-date: '2026-04-07T13:41:23.567Z'
+date: '2026-04-07T13:42:16.432Z'
 draft: true
 typeR: plat
 categories:
@@ -86,6 +86,7 @@ ingredients:
     type: epices
 preparation: |-
   - Mélanger la farine avec toutes les épices. Saler. Ajouter de l'eau afin d'obtenir une pâte à beignets épaisse.
+  - râper l'ail et l'ajouter à la pâte
   - Couper l'aubergine en fine tranche
   - Tremper les tranches d'aubergine dans la pâte. Former des beignets et les plonger dans le bain de friture quelques minutes en les retournant pour que les légumes puissent cuire.
 prepAlt: []
@@ -93,11 +94,11 @@ astuces: []
 preparation24h: null
 permissionWrite:
   - 698a40da4679cd55596b
-auteur: null
+auteur: mara
 createdAt: '2026-04-07T13:41:19.249+00:00'
-updatedAt: '2026-04-07T13:41:19.249+00:00'
+updatedAt: '2026-04-07T13:42:16.111+00:00'
 createdBy: 698a40da4679cd55596b
-teams: null
+teams: []
 status: public
 rootRecipeId: null
 versionLabel: null

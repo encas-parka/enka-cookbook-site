@@ -1,6 +1,6 @@
 ---
 title: Chorba végé sans gluten
-date: "2026-02-15T18:34:59.017Z"
+date: '2026-04-08T10:25:12.255Z'
 draft: false
 typeR: plat
 categories:
@@ -26,7 +26,7 @@ ingredients:
     originalUnit: l.
     normalizedQuantity: 3000
     normalizedUnit: ml
-    comment: ""
+    comment: ''
     allergens: []
     type: autres
     pF: false
@@ -37,7 +37,7 @@ ingredients:
     originalUnit: gr.
     normalizedQuantity: 10
     normalizedUnit: gr.
-    comment: ""
+    comment: ''
     allergens: []
     type: epices
     pF: false
@@ -48,7 +48,7 @@ ingredients:
     originalUnit: gr.
     normalizedQuantity: 8
     normalizedUnit: gr.
-    comment: ""
+    comment: ''
     allergens: []
     type: epices
     pF: false
@@ -59,7 +59,7 @@ ingredients:
     originalUnit: gr.
     normalizedQuantity: 30
     normalizedUnit: gr.
-    comment: ""
+    comment: ''
     allergens:
       - Moutarde
     type: epices
@@ -71,7 +71,7 @@ ingredients:
     originalUnit: bottes
     normalizedQuantity: 0.5
     normalizedUnit: bottes
-    comment: ""
+    comment: ''
     allergens: []
     type: epices
     pF: true
@@ -82,7 +82,7 @@ ingredients:
     originalUnit: bottes
     normalizedQuantity: 1
     normalizedUnit: bottes
-    comment: ""
+    comment: ''
     allergens: []
     type: epices
     pF: true
@@ -93,7 +93,7 @@ ingredients:
     originalUnit: gr.
     normalizedQuantity: 100
     normalizedUnit: gr.
-    comment: ""
+    comment: ''
     allergens: []
     type: epices
     pF: false
@@ -104,7 +104,7 @@ ingredients:
     originalUnit: gr.
     normalizedQuantity: 800
     normalizedUnit: gr.
-    comment: ""
+    comment: ''
     allergens: []
     type: epices
     pF: false
@@ -115,7 +115,7 @@ ingredients:
     originalUnit: gr.
     normalizedQuantity: 140
     normalizedUnit: gr.
-    comment: ""
+    comment: ''
     allergens:
       - Céleri
     type: legumes
@@ -127,7 +127,7 @@ ingredients:
     originalUnit: gr.
     normalizedQuantity: 500
     normalizedUnit: gr.
-    comment: ""
+    comment: ''
     allergens: []
     type: legumes
     pF: true
@@ -138,7 +138,7 @@ ingredients:
     originalUnit: gr.
     normalizedQuantity: 600
     normalizedUnit: gr.
-    comment: ""
+    comment: ''
     allergens: []
     type: legumes
     pF: true
@@ -149,16 +149,16 @@ ingredients:
     originalUnit: ml
     normalizedQuantity: 100
     normalizedUnit: ml
-    comment: ""
+    comment: ''
     allergens: []
     type: lof
     pF: false
     pS: false
   - uuid: 6a8w8k
     name: Pois chiches
-    originalQuantity: 400
+    originalQuantity: 300
     originalUnit: gr.
-    normalizedQuantity: 400
+    normalizedQuantity: 300
     normalizedUnit: gr.
     comment: secs
     allergens: []
@@ -171,18 +171,22 @@ ingredients:
     originalUnit: gr.
     normalizedQuantity: 300
     normalizedUnit: gr.
-    comment: ""
+    comment: ''
     allergens: []
     type: legumes
+    pF: false
+    pS: false
   - uuid: mesg7t
     name: Nouilles de riz
     originalQuantity: 150
     originalUnit: gr.
     normalizedQuantity: 150
     normalizedUnit: gr.
-    comment: ""
+    comment: ''
     allergens: []
     type: sec
+    pF: false
+    pS: false
 preparation: |-
   Eplucher et émincer les carottes et les navets. Emincer les branches de céleri. Mettre le tout dans un saladier. Réserver.
 
@@ -206,11 +210,13 @@ astuces: []
 preparation24h: Faire tremper les pois chiche la veille.
 permissionWrite:
   - 6931ecdccd2c8d8d15e5
-createdAt: "2026-02-15T18:03:44.319+00:00"
-updatedAt: "2026-02-27T02:00:00.000+00:00"
+auteur: null
+createdAt: '2026-02-15T18:03:44.319+00:00'
+updatedAt: '2026-04-08T10:25:10.735+00:00'
 createdBy: 6931ecdccd2c8d8d15e5
-teams: []
+teams: null
 status: public
 rootRecipeId: chorba-agneau-et-langu_duj2ar8i9twp
-versionLabel: "v3 - "
+versionLabel: 'v3 - '
 ---
+

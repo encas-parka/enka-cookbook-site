@@ -272,7 +272,7 @@
   </div>
 {/snippet}
 
-<div class="bg-base-200" in:fade>
+<div class="overflow-x-hidden bg-base-200" in:fade>
   <!-- LeftPanel avec recherche et sommaire -->
   <div class="print:hidden">
     <LeftPanel>

@@ -306,7 +306,7 @@
   </button>
 {/snippet}
 
-<div class="mx-auto mt-4 max-w-6xl px-2">
+<div class="mx-auto mt-4 max-w-6xl overflow-x-hidden px-2">
   <div class="flex gap-4">
     <!-- Filtres (desktop: sidebar fixe) -->
     <LeftPanel>
@@ -331,7 +331,7 @@
           </h2>
         </div>
         {#if canEdit}
-          <div class="flex gap-2">
+          <div class="flex flex-wrap justify-end gap-2">
             {#if myTeams.length > 0}
               {#if myTeams.length === 1}
                 <button

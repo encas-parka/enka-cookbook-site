@@ -314,7 +314,7 @@ Modal de récapitulatif des dépenses
 
       <!-- Purchases Table (Desktop) -->
       {#if !globalState.isMobile}
-        <div class="bg-base-100 border-base-200 rounded-lg border">
+        <div class="bg-base-100 border-base-200 overflow-x-auto rounded-lg border">
           <table class="table-zebra table-xs table w-full">
             <thead class="bg-base-200 sticky top-0">
               <tr>

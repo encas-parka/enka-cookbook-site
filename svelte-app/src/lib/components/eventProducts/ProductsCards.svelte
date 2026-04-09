@@ -302,6 +302,7 @@
         </div>
       {/if}
 
+      <div class="overflow-x-auto">
       <table class="table-compact table w-full border-collapse">
         <thead>
           <tr class="border-b border-gray-400 bg-gray-100 text-left">
@@ -406,6 +407,7 @@
           {/each}
         </tbody>
       </table>
+      </div>
     </div>
   {/each}
 </div>

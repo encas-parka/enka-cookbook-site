@@ -67,12 +67,11 @@
       type="number"
       min="0"
       step="1"
-      bind:value={
-        () => quantity,
-        (v) => {
-          if (v !== undefined && v >= 0) onchange(v);
-        }
-      }
+      value={quantity}
+      oninput={(e) => {
+        const v = parseInt(e.currentTarget.value);
+        if (!isNaN(v) && v >= 0) onchange(v);
+      }}
       class="quantity-input input input-xs w-14 text-center font-semibold tabular-nums {isActive
         ? 'input-primary'
         : ''}"

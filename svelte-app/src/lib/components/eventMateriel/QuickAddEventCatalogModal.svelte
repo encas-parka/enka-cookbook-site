@@ -98,7 +98,10 @@
   const hasSelection = $derived(summary.itemCount > 0);
 
   function setQuantity(itemName: string, qty: number) {
-    quantities[itemName] = qty;
+    quantities = {
+      ...quantities,
+      [itemName]: qty,
+    };
   }
 
   const iconMap: Record<string, any> = {
@@ -129,6 +132,8 @@
   async function handleSubmit() {
     if (!hasChanges || loading) return;
 
+    console.log("[QuickAdd] Start submit. Quantities:", quantities);
+
     loading = true;
 
     try {
@@ -136,14 +141,18 @@
       let updated = 0;
       let deleted = 0;
 
+      const entries = Object.entries(quantities);
+      console.log(`[QuickAdd] Processing ${entries.length} entries`);
+
       // Ne traiter que les items modifiés (présents dans quantities)
-      for (const [itemName, newQty] of Object.entries(quantities)) {
+      for (const [itemName, newQty] of entries) {
         const item = MATERIEL_CATALOG.find((i) => i.name === itemName);
         if (!item) continue;
 
         const unsourced = unsourcedByCatalogName[itemName];
 
         if (!unsourced && newQty > 0) {
+          console.log(`[QuickAdd] Creating: ${itemName} (qty: ${newQty})`);
           // Créer un nouvel item
           const data: CreateEventMaterielData = {
             eventId,
@@ -157,6 +166,7 @@
           const oldQty = unsourced.quantity;
 
           if (newQty > 0 && newQty !== oldQty) {
+            console.log(`[QuickAdd] Updating: ${itemName} (${oldQty} -> ${newQty})`);
             // Mettre à jour la quantité
             await eventMaterielStore.updateItem(unsourced.ids[0], {
               quantity: newQty,
@@ -168,16 +178,17 @@
               deleted++;
             }
           } else if (newQty === 0) {
+            console.log(`[QuickAdd] Deleting: ${itemName}`);
             // Supprimer tous les items (quantité passée à 0)
             for (const id of unsourced.ids) {
               await eventMaterielStore.deleteItem(id);
               deleted++;
             }
           }
-          // Si newQty === oldQty, ne rien faire (pas de modification)
         }
       }
 
+      console.log(`[QuickAdd] Final: ${created} created, ${updated} updated, ${deleted} deleted`);
       const parts: string[] = [];
       if (created > 0) parts.push(`${created} ajouté${created > 1 ? "s" : ""}`);
       if (updated > 0) parts.push(`${updated} mis à jour`);

@@ -118,8 +118,8 @@
   }
 </script>
 
-<link rel="stylesheet" href="/fonts/fredoka.css" />
-<link rel="stylesheet" href="/fonts/sora.css" />
+<link rel="stylesheet" href="/app/fonts/fredoka.css" />
+<link rel="stylesheet" href="/app/fonts/sora.css" />
 
 <div class="flex min-h-dvh flex-col">
   <div class="bg-base-200 flex-1">

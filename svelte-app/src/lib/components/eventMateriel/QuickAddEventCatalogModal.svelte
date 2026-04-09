@@ -136,11 +136,15 @@
       let updated = 0;
       let deleted = 0;
 
-      for (const item of MATERIEL_CATALOG) {
-        const newQty = quantities[item.name] ?? 0;
-        const unsourced = unsourcedByCatalogName[item.name];
+      // Ne traiter que les items modifiés (présents dans quantities)
+      for (const [itemName, newQty] of Object.entries(quantities)) {
+        const item = MATERIEL_CATALOG.find((i) => i.name === itemName);
+        if (!item) continue;
+
+        const unsourced = unsourcedByCatalogName[itemName];
 
         if (!unsourced && newQty > 0) {
+          // Créer un nouvel item
           const data: CreateEventMaterielData = {
             eventId,
             name: item.name,
@@ -150,21 +154,27 @@
           await eventMaterielStore.addItem(data, globalState.userId || "");
           created++;
         } else if (unsourced) {
-          if (newQty > 0 && newQty !== unsourced.quantity) {
+          const oldQty = unsourced.quantity;
+
+          if (newQty > 0 && newQty !== oldQty) {
+            // Mettre à jour la quantité
             await eventMaterielStore.updateItem(unsourced.ids[0], {
               quantity: newQty,
             });
             updated++;
+            // Supprimer les doublons s'il y en a
             for (let i = 1; i < unsourced.ids.length; i++) {
               await eventMaterielStore.deleteItem(unsourced.ids[i]);
               deleted++;
             }
           } else if (newQty === 0) {
+            // Supprimer tous les items (quantité passée à 0)
             for (const id of unsourced.ids) {
               await eventMaterielStore.deleteItem(id);
               deleted++;
             }
           }
+          // Si newQty === oldQty, ne rien faire (pas de modification)
         }
       }
 

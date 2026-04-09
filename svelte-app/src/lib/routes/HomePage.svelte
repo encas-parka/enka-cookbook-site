@@ -190,10 +190,7 @@
 </script>
 
 <svelte:head>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Cherry+Bomb+One&display=swap"
-    rel="stylesheet"
-  />
+  <link rel="stylesheet" href="/app/fonts/cherry-bomb-one.css" />
 </svelte:head>
 
 <div class="bg-base-200">

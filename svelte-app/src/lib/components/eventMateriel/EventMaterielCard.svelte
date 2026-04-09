@@ -121,9 +121,7 @@
       <div class="flex min-w-0 flex-wrap items-center gap-x-4 gap-y-1">
         <div class="flex flex-wrap items-center gap-x-4 gap-y-0">
           <div class="flex items-center gap-2">
-            <div
-              class="text-primary group-hover:text-primary/80 text-base font-semibold transition-colors"
-            >
+            <div class=" text-base font-medium">
               {item.name}
             </div>
             {#if item.quantity > 1}

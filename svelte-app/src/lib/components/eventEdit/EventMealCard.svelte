@@ -466,7 +466,9 @@
                   </div>
 
                   <!-- Contrôles d'édition -->
-                  <div class="me-10 flex items-center gap-2">
+                  <div
+                    class="ms-auto me-10 flex items-center justify-items-end gap-2"
+                  >
                     <!-- Type -->
                     <select class="select w-28" bind:value={recipe.typeR}>
                       <option value="entree">Entrée</option>

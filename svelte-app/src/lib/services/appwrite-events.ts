@@ -34,7 +34,7 @@ export async function listEvents(
   return safeOperation(
     async () => {
       const { tables } = await getAppwriteInstances();
-      const queries = [Query.orderDesc("dateStart")];
+      const queries = [Query.orderDesc("dateStart"), Query.limit(100)];
 
       // Ajouter le filtre de date si minDate est fourni
       if (minDate) {

@@ -127,7 +127,7 @@ export async function listUpdatedRecipes(since: string): Promise<Recettes[]> {
   try {
     const { tables, config } = await getAppwriteInstances();
 
-    const queries = [Query.greaterThan("$updatedAt", since), Query.limit(200)];
+    const queries = [Query.greaterThan("$updatedAt", since), Query.limit(500)];
 
     const response = await tables.listRows({
       databaseId: config.databaseId,

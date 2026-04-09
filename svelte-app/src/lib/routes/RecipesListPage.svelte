@@ -11,9 +11,8 @@
   import { recipeDataStore } from "$lib/stores/RecipeDataStore.svelte";
   import { navBarStore } from "../stores/NavBarStore.svelte";
   import { PlusIcon } from "@lucide/svelte";
-  import { navigate, p, route } from "$lib/router";
+  import { navigate, p, route, searchParams } from "$lib/router";
   import { globalState } from "../stores/GlobalState.svelte";
-  import { onDestroy } from "svelte";
   import { fade } from "svelte/transition";
   import { flip } from "svelte/animate";
 
@@ -30,7 +29,7 @@
     scope: "all" | "mine" | "drafts";
   }
 
-  let searchQuery = $state("");
+  let searchQuery = $state(String(searchParams.get("q") ?? ""));
   let filters = $state<Filters>({
     categories: [],
     regimes: [],
@@ -39,7 +38,7 @@
     saison: "",
     testedStatus: "all",
     ingredients: [],
-    typeR: "",
+    typeR: String(searchParams.get("type") ?? ""),
     scope: "all",
   });
 
@@ -214,6 +213,13 @@
   // Reset fonctions
   function resetSearch() {
     searchQuery = "";
+    searchParams.delete("q");
+  }
+
+  function updateSearchQuery(value: string) {
+    searchQuery = value;
+    if (value) searchParams.set("q", value);
+    else searchParams.delete("q");
   }
 
   function resetFilters() {
@@ -228,6 +234,14 @@
       typeR: "",
       scope: filters.scope, // Garder le scope actuel lors du reset des filtres techniques
     };
+    searchParams.delete("type");
+  }
+
+  // Helper pour mettre à jour typeR + sync URL
+  function setTypeR(value: string) {
+    filters.typeR = value;
+    if (value) searchParams.set("type", value);
+    else searchParams.delete("type");
   }
 
   // Lazy loading avec Intersection Observer
@@ -287,13 +301,23 @@
     });
   });
 
-  onMount(async () => {
+  onMount(() => {
     // Note: recipesStore est déjà initialisé via App.svelte (loadCache + syncFromRemote)
 
     // recipeDataStore est initialisé à la demande (pas global)
     if (!recipeDataStore.isInitialized) {
-      await recipeDataStore.initialize();
+      recipeDataStore.initialize();
     }
+
+    // Gestion du bouton back/forward du navigateur
+    const handleHashChange = () => {
+      const urlQ = String(searchParams.get("q") ?? "");
+      const urlType = String(searchParams.get("type") ?? "");
+      if (searchQuery !== urlQ) searchQuery = urlQ;
+      if (filters.typeR !== urlType) filters.typeR = urlType;
+    };
+    window.addEventListener("hashchange", handleHashChange);
+    return () => window.removeEventListener("hashchange", handleHashChange);
   });
 </script>
 
@@ -319,7 +343,7 @@
 </LeftPanel>
 
 <!-- Contenu principal -->
-<div class="relative z-0 p-4 lg:ml-120" in:fade>
+<div class="relative z-0 p-4 lg:ml-100" in:fade>
   <div class="mx-auto h-full max-w-4xl">
     <!-- header -->
     <div class="mb-10 space-y-6">
@@ -327,25 +351,25 @@
       <div class="tabs tabs-border tabs-lg mb-6 flex-wrap font-bold">
         <button
           class="tab {filters.typeR === '' ? 'tab-active' : ''}"
-          onclick={() => (filters.typeR = "")}
+          onclick={() => setTypeR("")}
         >
           Toutes
         </button>
         <button
           class="tab {filters.typeR === 'entree' ? 'tab-active' : ''}"
-          onclick={() => (filters.typeR = "entree")}
+          onclick={() => setTypeR("entree")}
         >
           Entrées
         </button>
         <button
           class="tab {filters.typeR === 'plat' ? 'tab-active' : ''}"
-          onclick={() => (filters.typeR = "plat")}
+          onclick={() => setTypeR("plat")}
         >
           Plats
         </button>
         <button
           class="tab {filters.typeR === 'dessert' ? 'tab-active' : ''}"
-          onclick={() => (filters.typeR = "dessert")}
+          onclick={() => setTypeR("dessert")}
         >
           Desserts
         </button>
@@ -353,7 +377,11 @@
 
       <!-- Barre de recherche -->
       <div class="mb-4">
-        <RecipeSearchBar bind:searchQuery onReset={resetSearch} />
+        <RecipeSearchBar
+          {searchQuery}
+          onUpdate={updateSearchQuery}
+          onReset={resetSearch}
+        />
       </div>
       <!-- Résumé des filtres actifs -->
       <div class="mb-6">

@@ -24,6 +24,7 @@ import type { Models } from "appwrite";
 export interface MaterielCacheMetadata {
   lastSyncMateriel: string | null;
   lastSyncLoans: string | null;
+  syncVersion?: number;
 }
 
 export interface MaterielIDBCache {
@@ -67,6 +68,7 @@ class MaterielIndexedDBCache implements MaterielIDBCache {
   // Clés pour les métadonnées
   private readonly LAST_SYNC_MATERIEL_KEY = "lastSyncMateriel";
   private readonly LAST_SYNC_LOANS_KEY = "lastSyncLoans";
+  private readonly SYNC_VERSION_KEY = "syncVersion";
 
   /**
    * Ouvre/crée la base IndexedDB
@@ -365,6 +367,8 @@ class MaterielIndexedDBCache implements MaterielIDBCache {
             metadata.lastSyncMateriel = entry.value;
           if (entry.key === this.LAST_SYNC_LOANS_KEY)
             metadata.lastSyncLoans = entry.value;
+          if (entry.key === this.SYNC_VERSION_KEY)
+            metadata.syncVersion = entry.value;
         });
 
         console.log(
@@ -395,6 +399,12 @@ class MaterielIndexedDBCache implements MaterielIDBCache {
         key: this.LAST_SYNC_LOANS_KEY,
         value: metadata.lastSyncLoans,
       });
+      if (metadata.syncVersion !== undefined) {
+        store.put({
+          key: this.SYNC_VERSION_KEY,
+          value: metadata.syncVersion,
+        });
+      }
 
       tx.oncomplete = () => {
         console.log(`[MaterielIDBCache] Metadata sauvegardées`);

@@ -127,7 +127,7 @@
             ? globalState.headerVisible
               ? 'top-12'
               : 'top-0'
-            : 'top-13 rounded-lg'} z-2 flex flex-wrap items-center justify-between px-4 py-2 shadow-md transition-all duration-300 @md:flex-nowrap print:shadow-none {isVisible
+            : 'top-12 rounded-lg'} z-2 flex flex-wrap items-center justify-between gap-y-1 px-4 py-0.5 shadow-md transition-all duration-300 sm:py-2 @md:flex-nowrap print:shadow-none {isVisible
             ? 'opacity-100'
             : 'pointer-events-none opacity-0'}"
         >
@@ -188,7 +188,9 @@
 
           <!-- Actions groupées -->
           {#if shouldShowActionButtons}
-            <div class="ms-auto flex flex-wrap items-center justify-end gap-2">
+            <div
+              class="ms-auto mt-1 flex flex-wrap items-center justify-end gap-2"
+            >
               <button
                 class="btn btn-xs md:btn-sm btn-primary btn-soft"
                 onclick={() =>

@@ -37,6 +37,21 @@ export function getProductTypeInfo(type: string) {
   }
 }
 
+export const TYPE_LABEL_TO_KEY: Record<string, string> = {
+  "Produits Sec": "sec",
+  "Viandes et Poissons": "animaux",
+  "Fruits et Légumes": "legumes",
+  Sucrées: "sucres",
+  "L.O.F": "lof",
+  Autres: "autres",
+  Assaisonnements: "epices",
+  "Produits Frais": "frais",
+};
+
+export function getProductTypeRawKey(displayName: string): string {
+  return TYPE_LABEL_TO_KEY[displayName] ?? displayName;
+}
+
 // Import des fonctions de formatage depuis QuantityFormatter
 import { convertAndFormatQuantity } from "./QuantityFormatter";
 

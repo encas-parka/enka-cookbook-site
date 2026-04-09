@@ -18,6 +18,7 @@
     SoapDispenserDroplet,
     FireExtinguisher,
     Flame,
+    Pencil,
   } from "@lucide/svelte";
   import type { EnrichedMateriel } from "$lib/types/materiel.types";
   import type { MaterielStatus } from "$lib/types/appwrite";
@@ -138,7 +139,7 @@
 </script>
 
 <div
-  class="card card-side bg-base-100 border-base-200 hover:border-primary/50 group cursor-pointer border text-left shadow-sm transition-all hover:shadow-md"
+  class="card card-side card-xs bg-base-100 border-base-200 hover:border-primary/50 group cursor-pointer border text-left shadow-sm transition-all hover:shadow-md"
   role="button"
   tabindex="0"
   onclick={() => canEdit && onEdit?.(materiel.$id)}
@@ -150,13 +151,15 @@
   }}
 >
   <!-- Image/Icon placeholder -->
-  <div class="hidden pl-4 sm:flex sm:items-center">
-    <div class="{getMaterielTypeBgClass(materiel.type)} rounded-lg p-3">
-      <TypeIcon class="{getMaterielTypeColorClass(materiel.type)} h-6 w-6" />
+  <div class="flex items-center p-2 sm:pl-4">
+    <div class="{getMaterielTypeBgClass(materiel.type)} rounded-lg p-1 sm:p-3">
+      <TypeIcon
+        class="{getMaterielTypeColorClass(materiel.type)} size-4 sm:size-6"
+      />
     </div>
   </div>
 
-  <div class="card-body py-3">
+  <div class="card-body">
     <div
       class="flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between"
     >
@@ -276,22 +279,21 @@
           </div>
         {/if}
       </div>
-
-      <!-- Actions -->
-      <div class="flex items-center justify-end">
-        {#if canEdit}
-          <button
-            class="btn btn-ghost btn-xs text-primary"
-            onclick={(e) => {
-              e.stopPropagation();
-              onEdit?.(materiel.$id);
-            }}
-            aria-label="Éditer"
-          >
-            <Edit class="h-4 w-4" />
-          </button>
-        {/if}
-      </div>
     </div>
   </div>
+  <!-- Actions -->
+  {#if canEdit}
+    <div class="flex items-center p-2">
+      <button
+        class="btn btn-ghost btn-xs text-primary"
+        onclick={(e) => {
+          e.stopPropagation();
+          onEdit?.(materiel.$id);
+        }}
+        aria-label="Éditer"
+      >
+        <Pencil class="h-4 w-4" />
+      </button>
+    </div>
+  {/if}
 </div>

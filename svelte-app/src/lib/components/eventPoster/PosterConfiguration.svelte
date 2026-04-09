@@ -53,7 +53,7 @@
   }
 </script>
 
-<div class="bg-base-200 h-full w-full space-y-6 pt-10 sm:pt-16">
+<div class="bg-base-200 h-full w-full space-y-6 sm:pt-16">
   <!-- Display Options -->
   <Fieldset legend="Éléments à afficher">
     <!-- Display Checkbox Component: Date -->

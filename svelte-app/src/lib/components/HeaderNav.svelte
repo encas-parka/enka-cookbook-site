@@ -4,24 +4,34 @@
   import { globalState } from "../stores/GlobalState.svelte";
   import { navBarStore } from "../stores/NavBarStore.svelte";
   import { recipesStore } from "../stores/RecipesStore.svelte";
-  import DocumentTabs from "./documents/DocumentTabs.svelte";
+  import { eventsStore } from "../stores/EventsStore.svelte";
+  import { nativeTeamsStore } from "../stores/NativeTeamsStore.svelte";
   import EventTabs from "./eventEdit/EventTabs.svelte";
-  import MaterielTabs from "./MaterielTabs.svelte";
+  import {
+    allEventTabs,
+    getEventActiveIndex,
+    getEventTabPath,
+  } from "./eventEdit/event-tabs-config";
   import InstallButton from "./ui/InstallButton.svelte";
 
   import {
     BookOpenIcon,
+    Calendar,
+    ChevronDown,
     CookingPot,
     DatabaseIcon,
     LayoutDashboardIcon,
     LockIcon,
     LogInIcon,
     LogOutIcon,
+    Package,
     PlusIcon,
     RefreshCwIcon,
     UserIcon,
-    UsersIcon,
+    Users,
   } from "@lucide/svelte";
+
+  import { formatDateShort } from "$lib/utils/products-display";
 
   let showDropdown = $state(false);
   let isReloading = $state(false);
@@ -130,12 +140,99 @@
     return null;
   });
 
+  // ---------------------------------------------------------------------------
+  // Event tabs context helper (pour le dropdown navbar)
+  // ---------------------------------------------------------------------------
+  const eventContext = $derived(
+    context?.type === "eventEdit" ||
+      context?.type === "eventDocumentEdit" ||
+      context?.type === "eventDocumentCreate"
+      ? {
+          eventId: context.eventId,
+          basePath: context.type === "eventEdit" ? context.basePath : "/event",
+        }
+      : null,
+  );
+
+  const eventActiveIdx = $derived(
+    eventContext ? getEventActiveIndex(route.pathname) : -1,
+  );
+
+  const eventActiveTab = $derived(
+    eventActiveIdx >= 0 ? allEventTabs[eventActiveIdx] : null,
+  );
+
+  const eventOtherTabs = $derived(
+    eventActiveIdx >= 0
+      ? allEventTabs.filter((_, i) => i !== eventActiveIdx)
+      : [],
+  );
+
+  const eventTitle = $derived(
+    eventContext ? eventsStore.getEventById(eventContext.eventId)?.name : null,
+  );
+
+  // 2 prochains événements de l'utilisateur (pour le dropdown)
+  const upcomingEvents = $derived(
+    eventsStore.getUpcomingEventsForUser().slice(0, 2),
+  );
+
+  // L'onglet actif a-t-il une LeftPanel ? (recettes=1, produits=2, affiches=5)
+  const hasLeftPanel = $derived(
+    eventActiveIdx === 1 ||
+      eventActiveIdx === 2 ||
+      eventActiveIdx === 4 ||
+      eventActiveIdx === 5,
+  );
+
+  // Obtenir le chemin pour la page matériel
+  function getMaterielPath(): string {
+    const teamId =
+      context?.type === "materiel" || context?.type === "loans"
+        ? context.teamId
+        : null;
+
+    if (teamId) {
+      return `/dashboard/materiel/${teamId}`;
+    }
+
+    const myTeams = nativeTeamsStore.myTeams;
+    if (myTeams.length > 0) {
+      return `/dashboard/materiel/${myTeams[0].$id}`;
+    }
+
+    return "/dashboard/materiel";
+  }
+
+  // Obtenir le chemin pour la page emprunts
+  function getLoansPath(): string {
+    const teamId =
+      context?.type === "materiel" || context?.type === "loans"
+        ? context.teamId
+        : null;
+
+    if (teamId) {
+      return `/dashboard/loans/${teamId}`;
+    }
+
+    const myTeams = nativeTeamsStore.myTeams;
+    if (myTeams.length > 0) {
+      return `/dashboard/loans/${myTeams[0].$id}`;
+    }
+
+    return "/dashboard/loans";
+  }
+
   function toggleDropdown() {
     showDropdown = !showDropdown;
   }
 
   function closeDropdown() {
     showDropdown = false;
+  }
+
+  function closeAllCssDropdowns() {
+    (document.activeElement as HTMLElement)?.blur();
   }
 
   async function handleLogout() {
@@ -213,13 +310,13 @@
 </script>
 
 <div
-  class="navbar bg-base-100 border-base-300 sticky top-0 z-1000 min-h-11 border-b px-4 py-0 shadow-sm transition-transform duration-300 print:hidden {globalState.isMobile &&
+  class="navbar bg-base-100 border-base-300 justify-items-between sticky top-0 z-1000 min-h-11 border-b px-4 py-0 shadow-sm transition-transform duration-300 print:hidden {globalState.isMobile &&
     'min-h-11'}
     {globalState.isMobile && !globalState.headerVisible
     ? '-translate-y-full'
     : ''}"
 >
-  <div class="navbar-start w-fit shrink-0 gap-1">
+  <div class="navbar-start w-fit flex-1 shrink-0 gap-1">
     <!-- Brand -->
     <a href={p("/")} class="btn btn-ghost btn-circle">
       <img src="/images/favicon.png" alt="logo" class="h-8 w-8" />
@@ -257,32 +354,86 @@
     {/if} -->
   </div>
 
-  <!-- navbar-center : SEULEMENT SUR DESKTOP -->
-  {#if globalState.isDesktop}
-    <div class="navbar-center absolute left-1/2 -translate-x-1/2 transform">
-      {#if context?.type === "materiel" || context?.type === "loans"}
-        <MaterielTabs currentTeamId={context.teamId} />
-      {:else if context?.type === "eventEdit" || context?.type === "eventDocumentEdit" || context?.type === "eventDocumentCreate"}
-        <EventTabs
-          eventId={context.eventId}
-          basePath={context && "basePath" in context
-            ? context.basePath
-            : "/event"}
-        />
-      {:else if context?.type === "documentEdit"}
-        <DocumentTabs />
-      {:else}
-        <h1
-          class="font-family-fredoka mx-auto truncate text-sm font-bold tracking-wider uppercase opacity-70"
-          title={navBarStore.title}
+  <!-- navbar-center : onglet actif + dropdown des autres routes -->
+  <div class="navbar-center min-w-0 flex-1 items-center px-2">
+    {#if eventContext && eventActiveTab}
+      <div class="dropdown mx-auto">
+        <div
+          tabindex="0"
+          role="button"
+          class="btn max-sm:btn-sm btn-ghost font-family-fredoka gap-2 font-bold uppercase"
         >
-          {navBarStore.title}
-        </h1>
-      {/if}
-    </div>
-  {/if}
+          {#if globalState.isDesktop && eventTitle}
+            <span class="max-w-28 truncate opacity-70">{eventTitle}</span>
+            <span class="text-xs opacity-40">›</span>
+          {/if}
+          <span class="opacity-80">{eventActiveTab.label}</span>
+          <ChevronDown size={16} class="opacity-50" />
+        </div>
+        <ul
+          class="menu dropdown-content bg-base-100 border-base-200 z-1 mt-3 w-48 rounded-xl border p-2 font-medium shadow-xl"
+        >
+          {#each eventOtherTabs as tab (tab.relativePath)}
+            {@const TabIcon = tab.icon}
+            <li>
+              <a
+                href={getEventTabPath(
+                  tab,
+                  eventContext.eventId,
+                  eventContext.basePath,
+                )}
+                onclick={closeAllCssDropdowns}
+              >
+                <TabIcon size={16} />
+                {tab.label}
+              </a>
+            </li>
+          {/each}
+        </ul>
+      </div>
+    {:else if context?.type === "materiel" || context?.type === "loans"}
+      <!-- Dropdown Matériel/Reservations (pattern events) -->
+      <div class="dropdown mx-auto">
+        <div
+          tabindex="0"
+          role="button"
+          class="btn btn-ghost font-family-fredoka gap-1 font-bold uppercase"
+        >
+          <span class="opacity-80">
+            {context?.type === "loans" ? "Réservations" : "Matériel"}
+          </span>
+          <ChevronDown size={14} class="opacity-50" />
+        </div>
+        <ul
+          class="menu dropdown-content bg-base-100 border-base-200 z-1 mt-3 w-48 rounded-xl border p-2 shadow-xl"
+        >
+          <li>
+            <a href={getMaterielPath()} onclick={closeAllCssDropdowns}>
+              <Package size={16} />
+              Matériel
+            </a>
+          </li>
+          <li>
+            <a href={getLoansPath()} onclick={closeAllCssDropdowns}>
+              <Users size={16} />
+              Réservations
+            </a>
+          </li>
+        </ul>
+      </div>
+    {:else if context?.type === "documentEdit"}
+      <span class="btn btn-sm btn-ghost font-medium">Documents</span>
+    {:else if navBarStore.title}
+      <h1
+        class="font-family-fredoka mx-auto truncate text-sm font-bold tracking-wider uppercase opacity-70"
+        title={navBarStore.title}
+      >
+        {navBarStore.title}
+      </h1>
+    {/if}
+  </div>
 
-  <div class="navbar-end z-10 ms-auto w-fit shrink-0 gap-4 ps-11">
+  <div class="navbar-end z-10 ms-auto w-fit flex-1 shrink-0 gap-4">
     {#if navBarStore.isLockedByOthers}
       <div class="badge badge-warning flex items-center gap-1 py-3 font-medium">
         <LockIcon size={14} />
@@ -299,7 +450,6 @@
     </div>
 
     <!-- User dropdown -->
-    <InstallButton />
     {#if globalState.isAuthenticated}
       <div class="dropdown dropdown-end">
         <div
@@ -314,8 +464,9 @@
           </div>
         </div>
         <ul
-          class="menu dropdown-content bg-base-100 border-base-200 z-1 mt-3 w-56 rounded-xl border p-2 shadow-xl"
+          class="menu dropdown-content bg-base-100 border-base-200 z-1 mt-3 w-60 rounded-xl border p-2 shadow-xl"
         >
+          <!-- Email -->
           <li class="border-base-100 mb-1 border-b px-4 py-2">
             <span
               class="block truncate p-0 text-xs font-medium italic opacity-60"
@@ -323,35 +474,90 @@
               {globalState.user?.email}
             </span>
           </li>
+
+          <!-- Navigation -->
           <li>
-            <a href={p("/dashboard")} class="flex items-center gap-2">
+            <a
+              href={p("/dashboard")}
+              class="flex items-center gap-2"
+              onclick={closeAllCssDropdowns}
+            >
               <LayoutDashboardIcon size={16} /> Dashboard
             </a>
           </li>
           <li>
-            <a href={p("/dashboard/teams")} class="flex items-center gap-2">
-              <UsersIcon size={16} /> Équipes
-            </a>
-          </li>
-          <li>
-            <a href={p("/dashboard/user")} class="flex items-center gap-2">
+            <a
+              href={p("/dashboard/user")}
+              class="flex items-center gap-2"
+              onclick={closeAllCssDropdowns}
+            >
               <UserIcon size={16} /> Mon compte
             </a>
           </li>
+
+          <!-- Création & contenu -->
+          <li class="border-base-100 my-1 border-t"></li>
           <li>
             <a
               href={p("/dashboard/eventCreate")}
               class="flex items-center gap-2"
+              onclick={closeAllCssDropdowns}
             >
               <PlusIcon size={16} /> Nouvel événement
             </a>
           </li>
           <li>
-            <a href={p("/recipe")} class="flex items-center gap-2">
+            <a
+              href={p("/recipe/new")}
+              class="flex items-center gap-2"
+              onclick={closeAllCssDropdowns}
+            >
+              <PlusIcon size={16} /> Nouvelle recette
+            </a>
+          </li>
+          <li>
+            <a
+              href={p("/recipe")}
+              class="flex items-center gap-2"
+              onclick={closeAllCssDropdowns}
+            >
               <BookOpenIcon size={16} /> Recettes
             </a>
           </li>
-          <!-- TODO : add new recipe link -->
+
+          <!-- Prochains événements -->
+          {#if upcomingEvents.length > 0}
+            <li class="border-base-100 my-1 border-t"></li>
+            <li
+              class="pointer-events-none px-4 pt-1 pb-0.5 text-xs font-semibold uppercase opacity-40"
+            >
+              Prochains événements
+            </li>
+            {#each upcomingEvents as event (event.$id)}
+              <li>
+                <a
+                  href={`/event/${event.$id}`}
+                  class="flex items-center gap-2"
+                  onclick={closeAllCssDropdowns}
+                >
+                  <Calendar size={16} class="shrink-0 opacity-60" />
+                  <div class="flex min-w-0 flex-col gap-0.5">
+                    <span class="truncate text-sm" title={event.name}>
+                      {event.name}
+                    </span>
+                    <span class="truncate text-xs opacity-50">
+                      {event.dateStart
+                        ? formatDateShort(event.dateStart)
+                        : "N/A"}
+                    </span>
+                  </div>
+                </a>
+              </li>
+            {/each}
+          {/if}
+
+          <!-- Actions -->
+          <li class="border-base-100 my-1 border-t"></li>
           <li>
             <button
               onclick={handleReloadRecipes}
@@ -366,7 +572,6 @@
             </button>
           </li>
           {#if isDev}
-            <li class="border-base-100 my-1 border-t"></li>
             <li>
               <button
                 onclick={handleRefreshAllStores}
@@ -382,6 +587,7 @@
             </li>
           {/if}
           <li class="border-base-100 my-1 border-t"></li>
+          <li><InstallButton /></li>
           <li>
             <button class="text-error hover:bg-error/10" onclick={handleLogout}
               ><LogOutIcon size={16} /> Se déconnecter</button
@@ -398,29 +604,17 @@
   </div>
 </div>
 
-<!-- SECTION SÉPARÉE : SEULEMENT SUR MOBILE (NON-STICKY) -->
-{#if !globalState.isDesktop}
+<!-- SECTION SOUS NAVBAR : tabs (non-sticky, tout le temps) -->
+{#if eventContext}
   <div
-    class="border-base-300 bg-base-100 h-fit border-b px-4 py-2 print:hidden"
+    class=" h-fit px-4 py-2 print:hidden {globalState.isDesktop && hasLeftPanel
+      ? 'ml-110'
+      : ''}"
   >
-    {#if context?.type === "materiel" || context?.type === "loans"}
-      <MaterielTabs currentTeamId={context.teamId} />
-    {:else if context?.type === "eventEdit" || context?.type === "eventDocumentEdit" || context?.type === "eventDocumentCreate"}
-      <EventTabs
-        eventId={context.eventId}
-        basePath={context && "basePath" in context
-          ? context.basePath
-          : "/event"}
-      />
-    {:else if context?.type === "documentEdit"}
-      <DocumentTabs />
-    {:else if navBarStore.title}
-      <h1
-        class="text-center text-sm font-bold tracking-wider uppercase opacity-70"
-      >
-        {navBarStore.title}
-      </h1>
-    {/if}
+    <EventTabs
+      eventId={eventContext.eventId}
+      basePath={eventContext.basePath}
+    />
   </div>
 {/if}
 

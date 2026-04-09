@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { onMount, onDestroy } from "svelte";
-  import { Plus, Package, LoaderCircle, Users } from "@lucide/svelte";
+  import { onMount } from "svelte";
+  import { Plus, Package, LoaderCircle, Users, ListPlus } from "@lucide/svelte";
   import { materielStore } from "$lib/stores/MaterielStore.svelte";
   import { globalState } from "$lib/stores/GlobalState.svelte";
   import { nativeTeamsStore } from "$lib/stores/NativeTeamsStore.svelte";
@@ -9,6 +9,7 @@
   import MaterielCard from "$lib/components/teamMatos/MaterielCard.svelte";
   import MaterielForm from "$lib/components/teamMatos/MaterielForm.svelte";
   import EditMaterielModal from "$lib/components/teamMatos/EditMaterielModal.svelte";
+  import QuickAddCatalogModal from "$lib/components/teamMatos/QuickAddCatalogModal.svelte";
   import MaterielFilters, {
     type MaterielFiltersType,
   } from "$lib/components/teamMatos/MaterielFilters.svelte";
@@ -20,6 +21,7 @@
   // État de la page
   let showForm = $state(false);
   let createModalOpen = $state(false);
+  let catalogModalOpen = $state(false);
   let editModalMaterielId = $state<string | null>(null);
   let activeTeamId = $state<string | null>(null);
   let isRedirecting = $state(false);
@@ -209,7 +211,7 @@
 </LeftPanel>
 
 <!-- Contenu principal -->
-<div class="p-2 sm:p-4 lg:ml-120" transition:fade>
+<div class="p-2 sm:p-4 lg:ml-110" transition:fade>
   <div class="mx-auto max-w-7xl sm:px-4 sm:py-8">
     <!-- Tabs par équipe (seulement si plus d'une équipe) -->
     {#if userTeams.length > 1}
@@ -235,10 +237,17 @@
 
     <!-- Bouton dépliable pour ajouter du matériel -->
     {#if !showForm}
-      <div class="mb-6 text-end">
-        <button class="btn btn-wide btn-primary" onclick={toggleForm}>
+      <div class="mb-6 flex justify-end gap-2">
+        <button
+          class="btn btn-outline btn-primary"
+          onclick={() => (catalogModalOpen = true)}
+        >
+          <ListPlus class="h-4 w-4" />
+          Catalogue
+        </button>
+        <button class="btn btn-primary" onclick={toggleForm}>
           <Plus class="h-4 w-4" />
-          Ajouter du matériel
+          Ajouter
         </button>
       </div>
     {/if}
@@ -320,3 +329,12 @@
   onClose={closeEditModal}
   onSuccess={handleMaterielUpdated}
 />
+
+{#if activeTeam}
+  <QuickAddCatalogModal
+    isOpen={catalogModalOpen}
+    onClose={() => (catalogModalOpen = false)}
+    teamId={activeTeam.$id}
+    teamName={activeTeam.name}
+  />
+{/if}

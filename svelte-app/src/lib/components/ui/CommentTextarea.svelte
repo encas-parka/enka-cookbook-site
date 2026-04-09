@@ -8,7 +8,7 @@
   let { value = $bindable(), disabled = false, id }: Props = $props();
 </script>
 
-<div class="flex flex-col">
+<div class="flex min-w-0 flex-col">
   <span class="label">Informations complémentaires (optionnel)</span>
 
   <textarea

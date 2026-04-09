@@ -27,6 +27,7 @@
  */
 
 import { SvelteMap } from "svelte/reactivity";
+import { CACHE_SYNC_VERSION } from "$lib/constants/sync";
 import type {
   RecipeIndexEntry,
   RecipeForDisplay,
@@ -162,6 +163,20 @@ class RecipesStore {
       // Charger l'index depuis le cache
       const cachedIndex = await this.#cache.loadRecipesIndex();
       const cachedMetadata = await this.#cache.loadMetadata();
+
+      // Vérifier la version du cache — si obsolète, forcer un full sync Appwrite
+      if (
+        cachedMetadata &&
+        (!cachedMetadata.syncVersion ||
+          cachedMetadata.syncVersion < CACHE_SYNC_VERSION)
+      ) {
+        console.log(
+          `[RecipesStore] Cache syncVersion ${cachedMetadata.syncVersion ?? "absent"} < ${CACHE_SYNC_VERSION}, full sync Appwrite requis`,
+        );
+        cachedMetadata.lastAppwriteSync = null;
+        // Persister immédiatement pour que syncFromRemote() voie la nullification
+        await this.#cache.saveMetadata(cachedMetadata);
+      }
 
       if (cachedIndex.size > 0) {
         console.log(
@@ -649,6 +664,7 @@ class RecipesStore {
           recipesCount: this.#recipesIndex.size,
           cacheVersion: 1,
           migrationVersion: 0,
+          syncVersion: CACHE_SYNC_VERSION,
         });
         console.log("[RecipesStore] Cache IDB recréé");
       }
@@ -732,6 +748,7 @@ class RecipesStore {
       await this.#cache.saveMetadata({
         ...cachedMetadata,
         lastAppwriteSync: now,
+        syncVersion: CACHE_SYNC_VERSION,
       });
     }
 

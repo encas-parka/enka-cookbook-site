@@ -47,7 +47,6 @@ export function createStorageKey(baseKey: string, mainId: string): string {
   return `${baseKey}_${mainId}`;
 }
 
-
 /**
  * Vérifie si une adresse email est valide
  */

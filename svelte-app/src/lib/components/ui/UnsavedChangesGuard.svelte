@@ -1,5 +1,6 @@
 <script lang="ts">
   import { blockNavigation } from "$lib/router";
+  import { onDestroy } from "svelte";
 
   interface Props {
     routeKey: string;
@@ -33,6 +34,12 @@
 
     // Retourner true pour autoriser, false pour bloquer
     return confirmed;
+  });
+
+  // Nettoyer le blocker au destroy du composant pour éviter
+  // qu'une closure fantôme ne persiste après navigation
+  onDestroy(() => {
+    blockNavigation(null as any);
   });
 </script>
 

@@ -7,18 +7,10 @@
   interface Props {
     preparation: string;
     preparation24h?: string;
-    preparationHtml?: string;
-    preparation24hHtml?: string;
     astuces?: Astuce[];
   }
 
-  let {
-    preparation,
-    preparation24h,
-    preparationHtml,
-    preparation24hHtml,
-    astuces = [],
-  }: Props = $props();
+  let { preparation, preparation24h, astuces = [] }: Props = $props();
 </script>
 
 <div class="space-y-4">
@@ -31,11 +23,7 @@
       iconSize={18}
     >
       <div class="prose max-w-none">
-        {#if preparation24hHtml}
-          <div>{@html preparation24hHtml}</div>
-        {:else}
-          <SvelteMarkdown source={preparation24h} />
-        {/if}
+        <SvelteMarkdown source={preparation24h} />
       </div>
     </Fieldset>
   {/if}
@@ -47,28 +35,18 @@
     legendSize="text-lg"
   >
     <div class="prose max-w-none">
-      {#if preparationHtml}
-        <div>{@html preparationHtml}</div>
-      {:else}
-        <SvelteMarkdown source={preparation} />
-      {/if}
+      <SvelteMarkdown source={preparation} />
     </div>
   </Fieldset>
 
   <!-- Astuces -->
   {#if astuces.length > 0}
-    <div class="space-y-2 print:space-y-1">
-      {#each astuces as astuce}
-        <Fieldset
-          legend="Astuces"
-          iconComponent={Lightbulb}
-          legendSize="text-sm"
-        >
-          <div class="flex items-start gap-2">
-            <div class="text-sm">{astuce.astuce}</div>
-          </div>
-        </Fieldset>
-      {/each}
-    </div>
+    <Fieldset legend="Astuces" iconComponent={Lightbulb} legendSize="text-lg">
+      <ul class="list-disc space-y-1 ps-5 text-sm">
+        {#each astuces as astuce}
+          <li>{astuce.astuce}</li>
+        {/each}
+      </ul>
+    </Fieldset>
   {/if}
 </div>

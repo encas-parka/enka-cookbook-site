@@ -81,7 +81,7 @@
   );
 </script>
 
-<div class="sm:mt-12" class:opacity-30={disabled}>
+<div class:opacity-30={disabled}>
   <!-- Bouton invisible pour empêcher la capture du focus lors de l'ouverture du drawer -->
   <button
     class="absolute -z-50 size-0 opacity-0"

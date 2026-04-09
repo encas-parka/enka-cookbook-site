@@ -1,8 +1,4 @@
 <script lang="ts">
-  import {
-    warmUpEnkaData,
-    warmUpUsersTeamsManager,
-  } from "$lib/services/appwrite-warmup";
   import { navigate } from "$lib/router";
   import { eventsStore } from "$lib/stores/EventsStore.svelte";
   import { globalState } from "$lib/stores/GlobalState.svelte";
@@ -17,27 +13,17 @@
     Settings,
     Users,
   } from "@lucide/svelte";
-  import { onDestroy } from "svelte";
   import { navBarStore } from "../stores/NavBarStore.svelte";
 
   import LatestRecipesCard from "$lib/components/dashboard/LatestRecipesCard.svelte";
   import TeamDashboardCard from "../components/dashboard/TeamDashboardCard.svelte";
   import ExternalEventsCard from "../components/dashboard/ExternalEventsCard.svelte";
-  import CreateTeamModal from "../components/teams/CreateTeamModal.svelte";
   import { fade } from "svelte/transition";
   import EmailVerificationAlert from "../components/ui/EmailVerificationAlert.svelte";
   import TeamSummaryCard from "../components/dashboard/TeamSummaryCard.svelte";
   import ActionCard from "../components/ui/ActionCard.svelte";
 
   let createModalOpen = $state(false);
-
-  // Traitement des événements - utiliser les derived properties du store
-
-  // WARM-UP
-  // $effect(() => {
-  //   warmUpUsersTeamsManager();
-  //   warmUpEnkaData();
-  // });
 
   function handleTeamCreated(teamId: string) {
     createModalOpen = false;
@@ -56,7 +42,7 @@
 </script>
 
 {#snippet navActions()}
-  <div class="flex gap-2 {globalState.isMobile && 'hidden'}">
+  <div class="hidden shrink-0 gap-2 lg:flex">
     <button
       class="btn btn-primary btn-sm"
       onclick={() => navigate("/dashboard/eventCreate")}
@@ -212,8 +198,12 @@
   </div>
 </div>
 
-<CreateTeamModal
-  isOpen={createModalOpen}
-  onClose={() => (createModalOpen = false)}
-  onSuccess={handleTeamCreated}
-/>
+{#if createModalOpen}
+  {#await import("../components/teams/CreateTeamModal.svelte") then { default: CreateTeamModal }}
+    <CreateTeamModal
+      isOpen={createModalOpen}
+      onClose={() => (createModalOpen = false)}
+      onSuccess={handleTeamCreated}
+    />
+  {/await}
+{/if}

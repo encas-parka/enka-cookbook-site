@@ -8,7 +8,6 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 - `bun run dev` - Start development server with Vite HMR and Hugo proxy
 - `bun run build` - Build for production (outputs to `../static/app/`)
-- `bun run preview` - Preview production build locally
 - `bun run check` - Run type checking (svelte-check + TypeScript)
 
 ### Code Quality
@@ -207,8 +206,7 @@ Components follow a consistent structure:
   function handleSomething() { ... }
 </script>
 
-<!-- Template -->
-<div>...</div>
+<!-- Template --><div>...</div>
 ```
 
 **5. Toast Service Pattern**
@@ -218,14 +216,11 @@ Use `toastService.track()` for async operations, especially after modal closes:
 ```typescript
 import { toastService } from "$lib/services/toast.service.svelte";
 
-const result = await toastService.track(
-  someAsyncOperation(),
-  {
-    loading: "Chargement...",
-    success: "Opération réussie",
-    error: "Erreur lors de l'opération"
-  }
-);
+const result = await toastService.track(someAsyncOperation(), {
+  loading: "Chargement...",
+  success: "Opération réussie",
+  error: "Erreur lors de l'opération",
+});
 ```
 
 ## Directories Structure
@@ -291,11 +286,6 @@ Available reusable form components in `src/lib/components/ui/`:
 - **BtnGroupCheck** - Button group for single selection
 - **CommentText** - Text input with optional comment
 - **Fieldset** - Fieldset wrapper with required styling
-- **PriceInput** - Price input with currency
-- **QuantityInput** - Quantity + unit input
-- **StatusSelect** - Status dropdown
-- **StoreInput** - Store selection
-- **WhoInput** - Person/user selection
 
 ### Code Style
 

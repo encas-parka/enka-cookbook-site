@@ -6,13 +6,14 @@
   import { navigate } from "$lib/router";
   import { onDestroy, onMount } from "svelte";
   import { fade } from "svelte/transition";
-  import { Save, Lock, Edit3, Eye } from "@lucide/svelte";
+  import { Save, Lock, Edit3, Eye, Download } from "@lucide/svelte";
   import MarkdownEditorAdvanced from "$lib/components/MarkdownEditorAdvanced.svelte";
   import UnsavedChangesGuard from "$lib/components/ui/UnsavedChangesGuard.svelte";
   import SvelteMarkdown from "@humanspeak/svelte-markdown";
   import { navBarStore } from "$lib/stores/NavBarStore.svelte";
   import { online } from "svelte/reactivity/window";
   import { route, searchParams } from "$lib/router";
+  import { shareOrDownload, toSlug } from "$lib/utils/share-utils";
 
   let eventId = $derived(route.params.id || "");
   let docId = $derived(route.params.docId || "");
@@ -28,6 +29,10 @@
   let iHoldLock = $state(false);
   let heartbeatInterval: ReturnType<typeof setInterval> | null = null;
   let initialDocumentSnapshot = $state<string>("");
+
+  // docId non-réactif capturé au moment de l'acquisition du lock
+  // pour garantir sa disponibilité lors du cleanup (onDestroy)
+  let lockedDocId: string | null = null;
 
   // Mode édition ou preview
   const mode = $derived(
@@ -92,6 +97,7 @@
         globalState.userName || null,
       );
       iHoldLock = true;
+      lockedDocId = docId;
       startHeartbeat();
       return true;
     } catch (error) {
@@ -128,18 +134,25 @@
   /**
    * Libère le lock
    * Cleanup local synchrone + release serveur fire-and-forget
+   *
+   * Utilise lockedDocId (non-réactif) car docId (réactif) peut déjà
+   * être vide lors du onDestroy si la route a déjà changé.
    */
   function releaseLock(): void {
-    if (!docId || !iHoldLock) return;
+    const docIdToRelease = lockedDocId;
+    if (!docIdToRelease || !iHoldLock) return;
 
     // 1. Cleanup local IMMÉDIAT (synchrone)
     stopHeartbeat();
     iHoldLock = false;
+    lockedDocId = null;
 
     // 2. Release serveur (fire-and-forget)
-    teamdocsStore.updateDocumentLock(docId, null, null).catch((error) => {
-      console.error("[EventDocumentEditPage] Erreur libération lock:", error);
-    });
+    teamdocsStore
+      .updateDocumentLock(docIdToRelease, null, null)
+      .catch((error) => {
+        console.error("[EventDocumentEditPage] Erreur libération lock:", error);
+      });
   }
 
   // ============================================================================
@@ -246,6 +259,15 @@
     }
   }
 
+  function handleExport() {
+    const md = content || "";
+    shareOrDownload(
+      md,
+      `${toSlug(title || storeDoc?.title || "document")}.md`,
+      "Document exporté",
+    );
+  }
+
   // ============================================================================
   // NAVBAR
   // ============================================================================
@@ -267,6 +289,13 @@
 
 {#snippet navActions()}
   <div class="flex items-center gap-2">
+    <button
+      class="btn btn-primary btn-circle btn-sm"
+      onclick={handleExport}
+      title="Exporter le document"
+    >
+      <Download size={18} />
+    </button>
     {#if isDirty}
       <button
         class="btn btn-primary btn-sm"
@@ -278,7 +307,7 @@
         {:else}
           <Save class="h-4 w-4" />
         {/if}
-        Enregistrer
+        <span class="hidden sm:inline">Enregistrer</span>
       </button>
     {/if}
   </div>
@@ -393,8 +422,21 @@
 <UnsavedChangesGuard
   routeKey={`event-document-edit/${eventId}/${docId}`}
   shouldProtect={() => isDirty && isLockedByMe}
-  message="Vous avez des modifications non sauvegardées. Voulez-vous quitter sans enregistrer ?"
+  message="Vous avez des modifications non sauvegardées. Voulez-vous quitter sans sauvegarder ?"
 />
+
+<!-- Bouton flottant Enregistrer (mobile uniquement) -->
+{#if isDirty && !isSaving}
+  <button
+    class="btn btn-primary btn-sm sticky bottom-2 shadow-lg {!globalState.isMobile &&
+      'hidden'}"
+    onclick={handleSave}
+    disabled={!canEdit || !isValid || isSaving}
+  >
+    <Save size={16} class="mr-1" />
+    Enregistrer
+  </button>
+{/if}
 
 <style>
   :global(.dropdown-content) {

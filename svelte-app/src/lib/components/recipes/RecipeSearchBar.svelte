@@ -3,10 +3,11 @@
 
   interface Props {
     searchQuery: string;
+    onUpdate: (value: string) => void;
     onReset: () => void;
   }
 
-  let { searchQuery = $bindable(), onReset }: Props = $props();
+  let { searchQuery, onUpdate, onReset }: Props = $props();
 </script>
 
 <div class="">
@@ -14,7 +15,8 @@
     <Search class="h-5 w-5 opacity-50" />
     <input
       type="text"
-      bind:value={searchQuery}
+      value={searchQuery}
+      oninput={(e) => onUpdate(e.currentTarget.value)}
       placeholder="Rechercher... (parmi les titres, auteur·ices, spécialités. Désactive les filtres sélectionnés)"
       class=""
     />

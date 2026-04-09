@@ -23,12 +23,8 @@
   );
 </script>
 
-<div
-  class="flex {flexCol
-    ? 'flex-col'
-    : 'flex-wrap'} items-baseline gap-x-4 gap-y-1"
->
-  <label class="input w-72">
+<div class="flex w-full min-w-0 flex-wrap items-baseline gap-x-4 gap-y-1">
+  <label class="input w-full min-w-0 sm:w-72">
     <User class="h-4 w-4 opacity-50" />
     <input
       type="text"

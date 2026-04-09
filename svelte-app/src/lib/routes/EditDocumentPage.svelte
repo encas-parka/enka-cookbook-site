@@ -5,7 +5,16 @@
   import { toastService } from "$lib/services/toast.service.svelte";
   import { navigate } from "$lib/router";
   import { onDestroy, onMount } from "svelte";
-  import { Save, X, Lock, Eye, Edit3, Loader2, PlusIcon } from "@lucide/svelte";
+  import {
+    Save,
+    X,
+    Lock,
+    Eye,
+    Edit3,
+    Loader2,
+    PlusIcon,
+    Download,
+  } from "@lucide/svelte";
   import { fade } from "svelte/transition";
   import MarkdownEditorAdvanced from "$lib/components/MarkdownEditorAdvanced.svelte";
   import BtnGroupCheck from "$lib/components/ui/BtnGroupCheck.svelte";
@@ -19,6 +28,7 @@
   // ============================================================================
 
   import { route, searchParams } from "$lib/router";
+  import { shareOrDownload, toSlug } from "$lib/utils/share-utils";
 
   let teamId = $derived(route.params.teamId);
   let docId = $derived(route.params.docId);
@@ -298,6 +308,15 @@
   });
 
   // ============================================================================
+  // MODE TOGGLE
+  // ============================================================================
+
+  function handleModeChange(newMode: "edit" | "preview") {
+    if (newMode === "edit" && isLockedByOthers) return;
+    searchParams.set("mode", newMode);
+  }
+
+  // ============================================================================
   // HANDLERS
   // ============================================================================
 
@@ -377,6 +396,15 @@
     }
   }
 
+  function handleExport() {
+    const md = content || "";
+    shareOrDownload(
+      md,
+      `${toSlug(title || storeDoc?.title || "document")}.md`,
+      "Document exporté",
+    );
+  }
+
   // ============================================================================
   // NAVBAR CONFIGURATION
   // ============================================================================
@@ -400,6 +428,13 @@
 <!-- ============================================================================ -->
 {#snippet navActions()}
   <div class="flex items-center gap-2">
+    <button
+      class="btn btn-primary btn-circle btn-sm"
+      onclick={handleExport}
+      title="Exporter le document"
+    >
+      <Download size={18} />
+    </button>
     {#if isDirty}
       <!-- Save button -->
       <button
@@ -412,7 +447,7 @@
         {:else}
           <Save class="h-4 w-4" />
         {/if}
-        Enregistrer
+        <span class="hidden sm:inline">Enregistrer</span>
       </button>
     {/if}
   </div>
@@ -438,6 +473,33 @@
             >{storeLockedByName || "un autre utilisateur"}</span
           >. Vous ne pouvez pas le modifier pour le moment.
         </p>
+      </div>
+    </div>
+  {/if}
+
+  <!-- Tabs mode édition/aperçu -->
+  {#if !isLoading && storeDoc}
+    <div class="mb-4">
+      <div class=" px-4 py-1">
+        <div class="tabs tabs-border justify-center">
+          <button
+            class="tab gap-2 font-semibold"
+            class:tab-active={mode === "edit"}
+            onclick={() => handleModeChange("edit")}
+            disabled={isLockedByOthers}
+          >
+            <Edit3 class="h-4 w-4" />
+            Édition
+          </button>
+          <button
+            class="tab gap-2 font-semibold"
+            class:tab-active={mode === "preview"}
+            onclick={() => handleModeChange("preview")}
+          >
+            <Eye class="h-4 w-4" />
+            Aperçu
+          </button>
+        </div>
       </div>
     </div>
   {/if}
@@ -564,8 +626,21 @@
 <UnsavedChangesGuard
   routeKey={`editdocument/${teamId}/${docId}`}
   shouldProtect={() => isDirty && isLockedByMe}
-  message="Vous avez des modifications non sauvegardées. Voulez-vous quitter sans enregistrer ?"
+  message="Vous avez des modifications non sauvegardées. Voulez-vous quitter sans sauvegarder ?"
 />
+
+<!-- Bouton flottant Enregistrer (mobile uniquement) -->
+{#if isDirty && !isSaving}
+  <button
+    class="btn btn-primary btn-sm sticky bottom-2 shadow-lg {!globalState.isMobile &&
+      'hidden'}"
+    onclick={handleSave}
+    disabled={!canEdit || !isValid || isSaving}
+  >
+    <Save size={16} class="mr-1" />
+    Enregistrer
+  </button>
+{/if}
 
 <style>
   /* Assurer que le dropdown du heading est bien au-dessus */

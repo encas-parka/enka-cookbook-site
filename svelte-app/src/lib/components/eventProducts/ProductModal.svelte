@@ -97,114 +97,119 @@
       onClose={handleModalClose}
     ></ModalHeader>
 
-    <!-- Header avec indicateur d'archive -->
-    {#if isArchiveMode}
-      <div
-        class="alert alert-warning border-warning/20 m-4 border-b px-4 py-2 text-xs"
-      >
-        <History class="h-4 w-4" />
-        <span class="font-medium">Mode consultation</span>
-        <span class="opacity-75">Événement terminé</span>
-      </div>
-    {/if}
-
-    <!-- Onglets -->
-    <div class="border-base-300 mb-4 flex-none border-b px-4">
-      <div class="tabs tabs-border" role="tablist">
-        <button
-          role="tab"
-          class="tab {modalState?.currentTab === 'recettes'
-            ? 'tab-active'
-            : ''}"
-          onclick={() => handleTabClick("recettes")}
-        >
-          <CookingPot class="mr-1 h-4 w-4" />
-          <span class="hidden sm:inline">Recettes</span>
-          {#if modalState?.product?.nbRecipes && modalState.product.nbRecipes > 0}
-            <span class="badge badge-sm badge-secondary ml-1">
-              {modalState.product.nbRecipes}
-            </span>
-          {:else}
-            <span class="badge badge-sm badge-ghost ml-1">0</span>
-          {/if}
-        </button>
-
-        <button
-          role="tab"
-          class="tab {modalState?.currentTab === 'magasins'
-            ? 'tab-active'
-            : ''}"
-          onclick={() => handleTabClick("magasins")}
-        >
-          <Store class="mr-1 h-4 w-4" />
-          <span class="hidden sm:inline">Magasin</span>
-          {#if modalState?.hasChanges?.store}
-            <div class="bg-warning ml-1 h-2 w-2 rounded-full"></div>
-          {/if}
-        </button>
-
-        <button
-          role="tab"
-          class="tab {modalState?.currentTab === 'volontaires'
-            ? 'tab-active'
-            : ''}"
-          onclick={() => handleTabClick("volontaires")}
-        >
-          <Users class="mr-1 h-4 w-4" />
-          <span class="hidden sm:inline">Volontaires</span>
-          {#if modalState?.hasChanges?.who}
-            <div class="bg-warning ml-1 h-2 w-2 rounded-full"></div>
-          {:else if modalState?.product?.who && modalState.product.who.length > 0}
-            <span class="badge badge-sm badge-secondary ml-1">
-              {modalState.product.who.length}
-            </span>
-          {:else}
-            <span class="badge badge-sm badge-ghost ml-1">0</span>
-          {/if}
-        </button>
-
-        <button
-          role="tab"
-          class="tab {modalState?.currentTab === 'stock' ? 'tab-active' : ''}"
-          onclick={() => handleTabClick("stock")}
-        >
-          <Archive class="mr-1 h-4 w-4" />
-          <span class="hidden sm:inline">Stock</span>
-          {#if modalState?.hasChanges?.stock}
-            <div class="bg-warning ml-1 h-2 w-2 rounded-full"></div>
-          {:else if modalState?.stockParsed}
-            <span class="badge badge-sm badge-secondary ml-1">1</span>
-          {:else}
-            <span class="badge badge-sm badge-ghost ml-1">0</span>
-          {/if}
-        </button>
-
-        <button
-          role="tab"
-          class="tab {modalState?.currentTab === 'achats' ? 'tab-active' : ''}"
-          onclick={() => handleTabClick("achats")}
-        >
-          <ShoppingCart class="mr-1 h-4 w-4" />
-          <span class="hidden sm:inline">Achats</span>
-          {#if modalState?.purchasesList && modalState.purchasesList.length > 0}
-            <span class="badge badge-sm badge-secondary ml-1">
-              {modalState.purchasesList.length}
-            </span>
-          {:else}
-            <span class="badge badge-sm badge-ghost ml-1">0</span>
-          {/if}
-        </button>
-      </div>
-    </div>
-
     <!-- Contenu -->
     <ModalContent>
+      <!-- Header avec indicateur d'archive -->
+      {#if isArchiveMode}
+        <div
+          class="alert alert-warning border-warning/20 m-4 border-b px-4 py-2 text-xs"
+        >
+          <History class="h-4 w-4" />
+          <span class="font-medium">Mode consultation</span>
+          <span class="opacity-75">Événement terminé</span>
+        </div>
+      {/if}
+
       {#if modalState?.error}
         <div class="alert alert-error max-md:alert-vertical mb-4">
           <X class="h-4 w-4" />
           <span>Erreur : {modalState.error}</span>
         </div>
       {/if}
+
+      <!-- Onglets -->
+      <div class="flex-none">
+        <div
+          class="tabs tabs-border border-base-300 mb-4 flex-1 border-b px-4"
+          role="tablist"
+        >
+          <button
+            role="tab"
+            class="tab {modalState?.currentTab === 'recettes'
+              ? 'tab-active'
+              : ''}"
+            onclick={() => handleTabClick("recettes")}
+          >
+            <CookingPot class="mr-1 h-4 w-4" />
+            <span class="hidden sm:inline">Recettes</span>
+            {#if modalState?.product?.nbRecipes && modalState.product.nbRecipes > 0}
+              <span class="badge badge-sm badge-secondary ml-1">
+                {modalState.product.nbRecipes}
+              </span>
+            {:else}
+              <span class="badge badge-sm badge-ghost ml-1">0</span>
+            {/if}
+          </button>
+
+          <button
+            role="tab"
+            class="tab {modalState?.currentTab === 'magasins'
+              ? 'tab-active'
+              : ''}"
+            onclick={() => handleTabClick("magasins")}
+          >
+            <Store class="mr-1 h-4 w-4" />
+            <span class="hidden sm:inline">Magasin</span>
+            {#if modalState?.hasChanges?.store}
+              <div class="bg-warning ml-1 h-2 w-2 rounded-full"></div>
+            {/if}
+          </button>
+
+          <button
+            role="tab"
+            class="tab {modalState?.currentTab === 'volontaires'
+              ? 'tab-active'
+              : ''}"
+            onclick={() => handleTabClick("volontaires")}
+          >
+            <Users class="mr-1 h-4 w-4" />
+            <span class="hidden sm:inline">Volontaires</span>
+            {#if modalState?.hasChanges?.who}
+              <div class="bg-warning ml-1 h-2 w-2 rounded-full"></div>
+            {:else if modalState?.product?.who && modalState.product.who.length > 0}
+              <span class="badge badge-sm badge-secondary ml-1">
+                {modalState.product.who.length}
+              </span>
+            {:else}
+              <span class="badge badge-sm badge-ghost ml-1">0</span>
+            {/if}
+          </button>
+
+          <button
+            role="tab"
+            class="tab {modalState?.currentTab === 'stock' ? 'tab-active' : ''}"
+            onclick={() => handleTabClick("stock")}
+          >
+            <Archive class="mr-1 h-4 w-4" />
+            <span class="hidden sm:inline">Stock</span>
+            {#if modalState?.hasChanges?.stock}
+              <div class="bg-warning ml-1 h-2 w-2 rounded-full"></div>
+            {:else if modalState?.stockParsed}
+              <span class="badge badge-sm badge-secondary ml-1">1</span>
+            {:else}
+              <span class="badge badge-sm badge-ghost ml-1">0</span>
+            {/if}
+          </button>
+
+          <button
+            role="tab"
+            class="tab {modalState?.currentTab === 'achats'
+              ? 'tab-active'
+              : ''}"
+            onclick={() => handleTabClick("achats")}
+          >
+            <ShoppingCart class="mr-1 h-4 w-4" />
+            <span class="hidden sm:inline">Achats</span>
+            {#if modalState?.purchasesList && modalState.purchasesList.length > 0}
+              <span class="badge badge-sm badge-secondary ml-1">
+                {modalState.purchasesList.length}
+              </span>
+            {:else}
+              <span class="badge badge-sm badge-ghost ml-1">0</span>
+            {/if}
+          </button>
+        </div>
+      </div>
 
       <div>
         {#key modalState?.currentTab}

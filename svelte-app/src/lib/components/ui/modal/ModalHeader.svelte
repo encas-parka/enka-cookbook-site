@@ -20,7 +20,7 @@
   }: Props = $props();
 </script>
 
-<div class="border-base-300 flex-none border-b px-4 py-3">
+<div class="border-base-300 min-w-0 flex-none border-b px-4 py-3">
   <div class="absolute top-2 right-2">
     {#if !globalState.isMobile}
       <button
@@ -45,7 +45,7 @@
         </button>
       {/if}
 
-      <div class="max-w-11/12 min-w-0 flex-1 items-baseline">
+      <div class="min-w-0 flex-1 items-baseline sm:max-w-10/12">
         <h3 class="truncate text-lg font-bold">{title}</h3>
         {#if subtitle}
           <p class="text-base-content/70 truncate text-sm">{subtitle}</p>

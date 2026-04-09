@@ -9,7 +9,6 @@
   import { route } from "$lib/router";
   import { getContributors } from "$lib/utils/event-stats-helpers";
   import { isDemoEvent } from "$lib/data/demo-event-config";
-  import EventTabs from "$lib/components/eventEdit/EventTabs.svelte";
   import EventTodoList from "$lib/components/eventTodo/EventTodoList.svelte";
   import { ListTodo } from "@lucide/svelte";
   import { online } from "svelte/reactivity/window";
@@ -83,11 +82,11 @@
 {/snippet}
 
 <div class="bg-base-200 min-h-lvh px-2 pt-4 pb-20 md:px-20" transition:fade>
-  <!-- Event name header -->
+  <!-- Header -->
   {#if currentEvent}
-    <div class="mt-4 flex items-center gap-3">
-      <ListTodo class="text-primary h-6 w-6" />
-      <h1 class="text-xl font-bold">{currentEvent.name}</h1>
+    <div class="mb-4 flex items-center gap-4">
+      <ListTodo class="text-primary size-5" />
+      <h2 class="text-xl font-bold">Tâches - {currentEvent.name}</h2>
     </div>
   {/if}
 

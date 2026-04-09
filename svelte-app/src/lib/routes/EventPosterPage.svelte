@@ -16,6 +16,7 @@
   import PosterDisplay from "../components/eventPoster/PosterDisplay.svelte";
   import PosterConfiguration from "../components/eventPoster/PosterConfiguration.svelte";
   import { fade } from "svelte/transition";
+  import "../components/eventPoster/poster-fonts.css";
 
   // Event data
   const eventId = $derived(route.params.id ?? "");
@@ -203,10 +204,7 @@
 
   async function saveConfig() {
     try {
-      await eventsStore.savePosterConfig(
-        eventId,
-        $state.snapshot(config),
-      );
+      await eventsStore.savePosterConfig(eventId, $state.snapshot(config));
       globalState.toast.success("Configuration sauvegardée", {
         details: "Les réglages courants sont enregistrés localement.",
       });
@@ -457,9 +455,12 @@
 </script>
 
 {#snippet navActions()}
-  <button class="btn btn-primary btn-sm gap-2" onclick={printAll}>
-    <Printer class="h-5 w-5" />
-    Imprimer tout
+  <button
+    class="btn btn-circle btn-primary"
+    onclick={printAll}
+    title="Imprimer tout"
+  >
+    <Printer size={18} />
   </button>
 {/snippet}
 

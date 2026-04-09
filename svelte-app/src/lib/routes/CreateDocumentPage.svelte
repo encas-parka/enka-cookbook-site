@@ -4,7 +4,6 @@
   import { globalState } from "$lib/stores/GlobalState.svelte";
   import { toastService } from "$lib/services/toast.service.svelte";
   import { navigate } from "$lib/router";
-  import { onDestroy } from "svelte";
   import { fade } from "svelte/transition";
   import { Save, X, PlusIcon } from "@lucide/svelte";
   import MarkdownEditorAdvanced from "$lib/components/MarkdownEditorAdvanced.svelte";
@@ -205,7 +204,7 @@
       {:else}
         <Save class="h-4 w-4" />
       {/if}
-      Créer
+      <span class="hidden sm:inline">Créer</span>
     </button>
   </div>
 {/snippet}
@@ -307,6 +306,19 @@
         </div>
       </label>
     </fieldset> -->
+
+    <!-- Bouton flottant Créer (mobile uniquement) -->
+    {#if hasUnsavedChanges && !isSaving}
+      <button
+        class="btn btn-primary btn-sm sticky bottom-2 shadow-lg {!globalState.isMobile &&
+          'hidden'}"
+        onclick={handleCreate}
+        disabled={!canEdit || !isValid || isSaving}
+      >
+        <Save size={16} class="mr-1" />
+        Créer
+      </button>
+    {/if}
   </div>
 </div>
 

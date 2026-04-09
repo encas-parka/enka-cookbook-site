@@ -9,7 +9,6 @@
   import MarkdownEditorAdvanced from "$lib/components/MarkdownEditorAdvanced.svelte";
   import UnsavedChangesGuard from "$lib/components/ui/UnsavedChangesGuard.svelte";
   import { navBarStore } from "$lib/stores/NavBarStore.svelte";
-  import EventTabs from "$lib/components/eventEdit/EventTabs.svelte";
   import { route } from "$lib/router";
 
   let eventId = $derived(route.params.id || "");
@@ -95,7 +94,7 @@
     {:else}
       <Save class="h-4 w-4" />
     {/if}
-    Créer
+    <span class="hidden sm:inline">Créer</span>
   </button>
 {/snippet}
 
@@ -137,6 +136,19 @@
       </fieldset>
     </div>
   </div>
+
+  <!-- Bouton flottant Créer (mobile uniquement) -->
+  {#if hasUnsavedChanges && !isSaving}
+    <button
+      class="btn btn-primary btn-sm sticky bottom-2 shadow-lg {!globalState.isMobile &&
+        'hidden'}"
+      onclick={handleCreate}
+      disabled={!isValid || isSaving}
+    >
+      <Save size={16} class="mr-1" />
+      Créer
+    </button>
+  {/if}
 </div>
 
 <style>

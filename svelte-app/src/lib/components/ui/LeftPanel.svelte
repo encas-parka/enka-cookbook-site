@@ -21,7 +21,7 @@
 {#if globalState.isDesktop}
   <!-- Conteneur fixe à gauche avec overflow -->
   <div
-    class="{bgClass} fixed top-0 left-0 z-40 h-dvh w-sm overflow-y-auto p-4 pb-12 print:hidden"
+    class="{bgClass} fixed top-0 left-0 z-40 mt-12 h-dvh w-sm overflow-y-auto p-4 pb-12 print:hidden"
   >
     {@render children?.()}
   </div>
@@ -33,7 +33,7 @@
       class="fixed top-0 bottom-0 left-0 z-50 flex w-[90vw] max-w-100 flex-row shadow-2xl {bgClass}"
     >
       <div
-        class="min-h-0 flex-1 overflow-y-auto p-4 pb-24"
+        class="min-h-0 flex-1 overflow-y-auto p-4 pt-12 pb-24"
         style="touch-action: pan-y;"
         role="presentation"
         onpointerdown={(e) => e.stopPropagation()}
@@ -48,7 +48,7 @@
   <!-- FAB flottant pour mobile -->
   <div class="fixed bottom-10 left-[2%] z-50 print:hidden">
     <button
-      class="btn btn-primary btn-circle btn-lg shadow-lg"
+      class="btn btn-primary btn-circle"
       onclick={() => (filtersDrawerOpen = !filtersDrawerOpen)}
       aria-label="Ouvrir les filtres"
     >

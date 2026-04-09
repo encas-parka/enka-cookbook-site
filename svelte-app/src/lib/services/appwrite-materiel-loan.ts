@@ -41,6 +41,8 @@ export type MaterielLoanCreate = {
   materiels: MaterielLoanItem[];
   notes?: string;
   status?: MaterielLoanStatus;
+  eventId?: string | null; // ID de l'événement lié (optionnel)
+  eventName?: string | null; // Snapshot du nom de l'event (optionnel)
 };
 
 export type MaterielLoanUpdate = Partial<{
@@ -51,6 +53,8 @@ export type MaterielLoanUpdate = Partial<{
   notes: string;
   returnedAt: string;
   returnNotes: string;
+  eventId: string | null;
+  eventName: string | null;
 }>;
 
 // =============================================================================
@@ -151,6 +155,8 @@ export async function createMaterielLoan(
         completedAt: null,
         returnedAt: null,
         returnNotes: null,
+        eventId: data.eventId || null,
+        eventName: data.eventName || null,
       },
       permissions,
     });
@@ -192,6 +198,8 @@ export async function updateMaterielLoan(
     if (data.returnedAt !== undefined) updateData.returnedAt = data.returnedAt;
     if (data.returnNotes !== undefined)
       updateData.returnNotes = data.returnNotes;
+    if (data.eventId !== undefined) updateData.eventId = data.eventId;
+    if (data.eventName !== undefined) updateData.eventName = data.eventName;
 
     const loan = await tables.updateRow({
       databaseId: APPWRITE_CONFIG.APPWRITE_CONFIG.databaseId,

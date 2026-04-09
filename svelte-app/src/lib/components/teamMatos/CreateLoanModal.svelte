@@ -1,34 +1,36 @@
 <script lang="ts">
-  import {
-    Calendar,
-    Package,
-    X,
-    Check,
-    Sparkles,
-    Hash,
-    User,
-    Zap,
-    Wrench,
-    ChefHat,
-    Utensils,
-    Flame,
-    SoapDispenserDroplet,
-    Box,
-    Info,
-    LoaderCircle,
-  } from "@lucide/svelte";
-  import AutocompleteInput from "../ui/AutocompleteInput.svelte";
-  import ModalContainer from "../ui/modal/ModalContainer.svelte";
-  import ModalHeader from "../ui/modal/ModalHeader.svelte";
-  import ModalContent from "../ui/modal/ModalContent.svelte";
-  import ModalFooter from "../ui/modal/ModalFooter.svelte";
+  import { toastService } from "$lib/services/toast.service.svelte";
+  import { eventsStore } from "$lib/stores/EventsStore.svelte";
+  import { globalState } from "$lib/stores/GlobalState.svelte";
   import { materielStore } from "$lib/stores/MaterielStore.svelte";
   import type {
     EnrichedMateriel,
     EnrichedMaterielLoan,
   } from "$lib/types/materiel.types";
-  import { toastService } from "$lib/services/toast.service.svelte";
-  import { globalState } from "$lib/stores/GlobalState.svelte";
+  import {
+    Box,
+    Calendar,
+    Check,
+    ChefHat,
+    Flame,
+    Info,
+    LoaderCircle,
+    Minus,
+    Package,
+    Plus,
+    SoapDispenserDroplet,
+    Sparkles,
+    User,
+    Utensils,
+    Wrench,
+    X,
+    Zap,
+  } from "@lucide/svelte";
+  import AutocompleteInput from "../ui/AutocompleteInput.svelte";
+  import ModalContainer from "../ui/modal/ModalContainer.svelte";
+  import ModalContent from "../ui/modal/ModalContent.svelte";
+  import ModalFooter from "../ui/modal/ModalFooter.svelte";
+  import ModalHeader from "../ui/modal/ModalHeader.svelte";
   import QuickMaterielSelectionModal from "./QuickMaterielSelectionModal.svelte";
 
   // Types
@@ -61,10 +63,18 @@
     ownerId: string; // ID de l'équipe propriétaire
     ownerName: string; // Nom de l'équipe
     loanId?: string; // Optionnel : ID du loan à modifier (mode édition)
+    preselectedEventId?: string; // Optionnel : eventId pré-sélectionné en mode création
   }
 
-  let { isOpen, onClose, onSuccess, ownerId, ownerName, loanId }: Props =
-    $props();
+  let {
+    isOpen,
+    onClose,
+    onSuccess,
+    ownerId,
+    ownerName,
+    loanId,
+    preselectedEventId,
+  }: Props = $props();
 
   // Mode dérivé : édition si loanId est fourni
   let mode = $derived<Mode>(loanId ? "edit" : "create");
@@ -75,6 +85,7 @@
   let notes = $state("");
   let selectedMateriels = $state<SelectedMateriel[]>([]);
   let loanStatus = $state<any>("accepted"); // Statut de l'emprunt (forcé à "accepted")
+  let selectedEventId = $state<string | null>(null); // ID de l'event sélectionné
 
   // UI state
   let showQuickSelection = $state(false);
@@ -88,8 +99,64 @@
     removed: string[];
   }>({ count: 0, removed: [] });
 
-  // Flag pour éviter la double exécution de l'effect
+  // Flag pour éviter la double exécution de l'effet de conflits
   let isProcessingConflicts = $state(false);
+
+  // Flag pour indiquer si l'utilisateur a modifié manuellement les dates
+  let userHasModifiedDates = $state(false);
+
+  // Helper pour ajouter/supprimer des jours à une date
+  // Gère les formats YYYY-MM-DD et ISO complet (2025-04-15T10:30:00.000Z)
+  function addDays(dateStr: string, days: number): string {
+    // Parser la date - works avec les deux formats
+    const date = new Date(dateStr);
+    if (isNaN(date.getTime())) {
+      console.error("[CreateLoanModal] Date invalide:", dateStr);
+      return dateStr; // Retourner tel quel en cas d'erreur
+    }
+    date.setDate(date.getDate() + days);
+    return date.toISOString().split("T")[0];
+  }
+
+  // Helper pour formater une date au format "lun. 1 janv."
+  function formatShortDate(dateStr: string | null): string {
+    if (!dateStr) return "";
+    const date = new Date(dateStr);
+    if (isNaN(date.getTime())) return "";
+    const jourCourt = date.toLocaleDateString("fr-FR", { weekday: "short" });
+    const jour = date.getDate();
+    const moisCourt = date.toLocaleDateString("fr-FR", { month: "short" });
+    return `${jourCourt} ${jour} ${moisCourt}.`;
+  }
+
+  // Effet pour pré-remplir les dates depuis l'événement sélectionné (mode création uniquement)
+  $effect(() => {
+    if (mode === "create" && selectedEventId && !userHasModifiedDates) {
+      const event = availableEvents.find((e) => e.$id === selectedEventId);
+      if (event && event.dateStart && event.dateEnd) {
+        startDate = addDays(event.dateStart, -1);
+        endDate = addDays(event.dateEnd, 1);
+      }
+    }
+  });
+
+  // Effet pour réinitialiser le flag quand l'événement change
+  $effect(() => {
+    selectedEventId; // Dépendance explicite
+    userHasModifiedDates = false;
+  });
+
+  // Liste des événements disponibles pour la liaison
+  const availableEvents = $derived.by(() => {
+    return eventsStore.events.filter((e) => e.status !== "canceled");
+  });
+
+  // Événement sélectionné (pour affichage des dates)
+  const selectedEvent = $derived(
+    selectedEventId
+      ? availableEvents.find((e) => e.$id === selectedEventId)
+      : null,
+  );
 
   // Dérivés - Matériels disponibles pour la période sélectionnée
   const availableMateriels = $derived.by(() => {
@@ -138,7 +205,7 @@
       endDate !== "" &&
       startDate < endDate &&
       selectedMateriels.length > 0 &&
-      selectedMateriels.every((m) => m.quantity >= 1) &&
+      selectedMateriels.some((m) => m.quantity >= 1) &&
       globalState.userId !== null &&
       globalState.userId !== undefined &&
       !loading &&
@@ -213,6 +280,8 @@
           endDate = loan.endDate.split("T")[0];
           notes = loan.notes || "";
           loanStatus = loan.status;
+          selectedEventId = loan.eventId || null; // Charger l'event lié
+          userHasModifiedDates = true; // Dates pré-remplies, l'utilisateur peut les modifier
 
           // Charger les matériels sélectionnés
           selectedMateriels = loan.materielItems.map((item) => {
@@ -231,8 +300,11 @@
         }
         loadingLoan = false;
       } else if (mode === "create") {
-        // Reset en mode création
+        // Reset en mode création avec pré-sélection éventuelle
         resetForm();
+        if (preselectedEventId) {
+          selectedEventId = preselectedEventId;
+        }
       }
     }
   });
@@ -270,16 +342,10 @@
     ];
   }
 
-  function handleRemoveMateriel(materielId: string) {
-    selectedMateriels = selectedMateriels.filter(
-      (m) => m.materielId !== materielId,
-    );
-  }
-
   function handleQuantityChange(materielId: string, newQuantity: number) {
     selectedMateriels = selectedMateriels.map((m) =>
       m.materielId === materielId
-        ? { ...m, quantity: Math.max(1, Math.min(newQuantity, m.maxQuantity)) }
+        ? { ...m, quantity: Math.max(0, Math.min(newQuantity, m.maxQuantity)) }
         : m,
     );
   }
@@ -323,16 +389,23 @@
     loading = true;
 
     try {
-      const materielItems = selectedMateriels.map((m) => ({
-        materielId: m.materielId,
-        materielName: m.materielName,
-        quantity: m.quantity,
-      }));
+      const materielItems = selectedMateriels
+        .filter((m) => m.quantity >= 1)
+        .map((m) => ({
+          materielId: m.materielId,
+          materielName: m.materielName,
+          quantity: m.quantity,
+        }));
 
       if (mode === "create") {
         // Création d'un nouvel emprunt
         const responsibleId = globalState.userId || "";
         const responsibleName = globalState.userName || "Inconnu";
+
+        // Récupérer le nom de l'event sélectionné
+        const selectedEvent = selectedEventId
+          ? availableEvents.find((e) => e.$id === selectedEventId)
+          : null;
 
         await materielStore.createLoan({
           startDate,
@@ -344,6 +417,8 @@
           materiels: materielItems,
           notes: notes.trim() || undefined,
           status: loanStatus,
+          eventId: selectedEventId,
+          eventName: selectedEvent?.name || null,
         });
 
         toastService.success("Réservation créée avec succès");
@@ -353,11 +428,18 @@
           throw new Error("loanId manquant en mode édition");
         }
 
+        // Récupérer le nom de l'event sélectionné
+        const selectedEvent = selectedEventId
+          ? availableEvents.find((e) => e.$id === selectedEventId)
+          : null;
+
         await materielStore.updateLoan(loanId, {
           startDate,
           endDate,
           materiels: materielItems,
           notes: notes.trim() || undefined,
+          eventId: selectedEventId,
+          eventName: selectedEvent?.name || null,
         });
 
         toastService.success("Réservation modifiée avec succès");
@@ -390,6 +472,8 @@
     notes = "";
     selectedMateriels = [];
     loanStatus = "accepted"; // Reset du statut (forcé à "accepted")
+    selectedEventId = null; // Reset de l'event sélectionné
+    userHasModifiedDates = false; // Reset du flag de modification manuelle
   }
 
   function handleClose() {
@@ -398,7 +482,7 @@
   }
 </script>
 
-<ModalContainer {isOpen} onClose={handleClose} maxWidth="xl">
+<ModalContainer {isOpen} onClose={handleClose} maxWidth="lg">
   <ModalHeader
     title={mode === "create"
       ? `Nouvelle réservation - ${ownerName}`
@@ -445,9 +529,30 @@
 
         <!-- Section 1: Informations de l'emprunt -->
         <div class="space-y-4">
+          <!-- Lien événement (optionnel) -->
+          <label class="select w-full">
+            <span class="label"
+              ><Package class="h-4 w-4" />
+              Événement lié ?</span
+            >
+            <select
+              disabled={loading}
+              value={selectedEventId || ""}
+              onchange={(e) => {
+                const target = e.target as HTMLSelectElement;
+                selectedEventId = target.value || null;
+              }}
+            >
+              <option value="">Aucun événement</option>
+              {#each availableEvents as event (event.$id)}
+                <option value={event.$id}>{event.name}</option>
+              {/each}
+            </select>
+          </label>
+
           <!-- Dates -->
           <div class="flex flex-wrap gap-4">
-            <label class="input min-w-[200px] flex-1">
+            <label class="input min-w-50 flex-1">
               <span class="label"
                 ><Calendar class="h-4 w-4" />
                 Date début *</span
@@ -456,11 +561,12 @@
                 type="date"
                 class="grow"
                 bind:value={startDate}
+                oninput={() => (userHasModifiedDates = true)}
                 disabled={loading}
               />
             </label>
 
-            <label class="input min-w-[200px] flex-1">
+            <label class="input min-w-50 *:flex-1">
               <span class="label"
                 ><Calendar class="h-4 w-4" />
                 Date fin *</span
@@ -469,11 +575,25 @@
                 type="date"
                 class="grow"
                 bind:value={endDate}
+                oninput={() => (userHasModifiedDates = true)}
                 disabled={loading}
                 min={startDate}
               />
             </label>
           </div>
+
+          <!-- Info dates de l'événement -->
+          {#if selectedEvent && selectedEvent.dateStart && selectedEvent.dateEnd}
+            <p class="text-base-content/50 -mt-2 px-1 text-sm">
+              L'événement aura lieu du <span class="font-medium"
+                >{formatShortDate(selectedEvent.dateStart)}</span
+              >
+              au
+              <span class="font-medium"
+                >{formatShortDate(selectedEvent.dateEnd)}</span
+              >
+            </p>
+          {/if}
 
           <!-- Responsable (read-only, sera l'utilisateur actuel) -->
           <label class="input w-full">
@@ -493,7 +613,7 @@
           <fieldset class="fieldset bg-base-100">
             <legend class="fieldset-legend">Notes (optionnel)</legend>
             <textarea
-              class="textarea textarea-bordered w-full"
+              class="textarea w-full"
               rows="2"
               bind:value={notes}
               placeholder="Informations complémentaires sur l'emprunt..."
@@ -606,7 +726,12 @@
                               ? SoapDispenserDroplet
                               : Box}
 
-                <div class="bg-base-200 rounded-lg p-2">
+                <div
+                  class="bg-base-200 rounded-lg p-2 transition-opacity {materiel.quantity ===
+                  0
+                    ? 'opacity-40'
+                    : ''}"
+                >
                   <div class="flex items-center gap-2">
                     <!-- Icone type -->
                     <div class="bg-base-300 rounded p-1">
@@ -614,8 +739,14 @@
                     </div>
 
                     <!-- Nom + dispo -->
-                    <div class="min-w-0 flex-1">
-                      <div class="truncate font-medium">
+                    <div
+                      class="flex min-w-0 flex-1 flex-wrap items-center gap-x-4 gap-y-1"
+                    >
+                      <div
+                        class="truncate font-medium {materiel.quantity === 0
+                          ? 'line-through'
+                          : ''}"
+                      >
                         {materiel.materielName}
                       </div>
                       <div class="text-xs opacity-70">
@@ -627,38 +758,49 @@
 
                     <!-- Quantité -->
                     <div class="flex items-center gap-1">
-                      <span class="text-sm opacity-70">
-                        <Hash class="inline h-3 w-3" />
-                      </span>
-                      <label class="select join">
-                        <select
-                          class="join-item select-sm select-bordered w-20"
-                          bind:value={materiel.quantity}
-                          onchange={(e) => {
-                            const target = e.target as HTMLSelectElement;
-                            handleQuantityChange(
-                              materiel.materielId,
-                              parseInt(target.value),
-                            );
-                          }}
-                          disabled={loading}
-                        >
-                          {#each Array(materiel.maxQuantity) as _, i (i)}
-                            <option value={i + 1}>{i + 1}</option>
-                          {/each}
-                        </select>
-                      </label>
+                      <button
+                        class="btn btn-ghost btn-xs btn-circle hidden sm:flex"
+                        onclick={() =>
+                          handleQuantityChange(
+                            materiel.materielId,
+                            materiel.quantity - 1,
+                          )}
+                        disabled={loading || materiel.quantity <= 0}
+                        aria-label="Diminuer"
+                      >
+                        <Minus class="size-3" />
+                      </button>
+                      <select
+                        class="select select-sm w-20"
+                        bind:value={materiel.quantity}
+                        onchange={(e) => {
+                          const target = e.target as HTMLSelectElement;
+                          handleQuantityChange(
+                            materiel.materielId,
+                            parseInt(target.value),
+                          );
+                        }}
+                        disabled={loading}
+                      >
+                        <option value={0}>0</option>
+                        {#each Array(materiel.maxQuantity) as _, i (i)}
+                          <option value={i + 1}>{i + 1}</option>
+                        {/each}
+                      </select>
+                      <button
+                        class="btn btn-ghost btn-xs btn-circle hidden sm:flex"
+                        onclick={() =>
+                          handleQuantityChange(
+                            materiel.materielId,
+                            materiel.quantity + 1,
+                          )}
+                        disabled={loading ||
+                          materiel.quantity >= materiel.maxQuantity}
+                        aria-label="Augmenter"
+                      >
+                        <Plus class="size-3" />
+                      </button>
                     </div>
-
-                    <!-- Supprimer -->
-                    <button
-                      class="btn btn-ghost btn-xs btn-circle"
-                      onclick={() => handleRemoveMateriel(materiel.materielId)}
-                      disabled={loading}
-                      aria-label="Supprimer"
-                    >
-                      <X class="h-3 w-3" />
-                    </button>
                   </div>
                 </div>
               {/each}

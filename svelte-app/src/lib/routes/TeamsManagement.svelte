@@ -6,11 +6,8 @@
   import CreateTeamModal from "$lib/components/teams/CreateTeamModal.svelte";
   import TeamDetailModal from "$lib/components/teams/TeamDetailModal.svelte";
   import { navBarStore } from "../stores/NavBarStore.svelte";
-  import { onDestroy } from "svelte";
   import { navigate } from "$lib/router";
   import { fade } from "svelte/transition";
-
-  import { warmUpUsersTeamsManager } from "$lib/services/appwrite-warmup";
 
   // État de la page
   let createModalOpen = $state(false);
@@ -39,13 +36,6 @@
   }
 
   // ============================================================================
-  // WARM-UP
-  // ============================================================================
-  // $effect(() => {
-  //   warmUpUsersTeamsManager();
-  // });
-
-  // ============================================================================
   // NAVBAR CONFIGURATION
   // ============================================================================
 
@@ -60,7 +50,7 @@
 {#snippet navActions()}
   <button class="btn btn-primary btn-sm" onclick={openCreateModal}>
     <Plus class="h-4 w-4" />
-    Créer une équipe
+    <span class="hidden sm:inline">Créer une équipe</span>
   </button>
 {/snippet}
 

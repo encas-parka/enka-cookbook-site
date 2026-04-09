@@ -431,6 +431,7 @@ export class TeamdocsStore {
 
     for (const doc of this.#documentsList) {
       const teamId = doc.teamId;
+      if (!teamId) continue;
       if (!tagsByTeam.has(teamId)) {
         tagsByTeam.set(teamId, new Set());
       }

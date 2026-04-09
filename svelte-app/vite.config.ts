@@ -4,7 +4,7 @@ import { svelte } from "@sveltejs/vite-plugin-svelte";
 import { VitePWA } from "vite-plugin-pwa";
 import path from "path";
 import { fileURLToPath } from "url";
-import { visualizer } from "rollup-plugin-visualizer";
+// import { visualizer } from "rollup-plugin-visualizer";
 
 // ESM-safe __dirname replacement
 const __filename = fileURLToPath(import.meta.url);
@@ -24,7 +24,7 @@ export default defineConfig(({ mode }) => ({
         short_name: "Enka",
         description:
           "Recettes collaboratives et gestion d'événements pour cantines autogérées",
-        theme_color: "#ffffff",
+        theme_color: "#900e3b",
         background_color: "#ffffff",
         lang: "fr",
         display: "standalone",
@@ -32,31 +32,80 @@ export default defineConfig(({ mode }) => ({
         scope: "/app/",
         icons: [
           {
-            src: "pwa-192x192.png",
+            src: "192x192.png",
             sizes: "192x192",
             type: "image/png",
+            purpose: "any",
           },
           {
-            src: "pwa-512x512.png",
+            src: "512x512.png",
             sizes: "512x512",
             type: "image/png",
+            purpose: "any",
           },
           {
-            src: "pwa-512x512.png",
-            sizes: "512x512",
+            src: "logo.svg",
+            sizes: "any",
+            type: "image/svg+xml",
+            purpose: "any",
+          },
+          {
+            src: "192x192.png",
+            sizes: "192x192",
             type: "image/png",
             purpose: "maskable",
           },
         ],
       },
       workbox: {
-        // Seuls les assets hashés (JS/CSS) sont pré-cachés
-        globPatterns: ["assets/**/*.{js,css,woff2}"],
-        // Les assets ont déjà un hash dans leur nom, pas besoin de cache-busting
+        globPatterns: ["assets/**/*.{js,css,woff2}", "fonts/**/*.{css,woff2}"],
         dontCacheBustURLsMatching: /-[a-f0-9]{8}\./,
         cleanupOutdatedCaches: true,
         skipWaiting: true,
         clientsClaim: true,
+        runtimeCaching: [
+          {
+            urlPattern: /^https?:\/\/.*\/api\/data\.json$/,
+            handler: "StaleWhileRevalidate",
+            options: {
+              cacheName: "hugo-api",
+              expiration: { maxEntries: 10, maxAgeSeconds: 60 * 60 },
+            },
+          },
+          {
+            urlPattern: /^https?:\/\/.*\/recettes\/.*\/recipe\.json$/,
+            handler: "StaleWhileRevalidate",
+            options: {
+              cacheName: "hugo-recipes",
+              expiration: { maxEntries: 100, maxAgeSeconds: 60 * 60 },
+            },
+          },
+          {
+            urlPattern: /^https?:\/\/.*\/(icons|images)\/.*/,
+            handler: "CacheFirst",
+            options: {
+              cacheName: "static-assets",
+              expiration: { maxEntries: 50, maxAgeSeconds: 30 * 24 * 60 * 60 },
+            },
+          },
+          {
+            urlPattern: /^https:\/\/fonts\.googleapis\.com\/.+/,
+            handler: "StaleWhileRevalidate",
+            options: {
+              cacheName: "google-fonts-stylesheets",
+              expiration: { maxEntries: 20, maxAgeSeconds: 60 * 60 * 24 },
+            },
+          },
+          {
+            urlPattern: /^https:\/\/fonts\.gstatic\.com\/.+/,
+            handler: "CacheFirst",
+            options: {
+              cacheName: "google-fonts-webfonts",
+              expiration: { maxEntries: 30, maxAgeSeconds: 365 * 24 * 60 * 60 },
+              cacheableResponse: { statuses: [0, 200] },
+            },
+          },
+        ],
       },
       devOptions: {
         enabled: false,
@@ -95,9 +144,18 @@ export default defineConfig(({ mode }) => ({
 
     rollupOptions: {
       output: {
-        entryFileNames: "assets/[name]-[hash].js",
-        chunkFileNames: "assets/[name]-[hash].js",
-        assetFileNames: "assets/[name]-[hash].[ext]",
+        entryFileNames:
+          mode === "development"
+            ? "assets/[name].js"
+            : "assets/[name]-[hash].js",
+        chunkFileNames:
+          mode === "development"
+            ? "assets/[name].js"
+            : "assets/[name]-[hash].js",
+        assetFileNames:
+          mode === "development"
+            ? "assets/[name].[ext]"
+            : "assets/[name]-[hash].[ext]",
 
         manualChunks(id) {
           if (id.includes("@lucide/svelte")) {
@@ -106,7 +164,6 @@ export default defineConfig(({ mode }) => ({
           if (id.includes("appwrite")) {
             return "appwrite";
           }
-          // ⭐ AJOUT : Séparer Tiptap (gros paquet)
           if (id.includes("@tiptap")) {
             return "tiptap";
           }

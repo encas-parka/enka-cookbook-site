@@ -8,6 +8,7 @@ import { materielStore } from "./MaterielStore.svelte";
 import { teamdocsStore } from "./TeamdocsStore.svelte";
 import { notificationStore } from "./NotificationStore.svelte";
 import { realtimeManager } from "./RealtimeManager.svelte";
+import { recipesStore } from "./RecipesStore.svelte";
 import type { Models } from "appwrite";
 import { route } from "$lib/router";
 
@@ -20,7 +21,7 @@ class GlobalState {
   // =============================================================================
 
   #user = $state<Models.User<Models.Preferences> | null>(null);
-  #userTeams = $state<string[]>([]);
+  #userTeams = $derived(nativeTeamsStore.myTeams.map((t) => t.$id));
   #authLoading = $state(false);
   #authError = $state<string | null>(null);
   #authInitialized = $state(false);
@@ -59,7 +60,7 @@ class GlobalState {
 
   /**
    * Initialise l'authentification
-   * Récupère l'utilisateur connecté et ses équipes
+   * Récupère uniquement l'utilisateur connecté (pas les stores)
    */
   async initializeAuth(): Promise<void> {
     if (this.#authInitialized) {
@@ -72,42 +73,29 @@ class GlobalState {
     this.#authError = null;
 
     try {
-      // Récupérer l'utilisateur connecté
       const { account } = await getAppwriteInstances();
       this.#user = await account.get();
 
-      // LEGACY
       localStorage.setItem("appwrite-user-name", this.#user.name);
       localStorage.setItem("appwrite-user-email", this.#user.email);
       localStorage.setItem("appwrite-user-id", this.#user.$id);
 
-      // Initialiser NativeTeamsStore AVANT de récupérer les équipes
-      await nativeTeamsStore.initialize();
-
-      // Récupérer les équipes depuis NativeTeamsStore
-      this.#userTeams = nativeTeamsStore.myTeams.map((t) => t.$id);
-
-      console.log(
-        `[GlobalState] Authentifié: ${this.#user.name} (${this.#userTeams.length} équipes)`,
-      );
+      console.log(`[GlobalState] Authentifié: ${this.#user.name}`);
     } catch (error) {
-      // Pas connecté ou erreur
       this.#user = null;
-      this.#userTeams = [];
       this.#authError =
         error instanceof Error ? error.message : "Erreur d'authentification";
 
       console.log("[GlobalState] Utilisateur non connecté");
     } finally {
       this.#authLoading = false;
-      this.#authInitialized = true; // ✅ Toujours marquer comme initialisé
+      this.#authInitialized = true;
     }
   }
 
   /**
    * Réinitialise l'authentification après un login/inscription réussie
-   * Force la mise à jour de l'état utilisateur et des équipes
-   * Réinitialise tous les stores utilisateur avec les credentials authentifiés
+   * Set l'utilisateur + synchronise tous les stores + realtime
    */
   async refreshAuthAfterLogin(): Promise<void> {
     console.log("[GlobalState] Réinitialisation après login...");
@@ -115,43 +103,47 @@ class GlobalState {
     this.#authError = null;
 
     try {
-      // Récupérer le nouvel utilisateur connecté
       const { account } = await getAppwriteInstances();
       this.#user = await account.get();
 
-      // Mettre à jour localStorage
       localStorage.setItem("appwrite-user-name", this.#user.name);
       localStorage.setItem("appwrite-user-email", this.#user.email);
       localStorage.setItem("appwrite-user-id", this.#user.$id);
 
-      // ✅ RÉINITIALISER TOUS LES STORES UTILISATEURS
+      // Phase 0: Initialiser le cache IDB pour les stores qui en dépendent
+      // (obligatoire avant syncFromRemote — sinon le guard #cache retourne silencieusement)
+      await Promise.all([
+        eventsStore.loadCache(),
+        recipesStore.loadCache(),
+        materielStore.loadCache(),
+        teamdocsStore.loadCache(),
+        nativeTeamsStore.loadCache(),
+      ]);
 
-      // 1. NativeTeamsStore (équipes natives)
-      await nativeTeamsStore.initialize();
+      // Phase 1: Sync de TOUS les stores en parallèle
+      await Promise.all([
+        nativeTeamsStore.syncFromRemote(),
+        eventsStore.syncFromRemote(),
+        materielStore.syncFromRemote(),
+        teamdocsStore.syncFromRemote(),
+        recipesStore.syncFromRemote(),
+        notificationStore.initialize(),
+      ]);
 
-      // 2. EventsStore (événements utilisateur)
-      await eventsStore.syncFromRemote();
-      await eventsStore.setupRealtime();
+      // Phase 2: Setup realtime pour TOUS les stores
+      await Promise.all([
+        nativeTeamsStore.setupRealtime(),
+        eventsStore.setupRealtime(),
+        materielStore.setupRealtime(),
+        teamdocsStore.setupRealtime(),
+        recipesStore.setupRealtime(),
+      ]);
 
-      // 3. MaterielStore (matériel et emprunts)
-      await materielStore.syncFromRemote();
-      await materielStore.setupRealtime();
-
-      // 4. TeamdocsStore (documents d'équipe)
-      await teamdocsStore.syncFromRemote();
-      await teamdocsStore.setupRealtime();
-
-      // 5. NotificationStore (lazy init + realtime notifications)
-      await notificationStore.initialize();
-
-      // 6. RealtimeManager (WebSocket central pour tous les stores)
+      // Phase 3: RealtimeManager en dernier (agrège les channels enregistrés)
       await realtimeManager.initialize();
 
-      // 7. Récupérer les équipes depuis NativeTeamsStore
-      this.#userTeams = nativeTeamsStore.myTeams.map((t) => t.$id);
-
       console.log(
-        `[GlobalState] Réinitialisé après login: ${this.#user.name} (${this.#userTeams.length} équipes)`,
+        `[GlobalState] Réinitialisé après login: ${this.#user.name} (${this.userTeams.length} équipes)`,
       );
     } catch (error) {
       console.error("[GlobalState] Erreur lors de la réinitialisation:", error);
@@ -163,66 +155,34 @@ class GlobalState {
   }
 
   /**
-   * Déconnexion
+   * Déconnexion : cleanup Appwrite + stores privés + realtime
    */
   async logout(): Promise<void> {
     try {
-      // Déconnexion Appwrite (supprime toutes les sessions)
       const { account } = await getAppwriteInstances();
       await account.deleteSession({ sessionId: "current" });
 
-      // Nettoyer le cache Appwrite
       clearAppwriteCache();
 
-      // @LEGACY : Nettoyer localStorage
       localStorage.removeItem("appwrite-user-name");
       localStorage.removeItem("appwrite-user-email");
       localStorage.removeItem("appwrite-user-id");
 
-      // Réinitialiser l'état
+      // Cleanup des stores privés (recipesStore préservé pour les visiteurs)
+      notificationStore.destroy();
+      nativeTeamsStore.destroy();
+      eventsStore.destroy();
+      materielStore.destroy();
+      teamdocsStore.destroy();
+      realtimeManager.destroy();
+
       this.#user = null;
-      this.#userTeams = [];
       this.#authInitialized = false;
 
       console.log("[GlobalState] Déconnexion réussie");
     } catch (error) {
       console.error("[GlobalState] Erreur lors de la déconnexion:", error);
       throw error;
-    }
-  }
-
-  /**
-   * Rafraîchit les équipes de l'utilisateur
-   * Utile après l'initialisation complète d'Appwrite
-   */
-  async refreshTeams(): Promise<void> {
-    if (!this.#user) {
-      console.warn(
-        "[GlobalState] Impossible de rafraîchir les équipes: utilisateur non connecté",
-      );
-      return;
-    }
-
-    try {
-      // Forcer la synchronisation depuis Appwrite
-      await nativeTeamsStore.syncFromRemote();
-
-      // Récupérer les équipes depuis NativeTeamsStore
-      const teams = nativeTeamsStore.myTeams.map((t) => t.$id);
-
-      // Mettre à jour seulement si on a récupéré des équipes
-      // ou si c'était vide avant (cas d'initialisation)
-      if (teams.length > 0 || this.#userTeams.length === 0) {
-        this.#userTeams = teams;
-        console.log(
-          `[GlobalState] Équipes rafraîchies: ${this.#userTeams.length}`,
-        );
-      }
-    } catch (error) {
-      console.error(
-        "[GlobalState] Erreur lors du rafraîchissement des équipes:",
-        error,
-      );
     }
   }
 

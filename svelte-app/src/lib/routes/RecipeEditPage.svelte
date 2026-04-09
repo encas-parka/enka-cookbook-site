@@ -104,11 +104,6 @@
   // AUTO-EFFECTS
   // ============================================================================
 
-  // WARM-UP
-  // $effect(() => {
-  //   warmUpEnkaData();
-  // });
-
   // Vérifier que l'utilisateur est connecté
   $effect(() => {
     if (!globalState.userId) {
@@ -434,7 +429,7 @@
       class="btn btn-secondary btn-soft btn-sm"
     >
       <Copy class="h-4 w-4" />
-      Créer une version alternative
+      <span class="hidden sm:inline">Créer une version alternative</span>
     </button>
 
     <!-- Save button -->
@@ -443,8 +438,14 @@
       disabled={!canEdit || isSaving || !isDirty}
       class="btn btn-accent btn-sm"
     >
-      <Save class="h-4 w-4" />
-      {isSaving ? "Sauvegarde..." : "Sauvegarder"}
+      {#if isSaving}
+        <span class="loading loading-spinner loading-xs text-primary"></span>
+      {:else}
+        <Save class="h-4 w-4" />
+      {/if}
+      <span class="hidden sm:inline"
+        >{isSaving ? "Sauvegarde..." : "Sauvegarder"}</span
+      >
     </button>
   </div>
 {/snippet}
@@ -523,6 +524,19 @@
             {isDeleting ? "Suppression..." : "Supprimer la recette"}
           </button>
         </div>
+      {/if}
+
+      <!-- Bouton flottant Sauvegarder (mobile uniquement) -->
+      {#if isDirty && !isSaving}
+        <button
+          class="btn btn-accent btn-sm sticky bottom-2 shadow-lg {!globalState.isMobile &&
+            'hidden'}"
+          onclick={save}
+          disabled={!canEdit || isSaving || !isDirty}
+        >
+          <Save size={16} class="mr-1" />
+          Sauvegarder
+        </button>
       {/if}
     </div>
   {/if}

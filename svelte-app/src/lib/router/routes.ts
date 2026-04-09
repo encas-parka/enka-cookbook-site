@@ -135,10 +135,13 @@ export const routes: Routes = {
     "/": () => import("$lib/routes/EventEditPage.svelte"),
     "/recipes": () => import("$lib/routes/EventRecipesPage.svelte"),
     "/products": () => import("$lib/routes/EventProductsPage.svelte"),
+    "/materiel": () => import("$lib/routes/EventMaterielPage.svelte"),
     "/posters": () => import("$lib/routes/EventPosterPage.svelte"),
     "/todos": () => import("$lib/routes/EventTodosPage.svelte"),
     "/documents": () => import("$lib/routes/EventDocumentsPage.svelte"),
     "/document/new": () => import("$lib/routes/EventDocumentCreatePage.svelte"),
+    "/document/:docId": () =>
+      import("$lib/routes/EventDocumentEditPage.svelte"),
     "/document/:docId/edit": () =>
       import("$lib/routes/EventDocumentEditPage.svelte"),
   },

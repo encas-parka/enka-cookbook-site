@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { onMount, onDestroy } from "svelte";
+  import { onMount } from "svelte";
   import { fade } from "svelte/transition";
   import { Plus, Users, LoaderCircle } from "@lucide/svelte";
   import { materielStore } from "$lib/stores/MaterielStore.svelte";

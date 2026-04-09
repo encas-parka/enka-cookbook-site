@@ -31,9 +31,7 @@
       if (belongsToUserTeams) return false;
 
       // L'utilisateur est dans les contributors
-      const isContributor = event.contributors?.some(
-        (c) => c.id === userId,
-      );
+      const isContributor = event.contributors?.some((c) => c.id === userId);
 
       return isContributor;
     });

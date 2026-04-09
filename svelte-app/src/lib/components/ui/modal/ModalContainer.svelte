@@ -91,9 +91,9 @@
   <!-- Modal box -->
   {#if isOpen}
     <div
-      class="modal-box p-0 {modalClass} {fullscreenOnMobile &&
+      class="modal-box min-w-0 p-0 {modalClass} {fullscreenOnMobile &&
       globalState.isMobile
-        ? 'fixed inset-0 m-0 h-dvh w-dvw rounded-none grid grid-rows-[auto_1fr_auto]'
+        ? 'fixed inset-0 m-0 grid h-dvh w-dvw grid-rows-[auto_1fr_auto] rounded-none'
         : 'fixed top-10 m-auto flex flex-col'} {!(
         fullscreenOnMobile && globalState.isMobile
       ) && getSizeClass(maxWidth, 'max-w')} {!(

@@ -283,7 +283,7 @@
       {:else}
         <Save size={18} class="mr-1" />
       {/if}
-      <span class="font-bold">Créer</span>
+      <span class="hidden font-bold sm:inline">Créer</span>
     </button>
   </div>
 {/snippet}
@@ -329,7 +329,7 @@
       </div>
 
       <!-- Statut de l'événement -->
-      <div class="align-start md:min-w-96">
+      <div class="align-start w-full md:min-w-96">
         <Fieldset legend="Statut de l'événement">
           <div class="space-y-3">
             <label class="flex cursor-pointer items-center gap-3">
@@ -516,5 +516,18 @@
         </div>
       </div>
     </div>
+  {/if}
+
+  <!-- Bouton flottant Créer (mobile uniquement) -->
+  {#if hasData && !isBusy}
+    <button
+      class="btn btn-accent btn-sm sticky bottom-2 shadow-lg {!globalState.isMobile &&
+        'hidden'}"
+      onclick={handleSave}
+      disabled={isBusy || !hasData}
+    >
+      <Save size={16} class="mr-1" />
+      Créer
+    </button>
   {/if}
 </div>

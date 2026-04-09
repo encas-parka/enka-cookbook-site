@@ -28,7 +28,7 @@ export class DateRangeStore {
   // Bornes calculées (définies avant utilisation dans d'autres derived)
   firstAvailableDate = $derived([...this.#availableDates].sort()[0]);
   lastAvailableDate = $derived(
-    [...this.#availableDates].sort()[this.#availableDates.length - 1]
+    [...this.#availableDates].sort()[this.#availableDates.length - 1],
   );
 
   // Objet range pour compatibilité (ou usage direct)
@@ -55,7 +55,7 @@ export class DateRangeStore {
 
   isFullRange = $derived(
     this.#start === this.firstAvailableDate &&
-      this.#end === this.lastAvailableDate
+      this.#end === this.lastAvailableDate,
   );
 
   isUpcomingRange = $derived.by(() => {
@@ -82,9 +82,7 @@ export class DateRangeStore {
 
   hasSingleDateEvent = $derived(this.#availableDates.length === 1);
 
-  hasSingleDateInRange = $derived(
-    !!(this.#start && this.#start === this.#end)
-  );
+  hasSingleDateInRange = $derived(!!(this.#start && this.#start === this.#end));
 
   hasPastDatesInRange = $derived.by(() => {
     if (!this.#start || !this.#end) return false;
@@ -93,11 +91,11 @@ export class DateRangeStore {
     // 🎯 Vérifier si la PREMIÈRE date du range est passée (avec marge)
     // Si le début de la plage est déjà passée, on masque les boutons d'action
     const startWithMargin = new Date(this.#start);
-    startWithMargin.setHours(startWithMargin.getHours() + DEFAULT_PURCHASE_MARGIN_HOURS);
+    startWithMargin.setHours(
+      startWithMargin.getHours() + DEFAULT_PURCHASE_MARGIN_HOURS,
+    );
     return startWithMargin < new Date();
   });
-
-
 
   // Actions
   setAvailableDates(dates: string[]) {
@@ -163,7 +161,7 @@ export class DateRangeStore {
 
     // Trouver la première date disponible à partir de demain
     const futureDates = this.#availableDates.filter(
-      (date) => new Date(date) >= tomorrow
+      (date) => new Date(date) >= tomorrow,
     );
 
     if (futureDates.length > 0) {
@@ -193,9 +191,7 @@ export class DateRangeStore {
     this.#start = startDate;
     this.#end = sortedDates[sortedDates.length - 1];
 
-    console.log(
-      `[DateRangeStore] Initialized: ${this.#start} - ${this.#end}`,
-    );
+    console.log(`[DateRangeStore] Initialized: ${this.#start} - ${this.#end}`);
   }
 
   /**

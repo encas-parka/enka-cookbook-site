@@ -11,6 +11,10 @@
   import { productsStore } from "$lib/stores/ProductsStore.svelte";
   import { createManualProduct } from "$lib/services/appwrite-products";
   import { toastService } from "$lib/services/toast.service.svelte";
+  import {
+    getProductTypeInfo,
+    getProductTypeRawKey,
+  } from "$lib/utils/products-display";
   import Suggestions from "../ui/Suggestions.svelte";
   import QuantityInput from "../ui/QuantityInput.svelte";
   import StoreInput from "../ui/StoreInput.svelte";
@@ -75,10 +79,10 @@
 
   // Suggestions
   const typeSuggestions = $derived(
-    productsStore.uniqueProductTypes.map((t) => ({
-      id: t,
-      label: t,
-    })),
+    productsStore.uniqueProductTypes.map((t) => {
+      const info = getProductTypeInfo(t);
+      return { id: t, label: info.displayName, icon: info.icon };
+    }),
   );
   let isArchiveMode = $derived(productsStore.isEventPassed);
 
@@ -104,7 +108,7 @@
 
       const productData = {
         productName: formData.productName.trim(),
-        productType: formData.productType.trim(),
+        productType: getProductTypeRawKey(formData.productType.trim()),
         store: formData.store.trim()
           ? { storeName: formData.store.trim() }
           : undefined,
@@ -116,7 +120,11 @@
           : undefined,
       };
 
-      await createManualProduct(productData, productsStore.currentMainId!);
+      const newProduct = await createManualProduct(
+        productData,
+        productsStore.currentMainId!,
+      );
+      productsStore.addProductOptimistic(newProduct);
 
       success = true;
       toastService.success(`Produit "${productData.productName}" ajouté`);
@@ -247,7 +255,8 @@
         <fieldset class="fieldset">
           <div class="flex flex-wrap items-baseline gap-2">
             <label
-              class="input w-72 required {showErrors && validationErrors.productType
+              class="input required w-72 {showErrors &&
+              validationErrors.productType
                 ? 'input-error'
                 : ''}"
             >
@@ -262,6 +271,7 @@
             <Suggestions
               suggestions={typeSuggestions}
               onSuggestionClick={(s) => (formData.productType = s.label)}
+              maxSuggestions={Infinity}
               disabled={loading}
             />
           </div>
@@ -317,7 +327,7 @@
 
         <!-- Actions avec mt-auto pour rester en bas -->
         <div
-          class="border-base-300 mt-auto flex flex-wrap items-center justify-between gap-2 border-t pt-4"
+          class="border-base-300 mt-auto flex flex-wrap items-center justify-end gap-2 border-t pt-4"
         >
           <button
             type="button"
@@ -327,31 +337,29 @@
           >
             Annuler
           </button>
-          <div class="flex gap-2">
-            <button
-              type="button"
-              class="btn btn-secondary"
-              onclick={() => handleSubmit(true)}
-              disabled={loading || isArchiveMode}
-            >
-              {#if loading}
-                <span class="loading loading-spinner"></span>
-              {:else}
-                <Plus size={18} />
-              {/if}
-              Ajouter et créer un nouveau
-            </button>
-            <button
-              type="submit"
-              class="btn btn-primary"
-              disabled={loading || isArchiveMode}
-            >
-              {#if loading}
-                <span class="loading loading-spinner"></span>
-              {/if}
-              Ajouter et fermer
-            </button>
-          </div>
+          <button
+            type="button"
+            class="btn btn-secondary"
+            onclick={() => handleSubmit(true)}
+            disabled={loading || isArchiveMode}
+          >
+            {#if loading}
+              <span class="loading loading-spinner"></span>
+            {:else}
+              <Plus size={18} />
+            {/if}
+            Ajouter et créer un nouveau
+          </button>
+          <button
+            type="submit"
+            class="btn btn-primary"
+            disabled={loading || isArchiveMode}
+          >
+            {#if loading}
+              <span class="loading loading-spinner"></span>
+            {/if}
+            Ajouter et fermer
+          </button>
         </div>
       </fieldset>
     </form>

@@ -237,24 +237,20 @@
       <div class="space-y-4">
         <h4 class="font-medium">Détails de l'achat</h4>
 
-        <div class="flex flex-col gap-4 sm:flex-row">
+        <div class="flex flex-wrap gap-4">
           <!-- Magasin -->
-          <div class="flex-1">
-            <StoreInput
-              bind:value={formData.store}
-              suggestions={productsStore.uniqueStores}
-              disabled={loading}
-            />
-          </div>
+          <StoreInput
+            bind:value={formData.store}
+            suggestions={productsStore.uniqueStores}
+            disabled={loading}
+          />
 
           <!-- Qui -->
-          <div class="flex-1">
-            <WhoInput
-              bind:value={formData.who}
-              suggestions={productsStore.uniqueWho}
-              disabled={loading}
-            />
-          </div>
+          <WhoInput
+            bind:value={formData.who}
+            suggestions={productsStore.uniqueWho}
+            disabled={loading}
+          />
         </div>
 
         <!-- Dépense -->

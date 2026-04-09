@@ -58,7 +58,6 @@
       hasDifferentQuantities:
         scaledOriginal.formattedNumber !== scaledNormalized.formattedNumber ||
         scaledOriginal.unit !== scaledNormalized.unit,
-
     };
   }
 </script>

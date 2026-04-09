@@ -56,6 +56,7 @@
   import InfoCollapse from "../components/ui/InfoCollapse.svelte";
   import { isDemoEvent } from "../data/demo-event-config";
   import { online } from "svelte/reactivity/window";
+  import { shareOrDownload } from "$lib/utils/share-utils";
 
   // Mapping des icônes pour les statuts d'achat
   const statusIcons = {
@@ -95,22 +96,15 @@
 
   function handleExportMarkdown() {
     const markdown = productsStore.exportToMarkdown(eventName);
-
-    const blob = new Blob([markdown], { type: "text/markdown;charset=utf-8" });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url;
     const slug = eventName
       .toLowerCase()
       .replace(/[^a-z0-9]+/g, "-")
       .replace(/^-|-$/g, "");
-    a.download = `${slug || "produits"}-courses.md`;
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    URL.revokeObjectURL(url);
-
-    toastService.success("Liste de courses exportée en Markdown");
+    shareOrDownload(
+      markdown,
+      `${slug || "produits"}-courses.md`,
+      "Liste de courses exportée en Markdown",
+    );
   }
 
   // État local pour le modal d'ajout de produit
@@ -118,11 +112,6 @@
 
   // État de chargement
   let isLoading = $state(true);
-
-  // WARM-UP
-  // $effect(() => {
-  //   warmUpEnkaData();
-  // });
 
   // =========================================================================
   // INITIALISATION
@@ -345,27 +334,18 @@
 {#snippet navActions()}
   <div class="flex items-center gap-2">
     <button
-      class="btn btn-circle btn-primary"
+      class="btn btn-sm btn-circle btn-primary"
       onclick={handleExportMarkdown}
       title="Exporter en Markdown"
     >
       <Download size={18} />
     </button>
     <button
-      class="btn btn-circle btn-primary"
+      class="btn btn-sm btn-circle btn-primary"
       onclick={() => (printModalOpen = true)}
       title="Imprimer la liste"
     >
       <Printer size={18} />
-    </button>
-    <button
-      class="btn btn-primary btn-sm"
-      onclick={handleOpenAddProductModal}
-      title="Ajouter un produit manuellement"
-      disabled={!canEdit}
-    >
-      <Plus class="mr-1 h-4 w-4" />
-      Produit
     </button>
   </div>
 {/snippet}
@@ -494,7 +474,9 @@
       {/if}
 
       {#if hasUndatedRecipes}
-        <div class="alert alert-warning alert-soft w-full max-sm:alert-vertical">
+        <div
+          class="alert alert-warning alert-soft max-sm:alert-vertical w-full"
+        >
           <CircleAlert size={20} class="shrink-0" />
           <div>
             <span class="font-bold">Recettes non planifiées</span>
@@ -545,7 +527,7 @@
               </div>
               <div class="card-action mt-auto">
                 <button
-                  class="btn btn-primary btn-soft w-full"
+                  class="btn btn-primar w-full"
                   onclick={handleOpenAddProductModal}
                   onmouseenter={() =>
                     (hoverHelp.msg = "Ajouter un produit manuellement")}

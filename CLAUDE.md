@@ -10,10 +10,12 @@ This project contains **two CLAUDE.md files** for different contexts:
 2. **`svelte-app/CLAUDE.md`** - Detailed Svelte app architecture and development
 
 **How Claude Code selects which file to read:**
+
 - Working directory = project root → reads this file
 - Working directory = `svelte-app/` → reads `svelte-app/CLAUDE.md`
 
 **Recommendation**: When starting Svelte app work, explicitly reference:
+
 > "Read svelte-app/CLAUDE.md for Svelte-specific architecture"
 
 ## Project Overview
@@ -159,7 +161,7 @@ disableKinds:
   - taxonomy
   - term
   - section
-  - 404  # SPA handles all routing
+  - 404 # SPA handles all routing
 ```
 
 ## Key Architecture Patterns
@@ -276,8 +278,6 @@ See `svelte-app/docs/local-mode.md` for complete documentation.
 
 **Project-wide documentation**:
 
-- `svelte-app/docs/local-mode.md` - Local/demo event mode
-- `svelte-app/docs/demo-events-generator.md` - Creating demo events
 - `svelte-app/src/lib/services/README.md` - Service layer architecture
 
 ## Important Notes

@@ -1,11 +1,11 @@
 <script lang="ts">
   import { PencilLine } from "@lucide/svelte";
-  import type { ComponentType } from "svelte";
+  import type { Component } from "svelte";
 
   interface SuggestionItem {
     id: string;
     label: string;
-    icon?: ComponentType;
+    icon?: Component;
     disabled?: boolean;
   }
 

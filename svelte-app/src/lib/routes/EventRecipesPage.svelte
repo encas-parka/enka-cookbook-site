@@ -77,7 +77,8 @@
     if (selectedUndatedFilter) {
       return eventMeals.filter((meal) => meal.date === "");
     }
-    if (!selectedDateFilter) return eventMeals.filter((meal) => meal.date !== "");
+    if (!selectedDateFilter)
+      return eventMeals.filter((meal) => meal.date !== "");
 
     return eventMeals.filter((meal) => {
       if (meal.date === "") return false;
@@ -184,7 +185,6 @@
         await recipesStore.getRecipesByUuidsBulk(allRecipeUuids);
 
       // Convertir la Map en array
-      // Note: preparationHtml et preparation24hHtml sont déjà parsés par RecipesStore
       recipesDetails = Array.from(recipesMap.values()).filter(Boolean);
 
       console.log(
@@ -265,8 +265,9 @@
 
 {#snippet navActions()}
   <div class="flex gap-2 max-sm:hidden">
-    <button class="btn btn-circle btn-primary" onclick={() => window.print()}
-      ><Printer size={18} /></button
+    <button
+      class="btn btn-sm btn-circle btn-primary"
+      onclick={() => window.print()}><Printer size={18} /></button
     >
   </div>
 {/snippet}
@@ -281,10 +282,10 @@
         tabindex="-1"
         aria-hidden="true"
       ></button>
-      <div class="my-6">
+      <div>
         <h3 class="mb-3 text-lg font-semibold">Rechercher par ingrédient</h3>
 
-        <div class="relative">
+        <div class="relative mb-4">
           <AutocompleteInput
             items={availableIngredientsForAutocomplete}
             onSelect={selectIngredient}
@@ -375,7 +376,7 @@
                           selectedUndatedFilter = false; // Réinitialiser le filtre mise de côté
                         }}
                       >
-                        <span class="truncate text-left text-wrap">
+                        <span class="truncate text-left leading-none text-wrap">
                           {recipe.title}
                         </span>
                       </button>
@@ -402,7 +403,12 @@
                 selectedUndatedFilter = !selectedUndatedFilter;
               }}
             >
-              <span>📌 Mise de côté ({undatedMeals.reduce((count, m) => count + m.recipes.length, 0)})</span>
+              <span
+                >📌 Mise de côté ({undatedMeals.reduce(
+                  (count, m) => count + m.recipes.length,
+                  0,
+                )})</span
+              >
             </button>
           </li>
           {#if selectedUndatedFilter}
@@ -744,7 +750,7 @@
                     id="meal-{meal.date || 'undated'}"
                     class="card my-4 flex flex-row flex-wrap items-center justify-center gap-4 p-2 font-black shadow-lg sm:gap-6 sm:px-4 sm:py-2 print:hidden {meal.date
                       ? 'bg-primary text-primary-content'
-                      : 'bg-warning/20 text-warning-content'}"
+                      : 'bg-warning/80 text-warning-content'}"
                   >
                     {#if meal.date}
                       <div class="">

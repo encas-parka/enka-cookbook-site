@@ -11,7 +11,6 @@
   import { navigate } from "$lib/router";
   import { navBarStore } from "../stores/NavBarStore.svelte";
   import { globalState } from "../stores/GlobalState.svelte";
-  import { onDestroy } from "svelte";
   import { getTypeDisplay } from "$lib/utils/recipeUtils";
   import RecipeMetadata from "$lib/components/recipes/RecipeMetadata.svelte";
   import { fade } from "svelte/transition";

@@ -45,7 +45,7 @@
   <!-- Contributeurs -->
   <div class="badge badge-soft badge-primary badge-lg flex items-center gap-2">
     <Users class="h-4 w-4" />
-    <span>{stats.contributorsStats.total} Participant·es</span>
+    <span>{stats.contributorsStats.accepted} Participant·es</span>
   </div>
 
   <!-- Recettes manquantes -->

@@ -72,6 +72,7 @@ class RecipesIndexedDBCache implements RecipesIDBCache {
   private readonly LAST_APPWRITE_SYNC_KEY = "lastAppwriteSync";
   private readonly RECIPES_COUNT_KEY = "recipesCount";
   private readonly MIGRATION_VERSION_KEY = "migrationVersion";
+  private readonly SYNC_VERSION_KEY = "syncVersion";
 
   /**
    * Ouvre/crée la base IndexedDB
@@ -488,6 +489,8 @@ class RecipesIndexedDBCache implements RecipesIDBCache {
             metadata.lastAppwriteSync = entry.value;
           else if (entry.key === this.MIGRATION_VERSION_KEY)
             metadata.migrationVersion = entry.value || 0;
+          else if (entry.key === this.SYNC_VERSION_KEY)
+            metadata.syncVersion = entry.value;
         });
 
         console.log(
@@ -519,7 +522,13 @@ class RecipesIndexedDBCache implements RecipesIDBCache {
         value: metadata.lastAppwriteSync,
       });
       store.put({ key: this.RECIPES_COUNT_KEY, value: metadata.recipesCount });
-      store.put({ key: this.MIGRATION_VERSION_KEY, value: metadata.migrationVersion });
+      store.put({
+        key: this.MIGRATION_VERSION_KEY,
+        value: metadata.migrationVersion,
+      });
+      if (metadata.syncVersion !== undefined) {
+        store.put({ key: this.SYNC_VERSION_KEY, value: metadata.syncVersion });
+      }
 
       tx.oncomplete = () => {
         console.log(`[RecipesIDBCache] Metadata sauvegardées`);
@@ -539,10 +548,15 @@ class RecipesIndexedDBCache implements RecipesIDBCache {
     return new Promise((resolve, reject) => {
       const tx = this.db!.transaction(this.METADATA_STORE, "readwrite");
       const store = tx.objectStore(this.METADATA_STORE);
-      const request = store.put({ key: this.MIGRATION_VERSION_KEY, value: version });
+      const request = store.put({
+        key: this.MIGRATION_VERSION_KEY,
+        value: version,
+      });
 
       request.onsuccess = () => {
-        console.log(`[RecipesIDBCache] migrationVersion mis à jour: ${version}`);
+        console.log(
+          `[RecipesIDBCache] migrationVersion mis à jour: ${version}`,
+        );
         resolve();
       };
 

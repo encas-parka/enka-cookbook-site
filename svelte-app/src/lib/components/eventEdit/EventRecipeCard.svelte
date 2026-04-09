@@ -149,7 +149,7 @@
           {/if}
 
           <!-- Badges de régimes -->
-          <div class="flex-shrink-0">
+          <div class="shrink-0">
             {#if recipe.regime}
               <RecipeRegimeBadges
                 regimes={recipe.regime}
@@ -163,7 +163,7 @@
 
       <!-- Informations supplémentaires -->
       <div
-        class="border-base-300 flex flex-wrap items-center gap-4 pt-4 print:gap-2 print:pt-0"
+        class=" flex flex-wrap items-center gap-4 pt-4 print:gap-2 print:pt-0"
       >
         <div class="text-base-content/80 flex items-center gap-2 py-2 text-lg">
           <Users class="h-4 w-4" />
@@ -199,6 +199,15 @@
           </div>
         {/if}
       </div>
+
+      <!-- Description quantité -->
+      {#if recipe.quantite_desc}
+        <div class="pt-3 print:pt-1">
+          <p class="text-base-content/70 text-end text-sm italic">
+            {recipe.quantite_desc}
+          </p>
+        </div>
+      {/if}
     </div>
 
     <!-- Grille principale : Ingrédients + Préparation -->
@@ -217,8 +226,6 @@
         <RecipePreparation
           preparation={recipe.preparation}
           preparation24h={recipe.preparation24h || undefined}
-          preparationHtml={recipe.preparationHtml}
-          preparation24hHtml={recipe.preparation24hHtml}
           astuces={recipe.astuces || []}
         />
       </div>

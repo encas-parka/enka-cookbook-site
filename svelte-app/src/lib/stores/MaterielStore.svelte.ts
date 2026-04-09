@@ -1,7 +1,8 @@
 import { SvelteMap } from "svelte/reactivity";
 import type { Models } from "appwrite";
 import { Query } from "appwrite";
-import type { Materiel, MaterielLoan } from "$lib/types/appwrite";
+import { CACHE_SYNC_VERSION } from "$lib/constants/sync";
+import type { Materiel, MaterielLoan, MaterielType } from "$lib/types/appwrite";
 import type {
   EnrichedMateriel,
   EnrichedMaterielLoan,
@@ -31,9 +32,11 @@ import {
   createMaterielIDBCache,
   type MaterielIDBCache,
 } from "$lib/services/materiel-idb-cache";
+import { materielTypeLabels } from "$lib/utils/share-utils";
 import { globalState } from "./GlobalState.svelte";
 import { realtimeManager } from "./RealtimeManager.svelte";
 import { nativeTeamsStore } from "./NativeTeamsStore.svelte";
+import { eventMaterielStore } from "./EventMaterielStore.svelte";
 import {
   enrichMaterielFromAppwrite,
   enrichLoanFromAppwrite,
@@ -330,8 +333,18 @@ export class MaterielStore {
 
       // Charger les métadonnées
       const metadata = await this.#idbCache.loadMetadata();
-      this.#lastSyncMateriel = metadata.lastSyncMateriel;
-      this.#lastSyncLoans = metadata.lastSyncLoans;
+
+      // Vérifier la version du cache — si obsolète, forcer un full sync
+      if (!metadata.syncVersion || metadata.syncVersion < CACHE_SYNC_VERSION) {
+        console.log(
+          `[MaterielStore] Cache syncVersion ${metadata.syncVersion ?? "absent"} < ${CACHE_SYNC_VERSION}, full sync requis`,
+        );
+        this.#lastSyncMateriel = null;
+        this.#lastSyncLoans = null;
+      } else {
+        this.#lastSyncMateriel = metadata.lastSyncMateriel;
+        this.#lastSyncLoans = metadata.lastSyncLoans;
+      }
 
       console.log(
         `[MaterielStore] ${this.#materiels.size} matériels et ${this.#loans.size} emprunts chargés du cache IDB`,
@@ -345,8 +358,11 @@ export class MaterielStore {
     try {
       // 1. Sync Materiel (modifiés depuis lastSyncMateriel)
       const materielQueries = this.#lastSyncMateriel
-        ? [Query.greaterThan("$updatedAt", this.#lastSyncMateriel)]
-        : [];
+        ? [
+            Query.greaterThan("$updatedAt", this.#lastSyncMateriel),
+            Query.limit(500),
+          ]
+        : [Query.limit(500)];
 
       const updatedMateriels = await listMateriels(materielQueries);
 
@@ -362,9 +378,9 @@ export class MaterielStore {
       const loanQueries = this.#lastSyncLoans
         ? [
             Query.greaterThan("$updatedAt", this.#lastSyncLoans),
-            Query.limit(100),
+            Query.limit(500),
           ]
-        : [];
+        : [Query.limit(500)];
 
       const updatedLoans = await listMaterielLoans(loanQueries);
 
@@ -383,6 +399,7 @@ export class MaterielStore {
       await this.#idbCache?.saveMetadata({
         lastSyncMateriel: this.#lastSyncMateriel,
         lastSyncLoans: this.#lastSyncLoans,
+        syncVersion: CACHE_SYNC_VERSION,
       });
 
       console.log("[MaterielStore] Sync terminé");
@@ -683,6 +700,8 @@ export class MaterielStore {
     materiels: MaterielLoanItem[];
     notes?: string;
     status?: "asked" | "accepted"; // Statut optionnel
+    eventId?: string | null; // ID de l'événement lié (optionnel)
+    eventName?: string | null; // Snapshot du nom de l'event (optionnel)
   }): Promise<EnrichedMaterielLoan> {
     this.#loading = true;
     this.#error = null;
@@ -697,6 +716,18 @@ export class MaterielStore {
 
       // Enrichir le loan créé pour le retour
       const enriched = enrichLoanFromAppwrite(loan);
+
+      // Sync vers EventMateriel si un eventId est lié
+      if (data.eventId && data.materiels.length > 0) {
+        await eventMaterielStore.syncFromLoan(
+          loan.$id,
+          data.eventId,
+          data.materiels,
+          data.responsibleName,
+          data.ownerName,
+          globalState.userId,
+        );
+      }
 
       // Le realtime va gérer la mise à jour locale
       return enriched;
@@ -721,14 +752,42 @@ export class MaterielStore {
       notes?: string;
       returnedAt?: string;
       returnNotes?: string;
+      eventId?: string | null;
+      eventName?: string | null;
     },
   ): Promise<void> {
     this.#loading = true;
     this.#error = null;
 
     try {
+      const currentLoan = this.#loans.get(loanId);
+      const oldEventId = currentLoan?.eventId || null;
+      const newEventId = data.eventId !== undefined ? data.eventId : oldEventId;
+
       // Cast pour MaterielLoanStatus (enum) vs MaterielLoanStatusUnion (string literals)
       await updateMaterielLoan(loanId, data as any);
+
+      // Sync vers EventMateriel si nécessaire
+      if (data.eventId !== undefined || data.materiels !== undefined) {
+        const materiels = data.materiels || currentLoan?.materielItems || [];
+
+        if (oldEventId && oldEventId !== newEventId) {
+          await eventMaterielStore.removeByLoanAndEvent(loanId, oldEventId);
+        }
+
+        if (newEventId && materiels.length > 0) {
+          await eventMaterielStore.syncFromLoan(
+            loanId,
+            newEventId,
+            materiels,
+            currentLoan?.responsibleName || "",
+            currentLoan?.ownerName || "",
+            globalState.userId || "",
+          );
+        } else if (!newEventId && oldEventId) {
+          await eventMaterielStore.removeByLoan(loanId);
+        }
+      }
 
       // Le realtime va gérer la mise à jour locale
     } catch (err) {
@@ -751,6 +810,10 @@ export class MaterielStore {
    * Refuse un emprunt
    */
   async refuseLoan(loanId: string): Promise<void> {
+    const loan = this.#loans.get(loanId);
+    if (loan?.eventId) {
+      await eventMaterielStore.removeByLoan(loanId);
+    }
     await this.updateLoan(loanId, { status: "refused" });
   }
 
@@ -758,6 +821,10 @@ export class MaterielStore {
    * Annule un emprunt
    */
   async cancelLoan(loanId: string): Promise<void> {
+    const loan = this.#loans.get(loanId);
+    if (loan?.eventId) {
+      await eventMaterielStore.removeByLoan(loanId);
+    }
     await this.updateLoan(loanId, { status: "canceled" });
   }
 
@@ -829,8 +896,12 @@ export class MaterielStore {
       // Ré-enrichir les matériels avant suppression
       const loan = this.#loans.get(loanId);
       if (loan) {
-        // ✅ Plus d'await : ré-enrichissement synchrone avec données locales
         this.#reEnrichMaterielsFromLoan(loan);
+
+        // Supprimer les EventMateriel liés
+        if (loan.eventId) {
+          await eventMaterielStore.removeByLoan(loanId);
+        }
       }
 
       await deleteMaterielLoan(loanId);
@@ -843,6 +914,76 @@ export class MaterielStore {
     } finally {
       this.#loading = false;
     }
+  }
+
+  exportLoanToMarkdown(loanId: string): string {
+    const loan = this.#loans.get(loanId);
+    if (!loan) return "";
+
+    const lines: string[] = [];
+
+    lines.push("---");
+    lines.push("# Réservation de matériel");
+    lines.push("");
+
+    lines.push(`- **Responsable** : ${loan.responsibleName ?? ""}`);
+
+    const start = new Date(loan.startDate).toLocaleDateString("fr-FR", {
+      day: "2-digit",
+      month: "2-digit",
+    });
+    const end = new Date(loan.endDate).toLocaleDateString("fr-FR", {
+      day: "2-digit",
+      month: "2-digit",
+    });
+    lines.push(`- **Période** : ${start} - ${end}`);
+
+    if (loan.eventName) {
+      lines.push(`- **Événement** : ${loan.eventName}`);
+    }
+
+    if (loan.notes) {
+      lines.push(`- **Notes** : ${loan.notes}`);
+    }
+
+    lines.push("");
+
+    const items = loan.materielItems;
+    const byType = new Map<string, typeof items>();
+
+    for (const item of items) {
+      const m = this.#materiels.get(item.materielId);
+      const typeLabel = materielTypeLabels[m?.type ?? "other"] ?? "Autre";
+      if (!byType.has(typeLabel)) byType.set(typeLabel, []);
+      byType.get(typeLabel)!.push(item);
+    }
+
+    for (const [typeLabel, typeItems] of byType) {
+      lines.push(`## ${typeLabel}`);
+      lines.push("");
+      for (const item of typeItems) {
+        lines.push(`- ${item.materielName} × ${item.quantity}`);
+      }
+      lines.push("");
+    }
+
+    if (loan.status === "completed" && loan.returnNotes) {
+      lines.push("## Retour");
+      lines.push("");
+      for (const item of items) {
+        const lost = item.lostQuantity ?? 0;
+        const broken = item.brokenQuantity ?? 0;
+        if (lost > 0 || broken > 0) {
+          lines.push(
+            `- ${item.materielName} × ${item.quantity} (perdu: ${lost}, cassé: ${broken})`,
+          );
+        }
+      }
+      lines.push("");
+      lines.push(loan.returnNotes);
+    }
+
+    return lines.join("\n");
   }
 
   /**
@@ -883,6 +1024,7 @@ export class MaterielStore {
         await this.#idbCache.saveMetadata({
           lastSyncMateriel: this.#lastSyncMateriel,
           lastSyncLoans: this.#lastSyncLoans,
+          syncVersion: CACHE_SYNC_VERSION,
         });
 
         console.log("[MaterielStore] Cache IDB recréé");

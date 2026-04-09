@@ -34,8 +34,12 @@
     {{ end }}
     <link rel="icon" href="/images/favicon.png" type="image/png" />
     <link rel="manifest" href="/app/manifest.webmanifest" />
-    <link rel="apple-touch-icon" href="/app/pwa-192x192.png" />
-    <meta name="theme-color" content="#ffffff" />
+    <link rel="apple-touch-icon" href="/app/192x192.png" sizes="192x192" />
+    <link rel="apple-touch-icon" href="/app/512x512.png" sizes="512x512" />
+    <meta name="theme-color" content="#900e3b" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="Enka" />
     <!--<style>
       /* CSS critique - évite le flash de contenu non stylisé (FOUC) */
       #app {

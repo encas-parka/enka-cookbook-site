@@ -34,7 +34,7 @@
 
   // Number of columns based on unique types
   const numColumns = $derived(
-    uniqueTaskOnTypes.length === 0 ? 1 : Math.min(uniqueTaskOnTypes.length, 3)
+    uniqueTaskOnTypes.length === 0 ? 1 : Math.min(uniqueTaskOnTypes.length, 3),
   );
 
   // Sort weight helper for enum ordering
@@ -45,16 +45,20 @@
 
   // Label for taskOn type
   function getTaskOnLabel(value: string): string {
-    const labels = { beforeEvent: "Avant l'événement", onEvent: "Pendant l'événement", afterEvent: "Après l'événement" };
+    const labels = {
+      beforeEvent: "Avant l'événement",
+      onEvent: "Pendant l'événement",
+      afterEvent: "Après l'événement",
+    };
     return labels[value] ?? value;
   }
 
   // Group todos by taskOn type
   const groupedTodos = $derived.by(() => {
     const groups: Record<string, EventTodo[]> = {};
-    
+
     // Initialize groups for existing types
-    uniqueTaskOnTypes.forEach(type => {
+    uniqueTaskOnTypes.forEach((type) => {
       groups[type] = [];
     });
 
@@ -73,7 +77,7 @@
       return aDueDate - bDueDate;
     });
 
-    sortedTodos.forEach(todo => {
+    sortedTodos.forEach((todo) => {
       const type = todo.taskOn ?? "unassigned";
       if (!groups[type]) groups[type] = [];
       groups[type].push(todo);
@@ -107,7 +111,7 @@
     <ListTodo class="size-4" />
     <span>{todos.length} tâches</span>
   </div>
-  <button class="btn btn-sm btn-primary gap-2" onclick={handleAdd} disabled={disabled}>
+  <button class="btn btn-sm btn-primary gap-2" onclick={handleAdd} {disabled}>
     <Plus class="size-4" /> Nouvelle tâche
   </button>
 </div>
@@ -129,15 +133,25 @@
   </div>
 {:else}
   <!-- Grid with columns based on unique taskOn types -->
-  <div class="grid gap-4 {numColumns === 3 ? 'grid-cols-1 md:grid-cols-3' : numColumns === 2 ? 'grid-cols-1 md:grid-cols-2' : 'grid-cols-1'}">
+  <div
+    class="grid gap-4 {numColumns === 3
+      ? 'grid-cols-1 md:grid-cols-3'
+      : numColumns === 2
+        ? 'grid-cols-1 md:grid-cols-2'
+        : 'grid-cols-1'}"
+  >
     {#each uniqueTaskOnTypes as taskOnType (taskOnType)}
       <div class="flex flex-col gap-3">
         <!-- Column Header -->
-        <div class="text-sm font-medium text-base-content/70 pb-2 border-b border-base-200">
+        <div
+          class="text-base-content/70 border-base-200 border-b pb-2 text-sm font-medium"
+        >
           {getTaskOnLabel(taskOnType)}
-          <span class="text-base-content/40 text-xs ml-1">({groupedTodos[taskOnType]?.length ?? 0})</span>
+          <span class="text-base-content/40 ml-1 text-xs"
+            >({groupedTodos[taskOnType]?.length ?? 0})</span
+          >
         </div>
-        
+
         <!-- Tasks in this column -->
         {#each groupedTodos[taskOnType] ?? [] as todo (todo.id)}
           <EventTodoItem

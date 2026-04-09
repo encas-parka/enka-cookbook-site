@@ -93,7 +93,7 @@ const SYNC_DEBOUNCE_MS = 500;
 
 // Version de migration actuelle - À incrémenter lors des changements de structure
 // qui nécessitent d'invalider les caches existants
-const CURRENT_MIGRATION_VERSION = 1;
+const CURRENT_MIGRATION_VERSION = 2;
 
 // =============================================================================
 // STORE SINGLETON
@@ -1146,6 +1146,10 @@ class ProductsStore {
     this.#enrichedProducts.delete(productId);
   }
 
+  addProductOptimistic(product: Products) {
+    this.#handleProductUpsert(product);
+  }
+
   // =========================================================================
   // GESTION DES PURCHASES
   // =========================================================================
@@ -2019,7 +2023,10 @@ class ProductsStore {
       return await this.updatePurchaseLocal(purchaseId, updates);
     } else {
       const { updatePurchase } = await import("../services/appwrite-products");
-      await updatePurchase(purchaseId, updates as Parameters<typeof updatePurchase>[1]);
+      await updatePurchase(
+        purchaseId,
+        updates as Parameters<typeof updatePurchase>[1],
+      );
     }
   }
 

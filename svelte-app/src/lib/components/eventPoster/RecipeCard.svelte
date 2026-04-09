@@ -191,33 +191,43 @@
   }
 
   // Font class helper
-  function getFontClasses(font: string, bold: boolean, italic: boolean): string[] {
-    return [
-      font,
-      bold && 'font-bold',
-      italic && 'italic'
-    ].filter((c): c is string => !!c);
+  function getFontClasses(
+    font: string,
+    bold: boolean,
+    italic: boolean,
+  ): string[] {
+    return [font, bold && "font-bold", italic && "italic"].filter(
+      (c): c is string => !!c,
+    );
   }
 
   // Font classes for each element type
   let titleFontClasses = $derived.by(() =>
-    getFontClasses(config.fontRecettes, config.boldRecettes, config.italicRecettes)
+    getFontClasses(
+      config.fontRecettes,
+      config.boldRecettes,
+      config.italicRecettes,
+    ),
   );
 
   let descriptionFontClasses = $derived.by(() =>
-    getFontClasses(config.fontDesc, config.boldDesc, config.italicDesc)
+    getFontClasses(config.fontDesc, config.boldDesc, config.italicDesc),
   );
 
   let regimesFontClasses = $derived.by(() =>
-    getFontClasses(config.fontRegimes, config.boldRegimes, config.italicRegimes)
+    getFontClasses(
+      config.fontRegimes,
+      config.boldRegimes,
+      config.italicRegimes,
+    ),
   );
 
   let allergensFontClasses = $derived.by(() =>
-    getFontClasses(config.fontAlert, config.boldAlert, config.italicAlert)
+    getFontClasses(config.fontAlert, config.boldAlert, config.italicAlert),
   );
 
   let ingredientsFontClasses = $derived.by(() =>
-    getFontClasses(config.fontIng, config.boldIng, config.italicIng)
+    getFontClasses(config.fontIng, config.boldIng, config.italicIng),
   );
 </script>
 
@@ -254,9 +264,9 @@
         <button
           type="button"
           class={[
-            'recipe-title mb-2 block w-full border-none bg-transparent p-0 text-center text-lg text-black transition-colors hover:bg-black/5',
-            !isEditing && 'cursor-pointer',
-            titleFontClasses
+            "recipe-title mb-2 block w-full border-none bg-transparent p-0 text-center text-lg text-black transition-colors hover:bg-black/5",
+            !isEditing && "cursor-pointer",
+            titleFontClasses,
           ]}
           style={getBigFontSize(config.fontSizeRecettes)}
           onclick={handleStartEdit}
@@ -287,9 +297,9 @@
               <button
                 type="button"
                 class={[
-                  'recipe-description mx-auto block border-none bg-transparent p-0 text-sm text-black opacity-90 transition-colors hover:bg-black/5',
-                  !isEditingDescription && 'cursor-pointer',
-                  descriptionFontClasses
+                  "recipe-description mx-auto block border-none bg-transparent p-0 text-sm text-black opacity-90 transition-colors hover:bg-black/5",
+                  !isEditingDescription && "cursor-pointer",
+                  descriptionFontClasses,
                 ]}
                 style={getSmallFontSize(config.fontSizeDesc)}
                 onclick={handleStartEditDescription}
@@ -321,8 +331,8 @@
           {#each regimes as regime (regime)}
             <span
               class={[
-                'border-black bg-transparent font-medium text-black',
-                regimesFontClasses
+                "border-black bg-transparent font-medium text-black",
+                regimesFontClasses,
               ]}
               style={getSmallFontSize(config.fontSizeRegimes)}
             >
@@ -341,10 +351,7 @@
               >Attention:
             </span>
             <span
-              class={[
-                'opacity-80',
-                allergensFontClasses
-              ]}
+              class={["opacity-80", allergensFontClasses]}
               style={getSmallFontSize(config.fontSizeAlert)}
             >
               {allergens.join(", ")}
@@ -379,9 +386,9 @@
               <button
                 type="button"
                 class={[
-                  'mx-auto block border-none bg-transparent p-0 text-xs font-normal capitalize decoration-dotted opacity-80 transition-colors hover:bg-black/5 hover:underline',
-                  !isEditingIngredients && 'cursor-pointer',
-                  ingredientsFontClasses
+                  "mx-auto block border-none bg-transparent p-0 text-xs font-normal capitalize decoration-dotted opacity-80 transition-colors hover:bg-black/5 hover:underline",
+                  !isEditingIngredients && "cursor-pointer",
+                  ingredientsFontClasses,
                 ]}
                 style={getSmallFontSize(config.fontSizeIng)}
                 onclick={handleStartEditIngredients}

@@ -25,6 +25,8 @@
     Info,
     ChefHat,
     CalendarPlus,
+    XCircle,
+    Download,
   } from "@lucide/svelte";
   import { nanoid } from "nanoid";
   import { flip } from "svelte/animate";
@@ -40,6 +42,7 @@
   import AssignDateModal from "../components/eventEdit/AssignDateModal.svelte";
   import { recipesStore } from "../stores/RecipesStore.svelte";
   import { online } from "svelte/reactivity/window";
+  import { shareOrDownload, toSlug } from "$lib/utils/share-utils";
 
   // ============================================================================
   // PROPS & INITIALISATION
@@ -86,6 +89,7 @@
   // États des modales de confirmation
   let showConfirmStatusModal = $state(false);
   let showCancelStatusModal = $state(false);
+  let showCancelEditModal = $state(false);
 
   // Assignation de date (recettes à planifier)
   let showAssignDateModal = $state(false);
@@ -294,20 +298,25 @@
     console.log("[Init] Début initialisation pour eventId:", eventId);
 
     untrack(async () => {
+      const event = eventsStore.getEventById(eventId);
+      console.log("[Init] Event récupéré:", event?.$id, event?.name);
+
+      if (!event) {
+        console.log("[Init] Event non trouvé dans le cache");
+        return;
+      }
+
+      isInitialised = true;
+
+      // 🔥 Mode démo: pas de lock
+      if (isDemoEvent(event.$id)) {
+        console.log("[Init] Mode démo: prêt");
+        return;
+      }
+
+      // Mode normal: charger le lock en arrière-plan (non-bloquant)
       isBusy = true;
       try {
-        const event = eventsStore.getEventById(eventId);
-        console.log("[Init] Event récupéré:", event?.$id, event?.name);
-
-        // 🔥 Mode démo: marquer initialisé, pas de lock
-        if (event && isDemoEvent(event.$id)) {
-          console.log("[Init] Mode démo: prêt, marquage isInitialised = true");
-          isInitialised = true;
-          // ✅ NE PAS activer isEditing ici - il sera activé par startEditing() quand l'utilisateur éditera
-          return;
-        }
-
-        // Mode normal: initialiser le lock
         activeLock = await locksService.getLock(eventId);
         lockUnsub = locksService.subscribeToLock(eventId, (lock) => {
           console.log("[EventEditPage] 🔒 Verrou mis à jour:", {
@@ -317,11 +326,9 @@
           });
           activeLock = lock;
         });
-
-        isInitialised = true;
       } finally {
         isBusy = false;
-        console.log("[Init] Fin initialisation, isBusy = false");
+        console.log("[Init] Lock chargé, isBusy = false");
       }
     });
   });
@@ -724,11 +731,12 @@
   // ASSIGNATION DE DATE (recettes à planifier)
   // ============================================================================
 
-  function openAssignDateModal(
+  async function openAssignDateModal(
     mealId: string,
     recipeUuid: string,
     typeR: RecettesTypeR,
   ) {
+    if (!(await startEditing())) return;
     assigningRecipe = { mealId, recipeUuid, typeR, sourceHasDate: false };
     showAssignDateModal = true;
   }
@@ -886,10 +894,99 @@
     status = "canceled";
     showCancelStatusModal = false;
   }
+
+  async function handleCancelEdit() {
+    showCancelEditModal = false;
+    await releaseLock();
+    // Le $effect de sync resynchronisera automatiquement le shadow draft
+    // depuis currentEvent une fois isEditing passé à false
+  }
+
+  function getRecipeColor(typeR: RecettesTypeR) {
+    if (typeR === "entree") return "bg-lime-100 border-lime-200";
+    if (typeR === "plat") return "bg-orange-100 border-orange-200";
+    if (typeR === "dessert") return "bg-pink-100 border-pink-200";
+    if (typeR === "autre") return "bg-purple-100 border-purple-200";
+    return "bg-base-200";
+  }
+
+  function handleExportRecipes() {
+    const lines: string[] = [];
+
+    lines.push("---");
+    lines.push(`# ${eventName || "Événement"} - Recettes`);
+    lines.push("");
+
+    for (const meal of sortedDatedMeals) {
+      const date = new Date(meal.date).toLocaleDateString("fr-FR", {
+        weekday: "long",
+        day: "2-digit",
+        month: "2-digit",
+      });
+      lines.push(`## ${date} (${meal.guests} couverts)`);
+      lines.push("");
+
+      if (meal.recipes.length === 0) {
+        lines.push("_Aucune recette_");
+        lines.push("");
+        continue;
+      }
+
+      for (const recipe of meal.recipes) {
+        const name =
+          recipesStore.getRecipeIndexByUuid(recipe.recipeUuid)?.title ??
+          recipe.recipeUuid.slice(0, 8);
+        const suffix =
+          recipe.hasOwnPlatesNb && recipe.plates !== meal.guests
+            ? ` (${recipe.plates})`
+            : "";
+        lines.push(`- ${name}${suffix}`);
+      }
+      lines.push("");
+    }
+
+    if (undatedMeals.length > 0) {
+      const allUndated = undatedMeals.flatMap((m) => m.recipes);
+      if (allUndated.length > 0) {
+        lines.push("## Recettes à planifier");
+        lines.push("");
+        for (const recipe of allUndated) {
+          const name =
+            recipesStore.getRecipeIndexByUuid(recipe.recipeUuid)?.title ??
+            recipe.recipeUuid.slice(0, 8);
+          lines.push(`- ${name}`);
+        }
+        lines.push("");
+      }
+    }
+
+    shareOrDownload(
+      lines.join("\n"),
+      `${toSlug(eventName || "evenement")}-recettes.md`,
+      "Recettes exportées",
+    );
+  }
 </script>
 
 {#snippet navActions()}
   <div class="flex items-center gap-2">
+    {#if isEditing}
+      <button
+        class="btn btn-ghost btn-sm"
+        onclick={() => (showCancelEditModal = true)}
+        disabled={isBusy}
+      >
+        <XCircle size={18} class="mr-1" />
+        <span class="hidden sm:flex">Annuler</span>
+      </button>
+    {/if}
+    <button
+      class="btn btn-primary btn-sm btn-circle"
+      onclick={handleExportRecipes}
+      title="Exporter les recettes en Markdown"
+    >
+      <Download size={18} />
+    </button>
     <button
       class="btn btn-accent btn-sm"
       onclick={handleSave}
@@ -900,12 +997,12 @@
       {:else}
         <Save size={18} class="mr-1" />
       {/if}
-      <span class="font-bold">Enregistrer</span>
+      <span class="hidden font-bold sm:flex">Enregistrer</span>
     </button>
   </div>
 {/snippet}
 
-<div class="bg-base-200 min-h-lvh space-y-6 px-2 pt-4 pb-20 md:px-20">
+<div class="bg-base-200 relative min-h-lvh space-y-6 px-2 pt-4 pb-20 md:px-20">
   <div class="flex flex-wrap items-center justify-between gap-x-6 gap-y-3">
     <div class="min-w-80 flex-1 gap-2">
       {#if editingTitle}
@@ -1116,8 +1213,13 @@
 
         <!-- Recettes à planifier (meals sans date) -->
         {#if undatedMeals.length > 0}
-          <fieldset class="fieldset bg-base-200 rounded-box mb-4">
-            <legend class="fieldset-legend">Recettes à planifier</legend>
+          <fieldset
+            class="fieldset bg-base-100/70 rounded-box border-base-300 mb-4 border p-4 shadow"
+          >
+            <legend
+              class="fieldset-legend bg-base-100/70 rounded-2xl px-4 text-lg"
+              >Recettes à planifier</legend
+            >
             <div class="flex flex-wrap gap-2 p-2">
               {#each undatedMeals as undatedMeal}
                 {#each undatedMeal.recipes as recipe}
@@ -1127,7 +1229,9 @@
                   {@const recipeName =
                     recipeIndex?.title ?? recipe.recipeUuid.slice(0, 8)}
                   <div
-                    class="badge badge-lg bg-base-100 h-auto gap-3 py-2 font-medium"
+                    class="badge badge-lg {getRecipeColor(
+                      recipe.typeR,
+                    )} h-auto gap-3 border py-1 font-medium"
                     transition:slide
                   >
                     <ChefHat class="size-4 shrink-0" />
@@ -1141,6 +1245,7 @@
                             recipe.recipeUuid,
                             recipe.typeR,
                           )}
+                        disabled={!canEdit}
                         title="Assigner une date"
                       >
                         <CalendarPlus class="" />
@@ -1198,6 +1303,19 @@
       </div>
     </div>
   {/if}
+
+  <!-- Bouton flottant Enregistrer (mobile uniquement) -->
+  {#if (isDirty || isEditing) && !isBusy}
+    <button
+      class="btn btn-accent btn-sm sticky bottom-2 shadow-lg {!globalState.isMobile &&
+        'hidden'}"
+      onclick={handleSave}
+      disabled={!isDirty || !canEdit}
+    >
+      <Save size={16} class="mr-1" />
+      Enregistrer
+    </button>
+  {/if}
 </div>
 
 <!-- Modales de confirmation pour le statut -->
@@ -1221,6 +1339,18 @@
   cancelLabel="Non, garder"
   onConfirm={handleCancelStatus}
   onCancel={() => (showCancelStatusModal = false)}
+/>
+
+<!-- Modal d'annulation des modifications -->
+<ConfirmModal
+  isOpen={showCancelEditModal}
+  title="Annuler les modifications"
+  message="Vos modifications non enregistrées seront perdues. La dernière version sauvegardée de l'événement sera rétablie."
+  variant="warning"
+  confirmLabel="Oui, annuler"
+  cancelLabel="Continuer l'édition"
+  onConfirm={handleCancelEdit}
+  onCancel={() => (showCancelEditModal = false)}
 />
 
 <!-- Modal d'assignation de date pour les recettes à planifier -->

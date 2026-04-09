@@ -28,8 +28,8 @@ import type { AppwriteConfig } from "../types/global";
 const isDevLocal =
   import.meta.env.DEV ||
   (typeof window !== "undefined" &&
-    (window.location.hostname.includes(".enka-cookbook-site.pages.dev") ||
-      import.meta.env.VITE_APP_ENV === "dev"));
+    window.location.hostname.includes(".enka-cookbook-site.pages.dev")) ||
+  import.meta.env.VITE_APP_ENV === "dev"; //#DEV Pour les deployement de branche de dev, si on veut rester sur ec-dev. : + window.location.hostname.includes(".enka-cookbook-site.pages.dev") ||
 
 const APPWRITE_CONFIG = {
   endpoint: "https://aw.oupla.net/v1",
@@ -52,6 +52,7 @@ const APPWRITE_CONFIG = {
     locks: "locks",
     user_notifications: "user_notifications",
     materiel_loan: "materiel_loan",
+    event_materiel: "event_materiel",
     teamdocs: "teamdocs", // Documents d'équipe
   },
 };

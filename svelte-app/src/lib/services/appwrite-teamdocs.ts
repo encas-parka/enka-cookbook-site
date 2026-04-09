@@ -29,6 +29,7 @@ export async function listDocuments(): Promise<Teamdocs[]> {
     const response = await tables.listRows({
       databaseId: config.databaseId,
       tableId: TEAMDOCS_COLLECTION_ID,
+      queries: [Query.limit(50)],
     });
 
     return response.rows as unknown as Teamdocs[];
@@ -45,7 +46,7 @@ export async function listUpdatedDocuments(since: string): Promise<Teamdocs[]> {
   try {
     const { tables, config } = await getAppwriteInstances();
 
-    const queries = [Query.greaterThan("$updatedAt", since)];
+    const queries = [Query.greaterThan("$updatedAt", since), Query.limit(50)];
 
     const response = await tables.listRows({
       databaseId: config.databaseId,

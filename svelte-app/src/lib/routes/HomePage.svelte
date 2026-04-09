@@ -55,6 +55,7 @@
 
   import { onMount } from "svelte";
   import { navBarStore } from "$lib/stores/NavBarStore.svelte";
+  import InstallButton from "../components/ui/InstallButton.svelte";
 
   onMount(() => {
     navBarStore.reset();
@@ -188,6 +189,13 @@
   }
 </script>
 
+<svelte:head>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cherry+Bomb+One&display=swap"
+    rel="stylesheet"
+  />
+</svelte:head>
+
 <div class="bg-base-200">
   <!-- Alerte de vérification d'email -->
 
@@ -201,7 +209,7 @@
           <img
             src="/images/logo.svg"
             alt="Enka Cookbook"
-            class="size-40 md:size-80"
+            class="size-40 md:size-60"
           />
         </div>
         <h1
@@ -250,6 +258,8 @@
           <ArrowRight size={24} />
           Accéder au tableau de bord
         </button>
+
+        <InstallButton />
       {:else}
         <button
           class="btn btn-secondary md:btn-lg transition-all duration-300 hover:scale-110"

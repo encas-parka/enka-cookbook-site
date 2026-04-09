@@ -213,7 +213,10 @@ class IndexedDBCache implements IDBCache {
         store.put({ key: this.HUGO_HASH_KEY, value: metadata.hugoContentHash });
       }
       // Toujours sauvegarder la version de migration
-      store.put({ key: this.MIGRATION_VERSION_KEY, value: metadata.migrationVersion });
+      store.put({
+        key: this.MIGRATION_VERSION_KEY,
+        value: metadata.migrationVersion,
+      });
 
       tx.oncomplete = () => {
         console.log(`[IDBCache] Metadata sauvegardées (objets {key, value})`);
@@ -297,7 +300,10 @@ class IndexedDBCache implements IDBCache {
     return new Promise((resolve, reject) => {
       const tx = this.db!.transaction(this.METADATA_STORE, "readwrite");
       const store = tx.objectStore(this.METADATA_STORE);
-      const request = store.put({ key: this.MIGRATION_VERSION_KEY, value: version });
+      const request = store.put({
+        key: this.MIGRATION_VERSION_KEY,
+        value: version,
+      });
 
       request.onsuccess = () => {
         console.log(`[IDBCache] migrationVersion mis à jour: ${version}`);

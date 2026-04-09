@@ -40,12 +40,13 @@ export const authGuard: Hooks = {
 /**
  * Guard pour les routes events (mode agnostic)
  *
- * Ce guard initialise seulement le store selon le mode :
- * - Utilisateur authentifié → mode normal
- * - Non authentifié → mode public (pour l'event démo)
+ * Ce guard initialise uniquement le cache IndexedDB (~10ms).
+ * La synchronisation Appwrite (syncFromRemote + setupRealtime) est gérée
+ * en arrière-plan par App.svelte, avec un toast "Mise à jour en cours...".
+ *
+ * L'UI s'affiche immédiatement avec les données du cache.
  *
  * La sécurité (permissions, accès) est gérée par Appwrite au niveau backend.
- * Ce guard évite juste d'initialiser le store plusieurs fois.
  *
  * Utilisation :
  * '/event/:id': {
@@ -55,19 +56,19 @@ export const authGuard: Hooks = {
  */
 export const eventGuard: Hooks = {
   async beforeLoad() {
-    // Initialiser le store une seule fois
-    if (!eventsStore.isInitialized) {
-      if (globalState.isAuthenticated) {
-        // Mode normal : utilisateur connecté
-        console.log("[EventGuard] Mode normal > initialize");
-        await eventsStore.initialize();
-      } else {
-        // Mode public : pour l'event démo
-        console.log("[EventGuard] Mode public > initializeForPublic");
-        await eventsStore.initializeForPublic();
-      }
+    if (eventsStore.isInitialized) {
+      console.log("[EventGuard] ✅ Store déjà initialisé");
+      return;
     }
 
-    console.log("[EventGuard] ✅ Store initialisé");
+    if (globalState.isAuthenticated) {
+      console.log("[EventGuard] Mode normal > loadCache (rapide)");
+      await eventsStore.loadCache();
+    } else {
+      console.log("[EventGuard] Mode public > initializeForPublic");
+      await eventsStore.initializeForPublic();
+    }
+
+    console.log("[EventGuard] ✅ Store prêt (cache chargé)");
   },
 };

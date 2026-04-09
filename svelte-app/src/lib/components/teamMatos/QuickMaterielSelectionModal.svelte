@@ -125,8 +125,12 @@
   }
 </script>
 
-<ModalContainer {isOpen} onClose={handleClose} maxWidth="xl">
-  <ModalHeader title="Sélection rapide du matériel" onClose={handleClose} showBackButton={false} />
+<ModalContainer {isOpen} onClose={handleClose} maxWidth="lg">
+  <ModalHeader
+    title="Sélection rapide du matériel"
+    onClose={handleClose}
+    showBackButton={false}
+  />
 
   <ModalContent>
     <div class="space-y-6">
@@ -204,7 +208,7 @@
   </ModalContent>
 
   <ModalFooter>
-    <div class="flex flex-wrap items-center justify-between gap-2 w-full">
+    <div class="flex w-full flex-wrap items-center justify-between gap-2">
       <div class="text-sm opacity-70">
         {localSelectedIds.size} matériel{localSelectedIds.size > 1 ? "s" : ""}
         sélectionné{localSelectedIds.size > 1 ? "s" : ""}

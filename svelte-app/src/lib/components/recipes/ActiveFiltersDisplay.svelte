@@ -1,6 +1,6 @@
 <script lang="ts">
   import { Eraser } from "@lucide/svelte";
-  import { navigate } from '$lib/router';
+  import { navigate } from "$lib/router";
   import { globalState } from "$lib/stores/GlobalState.svelte";
 
   interface Filters {

@@ -9,7 +9,6 @@
   import { PlusIcon } from "@lucide/svelte";
   import DocCard from "$lib/components/documents/DocCard.svelte";
   import DocumentSearchBar from "$lib/components/documents/DocumentSearchBar.svelte";
-  import EventTabs from "$lib/components/eventEdit/EventTabs.svelte";
   import { online } from "svelte/reactivity/window";
 
   import { route } from "$lib/router";
@@ -110,20 +109,28 @@
   });
 </script>
 
-{#snippet navActions()}
-  {#if canEdit}
-    <button
-      class="btn btn-primary btn-sm"
-      onclick={() => navigate(`/event/${eventId}/document/new`)}
-    >
-      <PlusIcon size={18} />
-      Créer un document
-    </button>
-  {/if}
-{/snippet}
+{#snippet navActions()}{/snippet}
 
 <div class="bg-base-200 min-h-lvh px-2 pt-4 pb-20 md:px-20" transition:fade>
   <div class="mx-auto mt-6 max-w-4xl">
+    <!-- Header -->
+    <div class="mb-4 flex flex-wrap items-center justify-between gap-4">
+      {#if currentEvent}
+        <h2 class="text-xl font-bold">
+          {paginatedDocs?.length} Documents - {currentEvent.name}
+        </h2>
+      {/if}
+      {#if canEdit}
+        <button
+          class="btn btn-primary btn-sm ms-auto"
+          onclick={() => navigate(`/event/${eventId}/document/new`)}
+        >
+          <PlusIcon class="mr-1 size-4" />
+          Créer un document
+        </button>
+      {/if}
+    </div>
+
     <div class="mb-6">
       <DocumentSearchBar
         bind:searchQuery

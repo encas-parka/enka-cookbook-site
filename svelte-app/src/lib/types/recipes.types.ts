@@ -55,9 +55,6 @@ export type RecipeFromAppwrite = Recettes;
 export type RecipeForDisplay = Omit<Recettes, "ingredients" | "astuces"> & {
   ingredients: RecipeIngredient[];
   astuces: Astuce[];
-  // HTML pré-parsé pour optimisation du render (optionnel)
-  preparationHtml?: string;
-  preparation24hHtml?: string;
 };
 
 /**
@@ -172,6 +169,7 @@ export interface RecipesCacheMetadata {
   recipesCount: number;
   cacheVersion?: number; // Version du format de cache
   migrationVersion: number; // Version des migrations appliquées
+  syncVersion?: number; // Version du cache de synchronisation (cf. constants/sync.ts)
 }
 
 // =============================================================================

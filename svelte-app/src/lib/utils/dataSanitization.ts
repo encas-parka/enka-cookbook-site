@@ -3,7 +3,7 @@
  * Fonctions pures pour nettoyer et transformer les données
  */
 
-import type { Purchases } from '$lib/types/appwrite';
+import type { Purchases } from "$lib/types/appwrite";
 
 /**
  * Nettoie un purchase pour éviter la récursion infinie dans le cache
@@ -24,5 +24,5 @@ export function sanitizePurchase(purchase: Purchases): Purchases {
  * Nettoie un tableau de purchases
  */
 export function sanitizePurchases(purchases: Purchases[]): Purchases[] {
-  return purchases.map(purchase => sanitizePurchase(purchase));
+  return purchases.map((purchase) => sanitizePurchase(purchase));
 }

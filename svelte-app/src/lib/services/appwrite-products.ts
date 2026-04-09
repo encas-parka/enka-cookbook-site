@@ -367,7 +367,10 @@ export async function loadProductsWithPurchases(
       const purchasesResponse = await tables.listRows({
         databaseId: config.databaseId,
         tableId: config.collections.purchases,
-        queries: [Query.equal("$id", Array.from(allPurchaseIds))],
+        queries: [
+          Query.equal("$id", Array.from(allPurchaseIds)),
+          Query.limit(100),
+        ],
       });
       const purchases = purchasesResponse.rows as unknown as Purchases[];
 
@@ -461,7 +464,7 @@ export async function loadProductById(
 export async function loadUpdatedPurchases(
   mainId: string,
   lastSync: string,
-  limit = 100,
+  limit = 500,
 ): Promise<Purchases[]> {
   try {
     const { tables, config } = await getAppwriteInstances();
@@ -1016,11 +1019,11 @@ export async function loadPurchasesListByIds(
   try {
     const { tables, config } = await getAppwriteInstances();
 
-    const response = await tables.listRows(
-      config.databaseId,
-      config.collections.purchases,
-      [Query.equal("$id", purchaseIds)], // Note: products est maintenant string[], pas de relation
-    );
+    const response = await tables.listRows({
+      databaseId: config.databaseId,
+      tableId: config.collections.purchases,
+      queries: [Query.equal("$id", purchaseIds)],
+    });
 
     console.log(
       `[Appwrite product] ${response.rows.length} purchases chargés avec relations products`,
@@ -1667,15 +1670,15 @@ export async function loadOrphanPurchases(
   try {
     const { tables, config } = await getAppwriteInstances();
 
-    const response = await tables.listRows(
-      config.databaseId,
-      config.collections.purchases,
-      [
+    const response = await tables.listRows({
+      databaseId: config.databaseId,
+      tableId: config.collections.purchases,
+      queries: [
         Query.equal("mainId", mainId),
         Query.equal("status", "expense"),
         Query.limit(1000), // Limite raisonnable pour les dépenses
       ],
-    );
+    });
 
     console.log(
       `[Appwrite product] ${response.rows.length} dépenses globales chargées`,

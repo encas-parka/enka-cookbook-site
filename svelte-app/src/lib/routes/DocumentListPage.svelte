@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { onMount, onDestroy } from "svelte";
+  import { onMount } from "svelte";
   import { fade } from "svelte/transition";
   import { teamdocsStore } from "$lib/stores/TeamdocsStore.svelte";
   import { nativeTeamsStore } from "$lib/stores/NativeTeamsStore.svelte";
@@ -207,7 +207,7 @@
     onclick={() => navigate(`/createdocument/${teamId}/new`)}
   >
     <PlusIcon size={18} />
-    Créer un document
+    <span class="hidden sm:inline">Créer un document</span>
   </button>
 {/snippet}
 

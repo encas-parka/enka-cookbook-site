@@ -94,7 +94,9 @@ class EventsIndexedDBCache implements EventsIDBCache {
 
           // Store des configurations d'affiches (key = eventId)
           if (!db.objectStoreNames.contains(this.POSTER_CONFIGS_STORE)) {
-            db.createObjectStore(this.POSTER_CONFIGS_STORE, { keyPath: "eventId" });
+            db.createObjectStore(this.POSTER_CONFIGS_STORE, {
+              keyPath: "eventId",
+            });
             console.log("[EventsIDBCache] Object store 'poster-configs' créé");
           }
         };
@@ -107,7 +109,9 @@ class EventsIndexedDBCache implements EventsIDBCache {
     // Vérifier que les object stores nécessaires existent
     const hasEventsStore = db.objectStoreNames.contains(this.EVENTS_STORE);
     const hasMetadataStore = db.objectStoreNames.contains(this.METADATA_STORE);
-    const hasPosterConfigsStore = db.objectStoreNames.contains(this.POSTER_CONFIGS_STORE);
+    const hasPosterConfigsStore = db.objectStoreNames.contains(
+      this.POSTER_CONFIGS_STORE,
+    );
 
     if (!hasEventsStore || !hasMetadataStore || !hasPosterConfigsStore) {
       // La base est corrompue ou obsolète (existe mais sans les stores nécessaires)

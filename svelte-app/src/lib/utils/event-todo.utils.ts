@@ -24,7 +24,9 @@ export function parseEventTodoPriority(
     return priority as EventTodoPriority;
   }
 
-  console.warn(`[event-todo.utils] Priority invalide: ${priority}, utilisation de "medium"`);
+  console.warn(
+    `[event-todo.utils] Priority invalide: ${priority}, utilisation de "medium"`,
+  );
   return EventTodoPriority.MEDIUM; // Valeur par défaut
 }
 
@@ -56,7 +58,6 @@ export function formatPriority(priority: EventTodoPriority): string {
 export function isTodoCompleted(todo: EventTodo): boolean {
   return todo.status === EventTodoStatus.DONE;
 }
-
 
 /**
  * Vérifie si un todo est en retard

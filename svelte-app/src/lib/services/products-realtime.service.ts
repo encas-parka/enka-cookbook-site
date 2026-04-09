@@ -50,7 +50,7 @@ export interface ProductsRealtimeOptions {
  */
 function createRealtimeEventHandler(
   callbacks: ProductsRealtimeCallbacks,
-  options: ProductsRealtimeOptions = {}
+  options: ProductsRealtimeOptions = {},
 ) {
   const { showOtherUserToasts = true } = options;
 
@@ -66,10 +66,10 @@ function createRealtimeEventHandler(
 
     // Déterminer le type de collection et d'événement
     const isProductsCollection = events.some((e: string) =>
-      e.includes("products.")
+      e.includes("products."),
     );
     const isPurchasesCollection = events.some((e: string) =>
-      e.includes("purchases.")
+      e.includes("purchases."),
     );
 
     const isCreate = events.some((e: string) => e.includes(".create"));
@@ -82,14 +82,14 @@ function createRealtimeEventHandler(
         payload as Products,
         { isCreate, isUpdate, isDelete },
         callbacks,
-        showOtherUserToasts
+        showOtherUserToasts,
       );
     } else if (isPurchasesCollection) {
       handlePurchaseEvent(
         payload as Purchases,
         { isCreate, isUpdate, isDelete },
         callbacks,
-        showOtherUserToasts
+        showOtherUserToasts,
       );
     }
   };
@@ -102,16 +102,20 @@ function handleProductEvent(
   product: Products,
   eventType: { isCreate: boolean; isUpdate: boolean; isDelete: boolean },
   callbacks: ProductsRealtimeCallbacks,
-  showToasts: boolean
+  showToasts: boolean,
 ) {
   const { isCreate, isUpdate, isDelete } = eventType;
 
   // Toast notifications pour les autres utilisateurs
-  if (showToasts && product.updatedBy && product.updatedBy !== globalState.userName) {
+  if (
+    showToasts &&
+    product.updatedBy &&
+    product.updatedBy !== globalState.userName
+  ) {
     if (isCreate || isUpdate) {
       toastService.info(
         `${product.updatedBy} a modifié le produit "${product.productName}"`,
-        { source: "realtime-other" }
+        { source: "realtime-other" },
       );
     } else if (isDelete) {
       toastService.info(`${product.updatedBy} a supprimé un produit`, {
@@ -137,26 +141,39 @@ function handlePurchaseEvent(
   purchase: Purchases,
   eventType: { isCreate: boolean; isUpdate: boolean; isDelete: boolean },
   callbacks: ProductsRealtimeCallbacks,
-  showToasts: boolean
+  showToasts: boolean,
 ) {
   const { isCreate, isUpdate, isDelete } = eventType;
 
   // Toast notifications pour les autres utilisateurs
-  if (showToasts && purchase.createdBy && purchase.createdBy !== globalState.userName) {
+  if (
+    showToasts &&
+    purchase.createdBy &&
+    purchase.createdBy !== globalState.userName
+  ) {
     const productName = "un produit"; // Message générique
 
     if (isCreate && purchase.who !== globalState.userName) {
-      toastService.info(`${purchase.who} a ajouté un achat pour ${productName}`, {
-        source: "realtime-other",
-      });
+      toastService.info(
+        `${purchase.who} a ajouté un achat pour ${productName}`,
+        {
+          source: "realtime-other",
+        },
+      );
     } else if (isUpdate && purchase.who !== globalState.userName) {
-      toastService.info(`${purchase.who} a modifié un achat pour ${productName}`, {
-        source: "realtime-other",
-      });
+      toastService.info(
+        `${purchase.who} a modifié un achat pour ${productName}`,
+        {
+          source: "realtime-other",
+        },
+      );
     } else if (isDelete) {
-      toastService.info(`${purchase.who} a supprimé un achat pour ${productName}`, {
-        source: "realtime-other",
-      });
+      toastService.info(
+        `${purchase.who} a supprimé un achat pour ${productName}`,
+        {
+          source: "realtime-other",
+        },
+      );
     }
   }
 
@@ -193,7 +210,7 @@ function handlePurchaseEvent(
  */
 export function setupProductsRealtimeHandler(
   callbacks: ProductsRealtimeCallbacks,
-  options: ProductsRealtimeOptions = {}
+  options: ProductsRealtimeOptions = {},
 ): () => void {
   const DB_ID = getDatabaseId();
   const PRODUCTS_COLLECTION = getCollectionId("products");
@@ -207,10 +224,13 @@ export function setupProductsRealtimeHandler(
   const handleRealtimeEvent = createRealtimeEventHandler(callbacks, options);
 
   // S'inscrire via RealtimeManager (inscription dynamique)
-  const unsubscribe = realtimeManager.registerDynamic(channels, handleRealtimeEvent);
+  const unsubscribe = realtimeManager.registerDynamic(
+    channels,
+    handleRealtimeEvent,
+  );
 
   console.log(
-    `[ProductsRealtimeHandler] ✅ Realtime configuré (${channels.length} channels)`
+    `[ProductsRealtimeHandler] ✅ Realtime configuré (${channels.length} channels)`,
   );
 
   return unsubscribe;

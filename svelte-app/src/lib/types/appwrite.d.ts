@@ -71,6 +71,23 @@ export enum MaterielLoanStatus {
   ARCHIVED = "archived",
 }
 
+export enum EventMaterielType {
+  ELECTRONIC = "electronic",
+  MANUAL = "manual",
+  OTHER = "other",
+  TOOLS = "tools",
+  DISH = "dish",
+  COOKING = "cooking",
+  GAZ = "gaz",
+  HYGIENE = "hygiene",
+}
+
+export enum EventMaterielStatus {
+  NEEDED = "needed",
+  CONFIRMED = "confirmed",
+  BROUGHT = "brought",
+}
+
 export type InscriptionCampaigns = Models.Row & {
   campaign_id: string;
   team_id: string;
@@ -229,6 +246,23 @@ export type MaterielLoan = Models.Row & {
   completedAt: string | null;
   returnedAt: string | null;
   returnNotes: string | null;
+  eventId: string | null;
+  eventName: string | null;
+};
+
+export type EventMateriel = Models.Row & {
+  eventId: string;
+  name: string;
+  quantity: number;
+  type: EventMaterielType;
+  who: string | null;
+  where: string | null;
+  fromTeamName: string | null;
+  sourceMaterielId: string | null;
+  loanId: string | null;
+  status: EventMaterielStatus;
+  notes: string | null;
+  createdBy: string;
 };
 
 export type Teamdocs = Models.Row & {

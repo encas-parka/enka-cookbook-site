@@ -15,12 +15,17 @@
     ClockArrowUp,
     Trash2,
     Pencil,
+    Link,
+    Download,
   } from "@lucide/svelte";
   import type {
     EnrichedMaterielLoan,
     MaterielLoanItem,
   } from "$lib/types/materiel.types";
   import { formatDateDayMonthShort } from "$lib/utils/date-helpers";
+  import { navigate } from "$lib/router";
+  import { materielStore } from "$lib/stores/MaterielStore.svelte";
+  import { shareOrDownload } from "$lib/utils/share-utils";
 
   // Type union pour MaterielLoanStatus (évite les problèmes d'import enum)
   type MaterielLoanStatusLiteral =
@@ -186,7 +191,7 @@
   });
 
   // Actions disponibles selon le statut
-  const actions = $derived(() => {
+  const actions = $derived.by(() => {
     switch (loan.status) {
       case "asked":
         return [
@@ -239,6 +244,16 @@
   function handleAction(action?: (loanId: string) => void) {
     action?.(loan.$id);
   }
+
+  function handleExport() {
+    const markdown = materielStore.exportLoanToMarkdown(loan.$id);
+    if (!markdown) return;
+    const slug = (loan.responsibleName ?? "reservation")
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-|-$/g, "");
+    shareOrDownload(markdown, `${slug}-reservation.md`, "Réservation exportée");
+  }
 </script>
 
 <div class="card bg-base-100 border-base-200 border text-left shadow-sm">
@@ -275,9 +290,18 @@
               )}
             </span>
           </div>
-          <!-- <span class="badge {statusConfig.badgeClass} badge-sm gap-1">
-            {statusConfig.label}
-          </span> -->
+
+          <!-- Événement lié (si présent) -->
+          {#if loan.eventId && loan.eventName}
+            <button
+              class="badge badge-soft badge-primary badge-sm hover:badge-primary gap-1"
+              onclick={() => navigate(`/event/${loan.eventId}`)}
+              title="Voir l'événement"
+            >
+              <Link class="h-3 w-3" />
+              {loan.eventName}
+            </button>
+          {/if}
         </div>
         <!-- Notes (si présentes) -->
         {#if loan.notes}
@@ -287,7 +311,7 @@
         {/if}
         <!-- Matériels -->
         <div class="flex flex-wrap gap-2">
-          {#each materiels as m}
+          {#each materiels as m (m.materielId)}
             <span class="badge badge-sm badge-soft h-auto {getBadgeClass(m)}">
               <span class="font-medium"> {m.materielName} </span>
               <span class="font-bold text-nowrap"> × {m.quantity}</span>
@@ -305,8 +329,16 @@
       </div>
 
       <!-- Actions -->
-      <div class="flex flex-col gap-4 not-sm:mt-4">
-        {#each actions() as action}
+      <div class="flex flex-wrap justify-end gap-4 not-sm:mt-4">
+        <button
+          class="btn btn-outline btn-primary btn-sm"
+          onclick={handleExport}
+          title="Exporter en Markdown"
+        >
+          <Download class="h-4 w-4" />
+        </button>
+
+        {#each actions as action (action.label)}
           <button
             class="btn btn-sm {action.class}"
             onclick={() => handleAction(action.action)}
@@ -317,9 +349,9 @@
           </button>
         {/each}
 
-        {#if onEdit && loan.status === "asked"}
+        {#if onEdit}
           <button
-            class="btn btn-primary btn-soft btn-sm"
+            class="btn btn-primary btn-sm"
             onclick={() => onEdit(loan.$id)}
             title="Modifier"
           >

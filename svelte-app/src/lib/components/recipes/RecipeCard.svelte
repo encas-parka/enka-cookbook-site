@@ -51,7 +51,9 @@
   {/if}
 
   <!-- Header -->
-  <div class=" flex flex-wrap items-start justify-between gap-4 @md:my-2">
+  <div
+    class=" flex flex-wrap items-start justify-between gap-x-4 gap-y-2 @md:my-2"
+  >
     <div class="min-w-2/3 flex-1">
       <!-- title mobile-->
       {#if !globalState.isDesktop}
@@ -109,7 +111,7 @@
 
     <!-- Badges -->
     <div class="ms-auto flex flex-col justify-end gap-2">
-      <div class=" flex flex-wrap justify-end gap-1 pt-1">
+      <div class=" flex flex-wrap justify-end gap-1 sm:pt-1">
         {#if recipe.categories}
           {#if recipe.region}
             <span class="badge badge-ghost">{recipe.region}</span>

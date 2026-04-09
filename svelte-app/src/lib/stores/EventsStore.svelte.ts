@@ -177,9 +177,13 @@ export class EventsStore {
    * Exclut les événements annulés et archivés
    */
   getUpcomingEventsForUser(): EnrichedEvent[] {
+    // Toujours lire #currentEvents pour maintenir la dépendance réactive
+    // (sinon le early return casse la chaîne de réactivité si le store
+    // n'est pas encore initialisé au premier appel)
+    const events = this.#currentEvents;
     if (!this.#userId) return [];
 
-    return this.#currentEvents.filter((event) => {
+    return events.filter((event) => {
       // Exclure les événements annulés ou archivés
       if (event.status === "canceled" || event.status === "archive")
         return false;

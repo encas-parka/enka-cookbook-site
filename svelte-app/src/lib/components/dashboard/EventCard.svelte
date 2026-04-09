@@ -11,6 +11,8 @@
     Image,
     ShoppingCart,
     CookingPot,
+    ListTodo,
+    Package,
   } from "@lucide/svelte";
   import type { EnrichedEvent } from "$lib/types/events.d";
   import { navigate } from "$lib/router";
@@ -87,14 +89,12 @@
       {/if}
 
       {#if event.contributors && event.contributors.length > 0}
+        {@const acceptedCount = event.contributors.filter(
+          (c) => c.status === "accepted",
+        ).length}
         <div class="text-base-content/90 flex items-center gap-1">
           <Users class="h-3 w-3" />
-          <span
-            >{event.contributors.length} participant{event.contributors.length >
-            1
-              ? "s"
-              : ""}</span
-          >
+          <span>{acceptedCount} participant{acceptedCount > 1 ? "s" : ""}</span>
           <span>({event.minContrib} requis)</span>
         </div>
       {/if}
@@ -170,6 +170,28 @@
       >
         <FileText class="size-4 @max-xs:size-3" />
         Documents
+      </button>
+
+      <button
+        class="btn btn-outline btn-secondary @max-sm:btn-xs btn-xs"
+        onclick={(e) => {
+          e.stopPropagation();
+          navigate(`/event/${event.$id}/todos`);
+        }}
+      >
+        <ListTodo class="size-4 @max-xs:size-3" />
+        Tâches
+      </button>
+
+      <button
+        class="btn btn-outline btn-secondary @max-sm:btn-xs btn-xs"
+        onclick={(e) => {
+          e.stopPropagation();
+          navigate(`/event/${event.$id}/materiel`);
+        }}
+      >
+        <Package class="size-4 @max-xs:size-3" />
+        Matériel
       </button>
     </div>
   </div>

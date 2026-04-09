@@ -11,14 +11,12 @@
   import { toastService } from "$lib/services/toast.service.svelte";
   import { navigate, route } from "$lib/router";
   import { Save } from "@lucide/svelte";
-  import { onDestroy } from "svelte";
   import { navBarStore } from "../stores/NavBarStore.svelte";
   import RecipeHeaderForm from "$lib/components/recipeEdit/RecipeHeaderForm.svelte";
   import RecipePrepaForm from "$lib/components/recipeEdit/RecipePrepaForm.svelte";
   import RecipePermissionsManager from "$lib/components/recipeEdit/RecipePermissionsManager.svelte";
   import UnsavedChangesGuard from "$lib/components/ui/UnsavedChangesGuard.svelte";
   import { generateSlugUuid35 } from "$lib/utils/slugUtils";
-  import { warmUpEnkaData } from "$lib/services/appwrite-warmup";
   import {
     type RecipeFormState,
     type ValidationError,
@@ -81,11 +79,6 @@
   // ============================================================================
   // AUTO-EFFECTS
   // ============================================================================
-
-  // Warm-up de la fonction enkaData
-  // $effect(() => {
-  //   warmUpEnkaData();
-  // });
 
   // Vérifier que l'utilisateur est connecté
   $effect(() => {
@@ -272,7 +265,12 @@
       class="btn btn-primary btn-sm"
     >
       <Save class="h-4 w-4" />
-      {isSaving ? "Sauvegarde..." : "Créer la recette"}
+
+      {isSaving
+        ? "Sauvegarde..."
+        : globalState.isMobile
+          ? ""
+          : "Créer la recette"}
     </button>
   </div>
 {/snippet}
@@ -309,6 +307,19 @@
         createdBy={recipe.createdBy}
         {canEdit}
       />
+
+      <!-- Bouton flottant Créer (mobile uniquement) -->
+      {#if isDirty && !isSaving}
+        <button
+          class="btn btn-primary btn-sm sticky bottom-2 shadow-lg {!globalState.isMobile &&
+            'hidden'}"
+          onclick={save}
+          disabled={isSaving || !isDirty}
+        >
+          <Save size={16} class="mr-1" />
+          Créer la recette
+        </button>
+      {/if}
     </div>
   {/if}
 </div>

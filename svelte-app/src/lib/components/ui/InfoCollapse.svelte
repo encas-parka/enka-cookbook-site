@@ -33,7 +33,7 @@
 </script>
 
 <div
-  class={`bg-base-100 border-base-200 relative overflow-hidden rounded-lg border ${className}`}
+  class={`bg-base-100 border-base-200 relative min-w-0 overflow-hidden rounded-lg border ${className}`}
   {style}
 >
   <button
@@ -46,7 +46,7 @@
   >
     <div class="flex gap-6 max-md:flex-col">
       <div class=" flex items-center gap-3 self-start">
-        <Icon size={24} class="text-base-content flex-shrink-0" />
+        <Icon size={24} class="text-base-content shrink-0" />
         {#if title}
           <span class="text-base-content font-semibold">{title}</span>
         {/if}
@@ -67,7 +67,7 @@
           {/if}
         </div>
         <ChevronDown
-          class={`text-base-content h-4 w-4 flex-shrink-0 transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`}
+          class={`text-base-content h-4 w-4 shrink-0 transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`}
         />
       </div>
     {/if}

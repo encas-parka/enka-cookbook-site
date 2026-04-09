@@ -200,9 +200,7 @@
 
 <!-- Modal de gestion -->
 <ModalContainer isOpen={showInviteModal} onClose={handleCloseInviteModal}>
-  <ModalHeader
-    title="Gérer les collaborateurs"
-    onClose={handleCloseInviteModal}
+  <ModalHeader title="Gérer les collaborateurs" onClose={handleCloseInviteModal}
   ></ModalHeader>
 
   <ModalContent>

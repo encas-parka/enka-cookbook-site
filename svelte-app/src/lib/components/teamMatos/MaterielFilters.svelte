@@ -75,7 +75,7 @@
   }
 </script>
 
-<div class="space-y-4 max-sm:mt-8 sm:mt-12" class:opacity-30={disabled}>
+<div class="space-y-4" class:opacity-30={disabled}>
   <div class="mb-4 flex items-center justify-between">
     <h4 class="text-lg font-bold">
       <Funnel class="inline size-4 align-baseline" /> Filtres

@@ -1,8 +1,8 @@
 ---
 title: A nouvelle recette locale de qaldek
-date: '2026-04-09T03:12:44.114Z'
+date: '2026-04-09T03:12:49.175Z'
 draft: true
-typeR: plat
+typeR: dessert
 categories:
   - Cake
 regime:
@@ -19,8 +19,7 @@ region: run TTT
 saison:
   - ete
 id: a-nouvelle-recet-v2-qa_atvn4vuygtf_
-materiel:
-  - Ficelle
+materiel: []
 ingredients:
   - uuid: PmCC0BBVN37UkjL9ctONP
     name: Abricot
@@ -79,7 +78,7 @@ permissionWrite:
   - 68975cbc002469058f8b
 auteur: qaldek
 createdAt: '2026-04-09T03:12:41.063+00:00'
-updatedAt: '2026-04-09T03:12:41.063+00:00'
+updatedAt: '2026-04-09T03:12:48.913+00:00'
 createdBy: 693200b700222efe46a2
 teams: []
 status: public

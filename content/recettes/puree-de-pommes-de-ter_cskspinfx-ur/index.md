@@ -1,6 +1,6 @@
 ---
 title: Purée de pommes de terres - gratinage optionnel - vegan
-date: '2026-03-28T14:50:18.954Z'
+date: '2026-04-09T08:30:36.671Z'
 draft: true
 typeR: plat
 categories:
@@ -18,10 +18,7 @@ description: null
 region: null
 saison: []
 id: puree-de-pommes-de-ter_cskspinfx-ur
-materiel:
-  - Four
-  - Bruleur
-  - Presse-purée
+materiel: []
 ingredients:
   - uuid: 18dy4e
     name: Pomme de terre
@@ -46,15 +43,6 @@ ingredients:
     originalQuantity: 200
     originalUnit: ml
     normalizedQuantity: 200
-    normalizedUnit: ml
-    comment: ''
-    allergens: []
-    type: lof
-  - uuid: vw9d1a
-    name: Lait végétal (au choix)
-    originalQuantity: 2
-    originalUnit: l.
-    normalizedQuantity: 2000
     normalizedUnit: ml
     comment: ''
     allergens: []
@@ -105,6 +93,15 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+  - uuid: hzwesd
+    name: Lait de riz
+    originalQuantity: 2
+    originalUnit: l.
+    normalizedQuantity: 2000
+    normalizedUnit: ml
+    comment: ''
+    allergens: []
+    type: lof
 preparation: |-
   Faire chauffer un grand volume d'eau salée. 
 
@@ -122,11 +119,11 @@ astuces: []
 preparation24h: null
 permissionWrite:
   - 6931ecdccd2c8d8d15e5
-auteur: null
+auteur: Marion
 createdAt: '2026-03-28T14:50:18.387+00:00'
-updatedAt: '2026-03-28T14:50:18.387+00:00'
+updatedAt: '2026-04-09T08:30:36.292+00:00'
 createdBy: 6931ecdccd2c8d8d15e5
-teams: null
+teams: []
 status: public
 rootRecipeId: null
 versionLabel: null

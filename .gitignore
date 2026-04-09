@@ -18,7 +18,9 @@ svelte-app/.vite
 *.opencode
 *.agents
 *.serena
+AGENTS.md
 agent
 *skills-lock.json
 appwrite
 appwrite-ec-dev
+graphify-out/

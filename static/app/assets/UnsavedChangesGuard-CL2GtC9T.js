@@ -1,0 +1,1 @@
+import{d as e,p as s,aE as a,c as o,bj as t}from"./appwrite-s-dM7JmB.js";function r(r,n){e(n,!0);let i=s(n,"message",3,"Vous avez des modifications non sauvegardées. Voulez-vous quitter sans enregistrer ?");t(()=>{if(!n.shouldProtect())return!0;const e=confirm(i());return e&&n.onLeaveWithoutSave&&n.onLeaveWithoutSave(),e}),a(()=>{t(null)}),o()}export{r as U};

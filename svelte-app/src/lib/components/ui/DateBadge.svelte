@@ -12,6 +12,15 @@
 
   let { dateDisplayInfo, recipes = [] }: Props = $props();
 
+  const tooltipText = $derived(
+    recipes.length > 3
+      ? recipes
+          .slice(0, 3)
+          .map((r) => r.r)
+          .join(", ") + `… (+${recipes.length - 3})`
+      : recipes.map((r) => r.r).join(", "),
+  );
+
   const IconComponent = $derived(
     dateDisplayInfo.timeIcon === "sun"
       ? Sun
@@ -23,7 +32,7 @@
   );
 </script>
 
-<div class="tooltip" data-tip={recipes.map((r) => r.r).join(", ")}>
+<div class="tooltip" data-tip={tooltipText}>
   <div
     class="badge badge-soft badge-sm hover:badge-primary flex items-center gap-1"
   >

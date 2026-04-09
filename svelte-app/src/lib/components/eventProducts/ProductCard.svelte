@@ -89,7 +89,7 @@
 <!-- Card du produit -->
 <div
   transition:fade
-  class="card bg-base-100 {globalState.isMobile &&
+  class="card overflow-x-clip bg-base-100 {globalState.isMobile &&
     'border-base-300 border shadow'} {product.status === 'isSyncing'
     ? 'border-accent bg-accent/30 animate-pulse border-2'
     : ''}"

@@ -355,7 +355,7 @@
 <ActiveFiltersIndicator />
 
 <div
-  class="space-y-6 pt-6 md:px-16 {globalState.isDesktop &&
+  class="overflow-x-hidden space-y-6 pt-6 md:px-16 {globalState.isDesktop &&
     'ml-110 print:ml-0'} "
   transition:fade
 >

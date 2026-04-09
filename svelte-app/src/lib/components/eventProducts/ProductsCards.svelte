@@ -94,15 +94,15 @@
           const entry = entries[0];
           if (!entry) return;
 
-          // Le header est visible si le groupe a au moins 5% de visibilité
-          const isGroupVisible = entry.intersectionRatio >= 0.05;
+          // Le header est visible dès que le groupe est partiellement dans le viewport
+          const isGroupVisible = entry.isIntersecting;
           headerVisibility = new Map(headerVisibility).set(
             groupKey,
             isGroupVisible,
           );
         },
         {
-          threshold: [0, 0.05, 1], // Détecter 0%, 10% et 100% de visibilité
+          threshold: [0, 1], // Détecter l'entrée et la sortie complètes du viewport
         },
       );
     });

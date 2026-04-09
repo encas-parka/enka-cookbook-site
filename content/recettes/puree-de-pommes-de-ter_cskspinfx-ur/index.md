@@ -1,6 +1,6 @@
 ---
 title: Purée de pommes de terres - gratinage optionnel - vegan
-date: '2026-04-09T08:30:36.671Z'
+date: '2026-04-09T08:31:01.177Z'
 draft: true
 typeR: plat
 categories:
@@ -103,15 +103,13 @@ ingredients:
     allergens: []
     type: lof
 preparation: |-
-  Faire chauffer un grand volume d'eau salée. 
-
-  Éplucher les pommes de terres, les cuire dans l'eau.
+  Éplucher les pommes de terres, les cuire dans un grand volume d'eau.
 
   Une fois égouttées, les écraser.
 
   Séparément, faire chauffer la margarine, la crème soja et le lait, ainsi que le poivre, sel, muscade.
 
-  Tout mélanger et servir. 
+  Tout mélanger et servir.
 
   Si besoin de maintenir au chaud, mettre dans des gatros au four avec un peu de margarine fondue sur le dessus pour les faire gratiner.
 prepAlt: []
@@ -121,7 +119,7 @@ permissionWrite:
   - 6931ecdccd2c8d8d15e5
 auteur: Marion
 createdAt: '2026-03-28T14:50:18.387+00:00'
-updatedAt: '2026-04-09T08:30:36.292+00:00'
+updatedAt: '2026-04-09T08:31:00.710+00:00'
 createdBy: 6931ecdccd2c8d8d15e5
 teams: []
 status: public

@@ -1,6 +1,6 @@
 ---
 title: Xtipiti
-date: '2026-03-26T10:34:58.650Z'
+date: '2026-04-09T08:23:15.763Z'
 draft: true
 typeR: entree
 categories:
@@ -18,8 +18,7 @@ region: Grèce
 saison:
   - ete
 id: xtipiti_kcesllc4boqm
-materiel:
-  - Four
+materiel: []
 ingredients:
   - uuid: 0zglpj
     name: Poivron (rouge)
@@ -80,7 +79,7 @@ ingredients:
 preparation: |-
   Faire cuire les poivrons au four à 180 °C pendant 30 minutes. Augmentez ensuite la température à 230 °C sur le gril et poursuivez la cuisson pendant 10 minutes supplémentaires, jusqu'à ce que la peau soit noircie, en le retournant régulièrement.
 
-  Pelez les poivrons, retirez les graines et mettez la chair dans un grand saladier. Ajoutez le yaourt, la moitié de la feta, le bouillon et l'ail, puis mixez jusqu'à obtenir une préparation homogène. 
+  Pelez les poivrons, retirez les graines et mettez la chair dans un grand saladier. Ajoutez le yaourt, la moitié de la feta, l'ail, puis mixez jusqu'à obtenir une préparation homogène. Saler si besoin mais la feta sale beaucoup déjà.
 
   Emiettez le reste de la feta à la main / fourchette, mélanger.
 prepAlt: []
@@ -88,11 +87,11 @@ astuces: []
 preparation24h: null
 permissionWrite:
   - 6931ecdccd2c8d8d15e5
-auteur: null
+auteur: Marion
 createdAt: '2026-03-26T10:34:58.241+00:00'
-updatedAt: '2026-03-26T10:34:58.241+00:00'
+updatedAt: '2026-04-09T08:23:15.351+00:00'
 createdBy: 6931ecdccd2c8d8d15e5
-teams: null
+teams: []
 status: public
 rootRecipeId: null
 versionLabel: null

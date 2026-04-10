@@ -334,20 +334,20 @@
 
   <ModalContent>
     {#if !todoToEdit}
-      <div role="tablist" class="tabs tabs-border tabs-lg mb-4">
+      <div role="tablist" class="tabs tabs-border sm:tabs-lg mb-4 font-bold">
         <button
           role="tab"
           class="tab {activeTab === 'individual' ? 'tab-active' : ''}"
           onclick={() => (activeTab = "individual")}
         >
-          <AlignLeft class="me-2 size-4" /> Tâche individuelle
+          <AlignLeft class="me-2 size-4" /> Tâche
         </button>
         <button
           role="tab"
           class="tab {activeTab === 'bulk' ? 'tab-active' : ''}"
           onclick={() => (activeTab = "bulk")}
         >
-          <List class="me-2 size-4" /> Tâches prédéfinies
+          <List class="me-2 size-4" /> Listes prédéfinies
         </button>
       </div>
     {/if}

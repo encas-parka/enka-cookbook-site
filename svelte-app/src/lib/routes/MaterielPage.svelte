@@ -211,7 +211,7 @@
 </LeftPanel>
 
 <!-- Contenu principal -->
-<div class="p-2 sm:p-4 lg:ml-110" transition:fade>
+<div class="p-4 pb-20 lg:ml-96" transition:fade>
   <div class="mx-auto max-w-7xl sm:px-4 sm:py-8">
     <!-- Tabs par équipe (seulement si plus d'une équipe) -->
     {#if userTeams.length > 1}

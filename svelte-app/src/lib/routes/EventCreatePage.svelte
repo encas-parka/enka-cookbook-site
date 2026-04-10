@@ -288,10 +288,10 @@
   </div>
 {/snippet}
 
-<div class="bg-base-200 min-h-lvh space-y-10 px-2 pt-4 pb-20 md:px-30 md:pb-20">
+<div class="bg-base-200 min-h-lvh space-y-10 px-4 pt-4 pb-20 md:px-20">
   <div class="card card-sm bg-base-100">
     <div class="card-body">
-      <div class="card-title mb-4">
+      <div class="card-title mb-2">
         <CalendarPlus2 /> Création d'un événement
       </div>
       <p>
@@ -329,7 +329,7 @@
       </div>
 
       <!-- Statut de l'événement -->
-      <div class="align-start w-full md:min-w-96">
+      <div class=" max-sm:w-full md:min-w-96">
         <Fieldset legend="Statut de l'événement">
           <div class="space-y-3">
             <label class="flex cursor-pointer items-center gap-3">

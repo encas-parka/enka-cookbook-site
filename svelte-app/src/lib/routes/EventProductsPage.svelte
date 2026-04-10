@@ -9,6 +9,7 @@
     Clock,
     Download,
     Funnel,
+    Search,
     Info,
     MessageCircleQuestionMark,
     Package,
@@ -355,8 +356,8 @@
 <ActiveFiltersIndicator />
 
 <div
-  class="overflow-x-hidden space-y-6 pt-6 md:px-16 {globalState.isDesktop &&
-    'ml-110 print:ml-0'} "
+  class="space-y-6 overflow-x-hidden pt-6 md:px-16 {globalState.isDesktop &&
+    'ml-96 print:ml-0'} "
   transition:fade
 >
   {#if isLoading}
@@ -653,6 +654,29 @@
         )}
       </h2>
     </div>
+
+    {#if !globalState.isDesktop}
+      <div class="flex items-center gap-2 px-4">
+        <div class="input input-lg flex flex-1 items-center gap-2">
+          <Search class="size-4 shrink-0" />
+          <input
+            type="text"
+            placeholder="Rechercher un produit..."
+            class="grow"
+            value={productsStore.filters.searchQuery}
+            oninput={(e) => productsStore.setSearchQuery(e.currentTarget.value)}
+          />
+          {#if productsStore.filters.searchQuery}
+            <button
+              class="btn btn-xs btn-circle btn-error btn-outline opacity-60"
+              onclick={() => productsStore.setSearchQuery("")}
+            >
+              <X class="size-4" />
+            </button>
+          {/if}
+        </div>
+      </div>
+    {/if}
 
     <ProductsCards
       {currentEvent}

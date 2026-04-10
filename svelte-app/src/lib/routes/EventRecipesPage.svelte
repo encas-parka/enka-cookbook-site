@@ -471,8 +471,8 @@
     </LeftPanel>
   </div>
   <!-- Contenu principal -->
-  <div class="print:ml-0 {globalState.isDesktop && ' ml-110'}">
-    <div class="mx-auto max-w-6xl px-1 py-8 md:px-4">
+  <div class="print:ml-0 {globalState.isDesktop && ' ml-96'}">
+    <div class="mx-auto max-w-6xl p-4 pb-20">
       <!-- En-tête de l'événement -->
       {#if loading}
         <!-- Skeleton de l'en-tête -->

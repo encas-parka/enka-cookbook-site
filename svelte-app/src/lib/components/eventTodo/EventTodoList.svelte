@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Plus, ListTodo, Loader2 } from "@lucide/svelte";
+  import { Plus, Loader2 } from "@lucide/svelte";
   import { SvelteSet } from "svelte/reactivity";
   import EventTodoItem from "./EventTodoItem.svelte";
   import EventTodoModal from "./EventTodoModal.svelte";
@@ -106,11 +106,7 @@
 </script>
 
 <!-- Header / Actions -->
-<div class="mb-4 flex items-center justify-between">
-  <div class="flex items-center gap-2 text-sm opacity-60">
-    <ListTodo class="size-4" />
-    <span>{todos.length} tâches</span>
-  </div>
+<div class="mb-4 flex items-center justify-end">
   <button class="btn btn-sm btn-primary gap-2" onclick={handleAdd} {disabled}>
     <Plus class="size-4" /> Nouvelle tâche
   </button>

@@ -3,7 +3,6 @@
   import type { EventMateriel } from "$lib/types/appwrite";
   import {
     getMaterielTypeBadgeClass,
-    getMaterielTypeBgClass,
     getMaterielTypeColorClass,
     getMaterielTypeConfig,
   } from "$lib/utils/materiel.utils";
@@ -107,20 +106,14 @@
   }}
 >
   <!-- Type Icon -->
-  <div class=" flex items-center pl-2">
-    <div class="{getMaterielTypeBgClass(item.type)} rounded-lg p-1">
-      <TypeIcon class="{getMaterielTypeColorClass(item.type)} size-5" />
-    </div>
-  </div>
 
   <div class="card-body">
-    <div
-      class="flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between"
-    >
+    <div class="flex flex-wrap items-center justify-between gap-x-4 gap-y-1">
       <!-- Main Info: Nom, Type, Details -->
       <div class="flex min-w-0 flex-wrap items-center gap-x-4 gap-y-1">
         <div class="flex flex-wrap items-center gap-x-4 gap-y-0">
           <div class="flex items-center gap-2">
+            <TypeIcon class="{getMaterielTypeColorClass(item.type)} size-5" />
             <div class=" text-base font-medium">
               {item.name}
             </div>
@@ -186,7 +179,7 @@
       </div>
 
       <!-- Actions -->
-      <div class="flex items-center gap-2">
+      <div class="ms-auto flex items-center gap-2">
         <!-- Status derive de where -->
         <span
           class="badge {isFound

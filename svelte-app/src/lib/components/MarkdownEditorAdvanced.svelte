@@ -45,7 +45,6 @@
   // État pour savoir si l'éditeur est focalisé (optionnel pour le style)
   let isFocused = $state(false);
 
-  // État du dropdown heading
   let showHeadingDropdown = $state(false);
 
   // Détection du heading actif avec $derived

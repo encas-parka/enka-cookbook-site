@@ -9,6 +9,7 @@
     ArrowDownToLine,
     Download,
     ClipboardCopy,
+    ChevronDown,
   } from "@lucide/svelte";
   import { eventsStore } from "$lib/stores/EventsStore.svelte";
   import { globalState } from "$lib/stores/GlobalState.svelte";
@@ -306,7 +307,7 @@
   </button>
 {/snippet}
 
-<div class="mx-auto mt-4 max-w-6xl overflow-x-hidden px-2">
+<div class="mx-auto mt-4 max-w-6xl overflow-x-hidden p-4 pb-20">
   <div class="flex gap-4">
     <!-- Filtres (desktop: sidebar fixe) -->
     <LeftPanel>
@@ -321,7 +322,7 @@
     </LeftPanel>
 
     <!-- Contenu principal -->
-    <div class="mt-4 flex-1 sm:ml-80">
+    <div class="mt-4 flex-1 lg:ml-96">
       <!-- Header -->
       <div class="mb-4 flex flex-wrap items-center justify-between gap-4">
         <div class="flex items-center gap-4">
@@ -331,47 +332,46 @@
           </h2>
         </div>
         {#if canEdit}
-          <div class="flex flex-wrap justify-end gap-2">
-            {#if myTeams.length > 0}
-              {#if myTeams.length === 1}
-                <button
-                  class="btn btn-secondary btn-outline btn-sm"
-                  onclick={() => openImportModal()}
-                >
-                  <ClipboardCopy class="mr-1 size-4" />
-                  {myTeams[0].name}
-                </button>
-              {:else}
-                <details class="dropdown dropdown-end">
-                  <summary class="btn btn-secondary btn-outline btn-sm">
-                    <ClipboardCopy class="mr-1 size-4" />
-                    {myTeams[0].name}
-                  </summary>
-                  <ul
-                    class="dropdown-content menu bg-base-100 rounded-box z-10 mt-1 w-52 p-2 shadow"
-                  >
-                    {#each myTeams as team (team.$id)}
-                      <li>
-                        <button onclick={() => openImportModal(team.$id)}>
-                          {team.name}
-                        </button>
-                      </li>
-                    {/each}
-                  </ul>
-                </details>
-              {/if}
-            {/if}
-            <button
-              class="btn btn-primary btn-outline btn-sm"
-              onclick={() => (catalogModalOpen = true)}
-            >
-              <ListPlus class="mr-1 size-4" />
-              Catalogue
-            </button>
-            <button class="btn btn-primary btn-sm" onclick={openAddForm}>
-              <Plus class="mr-1 size-4" />
+          <div class="dropdown dropdown-end ms-auto">
+            <div tabindex="0" role="button" class="btn btn-primary btn-sm">
+              <Plus class="size-4" />
               Ajouter
-            </button>
+              <ChevronDown size={14} class="opacity-50" />
+            </div>
+            <ul
+              class="menu dropdown-content bg-base-100 border-base-200 z-1 mt-3 w-52 rounded-xl border p-2 font-medium shadow-xl"
+            >
+              <li>
+                <button onclick={openAddForm}>
+                  <Plus size={16} />
+                  Ajouter
+                </button>
+              </li>
+              <li>
+                <button onclick={() => (catalogModalOpen = true)}>
+                  <ListPlus size={16} />
+                  Catalogue
+                </button>
+              </li>
+              {#if myTeams.length === 1}
+                <li>
+                  <button onclick={() => openImportModal()}>
+                    <ClipboardCopy size={16} />
+                    {myTeams[0].name}
+                  </button>
+                </li>
+              {:else if myTeams.length > 1}
+                <li class="menu-title">Importer depuis</li>
+                {#each myTeams as team (team.$id)}
+                  <li>
+                    <button onclick={() => openImportModal(team.$id)}>
+                      <ClipboardCopy size={16} />
+                      {team.name}
+                    </button>
+                  </li>
+                {/each}
+              {/if}
+            </ul>
           </div>
         {/if}
       </div>

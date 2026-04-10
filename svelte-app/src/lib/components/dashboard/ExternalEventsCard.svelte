@@ -89,7 +89,9 @@
   </div>
 {:else}
   <!-- Affichage normal avec événements -->
-  <div class="card bg-base-100 border-base-200 mb-6 border shadow-xl">
+  <div
+    class="card max-sm:card-sm bg-base-100 border-base-200 mb-6 border shadow-xl"
+  >
     <div class="card-body">
       <div class="mb-4 flex flex-wrap items-center justify-between">
         <div class="flex items-center gap-3">

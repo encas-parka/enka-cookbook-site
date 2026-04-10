@@ -203,7 +203,7 @@
   // Cleanup
 </script>
 
-<div class="container mx-auto p-2 sm:p-4" transition:fade>
+<div class="container mx-auto p-4 pb-20" transition:fade>
   <div class="mx-auto max-w-7xl sm:px-4 sm:py-8">
     <!-- Tabs par équipe (seulement si plus d'une équipe) -->
     {#if userTeams.length > 1}
@@ -213,7 +213,9 @@
             (loan) => loan.ownerId === team.$id,
           ).length}
           <button
-            class="tab {activeTeamId === team.$id ? 'tab-active' : ''}"
+            class="tab font-bold {activeTeamId === team.$id
+              ? 'tab-active'
+              : ''}"
             onclick={() => switchTeam(team.$id)}
           >
             <Users class="mr-2 h-4 w-4" />

@@ -342,12 +342,24 @@
     ];
   }
 
+  function getStep(maxQuantity: number): number {
+    if (maxQuantity <= 15) return 1;
+    return 5;
+  }
+
   function handleQuantityChange(materielId: string, newQuantity: number) {
     selectedMateriels = selectedMateriels.map((m) =>
       m.materielId === materielId
         ? { ...m, quantity: Math.max(0, Math.min(newQuantity, m.maxQuantity)) }
         : m,
     );
+  }
+
+  function handleTakeAll() {
+    selectedMateriels = selectedMateriels.map((m) => ({
+      ...m,
+      quantity: m.maxQuantity,
+    }));
   }
 
   function handleQuickSelectionAdd(materielIds: string[]) {
@@ -566,7 +578,7 @@
               />
             </label>
 
-            <label class="input min-w-50 *:flex-1">
+            <label class="input min-w-50 flex-1">
               <span class="label"
                 ><Calendar class="h-4 w-4" />
                 Date fin *</span
@@ -707,9 +719,22 @@
           <!-- Liste des matériels sélectionnés -->
           {#if selectedMateriels.length > 0}
             <div class="space-y-2">
-              <p class="text-sm font-semibold opacity-70">
-                Matériels sélectionnés
-              </p>
+              <div class="flex items-center justify-between">
+                <p class="text-sm font-semibold opacity-70">
+                  Matériels sélectionnés
+                </p>
+                {#if selectedMateriels.some((m) => m.maxQuantity > m.quantity)}
+                  <button
+                    class="link link-primary text-xs font-medium"
+                    onclick={handleTakeAll}
+                    disabled={loading}
+                  >
+                    Tout prendre
+                  </button>
+                {:else}
+                  <span class="text-xs font-medium">Tout pris</span>
+                {/if}
+              </div>
               {#each selectedMateriels as materiel (materiel.materielId)}
                 {@const TypeIcon =
                   materiel.type === "electronic"
@@ -763,42 +788,54 @@
                         onclick={() =>
                           handleQuantityChange(
                             materiel.materielId,
-                            materiel.quantity - 1,
+                            materiel.quantity - getStep(materiel.maxQuantity),
                           )}
                         disabled={loading || materiel.quantity <= 0}
                         aria-label="Diminuer"
                       >
                         <Minus class="size-3" />
                       </button>
-                      <select
-                        class="select select-sm w-20"
-                        bind:value={materiel.quantity}
+                      <input
+                        type="number"
+                        class="input input-sm w-16 [appearance:textfield] text-center [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
+                        min={0}
+                        max={materiel.maxQuantity}
+                        step={getStep(materiel.maxQuantity)}
+                        value={materiel.quantity}
                         onchange={(e) => {
-                          const target = e.target as HTMLSelectElement;
+                          const target = e.target as HTMLInputElement;
                           handleQuantityChange(
                             materiel.materielId,
-                            parseInt(target.value),
+                            parseInt(target.value) || 0,
                           );
                         }}
                         disabled={loading}
-                      >
-                        <option value={0}>0</option>
-                        {#each Array(materiel.maxQuantity) as _, i (i)}
-                          <option value={i + 1}>{i + 1}</option>
-                        {/each}
-                      </select>
+                      />
                       <button
                         class="btn btn-ghost btn-xs btn-circle hidden sm:flex"
                         onclick={() =>
                           handleQuantityChange(
                             materiel.materielId,
-                            materiel.quantity + 1,
+                            materiel.quantity + getStep(materiel.maxQuantity),
                           )}
                         disabled={loading ||
                           materiel.quantity >= materiel.maxQuantity}
                         aria-label="Augmenter"
                       >
                         <Plus class="size-3" />
+                      </button>
+
+                      <button
+                        class="btn btn-ghost btn-xs"
+                        onclick={() =>
+                          handleQuantityChange(
+                            materiel.materielId,
+                            materiel.maxQuantity,
+                          )}
+                        disabled={loading ||
+                          materiel.quantity >= materiel.maxQuantity}
+                      >
+                        tout
                       </button>
                     </div>
                   </div>

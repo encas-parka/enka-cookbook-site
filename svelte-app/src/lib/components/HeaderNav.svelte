@@ -318,22 +318,16 @@
 >
   <div class="navbar-start w-fit flex-1 shrink-0 gap-1">
     <!-- Brand -->
-    <a href={p("/")} class="btn btn-ghost btn-circle">
-      <img src="/images/favicon.png" alt="logo" class="h-8 w-8" />
+    <a
+      href={globalState.isAuthenticated ? p("/dashboard") : p("/")}
+      class="btn btn-ghost btn-sm max-sm:btn-circle"
+    >
+      <img src="/images/favicon.png" alt="logo" class="size-7" />
+      <span class="hidden md:inline">Tableau de bord</span>
     </a>
 
     <!-- Permanent Nav Links -->
     <div class=" flex items-center gap-1">
-      {#if globalState.isAuthenticated}
-        <a
-          href={p("/dashboard")}
-          class="btn btn-ghost btn-sm not-md:btn-square md:gap-2"
-        >
-          <LayoutDashboardIcon size={18} />
-          <span class="hidden md:inline">Tableau de bord</span>
-        </a>
-      {/if}
-
       <a
         href={p("/recipe")}
         class="btn btn-sm btn-ghost not-md:btn-square md:gap-2"
@@ -355,7 +349,7 @@
   </div>
 
   <!-- navbar-center : onglet actif + dropdown des autres routes -->
-  <div class="navbar-center min-w-0 flex-1 items-center px-2">
+  <div class="navbar-center mx-auto min-w-0 flex-1 items-center px-2">
     {#if eventContext && eventActiveTab}
       <div class="dropdown mx-auto">
         <div
@@ -608,7 +602,7 @@
 {#if eventContext}
   <div
     class=" h-fit px-4 py-2 print:hidden {globalState.isDesktop && hasLeftPanel
-      ? 'ml-110'
+      ? 'ml-96'
       : ''}"
   >
     <EventTabs

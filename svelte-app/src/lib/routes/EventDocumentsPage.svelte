@@ -111,7 +111,7 @@
 
 {#snippet navActions()}{/snippet}
 
-<div class="bg-base-200 min-h-lvh px-2 pt-4 pb-20 md:px-20" transition:fade>
+<div class="bg-base-200 min-h-lvh px-4 pt-4 pb-20 md:px-20" transition:fade>
   <div class="mx-auto mt-6 max-w-4xl">
     <!-- Header -->
     <div class="mb-4 flex flex-wrap items-center justify-between gap-4">

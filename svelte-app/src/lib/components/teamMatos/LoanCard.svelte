@@ -211,7 +211,7 @@
       case "accepted":
         return [
           {
-            label: "Compléter Fiche retour",
+            label: "Fiche retour",
             icon: ClipboardPen,
             action: onReturn,
             class: "btn-warning",
@@ -256,7 +256,9 @@
   }
 </script>
 
-<div class="card bg-base-100 border-base-200 border text-left shadow-sm">
+<div
+  class="card max-sm:card-sm bg-base-100 border-base-200 border text-left shadow-sm"
+>
   <!-- Badge statut -->
   <!-- <div class="hidden pl-4 sm:flex sm:items-center">
     <div class="bg-base-200 rounded-lg p-3">
@@ -266,7 +268,7 @@
 
   <div class="card-body py-3">
     <div
-      class="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between"
+      class="flex flex-col gap-x-2 gap-y-1 sm:flex-row sm:items-start sm:justify-between"
     >
       <!-- Info principale -->
       <div class="flex min-w-0 flex-1 flex-col gap-4">

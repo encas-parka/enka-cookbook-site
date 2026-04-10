@@ -278,7 +278,7 @@
 <!-- TEMPLATE -->
 <!-- ============================================================================ -->
 
-<div class="max-w-9xl container mx-auto px-2 py-8 sm:px-4" in:fade>
+<div class="max-w-9xl container mx-auto p-4 pb-20" in:fade>
   {#if !loaded}
     <div class="flex items-center justify-center py-20">
       <div class="loading loading-spinner loading-lg"></div>

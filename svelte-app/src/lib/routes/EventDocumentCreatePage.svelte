@@ -106,7 +106,7 @@
 
 <!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
 <div
-  class="bg-base-200 min-h-lvh px-2 pt-4 pb-20 md:px-20"
+  class="bg-base-200 min-h-lvh px-4 pt-4 pb-20 md:px-20"
   onkeydown={handleKeydown}
   role="region"
   tabindex="-1"

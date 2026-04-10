@@ -511,7 +511,7 @@
       />
     </div>
 
-    <div class="print:m-0 print:p-0 {globalState.isDesktop ? 'ml-80' : ''}">
+    <div class="print:m-0 print:p-0 {globalState.isDesktop ? 'ml-96' : ''}">
       <PosterDisplay
         {event}
         {groupedMeals}

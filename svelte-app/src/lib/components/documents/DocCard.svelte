@@ -7,9 +7,7 @@
     Calendar,
     Clock,
     ArrowRight,
-    Download,
   } from "@lucide/svelte";
-  import { shareOrDownload, toSlug } from "$lib/utils/share-utils";
 
   interface Props {
     doc: EnrichedTeamdoc;
@@ -34,17 +32,6 @@
         ? p(`/editdocument/${teamId}/${doc.$id}`)
         : "#",
   );
-
-  function handleDownload(e: MouseEvent) {
-    e.preventDefault();
-    e.stopPropagation();
-    const md = doc.content || "";
-    shareOrDownload(
-      md,
-      `${toSlug(doc.title || "document")}.md`,
-      "Document exporté",
-    );
-  }
 </script>
 
 <a
@@ -101,14 +88,7 @@
     </div>
   </div>
 
-  <div class="flex shrink-0 items-start gap-3">
-    <button
-      class="btn btn-primary btn-circle btn-outline btn-xs opacity-0 transition-opacity group-hover:opacity-100"
-      onclick={handleDownload}
-      title="Exporter le document"
-    >
-      <Download class="h-3.5 w-3.5" />
-    </button>
+  <div class="flex shrink-0 flex-col items-start gap-3 sm:flex-row">
     <ArrowRight class="mt-0.5 h-4 w-4 opacity-40" />
   </div>
 </a>

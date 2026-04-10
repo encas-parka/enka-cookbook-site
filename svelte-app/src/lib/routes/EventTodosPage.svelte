@@ -81,18 +81,18 @@
   <!-- Pas d'actions spécifiques pour cette page -->
 {/snippet}
 
-<div class="bg-base-200 min-h-lvh px-2 pt-4 pb-20 md:px-20" transition:fade>
+<div class="bg-base-200 min-h-lvh px-4 pt-4 pb-20 md:px-20" transition:fade>
   <!-- Header -->
-  {#if currentEvent}
-    <div class="mb-4 flex items-center gap-4">
-      <ListTodo class="text-primary size-5" />
-      <h2 class="text-xl font-bold">Tâches - {currentEvent.name}</h2>
-    </div>
-  {/if}
 
   <!-- Todo List -->
   {#if currentEvent}
     <div class="mx-auto mt-6 {maxWidthClass}">
+      <div class="mb-4 flex items-center gap-4">
+        <ListTodo class="text-primary size-5" />
+        <h2 class="text-xl font-bold">
+          Tâches ({currentEvent.todos.length}) - {currentEvent.name}
+        </h2>
+      </div>
       <EventTodoList
         event={currentEvent}
         {contributors}

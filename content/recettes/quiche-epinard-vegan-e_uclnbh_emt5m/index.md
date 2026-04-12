@@ -1,6 +1,6 @@
 ---
 title: Quiche épinard végan et sans gluten
-date: '2026-04-12T12:47:14.927Z'
+date: '2026-04-12T12:47:54.889Z'
 draft: false
 typeR: entree
 categories:
@@ -22,7 +22,6 @@ saison:
   - automne
 id: quiche-epinard-vegan-e_uclnbh_emt5m
 materiel:
-  - Bruleur
   - Moule à tarte
 ingredients:
   - uuid: 4totf1
@@ -135,11 +134,11 @@ astuces: []
 preparation24h: '#### '
 permissionWrite:
   - 69a063c400308d84e961
-auteur: null
+auteur: georgetteetnono
 createdAt: '2026-04-12T12:47:14.278+00:00'
-updatedAt: '2026-04-12T12:47:14.278+00:00'
+updatedAt: '2026-04-12T12:47:54.526+00:00'
 createdBy: 69a063c400308d84e961
-teams: null
+teams: []
 status: public
 rootRecipeId: null
 versionLabel: null

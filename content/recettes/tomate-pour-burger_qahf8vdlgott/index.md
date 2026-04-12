@@ -1,7 +1,7 @@
 ---
 title: Tomate pour burger
-date: '2026-04-12T11:57:59.857Z'
-draft: true
+date: '2026-04-12T12:19:05.370Z'
+draft: false
 typeR: plat
 categories:
   - Salade
@@ -19,8 +19,7 @@ region: null
 saison:
   - ete
 id: tomate-pour-burger_qahf8vdlgott
-materiel:
-  - Gastro 1/1 (15cm)
+materiel: []
 ingredients:
   - uuid: ibtbnq
     name: Tomate
@@ -37,11 +36,11 @@ astuces: []
 preparation24h: null
 permissionWrite:
   - 69a063c400308d84e961
-auteur: null
+auteur: georgetteetnono
 createdAt: '2026-04-12T11:57:59.437+00:00'
-updatedAt: '2026-04-12T11:57:59.437+00:00'
+updatedAt: '2026-04-12T12:19:04.905+00:00'
 createdBy: 69a063c400308d84e961
-teams: null
+teams: []
 status: public
 rootRecipeId: null
 versionLabel: null

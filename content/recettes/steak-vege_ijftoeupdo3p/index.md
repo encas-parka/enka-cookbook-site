@@ -1,6 +1,6 @@
 ---
-title: Steak végé
-date: '2026-03-28T10:49:55.426Z'
+title: Steak végé aux haricots rouges
+date: '2026-04-12T13:55:15.499Z'
 draft: false
 typeR: plat
 categories:
@@ -38,6 +38,8 @@ ingredients:
     comment: cuits et égoutés
     allergens: []
     type: sec
+    pF: false
+    pS: false
   - uuid: c5sgrf
     name: farine de sarrasin
     originalQuantity: 1.6
@@ -47,6 +49,8 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: 5c1b20
     name: Moutarde
     originalQuantity: 33
@@ -57,6 +61,8 @@ ingredients:
     allergens:
       - Moutarde
     type: epices
+    pF: false
+    pS: false
   - uuid: rtavky
     name: Oignon
     originalQuantity: 16
@@ -66,6 +72,8 @@ ingredients:
     comment: haché
     allergens: []
     type: legumes
+    pF: false
+    pS: false
   - uuid: u2m28w
     name: Ail
     originalQuantity: 30
@@ -75,6 +83,8 @@ ingredients:
     comment: haché
     allergens: []
     type: legumes
+    pF: false
+    pS: false
   - uuid: h3c8al
     name: huile d'olive
     originalQuantity: 0.35
@@ -84,6 +94,8 @@ ingredients:
     comment: ou tournesol il faut aussi 70cl d'eau dans cette recette
     allergens: []
     type: lof
+    pF: false
+    pS: false
   - uuid: he3u48
     name: Cumin moulu
     originalQuantity: 33
@@ -93,6 +105,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: 0p7ynz
     name: Piment doux
     originalQuantity: 33
@@ -102,6 +116,8 @@ ingredients:
     comment: en poudre
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: a8dxd8
     name: Herbes de Provence
     originalQuantity: 33
@@ -111,6 +127,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: 2pps90
     name: Poivre
     originalQuantity: 0
@@ -120,6 +138,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
   - uuid: 2juq3x
     name: Sel
     originalQuantity: 0
@@ -129,6 +149,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+    pF: false
+    pS: false
 preparation: |-
   faire revenir oignon + ail.
 
@@ -146,7 +168,7 @@ permissionWrite:
   - 69a063c400308d84e961
 auteur: null
 createdAt: '2026-03-28T10:49:55.013+00:00'
-updatedAt: '2026-03-28T10:49:55.013+00:00'
+updatedAt: '2026-04-12T13:55:13.084+00:00'
 createdBy: 69a063c400308d84e961
 teams: null
 status: public

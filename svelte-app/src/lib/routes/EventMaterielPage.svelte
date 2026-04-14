@@ -28,11 +28,13 @@
   import QuickAddEventCatalogModal from "$lib/components/eventMateriel/QuickAddEventCatalogModal.svelte";
   import LeftPanel from "$lib/components/ui/LeftPanel.svelte";
   import ConfirmModal from "$lib/components/ui/ConfirmModal.svelte";
+  import MaterielSortControls from "$lib/components/eventMateriel/MaterielSortControls.svelte";
   import type { EventMateriel } from "$lib/types/appwrite";
   import type {
     CreateEventMaterielData,
     UpdateEventMaterielData,
     EventMaterielFilters as EventMaterielFilterOptions,
+    EventMaterielSort,
   } from "$lib/types/event-materiel.types";
   import { online } from "svelte/reactivity/window";
   import { isDemoEvent } from "$lib/data/demo-event-config";
@@ -117,6 +119,12 @@
     search: "",
   });
 
+  // Tri (défaut : par type)
+  let currentSort = $state<EventMaterielSort>({
+    field: "type",
+    direction: "asc",
+  });
+
   // Types disponibles
   const availableTypes = [
     "electronic",
@@ -143,7 +151,7 @@
         where: filters.where,
         search: filters.search,
       },
-      { field: "name", direction: "asc" },
+      currentSort,
     ),
   );
 
@@ -386,6 +394,9 @@
           />
         </div>
       {/if}
+
+      <!-- Contrôles de tri -->
+      <MaterielSortControls sort={currentSort} onSortChange={(s) => (currentSort = s)} />
 
       <!-- Filtres actifs -->
       {#if activeBadges.length > 0}

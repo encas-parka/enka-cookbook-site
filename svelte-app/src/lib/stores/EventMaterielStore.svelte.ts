@@ -435,6 +435,13 @@ export class EventMaterielStore {
         case "who":
           cmp = (a.who || "").localeCompare(b.who || "");
           break;
+        case "where":
+          // Tri par lieu, puis alphabétiquement par nom
+          cmp = (a.where || "").localeCompare(b.where || "");
+          if (cmp === 0) {
+            cmp = a.name.localeCompare(b.name);
+          }
+          break;
       }
       return sort.direction === "desc" ? -cmp : cmp;
     });

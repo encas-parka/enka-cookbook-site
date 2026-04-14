@@ -52,7 +52,7 @@ export interface EventMaterielFilters {
   search?: string; // recherche globale (nom, who, where, notes)
 }
 
-export type EventMaterielSortField = "name" | "type" | "status" | "who";
+export type EventMaterielSortField = "name" | "type" | "status" | "who" | "where";
 
 export type SortDirection = "asc" | "desc";
 

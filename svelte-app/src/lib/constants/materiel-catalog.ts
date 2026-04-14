@@ -17,6 +17,8 @@ export const MATERIEL_CATALOG: CatalogItem[] = [
   // ==========================================================================
   // Cuisine — Gastro (au four)
   // ==========================================================================
+  { name: "Gastro 1/1 Couvercles", type: "cooking" },
+  { name: "Gastro 1/1 (2cm)", type: "cooking" },
   { name: "Gastro 1/1 (5cm)", type: "cooking" },
   { name: "Gastro 1/1 (10cm)", type: "cooking" },
   { name: "Gastro 1/1 (15cm)", type: "cooking" },
@@ -55,14 +57,6 @@ export const MATERIEL_CATALOG: CatalogItem[] = [
   { name: "Gamelle Alu 80L", type: "cooking" },
   { name: "Gamelle Alu 100L", type: "cooking" },
   { name: "Gamelle Alu 120L", type: "cooking" },
-
-  // ==========================================================================
-  // Cuisine — Plats (au four)
-  // ==========================================================================
-  { name: "Plat à Pizza 40cm", type: "cooking" },
-  { name: "Plat à Pizza 60cm", type: "cooking" },
-  { name: "Plat à Pizza 80cm", type: "cooking" },
-  { name: "Plat à Pizza 100cm", type: "cooking" },
 
   // ==========================================================================
   // Cuisine — Couvercles

@@ -51,9 +51,7 @@
     return header?.name || null;
   });
 
-  const isAllocation = $derived(
-    !!currentItem?.groupId,
-  );
+  const isAllocation = $derived(!!currentItem?.groupId);
 
   function resetForm() {
     error = null;
@@ -117,14 +115,11 @@
   async function handleUnlink() {
     if (!itemId) return;
     try {
-      await toastService.track(
-        eventMaterielStore.linkToHeader(itemId, null),
-        {
-          loading: "Déliaison en cours...",
-          success: "Item détaché",
-          error: "Erreur lors de la déliaison",
-        },
-      );
+      await toastService.track(eventMaterielStore.linkToHeader(itemId, null), {
+        loading: "Déliaison en cours...",
+        success: "Item détaché",
+        error: "Erreur lors de la déliaison",
+      });
       onSuccess?.();
     } catch (err: any) {
       error = err.message || "Erreur lors de la déliaison";
@@ -161,7 +156,7 @@
   }
 </script>
 
-<ModalContainer {isOpen} onClose={handleClose}>
+<ModalContainer {isOpen} onClose={handleClose} maxWidth="sm">
   <ModalHeader
     title={currentItem
       ? `Modifier : ${currentItem.name}`
@@ -202,7 +197,8 @@
         <div class="bg-base-200 mt-4 rounded-lg p-3">
           <div class="mb-2 flex items-center gap-2 text-sm">
             <Link class="text-base-content/50 size-4" />
-            <span class="text-base-content/70">Lier à un besoin existant :</span>
+            <span class="text-base-content/70">Lier à un besoin existant :</span
+            >
           </div>
           <div class="flex max-h-32 flex-col gap-1 overflow-y-auto">
             {#each availableHeaders as header (header.$id)}

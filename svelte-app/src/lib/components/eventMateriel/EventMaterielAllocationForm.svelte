@@ -28,7 +28,9 @@
     onCancel,
   }: Props = $props();
 
+  // svelte-ignore state_referenced_locally
   let quantity = $state(Math.min(1, maxQuantity));
+  // svelte-ignore state_referenced_locally
   let status = $state<EventMaterielStatus>(presetStatus ?? "to_check");
   let who = $state("");
   let where = $state("");
@@ -58,53 +60,76 @@
   }
 </script>
 
-<form onsubmit={handleSubmit} class="space-y-3">
-  <div class="text-base-content/70 mb-4 text-sm">
+<form onsubmit={handleSubmit} class="space-y-4">
+  <div class="text-base-content/70 text-sm">
     <strong>{headerName}</strong>
     {#if maxQuantity > 0}
       <span class="badge badge-warning badge-xs ml-1"
         >besoin total: {maxQuantity}</span
       >
     {/if}
-    <span>Indiquez la quantité disponibile empruntable ou à demander</span>
+    <p>Indiquez la quantité disponible, empruntable ou à demander.</p>
   </div>
 
-  <div class="grid grid-cols-1 gap-3 sm:grid-cols-2">
-    <label class="input">
-      <span class="label"><Hash class="size-4" /> quantité</span>
-      <input
-        type="number"
-        min="1"
-        max={maxQuantity}
-        bind:value={quantity}
-        placeholder="Quantité"
-        required
-      />
-    </label>
-
-    <fieldset class="fieldset gap-0.5">
-      <label class="select">
-        <CircleDot class="h-4 w-4 opacity-50" />
-        <select bind:value={status}>
-          {#each statuses as s (s.value)}
-            <option value={s.value}>{s.label}</option>
-          {/each}
-        </select>
+  <div class="grid grid-cols-1 gap-4">
+    <fieldset class="fieldset">
+      <legend class="fieldset-legend"
+        ><Hash class="inline size-4" /> Quantité</legend
+      >
+      <label class="input w-full">
+        <input
+          type="number"
+          min="1"
+          max={maxQuantity}
+          bind:value={quantity}
+          placeholder="Quantité"
+          class="grow"
+          required
+        />
       </label>
-      <span class="label">ok où a demander ?</span>
     </fieldset>
-    <label class="input">
-      <User class="h-4 w-4 opacity-50" />
-      <input type="text" bind:value={who} placeholder="Qui s'en charge ?" />
-    </label>
 
-    <label class="input">
-      <MapPin class="h-4 w-4 opacity-50" />
-      <input type="text" bind:value={where} placeholder="Où le trouver ?" />
-    </label>
+    <fieldset class="fieldset">
+      <legend class="fieldset-legend"
+        ><CircleDot class="inline size-4" /> Statut</legend
+      >
+      <select bind:value={status} class="select w-full">
+        {#each statuses as s (s.value)}
+          <option value={s.value}>{s.label}</option>
+        {/each}
+      </select>
+    </fieldset>
+
+    <fieldset class="fieldset">
+      <legend class="fieldset-legend"
+        ><User class="inline size-4" /> Qui ?</legend
+      >
+      <label class="input w-full">
+        <input
+          type="text"
+          bind:value={who}
+          placeholder="Personne responsable"
+          class="grow"
+        />
+      </label>
+    </fieldset>
+
+    <fieldset class="fieldset">
+      <legend class="fieldset-legend"
+        ><MapPin class="inline size-4" /> Où ?</legend
+      >
+      <label class="input w-full">
+        <input
+          type="text"
+          bind:value={where}
+          placeholder="Lieu de stockage"
+          class="grow"
+        />
+      </label>
+    </fieldset>
   </div>
 
-  <div class="modal-action flex justify-end gap-2">
+  <div class="flex justify-end gap-2">
     <button type="button" class="btn btn-ghost btn-sm" onclick={onCancel}>
       <X class="h-4 w-4" />
       Annuler

@@ -33,7 +33,6 @@
   import ModalContent from "$lib/components/ui/modal/ModalContent.svelte";
   import EventMaterielControls, {
     type ActiveBadge,
-    type CollapseState,
   } from "$lib/components/eventMateriel/EventMaterielControls.svelte";
   import type { EventMateriel } from "$lib/types/appwrite";
   import type {
@@ -140,7 +139,6 @@
   // Display mode: "nested" (grouped by header) or "flat" (one card per item)
   type DisplayMode = "nested" | "flat";
   let displayMode = $state<DisplayMode>("nested");
-  let collapseState = $state<CollapseState>("expanded");
 
   // Detect if filters are active (status/where/who filters force flat mode)
   const hasActiveFilters = $derived.by(() => {
@@ -495,7 +493,7 @@
         {/if}
       </div>
 
-      <!-- Contrôles : tri + mode d'affichage + filtres actifs + collapse -->
+      <!-- Contrôles : tri + mode d'affichage + filtres actifs -->
       <EventMaterielControls
         sort={currentSort}
         onSortChange={(s) => (currentSort = s)}
@@ -505,8 +503,6 @@
         {activeBadges}
         onRemoveBadge={removeBadge}
         onResetFilters={resetFilters}
-        {collapseState}
-        onCollapseChange={(s) => (collapseState = s)}
       />
 
       <!-- Loading -->
@@ -534,14 +530,12 @@
             <EventMaterielGroupCard
               {group}
               {canEdit}
-              forceCollapseState={collapseState}
               onEditItem={(item) => (editingItemId = item.$id)}
               onEditLoan={handleEditLoan}
               onAddAllocation={(headerId, status) => {
                 allocatingForHeaderId = headerId;
                 allocationPresetStatus = status;
               }}
-              onManualToggle={() => (collapseState = "indeterminate")}
             />
           {/each}
         </div>
@@ -607,6 +601,7 @@
   {#if allocHeader}
     <ModalContainer
       isOpen={true}
+      maxWidth="sm"
       onClose={() => {
         allocatingForHeaderId = null;
         allocationPresetStatus = undefined;
@@ -638,7 +633,7 @@
 
 <!-- Modal d'ajout de matériel -->
 {#if addModalOpen && canEdit && eventId}
-  <ModalContainer isOpen={true} onClose={closeForm}>
+  <ModalContainer isOpen={true} onClose={closeForm} maxWidth="sm">
     <ModalHeader title="Ajouter du matériel" onClose={closeForm} />
     <ModalContent>
       <EventMaterielForm

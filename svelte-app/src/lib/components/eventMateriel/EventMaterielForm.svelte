@@ -109,82 +109,113 @@
   }
 </script>
 
-<form onsubmit={handleSubmit} class="space-y-3">
-  <div class="grid grid-cols-1 gap-3 sm:grid-cols-2">
-    {#if isEdit}
-      <label class="input sm:col-span-2">
+<form onsubmit={handleSubmit} class="space-y-4">
+  {#if isEdit}
+    <fieldset class="fieldset">
+      <legend class="fieldset-legend"
+        ><Package class="inline size-4" /> Nom</legend
+      >
+      <label class="input w-full">
         <Package class="h-4 w-4 opacity-50" />
         <input
           type="text"
           bind:value={name}
           placeholder="Nom * (ex: Table pliante)"
+          class="grow"
           required
         />
       </label>
-    {:else}
-      <MaterielNameSuggest
-        class="sm:col-span-2"
-        value={name}
-        onSelect={handleNameSelect}
-        onInput={handleNameInput}
-      />
-    {/if}
+    </fieldset>
+  {:else}
+    <MaterielNameSuggest
+      value={name}
+      onSelect={handleNameSelect}
+      onInput={handleNameInput}
+    />
+  {/if}
 
-    <label class="input">
-      <span class="label"><Hash class="size-4" /> quantité</span>
-      <input
-        type="number"
-        min="1"
-        bind:value={quantity}
-        placeholder="Quantité"
-      />
-    </label>
+  <div class="grid grid-cols-1 gap-4">
+    <fieldset class="fieldset">
+      <legend class="fieldset-legend"
+        ><Hash class="inline size-4" /> Quantité</legend
+      >
+      <label class="input w-full">
+        <input
+          type="number"
+          min="1"
+          bind:value={quantity}
+          placeholder="Quantité"
+          class="grow"
+        />
+      </label>
+    </fieldset>
 
-    <label class="select">
-      <Shapes class="h-4 w-4 opacity-50" />
-      <select bind:value={type}>
+    <fieldset class="fieldset">
+      <legend class="fieldset-legend"
+        ><Shapes class="inline size-4" /> Type</legend
+      >
+      <select bind:value={type} class="select w-full">
         {#each types as t (t.value)}
           <option value={t.value}>{t.label}</option>
         {/each}
       </select>
-    </label>
+    </fieldset>
 
-    <label class="select">
-      <CircleDot class="h-4 w-4 opacity-50" />
-      <select bind:value={status}>
+    <fieldset class="fieldset">
+      <legend class="fieldset-legend"
+        ><CircleDot class="inline size-4" /> Statut</legend
+      >
+      <select bind:value={status} class="select w-full">
         {#each statuses as s (s.value)}
           <option value={s.value}>{s.label}</option>
         {/each}
       </select>
-    </label>
+    </fieldset>
 
-    <label class="input">
-      <User class="h-4 w-4 opacity-50" />
-      <input type="text" bind:value={who} placeholder="Qui s'en charge ?" />
-    </label>
+    <fieldset class="fieldset">
+      <legend class="fieldset-legend"
+        ><User class="inline size-4" /> Qui ?</legend
+      >
+      <label class="input w-full">
+        <User class="h-4 w-4 opacity-50" />
+        <input
+          type="text"
+          bind:value={who}
+          placeholder="Personne responsable"
+          class="grow"
+        />
+      </label>
+    </fieldset>
 
-    <label class="input">
-      <MapPin class="h-4 w-4 opacity-50" />
-      <input
-        type="text"
-        bind:value={where}
-        placeholder="Où le trouver ?"
-        disabled={!canEditWhere}
-      />
-    </label>
+    <fieldset class="fieldset">
+      <legend class="fieldset-legend"
+        ><MapPin class="inline size-4" /> Où ?</legend
+      >
+      <label class="input w-full">
+        <MapPin class="h-4 w-4 opacity-50" />
+        <input
+          type="text"
+          bind:value={where}
+          placeholder="Lieu de stockage"
+          class="grow"
+          disabled={!canEditWhere}
+        />
+      </label>
+    </fieldset>
 
-    <label class="textarea sm:col-span-2">
+    <fieldset class="fieldset">
+      <legend class="fieldset-legend">Notes</legend>
       <textarea
         rows="2"
-        class="size-full"
         bind:value={notes}
-        placeholder="Notes..."
+        placeholder="Notes supplémentaires..."
+        class="textarea w-full"
       ></textarea>
-    </label>
+    </fieldset>
   </div>
 
   {#if isEdit && onDelete}
-    <div class="mt-4 flex">
+    <div class="flex">
       <button
         type="button"
         class="btn btn-error btn-outline btn-sm"
@@ -197,7 +228,7 @@
     </div>
   {/if}
 
-  <div class="modal-action flex justify-end gap-2">
+  <div class="flex justify-end gap-2">
     <button type="button" class="btn btn-ghost" onclick={onCancel}>
       <X class="h-4 w-4" />
       Annuler

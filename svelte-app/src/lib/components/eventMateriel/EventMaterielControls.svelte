@@ -1,17 +1,14 @@
 <script lang="ts">
+  import type {
+    EventMaterielSort,
+    EventMaterielSortField,
+  } from "$lib/types/event-materiel.types";
   import {
     ArrowDownNarrowWide,
     LayoutGrid,
     LayoutList,
-    ChevronsDown,
-    ChevronsUp,
-    Minus,
     X,
   } from "@lucide/svelte";
-  import type {
-    EventMaterielSortField,
-    EventMaterielSort,
-  } from "$lib/types/event-materiel.types";
 
   export interface ActiveBadge {
     id: string;
@@ -30,8 +27,6 @@
     activeBadges: ActiveBadge[];
     onRemoveBadge: (id: string) => void;
     onResetFilters: () => void;
-    collapseState?: CollapseState;
-    onCollapseChange?: (state: CollapseState) => void;
   }
 
   let {
@@ -43,8 +38,6 @@
     activeBadges,
     onRemoveBadge,
     onResetFilters,
-    collapseState = "expanded",
-    onCollapseChange,
   }: Props = $props();
 
   type SortOption = { field: EventMaterielSortField; label: string };
@@ -63,19 +56,11 @@
     const base = "btn btn-sm btn-primary btn-outline gap-2";
     return sort.field === field ? `${base} btn-active` : base;
   }
-
-  function toggleCollapse() {
-    if (collapseState === "collapsed") {
-      onCollapseChange?.("expanded");
-    } else {
-      onCollapseChange?.("collapsed");
-    }
-  }
 </script>
 
 <div class="space-y-2">
   <div
-    class="bg-base-300 rounded-box flex flex-wrap items-center gap-3 px-4 py-3"
+    class="bg-base-300 rounded-box flex flex-wrap items-center justify-between gap-3 px-4 py-3"
   >
     <fieldset class="fieldset">
       <legend class="legend label">
@@ -94,12 +79,8 @@
       </div>
     </fieldset>
 
-    <div
-      class="divider divider-horizontal mx-0 hidden h-6 w-px bg-base-content/10 sm:flex"
-    ></div>
-
     <div class="flex items-center gap-2">
-      <div class="flex rounded-btn bg-base-200 p-1">
+      <div class="rounded-btn flex p-1">
         <button
           class="btn btn-xs gap-1 {displayMode === 'nested'
             ? 'btn-primary'
@@ -122,27 +103,6 @@
           <span class="hidden sm:inline">Liste</span>
         </button>
       </div>
-
-      {#if displayMode === "nested" && !hasActiveFilters}
-        <button
-          class="btn btn-ghost btn-xs gap-1"
-          onclick={toggleCollapse}
-          title={collapseState === "collapsed"
-            ? "Tout déplier"
-            : "Tout plier"}
-        >
-          {#if collapseState === "collapsed"}
-            <ChevronsDown class="size-4" />
-          {:else if collapseState === "expanded"}
-            <ChevronsUp class="size-4" />
-          {:else}
-            <Minus class="size-4" />
-          {/if}
-          <span class="hidden sm:inline">
-            {collapseState === "collapsed" ? "Déplier" : "Plier"}
-          </span>
-        </button>
-      {/if}
     </div>
   </div>
 
@@ -161,7 +121,10 @@
         </button>
       {/each}
       {#if activeBadges.length > 1}
-        <button class="btn btn-ghost btn-xs text-error" onclick={onResetFilters}>
+        <button
+          class="btn btn-ghost btn-xs text-error"
+          onclick={onResetFilters}
+        >
           Réinitialiser
         </button>
       {/if}

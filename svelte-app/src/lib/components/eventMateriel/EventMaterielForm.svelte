@@ -3,6 +3,7 @@
   import type {
     CreateEventMaterielData,
     EventMaterielType,
+    EventMaterielStatus,
   } from "$lib/types/event-materiel.types";
   import {
     Hash,
@@ -13,7 +14,9 @@
     Trash2,
     User,
     X,
+    CircleDot,
   } from "@lucide/svelte";
+  import MaterielNameSuggest from "$lib/components/eventMateriel/MaterielNameSuggest.svelte";
 
   interface Props {
     eventId: string;
@@ -33,8 +36,6 @@
     canEditWhere = true,
   }: Props = $props();
 
-  // Capture un snapshot des valeurs au montage — le formulaire est démonté
-  // après chaque soumission/annulation, donc pas de risque de stale data.
   // svelte-ignore state_referenced_locally
   let name = $state(initialData?.name || "");
   // svelte-ignore state_referenced_locally
@@ -44,15 +45,15 @@
     (initialData?.type as EventMaterielType) || "other",
   );
   // svelte-ignore state_referenced_locally
+  let status = $state<EventMaterielStatus>(
+    (initialData?.status as EventMaterielStatus) || "to_find",
+  );
+  // svelte-ignore state_referenced_locally
   let who = $state(initialData?.who || "");
   // svelte-ignore state_referenced_locally
   let where = $state(initialData?.where || "");
   // svelte-ignore state_referenced_locally
   let notes = $state(initialData?.notes || "");
-  // // TODO: status derive de where - supprimer ces lignes si on reintroduit un statut
-  // let status = $state<EventMaterielStatus>(
-  //   (initialData?.status as EventMaterielStatus) || "needed",
-  // );
   let submitting = $state(false);
 
   const isEdit = $derived(!!initialData);
@@ -68,6 +69,24 @@
     { value: "hygiene", label: "Hygiène" },
   ];
 
+  const statuses: { value: EventMaterielStatus; label: string }[] = [
+    { value: "to_find", label: "À trouver" },
+    { value: "to_check", label: "À vérifier" },
+    { value: "confirmed", label: "Ok" },
+  ];
+
+  function handleNameInput(val: string) {
+    name = val;
+  }
+
+  function handleNameSelect(suggestion: {
+    name: string;
+    type: EventMaterielType;
+  }) {
+    name = suggestion.name;
+    type = suggestion.type;
+  }
+
   async function handleSubmit(e: Event) {
     e.preventDefault();
     if (!name.trim()) return;
@@ -79,9 +98,9 @@
         name: name.trim(),
         quantity,
         type,
+        status,
         who: who.trim() || null,
         where: where.trim() || null,
-        // status, // TODO: supprimer si on reintroduit un statut
         notes: notes.trim() || null,
       });
     } finally {
@@ -92,18 +111,25 @@
 
 <form onsubmit={handleSubmit} class="space-y-3">
   <div class="grid grid-cols-1 gap-3 sm:grid-cols-2">
-    <!-- Nom -->
-    <label class="input sm:col-span-2">
-      <Package class="h-4 w-4 opacity-50" />
-      <input
-        type="text"
-        bind:value={name}
-        placeholder="Nom * (ex: Table pliante)"
-        required
+    {#if isEdit}
+      <label class="input sm:col-span-2">
+        <Package class="h-4 w-4 opacity-50" />
+        <input
+          type="text"
+          bind:value={name}
+          placeholder="Nom * (ex: Table pliante)"
+          required
+        />
+      </label>
+    {:else}
+      <MaterielNameSuggest
+        class="sm:col-span-2"
+        value={name}
+        onSelect={handleNameSelect}
+        onInput={handleNameInput}
       />
-    </label>
+    {/if}
 
-    <!-- Quantité -->
     <label class="input">
       <span class="label"><Hash class="size-4" /> quantité</span>
       <input
@@ -114,7 +140,6 @@
       />
     </label>
 
-    <!-- Type -->
     <label class="select">
       <Shapes class="h-4 w-4 opacity-50" />
       <select bind:value={type}>
@@ -124,13 +149,20 @@
       </select>
     </label>
 
-    <!-- Qui -->
+    <label class="select">
+      <CircleDot class="h-4 w-4 opacity-50" />
+      <select bind:value={status}>
+        {#each statuses as s (s.value)}
+          <option value={s.value}>{s.label}</option>
+        {/each}
+      </select>
+    </label>
+
     <label class="input">
       <User class="h-4 w-4 opacity-50" />
       <input type="text" bind:value={who} placeholder="Qui s'en charge ?" />
     </label>
 
-    <!-- Où -->
     <label class="input">
       <MapPin class="h-4 w-4 opacity-50" />
       <input
@@ -141,7 +173,6 @@
       />
     </label>
 
-    <!-- Notes -->
     <label class="textarea sm:col-span-2">
       <textarea
         rows="2"
@@ -152,7 +183,6 @@
     </label>
   </div>
 
-  <!-- Delete (edit mode only) -->
   {#if isEdit && onDelete}
     <div class="mt-4 flex">
       <button
@@ -167,7 +197,6 @@
     </div>
   {/if}
 
-  <!-- Actions -->
   <div class="modal-action flex justify-end gap-2">
     <button type="button" class="btn btn-ghost" onclick={onCancel}>
       <X class="h-4 w-4" />

@@ -43,9 +43,11 @@
     const result: Record<string, { quantity: number; ids: string[] }> = {};
     for (const m of eventMaterielStore.items) {
       if (!m.who && !m.where) {
-        if (!result[m.name]) result[m.name] = { quantity: 0, ids: [] };
-        result[m.name].quantity += m.quantity;
-        result[m.name].ids.push(m.$id);
+        const key = m.name || "";
+        if (!key) continue;
+        if (!result[key]) result[key] = { quantity: 0, ids: [] };
+        result[key].quantity += m.quantity || 0;
+        result[key].ids.push(m.$id);
       }
     }
     return result;
@@ -55,9 +57,11 @@
     const result: Record<string, { label: string; qty: number }[]> = {};
     for (const m of eventMaterielStore.items) {
       if (m.who || m.where) {
+        const key = m.name || "";
+        if (!key) continue;
         const label = m.fromTeamName || m.where || m.who || "source inconnue";
-        if (!result[m.name]) result[m.name] = [];
-        result[m.name].push({ label, qty: m.quantity });
+        if (!result[key]) result[key] = [];
+        result[key].push({ label, qty: m.quantity || 0 });
       }
     }
     return result;
@@ -159,6 +163,7 @@
             name: item.name,
             type: item.type as CreateEventMaterielData["type"],
             quantity: newQty,
+            status: "to_find",
           };
           await eventMaterielStore.addItem(data, globalState.userId || "");
           created++;

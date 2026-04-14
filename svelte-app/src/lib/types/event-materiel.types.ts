@@ -8,12 +8,10 @@
 import type { EventMateriel } from "./appwrite";
 
 // =============================================================================
-// STATUTS (PROVISOIRE : commenté en attendant refonte)
-// Le statut est actuellement derivé de `where` dans l'UI
-// TODO: refondre selon besoin : tofind | ok | bonus
+// STATUTS
 // =============================================================================
 
-// export type EventMaterielStatus = "needed" | "confirmed" | "brought";
+export type EventMaterielStatus = "to_find" | "to_check" | "confirmed";
 
 export type EventMaterielType =
   | "electronic"
@@ -46,10 +44,10 @@ export interface EnrichedEventMateriel extends EventMateriel {
 
 export interface EventMaterielFilters {
   types?: EventMaterielType[];
-  // statuses?: EventMaterielStatus[]; // TODO: status derive de where
-  who?: string[]; // filtres par personne (inclut "__none__" pour "Personne")
-  where?: string[]; // filtres par lieu (inclut "__none__" pour "À trouver")
-  search?: string; // recherche globale (nom, who, where, notes)
+  statuses?: EventMaterielStatus[];
+  who?: string[];
+  where?: string[];
+  search?: string;
 }
 
 export type EventMaterielSortField = "name" | "type" | "status" | "who" | "where";
@@ -70,13 +68,25 @@ export interface CreateEventMaterielData {
   name: string;
   quantity: number;
   type: EventMaterielType;
+  status?: EventMaterielStatus;
+  groupId?: string | null;
   who?: string | null;
   where?: string | null;
   fromTeamName?: string | null;
   sourceMaterielId?: string | null;
   loanId?: string | null;
-  // status?: EventMaterielStatus; // TODO: status derive de where
   notes?: string | null;
 }
 
 export type UpdateEventMaterielData = Partial<CreateEventMaterielData>;
+
+// =============================================================================
+// GROUPES (besoin + allocations)
+// =============================================================================
+
+export interface MaterielGroup {
+  header: EventMateriel;
+  allocations: EventMateriel[];
+  remainingQty: number;
+  totalAllocated: number;
+}

@@ -15,7 +15,8 @@ import type {
   EventMaterielFilters,
   EventMaterielSort,
   EventMaterielType,
-  // EventMaterielStatus, // TODO: status derive de where
+  EventMaterielStatus,
+  MaterielGroup,
 } from "$lib/types/event-materiel.types";
 import {
   listEventMateriel,
@@ -352,6 +353,23 @@ export class EventMaterielStore {
   // }
 
   // =============================================================================
+  // UTILITAIRE STATUS
+  // =============================================================================
+
+  /**
+   * Résout le status d'un item.
+   * Pour la migration : les anciens items sans status valide sont déduits de `where`.
+   */
+  resolveStatus(item: EventMateriel): EventMaterielStatus {
+    const s = item.status as string;
+    if (s === "to_find" || s === "to_check" || s === "confirmed") {
+      return s as EventMaterielStatus;
+    }
+    // Migration : anciens items sans status → déduit de where
+    return item.where && item.where.trim().length > 0 ? "confirmed" : "to_find";
+  }
+
+  // =============================================================================
   // FILTRAGE ET TRI
   // =============================================================================
 
@@ -371,13 +389,12 @@ export class EventMaterielStore {
       );
     }
 
-    // Filtre par statuts (PROVISOIRE : commente car status derive de where)
-    // TODO: supprimer ou adapter si on reintroduit un statut
-    // if (filters.statuses?.length) {
-    //   result = result.filter((item) =>
-    //     filters.statuses!.includes(item.status as EventMaterielStatus),
-    //   );
-    // }
+    // Filtre par statuts
+    if (filters.statuses?.length) {
+      result = result.filter((item) =>
+        filters.statuses!.includes(this.resolveStatus(item)),
+      );
+    }
 
     // Filtre par qui (who)
     if (filters.who?.length) {
@@ -408,7 +425,7 @@ export class EventMaterielStore {
       const search = filters.search.toLowerCase();
       result = result.filter(
         (item) =>
-          item.name.toLowerCase().includes(search) ||
+          (item.name || "").toLowerCase().includes(search) ||
           item.who?.toLowerCase().includes(search) ||
           item.where?.toLowerCase().includes(search) ||
           item.notes?.toLowerCase().includes(search),
@@ -420,26 +437,24 @@ export class EventMaterielStore {
       let cmp = 0;
       switch (sort.field) {
         case "name":
-          cmp = a.name.localeCompare(b.name);
+          cmp = (a.name || "").localeCompare(b.name || "");
           break;
         case "type":
-          // Tri par type, puis alphabétiquement par nom
           cmp = a.type.localeCompare(b.type);
           if (cmp === 0) {
-            cmp = a.name.localeCompare(b.name);
+            cmp = (a.name || "").localeCompare(b.name || "");
           }
           break;
         case "status":
-          cmp = a.status.localeCompare(b.status);
+          cmp = this.resolveStatus(a).localeCompare(this.resolveStatus(b));
           break;
         case "who":
           cmp = (a.who || "").localeCompare(b.who || "");
           break;
         case "where":
-          // Tri par lieu, puis alphabétiquement par nom
           cmp = (a.where || "").localeCompare(b.where || "");
           if (cmp === 0) {
-            cmp = a.name.localeCompare(b.name);
+            cmp = (a.name || "").localeCompare(b.name || "");
           }
           break;
       }
@@ -473,6 +488,169 @@ export class EventMaterielStore {
       counts[item.type] = (counts[item.type] || 0) + 1;
     });
     return counts;
+  }
+
+  // =============================================================================
+  // REGROUPEMENT (BESOIN + ALLOCATIONS)
+  // =============================================================================
+
+  /**
+   * Retourne les headers (groupId = null, status to_find)
+   */
+  get headers(): EventMateriel[] {
+    return this.#itemsList.filter(
+      (item) => !item.groupId && this.resolveStatus(item) === "to_find",
+    );
+  }
+
+  /**
+   * Retourne les allocations d'un header
+   */
+  getAllocationsForHeader(headerId: string): EventMateriel[] {
+    return this.#itemsList.filter((item) => item.groupId === headerId);
+  }
+
+  /**
+   * Calcule la quantité restante pour un header
+   */
+  getRemainingQuantity(headerId: string): number {
+    const header = this.#items.get(headerId);
+    if (!header) return 0;
+    const allocated = this.getAllocationsForHeader(headerId).reduce(
+      (sum, a) => sum + (a.quantity || 0),
+      0,
+    );
+    return (header.quantity || 0) - allocated;
+  }
+
+  /**
+   * Retourne la structure groupée pour l'UI (mode nested)
+   */
+  getGroupedItems(
+    filters: EventMaterielFilters,
+    sort: EventMaterielSort,
+  ): MaterielGroup[] {
+    const filtered = this.getFilteredItems(filters, sort);
+
+    const headerMap = new Map<string, EventMateriel>();
+    const allocationsByHeader = new Map<string, EventMateriel[]>();
+    const standalone: EventMateriel[] = [];
+
+    for (const item of filtered) {
+      if (item.groupId) {
+        if (!allocationsByHeader.has(item.groupId)) {
+          allocationsByHeader.set(item.groupId, []);
+        }
+        allocationsByHeader.get(item.groupId)!.push(item);
+      } else if (this.resolveStatus(item) === "to_find") {
+        headerMap.set(item.$id, item);
+      } else {
+        standalone.push(item);
+      }
+    }
+
+    const groups: MaterielGroup[] = [];
+
+    for (const [headerId, header] of headerMap) {
+      const allocations = allocationsByHeader.get(headerId) || [];
+      const totalAllocated = allocations.reduce(
+        (sum, a) => sum + (a.quantity || 0),
+        0,
+      );
+      groups.push({
+        header,
+        allocations,
+        remainingQty: (header.quantity || 0) - totalAllocated,
+        totalAllocated,
+      });
+    }
+
+    for (const item of standalone) {
+      const allocations = allocationsByHeader.get(item.$id) || [];
+      if (allocations.length > 0) {
+        const totalAllocated = allocations.reduce(
+          (sum, a) => sum + (a.quantity || 0),
+          0,
+        );
+        groups.push({
+          header: item,
+          allocations,
+          remainingQty: (item.quantity || 0) - totalAllocated,
+          totalAllocated,
+        });
+      } else {
+        groups.push({
+          header: item,
+          allocations: [],
+          remainingQty: 0,
+          totalAllocated: item.quantity || 0,
+        });
+      }
+    }
+
+    return groups;
+  }
+
+  /**
+   * Recherche un header existant par nom (fuzzy match)
+   */
+  findMatchingHeader(name: string): EventMateriel | null {
+    const normalizedSearch = name.toLowerCase().trim();
+    let bestMatch: EventMateriel | null = null;
+    let bestScore = 0;
+
+    for (const header of this.headers) {
+      const headerName = (header.name || "").toLowerCase().trim();
+      if (!headerName) continue;
+
+      let score = 0;
+      if (headerName === normalizedSearch) {
+        score = 100;
+      } else if (headerName.includes(normalizedSearch)) {
+        score = 80;
+      } else if (normalizedSearch.includes(headerName)) {
+        score = 70;
+      } else {
+        const searchWords = normalizedSearch.split(/\s+/);
+        const headerWords = headerName.split(/\s+/);
+        const overlap = searchWords.filter((w) =>
+          headerWords.some((hw) => hw.includes(w) || w.includes(hw)),
+        );
+        score = (overlap.length / Math.max(searchWords.length, headerWords.length)) * 60;
+      }
+
+      if (score > bestScore && score >= 50) {
+        bestScore = score;
+        bestMatch = header;
+      }
+    }
+
+    return bestMatch;
+  }
+
+  /**
+   * Retourne les valeurs uniques de status (résolues) pour les filtres
+   */
+  getUniqueStatusValues(): EventMaterielStatus[] {
+    const values = new Set<EventMaterielStatus>();
+    this.#itemsList.forEach((item) => {
+      values.add(this.resolveStatus(item));
+    });
+    return Array.from(values).sort();
+  }
+
+  /**
+   * Lie un item à un header (allocation) ou délie (groupId = null)
+   */
+  async linkToHeader(itemId: string, headerId: string | null): Promise<void> {
+    await this.updateItem(itemId, { groupId: headerId });
+  }
+
+  /**
+   * Retourne les headers disponibles pour le linking (excluant l'item lui-même)
+   */
+  getAvailableHeadersForLink(excludeItemId?: string): EventMateriel[] {
+    return this.headers.filter((h) => h.$id !== excludeItemId);
   }
 
   // =============================================================================
@@ -534,12 +712,17 @@ export class EventMaterielStore {
           const type = (sourceMateriel?.type || "other") as EventMaterielType;
           const location = sourceMateriel?.location || null;
 
+          const matchingHeader = this.findMatchingHeader(loanItem.materielName);
+          const groupId = matchingHeader?.$id ?? null;
+
           const created = await createEventMaterielService(
             {
               eventId,
               name: loanItem.materielName,
               quantity: loanItem.quantity,
               type,
+              status: "confirmed",
+              groupId,
               who: responsibleName,
               where: location,
               fromTeamName: ownerName,

@@ -36,30 +36,13 @@
   function openEditLoanModal(loanId: string) {
     if (!activeTeamId) return;
 
-    // Trouver l'équipe active
     const team = userTeams.find((t) => t.$id === activeTeamId);
     if (!team) {
       toastService.error("Équipe introuvable");
       return;
     }
 
-    // Vérifier que la date de fin n'est pas passée
-    const loan = materielStore.getLoanById(loanId);
-    if (!loan) {
-      toastService.error("Emprunt introuvable");
-      return;
-    }
-
-    const now = new Date();
-    const endDate = new Date(loan.endDate);
-    if (now > endDate) {
-      toastService.error(
-        "Impossible de modifier un emprunt dont la date est passée",
-      );
-      return;
-    }
-
-    editingLoanId = loanId; // Passer en mode édition
+    editingLoanId = loanId;
     createLoanModalOpen = true;
   }
 
@@ -262,7 +245,7 @@
         <div class="space-y-4">
           <div class="mb-6 flex justify-end">
             <button
-              class="btn btn-primary btn-wide flex gap-2"
+              class="btn btn-primary btn-sm flex gap-2"
               onclick={openCreateLoanModal}
             >
               <Plus size={16} />

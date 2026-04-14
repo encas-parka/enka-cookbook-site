@@ -180,9 +180,11 @@
       </div>
     </div>
 
-    <div class="card grid grid-cols-1 gap-6 text-sm">
+    <div class="card grid grid-cols-1 gap-6 text-sm lg:grid-cols-6">
       <!-- === ÉVÉNEMENTS === -->
-      <div class="card bg-base-100 card-sm border-neutral/20 border shadow-sm">
+      <div
+        class="card bg-base-100 card-sm border-neutral/20 border shadow-sm lg:col-span-4"
+      >
         <div class="card-body">
           <div class="flex flex-wrap justify-between gap-2">
             <h3 class="card-title items-center">
@@ -218,7 +220,7 @@
         </div>
       </div>
 
-      <div>
+      <div class="lg:col-span-2">
         <DocQuickAccess teamId={team.$id} />
       </div>
     </div>

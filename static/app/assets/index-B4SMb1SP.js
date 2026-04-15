@@ -1,0 +1,1 @@
+import{b7 as o,b8 as n}from"./appwrite-CPC-AaP1.js";const w=new o(()=>window.scrollY,o=>n(window,"scroll",o)),i=new o(()=>navigator.onLine,o=>{const w=n(window,"online",o),i=n(window,"offline",o);return()=>{w(),i()}});export{i as o,w as s};

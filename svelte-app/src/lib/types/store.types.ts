@@ -349,11 +349,12 @@ export interface ProductData {
 export interface RecipeOccurrence {
   r: string; // recipeName
   q: number; // quantité brute (optionnel, si différent de qEq)
-  u: string; // unité brute (optionnel, si différent de uEq)
+  u: string; // unité brute (optionnel, si différent de qEq)
   qEq: number; // quantité équivalente (convertie)
   uEq: string; // unité équivalente
   a: number; // assiettes
   cRule?: string; // conversion rule (optionnel)
+  id?: string; // recipeUuid (pour lien profond vers EventRecipesPage)
 }
 
 export interface ByDateEntry {

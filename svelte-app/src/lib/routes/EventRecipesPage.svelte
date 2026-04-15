@@ -5,7 +5,7 @@
     getTotalGuests,
     getTotalRecipes,
   } from "$lib/utils/event-stats-helpers";
-  import { navigate, route } from "$lib/router";
+  import { navigate, route, searchParams } from "$lib/router";
   import { onMount, tick } from "svelte";
   import EventStats from "$lib/components/EventStats.svelte";
   import EventRecipeCard from "$lib/components/eventEdit/EventRecipeCard.svelte";
@@ -43,7 +43,6 @@
   let isLoading = $state(false);
 
   // État pour la recherche par ingrédient (un seul à la fois)
-  let selectedIngredient = $state<string>("");
   let ingredientSearch = $state("");
 
   // Extraire tous les ingrédients uniques des recettes de l'événement
@@ -59,72 +58,68 @@
     return Array.from(ingredientsSet).sort();
   });
 
+  // ============================================================================
+  // FILTRAGE : searchParams comme source de vérité unique
+  // Params : recipe=uuid, meal=dateISO|"undated", ingredient=name
+  // ============================================================================
+
+  const urlFilter = $derived.by(() => {
+    const r = searchParams.get("recipe");
+    const m = searchParams.get("meal");
+    const i = searchParams.get("ingredient");
+    return {
+      recipeUuid: r ? String(r) : null,
+      mealDate: m ? String(m) : null,
+      ingredient: i ? String(i) : null,
+    };
+  });
+
+  const hasActiveFilter = $derived(
+    !!urlFilter.recipeUuid || !!urlFilter.mealDate || !!urlFilter.ingredient,
+  );
+
   // Ingrédients disponibles pour l'autocomplétion (exclut celui déjà sélectionné)
   const availableIngredientsForAutocomplete = $derived(
-    selectedIngredient
-      ? availableIngredients.filter((ing) => ing !== selectedIngredient)
+    urlFilter.ingredient
+      ? availableIngredients.filter((ing) => ing !== urlFilter.ingredient)
       : availableIngredients,
   );
 
-  // État pour les filtres de date, moment et recette individuelle
-  let selectedDateFilter = $state<string | null>(null);
-  let selectedTimeFilter = $state<string | null>(null);
-  let selectedMealRecipeFilter = $state<string | null>(null); // Format: "mealId-recipeIndex"
-  let selectedUndatedFilter = $state<boolean>(false); // Filtre "mise de côté"
-
-  // Repas filtrés par date et moment (pour l'affichage principal)
+  // Repas filtrés par date/meal (pour l'affichage principal)
   const filteredMeals = $derived.by(() => {
-    if (selectedUndatedFilter) {
+    const { mealDate } = urlFilter;
+
+    if (!mealDate) {
+      return eventMeals.filter((meal) => meal.date !== "");
+    }
+
+    if (mealDate === "undated") {
       return eventMeals.filter((meal) => meal.date === "");
     }
-    if (!selectedDateFilter)
-      return eventMeals.filter((meal) => meal.date !== "");
 
-    return eventMeals.filter((meal) => {
-      if (meal.date === "") return false;
-      const date = formatDateShort(meal.date);
-      const time = extractTime(meal.date);
+    // mealDate peut être une date complète (2026-04-15T12:00:00) ou juste la date (2026-04-15)
+    if (mealDate.includes("T")) {
+      return eventMeals.filter((meal) => meal.date === mealDate);
+    }
 
-      const dateMatch = date === selectedDateFilter;
-      const timeMatch = !selectedTimeFilter || time === selectedTimeFilter;
-
-      return dateMatch && timeMatch;
-    });
+    // Date seule → prefix match
+    return eventMeals.filter((meal) => meal.date?.startsWith(mealDate));
   });
 
   // Recettes mises de côté (meals sans date)
   const undatedMeals = $derived(eventMeals.filter((meal) => meal.date === ""));
 
-  // Recettes filtrées par ingrédients ET par filtres de date/moment
+  // Recettes filtrées par ingrédient
   const filteredRecipes = $derived.by(() => {
-    let recipes = recipesDetails;
+    if (!urlFilter.ingredient) return recipesDetails;
 
-    // Filtrer par la recherche d'ingrédient
-    if (selectedIngredient) {
-      recipes = recipes.filter((recipe) =>
-        recipe.ingredients?.some(
-          (ingredient: any) =>
-            ingredient.name &&
-            ingredient.name.toLowerCase() === selectedIngredient.toLowerCase(),
-        ),
-      );
-    }
-
-    // Filtrer par date/moment sélectionnés
-    if (selectedDateFilter) {
-      const filteredMealRecipes = new Set();
-      filteredMeals.forEach((meal) => {
-        meal.recipes.forEach((mealRecipe: any) => {
-          filteredMealRecipes.add(mealRecipe.recipeUuid);
-        });
-      });
-
-      recipes = recipes.filter((recipe: any) =>
-        filteredMealRecipes.has(recipe.$id),
-      );
-    }
-
-    return recipes;
+    return recipesDetails.filter((recipe) =>
+      recipe.ingredients?.some(
+        (ingredient: any) =>
+          ingredient.name &&
+          ingredient.name.toLowerCase() === urlFilter.ingredient!.toLowerCase(),
+      ),
+    );
   });
 
   // Organisation des repas pour le sommaire (par date et moment, exclut les meals sans date)
@@ -238,6 +233,24 @@
     }
   });
 
+  // // ============================================================================
+  // // SCROLL : vers la recette ciblée quand les données sont prêtes
+  // // ============================================================================
+
+  // $effect(() => {
+  //   const recipeUuid = urlFilter.recipeUuid;
+  //   if (!recipeUuid || loading) return;
+  //   // Tracker eventMeals comme dépendance
+  //   if (eventMeals.length === 0) return;
+
+  //   tick().then(() => {
+  //     requestAnimationFrame(() => {
+  //       const el = document.getElementById(`recipe-${recipeUuid}`);
+  //       el?.scrollIntoView({ behavior: "smooth", block: "center" });
+  //     });
+  //   });
+  // });
+
   // ============================================================================
   // NAVBAR CONFIGURATION
   // ============================================================================
@@ -248,18 +261,41 @@
     });
   });
 
-  // Gestion de l'ingrédient sélectionné
+  // Helpers pour écrire dans les searchParams
+  function clearAllFilters() {
+    searchParams.delete("recipe");
+    searchParams.delete("meal");
+    searchParams.delete("ingredient");
+    ingredientSearch = "";
+  }
+
+  function setFilterRecipe(recipeUuid: string, mealDate: string) {
+    searchParams.set("recipe", recipeUuid);
+    searchParams.set("meal", mealDate);
+    searchParams.delete("ingredient");
+    ingredientSearch = "";
+  }
+
+  function setFilterMeal(mealDate: string) {
+    searchParams.delete("recipe");
+    searchParams.set("meal", mealDate);
+    searchParams.delete("ingredient");
+    ingredientSearch = "";
+  }
+
+  function setFilterIngredient(ingredient: string) {
+    searchParams.delete("recipe");
+    searchParams.delete("meal");
+    searchParams.set("ingredient", ingredient);
+  }
+
   function selectIngredient(ingredient: string) {
-    selectedIngredient = ingredient;
-    // Reset les filtres de date/recette/mise de côté
-    selectedDateFilter = null;
-    selectedTimeFilter = null;
-    selectedMealRecipeFilter = null;
-    selectedUndatedFilter = false;
+    setFilterIngredient(ingredient);
   }
 
   function resetIngredientFilter() {
-    selectedIngredient = "";
+    searchParams.delete("ingredient");
+    ingredientSearch = "";
   }
 </script>
 
@@ -272,7 +308,7 @@
   </div>
 {/snippet}
 
-<div class="overflow-x-hidden bg-base-200" in:fade>
+<div class="bg-base-200 overflow-x-hidden" in:fade>
   <!-- LeftPanel avec recherche et sommaire -->
   <div class="print:hidden">
     <LeftPanel>
@@ -289,11 +325,11 @@
           <AutocompleteInput
             items={availableIngredientsForAutocomplete}
             onSelect={selectIngredient}
-            placeholder={selectedIngredient || "Filtrer par ingrédients..."}
+            placeholder={urlFilter.ingredient || "Filtrer par ingrédients..."}
             minQueryLength={1}
             bind:value={ingredientSearch}
           />
-          {#if selectedIngredient}
+          {#if urlFilter.ingredient}
             <button
               class="btn btn-circle btn-error btn-outline btn-xs absolute top-1/2 right-2 z-10 -translate-y-1/2 opacity-60 hover:opacity-100"
               onclick={resetIngredientFilter}
@@ -308,18 +344,22 @@
       <!-- Sommaire réactif des recettes avec filtrage -->
       <ul class="menu bg-base-100 rounded-box w-full drop-shadow-lg">
         {#each Array.from(mealsByDate.entries()) as [date, times] (date)}
+          {@const dateISO =
+            Array.from(
+              (times as Map<string, any[]>).values(),
+            )[0]?.[0]?.date?.split("T")[0] ?? ""}
           <li>
             <button
-              class="btn btn-sm justify-start {selectedDateFilter === date &&
-              !selectedTimeFilter
+              class="btn btn-sm justify-start {urlFilter.mealDate === dateISO &&
+              !urlFilter.recipeUuid
                 ? 'btn-accent'
                 : 'btn-ghost'}"
               onclick={() => {
-                selectedTimeFilter = null; // Réinitialiser le filtre de temps
-                selectedMealRecipeFilter = null; // Réinitialiser le filtre de recette
-                selectedIngredient = ""; // Réinitialiser le filtre d'ingrédient
-                selectedUndatedFilter = false; // Réinitialiser le filtre mise de côté
-                selectedDateFilter = selectedDateFilter === date ? null : date;
+                if (urlFilter.mealDate === dateISO && !urlFilter.recipeUuid) {
+                  clearAllFilters();
+                } else {
+                  setFilterMeal(dateISO);
+                }
               }}
             >
               <span>{date}</span>
@@ -328,19 +368,22 @@
 
           <ul>
             {#each Array.from((times as Map<string, any[]>).entries()) as [time, meals] (time)}
+              {@const mealISO = meals[0].date}
               <li>
                 <button
-                  class="btn btn-sm mb-1 h-auto justify-start pl-4 {selectedDateFilter ===
-                    date && selectedTimeFilter === time
+                  class="btn btn-sm mb-1 h-auto justify-start pl-4 {urlFilter.mealDate ===
+                    mealISO && !urlFilter.recipeUuid
                     ? 'btn-accent'
                     : 'btn-ghost '}"
                   onclick={() => {
-                    selectedDateFilter = date;
-                    selectedTimeFilter =
-                      selectedTimeFilter === time ? null : time;
-                    selectedMealRecipeFilter = null; // Réinitialiser le filtre de recette
-                    selectedIngredient = ""; // Réinitialiser le filtre d'ingrédient
-                    selectedUndatedFilter = false; // Réinitialiser le filtre mise de côté
+                    if (
+                      urlFilter.mealDate === mealISO &&
+                      !urlFilter.recipeUuid
+                    ) {
+                      clearAllFilters();
+                    } else {
+                      setFilterMeal(mealISO);
+                    }
                   }}
                 >
                   <span class="flex w-full items-center justify-between">
@@ -356,24 +399,19 @@
                   {@const recipe = recipesDetails.find(
                     (r) => r.$id === mealRecipe.recipeUuid,
                   )}
-                  {@const mealRecipeKey =
-                    (meals[0].id || meals[0].date) + "_" + recipeIndex}
                   {#if recipe}
                     <li>
                       <button
-                        class="btn btn-sm mb-1 ml-8 justify-start {selectedMealRecipeFilter ===
-                        mealRecipeKey
+                        class="btn btn-sm mb-1 ml-8 justify-start {urlFilter.recipeUuid ===
+                        mealRecipe.recipeUuid
                           ? 'btn-accent'
                           : 'btn-ghost'}"
                         onclick={() => {
-                          selectedDateFilter = null;
-                          selectedTimeFilter = null;
-                          selectedMealRecipeFilter =
-                            selectedMealRecipeFilter === mealRecipeKey
-                              ? null
-                              : mealRecipeKey;
-                          selectedIngredient = ""; // Réinitialiser le filtre d'ingrédient
-                          selectedUndatedFilter = false; // Réinitialiser le filtre mise de côté
+                          if (urlFilter.recipeUuid === mealRecipe.recipeUuid) {
+                            clearAllFilters();
+                          } else {
+                            setFilterRecipe(mealRecipe.recipeUuid, mealISO);
+                          }
                         }}
                       >
                         <span class="truncate text-left leading-none text-wrap">
@@ -392,15 +430,16 @@
         {#if undatedMeals.length > 0}
           <li class="mt-2">
             <button
-              class="btn btn-sm justify-start {selectedUndatedFilter
+              class="btn btn-sm justify-start {urlFilter.mealDate ===
+                'undated' && !urlFilter.recipeUuid
                 ? 'btn-accent'
                 : 'btn-ghost'}"
               onclick={() => {
-                selectedDateFilter = null;
-                selectedTimeFilter = null;
-                selectedMealRecipeFilter = null;
-                selectedIngredient = "";
-                selectedUndatedFilter = !selectedUndatedFilter;
+                if (urlFilter.mealDate === "undated" && !urlFilter.recipeUuid) {
+                  clearAllFilters();
+                } else {
+                  setFilterMeal("undated");
+                }
               }}
             >
               <span
@@ -411,31 +450,26 @@
               >
             </button>
           </li>
-          {#if selectedUndatedFilter}
+          {#if urlFilter.mealDate === "undated"}
             <ul>
               {#each undatedMeals as undatedMeal (undatedMeal.id)}
                 {#each undatedMeal.recipes as mealRecipe, recipeIndex (mealRecipe.recipeUuid + "-" + recipeIndex)}
                   {@const recipe = recipesDetails.find(
                     (r) => r.$id === mealRecipe.recipeUuid,
                   )}
-                  {@const mealRecipeKey =
-                    "undated_" + undatedMeal.id + "_" + recipeIndex}
                   {#if recipe}
                     <li>
                       <button
-                        class="btn btn-sm mb-1 ml-4 justify-start {selectedMealRecipeFilter ===
-                        mealRecipeKey
+                        class="btn btn-sm mb-1 ml-4 justify-start {urlFilter.recipeUuid ===
+                        mealRecipe.recipeUuid
                           ? 'btn-accent'
                           : 'btn-ghost'}"
                         onclick={() => {
-                          selectedDateFilter = null;
-                          selectedTimeFilter = null;
-                          selectedUndatedFilter = false;
-                          selectedIngredient = "";
-                          selectedMealRecipeFilter =
-                            selectedMealRecipeFilter === mealRecipeKey
-                              ? null
-                              : mealRecipeKey;
+                          if (urlFilter.recipeUuid === mealRecipe.recipeUuid) {
+                            clearAllFilters();
+                          } else {
+                            setFilterRecipe(mealRecipe.recipeUuid, "undated");
+                          }
                         }}
                       >
                         <span class="truncate text-left text-wrap">
@@ -451,16 +485,11 @@
         {/if}
       </ul>
 
-      {#if selectedDateFilter || selectedTimeFilter || selectedMealRecipeFilter || selectedUndatedFilter}
+      {#if hasActiveFilter}
         <div class="my-4">
           <button
             class="btn btn-dash btn-block btn-primary"
-            onclick={() => {
-              selectedDateFilter = null;
-              selectedTimeFilter = null;
-              selectedMealRecipeFilter = null;
-              selectedUndatedFilter = false;
-            }}
+            onclick={clearAllFilters}
             aria-label="Afficher toutes les recettes"
           >
             <Eye size={18} />
@@ -594,36 +623,31 @@
           </div>
 
           <!-- filtre en cours -->
-          {#if selectedDateFilter || selectedTimeFilter || selectedMealRecipeFilter || selectedIngredient || selectedUndatedFilter}
+          {#if hasActiveFilter}
             <div class="m-4 flex flex-wrap items-center justify-center gap-2">
               <div class="badge badge-xl badge-primary">
                 <Funnel class="mr-1 h-4 w-4" />
                 filtre :
-                {#if selectedUndatedFilter}
+                {#if urlFilter.mealDate === "undated"}
                   <span class="mr-1">📌 Mise de côté</span>
                 {/if}
-                {#if selectedDateFilter}
-                  <span class="mr-1">{selectedDateFilter}</span>
+                {#if urlFilter.mealDate && urlFilter.mealDate !== "undated"}
+                  <span class="mr-1"
+                    >{urlFilter.mealDate.includes("T")
+                      ? formatDateWdDayMonth(urlFilter.mealDate)
+                      : urlFilter.mealDate}</span
+                  >
                 {/if}
-                {#if selectedTimeFilter}
-                  <span class="mr-1">{selectedTimeFilter}</span>
-                {/if}
-                {#if selectedMealRecipeFilter}
+                {#if urlFilter.recipeUuid}
                   <span class="mr-1"> recette</span>
                 {/if}
-                {#if selectedIngredient}
-                  <span>{selectedIngredient}</span>
+                {#if urlFilter.ingredient}
+                  <span>{urlFilter.ingredient}</span>
                 {/if}
               </div>
               <button
                 class="btn btn-dash btn-sm"
-                onclick={() => {
-                  selectedDateFilter = null;
-                  selectedTimeFilter = null;
-                  selectedMealRecipeFilter = null;
-                  selectedUndatedFilter = false;
-                  selectedIngredient = "";
-                }}
+                onclick={clearAllFilters}
                 aria-label="Afficher toutes les recettes"
               >
                 <Eye class="h-4 w-4" />
@@ -634,14 +658,14 @@
         </div>
 
         <!-- Grille des recettes -->
-        {#if selectedIngredient}
+        {#if urlFilter.ingredient}
           <!-- Mode recherche par ingrédient : afficher les recettes filtrées -->
           {#if filteredRecipes.length === 0}
             <div
               class="bg-base-100 border-base-300 rounded-xl border p-8 text-center print:hidden"
             >
               <p class="text-base-content/60 text-lg">
-                Aucune recette ne contient l'ingrédient "{selectedIngredient}".
+                Aucune recette ne contient l'ingrédient "{urlFilter.ingredient}".
               </p>
             </div>
           {:else}
@@ -700,48 +724,25 @@
             </div>
           {/if}
         {:else}
-          <!-- Mode normal : afficher les repas filtrés par date/moment/recette -->
-          {#if filteredMeals.length === 0 && (selectedDateFilter || selectedTimeFilter)}
+          <!-- Mode normal : afficher les repas filtrés par meal/recette -->
+          {#if filteredMeals.length === 0 && urlFilter.mealDate}
             <div
               class="bg-base-100 border-base-300 rounded-xl border p-8 text-center"
             >
               <p class="text-base-content/60 text-lg">
                 Aucune recette ne correspond aux filtres sélectionnés.
               </p>
-              <button
-                class="btn btn-primary mt-4"
-                onclick={() => {
-                  selectedDateFilter = null;
-                  selectedTimeFilter = null;
-                  selectedMealRecipeFilter = null;
-                }}
-              >
+              <button class="btn btn-primary mt-4" onclick={clearAllFilters}>
                 Réinitialiser les filtres
               </button>
             </div>
           {:else}
             <div class="space-y-10 print:space-y-0">
               {#each filteredMeals as meal, mealIndex (meal.id || mealIndex)}
-                <!-- Filtrer les recettes individuellement si sélectionné -->
-                {@const mealRecipesToDisplay = selectedMealRecipeFilter
-                  ? (() => {
-                      const [mealId, recipeIndex] =
-                        selectedMealRecipeFilter.split("_");
-                      if (mealId === "undated") {
-                        const currentMealId = meal.id;
-                        if (mealId !== "undated_" + currentMealId) return [];
-                        return meal.recipes.filter(
-                          (_mr: any, idx: number) =>
-                            idx === parseInt(recipeIndex),
-                        );
-                      }
-                      const currentMealId = meal.id || meal.date;
-                      if (mealId !== currentMealId.toString()) return [];
-                      return meal.recipes.filter(
-                        (_mr: any, idx: number) =>
-                          idx === parseInt(recipeIndex),
-                      );
-                    })()
+                {@const mealRecipesToDisplay = urlFilter.recipeUuid
+                  ? meal.recipes.filter(
+                      (mr: any) => mr.recipeUuid === urlFilter.recipeUuid,
+                    )
                   : meal.recipes}
 
                 {#if mealRecipesToDisplay.length > 0}
@@ -792,16 +793,10 @@
                 {/if}
               {/each}
             </div>
-            {#if selectedDateFilter || selectedTimeFilter || selectedMealRecipeFilter || selectedUndatedFilter}
+            {#if hasActiveFilter}
               <button
                 class="btn btn-dash btn-block my-5"
-                onclick={() => {
-                  selectedDateFilter = null;
-                  selectedTimeFilter = null;
-                  selectedMealRecipeFilter = null;
-                  selectedUndatedFilter = false;
-                  selectedIngredient = "";
-                }}
+                onclick={clearAllFilters}
                 aria-label="Afficher toutes les recettes"
               >
                 <Eye class="h-4 w-4" />
@@ -812,7 +807,7 @@
         {/if}
 
         <!-- Message si pas de recettes du tout -->
-        {#if !selectedIngredient && recipesDetails.length === 0 && !loading}
+        {#if !urlFilter.ingredient && recipesDetails.length === 0 && !loading}
           <div
             class="bg-base-100 border-base-300 rounded-xl border p-8 text-center"
           >

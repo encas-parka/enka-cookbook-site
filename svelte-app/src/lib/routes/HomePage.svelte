@@ -1,15 +1,13 @@
 <script lang="ts">
+  import { DEMO_EVENT_ID } from "$lib/data/demo-event-config";
   import { navigate } from "$lib/router";
-  import { globalState } from "../stores/GlobalState.svelte";
-  import { ChefHat, ArrowRight, ArrowDown, Eye } from "@lucide/svelte";
-  import { eventsStore } from "../stores/EventsStore.svelte";
-  import { toastService } from "../services/toast.service.svelte";
-  import { fade, fly } from "svelte/transition";
+  import { ArrowDown, ArrowRight, ChefHat } from "@lucide/svelte";
   import { cubicInOut } from "svelte/easing";
   import { scrollY } from "svelte/reactivity/window";
-  import { DEMO_EVENT_ID } from "$lib/data/demo-event-config";
-  import LoadingSpinner from "../components/ui/LoadingSpinner.svelte";
+  import { fly } from "svelte/transition";
   import EmailVerificationAlert from "../components/ui/EmailVerificationAlert.svelte";
+  import { toastService } from "../services/toast.service.svelte";
+  import { globalState } from "../stores/GlobalState.svelte";
 
   function openAuthModal() {
     globalState.authModal.isOpen = true;
@@ -53,8 +51,8 @@
     }
   }
 
-  import { onMount } from "svelte";
   import { navBarStore } from "$lib/stores/NavBarStore.svelte";
+  import { onMount } from "svelte";
   import InstallButton from "../components/ui/InstallButton.svelte";
 
   onMount(() => {
@@ -149,10 +147,6 @@
     handleScroll();
   });
 
-  const themeBtnClasses = (theme: "primary" | "secondary" = "primary") => {
-    return theme === "primary" ? "btn-primary" : "btn-secondary";
-  };
-
   /**
    * État d'animation pour le TEXTE avec snap et plateau
    * Utilise un plateau de 30% (0.35 → 0.65) pour le moment de lisibilité
@@ -190,7 +184,10 @@
 </script>
 
 <svelte:head>
-  <link rel="stylesheet" href="{import.meta.env.BASE_URL}fonts/cherry-bomb-one.css" />
+  <link
+    rel="stylesheet"
+    href="{import.meta.env.BASE_URL}fonts/cherry-bomb-one.css"
+  />
 </svelte:head>
 
 <div class="bg-base-200">
@@ -496,7 +493,7 @@
 
     <!-- Hauteur de scroll invisible (sans snap CSS) -->
     <div class="relative -z-10">
-      {#each features as feature}
+      {#each features as { }}
         <div class="h-screen"></div>
       {/each}
     </div>

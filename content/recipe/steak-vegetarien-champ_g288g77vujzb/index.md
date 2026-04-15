@@ -1,0 +1,180 @@
+---
+astuces:
+  - astuce: Les noix peuvent être remplacées par des amandes ou autres fruits à coques. Les épices peuvent être changées.
+auteur: Marion
+categories:
+  - Snacking
+check: true
+checkAlwaysOk: true
+checkfor: 40
+cuisson: true
+draft: false
+ingredients:
+  - uuid: ljzb7j
+    name: Eau
+    originalQuantity: 6.5
+    originalUnit: l.
+    normalizedQuantity: 6500
+    normalizedUnit: ml
+    comment: ''
+    allergens: []
+    type: autres
+    pF: false
+    pS: false
+  - uuid: 2pps90
+    name: Poivre
+    originalQuantity: 1
+    originalUnit: au goût
+    normalizedQuantity: 1
+    normalizedUnit: au goût
+    comment: ''
+    allergens: []
+    type: epices
+    pF: false
+    pS: false
+  - uuid: dc8855
+    name: Cumin
+    originalQuantity: 10
+    originalUnit: gr.
+    normalizedQuantity: 10
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: epices
+    pF: false
+    pS: false
+  - uuid: ique18
+    name: Paprika fumé
+    originalQuantity: 70
+    originalUnit: gr.
+    normalizedQuantity: 70
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: epices
+    pF: false
+    pS: false
+  - uuid: 5dwrvm
+    name: Gros sel
+    originalQuantity: 5
+    originalUnit: c. à café
+    normalizedQuantity: 25
+    normalizedUnit: ml
+    comment: ''
+    allergens: []
+    type: epices
+    pF: false
+    pS: false
+  - uuid: jjrwlj
+    name: Sauce soja
+    originalQuantity: 1.3
+    originalUnit: l.
+    normalizedQuantity: 1300
+    normalizedUnit: ml
+    comment: ''
+    allergens:
+      - Soja
+    type: epices
+    pF: false
+    pS: false
+  - uuid: u2m28w
+    name: Ail
+    originalQuantity: 26
+    originalUnit: unité
+    normalizedQuantity: 169
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
+    pF: true
+    pS: false
+  - uuid: v9qhs9
+    name: Champignons
+    originalQuantity: 2
+    originalUnit: kg
+    normalizedQuantity: 2000
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
+    pF: true
+    pS: false
+  - uuid: rtavky
+    name: Oignon
+    originalQuantity: 4
+    originalUnit: kg
+    normalizedQuantity: 4000
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
+    pF: true
+    pS: false
+  - uuid: c70jxb
+    name: huile de tournesol
+    originalQuantity: 500
+    originalUnit: ml
+    normalizedQuantity: 500
+    normalizedUnit: ml
+    comment: ''
+    allergens: []
+    type: lof
+    pF: false
+    pS: false
+  - uuid: usibcf
+    name: Noix
+    originalQuantity: 500
+    originalUnit: gr.
+    normalizedQuantity: 500
+    normalizedUnit: gr.
+    comment: ''
+    allergens:
+      - Fruit à coque
+    type: sec
+    pF: false
+    pS: false
+  - uuid: ovewgk
+    name: Flocons d'avoine
+    originalQuantity: 4.3
+    originalUnit: kg
+    normalizedQuantity: 4300
+    normalizedUnit: gr.
+    comment: ''
+    allergens:
+      - Gluten
+    type: sec
+    pF: false
+    pS: false
+materiel:
+  - Gastro 1/1 (Fins)
+  - Four
+plate: 130
+prepAlt:
+  - recetteAlt: steak-vege-champignons-aubergines-noix-avoine-haricots-rouges-version-amelioree_6068ae73-1984-4084-890f-17076c0afe8c
+preparation: |-
+  * Hâcher finement oignons, champignons et ail (ail optionnel mais meilleur), et noix
+  * Faire chauffer un fond d'huile dans une grosse marmite. Ajouter oignons et épices.
+  * Faire revenir les oignons 5-10 minutes (jusqu'à ce qu'ils dorent un peu)
+  * Ajouter les champignons et l'ail, faire revenir 5 minutes
+  * Ajouter sauce soja, eau et sel
+  * Faire mijoter 10 minutes
+  * Ajouter flocons d'avoine et noix
+  * Couper le feu et bien mélanger
+  * Laisser reposer au moins 20 minutes
+  * Façonner (je ne me souviens plus le poids d'un steak individuel mais peser le tout et calculer, c'est assez généreux). Mettre de l'huile sur les deux faces du steak (au pinceau c'est le mieux)
+  * Faire cuire à 180°C environ 30 minutes, jusqu'à ce qu'ils brunissent un peu. Retourner en milieu de cuisson.
+publishDate: '2024-03-08T10:19:47.990000+00:00'
+regime:
+  - sans-lactose
+  - vegan
+title: Steak végétarien champignons - noix - flocons d'avoine
+typeR: plat
+serveHot: true
+uuid: g288g77vujzb
+id: steak-vegetarien-champ_g288g77vujzb
+createdAt: '2024-03-08T10:19:47.990000+00:00'
+updatedAt: '2024-03-08T10:19:47.990000+00:00'
+createdBy: Marion
+permissionWrite:
+  - 6931ecdccd2c8d8d15e5
+---

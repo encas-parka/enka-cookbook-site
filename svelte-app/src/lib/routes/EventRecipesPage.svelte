@@ -243,9 +243,10 @@
     if (eventMeals.length === 0) return;
 
     tick().then(() => {
+      // D'abord se assurer d'être en haut (utile quand on vient d'une autre page)
+      window.scrollTo({ top: 0, behavior: "instant" });
       requestAnimationFrame(() => {
-        const el = document.getElementById(`meal-${mealDate}`);
-        el?.scrollIntoView({ behavior: "smooth", block: "start" });
+        scrollTo({ top: 0, behavior: "smooth" });
       });
     });
   });

@@ -291,6 +291,78 @@ export class EventMaterielStore {
   }
 
   /**
+   * Crée un header + une allocation en une seule opération.
+   * Utilisé quand un utilisateur ajoute du matériel avec un status source
+   * (confirmed/to_check), ou quand un loan n'a pas de header existant.
+   */
+  async addHeaderWithAllocation(
+    headerData: {
+      eventId: string;
+      name: string;
+      quantity: number;
+      type: EventMaterielType;
+      notes?: string | null;
+    },
+    allocationData: {
+      status: EventMaterielStatus;
+      who?: string | null;
+      where?: string | null;
+      fromTeamName?: string | null;
+      sourceMaterielId?: string | null;
+      loanId?: string | null;
+      notes?: string | null;
+    },
+    userId: string,
+  ): Promise<{ header: EventMateriel; allocation: EventMateriel }> {
+    this.#loading = true;
+    this.#error = null;
+
+    try {
+      const header = await createEventMaterielService(
+        {
+          eventId: headerData.eventId,
+          name: headerData.name,
+          quantity: headerData.quantity,
+          type: headerData.type,
+          status: "to_find",
+          groupId: null,
+          notes: headerData.notes || null,
+        },
+        userId,
+      );
+      this.#items.set(header.$id, header);
+      this.#idbCache?.saveItem(header);
+
+      const allocation = await createEventMaterielService(
+        {
+          eventId: headerData.eventId,
+          name: headerData.name,
+          quantity: headerData.quantity,
+          type: headerData.type,
+          status: allocationData.status,
+          groupId: header.$id,
+          who: allocationData.who || null,
+          where: allocationData.where || null,
+          fromTeamName: allocationData.fromTeamName || null,
+          sourceMaterielId: allocationData.sourceMaterielId || null,
+          loanId: allocationData.loanId || null,
+          notes: allocationData.notes || null,
+        },
+        userId,
+      );
+      this.#items.set(allocation.$id, allocation);
+      this.#idbCache?.saveItem(allocation);
+
+      return { header, allocation };
+    } catch (err) {
+      this.#error = err instanceof Error ? err.message : "Erreur de création";
+      throw err;
+    } finally {
+      this.#loading = false;
+    }
+  }
+
+  /**
    * Met à jour un item
    */
   async updateItem(
@@ -713,27 +785,50 @@ export class EventMaterielStore {
           const location = sourceMateriel?.location || null;
 
           const matchingHeader = this.findMatchingHeader(loanItem.materielName);
-          const groupId = matchingHeader?.$id ?? null;
 
-          const created = await createEventMaterielService(
-            {
-              eventId,
-              name: loanItem.materielName,
-              quantity: loanItem.quantity,
-              type,
-              status: "confirmed",
-              groupId,
-              who: responsibleName,
-              where: location,
-              fromTeamName: ownerName,
-              sourceMaterielId: loanItem.materielId,
-              loanId,
-            },
-            userId,
-          );
-          if (this.#currentEventId === eventId) {
-            this.#items.set(created.$id, created);
-            this.#idbCache?.saveItem(created);
+          if (matchingHeader) {
+            const created = await createEventMaterielService(
+              {
+                eventId,
+                name: loanItem.materielName,
+                quantity: loanItem.quantity,
+                type,
+                status: "confirmed",
+                groupId: matchingHeader.$id,
+                who: responsibleName,
+                where: location,
+                fromTeamName: ownerName,
+                sourceMaterielId: loanItem.materielId,
+                loanId,
+              },
+              userId,
+            );
+            if (this.#currentEventId === eventId) {
+              this.#items.set(created.$id, created);
+              this.#idbCache?.saveItem(created);
+            }
+          } else {
+            const result = await this.addHeaderWithAllocation(
+              {
+                eventId,
+                name: loanItem.materielName,
+                quantity: loanItem.quantity,
+                type,
+              },
+              {
+                status: "confirmed",
+                who: responsibleName,
+                where: location,
+                fromTeamName: ownerName,
+                sourceMaterielId: loanItem.materielId,
+                loanId,
+              },
+              userId,
+            );
+            if (this.#currentEventId !== eventId) {
+              this.#items.delete(result.header.$id);
+              this.#items.delete(result.allocation.$id);
+            }
           }
         }
       }

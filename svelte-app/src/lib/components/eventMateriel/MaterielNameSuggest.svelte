@@ -40,7 +40,10 @@
     const results: Suggestion[] = [];
     const seenNames = new Set<string>();
 
-    const headerNames = new Map<string, { type: EventMaterielType; quantity: number }>();
+    const headerNames = new Map<
+      string,
+      { type: EventMaterielType; quantity: number }
+    >();
     for (const header of eventMaterielStore.headers) {
       const n = (header.name || "").toLowerCase().trim();
       if (n && n.includes(q)) {
@@ -52,9 +55,10 @@
     }
 
     for (const [name, info] of headerNames) {
-      const originalName = eventMaterielStore.headers.find(
-        (h) => (h.name || "").toLowerCase().trim() === name,
-      )?.name || name;
+      const originalName =
+        eventMaterielStore.headers.find(
+          (h) => (h.name || "").toLowerCase().trim() === name,
+        )?.name || name;
       results.push({
         name: originalName,
         type: info.type,
@@ -141,7 +145,7 @@
 </script>
 
 <div class="relative {className}">
-  <label class="input sm:col-span-2">
+  <label class="input w-full">
     <Search class="h-4 w-4 opacity-50" />
     <input
       type="text"
@@ -158,14 +162,15 @@
 
   {#if showDropdown && suggestions.length > 0}
     <ul
-      class="bg-base-100 border-base-200 absolute z-50 mt-1 w-full rounded-box border shadow-lg"
+      class="bg-base-100 border-base-200 rounded-box absolute z-50 mt-1 w-full border shadow-lg"
       role="listbox"
     >
       {#each suggestions as suggestion, i (suggestion.name + suggestion.source)}
         <li>
           <button
             type="button"
-            class="flex w-full items-center gap-2 px-3 py-2 text-left text-sm {i === highlightedIndex
+            class="flex w-full items-center gap-2 px-3 py-2 text-left text-sm {i ===
+            highlightedIndex
               ? 'bg-primary/10'
               : 'hover:bg-base-200'}"
             role="option"

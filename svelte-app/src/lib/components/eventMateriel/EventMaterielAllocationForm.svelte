@@ -3,7 +3,7 @@
     EventMaterielType,
     EventMaterielStatus,
   } from "$lib/types/event-materiel.types";
-  import { Hash, MapPin, Save, User, X, CircleDot } from "@lucide/svelte";
+  import { Hash, MapPin, User, CircleDot } from "@lucide/svelte";
 
   interface Props {
     maxQuantity: number;
@@ -15,6 +15,7 @@
       status: EventMaterielStatus;
       who: string;
       where: string;
+      notes?: string;
     }) => Promise<void>;
     onCancel: () => void;
   }
@@ -34,6 +35,7 @@
   let status = $state<EventMaterielStatus>(presetStatus ?? "to_check");
   let who = $state("");
   let where = $state("");
+  let notes = $state("");
   let submitting = $state(false);
 
   const statuses: { value: EventMaterielStatus; label: string }[] = [
@@ -41,6 +43,14 @@
     { value: "confirmed", label: "Ok" },
     { value: "to_find", label: "À trouver" },
   ];
+
+  const statusClass = $derived(
+    status === "confirmed"
+      ? "select-success text-success"
+      : status === "to_check"
+        ? "select-warning text-warning"
+        : "select-error text-error",
+  );
 
   async function handleSubmit(e: Event) {
     e.preventDefault();
@@ -53,6 +63,7 @@
         status,
         who: who.trim(),
         where: where.trim(),
+        notes: notes.trim() || undefined,
       });
     } finally {
       submitting = false;
@@ -93,7 +104,7 @@
       <legend class="fieldset-legend"
         ><CircleDot class="inline size-4" /> Statut</legend
       >
-      <select bind:value={status} class="select w-full">
+      <select bind:value={status} class="select w-full {statusClass}">
         {#each statuses as s (s.value)}
           <option value={s.value}>{s.label}</option>
         {/each}
@@ -127,24 +138,15 @@
         />
       </label>
     </fieldset>
-  </div>
 
-  <div class="flex justify-end gap-2">
-    <button type="button" class="btn btn-ghost btn-sm" onclick={onCancel}>
-      <X class="h-4 w-4" />
-      Annuler
-    </button>
-    <button
-      type="submit"
-      class="btn btn-primary btn-sm"
-      disabled={quantity <= 0 || quantity > maxQuantity || submitting}
-    >
-      {#if submitting}
-        <span class="loading loading-spinner loading-xs"></span>
-      {:else}
-        <Save class="h-4 w-4" />
-      {/if}
-      Allouer
-    </button>
+    <fieldset class="fieldset">
+      <legend class="fieldset-legend">Notes</legend>
+      <textarea
+        rows="2"
+        bind:value={notes}
+        placeholder="Notes supplémentaires..."
+        class="textarea w-full"
+      ></textarea>
+    </fieldset>
   </div>
 </form>

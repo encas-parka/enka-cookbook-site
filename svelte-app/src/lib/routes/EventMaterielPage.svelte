@@ -8,6 +8,8 @@
     Download,
     ClipboardCopy,
     ChevronDown,
+    Check,
+    X,
   } from "@lucide/svelte";
   import { eventsStore } from "$lib/stores/EventsStore.svelte";
   import { globalState } from "$lib/stores/GlobalState.svelte";
@@ -31,6 +33,7 @@
   import ModalContainer from "$lib/components/ui/modal/ModalContainer.svelte";
   import ModalHeader from "$lib/components/ui/modal/ModalHeader.svelte";
   import ModalContent from "$lib/components/ui/modal/ModalContent.svelte";
+  import ModalFooter from "$lib/components/ui/modal/ModalFooter.svelte";
   import EventMaterielControls, {
     type ActiveBadge,
   } from "$lib/components/eventMateriel/EventMaterielControls.svelte";
@@ -41,13 +44,13 @@
     EventMaterielFilters as EventMaterielFilterOptions,
     EventMaterielSort,
     EventMaterielStatus,
+    EventMaterielType,
     MaterielGroup,
   } from "$lib/types/event-materiel.types";
   import { online } from "svelte/reactivity/window";
   import { isDemoEvent } from "$lib/data/demo-event-config";
   import { shareOrDownload, toSlug } from "$lib/utils/share-utils";
 
-  // Labels pour les types
   const typeLabels: Record<string, string> = {
     electronic: "Électronique",
     manual: "Manuel",
@@ -86,6 +89,15 @@
     undefined,
   );
 
+  // Add modal form state
+  let addFormSubmitting = $state(false);
+  let addFormErrors = $state<string[]>([]);
+  let addFormRef: any = $state(null);
+  let addFormDirty = $state(false);
+
+  // Allocation modal form state
+  let allocFormRef: any = $state(null);
+
   // Lazy-loaded CreateLoanModal component
   let CreateLoanModal:
     | typeof import("$lib/components/teamMatos/CreateLoanModal.svelte").default
@@ -93,7 +105,6 @@
 
   const myTeams = $derived(nativeTeamsStore.myTeams);
 
-  // Set of loanIds the current user can manage (is member of the owning team)
   const userAccessibleLoanIds = $derived.by(() => {
     const myTeamIds = new Set(myTeams.map((t) => t.$id));
     const loanIds = new Set<string>();
@@ -136,11 +147,9 @@
     direction: "asc",
   });
 
-  // Display mode: "nested" (grouped by header) or "flat" (one card per item)
   type DisplayMode = "nested" | "flat";
   let displayMode = $state<DisplayMode>("nested");
 
-  // Detect if filters are active (status/where/who filters force flat mode)
   const hasActiveFilters = $derived.by(() => {
     return (
       filters.statuses.length > 0 ||
@@ -150,12 +159,10 @@
     );
   });
 
-  // Effective display mode: flat when filters are active
   const effectiveDisplayMode = $derived<DisplayMode>(
     hasActiveFilters ? "flat" : displayMode,
   );
 
-  // Types disponibles
   const availableTypes = [
     "electronic",
     "manual",
@@ -167,14 +174,12 @@
     "hygiene",
   ];
 
-  // Valeurs disponibles pour les filtres (depuis le store)
   const availableWho = $derived(eventMaterielStore.getUniqueWhoValues());
   const availableWhere = $derived(eventMaterielStore.getUniqueWhereValues());
   const availableStatuses = $derived(
     eventMaterielStore.getUniqueStatusValues(),
   );
 
-  // Items filtrés (via store)
   const filteredItems = $derived(
     eventMaterielStore.getFilteredItems(
       {
@@ -188,7 +193,6 @@
     ),
   );
 
-  // Grouped items for nested display
   const groupedItems = $derived(
     eventMaterielStore.getGroupedItems(
       {
@@ -205,7 +209,6 @@
   const activeBadges = $derived.by<ActiveBadge[]>(() => {
     const badges: ActiveBadge[] = [];
 
-    // Types
     filters.types.forEach((type) => {
       badges.push({
         id: `type:${type}`,
@@ -214,7 +217,6 @@
       });
     });
 
-    // Statuses
     const statusLabels: Record<string, string> = {
       to_find: "À trouver",
       to_check: "À vérifier",
@@ -228,7 +230,6 @@
       });
     });
 
-    // Who
     filters.who.forEach((who) => {
       badges.push({
         id: `who:${who}`,
@@ -237,7 +238,6 @@
       });
     });
 
-    // Where
     filters.where.forEach((where) => {
       badges.push({
         id: `where:${where}`,
@@ -277,7 +277,6 @@
     }
   });
 
-  // Reset filtres
   function resetFilters() {
     filters = { types: [], statuses: [], who: [], where: [], search: "" };
   }
@@ -293,23 +292,55 @@
     );
   }
 
-  // Form handlers
   function openAddForm() {
+    addFormErrors = [];
+    addFormSubmitting = false;
     addModalOpen = true;
   }
 
   function closeForm() {
     addModalOpen = false;
+    addFormErrors = [];
+    addFormSubmitting = false;
   }
 
   async function handleSubmit(data: CreateEventMaterielData) {
     try {
-      await eventMaterielStore.addItem(data, globalState.userId || "");
-      toastService.success("Item ajouté");
+      if (data.status && data.status !== "to_find" && (data.who || data.where)) {
+        await eventMaterielStore.addHeaderWithAllocation(
+          {
+            eventId,
+            name: data.name,
+            quantity: data.quantity,
+            type: data.type as EventMaterielType,
+            notes: data.notes,
+          },
+          {
+            status: data.status,
+            who: data.who,
+            where: data.where,
+            notes: null,
+          },
+          globalState.userId || "",
+        );
+        toastService.success("Besoin et allocation ajoutés");
+      } else {
+        await eventMaterielStore.addItem(data, globalState.userId || "");
+        toastService.success("Item ajouté");
+      }
       closeForm();
     } catch (err) {
       console.error("[EventMaterielPage] Submit error:", err);
       toastService.error("Erreur lors de la sauvegarde");
+    }
+  }
+
+  function handleAddFormFooterSubmit() {
+    if (addFormRef) {
+      const formEl = addFormRef.querySelector("form") as HTMLFormElement | null;
+      if (formEl) {
+        formEl.requestSubmit();
+      }
     }
   }
 
@@ -331,9 +362,10 @@
 
   async function handleAllocation(allocationData: {
     quantity: number;
-    status: "to_find" | "to_check" | "confirmed";
+    status: EventMaterielStatus;
     who: string;
     where: string;
+    notes?: string;
   }) {
     if (!allocatingForHeaderId) return;
     const header = eventMaterielStore.items.find(
@@ -351,6 +383,7 @@
         groupId: allocatingForHeaderId,
         who: allocationData.who || null,
         where: allocationData.where || null,
+        notes: allocationData.notes || null,
       };
       await eventMaterielStore.addItem(data, globalState.userId || "");
       toastService.success("Allocation ajoutée");
@@ -360,6 +393,20 @@
     }
     allocatingForHeaderId = null;
     allocationPresetStatus = undefined;
+  }
+
+  function closeAllocationModal() {
+    allocatingForHeaderId = null;
+    allocationPresetStatus = undefined;
+  }
+
+  function handleAllocFormFooterSubmit() {
+    if (allocFormRef) {
+      const formEl = allocFormRef.querySelector("form") as HTMLFormElement | null;
+      if (formEl) {
+        formEl.requestSubmit();
+      }
+    }
   }
 
   async function handleEditLoan(loanId: string) {
@@ -396,7 +443,6 @@
     return team?.name || "";
   }
 
-  // Init
   onMount(async () => {
     if (eventId) {
       await eventMaterielStore.initializeForEvent(eventId);
@@ -416,7 +462,6 @@
 
 <div class="mx-auto mt-4 max-w-7xl overflow-x-hidden p-4 pb-20">
   <div class="flex gap-4">
-    <!-- Filtres (desktop: sidebar fixe) -->
     <LeftPanel>
       <EventMaterielFilters
         bind:filters
@@ -429,7 +474,6 @@
       />
     </LeftPanel>
 
-    <!-- Contenu principal -->
     <div class="mt-4 flex-1 lg:ml-96">
       <!-- Header -->
       <div class="mb-4 flex flex-wrap items-center justify-between gap-4">
@@ -493,7 +537,7 @@
         {/if}
       </div>
 
-      <!-- Contrôles : tri + mode d'affichage + filtres actifs -->
+      <!-- Contrôles -->
       <EventMaterielControls
         sort={currentSort}
         onSortChange={(s) => (currentSort = s)}
@@ -518,10 +562,28 @@
               résultat pour ces filtres{/if}
           </p>
           {#if eventMaterielStore.count === 0 && canEdit}
-            <button class="btn btn-primary btn-sm mt-4" onclick={openAddForm}>
-              <Plus class="h-4 w-4" />
-              Ajouter du matériel
-            </button>
+            <div class="flex flex-wrap justify-center gap-2 mt-4">
+              <button class="btn btn-primary btn-sm" onclick={openAddForm}>
+                <Plus class="h-4 w-4" />
+                Ajouter un item
+              </button>
+              <button
+                class="btn btn-outline btn-sm"
+                onclick={() => (catalogModalOpen = true)}
+              >
+                <ListPlus class="h-4 w-4" />
+                Ajouts multiples
+              </button>
+              {#if myTeams.length >= 1}
+                <button
+                  class="btn btn-outline btn-sm"
+                  onclick={() => openImportModal()}
+                >
+                  <ClipboardCopy class="h-4 w-4" />
+                  Importer depuis {myTeams[0].name}
+                </button>
+              {/if}
+            </div>
           {/if}
         </div>
       {:else if effectiveDisplayMode === "nested"}
@@ -555,7 +617,6 @@
         </div>
       {/if}
 
-      <!-- Error -->
       {#if eventMaterielStore.error}
         <div class="alert alert-error mt-4">
           {eventMaterielStore.error}
@@ -602,46 +663,75 @@
     <ModalContainer
       isOpen={true}
       maxWidth="sm"
-      onClose={() => {
-        allocatingForHeaderId = null;
-        allocationPresetStatus = undefined;
-      }}
+      onClose={closeAllocationModal}
     >
-      <ModalHeader
-        title="Ajouter une allocation"
-        onClose={() => {
-          allocatingForHeaderId = null;
-          allocationPresetStatus = undefined;
-        }}
-      />
+      <ModalHeader title="Ajouter une allocation" onClose={closeAllocationModal} />
       <ModalContent>
-        <EventMaterielAllocationForm
-          maxQuantity={allocRemaining}
-          headerName={allocHeader.name || ""}
-          headerType={allocHeader.type as any}
-          presetStatus={allocationPresetStatus}
-          onSubmit={handleAllocation}
-          onCancel={() => {
-            allocatingForHeaderId = null;
-            allocationPresetStatus = undefined;
-          }}
-        />
+        <div bind:this={allocFormRef}>
+          <EventMaterielAllocationForm
+            maxQuantity={allocRemaining}
+            headerName={allocHeader.name || ""}
+            headerType={allocHeader.type as any}
+            presetStatus={allocationPresetStatus}
+            onSubmit={handleAllocation}
+            onCancel={closeAllocationModal}
+          />
+        </div>
       </ModalContent>
+      <ModalFooter>
+        <button type="button" class="btn btn-ghost btn-sm" onclick={closeAllocationModal}>
+          <X class="size-4" />
+          Annuler
+        </button>
+        <button
+          type="button"
+          class="btn btn-primary btn-sm"
+          onclick={handleAllocFormFooterSubmit}
+        >
+          <Check class="size-4" />
+          Allouer
+        </button>
+      </ModalFooter>
     </ModalContainer>
   {/if}
 {/if}
 
 <!-- Modal d'ajout de matériel -->
 {#if addModalOpen && canEdit && eventId}
-  <ModalContainer isOpen={true} onClose={closeForm} maxWidth="sm">
+  <ModalContainer isOpen={true} onClose={closeForm} maxWidth="sm" hasUnsavedChanges={addFormDirty}>
     <ModalHeader title="Ajouter du matériel" onClose={closeForm} />
     <ModalContent>
-      <EventMaterielForm
-        {eventId}
-        onSubmit={handleSubmit}
-        onCancel={closeForm}
-      />
+      <div bind:this={addFormRef}>
+        <EventMaterielForm
+          {eventId}
+          onSubmit={handleSubmit}
+          onCancel={closeForm}
+          mode="item"
+          bind:submitting={addFormSubmitting}
+          bind:errors={addFormErrors}
+          bind:dirty={addFormDirty}
+        />
+      </div>
     </ModalContent>
+    <ModalFooter>
+      <button type="button" class="btn btn-ghost btn-sm" onclick={closeForm}>
+        <X class="size-4" />
+        Annuler
+      </button>
+      <button
+        type="button"
+        class="btn btn-primary btn-sm"
+        onclick={handleAddFormFooterSubmit}
+        disabled={addFormSubmitting}
+      >
+        {#if addFormSubmitting}
+          <span class="loading loading-spinner loading-xs"></span>
+        {:else}
+          <Check class="size-4" />
+        {/if}
+        Ajouter
+      </button>
+    </ModalFooter>
   </ModalContainer>
 {/if}
 

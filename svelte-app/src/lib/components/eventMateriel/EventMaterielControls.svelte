@@ -7,6 +7,7 @@
     ArrowDownNarrowWide,
     LayoutGrid,
     LayoutList,
+    ArrowDownAZ,
     X,
   } from "@lucide/svelte";
 
@@ -40,11 +41,15 @@
     onResetFilters,
   }: Props = $props();
 
-  type SortOption = { field: EventMaterielSortField; label: string };
+  type SortOption = {
+    field: EventMaterielSortField;
+    label: string;
+    icon?: string;
+  };
 
   const sortOptions: SortOption[] = [
     { field: "type", label: "Type" },
-    { field: "name", label: "Alphabétique" },
+    { field: "name", label: "Abc", icon: "ArrowDownAZ" },
     { field: "where", label: "Lieu" },
   ];
 
@@ -73,16 +78,17 @@
             onclick={() => handleSortClick(option.field)}
             aria-label="Trier par {option.label}"
           >
+            {#if option.icon}<ArrowDownAZ class="inline size-4" />{/if}
             {option.label}
           </button>
         {/each}
       </div>
     </fieldset>
 
-    <div class="flex items-center gap-2">
-      <div class="rounded-btn flex p-1">
+    <div class="flex items-center gap-2 self-end">
+      <div class="join flex p-1">
         <button
-          class="btn btn-xs gap-1 {displayMode === 'nested'
+          class="btn btn-xs join-item gap-1 {displayMode === 'nested'
             ? 'btn-primary'
             : 'btn-ghost'}"
           onclick={() => onDisplayModeChange("nested")}
@@ -93,7 +99,7 @@
           <span class="hidden sm:inline">Groupé</span>
         </button>
         <button
-          class="btn btn-xs gap-1 {displayMode === 'flat'
+          class="btn btn-xs join-item gap-1 {displayMode === 'flat'
             ? 'btn-primary'
             : 'btn-ghost'}"
           onclick={() => onDisplayModeChange("flat")}

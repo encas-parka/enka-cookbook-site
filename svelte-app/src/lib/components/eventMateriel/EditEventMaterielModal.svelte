@@ -1,8 +1,9 @@
 <script lang="ts">
-  import { Package, Link, Unlink } from "@lucide/svelte";
+  import { Package, Link, Unlink, Trash2, Check, Save, X } from "@lucide/svelte";
   import ModalContainer from "$lib/components/ui/modal/ModalContainer.svelte";
   import ModalHeader from "$lib/components/ui/modal/ModalHeader.svelte";
   import ModalContent from "$lib/components/ui/modal/ModalContent.svelte";
+  import ModalFooter from "$lib/components/ui/modal/ModalFooter.svelte";
   import ConfirmModal from "$lib/components/ui/ConfirmModal.svelte";
   import EventMaterielForm from "$lib/components/eventMateriel/EventMaterielForm.svelte";
   import { eventMaterielStore } from "$lib/stores/EventMaterielStore.svelte";
@@ -32,6 +33,9 @@
 
   let error = $state<string | null>(null);
   let showDeleteConfirm = $state(false);
+  let submitting = $state(false);
+  let formErrors = $state<string[]>([]);
+  let formDirty = $state(false);
 
   const currentItem = $derived(
     itemId
@@ -52,10 +56,14 @@
   });
 
   const isAllocation = $derived(!!currentItem?.groupId);
+  const formMode = $derived(
+    isAllocation ? "allocation" : "header",
+  );
 
   function resetForm() {
     error = null;
     showDeleteConfirm = false;
+    formErrors = [];
   }
 
   async function updateItem(data: CreateEventMaterielData) {
@@ -154,9 +162,20 @@
     resetForm();
     onClose();
   }
+
+  let formRef: any = $state(null);
+
+  async function handleFooterSubmit() {
+    if (formRef) {
+      const formEl = formRef.querySelector("form") as HTMLFormElement | null;
+      if (formEl) {
+        formEl.requestSubmit();
+      }
+    }
+  }
 </script>
 
-<ModalContainer {isOpen} onClose={handleClose} maxWidth="sm">
+<ModalContainer {isOpen} onClose={handleClose} maxWidth="sm" hasUnsavedChanges={formDirty}>
   <ModalHeader
     title={currentItem
       ? `Modifier : ${currentItem.name}`
@@ -166,16 +185,20 @@
 
   <ModalContent>
     {#if currentItem}
-      <EventMaterielForm
-        {eventId}
-        initialData={currentItem}
-        onSubmit={updateItem}
-        onCancel={handleClose}
-        onDelete={() => (showDeleteConfirm = true)}
-        {canEditWhere}
-      />
+      <div bind:this={formRef}>
+        <EventMaterielForm
+          {eventId}
+          initialData={currentItem}
+          onSubmit={updateItem}
+          onCancel={handleClose}
+          mode={formMode}
+          bind:submitting
+          bind:errors={formErrors}
+          bind:dirty={formDirty}
+          {canEditWhere}
+        />
+      </div>
 
-      <!-- Header linking section -->
       {#if isAllocation}
         <div class="bg-base-200 mt-4 rounded-lg p-3">
           <div class="flex items-center justify-between">
@@ -229,6 +252,38 @@
       </div>
     {/if}
   </ModalContent>
+
+  <ModalFooter>
+    {#if currentItem}
+      <button
+        type="button"
+        class="btn btn-ghost btn-sm text-error"
+        onclick={() => (showDeleteConfirm = true)}
+        disabled={submitting}
+        title="Supprimer"
+      >
+        <Trash2 class="size-4" />
+      </button>
+    {/if}
+    <div class="flex-1"></div>
+    <button type="button" class="btn btn-ghost btn-sm" onclick={handleClose}>
+      <X class="size-4" />
+      Annuler
+    </button>
+    <button
+      type="button"
+      class="btn btn-primary btn-sm"
+      onclick={handleFooterSubmit}
+      disabled={submitting}
+    >
+      {#if submitting}
+        <span class="loading loading-spinner loading-xs"></span>
+      {:else}
+        <Save class="size-4" />
+      {/if}
+      Enregistrer
+    </button>
+  </ModalFooter>
 </ModalContainer>
 
 <ConfirmModal

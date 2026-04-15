@@ -197,10 +197,7 @@
       [];
 
     for (const m of selectedMateriels) {
-      if (m.quantity === 0) {
-        toRemove.push({ name: m.materielName });
-        continue;
-      }
+      if (m.quantity === 0) continue;
       const available = availabilityMap.get(m.materielId) ?? 0;
       if (available === 0) {
         toRemove.push({ name: m.materielName });

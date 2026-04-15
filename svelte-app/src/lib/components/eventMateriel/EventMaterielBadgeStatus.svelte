@@ -6,6 +6,7 @@
     CircleDot,
     CircleAlert,
     PencilLine,
+    BadgeQuestionMark,
   } from "@lucide/svelte";
   import type {
     MaterielGroup,
@@ -39,23 +40,23 @@
 </script>
 
 <div class="flex flex-wrap items-center gap-1">
-  {#if toFindQty > 0}
-    <button
-      class="btn btn-soft btn-error btn-sm gap-1"
-      onclick={(e) => {
-        e.stopPropagation();
-        onEditHeader(headerId);
-      }}
-      title="Éditer le besoin"
+  <button
+    class="btn btn-soft btn-error btn-sm gap-1"
+    onclick={(e) => {
+      e.stopPropagation();
+      onEditHeader(headerId);
+    }}
+    title="Éditer le besoin"
+  >
+    <CircleAlert size="16" class="sm:hidden" />
+    <span class="hidden font-normal sm:inline"
+      >Manque: <strong>{toFindQty}</strong></span
     >
-      <span class="text-xs font-normal"
-        >À trouver: <strong>{toFindQty}</strong></span
-      >
-      <span class="btn btn-circle btn-error ms-2 size-6 p-0.5 opacity-60">
-        <PencilLine size="14" /></span
-      >
-    </button>
-  {/if}
+    <strong class=" sm:hidden">{toFindQty}</strong>
+    <span class="btn btn-circle btn-error ms-2 size-6 p-0.5 opacity-60">
+      <PencilLine size="14" /></span
+    >
+  </button>
   <button
     class="btn btn-soft btn-warning btn-sm gap-1"
     onclick={(e) => {
@@ -64,9 +65,11 @@
     }}
     title="Ajouter une allocation à vérifier"
   >
-    <span class="text-xs font-normal"
-      >À vérifier: <strong>{toCheckQty}</strong></span
+    <BadgeQuestionMark size="16" class="sm:hidden" />
+    <span class="hidden font-normal sm:inline"
+      >vérifier: <strong>{toCheckQty}</strong></span
     >
+    <strong class=" sm:hidden">{toCheckQty}</strong>
     <span class="btn btn-circle btn-warning ms-2 size-6 p-0.5 opacity-60">
       <Plus size="14" /></span
     >
@@ -79,7 +82,11 @@
     }}
     title="Ajouter une allocation confirmée"
   >
-    <span class="text-xs font-normal">Ok: <strong>{confirmedQty}</strong></span>
+    <Check size="16" class="sm:hidden" />
+    <span class="hidden font-normal sm:inline"
+      >Ok: <strong>{confirmedQty}</strong></span
+    >
+    <strong class=" sm:hidden">{confirmedQty}</strong>
     <span class="btn btn-circle btn-success ms-2 size-6 p-0.5 opacity-60">
       <Plus size="14" /></span
     >

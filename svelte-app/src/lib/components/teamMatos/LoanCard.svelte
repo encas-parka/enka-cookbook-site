@@ -292,7 +292,7 @@
             <button
               class="badge badge-soft badge-primary badge-sm hover:badge-primary gap-1"
               onclick={() => navigate(`/event/${loan.eventId}`)}
-              title="Voir l'événement"
+              title="Voir l'événement" 
             >
               <Link class="h-3 w-3" />
               {loan.eventName}

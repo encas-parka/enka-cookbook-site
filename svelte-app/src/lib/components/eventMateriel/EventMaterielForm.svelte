@@ -9,14 +9,14 @@
     Hash,
     MapPin,
     Package,
-    Save,
     Shapes,
-    Trash2,
     User,
-    X,
     CircleDot,
+    CircleAlert,
   } from "@lucide/svelte";
   import MaterielNameSuggest from "$lib/components/eventMateriel/MaterielNameSuggest.svelte";
+
+  export type FormMode = "header" | "item" | "allocation";
 
   interface Props {
     eventId: string;
@@ -25,6 +25,10 @@
     onCancel: () => void;
     onDelete?: (() => void) | null;
     canEditWhere?: boolean;
+    mode?: FormMode;
+    submitting?: boolean;
+    errors?: string[];
+    dirty?: boolean;
   }
 
   let {
@@ -34,6 +38,10 @@
     onCancel,
     onDelete = null,
     canEditWhere = true,
+    mode = "item",
+    submitting = $bindable(false),
+    errors = $bindable([]),
+    dirty = $bindable(false),
   }: Props = $props();
 
   // svelte-ignore state_referenced_locally
@@ -54,9 +62,48 @@
   let where = $state(initialData?.where || "");
   // svelte-ignore state_referenced_locally
   let notes = $state(initialData?.notes || "");
-  let submitting = $state(false);
+
+  let attempted = $state(false);
 
   const isEdit = $derived(!!initialData);
+
+  // svelte-ignore state_referenced_locally
+  const origName = initialData?.name || "";
+  // svelte-ignore state_referenced_locally
+  const origQuantity = initialData?.quantity || 1;
+  // svelte-ignore state_referenced_locally
+  const origType = (initialData?.type as EventMaterielType) || "other";
+  // svelte-ignore state_referenced_locally
+  const origStatus = (initialData?.status as EventMaterielStatus) || "to_find";
+  // svelte-ignore state_referenced_locally
+  const origWho = initialData?.who || "";
+  // svelte-ignore state_referenced_locally
+  const origWhere = initialData?.where || "";
+  // svelte-ignore state_referenced_locally
+  const origNotes = initialData?.notes || "";
+
+  $effect(() => {
+    dirty =
+      name !== origName ||
+      quantity !== origQuantity ||
+      type !== origType ||
+      status !== origStatus ||
+      who !== origWho ||
+      where !== origWhere ||
+      notes !== origNotes;
+  });
+
+  const showStatus = $derived(mode !== "header");
+  const showWho = $derived(mode !== "header" && (status !== "to_find" || attempted));
+  const showWhere = $derived(mode !== "header" && status !== "to_find");
+
+  const statusClass = $derived(
+    status === "confirmed"
+      ? "select-success text-success"
+      : status === "to_check"
+        ? "select-warning text-warning"
+        : "select-error text-error",
+  );
 
   const types: { value: EventMaterielType; label: string }[] = [
     { value: "other", label: "Autre" },
@@ -75,6 +122,23 @@
     { value: "confirmed", label: "Ok" },
   ];
 
+  const validationErrors = $derived.by(() => {
+    const errs: string[] = [];
+    if (!name.trim()) errs.push("Le nom est requis.");
+    if (quantity < 1) errs.push("La quantité doit être ≥ 1.");
+    if (
+      mode === "item" &&
+      status !== "to_find" &&
+      !who.trim() &&
+      !where.trim()
+    ) {
+      errs.push("Indiquez qui apporte le matériel ou d'où il vient.");
+    }
+    return errs;
+  });
+
+  const isValid = $derived(validationErrors.length === 0);
+
   function handleNameInput(val: string) {
     name = val;
   }
@@ -89,7 +153,9 @@
 
   async function handleSubmit(e: Event) {
     e.preventDefault();
-    if (!name.trim()) return;
+    attempted = true;
+    errors = validationErrors;
+    if (!isValid) return;
 
     submitting = true;
     try {
@@ -106,6 +172,23 @@
     } finally {
       submitting = false;
     }
+  }
+
+  export function getFormData(): CreateEventMaterielData {
+    return {
+      eventId,
+      name: name.trim(),
+      quantity,
+      type,
+      status,
+      who: who.trim() || null,
+      where: where.trim() || null,
+      notes: notes.trim() || null,
+    };
+  }
+
+  export function getIsEdit(): boolean {
+    return isEdit;
   }
 </script>
 
@@ -146,6 +229,7 @@
           bind:value={quantity}
           placeholder="Quantité"
           class="grow"
+          required
         />
       </label>
     </fieldset>
@@ -161,47 +245,53 @@
       </select>
     </fieldset>
 
-    <fieldset class="fieldset">
-      <legend class="fieldset-legend"
-        ><CircleDot class="inline size-4" /> Statut</legend
-      >
-      <select bind:value={status} class="select w-full">
-        {#each statuses as s (s.value)}
-          <option value={s.value}>{s.label}</option>
-        {/each}
-      </select>
-    </fieldset>
+    {#if showStatus}
+      <fieldset class="fieldset">
+        <legend class="fieldset-legend"
+          ><CircleDot class="inline size-4" /> Statut</legend
+        >
+        <select bind:value={status} class="select w-full {statusClass}">
+          {#each statuses as s (s.value)}
+            <option value={s.value}>{s.label}</option>
+          {/each}
+        </select>
+      </fieldset>
+    {/if}
 
-    <fieldset class="fieldset">
-      <legend class="fieldset-legend"
-        ><User class="inline size-4" /> Qui ?</legend
-      >
-      <label class="input w-full">
-        <User class="h-4 w-4 opacity-50" />
-        <input
-          type="text"
-          bind:value={who}
-          placeholder="Personne responsable"
-          class="grow"
-        />
-      </label>
-    </fieldset>
+    {#if showWho}
+      <fieldset class="fieldset">
+        <legend class="fieldset-legend"
+          ><User class="inline size-4" /> Qui ?</legend
+        >
+        <label class="input w-full">
+          <User class="h-4 w-4 opacity-50" />
+          <input
+            type="text"
+            bind:value={who}
+            placeholder="Personne responsable"
+            class="grow"
+          />
+        </label>
+      </fieldset>
+    {/if}
 
-    <fieldset class="fieldset">
-      <legend class="fieldset-legend"
-        ><MapPin class="inline size-4" /> Où ?</legend
-      >
-      <label class="input w-full">
-        <MapPin class="h-4 w-4 opacity-50" />
-        <input
-          type="text"
-          bind:value={where}
-          placeholder="Lieu de stockage"
-          class="grow"
-          disabled={!canEditWhere}
-        />
-      </label>
-    </fieldset>
+    {#if showWhere}
+      <fieldset class="fieldset">
+        <legend class="fieldset-legend"
+          ><MapPin class="inline size-4" /> Où ?</legend
+        >
+        <label class="input w-full">
+          <MapPin class="h-4 w-4 opacity-50" />
+          <input
+            type="text"
+            bind:value={where}
+            placeholder="Lieu de stockage"
+            class="grow"
+            disabled={!canEditWhere}
+          />
+        </label>
+      </fieldset>
+    {/if}
 
     <fieldset class="fieldset">
       <legend class="fieldset-legend">Notes</legend>
@@ -214,36 +304,14 @@
     </fieldset>
   </div>
 
-  {#if isEdit && onDelete}
-    <div class="flex">
-      <button
-        type="button"
-        class="btn btn-error btn-outline btn-sm"
-        onclick={onDelete}
-        disabled={submitting}
-      >
-        <Trash2 class="size-4" />
-        Supprimer
-      </button>
+  {#if attempted && errors.length > 0}
+    <div class="alert alert-warning alert-soft text-sm">
+      <CircleAlert class="size-4 shrink-0" />
+      <ul class="list-disc pl-2">
+        {#each errors as err}
+          <li>{err}</li>
+        {/each}
+      </ul>
     </div>
   {/if}
-
-  <div class="flex justify-end gap-2">
-    <button type="button" class="btn btn-ghost" onclick={onCancel}>
-      <X class="h-4 w-4" />
-      Annuler
-    </button>
-    <button
-      type="submit"
-      class="btn btn-primary"
-      disabled={!name.trim() || submitting}
-    >
-      {#if submitting}
-        <span class="loading loading-spinner loading-xs"></span>
-      {:else}
-        <Save class="h-4 w-4" />
-      {/if}
-      {isEdit ? "Enregistrer" : "Ajouter"}
-    </button>
-  </div>
 </form>

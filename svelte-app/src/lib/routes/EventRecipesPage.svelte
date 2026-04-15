@@ -233,23 +233,22 @@
     }
   });
 
-  // // ============================================================================
-  // // SCROLL : vers la recette ciblée quand les données sont prêtes
-  // // ============================================================================
+  // ============================================================================
+  // SCROLL : vers le header du meal ciblé quand les données sont prêtes
+  // ============================================================================
 
-  // $effect(() => {
-  //   const recipeUuid = urlFilter.recipeUuid;
-  //   if (!recipeUuid || loading) return;
-  //   // Tracker eventMeals comme dépendance
-  //   if (eventMeals.length === 0) return;
+  $effect(() => {
+    const { recipeUuid, mealDate } = urlFilter;
+    if (!recipeUuid || !mealDate || loading) return;
+    if (eventMeals.length === 0) return;
 
-  //   tick().then(() => {
-  //     requestAnimationFrame(() => {
-  //       const el = document.getElementById(`recipe-${recipeUuid}`);
-  //       el?.scrollIntoView({ behavior: "smooth", block: "center" });
-  //     });
-  //   });
-  // });
+    tick().then(() => {
+      requestAnimationFrame(() => {
+        const el = document.getElementById(`meal-${mealDate}`);
+        el?.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+    });
+  });
 
   // ============================================================================
   // NAVBAR CONFIGURATION

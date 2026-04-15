@@ -80,11 +80,11 @@
                       if (!eventId) return;
                       // Fermer le modal AVANT de naviguer pour que le scroll lock
                       // CSS (DaisyUI :root:has(.modal-open)) soit retiré du DOM
-                      // avant que sv-router appelle window.scrollTo(0,0)
                       onClose?.();
                       await tick();
                       navigate(`/event/${eventId}/recipes`, {
                         search: { recipe: recipeId, meal: mealDate },
+                        scrollToTop: false,
                       });
                     }}>{recipe.r}</button
                   >

@@ -9,7 +9,7 @@ public
 .vscode
 _vendor
 node_modules
-content/recettes/uuid.sh
+content/recipe/uuid.sh
 *.code-workspace
 backups
 docs

@@ -1,0 +1,21 @@
+# robots.txt pour Enka Cookbook
+# https://enka-cookbook.oupla.net/
+
+User-agent: *
+Allow: /
+
+Allow: /api/
+Allow: /recipe/
+Allow: /data/
+Allow: /images/
+Allow: /icons/
+Allow: /evenements/
+Allow: /app/
+Allow: /index.html
+
+Disallow: /admin/
+Disallow: /dashboard/
+Disallow: /recipe/my/
+Disallow: /recipe/new/
+
+Sitemap: https://enka-cookbook.oupla.net/sitemap.xml

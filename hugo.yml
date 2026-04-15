@@ -2,7 +2,7 @@ title: Enka Cookbook
 titleAddition: Des recettes pour pleins
 description: Site collaboratif de partage de recettes et d'organisation d'évènement pour les cantines autogérées.
 
-baseURL: "/"
+baseURL: "https://enka-cookbook.oupla.net/"
 
 titleSeparator: "-"
 relativeURLs: false
@@ -65,10 +65,10 @@ caches:
   getjson:
     dir: :cacheDir/:project
     maxAge: 10s
-# sitemap:
-#   changefreq: monthly
-#   filename: sitemap.xml
-#   priority: 0.5
+sitemap:
+  changefreq: monthly
+  filename: sitemap.xml
+  priority: 0.5
 
 
 # Opengraph

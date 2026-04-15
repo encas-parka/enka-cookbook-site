@@ -1,6 +1,6 @@
 {{/* Nouveau template simplifié - toutes les données sont déjà dans le frontmatter */}}
 {{- $recipes := slice -}}
-{{- range where .Site.RegularPages "Section" "recettes" -}}
+{{- range where .Site.RegularPages "Section" "recipe" -}}
   {{- if .Title -}}
 
     {{/* Extraire les noms des ingrédients directement depuis le frontmatter */}}

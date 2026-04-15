@@ -73,7 +73,7 @@ export default defineConfig(({ mode }) => ({
             },
           },
           {
-            urlPattern: /^https?:\/\/.*\/recettes\/.*\/recipe\.json$/,
+            urlPattern: /^https?:\/\/.*\/recipe\/.*\/recipe\.json$/,
             handler: "StaleWhileRevalidate",
             options: {
               cacheName: "hugo-recipes",
@@ -181,15 +181,16 @@ export default defineConfig(({ mode }) => ({
 
   server: {
     proxy: {
-      "/recettes": {
+      "/recipe": {
         target: "http://localhost:1313",
         changeOrigin: true,
-        configure: (proxy, _options) => {
-          proxy.on("error", (_err, _req, _res) => {
-            console.log(
-              "[Vite Proxy] Hugo server not available for /recettes/",
-            );
-          });
+        // Ne proxy que les fichiers JSON vers Hugo.
+        // Pour les pages HTML, laisser Vite servir index.html (SPA fallback)
+        // afin que le HMR et l'inspecteur Svelte fonctionnent.
+        bypass: (req, _res, _options) => {
+          if (!req.url?.includes(".json")) {
+            return "/index.html";
+          }
         },
       },
       "/data": {

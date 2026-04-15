@@ -26,7 +26,7 @@ const __dirname = path.dirname(__filename);
 // CONFIGURATION
 // ============================================================================
 
-const RECIPES_DIR = path.resolve(__dirname, '../content/recettes');
+const RECIPES_DIR = path.resolve(__dirname, '../content/recipe');
 const INGREDIENTS_FILE = path.resolve(__dirname, '../static/data/ingredients.json');
 
 // ============================================================================

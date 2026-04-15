@@ -29,7 +29,7 @@ Applique les corrections aux fichiers de recettes.
 ## Ce que fait le script
 
 1. Charge `static/data/ingredients.json` et crée un index nom → UUID
-2. Parcourt toutes les recettes dans `content/recettes/`
+2. Parcourt toutes les recettes dans `content/recipe/`
 3. Identifie les ingrédients avec des UUIDs de 21 caractères (nanoid)
 4. Pour chaque ingrédient trouvé :
    - Recherche l'UUID correspondant dans `ingredients.json` par nom

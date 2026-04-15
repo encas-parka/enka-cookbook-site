@@ -36,7 +36,7 @@ node update-recipe-allergens.js [--dry-run] [--yes]
 
 1. Vérifie que le dépôt git est propre (pas de modifications non commitées)
 2. Charge `ingredients.json` pour avoir les données fraîches
-3. Parcourt toutes les recettes dans `content/recettes/`
+3. Parcourt toutes les recettes dans `content/recipe/`
 4. Pour chaque ingrédient de chaque recette :
    - Met à jour les allergènes depuis `ingredients.json`
    - Met à jour le type, pF, pS

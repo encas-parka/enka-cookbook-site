@@ -13,6 +13,7 @@
     EventMaterielStatus,
   } from "$lib/types/event-materiel.types";
   import { eventMaterielStore } from "$lib/stores/EventMaterielStore.svelte";
+  import { getEventMaterielStatusConfig } from "$lib/utils/materiel.utils";
 
   interface Props {
     group: MaterielGroup;
@@ -41,7 +42,7 @@
 
 <div class="flex flex-wrap items-center gap-1">
   <button
-    class="btn btn-soft btn-error btn-sm gap-1"
+    class="btn btn-soft {toFindQty > 0 && 'btn-error'} sm:btn-sm gap-1 pe-1"
     onclick={(e) => {
       e.stopPropagation();
       onEditHeader(headerId);
@@ -53,12 +54,12 @@
       >Manque: <strong>{toFindQty}</strong></span
     >
     <strong class=" sm:hidden">{toFindQty}</strong>
-    <span class="btn btn-circle btn-error ms-2 size-6 p-0.5 opacity-60">
+    <span class="btn btn-square btn-error ms-2 size-6 p-0.5 opacity-60">
       <PencilLine size="14" /></span
     >
   </button>
   <button
-    class="btn btn-soft btn-warning btn-sm gap-1"
+    class="btn btn-soft {toCheckQty > 0 && 'btn-warning'} sm:btn-sm gap-1 pe-1"
     onclick={(e) => {
       e.stopPropagation();
       onAddAllocation(headerId, "to_check");
@@ -70,12 +71,13 @@
       >vérifier: <strong>{toCheckQty}</strong></span
     >
     <strong class=" sm:hidden">{toCheckQty}</strong>
-    <span class="btn btn-circle btn-warning ms-2 size-6 p-0.5 opacity-60">
+    <span class="btn btn-square btn-warning ms-2 size-6 p-0.5 opacity-60">
       <Plus size="14" /></span
     >
   </button>
   <button
-    class="btn btn-soft btn-success btn-sm gap-1"
+    class="btn btn-soft {confirmedQty > 0 &&
+      'btn-success'} sm:btn-sm gap-1 pe-1"
     onclick={(e) => {
       e.stopPropagation();
       onAddAllocation(headerId, "confirmed");
@@ -87,7 +89,7 @@
       >Ok: <strong>{confirmedQty}</strong></span
     >
     <strong class=" sm:hidden">{confirmedQty}</strong>
-    <span class="btn btn-circle btn-success ms-2 size-6 p-0.5 opacity-60">
+    <span class="btn btn-square btn-success ms-2 size-6 p-0.5 opacity-60">
       <Plus size="14" /></span
     >
   </button>

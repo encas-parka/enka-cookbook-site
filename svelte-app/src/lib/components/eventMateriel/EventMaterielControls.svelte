@@ -88,9 +88,10 @@
     <div class="flex items-center gap-2 self-end">
       <div class="join flex p-1">
         <button
-          class="btn btn-xs join-item gap-1 {displayMode === 'nested'
-            ? 'btn-primary'
-            : 'btn-ghost'}"
+          class="btn btn-sm join-item btn-primary gap-1 {displayMode !==
+          'nested'
+            ? 'btn-outline'
+            : ''}"
           onclick={() => onDisplayModeChange("nested")}
           title="Vue groupée"
           disabled={hasActiveFilters}
@@ -99,9 +100,8 @@
           <span class="hidden sm:inline">Groupé</span>
         </button>
         <button
-          class="btn btn-xs join-item gap-1 {displayMode === 'flat'
-            ? 'btn-primary'
-            : 'btn-ghost'}"
+          class="btn btn-sm join-item btn-primary gap-1 {displayMode !==
+            'flat' && 'btn-outline'}"
           onclick={() => onDisplayModeChange("flat")}
           title="Vue liste"
         >

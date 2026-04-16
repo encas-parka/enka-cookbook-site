@@ -19,6 +19,46 @@ import type {
   MaterielLoanDetail,
   MaterielOwner,
 } from "$lib/types/materiel.types";
+import type { EventMaterielStatus } from "$lib/types/event-materiel.types";
+
+export interface EventMaterielStatusConfig {
+  label: string;
+  badgeClass: string;
+  selectClass: string;
+}
+
+const eventMaterielStatusConfigs: Record<string, EventMaterielStatusConfig> = {
+  to_find: {
+    label: "À trouver",
+    badgeClass: "badge-error",
+    selectClass: "select-error text-error",
+  },
+  to_check: {
+    label: "À vérifier",
+    badgeClass: "badge-warning",
+    selectClass: "select-warning text-warning",
+  },
+  confirmed: {
+    label: "Ok",
+    badgeClass: "badge-success",
+    selectClass: "select-success text-success",
+  },
+};
+
+export function getEventMaterielStatusConfig(
+  status: EventMaterielStatus | string | null | undefined,
+): EventMaterielStatusConfig {
+  return (
+    eventMaterielStatusConfigs[status || "to_find"] ||
+    eventMaterielStatusConfigs.to_find
+  );
+}
+
+export const eventMaterielStatusLabels: Record<string, string> = {
+  to_find: "À trouver",
+  to_check: "À vérifier",
+  confirmed: "Ok",
+};
 
 // =============================================================================
 // LABELS - Fonctions de labellisation pour l'affichage

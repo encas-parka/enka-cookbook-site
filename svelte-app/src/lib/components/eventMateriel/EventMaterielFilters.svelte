@@ -9,6 +9,7 @@
   } from "@lucide/svelte";
   import Fieldset from "$lib/components/ui/Fieldset.svelte";
   import CheckboxBadge from "$lib/components/ui/CheckboxBadge.svelte";
+  import { getEventMaterielStatusConfig, getMaterielTypeConfig } from "$lib/utils/materiel.utils";
 
   export interface EventMaterielFiltersState {
     types: string[];
@@ -49,26 +50,11 @@
   }
 
   function getTypeLabel(type: string): string {
-    const labels: Record<string, string> = {
-      electronic: "Électronique",
-      manual: "Manuel",
-      other: "Autre",
-      tools: "Outils",
-      dish: "Vaisselle",
-      cooking: "Cuisine",
-      gaz: "Gaz",
-      hygiene: "Hygiène",
-    };
-    return labels[type] || type;
+    return getMaterielTypeConfig(type).label;
   }
 
   function getStatusLabel(status: string): string {
-    const labels: Record<string, string> = {
-      to_find: "À trouver",
-      to_check: "À vérifier",
-      confirmed: "Ok",
-    };
-    return labels[status] || status;
+    return getEventMaterielStatusConfig(status).label;
   }
 </script>
 

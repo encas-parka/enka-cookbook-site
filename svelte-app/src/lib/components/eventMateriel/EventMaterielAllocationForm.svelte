@@ -3,7 +3,8 @@
     EventMaterielType,
     EventMaterielStatus,
   } from "$lib/types/event-materiel.types";
-  import { Hash, MapPin, User, CircleDot } from "@lucide/svelte";
+  import { getEventMaterielStatusConfig } from "$lib/utils/materiel.utils";
+  import { Hash, MapPin, User, CircleDot, CircleAlert } from "@lucide/svelte";
 
   interface Props {
     maxQuantity: number;
@@ -29,32 +30,50 @@
     onCancel,
   }: Props = $props();
 
-  // svelte-ignore state_referenced_locally
   let quantity = $state(Math.min(1, maxQuantity));
-  // svelte-ignore state_referenced_locally
   let status = $state<EventMaterielStatus>(presetStatus ?? "to_check");
   let who = $state("");
   let where = $state("");
   let notes = $state("");
   let submitting = $state(false);
+  let attempted = $state(false);
 
   const statuses: { value: EventMaterielStatus; label: string }[] = [
-    { value: "to_check", label: "À vérifier / demander" },
-    { value: "confirmed", label: "Ok" },
-    { value: "to_find", label: "À trouver" },
-  ];
+    "to_check",
+    "confirmed",
+    "to_find",
+  ].map((s) => ({
+    value: s as EventMaterielStatus,
+    label: getEventMaterielStatusConfig(s).label,
+  }));
 
   const statusClass = $derived(
-    status === "confirmed"
-      ? "select-success text-success"
-      : status === "to_check"
-        ? "select-warning text-warning"
-        : "select-error text-error",
+    getEventMaterielStatusConfig(status).selectClass,
   );
+
+  const needsSource = $derived(status === "to_check" || status === "confirmed");
+
+  const whoOrWhereError = $derived(
+    attempted && needsSource && !who.trim() && !where.trim(),
+  );
+
+  const whoError = $derived(whoOrWhereError && !who.trim());
+  const whereError = $derived(whoOrWhereError && !where.trim());
+
+  const validationErrors = $derived.by(() => {
+    const errs: string[] = [];
+    if (quantity <= 0 || quantity > maxQuantity)
+      errs.push("La quantité doit être entre 1 et " + maxQuantity + ".");
+    if (needsSource && !who.trim() && !where.trim()) {
+      errs.push("Indiquez qui apporte le matériel ou d'où il vient.");
+    }
+    return errs;
+  });
 
   async function handleSubmit(e: Event) {
     e.preventDefault();
-    if (quantity <= 0 || quantity > maxQuantity) return;
+    attempted = true;
+    if (validationErrors.length > 0) return;
 
     submitting = true;
     try {
@@ -72,13 +91,15 @@
 </script>
 
 <form onsubmit={handleSubmit} class="space-y-4">
-  <div class="text-base-content/70 text-sm">
-    <strong>{headerName}</strong>
-    {#if maxQuantity > 0}
-      <span class="badge badge-warning badge-xs ml-1"
-        >besoin total: {maxQuantity}</span
-      >
-    {/if}
+  <div class="text-base-content/70 py-2 text-sm">
+    <div class="mb-2">
+      <strong>{headerName}</strong>
+      {#if maxQuantity > 0}
+        <span class="badge badge-warning badge-sm float-end"
+          >besoin total: {maxQuantity}</span
+        >
+      {/if}
+    </div>
     <p>Indiquez la quantité disponible, empruntable ou à demander.</p>
   </div>
 
@@ -112,7 +133,7 @@
     </fieldset>
 
     <fieldset class="fieldset">
-      <legend class="fieldset-legend"
+      <legend class="fieldset-legend required"
         ><User class="inline size-4" /> Qui ?</legend
       >
       <label class="input w-full">
@@ -120,13 +141,14 @@
           type="text"
           bind:value={who}
           placeholder="Personne responsable"
-          class="grow"
+          class="grow {whoError ? 'input-error' : ''}"
+          required={needsSource}
         />
       </label>
     </fieldset>
 
     <fieldset class="fieldset">
-      <legend class="fieldset-legend"
+      <legend class="fieldset-legend required"
         ><MapPin class="inline size-4" /> Où ?</legend
       >
       <label class="input w-full">
@@ -134,7 +156,8 @@
           type="text"
           bind:value={where}
           placeholder="Lieu de stockage"
-          class="grow"
+          class="grow {whereError ? 'input-error' : ''}"
+          required={needsSource}
         />
       </label>
     </fieldset>
@@ -149,4 +172,15 @@
       ></textarea>
     </fieldset>
   </div>
+
+  {#if attempted && validationErrors.length > 0}
+    <div class="alert alert-warning alert-soft text-sm">
+      <CircleAlert class="size-4 shrink-0" />
+      <ul class="list-disc pl-2">
+        {#each validationErrors as err}
+          <li>{err}</li>
+        {/each}
+      </ul>
+    </div>
+  {/if}
 </form>

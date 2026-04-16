@@ -1,7 +1,12 @@
 <script lang="ts">
   import { onMount } from "svelte";
   import { fade } from "svelte/transition";
-  import { Plus, Users, LoaderCircle } from "@lucide/svelte";
+  import {
+    Plus,
+    Users,
+    LoaderCircle,
+    ArrowRightFromLine,
+  } from "@lucide/svelte";
   import { materielStore } from "$lib/stores/MaterielStore.svelte";
   import { globalState } from "$lib/stores/GlobalState.svelte";
   import { nativeTeamsStore } from "$lib/stores/NativeTeamsStore.svelte";
@@ -180,11 +185,18 @@
 
     navBarStore.setConfig({
       title: teamName,
+      actions: navActions,
     });
   });
-
-  // Cleanup
 </script>
+
+{#snippet navActions()}
+  <button
+    class="btn btn-primary btn-sm"
+    onclick={() => navigate(`/dashboard/materiel/${activeTeamId}`)}
+  >
+    Inventaire <ArrowRightFromLine class="size-4" />
+  </button>{/snippet}
 
 <div class="container mx-auto p-4 pb-20" transition:fade>
   <div class="mx-auto max-w-7xl sm:px-4 sm:py-8">

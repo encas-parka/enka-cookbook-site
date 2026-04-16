@@ -1,16 +1,13 @@
 <script lang="ts">
-  import { eventMaterielStore } from "$lib/stores/EventMaterielStore.svelte";
-  import { MATERIEL_CATALOG } from "$lib/constants/materiel-catalog";
-  import type { EventMaterielType } from "$lib/types/event-materiel.types";
-  import { Search } from "@lucide/svelte";
+  import { MATERIEL_CATALOG, type CatalogType } from "$lib/constants/materiel-catalog";
+  import { materielStore } from "$lib/stores/MaterielStore.svelte";
+  import { Search, Package, Plus } from "@lucide/svelte";
 
   interface Suggestion {
     name: string;
-    type: EventMaterielType;
-    source: "header" | "catalog";
-    quantity?: number;
-    alreadyExists?: boolean;
-    itemId?: string;
+    type: CatalogType;
+    source: "existing" | "catalog";
+    materielId?: string;
   }
 
   interface Props {
@@ -18,6 +15,7 @@
     onSelect: (suggestion: Suggestion) => void;
     onInput: (value: string) => void;
     placeholder?: string;
+    teamId: string;
     class?: string;
   }
 
@@ -25,7 +23,8 @@
     value,
     onSelect,
     onInput,
-    placeholder = "Nom * (ex: Table pliante)",
+    placeholder = "Ex: Mixeur professionnel",
+    teamId,
     class: className = "",
   }: Props = $props();
 
@@ -41,44 +40,25 @@
     const results: Suggestion[] = [];
     const seenNames = new Set<string>();
 
-    const headerNames = new Map<
-      string,
-      { type: EventMaterielType; quantity: number }
-    >();
-    for (const header of eventMaterielStore.headers) {
-      const n = (header.name || "").toLowerCase().trim();
-      if (n && n.includes(q)) {
-        headerNames.set(n, {
-          type: header.type as EventMaterielType,
-          quantity: header.quantity || 0,
-        });
+    if (teamId) {
+      for (const m of materielStore.getMaterielsByOwner(teamId)) {
+        const n = m.name.toLowerCase().trim();
+        if (n.includes(q) && !seenNames.has(n)) {
+          results.push({
+            name: m.name,
+            type: m.type as CatalogType,
+            source: "existing",
+            materielId: m.$id,
+          });
+          seenNames.add(n);
+        }
       }
-    }
-
-    for (const [name, info] of headerNames) {
-      const headerItem = eventMaterielStore.headers.find(
-        (h) => (h.name || "").toLowerCase().trim() === name,
-      );
-      const originalName = headerItem?.name || name;
-      results.push({
-        name: originalName,
-        type: info.type,
-        source: "header",
-        quantity: info.quantity,
-        alreadyExists: true,
-        itemId: headerItem?.$id,
-      });
-      seenNames.add(name);
     }
 
     for (const item of MATERIEL_CATALOG) {
       const n = item.name.toLowerCase().trim();
       if (n.includes(q) && !seenNames.has(n)) {
-        results.push({
-          name: item.name,
-          type: item.type as EventMaterielType,
-          source: "catalog",
-        });
+        results.push({ name: item.name, type: item.type, source: "catalog" });
         seenNames.add(n);
       }
     }
@@ -88,8 +68,8 @@
       const aStarts = a.name.toLowerCase().startsWith(exact) ? 0 : 1;
       const bStarts = b.name.toLowerCase().startsWith(exact) ? 0 : 1;
       if (aStarts !== bStarts) return aStarts - bStarts;
-      if (a.source === "header" && b.source !== "header") return -1;
-      if (a.source !== "header" && b.source === "header") return 1;
+      if (a.source === "existing" && b.source !== "existing") return -1;
+      if (a.source !== "existing" && b.source === "existing") return 1;
       return a.name.localeCompare(b.name, "fr");
     });
 
@@ -138,12 +118,6 @@
     showDropdown = false;
     highlightedIndex = -1;
   }
-
-  const sourceLabel = $derived.by(() => {
-    return (source: "header" | "catalog") => {
-      return source === "header" ? "Existant" : "Catalogue";
-    };
-  });
 </script>
 
 <div class="relative {className}">
@@ -171,28 +145,21 @@
         <li>
           <button
             type="button"
-            class="flex w-full items-center gap-2 px-3 py-2 text-left text-sm {i ===
-            highlightedIndex
-              ? 'bg-primary/10'
-              : 'hover:bg-base-200'}"
+            class="flex w-full items-center gap-2 px-3 py-2 text-left text-sm {i === highlightedIndex ? 'bg-primary/10' : 'hover:bg-base-200'}"
             role="option"
             aria-selected={i === highlightedIndex}
             onclick={() => selectSuggestion(suggestion)}
             onmouseenter={() => (highlightedIndex = i)}
           >
-            <span class="flex-1 truncate">{suggestion.name}</span>
-            {#if suggestion.alreadyExists && suggestion.quantity}
-              <span class="badge badge-ghost badge-xs">
-                x{suggestion.quantity}
-              </span>
+            {#if suggestion.source === "existing"}
+              <Package class="h-3 w-3 opacity-50" />
+            {:else}
+              <Plus class="h-3 w-3 opacity-40" />
             {/if}
-            <span
-              class="badge {suggestion.source === 'header'
-                ? 'badge-secondary'
-                : 'badge-outline'} badge-xs"
-            >
-              {sourceLabel(suggestion.source)}
-            </span>
+            <span class="flex-1 truncate">{suggestion.name}</span>
+            {#if suggestion.source === "existing"}
+              <span class="badge badge-secondary badge-xs">Inventaire</span>
+            {/if}
           </button>
         </li>
       {/each}

@@ -596,7 +596,7 @@
               Événement lié ?</span
             >
             <select
-              disabled={loading || (mode === "edit" && isEndDatePast)}
+              disabled={loading || (mode === "edit" && isEndDatePast) || !!preselectedEventId}
               value={selectedEventId || ""}
               onchange={(e) => {
                 const target = e.target as HTMLSelectElement;

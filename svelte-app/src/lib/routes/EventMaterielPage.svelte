@@ -21,12 +21,11 @@
   import { route } from "$lib/router";
   import EventMaterielCard from "$lib/components/eventMateriel/EventMaterielCard.svelte";
   import EventMaterielGroupCard from "$lib/components/eventMateriel/EventMaterielGroupCard.svelte";
-  import EventMaterielForm from "$lib/components/eventMateriel/EventMaterielForm.svelte";
   import EventMaterielAllocationForm from "$lib/components/eventMateriel/EventMaterielAllocationForm.svelte";
   import EventMaterielFilters, {
     type EventMaterielFiltersState,
   } from "$lib/components/eventMateriel/EventMaterielFilters.svelte";
-  import EditEventMaterielModal from "$lib/components/eventMateriel/EditEventMaterielModal.svelte";
+  import EventMaterielModal from "$lib/components/eventMateriel/EventMaterielModal.svelte";
   import QuickAddEventCatalogModal from "$lib/components/eventMateriel/QuickAddEventCatalogModal.svelte";
   import LeftPanel from "$lib/components/ui/LeftPanel.svelte";
   import ConfirmModal from "$lib/components/ui/ConfirmModal.svelte";
@@ -40,27 +39,18 @@
   import type { EventMateriel } from "$lib/types/appwrite";
   import type {
     CreateEventMaterielData,
-    UpdateEventMaterielData,
     EventMaterielFilters as EventMaterielFilterOptions,
     EventMaterielSort,
     EventMaterielStatus,
-    EventMaterielType,
     MaterielGroup,
   } from "$lib/types/event-materiel.types";
   import { online } from "svelte/reactivity/window";
   import { isDemoEvent } from "$lib/data/demo-event-config";
   import { shareOrDownload, toSlug } from "$lib/utils/share-utils";
-
-  const typeLabels: Record<string, string> = {
-    electronic: "Électronique",
-    manual: "Manuel",
-    other: "Autre",
-    tools: "Outils",
-    dish: "Vaisselle",
-    cooking: "Cuisine",
-    gaz: "Gaz",
-    hygiene: "Hygiène",
-  };
+  import {
+    getMaterielTypeConfig,
+    getEventMaterielStatusConfig,
+  } from "$lib/utils/materiel.utils";
 
   // Route params
   let eventId = $derived(route.params.id ?? "");
@@ -77,9 +67,9 @@
   );
 
   // UI State
-  let addModalOpen = $state(false);
+  let materielModalOpen = $state(false);
+  let materielModalId = $state<string | null>(null);
   let catalogModalOpen = $state(false);
-  let editingItemId = $state<string | null>(null);
   let deleteTarget = $state<EventMateriel | null>(null);
   let editLoanId = $state<string | null>(null);
   let importLoanModalOpen = $state(false);
@@ -88,12 +78,6 @@
   let allocationPresetStatus = $state<EventMaterielStatus | undefined>(
     undefined,
   );
-
-  // Add modal form state
-  let addFormSubmitting = $state(false);
-  let addFormErrors = $state<string[]>([]);
-  let addFormRef: any = $state(null);
-  let addFormDirty = $state(false);
 
   // Allocation modal form state
   let allocFormRef: any = $state(null);
@@ -118,11 +102,6 @@
     }
     return loanIds;
   });
-
-  function canEditWhereForItem(item: EventMateriel): boolean {
-    if (!item.loanId) return true;
-    return userAccessibleLoanIds.has(item.loanId);
-  }
 
   async function loadCreateLoanModal() {
     if (!CreateLoanModal) {
@@ -212,20 +191,15 @@
     filters.types.forEach((type) => {
       badges.push({
         id: `type:${type}`,
-        label: typeLabels[type] || type,
+        label: getMaterielTypeConfig(type).label,
         color: "badge-secondary",
       });
     });
 
-    const statusLabels: Record<string, string> = {
-      to_find: "À trouver",
-      to_check: "À vérifier",
-      confirmed: "Confirmé",
-    };
     filters.statuses.forEach((status) => {
       badges.push({
         id: `status:${status}`,
-        label: statusLabels[status] || status,
+        label: getEventMaterielStatusConfig(status).label,
         color: "badge-accent",
       });
     });
@@ -293,55 +267,18 @@
   }
 
   function openAddForm() {
-    addFormErrors = [];
-    addFormSubmitting = false;
-    addModalOpen = true;
+    materielModalId = null;
+    materielModalOpen = true;
   }
 
-  function closeForm() {
-    addModalOpen = false;
-    addFormErrors = [];
-    addFormSubmitting = false;
+  function openEditForm(itemId: string) {
+    materielModalId = itemId;
+    materielModalOpen = true;
   }
 
-  async function handleSubmit(data: CreateEventMaterielData) {
-    try {
-      if (data.status && data.status !== "to_find" && (data.who || data.where)) {
-        await eventMaterielStore.addHeaderWithAllocation(
-          {
-            eventId,
-            name: data.name,
-            quantity: data.quantity,
-            type: data.type as EventMaterielType,
-            notes: data.notes,
-          },
-          {
-            status: data.status,
-            who: data.who,
-            where: data.where,
-            notes: null,
-          },
-          globalState.userId || "",
-        );
-        toastService.success("Besoin et allocation ajoutés");
-      } else {
-        await eventMaterielStore.addItem(data, globalState.userId || "");
-        toastService.success("Item ajouté");
-      }
-      closeForm();
-    } catch (err) {
-      console.error("[EventMaterielPage] Submit error:", err);
-      toastService.error("Erreur lors de la sauvegarde");
-    }
-  }
-
-  function handleAddFormFooterSubmit() {
-    if (addFormRef) {
-      const formEl = addFormRef.querySelector("form") as HTMLFormElement | null;
-      if (formEl) {
-        formEl.requestSubmit();
-      }
-    }
+  function closeMaterielModal() {
+    materielModalOpen = false;
+    materielModalId = null;
   }
 
   function confirmDelete(item: EventMateriel) {
@@ -402,7 +339,9 @@
 
   function handleAllocFormFooterSubmit() {
     if (allocFormRef) {
-      const formEl = allocFormRef.querySelector("form") as HTMLFormElement | null;
+      const formEl = allocFormRef.querySelector(
+        "form",
+      ) as HTMLFormElement | null;
       if (formEl) {
         formEl.requestSubmit();
       }
@@ -562,7 +501,7 @@
               résultat pour ces filtres{/if}
           </p>
           {#if eventMaterielStore.count === 0 && canEdit}
-            <div class="flex flex-wrap justify-center gap-2 mt-4">
+            <div class="mt-4 flex flex-wrap justify-center gap-2">
               <button class="btn btn-primary btn-sm" onclick={openAddForm}>
                 <Plus class="h-4 w-4" />
                 Ajouter un item
@@ -592,7 +531,7 @@
             <EventMaterielGroupCard
               {group}
               {canEdit}
-              onEditItem={(item) => (editingItemId = item.$id)}
+              onEditItem={(item) => openEditForm(item.$id)}
               onEditLoan={handleEditLoan}
               onAddAllocation={(headerId, status) => {
                 allocatingForHeaderId = headerId;
@@ -608,7 +547,7 @@
               !!item.loanId && userAccessibleLoanIds.has(item.loanId)}
             <EventMaterielCard
               {item}
-              onEdit={(item) => (editingItemId = item.$id)}
+              onEdit={(item) => openEditForm(item.$id)}
               onEditLoan={handleEditLoan}
               {canEdit}
               {canUserEditLoan}
@@ -637,18 +576,12 @@
   onCancel={() => (deleteTarget = null)}
 />
 
-<!-- Modal d'édition -->
-<EditEventMaterielModal
-  isOpen={editingItemId !== null}
-  itemId={editingItemId}
+<!-- Modal unifiée ajout/édition de matériel -->
+<EventMaterielModal
+  isOpen={materielModalOpen}
+  onClose={closeMaterielModal}
   {eventId}
-  onClose={() => (editingItemId = null)}
-  onSuccess={() => (editingItemId = null)}
-  canEditWhere={editingItemId
-    ? canEditWhereForItem(
-        eventMaterielStore.items.find((i) => i.$id === editingItemId)!,
-      )
-    : true}
+  itemId={materielModalId}
 />
 
 <!-- Formulaire d'allocation -->
@@ -660,17 +593,16 @@
     allocatingForHeaderId,
   )}
   {#if allocHeader}
-    <ModalContainer
-      isOpen={true}
-      maxWidth="sm"
-      onClose={closeAllocationModal}
-    >
-      <ModalHeader title="Ajouter une allocation" onClose={closeAllocationModal} />
+    <ModalContainer isOpen={true} maxWidth="sm" onClose={closeAllocationModal}>
+      <ModalHeader
+        title={allocHeader.name || "Ajouter"}
+        onClose={closeAllocationModal}
+      />
       <ModalContent>
         <div bind:this={allocFormRef}>
           <EventMaterielAllocationForm
             maxQuantity={allocRemaining}
-            headerName={allocHeader.name || ""}
+            headerName={""}
             headerType={allocHeader.type as any}
             presetStatus={allocationPresetStatus}
             onSubmit={handleAllocation}
@@ -679,7 +611,11 @@
         </div>
       </ModalContent>
       <ModalFooter>
-        <button type="button" class="btn btn-ghost btn-sm" onclick={closeAllocationModal}>
+        <button
+          type="button"
+          class="btn btn-ghost btn-sm"
+          onclick={closeAllocationModal}
+        >
           <X class="size-4" />
           Annuler
         </button>
@@ -689,50 +625,11 @@
           onclick={handleAllocFormFooterSubmit}
         >
           <Check class="size-4" />
-          Allouer
+          Enregistrer
         </button>
       </ModalFooter>
     </ModalContainer>
   {/if}
-{/if}
-
-<!-- Modal d'ajout de matériel -->
-{#if addModalOpen && canEdit && eventId}
-  <ModalContainer isOpen={true} onClose={closeForm} maxWidth="sm" hasUnsavedChanges={addFormDirty}>
-    <ModalHeader title="Ajouter du matériel" onClose={closeForm} />
-    <ModalContent>
-      <div bind:this={addFormRef}>
-        <EventMaterielForm
-          {eventId}
-          onSubmit={handleSubmit}
-          onCancel={closeForm}
-          mode="item"
-          bind:submitting={addFormSubmitting}
-          bind:errors={addFormErrors}
-          bind:dirty={addFormDirty}
-        />
-      </div>
-    </ModalContent>
-    <ModalFooter>
-      <button type="button" class="btn btn-ghost btn-sm" onclick={closeForm}>
-        <X class="size-4" />
-        Annuler
-      </button>
-      <button
-        type="button"
-        class="btn btn-primary btn-sm"
-        onclick={handleAddFormFooterSubmit}
-        disabled={addFormSubmitting}
-      >
-        {#if addFormSubmitting}
-          <span class="loading loading-spinner loading-xs"></span>
-        {:else}
-          <Check class="size-4" />
-        {/if}
-        Ajouter
-      </button>
-    </ModalFooter>
-  </ModalContainer>
 {/if}
 
 <!-- Modal catalogue rapide -->

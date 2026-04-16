@@ -6,6 +6,7 @@
   import type { EventMateriel } from "$lib/types/appwrite";
   import { eventMaterielStore } from "$lib/stores/EventMaterielStore.svelte";
   import {
+    getEventMaterielStatusConfig,
     getMaterielTypeBadgeClass,
     getMaterielTypeColorClass,
     getMaterielTypeConfig,
@@ -15,6 +16,7 @@
     Check,
     CircleAlert,
     CircleDot,
+    ClipboardEdit,
     MapPin,
     Package,
     Pencil,
@@ -40,24 +42,6 @@
 
   const header = $derived(group.header);
 
-  const allocationStatusBadge = $derived.by(() => {
-    return (status: string) => {
-      switch (status) {
-        case "confirmed":
-          return { badge: "badge-success", icon: Check, label: "Ok" };
-        case "to_check":
-          return { badge: "badge-info", icon: CircleDot, label: "À vérifier" };
-        case "to_find":
-        default:
-          return {
-            badge: "badge-warning",
-            icon: CircleAlert,
-            label: "À trouver",
-          };
-      }
-    };
-  });
-
   function handleAddAllocation(headerId: string, status: EventMaterielStatus) {
     onAddAllocation?.(headerId, status);
   }
@@ -67,7 +51,7 @@
   }
 </script>
 
-<div class="card card-xs border-base-200 border shadow-sm">
+<div class="card card-xs border-base-200 bg-base-100 border shadow-sm">
   <div class="card-body">
     <!-- Header row -->
     <div class="flex flex-wrap items-center gap-3">
@@ -109,9 +93,15 @@
       >
         {#each group.allocations as alloc (alloc.$id)}
           {@const allocStatus = eventMaterielStore.resolveStatus(alloc)}
-          {@const allocBadge = allocationStatusBadge(allocStatus)}
+          {@const allocConfig = getEventMaterielStatusConfig(allocStatus)}
+          {@const AllocIcon =
+            allocStatus === "confirmed"
+              ? Check
+              : allocStatus === "to_check"
+                ? CircleDot
+                : CircleAlert}
           <button
-            class="badge badge-lg badge-outline {allocBadge.badge}  hover:cursor-pointer"
+            class="badge badge-lg badge-outline {allocConfig.badgeClass} group hover:cursor-pointer hover:shadow-sm"
             onclick={(e) => {
               e.stopPropagation();
               onEditItem && !alloc.loanId ? onEditItem(alloc) : null;
@@ -143,29 +133,21 @@
 
             <!-- Alloc status -->
             <span
-              class="badge {allocBadge.badge} badge-soft badge-sm gap-1 py-0"
-              title={allocBadge.label}
+              class="badge {allocConfig.badgeClass} badge-soft badge-sm gap-1 py-0"
+              title={allocConfig.label}
             >
-              <allocBadge.icon class="size-3" />
-              {allocBadge.label}
+              <AllocIcon class="size-3" />
+              {allocConfig.label}
             </span>
 
             <!-- Edit alloc -->
             {#if canEdit && onEditItem && !alloc.loanId}
-              <div class="btn btn-xs btn-ghost">
-                <Pencil class="size-3.5" />
-              </div>
+              <Pencil class="size-3.5 group-hover:scale-105" />
             {/if}
 
             <!-- Edit loan -->
             {#if alloc.loanId && onEditLoan}
-              <div
-                class="btn btn-xs btn-ghost"
-                aria-label="Modifier la réservation"
-                title="Modifier la réservation"
-              >
-                <Pencil class="size-3.5" />
-              </div>
+              <ClipboardEdit class="size-3.5 group-hover:scale-105" />
             {/if}
           </button>
         {/each}

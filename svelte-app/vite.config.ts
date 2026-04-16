@@ -10,140 +10,137 @@ import { fileURLToPath } from "url";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+const pwaConfig = {
+  registerType: "autoUpdate" as const,
+  injectRegister: false, // Hugo contrôle le HTML, on enregistre le SW manuellement
+  manifest: {
+    name: "Enka Cookbook",
+    short_name: "Enka",
+    description:
+      "Recettes collaboratives et gestion d'événements pour cantines autogérées",
+    theme_color: "#900e3b",
+    background_color: "#ffffff",
+    lang: "fr",
+    display: "standalone" as const,
+    start_url: "/app/",
+    scope: "/app/",
+    icons: [
+      {
+        src: "192x192.png",
+        sizes: "192x192",
+        type: "image/png",
+        purpose: "any",
+      },
+      {
+        src: "512x512.png",
+        sizes: "512x512",
+        type: "image/png",
+        purpose: "any",
+      },
+      {
+        src: "logo.svg",
+        sizes: "any",
+        type: "image/svg+xml",
+        purpose: "any",
+      },
+      {
+        src: "192x192.png",
+        sizes: "192x192",
+        type: "image/png",
+        purpose: "maskable",
+      },
+    ],
+  },
+  workbox: {
+    globPatterns: ["assets/**/*.{js,css,woff2}", "fonts/**/*.{css,woff2}"],
+    dontCacheBustURLsMatching: /-[a-f0-9]{8}\./,
+    cleanupOutdatedCaches: true,
+    skipWaiting: true,
+    clientsClaim: true,
+    runtimeCaching: [
+      {
+        urlPattern: /^https?:\/\/.*\/api\/data\.json$/,
+        handler: "StaleWhileRevalidate",
+        options: {
+          cacheName: "hugo-api",
+          expiration: { maxEntries: 10, maxAgeSeconds: 60 * 60 },
+        },
+      },
+      {
+        urlPattern: /^https?:\/\/.*\/recipe\/.*\/recipe\.json$/,
+        handler: "StaleWhileRevalidate",
+        options: {
+          cacheName: "hugo-recipes",
+          expiration: { maxEntries: 100, maxAgeSeconds: 60 * 60 },
+        },
+      },
+      {
+        urlPattern: /^https?:\/\/.*\/(icons|images)\/.*/,
+        handler: "CacheFirst",
+        options: {
+          cacheName: "static-assets",
+          expiration: { maxEntries: 50, maxAgeSeconds: 30 * 24 * 60 * 60 },
+        },
+      },
+      {
+        urlPattern: /^https:\/\/fonts\.googleapis\.com\/.+/,
+        handler: "StaleWhileRevalidate",
+        options: {
+          cacheName: "google-fonts-stylesheets",
+          expiration: { maxEntries: 20, maxAgeSeconds: 60 * 60 * 24 },
+        },
+      },
+      {
+        urlPattern: /^https:\/\/fonts\.gstatic\.com\/.+/,
+        handler: "CacheFirst",
+        options: {
+          cacheName: "google-fonts-webfonts",
+          expiration: { maxEntries: 30, maxAgeSeconds: 365 * 24 * 60 * 60 },
+          cacheableResponse: { statuses: [0, 200] },
+        },
+      },
+    ],
+  },
+  devOptions: {
+    enabled: false,
+  },
+};
+
 export default defineConfig(({ mode }) => ({
   base: mode === "development" ? "/" : "/app/",
 
   plugins: [
     tailwindcss(),
-    svelte(),
-    VitePWA({
-      registerType: "autoUpdate",
-      injectRegister: false, // Hugo contrôle le HTML, on enregistre le SW manuellement
-      manifest: {
-        name: "Enka Cookbook",
-        short_name: "Enka",
-        description:
-          "Recettes collaboratives et gestion d'événements pour cantines autogérées",
-        theme_color: "#900e3b",
-        background_color: "#ffffff",
-        lang: "fr",
-        display: "standalone",
-        start_url: "/app/",
-        scope: "/app/",
-        icons: [
-          {
-            src: "192x192.png",
-            sizes: "192x192",
-            type: "image/png",
-            purpose: "any",
-          },
-          {
-            src: "512x512.png",
-            sizes: "512x512",
-            type: "image/png",
-            purpose: "any",
-          },
-          {
-            src: "logo.svg",
-            sizes: "any",
-            type: "image/svg+xml",
-            purpose: "any",
-          },
-          {
-            src: "192x192.png",
-            sizes: "192x192",
-            type: "image/png",
-            purpose: "maskable",
-          },
-        ],
-      },
-      workbox: {
-        globPatterns: ["assets/**/*.{js,css,woff2}", "fonts/**/*.{css,woff2}"],
-        dontCacheBustURLsMatching: /-[a-f0-9]{8}\./,
-        cleanupOutdatedCaches: true,
-        skipWaiting: true,
-        clientsClaim: true,
-        runtimeCaching: [
-          {
-            urlPattern: /^https?:\/\/.*\/api\/data\.json$/,
-            handler: "StaleWhileRevalidate",
-            options: {
-              cacheName: "hugo-api",
-              expiration: { maxEntries: 10, maxAgeSeconds: 60 * 60 },
-            },
-          },
-          {
-            urlPattern: /^https?:\/\/.*\/recipe\/.*\/recipe\.json$/,
-            handler: "StaleWhileRevalidate",
-            options: {
-              cacheName: "hugo-recipes",
-              expiration: { maxEntries: 100, maxAgeSeconds: 60 * 60 },
-            },
-          },
-          {
-            urlPattern: /^https?:\/\/.*\/(icons|images)\/.*/,
-            handler: "CacheFirst",
-            options: {
-              cacheName: "static-assets",
-              expiration: { maxEntries: 50, maxAgeSeconds: 30 * 24 * 60 * 60 },
-            },
-          },
-          {
-            urlPattern: /^https:\/\/fonts\.googleapis\.com\/.+/,
-            handler: "StaleWhileRevalidate",
-            options: {
-              cacheName: "google-fonts-stylesheets",
-              expiration: { maxEntries: 20, maxAgeSeconds: 60 * 60 * 24 },
-            },
-          },
-          {
-            urlPattern: /^https:\/\/fonts\.gstatic\.com\/.+/,
-            handler: "CacheFirst",
-            options: {
-              cacheName: "google-fonts-webfonts",
-              expiration: { maxEntries: 30, maxAgeSeconds: 365 * 24 * 60 * 60 },
-              cacheableResponse: { statuses: [0, 200] },
-            },
-          },
-        ],
-      },
-      devOptions: {
-        enabled: false,
-      },
-    }),
+    svelte(), // v7 : inspector intégré automatiquement
+    VitePWA(pwaConfig),
     // visualizer({
     //   open: true,
     //   gzipSize: true,
     //   filename: "./dist/stats.html",
-    // }),
+    // }) as PluginOption,
   ],
 
   build: {
     outDir: "../static/app/",
     emptyOutDir: true,
 
-    // ⭐ CHANGEMENT 1 : Terser basique
-    minify: "terser",
-    terserOptions: {
-      compress: {
-        drop_console: ["log"], // Supprime console.log
-        pure_funcs: ["console.log"],
-        drop_debugger: true, // Supprime debugger
-        passes: 1, // 1 passe pour commencer
-      },
-      mangle: {
-        keep_classnames: true, // CRUCIAL pour Svelte 5
-      },
-      format: {
-        comments: false, // Supprime tous les commentaires
-      },
-    },
+    // ⭐ Vite 8 : Oxc remplace Terser/esbuild pour la minification
+    // minify: "terser" supprimé — Oxc est le défaut
+    // terserOptions supprimé — config via rolldownOptions.output.minify
 
     target: "es2020",
     manifest: ".vite-manifest.json",
 
-    rollupOptions: {
+    // ⭐ Vite 8 : rollupOptions → rolldownOptions (rollupOptions déprécié)
+    rolldownOptions: {
       output: {
+        // ⭐ Oxc minifier (remplace Terser/esbuild)
+        // true active la minification par défaut (compress + mangle)
+        minify: true,
+        keepNames: true, // CRUCIAL pour Svelte 5 (équivalent terser keep_classnames)
+        // ⚠️ Oxc ne supporte pas drop_console/drop_debugger nativement.
+        // Pour supprimer console.log en prod, ajouter au niveau build :
+        //   define: { 'console.log': 'undefined' }
         entryFileNames:
           mode === "development"
             ? "assets/[name].js"
@@ -157,6 +154,8 @@ export default defineConfig(({ mode }) => ({
             ? "assets/[name].[ext]"
             : "assets/[name]-[hash].[ext]",
 
+        // Note: manualChunks en forme fonction est déprécié dans Vite 8
+        // mais fonctionne encore. Rolldown propose codeSplitting comme alternative.
         manualChunks(id) {
           if (id.includes("@lucide/svelte")) {
             return "icons";

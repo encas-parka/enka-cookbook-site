@@ -34,6 +34,7 @@ import {
 import { materielTypeLabels } from "$lib/utils/share-utils";
 import { globalState } from "./GlobalState.svelte";
 import { realtimeManager } from "./RealtimeManager.svelte";
+import { materielStore } from "./MaterielStore.svelte";
 
 export class EventMaterielStore {
   // État réactif - stocke les items par eventId
@@ -688,7 +689,9 @@ export class EventMaterielStore {
         const overlap = searchWords.filter((w) =>
           headerWords.some((hw) => hw.includes(w) || w.includes(hw)),
         );
-        score = (overlap.length / Math.max(searchWords.length, headerWords.length)) * 60;
+        score =
+          (overlap.length / Math.max(searchWords.length, headerWords.length)) *
+          60;
       }
 
       if (score > bestScore && score >= 50) {
@@ -777,7 +780,6 @@ export class EventMaterielStore {
             }
           }
         } else {
-          const { materielStore } = await import("./MaterielStore.svelte");
           const sourceMateriel = materielStore.getMaterielById(
             loanItem.materielId,
           );
@@ -923,7 +925,6 @@ export class EventMaterielStore {
       this.#idbCache?.deleteItem(itemId);
 
       if (loanId && sourceMaterielId) {
-        const { materielStore } = await import("./MaterielStore.svelte");
         const loan = materielStore.getLoanById(loanId);
         if (loan && loan.materielItems.length > 0) {
           const updatedItems = loan.materielItems.filter(

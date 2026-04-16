@@ -30,6 +30,12 @@ import {
   syncProductsWithPurchases,
   loadUpdatedPurchases,
   loadOrphanPurchases,
+  createQuickValidationPurchases,
+  updatePurchase,
+  upsertProduct,
+  updateProduct as updateProductAppwrite,
+  updateProductBatch,
+  batchUpdateProductsOptimized,
 } from "../services/appwrite-products";
 import type { GroupPurchaseBatchResult } from "../services/appwrite-transaction";
 
@@ -2001,8 +2007,7 @@ class ProductsStore {
       return await this.createPurchaseLocal(productId, quantities, options);
     } else {
       // Mode normal : utiliser le service Appwrite
-      const { createQuickValidationPurchases } =
-        await import("../services/appwrite-products");
+
       await createQuickValidationPurchases(
         this.#currentMainId!,
         productId,
@@ -2022,7 +2027,6 @@ class ProductsStore {
     if (isDemoEvent(this.#currentEventId)) {
       return await this.updatePurchaseLocal(purchaseId, updates);
     } else {
-      const { updatePurchase } = await import("../services/appwrite-products");
       await updatePurchase(
         purchaseId,
         updates as Parameters<typeof updatePurchase>[1],
@@ -2048,7 +2052,6 @@ class ProductsStore {
       }
 
       // Pseudo-suppression : on met à jour le statut au lieu de supprimer physiquement
-      const { updatePurchase } = await import("../services/appwrite-products");
       await updatePurchase(purchaseId, { status: "deleted" });
     }
   }
@@ -2070,7 +2073,6 @@ class ProductsStore {
       return await this.createProductLocal(productData);
     } else {
       // Mode normal : utiliser le service Appwrite
-      const { upsertProduct } = await import("../services/appwrite-products");
       const newProduct = await upsertProduct(
         crypto.randomUUID(),
         productData,
@@ -2092,9 +2094,6 @@ class ProductsStore {
     if (isDemoEvent(this.#currentEventId)) {
       return await this.updateProductLocal(productId, updates);
     } else {
-      const { updateProduct: updateProductAppwrite, upsertProduct } =
-        await import("../services/appwrite-products");
-
       // Vérifier si le produit est synchronisé avec Appwrite
       const enrichedProduct = this.getEnrichedProductById(productId);
       if (enrichedProduct && !enrichedProduct.isSynced) {
@@ -2126,8 +2125,7 @@ class ProductsStore {
       }
     } else {
       // Mode normal : appel batch Appwrite (cloud function optimisée)
-      const { updateProductBatch } =
-        await import("../services/appwrite-products");
+
       await updateProductBatch(
         productId,
         updates,
@@ -2157,8 +2155,6 @@ class ProductsStore {
         updateData,
       );
     } else {
-      const { batchUpdateProductsOptimized } =
-        await import("../services/appwrite-products");
       return await batchUpdateProductsOptimized(
         productIds,
         products,

@@ -9,6 +9,7 @@
  */
 
 import type { Hooks } from "sv-router";
+import { navigate } from "$lib/router";
 import { globalState } from "$lib/stores/GlobalState.svelte";
 import { eventsStore } from "$lib/stores/EventsStore.svelte";
 import { toastService } from "$lib/services/toast.service.svelte";
@@ -30,8 +31,6 @@ export const authGuard: Hooks = {
   async beforeLoad({ pathname }) {
     if (!globalState.isAuthenticated) {
       console.log(`[AuthGuard] Accès refusé à ${pathname} > Redirection /`);
-      // Import dynamique de navigate pour éviter l'erreur d'export
-      const { navigate } = await import("$lib/router");
       throw navigate("/", { replace: true });
     }
   },

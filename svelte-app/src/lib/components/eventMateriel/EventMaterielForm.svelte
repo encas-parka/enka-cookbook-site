@@ -15,6 +15,10 @@
     CircleAlert,
   } from "@lucide/svelte";
   import MaterielNameSuggest from "$lib/components/eventMateriel/MaterielNameSuggest.svelte";
+  import {
+    getEventMaterielStatusConfig,
+    getMaterielTypeConfig,
+  } from "$lib/utils/materiel.utils";
 
   export type FormMode = "header" | "item" | "allocation";
 
@@ -29,6 +33,7 @@
     submitting?: boolean;
     errors?: string[];
     dirty?: boolean;
+    onExistingSelected?: ((itemId: string) => void) | null;
   }
 
   let {
@@ -42,6 +47,7 @@
     submitting = $bindable(false),
     errors = $bindable([]),
     dirty = $bindable(false),
+    onExistingSelected = null,
   }: Props = $props();
 
   // svelte-ignore state_referenced_locally
@@ -94,44 +100,48 @@
   });
 
   const showStatus = $derived(mode !== "header");
-  const showWho = $derived(mode !== "header" && (status !== "to_find" || attempted));
-  const showWhere = $derived(mode !== "header" && status !== "to_find");
+  const needsSource = $derived(mode !== "header" && status !== "to_find");
+  const showWho = $derived(mode !== "header");
+  const showWhere = $derived(mode !== "header");
+
+  const whoOrWhereError = $derived(
+    attempted && needsSource && !who.trim() && !where.trim(),
+  );
+  const whoError = $derived(whoOrWhereError && !who.trim());
+  const whereError = $derived(whoOrWhereError && !where.trim());
 
   const statusClass = $derived(
-    status === "confirmed"
-      ? "select-success text-success"
-      : status === "to_check"
-        ? "select-warning text-warning"
-        : "select-error text-error",
+    getEventMaterielStatusConfig(status).selectClass,
   );
 
   const types: { value: EventMaterielType; label: string }[] = [
-    { value: "other", label: "Autre" },
-    { value: "electronic", label: "Électronique" },
-    { value: "manual", label: "Manuel" },
-    { value: "tools", label: "Outils" },
-    { value: "dish", label: "Vaisselle" },
-    { value: "cooking", label: "Cuisine" },
-    { value: "gaz", label: "Gaz" },
-    { value: "hygiene", label: "Hygiène" },
-  ];
+    "other",
+    "electronic",
+    "manual",
+    "tools",
+    "dish",
+    "cooking",
+    "gaz",
+    "hygiene",
+  ].map((t) => ({
+    value: t as EventMaterielType,
+    label: getMaterielTypeConfig(t).label,
+  }));
 
   const statuses: { value: EventMaterielStatus; label: string }[] = [
-    { value: "to_find", label: "À trouver" },
-    { value: "to_check", label: "À vérifier" },
-    { value: "confirmed", label: "Ok" },
-  ];
+    "to_find",
+    "to_check",
+    "confirmed",
+  ].map((s) => ({
+    value: s as EventMaterielStatus,
+    label: getEventMaterielStatusConfig(s).label,
+  }));
 
   const validationErrors = $derived.by(() => {
     const errs: string[] = [];
     if (!name.trim()) errs.push("Le nom est requis.");
     if (quantity < 1) errs.push("La quantité doit être ≥ 1.");
-    if (
-      mode === "item" &&
-      status !== "to_find" &&
-      !who.trim() &&
-      !where.trim()
-    ) {
+    if (needsSource && !who.trim() && !where.trim()) {
       errs.push("Indiquez qui apporte le matériel ou d'où il vient.");
     }
     return errs;
@@ -146,7 +156,18 @@
   function handleNameSelect(suggestion: {
     name: string;
     type: EventMaterielType;
+    source?: string;
+    itemId?: string;
   }) {
+    // Si c'est un header existant et qu'on a un callback → basculer en édition
+    if (
+      suggestion.source === "header" &&
+      suggestion.itemId &&
+      onExistingSelected
+    ) {
+      onExistingSelected(suggestion.itemId);
+      return;
+    }
     name = suggestion.name;
     type = suggestion.type;
   }
@@ -193,6 +214,27 @@
 </script>
 
 <form onsubmit={handleSubmit} class="space-y-4">
+  <div class="text-base-content/70 py-2 text-sm">
+    {#if isEdit}
+      <div class="mb-2">
+        <strong>{initialData?.name}</strong>
+        {#if mode === "allocation"}
+          <span class="badge badge-info badge-xs ml-1">allocation</span>
+        {:else}
+          <span class="badge badge-warning badge-xs ml-1">besoin</span>
+        {/if}
+      </div>
+      <p>
+        Modifier les détails {#if mode === "allocation"}
+          de l'apport
+        {:else}
+          concernant le besoin de ce matériel{/if}.
+      </p>
+    {:else}
+      <p>Ajouter à la liste du matériel requis</p>
+    {/if}
+  </div>
+
   {#if isEdit}
     <fieldset class="fieldset">
       <legend class="fieldset-legend"
@@ -220,7 +262,8 @@
   <div class="grid grid-cols-1 gap-4">
     <fieldset class="fieldset">
       <legend class="fieldset-legend"
-        ><Hash class="inline size-4" /> Quantité</legend
+        ><Hash class="inline size-4" /> Quantité {#if mode !== "allocation"}
+          requise{/if}</legend
       >
       <label class="input w-full">
         <input
@@ -269,7 +312,8 @@
             type="text"
             bind:value={who}
             placeholder="Personne responsable"
-            class="grow"
+            class="grow {whoError ? 'input-error' : ''}"
+            required={needsSource}
           />
         </label>
       </fieldset>
@@ -286,8 +330,9 @@
             type="text"
             bind:value={where}
             placeholder="Lieu de stockage"
-            class="grow"
+            class="grow {whereError ? 'input-error' : ''}"
             disabled={!canEditWhere}
+            required={needsSource}
           />
         </label>
       </fieldset>

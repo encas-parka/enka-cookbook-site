@@ -113,7 +113,7 @@
         <div
           class="text-primary flex items-center gap-2 text-base font-semibold"
         >
-          <typeInfo.icon class="h-4 w-4" />{product.productName}
+          <typeInfo.icon class="h-4 w-4 shrink-0" />{product.productName}
           {#if product.previousNames && product.previousNames.length > 0}
             <div class="text-base-content/60 text-sm font-normal">
               Ancien: {product.previousNames[0]}

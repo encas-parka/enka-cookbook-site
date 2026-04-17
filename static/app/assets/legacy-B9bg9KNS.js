@@ -1,0 +1,1 @@
+import{Bn as e}from"./appwrite-eh6oO_17.js";e();

@@ -45,7 +45,6 @@
     MaterielGroup,
   } from "$lib/types/event-materiel.types";
   import { online } from "svelte/reactivity/window";
-  import { isDemoEvent } from "$lib/data/demo-event-config";
   import { shareOrDownload, toSlug } from "$lib/utils/share-utils";
   import {
     getMaterielTypeConfig,
@@ -60,10 +59,9 @@
 
   // Permissions
   const canEdit = $derived(
-    (currentEvent && isDemoEvent(currentEvent.$id)) ||
-      (online.current &&
-        eventsStore.canUserEditEvent(eventId || "", globalState.userId || "") &&
-        currentEvent?.status !== "canceled"),
+    online.current &&
+      eventsStore.canUserEditEvent(eventId || "", globalState.userId || "") &&
+      currentEvent?.status !== "canceled",
   );
 
   // UI State

@@ -23,8 +23,6 @@ import type {
   BatchUpdateResult,
 } from "../types/store.types";
 import type { EnrichedEvent } from "../types/events";
-import { isDemoEvent } from "$lib/data/demo-event-config";
-
 import {
   loadPurchasesListByIds,
   syncProductsWithPurchases,
@@ -927,13 +925,6 @@ class ProductsStore {
    * Utilisé par NotificationStore pour les mises à jour batch
    */
   async syncFromAppwrite() {
-    // 🔥 MODE LOCAL: Skip Appwrite sync
-    if (isDemoEvent(this.#currentEventId)) {
-      console.log("[ProductsStore] Mode local: skip syncFromAppwrite");
-      return;
-    }
-
-    // Mode normal (existing code)
     if (!this.#currentMainId) return;
     this.#syncing = true;
     console.log(
@@ -1445,12 +1436,6 @@ class ProductsStore {
    * Configure les abonnements realtime via le service externalisé
    */
   #setupRealtimeSubscriptions(): void {
-    // 🔥 MODE LOCAL: Skip realtime
-    if (isDemoEvent(this.#currentEventId)) {
-      console.log("[ProductsStore] Mode local: skip realtime setup");
-      return;
-    }
-
     // Utiliser le service externalisé
     const callbacks = this.#setupRealtimeCallbacks();
     this.#unsubscribe = setupProductsRealtimeHandler(callbacks);
@@ -1714,275 +1699,7 @@ class ProductsStore {
   }
 
   // =========================================================================
-  // MODE LOCAL : Méthodes dédiées (sans Appwrite)
-  // =========================================================================
-
-  /**
-   * Crée un purchase en mode local (sans Appwrite)
-   * Met à jour le produit concerné et persiste dans IndexedDB
-   */
-  async createPurchaseLocal(
-    productId: string,
-    quantities: Array<{ q: number; u: string }>,
-    options: {
-      invoiceId?: string;
-      notes?: string;
-      store?: string;
-      price?: number | null;
-      who?: string;
-      status?: string | null;
-      orderDate?: string | null;
-      deliveryDate?: string | null;
-    },
-  ): Promise<void> {
-    const productModel = this.#enrichedProducts.get(productId);
-    if (!productModel) {
-      throw new Error(`Produit ${productId} introuvable`);
-    }
-
-    // 1. Créer l'objet purchase plain
-    const purchaseStatus = options.status || "delivered";
-    let deliveryDate = options.deliveryDate || null;
-
-    // Auto-date de livraison si "delivered" et pas de date fournie
-    if (purchaseStatus === "delivered" && !deliveryDate) {
-      deliveryDate = new Date().toISOString();
-    }
-
-    const newPurchase: Purchases = {
-      $id: crypto.randomUUID(),
-      $createdAt: new Date().toISOString(),
-      $updatedAt: new Date().toISOString(),
-      $databaseId: "localDemo",
-      $tableId: "localDemo",
-      $permissions: [],
-      $sequence: 0,
-      invoiceId: options.invoiceId || null,
-      notes: options.notes || "",
-      store: options.store || null,
-      mainId: this.#currentEventId!,
-      unit: quantities[0]?.u || "", // Unité principale
-      quantity: quantities.reduce((sum, qty) => sum + qty.q, 0), // Quantité totale
-      price: options.price || null,
-      status: purchaseStatus,
-      who: options.who || null,
-      createdBy: "guest",
-      orderDate: options.orderDate || new Date().toISOString(),
-      deliveryDate,
-      invoiceTotal: null,
-      products: [productId],
-    };
-
-    // 2. Ajouter au produit via le ProductModel
-    const currentProduct = $state.snapshot(productModel.data);
-    const updatedProduct: EnrichedProduct = {
-      ...currentProduct,
-      purchases: [...(currentProduct.purchases || []), newPurchase],
-      $updatedAt: new Date().toISOString(),
-    };
-
-    // 3. Persister dans IndexedDB AVANT de mettre à jour l'état réactif
-    if (this.#idbCache) {
-      await this.#idbCache.upsertProduct(updatedProduct);
-    }
-
-    // Mettre à jour le ProductModel APRÈS
-    productModel.update(updatedProduct);
-
-    console.log(`[ProductsStore] Mode local: purchase créé pour ${productId}`);
-  }
-
-  /**
-   * Crée un produit en mode local (sans Appwrite)
-   * Met à jour la Map réactive et persiste dans IndexedDB
-   */
-  async createProductLocal(productData: {
-    productName: string;
-    productType?: string;
-    pF?: boolean;
-    pS?: boolean;
-    status?: string;
-    who?: string[];
-    store?: string;
-    stockReel?: string;
-  }): Promise<string> {
-    const newProductId = crypto.randomUUID();
-
-    // 1. Créer l'objet produit plain
-    const newProduct: EnrichedProduct = {
-      $id: newProductId,
-      $createdAt: new Date().toISOString(),
-      $updatedAt: new Date().toISOString(),
-      $permissions: [], // Pas de permissions en mode local
-      // Données de base
-      productHugoUuid: null,
-      productName: productData.productName,
-      productType: productData.productType || "ingredient",
-      pF: productData.pF ?? false,
-      pS: productData.pS ?? false,
-      nbRecipes: 0,
-      totalAssiettes: 0,
-      isSynced: false, // Produit local, pas synchronisé avec Appwrite
-      mainId: this.#currentEventId!,
-      totalNeededRaw: [],
-      // Données interactives
-      status: productData.status || "ok",
-      who: productData.who || null,
-      store: productData.store || "",
-      stockReel: productData.stockReel || null,
-      previousNames: null,
-      isMerged: false,
-      mergedFrom: null,
-      mergeDate: null,
-      mergeReason: null,
-      mergedInto: null,
-      totalNeededOverride: null,
-      updatedBy: null,
-      specs: null,
-      // Données enrichies
-      purchases: [],
-      byDate: {},
-      storeInfo: null,
-      stockParsed: null,
-      totalNeededArray: [],
-      totalPurchasesArray: [],
-      stockOrTotalPurchases: "",
-      displayTotalNeeded: "",
-      displayTotalPurchases: "",
-      displayMissingQuantity: "",
-      displayTotalOverride: "",
-      totalNeededOverrideParsed: null,
-      missingQuantityArray: [],
-      dateDisplayInfo: {},
-      specsParsed: null,
-    };
-
-    // 2. Créer le ProductModel et l'ajouter à la Map
-    const productModel = new ProductModel(newProduct, this.dateStore);
-    this.#enrichedProducts.set(newProductId, productModel);
-
-    // 3. Persister dans IndexedDB
-    if (this.#idbCache) {
-      await this.#idbCache.upsertProduct(newProduct);
-    }
-
-    console.log(`[ProductsStore] Mode local: produit créé ${newProductId}`);
-    return newProductId;
-  }
-
-  /**
-   * Met à jour un produit en mode local
-   * Met à jour la Map réactive et persiste dans IndexedDB
-   * Maintenant publique pour être utilisée directement si besoin
-   */
-  async updateProductLocal(
-    productId: string,
-    updates: Partial<EnrichedProduct>,
-  ): Promise<void> {
-    const productModel = this.#enrichedProducts.get(productId);
-    if (!productModel) {
-      throw new Error(`Produit ${productId} introuvable`);
-    }
-
-    // 1. Fusionner les données
-    const updatedProduct: EnrichedProduct = {
-      ...productModel.data,
-      ...updates,
-      $updatedAt: new Date().toISOString(),
-    };
-
-    // 2. Mettre à jour le ProductModel (déclenche la réactivité Svelte 5)
-    productModel.update(updatedProduct);
-
-    // 3. Persister dans IndexedDB (avec snapshot pour supprimer les Proxy)
-    if (this.#idbCache) {
-      const snapshot = $state.snapshot(productModel.data);
-      await this.#idbCache.upsertProduct(snapshot);
-    }
-
-    console.log(`[ProductsStore] Mode local: produit mis à jour ${productId}`);
-  }
-
-  /**
-   * Ajoute un purchase en mode local (alias pour #createPurchaseLocal)
-   */
-  async addPurchaseToLocal(
-    productId: string,
-    quantities: Array<{ q: number; u: string }>,
-    options: {
-      invoiceId?: string;
-      notes?: string;
-      store?: string;
-      price?: number | null;
-      who?: string;
-      status?: string | null;
-      orderDate?: string | null;
-      deliveryDate?: string | null;
-    },
-  ): Promise<void> {
-    return await this.createPurchaseLocal(productId, quantities, options);
-  }
-
-  /**
-   * Met à jour un purchase en mode local
-   */
-  async updatePurchaseLocal(
-    purchaseId: string,
-    updates: Partial<Purchases>,
-  ): Promise<void> {
-    // 1. Trouver le produit qui contient ce purchase
-    let targetProductId: string | null = null;
-    for (const [productId, productModel] of this.#enrichedProducts) {
-      if (productModel.data.purchases?.some((p) => p.$id === purchaseId)) {
-        targetProductId = productId;
-        break;
-      }
-    }
-
-    if (!targetProductId) {
-      // Vérifier si c'est un achat orphelin (dépense)
-      if (this.#orphanPurchases.has(purchaseId)) {
-        const existing = this.#orphanPurchases.get(purchaseId)!;
-        const updated = {
-          ...existing,
-          ...updates,
-          $updatedAt: new Date().toISOString(),
-        };
-
-        if (updated.status === "deleted") {
-          this.#orphanPurchases.delete(purchaseId);
-        } else {
-          this.#orphanPurchases.set(purchaseId, updated);
-        }
-        return;
-      }
-      throw new Error(`Purchase ${purchaseId} introuvable`);
-    }
-
-    // 2. Mettre à jour le purchase dans la liste
-    const productModel = this.#enrichedProducts.get(targetProductId);
-    if (!productModel) return;
-    const updatedPurchases = productModel.data.purchases.map((p) =>
-      p.$id === purchaseId
-        ? { ...p, ...updates, $updatedAt: new Date().toISOString() }
-        : p,
-    );
-
-    // 3. Mettre à jour via la méthode générique
-    await this.updateProductLocal(targetProductId, {
-      purchases: updatedPurchases,
-    });
-  }
-
-  /**
-   * Supprime un purchase en mode local (pseudo-suppression)
-   */
-  async deletePurchaseLocal(purchaseId: string): Promise<void> {
-    await this.updatePurchaseLocal(purchaseId, { status: "deleted" });
-  }
-
-  // =========================================================================
-  // API PUBLIQUE (avec guards intégrés)
+  // API PUBLIQUE
   // =========================================================================
 
   /**
@@ -2003,18 +1720,12 @@ class ProductsStore {
       deliveryDate?: string | null;
     },
   ): Promise<void> {
-    if (isDemoEvent(this.#currentEventId)) {
-      return await this.createPurchaseLocal(productId, quantities, options);
-    } else {
-      // Mode normal : utiliser le service Appwrite
-
-      await createQuickValidationPurchases(
-        this.#currentMainId!,
-        productId,
-        quantities,
-        options,
-      );
-    }
+    await createQuickValidationPurchases(
+      this.#currentMainId!,
+      productId,
+      quantities,
+      options,
+    );
   }
 
   /**
@@ -2024,36 +1735,18 @@ class ProductsStore {
     purchaseId: string,
     updates: Partial<Purchases>,
   ): Promise<void> {
-    if (isDemoEvent(this.#currentEventId)) {
-      return await this.updatePurchaseLocal(purchaseId, updates);
-    } else {
-      await updatePurchase(
-        purchaseId,
-        updates as Parameters<typeof updatePurchase>[1],
-      );
-    }
+    await updatePurchase(
+      purchaseId,
+      updates as Parameters<typeof updatePurchase>[1],
+    );
   }
 
   /**
    * Supprime un purchase (pseudo-suppression via status: 'deleted')
    */
   async deletePurchase(purchaseId: string): Promise<void> {
-    if (isDemoEvent(this.#currentEventId)) {
-      return await this.deletePurchaseLocal(purchaseId);
-    } else {
-      // Optimistic update : on applique localement immédiatement pour la réactivité
-      try {
-        await this.deletePurchaseLocal(purchaseId);
-      } catch (err) {
-        console.warn(
-          "[ProductsStore] Optimistic delete failed or purchase not found locally:",
-          err,
-        );
-      }
-
-      // Pseudo-suppression : on met à jour le statut au lieu de supprimer physiquement
-      await updatePurchase(purchaseId, { status: "deleted" });
-    }
+    // Pseudo-suppression : on met à jour le statut au lieu de supprimer physiquement
+    await updatePurchase(purchaseId, { status: "deleted" });
   }
 
   /**
@@ -2069,17 +1762,12 @@ class ProductsStore {
     store?: string;
     stockReel?: string;
   }): Promise<string> {
-    if (isDemoEvent(this.#currentEventId)) {
-      return await this.createProductLocal(productData);
-    } else {
-      // Mode normal : utiliser le service Appwrite
-      const newProduct = await upsertProduct(
-        crypto.randomUUID(),
-        productData,
-        (id) => this.getEnrichedProductById(id),
-      );
-      return newProduct.$id;
-    }
+    const newProduct = await upsertProduct(
+      crypto.randomUUID(),
+      productData,
+      (id) => this.getEnrichedProductById(id),
+    );
+    return newProduct.$id;
   }
 
   /**
@@ -2091,47 +1779,33 @@ class ProductsStore {
     productId: string,
     updates: Partial<EnrichedProduct>,
   ): Promise<void> {
-    if (isDemoEvent(this.#currentEventId)) {
-      return await this.updateProductLocal(productId, updates);
+    // Vérifier si le produit est synchronisé avec Appwrite
+    const enrichedProduct = this.getEnrichedProductById(productId);
+    if (enrichedProduct && !enrichedProduct.isSynced) {
+      // Produit local uniquement : créer sur Appwrite via upsert
+      await upsertProduct(productId, updates, (id: string) =>
+        this.getEnrichedProductById(id),
+      );
     } else {
-      // Vérifier si le produit est synchronisé avec Appwrite
-      const enrichedProduct = this.getEnrichedProductById(productId);
-      if (enrichedProduct && !enrichedProduct.isSynced) {
-        // Produit local uniquement : créer sur Appwrite via upsert
-        await upsertProduct(productId, updates, (id: string) =>
-          this.getEnrichedProductById(id),
-        );
-      } else {
-        // Produit déjà synchronisé : update normal
-        await updateProductAppwrite(productId, updates);
-      }
+      // Produit déjà synchronisé : update normal
+      await updateProductAppwrite(productId, updates);
     }
   }
 
   /**
-   * Met à jour un produit en batch (avec détection automatique du mode)
-   * En mode normal : utilise la cloud function optimisée
-   * En mode local : boucle d'appels à updateProductLocal
+   * Met à jour un produit en batch
+   * Utilise la cloud function optimisée
    */
   async updateProductBatch(
     productId: string,
     updates: Partial<EnrichedProduct>,
     callback?: (id: string) => EnrichedProduct | undefined,
   ): Promise<void> {
-    if (isDemoEvent(this.#currentEventId)) {
-      // Mode local : boucle d'appels à #updateProductLocal
-      for (const [key, value] of Object.entries(updates)) {
-        await this.updateProductLocal(productId, { [key]: value });
-      }
-    } else {
-      // Mode normal : appel batch Appwrite (cloud function optimisée)
-
-      await updateProductBatch(
-        productId,
-        updates,
-        callback || ((id) => this.getEnrichedProductById(id)),
-      );
-    }
+    await updateProductBatch(
+      productId,
+      updates,
+      callback || ((id) => this.getEnrichedProductById(id)),
+    );
   }
 
   // =========================================================================
@@ -2148,59 +1822,12 @@ class ProductsStore {
     updateType: "who" | "store",
     updateData: { names?: string[] } | StoreInfo,
   ): Promise<BatchUpdateResult> {
-    if (isDemoEvent(this.#currentEventId)) {
-      return await this.#batchUpdateProductsLocal(
-        productIds,
-        updateType,
-        updateData,
-      );
-    } else {
-      return await batchUpdateProductsOptimized(
-        productIds,
-        products,
-        updateType,
-        updateData,
-      );
-    }
-  }
-
-  /**
-   * Met à jour plusieurs produits en mode local
-   */
-  async #batchUpdateProductsLocal(
-    productIds: string[],
-    updateType: "who" | "store",
-    updateData: { names?: string[] } | StoreInfo,
-  ): Promise<BatchUpdateResult> {
-    try {
-      let updatedCount = 0;
-
-      for (const productId of productIds) {
-        if (updateType === "who") {
-          const whoList = (updateData as { names?: string[] }).names || [];
-          await this.updateProductLocal(productId, { who: whoList });
-        } else if (updateType === "store") {
-          const storeInfo = updateData as StoreInfo;
-          await this.updateProductLocal(productId, { storeInfo });
-        }
-        updatedCount++;
-      }
-
-      return {
-        success: true,
-        updatedCount,
-        updateType,
-        timestamp: new Date().toISOString(),
-      };
-    } catch (error) {
-      return {
-        success: false,
-        updatedCount: 0,
-        updateType,
-        error: error instanceof Error ? error.message : "Erreur inconnue",
-        timestamp: new Date().toISOString(),
-      };
-    }
+    return await batchUpdateProductsOptimized(
+      productIds,
+      products,
+      updateType,
+      updateData,
+    );
   }
 
   /**
@@ -2223,82 +1850,13 @@ class ProductsStore {
       purchaseDeliveryDate?: string | null;
     },
   ): Promise<GroupPurchaseBatchResult> {
-    if (isDemoEvent(this.#currentEventId)) {
-      return await this.#createGroupPurchaseLocal(productsData, invoiceData);
-    } else {
-      const { createGroupPurchaseWithSync } =
-        await import("../services/appwrite-transaction");
-      return await createGroupPurchaseWithSync(
-        this.#currentMainId!,
-        productsData,
-        invoiceData,
-      );
-    }
-  }
-
-  /**
-   * Crée des achats groupés en mode local
-   */
-  async #createGroupPurchaseLocal(
-    productsData: Array<{
-      productId: string;
-      isSynced: boolean;
-      missingQuantities: Array<{ q: number; u: string }>;
-    }>,
-    invoiceData: {
-      invoiceId: string;
-      invoiceTotal?: number;
-      store?: string;
-      notes?: string;
-      who?: string;
-      purchaseStatus?: string | null;
-      purchaseDeliveryDate?: string | null;
-    },
-  ): Promise<GroupPurchaseBatchResult> {
-    try {
-      if (!productsData?.length) {
-        return {
-          success: false,
-          results: [],
-          totalProductsCreated: 0,
-          totalPurchasesCreated: 0,
-          totalExpensesCreated: 0,
-          error: "Aucun produit à traiter",
-        };
-      }
-
-      let totalPurchasesCreated = 0;
-
-      for (const productData of productsData) {
-        await this.createPurchaseLocal(
-          productData.productId,
-          productData.missingQuantities,
-          {
-            invoiceId: invoiceData.invoiceId,
-            notes: invoiceData.notes,
-            store: invoiceData.store,
-          },
-        );
-        totalPurchasesCreated++;
-      }
-
-      return {
-        success: true,
-        results: [],
-        totalProductsCreated: productsData.length,
-        totalPurchasesCreated,
-        totalExpensesCreated: 0,
-      };
-    } catch (error) {
-      return {
-        success: false,
-        results: [],
-        totalProductsCreated: 0,
-        totalPurchasesCreated: 0,
-        totalExpensesCreated: 0,
-        error: error instanceof Error ? error.message : "Erreur inconnue",
-      };
-    }
+    const { createGroupPurchaseWithSync } =
+      await import("../services/appwrite-transaction");
+    return await createGroupPurchaseWithSync(
+      this.#currentMainId!,
+      productsData,
+      invoiceData,
+    );
   }
 
   destroy() {
@@ -2316,13 +1874,6 @@ class ProductsStore {
   // =========================================================================
 
   async #loadOrphanPurchases() {
-    // 🔥 MODE LOCAL: Skip Appwrite
-    if (isDemoEvent(this.#currentEventId)) {
-      console.log("[ProductsStore] Mode local: skip loadOrphanPurchases");
-      return;
-    }
-
-    // Mode normal (existing code)
     if (!this.#currentMainId) return;
 
     try {

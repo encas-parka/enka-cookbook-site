@@ -1,12 +1,10 @@
 <script lang="ts">
-  import { DEMO_EVENT_ID } from "$lib/data/demo-event-config";
   import { navigate } from "$lib/router";
   import { ArrowDown, ArrowRight, ChefHat } from "@lucide/svelte";
   import { cubicInOut } from "svelte/easing";
   import { scrollY } from "svelte/reactivity/window";
   import { fly } from "svelte/transition";
   import EmailVerificationAlert from "../components/ui/EmailVerificationAlert.svelte";
-  import { toastService } from "../services/toast.service.svelte";
   import { globalState } from "../stores/GlobalState.svelte";
 
   function openAuthModal() {
@@ -33,24 +31,6 @@
     };
   }
 
-  let isDemoLoading = $state(false);
-
-  async function handleDemoEvent() {
-    try {
-      const toastId = toastService.loading("Chargement de la démo...");
-      isDemoLoading = true;
-
-      // Le guard eventGuard s'occupe de l'initialisation du store
-      toastService.dismiss(toastId);
-      navigate(`/event/${DEMO_EVENT_ID}`);
-    } catch (error) {
-      console.error("[HomePage] Erreur chargement démo:", error);
-      toastService.error("Erreur lors du chargement de la démo");
-    } finally {
-      isDemoLoading = false;
-    }
-  }
-
   import { navBarStore } from "$lib/stores/NavBarStore.svelte";
   import { onMount } from "svelte";
   import InstallButton from "../components/ui/InstallButton.svelte";
@@ -66,8 +46,6 @@
       description:
         "Élaborez des menus sur plusieurs jours et organisez-vous en équipes",
       screenshot: "/images/home/events.webp",
-      buttonText: "Voir la démo",
-      buttonAction: handleDemoEvent,
       theme: "secondary" as const,
     },
     {
@@ -290,17 +268,6 @@
     <div
       class="to-neutral/20 from-base-100 sticky top-10 flex min-h-screen flex-col items-center justify-center bg-linear-to-l px-4 pb-10"
     >
-      <!-- <button
-        class="btn btn-lg btn-accent mb-10 w-fit"
-        onclick={handleDemoEvent}
-      >
-        {#if isDemoLoading}
-          <span class="loading loading-spinner"> </span>
-        {:else}
-          <Eye size={24} />
-        {/if}
-        Voir la démo d'événement
-      </button> -->
       <div
         class="grid w-full grid-cols-1 items-center gap-12 lg:grid-cols-5 lg:gap-16"
       >
@@ -435,27 +402,6 @@
                       </li>
                     {/each}
                   </ul>
-                {/if}
-
-                {#if feature.buttonText}
-                  <!-- Bouton avec dernier délai -->
-                  <div
-                    class="mt-8"
-                    style="
-                        opacity: {isActive ? 1 : 0};
-                        transform: translateY({isActive
-                      ? 0
-                      : 15}px) scale({isActive ? 1 : 0.95});
-                        transition: opacity 500ms ease-out {getElementDelay(
-                      feature.items ? 4 : 3,
-                      isActive,
-                    )}ms,
-                                    transform 500ms ease-out {getElementDelay(
-                      feature.items ? 4 : 3,
-                      isActive,
-                    )}ms;
-                      "
-                  ></div>
                 {/if}
               </div>
             </div>

@@ -10,7 +10,6 @@
   import { globalState } from "$lib/stores/GlobalState.svelte";
   import type { EventMeal, EventMealRecipe } from "$lib/types/events";
   import type { RecettesTypeR } from "$lib/types/recipes.types";
-  import { isDemoEvent } from "$lib/data/demo-event-config";
 
   import {
     Calendar,
@@ -153,8 +152,6 @@
 
   /**
    * Démarre le mode édition en acquérant le verrou.
-   * Mode démo : active isEditing sans verrou.
-   * Mode normal : acquiert le verrou puis active isEditing.
    */
   async function startEditing(): Promise<boolean> {
     if (isEditing) return true; // Déjà en édition
@@ -166,13 +163,7 @@
       return false;
     }
 
-    // Mode démo : activer directement l'édition (pas de lock)
-    if (currentEvent && isDemoEvent(currentEvent.$id)) {
-      isEditing = true;
-      return true;
-    }
-
-    // Mode normal : acquérir le verrou
+    // Acquérir le verrou
     const success = await acquireLock();
     if (success) {
       isEditing = true; // ✅ Activer le mode édition après acquisition du lock
@@ -204,13 +195,11 @@
   });
 
   const canEdit = $derived(
-    // ✅ Mode démo : toujours éditable
-    (currentEvent && isDemoEvent(currentEvent.$id)) ||
-      // Mode normal : vérifier les permissions + en ligne
-      (!!online.current &&
-        eventsStore.canUserEditEvent(eventId, globalState.userId || "") &&
-        !isLockedByOthers &&
-        !isBusy),
+    // Mode normal : vérifier les permissions + en ligne
+    !!online.current &&
+      eventsStore.canUserEditEvent(eventId, globalState.userId || "") &&
+      !isLockedByOthers &&
+      !isBusy,
   );
 
   const lockedByUserName = $derived(
@@ -259,7 +248,6 @@
       //   newEventName: eventName,
       //   oldMealsCount,
       //   newMealsCount: meals.length,
-      //   isDemo: isDemoEvent(currentEvent.$id),
       // });
     });
   });
@@ -325,13 +313,7 @@
 
       isInitialised = true;
 
-      // 🔥 Mode démo: pas de lock
-      if (isDemoEvent(event.$id)) {
-        console.log("[Init] Mode démo: prêt");
-        return;
-      }
-
-      // Mode normal: charger le lock en arrière-plan (non-bloquant)
+      // Charger le lock en arrière-plan (non-bloquant)
       isBusy = true;
       try {
         activeLock = await locksService.getLock(eventId);
@@ -396,12 +378,6 @@
   // ============================================================================
 
   async function acquireLock(): Promise<boolean> {
-    // Mode démo : ne rien faire (géré par startEditing)
-    if (currentEvent && isDemoEvent(currentEvent.$id)) {
-      console.log("[acquireLock] Mode démo : pas de lock à acquérir");
-      return true;
-    }
-
     if (!eventId || !globalState.userId || isBusy || isAcquiringLock)
       return false;
 
@@ -433,14 +409,6 @@
   }
 
   async function releaseLock(): Promise<void> {
-    // Mode démo : juste désactiver le mode édition
-    if (currentEvent && isDemoEvent(currentEvent.$id)) {
-      console.log("[releaseLock] Mode démo : désactivation de isEditing");
-      isEditing = false;
-      return;
-    }
-
-    // Mode normal : libérer le vrai verrou
     if (!eventId || !globalState.userId) return;
 
     try {
@@ -1170,22 +1138,6 @@
       <!-- Colonne Gauche : Infos & Permissions -->
       <div class="space-y-6 lg:col-span-1">
         <!-- Permissions -->
-        {#if currentEvent && isDemoEvent(currentEvent.$id)}
-          <!-- Mode démo : Message informatif -->
-          <Fieldset legend="Participants" iconComponent={Users}>
-            <div class="alert alert-info">
-              <Info class="h-5 w-5" />
-              <div>
-                <h4 class="font-bold">Mode Démonstration</h4>
-                <p class="text-sm">
-                  Dans un véritable événement, vous pourrez inviter des équipes
-                  et des participants à collaborer sur la planification.
-                </p>
-              </div>
-            </div>
-          </Fieldset>
-        {:else}
-          <!-- Mode normal : PermissionsManager -->
           <PermissionsManager
             {canEdit}
             {contributors}
@@ -1196,7 +1148,6 @@
             {eventId}
             onStartEdit={startEditing}
           />
-        {/if}
 
         <!-- Documents liés à l'événement -->
         {#if currentEvent}

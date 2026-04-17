@@ -8,7 +8,6 @@
   import { toastService } from "$lib/services/toast.service.svelte";
   import { route } from "$lib/router";
   import { getContributors } from "$lib/utils/event-stats-helpers";
-  import { isDemoEvent } from "$lib/data/demo-event-config";
   import EventTodoList from "$lib/components/eventTodo/EventTodoList.svelte";
   import { ListTodo } from "@lucide/svelte";
   import { online } from "svelte/reactivity/window";
@@ -24,10 +23,9 @@
 
   // Permissions
   const canEdit = $derived(
-    (currentEvent && isDemoEvent(currentEvent.$id)) ||
-      (online.current &&
-        eventsStore.canUserEditEvent(eventId || "", globalState.userId || "") &&
-        currentEvent?.status !== "canceled"),
+    online.current &&
+      eventsStore.canUserEditEvent(eventId || "", globalState.userId || "") &&
+      currentEvent?.status !== "canceled",
   );
 
   // Unique taskOn types in event todos

@@ -55,7 +55,6 @@
 
   import BadgeEventStatus from "../components/ui/BadgeEventStatus.svelte";
   import InfoCollapse from "../components/ui/InfoCollapse.svelte";
-  import { isDemoEvent } from "../data/demo-event-config";
   import { online } from "svelte/reactivity/window";
   import { shareOrDownload } from "$lib/utils/share-utils";
 
@@ -285,10 +284,9 @@
    * Même logique que EventEditPage
    */
   const canEdit = $derived(
-    (currentEvent && isDemoEvent(currentEvent.$id)) ||
-      (online.current &&
-        eventsStore.canUserEditEvent(eventId || "", globalState.userId || "") &&
-        currentEvent?.status !== "canceled"),
+    online.current &&
+      eventsStore.canUserEditEvent(eventId || "", globalState.userId || "") &&
+      currentEvent?.status !== "canceled",
   );
 
   /**

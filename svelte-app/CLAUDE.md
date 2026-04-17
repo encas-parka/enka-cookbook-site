@@ -354,15 +354,6 @@ The Vite dev server proxies requests to Hugo:
 - `/icons/*` → Hugo icons
 - `/images/*` → Hugo images
 
-## Local/Demo Mode
-
-The application supports **local event mode** for demo/testing without authentication:
-
-- Events with `status="local"` can be accessed via `/event/:id` routes
-- Protected by `eventGuard` which initializes store in public mode
-- Allows full event editing without being logged in
-- Useful for on-site event management and demonstrations
-
 ## Important Notes
 
 - **Always use reactive derived values** - Never copy store data, use `$derived()` for automatic updates

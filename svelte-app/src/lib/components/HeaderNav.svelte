@@ -102,15 +102,6 @@
       };
     }
 
-    // Routes demo: /demo/event/:id, /demo/event/recipes, etc.
-    if (pathname.includes("/demo/event/") && params.id) {
-      return {
-        type: "eventEdit",
-        basePath: "/demo/event",
-        eventId: params.id as string,
-      };
-    }
-
     // Routes matériel: /dashboard/materiel/:teamId
     if (pathname.includes("/dashboard/materiel/") && params.teamId) {
       return {

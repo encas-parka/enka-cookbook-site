@@ -1,43 +1,28 @@
-/**
- * Store pour les documents d'équipe (Teamdocs)
- * Pattern MaterielStore avec SvelteMap, IDB cache, Realtime
- */
-
-import { SvelteMap } from "svelte/reactivity";
+import { Permission, Role } from "appwrite";
 import type { Teamdocs } from "$lib/types/appwrite.d";
-import {
-  listDocuments,
-  createDocument as createDocumentAppwrite,
-  createEventDocument as createEventDocumentAppwrite,
-  updateDocument as updateDocumentAppwrite,
-  deleteDocument as deleteDocumentAppwrite,
-  updateDocumentLock,
-  TEAMDOCS_COLLECTION_ID,
-} from "$lib/services/appwrite-teamdocs";
 import { globalState } from "./GlobalState.svelte";
-import { realtimeManager } from "./RealtimeManager.svelte";
-import { getDatabaseId } from "$lib/services/appwrite";
+import { createSyncCollection, bridgeToMap, db } from "$lib/db-sync/aw-sync";
 
 export interface EnrichedTeamdoc extends Omit<Teamdocs, "lockedBy"> {
   lockedBy: string | null;
 }
 
 export class TeamdocsStore {
-  // État réactif
-  #documents = new SvelteMap<string, EnrichedTeamdoc>();
-  #teamTags = new SvelteMap<string, string[]>(); // teamId -> tags[]
+  #collection = createSyncCollection<Teamdocs>({
+    table: db.teamdocs,
+    collectionName: "teamdocs",
+  });
+
+  #bridge = bridgeToMap<Teamdocs>(() => db.teamdocs.toArray());
+  #documents = this.#bridge.map;
+
   #loading = $state(false);
   #error = $state<string | null>(null);
   #isInitialized = $state(false);
   #isRealtimeActive = $state(false);
   #realtimeInitialized = false;
-  #lastSync = $state<string | null>(null);
-  #realtimeCleanup: (() => void) | null = null;
-
-  // Promise d'initialisation en cours pour déduplication
   #initPromise: Promise<void> | null = null;
 
-  // Getters simples
   get loading() {
     return this.#loading;
   }
@@ -54,38 +39,29 @@ export class TeamdocsStore {
     return this.#documents.size;
   }
 
-  // Propriétés réactives ($derived)
   #documentsList = $derived(Array.from(this.#documents.values()));
   get documents() {
     return this.#documentsList;
   }
 
   // =============================================================================
-  // FILTRAGE PAR TEAM
+  // FILTRAGE
   // =============================================================================
 
-  /**
-   * Récupère les documents d'une équipe spécifique
-   * Filtrage côté client (Appwrite renvoie tous les docs accessibles)
-   */
   getTeamDocuments(teamId: string): EnrichedTeamdoc[] {
     return this.#documentsList.filter((doc) => doc.teamId === teamId);
   }
 
-  /**
-   * Récupère les tags utilisés par une équipe
-   */
   getTeamTags(teamId: string): string[] {
-    return this.#teamTags.get(teamId) || [];
+    const tags = new Set<string>();
+    for (const doc of this.#documentsList) {
+      if (doc.teamId === teamId && doc.tags) {
+        for (const tag of doc.tags) tags.add(tag);
+      }
+    }
+    return Array.from(tags).sort();
   }
 
-  // =============================================================================
-  // FILTRAGE PAR EVENT
-  // =============================================================================
-
-  /**
-   * Récupère les documents liés à un événement
-   */
   getEventDocuments(eventId: string): EnrichedTeamdoc[] {
     return this.#documentsList.filter((doc) => doc.eventId === eventId);
   }
@@ -94,10 +70,6 @@ export class TeamdocsStore {
   // INITIALISATION (3 PHASES)
   // =============================================================================
 
-  /**
-   * Phase 1 : Charge le cache IndexedDB
-   * Pour l'instant, pas de cache IDB — on initialise simplement l'état.
-   */
   async loadCache(): Promise<void> {
     if (this.#isInitialized) return;
 
@@ -105,14 +77,12 @@ export class TeamdocsStore {
     this.#error = null;
 
     try {
-      // Pas de userId = pas de données à charger, mais on ne bloque pas
       if (!globalState.userId) {
         console.log("[TeamdocsStore] Pas de userId, cache vide");
         return;
       }
 
-      // TODO: Implémenter IDB cache si nécessaire
-      console.log("[TeamdocsStore] Cache chargé (sans IDB)");
+      console.log("[TeamdocsStore] Cache chargé (Dexie)");
     } catch (err) {
       this.#error =
         err instanceof Error ? err.message : "Erreur de chargement du cache";
@@ -123,9 +93,6 @@ export class TeamdocsStore {
     }
   }
 
-  /**
-   * Phase 2 : Synchronise avec Appwrite
-   */
   async syncFromRemote(): Promise<void> {
     if (!globalState.userId) {
       console.log("[TeamdocsStore] Pas de userId, skip syncFromRemote");
@@ -136,18 +103,8 @@ export class TeamdocsStore {
     this.#error = null;
 
     try {
-      // Récupérer tous les documents accessibles
-      const docs = await listDocuments();
+      await this.#collection.initialFetch();
 
-      // Enrichir et stocker
-      for (const doc of docs) {
-        this.#documents.set(doc.$id, doc);
-      }
-
-      // Mettre à jour les tags par équipe
-      this.#updateTeamTagsFromDocuments();
-
-      this.#lastSync = new Date().toISOString();
       console.log(
         `[TeamdocsStore] Sync terminé : ${this.#documents.size} documents`,
       );
@@ -161,32 +118,18 @@ export class TeamdocsStore {
     }
   }
 
-  /**
-   * Phase 3 : Configure les abonnements realtime
-   */
   async setupRealtime(): Promise<void> {
-    // ✅ Pas de realtime pour les visiteurs
     if (!globalState.isAuthenticated) {
       return;
     }
 
-    // Vérifier si déjà configuré pour éviter les doublons
-    // ✅ SAUF si le RealtimeManager a été détruit (changement auth)
-    if (this.#realtimeInitialized && realtimeManager.isInitialized) {
+    if (this.#realtimeInitialized) {
       console.log("[TeamdocsStore] Realtime déjà configuré");
       return;
     }
 
-    // Réinitialiser le flag si le RealtimeManager a été détruit
-    if (this.#realtimeInitialized && !realtimeManager.isInitialized) {
-      console.log(
-        "[TeamdocsStore] RealtimeManager détruit, réinitialisation...",
-      );
-      this.#realtimeInitialized = false;
-    }
-
     try {
-      await this.#setupRealtime();
+      this.#collection.subscribe();
       this.#isRealtimeActive = true;
       this.#realtimeInitialized = true;
       console.log("[TeamdocsStore] Realtime configuré");
@@ -198,10 +141,6 @@ export class TeamdocsStore {
     }
   }
 
-  /**
-   * Initialise les 3 phases séquentiellement
-   * Déduplication via #initPromise pour éviter les appels concurrents
-   */
   async initialize(): Promise<void> {
     if (this.#isInitialized) {
       console.log("[TeamdocsStore] Déjà initialisé");
@@ -241,58 +180,9 @@ export class TeamdocsStore {
   }
 
   // =============================================================================
-  // REALTIME
+  // CRUD
   // =============================================================================
 
-  async #setupRealtime(): Promise<void> {
-    const DB_ID = getDatabaseId();
-    const channels = [
-      `databases.${DB_ID}.collections.${TEAMDOCS_COLLECTION_ID}.documents`,
-    ];
-
-    realtimeManager.register(channels, async (response) => {
-      await this.#handleDocumentRealtime(response);
-    });
-
-    // Le cleanup est géré par le RealtimeManager via destroy()
-    this.#realtimeCleanup = null;
-  }
-
-  async #handleDocumentRealtime(payload: any): Promise<void> {
-    const { events, payload: docPayload } = payload;
-
-    const eventType = events?.some((e: string) => e.includes(".create"))
-      ? "create"
-      : events?.some((e: string) => e.includes(".delete"))
-        ? "delete"
-        : "update";
-
-    const doc = docPayload as Teamdocs;
-
-    if (eventType === "create" || eventType === "update") {
-      if (doc) {
-        this.#documents.set(doc.$id, doc);
-        this.#updateTeamTagsFromDocuments();
-        this.#lastSync = new Date().toISOString();
-        console.log(`[TeamdocsStore] Document ${eventType} : ${doc.$id}`);
-      }
-    } else if (eventType === "delete") {
-      if (doc?.$id) {
-        this.#documents.delete(doc.$id);
-        this.#updateTeamTagsFromDocuments();
-        this.#lastSync = new Date().toISOString();
-        console.log(`[TeamdocsStore] Document supprimé : ${doc.$id}`);
-      }
-    }
-  }
-
-  // =============================================================================
-  // CRUD OPERATIONS
-  // =============================================================================
-
-  /**
-   * Crée un nouveau document
-   */
   async createDocument(
     data: Partial<Teamdocs>,
     teamId: string,
@@ -301,26 +191,23 @@ export class TeamdocsStore {
       throw new Error("Utilisateur non connecté");
     }
 
-    const doc = await createDocumentAppwrite(
-      data,
-      teamId,
-      globalState.userId,
-      globalState.userName,
+    const doc = await this.#collection.create(
+      {
+        ...data,
+        teamId,
+        createdBy: globalState.userId,
+      } as Omit<Teamdocs, "$id" | "$createdAt" | "$updatedAt">,
+      [
+        Permission.read(Role.team(teamId)),
+        Permission.update(Role.team(teamId)),
+        Permission.delete(Role.team(teamId)),
+      ],
     );
-
-    // Enrichir et stocker
-    this.#documents.set(doc.$id, doc);
-
-    // Mettre à jour les tags
-    this.#updateTeamTagsFromDocuments();
 
     console.log(`[TeamdocsStore] Document créé : ${doc.$id}`);
     return doc;
   }
 
-  /**
-   * Crée un nouveau document lié à un événement
-   */
   async createEventDocument(
     data: Partial<Teamdocs>,
     eventId: string,
@@ -329,54 +216,36 @@ export class TeamdocsStore {
       throw new Error("Utilisateur non connecté");
     }
 
-    const doc = await createEventDocumentAppwrite(
-      data,
-      eventId,
-      globalState.userId,
+    const doc = await this.#collection.create(
+      {
+        ...data,
+        eventId,
+        status: "doc",
+      } as Omit<Teamdocs, "$id" | "$createdAt" | "$updatedAt">,
+      [
+        Permission.read(Role.label(eventId)),
+        Permission.update(Role.label(eventId)),
+        Permission.delete(Role.label(eventId)),
+      ],
     );
-
-    this.#documents.set(doc.$id, doc);
 
     console.log(`[TeamdocsStore] Document événement créé : ${doc.$id}`);
     return doc;
   }
 
-  /**
-   * Met à jour un document
-   */
   async updateDocument(id: string, data: Partial<Teamdocs>): Promise<Teamdocs> {
-    const doc = await updateDocumentAppwrite(id, data);
-
-    // Enrichir et stocker
-    this.#documents.set(id, doc);
-
-    // Mettre à jour les tags si nécessaire
-    if (data.tags) {
-      this.#updateTeamTagsFromDocuments();
-    }
+    const doc = await this.#collection.update(id, data);
 
     console.log(`[TeamdocsStore] Document mis à jour : ${id}`);
     return doc;
   }
 
-  /**
-   * Supprime un document
-   */
   async deleteDocument(id: string): Promise<void> {
-    await deleteDocumentAppwrite(id);
-
-    // Supprimer du store
-    this.#documents.delete(id);
-
-    // Mettre à jour les tags
-    this.#updateTeamTagsFromDocuments();
+    await this.#collection.remove(id);
 
     console.log(`[TeamdocsStore] Document supprimé : ${id}`);
   }
 
-  /**
-   * Récupère un document par ID
-   */
   getDocumentById(id: string): EnrichedTeamdoc | undefined {
     return this.#documents.get(id);
   }
@@ -385,13 +254,6 @@ export class TeamdocsStore {
   // LOCK MANAGEMENT
   // =============================================================================
 
-  /**
-   * Met à jour le lock d'un document
-   * Le lock est stocké dans les champs lockedBy et lockedByName du document
-   * @param docId - ID du document
-   * @param lockedBy - userId pour verrouiller, null pour libérer
-   * @param lockedByName - nom du détenteur, null pour libérer
-   */
   async updateDocumentLock(
     docId: string,
     lockedBy: string | null,
@@ -400,13 +262,10 @@ export class TeamdocsStore {
     if (!globalState.userId) return;
 
     try {
-      await updateDocumentLock(docId, lockedBy, lockedByName);
-
-      // Mise à jour locale immédiate pour UX (le realtime synchronisera les autres)
-      const currentDoc = this.#documents.get(docId);
-      if (currentDoc) {
-        this.#documents.set(docId, { ...currentDoc, lockedBy, lockedByName });
-      }
+      await this.#collection.update(docId, {
+        lockedBy,
+        lockedByName,
+      } as Partial<Teamdocs>);
 
       console.log(
         `[TeamdocsStore] Verrou ${docId} mis à jour: ${lockedBy || "libéré"}`,
@@ -418,52 +277,14 @@ export class TeamdocsStore {
   }
 
   // =============================================================================
-  // TAGS MANAGEMENT
-  // =============================================================================
-
-  /**
-   * Met à jour les tags par équipe à partir des documents
-   * Méthode synchrone — aucun await nécessaire
-   */
-  #updateTeamTagsFromDocuments(): void {
-    // Grouper les tags par équipe
-    const tagsByTeam = new Map<string, Set<string>>();
-
-    for (const doc of this.#documentsList) {
-      const teamId = doc.teamId;
-      if (!teamId) continue;
-      if (!tagsByTeam.has(teamId)) {
-        tagsByTeam.set(teamId, new Set());
-      }
-
-      if (doc.tags) {
-        doc.tags.forEach((tag) => {
-          tagsByTeam.get(teamId)!.add(tag);
-        });
-      }
-    }
-
-    // Mettre à jour le SvelteMap
-    tagsByTeam.forEach((tags, teamId) => {
-      this.#teamTags.set(teamId, Array.from(tags).sort());
-    });
-
-    console.log(
-      `[TeamdocsStore] Tags mis à jour pour ${tagsByTeam.size} équipes`,
-    );
-  }
-
-  // =============================================================================
   // CLEANUP
   // =============================================================================
 
   destroy(): void {
-    if (this.#realtimeCleanup) {
-      this.#realtimeCleanup();
-      this.#realtimeCleanup = null;
-    }
-    this.#documents.clear();
-    this.#teamTags.clear();
+    this.#collection.unsubscribeAll();
+    this.#collection.clearLocal().catch((err) =>
+      console.warn("[TeamdocsStore] Error clearing local data:", err),
+    );
     this.#isInitialized = false;
     this.#isRealtimeActive = false;
     this.#realtimeInitialized = false;
@@ -473,15 +294,10 @@ export class TeamdocsStore {
     console.log("[TeamdocsStore] Store détruit");
   }
 
-  /**
-   * Réinitialise complètement le store (pour tests/debug)
-   */
   async hardReset(): Promise<void> {
     this.destroy();
-    this.#lastSync = null;
     console.log("[TeamdocsStore] Hard reset effectué");
   }
 }
 
-// Instance singleton
 export const teamdocsStore = new TeamdocsStore();

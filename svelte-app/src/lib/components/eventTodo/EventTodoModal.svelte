@@ -397,7 +397,7 @@
             <legend class="fieldset-legend flex items-center gap-2">
               <Clock class="size-4 opacity-50" /> Moment
             </legend>
-            <select class="select w-full" bind:value={taskOn}>
+            <select class="select" bind:value={taskOn}>
               <option value="beforeEvent">Avant l'événement</option>
               <option value="onEvent">Pendant l'événement</option>
               <option value="afterEvent">Après l'événement</option>

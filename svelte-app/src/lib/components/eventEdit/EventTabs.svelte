@@ -19,11 +19,7 @@
 </script>
 
 <div class="rounded-box bg-accent/10 px-2 py-1">
-  <div
-    class="tabs flex-wrap justify-center {globalState.isMobile
-      ? 'tabs-sm'
-      : ''}"
-  >
+  <div class="tabs flex-wrap justify-center">
     {#each allEventTabs as tab, i (tab.relativePath)}
       {@const Icon = tab.icon}
       <a
@@ -32,7 +28,7 @@
           : 'text-accent'}"
         href={getEventTabPath(tab, eventId, basePath)}
       >
-        <Icon class="me-1 {globalState.isMobile ? 'size-3' : 'size-4'}" />
+        <Icon class="me-1 size-4" />
         {tab.label}
       </a>
     {/each}

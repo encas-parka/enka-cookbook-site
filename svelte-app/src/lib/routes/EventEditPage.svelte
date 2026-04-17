@@ -1002,7 +1002,7 @@
   </div>
 {/snippet}
 
-<div class="bg-base-200 relative min-h-lvh overflow-x-hidden space-y-6 px-4 pt-4 pb-20 md:px-20">
+<div class="bg-base-200 relative min-h-lvh overflow-x-clip space-y-6 px-4 pt-4 pb-20 md:px-20">
   <div class="flex flex-wrap items-center justify-between gap-x-6 gap-y-3">
     <div class="min-w-80 flex-1 gap-2">
       {#if editingTitle}

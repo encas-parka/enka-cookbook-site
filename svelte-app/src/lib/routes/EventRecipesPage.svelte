@@ -42,6 +42,11 @@
   // Pour éviter les rechargements en boucle
   let isLoading = $state(false);
 
+  // Pagination progressive (lazy loading par meals)
+  let pageSize = $state(1);
+  let currentPage = $state(1);
+  let sentinel = $state<HTMLElement | undefined>();
+
   // État pour la recherche par ingrédient (un seul à la fois)
   let ingredientSearch = $state("");
 
@@ -121,6 +126,26 @@
       ),
     );
   });
+
+  // Meals qui contiennent au moins une recette correspondant au filtre ingrédient
+  const mealsWithIngredientMatch = $derived.by(() => {
+    if (!urlFilter.ingredient) return [];
+    return eventMeals.filter((meal) =>
+      meal.recipes.some((mr: any) =>
+        filteredRecipes.some((fr) => fr.$id === mr.recipeUuid),
+      ),
+    );
+  });
+
+  // Source de meals à paginer selon le mode actif
+  const mealsToPaginate = $derived(
+    urlFilter.ingredient ? mealsWithIngredientMatch : filteredMeals,
+  );
+
+  // Meals paginés pour le lazy loading
+  const paginatedMeals = $derived(
+    mealsToPaginate.slice(0, currentPage * pageSize),
+  );
 
   // Organisation des repas pour le sommaire (par date et moment, exclut les meals sans date)
   const mealsByDate = $derived.by(() => {
@@ -249,6 +274,33 @@
         scrollTo({ top: 0, behavior: "smooth" });
       });
     });
+  });
+
+  // Lazy loading avec Intersection Observer
+  $effect(() => {
+    if (!sentinel) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (
+          entries[0].isIntersecting &&
+          paginatedMeals.length < mealsToPaginate.length
+        ) {
+          currentPage++;
+        }
+      },
+      { threshold: 0.1, rootMargin: "150px" },
+    );
+
+    observer.observe(sentinel);
+    return () => observer.disconnect();
+  });
+
+  // Reset pagination quand les filtres changent
+  $effect(() => {
+    urlFilter;
+    mealsToPaginate;
+    currentPage = 1;
   });
 
   // ============================================================================
@@ -670,7 +722,7 @@
             </div>
           {:else}
             <div class="space-y-8 print:space-y-0">
-              {#each eventMeals as meal, mealIndex (meal.id || mealIndex)}
+              {#each paginatedMeals as meal, mealIndex (meal.id || mealIndex)}
                 {@const recipesMatchingSearch = meal.recipes.filter((mr: any) =>
                   filteredRecipes.some((fr) => fr.$id === mr.recipeUuid),
                 )}
@@ -738,7 +790,7 @@
             </div>
           {:else}
             <div class="space-y-10 print:space-y-0">
-              {#each filteredMeals as meal, mealIndex (meal.id || mealIndex)}
+              {#each paginatedMeals as meal, mealIndex (meal.id || mealIndex)}
                 {@const mealRecipesToDisplay = urlFilter.recipeUuid
                   ? meal.recipes.filter(
                       (mr: any) => mr.recipeUuid === urlFilter.recipeUuid,
@@ -804,6 +856,13 @@
               </button>
             {/if}
           {/if}
+        {/if}
+
+        <!-- Sentinelle pour lazy loading -->
+        {#if paginatedMeals.length < mealsToPaginate.length}
+          <div bind:this={sentinel} class="py-8 text-center print:hidden">
+            <span class="loading loading-spinner loading-md"></span>
+          </div>
         {/if}
 
         <!-- Message si pas de recettes du tout -->

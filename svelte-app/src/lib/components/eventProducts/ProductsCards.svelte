@@ -50,7 +50,14 @@
   const groupedFilteredProducts = $derived(
     productsStore.groupedFilteredProducts,
   );
+  const allGroupEntries = $derived(Object.entries(groupedFilteredProducts));
   const filters = productsStore.filters;
+
+  // Pagination progressive (lazy loading, 1 groupe à la fois)
+  let currentPage = $state(1);
+  let sentinel = $state<HTMLElement | undefined>();
+
+  const paginatedGroupEntries = $derived(allGroupEntries.slice(0, currentPage));
 
   const formatedStartDateRange = formatDateWdDayMonthShort(
     productsStore.dateStore.start,
@@ -107,6 +114,32 @@
       );
     });
   });
+
+  // Lazy loading : charger le groupe suivant quand la sentinelle est visible
+  $effect(() => {
+    if (!sentinel) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (
+          entries[0].isIntersecting &&
+          paginatedGroupEntries.length < allGroupEntries.length
+        ) {
+          currentPage++;
+        }
+      },
+      { threshold: 0.1, rootMargin: "200px" },
+    );
+
+    observer.observe(sentinel);
+    return () => observer.disconnect();
+  });
+
+  // Reset pagination quand les filtres/groupes changent
+  $effect(() => {
+    allGroupEntries;
+    currentPage = 1;
+  });
 </script>
 
 <div
@@ -114,7 +147,7 @@
     ? 'pointer-events-none opacity-60'
     : ''}"
 >
-  {#each Object.entries(groupedFilteredProducts) as [groupKey, gProducts], groupIndex (groupKey)}
+  {#each paginatedGroupEntries as [groupKey, gProducts], groupIndex (groupKey)}
     {@const groupProducts = gProducts}
     <!-- Conteneur du groupe observable pour IntersectionObserver -->
     <div bind:this={groupElements[groupIndex]}>
@@ -276,6 +309,13 @@
       </div>
     </div>
   {/each}
+
+  <!-- Sentinelle pour lazy loading -->
+  {#if paginatedGroupEntries.length < allGroupEntries.length}
+    <div bind:this={sentinel} class="py-8 text-center print:hidden">
+      <span class="loading loading-spinner loading-md"></span>
+    </div>
+  {/if}
 </div>
 
 <!-- Vue TABLEAU pour l'impression (Alternative compacte) -->
@@ -303,110 +343,115 @@
       {/if}
 
       <div class="overflow-x-auto">
-      <table class="table-compact table w-full border-collapse">
-        <thead>
-          <tr class="border-b border-gray-400 bg-gray-100 text-left">
-            <th class="w-1/12 border px-2 py-1">Check</th>
-            <th class="w-4/12 border px-2 py-1">Produit</th>
-            <th class="w-2/12 border px-2 py-1">Besoin</th>
-            {#if filters.groupBy === "store"}
-              <th class="w-3/12 border px-2 py-1">Qui / Type</th>
-            {:else}
-              <th class="w-3/12 border px-2 py-1">Store / Qui</th>
-            {/if}
-            <th class="w-2/12 border px-2 py-1 text-right">Acheté</th>
-          </tr>
-        </thead>
-        <tbody>
-          {#each groupProducts as productModel (productModel.data.$id)}
-            {@const product = productModel.data}
-            {@const productInDateRange = productModel.stats}
-            {@const consolidatedPurchases = formatPurchasesWithBadges(
-              product.purchases || [],
-            )}
-
-            <tr class="break-inside-avoid border-b border-gray-300">
-              <td class="border px-2 py-1 text-center">
-                <div class="mx-auto h-4 w-4 border border-gray-400"></div>
-              </td>
-              <td
-                class="border px-2 py-1 font-medium"
-                style="max-width: 200px;"
-              >
-                <div class="truncate">{product.productName}</div>
-                {#if product.previousNames && product.previousNames.length > 0}
-                  <span class="block truncate text-[9pt] font-normal opacity-60"
-                    >(Ancien: {product.previousNames[0]})</span
-                  >
-                {/if}
-              </td>
-              <td class="border px-2 py-1 text-sm font-bold text-nowrap">
-                {#if product.totalNeededOverrideParsed?.totalOverride}
-                  {product.totalNeededOverrideParsed.totalOverride.q}
-                  {product.totalNeededOverrideParsed.totalOverride.u}
-                {:else}
-                  {productInDateRange.formattedQuantities}
-                {/if}
-              </td>
-              <td class="border px-2 py-1 text-sm" style="max-width: 160px;">
-                {#if filters.groupBy === "store"}
-                  <!-- Si groupé par STORE, on montre WHO et TYPE -->
-                  <div class="flex items-baseline gap-1">
-                    {#if product.who?.length}
-                      <span
-                        class="truncate font-medium"
-                        style="max-width: 80px;"
-                        >{product.who
-                          .map((w) => (w.length > 8 ? w.slice(0, 8) + "…" : w))
-                          .join(", ")}</span
-                      >
-                    {/if}
-                    <span class="text-[9pt] text-nowrap opacity-70">
-                      {product.productType || "Autre"}
-                    </span>
-                  </div>
-                {:else}
-                  <!-- Sinon (groupé par TYPE ou aucun), on montre STORE et WHO -->
-                  <div class="flex items-baseline gap-1">
-                    {#if product.storeInfo?.storeName}
-                      <span
-                        class="truncate font-medium"
-                        style="max-width: 80px;"
-                      >
-                        {product.storeInfo.storeName}
-                      </span>
-                    {/if}
-                    {#if product.who?.length}
-                      <span
-                        class="truncate text-[9pt] opacity-70"
-                        style="max-width: 80px;"
-                      >
-                        {product.who
-                          .map((w) => (w.length > 8 ? w.slice(0, 8) + "…" : w))
-                          .join(", ")}
-                      </span>
-                    {/if}
-                  </div>
-                {/if}
-              </td>
-              <td class="border px-2 py-1 text-right text-sm text-nowrap">
-                {#if product.stockParsed}
-                  <span class="font-medium">
-                    📦 {product.stockParsed.quantity}
-                  </span>
-                {/if}
-                {#if consolidatedPurchases.length}
-                  <span
-                    >{consolidatedPurchases
-                      .map((p) => `${p.quantity} ${p.unit}`)
-                      .join(", ")}</span
-                  >
-                {/if}
-              </td>
+        <table class="table-compact table w-full border-collapse">
+          <thead>
+            <tr class="border-b border-gray-400 bg-gray-100 text-left">
+              <th class="w-1/12 border px-2 py-1">Check</th>
+              <th class="w-4/12 border px-2 py-1">Produit</th>
+              <th class="w-2/12 border px-2 py-1">Besoin</th>
+              {#if filters.groupBy === "store"}
+                <th class="w-3/12 border px-2 py-1">Qui / Type</th>
+              {:else}
+                <th class="w-3/12 border px-2 py-1">Store / Qui</th>
+              {/if}
+              <th class="w-2/12 border px-2 py-1 text-right">Acheté</th>
             </tr>
-          {/each}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {#each groupProducts as productModel (productModel.data.$id)}
+              {@const product = productModel.data}
+              {@const productInDateRange = productModel.stats}
+              {@const consolidatedPurchases = formatPurchasesWithBadges(
+                product.purchases || [],
+              )}
+
+              <tr class="break-inside-avoid border-b border-gray-300">
+                <td class="border px-2 py-1 text-center">
+                  <div class="mx-auto h-4 w-4 border border-gray-400"></div>
+                </td>
+                <td
+                  class="border px-2 py-1 font-medium"
+                  style="max-width: 200px;"
+                >
+                  <div class="truncate">{product.productName}</div>
+                  {#if product.previousNames && product.previousNames.length > 0}
+                    <span
+                      class="block truncate text-[9pt] font-normal opacity-60"
+                      >(Ancien: {product.previousNames[0]})</span
+                    >
+                  {/if}
+                </td>
+                <td class="border px-2 py-1 text-sm font-bold text-nowrap">
+                  {#if product.totalNeededOverrideParsed?.totalOverride}
+                    {product.totalNeededOverrideParsed.totalOverride.q}
+                    {product.totalNeededOverrideParsed.totalOverride.u}
+                  {:else}
+                    {productInDateRange.formattedQuantities}
+                  {/if}
+                </td>
+                <td class="border px-2 py-1 text-sm" style="max-width: 160px;">
+                  {#if filters.groupBy === "store"}
+                    <!-- Si groupé par STORE, on montre WHO et TYPE -->
+                    <div class="flex items-baseline gap-1">
+                      {#if product.who?.length}
+                        <span
+                          class="truncate font-medium"
+                          style="max-width: 80px;"
+                          >{product.who
+                            .map((w) =>
+                              w.length > 8 ? w.slice(0, 8) + "…" : w,
+                            )
+                            .join(", ")}</span
+                        >
+                      {/if}
+                      <span class="text-[9pt] text-nowrap opacity-70">
+                        {product.productType || "Autre"}
+                      </span>
+                    </div>
+                  {:else}
+                    <!-- Sinon (groupé par TYPE ou aucun), on montre STORE et WHO -->
+                    <div class="flex items-baseline gap-1">
+                      {#if product.storeInfo?.storeName}
+                        <span
+                          class="truncate font-medium"
+                          style="max-width: 80px;"
+                        >
+                          {product.storeInfo.storeName}
+                        </span>
+                      {/if}
+                      {#if product.who?.length}
+                        <span
+                          class="truncate text-[9pt] opacity-70"
+                          style="max-width: 80px;"
+                        >
+                          {product.who
+                            .map((w) =>
+                              w.length > 8 ? w.slice(0, 8) + "…" : w,
+                            )
+                            .join(", ")}
+                        </span>
+                      {/if}
+                    </div>
+                  {/if}
+                </td>
+                <td class="border px-2 py-1 text-right text-sm text-nowrap">
+                  {#if product.stockParsed}
+                    <span class="font-medium">
+                      📦 {product.stockParsed.quantity}
+                    </span>
+                  {/if}
+                  {#if consolidatedPurchases.length}
+                    <span
+                      >{consolidatedPurchases
+                        .map((p) => `${p.quantity} ${p.unit}`)
+                        .join(", ")}</span
+                    >
+                  {/if}
+                </td>
+              </tr>
+            {/each}
+          </tbody>
+        </table>
       </div>
     </div>
   {/each}

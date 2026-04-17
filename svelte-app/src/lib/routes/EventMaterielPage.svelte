@@ -4,12 +4,12 @@
     Plus,
     LoaderCircle,
     Package,
-    X,
     ListPlus,
-    ArrowDownToLine,
     Download,
     ClipboardCopy,
     ChevronDown,
+    Check,
+    X,
   } from "@lucide/svelte";
   import { eventsStore } from "$lib/stores/EventsStore.svelte";
   import { globalState } from "$lib/stores/GlobalState.svelte";
@@ -20,37 +20,37 @@
   import { materielStore } from "$lib/stores/MaterielStore.svelte";
   import { route } from "$lib/router";
   import EventMaterielCard from "$lib/components/eventMateriel/EventMaterielCard.svelte";
-  import EventMaterielForm from "$lib/components/eventMateriel/EventMaterielForm.svelte";
+  import EventMaterielGroupCard from "$lib/components/eventMateriel/EventMaterielGroupCard.svelte";
+  import EventMaterielAllocationForm from "$lib/components/eventMateriel/EventMaterielAllocationForm.svelte";
   import EventMaterielFilters, {
     type EventMaterielFiltersState,
   } from "$lib/components/eventMateriel/EventMaterielFilters.svelte";
-  import EditEventMaterielModal from "$lib/components/eventMateriel/EditEventMaterielModal.svelte";
+  import EventMaterielModal from "$lib/components/eventMateriel/EventMaterielModal.svelte";
   import QuickAddEventCatalogModal from "$lib/components/eventMateriel/QuickAddEventCatalogModal.svelte";
   import LeftPanel from "$lib/components/ui/LeftPanel.svelte";
   import ConfirmModal from "$lib/components/ui/ConfirmModal.svelte";
-  import MaterielSortControls from "$lib/components/eventMateriel/MaterielSortControls.svelte";
+  import ModalContainer from "$lib/components/ui/modal/ModalContainer.svelte";
+  import ModalHeader from "$lib/components/ui/modal/ModalHeader.svelte";
+  import ModalContent from "$lib/components/ui/modal/ModalContent.svelte";
+  import ModalFooter from "$lib/components/ui/modal/ModalFooter.svelte";
+  import EventMaterielControls, {
+    type ActiveBadge,
+  } from "$lib/components/eventMateriel/EventMaterielControls.svelte";
   import type { EventMateriel } from "$lib/types/appwrite";
   import type {
     CreateEventMaterielData,
-    UpdateEventMaterielData,
     EventMaterielFilters as EventMaterielFilterOptions,
     EventMaterielSort,
+    EventMaterielStatus,
+    MaterielGroup,
   } from "$lib/types/event-materiel.types";
   import { online } from "svelte/reactivity/window";
   import { isDemoEvent } from "$lib/data/demo-event-config";
   import { shareOrDownload, toSlug } from "$lib/utils/share-utils";
-
-  // Labels pour les types
-  const typeLabels: Record<string, string> = {
-    electronic: "Électronique",
-    manual: "Manuel",
-    other: "Autre",
-    tools: "Outils",
-    dish: "Vaisselle",
-    cooking: "Cuisine",
-    gaz: "Gaz",
-    hygiene: "Hygiène",
-  };
+  import {
+    getMaterielTypeConfig,
+    getEventMaterielStatusConfig,
+  } from "$lib/utils/materiel.utils";
 
   // Route params
   let eventId = $derived(route.params.id ?? "");
@@ -67,13 +67,20 @@
   );
 
   // UI State
-  let showForm = $state(false);
+  let materielModalOpen = $state(false);
+  let materielModalId = $state<string | null>(null);
   let catalogModalOpen = $state(false);
-  let editingItemId = $state<string | null>(null);
   let deleteTarget = $state<EventMateriel | null>(null);
   let editLoanId = $state<string | null>(null);
   let importLoanModalOpen = $state(false);
   let importTeamId = $state<string | null>(null);
+  let allocatingForHeaderId = $state<string | null>(null);
+  let allocationPresetStatus = $state<EventMaterielStatus | undefined>(
+    undefined,
+  );
+
+  // Allocation modal form state
+  let allocFormRef: any = $state(null);
 
   // Lazy-loaded CreateLoanModal component
   let CreateLoanModal:
@@ -82,7 +89,6 @@
 
   const myTeams = $derived(nativeTeamsStore.myTeams);
 
-  // Set of loanIds the current user can manage (is member of the owning team)
   const userAccessibleLoanIds = $derived.by(() => {
     const myTeamIds = new Set(myTeams.map((t) => t.$id));
     const loanIds = new Set<string>();
@@ -97,11 +103,6 @@
     return loanIds;
   });
 
-  function canEditWhereForItem(item: EventMateriel): boolean {
-    if (!item.loanId) return true;
-    return userAccessibleLoanIds.has(item.loanId);
-  }
-
   async function loadCreateLoanModal() {
     if (!CreateLoanModal) {
       const mod =
@@ -113,7 +114,7 @@
   // Filtres
   let filters = $state<EventMaterielFiltersState>({
     types: [],
-    // statuses: [], // TODO: status derive de where
+    statuses: [],
     who: [],
     where: [],
     search: "",
@@ -125,7 +126,22 @@
     direction: "asc",
   });
 
-  // Types disponibles
+  type DisplayMode = "nested" | "flat";
+  let displayMode = $state<DisplayMode>("nested");
+
+  const hasActiveFilters = $derived.by(() => {
+    return (
+      filters.statuses.length > 0 ||
+      filters.who.length > 0 ||
+      filters.where.length > 0 ||
+      filters.search.length > 0
+    );
+  });
+
+  const effectiveDisplayMode = $derived<DisplayMode>(
+    hasActiveFilters ? "flat" : displayMode,
+  );
+
   const availableTypes = [
     "electronic",
     "manual",
@@ -137,16 +153,17 @@
     "hygiene",
   ];
 
-  // Valeurs disponibles pour les filtres (depuis le store)
   const availableWho = $derived(eventMaterielStore.getUniqueWhoValues());
   const availableWhere = $derived(eventMaterielStore.getUniqueWhereValues());
+  const availableStatuses = $derived(
+    eventMaterielStore.getUniqueStatusValues(),
+  );
 
-  // Items filtrés (via store)
   const filteredItems = $derived(
     eventMaterielStore.getFilteredItems(
       {
         types: filters.types as EventMaterielFilterOptions["types"],
-        // statuses: filters.statuses, // TODO: status derive de where
+        statuses: filters.statuses as EventMaterielFilterOptions["statuses"],
         who: filters.who,
         where: filters.where,
         search: filters.search,
@@ -155,26 +172,38 @@
     ),
   );
 
-  // Badges pour les filtres actifs
-  interface ActiveBadge {
-    id: string;
-    label: string;
-    color: string;
-  }
+  const groupedItems = $derived(
+    eventMaterielStore.getGroupedItems(
+      {
+        types: filters.types as EventMaterielFilterOptions["types"],
+        statuses: filters.statuses as EventMaterielFilterOptions["statuses"],
+        who: filters.who,
+        where: filters.where,
+        search: filters.search,
+      },
+      currentSort,
+    ),
+  );
 
   const activeBadges = $derived.by<ActiveBadge[]>(() => {
     const badges: ActiveBadge[] = [];
 
-    // Types
     filters.types.forEach((type) => {
       badges.push({
         id: `type:${type}`,
-        label: typeLabels[type] || type,
+        label: getMaterielTypeConfig(type).label,
         color: "badge-secondary",
       });
     });
 
-    // Who
+    filters.statuses.forEach((status) => {
+      badges.push({
+        id: `status:${status}`,
+        label: getEventMaterielStatusConfig(status).label,
+        color: "badge-accent",
+      });
+    });
+
     filters.who.forEach((who) => {
       badges.push({
         id: `who:${who}`,
@@ -183,7 +212,6 @@
       });
     });
 
-    // Where
     filters.where.forEach((where) => {
       badges.push({
         id: `where:${where}`,
@@ -200,6 +228,9 @@
     switch (prefix) {
       case "type":
         filters.types = filters.types.filter((t) => t !== value);
+        break;
+      case "status":
+        filters.statuses = filters.statuses.filter((s) => s !== value);
         break;
       case "who":
         filters.who = filters.who.filter((w) => w !== value);
@@ -220,9 +251,8 @@
     }
   });
 
-  // Reset filtres
   function resetFilters() {
-    filters = { types: [], who: [], where: [], search: "" };
+    filters = { types: [], statuses: [], who: [], where: [], search: "" };
   }
 
   function handleExport() {
@@ -236,24 +266,19 @@
     );
   }
 
-  // Form handlers
   function openAddForm() {
-    showForm = true;
+    materielModalId = null;
+    materielModalOpen = true;
   }
 
-  function closeForm() {
-    showForm = false;
+  function openEditForm(itemId: string) {
+    materielModalId = itemId;
+    materielModalOpen = true;
   }
 
-  async function handleSubmit(data: CreateEventMaterielData) {
-    try {
-      await eventMaterielStore.addItem(data, globalState.userId || "");
-      toastService.success("Item ajouté");
-      closeForm();
-    } catch (err) {
-      console.error("[EventMaterielPage] Submit error:", err);
-      toastService.error("Erreur lors de la sauvegarde");
-    }
+  function closeMaterielModal() {
+    materielModalOpen = false;
+    materielModalId = null;
   }
 
   function confirmDelete(item: EventMateriel) {
@@ -272,6 +297,57 @@
     deleteTarget = null;
   }
 
+  async function handleAllocation(allocationData: {
+    quantity: number;
+    status: EventMaterielStatus;
+    who: string;
+    where: string;
+    notes?: string;
+  }) {
+    if (!allocatingForHeaderId) return;
+    const header = eventMaterielStore.items.find(
+      (i) => i.$id === allocatingForHeaderId,
+    );
+    if (!header) return;
+
+    try {
+      const data: CreateEventMaterielData = {
+        eventId,
+        name: header.name || "",
+        type: header.type as CreateEventMaterielData["type"],
+        quantity: allocationData.quantity,
+        status: allocationData.status,
+        groupId: allocatingForHeaderId,
+        who: allocationData.who || null,
+        where: allocationData.where || null,
+        notes: allocationData.notes || null,
+      };
+      await eventMaterielStore.addItem(data, globalState.userId || "");
+      toastService.success("Allocation ajoutée");
+    } catch (err) {
+      console.error("[EventMaterielPage] Allocation error:", err);
+      toastService.error("Erreur lors de l'ajout de l'allocation");
+    }
+    allocatingForHeaderId = null;
+    allocationPresetStatus = undefined;
+  }
+
+  function closeAllocationModal() {
+    allocatingForHeaderId = null;
+    allocationPresetStatus = undefined;
+  }
+
+  function handleAllocFormFooterSubmit() {
+    if (allocFormRef) {
+      const formEl = allocFormRef.querySelector(
+        "form",
+      ) as HTMLFormElement | null;
+      if (formEl) {
+        formEl.requestSubmit();
+      }
+    }
+  }
+
   async function handleEditLoan(loanId: string) {
     await loadCreateLoanModal();
     editLoanId = loanId;
@@ -288,7 +364,16 @@
       importTeamId = teamId || myTeams[0]?.$id || null;
       if (!importTeamId) return;
       await loadCreateLoanModal();
-      importLoanModalOpen = true;
+
+      const existingLoan = materielStore.loans.find(
+        (l) => l.ownerId === importTeamId && l.eventId === eventId,
+      );
+
+      if (existingLoan) {
+        editLoanId = existingLoan.$id;
+      } else {
+        importLoanModalOpen = true;
+      }
     }
   }
 
@@ -297,7 +382,6 @@
     return team?.name || "";
   }
 
-  // Init
   onMount(async () => {
     if (eventId) {
       await eventMaterielStore.initializeForEvent(eventId);
@@ -315,21 +399,20 @@
   </button>
 {/snippet}
 
-<div class="mx-auto mt-4 max-w-6xl overflow-x-hidden p-4 pb-20">
+<div class="mx-auto mt-4 max-w-7xl overflow-x-hidden p-4 pb-20">
   <div class="flex gap-4">
-    <!-- Filtres (desktop: sidebar fixe) -->
     <LeftPanel>
       <EventMaterielFilters
         bind:filters
         {availableTypes}
         {availableWho}
         {availableWhere}
+        {availableStatuses}
         onReset={resetFilters}
         disabled={eventMaterielStore.loading}
       />
     </LeftPanel>
 
-    <!-- Contenu principal -->
     <div class="mt-4 flex-1 lg:ml-96">
       <!-- Header -->
       <div class="mb-4 flex flex-wrap items-center justify-between gap-4">
@@ -366,6 +449,11 @@
                   <button onclick={() => openImportModal()}>
                     <ClipboardCopy size={16} />
                     {myTeams[0].name}
+                    {#if materielStore.loans.some((l) => l.ownerId === myTeams[0].$id && l.eventId === eventId)}
+                      <span class="text-base-content/50 text-xs"
+                        >(réservation existante)</span
+                      >
+                    {/if}
                   </button>
                 </li>
               {:else if myTeams.length > 1}
@@ -375,6 +463,10 @@
                     <button onclick={() => openImportModal(team.$id)}>
                       <ClipboardCopy size={16} />
                       {team.name}
+                      {#if materielStore.loans.some((l) => l.ownerId === team.$id && l.eventId === eventId)}
+                        <span class="text-base-content/50 text-xs">(résa.)</span
+                        >
+                      {/if}
                     </button>
                   </li>
                 {/each}
@@ -384,45 +476,17 @@
         {/if}
       </div>
 
-      <!-- Formulaire dépliable -->
-      {#if showForm && canEdit && eventId}
-        <div class="rounded-box bg-base-200 mb-4 p-4">
-          <EventMaterielForm
-            {eventId}
-            onSubmit={handleSubmit}
-            onCancel={closeForm}
-          />
-        </div>
-      {/if}
-
-      <!-- Contrôles de tri -->
-      <MaterielSortControls sort={currentSort} onSortChange={(s) => (currentSort = s)} />
-
-      <!-- Filtres actifs -->
-      {#if activeBadges.length > 0}
-        <div class="mb-4 flex flex-wrap items-center gap-2">
-          <span class="text-base-content/50 text-sm">Filtres :</span>
-          {#each activeBadges as badge (badge.id)}
-            <button
-              type="button"
-              class="badge {badge.color} cursor-pointer gap-1 hover:opacity-80"
-              onclick={() => removeBadge(badge.id)}
-              title="Retirer ce filtre"
-            >
-              {badge.label}
-              <X class="h-3 w-3" />
-            </button>
-          {/each}
-          {#if activeBadges.length > 1}
-            <button
-              class="btn btn-ghost btn-xs text-error"
-              onclick={resetFilters}
-            >
-              Réinitialiser
-            </button>
-          {/if}
-        </div>
-      {/if}
+      <!-- Contrôles -->
+      <EventMaterielControls
+        sort={currentSort}
+        onSortChange={(s) => (currentSort = s)}
+        displayMode={effectiveDisplayMode}
+        onDisplayModeChange={(m) => (displayMode = m)}
+        {hasActiveFilters}
+        {activeBadges}
+        onRemoveBadge={removeBadge}
+        onResetFilters={resetFilters}
+      />
 
       <!-- Loading -->
       {#if eventMaterielStore.loading && eventMaterielStore.count === 0}
@@ -437,11 +501,44 @@
               résultat pour ces filtres{/if}
           </p>
           {#if eventMaterielStore.count === 0 && canEdit}
-            <button class="btn btn-primary btn-sm mt-4" onclick={openAddForm}>
-              <Plus class="h-4 w-4" />
-              Ajouter du matériel
-            </button>
+            <div class="mt-4 flex flex-wrap justify-center gap-2">
+              <button class="btn btn-primary btn-sm" onclick={openAddForm}>
+                <Plus class="h-4 w-4" />
+                Ajouter un item
+              </button>
+              <button
+                class="btn btn-outline btn-sm"
+                onclick={() => (catalogModalOpen = true)}
+              >
+                <ListPlus class="h-4 w-4" />
+                Ajouts multiples
+              </button>
+              {#if myTeams.length >= 1}
+                <button
+                  class="btn btn-outline btn-sm"
+                  onclick={() => openImportModal()}
+                >
+                  <ClipboardCopy class="h-4 w-4" />
+                  Importer depuis {myTeams[0].name}
+                </button>
+              {/if}
+            </div>
           {/if}
+        </div>
+      {:else if effectiveDisplayMode === "nested"}
+        <div class="mt-8 grid grid-cols-1 gap-1">
+          {#each groupedItems as group (group.header.$id)}
+            <EventMaterielGroupCard
+              {group}
+              {canEdit}
+              onEditItem={(item) => openEditForm(item.$id)}
+              onEditLoan={handleEditLoan}
+              onAddAllocation={(headerId, status) => {
+                allocatingForHeaderId = headerId;
+                allocationPresetStatus = status;
+              }}
+            />
+          {/each}
         </div>
       {:else}
         <div class="mt-8 grid grid-cols-1 gap-1">
@@ -450,7 +547,7 @@
               !!item.loanId && userAccessibleLoanIds.has(item.loanId)}
             <EventMaterielCard
               {item}
-              onEdit={(item) => (editingItemId = item.$id)}
+              onEdit={(item) => openEditForm(item.$id)}
               onEditLoan={handleEditLoan}
               {canEdit}
               {canUserEditLoan}
@@ -459,7 +556,6 @@
         </div>
       {/if}
 
-      <!-- Error -->
       {#if eventMaterielStore.error}
         <div class="alert alert-error mt-4">
           {eventMaterielStore.error}
@@ -480,19 +576,61 @@
   onCancel={() => (deleteTarget = null)}
 />
 
-<!-- Modal d'édition -->
-<EditEventMaterielModal
-  isOpen={editingItemId !== null}
-  itemId={editingItemId}
+<!-- Modal unifiée ajout/édition de matériel -->
+<EventMaterielModal
+  isOpen={materielModalOpen}
+  onClose={closeMaterielModal}
   {eventId}
-  onClose={() => (editingItemId = null)}
-  onSuccess={() => (editingItemId = null)}
-  canEditWhere={editingItemId
-    ? canEditWhereForItem(
-        eventMaterielStore.items.find((i) => i.$id === editingItemId)!,
-      )
-    : true}
+  itemId={materielModalId}
 />
+
+<!-- Formulaire d'allocation -->
+{#if allocatingForHeaderId}
+  {@const allocHeader = eventMaterielStore.items.find(
+    (i) => i.$id === allocatingForHeaderId,
+  )}
+  {@const allocRemaining = eventMaterielStore.getRemainingQuantity(
+    allocatingForHeaderId,
+  )}
+  {#if allocHeader}
+    <ModalContainer isOpen={true} maxWidth="sm" onClose={closeAllocationModal}>
+      <ModalHeader
+        title={allocHeader.name || "Ajouter"}
+        onClose={closeAllocationModal}
+      />
+      <ModalContent>
+        <div bind:this={allocFormRef}>
+          <EventMaterielAllocationForm
+            maxQuantity={allocRemaining}
+            headerName={""}
+            headerType={allocHeader.type as any}
+            presetStatus={allocationPresetStatus}
+            onSubmit={handleAllocation}
+            onCancel={closeAllocationModal}
+          />
+        </div>
+      </ModalContent>
+      <ModalFooter>
+        <button
+          type="button"
+          class="btn btn-ghost btn-sm"
+          onclick={closeAllocationModal}
+        >
+          <X class="size-4" />
+          Annuler
+        </button>
+        <button
+          type="button"
+          class="btn btn-primary btn-sm"
+          onclick={handleAllocFormFooterSubmit}
+        >
+          <Check class="size-4" />
+          Enregistrer
+        </button>
+      </ModalFooter>
+    </ModalContainer>
+  {/if}
+{/if}
 
 <!-- Modal catalogue rapide -->
 <QuickAddEventCatalogModal

@@ -504,31 +504,31 @@
         {/if}
         {#if !eventIsPassed}
           <!-- Carte des produits complétés/manquants -->
-          <div class="card card-xs sm:card-sm border-2 border-orange-700">
+          <div
+            class="card card-xs max-sm:card-side sm:card-sm border-2 border-orange-700"
+          >
             <div class="card-body">
               <div class="card-title text-orange-800">
                 <PackageCheck class="text-orange-800 opacity-60" />
                 Produits
               </div>
 
-              <div class="flex items-center justify-center px-2">
-                <!-- <div class="text-center">
+              <!-- <div class="text-center">
                 <div class="text-success text-lg font-bold md:text-2xl">
                   {productsStore.completionStats.completed}
                 </div>
                 <div class="text-base-content/60 text-xs">Ok</div>
               </div>
               <div class="divider divider-horizontal mx-1"></div> -->
-                <div class="text-center">
-                  <div class="text-error text-lg font-bold md:text-2xl">
-                    {productsStore.completionStats.missing}
-                  </div>
-                  <div class="text-base-content/60 text-xs">Manquants</div>
+              <div class="text-center">
+                <div class="text-error text-lg font-bold md:text-2xl">
+                  {productsStore.completionStats.missing}
                 </div>
+                <div class="text-base-content/60 text-xs">Manquants</div>
               </div>
               <div class="card-action mt-auto">
                 <button
-                  class="btn btn-primar w-full"
+                  class="btn btn-accent w-full"
                   onclick={handleOpenAddProductModal}
                   onmouseenter={() =>
                     (hoverHelp.msg = "Ajouter un produit manuellement")}
@@ -537,7 +537,7 @@
                   disabled={!canEdit}
                 >
                   <Plus class="mr-1 h-4 w-4" />
-                  Produit
+                  <span class="hidden sm:inline">Ajouter un</span>Produit
                 </button>
               </div>
             </div>
@@ -578,25 +578,25 @@
       class="shadow-info shadow print:hidden"
     >
       <p class="">
-        Cette page liste l'ensemble des produits présent dans les recettes de
+        Cette page liste l'ensemble des produits présents dans les recettes de
         l'événement. La liste est <span class="font-semibold"
           >mise à jour dès que les menus sont modifiés</span
         >
-        (recettes ajoutées, supprimées, nombre de couvert modifié, etc.) Vous pouvez
+        (recettes ajoutées, supprimées, nombre de couverts modifié, etc.). Vous pouvez
         :
       </p>
       <ul>
         <li>
-          Ajouter des produits non présent dans les recettes grace au bouton <kbd
+          Ajouter des produits non présents dans les recettes grâce au bouton <kbd
             class="kbd kbd-sm">+ Produit</kbd
-          > en haut à gauche
+          > dans l'encart "Produits".
         </li>
         <li>
-          Filtrer les produits par type, température, date, manquant etc.
+          Filtrer les produits par type, température, date, manquant, etc.
           {#if globalState.isMobile}
-            grace au bouton en bas à gauche <Funnel size={14} />
+            grâce au bouton en bas à gauche <Funnel size={14} />
           {:else}
-            grace au menu de droite
+            grâce au menu de droite.
           {/if}
         </li>
         <li>
@@ -604,15 +604,15 @@
           produit, soit via le bouton <kbd class="kbd kbd-sm">manque ...</kbd> dans
           la colonne des besoins (déclare acheté la quantité manquante). Les achats
           peuvent être déclarés comme des 'commandes', et vous pouvez préciser la
-          date de réception
+          date de réception.
         </li>
         <li>
-          Déclarer tout un groupe de produit acheté via le bouton <kbd
+          Déclarer tout un groupe de produits achetés via le bouton <kbd
             class="kbd kbd-sm">Achat groupé</kbd
-          > dans l'entête de chaque groupe
+          > dans l'entête de chaque groupe.
         </li>
         <li>
-          Définir des magasins ou vous mandater pour l'achat de produit
+          Définir des magasins où vous mandater pour l'achat de produits
           (individuel ou par groupe) → <Store
             size={14}
             class="text-primary inline"
@@ -621,26 +621,26 @@
         </li>
         <li>
           Modifier la quantité réclamée pour un produit. Si les recettes et
-          menus sont modifié entre temps, la carte des besoin du produit
-          indiquera que les quantités calculé ont changé depuis la modification
-          manuelle des besoins déclarés pour ce produit.
+          menus sont modifiés entre temps, la carte des besoins du produit
+          indiquera que les quantités calculées ont changé depuis la
+          modification manuelle des besoins déclarés pour ce produit.
           <p>
-            Cela peut aussi servir a <span class="font-semibold"
+            Cela peut aussi servir à <span class="font-semibold"
               >remplacer un produit par un autre</span
-            > sans modifier les recettes
+            > sans modifier les recettes.
           </p>
         </li>
         <li>
           Déclarer des dépenses indépendamment des achats (possible y compris
-          après que l'événement soit fini)
+          après que l'événement soit fini).
         </li>
         <li>
-          Visualiser l'ensemble des dépenses effectué, et par qui, en cliquant
-          sur <kbd class="kbd">Dépenses</kbd> dans l'entête
+          Visualiser l'ensemble des dépenses effectuées, et par qui, en cliquant
+          sur <kbd class="kbd">Dépenses</kbd> dans l'entête.
         </li>
       </ul>
       <p>
-        Tous les membres des équipes ou individus invité à participer à
+        Tous les membres des équipes ou individus invités à participer à
         l'événement peuvent modifier les produits, ajouter des achats, dépenses,
         etc.
       </p>

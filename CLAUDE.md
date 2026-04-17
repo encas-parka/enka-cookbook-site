@@ -68,14 +68,14 @@ npx prettier --write "**/*.{svelte,ts,js,css}"
 ```
 ┌─────────────────────────────────────────────────────────────┐
 │                    Markdown Content                         │
-│  • Recipes (content/recettes/)                              │
+│  • Recipes (content/recipe/)                                │
 │  • Events (content/evenements/)                             │
 └─────────────────▲───────────────────────────────────────────┘
                    │ Hugo Processing
 ┌─────────────────▼───────────────────────────────────────────┐
 │                      Hugo Engine                            │
 │  • Generates JSON API (/api/data.json)                      │
-│  • Recipe detail JSON (/recettes/*/recipe.json)             │
+│  • Recipe detail JSON (/recipe/*/recipe.json)             │
 │  • Static assets (images, icons)                            │
 └─────────────────▲───────────────────────────────────────────┘
                    │ Vite Proxy (dev) or Static (prod)
@@ -115,7 +115,7 @@ npx prettier --write "**/*.{svelte,ts,js,css}"
 ```
 enka-cookbook-site/           # Hugo site root (this repository)
 ├── content/
-│   ├── recettes/             # Recipe pages (Markdown with frontmatter)
+│   ├── recipe/              # Recipe pages (Markdown with frontmatter)
 │   └── evenements/           # Event pages
 ├── layouts/                  # Hugo templates
 ├── static/
@@ -199,7 +199,7 @@ The Svelte app follows a reactive 3-layer pattern:
 **Recipes**: Each recipe is a directory with UUID-based naming:
 
 ```
-content/recettes/recipe-name_uuid/
+content/recipe/recipe-name_uuid/
 └── index.md
 ```
 
@@ -230,7 +230,7 @@ content/recettes/recipe-name_uuid/
 
 During development, Vite proxies these paths to Hugo:
 
-- `/recettes/*` → Hugo recipe pages
+- `/recipe/*` → Hugo recipe pages
 - `/api/*` → Hugo JSON API
 - `/data/*` → Hugo static data
 - `/icons/*` → Hugo icons

@@ -3,7 +3,7 @@
 /**
  * Script de mise à jour des allergènes et régimes des recettes
  *
- * Ce script parcourt toutes les recettes dans content/recettes/ et met à jour :
+ * Ce script parcourt toutes les recettes dans content/recipe/ et met à jour :
  * - Les allergènes de chaque ingrédient (depuis ingredients.json)
  * - Les régimes de la recette (recalculés depuis les nouveaux allergènes)
  *
@@ -37,7 +37,7 @@ const __dirname = path.dirname(__filename);
 // ============================================================================
 
 const ROOT_DIR = path.dirname(__dirname);
-const RECIPES_DIR = path.join(ROOT_DIR, "content/recettes");
+const RECIPES_DIR = path.join(ROOT_DIR, "content/recipe");
 const INGREDIENTS_JSON = path.join(ROOT_DIR, "static/data/ingredients.json");
 
 // ============================================================================
@@ -112,7 +112,7 @@ function commitChanges(stats) {
 
   try {
     // Ajouter les fichiers modifiés
-    execSync("git add content/recettes", { cwd: ROOT_DIR, stdio: "ignore" });
+    execSync("git add content/recipe", { cwd: ROOT_DIR, stdio: "ignore" });
 
     // Créer le commit
     const message = `chore: mise à jour des allergènes et régimes (${stats.recipesUpdated} recettes)
@@ -132,7 +132,7 @@ Script: scripts_dev/update-recipe-allergens.js`;
   } catch (error) {
     console.error("⚠️  Erreur lors du commit:", error.message);
     console.log(
-      "\n💡 Veuillez commiter manuellement: git add content/recettes && git commit",
+      "\n💡 Veuillez commiter manuellement: git add content/recipe && git commit",
     );
   }
 }

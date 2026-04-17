@@ -201,12 +201,6 @@
             action: onAccept,
             class: "btn-success",
           },
-          {
-            label: "Annuler",
-            icon: Trash2,
-            action: onCancel,
-            class: "btn-error btn-outline",
-          },
         ];
       case "accepted":
         return [
@@ -298,7 +292,7 @@
             <button
               class="badge badge-soft badge-primary badge-sm hover:badge-primary gap-1"
               onclick={() => navigate(`/event/${loan.eventId}`)}
-              title="Voir l'événement"
+              title="Voir l'événement" 
             >
               <Link class="h-3 w-3" />
               {loan.eventName}
@@ -315,8 +309,8 @@
         <div class="flex flex-wrap gap-2">
           {#each materiels as m (m.materielId)}
             <span class="badge badge-sm badge-soft h-auto {getBadgeClass(m)}">
-              <span class="font-medium"> {m.materielName} </span>
-              <span class="font-bold text-nowrap"> × {m.quantity}</span>
+              <span> {m.materielName} </span>
+              <span class="badge badge-s"> × {m.quantity}</span>
             </span>
           {/each}
         </div>

@@ -1,9 +1,12 @@
 # Redirections pour Cloudflare Pages - Architecture SPA Svelte
 # Documentation : https://developers.cloudflare.com/pages/configuration/redirects/
 
+# Ancien chemin /recettes/ → redirection permanente (SEO)
+/recettes/* /recipe/:splat 301
+
 # Routes API et données Hugo (fichiers réels - PAS de redirection)
 /api/* /api/:splat 200
-/recettes/* /recettes/:splat 200
+/recipe/* /recipe/:splat 200
 /data/* /data/:splat 200
 /images/* /images/:splat 200
 /icons/* /icons/:splat 200

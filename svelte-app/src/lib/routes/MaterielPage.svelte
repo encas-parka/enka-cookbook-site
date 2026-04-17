@@ -1,72 +1,55 @@
 <script lang="ts">
   import { onMount } from "svelte";
-  import { Plus, Package, LoaderCircle, Users, ListPlus } from "@lucide/svelte";
+  import {
+    Plus,
+    Package,
+    LoaderCircle,
+    Users,
+    ListPlus,
+    ArrowRightFromLine,
+  } from "@lucide/svelte";
   import { materielStore } from "$lib/stores/MaterielStore.svelte";
   import { globalState } from "$lib/stores/GlobalState.svelte";
   import { nativeTeamsStore } from "$lib/stores/NativeTeamsStore.svelte";
   import { navBarStore } from "../stores/NavBarStore.svelte";
-  import { route } from "$lib/router";
+  import { p, route } from "$lib/router";
   import MaterielCard from "$lib/components/teamMatos/MaterielCard.svelte";
-  import MaterielForm from "$lib/components/teamMatos/MaterielForm.svelte";
-  import EditMaterielModal from "$lib/components/teamMatos/EditMaterielModal.svelte";
+  import MaterielModal from "$lib/components/teamMatos/MaterielModal.svelte";
   import QuickAddCatalogModal from "$lib/components/teamMatos/QuickAddCatalogModal.svelte";
   import MaterielFilters, {
     type MaterielFiltersType,
   } from "$lib/components/teamMatos/MaterielFilters.svelte";
   import LeftPanel from "$lib/components/ui/LeftPanel.svelte";
-  import { fade, slide } from "svelte/transition";
+  import { fade } from "svelte/transition";
   import { navigate } from "$lib/router";
   import type { EnrichedMateriel } from "$lib/types/materiel.types";
 
   // État de la page
-  let showForm = $state(false);
-  let createModalOpen = $state(false);
+  let materielModalOpen = $state(false);
+  let materielModalEditId = $state<string | null>(null);
   let catalogModalOpen = $state(false);
-  let editModalMaterielId = $state<string | null>(null);
   let activeTeamId = $state<string | null>(null);
   let isRedirecting = $state(false);
 
-  // État des filtres (sans loanStatus)
   let filters = $state<Omit<MaterielFiltersType, "loanStatus">>({
     types: [],
     locations: [],
     statuses: [],
   });
 
-  // Basculer l'affichage du formulaire
-  function toggleForm() {
-    showForm = !showForm;
+  function openCreateModal() {
+    materielModalEditId = null;
+    materielModalOpen = true;
   }
 
-  function closeForm() {
-    showForm = false;
-  }
-
-  // Ouvrir le modal d'édition
   function openEditModal(materielId: string) {
-    editModalMaterielId = materielId;
+    materielModalEditId = materielId;
+    materielModalOpen = true;
   }
 
-  // Fermer le modal d'édition
-  function closeEditModal() {
-    editModalMaterielId = null;
-  }
-
-  // Gestion de la soumission du formulaire
-  async function handleMaterielSubmit(data: any) {
-    try {
-      await materielStore.createMateriel(data);
-      closeForm();
-      console.log("[MaterielPage] Matériel créé avec succès");
-    } catch (err) {
-      console.error("[MaterielPage] Erreur création:", err);
-    }
-  }
-
-  // Après édition
-  function handleMaterielUpdated() {
-    console.log("[MaterielPage] Matériel mis à jour");
-    closeEditModal();
+  function closeMaterielModal() {
+    materielModalOpen = false;
+    materielModalEditId = null;
   }
 
   // Types disponibles
@@ -194,9 +177,18 @@
 
     navBarStore.setConfig({
       title: teamName,
+      actions: navActions,
     });
   });
 </script>
+
+{#snippet navActions()}
+  <button
+    class="btn btn-primary btn-sm"
+    onclick={() => navigate(`/dashboard/loans/${activeTeamId}`)}
+  >
+    Réservations <ArrowRightFromLine class="size-4" />
+  </button>{/snippet}
 
 <!-- Filtres - Sidebar Desktop / Drawer Mobile -->
 <LeftPanel>
@@ -235,37 +227,19 @@
       </div>
     {/if}
 
-    <!-- Bouton dépliable pour ajouter du matériel -->
-    {#if !showForm}
-      <div class="mb-6 flex justify-end gap-2">
-        <button
-          class="btn btn-outline btn-primary"
-          onclick={() => (catalogModalOpen = true)}
-        >
-          <ListPlus class="h-4 w-4" />
-          Catalogue
-        </button>
-        <button class="btn btn-primary" onclick={toggleForm}>
-          <Plus class="h-4 w-4" />
-          Ajouter
-        </button>
-      </div>
-    {/if}
-
-    <!-- Formulaire déployable -->
-    {#if showForm && activeTeam}
-      <div class="card bg-base-100 mb-6 shadow-lg" transition:slide>
-        <div class="card-body">
-          <MaterielForm
-            showStatus={false}
-            onSubmit={handleMaterielSubmit}
-            onCancel={closeForm}
-            ownerId={activeTeam.$id}
-            ownerName={activeTeam.name}
-          />
-        </div>
-      </div>
-    {/if}
+    <div class="mb-6 flex justify-end gap-2">
+      <button
+        class="btn btn-sm btn-outline btn-primary"
+        onclick={() => (catalogModalOpen = true)}
+      >
+        <ListPlus class="h-4 w-4" />
+        Catalogue
+      </button>
+      <button class="btn btn-sm btn-primary" onclick={openCreateModal}>
+        <Plus class="h-4 w-4" />
+        Ajouter
+      </button>
+    </div>
 
     <!-- Contenu -->
     {#if !globalState.isAuthenticated}
@@ -323,14 +297,15 @@
   </div>
 </div>
 
-<EditMaterielModal
-  materielId={editModalMaterielId}
-  isOpen={editModalMaterielId !== null}
-  onClose={closeEditModal}
-  onSuccess={handleMaterielUpdated}
-/>
-
 {#if activeTeam}
+  <MaterielModal
+    isOpen={materielModalOpen}
+    onClose={closeMaterielModal}
+    teamId={activeTeam.$id}
+    teamName={activeTeam.name}
+    {availableLocations}
+    materielId={materielModalEditId}
+  />
   <QuickAddCatalogModal
     isOpen={catalogModalOpen}
     onClose={() => (catalogModalOpen = false)}

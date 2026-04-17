@@ -2,6 +2,7 @@
   import { globalState } from "$lib/stores/GlobalState.svelte";
   import type { EventMateriel } from "$lib/types/appwrite";
   import {
+    getEventMaterielStatusConfig,
     getMaterielTypeBadgeClass,
     getMaterielTypeColorClass,
     getMaterielTypeConfig,
@@ -11,6 +12,7 @@
     ChefHat,
     CircleAlert,
     ClipboardPen,
+    CircleDot,
     Flame,
     MapPin,
     MessageSquare,
@@ -24,6 +26,7 @@
     Zap,
   } from "@lucide/svelte";
   import { online } from "svelte/reactivity/window";
+  import { eventMaterielStore } from "$lib/stores/EventMaterielStore.svelte";
 
   interface Props {
     item: EventMateriel;
@@ -42,8 +45,17 @@
     canUserEditLoan = false,
   }: Props = $props();
 
-  // Status derive de where
-  const isFound = $derived(item.where && item.where.trim().length > 0);
+  const resolvedStatus = $derived(eventMaterielStore.resolveStatus(item));
+
+  const statusConfig = $derived(getEventMaterielStatusConfig(resolvedStatus));
+
+  const StatusIcon = $derived(
+    resolvedStatus === "confirmed"
+      ? Check
+      : resolvedStatus === "to_check"
+        ? CircleDot
+        : CircleAlert,
+  );
 
   // Notes expand/collapse
   let notesExpanded = $state(false);
@@ -117,9 +129,6 @@
             <div class=" text-base font-medium">
               {item.name}
             </div>
-            {#if item.quantity > 1}
-              <span class="badge badge-ghost badge-sm">x{item.quantity}</span>
-            {/if}
             <span
               class="badge hidden sm:flex {getMaterielTypeBadgeClass(
                 item.type,
@@ -180,20 +189,13 @@
 
       <!-- Actions -->
       <div class="ms-auto flex items-center gap-2">
-        <!-- Status derive de where -->
+        <!-- Status badge -->
         <span
-          class="badge {isFound
-            ? 'badge-success'
-            : 'badge-warning'} badge-soft badge-sm gap-1 py-0"
-          title={isFound ? "Emplacement connu" : "À trouver"}
+          class="badge {statusConfig.badgeClass} badge-soft gap-1 py-0"
+          title={statusConfig.label}
         >
-          {#if isFound}
-            <Check class="size-3" />
-            OK
-          {:else}
-            <CircleAlert class="size-3" />
-            À trouver
-          {/if}
+          <StatusIcon class="size-3" />
+          {statusConfig.label}{#if (item.quantity ?? 0) > 1}&nbsp;x{item.quantity}{/if}
         </span>
         <!-- Edit button (only if can edit) -->
         {#if canUserEdit}

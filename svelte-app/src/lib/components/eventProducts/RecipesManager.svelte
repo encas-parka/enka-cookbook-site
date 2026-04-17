@@ -17,13 +17,16 @@
   } from "$lib/utils/date-helpers.js";
   import { getTimeIcon } from "$lib/utils/dateRange.js";
   import { formatSingleQuantity } from "$lib/utils/QuantityFormatter.js";
+  import { navigate } from "$lib/router";
+  import { tick } from "svelte";
 
   interface Props {
     modalState: ProductModalStateType;
     isArchiveMode: boolean;
+    onClose?: () => void;
   }
 
-  let { modalState, isArchiveMode }: Props = $props();
+  let { modalState, isArchiveMode, onClose }: Props = $props();
 
   // Données dérivées du store
   const recipes = $derived(modalState.recipes);
@@ -67,7 +70,29 @@
             >
               <!-- Nom de la recette + icône date -->
               <div class="flex items-start gap-4">
-                <span class="text-primary text-base text-wrap">{recipe.r}</span>
+                {#if recipe.id}
+                  {@const recipeId = recipe.id}
+                  {@const mealDate = recipe.dateTimeService || "undated"}
+                  <button
+                    class="text-primary link link-hover text-base text-wrap"
+                    onclick={async () => {
+                      const eventId = modalState.product?.mainId;
+                      if (!eventId) return;
+                      // Fermer le modal AVANT de naviguer pour que le scroll lock
+                      // CSS (DaisyUI :root:has(.modal-open)) soit retiré du DOM
+                      onClose?.();
+                      await tick();
+                      navigate(`/event/${eventId}/recipes`, {
+                        search: { recipe: recipeId, meal: mealDate },
+                        scrollToTop: false,
+                      });
+                    }}>{recipe.r}</button
+                  >
+                {:else}
+                  <span class="text-primary text-base text-wrap"
+                    >{recipe.r}</span
+                  >
+                {/if}
 
                 <div
                   class="flex min-w-fit items-center gap-1 text-base font-medium"

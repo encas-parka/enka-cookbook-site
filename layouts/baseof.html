@@ -11,8 +11,40 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{{ .Site.Title }}</title>
-    {{/* Utiliser les chemins avec hash depuis le manifest */}}
+    <title>{{ block "title" . }}{{ .Site.Title }}{{ end }}</title>
+    <meta
+      name="description"
+      content="{{ block "description" . }}
+        {{ .Site.Params.description }}
+      {{ end }}"
+    />
+    <link rel="canonical" href="{{ .Permalink }}" />
+    <meta property="og:site_name" content="{{ .Site.Title }}" />
+    <meta property="og:locale" content="fr_FR" />
+    <meta property="og:url" content="{{ .Permalink }}" />
+    <meta
+      property="og:title"
+      content="{{ block "og_title" . }}{{ .Site.Title }}{{ end }}"
+    />
+    <meta
+      property="og:description"
+      content="{{ block "og_description" . }}
+        {{ .Site.Params.description }}
+      {{ end }}"
+    />
+    <meta
+      property="og:type"
+      content="{{ block "og_type" . }}website{{ end }}"
+    />
+    {{ block "og_image" . }}
+      <meta property="og:image" content="{{ "app/512x512.png" | absURL }}" />
+      <meta name="twitter:image" content="{{ "app/512x512.png" | absURL }}" />
+    {{ end }}
+    <meta name="twitter:card" content="summary" />
+    <meta
+      name="twitter:title"
+      content="{{ block "twitter_title" . }}{{ .Site.Title }}{{ end }}"
+    />
     {{ with $manifest }}
       {{ with index . "index.html" }}
         {{/* Charger le CSS principal */}}

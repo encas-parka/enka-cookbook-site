@@ -1,22 +1,30 @@
 <script lang="ts">
-  import { Funnel, FunnelX, Package, MapPin, User } from "@lucide/svelte";
+  import {
+    Funnel,
+    FunnelX,
+    Package,
+    MapPin,
+    User,
+    CircleDot,
+  } from "@lucide/svelte";
   import Fieldset from "$lib/components/ui/Fieldset.svelte";
   import CheckboxBadge from "$lib/components/ui/CheckboxBadge.svelte";
+  import { getEventMaterielStatusConfig, getMaterielTypeConfig } from "$lib/utils/materiel.utils";
 
   export interface EventMaterielFiltersState {
     types: string[];
-    // statuses: string[]; // TODO: status derive de where
-    who: string[]; // valeurs "who" + "__none__" pour "Personne"
-    where: string[]; // valeurs "where" + "__none__" pour "À trouver"
+    statuses: string[];
+    who: string[];
+    where: string[];
     search: string;
   }
 
   interface Props {
     filters: EventMaterielFiltersState;
     availableTypes: string[];
-    availableWho: string[]; // valeurs uniques de who
-    availableWhere: string[]; // valeurs uniques de where
-    // availableStatuses: string[]; // TODO: status derive de where
+    availableWho: string[];
+    availableWhere: string[];
+    availableStatuses: string[];
     onReset: () => void;
     disabled?: boolean;
   }
@@ -26,7 +34,7 @@
     availableTypes,
     availableWho,
     availableWhere,
-    // availableStatuses, // TODO: status derive de where
+    availableStatuses,
     onReset,
     disabled = false,
   }: Props = $props();
@@ -42,28 +50,12 @@
   }
 
   function getTypeLabel(type: string): string {
-    const labels: Record<string, string> = {
-      electronic: "Électronique",
-      manual: "Manuel",
-      other: "Autre",
-      tools: "Outils",
-      dish: "Vaisselle",
-      cooking: "Cuisine",
-      gaz: "Gaz",
-      hygiene: "Hygiène",
-    };
-    return labels[type] || type;
+    return getMaterielTypeConfig(type).label;
   }
 
-  // TODO: status derive de where - supprimer ces fonctions si on reintroduit un statut
-  // function getStatusLabel(status: string): string {
-  //   const labels: Record<string, string> = {
-  //     needed: "Nécessaire",
-  //     confirmed: "Confirmé",
-  //     brought: "Apporté",
-  //   };
-  //   return labels[status] || status;
-  // }
+  function getStatusLabel(status: string): string {
+    return getEventMaterielStatusConfig(status).label;
+  }
 </script>
 
 <div class="space-y-4" class:opacity-30={disabled}>
@@ -104,8 +96,8 @@
     </div>
   </Fieldset>
 
-  <!-- // TODO: status derive de where - supprimer cette section si on reintroduit un statut -->
-  <!-- <Fieldset legend="Statut" iconComponent={CheckCircle2}>
+  <!-- Statuts -->
+  <Fieldset legend="Statut" iconComponent={CircleDot}>
     <div class="flex flex-wrap gap-3">
       {#each availableStatuses as status (status)}
         <CheckboxBadge
@@ -118,7 +110,7 @@
         />
       {/each}
     </div>
-  </Fieldset> -->
+  </Fieldset>
 
   <!-- Who (Personne) -->
   {#if availableWho.length > 0}

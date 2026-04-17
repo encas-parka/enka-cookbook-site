@@ -310,8 +310,8 @@
 </script>
 
 <div
-  class="navbar bg-base-100 border-base-300 justify-items-between sticky top-0 z-1000 min-h-11 border-b px-4 py-0 shadow-sm transition-transform duration-300 print:hidden {globalState.isMobile &&
-    'min-h-11'}
+  class="navbar bg-base-100 border-base-300 justify-items-between sticky top-0 z-1000 min-h-12 border-b px-4 py-0 shadow-sm transition-transform duration-300 print:hidden {globalState.isMobile &&
+    'min-h-12'}
     {globalState.isMobile && !globalState.headerVisible
     ? '-translate-y-full'
     : ''}"

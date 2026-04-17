@@ -473,6 +473,7 @@ async function processMeal(
         aggregations,
         recipeDetails.title,
         mealRecipe.plates,
+        mealRecipe.recipeUuid,
       );
     }
   }
@@ -488,6 +489,7 @@ function addIngredientToAggregation(
   aggregations: Map<string, ProductAggregation>,
   recipeName: string,
   plates: number,
+  recipeUuid?: string,
 ): void {
   const uuid = ingredient.uuid;
 
@@ -542,6 +544,7 @@ function addIngredientToAggregation(
     qEq: scaledQuantity,
     uEq: ingredient.normalizedUnit,
     a: plates,
+    ...(recipeUuid ? { id: recipeUuid } : {}),
   });
 
   // 3. Incrémenter les assiettes (Attention: une recette n'est ajoutée qu'une fois par ingrédient,

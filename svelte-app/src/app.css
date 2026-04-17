@@ -22,7 +22,7 @@
 
 @layer base {
   html {
-    font-size: clamp(14px, 1.1vw, 18px);
+    font-size: clamp(11px, 8px + 0.5vw, 18px);
     margin: 0;
     padding: 0;
   }

@@ -1,0 +1,107 @@
+{{- define "title" }}{{ .Title }} - {{ .Site.Title }}{{ end -}}
+{{- define "description" }}{{ with .Params.description }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}{{ end -}}
+{{- define "og_title" }}{{ .Title }}{{ end -}}
+{{- define "og_description" }}{{ with .Params.description }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}{{ end -}}
+{{- define "og_type" }}article{{ end -}}
+{{- define "twitter_title" }}{{ .Title }}{{ end -}}
+{{- define "og_image" }}
+{{- with .Params.img -}}
+  {{- if ne . "" -}}
+    <meta property="og:image" content="{{ printf "/images/%s" . | absURL }}" />
+    <meta name="twitter:image" content="{{ printf "/images/%s" . | absURL }}" />
+    <meta name="twitter:card" content="summary_large_image" />
+  {{- else -}}
+    <meta property="og:image" content="{{ "app/512x512.png" | absURL }}" />
+    <meta name="twitter:image" content="{{ "app/512x512.png" | absURL }}" />
+  {{- end -}}
+{{- else -}}
+    <meta property="og:image" content="{{ "app/512x512.png" | absURL }}" />
+    <meta name="twitter:image" content="{{ "app/512x512.png" | absURL }}" />
+{{- end -}}
+{{- end -}}
+
+{{ define "main" }}
+{{/* Construire le Schema.org Recipe comme dict Hugo, puis jsonify en une seule fois */}}
+{{- $schema := dict
+  "@context" "https://schema.org/"
+  "@type" "Recipe"
+  "name" .Title
+  "url" .Permalink
+-}}
+{{- with .Params.description -}}
+  {{- $schema = merge $schema (dict "description" .) -}}
+{{- end -}}
+{{- with .Params.auteur -}}
+  {{- $schema = merge $schema (dict "author" (dict "@type" "Person" "name" .)) -}}
+{{- end -}}
+{{- with .Params.ingredients -}}
+  {{- $ings := slice -}}
+  {{- range . -}}
+    {{- $ings = $ings | append (printf "%v %s %s" .originalQuantity .originalUnit .name) -}}
+  {{- end -}}
+  {{- $schema = merge $schema (dict "recipeIngredient" $ings) -}}
+{{- end -}}
+{{- with .Params.preparation -}}
+  {{- $schema = merge $schema (dict "recipeInstructions" .) -}}
+{{- end -}}
+{{- with .Params.typeR -}}
+  {{- $schema = merge $schema (dict "recipeCategory" .) -}}
+{{- end -}}
+{{- with .Params.regime -}}
+  {{- $diets := slice -}}
+  {{- range . -}}
+    {{- $uri := "https://schema.org/RestrictedDiet" -}}
+    {{- if eq . "vegan" }}{{ $uri = "https://schema.org/VeganDiet" }}{{ end -}}
+    {{- if eq . "sans-gluten" }}{{ $uri = "https://schema.org/GlutenFreeDiet" }}{{ end -}}
+    {{- if eq . "sans-lactose" }}{{ $uri = "https://schema.org/LactoseFreeDiet" }}{{ end -}}
+    {{- $diets = $diets | append $uri -}}
+  {{- end -}}
+  {{- $schema = merge $schema (dict "suitableForDiet" $diets) -}}
+{{- end -}}
+{{- with .Params.plate -}}
+  {{- $schema = merge $schema (dict "recipeYield" .) -}}
+{{- end -}}
+{{- with .Params.img -}}
+  {{- if ne . "" -}}
+    {{- $schema = merge $schema (dict "image" (printf "/images/%s" . | absURL)) -}}
+  {{- end -}}
+{{- end -}}
+<script type="application/ld+json">{{ $schema | jsonify (dict "indent" "  ") | safeHTML }}</script>
+
+<noscript>
+  <article style="max-width:800px;margin:2rem auto;padding:0 1rem;font-family:system-ui,sans-serif">
+    <h1>{{ .Title }}</h1>
+    {{- with .Params.description }}
+    <p><em>{{ . }}</em></p>
+    {{- end }}
+    {{- with .Params.auteur }}
+    <p>Par {{ . }}</p>
+    {{- end }}
+    {{- with .Params.ingredients }}
+    <h2>Ingr&eacute;dients{{ with $.Params.plate }} (pour {{ . }} parts){{ end }}</h2>
+    <ul>
+      {{- range . }}
+      <li>{{ .originalQuantity }} {{ .originalUnit }} {{ .name }}{{ with .comment }} ({{ . }}){{ end }}</li>
+      {{- end }}
+    </ul>
+    {{- end }}
+    {{- with .Params.preparation24h }}
+    <h2>Pr&eacute;paration la veille</h2>
+    <p>{{ . }}</p>
+    {{- end }}
+    {{- with .Params.preparation }}
+    <h2>Pr&eacute;paration</h2>
+    <p>{{ . }}</p>
+    {{- end }}
+    {{- with .Params.astuces }}
+    <h2>Astuces</h2>
+    <ul>
+      {{- range . }}
+      <li>{{ . }}</li>
+      {{- end }}
+    </ul>
+    {{- end }}
+    <p><small>Retrouvez cette recette sur <a href="{{ .Permalink }}">Enka Cookbook</a></small></p>
+  </article>
+</noscript>
+{{ end }}

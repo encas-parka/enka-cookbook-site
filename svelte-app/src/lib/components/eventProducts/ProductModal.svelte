@@ -214,7 +214,7 @@
       <div>
         {#key modalState?.currentTab}
           {#if modalState?.currentTab === "recettes"}
-            <RecipesManager {modalState} {isArchiveMode} />
+            <RecipesManager {modalState} {isArchiveMode} onClose={handleModalClose} />
           {:else if modalState?.currentTab === "achats"}
             <PurchaseManager {modalState} {isArchiveMode} />
           {:else if modalState?.currentTab === "stock"}

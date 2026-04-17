@@ -17,9 +17,7 @@ export const MATERIEL_CATALOG: CatalogItem[] = [
   // ==========================================================================
   // Cuisine — Gastro (au four)
   // ==========================================================================
-  { name: "Gastro 1/1 Couvercles", type: "cooking" },
-  { name: "Gastro 1/1 (2cm)", type: "cooking" },
-  { name: "Gastro 1/1 (5cm)", type: "cooking" },
+
   { name: "Gastro 1/1 (10cm)", type: "cooking" },
   { name: "Gastro 1/1 (15cm)", type: "cooking" },
   { name: "Gastro 1/1 (20cm)", type: "cooking" },

@@ -2,6 +2,8 @@
   import { Package, MapPin, Hash, X, Check } from "@lucide/svelte";
   import RadioBadgeGroup from "$lib/components/ui/RadioBadgeGroup.svelte";
   import { nativeTeamsStore } from "$lib/stores/NativeTeamsStore.svelte";
+  import TeamMaterielNameSuggest from "./TeamMaterielNameSuggest.svelte";
+  import Suggestions from "$lib/components/ui/Suggestions.svelte";
 
   // Types littéraux pour éviter les erreurs TypeScript avec les enums
   type MaterielTypeLiteral =
@@ -29,9 +31,11 @@
   interface Props {
     showStatus?: boolean;
     buttonAction?: boolean;
-    ownerId?: string; // Optionnel : si fourni, pré-remplit l'owner (teamId)
-    ownerName?: string; // Optionnel : nom de l'owner pour l'affichage
-    initialValues?: MaterielInitialValues | null; // Optionnel : valeurs initiales pour l'édition
+    ownerId?: string;
+    ownerName?: string;
+    initialValues?: MaterielInitialValues | null;
+    teamId?: string;
+    availableLocations?: string[];
     onSubmit?: (data: {
       name: string;
       description: string | null;
@@ -43,6 +47,7 @@
       owner: string; // JSON string
     }) => void;
     onCancel?: () => void;
+    onExistingSelected?: (materielId: string) => void;
   }
 
   let {
@@ -53,6 +58,9 @@
     ownerId,
     ownerName,
     initialValues,
+    teamId,
+    availableLocations = [],
+    onExistingSelected,
   }: Props = $props();
 
   // Import des composants UI
@@ -82,6 +90,8 @@
 
   // L'owner est-il verrouillé (pré-rempli depuis les props) ?
   const isOwnerLocked = $derived(ownerId);
+
+  const isEdit = $derived(!!initialValues);
 
   // Options pour les RadioBadgeGroups
   const typeOptions = $derived([
@@ -179,6 +189,30 @@
     shareableWithTeamNames = [];
     error = null;
   }
+
+  function handleNameInput(val: string) {
+    name = val;
+  }
+
+  function handleNameSelect(suggestion: {
+    name: string;
+    type: string;
+    source?: string;
+    materielId?: string;
+  }) {
+    if (suggestion.source === "existing" && suggestion.materielId && onExistingSelected) {
+      onExistingSelected(suggestion.materielId);
+      return;
+    }
+    name = suggestion.name;
+    type = suggestion.type as MaterielTypeLiteral;
+  }
+
+  const locationSuggestionItems = $derived(
+    availableLocations
+      .filter((l) => l !== location)
+      .map((l) => ({ id: l, label: l })),
+  );
 </script>
 
 <div class="space-y-6">
@@ -191,22 +225,33 @@
   <div class="space-y-3">
     <div class="flex flex-wrap gap-x-6 gap-y-4">
       <!-- Nom -->
-      <label class="input min-w-1/2">
-        <span class="label required"
-          ><Package class="h-4 w-4 " />
-          Nom</span
-        >
-        <input
-          type="text"
-          class="grow"
-          bind:value={name}
-          placeholder="Ex: Mixeur professionnel"
-          maxlength="100"
-          disabled={loading}
-          required
-          aria-required="true"
-        />
-      </label>
+      {#if isEdit}
+        <label class="input min-w-1/2">
+          <span class="label required"
+            ><Package class="h-4 w-4" />
+            Nom</span
+          >
+          <input
+            type="text"
+            class="grow"
+            bind:value={name}
+            placeholder="Ex: Mixeur professionnel"
+            maxlength="100"
+            disabled={loading}
+            required
+            aria-required="true"
+          />
+        </label>
+      {:else}
+        <div class="min-w-1/2">
+          <TeamMaterielNameSuggest
+            value={name}
+            onSelect={handleNameSelect}
+            onInput={handleNameInput}
+            teamId={teamId || ownerId || ""}
+          />
+        </div>
+      {/if}
 
       <!-- owner -->
       <!-- <label class="select min-w-[250px]">
@@ -280,17 +325,25 @@
     </label>
 
     <!-- Localisation -->
-    <label class="input flex-1">
-      <span class="label"><MapPin class="size-4" />Localisation</span>
-      <input
-        type="text"
-        class="grow"
-        bind:value={location}
-        placeholder="où c'est stocker"
-        maxlength="50"
-        disabled={loading}
-      />
-    </label>
+    <div class="flex flex-1 flex-col gap-1">
+      <label class="input w-full">
+        <MapPin class="h-4 w-4 opacity-50" />
+        <input
+          type="text"
+          bind:value={location}
+          placeholder="Où c'est stocké"
+          maxlength="50"
+          disabled={loading}
+        />
+      </label>
+      {#if locationSuggestionItems.length > 0}
+        <Suggestions
+          suggestions={locationSuggestionItems}
+          onSuggestionClick={(s) => (location = s.label)}
+          buttonSize="btn-xs"
+        />
+      {/if}
+    </div>
   </div>
 
   <!-- Section 4: ShareableWith -->

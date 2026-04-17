@@ -119,7 +119,8 @@ export async function createEventMateriel(
         fromTeamName: data.fromTeamName || null,
         sourceMaterielId: data.sourceMaterielId || null,
         loanId: data.loanId || null,
-        // status: data.status || "needed", // TODO: status derive de where
+        status: data.status || "to_find",
+        groupId: data.groupId || null,
         notes: data.notes || null,
         createdBy: userId,
       },
@@ -160,7 +161,8 @@ export async function updateEventMateriel(
     if (data.sourceMaterielId !== undefined)
       updateData.sourceMaterielId = data.sourceMaterielId;
     if (data.loanId !== undefined) updateData.loanId = data.loanId;
-    // if (data.status !== undefined) updateData.status = data.status; // TODO: status derive de where
+    if (data.status !== undefined) updateData.status = data.status;
+    if (data.groupId !== undefined) updateData.groupId = data.groupId;
     if (data.notes !== undefined) updateData.notes = data.notes;
 
     const item = await tables.updateRow({

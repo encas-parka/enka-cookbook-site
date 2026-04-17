@@ -1043,7 +1043,7 @@ class RecipesStore {
 
       // 3a. Tenter Hugo (recette publiée)
       try {
-        const recipePath = `/recettes/${uuid}/recipe.json`;
+        const recipePath = `/recipe/${uuid}/recipe.json`;
         const response = await fetch(recipePath);
         if (response.ok) {
           const rawData = await response.json();
@@ -1161,7 +1161,7 @@ class RecipesStore {
 
           // 3a. Tenter Hugo (plus rapide)
           try {
-            const recipePath = `/recettes/${uuid}/recipe.json`;
+            const recipePath = `/recipe/${uuid}/recipe.json`;
             const response = await fetch(recipePath);
             if (response.ok) {
               const rawData = await response.json();

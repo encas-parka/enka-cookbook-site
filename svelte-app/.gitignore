@@ -25,4 +25,4 @@ dist-ssr
 
 
 # DEV
-# static/*
+static/*

@@ -348,7 +348,7 @@ Available reusable form components in `src/lib/components/ui/`:
 
 The Vite dev server proxies requests to Hugo:
 
-- `/recettes/*` → Hugo recipe pages
+- `/recipe/*` → Hugo recipe pages
 - `/api/*` → Hugo JSON API
 - `/data/*` → Hugo static data
 - `/icons/*` → Hugo icons

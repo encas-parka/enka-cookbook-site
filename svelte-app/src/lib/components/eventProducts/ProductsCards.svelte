@@ -225,7 +225,7 @@
               class="ms-auto mt-1 flex flex-wrap items-center justify-end gap-2"
             >
               <button
-                class="btn btn-xs md:btn-sm btn-primary btn-soft"
+                class="btn btn-sm btn-primary btn-soft"
                 onclick={() =>
                   onOpenGroupEditModal(
                     "store",
@@ -244,7 +244,7 @@
               </button>
 
               <button
-                class="btn btn-xs md:btn-sm btn-primary btn-soft"
+                class="btn btn-sm btn-primary btn-soft"
                 onclick={() =>
                   onOpenGroupEditModal(
                     "who",
@@ -265,7 +265,7 @@
               <!-- Bouton validation groupée -->
               {#if groupProducts!.some((p) => p.data.displayMissingQuantity !== "✅ Complet")}
                 <button
-                  class="btn btn-xs md:btn-sm btn-primary btn-soft"
+                  class="btn btn-sm btn-primary btn-soft"
                   onclick={() =>
                     onOpenGroupPurchaseModal(groupProducts!.map((p) => p.data))}
                   title="Ouvrir le modal d'achat groupé"

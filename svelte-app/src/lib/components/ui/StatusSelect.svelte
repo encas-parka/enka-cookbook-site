@@ -14,7 +14,7 @@
 
 <div class="flex w-full flex-wrap gap-4">
   <div class="flex flex-col">
-    <select class="custom-select input w-52" bind:value={status} {disabled}>
+    <select class="select input w-52" bind:value={status} {disabled}>
       <option value="delivered" selected>Acheté</option>
       <option value="ordered">Commandé</option>
     </select>

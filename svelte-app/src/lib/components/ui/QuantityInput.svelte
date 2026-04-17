@@ -20,7 +20,7 @@
 <fieldset class="fieldset">
   <div class="flex gap-2 {required ? 'required' : ''}">
     <label class="input w-32">
-      <Package class="h-4 w-4 opacity-50" />
+      <Package class="opacity-50" />
       <input
         class="w-full text-center"
         type="number"
@@ -33,10 +33,10 @@
         aria-required={required ? "true" : undefined}
       />
     </label>
-    <label class="input w-44">
-      <span class="fieldset-label">unité</span>
+    <label class="select w-44">
+      <span class="label">unité</span>
       <select
-        class="custom-select w-full text-end"
+        class="text-end"
         bind:value={unit}
         {disabled}
         {required}

@@ -87,7 +87,7 @@
           <!-- Ajout rapide -->
           <div class="flex gap-2">
             <label class="input w-72">
-              <User class="h-4 w-4 opacity-50" />
+              <User class="opacity-50" />
               <input
                 type="text"
                 class="w-full"

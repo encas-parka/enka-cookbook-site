@@ -476,7 +476,7 @@
 
       {#if hasUndatedRecipes}
         <div
-          class="alert alert-warning alert-soft max-sm:alert-vertical w-full"
+          class="alert alert-warning alert-soft max-sm:alert-vertical mb-4 w-full"
         >
           <CircleAlert size={20} class="shrink-0" />
           <div>

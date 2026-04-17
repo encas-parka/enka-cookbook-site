@@ -27,7 +27,7 @@
 
 <div class="flex w-full min-w-0 flex-wrap items-baseline gap-x-4 gap-y-1">
   <label class="input w-full min-w-0 sm:w-72">
-    <Store class="h-4 w-4 opacity-50" />
+    <Store class="opacity-50" />
     <input
       type="text"
       bind:value

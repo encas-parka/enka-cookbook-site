@@ -14,7 +14,7 @@
   import { getProductTypeInfo } from "$lib/utils/products-display";
   import TimelineRange from "../ui/TimelineRange.svelte";
   import Fieldset from "../ui/Fieldset.svelte";
-  import { slide } from "svelte/transition";
+  import { fade, slide } from "svelte/transition";
   import { hoverHelp } from "@/lib/stores/GlobalState.svelte";
 
   const filters = $derived(productsStore.filters);
@@ -178,6 +178,7 @@
           {/each}
         </div>
         <!-- Filtres température -->
+        <div class="mt-4 opacity-60">Température :</div>
         <div
           class="bg-base-100 flex flex-wrap gap-1 rounded-xl p-2 font-semibold"
           role="group"
@@ -252,9 +253,10 @@
         </div>
         {#if filters.selectedProductTypes.length > 0 || filters.selectedTemperatures.length > 0 || filters.temperatureFilter !== "all"}
           <button
-            class="btn btn-sm btn-circle btn-outline text-error ms-auto"
+            class="btn btn-sm btn-circle btn-outline text-error float-end ms-auto"
             onclick={() => productsStore.clearTypeAndTemperatureFilters()}
             title="Effacer les filtres de types et température"
+            in:fade
           >
             <FunnelX size={16} />
           </button>

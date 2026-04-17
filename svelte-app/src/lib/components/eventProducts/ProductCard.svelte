@@ -89,7 +89,7 @@
 <!-- Card du produit -->
 <div
   transition:fade
-  class="card overflow-x-clip bg-base-100 {globalState.isMobile &&
+  class="card bg-base-100 overflow-x-clip {globalState.isMobile &&
     'border-base-300 border shadow'} {product.status === 'isSyncing'
     ? 'border-accent bg-accent/30 animate-pulse border-2'
     : ''}"
@@ -127,20 +127,18 @@
               <ClipboardPenLine class="text-warning h-4 w-4" />
             </div>
           {/if}
-        </div>
-        <!-- icone and sync spinner -->
-        <div class="flex gap-1">
+          <!-- icone and sync spinner -->
           {#if product.pF}
             <div
-              class="bg-success/20 flex h-6 w-6 items-center justify-center rounded-full"
+              class="bg-success/20 flex size-6 items-center justify-center rounded-full"
               title="Produit frais"
             >
-              <ShoppingBasket class="text-success h-4 w-4" />
+              <ShoppingBasket size={16} class="text-success " />
             </div>
           {/if}
           {#if product.pS}
             <div
-              class="bg-info/20 flex h-6 w-6 items-center justify-center rounded-full"
+              class="bg-info/20 flex size-6 items-center justify-center rounded-full"
               title="Produit surgelé"
             >
               <Snowflake class="text-info h-4 w-4" />
@@ -179,8 +177,8 @@
           <!-- Store -->
           <button
             title="Modifier le magasin"
-            class="btn btn-soft btn-xs sm:btn-sm group relative {product
-              .storeInfo?.storeName
+            class="btn btn-soft btn-sm group relative {product.storeInfo
+              ?.storeName
               ? 'btn-success'
               : ''}"
             onclick={() => onOpenModal(product.$id, "magasins")}
@@ -205,14 +203,14 @@
                 </div>
               {/if}
             {:else}
-              <div class="ml-1 text-sm font-medium">?</div>
+              <div class="ml-1 text-sm font-medium opacity-60">?</div>
             {/if}
           </button>
 
           <!-- Who -->
           <button
             title="Modifier les volontaires"
-            class="btn btn-xs sm:btn-sm btn-soft group relative {product.who &&
+            class="btn btn-sm btn-soft group relative {product.who &&
             product.who?.length > 0
               ? 'btn-success'
               : ''}"
@@ -242,7 +240,7 @@
                 {product.who}
               {/if}
             {:else}
-              <div class="ml-1 text-sm font-medium">?</div>
+              <div class="ml-1 text-sm font-medium opacity-60">?</div>
             {/if}
           </button>
         </div>
@@ -340,7 +338,7 @@
           <!-- Bouton d'achat rapide -->
           {#if shouldShowActionButtons && productInDateRange.hasMissing}
             <button
-              class="btn btn-sm btn-outline btn-primary ms-auto"
+              class="btn sm:btn-sm btn-outline btn-primary ms-auto"
               onclick={(e) => {
                 e.stopPropagation();
                 onQuickValidation(product, productInDateRange);
@@ -349,7 +347,7 @@
                 (hoverHelp.msg = "Ajouter aux achats effectués")}
               onmouseleave={() => hoverHelp.reset()}
             >
-              <span class="text-xs"
+              <span
                 ><span class="font-light">manque : </span>
                 {productInDateRange.formattedMissingQuantities}</span
               >
@@ -435,13 +433,13 @@
               >
                 <div class="flex items-center gap-1">
                   <IconComponent class="h-4 w-4" />
-                  <span class="text-sm font-medium text-nowrap">
+                  <span class="font-medium text-nowrap">
                     {purchase.quantity}
                     {purchase.unit}
                   </span>
                 </div>
                 {#if purchase.status === "ordered"}
-                  <span class="text-xs opacity-75">
+                  <span class="text-sm opacity-75">
                     {#if purchase.deliveryDate}
                       livré le: {purchase.deliveryDate}
                     {:else}

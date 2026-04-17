@@ -10,7 +10,7 @@
 </script>
 
 <label class="input w-96">
-  <MessageCircle size={20} class="text-base-centent/70" />
+  <MessageCircle size={20} class="opacity-50" />
   <input
     type="text"
     bind:value

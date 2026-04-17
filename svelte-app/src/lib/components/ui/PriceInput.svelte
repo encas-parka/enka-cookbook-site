@@ -10,7 +10,7 @@
 </script>
 
 <label class="input w-28">
-  <Euro class="h-4 w-4 opacity-50" />
+  <Euro class="opacity-50" />
   <input
     type="number"
     step="1"

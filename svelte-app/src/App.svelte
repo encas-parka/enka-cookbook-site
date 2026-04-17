@@ -151,8 +151,8 @@
   <ScrollToTopButton />
 {/await}
 
-{#await import("./lib/components/ui/OfflineIndicator.svelte") then { default: OfflineIndicator }}
-  <OfflineIndicator />
+{#await import("./lib/components/ui/StatusBar.svelte") then { default: StatusBar }}
+  <StatusBar />
 {/await}
 
 {#if globalState.isAuthenticated}

@@ -4,8 +4,6 @@ export interface NavBarConfig {
   title?: string;
   backAction?: () => void;
   actions?: Snippet;
-  isLockedByOthers?: boolean;
-  lockedByUserName?: string;
   hasUnsavedChanges?: boolean;
 }
 
@@ -24,14 +22,6 @@ class NavBarStore {
 
   get actions() {
     return this.#config.actions;
-  }
-
-  get isLockedByOthers() {
-    return this.#config.isLockedByOthers || false;
-  }
-
-  get lockedByUserName() {
-    return this.#config.lockedByUserName || "";
   }
 
   get hasUnsavedChanges() {

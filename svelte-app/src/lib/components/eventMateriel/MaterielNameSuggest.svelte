@@ -2,7 +2,7 @@
   import { eventMaterielStore } from "$lib/stores/EventMaterielStore.svelte";
   import { MATERIEL_CATALOG } from "$lib/constants/materiel-catalog";
   import type { EventMaterielType } from "$lib/types/event-materiel.types";
-  import { Search } from "@lucide/svelte";
+  import { Plus, Search } from "@lucide/svelte";
 
   interface Suggestion {
     name: string;
@@ -186,13 +186,13 @@
                 x{suggestion.quantity}
               </span>
             {/if}
-            <span
-              class="badge {suggestion.source === 'header'
-                ? 'badge-secondary'
-                : 'badge-outline'} badge-xs"
-            >
-              {sourceLabel(suggestion.source)}
-            </span>
+            {#if suggestion.source === "header"}
+              <span class="badge badge-secondary badge-xs">
+                {sourceLabel(suggestion.source)}
+              </span>
+            {:else}
+              <Plus size={14} class="opacity-50" />
+            {/if}
           </button>
         </li>
       {/each}

@@ -1,4 +1,4 @@
-import { ID, Query, Permission, Role } from "appwrite";
+import { ID, Query } from "appwrite";
 import {
   getAppwriteInstances,
   getDatabaseId,
@@ -42,7 +42,17 @@ export const locksService = {
   },
 
   /**
-   * Acquiert ou rafraîchit un verrou (Permanent UPSERT)
+   * Acquiert ou rafraîchit un verrou.
+   *
+   * Flux :
+   *   1. Lire le lock brut (sans filtrage d'expiration)
+   *   2. Si pas de document → créer
+   *   3. Si même utilisateur → refresh (heartbeat)
+   *   4. Si utilisateur différent + non expiré → refuser
+   *   5. Si utilisateur différent + expiré → prendre le relais
+   *
+   * Update est autorisé au niveau collection (Users),
+   * la protection contre le vol de lock actif est dans le code.
    */
   async acquireLock(
     resourceId: string,
@@ -54,29 +64,37 @@ export const locksService = {
       Date.now() + LOCK_DURATION_MINUTES * 60 * 1000,
     ).toISOString();
 
-    const data = {
-      userId,
-      userName,
-      expiresAt,
-    };
+    const data = { userId, userName, expiresAt };
 
-    const permissions = [
-      Permission.read(Role.any()),
-      Permission.update(Role.user(userId)),
-    ];
-
+    // 1. Lecture du lock brut (sans filtrage d'expiration)
+    // Permissions gérées au niveau collection (Create, Read, Update → Users)
     try {
-      // 1. Tenter une mise à jour (Si le document existe déjà)
+      const existing = await tables.getRow({
+        databaseId: getDatabaseId(),
+        tableId: getCollectionId("locks"),
+        rowId: resourceId,
+      });
+
+      // Document existe : vérifier si on peut l'acquérir
+      if (
+        existing.userId &&
+        existing.userId !== userId &&
+        new Date(existing.expiresAt) >= new Date()
+      ) {
+        // Lock actif détenu par un autre utilisateur → refuser
+        return false;
+      }
+
+      // Même utilisateur (heartbeat) OU lock expiré → update
       await tables.updateRow({
         databaseId: getDatabaseId(),
         tableId: getCollectionId("locks"),
         rowId: resourceId,
         data,
-        permissions,
       });
       return true;
     } catch (error: any) {
-      // 2. Si non trouvé (404), créer le document
+      // Pas de document → créer
       if (error.code === 404) {
         try {
           await tables.createRow({
@@ -84,7 +102,6 @@ export const locksService = {
             tableId: getCollectionId("locks"),
             rowId: resourceId,
             data,
-            permissions,
           });
           return true;
         } catch (createError: any) {
@@ -93,9 +110,8 @@ export const locksService = {
         }
       }
 
-      // 3. Si erreur de permission (déjà verrouillé par un autre)
       console.warn(
-        "[locksService] Acquisition refusée (peut-être déjà verrouillé):",
+        "[locksService] Erreur acquisition verrou:",
         error.message,
       );
       return false;
@@ -103,37 +119,30 @@ export const locksService = {
   },
 
   /**
-   * Libère un verrou (Réinitialise les valeurs pour le rendre disponible)
+   * Libère un verrou (Réinitialise les valeurs pour le rendre disponible).
+   * Permissions gérées au niveau collection (Update → Users).
    */
   async releaseLock(resourceId: string, userId: string): Promise<void> {
     const { tables } = await getAppwriteInstances();
     try {
-      // Réinitialiser le verrou au lieu de supprimer la row
-      // Plus robuste : évite les erreurs 401 si les permissions changent
       await tables.updateRow({
         databaseId: getDatabaseId(),
         tableId: getCollectionId("locks"),
         rowId: resourceId,
         data: {
-          userId: "", // Vide = aucun utilisateur
+          userId: "",
           userName: "",
-          expiresAt: new Date(0).toISOString(), // Date passée = verrou expiré
+          expiresAt: new Date(0).toISOString(),
         },
-        permissions: [
-          Permission.read(Role.any()),
-          Permission.update(Role.any()), // Réinitialiser les permissions pour permettre à任何人 de prendre le lock
-        ],
       });
       console.log(
-        `[locksService] Verrou libéré (réinitialisé) pour ${resourceId}`,
+        `[locksService] Verrou libéré pour ${resourceId}`,
       );
     } catch (error: any) {
       if (error.code === 404) {
         console.log(`[locksService] Verrou déjà libéré pour ${resourceId}`);
         return;
       }
-      // En cas d'erreur (401, 403, etc.), on logue mais on ne bloque pas
-      // Le cleanup local se fera dans EventEditPage anyway
       console.warn(
         "[locksService] Impossible de libérer le verrou sur le serveur:",
         error.message,

@@ -346,10 +346,10 @@
             Pas encore de compte ?
             <button
               onclick={() => (showLogin = false)}
-              class="btn btn-primary btn-sm btn-soft ms-1"
+              class="btn btn-primary btn-link"
               disabled={isLoading}
             >
-              S'inscrire
+              Créer un compte
             </button>
           </div>
         </div>
@@ -446,7 +446,7 @@
           Déjà un compte ?
           <button
             onclick={() => (showLogin = true)}
-            class="btn btn-soft btn-sm btn-primary ms-1"
+            class="btn btn-link btn-primary"
             disabled={isLoading}
           >
             Se connecter

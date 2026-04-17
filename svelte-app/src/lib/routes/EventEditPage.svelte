@@ -35,6 +35,7 @@
   import EventDocumentsFieldset from "../components/eventEdit/EventDocumentsFieldset.svelte";
   import { navBarStore } from "../stores/NavBarStore.svelte";
   import { locksService, type AppwriteLock } from "../services/appwrite-locks";
+  import { statusBarStore } from "../stores/StatusBarStore.svelte";
   import UnsavedChangesGuard from "../components/ui/UnsavedChangesGuard.svelte";
   import Fieldset from "../components/ui/Fieldset.svelte";
   import ConfirmModal from "../components/ui/ConfirmModal.svelte";
@@ -270,11 +271,27 @@
   $effect(() => {
     navBarStore.setConfig({
       actions: navActions,
-      isLockedByOthers,
-      lockedByUserName,
       hasUnsavedChanges: isDirty && !isLockedByOthers,
     });
   });
+
+  // ============================================================================
+  // STATUS BAR (lock info)
+  // ============================================================================
+
+  $effect(() => {
+    if (isLockedByOthers) {
+      statusBarStore.setLockStatus({
+        type: "locked-by-other",
+        userName: lockedByUserName,
+      });
+    } else if (isLockedByMe) {
+      statusBarStore.setLockStatus({ type: "locked-by-me" });
+    } else {
+      statusBarStore.setLockStatus(null);
+    }
+  });
+
   // ============================================================================
   // INITIALISATION
   // ============================================================================
@@ -369,6 +386,9 @@
       console.log("🚪 Démontage du composant, libération du lock...");
       releaseLock();
     }
+
+    // 4. Nettoyer le statut de la barre
+    statusBarStore.clearLockStatus();
   });
 
   // ============================================================================
@@ -1002,7 +1022,9 @@
   </div>
 {/snippet}
 
-<div class="bg-base-200 relative min-h-lvh overflow-x-clip space-y-6 px-4 pt-4 pb-20 md:px-20">
+<div
+  class="bg-base-200 relative min-h-lvh space-y-6 overflow-x-clip px-4 pt-4 pb-20 md:px-20"
+>
   <div class="flex flex-wrap items-center justify-between gap-x-6 gap-y-3">
     <div class="min-w-80 flex-1 gap-2">
       {#if editingTitle}
@@ -1214,7 +1236,7 @@
         <!-- Recettes à planifier (meals sans date) -->
         {#if undatedMeals.length > 0}
           <fieldset
-            class="fieldset bg-base-100/70 rounded-box border-base-300 mb-4 border p-4 shadow"
+            class="fieldset bg-base-100/50 rounded-box border-base-300 mb-4 border p-4 shadow"
           >
             <legend
               class="fieldset-legend bg-base-100/70 rounded-2xl px-4 text-lg"

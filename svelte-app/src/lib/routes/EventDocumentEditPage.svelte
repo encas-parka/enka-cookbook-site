@@ -11,6 +11,7 @@
   import UnsavedChangesGuard from "$lib/components/ui/UnsavedChangesGuard.svelte";
   import SvelteMarkdown from "@humanspeak/svelte-markdown";
   import { navBarStore } from "$lib/stores/NavBarStore.svelte";
+  import { statusBarStore } from "$lib/stores/StatusBarStore.svelte";
   import { online } from "svelte/reactivity/window";
   import { route, searchParams } from "$lib/router";
   import { shareOrDownload, toSlug } from "$lib/utils/share-utils";
@@ -195,6 +196,7 @@
 
   onDestroy(() => {
     releaseLock();
+    statusBarStore.clearLockStatus();
   });
 
   // Lock réactif au mode
@@ -276,9 +278,24 @@
     navBarStore.setConfig({
       title: storeDoc ? storeDoc.title : "Document",
       actions: navActions,
-      isLockedByOthers,
-      lockedByUserName: lockHolderName || undefined,
     });
+  });
+
+  // ============================================================================
+  // STATUS BAR (lock info)
+  // ============================================================================
+
+  $effect(() => {
+    if (isLockedByOthers) {
+      statusBarStore.setLockStatus({
+        type: "locked-by-other",
+        userName: lockHolderName || "un autre utilisateur",
+      });
+    } else if (isLockedByMe) {
+      statusBarStore.setLockStatus({ type: "locked-by-me" });
+    } else {
+      statusBarStore.setLockStatus(null);
+    }
   });
 
   $effect(() => {

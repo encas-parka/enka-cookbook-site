@@ -399,6 +399,58 @@
   </button>
 {/snippet}
 
+{#snippet addDropDown()}
+  <div class="dropdown dropdown-end ms-auto">
+    <div tabindex="0" role="button" class="btn btn-primary btn-sm">
+      <Plus class="size-4" />
+      Ajouter
+      <ChevronDown size={14} class="opacity-50" />
+    </div>
+    <ul
+      class="menu dropdown-content bg-base-100 border-base-200 z-1 mt-3 w-52 rounded-xl border p-2 font-medium shadow-xl"
+    >
+      <li>
+        <button onclick={openAddForm}>
+          <Plus size={16} />
+          Ajouter
+        </button>
+      </li>
+      <li>
+        <button onclick={() => (catalogModalOpen = true)}>
+          <ListPlus size={16} />
+          Catalogue
+        </button>
+      </li>
+      {#if myTeams.length === 1}
+        <li>
+          <button onclick={() => openImportModal()}>
+            <ClipboardCopy size={16} />
+            {myTeams[0].name}
+            {#if materielStore.loans.some((l) => l.ownerId === myTeams[0].$id && l.eventId === eventId)}
+              <span class="text-base-content/50 text-xs"
+                >(réservation existante)</span
+              >
+            {/if}
+          </button>
+        </li>
+      {:else if myTeams.length > 1}
+        <li class="menu-title">Importer depuis</li>
+        {#each myTeams as team (team.$id)}
+          <li>
+            <button onclick={() => openImportModal(team.$id)}>
+              <ClipboardCopy size={16} />
+              {team.name}
+              {#if materielStore.loans.some((l) => l.ownerId === team.$id && l.eventId === eventId)}
+                <span class="text-base-content/50 text-xs">(résa.)</span>
+              {/if}
+            </button>
+          </li>
+        {/each}
+      {/if}
+    </ul>
+  </div>
+{/snippet}
+
 <div class="mx-auto mt-4 max-w-7xl overflow-x-hidden p-4 pb-20">
   <div class="flex gap-4">
     <LeftPanel>
@@ -423,56 +475,7 @@
           </h2>
         </div>
         {#if canEdit}
-          <div class="dropdown dropdown-end ms-auto">
-            <div tabindex="0" role="button" class="btn btn-primary btn-sm">
-              <Plus class="size-4" />
-              Ajouter
-              <ChevronDown size={14} class="opacity-50" />
-            </div>
-            <ul
-              class="menu dropdown-content bg-base-100 border-base-200 z-1 mt-3 w-52 rounded-xl border p-2 font-medium shadow-xl"
-            >
-              <li>
-                <button onclick={openAddForm}>
-                  <Plus size={16} />
-                  Ajouter
-                </button>
-              </li>
-              <li>
-                <button onclick={() => (catalogModalOpen = true)}>
-                  <ListPlus size={16} />
-                  Catalogue
-                </button>
-              </li>
-              {#if myTeams.length === 1}
-                <li>
-                  <button onclick={() => openImportModal()}>
-                    <ClipboardCopy size={16} />
-                    {myTeams[0].name}
-                    {#if materielStore.loans.some((l) => l.ownerId === myTeams[0].$id && l.eventId === eventId)}
-                      <span class="text-base-content/50 text-xs"
-                        >(réservation existante)</span
-                      >
-                    {/if}
-                  </button>
-                </li>
-              {:else if myTeams.length > 1}
-                <li class="menu-title">Importer depuis</li>
-                {#each myTeams as team (team.$id)}
-                  <li>
-                    <button onclick={() => openImportModal(team.$id)}>
-                      <ClipboardCopy size={16} />
-                      {team.name}
-                      {#if materielStore.loans.some((l) => l.ownerId === team.$id && l.eventId === eventId)}
-                        <span class="text-base-content/50 text-xs">(résa.)</span
-                        >
-                      {/if}
-                    </button>
-                  </li>
-                {/each}
-              {/if}
-            </ul>
-          </div>
+          {@render addDropDown()}
         {/if}
       </div>
 

@@ -21,7 +21,6 @@
     CookingPot,
     DatabaseIcon,
     LayoutDashboardIcon,
-    LockIcon,
     LogInIcon,
     LogOutIcon,
     Package,
@@ -428,14 +427,6 @@
   </div>
 
   <div class="navbar-end z-10 ms-auto w-fit flex-1 shrink-0 gap-4">
-    {#if navBarStore.isLockedByOthers}
-      <div class="badge badge-warning flex items-center gap-1 py-3 font-medium">
-        <LockIcon size={14} />
-        <span class="text-xs">
-          Édition par {navBarStore.lockedByUserName}
-        </span>
-      </div>
-    {/if}
     <!-- Actions -->
     <div class="flex items-center gap-2">
       {#if navBarStore.actions}

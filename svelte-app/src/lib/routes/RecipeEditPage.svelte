@@ -14,6 +14,7 @@
   import { onDestroy } from "svelte";
   import { fade } from "svelte/transition";
   import { navBarStore } from "../stores/NavBarStore.svelte";
+  import { statusBarStore } from "../stores/StatusBarStore.svelte";
   import RecipeHeaderForm from "$lib/components/recipeEdit/RecipeHeaderForm.svelte";
   import RecipePrepaForm from "$lib/components/recipeEdit/RecipePrepaForm.svelte";
   import RecipePermissionsManager from "$lib/components/recipeEdit/RecipePermissionsManager.svelte";
@@ -186,11 +187,29 @@
     });
   });
 
+  // ============================================================================
+  // STATUS BAR (lock info)
+  // ============================================================================
+
+  $effect(() => {
+    if (isLockedByOthers) {
+      statusBarStore.setLockStatus({
+        type: "locked-by-other",
+        userName: "un autre utilisateur",
+      });
+    } else if (isLockedByMe) {
+      statusBarStore.setLockStatus({ type: "locked-by-me" });
+    } else {
+      statusBarStore.setLockStatus(null);
+    }
+  });
+
   onDestroy(async () => {
     stopHeartbeat();
     if (isLockedByMe && !isSaving) {
       await releaseLock();
     }
+    statusBarStore.clearLockStatus();
     window.removeEventListener("beforeunload", handleBeforeUnload);
   });
 

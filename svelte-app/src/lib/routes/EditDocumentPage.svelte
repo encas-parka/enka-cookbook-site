@@ -21,6 +21,7 @@
   import UnsavedChangesGuard from "$lib/components/ui/UnsavedChangesGuard.svelte";
   import SvelteMarkdown from "@humanspeak/svelte-markdown";
   import { navBarStore } from "$lib/stores/NavBarStore.svelte";
+  import { statusBarStore } from "$lib/stores/StatusBarStore.svelte";
   import { online } from "svelte/reactivity/window";
 
   // ============================================================================
@@ -273,6 +274,7 @@
   // Libérer le lock à la destruction
   onDestroy(() => {
     releaseLock();
+    statusBarStore.clearLockStatus();
   });
 
   // Lock réactif au mode
@@ -413,9 +415,24 @@
     navBarStore.setConfig({
       title: storeDoc ? `Document: ${storeDoc.title}` : "Modifier le document",
       actions: navActions,
-      isLockedByOthers: isLockedByOthers,
-      lockedByUserName: storeLockedByName || undefined,
     });
+  });
+
+  // ============================================================================
+  // STATUS BAR (lock info)
+  // ============================================================================
+
+  $effect(() => {
+    if (isLockedByOthers) {
+      statusBarStore.setLockStatus({
+        type: "locked-by-other",
+        userName: storeLockedByName || "un autre utilisateur",
+      });
+    } else if (isLockedByMe) {
+      statusBarStore.setLockStatus({ type: "locked-by-me" });
+    } else {
+      statusBarStore.setLockStatus(null);
+    }
   });
 
   // Enregistrer le gestionnaire de clavier

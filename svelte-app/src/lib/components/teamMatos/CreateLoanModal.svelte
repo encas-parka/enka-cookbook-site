@@ -330,7 +330,11 @@
   }
 
   function handleQuantityChange(materielId: string, newQuantity: number) {
-    const max = getEffectiveMax(materielId, selectedMateriels.find(m => m.materielId === materielId)?.maxQuantity ?? 0);
+    const max = getEffectiveMax(
+      materielId,
+      selectedMateriels.find((m) => m.materielId === materielId)?.maxQuantity ??
+        0,
+    );
     selectedMateriels = selectedMateriels.map((m) =>
       m.materielId === materielId
         ? { ...m, quantity: Math.max(0, Math.min(newQuantity, max)) }
@@ -379,9 +383,7 @@
   function applyConflictResolution(): SelectedMateriel[] {
     const removeIds = new Set(conflictSummary.toRemove.map((i) => i.name));
     return selectedMateriels
-      .filter(
-        (m) => m.quantity > 0 && !removeIds.has(m.materielName),
-      )
+      .filter((m) => m.quantity > 0 && !removeIds.has(m.materielName))
       .map((m) => {
         const reduce = conflictSummary.toReduce.find(
           (i) => i.name === m.materielName,
@@ -538,7 +540,10 @@
     onClose();
   }
 
-  function getItemConflictInfo(materielId: string, quantity: number): {
+  function getItemConflictInfo(
+    materielId: string,
+    quantity: number,
+  ): {
     isUnavailable: boolean;
     unavailableCount: number;
     available: number;
@@ -596,7 +601,9 @@
               Événement lié ?</span
             >
             <select
-              disabled={loading || (mode === "edit" && isEndDatePast) || !!preselectedEventId}
+              disabled={loading ||
+                (mode === "edit" && isEndDatePast) ||
+                !!preselectedEventId}
               value={selectedEventId || ""}
               onchange={(e) => {
                 const target = e.target as HTMLSelectElement;
@@ -719,7 +726,9 @@
                     <div class="bg-base-300 rounded p-1">
                       <TypeIcon class="h-4 w-4 opacity-70" />
                     </div>
-                    <div class="flex min-w-0 flex-1 items-center gap-x-4 gap-y-1">
+                    <div
+                      class="flex min-w-0 flex-1 items-center gap-x-4 gap-y-1"
+                    >
                       <div class="truncate font-medium">
                         {materiel.materielName}
                       </div>
@@ -766,19 +775,40 @@
               <AlertCircle class="h-5 w-5" />
               <div>
                 <p class="font-semibold">
-                  Conflit{conflictSummary.toRemove.length + conflictSummary.toReduce.length > 1 ? "s" : ""} de disponibilité détecté{conflictSummary.toRemove.length + conflictSummary.toReduce.length > 1 ? "s" : ""}
+                  Conflit{conflictSummary.toRemove.length +
+                    conflictSummary.toReduce.length >
+                  1
+                    ? "s"
+                    : ""} de disponibilité détecté{conflictSummary.toRemove
+                    .length +
+                    conflictSummary.toReduce.length >
+                  1
+                    ? "s"
+                    : ""}
                 </p>
                 <p class="mt-1 text-sm opacity-80">
                   {#if conflictSummary.toRemove.length > 0}
-                    <span>Indisponible{conflictSummary.toRemove.length > 1 ? "s" : ""} : </span>
-                    <span class="font-medium">{conflictSummary.toRemove.map((i) => i.name).join(", ")}</span>
+                    <span
+                      >Indisponible{conflictSummary.toRemove.length > 1
+                        ? "s"
+                        : ""} :
+                    </span>
+                    <span class="font-medium"
+                      >{conflictSummary.toRemove
+                        .map((i) => i.name)
+                        .join(", ")}</span
+                    >
                     {#if conflictSummary.toReduce.length > 0}
                       <span class="mx-1">·</span>
                     {/if}
                   {/if}
                   {#if conflictSummary.toReduce.length > 0}
                     <span>Quantité réduite : </span>
-                    <span class="font-medium">{conflictSummary.toReduce.map((i) => `${i.name} (${i.available}/${i.requested})`).join(", ")}</span>
+                    <span class="font-medium"
+                      >{conflictSummary.toReduce
+                        .map((i) => `${i.name} (${i.available}/${i.requested})`)
+                        .join(", ")}</span
+                    >
                   {/if}
                 </p>
               </div>
@@ -821,9 +851,15 @@
                             : materiel.type === "hygiene"
                               ? SoapDispenserDroplet
                               : Box}
-                {@const conflict = getItemConflictInfo(materiel.materielId, materiel.quantity)}
+                {@const conflict = getItemConflictInfo(
+                  materiel.materielId,
+                  materiel.quantity,
+                )}
                 {@const hasConflict = conflict.unavailableCount > 0}
-                {@const effectiveMax = getEffectiveMax(materiel.materielId, materiel.maxQuantity)}
+                {@const effectiveMax = getEffectiveMax(
+                  materiel.materielId,
+                  materiel.maxQuantity,
+                )}
 
                 <div
                   class="rounded-lg p-2 transition-opacity {materiel.quantity ===
@@ -866,7 +902,8 @@
                     <div class="flex items-center gap-1">
                       <button
                         class="btn btn-ghost btn-xs btn-circle text-error"
-                        onclick={() => handleRemoveMateriel(materiel.materielId)}
+                        onclick={() =>
+                          handleRemoveMateriel(materiel.materielId)}
                         disabled={loading || materiel.quantity === 0}
                         aria-label="Retirer"
                       >
@@ -906,10 +943,8 @@
                           handleQuantityChange(
                             materiel.materielId,
                             materiel.quantity + getStep(effectiveMax),
-                          )
-                        }
-                        disabled={loading ||
-                          materiel.quantity >= effectiveMax}
+                          )}
+                        disabled={loading || materiel.quantity >= effectiveMax}
                         aria-label="Augmenter"
                       >
                         <Plus class="size-3" />
@@ -921,26 +956,10 @@
                           handleQuantityChange(
                             materiel.materielId,
                             effectiveMax,
-                          )
-                        }
-                        disabled={loading ||
-                          materiel.quantity >= effectiveMax}
+                          )}
+                        disabled={loading || materiel.quantity >= effectiveMax}
                       >
                         tout
-                      </button>
-
-                      <button
-                        class="btn btn-ghost btn-xs btn-circle hidden sm:flex"
-                        onclick={() =>
-                          handleQuantityChange(
-                            materiel.materielId,
-                            materiel.quantity - getStep(effectiveMax),
-                          )
-                        }
-                        disabled={loading || materiel.quantity <= 0}
-                        aria-label="Diminuer"
-                      >
-                        <Minus class="size-3" />
                       </button>
                     </div>
                   </div>

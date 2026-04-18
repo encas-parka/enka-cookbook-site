@@ -101,6 +101,7 @@ export type AwCollectionName =
 	| 'kteams'
 	| 'locks'
 	| 'user_notifications'
+	| 'materiel'
 	| 'materiel_loan'
 	| 'event_materiel'
 	| 'teamdocs';

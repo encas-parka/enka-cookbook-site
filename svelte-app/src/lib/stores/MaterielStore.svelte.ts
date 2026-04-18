@@ -1,65 +1,55 @@
-import { SvelteMap } from "svelte/reactivity";
-import type { Models } from "appwrite";
-import { Query } from "appwrite";
-import { CACHE_SYNC_VERSION } from "$lib/constants/sync";
-import type { Materiel, MaterielLoan, MaterielType } from "$lib/types/appwrite";
+import { Permission, Role } from "appwrite";
+import type { Materiel, MaterielLoan } from "$lib/types/appwrite";
 import type {
   EnrichedMateriel,
   EnrichedMaterielLoan,
-  MaterielFromAppwrite,
   MaterielLoanItem,
-  MaterielLoanDetail,
   MaterielLoanStatusUnion,
+  MaterielOwner,
 } from "$lib/types/materiel.types";
-import {
-  listMateriels,
-  getMateriel,
-  createMateriel,
-  updateMateriel,
-  deleteMateriel,
-  getMaterielRealtimeChannels,
-  updateMateriel as updateMaterielService,
-} from "$lib/services/appwrite-materiel";
-import {
-  listMaterielLoans,
-  getMaterielLoan,
-  getMaterielLoanRealtimeChannels,
-  createMaterielLoan,
-  updateMaterielLoan,
-  deleteMaterielLoan,
-} from "$lib/services/appwrite-materiel-loan";
-import {
-  createMaterielIDBCache,
-  type MaterielIDBCache,
-} from "$lib/services/materiel-idb-cache";
-import { materielTypeLabels } from "$lib/utils/share-utils";
-import { globalState } from "./GlobalState.svelte";
-import { realtimeManager } from "./RealtimeManager.svelte";
-import { nativeTeamsStore } from "./NativeTeamsStore.svelte";
-import { eventMaterielStore } from "./EventMaterielStore.svelte";
 import {
   enrichMaterielFromAppwrite,
   enrichLoanFromAppwrite,
   reEnrichMaterielFromLoans,
-  parseOwnerFromAppwrite,
   parseLoanItemsFromAppwrite,
-  extractMaterielIdsFromLoans,
   calculateLoanedQuantityForPeriod,
 } from "$lib/utils/materiel.utils";
+import { materielTypeLabels } from "$lib/utils/share-utils";
+import { globalState } from "./GlobalState.svelte";
+import { nativeTeamsStore } from "./NativeTeamsStore.svelte";
+import { eventMaterielStore } from "./EventMaterielStore.svelte";
+import {
+  createSyncCollection,
+  bridgeToMap,
+  db,
+} from "$lib/db-sync/aw-sync";
 
 export class MaterielStore {
+  // aw-sync collections
+  #materielCollection = createSyncCollection<Materiel>({
+    table: db.materiels,
+    collectionName: "materiel",
+  });
+
+  #loanCollection = createSyncCollection<MaterielLoan>({
+    table: db.materielLoans,
+    collectionName: "materiel_loan",
+  });
+
+  // Bridges (liveQuery → SvelteMap)
+  #materielBridge = bridgeToMap<Materiel>(() => db.materiels.toArray());
+  #loanBridge = bridgeToMap<MaterielLoan>(() => db.materielLoans.toArray());
+
+  // Raw data maps
+  #materielsMap = this.#materielBridge.map;
+  #loansMap = this.#loanBridge.map;
+
   // État réactif
-  #materiels = new SvelteMap<string, EnrichedMateriel>();
-  #loans = new SvelteMap<string, EnrichedMaterielLoan>();
-  #idbCache: MaterielIDBCache | null = null;
   #loading = $state(false);
   #error = $state<string | null>(null);
   #isInitialized = $state(false);
   #isRealtimeActive = $state(false);
   #realtimeInitialized = false;
-  #lastSyncMateriel = $state<string | null>(null);
-  #lastSyncLoans = $state<string | null>(null);
-  #realtimeUnsubscribe: (() => void) | null = null;
 
   // Getters simples
   get loading() {
@@ -75,29 +65,52 @@ export class MaterielStore {
     return this.#isRealtimeActive;
   }
   get count() {
-    return this.#materiels.size;
+    return this.#materielsMap.size;
   }
 
-  // Propriétés réactives ($derived)
-  #materielsList = $derived(Array.from(this.#materiels.values()));
+  // =============================================================================
+  // ENRICHED DERIVED DATA
+  // =============================================================================
+
+  /** Raw materiels list from Dexie */
+  #rawMaterielsList = $derived(Array.from(this.#materielsMap.values()));
+
+  /** Raw loans list from Dexie */
+  #rawLoansList = $derived(Array.from(this.#loansMap.values()));
+
+  /** All loans enriched with parsed materielItems */
+  #enrichedLoans = $derived.by(() => {
+    const result = new Map<string, EnrichedMaterielLoan>();
+    for (const loan of this.#rawLoansList) {
+      result.set(loan.$id, enrichLoanFromAppwrite(loan));
+    }
+    return result;
+  });
+
+  /** All materiels enriched with loan data */
+  #enrichedMateriels = $derived.by(() => {
+    const allLoans = this.#rawLoansList;
+    const result = new Map<string, EnrichedMateriel>();
+    for (const doc of this.#rawMaterielsList) {
+      result.set(doc.$id, enrichMaterielFromAppwrite(doc, allLoans));
+    }
+    return result;
+  });
+
+  // Public reactive lists
   get materiels() {
-    return this.#materielsList;
+    return Array.from(this.#enrichedMateriels.values());
   }
 
-  // Loans
-  #loansList = $derived(Array.from(this.#loans.values()));
   get loans() {
-    return this.#loansList;
+    return Array.from(this.#enrichedLoans.values());
   }
 
   // Matériels des équipes de l'utilisateur
   #teamMaterielsList = $derived.by(() => {
     if (!globalState.userId) return [];
-
-    // Récupérer les IDs des équipes de l'utilisateur
     const myTeamIds = nativeTeamsStore.myTeams.map((t) => t.$id);
-
-    return this.#materielsList.filter(
+    return Array.from(this.#enrichedMateriels.values()).filter(
       (m) => m.ownerData?.teamId && myTeamIds.includes(m.ownerData.teamId),
     );
   });
@@ -108,15 +121,11 @@ export class MaterielStore {
   // Matériels partageables des autres équipes
   #shareableMaterielsList = $derived.by(() => {
     if (!globalState.userId) return [];
-
     const myTeamIds = nativeTeamsStore.myTeams.map((t) => t.$id);
-
-    return this.#materielsList.filter((m) => {
-      // Vérifier si le matériel est partageable avec au moins une de mes équipes
+    return Array.from(this.#enrichedMateriels.values()).filter((m) => {
       const isShareableWithMyTeams = m.shareableWith?.some((teamId) =>
         myTeamIds.includes(teamId),
       );
-
       return (
         isShareableWithMyTeams &&
         !(m.ownerData?.teamId && myTeamIds.includes(m.ownerData.teamId))
@@ -129,7 +138,9 @@ export class MaterielStore {
 
   // Matériels avec quantité disponible
   #availableMaterielsList = $derived.by(() => {
-    return this.#materielsList.filter((m) => m.isAvailable);
+    return Array.from(this.#enrichedMateriels.values()).filter(
+      (m) => m.isAvailable,
+    );
   });
   get availableMateriels() {
     return this.#availableMaterielsList;
@@ -139,11 +150,6 @@ export class MaterielStore {
   // FILTRAGE PAR OWNER
   // =============================================================================
 
-  /**
-   * Récupère les matériels disponibles pour une équipe spécifique
-   * @param teamId ID de l'équipe propriétaire
-   * @returns Liste des matériels disponibles appartenant à l'équipe
-   */
   getAvailableMaterielsByOwner(teamId: string): EnrichedMateriel[] {
     return this.#availableMaterielsList.filter(
       (m) =>
@@ -153,23 +159,12 @@ export class MaterielStore {
     );
   }
 
-  /**
-   * Récupère tous les matériels pour une équipe spécifique
-   * @param teamId ID de l'équipe propriétaire
-   * @returns Liste de tous les matériels appartenant à l'équipe
-   */
   getMaterielsByOwner(teamId: string): EnrichedMateriel[] {
-    return this.#materielsList.filter((m) => m.ownerData?.teamId === teamId);
+    return Array.from(this.#enrichedMateriels.values()).filter(
+      (m) => m.ownerData?.teamId === teamId,
+    );
   }
 
-  /**
-   * Récupère les matériels disponibles pour une équipe sur une période donnée
-   * @param teamId ID de l'équipe propriétaire
-   * @param startDate Date de début de la période
-   * @param endDate Date de fin de la période
-   * @param excludeLoanId Optionnel : ID d'un emprunt à exclure du calcul (pour l'édition)
-   * @returns Liste des matériels disponibles avec leur quantité disponible sur la période
-   */
   getAvailableMaterielsForPeriod(
     teamId: string,
     startDate: string,
@@ -178,11 +173,11 @@ export class MaterielStore {
   ): Array<EnrichedMateriel & { availableForPeriod: number }> {
     const periodStart = new Date(startDate);
     const periodEnd = new Date(endDate);
-    const allLoans = Array.from(this.#loans.values());
+    const allLoans = this.#rawLoansList;
 
-    return this.#materielsList
+    return Array.from(this.#enrichedMateriels.values())
       .filter((m) => m.ownerData?.teamId === teamId)
-      .filter((m) => m.status !== "lost" && m.status !== "torepair") // Exclure les matériels perdus ou à réparer
+      .filter((m) => m.status !== "lost" && m.status !== "torepair")
       .map((materiel) => {
         const loanedQuantity = calculateLoanedQuantityForPeriod(
           materiel.$id,
@@ -192,22 +187,15 @@ export class MaterielStore {
           excludeLoanId,
         );
         const availableForPeriod = materiel.quantity - loanedQuantity;
-
-        return {
-          ...materiel,
-          availableForPeriod,
-        };
+        return { ...materiel, availableForPeriod };
       })
       .filter((m) => m.availableForPeriod > 0);
   }
 
   // =============================================================================
-  // INITIALISATION
+  // INITIALISATION (3 PHASES)
   // =============================================================================
 
-  /**
-   * Phase 1 : Charge le cache IndexedDB uniquement
-   */
   async loadCache(): Promise<void> {
     if (this.#isInitialized) return;
 
@@ -220,16 +208,7 @@ export class MaterielStore {
         return;
       }
 
-      // 1. Créer le cache IDB
-      this.#idbCache = await createMaterielIDBCache();
-
-      // 2. Charger depuis IDB
-      await this.#loadFromCacheInternal();
-
-      this.#isInitialized = true;
-      console.log(
-        `[MaterielStore] Cache chargé : ${this.#materiels.size} matériels, ${this.#loans.size} emprunts`,
-      );
+      console.log("[MaterielStore] Cache chargé (Dexie)");
     } catch (err) {
       this.#error =
         err instanceof Error ? err.message : "Erreur de chargement du cache";
@@ -240,23 +219,18 @@ export class MaterielStore {
     }
   }
 
-  /**
-   * Phase 2 : Synchronise avec Appwrite
-   */
   async syncFromRemote(): Promise<void> {
     this.#loading = true;
     this.#error = null;
 
     try {
-      if (!globalState.userId) {
-        return;
-      }
+      if (!globalState.userId) return;
 
-      // Sync incrémentiel avec Appwrite
-      await this.#syncFromAppwrite();
+      await this.#materielCollection.initialFetch();
+      await this.#loanCollection.initialFetch();
 
       console.log(
-        `[MaterielStore] Sync terminé : ${this.#materiels.size} matériels, ${this.#loans.size} emprunts`,
+        `[MaterielStore] Sync terminé : ${this.#materielsMap.size} matériels, ${this.#loansMap.size} emprunts`,
       );
     } catch (err) {
       this.#error =
@@ -268,32 +242,16 @@ export class MaterielStore {
     }
   }
 
-  /**
-   * Phase 3 : Configure les abonnements realtime
-   */
   async setupRealtime(): Promise<void> {
-    // ✅ Pas de realtime pour les visiteurs
-    if (!globalState.isAuthenticated) {
-      return;
-    }
-
-    // Vérifier si déjà configuré pour éviter les doublons
-    // ✅ SAUF si le RealtimeManager a été détruit (changement auth)
-    if (this.#realtimeInitialized && realtimeManager.isInitialized) {
+    if (!globalState.isAuthenticated) return;
+    if (this.#realtimeInitialized) {
       console.log("[MaterielStore] Realtime déjà configuré");
       return;
     }
 
-    // Réinitialiser le flag si le RealtimeManager a été détruit
-    if (this.#realtimeInitialized && !realtimeManager.isInitialized) {
-      console.log(
-        "[MaterielStore] RealtimeManager détruit, réinitialisation...",
-      );
-      this.#realtimeInitialized = false;
-    }
-
     try {
-      await this.#setupRealtime();
+      this.#materielCollection.subscribe();
+      this.#loanCollection.subscribe();
       this.#isRealtimeActive = true;
       this.#realtimeInitialized = true;
       console.log("[MaterielStore] Realtime configuré");
@@ -305,299 +263,24 @@ export class MaterielStore {
     }
   }
 
-  /**
-   * Initialise les 3 phases séquentiellement (méthode legacy pour compatibilité)
-   */
   async initialize(): Promise<void> {
     await this.loadCache();
     await this.syncFromRemote();
     await this.setupRealtime();
   }
 
-  async #loadFromCacheInternal(): Promise<void> {
-    if (!this.#idbCache) return;
-
-    try {
-      // Charger les matériels
-      const materielsMap = await this.#idbCache.loadMateriels();
-      materielsMap.forEach((materiel) => {
-        this.#materiels.set(materiel.$id, materiel);
-      });
-
-      // Charger les emprunts
-      const loansMap = await this.#idbCache.loadLoans();
-      loansMap.forEach((loan) => {
-        const enriched = enrichLoanFromAppwrite(loan);
-        this.#loans.set(loan.$id, enriched);
-      });
-
-      // Charger les métadonnées
-      const metadata = await this.#idbCache.loadMetadata();
-
-      // Vérifier la version du cache — si obsolète, forcer un full sync
-      if (!metadata.syncVersion || metadata.syncVersion < CACHE_SYNC_VERSION) {
-        console.log(
-          `[MaterielStore] Cache syncVersion ${metadata.syncVersion ?? "absent"} < ${CACHE_SYNC_VERSION}, full sync requis`,
-        );
-        this.#lastSyncMateriel = null;
-        this.#lastSyncLoans = null;
-      } else {
-        this.#lastSyncMateriel = metadata.lastSyncMateriel;
-        this.#lastSyncLoans = metadata.lastSyncLoans;
-      }
-
-      console.log(
-        `[MaterielStore] ${this.#materiels.size} matériels et ${this.#loans.size} emprunts chargés du cache IDB`,
-      );
-    } catch (err) {
-      console.warn("[MaterielStore] Erreur lecture cache IDB, ignoré:", err);
-    }
-  }
-
-  async #syncFromAppwrite(): Promise<void> {
-    try {
-      // 1. Sync Materiel (modifiés depuis lastSyncMateriel)
-      const materielQueries = this.#lastSyncMateriel
-        ? [
-            Query.greaterThan("$updatedAt", this.#lastSyncMateriel),
-            Query.limit(500),
-          ]
-        : [Query.limit(500)];
-
-      const updatedMateriels = await listMateriels(materielQueries);
-
-      for (const doc of updatedMateriels) {
-        const enriched = this.#enrichMaterielFromLoans(doc);
-        this.#materiels.set(doc.$id, enriched);
-        this.#idbCache?.upsertMateriel(enriched);
-      }
-
-      this.#lastSyncMateriel = new Date().toISOString();
-
-      // 2. Sync MaterielLoan (modifiés depuis lastSyncLoans)
-      const loanQueries = this.#lastSyncLoans
-        ? [
-            Query.greaterThan("$updatedAt", this.#lastSyncLoans),
-            Query.limit(500),
-          ]
-        : [Query.limit(500)];
-
-      const updatedLoans = await listMaterielLoans(loanQueries);
-
-      for (const loan of updatedLoans) {
-        const enriched = enrichLoanFromAppwrite(loan);
-        this.#loans.set(loan.$id, enriched);
-        this.#idbCache?.upsertLoan(loan);
-
-        // Ré-enrichir les matériels affectés
-        this.#reEnrichMaterielsFromLoan(enriched);
-      }
-
-      this.#lastSyncLoans = new Date().toISOString();
-
-      // 3. Persister les métadonnées
-      await this.#idbCache?.saveMetadata({
-        lastSyncMateriel: this.#lastSyncMateriel,
-        lastSyncLoans: this.#lastSyncLoans,
-        syncVersion: CACHE_SYNC_VERSION,
-      });
-
-      console.log("[MaterielStore] Sync terminé");
-    } catch (err) {
-      console.error("[MaterielStore] Erreur sync:", err);
-      throw err;
-    }
-  }
-
-  /**
-   * Charge TOUS les documents depuis Appwrite (sans filtre $updatedAt)
-   * Utilisé pour le hard reset
-   */
-  async #forceLoadFromAppwrite(): Promise<void> {
-    try {
-      console.log("[MaterielStore] Chargement complet depuis Appwrite...");
-
-      // 1. Charger TOUS les matériels
-      const allMateriels = await listMateriels([Query.limit(1000)]);
-
-      for (const doc of allMateriels) {
-        const enriched = this.#enrichMaterielFromLoans(doc);
-        this.#materiels.set(doc.$id, enriched);
-      }
-
-      // 2. Charger TOUS les emprunts
-      const allLoans = await listMaterielLoans([Query.limit(1000)]);
-
-      const enrichedLoans: EnrichedMaterielLoan[] = [];
-      for (const loan of allLoans) {
-        const enriched = enrichLoanFromAppwrite(loan);
-        this.#loans.set(loan.$id, enriched);
-        enrichedLoans.push(enriched);
-      }
-
-      // 3. Ré-enrichir tous les matériels avec les emprunts chargés
-      for (const loan of enrichedLoans) {
-        this.#reEnrichMaterielsFromLoan(loan);
-      }
-
-      // 4. Mettre à jour les timestamps de sync
-      this.#lastSyncMateriel = new Date().toISOString();
-      this.#lastSyncLoans = new Date().toISOString();
-
-      console.log(
-        `[MaterielStore] ${allMateriels.length} matériels et ${allLoans.length} emprunts chargés`,
-      );
-    } catch (err) {
-      console.error("[MaterielStore] Erreur chargement complet:", err);
-      throw err;
-    }
-  }
-
-  async #setupRealtime(): Promise<void> {
-    // Enregistrer un callback pour la collection materiel
-    realtimeManager.register(
-      getMaterielRealtimeChannels(),
-      async (response: any) => {
-        await this.#handleMaterielRealtime(response);
-      },
-    );
-
-    // Enregistrer un callback séparé pour la collection materiel_loan
-    realtimeManager.register(
-      getMaterielLoanRealtimeChannels(),
-      async (response: any) => {
-        await this.#handleLoanRealtime(response);
-      },
-    );
-  }
-
-  async #handleMaterielRealtime(response: any): Promise<void> {
-    try {
-      const events = response.events;
-      const payload = response.payload as Materiel;
-
-      if (!payload) {
-        console.warn(
-          "[MaterielStore] Realtime Materiel : pas de payload dans la réponse",
-        );
-        return;
-      }
-
-      const eventType = events.some((e: string) => e.includes(".create"))
-        ? "create"
-        : events.some((e: string) => e.includes(".delete"))
-          ? "delete"
-          : "update";
-
-      console.log(
-        `[MaterielStore] ⚡️ Realtime Materiel RECEIVED: ${eventType} pour ${payload.$id}`,
-      );
-
-      if (eventType === "create" || eventType === "update") {
-        const enriched = this.#enrichMaterielFromLoans(payload);
-        this.#materiels.set(payload.$id, enriched);
-        this.#idbCache?.upsertMateriel(enriched);
-      } else if (eventType === "delete") {
-        this.#materiels.delete(payload.$id);
-        this.#idbCache?.deleteMateriel(payload.$id);
-      }
-    } catch (err) {
-      console.error("[MaterielStore] Erreur realtime Materiel:", err);
-    }
-  }
-
-  async #handleLoanRealtime(response: any): Promise<void> {
-    try {
-      const events = response.events;
-      const payload = response.payload as MaterielLoan;
-
-      if (!payload) {
-        console.warn(
-          "[MaterielStore] Realtime Loan : pas de payload dans la réponse",
-        );
-        return;
-      }
-
-      const eventType = events.some((e: string) => e.includes(".create"))
-        ? "create"
-        : events.some((e: string) => e.includes(".delete"))
-          ? "delete"
-          : "update";
-
-      console.log(
-        `[MaterielStore] ⚡️ Realtime Loan RECEIVED: ${eventType} pour ${payload.$id}`,
-      );
-
-      if (eventType === "create" || eventType === "update") {
-        const enriched = enrichLoanFromAppwrite(payload);
-        this.#loans.set(payload.$id, enriched);
-        this.#idbCache?.upsertLoan(payload);
-        this.#reEnrichMaterielsFromLoan(enriched);
-      } else if (eventType === "delete") {
-        // Conserver le loan pour le ré-enrichissement avant suppression
-        const loan = this.#loans.get(payload.$id);
-        if (loan) {
-          // Ré-enrichissement synchrone avec données locales
-          this.#reEnrichMaterielsFromLoan(loan);
-        }
-        this.#loans.delete(payload.$id);
-        this.#idbCache?.deleteLoan(payload.$id);
-      }
-    } catch (err) {
-      console.error("[MaterielStore] Erreur realtime Loan:", err);
-    }
-  }
-
   // =============================================================================
-  // ENRICHISSEMENT
-  // =============================================================================
-
-  /**
-   * Enrichit un matériel en calculant ses emprunts actifs depuis #loans
-   * Utilise les utilitaires de parsing pour garantir la cohérence
-   */
-  #enrichMaterielFromLoans(doc: Materiel): EnrichedMateriel {
-    const allLoans = Array.from(this.#loans.values());
-    return enrichMaterielFromAppwrite(doc, allLoans);
-  }
-
-  /**
-   * Ré-enrichit les matériels affectés par un emprunt
-   * Version optimisée : utilise les données locales, pas d'appel API
-   */
-  #reEnrichMaterielsFromLoan(loan: EnrichedMaterielLoan): void {
-    // ✅ Utiliser les items déjà parsés du loan enrichi
-    const loanItems = loan.materielItems;
-
-    // Récupérer tous les loans pour le recalcul
-    const allLoans = Array.from(this.#loans.values());
-
-    for (const item of loanItems) {
-      const materiel = this.#materiels.get(item.materielId);
-      if (materiel) {
-        // ✅ Utiliser les données locales, pas d'appel API
-        const enriched = reEnrichMaterielFromLoans(materiel, allLoans);
-        this.#materiels.set(item.materielId, enriched);
-        this.#idbCache?.upsertMateriel(enriched);
-      }
-    }
-  }
-
-  // =============================================================================
-  // API PUBLIQUE
+  // API PUBLIQUE - MATERIELS
   // =============================================================================
 
   getMaterielById(materielId: string): EnrichedMateriel | undefined {
-    return this.#materiels.get(materielId);
+    return this.#enrichedMateriels.get(materielId);
   }
 
   getLoanById(loanId: string): EnrichedMaterielLoan | undefined {
-    return this.#loans.get(loanId);
+    return this.#enrichedLoans.get(loanId);
   }
 
-  /**
-   * Crée un nouveau matériel
-   */
   async createMateriel(data: {
     name: string;
     description?: string;
@@ -616,12 +299,53 @@ export class MaterielStore {
         throw new Error("Utilisateur non connecté");
       }
 
-      const doc = await createMateriel(data as any, globalState.userId);
-      const enriched = this.#enrichMaterielFromLoans(doc);
-      this.#materiels.set(doc.$id, enriched);
-      this.#idbCache?.upsertMateriel(enriched);
+      // Parser owner pour les permissions
+      let ownerData: MaterielOwner;
+      try {
+        ownerData =
+          typeof data.owner === "string"
+            ? JSON.parse(data.owner)
+            : (data.owner as MaterielOwner);
+      } catch (e) {
+        throw new Error("Invalid owner format");
+      }
 
-      return enriched;
+      // Permissions
+      const permissions = [
+        Permission.read(Role.user(globalState.userId)),
+        Permission.update(Role.user(globalState.userId)),
+      ];
+      if (ownerData.teamId) {
+        permissions.push(
+          Permission.read(Role.team(ownerData.teamId)),
+          Permission.update(Role.team(ownerData.teamId)),
+        );
+      } else if (ownerData.userId) {
+        permissions.push(
+          Permission.read(Role.user(ownerData.userId)),
+          Permission.update(Role.user(ownerData.userId)),
+        );
+      }
+
+      const doc = await this.#materielCollection.create(
+        {
+          name: data.name,
+          description: data.description || null,
+          type: data.type || null,
+          quantity: data.quantity,
+          status: (data.status || "ok") as Materiel["status"],
+          location: data.location || null,
+          shareableWith: data.shareableWith || null,
+          owner: data.owner,
+          deleted: false,
+          isStorage: false,
+          storeIn: null,
+        } as Omit<Materiel, "$id" | "$createdAt" | "$updatedAt">,
+        permissions,
+      );
+
+      // Return enriched (will also update via liveQuery)
+      return enrichMaterielFromAppwrite(doc, this.#rawLoansList);
     } catch (err) {
       this.#error = err instanceof Error ? err.message : "Erreur de création";
       throw err;
@@ -630,9 +354,6 @@ export class MaterielStore {
     }
   }
 
-  /**
-   * Met à jour un matériel
-   */
   async updateMateriel(
     materielId: string,
     data: {
@@ -650,10 +371,10 @@ export class MaterielStore {
     this.#error = null;
 
     try {
-      const doc = await updateMateriel(materielId, data);
-      const enriched = this.#enrichMaterielFromLoans(doc);
-      this.#materiels.set(doc.$id, enriched);
-      this.#idbCache?.upsertMateriel(enriched);
+      await this.#materielCollection.update(
+        materielId,
+        data as Partial<Materiel>,
+      );
     } catch (err) {
       this.#error =
         err instanceof Error ? err.message : "Erreur de mise à jour";
@@ -663,17 +384,12 @@ export class MaterielStore {
     }
   }
 
-  /**
-   * Supprime un matériel
-   */
   async deleteMateriel(materielId: string): Promise<void> {
     this.#loading = true;
     this.#error = null;
 
     try {
-      await deleteMateriel(materielId);
-      this.#materiels.delete(materielId);
-      this.#idbCache?.deleteMateriel(materielId);
+      await this.#materielCollection.remove(materielId);
     } catch (err) {
       this.#error =
         err instanceof Error ? err.message : "Erreur de suppression";
@@ -687,9 +403,6 @@ export class MaterielStore {
   // API PUBLIQUE - LOANS
   // =============================================================================
 
-  /**
-   * Crée un emprunt avec plusieurs matériels
-   */
   async createLoan(data: {
     startDate: string;
     endDate: string;
@@ -699,9 +412,9 @@ export class MaterielStore {
     ownerName: string;
     materiels: MaterielLoanItem[];
     notes?: string;
-    status?: "asked" | "accepted"; // Statut optionnel
-    eventId?: string | null; // ID de l'événement lié (optionnel)
-    eventName?: string | null; // Snapshot du nom de l'event (optionnel)
+    status?: "asked" | "accepted";
+    eventId?: string | null;
+    eventName?: string | null;
   }): Promise<EnrichedMaterielLoan> {
     this.#loading = true;
     this.#error = null;
@@ -711,10 +424,33 @@ export class MaterielStore {
         throw new Error("Utilisateur non connecté");
       }
 
-      // Cast pour MaterielLoanStatus (enum) vs MaterielLoanStatusUnion (string literals)
-      const loan = await createMaterielLoan(data as any, globalState.userId);
+      const permissions = [
+        Permission.read(Role.user(globalState.userId)),
+        Permission.update(Role.user(globalState.userId)),
+        Permission.read(Role.team(data.ownerId)),
+        Permission.update(Role.team(data.ownerId)),
+      ];
 
-      // Enrichir le loan créé pour le retour
+      const loan = await this.#loanCollection.create(
+        {
+          startDate: data.startDate,
+          endDate: data.endDate,
+          responsibleId: data.responsibleId,
+          responsibleName: data.responsibleName,
+          ownerId: data.ownerId,
+          ownerName: data.ownerName,
+          materiels: data.materiels.map((item) => JSON.stringify(item)),
+          notes: data.notes || null,
+          status: (data.status || "asked") as MaterielLoan["status"],
+          completedAt: null,
+          returnedAt: null,
+          returnNotes: null,
+          eventId: data.eventId || null,
+          eventName: data.eventName || null,
+        } as Omit<MaterielLoan, "$id" | "$createdAt" | "$updatedAt">,
+        permissions,
+      );
+
       const enriched = enrichLoanFromAppwrite(loan);
 
       // Sync vers EventMateriel si un eventId est lié
@@ -729,7 +465,6 @@ export class MaterielStore {
         );
       }
 
-      // Le realtime va gérer la mise à jour locale
       return enriched;
     } catch (err) {
       this.#error = err instanceof Error ? err.message : "Erreur de création";
@@ -739,9 +474,6 @@ export class MaterielStore {
     }
   }
 
-  /**
-   * Met à jour un emprunt
-   */
   async updateLoan(
     loanId: string,
     data: {
@@ -760,12 +492,32 @@ export class MaterielStore {
     this.#error = null;
 
     try {
-      const currentLoan = this.#loans.get(loanId);
+      const currentLoan = this.#enrichedLoans.get(loanId);
       const oldEventId = currentLoan?.eventId || null;
-      const newEventId = data.eventId !== undefined ? data.eventId : oldEventId;
+      const newEventId =
+        data.eventId !== undefined ? data.eventId : oldEventId;
 
-      // Cast pour MaterielLoanStatus (enum) vs MaterielLoanStatusUnion (string literals)
-      await updateMaterielLoan(loanId, data as any);
+      const updateData: Record<string, unknown> = {};
+      if (data.startDate !== undefined) updateData.startDate = data.startDate;
+      if (data.endDate !== undefined) updateData.endDate = data.endDate;
+      if (data.materiels !== undefined)
+        updateData.materiels = data.materiels.map((item) =>
+          JSON.stringify(item),
+        );
+      if (data.status !== undefined)
+        updateData.status = data.status as string;
+      if (data.notes !== undefined) updateData.notes = data.notes;
+      if (data.returnedAt !== undefined)
+        updateData.returnedAt = data.returnedAt;
+      if (data.returnNotes !== undefined)
+        updateData.returnNotes = data.returnNotes;
+      if (data.eventId !== undefined) updateData.eventId = data.eventId;
+      if (data.eventName !== undefined) updateData.eventName = data.eventName;
+
+      await this.#loanCollection.update(
+        loanId,
+        updateData as Partial<MaterielLoan>,
+      );
 
       // Sync vers EventMateriel si nécessaire
       if (data.eventId !== undefined || data.materiels !== undefined) {
@@ -788,8 +540,6 @@ export class MaterielStore {
           await eventMaterielStore.removeByLoan(loanId);
         }
       }
-
-      // Le realtime va gérer la mise à jour locale
     } catch (err) {
       this.#error =
         err instanceof Error ? err.message : "Erreur de mise à jour";
@@ -799,44 +549,30 @@ export class MaterielStore {
     }
   }
 
-  /**
-   * Accepte un emprunt
-   */
   async acceptLoan(loanId: string): Promise<void> {
     await this.updateLoan(loanId, { status: "accepted" });
   }
 
-  /**
-   * Refuse un emprunt
-   */
   async refuseLoan(loanId: string): Promise<void> {
-    const loan = this.#loans.get(loanId);
+    const loan = this.#enrichedLoans.get(loanId);
     if (loan?.eventId) {
       await eventMaterielStore.removeByLoan(loanId);
     }
     await this.updateLoan(loanId, { status: "refused" });
   }
 
-  /**
-   * Annule un emprunt
-   */
   async cancelLoan(loanId: string): Promise<void> {
-    const loan = this.#loans.get(loanId);
+    const loan = this.#enrichedLoans.get(loanId);
     if (loan?.eventId) {
       await eventMaterielStore.removeByLoan(loanId);
     }
     await this.updateLoan(loanId, { status: "canceled" });
   }
 
-  /**
-   * Termine un emprunt en enregistrant l'état du matériel retourné
-   * Combine les étapes returned + completed
-   * Met également à jour le statut des materiels si perdu/cassé
-   */
   async completeLoanWithReturn(
     loanId: string,
     data: {
-      materiels: MaterielLoanItem[]; // Avec lost/broken mis à jour
+      materiels: MaterielLoanItem[];
       returnNotes?: string;
     },
   ): Promise<void> {
@@ -845,27 +581,21 @@ export class MaterielStore {
       const lost = item.lostQuantity || 0;
       const broken = item.brokenQuantity || 0;
 
-      // Si tout est perdu ou cassé, marquer comme "lost"
       if (lost + broken >= item.quantity) {
-        await updateMaterielService(item.materielId, {
+        await this.#materielCollection.update(item.materielId, {
           status: "lost",
-        });
-      }
-      // Si partiellement cassé (mais pas tout), marquer comme "torepair"
-      else if (broken > 0) {
-        await updateMaterielService(item.materielId, {
+        } as Partial<Materiel>);
+      } else if (broken > 0) {
+        await this.#materielCollection.update(item.materielId, {
           status: "torepair",
-        });
-      }
-      // Sinon, s'assurer que le statut est "ok"
-      else {
-        await updateMaterielService(item.materielId, {
+        } as Partial<Materiel>);
+      } else {
+        await this.#materielCollection.update(item.materielId, {
           status: "ok",
-        });
+        } as Partial<Materiel>);
       }
     }
 
-    // Mettre à jour le loan
     await this.updateLoan(loanId, {
       status: "completed",
       returnedAt: new Date().toISOString(),
@@ -874,10 +604,6 @@ export class MaterielStore {
     });
   }
 
-  /**
-   * Termine un emprunt (sans fiche de retour)
-   * @deprecated
-   */
   async completeLoan(loanId: string): Promise<void> {
     await this.updateLoan(loanId, {
       status: "completed",
@@ -885,28 +611,17 @@ export class MaterielStore {
     });
   }
 
-  /**
-   * Supprime un emprunt
-   */
   async deleteLoan(loanId: string): Promise<void> {
     this.#loading = true;
     this.#error = null;
 
     try {
-      // Ré-enrichir les matériels avant suppression
-      const loan = this.#loans.get(loanId);
-      if (loan) {
-        this.#reEnrichMaterielsFromLoan(loan);
-
-        // Supprimer les EventMateriel liés
-        if (loan.eventId) {
-          await eventMaterielStore.removeByLoan(loanId);
-        }
+      const loan = this.#enrichedLoans.get(loanId);
+      if (loan?.eventId) {
+        await eventMaterielStore.removeByLoan(loanId);
       }
 
-      await deleteMaterielLoan(loanId);
-
-      // Le realtime va gérer le reste
+      await this.#loanCollection.remove(loanId);
     } catch (err) {
       this.#error =
         err instanceof Error ? err.message : "Erreur de suppression";
@@ -917,7 +632,7 @@ export class MaterielStore {
   }
 
   exportLoanToMarkdown(loanId: string): string {
-    const loan = this.#loans.get(loanId);
+    const loan = this.#enrichedLoans.get(loanId);
     if (!loan) return "";
 
     const lines: string[] = [];
@@ -952,7 +667,7 @@ export class MaterielStore {
     const byType = new Map<string, typeof items>();
 
     for (const item of items) {
-      const m = this.#materiels.get(item.materielId);
+      const m = this.#enrichedMateriels.get(item.materielId);
       const typeLabel = materielTypeLabels[m?.type ?? "other"] ?? "Autre";
       if (!byType.has(typeLabel)) byType.set(typeLabel, []);
       byType.get(typeLabel)!.push(item);
@@ -986,49 +701,23 @@ export class MaterielStore {
     return lines.join("\n");
   }
 
-  /**
-   * Hard Reset - Vide tout (état Svelte + cache IDB) et recharge depuis Appwrite
-   */
+  // =============================================================================
+  // HARD RESET & CLEANUP
+  // =============================================================================
+
   async hardReset(): Promise<void> {
-    console.log("[MaterielStore] 🔄 HARD RESET - Vidage complet...");
+    console.log("[MaterielStore] 🔄 HARD RESET...");
     this.#loading = true;
     this.#error = null;
 
     try {
-      // 1. Vider l'état Svelte
-      this.#materiels.clear();
-      this.#loans.clear();
+      // Clear Dexie + syncMeta for both collections
+      await this.#materielCollection.clearLocal();
+      await this.#loanCollection.clearLocal();
 
-      // 2. Vider le cache IndexedDB
-      if (this.#idbCache) {
-        await this.#idbCache.clear();
-        console.log("[MaterielStore] Cache IDB vidé");
-      }
-
-      // 3. Recharger TOUT depuis Appwrite (sans filtre $updatedAt)
-      await this.#forceLoadFromAppwrite();
-
-      // 4. Recréer le cache avec les données fraîches
-      if (this.#idbCache) {
-        // Sauvegarder tous les matériels
-        for (const [, materiel] of this.#materiels) {
-          await this.#idbCache.upsertMateriel(materiel);
-        }
-
-        // Sauvegarder tous les emprunts
-        for (const [, loan] of this.#loans) {
-          await this.#idbCache.upsertLoan(loan);
-        }
-
-        // Sauvegarder les métadonnées
-        await this.#idbCache.saveMetadata({
-          lastSyncMateriel: this.#lastSyncMateriel,
-          lastSyncLoans: this.#lastSyncLoans,
-          syncVersion: CACHE_SYNC_VERSION,
-        });
-
-        console.log("[MaterielStore] Cache IDB recréé");
-      }
+      // Re-sync from Appwrite (full sync, no lastSync)
+      await this.#materielCollection.initialFetch();
+      await this.#loanCollection.initialFetch();
 
       console.log("[MaterielStore] ✓ HARD RESET terminé");
     } catch (err) {
@@ -1043,11 +732,15 @@ export class MaterielStore {
   }
 
   destroy(): void {
-    this.#realtimeUnsubscribe?.();
-    this.#materiels.clear();
-    this.#loans.clear();
-    this.#idbCache = null;
-    this.#realtimeInitialized = false; // Reset pour permettre une réinitialisation
+    this.#materielCollection.unsubscribeAll();
+    this.#loanCollection.unsubscribeAll();
+    this.#materielCollection.clearLocal().catch(() => {});
+    this.#loanCollection.clearLocal().catch(() => {});
+    this.#realtimeInitialized = false;
+    this.#isInitialized = false;
+    this.#loading = false;
+    this.#error = null;
+    console.log("[MaterielStore] Store détruit");
   }
 }
 

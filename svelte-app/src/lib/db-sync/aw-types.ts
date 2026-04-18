@@ -104,4 +104,5 @@ export type AwCollectionName =
 	| 'materiel'
 	| 'materiel_loan'
 	| 'event_materiel'
-	| 'teamdocs';
+	| 'teamdocs'
+	| 'recipes';

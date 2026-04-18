@@ -55,6 +55,7 @@ const APPWRITE_CONFIG = {
     materiel_loan: "materiel_loan",
     event_materiel: "event_materiel",
     teamdocs: "teamdocs", // Documents d'équipe
+    recipes: "recettes",
   },
 };
 

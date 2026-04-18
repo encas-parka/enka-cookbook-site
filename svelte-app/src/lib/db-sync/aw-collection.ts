@@ -173,7 +173,9 @@ export function createSyncCollection<T extends AwDoc>(options: {
 		// 2. Build queries
 		const queries: unknown[] = [];
 		if (lastSync) {
-			queries.push(Query.greaterThan('$updatedAt', lastSync));
+			// Utilise greaterThanEqual pour ne pas manquer les enregistrements
+			// ayant le même $updatedAt que le dernier sync (bulkPut dédup par $id)
+			queries.push(Query.greaterThanEqual('$updatedAt', lastSync));
 		}
 		queries.push(Query.orderAsc('$updatedAt'));
 		queries.push(Query.limit(500));

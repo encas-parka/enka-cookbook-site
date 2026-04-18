@@ -11,7 +11,7 @@
  * - CRUD via aw-sync (optimistic writes + rollback)
  */
 
-import { Permission, Role } from "appwrite";
+import { Permission, Query, Role } from "appwrite";
 import type { EventMateriel } from "$lib/types/appwrite";
 import type {
   CreateEventMaterielData,
@@ -135,7 +135,7 @@ export class EventMaterielStore {
       this.#items = this.#bridge.map;
 
       await this.#collection.initialFetch({
-        queries: [],
+        queries: [Query.equal("eventId", eventId)],
       });
 
       // Phase 3: Realtime
@@ -772,15 +772,14 @@ export class EventMaterielStore {
   // CLEANUP
   // =============================================================================
 
-  destroy(): void {
+  async destroy(): Promise<void> {
     this.#collection.unsubscribeAll();
-    this.#collection.clearLocal().catch((err) =>
-      console.warn("[EventMaterielStore] Error clearing local data:", err),
-    );
     if (this.#bridge) {
       this.#bridge.subscription.unsubscribe();
       this.#bridge = null;
     }
+    // Nettoyer IndexedDB pour éviter les fuites de données entre utilisateurs
+    await this.#collection.clearLocal();
     this.#items = new Map();
     this.#currentEventId = null;
     this.#isInitialized = false;

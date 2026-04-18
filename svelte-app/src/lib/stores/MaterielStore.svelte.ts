@@ -731,11 +731,17 @@ export class MaterielStore {
     }
   }
 
-  destroy(): void {
+  async destroy(): Promise<void> {
+    // Unsubscribe bridges en premier pour arrêter les liveQuery Dexie
+    this.#materielBridge.subscription.unsubscribe();
+    this.#loanBridge.subscription.unsubscribe();
     this.#materielCollection.unsubscribeAll();
     this.#loanCollection.unsubscribeAll();
-    this.#materielCollection.clearLocal().catch(() => {});
-    this.#loanCollection.clearLocal().catch(() => {});
+    // Nettoyer IndexedDB pour éviter les fuites de données entre utilisateurs
+    await Promise.all([
+      this.#materielCollection.clearLocal(),
+      this.#loanCollection.clearLocal(),
+    ]);
     this.#realtimeInitialized = false;
     this.#isInitialized = false;
     this.#loading = false;

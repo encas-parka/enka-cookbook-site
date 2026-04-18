@@ -280,11 +280,12 @@ export class TeamdocsStore {
   // CLEANUP
   // =============================================================================
 
-  destroy(): void {
+  async destroy(): Promise<void> {
+    // Unsubscribe bridge en premier pour arrêter le liveQuery Dexie
+    this.#bridge.subscription.unsubscribe();
     this.#collection.unsubscribeAll();
-    this.#collection.clearLocal().catch((err) =>
-      console.warn("[TeamdocsStore] Error clearing local data:", err),
-    );
+    // Nettoyer IndexedDB pour éviter les fuites de données entre utilisateurs
+    await this.#collection.clearLocal();
     this.#isInitialized = false;
     this.#isRealtimeActive = false;
     this.#realtimeInitialized = false;
@@ -295,7 +296,7 @@ export class TeamdocsStore {
   }
 
   async hardReset(): Promise<void> {
-    this.destroy();
+    await this.destroy();
     console.log("[TeamdocsStore] Hard reset effectué");
   }
 }

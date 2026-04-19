@@ -1,0 +1,66 @@
+import type {
+  ByDateEntry,
+  DateDisplayInfo,
+  EnrichedProduct,
+  NumericQuantity,
+} from "../types/store.types";
+import type { ProductNeedRow } from "../db-sync/aw-sync";
+
+export interface ParsedNeed {
+  $id: string;
+  mainId: string;
+  productHugoUuid: string;
+  productName: string;
+  productType: string;
+  pF: boolean;
+  pS: boolean;
+  byDate: Record<string, ByDateEntry>;
+  totalNeededArray: NumericQuantity[];
+  nbRecipes: number;
+  totalAssiettes: number;
+  dateDisplayInfo: Record<string, DateDisplayInfo>;
+  $createdAt: string;
+  $updatedAt: string;
+}
+
+export function parseNeedRow(row: ProductNeedRow): ParsedNeed {
+  return {
+    $id: row.$id,
+    mainId: row.mainId,
+    productHugoUuid: row.productHugoUuid,
+    productName: row.productName,
+    productType: row.productType,
+    pF: row.pF,
+    pS: row.pS,
+    byDate: JSON.parse(row.byDate),
+    totalNeededArray: JSON.parse(row.totalNeededArray),
+    nbRecipes: row.nbRecipes,
+    totalAssiettes: row.totalAssiettes,
+    dateDisplayInfo: JSON.parse(row.dateDisplayInfo),
+    $createdAt: row.$createdAt,
+    $updatedAt: row.$updatedAt,
+  };
+}
+
+export function toNeedRow(
+  enriched: EnrichedProduct,
+  mainId: string,
+): ProductNeedRow {
+  const now = new Date().toISOString();
+  return {
+    $id: enriched.$id,
+    mainId,
+    productHugoUuid: enriched.productHugoUuid || "",
+    productName: enriched.productName,
+    productType: enriched.productType,
+    pF: enriched.pF,
+    pS: enriched.pS,
+    byDate: JSON.stringify(enriched.byDate),
+    totalNeededArray: JSON.stringify(enriched.totalNeededArray),
+    nbRecipes: enriched.nbRecipes,
+    totalAssiettes: enriched.totalAssiettes,
+    dateDisplayInfo: JSON.stringify(enriched.dateDisplayInfo),
+    $createdAt: enriched.$createdAt || now,
+    $updatedAt: now,
+  };
+}

@@ -9,7 +9,6 @@ import {
   Refrigerator,
   Package,
 } from "@lucide/svelte";
-import type { EnrichedProduct } from "../types/store.types";
 
 // Fonction pour obtenir le nom d'affichage et l'icône d'un type de produit
 export function getProductTypeInfo(type: string) {
@@ -37,7 +36,7 @@ export function getProductTypeInfo(type: string) {
   }
 }
 
-export const TYPE_LABEL_TO_KEY: Record<string, string> = {
+const TYPE_LABEL_TO_KEY: Record<string, string> = {
   "Produits Sec": "sec",
   "Viandes et Poissons": "animaux",
   "Fruits et Légumes": "legumes",
@@ -82,22 +81,6 @@ export function formatDateShort(dateString: string): string {
   } catch {
     return dateString;
   }
-}
-
-export function sortEnrichedProducts(
-  products: EnrichedProduct[],
-  filters: any,
-): any[] {
-  if (!filters.sortColumn) return products;
-
-  return [...products].sort((a, b) => {
-    let aVal: any = a[filters.sortColumn as keyof any];
-    let bVal: any = b[filters.sortColumn as keyof any];
-
-    if (aVal < bVal) return filters.sortDirection === "asc" ? -1 : 1;
-    if (aVal > bVal) return filters.sortDirection === "asc" ? 1 : -1;
-    return 0;
-  });
 }
 
 // Fonctions pour la gestion des statuts d'achat

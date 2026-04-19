@@ -12,19 +12,24 @@ import {
   hasConversions,
 } from "../utils/productsUtils";
 import {
-  createEnrichedProductFromAppwrite,
-  updateExistingProduct,
+  buildRawProductBase,
+  applyNeedToBase,
   createEnrichedProductsFromEvent,
 } from "../utils/productEnrichment";
+import {
+  parseNeedRow,
+  toNeedRow,
+  type ParsedNeed,
+} from "../utils/product-need-serializer";
+import {
+  exportProductsToMarkdown,
+  type MarkdownExportGroup,
+} from "../utils/product-markdown-export";
 import { toastService } from "../services/toast.service.svelte";
 import type {
   EnrichedProduct,
   StoreInfo,
-  TotalNeededOverrideData,
   BatchUpdateResult,
-  NumericQuantity,
-  ByDateEntry,
-  DateDisplayInfo,
 } from "../types/store.types";
 import type { EnrichedEvent } from "../types/events";
 import {
@@ -68,71 +73,6 @@ import {
  * productsStore.setSearchQuery('pâtes');
  * const product = productsStore.getEnrichedProductById('abc');
  */
-
-// =============================================================================
-// HELPERS
-// =============================================================================
-
-/** Deserialize a ProductNeedRow's JSON fields into their runtime types */
-function parseNeedRow(row: ProductNeedRow): ParsedNeed {
-  return {
-    $id: row.$id,
-    mainId: row.mainId,
-    productHugoUuid: row.productHugoUuid,
-    productName: row.productName,
-    productType: row.productType,
-    pF: row.pF,
-    pS: row.pS,
-    byDate: JSON.parse(row.byDate),
-    totalNeededArray: JSON.parse(row.totalNeededArray),
-    totalNeededRaw: JSON.parse(row.totalNeededRaw),
-    nbRecipes: row.nbRecipes,
-    totalAssiettes: row.totalAssiettes,
-    dateDisplayInfo: JSON.parse(row.dateDisplayInfo),
-    $createdAt: row.$createdAt,
-    $updatedAt: row.$updatedAt,
-  };
-}
-
-interface ParsedNeed {
-  $id: string;
-  mainId: string;
-  productHugoUuid: string;
-  productName: string;
-  productType: string;
-  pF: boolean;
-  pS: boolean;
-  byDate: Record<string, ByDateEntry>;
-  totalNeededArray: NumericQuantity[];
-  totalNeededRaw: NumericQuantity[];
-  nbRecipes: number;
-  totalAssiettes: number;
-  dateDisplayInfo: Record<string, DateDisplayInfo>;
-  $createdAt: string;
-  $updatedAt: string;
-}
-
-/** Serialize an EnrichedProduct's need fields into a ProductNeedRow for Dexie storage */
-function toNeedRow(enriched: EnrichedProduct, mainId: string): ProductNeedRow {
-  const now = new Date().toISOString();
-  return {
-    $id: enriched.$id,
-    mainId,
-    productHugoUuid: enriched.productHugoUuid || "",
-    productName: enriched.productName,
-    productType: enriched.productType,
-    pF: enriched.pF,
-    pS: enriched.pS,
-    byDate: JSON.stringify(enriched.byDate),
-    totalNeededArray: JSON.stringify(enriched.totalNeededArray),
-    totalNeededRaw: JSON.stringify(enriched.totalNeededRaw),
-    nbRecipes: enriched.nbRecipes,
-    totalAssiettes: enriched.totalAssiettes,
-    dateDisplayInfo: JSON.stringify(enriched.dateDisplayInfo),
-    $createdAt: enriched.$createdAt || now,
-    $updatedAt: now,
-  };
-}
 
 // =============================================================================
 // STORE
@@ -308,25 +248,12 @@ class ProductsStore {
     purchases: Purchases[],
   ): EnrichedProduct {
     if (raw && need) {
-      const productWithPurchases = { ...raw, purchases };
-      const enriched = createEnrichedProductFromAppwrite(productWithPurchases);
-      // Besoins (recettes Hugo) — source de vérité pour productType, pF, pS
-      // Le raw product Appwrite sert de fallback (produits manuels hors recettes)
-      enriched.productType = need.productType ?? enriched.productType;
-      enriched.pF = need.pF ?? enriched.pF;
-      enriched.pS = need.pS ?? enriched.pS;
-      enriched.byDate = need.byDate;
-      enriched.totalNeededArray = need.totalNeededArray;
-      enriched.totalNeededRaw = need.totalNeededRaw;
-      enriched.nbRecipes = need.nbRecipes;
-      enriched.totalAssiettes = need.totalAssiettes;
-      enriched.dateDisplayInfo = need.dateDisplayInfo;
-      return enriched;
+      const base = buildRawProductBase({ ...raw, purchases });
+      return applyNeedToBase(base, need);
     }
 
     if (raw) {
-      const productWithPurchases = { ...raw, purchases };
-      return createEnrichedProductFromAppwrite(productWithPurchases);
+      return buildRawProductBase({ ...raw, purchases });
     }
 
     if (need) {
@@ -343,7 +270,6 @@ class ProductsStore {
         totalAssiettes: need.totalAssiettes,
         isSynced: false,
         mainId: need.mainId,
-        totalNeededRaw: need.totalNeededRaw,
         status: "active",
         who: [],
         store: "" as any,
@@ -363,15 +289,12 @@ class ProductsStore {
         totalNeededArray: need.totalNeededArray,
         totalPurchasesArray: [],
         missingQuantityArray: [],
-        stockOrTotalPurchases: "",
         displayTotalNeeded: "",
-        displayTotalPurchases: "",
         displayMissingQuantity: "",
         displayTotalOverride: "",
         totalNeededOverrideParsed: null,
         dateDisplayInfo: need.dateDisplayInfo,
         specs: null,
-        specsParsed: null,
       };
     }
 
@@ -400,9 +323,26 @@ class ProductsStore {
       (groups[key] ??= []).push(model);
     }
 
-    // Tri des produits dans chaque groupe
     for (const key of Object.keys(groups)) {
-      groups[key]!.sort((a, b) => a.data.$id.localeCompare(b.data.$id));
+      const models = groups[key]!;
+      if (this.#filters.sortColumn) {
+        const col = this.#filters.sortColumn as keyof import("../types/store.types").EnrichedProduct;
+        const dir = this.#filters.sortDirection === "asc" ? 1 : -1;
+        models.sort((a, b) => {
+          const aVal = a.data[col];
+          const bVal = b.data[col];
+          if (aVal == null && bVal == null) return 0;
+          if (aVal == null) return dir;
+          if (bVal == null) return -dir;
+          if (typeof aVal === "string" && typeof bVal === "string")
+            return dir * aVal.localeCompare(bVal);
+          if (aVal < bVal) return -dir;
+          if (aVal > bVal) return dir;
+          return 0;
+        });
+      } else {
+        models.sort((a, b) => a.data.$id.localeCompare(b.data.$id));
+      }
     }
 
     // Tri des clés de groupe (vide en dernier)
@@ -877,65 +817,25 @@ class ProductsStore {
   // ===========================================================================
 
   exportToMarkdown(eventName: string): string {
-    const lines: string[] = [];
-    lines.push("---");
-    lines.push(`# ${eventName}`);
+    const groups: MarkdownExportGroup[] = Object.entries(this.#groups).map(
+      ([label, models]) => ({
+        label,
+        products: models.map((m) => ({
+          productName: m.data.productName,
+          formattedQuantities: m.stats.formattedQuantities,
+          acquiredQuantities: m.stats.acquiredQuantities,
+          formattedAcquiredQuantities: m.stats.formattedAcquiredQuantities,
+          missingQuantities: m.stats.missingQuantities,
+          formattedMissingQuantities: m.stats.formattedMissingQuantities,
+        })),
+      }),
+    );
 
-    const { start, end } = this.dateStore.current;
-    if (start && end) {
-      const startStr = new Date(start).toLocaleDateString("fr-FR", {
-        day: "numeric",
-        month: "long",
-      });
-      const endStr = new Date(end).toLocaleDateString("fr-FR", {
-        day: "numeric",
-        month: "long",
-      });
-      lines.push(`- ${startStr} au ${endStr}`);
-    } else if (start) {
-      const dateStr = new Date(start).toLocaleDateString("fr-FR", {
-        day: "numeric",
-        month: "long",
-        year: "numeric",
-      });
-      lines.push(`- ${dateStr}`);
-    }
-
-    lines.push("");
-
-    const groups = this.#groups;
-    const groupKeys = Object.keys(groups);
-
-    if (groupKeys.length === 0) {
-      lines.push("_Aucun produit ne correspond aux filtres actuels._");
-    } else {
-      for (const groupLabel of groupKeys) {
-        const models = groups[groupLabel]!;
-        if (groupLabel) {
-          lines.push(`## ${groupLabel}`);
-          lines.push("");
-        }
-        for (const model of models) {
-          const name = model.data.productName;
-          const total = model.stats.formattedQuantities || "-";
-          const hasAcquired = model.stats.acquiredQuantities.length > 0;
-          const hasMissing = model.stats.missingQuantities.length > 0;
-          let line = `- ${name}: ${total}`;
-          if (hasAcquired) {
-            const acquired = model.stats.formattedAcquiredQuantities || "-";
-            line += ` | acquis ${acquired}`;
-            if (hasMissing) {
-              const missing = model.stats.formattedMissingQuantities || "-";
-              line += ` | manque ${missing}`;
-            }
-          }
-          lines.push(line);
-        }
-        lines.push("");
-      }
-    }
-
-    return lines.join("\n");
+    return exportProductsToMarkdown({
+      eventName,
+      dateRange: this.dateStore.current,
+      groups,
+    });
   }
 
   // ===========================================================================

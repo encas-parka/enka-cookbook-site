@@ -2,7 +2,6 @@ import type {
   ByDateEntry,
   EnrichedProduct,
   NumericQuantity,
-  RecipeOccurrence,
   RecipeWithDate,
 } from "../types/store.types";
 
@@ -11,8 +10,6 @@ import { aggregateByUnit, formatSingleQuantity } from "./QuantityFormatter";
 /**
  * Interface pour l'état des filtres
  */
-export type CompletionStatus = "all" | "completed" | "incomplete";
-
 export type TemperatureFilterMode =
   | "all"
   | "frais"
@@ -27,7 +24,7 @@ export interface FiltersState {
   selectedProductTypes: string[];
   selectedTemperatures: string[];
   temperatureFilter: TemperatureFilterMode;
-  completionStatus: CompletionStatus;
+  completionStatus: "all" | "completed" | "incomplete";
   groupBy: "store" | "productType" | "none";
   sortColumn: string;
   sortDirection: "asc" | "desc";
@@ -140,19 +137,6 @@ export function calculateAndFormatMissing(
 }
 
 /**
- * Extrait toutes les recettes depuis la structure byDate
- * @param byDate - Structure byDate parsée
- * @returns Tableau de toutes les RecipeOccurrence
- */
-export function extractAllRecipes(
-  byDate: Record<string, ByDateEntry>,
-): RecipeOccurrence[] {
-  if (!byDate) return [];
-
-  return Object.values(byDate).flatMap((entry) => entry.recipes || []);
-}
-
-/**
  * Détecte si un ingredient a des conversions (q/u différent de qEq/uEq)
  * @param byDate - Structure byDate parsée
  * @returns true si des conversions sont détectées
@@ -186,23 +170,6 @@ export function generateRecipesWithDates(
   });
 
   return recipesWithDates;
-}
-
-/**
- * Calcule le total global depuis byDate (toutes dates confondues)
- * @param byDate - Structure byDate parsée
- * @returns NumericQuantity[] total global
- */
-export function calculateGlobalTotal(
-  byDate: Record<string, ByDateEntry>,
-): NumericQuantity[] {
-  if (!byDate) return [];
-
-  // Extraire tous les totaux consolidés et agréger
-  const allTotals = Object.values(byDate).flatMap(
-    (entry) => entry.totalConsolidated,
-  );
-  return aggregateByUnit(allTotals);
 }
 
 // =============================================================================
@@ -254,29 +221,6 @@ export function formatStockResult(result: NumericQuantity[]): string {
   } else {
     return "Équilibré";
   }
-}
-
-/**
- * Formate le message pour la notification toast
- */
-export function formatToastMessage(analysis: any): string {
-  const parts: string[] = [];
-
-  if (analysis.newIngredients.length > 0) {
-    parts.push(`${analysis.newIngredients.length} produits ajoutés`);
-  }
-
-  if (analysis.updatedIngredients.length > 0) {
-    parts.push(`${analysis.updatedIngredients.length} produits mis à jour`);
-  }
-
-  if (analysis.removedIngredients.length > 0) {
-    parts.push(`${analysis.removedIngredients.length} produits supprimés`);
-  }
-
-  return parts.length > 0
-    ? `Mise à jour du menu: ${parts.join(", ")}`
-    : "Menu mis à jour";
 }
 
 /**
@@ -494,30 +438,4 @@ export function detectOverrideMismatch(
   };
 }
 
-/**
- * Formate un message d'avertissement pour un override avec mismatch
- * @param mismatch - Résultat de detectOverrideMismatch
- * @returns Message formaté pour l'utilisateur
- */
-export function formatOverrideWarning(mismatch: OverrideMismatch): string {
-  if (!mismatch.hasMismatch || !mismatch.details) return "";
 
-  const parts: string[] = [];
-
-  if (mismatch.details.oldPlates !== mismatch.details.newPlates) {
-    parts.push(
-      `${mismatch.details.oldPlates} → ${mismatch.details.newPlates} couverts`,
-    );
-  }
-
-  if (mismatch.details.oldRecipes !== mismatch.details.newRecipes) {
-    parts.push(
-      `${mismatch.details.oldRecipes} → ${mismatch.details.newRecipes} recettes`,
-    );
-  }
-
-  // Note: formatTotalQuantity import n'est pas utilisé dans cette version
-  // L'affichage des quantités est géré directement dans les composants UI
-
-  return parts.length > 0 ? parts.join(", ") : "";
-}

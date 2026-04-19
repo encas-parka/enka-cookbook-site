@@ -65,8 +65,6 @@ export interface ProductNeedRow {
 	byDate: string;
 	/** Total needed across all dates (JSON-serialized NumericQuantity[]) */
 	totalNeededArray: string;
-	/** Total needed raw (JSON-serialized NumericQuantity[]) */
-	totalNeededRaw: string;
 	/** Number of recipes using this product */
 	nbRecipes: number;
 	/** Total portions/servings */

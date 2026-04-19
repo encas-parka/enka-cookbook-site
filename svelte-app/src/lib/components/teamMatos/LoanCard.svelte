@@ -292,7 +292,7 @@
             <button
               class="badge badge-soft badge-primary badge-sm hover:badge-primary gap-1"
               onclick={() => navigate(`/event/${loan.eventId}`)}
-              title="Voir l'événement" 
+              title="Voir l'événement"
             >
               <Link class="h-3 w-3" />
               {loan.eventName}
@@ -310,7 +310,7 @@
           {#each materiels as m (m.materielId)}
             <span class="badge badge-sm badge-soft h-auto {getBadgeClass(m)}">
               <span> {m.materielName} </span>
-              <span class="badge badge-s"> × {m.quantity}</span>
+              <span class="badge badge-sm"> × {m.quantity}</span>
             </span>
           {/each}
         </div>

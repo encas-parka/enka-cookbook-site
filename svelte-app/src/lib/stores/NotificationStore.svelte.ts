@@ -257,7 +257,8 @@ class NotificationStore {
           console.log(
             "[NotificationStore] ✅ Calling productsStore.syncFromAppwrite()",
           );
-          await productsStore.syncFromAppwrite();
+          // aw-sync handles sync automatically via realtime subscriptions
+          // No manual sync needed - Dexie liveQuery + aw-sync bridges keep data fresh
 
           if (notif.from && notif.from !== globalState.userId) {
             if (notif.from === "system") {

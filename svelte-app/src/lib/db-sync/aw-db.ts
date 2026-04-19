@@ -35,11 +35,48 @@ export interface RecipeDataRow {
 	data: unknown;
 }
 
-/** Hugo product data scoped to an event. */
-export interface HugoProductRow {
-	$id: string;
-	mainId: string;
+/** Key-value row for Hugo reference catalog (ingredients, recipe-info, metadata). */
+export interface CatalogRow {
+	key: string;
 	data: unknown;
+}
+
+/**
+ * Calculated product needs scoped to an event.
+ * Persisted from event.meals → recipes → ingredients aggregation.
+ * NOT from Hugo SSG — the name is historical.
+ */
+export interface ProductNeedRow {
+	/** Composite ID: {productNameSlug}_{eventIdShort} — same as EnrichedProduct.$id */
+	$id: string;
+	/** Event ID (for Dexie indexing/scoping) */
+	mainId: string;
+	/** Product UUID (from recipe ingredient) */
+	productHugoUuid: string;
+	/** Product display name */
+	productName: string;
+	/** Product type (e.g. "cremerie", "boucherie") */
+	productType: string;
+	/** Needs refrigeration */
+	pF: boolean;
+	/** Needs freezing */
+	pS: boolean;
+	/** Quantities needed per date (JSON-serialized Record<string, ByDateEntry>) */
+	byDate: string;
+	/** Total needed across all dates (JSON-serialized NumericQuantity[]) */
+	totalNeededArray: string;
+	/** Total needed raw (JSON-serialized NumericQuantity[]) */
+	totalNeededRaw: string;
+	/** Number of recipes using this product */
+	nbRecipes: number;
+	/** Total portions/servings */
+	totalAssiettes: number;
+	/** Display info per date (JSON-serialized Record<string, DateDisplayInfo>) */
+	dateDisplayInfo: string;
+	/** Timestamp for bridge change detection */
+	$updatedAt: string;
+	/** Creation timestamp */
+	$createdAt: string;
 }
 
 // =============================================================================
@@ -72,7 +109,12 @@ export class EnkaDB extends Dexie {
 
 	// --- Hugo static data ---
 	recipeData!: Table<RecipeDataRow, string>;
-	hugoProducts!: Table<HugoProductRow, string>;
+
+	// --- Calculated product needs (from event.meals → recipes → ingredients) ---
+	productNeeds!: Table<ProductNeedRow, string>;
+
+	// --- Hugo reference catalog (ingredients, recipe-info) ---
+	catalog!: Table<CatalogRow, string>;
 
 	// --- Sync metadata ---
 	syncMeta!: Table<SyncMetaRow, string>;
@@ -97,6 +139,17 @@ export class EnkaDB extends Dexie {
 			recipeData: 'key',
 			hugoProducts: '$id, mainId',
 			syncMeta: 'collectionId'
+		});
+
+		// v2: add catalog table for Hugo reference data
+		this.version(2).stores({
+			catalog: 'key'
+		});
+
+		// v3: rename hugoProducts → productNeeds with richer schema
+		this.version(3).stores({
+			hugoProducts: null,       // Drop old table
+			productNeeds: '$id, mainId'
 		});
 	}
 }

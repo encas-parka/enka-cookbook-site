@@ -26,9 +26,12 @@ export class ProductModel {
   }
 
   /**
-   * Met à jour les données du produit
+   * Met à jour les données du produit.
+   * Ne déclenche une notification réactive QUE si les données changent réellement.
+   * Ceci évite les boucles infinies ($effect lit → update écrit → re-lit).
    */
   update(newData: EnrichedProduct) {
+    if (this.data === newData) return;
     this.data = newData;
   }
 

@@ -27,8 +27,7 @@ import {
 import { ingredientsFromAppwrite } from '../utils/ingredientUtils';
 import {
 	forceReloadAllAppwriteRecipes,
-	getRecipeAppwrite as getAppwriteRecipe,
-	updateRecipeAppwrite
+	getRecipeAppwrite as getAppwriteRecipe
 } from '../services/appwrite-recipes';
 import { globalState } from './GlobalState.svelte';
 import {
@@ -53,8 +52,29 @@ class RecipesStore {
 	);
 	#appwriteRecipes = this.#bridge.map;
 
-	// Unified index: Hugo published + Appwrite (drafts + updates)
-	#recipesIndex = $state(new SvelteMap<string, RecipeIndexEntry>());
+	// Hugo recipes (published, from data.json + cache)
+	#hugoRecipes = new SvelteMap<string, RecipeIndexEntry>();
+
+	// Unified index: $derived merge of Hugo + Appwrite (Appwrite wins on conflict)
+	#recipesIndex = $derived.by(() => {
+		const merged = new Map<string, RecipeIndexEntry>();
+
+		// 1. Hugo recipes (base layer - published recipes)
+		for (const [id, entry] of this.#hugoRecipes) {
+			merged.set(id, entry);
+		}
+
+		// 2. Appwrite recipes (overlay - wins on conflict, handles drafts & deletions)
+		for (const recipe of this.#appwriteRecipes.values()) {
+			if (recipe.status === 'deleted') {
+				merged.delete(recipe.$id);
+			} else {
+				merged.set(recipe.$id, parseAppwriteRecipeToIndexEntry(recipe));
+			}
+		}
+
+		return merged;
+	});
 
 	// Hugo build timestamp (for cache invalidation)
 	#versionTimestamp = $state<number | null>(null);
@@ -133,7 +153,7 @@ class RecipesStore {
 				for (const row of cachedRows) {
 					const entry = row.data as RecipeIndexEntry;
 					if (entry?.$id) {
-						this.#recipesIndex.set(entry.$id, entry);
+						this.#hugoRecipes.set(entry.$id, entry);
 					}
 				}
 				console.log(
@@ -141,14 +161,12 @@ class RecipesStore {
 				);
 			}
 
-			// 2. Load Appwrite recipes from Dexie (populated by aw-sync initialFetch)
-			if (this.#appwriteRecipes.size > 0) {
-				this.#mergeAppwriteIntoIndex();
-			}
+			// 2. Appwrite recipes are already available via bridge (#appwriteRecipes)
+			// The $derived #recipesIndex automatically merges Hugo + Appwrite
 
 			this.#isInitialized = true;
 			console.log(
-				`[RecipesStore] Cache chargé: ${this.#recipesIndex.size} recettes`
+				`[RecipesStore] Cache chargé: ${this.#hugoRecipes.size} recettes Hugo`
 			);
 		} catch (err) {
 			const message =
@@ -190,10 +208,10 @@ class RecipesStore {
 			}
 
 			// 2. Appwrite delta sync via aw-sync
+			// initialFetch writes to db.recipes → bridge → $derived merges automatically
 			if (globalState.userId) {
 				try {
 					await this.#collection.initialFetch();
-					this.#mergeAppwriteIntoIndex();
 				} catch (err) {
 					console.warn('[RecipesStore] Erreur sync Appwrite:', err);
 				}
@@ -273,8 +291,7 @@ class RecipesStore {
 		try {
 			this.#collection.subscribe();
 			this.#realtimeInitialized = true;
-
-			this.#setupAppwriteBridgeSync();
+			// Le $derived #recipesIndex réagit automatiquement aux changements du bridge
 		} catch (err) {
 			console.warn('[RecipesStore] Erreur activation realtime:', err);
 		}
@@ -373,13 +390,13 @@ class RecipesStore {
 			`[RecipesStore] Nouvelle version Hugo détectée (Ts: ${remoteTimestamp})`
 		);
 
-		// Smart merge Hugo recipes into index
+		// Smart merge Hugo recipes into #hugoRecipes
 		const recipes = data.recipes.map((r: any) => parseRecipeIndexEntry(r));
 		let updatedCount = 0;
 		const updatedIds: string[] = [];
 
 		recipes.forEach((newRecipe: RecipeIndexEntry) => {
-			const existing = this.#recipesIndex.get(newRecipe.$id);
+			const existing = this.#hugoRecipes.get(newRecipe.$id);
 
 			let shouldUpdate = false;
 			if (!existing) {
@@ -393,7 +410,7 @@ class RecipesStore {
 			}
 
 			if (shouldUpdate) {
-				this.#recipesIndex.set(newRecipe.$id, newRecipe);
+				this.#hugoRecipes.set(newRecipe.$id, newRecipe);
 				updatedIds.push(newRecipe.$id);
 				updatedCount++;
 			}
@@ -421,12 +438,8 @@ class RecipesStore {
 				await db.recipeData.bulkDelete(oldKeys);
 			}
 
-			// Write new index entries
-			const rows = Array.from(this.#recipesIndex.values())
-				.filter((entry) => {
-					// Only persist Hugo-sourced entries (no status or status=public)
-					return !entry.status || entry.status === 'public';
-				})
+			// Write new index entries (all Hugo entries)
+			const rows = Array.from(this.#hugoRecipes.values())
 				.map((entry) => ({
 					key: `idx:${entry.$id}`,
 					data: entry as unknown
@@ -440,51 +453,6 @@ class RecipesStore {
 				collectionId: this.#HUGO_META_KEY,
 				lastSync: String(remoteTimestamp ?? Date.now() / 1000)
 			});
-		});
-	}
-
-	// =============================================================================
-	// APPWRITE MERGE
-	// =============================================================================
-
-	/**
-	 * Merge Appwrite recipes (from bridge SvelteMap) into the unified index.
-	 * Called after initialFetch and on realtime updates.
-	 */
-	#mergeAppwriteIntoIndex(): void {
-		let updatedCount = 0;
-		let deletedCount = 0;
-
-		for (const recipe of this.#appwriteRecipes.values()) {
-			if (recipe.status === 'deleted') {
-				if (this.#recipesIndex.has(recipe.$id)) {
-					this.#recipesIndex.delete(recipe.$id);
-					deletedCount++;
-				}
-			} else {
-				const indexEntry = parseAppwriteRecipeToIndexEntry(recipe);
-				this.#recipesIndex.set(indexEntry.$id, indexEntry);
-				updatedCount++;
-			}
-		}
-
-		if (updatedCount > 0 || deletedCount > 0) {
-			console.log(
-				`[RecipesStore] Appwrite merge: ${updatedCount} mises à jour, ${deletedCount} supprimées`
-			);
-		}
-	}
-
-	/**
-	 * Set up an effect that watches the Appwrite bridge map and merges changes.
-	 * This ensures realtime updates from aw-sync → Dexie → bridge → index.
-	 */
-	#setupAppwriteBridgeSync(): void {
-		$effect(() => {
-			// Access .size to track map mutations
-			const _size = this.#appwriteRecipes.size;
-			// Re-merge whenever Appwrite data changes
-			this.#mergeAppwriteIntoIndex();
 		});
 	}
 
@@ -507,27 +475,11 @@ class RecipesStore {
 
 			const appwriteRecipes = await forceReloadAllAppwriteRecipes();
 
-			// Bulk put into Dexie
+			// Bulk put into Dexie → bridge → $derived #recipesIndex se met à jour
 			await db.recipes.bulkPut(appwriteRecipes);
 
-			// Merge into index
-			let addedCount = 0;
-			let deletedCount = 0;
-
-			appwriteRecipes.forEach((recipe) => {
-				if (recipe.status === 'deleted') {
-					if (this.#recipesIndex.has(recipe.$id)) {
-						this.#recipesIndex.delete(recipe.$id);
-						deletedCount++;
-					}
-				} else {
-					this.#recipesIndex.set(
-						recipe.$id,
-						parseAppwriteRecipeToIndexEntry(recipe)
-					);
-					addedCount++;
-				}
-			});
+			const addedCount = appwriteRecipes.filter((r) => r.status !== 'deleted').length;
+			const deletedCount = appwriteRecipes.filter((r) => r.status === 'deleted').length;
 
 			console.log(
 				`[RecipesStore] ${addedCount} recettes Appwrite chargées, ${deletedCount} supprimées`
@@ -556,7 +508,7 @@ class RecipesStore {
 		this.#error = null;
 
 		try {
-			this.#recipesIndex.clear();
+			this.#hugoRecipes.clear();
 
 			// Clear Dexie tables
 			await db.transaction(
@@ -570,28 +522,17 @@ class RecipesStore {
 				}
 			);
 
-			// Reload Hugo
+			// Reload Hugo → #hugoRecipes
 			await this.#loadIndexFromDataJson();
 
-			// Reload all Appwrite
+			// Reload all Appwrite → db.recipes → bridge → $derived
 			const appwriteRecipes = await forceReloadAllAppwriteRecipes();
 			await db.recipes.bulkPut(
 				appwriteRecipes.filter((r) => r.status !== 'deleted')
 			);
 
-			let addedCount = 0;
-			let deletedCount = 0;
-			appwriteRecipes.forEach((recipe) => {
-				if (recipe.status !== 'deleted') {
-					this.#recipesIndex.set(
-						recipe.$id,
-						parseAppwriteRecipeToIndexEntry(recipe)
-					);
-					addedCount++;
-				} else {
-					deletedCount++;
-				}
-			});
+			const addedCount = appwriteRecipes.filter((r) => r.status !== 'deleted').length;
+			const deletedCount = appwriteRecipes.filter((r) => r.status === 'deleted').length;
 
 			console.log(
 				`[RecipesStore] ${addedCount} recettes Appwrite chargées, ${deletedCount} supprimées ignorées`
@@ -710,20 +651,12 @@ class RecipesStore {
 		if (!globalState.userId) return;
 
 		try {
-			await updateRecipeAppwrite(
-				uuid,
-				{ lockedBy },
-				globalState.userId
-			);
+			// Optimistic update via aw-sync: Dexie → bridge → $derived → UI
+			await this.#collection.update(uuid, { lockedBy } as Partial<Recettes>);
 
 			console.log(
 				`[RecipesStore] Verrou ${uuid} mis à jour: ${lockedBy || 'libéré'}`
 			);
-
-			const currentIndex = this.#recipesIndex.get(uuid);
-			if (currentIndex) {
-				this.#recipesIndex.set(uuid, { ...currentIndex, lockedBy });
-			}
 		} catch (error) {
 			console.error(
 				`[RecipesStore] Erreur verrouillage ${uuid}:`,

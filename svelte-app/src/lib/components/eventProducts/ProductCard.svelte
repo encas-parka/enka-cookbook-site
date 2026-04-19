@@ -351,9 +351,7 @@
                 ><span class="font-light">manque : </span>
                 {productInDateRange.formattedMissingQuantities}</span
               >
-              <span class="text-primary">
-                <IconSprite name="add-to-cart" size={16} /></span
-              >
+              <IconSprite name="add-to-cart" size={16} />
             </button>
           {:else if shouldShowActionButtons}
             <CircleCheckBig size={24} class="text-success ms-auto" />

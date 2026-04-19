@@ -9,7 +9,7 @@
  * ```
  */
 
-export { db, cleanupLegacyCaches, type EnkaDB, type RecipeDataRow, type HugoProductRow, type SyncMetaRow } from './aw-db';
+export { db, cleanupLegacyCaches, type EnkaDB, type RecipeDataRow, type CatalogRow, type ProductNeedRow, type SyncMetaRow } from './aw-db';
 export { createSyncCollection, mergeByKey, RecordDeletedError } from './aw-collection';
 export { bridgeToMap, bridgeToMapFiltered, type BridgeResult } from './aw-bridge';
 export type {

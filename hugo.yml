@@ -22,7 +22,7 @@ disableKinds:
   - taxonomy
   - term
   - section
-  - 404  # Désactiver la génération de 404.html pour activer le mode SPA automatique de Cloudflare Pages
+  - 404 # Désactiver la génération de 404.html pour activer le mode SPA automatique de Cloudflare Pages
 
 # pagination:
 #   disableAliases: false
@@ -31,13 +31,12 @@ disableKinds:
 
 outputs:
   home:
-      - HTML
-      - dataJson
+    - HTML
+    - dataJson
 
   page:
     - RecipeDetail
-    - HTML  # Désactivé temporairement pour les recettes
-
+    - HTML
 
 mediaTypes:
   application/json:
@@ -45,7 +44,6 @@ mediaTypes:
       - json
 
 outputFormats:
-
   RecipeDetail:
     mediaType: application/json
     baseName: recipe
@@ -60,7 +58,6 @@ outputFormats:
     notAlternative: true
     path: data/
 
-
 caches:
   getjson:
     dir: :cacheDir/:project
@@ -69,7 +66,6 @@ sitemap:
   changefreq: monthly
   filename: sitemap.xml
   priority: 0.5
-
 
 # Opengraph
 ogLocale: fr
@@ -123,10 +119,5 @@ markup:
 
 # Import du theme (layouts, assets, static, ...js, css and default images & icons)
 module:
-
   hugoVersion:
     version: "0.152.2"
-
-  # imports:
-  #   - path: "github.com/encas-parka/hugo-cookbook-theme"
-  #     disable: false

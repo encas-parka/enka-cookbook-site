@@ -1,6 +1,8 @@
 import { SvelteMap } from "svelte/reactivity";
 import { useDebounce } from "runed";
 import { Query } from "appwrite";
+import { liveQuery } from "dexie";
+import type { Subscription } from "dexie";
 import type { Products, Purchases } from "../types/appwrite.d";
 
 import {
@@ -42,25 +44,24 @@ import { eventsStore } from "./EventsStore.svelte";
 import { recipesStore } from "./RecipesStore.svelte";
 import {
   createSyncCollection,
-  bridgeToMapFiltered,
   db,
-  type BridgeResult,
   type ProductNeedRow,
 } from "$lib/db-sync/aw-sync";
 
 /**
  * ProductsStore - Store principal de gestion des produits avec Svelte 5 + aw-sync
  *
- * Architecture (v2 — $derived merge, no $effect for data flow):
- * - aw-sync: Dexie (db.products + db.purchases + db.productNeeds) + delta sync + realtime
- * - bridgeToMapFiltered: liveQuery → SvelteMap (raw data scoped by mainId)
- * - $derived: purchasesByProduct index, orphanPurchases, enrichedProducts (3-way merge)
- * - $effect: meals sync only (writes calculated needs to Dexie, bridge propagates)
+ * Architecture simplifiée :
+ * - 1 liveQuery Dexie observe les 3 tables (products, purchases, productNeeds)
+ * - #onDataChange : merge des 3 sources + fingerprint → MAJ in-place des ProductModel
+ * - #productModels (SvelteMap) : source de vérité unique, références stables
+ * - #groups ($state) : vue groupée/filtrée, reconstruite explicitement
  *
- * Flux de données:
- * Lecture :  Dexie → liveQuery → SvelteMap (products/purchases/needs) → $derived merge → ProductModel → UI
- * Écriture : UI → Store → Appwrite CRUD → aw-sync realtime → Dexie → liveQuery → ... → UI
- * Needs :    event.meals → createEnrichedProductsFromEvent → db.productNeeds.bulkPut → bridge → $derived merge
+ * Flux :
+ *   liveQuery → #onDataChange → #productModels + #rebuildGroups
+ *   filtres   → setter → #rebuildGroups
+ *   date      → $effect → #rebuildGroups
+ *   CRUD      → Appwrite → realtime → Dexie → liveQuery → #onDataChange
  *
  * @usage
  * await productsStore.initialize('eventId');
@@ -139,7 +140,7 @@ function toNeedRow(enriched: EnrichedProduct, mainId: string): ProductNeedRow {
 
 class ProductsStore {
   // ===========================================================================
-  // aw-sync COLLECTIONS
+  // aw-sync COLLECTIONS (CRUD + sync Appwrite ↔ Dexie)
   // ===========================================================================
 
   #productsCollection = createSyncCollection<Products>({
@@ -151,10 +152,14 @@ class ProductsStore {
     collectionName: "purchases",
   });
 
-  // Bridges: liveQuery → SvelteMap (raw data, scoped by mainId)
-  #productsBridge = $state.raw<BridgeResult<Products> | null>(null);
-  #purchasesBridge = $state.raw<BridgeResult<Purchases> | null>(null);
-  #needsBridge = $state.raw<BridgeResult<ProductNeedRow> | null>(null);
+  // Map stable de ProductModel — UNIQUE source de vérité pour l'UI
+  #productModels = new SvelteMap<string, ProductModel>();
+
+  // Vue groupée/filtrée — $state plat, reconstruit par #rebuildGroups()
+  #groups = $state<Record<string, ProductModel[]>>({});
+
+  // Souscription liveQuery Dexie (1 pour les 3 tables)
+  #dataSubscription: Subscription | null = null;
 
   // Metadata
   #currentMainId = $state<string | null>(null);
@@ -167,6 +172,7 @@ class ProductsStore {
   #lastSync = $state<string | null>(null);
   #lastMealsHash = "";
   #cleanupSyncEffect: (() => void) | null = null;
+  #cleanupDateEffect: (() => void) | null = null;
 
   // Filters
   #filters = $state<FiltersState>({
@@ -186,100 +192,129 @@ class ProductsStore {
   dateStore = new DateRangeStore();
 
   // ===========================================================================
-  // DERIVED: Purchases index (productId → Purchases[])
+  // DATA CHANGE : liveQuery → merge + fingerprint → ProductModels + groups
   // ===========================================================================
 
-  /** Direct access to purchases bridge map for derived computations */
-  #getPurchasesMap(): SvelteMap<string, Purchases> {
-    return this.#purchasesBridge?.map ?? new SvelteMap<string, Purchases>();
+  /**
+   * Lance la souscription liveQuery sur les 3 tables Dexie.
+   */
+  #startDataSubscription(mainId: string) {
+    this.#dataSubscription?.unsubscribe();
+
+    this.#dataSubscription = liveQuery(async () => {
+      const [products, purchases, needs] = await Promise.all([
+        db.products.where("mainId").equals(mainId).toArray(),
+        db.purchases.where("mainId").equals(mainId).toArray(),
+        db.productNeeds.where("mainId").equals(mainId).toArray(),
+      ]);
+      return { products, purchases, needs };
+    }).subscribe({
+      next: ({ products, purchases, needs }) => {
+        this.#onDataChange(products, purchases, needs);
+      },
+      error: (err) => {
+        console.error("[ProductsStore] liveQuery error:", err);
+      },
+    });
   }
 
-  #purchasesByProduct = $derived.by(() => {
-    const purchasesMap = this.#getPurchasesMap();
-    const index = new Map<string, Purchases[]>();
-    for (const purchase of purchasesMap.values()) {
-      if (purchase.status === "deleted" || purchase.status === "expense")
-        continue;
-      for (const productId of purchase.products ?? []) {
-        const list = index.get(productId) ?? [];
-        list.push(purchase);
-        index.set(productId, list);
-      }
-    }
-    return index;
-  });
+  /**
+   * Point d'entrée unique quand les données Dexie changent.
+   * Merge les 3 sources, compare les fingerprints, met à jour les ProductModels,
+   * puis reconstruit les groupes.
+   */
+  #onDataChange(products: Products[], purchases: Purchases[], needs: ProductNeedRow[]) {
+    // ── 1. Indexer les sources ──────────────────────────────
+    const productsById = new Map(products.map((p) => [p.$id, p]));
+    const needsById = new Map(needs.map((n) => [n.$id, n]));
 
-  // Orphan purchases (expenses)
-  #derivedOrphanPurchases = $derived.by(() => {
-    const purchasesMap = this.#getPurchasesMap();
-    const orphans = new SvelteMap<string, Purchases>();
-    for (const [id, purchase] of purchasesMap) {
+    const purchasesByProduct = new Map<string, Purchases[]>();
+    const orphanPurchases = new SvelteMap<string, Purchases>();
+    for (const purchase of purchases) {
       if (purchase.status === "expense") {
-        orphans.set(id, purchase);
+        orphanPurchases.set(purchase.$id, purchase);
+        continue;
+      }
+      if (purchase.status === "deleted") continue;
+      for (const productId of purchase.products ?? []) {
+        const list = purchasesByProduct.get(productId) ?? [];
+        list.push(purchase);
+        purchasesByProduct.set(productId, list);
       }
     }
-    return orphans;
-  });
+    this.#orphanPurchases = orphanPurchases;
+    this.#purchasesByProductCache = purchasesByProduct;
 
-  // ===========================================================================
-  // DERIVED: 3-way merge (products + purchases + needs) → EnrichedProducts
-  // ===========================================================================
-
-  /**
-   * Core merge: combines products (Appwrite), purchases (Appwrite),
-   * and calculated needs (from event.meals) into enriched ProductModel instances.
-   *
-   * Pure $derived — no side effects, no $effect.
-   * Reads from the 3 bridges + purchasesByProduct index.
-   */
-  #enrichedProducts = $derived.by(() => {
-    const productsMap = this.#productsBridge?.map;
-    const needsMap = this.#needsBridge?.map;
-
-    // Touch purchases index to create reactive dependency
-    this.#purchasesByProduct.size;
-
-    if (!productsMap && !needsMap) return new SvelteMap<string, ProductModel>();
-
-    const result = new SvelteMap<string, ProductModel>();
-
+    // ── 2. Identifier tous les IDs connus ───────────────────
     const allIds = new Set<string>();
-    if (productsMap) for (const id of productsMap.keys()) allIds.add(id);
-    if (needsMap) for (const id of needsMap.keys()) allIds.add(id);
+    for (const id of productsById.keys()) allIds.add(id);
+    for (const id of needsById.keys()) allIds.add(id);
 
+    const staleIds = new Set(this.#productModels.keys());
+
+    // ── 3. Merge + fingerprint + mise à jour ────────────────
     for (const id of allIds) {
-      const raw = productsMap?.get(id);
-      const needRow = needsMap?.get(id);
-      const need = needRow ? parseNeedRow(needRow) : null;
-      const purchases = this.#purchasesByProduct.get(id) || [];
+      staleIds.delete(id);
 
-      const enriched = this.#mergeData(raw, need, purchases);
-      result.set(id, new ProductModel(enriched, this.dateStore));
+      const raw = productsById.get(id);
+      const needRow = needsById.get(id);
+      const prods = purchasesByProduct.get(id) ?? [];
+
+      // Fingerprint (tri des purchases pour stabilité)
+      const version = [
+        raw?.$updatedAt ?? "",
+        needRow?.$updatedAt ?? "",
+        ...prods.map((p) => p.$updatedAt).filter(Boolean).sort(),
+      ].join("|");
+
+      const existing = this.#productModels.get(id);
+
+      // Skip si inchangé
+      if (existing && existing._version === version) continue;
+
+      // Merge des 3 sources → EnrichedProduct
+      const need = needRow ? parseNeedRow(needRow) : null;
+      const enriched = this.#buildEnriched(raw, need, prods);
+
+      if (existing) {
+        existing.update(enriched);
+        existing._version = version;
+      } else {
+        const model = new ProductModel(enriched, this.dateStore);
+        model._version = version;
+        this.#productModels.set(id, model);
+      }
     }
 
-    return result;
-  });
+    // ── 4. Supprimer les modèles obsolètes ──────────────────
+    for (const id of staleIds) {
+      this.#productModels.delete(id);
+    }
 
-  // ===========================================================================
-  // MERGE FUNCTION (unified)
-  // ===========================================================================
+    // ── 5. Reconstruire les groupes ─────────────────────────
+    this.#rebuildGroups();
+  }
+
+  // Cache pour financialStats (mis à jour par #onDataChange)
+  #orphanPurchases = new SvelteMap<string, Purchases>();
+  #purchasesByProductCache = new Map<string, Purchases[]>();
 
   /**
-   * Merges data from 0–3 sources into a single EnrichedProduct.
-   * - raw: Appwrite product data (may be null if product only exists as a need)
-   * - need: Calculated needs from event.meals (may be null if manual product)
-   * - purchases: Related purchases
+   * Fusionne 0–3 sources en un seul EnrichedProduct.
    */
-  #mergeData(
+  #buildEnriched(
     raw: Products | undefined,
     need: ParsedNeed | null,
     purchases: Purchases[],
   ): EnrichedProduct {
     if (raw && need) {
-      // Product exists in both Appwrite and calculated needs → merge
       const productWithPurchases = { ...raw, purchases };
       const enriched = createEnrichedProductFromAppwrite(productWithPurchases);
-      // Overwrite need-derived fields
+      // Besoins (recettes Hugo) — source de vérité pour productType, pF, pS
+      // Le raw product Appwrite sert de fallback (produits manuels hors recettes)
+      enriched.productType = need.productType ?? enriched.productType;
+      enriched.pF = need.pF ?? enriched.pF;
+      enriched.pS = need.pS ?? enriched.pS;
       enriched.byDate = need.byDate;
       enriched.totalNeededArray = need.totalNeededArray;
       enriched.totalNeededRaw = need.totalNeededRaw;
@@ -290,13 +325,11 @@ class ProductsStore {
     }
 
     if (raw) {
-      // Product only in Appwrite (manual product, or needs not yet calculated)
       const productWithPurchases = { ...raw, purchases };
       return createEnrichedProductFromAppwrite(productWithPurchases);
     }
 
     if (need) {
-      // Product only in calculated needs (not yet synced to Appwrite)
       return {
         $id: need.$id,
         $createdAt: need.$createdAt,
@@ -342,8 +375,84 @@ class ProductsStore {
       };
     }
 
-    // Should never happen (allIds ensures at least one source)
-    throw new Error("[ProductsStore] mergeData called with no data sources");
+    throw new Error("[ProductsStore] buildEnriched appelé sans données");
+  }
+
+  // ===========================================================================
+  // GROUPING : filtrage + groupement (explicite, pas $derived)
+  // ===========================================================================
+
+  /**
+   * Reconstruit #groups à partir de #productModels + #filters + dateRange.
+   * Appelé par #onDataChange, les setters de filtres, et le date effect.
+   */
+  #rebuildGroups() {
+    if (!this.dateRange.start || !this.dateRange.end) {
+      this.#groups = {};
+      return;
+    }
+
+    const groups: Record<string, ProductModel[]> = {};
+
+    for (const [id, model] of this.#productModels) {
+      if (!this.#passesFilters(model)) continue;
+      const key = this.#groupKey(model);
+      (groups[key] ??= []).push(model);
+    }
+
+    // Tri des produits dans chaque groupe
+    for (const key of Object.keys(groups)) {
+      groups[key]!.sort((a, b) => a.data.$id.localeCompare(b.data.$id));
+    }
+
+    // Tri des clés de groupe (vide en dernier)
+    const sortedKeys = Object.keys(groups).sort((a, b) => {
+      if (a === "") return 1;
+      if (b === "") return -1;
+      return a.localeCompare(b);
+    });
+
+    const sortedGroups: Record<string, ProductModel[]> = {};
+    for (const key of sortedKeys) {
+      sortedGroups[key] = groups[key]!;
+    }
+
+    this.#groups = sortedGroups;
+  }
+
+  /** Un ProductModel passe-t-il les filtres courants ? */
+  #passesFilters(model: ProductModel): boolean {
+    const product = model.data;
+    const isManualProduct = !product.productHugoUuid;
+
+    if (!product.byDate && !isManualProduct) return false;
+    if (!matchesFilters(product, this.#filters)) return false;
+
+    // Filtre completion (dépend de model.stats → dateRange)
+    if (this.#filters.completionStatus !== "all") {
+      const hasMissing = model.stats.hasMissing;
+      if (this.#filters.completionStatus === "completed" && hasMissing) return false;
+      if (this.#filters.completionStatus === "incomplete" && !hasMissing) return false;
+    }
+
+    // Filtre date range
+    if (product.byDate) {
+      const hasDataInRange = Object.keys(product.byDate).some(
+        (dateStr) => dateStr >= this.dateRange.start! && dateStr <= this.dateRange.end!,
+      );
+      if (!hasDataInRange && !isManualProduct) return false;
+    }
+
+    return true;
+  }
+
+  /** Calcule la clé de groupe pour un modèle. */
+  #groupKey(model: ProductModel): string {
+    if (this.#filters.groupBy === "none") return "";
+    if (this.#filters.groupBy === "store") {
+      return model.data.storeInfo?.storeName || "Non défini";
+    }
+    return model.data.productType || "Non défini";
   }
 
   // ===========================================================================
@@ -450,71 +559,28 @@ class ProductsStore {
     return descriptions;
   }
 
-  get groupedFilteredProducts() {
-    return this.#groupedFilteredProducts;
+  get groupedProducts() {
+    return this.#groups;
   }
 
   // ===========================================================================
-  // DERIVED: Enriched products → UI
+  // DERIVED: Stats globales (lisent directement #productModels)
   // ===========================================================================
 
-  enrichedProducts = $derived.by(() => {
-    return Array.from(this.#enrichedProducts.values()).map((m) => m.data);
-  });
-
-  filteredProductsMap = $derived.by(() => {
-    if (!this.dateRange.start || !this.dateRange.end) {
-      return new Map<string, ProductModel>();
-    }
-
-    const startDateISO = this.dateRange.start;
-    const endDateISO = this.dateRange.end;
-    const filteredMap = new Map<string, ProductModel>();
-
-    for (const [id, model] of this.#enrichedProducts) {
-      const product = model.data;
-      const isManualProduct = !product.productHugoUuid;
-      if (!product.byDate && !isManualProduct) continue;
-
-      if (!matchesFilters(product, this.#filters)) continue;
-
-      if (this.#filters.completionStatus !== "all") {
-        const hasMissing = model.stats.hasMissing;
-        if (this.#filters.completionStatus === "completed" && hasMissing)
-          continue;
-        if (this.#filters.completionStatus === "incomplete" && !hasMissing)
-          continue;
-      }
-
-      let hasDataInRange = false;
-      if (product.byDate) {
-        hasDataInRange = Object.keys(product.byDate).some((dateStr) => {
-          return dateStr >= startDateISO && dateStr <= endDateISO;
-        });
-      }
-
-      if (hasDataInRange || isManualProduct) {
-        filteredMap.set(id, model);
-      }
-    }
-
-    return filteredMap;
-  });
-
   stats = $derived.by(() => ({
-    total: this.#enrichedProducts.size,
-    frais: Array.from(this.#enrichedProducts.values()).filter((p) => p.pF)
+    total: this.#productModels.size,
+    frais: Array.from(this.#productModels.values()).filter((p) => p.data.pF)
       .length,
-    surgel: Array.from(this.#enrichedProducts.values()).filter((p) => p.pS)
+    surgel: Array.from(this.#productModels.values()).filter((p) => p.data.pS)
       .length,
-    merged: Array.from(this.#enrichedProducts.values()).filter(
+    merged: Array.from(this.#productModels.values()).filter(
       (p) => p.data.isMerged,
     ).length,
   }));
 
   uniqueStores = $derived.by(() => {
-    const storeNames = Array.from(this.#enrichedProducts.values())
-      .map((p) => p.storeInfo?.storeName)
+    const storeNames = Array.from(this.#productModels.values())
+      .map((p) => p.data.storeInfo?.storeName)
       .filter(Boolean);
     return [...new Set(storeNames)] as string[];
   });
@@ -530,8 +596,8 @@ class ProductsStore {
   });
 
   #usedWho = $derived.by(() => {
-    const whos = Array.from(this.#enrichedProducts.values()).flatMap(
-      (p) => p.who || [],
+    const whos = Array.from(this.#productModels.values()).flatMap(
+      (p) => p.data.who || [],
     );
     return [...new Set(whos)].sort();
   });
@@ -542,48 +608,16 @@ class ProductsStore {
   });
 
   uniqueProductTypes = $derived.by(() => {
-    const types = Array.from(this.#enrichedProducts.values())
-      .map((p) => p.productType)
+    const types = Array.from(this.#productModels.values())
+      .map((p) => p.data.productType)
       .filter(Boolean);
     return [...new Set(types)] as string[];
-  });
-
-  #groupedFilteredProducts = $derived.by(() => {
-    const relevantProducts = Array.from(this.filteredProductsMap.values());
-    const sortedProducts = relevantProducts.sort((a, b) =>
-      a.$id.localeCompare(b.$id),
-    );
-
-    if (this.#filters.groupBy === "none") {
-      return { "": sortedProducts };
-    }
-
-    const groups = Object.groupBy(sortedProducts, (model) => {
-      if (this.#filters.groupBy === "store") {
-        return model.storeInfo?.storeName || "Non défini";
-      } else {
-        return model.productType || "Non défini";
-      }
-    });
-
-    const sortedGroupKeys = Object.keys(groups).sort((a, b) => {
-      if (a === "") return 1;
-      if (b === "") return -1;
-      return a.localeCompare(b);
-    });
-
-    const sortedGroups: Record<string, ProductModel[]> = {};
-    sortedGroupKeys.forEach((key) => {
-      sortedGroups[key] = groups[key]!;
-    });
-
-    return sortedGroups;
   });
 
   completionStats = $derived.by(() => {
     let completed = 0;
     let missing = 0;
-    for (const model of this.#enrichedProducts.values()) {
+    for (const model of this.#productModels.values()) {
       if (model.stats.hasMissing) {
         missing++;
       } else {
@@ -599,7 +633,8 @@ class ProductsStore {
     const byWho: Record<string, number> = {};
     const allPurchases: (Purchases & { _productName?: string })[] = [];
 
-    for (const purchase of this.#derivedOrphanPurchases.values()) {
+    // Utilise les caches mis à jour par le reconciler
+    for (const purchase of this.#orphanPurchases.values()) {
       if (purchase.status === "deleted") continue;
       const amount = purchase.invoiceTotal || purchase.price || 0;
       totalGlobal += amount;
@@ -610,9 +645,9 @@ class ProductsStore {
       allPurchases.push(purchase);
     }
 
-    for (const model of this.#enrichedProducts.values()) {
+    for (const model of this.#productModels.values()) {
       const product = model.data;
-      const purchases = this.#purchasesByProduct.get(product.$id) || [];
+      const purchases = this.#purchasesByProductCache.get(product.$id) || [];
       for (const purchase of purchases) {
         if (purchase.price) {
           totalGlobal += purchase.price;
@@ -670,18 +705,7 @@ class ProductsStore {
       this.#currentEventId = event.$id;
       this.#currentMainId = event.$id;
 
-      // 1. Initialiser les bridges liveQuery (scopes par mainId)
-      this.#productsBridge = bridgeToMapFiltered(db.products, (t) =>
-        t.where("mainId").equals(this.#currentMainId!).toArray(),
-      );
-      this.#purchasesBridge = bridgeToMapFiltered(db.purchases, (t) =>
-        t.where("mainId").equals(this.#currentMainId!).toArray(),
-      );
-      this.#needsBridge = bridgeToMapFiltered(db.productNeeds, (t) =>
-        t.where("mainId").equals(this.#currentMainId!).toArray(),
-      );
-
-      // 2. Delta sync depuis Appwrite
+      // 1. Delta sync Appwrite → Dexie
       this.#syncing = true;
       await this.#productsCollection.initialFetch({
         queries: [Query.equal("mainId", this.#currentMainId!)],
@@ -692,8 +716,7 @@ class ProductsStore {
       this.#syncing = false;
       this.#lastSync = new Date().toISOString();
 
-      // 3. Calculate needs if none in Dexie yet
-      // Query Dexie directly — the bridge liveQuery may not have fired yet
+      // 2. Calculate needs if none in Dexie yet
       const existingNeedsCount = await db.productNeeds
         .where("mainId")
         .equals(this.#currentMainId!)
@@ -709,22 +732,28 @@ class ProductsStore {
       // Record meals hash to prevent redundant recalculation from meals sync effect
       this.#lastMealsHash = JSON.stringify(event.meals);
 
-      // 4. Abonnements realtime (aw-sync → Dexie → liveQuery → bridges)
+      // 3. Lancer le liveQuery unique (observe 3 tables → reconciler)
+      this.#startDataSubscription(this.#currentMainId!);
+
+      // 4. Abonnements realtime (Appwrite → Dexie → liveQuery → reconciler)
       this.#productsCollection.subscribe();
       this.#purchasesCollection.subscribe();
 
-      // 5. Setup reactive sync avec EventsStore (meals updates → Dexie)
+      // 5. Setup reactive sync avec EventsStore (meals updates → Dexie → liveQuery)
       this.#setupMealsSyncEffect(eventId);
 
       // 6. Date range
       this.dateStore.setAvailableDates([...(event.allDates || [])]);
       this.dateStore.initializeSmartRange();
 
+      // 7. Date range effect : rebuild groups quand les dates changent
+      this.#setupDateRangeEffect();
+
       this.#isInitialized = true;
       this.#loading = false;
 
       console.log(
-        `[ProductsStore] Initialisation terminee: ${this.#enrichedProducts.size} produits, ${this.#getPurchasesMap().size} achats`,
+        `[ProductsStore] Initialisation terminee: ${this.#productModels.size} produits`,
       );
     } catch (err) {
       const message =
@@ -765,7 +794,23 @@ class ProductsStore {
   }
 
   // ===========================================================================
-  // SYNC WITH EVENT MEALS (the only remaining $effect)
+  // DATE RANGE EFFECT : rebuild groups quand la plage de dates change
+  // ===========================================================================
+
+  #setupDateRangeEffect() {
+    this.#cleanupDateEffect?.();
+    this.#cleanupDateEffect = $effect.root(() => {
+      $effect(() => {
+        const { start, end } = this.dateStore.current;
+        if (start && end && this.#isInitialized) {
+          this.#rebuildGroups();
+        }
+      });
+    });
+  }
+
+  // ===========================================================================
+  // SYNC WITH EVENT MEALS
   // ===========================================================================
 
   #setupMealsSyncEffect(eventId: string) {
@@ -858,7 +903,7 @@ class ProductsStore {
 
     lines.push("");
 
-    const groups = this.#groupedFilteredProducts;
+    const groups = this.#groups;
     const groupKeys = Object.keys(groups);
 
     if (groupKeys.length === 0) {
@@ -871,7 +916,7 @@ class ProductsStore {
           lines.push("");
         }
         for (const model of models) {
-          const name = model.productName;
+          const name = model.data.productName;
           const total = model.stats.formattedQuantities || "-";
           const hasAcquired = model.stats.acquiredQuantities.length > 0;
           const hasMissing = model.stats.missingQuantities.length > 0;
@@ -932,6 +977,7 @@ class ProductsStore {
         this.#filters.temperatureFilter = "all";
         this.#filters.completionStatus = "all";
       }
+      this.#rebuildGroups();
     },
     () => 500,
   );
@@ -943,6 +989,7 @@ class ProductsStore {
     } else {
       this.#filters.selectedProductTypes.push(type);
     }
+    this.#rebuildGroups();
   }
 
   toggleTemperature(temperature: "frais" | "surgele") {
@@ -952,20 +999,24 @@ class ProductsStore {
     } else {
       this.#filters.selectedTemperatures.push(temperature);
     }
+    this.#rebuildGroups();
   }
 
   setTemperatureFilter(mode: TemperatureFilterMode) {
     this.#filters.temperatureFilter = mode;
+    this.#rebuildGroups();
   }
 
   clearTypeAndTemperatureFilters() {
     this.#filters.selectedProductTypes = [];
     this.#filters.selectedTemperatures = [];
     this.#filters.temperatureFilter = "all";
+    this.#rebuildGroups();
   }
 
   setGroupBy(groupBy: "store" | "productType" | "none") {
     this.#filters.groupBy = groupBy;
+    this.#rebuildGroups();
   }
 
   toggleStore(store: string) {
@@ -975,6 +1026,7 @@ class ProductsStore {
     } else {
       this.#filters.selectedStores.push(store);
     }
+    this.#rebuildGroups();
   }
 
   toggleWho(who: string) {
@@ -984,18 +1036,22 @@ class ProductsStore {
     } else {
       this.#filters.selectedWho.push(who);
     }
+    this.#rebuildGroups();
   }
 
   clearStoreFilters() {
     this.#filters.selectedStores = [];
+    this.#rebuildGroups();
   }
 
   clearWhoFilters() {
     this.#filters.selectedWho = [];
+    this.#rebuildGroups();
   }
 
   setCompletionStatus(status: "all" | "completed" | "incomplete") {
     this.#filters.completionStatus = status;
+    this.#rebuildGroups();
   }
 
   handleSort(column: string) {
@@ -1006,6 +1062,7 @@ class ProductsStore {
       this.#filters.sortColumn = column;
       this.#filters.sortDirection = "asc";
     }
+    this.#rebuildGroups();
   }
 
   clearFilters() {
@@ -1021,6 +1078,7 @@ class ProductsStore {
       sortColumn: "",
       sortDirection: "asc",
     };
+    this.#rebuildGroups();
   }
 
   // ===========================================================================
@@ -1028,15 +1086,15 @@ class ProductsStore {
   // ===========================================================================
 
   getEnrichedProductById(productId: string): EnrichedProduct | null {
-    return this.#enrichedProducts.get(productId)?.data ?? null;
+    return this.#productModels.get(productId)?.data ?? null;
   }
 
   getProductModelById(productId: string): ProductModel | null {
-    return this.#enrichedProducts.get(productId) ?? null;
+    return this.#productModels.get(productId) ?? null;
   }
 
   hasConversions(productId: string): boolean {
-    const product = this.#enrichedProducts.get(productId)?.data;
+    const product = this.#productModels.get(productId)?.data;
     if (!product?.byDate) return false;
     return hasConversions(product.byDate);
   }
@@ -1053,6 +1111,38 @@ class ProductsStore {
     // Also clear calculated needs
     await db.productNeeds.clear();
     console.log("[ProductsStore] Cache vidé");
+  }
+
+  /**
+   * Force un delta sync Appwrite → Dexie pour les produits et achats.
+   *
+   * Appelé par NotificationStore après une notification batch_products_update
+   * (Cloud Functions : batchUpdate, groupPurchase).
+   *
+   * Le realtime Appwrite ne relaie pas toujours les événements de modification
+   * issus des Cloud Functions vers les clients, donc ce delta sync explicite
+   * garantit que Dexie (et donc le liveQuery → #onDataChange) est à jour.
+   */
+  async syncFromAppwrite(): Promise<void> {
+    if (!this.#currentMainId) {
+      console.warn("[ProductsStore] syncFromAppwrite() appelé sans currentMainId");
+      return;
+    }
+
+    try {
+      await Promise.all([
+        this.#productsCollection.initialFetch({
+          queries: [Query.equal("mainId", this.#currentMainId)],
+        }),
+        this.#purchasesCollection.initialFetch({
+          queries: [Query.equal("mainId", this.#currentMainId)],
+        }),
+      ]);
+      this.#lastSync = new Date().toISOString();
+      console.log("[ProductsStore] syncFromAppwrite() terminé");
+    } catch (err) {
+      console.error("[ProductsStore] syncFromAppwrite() échoué:", err);
+    }
   }
 
   // ===========================================================================
@@ -1214,18 +1304,22 @@ class ProductsStore {
     // Cleanup effects
     this.#cleanupSyncEffect?.();
     this.#cleanupSyncEffect = null;
+    this.#cleanupDateEffect?.();
+    this.#cleanupDateEffect = null;
 
-    // Cleanup bridges
-    this.#productsBridge?.subscription.unsubscribe();
-    this.#productsBridge = null;
-    this.#purchasesBridge?.subscription.unsubscribe();
-    this.#purchasesBridge = null;
-    this.#needsBridge?.subscription.unsubscribe();
-    this.#needsBridge = null;
+    // Cleanup liveQuery
+    this.#dataSubscription?.unsubscribe();
+    this.#dataSubscription = null;
 
     // Cleanup aw-sync subscriptions
     this.#productsCollection.unsubscribeAll();
     this.#purchasesCollection.unsubscribeAll();
+
+    // Vider les structures de données
+    this.#productModels.clear();
+    this.#groups = {};
+    this.#orphanPurchases = new SvelteMap();
+    this.#purchasesByProductCache = new Map();
 
     // Reset metadata
     this.#currentMainId = null;

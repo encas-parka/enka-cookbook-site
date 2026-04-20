@@ -452,29 +452,6 @@ export function enrichMaterielFromAppwrite(
   };
 }
 
-/**
- * Ré-enrichit un matériel existant après une mise à jour de loan
- * Utilise les données locales du store pour éviter les appels API
- *
- * @param currentMateriel - Matériel actuel dans le store (enrichi)
- * @param allLoans - Tous les emprunts pour recalculer
- * @returns Matériel ré-enrichi avec les nouvelles données
- */
-export function reEnrichMaterielFromLoans(
-  currentMateriel: EnrichedMateriel,
-  allLoans: MaterielLoan[],
-): EnrichedMateriel {
-  // Extraire les champs Appwrite de base depuis le matériel enrichi
-  // EnrichedMateriel étend Materiel, donc on peut le caster directement
-  const baseMateriel: Materiel = {
-    ...currentMateriel,
-    // Si le statut était "loan" à cause des emprunts, on remet le statut original
-    // status: currentMateriel.status === "loan" ? "ok" : currentMateriel.status,
-  } as Materiel;
-
-  return enrichMaterielFromAppwrite(baseMateriel, allLoans);
-}
-
 // =============================================================================
 // HELPERS - Validation et calculs
 // =============================================================================

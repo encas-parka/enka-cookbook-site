@@ -1,4 +1,6 @@
 import { Permission, Role } from "appwrite";
+import { liveQuery } from "dexie";
+import type { Subscription } from "dexie";
 import type { Materiel, MaterielLoan } from "$lib/types/appwrite";
 import type {
   EnrichedMateriel,
@@ -10,22 +12,34 @@ import type {
 import {
   enrichMaterielFromAppwrite,
   enrichLoanFromAppwrite,
-  reEnrichMaterielFromLoans,
-  parseLoanItemsFromAppwrite,
   calculateLoanedQuantityForPeriod,
 } from "$lib/utils/materiel.utils";
 import { materielTypeLabels } from "$lib/utils/share-utils";
 import { globalState } from "./GlobalState.svelte";
 import { nativeTeamsStore } from "./NativeTeamsStore.svelte";
 import { eventMaterielStore } from "./EventMaterielStore.svelte";
-import {
-  createSyncCollection,
-  bridgeToMap,
-  db,
-} from "$lib/db-sync/aw-sync";
+import { createSyncCollection, db } from "$lib/db-sync/aw-sync";
+
+/**
+ * MaterielStore — Gestion du matériel avec Svelte 5 + aw-sync
+ *
+ * Architecture :
+ * - 1 liveQuery Dexie observe 2 tables (materiels, materielLoans)
+ * - #raw ($state) : données brutes synchronisées, écrites par le handler liveQuery
+ * - #enrichedMateriels / #enrichedLoans ($derived) : enrichissement pur
+ * - Listes filtrées ($derived) : vues dérivées
+ *
+ * Flux :
+ *   liveQuery(2 tables) → #raw ($state) → #enriched ($derived) → filtered ($derived)
+ *   CRUD → Appwrite → realtime → Dexie → liveQuery → #raw
+ *
+ * Note : bridgeToMap n'est PAS utilisé ici car les données enrichies
+ * dépendent de 2 tables croisées. Un $state + $derived est plus adapté
+ * qu'une SvelteMap qui serait immédiatement détruite par la chaîne $derived.
+ */
 
 export class MaterielStore {
-  // aw-sync collections
+  // aw-sync collections (CRUD + sync Appwrite ↔ Dexie)
   #materielCollection = createSyncCollection<Materiel>({
     table: db.materiels,
     collectionName: "materiel",
@@ -36,13 +50,14 @@ export class MaterielStore {
     collectionName: "materiel_loan",
   });
 
-  // Bridges (liveQuery → SvelteMap)
-  #materielBridge = bridgeToMap<Materiel>(() => db.materiels.toArray());
-  #loanBridge = bridgeToMap<MaterielLoan>(() => db.materielLoans.toArray());
+  // Single liveQuery subscription (observes both tables)
+  #subscription: Subscription | null = null;
 
-  // Raw data maps
-  #materielsMap = this.#materielBridge.map;
-  #loansMap = this.#loanBridge.map;
+  // Reactive raw data — written by liveQuery, consumed by $derived
+  #raw = $state<{ materiels: Materiel[]; loans: MaterielLoan[] }>({
+    materiels: [],
+    loans: [],
+  });
 
   // État réactif
   #loading = $state(false);
@@ -65,52 +80,39 @@ export class MaterielStore {
     return this.#isRealtimeActive;
   }
   get count() {
-    return this.#materielsMap.size;
+    return this.#raw.materiels.length;
   }
 
   // =============================================================================
   // ENRICHED DERIVED DATA
   // =============================================================================
 
-  /** Raw materiels list from Dexie */
-  #rawMaterielsList = $derived(Array.from(this.#materielsMap.values()));
-
-  /** Raw loans list from Dexie */
-  #rawLoansList = $derived(Array.from(this.#loansMap.values()));
+  /** All materiels enriched with loan data */
+  #enrichedMateriels = $derived.by(() =>
+    this.#raw.materiels.map((m) =>
+      enrichMaterielFromAppwrite(m, this.#raw.loans),
+    ),
+  );
 
   /** All loans enriched with parsed materielItems */
-  #enrichedLoans = $derived.by(() => {
-    const result = new Map<string, EnrichedMaterielLoan>();
-    for (const loan of this.#rawLoansList) {
-      result.set(loan.$id, enrichLoanFromAppwrite(loan));
-    }
-    return result;
-  });
-
-  /** All materiels enriched with loan data */
-  #enrichedMateriels = $derived.by(() => {
-    const allLoans = this.#rawLoansList;
-    const result = new Map<string, EnrichedMateriel>();
-    for (const doc of this.#rawMaterielsList) {
-      result.set(doc.$id, enrichMaterielFromAppwrite(doc, allLoans));
-    }
-    return result;
-  });
+  #enrichedLoans = $derived.by(() =>
+    this.#raw.loans.map((l) => enrichLoanFromAppwrite(l)),
+  );
 
   // Public reactive lists
   get materiels() {
-    return Array.from(this.#enrichedMateriels.values());
+    return this.#enrichedMateriels;
   }
 
   get loans() {
-    return Array.from(this.#enrichedLoans.values());
+    return this.#enrichedLoans;
   }
 
   // Matériels des équipes de l'utilisateur
   #teamMaterielsList = $derived.by(() => {
     if (!globalState.userId) return [];
     const myTeamIds = nativeTeamsStore.myTeams.map((t) => t.$id);
-    return Array.from(this.#enrichedMateriels.values()).filter(
+    return this.#enrichedMateriels.filter(
       (m) => m.ownerData?.teamId && myTeamIds.includes(m.ownerData.teamId),
     );
   });
@@ -122,7 +124,7 @@ export class MaterielStore {
   #shareableMaterielsList = $derived.by(() => {
     if (!globalState.userId) return [];
     const myTeamIds = nativeTeamsStore.myTeams.map((t) => t.$id);
-    return Array.from(this.#enrichedMateriels.values()).filter((m) => {
+    return this.#enrichedMateriels.filter((m) => {
       const isShareableWithMyTeams = m.shareableWith?.some((teamId) =>
         myTeamIds.includes(teamId),
       );
@@ -138,9 +140,7 @@ export class MaterielStore {
 
   // Matériels avec quantité disponible
   #availableMaterielsList = $derived.by(() => {
-    return Array.from(this.#enrichedMateriels.values()).filter(
-      (m) => m.isAvailable,
-    );
+    return this.#enrichedMateriels.filter((m) => m.isAvailable);
   });
   get availableMateriels() {
     return this.#availableMaterielsList;
@@ -160,7 +160,7 @@ export class MaterielStore {
   }
 
   getMaterielsByOwner(teamId: string): EnrichedMateriel[] {
-    return Array.from(this.#enrichedMateriels.values()).filter(
+    return this.#enrichedMateriels.filter(
       (m) => m.ownerData?.teamId === teamId,
     );
   }
@@ -173,9 +173,9 @@ export class MaterielStore {
   ): Array<EnrichedMateriel & { availableForPeriod: number }> {
     const periodStart = new Date(startDate);
     const periodEnd = new Date(endDate);
-    const allLoans = this.#rawLoansList;
+    const allLoans = this.#raw.loans;
 
-    return Array.from(this.#enrichedMateriels.values())
+    return this.#enrichedMateriels
       .filter((m) => m.ownerData?.teamId === teamId)
       .filter((m) => m.status !== "lost" && m.status !== "torepair")
       .map((materiel) => {
@@ -190,6 +190,33 @@ export class MaterielStore {
         return { ...materiel, availableForPeriod };
       })
       .filter((m) => m.availableForPeriod > 0);
+  }
+
+  // =============================================================================
+  // LIVEQUERY OBSERVATION
+  // =============================================================================
+
+  /**
+   * Démarre la souscription liveQuery sur les 2 tables Dexie.
+   * Les données sont synchronisées (même transaction Dexie).
+   */
+  #startObservation() {
+    this.#subscription?.unsubscribe();
+
+    this.#subscription = liveQuery(async () => {
+      const [materiels, loans] = await Promise.all([
+        db.materiels.toArray(),
+        db.materielLoans.toArray(),
+      ]);
+      return { materiels, loans };
+    }).subscribe({
+      next: (data) => {
+        this.#raw = data;
+      },
+      error: (err) => {
+        console.error("[MaterielStore] liveQuery error:", err);
+      },
+    });
   }
 
   // =============================================================================
@@ -229,8 +256,11 @@ export class MaterielStore {
       await this.#materielCollection.initialFetch();
       await this.#loanCollection.initialFetch();
 
+      // Start observing Dexie tables after data is populated
+      this.#startObservation();
+
       console.log(
-        `[MaterielStore] Sync terminé : ${this.#materielsMap.size} matériels, ${this.#loansMap.size} emprunts`,
+        `[MaterielStore] Sync terminé : ${this.#raw.materiels.length} matériels, ${this.#raw.loans.length} emprunts`,
       );
     } catch (err) {
       this.#error =
@@ -274,11 +304,11 @@ export class MaterielStore {
   // =============================================================================
 
   getMaterielById(materielId: string): EnrichedMateriel | undefined {
-    return this.#enrichedMateriels.get(materielId);
+    return this.#enrichedMateriels.find((m) => m.$id === materielId);
   }
 
   getLoanById(loanId: string): EnrichedMaterielLoan | undefined {
-    return this.#enrichedLoans.get(loanId);
+    return this.#enrichedLoans.find((l) => l.$id === loanId);
   }
 
   async createMateriel(data: {
@@ -345,7 +375,7 @@ export class MaterielStore {
       );
 
       // Return enriched (will also update via liveQuery)
-      return enrichMaterielFromAppwrite(doc, this.#rawLoansList);
+      return enrichMaterielFromAppwrite(doc, this.#raw.loans);
     } catch (err) {
       this.#error = err instanceof Error ? err.message : "Erreur de création";
       throw err;
@@ -492,7 +522,7 @@ export class MaterielStore {
     this.#error = null;
 
     try {
-      const currentLoan = this.#enrichedLoans.get(loanId);
+      const currentLoan = this.getLoanById(loanId);
       const oldEventId = currentLoan?.eventId || null;
       const newEventId =
         data.eventId !== undefined ? data.eventId : oldEventId;
@@ -554,7 +584,7 @@ export class MaterielStore {
   }
 
   async refuseLoan(loanId: string): Promise<void> {
-    const loan = this.#enrichedLoans.get(loanId);
+    const loan = this.getLoanById(loanId);
     if (loan?.eventId) {
       await eventMaterielStore.removeByLoan(loanId);
     }
@@ -562,7 +592,7 @@ export class MaterielStore {
   }
 
   async cancelLoan(loanId: string): Promise<void> {
-    const loan = this.#enrichedLoans.get(loanId);
+    const loan = this.getLoanById(loanId);
     if (loan?.eventId) {
       await eventMaterielStore.removeByLoan(loanId);
     }
@@ -616,7 +646,7 @@ export class MaterielStore {
     this.#error = null;
 
     try {
-      const loan = this.#enrichedLoans.get(loanId);
+      const loan = this.getLoanById(loanId);
       if (loan?.eventId) {
         await eventMaterielStore.removeByLoan(loanId);
       }
@@ -632,7 +662,7 @@ export class MaterielStore {
   }
 
   exportLoanToMarkdown(loanId: string): string {
-    const loan = this.#enrichedLoans.get(loanId);
+    const loan = this.getLoanById(loanId);
     if (!loan) return "";
 
     const lines: string[] = [];
@@ -667,7 +697,9 @@ export class MaterielStore {
     const byType = new Map<string, typeof items>();
 
     for (const item of items) {
-      const m = this.#enrichedMateriels.get(item.materielId);
+      const m = this.#enrichedMateriels.find(
+        (em) => em.$id === item.materielId,
+      );
       const typeLabel = materielTypeLabels[m?.type ?? "other"] ?? "Autre";
       if (!byType.has(typeLabel)) byType.set(typeLabel, []);
       byType.get(typeLabel)!.push(item);
@@ -732,16 +764,22 @@ export class MaterielStore {
   }
 
   async destroy(): Promise<void> {
-    // Unsubscribe bridges en premier pour arrêter les liveQuery Dexie
-    this.#materielBridge.subscription.unsubscribe();
-    this.#loanBridge.subscription.unsubscribe();
+    // Unsubscribe liveQuery
+    this.#subscription?.unsubscribe();
+    this.#subscription = null;
+
+    // Unsubscribe aw-sync realtime
     this.#materielCollection.unsubscribeAll();
     this.#loanCollection.unsubscribeAll();
+
     // Nettoyer IndexedDB pour éviter les fuites de données entre utilisateurs
     await Promise.all([
       this.#materielCollection.clearLocal(),
       this.#loanCollection.clearLocal(),
     ]);
+
+    // Reset state
+    this.#raw = { materiels: [], loans: [] };
     this.#realtimeInitialized = false;
     this.#isInitialized = false;
     this.#loading = false;

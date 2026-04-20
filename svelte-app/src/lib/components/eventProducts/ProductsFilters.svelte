@@ -267,21 +267,22 @@
         <div class="mb-2 flex items-center gap-2">
           <div class="join mr-2">
             <button
-              class="btn btn-sm join-item {filters.storeFilterMode === 'all' &&
-              filters.selectedStores.length === 0
+              class="btn btn-sm join-item uppercase {filters.storeFilterMode ===
+                'all' && filters.selectedStores.length === 0
                 ? 'btn-secondary'
-                : 'btn-soft btn-secondary'}"
+                : 'btn-soft'}"
               type="button"
               onclick={() => productsStore.setStoreFilterMode("all")}
-            >Tous</button
+              >Tous</button
             >
             <button
-              class="btn btn-sm join-item {filters.storeFilterMode === 'none'
+              class="btn btn-sm join-item uppercase {filters.storeFilterMode ===
+              'none'
                 ? 'btn-secondary'
-                : 'btn-soft btn-secondary'}"
+                : 'btn-soft'}"
               type="button"
               onclick={() => productsStore.setStoreFilterMode("none")}
-            >Aucun</button
+              >Aucun</button
             >
           </div>
         </div>
@@ -312,18 +313,17 @@
               class="btn btn-sm join-item {filters.whoFilterMode === 'all' &&
               filters.selectedWho.length === 0
                 ? 'btn-secondary'
-                : 'btn-soft btn-secondary'}"
+                : 'btn-soft'}"
               type="button"
-              onclick={() => productsStore.setWhoFilterMode("all")}
-            >Tous</button
+              onclick={() => productsStore.setWhoFilterMode("all")}>Tous</button
             >
             <button
               class="btn btn-sm join-item {filters.whoFilterMode === 'none'
                 ? 'btn-secondary'
-                : 'btn-soft btn-secondary'}"
+                : 'btn-soft'}"
               type="button"
               onclick={() => productsStore.setWhoFilterMode("none")}
-            >Personne</button
+              >Personne</button
             >
           </div>
         </div>

@@ -55,7 +55,8 @@ class RecipesStore {
 	// Hugo recipes (published, from data.json + cache)
 	#hugoRecipes = new SvelteMap<string, RecipeIndexEntry>();
 
-	// Unified index: $derived merge of Hugo + Appwrite (Appwrite wins on conflict)
+	// Unified index: $derived merge of Hugo + Appwrite
+	// Most recent $updatedAt wins on conflict; deleted status always honored
 	#recipesIndex = $derived.by(() => {
 		const merged = new Map<string, RecipeIndexEntry>();
 
@@ -64,12 +65,17 @@ class RecipesStore {
 			merged.set(id, entry);
 		}
 
-		// 2. Appwrite recipes (overlay - wins on conflict, handles drafts & deletions)
+		// 2. Appwrite recipes (overlay - respects updatedAt, handles drafts & deletions)
 		for (const recipe of this.#appwriteRecipes.values()) {
 			if (recipe.status === 'deleted') {
 				merged.delete(recipe.$id);
 			} else {
-				merged.set(recipe.$id, parseAppwriteRecipeToIndexEntry(recipe));
+				const hugoEntry = merged.get(recipe.$id);
+				const awEntry = parseAppwriteRecipeToIndexEntry(recipe);
+				// Appwrite wins if no Hugo equivalent (draft-only) or if Appwrite is at least as recent
+				if (!hugoEntry || awEntry.$updatedAt >= hugoEntry.$updatedAt) {
+					merged.set(recipe.$id, awEntry);
+				}
 			}
 		}
 

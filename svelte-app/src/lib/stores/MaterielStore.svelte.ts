@@ -751,6 +751,9 @@ export class MaterielStore {
       await this.#materielCollection.initialFetch();
       await this.#loanCollection.initialFetch();
 
+      // Restart liveQuery observation (may have been stopped by destroy())
+      this.#startObservation();
+
       console.log("[MaterielStore] ✓ HARD RESET terminé");
     } catch (err) {
       const message =

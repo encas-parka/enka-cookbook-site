@@ -6,6 +6,7 @@ import { nativeTeamsStore } from "./NativeTeamsStore.svelte";
 import { eventsStore } from "./EventsStore.svelte";
 import { materielStore } from "./MaterielStore.svelte";
 import { teamdocsStore } from "./TeamdocsStore.svelte";
+import { productsStore } from "./ProductsStore.svelte";
 import { notificationStore } from "./NotificationStore.svelte";
 import { realtimeManager } from "./RealtimeManager.svelte";
 import { recipesStore } from "./RecipesStore.svelte";
@@ -175,6 +176,7 @@ class GlobalState {
       await eventsStore.destroy();
       await materielStore.destroy();
       await teamdocsStore.destroy();
+      await productsStore.destroy();
       realtimeManager.destroy();
 
       this.#user = null;

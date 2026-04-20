@@ -1250,8 +1250,12 @@ class ProductsStore {
     console.log("[ProductsStore] Reset termine");
   }
 
-  destroy() {
+  async destroy() {
     this.reset();
+    // Nettoyer IndexedDB pour éviter les fuites de données entre utilisateurs
+    await this.#productsCollection.clearLocal();
+    await this.#purchasesCollection.clearLocal();
+    await db.productNeeds.clear();
     console.log("[ProductsStore] Ressources nettoyees");
   }
 }

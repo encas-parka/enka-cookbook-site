@@ -1,6 +1,6 @@
 ---
-title: Crumble aux fruits sans gluten
-date: '2026-04-20T13:42:14.803Z'
+title: Crumble aux abricots sans gluten
+date: '2026-04-20T13:44:09.177Z'
 draft: true
 typeR: dessert
 categories: []
@@ -80,7 +80,7 @@ permissionWrite:
   - 69b01d0a001a6848cc4c
 auteur: chrismino28
 createdAt: '2026-04-20T13:42:12.043+00:00'
-updatedAt: '2026-04-20T13:42:12.043+00:00'
+updatedAt: '2026-04-20T13:44:08.815+00:00'
 createdBy: 69b01d0a001a6848cc4c
 teams: []
 status: public

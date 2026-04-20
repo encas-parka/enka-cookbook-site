@@ -13,6 +13,7 @@
   import Toast from "./lib/components/ui/Toast.svelte";
   import { globalState } from "./lib/stores/GlobalState.svelte";
   import { toastService } from "./lib/services/toast.service.svelte";
+  import { cleanupLegacyCaches } from "$lib/db-sync/aw-sync";
   import { Router, preload } from "$lib/router";
 
   type AppState = "BOOTING" | "READY" | "ERROR";
@@ -22,6 +23,9 @@
   async function initializeApp() {
     try {
       appState = "BOOTING";
+
+      // Nettoyer les anciens caches IDB (migration PocketBase → Dexie)
+      await cleanupLegacyCaches();
 
       await globalState.initializeAuth();
 

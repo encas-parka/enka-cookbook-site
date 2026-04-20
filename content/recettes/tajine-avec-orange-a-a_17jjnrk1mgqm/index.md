@@ -1,6 +1,6 @@
 ---
 title: Tajine de boeuf avec orange
-date: '2026-04-20T13:18:18.177Z'
+date: '2026-04-20T13:30:21.432Z'
 draft: true
 typeR: plat
 categories: []
@@ -201,15 +201,6 @@ ingredients:
     allergens:
       - Moutarde
     type: epices
-  - uuid: y16lzq
-    name: Menthe fraîche
-    originalQuantity: 2
-    originalUnit: bottes
-    normalizedQuantity: 2
-    normalizedUnit: bottes
-    comment: A hacher
-    allergens: []
-    type: epices
 preparation: |-
   Recette testée avec des légumes d'hiver et sans viande pour 4 personnes d'abord dans un plat à tajine puis pour 50 personnes avec une grande casserole/marmitte.
 
@@ -224,7 +215,7 @@ preparation: |-
   - Rajouter les aubergines qui vont fondre doucement, ainsi que le jus et les zestes d'orange. Laisser mijoter à couvert à feu doux (1h).
   - A côté, faire revenir le reste des oignons dans une autre casserole, et les faire caraméliser.
   - Faire torréfier les amandes dans une poêle et hâcher le persil.
-  - 30min/1h avant de servir : Préparer la semoule qui accompnera le tajine. Une fois cuite, ajouter des feuilles de menthe hachées et mélanger.
+  - 30min/1h avant de servir : Préparer la semoule qui accompnera le tajine.
   - Disposer à côté du tajine et de la semoule, les oignons confits, les amandes torréfiées, les raisins secs si pas mis dans le plat, et le persil pour que chacun.e puisse en mettre à sa guise.
 
   Et bon appétit !
@@ -238,7 +229,7 @@ permissionWrite:
   - 69b01d0a001a6848cc4c
 auteur: chrismino28
 createdAt: '2026-03-11T14:21:26.193+00:00'
-updatedAt: '2026-04-20T13:18:17.530+00:00'
+updatedAt: '2026-04-20T13:30:21.005+00:00'
 createdBy: 69b01d0a001a6848cc4c
 teams: []
 status: public

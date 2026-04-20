@@ -24,6 +24,8 @@ export interface FiltersState {
   selectedProductTypes: string[];
   selectedTemperatures: string[];
   temperatureFilter: TemperatureFilterMode;
+  storeFilterMode: "all" | "none";
+  whoFilterMode: "all" | "none";
   completionStatus: "all" | "completed" | "incomplete";
   groupBy: "store" | "productType" | "none";
   sortColumn: string;
@@ -242,7 +244,10 @@ export function matchesFilters(
   }
 
   // Filtre par store
-  if (filters.selectedStores.length > 0) {
+  if (filters.storeFilterMode === "none") {
+    // Afficher uniquement les produits sans magasin assigné
+    if (product.storeInfo?.storeName) return false;
+  } else if (filters.selectedStores.length > 0) {
     if (
       !product.storeInfo?.storeName ||
       !filters.selectedStores.includes(product.storeInfo.storeName)
@@ -252,7 +257,10 @@ export function matchesFilters(
   }
 
   // Filtre par who
-  if (filters.selectedWho.length > 0) {
+  if (filters.whoFilterMode === "none") {
+    // Afficher uniquement les produits sans personne assignée
+    if (product.who && product.who.length > 0) return false;
+  } else if (filters.selectedWho.length > 0) {
     if (
       !product.who ||
       !product.who.some((w) => filters.selectedWho.includes(w))

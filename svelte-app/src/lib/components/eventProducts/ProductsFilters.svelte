@@ -14,7 +14,7 @@
   import { getProductTypeInfo } from "$lib/utils/products-display";
   import TimelineRange from "../ui/TimelineRange.svelte";
   import Fieldset from "../ui/Fieldset.svelte";
-  import { fade, slide } from "svelte/transition";
+  import { slide } from "svelte/transition";
   import { hoverHelp } from "@/lib/stores/GlobalState.svelte";
 
   const filters = $derived(productsStore.filters);
@@ -162,6 +162,15 @@
     {#if uniqueProductTypes.length > 0}
       <Fieldset legend="Types & Température" iconComponent={Thermometer}>
         <div class="mb-2 flex flex-wrap items-center gap-2" role="group">
+          <button
+            class="btn btn-sm {filters.selectedProductTypes.length === 0
+              ? 'btn-secondary'
+              : 'btn-soft btn-secondary'}"
+            onclick={() => productsStore.clearTypeAndTemperatureFilters()}
+            type="button"
+          >
+            Tous
+          </button>
           {#each uniqueProductTypes as type (type)}
             {@const typeInfo = getProductTypeInfo(type)}
             <button
@@ -251,74 +260,88 @@
             <span class="line-through">surgelés</span>
           </button>
         </div>
-        {#if filters.selectedProductTypes.length > 0 || filters.selectedTemperatures.length > 0 || filters.temperatureFilter !== "all"}
-          <button
-            class="btn btn-sm btn-circle btn-outline text-error float-end ms-auto"
-            onclick={() => productsStore.clearTypeAndTemperatureFilters()}
-            title="Effacer les filtres de types et température"
-            in:fade
-          >
-            <FunnelX size={16} />
-          </button>
-        {:else}
-          <div class="text-base-content/60 p-1 text-end text-xs italic">
-            aucun filtre sélectionné
-          </div>
-        {/if}
       </Fieldset>
     {/if}
     {#if uniqueStores.length > 0}
       <Fieldset legend="Magasins" iconComponent={Store}>
+        <div class="mb-2 flex items-center gap-2">
+          <div class="join mr-2">
+            <button
+              class="btn btn-sm join-item {filters.storeFilterMode === 'all' &&
+              filters.selectedStores.length === 0
+                ? 'btn-secondary'
+                : 'btn-soft btn-secondary'}"
+              type="button"
+              onclick={() => productsStore.setStoreFilterMode("all")}
+            >Tous</button
+            >
+            <button
+              class="btn btn-sm join-item {filters.storeFilterMode === 'none'
+                ? 'btn-secondary'
+                : 'btn-soft btn-secondary'}"
+              type="button"
+              onclick={() => productsStore.setStoreFilterMode("none")}
+            >Aucun</button
+            >
+          </div>
+        </div>
         <div class="flex flex-wrap items-center gap-2" role="group">
           {#each uniqueStores as store (store)}
             <button
-              class="btn btn-sm {filters.selectedStores.length === 0
-                ? 'btn-soft btn-secondary'
-                : filters.selectedStores.includes(store)
-                  ? 'btn-secondary'
-                  : 'btn-dash btn-secondary'}"
+              class="btn btn-sm {filters.storeFilterMode === 'none'
+                ? 'btn-dash btn-secondary'
+                : filters.selectedStores.length === 0
+                  ? 'btn-soft btn-secondary'
+                  : filters.selectedStores.includes(store)
+                    ? 'btn-secondary'
+                    : 'btn-dash btn-secondary'}"
               onclick={() => productsStore.toggleStore(store)}
             >
               {store}
             </button>
           {/each}
-          {#if filters.selectedStores.length > 0}
-            <button
-              class="btn btn-xs btn-circle btn-outline text-error ms-auto"
-              onclick={() => productsStore.clearStoreFilters()}
-              title="Effacer les filtres de magasins"
-            >
-              <FunnelX size={16} />
-            </button>
-          {/if}
         </div>
       </Fieldset>
     {/if}
 
     {#if uniqueWho.length > 0}
       <Fieldset legend="Qui" iconComponent={User}>
+        <div class="mb-2 flex items-center gap-2">
+          <div class="join mr-2">
+            <button
+              class="btn btn-sm join-item {filters.whoFilterMode === 'all' &&
+              filters.selectedWho.length === 0
+                ? 'btn-secondary'
+                : 'btn-soft btn-secondary'}"
+              type="button"
+              onclick={() => productsStore.setWhoFilterMode("all")}
+            >Tous</button
+            >
+            <button
+              class="btn btn-sm join-item {filters.whoFilterMode === 'none'
+                ? 'btn-secondary'
+                : 'btn-soft btn-secondary'}"
+              type="button"
+              onclick={() => productsStore.setWhoFilterMode("none")}
+            >Personne</button
+            >
+          </div>
+        </div>
         <div class="flex flex-wrap items-center gap-2" role="group">
           {#each uniqueWho as who (who)}
             <button
-              class="btn btn-sm {filters.selectedWho.length === 0
-                ? ' btn-soft btn-secondary'
-                : filters.selectedWho.includes(who)
-                  ? ' btn-secondary'
-                  : 'btn-dash btn-secondary'}"
+              class="btn btn-sm {filters.whoFilterMode === 'none'
+                ? 'btn-dash btn-secondary'
+                : filters.selectedWho.length === 0
+                  ? ' btn-soft btn-secondary'
+                  : filters.selectedWho.includes(who)
+                    ? ' btn-secondary'
+                    : 'btn-dash btn-secondary'}"
               onclick={() => productsStore.toggleWho(who)}
             >
               {who}
             </button>
           {/each}
-          {#if filters.selectedWho.length > 0}
-            <button
-              class="btn btn-xs btn-circle btn-outline btn-error ms-auto"
-              onclick={() => productsStore.clearWhoFilters()}
-              title="Effacer les filtres de qui"
-            >
-              <FunnelX size={16} />
-            </button>
-          {/if}
         </div>
       </Fieldset>
     {/if}

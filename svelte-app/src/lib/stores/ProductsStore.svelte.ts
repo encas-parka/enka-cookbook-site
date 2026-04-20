@@ -122,6 +122,8 @@ class ProductsStore {
     selectedProductTypes: [],
     selectedTemperatures: [],
     temperatureFilter: "all",
+    storeFilterMode: "all",
+    whoFilterMode: "all",
     completionStatus: "all",
     groupBy: "productType",
     sortColumn: "",
@@ -457,6 +459,8 @@ class ProductsStore {
       this.filters.selectedProductTypes.length > 0 ||
       this.filters.selectedTemperatures.length > 0 ||
       this.filters.temperatureFilter !== "all" ||
+      this.filters.storeFilterMode !== "all" ||
+      this.filters.whoFilterMode !== "all" ||
       this.filters.completionStatus !== "all"
     );
   }
@@ -490,10 +494,14 @@ class ProductsStore {
 
     if (this.filters.selectedStores.length > 0) {
       descriptions.push(`Magasins: ${this.filters.selectedStores.length}`);
+    } else if (this.filters.storeFilterMode === "none") {
+      descriptions.push("Sans magasin");
     }
 
     if (this.filters.selectedWho.length > 0) {
       descriptions.push(`Qui: ${this.filters.selectedWho.length}`);
+    } else if (this.filters.whoFilterMode === "none") {
+      descriptions.push("Sans personne");
     }
 
     return descriptions;
@@ -920,6 +928,7 @@ class ProductsStore {
   }
 
   toggleStore(store: string) {
+    this.#filters.storeFilterMode = "all";
     const idx = this.#filters.selectedStores.indexOf(store);
     if (idx > -1) {
       this.#filters.selectedStores.splice(idx, 1);
@@ -930,6 +939,7 @@ class ProductsStore {
   }
 
   toggleWho(who: string) {
+    this.#filters.whoFilterMode = "all";
     const idx = this.#filters.selectedWho.indexOf(who);
     if (idx > -1) {
       this.#filters.selectedWho.splice(idx, 1);
@@ -941,10 +951,24 @@ class ProductsStore {
 
   clearStoreFilters() {
     this.#filters.selectedStores = [];
+    this.#filters.storeFilterMode = "all";
     this.#rebuildGroups();
   }
 
   clearWhoFilters() {
+    this.#filters.selectedWho = [];
+    this.#filters.whoFilterMode = "all";
+    this.#rebuildGroups();
+  }
+
+  setStoreFilterMode(mode: "all" | "none") {
+    this.#filters.storeFilterMode = mode;
+    this.#filters.selectedStores = [];
+    this.#rebuildGroups();
+  }
+
+  setWhoFilterMode(mode: "all" | "none") {
+    this.#filters.whoFilterMode = mode;
     this.#filters.selectedWho = [];
     this.#rebuildGroups();
   }
@@ -973,6 +997,8 @@ class ProductsStore {
       selectedProductTypes: [],
       selectedTemperatures: [],
       temperatureFilter: "all",
+      storeFilterMode: "all",
+      whoFilterMode: "all",
       completionStatus: "all",
       groupBy: "productType",
       sortColumn: "",
@@ -1241,6 +1267,8 @@ class ProductsStore {
       selectedProductTypes: [],
       selectedTemperatures: [],
       temperatureFilter: "all",
+      storeFilterMode: "all",
+      whoFilterMode: "all",
       completionStatus: "all",
       groupBy: "productType",
       sortColumn: "",

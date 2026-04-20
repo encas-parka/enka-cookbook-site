@@ -5,6 +5,8 @@ export interface NavBarConfig {
   backAction?: () => void;
   actions?: Snippet;
   hasUnsavedChanges?: boolean;
+  /** When true, the page manages its own LeftPanel layout (sticky) — HeaderNav should not apply ml-96 to EventTabs */
+  stickyLeftPanel?: boolean;
 }
 
 class NavBarStore {
@@ -26,6 +28,10 @@ class NavBarStore {
 
   get hasUnsavedChanges() {
     return this.#config.hasUnsavedChanges || false;
+  }
+
+  get stickyLeftPanel() {
+    return this.#config.stickyLeftPanel || false;
   }
 
   setConfig(config: NavBarConfig) {

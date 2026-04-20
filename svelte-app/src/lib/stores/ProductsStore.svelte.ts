@@ -124,6 +124,7 @@ class ProductsStore {
     temperatureFilter: "all",
     storeFilterMode: "all",
     whoFilterMode: "all",
+    deliveryDateFilter: null,
     completionStatus: "all",
     groupBy: "productType",
     sortColumn: "",
@@ -377,6 +378,16 @@ class ProductsStore {
       if (this.#filters.completionStatus === "incomplete" && !hasMissing) return false;
     }
 
+    // Filtre date de livraison (produits avec purchase "ordered" à cette date)
+    if (this.#filters.deliveryDateFilter) {
+      const hasOrderedDelivery = product.purchases?.some(
+        (p) =>
+          p.status === "ordered" &&
+          p.deliveryDate === this.#filters.deliveryDateFilter,
+      );
+      if (!hasOrderedDelivery) return false;
+    }
+
     // Filtre date range
     if (product.byDate) {
       const hasDataInRange = Object.keys(product.byDate).some(
@@ -461,6 +472,7 @@ class ProductsStore {
       this.filters.temperatureFilter !== "all" ||
       this.filters.storeFilterMode !== "all" ||
       this.filters.whoFilterMode !== "all" ||
+      this.filters.deliveryDateFilter !== null ||
       this.filters.completionStatus !== "all"
     );
   }
@@ -502,6 +514,10 @@ class ProductsStore {
       descriptions.push(`Qui: ${this.filters.selectedWho.length}`);
     } else if (this.filters.whoFilterMode === "none") {
       descriptions.push("Sans personne");
+    }
+
+    if (this.filters.deliveryDateFilter) {
+      descriptions.push(`Livraison: ${this.filters.deliveryDateFilter}`);
     }
 
     return descriptions;
@@ -560,6 +576,18 @@ class ProductsStore {
       .map((p) => p.data.productType)
       .filter(Boolean);
     return [...new Set(types)] as string[];
+  });
+
+  uniqueDeliveryDates = $derived.by(() => {
+    const dates = new Set<string>();
+    for (const model of this.#productModels.values()) {
+      for (const purchase of model.data.purchases ?? []) {
+        if (purchase.status === "ordered" && purchase.deliveryDate) {
+          dates.add(purchase.deliveryDate);
+        }
+      }
+    }
+    return Array.from(dates).sort();
   });
 
   completionStats = $derived.by(() => {
@@ -975,6 +1003,17 @@ class ProductsStore {
 
   setCompletionStatus(status: "all" | "completed" | "incomplete") {
     this.#filters.completionStatus = status;
+    if (status !== "all") {
+      this.#filters.deliveryDateFilter = null;
+    }
+    this.#rebuildGroups();
+  }
+
+  setDeliveryDateFilter(date: string | null) {
+    this.#filters.deliveryDateFilter = date;
+    if (date) {
+      this.#filters.completionStatus = "all";
+    }
     this.#rebuildGroups();
   }
 
@@ -999,6 +1038,7 @@ class ProductsStore {
       temperatureFilter: "all",
       storeFilterMode: "all",
       whoFilterMode: "all",
+      deliveryDateFilter: null,
       completionStatus: "all",
       groupBy: "productType",
       sortColumn: "",
@@ -1269,6 +1309,7 @@ class ProductsStore {
       temperatureFilter: "all",
       storeFilterMode: "all",
       whoFilterMode: "all",
+      deliveryDateFilter: null,
       completionStatus: "all",
       groupBy: "productType",
       sortColumn: "",

@@ -33,7 +33,7 @@
 </script>
 
 <div
-  class={`bg-base-100 border-base-200 relative min-w-0 overflow-hidden rounded-lg border ${className}`}
+  class={`bg-base-100 border-base-200 relative min-w-0 overflow-hidden rounded-2xl border ${className}`}
   {style}
 >
   <button
@@ -58,7 +58,7 @@
       {/if}
     </div>
     {#if hasChildren}
-      <div class="absolute top-0 right-2 flex items-center gap-1">
+      <div class="absolute top-1 right-2 flex items-center gap-1">
         <div class="text-base-content/70 text-sm italic">
           {#if !isOpen}
             en savoir plus

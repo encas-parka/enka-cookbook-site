@@ -16,19 +16,19 @@
 <!-- Indicateur flottant des filtres actifs - visible uniquement ~~sur mobile~~ quand des filtres sont actifs -->
 {#if hasActiveFilters}
   <div
-    class="fixed right-[15%] bottom-6 z-50 md:right-24 print:hidden"
+    class="fixed right-[15%] bottom-10 z-50 md:right-24 print:hidden"
     transition:scale={{ duration: 200, start: 0.8 }}
   >
     <div
-      class="alert alert-soft bg-secondary/90 text-secondary-content flex items-center gap-2 rounded-full px-3 py-1.5 shadow-lg backdrop-blur-sm"
+      class=" bg-secondary/80 text-secondary-content flex items-center gap-2 rounded-full px-3 py-1.5 shadow-lg"
     >
       <span class="max-w-32 truncate text-xs font-medium">{displayText}</span>
       <button
-        class="btn btn-xs btn-circle btn-ghost"
+        class="btn btn-sm btn-circle btn-secondary"
         onclick={() => productsStore.clearFilters()}
         title="Effacer tous les filtres"
       >
-        <FunnelX class="size-4" />
+        <FunnelX class="size-6" />
       </button>
     </div>
   </div>

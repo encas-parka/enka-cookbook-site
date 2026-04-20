@@ -599,7 +599,7 @@
 <!-- SECTION SOUS NAVBAR : tabs (non-sticky, tout le temps) -->
 {#if eventContext}
   <div
-    class=" h-fit px-4 py-2 print:hidden {globalState.isDesktop && hasLeftPanel
+    class=" h-fit px-4 py-2 print:hidden {globalState.isDesktop && hasLeftPanel && !navBarStore.stickyLeftPanel
       ? 'ml-96'
       : ''}"
   >

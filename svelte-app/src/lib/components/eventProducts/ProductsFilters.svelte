@@ -21,7 +21,17 @@
   const uniqueStores = $derived(productsStore.uniqueStores);
   const uniqueWho = $derived(productsStore.uniqueWho);
   const uniqueProductTypes = $derived(productsStore.uniqueProductTypes);
+  const uniqueDeliveryDates = $derived(productsStore.uniqueDeliveryDates);
   const isSearchActive = $derived(productsStore.isSearchActive);
+
+  /** Formate une date ISO en "lun. 21" */
+  function formatDeliveryDate(dateStr: string): string {
+    const date = new Date(dateStr);
+    return date.toLocaleDateString("fr-FR", {
+      weekday: "short",
+      day: "numeric",
+    });
+  }
 </script>
 
 <button class="absolute -z-50 size-0 opacity-0" tabindex="-1" aria-hidden="true"
@@ -73,8 +83,8 @@
 
       {#if productsStore.hasPastDatesInRange}
         <div class="alert alert-warning" transition:slide>
-          Cette période contient des dates passées. Les achats ne sont plus
-          possibles pour ces dates.
+          Cette période contient des dates passées. Les achats ne sont pas
+          possibles pour les produits concernés par ces dates.
         </div>
       {/if}
     </Fieldset>
@@ -100,8 +110,8 @@
         id="completion-status"
       >
         <button
-          class="btn btn-sm flex-1 {filters.completionStatus === 'all' &&
-            'btn-primary'}"
+          class="btn btn-sm flex-1 uppercase {filters.completionStatus ===
+            'all' && 'btn-primary'}"
           type="button"
           aria-label="Tous"
           onclick={() => productsStore.setCompletionStatus("all")}>Tous</button
@@ -124,6 +134,36 @@
         >
       </div>
     </div>
+
+    {#if uniqueDeliveryDates.length > 0}
+      <div class="flex flex-col">
+        <label class="label label-text flex" for="delivery-date-filter"
+          >Livraison prévue :</label
+        >
+        <div
+          class="bg-base-100 flex flex-wrap gap-1 rounded-xl p-2 font-semibold"
+          role="group"
+          id="delivery-date-filter"
+        >
+          {#each uniqueDeliveryDates as date (date)}
+            <button
+              class="btn btn-sm {filters.deliveryDateFilter === date
+                ? 'btn-secondary'
+                : filters.deliveryDateFilter
+                  ? 'btn-dash btn-secondary'
+                  : 'btn-soft btn-secondary'}"
+              type="button"
+              onclick={() =>
+                productsStore.setDeliveryDateFilter(
+                  filters.deliveryDateFilter === date ? null : date,
+                )}
+            >
+              {formatDeliveryDate(date)}
+            </button>
+          {/each}
+        </div>
+      </div>
+    {/if}
 
     <!-- Groupement -->
     <div class="mb-4 flex flex-col">
@@ -163,7 +203,8 @@
       <Fieldset legend="Types & Température" iconComponent={Thermometer}>
         <div class="mb-2 flex flex-wrap items-center gap-2" role="group">
           <button
-            class="btn btn-sm {filters.selectedProductTypes.length === 0
+            class="btn btn-sm uppercase {filters.selectedProductTypes.length ===
+            0
               ? 'btn-secondary'
               : 'btn-soft btn-secondary'}"
             onclick={() => productsStore.clearTypeAndTemperatureFilters()}
@@ -193,7 +234,8 @@
           role="group"
         >
           <button
-            class="btn btn-sm flex-1 {filters.temperatureFilter === 'all'
+            class="btn btn-sm flex-1 uppercase {filters.temperatureFilter ===
+            'all'
               ? 'btn-secondary'
               : 'btn-soft btn-secondary'}"
             onclick={() => productsStore.setTemperatureFilter("all")}
@@ -264,7 +306,7 @@
     {/if}
     {#if uniqueStores.length > 0}
       <Fieldset legend="Magasins" iconComponent={Store}>
-        <div class="mb-2 flex items-center gap-2">
+        <div class="flex flex-wrap items-center gap-2" role="group">
           <div class="join mr-2">
             <button
               class="btn btn-sm join-item uppercase {filters.storeFilterMode ===
@@ -285,8 +327,6 @@
               >Aucun</button
             >
           </div>
-        </div>
-        <div class="flex flex-wrap items-center gap-2" role="group">
           {#each uniqueStores as store (store)}
             <button
               class="btn btn-sm {filters.storeFilterMode === 'none'
@@ -307,18 +347,19 @@
 
     {#if uniqueWho.length > 0}
       <Fieldset legend="Qui" iconComponent={User}>
-        <div class="mb-2 flex items-center gap-2">
+        <div class="flex flex-wrap items-center gap-2" role="group">
           <div class="join mr-2">
             <button
-              class="btn btn-sm join-item {filters.whoFilterMode === 'all' &&
-              filters.selectedWho.length === 0
+              class="btn btn-sm join-item uppercase {filters.whoFilterMode ===
+                'all' && filters.selectedWho.length === 0
                 ? 'btn-secondary'
                 : 'btn-soft'}"
               type="button"
               onclick={() => productsStore.setWhoFilterMode("all")}>Tous</button
             >
             <button
-              class="btn btn-sm join-item {filters.whoFilterMode === 'none'
+              class="btn btn-sm join-item uppercase {filters.whoFilterMode ===
+              'none'
                 ? 'btn-secondary'
                 : 'btn-soft'}"
               type="button"
@@ -326,8 +367,6 @@
               >Personne</button
             >
           </div>
-        </div>
-        <div class="flex flex-wrap items-center gap-2" role="group">
           {#each uniqueWho as who (who)}
             <button
               class="btn btn-sm {filters.whoFilterMode === 'none'

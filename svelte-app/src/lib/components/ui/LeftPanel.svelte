@@ -14,14 +14,17 @@
   interface Props {
     children?: Snippet;
     bgClass?: string;
+    sticky?: boolean;
   }
-  let { children, bgClass = "bg-base-200" }: Props = $props();
+  let { children, bgClass = "bg-base-200", sticky = false }: Props = $props();
 </script>
 
 {#if globalState.isDesktop}
-  <!-- Conteneur fixe à gauche avec overflow -->
+  <!-- Conteneur fixe ou sticky à gauche avec overflow -->
   <div
-    class="{bgClass} fixed top-0 left-0 z-40 mt-12 h-dvh w-sm overflow-y-auto p-4 pb-28 print:hidden"
+    class="{bgClass} top-0 left-0 z-40 mt-12 h-dvh w-sm overflow-y-auto p-4 pb-28 print:hidden {sticky
+      ? 'sticky'
+      : 'fixed'}"
   >
     {@render children?.()}
   </div>

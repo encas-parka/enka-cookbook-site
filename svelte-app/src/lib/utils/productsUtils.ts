@@ -26,6 +26,7 @@ export interface FiltersState {
   temperatureFilter: TemperatureFilterMode;
   storeFilterMode: "all" | "none";
   whoFilterMode: "all" | "none";
+  deliveryDateFilter: string | null;
   completionStatus: "all" | "completed" | "incomplete";
   groupBy: "store" | "productType" | "none";
   sortColumn: string;

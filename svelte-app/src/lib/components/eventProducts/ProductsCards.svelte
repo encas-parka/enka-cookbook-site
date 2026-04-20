@@ -302,7 +302,7 @@
       {/if}
 
       <!-- Cards des produits du groupe -->
-      <div class="mt-4 mb-8 space-y-4 sm:space-y-2" transition:fade>
+      <div class="mt-4 mb-8 space-y-4 sm:space-y-2">
         {#each groupProducts as productModel (productModel.data.$id)}
           <ProductCard
             {productModel}

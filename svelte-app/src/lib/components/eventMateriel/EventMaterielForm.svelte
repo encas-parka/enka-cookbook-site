@@ -344,15 +344,17 @@
      {/if}
 
 
-    <fieldset class="fieldset">
-      <legend class="fieldset-legend">Notes</legend>
-      <textarea
-        rows="2"
-        bind:value={notes}
-        placeholder="Notes supplémentaires..."
-        class="textarea w-full"
-      ></textarea>
-    </fieldset>
+     <fieldset class="fieldset">
+       <legend class="fieldset-legend">Notes</legend>
+       <textarea
+         rows="2"
+         bind:value={notes}
+         placeholder="Notes supplémentaires..."
+         class="textarea w-full"
+         maxlength="255"
+       ></textarea>
+     </fieldset>
+
   </div>
 
    {#if attempted && errors.length > 0}

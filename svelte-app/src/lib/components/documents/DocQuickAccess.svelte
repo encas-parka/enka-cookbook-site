@@ -8,6 +8,7 @@
     Plus,
     FilePlus,
     AlertTriangle,
+    ArrowRight,
   } from "@lucide/svelte";
   import DocCard from "./DocCard.svelte";
 
@@ -49,12 +50,12 @@
         Documents récents
       </h2>
       <a
-        class="btn btn-sm"
+        class="btn btn-sm btn-link"
         href={p(`/documents/${teamId}`)}
         title="Voir tous les documents"
       >
         Voir tout
-        <ArrowBigRight size={16} />
+        <ArrowRight size={16} />
       </a>
     </div>
 
@@ -87,7 +88,7 @@
     <!-- Bouton Créer -->
     <div class="card-actions mt-4 justify-end pt-4">
       <a
-        class="btn btn-primary btn-soft btn-sm"
+        class="btn btn-primary btn-soft sm:btn-sm"
         href={p(`/createdocument/${teamId}/new`)}
       >
         <Plus class="h-4 w-4" />

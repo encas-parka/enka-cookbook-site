@@ -118,7 +118,7 @@
     <!-- Actions -->
     <div class="mt-6 flex flex-wrap justify-end gap-2">
       <button
-        class="btn btn-outline btn-secondary @max-sm:btn-xs btn-xs"
+        class="btn btn-outline btn-secondary @max-sm:btn-sm btn-xs"
         onclick={(e) => {
           e.stopPropagation();
           navigate(`/event/${event.$id}`);
@@ -129,7 +129,7 @@
       </button>
 
       <button
-        class="btn btn-outline btn-secondary @max-sm:btn-xs btn-xs"
+        class="btn btn-outline btn-secondary @max-sm:btn-sm btn-xs"
         onclick={(e) => {
           e.stopPropagation();
           navigate(`/event/${event.$id}/recipes`);
@@ -140,7 +140,7 @@
       </button>
 
       <button
-        class="btn btn-outline btn-secondary @max-sm:btn-xs btn-xs"
+        class="btn btn-outline btn-secondary @max-sm:btn-sm btn-xs"
         onclick={(e) => {
           e.stopPropagation();
           navigate(`/event/${event.$id}/products`);
@@ -151,7 +151,7 @@
       </button>
 
       <button
-        class="btn btn-outline btn-secondary @max-sm:btn-xs btn-xs"
+        class="btn btn-outline btn-secondary @max-sm:btn-sm btn-xs"
         onclick={(e) => {
           e.stopPropagation();
           navigate(`/event/${event.$id}/posters`);
@@ -162,7 +162,7 @@
       </button>
 
       <button
-        class="btn btn-outline btn-secondary @max-sm:btn-xs btn-xs"
+        class="btn btn-outline btn-secondary @max-sm:btn-sm btn-xs"
         onclick={(e) => {
           e.stopPropagation();
           navigate(`/event/${event.$id}/documents`);
@@ -173,7 +173,7 @@
       </button>
 
       <button
-        class="btn btn-outline btn-secondary @max-sm:btn-xs btn-xs"
+        class="btn btn-outline btn-secondary @max-sm:btn-sm btn-xs"
         onclick={(e) => {
           e.stopPropagation();
           navigate(`/event/${event.$id}/todos`);
@@ -184,7 +184,7 @@
       </button>
 
       <button
-        class="btn btn-outline btn-secondary @max-sm:btn-xs btn-xs"
+        class="btn btn-outline btn-secondary @max-sm:btn-sm btn-xs"
         onclick={(e) => {
           e.stopPropagation();
           navigate(`/event/${event.$id}/materiel`);

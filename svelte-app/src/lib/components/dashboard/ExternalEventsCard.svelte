@@ -14,7 +14,7 @@
   let { currentEvents, userTeamIds, loading = false }: Props = $props();
 
   // État : false = événements externes uniquement, true = tous les événements
-  let showAllEvents = $state(false);
+  let showAllEvents = $state(true);
 
   // Événements externes : utilisateur est contributor mais pas dans ses équipes
   // currentEvents est déjà trié par dateStart croissant dans le store
@@ -90,7 +90,7 @@
 {:else}
   <!-- Affichage normal avec événements -->
   <div
-    class="card max-sm:card-sm bg-base-100 border-base-200 mb-6 border shadow-xl"
+    class="card max-sm:card-sm bg-base-100 border-base-200 mb-6 border shadow-md"
   >
     <div class="card-body">
       <div class="mb-4 flex flex-wrap items-center justify-between">
@@ -116,13 +116,17 @@
 
         <!-- Bouton toggle -->
         {#if teamEvents.length > 0}
-          <button class="btn btn-sm ms-auto" onclick={toggleEventsView}>
+          <button
+            class="btn btn-sm btn-link btn-secondary ms-auto"
+            onclick={toggleEventsView}
+          >
             {#if showAllEvents}
               Voir les invitations externes uniquement
             {:else}
-              <Users class="h-4 w-4" />
               Voir tous mes événements
-              <div class="badge badge-neutral">{totalEventsCount}</div>
+              <div class="badge badge-sm badge-secondary badge-soft">
+                {totalEventsCount}
+              </div>
             {/if}
           </button>
         {/if}

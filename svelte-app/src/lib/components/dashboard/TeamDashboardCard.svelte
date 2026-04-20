@@ -127,7 +127,7 @@
               <div class="text-base-content/70">{memberNamesDisplay}</div>
             </div>
             <button
-              class="btn btn-sm btn-accent ms-auto"
+              class="btn sm:btn-sm btn-accent ms-auto"
               onclick={inviteMember}
             >
               <Plus class="h-4 w-4" />
@@ -190,7 +190,7 @@
             <h3 class="card-title items-center">
               <Calendar class="text-primary inline size-5" /> Événements
             </h3>
-            <a class="btn btn-sm" href={p("/eventList")}>
+            <a class="btn btn-sm btn-link" href={p("/eventList")}>
               Voir les événements passés
               <ArrowRight class="ml-2 h-4 w-4" />
             </a>
@@ -210,7 +210,7 @@
           <div class="card-actions mt-auto items-center justify-end">
             <!-- Bouton Créer un événement -->
             <a
-              class="btn btn-primary btn-soft btn-sm ml-auto"
+              class="btn btn-primary btn-soft sm:btn-sm ml-auto"
               href={p(`/dashboard/eventCreate/${team.$id}`)}
             >
               <Plus class="h-4 w-4" />

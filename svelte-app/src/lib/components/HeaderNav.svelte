@@ -162,6 +162,15 @@
     eventContext ? eventsStore.getEventById(eventContext.eventId)?.name : null,
   );
 
+  // Nom de l'équipe pour le contexte matériel/loans
+  const matosTeamName = $derived.by(() => {
+    if (context?.type === "materiel" || context?.type === "loans") {
+      const team = nativeTeamsStore.getTeamById(context.teamId);
+      return team?.name || null;
+    }
+    return null;
+  });
+
   // 2 prochains événements de l'utilisateur (pour le dropdown)
   const upcomingEvents = $derived(
     eventsStore.getUpcomingEventsForUser().slice(0, 2),
@@ -306,11 +315,11 @@
     ? '-translate-y-full'
     : ''}"
 >
-  <div class="navbar-start w-fit flex-1 shrink-0 gap-1">
+  <div class="navbar-start w-fit flex-1 shrink-0 gap-2">
     <!-- Brand -->
     <a
       href={globalState.isAuthenticated ? p("/dashboard") : p("/")}
-      class="btn btn-ghost btn-sm max-sm:btn-circle"
+      class="btn btn-ghost sm:btn-sm max-sm:btn-circle"
     >
       <img src="/images/favicon.png" alt="logo" class="size-7" />
       <span class="hidden md:inline">Tableau de bord</span>
@@ -320,7 +329,7 @@
     <div class=" flex items-center gap-1">
       <a
         href={p("/recipe")}
-        class="btn btn-sm btn-ghost not-md:btn-square md:gap-2"
+        class="btn sm:btn-sm btn-ghost not-md:btn-square md:gap-2"
       >
         <CookingPot size={18} />
         <span class="hidden md:inline">Recettes</span>
@@ -376,33 +385,40 @@
         </ul>
       </div>
     {:else if context?.type === "materiel" || context?.type === "loans"}
-      <!-- Dropdown Matériel/Reservations (pattern events) -->
+      <!-- Dropdown Inventaire/Réservations avec nom d'équipe (pattern events) -->
       <div class="dropdown mx-auto">
         <div
           tabindex="0"
           role="button"
-          class="btn btn-ghost font-family-fredoka gap-1 font-bold uppercase"
+          class="btn max-sm:btn-sm btn-ghost font-family-fredoka gap-2 font-bold uppercase"
         >
+          {#if globalState.isDesktop && matosTeamName}
+            <span class="max-w-28 truncate opacity-70">{matosTeamName}</span>
+            <span class="text-xs opacity-40">›</span>
+          {/if}
           <span class="opacity-80">
-            {context?.type === "loans" ? "Réservations" : "Matériel"}
+            {context?.type === "loans" ? "Réservations" : "Inventaire"}
           </span>
-          <ChevronDown size={14} class="opacity-50" />
+          <ChevronDown size={16} class="opacity-50" />
         </div>
         <ul
           class="menu dropdown-content bg-base-100 border-base-200 z-1 mt-3 w-48 rounded-xl border p-2 shadow-xl"
         >
-          <li>
-            <a href={getMaterielPath()} onclick={closeAllCssDropdowns}>
-              <Package size={16} />
-              Matériel
-            </a>
-          </li>
-          <li>
-            <a href={getLoansPath()} onclick={closeAllCssDropdowns}>
-              <Users size={16} />
-              Réservations
-            </a>
-          </li>
+          {#if context?.type === "loans"}
+            <li>
+              <a href={getMaterielPath()} onclick={closeAllCssDropdowns}>
+                <Package size={16} />
+                Inventaire
+              </a>
+            </li>
+          {:else}
+            <li>
+              <a href={getLoansPath()} onclick={closeAllCssDropdowns}>
+                <Users size={16} />
+                Réservations
+              </a>
+            </li>
+          {/if}
         </ul>
       </div>
     {:else if context?.type === "documentEdit"}
@@ -431,7 +447,7 @@
         <div
           tabindex="0"
           role="button"
-          class="btn btn-sm btn-ghost btn-circle avatar bg-primary/10 text-primary border-primary/20 border"
+          class="btn sm:btn-sm btn-ghost btn-circle avatar bg-primary/10 text-primary border-primary/20 border"
         >
           <div
             class="flex w-10 items-center justify-center rounded-full text-lg font-bold"
@@ -572,9 +588,9 @@
         </ul>
       </div>
     {:else}
-      <button class="btn btn-primary btn-sm shadow-md" onclick={handleLogin}>
+      <button class="btn btn-primary sm:btn-sm shadow-md" onclick={handleLogin}>
         <LogInIcon size={16} />
-        Connexion
+        <span class="hidden sm:inline">Connexion</span>
       </button>
     {/if}
   </div>

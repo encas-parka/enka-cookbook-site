@@ -4,9 +4,7 @@
     Plus,
     Package,
     LoaderCircle,
-    Users,
     ListPlus,
-    ArrowRightFromLine,
   } from "@lucide/svelte";
   import { materielStore } from "$lib/stores/MaterielStore.svelte";
   import { globalState } from "$lib/stores/GlobalState.svelte";
@@ -177,18 +175,9 @@
 
     navBarStore.setConfig({
       title: teamName,
-      actions: navActions,
     });
   });
 </script>
-
-{#snippet navActions()}
-  <button
-    class="btn btn-primary btn-sm"
-    onclick={() => navigate(`/dashboard/loans/${activeTeamId}`)}
-  >
-    Réservations <ArrowRightFromLine class="size-4" />
-  </button>{/snippet}
 
 <!-- Filtres - Sidebar Desktop / Drawer Mobile -->
 <LeftPanel>
@@ -205,27 +194,19 @@
 <!-- Contenu principal -->
 <div class="p-4 pb-20 lg:ml-96" transition:fade>
   <div class="mx-auto max-w-7xl sm:px-4 sm:py-8">
-    <!-- Tabs par équipe (seulement si plus d'une équipe) -->
-    {#if userTeams.length > 1}
-      <div class="tabs tabs-border bg-base-200 sm:tabs-lg mb-6 font-semibold">
-        {#each userTeams as team (team.$id)}
-          <button
-            class="tab {activeTeamId === team.$id ? 'tab-active' : ''}"
-            onclick={() => switchTeam(team.$id)}
-          >
-            <Users class="mr-2 h-4 w-4" />
-            {team.name}
-            <span class="badge badge-sm badge-neutral ml-2">
-              {materielStore.materiels.filter(
-                (m) =>
-                  m.ownerData.teamId === team.$id ||
-                  m.shareableWith?.includes(team.$id),
-              ).length}
-            </span>
-          </button>
-        {/each}
-      </div>
-    {/if}
+    <!-- Tabs Inventaire / Réservation -->
+    <div class="tabs tabs-border bg-base-200 sm:tabs-lg mb-6 font-semibold">
+      <button class="tab tab-active">
+        Inventaire
+      </button>
+      <button
+        class="tab"
+        onclick={() => navigate(`/dashboard/loans/${activeTeamId}`)}
+        disabled={!activeTeamId}
+      >
+        Réservation
+      </button>
+    </div>
 
     <div class="mb-6 flex justify-end gap-2">
       <button

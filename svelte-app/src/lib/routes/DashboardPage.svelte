@@ -158,8 +158,8 @@
       </div>
 
       <!-- SECTION 1: Événements personnels (invitations externes) -->
-      <section class="grid grid-cols-1 gap-8 py-8 lg:grid-cols-6">
-        <div class=" col-span-4">
+      <section class="grid grid-cols-1 gap-x-8 gap-y-4 py-8 lg:grid-cols-6">
+        <div class="lg:col-span-4">
           <ExternalEventsCard
             currentEvents={eventsStore.currentEvents}
             userTeamIds={globalState.userTeams}
@@ -167,7 +167,7 @@
           />
         </div>
         <div
-          class="card card-sm bg-base-100 border-base-200 col-span-2 border shadow-xl"
+          class="card card-sm bg-base-100 border-base-200 border shadow-md lg:col-span-2"
         >
           <div class="card-body">
             <LatestRecipesCard />

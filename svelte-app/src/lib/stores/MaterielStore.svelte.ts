@@ -108,18 +108,6 @@ export class MaterielStore {
     return this.#enrichedLoans;
   }
 
-  // Matériels des équipes de l'utilisateur
-  #teamMaterielsList = $derived.by(() => {
-    if (!globalState.userId) return [];
-    const myTeamIds = nativeTeamsStore.myTeams.map((t) => t.$id);
-    return this.#enrichedMateriels.filter(
-      (m) => m.ownerData?.teamId && myTeamIds.includes(m.ownerData.teamId),
-    );
-  });
-  get teamMateriels() {
-    return this.#teamMaterielsList;
-  }
-
   // Matériels partageables des autres équipes
   #shareableMaterielsList = $derived.by(() => {
     if (!globalState.userId) return [];
@@ -138,24 +126,17 @@ export class MaterielStore {
     return this.#shareableMaterielsList;
   }
 
-  // Matériels avec quantité disponible
-  #availableMaterielsList = $derived.by(() => {
-    return this.#enrichedMateriels.filter((m) => m.isAvailable);
-  });
-  get availableMateriels() {
-    return this.#availableMaterielsList;
-  }
-
   // =============================================================================
   // FILTRAGE PAR OWNER
   // =============================================================================
 
   getAvailableMaterielsByOwner(teamId: string): EnrichedMateriel[] {
-    return this.#availableMaterielsList.filter(
+    return this.#enrichedMateriels.filter(
       (m) =>
         m.ownerData?.teamId === teamId &&
         m.status !== "lost" &&
-        m.status !== "torepair",
+        m.status !== "torepair" &&
+        m.isAvailable,
     );
   }
 

@@ -50,6 +50,11 @@
   let heartbeatInterval: ReturnType<typeof setInterval> | null = null;
   let initialDocumentSnapshot = $state<string>("");
 
+  // docId non-réactif capturé au moment de l'acquisition du lock
+  // pour garantir sa disponibilité lors du cleanup (onDestroy)
+  // car docId ($derived de route.params) peut déjà être vide après navigation
+  let lockedDocId: string | null = null;
+
   // ============================================================================
   // LECTURE RÉACTIVE DU STORE (pour le lock)
   // ============================================================================
@@ -147,6 +152,7 @@
         globalState.userName || null,
       );
       iHoldLock = true;
+      lockedDocId = docId;
       startHeartbeat();
       console.log(`[EditDocumentPage] Lock acquis pour ${docId}`);
       return true;
@@ -194,16 +200,21 @@
   /**
    * Libère le lock
    * Cleanup local synchrone + release serveur fire-and-forget
+   *
+   * Utilise lockedDocId (non-réactif) car docId (réactif) peut déjà
+   * être vide lors du onDestroy si la route a déjà changé.
    */
   function releaseLock(): void {
-    if (!docId || !iHoldLock) return;
+    const docIdToRelease = lockedDocId;
+    if (!docIdToRelease || !iHoldLock) return;
 
     // 1. Cleanup local IMMÉDIAT (synchrone)
     stopHeartbeat();
     iHoldLock = false;
+    lockedDocId = null;
 
     // 2. Release serveur (fire-and-forget)
-    teamdocsStore.updateDocumentLock(docId, null, null).catch((error) => {
+    teamdocsStore.updateDocumentLock(docIdToRelease, null, null).catch((error) => {
       console.error("[EditDocumentPage] Erreur libération lock:", error);
     });
   }
@@ -370,13 +381,18 @@
         isPublic,
       });
 
-      // Mettre à jour le snapshot
+      // Mettre à jour le snapshot → isDirty passe à false
       initialDocumentSnapshot = JSON.stringify({
         title,
         content,
         tags,
         isPublic,
       });
+
+      // Basculer en mode preview
+      // Le $effect réactif libérera le lock automatiquement
+      // (condition : mode === "preview" && iHoldLock && !isDirty)
+      searchParams.set("mode", "preview");
 
       toastService.success("Document enregistré avec succès");
     } catch (error) {
@@ -643,6 +659,12 @@
 <UnsavedChangesGuard
   routeKey={`editdocument/${teamId}/${docId}`}
   shouldProtect={() => isDirty && isLockedByMe}
+  onLeaveWithoutSave={() => {
+    // Libérer le lock si on le détient
+    if (iHoldLock) {
+      releaseLock();
+    }
+  }}
   message="Vous avez des modifications non sauvegardées. Voulez-vous quitter sans sauvegarder ?"
 />
 

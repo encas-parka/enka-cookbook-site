@@ -125,6 +125,7 @@ enka-cookbook-site/           # Hugo site root (this repository)
 ├── svelte-app/               # Svelte 5 application
 │   ├── src/
 │   │   ├── lib/
+│   │   │   ├── db-sync/     # aw-sync: Appwrite ↔ Dexie offline-first layer
 │   │   │   ├── router/       # sv-router configuration (routes, guards, navigation)
 │   │   │   ├── stores/       # Svelte stores (state management)
 │   │   │   ├── services/     # Appwrite service layers
@@ -178,21 +179,21 @@ The application uses **sv-router** for client-side hash-based routing:
 
 See `svelte-app/CLAUDE.md` for complete routing documentation.
 
-### Store Pattern (3-Layer Architecture)
+### Store Pattern (aw-sync + 3-Layer Architecture)
 
-The Svelte app follows a reactive 3-layer pattern:
+The Svelte app uses **aw-sync** (`svelte-app/src/lib/db-sync/`) as the offline-first persistence layer:
 
-1. **Service Layer** (`src/lib/services/appwrite-*.ts`): Pure CRUD functions
-2. **Store Layer** (`src/lib/stores/*.svelte.ts`): State management with SvelteMap
-3. **Model Layer** (`src/lib/models/*.svelte.ts`): Reactive wrappers
+- **Appwrite ↔ Dexie**: `createSyncCollection()` handles delta sync, realtime, optimistic CRUD with rollback
+- **Dexie ↔ SvelteMap**: `bridgeToMap()` provides fine-grained reactive updates via `$updatedAt`
+- **Components** never read Appwrite directly — all reads go through Dexie → SvelteMap → `$derived`
 
 **Store initialization** follows a 3-phase pattern:
 
-1. `loadCache()` - Load from IndexedDB (fast UI)
-2. `syncFromRemote()` - Sync from Appwrite/Hugo
-3. `setupRealtime()` - Subscribe to live updates
+1. `loadCache()` - Load from Dexie via `bridgeToMap` liveQuery (fast, offline-capable)
+2. `syncFromRemote()` - Delta sync Appwrite → Dexie via `initialFetch()`
+3. `setupRealtime()` - WebSocket → Dexie via `subscribe()`
 
-**Central realtime multiplexing**: All stores register channels with `RealtimeManager` for a single WebSocket connection.
+**Store cleanup** on logout: `destroy()` must call `bridge.subscription.unsubscribe()` + `collection.unsubscribeAll()` + `collection.clearLocal()`.
 
 ### Content Structure
 
@@ -223,7 +224,7 @@ content/recipe/recipe-name_uuid/
 - **Reactive runes**: Use `$state`, `$derived`, `$props`
 - **Stores as singletons**: Import and use directly
 - **Reactive access**: Always use `$derived()` for store data
-- **IndexedDB caching**: Automatic - stores handle persistence
+- **IndexedDB via aw-sync**: Dexie persistence managed by `createSyncCollection` + `bridgeToMap`; stores call `clearLocal()` on destroy
 - **Auth required**: Check `globalState.isAuthenticated` for writes
 
 ### Vite Dev Server Proxy
@@ -260,7 +261,7 @@ See `svelte-app/docs/local-mode.md` for complete documentation.
 
 - **Print optimization**: Kitchen-optimized layouts for recipes
 - **Batch operations**: Cloud Functions for large operations
-- **Offline-first**: IndexedDB with automatic sync
+- **Offline-first**: Dexie (IndexedDB) with Appwrite delta sync + realtime via aw-sync
 - **Event management**: Multi-day events with ingredient consolidation
 - **Real-time collaboration**: Single WebSocket multiplexed subscriptions
 - **Team documents**: Collaborative document editing
@@ -287,4 +288,4 @@ See `svelte-app/docs/local-mode.md` for complete documentation.
 - **Build order**: `cd svelte-app && bun run build` → outputs to `static/app/`
 - **Auth is Appwrite-only**: Hugo has no authentication, handled by SPA
 - **Realtime is multiplexed**: All stores share a single WebSocket
-- **IndexedDB is automatic**: Stores handle cache persistence transparently
+- **IndexedDB via aw-sync**: Dexie persistence managed by aw-sync layer; stores call `clearLocal()` on destroy

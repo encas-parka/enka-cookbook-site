@@ -88,6 +88,7 @@ All routes are defined in `src/lib/router/routes.ts`:
 - **Build**: Vite with @sveltejs/vite-plugin-svelte
 - **Styling**: Tailwind CSS v4 with DaisyUI components
 - **Backend**: Appwrite (database, authentication, realtime)
+- **Persistence**: Dexie (IndexedDB) via aw-sync layer for offline-first
 - **Icons**: Lucide Svelte (`@lucide/svelte` - NOT `lucide-svelte`)
 - **Markdown**: TipTap editor for rich text editing
 - **Serialization**: SuperJSON for complex data structures
@@ -106,11 +107,17 @@ All routes are defined in `src/lib/router/routes.ts`:
 │  • Stateless data transformations                           │
 │  • Realtime subscription management                         │
 └─────────────────▲───────────────────────────────────────────┘
-                   │ Reactive state management
+                   │ aw-sync: initialFetch / subscribe / CRUD
+┌─────────────────▼───────────────────────────────────────────┐
+│              Dexie / IndexedDB (aw-sync layer)              │
+│  • Offline-first local persistence                          │
+│  • Delta sync (cursor-based) + realtime WebSocket → Dexie   │
+│  • Optimistic writes with automatic rollback                │
+└─────────────────▲───────────────────────────────────────────┘
+                   │ liveQuery → bridgeToMap
 ┌─────────────────▼───────────────────────────────────────────┐
 │                  Store Layer (stores/*.svelte.ts)          │
 │  • SvelteMap<string, Model> for O(1) access                │
-│  • IndexedDB caching with automatic persistence            │
 │  • Reactive filtering with $derived.by()                    │
 │  • Business logic & calculations                           │
 └─────────────────▲───────────────────────────────────────────┘
@@ -131,7 +138,28 @@ All routes are defined in `src/lib/router/routes.ts`:
 
 ### Key Architectural Concepts
 
-**1. Stores (Singleton Pattern)**
+**1. aw-sync: Offline-First Sync Layer**
+
+The `db-sync/` module provides the bridge between Appwrite (remote) and Svelte stores (UI):
+
+```
+Appwrite (remote)
+  ↕  initialFetch() — delta sync (cursor-based, 500/page)
+  ↕  subscribe()    — realtime WebSocket → Dexie put/delete
+Dexie / IndexedDB (local)
+  ↕  liveQuery()    — reactive, re-fires on table changes
+SvelteMap (bridgeToMap) — incremental fine-grained updates
+  ↕  $derived.by()  — enrichment / filters / sort
+UI Components       — read-only from stores
+```
+
+- **`createSyncCollection()`** — Full CRUD + delta sync + realtime for a Dexie table
+- **`bridgeToMap()`** — Connects a Dexie liveQuery to a SvelteMap for fine-grained reactivity
+- **`bridgeToMapFiltered()`** — Scoped variant (e.g. by eventId)
+- **`useLiveQuery()`** — Svelte 5 component hook for one-off Dexie queries
+- **Entry point**: `import { createSyncCollection, bridgeToMap, db } from '$lib/db-sync/aw-sync'`
+
+**2. Stores (Singleton Pattern)**
 
 All major stores are singleton classes with Svelte 5 reactive runes:
 
@@ -146,21 +174,38 @@ All major stores are singleton classes with Svelte 5 reactive runes:
 - **NativeTeamsStore** - Native teams from Appwrite
 - **NotificationStore** - User notifications
 - **NavBarStore** - Navigation bar state
+- **RecipeDataStore** - Hugo static data (ingredients, recipe-info)
 
-**2. Store Initialization Pattern (3-Phase)**
+**3. Store Initialization Pattern (3-Phase)**
 
 ```typescript
-// Phase 1: Fast cache load from IndexedDB
+// Phase 1: Fast cache load from Dexie (via bridgeToMap liveQuery)
 await store.loadCache();
 
-// Phase 2: Sync from Appwrite/Hugo
+// Phase 2: Delta sync from Appwrite → Dexie
 await store.syncFromRemote();
 
-// Phase 3: Subscribe to live updates
+// Phase 3: Realtime WebSocket → Dexie
 await store.setupRealtime();
 ```
 
-**3. Realtime Multiplexing**
+**4. Store Cleanup (destroy / logout)**
+
+Every store with private Dexie data must clean up on logout to prevent data leaks:
+
+```typescript
+async destroy(): Promise<void> {
+  this.#bridge.subscription.unsubscribe();   // Stop Dexie liveQuery
+  this.#collection.unsubscribeAll();          // Stop Appwrite realtime
+  await this.#collection.clearLocal();        // Clear Dexie table + syncMeta
+  this.#rawMap.clear();
+  this.#isInitialized = false;
+}
+```
+
+Stores are wired into `GlobalState.logout()` for automatic cleanup.
+
+**5. Realtime Multiplexing**
 
 All stores register channels with the central RealtimeManager:
 
@@ -177,7 +222,7 @@ realtimeManager.register(
 const cleanup = realtimeManager.registerDynamic(channels, callback);
 ```
 
-**4. Component Structure**
+**6. Component Structure**
 
 Components follow a consistent structure:
 
@@ -209,7 +254,7 @@ Components follow a consistent structure:
 <!-- Template --><div>...</div>
 ```
 
-**5. Toast Service Pattern**
+**7. Toast Service Pattern**
 
 Use `toastService.track()` for async operations, especially after modal closes:
 
@@ -241,14 +286,20 @@ src/
     │   ├── EventsStore.svelte.ts
     │   ├── RealtimeManager.svelte.ts
     │   └── ...
-    ├── services/        # Appwrite CRUD + caching
+    ├── db-sync/         # aw-sync: Appwrite ↔ Dexie offline-first layer
+    │   ├── aw-sync.ts          # Barrel export (entry point)
+    │   ├── aw-collection.ts    # createSyncCollection()
+    │   ├── aw-bridge.ts        # bridgeToMap(), bridgeToMapFiltered()
+    │   ├── aw-db.ts            # EnkaDB schema (Dexie)
+    │   ├── aw-types.ts         # Shared types
+    │   └── use-live-query.svelte.ts  # useLiveQuery() component hook
+    ├── services/        # Appwrite CRUD + utilities
     │   ├── appwrite.ts  # Centralized Appwrite client
     │   ├── appwrite-products.ts
     │   ├── appwrite-recipes.ts
     │   ├── appwrite-events.ts
     │   ├── appwrite-transaction.ts
-    │   ├── toast.service.svelte.ts
-    │   └── *-idb-cache.ts  # IndexedDB cache services
+    │   └── toast.service.svelte.ts
     ├── models/          # Reactive data wrappers
     │   └── ProductModel.svelte.ts
     ├── components/      # UI components organized by feature
@@ -320,12 +371,14 @@ Available reusable form components in `src/lib/components/ui/`:
 
 ### When creating a new store:
 
-1. Create `src/lib/stores/YourStore.svelte.ts` with class-based singleton
-2. Add 3-phase initialization: `loadCache()`, `syncFromRemote()`, `setupRealtime()`
-3. Create IndexedDB cache service in `src/lib/services/your-store-idb-cache.ts`
-4. Add CRUD service in `src/lib/services/appwrite-yourdomain.ts`
-5. Register channels with `realtimeManager.register()` during setup
-6. Export singleton instance
+1. Add Dexie table in `src/lib/db-sync/aw-db.ts` (declare on `EnkaDB` + increment version)
+2. Add collection name to `AwCollectionName` in `src/lib/db-sync/aw-types.ts`
+3. Verify name is mapped in `APPWRITE_CONFIG.collections` (in `appwrite.ts`)
+4. Create `src/lib/stores/YourStore.svelte.ts` with class-based singleton using `createSyncCollection` + `bridgeToMap`
+5. Add 3-phase initialization: `loadCache()`, `syncFromRemote()`, `setupRealtime()`
+6. Add `destroy()` with bridge unsubscribe + collection unsubscribeAll + clearLocal
+7. Wire into `GlobalState.logout()` if the store holds private user data
+8. Export singleton instance
 
 ### When debugging state issues:
 
@@ -358,7 +411,7 @@ The Vite dev server proxies requests to Hugo:
 
 - **Always use reactive derived values** - Never copy store data, use `$derived()` for automatic updates
 - **Stores are singletons** - Import and use directly, don't create instances
-- **IndexedDB is automatic** - Stores handle cache persistence transparently
+- **IndexedDB via aw-sync** - Dexie persistence is managed by `createSyncCollection` + `bridgeToMap`; stores call `clearLocal()` on destroy
 - **Realtime is multiplexed** - All stores share a single WebSocket via RealtimeManager
 - **Auth is required for most operations** - Check `globalState.isAuthenticated` before write operations
 - **Appwrite config is centralized** - Use `getAppwriteInstances()` from `appwrite.ts` service

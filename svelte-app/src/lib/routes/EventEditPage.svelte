@@ -113,6 +113,11 @@
   let activeLock = $state<AppwriteLock | null>(null);
   let lockUnsub: (() => void) | null = null;
 
+  // eventId non-réactif capturé au moment de l'acquisition du lock
+  // pour garantir sa disponibilité lors du cleanup (onDestroy)
+  // car eventId ($derived de route.params) peut déjà être vide après navigation
+  let lockedEventId: string | null = null;
+
   // isDirty est calculé par comparaison avec currentEvent (la référence)
   const isDirty = $derived.by(() => {
     if (eventName === "" && meals.length === 0) return false;
@@ -364,7 +369,8 @@
     }
 
     // 3. Libérer le lock si détenu
-    if (eventId && isEditing) {
+    // Utilise lockedEventId (non-réactif) car eventId peut déjà être vide
+    if (lockedEventId && isEditing) {
       console.log("🚪 Démontage du composant, libération du lock...");
       releaseLock();
     }
@@ -390,6 +396,8 @@
       );
 
       if (success) {
+        // Capturer l'ID de manière non-réactive pour le cleanup
+        lockedEventId = eventId;
         // On laisse le realtime mettre à jour activeLock (pas d'optimistic update)
         scheduleAutoSave();
         return true;
@@ -409,15 +417,17 @@
   }
 
   async function releaseLock(): Promise<void> {
-    if (!eventId || !globalState.userId) return;
+    const eventIdToRelease = lockedEventId;
+    if (!eventIdToRelease || !globalState.userId) return;
 
     try {
-      await locksService.releaseLock(eventId, globalState.userId);
+      await locksService.releaseLock(eventIdToRelease, globalState.userId);
       console.log("🔓 Verrou libéré");
     } catch (error) {
       console.error("❌ Erreur libération verrou:", error);
     }
 
+    lockedEventId = null;
     isEditing = false; // ✅ Désactiver le mode édition après libération du lock
     // activeLock sera mis à jour par le realtime
   }
@@ -1346,5 +1356,11 @@
 <UnsavedChangesGuard
   routeKey={`/event/${eventId}`}
   shouldProtect={() => isDirty}
+  onLeaveWithoutSave={async () => {
+    // Libérer le lock si on le détient
+    if (isEditing) {
+      await releaseLock();
+    }
+  }}
   message="Vous avez des modifications non sauvegardées. Voulez-vous vraiment quitter ?"
 />

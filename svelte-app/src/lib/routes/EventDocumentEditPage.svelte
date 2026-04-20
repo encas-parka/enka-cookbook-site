@@ -244,7 +244,14 @@
         title: title.trim(),
         content,
       });
+      // Mettre à jour le snapshot → isDirty passe à false
       initialDocumentSnapshot = JSON.stringify({ title, content });
+
+      // Basculer en mode preview
+      // Le $effect réactif libérera le lock automatiquement
+      // (condition : mode === "preview" && iHoldLock && !isDirty)
+      searchParams.set("mode", "preview");
+
       toastService.success("Document enregistré");
     } catch (error) {
       console.error("[EventDocumentEditPage] Erreur sauvegarde:", error);

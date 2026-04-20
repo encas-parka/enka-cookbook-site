@@ -1,6 +1,6 @@
 ---
 title: Tajine de boeuf avec orange
-date: '2026-04-20T13:06:19.000Z'
+date: '2026-04-20T13:18:18.177Z'
 draft: true
 typeR: plat
 categories: []
@@ -201,6 +201,15 @@ ingredients:
     allergens:
       - Moutarde
     type: epices
+  - uuid: y16lzq
+    name: Menthe fraîche
+    originalQuantity: 2
+    originalUnit: bottes
+    normalizedQuantity: 2
+    normalizedUnit: bottes
+    comment: A hacher
+    allergens: []
+    type: epices
 preparation: |-
   Recette testée avec des légumes d'hiver et sans viande pour 4 personnes d'abord dans un plat à tajine puis pour 50 personnes avec une grande casserole/marmitte.
 
@@ -209,13 +218,13 @@ preparation: |-
   - La veille ou quelques heures avant le début de la cuisine, mélanger les épices (ras el hanout, cumin) et l'huile d'olive dans un gros contenant et laisser mariner les morceaux de boeufs avec. Couvrir et mettre au frais.
   - Couper les légumes (carottes, aubergines, oignons, ail, tomates) de la façon indiquée.
   - Dans une grande marmitte, faire chauffer l'huile d'olive, avant d'y ajouter la viande et sa marinade pour la faire dorer (pendant 20min). La retourner régulièrement.
-  - Ajouter les carottes et les oignons. Laisser cuire. 
+  - Ajouter les carottes et les oignons. Laisser cuire.
   - Presser les oranges pour en récolter le jus et rapper le zeste.
   - Rajouter l'ail, les tomates hachées, les pois chiches cuits et les bouillons de légumes à la marmitte de légumes. Couvrir et laisser mijoter à feux doux (30min). Assaisoner en plus de la marinade et des bouillons au fur et à mesure de sel, ras el hanout, cumin et de canelle en dernier.
   - Rajouter les aubergines qui vont fondre doucement, ainsi que le jus et les zestes d'orange. Laisser mijoter à couvert à feu doux (1h).
   - A côté, faire revenir le reste des oignons dans une autre casserole, et les faire caraméliser.
   - Faire torréfier les amandes dans une poêle et hâcher le persil.
-  - 30min avant de servir : Préparer la semoule qui accompnera le tajine.
+  - 30min/1h avant de servir : Préparer la semoule qui accompnera le tajine. Une fois cuite, ajouter des feuilles de menthe hachées et mélanger.
   - Disposer à côté du tajine et de la semoule, les oignons confits, les amandes torréfiées, les raisins secs si pas mis dans le plat, et le persil pour que chacun.e puisse en mettre à sa guise.
 
   Et bon appétit !
@@ -229,9 +238,9 @@ permissionWrite:
   - 69b01d0a001a6848cc4c
 auteur: chrismino28
 createdAt: '2026-03-11T14:21:26.193+00:00'
-updatedAt: '2026-04-20T13:06:15.414+00:00'
+updatedAt: '2026-04-20T13:18:17.530+00:00'
 createdBy: 69b01d0a001a6848cc4c
-teams: null
+teams: []
 status: public
 rootRecipeId: null
 versionLabel: null

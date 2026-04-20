@@ -88,6 +88,17 @@ export interface SyncMetaRow {
 }
 
 // =============================================================================
+// JOIN LINKS CACHE
+// =============================================================================
+
+/** Cache des liens d'invitation déjà utilisés (linkId → eventId) */
+export interface JoinLinkRow {
+	linkId: string;
+	eventId: string;
+	joinedAt: string;
+}
+
+// =============================================================================
 // ENKA DB
 // =============================================================================
 
@@ -116,6 +127,9 @@ export class EnkaDB extends Dexie {
 
 	// --- Sync metadata ---
 	syncMeta!: Table<SyncMetaRow, string>;
+
+	// --- Join links cache ---
+	joinLinks!: Table<JoinLinkRow, string>;
 
 	constructor() {
 		super('EnkaDB');
@@ -148,6 +162,11 @@ export class EnkaDB extends Dexie {
 		this.version(3).stores({
 			hugoProducts: null,       // Drop old table
 			productNeeds: '$id, mainId'
+		});
+
+		// v4: add joinLinks cache for share link optimization
+		this.version(4).stores({
+			joinLinks: 'linkId'
 		});
 	}
 }

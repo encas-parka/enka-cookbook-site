@@ -1,6 +1,6 @@
 ---
 title: Tajine avec agneau et orange
-date: '2026-04-20T13:29:36.072Z'
+date: '2026-04-20T13:56:48.245Z'
 draft: true
 typeR: plat
 categories: []
@@ -215,7 +215,7 @@ preparation: |-
   - Rajouter les aubergines qui vont fondre doucement, ainsi que le jus et les zestes d'orange. Laisser mijoter à couvert à feu doux (1h).
   - A côté, faire revenir le reste des oignons dans une autre casserole, et les faire caraméliser.
   - Faire torréfier les amandes dans une poêle et hâcher le persil.
-  - 30min/1h avant de servir : Préparer la semoule qui accompagnera le tajine.
+  - 30min/1h avant de servir : Préparer la semoule et le riz qui accompagneront le tajine.
   - Disposer à côté du tajine et de la semoule, les oignons confits, les amandes torréfiées, les raisins secs si pas mis dans le plat, et le persil pour que chacun.e puisse en mettre à sa guise.
 
   Et bon appétit !
@@ -229,7 +229,7 @@ permissionWrite:
   - 69b01d0a001a6848cc4c
 auteur: chrismino28
 createdAt: '2026-04-20T13:29:35.541+00:00'
-updatedAt: '2026-04-20T13:29:35.541+00:00'
+updatedAt: '2026-04-20T13:56:47.698+00:00'
 createdBy: 69b01d0a001a6848cc4c
 teams: []
 status: public

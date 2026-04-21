@@ -56,7 +56,11 @@
   import BadgeEventStatus from "../components/ui/BadgeEventStatus.svelte";
   import InfoCollapse from "../components/ui/InfoCollapse.svelte";
   import { online } from "svelte/reactivity/window";
-  import { shareOrDownload, downloadFile, toSlug } from "$lib/utils/share-utils";
+  import {
+    shareOrDownload,
+    downloadFile,
+    toSlug,
+  } from "$lib/utils/share-utils";
 
   // Mapping des icônes pour les statuts d'achat
   const statusIcons = {
@@ -101,7 +105,9 @@
   function getExportDateSuffix(): string {
     const { start, end } = productsStore.dateStore.current ?? {};
     const fmt = (d: string) =>
-      new Date(d).toLocaleDateString("fr-FR", { day: "2-digit", month: "2-digit" }).replace(/\//g, "-");
+      new Date(d)
+        .toLocaleDateString("fr-FR", { day: "2-digit", month: "2-digit" })
+        .replace(/\//g, "-");
     if (start && end) {
       return `_${fmt(start)}--${fmt(end)}`;
     }
@@ -371,13 +377,13 @@
         <li>
           <button onclick={handleExportMarkdown}>
             <Download size={16} />
-            Markdown
+            Texte
           </button>
         </li>
         <li>
           <button onclick={handleExportCsv}>
             <Download size={16} />
-            CSV Tableur
+            Excel / Calc
           </button>
         </li>
       </ul>
@@ -679,6 +685,26 @@
           Visualiser l'ensemble des dépenses effectuées, et par qui, en cliquant
           sur <kbd class="kbd">Dépenses</kbd> dans l'entête.
         </li>
+        <li>
+          <span class="font-semibold">Exporter la liste</span> via les boutons
+          en haut à droite de la barre de navigation :
+          <ul>
+            <li>
+              <Download size={14} class="inline" />
+              <span class="font-medium">Texte</span>
+              ou <span class="font-medium">Excel / Calc</span> — télécharge un fichier
+              avec la liste des produits.
+            </li>
+            <li>
+              <Printer size={14} class="inline" />
+              <span class="font-medium">Imprimer / PDF</span>
+              — ouvre la boîte d'impression du navigateur. Pour obtenir un PDF, sélectionnez
+              « Enregistrer au format PDF » comme imprimante.
+            </li>
+          </ul>
+          Les exports correspondent à la liste telle qu'affichée à l'écran, filtres
+          inclus (dates, type, magasin, responsable…).
+        </li>
       </ul>
       <p>
         Tous les membres des équipes ou individus invités à participer à
@@ -690,9 +716,9 @@
     <!-- header print -->
     <div class="print-only">
       <h2 class="text-lg font-bold">
-        Produits pour {eventName}, du {formatDateShort(productsStore.dateStore.start ?? startDate ?? "")} au {formatDateShort(
-          productsStore.dateStore.end ?? endDate ?? "",
-        )}
+        Produits pour {eventName}, du {formatDateShort(
+          productsStore.dateStore.start ?? startDate ?? "",
+        )} au {formatDateShort(productsStore.dateStore.end ?? endDate ?? "")}
       </h2>
     </div>
 

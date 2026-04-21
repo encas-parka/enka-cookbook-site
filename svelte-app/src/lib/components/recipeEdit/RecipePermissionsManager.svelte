@@ -209,7 +209,7 @@
       <fieldset class="fieldset">
         <legend class="fieldset-legend">Ajouter par email</legend>
         <div class="flex gap-2">
-          <label class="input input-bordered flex grow items-center gap-2">
+          <label class="input flex grow items-center gap-2">
             <Mail class="opacity-40" size={18} />
             <input
               type="email"

@@ -299,7 +299,7 @@
               min="1"
               value={currentServings}
               oninput={handleServingsInput}
-              class="input input-bordered input-primary w-24"
+              class="input input-primary w-24"
             />
           </div>
 

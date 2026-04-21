@@ -316,8 +316,7 @@
         <div class="fieldset">
           <legend class="fieldset-legend required">Type</legend>
           <select
-            class="select select-bordered w-full {showErrors &&
-            validationErrors.type
+            class="select w-full {showErrors && validationErrors.type
               ? 'select-error'
               : ''}"
             bind:value={formData.type}

@@ -177,7 +177,7 @@
                 id="new-password"
                 type="password"
                 bind:value={newPassword}
-                class="input input-bordered w-full"
+                class="input w-full"
                 minlength="8"
                 required
                 disabled={isLoading}
@@ -196,7 +196,7 @@
                 id="confirm-password"
                 type="password"
                 bind:value={confirmPassword}
-                class="input input-bordered w-full"
+                class="input w-full"
                 minlength="8"
                 required
                 disabled={isLoading}

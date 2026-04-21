@@ -3,16 +3,20 @@
 # merge-to-enka-next.sh — Merge propre d'une branche de dev vers enka-next.
 #
 # Usage :
-#   ./scripts_dev/merge-to-enka-next.sh              # merge standard
-#   ./scripts_dev/merge-to-enka-next.sh --squash      # squash merge
-#   ./scripts_dev/merge-to-enka-next.sh --rebuild     # rebuild static/app après merge
+#   ./scripts_dev/merge-to-enka-next.sh              # merge + rebuild (défaut)
+#   ./scripts_dev/merge-to-enka-next.sh --squash      # squash merge + rebuild
+#   ./scripts_dev/merge-to-enka-next.sh --no-rebuild  # merge sans rebuild
+#
+# Prérequis :
+#   - .gitattributes doit contenir : static/app/** merge=ours
+#   - Cela évite les conflits sur les fichiers de build
 #
 # Le script :
 #   1. Vérifie qu'on est sur une branche de dev (pas enka-next/main)
-#   2. Retire static/app/ de l'index Git (git rm --cached) + commit
+#   2. Push la branche source (backup)
 #   3. Bascule sur enka-next, pull, merge
-#   4. Push enka-next
-#   5. Optionnel : rebuild + commit du build (--rebuild)
+#   4. Rebuild Svelte sur enka-next (par défaut)
+#   5. Push enka-next
 #   6. Retour sur la branche source (toujours, même en cas d'erreur)
 #
 set -euo pipefail
@@ -21,6 +25,8 @@ set -euo pipefail
 ROOT_DIR="$(cd "$(dirname "$0")/.." && pwd)"
 TARGET_BRANCH="enka-next"
 BUILD_DIR="static/app"
+GITIGNORE_ROOT="$ROOT_DIR/.gitignore"
+GITIGNORE_SVELTE="$ROOT_DIR/svelte-app/.gitignore"
 
 # ── Helpers ─────────────────────────────────────────────────────────
 info()  { echo -e "\033[1;34m→\033[0m $*"; }
@@ -28,29 +34,27 @@ ok()    { echo -e "\033[1;32m✓\033[0m $*"; }
 warn()  { echo -e "\033[1;33m⚠\033[0m $*"; }
 err()   { echo -e "\033[1;31m✗\033[0m $*"; }
 
-# Décommente une ligne (supprime le # devant), matche uniquement la ligne exacte
-uncomment_line() {
-    local file="$1" pattern="$2"
-    if grep -q "^#\s\?${pattern}\s*$" "$file"; then
-        sed -i "s|^#\(\s\?\)${pattern}\s*$|${pattern}|" "$file"
-    fi
-}
-
-# Recommente une ligne (ajoute # devant), matche uniquement la ligne exacte
+# Commente une ligne de gitignore (ajoute # devant).
+# Utilise grep -Fxq (fixed string, ligne exacte) pour éviter
+# les problèmes avec les métacaractères regex (ex: * dans "static/*").
+# Puis sed par numéro de ligne (pas de regex dans le pattern).
 comment_line() {
     local file="$1" pattern="$2"
-    if grep -q "^${pattern}\s*$" "$file"; then
-        sed -i "s|^${pattern}\s*$|# ${pattern}|" "$file"
+    if grep -Fxq "$pattern" "$file"; then
+        local line_num
+        line_num=$(grep -Fxn "$pattern" "$file" | head -1 | cut -d: -f1)
+        sed -i "${line_num}s|^|# |" "$file"
+        info "Gitignore : '$pattern' → désactivé (commenté)"
     fi
 }
 
 # ── Parse args ──────────────────────────────────────────────────────
 SQUASH=false
-REBUILD=false
+REBUILD=true
 for arg in "$@"; do
     case "$arg" in
-        --squash)   SQUASH=true ;;
-        --rebuild)  REBUILD=true ;;
+        --squash)      SQUASH=true ;;
+        --no-rebuild)  REBUILD=false ;;
         *) err "Option inconnue : $arg"; exit 1 ;;
     esac
 done
@@ -65,8 +69,6 @@ if [ "$SOURCE_BRANCH" = "$TARGET_BRANCH" ] || [ "$SOURCE_BRANCH" = "main" ]; the
     exit 1
 fi
 
-# On vérifie uniquement les fichiers trackés modifiés/stagés.
-# Les untracked (ex: static/app/ après git rm --cached) sont inoffensifs pour un merge.
 if ! git diff --quiet 2>/dev/null || ! git diff --cached --quiet 2>/dev/null; then
     err "Le working tree a des modifications non committées. Commit ou stash d'abord."
     git diff --name-only
@@ -93,37 +95,25 @@ info "Branche cible   : $TARGET_BRANCH"
 if [ "$SQUASH" = true ]; then
     info "Mode            : squash merge"
 fi
-
-# ── Étape 1 : Retirer static/app de l'index sur la branche source ──
-info "Retire static/app/ de l'index Git sur $SOURCE_BRANCH…"
-
-TRACKED=$(git ls-files "$BUILD_DIR/" | head -1)
-if [ -n "$TRACKED" ]; then
-    git rm -r --cached "$BUILD_DIR/" 2>/dev/null || true
-    git commit -m "chore: retire static/app de l'index avant merge vers $TARGET_BRANCH" || {
-        warn "Rien à committer pour le retrait du build."
-    }
-    ok "Build retiré de l'index."
-else
-    warn "static/app/ n'était pas tracké. Étape ignorée."
+if [ "$REBUILD" = false ]; then
+    warn "Rebuild désactivé (--no-rebuild). Pense à rebuilder manuellement sur $TARGET_BRANCH."
 fi
 
-# ── Étape 2 : Push la branche source (avec le commit de retrait) ───
-info "Push $SOURCE_BRANCH…"
+# ── Étape 1 : Push la branche source (backup) ──────────────────────
+info "Push $SOURCE_BRANCH (backup)…"
 git push origin "$SOURCE_BRANCH"
 ok "Push réussi."
 
-# ── Étape 3 : Nettoyer le build du disque avant checkout ────────────
-# Les fichiers untracked de static/app/ bloqueraient le checkout vers
-# enka-next (qui les tracke avec des hash différents).
-# C'est safe : ce sont des fichiers générés, recréables par bun run build.
+# ── Étape 2 : Nettoyer le build du disque avant checkout ────────────
+# Supprime les fichiers générés pour éviter les conflits lors du
+# checkout vers enka-next. C'est safe : recréables par bun run build.
 if [ -d "$BUILD_DIR" ]; then
     info "Supprime static/app/ du disque (fichiers générés, recréables)…"
     rm -rf "$BUILD_DIR"
     ok "Build supprimé du disque."
 fi
 
-# ── Étape 4 : Basculer sur enka-next et pull ───────────────────────
+# ── Étape 3 : Basculer sur enka-next et pull ───────────────────────
 info "Bascule sur $TARGET_BRANCH…"
 git checkout "$TARGET_BRANCH"
 git pull origin "$TARGET_BRANCH"
@@ -148,7 +138,6 @@ else
     echo "    git add ."
     echo "    git commit"
     echo "    git push origin $TARGET_BRANCH"
-    echo "    # puis relance avec --rebuild si nécessaire"
     echo ""
     echo "Conflits :"
     git diff --name-only --diff-filter=U
@@ -158,16 +147,10 @@ else
     exit 1
 fi
 
-# ── Étape 5 : Push enka-next ───────────────────────────────────────
-info "Push $TARGET_BRANCH…"
-git push origin "$TARGET_BRANCH"
-ok "Push réussi."
-
-# ── Étape 6 : Rebuild optionnel ────────────────────────────────────
+# ── Étape 5 : Rebuild Svelte (par défaut) ──────────────────────────
 if [ "$REBUILD" = true ]; then
-    info "Rebuild Svelte…"
-    GITIGNORE_ROOT="$ROOT_DIR/.gitignore"
-    GITIGNORE_SVELTE="$ROOT_DIR/svelte-app/.gitignore"
+    info "Rebuild Svelte sur $TARGET_BRANCH…"
+
     # S'assurer que le build n'est PAS exclu par les gitignore
     comment_line "$GITIGNORE_ROOT" "static/app"
     comment_line "$GITIGNORE_SVELTE" "static/*"
@@ -181,14 +164,25 @@ if [ "$REBUILD" = true ]; then
     fi
     cd "$ROOT_DIR"
 
-    git add "$BUILD_DIR/"
-    # Ne pas committer les gitignore s'ils n'ont pas changé
-    git diff --quiet "$GITIGNORE_ROOT" 2>/dev/null || git add "$GITIGNORE_ROOT"
-    git diff --quiet "$GITIGNORE_SVELTE" 2>/dev/null || git add "$GITIGNORE_SVELTE"
-    git commit -m "build: static/app post-merge ($SOURCE_BRANCH → $TARGET_BRANCH)"
-    git push origin "$TARGET_BRANCH"
-    ok "Build déployé sur $TARGET_BRANCH."
+    # Vérifier qu'il y a du nouveau contenu
+    if git diff --quiet "$BUILD_DIR" && git diff --cached --quiet "$BUILD_DIR"; then
+        if [ -z "$(git ls-files --others --exclude-standard "$BUILD_DIR")" ]; then
+            warn "Aucun changement détecté dans static/app/. Pas de commit de build."
+        fi
+    else
+        git add "$BUILD_DIR/"
+        # Ne pas committer les gitignore s'ils n'ont pas changé
+        git diff --quiet "$GITIGNORE_ROOT" 2>/dev/null || git add "$GITIGNORE_ROOT"
+        git diff --quiet "$GITIGNORE_SVELTE" 2>/dev/null || git add "$GITIGNORE_SVELTE"
+        git commit -m "build: static/app post-merge ($SOURCE_BRANCH → $TARGET_BRANCH)"
+        ok "Build commité sur $TARGET_BRANCH."
+    fi
 fi
+
+# ── Étape 6 : Push enka-next ───────────────────────────────────────
+info "Push $TARGET_BRANCH…"
+git push origin "$TARGET_BRANCH"
+ok "Push réussi."
 
 # ── Retour sur la branche source ───────────────────────────────────
 info "Retour sur $SOURCE_BRANCH…"

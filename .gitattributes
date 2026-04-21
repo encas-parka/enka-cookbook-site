@@ -1,0 +1,12 @@
+# ── Build Svelte ─────────────────────────────────────────────────────
+# Les fichiers de build (static/app/) sont des artefacts générés avec des
+# hashes de contenu différents entre les branches.  Pour éviter les conflits
+# au merge, on indique à Git de toujours garder la version de la branche
+# cible (« ours ») en cas de conflit.  Après le merge, il suffit de
+# rebuilder (bun run build) pour obtenir un build propre.
+#
+# merge=ours  → en cas de conflit, garde la version de la branche cible
+# -diff       → pas de diff texte (fichiers minifiés / binaires)
+# -delta      → pas de compression delta (inutile pour ce contenu)
+
+static/app/** merge=ours -diff -delta

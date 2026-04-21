@@ -6,11 +6,14 @@
 #   ./scripts_dev/deploy-build.sh           # commit + push
 #   ./scripts_dev/deploy-build.sh --no-push # commit seulement
 #
+# Prérequis :
+#   - .gitattributes doit contenir : static/app/** merge=ours
+#   - Cela évite les conflits de merge sur les fichiers de build
+#
 # Le script :
 #   1. S'assure que les gitignore n'excluent PAS static/app (commente les règles d'exclusion)
 #   2. Lance bun run build dans svelte-app/
 #   3. git add + commit + push (si --no-push n'est pas passé)
-#   4. Pas de cleanup nécessaire : le commit laisse le gitignore propre
 #
 set -euo pipefail
 
@@ -29,10 +32,14 @@ err()   { echo -e "\033[1;31m✗\033[0m $*"; }
 
 # Commente une ligne (ajoute # devant) = DÉSACTIVE l'exclusion gitignore
 # "static/app" → "# static/app"  (le build sera suivi par Git)
+# Utilise grep -Fxq (match exact de la ligne complète, pas de regex)
+# puis sed par numéro de ligne (pas de regex dans le pattern).
 comment_line() {
     local file="$1" pattern="$2"
-    if grep -q "^${pattern}\s*$" "$file"; then
-        sed -i "s|^${pattern}\s*$|# ${pattern}|" "$file"
+    if grep -Fxq "$pattern" "$file"; then
+        local line_num
+        line_num=$(grep -Fxn "$pattern" "$file" | head -1 | cut -d: -f1)
+        sed -i "${line_num}s|^|# |" "$file"
         info "Gitignore : '$pattern' → désactivé (commenté)"
     fi
 }

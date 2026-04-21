@@ -65,9 +65,12 @@ if [ "$SOURCE_BRANCH" = "$TARGET_BRANCH" ] || [ "$SOURCE_BRANCH" = "main" ]; the
     exit 1
 fi
 
-if [ -n "$(git status --porcelain)" ]; then
-    err "Le working tree n'est pas propre. Commit ou stash tes changements d'abord."
-    git status --short
+# On vérifie uniquement les fichiers trackés modifiés/stagés.
+# Les untracked (ex: static/app/ après git rm --cached) sont inoffensifs pour un merge.
+if ! git diff --quiet 2>/dev/null || ! git diff --cached --quiet 2>/dev/null; then
+    err "Le working tree a des modifications non committées. Commit ou stash d'abord."
+    git diff --name-only
+    git diff --cached --name-only
     exit 1
 fi
 

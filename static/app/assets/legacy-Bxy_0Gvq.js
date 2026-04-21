@@ -1,1 +1,0 @@
-import{Rn as e}from"./appwrite-C6u9MPHC.js";e();

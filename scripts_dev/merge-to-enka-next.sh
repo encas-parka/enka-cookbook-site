@@ -113,7 +113,17 @@ info "Push $SOURCE_BRANCH…"
 git push origin "$SOURCE_BRANCH"
 ok "Push réussi."
 
-# ── Étape 3 : Basculer sur enka-next et pull ───────────────────────
+# ── Étape 3 : Nettoyer le build du disque avant checkout ────────────
+# Les fichiers untracked de static/app/ bloqueraient le checkout vers
+# enka-next (qui les tracke avec des hash différents).
+# C'est safe : ce sont des fichiers générés, recréables par bun run build.
+if [ -d "$BUILD_DIR" ]; then
+    info "Supprime static/app/ du disque (fichiers générés, recréables)…"
+    rm -rf "$BUILD_DIR"
+    ok "Build supprimé du disque."
+fi
+
+# ── Étape 4 : Basculer sur enka-next et pull ───────────────────────
 info "Bascule sur $TARGET_BRANCH…"
 git checkout "$TARGET_BRANCH"
 git pull origin "$TARGET_BRANCH"
@@ -158,8 +168,9 @@ if [ "$REBUILD" = true ]; then
     info "Rebuild Svelte…"
     GITIGNORE_ROOT="$ROOT_DIR/.gitignore"
     GITIGNORE_SVELTE="$ROOT_DIR/svelte-app/.gitignore"
-    uncomment_line "$GITIGNORE_ROOT" "static/app"
-    uncomment_line "$GITIGNORE_SVELTE" "static/*"
+    # S'assurer que le build n'est PAS exclu par les gitignore
+    comment_line "$GITIGNORE_ROOT" "static/app"
+    comment_line "$GITIGNORE_SVELTE" "static/*"
 
     cd "$ROOT_DIR/svelte-app"
     if bun run build; then
@@ -170,12 +181,12 @@ if [ "$REBUILD" = true ]; then
     fi
     cd "$ROOT_DIR"
 
-    git add "$BUILD_DIR/" "$GITIGNORE_ROOT" "$GITIGNORE_SVELTE"
+    git add "$BUILD_DIR/"
+    # Ne pas committer les gitignore s'ils n'ont pas changé
+    git diff --quiet "$GITIGNORE_ROOT" 2>/dev/null || git add "$GITIGNORE_ROOT"
+    git diff --quiet "$GITIGNORE_SVELTE" 2>/dev/null || git add "$GITIGNORE_SVELTE"
     git commit -m "build: static/app post-merge ($SOURCE_BRANCH → $TARGET_BRANCH)"
     git push origin "$TARGET_BRANCH"
-
-    comment_line "$GITIGNORE_ROOT" "static/app"
-    comment_line "$GITIGNORE_SVELTE" "static/*"
     ok "Build déployé sur $TARGET_BRANCH."
 fi
 

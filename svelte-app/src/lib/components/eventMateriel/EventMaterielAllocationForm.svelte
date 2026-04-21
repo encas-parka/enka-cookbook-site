@@ -31,7 +31,9 @@
     onCancel,
   }: Props = $props();
 
+  // svelte-ignore state_referenced_locally
   let quantity = $state(Math.min(1, maxQuantity));
+  // svelte-ignore state_referenced_locally
   let status = $state<EventMaterielStatus>(presetStatus ?? "to_check");
   let who = $state("");
   let where = $state("");
@@ -136,51 +138,47 @@
       </select>
     </fieldset>
 
-     <fieldset class="fieldset">
-       <legend class="fieldset-legend required"
-         ><User class="inline size-4" /> Qui ?</legend
-       >
-       <label class="input w-full {whoError ? 'input-error' : ''}">
-         <input
-           type="text"
-           bind:value={who}
-           placeholder="Personne responsable"
-           class="grow"
-         />
-       </label>
-     </fieldset>
+    <fieldset class="fieldset">
+      <legend class="fieldset-legend required"
+        ><User class="inline size-4" /> Qui ?</legend
+      >
+      <label class="input w-full {whoError ? 'input-error' : ''}">
+        <input
+          type="text"
+          bind:value={who}
+          placeholder="Personne responsable"
+          class="grow"
+        />
+      </label>
+    </fieldset>
 
+    <fieldset class="fieldset">
+      <legend class="fieldset-legend required"
+        ><MapPin class="inline size-4" /> Où ?</legend
+      >
+      <label class="input w-full {whereError ? 'input-error' : ''}">
+        <input
+          type="text"
+          bind:value={where}
+          placeholder="Lieu de stockage"
+          class="grow"
+        />
+      </label>
+    </fieldset>
 
-     <fieldset class="fieldset">
-       <legend class="fieldset-legend required"
-         ><MapPin class="inline size-4" /> Où ?</legend
-       >
-       <label class="input w-full {whereError ? 'input-error' : ''}">
-         <input
-           type="text"
-           bind:value={where}
-           placeholder="Lieu de stockage"
-           class="grow"
-         />
-       </label>
-     </fieldset>
+    <fieldset class="fieldset">
+      <legend class="fieldset-legend">Notes</legend>
+      <textarea
+        rows="2"
+        bind:value={notes}
+        placeholder="Notes supplémentaires..."
+        class="textarea w-full"
+        maxlength="255"
+      ></textarea>
+    </fieldset>
+  </div>
 
-
-     <fieldset class="fieldset">
-       <legend class="fieldset-legend">Notes</legend>
-       <textarea
-         rows="2"
-         bind:value={notes}
-         placeholder="Notes supplémentaires..."
-         class="textarea w-full"
-         maxlength="255"
-       ></textarea>
-     </fieldset>
-
-   </div>
- 
-   {#if attempted && validationErrors.length > 0}
-     <!-- Les erreurs sont maintenant gérées par toastService -->
-   {/if}
- </form>
-
+  {#if attempted && validationErrors.length > 0}
+    <!-- Les erreurs sont maintenant gérées par toastService -->
+  {/if}
+</form>

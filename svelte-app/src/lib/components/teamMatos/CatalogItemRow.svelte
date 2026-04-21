@@ -92,9 +92,11 @@
   .quantity-input::-webkit-inner-spin-button,
   .quantity-input::-webkit-outer-spin-button {
     -webkit-appearance: none;
+    appearance: none;
     margin: 0;
   }
   .quantity-input {
     -moz-appearance: textfield;
+    appearance: textfield;
   }
 </style>

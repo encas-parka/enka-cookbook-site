@@ -116,7 +116,7 @@
 
     <!-- Allocations (always visible) -->
     {#if group.allocations.length > 0}
-      <div class="mt-2 flex flex-wrap items-center gap-x-4 gap-y-2">
+      <div class="flex flex-wrap items-center gap-x-4 gap-y-2 p-2">
         {#each group.allocations as alloc (alloc.$id)}
           {@const allocStatus = eventMaterielStore.resolveStatus(alloc)}
           {@const allocConfig = getEventMaterielStatusConfig(allocStatus)}
@@ -181,8 +181,5 @@
         <!-- Add allocation button removed -->
       </div>
     {/if}
-
-    <!-- Footer Action -->
-    <div class="flex justify-end"></div>
   </div>
 </div>

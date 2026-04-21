@@ -1,26 +1,18 @@
 <script lang="ts">
-  import { onMount } from "svelte";
-  import {
-    Plus,
-    Package,
-    LoaderCircle,
-    ListPlus,
-  } from "@lucide/svelte";
-  import { materielStore } from "$lib/stores/MaterielStore.svelte";
-  import { globalState } from "$lib/stores/GlobalState.svelte";
-  import { nativeTeamsStore } from "$lib/stores/NativeTeamsStore.svelte";
-  import { navBarStore } from "../stores/NavBarStore.svelte";
-  import { p, route } from "$lib/router";
   import MaterielCard from "$lib/components/teamMatos/MaterielCard.svelte";
-  import MaterielModal from "$lib/components/teamMatos/MaterielModal.svelte";
-  import QuickAddCatalogModal from "$lib/components/teamMatos/QuickAddCatalogModal.svelte";
   import MaterielFilters, {
     type MaterielFiltersType,
   } from "$lib/components/teamMatos/MaterielFilters.svelte";
+  import MaterielModal from "$lib/components/teamMatos/MaterielModal.svelte";
+  import QuickAddCatalogModal from "$lib/components/teamMatos/QuickAddCatalogModal.svelte";
   import LeftPanel from "$lib/components/ui/LeftPanel.svelte";
+  import { navigate, route } from "$lib/router";
+  import { globalState } from "$lib/stores/GlobalState.svelte";
+  import { materielStore } from "$lib/stores/MaterielStore.svelte";
+  import { nativeTeamsStore } from "$lib/stores/NativeTeamsStore.svelte";
+  import { ListPlus, Package, Plus } from "@lucide/svelte";
   import { fade } from "svelte/transition";
-  import { navigate } from "$lib/router";
-  import type { EnrichedMateriel } from "$lib/types/materiel.types";
+  import { navBarStore } from "../stores/NavBarStore.svelte";
 
   // État de la page
   let materielModalOpen = $state(false);
@@ -196,9 +188,7 @@
   <div class="mx-auto max-w-7xl sm:px-4 sm:py-8">
     <!-- Tabs Inventaire / Réservation -->
     <div class="tabs tabs-border bg-base-200 sm:tabs-lg mb-6 font-semibold">
-      <button class="tab tab-active">
-        Inventaire
-      </button>
+      <button class="tab tab-active"> Inventaire </button>
       <button
         class="tab"
         onclick={() => navigate(`/dashboard/loans/${activeTeamId}`)}

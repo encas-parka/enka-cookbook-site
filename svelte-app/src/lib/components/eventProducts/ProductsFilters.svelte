@@ -83,8 +83,8 @@
 
       {#if productsStore.hasPastDatesInRange}
         <div class="alert alert-warning" transition:slide>
-          Cette période contient des dates passées. Les achats ne sont pas
-          possibles pour les produits concernés par ces dates.
+          Cette période contient des dates passées. Le calcul des quantité
+          manquantes est impossible.
         </div>
       {/if}
     </Fieldset>

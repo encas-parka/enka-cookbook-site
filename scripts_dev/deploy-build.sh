@@ -40,20 +40,21 @@ cleanup() {
 
 trap cleanup EXIT
 
-# Décommente une ligne dans un fichier (supprime le # devant)
+# Décommente une ligne (supprime le # devant), matche uniquement la ligne exacte
+# Ex: "# static/app" → "static/app"    mais PAS "# voir static/app/old"
 uncomment_line() {
     local file="$1" pattern="$2"
-    if grep -q "^#.*${pattern}" "$file"; then
-        sed -i "s|^#\s\?${pattern}|${pattern}|" "$file"
+    if grep -q "^#\s\?${pattern}\s*$" "$file"; then
+        sed -i "s|^#\(\s\?\)${pattern}\s*$|${pattern}|" "$file"
     fi
 }
 
-# Recommente une ligne dans un fichier (ajoute # devant)
+# Recommente une ligne (ajoute # devant), matche uniquement la ligne exacte
+# Ex: "static/app" → "# static/app"    mais PAS "static/app/dist"
 comment_line() {
     local file="$1" pattern="$2"
-    # Ne commente que si la ligne est active (pas déjà commentée)
-    if grep -q "^${pattern}" "$file"; then
-        sed -i "s|^${pattern}|# ${pattern}|" "$file"
+    if grep -q "^${pattern}\s*$" "$file"; then
+        sed -i "s|^${pattern}\s*$|# ${pattern}|" "$file"
     fi
 }
 

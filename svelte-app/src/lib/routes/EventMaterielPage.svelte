@@ -9,6 +9,8 @@
     ClipboardCopy,
     ChevronDown,
     Check,
+    Funnel,
+    Printer,
     X,
   } from "@lucide/svelte";
   import { eventsStore } from "$lib/stores/EventsStore.svelte";
@@ -29,6 +31,7 @@
   import QuickAddEventCatalogModal from "$lib/components/eventMateriel/QuickAddEventCatalogModal.svelte";
   import LeftPanel from "$lib/components/ui/LeftPanel.svelte";
   import ConfirmModal from "$lib/components/ui/ConfirmModal.svelte";
+  import InfoCollapse from "$lib/components/ui/InfoCollapse.svelte";
   import ModalContainer from "$lib/components/ui/modal/ModalContainer.svelte";
   import ModalHeader from "$lib/components/ui/modal/ModalHeader.svelte";
   import ModalContent from "$lib/components/ui/modal/ModalContent.svelte";
@@ -45,7 +48,7 @@
     MaterielGroup,
   } from "$lib/types/event-materiel.types";
   import { online } from "svelte/reactivity/window";
-  import { shareOrDownload, toSlug } from "$lib/utils/share-utils";
+  import { shareOrDownload, downloadFile, toSlug } from "$lib/utils/share-utils";
   import {
     getMaterielTypeConfig,
     getEventMaterielStatusConfig,
@@ -183,6 +186,16 @@
     ),
   );
 
+  const groupedByType = $derived.by(() => {
+    const map = new Map<string, MaterielGroup[]>();
+    for (const group of groupedItems) {
+      const typeLabel = getMaterielTypeConfig(group.header.type).label;
+      if (!map.has(typeLabel)) map.set(typeLabel, []);
+      map.get(typeLabel)!.push(group);
+    }
+    return Array.from(map.entries());
+  });
+
   const activeBadges = $derived.by<ActiveBadge[]>(() => {
     const badges: ActiveBadge[] = [];
 
@@ -253,14 +266,35 @@
     filters = { types: [], statuses: [], who: [], where: [], search: "" };
   }
 
-  function handleExport() {
+  // =========================================================================
+  // EXPORT MARKDOWN, CSV & PRINT
+  // =========================================================================
+
+  let printModalOpen = $state(false);
+
+  function getExportSlug(): string {
+    return toSlug(currentEvent?.name ?? "") || "materiel";
+  }
+
+  function handleExportMarkdown() {
     const name = currentEvent?.name ?? "materiel";
-    const markdown = eventMaterielStore.exportToMarkdown(name, filteredItems);
+    const markdown = eventMaterielStore.exportToMarkdown(name, groupedItems);
     if (!markdown) return;
     shareOrDownload(
       markdown,
-      `${toSlug(name)}-materiel.md`,
-      "Matériel exporté",
+      `${getExportSlug()}-materiel.md`,
+      "Matériel exporté en Markdown",
+    );
+  }
+
+  function handleExportCsv() {
+    const csv = eventMaterielStore.exportToCsv(groupedItems);
+    if (!csv) return;
+    downloadFile(
+      csv,
+      `${getExportSlug()}-materiel.csv`,
+      "text/csv;charset=utf-8",
+      "Matériel exporté en CSV",
     );
   }
 
@@ -388,13 +422,42 @@
 </script>
 
 {#snippet navActions()}
-  <button
-    class="btn btn-sm btn-circle btn-primary"
-    onclick={handleExport}
-    title="Exporter en Markdown"
-  >
-    <Download size={18} />
-  </button>
+  <div class="flex items-center gap-2">
+    <div class="dropdown dropdown-end">
+      <div
+        class="btn btn-sm btn-circle btn-primary"
+        tabindex="0"
+        role="button"
+        title="Exporter"
+      >
+        <Download size={18} />
+      </div>
+      <ul
+        class="dropdown-content menu bg-base-100 rounded-box z-10 w-48 p-2 shadow-lg"
+        tabindex="0"
+      >
+        <li>
+          <button onclick={handleExportMarkdown}>
+            <Download size={16} />
+            Texte
+          </button>
+        </li>
+        <li>
+          <button onclick={handleExportCsv}>
+            <Download size={16} />
+            Excel / Calc
+          </button>
+        </li>
+      </ul>
+    </div>
+    <button
+      class="btn btn-sm btn-circle btn-primary"
+      onclick={() => (printModalOpen = true)}
+      title="Imprimer la liste"
+    >
+      <Printer size={18} />
+    </button>
+  </div>
 {/snippet}
 
 {#snippet addDropDown()}
@@ -449,7 +512,7 @@
   </div>
 {/snippet}
 
-<div class="mx-auto mt-4 max-w-7xl overflow-x-hidden p-4 pb-20">
+<div class="mx-auto mt-4 max-w-7xl overflow-x-hidden p-4 pb-20 print:hidden">
   <div class="flex gap-4">
     <LeftPanel>
       <EventMaterielFilters
@@ -476,6 +539,88 @@
           {@render addDropDown()}
         {/if}
       </div>
+
+      <InfoCollapse
+        title="Aide"
+        contentVisible="Gestion du matériel requis pour l'événement : lister les besoins, suivre ce qui est trouvé, emprunté ou confirmé. Cliquez pour en savoir plus…"
+        class="shadow-info my-8 shadow "
+      >
+        <p>
+          Cette page sert à <span class="font-semibold"
+            >lister le matériel requis</span
+          >
+          pour l'événement et à
+          <span class="font-semibold"
+            >suivre ce qui a été trouvé, emprunté ou confirmé</span
+          >. Chaque besoin (ex : 5 tables pliantes) peut recevoir plusieurs
+          apports : une personne indique qu'elle en apporte 3, une autre 2, etc.
+          Vous pouvez :
+        </p>
+        <ul>
+          <li>
+            Ajouter un besoin en matériel via le bouton <kbd class="kbd kbd-sm"
+              >+ Ajouter</kbd
+            >.
+          </li>
+          <li>
+            Ajouter plusieurs items d'un coup depuis le catalogue via <kbd
+              class="kbd kbd-sm">Catalogue</kbd
+            >.
+          </li>
+          <li>
+            <span class="font-semibold"
+              >Importer le matériel d'une de vos équipes</span
+            >
+            (réservation/prêt) via les boutons de la liste déroulante
+            <kbd class="kbd kbd-sm">Ajouter</kbd>.
+          </li>
+          <li>
+            Pour chaque apport, indiquer le <span class="font-semibold"
+              >statut</span
+            >
+            :
+            <ul>
+              <li>
+                <strong>À trouver</strong> — le matériel est encore recherché
+              </li>
+              <li>
+                <strong>À vérifier</strong> — une piste existe, à confirmer
+              </li>
+              <li><strong>Confirmé</strong> — le matériel est acquis</li>
+            </ul>
+          </li>
+          <li>
+            Préciser <strong>qui</strong> apporte le matériel et
+            <strong>d'où</strong> il vient (lieu de stockage).
+          </li>
+          <li>
+            Filtrer par type, statut, responsable, lieu ou recherche textuelle
+            {#if globalState.isMobile}
+              grâce au bouton en bas à gauche <Funnel size={14} />
+            {:else}
+              grâce au panneau de filtres
+            {/if}.
+          </li>
+          <li>
+            Trier les items et basculer entre <strong>vue groupée</strong> (par
+            besoin) et <strong>vue plate</strong> (liste complète).
+          </li>
+          <li>Éditer ou supprimer un item en cliquant dessus.</li>
+          <li>
+            <span class="font-semibold">Exporter la liste</span> en Markdown via
+            le bouton <Download size={14} class="inline" /> de la barre de navigation.
+            L'export tient compte des filtres actifs.
+          </li>
+          <li>
+            Les badges au-dessus de la liste indiquent les filtres actifs ;
+            cliquez sur un badge pour le retirer.
+          </li>
+        </ul>
+        <p>
+          Tous les membres des équipes ou individus invités à participer à
+          l'événement peuvent modifier le matériel.
+        </p>
+      </InfoCollapse>
 
       <!-- Contrôles -->
       <EventMaterielControls
@@ -564,6 +709,101 @@
       {/if}
     </div>
   </div>
+</div>
+
+<!-- Vue TABLEAU pour l'impression (print-only) -->
+<div class="print-only w-full">
+  <h2 class="text-lg font-bold">
+    Matériel pour {currentEvent?.name ?? ""}
+  </h2>
+
+  {#each groupedByType as [typeLabel, typeGroups] (typeLabel)}
+    <div class="break-inside-avoid">
+      <div class="mt-6 mb-2">
+        <div class="border-b-2 border-gray-800 pb-1 font-bold uppercase">
+          {typeLabel}
+          <span class="ml-2 text-sm font-normal normal-case opacity-70"
+            >({typeGroups.length} items)</span
+          >
+        </div>
+      </div>
+
+      <div class="overflow-x-auto">
+        <table class="table-compact table w-full border-collapse">
+          <thead>
+            <tr class="border-b border-gray-400 bg-gray-100 text-left">
+              <th class="w-1/12 border px-2 py-1">Check</th>
+              <th class="w-3/12 border px-2 py-1">Nom</th>
+              <th class="w-1/12 border px-2 py-1 text-center">Besoin</th>
+              <th class="w-3/12 border px-2 py-1">Trouvé</th>
+              <th class="w-3/12 border px-2 py-1">À vérifier</th>
+              <th class="w-1/12 border px-2 py-1">Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+            {#each typeGroups as group (group.header.$id)}
+              {@const confirmedAllocs = group.allocations.filter(
+                (a) => eventMaterielStore.resolveStatus(a) === "confirmed",
+              )}
+              {@const toCheckAllocs = group.allocations.filter(
+                (a) => eventMaterielStore.resolveStatus(a) === "to_check",
+              )}
+              <tr class="break-inside-avoid border-b border-gray-300">
+                <td class="border px-2 py-1 text-center">
+                  <div class="mx-auto h-4 w-4 border border-gray-400"></div>
+                </td>
+                <td class="border px-2 py-1 font-medium">
+                  {group.header.name || "Sans nom"}
+                </td>
+                <td class="border px-2 py-1 text-center font-bold">
+                  {group.header.quantity ?? 0}
+                </td>
+                <td class="border px-2 py-1 text-sm">
+                  {#if confirmedAllocs.length > 0}
+                    {confirmedAllocs
+                      .map((a) => {
+                        const parts: string[] = [];
+                        if (a.who) parts.push(a.who);
+                        if (a.where) parts.push(a.where);
+                        return parts.length > 0
+                          ? `${a.quantity ?? 0} (${parts.join(" - ")})`
+                          : `${a.quantity ?? 0}`;
+                      })
+                      .join(", ")}
+                  {:else}
+                    <span class="opacity-30">-</span>
+                  {/if}
+                </td>
+                <td class="border px-2 py-1 text-sm">
+                  {#if toCheckAllocs.length > 0}
+                    {toCheckAllocs
+                      .map((a) => {
+                        const parts: string[] = [];
+                        if (a.who) parts.push(a.who);
+                        if (a.where) parts.push(a.where);
+                        return parts.length > 0
+                          ? `${a.quantity ?? 0} (${parts.join(" - ")})`
+                          : `${a.quantity ?? 0}`;
+                      })
+                      .join(", ")}
+                  {:else}
+                    <span class="opacity-30">-</span>
+                  {/if}
+                </td>
+                <td class="border px-2 py-1 text-sm text-nowrap">
+                  {group.header.notes
+                    ? group.header.notes.length > 30
+                      ? group.header.notes.slice(0, 30) + "…"
+                      : group.header.notes
+                    : ""}
+                </td>
+              </tr>
+            {/each}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  {/each}
 </div>
 
 <!-- Modal de confirmation suppression -->
@@ -664,3 +904,31 @@
     />
   {/if}
 {/if}
+
+<!-- Modal de confirmation impression -->
+<ConfirmModal
+  isOpen={printModalOpen}
+  title="Imprimer la liste de matériel"
+  message="Vous pouvez affiner le matériel à imprimer en utilisant les filtres (type, statut, responsable, lieu…). Lors de l'impression, ajustez les options « Marges » et « Échelle » du navigateur pour un rendu optimal."
+  variant="info"
+  confirmLabel="Imprimer"
+  cancelLabel="Annuler"
+  onConfirm={() => {
+    printModalOpen = false;
+    setTimeout(() => {
+      window.print();
+    }, 300);
+  }}
+  onCancel={() => (printModalOpen = false)}
+/>
+
+<style>
+  ul {
+    list-style-type: disc;
+    margin: 1rem;
+  }
+
+  li {
+    margin-bottom: 0.5rem;
+  }
+</style>

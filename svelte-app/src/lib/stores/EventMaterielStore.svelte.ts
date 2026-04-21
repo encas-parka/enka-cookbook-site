@@ -26,7 +26,8 @@ import type { MaterielLoanItem } from "$lib/types/materiel.types";
 import {
   listEventMaterielByLoan,
 } from "$lib/services/appwrite-event-materiel";
-import { materielTypeLabels } from "$lib/utils/share-utils";
+import { getMaterielTypeConfig } from "$lib/utils/materiel.utils";
+import { exportMaterielToCsv, formatAllocations } from "$lib/utils/materiel-csv-export";
 import { globalState } from "./GlobalState.svelte";
 import { materielStore } from "./MaterielStore.svelte";
 import {
@@ -35,6 +36,26 @@ import {
   db,
   type BridgeResult,
 } from "$lib/db-sync/aw-sync";
+
+/**
+ * Formatte un apport inline : "jean x12", "marie (lieu1) x2", "(lieu3) x5"
+ */
+function formatAllocInline(qty: number, who?: string | null, where?: string | null): string {
+  const whoStr = who?.trim() || "";
+  const whereStr = where?.trim() || "";
+  if (whoStr && whereStr) return `${whoStr} (${whereStr}) x${qty}`;
+  if (whoStr) return `${whoStr} x${qty}`;
+  if (whereStr) return `(${whereStr}) x${qty}`;
+  return `x${qty}`;
+}
+
+/**
+ * Agrège une liste d'apports en une ligne inline.
+ * Ex: "jean x12, marie (lieu1) x2"
+ */
+function formatAllocsInline(allocs: EventMateriel[]): string {
+  return allocs.map((a) => formatAllocInline(a.quantity ?? 0, a.who, a.where)).join(", ");
+}
 
 export class EventMaterielStore {
   // aw-sync collection (CRUD + sync)
@@ -729,43 +750,110 @@ export class EventMaterielStore {
     }
   }
 
-  exportToMarkdown(eventName: string, items?: EventMateriel[]): string {
+  /**
+   * Export Markdown indenté : groupes par type, chaque besoin avec ses apports.
+   * Format :
+   * ## Type
+   * - Nom : besoin
+   *   -- ok : jean x12, marie (lieu1) x2
+   *   -- à vérifier : vanessa (lieu2) x4, lieu3 x5
+   *   > notes
+   */
+  exportToMarkdown(eventName: string, groups: MaterielGroup[]): string {
+    if (groups.length === 0) return "";
+
     const lines: string[] = [];
-    const exportItems = items ?? this.#itemsList;
-
-    if (exportItems.length === 0) return "";
-
-    lines.push("---");
-    lines.push(`# Matériel : ${eventName}`);
+    lines.push("# Matériel : " + eventName);
     lines.push("");
 
-    const byType = new Map<string, typeof exportItems>();
-    for (const item of exportItems) {
-      const label = materielTypeLabels[item.type] ?? "Autre";
+    // Grouper par type du header
+    const byType = new Map<string, MaterielGroup[]>();
+    for (const group of groups) {
+      const label = getMaterielTypeConfig(group.header.type).label;
       if (!byType.has(label)) byType.set(label, []);
-      byType.get(label)!.push(item);
+      byType.get(label)!.push(group);
     }
 
-    for (const [typeLabel, typeItems] of byType) {
-      lines.push(`## ${typeLabel}`);
+    for (const [typeLabel, typeGroups] of byType) {
+      lines.push("## " + typeLabel);
       lines.push("");
-      for (const item of typeItems) {
-        let line = `- ${item.name} × ${item.quantity}`;
-        const meta: string[] = [];
-        if (item.who) meta.push(item.who);
-        if (item.where) meta.push(item.where);
-        if (meta.length > 0) line += ` (${meta.join(" — ")})`;
-        lines.push(line);
-        if (item.notes) {
-          for (const noteLine of item.notes.split("\n")) {
-            lines.push(`> ${noteLine}`);
+
+      for (const group of typeGroups) {
+        const header = group.header;
+        const confirmedAllocs = group.allocations.filter(
+          (a) => this.resolveStatus(a) === "confirmed",
+        );
+        const toCheckAllocs = group.allocations.filter(
+          (a) => this.resolveStatus(a) === "to_check",
+        );
+
+        // Ligne principale : nom + besoin
+        lines.push("- " + (header.name || "Sans nom") + " : " + (header.quantity ?? 0));
+
+        // Ok (toujours affiché, inline)
+        if (confirmedAllocs.length > 0) {
+          lines.push("  -- ok : " + formatAllocsInline(confirmedAllocs));
+        } else {
+          lines.push("  -- ok : 0");
+        }
+
+        // À vérifier (si > 0, inline)
+        if (toCheckAllocs.length > 0) {
+          lines.push("  -- à vérifier : " + formatAllocsInline(toCheckAllocs));
+        }
+
+        // Notes (blockquotes)
+        if (header.notes) {
+          for (const noteLine of header.notes.split("\n")) {
+            lines.push("  > " + noteLine);
           }
         }
       }
+
       lines.push("");
     }
 
     return lines.join("\n");
+  }
+
+  /**
+   * Export CSV groupé par besoin : colonnes Nom, Type, Besoin, Trouvé, À vérifier, Notes.
+   */
+  exportToCsv(groups: MaterielGroup[]): string {
+    if (groups.length === 0) return "";
+
+    const rows = groups.map((group) => {
+      const header = group.header;
+      const confirmedAllocs = group.allocations.filter(
+        (a) => this.resolveStatus(a) === "confirmed",
+      );
+      const toCheckAllocs = group.allocations.filter(
+        (a) => this.resolveStatus(a) === "to_check",
+      );
+
+      return {
+        name: header.name || "",
+        type: getMaterielTypeConfig(header.type).label,
+        besoin: header.quantity ?? 0,
+        trouve: formatAllocations(
+          confirmedAllocs.map((a) => ({
+            qty: a.quantity ?? 0,
+            who: a.who || "",
+            where: a.where || "",
+          })),
+        ),
+        aVerifier: formatAllocations(
+          toCheckAllocs.map((a) => ({
+            qty: a.quantity ?? 0,
+            who: a.who || "",
+            where: a.where || "",
+          })),
+        ),
+        notes: header.notes || "",
+      };
+    });
+
+    return exportMaterielToCsv(rows);
   }
 
   // =============================================================================

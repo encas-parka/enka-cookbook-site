@@ -8,6 +8,8 @@
     CircleCheckBig,
     SquarePen,
     Clock,
+    LayoutGrid,
+    List,
   } from "@lucide/svelte";
 
   import { globalState, hoverHelp } from "$lib/stores/GlobalState.svelte";
@@ -19,6 +21,7 @@
   import { fade } from "svelte/transition";
 
   import ProductCard from "./ProductCard.svelte";
+  import ProductCardCompact from "./ProductCardCompact.svelte";
   import {
     getProductTypeInfo,
     formatPurchasesWithBadges,
@@ -49,6 +52,9 @@
   const groupedProducts = $derived(productsStore.groupedProducts);
   const allGroupEntries = $derived(Object.entries(groupedProducts));
   const filters = $derived(productsStore.filters);
+
+  // View mode: 'card' (default) or 'compact'
+  let viewMode = $state<"card" | "compact">("card");
 
   // Pagination progressive (lazy loading, 1 groupe à la fois)
   let currentPage = $state(1);
@@ -152,6 +158,32 @@
     ? 'pointer-events-none opacity-60'
     : ''}"
 >
+  <!-- View mode toggle -->
+  <div class="flex justify-end px-1">
+    <div class="join">
+      <button
+        class="btn join-item {viewMode === 'card'
+          ? 'btn-active btn-primary'
+          : 'btn-soft'}"
+        onclick={() => (viewMode = "card")}
+        title="Vue cartes"
+      >
+        <LayoutGrid size={14} />
+        cartes
+      </button>
+      <button
+        class="btn join-item {viewMode === 'compact'
+          ? 'btn-active btn-primary'
+          : 'btn-soft'}"
+        onclick={() => (viewMode = "compact")}
+        title="Vue compacte"
+      >
+        <List size={14} />
+        compact
+      </button>
+    </div>
+  </div>
+
   {#each paginatedGroupEntries as [groupKey, gProducts], groupIndex (groupKey)}
     {@const groupProducts = gProducts}
     <!-- Conteneur du groupe observable pour IntersectionObserver -->
@@ -302,16 +334,29 @@
       {/if}
 
       <!-- Cards des produits du groupe -->
-      <div class="mt-4 mb-8 space-y-4 sm:space-y-2">
-        {#each groupProducts as productModel (productModel.data.$id)}
-          <ProductCard
-            {productModel}
-            {shouldShowActionButtons}
-            {onOpenModal}
-            {onQuickValidation}
-          />
-        {/each}
-      </div>
+      {#if viewMode === "compact"}
+        <div class="divide-neutral/20 my-2 mb-8 divide-y">
+          {#each groupProducts as productModel (productModel.data.$id)}
+            <ProductCardCompact
+              {productModel}
+              {shouldShowActionButtons}
+              {onOpenModal}
+              {onQuickValidation}
+            />
+          {/each}
+        </div>
+      {:else}
+        <div class="mt-4 mb-8 space-y-4 sm:space-y-2">
+          {#each groupProducts as productModel (productModel.data.$id)}
+            <ProductCard
+              {productModel}
+              {shouldShowActionButtons}
+              {onOpenModal}
+              {onQuickValidation}
+            />
+          {/each}
+        </div>
+      {/if}
     </div>
   {/each}
 

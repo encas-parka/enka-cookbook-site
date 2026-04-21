@@ -101,7 +101,7 @@
   },
   {
     "label": "Build & Deploy (push build dans static/app)",
-    "command": "bash scripts_dev/deploy-build.sh",
+    "command": "bash ./scripts_dev/deploy-build.sh",
     "cwd": ".",
     "use_new_terminal": true,
     "allow_concurrent_runs": false,
@@ -115,7 +115,7 @@
   },
   {
     "label": "Merge vers enka-next",
-    "command": "bash scripts_dev/merge-to-enka-next.sh",
+    "command": "bash ./scripts_dev/merge-to-enka-next.sh",
     "cwd": ".",
     "use_new_terminal": true,
     "allow_concurrent_runs": false,

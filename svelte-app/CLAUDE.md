@@ -27,7 +27,9 @@ npx prettier --check "**/*.{svelte,ts,js,css}"
 
 ## Routing with sv-router
 
-The application uses **sv-router** for client-side routing with hash-based navigation.
+The application uses **sv-router** for client-side path-based routing (no hash). The `<Router>` component in `App.svelte` is used without `base="#"`, so URLs are clean paths like `/recipe/123` instead of `#/recipe/123`.
+
+In development, Vite proxies non-JSON requests under `/recipe/*` to `/index.html` (SPA fallback), allowing the client-side router to handle all navigation. In production, the app is served under `/app/` and the hosting layer must redirect unknown paths to `/app/index.html`.
 
 ### Basic Navigation
 

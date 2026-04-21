@@ -169,7 +169,7 @@ disableKinds:
 
 ### Svelte 5 Router (sv-router)
 
-The application uses **sv-router** for client-side hash-based routing:
+The application uses **sv-router** for client-side path-based routing (no hash). URLs are clean paths like `/recipe/123` instead of `#/recipe/123`. In development, Vite proxies non-JSON requests under `/recipe/*` to `/index.html` (SPA fallback). In production, the app is served under `/app/` and the hosting layer must redirect unknown paths to `/app/index.html`.
 
 - **Routes definition**: `svelte-app/src/lib/router/routes.ts`
 - **Route guards**: `svelte-app/src/lib/router/guards.ts` (authGuard, eventGuard)

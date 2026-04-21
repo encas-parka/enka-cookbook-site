@@ -14,14 +14,24 @@
   import { getProductTypeInfo } from "$lib/utils/products-display";
   import TimelineRange from "../ui/TimelineRange.svelte";
   import Fieldset from "../ui/Fieldset.svelte";
-  import { fade, slide } from "svelte/transition";
+  import { slide } from "svelte/transition";
   import { hoverHelp } from "@/lib/stores/GlobalState.svelte";
 
   const filters = $derived(productsStore.filters);
   const uniqueStores = $derived(productsStore.uniqueStores);
   const uniqueWho = $derived(productsStore.uniqueWho);
   const uniqueProductTypes = $derived(productsStore.uniqueProductTypes);
+  const uniqueDeliveryDates = $derived(productsStore.uniqueDeliveryDates);
   const isSearchActive = $derived(productsStore.isSearchActive);
+
+  /** Formate une date ISO en "lun. 21" */
+  function formatDeliveryDate(dateStr: string): string {
+    const date = new Date(dateStr);
+    return date.toLocaleDateString("fr-FR", {
+      weekday: "short",
+      day: "numeric",
+    });
+  }
 </script>
 
 <button class="absolute -z-50 size-0 opacity-0" tabindex="-1" aria-hidden="true"
@@ -73,8 +83,8 @@
 
       {#if productsStore.hasPastDatesInRange}
         <div class="alert alert-warning" transition:slide>
-          Cette période contient des dates passées. Les achats ne sont plus
-          possibles pour ces dates.
+          Cette période contient des dates passées. Le calcul des quantité
+          manquantes est impossible.
         </div>
       {/if}
     </Fieldset>
@@ -100,8 +110,8 @@
         id="completion-status"
       >
         <button
-          class="btn btn-sm flex-1 {filters.completionStatus === 'all' &&
-            'btn-primary'}"
+          class="btn btn-sm flex-1 uppercase {filters.completionStatus ===
+            'all' && 'btn-primary'}"
           type="button"
           aria-label="Tous"
           onclick={() => productsStore.setCompletionStatus("all")}>Tous</button
@@ -124,6 +134,36 @@
         >
       </div>
     </div>
+
+    {#if uniqueDeliveryDates.length > 0}
+      <div class="flex flex-col">
+        <label class="label label-text flex" for="delivery-date-filter"
+          >Livraison prévue :</label
+        >
+        <div
+          class="bg-base-100 flex flex-wrap gap-1 rounded-xl p-2 font-semibold"
+          role="group"
+          id="delivery-date-filter"
+        >
+          {#each uniqueDeliveryDates as date (date)}
+            <button
+              class="btn btn-sm {filters.deliveryDateFilter === date
+                ? 'btn-secondary'
+                : filters.deliveryDateFilter
+                  ? 'btn-dash btn-secondary'
+                  : 'btn-soft btn-secondary'}"
+              type="button"
+              onclick={() =>
+                productsStore.setDeliveryDateFilter(
+                  filters.deliveryDateFilter === date ? null : date,
+                )}
+            >
+              {formatDeliveryDate(date)}
+            </button>
+          {/each}
+        </div>
+      </div>
+    {/if}
 
     <!-- Groupement -->
     <div class="mb-4 flex flex-col">
@@ -162,6 +202,16 @@
     {#if uniqueProductTypes.length > 0}
       <Fieldset legend="Types & Température" iconComponent={Thermometer}>
         <div class="mb-2 flex flex-wrap items-center gap-2" role="group">
+          <button
+            class="btn btn-sm uppercase {filters.selectedProductTypes.length ===
+            0
+              ? 'btn-secondary'
+              : 'btn-soft btn-secondary'}"
+            onclick={() => productsStore.clearTypeAndTemperatureFilters()}
+            type="button"
+          >
+            Tous
+          </button>
           {#each uniqueProductTypes as type (type)}
             {@const typeInfo = getProductTypeInfo(type)}
             <button
@@ -184,7 +234,8 @@
           role="group"
         >
           <button
-            class="btn btn-sm flex-1 {filters.temperatureFilter === 'all'
+            class="btn btn-sm flex-1 uppercase {filters.temperatureFilter ===
+            'all'
               ? 'btn-secondary'
               : 'btn-soft btn-secondary'}"
             onclick={() => productsStore.setTemperatureFilter("all")}
@@ -251,46 +302,45 @@
             <span class="line-through">surgelés</span>
           </button>
         </div>
-        {#if filters.selectedProductTypes.length > 0 || filters.selectedTemperatures.length > 0 || filters.temperatureFilter !== "all"}
-          <button
-            class="btn btn-sm btn-circle btn-outline text-error float-end ms-auto"
-            onclick={() => productsStore.clearTypeAndTemperatureFilters()}
-            title="Effacer les filtres de types et température"
-            in:fade
-          >
-            <FunnelX size={16} />
-          </button>
-        {:else}
-          <div class="text-base-content/60 p-1 text-end text-xs italic">
-            aucun filtre sélectionné
-          </div>
-        {/if}
       </Fieldset>
     {/if}
     {#if uniqueStores.length > 0}
       <Fieldset legend="Magasins" iconComponent={Store}>
         <div class="flex flex-wrap items-center gap-2" role="group">
+          <div class="join mr-2">
+            <button
+              class="btn btn-sm join-item uppercase {filters.storeFilterMode ===
+                'all' && filters.selectedStores.length === 0
+                ? 'btn-secondary'
+                : 'btn-soft'}"
+              type="button"
+              onclick={() => productsStore.setStoreFilterMode("all")}
+              >Tous</button
+            >
+            <button
+              class="btn btn-sm join-item uppercase {filters.storeFilterMode ===
+              'none'
+                ? 'btn-secondary'
+                : 'btn-soft'}"
+              type="button"
+              onclick={() => productsStore.setStoreFilterMode("none")}
+              >Aucun</button
+            >
+          </div>
           {#each uniqueStores as store (store)}
             <button
-              class="btn btn-sm {filters.selectedStores.length === 0
-                ? 'btn-soft btn-secondary'
-                : filters.selectedStores.includes(store)
-                  ? 'btn-secondary'
-                  : 'btn-dash btn-secondary'}"
+              class="btn btn-sm {filters.storeFilterMode === 'none'
+                ? 'btn-dash btn-secondary'
+                : filters.selectedStores.length === 0
+                  ? 'btn-soft btn-secondary'
+                  : filters.selectedStores.includes(store)
+                    ? 'btn-secondary'
+                    : 'btn-dash btn-secondary'}"
               onclick={() => productsStore.toggleStore(store)}
             >
               {store}
             </button>
           {/each}
-          {#if filters.selectedStores.length > 0}
-            <button
-              class="btn btn-xs btn-circle btn-outline text-error ms-auto"
-              onclick={() => productsStore.clearStoreFilters()}
-              title="Effacer les filtres de magasins"
-            >
-              <FunnelX size={16} />
-            </button>
-          {/if}
         </div>
       </Fieldset>
     {/if}
@@ -298,27 +348,39 @@
     {#if uniqueWho.length > 0}
       <Fieldset legend="Qui" iconComponent={User}>
         <div class="flex flex-wrap items-center gap-2" role="group">
+          <div class="join mr-2">
+            <button
+              class="btn btn-sm join-item uppercase {filters.whoFilterMode ===
+                'all' && filters.selectedWho.length === 0
+                ? 'btn-secondary'
+                : 'btn-soft'}"
+              type="button"
+              onclick={() => productsStore.setWhoFilterMode("all")}>Tous</button
+            >
+            <button
+              class="btn btn-sm join-item uppercase {filters.whoFilterMode ===
+              'none'
+                ? 'btn-secondary'
+                : 'btn-soft'}"
+              type="button"
+              onclick={() => productsStore.setWhoFilterMode("none")}
+              >Personne</button
+            >
+          </div>
           {#each uniqueWho as who (who)}
             <button
-              class="btn btn-sm {filters.selectedWho.length === 0
-                ? ' btn-soft btn-secondary'
-                : filters.selectedWho.includes(who)
-                  ? ' btn-secondary'
-                  : 'btn-dash btn-secondary'}"
+              class="btn btn-sm {filters.whoFilterMode === 'none'
+                ? 'btn-dash btn-secondary'
+                : filters.selectedWho.length === 0
+                  ? ' btn-soft btn-secondary'
+                  : filters.selectedWho.includes(who)
+                    ? ' btn-secondary'
+                    : 'btn-dash btn-secondary'}"
               onclick={() => productsStore.toggleWho(who)}
             >
               {who}
             </button>
           {/each}
-          {#if filters.selectedWho.length > 0}
-            <button
-              class="btn btn-xs btn-circle btn-outline btn-error ms-auto"
-              onclick={() => productsStore.clearWhoFilters()}
-              title="Effacer les filtres de qui"
-            >
-              <FunnelX size={16} />
-            </button>
-          {/if}
         </div>
       </Fieldset>
     {/if}

@@ -60,6 +60,11 @@
   let heartbeatInterval: any = null;
   let initialRecipeSnapshot = $state<string | null>(null);
 
+  // recipeId non-réactif capturé au moment de l'acquisition du lock
+  // pour garantir sa disponibilité lors du cleanup (onDestroy)
+  // car recipeId ($derived de route.params) peut déjà être vide après navigation
+  let lockedRecipeId: string | null = null;
+
   // Modal de suppression
   let showDeleteModal = $state(false);
   let isDeleting = $state(false);
@@ -280,6 +285,7 @@
 
       await recipesStore.updateRecipeLock(recipeId, globalState.userId);
       lockedBy = globalState.userId;
+      lockedRecipeId = recipeId;
       console.log("🔒 Verrou acquis");
       startHeartbeat();
       return true;
@@ -291,12 +297,14 @@
   }
 
   async function releaseLock(): Promise<void> {
-    if (!recipeId) return;
+    const recipeIdToRelease = lockedRecipeId;
+    if (!recipeIdToRelease) return;
     stopHeartbeat();
 
     try {
-      await recipesStore.updateRecipeLock(recipeId, null);
+      await recipesStore.updateRecipeLock(recipeIdToRelease, null);
       lockedBy = null;
+      lockedRecipeId = null;
       console.log("🔓 Verrou libéré");
     } catch (error) {
       console.error("❌ Erreur libération verrou:", error);

@@ -8,21 +8,28 @@
     "dev:watch": "vite build --mode development --watch",
     "build": "vite build",
     "preview": "vite preview",
-    "check": "svelte-check --tsconfig ./tsconfig.app.json && tsc -p tsconfig.node.json"
+    "check-legacy": "svelte-check --tsconfig ./tsconfig.app.json && tsc -p tsconfig.node.json",
+    "check": "svelte-check-native --output machine --tsconfig ./tsconfig.app.json && tsc -p tsconfig.node.json",
+    "check-for-human": "svelte-check-native --tsconfig ./tsconfig.app.json && tsc -p tsconfig.node.json",
+    "test": "vitest run",
+    "test:watch": "vitest"
   },
   "devDependencies": {
     "@sveltejs/vite-plugin-svelte": "^7.0.0",
     "@tsconfig/svelte": "^5.0.8",
     "@types/node": "^24.12.2",
+    "@typescript/native-preview": "^7.0.0-dev.20260420.1",
     "prettier": "^3.8.1",
     "prettier-plugin-svelte": "^3.5.1",
     "prettier-plugin-tailwindcss": "^0.7.2",
     "rollup-plugin-visualizer": "^7.0.1",
     "svelte": "^5.55.2",
     "svelte-check": "^4.4.6",
+    "svelte-check-native": "^0.3.7",
     "typescript": "~5.9.3",
     "vite": "^8.0.0",
-    "vite-plugin-pwa": "^1.2.0"
+    "vite-plugin-pwa": "^1.2.0",
+    "vitest": "^4.1.4"
   },
   "dependencies": {
     "@abhivarde/svelte-drawer": "^1.0.0",
@@ -36,6 +43,7 @@
     "@tiptap/starter-kit": "^3.22.3",
     "appwrite": "^21.5.0",
     "daisyui": "^5.5.19",
+    "dexie": "^4.4.2",
     "rune-scroller": "^2.2.2",
     "runed": "^0.37.1",
     "sv-router": "^0.13.0",

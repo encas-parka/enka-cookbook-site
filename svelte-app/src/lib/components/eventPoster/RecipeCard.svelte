@@ -284,7 +284,7 @@
             <div class="mx-auto mt-2 max-w-sm">
               <textarea
                 bind:this={descriptionInput}
-                class="textarea textarea-bordered textarea-xs w-full text-center"
+                class="textarea textarea-xs w-full text-center"
                 rows="2"
                 bind:value={tempDescription}
                 onblur={handleFinishEditDescription}
@@ -369,7 +369,7 @@
               <div class="mx-auto mt-1 max-w-sm">
                 <textarea
                   bind:this={ingredientInput}
-                  class="textarea textarea-bordered textarea-xs w-full text-center"
+                  class="textarea textarea-xs w-full text-center"
                   rows="3"
                   bind:value={tempIngredients}
                   onblur={handleFinishEditIngredients}

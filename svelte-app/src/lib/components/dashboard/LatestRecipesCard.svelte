@@ -126,12 +126,12 @@
     Vos dernières Recettes
   </h2>
   <button
-    class="btn btn-sm"
+    class="btn btn-sm btn-link"
     onclick={viewAllRecipes}
     title="Voir toutes les recettes"
   >
     Voir tout
-    <ArrowBigRight size={16} />
+    <ArrowRight size={16} />
   </button>
 </div>
 
@@ -178,7 +178,10 @@
 
   <!-- Bouton création rapide -->
   <div class="card-actions justify-end pt-4">
-    <button class="btn btn-primary btn-sm btn-soft" onclick={createNewRecipe}>
+    <button
+      class="btn btn-primary sm:btn-sm btn-soft"
+      onclick={createNewRecipe}
+    >
       <BookOpen class="mr-2 h-4 w-4" />
       Créer une recette
     </button>

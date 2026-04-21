@@ -250,6 +250,8 @@ export function enrichedProductToAppwriteProduct(
     mainId: enrichedProduct.mainId,
     productHugoUuid: enrichedProduct.productHugoUuid,
     productName: enrichedProduct.productName, // pour renommage futur
+    productType: enrichedProduct.productType, // 🔧 FIX : persisté dans Appwrite
+    // pF/pS : absents du schéma Appwrite, gérés côté client uniquement
     // Données utilisateur (écrasent/étendent les valeurs par défaut)
     ...userUpdates,
   };

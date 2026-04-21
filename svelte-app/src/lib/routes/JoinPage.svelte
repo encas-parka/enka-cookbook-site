@@ -6,6 +6,7 @@
   import { redeemShareLink } from "$lib/services/appwrite-invitations";
   import { toastService } from "$lib/services/toast.service.svelte";
   import { navBarStore } from "$lib/stores/NavBarStore.svelte";
+  import { db } from "$lib/db-sync/aw-sync";
   import AuthModal from "$lib/components/AuthModal.svelte";
   import { PartyPopper, TriangleAlert } from "@lucide/svelte";
 
@@ -26,6 +27,14 @@
     if (!linkId) {
       step = "error";
       errorMsg = "Lien invalide.";
+      return;
+    }
+
+    // Vérifier d'abord le cache local joinLinks
+    const cachedLink = await db.joinLinks.get(linkId);
+    if (cachedLink) {
+      // Lien déjà utilisé → redirection directe
+      navigate(`/event/${cachedLink.eventId}`);
       return;
     }
 
@@ -64,6 +73,13 @@
     try {
       step = "loading";
       const { eventId } = await redeemShareLink(id, userId);
+
+      // Sauvegarder dans le cache pour les prochaines fois
+      await db.joinLinks.put({
+        linkId: id,
+        eventId: eventId,
+        joinedAt: new Date().toISOString(),
+      });
 
       // FORCER la synchronisation avec Appwrite pour obtenir la nouvelle liste des contributeurs (sinon le cache idb est utilisé)
       const { eventsStore } = await import("$lib/stores/EventsStore.svelte");

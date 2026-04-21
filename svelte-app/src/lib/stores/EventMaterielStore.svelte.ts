@@ -4,10 +4,14 @@
  * Gère les items de matériel nécessaire pour un événement.
  * Charge les données par eventId (pas en global), comme ProductsStore.
  *
- * Pattern 3-phase : loadCache → syncFromRemote → setupRealtime
+ * Architecture :
+ * - Dexie table `eventMateriels` (persistance offline)
+ * - aw-sync collection (delta sync + realtime)
+ * - bridgeToMapFiltered scoped par eventId (réactivité fine)
+ * - CRUD via aw-sync (optimistic writes + rollback)
  */
 
-import { SvelteMap } from "svelte/reactivity";
+import { Permission, Query, Role } from "appwrite";
 import type { EventMateriel } from "$lib/types/appwrite";
 import type {
   CreateEventMaterielData,
@@ -18,33 +22,58 @@ import type {
   EventMaterielStatus,
   MaterielGroup,
 } from "$lib/types/event-materiel.types";
-import {
-  listEventMateriel,
-  listEventMaterielByLoan,
-  createEventMateriel as createEventMaterielService,
-  updateEventMateriel as updateEventMaterielService,
-  deleteEventMateriel as deleteEventMaterielService,
-  getEventMaterielRealtimeChannels,
-} from "$lib/services/appwrite-event-materiel";
 import type { MaterielLoanItem } from "$lib/types/materiel.types";
 import {
-  createEventMaterielIDBCache,
-  type EventMaterielIDBCache,
-} from "$lib/services/event-materiel-idb-cache";
-import { materielTypeLabels } from "$lib/utils/share-utils";
+  listEventMaterielByLoan,
+} from "$lib/services/appwrite-event-materiel";
+import { getMaterielTypeConfig } from "$lib/utils/materiel.utils";
+import { exportMaterielToCsv, formatAllocations } from "$lib/utils/materiel-csv-export";
 import { globalState } from "./GlobalState.svelte";
-import { realtimeManager } from "./RealtimeManager.svelte";
 import { materielStore } from "./MaterielStore.svelte";
+import {
+  createSyncCollection,
+  bridgeToMapFiltered,
+  db,
+  type BridgeResult,
+} from "$lib/db-sync/aw-sync";
+
+/**
+ * Formatte un apport inline : "jean x12", "marie (lieu1) x2", "(lieu3) x5"
+ */
+function formatAllocInline(qty: number, who?: string | null, where?: string | null): string {
+  const whoStr = who?.trim() || "";
+  const whereStr = where?.trim() || "";
+  if (whoStr && whereStr) return `${whoStr} (${whereStr}) x${qty}`;
+  if (whoStr) return `${whoStr} x${qty}`;
+  if (whereStr) return `(${whereStr}) x${qty}`;
+  return `x${qty}`;
+}
+
+/**
+ * Agrège une liste d'apports en une ligne inline.
+ * Ex: "jean x12, marie (lieu1) x2"
+ */
+function formatAllocsInline(allocs: EventMateriel[]): string {
+  return allocs.map((a) => formatAllocInline(a.quantity ?? 0, a.who, a.where)).join(", ");
+}
 
 export class EventMaterielStore {
-  // État réactif - stocke les items par eventId
-  #items = new SvelteMap<string, EventMateriel>();
-  #idbCache: EventMaterielIDBCache | null = null;
+  // aw-sync collection (CRUD + sync)
+  #collection = createSyncCollection<EventMateriel>({
+    table: db.eventMateriels,
+    collectionName: "event_materiel",
+  });
+
+  // Bridge scoped dynamiquement par eventId
+  #bridge: BridgeResult<EventMateriel> | null = null;
+  #items = $state<Map<string, EventMateriel>>(new Map());
+
+  // État réactif
   #loading = $state(false);
   #error = $state<string | null>(null);
   #isInitialized = $state(false);
   #isRealtimeActive = $state(false);
-  #realtimeCleanup: (() => void) | null = null;
+  #realtimeInitialized = false;
   #currentEventId: string | null = null;
 
   // Getters simples
@@ -74,10 +103,6 @@ export class EventMaterielStore {
   // VALEURS UNIQUES POUR LES FILTRES
   // =============================================================================
 
-  /**
-   * Retourne la liste des valeurs uniques de 'where' triées
-   * Inclut option "À trouver" pour les items sans where
-   */
   getUniqueWhereValues(): string[] {
     const values = new Set<string>();
     this.#itemsList.forEach((item) => {
@@ -88,10 +113,6 @@ export class EventMaterielStore {
     return Array.from(values).sort((a, b) => a.localeCompare(b, "fr"));
   }
 
-  /**
-   * Retourne la liste des valeurs uniques de 'who' triées
-   * Inclut option "Personne" pour les items sans who
-   */
   getUniqueWhoValues(): string[] {
     const values = new Set<string>();
     this.#itemsList.forEach((item) => {
@@ -106,22 +127,20 @@ export class EventMaterielStore {
   // INITIALISATION PAR EVENT
   // =============================================================================
 
-  /**
-   * Initialise le store pour un événement spécifique
-   * Appelé quand l'utilisateur navigue vers /event/:id/materiel
-   */
   async initializeForEvent(eventId: string): Promise<void> {
     // Si déjà chargé pour le même event, ne pas recharger
     if (this.#currentEventId === eventId && this.#isInitialized) {
-      console.log(`[EventMaterielStore] Déjà initialisé pour event ${eventId}`);
+      console.log(
+        `[EventMaterielStore] Déjà initialisé pour event ${eventId}`,
+      );
       return;
     }
 
-    // Si on change d'event, vider les données précédentes
-    if (this.#currentEventId && this.#currentEventId !== eventId) {
-      this.#items.clear();
-      this.#currentEventId = null;
-      this.#isInitialized = false;
+    // Si on change d'event, détruire le bridge précédent
+    if (this.#bridge) {
+      this.#bridge.subscription.unsubscribe();
+      this.#bridge = null;
+    this.#items = new Map();
     }
 
     this.#loading = true;
@@ -130,18 +149,22 @@ export class EventMaterielStore {
     try {
       this.#currentEventId = eventId;
 
-      // Phase 1: Cache IDB
-      if (!this.#idbCache) {
-        this.#idbCache = await createEventMaterielIDBCache();
-      }
+      // Phase 1+2: Bridge + Sync via aw-sync
+      this.#bridge = bridgeToMapFiltered(db.eventMateriels, (t) =>
+        t.where("eventId").equals(eventId).toArray(),
+      );
+      this.#items = this.#bridge.map;
 
-      await this.#loadFromCache(eventId);
-
-      // Phase 2: Sync Appwrite
-      await this.#syncFromAppwrite(eventId);
+      await this.#collection.initialFetch({
+        queries: [Query.equal("eventId", eventId)],
+      });
 
       // Phase 3: Realtime
-      await this.#setupRealtime(eventId);
+      if (globalState.isAuthenticated && !this.#realtimeInitialized) {
+        this.#collection.subscribe();
+        this.#isRealtimeActive = true;
+        this.#realtimeInitialized = true;
+      }
 
       this.#isInitialized = true;
       console.log(
@@ -156,121 +179,10 @@ export class EventMaterielStore {
     }
   }
 
-  async #loadFromCache(eventId: string): Promise<void> {
-    if (!this.#idbCache) return;
-
-    try {
-      const itemsMap = await this.#idbCache.loadItems(eventId);
-      itemsMap.forEach((item) => {
-        this.#items.set(item.$id, item);
-      });
-
-      console.log(
-        `[EventMaterielStore] ${itemsMap.size} items chargés du cache IDB`,
-      );
-    } catch (err) {
-      console.warn(
-        "[EventMaterielStore] Erreur lecture cache IDB, ignoré:",
-        err,
-      );
-    }
-  }
-
-  async #syncFromAppwrite(eventId: string): Promise<void> {
-    try {
-      const items = await listEventMateriel(eventId);
-
-      // Vider les anciens items de cet event
-      const toRemove: string[] = [];
-      this.#items.forEach((item) => {
-        if (item.eventId === eventId) toRemove.push(item.$id);
-      });
-      toRemove.forEach((id) => this.#items.delete(id));
-
-      // Ajouter les nouveaux
-      for (const item of items) {
-        this.#items.set(item.$id, item);
-      }
-
-      // Persister dans IDB
-      await this.#idbCache?.saveItems(items);
-
-      // Mettre à jour le timestamp
-      await this.#idbCache?.saveMetadata(eventId, {
-        lastSync: new Date().toISOString(),
-      });
-
-      console.log(
-        `[EventMaterielStore] Sync terminé: ${items.length} items pour event ${eventId}`,
-      );
-    } catch (err) {
-      console.error("[EventMaterielStore] Erreur sync:", err);
-      throw err;
-    }
-  }
-
-  async #setupRealtime(eventId: string): Promise<void> {
-    if (!globalState.isAuthenticated) return;
-
-    // Nettoyage de l'ancien abonnement si on change d'event
-    if (this.#realtimeCleanup) {
-      this.#realtimeCleanup();
-      this.#realtimeCleanup = null;
-    }
-
-    try {
-      this.#realtimeCleanup = realtimeManager.registerDynamic(
-        getEventMaterielRealtimeChannels(),
-        async (response: any) => {
-          await this.#handleRealtime(response);
-        },
-      );
-      this.#isRealtimeActive = true;
-      console.log("[EventMaterielStore] Realtime configuré");
-    } catch (err) {
-      console.error("[EventMaterielStore] Erreur realtime:", err);
-    }
-  }
-
-  async #handleRealtime(response: any): Promise<void> {
-    try {
-      const events = response.events;
-      const payload = response.payload as EventMateriel;
-
-      if (!payload) return;
-
-      // Ignorer les items d'autres events
-      if (payload.eventId !== this.#currentEventId) return;
-
-      const eventType = events.some((e: string) => e.includes(".create"))
-        ? "create"
-        : events.some((e: string) => e.includes(".delete"))
-          ? "delete"
-          : "update";
-
-      console.log(
-        `[EventMaterielStore] ⚡️ Realtime: ${eventType} pour ${payload.$id}`,
-      );
-
-      if (eventType === "create" || eventType === "update") {
-        this.#items.set(payload.$id, payload);
-        this.#idbCache?.saveItem(payload);
-      } else if (eventType === "delete") {
-        this.#items.delete(payload.$id);
-        this.#idbCache?.deleteItem(payload.$id);
-      }
-    } catch (err) {
-      console.error("[EventMaterielStore] Erreur realtime:", err);
-    }
-  }
-
   // =============================================================================
   // API PUBLIQUE - CRUD
   // =============================================================================
 
-  /**
-   * Crée un nouvel item de matériel
-   */
   async addItem(
     data: CreateEventMaterielData,
     userId: string,
@@ -279,9 +191,29 @@ export class EventMaterielStore {
     this.#error = null;
 
     try {
-      const item = await createEventMaterielService(data, userId);
-      this.#items.set(item.$id, item);
-      this.#idbCache?.saveItem(item);
+      const item = await this.#collection.create(
+        {
+          eventId: data.eventId,
+          name: data.name,
+          quantity: data.quantity,
+          type: data.type || "other",
+          who: data.who || null,
+          where: data.where || null,
+          fromTeamName: data.fromTeamName || null,
+          sourceMaterielId: data.sourceMaterielId || null,
+          loanId: data.loanId || null,
+          status: data.status || "to_find",
+          groupId: data.groupId || null,
+          notes: data.notes || null,
+          createdBy: userId,
+        } as Omit<EventMateriel, "$id" | "$createdAt" | "$updatedAt">,
+        [
+          Permission.read(Role.label(data.eventId)),
+          Permission.update(Role.label(data.eventId)),
+          Permission.delete(Role.label(data.eventId)),
+        ],
+      );
+
       return item;
     } catch (err) {
       this.#error = err instanceof Error ? err.message : "Erreur de création";
@@ -291,11 +223,6 @@ export class EventMaterielStore {
     }
   }
 
-  /**
-   * Crée un header + une allocation en une seule opération.
-   * Utilisé quand un utilisateur ajoute du matériel avec un status source
-   * (confirmed/to_check), ou quand un loan n'a pas de header existant.
-   */
   async addHeaderWithAllocation(
     headerData: {
       eventId: string;
@@ -319,7 +246,7 @@ export class EventMaterielStore {
     this.#error = null;
 
     try {
-      const header = await createEventMaterielService(
+      const header = await this.addItem(
         {
           eventId: headerData.eventId,
           name: headerData.name,
@@ -331,10 +258,8 @@ export class EventMaterielStore {
         },
         userId,
       );
-      this.#items.set(header.$id, header);
-      this.#idbCache?.saveItem(header);
 
-      const allocation = await createEventMaterielService(
+      const allocation = await this.addItem(
         {
           eventId: headerData.eventId,
           name: headerData.name,
@@ -351,8 +276,6 @@ export class EventMaterielStore {
         },
         userId,
       );
-      this.#items.set(allocation.$id, allocation);
-      this.#idbCache?.saveItem(allocation);
 
       return { header, allocation };
     } catch (err) {
@@ -363,9 +286,6 @@ export class EventMaterielStore {
     }
   }
 
-  /**
-   * Met à jour un item
-   */
   async updateItem(
     itemId: string,
     data: UpdateEventMaterielData,
@@ -374,9 +294,7 @@ export class EventMaterielStore {
     this.#error = null;
 
     try {
-      const updated = await updateEventMaterielService(itemId, data);
-      this.#items.set(updated.$id, updated);
-      this.#idbCache?.saveItem(updated);
+      await this.#collection.update(itemId, data as Partial<EventMateriel>);
     } catch (err) {
       this.#error =
         err instanceof Error ? err.message : "Erreur de mise à jour";
@@ -386,17 +304,12 @@ export class EventMaterielStore {
     }
   }
 
-  /**
-   * Supprime un item
-   */
   async deleteItem(itemId: string): Promise<void> {
     this.#loading = true;
     this.#error = null;
 
     try {
-      await deleteEventMaterielService(itemId);
-      this.#items.delete(itemId);
-      this.#idbCache?.deleteItem(itemId);
+      await this.#collection.remove(itemId);
     } catch (err) {
       this.#error =
         err instanceof Error ? err.message : "Erreur de suppression";
@@ -406,33 +319,10 @@ export class EventMaterielStore {
     }
   }
 
-  // /**
-  //  * Change le statut d'un item (cycle: needed → confirmed → brought)
-  //  * TODO: supprimer ou adapter si on reintroduit un statut
-  //  */
-  // async cycleStatus(itemId: string): Promise<void> {
-  //   const item = this.#items.get(itemId);
-  //   if (!item) return;
-
-  //   const nextStatus: Record<string, EventMaterielStatus> = {
-  //     needed: "confirmed",
-  //     confirmed: "brought",
-  //     brought: "needed",
-  //   };
-
-  //   await this.updateItem(itemId, {
-  //     status: nextStatus[item.status] || "needed",
-  //   } as UpdateEventMaterielData);
-  // }
-
   // =============================================================================
   // UTILITAIRE STATUS
   // =============================================================================
 
-  /**
-   * Résout le status d'un item.
-   * Pour la migration : les anciens items sans status valide sont déduits de `where`.
-   */
   resolveStatus(item: EventMateriel): EventMaterielStatus {
     const s = item.status as string;
     if (s === "to_find" || s === "to_check" || s === "confirmed") {
@@ -446,9 +336,6 @@ export class EventMaterielStore {
   // FILTRAGE ET TRI
   // =============================================================================
 
-  /**
-   * Filtre et trie les items selon les critères donnés
-   */
   getFilteredItems(
     filters: EventMaterielFilters,
     sort: EventMaterielSort,
@@ -472,11 +359,9 @@ export class EventMaterielStore {
     // Filtre par qui (who)
     if (filters.who?.length) {
       result = result.filter((item) => {
-        // Si "__none__" est coché, on inclut les items sans who
         if (filters.who!.includes("__none__") && !item.who) {
           return true;
         }
-        // Sinon on filtre par who exact
         return filters.who!.some((w) => w !== "__none__" && item.who === w);
       });
     }
@@ -484,11 +369,9 @@ export class EventMaterielStore {
     // Filtre par où (where)
     if (filters.where?.length) {
       result = result.filter((item) => {
-        // Si "__none__" est coché, on inclut les items sans where
         if (filters.where!.includes("__none__") && !item.where) {
           return true;
         }
-        // Sinon on filtre par where exact
         return filters.where!.some((w) => w !== "__none__" && item.where === w);
       });
     }
@@ -541,20 +424,6 @@ export class EventMaterielStore {
   // STATS
   // =============================================================================
 
-  // TODO: a supprimer ou adapter - status derive de where
-  // getItemsByStatus(): Record<EventMaterielStatus, number> {
-  //   const counts: Record<EventMaterielStatus, number> = {
-  //     needed: 0,
-  //     confirmed: 0,
-  //     brought: 0,
-  //   };
-  //   this.#itemsList.forEach((item) => {
-  //     counts[item.status as EventMaterielStatus] =
-  //       (counts[item.status as EventMaterielStatus] || 0) + 1;
-  //   });
-  //   return counts;
-  // }
-
   getItemsByType(): Record<string, number> {
     const counts: Record<string, number> = {};
     this.#itemsList.forEach((item) => {
@@ -567,27 +436,18 @@ export class EventMaterielStore {
   // REGROUPEMENT (BESOIN + ALLOCATIONS)
   // =============================================================================
 
-  /**
-   * Retourne les headers (groupId = null, status to_find)
-   */
   get headers(): EventMateriel[] {
     return this.#itemsList.filter(
       (item) => !item.groupId && this.resolveStatus(item) === "to_find",
     );
   }
 
-  /**
-   * Retourne les allocations d'un header
-   */
   getAllocationsForHeader(headerId: string): EventMateriel[] {
     return this.#itemsList.filter((item) => item.groupId === headerId);
   }
 
-  /**
-   * Calcule la quantité restante pour un header
-   */
   getRemainingQuantity(headerId: string): number {
-    const header = this.#items.get(headerId);
+    const header = this.#items?.get(headerId);
     if (!header) return 0;
     const allocated = this.getAllocationsForHeader(headerId).reduce(
       (sum, a) => sum + (a.quantity || 0),
@@ -596,9 +456,6 @@ export class EventMaterielStore {
     return (header.quantity || 0) - allocated;
   }
 
-  /**
-   * Retourne la structure groupée pour l'UI (mode nested)
-   */
   getGroupedItems(
     filters: EventMaterielFilters,
     sort: EventMaterielSort,
@@ -664,9 +521,6 @@ export class EventMaterielStore {
     return groups;
   }
 
-  /**
-   * Recherche un header existant par nom (fuzzy match)
-   */
   findMatchingHeader(name: string): EventMateriel | null {
     const normalizedSearch = name.toLowerCase().trim();
     let bestMatch: EventMateriel | null = null;
@@ -690,7 +544,8 @@ export class EventMaterielStore {
           headerWords.some((hw) => hw.includes(w) || w.includes(hw)),
         );
         score =
-          (overlap.length / Math.max(searchWords.length, headerWords.length)) *
+          (overlap.length /
+            Math.max(searchWords.length, headerWords.length)) *
           60;
       }
 
@@ -703,9 +558,6 @@ export class EventMaterielStore {
     return bestMatch;
   }
 
-  /**
-   * Retourne les valeurs uniques de status (résolues) pour les filtres
-   */
   getUniqueStatusValues(): EventMaterielStatus[] {
     const values = new Set<EventMaterielStatus>();
     this.#itemsList.forEach((item) => {
@@ -714,16 +566,10 @@ export class EventMaterielStore {
     return Array.from(values).sort();
   }
 
-  /**
-   * Lie un item à un header (allocation) ou délie (groupId = null)
-   */
   async linkToHeader(itemId: string, headerId: string | null): Promise<void> {
     await this.updateItem(itemId, { groupId: headerId });
   }
 
-  /**
-   * Retourne les headers disponibles pour le linking (excluant l'item lui-même)
-   */
   getAvailableHeadersForLink(excludeItemId?: string): EventMateriel[] {
     return this.headers.filter((h) => h.$id !== excludeItemId);
   }
@@ -732,19 +578,6 @@ export class EventMaterielStore {
   // SYNC DEPUIS LOAN (MatérielLoan → EventMateriel)
   // =============================================================================
 
-  /**
-   * Synchronise les EventMateriel depuis un loan.
-   * - Crée les items manquants
-   * - Met à jour les quantités si modifiées
-   * - Supprime les items retirés du loan
-   *
-   * @param loanId ID du MaterielLoan
-   * @param eventId ID de l'événement cible
-   * @param materiels Items du loan (MaterielLoanItem[])
-   * @param responsibleName Nom du responsable de la réservation (→ champ `who`)
-   * @param ownerName Nom de la team propriétaire (→ champ `fromTeamName`)
-   * @param userId ID de l'utilisateur effectuant l'action
-   */
   async syncFromLoan(
     loanId: string,
     eventId: string,
@@ -756,7 +589,10 @@ export class EventMaterielStore {
     try {
       const existingItems = await listEventMaterielByLoan(loanId);
 
-      const existingByMaterielId = new Map<string, (typeof existingItems)[0]>();
+      const existingByMaterielId = new Map<
+        string,
+        (typeof existingItems)[0]
+      >();
       for (const item of existingItems) {
         if (item.sourceMaterielId) {
           existingByMaterielId.set(item.sourceMaterielId, item);
@@ -771,13 +607,9 @@ export class EventMaterielStore {
 
         if (existing) {
           if (existing.quantity !== loanItem.quantity) {
-            const updated = await updateEventMaterielService(existing.$id, {
+            await this.#collection.update(existing.$id, {
               quantity: loanItem.quantity,
-            });
-            if (this.#currentEventId === eventId) {
-              this.#items.set(updated.$id, updated);
-              this.#idbCache?.saveItem(updated);
-            }
+            } as Partial<EventMateriel>);
           }
         } else {
           const sourceMateriel = materielStore.getMaterielById(
@@ -789,7 +621,7 @@ export class EventMaterielStore {
           const matchingHeader = this.findMatchingHeader(loanItem.materielName);
 
           if (matchingHeader) {
-            const created = await createEventMaterielService(
+            await this.addItem(
               {
                 eventId,
                 name: loanItem.materielName,
@@ -805,12 +637,8 @@ export class EventMaterielStore {
               },
               userId,
             );
-            if (this.#currentEventId === eventId) {
-              this.#items.set(created.$id, created);
-              this.#idbCache?.saveItem(created);
-            }
           } else {
-            const result = await this.addHeaderWithAllocation(
+            await this.addHeaderWithAllocation(
               {
                 eventId,
                 name: loanItem.materielName,
@@ -827,21 +655,13 @@ export class EventMaterielStore {
               },
               userId,
             );
-            if (this.#currentEventId !== eventId) {
-              this.#items.delete(result.header.$id);
-              this.#items.delete(result.allocation.$id);
-            }
           }
         }
       }
 
       for (const [materielId, existing] of existingByMaterielId) {
         if (!processedIds.has(materielId)) {
-          await deleteEventMaterielService(existing.$id);
-          if (this.#currentEventId === eventId) {
-            this.#items.delete(existing.$id);
-            this.#idbCache?.deleteItem(existing.$id);
-          }
+          await this.#collection.remove(existing.$id);
         }
       }
 
@@ -854,17 +674,12 @@ export class EventMaterielStore {
     }
   }
 
-  /**
-   * Supprime tous les EventMateriel liés à un loan
-   */
   async removeByLoan(loanId: string): Promise<void> {
     try {
       const existingItems = await listEventMaterielByLoan(loanId);
 
       for (const item of existingItems) {
-        await deleteEventMaterielService(item.$id);
-        this.#items.delete(item.$id);
-        this.#idbCache?.deleteItem(item.$id);
+        await this.#collection.remove(item.$id);
       }
 
       console.log(
@@ -876,22 +691,15 @@ export class EventMaterielStore {
     }
   }
 
-  /**
-   * Supprime les EventMateriel liés à un loan pour un event spécifique
-   * Utilisé quand l'event lié change
-   */
   async removeByLoanAndEvent(loanId: string, eventId: string): Promise<void> {
     try {
       const existingItems = await listEventMaterielByLoan(loanId);
-
-      const toDelete = existingItems.filter((item) => item.eventId === eventId);
+      const toDelete = existingItems.filter(
+        (item) => item.eventId === eventId,
+      );
 
       for (const item of toDelete) {
-        await deleteEventMaterielService(item.$id);
-        if (this.#currentEventId === eventId) {
-          this.#items.delete(item.$id);
-          this.#idbCache?.deleteItem(item.$id);
-        }
+        await this.#collection.remove(item.$id);
       }
 
       console.log(
@@ -903,16 +711,12 @@ export class EventMaterielStore {
     }
   }
 
-  /**
-   * Supprime un EventMateriel et, s'il vient d'un loan,
-   * retire le materiel correspondant du loan
-   */
   async deleteItemAndRemoveFromLoan(itemId: string): Promise<void> {
     this.#loading = true;
     this.#error = null;
 
     try {
-      const item = this.#items.get(itemId);
+      const item = this.#items?.get(itemId);
       if (!item) {
         throw new Error("Item introuvable");
       }
@@ -920,9 +724,7 @@ export class EventMaterielStore {
       const loanId = item.loanId;
       const sourceMaterielId = item.sourceMaterielId;
 
-      await deleteEventMaterielService(itemId);
-      this.#items.delete(itemId);
-      this.#idbCache?.deleteItem(itemId);
+      await this.#collection.remove(itemId);
 
       if (loanId && sourceMaterielId) {
         const loan = materielStore.getLoanById(loanId);
@@ -948,60 +750,132 @@ export class EventMaterielStore {
     }
   }
 
-  exportToMarkdown(eventName: string, items?: EventMateriel[]): string {
+  /**
+   * Export Markdown indenté : groupes par type, chaque besoin avec ses apports.
+   * Format :
+   * ## Type
+   * - Nom : besoin
+   *   -- ok : jean x12, marie (lieu1) x2
+   *   -- à vérifier : vanessa (lieu2) x4, lieu3 x5
+   *   > notes
+   */
+  exportToMarkdown(eventName: string, groups: MaterielGroup[]): string {
+    if (groups.length === 0) return "";
+
     const lines: string[] = [];
-    const exportItems = items ?? Array.from(this.#items.values());
-
-    if (exportItems.length === 0) return "";
-
-    lines.push("---");
-    lines.push(`# Matériel : ${eventName}`);
+    lines.push("# Matériel : " + eventName);
     lines.push("");
 
-    const byType = new Map<string, typeof exportItems>();
-    for (const item of exportItems) {
-      const label = materielTypeLabels[item.type] ?? "Autre";
+    // Grouper par type du header
+    const byType = new Map<string, MaterielGroup[]>();
+    for (const group of groups) {
+      const label = getMaterielTypeConfig(group.header.type).label;
       if (!byType.has(label)) byType.set(label, []);
-      byType.get(label)!.push(item);
+      byType.get(label)!.push(group);
     }
 
-    for (const [typeLabel, typeItems] of byType) {
-      lines.push(`## ${typeLabel}`);
+    for (const [typeLabel, typeGroups] of byType) {
+      lines.push("## " + typeLabel);
       lines.push("");
-      for (const item of typeItems) {
-        let line = `- ${item.name} × ${item.quantity}`;
-        const meta: string[] = [];
-        if (item.who) meta.push(item.who);
-        if (item.where) meta.push(item.where);
-        if (meta.length > 0) line += ` (${meta.join(" — ")})`;
-        lines.push(line);
-        if (item.notes) {
-          for (const noteLine of item.notes.split("\n")) {
-            lines.push(`> ${noteLine}`);
+
+      for (const group of typeGroups) {
+        const header = group.header;
+        const confirmedAllocs = group.allocations.filter(
+          (a) => this.resolveStatus(a) === "confirmed",
+        );
+        const toCheckAllocs = group.allocations.filter(
+          (a) => this.resolveStatus(a) === "to_check",
+        );
+
+        // Ligne principale : nom + besoin
+        lines.push("- " + (header.name || "Sans nom") + " : " + (header.quantity ?? 0));
+
+        // Ok (toujours affiché, inline)
+        if (confirmedAllocs.length > 0) {
+          lines.push("  -- ok : " + formatAllocsInline(confirmedAllocs));
+        } else {
+          lines.push("  -- ok : 0");
+        }
+
+        // À vérifier (si > 0, inline)
+        if (toCheckAllocs.length > 0) {
+          lines.push("  -- à vérifier : " + formatAllocsInline(toCheckAllocs));
+        }
+
+        // Notes (blockquotes)
+        if (header.notes) {
+          for (const noteLine of header.notes.split("\n")) {
+            lines.push("  > " + noteLine);
           }
         }
       }
+
       lines.push("");
     }
 
     return lines.join("\n");
   }
 
+  /**
+   * Export CSV groupé par besoin : colonnes Nom, Type, Besoin, Trouvé, À vérifier, Notes.
+   */
+  exportToCsv(groups: MaterielGroup[]): string {
+    if (groups.length === 0) return "";
+
+    const rows = groups.map((group) => {
+      const header = group.header;
+      const confirmedAllocs = group.allocations.filter(
+        (a) => this.resolveStatus(a) === "confirmed",
+      );
+      const toCheckAllocs = group.allocations.filter(
+        (a) => this.resolveStatus(a) === "to_check",
+      );
+
+      return {
+        name: header.name || "",
+        type: getMaterielTypeConfig(header.type).label,
+        besoin: header.quantity ?? 0,
+        trouve: formatAllocations(
+          confirmedAllocs.map((a) => ({
+            qty: a.quantity ?? 0,
+            who: a.who || "",
+            where: a.where || "",
+          })),
+        ),
+        aVerifier: formatAllocations(
+          toCheckAllocs.map((a) => ({
+            qty: a.quantity ?? 0,
+            who: a.who || "",
+            where: a.where || "",
+          })),
+        ),
+        notes: header.notes || "",
+      };
+    });
+
+    return exportMaterielToCsv(rows);
+  }
+
   // =============================================================================
   // CLEANUP
   // =============================================================================
 
-  destroy(): void {
-    if (this.#realtimeCleanup) {
-      this.#realtimeCleanup();
-      this.#realtimeCleanup = null;
+  async destroy(): Promise<void> {
+    this.#collection.unsubscribeAll();
+    if (this.#bridge) {
+      this.#bridge.subscription.unsubscribe();
+      this.#bridge = null;
     }
-    this.#items.clear();
-    this.#idbCache?.close();
-    this.#idbCache = null;
+    // Nettoyer IndexedDB pour éviter les fuites de données entre utilisateurs
+    await this.#collection.clearLocal();
+    this.#items = new Map();
     this.#currentEventId = null;
     this.#isInitialized = false;
     this.#isRealtimeActive = false;
+    this.#realtimeInitialized = false;
+    this.#loading = false;
+    this.#error = null;
+    console.log("[EventMaterielStore] Store détruit");
   }
 }
 

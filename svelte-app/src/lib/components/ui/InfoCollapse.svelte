@@ -33,7 +33,7 @@
 </script>
 
 <div
-  class={`bg-base-100 border-base-200 relative min-w-0 overflow-hidden rounded-lg border ${className}`}
+  class={`bg-base-100 border-base-200 relative min-w-0 rounded-2xl border ${className}`}
   {style}
 >
   <button
@@ -58,7 +58,7 @@
       {/if}
     </div>
     {#if hasChildren}
-      <div class="absolute top-0 right-2 flex items-center gap-1">
+      <div class="absolute right-2 bottom-1 flex items-center gap-1">
         <div class="text-base-content/70 text-sm italic">
           {#if !isOpen}
             en savoir plus
@@ -78,7 +78,7 @@
       id="collapse-content"
       role="button"
       tabindex="0"
-      class={`overflow-hidden transition-all duration-200 ${isOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"} hover:cursor-pointer`}
+      class={`overflow-hidden transition-all duration-200 ${isOpen ? "opacity-100" : "max-h-0 opacity-0"} hover:cursor-pointer`}
       onclick={toggle}
       onkeydown={(e) => {
         if (e.key === "Enter" || e.key === " ") {

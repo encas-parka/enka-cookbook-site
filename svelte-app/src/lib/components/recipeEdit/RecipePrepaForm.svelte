@@ -8,6 +8,8 @@
     Lightbulb,
     X,
     Trash2,
+    Triangle,
+    TriangleAlert,
   } from "@lucide/svelte";
 
   interface Props {
@@ -19,7 +21,8 @@
   let { recipe = $bindable(), validationErrors, canEdit }: Props = $props();
 </script>
 
-<div class="alert alert-info mb-4">
+<div class="alert alert-info max-sm:alert-vertical mb-4">
+  <TriangleAlert size={24} />
   <span>
     <ul class="mt-1 list-disc pl-5 text-sm">
       <li>
@@ -30,8 +33,8 @@
         couverts est modifié.
       </li>
       <li>
-        Privilégiez les quantités en gramme (g), kilogramme (kg), litre (L) et
-        millilitre (mL) plutôt que les unités imprécises (notamment « unité »
+        Privilégiez les quantités en gramme (gr.), kilogramme (kg), litre (l.)
+        et millilitre (ml) plutôt que les unités imprécises (notamment « unité »
         pour les fruits et légumes, dont les tailles et poids varient souvent du
         simple au double).
       </li>

@@ -122,13 +122,13 @@
 {:else}
   <!-- Événement en cours : afficher les boutons -->
 
-  <div class="join my-2 ms-auto">
+  <div class="join my-2 flex justify-end">
     <button
       type="button"
       name="options"
       class="join-item btn btn-sm {dateStore.isUpcomingRange
-        ? 'btn-soft btn-secondary'
-        : 'btn-ghost'}"
+        ? ' btn-secondary'
+        : 'btn-soft'}"
       aria-label=" Dates à venir"
       onclick={() => dateStore.selectUpcoming()}
     >
@@ -138,8 +138,8 @@
       type="button"
       name="options"
       class="join-item btn btn-sm {dateStore.isFullRange
-        ? 'btn-soft btn-secondary'
-        : 'btn-ghost'}"
+        ? ' btn-secondary'
+        : 'btn-soft'}"
       aria-label=" Toutes les dates"
       onclick={() => dateStore.selectAll()}
     >

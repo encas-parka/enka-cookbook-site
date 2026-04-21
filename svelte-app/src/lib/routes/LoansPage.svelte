@@ -5,7 +5,6 @@
     Plus,
     Users,
     LoaderCircle,
-    ArrowRightFromLine,
   } from "@lucide/svelte";
   import { materielStore } from "$lib/stores/MaterielStore.svelte";
   import { globalState } from "$lib/stores/GlobalState.svelte";
@@ -139,6 +138,31 @@
     return filtered;
   });
 
+  // =============================================================================
+  // FILTRAGE : masquer les réservations terminées depuis +7 jours
+  // =============================================================================
+
+  const SEVEN_DAYS_MS = 7 * 24 * 60 * 60 * 1000;
+  let showOldCompleted = $state(false);
+
+  function isOldCompleted(loan: {
+    status: string;
+    completedAt: string | null;
+  }): boolean {
+    if (loan.status !== "completed" || !loan.completedAt) return false;
+    return Date.now() - new Date(loan.completedAt).getTime() >= SEVEN_DAYS_MS;
+  }
+
+  const oldCompletedCount = $derived(
+    teamLoans.filter(isOldCompleted).length,
+  );
+
+  const visibleLoans = $derived(
+    showOldCompleted
+      ? teamLoans
+      : teamLoans.filter((loan) => !isOldCompleted(loan)),
+  );
+
   // Changer d'équipe
   function switchTeam(teamId: string) {
     navigate(`/dashboard/loans/${teamId}`);
@@ -185,43 +209,25 @@
 
     navBarStore.setConfig({
       title: teamName,
-      actions: navActions,
     });
   });
 </script>
 
-{#snippet navActions()}
-  <button
-    class="btn btn-primary btn-sm"
-    onclick={() => navigate(`/dashboard/materiel/${activeTeamId}`)}
-  >
-    Inventaire <ArrowRightFromLine class="size-4" />
-  </button>{/snippet}
-
 <div class="container mx-auto p-4 pb-20" transition:fade>
   <div class="mx-auto max-w-7xl sm:px-4 sm:py-8">
-    <!-- Tabs par équipe (seulement si plus d'une équipe) -->
-    {#if userTeams.length > 1}
-      <div class="tabs tabs-border bg-base-200 sm:tabs-lg mb-6 font-medium">
-        {#each userTeams as team (team.$id)}
-          {@const loansCount = materielStore.loans.filter(
-            (loan) => loan.ownerId === team.$id,
-          ).length}
-          <button
-            class="tab font-bold {activeTeamId === team.$id
-              ? 'tab-active'
-              : ''}"
-            onclick={() => switchTeam(team.$id)}
-          >
-            <Users class="mr-2 h-4 w-4" />
-            {team.name}
-            <span class="badge badge-sm badge-neutral ml-2">
-              {loansCount}
-            </span>
-          </button>
-        {/each}
-      </div>
-    {/if}
+    <!-- Tabs Inventaire / Réservation -->
+    <div class="tabs tabs-border bg-base-200 sm:tabs-lg mb-6 font-semibold">
+      <button
+        class="tab"
+        onclick={() => navigate(`/dashboard/materiel/${activeTeamId}`)}
+        disabled={!activeTeamId}
+      >
+        Inventaire
+      </button>
+      <button class="tab tab-active">
+        Réservation
+      </button>
+    </div>
 
     <!-- Contenu -->
     {#if !globalState.isAuthenticated}
@@ -264,7 +270,7 @@
               Ajouter une reservation
             </button>
           </div>
-          {#each teamLoans as loan (loan.$id)}
+          {#each visibleLoans as loan (loan.$id)}
             <LoanCard
               {loan}
               onReturn={openReturnForm}
@@ -274,6 +280,18 @@
               onEdit={openEditLoanModal}
             />
           {/each}
+          {#if oldCompletedCount > 0}
+            <div class="text-center">
+              <button
+                class="btn btn-link btn-secondary btn-sm"
+                onclick={() => (showOldCompleted = !showOldCompleted)}
+              >
+                {showOldCompleted
+                  ? "Masquer les réservations terminées"
+                  : `${oldCompletedCount} réservation${oldCompletedCount > 1 ? "s" : ""} terminée${oldCompletedCount > 1 ? "s" : ""} (+ 7j)`}
+              </button>
+            </div>
+          {/if}
         </div>
       {/if}
     {/if}

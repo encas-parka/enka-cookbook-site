@@ -16,6 +16,7 @@ docs
 svelte-app/.vite
 *.claude
 *.opencode
+opencode.json
 *.agents
 .zed
 AGENTS.md

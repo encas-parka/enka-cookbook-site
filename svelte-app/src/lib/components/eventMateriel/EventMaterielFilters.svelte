@@ -9,7 +9,10 @@
   } from "@lucide/svelte";
   import Fieldset from "$lib/components/ui/Fieldset.svelte";
   import CheckboxBadge from "$lib/components/ui/CheckboxBadge.svelte";
-  import { getEventMaterielStatusConfig, getMaterielTypeConfig } from "$lib/utils/materiel.utils";
+  import {
+    getEventMaterielStatusConfig,
+    getMaterielTypeConfig,
+  } from "$lib/utils/materiel.utils";
 
   export interface EventMaterielFiltersState {
     types: string[];
@@ -73,7 +76,7 @@
   <div>
     <input
       type="text"
-      class="input input-sm input-bordered w-full"
+      class="input w-full"
       placeholder="Rechercher..."
       bind:value={filters.search}
       {disabled}

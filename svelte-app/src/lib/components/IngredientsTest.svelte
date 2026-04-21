@@ -66,10 +66,10 @@
       <input
         type="text"
         placeholder="Rechercher un ingrédient..."
-        class="input input-bordered flex-1"
+        class="input flex-1"
         bind:value={searchQuery}
       />
-      <select class="select select-bordered" bind:value={selectedType}>
+      <select class="select" bind:value={selectedType}>
         <option value="">Tous les types</option>
         {#each recipeDataStore.availableTypes as type}
           <option value={type}>{type}</option>

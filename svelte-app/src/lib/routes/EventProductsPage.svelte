@@ -55,9 +55,12 @@
 
   import BadgeEventStatus from "../components/ui/BadgeEventStatus.svelte";
   import InfoCollapse from "../components/ui/InfoCollapse.svelte";
-  import { isDemoEvent } from "../data/demo-event-config";
   import { online } from "svelte/reactivity/window";
-  import { shareOrDownload } from "$lib/utils/share-utils";
+  import {
+    shareOrDownload,
+    downloadFile,
+    toSlug,
+  } from "$lib/utils/share-utils";
 
   // Mapping des icônes pour les statuts d'achat
   const statusIcons = {
@@ -92,19 +95,44 @@
   let groupPurchaseProducts = $state<any[]>([]);
 
   // =========================================================================
-  // EXPORT MARKDOWN
+  // EXPORT MARKDOWN & CSV
   // =========================================================================
+
+  function getSlug(): string {
+    return toSlug(eventName) || "produits";
+  }
+
+  function getExportDateSuffix(): string {
+    const { start, end } = productsStore.dateStore.current ?? {};
+    const fmt = (d: string) =>
+      new Date(d)
+        .toLocaleDateString("fr-FR", { day: "2-digit", month: "2-digit" })
+        .replace(/\//g, "-");
+    if (start && end) {
+      return `_${fmt(start)}--${fmt(end)}`;
+    }
+    if (start) {
+      return `_${fmt(start)}`;
+    }
+    return "";
+  }
 
   function handleExportMarkdown() {
     const markdown = productsStore.exportToMarkdown(eventName);
-    const slug = eventName
-      .toLowerCase()
-      .replace(/[^a-z0-9]+/g, "-")
-      .replace(/^-|-$/g, "");
     shareOrDownload(
       markdown,
-      `${slug || "produits"}-courses.md`,
+      `${getSlug()}-courses${getExportDateSuffix()}.md`,
       "Liste de courses exportée en Markdown",
+    );
+  }
+
+  function handleExportCsv() {
+    const csv = productsStore.exportToCsv();
+    downloadFile(
+      csv,
+      `${getSlug()}-courses${getExportDateSuffix()}.csv`,
+      "text/csv;charset=utf-8",
+      "Liste de courses exportée en CSV",
     );
   }
 
@@ -285,10 +313,9 @@
    * Même logique que EventEditPage
    */
   const canEdit = $derived(
-    (currentEvent && isDemoEvent(currentEvent.$id)) ||
-      (online.current &&
-        eventsStore.canUserEditEvent(eventId || "", globalState.userId || "") &&
-        currentEvent?.status !== "canceled"),
+    online.current &&
+      eventsStore.canUserEditEvent(eventId || "", globalState.userId || "") &&
+      currentEvent?.status !== "canceled",
   );
 
   /**
@@ -334,13 +361,33 @@
 
 {#snippet navActions()}
   <div class="flex items-center gap-2">
-    <button
-      class="btn btn-sm btn-circle btn-primary"
-      onclick={handleExportMarkdown}
-      title="Exporter en Markdown"
-    >
-      <Download size={18} />
-    </button>
+    <div class="dropdown dropdown-end">
+      <div
+        class="btn btn-sm btn-circle btn-primary"
+        tabindex="0"
+        role="button"
+        title="Exporter"
+      >
+        <Download size={18} />
+      </div>
+      <ul
+        class="dropdown-content menu bg-base-100 rounded-box z-10 w-48 p-2 shadow-lg"
+        tabindex="0"
+      >
+        <li>
+          <button onclick={handleExportMarkdown}>
+            <Download size={16} />
+            Texte
+          </button>
+        </li>
+        <li>
+          <button onclick={handleExportCsv}>
+            <Download size={16} />
+            Excel / Calc
+          </button>
+        </li>
+      </ul>
+    </div>
     <button
       class="btn btn-sm btn-circle btn-primary"
       onclick={() => (printModalOpen = true)}
@@ -356,7 +403,7 @@
 <ActiveFiltersIndicator />
 
 <div
-  class="space-y-6 overflow-x-clip pt-6 md:px-16 {globalState.isDesktop &&
+  class="space-y-6 overflow-x-clip pt-6 pb-28 md:px-16 {globalState.isDesktop &&
     'ml-96 print:ml-0'} "
   transition:fade
 >
@@ -638,6 +685,26 @@
           Visualiser l'ensemble des dépenses effectuées, et par qui, en cliquant
           sur <kbd class="kbd">Dépenses</kbd> dans l'entête.
         </li>
+        <li>
+          <span class="font-semibold">Exporter la liste</span> via les boutons
+          en haut à droite de la barre de navigation :
+          <ul>
+            <li>
+              <Download size={14} class="inline" />
+              <span class="font-medium">Texte</span>
+              ou <span class="font-medium">Excel / Calc</span> — télécharge un fichier
+              avec la liste des produits.
+            </li>
+            <li>
+              <Printer size={14} class="inline" />
+              <span class="font-medium">Imprimer / PDF</span>
+              — ouvre la boîte d'impression du navigateur. Pour obtenir un PDF, sélectionnez
+              « Enregistrer au format PDF » comme imprimante.
+            </li>
+          </ul>
+          Les exports correspondent à la liste telle qu'affichée à l'écran, filtres
+          inclus (dates, type, magasin, responsable…).
+        </li>
       </ul>
       <p>
         Tous les membres des équipes ou individus invités à participer à
@@ -649,9 +716,9 @@
     <!-- header print -->
     <div class="print-only">
       <h2 class="text-lg font-bold">
-        Produits pour {eventName}, du {formatDateShort(startDate ?? "")} au {formatDateShort(
-          endDate ?? "",
-        )}
+        Produits pour {eventName}, du {formatDateShort(
+          productsStore.dateStore.start ?? startDate ?? "",
+        )} au {formatDateShort(productsStore.dateStore.end ?? endDate ?? "")}
       </h2>
     </div>
 

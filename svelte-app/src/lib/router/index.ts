@@ -29,11 +29,11 @@ export const { p, navigate, isActive, preload, route } = createRouter(routes);
 /**
  * Composant Router à utiliser dans App.svelte
  *
- * IMPORTANT: Utiliser <Router base="#"> pour activer le mode hash
- * Cela permet à l'application de fonctionner avec des URLs like #/recipe/123
+ * Le routeur fonctionne en mode path-based (pas de hash).
+ * Les URLs sont propres : /recipe/123 au lieu de #/recipe/123.
  *
  * Exemple dans App.svelte :
- * <Router base="#">
+ * <Router>
  *   <!-- Les routes sont rendues ici automatiquement -->
  * </Router>
  */

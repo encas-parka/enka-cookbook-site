@@ -10,7 +10,6 @@
   import { AlertCircle, Info, Printer } from "@lucide/svelte";
   import { online } from "svelte/reactivity/window";
   import { navBarStore } from "$lib/stores/NavBarStore.svelte";
-  import { isDemoEvent } from "../data/demo-event-config";
   import LeftPanel from "../components/ui/LeftPanel.svelte";
   import EventInvitationAlert from "../components/EventInvitationAlert.svelte";
   import PosterDisplay from "../components/eventPoster/PosterDisplay.svelte";
@@ -103,8 +102,8 @@
 
     const userId = globalState.userId || "";
 
-    // Creator can always edit and demo events
-    if (event.createdBy === userId || isDemoEvent(event.$id)) return true;
+    // Creator can always edit
+    if (event.createdBy === userId) return true;
 
     // Contributor with accepted status can edit
     const contributor = event.contributors?.find((c) => c.id === userId);

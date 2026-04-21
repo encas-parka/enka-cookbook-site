@@ -5,16 +5,18 @@
     EventMaterielType,
     EventMaterielStatus,
   } from "$lib/types/event-materiel.types";
-  import {
-    Hash,
-    MapPin,
-    Package,
-    Shapes,
-    User,
-    CircleDot,
-    CircleAlert,
-  } from "@lucide/svelte";
-  import MaterielNameSuggest from "$lib/components/eventMateriel/MaterielNameSuggest.svelte";
+   import {
+     Hash,
+     MapPin,
+     Package,
+     Shapes,
+     User,
+     CircleDot,
+     CircleAlert,
+   } from "@lucide/svelte";
+   import { toastService } from "$lib/services/toast.service.svelte";
+   import MaterielNameSuggest from "$lib/components/eventMateriel/MaterielNameSuggest.svelte";
+
   import {
     getEventMaterielStatusConfig,
     getMaterielTypeConfig,
@@ -172,13 +174,17 @@
     type = suggestion.type;
   }
 
-  async function handleSubmit(e: Event) {
-    e.preventDefault();
-    attempted = true;
-    errors = validationErrors;
-    if (!isValid) return;
+   async function handleSubmit(e: Event) {
+     e.preventDefault();
+     attempted = true;
+     errors = validationErrors;
+     if (!isValid) {
+       validationErrors.forEach((err) => toastService.error(err));
+       return;
+     }
+ 
+     submitting = true;
 
-    submitting = true;
     try {
       await onSubmit({
         eventId,
@@ -301,62 +307,58 @@
       </fieldset>
     {/if}
 
-    {#if showWho}
-      <fieldset class="fieldset">
-        <legend class="fieldset-legend"
-          ><User class="inline size-4" /> Qui ?</legend
-        >
-        <label class="input w-full">
-          <User class="h-4 w-4 opacity-50" />
-          <input
-            type="text"
-            bind:value={who}
-            placeholder="Personne responsable"
-            class="grow {whoError ? 'input-error' : ''}"
-            required={needsSource}
-          />
-        </label>
-      </fieldset>
-    {/if}
+     {#if showWho}
+       <fieldset class="fieldset">
+         <legend class="fieldset-legend"
+           ><User class="inline size-4" /> Qui ?</legend
+         >
+         <label class="input w-full {whoError ? 'input-error' : ''}">
+           <User class="h-4 w-4 opacity-50" />
+           <input
+             type="text"
+             bind:value={who}
+             placeholder="Personne responsable"
+             class="grow"
+           />
+         </label>
+       </fieldset>
+     {/if}
 
-    {#if showWhere}
-      <fieldset class="fieldset">
-        <legend class="fieldset-legend"
-          ><MapPin class="inline size-4" /> Où ?</legend
-        >
-        <label class="input w-full">
-          <MapPin class="h-4 w-4 opacity-50" />
-          <input
-            type="text"
-            bind:value={where}
-            placeholder="Lieu de stockage"
-            class="grow {whereError ? 'input-error' : ''}"
-            disabled={!canEditWhere}
-            required={needsSource}
-          />
-        </label>
-      </fieldset>
-    {/if}
 
-    <fieldset class="fieldset">
-      <legend class="fieldset-legend">Notes</legend>
-      <textarea
-        rows="2"
-        bind:value={notes}
-        placeholder="Notes supplémentaires..."
-        class="textarea w-full"
-      ></textarea>
-    </fieldset>
+     {#if showWhere}
+       <fieldset class="fieldset">
+         <legend class="fieldset-legend"
+           ><MapPin class="inline size-4" /> Où ?</legend
+         >
+         <label class="input w-full {whereError ? 'input-error' : ''}">
+           <MapPin class="h-4 w-4 opacity-50" />
+           <input
+             type="text"
+             bind:value={where}
+             placeholder="Lieu de stockage"
+             class="grow"
+             disabled={!canEditWhere}
+           />
+         </label>
+       </fieldset>
+     {/if}
+
+
+     <fieldset class="fieldset">
+       <legend class="fieldset-legend">Notes</legend>
+       <textarea
+         rows="2"
+         bind:value={notes}
+         placeholder="Notes supplémentaires..."
+         class="textarea w-full"
+         maxlength="255"
+       ></textarea>
+     </fieldset>
+
   </div>
 
-  {#if attempted && errors.length > 0}
-    <div class="alert alert-warning alert-soft text-sm">
-      <CircleAlert class="size-4 shrink-0" />
-      <ul class="list-disc pl-2">
-        {#each errors as err}
-          <li>{err}</li>
-        {/each}
-      </ul>
-    </div>
-  {/if}
-</form>
+   {#if attempted && errors.length > 0}
+     <!-- Les erreurs sont maintenant gérées par toastService -->
+   {/if}
+ </form>
+

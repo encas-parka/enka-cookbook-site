@@ -51,9 +51,11 @@ const APPWRITE_CONFIG = {
     kteams: "kteams", // Collection custom pour gérer les équipes
     locks: "locks",
     user_notifications: "user_notifications",
+    materiel: "materiel",
     materiel_loan: "materiel_loan",
     event_materiel: "event_materiel",
     teamdocs: "teamdocs", // Documents d'équipe
+    recipes: "recettes",
   },
 };
 

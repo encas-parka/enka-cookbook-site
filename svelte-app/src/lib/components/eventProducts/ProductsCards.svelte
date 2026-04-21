@@ -8,6 +8,8 @@
     CircleCheckBig,
     SquarePen,
     Clock,
+    LayoutGrid,
+    List,
   } from "@lucide/svelte";
 
   import { globalState, hoverHelp } from "$lib/stores/GlobalState.svelte";
@@ -17,13 +19,13 @@
     formatDateWdDayMonthShort,
   } from "$lib/utils/date-helpers";
   import { fade } from "svelte/transition";
-  import { useIntersectionObserver } from "runed";
+
   import ProductCard from "./ProductCard.svelte";
+  import ProductCardCompact from "./ProductCardCompact.svelte";
   import {
     getProductTypeInfo,
     formatPurchasesWithBadges,
   } from "@/lib/utils/products-display";
-  import { flip } from "svelte/animate";
 
   interface Props {
     onOpenModal: (productId: string, tab?: string) => void;
@@ -47,11 +49,12 @@
     disabled = false,
   }: Props = $props();
 
-  const groupedFilteredProducts = $derived(
-    productsStore.groupedFilteredProducts,
-  );
-  const allGroupEntries = $derived(Object.entries(groupedFilteredProducts));
-  const filters = productsStore.filters;
+  const groupedProducts = $derived(productsStore.groupedProducts);
+  const allGroupEntries = $derived(Object.entries(groupedProducts));
+  const filters = $derived(productsStore.filters);
+
+  // View mode: 'card' (default) or 'compact'
+  let viewMode = $state<"card" | "compact">("card");
 
   // Pagination progressive (lazy loading, 1 groupe à la fois)
   let currentPage = $state(1);
@@ -81,37 +84,47 @@
   );
 
   // Gestion de la visibilité des headers sticky avec IntersectionObserver
-  // Un header est visible si son groupe de produits est encore visible à au moins 10%
   let groupElements = $state<(HTMLElement | undefined)[]>([]);
   let headerVisibility = $state<Map<string, boolean>>(new Map());
+  let activeObservers: IntersectionObserver[] = [];
 
-  // Observer chaque groupe de produits pour détecter quand il sort du viewport
+  // Observer chaque groupe — recrée les observers quand les clés changent
+  let prevGroupKeysSignature = "";
   $effect(() => {
-    const groupKeys = Object.keys(groupedFilteredProducts);
+    const currentKeys = Object.keys(groupedProducts);
+    const signature = currentKeys.join(",");
+    if (signature === prevGroupKeysSignature) return;
+    prevGroupKeysSignature = signature;
+
+    // Nettoyer les anciens observers (runed useIntersectionObserver ne le faisait pas)
+    activeObservers.forEach((o) => o.disconnect());
+    activeObservers = [];
+
+    // Reset : tous les headers repassent visible par défaut (?? true)
+    headerVisibility = new Map();
 
     groupElements.forEach((groupEl, index) => {
       if (!groupEl) return;
 
-      const groupKey = groupKeys[index];
+      const groupKey = currentKeys[index];
       if (!groupKey) return;
 
-      useIntersectionObserver(
-        () => groupEl,
+      const observer = new IntersectionObserver(
         (entries) => {
           const entry = entries[0];
           if (!entry) return;
 
-          // Le header est visible dès que le groupe est partiellement dans le viewport
-          const isGroupVisible = entry.isIntersecting;
           headerVisibility = new Map(headerVisibility).set(
             groupKey,
-            isGroupVisible,
+            entry.isIntersecting,
           );
         },
         {
-          threshold: [0, 1], // Détecter l'entrée et la sortie complètes du viewport
+          threshold: [0, 1],
         },
       );
+      observer.observe(groupEl);
+      activeObservers.push(observer);
     });
   });
 
@@ -128,18 +141,16 @@
           currentPage++;
         }
       },
-      { threshold: 0.1, rootMargin: "200px" },
+      { threshold: 0.1, rootMargin: "10px" },
     );
 
     observer.observe(sentinel);
     return () => observer.disconnect();
   });
 
-  // Reset pagination quand les filtres/groupes changent
-  $effect(() => {
-    allGroupEntries;
-    currentPage = 1;
-  });
+  // Plus de reset de pagination : Array.slice(0, n) gère n > length naturellement.
+  // Le lazy loading via la sentinelle charge les groupes additionnels si besoin.
+  // Évite la cascade de re-renders (reset → sentinel → ++ → re-render → …).
 </script>
 
 <div
@@ -147,6 +158,32 @@
     ? 'pointer-events-none opacity-60'
     : ''}"
 >
+  <!-- View mode toggle -->
+  <div class="flex justify-end px-1">
+    <div class="join">
+      <button
+        class="btn join-item {viewMode === 'card'
+          ? 'btn-active btn-primary'
+          : 'btn-soft'}"
+        onclick={() => (viewMode = "card")}
+        title="Vue cartes"
+      >
+        <LayoutGrid size={14} />
+        cartes
+      </button>
+      <button
+        class="btn join-item {viewMode === 'compact'
+          ? 'btn-active btn-primary'
+          : 'btn-soft'}"
+        onclick={() => (viewMode = "compact")}
+        title="Vue compacte"
+      >
+        <List size={14} />
+        compact
+      </button>
+    </div>
+  </div>
+
   {#each paginatedGroupEntries as [groupKey, gProducts], groupIndex (groupKey)}
     {@const groupProducts = gProducts}
     <!-- Conteneur du groupe observable pour IntersectionObserver -->
@@ -297,16 +334,29 @@
       {/if}
 
       <!-- Cards des produits du groupe -->
-      <div class="mt-4 mb-8 space-y-4 sm:space-y-2" transition:fade>
-        {#each groupProducts as productModel (productModel.data.$id)}
-          <ProductCard
-            {productModel}
-            {shouldShowActionButtons}
-            {onOpenModal}
-            {onQuickValidation}
-          />
-        {/each}
-      </div>
+      {#if viewMode === "compact"}
+        <div class="divide-neutral/20 my-2 mb-8 divide-y">
+          {#each groupProducts as productModel (productModel.data.$id)}
+            <ProductCardCompact
+              {productModel}
+              {shouldShowActionButtons}
+              {onOpenModal}
+              {onQuickValidation}
+            />
+          {/each}
+        </div>
+      {:else}
+        <div class="mt-4 mb-8 space-y-4 sm:space-y-2">
+          {#each groupProducts as productModel (productModel.data.$id)}
+            <ProductCard
+              {productModel}
+              {shouldShowActionButtons}
+              {onOpenModal}
+              {onQuickValidation}
+            />
+          {/each}
+        </div>
+      {/if}
     </div>
   {/each}
 
@@ -320,7 +370,7 @@
 
 <!-- Vue TABLEAU pour l'impression (Alternative compacte) -->
 <div class="print-only w-full">
-  {#each Object.entries(groupedFilteredProducts) as [groupKey, groupProducts] (groupKey)}
+  {#each Object.entries(groupedProducts) as [groupKey, groupProducts] (groupKey)}
     <div class="break-inside-avoid">
       {#if groupKey !== ""}
         <div class="mt-6 mb-2">
@@ -457,7 +507,7 @@
   {/each}
 </div>
 
-{#if Object.values(groupedFilteredProducts).flat().length === 0}
+{#if Object.values(groupedProducts).flat().length === 0}
   <div class="py-8 text-center">
     <div class="alert alert-info max-md:alert-vertical">
       <svg

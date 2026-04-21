@@ -88,7 +88,7 @@
 
 <!-- Card du produit -->
 <div
-  transition:fade
+  out:fade
   class="card bg-base-100 overflow-x-clip {globalState.isMobile &&
     'border-base-300 border shadow'} {product.status === 'isSyncing'
     ? 'border-accent bg-accent/30 animate-pulse border-2'
@@ -351,9 +351,7 @@
                 ><span class="font-light">manque : </span>
                 {productInDateRange.formattedMissingQuantities}</span
               >
-              <span class="text-primary">
-                <IconSprite name="add-to-cart" size={16} /></span
-              >
+              <IconSprite name="add-to-cart" size={16} />
             </button>
           {:else if shouldShowActionButtons}
             <CircleCheckBig size={24} class="text-success ms-auto" />

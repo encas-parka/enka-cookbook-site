@@ -257,6 +257,9 @@ class NotificationStore {
           console.log(
             "[NotificationStore] ✅ Calling productsStore.syncFromAppwrite()",
           );
+          // Les Cloud Functions ne déclenchent pas toujours les événements
+          // realtime Appwrite vers les clients. Un delta sync explicite
+          // garantit que Dexie → liveQuery → #onDataChange est à jour.
           await productsStore.syncFromAppwrite();
 
           if (notif.from && notif.from !== globalState.userId) {

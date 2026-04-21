@@ -22,6 +22,7 @@
     Pencil,
     Plus,
     User,
+    MessageSquare,
   } from "@lucide/svelte";
 
   interface Props {
@@ -55,26 +56,53 @@
   <div class="card-body">
     <!-- Header row -->
     <div class="flex flex-wrap items-center gap-3">
-      <div class="flex items-center gap-3">
-        <!-- Type icon -->
-        <Package
-          class="{getMaterielTypeColorClass(header.type)} size-5 shrink-0"
-        />
+      <div class="flex flex-1 flex-col gap-1">
+        <div class="flex flex-wrap items-center gap-3">
+          <!-- Type icon -->
+          <Package
+            class="{getMaterielTypeColorClass(header.type)} size-5 shrink-0"
+          />
 
-        <!-- Name -->
-        <span class="truncate text-base font-medium">{header.name || ""}</span>
+          <!-- Name -->
+          <span class="truncate text-base font-medium">{header.name || ""}</span
+          >
 
-        <!-- Quantity -->
-        <span class="badge badge-ghost badge-sm">x{header.quantity || 0}</span>
+          <!-- Quantity -->
+          <span class="badge badge-ghost badge-sm">x{header.quantity || 0}</span
+          >
 
-        <!-- Type badge -->
-        <span
-          class="badge hidden sm:flex {getMaterielTypeBadgeClass(
-            header.type,
-          )} badge-soft badge-sm gap-1 py-0"
-        >
-          {getMaterielTypeConfig(header.type).label}
-        </span>
+          <!-- Type badge -->
+          <span
+            class="badge hidden sm:flex {getMaterielTypeBadgeClass(
+              header.type,
+            )} badge-soft badge-sm gap-1 py-0"
+          >
+            {getMaterielTypeConfig(header.type).label}
+          </span>
+          {#if canEdit}
+            <button
+              class="btn btn-ghost btn-sm btn-squarre"
+              onclick={handleEditHeader}
+              title="Editer"
+            >
+              <Pencil class="size-3" />
+            </button>
+          {/if}
+        </div>
+        <!-- Note row -->
+        {#if header.notes}
+          <div class="flex items-center gap-1 ps-4 text-xs italic opacity-50">
+            <MessageSquare class="size-3 shrink-0" />
+            <button
+              class="max-w-54 truncate p-0 text-left transition-opacity hover:opacity-100"
+              onclick={handleEditHeader}
+            >
+              {header.notes.length > 80
+                ? header.notes.slice(0, 80) + "..."
+                : header.notes}
+            </button>
+          </div>
+        {/if}
       </div>
       <!-- Status badges -->
       <div class="ml-auto">
@@ -88,9 +116,7 @@
 
     <!-- Allocations (always visible) -->
     {#if group.allocations.length > 0}
-      <div
-        class="border-base-200 bg-base-200/30 flex flex-wrap items-center gap-x-4 gap-y-2 border-t"
-      >
+      <div class="flex flex-wrap items-center gap-x-4 gap-y-2 p-2">
         {#each group.allocations as alloc (alloc.$id)}
           {@const allocStatus = eventMaterielStore.resolveStatus(alloc)}
           {@const allocConfig = getEventMaterielStatusConfig(allocStatus)}
@@ -101,7 +127,7 @@
                 ? CircleDot
                 : CircleAlert}
           <button
-            class="badge badge-lg badge-outline {allocConfig.badgeClass} group hover:cursor-pointer hover:shadow-sm"
+            class="badge badge-xl badge-outline {allocConfig.badgeClass} group hover:cursor-pointer hover:shadow-sm"
             onclick={(e) => {
               e.stopPropagation();
               onEditItem && !alloc.loanId ? onEditItem(alloc) : null;
@@ -111,19 +137,19 @@
           >
             <!-- Alloc info -->
             {#if alloc.where}
-              <div class="flex items-center gap-1 text-sm">
+              <div class="flex items-center gap-1 sm:text-sm">
                 <MapPin class="h-3 w-3 shrink-0" />
                 <span class="max-w-40 truncate">{alloc.where}</span>
               </div>
             {/if}
             {#if alloc.who}
-              <div class="flex items-center gap-1 text-sm">
+              <div class="flex items-center gap-1 sm:text-sm">
                 <User class="h-3 w-3 shrink-0" />
                 <span class="truncate">{alloc.who}</span>
               </div>
             {/if}
             {#if alloc.fromTeamName}
-              <span class="text-base-content/50 text-xs">
+              <span class="text-base-content/50 text-sm sm:text-xs">
                 ({alloc.fromTeamName})
               </span>
             {/if}
@@ -152,21 +178,7 @@
           </button>
         {/each}
 
-        <!-- Add allocation button -->
-        {#if canEdit && onAddAllocation && group.remainingQty > 0}
-          <div class="ms-auto pt-2">
-            <button
-              class="btn btn-ghost btn-xs text-primary gap-1"
-              onclick={(e) => {
-                e.stopPropagation();
-                onAddAllocation(header.$id);
-              }}
-            >
-              <Plus class="size-3.5" />
-              Ajouter
-            </button>
-          </div>
-        {/if}
+        <!-- Add allocation button removed -->
       </div>
     {/if}
   </div>

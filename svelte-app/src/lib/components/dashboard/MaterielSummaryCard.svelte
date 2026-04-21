@@ -1,7 +1,6 @@
 <script lang="ts">
   import { Package, ArrowRight } from "@lucide/svelte";
   import { navigate } from "$lib/router";
-  import { materielStore } from "$lib/stores/MaterielStore.svelte";
 
   interface Props {
     loading?: boolean;

@@ -282,7 +282,7 @@
             </div>
 
             <select
-              class="select select-sm select-bordered w-full"
+              class="select select-sm w-full"
               bind:value={config[fontKey]}
             >
               <option value="montserrat-font">Montserrat (Standard)</option>

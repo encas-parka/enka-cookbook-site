@@ -12,20 +12,28 @@
   import LeftPanel from "$lib/components/ui/LeftPanel.svelte";
   import AutocompleteInput from "$lib/components/ui/AutocompleteInput.svelte";
   import { formatDateShort } from "$lib/utils/products-display";
+  import EventCalendar from "$lib/components/EventCalendar.svelte";
   import {
     ArrowLeft,
     Calendar,
+    CalendarDays,
     CookingPot,
     Utensils,
     Eye,
     X,
     Funnel,
     Printer,
+    CalendarMinus,
   } from "@lucide/svelte";
-  import { extractTime, formatDateWdDayMonth } from "../utils/date-helpers";
+  import {
+    extractTime,
+    formatDateWdDayMonth,
+    extractDate,
+    formatDateWdDayMonthShort,
+  } from "../utils/date-helpers";
   import { globalState } from "../stores/GlobalState.svelte";
   import { navBarStore } from "../stores/NavBarStore.svelte";
-  import { fade } from "svelte/transition";
+  import { fade, slide } from "svelte/transition";
 
   // État local
   let loading = $state(true);
@@ -167,6 +175,123 @@
     return groups;
   });
 
+  // ============================================================================
+  // CALENDRIER : colonnes de dates × moments pour EventCalendar
+  // ============================================================================
+
+  const showCalendar = $derived(mealsByDate.size >= 3);
+
+  // Toggle utilisateur : afficher/masquer le calendrier
+  // svelte-ignore state_referenced_locally
+  let calendarVisible = $state(showCalendar);
+
+  // Synchroniser la valeur par défaut quand les données changent
+  $effect(() => {
+    if (showCalendar && !calendarVisible) calendarVisible = true;
+  });
+
+  // Le calendrier est pertinent uniquement s'il y a des dates
+  const canShowCalendar = $derived(mealsByDate.size > 0);
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  type CalendarRecipeInfo = {
+    recipeUuid: string;
+    title: string;
+    plates: number;
+    mealDate: string;
+    typeR: string;
+    preparation24h: string | null;
+  };
+
+  const TYPE_ORDER: Record<string, number> = {
+    entree: 0,
+    plat: 1,
+    dessert: 2,
+    autre: 3,
+  };
+
+  const calendarColumns = $derived.by(() => {
+    type ColumnData = {
+      label: string;
+      mealsByMoment: Map<string, CalendarRecipeInfo[]>;
+    };
+    const dateMap = new Map<string, ColumnData>();
+
+    eventMeals.forEach((meal: any) => {
+      if (meal.date === "") return;
+
+      const dateISO = extractDate(meal.date);
+      const moment = extractTime(meal.date);
+
+      if (!dateMap.has(dateISO)) {
+        dateMap.set(dateISO, {
+          label: formatDateWdDayMonthShort(meal.date),
+          mealsByMoment: new Map(),
+        });
+      }
+
+      const col = dateMap.get(dateISO)!;
+
+      meal.recipes.forEach((mealRecipe: any) => {
+        const recipe = recipesDetails.find(
+          (r: any) => r.$id === mealRecipe.recipeUuid,
+        );
+        if (!recipe) return;
+
+        if (!col.mealsByMoment.has(moment)) {
+          col.mealsByMoment.set(moment, []);
+        }
+        col.mealsByMoment.get(moment)!.push({
+          recipeUuid: mealRecipe.recipeUuid,
+          title: recipe.title,
+          plates: mealRecipe.plates ?? meal.guests ?? 0,
+          mealDate: meal.date,
+          typeR: mealRecipe.typeR ?? "autre",
+          preparation24h: recipe.preparation24h ?? null,
+        });
+      });
+    });
+
+    // Trier par date ISO et trier les recettes par typeR dans chaque moment
+    return Array.from(dateMap.keys())
+      .sort()
+      .map((dateISO) => {
+        const data = dateMap.get(dateISO)!;
+        // Trier chaque moment par typeR (entree → plat → dessert → autre)
+        data.mealsByMoment.forEach((recipes) => {
+          recipes.sort(
+            (a, b) => (TYPE_ORDER[a.typeR] ?? 9) - (TYPE_ORDER[b.typeR] ?? 9),
+          );
+        });
+        return {
+          dateISO,
+          label: data.label,
+          mealsByMoment: data.mealsByMoment,
+        };
+      });
+  });
+
+  const undatedCalendarRecipes = $derived.by(() => {
+    const recipes: CalendarRecipeInfo[] = [];
+    undatedMeals.forEach((meal: any) => {
+      meal.recipes.forEach((mealRecipe: any) => {
+        const recipe = recipesDetails.find(
+          (r: any) => r.$id === mealRecipe.recipeUuid,
+        );
+        if (!recipe) return;
+        recipes.push({
+          recipeUuid: mealRecipe.recipeUuid,
+          title: recipe.title,
+          plates: mealRecipe.plates ?? meal.guests ?? 0,
+          mealDate: "undated",
+          typeR: mealRecipe.typeR ?? "autre",
+          preparation24h: recipe.preparation24h ?? null,
+        });
+      });
+    });
+    return recipes;
+  });
+
   // Calculer les informations de l'événement
   const eventName = $derived(currentEvent?.name ?? "");
   const startDate = $derived(currentEvent?.dateStart ?? null);
@@ -259,7 +384,7 @@
   });
 
   // ============================================================================
-  // SCROLL : vers le header du meal ciblé quand les données sont prêtes
+  // SCROLL : vers la zone recettes quand les données sont prêtes
   // ============================================================================
 
   $effect(() => {
@@ -268,11 +393,12 @@
     if (eventMeals.length === 0) return;
 
     tick().then(() => {
-      // D'abord se assurer d'être en haut (utile quand on vient d'une autre page)
-      window.scrollTo({ top: 0, behavior: "instant" });
-      requestAnimationFrame(() => {
-        scrollTo({ top: 0, behavior: "smooth" });
-      });
+      const anchor = document.getElementById("recipes-anchor");
+      if (anchor) {
+        anchor.scrollIntoView({ behavior: "smooth", block: "start" });
+      } else {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
     });
   });
 
@@ -310,6 +436,7 @@
   $effect(() => {
     navBarStore.setConfig({
       actions: navActions,
+      stickyLeftPanel: calendarVisible,
     });
   });
 
@@ -360,300 +487,16 @@
   </div>
 {/snippet}
 
-<div class="bg-base-200 overflow-x-hidden" in:fade>
-  <!-- LeftPanel avec recherche et sommaire -->
-  <div class="print:hidden">
-    <LeftPanel>
-      <!-- Champ de recherche par ingrédient avec autocomplétion -->
-      <button
-        class="absolute -z-50 size-0 opacity-0"
-        tabindex="-1"
-        aria-hidden="true"
-      ></button>
-      <div>
-        <h3 class="mb-3 text-lg font-semibold">Rechercher par ingrédient</h3>
+<div class="bg-base-200 overflow-x-clip" in:fade>
+  {#if !loading && eventName}
+    <!-- ═══════════════════════════════════════════════════════════ -->
+    <!-- HEADER : titre, dates, stats (uniquement mode calendrier) -->
+    <!-- ═══════════════════════════════════════════════════════════ -->
 
-        <div class="relative mb-4">
-          <AutocompleteInput
-            items={availableIngredientsForAutocomplete}
-            onSelect={selectIngredient}
-            placeholder={urlFilter.ingredient || "Filtrer par ingrédients..."}
-            minQueryLength={1}
-            bind:value={ingredientSearch}
-          />
-          {#if urlFilter.ingredient}
-            <button
-              class="btn btn-circle btn-error btn-outline btn-xs absolute top-1/2 right-2 z-10 -translate-y-1/2 opacity-60 hover:opacity-100"
-              onclick={resetIngredientFilter}
-              aria-label="Effacer la recherche"
-            >
-              <X size={14} />
-            </button>
-          {/if}
-        </div>
-      </div>
-
-      <!-- Sommaire réactif des recettes avec filtrage -->
-      <ul class="menu bg-base-100 rounded-box w-full drop-shadow-lg">
-        {#each Array.from(mealsByDate.entries()) as [date, times] (date)}
-          {@const dateISO =
-            Array.from(
-              (times as Map<string, any[]>).values(),
-            )[0]?.[0]?.date?.split("T")[0] ?? ""}
-          <li>
-            <button
-              class="btn btn-sm justify-start {urlFilter.mealDate === dateISO &&
-              !urlFilter.recipeUuid
-                ? 'btn-accent'
-                : 'btn-ghost'}"
-              onclick={() => {
-                if (urlFilter.mealDate === dateISO && !urlFilter.recipeUuid) {
-                  clearAllFilters();
-                } else {
-                  setFilterMeal(dateISO);
-                }
-              }}
-            >
-              <span>{date}</span>
-            </button>
-          </li>
-
-          <ul>
-            {#each Array.from((times as Map<string, any[]>).entries()) as [time, meals] (time)}
-              {@const mealISO = meals[0].date}
-              <li>
-                <button
-                  class="btn btn-sm mb-1 h-auto justify-start pl-4 {urlFilter.mealDate ===
-                    mealISO && !urlFilter.recipeUuid
-                    ? 'btn-accent'
-                    : 'btn-ghost '}"
-                  onclick={() => {
-                    if (
-                      urlFilter.mealDate === mealISO &&
-                      !urlFilter.recipeUuid
-                    ) {
-                      clearAllFilters();
-                    } else {
-                      setFilterMeal(mealISO);
-                    }
-                  }}
-                >
-                  <span class="flex w-full items-center justify-between">
-                    <span>
-                      {time === "matin" ? "🌅" : time === "midi" ? "☀️" : "🌙"}
-                      {time}
-                    </span>
-                  </span>
-                </button>
-              </li>
-              <ul>
-                {#each meals[0].recipes as mealRecipe, recipeIndex (mealRecipe.recipeUuid + "-" + recipeIndex)}
-                  {@const recipe = recipesDetails.find(
-                    (r) => r.$id === mealRecipe.recipeUuid,
-                  )}
-                  {#if recipe}
-                    <li>
-                      <button
-                        class="btn btn-sm mb-1 ml-8 justify-start {urlFilter.recipeUuid ===
-                        mealRecipe.recipeUuid
-                          ? 'btn-accent'
-                          : 'btn-ghost'}"
-                        onclick={() => {
-                          if (urlFilter.recipeUuid === mealRecipe.recipeUuid) {
-                            clearAllFilters();
-                          } else {
-                            setFilterRecipe(mealRecipe.recipeUuid, mealISO);
-                          }
-                        }}
-                      >
-                        <span class="truncate text-left leading-none text-wrap">
-                          {recipe.title}
-                        </span>
-                      </button>
-                    </li>
-                  {/if}
-                {/each}
-              </ul>
-            {/each}
-          </ul>
-        {/each}
-
-        <!-- Section "Mise de côté" dans le sommaire -->
-        {#if undatedMeals.length > 0}
-          <li class="mt-2">
-            <button
-              class="btn btn-sm justify-start {urlFilter.mealDate ===
-                'undated' && !urlFilter.recipeUuid
-                ? 'btn-accent'
-                : 'btn-ghost'}"
-              onclick={() => {
-                if (urlFilter.mealDate === "undated" && !urlFilter.recipeUuid) {
-                  clearAllFilters();
-                } else {
-                  setFilterMeal("undated");
-                }
-              }}
-            >
-              <span
-                >📌 Mise de côté ({undatedMeals.reduce(
-                  (count, m) => count + m.recipes.length,
-                  0,
-                )})</span
-              >
-            </button>
-          </li>
-          {#if urlFilter.mealDate === "undated"}
-            <ul>
-              {#each undatedMeals as undatedMeal (undatedMeal.id)}
-                {#each undatedMeal.recipes as mealRecipe, recipeIndex (mealRecipe.recipeUuid + "-" + recipeIndex)}
-                  {@const recipe = recipesDetails.find(
-                    (r) => r.$id === mealRecipe.recipeUuid,
-                  )}
-                  {#if recipe}
-                    <li>
-                      <button
-                        class="btn btn-sm mb-1 ml-4 justify-start {urlFilter.recipeUuid ===
-                        mealRecipe.recipeUuid
-                          ? 'btn-accent'
-                          : 'btn-ghost'}"
-                        onclick={() => {
-                          if (urlFilter.recipeUuid === mealRecipe.recipeUuid) {
-                            clearAllFilters();
-                          } else {
-                            setFilterRecipe(mealRecipe.recipeUuid, "undated");
-                          }
-                        }}
-                      >
-                        <span class="truncate text-left text-wrap">
-                          {recipe.title}
-                        </span>
-                      </button>
-                    </li>
-                  {/if}
-                {/each}
-              {/each}
-            </ul>
-          {/if}
-        {/if}
-      </ul>
-
-      {#if hasActiveFilter}
-        <div class="my-4">
-          <button
-            class="btn btn-dash btn-block btn-primary"
-            onclick={clearAllFilters}
-            aria-label="Afficher toutes les recettes"
-          >
-            <Eye size={18} />
-            Afficher toutes les recettes
-          </button>
-        </div>
-      {/if}
-    </LeftPanel>
-  </div>
-  <!-- Contenu principal -->
-  <div class="print:ml-0 {globalState.isDesktop && ' ml-96'}">
-    <div class="mx-auto max-w-6xl p-4 pb-20">
-      <!-- En-tête de l'événement -->
-      {#if loading}
-        <!-- Skeleton de l'en-tête -->
-        <div class="mb-8 space-y-4 print:hidden">
-          <div class="flex flex-wrap items-center justify-between gap-4">
-            <div class="space-y-2">
-              <div class="skeleton h-6 w-64"></div>
-              <div class="skeleton h-4 w-48"></div>
-            </div>
-          </div>
-          <div class="flex justify-end p-4">
-            <div class="skeleton h-10 w-3/4"></div>
-          </div>
-        </div>
-
-        <!-- Skeleton des cartes de recettes -->
-        <div class="space-y-10 print:hidden">
-          {#each Array(3) as _, i}
-            <div class="space-y-6">
-              <!-- Skeleton de l'en-tête de repas -->
-              <div
-                class="card bg-accent/20 flex flex-row items-center justify-center gap-6 p-4"
-              >
-                <div class="skeleton h-6 w-32"></div>
-                <div class="skeleton h-6 w-20"></div>
-                <div class="skeleton h-8 w-16 rounded-full"></div>
-                <div class="skeleton h-8 w-16 rounded-full"></div>
-              </div>
-
-              <!-- Skeleton de la carte de recette -->
-              <div class="card bg-base-100 shadow-xl">
-                <div class="card-body">
-                  <div class="flex justify-between">
-                    <div class="flex-1">
-                      <div class="mb-4">
-                        <div class="skeleton mb-2 h-8 w-3/4"></div>
-                        <div class="flex gap-2">
-                          <div class="skeleton h-5 w-20 rounded-full"></div>
-                          <div class="skeleton h-5 w-16 rounded-full"></div>
-                        </div>
-                      </div>
-
-                      <!-- Skeleton des métadonnées -->
-                      <div class="mb-4 flex flex-wrap gap-4 text-sm">
-                        <div class="skeleton h-4 w-24"></div>
-                        <div class="skeleton h-4 w-24"></div>
-                        <div class="skeleton h-4 w-24"></div>
-                      </div>
-
-                      <!-- Skeleton des ingrédients -->
-                      <div class="mb-6">
-                        <h3
-                          class="mb-2 flex items-center gap-2 font-semibold"
-                          aria-label="Chargement des ingrédients"
-                        >
-                          <div class="skeleton h-5 w-6"></div>
-                          <div class="skeleton h-5 w-32"></div>
-                        </h3>
-                        <div class="space-y-2">
-                          {#each Array(4) as _, j}
-                            <div class="skeleton h-4 w-full"></div>
-                          {/each}
-                        </div>
-                      </div>
-
-                      <!-- Skeleton de la préparation -->
-                      <div>
-                        <h3
-                          class="mb-2 flex items-center gap-2 font-semibold"
-                          aria-label="Chargement de la préparation"
-                        >
-                          <div class="skeleton h-5 w-6"></div>
-                          <div class="skeleton h-5 w-32"></div>
-                        </h3>
-                        <div class="space-y-2">
-                          {#each Array(3) as _, k}
-                            <div class="flex gap-2">
-                              <div class="skeleton h-4 w-6 shrink-0"></div>
-                              <div class="skeleton h-4 w-full"></div>
-                            </div>
-                          {/each}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          {/each}
-        </div>
-      {:else if error}
-        <div class="alert alert-error">
-          <div>
-            <h3 class="font-bold">Erreur</h3>
-            <div>{error}</div>
-          </div>
-        </div>
-      {:else if eventName}
-        <!-- Informations principales -->
-        <div class="mb-8 space-y-4 print:hidden">
+    {#if calendarVisible}
+      <!-- En-tête événement (pleine largeur) -->
+      <div class="mx-auto max-w-6xl p-4 pb-0 print:hidden">
+        <div class="mb-4 space-y-4">
           <div class="flex flex-wrap items-center justify-between gap-4">
             <div>
               <h1 class="">{eventName}</h1>
@@ -673,209 +516,985 @@
           <div class="flex justify-end p-4">
             <EventStats {currentEvent} />
           </div>
+        </div>
+      </div>
+    {/if}
 
-          <!-- filtre en cours -->
-          {#if hasActiveFilter}
-            <div class="m-4 flex flex-wrap items-center justify-center gap-2">
-              <div class="badge badge-xl badge-primary">
-                <Funnel class="mr-1 h-4 w-4" />
-                filtre :
-                {#if urlFilter.mealDate === "undated"}
-                  <span class="mr-1">📌 Mise de côté</span>
-                {/if}
-                {#if urlFilter.mealDate && urlFilter.mealDate !== "undated"}
-                  <span class="mr-1"
-                    >{urlFilter.mealDate.includes("T")
-                      ? formatDateWdDayMonth(urlFilter.mealDate)
-                      : urlFilter.mealDate}</span
-                  >
-                {/if}
-                {#if urlFilter.recipeUuid}
-                  <span class="mr-1"> recette</span>
-                {/if}
+    <!-- Toggle calendrier -->
+    {#if !showCalendar}
+      <div class="flex justify-end px-6">
+        <label class="btn btn-ghost swap" class:swap-active={calendarVisible}>
+          <input type="checkbox" bind:checked={calendarVisible} />
+          <CalendarMinus class="swap-on size-6" />
+          <CalendarDays class="swap-off size-6 opacity-40" />
+        </label>
+      </div>
+    {/if}
+
+    <!-- Calendrier (conditionnel) -->
+    {#if calendarVisible}
+      <div
+        class="max-w-9xl mx-auto px-2 py-6 sm:px-4 print:hidden"
+        transition:slide
+      >
+        <EventCalendar
+          columns={calendarColumns}
+          undatedRecipes={undatedCalendarRecipes}
+          selectedRecipeUuid={urlFilter.recipeUuid}
+          selectedMealDate={urlFilter.mealDate}
+          onFilterRecipe={setFilterRecipe}
+          onFilterMeal={setFilterMeal}
+          onClearFilters={clearAllFilters}
+        />
+      </div>
+    {/if}
+
+    {#if calendarVisible}
+      <!-- Zone LeftPanel sticky + contenu -->
+      <div id="recipes-anchor" class="flex">
+        <div class="print:hidden">
+          <LeftPanel sticky={true}>
+            <!-- Champ de recherche par ingrédient avec autocomplétion -->
+            <button
+              class="absolute -z-50 size-0 opacity-0"
+              tabindex="-1"
+              aria-hidden="true"
+            ></button>
+            <div>
+              <h3 class="mb-3 text-lg font-semibold">
+                Rechercher par ingrédient
+              </h3>
+
+              <div class="relative mb-4">
+                <AutocompleteInput
+                  items={availableIngredientsForAutocomplete}
+                  onSelect={selectIngredient}
+                  placeholder={urlFilter.ingredient ||
+                    "Filtrer par ingrédients..."}
+                  minQueryLength={1}
+                  bind:value={ingredientSearch}
+                />
                 {#if urlFilter.ingredient}
-                  <span>{urlFilter.ingredient}</span>
+                  <button
+                    class="btn btn-circle btn-error btn-outline btn-xs absolute top-1/2 right-2 z-10 -translate-y-1/2 opacity-60 hover:opacity-100"
+                    onclick={resetIngredientFilter}
+                    aria-label="Effacer la recherche"
+                  >
+                    <X size={14} />
+                  </button>
                 {/if}
               </div>
-              <button
-                class="btn btn-dash btn-sm"
-                onclick={clearAllFilters}
-                aria-label="Afficher toutes les recettes"
-              >
-                <Eye class="h-4 w-4" />
-                Afficher toutes les recettes
-              </button>
             </div>
-          {/if}
+
+            <!-- Sommaire réactif des recettes avec filtrage -->
+            <ul class="menu bg-base-100 rounded-box w-full drop-shadow-lg">
+              {#each Array.from(mealsByDate.entries()) as [date, times] (date)}
+                {@const dateISO =
+                  Array.from(
+                    (times as Map<string, any[]>).values(),
+                  )[0]?.[0]?.date?.split("T")[0] ?? ""}
+                <li>
+                  <button
+                    class="btn btn-sm justify-start {urlFilter.mealDate ===
+                      dateISO && !urlFilter.recipeUuid
+                      ? 'btn-accent'
+                      : 'btn-ghost'}"
+                    onclick={() => {
+                      if (
+                        urlFilter.mealDate === dateISO &&
+                        !urlFilter.recipeUuid
+                      ) {
+                        clearAllFilters();
+                      } else {
+                        setFilterMeal(dateISO);
+                      }
+                    }}
+                  >
+                    <span>{date}</span>
+                  </button>
+                </li>
+
+                <ul>
+                  {#each Array.from((times as Map<string, any[]>).entries()) as [time, meals] (time)}
+                    {@const mealISO = meals[0].date}
+                    <li>
+                      <button
+                        class="btn btn-sm mb-1 h-auto justify-start pl-4 {urlFilter.mealDate ===
+                          mealISO && !urlFilter.recipeUuid
+                          ? 'btn-accent'
+                          : 'btn-ghost '}"
+                        onclick={() => {
+                          if (
+                            urlFilter.mealDate === mealISO &&
+                            !urlFilter.recipeUuid
+                          ) {
+                            clearAllFilters();
+                          } else {
+                            setFilterMeal(mealISO);
+                          }
+                        }}
+                      >
+                        <span class="flex w-full items-center justify-between">
+                          <span>
+                            {time === "matin"
+                              ? "🌅"
+                              : time === "midi"
+                                ? "☀️"
+                                : "🌙"}
+                            {time}
+                          </span>
+                        </span>
+                      </button>
+                    </li>
+                    <ul>
+                      {#each meals[0].recipes as mealRecipe, recipeIndex (mealRecipe.recipeUuid + "-" + recipeIndex)}
+                        {@const recipe = recipesDetails.find(
+                          (r) => r.$id === mealRecipe.recipeUuid,
+                        )}
+                        {#if recipe}
+                          <li>
+                            <button
+                              class="btn btn-sm mb-1 ml-8 justify-start {urlFilter.recipeUuid ===
+                              mealRecipe.recipeUuid
+                                ? 'btn-accent'
+                                : 'btn-ghost'}"
+                              onclick={() => {
+                                if (
+                                  urlFilter.recipeUuid === mealRecipe.recipeUuid
+                                ) {
+                                  clearAllFilters();
+                                } else {
+                                  setFilterRecipe(
+                                    mealRecipe.recipeUuid,
+                                    mealISO,
+                                  );
+                                }
+                              }}
+                            >
+                              <span
+                                class="truncate text-left leading-none text-wrap"
+                              >
+                                {recipe.title}
+                              </span>
+                              {#if recipe.preparation24h}<span
+                                  class="status status-md status-warning pb-2"
+                                ></span>{/if}
+                            </button>
+                          </li>
+                        {/if}
+                      {/each}
+                    </ul>
+                  {/each}
+                </ul>
+              {/each}
+
+              <!-- Section "Mise de côté" dans le sommaire -->
+              {#if undatedMeals.length > 0}
+                <li class="mt-2">
+                  <button
+                    class="btn btn-sm justify-start {urlFilter.mealDate ===
+                      'undated' && !urlFilter.recipeUuid
+                      ? 'btn-accent'
+                      : 'btn-ghost'}"
+                    onclick={() => {
+                      if (
+                        urlFilter.mealDate === "undated" &&
+                        !urlFilter.recipeUuid
+                      ) {
+                        clearAllFilters();
+                      } else {
+                        setFilterMeal("undated");
+                      }
+                    }}
+                  >
+                    <span
+                      >📌 Mise de côté ({undatedMeals.reduce(
+                        (count, m) => count + m.recipes.length,
+                        0,
+                      )})</span
+                    >
+                  </button>
+                </li>
+                {#if urlFilter.mealDate === "undated"}
+                  <ul>
+                    {#each undatedMeals as undatedMeal (undatedMeal.id)}
+                      {#each undatedMeal.recipes as mealRecipe, recipeIndex (mealRecipe.recipeUuid + "-" + recipeIndex)}
+                        {@const recipe = recipesDetails.find(
+                          (r) => r.$id === mealRecipe.recipeUuid,
+                        )}
+                        {#if recipe}
+                          <li>
+                            <button
+                              class="btn btn-sm mb-1 ml-4 justify-start {urlFilter.recipeUuid ===
+                              mealRecipe.recipeUuid
+                                ? 'btn-accent'
+                                : 'btn-ghost'}"
+                              onclick={() => {
+                                if (
+                                  urlFilter.recipeUuid === mealRecipe.recipeUuid
+                                ) {
+                                  clearAllFilters();
+                                } else {
+                                  setFilterRecipe(
+                                    mealRecipe.recipeUuid,
+                                    "undated",
+                                  );
+                                }
+                              }}
+                            >
+                              <span class="truncate text-left text-wrap">
+                                {recipe.title}
+                              </span>
+                            </button>
+                          </li>
+                        {/if}
+                      {/each}
+                    {/each}
+                  </ul>
+                {/if}
+              {/if}
+            </ul>
+
+            {#if hasActiveFilter}
+              <div class="my-4">
+                <button
+                  class="btn btn-dash btn-block btn-primary"
+                  onclick={clearAllFilters}
+                  aria-label="Afficher toutes les recettes"
+                >
+                  <Eye size={18} />
+                  Afficher toutes les recettes
+                </button>
+              </div>
+            {/if}
+          </LeftPanel>
         </div>
 
-        <!-- Grille des recettes -->
-        {#if urlFilter.ingredient}
-          <!-- Mode recherche par ingrédient : afficher les recettes filtrées -->
-          {#if filteredRecipes.length === 0}
-            <div
-              class="bg-base-100 border-base-300 rounded-xl border p-8 text-center print:hidden"
-            >
-              <p class="text-base-content/60 text-lg">
-                Aucune recette ne contient l'ingrédient "{urlFilter.ingredient}".
-              </p>
-            </div>
-          {:else}
-            <div class="space-y-8 print:space-y-0">
-              {#each paginatedMeals as meal, mealIndex (meal.id || mealIndex)}
-                {@const recipesMatchingSearch = meal.recipes.filter((mr: any) =>
-                  filteredRecipes.some((fr) => fr.$id === mr.recipeUuid),
-                )}
-                {#if recipesMatchingSearch.length > 0}
-                  <!-- Date break / Mise de côté header -->
-                  <div
-                    id="meal-{meal.date || 'undated'}"
-                    class="card my-4 flex flex-row items-center justify-center gap-6 px-4 py-2 font-black print:hidden {meal.date
-                      ? 'bg-accent text-accent-content'
-                      : 'bg-warning/20 text-warning-content'}"
-                  >
-                    {#if meal.date}
-                      <div class="">
-                        {formatDateWdDayMonth(meal.date)}
-                      </div>
-                      <div>{extractTime(meal.date)}</div>
-                    {:else}
-                      <div class="flex items-center gap-2">
-                        <span>📌</span>
-                        <span>Mise de côté</span>
-                      </div>
-                    {/if}
-                    <div class="badge badge-outline">
-                      <Utensils size={16} />
-                      {meal.guests}
-                    </div>
-                    <div class="badge badge-outline">
-                      <CookingPot size={16} />
-                      {recipesMatchingSearch.length}
-                    </div>
-                  </div>
-
-                  <!-- Recettes qui correspondent à la recherche -->
-                  {#each recipesMatchingSearch as mealRecipe, recipeIndex ((meal.id || mealIndex) + "-" + mealRecipe.recipeUuid + "-" + recipeIndex)}
-                    {@const recipe = recipesDetails.find(
-                      (r) => r.$id === mealRecipe.recipeUuid,
+        <!-- Contenu principal (sans ml-96 car LeftPanel est sticky dans le flux) -->
+        <div class="flex-1">
+          <div class="mx-auto max-w-6xl p-4 pb-20">
+            {#if urlFilter.ingredient}
+              <!-- Mode recherche par ingrédient -->
+              {#if filteredRecipes.length === 0}
+                <div
+                  class="bg-base-100 border-base-300 rounded-xl border p-8 text-center print:hidden"
+                >
+                  <p class="text-base-content/60 text-lg">
+                    Aucune recette ne contient l'ingrédient "{urlFilter.ingredient}".
+                  </p>
+                </div>
+              {:else}
+                <div class="space-y-8 print:space-y-0">
+                  {#each paginatedMeals as meal, mealIndex (meal.id || mealIndex)}
+                    {@const recipesMatchingSearch = meal.recipes.filter(
+                      (mr: any) =>
+                        filteredRecipes.some((fr) => fr.$id === mr.recipeUuid),
                     )}
-                    <div class="page-break-after mb-8">
-                      {#if recipe}
-                        <EventRecipeCard
-                          {recipe}
-                          {meal}
-                          {mealRecipe}
-                          {totalGuests}
-                        />
-                      {/if}
-                    </div>
-                  {/each}
-                {/if}
-              {/each}
-            </div>
-          {/if}
-        {:else}
-          <!-- Mode normal : afficher les repas filtrés par meal/recette -->
-          {#if filteredMeals.length === 0 && urlFilter.mealDate}
-            <div
-              class="bg-base-100 border-base-300 rounded-xl border p-8 text-center"
-            >
-              <p class="text-base-content/60 text-lg">
-                Aucune recette ne correspond aux filtres sélectionnés.
-              </p>
-              <button class="btn btn-primary mt-4" onclick={clearAllFilters}>
-                Réinitialiser les filtres
-              </button>
-            </div>
-          {:else}
-            <div class="space-y-10 print:space-y-0">
-              {#each paginatedMeals as meal, mealIndex (meal.id || mealIndex)}
-                {@const mealRecipesToDisplay = urlFilter.recipeUuid
-                  ? meal.recipes.filter(
-                      (mr: any) => mr.recipeUuid === urlFilter.recipeUuid,
-                    )
-                  : meal.recipes}
+                    {#if recipesMatchingSearch.length > 0}
+                      <div
+                        id="meal-{meal.date || 'undated'}"
+                        class="card my-4 flex flex-row items-center justify-center gap-6 px-4 py-2 font-black print:hidden {meal.date
+                          ? 'bg-accent text-accent-content'
+                          : 'bg-warning/20 text-warning-content'}"
+                      >
+                        {#if meal.date}
+                          <div class="">
+                            {formatDateWdDayMonth(meal.date)}
+                          </div>
+                          <div>{extractTime(meal.date)}</div>
+                        {:else}
+                          <div class="flex items-center gap-2">
+                            <span>📌</span>
+                            <span>Mise de côté</span>
+                          </div>
+                        {/if}
+                        <div class="badge badge-outline">
+                          <Utensils size={16} />
+                          {meal.guests}
+                        </div>
+                        <div class="badge badge-outline">
+                          <CookingPot size={16} />
+                          {recipesMatchingSearch.length}
+                        </div>
+                      </div>
 
-                {#if mealRecipesToDisplay.length > 0}
-                  <!-- Date break / Mise de côté header -->
-                  <div
-                    id="meal-{meal.date || 'undated'}"
-                    class="card my-4 flex flex-row flex-wrap items-center justify-center gap-4 p-2 font-black shadow-lg sm:gap-6 sm:px-4 sm:py-2 print:hidden {meal.date
-                      ? 'bg-primary text-primary-content'
-                      : 'bg-warning/80 text-warning-content'}"
-                  >
-                    {#if meal.date}
-                      <div class="">
-                        {formatDateWdDayMonth(meal.date)}
-                      </div>
-                      <div>{extractTime(meal.date)}</div>
-                    {:else}
-                      <div class="flex items-center gap-2">
-                        <span>📌</span>
-                        <span>Mise de côté</span>
-                      </div>
+                      {#each recipesMatchingSearch as mealRecipe, recipeIndex ((meal.id || mealIndex) + "-" + mealRecipe.recipeUuid + "-" + recipeIndex)}
+                        {@const recipe = recipesDetails.find(
+                          (r) => r.$id === mealRecipe.recipeUuid,
+                        )}
+                        <div class="page-break-after mb-8">
+                          {#if recipe}
+                            <EventRecipeCard
+                              {recipe}
+                              {meal}
+                              {mealRecipe}
+                              {totalGuests}
+                            />
+                          {/if}
+                        </div>
+                      {/each}
                     {/if}
-                    <div class="badge badge-outline">
-                      <Utensils size={16} />
-                      {meal.guests}
-                    </div>
-                    <div class="badge badge-outline">
-                      <CookingPot size={16} />
-                      {mealRecipesToDisplay.length}
-                    </div>
-                  </div>
-
-                  <!-- Recettes -->
-                  {#each mealRecipesToDisplay as mealRecipe, recipeIndex ((meal.id || mealIndex) + "-" + mealRecipe.recipeUuid + "-" + recipeIndex)}
-                    {@const recipe = recipesDetails.find(
-                      (r) => r.$id === mealRecipe.recipeUuid,
-                    )}
-                    <div class="page-break-after">
-                      {#if recipe}
-                        <EventRecipeCard
-                          {recipe}
-                          {meal}
-                          {mealRecipe}
-                          {totalGuests}
-                        />
-                      {/if}
-                    </div>
                   {/each}
+                </div>
+              {/if}
+            {:else}
+              <!-- Mode normal -->
+              {#if filteredMeals.length === 0 && urlFilter.mealDate}
+                <div
+                  class="bg-base-100 border-base-300 rounded-xl border p-8 text-center"
+                >
+                  <p class="text-base-content/60 text-lg">
+                    Aucune recette ne correspond aux filtres sélectionnés.
+                  </p>
+                  <button
+                    class="btn btn-primary mt-4"
+                    onclick={clearAllFilters}
+                  >
+                    Réinitialiser les filtres
+                  </button>
+                </div>
+              {:else}
+                <div class="space-y-10 print:space-y-0">
+                  {#each paginatedMeals as meal, mealIndex (meal.id || mealIndex)}
+                    {@const mealRecipesToDisplay = urlFilter.recipeUuid
+                      ? meal.recipes.filter(
+                          (mr: any) => mr.recipeUuid === urlFilter.recipeUuid,
+                        )
+                      : meal.recipes}
+
+                    {#if mealRecipesToDisplay.length > 0}
+                      <div
+                        id="meal-{meal.date || 'undated'}"
+                        class="card my-4 flex flex-row flex-wrap items-center justify-center gap-4 p-2 font-black shadow-lg sm:gap-6 sm:px-4 sm:py-2 print:hidden {meal.date
+                          ? 'bg-primary text-primary-content'
+                          : 'bg-warning/80 text-warning-content'}"
+                      >
+                        {#if meal.date}
+                          <div class="">
+                            {formatDateWdDayMonth(meal.date)}
+                          </div>
+                          <div>{extractTime(meal.date)}</div>
+                        {:else}
+                          <div class="flex items-center gap-2">
+                            <span>📌</span>
+                            <span>Mise de côté</span>
+                          </div>
+                        {/if}
+                        <div class="badge badge-outline">
+                          <Utensils size={16} />
+                          {meal.guests}
+                        </div>
+                        <div class="badge badge-outline">
+                          <CookingPot size={16} />
+                          {mealRecipesToDisplay.length}
+                        </div>
+                      </div>
+
+                      {#each mealRecipesToDisplay as mealRecipe, recipeIndex ((meal.id || mealIndex) + "-" + mealRecipe.recipeUuid + "-" + recipeIndex)}
+                        {@const recipe = recipesDetails.find(
+                          (r) => r.$id === mealRecipe.recipeUuid,
+                        )}
+                        <div class="page-break-after">
+                          {#if recipe}
+                            <EventRecipeCard
+                              {recipe}
+                              {meal}
+                              {mealRecipe}
+                              {totalGuests}
+                            />
+                          {/if}
+                        </div>
+                      {/each}
+                    {/if}
+                  {/each}
+                </div>
+                {#if hasActiveFilter}
+                  <button
+                    class="btn btn-dash btn-block my-5"
+                    onclick={clearAllFilters}
+                    aria-label="Afficher toutes les recettes"
+                  >
+                    <Eye class="h-4 w-4" />
+                    Afficher toutes les recettes
+                  </button>
                 {/if}
-              {/each}
+              {/if}
+            {/if}
+
+            <!-- Sentinelle pour lazy loading -->
+            {#if paginatedMeals.length < mealsToPaginate.length}
+              <div bind:this={sentinel} class="py-8 text-center print:hidden">
+                <span class="loading loading-spinner loading-md"></span>
+              </div>
+            {/if}
+
+            <!-- Message si pas de recettes du tout -->
+            {#if !urlFilter.ingredient && recipesDetails.length === 0 && !loading}
+              <div
+                class="bg-base-100 border-base-300 rounded-xl border p-8 text-center"
+              >
+                <p class="text-base-content/60 text-lg">
+                  Aucune recette n'a encore été ajoutée à cet événement.
+                </p>
+              </div>
+            {/if}
+          </div>
+        </div>
+      </div>
+    {:else}
+      <!-- ═══════════════════════════════════════════════════════════ -->
+      <!-- MODE CLASSIQUE (sans calendrier) : layout original         -->
+      <!-- ═══════════════════════════════════════════════════════════ -->
+
+      <!-- LeftPanel avec recherche et sommaire -->
+      <div class="print:hidden">
+        <LeftPanel>
+          <!-- Champ de recherche par ingrédient avec autocomplétion -->
+          <button
+            class="absolute -z-50 size-0 opacity-0"
+            tabindex="-1"
+            aria-hidden="true"
+          ></button>
+          <div>
+            <h3 class="mb-3 text-lg font-semibold">
+              Rechercher par ingrédient
+            </h3>
+
+            <div class="relative mb-4">
+              <AutocompleteInput
+                items={availableIngredientsForAutocomplete}
+                onSelect={selectIngredient}
+                placeholder={urlFilter.ingredient ||
+                  "Filtrer par ingrédients..."}
+                minQueryLength={1}
+                bind:value={ingredientSearch}
+              />
+              {#if urlFilter.ingredient}
+                <button
+                  class="btn btn-circle btn-error btn-outline btn-xs absolute top-1/2 right-2 z-10 -translate-y-1/2 opacity-60 hover:opacity-100"
+                  onclick={resetIngredientFilter}
+                  aria-label="Effacer la recherche"
+                >
+                  <X size={14} />
+                </button>
+              {/if}
             </div>
-            {#if hasActiveFilter}
+          </div>
+
+          <!-- Sommaire réactif des recettes avec filtrage -->
+          <ul class="menu bg-base-100 rounded-box w-full drop-shadow-lg">
+            {#each Array.from(mealsByDate.entries()) as [date, times] (date)}
+              {@const dateISO =
+                Array.from(
+                  (times as Map<string, any[]>).values(),
+                )[0]?.[0]?.date?.split("T")[0] ?? ""}
+              <li>
+                <button
+                  class="btn btn-sm justify-start {urlFilter.mealDate ===
+                    dateISO && !urlFilter.recipeUuid
+                    ? 'btn-accent'
+                    : 'btn-ghost'}"
+                  onclick={() => {
+                    if (
+                      urlFilter.mealDate === dateISO &&
+                      !urlFilter.recipeUuid
+                    ) {
+                      clearAllFilters();
+                    } else {
+                      setFilterMeal(dateISO);
+                    }
+                  }}
+                >
+                  <span>{date}</span>
+                </button>
+              </li>
+
+              <ul>
+                {#each Array.from((times as Map<string, any[]>).entries()) as [time, meals] (time)}
+                  {@const mealISO = meals[0].date}
+                  <li>
+                    <button
+                      class="btn btn-sm mb-1 h-auto justify-start pl-4 {urlFilter.mealDate ===
+                        mealISO && !urlFilter.recipeUuid
+                        ? 'btn-accent'
+                        : 'btn-ghost '}"
+                      onclick={() => {
+                        if (
+                          urlFilter.mealDate === mealISO &&
+                          !urlFilter.recipeUuid
+                        ) {
+                          clearAllFilters();
+                        } else {
+                          setFilterMeal(mealISO);
+                        }
+                      }}
+                    >
+                      <span class="flex w-full items-center justify-between">
+                        <span>
+                          {time === "matin"
+                            ? "🌅"
+                            : time === "midi"
+                              ? "☀️"
+                              : "🌙"}
+                          {time}
+                        </span>
+                      </span>
+                    </button>
+                  </li>
+                  <ul>
+                    {#each meals[0].recipes as mealRecipe, recipeIndex (mealRecipe.recipeUuid + "-" + recipeIndex)}
+                      {@const recipe = recipesDetails.find(
+                        (r) => r.$id === mealRecipe.recipeUuid,
+                      )}
+                      {#if recipe}
+                        <li>
+                          <button
+                            class="btn btn-sm mb-1 ml-8 justify-start {urlFilter.recipeUuid ===
+                            mealRecipe.recipeUuid
+                              ? 'btn-accent'
+                              : 'btn-ghost'}"
+                            onclick={() => {
+                              if (
+                                urlFilter.recipeUuid === mealRecipe.recipeUuid
+                              ) {
+                                clearAllFilters();
+                              } else {
+                                setFilterRecipe(mealRecipe.recipeUuid, mealISO);
+                              }
+                            }}
+                          >
+                            <span
+                              class="truncate text-left leading-none text-wrap"
+                            >
+                              {recipe.title}
+                            </span>
+                          </button>
+                        </li>
+                      {/if}
+                    {/each}
+                  </ul>
+                {/each}
+              </ul>
+            {/each}
+
+            <!-- Section "Mise de côté" dans le sommaire -->
+            {#if undatedMeals.length > 0}
+              <li class="mt-2">
+                <button
+                  class="btn btn-sm justify-start {urlFilter.mealDate ===
+                    'undated' && !urlFilter.recipeUuid
+                    ? 'btn-accent'
+                    : 'btn-ghost'}"
+                  onclick={() => {
+                    if (
+                      urlFilter.mealDate === "undated" &&
+                      !urlFilter.recipeUuid
+                    ) {
+                      clearAllFilters();
+                    } else {
+                      setFilterMeal("undated");
+                    }
+                  }}
+                >
+                  <span
+                    >📌 Mise de côté ({undatedMeals.reduce(
+                      (count, m) => count + m.recipes.length,
+                      0,
+                    )})</span
+                  >
+                </button>
+              </li>
+              {#if urlFilter.mealDate === "undated"}
+                <ul>
+                  {#each undatedMeals as undatedMeal (undatedMeal.id)}
+                    {#each undatedMeal.recipes as mealRecipe, recipeIndex (mealRecipe.recipeUuid + "-" + recipeIndex)}
+                      {@const recipe = recipesDetails.find(
+                        (r) => r.$id === mealRecipe.recipeUuid,
+                      )}
+                      {#if recipe}
+                        <li>
+                          <button
+                            class="btn btn-sm mb-1 ml-4 justify-start {urlFilter.recipeUuid ===
+                            mealRecipe.recipeUuid
+                              ? 'btn-accent'
+                              : 'btn-ghost'}"
+                            onclick={() => {
+                              if (
+                                urlFilter.recipeUuid === mealRecipe.recipeUuid
+                              ) {
+                                clearAllFilters();
+                              } else {
+                                setFilterRecipe(
+                                  mealRecipe.recipeUuid,
+                                  "undated",
+                                );
+                              }
+                            }}
+                          >
+                            <span class="truncate text-left text-wrap">
+                              {recipe.title}
+                            </span>
+                          </button>
+                        </li>
+                      {/if}
+                    {/each}
+                  {/each}
+                </ul>
+              {/if}
+            {/if}
+          </ul>
+
+          {#if hasActiveFilter}
+            <div class="my-4">
               <button
-                class="btn btn-dash btn-block my-5"
+                class="btn btn-dash btn-block btn-primary"
                 onclick={clearAllFilters}
                 aria-label="Afficher toutes les recettes"
               >
-                <Eye class="h-4 w-4" />
+                <Eye size={18} />
                 Afficher toutes les recettes
               </button>
+            </div>
+          {/if}
+        </LeftPanel>
+      </div>
+
+      <!-- Contenu principal -->
+      <div
+        id="recipes-anchor"
+        class="print:ml-0 {globalState.isDesktop && ' ml-96'}"
+      >
+        <div class="mx-auto max-w-6xl p-4 pb-20">
+          <!-- En-tête de l'événement -->
+          {#if loading}
+            <!-- Skeleton de l'en-tête -->
+            <div class="mb-8 space-y-4 print:hidden">
+              <div class="flex flex-wrap items-center justify-between gap-4">
+                <div class="space-y-2">
+                  <div class="skeleton h-6 w-64"></div>
+                  <div class="skeleton h-4 w-48"></div>
+                </div>
+              </div>
+              <div class="flex justify-end p-4">
+                <div class="skeleton h-10 w-3/4"></div>
+              </div>
+            </div>
+
+            <!-- Skeleton des cartes de recettes -->
+            <div class="space-y-10 print:hidden">
+              {#each Array(3) as _, i}
+                <div class="space-y-6">
+                  <!-- Skeleton de l'en-tête de repas -->
+                  <div
+                    class="card bg-accent/20 flex flex-row items-center justify-center gap-6 p-4"
+                  >
+                    <div class="skeleton h-6 w-32"></div>
+                    <div class="skeleton h-6 w-20"></div>
+                    <div class="skeleton h-8 w-16 rounded-full"></div>
+                    <div class="skeleton h-8 w-16 rounded-full"></div>
+                  </div>
+
+                  <!-- Skeleton de la carte de recette -->
+                  <div class="card bg-base-100 shadow-xl">
+                    <div class="card-body">
+                      <div class="flex justify-between">
+                        <div class="flex-1">
+                          <div class="mb-4">
+                            <div class="skeleton mb-2 h-8 w-3/4"></div>
+                            <div class="flex gap-2">
+                              <div class="skeleton h-5 w-20 rounded-full"></div>
+                              <div class="skeleton h-5 w-16 rounded-full"></div>
+                            </div>
+                          </div>
+
+                          <!-- Skeleton des métadonnées -->
+                          <div class="mb-4 flex flex-wrap gap-4 text-sm">
+                            <div class="skeleton h-4 w-24"></div>
+                            <div class="skeleton h-4 w-24"></div>
+                            <div class="skeleton h-4 w-24"></div>
+                          </div>
+
+                          <!-- Skeleton des ingrédients -->
+                          <div class="mb-6">
+                            <h3
+                              class="mb-2 flex items-center gap-2 font-semibold"
+                              aria-label="Chargement des ingrédients"
+                            >
+                              <div class="skeleton h-5 w-6"></div>
+                              <div class="skeleton h-5 w-32"></div>
+                            </h3>
+                            <div class="space-y-2">
+                              {#each Array(4) as _, j}
+                                <div class="skeleton h-4 w-full"></div>
+                              {/each}
+                            </div>
+                          </div>
+
+                          <!-- Skeleton de la préparation -->
+                          <div>
+                            <h3
+                              class="mb-2 flex items-center gap-2 font-semibold"
+                              aria-label="Chargement de la préparation"
+                            >
+                              <div class="skeleton h-5 w-6"></div>
+                              <div class="skeleton h-5 w-32"></div>
+                            </h3>
+                            <div class="space-y-2">
+                              {#each Array(3) as _, k}
+                                <div class="flex gap-2">
+                                  <div class="skeleton h-4 w-6 shrink-0"></div>
+                                  <div class="skeleton h-4 w-full"></div>
+                                </div>
+                              {/each}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              {/each}
+            </div>
+          {:else if error}
+            <div class="alert alert-error">
+              <div>
+                <h3 class="font-bold">Erreur</h3>
+                <div>{error}</div>
+              </div>
+            </div>
+          {:else if eventName}
+            <!-- Informations principales -->
+            <div class="mb-8 space-y-4 print:hidden">
+              <div class="flex flex-wrap items-center justify-between gap-4">
+                <div>
+                  <h1 class="">{eventName}</h1>
+                  <div class="text-base-content/60 text-sm">
+                    {#if startDate && endDate}
+                      <Calendar class="inline h-4 w-4" />
+                      {formatDateShort(startDate)} au {formatDateShort(endDate)}
+                    {:else if startDate}
+                      <Calendar class="inline h-4 w-4" />
+                      {formatDateShort(startDate)}
+                    {/if}
+                  </div>
+                </div>
+              </div>
+
+              <!-- Statistiques -->
+              <div class="flex justify-end p-4">
+                <EventStats {currentEvent} />
+              </div>
+
+              <!-- filtre en cours -->
+              {#if hasActiveFilter}
+                <div
+                  class="m-4 flex flex-wrap items-center justify-center gap-2"
+                >
+                  <div class="badge badge-xl badge-primary">
+                    <Funnel class="mr-1 h-4 w-4" />
+                    filtre :
+                    {#if urlFilter.mealDate === "undated"}
+                      <span class="mr-1">📌 Mise de côté</span>
+                    {/if}
+                    {#if urlFilter.mealDate && urlFilter.mealDate !== "undated"}
+                      <span class="mr-1"
+                        >{urlFilter.mealDate.includes("T")
+                          ? formatDateWdDayMonth(urlFilter.mealDate)
+                          : urlFilter.mealDate}</span
+                      >
+                    {/if}
+                    {#if urlFilter.recipeUuid}
+                      <span class="mr-1"> recette</span>
+                    {/if}
+                    {#if urlFilter.ingredient}
+                      <span>{urlFilter.ingredient}</span>
+                    {/if}
+                  </div>
+                  <button
+                    class="btn btn-dash btn-sm"
+                    onclick={clearAllFilters}
+                    aria-label="Afficher toutes les recettes"
+                  >
+                    <Eye class="h-4 w-4" />
+                    Afficher toutes les recettes
+                  </button>
+                </div>
+              {/if}
+            </div>
+
+            <!-- Grille des recettes -->
+            {#if urlFilter.ingredient}
+              <!-- Mode recherche par ingrédient : afficher les recettes filtrées -->
+              {#if filteredRecipes.length === 0}
+                <div
+                  class="bg-base-100 border-base-300 rounded-xl border p-8 text-center print:hidden"
+                >
+                  <p class="text-base-content/60 text-lg">
+                    Aucune recette ne contient l'ingrédient "{urlFilter.ingredient}".
+                  </p>
+                </div>
+              {:else}
+                <div class="space-y-8 print:space-y-0">
+                  {#each paginatedMeals as meal, mealIndex (meal.id || mealIndex)}
+                    {@const recipesMatchingSearch = meal.recipes.filter(
+                      (mr: any) =>
+                        filteredRecipes.some((fr) => fr.$id === mr.recipeUuid),
+                    )}
+                    {#if recipesMatchingSearch.length > 0}
+                      <!-- Date break / Mise de côté header -->
+                      <div
+                        id="meal-{meal.date || 'undated'}"
+                        class="card my-4 flex flex-row items-center justify-center gap-6 px-4 py-2 font-black print:hidden {meal.date
+                          ? 'bg-accent text-accent-content'
+                          : 'bg-warning/20 text-warning-content'}"
+                      >
+                        {#if meal.date}
+                          <div class="">
+                            {formatDateWdDayMonth(meal.date)}
+                          </div>
+                          <div>{extractTime(meal.date)}</div>
+                        {:else}
+                          <div class="flex items-center gap-2">
+                            <span>📌</span>
+                            <span>Mise de côté</span>
+                          </div>
+                        {/if}
+                        <div class="badge badge-outline">
+                          <Utensils size={16} />
+                          {meal.guests}
+                        </div>
+                        <div class="badge badge-outline">
+                          <CookingPot size={16} />
+                          {recipesMatchingSearch.length}
+                        </div>
+                      </div>
+
+                      <!-- Recettes qui correspondent à la recherche -->
+                      {#each recipesMatchingSearch as mealRecipe, recipeIndex ((meal.id || mealIndex) + "-" + mealRecipe.recipeUuid + "-" + recipeIndex)}
+                        {@const recipe = recipesDetails.find(
+                          (r) => r.$id === mealRecipe.recipeUuid,
+                        )}
+                        <div class="page-break-after mb-8">
+                          {#if recipe}
+                            <EventRecipeCard
+                              {recipe}
+                              {meal}
+                              {mealRecipe}
+                              {totalGuests}
+                            />
+                          {/if}
+                        </div>
+                      {/each}
+                    {/if}
+                  {/each}
+                </div>
+              {/if}
+            {:else}
+              <!-- Mode normal : afficher les repas filtrés par meal/recette -->
+              {#if filteredMeals.length === 0 && urlFilter.mealDate}
+                <div
+                  class="bg-base-100 border-base-300 rounded-xl border p-8 text-center"
+                >
+                  <p class="text-base-content/60 text-lg">
+                    Aucune recette ne correspond aux filtres sélectionnés.
+                  </p>
+                  <button
+                    class="btn btn-primary mt-4"
+                    onclick={clearAllFilters}
+                  >
+                    Réinitialiser les filtres
+                  </button>
+                </div>
+              {:else}
+                <div class="space-y-10 print:space-y-0">
+                  {#each paginatedMeals as meal, mealIndex (meal.id || mealIndex)}
+                    {@const mealRecipesToDisplay = urlFilter.recipeUuid
+                      ? meal.recipes.filter(
+                          (mr: any) => mr.recipeUuid === urlFilter.recipeUuid,
+                        )
+                      : meal.recipes}
+
+                    {#if mealRecipesToDisplay.length > 0}
+                      <!-- Date break / Mise de côté header -->
+                      <div
+                        id="meal-{meal.date || 'undated'}"
+                        class="card my-4 flex flex-row flex-wrap items-center justify-center gap-4 p-2 font-black shadow-lg sm:gap-6 sm:px-4 sm:py-2 print:hidden {meal.date
+                          ? 'bg-primary text-primary-content'
+                          : 'bg-warning/80 text-warning-content'}"
+                      >
+                        {#if meal.date}
+                          <div class="">
+                            {formatDateWdDayMonth(meal.date)}
+                          </div>
+                          <div>{extractTime(meal.date)}</div>
+                        {:else}
+                          <div class="flex items-center gap-2">
+                            <span>📌</span>
+                            <span>Mise de côté</span>
+                          </div>
+                        {/if}
+                        <div class="badge badge-outline">
+                          <Utensils size={16} />
+                          {meal.guests}
+                        </div>
+                        <div class="badge badge-outline">
+                          <CookingPot size={16} />
+                          {mealRecipesToDisplay.length}
+                        </div>
+                      </div>
+
+                      <!-- Recettes -->
+                      {#each mealRecipesToDisplay as mealRecipe, recipeIndex ((meal.id || mealIndex) + "-" + mealRecipe.recipeUuid + "-" + recipeIndex)}
+                        {@const recipe = recipesDetails.find(
+                          (r) => r.$id === mealRecipe.recipeUuid,
+                        )}
+                        <div class="page-break-after">
+                          {#if recipe}
+                            <EventRecipeCard
+                              {recipe}
+                              {meal}
+                              {mealRecipe}
+                              {totalGuests}
+                            />
+                          {/if}
+                        </div>
+                      {/each}
+                    {/if}
+                  {/each}
+                </div>
+                {#if hasActiveFilter}
+                  <button
+                    class="btn btn-dash btn-block my-5"
+                    onclick={clearAllFilters}
+                    aria-label="Afficher toutes les recettes"
+                  >
+                    <Eye class="h-4 w-4" />
+                    Afficher toutes les recettes
+                  </button>
+                {/if}
+              {/if}
+            {/if}
+
+            <!-- Sentinelle pour lazy loading -->
+            {#if paginatedMeals.length < mealsToPaginate.length}
+              <div bind:this={sentinel} class="py-8 text-center print:hidden">
+                <span class="loading loading-spinner loading-md"></span>
+              </div>
+            {/if}
+
+            <!-- Message si pas de recettes du tout -->
+            {#if !urlFilter.ingredient && recipesDetails.length === 0 && !loading}
+              <div
+                class="bg-base-100 border-base-300 rounded-xl border p-8 text-center"
+              >
+                <p class="text-base-content/60 text-lg">
+                  Aucune recette n'a encore été ajoutée à cet événement.
+                </p>
+              </div>
             {/if}
           {/if}
-        {/if}
-
-        <!-- Sentinelle pour lazy loading -->
-        {#if paginatedMeals.length < mealsToPaginate.length}
-          <div bind:this={sentinel} class="py-8 text-center print:hidden">
-            <span class="loading loading-spinner loading-md"></span>
-          </div>
-        {/if}
-
-        <!-- Message si pas de recettes du tout -->
-        {#if !urlFilter.ingredient && recipesDetails.length === 0 && !loading}
-          <div
-            class="bg-base-100 border-base-300 rounded-xl border p-8 text-center"
-          >
-            <p class="text-base-content/60 text-lg">
-              Aucune recette n'a encore été ajoutée à cet événement.
-            </p>
-          </div>
-        {/if}
-      {/if}
-    </div>
-  </div>
+        </div>
+      </div>
+    {/if}
+  {/if}
 </div>

@@ -24,7 +24,7 @@
           href={`/event/${eventId}/document/${doc.$id}/edit`}
         >
           <FileText class="text-primary h-4 w-4 shrink-0" />
-          <span class="flex-1 truncate">{doc.title}</span>
+          <span class="flex-1 truncate font-medium">{doc.title}</span>
           {#if doc.lockedBy && doc.lockedBy !== globalState.userId}
             <Lock class="text-warning h-3 w-3 shrink-0" />
           {/if}

@@ -547,7 +547,7 @@
                         <input
                           type="text"
                           bind:value={ingredient.comment}
-                          placeholder="Ex: coupées en dés; pour la sauce..."
+                          placeholder="Ex: pour la sauce..."
                           maxlength="100"
                           {disabled}
                         />

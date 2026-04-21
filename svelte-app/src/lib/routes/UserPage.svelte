@@ -149,7 +149,7 @@
       </h2>
 
       <form onsubmit={handleUpdateName}>
-        <label class="input input-bordered flex items-center gap-2">
+        <label class="input flex items-center gap-2">
           <User class="h-4 w-4 opacity-50" />
           <input
             type="text"
@@ -190,7 +190,7 @@
       <form onsubmit={handleUpdatePassword}>
         <fieldset class="fieldset mb-4">
           <legend class="fieldset-legend">Ancien mot de passe</legend>
-          <label class="input input-bordered flex items-center gap-2">
+          <label class="input flex items-center gap-2">
             <Key class="h-4 w-4 opacity-50" />
             <input
               type="password"
@@ -204,7 +204,7 @@
 
         <fieldset class="fieldset mb-4">
           <legend class="fieldset-legend">Nouveau mot de passe</legend>
-          <label class="input input-bordered flex items-center gap-2">
+          <label class="input flex items-center gap-2">
             <Lock class="h-4 w-4 opacity-50" />
             <input
               type="password"
@@ -220,7 +220,7 @@
           <legend class="fieldset-legend"
             >Confirmer le nouveau mot de passe</legend
           >
-          <label class="input input-bordered flex items-center gap-2">
+          <label class="input flex items-center gap-2">
             <Lock class="h-4 w-4 opacity-50" />
             <input
               type="password"

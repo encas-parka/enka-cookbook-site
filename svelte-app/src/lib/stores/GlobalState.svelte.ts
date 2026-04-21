@@ -6,9 +6,11 @@ import { nativeTeamsStore } from "./NativeTeamsStore.svelte";
 import { eventsStore } from "./EventsStore.svelte";
 import { materielStore } from "./MaterielStore.svelte";
 import { teamdocsStore } from "./TeamdocsStore.svelte";
+import { productsStore } from "./ProductsStore.svelte";
 import { notificationStore } from "./NotificationStore.svelte";
 import { realtimeManager } from "./RealtimeManager.svelte";
 import { recipesStore } from "./RecipesStore.svelte";
+import { db } from "$lib/db-sync/aw-sync";
 import type { Models } from "appwrite";
 import { route } from "$lib/router";
 
@@ -169,12 +171,17 @@ class GlobalState {
       localStorage.removeItem("appwrite-user-id");
 
       // Cleanup des stores privés (recipesStore préservé pour les visiteurs)
+      // Les destroy() sont async car ils nettoient IndexedDB (sécurité multi-user)
       notificationStore.destroy();
       nativeTeamsStore.destroy();
-      eventsStore.destroy();
-      materielStore.destroy();
-      teamdocsStore.destroy();
+      await eventsStore.destroy();
+      await materielStore.destroy();
+      await teamdocsStore.destroy();
+      await productsStore.destroy();
       realtimeManager.destroy();
+
+      // Nettoyer le cache des liens d'invitation
+      await db.joinLinks.clear();
 
       this.#user = null;
       this.#authInitialized = false;

@@ -1,1396 +1,1021 @@
 /**
- * RecipesStore - Store de gestion des recettes avec Svelte 5
+ * RecipesStore - Store de gestion des recettes avec Svelte 5 + aw-sync
  *
  * Architecture:
- * 1. Chargement de l'index léger depuis data.json (recettes publiées)
- * 2. Chargement des recettes drafts depuis Appwrite
- * 3. Fusion dans un index unifié
- * 4. Lazy loading des détails depuis /recettes/.../recipe.json ou Appwrite avec fallback automatique
- * 5. Cache IndexedDB pour performance
+ * 1. Hugo data.json → index des recettes publiées (HTTP fetch)
+ * 2. Appwrite recettes → drafts + mises à jour (aw-sync: Dexie + realtime)
+ * 3. Fusion Hugo + Appwrite dans un index unifié (SvelteMap)
+ * 4. Lazy loading des détails depuis Hugo JSON / Appwrite (fallback)
+ * 5. Cache des détails dans Dexie (db.recipeData)
  *
- * Responsabilités:
- * - Charger et fusionner recettes Hugo + Appwrite
- * - Lazy-load les détails de recettes à la demande
- * - Fournir une API de recherche/filtrage
- * - Gérer le cache IndexedDB (stratégie, pas l'implémentation)
- * - Realtime pour les recettes Appwrite
- * - Gérer les verrous d'édition
- *
- * Note: Les opérations CRUD (create/update/delete) sont gérées directement
- * par les composants via appwrite-recipes.ts. Le store reçoit les mises
- * à jour via realtime pour maintenir la cohérence.
- *
- * @usage
- * await recipesStore.initialize();
- * const recipe = await recipesStore.getRecipeByUuid('5f3ada9bde90');
- * const results = recipesStore.searchRecipes('houmous');
+ * aw-sync gère: delta sync Appwrite → db.recipes, realtime, CRUD optimiste
+ * Le store gère: fusion Hugo + Appwrite, lazy loading, recherche, verrous
  */
 
-import { SvelteMap } from "svelte/reactivity";
-import { CACHE_SYNC_VERSION } from "$lib/constants/sync";
+import { SvelteMap } from 'svelte/reactivity';
+import type { Recettes } from '$lib/types/appwrite.d';
 import type {
-  RecipeIndexEntry,
-  RecipeForDisplay,
-} from "../types/recipes.types";
+	RecipeIndexEntry,
+	RecipeForDisplay
+} from '../types/recipes.types';
 import {
-  createRecipesIDBCache,
-  type RecipesIDBCache,
-} from "../services/recipes-idb-cache";
+	parseRecipeIndexEntry,
+	parseAppwriteRecipeToIndexEntry,
+	astucesFromAppwrite,
+	parseRecipeData
+} from '../utils/recipeUtils';
+import { ingredientsFromAppwrite } from '../utils/ingredientUtils';
 import {
-  parseRecipeIndexEntry,
-  parseAppwriteRecipeToIndexEntry,
-  astucesFromAppwrite,
-} from "../utils/recipeUtils";
-import { parseRecipeData } from "../utils/recipeUtils";
-import { ingredientsFromAppwrite } from "../utils/ingredientUtils";
+	forceReloadAllAppwriteRecipes,
+	getRecipeAppwrite as getAppwriteRecipe
+} from '../services/appwrite-recipes';
+import { globalState } from './GlobalState.svelte';
 import {
-  forceReloadAllAppwriteRecipes,
-  getRecipeAppwrite as getAppwriteRecipe,
-  updateRecipeAppwrite,
-  listUpdatedRecipes,
-  RECIPES_COLLECTION_ID,
-} from "../services/appwrite-recipes";
-import { globalState } from "./GlobalState.svelte";
-import { getDatabaseId } from "../services/appwrite";
-import { realtimeManager } from "./RealtimeManager.svelte";
+	createSyncCollection,
+	bridgeToMap,
+	db,
+	type BridgeResult
+} from '$lib/db-sync/aw-sync';
 
-// =============================================================================
-// CONFIGURATION
-// =============================================================================
-
-// URL du fichier data.json (proxié par Vite en mode dev vers Hugo)
-
-const DATA_JSON_URL = "/data/data.json";
-
-// Version de migration actuelle - À incrémenter lors des changements de structure
-// qui nécessitent d'invalider les caches existants
-const CURRENT_MIGRATION_VERSION = 1;
-
-// =============================================================================
-// STORE SINGLETON
-// =============================================================================
+const DATA_JSON_URL = '/data/data.json';
 
 class RecipesStore {
-  // État réactif - Index (Hugo + Appwrite fusionné)
-  #recipesIndex = $state(new SvelteMap<string, RecipeIndexEntry>());
-
-  // État UI
-  #loading = $state(false);
-  #error = $state<string | null>(null);
-  #isInitialized = $state(false);
-  #versionTimestamp = $state<number | null>(null);
-
-  // Cache IndexedDB
-  #cache: RecipesIDBCache | null = null;
-
-  // Tracking des chargements en cours (pour éviter les doublons)
-  #loadingDetails = new Set<string>();
-
-  // Promise d'initialisation en cours pour déduplication
-  #initPromise: Promise<void> | null = null;
-  #realtimeInitialized = false;
-
-  // Promise résolue quand syncFromRemote() a terminé (invalide les caches obsolètes)
-  // ProductsStore l'attend avant de calculer les produits depuis les recettes
-  #syncPromise: Promise<void> = Promise.resolve();
-  #syncResolve: (() => void) | null = null;
-
-  // Getters publics
-  get loading() {
-    return this.#loading;
-  }
-
-  get error() {
-    return this.#error;
-  }
-
-  get isInitialized() {
-    return this.#isInitialized;
-  }
-
-  /**
-   * Promise résolue quand syncFromRemote() (ou la variante publique) a terminé.
-   * Garantit que les details IDB obsolètes ont été supprimés avant tout calcul de produits.
-   * ProductsStore l'attend avant de recalculer les produits depuis les recettes.
-   */
-  get syncReady(): Promise<void> {
-    return this.#syncPromise;
-  }
-
-  /**
-   * Liste réactive de l'index des recettes
-   */
-  get recipesIndex() {
-    return Array.from(this.#recipesIndex.values());
-  }
-
-  /**
-   * Nombre de recettes dans l'index
-   */
-  get count() {
-    return this.#recipesIndex.size;
-  }
-
-  /**
-   * Retourne toutes les recettes de l'index (pour la page de liste)
-   */
-  getAllRecipes(): RecipeIndexEntry[] {
-    return Array.from(this.#recipesIndex.values());
-  }
-
-  // =============================================================================
-  // INITIALISATION PHASÉE (OPTIMISATION)
-  // =============================================================================
-
-  /**
-   * Phase 1 : Charger uniquement depuis le cache IndexedDB
-   * Appelé au démarrage pour afficher l'UI rapidement
-   */
-  async loadCache(): Promise<void> {
-    if (this.#isInitialized) {
-      console.log("[RecipesStore] Cache déjà chargé");
-      return;
-    }
-
-    console.log("[RecipesStore] Chargement du cache...");
-    this.#loading = true;
-    this.#error = null;
-
-    try {
-      // Ouvrir le cache IndexedDB
-      this.#cache = await createRecipesIDBCache();
-
-      // Charger l'index depuis le cache
-      const cachedIndex = await this.#cache.loadRecipesIndex();
-      const cachedMetadata = await this.#cache.loadMetadata();
-
-      // Vérifier la version du cache — si obsolète, forcer un full sync Appwrite
-      if (
-        cachedMetadata &&
-        (!cachedMetadata.syncVersion ||
-          cachedMetadata.syncVersion < CACHE_SYNC_VERSION)
-      ) {
-        console.log(
-          `[RecipesStore] Cache syncVersion ${cachedMetadata.syncVersion ?? "absent"} < ${CACHE_SYNC_VERSION}, full sync Appwrite requis`,
-        );
-        cachedMetadata.lastAppwriteSync = null;
-        // Persister immédiatement pour que syncFromRemote() voie la nullification
-        await this.#cache.saveMetadata(cachedMetadata);
-      }
-
-      if (cachedIndex.size > 0) {
-        console.log(
-          `[RecipesStore] ${cachedIndex.size} recettes (index) chargées depuis le cache`,
-        );
-        this.#recipesIndex = new SvelteMap(cachedIndex);
-      }
-
-      this.#isInitialized = true;
-      console.log(
-        `[RecipesStore] Cache chargé: ${this.#recipesIndex.size} recettes`,
-      );
-    } catch (err) {
-      const message =
-        err instanceof Error
-          ? err.message
-          : "Erreur lors du chargement du cache";
-      this.#error = message;
-      console.error("[RecipesStore]", message, err);
-      throw err;
-    } finally {
-      this.#loading = false;
-    }
-  }
-
-  /**
-   * Phase 2 : Synchroniser avec les sources distantes (Hugo JSON + Appwrite)
-   * Appelé après loadCache
-   */
-  async syncFromRemote(): Promise<void> {
-    if (!this.#cache) {
-      console.warn("[RecipesStore] Impossible de sync : cache non initialisé");
-      return;
-    }
-
-    // Créer une nouvelle Promise non-résolue pour signaler que le sync est en cours
-    this.#syncPromise = new Promise<void>((resolve) => {
-      this.#syncResolve = resolve;
-    });
-
-    console.log("[RecipesStore] Synchronisation depuis sources distantes...");
-    this.#loading = true;
-
-    try {
-      const cachedMetadata = await this.#cache.loadMetadata();
-
-      // 1. Charger l'index depuis data.json (Hugo)
-      try {
-        await this.#loadIndexFromDataJson(cachedMetadata);
-      } catch (err) {
-        console.error("[RecipesStore] Erreur chargement data.json:", err);
-        if (this.#recipesIndex.size === 0) {
-          throw new Error("Aucun cache disponible et data.json inaccessible");
-        }
-        console.log("[RecipesStore] Continuation avec les données du cache");
-      }
-
-      // 2. Sync Incrémentiel Appwrite
-      if (globalState.userId) {
-        try {
-          await this.#incrementalSync(cachedMetadata);
-        } catch (err) {
-          console.warn("[RecipesStore] Erreur sync Appwrite:", err);
-        }
-      }
-
-      console.log(
-        `[RecipesStore] Synchronisation terminée: ${this.#recipesIndex.size} recettes`,
-      );
-    } catch (err) {
-      const message =
-        err instanceof Error
-          ? err.message
-          : "Erreur lors de la synchronisation";
-      this.#error = message;
-      console.error("[RecipesStore]", message, err);
-      throw err;
-    } finally {
-      this.#loading = false;
-      // Résoudre la promise pour signaler que le sync est terminé
-      // (quelles que soient les erreurs partielles)
-      this.#syncResolve?.();
-      this.#syncResolve = null;
-    }
-  }
-
-  /**
-   * Phase 2 (Publique): Synchroniser uniquement depuis Hugo JSON
-   * Appelé pour les utilisateurs non authentifiés
-   */
-  async syncFromRemotePublicOnly(): Promise<void> {
-    if (!this.#cache) {
-      console.warn("[RecipesStore] Impossible de sync : cache non initialisé");
-      return;
-    }
-
-    // Créer une nouvelle Promise non-résolue pour signaler que le sync est en cours
-    this.#syncPromise = new Promise<void>((resolve) => {
-      this.#syncResolve = resolve;
-    });
-
-    console.log("[RecipesStore] Synchronisation publique (Hugo uniquement)...");
-    this.#loading = true;
-
-    try {
-      const cachedMetadata = await this.#cache.loadMetadata();
-
-      // 1. Charger l'index depuis data.json (Hugo) - PAS de sync Appwrite
-      try {
-        await this.#loadIndexFromDataJson(cachedMetadata);
-      } catch (err) {
-        console.error("[RecipesStore] Erreur chargement data.json:", err);
-        if (this.#recipesIndex.size === 0) {
-          throw new Error("Aucun cache disponible et data.json inaccessible");
-        }
-        console.log("[RecipesStore] Continuation avec les données du cache");
-      }
-
-      console.log(
-        `[RecipesStore] Synchronisation publique terminée: ${this.#recipesIndex.size} recettes`,
-      );
-    } catch (err) {
-      const message =
-        err instanceof Error
-          ? err.message
-          : "Erreur lors de la synchronisation publique";
-      this.#error = message;
-      console.error("[RecipesStore]", message, err);
-      throw err;
-    } finally {
-      this.#loading = false;
-      // Résoudre la promise pour signaler que le sync est terminé
-      this.#syncResolve?.();
-      this.#syncResolve = null;
-    }
-  }
-
-  /**
-   * Phase 3 : Setup du realtime (appelé après syncFromRemote)
-   */
-  async setupRealtime(): Promise<void> {
-    if (!this.#cache) {
-      console.warn(
-        "[RecipesStore] Impossible de setup realtime : cache non initialisé",
-      );
-      return;
-    }
-
-    // Vérifier si déjà configuré pour éviter les doublons
-    // ✅ SAUF si le RealtimeManager a été détruit (changement auth)
-    if (this.#realtimeInitialized && realtimeManager.isInitialized) {
-      console.log("[RecipesStore] Realtime déjà configuré");
-      return;
-    }
-
-    // Réinitialiser le flag si le RealtimeManager a été détruit
-    if (this.#realtimeInitialized && !realtimeManager.isInitialized) {
-      console.log(
-        "[RecipesStore] RealtimeManager détruit, réinitialisation...",
-      );
-      this.#realtimeInitialized = false;
-    }
-
-    console.log("[RecipesStore] Configuration du realtime...");
-
-    // ✅ Pas de realtime pour les visiteurs
-    // Note: #realtimeInitialized reste false pour permettre l'initialisation
-    // lorsque l'utilisateur se connecte (mode visiteur → authentifié)
-    if (!globalState.isAuthenticated) {
-      console.log("[RecipesStore] Mode visiteur : pas de realtime");
-      return;
-    }
-
-    try {
-      this.#setupRealtime();
-      this.#realtimeInitialized = true;
-    } catch (err) {
-      console.warn("[RecipesStore] Erreur activation realtime:", err);
-    }
-  }
-
-  // =============================================================================
-  // INITIALISATION (LÉGACY - COMPATIBILITÉ)
-  // =============================================================================
-
-  /**
-   * Initialise le store
-   * 1. Ouvre le cache IndexedDB
-   * 2. Charge l'index depuis le cache si disponible
-   * 3. Charge l'index depuis data.json (recettes published)
-   * 4. Cleanup : marque les recettes Appwrite comme published si présentes dans Hugo
-   * 5. Charge les recettes non-published depuis Appwrite
-   * 6. Active le realtime pour les recettes Appwrite
-   */
-  async initialize(): Promise<void> {
-    // 1. Déjà initialisé ?
-    if (this.#isInitialized) {
-      console.log("[RecipesStore] Déjà initialisé");
-      return;
-    }
-
-    // 2. Initialisation déjà en cours ?
-    if (this.#initPromise) {
-      console.log("[RecipesStore] Initialisation déjà en cours, attente...");
-      return this.#initPromise;
-    }
-
-    // 3. Nouvelle initialisation
-    console.log("[RecipesStore] Initialisation...");
-    this.#loading = true;
-    this.#error = null;
-
-    // Créer la promesse d'initialisation
-    this.#initPromise = (async () => {
-      try {
-        // Phase 1: Charger le cache
-        await this.loadCache();
-
-        // Phase 2: Sync depuis les sources distantes
-        await this.syncFromRemote();
-
-        // Phase 3: Setup realtime
-        await this.setupRealtime();
-
-        // Vérification finale
-        if (this.#recipesIndex.size === 0) {
-          const message = "Aucune recette disponible après initialisation";
-          this.#error = message;
-          console.warn("[RecipesStore]", message);
-        }
-
-        console.log(
-          `[RecipesStore] Initialisation complétée: ${this.#recipesIndex.size} recettes`,
-        );
-      } catch (err) {
-        const message =
-          err instanceof Error
-            ? err.message
-            : "Erreur lors de l'initialisation";
-        this.#error = message;
-        console.error("[RecipesStore] ECHEC Initialisation:", message, err);
-        throw err;
-      } finally {
-        this.#loading = false;
-        this.#initPromise = null; // Nettoyer la promesse pour permettre une nouvelle tentative si nécessaire
-      }
-    })();
-
-    return this.#initPromise;
-  }
-
-  /**
-   * Charge l'index (`data.json`).
-   * Vérifie le timestamp inclus dans `meta` pour savoir si le cache doit être mis à jour.
-   */
-  async #loadIndexFromDataJson(cachedMetadata: any): Promise<void> {
-    try {
-      console.log("[RecipesStore] Chargement data.json...");
-
-      // 1. Fetch data.json
-      const response = await fetch(DATA_JSON_URL);
-      if (!response.ok) throw new Error(`Erreur HTTP: ${response.status}`);
-      const data = await response.json();
-
-      // 2. Vérification structure & Timestamp
-      if (!Array.isArray(data.recipes)) {
-        throw new Error("Format invalide: recipes n'est pas un tableau");
-      }
-
-      const remoteTimestamp = data.meta?.timestamp;
-      this.#versionTimestamp = remoteTimestamp; // Toujours stocker le dernier timestamp vu
-
-      if (
-        remoteTimestamp &&
-        cachedMetadata &&
-        cachedMetadata.buildTimestamp &&
-        cachedMetadata.buildTimestamp >= remoteTimestamp
-      ) {
-        console.log(
-          `[RecipesStore] Cache à jour (Ts: ${cachedMetadata.buildTimestamp} >= ${remoteTimestamp})`,
-        );
-
-        // Même si le cache est à jour par rapport au build, on peut vouloir
-        // mettre à jour l'index en mémoire si on n'avait rien (premier chargement)
-        // Mais ici on suppose que loadRecipesIndex a déjà rempli this.#recipesIndex
-        return;
-      }
-
-      console.log(
-        `[RecipesStore] Nouvelle version détectée ou cache manquant (Ts: ${remoteTimestamp}), Traitement...`,
-      );
-
-      // 3. Smart Merge (Index en mémoire vs Nouvelles données)
-      const recipes = data.recipes.map((r: any) => parseRecipeIndexEntry(r));
-      let updatedCount = 0;
-      const updatedIds: string[] = []; // Track des recettes mises à jour
-
-      recipes.forEach((newRecipe: RecipeIndexEntry) => {
-        const existing = this.#recipesIndex.get(newRecipe.$id);
-
-        let shouldUpdate = false;
-        if (!existing) {
-          shouldUpdate = true; // Nouveau
-        } else {
-          // Si existant, comparer les dates de mise à jour pour éviter d'écraser un changement Appwrite récent
-          // non encore buildé par Hugo.
-          const newDate = new Date(newRecipe.$updatedAt).getTime();
-          const existingDate = new Date(existing.$updatedAt).getTime();
-          if (newDate > existingDate) {
-            shouldUpdate = true;
-          }
-        }
-
-        if (shouldUpdate) {
-          this.#recipesIndex.set(newRecipe.$id, newRecipe);
-          updatedIds.push(newRecipe.$id);
-          updatedCount++;
-        }
-      });
-
-      console.log(
-        `[RecipesStore] Smart Merge: ${updatedCount} recettes mises à jour/ajoutées.`,
-      );
-
-      // 4. Mise à jour du cache
-      if (this.#cache) {
-        // 🔧 IMPORTANT: Supprimer les détails obsolètes des recettes mises à jour
-        // pour forcer le rechargement depuis Hugo (qui contient les bons UUIDs)
-        for (const uuid of updatedIds) {
-          try {
-            await this.#cache.deleteRecipeDetail(uuid);
-            console.log(
-              `[RecipesStore] Détails obsolètes supprimés pour ${uuid}`,
-            );
-          } catch (err) {
-            console.warn(
-              `[RecipesStore] Erreur suppression détails ${uuid}:`,
-              err,
-            );
-          }
-        }
-
-        // Sauvegarder l'index complet (mémoire)
-        await this.#cache.saveRecipesIndex(this.#recipesIndex);
-        await this.#cache.saveMetadata({
-          ...cachedMetadata,
-          buildTimestamp: remoteTimestamp || Date.now() / 1000,
-          recipesCount: this.#recipesIndex.size,
-          cacheVersion: 1,
-        });
-      }
-    } catch (err) {
-      console.error("[RecipesStore] Erreur loadIndexFromDataJson:", err);
-      throw err;
-    }
-  }
-
-  /**
-   * Recharge manuellement toutes les recettes depuis Appwrite
-   * À utiliser via le bouton "Recharger les recettes" dans l'UI
-   */
-  async forceReloadAllRecipes(): Promise<void> {
-    if (!globalState.userId) {
-      throw new Error("Utilisateur non connecté");
-    }
-
-    this.#loading = true;
-    this.#error = null;
-
-    try {
-      console.log("[RecipesStore] Rechargement forcé des recettes Appwrite...");
-
-      // Charger TOUTES les recettes Appwrite
-      const appwriteRecipes = await forceReloadAllAppwriteRecipes();
-
-      // Filtrer et ajouter à l'index via la méthode de parsing existante
-      let addedCount = 0;
-      let deletedCount = 0;
-
-      appwriteRecipes.forEach((recipe) => {
-        // Si la recette est supprimée, on la retire de l'index
-        if (recipe.status === "deleted") {
-          if (this.#recipesIndex.has(recipe.$id)) {
-            this.#recipesIndex.delete(recipe.$id);
-            deletedCount++;
-            console.log(
-              `[RecipesStore] Recette ${recipe.$id} supprimée (status=deleted)`,
-            );
-          }
-        } else {
-          this.#recipesIndex.set(
-            recipe.$id,
-            parseAppwriteRecipeToIndexEntry(recipe),
-          );
-          addedCount++;
-        }
-      });
-
-      console.log(
-        `[RecipesStore] ${addedCount} recettes Appwrite chargées, ${deletedCount} supprimées`,
-      );
-
-      // Mettre à jour le cache
-      if (this.#cache) {
-        const cachedMetadata = await this.#cache.loadMetadata();
-        const now = new Date().toISOString();
-        await this.#cache.saveRecipesIndex(this.#recipesIndex);
-        await this.#cache.saveMetadata({
-          ...cachedMetadata,
-          lastAppwriteSync: now,
-          recipesCount: this.#recipesIndex.size,
-          cacheVersion: 1,
-        });
-      }
-
-      console.log("[RecipesStore] Rechargement forcé terminé");
-    } catch (err) {
-      const message =
-        err instanceof Error ? err.message : "Erreur lors du rechargement";
-      this.#error = message;
-      console.error("[RecipesStore] Erreur rechargement forcé:", err);
-      throw err;
-    } finally {
-      this.#loading = false;
-    }
-  }
-
-  /**
-   * Hard reset : Vide TOUT (état Svelte + cache IDB) et recharge depuis zéro
-   * Utilisé en mode dev pour repartir de zéro
-   */
-  async hardReset(): Promise<void> {
-    if (!globalState.userId) {
-      throw new Error("Utilisateur non connecté");
-    }
-
-    console.log("[RecipesStore] 🔄 HARD RESET - Vidage complet...");
-    this.#loading = true;
-    this.#error = null;
-
-    try {
-      // 1. Vider l'état Svelte
-      this.#recipesIndex.clear();
-
-      // 2. Vider le cache IndexedDB
-      if (this.#cache) {
-        await this.#cache.clear();
-        console.log("[RecipesStore] Cache IDB vidé");
-      }
-
-      // 3. Recharger depuis data.json (Hugo)
-      await this.#loadIndexFromDataJson(null); // null = pas de cachedMetadata
-
-      // 4. Charger TOUTES les recettes Appwrite
-      const appwriteRecipes = await forceReloadAllAppwriteRecipes();
-
-      // 5. Filtrer et ajouter à l'index via la méthode de parsing existante
-      let addedCount = 0;
-      let deletedCount = 0;
-
-      appwriteRecipes.forEach((recipe) => {
-        // Si la recette est supprimée, on l'ignore (hard reset = état propre)
-        if (recipe.status !== "deleted") {
-          this.#recipesIndex.set(
-            recipe.$id,
-            parseAppwriteRecipeToIndexEntry(recipe),
-          );
-          addedCount++;
-        } else {
-          deletedCount++;
-        }
-      });
-
-      console.log(
-        `[RecipesStore] ${addedCount} recettes Appwrite chargées, ${deletedCount} supprimées ignorées`,
-      );
-
-      // 6. Recréer le cache avec les données fraîches
-      if (this.#cache) {
-        const now = new Date().toISOString();
-        await this.#cache.saveRecipesIndex(this.#recipesIndex);
-        await this.#cache.saveMetadata({
-          buildTimestamp: this.#versionTimestamp,
-          lastAppwriteSync: now,
-          recipesCount: this.#recipesIndex.size,
-          cacheVersion: 1,
-          migrationVersion: 0,
-          syncVersion: CACHE_SYNC_VERSION,
-        });
-        console.log("[RecipesStore] Cache IDB recréé");
-      }
-
-      console.log("[RecipesStore] ✓ HARD RESET terminé");
-    } catch (err) {
-      const message =
-        err instanceof Error ? err.message : "Erreur lors du hard reset";
-      this.#error = message;
-      console.error("[RecipesStore] Erreur hard reset:", err);
-      throw err;
-    } finally {
-      this.#loading = false;
-    }
-  }
-
-  /**
-   * Sync Incrémentiel avec Appwrite
-   * Récupère :
-   * - TOUS les drafts modifiés depuis lastAppwriteSync (ou tous les drafts si pas de lastAppwriteSync)
-   * - Les recettes publiées modifiées depuis buildTimestamp (déjà dans le JSON)
-   */
-  async #incrementalSync(cachedMetadata: any): Promise<void> {
-    console.log("[RecipesStore] Sync incrémentiel Appwrite...");
-
-    // 1. Récupérer TOUS les drafts modifiés depuis lastAppwriteSync
-    // Si pas de lastAppwriteSync (cache vide), on récupère TOUS les drafts
-    const draftSince =
-      cachedMetadata?.lastAppwriteSync || "1970-01-01T00:00:00.000Z";
-
-    // 2. Récupérer les recettes publiées modifiées depuis buildTimestamp
-    // Si pas de buildTimestamp, on utilise 1970 pour tout récupérer
-    const publishedSince = cachedMetadata?.buildTimestamp
-      ? new Date(cachedMetadata.buildTimestamp * 1000).toISOString()
-      : "1970-01-01T00:00:00.000Z";
-
-    console.log(`[RecipesStore] Sync Appwrite: depuis ${draftSince}`);
-
-    // Récupérer les recettes modifiées via le service existant
-    // Note: listUpdatedRecipes utilise $updatedAt donc récupère aussi les deleted
-    const updatedRecipes = await listUpdatedRecipes(draftSince);
-
-    if (updatedRecipes.length === 0) {
-      console.log("[RecipesStore] Aucune mise à jour Appwrite détectée.");
-      return;
-    }
-
-    console.log(
-      `[RecipesStore] ${updatedRecipes.length} recettes mises à jour depuis Appwrite.`,
-    );
-
-    let updatedCount = 0;
-    let deletedCount = 0;
-
-    updatedRecipes.forEach((recipe) => {
-      // Si la recette est supprimée, on la retire de l'index
-      if (recipe.status === "deleted") {
-        if (this.#recipesIndex.has(recipe.$id)) {
-          this.#recipesIndex.delete(recipe.$id);
-          deletedCount++;
-          console.log(
-            `[RecipesStore] Recette ${recipe.$id} supprimée (status=deleted)`,
-          );
-        }
-      } else {
-        // Parsing unifié
-        const indexEntry = parseAppwriteRecipeToIndexEntry(recipe);
-
-        // Upsert incontestable (Appwrite est la source de vérité pour les modifs récentes)
-        this.#recipesIndex.set(indexEntry.$id, indexEntry);
-
-        updatedCount++;
-      }
-    });
-
-    // Mettre à jour lastAppwriteSync
-    const now = new Date().toISOString();
-
-    if (this.#cache) {
-      await this.#cache.saveRecipesIndex(this.#recipesIndex);
-      await this.#cache.saveMetadata({
-        ...cachedMetadata,
-        lastAppwriteSync: now,
-        syncVersion: CACHE_SYNC_VERSION,
-      });
-    }
-
-    console.log(
-      `[RecipesStore] Sync incrémentiel terminé (${updatedCount} mises à jour, ${deletedCount} supprimées).`,
-    );
-  }
-
-  /**
-   * Configure le realtime pour les recettes Appwrite
-   */
-  async #setupRealtime(): Promise<void> {
-    try {
-      console.log("[RecipesStore] Configuration du Realtime...");
-      const DB_ID = getDatabaseId();
-
-      realtimeManager.register(
-        [`databases.${DB_ID}.collections.${RECIPES_COLLECTION_ID}.documents`],
-        async (response: any) => {
-          const recipe = response.payload as any; // Recettes type defined via JSDoc or import
-
-          let eventType = "update";
-          if (response.events.some((e: string) => e.includes(".create"))) {
-            eventType = "create";
-          } else if (
-            response.events.some((e: string) => e.includes(".delete"))
-          ) {
-            eventType = "delete";
-          }
-
-          console.log(
-            `[RecipesStore] ⚡️ Realtime RECEIVED: ${eventType} pour ${recipe.$id}`,
-          );
-
-          if (eventType === "create" || eventType === "update") {
-            // Gérer les recettes supprimées (status = "deleted")
-            if (recipe.status === "deleted") {
-              this.#recipesIndex.delete(recipe.$id);
-              if (this.#cache) {
-                try {
-                  await this.#cache.deleteRecipeFromIndex(recipe.$id);
-                  console.log(
-                    `[RecipesStore] Recette ${recipe.$id} supprimée de l'index (status=deleted)`,
-                  );
-                } catch (error) {
-                  console.warn(
-                    `[RecipesStore] Erreur suppression index ${recipe.$id}:`,
-                    error,
-                  );
-                }
-              }
-              return;
-            }
-
-            // 1. Mettre à jour l'index
-            const indexEntry = parseAppwriteRecipeToIndexEntry(recipe);
-            this.#recipesIndex.set(recipe.$id, indexEntry);
-
-            // 2. Préparer les détails complets
-            const ingredients = ingredientsFromAppwrite(recipe.ingredients);
-            const recipeData: RecipeForDisplay = {
-              ...recipe,
-              ingredients: ingredients,
-              astuces: astucesFromAppwrite(recipe.astuces),
-            };
-
-            // 3. Mettre à jour les détails dans le cache
-            if (this.#cache) {
-              try {
-                await this.#cache.saveRecipeDetail(recipeData);
-                console.log(
-                  `[RecipesStore] Détails de ${recipe.$id} mis à jour dans le cache`,
-                );
-              } catch (error) {
-                console.warn(
-                  `[RecipesStore] Erreur mise à jour cache détails ${recipe.$id}:`,
-                  error,
-                );
-              }
-            }
-          } else if (eventType === "delete") {
-            this.#recipesIndex.delete(recipe.$id);
-            if (this.#cache) {
-              try {
-                await this.#cache.deleteRecipeFromIndex(recipe.$id);
-                console.log(
-                  `[RecipesStore] Recette ${recipe.$id} supprimée du cache`,
-                );
-              } catch (error) {
-                console.warn(
-                  `[RecipesStore] Erreur suppression cache ${recipe.$id}:`,
-                  error,
-                );
-              }
-            }
-          }
-        },
-      );
-
-      console.log("[RecipesStore] Realtime enregistré auprès du manager");
-    } catch (err) {
-      console.error(
-        "[RecipesStore] Erreur lors de la configuration du realtime:",
-        err,
-      );
-    }
-  }
-
-  // =============================================================================
-  // API PUBLIQUE - LECTURE INDEX
-  // =============================================================================
-
-  /**
-   * Récupère une entrée d'index par $id
-   */
-  getRecipeIndexByUuid($id: string): RecipeIndexEntry | null {
-    const result = this.#recipesIndex.get($id) || null;
-    return result;
-  }
-
-  /**
-   * Normalise une chaîne en ignorant les accents et la casse
-   */
-  #normalizeString(str: string): string {
-    return str
-      .toLowerCase()
-      .normalize("NFD")
-      .replace(/[\u0300-\u036f]/g, ""); // Supprime les diacritiques
-  }
-
-  /**
-   * Recherche des recettes par texte (mots entiers, début de mots)
-   * Ignorer les majuscules et accents
-   */
-  searchRecipes(query: string): RecipeIndexEntry[] {
-    if (!query.trim()) {
-      return this.recipesIndex;
-    }
-
-    const searchTerms = this.#normalizeString(query.trim()).split(/\s+/);
-
-    return this.recipesIndex.filter((recipe) => {
-      const recipeTitle = this.#normalizeString(recipe.title);
-
-      // Découper le titre en mots (par espaces, tirets, underscores)
-      const titleWords = recipeTitle.split(/[\s\-_]+/);
-
-      // Tous les termes de recherche doivent matcher le début d'au moins un mot
-      // Exemple: "lasagne bol" → cherche "lasagne" ET "bol" comme début de mots
-      return searchTerms.every((term) =>
-        titleWords.some((word) => word.startsWith(term)),
-      );
-    });
-  }
-
-  /**
-   * Récupère tous les types de recettes disponibles
-   */
-  get availableTypes(): string[] {
-    const types = new Set<string>();
-    this.recipesIndex.forEach((recipe) => types.add(recipe.typeR));
-    return Array.from(types).sort();
-  }
-
-  /**
-   * Vérifie si l'utilisateur peut éditer une recette
-   * @param uuid - UUID de la recette
-   * @returns true si l'utilisateur peut éditer, false sinon
-   */
-  async canEditRecipe(uuid: string): Promise<boolean> {
-    if (!globalState.userId) return false;
-
-    // Recettes Appwrite : vérifier permissions
-    try {
-      const recipe = await getAppwriteRecipe(uuid);
-      if (!recipe) return false;
-
-      return (
-        recipe.createdBy === globalState.userId ||
-        Boolean(recipe.permissionWrite?.includes(globalState.userId)) ||
-        Boolean(
-          recipe.teams?.some((teamId) =>
-            globalState.userTeams.includes(teamId),
-          ),
-        )
-      );
-    } catch (err) {
-      console.error(
-        `[RecipesStore] Erreur lors de la vérification des permissions pour ${uuid}:`,
-        err,
-      );
-      return false;
-    }
-  }
-
-  /**
-   * Récupère le statut de verrouillage d'une recette depuis l'index
-   * @param uuid - UUID de la recette
-   * @returns ID de l'utilisateur qui verrouille ou null
-   */
-  getRecipeLockStatus(uuid: string): string | null {
-    const entry = this.#recipesIndex.get(uuid);
-    return entry?.lockedBy || null;
-  }
-
-  // =============================================================================
-  // API PUBLIQUE - LOCKING
-  // =============================================================================
-  /**
-   * Met à jour le verrou d'une recette (optimisé - appel direct Appwrite)
-   * @param uuid - UUID de la recette
-   * @param lockedBy - ID utilisateur ou null pour déverrouiller
-   */
-  async updateRecipeLock(uuid: string, lockedBy: string | null): Promise<void> {
-    if (!globalState.userId) return;
-
-    try {
-      // Appel direct à Appwrite - plus de cloud function pour le lock
-      await updateRecipeAppwrite(
-        uuid,
-        {
-          lockedBy,
-        },
-        globalState.userId,
-      );
-
-      console.log(
-        `[RecipesStore] Verrou ${uuid} mis à jour: ${lockedBy || "libéré"}`,
-      );
-
-      // Mise à jour locale immédiate de l'INDEX pour UX (le realtime synchronisera les autres)
-      const currentIndex = this.#recipesIndex.get(uuid);
-      if (currentIndex) {
-        this.#recipesIndex.set(uuid, { ...currentIndex, lockedBy });
-      }
-    } catch (error) {
-      console.error(`[RecipesStore] Erreur verrouillage ${uuid}:`, error);
-      throw error;
-    }
-  }
-
-  // =============================================================================
-  // API PUBLIQUE - LAZY LOADING DÉTAILS
-  // =============================================================================
-
-  /**
-   * Retourne les détails complets d'une recette avec détection intelligente de source
-   *
-   * Architecture optimisée (IDB First):
-   * 1. IndexedDB cache (lazy loading)
-   * 2. Source intelligente: Hugo JSON pour les publiées, Appwrite pour les brouillons
-   * 3. Cache persistant automatique
-   *
-   * @param uuid - slug-uuid de la recette
-   * @returns Détails de la recette ou null si non trouvée
-   */
-  async getRecipeByUuid(uuid: string): Promise<RecipeForDisplay | null> {
-    // 1. Éviter les chargements parallèles du même UUID
-    if (this.#loadingDetails.has(uuid)) {
-      console.log(
-        `[RecipesStore] Chargement de ${uuid} déjà en cours, attente...`,
-      );
-      while (this.#loadingDetails.has(uuid)) {
-        await new Promise((resolve) => setTimeout(resolve, 50));
-      }
-      // Une fois le chargement parallèle fini, on retente la lecture IDB
-      if (this.#cache) {
-        return (
-          ((await this.#cache.loadRecipeDetail(
-            uuid,
-          )) as unknown as RecipeForDisplay) || null
-        );
-      }
-      return null;
-    }
-
-    this.#loadingDetails.add(uuid);
-
-    try {
-      // 2. Vérifier IndexedDB cache (Source de vérité locale)
-      if (this.#cache) {
-        const cachedDetail = await this.#cache.loadRecipeDetail(uuid);
-        if (cachedDetail) {
-          return cachedDetail;
-        }
-      }
-
-      // 3. Stratégie de chargement avec fallback automatique
-      // On tente Hugo en premier (plus rapide, pas d'auth),
-      // si ça échoue, on tente Appwrite
-      let recipeData: RecipeForDisplay | null = null;
-
-      // 3a. Tenter Hugo (recette publiée)
-      try {
-        const recipePath = `/recipe/${uuid}/recipe.json`;
-        const response = await fetch(recipePath);
-        if (response.ok) {
-          const rawData = await response.json();
-          recipeData = parseRecipeData(rawData);
-          console.log(`[RecipesStore] ${uuid} chargée depuis Hugo`);
-        }
-      } catch (err) {
-        console.log(`[RecipesStore] ${uuid} non trouvée dans Hugo`);
-      }
-
-      // 3b. Fallback Appwrite (si Hugo échoue ET utilisateur connecté)
-      if (!recipeData && globalState.userId) {
-        try {
-          const appwriteRecipe = await getAppwriteRecipe(uuid);
-          if (appwriteRecipe) {
-            // Convertir les ingrédients Appwrite au format RecipeIngredient[]
-            const ingredients = ingredientsFromAppwrite(
-              appwriteRecipe.ingredients || [],
-            );
-
-            recipeData = {
-              ...appwriteRecipe,
-              ingredients,
-              // NORMALISER: astuces doit toujours être un array
-              astuces: astucesFromAppwrite(appwriteRecipe.astuces),
-              prepAlt: appwriteRecipe.prepAlt || null,
-              categories: appwriteRecipe.categories,
-              regime: appwriteRecipe.regime,
-              saison: appwriteRecipe.saison,
-              teams: appwriteRecipe.teams,
-              permissionWrite: appwriteRecipe.permissionWrite,
-            };
-            console.log(
-              `[RecipesStore] ${uuid} chargée depuis Appwrite (fallback)`,
-            );
-          }
-        } catch (err) {
-          console.log(`[RecipesStore] ${uuid} non trouvée dans Appwrite`);
-        }
-      }
-
-      // 4. Mettre en cache si trouvé
-      if (recipeData && this.#cache) {
-        await this.#cache.saveRecipeDetail(recipeData);
-      }
-
-      if (!recipeData) {
-        console.warn(`[RecipesStore] ${uuid} non trouvée (Hugo ni Appwrite)`);
-      }
-
-      return recipeData;
-    } catch (err) {
-      console.error(
-        `[RecipesStore] Erreur lors du chargement de ${uuid}:`,
-        err,
-      );
-      return null;
-    } finally {
-      this.#loadingDetails.delete(uuid);
-    }
-  }
-
-  /**
-   * Récupère plusieurs recettes en une seule opération bulk (OPTIMISATION)
-   *
-   * Stratégie :
-   * 1. Charger depuis IDB en bulk (1 transaction)
-   * 2. Identifier les UUIDs manquants
-   * 3. Fetch manquants en parallèle (Hugo/Appwrite)
-   * 4. Sauvegarder en IDB en bulk
-   * 5. Retourner tout (cache + fetched)
-   *
-   * @param uuids - Liste des UUIDs de recettes à charger
-   * @returns Map des recettes trouvées (UUID → RecipeForDisplay)
-   */
-  async getRecipesByUuidsBulk(
-    uuids: string[],
-  ): Promise<Map<string, RecipeForDisplay>> {
-    const startTime = performance.now();
-
-    // Filtrer les doublons et les UUIDs vides
-    const uniqueUuids = [...new Set(uuids.filter(Boolean))];
-
-    if (uniqueUuids.length === 0) {
-      return new Map();
-    }
-
-    console.log(
-      `[RecipesStore] Chargement bulk de ${uniqueUuids.length} recettes...`,
-    );
-
-    // 1. Charger depuis IDB en bulk
-    const cached = new Map<string, RecipeForDisplay>();
-    if (this.#cache) {
-      const cachedMap = await this.#cache.loadRecipeDetailsBulk(uniqueUuids);
-      cachedMap.forEach((recipe, uuid) => cached.set(uuid, recipe));
-    }
-
-    // 2. Identifier les manquants
-    const missing = uniqueUuids.filter((uuid) => !cached.has(uuid));
-
-    console.log(
-      `[RecipesStore] Bulk: ${cached.size} dans le cache, ${missing.length} à fetch`,
-    );
-
-    // 3. Fetch manquants en parallèle
-    const fetched = new Map<string, RecipeForDisplay>();
-    if (missing.length > 0) {
-      // Marquer tous les UUIDs comme "en cours de chargement" pour éviter les doublons
-      missing.forEach((uuid) => this.#loadingDetails.add(uuid));
-
-      try {
-        const fetchPromises = missing.map(async (uuid) => {
-          let recipeData: RecipeForDisplay | null = null;
-
-          // 3a. Tenter Hugo (plus rapide)
-          try {
-            const recipePath = `/recipe/${uuid}/recipe.json`;
-            const response = await fetch(recipePath);
-            if (response.ok) {
-              const rawData = await response.json();
-              recipeData = parseRecipeData(rawData);
-            }
-          } catch (err) {
-            // Silencieux, on tentera Appwrite
-          }
-
-          // 3b. Fallback Appwrite
-          if (!recipeData && globalState.userId) {
-            try {
-              const appwriteRecipe = await getAppwriteRecipe(uuid);
-              if (appwriteRecipe) {
-                const ingredients = ingredientsFromAppwrite(
-                  appwriteRecipe.ingredients || [],
-                );
-
-                recipeData = {
-                  ...appwriteRecipe,
-                  ingredients,
-                  astuces: astucesFromAppwrite(appwriteRecipe.astuces),
-                  prepAlt: appwriteRecipe.prepAlt || null,
-                  categories: appwriteRecipe.categories,
-                  regime: appwriteRecipe.regime,
-                  saison: appwriteRecipe.saison,
-                  teams: appwriteRecipe.teams,
-                  permissionWrite: appwriteRecipe.permissionWrite,
-                };
-              }
-            } catch (err) {
-              // Silencieux
-            }
-          }
-
-          // Retourner null si non trouvé
-          return recipeData ? { uuid, recipe: recipeData } : null;
-        });
-
-        const results = await Promise.all(fetchPromises);
-
-        // Filtrer les nulls et créer la Map
-        results.forEach((result) => {
-          if (result) {
-            fetched.set(result.uuid, result.recipe);
-          }
-        });
-
-        // 4. Sauvegarder en IDB en bulk
-        if (fetched.size > 0 && this.#cache) {
-          await this.#cache.saveRecipeDetailsBulk(fetched);
-        }
-
-        // Nettoyer les marqueurs de chargement
-        missing.forEach((uuid) => this.#loadingDetails.delete(uuid));
-      } catch (err) {
-        console.error(`[RecipesStore] Erreur lors du fetch bulk:`, err);
-        // Nettoyer les marqueurs en cas d'erreur
-        missing.forEach((uuid) => this.#loadingDetails.delete(uuid));
-      }
-    }
-
-    // 5. Fusionner cache + fetched
-    const allRecipes = new Map([...cached, ...fetched]);
-
-    const elapsed = performance.now() - startTime;
-    console.log(
-      `[RecipesStore] Bulk terminé: ${allRecipes.size}/${uniqueUuids.length} recettes en ${elapsed.toFixed(0)}ms`,
-    );
-
-    return allRecipes;
-  }
-
-  /**
-   * Précharge les détails de plusieurs recettes en parallèle
-   *
-   * @param uuids - Liste des UUIDs à précharger
-   * @returns Promesse résolue quand tous les chargements sont terminés
-   */
-  async preloadRecipes(uuids: string[]): Promise<void> {
-    console.log(`[RecipesStore] Préchargement de ${uuids.length} recettes...`);
-    const promises = uuids.map((uuid) => this.getRecipeByUuid(uuid));
-    await Promise.all(promises);
-    console.log(`[RecipesStore] Préchargement terminé`);
-  }
-
-  /**
-   * Récupère le groupe de variantes d'une recette
-   * @param recipeId - UUID de la recette
-   * @param maxDepth - Profondeur max de recherche (défaut: 2)
-   * @returns Racine + tableau de toutes les variantes connectées
-   */
-  async getVariantGroup(
-    recipeId: string,
-    maxDepth: number = 2,
-  ): Promise<{
-    root: RecipeIndexEntry | null;
-    variants: RecipeIndexEntry[];
-    isRoot: boolean;
-  }> {
-    const initial = this.getRecipeIndexByUuid(recipeId);
-    if (!initial) {
-      return { root: null, variants: [], isRoot: false };
-    }
-
-    const allVariants = new Map<string, RecipeIndexEntry>();
-    const visitedRoots = new Set<string>();
-
-    // Trouver la racine en remontant
-    let current = initial;
-    while (current.rootRecipeId && !visitedRoots.has(current.rootRecipeId)) {
-      visitedRoots.add(current.$id);
-      const parent = this.getRecipeIndexByUuid(current.rootRecipeId);
-      if (!parent) break;
-      current = parent;
-    }
-
-    const root = current;
-    allVariants.set(root.$id, root);
-
-    // Récupérer toutes les variantes (avec profondeur limitée)
-    await this.#collectVariants(
-      root.$id,
-      allVariants,
-      new Set([root.$id]),
-      0,
-      maxDepth,
-    );
-
-    return {
-      root,
-      variants: Array.from(allVariants.values()),
-      isRoot: !initial.rootRecipeId || initial.rootRecipeId === initial.$id,
-    };
-  }
-
-  /**
-   * Collecte récursive des variantes depuis IndexedDB
-   * @param rootId - Racine actuelle à explorer
-   * @param collected - Map des variantes collectées
-   * @param visitedRoots - Racines déjà visitées (évite les boucles)
-   * @param depth - Profondeur actuelle
-   * @param maxDepth - Profondeur max
-   */
-  async #collectVariants(
-    rootId: string,
-    collected: Map<string, RecipeIndexEntry>,
-    visitedRoots: Set<string>,
-    depth: number,
-    maxDepth: number,
-  ): Promise<void> {
-    if (depth > maxDepth) return;
-
-    // Parcourir tout l'index IndexedDB pour trouver les variantes
-    for (const [uuid, recipe] of this.#recipesIndex) {
-      // Ignorer si déjà collecté
-      if (collected.has(uuid)) continue;
-
-      // Vérifier si cette recette a ce root
-      if (recipe.rootRecipeId === rootId) {
-        collected.set(uuid, recipe);
-
-        // Si cette recette a un AUTRE root qu'on n'a pas visité, on le suit
-        if (
-          recipe.rootRecipeId &&
-          recipe.rootRecipeId !== rootId &&
-          !visitedRoots.has(recipe.rootRecipeId)
-        ) {
-          visitedRoots.add(recipe.rootRecipeId);
-          await this.#collectVariants(
-            recipe.rootRecipeId,
-            collected,
-            visitedRoots,
-            depth + 1,
-            maxDepth,
-          );
-        }
-      }
-    }
-  }
-
-  /**
-   * Trouve la racine finale d'une recette en remontant la chaîne
-   * @param recipeId - UUID de la recette
-   * @returns UUID de la racine finale
-   */
-  findRootRecipe(recipeId: string): string {
-    const visited = new Set<string>();
-    let currentId = recipeId;
-    let maxDepth = 10;
-
-    for (let i = 0; i < maxDepth; i++) {
-      const recipe = this.getRecipeIndexByUuid(currentId);
-      if (!recipe || !recipe.rootRecipeId) {
-        return currentId; // Racine trouvée
-      }
-
-      if (visited.has(currentId)) {
-        console.error(
-          "[RecipesStore] Cycle détecté dans rootRecipeId, retour à",
-          recipeId,
-        );
-        return recipeId;
-      }
-
-      visited.add(currentId);
-      currentId = recipe.rootRecipeId;
-    }
-
-    return recipeId; // Fallback
-  }
-
-  /**
-   * Nettoie les ressources
-   */
-  destroy(): void {
-    if (this.#cache) {
-      this.#cache.close();
-      this.#cache = null;
-    }
-    this.#recipesIndex.clear();
-    this.#isInitialized = false;
-    this.#realtimeInitialized = false; // Reset pour permettre une réinitialisation
-    console.log("[RecipesStore] Ressources nettoyées");
-  }
+	// aw-sync collection for Appwrite recipes
+	#collection = createSyncCollection<Recettes>({
+		table: db.recipes,
+		collectionName: 'recipes'
+	});
+
+	// Bridge: liveQuery on db.recipes → SvelteMap of raw Appwrite data
+	#bridge: BridgeResult<Recettes> = bridgeToMap<Recettes>(
+		() => db.recipes.toArray()
+	);
+	#appwriteRecipes = this.#bridge.map;
+
+	// Hugo recipes (published, from data.json + cache)
+	#hugoRecipes = new SvelteMap<string, RecipeIndexEntry>();
+
+	// Unified index: $derived merge of Hugo + Appwrite
+	// Most recent $updatedAt wins on conflict; deleted status always honored
+	#recipesIndex = $derived.by(() => {
+		const merged = new Map<string, RecipeIndexEntry>();
+
+		// 1. Hugo recipes (base layer - published recipes)
+		for (const [id, entry] of this.#hugoRecipes) {
+			merged.set(id, entry);
+		}
+
+		// 2. Appwrite recipes (overlay - respects updatedAt, handles drafts & deletions)
+		for (const recipe of this.#appwriteRecipes.values()) {
+			if (recipe.status === 'deleted') {
+				merged.delete(recipe.$id);
+			} else {
+				const hugoEntry = merged.get(recipe.$id);
+				const awEntry = parseAppwriteRecipeToIndexEntry(recipe);
+				// Appwrite wins if no Hugo equivalent (draft-only) or if Appwrite is at least as recent
+				if (!hugoEntry || awEntry.$updatedAt >= hugoEntry.$updatedAt) {
+					merged.set(recipe.$id, awEntry);
+				}
+			}
+		}
+
+		return merged;
+	});
+
+	// Hugo build timestamp (for cache invalidation)
+	#versionTimestamp = $state<number | null>(null);
+
+	// UI state
+	#loading = $state(false);
+	#error = $state<string | null>(null);
+	#isInitialized = $state(false);
+	#realtimeInitialized = false;
+
+	// Dedup loading
+	#loadingDetails = new Set<string>();
+	#initPromise: Promise<void> | null = null;
+
+	// syncReady: resolved when syncFromRemote() finishes
+	#syncPromise: Promise<void> = Promise.resolve();
+	#syncResolve: (() => void) | null = null;
+
+	// Hugo metadata key in syncMeta
+	#HUGO_META_KEY = 'recipes-hugo';
+
+	// =============================================================================
+	// GETTERS
+	// =============================================================================
+
+	get loading() {
+		return this.#loading;
+	}
+	get error() {
+		return this.#error;
+	}
+	get isInitialized() {
+		return this.#isInitialized;
+	}
+	get syncReady(): Promise<void> {
+		return this.#syncPromise;
+	}
+	get recipesIndex(): RecipeIndexEntry[] {
+		return Array.from(this.#recipesIndex.values());
+	}
+	get count() {
+		return this.#recipesIndex.size;
+	}
+
+	getAllRecipes(): RecipeIndexEntry[] {
+		return Array.from(this.#recipesIndex.values());
+	}
+
+	// =============================================================================
+	// 3-PHASE INIT
+	// =============================================================================
+
+	async loadCache(): Promise<void> {
+		if (this.#isInitialized) {
+			console.log('[RecipesStore] Cache déjà chargé');
+			return;
+		}
+
+		console.log('[RecipesStore] Chargement du cache...');
+		this.#loading = true;
+		this.#error = null;
+
+		try {
+			// 1. Load Hugo-cached index from db.recipeData
+			const hugoMeta = await db.syncMeta.get(this.#HUGO_META_KEY);
+			if (hugoMeta?.lastSync) {
+				this.#versionTimestamp = Number(hugoMeta.lastSync);
+			}
+
+			const cachedRows = await db.recipeData
+				.where('key')
+				.startsWith('idx:')
+				.toArray();
+
+			if (cachedRows.length > 0) {
+				for (const row of cachedRows) {
+					const entry = row.data as RecipeIndexEntry;
+					if (entry?.$id) {
+						this.#hugoRecipes.set(entry.$id, entry);
+					}
+				}
+				console.log(
+					`[RecipesStore] ${cachedRows.length} recettes Hugo chargées depuis le cache Dexie`
+				);
+			}
+
+			// 2. Appwrite recipes are already available via bridge (#appwriteRecipes)
+			// The $derived #recipesIndex automatically merges Hugo + Appwrite
+
+			this.#isInitialized = true;
+			console.log(
+				`[RecipesStore] Cache chargé: ${this.#hugoRecipes.size} recettes Hugo`
+			);
+		} catch (err) {
+			const message =
+				err instanceof Error
+					? err.message
+					: 'Erreur lors du chargement du cache';
+			this.#error = message;
+			console.error('[RecipesStore]', message, err);
+			throw err;
+		} finally {
+			this.#loading = false;
+		}
+	}
+
+	async syncFromRemote(): Promise<void> {
+		this.#syncPromise = new Promise<void>((resolve) => {
+			this.#syncResolve = resolve;
+		});
+
+		console.log(
+			'[RecipesStore] Synchronisation depuis sources distantes...'
+		);
+		this.#loading = true;
+
+		try {
+			// 1. Hugo data.json
+			try {
+				await this.#loadIndexFromDataJson();
+			} catch (err) {
+				console.error('[RecipesStore] Erreur chargement data.json:', err);
+				if (this.#recipesIndex.size === 0) {
+					throw new Error(
+						'Aucun cache disponible et data.json inaccessible'
+					);
+				}
+				console.log(
+					'[RecipesStore] Continuation avec les données du cache'
+				);
+			}
+
+			// 2. Appwrite delta sync via aw-sync
+			// initialFetch writes to db.recipes → bridge → $derived merges automatically
+			if (globalState.userId) {
+				try {
+					await this.#collection.initialFetch();
+				} catch (err) {
+					console.warn('[RecipesStore] Erreur sync Appwrite:', err);
+				}
+			}
+
+			console.log(
+				`[RecipesStore] Synchronisation terminée: ${this.#recipesIndex.size} recettes`
+			);
+		} catch (err) {
+			const message =
+				err instanceof Error
+					? err.message
+					: 'Erreur lors de la synchronisation';
+			this.#error = message;
+			console.error('[RecipesStore]', message, err);
+			throw err;
+		} finally {
+			this.#loading = false;
+			this.#syncResolve?.();
+			this.#syncResolve = null;
+		}
+	}
+
+	async syncFromRemotePublicOnly(): Promise<void> {
+		this.#syncPromise = new Promise<void>((resolve) => {
+			this.#syncResolve = resolve;
+		});
+
+		console.log(
+			'[RecipesStore] Synchronisation publique (Hugo uniquement)...'
+		);
+		this.#loading = true;
+
+		try {
+			try {
+				await this.#loadIndexFromDataJson();
+			} catch (err) {
+				console.error('[RecipesStore] Erreur chargement data.json:', err);
+				if (this.#recipesIndex.size === 0) {
+					throw new Error(
+						'Aucun cache disponible et data.json inaccessible'
+					);
+				}
+			}
+
+			console.log(
+				`[RecipesStore] Synchronisation publique terminée: ${this.#recipesIndex.size} recettes`
+			);
+		} catch (err) {
+			const message =
+				err instanceof Error
+					? err.message
+					: 'Erreur lors de la synchronisation publique';
+			this.#error = message;
+			console.error('[RecipesStore]', message, err);
+			throw err;
+		} finally {
+			this.#loading = false;
+			this.#syncResolve?.();
+			this.#syncResolve = null;
+		}
+	}
+
+	async setupRealtime(): Promise<void> {
+		if (this.#realtimeInitialized) {
+			console.log('[RecipesStore] Realtime déjà configuré');
+			return;
+		}
+
+		console.log('[RecipesStore] Configuration du realtime...');
+
+		if (!globalState.isAuthenticated) {
+			console.log('[RecipesStore] Mode visiteur : pas de realtime');
+			return;
+		}
+
+		try {
+			this.#collection.subscribe();
+			this.#realtimeInitialized = true;
+			// Le $derived #recipesIndex réagit automatiquement aux changements du bridge
+		} catch (err) {
+			console.warn('[RecipesStore] Erreur activation realtime:', err);
+		}
+	}
+
+	async initialize(): Promise<void> {
+		if (this.#isInitialized) {
+			console.log('[RecipesStore] Déjà initialisé');
+			return;
+		}
+
+		if (this.#initPromise) {
+			console.log(
+				'[RecipesStore] Initialisation déjà en cours, attente...'
+			);
+			return this.#initPromise;
+		}
+
+		console.log('[RecipesStore] Initialisation...');
+		this.#loading = true;
+		this.#error = null;
+
+		this.#initPromise = (async () => {
+			try {
+				await this.loadCache();
+				await this.syncFromRemote();
+				await this.setupRealtime();
+
+				if (this.#recipesIndex.size === 0) {
+					const message =
+						'Aucune recette disponible après initialisation';
+					this.#error = message;
+					console.warn('[RecipesStore]', message);
+				}
+
+				console.log(
+					`[RecipesStore] Initialisation complétée: ${this.#recipesIndex.size} recettes`
+				);
+			} catch (err) {
+				const message =
+					err instanceof Error
+						? err.message
+						: 'Erreur lors de l\'initialisation';
+				this.#error = message;
+				console.error(
+					'[RecipesStore] ECHEC Initialisation:',
+					message,
+					err
+				);
+				throw err;
+			} finally {
+				this.#loading = false;
+				this.#initPromise = null;
+			}
+		})();
+
+		return this.#initPromise;
+	}
+
+	// =============================================================================
+	// HUGO data.json
+	// =============================================================================
+
+	async #loadIndexFromDataJson(): Promise<void> {
+		console.log('[RecipesStore] Chargement data.json...');
+
+		const response = await fetch(DATA_JSON_URL);
+		if (!response.ok) throw new Error(`Erreur HTTP: ${response.status}`);
+		const data = await response.json();
+
+		if (!Array.isArray(data.recipes)) {
+			throw new Error('Format invalide: recipes n\'est pas un tableau');
+		}
+
+		const remoteTimestamp: number | undefined = data.meta?.timestamp;
+		this.#versionTimestamp = remoteTimestamp ?? null;
+
+		// Check if Hugo data is newer than cached
+		const hugoMeta = await db.syncMeta.get(this.#HUGO_META_KEY);
+		const cachedTimestamp = hugoMeta?.lastSync
+			? Number(hugoMeta.lastSync)
+			: null;
+
+		if (
+			remoteTimestamp &&
+			cachedTimestamp &&
+			cachedTimestamp >= remoteTimestamp
+		) {
+			console.log(
+				`[RecipesStore] Cache Hugo à jour (Ts: ${cachedTimestamp} >= ${remoteTimestamp})`
+			);
+			return;
+		}
+
+		console.log(
+			`[RecipesStore] Nouvelle version Hugo détectée (Ts: ${remoteTimestamp})`
+		);
+
+		// Smart merge Hugo recipes into #hugoRecipes
+		const recipes = data.recipes.map((r: any) => parseRecipeIndexEntry(r));
+		let updatedCount = 0;
+		const updatedIds: string[] = [];
+
+		recipes.forEach((newRecipe: RecipeIndexEntry) => {
+			const existing = this.#hugoRecipes.get(newRecipe.$id);
+
+			let shouldUpdate = false;
+			if (!existing) {
+				shouldUpdate = true;
+			} else {
+				const newDate = new Date(newRecipe.$updatedAt).getTime();
+				const existingDate = new Date(existing.$updatedAt).getTime();
+				if (newDate > existingDate) {
+					shouldUpdate = true;
+				}
+			}
+
+			if (shouldUpdate) {
+				this.#hugoRecipes.set(newRecipe.$id, newRecipe);
+				updatedIds.push(newRecipe.$id);
+				updatedCount++;
+			}
+		});
+
+		console.log(
+			`[RecipesStore] Smart Merge Hugo: ${updatedCount} recettes mises à jour/ajoutées`
+		);
+
+		// Invalidate stale details for updated Hugo recipes
+		if (updatedIds.length > 0) {
+			await db.recipeData.bulkDelete(
+				updatedIds.map((id) => `detail:${id}`)
+			);
+		}
+
+		// Persist Hugo index to Dexie
+		await db.transaction('rw', db.recipeData, db.syncMeta, async () => {
+			// Clear old Hugo index entries
+			const oldKeys = (await db.recipeData
+				.where('key')
+				.startsWith('idx:')
+				.keys()) as string[];
+			if (oldKeys.length > 0) {
+				await db.recipeData.bulkDelete(oldKeys);
+			}
+
+			// Write new index entries (all Hugo entries)
+			const rows = Array.from(this.#hugoRecipes.values())
+				.map((entry) => ({
+					key: `idx:${entry.$id}`,
+					data: entry as unknown
+				}));
+			if (rows.length > 0) {
+				await db.recipeData.bulkPut(rows);
+			}
+
+			// Update Hugo metadata
+			await db.syncMeta.put({
+				collectionId: this.#HUGO_META_KEY,
+				lastSync: String(remoteTimestamp ?? Date.now() / 1000)
+			});
+		});
+	}
+
+	// =============================================================================
+	// FORCE RELOAD / HARD RESET
+	// =============================================================================
+
+	async forceReloadAllRecipes(): Promise<void> {
+		if (!globalState.userId) {
+			throw new Error('Utilisateur non connecté');
+		}
+
+		this.#loading = true;
+		this.#error = null;
+
+		try {
+			console.log(
+				'[RecipesStore] Rechargement forcé des recettes Appwrite...'
+			);
+
+			const appwriteRecipes = await forceReloadAllAppwriteRecipes();
+
+			// Bulk put into Dexie → bridge → $derived #recipesIndex se met à jour
+			await db.recipes.bulkPut(appwriteRecipes);
+
+			const addedCount = appwriteRecipes.filter((r) => r.status !== 'deleted').length;
+			const deletedCount = appwriteRecipes.filter((r) => r.status === 'deleted').length;
+
+			console.log(
+				`[RecipesStore] ${addedCount} recettes Appwrite chargées, ${deletedCount} supprimées`
+			);
+			console.log('[RecipesStore] Rechargement forcé terminé');
+		} catch (err) {
+			const message =
+				err instanceof Error
+					? err.message
+					: 'Erreur lors du rechargement';
+			this.#error = message;
+			console.error('[RecipesStore] Erreur rechargement forcé:', err);
+			throw err;
+		} finally {
+			this.#loading = false;
+		}
+	}
+
+	async hardReset(): Promise<void> {
+		if (!globalState.userId) {
+			throw new Error('Utilisateur non connecté');
+		}
+
+		console.log('[RecipesStore] HARD RESET - Vidage complet...');
+		this.#loading = true;
+		this.#error = null;
+
+		try {
+			this.#hugoRecipes.clear();
+
+			// Clear Dexie tables
+			await db.transaction(
+				'rw',
+				[db.recipes, db.recipeData, db.syncMeta],
+				async () => {
+					await db.recipes.clear();
+					await db.recipeData.clear();
+					await db.syncMeta.delete(this.#HUGO_META_KEY);
+					await db.syncMeta.delete('recettes');
+				}
+			);
+
+			// Reload Hugo → #hugoRecipes
+			await this.#loadIndexFromDataJson();
+
+			// Reload all Appwrite → db.recipes → bridge → $derived
+			const appwriteRecipes = await forceReloadAllAppwriteRecipes();
+			await db.recipes.bulkPut(
+				appwriteRecipes.filter((r) => r.status !== 'deleted')
+			);
+
+			const addedCount = appwriteRecipes.filter((r) => r.status !== 'deleted').length;
+			const deletedCount = appwriteRecipes.filter((r) => r.status === 'deleted').length;
+
+			console.log(
+				`[RecipesStore] ${addedCount} recettes Appwrite chargées, ${deletedCount} supprimées ignorées`
+			);
+			console.log('[RecipesStore] HARD RESET terminé');
+		} catch (err) {
+			const message =
+				err instanceof Error
+					? err.message
+					: 'Erreur lors du hard reset';
+			this.#error = message;
+			console.error('[RecipesStore] Erreur hard reset:', err);
+			throw err;
+		} finally {
+			this.#loading = false;
+		}
+	}
+
+	// =============================================================================
+	// PUBLIC API - INDEX READS
+	// =============================================================================
+
+	getRecipeIndexByUuid($id: string): RecipeIndexEntry | null {
+		return this.#recipesIndex.get($id) || null;
+	}
+
+	#normalizeString(str: string): string {
+		return str
+			.toLowerCase()
+			.normalize('NFD')
+			.replace(/[\u0300-\u036f]/g, '');
+	}
+
+	searchRecipes(query: string): RecipeIndexEntry[] {
+		if (!query.trim()) {
+			return this.recipesIndex;
+		}
+
+		const searchTerms = this.#normalizeString(query.trim()).split(/\s+/);
+
+		return this.recipesIndex.filter((recipe) => {
+			const recipeTitle = this.#normalizeString(recipe.title);
+			const titleWords = recipeTitle.split(/[\s\-_]+/);
+
+			return searchTerms.every((term) =>
+				titleWords.some((word) => word.startsWith(term))
+			);
+		});
+	}
+
+	get availableTypes(): string[] {
+		const types = new Set<string>();
+		this.recipesIndex.forEach((recipe) => types.add(recipe.typeR));
+		return Array.from(types).sort();
+	}
+
+	async canEditRecipe(uuid: string): Promise<boolean> {
+		if (!globalState.userId) return false;
+
+		try {
+			// Check from Appwrite bridge first (fast, local)
+			const localRecipe = this.#appwriteRecipes.get(uuid);
+			if (localRecipe) {
+				return (
+					localRecipe.createdBy === globalState.userId ||
+					Boolean(
+						localRecipe.permissionWrite?.includes(
+							globalState.userId
+						)
+					) ||
+					Boolean(
+						localRecipe.teams?.some((teamId) =>
+							globalState.userTeams.includes(teamId)
+						)
+					)
+				);
+			}
+
+			// Fallback: fetch from Appwrite
+			const recipe = await getAppwriteRecipe(uuid);
+			if (!recipe) return false;
+
+			return (
+				recipe.createdBy === globalState.userId ||
+				Boolean(
+					recipe.permissionWrite?.includes(globalState.userId)
+				) ||
+				Boolean(
+					recipe.teams?.some((teamId) =>
+						globalState.userTeams.includes(teamId)
+					)
+				)
+			);
+		} catch (err) {
+			console.error(
+				`[RecipesStore] Erreur vérification permissions ${uuid}:`,
+				err
+			);
+			return false;
+		}
+	}
+
+	getRecipeLockStatus(uuid: string): string | null {
+		const entry = this.#recipesIndex.get(uuid);
+		return entry?.lockedBy || null;
+	}
+
+	// =============================================================================
+	// PUBLIC API - LOCKING
+	// =============================================================================
+
+	async updateRecipeLock(
+		uuid: string,
+		lockedBy: string | null
+	): Promise<void> {
+		if (!globalState.userId) return;
+
+		try {
+			// Optimistic update via aw-sync: Dexie → bridge → $derived → UI
+			await this.#collection.update(uuid, { lockedBy } as Partial<Recettes>);
+
+			console.log(
+				`[RecipesStore] Verrou ${uuid} mis à jour: ${lockedBy || 'libéré'}`
+			);
+		} catch (error) {
+			console.error(
+				`[RecipesStore] Erreur verrouillage ${uuid}:`,
+				error
+			);
+			throw error;
+		}
+	}
+
+	// =============================================================================
+	// PUBLIC API - LAZY LOADING DETAILS
+	// =============================================================================
+
+	async getRecipeByUuid(uuid: string): Promise<RecipeForDisplay | null> {
+		if (this.#loadingDetails.has(uuid)) {
+			console.log(
+				`[RecipesStore] Chargement de ${uuid} déjà en cours, attente...`
+			);
+			while (this.#loadingDetails.has(uuid)) {
+				await new Promise((resolve) => setTimeout(resolve, 50));
+			}
+			return this.#loadDetailFromDexie(uuid);
+		}
+
+		this.#loadingDetails.add(uuid);
+
+		try {
+			// 1. Check Dexie cache
+			const cached = await this.#loadDetailFromDexie(uuid);
+			if (cached) return cached;
+
+			// 2. Fetch from source
+			let recipeData: RecipeForDisplay | null = null;
+
+			// 2a. Try Hugo (published recipes)
+			try {
+				const recipePath = `/recipe/${uuid}/recipe.json`;
+				const response = await fetch(recipePath);
+				if (response.ok) {
+					const rawData = await response.json();
+					recipeData = parseRecipeData(rawData);
+					console.log(`[RecipesStore] ${uuid} chargée depuis Hugo`);
+				}
+			} catch (err) {
+				console.log(`[RecipesStore] ${uuid} non trouvée dans Hugo`);
+			}
+
+			// 2b. Fallback Appwrite
+			if (!recipeData && globalState.userId) {
+				recipeData = await this.#loadDetailFromAppwrite(uuid);
+			}
+
+			// 3. Cache in Dexie
+			if (recipeData) {
+				await this.#saveDetailToDexie(uuid, recipeData);
+			} else {
+				console.warn(
+					`[RecipesStore] ${uuid} non trouvée (Hugo ni Appwrite)`
+				);
+			}
+
+			return recipeData;
+		} catch (err) {
+			console.error(
+				`[RecipesStore] Erreur lors du chargement de ${uuid}:`,
+				err
+			);
+			return null;
+		} finally {
+			this.#loadingDetails.delete(uuid);
+		}
+	}
+
+	async getRecipesByUuidsBulk(
+		uuids: string[]
+	): Promise<Map<string, RecipeForDisplay>> {
+		const startTime = performance.now();
+		const uniqueUuids = [...new Set(uuids.filter(Boolean))];
+		if (uniqueUuids.length === 0) return new Map();
+
+		console.log(
+			`[RecipesStore] Chargement bulk de ${uniqueUuids.length} recettes...`
+		);
+
+		// 1. Load cached from Dexie
+		const cached = new Map<string, RecipeForDisplay>();
+		const keys = uniqueUuids.map((id) => `detail:${id}`);
+		const rows = await db.recipeData.bulkGet(keys);
+		for (let i = 0; i < rows.length; i++) {
+			const row = rows[i];
+			if (row?.data) {
+				cached.set(uniqueUuids[i], row.data as RecipeForDisplay);
+			}
+		}
+
+		// 2. Identify missing
+		const missing = uniqueUuids.filter((uuid) => !cached.has(uuid));
+		console.log(
+			`[RecipesStore] Bulk: ${cached.size} dans le cache, ${missing.length} à fetch`
+		);
+
+		// 3. Fetch missing in parallel
+		const fetched = new Map<string, RecipeForDisplay>();
+		if (missing.length > 0) {
+			missing.forEach((uuid) => this.#loadingDetails.add(uuid));
+
+			try {
+				const fetchPromises = missing.map(async (uuid) => {
+					let recipeData: RecipeForDisplay | null = null;
+
+					try {
+						const response = await fetch(
+							`/recipe/${uuid}/recipe.json`
+						);
+						if (response.ok) {
+							recipeData = parseRecipeData(
+								await response.json()
+							);
+						}
+					} catch {
+						// Silent
+					}
+
+					if (!recipeData && globalState.userId) {
+						recipeData =
+							await this.#loadDetailFromAppwrite(uuid);
+					}
+
+					return recipeData ? { uuid, recipe: recipeData } : null;
+				});
+
+				const results = await Promise.all(fetchPromises);
+				const toSave: { key: string; data: unknown }[] = [];
+
+				for (const result of results) {
+					if (result) {
+						fetched.set(result.uuid, result.recipe);
+						toSave.push({
+							key: `detail:${result.uuid}`,
+							data: result.recipe as unknown
+						});
+					}
+				}
+
+				if (toSave.length > 0) {
+					await db.recipeData.bulkPut(toSave);
+				}
+
+				missing.forEach((uuid) => this.#loadingDetails.delete(uuid));
+			} catch (err) {
+				console.error('[RecipesStore] Erreur fetch bulk:', err);
+				missing.forEach((uuid) => this.#loadingDetails.delete(uuid));
+			}
+		}
+
+		const allRecipes = new Map([...cached, ...fetched]);
+		const elapsed = performance.now() - startTime;
+		console.log(
+			`[RecipesStore] Bulk terminé: ${allRecipes.size}/${uniqueUuids.length} recettes en ${elapsed.toFixed(0)}ms`
+		);
+
+		return allRecipes;
+	}
+
+	async preloadRecipes(uuids: string[]): Promise<void> {
+		console.log(
+			`[RecipesStore] Préchargement de ${uuids.length} recettes...`
+		);
+		await Promise.all(uuids.map((uuid) => this.getRecipeByUuid(uuid)));
+		console.log('[RecipesStore] Préchargement terminé');
+	}
+
+	// =============================================================================
+	// VARIANT GROUPS
+	// =============================================================================
+
+	async getVariantGroup(
+		recipeId: string,
+		maxDepth: number = 2
+	): Promise<{
+		root: RecipeIndexEntry | null;
+		variants: RecipeIndexEntry[];
+		isRoot: boolean;
+	}> {
+		const initial = this.getRecipeIndexByUuid(recipeId);
+		if (!initial) {
+			return { root: null, variants: [], isRoot: false };
+		}
+
+		const allVariants = new Map<string, RecipeIndexEntry>();
+		const visitedRoots = new Set<string>();
+
+		let current = initial;
+		while (
+			current.rootRecipeId &&
+			!visitedRoots.has(current.rootRecipeId)
+		) {
+			visitedRoots.add(current.$id);
+			const parent = this.getRecipeIndexByUuid(current.rootRecipeId);
+			if (!parent) break;
+			current = parent;
+		}
+
+		const root = current;
+		allVariants.set(root.$id, root);
+
+		this.#collectVariants(
+			root.$id,
+			allVariants,
+			new Set([root.$id]),
+			0,
+			maxDepth
+		);
+
+		return {
+			root,
+			variants: Array.from(allVariants.values()),
+			isRoot:
+				!initial.rootRecipeId || initial.rootRecipeId === initial.$id
+		};
+	}
+
+	#collectVariants(
+		rootId: string,
+		collected: Map<string, RecipeIndexEntry>,
+		visitedRoots: Set<string>,
+		depth: number,
+		maxDepth: number
+	): void {
+		if (depth > maxDepth) return;
+
+		for (const [uuid, recipe] of this.#recipesIndex) {
+			if (collected.has(uuid)) continue;
+
+			if (recipe.rootRecipeId === rootId) {
+				collected.set(uuid, recipe);
+
+				if (
+					recipe.rootRecipeId &&
+					recipe.rootRecipeId !== rootId &&
+					!visitedRoots.has(recipe.rootRecipeId)
+				) {
+					visitedRoots.add(recipe.rootRecipeId);
+					this.#collectVariants(
+						recipe.rootRecipeId,
+						collected,
+						visitedRoots,
+						depth + 1,
+						maxDepth
+					);
+				}
+			}
+		}
+	}
+
+	findRootRecipe(recipeId: string): string {
+		const visited = new Set<string>();
+		let currentId = recipeId;
+
+		for (let i = 0; i < 10; i++) {
+			const recipe = this.getRecipeIndexByUuid(currentId);
+			if (!recipe || !recipe.rootRecipeId) return currentId;
+
+			if (visited.has(currentId)) {
+				console.error(
+					'[RecipesStore] Cycle détecté dans rootRecipeId, retour à',
+					recipeId
+				);
+				return recipeId;
+			}
+
+			visited.add(currentId);
+			currentId = recipe.rootRecipeId;
+		}
+
+		return recipeId;
+	}
+
+	// =============================================================================
+	// DETAIL HELPERS
+	// =============================================================================
+
+	async #loadDetailFromDexie(
+		uuid: string
+	): Promise<RecipeForDisplay | null> {
+		const row = await db.recipeData.get(`detail:${uuid}`);
+		return (row?.data as RecipeForDisplay | undefined) ?? null;
+	}
+
+	async #saveDetailToDexie(
+		uuid: string,
+		data: RecipeForDisplay
+	): Promise<void> {
+		await db.recipeData.put({
+			key: `detail:${uuid}`,
+			data: data as unknown
+		});
+	}
+
+	async #loadDetailFromAppwrite(
+		uuid: string
+	): Promise<RecipeForDisplay | null> {
+		try {
+			// Try local bridge first
+			const localRecipe = this.#appwriteRecipes.get(uuid);
+			if (localRecipe && localRecipe.status !== 'deleted') {
+				return this.#appwriteRecipeToDisplay(localRecipe);
+			}
+
+			// Fallback: fetch from Appwrite
+			const appwriteRecipe = await getAppwriteRecipe(uuid);
+			if (!appwriteRecipe) return null;
+
+			console.log(
+				`[RecipesStore] ${uuid} chargée depuis Appwrite (fallback)`
+			);
+			return this.#appwriteRecipeToDisplay(appwriteRecipe);
+		} catch (err) {
+			console.log(
+				`[RecipesStore] ${uuid} non trouvée dans Appwrite`
+			);
+			return null;
+		}
+	}
+
+	#appwriteRecipeToDisplay(recipe: Recettes): RecipeForDisplay {
+		const ingredients = ingredientsFromAppwrite(recipe.ingredients || []);
+
+		return {
+			...recipe,
+			ingredients,
+			astuces: astucesFromAppwrite(recipe.astuces),
+			prepAlt: recipe.prepAlt || null,
+			categories: recipe.categories,
+			regime: recipe.regime,
+			saison: recipe.saison,
+			teams: recipe.teams,
+			permissionWrite: recipe.permissionWrite
+		};
+	}
+
+	// =============================================================================
+	// CLEANUP
+	// =============================================================================
+
+	destroy(): void {
+		this.#bridge.subscription.unsubscribe();
+		this.#collection.unsubscribeAll();
+		this.#recipesIndex.clear();
+		this.#isInitialized = false;
+		this.#realtimeInitialized = false;
+		console.log('[RecipesStore] Ressources nettoyées');
+	}
 }
-
-// =============================================================================
-// EXPORT SINGLETON
-// =============================================================================
 
 export const recipesStore = new RecipesStore();

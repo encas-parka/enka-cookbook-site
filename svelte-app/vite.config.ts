@@ -1,7 +1,7 @@
 import tailwindcss from "@tailwindcss/vite";
 import { defineConfig } from "vite";
 import { svelte } from "@sveltejs/vite-plugin-svelte";
-import { VitePWA } from "vite-plugin-pwa";
+import { VitePWA, type VitePWAOptions } from "vite-plugin-pwa";
 import path from "path";
 import { fileURLToPath } from "url";
 // import { visualizer } from "rollup-plugin-visualizer";
@@ -10,7 +10,7 @@ import { fileURLToPath } from "url";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const pwaConfig = {
+const pwaConfig: Partial<VitePWAOptions> = {
   registerType: "autoUpdate" as const,
   injectRegister: false, // Hugo contrôle le HTML, on enregistre le SW manuellement
   manifest: {

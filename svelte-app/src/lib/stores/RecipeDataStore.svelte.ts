@@ -1,38 +1,29 @@
 /**
  * RecipeDataStore - Store unifié pour les données statiques de recettes
  *
- * Gère 3 sources de données JSON statiques :
- * 1. /static/data/ingredients.json (~50ko, 800 items)
- * 2. /static/data/recipe-info.json (materiel, categories, regimes)
- * 3. Cache IndexedDB pour performance
+ * Gère 2 sources de données JSON statiques Hugo :
+ * 1. /data/ingredients.json (~50ko, 800 items)
+ * 2. /data/recipe-info.json (materiel, categories, regimes)
  *
  * Architecture :
- * - Chargement IDB → Fetch JSON → Compare hash → Update si nécessaire
- * - Ajout d'ingrédients via fonction cloud Appwrite → Commit GitHub → Invalidation cache
- * - Modification recipe-info via fonction cloud
- *
- * Data Flow (ajout ingrédient) :
- * CMS → Appwrite Function → GitHub (Octokit) → Webhook → Rebuild → Client recharge
+ * - Persistence via Dexie db.catalog (key-value)
+ * - Chargement cache → Fetch JSON → Compare hash → Update si nécessaire
+ * - Ajout d'ingrédients via fonction cloud Appwrite → Commit GitHub → Webhook → Rebuild
  *
  * @usage
  * await recipeDataStore.initialize();
  * const ingredient = recipeDataStore.getIngredientByUuid('xo0ibs');
  * const categories = recipeDataStore.categories;
- * await recipeDataStore.addIngredient({ name: 'Tomate', type: 'legumes' });
  */
 
 import { SvelteMap } from "svelte/reactivity";
 import type {
   Ingredient,
   RecipeInfo,
-  RecipeDataCacheMetadata,
 } from "../types/recipes.types";
-import {
-  createRecipeDataIDBCache,
-  type RecipeDataIDBCache,
-} from "../services/recipe-data-idb-cache";
 import { serializeRecipeInfo } from "$lib/utils/serialization.utils";
 import { getAppwriteInstances } from "$lib/services/appwrite";
+import { db } from "$lib/db-sync/aw-sync";
 
 // =============================================================================
 // CONFIGURATION
@@ -40,6 +31,21 @@ import { getAppwriteInstances } from "$lib/services/appwrite";
 
 const INGREDIENTS_JSON_URL = "/data/ingredients.json";
 const RECIPE_INFO_JSON_URL = "/data/recipe-info.json";
+
+// Catalog keys in db.catalog
+const KEY_INGREDIENTS = "ingredients";
+const KEY_RECIPE_INFO = "recipe-info";
+const KEY_METADATA = "catalog-metadata";
+
+// =============================================================================
+// TYPES
+// =============================================================================
+
+interface CatalogMetadata {
+  lastSync: string | null;
+  dataJsonHash: string | null;
+  ingredientsCount: number;
+}
 
 // =============================================================================
 // STORE SINGLETON
@@ -58,9 +64,6 @@ class RecipeDataStore {
   #lastSync = $state<string | null>(null);
   #isInitialized = $state(false);
 
-  // Cache IndexedDB
-  #cache: RecipeDataIDBCache | null = null;
-
   // Propriétés dérivées
   #ingredientNames = $derived.by(() =>
     Array.from(this.#ingredients.values())
@@ -68,7 +71,10 @@ class RecipeDataStore {
       .sort(),
   );
 
-  // Getters publics
+  // ===========================================================================
+  // GETTERS PUBLICS
+  // ===========================================================================
+
   get loading() {
     return this.#loading;
   }
@@ -104,16 +110,15 @@ class RecipeDataStore {
     return this.#recipeInfo.regimes;
   }
 
-  // =============================================================================
+  // ===========================================================================
   // INITIALISATION
-  // =============================================================================
+  // ===========================================================================
 
   /**
    * Initialise le store
-   * 1. Ouvre IndexedDB
-   * 2. Charge depuis cache si disponible
-   * 3. Fetch JSON et compare hash
-   * 4. Met à jour si nécessaire
+   * 1. Charge depuis db.catalog si disponible
+   * 2. Fetch JSON et compare hash
+   * 3. Met à jour si nécessaire
    */
   async initialize(): Promise<void> {
     if (this.#isInitialized) {
@@ -126,23 +131,10 @@ class RecipeDataStore {
     this.#error = null;
 
     try {
-      // 1. Ouvrir IndexedDB
-      this.#cache = await createRecipeDataIDBCache();
+      // 1. Charger depuis le cache Dexie
+      await this.#loadFromCatalog();
 
-      // 2. Charger depuis cache
-      const cachedData = await this.#cache.loadAll();
-      const cachedMetadata = await this.#cache.loadMetadata();
-
-      if (cachedData.ingredients.size > 0) {
-        console.log(
-          `[RecipeDataStore] Cache: ${cachedData.ingredients.size} ingrédients`,
-        );
-        this.#ingredients = new SvelteMap(cachedData.ingredients);
-        this.#recipeInfo = cachedData.recipeInfo;
-        this.#lastSync = cachedMetadata.lastSync;
-      }
-
-      // 3. Charger depuis JSON et vérifier hash
+      // 2. Charger depuis JSON et vérifier hash
       await this.#loadFromJSON();
 
       this.#isInitialized = true;
@@ -161,13 +153,42 @@ class RecipeDataStore {
   }
 
   /**
+   * Charge les données depuis db.catalog (Dexie)
+   */
+  async #loadFromCatalog(): Promise<void> {
+    const [ingredientsRow, recipeInfoRow, metadataRow] = await db.catalog.bulkGet([
+      KEY_INGREDIENTS,
+      KEY_RECIPE_INFO,
+      KEY_METADATA,
+    ]);
+
+    const ingredientsMap = ingredientsRow?.data as Map<string, Ingredient> | undefined;
+    const recipeInfo = recipeInfoRow?.data as RecipeInfo | undefined;
+    const metadata = metadataRow?.data as CatalogMetadata | undefined;
+
+    if (ingredientsMap && ingredientsMap.size > 0) {
+      this.#ingredients = new SvelteMap(ingredientsMap);
+      console.log(
+        `[RecipeDataStore] Cache: ${ingredientsMap.size} ingrédients`,
+      );
+    }
+
+    if (recipeInfo) {
+      this.#recipeInfo = recipeInfo;
+    }
+
+    if (metadata) {
+      this.#lastSync = metadata.lastSync;
+    }
+  }
+
+  /**
    * Charge depuis JSON statiques et compare les hash
    */
   async #loadFromJSON(): Promise<void> {
     try {
       console.log("[RecipeDataStore] Fetch JSON...");
 
-      // Fetch parallèle
       const [ingredientsRes, recipeInfoRes] = await Promise.all([
         fetch(INGREDIENTS_JSON_URL),
         fetch(RECIPE_INFO_JSON_URL),
@@ -188,20 +209,21 @@ class RecipeDataStore {
       );
 
       // Vérifier si changement
-      const cachedMetadata = await this.#cache!.loadMetadata();
-      if (cachedMetadata.dataJsonHash === contentHash) {
+      const metadataRow = await db.catalog.get(KEY_METADATA);
+      const metadata = metadataRow?.data as CatalogMetadata | undefined;
+
+      if (metadata?.dataJsonHash === contentHash) {
         console.log("[RecipeDataStore] JSON inchangés, cache valide");
         return;
       }
 
       console.log("[RecipeDataStore] Mise à jour depuis JSON...");
 
-      // Trier les ingrédients par nom alphabétique (français) avant de créer le Map
+      // Trier les ingrédients par nom alphabétique
       const sortedIngredients = (ingredientsData as Ingredient[]).sort((a, b) =>
         a.n.localeCompare(b.n, "fr"),
       );
 
-      // Mettre à jour ingrédients
       const ingredientsMap = new Map<string, Ingredient>();
       sortedIngredients.forEach((ing) => {
         ingredientsMap.set(ing.u, ing);
@@ -211,18 +233,19 @@ class RecipeDataStore {
       this.#recipeInfo = recipeInfoData as RecipeInfo;
       this.#lastSync = new Date().toISOString();
 
-      // Sauvegarder dans IndexedDB
-      if (this.#cache) {
-        await this.#cache.saveAll({
-          ingredients: ingredientsMap,
-          recipeInfo: serializeRecipeInfo(this.#recipeInfo),
-        });
-        await this.#cache.saveMetadata({
-          lastSync: this.#lastSync,
-          dataJsonHash: contentHash,
-          ingredientsCount: ingredientsMap.size,
-        });
-      }
+      // Sauvegarder dans db.catalog
+      await db.catalog.bulkPut([
+        { key: KEY_INGREDIENTS, data: ingredientsMap },
+        { key: KEY_RECIPE_INFO, data: serializeRecipeInfo(this.#recipeInfo) },
+        {
+          key: KEY_METADATA,
+          data: {
+            lastSync: this.#lastSync,
+            dataJsonHash: contentHash,
+            ingredientsCount: ingredientsMap.size,
+          } satisfies CatalogMetadata,
+        },
+      ]);
 
       console.log(
         `[RecipeDataStore] ✓ Cache mis à jour (hash: ${contentHash.slice(0, 8)}...)`,
@@ -244,9 +267,9 @@ class RecipeDataStore {
     return hashArray.map((b) => b.toString(16).padStart(2, "0")).join("");
   }
 
-  // =============================================================================
+  // ===========================================================================
   // API PUBLIQUE - INGRÉDIENTS
-  // =============================================================================
+  // ===========================================================================
 
   getIngredientByUuid(uuid: string): Ingredient | null {
     return this.#ingredients.get(uuid) || null;
@@ -300,12 +323,10 @@ class RecipeDataStore {
     try {
       console.log("[RecipeDataStore] Ajout ingrédient:", data.name);
 
-      // Récupérer les instances Appwrite
       const { functions } = await getAppwriteInstances();
 
-      // Appeler la fonction cloud Appwrite
       const response = await functions.createExecution({
-        functionId: "68f00487000c624533a3", // enkaData function ID
+        functionId: "68f00487000c624533a3",
         body: JSON.stringify({
           action: "add_ingredient",
           data: {
@@ -320,7 +341,6 @@ class RecipeDataStore {
         async: false,
       });
 
-      // Parser la réponse
       const result = JSON.parse(response.responseBody);
 
       if (!result.success) {
@@ -334,15 +354,18 @@ class RecipeDataStore {
       // Mise à jour locale optimiste
       this.#ingredients.set(newIngredient.u, newIngredient);
 
-      // Sauvegarder dans IDB
-      if (this.#cache) {
-        await this.#cache.upsertIngredient(newIngredient);
-      }
+      // Sauvegarder dans db.catalog
+      await db.catalog.put({ key: KEY_INGREDIENTS, data: new Map(this.#ingredients) });
 
       // Invalider le hash pour forcer le reload au prochain refresh
-      if (this.#cache) {
-        await this.#cache.updateDataJsonHash(null);
-      }
+      await db.catalog.put({
+        key: KEY_METADATA,
+        data: {
+          lastSync: this.#lastSync,
+          dataJsonHash: null,
+          ingredientsCount: this.#ingredients.size,
+        } satisfies CatalogMetadata,
+      });
 
       console.log(
         `[RecipeDataStore] ✓ Ingrédient ajouté: ${newIngredient.n} (${newIngredient.u})`,
@@ -355,13 +378,10 @@ class RecipeDataStore {
     }
   }
 
-  // =============================================================================
+  // ===========================================================================
   // API PUBLIQUE - RECIPE INFO
-  // =============================================================================
+  // ===========================================================================
 
-  /**
-   * Ajoute une catégorie
-   */
   async addCategory(category: string): Promise<void> {
     if (this.#recipeInfo.categories.includes(category)) {
       console.warn(`[RecipeDataStore] Catégorie déjà existante: ${category}`);
@@ -374,9 +394,6 @@ class RecipeDataStore {
     });
   }
 
-  /**
-   * Ajoute du matériel
-   */
   async addMateriel(materiel: string): Promise<void> {
     if (this.#recipeInfo.materiel.includes(materiel)) {
       console.warn(`[RecipeDataStore] Matériel déjà existant: ${materiel}`);
@@ -389,9 +406,6 @@ class RecipeDataStore {
     });
   }
 
-  /**
-   * Ajoute un régime
-   */
   async addRegime(regime: string): Promise<void> {
     if (this.#recipeInfo.regimes.includes(regime)) {
       console.warn(`[RecipeDataStore] Régime déjà existant: ${regime}`);
@@ -411,11 +425,10 @@ class RecipeDataStore {
     try {
       console.log("[RecipeDataStore] Mise à jour recipe-info...");
 
-      // Récupérer les instances Appwrite
       const { functions } = await getAppwriteInstances();
 
       const response = await functions.createExecution({
-        functionId: "68f00487000c624533a3", // enkaData function ID
+        functionId: "68f00487000c624533a3",
         body: JSON.stringify({
           action: "update_recipe_info",
           data: newInfo,
@@ -423,7 +436,6 @@ class RecipeDataStore {
         async: false,
       });
 
-      // Parser la réponse
       const result = JSON.parse(response.responseBody);
 
       if (!result.success) {
@@ -435,15 +447,18 @@ class RecipeDataStore {
       // Mise à jour locale optimiste
       this.#recipeInfo = newInfo;
 
-      // Sauvegarder dans IDB
-      if (this.#cache) {
-        await this.#cache.saveAll({
-          ingredients: new Map(this.#ingredients),
-          recipeInfo: serializeRecipeInfo(newInfo),
-        });
-        // Invalider le hash
-        await this.#cache.updateDataJsonHash(null);
-      }
+      // Sauvegarder dans db.catalog
+      await db.catalog.bulkPut([
+        { key: KEY_RECIPE_INFO, data: serializeRecipeInfo(newInfo) },
+        {
+          key: KEY_METADATA,
+          data: {
+            lastSync: this.#lastSync,
+            dataJsonHash: null,
+            ingredientsCount: this.#ingredients.size,
+          } satisfies CatalogMetadata,
+        },
+      ]);
 
       console.log("[RecipeDataStore] ✓ recipe-info mis à jour");
     } catch (err) {
@@ -452,9 +467,9 @@ class RecipeDataStore {
     }
   }
 
-  // =============================================================================
+  // ===========================================================================
   // UTILITAIRES
-  // =============================================================================
+  // ===========================================================================
 
   async forceReload(): Promise<void> {
     console.log("[RecipeDataStore] Rechargement forcé...");
@@ -462,9 +477,10 @@ class RecipeDataStore {
     this.#error = null;
 
     try {
-      if (this.#cache) {
-        await this.#cache.updateDataJsonHash(null);
-      }
+      await db.catalog.put({
+        key: KEY_METADATA,
+        data: { lastSync: this.#lastSync, dataJsonHash: null, ingredientsCount: 0 } satisfies CatalogMetadata,
+      });
       await this.#loadFromJSON();
       console.log("[RecipeDataStore] ✓ Rechargement complété");
     } catch (err) {
@@ -479,21 +495,15 @@ class RecipeDataStore {
   }
 
   async clearCache(): Promise<void> {
-    if (this.#cache) {
-      await this.#cache.clear();
-      console.log("[RecipeDataStore] Cache vidé");
-    }
+    await db.catalog.clear();
     this.#ingredients.clear();
     this.#recipeInfo = { materiel: [], categories: [], regimes: [] };
     this.#lastSync = null;
     this.#isInitialized = false;
+    console.log("[RecipeDataStore] Cache vidé");
   }
 
   destroy(): void {
-    if (this.#cache) {
-      this.#cache.close();
-      this.#cache = null;
-    }
     this.#ingredients.clear();
     this.#isInitialized = false;
     console.log("[RecipeDataStore] Ressources nettoyées");

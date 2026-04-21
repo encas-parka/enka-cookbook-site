@@ -150,7 +150,6 @@ export interface EnrichedProduct {
   totalAssiettes: number;
   isSynced: boolean;
   mainId: Main | string; // ou Main (géré au sync)
-  totalNeededRaw: NumericQuantity[];
 
   // DONNÉES INTERACTIVES / COLLABORATIVES (brutes Appwrite)
   status: string;
@@ -177,9 +176,7 @@ export interface EnrichedProduct {
   totalNeededArray: NumericQuantity[]; // Calculé de byDateParsed
   totalPurchasesArray: NumericQuantity[]; // Calculé de purchases
   missingQuantityArray: NumericQuantity[]; // Calculé
-  stockOrTotalPurchases: string; // Calculé
   displayTotalNeeded: string; // Formaté pour UI
-  displayTotalPurchases: string; // Formaté pour UI
   displayMissingQuantity: string; // Formaté pour UI
   displayTotalOverride: string; // Formaté pour UI depuis totalNeededOverride
   totalNeededOverrideParsed: TotalNeededOverrideData | null; // Parsé de totalNeededOverride
@@ -189,7 +186,6 @@ export interface EnrichedProduct {
 
   // Specs pour produits manuels
   specs: string | null;
-  specsParsed: ManualSpecs | null;
 }
 
 export interface ManualSpecs {

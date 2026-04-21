@@ -5,6 +5,7 @@
   } from "$lib/types/event-materiel.types";
   import { getEventMaterielStatusConfig } from "$lib/utils/materiel.utils";
   import { Hash, MapPin, User, CircleDot, CircleAlert } from "@lucide/svelte";
+  import { toastService } from "$lib/services/toast.service.svelte";
 
   interface Props {
     maxQuantity: number;
@@ -30,7 +31,9 @@
     onCancel,
   }: Props = $props();
 
+  // svelte-ignore state_referenced_locally
   let quantity = $state(Math.min(1, maxQuantity));
+  // svelte-ignore state_referenced_locally
   let status = $state<EventMaterielStatus>(presetStatus ?? "to_check");
   let who = $state("");
   let where = $state("");
@@ -73,7 +76,10 @@
   async function handleSubmit(e: Event) {
     e.preventDefault();
     attempted = true;
-    if (validationErrors.length > 0) return;
+    if (validationErrors.length > 0) {
+      validationErrors.forEach((err) => toastService.error(err));
+      return;
+    }
 
     submitting = true;
     try {
@@ -95,7 +101,7 @@
     <div class="mb-2">
       <strong>{headerName}</strong>
       {#if maxQuantity > 0}
-        <span class="badge badge-warning badge-sm float-end"
+        <span class="badge badge-warning float-end"
           >besoin total: {maxQuantity}</span
         >
       {/if}
@@ -136,13 +142,12 @@
       <legend class="fieldset-legend required"
         ><User class="inline size-4" /> Qui ?</legend
       >
-      <label class="input w-full">
+      <label class="input w-full {whoError ? 'input-error' : ''}">
         <input
           type="text"
           bind:value={who}
           placeholder="Personne responsable"
-          class="grow {whoError ? 'input-error' : ''}"
-          required={needsSource}
+          class="grow"
         />
       </label>
     </fieldset>
@@ -151,13 +156,12 @@
       <legend class="fieldset-legend required"
         ><MapPin class="inline size-4" /> Où ?</legend
       >
-      <label class="input w-full">
+      <label class="input w-full {whereError ? 'input-error' : ''}">
         <input
           type="text"
           bind:value={where}
           placeholder="Lieu de stockage"
-          class="grow {whereError ? 'input-error' : ''}"
-          required={needsSource}
+          class="grow"
         />
       </label>
     </fieldset>
@@ -169,18 +173,12 @@
         bind:value={notes}
         placeholder="Notes supplémentaires..."
         class="textarea w-full"
+        maxlength="255"
       ></textarea>
     </fieldset>
   </div>
 
   {#if attempted && validationErrors.length > 0}
-    <div class="alert alert-warning alert-soft text-sm">
-      <CircleAlert class="size-4 shrink-0" />
-      <ul class="list-disc pl-2">
-        {#each validationErrors as err}
-          <li>{err}</li>
-        {/each}
-      </ul>
-    </div>
+    <!-- Les erreurs sont maintenant gérées par toastService -->
   {/if}
 </form>

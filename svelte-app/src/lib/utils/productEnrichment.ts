@@ -36,6 +36,7 @@ import { UnitConverter } from "./UnitConverter";
 import { calculateAllDateDisplayInfo } from "./dateRange";
 import { recipesStore } from "$lib/stores/RecipesStore.svelte";
 import type { ProductWithPurchases } from "../services/appwrite-products";
+import type { ParsedNeed } from "./product-need-serializer";
 
 /**
  * Type interne pour les produits avec purchases optionnel.
@@ -66,16 +67,15 @@ type ProductWithOptionalPurchases = Partial<Models.Row> & {
 };
 
 /**
- * Crée un EnrichedProduct depuis un Products Appwrite seul
- * ⚠️ Utilisé au sync si le produit n'existe pas localement (cas rare)
+ * Construit un EnrichedProduct de base depuis un produit Appwrite brut.
+ * Ne contient que les données Appwrite parsées + purchases agrégées.
+ * Les champs Hugo (byDate, nbRecipes, etc.) sont à leurs valeurs par défaut.
  */
-export function createEnrichedProductFromAppwrite(
+export function buildRawProductBase(
   product: ProductWithOptionalPurchases,
 ): EnrichedProduct {
-  // Parser les specs (métadonnées manuelles)
   const specsParsed = safeJsonParse<ManualSpecs>(product.specs) ?? null;
 
-  // Calculer depuis purchases (en filtrant les supprimés)
   const activePurchases = (product.purchases ?? []).filter(
     (p) => p.status !== "deleted",
   );
@@ -83,19 +83,14 @@ export function createEnrichedProductFromAppwrite(
     transformPurchasesToNumericQuantity(activePurchases),
   );
 
-  // byDate manquant = pas de totalNeededArray par défaut
-  let totalNeededArray: NumericQuantity[] = [];
+  const totalNeededArray: NumericQuantity[] = specsParsed?.quantity
+    ? [specsParsed.quantity]
+    : [];
 
-  // Si produit manuel avec quantité définie dans specs, on l'utilise comme besoin
-  if (specsParsed?.quantity) {
-    totalNeededArray = [specsParsed.quantity];
-  }
-
-  // 🎯 Priorité : Override manuel > Calcul auto
-  // Parser l'override s'il existe pour le calcul du missing
   const totalNeededOverrideParsed = safeJsonParse<TotalNeededOverrideData>(
     product.totalNeededOverride,
   );
+
   const effectiveNeededArray = totalNeededOverrideParsed
     ? [totalNeededOverrideParsed.totalOverride]
     : totalNeededArray;
@@ -103,7 +98,6 @@ export function createEnrichedProductFromAppwrite(
   const { numeric: missingQuantityArray, display: displayMissingQuantity } =
     calculateAndFormatMissing(effectiveNeededArray, totalPurchasesArray);
 
-  // Parser et normaliser le stock (kg→gr., l.→ml)
   let stockParsed = safeJsonParse<any>(product.stockReel) ?? null;
   if (stockParsed && stockParsed.quantity && stockParsed.unit) {
     const normalized = UnitConverter.normalize(
@@ -117,35 +111,25 @@ export function createEnrichedProductFromAppwrite(
     };
   }
 
-  const displayTotalPurchases = formatTotalQuantity(totalPurchasesArray);
   const storeInfo = product.store
     ? safeJsonParse<StoreInfo>(product.store)
     : null;
 
-  const stockOrTotalPurchases = stockParsed
-    ? `${stockParsed.quantity} ${stockParsed.unit}`
-    : displayTotalPurchases;
-
   return {
-    // Métadonnées Appwrite
     $id: product.$id,
     $createdAt: product.$createdAt,
     $updatedAt: product.$updatedAt,
 
-    // Données métier
     productHugoUuid: product.productHugoUuid || "",
     productName: product.productName,
     productType: product.productType || "none",
-    // Utiliser les specs pour pF/pS, sinon false
     pF: specsParsed?.pF ?? false,
     pS: specsParsed?.pS ?? false,
     nbRecipes: 0,
     totalAssiettes: 0,
     isSynced: product.isSynced,
     mainId: product.mainId,
-    totalNeededRaw: [],
 
-    // Données collaboratives (brutes Appwrite)
     status: product.status,
     who: product.who,
     store: product.store,
@@ -161,21 +145,14 @@ export function createEnrichedProductFromAppwrite(
     purchases: product.purchases ?? [],
     specs: product.specs,
 
-    // Hugo (⚠️ manquant, sera vide)
     byDate: {},
-
-    // Calculées
     storeInfo,
     stockParsed,
-    specsParsed, // utile ?
     totalNeededArray,
     totalPurchasesArray,
     missingQuantityArray,
-    stockOrTotalPurchases,
-    displayTotalNeeded: formatTotalQuantity(totalNeededArray), // Afficher le besoin manuel
-    displayTotalPurchases,
+    displayTotalNeeded: formatTotalQuantity(totalNeededArray),
     displayMissingQuantity,
-    // Déjà parsé plus haut pour le calcul du missing
     totalNeededOverrideParsed,
     displayTotalOverride: totalNeededOverrideParsed
       ? formatTotalQuantity([totalNeededOverrideParsed.totalOverride])
@@ -185,178 +162,33 @@ export function createEnrichedProductFromAppwrite(
 }
 
 /**
- * Met à jour un EnrichedProduct existant avec données Appwrite fraîches
- *
- * 🎯 Stratégie :
- * - Remplacer TOUS les champs bruts Appwrite
- * - Garder byDate (statique, de Hugo)
- * - Recalculer les dérivés
+ * Applique les données Hugo (need) sur un EnrichedProduct de base.
+ * Surcharge les champs need et RECALCULE le missing avec le bon totalNeededArray.
  */
-export function updateExistingProduct(
-  product: ProductWithOptionalPurchases,
-  existing: EnrichedProduct,
+export function applyNeedToBase(
+  base: EnrichedProduct,
+  need: ParsedNeed,
 ): EnrichedProduct {
-  // Utiliser les nouvelles valeurs si présentes, sinon garder les anciennes
-  // Cela protège contre l'écrasement par les payloads partiels du realtime
+  base.productType = need.productType ?? base.productType;
+  base.pF = need.pF ?? base.pF;
+  base.pS = need.pS ?? base.pS;
+  base.byDate = need.byDate;
+  base.totalNeededArray = need.totalNeededArray;
+  base.nbRecipes = need.nbRecipes;
+  base.totalAssiettes = need.totalAssiettes;
+  base.dateDisplayInfo = need.dateDisplayInfo;
 
-  // Fusion intelligente des purchases (en filtrant les supprimés)
-  const rawPurchases = product.purchases ?? existing.purchases;
-  const mergedPurchases = (rawPurchases ?? []).filter(
-    (p) => p.status !== "deleted",
-  );
-
-  // Fusion intelligente des specs
-  const mergedSpecs = product.specs ?? existing.specs;
-  const specsParsed = mergedSpecs
-    ? safeJsonParse<ManualSpecs>(mergedSpecs)
-    : existing.specsParsed;
-
-  // Calculer totalPurchasesArray depuis les purchases fusionnées
-  const totalPurchasesArray = calculateTotalQuantityArray(
-    transformPurchasesToNumericQuantity(mergedPurchases),
-  );
-  const displayTotalPurchases = formatTotalQuantity(totalPurchasesArray);
-
-  // Recalculer totalNeededArray (si manuel)
-  let totalNeededArray = existing.totalNeededArray;
-  // Si c'est un produit manuel (pas de lien Hugo) et qu'on a des specs, on met à jour le besoin
-  if (!existing.productHugoUuid && specsParsed?.quantity) {
-    totalNeededArray = [specsParsed.quantity];
-  }
-
-  // 🎯 Priorité : Override manuel > Calcul auto
-  // Parser l'override s'il existe pour le calcul du missing
-  const totalNeededOverrideParsed = safeJsonParse<TotalNeededOverrideData>(
-    product.totalNeededOverride ?? existing.totalNeededOverride,
-  );
-  const effectiveNeededArray = totalNeededOverrideParsed
-    ? [totalNeededOverrideParsed.totalOverride]
-    : totalNeededArray;
-
-  // Recalculer missing
+  const effectiveNeededArray = base.totalNeededOverrideParsed
+    ? [base.totalNeededOverrideParsed.totalOverride]
+    : base.totalNeededArray;
   const { numeric: missingQuantityArray, display: displayMissingQuantity } =
-    calculateAndFormatMissing(effectiveNeededArray, totalPurchasesArray);
+    calculateAndFormatMissing(effectiveNeededArray, base.totalPurchasesArray);
 
-  // Fusion intelligente du stock
-  const mergedStockReel = product.stockReel ?? existing.stockReel;
-  let stockParsed = mergedStockReel
-    ? safeJsonParse<any>(mergedStockReel)
-    : existing.stockParsed;
+  base.missingQuantityArray = missingQuantityArray;
+  base.displayMissingQuantity = displayMissingQuantity;
+  base.displayTotalNeeded = formatTotalQuantity(base.totalNeededArray);
 
-  // Normaliser le stock (kg→gr., l.→ml)
-  if (stockParsed && stockParsed.quantity && stockParsed.unit) {
-    const normalized = UnitConverter.normalize(
-      parseFloat(stockParsed.quantity),
-      stockParsed.unit,
-    );
-    stockParsed = {
-      ...stockParsed,
-      quantity: normalized.quantity,
-      unit: normalized.unit,
-    };
-  }
-
-  // Fusion intelligente du store
-  const mergedStore = product.store ?? existing.store;
-  const storeInfo = mergedStore
-    ? safeJsonParse<StoreInfo>(mergedStore)
-    : existing.storeInfo;
-
-  const stockOrTotalPurchases = stockParsed
-    ? `${stockParsed.quantity} ${stockParsed.unit}`
-    : displayTotalPurchases;
-
-  // 📝 Log de debug pour tracer les fusions importantes
-  if (product.purchases === undefined && existing.purchases?.length) {
-    console.log(
-      `[ProductsStore] Fusion intelligente : préservation de ${existing.purchases.length} purchases pour ${existing.productName}`,
-    );
-  }
-
-  return {
-    // ✅ GARDER : toujours garder les données statiques Hugo
-    ...existing,
-
-    // ✅ FUSION SÉLECTIVE : seulement si présent dans le payload
-    $updatedAt: product.$updatedAt,
-
-    // Champs métier - fusionner seulement si définis
-    productName: product.productName ?? existing.productName,
-    productType: product.productType ?? existing.productType,
-    isSynced: product.isSynced ?? existing.isSynced,
-    mainId: product.mainId ?? existing.mainId,
-
-    // Mettre à jour pF/pS depuis les specs si disponibles
-    pF: specsParsed?.pF ?? existing.pF,
-    pS: specsParsed?.pS ?? existing.pS,
-
-    // 🛡️ CHAMPS CRITIQUES : PROTECTION CONTRE L'ÉCRASEMENT
-    status: product.status ?? existing.status,
-    who: product.who ?? existing.who,
-    store: mergedStore,
-    stockReel: mergedStockReel,
-    specs: mergedSpecs,
-
-    // 🚨 PROTECTION SPÉCIALE pour purchases (le bug principal)
-    purchases: mergedPurchases,
-
-    // Autres champs avec protection contre les payloads partiels
-    previousNames: product.previousNames ?? existing.previousNames,
-    isMerged: product.isMerged ?? existing.isMerged,
-    mergedFrom: product.mergedFrom ?? existing.mergedFrom,
-    mergeDate: product.mergeDate ?? existing.mergeDate,
-    mergeReason: product.mergeReason ?? existing.mergeReason,
-    mergedInto: product.mergedInto ?? existing.mergedInto,
-    // 🛡️ NOTE: totalNeededOverride utilise "" pour la suppression (pas null)
-    // L'opérateur ?? fonctionne car "" est falsy mais différent de null/undefined
-    totalNeededOverride:
-      product.totalNeededOverride ?? existing.totalNeededOverride,
-
-    // ✅ RECALCULER : les dérivés basés sur les données fusionnées
-    storeInfo,
-    stockParsed,
-    specsParsed,
-    totalNeededArray,
-    totalPurchasesArray,
-    missingQuantityArray,
-    stockOrTotalPurchases,
-    displayTotalPurchases,
-    displayMissingQuantity,
-    displayTotalNeeded: formatTotalQuantity(totalNeededArray),
-    // Déjà parsé plus haut pour le calcul du missing
-    totalNeededOverrideParsed,
-    displayTotalOverride: totalNeededOverrideParsed
-      ? formatTotalQuantity([totalNeededOverrideParsed.totalOverride])
-      : "",
-  };
-}
-
-/**
- * Recalcule les dépendances liées aux purchases pour un produit
- */
-export function recalculatePurchaseDependents(product: EnrichedProduct): void {
-  // Recalculer totalPurchasesArray (en filtrant les supprimés)
-  const activePurchases = (product.purchases ?? []).filter(
-    (p) => p.status !== "deleted",
-  );
-  product.totalPurchasesArray = calculateTotalQuantityArray(
-    transformPurchasesToNumericQuantity(activePurchases),
-  );
-
-  // 🎯 Priorité : Override manuel > Calcul auto
-  const effectiveNeededArray = product.totalNeededOverrideParsed
-    ? [product.totalNeededOverrideParsed.totalOverride]
-    : product.totalNeededArray;
-
-  // Recalculer missingQuantity et display
-  const { numeric: missingQuantityArray, display: displayMissingQuantity } =
-    calculateAndFormatMissing(
-      effectiveNeededArray,
-      product.totalPurchasesArray,
-    );
-
-  product.missingQuantityArray = missingQuantityArray;
-  product.displayMissingQuantity = displayMissingQuantity;
+  return base;
 }
 
 // =============================================================================
@@ -642,7 +474,6 @@ function createEnrichedProductFromAggregation(
     totalPurchasesArray,
     missingQuantityArray,
     displayTotalNeeded: formatTotalQuantity(totalNeededArray),
-    displayTotalPurchases: formatTotalQuantity(totalPurchasesArray),
     displayMissingQuantity,
 
     // Métadonnées
@@ -661,7 +492,6 @@ function createEnrichedProductFromAggregation(
     updatedBy: null,
     totalNeededOverrideParsed: null,
     displayTotalOverride: "",
-    stockOrTotalPurchases: "",
     previousNames: null,
     isMerged: false,
     mergedFrom: [],
@@ -669,12 +499,10 @@ function createEnrichedProductFromAggregation(
     mergeReason: null,
     mergedInto: null,
     specs: null,
-    specsParsed: null,
     pF: aggregation.pF ?? false,
     pS: aggregation.pS ?? false,
     nbRecipes,
     totalAssiettes,
-    totalNeededRaw: totalNeededArray, // Initialisation cohérente
     dateDisplayInfo,
 
     // Timestamps

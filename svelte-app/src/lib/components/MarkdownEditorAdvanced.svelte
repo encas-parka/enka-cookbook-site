@@ -222,6 +222,10 @@
         >
           <Strikethrough class="h-4 w-4" />
         </button>
+        <!--
+          FIXIT: Le highlight ne fonctionne pas à l'enregistrement / au preview,
+          et ne déclenche pas isDirty. En attendant d'investiguer plus,
+          le bouton est désactivé.
         <button
           type="button"
           class="btn btn-ghost btn-square btn-sm"
@@ -231,6 +235,7 @@
         >
           <HighlightIcon class="h-4 w-4" />
         </button>
+        -->
 
         <div class="divider divider-horizontal mx-0 h-6"></div>
 

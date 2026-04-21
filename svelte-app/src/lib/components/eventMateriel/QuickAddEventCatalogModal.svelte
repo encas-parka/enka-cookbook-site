@@ -171,7 +171,9 @@
           const oldQty = unsourced.quantity;
 
           if (newQty > 0 && newQty !== oldQty) {
-            console.log(`[QuickAdd] Updating: ${itemName} (${oldQty} -> ${newQty})`);
+            console.log(
+              `[QuickAdd] Updating: ${itemName} (${oldQty} -> ${newQty})`,
+            );
             // Mettre à jour la quantité
             await eventMaterielStore.updateItem(unsourced.ids[0], {
               quantity: newQty,
@@ -193,7 +195,9 @@
         }
       }
 
-      console.log(`[QuickAdd] Final: ${created} created, ${updated} updated, ${deleted} deleted`);
+      console.log(
+        `[QuickAdd] Final: ${created} created, ${updated} updated, ${deleted} deleted`,
+      );
       const parts: string[] = [];
       if (created > 0) parts.push(`${created} ajouté${created > 1 ? "s" : ""}`);
       if (updated > 0) parts.push(`${updated} mis à jour`);
@@ -223,7 +227,7 @@
 
   <ModalContent>
     <div class="mb-4">
-      <label class="input input-bordered input-sm w-full">
+      <label class="input input-sm w-full">
         <Search class="size-4 opacity-50" />
         <input
           type="text"

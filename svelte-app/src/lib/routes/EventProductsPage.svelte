@@ -101,9 +101,9 @@
   function getExportDateSuffix(): string {
     const { start, end } = productsStore.dateStore.current ?? {};
     const fmt = (d: string) =>
-      new Date(d).toLocaleDateString("fr-FR", { day: "2-digit", month: "2-digit", year: "numeric" }).replace(/\//g, "-");
+      new Date(d).toLocaleDateString("fr-FR", { day: "2-digit", month: "2-digit" }).replace(/\//g, "-");
     if (start && end) {
-      return `_${fmt(start)}-${fmt(end)}`;
+      return `_${fmt(start)}--${fmt(end)}`;
     }
     if (start) {
       return `_${fmt(start)}`;

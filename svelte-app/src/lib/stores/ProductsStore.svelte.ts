@@ -25,6 +25,7 @@ import {
   exportProductsToMarkdown,
   type MarkdownExportGroup,
 } from "../utils/product-markdown-export";
+import { exportProductsToCsv } from "../utils/product-csv-export";
 import { toastService } from "../services/toast.service.svelte";
 import type {
   EnrichedProduct,
@@ -871,6 +872,26 @@ class ProductsStore {
       eventName,
       dateRange: this.dateStore.current,
       groups,
+    });
+  }
+
+  // ===========================================================================
+  // EXPORT CSV
+  // ===========================================================================
+
+  exportToCsv(): string {
+    const allProducts = Object.values(this.#groups).flat();
+
+    return exportProductsToCsv({
+      products: allProducts.map((m) => ({
+        productName: m.data.productName,
+        productType: m.data.productType || "Non défini",
+        storeName: m.data.storeInfo?.storeName || "Non défini",
+        who: (m.data.who || []).join(", "),
+        formattedQuantities: m.stats.formattedQuantities,
+        formattedAcquiredQuantities: m.stats.formattedAcquiredQuantities,
+        formattedMissingQuantities: m.stats.formattedMissingQuantities,
+      })),
     });
   }
 

@@ -18,20 +18,22 @@ export function toSlug(text: string): string {
     .replace(/^-|-$/g, "");
 }
 
-export async function shareOrDownload(
-  markdown: string,
+/**
+ * Download or share a file with arbitrary content and MIME type.
+ */
+export async function downloadFile(
+  content: string,
   filename: string,
+  mimeType: string,
   successMessage: string,
 ): Promise<void> {
-  const file = new File([markdown], filename, {
-    type: "text/markdown;charset=utf-8",
-  });
+  const file = new File([content], filename, { type: mimeType });
 
   if (navigator.share && navigator.canShare?.({ files: [file] })) {
     try {
       await navigator.share({
         files: [file],
-        title: filename.replace(/\.md$/, ""),
+        title: filename.replace(/\.[^.]+$/, ""),
       });
       toastService.success(successMessage);
       return;
@@ -40,7 +42,7 @@ export async function shareOrDownload(
     }
   }
 
-  const blob = new Blob([markdown], { type: "text/markdown;charset=utf-8" });
+  const blob = new Blob([content], { type: mimeType });
   const url = URL.createObjectURL(blob);
   const a = document.createElement("a");
   a.href = url;
@@ -50,4 +52,20 @@ export async function shareOrDownload(
   document.body.removeChild(a);
   URL.revokeObjectURL(url);
   toastService.success(successMessage);
+}
+
+/**
+ * Download or share a Markdown file (convenience wrapper).
+ */
+export async function shareOrDownload(
+  markdown: string,
+  filename: string,
+  successMessage: string,
+): Promise<void> {
+  return downloadFile(
+    markdown,
+    filename,
+    "text/markdown;charset=utf-8",
+    successMessage,
+  );
 }

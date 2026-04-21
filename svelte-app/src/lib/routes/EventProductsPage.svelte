@@ -56,7 +56,7 @@
   import BadgeEventStatus from "../components/ui/BadgeEventStatus.svelte";
   import InfoCollapse from "../components/ui/InfoCollapse.svelte";
   import { online } from "svelte/reactivity/window";
-  import { shareOrDownload } from "$lib/utils/share-utils";
+  import { shareOrDownload, downloadFile, toSlug } from "$lib/utils/share-utils";
 
   // Mapping des icônes pour les statuts d'achat
   const statusIcons = {
@@ -91,19 +91,42 @@
   let groupPurchaseProducts = $state<any[]>([]);
 
   // =========================================================================
-  // EXPORT MARKDOWN
+  // EXPORT MARKDOWN & CSV
   // =========================================================================
+
+  function getSlug(): string {
+    return toSlug(eventName) || "produits";
+  }
+
+  function getExportDateSuffix(): string {
+    const { start, end } = productsStore.dateStore.current ?? {};
+    const fmt = (d: string) =>
+      new Date(d).toLocaleDateString("fr-FR", { day: "2-digit", month: "2-digit", year: "numeric" }).replace(/\//g, "-");
+    if (start && end) {
+      return `_${fmt(start)}-${fmt(end)}`;
+    }
+    if (start) {
+      return `_${fmt(start)}`;
+    }
+    return "";
+  }
 
   function handleExportMarkdown() {
     const markdown = productsStore.exportToMarkdown(eventName);
-    const slug = eventName
-      .toLowerCase()
-      .replace(/[^a-z0-9]+/g, "-")
-      .replace(/^-|-$/g, "");
     shareOrDownload(
       markdown,
-      `${slug || "produits"}-courses.md`,
+      `${getSlug()}-courses${getExportDateSuffix()}.md`,
       "Liste de courses exportée en Markdown",
+    );
+  }
+
+  function handleExportCsv() {
+    const csv = productsStore.exportToCsv();
+    downloadFile(
+      csv,
+      `${getSlug()}-courses${getExportDateSuffix()}.csv`,
+      "text/csv;charset=utf-8",
+      "Liste de courses exportée en CSV",
     );
   }
 
@@ -332,13 +355,33 @@
 
 {#snippet navActions()}
   <div class="flex items-center gap-2">
-    <button
-      class="btn btn-sm btn-circle btn-primary"
-      onclick={handleExportMarkdown}
-      title="Exporter en Markdown"
-    >
-      <Download size={18} />
-    </button>
+    <div class="dropdown dropdown-end">
+      <div
+        class="btn btn-sm btn-circle btn-primary"
+        tabindex="0"
+        role="button"
+        title="Exporter"
+      >
+        <Download size={18} />
+      </div>
+      <ul
+        class="dropdown-content menu bg-base-100 rounded-box z-10 w-48 p-2 shadow-lg"
+        tabindex="0"
+      >
+        <li>
+          <button onclick={handleExportMarkdown}>
+            <Download size={16} />
+            Markdown
+          </button>
+        </li>
+        <li>
+          <button onclick={handleExportCsv}>
+            <Download size={16} />
+            CSV Tableur
+          </button>
+        </li>
+      </ul>
+    </div>
     <button
       class="btn btn-sm btn-circle btn-primary"
       onclick={() => (printModalOpen = true)}
@@ -647,8 +690,8 @@
     <!-- header print -->
     <div class="print-only">
       <h2 class="text-lg font-bold">
-        Produits pour {eventName}, du {formatDateShort(startDate ?? "")} au {formatDateShort(
-          endDate ?? "",
+        Produits pour {eventName}, du {formatDateShort(productsStore.dateStore.start ?? startDate ?? "")} au {formatDateShort(
+          productsStore.dateStore.end ?? endDate ?? "",
         )}
       </h2>
     </div>

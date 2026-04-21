@@ -1,1 +1,0 @@
-import"./rolldown-runtime-CSptdK7L.js";import{Cn as e,dn as t,jn as n,kn as r,wn as i}from"./appwrite-BM4JtP-2.js";var a=new WeakMap,StatusBarStore=class{constructor(){n(this,a,i(null))}get lockStatus(){return t(r(a,this))}setLockStatus(t){e(r(a,this),t,!0)}clearLockStatus(){e(r(a,this),null)}},o=new StatusBarStore;export{o as t};

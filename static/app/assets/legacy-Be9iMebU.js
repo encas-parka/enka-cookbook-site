@@ -1,1 +1,0 @@
-import{zn as e}from"./appwrite-BM4JtP-2.js";e();

@@ -7,10 +7,10 @@
 #   ./scripts_dev/deploy-build.sh --no-push # commit seulement
 #
 # Le script :
-#   1. Décommente les lignes d'exclusion du build dans les .gitignore
+#   1. S'assure que les gitignore n'excluent PAS static/app (commente les règles d'exclusion)
 #   2. Lance bun run build dans svelte-app/
 #   3. git add + commit + push (si --no-push n'est pas passé)
-#   4. Recommente les .gitignore (nettoyage always, même en cas d'erreur)
+#   4. Pas de cleanup nécessaire : le commit laisse le gitignore propre
 #
 set -euo pipefail
 
@@ -27,34 +27,13 @@ ok()    { echo -e "\033[1;32m✓\033[0m $*"; }
 warn()  { echo -e "\033[1;33m⚠\033[0m $*"; }
 err()   { echo -e "\033[1;31m✗\033[0m $*"; }
 
-cleanup_done=false
-
-cleanup() {
-    if [ "$cleanup_done" = true ]; then return; fi
-    cleanup_done=true
-    info "Nettoyage : re-commente les .gitignore…"
-    comment_line "$GITIGNORE_ROOT" "static/app"
-    comment_line "$GITIGNORE_SVELTE" "static/*"
-    ok "Gitignore restaurés."
-}
-
-trap cleanup EXIT
-
-# Décommente une ligne (supprime le # devant), matche uniquement la ligne exacte
-# Ex: "# static/app" → "static/app"    mais PAS "# voir static/app/old"
-uncomment_line() {
-    local file="$1" pattern="$2"
-    if grep -q "^#\s\?${pattern}\s*$" "$file"; then
-        sed -i "s|^#\(\s\?\)${pattern}\s*$|${pattern}|" "$file"
-    fi
-}
-
-# Recommente une ligne (ajoute # devant), matche uniquement la ligne exacte
-# Ex: "static/app" → "# static/app"    mais PAS "static/app/dist"
+# Commente une ligne (ajoute # devant) = DÉSACTIVE l'exclusion gitignore
+# "static/app" → "# static/app"  (le build sera suivi par Git)
 comment_line() {
     local file="$1" pattern="$2"
     if grep -q "^${pattern}\s*$" "$file"; then
         sed -i "s|^${pattern}\s*$|# ${pattern}|" "$file"
+        info "Gitignore : '$pattern' → désactivé (commenté)"
     fi
 }
 
@@ -72,11 +51,10 @@ if [ ! -d "svelte-app" ]; then
     exit 1
 fi
 
-# ── Étape 1 : Décommenter les gitignore ────────────────────────────
-info "Décommente les .gitignore pour inclure static/app…"
-uncomment_line "$GITIGNORE_ROOT" "static/app"
-uncomment_line "$GITIGNORE_SVELTE" "static/*"
-ok "Lignes d'exclusion commentées."
+# ── Étape 1 : S'assurer que le build n'est PAS exclu par les gitignore ─
+info "Vérifie les .gitignore…"
+comment_line "$GITIGNORE_ROOT" "static/app"
+comment_line "$GITIGNORE_SVELTE" "static/*"
 
 # ── Étape 2 : Build Svelte ─────────────────────────────────────────
 info "Build Svelte (bun run build)…"
@@ -91,7 +69,6 @@ cd "$ROOT_DIR"
 
 # ── Étape 3 : Vérifier qu'il y a du nouveau contenu ────────────────
 if git diff --quiet "$BUILD_DIR" && git diff --cached --quiet "$BUILD_DIR"; then
-    # Vérifier aussi les fichiers non-trackés
     if [ -z "$(git ls-files --others --exclude-standard "$BUILD_DIR")" ]; then
         warn "Aucun changement détecté dans static/app/. Rien à committer."
         exit 0
@@ -100,7 +77,10 @@ fi
 
 # ── Étape 4 : Git add + commit ─────────────────────────────────────
 info "Stage et commit…"
-git add "$BUILD_DIR/" "$GITIGNORE_ROOT" "$GITIGNORE_SVELTE"
+git add "$BUILD_DIR/"
+# Ne pas committer les gitignore s'ils n'ont pas changé
+git diff --quiet "$GITIGNORE_ROOT" 2>/dev/null || git add "$GITIGNORE_ROOT"
+git diff --quiet "$GITIGNORE_SVELTE" 2>/dev/null || git add "$GITIGNORE_SVELTE"
 git commit -m "$COMMIT_MSG" || {
     warn "Rien à committer (peut-être déjà à jour)."
     exit 0

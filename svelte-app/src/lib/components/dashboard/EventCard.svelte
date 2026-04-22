@@ -1,7 +1,6 @@
 <script lang="ts">
   import {
     Calendar,
-    Clock,
     Users,
     ChefHat,
     ArrowRight,
@@ -10,7 +9,6 @@
     FileText,
     Image,
     ShoppingCart,
-    CookingPot,
     ListTodo,
     Package,
   } from "@lucide/svelte";
@@ -79,7 +77,7 @@
 
     <!-- Métadonnées -->
     <div
-      class="text-base-content/70 mt-2 flex flex-wrap items-center gap-3 text-sm"
+      class="text-base-content/70 mt-2 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm"
     >
       {#if event.teams && event.teams.length > 0}
         <div class="text-primary flex items-center gap-1 font-semibold">
@@ -102,16 +100,6 @@
       <div class="flex items-center gap-1">
         <ChefHat class="h-3 w-3" />
         <span>{getMealsCount(event)} repas</span>
-      </div>
-
-      <div class="flex items-center gap-1">
-        <CookingPot class="h-3 w-3" />
-        <span>{getTotalRecipes(event)} recettes</span>
-      </div>
-
-      <div class="flex items-center gap-1">
-        <Clock class="h-3 w-3" />
-        <span>{getTodosCount(event)} tâches</span>
       </div>
     </div>
 
@@ -136,7 +124,7 @@
         }}
       >
         <FileText class="size-4 @max-xs:size-3" />
-        Recettes
+        Recettes ({getTotalRecipes(event)})
       </button>
 
       <button
@@ -180,7 +168,7 @@
         }}
       >
         <ListTodo class="size-4 @max-xs:size-3" />
-        Tâches
+        Tâches ({getTodosCount(event)})
       </button>
 
       <button

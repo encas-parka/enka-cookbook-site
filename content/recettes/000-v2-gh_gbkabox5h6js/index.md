@@ -1,6 +1,6 @@
 ---
 title: '000'
-date: '2026-04-22T02:28:22.794Z'
+date: '2026-04-22T03:41:37.899Z'
 draft: true
 typeR: plat
 categories:
@@ -11,7 +11,7 @@ regime:
   - sans-gluten
   - sans-lactose
 plate: 100
-quantite_desc: quantité desc
+quantite_desc: quantité descrre
 check: true
 cuisson: true
 serveHot: true
@@ -24,9 +24,9 @@ materiel: []
 ingredients:
   - uuid: 4n95t5
     name: Harissa
-    originalQuantity: 20
+    originalQuantity: 20.3
     originalUnit: gr.
-    normalizedQuantity: 20
+    normalizedQuantity: 20.3
     normalizedUnit: gr.
     comment: ''
     allergens: []
@@ -112,7 +112,7 @@ permissionWrite:
   - 68975cbc002469058f8b
 auteur: ghald
 createdAt: '2026-02-04T00:51:50.602+00:00'
-updatedAt: '2026-04-22T02:28:19.184+00:00'
+updatedAt: '2026-04-22T03:41:35.637+00:00'
 createdBy: 68975cbc002469058f8b
 teams: []
 status: public

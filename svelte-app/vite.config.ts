@@ -124,9 +124,13 @@ export default defineConfig(({ mode }) => ({
     outDir: "../static/app/",
     emptyOutDir: true,
 
-    // ⭐ Vite 8 : Oxc remplace Terser/esbuild pour la minification
-    // minify: "terser" supprimé — Oxc est le défaut
-    // terserOptions supprimé — config via rolldownOptions.output.minify
+    // ⭐ esbuild comme minificateur (au lieu d'OxC par défaut)
+    // pure supprime uniquement console.log, console.error/warn restent intacts
+    minify: "esbuild",
+    legalComments: "none",
+    esbuild: {
+      pure: mode === "production" ? ["console.log"] : [],
+    },
 
     target: "es2020",
     manifest: ".vite-manifest.json",
@@ -134,13 +138,7 @@ export default defineConfig(({ mode }) => ({
     // ⭐ Vite 8 : rollupOptions → rolldownOptions (rollupOptions déprécié)
     rolldownOptions: {
       output: {
-        // ⭐ Oxc minifier (remplace Terser/esbuild)
-        // true active la minification par défaut (compress + mangle)
-        minify: true,
         keepNames: true, // CRUCIAL pour Svelte 5 (équivalent terser keep_classnames)
-        // ⚠️ Oxc ne supporte pas drop_console/drop_debugger nativement.
-        // Pour supprimer console.log en prod, ajouter au niveau build :
-        //   define: { 'console.log': 'undefined' }
         entryFileNames:
           mode === "development"
             ? "assets/[name].js"

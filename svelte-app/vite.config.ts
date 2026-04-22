@@ -127,7 +127,6 @@ export default defineConfig(({ mode }) => ({
     // ⭐ esbuild comme minificateur (au lieu d'OxC par défaut)
     // pure supprime uniquement console.log, console.error/warn restent intacts
     minify: "esbuild",
-    legalComments: "none",
     esbuild: {
       pure: mode === "production" ? ["console.log"] : [],
     },

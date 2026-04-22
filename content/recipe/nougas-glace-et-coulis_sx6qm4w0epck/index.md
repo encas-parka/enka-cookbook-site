@@ -1,6 +1,6 @@
 ---
 title: Nougas glacé  - et coulis de fruits rouges
-date: '2026-04-07T21:42:31.244Z'
+date: "2026-04-07T21:42:31.244Z"
 draft: true
 typeR: dessert
 categories: []
@@ -24,17 +24,17 @@ ingredients:
     originalUnit: l.
     normalizedQuantity: 2000
     normalizedUnit: ml
-    comment: ''
+    comment: ""
     allergens:
       - Produit laitier
     type: frais
-  - uuid: 0ue6i6
-    name: oeufs
+  - uuid: zf3zf8
+    name: Oeuf
     originalQuantity: 20
     originalUnit: unité
     normalizedQuantity: 20
     normalizedUnit: unité
-    comment: ''
+    comment: ""
     allergens:
       - Oeuf
     type: lof
@@ -44,7 +44,7 @@ ingredients:
     originalUnit: gr.
     normalizedQuantity: 250
     normalizedUnit: gr.
-    comment: ''
+    comment: ""
     allergens:
       - Fruit à coque
     type: legumes
@@ -54,7 +54,7 @@ ingredients:
     originalUnit: gr.
     normalizedQuantity: 400
     normalizedUnit: gr.
-    comment: ''
+    comment: ""
     allergens:
       - Fruit à coque
     type: sec
@@ -64,7 +64,7 @@ ingredients:
     originalUnit: kg
     normalizedQuantity: 2000
     normalizedUnit: gr.
-    comment: ''
+    comment: ""
     allergens: []
     type: legumes
   - uuid: g0lph5
@@ -73,7 +73,7 @@ ingredients:
     originalUnit: gr.
     normalizedQuantity: 800
     normalizedUnit: gr.
-    comment: ''
+    comment: ""
     allergens: []
     type: sucres
   - uuid: lny16c
@@ -82,7 +82,7 @@ ingredients:
     originalUnit: gr.
     normalizedQuantity: 250
     normalizedUnit: gr.
-    comment: ''
+    comment: ""
     allergens: []
     type: sucres
 preparation: |-
@@ -106,12 +106,11 @@ preparation24h: null
 permissionWrite:
   - 698a0ed8cdbfef3c7606
 auteur: null
-createdAt: '2026-04-07T21:42:27.525+00:00'
-updatedAt: '2026-04-07T21:42:27.525+00:00'
+createdAt: "2026-04-07T21:42:27.525+00:00"
+updatedAt: "2026-04-22T09:55:26.149+00:00"
 createdBy: 698a0ed8cdbfef3c7606
 teams: null
 status: public
 rootRecipeId: null
 versionLabel: null
 ---
-

@@ -1,6 +1,6 @@
 ---
 title: Pain burger
-date: '2026-03-28T10:21:25.888Z'
+date: "2026-03-28T10:21:25.888Z"
 draft: false
 typeR: plat
 categories:
@@ -49,12 +49,12 @@ ingredients:
     originalUnit: l.
     normalizedQuantity: 2750
     normalizedUnit: ml
-    comment: 'température ambiante '
+    comment: "température ambiante "
     allergens:
       - Produit laitier
     type: lof
-  - uuid: 0ue6i6
-    name: oeufs
+  - uuid: zf3zf8
+    name: Oeuf
     originalQuantity: 14
     originalUnit: unité
     normalizedQuantity: 14
@@ -134,12 +134,11 @@ preparation24h: |-
 permissionWrite:
   - 69a063c400308d84e961
 auteur: georgetteetnono
-createdAt: '2026-03-28T10:04:30.735+00:00'
-updatedAt: '2026-03-28T10:21:25.422+00:00'
+createdAt: "2026-03-28T10:04:30.735+00:00"
+updatedAt: "2026-04-22T09:55:26.149+00:00"
 createdBy: 69a063c400308d84e961
 teams: []
 status: public
 rootRecipeId: null
 versionLabel: null
 ---
-

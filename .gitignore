@@ -4,7 +4,6 @@ public
 **/jsconfig.json
 *bak
 *BAK
-.netlify
 .hugo_build.lock
 .vscode
 _vendor

@@ -1,13 +1,5 @@
 [
   {
-    "u": "3u2y4y",
-    "n": "500 g de yaourt à la grecque",
-    "t": "frais",
-    "a": [
-      "Produit laitier"
-    ]
-  },
-  {
     "n": "Abricot",
     "t": "legumes",
     "u": "xo0ibs",
@@ -29,9 +21,7 @@
     "t": "animaux",
     "u": "mz93p4",
     "pF": true,
-    "a": [
-      "Viande"
-    ]
+    "a": ["Viande"]
   },
   {
     "n": "Ail",
@@ -79,25 +69,19 @@
     "n": "Amande",
     "t": "sec",
     "u": "fuhtcw",
-    "a": [
-      "Fruit à coque"
-    ]
+    "a": ["Fruit à coque"]
   },
   {
     "u": "juv4ip",
     "n": "amandes",
     "t": "legumes",
-    "a": [
-      "Fruits à coque"
-    ]
+    "a": ["Fruits à coque"]
   },
   {
     "n": "Amandes effilées",
     "t": "sec",
     "u": "xkijt9",
-    "a": [
-      "Fruit à coque"
-    ]
+    "a": ["Fruit à coque"]
   },
   {
     "n": "Ananas",
@@ -115,20 +99,14 @@
     "t": "animaux",
     "u": "zgfqat",
     "pF": true,
-    "a": [
-      "Viande",
-      "Porc"
-    ]
+    "a": ["Viande", "Porc"]
   },
   {
     "n": "Andouillette (charcuterie)",
     "t": "animaux",
     "u": "f7dxsh",
     "pF": true,
-    "a": [
-      "Viande",
-      "Porc"
-    ]
+    "a": ["Viande", "Porc"]
   },
   {
     "n": "Aneth aromatique",
@@ -140,9 +118,7 @@
     "t": "animaux",
     "u": "1g26bd",
     "pF": true,
-    "a": [
-      "Poisson"
-    ]
+    "a": ["Poisson"]
   },
   {
     "n": "Anis étoilé",
@@ -169,9 +145,7 @@
     "u": "wr5x7u",
     "n": "asa foetida",
     "t": "epices",
-    "a": [
-      "Céleri"
-    ]
+    "a": ["Céleri"]
   },
   {
     "n": "Asperge blanche",
@@ -202,19 +176,14 @@
     "t": "frais",
     "u": "wb086z",
     "pF": true,
-    "a": [
-      "Produit laitier"
-    ]
+    "a": ["Produit laitier"]
   },
   {
     "n": "Bacon (charcuterie)",
     "t": "animaux",
     "u": "mv18mg",
     "pF": true,
-    "a": [
-      "Viande",
-      "Porc"
-    ]
+    "a": ["Viande", "Porc"]
   },
   {
     "n": "Baies roses",
@@ -237,9 +206,7 @@
     "t": "animaux",
     "u": "b7eftl",
     "pF": true,
-    "a": [
-      "Poisson"
-    ]
+    "a": ["Poisson"]
   },
   {
     "n": "Basilic",
@@ -262,27 +229,21 @@
     "t": "animaux",
     "u": "7buymk",
     "pF": true,
-    "a": [
-      "Poisson"
-    ]
+    "a": ["Poisson"]
   },
   {
     "n": "Bavette (boeuf)",
     "t": "animaux",
     "u": "zuwedv",
     "pF": true,
-    "a": [
-      "Viande"
-    ]
+    "a": ["Viande"]
   },
   {
     "n": "Beaufort",
     "t": "frais",
     "u": "dar9kl",
     "pF": true,
-    "a": [
-      "Produit laitier"
-    ]
+    "a": ["Produit laitier"]
   },
   {
     "n": "Bette (blette)",
@@ -305,35 +266,27 @@
     "n": "Beurre de cacahuètes (salé)",
     "t": "autres",
     "u": "ks3ocl",
-    "a": [
-      "Arachides"
-    ]
+    "a": ["Arachides"]
   },
   {
     "n": "Beurre de cacahuètes (sucré)",
     "t": "autres",
     "u": "7wpsj2",
-    "a": [
-      "Arachides"
-    ]
+    "a": ["Arachides"]
   },
   {
     "n": "Beurre demi-sel",
     "t": "frais",
     "u": "mxub21",
     "pF": true,
-    "a": [
-      "Produit laitier"
-    ]
+    "a": ["Produit laitier"]
   },
   {
     "n": "Beurre doux",
     "t": "frais",
     "u": "kmq1zb",
     "pF": true,
-    "a": [
-      "Produit laitier"
-    ]
+    "a": ["Produit laitier"]
   },
   {
     "n": "Bicarbonate alimentaire",
@@ -350,47 +303,33 @@
     "t": "animaux",
     "u": "m62ark",
     "pF": true,
-    "a": [
-      "Viande"
-    ]
+    "a": ["Viande"]
   },
   {
     "n": "Bifteck (boeuf)",
     "t": "animaux",
     "u": "oe4cqe",
     "pF": true,
-    "a": [
-      "Viande"
-    ]
+    "a": ["Viande"]
   },
   {
     "n": "Bigorneaux (fruits de mer)",
     "t": "animaux",
     "u": "ppk4ed",
     "pF": true,
-    "a": [
-      "Mollusque"
-    ]
+    "a": ["Mollusque"]
   },
   {
     "u": "02a93f",
     "n": "biscuit de Savoie",
     "t": "autres",
-    "a": [
-      "Gluten",
-      "Oeuf"
-    ]
+    "a": ["Gluten", "Oeuf"]
   },
   {
     "n": "Biscuit Petit Brun",
     "t": "sucres",
     "u": "i5hlq1",
-    "a": [
-      "Gluten",
-      "Produit laitier",
-      "Sésame",
-      "Oeuf"
-    ]
+    "a": ["Gluten", "Produit laitier", "Sésame", "Oeuf"]
   },
   {
     "n": "Biscuit vegan et sans gluten",
@@ -402,64 +341,46 @@
     "t": "animaux",
     "u": "ywsa1s",
     "pF": true,
-    "a": [
-      "Viande"
-    ]
+    "a": ["Viande"]
   },
   {
     "n": "Blé",
     "t": "sec",
     "u": "wsjxq7",
-    "a": [
-      "Gluten"
-    ]
+    "a": ["Gluten"]
   },
   {
     "n": "Bleu",
     "t": "frais",
     "u": "zin8ws",
     "pF": true,
-    "a": [
-      "Produit laitier"
-    ]
+    "a": ["Produit laitier"]
   },
   {
     "u": "yc2ncb",
     "n": "Boeuf",
     "t": "animaux",
-    "a": [
-      "Viande"
-    ]
+    "a": ["Viande"]
   },
   {
     "n": "Boudin blanc (charcuterie)",
     "t": "animaux",
     "u": "70q6zb",
     "pF": true,
-    "a": [
-      "Viande",
-      "Porc"
-    ]
+    "a": ["Viande", "Porc"]
   },
   {
     "n": "Boudin noir (charcuterie)",
     "t": "animaux",
     "u": "442u8i",
     "pF": true,
-    "a": [
-      "Viande",
-      "Porc"
-    ]
+    "a": ["Viande", "Porc"]
   },
   {
     "n": "boudoir",
     "t": "sucres",
     "u": "nz97kr",
-    "a": [
-      "Produit laitier",
-      "Gluten",
-      "Oeuf"
-    ]
+    "a": ["Produit laitier", "Gluten", "Oeuf"]
   },
   {
     "n": "bouillon cube",
@@ -475,25 +396,19 @@
     "n": "Bouillon de légumes",
     "t": "epices",
     "u": "3n8509",
-    "a": [
-      "Gluten"
-    ]
+    "a": ["Gluten"]
   },
   {
     "n": "Boulgour",
     "t": "sec",
     "u": "omf24t",
-    "a": [
-      "Gluten"
-    ]
+    "a": ["Gluten"]
   },
   {
     "n": "Boulgour fin",
     "t": "sec",
     "u": "s0hv5y",
-    "a": [
-      "Gluten"
-    ]
+    "a": ["Gluten"]
   },
   {
     "n": "Bouquet garni",
@@ -505,27 +420,21 @@
     "t": "animaux",
     "u": "70v04n",
     "pF": true,
-    "a": [
-      "Viande"
-    ]
+    "a": ["Viande"]
   },
   {
     "n": "Brie-Beaufort",
     "t": "frais",
     "u": "gjww01",
     "pF": true,
-    "a": [
-      "Produit laitier"
-    ]
+    "a": ["Produit laitier"]
   },
   {
     "n": "Brochet (poisson)",
     "t": "animaux",
     "u": "5jguvn",
     "pF": true,
-    "a": [
-      "Poisson"
-    ]
+    "a": ["Poisson"]
   },
   {
     "n": "Brocoli",
@@ -538,44 +447,33 @@
     "t": "frais",
     "u": "yjxnau",
     "pF": true,
-    "a": [
-      "Produit laitier"
-    ]
+    "a": ["Produit laitier"]
   },
   {
     "n": "Bulot (fruits de mer)",
     "t": "animaux",
     "u": "91je3t",
     "pF": true,
-    "a": [
-      "Mollusque"
-    ]
+    "a": ["Mollusque"]
   },
   {
     "n": "Cabillaud (poisson)",
     "t": "animaux",
     "u": "ngl32x",
     "pF": true,
-    "a": [
-      "Poisson"
-    ]
+    "a": ["Poisson"]
   },
   {
     "n": "Cacahuète",
     "t": "sec",
     "u": "73ikep",
-    "a": [
-      "Arachide"
-    ]
+    "a": ["Arachide"]
   },
   {
     "u": "pdrpau",
     "n": "Cacahuètes grilléées",
     "t": "sec",
-    "a": [
-      "Arachides",
-      "Fruits à coque"
-    ]
+    "a": ["Arachides", "Fruits à coque"]
   },
   {
     "n": "Cacao",
@@ -592,36 +490,28 @@
     "t": "animaux",
     "u": "279ad0",
     "pF": true,
-    "a": [
-      "Viande"
-    ]
+    "a": ["Viande"]
   },
   {
     "n": "Calamar (fruits de mer)",
     "t": "animaux",
     "u": "cxldjv",
     "pF": true,
-    "a": [
-      "Crustacé"
-    ]
+    "a": ["Crustacé"]
   },
   {
     "n": "Camembert",
     "t": "frais",
     "u": "2soph2",
     "pF": true,
-    "a": [
-      "Produit laitier"
-    ]
+    "a": ["Produit laitier"]
   },
   {
     "n": "Canard (volaille et gibier)",
     "t": "animaux",
     "u": "5yclak",
     "pF": true,
-    "a": [
-      "Viande"
-    ]
+    "a": ["Viande"]
   },
   {
     "n": "Canneberge",
@@ -639,9 +529,7 @@
     "t": "frais",
     "u": "chmx44",
     "pF": true,
-    "a": [
-      "Produit laitier"
-    ]
+    "a": ["Produit laitier"]
   },
   {
     "n": "Câpres",
@@ -675,18 +563,14 @@
     "t": "animaux",
     "u": "yb5s26",
     "pF": true,
-    "a": [
-      "Poisson"
-    ]
+    "a": ["Poisson"]
   },
   {
     "n": "Carrelet (poisson)",
     "t": "animaux",
     "u": "110zbn",
     "pF": true,
-    "a": [
-      "Poisson"
-    ]
+    "a": ["Poisson"]
   },
   {
     "n": "Cassis",
@@ -728,27 +612,21 @@
     "t": "legumes",
     "u": "qagkr3",
     "pF": true,
-    "a": [
-      "Céleri"
-    ]
+    "a": ["Céleri"]
   },
   {
     "n": "Céleri branche",
     "t": "legumes",
     "u": "78fo97",
     "pF": true,
-    "a": [
-      "Céleri"
-    ]
+    "a": ["Céleri"]
   },
   {
     "n": "Céleri rave",
     "t": "legumes",
     "u": "2145vg",
     "pF": true,
-    "a": [
-      "Céleri"
-    ]
+    "a": ["Céleri"]
   },
   {
     "n": "Cerfeuil",
@@ -777,38 +655,28 @@
     "t": "animaux",
     "u": "xm058a",
     "pF": true,
-    "a": [
-      "Viande"
-    ]
+    "a": ["Viande"]
   },
   {
     "n": "Cervelas (charcuterie)",
     "t": "animaux",
     "u": "ufwzvi",
     "pF": true,
-    "a": [
-      "Viande",
-      "Porc"
-    ]
+    "a": ["Viande", "Porc"]
   },
   {
     "n": "Cervelle (abats)",
     "t": "animaux",
     "u": "70y1z0",
     "pF": true,
-    "a": [
-      "Viande"
-    ]
+    "a": ["Viande"]
   },
   {
     "n": "Chair à saucisse (charcuterie)",
     "t": "animaux",
     "u": "xpw7ri",
     "pF": true,
-    "a": [
-      "Viande",
-      "Porc"
-    ]
+    "a": ["Viande", "Porc"]
   },
   {
     "n": "Champignon de Paris",
@@ -858,9 +726,7 @@
     "n": "Chapelure",
     "t": "autres",
     "u": "psu3gg",
-    "a": [
-      "Gluten"
-    ]
+    "a": ["Gluten"]
   },
   {
     "n": "Chapelure sans gluten",
@@ -872,18 +738,14 @@
     "t": "frais",
     "u": "laq4wn",
     "pF": true,
-    "a": [
-      "Produit laitier"
-    ]
+    "a": ["Produit laitier"]
   },
   {
     "n": "Chevreuil (volaille et gibier)",
     "t": "animaux",
     "u": "upmilx",
     "pF": true,
-    "a": [
-      "Viande"
-    ]
+    "a": ["Viande"]
   },
   {
     "n": "chicorée soluble",
@@ -931,19 +793,13 @@
     "t": "animaux",
     "u": "dsiv59",
     "pF": true,
-    "a": [
-      "Viande",
-      "Porc"
-    ]
+    "a": ["Viande", "Porc"]
   },
   {
     "n": "Chorizo végan",
     "t": "autres",
     "u": "f1xrxx",
-    "a": [
-      "Gluten",
-      "Soja"
-    ]
+    "a": ["Gluten", "Soja"]
   },
   {
     "n": "Chou blanc",
@@ -1009,9 +865,7 @@
     "n": "Chunks (protéine de soja)",
     "t": "autres",
     "u": "pbydyr",
-    "a": [
-      "Soja"
-    ]
+    "a": ["Soja"]
   },
   {
     "n": "Ciboulette",
@@ -1091,9 +945,7 @@
     "t": "animaux",
     "u": "pny4sg",
     "pF": true,
-    "a": [
-      "Viande"
-    ]
+    "a": ["Viande"]
   },
   {
     "n": "Coing",
@@ -1106,27 +958,21 @@
     "t": "animaux",
     "u": "dmlfsq",
     "pF": true,
-    "a": [
-      "Poisson"
-    ]
+    "a": ["Poisson"]
   },
   {
     "n": "Collier (agneau)",
     "t": "animaux",
     "u": "8bssc5",
     "pF": true,
-    "a": [
-      "Viande"
-    ]
+    "a": ["Viande"]
   },
   {
     "n": "Collier (blanquette) (veau)",
     "t": "animaux",
     "u": "i7dbn1",
     "pF": true,
-    "a": [
-      "Viande"
-    ]
+    "a": ["Viande"]
   },
   {
     "n": "Colorants alimentaires",
@@ -1154,9 +1000,7 @@
     "t": "frais",
     "u": "da93ql",
     "pF": true,
-    "a": [
-      "Produit laitier"
-    ]
+    "a": ["Produit laitier"]
   },
   {
     "n": "Concentré de tomate",
@@ -1195,19 +1039,14 @@
     "t": "animaux",
     "u": "68uuc3",
     "pF": true,
-    "a": [
-      "Viande",
-      "Porc"
-    ]
+    "a": ["Viande", "Porc"]
   },
   {
     "n": "Coque (fruits de mer)",
     "t": "animaux",
     "u": "vfk7w4",
     "pF": true,
-    "a": [
-      "Mollusque"
-    ]
+    "a": ["Mollusque"]
   },
   {
     "n": "Coriandre",
@@ -1234,9 +1073,7 @@
     "n": "corn flakes",
     "t": "sec",
     "u": "kp0srn",
-    "a": [
-      "Gluten"
-    ]
+    "a": ["Gluten"]
   },
   {
     "n": "Cornflakes (sans gluten)",
@@ -1263,54 +1100,42 @@
     "t": "animaux",
     "u": "sip7kr",
     "pF": true,
-    "a": [
-      "Viande"
-    ]
+    "a": ["Viande"]
   },
   {
     "n": "Côte (veau)",
     "t": "animaux",
     "u": "o2eixm",
     "pF": true,
-    "a": [
-      "Viande"
-    ]
+    "a": ["Viande"]
   },
   {
     "n": "Côte échine (porc)",
     "t": "animaux",
     "u": "ip42wi",
     "pF": true,
-    "a": [
-      "Porc"
-    ]
+    "a": ["Porc"]
   },
   {
     "n": "Côte première (porc)",
     "t": "animaux",
     "u": "b8axth",
     "pF": true,
-    "a": [
-      "Porc"
-    ]
+    "a": ["Porc"]
   },
   {
     "n": "Côtelette (agneau)",
     "t": "animaux",
     "u": "q890ia",
     "pF": true,
-    "a": [
-      "Viande"
-    ]
+    "a": ["Viande"]
   },
   {
     "n": "Côtelette (porc)",
     "t": "animaux",
     "u": "8ctt74",
     "pF": true,
-    "a": [
-      "Porc"
-    ]
+    "a": ["Porc"]
   },
   {
     "n": "Coulis de tomates",
@@ -1345,9 +1170,7 @@
     "t": "animaux",
     "u": "xjwtly",
     "pF": true,
-    "a": [
-      "Crustacé"
-    ]
+    "a": ["Crustacé"]
   },
   {
     "n": "Cranberries",
@@ -1363,18 +1186,14 @@
     "u": "l8clfd",
     "n": "creme",
     "t": "lof",
-    "a": [
-      "Produit laitier"
-    ]
+    "a": ["Produit laitier"]
   },
   {
     "n": "Crème Chantilly",
     "t": "frais",
     "u": "lk4tk0",
     "pF": true,
-    "a": [
-      "Produit laitier"
-    ]
+    "a": ["Produit laitier"]
   },
   {
     "u": "37gzkn",
@@ -1391,9 +1210,7 @@
     "n": "Crème d'orge",
     "t": "lof",
     "u": "xc0m2b",
-    "a": [
-      "Gluten"
-    ]
+    "a": ["Gluten"]
   },
   {
     "n": "creme de coco",
@@ -1414,127 +1231,97 @@
     "u": "fxv31x",
     "n": "crème de soja",
     "t": "frais",
-    "a": [
-      "Soja"
-    ]
+    "a": ["Soja"]
   },
   {
     "n": "Crème épaisse",
     "t": "frais",
     "u": "1e8unz",
     "pF": true,
-    "a": [
-      "Produit laitier"
-    ]
+    "a": ["Produit laitier"]
   },
   {
     "u": "82f9hx",
     "n": "creme fleurette",
     "t": "lof",
-    "a": [
-      "Produit laitier"
-    ]
+    "a": ["Produit laitier"]
   },
   {
     "n": "Crème florette",
     "t": "frais",
     "u": "k6zm70",
-    "a": [
-      "Produit laitier"
-    ]
+    "a": ["Produit laitier"]
   },
   {
     "u": "n3rggt",
     "n": "creme fouettee",
     "t": "frais",
-    "a": [
-      "Produit laitier"
-    ]
+    "a": ["Produit laitier"]
   },
   {
     "u": "turz3b",
     "n": "crème fouettée",
     "t": "frais",
-    "a": [
-      "Produit laitier"
-    ]
+    "a": ["Produit laitier"]
   },
   {
     "n": "Crème fraîche épaisse entière",
     "t": "frais",
     "u": "izd01q",
     "pF": true,
-    "a": [
-      "Produit laitier"
-    ]
+    "a": ["Produit laitier"]
   },
   {
     "n": "Crème fraiche liquide entière",
     "t": "lof",
     "u": "6tnb6h",
-    "a": [
-      "Produit laitier"
-    ]
+    "a": ["Produit laitier"]
   },
   {
     "n": "Crème glacée",
     "t": "frais",
     "u": "aq6040",
     "pF": true,
-    "a": [
-      "Produit laitier"
-    ]
+    "a": ["Produit laitier"]
   },
   {
     "n": "Crème glacée chocolat",
     "t": "frais",
     "u": "ydouo9",
     "pF": true,
-    "a": [
-      "Produit laitier"
-    ]
+    "a": ["Produit laitier"]
   },
   {
     "n": "Crème glacée fraise",
     "t": "frais",
     "u": "yyo2yt",
     "pF": true,
-    "a": [
-      "Produit laitier"
-    ]
+    "a": ["Produit laitier"]
   },
   {
     "n": "Crème glacée vanille",
     "t": "frais",
     "u": "xssjj3",
     "pF": true,
-    "a": [
-      "Produit laitier"
-    ]
+    "a": ["Produit laitier"]
   },
   {
     "n": "Crème liquide",
     "t": "lof",
     "u": "nvzduo",
-    "a": [
-      "Produit laitier"
-    ]
+    "a": ["Produit laitier"]
   },
   {
     "n": "Crème soja",
     "t": "lof",
     "u": "chfwwq",
-    "a": [
-      "Soja"
-    ]
+    "a": ["Soja"]
   },
   {
     "n": "Crème Végétale",
     "t": "lof",
     "u": "aq796v",
-    "a": [
-      "Soja"
-    ]
+    "a": ["Soja"]
   },
   {
     "n": "crêpes de sarrasin",
@@ -1547,9 +1334,7 @@
     "t": "animaux",
     "u": "niic2i",
     "pF": true,
-    "a": [
-      "Crustacé"
-    ]
+    "a": ["Crustacé"]
   },
   {
     "u": "2mcu30",
@@ -1562,18 +1347,14 @@
     "t": "animaux",
     "u": "q6h1hp",
     "pF": true,
-    "a": [
-      "Viande"
-    ]
+    "a": ["Viande"]
   },
   {
     "n": "Cuisse de poulet (volaille et gibier)",
     "t": "animaux",
     "u": "xavxvy",
     "pF": true,
-    "a": [
-      "Viande"
-    ]
+    "a": ["Viande"]
   },
   {
     "n": "Cumin",
@@ -1639,27 +1420,20 @@
     "t": "animaux",
     "u": "d0ba1k",
     "pF": true,
-    "a": [
-      "Viande"
-    ]
+    "a": ["Viande"]
   },
   {
     "n": "Doenjang",
     "t": "epices",
     "u": "vet0jj",
-    "a": [
-      "Gluten",
-      "Soja"
-    ]
+    "a": ["Gluten", "Soja"]
   },
   {
     "n": "Dorade (poisson)",
     "t": "animaux",
     "u": "qf8h6r",
     "pF": true,
-    "a": [
-      "Poisson"
-    ]
+    "a": ["Poisson"]
   },
   {
     "n": "Eau",
@@ -1703,9 +1477,7 @@
     "t": "animaux",
     "u": "44eutn",
     "pF": true,
-    "a": [
-      "Porc"
-    ]
+    "a": ["Porc"]
   },
   {
     "n": "Écorce d'orange séchée ",
@@ -1717,36 +1489,28 @@
     "t": "frais",
     "u": "7l4sfz",
     "pF": true,
-    "a": [
-      "Produit laitier"
-    ]
+    "a": ["Produit laitier"]
   },
   {
     "n": "églefin ou aiglefin (poisson)",
     "t": "animaux",
     "u": "7sejg1",
     "pF": true,
-    "a": [
-      "Poisson"
-    ]
+    "a": ["Poisson"]
   },
   {
     "n": "Emincés de poulet (volaille et gibier)",
     "t": "animaux",
     "u": "a3widy",
     "pF": true,
-    "a": [
-      "Viande"
-    ]
+    "a": ["Viande"]
   },
   {
     "n": "Emmental",
     "t": "frais",
     "u": "36vcgl",
     "pF": true,
-    "a": [
-      "Produit laitier"
-    ]
+    "a": ["Produit laitier"]
   },
   {
     "n": "Endive",
@@ -1759,45 +1523,35 @@
     "t": "animaux",
     "u": "nlcs1b",
     "pF": true,
-    "a": [
-      "Viande"
-    ]
+    "a": ["Viande"]
   },
   {
     "n": "épaule (agneau)",
     "t": "animaux",
     "u": "9j4s8v",
     "pF": true,
-    "a": [
-      "Viande"
-    ]
+    "a": ["Viande"]
   },
   {
     "n": "épaule (veau)",
     "t": "animaux",
     "u": "l5wy0o",
     "pF": true,
-    "a": [
-      "Viande"
-    ]
+    "a": ["Viande"]
   },
   {
     "n": "épaule cuite dégraissée (porc)",
     "t": "animaux",
     "u": "aqc9d4",
     "pF": true,
-    "a": [
-      "Porc"
-    ]
+    "a": ["Porc"]
   },
   {
     "n": "éperlan (poisson)",
     "t": "animaux",
     "u": "4qtoii",
     "pF": true,
-    "a": [
-      "Poisson"
-    ]
+    "a": ["Poisson"]
   },
   {
     "n": "Epinard",
@@ -1816,36 +1570,28 @@
     "t": "animaux",
     "u": "blwjma",
     "pF": true,
-    "a": [
-      "Viande"
-    ]
+    "a": ["Viande"]
   },
   {
     "n": "Escalope de dinde (volaille et gibier)",
     "t": "animaux",
     "u": "e22a1q",
     "pF": true,
-    "a": [
-      "Viande"
-    ]
+    "a": ["Viande"]
   },
   {
     "n": "Escalope de poulet (volaille et gibier)",
     "t": "animaux",
     "u": "lwj6za",
     "pF": true,
-    "a": [
-      "Viande"
-    ]
+    "a": ["Viande"]
   },
   {
     "n": "Espadon (poisson)",
     "t": "animaux",
     "u": "c2awx6",
     "pF": true,
-    "a": [
-      "Poisson"
-    ]
+    "a": ["Poisson"]
   },
   {
     "u": "lw52ml",
@@ -1874,9 +1620,7 @@
     "t": "animaux",
     "u": "fv4y9f",
     "pF": true,
-    "a": [
-      "Viande"
-    ]
+    "a": ["Viande"]
   },
   {
     "n": "Farine d'amande",
@@ -1892,33 +1636,25 @@
     "n": "Farine d'avoine",
     "t": "lof",
     "u": "ab50bc",
-    "a": [
-      "Gluten"
-    ]
+    "a": ["Gluten"]
   },
   {
     "n": "Farine d'épeautre",
     "t": "lof",
     "u": "861x4y",
-    "a": [
-      "Gluten"
-    ]
+    "a": ["Gluten"]
   },
   {
     "n": "Farine d'orge",
     "t": "lof",
     "u": "fqilxx",
-    "a": [
-      "Gluten"
-    ]
+    "a": ["Gluten"]
   },
   {
     "n": "Farine de blé",
     "t": "lof",
     "u": "2av6w8",
-    "a": [
-      "Gluten"
-    ]
+    "a": ["Gluten"]
   },
   {
     "n": "Farine de blé noir (sarrasin)",
@@ -1939,9 +1675,7 @@
     "n": "Farine de kamut",
     "t": "lof",
     "u": "w9cfv1",
-    "a": [
-      "Gluten"
-    ]
+    "a": ["Gluten"]
   },
   {
     "n": "Farine de lentilles",
@@ -1993,17 +1727,13 @@
     "n": "Farine de seigle",
     "t": "lof",
     "u": "5ryt7y",
-    "a": [
-      "Gluten"
-    ]
+    "a": ["Gluten"]
   },
   {
     "n": "Farine de soja",
     "t": "lof",
     "u": "p4tg0v",
-    "a": [
-      "Soja"
-    ]
+    "a": ["Soja"]
   },
   {
     "n": "Farine de tapioca",
@@ -2015,9 +1745,7 @@
     "t": "animaux",
     "u": "j6m21g",
     "pF": true,
-    "a": [
-      "Viande"
-    ]
+    "a": ["Viande"]
   },
   {
     "n": "Fécule de maïs (Maïzena)",
@@ -2060,17 +1788,13 @@
     "t": "frais",
     "u": "m5dxyo",
     "pF": true,
-    "a": [
-      "Produit laitier"
-    ]
+    "a": ["Produit laitier"]
   },
   {
     "u": "9ip91h",
     "n": "feuille a samoussa",
     "t": "sec",
-    "a": [
-      "Gluten"
-    ]
+    "a": ["Gluten"]
   },
   {
     "n": "Feuille de citron combava",
@@ -2091,17 +1815,13 @@
     "u": "up1ydm",
     "n": "feuille de pâte à  samoussa",
     "t": "sec",
-    "a": [
-      "Gluten"
-    ]
+    "a": ["Gluten"]
   },
   {
     "n": "Feuilles de brick",
     "t": "autres",
     "u": "36uk6j",
-    "a": [
-      "Gluten"
-    ]
+    "a": ["Gluten"]
   },
   {
     "n": "Feuilles de riz (galettes)",
@@ -2129,45 +1849,35 @@
     "t": "animaux",
     "u": "bewdsh",
     "pF": true,
-    "a": [
-      "Viande"
-    ]
+    "a": ["Viande"]
   },
   {
     "n": "Filet d'autruche (volaille et gibier)",
     "t": "animaux",
     "u": "ipfqx8",
     "pF": true,
-    "a": [
-      "Viande"
-    ]
+    "a": ["Viande"]
   },
   {
     "n": "Filet mignon (porc)",
     "t": "animaux",
     "u": "63dvqz",
     "pF": true,
-    "a": [
-      "Porc"
-    ]
+    "a": ["Porc"]
   },
   {
     "n": "Flanchet (boeuf)",
     "t": "animaux",
     "u": "zrixbv",
     "pF": true,
-    "a": [
-      "Viande"
-    ]
+    "a": ["Viande"]
   },
   {
     "n": "Flétan (poisson)",
     "t": "animaux",
     "u": "ucayk1",
     "pF": true,
-    "a": [
-      "Poisson"
-    ]
+    "a": ["Poisson"]
   },
   {
     "n": "Fleur de sel",
@@ -2178,9 +1888,7 @@
     "n": "Flocons d'avoine",
     "t": "sec",
     "u": "ovewgk",
-    "a": [
-      "Gluten"
-    ]
+    "a": ["Gluten"]
   },
   {
     "n": "Flocons d'avoine sans gluten",
@@ -2192,27 +1900,21 @@
     "t": "animaux",
     "u": "kmwg8w",
     "pF": true,
-    "a": [
-      "Viande"
-    ]
+    "a": ["Viande"]
   },
   {
     "n": "Foie gras (charcuterie)",
     "t": "animaux",
     "u": "lmav2h",
     "pF": true,
-    "a": [
-      "Viande"
-    ]
+    "a": ["Viande"]
   },
   {
     "n": "Fourme d'Ambert",
     "t": "frais",
     "u": "ta6o8n",
     "pF": true,
-    "a": [
-      "Produit laitier"
-    ]
+    "a": ["Produit laitier"]
   },
   {
     "n": "Fraise",
@@ -2243,45 +1945,35 @@
     "t": "frais",
     "u": "onfvly",
     "pF": true,
-    "a": [
-      "Produit laitier"
-    ]
+    "a": ["Produit laitier"]
   },
   {
     "n": "Fromage blanc",
     "t": "frais",
     "u": "b2dxf8",
     "pF": true,
-    "a": [
-      "Produit laitier"
-    ]
+    "a": ["Produit laitier"]
   },
   {
     "n": "Fromage de chèvre frais",
     "t": "frais",
     "u": "cnhs2e",
     "pF": true,
-    "a": [
-      "Produit laitier"
-    ]
+    "a": ["Produit laitier"]
   },
   {
     "n": "Fromage frais",
     "t": "frais",
     "u": "0d5y4q",
     "pF": true,
-    "a": [
-      "Produit laitier"
-    ]
+    "a": ["Produit laitier"]
   },
   {
     "n": "Fromage râpé",
     "t": "frais",
     "u": "u1fypr",
     "pF": true,
-    "a": [
-      "Produit laitier"
-    ]
+    "a": ["Produit laitier"]
   },
   {
     "n": "Fruit de la passion",
@@ -2322,9 +2014,7 @@
     "u": "ljin96",
     "n": "garam  massala",
     "t": "epices",
-    "a": [
-      "Moutarde"
-    ]
+    "a": ["Moutarde"]
   },
   {
     "n": "Garam Masala",
@@ -2341,9 +2031,7 @@
     "t": "animaux",
     "u": "mt0iyq",
     "pF": true,
-    "a": [
-      "Viande"
-    ]
+    "a": ["Viande"]
   },
   {
     "n": "Gingembre",
@@ -2376,18 +2064,13 @@
     "n": "Gluten pur",
     "t": "lof",
     "u": "946ddw",
-    "a": [
-      "Gluten"
-    ]
+    "a": ["Gluten"]
   },
   {
     "n": "Gochujang",
     "t": "epices",
     "u": "rv1rfv",
-    "a": [
-      "Gluten",
-      "Soja"
-    ]
+    "a": ["Gluten", "Soja"]
   },
   {
     "n": "Gochujang sans gluten",
@@ -2409,18 +2092,14 @@
     "t": "frais",
     "u": "qikzlk",
     "pF": true,
-    "a": [
-      "Produit laitier"
-    ]
+    "a": ["Produit laitier"]
   },
   {
     "n": "Gouda en tranche",
     "t": "frais",
     "u": "aspkm2",
     "pF": true,
-    "a": [
-      "Produit laitier"
-    ]
+    "a": ["Produit laitier"]
   },
   {
     "n": "Gousse d'ail",
@@ -2472,17 +2151,13 @@
     "n": "Graines de sésame blanc",
     "t": "sec",
     "u": "z9plfy",
-    "a": [
-      "Sésame"
-    ]
+    "a": ["Sésame"]
   },
   {
     "n": "Graines de sésame noir",
     "t": "sec",
     "u": "atlkei",
-    "a": [
-      "Sésame"
-    ]
+    "a": ["Sésame"]
   },
   {
     "n": "Grenade",
@@ -2506,9 +2181,7 @@
     "t": "frais",
     "u": "pvia1r",
     "pF": true,
-    "a": [
-      "Produit laitier"
-    ]
+    "a": ["Produit laitier"]
   },
   {
     "n": "Guacamole",
@@ -2519,27 +2192,21 @@
     "n": "Halva",
     "t": "sucres",
     "u": "2cnk7l",
-    "a": [
-      "Sésame"
-    ]
+    "a": ["Sésame"]
   },
   {
     "n": "Hampe grillée (boeuf)",
     "t": "animaux",
     "u": "titfjt",
     "pF": true,
-    "a": [
-      "Viande"
-    ]
+    "a": ["Viande"]
   },
   {
     "n": "Hareng (poisson)",
     "t": "animaux",
     "u": "o483rs",
     "pF": true,
-    "a": [
-      "Poisson"
-    ]
+    "a": ["Poisson"]
   },
   {
     "n": "Haricots beurre",
@@ -2600,17 +2267,13 @@
     "t": "animaux",
     "u": "tnlr3b",
     "pF": true,
-    "a": [
-      "Crustacé"
-    ]
+    "a": ["Crustacé"]
   },
   {
     "n": "Huile d'arachide",
     "t": "lof",
     "u": "8d1cfa5bf2ae",
-    "a": [
-      "Arachides"
-    ]
+    "a": ["Arachides"]
   },
   {
     "n": "Huile d'argan",
@@ -2656,17 +2319,13 @@
     "n": "huile de noisette",
     "t": "lof",
     "u": "yff0vs",
-    "a": [
-      "Fruit à coque"
-    ]
+    "a": ["Fruit à coque"]
   },
   {
     "n": "huile de noix",
     "t": "lof",
     "u": "rfa985",
-    "a": [
-      "Fruit à coque"
-    ]
+    "a": ["Fruit à coque"]
   },
   {
     "n": "huile de pépins de courge",
@@ -2682,9 +2341,7 @@
     "n": "huile de sésame",
     "t": "lof",
     "u": "fazth1",
-    "a": [
-      "Sésame"
-    ]
+    "a": ["Sésame"]
   },
   {
     "n": "huile de tournesol",
@@ -2701,76 +2358,56 @@
     "t": "animaux",
     "u": "lgcsqd",
     "pF": true,
-    "a": [
-      "Mollusque"
-    ]
+    "a": ["Mollusque"]
   },
   {
     "n": "Jambon blanc (charcuterie)",
     "t": "animaux",
     "u": "j6ngb8",
     "pF": true,
-    "a": [
-      "Viande",
-      "Porc"
-    ]
+    "a": ["Viande", "Porc"]
   },
   {
     "n": "Jambon cru (charcuterie)",
     "t": "animaux",
     "u": "np0cbk",
     "pF": true,
-    "a": [
-      "Viande",
-      "Porc"
-    ]
+    "a": ["Viande", "Porc"]
   },
   {
     "n": "Jambon de Bayonne (charcuterie)",
     "t": "animaux",
     "u": "h32yhh",
     "pF": true,
-    "a": [
-      "Viande",
-      "Porc"
-    ]
+    "a": ["Viande", "Porc"]
   },
   {
     "n": "Jambon de dinde (charcuterie)",
     "t": "animaux",
     "u": "ich6gs",
     "pF": true,
-    "a": [
-      "Viande"
-    ]
+    "a": ["Viande"]
   },
   {
     "n": "Jambonneau (charcuterie)",
     "t": "animaux",
     "u": "hok8fa",
     "pF": true,
-    "a": [
-      "Viande",
-      "Porc"
-    ]
+    "a": ["Viande", "Porc"]
   },
   {
     "n": "Jarret (osso bucco) (veau)",
     "t": "animaux",
     "u": "2ofoh1",
     "pF": true,
-    "a": [
-      "Viande"
-    ]
+    "a": ["Viande"]
   },
   {
     "n": "Jarret pot au feu (boeuf)",
     "t": "animaux",
     "u": "b3wxxe",
     "pF": true,
-    "a": [
-      "Viande"
-    ]
+    "a": ["Viande"]
   },
   {
     "n": "Jus d'orange",
@@ -2848,9 +2485,7 @@
     "t": "frais",
     "u": "bppied",
     "pF": true,
-    "a": [
-      "Produit laitier"
-    ]
+    "a": ["Produit laitier"]
   },
   {
     "n": "Kiwi",
@@ -2868,25 +2503,19 @@
     "n": "lait (chèvres)",
     "t": "lof",
     "u": "pvc3gi",
-    "a": [
-      "Produit laitier"
-    ]
+    "a": ["Produit laitier"]
   },
   {
     "n": "Lait concentré (non sucré)",
     "t": "lof",
     "u": "zat1zc",
-    "a": [
-      "Produit laitier"
-    ]
+    "a": ["Produit laitier"]
   },
   {
     "n": "Lait concentré sucré",
     "t": "lof",
     "u": "5dcfzk",
-    "a": [
-      "Produit laitier"
-    ]
+    "a": ["Produit laitier"]
   },
   {
     "n": "lait d’amande",
@@ -2897,17 +2526,13 @@
     "n": "Lait d'avoine",
     "t": "lof",
     "u": "3eex0o",
-    "a": [
-      "Gluten"
-    ]
+    "a": ["Gluten"]
   },
   {
     "n": "lait d'épeautre",
     "t": "lof",
     "u": "v08e8s",
-    "a": [
-      "Gluten"
-    ]
+    "a": ["Gluten"]
   },
   {
     "n": "lait de cajou",
@@ -2923,9 +2548,7 @@
     "n": "lait de noisette",
     "t": "lof",
     "u": "y0en3x",
-    "a": [
-      "Fruit à coque"
-    ]
+    "a": ["Fruit à coque"]
   },
   {
     "n": "Lait de riz",
@@ -2936,57 +2559,43 @@
     "n": "lait de soja",
     "t": "lof",
     "u": "9uc01w",
-    "a": [
-      "Soja"
-    ]
+    "a": ["Soja"]
   },
   {
     "n": "Lait de soja",
     "t": "lof",
     "u": "gpeob7",
-    "a": [
-      "Soja"
-    ]
+    "a": ["Soja"]
   },
   {
     "n": "Lait de soja à la vanille",
     "t": "lof",
     "u": "83ji4x",
-    "a": [
-      "Soja"
-    ]
+    "a": ["Soja"]
   },
   {
     "u": "vk09o5",
     "n": "lait de vache",
     "t": "lof",
-    "a": [
-      "Produit laitier"
-    ]
+    "a": ["Produit laitier"]
   },
   {
     "n": "Lait demi-écrémé",
     "t": "lof",
     "u": "x286pc",
-    "a": [
-      "Produit laitier"
-    ]
+    "a": ["Produit laitier"]
   },
   {
     "n": "Lait écrémé",
     "t": "lof",
     "u": "ue125d",
-    "a": [
-      "Produit laitier"
-    ]
+    "a": ["Produit laitier"]
   },
   {
     "n": "Lait entier",
     "t": "lof",
     "u": "dbbjuu",
-    "a": [
-      "Produit laitier"
-    ]
+    "a": ["Produit laitier"]
   },
   {
     "n": "Lait végétal (au choix)",
@@ -3004,82 +2613,62 @@
     "t": "animaux",
     "u": "t34cw9",
     "pF": true,
-    "a": [
-      "Crustacé"
-    ]
+    "a": ["Crustacé"]
   },
   {
     "n": "Langoustine (fruits de mer)",
     "t": "animaux",
     "u": "2l6t56",
     "pF": true,
-    "a": [
-      "Crustacé"
-    ]
+    "a": ["Crustacé"]
   },
   {
     "n": "Langue de boeuf (abats)",
     "t": "animaux",
     "u": "i0x1yw",
     "pF": true,
-    "a": [
-      "Viande"
-    ]
+    "a": ["Viande"]
   },
   {
     "n": "Langue de veau (abats)",
     "t": "animaux",
     "u": "lu4rod",
     "pF": true,
-    "a": [
-      "Viande"
-    ]
+    "a": ["Viande"]
   },
   {
     "n": "Lapin (volaille et gibier)",
     "t": "animaux",
     "u": "zuu48m",
     "pF": true,
-    "a": [
-      "Viande"
-    ]
+    "a": ["Viande"]
   },
   {
     "n": "Lard (charcuterie)",
     "t": "animaux",
     "u": "5mdklh",
     "pF": true,
-    "a": [
-      "Viande",
-      "Porc"
-    ]
+    "a": ["Viande", "Porc"]
   },
   {
     "n": "Lardons (charcuterie)",
     "t": "animaux",
     "u": "53lsas",
     "pF": true,
-    "a": [
-      "Viande",
-      "Porc"
-    ]
+    "a": ["Viande", "Porc"]
   },
   {
     "n": "Lasagnes",
     "t": "sec",
     "u": "wby30p",
-    "a": [
-      "Gluten"
-    ]
+    "a": ["Gluten"]
   },
   {
     "n": "Leerdammer",
     "t": "frais",
     "u": "95lffa",
     "pF": true,
-    "a": [
-      "Produit laitier"
-    ]
+    "a": ["Produit laitier"]
   },
   {
     "n": "Lentilles",
@@ -3105,9 +2694,7 @@
     "u": "3wausb",
     "n": "levain",
     "t": "lof",
-    "a": [
-      "Gluten"
-    ]
+    "a": ["Gluten"]
   },
   {
     "n": "Levure boulangère",
@@ -3123,9 +2710,7 @@
     "n": "Levure chimique",
     "t": "lof",
     "u": "vgec6e",
-    "a": [
-      "Gluten"
-    ]
+    "a": ["Gluten"]
   },
   {
     "n": "Levure chimique sans gluten",
@@ -3147,9 +2732,7 @@
     "t": "frais",
     "u": "1z66lc",
     "pF": true,
-    "a": [
-      "Gluten"
-    ]
+    "a": ["Gluten"]
   },
   {
     "n": "Levure fraîche de boulanger",
@@ -3162,27 +2745,21 @@
     "t": "animaux",
     "u": "rcbo9g",
     "pF": true,
-    "a": [
-      "Poisson"
-    ]
+    "a": ["Poisson"]
   },
   {
     "n": "Lièvre (volaille et gibier)",
     "t": "animaux",
     "u": "vn8xan",
     "pF": true,
-    "a": [
-      "Viande"
-    ]
+    "a": ["Viande"]
   },
   {
     "n": "Limande (poisson)",
     "t": "animaux",
     "u": "pgb7lh",
     "pF": true,
-    "a": [
-      "Poisson"
-    ]
+    "a": ["Poisson"]
   },
   {
     "n": "Liquid smoke",
@@ -3200,18 +2777,14 @@
     "t": "frais",
     "u": "swnonq",
     "pF": true,
-    "a": [
-      "Produit laitier"
-    ]
+    "a": ["Produit laitier"]
   },
   {
     "n": "Lotte (poisson)",
     "t": "animaux",
     "u": "fimllx",
     "pF": true,
-    "a": [
-      "Poisson"
-    ]
+    "a": ["Poisson"]
   },
   {
     "n": "Mâche (salade)",
@@ -3229,9 +2802,7 @@
     "t": "animaux",
     "u": "qr5k9j",
     "pF": true,
-    "a": [
-      "Viande"
-    ]
+    "a": ["Viande"]
   },
   {
     "n": "Maïs",
@@ -3260,9 +2831,7 @@
     "t": "animaux",
     "u": "hieeea",
     "pF": true,
-    "a": [
-      "Poisson"
-    ]
+    "a": ["Poisson"]
   },
   {
     "n": "Margarine",
@@ -3281,9 +2850,7 @@
     "t": "frais",
     "u": "0vyz4s",
     "pF": true,
-    "a": [
-      "Produit laitier"
-    ]
+    "a": ["Produit laitier"]
   },
   {
     "n": "Marron",
@@ -3295,36 +2862,26 @@
     "u": "dugplg",
     "n": "Marsala ou extrait d'amandes",
     "t": "sucres",
-    "a": [
-      "Fruits à coque"
-    ]
+    "a": ["Fruits à coque"]
   },
   {
     "n": "Mascarpone",
     "t": "frais",
     "u": "0tpvue",
     "pF": true,
-    "a": [
-      "Produit laitier"
-    ]
+    "a": ["Produit laitier"]
   },
   {
     "n": "Mayonnaise",
     "t": "epices",
     "u": "1ijv6u",
-    "a": [
-      "Oeuf",
-      "Moutarde"
-    ]
+    "a": ["Oeuf", "Moutarde"]
   },
   {
     "n": "Mayonnaise maison",
     "t": "epices",
     "u": "fe69a72c47c3",
-    "a": [
-      "Oeuf",
-      "Moutarde"
-    ]
+    "a": ["Oeuf", "Moutarde"]
   },
   {
     "n": "mélange 4 épices",
@@ -3380,18 +2937,14 @@
     "t": "animaux",
     "u": "x7wu93",
     "pF": true,
-    "a": [
-      "Poisson"
-    ]
+    "a": ["Poisson"]
   },
   {
     "n": "Merlu (poisson)",
     "t": "animaux",
     "u": "lkwgh4",
     "pF": true,
-    "a": [
-      "Poisson"
-    ]
+    "a": ["Poisson"]
   },
   {
     "u": "atl14m",
@@ -3414,9 +2967,7 @@
     "n": "Miso",
     "t": "autres",
     "u": "3zdyyy",
-    "a": [
-      "Soja"
-    ]
+    "a": ["Soja"]
   },
   {
     "n": "Miso blanc",
@@ -3427,45 +2978,34 @@
     "n": "Miso d'orge",
     "t": "epices",
     "u": "z8jaad",
-    "a": [
-      "Gluten"
-    ]
+    "a": ["Gluten"]
   },
   {
     "n": "Mortadelle (charcuterie)",
     "t": "animaux",
     "u": "bucais",
     "pF": true,
-    "a": [
-      "Viande",
-      "Porc"
-    ]
+    "a": ["Viande", "Porc"]
   },
   {
     "n": "Morue (poisson)",
     "t": "animaux",
     "u": "d73rvh",
     "pF": true,
-    "a": [
-      "Poisson"
-    ]
+    "a": ["Poisson"]
   },
   {
     "n": "Moule (fruits de mer)",
     "t": "animaux",
     "u": "fgawbx",
     "pF": true,
-    "a": [
-      "Crustacé"
-    ]
+    "a": ["Crustacé"]
   },
   {
     "n": "Moutarde",
     "t": "epices",
     "u": "5c1b20",
-    "a": [
-      "Moutarde"
-    ]
+    "a": ["Moutarde"]
   },
   {
     "n": "Moutarde à l'ancienne",
@@ -3487,27 +3027,21 @@
     "t": "frais",
     "u": "5yety4",
     "pF": true,
-    "a": [
-      "Produit laitier"
-    ]
+    "a": ["Produit laitier"]
   },
   {
     "n": "Mulet (poisson)",
     "t": "animaux",
     "u": "yonror",
     "pF": true,
-    "a": [
-      "Poisson"
-    ]
+    "a": ["Poisson"]
   },
   {
     "n": "Munster",
     "t": "frais",
     "u": "ezhrgx",
     "pF": true,
-    "a": [
-      "Produit laitier"
-    ]
+    "a": ["Produit laitier"]
   },
   {
     "n": "Muscade",
@@ -3546,34 +3080,26 @@
     "n": "Noisette",
     "t": "sec",
     "u": "ut0l0k",
-    "a": [
-      "Fruit à coque"
-    ]
+    "a": ["Fruit à coque"]
   },
   {
     "n": "Noix",
     "t": "sec",
     "u": "usibcf",
-    "a": [
-      "Fruit à coque"
-    ]
+    "a": ["Fruit à coque"]
   },
   {
     "n": "Noix (veau)",
     "t": "animaux",
     "u": "j18saz",
     "pF": true,
-    "a": [
-      "Viande"
-    ]
+    "a": ["Viande"]
   },
   {
     "n": "Noix de cajou",
     "t": "sec",
     "u": "5rkq49",
-    "a": [
-      "Fruit à coque"
-    ]
+    "a": ["Fruit à coque"]
   },
   {
     "n": "Noix de coco",
@@ -3595,26 +3121,20 @@
     "n": "Noix de macadamia",
     "t": "sec",
     "u": "ujh8v5",
-    "a": [
-      "Fruit à coque"
-    ]
+    "a": ["Fruit à coque"]
   },
   {
     "n": "Noix de pécan",
     "t": "sec",
     "u": "1ngabw",
-    "a": [
-      "Fruit à coque"
-    ]
+    "a": ["Fruit à coque"]
   },
   {
     "n": "Noix de Saint-Jacques (fruits de mer)",
     "t": "animaux",
     "u": "joq11n",
     "pF": true,
-    "a": [
-      "Mollusque"
-    ]
+    "a": ["Mollusque"]
   },
   {
     "n": "Nouilles chinoises",
@@ -3625,9 +3145,7 @@
     "n": "Nouilles de blé ondulées Ramen",
     "t": "sec",
     "u": "ul46ke",
-    "a": [
-      "Gluten"
-    ]
+    "a": ["Gluten"]
   },
   {
     "n": "Nouilles de riz",
@@ -3643,58 +3161,38 @@
     "n": "Oeuf",
     "t": "lof",
     "u": "zf3zf8",
-    "a": [
-      "Oeuf"
-    ]
+    "a": ["Oeuf"]
   },
   {
     "n": "Oeuf d'autruche",
     "t": "lof",
     "u": "o78frv",
-    "a": [
-      "Oeuf"
-    ]
+    "a": ["Oeuf"]
   },
   {
     "n": "Oeuf d'oie",
     "t": "lof",
     "u": "xhd36o",
-    "a": [
-      "Oeuf"
-    ]
+    "a": ["Oeuf"]
   },
   {
     "n": "Oeuf de caille",
     "t": "lof",
     "u": "7y1kd8",
-    "a": [
-      "Oeuf"
-    ]
+    "a": ["Oeuf"]
   },
   {
     "n": "Oeuf de cane",
     "t": "lof",
     "u": "4gcm9q",
-    "a": [
-      "Oeuf"
-    ]
-  },
-  {
-    "u": "0ue6i6",
-    "n": "oeufs",
-    "t": "lof",
-    "a": [
-      "Oeuf"
-    ]
+    "a": ["Oeuf"]
   },
   {
     "n": "Oie (volaille et gibier)",
     "t": "animaux",
     "u": "uitxe2",
     "pF": true,
-    "a": [
-      "Viande"
-    ]
+    "a": ["Viande"]
   },
   {
     "n": "Oignon",
@@ -3787,17 +3285,13 @@
     "n": "orties",
     "t": "legumes",
     "a": [],
-    "saisons": [
-      "ete"
-    ]
+    "saisons": ["ete"]
   },
   {
     "n": "Pain",
     "t": "autres",
     "u": "yr392x",
-    "a": [
-      "Gluten"
-    ]
+    "a": ["Gluten"]
   },
   {
     "u": "8w93vx",
@@ -3814,9 +3308,7 @@
     "n": "Pain baguette",
     "t": "sec",
     "u": "e7953e50480d",
-    "a": [
-      "Gluten"
-    ]
+    "a": ["Gluten"]
   },
   {
     "n": "Pain Burger",
@@ -3832,25 +3324,19 @@
     "n": "Pain de mie",
     "t": "autres",
     "u": "kg0mr1",
-    "a": [
-      "Gluten"
-    ]
+    "a": ["Gluten"]
   },
   {
     "n": "Pain pita",
     "t": "autres",
     "u": "wqwn2f",
-    "a": [
-      "Gluten"
-    ]
+    "a": ["Gluten"]
   },
   {
     "n": "Pain rassis",
     "t": "autres",
     "u": "k8dala",
-    "a": [
-      "Gluten"
-    ]
+    "a": ["Gluten"]
   },
   {
     "n": "Pain rassis sans gluten",
@@ -3862,18 +3348,14 @@
     "t": "animaux",
     "u": "3umx7k",
     "pF": true,
-    "a": [
-      "Viande"
-    ]
+    "a": ["Viande"]
   },
   {
     "n": "Palourde (fruits de mer)",
     "t": "animaux",
     "u": "q44d8f",
     "pF": true,
-    "a": [
-      "Mollusque"
-    ]
+    "a": ["Mollusque"]
   },
   {
     "n": "Pamplemousse",
@@ -3892,10 +3374,7 @@
     "t": "animaux",
     "u": "g7zmx1",
     "pF": true,
-    "a": [
-      "Viande",
-      "Porc"
-    ]
+    "a": ["Viande", "Porc"]
   },
   {
     "n": "Pandan",
@@ -3934,18 +3413,14 @@
     "t": "frais",
     "u": "pr1fiu",
     "pF": true,
-    "a": [
-      "Produit laitier"
-    ]
+    "a": ["Produit laitier"]
   },
   {
     "n": "Parmigiano",
     "t": "frais",
     "u": "cr4ai3",
     "pF": true,
-    "a": [
-      "Produit laitier"
-    ]
+    "a": ["Produit laitier"]
   },
   {
     "n": "Pastèque",
@@ -3953,12 +3428,7 @@
     "u": "n8iflg",
     "pF": true
   },
-  {
-    "n": "patate",
-    "t": "legumes",
-    "u": "bq423s",
-    "pF": true
-  },
+
   {
     "n": "Patates douces",
     "t": "legumes",
@@ -3975,9 +3445,7 @@
     "n": "Pâte à pain",
     "t": "autres",
     "u": "m42cma",
-    "a": [
-      "Gluten"
-    ]
+    "a": ["Gluten"]
   },
   {
     "u": "ykw1im",
@@ -3995,19 +3463,14 @@
     "n": "Pâte d'arachide",
     "t": "autres",
     "u": "6778796eb8d8",
-    "a": [
-      "Arachides"
-    ]
+    "a": ["Arachides"]
   },
   {
     "n": "Pâté de campagne (charcuterie)",
     "t": "animaux",
     "u": "k1dfh3",
     "pF": true,
-    "a": [
-      "Viande",
-      "Porc"
-    ]
+    "a": ["Viande", "Porc"]
   },
   {
     "n": "Pâte de Curry Rouge",
@@ -4025,10 +3488,7 @@
     "t": "animaux",
     "u": "6izg8x",
     "pF": true,
-    "a": [
-      "Viande",
-      "Porc"
-    ]
+    "a": ["Viande", "Porc"]
   },
   {
     "n": "Pâte de poivron",
@@ -4046,9 +3506,7 @@
     "t": "frais",
     "u": "h1levi",
     "pF": true,
-    "a": [
-      "Gluten"
-    ]
+    "a": ["Gluten"]
   },
   {
     "n": "Pâte feuilletée",
@@ -4073,34 +3531,26 @@
     "t": "frais",
     "u": "7tvtlu",
     "pF": true,
-    "a": [
-      "Gluten"
-    ]
+    "a": ["Gluten"]
   },
   {
     "n": "Pate filo (1 feuille)",
     "t": "autres",
     "u": "x6je0g",
     "pF": true,
-    "a": [
-      "Gluten"
-    ]
+    "a": ["Gluten"]
   },
   {
     "n": "Pâtes",
     "t": "sec",
     "u": "0o00h5",
-    "a": [
-      "Gluten"
-    ]
+    "a": ["Gluten"]
   },
   {
     "n": "Pâtes - langue d'oiseau",
     "t": "sec",
     "u": "hlx995",
-    "a": [
-      "Gluten"
-    ]
+    "a": ["Gluten"]
   },
   {
     "n": "Pâtes langues d'oiseaux sans gluten",
@@ -4117,9 +3567,7 @@
     "t": "animaux",
     "u": "2iyyi9",
     "pF": true,
-    "a": [
-      "Viande"
-    ]
+    "a": ["Viande"]
   },
   {
     "n": "Pavot",
@@ -4148,19 +3596,14 @@
     "t": "animaux",
     "u": "wdq9sd",
     "pF": true,
-    "a": [
-      "Viande",
-      "Porc"
-    ]
+    "a": ["Viande", "Porc"]
   },
   {
     "n": "Perche (poisson)",
     "t": "animaux",
     "u": "y41a1c",
     "pF": true,
-    "a": [
-      "Poisson"
-    ]
+    "a": ["Poisson"]
   },
   {
     "u": "61pj6v",
@@ -4206,10 +3649,7 @@
     "t": "animaux",
     "u": "hk4zd0",
     "pF": true,
-    "a": [
-      "Viande",
-      "Porc"
-    ]
+    "a": ["Viande", "Porc"]
   },
   {
     "n": "Petits flocons d'avoine",
@@ -4232,35 +3672,27 @@
     "t": "frais",
     "u": "vglv14",
     "pF": true,
-    "a": [
-      "Produit laitier"
-    ]
+    "a": ["Produit laitier"]
   },
   {
     "n": "Philadelphia ou autre marque moins cher",
     "t": "frais",
     "u": "2s1qoq",
     "pF": true,
-    "a": [
-      "Produit laitier"
-    ]
+    "a": ["Produit laitier"]
   },
   {
     "n": "Pigeon (volaille et gibier)",
     "t": "animaux",
     "u": "2g1ps2",
     "pF": true,
-    "a": [
-      "Viande"
-    ]
+    "a": ["Viande"]
   },
   {
     "n": "Pignon de pin",
     "t": "sec",
     "u": "82a9ot",
-    "a": [
-      "Fruit à coque"
-    ]
+    "a": ["Fruit à coque"]
   },
   {
     "n": "Piment (autre)",
@@ -4314,26 +3746,20 @@
     "t": "animaux",
     "u": "aw3xhp",
     "pF": true,
-    "a": [
-      "Viande"
-    ]
+    "a": ["Viande"]
   },
   {
     "n": "Pistache émmondée",
     "t": "sec",
     "u": "q7adw3",
-    "a": [
-      "Fruit à coque"
-    ]
+    "a": ["Fruit à coque"]
   },
   {
     "n": "Pistaches",
     "t": "legumes",
     "u": "qqc6u0",
     "pF": true,
-    "a": [
-      "Fruit à coque"
-    ]
+    "a": ["Fruit à coque"]
   },
   {
     "n": "Poire",
@@ -4379,18 +3805,14 @@
     "t": "animaux",
     "u": "8uw1t6",
     "pF": true,
-    "a": [
-      "Porc"
-    ]
+    "a": ["Porc"]
   },
   {
     "n": "Poitrine (veau)",
     "t": "animaux",
     "u": "8h4kzl",
     "pF": true,
-    "a": [
-      "Viande"
-    ]
+    "a": ["Viande"]
   },
   {
     "n": "Poivre",
@@ -4490,9 +3912,7 @@
     "t": "animaux",
     "u": "o6snoi",
     "pF": true,
-    "a": [
-      "Viande"
-    ]
+    "a": ["Viande"]
   },
   {
     "n": "Potimarron",
@@ -4510,69 +3930,53 @@
     "n": "Poudre d'amande",
     "t": "sec",
     "u": "abl0tz",
-    "a": [
-      "Fruits à coque"
-    ]
+    "a": ["Fruits à coque"]
   },
   {
     "n": "Poudre d'amandes",
     "t": "sucres",
     "u": "rmgr7l",
-    "a": [
-      "Fruit à coque"
-    ]
+    "a": ["Fruit à coque"]
   },
   {
     "u": "sq90lv",
     "n": "Poudre de graine de lin",
     "t": "sec",
-    "a": [
-      "Fruits à coque"
-    ]
+    "a": ["Fruits à coque"]
   },
   {
     "n": "Poudre de noisettes",
     "t": "sucres",
     "u": "0g08xt",
-    "a": [
-      "Fruit à coque"
-    ]
+    "a": ["Fruit à coque"]
   },
   {
     "n": "Poule (volaille et gibier)",
     "t": "animaux",
     "u": "200qgv",
     "pF": true,
-    "a": [
-      "Viande"
-    ]
+    "a": ["Viande"]
   },
   {
     "n": "Poulet (volaille et gibier)",
     "t": "animaux",
     "u": "11b1e0",
     "pF": true,
-    "a": [
-      "Viande"
-    ]
+    "a": ["Viande"]
   },
   {
     "n": "Poulet rôti (volaille et gibier)",
     "t": "animaux",
     "u": "ig2rla",
     "pF": true,
-    "a": [
-      "Viande"
-    ]
+    "a": ["Viande"]
   },
   {
     "n": "Pousses de soja",
     "t": "legumes",
     "u": "4wa1jr",
     "pF": true,
-    "a": [
-      "Soja"
-    ]
+    "a": ["Soja"]
   },
   {
     "n": "Pralines roses de Lyon",
@@ -4583,27 +3987,20 @@
     "n": "Praslin en poudre",
     "t": "sucres",
     "u": "ybc4p4",
-    "a": [
-      "Fruit à coque"
-    ]
+    "a": ["Fruit à coque"]
   },
   {
     "n": "Prosciutto (charcuterie)",
     "t": "animaux",
     "u": "dmmv7e",
     "pF": true,
-    "a": [
-      "Viande",
-      "Porc"
-    ]
+    "a": ["Viande", "Porc"]
   },
   {
     "n": "Protéines de soja",
     "t": "autres",
     "u": "6m90g7",
-    "a": [
-      "Soja"
-    ]
+    "a": ["Soja"]
   },
   {
     "n": "Protéines de soja (grosses)",
@@ -4656,10 +4053,7 @@
     "u": "szk5sw",
     "n": "Purée de cacahuète",
     "t": "autres",
-    "a": [
-      "Arachides",
-      "Fruits à coque"
-    ]
+    "a": ["Arachides", "Fruits à coque"]
   },
   {
     "n": "purée de noix de cajou",
@@ -4670,17 +4064,13 @@
     "u": "5xh7vq",
     "n": "purée de pistache",
     "t": "autres",
-    "a": [
-      "Fruits à coque"
-    ]
+    "a": ["Fruits à coque"]
   },
   {
     "n": "Purée de sésame noir",
     "t": "autres",
     "u": "9d8hxn",
-    "a": [
-      "Sésame"
-    ]
+    "a": ["Sésame"]
   },
   {
     "n": "Quetsche",
@@ -4693,9 +4083,7 @@
     "t": "animaux",
     "u": "az6k3k",
     "pF": true,
-    "a": [
-      "Viande"
-    ]
+    "a": ["Viande"]
   },
   {
     "n": "Quinoa",
@@ -4730,9 +4118,7 @@
     "t": "animaux",
     "u": "zuoe9n",
     "pF": true,
-    "a": [
-      "Poisson"
-    ]
+    "a": ["Poisson"]
   },
   {
     "n": "Raifort en poudre",
@@ -4754,27 +4140,21 @@
     "n": "Ras el hanout",
     "t": "epices",
     "u": "j40pyf",
-    "a": [
-      "Moutarde"
-    ]
+    "a": ["Moutarde"]
   },
   {
     "n": "Rascasse (poisson)",
     "t": "animaux",
     "u": "f9y4lu",
     "pF": true,
-    "a": [
-      "Poisson"
-    ]
+    "a": ["Poisson"]
   },
   {
     "n": "Reblochon",
     "t": "frais",
     "u": "ob3net",
     "pF": true,
-    "a": [
-      "Produit laitier"
-    ]
+    "a": ["Produit laitier"]
   },
   {
     "n": "Rhubarbe",
@@ -4787,55 +4167,42 @@
     "t": "frais",
     "u": "q6t705",
     "pF": true,
-    "a": [
-      "Produit laitier"
-    ]
+    "a": ["Produit laitier"]
   },
   {
     "n": "Rillettes d'oie (charcuterie)",
     "t": "animaux",
     "u": "jrxvb9",
     "pF": true,
-    "a": [
-      "Viande"
-    ]
+    "a": ["Viande"]
   },
   {
     "n": "Rillettes de canard (charcuterie)",
     "t": "animaux",
     "u": "23wvxs",
     "pF": true,
-    "a": [
-      "Viande"
-    ]
+    "a": ["Viande"]
   },
   {
     "n": "Rillettes de porc (charcuterie)",
     "t": "animaux",
     "u": "33djub",
     "pF": true,
-    "a": [
-      "Viande",
-      "Porc"
-    ]
+    "a": ["Viande", "Porc"]
   },
   {
     "n": "Rillettes de thon",
     "t": "animaux",
     "u": "p1unld",
     "pF": true,
-    "a": [
-      "Poisson"
-    ]
+    "a": ["Poisson"]
   },
   {
     "n": "Ris (abats)",
     "t": "animaux",
     "u": "ml02ss",
     "pF": true,
-    "a": [
-      "Viande"
-    ]
+    "a": ["Viande"]
   },
   {
     "n": "Riz",
@@ -4862,18 +4229,14 @@
     "t": "animaux",
     "u": "cuqv5x",
     "pF": true,
-    "a": [
-      "Viande"
-    ]
+    "a": ["Viande"]
   },
   {
     "n": "Rognons de porc (abats)",
     "t": "animaux",
     "u": "wrvr6h",
     "pF": true,
-    "a": [
-      "Viande"
-    ]
+    "a": ["Viande"]
   },
   {
     "n": "Romarin",
@@ -4885,100 +4248,77 @@
     "t": "frais",
     "u": "ey6c9e",
     "pF": true,
-    "a": [
-      "Produit laitier"
-    ]
+    "a": ["Produit laitier"]
   },
   {
     "n": "Rosbif (boeuf)",
     "t": "animaux",
     "u": "23hi37",
     "pF": true,
-    "a": [
-      "Viande"
-    ]
+    "a": ["Viande"]
   },
   {
     "n": "Rosette (charcuterie)",
     "t": "animaux",
     "u": "i8uddf",
     "pF": true,
-    "a": [
-      "Viande",
-      "Porc"
-    ]
+    "a": ["Viande", "Porc"]
   },
   {
     "n": "Rôti (porc)",
     "t": "animaux",
     "u": "b2ei4f",
     "pF": true,
-    "a": [
-      "Porc"
-    ]
+    "a": ["Porc"]
   },
   {
     "n": "Rôti (veau)",
     "t": "animaux",
     "u": "l9h5zr",
     "pF": true,
-    "a": [
-      "Viande"
-    ]
+    "a": ["Viande"]
   },
   {
     "n": "Rôti cuit (porc)",
     "t": "animaux",
     "u": "nj4357",
     "pF": true,
-    "a": [
-      "Porc"
-    ]
+    "a": ["Porc"]
   },
   {
     "n": "Rôti de dinde (volaille et gibier)",
     "t": "animaux",
     "u": "dj9knx",
     "pF": true,
-    "a": [
-      "Viande"
-    ]
+    "a": ["Viande"]
   },
   {
     "n": "Rôti Orloff (veau)",
     "t": "animaux",
     "u": "n5xlof",
     "pF": true,
-    "a": [
-      "Viande"
-    ]
+    "a": ["Viande"]
   },
   {
     "n": "Rouget (poisson)",
     "t": "animaux",
     "u": "g7qh6e",
     "pF": true,
-    "a": [
-      "Poisson"
-    ]
+    "a": ["Poisson"]
   },
   {
     "n": "Roussette (poisson)",
     "t": "animaux",
     "u": "f3qcec",
     "pF": true,
-    "a": [
-      "Poisson"
-    ]
+    "a": ["Poisson"]
   },
   {
     "n": "Rumsteak (boeuf)",
     "t": "animaux",
     "u": "xi7biw",
     "pF": true,
-    "a": [
-      "Viande"
-    ]
+    "a": ["Viande"]
   },
   {
     "n": "Safran",
@@ -4990,9 +4330,7 @@
     "t": "frais",
     "u": "mfjyx5",
     "pF": true,
-    "a": [
-      "Produit laitier"
-    ]
+    "a": ["Produit laitier"]
   },
   {
     "n": "Salade",
@@ -5017,10 +4355,7 @@
     "t": "animaux",
     "u": "q3efpw",
     "pF": true,
-    "a": [
-      "Viande",
-      "Porc"
-    ]
+    "a": ["Viande", "Porc"]
   },
   {
     "n": "Salsifis",
@@ -5038,27 +4373,21 @@
     "t": "animaux",
     "u": "im46yu",
     "pF": true,
-    "a": [
-      "Poisson"
-    ]
+    "a": ["Poisson"]
   },
   {
     "n": "Sanglier (volaille et gibier)",
     "t": "animaux",
     "u": "7q9ad3",
     "pF": true,
-    "a": [
-      "Viande"
-    ]
+    "a": ["Viande"]
   },
   {
     "n": "Sardine (poisson)",
     "t": "animaux",
     "u": "5jsoge",
     "pF": true,
-    "a": [
-      "Poisson"
-    ]
+    "a": ["Poisson"]
   },
   {
     "n": "Sariette",
@@ -5079,17 +4408,13 @@
     "n": "Sauce soja",
     "t": "epices",
     "u": "jjrwlj",
-    "a": [
-      "Soja"
-    ]
+    "a": ["Soja"]
   },
   {
     "n": "Sauce soja dark (foncé)",
     "t": "epices",
     "u": "h138n7",
-    "a": [
-      "Soja"
-    ]
+    "a": ["Soja"]
   },
   {
     "n": "Sauce tomate mutti",
@@ -5101,10 +4426,7 @@
     "t": "animaux",
     "u": "3shjj4",
     "pF": true,
-    "a": [
-      "Viande",
-      "Porc"
-    ]
+    "a": ["Viande", "Porc"]
   },
   {
     "n": "Saucisse végane",
@@ -5116,10 +4438,7 @@
     "t": "animaux",
     "u": "vt8q9x",
     "pF": true,
-    "a": [
-      "Viande",
-      "Porc"
-    ]
+    "a": ["Viande", "Porc"]
   },
   {
     "n": "Sauge",
@@ -5131,18 +4450,14 @@
     "t": "animaux",
     "u": "yq993x",
     "pF": true,
-    "a": [
-      "Poisson"
-    ]
+    "a": ["Poisson"]
   },
   {
     "n": "Seiche (poisson)",
     "t": "animaux",
     "u": "lire4e",
     "pF": true,
-    "a": [
-      "Poisson"
-    ]
+    "a": ["Poisson"]
   },
   {
     "n": "Sel",
@@ -5168,25 +4483,19 @@
     "n": "Semoule fine (blé)",
     "t": "sec",
     "u": "mltl42",
-    "a": [
-      "Gluten"
-    ]
+    "a": ["Gluten"]
   },
   {
     "n": "Semoule grosse (blé)",
     "t": "sec",
     "u": "gluv4i",
-    "a": [
-      "Gluten"
-    ]
+    "a": ["Gluten"]
   },
   {
     "n": "Semoule moyenne (blé)",
     "t": "sec",
     "u": "yx78ae",
-    "a": [
-      "Gluten"
-    ]
+    "a": ["Gluten"]
   },
   {
     "n": "Sept épices libanais",
@@ -5202,41 +4511,31 @@
     "n": "Sésame blanc",
     "t": "epices",
     "u": "1uz8x5",
-    "a": [
-      "Sésame"
-    ]
+    "a": ["Sésame"]
   },
   {
     "n": "Sésame brun",
     "t": "epices",
     "u": "0m7btx",
-    "a": [
-      "Sésame"
-    ]
+    "a": ["Sésame"]
   },
   {
     "n": "Sésame doré",
     "t": "epices",
     "u": "h3g82r",
-    "a": [
-      "Sésame"
-    ]
+    "a": ["Sésame"]
   },
   {
     "n": "Sésame noir",
     "t": "epices",
     "u": "9bdo2l",
-    "a": [
-      "Sésame"
-    ]
+    "a": ["Sésame"]
   },
   {
     "n": "Shiro miso",
     "t": "epices",
     "u": "dx771g",
-    "a": [
-      "Soja"
-    ]
+    "a": ["Soja"]
   },
   {
     "n": "Shizo vert",
@@ -5275,9 +4574,7 @@
     "t": "animaux",
     "u": "qr0xwp",
     "pF": true,
-    "a": [
-      "Poisson"
-    ]
+    "a": ["Poisson"]
   },
   {
     "n": "Spaguetti de Mais-Riz",
@@ -5288,10 +4585,7 @@
     "n": "Speculoos",
     "t": "sucres",
     "u": "h6thsp",
-    "a": [
-      "Gluten",
-      "Soja"
-    ]
+    "a": ["Gluten", "Soja"]
   },
   {
     "n": "Sriracha",
@@ -5303,17 +4597,13 @@
     "t": "animaux",
     "u": "hxqhsf",
     "pF": true,
-    "a": [
-      "Viande"
-    ]
+    "a": ["Viande"]
   },
   {
     "u": "esrux8",
     "n": "steak végé",
     "t": "autres",
-    "a": [
-      "Moutarde"
-    ]
+    "a": ["Moutarde"]
   },
   {
     "n": "sucre blanc",
@@ -5380,17 +4670,13 @@
     "n": "Tahin",
     "t": "autres",
     "u": "u33083",
-    "a": [
-      "Sésame"
-    ]
+    "a": ["Sésame"]
   },
   {
     "n": "Tamari (sauce)",
     "t": "epices",
     "u": "bbwo4n",
-    "a": [
-      "Soja"
-    ]
+    "a": ["Soja"]
   },
   {
     "n": "tamarin liquide",
@@ -5424,9 +4710,7 @@
     "t": "animaux",
     "u": "svrouu",
     "pF": true,
-    "a": [
-      "Viande"
-    ]
+    "a": ["Viande"]
   },
   {
     "n": "Thé Matcha",
@@ -5438,9 +4722,7 @@
     "t": "animaux",
     "u": "egpiw1",
     "pF": true,
-    "a": [
-      "Poisson"
-    ]
+    "a": ["Poisson"]
   },
   {
     "n": "Thym",
@@ -5452,9 +4734,7 @@
     "t": "frais",
     "u": "6ezq59",
     "pF": true,
-    "a": [
-      "Produit laitier"
-    ]
+    "a": ["Produit laitier"]
   },
   {
     "n": "Tofu ferme",
@@ -5512,36 +4792,28 @@
     "t": "animaux",
     "u": "2wbi6u",
     "pF": true,
-    "a": [
-      "Porc"
-    ]
+    "a": ["Porc"]
   },
   {
     "n": "Tripes (abats)",
     "t": "animaux",
     "u": "8jb1js",
     "pF": true,
-    "a": [
-      "Viande"
-    ]
+    "a": ["Viande"]
   },
   {
     "n": "Truite (poisson)",
     "t": "animaux",
     "u": "qgsomm",
     "pF": true,
-    "a": [
-      "Poisson"
-    ]
+    "a": ["Poisson"]
   },
   {
     "n": "Turbot (poisson)",
     "t": "animaux",
     "u": "b42j4r",
     "pF": true,
-    "a": [
-      "Poisson"
-    ]
+    "a": ["Poisson"]
   },
   {
     "n": "vanille extrait concentré",
@@ -5574,61 +4846,45 @@
     "t": "animaux",
     "u": "gnbf8z",
     "pF": true,
-    "a": [
-      "Viande"
-    ]
+    "a": ["Viande"]
   },
   {
     "n": "Viande hachée (porc)",
     "t": "animaux",
     "u": "ibn1yk",
     "pF": true,
-    "a": [
-      "Porc"
-    ]
+    "a": ["Porc"]
   },
   {
     "n": "Viande hachée (veau)",
     "t": "animaux",
     "u": "sb5cr6",
     "pF": true,
-    "a": [
-      "Viande"
-    ]
+    "a": ["Viande"]
   },
   {
     "n": "Vin Blanc",
     "t": "epices",
     "u": "judtle",
-    "a": [
-      "Sulfites",
-      "Alcool"
-    ]
+    "a": ["Sulfites", "Alcool"]
   },
   {
     "n": "Vin Rouge",
     "t": "epices",
     "u": "ruvnjp",
-    "a": [
-      "Sulfites",
-      "Alcool"
-    ]
+    "a": ["Sulfites", "Alcool"]
   },
   {
     "n": "Vinaigre balsamique",
     "t": "epices",
     "u": "qemlqs",
-    "a": [
-      "Sulfites"
-    ]
+    "a": ["Sulfites"]
   },
   {
     "n": "Vinaigre de cidre",
     "t": "epices",
     "u": "7qo3ht",
-    "a": [
-      "Alcool"
-    ]
+    "a": ["Alcool"]
   },
   {
     "n": "Vinaigre de riz",
@@ -5644,9 +4900,7 @@
     "n": "Vinaigre de vin",
     "t": "epices",
     "u": "bjuxby",
-    "a": [
-      "Alcool"
-    ]
+    "a": ["Alcool"]
   },
   {
     "n": "Vinaigre de Xérès",
@@ -5662,79 +4916,61 @@
     "u": "0d5qub",
     "n": "yahourt de soja",
     "t": "frais",
-    "a": [
-      "Soja"
-    ]
+    "a": ["Soja"]
   },
   {
     "u": "69caiq",
     "n": "yaourt à la grecque",
     "t": "frais",
-    "a": [
-      "Produit laitier"
-    ]
+    "a": ["Produit laitier"]
   },
   {
     "n": "Yaourt brassé",
     "t": "frais",
     "u": "a73fzw",
     "pF": true,
-    "a": [
-      "Produit laitier"
-    ]
+    "a": ["Produit laitier"]
   },
   {
     "n": "Yaourt d'Amande",
     "t": "frais",
     "u": "k3hbhs",
     "pF": true,
-    "a": [
-      "Fruit à coque"
-    ]
+    "a": ["Fruit à coque"]
   },
   {
     "n": "yaourt de brebis",
     "t": "frais",
     "u": "cq437o",
     "pF": true,
-    "a": [
-      "Produit laitier"
-    ]
+    "a": ["Produit laitier"]
   },
   {
     "n": "Yaourt de soja",
     "t": "frais",
     "u": "hlbwfd",
     "pF": true,
-    "a": [
-      "Soja"
-    ]
+    "a": ["Soja"]
   },
   {
     "n": "Yaourt de vache",
     "t": "frais",
     "u": "xahmrh",
     "pF": true,
-    "a": [
-      "Produit laitier"
-    ]
+    "a": ["Produit laitier"]
   },
   {
     "n": "Yaourt grec de vache",
     "t": "frais",
     "u": "dzqmba",
     "pF": true,
-    "a": [
-      "Produit laitier"
-    ]
+    "a": ["Produit laitier"]
   },
   {
     "n": "Yaourt nature",
     "t": "frais",
     "u": "yl86w7",
-    "a": [
-      "Produit laitier"
-    ]
+    "a": ["Produit laitier"]
   },
   {
     "n": "Yaourt Végétal",
@@ -5746,9 +4982,7 @@
     "n": "Zaatar (zathar)",
     "t": "epices",
     "u": "wxocup",
-    "a": [
-      "Sésame"
-    ]
+    "a": ["Sésame"]
   },
   {
     "n": "Zestes d'orange",

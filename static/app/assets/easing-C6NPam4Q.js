@@ -1,0 +1,1 @@
+import"./rolldown-runtime-C3mKaglU.js";function t(n){return n}function a(n){return n<.5?4*n*n*n:.5*Math.pow(2*n-2,3)+1}function c(n){const r=n-1;return r*r*r+1}function i(n){return n===1?n:1-Math.pow(2,-10*n)}export{t as i,c as n,i as r,a as t};

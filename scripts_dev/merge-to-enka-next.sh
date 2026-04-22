@@ -120,35 +120,39 @@ git pull origin "$TARGET_BRANCH"
 ok "À jour sur $TARGET_BRANCH."
 
 # ── Étape 4 : Merge ────────────────────────────────────────────────
-MERGE_FLAG=""
-if [ "$SQUASH" = true ]; then
-    MERGE_FLAG="--squash"
-fi
-
+MERGE_MSG="merge: $SOURCE_BRANCH → $TARGET_BRANCH"
 info "Merge de $SOURCE_BRANCH dans $TARGET_BRANCH…"
-if git merge $MERGE_FLAG "$SOURCE_BRANCH"; then
-    ok "Merge réussi."
 
-    if [ "$SQUASH" = true ]; then
-        git commit -m "merge: $SOURCE_BRANCH → $TARGET_BRANCH (squash)"
+if [ "$SQUASH" = true ]; then
+    if ! git merge --squash "$SOURCE_BRANCH"; then
+        err "Conflits détectés ! Résous-les manuellement, puis :"
+        echo "    git add . && git commit && git push origin $TARGET_BRANCH"
+        git diff --name-only --diff-filter=U
+        cleanup_done=true
+        exit 1
     fi
+    git commit -m "$MERGE_MSG (squash)"
+    ok "Merge (squash) réussi."
 else
-    err "Conflits détectés ! Résous-les manuellement, puis :"
-    echo ""
-    echo "    git add ."
-    echo "    git commit"
-    echo "    git push origin $TARGET_BRANCH"
-    echo ""
-    echo "Conflits :"
-    git diff --name-only --diff-filter=U
-    echo ""
-    err "Tu es resté sur $TARGET_BRANCH. Résous les conflits avant de revenir."
-    cleanup_done=true  # empêche le trap de faire un checkout forcé
-    exit 1
+    if ! git merge --no-edit -m "$MERGE_MSG" "$SOURCE_BRANCH"; then
+        err "Conflits détectés ! Résous-les manuellement, puis :"
+        echo "    git add . && git commit && git push origin $TARGET_BRANCH"
+        git diff --name-only --diff-filter=U
+        cleanup_done=true
+        exit 1
+    fi
+    ok "Merge réussi."
 fi
 
 # ── Étape 5 : Rebuild Svelte (par défaut) ──────────────────────────
 if [ "$REBUILD" = true ]; then
+    # Sécurité : vérifier qu'on est bien sur la branche cible
+    CURRENT=$(git branch --show-current)
+    if [ "$CURRENT" != "$TARGET_BRANCH" ]; then
+        err "Incohérence : branche actuelle=$CURRENT, attendue=$TARGET_BRANCH. Abandon du rebuild."
+        exit 1
+    fi
+
     info "Rebuild Svelte sur $TARGET_BRANCH…"
 
     # S'assurer que le build n'est PAS exclu par les gitignore

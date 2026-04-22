@@ -1,6 +1,6 @@
 ---
 title: Semoule
-date: '2026-04-22T01:04:51.920Z'
+date: '2026-04-22T01:08:56.834Z'
 draft: true
 typeR: plat
 categories:
@@ -15,15 +15,19 @@ cuisson: true
 serveHot: true
 description: en bac gastro
 region: null
-saison: []
+saison:
+  - printemps
+  - ete
+  - automne
+  - hiver
 id: semoule_s5kpvpsdlxzt
 materiel: []
 ingredients:
   - uuid: yx78ae
     name: Semoule moyenne (blé)
-    originalQuantity: 4
+    originalQuantity: 8
     originalUnit: kg
-    normalizedQuantity: 4000
+    normalizedQuantity: 8000
     normalizedUnit: gr.
     comment: ''
     allergens:
@@ -31,27 +35,27 @@ ingredients:
     type: sec
   - uuid: 2juq3x
     name: Sel
-    originalQuantity: 80
+    originalQuantity: 160
     originalUnit: gr.
-    normalizedQuantity: 80
+    normalizedQuantity: 160
     normalizedUnit: gr.
     comment: ''
     allergens: []
     type: epices
   - uuid: c70jxb
     name: huile de tournesol
-    originalQuantity: 175
+    originalQuantity: 350
     originalUnit: ml
-    normalizedQuantity: 175
+    normalizedQuantity: 350
     normalizedUnit: ml
     comment: ''
     allergens: []
     type: lof
   - uuid: ljzb7j
     name: Eau
-    originalQuantity: 6
+    originalQuantity: 12
     originalUnit: l.
-    normalizedQuantity: 6000
+    normalizedQuantity: 12000
     normalizedUnit: ml
     comment: ''
     allergens: []
@@ -64,7 +68,7 @@ permissionWrite:
   - 68975cbc002469058f8b
 auteur: ghald
 createdAt: '2026-04-06T11:03:01.685+00:00'
-updatedAt: '2026-04-22T01:04:51.650+00:00'
+updatedAt: '2026-04-22T01:08:56.523+00:00'
 createdBy: 68975cbc002469058f8b
 teams: []
 status: public

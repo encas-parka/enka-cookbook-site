@@ -1,6 +1,6 @@
 ---
 title: Semoule
-date: '2026-04-22T01:08:56.834Z'
+date: '2026-04-22T01:09:24.585Z'
 draft: true
 typeR: plat
 categories:
@@ -16,10 +16,7 @@ serveHot: true
 description: en bac gastro
 region: null
 saison:
-  - printemps
   - ete
-  - automne
-  - hiver
 id: semoule_s5kpvpsdlxzt
 materiel: []
 ingredients:
@@ -68,7 +65,7 @@ permissionWrite:
   - 68975cbc002469058f8b
 auteur: ghald
 createdAt: '2026-04-06T11:03:01.685+00:00'
-updatedAt: '2026-04-22T01:08:56.523+00:00'
+updatedAt: '2026-04-22T01:09:24.283+00:00'
 createdBy: 68975cbc002469058f8b
 teams: []
 status: public

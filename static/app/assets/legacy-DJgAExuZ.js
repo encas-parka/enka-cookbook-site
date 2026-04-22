@@ -1,0 +1,1 @@
+import{zn as e}from"./appwrite-Cv0_-4Gh.js";e();

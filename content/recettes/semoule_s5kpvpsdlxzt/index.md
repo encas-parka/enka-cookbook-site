@@ -1,6 +1,6 @@
 ---
 title: Semoule
-date: '2026-04-22T01:09:56.611Z'
+date: '2026-04-22T01:12:10.328Z'
 draft: true
 typeR: plat
 categories:
@@ -9,7 +9,7 @@ regime:
   - vegan
   - sans-lactose
 plate: 100
-quantite_desc: Pour accompagnement, 80 gr./pers (monter à 90 gr. si plat leger)
+quantite_desc: Pour accompagnement, 80 gr./pers (monter à 90 ou 100 gr. si plat leger)
 check: true
 cuisson: true
 serveHot: true
@@ -21,9 +21,9 @@ materiel: []
 ingredients:
   - uuid: yx78ae
     name: Semoule moyenne (blé)
-    originalQuantity: 8
+    originalQuantity: 4
     originalUnit: kg
-    normalizedQuantity: 8000
+    normalizedQuantity: 4000
     normalizedUnit: gr.
     comment: ''
     allergens:
@@ -31,27 +31,27 @@ ingredients:
     type: sec
   - uuid: 2juq3x
     name: Sel
-    originalQuantity: 160
+    originalQuantity: 80
     originalUnit: gr.
-    normalizedQuantity: 160
+    normalizedQuantity: 80
     normalizedUnit: gr.
     comment: ''
     allergens: []
     type: epices
   - uuid: c70jxb
     name: huile de tournesol
-    originalQuantity: 350
+    originalQuantity: 175
     originalUnit: ml
-    normalizedQuantity: 350
+    normalizedQuantity: 175
     normalizedUnit: ml
     comment: ''
     allergens: []
     type: lof
   - uuid: ljzb7j
     name: Eau
-    originalQuantity: 12
+    originalQuantity: 6
     originalUnit: l.
-    normalizedQuantity: 12000
+    normalizedQuantity: 6000
     normalizedUnit: ml
     comment: ''
     allergens: []
@@ -64,7 +64,7 @@ permissionWrite:
   - 68975cbc002469058f8b
 auteur: ghald
 createdAt: '2026-04-06T11:03:01.685+00:00'
-updatedAt: '2026-04-22T01:09:56.391+00:00'
+updatedAt: '2026-04-22T01:12:10.113+00:00'
 createdBy: 68975cbc002469058f8b
 teams: []
 status: public

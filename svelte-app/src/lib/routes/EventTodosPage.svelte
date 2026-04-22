@@ -9,6 +9,7 @@
   import { route } from "$lib/router";
   import { getContributors } from "$lib/utils/event-stats-helpers";
   import EventTodoList from "$lib/components/eventTodo/EventTodoList.svelte";
+  import EventDocumentsBloc from "$lib/components/documents/EventDocumentsBloc.svelte";
   import { ListTodo } from "@lucide/svelte";
   import { online } from "svelte/reactivity/window";
 
@@ -81,6 +82,18 @@
 
 <div class="bg-base-200 min-h-lvh px-4 pt-4 pb-20 md:px-20" transition:fade>
   <!-- Header -->
+
+  <!-- Bloc Documents attachés -->
+  {#if eventId}
+    <div class="mx-auto mt-4 {maxWidthClass}">
+      <EventDocumentsBloc
+        {eventId}
+        tag="tache"
+        tagLabel="Tâches"
+        {canEdit}
+      />
+    </div>
+  {/if}
 
   <!-- Todo List -->
   {#if currentEvent}

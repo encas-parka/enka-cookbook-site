@@ -40,6 +40,18 @@
     (searchParams.get("mode") as "edit" | "preview" | null) || "preview",
   );
 
+  // Tags prédéfinis pour lier aux pages d'événement
+  const PREDEFINED_TAGS = ["produit", "recette", "tache", "materiel"] as const;
+  const TAG_LABELS: Record<string, string> = {
+    produit: "Produits",
+    recette: "Recettes",
+    tache: "Tâches",
+    materiel: "Matériel",
+  };
+
+  // Tags sélectionnés
+  let selectedTags = $state<string[]>([]);
+
   // ============================================================================
   // LECTURE RÉACTIVE DU STORE
   // ============================================================================
@@ -55,7 +67,7 @@
   // ============================================================================
 
   const isDirty = $derived.by(() => {
-    const currentSnapshot = JSON.stringify({ title, content });
+    const currentSnapshot = JSON.stringify({ title, content, tags: selectedTags });
     return currentSnapshot !== initialDocumentSnapshot;
   });
 
@@ -182,7 +194,8 @@
 
       title = doc.title || "";
       content = doc.content || "";
-      initialDocumentSnapshot = JSON.stringify({ title, content });
+      selectedTags = doc.tags || [];
+      initialDocumentSnapshot = JSON.stringify({ title, content, tags: selectedTags });
 
       // Le lock est acquis réactivement via le $effect ci-dessous,
       // uniquement si le mode initial est "edit"
@@ -243,9 +256,10 @@
       await teamdocsStore.updateDocument(docId, {
         title: title.trim(),
         content,
+        tags: [...selectedTags],
       });
       // Mettre à jour le snapshot → isDirty passe à false
-      initialDocumentSnapshot = JSON.stringify({ title, content });
+      initialDocumentSnapshot = JSON.stringify({ title, content, tags: [...selectedTags] });
 
       // Basculer en mode preview
       // Le $effect réactif libérera le lock automatiquement
@@ -407,6 +421,35 @@
               />
             </label>
           </fieldset>
+
+          <!-- Sélecteur de tags -->
+          {#if mode === "edit"}
+            <fieldset class="fieldset">
+              <legend class="fieldset-legend">Lier aux pages</legend>
+              <div class="flex flex-wrap gap-2">
+                {#each PREDEFINED_TAGS as tag}
+                  <button
+                    type="button"
+                    class="btn btn-sm {selectedTags.includes(tag)
+                      ? 'btn-primary'
+                      : 'btn-outline'}"
+                    onclick={() => {
+                      if (selectedTags.includes(tag)) {
+                        selectedTags = selectedTags.filter((t) => t !== tag);
+                      } else {
+                        selectedTags = [...selectedTags, tag];
+                      }
+                    }}
+                  >
+                    {TAG_LABELS[tag]}
+                  </button>
+                {/each}
+              </div>
+              <p class="text-base-content/60 text-xs">
+                Sélectionnez les pages où ce document apparaîtra
+              </p>
+            </fieldset>
+          {/if}
 
           <fieldset class="fieldset">
             <MarkdownEditorAdvanced

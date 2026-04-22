@@ -123,7 +123,7 @@
       {#if canEdit}
         <button
           class="btn btn-primary btn-sm ms-auto"
-          onclick={() => navigate(`/event/${eventId}/document/new`)}
+          onclick={() => navigate(`/event/${eventId}/document/create`)}
         >
           <PlusIcon class="mr-1 size-4" />
           Créer un document
@@ -166,7 +166,7 @@
           {#if canEdit && searchQuery.length < 2}
             <button
               class="btn btn-primary mt-4"
-              onclick={() => navigate(`/event/${eventId}/document/new`)}
+onclick={() => navigate(`/event/${eventId}/document/create`)}
             >
               <PlusIcon size={18} />
               Créer le premier document

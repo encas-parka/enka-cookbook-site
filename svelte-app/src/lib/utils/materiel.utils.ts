@@ -24,6 +24,7 @@ import type { EventMaterielStatus } from "$lib/types/event-materiel.types";
 export interface EventMaterielStatusConfig {
   label: string;
   badgeClass: string;
+  bgClass: string;
   selectClass: string;
 }
 
@@ -31,16 +32,19 @@ const eventMaterielStatusConfigs: Record<string, EventMaterielStatusConfig> = {
   to_find: {
     label: "À trouver",
     badgeClass: "badge-error",
+    bgClass: "bg-error/10 border border-error/20",
     selectClass: "select-error text-error",
   },
   to_check: {
     label: "À vérifier",
     badgeClass: "badge-warning",
+    bgClass: "bg-warning/10 border border-warning/20",
     selectClass: "select-warning text-warning",
   },
   confirmed: {
     label: "Ok",
     badgeClass: "badge-success",
+    bgClass: "bg-success/10 border border-success/20",
     selectClass: "select-success text-success",
   },
 };

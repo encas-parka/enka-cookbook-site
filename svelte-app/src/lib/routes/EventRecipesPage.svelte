@@ -8,6 +8,7 @@
   import { navigate, route, searchParams } from "$lib/router";
   import { onMount, tick } from "svelte";
   import EventStats from "$lib/components/EventStats.svelte";
+  import EventDocumentsBloc from "$lib/components/documents/EventDocumentsBloc.svelte";
   import EventRecipeCard from "$lib/components/eventEdit/EventRecipeCard.svelte";
   import LeftPanel from "$lib/components/ui/LeftPanel.svelte";
   import AutocompleteInput from "$lib/components/ui/AutocompleteInput.svelte";
@@ -32,6 +33,7 @@
     formatDateWdDayMonthShort,
   } from "../utils/date-helpers";
   import { globalState } from "../stores/GlobalState.svelte";
+  import { online } from "svelte/reactivity/window";
   import { navBarStore } from "../stores/NavBarStore.svelte";
   import { fade, slide } from "svelte/transition";
 
@@ -42,6 +44,13 @@
 
   const currentEvent = $derived(
     eventId ? eventsStore.getEventById(eventId) : null,
+  );
+
+  // Permission d'édition
+  const canEdit = $derived(
+    eventId && globalState.userId
+      ? online.current && eventsStore.canUserEditEvent(eventId, globalState.userId)
+      : false,
   );
 
   let eventMeals = $state<any[]>([]);
@@ -516,6 +525,16 @@
           <div class="flex justify-end p-4">
             <EventStats {currentEvent} />
           </div>
+
+          <!-- Bloc Documents attachés -->
+          {#if eventId}
+            <EventDocumentsBloc
+              {eventId}
+              tag="recette"
+              tagLabel="Recettes"
+              {canEdit}
+            />
+          {/if}
         </div>
       </div>
     {/if}

@@ -68,10 +68,10 @@
       };
     }
 
-    // Routes création document événement: /event/:id/document/new
+    // Routes création document événement: /event/:id/document/create
     if (
       pathname.includes("/event/") &&
-      pathname.includes("/document/new") &&
+      pathname.includes("/document/create") &&
       params.id
     ) {
       return {

@@ -2,12 +2,7 @@
   import type { EnrichedTeamdoc } from "$lib/stores/TeamdocsStore.svelte";
   import { formatDateRelative } from "$lib/utils/date-helpers";
   import { p } from "$lib/router";
-  import {
-    FileText,
-    Calendar,
-    Clock,
-    ArrowRight,
-  } from "@lucide/svelte";
+  import { FileText, Calendar, Clock, ArrowRight } from "@lucide/svelte";
 
   interface Props {
     doc: EnrichedTeamdoc;
@@ -72,10 +67,12 @@
       <!-- Metadata -->
       <div class="text-base-content/50 me-4 flex items-center gap-3 text-xs">
         <!-- Created date -->
-        <div class="flex items-center gap-1">
-          <Calendar class="h-3 w-3" />
-          <span>Crée {formatDateRelative(doc.$createdAt)}</span>
-        </div>
+        {#if !doc.$updatedAt}
+          <div class="flex items-center gap-1">
+            <Calendar class="h-3 w-3" />
+            <span>Crée {formatDateRelative(doc.$createdAt)}</span>
+          </div>
+        {/if}
 
         <!-- Updated date (if different from created) -->
         {#if doc.$updatedAt && doc.$updatedAt !== doc.$createdAt}

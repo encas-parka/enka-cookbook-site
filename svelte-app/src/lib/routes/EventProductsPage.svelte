@@ -36,6 +36,7 @@
   import StoreBatchEditModal from "$lib/components/eventProducts/StoreBatchEditModal.svelte";
   import WhoBatchEditModal from "$lib/components/eventProducts/WhoBatchEditModal.svelte";
   import EventStats from "$lib/components/EventStats.svelte";
+  import EventDocumentsBloc from "$lib/components/documents/EventDocumentsBloc.svelte";
   import ConfirmModal from "$lib/components/ui/ConfirmModal.svelte";
   import { globalState, hoverHelp } from "$lib/stores/GlobalState.svelte";
   // Services
@@ -619,6 +620,15 @@
         </div>
       </div>
     </div>
+
+    <!-- Bloc Documents attachés -->
+    <EventDocumentsBloc
+      {eventId}
+      tag="produit"
+      tagLabel="Produits"
+      {canEdit}
+    />
+
     <InfoCollapse
       title="Aide"
       contentVisible="Page de gestion des produits nécéssaire pour l'événement. Cliquer pour découvrir ce que vous pouvez y faire..."

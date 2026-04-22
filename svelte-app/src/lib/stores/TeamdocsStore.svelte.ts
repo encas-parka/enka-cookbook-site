@@ -66,6 +66,15 @@ export class TeamdocsStore {
     return this.#documentsList.filter((doc) => doc.eventId === eventId);
   }
 
+  /**
+   * Récupère les documents d'un événement filtrés par tag
+   */
+  getEventDocumentsByTag(eventId: string, tag: string): EnrichedTeamdoc[] {
+    return this.#documentsList.filter(
+      (doc) => doc.eventId === eventId && doc.tags?.includes(tag),
+    );
+  }
+
   // =============================================================================
   // INITIALISATION (3 PHASES)
   // =============================================================================

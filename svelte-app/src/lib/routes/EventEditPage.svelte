@@ -715,6 +715,15 @@
     // Mutation directe du shadow draft
     meals = [...meals, newMeal];
     editingMealIndex = mealId;
+
+    // Scroll vers le nouveau meal après le rendu Svelte
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        document
+          .getElementById(`meal-card-${mealId}`)
+          ?.scrollIntoView({ behavior: "smooth", block: "center" });
+      });
+    });
   }
 
   function removeMeal(mealId: string) {
@@ -1256,7 +1265,7 @@
         {:else}
           <div class="space-y-4">
             {#each sortedDatedMeals as meal (meal.id + "-" + currentEvent?.$updatedAt)}
-              <div animate:flip={{ delay: 100, duration: 400 }}>
+              <div id="meal-card-{meal.id}" animate:flip={{ delay: 100, duration: 400 }}>
                 <EventMealCard
                   bind:meal={meals[meals.findIndex((m) => m.id === meal.id)]}
                   isEditing={editingMealIndex === meal.id}

@@ -136,6 +136,8 @@ export interface CreateEventData {
 export interface UpdateEventData {
   $updatedAt?: Date;
   name?: string;
+  description?: string;
+  minContrib?: number;
   dateStart?: string;
   dateEnd?: string;
   allDates?: string[]; // Tableau de toutes les dates uniques des repas

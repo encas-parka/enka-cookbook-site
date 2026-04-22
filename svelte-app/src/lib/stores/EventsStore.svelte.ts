@@ -477,6 +477,9 @@ export class EventsStore {
     if (data.status !== undefined) serialized.status = data.status;
     if (data.teams !== undefined) serialized.teams = data.teams;
     if (data.teamsId !== undefined) serialized.teamsId = data.teamsId;
+    if (data.description !== undefined)
+      serialized.description = data.description;
+    if (data.minContrib !== undefined) serialized.minContrib = data.minContrib;
 
     // JSON stringification pour les champs array d'objets
     if (data.meals !== undefined) {

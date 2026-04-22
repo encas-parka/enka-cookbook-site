@@ -21,7 +21,12 @@ import {
   type TeamPrefs,
 } from "@/lib/services/appwrite-native-teams";
 import { globalState } from "./GlobalState.svelte";
-import { registerRealtime, unregisterRealtime, isRealtimeInitialized } from "$lib/db-sync/aw-sync";
+import {
+  registerRealtime,
+  unregisterRealtime,
+  isRealtimeInitialized,
+  db,
+} from "$lib/db-sync/aw-sync";
 
 export class NativeTeamsStore {
   // État réactif
@@ -68,11 +73,9 @@ export class NativeTeamsStore {
   // =============================================================================
 
   /**
-   * Phase 1 : Pas de cache pour les équipes natives (no-op)
+   * Phase 1 : Charger les équipes depuis le cache IndexedDB
    */
   async loadCache(): Promise<void> {
-    // Les équipes natives n'ont pas de cache IndexedDB
-    // On marque juste comme initialisé
     if (this.#isInitialized) return;
 
     if (!globalState.userId) {
@@ -80,8 +83,14 @@ export class NativeTeamsStore {
       return;
     }
 
+    // Lire depuis Dexie
+    const cached = await db.nativeTeams.toArray();
+    for (const team of cached) {
+      this.#teams.set(team.$id, team);
+    }
+
     this.#isInitialized = true;
-    console.log("[NativeTeamsStore] Cache chargé : 0 équipes (pas de cache)");
+    console.log(`[NativeTeamsStore] Cache chargé : ${cached.length} équipes`);
   }
 
   /**
@@ -129,9 +138,7 @@ export class NativeTeamsStore {
 
     // Réinitialiser le flag si le realtime centralisé a été détruit
     if (this.#realtimeInitialized && !isRealtimeInitialized()) {
-      console.log(
-        "[NativeTeamsStore] Realtime détruit, réinitialisation...",
-      );
+      console.log("[NativeTeamsStore] Realtime détruit, réinitialisation...");
       this.#realtimeInitialized = false;
     }
 
@@ -249,6 +256,8 @@ export class NativeTeamsStore {
       };
 
       this.#teams.set(teamId, enriched);
+      // Write-through vers Dexie
+      await db.nativeTeams.put(enriched);
       return enriched;
     } catch (err) {
       console.error(`[NativeTeamsStore] Error fetching team ${teamId}:`, err);
@@ -284,6 +293,7 @@ export class NativeTeamsStore {
   async deleteTeam(teamId: string): Promise<void> {
     await deleteNativeTeam(teamId);
     this.#teams.delete(teamId);
+    await db.nativeTeams.delete(teamId);
   }
 
   async inviteTeamMember(
@@ -322,13 +332,14 @@ export class NativeTeamsStore {
     }
   }
 
-  destroy(): void {
+  async destroy(): Promise<void> {
     if (this.#realtimeInitialized) {
       unregisterRealtime("native-teams");
     }
     this.#teams.clear();
+    await db.nativeTeams.clear();
     this.#isInitialized = false;
-    this.#realtimeInitialized = false; // Reset pour permettre une réinitialisation
+    this.#realtimeInitialized = false;
   }
 }
 

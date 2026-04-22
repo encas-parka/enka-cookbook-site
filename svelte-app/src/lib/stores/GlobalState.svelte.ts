@@ -173,7 +173,7 @@ class GlobalState {
       // Cleanup des stores privés (recipesStore préservé pour les visiteurs)
       // Les destroy() sont async car ils nettoient IndexedDB (sécurité multi-user)
       notificationStore.destroy();
-      nativeTeamsStore.destroy();
+      await nativeTeamsStore.destroy();
       await eventsStore.destroy();
       await materielStore.destroy();
       await teamdocsStore.destroy();

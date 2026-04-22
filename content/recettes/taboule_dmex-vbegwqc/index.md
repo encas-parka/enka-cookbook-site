@@ -1,6 +1,6 @@
 ---
 title: Taboulé
-date: '2026-04-22T07:24:54.235Z'
+date: "2026-04-22T07:24:54.235Z"
 draft: true
 typeR: entree
 categories:
@@ -27,17 +27,17 @@ ingredients:
     originalUnit: kg
     normalizedQuantity: 4000
     normalizedUnit: gr.
-    comment: ''
+    comment: ""
     allergens:
       - Gluten
     type: sec
-  - uuid: 3bcek5
-    name: tomates
+  - uuid: ibtbnq
+    name: Tomate
     originalQuantity: 5
     originalUnit: kg
     normalizedQuantity: 5000
     normalizedUnit: gr.
-    comment: ''
+    comment: ""
     allergens: []
     type: legumes
   - uuid: l5p1a5
@@ -46,7 +46,7 @@ ingredients:
     originalUnit: kg
     normalizedQuantity: 5000
     normalizedUnit: gr.
-    comment: ''
+    comment: ""
     allergens: []
     type: legumes
   - uuid: rtavky
@@ -55,7 +55,7 @@ ingredients:
     originalUnit: kg
     normalizedQuantity: 1000
     normalizedUnit: gr.
-    comment: ''
+    comment: ""
     allergens: []
     type: legumes
   - uuid: u2m28w
@@ -73,7 +73,7 @@ ingredients:
     originalUnit: gr.
     normalizedQuantity: 500
     normalizedUnit: gr.
-    comment: ''
+    comment: ""
     allergens: []
     type: legumes
   - uuid: y16lzq
@@ -109,7 +109,7 @@ ingredients:
     originalUnit: l.
     normalizedQuantity: 3000
     normalizedUnit: ml
-    comment: ''
+    comment: ""
     allergens: []
     type: sucres
   - uuid: h3c8al
@@ -145,12 +145,11 @@ preparation24h: |-
 permissionWrite:
   - 69e4e2c10884ec675d1b
 auteur: null
-createdAt: '2026-04-22T07:24:53.893+00:00'
-updatedAt: '2026-04-22T07:24:53.893+00:00'
+createdAt: "2026-04-22T07:24:53.893+00:00"
+updatedAt: "2026-04-22T10:37:11.956+00:00"
 createdBy: 69e4e2c10884ec675d1b
 teams: null
 status: public
 rootRecipeId: null
 versionLabel: null
 ---
-

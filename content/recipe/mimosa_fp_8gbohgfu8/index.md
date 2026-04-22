@@ -1,6 +1,6 @@
 ---
 title: Mimosa
-date: '2026-04-04T20:38:53.269Z'
+date: "2026-04-04T20:38:53.269Z"
 draft: true
 typeR: entree
 categories:
@@ -14,7 +14,7 @@ quantite_desc: 1 /2 par personne
 check: true
 cuisson: true
 serveHot: false
-description: 'agrément pour la salade composée '
+description: "agrément pour la salade composée "
 region: Bon enfant
 saison: []
 id: mimosa_fp_8gbohgfu8
@@ -47,7 +47,7 @@ ingredients:
     originalUnit: au goût
     normalizedQuantity: 1
     normalizedUnit: au goût
-    comment: ''
+    comment: ""
     allergens: []
     type: epices
   - uuid: 5c1b20
@@ -56,19 +56,19 @@ ingredients:
     originalUnit: c. à soupe
     normalizedQuantity: 15
     normalizedUnit: ml
-    comment: ''
+    comment: ""
     allergens:
       - Moutarde
     type: epices
-  - uuid: bwkn34
-    name: Citron (jus)
+  - uuid: e4mjd1
+    name: Jus de citron
     originalQuantity: 10
     originalUnit: ml
     normalizedQuantity: 10
     normalizedUnit: ml
-    comment: ''
+    comment: ""
     allergens: []
-    type: legumes
+    type: sucres
   - uuid: hgfa4e
     name: Persil frais
     originalQuantity: 10
@@ -94,12 +94,11 @@ preparation24h: null
 permissionWrite:
   - 69a0483c0031f868819d
 auteur: null
-createdAt: '2026-04-04T20:38:50.623+00:00'
-updatedAt: '2026-04-04T20:38:50.623+00:00'
+createdAt: "2026-04-04T20:38:50.623+00:00"
+updatedAt: "2026-04-22T11:15:54.150+00:00"
 createdBy: 69a0483c0031f868819d
 teams: null
 status: public
 rootRecipeId: null
 versionLabel: null
 ---
-

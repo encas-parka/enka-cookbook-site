@@ -20,7 +20,7 @@ ingredients:
     originalUnit: kg
     normalizedQuantity: 5000
     normalizedUnit: gr.
-    comment: ''
+    comment: ""
     allergens: []
     type: sec
     pF: false
@@ -31,7 +31,7 @@ ingredients:
     originalUnit: kg
     normalizedQuantity: 2000
     normalizedUnit: gr.
-    comment: ''
+    comment: ""
     allergens: []
     type: sec
     pF: false
@@ -42,20 +42,20 @@ ingredients:
     originalUnit: unité
     normalizedQuantity: 3000
     normalizedUnit: gr.
-    comment: ''
+    comment: ""
     allergens: []
     type: legumes
     pF: true
     pS: false
-  - uuid: bwkn34
-    name: Citron (jus)
+  - uuid: e4mjd1
+    name: Jus de citron
     originalQuantity: 1
     originalUnit: unité
     normalizedQuantity: 1
     normalizedUnit: unité
-    comment: ''
+    comment: ""
     allergens: []
-    type: legumes
+    type: sucres
     pF: true
     pS: false
   - uuid: 92zzps
@@ -64,7 +64,7 @@ ingredients:
     originalUnit: kg
     normalizedQuantity: 4000
     normalizedUnit: gr.
-    comment: ''
+    comment: ""
     allergens: []
     type: legumes
     pF: true
@@ -75,7 +75,7 @@ ingredients:
     originalUnit: unité
     normalizedQuantity: 3000
     normalizedUnit: gr.
-    comment: ''
+    comment: ""
     allergens: []
     type: legumes
     pF: true
@@ -86,7 +86,7 @@ ingredients:
     originalUnit: kg
     normalizedQuantity: 8000
     normalizedUnit: gr.
-    comment: ''
+    comment: ""
     allergens: []
     type: legumes
     pF: true
@@ -97,7 +97,7 @@ ingredients:
     originalUnit: gr.
     normalizedQuantity: 500
     normalizedUnit: gr.
-    comment: ''
+    comment: ""
     allergens: []
     type: lof
     pF: false
@@ -108,7 +108,7 @@ ingredients:
     originalUnit: l.
     normalizedQuantity: 2000
     normalizedUnit: ml
-    comment: ''
+    comment: ""
     allergens:
       - Soja
     type: lof
@@ -120,7 +120,7 @@ ingredients:
     originalUnit: ml
     normalizedQuantity: 500
     normalizedUnit: ml
-    comment: ''
+    comment: ""
     allergens: []
     type: lof
     pF: false
@@ -131,7 +131,7 @@ ingredients:
     originalUnit: gr.
     normalizedQuantity: 500
     normalizedUnit: gr.
-    comment: ''
+    comment: ""
     allergens: []
     type: frais
     pF: true
@@ -142,7 +142,7 @@ ingredients:
     originalUnit: gr.
     normalizedQuantity: 100
     normalizedUnit: gr.
-    comment: ''
+    comment: ""
     allergens: []
     type: epices
     pF: false
@@ -153,7 +153,7 @@ ingredients:
     originalUnit: l.
     normalizedQuantity: 20000
     normalizedUnit: ml
-    comment: ''
+    comment: ""
     allergens: []
     type: epices
     pF: false
@@ -164,7 +164,7 @@ ingredients:
     originalUnit: bottes
     normalizedQuantity: 10
     normalizedUnit: bottes
-    comment: ''
+    comment: ""
     allergens: []
     type: epices
     pF: true
@@ -175,7 +175,7 @@ ingredients:
     originalUnit: gr.
     normalizedQuantity: 500
     normalizedUnit: gr.
-    comment: ''
+    comment: ""
     allergens:
       - Gluten
     type: epices
@@ -187,7 +187,7 @@ ingredients:
     originalUnit: gr.
     normalizedQuantity: 500
     normalizedUnit: gr.
-    comment: ''
+    comment: ""
     allergens: []
     type: epices
     pF: false
@@ -198,7 +198,7 @@ ingredients:
     originalUnit: l.
     normalizedQuantity: 1000
     normalizedUnit: ml
-    comment: ''
+    comment: ""
     allergens: []
     type: sucres
     pF: false
@@ -233,11 +233,11 @@ preparation: |-
   Chauffer le riz à sec en le remuant sans cesse. Lorsqu'il est bien chaud et commence à éclater légèrement, le vaporiser avec l'eau bouillante, réduire le feu, couvrir et laisser cuire jusqu'à absorption complète de l'eau. Transvaser de suite dans les gastros, arroser d'un peu d'huile et de la fleur d'oranger et maintenir au chaud.
 
   Au moment de servir ajouter le persil ou le mettre à disposition au service.
-publishDate: '2025-06-05T12:58:00+00:00'
+publishDate: "2025-06-05T12:58:00+00:00"
 serveHot: true
 uuid: 1oq9igtwzpr2
 id: blanquette-de-soja-tex_1oq9igtwzpr2
-createdAt: '2025-06-05T12:58:00+00:00'
-updatedAt: '2025-06-05T12:58:00+00:00'
+createdAt: "2025-06-05T12:58:00+00:00"
+updatedAt: "2026-04-22T11:15:54.150+00:00"
 createdBy: frédo
 ---

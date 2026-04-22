@@ -12,15 +12,15 @@ plate: 4
 check: true
 checkAlwaysOk: false
 ingredients:
-  - uuid: bwkn34
-    name: Citron (jus)
+  - uuid: e4mjd1
+    name: Jus de citron
     originalQuantity: 1
     originalUnit: unité
     normalizedQuantity: 1
     normalizedUnit: unité
-    comment: ''
+    comment: ""
     allergens: []
-    type: legumes
+    type: sucres
     pF: true
     pS: false
   - uuid: m6gmgq
@@ -29,7 +29,7 @@ ingredients:
     originalUnit: gr.
     normalizedQuantity: 40
     normalizedUnit: gr.
-    comment: ''
+    comment: ""
     allergens: []
     type: legumes
     pF: false
@@ -40,7 +40,7 @@ ingredients:
     originalUnit: unité
     normalizedQuantity: 120
     normalizedUnit: gr.
-    comment: ''
+    comment: ""
     allergens: []
     type: legumes
     pF: true
@@ -51,7 +51,7 @@ ingredients:
     originalUnit: kg
     normalizedQuantity: 1000
     normalizedUnit: gr.
-    comment: ''
+    comment: ""
     allergens: []
     type: legumes
     pF: true
@@ -62,7 +62,7 @@ ingredients:
     originalUnit: c. à soupe
     normalizedQuantity: 30
     normalizedUnit: ml
-    comment: ''
+    comment: ""
     allergens: []
     type: lof
     pF: false
@@ -73,7 +73,7 @@ ingredients:
     originalUnit: gr.
     normalizedQuantity: 150
     normalizedUnit: gr.
-    comment: ''
+    comment: ""
     allergens:
       - Produit laitier
     type: frais
@@ -85,7 +85,7 @@ ingredients:
     originalUnit: gr.
     normalizedQuantity: 15
     normalizedUnit: gr.
-    comment: ''
+    comment: ""
     allergens: []
     type: epices
     pF: false
@@ -96,7 +96,7 @@ ingredients:
     originalUnit: c. à café
     normalizedQuantity: 7.5
     normalizedUnit: ml
-    comment: ''
+    comment: ""
     allergens: []
     type: epices
     pF: false
@@ -107,18 +107,18 @@ ingredients:
     originalUnit: c. à soupe
     normalizedQuantity: 15
     normalizedUnit: ml
-    comment: ''
+    comment: ""
     allergens:
       - Sésame
     type: autres
     pF: false
     pS: false
 preparation: je le fais la semaine pro
-publishDate: '2025-05-19T14:28:00+00:00'
+publishDate: "2025-05-19T14:28:00+00:00"
 serveHot: false
 uuid: wbtyfvcqq95a
 id: salade-de-betteraves-r_wbtyfvcqq95a
-createdAt: '2025-05-19T14:28:00+00:00'
-updatedAt: '2025-05-19T14:28:00+00:00'
-createdBy: ''
+createdAt: "2025-05-19T14:28:00+00:00"
+updatedAt: "2026-04-22T11:15:54.150+00:00"
+createdBy: ""
 ---

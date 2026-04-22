@@ -1,6 +1,6 @@
 ---
 title: Samousa
-date: '2026-04-04T21:33:41.845Z'
+date: "2026-04-04T21:33:41.845Z"
 draft: true
 typeR: entree
 categories:
@@ -13,7 +13,7 @@ quantite_desc: 2 /personne
 check: true
 cuisson: true
 serveHot: true
-description: ' rouleaux croustillants fourrés parfumés '
+description: " rouleaux croustillants fourrés parfumés "
 region: Indienne
 saison: []
 id: samousa_tqx7a61tluqw
@@ -35,7 +35,7 @@ ingredients:
     originalUnit: gr.
     normalizedQuantity: 100
     normalizedUnit: gr.
-    comment: 'vert , haché menu '
+    comment: "vert , haché menu "
     allergens: []
     type: legumes
   - uuid: jyius1
@@ -44,7 +44,7 @@ ingredients:
     originalUnit: gr.
     normalizedQuantity: 50
     normalizedUnit: gr.
-    comment: 'surgelés '
+    comment: "surgelés "
     allergens: []
     type: legumes
   - uuid: up1ydm
@@ -53,19 +53,19 @@ ingredients:
     originalUnit: unité
     normalizedQuantity: 20
     normalizedUnit: unité
-    comment: ''
+    comment: ""
     allergens:
       - Gluten
     type: sec
-  - uuid: bwkn34
-    name: Citron (jus)
+  - uuid: e4mjd1
+    name: Jus de citron
     originalQuantity: 15
     originalUnit: ml
     normalizedQuantity: 15
     normalizedUnit: ml
-    comment: ''
+    comment: ""
     allergens: []
-    type: legumes
+    type: sucres
   - uuid: rtavky
     name: Oignon
     originalQuantity: 2
@@ -90,7 +90,7 @@ ingredients:
     originalUnit: gr.
     normalizedQuantity: 0
     normalizedUnit: gr.
-    comment: ''
+    comment: ""
     allergens: []
     type: epices
   - uuid: nf05n7
@@ -99,7 +99,7 @@ ingredients:
     originalUnit: gr.
     normalizedQuantity: 0
     normalizedUnit: gr.
-    comment: ''
+    comment: ""
     allergens: []
     type: epices
   - uuid: 0d1fzw
@@ -108,7 +108,7 @@ ingredients:
     originalUnit: c. à soupe
     normalizedQuantity: 15
     normalizedUnit: ml
-    comment: 'râpé '
+    comment: "râpé "
     allergens: []
     type: legumes
   - uuid: ljin96
@@ -117,7 +117,7 @@ ingredients:
     originalUnit: gr.
     normalizedQuantity: 0
     normalizedUnit: gr.
-    comment: ''
+    comment: ""
     allergens:
       - Moutarde
     type: epices
@@ -127,7 +127,7 @@ ingredients:
     originalUnit: gr.
     normalizedQuantity: 0
     normalizedUnit: gr.
-    comment: ''
+    comment: ""
     allergens:
       - Céleri
     type: epices
@@ -143,12 +143,11 @@ preparation24h: null
 permissionWrite:
   - 69a0483c0031f868819d
 auteur: null
-createdAt: '2026-04-04T21:33:41.362+00:00'
-updatedAt: '2026-04-04T21:33:41.362+00:00'
+createdAt: "2026-04-04T21:33:41.362+00:00"
+updatedAt: "2026-04-22T11:15:54.150+00:00"
 createdBy: 69a0483c0031f868819d
 teams: null
 status: public
 rootRecipeId: null
 versionLabel: null
 ---
-

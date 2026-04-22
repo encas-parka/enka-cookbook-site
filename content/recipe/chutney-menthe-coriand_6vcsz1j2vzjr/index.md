@@ -1,7 +1,7 @@
 ---
 title: Chutney menthe coriandre (rainbow queer naan)
 draft: false
-description: ''
+description: ""
 typeR: plat
 categories:
   - Sauce
@@ -12,18 +12,18 @@ saison:
   - ete
 cuisson: false
 plate: 60
-quantite_desc: ''
+quantite_desc: ""
 check: true
 ingredients:
-  - uuid: bwkn34
-    name: Citron (jus)
+  - uuid: e4mjd1
+    name: Jus de citron
     originalQuantity: 300
     originalUnit: gr.
     normalizedQuantity: 300
     normalizedUnit: gr.
-    comment: ''
+    comment: ""
     allergens: []
-    type: legumes
+    type: sucres
     pF: true
     pS: false
   - uuid: 0d1fzw
@@ -32,7 +32,7 @@ ingredients:
     originalUnit: gr.
     normalizedQuantity: 150
     normalizedUnit: gr.
-    comment: ''
+    comment: ""
     allergens: []
     type: legumes
     pF: true
@@ -43,7 +43,7 @@ ingredients:
     originalUnit: gousse·s
     normalizedQuantity: 130
     normalizedUnit: gr.
-    comment: ''
+    comment: ""
     allergens: []
     type: legumes
     pF: true
@@ -54,7 +54,7 @@ ingredients:
     originalUnit: gr.
     normalizedQuantity: 5
     normalizedUnit: gr.
-    comment: ''
+    comment: ""
     allergens: []
     type: epices
     pF: false
@@ -65,7 +65,7 @@ ingredients:
     originalUnit: gr.
     normalizedQuantity: 50
     normalizedUnit: gr.
-    comment: ''
+    comment: ""
     allergens: []
     type: epices
     pF: false
@@ -76,7 +76,7 @@ ingredients:
     originalUnit: unité
     normalizedQuantity: 3
     normalizedUnit: unité
-    comment: ''
+    comment: ""
     allergens: []
     type: epices
     pF: false
@@ -87,7 +87,7 @@ ingredients:
     originalUnit: ml
     normalizedQuantity: 50
     normalizedUnit: ml
-    comment: ''
+    comment: ""
     allergens:
       - Alcool
     type: epices
@@ -99,7 +99,7 @@ ingredients:
     originalUnit: bottes
     normalizedQuantity: 5
     normalizedUnit: bottes
-    comment: ''
+    comment: ""
     allergens: []
     type: epices
     pF: true
@@ -110,7 +110,7 @@ ingredients:
     originalUnit: bottes
     normalizedQuantity: 10
     normalizedUnit: bottes
-    comment: ''
+    comment: ""
     allergens: []
     type: epices
     pF: true
@@ -121,7 +121,7 @@ ingredients:
     originalUnit: gr.
     normalizedQuantity: 600
     normalizedUnit: gr.
-    comment: ''
+    comment: ""
     allergens: []
     type: autres
     pF: false
@@ -132,7 +132,7 @@ ingredients:
     originalUnit: l.
     normalizedQuantity: 1200
     normalizedUnit: ml
-    comment: ''
+    comment: ""
     allergens: []
     type: autres
     pF: false
@@ -140,7 +140,7 @@ ingredients:
 preparation: mixer finement le tout!!! et c'est tout!!!
 astuces:
   - astuce: ajouter l'eau au fur et à mesure
-publishDate: '2025-06-02T15:52:00+00:00'
+publishDate: "2025-06-02T15:52:00+00:00"
 checkAlwaysOk: false
 regime:
   - sans-gluten
@@ -149,8 +149,8 @@ regime:
 serveHot: false
 uuid: 6vcsz1j2vzjr
 id: chutney-menthe-coriand_6vcsz1j2vzjr
-createdAt: '2025-06-02T15:52:00+00:00'
-updatedAt: '2025-06-02T15:52:00+00:00'
+createdAt: "2025-06-02T15:52:00+00:00"
+updatedAt: "2026-04-22T11:15:54.150+00:00"
 createdBy: Auré
 permissionWrite:
   - 696faf80000078153479

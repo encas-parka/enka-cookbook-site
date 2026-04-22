@@ -1,7 +1,7 @@
 ---
 title: Lassi vegan a la mangue
 draft: false
-img: ''
+img: ""
 description: Boisson
 typeR: dessert
 categories:
@@ -20,7 +20,7 @@ ingredients:
     originalUnit: gr.
     normalizedQuantity: 50
     normalizedUnit: gr.
-    comment: ''
+    comment: ""
     allergens: []
     type: epices
     pF: false
@@ -31,20 +31,20 @@ ingredients:
     originalUnit: kg
     normalizedQuantity: 1500
     normalizedUnit: gr.
-    comment: ''
+    comment: ""
     allergens: []
     type: sucres
     pF: false
     pS: false
-  - uuid: bwkn34
-    name: Citron (jus)
+  - uuid: e4mjd1
+    name: Jus de citron
     originalQuantity: 500
     originalUnit: ml
     normalizedQuantity: 500
     normalizedUnit: ml
-    comment: ''
+    comment: ""
     allergens: []
-    type: legumes
+    type: sucres
     pF: true
     pS: false
   - uuid: mdoij4
@@ -53,7 +53,7 @@ ingredients:
     originalUnit: kg
     normalizedQuantity: 10000
     normalizedUnit: gr.
-    comment: ''
+    comment: ""
     allergens: []
     type: legumes
     pF: true
@@ -64,7 +64,7 @@ ingredients:
     originalUnit: l.
     normalizedQuantity: 8000
     normalizedUnit: ml
-    comment: ''
+    comment: ""
     allergens: []
     type: lof
     pF: false
@@ -75,7 +75,7 @@ ingredients:
     originalUnit: l.
     normalizedQuantity: 12000
     normalizedUnit: ml
-    comment: ''
+    comment: ""
     allergens:
       - Soja
     type: frais
@@ -90,15 +90,15 @@ preparation: |-
   Verser la cardamone et mixer jusqu'à texture bien crémeuse.
 
   Servir frais dans des verres.
-preparation24h: ''
+preparation24h: ""
 astuces: []
 prepAlt: []
-publishDate: '2025-10-16T18:21:00+00:00'
+publishDate: "2025-10-16T18:21:00+00:00"
 serveHot: false
 uuid: szk3bdykgyra
 id: lassi-vegan-a-la-mangu_szk3bdykgyra
-createdAt: '2025-10-16T18:21:00+00:00'
-updatedAt: '2025-10-16T18:21:00+00:00'
+createdAt: "2025-10-16T18:21:00+00:00"
+updatedAt: "2026-04-22T11:15:54.150+00:00"
 createdBy: Auré
 regime:
   - sans-gluten

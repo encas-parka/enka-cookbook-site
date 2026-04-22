@@ -14,15 +14,15 @@ quantite_desc: 1 Grosse patate par personnes
 check: true
 checkAlwaysOk: false
 ingredients:
-  - uuid: bwkn34
-    name: Citron (jus)
+  - uuid: e4mjd1
+    name: Jus de citron
     originalQuantity: 0.5
     originalUnit: gr.
     normalizedQuantity: 0.5
     normalizedUnit: gr.
     comment: ""
     allergens: []
-    type: legumes
+    type: sucres
     pF: true
     pS: false
   - uuid: u2m28w
@@ -164,7 +164,7 @@ serveHot: true
 uuid: clojw2gbb3cz
 id: smashed-potatoes-et-cr_clojw2gbb3cz
 createdAt: "2025-05-05T16:07:00+00:00"
-updatedAt: "2026-04-22T09:55:26.149+00:00"
+updatedAt: "2026-04-22T11:15:54.150+00:00"
 createdBy: ""
 materiel:
   - Four

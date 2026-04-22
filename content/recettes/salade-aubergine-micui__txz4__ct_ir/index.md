@@ -1,6 +1,6 @@
 ---
 title: Salade aubergine micuite
-date: '2026-04-19T20:27:10.024Z'
+date: "2026-04-19T20:27:10.024Z"
 draft: true
 typeR: entree
 categories:
@@ -27,7 +27,7 @@ ingredients:
     originalUnit: gr.
     normalizedQuantity: 0
     normalizedUnit: gr.
-    comment: ''
+    comment: ""
     allergens: []
     type: legumes
   - uuid: wwl5vn
@@ -36,7 +36,7 @@ ingredients:
     originalUnit: gr.
     normalizedQuantity: 0
     normalizedUnit: gr.
-    comment: ''
+    comment: ""
     allergens: []
     type: sec
   - uuid: hgfa4e
@@ -45,7 +45,7 @@ ingredients:
     originalUnit: gr.
     normalizedQuantity: 0
     normalizedUnit: gr.
-    comment: ''
+    comment: ""
     allergens: []
     type: epices
   - uuid: vwdomu
@@ -54,25 +54,25 @@ ingredients:
     originalUnit: gr.
     normalizedQuantity: 0
     normalizedUnit: gr.
-    comment: ''
+    comment: ""
     allergens: []
     type: legumes
-  - uuid: bwkn34
-    name: Citron (jus)
+  - uuid: e4mjd1
+    name: Jus de citron
     originalQuantity: 0
     originalUnit: gr.
     normalizedQuantity: 0
     normalizedUnit: gr.
-    comment: ''
+    comment: ""
     allergens: []
-    type: legumes
+    type: sucres
   - uuid: egkb0a
     name: Tomates cerises
     originalQuantity: 0
     originalUnit: gr.
     normalizedQuantity: 0
     normalizedUnit: gr.
-    comment: ''
+    comment: ""
     allergens: []
     type: legumes
   - uuid: h3c8al
@@ -81,7 +81,7 @@ ingredients:
     originalUnit: gr.
     normalizedQuantity: 0
     normalizedUnit: gr.
-    comment: ''
+    comment: ""
     allergens: []
     type: lof
 preparation: a venir
@@ -91,12 +91,11 @@ preparation24h: null
 permissionWrite:
   - 696fb1cc000eb33adee7
 auteur: null
-createdAt: '2026-04-19T20:27:09.587+00:00'
-updatedAt: '2026-04-19T20:27:09.587+00:00'
+createdAt: "2026-04-19T20:27:09.587+00:00"
+updatedAt: "2026-04-22T11:15:54.150+00:00"
 createdBy: 696fb1cc000eb33adee7
 teams: null
 status: public
 rootRecipeId: null
 versionLabel: null
 ---
-

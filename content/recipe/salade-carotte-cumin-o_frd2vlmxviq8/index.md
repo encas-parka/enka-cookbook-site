@@ -1,6 +1,6 @@
 ---
 title: Salade carotte cumin orange
-date: '2026-04-04T08:47:29.994Z'
+date: "2026-04-04T08:47:29.994Z"
 draft: true
 typeR: entree
 categories: []
@@ -25,7 +25,7 @@ ingredients:
     originalUnit: kg
     normalizedQuantity: 12500
     normalizedUnit: gr.
-    comment: ''
+    comment: ""
     allergens: []
     type: legumes
   - uuid: h3c8al
@@ -34,7 +34,7 @@ ingredients:
     originalUnit: ml
     normalizedQuantity: 375
     normalizedUnit: ml
-    comment: ''
+    comment: ""
     allergens: []
     type: lof
   - uuid: he3u48
@@ -52,18 +52,18 @@ ingredients:
     originalUnit: kg
     normalizedQuantity: 10000
     normalizedUnit: gr.
-    comment: ''
+    comment: ""
     allergens: []
     type: legumes
-  - uuid: bwkn34
-    name: Citron (jus)
+  - uuid: e4mjd1
+    name: Jus de citron
     originalQuantity: 1
     originalUnit: l.
     normalizedQuantity: 1000
     normalizedUnit: ml
-    comment: ''
+    comment: ""
     allergens: []
-    type: legumes
+    type: sucres
   - uuid: 2juq3x
     name: Sel
     originalQuantity: 12
@@ -79,7 +79,7 @@ ingredients:
     originalUnit: gr.
     normalizedQuantity: 12
     normalizedUnit: gr.
-    comment: ''
+    comment: ""
     allergens: []
     type: epices
   - uuid: fetrpe
@@ -88,11 +88,11 @@ ingredients:
     originalUnit: bottes
     normalizedQuantity: 2
     normalizedUnit: bottes
-    comment: ''
+    comment: ""
     allergens: []
     type: epices
 preparation: |-
-  - râpez les carottes 
+  - râpez les carottes
   - pressez les oranges
   - pressez les citrons
   - hachez la coriandre grossièrement
@@ -104,12 +104,11 @@ preparation24h: null
 permissionWrite:
   - 698a40da4679cd55596b
 auteur: mara
-createdAt: '2026-04-03T17:08:39.723+00:00'
-updatedAt: '2026-04-04T08:47:29.591+00:00'
+createdAt: "2026-04-03T17:08:39.723+00:00"
+updatedAt: "2026-04-22T11:15:54.150+00:00"
 createdBy: 698a40da4679cd55596b
 teams: []
 status: public
 rootRecipeId: null
 versionLabel: null
 ---
-

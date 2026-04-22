@@ -1,6 +1,6 @@
 ---
 title: Yassa végé
-date: '2026-04-04T20:52:40.548Z'
+date: "2026-04-04T20:52:40.548Z"
 draft: true
 typeR: plat
 categories:
@@ -15,7 +15,7 @@ check: true
 cuisson: true
 serveHot: true
 description: chunks de soja dans une sauce vigoureuse
-region: 'Sénégalaise '
+region: "Sénégalaise "
 saison: []
 id: yassa-vege_47rrmv2csi2_
 materiel: []
@@ -30,15 +30,15 @@ ingredients:
     allergens:
       - Soja
     type: autres
-  - uuid: bwkn34
-    name: Citron (jus)
+  - uuid: e4mjd1
+    name: Jus de citron
     originalQuantity: 4
     originalUnit: unité
     normalizedQuantity: 4
     normalizedUnit: unité
-    comment: ''
+    comment: ""
     allergens: []
-    type: legumes
+    type: sucres
   - uuid: rtavky
     name: Oignon
     originalQuantity: 10
@@ -54,7 +54,7 @@ ingredients:
     originalUnit: au goût
     normalizedQuantity: 1
     normalizedUnit: au goût
-    comment: ''
+    comment: ""
     allergens:
       - Moutarde
     type: epices
@@ -64,7 +64,7 @@ ingredients:
     originalUnit: gousse·s
     normalizedQuantity: 32.5
     normalizedUnit: gr.
-    comment: ''
+    comment: ""
     allergens: []
     type: legumes
   - uuid: 0lpad0
@@ -109,12 +109,11 @@ preparation24h: null
 permissionWrite:
   - 69a0483c0031f868819d
 auteur: null
-createdAt: '2026-04-04T20:52:39.940+00:00'
-updatedAt: '2026-04-04T20:52:39.940+00:00'
+createdAt: "2026-04-04T20:52:39.940+00:00"
+updatedAt: "2026-04-22T11:15:54.150+00:00"
 createdBy: 69a0483c0031f868819d
 teams: null
 status: public
 rootRecipeId: null
 versionLabel: null
 ---
-

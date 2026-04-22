@@ -1,6 +1,6 @@
 ---
 title: '000'
-date: '2026-04-22T03:41:37.899Z'
+date: '2026-04-22T03:42:10.105Z'
 draft: true
 typeR: plat
 categories:
@@ -24,9 +24,9 @@ materiel: []
 ingredients:
   - uuid: 4n95t5
     name: Harissa
-    originalQuantity: 20.3
+    originalQuantity: 20
     originalUnit: gr.
-    normalizedQuantity: 20.3
+    normalizedQuantity: 20
     normalizedUnit: gr.
     comment: ''
     allergens: []
@@ -90,9 +90,9 @@ ingredients:
     pS: false
   - uuid: cl88ye
     name: Mélasse de grenade
-    originalQuantity: 100
+    originalQuantity: 120
     originalUnit: ml
-    normalizedQuantity: 100
+    normalizedQuantity: 120
     normalizedUnit: ml
     comment: ''
     allergens: []
@@ -112,7 +112,7 @@ permissionWrite:
   - 68975cbc002469058f8b
 auteur: ghald
 createdAt: '2026-02-04T00:51:50.602+00:00'
-updatedAt: '2026-04-22T03:41:35.637+00:00'
+updatedAt: '2026-04-22T03:42:09.776+00:00'
 createdBy: 68975cbc002469058f8b
 teams: []
 status: public

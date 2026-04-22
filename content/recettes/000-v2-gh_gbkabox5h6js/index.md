@@ -1,6 +1,6 @@
 ---
 title: '000'
-date: '2026-04-07T10:39:54.145Z'
+date: '2026-04-22T01:14:54.504Z'
 draft: true
 typeR: plat
 categories:
@@ -24,9 +24,9 @@ materiel: []
 ingredients:
   - uuid: 4n95t5
     name: Harissa
-    originalQuantity: 50
+    originalQuantity: 20
     originalUnit: gr.
-    normalizedQuantity: 50
+    normalizedQuantity: 20
     normalizedUnit: gr.
     comment: ''
     allergens: []
@@ -112,7 +112,7 @@ permissionWrite:
   - 68975cbc002469058f8b
 auteur: ghald
 createdAt: '2026-02-04T00:51:50.602+00:00'
-updatedAt: '2026-04-07T10:39:51.215+00:00'
+updatedAt: '2026-04-22T01:14:51.955+00:00'
 createdBy: 68975cbc002469058f8b
 teams: []
 status: public

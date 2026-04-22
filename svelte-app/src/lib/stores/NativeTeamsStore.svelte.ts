@@ -21,7 +21,7 @@ import {
   type TeamPrefs,
 } from "@/lib/services/appwrite-native-teams";
 import { globalState } from "./GlobalState.svelte";
-import { realtimeManager } from "./RealtimeManager.svelte";
+import { registerRealtime, unregisterRealtime, isRealtimeInitialized } from "$lib/db-sync/aw-sync";
 
 export class NativeTeamsStore {
   // État réactif
@@ -121,16 +121,16 @@ export class NativeTeamsStore {
     }
 
     // Vérifier si déjà configuré pour éviter les doublons
-    // ✅ SAUF si le RealtimeManager a été détruit (changement auth)
-    if (this.#realtimeInitialized && realtimeManager.isInitialized) {
+    // ✅ SAUF si le realtime centralisé a été détruit (changement auth)
+    if (this.#realtimeInitialized && isRealtimeInitialized()) {
       console.log("[NativeTeamsStore] Realtime déjà configuré");
       return;
     }
 
-    // Réinitialiser le flag si le RealtimeManager a été détruit
-    if (this.#realtimeInitialized && !realtimeManager.isInitialized) {
+    // Réinitialiser le flag si le realtime centralisé a été détruit
+    if (this.#realtimeInitialized && !isRealtimeInitialized()) {
       console.log(
-        "[NativeTeamsStore] RealtimeManager détruit, réinitialisation...",
+        "[NativeTeamsStore] Realtime détruit, réinitialisation...",
       );
       this.#realtimeInitialized = false;
     }
@@ -182,7 +182,8 @@ export class NativeTeamsStore {
   async #setupRealtimeInternal(): Promise<void> {
     // Les Teams natives utilisent des channels différents dans Appwrite
     // Note: Pour les Teams, le channel est "teams" ou "memberships"
-    realtimeManager.register(
+    registerRealtime(
+      "native-teams",
       ["teams", "memberships"],
       async (response: any) => {
         // Logique de mise à jour basée sur les événements
@@ -322,6 +323,9 @@ export class NativeTeamsStore {
   }
 
   destroy(): void {
+    if (this.#realtimeInitialized) {
+      unregisterRealtime("native-teams");
+    }
     this.#teams.clear();
     this.#isInitialized = false;
     this.#realtimeInitialized = false; // Reset pour permettre une réinitialisation

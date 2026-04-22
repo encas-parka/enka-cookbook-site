@@ -1,1 +1,0 @@
-import"./rolldown-runtime-CSptdK7L.js";import{Dn as e,Fn as t,Pn as n,y as r}from"./appwrite-Cv0_-4Gh.js";function OverrideConflictModal(i,a){t(a,!0),e(()=>r.modalOverride.conflicts),n()}export{OverrideConflictModal as default};

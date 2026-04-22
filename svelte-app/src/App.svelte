@@ -6,14 +6,13 @@
   import { recipesStore } from "./lib/stores/RecipesStore.svelte";
   import { notificationStore } from "./lib/stores/NotificationStore.svelte";
   import { materielStore } from "./lib/stores/MaterielStore.svelte";
-  import { realtimeManager } from "./lib/stores/RealtimeManager.svelte";
+  import { cleanupLegacyCaches, initializeRealtime } from "$lib/db-sync/aw-sync";
   import { teamdocsStore } from "./lib/stores/TeamdocsStore.svelte";
   import ErrorAlert from "./lib/components/ui/ErrorAlert.svelte";
   import HeaderNav from "./lib/components/HeaderNav.svelte";
   import Toast from "./lib/components/ui/Toast.svelte";
   import { globalState } from "./lib/stores/GlobalState.svelte";
   import { toastService } from "./lib/services/toast.service.svelte";
-  import { cleanupLegacyCaches } from "$lib/db-sync/aw-sync";
   import { Router, preload } from "$lib/router";
 
   type AppState = "BOOTING" | "READY" | "ERROR";
@@ -66,7 +65,7 @@
               notificationStore.initialize(),
               teamdocsStore.setupRealtime(),
             ]);
-            await realtimeManager.initialize();
+            await initializeRealtime();
 
             toastService.update(syncToastId, {
               state: "success",

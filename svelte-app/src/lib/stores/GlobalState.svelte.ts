@@ -8,7 +8,7 @@ import { materielStore } from "./MaterielStore.svelte";
 import { teamdocsStore } from "./TeamdocsStore.svelte";
 import { productsStore } from "./ProductsStore.svelte";
 import { notificationStore } from "./NotificationStore.svelte";
-import { realtimeManager } from "./RealtimeManager.svelte";
+import { destroyRealtime, initializeRealtime } from "$lib/db-sync/aw-sync";
 import { recipesStore } from "./RecipesStore.svelte";
 import { db } from "$lib/db-sync/aw-sync";
 import type { Models } from "appwrite";
@@ -141,8 +141,8 @@ class GlobalState {
         recipesStore.setupRealtime(),
       ]);
 
-      // Phase 3: RealtimeManager en dernier (agrège les channels enregistrés)
-      await realtimeManager.initialize();
+      // Phase 3: Centralized realtime en dernier (agrège tous les channels enregistrés)
+      await initializeRealtime();
 
       console.log(
         `[GlobalState] Réinitialisé après login: ${this.#user.name} (${this.userTeams.length} équipes)`,
@@ -178,7 +178,7 @@ class GlobalState {
       await materielStore.destroy();
       await teamdocsStore.destroy();
       await productsStore.destroy();
-      realtimeManager.destroy();
+      destroyRealtime();
 
       // Nettoyer le cache des liens d'invitation
       await db.joinLinks.clear();

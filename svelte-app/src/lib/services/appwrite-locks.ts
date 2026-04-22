@@ -4,7 +4,7 @@ import {
   getDatabaseId,
   getCollectionId,
 } from "./appwrite";
-import { realtimeManager } from "../stores/RealtimeManager.svelte";
+import { registerRealtimeDynamic } from "$lib/db-sync/aw-sync";
 
 export interface AppwriteLock {
   $id: string; // L'ID du document verrouillé (ex: eventId)
@@ -165,8 +165,8 @@ export const locksService = {
 
     console.log(`[locksService] Enregistrement du channel de lock:`, channel);
 
-    // Utiliser RealtimeManager pour le multiplexage WebSocket (inscription dynamique)
-    return realtimeManager.registerDynamic([channel], (response: any) => {
+    // Utiliser aw-sync centralized realtime (inscription dynamique)
+    return registerRealtimeDynamic([channel], (response: any) => {
       // Événement de suppression
       if (response.events?.some((e: string) => e.endsWith(".delete"))) {
         callback(null);

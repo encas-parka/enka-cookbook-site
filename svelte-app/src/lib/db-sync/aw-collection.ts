@@ -26,10 +26,14 @@ import type { Table } from 'dexie';
 import {
 	getAppwriteInstances,
 	getDatabaseId,
-	getCollectionId,
-	subscribe as appwriteSubscribe
+	getCollectionId
 } from '$lib/services/appwrite';
 import { db, type SyncMetaRow } from './aw-db';
+import {
+	registerRealtime as registerInRegistry,
+	registerRealtimeDynamic,
+	unregisterRealtime
+} from './aw-realtime';
 import type {
 	AwDoc,
 	AwFetchOptions,
@@ -233,10 +237,11 @@ export function createSyncCollection<T extends AwDoc>(options: {
 	// =====================================================================
 
 	/**
-	 * Opens an Appwrite realtime subscription for this collection.
+	 * Registers a realtime subscription for this collection in the central registry.
 	 * Events (create / update / delete) are applied to Dexie automatically.
 	 *
-	 * Uses `subscribe()` from `appwrite.ts` which handles WebSocket multiplexing.
+	 * The actual WebSocket subscription is deferred until `initializeRealtime()` is called
+	 * (centralized batch subscription). For post-init subscriptions, uses dynamic registration.
 	 *
 	 * @param subOptions - Optional: scope to a specific document
 	 * @returns A SubscriptionRef for later unsubscription
@@ -256,8 +261,8 @@ export function createSyncCollection<T extends AwDoc>(options: {
 
 		const ref: SubscriptionRef = { id: subId, collectionId };
 
-		// Register handler — subscribe is async but we store the ref immediately
-		appwriteSubscribe(channels, async (response: any) => {
+		// Handler: applies realtime events to Dexie
+		const handler = async (response: any) => {
 			const { events, payload } = response;
 			if (!payload) return;
 
@@ -281,17 +286,12 @@ export function createSyncCollection<T extends AwDoc>(options: {
 					`[aw-sync] realtime ${isCreate ? 'CREATE' : 'UPDATE'} ${String(collectionName)}/${payload.$id}`
 				);
 			}
-		}).then((unsub) => {
-			const entry = subscriptions.get(subId);
-			if (entry) {
-				entry.unsubscribe = unsub;
-			} else {
-				// Already unsubscribed before promise resolved
-				unsub();
-			}
-		});
+		};
 
-		subscriptions.set(subId, { ref, unsubscribe: null });
+		// Register in central registry (deferred WebSocket)
+		registerInRegistry(subId, channels, handler);
+
+		subscriptions.set(subId, { ref, unsubscribe: () => unregisterRealtime(subId) });
 		onSubscriptionChange?.(true);
 
 		console.log(`[aw-sync] subscribe ${subId} → ${channels.join(', ')}`);
@@ -303,9 +303,8 @@ export function createSyncCollection<T extends AwDoc>(options: {
 	 */
 	async function unsubscribe(subRefOrId: SubscriptionRef | string): Promise<void> {
 		const subId = typeof subRefOrId === 'string' ? subRefOrId : subRefOrId.id;
-		const entry = subscriptions.get(subId);
-		if (entry) {
-			entry.unsubscribe?.();
+		if (subscriptions.has(subId)) {
+			unregisterRealtime(subId);
 			subscriptions.delete(subId);
 			console.log(`[aw-sync] unsubscribe ${subId}`);
 			if (subscriptions.size === 0) onSubscriptionChange?.(false);
@@ -316,9 +315,9 @@ export function createSyncCollection<T extends AwDoc>(options: {
 	 * Closes all active realtime subscriptions for this collection.
 	 */
 	async function unsubscribeAll(): Promise<void> {
-		for (const [, entry] of subscriptions) {
+		for (const [subId] of subscriptions) {
 			try {
-				entry.unsubscribe?.();
+				unregisterRealtime(subId);
 			} catch {
 				// Non-blocking
 			}

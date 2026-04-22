@@ -1,9 +1,17 @@
 /**
- * RealtimeManager - Gestionnaire centralisé des souscriptions Realtime Appwrite
+ * RealtimeManager - @deprecated
  *
- * Cette classe permet de multiplexer plusieurs souscriptions logiques sur une unique
- * connexion WebSocket Appwrite. Elle collecte les channels de tous les stores
- * et établit la connexion au démarrage de l'application.
+ * Ce module est remplacé par le registre centralisé dans `aw-sync/aw-realtime.ts`.
+ *
+ * Toutes les souscriptions realtime passent désormais par :
+ * - `registerRealtime()` / `registerRealtimeDynamic()` pour enregistrer des channels
+ * - `initializeRealtime()` pour ouvrir la connexion unique
+ *
+ * Ce fichier est conservé temporairement pour référence et sera supprimé
+ * après validation complète de la migration.
+ *
+ * Migration effectuée le : 2026-04-22
+ * Voir plan : `.agents/plans/26-04-22_realtime-centralized-subscriptions_pre.md`
  */
 
 import type { Client } from "appwrite";

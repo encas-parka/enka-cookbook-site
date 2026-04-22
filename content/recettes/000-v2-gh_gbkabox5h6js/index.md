@@ -1,6 +1,6 @@
 ---
 title: '000'
-date: '2026-04-22T01:14:54.504Z'
+date: '2026-04-22T02:28:22.794Z'
 draft: true
 typeR: plat
 categories:
@@ -15,7 +15,7 @@ quantite_desc: quantité desc
 check: true
 cuisson: true
 serveHot: true
-description: null
+description: new test realtime update
 region: null
 saison:
   - ete
@@ -112,7 +112,7 @@ permissionWrite:
   - 68975cbc002469058f8b
 auteur: ghald
 createdAt: '2026-02-04T00:51:50.602+00:00'
-updatedAt: '2026-04-22T01:14:51.955+00:00'
+updatedAt: '2026-04-22T02:28:19.184+00:00'
 createdBy: 68975cbc002469058f8b
 teams: []
 status: public

@@ -1,6 +1,6 @@
 <script lang="ts">
   import { onMount } from "svelte";
-  import {
+import {
     Plus,
     LoaderCircle,
     Package,
@@ -31,6 +31,7 @@
   import QuickAddEventCatalogModal from "$lib/components/eventMateriel/QuickAddEventCatalogModal.svelte";
   import LeftPanel from "$lib/components/ui/LeftPanel.svelte";
   import ConfirmModal from "$lib/components/ui/ConfirmModal.svelte";
+  import EventDocumentsBloc from "$lib/components/documents/EventDocumentsBloc.svelte";
   import InfoCollapse from "$lib/components/ui/InfoCollapse.svelte";
   import ModalContainer from "$lib/components/ui/modal/ModalContainer.svelte";
   import ModalHeader from "$lib/components/ui/modal/ModalHeader.svelte";
@@ -48,7 +49,11 @@
     MaterielGroup,
   } from "$lib/types/event-materiel.types";
   import { online } from "svelte/reactivity/window";
-  import { shareOrDownload, downloadFile, toSlug } from "$lib/utils/share-utils";
+  import {
+    shareOrDownload,
+    downloadFile,
+    toSlug,
+  } from "$lib/utils/share-utils";
   import {
     getMaterielTypeConfig,
     getEventMaterielStatusConfig,
@@ -127,9 +132,6 @@
     direction: "asc",
   });
 
-  type DisplayMode = "nested" | "flat";
-  let displayMode = $state<DisplayMode>("nested");
-
   const hasActiveFilters = $derived.by(() => {
     return (
       filters.statuses.length > 0 ||
@@ -138,10 +140,6 @@
       filters.search.length > 0
     );
   });
-
-  const effectiveDisplayMode = $derived<DisplayMode>(
-    hasActiveFilters ? "flat" : displayMode,
-  );
 
   const availableTypes = [
     "electronic",
@@ -158,19 +156,6 @@
   const availableWhere = $derived(eventMaterielStore.getUniqueWhereValues());
   const availableStatuses = $derived(
     eventMaterielStore.getUniqueStatusValues(),
-  );
-
-  const filteredItems = $derived(
-    eventMaterielStore.getFilteredItems(
-      {
-        types: filters.types as EventMaterielFilterOptions["types"],
-        statuses: filters.statuses as EventMaterielFilterOptions["statuses"],
-        who: filters.who,
-        where: filters.where,
-        search: filters.search,
-      },
-      currentSort,
-    ),
   );
 
   const groupedItems = $derived(
@@ -512,7 +497,9 @@
   </div>
 {/snippet}
 
-<div class="mx-auto mt-4 max-w-7xl overflow-x-hidden p-4 pb-20 print:hidden">
+<div
+  class="mx-auto mt-4 overflow-x-hidden p-4 pb-20 sm:max-w-11/12 print:hidden"
+>
   <div class="flex gap-4">
     <LeftPanel>
       <EventMaterielFilters
@@ -539,6 +526,14 @@
           {@render addDropDown()}
         {/if}
       </div>
+
+      <!-- Bloc Documents attachés -->
+      <EventDocumentsBloc
+        {eventId}
+        tag="materiel"
+        tagLabel="Matériel"
+        {canEdit}
+      />
 
       <InfoCollapse
         title="Aide"
@@ -601,10 +596,7 @@
               grâce au panneau de filtres
             {/if}.
           </li>
-          <li>
-            Trier les items et basculer entre <strong>vue groupée</strong> (par
-            besoin) et <strong>vue plate</strong> (liste complète).
-          </li>
+          <li>Trier les items par type, nom ou lieu.</li>
           <li>Éditer ou supprimer un item en cliquant dessus.</li>
           <li>
             <span class="font-semibold">Exporter la liste</span> en Markdown via
@@ -626,8 +618,6 @@
       <EventMaterielControls
         sort={currentSort}
         onSortChange={(s) => (currentSort = s)}
-        displayMode={effectiveDisplayMode}
-        onDisplayModeChange={(m) => (displayMode = m)}
         {hasActiveFilters}
         {activeBadges}
         onRemoveBadge={removeBadge}
@@ -639,7 +629,7 @@
         <div class="flex justify-center py-12">
           <LoaderCircle class="text-base-content/30 h-8 w-8 animate-spin" />
         </div>
-      {:else if filteredItems.length === 0}
+      {:else if groupedItems.length === 0}
         <div class="text-base-content/50 py-12 text-center">
           <Package class="mx-auto mb-2 h-12 w-12 opacity-30" />
           <p>
@@ -671,7 +661,7 @@
             </div>
           {/if}
         </div>
-      {:else if effectiveDisplayMode === "nested"}
+      {:else}
         <div class="mt-8 grid grid-cols-1 gap-1">
           {#each groupedItems as group (group.header.$id)}
             <EventMaterielGroupCard
@@ -683,20 +673,6 @@
                 allocatingForHeaderId = headerId;
                 allocationPresetStatus = status;
               }}
-            />
-          {/each}
-        </div>
-      {:else}
-        <div class="mt-8 grid grid-cols-1 gap-1">
-          {#each filteredItems as item (item.$id)}
-            {@const canUserEditLoan =
-              !!item.loanId && userAccessibleLoanIds.has(item.loanId)}
-            <EventMaterielCard
-              {item}
-              onEdit={(item) => openEditForm(item.$id)}
-              onEditLoan={handleEditLoan}
-              {canEdit}
-              {canUserEditLoan}
             />
           {/each}
         </div>

@@ -227,7 +227,7 @@
 
   <ModalContent>
     <div class="mb-4">
-      <label class="input input-sm w-full">
+      <label class="input w-full">
         <Search class="size-4 opacity-50" />
         <input
           type="text"

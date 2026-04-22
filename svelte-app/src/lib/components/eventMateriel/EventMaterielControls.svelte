@@ -5,8 +5,6 @@
   } from "$lib/types/event-materiel.types";
   import {
     ArrowDownNarrowWide,
-    LayoutGrid,
-    LayoutList,
     ArrowDownAZ,
     X,
   } from "@lucide/svelte";
@@ -22,8 +20,6 @@
   interface Props {
     sort: EventMaterielSort;
     onSortChange: (sort: EventMaterielSort) => void;
-    displayMode: "nested" | "flat";
-    onDisplayModeChange: (mode: "nested" | "flat") => void;
     hasActiveFilters: boolean;
     activeBadges: ActiveBadge[];
     onRemoveBadge: (id: string) => void;
@@ -33,8 +29,6 @@
   let {
     sort,
     onSortChange,
-    displayMode,
-    onDisplayModeChange,
     hasActiveFilters,
     activeBadges,
     onRemoveBadge,
@@ -84,32 +78,6 @@
         {/each}
       </div>
     </fieldset>
-
-    <div class="flex items-center gap-2 self-end">
-      <div class="join flex p-1">
-        <button
-          class="btn btn-sm join-item btn-primary gap-1 {displayMode !==
-          'nested'
-            ? 'btn-outline'
-            : ''}"
-          onclick={() => onDisplayModeChange("nested")}
-          title="Vue groupée"
-          disabled={hasActiveFilters}
-        >
-          <LayoutGrid class="size-4" />
-          <span class="hidden sm:inline">Groupé</span>
-        </button>
-        <button
-          class="btn btn-sm join-item btn-primary gap-1 {displayMode !==
-            'flat' && 'btn-outline'}"
-          onclick={() => onDisplayModeChange("flat")}
-          title="Vue liste"
-        >
-          <LayoutList class="size-4" />
-          <span class="hidden sm:inline">Liste</span>
-        </button>
-      </div>
-    </div>
   </div>
 
   {#if activeBadges.length > 0}

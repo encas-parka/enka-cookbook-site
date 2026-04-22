@@ -17,6 +17,7 @@
  */
 
 import { SvelteMap } from "svelte/reactivity";
+import fuzzysort from "fuzzysort";
 import type {
   Ingredient,
   RecipeInfo,
@@ -45,6 +46,17 @@ interface CatalogMetadata {
   lastSync: string | null;
   dataJsonHash: string | null;
   ingredientsCount: number;
+}
+
+// =============================================================================
+// TYPES EXPORTÉS
+// =============================================================================
+
+/** Résultat de recherche fuzzy avec score et highlight */
+export interface FuzzyIngredientResult {
+  ingredient: Ingredient;
+  score: number;
+  highlighted: string;
 }
 
 // =============================================================================
@@ -277,10 +289,53 @@ class RecipeDataStore {
 
   searchIngredients(query: string): Ingredient[] {
     if (!query.trim()) return this.ingredients;
-    const lowerQuery = query.toLowerCase();
-    return this.ingredients.filter((ing) =>
-      ing.n.toLowerCase().includes(lowerQuery),
-    );
+    const results = fuzzysort.go(query, this.ingredients, {
+      key: "n",
+      threshold: 0.3,
+      limit: 50,
+    });
+    return results.map((r) => r.obj);
+  }
+
+  /**
+   * Recherche fuzzy avec scores et highlight — pour les composants UI
+   * qui nécessitent d'afficher la pertinence et les caractères matchés.
+   */
+  searchIngredientsFuzzy(
+    query: string,
+    threshold = 0.3,
+    limit = 50,
+  ): FuzzyIngredientResult[] {
+    if (!query.trim()) return [];
+    const results = fuzzysort.go(query, this.ingredients, {
+      key: "n",
+      threshold,
+      limit,
+    });
+    return results.map((r) => ({
+      ingredient: r.obj,
+      score: r.score,
+      highlighted: r.highlight("<mark>", "</mark>"),
+    }));
+  }
+
+  /**
+   * Trouve les ingrédients similaires à un nom donné — utilisé comme
+   * guard anti-doublon dans la modal de création.
+   * Seuil plus permissif (0.5) pour capter les variantes proches.
+   */
+  findSimilarIngredients(name: string, limit = 5): FuzzyIngredientResult[] {
+    if (!name.trim() || name.trim().length < 2) return [];
+    const results = fuzzysort.go(name, this.ingredients, {
+      key: "n",
+      threshold: 0.5,
+      limit,
+    });
+    return results.map((r) => ({
+      ingredient: r.obj,
+      score: r.score,
+      highlighted: r.highlight("<mark>", "</mark>"),
+    }));
   }
 
   getIngredientsByType(type: string): Ingredient[] {

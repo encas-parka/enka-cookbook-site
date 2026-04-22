@@ -336,88 +336,62 @@ export class EventMaterielStore {
   // FILTRAGE ET TRI
   // =============================================================================
 
-  getFilteredItems(
-    filters: EventMaterielFilters,
-    sort: EventMaterielSort,
-  ): EventMateriel[] {
-    let result = [...this.#itemsList];
-
+  /**
+   * Vérifie si un item individuel matche les filtres donnés.
+   * Utilisé pour le filtrage au niveau groupe.
+   */
+  #itemMatchesFilters(item: EventMateriel, filters: EventMaterielFilters): boolean {
     // Filtre par types
     if (filters.types?.length) {
-      result = result.filter((item) =>
-        filters.types!.includes(item.type as EventMaterielType),
-      );
+      if (!filters.types.includes(item.type as EventMaterielType)) return false;
     }
 
     // Filtre par statuts
     if (filters.statuses?.length) {
-      result = result.filter((item) =>
-        filters.statuses!.includes(this.resolveStatus(item)),
-      );
+      if (!filters.statuses.includes(this.resolveStatus(item))) return false;
     }
 
     // Filtre par qui (who)
     if (filters.who?.length) {
-      result = result.filter((item) => {
-        if (filters.who!.includes("__none__") && !item.who) {
-          return true;
-        }
-        return filters.who!.some((w) => w !== "__none__" && item.who === w);
-      });
+      const matchesWho =
+        (filters.who.includes("__none__") && !item.who) ||
+        filters.who.some((w) => w !== "__none__" && item.who === w);
+      if (!matchesWho) return false;
     }
 
     // Filtre par où (where)
     if (filters.where?.length) {
-      result = result.filter((item) => {
-        if (filters.where!.includes("__none__") && !item.where) {
-          return true;
-        }
-        return filters.where!.some((w) => w !== "__none__" && item.where === w);
-      });
+      const matchesWhere =
+        (filters.where.includes("__none__") && !item.where) ||
+        filters.where.some((w) => w !== "__none__" && item.where === w);
+      if (!matchesWhere) return false;
     }
 
     // Recherche globale
     if (filters.search) {
       const search = filters.search.toLowerCase();
-      result = result.filter(
-        (item) =>
-          (item.name || "").toLowerCase().includes(search) ||
-          item.who?.toLowerCase().includes(search) ||
-          item.where?.toLowerCase().includes(search) ||
-          item.notes?.toLowerCase().includes(search),
-      );
+      const matchesSearch =
+        (item.name || "").toLowerCase().includes(search) ||
+        item.who?.toLowerCase().includes(search) ||
+        item.where?.toLowerCase().includes(search) ||
+        item.notes?.toLowerCase().includes(search);
+      if (!matchesSearch) return false;
     }
 
-    // Tri
-    result.sort((a, b) => {
-      let cmp = 0;
-      switch (sort.field) {
-        case "name":
-          cmp = (a.name || "").localeCompare(b.name || "");
-          break;
-        case "type":
-          cmp = a.type.localeCompare(b.type);
-          if (cmp === 0) {
-            cmp = (a.name || "").localeCompare(b.name || "");
-          }
-          break;
-        case "status":
-          cmp = this.resolveStatus(a).localeCompare(this.resolveStatus(b));
-          break;
-        case "who":
-          cmp = (a.who || "").localeCompare(b.who || "");
-          break;
-        case "where":
-          cmp = (a.where || "").localeCompare(b.where || "");
-          if (cmp === 0) {
-            cmp = (a.name || "").localeCompare(b.name || "");
-          }
-          break;
-      }
-      return sort.direction === "desc" ? -cmp : cmp;
-    });
+    return true;
+  }
 
-    return result;
+  /**
+   * Vérifie si des filtres sont actifs (au moins un critère renseigné).
+   */
+  #hasActiveFilters(filters: EventMaterielFilters): boolean {
+    return (
+      (filters.types?.length ?? 0) > 0 ||
+      (filters.statuses?.length ?? 0) > 0 ||
+      (filters.who?.length ?? 0) > 0 ||
+      (filters.where?.length ?? 0) > 0 ||
+      !!filters.search
+    );
   }
 
   // =============================================================================
@@ -460,13 +434,15 @@ export class EventMaterielStore {
     filters: EventMaterielFilters,
     sort: EventMaterielSort,
   ): MaterielGroup[] {
-    const filtered = this.getFilteredItems(filters, sort);
+    const allItems = this.#itemsList;
+    const hasFilters = this.#hasActiveFilters(filters);
 
+    // Étape 1 : Construire les groupes depuis TOUS les items
     const headerMap = new Map<string, EventMateriel>();
     const allocationsByHeader = new Map<string, EventMateriel[]>();
     const standalone: EventMateriel[] = [];
 
-    for (const item of filtered) {
+    for (const item of allItems) {
       if (item.groupId) {
         if (!allocationsByHeader.has(item.groupId)) {
           allocationsByHeader.set(item.groupId, []);
@@ -479,7 +455,7 @@ export class EventMaterielStore {
       }
     }
 
-    const groups: MaterielGroup[] = [];
+    const allGroups: MaterielGroup[] = [];
 
     for (const [headerId, header] of headerMap) {
       const allocations = allocationsByHeader.get(headerId) || [];
@@ -487,7 +463,7 @@ export class EventMaterielStore {
         (sum, a) => sum + (a.quantity || 0),
         0,
       );
-      groups.push({
+      allGroups.push({
         header,
         allocations,
         remainingQty: (header.quantity || 0) - totalAllocated,
@@ -502,14 +478,14 @@ export class EventMaterielStore {
           (sum, a) => sum + (a.quantity || 0),
           0,
         );
-        groups.push({
+        allGroups.push({
           header: item,
           allocations,
           remainingQty: (item.quantity || 0) - totalAllocated,
           totalAllocated,
         });
       } else {
-        groups.push({
+        allGroups.push({
           header: item,
           allocations: [],
           remainingQty: 0,
@@ -518,7 +494,50 @@ export class EventMaterielStore {
       }
     }
 
-    return groups;
+    // Étape 2 : Filtrer au niveau groupe
+    // Un groupe est affiché si son header OU au moins une allocation matche les filtres
+    let filteredGroups = allGroups;
+    if (hasFilters) {
+      filteredGroups = allGroups.filter((group) => {
+        if (this.#itemMatchesFilters(group.header, filters)) return true;
+        return group.allocations.some((a) =>
+          this.#itemMatchesFilters(a, filters),
+        );
+      });
+    }
+
+    // Étape 3 : Trier les groupes
+    filteredGroups.sort((a, b) => {
+      let cmp = 0;
+      switch (sort.field) {
+        case "name":
+          cmp = (a.header.name || "").localeCompare(b.header.name || "");
+          break;
+        case "type":
+          cmp = a.header.type.localeCompare(b.header.type);
+          if (cmp === 0) {
+            cmp = (a.header.name || "").localeCompare(b.header.name || "");
+          }
+          break;
+        case "status":
+          cmp = this
+            .resolveStatus(a.header)
+            .localeCompare(this.resolveStatus(b.header));
+          break;
+        case "who":
+          cmp = (a.header.who || "").localeCompare(b.header.who || "");
+          break;
+        case "where":
+          cmp = (a.header.where || "").localeCompare(b.header.where || "");
+          if (cmp === 0) {
+            cmp = (a.header.name || "").localeCompare(b.header.name || "");
+          }
+          break;
+      }
+      return sort.direction === "desc" ? -cmp : cmp;
+    });
+
+    return filteredGroups;
   }
 
   findMatchingHeader(name: string): EventMateriel | null {

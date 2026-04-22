@@ -1,5 +1,6 @@
 <script lang="ts">
   import type { RecipeIngredient, Ingredient } from "$lib/types/recipes.types";
+  import type { FuzzyIngredientResult } from "$lib/stores/RecipeDataStore.svelte";
   import { recipeDataStore } from "$lib/stores/RecipeDataStore.svelte";
   import { getProductTypeInfo } from "$lib/utils/products-display";
   import { UnitConverter } from "$lib/utils/UnitConverter";
@@ -41,14 +42,18 @@
   let showCreateModal = $state(false);
   let searchQueryForModal = $state("");
 
-  // Filtrage des ingrédients depuis le store
-  let filteredIngredients = $derived(() => {
-    // Si on est en mode "tout afficher" ou si la recherche est vide, retourner tous les ingrédients
+  // Recherche fuzzy des ingrédients depuis le store
+  let fuzzyResults = $derived<FuzzyIngredientResult[]>(() => {
+    // Si mode "tout afficher" ou recherche vide, retourner tous les ingrédients sans highlight
     if (showAllIngredients || searchQuery.length === 0) {
-      return recipeDataStore.ingredients;
+      return recipeDataStore.ingredients.map((ing) => ({
+        ingredient: ing,
+        score: 1,
+        highlighted: ing.n,
+      }));
     }
-    // Sinon filtrer par la recherche
-    return recipeDataStore.searchIngredients(searchQuery);
+    // Sinon recherche fuzzy avec highlight
+    return recipeDataStore.searchIngredientsFuzzy(searchQuery);
   });
 
   // Grouper les ingrédients par type
@@ -87,18 +92,18 @@
 
   // Gérer le selectedIndex de manière réactive
   $effect(() => {
-    const ingredients = filteredIngredients();
-    if (ingredients.length > 0 && selectedIndex === -1) {
+    const results = fuzzyResults();
+    if (results.length > 0 && selectedIndex === -1) {
       selectedIndex = 0;
-    } else if (ingredients.length === 0) {
+    } else if (results.length === 0) {
       selectedIndex = -1;
     }
   });
 
   // Réinitialiser l'index surligné quand les options changent
   $effect(() => {
-    const ingredients = filteredIngredients();
-    if (ingredients.length > 0 && selectedIndex >= ingredients.length) {
+    const results = fuzzyResults();
+    if (results.length > 0 && selectedIndex >= results.length) {
       selectedIndex = 0;
     }
   });
@@ -185,10 +190,10 @@
     switch (event.key) {
       case "ArrowDown":
         event.preventDefault();
-        const ingredients = filteredIngredients();
+        const results = fuzzyResults();
         if (!isOpen) {
           openDropdown(true);
-        } else if (selectedIndex < ingredients.length - 1) {
+        } else if (selectedIndex < results.length - 1) {
           selectedIndex++;
         }
         break;
@@ -202,9 +207,9 @@
 
       case "Enter":
         event.preventDefault();
-        const currentIngredients = filteredIngredients();
-        if (isOpen && currentIngredients.length > 0) {
-          addIngredientFromSearch(currentIngredients[selectedIndex].u);
+        const currentResults = fuzzyResults();
+        if (isOpen && currentResults.length > 0) {
+          addIngredientFromSearch(currentResults[selectedIndex].ingredient.u);
         } else if (!isOpen) {
           openDropdown(true);
         }
@@ -351,14 +356,14 @@
 
             <!-- Dropdown options -->
             {#if isOpen}
-              {@const ingredients = filteredIngredients()}
+              {@const results = fuzzyResults()}
 
               <div
                 id="ingredients-list"
                 class="border-base-300 bg-base-100 absolute z-50 mt-1 max-h-60 w-full overflow-auto rounded-lg border shadow-lg"
                 role="listbox"
               >
-                {#if ingredients.length === 0}
+                {#if results.length === 0}
                   <div class="text-base-content/50 px-4 py-2 text-sm">
                     Aucun ingrédient trouvé
                   </div>
@@ -383,7 +388,7 @@
                     </div>
                   {/if}
                 {:else}
-                  {#each ingredients as ingredient, index (ingredient.u)}
+                  {#each results as result, index (result.ingredient.u)}
                     <button
                       type="button"
                       id="ingredient-{index}"
@@ -391,15 +396,15 @@
                       selectedIndex
                         ? 'bg-base-200'
                         : ''}"
-                      onclick={() => addIngredientFromSearch(ingredient.u)}
+                      onclick={() => addIngredientFromSearch(result.ingredient.u)}
                       onmouseenter={() => (selectedIndex = index)}
                       role="option"
                       aria-selected={index === selectedIndex}
                       {disabled}
                     >
                       <div class="flex-1">
-                        <span class="truncate text-sm font-medium"
-                          >{ingredient.n}</span
+                        <span class="text-sm font-medium fuzzysort-highlight"
+                          >{@html result.highlighted}</span
                         >
                       </div>
                     </button>
@@ -564,9 +569,11 @@
   {/if}
 </div>
 
+
 <!-- Modal de création d'ingrédient -->
 <CreateIngredientModal
   bind:open={showCreateModal}
   initialName={searchQueryForModal}
   onIngredientCreated={handleIngredientCreated}
+  onUseExisting={handleIngredientCreated}
 />

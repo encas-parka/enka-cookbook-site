@@ -33,6 +33,7 @@ import {
 	forceReloadAllAppwriteRecipes,
 	getRecipeAppwrite as getAppwriteRecipe
 } from '../services/appwrite-recipes';
+import fuzzysort from 'fuzzysort';
 import { globalState } from './GlobalState.svelte';
 import {
 	createSyncCollection,
@@ -569,28 +570,17 @@ class RecipesStore {
 		return this.#recipesIndex.get($id) || null;
 	}
 
-	#normalizeString(str: string): string {
-		return str
-			.toLowerCase()
-			.normalize('NFD')
-			.replace(/[\u0300-\u036f]/g, '');
-	}
-
 	searchRecipes(query: string): RecipeIndexEntry[] {
 		if (!query.trim()) {
 			return this.recipesIndex;
 		}
 
-		const searchTerms = this.#normalizeString(query.trim()).split(/\s+/);
-
-		return this.recipesIndex.filter((recipe) => {
-			const recipeTitle = this.#normalizeString(recipe.title);
-			const titleWords = recipeTitle.split(/[\s\-_]+/);
-
-			return searchTerms.every((term) =>
-				titleWords.some((word) => word.startsWith(term))
-			);
+		const results = fuzzysort.go(query.trim(), this.recipesIndex, {
+			key: 'title',
+			threshold: 0.3,
 		});
+
+		return results.map(r => r.obj);
 	}
 
 	get availableTypes(): string[] {

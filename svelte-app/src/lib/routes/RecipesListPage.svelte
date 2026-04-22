@@ -15,6 +15,7 @@
   import { globalState } from "../stores/GlobalState.svelte";
   import { fade } from "svelte/transition";
   import { flip } from "svelte/animate";
+  import fuzzysort from "fuzzysort";
 
   // État des filtres
   interface Filters {
@@ -82,36 +83,19 @@
   const filteredRecipes = $derived.by(() => {
     // Si recherche active (>= 2 chars), ignorer les filtres sauf typeR
     if (searchQuery.length >= 2) {
-      const normalized = searchQuery
-        .toLowerCase()
-        .normalize("NFD")
-        .replace(/\p{Diacritic}/gu, "");
+      const query = searchQuery.trim();
+
+      // Recherche fuzzy multi-champ en un seul passage
+      const results = fuzzysort.go(query, allRecipes, {
+        keys: ["title", "auteur", "region"],
+        threshold: 0.3,
+      });
+
+      const matchingIds = new Set(results.map(r => r.obj.$id));
 
       return allRecipes.filter((recipe) => {
-        const titleMatch = recipe.title
-          .toLowerCase()
-          .normalize("NFD")
-          .replace(/\p{Diacritic}/gu, "")
-          .includes(normalized);
-
-        const authorMatch =
-          recipe.auteur
-            ?.toLowerCase()
-            .normalize("NFD")
-            .replace(/\p{Diacritic}/gu, "")
-            .includes(normalized) || false;
-
-        const specialiteMatch =
-          recipe.region
-            ?.toLowerCase()
-            .normalize("NFD")
-            .replace(/\p{Diacritic}/gu, "")
-            .includes(normalized) || false;
-
-        // Filtrer sur typeR même pendant la recherche
-        const typeRMatch = !filters.typeR || recipe.typeR === filters.typeR;
-
-        return (titleMatch || authorMatch || specialiteMatch) && typeRMatch;
+        if (!matchingIds.has(recipe.$id)) return false;
+        return !filters.typeR || recipe.typeR === filters.typeR;
       });
     }
 

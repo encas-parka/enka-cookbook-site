@@ -7,6 +7,7 @@ import type { Products, Purchases } from "../types/appwrite.d";
 
 import {
   matchesFilters,
+  computeFuzzySearchMatches,
   type FiltersState,
   type TemperatureFilterMode,
   hasConversions,
@@ -321,8 +322,16 @@ class ProductsStore {
 
     const groups: Record<string, ProductModel[]> = {};
 
+    // Pre-compute fuzzy search matches once for all products
+    const fuzzyMatchedIds = this.#filters.searchQuery.trim()
+      ? computeFuzzySearchMatches(
+          Array.from(this.#productModels.values()).map(m => m.data),
+          this.#filters.searchQuery,
+        )
+      : undefined;
+
     for (const [id, model] of this.#productModels) {
-      if (!this.#passesFilters(model)) continue;
+      if (!this.#passesFilters(model, fuzzyMatchedIds)) continue;
       const key = this.#groupKey(model);
       (groups[key] ??= []).push(model);
     }
@@ -365,12 +374,12 @@ class ProductsStore {
   }
 
   /** Un ProductModel passe-t-il les filtres courants ? */
-  #passesFilters(model: ProductModel): boolean {
+  #passesFilters(model: ProductModel, fuzzyMatchedIds?: Set<string>): boolean {
     const product = model.data;
     const isManualProduct = !product.productHugoUuid;
 
     if (!product.byDate && !isManualProduct) return false;
-    if (!matchesFilters(product, this.#filters)) return false;
+    if (!matchesFilters(product, this.#filters, fuzzyMatchedIds)) return false;
 
     // Filtre completion (dépend de model.stats → dateRange)
     if (this.#filters.completionStatus !== "all") {

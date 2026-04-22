@@ -1,6 +1,7 @@
 <script lang="ts" generics="T">
   import { Search } from "@lucide/svelte";
   import { keyboardNavigation } from "$lib/attachments/keyboardNavigation.svelte";
+  import fuzzysort from "fuzzysort";
 
   interface Props<T> {
     value?: string;
@@ -38,20 +39,29 @@
   let isFocused = $state(false);
   let inputElement: HTMLInputElement | undefined;
 
+  let fuzzyResults = $derived.by(() => {
+    const query = value.trim();
+    if (query.length < minQueryLength) return [];
+    return fuzzysort.go(query, items, {
+      key: itemToString as (item: T) => string,
+      threshold: 0.3,
+      limit: maxResults ?? 50,
+    });
+  });
+
+  let highlightMap = $derived.by(() => {
+    const map = new Map<string, string>();
+    for (const r of fuzzyResults) {
+      map.set(itemToString(r.obj), r.highlight("<mark>", "</mark>"));
+    }
+    return map;
+  });
+
   let filteredItems = $derived.by(() => {
-    // Si focus et pas de texte, montrer tous les éléments si showAllOnFocus est true
     if (isFocused && value.trim().length === 0 && showAllOnFocus) {
       return maxResults ? items.slice(0, maxResults) : items;
     }
-
-    const lowerQuery = value.toLowerCase().trim();
-    if (lowerQuery.length < minQueryLength) return [];
-
-    const filtered = items.filter((item) =>
-      itemToString(item).toLowerCase().includes(lowerQuery),
-    );
-
-    return maxResults ? filtered.slice(0, maxResults) : filtered;
+    return fuzzyResults.map(r => r.obj);
   });
 
   // Déterminer si les résultats doivent être affichés
@@ -146,7 +156,7 @@
               onclick={() => handleSelectItem(item)}
               {disabled}
             >
-              <span class="block truncate">{itemToString(item)}</span>
+              <span class="block truncate">{#if highlightMap.has(itemToString(item))}{@html highlightMap.get(itemToString(item))!}{:else}{itemToString(item)}{/if}</span>
             </button>
           </li>
         {/each}
@@ -162,3 +172,4 @@
     </div>
   {/if}
 </div>
+

@@ -10,6 +10,7 @@
     PackagePlus,
   } from "@lucide/svelte";
   import { recipeDataStore } from "$lib/stores/RecipeDataStore.svelte";
+  import type { FuzzyIngredientResult } from "$lib/stores/RecipeDataStore.svelte";
   import { toastService } from "$lib/services/toast.service.svelte";
   import type { Ingredient } from "$lib/types/recipes.types";
   import ModalContainer from "$lib/components/ui/modal/ModalContainer.svelte";
@@ -25,12 +26,14 @@
     open: boolean;
     initialName?: string;
     onIngredientCreated?: (ingredient: Ingredient) => void;
+    onUseExisting?: (ingredient: Ingredient) => void;
   }
 
   let {
     open = $bindable(false),
     initialName = "",
     onIngredientCreated,
+    onUseExisting,
   }: Props = $props();
 
   // ============================================================================
@@ -64,6 +67,13 @@
     pF?: string;
     pS?: string;
   }>({});
+
+  // Guard anti-doublon : ingrédients similaires détectés en temps réel
+  let similarIngredients = $derived<FuzzyIngredientResult[]>(() => {
+    const name = formData.name.trim();
+    if (name.length < 2) return [];
+    return recipeDataStore.findSimilarIngredients(name);
+  });
 
   // ============================================================================
   // CONSTANTES
@@ -249,6 +259,19 @@
     resetForm();
   }
 
+  /**
+   * Utilise un ingrédient existant au lieu d'en créer un nouveau
+   */
+  function useExistingIngredient(ingredient: Ingredient) {
+    toastService.success(`Ingrédient "${ingredient.n}" sélectionné`);
+    if (onUseExisting) {
+      onUseExisting(ingredient);
+    } else if (onIngredientCreated) {
+      onIngredientCreated(ingredient);
+    }
+    handleClose();
+  }
+
   // Reset du formulaire à l'ouverture du modal
   $effect(() => {
     if (open) {
@@ -309,6 +332,40 @@
           </label>
           {#if showErrors && validationErrors.name}
             <p class="text-error text-xs">{validationErrors.name}</p>
+          {/if}
+
+          <!-- Guard anti-doublon : ingrédients similaires -->
+          {#if similarIngredients().length > 0}
+            {@const similar = similarIngredients()}
+            <div class="alert alert-warning text-sm">
+              <TriangleAlert size={18} class="shrink-0" />
+              <div class="flex flex-col gap-2">
+                <span class="font-medium"
+                  >Cet ingrédient ressemble à des ingrédients existants
+                  :</span
+                >
+                <div class="flex flex-col gap-1">
+                  {#each similar as result}
+                    <button
+                      type="button"
+                      class="btn btn-sm btn-outline btn-primary justify-start text-left"
+                      onclick={() => useExistingIngredient(result.ingredient)}
+                    >
+                      <span class="fuzzysort-highlight"
+                        >{@html result.highlighted}</span
+                      >
+                      <span class="text-base-content/50 ml-auto text-xs"
+                        >{result.ingredient.t}</span
+                      >
+                    </button>
+                  {/each}
+                </div>
+                <span class="text-base-content/60 text-xs"
+                  >Cliquez sur un ingrédient ci-dessus pour l'utiliser, ou
+                  continuez la création.</span
+                >
+              </div>
+            </div>
           {/if}
         </div>
 
@@ -518,3 +575,4 @@
     </button>
   </ModalFooter>
 </ModalContainer>
+

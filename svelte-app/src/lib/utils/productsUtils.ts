@@ -1,3 +1,4 @@
+import fuzzysort from "fuzzysort";
 import type {
   ByDateEntry,
   EnrichedProduct,
@@ -227,19 +228,37 @@ export function formatStockResult(result: NumericQuantity[]): string {
 }
 
 /**
- * Vérifie si un produit correspond aux filtres appliqués
+ * Vérifie si un produit correspond aux filtres appliqués.
  * @param product - Produit enrichi à tester
  * @param filters - État des filtres à appliquer
+ * @param fuzzyMatchedIds - IDs pré-calculés par computeFuzzySearchMatches().
+ *   Requis quand filters.searchQuery est non-vide ; si omis, tous les produits échouent le filtre texte.
  * @returns true si le produit correspond à tous les filtres actifs
  */
+/**
+ * Computes the set of product IDs matching a fuzzy text query.
+ * Should be called once before iterating over products.
+ */
+export function computeFuzzySearchMatches(
+  products: EnrichedProduct[],
+  query: string,
+): Set<string> {
+  if (!query.trim()) return new Set();
+  const results = fuzzysort.go(query.trim(), products, {
+    key: "productName",
+    threshold: 0.3,
+  });
+  return new Set(results.map(r => r.obj.$id));
+}
+
 export function matchesFilters(
   product: EnrichedProduct,
   filters: FiltersState,
+  fuzzyMatchedIds?: Set<string>,
 ): boolean {
-  // Recherche textuelle
+  // Recherche textuelle fuzzy
   if (filters.searchQuery.trim()) {
-    const query = filters.searchQuery.toLowerCase();
-    if (!product.productName.toLowerCase().includes(query)) {
+    if (!fuzzyMatchedIds?.has(product.$id)) {
       return false;
     }
   }

@@ -1,6 +1,6 @@
 ---
 title: Semoule
-date: '2026-04-22T01:12:10.328Z'
+date: '2026-04-22T01:32:47.326Z'
 draft: true
 typeR: plat
 categories:
@@ -21,9 +21,9 @@ materiel: []
 ingredients:
   - uuid: yx78ae
     name: Semoule moyenne (blé)
-    originalQuantity: 4
+    originalQuantity: 8
     originalUnit: kg
-    normalizedQuantity: 4000
+    normalizedQuantity: 8000
     normalizedUnit: gr.
     comment: ''
     allergens:
@@ -31,27 +31,27 @@ ingredients:
     type: sec
   - uuid: 2juq3x
     name: Sel
-    originalQuantity: 80
+    originalQuantity: 160
     originalUnit: gr.
-    normalizedQuantity: 80
+    normalizedQuantity: 160
     normalizedUnit: gr.
     comment: ''
     allergens: []
     type: epices
   - uuid: c70jxb
     name: huile de tournesol
-    originalQuantity: 175
+    originalQuantity: 350
     originalUnit: ml
-    normalizedQuantity: 175
+    normalizedQuantity: 350
     normalizedUnit: ml
     comment: ''
     allergens: []
     type: lof
   - uuid: ljzb7j
     name: Eau
-    originalQuantity: 6
+    originalQuantity: 12
     originalUnit: l.
-    normalizedQuantity: 6000
+    normalizedQuantity: 12000
     normalizedUnit: ml
     comment: ''
     allergens: []
@@ -59,12 +59,12 @@ ingredients:
 preparation: "1. Huiler la semoule à sec: répartissez-la dans les bacs gastro (max 3 à 4 kg par gastro). Versez\_l'huile\_en filet sur la semoule sèche et mélangez à la main ou à la spatule pour bien enrober chaque grain.\n2. Faites bouillir de l'eau, ajouter  le sel.\n3. Versez l'eau bouillante salée sur la semoule huilée dans chaque bac, en couvrant bien toute la surface. Mélangez brièvement à la spatule pour uniformiser.\n4. Laisser gonfler 5 minutes:\_Couvrez chaque bac. Laissez gonfler sans toucher.\n5. Égrainer la semoule à la fourchette ou à la main en soulevant bien depuis le fond pour aérer et séparer tous les grains. Ajustez l'assaisonnement si besoin.\n6. Maintenir au chaud et servir:\_Recouvrez les bacs et maintenez au chaud en bain-marie ou en étuve jusqu'au service. Égrainez à nouveau juste avant de servir si nécessaire."
 prepAlt: []
 astuces: []
-preparation24h: null
+preparation24h: test
 permissionWrite:
   - 68975cbc002469058f8b
 auteur: ghald
 createdAt: '2026-04-06T11:03:01.685+00:00'
-updatedAt: '2026-04-22T01:12:10.113+00:00'
+updatedAt: '2026-04-22T01:32:46.847+00:00'
 createdBy: 68975cbc002469058f8b
 teams: []
 status: public

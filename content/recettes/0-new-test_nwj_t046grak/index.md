@@ -1,6 +1,6 @@
 ---
 title: 0 new test
-date: '2026-04-14T10:14:40.883Z'
+date: '2026-04-27T07:43:41.366Z'
 draft: true
 typeR: plat
 categories:
@@ -14,7 +14,7 @@ quantite_desc: null
 check: false
 cuisson: false
 serveHot: true
-description: null
+description: test admin
 region: null
 saison: []
 id: 0-new-test_nwj_t046grak
@@ -35,11 +35,11 @@ astuces: []
 preparation24h: null
 permissionWrite:
   - 693200b700222efe46a2
-auteur: null
+auteur: qaldek
 createdAt: '2026-04-14T10:14:37.538+00:00'
-updatedAt: '2026-04-14T10:14:37.538+00:00'
+updatedAt: '2026-04-27T07:43:38.594+00:00'
 createdBy: 693200b700222efe46a2
-teams: null
+teams: []
 status: public
 rootRecipeId: null
 versionLabel: null

@@ -1,9 +1,10 @@
 <script lang="ts">
-  import { Package, MapPin, Hash, X, Check } from "@lucide/svelte";
+  import { Package, MapPin, Hash, X, Check, Trash2 } from "@lucide/svelte";
   import RadioBadgeGroup from "$lib/components/ui/RadioBadgeGroup.svelte";
   import { nativeTeamsStore } from "$lib/stores/NativeTeamsStore.svelte";
   import TeamMaterielNameSuggest from "./TeamMaterielNameSuggest.svelte";
   import Suggestions from "$lib/components/ui/Suggestions.svelte";
+  import ConfirmModal from "$lib/components/ui/ConfirmModal.svelte";
 
   // Types littéraux pour éviter les erreurs TypeScript avec les enums
   type MaterielTypeLiteral =
@@ -48,6 +49,7 @@
     }) => void;
     onCancel?: () => void;
     onExistingSelected?: (materielId: string) => void;
+    onDelete?: (() => void) | null;
   }
 
   let {
@@ -61,6 +63,7 @@
     teamId,
     availableLocations = [],
     onExistingSelected,
+    onDelete = null,
   }: Props = $props();
 
   // Import des composants UI
@@ -87,6 +90,7 @@
 
   let loading = $state(false);
   let error = $state<string | null>(null);
+  let showDeleteConfirm = $state(false);
 
   // L'owner est-il verrouillé (pré-rempli depuis les props) ?
   const isOwnerLocked = $derived(ownerId);
@@ -372,23 +376,51 @@
 <div>
   <!-- Boutons -->
   {#if buttonAction}
-    <div class="ms-auto mt-8 flex justify-end gap-2">
-      <button class="btn btn-ghost" onclick={handleCancel} disabled={loading}>
-        <X class="h-5 w-5" />
-        Annuler
-      </button>
-      <button
-        class="btn btn-primary"
-        onclick={handleSubmit}
-        disabled={!isValid}
-      >
-        {#if loading}
-          <span class="loading loading-spinner loading-sm"></span>
-        {:else}
-          <Check class="h-5 w-5" />
-        {/if}
-        Enregistrer
-      </button>
+    <div class="mt-8 flex items-center gap-2">
+      {#if isEdit && onDelete}
+        <button
+          class="btn btn-ghost text-error"
+          onclick={() => (showDeleteConfirm = true)}
+          disabled={loading}
+          title="Supprimer"
+        >
+          <Trash2 class="h-5 w-5" />
+          <span class="hidden md:inline">Supprimer</span>
+        </button>
+      {/if}
+      <div class="ms-auto flex gap-2">
+        <button class="btn btn-ghost" onclick={handleCancel} disabled={loading}>
+          <X class="h-5 w-5" />
+          Annuler
+        </button>
+        <button
+          class="btn btn-primary"
+          onclick={handleSubmit}
+          disabled={!isValid}
+        >
+          {#if loading}
+            <span class="loading loading-spinner loading-sm"></span>
+          {:else}
+            <Check class="h-5 w-5" />
+          {/if}
+          Enregistrer
+        </button>
+      </div>
     </div>
   {/if}
 </div>
+
+{#if isEdit && onDelete}
+  <ConfirmModal
+    isOpen={showDeleteConfirm}
+    title="Supprimer le matériel"
+    message="Supprimer « {name} » de l'inventaire ?"
+    variant="danger"
+    confirmLabel="Supprimer"
+    onConfirm={() => {
+      showDeleteConfirm = false;
+      onDelete?.();
+    }}
+    onCancel={() => (showDeleteConfirm = false)}
+  />
+{/if}

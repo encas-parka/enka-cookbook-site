@@ -12,7 +12,6 @@
  * Écriture CRUD :
  * • createMateriel() : Créer un matériel
  * • updateMateriel() : Mettre à jour un matériel
- * • deleteMateriel() : Supprimer un matériel
  *
  * Ce fichier est une couche sans état qui expose des fonctions pures
  * pour MaterielStore. Toute la logique de réactivité est gérée par le store.
@@ -209,35 +208,6 @@ export async function updateMateriel(
   } catch (error) {
     console.error(
       `[appwrite-materiel] Error updating materiel ${materielId}:`,
-      error,
-    );
-    throw error;
-  }
-}
-
-// =============================================================================
-// SUPPRESSION
-// =============================================================================
-
-/**
- * Supprime un matériel
- *
- * @param materielId - ID du matériel à supprimer
- */
-export async function deleteMateriel(materielId: string): Promise<void> {
-  try {
-    const { tables } = await getAppwriteInstances();
-
-    await tables.deleteRow({
-      databaseId: APPWRITE_CONFIG.APPWRITE_CONFIG.databaseId,
-      tableId: MATERIEL_COLLECTION_ID,
-      rowId: materielId,
-    });
-
-    console.log(`[appwrite-materiel] Materiel deleted: ${materielId}`);
-  } catch (error) {
-    console.error(
-      `[appwrite-materiel] Error deleting materiel ${materielId}:`,
       error,
     );
     throw error;

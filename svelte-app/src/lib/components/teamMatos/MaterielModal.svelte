@@ -93,6 +93,24 @@
     activeMaterielId = null;
     onClose();
   }
+
+  async function handleDelete() {
+    if (!activeMaterielId) return;
+    loading = true;
+    try {
+      await toastService.track(
+        materielStore.deleteMateriel(activeMaterielId),
+        {
+          loading: "Suppression en cours...",
+          success: "Matériel supprimé avec succès",
+          error: "Erreur lors de la suppression du matériel",
+        },
+      );
+      handleClose();
+    } finally {
+      loading = false;
+    }
+  }
 </script>
 
 <ModalContainer {isOpen} onClose={handleClose}>
@@ -115,7 +133,7 @@
       </div>
     {/if}
 
-    {#if isEdit && !currentMateriel}
+    {#if isEdit && !currentMateriel && !loading}
       <div class="alert alert-warning">
         <span>Matériel introuvable</span>
       </div>
@@ -136,6 +154,7 @@
             : null}
           onSubmit={handleSubmit}
           onCancel={handleClose}
+          onDelete={isEdit ? handleDelete : null}
           ownerId={teamId}
           ownerName={teamName}
           teamId={teamId}

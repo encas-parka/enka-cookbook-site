@@ -43,6 +43,7 @@ export class MaterielStore {
   #materielCollection = createSyncCollection<Materiel>({
     table: db.materiels,
     collectionName: "materiel",
+    syncOptions: { softDelete: true },
   });
 
   #loanCollection = createSyncCollection<MaterielLoan>({
@@ -80,18 +81,18 @@ export class MaterielStore {
     return this.#isRealtimeActive;
   }
   get count() {
-    return this.#raw.materiels.length;
+    return this.#enrichedMateriels.length;
   }
 
   // =============================================================================
   // ENRICHED DERIVED DATA
   // =============================================================================
 
-  /** All materiels enriched with loan data */
+  /** All materiels enriched with loan data (soft-deleted excluded) */
   #enrichedMateriels = $derived.by(() =>
-    this.#raw.materiels.map((m) =>
-      enrichMaterielFromAppwrite(m, this.#raw.loans),
-    ),
+    this.#raw.materiels
+      .filter((m) => !m.deleted)
+      .map((m) => enrichMaterielFromAppwrite(m, this.#raw.loans)),
   );
 
   /** All loans enriched with parsed materielItems */
@@ -400,7 +401,7 @@ export class MaterielStore {
     this.#error = null;
 
     try {
-      await this.#materielCollection.remove(materielId);
+      await this.#materielCollection.update(materielId, { deleted: true } as Partial<Materiel>);
     } catch (err) {
       this.#error =
         err instanceof Error ? err.message : "Erreur de suppression";

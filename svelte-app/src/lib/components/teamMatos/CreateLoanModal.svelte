@@ -55,6 +55,7 @@
     quantity: number;
     type: MaterielTypeLiteral;
     maxQuantity: number;
+    isDeleted?: boolean;
   }
 
   interface Props {
@@ -250,7 +251,7 @@
 
   $effect(() => {
     if (isOpen) {
-      if (mode === "edit" && loanId) {
+      if (mode === "edit" && loanId && !loading) {
         loadingLoan = true;
         const loan = materielStore.getLoanById(loanId);
         if (loan) {
@@ -264,12 +265,14 @@
 
           selectedMateriels = loan.materielItems.map((item) => {
             const materiel = materielStore.getMaterielById(item.materielId);
+            const isDeleted = !materiel;
             return {
               materielId: item.materielId,
               materielName: item.materielName,
               quantity: item.quantity,
               type: materiel?.type || "",
-              maxQuantity: item.quantity,
+              maxQuantity: isDeleted ? 0 : item.quantity,
+              isDeleted,
             };
           });
         } else {
@@ -321,11 +324,15 @@
 
   // Plafond dynamique : lit la disponibilité réelle depuis availabilityMap
   // fallback = maxQuantity stocké (utile quand pas de dates)
+  // Si absent de la map = matériel soft-deleté → 0
   function getEffectiveMax(materielId: string, fallbackMax: number): number {
     const available = availabilityMap.get(materielId);
     // Si le matériel est dans la map, c'est la vraie dispo sur la période
     if (available !== undefined) return available;
-    // Sinon (pas de dates), on utilise le fallback
+    // Si pas de dates, le matériel n'est pas dans la map
+    // → vérifier s'il est deleted (maxQuantity === 0)
+    const item = selectedMateriels.find((m) => m.materielId === materielId);
+    if (item?.isDeleted) return 0;
     return fallbackMax;
   }
 
@@ -895,7 +902,9 @@
                       >
                         {materiel.materielName}
                       </div>
-                      {#if hasConflict}
+                      {#if materiel.isDeleted}
+                        <span class="badge badge-error badge-sm">Supprimé</span>
+                      {:else if hasConflict}
                         <span class="badge badge-error badge-sm">
                           {conflict.isUnavailable
                             ? "Indisponible"

@@ -44,7 +44,6 @@
   const statuses: { value: EventMaterielStatus; label: string }[] = [
     "to_check",
     "confirmed",
-    "to_find",
   ].map((s) => ({
     value: s as EventMaterielStatus,
     label: getEventMaterielStatusConfig(s).label,
@@ -63,10 +62,12 @@
   const whoError = $derived(whoOrWhereError && !who.trim());
   const whereError = $derived(whoOrWhereError && !where.trim());
 
+  const exceedsMax = $derived(maxQuantity > 0 && quantity > maxQuantity);
+  const quantityError = $derived(attempted && quantity <= 0);
+
   const validationErrors = $derived.by(() => {
     const errs: string[] = [];
-    if (quantity <= 0 || quantity > maxQuantity)
-      errs.push("La quantité doit être entre 1 et " + maxQuantity + ".");
+    if (quantity <= 0) errs.push("La quantité doit être ≥ 1.");
     if (needsSource && !who.trim() && !where.trim()) {
       errs.push("Indiquez qui apporte le matériel ou d'où il vient.");
     }
@@ -114,17 +115,22 @@
       <legend class="fieldset-legend"
         ><Hash class="inline size-4" /> Quantité</legend
       >
-      <label class="input w-full">
+      <label class="input w-full {quantityError ? 'input-error' : ''}">
         <input
           type="number"
           min="1"
-          max={maxQuantity}
           bind:value={quantity}
           placeholder="Quantité"
           class="grow"
           required
         />
       </label>
+      {#if exceedsMax}
+        <span class="text-warning/80 flex items-center gap-1 text-xs">
+          <CircleAlert class="size-3" />
+          Dépasse la quantité à trouver ({maxQuantity})
+        </span>
+      {/if}
     </fieldset>
 
     <fieldset class="fieldset">
@@ -177,8 +183,4 @@
       ></textarea>
     </fieldset>
   </div>
-
-  {#if attempted && validationErrors.length > 0}
-    <!-- Les erreurs sont maintenant gérées par toastService -->
-  {/if}
 </form>

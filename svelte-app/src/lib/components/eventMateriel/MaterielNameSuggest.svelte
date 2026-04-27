@@ -19,6 +19,7 @@
     onInput: (value: string) => void;
     placeholder?: string;
     class?: string;
+    hasError?: boolean;
   }
 
   let {
@@ -27,6 +28,7 @@
     onInput,
     placeholder = "Nom * (ex: Table pliante)",
     class: className = "",
+    hasError = false,
   }: Props = $props();
 
   let showDropdown = $state(false);
@@ -147,7 +149,7 @@
 </script>
 
 <div class="relative {className}">
-  <label class="input w-full">
+  <label class="input w-full {hasError ? 'input-error' : ''}">
     <Search class="h-4 w-4 opacity-50" />
     <input
       type="text"

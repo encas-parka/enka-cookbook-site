@@ -57,8 +57,8 @@
   // svelte-ignore state_referenced_locally
   let quantity = $state(initialData?.quantity || 1);
   // svelte-ignore state_referenced_locally
-  let type = $state<EventMaterielType>(
-    (initialData?.type as EventMaterielType) || "other",
+  let type = $state<EventMaterielType | "">(
+    (initialData?.type as EventMaterielType) || "",
   );
   // svelte-ignore state_referenced_locally
   let status = $state<EventMaterielStatus>(
@@ -80,7 +80,7 @@
   // svelte-ignore state_referenced_locally
   const origQuantity = initialData?.quantity || 1;
   // svelte-ignore state_referenced_locally
-  const origType = (initialData?.type as EventMaterielType) || "other";
+  const origType = (initialData?.type as EventMaterielType) || "";
   // svelte-ignore state_referenced_locally
   const origStatus = (initialData?.status as EventMaterielStatus) || "to_find";
   // svelte-ignore state_referenced_locally
@@ -112,6 +112,10 @@
   const whoError = $derived(whoOrWhereError && !who.trim());
   const whereError = $derived(whoOrWhereError && !where.trim());
 
+  const nameError = $derived(attempted && !name.trim());
+  const typeError = $derived(attempted && !type);
+  const quantityError = $derived(attempted && quantity < 1);
+
   const statusClass = $derived(
     getEventMaterielStatusConfig(status).selectClass,
   );
@@ -142,6 +146,7 @@
   const validationErrors = $derived.by(() => {
     const errs: string[] = [];
     if (!name.trim()) errs.push("Le nom est requis.");
+    if (!type) errs.push("Le type est requis.");
     if (quantity < 1) errs.push("La quantité doit être ≥ 1.");
     if (needsSource && !who.trim() && !where.trim()) {
       errs.push("Indiquez qui apporte le matériel ou d'où il vient.");
@@ -186,6 +191,7 @@
      submitting = true;
 
     try {
+      if (!type) return;
       await onSubmit({
         eventId,
         name: name.trim(),
@@ -201,7 +207,8 @@
     }
   }
 
-  export function getFormData(): CreateEventMaterielData {
+  export function getFormData(): CreateEventMaterielData | null {
+    if (!type) return null;
     return {
       eventId,
       name: name.trim(),
@@ -246,7 +253,7 @@
       <legend class="fieldset-legend"
         ><Package class="inline size-4" /> Nom</legend
       >
-      <label class="input w-full">
+      <label class="input w-full {nameError ? 'input-error' : ''}">
         <Package class="h-4 w-4 opacity-50" />
         <input
           type="text"
@@ -262,6 +269,7 @@
       value={name}
       onSelect={handleNameSelect}
       onInput={handleNameInput}
+      hasError={nameError}
     />
   {/if}
 
@@ -271,7 +279,7 @@
         ><Hash class="inline size-4" /> Quantité {#if mode !== "allocation"}
           requise{/if}</legend
       >
-      <label class="input w-full">
+      <label class="input w-full {quantityError ? 'input-error' : ''}">
         <input
           type="number"
           min="1"
@@ -287,7 +295,8 @@
       <legend class="fieldset-legend"
         ><Shapes class="inline size-4" /> Type</legend
       >
-      <select bind:value={type} class="select w-full">
+      <select bind:value={type} class="select w-full {typeError ? 'select-error' : ''}">
+        <option value="" disabled selected>Sélectionner</option>
         {#each types as t (t.value)}
           <option value={t.value}>{t.label}</option>
         {/each}
@@ -356,9 +365,5 @@
      </fieldset>
 
   </div>
-
-   {#if attempted && errors.length > 0}
-     <!-- Les erreurs sont maintenant gérées par toastService -->
-   {/if}
- </form>
+</form>
 

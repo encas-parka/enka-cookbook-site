@@ -395,10 +395,12 @@ export class ProductModalState implements ProductModalStateType {
     if (!this.product) return;
 
     await this.withLoading(async () => {
-      // Utiliser ProductsStore - updateProduct générique
-      await productsStore.updateProduct(this.product!.$id, {
-        storeInfo,
-      });
+      // Utiliser updateProductBatch pour gérer correctement la conversion storeInfo -> store (JSON)
+      await productsStore.updateProductBatch(
+        this.product!.$id,
+        { storeInfo },
+        (id) => productsStore.getEnrichedProductById(id) ?? undefined,
+      );
     }, "Magasin mis à jour");
   }
 

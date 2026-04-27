@@ -1,12 +1,13 @@
 ---
 title: Marbré cappuccino végan sans gluten
-date: '2026-04-27T06:52:08.019Z'
+date: '2026-04-27T06:53:55.767Z'
 draft: true
 typeR: dessert
 categories:
   - Gateau
 regime:
   - vegan
+  - sans-gluten
   - sans-lactose
 plate: 30
 quantite_desc: 30 parts par demi gastro
@@ -120,26 +121,6 @@ ingredients:
     comment: partie café
     allergens: []
     type: sucres
-  - uuid: vgec6e
-    name: Levure chimique
-    originalQuantity: 1
-    originalUnit: unité
-    normalizedQuantity: 11
-    normalizedUnit: gr.
-    comment: partie vanille
-    allergens:
-      - Gluten
-    type: lof
-  - uuid: vgec6e
-    name: Levure chimique
-    originalQuantity: 1
-    originalUnit: unité
-    normalizedQuantity: 11
-    normalizedUnit: gr.
-    comment: partie café
-    allergens:
-      - Gluten
-    type: lof
   - uuid: 1e3zhq
     name: Chocolat noir patissier 70p100
     originalQuantity: 50
@@ -213,6 +194,24 @@ ingredients:
     comment: Partie café
     allergens: []
     type: lof
+  - uuid: zb9tj8
+    name: Levure chimique sans gluten
+    originalQuantity: 1
+    originalUnit: unité
+    normalizedQuantity: 1
+    normalizedUnit: unité
+    comment: Partie vanille
+    allergens: []
+    type: lof
+  - uuid: zb9tj8
+    name: Levure chimique sans gluten
+    originalQuantity: 1
+    originalUnit: unité
+    normalizedQuantity: 1
+    normalizedUnit: unité
+    comment: Partie café
+    allergens: []
+    type: lof
 preparation: |-
   Faire séparément une pâte vanille et une pâte café chocolat.
 
@@ -240,7 +239,7 @@ permissionWrite:
   - 6931ecdccd2c8d8d15e5
 auteur: Marion
 createdAt: '2026-04-27T06:52:04.358+00:00'
-updatedAt: '2026-04-27T06:52:04.358+00:00'
+updatedAt: '2026-04-27T06:53:55.439+00:00'
 createdBy: 6931ecdccd2c8d8d15e5
 teams: []
 status: public

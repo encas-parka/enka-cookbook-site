@@ -356,12 +356,23 @@
   }
 
   function handleQuickSelectionAdd(materielIds: string[]) {
+    // Retirer les matériels qui étaient sélectionnés mais ont été décochés
+    const newIdsSet = new Set(materielIds);
+    selectedMateriels = selectedMateriels.filter((m) =>
+      newIdsSet.has(m.materielId),
+    );
+
+    // Ajouter les nouveaux matériels cochés
     materielIds.forEach((id) => {
-      const materiel = availableMateriels.find((m) => m.$id === id);
-      if (materiel) {
-        handleAddMateriel(materiel);
+      const already = selectedMateriels.find((m) => m.materielId === id);
+      if (!already) {
+        const materiel = availableMateriels.find((m) => m.$id === id);
+        if (materiel) {
+          handleAddMateriel(materiel);
+        }
       }
     });
+
     showQuickSelection = false;
   }
 

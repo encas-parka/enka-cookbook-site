@@ -515,16 +515,11 @@ import {
 
     <div class="mt-4 flex-1 lg:ml-96">
       <!-- Header -->
-      <div class="mb-4 flex flex-wrap items-center justify-between gap-4">
-        <div class="flex items-center gap-4">
-          <Package class="text-primary size-5" />
-          <h2 class="text-xl font-bold">
-            Matériel ({eventMaterielStore?.count})- {currentEvent?.name}
-          </h2>
-        </div>
-        {#if canEdit}
-          {@render addDropDown()}
-        {/if}
+      <div class="mb-4 flex flex-wrap items-center gap-4">
+        <Package class="text-primary size-5" />
+        <h2 class="text-xl font-bold">
+          Matériel ({eventMaterielStore?.count})- {currentEvent?.name}
+        </h2>
       </div>
 
       <!-- Bloc Documents attachés -->
@@ -622,6 +617,7 @@ import {
         {activeBadges}
         onRemoveBadge={removeBadge}
         onResetFilters={resetFilters}
+        addAction={canEdit ? addDropDown : undefined}
       />
 
       <!-- Loading -->

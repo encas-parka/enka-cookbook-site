@@ -3,6 +3,7 @@
     EventMaterielSort,
     EventMaterielSortField,
   } from "$lib/types/event-materiel.types";
+  import type { Snippet } from "svelte";
   import {
     ArrowDownNarrowWide,
     ArrowDownAZ,
@@ -24,6 +25,7 @@
     activeBadges: ActiveBadge[];
     onRemoveBadge: (id: string) => void;
     onResetFilters: () => void;
+    addAction?: Snippet;
   }
 
   let {
@@ -33,6 +35,7 @@
     activeBadges,
     onRemoveBadge,
     onResetFilters,
+    addAction,
   }: Props = $props();
 
   type SortOption = {
@@ -78,6 +81,9 @@
         {/each}
       </div>
     </fieldset>
+    {#if addAction}
+      {@render addAction()}
+    {/if}
   </div>
 
   {#if activeBadges.length > 0}

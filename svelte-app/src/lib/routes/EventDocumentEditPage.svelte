@@ -29,6 +29,8 @@
   let isSaving = $state(false);
   let iHoldLock = $state(false);
   let heartbeatInterval: ReturnType<typeof setInterval> | null = null;
+  let autosaveInterval: ReturnType<typeof setInterval> | null = null;
+  let pendingManualSave = $state(false);
   let initialDocumentSnapshot = $state<string>("");
 
   // docId non-réactif capturé au moment de l'acquisition du lock
@@ -112,6 +114,7 @@
       iHoldLock = true;
       lockedDocId = docId;
       startHeartbeat();
+      startAutosave();
       return true;
     } catch (error) {
       console.error("[EventDocumentEditPage] Erreur acquisition lock:", error);
@@ -144,6 +147,52 @@
     }
   }
 
+  // ============================================================================
+  // AUTOSAVE (toutes les 5 minutes, sans quitter le mode édition)
+  // ============================================================================
+
+  const AUTOSAVE_DELAY = 300000; // 5 minutes
+
+  async function performAutosave() {
+    if (!isDirty || isSaving || !iHoldLock || !storeDoc || !isValid || !online.current) return;
+
+    isSaving = true;
+    try {
+      await teamdocsStore.updateDocument(docId, {
+        title: title.trim(),
+        content,
+        tags: [...selectedTags],
+      });
+      // Mettre à jour le snapshot → isDirty passe à false
+      initialDocumentSnapshot = JSON.stringify({ title, content, tags: [...selectedTags] });
+      toastService.info("Sauvegarde automatique effectuée");
+    } catch (error) {
+      console.error("[EventDocumentEditPage] Erreur autosave:", error);
+      // Pas de toast d'erreur pour l'autosave — l'utilisateur sera notifié au prochain save manuel
+    } finally {
+      isSaving = false;
+      // Si l'utilisateur a demandé un save manuel pendant l'autosave, on le déclenche
+      if (pendingManualSave) {
+        pendingManualSave = false;
+        handleSave();
+      }
+    }
+  }
+
+  function startAutosave() {
+    stopAutosave();
+    autosaveInterval = setInterval(() => {
+      performAutosave();
+    }, AUTOSAVE_DELAY);
+  }
+
+  function stopAutosave() {
+    if (autosaveInterval) {
+      clearInterval(autosaveInterval);
+      autosaveInterval = null;
+    }
+  }
+
   /**
    * Libère le lock
    * Cleanup local synchrone + release serveur fire-and-forget
@@ -157,6 +206,7 @@
 
     // 1. Cleanup local IMMÉDIAT (synchrone)
     stopHeartbeat();
+    stopAutosave();
     iHoldLock = false;
     lockedDocId = null;
 
@@ -250,7 +300,12 @@
   // ============================================================================
 
   async function handleSave() {
-    if (!isValid || isSaving || !storeDoc) return;
+    if (!isValid || !storeDoc) return;
+    // Si un autosave est en cours, on mémorise la demande pour l'exécuter après
+    if (isSaving) {
+      pendingManualSave = true;
+      return;
+    }
     isSaving = true;
     try {
       await teamdocsStore.updateDocument(docId, {

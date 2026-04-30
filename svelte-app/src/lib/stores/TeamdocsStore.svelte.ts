@@ -260,32 +260,6 @@ export class TeamdocsStore {
   }
 
   // =============================================================================
-  // LOCK MANAGEMENT
-  // =============================================================================
-
-  async updateDocumentLock(
-    docId: string,
-    lockedBy: string | null,
-    lockedByName: string | null = null,
-  ): Promise<void> {
-    if (!globalState.userId) return;
-
-    try {
-      await this.#collection.update(docId, {
-        lockedBy,
-        lockedByName,
-      } as Partial<Teamdocs>);
-
-      console.log(
-        `[TeamdocsStore] Verrou ${docId} mis à jour: ${lockedBy || "libéré"}`,
-      );
-    } catch (error) {
-      console.error(`[TeamdocsStore] Erreur verrouillage ${docId}:`, error);
-      throw error;
-    }
-  }
-
-  // =============================================================================
   // CLEANUP
   // =============================================================================
 

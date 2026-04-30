@@ -321,8 +321,8 @@
       // Charger le lock en arrière-plan (non-bloquant)
       isBusy = true;
       try {
-        activeLock = await locksService.getLock(eventId);
-        lockUnsub = locksService.subscribeToLock(eventId, (lock) => {
+        activeLock = await locksService.getLock(`event_${eventId}`);
+        lockUnsub = locksService.subscribeToLock(`event_${eventId}`, (lock) => {
           console.log("[EventEditPage] 🔒 Verrou mis à jour:", {
             lockedBy: lock?.userName,
             userId: lock?.userId,
@@ -390,7 +390,7 @@
     isAcquiringLock = true;
     try {
       const success = await locksService.acquireLock(
-        eventId,
+        `event_${eventId}`,
         globalState.userId,
         globalState.userName,
       );
@@ -421,7 +421,7 @@
     if (!eventIdToRelease || !globalState.userId) return;
 
     try {
-      await locksService.releaseLock(eventIdToRelease, globalState.userId);
+      await locksService.releaseLock(`event_${eventIdToRelease}`, globalState.userId);
       console.log("🔓 Verrou libéré");
     } catch (error) {
       console.error("❌ Erreur libération verrou:", error);
@@ -595,7 +595,7 @@
       if (eventId && globalState.userId) {
         try {
           await locksService.acquireLock(
-            eventId,
+            `event_${eventId}`,
             globalState.userId,
             globalState.userName,
           );
@@ -664,6 +664,29 @@
     return () => {
       window.removeEventListener("beforeunload", handleBeforeUnload);
     };
+  });
+
+  // Rafraîchir le lock quand l'onglet redevient visible (mobile/tab arrière-plan)
+  $effect(() => {
+    const handleVisibility = async () => {
+      if (document.visibilityState !== 'visible') return;
+      if (!lockedEventId || !globalState.userId) return;
+
+      const success = await locksService.acquireLock(
+        `event_${lockedEventId}`,
+        globalState.userId,
+        globalState.userName,
+      );
+
+      if (!success) {
+        toastService.warning(
+          `Cet événement est maintenant édité par ${lockedByUserName}`,
+        );
+      }
+    };
+
+    document.addEventListener("visibilitychange", handleVisibility);
+    return () => document.removeEventListener("visibilitychange", handleVisibility);
   });
 
   // ============================================================================

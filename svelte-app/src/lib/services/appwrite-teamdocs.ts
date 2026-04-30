@@ -207,29 +207,6 @@ export async function deleteDocument(id: string): Promise<void> {
 // LOCKS OPERATIONS
 // =============================================================================
 
-/**
- * Met à jour le lock d'un document (heartbeat)
- * Le lock est stocké dans les champs lockedBy et lockedByName du document
- * @param docId - ID du document
- * @param lockedBy - userId pour verrouiller, null pour libérer
- * @param lockedByName - nom du détenteur, null pour libérer
- */
-export async function updateDocumentLock(
-  docId: string,
-  lockedBy: string | null,
-  lockedByName: string | null = null,
-): Promise<void> {
-  try {
-    await updateDocument(docId, { lockedBy, lockedByName });
-    console.log(
-      `[appwrite-teamdocs] Lock ${docId} mis à jour: ${lockedBy || "libéré"}`,
-    );
-  } catch (error) {
-    console.error(`[appwrite-teamdocs] Erreur verrouillage ${docId}:`, error);
-    throw error;
-  }
-}
-
 // =============================================================================
 // REALTIME SUBSCRIPTIONS
 // =============================================================================

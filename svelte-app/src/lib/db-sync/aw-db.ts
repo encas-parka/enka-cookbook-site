@@ -148,7 +148,7 @@ export class EnkaDB extends Dexie {
       materiels: "$id, type, status, owner, deleted",
       materielLoans: "$id, status, ownerId, eventId, startDate, endDate",
       eventMateriels: "$id, eventId, type, status, groupId",
-      teamdocs: "$id, teamId, eventId, status, lockedBy",
+      teamdocs: "$id, teamId, eventId, status",
       locks: "$id, userId, expiresAt",
       eventTodos: "$id, eventId, status, taskOn, priority",
       shareLinks: "$id, target_id, link_type, isActive",

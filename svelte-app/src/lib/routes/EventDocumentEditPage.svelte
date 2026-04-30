@@ -3,7 +3,7 @@
   import { eventsStore } from "$lib/stores/EventsStore.svelte";
   import { globalState } from "$lib/stores/GlobalState.svelte";
   import { toastService } from "$lib/services/toast.service.svelte";
-  import { navigate } from "$lib/router";
+  import { navigate, route, searchParams } from "$lib/router";
   import { onDestroy, onMount } from "svelte";
   import { fade } from "svelte/transition";
   import { Save, Lock, Edit3, Eye, Download } from "@lucide/svelte";
@@ -13,7 +13,7 @@
   import { navBarStore } from "$lib/stores/NavBarStore.svelte";
   import { statusBarStore } from "$lib/stores/StatusBarStore.svelte";
   import { online } from "svelte/reactivity/window";
-  import { route, searchParams } from "$lib/router";
+  import { locksService, type AppwriteLock } from "$lib/services/appwrite-locks";
   import { shareOrDownload, toSlug } from "$lib/utils/share-utils";
 
   let eventId = $derived(route.params.id || "");
@@ -27,15 +27,17 @@
   let content = $state("");
   let isLoading = $state(true);
   let isSaving = $state(false);
-  let iHoldLock = $state(false);
-  let heartbeatInterval: ReturnType<typeof setInterval> | null = null;
   let autosaveInterval: ReturnType<typeof setInterval> | null = null;
   let pendingManualSave = $state(false);
   let initialDocumentSnapshot = $state<string>("");
 
+  // Lock state (locksService)
+  let activeLock = $state<AppwriteLock | null>(null);
+  let lockUnsub: (() => void) | null = null;
+  let isAcquiringLock = $state(false);
   // docId non-réactif capturé au moment de l'acquisition du lock
   // pour garantir sa disponibilité lors du cleanup (onDestroy)
-  let lockedDocId: string | null = null;
+  let lockedResourceId: string | null = null;
 
   // Mode édition ou preview
   const mode = $derived(
@@ -61,9 +63,6 @@
   const storeDoc = $derived(teamdocsStore.getDocumentById(docId));
   const currentEvent = $derived(eventsStore.getEventById(eventId));
 
-  const lockHolder = $derived(storeDoc?.lockedBy ?? null);
-  const lockHolderName = $derived(storeDoc?.lockedByName ?? null);
-
   // ============================================================================
   // DERIVED STATES
   // ============================================================================
@@ -77,18 +76,13 @@
     return currentSnapshot !== initialDocumentSnapshot;
   });
 
-  const LOCK_TIMEOUT_MS = 300000; // 5 minutes
-
-  const isLockedByMe = $derived(iHoldLock);
+  const isLockedByMe = $derived.by(() => {
+    if (!activeLock) return false;
+    return activeLock.userId === globalState.userId;
+  });
   const isLockedByOthers = $derived.by(() => {
-    if (!lockHolder || lockHolder === globalState.userId || iHoldLock)
-      return false;
-    const lastUpdate = storeDoc?.$updatedAt
-      ? new Date(storeDoc.$updatedAt)
-      : null;
-    if (lastUpdate && Date.now() - lastUpdate.getTime() > LOCK_TIMEOUT_MS)
-      return false; // Lock expiré → considéré comme libre
-    return true;
+    if (!activeLock) return false;
+    return activeLock.userId !== globalState.userId;
   });
   const canEdit = $derived(
     online.current && !isLockedByOthers && !isLoading && !isSaving,
@@ -96,68 +90,55 @@
   const isValid = $derived(title.trim().length > 0);
 
   // ============================================================================
-  // LOCK LIFECYCLE
+  // LOCK LIFECYCLE (locksService)
   // ============================================================================
 
-  async function attemptAcquireLock(): Promise<boolean> {
-    if (!docId || !globalState.userId || !storeDoc) return false;
+  async function acquireLock(): Promise<boolean> {
+    if (!docId || !globalState.userId || isAcquiringLock) return false;
 
+    isAcquiringLock = true;
     try {
-      const currentLockedBy = storeDoc.lockedBy;
-      const lastUpdate = storeDoc.$updatedAt
-        ? new Date(storeDoc.$updatedAt)
-        : null;
-      const isExpired =
-        lastUpdate && Date.now() - lastUpdate.getTime() > LOCK_TIMEOUT_MS;
-
-      if (currentLockedBy && currentLockedBy !== globalState.userId) {
-        if (!isExpired) {
-          return false; // Verrouillé par quelqu'un d'autre, non expiré
-        }
-        console.log(
-          "[EventDocumentEditPage] Verrou précédent expiré, reprise...",
-        );
-      }
-
-      await teamdocsStore.updateDocumentLock(
-        docId,
+      const resourceId = `doc_${docId}`;
+      const success = await locksService.acquireLock(
+        resourceId,
         globalState.userId,
-        globalState.userName || null,
+        globalState.userName || "",
       );
-      iHoldLock = true;
-      lockedDocId = docId;
-      startHeartbeat();
-      startAutosave();
-      return true;
+
+      if (success) {
+        lockedResourceId = resourceId;
+        startAutosave();
+        return true;
+      } else {
+        toastService.warning(
+          `Ce document est en cours de modification par ${activeLock?.userName || "un autre utilisateur"}`,
+        );
+        return false;
+      }
     } catch (error) {
       console.error("[EventDocumentEditPage] Erreur acquisition lock:", error);
       toastService.error("Impossible de verrouiller le document");
       return false;
+    } finally {
+      isAcquiringLock = false;
     }
   }
 
-  function startHeartbeat() {
-    stopHeartbeat();
-    heartbeatInterval = setInterval(async () => {
-      if (iHoldLock && docId) {
-        try {
-          await teamdocsStore.updateDocumentLock(
-            docId,
-            globalState.userId,
-            globalState.userName || null,
-          );
-        } catch (error) {
-          console.error("[EventDocumentEditPage] Erreur heartbeat:", error);
-        }
-      }
-    }, 120000);
-  }
+  async function releaseLock(): Promise<void> {
+    const resourceIdToRelease = lockedResourceId;
+    if (!resourceIdToRelease || !globalState.userId) return;
 
-  function stopHeartbeat() {
-    if (heartbeatInterval) {
-      clearInterval(heartbeatInterval);
-      heartbeatInterval = null;
+    // 1. Cleanup local IMMÉDIAT (synchrone)
+    stopAutosave();
+    lockedResourceId = null;
+
+    // 2. Release serveur (fire-and-forget)
+    try {
+      await locksService.releaseLock(resourceIdToRelease, globalState.userId);
+    } catch (error) {
+      console.error("[EventDocumentEditPage] Erreur libération lock:", error);
     }
+    // activeLock sera mis à jour par le realtime
   }
 
   // ============================================================================
@@ -167,10 +148,24 @@
   const AUTOSAVE_DELAY = 300000; // 5 minutes
 
   async function performAutosave() {
+    // 1. Heartbeat : rafraîchir le lock si on le détient (avant le early return)
+    if (lockedResourceId && globalState.userId) {
+      try {
+        await locksService.acquireLock(
+          lockedResourceId,
+          globalState.userId,
+          globalState.userName || "",
+        );
+      } catch (e) {
+        console.error("[EventDocumentEditPage] Erreur heartbeat lock:", e);
+      }
+    }
+
+    // 2. Sauvegarde si des modifications existent
     if (
       !isDirty ||
       isSaving ||
-      !iHoldLock ||
+      !isLockedByMe ||
       !storeDoc ||
       !isValid ||
       !online.current
@@ -218,31 +213,6 @@
     }
   }
 
-  /**
-   * Libère le lock
-   * Cleanup local synchrone + release serveur fire-and-forget
-   *
-   * Utilise lockedDocId (non-réactif) car docId (réactif) peut déjà
-   * être vide lors du onDestroy si la route a déjà changé.
-   */
-  function releaseLock(): void {
-    const docIdToRelease = lockedDocId;
-    if (!docIdToRelease || !iHoldLock) return;
-
-    // 1. Cleanup local IMMÉDIAT (synchrone)
-    stopHeartbeat();
-    stopAutosave();
-    iHoldLock = false;
-    lockedDocId = null;
-
-    // 2. Release serveur (fire-and-forget)
-    teamdocsStore
-      .updateDocumentLock(docIdToRelease, null, null)
-      .catch((error) => {
-        console.error("[EventDocumentEditPage] Erreur libération lock:", error);
-      });
-  }
-
   // ============================================================================
   // LIFECYCLE
   // ============================================================================
@@ -276,6 +246,22 @@
         tags: selectedTags,
       });
 
+      // Charger le lock en arrière-plan + souscription realtime
+      try {
+        const resourceId = `doc_${docId}`;
+        activeLock = await locksService.getLock(resourceId);
+        lockUnsub = locksService.subscribeToLock(resourceId, (lock) => {
+          console.log("[EventDocumentEditPage] 🔒 Verrou mis à jour:", {
+            lockedBy: lock?.userName,
+            userId: lock?.userId,
+            expiresAt: lock?.expiresAt,
+          });
+          activeLock = lock;
+        });
+      } catch (error) {
+        console.error("[EventDocumentEditPage] Erreur chargement lock:", error);
+      }
+
       // Le lock est acquis réactivement via le $effect ci-dessous,
       // uniquement si le mode initial est "edit"
     } catch (error) {
@@ -287,6 +273,12 @@
   });
 
   onDestroy(() => {
+    // Désabonner du realtime des locks
+    if (lockUnsub) {
+      lockUnsub();
+      lockUnsub = null;
+    }
+    // Libérer le lock si détenu
     releaseLock();
     statusBarStore.clearLockStatus();
   });
@@ -295,11 +287,17 @@
   $effect(() => {
     if (isLoading || !storeDoc) return;
 
-    if (mode === "edit" && !isLockedByOthers && !iHoldLock) {
-      attemptAcquireLock();
+    // Forcer le mode preview quand le document est locké par un autre
+    if (isLockedByOthers && mode === "edit") {
+      searchParams.set("mode", "preview");
+      return;
     }
 
-    if (mode === "preview" && iHoldLock && !isDirty) {
+    if (mode === "edit" && !isLockedByOthers && !isLockedByMe) {
+      acquireLock();
+    }
+
+    if (mode === "preview" && isLockedByMe && !isDirty) {
       releaseLock();
     }
   });
@@ -313,6 +311,29 @@
     };
     window.addEventListener("beforeunload", handleBeforeUnload);
     return () => window.removeEventListener("beforeunload", handleBeforeUnload);
+  });
+
+  // Rafraîchir le lock quand l'onglet redevient visible (mobile/tab arrière-plan)
+  $effect(() => {
+    const handleVisibility = async () => {
+      if (document.visibilityState !== 'visible') return;
+      if (!lockedResourceId || !globalState.userId) return;
+
+      const success = await locksService.acquireLock(
+        lockedResourceId,
+        globalState.userId,
+        globalState.userName || "",
+      );
+
+      if (!success) {
+        toastService.warning(
+          `Ce document est maintenant édité par ${activeLock?.userName || "un autre utilisateur"}`,
+        );
+      }
+    };
+
+    document.addEventListener("visibilitychange", handleVisibility);
+    return () => document.removeEventListener("visibilitychange", handleVisibility);
   });
 
   // ============================================================================
@@ -351,7 +372,7 @@
 
       // Basculer en mode preview
       // Le $effect réactif libérera le lock automatiquement
-      // (condition : mode === "preview" && iHoldLock && !isDirty)
+      // (condition : mode === "preview" && isLockedByMe && !isDirty)
       searchParams.set("mode", "preview");
 
       toastService.success("Document enregistré");
@@ -398,7 +419,7 @@
     if (isLockedByOthers) {
       statusBarStore.setLockStatus({
         type: "locked-by-other",
-        userName: lockHolderName || "un autre utilisateur",
+        userName: activeLock?.userName || "un autre utilisateur",
       });
     } else if (isLockedByMe) {
       statusBarStore.setLockStatus({ type: "locked-by-me" });
@@ -482,7 +503,7 @@
           <p class="text-sm">
             Ce document est actuellement édité par
             <span class="font-bold"
-              >{lockHolderName || "un autre utilisateur"}</span
+              >{activeLock?.userName || "un autre utilisateur"}</span
             >. Vous ne pouvez pas le modifier pour le moment.
           </p>
         </div>

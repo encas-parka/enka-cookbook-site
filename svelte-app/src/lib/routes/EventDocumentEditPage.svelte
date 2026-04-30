@@ -69,14 +69,27 @@
   // ============================================================================
 
   const isDirty = $derived.by(() => {
-    const currentSnapshot = JSON.stringify({ title, content, tags: selectedTags });
+    const currentSnapshot = JSON.stringify({
+      title,
+      content,
+      tags: selectedTags,
+    });
     return currentSnapshot !== initialDocumentSnapshot;
   });
 
+  const LOCK_TIMEOUT_MS = 300000; // 5 minutes
+
   const isLockedByMe = $derived(iHoldLock);
-  const isLockedByOthers = $derived(
-    !!lockHolder && lockHolder !== globalState.userId && !iHoldLock,
-  );
+  const isLockedByOthers = $derived.by(() => {
+    if (!lockHolder || lockHolder === globalState.userId || iHoldLock)
+      return false;
+    const lastUpdate = storeDoc?.$updatedAt
+      ? new Date(storeDoc.$updatedAt)
+      : null;
+    if (lastUpdate && Date.now() - lastUpdate.getTime() > LOCK_TIMEOUT_MS)
+      return false; // Lock expiré → considéré comme libre
+    return true;
+  });
   const canEdit = $derived(
     online.current && !isLockedByOthers && !isLoading && !isSaving,
   );
@@ -95,7 +108,7 @@
         ? new Date(storeDoc.$updatedAt)
         : null;
       const isExpired =
-        lastUpdate && Date.now() - lastUpdate.getTime() > 300000;
+        lastUpdate && Date.now() - lastUpdate.getTime() > LOCK_TIMEOUT_MS;
 
       if (currentLockedBy && currentLockedBy !== globalState.userId) {
         if (!isExpired) {
@@ -154,7 +167,15 @@
   const AUTOSAVE_DELAY = 300000; // 5 minutes
 
   async function performAutosave() {
-    if (!isDirty || isSaving || !iHoldLock || !storeDoc || !isValid || !online.current) return;
+    if (
+      !isDirty ||
+      isSaving ||
+      !iHoldLock ||
+      !storeDoc ||
+      !isValid ||
+      !online.current
+    )
+      return;
 
     isSaving = true;
     try {
@@ -164,7 +185,11 @@
         tags: [...selectedTags],
       });
       // Mettre à jour le snapshot → isDirty passe à false
-      initialDocumentSnapshot = JSON.stringify({ title, content, tags: [...selectedTags] });
+      initialDocumentSnapshot = JSON.stringify({
+        title,
+        content,
+        tags: [...selectedTags],
+      });
       toastService.info("Sauvegarde automatique effectuée");
     } catch (error) {
       console.error("[EventDocumentEditPage] Erreur autosave:", error);
@@ -245,7 +270,11 @@
       title = doc.title || "";
       content = doc.content || "";
       selectedTags = doc.tags || [];
-      initialDocumentSnapshot = JSON.stringify({ title, content, tags: selectedTags });
+      initialDocumentSnapshot = JSON.stringify({
+        title,
+        content,
+        tags: selectedTags,
+      });
 
       // Le lock est acquis réactivement via le $effect ci-dessous,
       // uniquement si le mode initial est "edit"
@@ -314,7 +343,11 @@
         tags: [...selectedTags],
       });
       // Mettre à jour le snapshot → isDirty passe à false
-      initialDocumentSnapshot = JSON.stringify({ title, content, tags: [...selectedTags] });
+      initialDocumentSnapshot = JSON.stringify({
+        title,
+        content,
+        tags: [...selectedTags],
+      });
 
       // Basculer en mode preview
       // Le $effect réactif libérera le lock automatiquement

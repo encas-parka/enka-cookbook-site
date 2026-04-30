@@ -103,9 +103,18 @@
   // DERIVED STATES
   // ============================================================================
 
-  const isLockedByOthers = $derived(
-    !!storeLockedBy && storeLockedBy !== globalState.userId && !iHoldLock,
-  );
+  const LOCK_TIMEOUT_MS = 300000; // 5 minutes
+
+  const isLockedByOthers = $derived.by(() => {
+    if (!storeLockedBy || storeLockedBy === globalState.userId || iHoldLock)
+      return false;
+    const lastUpdate = storeDoc?.$updatedAt
+      ? new Date(storeDoc.$updatedAt)
+      : null;
+    if (lastUpdate && Date.now() - lastUpdate.getTime() > LOCK_TIMEOUT_MS)
+      return false; // Lock expiré → considéré comme libre
+    return true;
+  });
   const isLockedByMe = $derived(iHoldLock);
   const canEdit = $derived(
     online.current && !isLockedByOthers && !isLoading && !isSaving,
@@ -132,7 +141,7 @@
         ? new Date(storeDoc.$updatedAt)
         : null;
       const isExpired =
-        lastUpdate && Date.now() - lastUpdate.getTime() > 300000; // 5 min
+        lastUpdate && Date.now() - lastUpdate.getTime() > LOCK_TIMEOUT_MS;
 
       if (currentLockedBy && currentLockedBy !== globalState.userId) {
         if (isExpired) {

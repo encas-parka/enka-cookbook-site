@@ -21,7 +21,6 @@ import {
   import { nativeTeamsStore } from "$lib/stores/NativeTeamsStore.svelte";
   import { materielStore } from "$lib/stores/MaterielStore.svelte";
   import { route } from "$lib/router";
-  import EventMaterielCard from "$lib/components/eventMateriel/EventMaterielCard.svelte";
   import EventMaterielGroupCard from "$lib/components/eventMateriel/EventMaterielGroupCard.svelte";
   import EventMaterielAllocationForm from "$lib/components/eventMateriel/EventMaterielAllocationForm.svelte";
   import EventMaterielFilters, {
@@ -664,7 +663,6 @@ import {
               {group}
               {canEdit}
               onEditItem={(item) => openEditForm(item.$id)}
-              onEditLoan={handleEditLoan}
               onAddAllocation={(headerId, status) => {
                 allocatingForHeaderId = headerId;
                 allocationPresetStatus = status;
@@ -795,6 +793,7 @@ import {
   onClose={closeMaterielModal}
   {eventId}
   itemId={materielModalId}
+  onEditLoan={handleEditLoan}
 />
 
 <!-- Formulaire d'allocation -->

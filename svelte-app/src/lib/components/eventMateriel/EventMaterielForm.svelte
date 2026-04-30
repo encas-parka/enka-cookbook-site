@@ -13,6 +13,7 @@
      User,
      CircleDot,
      CircleAlert,
+     ExternalLink,
    } from "@lucide/svelte";
    import { toastService } from "$lib/services/toast.service.svelte";
    import MaterielNameSuggest from "$lib/components/eventMateriel/MaterielNameSuggest.svelte";
@@ -36,6 +37,7 @@
     errors?: string[];
     dirty?: boolean;
     onExistingSelected?: ((itemId: string) => void) | null;
+    onEditLoan?: ((loanId: string) => void) | null;
   }
 
   let {
@@ -50,6 +52,7 @@
     errors = $bindable([]),
     dirty = $bindable(false),
     onExistingSelected = null,
+    onEditLoan = null,
   }: Props = $props();
 
   // svelte-ignore state_referenced_locally
@@ -74,6 +77,7 @@
   let attempted = $state(false);
 
   const isEdit = $derived(!!initialData);
+  const isLoanLinked = $derived(!!initialData?.loanId);
 
   // svelte-ignore state_referenced_locally
   const origName = initialData?.name || "";
@@ -227,43 +231,69 @@
 </script>
 
 <form onsubmit={handleSubmit} class="space-y-4">
-  <div class="text-base-content/70 py-2 text-sm">
-    {#if isEdit}
-      <div class="mb-2">
-        <strong>{initialData?.name}</strong>
-        {#if mode === "allocation"}
-          <span class="badge badge-info badge-xs ml-1">allocation</span>
-        {:else}
-          <span class="badge badge-warning badge-xs ml-1">besoin</span>
-        {/if}
-      </div>
-      <p>
-        Modifier les détails {#if mode === "allocation"}
-          de l'apport
-        {:else}
-          concernant le besoin de ce matériel{/if}.
-      </p>
-    {:else}
-      <p>Ajouter à la liste du matériel requis</p>
-    {/if}
-  </div>
+   <div class="text-base-content/70 py-2 text-sm">
+     {#if isEdit}
+       <div class="mb-2">
+         <strong>{initialData?.name}</strong>
+         {#if mode === "allocation"}
+           <span class="badge badge-info badge-xs ml-1">allocation</span>
+         {:else}
+           <span class="badge badge-warning badge-xs ml-1">besoin</span>
+         {/if}
+       </div>
+       <p>
+         Modifier les détails {#if mode === "allocation"}
+           de l'apport
+         {:else}
+           concernant le besoin de ce matériel{/if}.
+       </p>
+     {:else}
+       <p>Ajouter à la liste du matériel requis</p>
+     {/if}
+   </div>
 
-  {#if isEdit}
-    <fieldset class="fieldset">
-      <legend class="fieldset-legend"
-        ><Package class="inline size-4" /> Nom</legend
-      >
-      <label class="input w-full {nameError ? 'input-error' : ''}">
-        <Package class="h-4 w-4 opacity-50" />
-        <input
-          type="text"
-          bind:value={name}
-          placeholder="Nom * (ex: Table pliante)"
-          class="grow"
-          required
-        />
-      </label>
-    </fieldset>
+   {#if isLoanLinked}
+     <div class="bg-base-200/80 rounded-lg p-3">
+       <div class="flex items-center justify-between gap-2">
+         <div class="flex flex-wrap items-center gap-2 text-sm">
+           <ExternalLink class="text-secondary size-4 shrink-0" />
+           <span class="text-base-content/70">Réservation de</span>
+           <span class="font-medium">{initialData?.fromTeamName || "une équipe"}</span>
+         </div>
+         {#if onEditLoan && initialData?.loanId}
+           <button
+             type="button"
+             class="btn btn-ghost btn-xs text-secondary gap-1"
+             onclick={() => onEditLoan(initialData!.loanId!)}
+           >
+             <ExternalLink class="size-3" />
+             Voir la réservation
+           </button>
+         {/if}
+       </div>
+       <p class="text-base-content/50 mt-1 text-xs">
+         Nom, quantité, type et statut sont gérés par la réservation.
+       </p>
+     </div>
+   {/if}
+
+   {#if isEdit}
+     <fieldset class="fieldset">
+       <legend class="fieldset-legend"
+         ><Package class="inline size-4" /> Nom</legend
+       >
+       <label class="input w-full {nameError ? 'input-error' : ''}">
+         <Package class="h-4 w-4 opacity-50" />
+         <input
+           type="text"
+           bind:value={name}
+           placeholder="Nom * (ex: Table pliante)"
+           class="grow"
+           required
+           disabled={isLoanLinked}
+         />
+       </label>
+     </fieldset>
   {:else}
     <MaterielNameSuggest
       value={name}
@@ -274,41 +304,42 @@
   {/if}
 
   <div class="grid grid-cols-1 gap-4">
-    <fieldset class="fieldset">
-      <legend class="fieldset-legend"
-        ><Hash class="inline size-4" /> Quantité {#if mode !== "allocation"}
-          requise{/if}</legend
-      >
-      <label class="input w-full {quantityError ? 'input-error' : ''}">
-        <input
-          type="number"
-          min="1"
-          bind:value={quantity}
-          placeholder="Quantité"
-          class="grow"
-          required
-        />
-      </label>
-    </fieldset>
+     <fieldset class="fieldset">
+       <legend class="fieldset-legend"
+         ><Hash class="inline size-4" /> Quantité {#if mode !== "allocation"}
+           requise{/if}</legend
+       >
+       <label class="input w-full {quantityError ? 'input-error' : ''}">
+         <input
+           type="number"
+           min="1"
+           bind:value={quantity}
+           placeholder="Quantité"
+           class="grow"
+           required
+           disabled={isLoanLinked}
+         />
+       </label>
+     </fieldset>
 
-    <fieldset class="fieldset">
-      <legend class="fieldset-legend"
-        ><Shapes class="inline size-4" /> Type</legend
-      >
-      <select bind:value={type} class="select w-full {typeError ? 'select-error' : ''}">
-        <option value="" disabled selected>Sélectionner</option>
-        {#each types as t (t.value)}
-          <option value={t.value}>{t.label}</option>
-        {/each}
-      </select>
-    </fieldset>
+     <fieldset class="fieldset">
+       <legend class="fieldset-legend"
+         ><Shapes class="inline size-4" /> Type</legend
+       >
+       <select bind:value={type} class="select w-full {typeError ? 'select-error' : ''}" disabled={isLoanLinked}>
+         <option value="" disabled selected>Sélectionner</option>
+         {#each types as t (t.value)}
+           <option value={t.value}>{t.label}</option>
+         {/each}
+       </select>
+     </fieldset>
 
     {#if showStatus}
       <fieldset class="fieldset">
         <legend class="fieldset-legend"
           ><CircleDot class="inline size-4" /> Statut</legend
         >
-        <select bind:value={status} class="select w-full {statusClass}">
+        <select bind:value={status} class="select w-full {statusClass}" disabled={isLoanLinked}>
           {#each statuses as s (s.value)}
             <option value={s.value}>{s.label}</option>
           {/each}

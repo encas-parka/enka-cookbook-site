@@ -28,9 +28,10 @@
     onClose: () => void;
     eventId: string;
     itemId?: string | null;
+    onEditLoan?: (loanId: string) => void;
   }
 
-  let { isOpen, onClose, eventId, itemId = null }: Props = $props();
+  let { isOpen, onClose, eventId, itemId = null, onEditLoan }: Props = $props();
 
   let activeItemId = $state<string | null>(null);
   let error = $state<string | null>(null);
@@ -82,17 +83,6 @@
     );
     return header?.name || null;
   });
-
-  function canEditWhereForItem(): boolean {
-    if (!currentItem?.loanId) return true;
-    // Check if user has access via their teams
-    const myTeamIds = new Set(
-      eventMaterielStore.items
-        .filter((i) => i.loanId === currentItem!.loanId)
-        .map(() => true),
-    );
-    return true; // Simplified — parent page already controls permissions
-  }
 
   // Sélection d'un item existant dans les suggestions → bascule en mode édition
   function handleExistingSelected(id: string) {
@@ -254,6 +244,11 @@
       }
     }
   }
+
+  function handleOpenLoan(loanId: string) {
+    handleClose();
+    onEditLoan?.(loanId);
+  }
 </script>
 
 <ModalContainer
@@ -283,6 +278,7 @@
             bind:errors={formErrors}
             bind:dirty={formDirty}
             onExistingSelected={handleExistingSelected}
+            onEditLoan={handleOpenLoan}
           />
         {/key}
       </div>

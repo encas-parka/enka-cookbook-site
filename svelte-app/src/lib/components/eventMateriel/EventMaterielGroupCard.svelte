@@ -30,13 +30,13 @@
     Utensils,
     Wrench,
     Zap,
+    CookingPot,
   } from "@lucide/svelte";
 
   interface Props {
     group: MaterielGroup;
     canEdit?: boolean;
     onEditItem?: (item: EventMateriel) => void;
-    onEditLoan?: (loanId: string) => void;
     onAddAllocation?: (headerId: string, status?: EventMaterielStatus) => void;
   }
 
@@ -44,7 +44,6 @@
     group,
     canEdit = true,
     onEditItem,
-    onEditLoan,
     onAddAllocation,
   }: Props = $props();
 
@@ -56,7 +55,7 @@
       case "electronic":
         return Zap;
       case "cooking":
-        return ChefHat;
+        return CookingPot;
       case "gaz":
         return Flame;
       case "dish":
@@ -64,8 +63,9 @@
       case "hygiene":
         return SoapDispenserDroplet;
       case "tools":
-      case "manual":
         return Wrench;
+      case "manual":
+        return ChefHat;
       case "other":
       default:
         return Package;
@@ -135,8 +135,7 @@
                   class="flex items-center gap-2 rounded-md px-2 py-1 {allocConfig.bgClass} group hover:cursor-pointer hover:shadow-sm"
                   onclick={(e) => {
                     e.stopPropagation();
-                    onEditItem && !alloc.loanId ? onEditItem(alloc) : null;
-                    onEditLoan ? onEditLoan(alloc.loanId!) : null;
+                    onEditItem?.(alloc);
                   }}
                   aria-label="Éditer l'allocation"
                 >
@@ -180,15 +179,13 @@
                   </span>
 
                   <!-- Edit alloc -->
-                  {#if canEdit && onEditItem && !alloc.loanId}
+                  {#if canEdit && onEditItem}
                     <Pencil class="ms-2 size-3.5 group-hover:scale-105" />
                   {/if}
 
-                  <!-- Edit loan -->
-                  {#if alloc.loanId && onEditLoan}
-                    <ClipboardEdit
-                      class="ms-2 size-3.5 group-hover:scale-105"
-                    />
+                  <!-- Loan indicator (visual only) -->
+                  {#if alloc.loanId}
+                    <ClipboardEdit class="ms-1 size-3.5 opacity-50" />
                   {/if}
                 </button>
               {/each}

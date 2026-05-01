@@ -23,11 +23,12 @@ import type {
   MaterielGroup,
 } from "$lib/types/event-materiel.types";
 import type { MaterielLoanItem } from "$lib/types/materiel.types";
-import {
-  listEventMaterielByLoan,
-} from "$lib/services/appwrite-event-materiel";
+import { listEventMaterielByLoan } from "$lib/services/appwrite-event-materiel";
 import { getMaterielTypeConfig } from "$lib/utils/materiel.utils";
-import { exportMaterielToCsv, formatAllocations } from "$lib/utils/materiel-csv-export";
+import {
+  exportMaterielToCsv,
+  formatAllocations,
+} from "$lib/utils/materiel-csv-export";
 import { globalState } from "./GlobalState.svelte";
 import { materielStore } from "./MaterielStore.svelte";
 import {
@@ -40,7 +41,11 @@ import {
 /**
  * Formatte un apport inline : "jean x12", "marie (lieu1) x2", "(lieu3) x5"
  */
-function formatAllocInline(qty: number, who?: string | null, where?: string | null): string {
+function formatAllocInline(
+  qty: number,
+  who?: string | null,
+  where?: string | null,
+): string {
   const whoStr = who?.trim() || "";
   const whereStr = where?.trim() || "";
   if (whoStr && whereStr) return `${whoStr} (${whereStr}) x${qty}`;
@@ -54,7 +59,9 @@ function formatAllocInline(qty: number, who?: string | null, where?: string | nu
  * Ex: "jean x12, marie (lieu1) x2"
  */
 function formatAllocsInline(allocs: EventMateriel[]): string {
-  return allocs.map((a) => formatAllocInline(a.quantity ?? 0, a.who, a.where)).join(", ");
+  return allocs
+    .map((a) => formatAllocInline(a.quantity ?? 0, a.who, a.where))
+    .join(", ");
 }
 
 export class EventMaterielStore {
@@ -130,9 +137,7 @@ export class EventMaterielStore {
   async initializeForEvent(eventId: string): Promise<void> {
     // Si déjà chargé pour le même event, ne pas recharger
     if (this.#currentEventId === eventId && this.#isInitialized) {
-      console.log(
-        `[EventMaterielStore] Déjà initialisé pour event ${eventId}`,
-      );
+      console.log(`[EventMaterielStore] Déjà initialisé pour event ${eventId}`);
       return;
     }
 
@@ -140,7 +145,7 @@ export class EventMaterielStore {
     if (this.#bridge) {
       this.#bridge.subscription.unsubscribe();
       this.#bridge = null;
-    this.#items = new Map();
+      this.#items = new Map();
     }
 
     this.#loading = true;
@@ -346,7 +351,10 @@ export class EventMaterielStore {
    * Vérifie si un item individuel matche les filtres donnés.
    * Utilisé pour le filtrage au niveau groupe.
    */
-  #itemMatchesFilters(item: EventMateriel, filters: EventMaterielFilters): boolean {
+  #itemMatchesFilters(
+    item: EventMateriel,
+    filters: EventMaterielFilters,
+  ): boolean {
     // Filtre par types
     if (filters.types?.length) {
       if (!filters.types.includes(item.type as EventMaterielType)) return false;
@@ -506,9 +514,9 @@ export class EventMaterielStore {
           }
           break;
         case "status":
-          cmp = this
-            .resolveStatus(a.header)
-            .localeCompare(this.resolveStatus(b.header));
+          cmp = this.resolveStatus(a.header).localeCompare(
+            this.resolveStatus(b.header),
+          );
           break;
         case "who":
           cmp = (a.header.who || "").localeCompare(b.header.who || "");
@@ -549,8 +557,7 @@ export class EventMaterielStore {
           headerWords.some((hw) => hw.includes(w) || w.includes(hw)),
         );
         score =
-          (overlap.length /
-            Math.max(searchWords.length, headerWords.length)) *
+          (overlap.length / Math.max(searchWords.length, headerWords.length)) *
           60;
       }
 
@@ -593,7 +600,9 @@ export class EventMaterielStore {
   async reattachAndCleanup(
     itemId: string,
     newHeaderId: string,
-  ): Promise<{ orphanDeleted: false } | { orphanDeleted: true; orphanName: string }> {
+  ): Promise<
+    { orphanDeleted: false } | { orphanDeleted: true; orphanName: string }
+  > {
     // Capturer l'état avant le déplacement
     const item = this.#items?.get(itemId);
     if (!item || !item.groupId) {
@@ -616,7 +625,11 @@ export class EventMaterielStore {
     ).length;
 
     // Nettoyage : header vide + quantités identiques → suppression automatique
-    if (remainingAllocations === 0 && oldHeader && (oldHeader.quantity ?? 0) === allocationQty) {
+    if (
+      remainingAllocations === 0 &&
+      oldHeader &&
+      (oldHeader.quantity ?? 0) === allocationQty
+    ) {
       await this.deleteItem(oldHeaderId);
       return { orphanDeleted: true, orphanName: oldHeader.name || "Sans nom" };
     }
@@ -643,10 +656,7 @@ export class EventMaterielStore {
     try {
       const existingItems = await listEventMaterielByLoan(loanId);
 
-      const existingByMaterielId = new Map<
-        string,
-        (typeof existingItems)[0]
-      >();
+      const existingByMaterielId = new Map<string, (typeof existingItems)[0]>();
       for (const item of existingItems) {
         if (item.sourceMaterielId) {
           existingByMaterielId.set(item.sourceMaterielId, item);
@@ -748,9 +758,7 @@ export class EventMaterielStore {
   async removeByLoanAndEvent(loanId: string, eventId: string): Promise<void> {
     try {
       const existingItems = await listEventMaterielByLoan(loanId);
-      const toDelete = existingItems.filter(
-        (item) => item.eventId === eventId,
-      );
+      const toDelete = existingItems.filter((item) => item.eventId === eventId);
 
       for (const item of toDelete) {
         await this.#collection.remove(item.$id);
@@ -781,10 +789,10 @@ export class EventMaterielStore {
       }
 
       // Si c'est un header, cascade-supprimer toutes ses allocations d'abord
+      let allocationCount = 0;
       if (!item.groupId) {
-        const allocations = this.#itemsList.filter(
-          (i) => i.groupId === itemId,
-        );
+        const allocations = this.#itemsList.filter((i) => i.groupId === itemId);
+        allocationCount = allocations.length;
         for (const allocation of allocations) {
           await this.#removeItemAndUpdateLoan(allocation);
         }
@@ -794,7 +802,7 @@ export class EventMaterielStore {
       await this.#removeItemAndUpdateLoan(item);
 
       console.log(
-        `[EventMaterielStore] deleteItemAndRemoveFromLoan: ${itemId}${!item.groupId ? ` + ${"cascade" /* count */} allocations` : ""}${item.loanId ? ` (loan ${item.loanId} updated)` : ""}`,
+        `[EventMaterielStore] deleteItemAndRemoveFromLoan: ${itemId}${allocationCount > 0 ? ` + ${allocationCount} allocations` : ""}${item.loanId ? ` (loan ${item.loanId} updated)` : ""}`,
       );
     } catch (err) {
       this.#error =
@@ -863,7 +871,9 @@ export class EventMaterielStore {
         );
 
         // Ligne principale : nom + besoin
-        lines.push("- " + (header.name || "Sans nom") + " : " + (header.quantity ?? 0));
+        lines.push(
+          "- " + (header.name || "Sans nom") + " : " + (header.quantity ?? 0),
+        );
 
         // Ok (toujours affiché, inline)
         if (confirmedAllocs.length > 0) {

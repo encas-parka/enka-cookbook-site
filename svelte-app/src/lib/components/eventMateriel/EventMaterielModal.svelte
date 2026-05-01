@@ -228,7 +228,9 @@
       );
       reattachTargetId = "";
       if (result.orphanDeleted) {
-        toastService.info(`Besoin "${result.orphanName}" supprimé (plus aucune réservation)`);
+        toastService.info(
+          `Besoin "${result.orphanName}" supprimé (plus aucune réservation)`,
+        );
       }
     } catch (err: any) {
       error = err.message || "Erreur lors du rattachement";
@@ -333,7 +335,9 @@
                     class="select select-sm grow"
                     bind:value={reattachTargetId}
                   >
-                    <option value="" disabled selected>Choisir un besoin…</option>
+                    <option value="" disabled selected
+                      >Choisir un besoin…</option
+                    >
                     {#each reattachHeaders as header (header.$id)}
                       <option value={header.$id}>
                         {header.name || "Sans nom"} (x{header.quantity || 0})

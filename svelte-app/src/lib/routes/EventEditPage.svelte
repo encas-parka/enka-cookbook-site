@@ -421,7 +421,10 @@
     if (!eventIdToRelease || !globalState.userId) return;
 
     try {
-      await locksService.releaseLock(`event_${eventIdToRelease}`, globalState.userId);
+      await locksService.releaseLock(
+        `event_${eventIdToRelease}`,
+        globalState.userId,
+      );
       console.log("🔓 Verrou libéré");
     } catch (error) {
       console.error("❌ Erreur libération verrou:", error);
@@ -642,7 +645,7 @@
       5 * 60 * 1000,
     );
 
-    console.log("⏰ Auto-save programmé dans 30 secondes");
+    console.log("Auto-save programme dans 5 minutes");
   }
 
   // Protection beforeunload - Avertir l'utilisateur s'il a des modifications non sauvegardées
@@ -669,7 +672,7 @@
   // Rafraîchir le lock quand l'onglet redevient visible (mobile/tab arrière-plan)
   $effect(() => {
     const handleVisibility = async () => {
-      if (document.visibilityState !== 'visible') return;
+      if (document.visibilityState !== "visible") return;
       if (!lockedEventId || !globalState.userId) return;
 
       const success = await locksService.acquireLock(
@@ -686,7 +689,8 @@
     };
 
     document.addEventListener("visibilitychange", handleVisibility);
-    return () => document.removeEventListener("visibilitychange", handleVisibility);
+    return () =>
+      document.removeEventListener("visibilitychange", handleVisibility);
   });
 
   // ============================================================================
@@ -1180,16 +1184,16 @@
       <!-- Colonne Gauche : Infos & Permissions -->
       <div class="space-y-6 lg:col-span-1">
         <!-- Permissions -->
-          <PermissionsManager
-            {canEdit}
-            {contributors}
-            {nativeTeamsStore}
-            {eventsStore}
-            bind:minContrib
-            userId={globalState.userId || ""}
-            {eventId}
-            onStartEdit={startEditing}
-          />
+        <PermissionsManager
+          {canEdit}
+          {contributors}
+          {nativeTeamsStore}
+          {eventsStore}
+          bind:minContrib
+          userId={globalState.userId || ""}
+          {eventId}
+          onStartEdit={startEditing}
+        />
 
         <!-- Documents liés à l'événement -->
         {#if currentEvent}
@@ -1288,7 +1292,10 @@
         {:else}
           <div class="space-y-4">
             {#each sortedDatedMeals as meal (meal.id + "-" + currentEvent?.$updatedAt)}
-              <div id="meal-card-{meal.id}" animate:flip={{ delay: 100, duration: 400 }}>
+              <div
+                id="meal-card-{meal.id}"
+                animate:flip={{ delay: 100, duration: 400 }}
+              >
                 <EventMealCard
                   bind:meal={meals[meals.findIndex((m) => m.id === meal.id)]}
                   isEditing={editingMealIndex === meal.id}

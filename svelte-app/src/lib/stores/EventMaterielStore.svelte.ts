@@ -256,8 +256,9 @@ export class EventMaterielStore {
     this.#loading = true;
     this.#error = null;
 
+    let header: EventMateriel | undefined;
     try {
-      const header = await this.addItem(
+      header = await this.addItem(
         {
           eventId: headerData.eventId,
           name: headerData.name,
@@ -290,6 +291,14 @@ export class EventMaterielStore {
 
       return { header, allocation };
     } catch (err) {
+      // Si le header a été créé mais l'allocation a échoué, nettoyer le header orphelin
+      if (header?.$id) {
+        try {
+          await this.#collection.remove(header.$id);
+        } catch {
+          // Meilleur effort — ne pas masquer l'erreur originale
+        }
+      }
       this.#error = err instanceof Error ? err.message : "Erreur de création";
       throw err;
     } finally {

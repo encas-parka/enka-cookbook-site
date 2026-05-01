@@ -31,21 +31,21 @@ export interface EventMaterielStatusConfig {
 const eventMaterielStatusConfigs: Record<string, EventMaterielStatusConfig> = {
   to_find: {
     label: "À trouver",
-    badgeClass: "badge-error",
-    bgClass: "bg-error/10 border border-error/20",
-    selectClass: "select-error text-error",
+    badgeClass: "badge-error badge-outline",
+    bgClass: "bg-error/5 border border-error/20",
+    selectClass: "text-error",
   },
   to_check: {
     label: "À vérifier",
-    badgeClass: "badge-warning",
-    bgClass: "bg-warning/10 border border-warning/20",
-    selectClass: "select-warning text-warning",
+    badgeClass: "badge-warning badge-outline",
+    bgClass: "bg-warning/5 border border-warning/20",
+    selectClass: "text-warning",
   },
   confirmed: {
     label: "Ok",
-    badgeClass: "badge-success",
-    bgClass: "bg-success/10 border border-success/20",
-    selectClass: "select-success text-success",
+    badgeClass: "badge-success badge-outline",
+    bgClass: "bg-success/5 border border-success/20",
+    selectClass: "text-success",
   },
 };
 

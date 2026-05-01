@@ -22,7 +22,7 @@
   let {
     suggestions,
     onSuggestionClick,
-    maxSuggestions = 8,
+    maxSuggestions = 15,
     title,
     buttonSize = "btn-xs",
     buttonVariant = "btn-soft",

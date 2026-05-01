@@ -34,7 +34,7 @@
   {href}
 >
   <div class="min-w-0 flex-1">
-    <div class="flex flex-wrap items-center gap-x-10 gap-y-2">
+    <div class="flex flex-wrap items-center gap-x-6 gap-y-2">
       <!-- Title with icon -->
       <div class="text-primary flex items-center gap-2">
         <FileText class="text-primary h-4 w-4 shrink-0" />

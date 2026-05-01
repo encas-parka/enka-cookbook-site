@@ -104,6 +104,22 @@
     localSelectedIds = new Set(selectedIds);
   });
 
+  function handleToggleAllByType(items: MaterielWithAvailability[]) {
+    const availableItems = items.filter((m) => !m.isUnavailable);
+    if (availableItems.length === 0) return;
+
+    const allSelected = availableItems.every((m) =>
+      localSelectedIds.has(m.$id),
+    );
+
+    if (allSelected) {
+      availableItems.forEach((m) => localSelectedIds.delete(m.$id));
+    } else {
+      availableItems.forEach((m) => localSelectedIds.add(m.$id));
+    }
+    localSelectedIds = new Set(localSelectedIds);
+  }
+
   function handleToggleItem(materielId: string) {
     if (localSelectedIds.has(materielId)) {
       localSelectedIds.delete(materielId);
@@ -166,7 +182,18 @@
               <TypeIcon class="text-primary h-4 w-4" />
             </div>
             {typeLabels[type]}
-            <span class="badge badge-ghost badge-sm ml-auto">
+            <button
+              class="btn btn-link btn-xs ml-auto"
+              onclick={() => handleToggleAllByType(materiels)}
+              disabled={materiels.filter((m) => !m.isUnavailable).length === 0}
+            >
+              {materiels
+                .filter((m) => !m.isUnavailable)
+                .every((m) => localSelectedIds.has(m.$id))
+                ? "Tout désélectionner"
+                : "Tout sélectionner"}
+            </button>
+            <span class="badge badge-ghost badge-sm">
               {materiels.filter((m) => localSelectedIds.has(m.$id))
                 .length}/{materiels.length}
             </span>

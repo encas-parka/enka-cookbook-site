@@ -133,7 +133,12 @@
   });
 
   const availableEvents = $derived.by(() => {
-    return eventsStore.events.filter((e) => e.status !== "canceled");
+    const now = new Date();
+    return eventsStore.events.filter(
+      (e) =>
+        e.status !== "canceled" &&
+        (new Date(e.dateEnd) >= now || e.$id === selectedEventId),
+    );
   });
 
   const selectedEvent = $derived(
@@ -566,6 +571,10 @@
     unavailableCount: number;
     available: number;
   } {
+    // Pendant la sauvegarde, on fige l'affichage pour éviter un flash "indisponible"
+    if (loading) {
+      return { isUnavailable: false, unavailableCount: 0, available: quantity };
+    }
     const available = availabilityMap.get(materielId) ?? 0;
     if (quantity > 0 && available === 0) {
       return { isUnavailable: true, unavailableCount: quantity, available: 0 };

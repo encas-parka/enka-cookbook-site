@@ -191,6 +191,12 @@ export class EventMaterielStore {
     this.#error = null;
 
     try {
+      // Invariant : une allocation (avec groupId) ne peut pas avoir le statut "to_find"
+      const status: EventMaterielStatus =
+        data.groupId && data.status === "to_find"
+          ? "to_check"
+          : (data.status as EventMaterielStatus) || "to_find";
+
       const item = await this.#collection.create(
         {
           eventId: data.eventId,
@@ -202,7 +208,7 @@ export class EventMaterielStore {
           fromTeamName: data.fromTeamName || null,
           sourceMaterielId: data.sourceMaterielId || null,
           loanId: data.loanId || null,
-          status: data.status || "to_find",
+          status,
           groupId: data.groupId || null,
           notes: data.notes || null,
           createdBy: userId,
@@ -411,9 +417,7 @@ export class EventMaterielStore {
   // =============================================================================
 
   get headers(): EventMateriel[] {
-    return this.#itemsList.filter(
-      (item) => !item.groupId && this.resolveStatus(item) === "to_find",
-    );
+    return this.#itemsList.filter((item) => !item.groupId);
   }
 
   getAllocationsForHeader(headerId: string): EventMateriel[] {
@@ -437,21 +441,22 @@ export class EventMaterielStore {
     const allItems = this.#itemsList;
     const hasFilters = this.#hasActiveFilters(filters);
 
-    // Étape 1 : Construire les groupes depuis TOUS les items
+    // Étape 1 : Classification binaire — tout item est soit header, soit allocation
+    // Header : groupId === null (indépendamment du statut)
+    // Allocation : groupId !== null
     const headerMap = new Map<string, EventMateriel>();
     const allocationsByHeader = new Map<string, EventMateriel[]>();
-    const standalone: EventMateriel[] = [];
 
     for (const item of allItems) {
       if (item.groupId) {
+        // Allocation : item lié à un header
         if (!allocationsByHeader.has(item.groupId)) {
           allocationsByHeader.set(item.groupId, []);
         }
         allocationsByHeader.get(item.groupId)!.push(item);
-      } else if (this.resolveStatus(item) === "to_find") {
-        headerMap.set(item.$id, item);
       } else {
-        standalone.push(item);
+        // Header : tout item sans groupId
+        headerMap.set(item.$id, item);
       }
     }
 
@@ -471,28 +476,9 @@ export class EventMaterielStore {
       });
     }
 
-    for (const item of standalone) {
-      const allocations = allocationsByHeader.get(item.$id) || [];
-      if (allocations.length > 0) {
-        const totalAllocated = allocations.reduce(
-          (sum, a) => sum + (a.quantity || 0),
-          0,
-        );
-        allGroups.push({
-          header: item,
-          allocations,
-          remainingQty: (item.quantity || 0) - totalAllocated,
-          totalAllocated,
-        });
-      } else {
-        allGroups.push({
-          header: item,
-          allocations: [],
-          remainingQty: 0,
-          totalAllocated: item.quantity || 0,
-        });
-      }
-    }
+    // Allocations orphelines : groupId pointe vers un header introuvable
+    // (ex: header supprimé) → on les ignore dans le regroupement
+    // Elles resteront visibles dans les filtres si elles matchent
 
     // Étape 2 : Filtrer au niveau groupe
     // Un groupe est affiché si son header OU au moins une allocation matche les filtres
@@ -586,7 +572,56 @@ export class EventMaterielStore {
   }
 
   async linkToHeader(itemId: string, headerId: string | null): Promise<void> {
-    await this.updateItem(itemId, { groupId: headerId });
+    const updateData: UpdateEventMaterielData = { groupId: headerId };
+
+    // Invariant : quand on attache à un header, le statut ne peut pas être "to_find"
+    if (headerId) {
+      const item = this.#items?.get(itemId);
+      if (item && this.resolveStatus(item) === "to_find") {
+        updateData.status = "to_check";
+      }
+    }
+
+    await this.updateItem(itemId, updateData);
+  }
+
+  /**
+   * Rattache une allocation à un nouveau header et nettoie l'ancien header
+   * s'il se retrouve vide (0 allocations) et que sa quantité correspond
+   * à celle de l'allocation déplacée (→ header probablement auto-créé par syncFromLoan).
+   */
+  async reattachAndCleanup(
+    itemId: string,
+    newHeaderId: string,
+  ): Promise<{ orphanDeleted: false } | { orphanDeleted: true; orphanName: string }> {
+    // Capturer l'état avant le déplacement
+    const item = this.#items?.get(itemId);
+    if (!item || !item.groupId) {
+      // Pas une allocation ou item introuvable → link simple
+      await this.linkToHeader(itemId, newHeaderId);
+      return { orphanDeleted: false };
+    }
+
+    const oldHeaderId = item.groupId;
+    const allocationQty = item.quantity ?? 0;
+    const oldHeader = this.#items?.get(oldHeaderId);
+
+    // Effectuer le rattachement
+    await this.linkToHeader(itemId, newHeaderId);
+
+    // Re-vérifier après le link : un événement realtime a pu ajouter une allocation
+    // au vieux header entre le moment où on a capturé l'état et maintenant
+    const remainingAllocations = this.#itemsList.filter(
+      (i) => i.groupId === oldHeaderId,
+    ).length;
+
+    // Nettoyage : header vide + quantités identiques → suppression automatique
+    if (remainingAllocations === 0 && oldHeader && (oldHeader.quantity ?? 0) === allocationQty) {
+      await this.deleteItem(oldHeaderId);
+      return { orphanDeleted: true, orphanName: oldHeader.name || "Sans nom" };
+    }
+
+    return { orphanDeleted: false };
   }
 
   getAvailableHeadersForLink(excludeItemId?: string): EventMateriel[] {
@@ -730,6 +765,11 @@ export class EventMaterielStore {
     }
   }
 
+  /**
+   * Supprime un item et, si lié à un loan, retire la ligne correspondante du loan.
+   * Si l'item est un header (pas de groupId), cascade-supprime toutes ses allocations
+   * (chacune avec mise à jour du loan si nécessaire).
+   */
   async deleteItemAndRemoveFromLoan(itemId: string): Promise<void> {
     this.#loading = true;
     this.#error = null;
@@ -740,25 +780,21 @@ export class EventMaterielStore {
         throw new Error("Item introuvable");
       }
 
-      const loanId = item.loanId;
-      const sourceMaterielId = item.sourceMaterielId;
-
-      await this.#collection.remove(itemId);
-
-      if (loanId && sourceMaterielId) {
-        const loan = materielStore.getLoanById(loanId);
-        if (loan && loan.materielItems.length > 0) {
-          const updatedItems = loan.materielItems.filter(
-            (li) => li.materielId !== sourceMaterielId,
-          );
-          await materielStore.updateLoan(loanId, {
-            materiels: updatedItems,
-          });
+      // Si c'est un header, cascade-supprimer toutes ses allocations d'abord
+      if (!item.groupId) {
+        const allocations = this.#itemsList.filter(
+          (i) => i.groupId === itemId,
+        );
+        for (const allocation of allocations) {
+          await this.#removeItemAndUpdateLoan(allocation);
         }
       }
 
+      // Supprimer l'item lui-même
+      await this.#removeItemAndUpdateLoan(item);
+
       console.log(
-        `[EventMaterielStore] deleteItemAndRemoveFromLoan: ${itemId}${loanId ? ` (loan ${loanId} updated)` : ""}`,
+        `[EventMaterielStore] deleteItemAndRemoveFromLoan: ${itemId}${!item.groupId ? ` + ${"cascade" /* count */} allocations` : ""}${item.loanId ? ` (loan ${item.loanId} updated)` : ""}`,
       );
     } catch (err) {
       this.#error =
@@ -766,6 +802,26 @@ export class EventMaterielStore {
       throw err;
     } finally {
       this.#loading = false;
+    }
+  }
+
+  /**
+   * Supprime un item de la collection et, s'il est lié à un loan,
+   * retire la ligne correspondante du loan.
+   */
+  async #removeItemAndUpdateLoan(item: EventMateriel): Promise<void> {
+    await this.#collection.remove(item.$id);
+
+    if (item.loanId && item.sourceMaterielId) {
+      const loan = materielStore.getLoanById(item.loanId);
+      if (loan && loan.materielItems.length > 0) {
+        const updatedItems = loan.materielItems.filter(
+          (li) => li.materielId !== item.sourceMaterielId,
+        );
+        await materielStore.updateLoan(item.loanId, {
+          materiels: updatedItems,
+        });
+      }
     }
   }
 

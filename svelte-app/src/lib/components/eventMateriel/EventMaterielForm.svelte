@@ -138,14 +138,18 @@
     label: getMaterielTypeConfig(t).label,
   }));
 
-  const statuses: { value: EventMaterielStatus; label: string }[] = [
-    "to_find",
-    "to_check",
-    "confirmed",
-  ].map((s) => ({
-    value: s as EventMaterielStatus,
-    label: getEventMaterielStatusConfig(s).label,
-  }));
+  const statuses = $derived.by(() => {
+    const all: EventMaterielStatus[] = ["to_find", "to_check", "confirmed"];
+    // En édition allocation, exclure "to_find" (une allocation est toujours to_check ou confirmed)
+    const filtered =
+      isEdit && mode === "allocation"
+        ? all.filter((s) => s !== "to_find")
+        : all;
+    return filtered.map((s) => ({
+      value: s as EventMaterielStatus,
+      label: getEventMaterielStatusConfig(s).label,
+    }));
+  });
 
   const validationErrors = $derived.by(() => {
     const errs: string[] = [];

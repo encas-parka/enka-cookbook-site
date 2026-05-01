@@ -2,12 +2,11 @@
   import {
     Package,
     Link,
-    Unlink,
     Trash2,
     Save,
     X,
-    Check,
     Plus,
+    ArrowRight,
   } from "@lucide/svelte";
   import ModalContainer from "$lib/components/ui/modal/ModalContainer.svelte";
   import ModalHeader from "$lib/components/ui/modal/ModalHeader.svelte";
@@ -22,6 +21,7 @@
     UpdateEventMaterielData,
     CreateEventMaterielData,
   } from "$lib/types/event-materiel.types";
+  import fuzzysort from "fuzzysort";
 
   interface Props {
     isOpen: boolean;
@@ -83,6 +83,31 @@
     );
     return header?.name || null;
   });
+
+  // Headers disponibles pour la réattache, triés par pertinence fuzzysort
+  // par rapport au nom de l'allocation courante
+  const reattachHeaders = $derived.by(() => {
+    if (!currentItem) return [];
+    const candidates = eventMaterielStore.headers.filter(
+      (h) => h.$id !== currentItem.groupId,
+    );
+    if (candidates.length === 0) return [];
+
+    const query = (currentItem.name || "").trim();
+    if (!query) return candidates;
+
+    const sorted = fuzzysort.go(query, candidates, {
+      key: "name",
+      threshold: -Infinity, // tous les résultats, juste triés
+      limit: 50,
+    });
+    // Les résultats fuzzysort + ceux qui n'ont pas matché (score très bas)
+    const sortedIds = new Set(sorted.map((r) => r.obj.$id));
+    const remaining = candidates.filter((h) => !sortedIds.has(h.$id));
+    return [...sorted.map((r) => r.obj), ...remaining];
+  });
+
+  let reattachTargetId = $state<string>("");
 
   // Sélection d'un item existant dans les suggestions → bascule en mode édition
   function handleExistingSelected(id: string) {
@@ -173,7 +198,7 @@
     }
   }
 
-  // ---- Link / Unlink ----
+  // ---- Link / Reattach ----
   async function handleLinkToHeader(headerId: string) {
     if (!activeItemId) return;
     try {
@@ -181,7 +206,7 @@
         eventMaterielStore.linkToHeader(activeItemId, headerId),
         {
           loading: "Liaison en cours...",
-          success: "Item lié au besoin",
+          success: "Allocation rattachée au besoin",
           error: "Erreur lors de la liaison",
         },
       );
@@ -190,19 +215,23 @@
     }
   }
 
-  async function handleUnlink() {
-    if (!activeItemId) return;
+  async function handleReattachSelect() {
+    if (!reattachTargetId || !activeItemId) return;
     try {
-      await toastService.track(
-        eventMaterielStore.linkToHeader(activeItemId, null),
+      const result = await toastService.track(
+        eventMaterielStore.reattachAndCleanup(activeItemId, reattachTargetId),
         {
-          loading: "Déliaison en cours...",
-          success: "Item détaché",
-          error: "Erreur lors de la déliaison",
+          loading: "Rattachement en cours...",
+          success: "Réservation rattachée au besoin",
+          error: "Erreur lors du rattachement",
         },
       );
+      reattachTargetId = "";
+      if (result.orphanDeleted) {
+        toastService.info(`Besoin "${result.orphanName}" supprimé (plus aucune réservation)`);
+      }
     } catch (err: any) {
-      error = err.message || "Erreur lors de la déliaison";
+      error = err.message || "Erreur lors du rattachement";
     }
   }
 
@@ -233,6 +262,7 @@
     showDeleteConfirm = false;
     formErrors = [];
     formDirty = false;
+    reattachTargetId = "";
     onClose();
   }
 
@@ -283,24 +313,48 @@
         {/key}
       </div>
 
-      <!-- Link/Unlink section (edit mode only) -->
+      <!-- Link/Reattach section (edit mode only) -->
       {#if isEdit && currentItem}
         {#if isAllocation}
           <div class="bg-base-200 mt-4 rounded-lg p-3">
-            <div class="flex items-center justify-between">
-              <div class="flex flex-wrap items-center gap-2 text-sm">
-                <Link class="text-primary size-4" />
-                <span class="text-base-content/70">Lié au besoin :</span>
-                <span class="font-medium">{currentHeaderName}</span>
-              </div>
-              <button
-                class="btn btn-ghost btn-xs text-error gap-1"
-                onclick={handleUnlink}
-              >
-                <Unlink class="size-3" />
-                Détacher
-              </button>
+            <div class="mb-2 flex items-center gap-2 text-sm">
+              <Link class="text-primary size-4" />
+              <span class="text-base-content/70">Lié au besoin :</span>
+              <span class="font-medium">{currentHeaderName ?? "Inconnu"}</span>
             </div>
+            {#if reattachHeaders.length > 0}
+              <div class="mt-2">
+                <p class="text-base-content/60 mb-1 text-xs">
+                  <ArrowRight class="inline size-3" />
+                  Rattacher à un autre besoin :
+                </p>
+                <div class="flex items-center gap-2">
+                  <select
+                    class="select select-sm grow"
+                    bind:value={reattachTargetId}
+                  >
+                    <option value="" disabled selected>Choisir un besoin…</option>
+                    {#each reattachHeaders as header (header.$id)}
+                      <option value={header.$id}>
+                        {header.name || "Sans nom"} (x{header.quantity || 0})
+                      </option>
+                    {/each}
+                  </select>
+                  <button
+                    type="button"
+                    class="btn btn-primary btn-sm"
+                    disabled={!reattachTargetId}
+                    onclick={handleReattachSelect}
+                  >
+                    <ArrowRight class="size-4" />
+                  </button>
+                </div>
+              </div>
+            {:else}
+              <p class="text-base-content/40 mt-1 text-xs">
+                Aucun autre besoin disponible pour le rattacher.
+              </p>
+            {/if}
           </div>
         {:else if !!currentItem?.loanId && availableHeaders.length > 0}
           <div class="bg-base-200 mt-4 rounded-lg p-3">

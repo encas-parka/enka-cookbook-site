@@ -23,7 +23,7 @@
   import { navBarStore } from "$lib/stores/NavBarStore.svelte";
   import { statusBarStore } from "$lib/stores/StatusBarStore.svelte";
   import { online } from "svelte/reactivity/window";
-  import { locksService, type AppwriteLock } from "$lib/services/appwrite-locks";
+  import { locksService, type AppwriteLock } from "$lib/services/pb-locks";
 
   // ============================================================================
   // ROUTE PARAMETERS
@@ -250,7 +250,7 @@
       try {
         const resourceId = `doc_${docId}`;
         activeLock = await locksService.getLock(resourceId);
-        lockUnsub = locksService.subscribeToLock(resourceId, (lock) => {
+        lockUnsub = await locksService.subscribeToLock(resourceId, (lock) => {
           console.log("[EditDocumentPage] 🔒 Verrou mis à jour:", {
             lockedBy: lock?.userName,
             userId: lock?.userId,

@@ -13,7 +13,7 @@
   import { navBarStore } from "$lib/stores/NavBarStore.svelte";
   import { statusBarStore } from "$lib/stores/StatusBarStore.svelte";
   import { online } from "svelte/reactivity/window";
-  import { locksService, type AppwriteLock } from "$lib/services/appwrite-locks";
+  import { locksService, type AppwriteLock } from "$lib/services/pb-locks";
   import { shareOrDownload, toSlug } from "$lib/utils/share-utils";
 
   let eventId = $derived(route.params.id || "");
@@ -250,7 +250,7 @@
       try {
         const resourceId = `doc_${docId}`;
         activeLock = await locksService.getLock(resourceId);
-        lockUnsub = locksService.subscribeToLock(resourceId, (lock) => {
+        lockUnsub = await locksService.subscribeToLock(resourceId, (lock) => {
           console.log("[EventDocumentEditPage] 🔒 Verrou mis à jour:", {
             lockedBy: lock?.userName,
             userId: lock?.userId,

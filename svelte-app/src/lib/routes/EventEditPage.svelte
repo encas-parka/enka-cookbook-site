@@ -33,7 +33,7 @@
   import EventStats from "../components/EventStats.svelte";
   import EventDocumentsFieldset from "../components/eventEdit/EventDocumentsFieldset.svelte";
   import { navBarStore } from "../stores/NavBarStore.svelte";
-  import { locksService, type AppwriteLock } from "../services/appwrite-locks";
+  import { locksService, type AppwriteLock } from "$lib/services/pb-locks";
   import { statusBarStore } from "../stores/StatusBarStore.svelte";
   import UnsavedChangesGuard from "../components/ui/UnsavedChangesGuard.svelte";
   import Fieldset from "../components/ui/Fieldset.svelte";
@@ -322,7 +322,7 @@
       isBusy = true;
       try {
         activeLock = await locksService.getLock(`event_${eventId}`);
-        lockUnsub = locksService.subscribeToLock(`event_${eventId}`, (lock) => {
+        lockUnsub = await locksService.subscribeToLock(`event_${eventId}`, (lock) => {
           console.log("[EventEditPage] 🔒 Verrou mis à jour:", {
             lockedBy: lock?.userName,
             userId: lock?.userId,

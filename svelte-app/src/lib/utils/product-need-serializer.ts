@@ -4,7 +4,7 @@ import type {
   EnrichedProduct,
   NumericQuantity,
 } from "../types/store.types";
-import type { ProductNeedRow } from "../db-sync/aw-sync";
+import type { ProductNeedRow } from "../db-sync/pb-sync";
 
 export interface ParsedNeed {
   $id: string;

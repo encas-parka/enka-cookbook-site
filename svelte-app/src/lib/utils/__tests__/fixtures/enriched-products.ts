@@ -1,4 +1,4 @@
-import type { ProductNeedRow } from "$lib/db-sync/aw-sync";
+import type { ProductNeedRow } from "$lib/db-sync/pb-sync";
 import type {
   ByDateEntry,
   EnrichedProduct,

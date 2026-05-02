@@ -1,19 +1,13 @@
 /**
- * RecipesStore - Store de gestion des recettes avec Svelte 5 + aw-sync
+ * RecipesStore - Store de gestion des recettes avec Svelte 5 + pb-sync
  *
  * Architecture:
- * 1. Hugo data.json → index des recettes publiées (HTTP fetch)
- * 2. Appwrite recettes → drafts + mises à jour (aw-sync: Dexie + realtime)
- * 3. Fusion Hugo + Appwrite dans un index unifié (SvelteMap)
- * 4. Lazy loading des détails:
- *    - Appwrite: lecture depuis #appwriteRecipes bridge (toujours à jour)
- *    - Hugo: cache detail:{uuid} dans db.recipeData + fetch /recipe/{uuid}/recipe.json
- * 5. db.recipeData:
- *    - idx:{uuid} = cache d'index Hugo (cold start rapide)
- *    - detail:{uuid} = cache détail Hugo uniquement (les recettes Appwrite ne passent plus ici)
+ * 1. PocketBase recipes → index unifié via pb-sync (delta sync + realtime)
+ * 2. Bridge liveQuery: db.recipes → SvelteMap → $derived → RecipeIndexEntry[]
+ * 3. Lazy loading: bridge (toujours à jour) ou collection.view() (remote fallback)
  *
- * aw-sync gère: delta sync Appwrite → db.recipes, realtime, CRUD optimiste
- * Le store gère: fusion Hugo + Appwrite, lazy loading, recherche, verrous
+ * pb-sync gère: delta sync PB → db.recipes, realtime, CRUD optimiste
+ * Le store gère: index, lazy loading, recherche, verrous, groupes de variantes
  */
 
 import { SvelteMap } from 'svelte/reactivity';
@@ -23,72 +17,38 @@ import type {
 	RecipeForDisplay
 } from '../types/recipes.types';
 import {
-	parseRecipeIndexEntry,
 	parseAppwriteRecipeToIndexEntry,
-	astucesFromAppwrite,
-	parseRecipeData
+	astucesFromAppwrite
 } from '../utils/recipeUtils';
 import { ingredientsFromAppwrite } from '../utils/ingredientUtils';
-import {
-	forceReloadAllAppwriteRecipes,
-	getRecipeAppwrite as getAppwriteRecipe
-} from '../services/appwrite-recipes';
 import fuzzysort from 'fuzzysort';
 import { globalState } from './GlobalState.svelte';
 import {
 	createSyncCollection,
 	bridgeToMap,
 	db,
+	pb,
 	type BridgeResult
-} from '$lib/db-sync/aw-sync';
-
-const DATA_JSON_URL = '/data/data.json';
+} from '$lib/db-sync/pb-sync';
 
 class RecipesStore {
-	// aw-sync collection for Appwrite recipes
-	#collection = createSyncCollection<Recettes>({
-		table: db.recipes,
-		collectionName: 'recipes'
-	});
+	#collection = createSyncCollection<Recettes>(pb, db.recipes, "recipes");
 
-	// Bridge: liveQuery on db.recipes → SvelteMap of raw Appwrite data
 	#bridge: BridgeResult<Recettes> = bridgeToMap<Recettes>(
 		() => db.recipes.toArray()
 	);
-	#appwriteRecipes = this.#bridge.map;
+	#rawRecipes = this.#bridge.map;
 
-	// Hugo recipes (published, from data.json + cache)
-	#hugoRecipes = new SvelteMap<string, RecipeIndexEntry>();
-
-	// Unified index: $derived merge of Hugo + Appwrite
-	// Most recent $updatedAt wins on conflict; deleted status always honored
+	// Unified index: convert bridge's Recettes → RecipeIndexEntry (skip deleted)
 	#recipesIndex = $derived.by(() => {
-		const merged = new Map<string, RecipeIndexEntry>();
-
-		// 1. Hugo recipes (base layer - published recipes)
-		for (const [id, entry] of this.#hugoRecipes) {
-			merged.set(id, entry);
-		}
-
-		// 2. Appwrite recipes (overlay - respects updatedAt, handles drafts & deletions)
-		for (const recipe of this.#appwriteRecipes.values()) {
-			if (recipe.status === 'deleted') {
-				merged.delete(recipe.$id);
-			} else {
-				const hugoEntry = merged.get(recipe.$id);
-				const awEntry = parseAppwriteRecipeToIndexEntry(recipe);
-				// Appwrite wins if no Hugo equivalent (draft-only) or if Appwrite is at least as recent
-				if (!hugoEntry || awEntry.$updatedAt >= hugoEntry.$updatedAt) {
-					merged.set(recipe.$id, awEntry);
-				}
+		const index = new SvelteMap<string, RecipeIndexEntry>();
+		for (const recipe of this.#rawRecipes.values()) {
+			if (recipe.status !== 'deleted') {
+				index.set(recipe.$id, parseAppwriteRecipeToIndexEntry(recipe));
 			}
 		}
-
-		return merged;
+		return index;
 	});
-
-	// Hugo build timestamp (for cache invalidation)
-	#versionTimestamp = $state<number | null>(null);
 
 	// UI state
 	#loading = $state(false);
@@ -103,9 +63,6 @@ class RecipesStore {
 	// syncReady: resolved when syncFromRemote() finishes
 	#syncPromise: Promise<void> = Promise.resolve();
 	#syncResolve: (() => void) | null = null;
-
-	// Hugo metadata key in syncMeta
-	#HUGO_META_KEY = 'recipes-hugo';
 
 	// =============================================================================
 	// GETTERS
@@ -149,35 +106,11 @@ class RecipesStore {
 		this.#error = null;
 
 		try {
-			// 1. Load Hugo-cached index from db.recipeData
-			const hugoMeta = await db.syncMeta.get(this.#HUGO_META_KEY);
-			if (hugoMeta?.lastSync) {
-				this.#versionTimestamp = Number(hugoMeta.lastSync);
-			}
-
-			const cachedRows = await db.recipeData
-				.where('key')
-				.startsWith('idx:')
-				.toArray();
-
-			if (cachedRows.length > 0) {
-				for (const row of cachedRows) {
-					const entry = row.data as RecipeIndexEntry;
-					if (entry?.$id) {
-						this.#hugoRecipes.set(entry.$id, entry);
-					}
-				}
-				console.log(
-					`[RecipesStore] ${cachedRows.length} recettes Hugo chargées depuis le cache Dexie`
-				);
-			}
-
-			// 2. Appwrite recipes are already available via bridge (#appwriteRecipes)
-			// The $derived #recipesIndex automatically merges Hugo + Appwrite
-
+			// Recipes are already available via bridge (#rawRecipes)
+			// The $derived #recipesIndex automatically converts them to index entries
 			this.#isInitialized = true;
 			console.log(
-				`[RecipesStore] Cache chargé: ${this.#hugoRecipes.size} recettes Hugo`
+				`[RecipesStore] Cache chargé: ${this.#recipesIndex.size} recettes`
 			);
 		} catch (err) {
 			const message =
@@ -197,36 +130,11 @@ class RecipesStore {
 			this.#syncResolve = resolve;
 		});
 
-		console.log(
-			'[RecipesStore] Synchronisation depuis sources distantes...'
-		);
+		console.log('[RecipesStore] Synchronisation depuis PocketBase...');
 		this.#loading = true;
 
 		try {
-			// 1. Hugo data.json
-			try {
-				await this.#loadIndexFromDataJson();
-			} catch (err) {
-				console.error('[RecipesStore] Erreur chargement data.json:', err);
-				if (this.#recipesIndex.size === 0) {
-					throw new Error(
-						'Aucun cache disponible et data.json inaccessible'
-					);
-				}
-				console.log(
-					'[RecipesStore] Continuation avec les données du cache'
-				);
-			}
-
-			// 2. Appwrite delta sync via aw-sync
-			// initialFetch writes to db.recipes → bridge → $derived merges automatically
-			if (globalState.userId) {
-				try {
-					await this.#collection.initialFetch();
-				} catch (err) {
-					console.warn('[RecipesStore] Erreur sync Appwrite:', err);
-				}
-			}
+			await this.#collection.initialFetch();
 
 			console.log(
 				`[RecipesStore] Synchronisation terminée: ${this.#recipesIndex.size} recettes`
@@ -236,46 +144,6 @@ class RecipesStore {
 				err instanceof Error
 					? err.message
 					: 'Erreur lors de la synchronisation';
-			this.#error = message;
-			console.error('[RecipesStore]', message, err);
-			throw err;
-		} finally {
-			this.#loading = false;
-			this.#syncResolve?.();
-			this.#syncResolve = null;
-		}
-	}
-
-	async syncFromRemotePublicOnly(): Promise<void> {
-		this.#syncPromise = new Promise<void>((resolve) => {
-			this.#syncResolve = resolve;
-		});
-
-		console.log(
-			'[RecipesStore] Synchronisation publique (Hugo uniquement)...'
-		);
-		this.#loading = true;
-
-		try {
-			try {
-				await this.#loadIndexFromDataJson();
-			} catch (err) {
-				console.error('[RecipesStore] Erreur chargement data.json:', err);
-				if (this.#recipesIndex.size === 0) {
-					throw new Error(
-						'Aucun cache disponible et data.json inaccessible'
-					);
-				}
-			}
-
-			console.log(
-				`[RecipesStore] Synchronisation publique terminée: ${this.#recipesIndex.size} recettes`
-			);
-		} catch (err) {
-			const message =
-				err instanceof Error
-					? err.message
-					: 'Erreur lors de la synchronisation publique';
 			this.#error = message;
 			console.error('[RecipesStore]', message, err);
 			throw err;
@@ -302,7 +170,6 @@ class RecipesStore {
 		try {
 			this.#collection.subscribe();
 			this.#realtimeInitialized = true;
-			// Le $derived #recipesIndex réagit automatiquement aux changements du bridge
 		} catch (err) {
 			console.warn('[RecipesStore] Erreur activation realtime:', err);
 		}
@@ -363,137 +230,23 @@ class RecipesStore {
 	}
 
 	// =============================================================================
-	// HUGO data.json
-	// =============================================================================
-
-	async #loadIndexFromDataJson(): Promise<void> {
-		console.log('[RecipesStore] Chargement data.json...');
-
-		const response = await fetch(DATA_JSON_URL);
-		if (!response.ok) throw new Error(`Erreur HTTP: ${response.status}`);
-		const data = await response.json();
-
-		if (!Array.isArray(data.recipes)) {
-			throw new Error('Format invalide: recipes n\'est pas un tableau');
-		}
-
-		const remoteTimestamp: number | undefined = data.meta?.timestamp;
-		this.#versionTimestamp = remoteTimestamp ?? null;
-
-		// Check if Hugo data is newer than cached
-		const hugoMeta = await db.syncMeta.get(this.#HUGO_META_KEY);
-		const cachedTimestamp = hugoMeta?.lastSync
-			? Number(hugoMeta.lastSync)
-			: null;
-
-		if (
-			remoteTimestamp &&
-			cachedTimestamp &&
-			cachedTimestamp >= remoteTimestamp
-		) {
-			console.log(
-				`[RecipesStore] Cache Hugo à jour (Ts: ${cachedTimestamp} >= ${remoteTimestamp})`
-			);
-			return;
-		}
-
-		console.log(
-			`[RecipesStore] Nouvelle version Hugo détectée (Ts: ${remoteTimestamp})`
-		);
-
-		// Smart merge Hugo recipes into #hugoRecipes
-		const recipes = data.recipes.map((r: any) => parseRecipeIndexEntry(r));
-		let updatedCount = 0;
-		const updatedIds: string[] = [];
-
-		recipes.forEach((newRecipe: RecipeIndexEntry) => {
-			const existing = this.#hugoRecipes.get(newRecipe.$id);
-
-			let shouldUpdate = false;
-			if (!existing) {
-				shouldUpdate = true;
-			} else {
-				const newDate = new Date(newRecipe.$updatedAt).getTime();
-				const existingDate = new Date(existing.$updatedAt).getTime();
-				if (newDate > existingDate) {
-					shouldUpdate = true;
-				}
-			}
-
-			if (shouldUpdate) {
-				this.#hugoRecipes.set(newRecipe.$id, newRecipe);
-				updatedIds.push(newRecipe.$id);
-				updatedCount++;
-			}
-		});
-
-		console.log(
-			`[RecipesStore] Smart Merge Hugo: ${updatedCount} recettes mises à jour/ajoutées`
-		);
-
-		// Invalidate stale details for updated Hugo recipes
-		if (updatedIds.length > 0) {
-			await db.recipeData.bulkDelete(
-				updatedIds.map((id) => `detail:${id}`)
-			);
-		}
-
-		// Persist Hugo index to Dexie
-		await db.transaction('rw', db.recipeData, db.syncMeta, async () => {
-			// Clear old Hugo index entries
-			const oldKeys = (await db.recipeData
-				.where('key')
-				.startsWith('idx:')
-				.keys()) as string[];
-			if (oldKeys.length > 0) {
-				await db.recipeData.bulkDelete(oldKeys);
-			}
-
-			// Write new index entries (all Hugo entries)
-			const rows = Array.from(this.#hugoRecipes.values())
-				.map((entry) => ({
-					key: `idx:${entry.$id}`,
-					data: entry as unknown
-				}));
-			if (rows.length > 0) {
-				await db.recipeData.bulkPut(rows);
-			}
-
-			// Update Hugo metadata
-			await db.syncMeta.put({
-				collectionId: this.#HUGO_META_KEY,
-				lastSync: String(remoteTimestamp ?? Date.now() / 1000)
-			});
-		});
-	}
-
-	// =============================================================================
 	// FORCE RELOAD / HARD RESET
 	// =============================================================================
 
 	async forceReloadAllRecipes(): Promise<void> {
-		if (!globalState.userId) {
-			throw new Error('Utilisateur non connecté');
-		}
-
 		this.#loading = true;
 		this.#error = null;
 
 		try {
-			console.log(
-				'[RecipesStore] Rechargement forcé des recettes Appwrite...'
-			);
+			console.log('[RecipesStore] Rechargement forcé des recettes...');
 
-			const appwriteRecipes = await forceReloadAllAppwriteRecipes();
+			await this.#collection.clearLocal();
+			await this.#collection.initialFetch();
 
-			// Bulk put into Dexie → bridge → $derived #recipesIndex se met à jour
-			await db.recipes.bulkPut(appwriteRecipes);
-
-			const addedCount = appwriteRecipes.filter((r) => r.status !== 'deleted').length;
-			const deletedCount = appwriteRecipes.filter((r) => r.status === 'deleted').length;
+			const addedCount = this.#recipesIndex.size;
 
 			console.log(
-				`[RecipesStore] ${addedCount} recettes Appwrite chargées, ${deletedCount} supprimées`
+				`[RecipesStore] ${addedCount} recettes rechargées`
 			);
 			console.log('[RecipesStore] Rechargement forcé terminé');
 		} catch (err) {
@@ -519,34 +272,13 @@ class RecipesStore {
 		this.#error = null;
 
 		try {
-			this.#hugoRecipes.clear();
+			await this.#collection.clearLocal();
+			await this.#collection.initialFetch();
 
-			// Clear Dexie tables
-			await db.transaction(
-				'rw',
-				[db.recipes, db.recipeData, db.syncMeta],
-				async () => {
-					await db.recipes.clear();
-					await db.recipeData.clear();
-					await db.syncMeta.delete(this.#HUGO_META_KEY);
-					await db.syncMeta.delete('recettes');
-				}
-			);
-
-			// Reload Hugo → #hugoRecipes
-			await this.#loadIndexFromDataJson();
-
-			// Reload all Appwrite → db.recipes → bridge → $derived
-			const appwriteRecipes = await forceReloadAllAppwriteRecipes();
-			await db.recipes.bulkPut(
-				appwriteRecipes.filter((r) => r.status !== 'deleted')
-			);
-
-			const addedCount = appwriteRecipes.filter((r) => r.status !== 'deleted').length;
-			const deletedCount = appwriteRecipes.filter((r) => r.status === 'deleted').length;
+			const addedCount = this.#recipesIndex.size;
 
 			console.log(
-				`[RecipesStore] ${addedCount} recettes Appwrite chargées, ${deletedCount} supprimées ignorées`
+				`[RecipesStore] ${addedCount} recettes rechargées`
 			);
 			console.log('[RecipesStore] HARD RESET terminé');
 		} catch (err) {
@@ -593,16 +325,10 @@ class RecipesStore {
 		if (!globalState.userId) return false;
 
 		try {
-			// Check from Appwrite bridge first (fast, local)
-			const localRecipe = this.#appwriteRecipes.get(uuid);
+			const localRecipe = this.#rawRecipes.get(uuid);
 			if (localRecipe) {
 				return (
 					localRecipe.createdBy === globalState.userId ||
-					Boolean(
-						localRecipe.permissionWrite?.includes(
-							globalState.userId
-						)
-					) ||
 					Boolean(
 						localRecipe.teams?.some((teamId) =>
 							globalState.userTeams.includes(teamId)
@@ -611,15 +337,11 @@ class RecipesStore {
 				);
 			}
 
-			// Fallback: fetch from Appwrite
-			const recipe = await getAppwriteRecipe(uuid);
+			const recipe = await this.#loadDetailFromRemote(uuid);
 			if (!recipe) return false;
 
 			return (
 				recipe.createdBy === globalState.userId ||
-				Boolean(
-					recipe.permissionWrite?.includes(globalState.userId)
-				) ||
 				Boolean(
 					recipe.teams?.some((teamId) =>
 						globalState.userTeams.includes(teamId)
@@ -651,7 +373,6 @@ class RecipesStore {
 		if (!globalState.userId) return;
 
 		try {
-			// Optimistic update via aw-sync: Dexie → bridge → $derived → UI
 			await this.#collection.update(uuid, { lockedBy } as Partial<Recettes>);
 
 			console.log(
@@ -678,52 +399,32 @@ class RecipesStore {
 			while (this.#loadingDetails.has(uuid)) {
 				await new Promise((resolve) => setTimeout(resolve, 50));
 			}
-			// Another caller just finished — check fresh sources before re-entering
-			const localRecipe = this.#appwriteRecipes.get(uuid);
+			const localRecipe = this.#rawRecipes.get(uuid);
 			if (localRecipe && localRecipe.status !== 'deleted') {
-				return this.#appwriteRecipeToDisplay(localRecipe);
+				return this.#recipeToDisplay(localRecipe);
 			}
-			const cached = await this.#loadDetailFromDexie(uuid);
-			if (cached) return cached;
-			// Data not found in bridge or cache — fall through to full load path
+			const remote = await this.#loadDetailFromRemote(uuid);
+			if (remote) return this.#recipeToDisplay(remote);
+			// Data not found in bridge or remote — fall through to full load path
 		}
 
 		this.#loadingDetails.add(uuid);
 
 		try {
-			// 1. Appwrite bridge (always fresh via liveQuery)
-			const localRecipe = this.#appwriteRecipes.get(uuid);
+			// 1. Bridge (always fresh via liveQuery)
+			const localRecipe = this.#rawRecipes.get(uuid);
 			if (localRecipe && localRecipe.status !== 'deleted') {
-				return this.#appwriteRecipeToDisplay(localRecipe);
+				return this.#recipeToDisplay(localRecipe);
 			}
 
-			// 2. Hugo detail cache (Hugo-only recipes)
-			const cached = await this.#loadDetailFromDexie(uuid);
-			if (cached) return cached;
-
-			// 3. Fetch from Hugo
-			let recipeData: RecipeForDisplay | null = null;
-			try {
-				const response = await fetch(`/recipe/${uuid}/recipe.json`);
-				if (response.ok) {
-					recipeData = parseRecipeData(await response.json());
-					await this.#saveDetailToDexie(uuid, recipeData);
-					console.log(`[RecipesStore] ${uuid} chargée depuis Hugo`);
-				}
-			} catch {
-				// Hugo unreachable
+			// 2. Remote fallback (recipe exists remotely but not in bridge yet)
+			if (globalState.userId) {
+				const remote = await this.#loadDetailFromRemote(uuid);
+				if (remote) return this.#recipeToDisplay(remote);
 			}
 
-			// 4. Appwrite remote fallback (recipe exists remotely but not in bridge yet)
-			if (!recipeData && globalState.userId) {
-				recipeData = await this.#loadDetailFromAppwriteRemote(uuid);
-			}
-
-			if (!recipeData) {
-				console.warn(`[RecipesStore] ${uuid} non trouvée`);
-			}
-
-			return recipeData;
+			console.warn(`[RecipesStore] ${uuid} non trouvée`);
+			return null;
 		} catch (err) {
 			console.error(`[RecipesStore] Erreur chargement ${uuid}:`, err);
 			return null;
@@ -746,11 +447,11 @@ class RecipesStore {
 		const results = new Map<string, RecipeForDisplay>();
 		const missing: string[] = [];
 
-		// 1. Appwrite bridge (always fresh)
+		// 1. Bridge (always fresh)
 		for (const uuid of uniqueUuids) {
-			const local = this.#appwriteRecipes.get(uuid);
+			const local = this.#rawRecipes.get(uuid);
 			if (local && local.status !== 'deleted') {
-				results.set(uuid, this.#appwriteRecipeToDisplay(local));
+				results.set(uuid, this.#recipeToDisplay(local));
 			} else {
 				missing.push(uuid);
 			}
@@ -760,89 +461,35 @@ class RecipesStore {
 			return results;
 		}
 
-		// 2. Hugo detail cache (Hugo-only recipes)
-		const cacheKeys = missing.map((id) => `detail:${id}`);
-		const rows = await db.recipeData.bulkGet(cacheKeys);
-		const stillMissing: string[] = [];
-
-		for (let i = 0; i < rows.length; i++) {
-			const row = rows[i];
-			if (row?.data) {
-				results.set(missing[i], row.data as RecipeForDisplay);
-			} else {
-				stillMissing.push(missing[i]);
-			}
-		}
-
-		if (stillMissing.length === 0) {
-			const elapsed = performance.now() - startTime;
-			console.log(
-				`[RecipesStore] Bulk: ${results.size}/${uniqueUuids.length} en ${elapsed.toFixed(0)}ms (cache + bridge)`
-			);
-			return results;
-		}
-
-		// 3. Fetch missing from Hugo, then Appwrite remote
+		// 2. Remote fallback for missing
 		console.log(
-			`[RecipesStore] Bulk: ${results.size} trouvés, ${stillMissing.length} à fetch`
+			`[RecipesStore] Bulk: ${results.size} trouvés, ${missing.length} à fetch`
 		);
 
-		stillMissing.forEach((uuid) => this.#loadingDetails.add(uuid));
+		missing.forEach((uuid) => this.#loadingDetails.add(uuid));
 
 		try {
-			const fetchPromises = stillMissing.map(
-				async (uuid): Promise<{ uuid: string; recipe: RecipeForDisplay } | null> => {
-					// 3a. Try Hugo
-					try {
-						const response = await fetch(
-							`/recipe/${uuid}/recipe.json`
-						);
-						if (response.ok) {
-							return {
-								uuid,
-								recipe: parseRecipeData(await response.json())
-							};
-						}
-					} catch {
-						// Hugo unreachable
+			if (globalState.userId) {
+				const fetchPromises = missing.map(
+					async (uuid): Promise<{ uuid: string; recipe: RecipeForDisplay } | null> => {
+						const recipe = await this.#loadDetailFromRemote(uuid);
+						if (recipe) return { uuid, recipe: this.#recipeToDisplay(recipe) };
+						return null;
 					}
+				);
 
-					// 3b. Appwrite remote fallback
-					if (globalState.userId) {
-						const recipe =
-							await this.#loadDetailFromAppwriteRemote(uuid);
-						if (recipe) return { uuid, recipe };
-					}
+				const fetched = await Promise.all(fetchPromises);
 
-					return null;
-				}
-			);
-
-			const fetched = await Promise.all(fetchPromises);
-			const hugoSaves: { key: string; data: unknown }[] = [];
-
-			for (const result of fetched) {
-				if (result) {
-					results.set(result.uuid, result.recipe);
-
-					// Only cache Hugo-sourced recipes in detail cache
-					const fromBridge = this.#appwriteRecipes.has(result.uuid);
-					if (!fromBridge) {
-						hugoSaves.push({
-							key: `detail:${result.uuid}`,
-							data: result.recipe as unknown
-						});
+				for (const result of fetched) {
+					if (result) {
+						results.set(result.uuid, result.recipe);
 					}
 				}
-			}
-
-			if (hugoSaves.length > 0) {
-				await db.recipeData.bulkPut(hugoSaves);
 			}
 		} catch (err) {
 			console.error('[RecipesStore] Erreur fetch bulk:', err);
 		} finally {
-			stillMissing.forEach((uuid) => this.#loadingDetails.delete(uuid));
+			missing.forEach((uuid) => this.#loadingDetails.delete(uuid));
 		}
 
 		const elapsed = performance.now() - startTime;
@@ -971,41 +618,24 @@ class RecipesStore {
 	// DETAIL HELPERS
 	// =============================================================================
 
-	async #loadDetailFromDexie(
+	async #loadDetailFromRemote(
 		uuid: string
-	): Promise<RecipeForDisplay | null> {
-		const row = await db.recipeData.get(`detail:${uuid}`);
-		return (row?.data as RecipeForDisplay | undefined) ?? null;
-	}
-
-	async #saveDetailToDexie(
-		uuid: string,
-		data: RecipeForDisplay
-	): Promise<void> {
-		await db.recipeData.put({
-			key: `detail:${uuid}`,
-			data: data as unknown
-		});
-	}
-
-	async #loadDetailFromAppwriteRemote(
-		uuid: string
-	): Promise<RecipeForDisplay | null> {
+	): Promise<Recettes | null> {
 		try {
-			const appwriteRecipe = await getAppwriteRecipe(uuid);
-			if (!appwriteRecipe) return null;
+			const recipe = await this.#collection.view(uuid);
+			if (!recipe) return null;
 
 			console.log(
-				`[RecipesStore] ${uuid} chargée depuis Appwrite (remote fallback)`
+				`[RecipesStore] ${uuid} chargée depuis PocketBase (remote fallback)`
 			);
-			return this.#appwriteRecipeToDisplay(appwriteRecipe);
+			return recipe;
 		} catch (err) {
-			console.log(`[RecipesStore] ${uuid} non trouvée dans Appwrite`);
+			console.log(`[RecipesStore] ${uuid} non trouvée dans PocketBase`);
 			return null;
 		}
 	}
 
-	#appwriteRecipeToDisplay(recipe: Recettes): RecipeForDisplay {
+	#recipeToDisplay(recipe: Recettes): RecipeForDisplay {
 		const ingredients = ingredientsFromAppwrite(recipe.ingredients || []);
 
 		return {

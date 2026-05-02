@@ -23,8 +23,7 @@ import type {
   RecipeInfo,
 } from "../types/recipes.types";
 import { serializeRecipeInfo } from "$lib/utils/serialization.utils";
-import { getAppwriteInstances } from "$lib/services/appwrite";
-import { db } from "$lib/db-sync/aw-sync";
+import { pb, db } from "$lib/db-sync/pb-sync";
 
 // =============================================================================
 // CONFIGURATION
@@ -361,7 +360,7 @@ class RecipeDataStore {
   }
 
   /**
-   * Ajoute un ingrédient via fonction cloud Appwrite
+   * Ajoute un ingrédient via PocketBase
    */
   async addIngredient(data: {
     name: string;
@@ -378,33 +377,21 @@ class RecipeDataStore {
     try {
       console.log("[RecipeDataStore] Ajout ingrédient:", data.name);
 
-      const { functions } = await getAppwriteInstances();
+      const newIngredient: Ingredient = {
+        u: crypto.randomUUID(),
+        n: data.name,
+        t: data.type,
+        a: data.allergens,
+        pF: data.pF,
+        pS: data.pS,
+        ...(data.saisons ? { s: data.saisons } : {}),
+      };
 
-      const response = await functions.createExecution({
-        functionId: "68f00487000c624533a3",
-        body: JSON.stringify({
-          action: "add_ingredient",
-          data: {
-            name: data.name,
-            type: data.type,
-            allergens: data.allergens,
-            pF: data.pF,
-            pS: data.pS,
-            saisons: data.saisons,
-          },
-        }),
-        async: false,
+      // Créer dans PocketBase
+      await (pb.collection as any)("ingredients").create({
+        id: newIngredient.u,
+        ...newIngredient,
       });
-
-      const result = JSON.parse(response.responseBody);
-
-      if (!result.success) {
-        throw new Error(
-          result.error || "Erreur lors de la création de l'ingrédient",
-        );
-      }
-
-      const newIngredient = result.ingredient as Ingredient;
 
       // Mise à jour locale optimiste
       this.#ingredients.set(newIngredient.u, newIngredient);
@@ -474,52 +461,29 @@ class RecipeDataStore {
   }
 
   /**
-   * Met à jour recipe-info.json via fonction cloud
+   * Met à jour recipe-info localement (Dexie)
+   * TODO: Remplacer par pb.collection('catalog') quand la collection PB existe
    */
   async #updateRecipeInfo(newInfo: RecipeInfo): Promise<void> {
-    try {
-      console.log("[RecipeDataStore] Mise à jour recipe-info...");
+    console.log("[RecipeDataStore] Mise à jour recipe-info...");
 
-      const { functions } = await getAppwriteInstances();
+    // Mise à jour locale
+    this.#recipeInfo = newInfo;
 
-      const response = await functions.createExecution({
-        functionId: "68f00487000c624533a3",
-        body: JSON.stringify({
-          action: "update_recipe_info",
-          data: newInfo,
-        }),
-        async: false,
-      });
+    // Sauvegarder dans db.catalog
+    await db.catalog.bulkPut([
+      { key: KEY_RECIPE_INFO, data: serializeRecipeInfo(newInfo) },
+      {
+        key: KEY_METADATA,
+        data: {
+          lastSync: this.#lastSync,
+          dataJsonHash: null,
+          ingredientsCount: this.#ingredients.size,
+        } satisfies CatalogMetadata,
+      },
+    ]);
 
-      const result = JSON.parse(response.responseBody);
-
-      if (!result.success) {
-        throw new Error(
-          result.error || "Erreur lors de la mise à jour du recipe-info",
-        );
-      }
-
-      // Mise à jour locale optimiste
-      this.#recipeInfo = newInfo;
-
-      // Sauvegarder dans db.catalog
-      await db.catalog.bulkPut([
-        { key: KEY_RECIPE_INFO, data: serializeRecipeInfo(newInfo) },
-        {
-          key: KEY_METADATA,
-          data: {
-            lastSync: this.#lastSync,
-            dataJsonHash: null,
-            ingredientsCount: this.#ingredients.size,
-          } satisfies CatalogMetadata,
-        },
-      ]);
-
-      console.log("[RecipeDataStore] ✓ recipe-info mis à jour");
-    } catch (err) {
-      console.error("[RecipeDataStore] Erreur MAJ recipe-info:", err);
-      throw err;
-    }
+    console.log("[RecipeDataStore] ✓ recipe-info mis à jour");
   }
 
   // ===========================================================================

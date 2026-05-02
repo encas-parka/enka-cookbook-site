@@ -11,7 +11,6 @@ import {
 import { SvelteSet } from "svelte/reactivity";
 import { UnitConverter } from "$lib/utils/UnitConverter";
 import { generateSlugUuid35 } from "$lib/utils/slugUtils";
-import { deleteRecipeAppwriteWithGithub } from "$lib/services/appwrite-recipes";
 
 // ============================================================================
 // TYPES
@@ -221,35 +220,7 @@ export function normalizeRecipeForAppwrite(
   } as CreateRecipeData;
 }
 
-/**
- * Prépare les données pour la synchronisation GitHub (Hugo)
- */
-export function prepareHugoData(
-  recipe: RecipeFormState,
-  recipeData: any,
-  meta: {
-    id: string;
-    createdAt: string;
-    updatedAt: string;
-    createdBy: string;
-  },
-): any {
-  const hugoData = {
-    ...recipeData,
-    ingredients: recipe.ingredients,
-    id: meta.id,
-    createdAt: meta.createdAt,
-    updatedAt: meta.updatedAt,
-    createdBy: meta.createdBy,
-  };
-  // @ts-ignore - On retire les clés avec $ pour Hugo
-  delete hugoData.$id;
-  // @ts-ignore
-  delete hugoData.$createdAt;
-  // @ts-ignore
-  delete hugoData.$updatedAt;
-  return hugoData;
-}
+
 
 // ============================================================================
 // INGREDIENTS & ALLERGENS
@@ -583,10 +554,7 @@ export async function deleteRecipe(
   const toastId = toastService.loading("Suppression de la recette...");
 
   try {
-    // Appel synchrone de la cloud function qui :
-    // 1. Supprime le fichier markdown sur GitHub
-    // 2. Met à jour le statut Appwrite à "deleted"
-    await deleteRecipeAppwriteWithGithub(recipeId, globalState.userId || "");
+    await recipesStore.softDeleteRecipe(recipeId);
 
     // Libérer le verrou si fourni
     if (releaseLockFn) {

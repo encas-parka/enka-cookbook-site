@@ -2,11 +2,6 @@
   import { recipesStore } from "$lib/stores/RecipesStore.svelte";
   import { recipeDataStore } from "$lib/stores/RecipeDataStore.svelte";
   import { globalState } from "$lib/stores/GlobalState.svelte";
-  import { db } from "$lib/db-sync/aw-sync";
-  import {
-    executeManageDataRecipe,
-    updateRecipeAppwrite,
-  } from "$lib/services/appwrite-recipes";
   import { ingredientsToAppwrite } from "$lib/utils/ingredientUtils";
   import { astucesToAppwrite } from "$lib/utils/recipeUtils";
   import { toastService } from "$lib/services/toast.service.svelte";
@@ -28,7 +23,6 @@
     transformStoreDataToForm,
     createRecipeSnapshot,
     normalizeRecipeForAppwrite,
-    prepareHugoData,
     determineAllergensAndRegimes,
     validateRecipe,
     deleteRecipe,
@@ -352,49 +346,18 @@
         lockedBy: null,
       };
 
-      const updated = await updateRecipeAppwrite(
+      const updated = await recipesStore.updateRecipe(
         recipeId,
         recipeData,
-        globalState.userId,
       );
 
       // Réinitialiser isDirty après sauvegarde réussie en recapturant le snapshot
       initialRecipeSnapshot = createRecipeSnapshot(recipe);
 
-      // Appel async pour synchroniser vers GitHub
-      const hugoUpdateData = prepareHugoData(recipe, recipeData, {
-        id: updated.$id,
-        createdAt: updated.$createdAt,
-        updatedAt: updated.$updatedAt,
-        createdBy: updated.createdBy,
-      });
-
-      executeManageDataRecipe(
-        "save_recipe",
-        recipeId,
-        globalState.userId,
-        hugoUpdateData,
-        true,
-      ).catch((error) => {
-        console.error("Sync vers GitHub échouée:", error);
-      });
-
       toastService.update(toastId, {
         state: "success",
         message: "Recette sauvegardée !",
       });
-
-      // Optimistic update: écrire les données confirmées dans les caches locaux
-      // pour que la page détail affiche immédiatement les nouvelles données
-      // sans attendre le realtime (qui confirmera/synchronisera après)
-      try {
-        // 1. Mettre à jour db.recipes (pour le bridge/index)
-        await db.recipes.put(updated);
-        // 2. Supprimer le cache détail périmé pour forcer un rechargement frais
-        await db.recipeData.delete(`detail:${recipeId}`);
-      } catch (cacheErr) {
-        console.warn("[RecipeEditPage] Optimistic cache update failed:", cacheErr);
-      }
 
       // Rediriger vers la page de consultation
       navigate(`/recipe/${recipeId}`);

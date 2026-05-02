@@ -615,6 +615,43 @@ class RecipesStore {
 	}
 
 	// =============================================================================
+	// PUBLIC API - CRUD
+	// =============================================================================
+
+	async createRecipe(
+		data: Partial<Recettes>,
+		userId: string
+	): Promise<Recettes> {
+		const slugUuid = data.$id || crypto.randomUUID();
+		const recipeData = {
+			...data,
+			$id: slugUuid,
+			createdBy: userId,
+			status: data.status || "active"
+		};
+
+		const recipe = await this.#collection.create(recipeData as unknown as Omit<Recettes, "$id" | "$createdAt" | "$updatedAt">);
+
+		console.log(`[RecipesStore] Recipe created: ${slugUuid}`);
+		return recipe;
+	}
+
+	async updateRecipe(
+		uuid: string,
+		data: Partial<Recettes>
+	): Promise<Recettes> {
+		const recipe = await this.#collection.update(uuid, data as Partial<Recettes>);
+
+		console.log(`[RecipesStore] Recipe updated: ${uuid}`);
+		return recipe;
+	}
+
+	async softDeleteRecipe(uuid: string): Promise<void> {
+		await this.#collection.update(uuid, { status: "deleted" } as Partial<Recettes>);
+		console.log(`[RecipesStore] Recipe soft deleted: ${uuid}`);
+	}
+
+	// =============================================================================
 	// DETAIL HELPERS
 	// =============================================================================
 

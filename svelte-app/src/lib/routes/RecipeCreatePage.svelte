@@ -2,12 +2,6 @@
   import { recipesStore } from "$lib/stores/RecipesStore.svelte";
   import { recipeDataStore } from "$lib/stores/RecipeDataStore.svelte";
   import { globalState } from "$lib/stores/GlobalState.svelte";
-  import {
-    createRecipeAppwrite,
-    executeManageDataRecipe,
-  } from "$lib/services/appwrite-recipes";
-  import { ingredientsToAppwrite } from "$lib/utils/ingredientUtils";
-  import { astucesToAppwrite } from "$lib/utils/recipeUtils";
   import { toastService } from "$lib/services/toast.service.svelte";
   import { navigate, route } from "$lib/router";
   import { Save } from "@lucide/svelte";
@@ -23,8 +17,6 @@
     createDefaultRecipe,
     transformStoreDataToForm,
     createRecipeSnapshot,
-    normalizeRecipeForAppwrite,
-    prepareHugoData,
     validateRecipe,
   } from "./RecipeEditPage";
   import { fade } from "svelte/transition";
@@ -198,41 +190,13 @@
         recipe.versionLabel || undefined,
       );
 
-      // Normaliser les types UI vers types Appwrite
-      const normalized = normalizeRecipeForAppwrite(recipe);
-
-      const recipeToCreate: any = {
-        ...normalized,
-        ingredients: ingredientsToAppwrite(recipe.ingredients),
-        astuces: astucesToAppwrite(recipe.astuces),
-        prepAlt: recipe.prepAlt,
-      };
-
-      const created = await createRecipeAppwrite(
-        recipeToCreate,
+      const created = await recipesStore.createRecipe(
+        recipe as any,
         globalState.userId,
       );
       toastService.update(toastId, {
         state: "success",
         message: "Recette créée avec succès !",
-      });
-
-      // Appel async pour synchroniser vers GitHub
-      const hugoData = prepareHugoData(recipe, recipeToCreate, {
-        id: created.$id,
-        createdAt: created.$createdAt,
-        updatedAt: created.$updatedAt,
-        createdBy: created.createdBy,
-      });
-
-      executeManageDataRecipe(
-        "save_recipe",
-        created.$id,
-        globalState.userId,
-        hugoData,
-        true,
-      ).catch((error) => {
-        console.error("Sync vers GitHub échouée:", error);
       });
 
       // Marquer la sauvegarde comme réussie pour le guard

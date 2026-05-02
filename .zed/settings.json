@@ -19,6 +19,13 @@
     "agent/*",
     ".agents/*",
   ],
+  "context_servers": {
+    "serena": {
+      "command": "serena",
+      "args": ["start-mcp-server", "--context=ide", "--project-from-cwd"],
+      "env": {}
+    }
+  },
   "languages": {
     "HTML": {
       "prettier": {

@@ -1,9 +1,10 @@
 {
   "lockfileVersion": 1,
+  "configVersion": 0,
   "workspaces": {
     "": {
       "devDependencies": {
-        "concurrently": "^9.1.2",
+        "concurrently": "^9.2.1",
       },
     },
   },

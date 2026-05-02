@@ -3,10 +3,10 @@
   import { fade } from "svelte/transition";
   import { navigate, route } from "$lib/router";
   import { globalState } from "$lib/stores/GlobalState.svelte";
-  import { redeemShareLink } from "$lib/services/appwrite-invitations";
+  import { redeemShareLink } from "$lib/services/pb-invitations";
   import { toastService } from "$lib/services/toast.service.svelte";
   import { navBarStore } from "$lib/stores/NavBarStore.svelte";
-  import { db } from "$lib/db-sync/aw-sync";
+  import { db } from "$lib/db-sync/pb-sync";
   import AuthModal from "$lib/components/AuthModal.svelte";
   import { PartyPopper, TriangleAlert } from "@lucide/svelte";
 

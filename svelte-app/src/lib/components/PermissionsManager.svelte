@@ -15,7 +15,7 @@
   import type { EventsStore } from "$lib/stores/EventsStore.svelte";
   import { nanoid } from "nanoid";
   import { toastService } from "$lib/services/toast.service.svelte";
-  import { createShareLink } from "$lib/services/appwrite-invitations";
+  import { createShareLink } from "$lib/services/pb-invitations";
   import ModalContainer from "$lib/components/ui/modal/ModalContainer.svelte";
   import ModalHeader from "$lib/components/ui/modal/ModalHeader.svelte";
   import ModalContent from "$lib/components/ui/modal/ModalContent.svelte";

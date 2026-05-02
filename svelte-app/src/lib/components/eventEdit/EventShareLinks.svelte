@@ -1,7 +1,7 @@
 <script lang="ts">
   import { Shield, Link as LinkIcon, Copy, Plus } from "@lucide/svelte";
   import Fieldset from "$lib/components/ui/Fieldset.svelte";
-  import { createShareLink } from "$lib/services/appwrite-invitations";
+  import { createShareLink } from "$lib/services/pb-invitations";
   import { globalState } from "$lib/stores/GlobalState.svelte";
   import { toastService } from "$lib/services/toast.service.svelte";
   import type { Main } from "$lib/types/appwrite";

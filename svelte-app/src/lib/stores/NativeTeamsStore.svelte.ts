@@ -1,32 +1,63 @@
 import { SvelteMap } from "svelte/reactivity";
-import type { Models } from "appwrite";
 import type {
   EnrichedNativeTeam,
   NativeTeamMember,
-  InviteResult,
-  AsyncInviteResult,
 } from "$lib/types/aw_native_team.d";
 import { toastService } from "$lib/services/toast.service.svelte";
-import {
-  listUserTeams,
-  getTeam,
-  createTeam as createNativeTeam,
-  updateTeam as updateNativeTeam,
-  deleteTeam as deleteNativeTeam,
-  listMembers,
-  removeMember,
-  inviteMembers,
-  updateTeamPrefs,
-  updateMembershipRoles,
-  type TeamPrefs,
-} from "@/lib/services/appwrite-native-teams";
 import { globalState } from "./GlobalState.svelte";
-import {
-  registerRealtime,
-  unregisterRealtime,
-  isRealtimeInitialized,
-  db,
-} from "$lib/db-sync/aw-sync";
+import { pb, db } from "$lib/db-sync/pb-sync";
+
+/**
+ * Interface pour les préférences d'une équipe.
+ * En PB, ces champs sont directement sur la collection `teams`
+ * (description, city, isPublic) — on garde l'interface pour
+ * compatibilité avec les composants existants.
+ */
+export interface TeamPrefs {
+  description?: string;
+  location?: string;
+  city?: string;
+  isPublic?: boolean;
+}
+
+/**
+ * Transforme un record PB team (avec expand.members) en EnrichedNativeTeam.
+ */
+function enrichTeamFromPB(raw: Record<string, any>): EnrichedNativeTeam {
+  const expandedMembers = raw.expand?.members;
+  const memberArray = expandedMembers
+    ? Array.isArray(expandedMembers)
+      ? expandedMembers
+      : [expandedMembers]
+    : [];
+
+  const roles: Record<string, string> = raw.roles || {};
+  const createdBy = raw.createdBy || raw.expand?.createdBy?.id || null;
+
+  return {
+    $id: raw.id,
+    name: raw.name || "",
+    total: memberArray.length,
+    $createdAt: raw.created || "",
+    $updatedAt: raw.updated || "",
+    prefs: {
+      description: raw.description || "",
+      location: raw.location || "",
+      city: raw.city || "",
+      isPublic: raw.isPublic || false,
+    },
+    description: raw.description || "",
+    members: memberArray.map((user: Record<string, any>) => ({
+      $id: user.id, // En PB, pas de membership ID → on utilise le user ID
+      id: user.id,
+      name: user.name || "",
+      userEmail: user.email || "",
+      roles: roles[user.id] ? [roles[user.id]] : ["member"],
+      joinedAt: user.created || "",
+      confirmed: true, // En PB, pas d'invitation pending
+    })),
+  };
+}
 
 export class NativeTeamsStore {
   // État réactif
@@ -35,6 +66,7 @@ export class NativeTeamsStore {
   #error = $state<string | null>(null);
   #isInitialized = $state(false);
   #realtimeInitialized = false;
+  #realtimeUnsubscribe: (() => void) | null = null;
 
   // Getters simples
   get loading() {
@@ -94,7 +126,7 @@ export class NativeTeamsStore {
   }
 
   /**
-   * Phase 2 : Charge les équipes depuis Appwrite
+   * Phase 2 : Charge les équipes depuis PocketBase
    */
   async syncFromRemote(): Promise<void> {
     this.#loading = true;
@@ -121,25 +153,16 @@ export class NativeTeamsStore {
   }
 
   /**
-   * Phase 3 : Configure les abonnements realtime
+   * Phase 3 : Configure les abonnements realtime via PB SSE
    */
   async setupRealtime(): Promise<void> {
-    // ✅ Pas de realtime pour les visiteurs
     if (!globalState.isAuthenticated) {
       return;
     }
 
-    // Vérifier si déjà configuré pour éviter les doublons
-    // ✅ SAUF si le realtime centralisé a été détruit (changement auth)
-    if (this.#realtimeInitialized && isRealtimeInitialized()) {
+    if (this.#realtimeInitialized) {
       console.log("[NativeTeamsStore] Realtime déjà configuré");
       return;
-    }
-
-    // Réinitialiser le flag si le realtime centralisé a été détruit
-    if (this.#realtimeInitialized && !isRealtimeInitialized()) {
-      console.log("[NativeTeamsStore] Realtime détruit, réinitialisation...");
-      this.#realtimeInitialized = false;
     }
 
     try {
@@ -155,7 +178,7 @@ export class NativeTeamsStore {
   }
 
   /**
-   * Initialise les 3 phases séquentiellement (méthode legacy pour compatibilité)
+   * Initialise les 3 phases séquentiellement
    */
   async initialize(): Promise<void> {
     await this.loadCache();
@@ -169,41 +192,66 @@ export class NativeTeamsStore {
   async hardReset(): Promise<void> {
     console.log("[NativeTeamsStore] Hard reset...");
 
-    // Vider l'état
     this.#teams.clear();
     this.#isInitialized = false;
 
-    // Recharger depuis Appwrite
     await this.initialize();
 
     console.log("[NativeTeamsStore] Hard reset terminé");
   }
 
+  // =============================================================================
+  // CHARGEMENT DES DONNÉES
+  // =============================================================================
+
   async #loadTeams(): Promise<void> {
-    const response = await listUserTeams();
-    for (const team of response.teams) {
-      await this.fetchTeam(team.$id);
+    const userId = globalState.userId;
+    if (!userId) return;
+
+    // Récupérer toutes les teams dont l'utilisateur est membre
+    const teams = await pb.collection("teams").getFullList({
+      expand: "members,createdBy",
+      filter: pb.filter("members ?= {:userId}", { userId }),
+    });
+
+    // Vider les teams obsolètes
+    const currentIds = new Set(teams.map((t) => t.id));
+    for (const id of this.#teams.keys()) {
+      if (!currentIds.has(id)) {
+        this.#teams.delete(id);
+      }
+    }
+
+    // Enrichir et stocker
+    for (const rawTeam of teams) {
+      const enriched = enrichTeamFromPB(rawTeam);
+      this.#teams.set(rawTeam.id, enriched);
+      await db.nativeTeams.put(enriched);
     }
   }
 
   async #setupRealtimeInternal(): Promise<void> {
-    // Les Teams natives utilisent des channels différents dans Appwrite
-    // Note: Pour les Teams, le channel est "teams" ou "memberships"
-    registerRealtime(
-      "native-teams",
-      ["teams", "memberships"],
-      async (response: any) => {
-        // Logique de mise à jour basée sur les événements
-        // Les événements Team/Membership sont globaux car liés à l'utilisateur
+    // Nettoyer l'abonnement précédent si nécessaire
+    if (this.#realtimeUnsubscribe) {
+      this.#realtimeUnsubscribe();
+      this.#realtimeUnsubscribe = null;
+    }
+
+    // S'abonner aux changements sur la collection teams
+    // PB SSE : les API rules filtrent déjà les teams visibles
+    this.#realtimeUnsubscribe = await pb
+      .collection("teams")
+      .subscribe("*", async (e) => {
         console.log(
-          "[NativeTeamsStore] ⚡️ Realtime RECEIVED:",
-          response.events,
+          "[NativeTeamsStore] ⚡️ Realtime event:",
+          e.action,
+          e.record?.id,
         );
 
-        // On refresh tout pour simplifier car les événements natifs sont complexes à mapper 1:1 localement sans risque
+        // Refresh complet pour simplifier (les relations members rendent
+        // la mise à jour incrémentale risquée)
         await this.#loadTeams();
-      },
-    );
+      });
   }
 
   // =============================================================================
@@ -216,15 +264,12 @@ export class NativeTeamsStore {
 
   /**
    * Retourne la liste des usernames des membres d'une team
-   * @param teamId - ID de la team
-   * @returns string[] - Liste des noms des membres
    */
   getTeamMemberNames(teamId: string): string[] {
     const team = this.#teams.get(teamId);
     if (!team || !team.members) return [];
     return team.members
       .map((m) => {
-        // Priorité: name > partie avant le @ de l'email > "Inconnu"
         if (m.name) return m.name;
         if (m.userEmail) return m.userEmail.split("@")[0];
         return "Inconnu";
@@ -234,29 +279,12 @@ export class NativeTeamsStore {
 
   async fetchTeam(teamId: string): Promise<EnrichedNativeTeam | null> {
     try {
-      const team = await getTeam(teamId);
-      const memberships = await listMembers(teamId);
+      const rawTeam = await pb.collection("teams").getOne(teamId, {
+        expand: "members,createdBy",
+      });
 
-      const enriched: EnrichedNativeTeam = {
-        $id: team.$id,
-        name: team.name,
-        total: team.total,
-        $createdAt: team.$createdAt,
-        $updatedAt: team.$updatedAt,
-        prefs: team.prefs,
-        members: memberships.memberships.map((m) => ({
-          $id: m.$id,
-          id: m.userId,
-          name: m.userName,
-          userEmail: m.userEmail,
-          roles: m.roles,
-          joinedAt: m.joined,
-          confirmed: m.confirm,
-        })),
-      };
-
+      const enriched = enrichTeamFromPB(rawTeam);
       this.#teams.set(teamId, enriched);
-      // Write-through vers Dexie
       await db.nativeTeams.put(enriched);
       return enriched;
     } catch (err) {
@@ -269,11 +297,21 @@ export class NativeTeamsStore {
     name: string,
     prefs?: TeamPrefs,
   ): Promise<EnrichedNativeTeam> {
-    const team = await createNativeTeam(name);
-    if (prefs && Object.keys(prefs).length > 0) {
-      await updateTeamPrefs(team.$id, prefs);
-    }
-    const enriched = await this.fetchTeam(team.$id);
+    const userId = globalState.userId;
+    if (!userId) throw new Error("Utilisateur non connecté");
+
+    const rawTeam = await pb.collection("teams").create({
+      name,
+      members: [userId],
+      createdBy: userId,
+      roles: { [userId]: "owner" },
+      description: prefs?.description || "",
+      city: prefs?.city || "",
+      isPublic: prefs?.isPublic || false,
+    });
+
+    // Re-fetch avec expand pour avoir les membres enrichis
+    const enriched = await this.fetchTeam(rawTeam.id);
     if (!enriched) throw new Error("Erreur après création d'équipe");
     return enriched;
   }
@@ -283,42 +321,87 @@ export class NativeTeamsStore {
     name?: string,
     prefs?: TeamPrefs,
   ): Promise<void> {
-    if (name) await updateNativeTeam(teamId, name);
-    if (prefs && Object.keys(prefs).length > 0) {
-      await updateTeamPrefs(teamId, prefs);
+    const data: Record<string, any> = {};
+    if (name) data.name = name;
+    if (prefs) {
+      if (prefs.description !== undefined) data.description = prefs.description;
+      if (prefs.city !== undefined) data.city = prefs.city;
+      if (prefs.isPublic !== undefined) data.isPublic = prefs.isPublic;
     }
+
+    if (Object.keys(data).length > 0) {
+      await pb.collection("teams").update(teamId, data);
+    }
+
     await this.fetchTeam(teamId);
   }
 
   async deleteTeam(teamId: string): Promise<void> {
-    await deleteNativeTeam(teamId);
+    await pb.collection("teams").delete(teamId);
     this.#teams.delete(teamId);
     await db.nativeTeams.delete(teamId);
   }
 
+  /**
+   * Invite des membres par email.
+   *
+   * NOTE : En PB, l'invitation par email nécessite un hook PB ou un mécanisme
+   * externe. Pour l'instant, cette méthode est un stub qui log l'action.
+   * L'ajout direct de membres (via userId) fonctionne via addMember().
+   * Le système d'invitations complet sera implémenté dans le Lot F-3.
+   */
   async inviteTeamMember(
     teamId: string,
     emails: string[],
-    message?: string,
+    _message?: string,
   ): Promise<void> {
-    const result = await inviteMembers(teamId, emails, message);
-
-    // ✅ La fonction est maintenant async, le reload se fera via realtime
-    // Ne pas faire await this.fetchTeam() immédiatement
-    // Les membres apparaîtront automatiquement via realtime
+    // TODO: Lot F-3 — implémenter les invitations via PB hooks ou service externe
+    console.warn(
+      `[NativeTeamsStore] inviteTeamMember: stub — emails=${emails.join(", ")}, teamId=${teamId}. En attente du Lot F-3.`,
+    );
+    toastService.info(
+      "L'invitation par email sera disponible prochainement (migration en cours).",
+    );
   }
 
+  /**
+   * Retire un membre d'une team.
+   * En PB, le paramètre est le userId (pas un membershipId).
+   * L'interface utilise encore le nom `membershipId` pour compatibilité.
+   */
   async removeMember(teamId: string, membershipId: string): Promise<void> {
-    await removeMember(teamId, membershipId);
+    // membershipId = userId en PB
+    const rawTeam = await pb.collection("teams").getOne(teamId);
+    const currentMembers: string[] = rawTeam.members || [];
+    const updatedMembers = currentMembers.filter((id) => id !== membershipId);
+
+    // Retirer aussi du roles
+    const roles: Record<string, string> = rawTeam.roles || {};
+    delete roles[membershipId];
+
+    await pb.collection("teams").update(teamId, {
+      members: updatedMembers,
+      roles,
+    });
+
     await this.fetchTeam(teamId);
   }
 
+  /**
+   * Met à jour le rôle d'un membre.
+   * En PB, le paramètre membershipId est le userId.
+   * Le rôle est stocké dans le champ JSON `roles` de la team.
+   */
   async updateMemberRole(
     teamId: string,
     membershipId: string,
     role: "owner" | "member",
   ): Promise<void> {
-    await updateMembershipRoles(teamId, membershipId, [role]);
+    const rawTeam = await pb.collection("teams").getOne(teamId);
+    const roles: Record<string, string> = rawTeam.roles || {};
+    roles[membershipId] = role;
+
+    await pb.collection("teams").update(teamId, { roles });
     await this.fetchTeam(teamId);
   }
 
@@ -333,8 +416,10 @@ export class NativeTeamsStore {
   }
 
   async destroy(): Promise<void> {
-    if (this.#realtimeInitialized) {
-      unregisterRealtime("native-teams");
+    // Unsubscribe PB realtime
+    if (this.#realtimeUnsubscribe) {
+      this.#realtimeUnsubscribe();
+      this.#realtimeUnsubscribe = null;
     }
     this.#teams.clear();
     await db.nativeTeams.clear();

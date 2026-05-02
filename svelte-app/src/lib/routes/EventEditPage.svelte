@@ -1,7 +1,7 @@
 <script lang="ts">
   import EventMealCard from "$lib/components/eventEdit/EventMealCard.svelte";
   import PermissionsManager from "$lib/components/PermissionsManager.svelte";
-  import EventShareLinks from "$lib/components/eventEdit/EventShareLinks.svelte";
+
   import EventInvitationAlert from "$lib/components/EventInvitationAlert.svelte";
   import { toastService } from "$lib/services/toast.service.svelte";
   import { eventsStore } from "$lib/stores/EventsStore.svelte";
@@ -322,14 +322,17 @@
       isBusy = true;
       try {
         activeLock = await locksService.getLock(`event_${eventId}`);
-        lockUnsub = await locksService.subscribeToLock(`event_${eventId}`, (lock) => {
-          console.log("[EventEditPage] 🔒 Verrou mis à jour:", {
-            lockedBy: lock?.userName,
-            userId: lock?.userId,
-            expiresAt: lock?.expiresAt,
-          });
-          activeLock = lock;
-        });
+        lockUnsub = await locksService.subscribeToLock(
+          `event_${eventId}`,
+          (lock) => {
+            console.log("[EventEditPage] 🔒 Verrou mis à jour:", {
+              lockedBy: lock?.userName,
+              userId: lock?.userId,
+              expiresAt: lock?.expiresAt,
+            });
+            activeLock = lock;
+          },
+        );
       } finally {
         isBusy = false;
         console.log("[Init] Lock chargé, isBusy = false");

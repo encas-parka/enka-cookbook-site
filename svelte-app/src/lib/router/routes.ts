@@ -46,9 +46,6 @@ export const routes: Routes = {
   // Détail d'une recette (publique)
   "/recipe/:uuid": () => import("$lib/routes/RecipeDetailPage.svelte"),
 
-  // Acceptation d'invitation
-  "/accept-invite": () => import("$lib/routes/AcceptInvite.svelte"),
-
   // Magic link de partage event (public, sans guard)
   "/join/:linkId": () => import("$lib/routes/JoinPage.svelte"),
 
@@ -139,7 +136,8 @@ export const routes: Routes = {
     "/posters": () => import("$lib/routes/EventPosterPage.svelte"),
     "/todos": () => import("$lib/routes/EventTodosPage.svelte"),
     "/documents": () => import("$lib/routes/EventDocumentsPage.svelte"),
-    "/document/create": () => import("$lib/routes/EventDocumentCreatePage.svelte"),
+    "/document/create": () =>
+      import("$lib/routes/EventDocumentCreatePage.svelte"),
     "/document/:docId": () =>
       import("$lib/routes/EventDocumentEditPage.svelte"),
     "/document/:docId/edit": () =>

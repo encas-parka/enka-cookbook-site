@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { onMount } from "svelte";
   import {
     Users,
     UserPlus,
@@ -15,7 +16,10 @@
   import type { EventsStore } from "$lib/stores/EventsStore.svelte";
   import { nanoid } from "nanoid";
   import { toastService } from "$lib/services/toast.service.svelte";
-  import { createShareLink } from "$lib/services/pb-invitations";
+  import {
+    createShareLink,
+    getEventShareLinks,
+  } from "$lib/services/pb-invitations";
   import ModalContainer from "$lib/components/ui/modal/ModalContainer.svelte";
   import ModalHeader from "$lib/components/ui/modal/ModalHeader.svelte";
   import ModalContent from "$lib/components/ui/modal/ModalContent.svelte";
@@ -90,6 +94,20 @@
   let emailInput = $state("");
   let inviteError = $state<string | null>(null);
   let isGenerating = $state(false);
+  let shareLinkIds = $state<string[]>([]);
+
+  async function loadShareLinks() {
+    if (!eventId) return;
+    try {
+      shareLinkIds = await getEventShareLinks(eventId);
+    } catch {
+      shareLinkIds = [];
+    }
+  }
+
+  onMount(() => {
+    loadShareLinks();
+  });
 
   // Groupes de contributeurs pour l'affichage
   let acceptedContributors = $derived(
@@ -264,8 +282,9 @@
     if (!userId || !eventId) return;
     try {
       isGenerating = true;
-      const result = await createShareLink(eventId, userId);
+      await createShareLink(eventId, userId);
       toastService.success("Lien généré avec succès !");
+      await loadShareLinks();
     } catch (e: any) {
       toastService.error(e.message || "Erreur lors de la génération du lien");
     } finally {
@@ -451,11 +470,10 @@
       </div>
     </div>
 
-    <!-- Liste des liens déjà générés -->
-    {@const event = eventsStore.getEventById(eventId)}
-    {#if event?.shareLinks && event.shareLinks.length > 0}
+    <!-- Liste des liens déjà générés (chargée depuis la collection share_links) -->
+    {#if shareLinkIds.length > 0}
       <div class="mt-4 space-y-2">
-        {#each event.shareLinks as linkId (linkId)}
+        {#each shareLinkIds as linkId (linkId)}
           <div
             class="bg-base-200 flex items-center justify-between gap-2 rounded-md p-2"
           >

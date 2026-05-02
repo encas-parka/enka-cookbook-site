@@ -1,21 +1,39 @@
 <script lang="ts">
+  import { onMount } from "svelte";
   import { Shield, Link as LinkIcon, Copy, Plus } from "@lucide/svelte";
   import Fieldset from "$lib/components/ui/Fieldset.svelte";
-  import { createShareLink } from "$lib/services/pb-invitations";
+  import {
+    createShareLink,
+    getEventShareLinks,
+  } from "$lib/services/pb-invitations";
   import { globalState } from "$lib/stores/GlobalState.svelte";
   import { toastService } from "$lib/services/toast.service.svelte";
-  import type { Main } from "$lib/types/appwrite";
 
-  let { event } = $props<{ event: Main }>();
+  let { eventId } = $props<{ eventId: string }>();
 
   let isGenerating = $state(false);
+  let shareLinkIds = $state<string[]>([]);
+
+  async function loadShareLinks() {
+    if (!eventId) return;
+    try {
+      shareLinkIds = await getEventShareLinks(eventId);
+    } catch {
+      shareLinkIds = [];
+    }
+  }
+
+  onMount(() => {
+    loadShareLinks();
+  });
 
   async function handleGenerateLink() {
-    if (!globalState.userId || !event?.id) return;
+    if (!globalState.userId || !eventId) return;
     try {
       isGenerating = true;
-      const result = await createShareLink(event.id, globalState.userId);
+      await createShareLink(eventId, globalState.userId);
       toastService.success("Lien généré avec succès !");
+      await loadShareLinks();
     } catch (e: any) {
       toastService.error(e.message || "Erreur lors de la génération du lien");
     } finally {
@@ -42,9 +60,9 @@
     </div>
 
     <!-- Liste des liens déjà générés -->
-    {#if event.shareLinks && event.shareLinks.length > 0}
+    {#if shareLinkIds.length > 0}
       <div class="space-y-2">
-        {#each event.shareLinks as linkId, i}
+        {#each shareLinkIds as linkId, i}
           <div
             class="bg-base-200 flex items-center justify-between gap-2 rounded-md p-2"
           >

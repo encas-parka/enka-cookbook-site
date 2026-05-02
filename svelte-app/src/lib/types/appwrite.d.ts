@@ -88,7 +88,6 @@ export type Main = PbDoc & {
   minContrib: number;
   todos: string[] | null;
   teamsId: string[] | null;
-  shareLinks: string[] | null;
 };
 
 export type Products = PbDoc & {

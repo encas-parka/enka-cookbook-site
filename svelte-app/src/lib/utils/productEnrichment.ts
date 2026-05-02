@@ -35,8 +35,14 @@ import {
 import { UnitConverter } from "./UnitConverter";
 import { calculateAllDateDisplayInfo } from "./dateRange";
 import { recipesStore } from "$lib/stores/RecipesStore.svelte";
-import type { ProductWithPurchases } from "../services/appwrite-products";
 import type { ParsedNeed } from "./product-need-serializer";
+
+/**
+ * Produit avec ses achats associés (résolu côté client).
+ */
+type ProductWithPurchases = Products & {
+  purchases: Purchases[];
+};
 
 /**
  * Type interne pour les produits avec purchases optionnel.

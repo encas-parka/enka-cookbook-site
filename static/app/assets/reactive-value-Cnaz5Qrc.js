@@ -1,0 +1,1 @@
+import"./rolldown-runtime-C3mKaglU.js";import{ci as i,di as e,li as t,si as l}from"./icons-LMS3qsu9.js";var s=new WeakMap,a=new WeakMap,n=class{constructor(r,c){e(this,s,void 0),e(this,a,void 0),i(s,this,r),i(a,this,l(c))}get current(){return t(a,this).call(this),t(s,this).call(this)}};export{n as t};

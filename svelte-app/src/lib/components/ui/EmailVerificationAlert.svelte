@@ -3,23 +3,11 @@
   import { fade } from "svelte/transition";
   import { MailCheck } from "@lucide/svelte";
   import { toastService } from "$lib/services/toast.service.svelte";
-
-  /**
-   * Composant d'alerte pour les utilisateurs dont l'email n'est pas vérifié
-   * S'affiche uniquement si l'utilisateur est authentifié mais que son email n'est pas vérifié
-   */
+  import { pb } from "$lib/db-sync/pb-sync";
 
   async function resendVerificationEmail() {
     try {
-      const { account } = await import("$lib/services/appwrite").then((m) =>
-        m.getAppwriteInstances(),
-      );
-
-      // Créer une verification avec URL de redirection
-      // Le router est en mode path-based, Appwrite ajoutera ?userId=xxx&secret=xxx
-      const token = await account.createEmailVerification({
-        url: window.location.origin + "/verify-email",
-      });
+      await pb.collection('users').requestVerification(pb.authStore.record!.email);
 
       toastService.success(
         "Email de vérification envoyé ! Vérifiez votre boîte de réception.",

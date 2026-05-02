@@ -13,6 +13,7 @@
   import Fieldset from "../ui/Fieldset.svelte";
   import BtnGroupCheck from "../ui/BtnGroupCheck.svelte";
   import { toastService } from "$lib/services/toast.service.svelte";
+  import { pb } from "$lib/db-sync/pb-sync";
   import { fade } from "svelte/transition";
   import ModalContainer from "$lib/components/ui/modal/ModalContainer.svelte";
   import ModalHeader from "$lib/components/ui/modal/ModalHeader.svelte";
@@ -91,20 +92,22 @@
     inviteError = null;
 
     try {
-      const { checkUserEmails } =
-        await import("$lib/services/appwrite-functions");
-      const result = await checkUserEmails([email]);
-      const userInfo = result[email];
+      const result = await pb.collection('users').getList(1, 1, {
+        filter: pb.filter('email = {:email}', { email }),
+      });
 
-      if (userInfo) {
-        if (permissionWrite?.includes(userInfo.id)) {
+      if (result.items.length > 0) {
+        const user = result.items[0];
+        const userName = (user as Record<string, unknown>).name as string || email;
+
+        if (permissionWrite?.includes(user.id)) {
           inviteError = "Cet utilisateur a déjà les droits d'écriture.";
         } else {
-          permissionWrite = [...(permissionWrite || []), userInfo.id];
-          memberNames[userInfo.id] = userInfo.name || email;
+          permissionWrite = [...(permissionWrite || []), user.id];
+          memberNames[user.id] = userName;
           emailInput = "";
           toastService.success(
-            `Permission d'édition ajouté pour ${userInfo.name || email}`,
+            `Permission d'édition ajouté pour ${userName}`,
           );
         }
       } else {

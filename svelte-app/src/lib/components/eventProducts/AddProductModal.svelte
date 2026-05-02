@@ -9,7 +9,6 @@
     History,
   } from "@lucide/svelte";
   import { productsStore } from "$lib/stores/ProductsStore.svelte";
-  import { createManualProduct } from "$lib/services/appwrite-products";
   import { toastService } from "$lib/services/toast.service.svelte";
   import {
     getProductTypeInfo,
@@ -106,28 +105,34 @@
         throw new Error("Aucun événement principal sélectionné");
       }
 
-      const productData = {
-        productName: formData.productName.trim(),
+      const productName = formData.productName.trim();
+      const storeValue = formData.store.trim()
+        ? JSON.stringify({ storeName: formData.store.trim() })
+        : undefined;
+
+      const productId = await productsStore.createProduct({
+        productName,
         productType: getProductTypeRawKey(formData.productType.trim()),
-        store: formData.store.trim()
-          ? { storeName: formData.store.trim() }
-          : undefined,
+        store: storeValue,
         who: formData.who.trim() ? [formData.who.trim()] : undefined,
         pF: formData.pF,
         pS: formData.pS,
-        quantity: formData.quantity
-          ? { q: formData.quantity, u: formData.unit.trim() || "pièces" }
-          : undefined,
-      };
+      });
 
-      const newProduct = await createManualProduct(
-        productData,
-        productsStore.currentMainId!,
-      );
-      productsStore.addProductOptimistic(newProduct);
+      // Si une quantité initiale est fournie, créer un achat associé
+      if (formData.quantity && formData.quantity > 0) {
+        await productsStore.createPurchase(
+          productId,
+          [{ q: formData.quantity, u: formData.unit.trim() || "pièces" }],
+          {
+            store: formData.store.trim(),
+            who: formData.who.trim(),
+          },
+        );
+      }
 
       success = true;
-      toastService.success(`Produit "${productData.productName}" ajouté`);
+      toastService.success(`Produit "${productName}" ajouté`);
 
       // Reset form after short delay and close
       // Reset form but keep some values

@@ -6,18 +6,16 @@
   import { MailCheck, XCircle, Loader2 } from "@lucide/svelte";
   import { fade } from "svelte/transition";
   import { navigate, route } from "$lib/router";
+  import { pb } from "$lib/db-sync/pb-sync";
 
   let status = $state<"loading" | "success" | "error">("loading");
   let message = $state("");
 
   onMount(async () => {
     navBarStore.reset();
-    // Appwrite ajoute les query params à l'URL : /verify-email?userId=xxx&secret=yyy
-    // Le router sv-router les expose via route.search
-    const userId = route.search.userId as string;
-    const secret = route.search.secret as string;
+    const token = route.search.token as string;
 
-    if (!userId || !secret) {
+    if (!token) {
       status = "error";
       message =
         "Paramètres de vérification manquants. Vérifiez le lien dans l'email.";
@@ -25,14 +23,8 @@
     }
 
     try {
-      // Appeler updateVerification pour finaliser la vérification
-      const { account } = await import("$lib/services/appwrite").then((m) =>
-        m.getAppwriteInstances(),
-      );
+      await pb.collection('users').confirmVerification(token);
 
-      await account.updateEmailVerification({ userId, secret });
-
-      // Rafraîchir les infos utilisateur
       await globalState.refreshAuthAfterLogin();
 
       status = "success";

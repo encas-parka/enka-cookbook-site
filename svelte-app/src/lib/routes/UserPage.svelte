@@ -2,7 +2,7 @@
   import { globalState } from "$lib/stores/GlobalState.svelte";
   import { route, navigate, p } from "$lib/router";
   import { toastService } from "$lib/services/toast.service.svelte";
-  import { getAppwriteInstances } from "$lib/services/appwrite";
+  import { pb } from "$lib/db-sync/pb-sync";
   import { onMount } from "svelte";
   import { navBarStore } from "$lib/stores/NavBarStore.svelte";
 
@@ -71,13 +71,15 @@
     isUpdatingName = true;
 
     try {
-      const { account } = await getAppwriteInstances();
-
-      await toastService.track(account.updateName(newName.trim()), {
-        loading: "Mise à jour du nom d'utilisateur...",
-        success: "Nom d'utilisateur mis à jour avec succès",
-        error: "Erreur lors de la mise à jour du nom d'utilisateur",
-      });
+      const userId = pb.authStore.record!.id;
+      await toastService.track(
+        pb.collection('users').update(userId, { name: newName.trim() }),
+        {
+          loading: "Mise à jour du nom d'utilisateur...",
+          success: "Nom d'utilisateur mis à jour avec succès",
+          error: "Erreur lors de la mise à jour du nom d'utilisateur",
+        },
+      );
 
       // Mettre à jour globalState
       await globalState.refreshAuthAfterLogin();
@@ -96,10 +98,13 @@
     isUpdatingPassword = true;
 
     try {
-      const { account } = await getAppwriteInstances();
-
+      const userId = pb.authStore.record!.id;
       await toastService.track(
-        account.updatePassword(newPassword, oldPassword),
+        pb.collection('users').update(userId, {
+          oldPassword,
+          password: newPassword,
+          passwordConfirm: newPassword,
+        }),
         {
           loading: "Mise à jour du mot de passe...",
           success: "Mot de passe mis à jour avec succès",

@@ -4,10 +4,6 @@ Modal de récapitulatif des dépenses
 <script lang="ts">
   import { productsStore } from "$lib/stores/ProductsStore.svelte";
   import { globalState } from "$lib/stores/GlobalState.svelte";
-  import {
-    createExpensePurchase,
-    updatePurchase,
-  } from "$lib/services/appwrite-products";
   import type { Purchases } from "$lib/types/appwrite";
   import {
     BadgeEuro,
@@ -120,7 +116,7 @@ Modal de récapitulatif des dépenses
 
       if (editingPurchaseId) {
         // Mode Édition
-        await updatePurchase(editingPurchaseId, {
+        await productsStore.updatePurchase(editingPurchaseId, {
           price: newExpense.invoiceTotal,
           invoiceTotal: newExpense.invoiceTotal,
           store: newExpense.store,
@@ -129,14 +125,12 @@ Modal de récapitulatif des dépenses
         });
       } else {
         // Mode Création
-        await createExpensePurchase(
-          mainId,
-          undefined, // invoiceId auto-généré
-          newExpense.invoiceTotal,
-          newExpense.store,
-          newExpense.notes,
-          newExpense.who,
-        );
+        await productsStore.createExpense({
+          invoiceTotal: newExpense.invoiceTotal,
+          store: newExpense.store,
+          notes: newExpense.notes,
+          who: newExpense.who,
+        });
       }
 
       // Reset form

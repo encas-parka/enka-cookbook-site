@@ -1231,6 +1231,33 @@ class ProductsStore {
     return newProduct.id;
   }
 
+  async createExpense(data: {
+    invoiceTotal: number;
+    store?: string;
+    notes?: string;
+    who?: string;
+  }): Promise<void> {
+    const mainId = this.#currentMainId;
+    if (!mainId) throw new Error("Aucun événement principal actif");
+
+    await this.#purchasesCollection.create({
+      products: [],
+      mainId,
+      quantity: 1,
+      unit: "global",
+      status: "expense",
+      notes: data.notes || "",
+      store: data.store || null,
+      who: data.who || globalState.userName,
+      price: data.invoiceTotal,
+      invoiceId: null,
+      invoiceTotal: data.invoiceTotal,
+      orderDate: null,
+      deliveryDate: new Date().toISOString(),
+      createdBy: globalState.userId,
+    } as unknown as Omit<Purchases, "id" | "created" | "updated">);
+  }
+
   async updateProduct(
     productId: string,
     updates: Partial<EnrichedProduct>,

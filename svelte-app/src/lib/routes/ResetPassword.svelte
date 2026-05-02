@@ -1,7 +1,7 @@
 <script lang="ts">
   import { onMount } from "svelte";
   import { navBarStore } from "$lib/stores/NavBarStore.svelte";
-  import { getAppwriteInstances } from "../services/appwrite";
+  import { pb } from "$lib/db-sync/pb-sync";
   import { navigate, route } from "$lib/router";
 
   import {
@@ -20,20 +20,18 @@
   let confirmPassword = $state("");
   let isValidLink = $state(false);
   let isProcessing = $state(true);
-  let userId = $state("");
-  let secret = $state("");
+  let token = $state("");
 
   // Récupérer userId et secret depuis l'URL via sv-router
   onMount(() => {
     navBarStore.reset();
-    userId = typeof route.search.userId === "string" ? route.search.userId : "";
-    secret = typeof route.search.secret === "string" ? route.search.secret : "";
+    token = typeof route.search.token === "string" ? route.search.token : "";
     validateRecoveryLink();
   });
 
   // Valider le lien
   async function validateRecoveryLink() {
-    if (!userId || !secret) {
+    if (!token) {
       errorMessage = "Lien de réinitialisation invalide ou manquant.";
       isValidLink = false;
       isProcessing = false;
@@ -48,7 +46,7 @@
     event.preventDefault();
 
     // Guard : vérifier que le lien est valide
-    if (!userId || !secret || !isValidLink) {
+    if (!token || !isValidLink) {
       errorMessage = "Lien de réinitialisation invalide.";
       return;
     }
@@ -72,21 +70,23 @@
     errorMessage = "";
 
     try {
-      const { account } = await getAppwriteInstances();
-
-      await account.updateRecovery({ userId, secret, password: newPassword });
+      await pb.collection('users').confirmPasswordReset(
+        token,
+        newPassword,
+        newPassword,
+      );
 
       successMessage = "Mot de passe réinitialisé avec succès !";
 
-      // Rediriger vers le dashboard après 3 secondes
       setTimeout(() => {
         navigate("/dashboard");
       }, 3000);
     } catch (error: any) {
       console.error("Erreur réinitialisation:", error);
       if (
-        error.response?.code === 401 ||
-        error.message?.includes("Invalid secret")
+        error.status === 400 ||
+        error.message?.includes("Invalid") ||
+        error.message?.includes("expired")
       ) {
         errorMessage =
           "Ce lien est invalide ou a expiré. Veuillez refaire une demande.";

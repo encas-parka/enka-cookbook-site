@@ -4,9 +4,8 @@
   import { eventsStore } from "./lib/stores/EventsStore.svelte";
   import { nativeTeamsStore as teamsStore } from "./lib/stores/NativeTeamsStore.svelte";
   import { recipesStore } from "./lib/stores/RecipesStore.svelte";
-  import { notificationStore } from "./lib/stores/NotificationStore.svelte";
   import { materielStore } from "./lib/stores/MaterielStore.svelte";
-  import { cleanupLegacyCaches, initializeRealtime } from "$lib/db-sync/aw-sync";
+  import { cleanupLegacyCaches } from "$lib/db-sync/pb-sync";
   import { teamdocsStore } from "./lib/stores/TeamdocsStore.svelte";
   import ErrorAlert from "./lib/components/ui/ErrorAlert.svelte";
   import HeaderNav from "./lib/components/HeaderNav.svelte";
@@ -62,10 +61,8 @@
               recipesStore.setupRealtime(),
               materielStore.setupRealtime(),
               teamsStore.setupRealtime(),
-              notificationStore.initialize(),
               teamdocsStore.setupRealtime(),
             ]);
-            await initializeRealtime();
 
             toastService.update(syncToastId, {
               state: "success",

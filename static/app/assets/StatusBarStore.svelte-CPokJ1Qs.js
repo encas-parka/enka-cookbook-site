@@ -1,1 +1,0 @@
-import"./rolldown-runtime-C3mKaglU.js";import{En as r,Nn as n,Tn as s,jn as a,pn as o}from"./appwrite-B2gS15p7.js";var t=new WeakMap,l=class{constructor(){n(this,t,r(null))}get lockStatus(){return o(a(t,this))}setLockStatus(e){s(a(t,this),e,!0)}clearLockStatus(){s(a(t,this),null)}},S=new l;export{S as t};

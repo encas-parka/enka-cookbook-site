@@ -157,9 +157,6 @@ export default defineConfig(({ mode }) => ({
           if (id.includes("@lucide/svelte")) {
             return "icons";
           }
-          if (id.includes("appwrite")) {
-            return "appwrite";
-          }
           if (id.includes("@tiptap")) {
             return "tiptap";
           }

@@ -13,8 +13,8 @@
   import { nativeTeamsStore as teamsStore } from "$lib/stores/NativeTeamsStore.svelte";
   import ManageMemberModal from "./ManageMemberModal.svelte";
   import ConfirmModal from "$lib/components/ui/ConfirmModal.svelte";
-  import { getAppwriteInstances } from "$lib/services/appwrite";
-  import { getFunctionId } from "$lib/services/appwrite";
+  import { pb } from "$lib/db-sync/pb-sync";
+  import { toastService } from "$lib/services/toast.service.svelte";
 
   interface Props {
     team: EnrichedTeam;
@@ -122,25 +122,18 @@
 
     resendingInvite = member.id;
     try {
-      const { functions } = await getAppwriteInstances();
-      const functionId = getFunctionId("usersTeamsManager");
-
-      // Utiliser native-invite avec un seul email
-      const payload = {
-        action: "native-invite",
-        teamId: team.id,
-        emails: [member.userEmail], // native-invite gère déjà un tableau d'emails
-      };
-
-      await functions.createExecution({
-        functionId,
-        body: JSON.stringify(payload),
+      await pb.send("/api/enka/invite-to-team", {
+        method: "POST",
+        body: {
+          teamId: team.id,
+          emails: [member.userEmail],
+        },
       });
 
-      alert(`Invitation renvoyée à ${member.name}`);
+      toastService.success(`Invitation renvoyée à ${member.name}`);
     } catch (err: any) {
       console.error("[TeamMembersList] Erreur renvoi invitation:", err);
-      alert("Erreur lors du renvoi de l'invitation : " + err.message);
+      toastService.error("Erreur lors du renvoi de l'invitation : " + (err.message || err));
     } finally {
       resendingInvite = null;
     }

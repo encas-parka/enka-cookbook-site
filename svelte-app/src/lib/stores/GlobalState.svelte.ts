@@ -7,7 +7,6 @@ import { eventsStore } from "./EventsStore.svelte";
 import { materielStore } from "./MaterielStore.svelte";
 import { teamdocsStore } from "./TeamdocsStore.svelte";
 import { productsStore } from "./ProductsStore.svelte";
-import { notificationStore } from "./NotificationStore.svelte";
 import { recipesStore } from "./RecipesStore.svelte";
 import { db } from "$lib/db-sync/pb-sync";
 import { route } from "$lib/router";
@@ -131,7 +130,7 @@ class GlobalState {
         materielStore.syncFromRemote(),
         teamdocsStore.syncFromRemote(),
         recipesStore.syncFromRemote(),
-        notificationStore.initialize(),
+
       ]);
 
       // Phase 2: Setup realtime pour TOUS les stores
@@ -170,7 +169,6 @@ class GlobalState {
 
       // Cleanup des stores privés (recipesStore préservé pour les visiteurs)
       // Les destroy() sont async car ils nettoient IndexedDB (sécurité multi-user)
-      notificationStore.destroy();
       await nativeTeamsStore.destroy();
       await eventsStore.destroy();
       await materielStore.destroy();

@@ -1,16 +1,16 @@
 /**
- * EventsStore - Store de gestion des événements avec Svelte 5 + aw-sync
+ * EventsStore - Store de gestion des événements avec Svelte 5 + pb-sync
  *
  * Architecture:
- * - aw-sync: Dexie (db.events) + delta sync + realtime + optimistic writes
- * - bridgeToMap: liveQuery → SvelteMap<Main> (raw Appwrite data)
+ * - pb-sync: Dexie (db.events) + delta sync + SSE realtime + optimistic writes
+ * - bridgeToMap: liveQuery → SvelteMap<Main> (raw PB data)
  * - $derived: EnrichedEvent with parsed meals/contributors/todos
  * - Business logic: CRUD, invitations, meals, todos, poster configs
  *
  * Flux de données:
  * Lecture :  Dexie → liveQuery → SvelteMap<Main> → $derived → EnrichedEvent → UI
- * Écriture : UI → Store → #collection.update() → Dexie (optimiste) → Appwrite → confirmé
- * Realtime : Appwrite WS → aw-sync → Dexie.put() → liveQuery → SvelteMap → $derived → UI
+ * Écriture : UI → Store → #collection.update() → Dexie (optimiste) → PocketBase → confirmé
+ * Realtime : PB SSE → pb-sync → Dexie.put() → liveQuery → SvelteMap → $derived → UI
  *
  * @usage
  * await eventsStore.initialize();
@@ -18,7 +18,6 @@
  * const myEvents = eventsStore.events;
  */
 
-import { ExecutionMethod } from "appwrite";
 import type { Main, MainStatus } from "$lib/types/appwrite.d";
 import type {
   CreateEventData,
@@ -33,38 +32,29 @@ import type {
 } from "$lib/types/events.d";
 import type { RecettesTypeR } from "$lib/types/recipes.types";
 import { nanoid } from "nanoid";
-import {
-  getEvent as getAppwriteEvent,
-  createEvent as createAppwriteEvent,
-  createEventWithTeams as createAppwriteEventWithTeams,
-  deleteEvent as deleteAppwriteEvent,
-} from "$lib/services/appwrite-events";
 import { globalState } from "./GlobalState.svelte";
 import {
   parseEventMeals,
   parseEventContributors,
   parseEventTodos,
 } from "$lib/utils/events.utils";
-import { getAppwriteInstances, getCollectionId } from "$lib/services/appwrite";
 import {
   createSyncCollection,
   bridgeToMap,
   db,
+  pb,
   type BridgeResult,
-} from "$lib/db-sync/aw-sync";
+} from "$lib/db-sync/pb-sync";
 
 // =============================================================================
 // STORE CLASS
 // =============================================================================
 
 export class EventsStore {
-  // aw-sync collection for events (Appwrite 'main' table)
-  #collection = createSyncCollection<Main>({
-    table: db.events,
-    collectionName: "events",
-  });
+  // pb-sync collection for events (PocketBase 'events' table)
+  #collection = createSyncCollection<Main>(pb, db.events, "events");
 
-  // Bridge: liveQuery on db.events → SvelteMap of raw Appwrite data
+  // Bridge: liveQuery on db.events → SvelteMap of raw PB data
   #bridge: BridgeResult<Main> = bridgeToMap<Main>(() => db.events.toArray());
   #rawEvents = this.#bridge.map;
 
@@ -87,8 +77,8 @@ export class EventsStore {
 
   /**
    * Transforme un événement brut (Main) en événement enrichi (EnrichedEvent).
-   * Les champs meals/contributors/todos (JSON stringifiés dans Appwrite)
-   * sont parsés en objets typés.
+   * Les champs meals/contributors/todos sont parsés en objets typés.
+   * Compatible Appwrite (JSON strings) et PocketBase (objets natifs).
    */
   #enrichEvent(main: Main): EnrichedEvent {
     return {
@@ -273,10 +263,10 @@ export class EventsStore {
   }
 
   /**
-   * Phase 2 : Delta sync depuis Appwrite
+   * Phase 2 : Delta sync depuis PocketBase
    */
   async syncFromRemote(): Promise<void> {
-    console.log("[EventsStore] Synchronisation depuis Appwrite...");
+    console.log("[EventsStore] Synchronisation depuis PocketBase...");
     this.#loading = true;
 
     try {
@@ -298,7 +288,7 @@ export class EventsStore {
   }
 
   /**
-   * Phase 3 : Activer le realtime Appwrite via aw-sync
+   * Phase 3 : Activer le realtime PocketBase via pb-sync (SSE)
    */
   async setupRealtime(): Promise<void> {
     if (this.#realtimeInitialized) {
@@ -367,16 +357,12 @@ export class EventsStore {
   }
 
   /**
-   * Récupère un événement depuis Appwrite (force refresh)
+   * Récupère un événement depuis PocketBase (force refresh)
    */
   async fetchEvent(eventId: string): Promise<EnrichedEvent | null> {
     try {
-      const event = await getAppwriteEvent(eventId);
-      if (event) {
-        await db.events.put(event);
-        return this.#enrichEvent(event);
-      }
-      return null;
+      const event = await this.#collection.view(eventId);
+      return this.#enrichEvent(event);
     } catch (err) {
       console.error(`[EventsStore] Erreur lors du fetch de ${eventId}:`, err);
       return null;
@@ -464,8 +450,9 @@ export class EventsStore {
   // =============================================================================
 
   /**
-   * Sérialise les données de mise à jour pour Appwrite.
-   * meals/contributors/todos sont des string[] (JSON stringifiés) dans Appwrite.
+   * Prépare les données de mise à jour pour PocketBase.
+   * PocketBase gère le JSON nativement — pas de stringify nécessaire.
+   * meals/contributors/todos sont envoyés en objets natifs.
    */
   #serializeUpdateData(data: UpdateEventData): Record<string, unknown> {
     const serialized: Record<string, unknown> = {};
@@ -481,23 +468,22 @@ export class EventsStore {
       serialized.description = data.description;
     if (data.minContrib !== undefined) serialized.minContrib = data.minContrib;
 
-    // JSON stringification pour les champs array d'objets
+    // PocketBase gère le JSON nativement — pas de stringify
     if (data.meals !== undefined) {
-      serialized.meals = data.meals.map((m) => JSON.stringify(m));
+      serialized.meals = data.meals;
     }
     if (data.contributors !== undefined) {
-      serialized.contributors = data.contributors.map((c) => JSON.stringify(c));
+      serialized.contributors = data.contributors;
     }
     if (data.todos !== undefined) {
-      serialized.todos = data.todos.map((t) => JSON.stringify(t));
+      serialized.todos = data.todos;
     }
 
     return serialized;
   }
 
   /**
-   * Met à jour un événement via aw-sync avec écriture optimiste.
-   * Sérialise automatiquement meals/contributors/todos.
+   * Met à jour un événement via pb-sync avec écriture optimiste.
    */
   async #updateEventData(
     eventId: string,
@@ -509,20 +495,33 @@ export class EventsStore {
 
   /**
    * Crée un nouvel événement
-   * @deprecated : utiliser createEventWithTeams (CF unifiée)
+   * @deprecated : utiliser createEventWithTeams (action unifiée)
    */
   async createEvent(data: CreateEventData): Promise<EnrichedEvent> {
     if (!globalState.userId) throw new Error("Utilisateur non connecté");
 
-    const event = await createAppwriteEvent(data, globalState.userId);
-    await db.events.put(event);
+    const record = await this.#collection.create({
+      name: data.name,
+      dateStart: data.dateStart,
+      dateEnd: data.dateEnd,
+      allDates: data.allDates,
+      meals: data.meals ?? [],
+      createdBy: globalState.userId,
+      teams: data.teams ?? [],
+      teamsId: data.teamsId ?? [],
+      contributors: data.contributors ?? [],
+      todos: data.todos ?? [],
+      status: "proposition",
+    } as unknown as Omit<Main, '$id' | '$createdAt' | '$updatedAt'>);
 
-    console.log(`[EventsStore] Événement créé: ${event.$id}`);
-    return this.#enrichEvent(event);
+    console.log(`[EventsStore] Événement créé: ${record.$id}`);
+    return this.#enrichEvent(record);
   }
 
   /**
-   * Crée un nouvel événement avec des teams (CF unifiée)
+   * Crée un nouvel événement avec des teams.
+   * Avec PocketBase, la création est directe (pas de CF atomique).
+   * Le système d'invitation PB (étape 1.3) remplacera le sendEmailToExistingMembers.
    */
   async createEventWithTeams(
     data: CreateEventData,
@@ -531,22 +530,37 @@ export class EventsStore {
   ): Promise<EnrichedEvent> {
     if (!globalState.userId) throw new Error("Utilisateur non connecté");
 
-    const event = await createAppwriteEventWithTeams(
-      data,
-      globalState.userId,
-      teamIds,
-      sendEmailToExistingMembers,
-    );
-    await db.events.put(event);
+    const record = await this.#collection.create({
+      name: data.name,
+      description: data.description || "",
+      dateStart: data.dateStart,
+      dateEnd: data.dateEnd,
+      allDates: data.allDates,
+      meals: data.meals ?? [],
+      createdBy: globalState.userId,
+      teams: data.teams ?? [],
+      teamsId: teamIds,
+      contributors: data.contributors ?? [],
+      todos: data.todos ?? [],
+      status: data.status || "proposition",
+    } as unknown as Omit<Main, '$id' | '$createdAt' | '$updatedAt'>);
 
     console.log(
-      `[EventsStore] Événement créé avec ${teamIds.length} team(s): ${event.$id}`,
+      `[EventsStore] Événement créé avec ${teamIds.length} team(s): ${record.$id}`,
     );
-    return this.#enrichEvent(event);
+
+    // TODO: système d'invitation PB (étape 1.3)
+    if (sendEmailToExistingMembers && teamIds.length > 0) {
+      console.warn(
+        `[EventsStore] Système d'invitation PB à implémenter — pas d'emails envoyés aux ${teamIds.length} team(s)`,
+      );
+    }
+
+    return this.#enrichEvent(record);
   }
 
   /**
-   * Met à jour un événement (écriture optimiste via aw-sync)
+   * Met à jour un événement (écriture optimiste via pb-sync)
    */
   async updateEvent(
     eventId: string,
@@ -573,11 +587,10 @@ export class EventsStore {
   }
 
   /**
-   * Supprime un événement (CF + cleanup label + suppression Dexie)
+   * Supprime un événement (direct PB, pas de cleanup de label nécessaire)
    */
   async deleteEvent(eventId: string): Promise<void> {
-    await deleteAppwriteEvent(eventId); // Supprime + CF cleanup label
-    await db.events.delete(eventId); // Supprime du cache Dexie
+    await this.#collection.remove(eventId);
     console.log(`[EventsStore] Événement supprimé: ${eventId}`);
   }
 
@@ -602,7 +615,8 @@ export class EventsStore {
   }
 
   /**
-   * Supprime un contributeur d'un événement
+   * Supprime un contributeur d'un événement (mise à jour directe).
+   * Avec PocketBase, pas de Label à nettoyer — on modifie directement le record.
    */
   async removeContributor(
     eventId: string,
@@ -611,11 +625,6 @@ export class EventsStore {
     try {
       const event = this.#enrichedMap.get(eventId);
       if (!event) throw new Error("Événement introuvable");
-
-      // Retirer le Label de l'utilisateur via CF
-      const { removeUserFromEvent } =
-        await import("$lib/services/appwrite-functions");
-      await removeUserFromEvent(eventId, contributorId);
 
       const contributors = event.contributors.filter(
         (c) => c.id !== contributorId && c.email !== contributorId,
@@ -669,7 +678,9 @@ export class EventsStore {
   // =============================================================================
 
   /**
-   * Invite des teams et/ou des utilisateurs à un événement (méthode unifiée)
+   * Invite des participants à un événement.
+   * STUB — le système d'invitation PocketBase sera implémenté à l'étape 1.3.
+   * En attendant, les contributeurs sont ajoutés directement au record.
    */
   async inviteParticipants(
     eventId: string,
@@ -680,61 +691,53 @@ export class EventsStore {
       sendEmailToExistingMembers?: boolean;
     },
   ): Promise<EnrichedEvent> {
+    console.warn(
+      `[EventsStore] Système d'invitation PB à implémenter (étape 1.3). Ajout direct des contributeurs.`,
+    );
+
+    const event = this.#enrichedMap.get(eventId);
+    if (!event) throw new Error("Événement introuvable");
+
+    const { emails = [], userIds = [] } = options;
+
+    if (emails.length === 0 && userIds.length === 0) {
+      return event;
+    }
+
+    // Ajouter les contributeurs directement dans le record (provisoire)
+    const newContributors: EventContributor[] = [
+      ...event.contributors,
+      ...emails.map((email) => ({
+        email,
+        status: "invited" as const,
+        invitedAt: new Date().toISOString(),
+      })),
+      ...userIds.map((id) => ({
+        id,
+        status: "invited" as const,
+        invitedAt: new Date().toISOString(),
+      })),
+    ];
+
+    return await this.updateEvent(eventId, { contributors: newContributors });
+  }
+
+  /**
+   * Retire une team d'un événement (mise à jour directe).
+   * Avec PocketBase, pas de Label à nettoyer — on modifie directement le record.
+   */
+  async removeTeam(eventId: string, teamId: string): Promise<EnrichedEvent> {
     try {
       const event = this.#enrichedMap.get(eventId);
       if (!event) throw new Error("Événement introuvable");
 
-      const {
-        teamIds = [],
-        emails = [],
-        userIds = [],
-        sendEmailToExistingMembers = true,
-      } = options;
+      const teams = (event.teams ?? []).filter((t) => t !== teamId);
+      const teamsId = (event.teamsId ?? []).filter((t) => t !== teamId);
 
-      if (teamIds.length === 0 && emails.length === 0 && userIds.length === 0) {
-        console.log(`[EventsStore] Aucun participant à inviter`);
-        return event;
-      }
-
-      const { inviteParticipantsToEvent } =
-        await import("$lib/services/appwrite-functions");
-      const result = await inviteParticipantsToEvent(eventId, event.name, {
-        teamIds,
-        emails,
-        userIds,
-        sendEmailToExistingMembers,
-      });
-
-      console.log(`[EventsStore] Invitation déclenchée: ${result.executionId}`);
-
-      // Retourner l'événement actuel (sera mis à jour via realtime)
-      return event;
-    } catch (err) {
-      console.error(`[EventsStore] Erreur invitation participants:`, err);
-      throw err;
-    }
-  }
-
-  /**
-   * Retire une team d'un événement
-   */
-  async removeTeam(eventId: string, teamId: string): Promise<EnrichedEvent> {
-    try {
-      const { removeTeamFromEvent } =
-        await import("$lib/services/appwrite-functions");
-      await removeTeamFromEvent(eventId, teamId);
-
-      // Recharger l'événement depuis Appwrite
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-      const updatedEvent = await this.fetchEvent(eventId);
-
-      if (!updatedEvent) throw new Error("Impossible de recharger l'événement");
-
-      console.log(
-        `[EventsStore] Team ${teamId} retirée de l'événement ${eventId}`,
-      );
-
-      return updatedEvent;
+      return await this.updateEvent(eventId, {
+        teams,
+        teamsId,
+      } as UpdateEventData);
     } catch (err) {
       console.error(`[EventsStore] Erreur retrait team:`, err);
       throw err;
@@ -919,7 +922,8 @@ export class EventsStore {
   }
 
   /**
-   * Met à jour le statut d'un todo via Cloud Function (atomique)
+   * Met à jour le statut d'un todo via mise à jour directe du record.
+   * Avec PocketBase, plus de Cloud Function nécessaire — update atomique sur le champ todos.
    */
   async updateTodoStatus(
     eventId: string,
@@ -927,18 +931,14 @@ export class EventsStore {
     status: EventTodoStatus,
   ): Promise<void> {
     try {
-      const { functions, config } = await getAppwriteInstances();
+      const event = this.#enrichedMap.get(eventId);
+      if (!event) throw new Error("Événement introuvable");
 
-      await functions.createExecution(
-        config.functions.enkaData,
-        JSON.stringify({
-          action: "update_todo_status",
-          data: { eventId, todoId, status },
-        }),
-        false,
-        "/",
-        ExecutionMethod.POST,
+      const todos = event.todos.map((t) =>
+        t.id === todoId ? { ...t, status } : t,
       );
+
+      await this.#collection.update(eventId, { todos } as Partial<Main>);
     } catch (err) {
       console.error(`[EventsStore] Erreur updateTodoStatus:`, err);
       throw err;
@@ -946,25 +946,32 @@ export class EventsStore {
   }
 
   /**
-   * Toggle l'assignation via Cloud Function (atomique)
+   * Toggle l'assignation d'un todo via mise à jour directe du record.
+   * Avec PocketBase, plus de Cloud Function nécessaire.
    */
   async toggleTodoAssignment(eventId: string, todoId: string): Promise<void> {
     try {
       const userId = globalState.userId;
       if (!userId) throw new Error("Utilisateur non connecté");
 
-      const { functions, config } = await getAppwriteInstances();
+      const event = this.#enrichedMap.get(eventId);
+      if (!event) throw new Error("Événement introuvable");
 
-      await functions.createExecution(
-        config.functions.enkaData,
-        JSON.stringify({
-          action: "toggle_todo_assignment",
-          data: { eventId, todoId },
-        }),
-        false,
-        "/",
-        ExecutionMethod.POST,
-      );
+      const todos = event.todos.map((t) => {
+        if (t.id !== todoId) return t;
+
+        const assignedTo = t.assignedTo ?? [];
+        const isAssigned = assignedTo.includes(userId);
+
+        return {
+          ...t,
+          assignedTo: isAssigned
+            ? assignedTo.filter((id) => id !== userId)
+            : [...assignedTo, userId],
+        };
+      });
+
+      await this.#collection.update(eventId, { todos } as Partial<Main>);
     } catch (err) {
       console.error(`[EventsStore] Erreur toggleTodoAssignment:`, err);
       throw err;
@@ -1100,12 +1107,12 @@ export class EventsStore {
 
   /**
    * Charge TOUS les événements (y compris les anciens).
-   * Avec aw-sync delta sync, tous les événements sont déjà disponibles.
+   * Avec pb-sync delta sync, tous les événements sont déjà disponibles.
    * Méthode conservée pour compatibilité (no-op).
    */
   async loadAllPastEvents(): Promise<void> {
     console.log(
-      `[EventsStore] loadAllPastEvents: ${this.#rawEvents.size} événements déjà disponibles via aw-sync`,
+      `[EventsStore] loadAllPastEvents: ${this.#rawEvents.size} événements déjà disponibles via pb-sync`,
     );
   }
 
@@ -1118,7 +1125,7 @@ export class EventsStore {
   }
 
   /**
-   * Force le rechargement des événements
+   * Force le rechargement des événements depuis PocketBase
    */
   async reload(): Promise<void> {
     console.log("[EventsStore] Rechargement...");
@@ -1126,9 +1133,7 @@ export class EventsStore {
     this.#error = null;
 
     try {
-      // Reset sync metadata pour forcer un full re-fetch
-      const collectionId = getCollectionId("events");
-      await db.syncMeta.delete(collectionId);
+      await this.#collection.clearLocal();
       await this.#collection.initialFetch();
 
       console.log("[EventsStore] Rechargement complété");
@@ -1144,7 +1149,7 @@ export class EventsStore {
   }
 
   /**
-   * Hard reset : Vide TOUT (Dexie + sync meta) et recharge depuis Appwrite
+   * Hard reset : Vide TOUT (Dexie) et recharge depuis PocketBase
    */
   async hardReset(): Promise<void> {
     console.log("[EventsStore] 🔄 HARD RESET - Vidage complet...");

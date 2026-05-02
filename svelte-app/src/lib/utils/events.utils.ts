@@ -7,12 +7,23 @@ import type {
 } from "../types/events.d";
 
 /**
- * Parse les meals d'un événement depuis une chaîne JSON
+ * Parse les meals d'un événement.
+ *
+ * Compatible Appwrite (string[] de JSON) et PocketBase (objets natifs).
+ * Avec PocketBase, les champs JSON arrivent déjà parsés en objets.
  */
 export function parseEventMeals(
-  mealsStr: string[] | null | undefined,
+  raw: (string | EventMeal)[] | null | undefined,
 ): EventMeal[] {
-  return safeJsonArrayParse(mealsStr, {
+  if (!raw || !Array.isArray(raw)) return [];
+
+  // PocketBase native JSON: already objects, no parsing needed
+  if (raw.length > 0 && typeof raw[0] !== "string") {
+    return raw as EventMeal[];
+  }
+
+  // Legacy Appwrite: JSON strings
+  return safeJsonArrayParse(raw as string[], {
     context: "parseEventMeals",
     itemFallback: (mealStr, index) => {
       console.warn(
@@ -31,15 +42,24 @@ export function parseEventMeals(
 }
 
 /**
- * Parse les contributeurs d'un événement depuis un tableau de chaînes
+ * Parse les contributeurs d'un événement.
+ *
+ * Compatible Appwrite (string[] de JSON) et PocketBase (objets natifs).
  */
 export function parseEventContributors(
-  contributorsStr: string[] | null | undefined,
+  raw: (string | EventContributor)[] | null | undefined,
 ): EventContributor[] {
-  return safeJsonArrayParse(contributorsStr, {
+  if (!raw || !Array.isArray(raw)) return [];
+
+  // PocketBase native JSON: already objects, no parsing needed
+  if (raw.length > 0 && typeof raw[0] !== "string") {
+    return raw as EventContributor[];
+  }
+
+  // Legacy Appwrite: JSON strings
+  return safeJsonArrayParse(raw as string[], {
     context: "parseEventContributors",
     itemFallback: (contributorStr, index) => {
-      // Fallback : si c'est un simple ID (ancien format), créer un objet complet
       console.warn(
         `[parseEventContributors] Contributor ${index} invalide, utilisation d'un fallback`,
         contributorStr,
@@ -59,12 +79,22 @@ export function parseEventContributors(
 import type { EventTodo } from "../types/events.d";
 
 /**
- * Parse les todos d'un événement depuis un tableau de chaînes JSON
+ * Parse les todos d'un événement.
+ *
+ * Compatible Appwrite (string[] de JSON) et PocketBase (objets natifs).
  */
 export function parseEventTodos(
-  todosStr: string[] | null | undefined,
+  raw: (string | EventTodo)[] | null | undefined,
 ): EventTodo[] {
-  return safeJsonArrayParse(todosStr, {
+  if (!raw || !Array.isArray(raw)) return [];
+
+  // PocketBase native JSON: already objects, no parsing needed
+  if (raw.length > 0 && typeof raw[0] !== "string") {
+    return raw as EventTodo[];
+  }
+
+  // Legacy Appwrite: JSON strings
+  return safeJsonArrayParse(raw as string[], {
     context: "parseEventTodos",
     itemFallback: (todoStr, index) => {
       console.warn(

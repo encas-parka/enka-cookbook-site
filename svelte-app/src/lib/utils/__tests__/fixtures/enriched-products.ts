@@ -9,7 +9,7 @@ export function makeNeedRow(
   overrides?: Partial<ProductNeedRow>,
 ): ProductNeedRow {
   return {
-    $id: "test-product_abc1234567",
+    id: "test-product_abc1234567",
     mainId: "event-001",
     productHugoUuid: "hugo-uuid-1",
     productName: "Beurre",
@@ -28,8 +28,8 @@ export function makeNeedRow(
     nbRecipes: 1,
     totalAssiettes: 10,
     dateDisplayInfo: JSON.stringify({}),
-    $createdAt: "2026-04-19T10:00:00Z",
-    $updatedAt: "2026-04-19T10:00:00Z",
+    created: "2026-04-19T10:00:00Z",
+    updated: "2026-04-19T10:00:00Z",
     ...overrides,
   };
 }
@@ -39,9 +39,9 @@ export function makeEnrichedProduct(
 ): EnrichedProduct {
   const now = new Date().toISOString();
   return {
-    $id: "test-product_abc1234567",
-    $createdAt: now,
-    $updatedAt: now,
+    id: "test-product_abc1234567",
+    created: now,
+    updated: now,
     productHugoUuid: "hugo-uuid-1",
     productName: "Beurre",
     productType: "cremerie",

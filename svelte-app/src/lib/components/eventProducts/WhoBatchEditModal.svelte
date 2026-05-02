@@ -38,11 +38,11 @@
   $effect(() => {
     const newSelection: Record<string, boolean> = {};
     products.forEach((product) => {
-      if (productIds.includes(product.$id)) {
+      if (productIds.includes(product.id)) {
         if (selectionMode === "empty") {
-          newSelection[product.$id] = !product.who || product.who.length === 0;
+          newSelection[product.id] = !product.who || product.who.length === 0;
         } else {
-          newSelection[product.$id] = true;
+          newSelection[product.id] = true;
         }
       }
     });
@@ -51,10 +51,10 @@
 
   const badgeItems = $derived(
     products.map((product) => ({
-      id: product.$id,
+      id: product.id,
       label: product.productName,
       title: product.productName,
-      selected: currentSelection[product.$id],
+      selected: currentSelection[product.id],
     })),
   );
 
@@ -87,7 +87,7 @@
 
     const selectedProductIds = selectedBadgeItems.map((item) => item.id);
     const selectedProducts = products.filter((p) =>
-      selectedProductIds.includes(p.$id),
+      selectedProductIds.includes(p.id),
     );
 
     productsStore.setSyncStatus(selectedProductIds, true);

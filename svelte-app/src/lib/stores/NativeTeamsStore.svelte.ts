@@ -35,11 +35,11 @@ function enrichTeamFromPB(raw: Record<string, any>): EnrichedNativeTeam {
   const createdBy = raw.createdBy || raw.expand?.createdBy?.id || null;
 
   return {
-    $id: raw.id,
+    id: raw.id,
     name: raw.name || "",
     total: memberArray.length,
-    $createdAt: raw.created || "",
-    $updatedAt: raw.updated || "",
+    created: raw.created || "",
+    updated: raw.updated || "",
     prefs: {
       description: raw.description || "",
       location: raw.location || "",
@@ -48,13 +48,13 @@ function enrichTeamFromPB(raw: Record<string, any>): EnrichedNativeTeam {
     },
     description: raw.description || "",
     members: memberArray.map((user: Record<string, any>) => ({
-      $id: user.id, // En PB, pas de membership ID → on utilise le user ID
       id: user.id,
+      userId: user.id,
       name: user.name || "",
       userEmail: user.email || "",
       roles: roles[user.id] ? [roles[user.id]] : ["member"],
       joinedAt: user.created || "",
-      confirmed: true, // En PB, pas d'invitation pending
+      confirmed: true,
     })),
   };
 }
@@ -90,7 +90,7 @@ export class NativeTeamsStore {
 
   isUserInAnyTeam(userId: string): boolean {
     return Array.from(this.#teams.values()).some((t) =>
-      t.members?.some((m) => m.id === userId),
+      t.members?.some((m) => m.userId === userId),
     );
   }
 
@@ -118,7 +118,7 @@ export class NativeTeamsStore {
     // Lire depuis Dexie
     const cached = await db.nativeTeams.toArray();
     for (const team of cached) {
-      this.#teams.set(team.$id, team);
+      this.#teams.set(team.id, team);
     }
 
     this.#isInitialized = true;

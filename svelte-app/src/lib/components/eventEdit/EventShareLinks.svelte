@@ -11,10 +11,10 @@
   let isGenerating = $state(false);
 
   async function handleGenerateLink() {
-    if (!globalState.userId || !event?.$id) return;
+    if (!globalState.userId || !event?.id) return;
     try {
       isGenerating = true;
-      const result = await createShareLink(event.$id, globalState.userId);
+      const result = await createShareLink(event.id, globalState.userId);
       toastService.success("Lien généré avec succès !");
     } catch (e: any) {
       toastService.error(e.message || "Erreur lors de la génération du lien");

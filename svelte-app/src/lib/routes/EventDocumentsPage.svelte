@@ -63,8 +63,8 @@
   const sortedDocs = $derived(
     [...filteredDocs].sort(
       (a, b) =>
-        new Date(b.$updatedAt || 0).getTime() -
-        new Date(a.$updatedAt || 0).getTime(),
+        new Date(b.updated || 0).getTime() -
+        new Date(a.updated || 0).getTime(),
     ),
   );
 
@@ -145,7 +145,7 @@
       </div>
     {:else}
       <div class="my-4 space-y-3">
-        {#each paginatedDocs as doc (doc.$id)}
+        {#each paginatedDocs as doc (doc.id)}
           <DocCard {doc} {eventId} bgClass="bg-base-100" />
         {/each}
       </div>

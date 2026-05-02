@@ -152,7 +152,7 @@
         {#each groupedTodos[taskOnType] ?? [] as todo (todo.id)}
           <EventTodoItem
             {todo}
-            eventId={event.$id}
+            eventId={event.id}
             onEdit={handleEdit}
             {disabled}
             {contributors}
@@ -166,7 +166,7 @@
 <!-- Modal -->
 <EventTodoModal
   open={showModal}
-  eventId={event.$id}
+  eventId={event.id}
   {todoToEdit}
   {contributors}
   currentTodos={todos}

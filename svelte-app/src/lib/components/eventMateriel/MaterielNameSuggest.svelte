@@ -68,7 +68,7 @@
         source: "header",
         quantity: info.quantity,
         alreadyExists: true,
-        itemId: headerItem?.$id,
+        itemId: headerItem?.id,
       });
       seenNames.add(name);
     }

@@ -26,7 +26,7 @@
     if (!activeTeamId) return;
 
     // Trouver l'équipe active
-    const team = userTeams.find((t) => t.$id === activeTeamId);
+    const team = userTeams.find((t) => t.id === activeTeamId);
     if (!team) {
       toastService.error("Équipe introuvable");
       return;
@@ -40,7 +40,7 @@
   function openEditLoanModal(loanId: string) {
     if (!activeTeamId) return;
 
-    const team = userTeams.find((t) => t.$id === activeTeamId);
+    const team = userTeams.find((t) => t.id === activeTeamId);
     if (!team) {
       toastService.error("Équipe introuvable");
       return;
@@ -113,7 +113,7 @@
 
   // Équipe active
   const activeTeam = $derived(
-    activeTeamId ? userTeams.find((t) => t.$id === activeTeamId) : null,
+    activeTeamId ? userTeams.find((t) => t.id === activeTeamId) : null,
   );
 
   // Emprunts filtrés pour l'équipe active
@@ -131,7 +131,7 @@
       totalLoans: materielStore.loans.length,
       filteredCount: filtered.length,
       allLoans: materielStore.loans.map((l) => ({
-        id: l.$id,
+        id: l.id,
         ownerId: l.ownerId,
       })),
     });
@@ -175,7 +175,7 @@
     if (teamIdFromParams && teamIdFromParams !== activeTeamId) {
       console.log("[LoansPage] teamIdFromParams:", teamIdFromParams);
       // Vérifier que l'utilisateur appartient à cette équipe
-      const team = userTeams.find((t) => t.$id === teamIdFromParams);
+      const team = userTeams.find((t) => t.id === teamIdFromParams);
       console.log("[LoansPage] équipe trouvée:", team);
       if (team) {
         console.log("[LoansPage] Mise à jour activeTeamId:", teamIdFromParams);
@@ -190,10 +190,10 @@
       // Premier chargement sans teamId : rediriger vers la première équipe
       console.log(
         "[LoansPage] Redirection vers première équipe:",
-        userTeams[0].$id,
+        userTeams[0].id,
       );
       isRedirecting = true;
-      navigate(`/dashboard/loans/${userTeams[0].$id}`);
+      navigate(`/dashboard/loans/${userTeams[0].id}`);
     }
   });
 
@@ -203,7 +203,7 @@
 
   $effect(() => {
     const team = activeTeamId
-      ? userTeams.find((t) => t.$id === activeTeamId)
+      ? userTeams.find((t) => t.id === activeTeamId)
       : null;
     const teamName = team?.name || "Emprunts";
 
@@ -270,7 +270,7 @@
               Ajouter une reservation
             </button>
           </div>
-          {#each visibleLoans as loan (loan.$id)}
+          {#each visibleLoans as loan (loan.id)}
             <LoanCard
               {loan}
               onReturn={openReturnForm}
@@ -304,7 +304,7 @@
     isOpen={createLoanModalOpen}
     onClose={closeCreateLoanModal}
     onSuccess={handleLoanCreated}
-    ownerId={activeTeam.$id}
+    ownerId={activeTeam.id}
     ownerName={activeTeam.name}
     loanId={editingLoanId ?? undefined}
   />

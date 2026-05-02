@@ -1,4 +1,3 @@
-import type { Models } from "appwrite";
 import type {
   Materiel,
   MaterielType,
@@ -29,7 +28,7 @@ export type MaterielLoanStatusUnion =
  * C'est exactement le même type que Materiel mais rend explicite
  * qu'on travaille avec des données non-transformées
  */
-export type MaterielFromAppwrite = Models.Row & Materiel;
+export type MaterielFromAppwrite = Materiel;
 
 // =============================================================================
 // TYPES LOCAUX - Format parsé côté client

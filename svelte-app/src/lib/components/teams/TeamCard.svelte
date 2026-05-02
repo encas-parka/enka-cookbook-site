@@ -17,7 +17,7 @@
     const currentUserId = globalState.userId;
     if (!currentUserId) return null;
 
-    const member = team.members.find((m) => m.id === currentUserId);
+    const member = team.members.find((m) => m.userId === currentUserId);
     return member?.roles?.[0] || null;
   });
 
@@ -42,15 +42,15 @@
 
   // L'utilisateur est-il membre confirmé ?
   const isUserMember = $derived.by(() => {
-    const me = team.members.find((m) => m.id === globalState.userId);
+    const me = team.members.find((m) => m.userId === globalState.userId);
     return me && me.confirmed;
   });
 
   // Quitter l'équipe (pour les membres non-owner)
   async function leaveTeam() {
-    const me = team.members.find((m) => m.id === globalState.userId);
+    const me = team.members.find((m) => m.userId === globalState.userId);
     if (me && me.roles?.[0] !== "owner") {
-      await teamsStore.removeMember(teamId, me.$id);
+      await teamsStore.removeMember(teamId, me.id);
     }
   }
 </script>
@@ -59,11 +59,11 @@
   class="card bg-base-100 border-base-200 hover:border-primary/50 group cursor-pointer border text-left shadow-xl transition-all hover:shadow-2xl"
   role="button"
   tabindex="0"
-  onclick={() => onClick(team.$id)}
+  onclick={() => onClick(team.id)}
   onkeydown={(e) => {
     if (e.key === "Enter" || e.key === " ") {
       e.preventDefault();
-      onClick(team.$id);
+      onClick(team.id);
     }
   }}
 >

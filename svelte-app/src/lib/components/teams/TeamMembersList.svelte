@@ -39,7 +39,7 @@
   // Rôle de l'utilisateur actuel
   const currentUserRole = $derived(() => {
     if (!currentUserId) return null;
-    const member = team.members.find((m) => m.id === currentUserId);
+    const member = team.members.find((m) => m.userId === currentUserId);
     return (member?.roles?.[0] as "owner" | "member") || null;
   });
 
@@ -63,7 +63,7 @@
   // Callback après mise à jour d'un membre
   async function handleMemberUpdated() {
     // Recharger les données de la team pour refléter les modifications
-    await teamsStore.fetchTeam(team.$id);
+    await teamsStore.fetchTeam(team.id);
     onMemberRemoved?.();
     manageMemberModal = { isOpen: false, member: null };
   }
@@ -72,13 +72,13 @@
   async function leaveTeam() {
     if (!currentUserId) return;
 
-    const myMembership = team.members.find((m) => m.id === currentUserId);
+    const myMembership = team.members.find((m) => m.userId === currentUserId);
     if (!myMembership) return;
 
     // Validation : vérifier si c'est le dernier owner
     if (myMembership.roles[0] === "owner") {
       const otherOwners = team.members.filter(
-        (m) => m.roles[0] === "owner" && m.id !== currentUserId,
+        (m) => m.roles[0] === "owner" && m.userId !== currentUserId,
       );
 
       if (otherOwners.length === 0) {
@@ -92,7 +92,7 @@
 
     loading = true;
     try {
-      await teamsStore.removeMember(team.$id, myMembership.$id);
+      await teamsStore.removeMember(team.id, myMembership.id);
       confirmLeaveTeam = false;
       onMemberRemoved?.();
     } catch (err: any) {
@@ -128,7 +128,7 @@
       // Utiliser native-invite avec un seul email
       const payload = {
         action: "native-invite",
-        teamId: team.$id,
+        teamId: team.id,
         emails: [member.userEmail], // native-invite gère déjà un tableau d'emails
       };
 

@@ -122,7 +122,7 @@
           <!-- Allocations (always visible) -->
           {#if group.allocations.length > 0}
             <div class="p61 flex flex-wrap items-center gap-x-2">
-              {#each group.allocations as alloc (alloc.$id)}
+              {#each group.allocations as alloc (alloc.id)}
                 {@const allocStatus = eventMaterielStore.resolveStatus(alloc)}
                 {@const allocConfig = getEventMaterielStatusConfig(allocStatus)}
                 {@const AllocIcon =

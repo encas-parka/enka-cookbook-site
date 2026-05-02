@@ -23,7 +23,7 @@
 
   let { group, onEditHeader, onAddAllocation }: Props = $props();
 
-  const headerId = $derived(group.header.$id);
+  const headerId = $derived(group.header.id);
 
   const toFindQty = $derived(group.remainingQty);
 

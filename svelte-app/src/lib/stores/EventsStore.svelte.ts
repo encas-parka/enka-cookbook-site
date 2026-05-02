@@ -512,9 +512,9 @@ export class EventsStore {
       contributors: data.contributors ?? [],
       todos: data.todos ?? [],
       status: "proposition",
-    } as unknown as Omit<Main, '$id' | '$createdAt' | '$updatedAt'>);
+    } as unknown as Omit<Main, 'id' | 'created' | 'updated'>);
 
-    console.log(`[EventsStore] Événement créé: ${record.$id}`);
+    console.log(`[EventsStore] Événement créé: ${record.id}`);
     return this.#enrichEvent(record);
   }
 
@@ -543,10 +543,10 @@ export class EventsStore {
       contributors: data.contributors ?? [],
       todos: data.todos ?? [],
       status: data.status || "proposition",
-    } as unknown as Omit<Main, '$id' | '$createdAt' | '$updatedAt'>);
+    } as unknown as Omit<Main, 'id' | 'created' | 'updated'>);
 
     console.log(
-      `[EventsStore] Événement créé avec ${teamIds.length} team(s): ${record.$id}`,
+      `[EventsStore] Événement créé avec ${teamIds.length} team(s): ${record.id}`,
     );
 
     // TODO: système d'invitation PB (étape 1.3)

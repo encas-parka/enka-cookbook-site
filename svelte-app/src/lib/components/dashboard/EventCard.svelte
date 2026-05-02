@@ -34,14 +34,14 @@
 
 <div
   class="bg-base-200/60 hover:bg-base-200 flex cursor-pointer items-start gap-3 rounded-lg p-3 shadow-sm transition-colors {cardClass} @container"
-  onclick={() => navigate(`/event/${event.$id}`)}
+  onclick={() => navigate(`/event/${event.id}`)}
   role="button"
   tabindex="0"
   title="Voir les détails de {event.name}"
   onkeydown={(e) => {
     if (e.key === "Enter" || e.key === " ") {
       e.preventDefault();
-      navigate(`/event/${event.$id}`);
+      navigate(`/event/${event.id}`);
     }
   }}
   transition:slide
@@ -109,7 +109,7 @@
         class="btn btn-outline btn-secondary @max-sm:btn-sm btn-xs"
         onclick={(e) => {
           e.stopPropagation();
-          navigate(`/event/${event.$id}`);
+          navigate(`/event/${event.id}`);
         }}
       >
         <Edit class="size-4 @max-xs:size-3" />
@@ -120,7 +120,7 @@
         class="btn btn-outline btn-secondary @max-sm:btn-sm btn-xs"
         onclick={(e) => {
           e.stopPropagation();
-          navigate(`/event/${event.$id}/recipes`);
+          navigate(`/event/${event.id}/recipes`);
         }}
       >
         <FileText class="size-4 @max-xs:size-3" />
@@ -131,7 +131,7 @@
         class="btn btn-outline btn-secondary @max-sm:btn-sm btn-xs"
         onclick={(e) => {
           e.stopPropagation();
-          navigate(`/event/${event.$id}/products`);
+          navigate(`/event/${event.id}/products`);
         }}
       >
         <ShoppingCart class="size-4 @max-xs:size-3" />
@@ -142,7 +142,7 @@
         class="btn btn-outline btn-secondary @max-sm:btn-sm btn-xs"
         onclick={(e) => {
           e.stopPropagation();
-          navigate(`/event/${event.$id}/posters`);
+          navigate(`/event/${event.id}/posters`);
         }}
       >
         <Image class="size-4 @max-xs:size-3" />
@@ -153,7 +153,7 @@
         class="btn btn-outline btn-secondary @max-sm:btn-sm btn-xs"
         onclick={(e) => {
           e.stopPropagation();
-          navigate(`/event/${event.$id}/documents`);
+          navigate(`/event/${event.id}/documents`);
         }}
       >
         <FileText class="size-4 @max-xs:size-3" />
@@ -164,7 +164,7 @@
         class="btn btn-outline btn-secondary @max-sm:btn-sm btn-xs"
         onclick={(e) => {
           e.stopPropagation();
-          navigate(`/event/${event.$id}/todos`);
+          navigate(`/event/${event.id}/todos`);
         }}
       >
         <ListTodo class="size-4 @max-xs:size-3" />
@@ -175,7 +175,7 @@
         class="btn btn-outline btn-secondary @max-sm:btn-sm btn-xs"
         onclick={(e) => {
           e.stopPropagation();
-          navigate(`/event/${event.$id}/materiel`);
+          navigate(`/event/${event.id}/materiel`);
         }}
       >
         <Package class="size-4 @max-xs:size-3" />

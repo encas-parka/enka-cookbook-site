@@ -236,11 +236,11 @@
   });
 
   function handleAction(action?: (loanId: string) => void) {
-    action?.(loan.$id);
+    action?.(loan.id);
   }
 
   function handleExport() {
-    const markdown = materielStore.exportLoanToMarkdown(loan.$id);
+    const markdown = materielStore.exportLoanToMarkdown(loan.id);
     if (!markdown) return;
     const slug = (loan.responsibleName ?? "reservation")
       .toLowerCase()
@@ -348,7 +348,7 @@
         {#if onEdit}
           <button
             class="btn btn-primary btn-sm"
-            onclick={() => onEdit(loan.$id)}
+            onclick={() => onEdit(loan.id)}
             title="Modifier"
           >
             <Pencil class="h-4 w-4" />

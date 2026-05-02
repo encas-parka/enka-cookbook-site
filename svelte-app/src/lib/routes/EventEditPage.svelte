@@ -309,7 +309,7 @@
 
     untrack(async () => {
       const event = eventsStore.getEventById(eventId);
-      console.log("[Init] Event récupéré:", event?.$id, event?.name);
+      console.log("[Init] Event récupéré:", event?.id, event?.name);
 
       if (!event) {
         console.log("[Init] Event non trouvé dans le cache");
@@ -1198,7 +1198,7 @@
         <!-- Documents liés à l'événement -->
         {#if currentEvent}
           <EventDocumentsFieldset
-            eventId={currentEvent.$id}
+            eventId={currentEvent.id}
             canEdit={canEdit && !isLockedByOthers}
           />
         {/if}
@@ -1291,7 +1291,7 @@
           </div>
         {:else}
           <div class="space-y-4">
-            {#each sortedDatedMeals as meal (meal.id + "-" + currentEvent?.$updatedAt)}
+            {#each sortedDatedMeals as meal (meal.id + "-" + currentEvent?.updated)}
               <div
                 id="meal-card-{meal.id}"
                 animate:flip={{ delay: 100, duration: 400 }}

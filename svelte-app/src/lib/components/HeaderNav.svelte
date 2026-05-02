@@ -197,7 +197,7 @@
 
     const myTeams = nativeTeamsStore.myTeams;
     if (myTeams.length > 0) {
-      return `/dashboard/materiel/${myTeams[0].$id}`;
+      return `/dashboard/materiel/${myTeams[0].id}`;
     }
 
     return "/dashboard/materiel";
@@ -216,7 +216,7 @@
 
     const myTeams = nativeTeamsStore.myTeams;
     if (myTeams.length > 0) {
-      return `/dashboard/loans/${myTeams[0].$id}`;
+      return `/dashboard/loans/${myTeams[0].id}`;
     }
 
     return "/dashboard/loans";
@@ -525,10 +525,10 @@
             >
               Prochains événements
             </li>
-            {#each upcomingEvents as event (event.$id)}
+            {#each upcomingEvents as event (event.id)}
               <li>
                 <a
-                  href={`/event/${event.$id}`}
+                  href={`/event/${event.id}`}
                   class="flex items-center gap-2"
                   onclick={closeAllCssDropdowns}
                 >

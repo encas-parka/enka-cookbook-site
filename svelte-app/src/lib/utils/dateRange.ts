@@ -394,8 +394,8 @@ function isPurchaseAvailableInRange(
     return false;
   }
 
-  // Date de référence (deliveryDate ou $createdAt pour les delivered sans deliveryDate)
-  const referenceDate = purchase.deliveryDate || purchase.$createdAt;
+  // Date de référence (deliveryDate ou created pour les delivered sans deliveryDate)
+  const referenceDate = purchase.deliveryDate || purchase.created;
   if (!referenceDate) {
     return false;
   }
@@ -418,7 +418,7 @@ function isPurchaseAvailableInRange(
   }
 
   // Si le stock est postérieur à l'achat = l'achat est inclus dans le stock
-  if (stockReferenceDate && purchase.$createdAt < stockReferenceDate) {
+  if (stockReferenceDate && purchase.created < stockReferenceDate) {
     return false;
   }
 

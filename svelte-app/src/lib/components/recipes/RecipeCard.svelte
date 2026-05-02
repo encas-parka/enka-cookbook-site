@@ -21,7 +21,7 @@
 <a
   class="card bg-base-100 cursor-pointer p-4 shadow-sm transition-shadow hover:shadow-md {recipe.auteur ===
     globalState.userName && 'border-accent/60 border-l-3'}"
-  href={p(`/recipe/${recipe.$id}`)}
+  href={p(`/recipe/${recipe.id}`)}
   role="button"
 >
   <!-- Absolute top @md -->

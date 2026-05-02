@@ -298,7 +298,7 @@
                       ?.title ||
                     recipe.recipeUuid}
                   {@const recipeData =
-                    recipesDetails.find((r) => r.$id === recipe.recipeUuid) ||
+                    recipesDetails.find((r) => r.id === recipe.recipeUuid) ||
                     null}
                   {@const descriptionVisible =
                     descriptionVisibilities[recipeKey] ?? true}

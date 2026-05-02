@@ -69,7 +69,7 @@
         for (const name of teamNames) {
           const team = nativeTeamsStore.teams.find((t) => t.name === name);
           if (team) {
-            teamIds.push(team.$id);
+            teamIds.push(team.id);
           }
         }
 
@@ -161,7 +161,7 @@
     // 1. Traiter les teams à ajouter
     // Filtrer les teams qui ne sont pas encore dans event.teams[]
     const teamsToAdd = selectedTeams.filter((teamId) => {
-      const team = nativeTeamsStore.teams.find((t) => t.$id === teamId);
+      const team = nativeTeamsStore.teams.find((t) => t.id === teamId);
       if (!team) return false;
       return !event.teams?.includes(team.name);
     });
@@ -216,7 +216,7 @@
     if (!event) return [];
 
     return selectedTeams.filter((teamId) => {
-      const team = nativeTeamsStore.teams.find((t) => t.$id === teamId);
+      const team = nativeTeamsStore.teams.find((t) => t.id === teamId);
       if (!team) return false;
       return !event.teams?.includes(team.name);
     });
@@ -587,8 +587,8 @@
                   <input
                     type="checkbox"
                     class="checkbox bg-base-100 checkbox-sm"
-                    checked={selectedTeams.includes(team.$id)}
-                    onchange={() => toggleTeam(team.$id)}
+                    checked={selectedTeams.includes(team.id)}
+                    onchange={() => toggleTeam(team.id)}
                   />
                   <div class="flex flex-col">
                     <span class="text-sm font-medium"
@@ -598,7 +598,7 @@
                       ></span
                     >
                     <div class="text-xs opacity-70">
-                      {nativeTeamsStore.getTeamMemberNames(team.$id).join(", ")}
+                      {nativeTeamsStore.getTeamMemberNames(team.id).join(", ")}
                     </div>
                   </div>
                 </label>

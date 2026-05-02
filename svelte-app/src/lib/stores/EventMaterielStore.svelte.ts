@@ -213,7 +213,7 @@ export class EventMaterielStore {
           groupId: data.groupId || null,
           notes: data.notes || null,
           createdBy: userId,
-        } as Omit<EventMateriel, "$id" | "$createdAt" | "$updatedAt">,
+        } as Omit<EventMateriel, "id" | "created" | "updated">,
       );
 
       return item;
@@ -269,7 +269,7 @@ export class EventMaterielStore {
           quantity: headerData.quantity,
           type: headerData.type,
           status: allocationData.status,
-          groupId: header.$id,
+          groupId: header.id,
           who: allocationData.who || null,
           where: allocationData.where || null,
           fromTeamName: allocationData.fromTeamName || null,
@@ -283,9 +283,9 @@ export class EventMaterielStore {
       return { header, allocation };
     } catch (err) {
       // Si le header a été créé mais l'allocation a échoué, nettoyer le header orphelin
-      if (header?.$id) {
+      if (header?.id) {
         try {
-          await this.#collection.remove(header.$id);
+          await this.#collection.remove(header.id);
         } catch {
           // Meilleur effort — ne pas masquer l'erreur originale
         }
@@ -464,7 +464,7 @@ export class EventMaterielStore {
         allocationsByHeader.get(item.groupId)!.push(item);
       } else {
         // Header : tout item sans groupId
-        headerMap.set(item.$id, item);
+        headerMap.set(item.id, item);
       }
     }
 
@@ -638,7 +638,7 @@ export class EventMaterielStore {
   }
 
   getAvailableHeadersForLink(excludeItemId?: string): EventMateriel[] {
-    return this.headers.filter((h) => h.$id !== excludeItemId);
+    return this.headers.filter((h) => h.id !== excludeItemId);
   }
 
   // =============================================================================
@@ -673,7 +673,7 @@ export class EventMaterielStore {
 
         if (existing) {
           if (existing.quantity !== loanItem.quantity) {
-            await this.#collection.update(existing.$id, {
+            await this.#collection.update(existing.id, {
               quantity: loanItem.quantity,
             } as Partial<EventMateriel>);
           }
@@ -694,7 +694,7 @@ export class EventMaterielStore {
                 quantity: loanItem.quantity,
                 type,
                 status: "confirmed",
-                groupId: matchingHeader.$id,
+                groupId: matchingHeader.id,
                 who: responsibleName,
                 where: location,
                 fromTeamName: ownerName,
@@ -727,7 +727,7 @@ export class EventMaterielStore {
 
       for (const [materielId, existing] of existingByMaterielId) {
         if (!processedIds.has(materielId)) {
-          await this.#collection.remove(existing.$id);
+          await this.#collection.remove(existing.id);
         }
       }
 
@@ -747,7 +747,7 @@ export class EventMaterielStore {
       );
 
       for (const item of existingItems) {
-        await this.#collection.remove(item.$id);
+        await this.#collection.remove(item.id);
       }
 
       console.log(
@@ -767,7 +767,7 @@ export class EventMaterielStore {
       const toDelete = existingItems.filter((item) => item.eventId === eventId);
 
       for (const item of toDelete) {
-        await this.#collection.remove(item.$id);
+        await this.#collection.remove(item.id);
       }
 
       console.log(
@@ -824,7 +824,7 @@ export class EventMaterielStore {
    * retire la ligne correspondante du loan.
    */
   async #removeItemAndUpdateLoan(item: EventMateriel): Promise<void> {
-    await this.#collection.remove(item.$id);
+    await this.#collection.remove(item.id);
 
     if (item.loanId && item.sourceMaterielId) {
       const loan = materielStore.getLoanById(item.loanId);

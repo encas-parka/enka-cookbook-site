@@ -149,7 +149,7 @@
     if (!urlFilter.ingredient) return [];
     return eventMeals.filter((meal) =>
       meal.recipes.some((mr: any) =>
-        filteredRecipes.some((fr) => fr.$id === mr.recipeUuid),
+        filteredRecipes.some((fr) => fr.id === mr.recipeUuid),
       ),
     );
   });
@@ -243,7 +243,7 @@
 
       meal.recipes.forEach((mealRecipe: any) => {
         const recipe = recipesDetails.find(
-          (r: any) => r.$id === mealRecipe.recipeUuid,
+          (r: any) => r.id === mealRecipe.recipeUuid,
         );
         if (!recipe) return;
 
@@ -285,7 +285,7 @@
     undatedMeals.forEach((meal: any) => {
       meal.recipes.forEach((mealRecipe: any) => {
         const recipe = recipesDetails.find(
-          (r: any) => r.$id === mealRecipe.recipeUuid,
+          (r: any) => r.id === mealRecipe.recipeUuid,
         );
         if (!recipe) return;
         recipes.push({
@@ -668,7 +668,7 @@
                     <ul>
                       {#each meals[0].recipes as mealRecipe, recipeIndex (mealRecipe.recipeUuid + "-" + recipeIndex)}
                         {@const recipe = recipesDetails.find(
-                          (r) => r.$id === mealRecipe.recipeUuid,
+                          (r) => r.id === mealRecipe.recipeUuid,
                         )}
                         {#if recipe}
                           <li>
@@ -739,7 +739,7 @@
                     {#each undatedMeals as undatedMeal (undatedMeal.id)}
                       {#each undatedMeal.recipes as mealRecipe, recipeIndex (mealRecipe.recipeUuid + "-" + recipeIndex)}
                         {@const recipe = recipesDetails.find(
-                          (r) => r.$id === mealRecipe.recipeUuid,
+                          (r) => r.id === mealRecipe.recipeUuid,
                         )}
                         {#if recipe}
                           <li>
@@ -807,7 +807,7 @@
                   {#each paginatedMeals as meal, mealIndex (meal.id || mealIndex)}
                     {@const recipesMatchingSearch = meal.recipes.filter(
                       (mr: any) =>
-                        filteredRecipes.some((fr) => fr.$id === mr.recipeUuid),
+                        filteredRecipes.some((fr) => fr.id === mr.recipeUuid),
                     )}
                     {#if recipesMatchingSearch.length > 0}
                       <div
@@ -839,7 +839,7 @@
 
                       {#each recipesMatchingSearch as mealRecipe, recipeIndex ((meal.id || mealIndex) + "-" + mealRecipe.recipeUuid + "-" + recipeIndex)}
                         {@const recipe = recipesDetails.find(
-                          (r) => r.$id === mealRecipe.recipeUuid,
+                          (r) => r.id === mealRecipe.recipeUuid,
                         )}
                         <div class="page-break-after mb-8">
                           {#if recipe}
@@ -911,7 +911,7 @@
 
                       {#each mealRecipesToDisplay as mealRecipe, recipeIndex ((meal.id || mealIndex) + "-" + mealRecipe.recipeUuid + "-" + recipeIndex)}
                         {@const recipe = recipesDetails.find(
-                          (r) => r.$id === mealRecipe.recipeUuid,
+                          (r) => r.id === mealRecipe.recipeUuid,
                         )}
                         <div class="page-break-after">
                           {#if recipe}
@@ -1063,7 +1063,7 @@
                   <ul>
                     {#each meals[0].recipes as mealRecipe, recipeIndex (mealRecipe.recipeUuid + "-" + recipeIndex)}
                       {@const recipe = recipesDetails.find(
-                        (r) => r.$id === mealRecipe.recipeUuid,
+                        (r) => r.id === mealRecipe.recipeUuid,
                       )}
                       {#if recipe}
                         <li>
@@ -1128,7 +1128,7 @@
                   {#each undatedMeals as undatedMeal (undatedMeal.id)}
                     {#each undatedMeal.recipes as mealRecipe, recipeIndex (mealRecipe.recipeUuid + "-" + recipeIndex)}
                       {@const recipe = recipesDetails.find(
-                        (r) => r.$id === mealRecipe.recipeUuid,
+                        (r) => r.id === mealRecipe.recipeUuid,
                       )}
                       {#if recipe}
                         <li>
@@ -1357,7 +1357,7 @@
                   {#each paginatedMeals as meal, mealIndex (meal.id || mealIndex)}
                     {@const recipesMatchingSearch = meal.recipes.filter(
                       (mr: any) =>
-                        filteredRecipes.some((fr) => fr.$id === mr.recipeUuid),
+                        filteredRecipes.some((fr) => fr.id === mr.recipeUuid),
                     )}
                     {#if recipesMatchingSearch.length > 0}
                       <!-- Date break / Mise de côté header -->
@@ -1391,7 +1391,7 @@
                       <!-- Recettes qui correspondent à la recherche -->
                       {#each recipesMatchingSearch as mealRecipe, recipeIndex ((meal.id || mealIndex) + "-" + mealRecipe.recipeUuid + "-" + recipeIndex)}
                         {@const recipe = recipesDetails.find(
-                          (r) => r.$id === mealRecipe.recipeUuid,
+                          (r) => r.id === mealRecipe.recipeUuid,
                         )}
                         <div class="page-break-after mb-8">
                           {#if recipe}
@@ -1465,7 +1465,7 @@
                       <!-- Recettes -->
                       {#each mealRecipesToDisplay as mealRecipe, recipeIndex ((meal.id || mealIndex) + "-" + mealRecipe.recipeUuid + "-" + recipeIndex)}
                         {@const recipe = recipesDetails.find(
-                          (r) => r.$id === mealRecipe.recipeUuid,
+                          (r) => r.id === mealRecipe.recipeUuid,
                         )}
                         <div class="page-break-after">
                           {#if recipe}

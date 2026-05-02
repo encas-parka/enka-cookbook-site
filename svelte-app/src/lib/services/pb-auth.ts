@@ -5,7 +5,7 @@
  * le stockage du token JWT dans localStorage automatiquement via `pb.authStore`.
  *
  * Normalisation : PocketBase utilise `id`/`created`/`updated` → on normalise
- * en `$id`/`$createdAt`/`$updatedAt` pour compatibilité avec le reste du codebase.
+ * en `id`/`created`/`updated` pour compatibilité avec le reste du codebase.
  */
 
 import { pb } from '$lib/db-sync/pb-sync';
@@ -19,7 +19,7 @@ import { pb } from '$lib/db-sync/pb-sync';
  * Seuls les champs utilisés par le codebase sont exposés.
  */
 export interface PBAuthUser {
-	$id: string;
+	id: string;
 	name: string;
 	email: string;
 }
@@ -33,7 +33,7 @@ export interface PBAuthUser {
  */
 function normalizeUser(record: Record<string, unknown>): PBAuthUser {
 	return {
-		$id: record.id as string,
+		id: record.id as string,
 		name: (record.name as string) || (record.username as string) || '',
 		email: (record.email as string) || ''
 	};

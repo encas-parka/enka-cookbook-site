@@ -1,7 +1,7 @@
 <script lang="ts">
   import { ArrowDownNarrowWide, ArrowUp, ArrowDown, X } from "@lucide/svelte";
 
-  type SortBy = "title" | "$createdAt" | "$updatedAt";
+  type SortBy = "title" | "created" | "updated";
 
   interface Props {
     sortBy: SortBy;
@@ -89,24 +89,24 @@
       </button>
 
       <button
-        class={getButtonSortClasses("$createdAt")}
-        onclick={() => handleSortClick("$createdAt")}
+        class={getButtonSortClasses("created")}
+        onclick={() => handleSortClick("created")}
         aria-label="Trier par date de création"
       >
-        {#if getSortIcon("$createdAt")}
-          {@const Icon = getSortIcon("$createdAt")}
+        {#if getSortIcon("created")}
+          {@const Icon = getSortIcon("created")}
           <Icon size={16} />
         {/if}
         Date de création
       </button>
 
       <button
-        class={getButtonSortClasses("$updatedAt")}
-        onclick={() => handleSortClick("$updatedAt")}
+        class={getButtonSortClasses("updated")}
+        onclick={() => handleSortClick("updated")}
         aria-label="Trier par date de modification"
       >
-        {#if getSortIcon("$updatedAt")}
-          {@const Icon = getSortIcon("$updatedAt")}
+        {#if getSortIcon("updated")}
+          {@const Icon = getSortIcon("updated")}
           <Icon size={16} />
         {/if}
         Date de modification

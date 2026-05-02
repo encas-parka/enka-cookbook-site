@@ -28,7 +28,7 @@
   // Réinitialiser la sélection quand le modal s'ouvre
   $effect(() => {
     if (isOpen) {
-      selectedEventId = events[0]?.$id ?? "";
+      selectedEventId = events[0]?.id ?? "";
     }
   });
 
@@ -37,7 +37,7 @@
     isSubmitting = true;
 
     try {
-      const event = events.find((e) => e.$id === selectedEventId);
+      const event = events.find((e) => e.id === selectedEventId);
       const eventName = event?.name ?? "l'événement";
 
       await toastService.track(
@@ -69,8 +69,8 @@
     <fieldset class="fieldset">
       <legend class="fieldset-legend">Choisir un événement</legend>
       <div class="flex flex-col gap-2">
-        {#each events as event (event.$id)}
-          {@const isSelected = selectedEventId === event.$id}
+        {#each events as event (event.id)}
+          {@const isSelected = selectedEventId === event.id}
           <label
             class="cursor-pointer rounded-lg px-3 py-2 transition-colors {isSelected
               ? 'bg-primary/20 ring-primary ring-1'
@@ -82,7 +82,7 @@
                 name="event-select"
                 class="radio radio-primary radio-sm"
                 bind:group={selectedEventId}
-                value={event.$id}
+                value={event.id}
               />
               <div class="flex-1">
                 <div class="font-medium">{event.name}</div>

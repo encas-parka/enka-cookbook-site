@@ -142,11 +142,11 @@
   class="card card-side card-xs bg-base-100 border-base-200 hover:border-primary/50 group cursor-pointer border text-left shadow-sm transition-all hover:shadow-md"
   role="button"
   tabindex="0"
-  onclick={() => canEdit && onEdit?.(materiel.$id)}
+  onclick={() => canEdit && onEdit?.(materiel.id)}
   onkeydown={(e) => {
     if (e.key === "Enter" || e.key === " ") {
       e.preventDefault();
-      canEdit && onEdit?.(materiel.$id);
+      canEdit && onEdit?.(materiel.id);
     }
   }}
 >
@@ -288,7 +288,7 @@
         class="btn btn-ghost btn-xs text-primary"
         onclick={(e) => {
           e.stopPropagation();
-          onEdit?.(materiel.$id);
+          onEdit?.(materiel.id);
         }}
         aria-label="Éditer"
       >

@@ -34,11 +34,11 @@
   {#if events.length > 0}
     <div class="my-4">
       <div class="space-y-6">
-        {#each events as event (event.$id)}
+        {#each events as event (event.id)}
           <EventCard
             {event}
             {cardClass}
-            contributorStatus={hasInvitation(event.$id) ? "invited" : null}
+            contributorStatus={hasInvitation(event.id) ? "invited" : null}
           />
         {/each}
       </div>

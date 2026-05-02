@@ -27,8 +27,8 @@
     return teamdocsStore
       .getTeamDocuments(teamId)
       .sort((a, b) => {
-        const dateA = a.$updatedAt ? new Date(a.$updatedAt).getTime() : 0;
-        const dateB = b.$updatedAt ? new Date(b.$updatedAt).getTime() : 0;
+        const dateA = a.updated ? new Date(a.updated).getTime() : 0;
+        const dateB = b.updated ? new Date(b.updated).getTime() : 0;
         return dateB - dateA; // Plus récent d'abord
       })
       .slice(0, 5);
@@ -80,7 +80,7 @@
       </div>
     {:else}
       <div class="space-y-2">
-        {#each latestDocs as doc (doc.$id)}
+        {#each latestDocs as doc (doc.id)}
           <DocCard {doc} {teamId} />
         {/each}
       </div>

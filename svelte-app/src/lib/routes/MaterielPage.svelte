@@ -62,7 +62,7 @@
 
   // Équipe active
   const activeTeam = $derived(
-    activeTeamId ? userTeams.find((t) => t.$id === activeTeamId) : null,
+    activeTeamId ? userTeams.find((t) => t.id === activeTeamId) : null,
   );
 
   // Matériel filtré pour l'équipe active
@@ -139,7 +139,7 @@
 
     if (teamIdFromParams && teamIdFromParams !== activeTeamId) {
       // Vérifier que l'utilisateur appartient à cette équipe
-      const team = userTeams.find((t) => t.$id === teamIdFromParams);
+      const team = userTeams.find((t) => t.id === teamIdFromParams);
       if (team) {
         activeTeamId = teamIdFromParams;
       }
@@ -151,7 +151,7 @@
     ) {
       // Premier chargement sans teamId : rediriger vers la première équipe
       isRedirecting = true;
-      navigate(`/dashboard/materiel/${userTeams[0].$id}`);
+      navigate(`/dashboard/materiel/${userTeams[0].id}`);
     }
   });
 
@@ -161,7 +161,7 @@
 
   $effect(() => {
     const team = activeTeamId
-      ? userTeams.find((t) => t.$id === activeTeamId)
+      ? userTeams.find((t) => t.id === activeTeamId)
       : null;
     const teamName = team?.name || "Matériel";
 
@@ -256,7 +256,7 @@
       {:else}
         <!-- Grille de matériel -->
         <div class="grid grid-cols-1">
-          {#each filteredMateriels as materiel (materiel.$id)}
+          {#each filteredMateriels as materiel (materiel.id)}
             <MaterielCard
               {materiel}
               onEdit={(materielId) => openEditModal(materielId)}
@@ -272,7 +272,7 @@
   <MaterielModal
     isOpen={materielModalOpen}
     onClose={closeMaterielModal}
-    teamId={activeTeam.$id}
+    teamId={activeTeam.id}
     teamName={activeTeam.name}
     {availableLocations}
     materielId={materielModalEditId}
@@ -280,7 +280,7 @@
   <QuickAddCatalogModal
     isOpen={catalogModalOpen}
     onClose={() => (catalogModalOpen = false)}
-    teamId={activeTeam.$id}
+    teamId={activeTeam.id}
     teamName={activeTeam.name}
   />
 {/if}

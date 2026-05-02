@@ -198,11 +198,11 @@
 
   function handleAddRecipe(recipe: RecipeIndexEntry) {
     // Vérifier si la recette existe déjà pour éviter les doublons
-    const alreadyExists = meal.recipes.some((r) => r.recipeUuid === recipe.$id);
+    const alreadyExists = meal.recipes.some((r) => r.recipeUuid === recipe.id);
     if (alreadyExists) return; // Ignorer silencieusement l'ajout d'une recette déjà présente
 
     const newRecipe: EventMealRecipe = {
-      recipeUuid: recipe.$id,
+      recipeUuid: recipe.id,
       plates: meal.guests,
       typeR: recipe.typeR,
       hasOwnPlatesNb: false, // Auto-sync par défaut pour les nouvelles recettes

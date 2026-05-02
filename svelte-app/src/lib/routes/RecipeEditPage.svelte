@@ -130,8 +130,8 @@
         .then((data) => {
           if (data) {
             recipe = transformStoreDataToForm(data, {
-              $createdAt: data.$createdAt,
-              $updatedAt: data.$updatedAt,
+              created: data.created,
+              updated: data.updated,
               createdBy: data.createdBy,
             });
             lockedBy = data.lockedBy || null;
@@ -266,7 +266,7 @@
     try {
       // Vérifier si le verrou actuel est expiré (plus de 5 minutes)
       const currentLockedBy = recipe.lockedBy;
-      const lastUpdate = recipe.$updatedAt ? new Date(recipe.$updatedAt) : null;
+      const lastUpdate = recipe.updated ? new Date(recipe.updated) : null;
       const isExpired =
         lastUpdate && Date.now() - lastUpdate.getTime() > 300000; // 5 min
 
@@ -339,7 +339,7 @@
         preparation24h: recipe.preparation24h,
         astuces: astucesToAppwrite(recipe.astuces),
         prepAlt: recipe.prepAlt,
-        $id: recipe.$id,
+        id: recipe.id,
         // Conserver createdBy pour l'upsert (création si nécessaire)
         createdBy: recipe.createdBy || globalState.userId,
         // Libérer le lock atomiquement avec la sauvegarde
@@ -483,13 +483,13 @@
       />
 
       <!-- Métadonnées système -->
-      {#if recipe.$createdAt}
+      {#if recipe.created}
         <RecipeMetadata
           auteur={recipe.auteur}
           createdBy={recipe.createdBy}
-          id={recipe.$id ?? ""}
-          createdAt={recipe.$createdAt}
-          updatedAt={recipe.$updatedAt}
+          id={recipe.id ?? ""}
+          createdAt={recipe.created}
+          updatedAt={recipe.updated}
         />
       {/if}
 

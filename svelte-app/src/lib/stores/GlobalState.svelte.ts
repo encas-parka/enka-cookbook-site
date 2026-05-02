@@ -20,7 +20,7 @@ class GlobalState {
   // =============================================================================
 
   #user = $state<PBAuthUser | null>(null);
-  #userTeams = $derived(nativeTeamsStore.myTeams.map((t) => t.$id));
+  #userTeams = $derived(nativeTeamsStore.myTeams.map((t) => t.id));
   #authLoading = $state(false);
   #authError = $state<string | null>(null);
   #authInitialized = $state(false);
@@ -30,7 +30,7 @@ class GlobalState {
   }
 
   get userId() {
-    return this.#user?.$id ?? null;
+    return this.#user?.id ?? null;
   }
 
   get userEmail() {
@@ -77,7 +77,7 @@ class GlobalState {
         this.#user = user;
         localStorage.setItem("appwrite-user-name", user.name);
         localStorage.setItem("appwrite-user-email", user.email);
-        localStorage.setItem("appwrite-user-id", user.$id);
+        localStorage.setItem("appwrite-user-id", user.id);
         console.log(`[GlobalState] Authentifié: ${user.name}`);
       } else {
         this.#user = null;
@@ -112,7 +112,7 @@ class GlobalState {
 
       localStorage.setItem("appwrite-user-name", user.name);
       localStorage.setItem("appwrite-user-email", user.email);
-      localStorage.setItem("appwrite-user-id", user.$id);
+      localStorage.setItem("appwrite-user-id", user.id);
 
       // Phase 0: Initialiser le cache IDB pour les stores qui en dépendent
       await Promise.all([
@@ -196,10 +196,10 @@ class GlobalState {
   isTeamOwner(teamId: string): boolean {
     if (!this.#user) return false;
 
-    const team = nativeTeamsStore.myTeams.find((t) => t.$id === teamId);
+    const team = nativeTeamsStore.myTeams.find((t) => t.id === teamId);
     if (!team) return false;
 
-    const member = team.members.find((m) => m.id === this.#user!.$id);
+    const member = team.members.find((m) => m.id === this.#user!.id);
     return member?.roles?.includes("owner") ?? false;
   }
 
@@ -212,10 +212,10 @@ class GlobalState {
   hasTeamRole(teamId: string, role: string): boolean {
     if (!this.#user) return false;
 
-    const team = nativeTeamsStore.myTeams.find((t) => t.$id === teamId);
+    const team = nativeTeamsStore.myTeams.find((t) => t.id === teamId);
     if (!team) return false;
 
-    const member = team.members.find((m) => m.id === this.#user!.$id);
+    const member = team.members.find((m) => m.id === this.#user!.id);
     return member?.roles?.includes(role) ?? false;
   }
 

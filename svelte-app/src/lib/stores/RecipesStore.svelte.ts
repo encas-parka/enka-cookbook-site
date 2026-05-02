@@ -44,7 +44,7 @@ class RecipesStore {
 		const index = new SvelteMap<string, RecipeIndexEntry>();
 		for (const recipe of this.#rawRecipes.values()) {
 			if (recipe.status !== 'deleted') {
-				index.set(recipe.$id, parseAppwriteRecipeToIndexEntry(recipe));
+				index.set(recipe.id, parseAppwriteRecipeToIndexEntry(recipe));
 			}
 		}
 		return index;
@@ -298,8 +298,8 @@ class RecipesStore {
 	// PUBLIC API - INDEX READS
 	// =============================================================================
 
-	getRecipeIndexByUuid($id: string): RecipeIndexEntry | null {
-		return this.#recipesIndex.get($id) || null;
+	getRecipeIndexByUuid(id: string): RecipeIndexEntry | null {
+		return this.#recipesIndex.get(id) || null;
 	}
 
 	searchRecipes(query: string): RecipeIndexEntry[] {
@@ -533,19 +533,19 @@ class RecipesStore {
 			current.rootRecipeId &&
 			!visitedRoots.has(current.rootRecipeId)
 		) {
-			visitedRoots.add(current.$id);
+			visitedRoots.add(current.id);
 			const parent = this.getRecipeIndexByUuid(current.rootRecipeId);
 			if (!parent) break;
 			current = parent;
 		}
 
 		const root = current;
-		allVariants.set(root.$id, root);
+		allVariants.set(root.id, root);
 
 		this.#collectVariants(
-			root.$id,
+			root.id,
 			allVariants,
-			new Set([root.$id]),
+			new Set([root.id]),
 			0,
 			maxDepth
 		);
@@ -554,7 +554,7 @@ class RecipesStore {
 			root,
 			variants: Array.from(allVariants.values()),
 			isRoot:
-				!initial.rootRecipeId || initial.rootRecipeId === initial.$id
+				!initial.rootRecipeId || initial.rootRecipeId === initial.id
 		};
 	}
 
@@ -622,15 +622,15 @@ class RecipesStore {
 		data: Partial<Recettes>,
 		userId: string
 	): Promise<Recettes> {
-		const slugUuid = data.$id || crypto.randomUUID();
+		const slugUuid = data.id || crypto.randomUUID();
 		const recipeData = {
 			...data,
-			$id: slugUuid,
+			id: slugUuid,
 			createdBy: userId,
 			status: data.status || "active"
 		};
 
-		const recipe = await this.#collection.create(recipeData as unknown as Omit<Recettes, "$id" | "$createdAt" | "$updatedAt">);
+		const recipe = await this.#collection.create(recipeData as unknown as Omit<Recettes, "id" | "created" | "updated">);
 
 		console.log(`[RecipesStore] Recipe created: ${slugUuid}`);
 		return recipe;

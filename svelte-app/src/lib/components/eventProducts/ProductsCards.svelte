@@ -266,7 +266,7 @@
                 onclick={() =>
                   onOpenGroupEditModal(
                     "store",
-                    groupProducts!.map((p) => p.data.$id),
+                    groupProducts!.map((p) => p.data.id),
                     groupProducts!.map((p) => p.data),
                   )}
                 onmouseenter={() =>
@@ -285,7 +285,7 @@
                 onclick={() =>
                   onOpenGroupEditModal(
                     "who",
-                    groupProducts!.map((p) => p.data.$id),
+                    groupProducts!.map((p) => p.data.id),
                     groupProducts!.map((p) => p.data),
                   )}
                 onmouseenter={() =>
@@ -336,7 +336,7 @@
       <!-- Cards des produits du groupe -->
       {#if viewMode === "compact"}
         <div class="divide-neutral/20 my-2 mb-8 divide-y">
-          {#each groupProducts as productModel (productModel.data.$id)}
+          {#each groupProducts as productModel (productModel.data.id)}
             <ProductCardCompact
               {productModel}
               {shouldShowActionButtons}
@@ -347,7 +347,7 @@
         </div>
       {:else}
         <div class="mt-4 mb-8 space-y-4 sm:space-y-2">
-          {#each groupProducts as productModel (productModel.data.$id)}
+          {#each groupProducts as productModel (productModel.data.id)}
             <ProductCard
               {productModel}
               {shouldShowActionButtons}
@@ -408,7 +408,7 @@
             </tr>
           </thead>
           <tbody>
-            {#each groupProducts as productModel (productModel.data.$id)}
+            {#each groupProducts as productModel (productModel.data.id)}
               {@const product = productModel.data}
               {@const productInDateRange = productModel.stats}
               {@const consolidatedPurchases = formatPurchasesWithBadges(

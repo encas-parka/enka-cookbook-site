@@ -102,9 +102,9 @@
         class="flex flex-1 cursor-pointer flex-wrap items-center gap-4"
         role="button"
         tabindex="0"
-        onclick={() => onOpenModal(product.$id, "recettes")}
+        onclick={() => onOpenModal(product.id, "recettes")}
         onkeydown={(e) =>
-          e.key === "Enter" && onOpenModal(product.$id, "recettes")}
+          e.key === "Enter" && onOpenModal(product.id, "recettes")}
         onmouseenter={() =>
           (hoverHelp.msg = "Afficher les informations sur ce produit")}
         onmouseleave={() => hoverHelp.reset()}
@@ -181,9 +181,9 @@
               ?.storeName
               ? 'btn-success'
               : ''}"
-            onclick={() => onOpenModal(product.$id, "magasins")}
+            onclick={() => onOpenModal(product.id, "magasins")}
             onkeydown={(e) =>
-              e.key === "Enter" && onOpenModal(product.$id, "magasins")}
+              e.key === "Enter" && onOpenModal(product.id, "magasins")}
             onmouseenter={() =>
               (hoverHelp.msg = "Définissez le magasin où acheter le produit")}
             onmouseleave={() => hoverHelp.reset()}
@@ -214,9 +214,9 @@
             product.who?.length > 0
               ? 'btn-success'
               : ''}"
-            onclick={() => onOpenModal(product.$id, "volontaires")}
+            onclick={() => onOpenModal(product.id, "volontaires")}
             onkeydown={(e) =>
-              e.key === "Enter" && onOpenModal(product.$id, "volontaires")}
+              e.key === "Enter" && onOpenModal(product.id, "volontaires")}
             onmouseenter={() =>
               (hoverHelp.msg =
                 "Déclarez qui est responsable de l'achat de ce produit")}
@@ -290,9 +290,9 @@
           role="button"
           tabindex="0"
           class=" bg-base-300/80 group hover:ring-accent/60 relative flex flex-1 cursor-pointer flex-wrap items-center justify-between gap-x-4 gap-y-1 rounded-lg p-2 shadow-sm hover:ring-2"
-          onclick={() => onOpenModal(product.$id, "recettes")}
+          onclick={() => onOpenModal(product.id, "recettes")}
           onkeydown={(e) =>
-            e.key === "Enter" && onOpenModal(product.$id, "recettes")}
+            e.key === "Enter" && onOpenModal(product.id, "recettes")}
           onmouseenter={() =>
             (hoverHelp.msg = "Afficher les informations sur ce produit")}
           onmouseleave={() => hoverHelp.reset()}
@@ -390,9 +390,9 @@
           class="group hover:ring-accent/60 bg-base-300/80 relative flex flex-1 cursor-pointer items-start justify-between gap-2 rounded-lg p-2 shadow-sm transition-colors hover:ring-2"
           role="button"
           tabindex="0"
-          onclick={() => onOpenModal(product.$id, "achats")}
+          onclick={() => onOpenModal(product.id, "achats")}
           onkeydown={(e) =>
-            e.key === "Enter" && onOpenModal(product.$id, "achats")}
+            e.key === "Enter" && onOpenModal(product.id, "achats")}
           onmouseenter={() => (hoverHelp.msg = "Déclarez des achats effectués")}
           onmouseleave={() => hoverHelp.reset()}
         >

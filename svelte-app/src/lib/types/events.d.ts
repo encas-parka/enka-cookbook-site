@@ -134,7 +134,7 @@ export interface CreateEventData {
  * Données pour mettre à jour un événement
  */
 export interface UpdateEventData {
-  $updatedAt?: Date;
+  updated?: Date;
   name?: string;
   description?: string;
   minContrib?: number;

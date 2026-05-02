@@ -83,10 +83,10 @@
   {:else}
     <!-- Liste des équipes -->
     <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-      {#each teamsStore.teams as team (team.$id)}
+      {#each teamsStore.teams as team (team.id)}
         <TeamCard
           {team}
-          teamId={team.$id}
+          teamId={team.id}
           onClick={(teamId) => openTeamDetails(teamId)}
         />
       {/each}

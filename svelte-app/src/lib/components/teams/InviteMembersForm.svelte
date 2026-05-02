@@ -36,7 +36,7 @@
   let error = $state<string | null>(null);
   let successMessage = $state<string | null>(null);
 
-  const isOwner = $derived(globalState.isTeamOwner(team.$id));
+  const isOwner = $derived(globalState.isTeamOwner(team.id));
 
   // Ajouter un email à la liste
   function addEmail() {

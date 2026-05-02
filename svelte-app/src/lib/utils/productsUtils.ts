@@ -248,7 +248,7 @@ export function computeFuzzySearchMatches(
     key: "productName",
     threshold: 0.3,
   });
-  return new Set(results.map(r => r.obj.$id));
+  return new Set(results.map(r => r.obj.id));
 }
 
 export function matchesFilters(
@@ -258,7 +258,7 @@ export function matchesFilters(
 ): boolean {
   // Recherche textuelle fuzzy
   if (filters.searchQuery.trim()) {
-    if (!fuzzyMatchedIds?.has(product.$id)) {
+    if (!fuzzyMatchedIds?.has(product.id)) {
       return false;
     }
   }

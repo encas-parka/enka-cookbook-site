@@ -47,7 +47,7 @@
         if (!key) continue;
         if (!result[key]) result[key] = { quantity: 0, ids: [] };
         result[key].quantity += m.quantity || 0;
-        result[key].ids.push(m.$id);
+        result[key].ids.push(m.id);
       }
     }
     return result;

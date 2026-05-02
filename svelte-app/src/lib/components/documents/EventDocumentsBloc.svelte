@@ -20,8 +20,8 @@
   const sortedDocs = $derived(
     [...docs].sort(
       (a, b) =>
-        new Date(b.$updatedAt || 0).getTime() -
-        new Date(a.$updatedAt || 0).getTime(),
+        new Date(b.updated || 0).getTime() -
+        new Date(a.updated || 0).getTime(),
     ),
   );
 </script>
@@ -47,10 +47,10 @@
 
     {#if sortedDocs.length > 0}
       <div class="flex flex-wrap items-center gap-4">
-        {#each sortedDocs.slice(0, 5) as doc (doc.$id)}
+        {#each sortedDocs.slice(0, 5) as doc (doc.id)}
           <a
             class="bg-base-200/60 hover:bg-base-200 flex cursor-pointer items-center gap-2 rounded-lg p-3 text-sm shadow-sm transition-colors"
-            href={`/event/${eventId}/document/${doc.$id}`}
+            href={`/event/${eventId}/document/${doc.id}`}
           >
             <FileText class="text-primary h-3 w-3 shrink-0" />
             <span class="truncate font-medium">{doc.title}</span>
@@ -58,7 +58,7 @@
               class="text-base-content/60 ms-4 flex items-center gap-1 text-xs"
             >
               <Clock class="h-3 w-3" />
-              <span>Modifié {formatDateRelative(doc.$updatedAt)}</span>
+              <span>Modifié {formatDateRelative(doc.updated)}</span>
             </div>
           </a>
         {/each}

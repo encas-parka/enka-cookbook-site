@@ -95,7 +95,7 @@ import {
   const myTeams = $derived(nativeTeamsStore.myTeams);
 
   const userAccessibleLoanIds = $derived.by(() => {
-    const myTeamIds = new Set(myTeams.map((t) => t.$id));
+    const myTeamIds = new Set(myTeams.map((t) => t.id));
     const loanIds = new Set<string>();
     for (const item of eventMaterielStore.items) {
       if (item.loanId) {
@@ -304,7 +304,7 @@ import {
   async function handleDelete() {
     if (!deleteTarget) return;
     try {
-      await eventMaterielStore.deleteItem(deleteTarget.$id);
+      await eventMaterielStore.deleteItem(deleteTarget.id);
       toastService.success("Item supprimé");
     } catch (err) {
       console.error("[EventMaterielPage] Delete error:", err);
@@ -322,7 +322,7 @@ import {
   }) {
     if (!allocatingForHeaderId) return;
     const header = eventMaterielStore.items.find(
-      (i) => i.$id === allocatingForHeaderId,
+      (i) => i.id === allocatingForHeaderId,
     );
     if (!header) return;
 
@@ -377,7 +377,7 @@ import {
 
   async function openImportModal(teamId?: string) {
     if (myTeams.length === 1 || teamId) {
-      importTeamId = teamId || myTeams[0]?.$id || null;
+      importTeamId = teamId || myTeams[0]?.id || null;
       if (!importTeamId) return;
       await loadCreateLoanModal();
 
@@ -386,7 +386,7 @@ import {
       );
 
       if (existingLoan) {
-        editLoanId = existingLoan.$id;
+        editLoanId = existingLoan.id;
       } else {
         importLoanModalOpen = true;
       }
@@ -394,7 +394,7 @@ import {
   }
 
   function getImportTeamName(): string {
-    const team = myTeams.find((t) => t.$id === importTeamId);
+    const team = myTeams.find((t) => t.id === importTeamId);
     return team?.name || "";
   }
 
@@ -471,7 +471,7 @@ import {
           <button onclick={() => openImportModal()}>
             <ClipboardCopy size={16} />
             {myTeams[0].name}
-            {#if materielStore.loans.some((l) => l.ownerId === myTeams[0].$id && l.eventId === eventId)}
+            {#if materielStore.loans.some((l) => l.ownerId === myTeams[0].id && l.eventId === eventId)}
               <span class="text-base-content/50 text-xs"
                 >(réservation existante)</span
               >
@@ -480,12 +480,12 @@ import {
         </li>
       {:else if myTeams.length > 1}
         <li class="menu-title">Importer depuis</li>
-        {#each myTeams as team (team.$id)}
+        {#each myTeams as team (team.id)}
           <li>
-            <button onclick={() => openImportModal(team.$id)}>
+            <button onclick={() => openImportModal(team.id)}>
               <ClipboardCopy size={16} />
               {team.name}
-              {#if materielStore.loans.some((l) => l.ownerId === team.$id && l.eventId === eventId)}
+              {#if materielStore.loans.some((l) => l.ownerId === team.id && l.eventId === eventId)}
                 <span class="text-base-content/50 text-xs">(résa.)</span>
               {/if}
             </button>
@@ -658,11 +658,11 @@ import {
         </div>
       {:else}
         <div class="mt-8 grid grid-cols-1 gap-1">
-          {#each groupedItems as group (group.header.$id)}
+          {#each groupedItems as group (group.header.id)}
             <EventMaterielGroupCard
               {group}
               {canEdit}
-              onEditItem={(item) => openEditForm(item.$id)}
+              onEditItem={(item) => openEditForm(item.id)}
               onAddAllocation={(headerId, status) => {
                 allocatingForHeaderId = headerId;
                 allocationPresetStatus = status;
@@ -711,7 +711,7 @@ import {
             </tr>
           </thead>
           <tbody>
-            {#each typeGroups as group (group.header.$id)}
+            {#each typeGroups as group (group.header.id)}
               {@const confirmedAllocs = group.allocations.filter(
                 (a) => eventMaterielStore.resolveStatus(a) === "confirmed",
               )}
@@ -799,7 +799,7 @@ import {
 <!-- Formulaire d'allocation -->
 {#if allocatingForHeaderId}
   {@const allocHeader = eventMaterielStore.items.find(
-    (i) => i.$id === allocatingForHeaderId,
+    (i) => i.id === allocatingForHeaderId,
   )}
   {@const allocRemaining = eventMaterielStore.getRemainingQuantity(
     allocatingForHeaderId,

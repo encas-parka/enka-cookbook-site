@@ -87,7 +87,7 @@ export class ProductModalState implements ProductModalStateType {
   editingPurchaseData = $derived.by(() => {
     if (!this.editingPurchaseId) return null;
     return (
-      this.purchasesList.find((p) => p.$id === this.editingPurchaseId) ?? null
+      this.purchasesList.find((p) => p.id === this.editingPurchaseId) ?? null
     );
   });
 
@@ -234,7 +234,7 @@ export class ProductModalState implements ProductModalStateType {
 
       // Utiliser ProductsStore (guard interne local/Appwrite)
       await productsStore.createPurchase(
-        this.product!.$id,
+        this.product!.id,
         [{ q: normalizedQuantity, u: normalizedUnit }],
         {
           store: this.forms.purchase.store || undefined,
@@ -278,7 +278,7 @@ export class ProductModalState implements ProductModalStateType {
   }
 
   startEditPurchase(purchase: Purchases) {
-    this.editingPurchaseId = purchase.$id;
+    this.editingPurchaseId = purchase.id;
   }
 
   cancelEditPurchase() {
@@ -286,7 +286,7 @@ export class ProductModalState implements ProductModalStateType {
   }
 
   async updateEditedPurchase(updatedPurchase: Purchases) {
-    if (!updatedPurchase.$id) return;
+    if (!updatedPurchase.id) return;
 
     await this.withLoading(async () => {
       // Normaliser les unités pour le stockage (kg→gr., l.→ml)
@@ -303,7 +303,7 @@ export class ProductModalState implements ProductModalStateType {
       }
 
       // Utiliser ProductsStore
-      await productsStore.updatePurchase(updatedPurchase.$id, {
+      await productsStore.updatePurchase(updatedPurchase.id, {
         unit: normalized.unit,
         quantity: normalized.quantity,
         store: updatedPurchase.store || null,
@@ -320,7 +320,7 @@ export class ProductModalState implements ProductModalStateType {
   }
 
   async removePurchase(purchaseId: string) {
-    const purchase = this.purchasesList.find((p) => p.$id === purchaseId);
+    const purchase = this.purchasesList.find((p) => p.id === purchaseId);
     if (!purchase) return;
 
     if (
@@ -357,7 +357,7 @@ export class ProductModalState implements ProductModalStateType {
       };
 
       // Utiliser ProductsStore - updateProduct générique
-      await productsStore.updateProduct(this.product!.$id, {
+      await productsStore.updateProduct(this.product!.id, {
         stockReel: JSON.stringify(newEntry),
       });
 
@@ -374,7 +374,7 @@ export class ProductModalState implements ProductModalStateType {
 
     await this.withLoading(async () => {
       // Utiliser ProductsStore - updateProduct générique
-      await productsStore.updateProduct(this.product!.$id, {
+      await productsStore.updateProduct(this.product!.id, {
         stockReel: null,
       });
     }, "Stock supprimé");
@@ -385,7 +385,7 @@ export class ProductModalState implements ProductModalStateType {
 
     await this.withLoading(async () => {
       // Utiliser ProductsStore - updateProduct générique
-      await productsStore.updateProduct(this.product!.$id, {
+      await productsStore.updateProduct(this.product!.id, {
         who: newWhoList,
       });
     }, "Volontaires mis à jour");
@@ -397,7 +397,7 @@ export class ProductModalState implements ProductModalStateType {
     await this.withLoading(async () => {
       // Utiliser updateProductBatch pour gérer correctement la conversion storeInfo -> store (JSON)
       await productsStore.updateProductBatch(
-        this.product!.$id,
+        this.product!.id,
         { storeInfo },
         (id) => productsStore.getEnrichedProductById(id) ?? undefined,
       );
@@ -409,7 +409,7 @@ export class ProductModalState implements ProductModalStateType {
 
     await this.withLoading(async () => {
       // Utiliser ProductsStore - updateProduct générique
-      await productsStore.updateProduct(this.product!.$id, {
+      await productsStore.updateProduct(this.product!.id, {
         totalNeededOverride: JSON.stringify(overrideData),
       });
     }, "Override appliqué");
@@ -425,7 +425,7 @@ export class ProductModalState implements ProductModalStateType {
 
     await this.withLoading(async () => {
       // Utiliser ProductsStore - updateProduct générique
-      await productsStore.updateProduct(this.product!.$id, {
+      await productsStore.updateProduct(this.product!.id, {
         totalNeededOverride: null,
       });
     }, "Override supprimé");
@@ -466,7 +466,7 @@ export class ProductModalState implements ProductModalStateType {
       if (Object.keys(batchUpdates).length > 0) {
         // Utiliser ProductsStore (guard gère le mode)
         await productsStore.updateProductBatch(
-          this.product!.$id,
+          this.product!.id,
           batchUpdates,
           (id) => productsStore.getEnrichedProductById(id) ?? undefined,
         );

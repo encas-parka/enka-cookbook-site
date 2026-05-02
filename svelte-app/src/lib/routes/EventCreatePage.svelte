@@ -48,7 +48,7 @@
   $effect(() => {
     const teamId = teamIdFromUrl;
     const myTeams = teamsStore.myTeams;
-    if (teamId && myTeams.some((t) => t.$id === teamId)) {
+    if (teamId && myTeams.some((t) => t.id === teamId)) {
       untrack(() => {
         if (!selectedTeams.includes(teamId)) {
           selectedTeams = [teamId];
@@ -196,7 +196,7 @@
         sendEmailToExistingMembers,
       );
 
-      navigate(`/event/${savedEvent.$id}`);
+      navigate(`/event/${savedEvent.id}`);
       return true;
     } catch (error) {
       console.error("Erreur sauvegarde:", error);
@@ -405,17 +405,17 @@
                 >Sélectionnez les équipes à inviter à l'événement :</legend
               >
               <div class="flex flex-wrap gap-2">
-                {#each teamsStore.myTeams as team (team.$id)}
+                {#each teamsStore.myTeams as team (team.id)}
                   <label
                     class="bg-secondary/10 hover:bg-secondary/20 flex cursor-pointer items-center gap-3 rounded-lg px-4 py-2 {selectedTeams.includes(
-                      team.$id,
+                      team.id,
                     ) && 'ring-secondary ring-2'}"
                   >
                     <input
                       type="checkbox"
                       class="checkbox checkbox-sm checkbox-secondary"
-                      checked={selectedTeams.includes(team.$id)}
-                      onchange={() => toggleTeam(team.$id)}
+                      checked={selectedTeams.includes(team.id)}
+                      onchange={() => toggleTeam(team.id)}
                     />
                     <div class="flex flex-col">
                       <span class="text-sm font-medium">
@@ -425,7 +425,7 @@
                         </span>
                       </span>
                       <div class="text-xs opacity-70">
-                        {teamsStore.getTeamMemberNames(team.$id).join(", ")}
+                        {teamsStore.getTeamMemberNames(team.id).join(", ")}
                       </div>
                     </div>
                   </label>

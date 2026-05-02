@@ -68,7 +68,7 @@
 
       const team = await teamsStore.createTeam(teamName.trim(), prefs);
 
-      createdTeamId = team.$id;
+      createdTeamId = team.id;
 
       // Basculer vers le formulaire d'invitation
       step = "invite";

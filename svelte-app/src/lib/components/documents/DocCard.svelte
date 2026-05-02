@@ -22,9 +22,9 @@
 
   const href = $derived(
     eventId
-      ? p(`/event/${eventId}/document/${doc.$id}`)
+      ? p(`/event/${eventId}/document/${doc.id}`)
       : teamId
-        ? p(`/editdocument/${teamId}/${doc.$id}`)
+        ? p(`/editdocument/${teamId}/${doc.id}`)
         : "#",
   );
 </script>
@@ -67,18 +67,18 @@
       <!-- Metadata -->
       <div class="text-base-content/50 me-4 flex items-center gap-3 text-xs">
         <!-- Created date -->
-        {#if !doc.$updatedAt}
+        {#if !doc.updated}
           <div class="flex items-center gap-1">
             <Calendar class="h-3 w-3" />
-            <span>Crée {formatDateRelative(doc.$createdAt)}</span>
+            <span>Crée {formatDateRelative(doc.created)}</span>
           </div>
         {/if}
 
         <!-- Updated date (if different from created) -->
-        {#if doc.$updatedAt && doc.$updatedAt !== doc.$createdAt}
+        {#if doc.updated && doc.updated !== doc.created}
           <div class="flex items-center gap-1">
             <Clock class="h-3 w-3" />
-            <span>Modifié {formatDateRelative(doc.$updatedAt)}</span>
+            <span>Modifié {formatDateRelative(doc.updated)}</span>
           </div>
         {/if}
       </div>

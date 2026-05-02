@@ -4,11 +4,10 @@
   import { globalState } from "$lib/stores/GlobalState.svelte";
   import TeamDetailModal from "$lib/components/teams/TeamDetailModal.svelte";
   import { nativeTeamsStore as teamsStore } from "$lib/stores/NativeTeamsStore.svelte";
-  import type { Models } from "appwrite";
   import CreateTeamModal from "../teams/CreateTeamModal.svelte";
 
   interface Team {
-    $id: string;
+    id: string;
     name: string;
     description?: string | null;
     total?: number;
@@ -95,16 +94,16 @@
               Vos équipes ({teams.length})
             </h3>
             <div class="space-y-2">
-              {#each teams as team (team.$id)}
+              {#each teams as team (team.id)}
                 <div
                   class="bg-base-200 hover:bg-base-300 flex cursor-pointer items-center justify-between rounded-lg p-2 transition-colors"
-                  onclick={() => openTeamDetailModal(team.$id)}
+                  onclick={() => openTeamDetailModal(team.id)}
                   role="button"
                   tabindex="0"
                   title="Voir les détails de {team.name}"
                   onkeydown={(e) => {
                     if (e.key === "Enter" || e.key === " ") {
-                      openTeamDetailModal(team.$id);
+                      openTeamDetailModal(team.id);
                     }
                   }}
                 >

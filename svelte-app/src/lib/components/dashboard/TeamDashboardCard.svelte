@@ -42,7 +42,7 @@
     return team.members || [];
   });
 
-  const memberNames = $derived(nativeTeamsStore.getTeamMemberNames(team.$id));
+  const memberNames = $derived(nativeTeamsStore.getTeamMemberNames(team.id));
 
   const memberNamesDisplay = $derived.by(() => {
     if (memberNames.length <= 20) return memberNames.join(", ");
@@ -55,7 +55,7 @@
   const teamCurrentEvents = $derived.by(() => {
     return currentEvents.filter(
       (event) =>
-        event.teamsId?.includes(team.$id) || event.teams?.includes(team.name),
+        event.teamsId?.includes(team.id) || event.teams?.includes(team.name),
     );
   });
 
@@ -63,7 +63,7 @@
     return pastEvents
       .filter(
         (event) =>
-          event.teamsId?.includes(team.$id) || event.teams?.includes(team.name),
+          event.teamsId?.includes(team.id) || event.teams?.includes(team.name),
       )
       .slice(0, 3); // 3 événements passés récents
   });
@@ -163,14 +163,14 @@
           <div class="flex w-full flex-wrap justify-around gap-2">
             <a
               class="btn btn-primary btn-soft flex-1"
-              href={p(`/dashboard/materiel/${team.$id}`)}
+              href={p(`/dashboard/materiel/${team.id}`)}
             >
               <NotebookPen class="size-4" />
               Inventaire
             </a>
             <a
               class="btn btn-primary btn-soft flex-1"
-              href={p(`/dashboard/loans/${team.$id}`)}
+              href={p(`/dashboard/loans/${team.id}`)}
             >
               <ScrollText class="size-4" />
               Réservations
@@ -211,7 +211,7 @@
             <!-- Bouton Créer un événement -->
             <a
               class="btn btn-primary btn-soft sm:btn-sm ml-auto"
-              href={p(`/dashboard/eventCreate/${team.$id}`)}
+              href={p(`/dashboard/eventCreate/${team.id}`)}
             >
               <Plus class="h-4 w-4" />
               Créer un événement
@@ -221,7 +221,7 @@
       </div>
 
       <div class="lg:col-span-2">
-        <DocQuickAccess teamId={team.$id} />
+        <DocQuickAccess teamId={team.id} />
       </div>
     </div>
 
@@ -232,7 +232,7 @@
 <!-- Modal de détails de l'équipe -->
 {#if showTeamModal}
   <TeamDetailModal
-    teamId={team.$id}
+    teamId={team.id}
     onClose={() => (showTeamModal = false)}
     initialTab={teamModalTab}
   />

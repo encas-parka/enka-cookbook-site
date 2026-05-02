@@ -25,10 +25,10 @@ export interface RecipeFormState extends Omit<
   | "cuisson"
   | "serveHot"
   | "check"
-  | "$id"
+  | "id"
   | "createdBy"
 > {
-  $id?: string;
+  id?: string;
   ingredients: RecipeIngredient[];
   astuces: { astuce: string }[];
   prepAlt: string[];
@@ -36,8 +36,8 @@ export interface RecipeFormState extends Omit<
   cuisson: boolean | "";
   serveHot: boolean | "";
   check: boolean | null;
-  $createdAt?: string;
-  $updatedAt?: string;
+  created?: string;
+  updated?: string;
   createdBy?: string;
   plate: number;
   quantite_desc: string | null;
@@ -363,7 +363,7 @@ export function validateRecipe(
 
       // Interdit : même titre et (pas de version des deux côtés OU même version des deux côtés)
       const isDuplicate =
-        isSameTitle && currentVersion === otherVersion && r.$id !== recipe!.$id;
+        isSameTitle && currentVersion === otherVersion && r.id !== recipe!.id;
 
       return isDuplicate;
     });

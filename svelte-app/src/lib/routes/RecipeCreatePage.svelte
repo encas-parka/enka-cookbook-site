@@ -95,7 +95,7 @@
             const userName = globalState.userName || "utilisateur";
 
             // Trouver la racine de la recette source
-            const rootRecipeId = data.rootRecipeId || data.$id;
+            const rootRecipeId = data.rootRecipeId || data.id;
 
             // Récupérer les variantes existantes pour générer le numéro de version
             const variantGroup =
@@ -105,9 +105,9 @@
 
             recipe = transformStoreDataToForm(data, {
               title: data.title, // Title inchangé
-              $id: "new-recipe",
-              $createdAt: undefined,
-              $updatedAt: undefined,
+              id: "new-recipe",
+              created: undefined,
+              updated: undefined,
               lockedBy: null,
               createdBy: globalState.userId || "",
               auteur: userName, // IMPORTANT: Nouvel auteur pour la duplication
@@ -139,7 +139,7 @@
     if (!sourceRecipeId && !loaded) {
       recipe = {
         ...createDefaultRecipe(),
-        $id: "new-recipe",
+        id: "new-recipe",
       } as RecipeFormState;
       loaded = true;
       return;
@@ -185,7 +185,7 @@
 
     try {
       // Générer l'ID de la recette avec le versionLabel si présent
-      recipe.$id = generateSlugUuid35(
+      recipe.id = generateSlugUuid35(
         recipe.title,
         recipe.versionLabel || undefined,
       );
@@ -204,7 +204,7 @@
 
       // Rediriger vers la page de détail de la nouvelle recette
       setTimeout(() => {
-        navigate(`/recipe/${created.$id}`);
+        navigate(`/recipe/${created.id}`);
       }, 1500);
     } catch (error) {
       console.error("Erreur sauvegarde:", error);

@@ -233,11 +233,11 @@ export function parseRecipeData(rawData: any): RecipeForDisplay {
 
   return {
     ...rawData,
-    // Mapper 'id' depuis Hugo vers '$id' pour notre format interne
-    $id: rawData.$id || rawData.id || "",
-    // Mapper 'createdAt'/'updatedAt' depuis Hugo vers '$createdAt'/'$updatedAt' pour notre format interne
-    $createdAt: rawData.$createdAt || rawData.createdAt || "",
-    $updatedAt: rawData.$updatedAt || rawData.updatedAt || "",
+    // Mapper 'id' depuis Hugo vers 'id' pour notre format interne
+    id: rawData.id || rawData.id || "",
+    // Mapper 'createdAt'/'updatedAt' depuis Hugo vers 'created'/'updated' pour notre format interne
+    created: rawData.created || rawData.createdAt || "",
+    updated: rawData.updated || rawData.updatedAt || "",
     ingredients,
   };
 }
@@ -285,10 +285,10 @@ export function parseRecipeIndexEntry(rawData: any): RecipeIndexEntry {
     ingredients,
     auteur: rawData.auteur || "",
     createdBy: rawData.createdBy || "",
-    // Mapper 'id' depuis Hugo vers '$id' pour notre format interne
-    $id: rawData.$id || rawData.id || "",
-    $createdAt: rawData.$createdAt || rawData.createdAt || "",
-    $updatedAt: rawData.$updatedAt || rawData.updatedAt || "",
+    // Mapper 'id' depuis Hugo vers 'id' pour notre format interne
+    id: rawData.id || rawData.id || "",
+    created: rawData.created || rawData.createdAt || "",
+    updated: rawData.updated || rawData.updatedAt || "",
   };
 }
 
@@ -328,9 +328,9 @@ export function parseAppwriteRecipeToIndexEntry(recipe: any): RecipeIndexEntry {
 
     // Champs de gestion
     lockedBy: recipe.lockedBy || null,
-    $id: recipe.$id,
-    $createdAt: recipe.$createdAt,
-    $updatedAt: recipe.$updatedAt,
+    id: recipe.id,
+    created: recipe.created,
+    updated: recipe.updated,
     createdBy: recipe.createdBy,
     plate: recipe.plate,
 

@@ -301,7 +301,7 @@
         </tr>
       </thead>
       <tbody>
-        {#each modalState.purchasesList as purchase (purchase.$id)}
+        {#each modalState.purchasesList as purchase (purchase.id)}
           <!-- Mode affichage uniquement - plus d'édition inline -->
           <tr>
             <td class="font-medium">
@@ -335,7 +335,7 @@
                   </button>
                   <button
                     class="btn btn-ghost btn-sm text-error"
-                    onclick={() => handleDeletePurchase(purchase.$id)}
+                    onclick={() => handleDeletePurchase(purchase.id)}
                     disabled={modalState.loading}
                   >
                     {#if modalState.loading}
@@ -355,7 +355,7 @@
 {:else}
   <!-- Mobile Card View -->
   <div class="mt-4 space-y-3">
-    {#each modalState.purchasesList as purchase (purchase.$id)}
+    {#each modalState.purchasesList as purchase (purchase.id)}
       <div class="card bg-base-100 border-neutral/40 card-xs border shadow-sm">
         <div class="card-body p-4">
           <div class="flex items-center justify-between gap-3">
@@ -381,7 +381,7 @@
             {#if !isArchiveMode}
               <button
                 class="btn btn-ghost btn-square btn-sm text-error"
-                onclick={() => handleDeletePurchase(purchase.$id)}
+                onclick={() => handleDeletePurchase(purchase.id)}
                 disabled={modalState.loading}
               >
                 {#if modalState.loading}

@@ -35,8 +35,8 @@
   });
 
   // Tri
-  type SortBy = "title" | "$createdAt" | "$updatedAt";
-  let sortBy = $state<SortBy>("$updatedAt");
+  type SortBy = "title" | "created" | "updated";
+  let sortBy = $state<SortBy>("updated");
   let sortOrder = $state<"asc" | "desc">("desc");
 
   // Pagination
@@ -46,7 +46,7 @@
 
   // Équipe
   let team = $derived.by(() => {
-    return nativeTeamsStore.myTeams.find((t) => t.$id === teamId);
+    return nativeTeamsStore.myTeams.find((t) => t.id === teamId);
   });
 
   // Récupérer tous les documents de l'équipe depuis le store
@@ -106,15 +106,15 @@
         return sortOrder === "asc"
           ? a.title.localeCompare(b.title, "fr")
           : b.title.localeCompare(a.title, "fr");
-      } else if (sortBy === "$createdAt") {
+      } else if (sortBy === "created") {
         const diff =
-          new Date(b.$createdAt || 0).getTime() -
-          new Date(a.$createdAt || 0).getTime();
+          new Date(b.created || 0).getTime() -
+          new Date(a.created || 0).getTime();
         return sortOrder === "asc" ? -diff : diff;
       } else {
         const diff =
-          new Date(b.$updatedAt || 0).getTime() -
-          new Date(a.$updatedAt || 0).getTime();
+          new Date(b.updated || 0).getTime() -
+          new Date(a.updated || 0).getTime();
         return sortOrder === "asc" ? -diff : diff;
       }
     });
@@ -256,7 +256,7 @@
       </div>
     {:else}
       <div class="my-8 space-y-3">
-        {#each paginatedDocs as doc (doc.$id)}
+        {#each paginatedDocs as doc (doc.id)}
           <DocCard
             {doc}
             {teamId}

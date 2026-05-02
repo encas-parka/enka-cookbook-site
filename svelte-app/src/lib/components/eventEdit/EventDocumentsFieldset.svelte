@@ -18,10 +18,10 @@
 <Fieldset legend="Documents" bgClass="bg-base-100">
   <div class="space-y-2">
     {#if docs.length > 0}
-      {#each docs as doc (doc.$id)}
+      {#each docs as doc (doc.id)}
         <a
           class="bg-base-200/60 hover:bg-base-200 flex cursor-pointer items-center gap-2 rounded-lg p-4 shadow-sm transition-colors"
-          href={`/event/${eventId}/document/${doc.$id}/edit`}
+          href={`/event/${eventId}/document/${doc.id}/edit`}
         >
           <FileText class="text-primary h-4 w-4 shrink-0" />
           <span class="flex-1 truncate font-medium">{doc.title}</span>

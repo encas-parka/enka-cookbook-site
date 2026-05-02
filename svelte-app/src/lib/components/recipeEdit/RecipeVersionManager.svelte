@@ -46,12 +46,12 @@
 
   // Charger les variantes existantes
   async function loadVariants() {
-    if (!recipe.$id) return;
+    if (!recipe.id) return;
 
     loadingVariants = true;
     try {
-      const group = await recipesStore.getVariantGroup(recipe.$id, 2);
-      variants = group.variants.filter((v) => v.$id !== recipe.$id);
+      const group = await recipesStore.getVariantGroup(recipe.id, 2);
+      variants = group.variants.filter((v) => v.id !== recipe.id);
     } catch (error) {
       console.error("[RecipeVersionManager] Error loading variants:", error);
     } finally {
@@ -59,9 +59,9 @@
     }
   }
 
-  // Charger au montage et quand recipe.$id change
+  // Charger au montage et quand recipe.id change
   $effect(() => {
-    if (recipe.$id) {
+    if (recipe.id) {
       loadVariants();
     }
   });
@@ -69,27 +69,27 @@
   // Liste des recettes pour l'autocomplétion (exclure la recette courante, variantes existantes et déjà ajoutées)
   let availableRecipes = $derived.by(() => {
     const excludedIds = new Set([
-      recipe.$id,
-      ...variants.map((v) => v.$id),
-      ...manuallyAddedVariants.map((v) => v.$id),
-      ...variantsToRemove.map((v) => v.$id),
+      recipe.id,
+      ...variants.map((v) => v.id),
+      ...manuallyAddedVariants.map((v) => v.id),
+      ...variantsToRemove.map((v) => v.id),
     ]);
-    return recipesStore.recipesIndex.filter((r) => !excludedIds.has(r.$id));
+    return recipesStore.recipesIndex.filter((r) => !excludedIds.has(r.id));
   });
 
   // Variantes à afficher (exclure celles marquées pour suppression)
   let displayVariants = $derived.by(() => {
     return variants.filter(
-      (v) => !variantsToRemove.some((r) => r.$id === v.$id),
+      (v) => !variantsToRemove.some((r) => r.id === v.id),
     );
   });
 
   // Ajouter une variante manuellement
   function handleAddVariant(variantRecipe: RecipeIndexEntry) {
-    if (!recipe.$id) return;
+    if (!recipe.id) return;
     if (!recipe.manuallyAddedVariants) recipe.manuallyAddedVariants = [];
 
-    if (recipe.manuallyAddedVariants.some((v) => v.$id === variantRecipe.$id))
+    if (recipe.manuallyAddedVariants.some((v) => v.id === variantRecipe.id))
       return;
 
     recipe.manuallyAddedVariants = [
@@ -107,7 +107,7 @@
     if (!recipe.manuallyAddedVariants) return;
 
     recipe.manuallyAddedVariants = recipe.manuallyAddedVariants.filter(
-      (v) => v.$id !== variantRecipe.$id,
+      (v) => v.id !== variantRecipe.id,
     );
 
     toastService.info(
@@ -145,7 +145,7 @@
     if (!recipe.variantsToRemove) return;
 
     recipe.variantsToRemove = recipe.variantsToRemove.filter(
-      (v) => v.$id !== variant.$id,
+      (v) => v.id !== variant.id,
     );
 
     toastService.info(`Suppression de "${variant.title}" annulée.`);
@@ -287,7 +287,7 @@
                 <div class="flex items-start justify-between gap-2">
                   <div class="flex min-w-0 flex-1 items-center gap-2">
                     <a
-                      href={p(`/recipe/${variant.$id}`)}
+                      href={p(`/recipe/${variant.id}`)}
                       target="_blank"
                       class="link link-primary link-hover truncate font-medium"
                     >
@@ -315,11 +315,11 @@
                 <div class="flex items-center gap-2 text-xs opacity-60">
                   <span>Par {variant.auteur || "inconnu"}</span>
                   <span>•</span>
-                  <span title={variant.$createdAt}>
-                    {formatDateRelative(variant.$createdAt || "")}
+                  <span title={variant.created}>
+                    {formatDateRelative(variant.created || "")}
                   </span>
                   <span>
-                    ({formatDateWdDayMonthShort(variant.$createdAt || "")})
+                    ({formatDateWdDayMonthShort(variant.created || "")})
                   </span>
                 </div>
               </div>

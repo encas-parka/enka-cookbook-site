@@ -51,14 +51,14 @@
   $effect(() => {
     const newSelection: Record<string, boolean> = {};
     products.forEach((product) => {
-      if (productIds.includes(product.$id)) {
+      if (productIds.includes(product.id)) {
         if (selectionMode === "empty") {
           // Sélectionner les produits sans magasin attribué
-          newSelection[product.$id] =
+          newSelection[product.id] =
             !product.storeInfo || !product.storeInfo.storeName;
         } else {
           // Sélectionner tous les produits
-          newSelection[product.$id] = true;
+          newSelection[product.id] = true;
         }
       }
     });
@@ -68,10 +68,10 @@
   // Préparer les données pour BtnGroupCheck avec état de sélection
   const badgeItems = $derived(
     products.map((product) => ({
-      id: product.$id,
+      id: product.id,
       label: product.productName,
       title: product.productName,
-      selected: currentSelection[product.$id],
+      selected: currentSelection[product.id],
     })),
   );
 
@@ -99,7 +99,7 @@
     // Extraire les données depuis selectedBadgeItems
     const selectedProductIds = selectedBadgeItems.map((item) => item.id);
     const selectedProducts = products.filter((p) =>
-      selectedProductIds.includes(p.$id),
+      selectedProductIds.includes(p.id),
     );
 
     // 🚀 UX IMMÉDIAT : Marquer les produits comme "isSyncing"

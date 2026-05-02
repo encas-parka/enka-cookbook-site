@@ -45,11 +45,11 @@
   let activeProductIds = $state<Set<string>>(new Set());
 
   $effect(() => {
-    activeProductIds = new Set(products.map((p) => p.$id));
+    activeProductIds = new Set(products.map((p) => p.id));
   });
 
   const activeProducts = $derived(
-    products.filter((p) => activeProductIds.has(p.$id)),
+    products.filter((p) => activeProductIds.has(p.id)),
   );
 
   const isFormValid = $derived.by(() => {
@@ -79,7 +79,7 @@
     error = null;
 
     const invoiceId = `FACTURE_${Date.now()}`;
-    const productIds = activeProducts.map((p) => p.$id);
+    const productIds = activeProducts.map((p) => p.id);
     productsStore.setSyncStatus(productIds, true);
 
     globalState.backgroundOperation = {
@@ -95,13 +95,13 @@
     }> = [];
 
     for (const product of activeProducts) {
-      const productModel = productsStore.getProductModelById(product.$id);
+      const productModel = productsStore.getProductModelById(product.id);
       const missingQuantities = (productModel?.stats.missingQuantities || [])
         .filter((qty) => qty.q < 0)
         .map((qty) => ({ q: Math.abs(qty.q), u: qty.u }));
 
       productsData.push({
-        productId: product.$id,
+        productId: product.id,
         isSynced: product.isSynced,
         missingQuantities,
       });
@@ -183,9 +183,9 @@
 
   const badgeItems = $derived(
     products.map((product) => {
-      const productModel = productsStore.getProductModelById(product.$id);
+      const productModel = productsStore.getProductModelById(product.id);
       return {
-        id: product.$id,
+        id: product.id,
         label: product.productName,
         title: `${product.productName} - Manque: ${productModel?.stats.formattedMissingQuantities || "-"}`,
         badge: productModel?.stats.formattedMissingQuantities || "-",

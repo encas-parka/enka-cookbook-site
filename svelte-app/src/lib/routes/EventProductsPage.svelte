@@ -239,7 +239,7 @@
   function openGroupPurchaseModal(products: any[]) {
     // 🚨 FILTRER SEULEMENT LES PRODUITS AVEC QUANTITÉS MANQUANTES
     const productsWithMissingQuantities = products.filter((product) => {
-      const productModel = productsStore.getProductModelById(product.$id);
+      const productModel = productsStore.getProductModelById(product.id);
       return productModel?.stats.hasMissing;
     });
 
@@ -288,7 +288,7 @@
         });
 
       // Utiliser ProductsStore qui a déjà le guard intégré
-      await productsStore.createPurchase(product.$id, normalizedQuantities, {
+      await productsStore.createPurchase(product.id, normalizedQuantities, {
         store: product.storeInfo?.storeName ?? null,
         notes: "",
         invoiceId: `VALID_${Date.now()}`,

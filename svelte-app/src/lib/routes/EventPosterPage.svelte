@@ -337,7 +337,7 @@
       );
       console.log(
         `[EventPoster] Recipe IDs:`,
-        recipesDetails.map((r) => r.$id),
+        recipesDetails.map((r) => r.id),
       );
     } catch (err) {
       console.error("Erreur lors du chargement des recettes:", err);

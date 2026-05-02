@@ -29,7 +29,7 @@
   const existingByCatalogName = $derived.by(() => {
     const result: Record<string, { id: string; quantity: number }> = {};
     for (const m of materielStore.getMaterielsByOwner(teamId)) {
-      result[m.name] = { id: m.$id, quantity: m.quantity };
+      result[m.name] = { id: m.id, quantity: m.quantity };
     }
     return result;
   });

@@ -2,7 +2,7 @@
  * aw-sync — EnkaDB Dexie Schema
  *
  * Central IndexedDB schema for the entire cookbook app.
- * Uses Appwrite conventions: primary key = `$id`, timestamps = `$updatedAt`, `$createdAt`.
+ * Uses PocketBase conventions: primary key = `id`, timestamps = `updated`, `created`.
  *
  * The old AppDB (PocketBase) is preserved in `./db.ts` until the planning module
  * is migrated separately.
@@ -24,6 +24,7 @@ import type {
   EventTodo,
   ShareLinks,
 } from "$lib/types/appwrite.d";
+import type { PbDoc } from "./aw-types";
 import type { EnrichedNativeTeam } from "$lib/types/aw_native_team.d";
 
 // =============================================================================
@@ -48,8 +49,8 @@ export interface CatalogRow {
  * NOT from Hugo SSG — the name is historical.
  */
 export interface ProductNeedRow {
-  /** Composite ID: {productNameSlug}_{eventIdShort} — same as EnrichedProduct.$id */
-  $id: string;
+  /** Composite ID: {productNameSlug}_{eventIdShort} — same as EnrichedProduct.id */
+  id: string;
   /** Event ID (for Dexie indexing/scoping) */
   mainId: string;
   /** Product UUID (from recipe ingredient) */
@@ -73,9 +74,9 @@ export interface ProductNeedRow {
   /** Display info per date (JSON-serialized Record<string, DateDisplayInfo>) */
   dateDisplayInfo: string;
   /** Timestamp for bridge change detection */
-  $updatedAt: string;
+  updated: string;
   /** Creation timestamp */
-  $createdAt: string;
+  created: string;
 }
 
 // =============================================================================
@@ -139,7 +140,7 @@ export class EnkaDB extends Dexie {
     super("EnkaDB");
 
     // Dexie index syntax: "primaryKey, index1, index2, *multiEntryIndex"
-    // $id is the Appwrite primary key — used as Dexie outbound key.
+    // id is the PocketBase primary key — used as Dexie outbound key.
     this.version(1).stores({
       events: "$id, status, createdBy, dateStart",
       products: "$id, mainId, productHugoUuid, store, status",
@@ -176,6 +177,27 @@ export class EnkaDB extends Dexie {
     // v5: add nativeTeams cache for Appwrite Teams API
     this.version(5).stores({
       nativeTeams: "$id",
+    });
+
+    // v6: rename PK from $id → id (PocketBase native field names)
+    this.version(6).stores({
+      events: "id, status, createdBy, dateStart",
+      products: "id, mainId, productHugoUuid, store, status",
+      purchases: "id, mainId, *products, status, store",
+      recipes: "id, status, typeR, createdBy, lockedBy",
+      materiels: "id, type, status, owner, deleted",
+      materielLoans: "id, status, ownerId, eventId, startDate, endDate",
+      eventMateriels: "id, eventId, type, status, groupId",
+      teamdocs: "id, teamId, eventId, status",
+      locks: "id, userId, expiresAt",
+      eventTodos: "id, eventId, status, taskOn, priority",
+      shareLinks: "id, target_id, link_type, isActive",
+      recipeData: "key",
+      productNeeds: "id, mainId",
+      syncMeta: "collectionId",
+      nativeTeams: "id",
+      joinLinks: "linkId",
+      catalog: "key",
     });
   }
 }

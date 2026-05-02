@@ -154,14 +154,14 @@ class ProductsStore {
    */
   #onDataChange(products: Products[], purchases: Purchases[], needs: ProductNeedRow[]) {
     // ── 1. Indexer les sources ──────────────────────────────
-    const productsById = new Map(products.map((p) => [p.$id, p]));
-    const needsById = new Map(needs.map((n) => [n.$id, n]));
+    const productsById = new Map(products.map((p) => [p.id, p]));
+    const needsById = new Map(needs.map((n) => [n.id, n]));
 
     const purchasesByProduct = new Map<string, Purchases[]>();
     const orphanPurchases = new SvelteMap<string, Purchases>();
     for (const purchase of purchases) {
       if (purchase.status === "expense") {
-        orphanPurchases.set(purchase.$id, purchase);
+        orphanPurchases.set(purchase.id, purchase);
         continue;
       }
       if (purchase.status === "deleted") continue;
@@ -191,9 +191,9 @@ class ProductsStore {
 
       // Fingerprint (tri des purchases pour stabilité)
       const version = [
-        raw?.$updatedAt ?? "",
-        needRow?.$updatedAt ?? "",
-        ...prods.map((p) => p.$updatedAt).filter(Boolean).sort(),
+        raw?.updated ?? "",
+        needRow?.updated ?? "",
+        ...prods.map((p) => p.updated).filter(Boolean).sort(),
       ].join("|");
 
       const existing = this.#productModels.get(id);
@@ -247,9 +247,9 @@ class ProductsStore {
 
     if (need) {
       return {
-        $id: need.$id,
-        $createdAt: need.$createdAt,
-        $updatedAt: need.$updatedAt,
+        id: need.id,
+        created: need.created,
+        updated: need.updated,
         productHugoUuid: need.productHugoUuid,
         productName: need.productName,
         productType: need.productType,
@@ -338,7 +338,7 @@ class ProductsStore {
           return 0;
         });
       } else {
-        models.sort((a, b) => a.data.$id.localeCompare(b.data.$id));
+        models.sort((a, b) => a.data.id.localeCompare(b.data.id));
       }
     }
 
@@ -617,7 +617,7 @@ class ProductsStore {
 
     for (const model of this.#productModels.values()) {
       const product = model.data;
-      const purchases = this.#purchasesByProductCache.get(product.$id) || [];
+      const purchases = this.#purchasesByProductCache.get(product.id) || [];
       for (const purchase of purchases) {
         if (purchase.price) {
           totalGlobal += purchase.price;
@@ -634,8 +634,8 @@ class ProductsStore {
     }
 
     allPurchases.sort((a, b) => {
-      const dateA = new Date(a.orderDate || a.$createdAt).getTime();
-      const dateB = new Date(b.orderDate || b.$createdAt).getTime();
+      const dateA = new Date(a.orderDate || a.created).getTime();
+      const dateB = new Date(b.orderDate || b.created).getTime();
       return dateB - dateA;
     });
 
@@ -672,8 +672,8 @@ class ProductsStore {
 
     try {
       this.#loading = true;
-      this.#currentEventId = event.$id;
-      this.#currentMainId = event.$id;
+      this.#currentEventId = event.id;
+      this.#currentMainId = event.id;
 
       // 1. Delta sync PocketBase → Dexie
       this.#syncing = true;
@@ -751,11 +751,11 @@ class ProductsStore {
     const products = await createEnrichedProductsFromEvent(
       event,
       getRecipeDetails,
-      event.$id,
+      event.id,
     );
 
     // Persist to Dexie as ProductNeedRows
-    const rows = products.map((p) => toNeedRow(p, event.$id));
+    const rows = products.map((p) => toNeedRow(p, event.id));
     await db.productNeeds.bulkPut(rows);
 
     console.log(
@@ -803,7 +803,7 @@ class ProductsStore {
     if (this.#lastMealsHash === mealsHash) return;
 
     console.log(
-      `[ProductsStore] Changement repas detecte pour ${event.$id}, recalcul...`,
+      `[ProductsStore] Changement repas detecte pour ${event.id}, recalcul...`,
     );
     this.#lastMealsHash = mealsHash;
 
@@ -816,25 +816,25 @@ class ProductsStore {
     const freshProducts = await createEnrichedProductsFromEvent(
       event,
       getRecipeDetails,
-      event.$id,
+      event.id,
     );
 
     // Persist to Dexie as ProductNeedRows
-    const rows = freshProducts.map((p) => toNeedRow(p, event.$id));
+    const rows = freshProducts.map((p) => toNeedRow(p, event.id));
     await db.productNeeds.bulkPut(rows);
     console.log(
       `[ProductsStore] ${freshProducts.length} besoins calculés et persistés depuis ${event.meals.length} repas`,
     );
 
     // Delete stale needs from Dexie
-    const freshIds = new Set(freshProducts.map((p) => p.$id));
+    const freshIds = new Set(freshProducts.map((p) => p.id));
     const existingNeeds = await db.productNeeds
       .where("mainId")
-      .equals(event.$id)
+      .equals(event.id)
       .toArray();
     const staleIds = existingNeeds
-      .filter((n) => !freshIds.has(n.$id))
-      .map((n) => n.$id);
+      .filter((n) => !freshIds.has(n.id))
+      .map((n) => n.id);
     if (staleIds.length > 0) {
       await db.productNeeds.bulkDelete(staleIds);
     }
@@ -1180,7 +1180,7 @@ class ProductsStore {
         createdBy: globalState.userId,
         invoiceId: options.invoiceId,
         invoiceTotal: null,
-      } as unknown as Omit<Purchases, "$id" | "$createdAt" | "$updatedAt">);
+      } as unknown as Omit<Purchases, "id" | "created" | "updated">);
     }
   }
 
@@ -1226,9 +1226,9 @@ class ProductsStore {
       mergedInto: null,
       totalNeededOverride: null,
       specs: JSON.stringify(spec),
-    } as unknown as Omit<Products, "$id" | "$createdAt" | "$updatedAt">);
+    } as unknown as Omit<Products, "id" | "created" | "updated">);
 
-    return newProduct.$id;
+    return newProduct.id;
   }
 
   async updateProduct(
@@ -1348,7 +1348,7 @@ class ProductsStore {
               stockReel: enriched.stockReel,
               isMerged: enriched.isMerged || false,
               specs: enriched.specs || null,
-            } as unknown as Omit<Products, "$id" | "$createdAt" | "$updatedAt">);
+            } as unknown as Omit<Products, "id" | "created" | "updated">);
           }
         }
         for (const qty of p.missingQuantities) {
@@ -1399,7 +1399,7 @@ class ProductsStore {
           orderDate: null,
           deliveryDate: deliveryDate!,
           createdBy: globalState.userId,
-        } as unknown as Omit<Purchases, "$id" | "$createdAt" | "$updatedAt">);
+        } as unknown as Omit<Purchases, "id" | "created" | "updated">);
         totalExpensesCreated = 1;
       }
 

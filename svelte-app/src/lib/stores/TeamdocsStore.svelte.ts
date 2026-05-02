@@ -201,10 +201,10 @@ export class TeamdocsStore {
         ...data,
         teamId,
         createdBy: globalState.userId,
-      } as Omit<Teamdocs, "$id" | "$createdAt" | "$updatedAt">,
+      } as Omit<Teamdocs, "id" | "created" | "updated">,
     );
 
-    console.log(`[TeamdocsStore] Document créé : ${doc.$id}`);
+    console.log(`[TeamdocsStore] Document créé : ${doc.id}`);
     return doc;
   }
 
@@ -221,10 +221,10 @@ export class TeamdocsStore {
         ...data,
         eventId,
         status: "doc",
-      } as Omit<Teamdocs, "$id" | "$createdAt" | "$updatedAt">,
+      } as Omit<Teamdocs, "id" | "created" | "updated">,
     );
 
-    console.log(`[TeamdocsStore] Document événement créé : ${doc.$id}`);
+    console.log(`[TeamdocsStore] Document événement créé : ${doc.id}`);
     return doc;
   }
 

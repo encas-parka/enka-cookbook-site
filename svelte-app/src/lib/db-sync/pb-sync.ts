@@ -13,7 +13,7 @@
 // PocketBase client
 export { pb } from './pb';
 
-// Dexie database (unchanged — same EnkaDB, same $id PK)
+// Dexie database (unchanged — same EnkaDB, same id PK)
 export {
 	db,
 	cleanupLegacyCaches,
@@ -41,8 +41,7 @@ export type {
 	PbSyncOptions,
 	PbSubscriptionRef,
 	PbCollectionName,
-	PbRawDoc
+	PbDoc
 } from './pb-types';
 
-// Re-export AwDoc for convenience (still the canonical document shape)
-export type { AwDoc, AwCollectionName } from './aw-types';
+export type { AwCollectionName } from './aw-types';

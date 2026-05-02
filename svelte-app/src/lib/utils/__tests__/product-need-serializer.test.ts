@@ -8,7 +8,7 @@ describe("product-need-serializer", () => {
       const row = makeNeedRow();
       const parsed = parseNeedRow(row);
 
-      expect(parsed.$id).toBe(row.$id);
+      expect(parsed.id).toBe(row.id);
       expect(parsed.mainId).toBe("event-001");
       expect(parsed.productName).toBe("Beurre");
       expect(parsed.productType).toBe("cremerie");
@@ -73,7 +73,7 @@ describe("product-need-serializer", () => {
       const enriched = makeEnrichedProduct();
       const row = toNeedRow(enriched, "event-001");
 
-      expect(row.$id).toBe(enriched.$id);
+      expect(row.id).toBe(enriched.id);
       expect(row.mainId).toBe("event-001");
       expect(row.productHugoUuid).toBe("hugo-uuid-1");
       expect(row.productName).toBe("Beurre");
@@ -109,27 +109,27 @@ describe("product-need-serializer", () => {
       expect(row.productHugoUuid).toBe("");
     });
 
-    it("sets $updatedAt to a valid ISO string", () => {
+    it("sets updated to a valid ISO string", () => {
       const enriched = makeEnrichedProduct();
       const row = toNeedRow(enriched, "event-001");
 
-      expect(new Date(row.$updatedAt).toISOString()).toBe(row.$updatedAt);
+      expect(new Date(row.updated).toISOString()).toBe(row.updated);
     });
 
-    it("uses enriched $createdAt if present", () => {
+    it("uses enriched created if present", () => {
       const enriched = makeEnrichedProduct({
-        $createdAt: "2026-01-01T00:00:00Z",
+        created: "2026-01-01T00:00:00Z",
       });
       const row = toNeedRow(enriched, "event-001");
 
-      expect(row.$createdAt).toBe("2026-01-01T00:00:00Z");
+      expect(row.created).toBe("2026-01-01T00:00:00Z");
     });
 
-    it("defaults $createdAt to now if empty", () => {
-      const enriched = makeEnrichedProduct({ $createdAt: "" });
+    it("defaults created to now if empty", () => {
+      const enriched = makeEnrichedProduct({ created: "" });
       const row = toNeedRow(enriched, "event-001");
 
-      expect(row.$createdAt).toBeTruthy();
+      expect(row.created).toBeTruthy();
     });
   });
 
@@ -139,7 +139,7 @@ describe("product-need-serializer", () => {
       const row = toNeedRow(enriched, "event-001");
       const parsed = parseNeedRow(row);
 
-      expect(parsed.$id).toBe(enriched.$id);
+      expect(parsed.id).toBe(enriched.id);
       expect(parsed.productName).toBe(enriched.productName);
       expect(parsed.productType).toBe(enriched.productType);
       expect(parsed.pF).toBe(enriched.pF);

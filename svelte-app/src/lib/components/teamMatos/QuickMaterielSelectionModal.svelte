@@ -109,13 +109,13 @@
     if (availableItems.length === 0) return;
 
     const allSelected = availableItems.every((m) =>
-      localSelectedIds.has(m.$id),
+      localSelectedIds.has(m.id),
     );
 
     if (allSelected) {
-      availableItems.forEach((m) => localSelectedIds.delete(m.$id));
+      availableItems.forEach((m) => localSelectedIds.delete(m.id));
     } else {
-      availableItems.forEach((m) => localSelectedIds.add(m.$id));
+      availableItems.forEach((m) => localSelectedIds.add(m.id));
     }
     localSelectedIds = new Set(localSelectedIds);
   }
@@ -189,25 +189,25 @@
             >
               {materiels
                 .filter((m) => !m.isUnavailable)
-                .every((m) => localSelectedIds.has(m.$id))
+                .every((m) => localSelectedIds.has(m.id))
                 ? "Tout désélectionner"
                 : "Tout sélectionner"}
             </button>
             <span class="badge badge-ghost badge-sm">
-              {materiels.filter((m) => localSelectedIds.has(m.$id))
+              {materiels.filter((m) => localSelectedIds.has(m.id))
                 .length}/{materiels.length}
             </span>
           </h4>
 
           <BtnGroupCheck
             items={materiels.map((m) => ({
-              id: m.$id,
+              id: m.id,
               label: m.name,
               badge:
                 m.availableForPeriod !== undefined
                   ? String(m.availableForPeriod)
                   : "0",
-              selected: localSelectedIds.has(m.$id),
+              selected: localSelectedIds.has(m.id),
               title:
                 m.availableForPeriod !== undefined
                   ? `${m.availableForPeriod}/${m.quantity} disponibles`

@@ -1,14 +1,14 @@
-import type { Models } from "appwrite";
+
 
 /**
  * Interface pour une équipe native enrichie avec ses membres et préférences
  */
 export interface EnrichedNativeTeam {
-  $id: string;
+  id: string;
   name: string;
   total: number;
-  $createdAt: string;
-  $updatedAt: string;
+  created: string;
+  updated: string;
   members: NativeTeamMember[];
   prefs: Record<string, any>;
   description?: string; // Optionnel, peut être stocké dans prefs
@@ -18,8 +18,8 @@ export interface EnrichedNativeTeam {
  * Interface pour un membre d'une équipe native
  */
 export interface NativeTeamMember {
-  $id: string; // Membership ID
-  id: string; // User ID
+  id: string; // Membership ID
+  userId: string; // User ID
   name: string;
   userEmail: string;
   roles: string[]; // ["owner"] ou ["member"]

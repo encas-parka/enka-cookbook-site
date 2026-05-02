@@ -117,15 +117,15 @@
 
   // Options d'équipes pour owner
   const teamOptions = $derived(
-    nativeTeamsStore.myTeams.map((t) => ({ id: t.$id, name: t.name })),
+    nativeTeamsStore.myTeams.map((t) => ({ id: t.id, name: t.name })),
   );
 
   // Options d'équipes pour shareableWith (BadgeItem format)
   const shareableWithTeamOptions = $derived(
     nativeTeamsStore.myTeams.map((t) => ({
-      id: t.$id,
+      id: t.id,
       label: t.name,
-      selected: shareableWithTeamNames.includes(t.$id),
+      selected: shareableWithTeamNames.includes(t.id),
     })),
   );
 

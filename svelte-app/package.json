@@ -12,13 +12,15 @@
     "check": "svelte-check-native --output machine --tsconfig ./tsconfig.app.json && tsc -p tsconfig.node.json",
     "check-for-human": "svelte-check-native --tsconfig ./tsconfig.app.json && tsc -p tsconfig.node.json",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "generate-types": "pocketbase-typegen --db ../pocketbase/pb_data/data.db --out src/lib/types/pb-generated.ts"
   },
   "devDependencies": {
     "@sveltejs/vite-plugin-svelte": "^7.0.0",
     "@tsconfig/svelte": "^5.0.8",
     "@types/node": "^24.12.2",
     "@typescript/native-preview": "^7.0.0-dev.20260501.1",
+    "pocketbase-typegen": "^1.5.0",
     "prettier": "^3.8.1",
     "prettier-plugin-svelte": "^3.5.1",
     "prettier-plugin-tailwindcss": "^0.7.2",
@@ -41,7 +43,6 @@
     "@tiptap/extension-highlight": "^3.22.3",
     "@tiptap/pm": "^3.22.3",
     "@tiptap/starter-kit": "^3.22.3",
-    "appwrite": "^21.5.0",
     "daisyui": "^5.5.19",
     "dexie": "^4.4.2",
     "fuzzysort": "^3.1.0",

@@ -104,7 +104,7 @@ export class MaterielStore {
   // Matériels partageables des autres équipes
   #shareableMaterielsList = $derived.by(() => {
     if (!globalState.userId) return [];
-    const myTeamIds = nativeTeamsStore.myTeams.map((t) => t.$id);
+    const myTeamIds = nativeTeamsStore.myTeams.map((t) => t.id);
     return this.#enrichedMateriels.filter((m) => {
       const isShareableWithMyTeams = m.shareableWith?.some((teamId) =>
         myTeamIds.includes(teamId),
@@ -154,7 +154,7 @@ export class MaterielStore {
       .filter((m) => m.status !== "lost" && m.status !== "torepair")
       .map((materiel) => {
         const loanedQuantity = calculateLoanedQuantityForPeriod(
-          materiel.$id,
+          materiel.id,
           allLoans,
           periodStart,
           periodEnd,
@@ -278,11 +278,11 @@ export class MaterielStore {
   // =============================================================================
 
   getMaterielById(materielId: string): EnrichedMateriel | undefined {
-    return this.#enrichedMateriels.find((m) => m.$id === materielId);
+    return this.#enrichedMateriels.find((m) => m.id === materielId);
   }
 
   getLoanById(loanId: string): EnrichedMaterielLoan | undefined {
-    return this.#enrichedLoans.find((l) => l.$id === loanId);
+    return this.#enrichedLoans.find((l) => l.id === loanId);
   }
 
   async createMateriel(data: {
@@ -327,7 +327,7 @@ export class MaterielStore {
           deleted: false,
           isStorage: false,
           storeIn: null,
-        } as Omit<Materiel, "$id" | "$createdAt" | "$updatedAt">,
+        } as Omit<Materiel, "id" | "created" | "updated">,
       );
 
       // Return enriched (will also update via liveQuery)
@@ -426,7 +426,7 @@ export class MaterielStore {
           returnNotes: null,
           eventId: data.eventId || null,
           eventName: data.eventName || null,
-        } as Omit<MaterielLoan, "$id" | "$createdAt" | "$updatedAt">,
+        } as Omit<MaterielLoan, "id" | "created" | "updated">,
       );
 
       const enriched = enrichLoanFromAppwrite(loan);
@@ -434,7 +434,7 @@ export class MaterielStore {
       // Sync vers EventMateriel si un eventId est lié
       if (data.eventId && data.materiels.length > 0) {
         await eventMaterielStore.syncFromLoan(
-          loan.$id,
+          loan.id,
           data.eventId,
           data.materiels,
           data.responsibleName,
@@ -646,7 +646,7 @@ export class MaterielStore {
 
     for (const item of items) {
       const m = this.#enrichedMateriels.find(
-        (em) => em.$id === item.materielId,
+        (em) => em.id === item.materielId,
       );
       const typeLabel = materielTypeLabels[m?.type ?? "other"] ?? "Autre";
       if (!byType.has(typeLabel)) byType.set(typeLabel, []);

@@ -377,7 +377,7 @@ export function enrichMaterielFromAppwrite(
 
     // Filtrer les items pour ce matériel
     const itemsForThisMateriel = loanItems.filter(
-      (item) => item.materielId === doc.$id,
+      (item) => item.materielId === doc.id,
     );
 
     if (itemsForThisMateriel.length === 0) {
@@ -396,7 +396,7 @@ export function enrichMaterielFromAppwrite(
     if ((isActive || isPlanned) && isAcceptedOrAsked) {
       itemsForThisMateriel.forEach((item) => {
         loanDetails.push({
-          loanId: loan.$id,
+          loanId: loan.id,
           responsibleName: loan.responsibleName || "",
           startDate: loan.startDate,
           endDate: loan.endDate,
@@ -438,7 +438,7 @@ export function enrichMaterielFromAppwrite(
   const availableQuantity = doc.quantity - totalLoanedQuantity;
 
   return {
-    // Tous les champs de Materiel (y compris Models.Row)
+    // Tous les champs de Materiel (y compris PbDoc)
     ...doc,
 
     // Override du statut calculé
@@ -596,7 +596,7 @@ export function calculateLoanedQuantityForPeriod(
 
   loans.forEach((loan) => {
     // Exclure le loan spécifié (pour l'édition)
-    if (excludeLoanId && loan.$id === excludeLoanId) {
+    if (excludeLoanId && loan.id === excludeLoanId) {
       return;
     }
 
@@ -642,7 +642,7 @@ export function isMaterielAvailableForPeriod(
   requestedQuantity: number = 1,
 ): boolean {
   const loanedQuantity = calculateLoanedQuantityForPeriod(
-    materiel.$id,
+    materiel.id,
     loans,
     periodStart,
     periodEnd,
@@ -708,7 +708,7 @@ export function getMaterielConflictsForPeriod(
       );
 
       conflicts.push({
-        loanId: loan.$id,
+        loanId: loan.id,
         responsibleName: loan.responsibleName || "Inconnu",
         startDate: loan.startDate,
         endDate: loan.endDate,

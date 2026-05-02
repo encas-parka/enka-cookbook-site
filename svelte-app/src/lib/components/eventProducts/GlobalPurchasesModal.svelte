@@ -71,8 +71,8 @@ Modal de récapitulatif des dépenses
 
       switch (sortColumn) {
         case "date":
-          valA = new Date(a.orderDate || a.$createdAt).getTime();
-          valB = new Date(b.orderDate || b.$createdAt).getTime();
+          valA = new Date(a.orderDate || a.created).getTime();
+          valB = new Date(b.orderDate || b.created).getTime();
           break;
         case "amount":
           valA = a.invoiceTotal || a.price || 0;
@@ -168,7 +168,7 @@ Modal de récapitulatif des dépenses
       notes: purchase.notes || "",
       who: purchase.who || "",
     };
-    editingPurchaseId = purchase.$id;
+    editingPurchaseId = purchase.id;
     showAddForm = true;
   }
 
@@ -363,10 +363,10 @@ Modal de récapitulatif des dépenses
               </tr>
             </thead>
             <tbody>
-              {#each displayedPurchases as purchase (purchase.$id)}
+              {#each displayedPurchases as purchase (purchase.id)}
                 <tr class="hover">
                   <td class="whitespace-nowrap"
-                    >{formatDate(purchase.orderDate || purchase.$createdAt)}</td
+                    >{formatDate(purchase.orderDate || purchase.created)}</td
                   >
 
                   <td class="max-w-xs truncate">
@@ -413,7 +413,7 @@ Modal de récapitulatif des dépenses
       {:else}
         <!-- Mobile Card View -->
         <div class="space-y-3">
-          {#each displayedPurchases as purchase (purchase.$id)}
+          {#each displayedPurchases as purchase (purchase.id)}
             <div class="card bg-base-100 shadow-sm">
               <div class="card-body p-4">
                 <div class="flex items-start justify-between gap-3">
@@ -423,7 +423,7 @@ Modal de récapitulatif des dépenses
                       <Calendar class="h-3.5 w-3.5" />
                       <span
                         >{formatDateDayMonthShort(
-                          purchase.orderDate || purchase.$createdAt,
+                          purchase.orderDate || purchase.created,
                         )}</span
                       >
                     </div>

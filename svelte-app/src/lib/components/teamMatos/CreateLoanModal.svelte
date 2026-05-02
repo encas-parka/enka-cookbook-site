@@ -119,7 +119,7 @@
 
   $effect(() => {
     if (mode === "create" && selectedEventId && !userHasModifiedDates) {
-      const event = availableEvents.find((e) => e.$id === selectedEventId);
+      const event = availableEvents.find((e) => e.id === selectedEventId);
       if (event && event.dateStart && event.dateEnd) {
         startDate = addDays(event.dateStart, -1);
         endDate = addDays(event.dateEnd, 1);
@@ -137,13 +137,13 @@
     return eventsStore.events.filter(
       (e) =>
         e.status !== "canceled" &&
-        (new Date(e.dateEnd) >= now || e.$id === selectedEventId),
+        (new Date(e.dateEnd) >= now || e.id === selectedEventId),
     );
   });
 
   const selectedEvent = $derived(
     selectedEventId
-      ? availableEvents.find((e) => e.$id === selectedEventId)
+      ? availableEvents.find((e) => e.id === selectedEventId)
       : null,
   );
 
@@ -168,10 +168,10 @@
     }
 
     const allMateriels = materielStore.getMaterielsByOwner(ownerId);
-    const availableIds = new Set(availableMateriels.map((m) => m.$id));
+    const availableIds = new Set(availableMateriels.map((m) => m.id));
 
     return allMateriels.map((m) => {
-      const available = availableMateriels.find((a) => a.$id === m.$id);
+      const available = availableMateriels.find((a) => a.id === m.id);
       return {
         ...m,
         availableForPeriod: available?.availableForPeriod || 0,
@@ -192,7 +192,7 @@
   const availabilityMap = $derived.by(() => {
     const map = new Map<string, number>();
     for (const m of allMaterielsWithAvailability) {
-      map.set(m.$id, m.availableForPeriod ?? 0);
+      map.set(m.id, m.availableForPeriod ?? 0);
     }
     return map;
   });
@@ -301,7 +301,7 @@
       (materiel as any).availableForPeriod ?? materiel.availableQuantity;
 
     const existing = selectedMateriels.find(
-      (m) => m.materielId === materiel.$id,
+      (m) => m.materielId === materiel.id,
     );
     if (existing) {
       if (existing.quantity < maxQty) {
@@ -313,7 +313,7 @@
     selectedMateriels = [
       ...selectedMateriels,
       {
-        materielId: materiel.$id,
+        materielId: materiel.id,
         materielName: materiel.name,
         quantity: 1,
         type: materiel.type || "",
@@ -378,7 +378,7 @@
     materielIds.forEach((id) => {
       const already = selectedMateriels.find((m) => m.materielId === id);
       if (!already) {
-        const materiel = availableMateriels.find((m) => m.$id === id);
+        const materiel = availableMateriels.find((m) => m.id === id);
         if (materiel) {
           handleAddMateriel(materiel);
         }
@@ -422,7 +422,7 @@
     if (!isValid) return;
 
     if (mode === "edit" && selectedEventId) {
-      const event = availableEvents.find((e) => e.$id === selectedEventId);
+      const event = availableEvents.find((e) => e.id === selectedEventId);
       if (event?.dateEnd) {
         const eventEndDate = event.dateEnd.split("T")[0];
         if (startDate > eventEndDate) {
@@ -465,7 +465,7 @@
         const responsibleName = globalState.userName || "Inconnu";
 
         const evt = selectedEventId
-          ? availableEvents.find((e) => e.$id === selectedEventId)
+          ? availableEvents.find((e) => e.id === selectedEventId)
           : null;
 
         await materielStore.createLoan({
@@ -489,7 +489,7 @@
         }
 
         const evt = selectedEventId
-          ? availableEvents.find((e) => e.$id === selectedEventId)
+          ? availableEvents.find((e) => e.id === selectedEventId)
           : null;
 
         await materielStore.updateLoan(loanId, {
@@ -638,8 +638,8 @@
               }}
             >
               <option value="">Aucun événement</option>
-              {#each availableEvents as event (event.$id)}
-                <option value={event.$id}>{event.name}</option>
+              {#each availableEvents as event (event.id)}
+                <option value={event.id}>{event.name}</option>
               {/each}
             </select>
           </label>

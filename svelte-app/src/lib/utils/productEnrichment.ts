@@ -3,8 +3,8 @@
  * Logique de transformation Products → EnrichedProduct
  */
 
-import type { Models } from "appwrite";
 import type { Products, Purchases, Main } from "$lib/types/appwrite";
+import type { PbDoc } from "$lib/db-sync/aw-types";
 import type {
   EnrichedProduct,
   NumericQuantity,
@@ -41,10 +41,10 @@ import type { ParsedNeed } from "./product-need-serializer";
 /**
  * Type interne pour les produits avec purchases optionnel.
  * Permet d'accepter à la fois Products brut (sans purchases), ProductWithPurchases,
- * et EnrichedProduct (qui a des champs optionnels comme $sequence).
+ * et EnrichedProduct (qui a des champs optionnels).
  */
-type ProductWithOptionalPurchases = Partial<Models.Row> & {
-  $id: string;
+type ProductWithOptionalPurchases = Partial<PbDoc> & {
+  id: string;
   purchases?: Purchases[];
   productName: string;
   productHugoUuid: string | null;
@@ -116,9 +116,9 @@ export function buildRawProductBase(
     : null;
 
   return {
-    $id: product.$id,
-    $createdAt: product.$createdAt,
-    $updatedAt: product.$updatedAt,
+    id: product.id,
+    created: product.created,
+    updated: product.updated,
 
     productHugoUuid: product.productHugoUuid || "",
     productName: product.productName,
@@ -227,7 +227,7 @@ export async function createEnrichedProductsFromEvent(
   mainId: string,
 ): Promise<EnrichedProduct[]> {
   console.log(
-    `[productEnrichment] Calcul pour événement ${event.$id} avec ${event.meals.length} repas`,
+    `[productEnrichment] Calcul pour événement ${event.id} avec ${event.meals.length} repas`,
   );
 
   // ⚡ ÉTAPE 1 : Collecter tous les UUIDs de recettes uniques
@@ -392,7 +392,7 @@ function addIngredientToAggregation(
 /**
  * Crée un EnrichedProduct final conforme à l'interface
  *
- * 🎯 Génération de l'$id unique par événement :
+ * 🎯 Génération de l'id unique par événement :
  * - Utilise une partie du productName slugifié
  * - Ajoute une portion de l'eventId (mainId) pour garantir l'unicité
  * - Limite à 36 caractères max (contrainte Appwrite)
@@ -411,7 +411,7 @@ function createEnrichedProductFromAggregation(
   // Utiliser les 10 derniers caractères en base36, ou moins si l'ID est court
   const eventIdShort = mainId.slice(-10);
 
-  // Construire l'$id unique (max 36 caractères pour Appwrite)
+  // Construire l'id unique (max 36 caractères)
   const semanticId = `${nameSlug}_${eventIdShort}`;
 
   // Construction de la structure byDate finale (ByDateEntry)
@@ -460,7 +460,7 @@ function createEnrichedProductFromAggregation(
   const dateDisplayInfo = calculateAllDateDisplayInfo(Object.keys(byDate));
 
   const product: EnrichedProduct = {
-    $id: semanticId,
+    id: semanticId,
     mainId,
     productHugoUuid: aggregation.productHugoUuid,
     productName: aggregation.productName,
@@ -479,7 +479,6 @@ function createEnrichedProductFromAggregation(
     // Métadonnées
     isSynced: false,
     status: "active",
-    // allergens removed (not in EnrichedProduct)
 
     // Champs optionnels vides
     who: [],
@@ -506,11 +505,8 @@ function createEnrichedProductFromAggregation(
     dateDisplayInfo,
 
     // Timestamps
-    $createdAt: new Date().toISOString(),
-    $updatedAt: new Date().toISOString(),
-    $permissions: [],
-    $databaseId: "",
-    $tableId: "",
+    created: new Date().toISOString(),
+    updated: new Date().toISOString(),
   };
 
   return product;

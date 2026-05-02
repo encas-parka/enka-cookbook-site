@@ -33,7 +33,7 @@
 
   // Réactivité du lock depuis le store (seule info venant de l'index en temps réel)
   const lockedBy = $derived(
-    recipeDetails ? recipesStore.getRecipeLockStatus(recipeDetails.$id) : null,
+    recipeDetails ? recipesStore.getRecipeLockStatus(recipeDetails.id) : null,
   );
 
   // Réagir aux changements d'UUID
@@ -100,7 +100,7 @@
   const recipesIndexMap = $derived.by(() => {
     const map = new Map();
     recipesStore.recipesIndex.forEach((recipe) => {
-      map.set(recipe.$id, { n: recipe.title });
+      map.set(recipe.id, { n: recipe.title });
     });
     return map;
   });
@@ -137,7 +137,7 @@
       <!-- Bouton Créer une version alternative (disponible pour tous) -->
       <button
         class="btn btn-secondary btn-sm"
-        onclick={() => navigate(`/recipe/${recipeDetails?.$id}/duplicate`)}
+        onclick={() => navigate(`/recipe/${recipeDetails?.id}/duplicate`)}
       >
         <Copy size={18} />
 
@@ -148,7 +148,7 @@
       {#if (recipeDetails.permissionWrite && globalState.userId && recipeDetails.permissionWrite.includes(globalState.userId)) || (recipeDetails.createdBy && recipeDetails.createdBy === globalState.userId)}
         <button
           class="btn btn-primary btn-sm"
-          onclick={() => navigate(`/recipe/${recipeDetails?.$id}/edit`)}
+          onclick={() => navigate(`/recipe/${recipeDetails?.id}/edit`)}
         >
           <PencilIcon size={18} />
           <span class="hidden sm:block">Éditer</span>
@@ -372,9 +372,9 @@
       <RecipeMetadata
         auteur={recipeDetails.auteur}
         createdBy={recipeDetails.createdBy}
-        id={recipeDetails.$id}
-        createdAt={recipeDetails.$createdAt}
-        updatedAt={recipeDetails.$updatedAt}
+        id={recipeDetails.id}
+        createdAt={recipeDetails.created}
+        updatedAt={recipeDetails.updated}
       />
     {/if}
   {/if}
@@ -384,7 +384,7 @@
   <AddRecipeToEventModal
     isOpen={showAddToEventModal}
     onClose={() => (showAddToEventModal = false)}
-    recipeId={recipeDetails.$id}
+    recipeId={recipeDetails.id}
     recipeTitle={recipeDetails.title}
     recipeTypeR={recipeDetails.typeR}
     events={upcomingEvents}

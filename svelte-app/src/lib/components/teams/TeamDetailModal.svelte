@@ -38,7 +38,7 @@
   // Rôle de l'utilisateur
   const userRole = $derived.by(() => {
     if (!team || !globalState.userId) return null;
-    const member = team.members.find((m) => m.id === globalState.userId);
+    const member = team.members.find((m) => m.userId === globalState.userId);
     return member?.roles?.[0] || null;
   });
 
@@ -80,7 +80,7 @@
 
     loading = true;
     try {
-      await teamsStore.updateTeam(team.$id, editName.trim() || undefined, {
+      await teamsStore.updateTeam(team.id, editName.trim() || undefined, {
         description: editDescription.trim() || undefined,
         location: editLocation.trim() || undefined,
         city: editCity.trim() || undefined,
@@ -100,7 +100,7 @@
 
     loading = true;
     try {
-      await teamsStore.deleteTeam(team.$id);
+      await teamsStore.deleteTeam(team.id);
       confirmDeleteTeam = false;
       onClose();
     } catch (err: any) {
@@ -127,7 +127,7 @@
     try {
       await toastService.track(
         teamsStore.inviteTeamMember(
-          team.$id,
+          team.id,
           invitedEmails,
           inviteCustomMessage || undefined,
         ),

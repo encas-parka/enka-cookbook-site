@@ -7,7 +7,7 @@ import type {
 import type { ProductNeedRow } from "../db-sync/pb-sync";
 
 export interface ParsedNeed {
-  $id: string;
+  id: string;
   mainId: string;
   productHugoUuid: string;
   productName: string;
@@ -19,13 +19,13 @@ export interface ParsedNeed {
   nbRecipes: number;
   totalAssiettes: number;
   dateDisplayInfo: Record<string, DateDisplayInfo>;
-  $createdAt: string;
-  $updatedAt: string;
+  created: string;
+  updated: string;
 }
 
 export function parseNeedRow(row: ProductNeedRow): ParsedNeed {
   return {
-    $id: row.$id,
+    id: row.id,
     mainId: row.mainId,
     productHugoUuid: row.productHugoUuid,
     productName: row.productName,
@@ -37,8 +37,8 @@ export function parseNeedRow(row: ProductNeedRow): ParsedNeed {
     nbRecipes: row.nbRecipes,
     totalAssiettes: row.totalAssiettes,
     dateDisplayInfo: JSON.parse(row.dateDisplayInfo),
-    $createdAt: row.$createdAt,
-    $updatedAt: row.$updatedAt,
+    created: row.created,
+    updated: row.updated,
   };
 }
 
@@ -48,7 +48,7 @@ export function toNeedRow(
 ): ProductNeedRow {
   const now = new Date().toISOString();
   return {
-    $id: enriched.$id,
+    id: enriched.id,
     mainId,
     productHugoUuid: enriched.productHugoUuid || "",
     productName: enriched.productName,
@@ -60,7 +60,7 @@ export function toNeedRow(
     nbRecipes: enriched.nbRecipes,
     totalAssiettes: enriched.totalAssiettes,
     dateDisplayInfo: JSON.stringify(enriched.dateDisplayInfo),
-    $createdAt: enriched.$createdAt || now,
-    $updatedAt: now,
+    created: enriched.created || now,
+    updated: now,
   };
 }

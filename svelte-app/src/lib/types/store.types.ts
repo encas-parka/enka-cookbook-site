@@ -61,7 +61,7 @@ export type FormQuantity = {
  * Types pour la gestion des événements principaux
  */
 export interface MainEventData {
-  $id: string;
+  id: string;
   mainId: string;
   name: string;
   allDates: string;
@@ -131,14 +131,10 @@ export interface TotalNeededOverrideData {
 
 // ✅ EnrichedProduct = Données BRUTES Appwrite + Hugo statiques + Calculées
 export interface EnrichedProduct {
-  // MÉTADONNÉES APPWRITE (brutes)
-  $id: string;
-  $createdAt?: string;
-  $updatedAt?: string;
-  $permissions?: string[];
-  $databaseId?: string;
-  $sequence?: number;
-  $tableId?: string;
+  // MÉTADONNÉES (PocketBase)
+  id: string;
+  created?: string;
+  updated?: string;
 
   // DONNÉES MÉTIER DE BASE (brutes Appwrite / Hugo)
   productHugoUuid: string | null;

@@ -49,7 +49,7 @@
   let sentinel = $state<HTMLElement | undefined>();
 
   // Tri
-  let sortBy = $state<"title" | "$createdAt" | "$updatedAt">("title");
+  let sortBy = $state<"title" | "created" | "updated">("title");
   let sortOrder = $state<"asc" | "desc">("asc");
 
   // Récupérer toutes les recettes depuis le store
@@ -91,10 +91,10 @@
         threshold: 0.3,
       });
 
-      const matchingIds = new Set(results.map(r => r.obj.$id));
+      const matchingIds = new Set(results.map(r => r.obj.id));
 
       return allRecipes.filter((recipe) => {
-        if (!matchingIds.has(recipe.$id)) return false;
+        if (!matchingIds.has(recipe.id)) return false;
         return !filters.typeR || recipe.typeR === filters.typeR;
       });
     }
@@ -172,15 +172,15 @@
         return sortOrder === "asc"
           ? a.title.localeCompare(b.title, "fr")
           : b.title.localeCompare(a.title, "fr");
-      } else if (sortBy === "$createdAt") {
+      } else if (sortBy === "created") {
         const diff =
-          new Date(b.$createdAt || 0).getTime() -
-          new Date(a.$createdAt || 0).getTime();
+          new Date(b.created || 0).getTime() -
+          new Date(a.created || 0).getTime();
         return sortOrder === "asc" ? -diff : diff;
       } else {
         const diff =
-          new Date(b.$updatedAt || 0).getTime() -
-          new Date(a.$updatedAt || 0).getTime();
+          new Date(b.updated || 0).getTime() -
+          new Date(a.updated || 0).getTime();
         return sortOrder === "asc" ? -diff : diff;
       }
     });
@@ -414,7 +414,7 @@
     {:else}
       <!-- Contenu normal -->
       <div class="my-8 space-y-10">
-        {#each paginatedRecipes as recipe (recipe.$id)}
+        {#each paginatedRecipes as recipe (recipe.id)}
           <div transition:fade={{ duration: 300 }}>
             <RecipeCard {recipe} highlightedIngredients={filters.ingredients} />
           </div>

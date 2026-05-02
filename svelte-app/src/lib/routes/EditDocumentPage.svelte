@@ -76,7 +76,7 @@
   );
 
   // Équipe
-  let team = $derived(nativeTeamsStore.myTeams.find((t) => t.$id === teamId));
+  let team = $derived(nativeTeamsStore.myTeams.find((t) => t.id === teamId));
 
   // Tags disponibles depuis le store + tags ajoutés par l'utilisateur
   let availableTags = $derived.by(() => {

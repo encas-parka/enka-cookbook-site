@@ -19,7 +19,7 @@
   // Événements externes : utilisateur est contributor mais pas dans ses équipes
   // currentEvents est déjà trié par dateStart croissant dans le store
   const externalEvents = $derived.by(() => {
-    const userId = globalState.user?.$id;
+    const userId = globalState.user?.id;
     if (!userId) return [];
 
     return currentEvents.filter((event) => {

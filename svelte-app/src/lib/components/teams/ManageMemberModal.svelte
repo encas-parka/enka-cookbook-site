@@ -78,8 +78,8 @@
     }
 
     // Capturer les données AVANT fermeture
-    const teamId = team.$id;
-    const memberId = member.$id;
+    const teamId = team.id;
+    const memberId = member.id;
     const memberName = member.name;
     const callback = onMemberUpdated;
 

@@ -54,7 +54,7 @@
 
   const currentItem = $derived(
     activeItemId
-      ? (eventMaterielStore.items.find((item) => item.$id === activeItemId) ??
+      ? (eventMaterielStore.items.find((item) => item.id === activeItemId) ??
           null)
       : null,
   );
@@ -79,7 +79,7 @@
   const currentHeaderName = $derived.by(() => {
     if (!currentItem?.groupId) return null;
     const header = eventMaterielStore.items.find(
-      (i) => i.$id === currentItem.groupId,
+      (i) => i.id === currentItem.groupId,
     );
     return header?.name || null;
   });
@@ -89,7 +89,7 @@
   const reattachHeaders = $derived.by(() => {
     if (!currentItem) return [];
     const candidates = eventMaterielStore.headers.filter(
-      (h) => h.$id !== currentItem.groupId,
+      (h) => h.id !== currentItem.groupId,
     );
     if (candidates.length === 0) return [];
 
@@ -102,8 +102,8 @@
       limit: 50,
     });
     // Les résultats fuzzysort + ceux qui n'ont pas matché (score très bas)
-    const sortedIds = new Set(sorted.map((r) => r.obj.$id));
-    const remaining = candidates.filter((h) => !sortedIds.has(h.$id));
+    const sortedIds = new Set(sorted.map((r) => r.obj.id));
+    const remaining = candidates.filter((h) => !sortedIds.has(h.id));
     return [...sorted.map((r) => r.obj), ...remaining];
   });
 
@@ -338,8 +338,8 @@
                     <option value="" disabled selected
                       >Choisir un besoin…</option
                     >
-                    {#each reattachHeaders as header (header.$id)}
-                      <option value={header.$id}>
+                    {#each reattachHeaders as header (header.id)}
+                      <option value={header.id}>
                         {header.name || "Sans nom"} (x{header.quantity || 0})
                       </option>
                     {/each}
@@ -369,10 +369,10 @@
               >
             </div>
             <div class="flex max-h-32 flex-col gap-1 overflow-y-auto">
-              {#each availableHeaders as header (header.$id)}
+              {#each availableHeaders as header (header.id)}
                 <button
                   class="btn btn-ghost btn-xs justify-start text-left"
-                  onclick={() => handleLinkToHeader(header.$id)}
+                  onclick={() => handleLinkToHeader(header.id)}
                 >
                   <Link class="size-3" />
                   {header.name}

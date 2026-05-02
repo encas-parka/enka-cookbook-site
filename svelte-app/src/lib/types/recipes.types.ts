@@ -88,9 +88,9 @@ export type RecipeIndexEntry = Pick<
   | "lockedBy"
   | "plate"
   | "createdBy"
-  | "$id"
-  | "$createdAt"
-  | "$updatedAt"
+  | "id"
+  | "created"
+  | "updated"
 > & {
   ingredients: string[]; // Noms des ingrédients uniquement (pour filtrage rapide)
   auteur?: string; // Auteur de la recette (optionnel)
@@ -178,19 +178,10 @@ export interface RecipesCacheMetadata {
 
 /**
  * Données pour créer une recette (format Appwrite)
- * Exclut uniquement les champs auto-générés de Models.Row (ceux commençant par $)
+ * Exclut uniquement les champs auto-générés (id, created, updated)
  * Note: createdBy est un champ métier que NOTRE application renseigne, pas Appwrite
  */
-export type CreateRecipeData = Omit<
-  Recettes,
-  | "$createdAt" // Auto-généré par Appwrite
-  | "$updatedAt" // Auto-généré par Appwrite
-  | "$permissions" // Auto-généré par Appwrite
-  | "$databaseId" // Auto-généré par Appwrite
-  | "$collectionId" // Auto-généré par Appwrite
-  | "$sequence" // Auto-généré par Appwrite
-  | "$tableId" // Auto-généré par Appwrite
->;
+export type CreateRecipeData = Omit<Recettes, "id" | "created" | "updated">;
 
 /**
  * Données pour mettre à jour une recette

@@ -3,7 +3,7 @@
  *
  * Mirrors the contract of `aw-types.ts` but adapted for PocketBase's API.
  * The key difference: PocketBase uses `id`/`created`/`updated` instead of
- * `$id`/`$createdAt`/`$updatedAt`. Normalization happens in `pb-collection.ts`.
+ * `id`/`created`/`updated`. No normalization needed.
  *
  * The internal types (AwDoc, bridgeToMap, etc.) remain unchanged — pb-collection
  * converts between formats transparently.
@@ -12,18 +12,10 @@
  */
 
 // =============================================================================
-// DOCUMENT CONSTRAINT (internal — AwDoc is still the canonical shape)
+// DOCUMENT CONSTRAINT — PbDoc is now the canonical shape
 // =============================================================================
 
-/**
- * Shape of a raw PocketBase record (before normalization).
- * Used internally by pb-collection for type-safe PocketBase API calls.
- */
-export interface PbRawDoc {
-  id: string;
-  created: string;
-  updated: string;
-}
+export type { PbDoc } from './aw-types';
 
 // =============================================================================
 // QUERY OPTIONS
@@ -88,7 +80,7 @@ export type MergeStrategy<T> = (local: T, remote: T) => T;
  * Configuration for a PocketBase sync collection.
  * Mirrors `AwSyncOptions` with PocketBase-specific additions.
  */
-export interface PbSyncOptions<T extends Record<string, unknown>> {
+export interface PbSyncOptions<T extends PbDoc> {
   /** Per-field merge strategies for concurrent array resolution */
   mergeStrategies?: {
     [K in keyof T]?: MergeStrategy<NonNullable<T[K]>>;

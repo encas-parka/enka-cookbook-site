@@ -84,7 +84,7 @@
     <!-- Identity sub-group → opens modal on "recettes" -->
     <button
       class="hover:bg-base-100 flex shrink-0 cursor-pointer items-center gap-1.5 rounded-sm px-0.5 transition-colors"
-      onclick={() => onOpenModal(product.$id, "recettes")}
+      onclick={() => onOpenModal(product.id, "recettes")}
       title="Voir les recettes"
     >
       <typeInfo.icon size={16} class="text-primary/70 shrink-0" />
@@ -110,7 +110,7 @@
           .storeInfo?.storeName
           ? 'text-success/80'
           : 'text-base-content/40'}"
-        onclick={() => onOpenModal(product.$id, "magasins")}
+        onclick={() => onOpenModal(product.id, "magasins")}
         title="Modifier le magasin"
       >
         <Store size={13} class="shrink-0" />
@@ -123,7 +123,7 @@
         product.who.length > 0
           ? 'text-success/80'
           : 'text-base-content/40'}"
-        onclick={() => onOpenModal(product.$id, "volontaires")}
+        onclick={() => onOpenModal(product.id, "volontaires")}
         title="Modifier les volontaires"
       >
         <Users size={13} class="shrink-0" />
@@ -161,7 +161,7 @@
       shouldShowActionButtons
         ? 'text-error'
         : 'text-success'}"
-      onclick={() => onOpenModal(product.$id, "recettes")}
+      onclick={() => onOpenModal(product.id, "recettes")}
       title="Voir le détail des besoins"
     >
       <div class="flex items-center gap-0.5">
@@ -190,7 +190,7 @@
     <!-- ── Row 2: Purchases ── -->
     <button
       class="hover:bg-base-100 bg-success/5 flex min-h-6 cursor-pointer flex-wrap items-center justify-end gap-2 rounded px-1 transition-colors"
-      onclick={() => onOpenModal(product.$id, "achats")}
+      onclick={() => onOpenModal(product.id, "achats")}
       title="Voir les achats"
     >
       <div class="flex items-center gap-1">

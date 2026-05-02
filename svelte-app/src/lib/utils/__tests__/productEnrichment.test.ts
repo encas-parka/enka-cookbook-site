@@ -13,9 +13,9 @@ vi.mock("$lib/services/toast.service.svelte", () => ({
 
 function makeRawProduct(overrides?: Partial<any>): any {
   return {
-    $id: "raw-product-001",
-    $createdAt: "2026-01-01T00:00:00Z",
-    $updatedAt: "2026-01-01T00:00:00Z",
+    id: "raw-product-001",
+    created: "2026-01-01T00:00:00Z",
+    updated: "2026-01-01T00:00:00Z",
     productName: "Beurre doux",
     productHugoUuid: "hugo-beurre-001",
     productType: "cremerie",
@@ -45,7 +45,7 @@ describe("buildRawProductBase", () => {
       const raw = makeRawProduct();
       const result = buildRawProductBase(raw);
 
-      expect(result.$id).toBe("raw-product-001");
+      expect(result.id).toBe("raw-product-001");
       expect(result.productName).toBe("Beurre doux");
       expect(result.productHugoUuid).toBe("hugo-beurre-001");
       expect(result.status).toBe("active");
@@ -161,9 +161,9 @@ describe("buildRawProductBase", () => {
     it("filtre les purchases avec status 'deleted'", () => {
       const raw = makeRawProduct({
         purchases: [
-          { $id: "p1", quantity: 2, unit: "kg", status: "ordered", products: ["raw-product-001"] },
-          { $id: "p2", quantity: 1, unit: "kg", status: "deleted", products: ["raw-product-001"] },
-          { $id: "p3", quantity: 500, unit: "gr.", status: "delivered", products: ["raw-product-001"] },
+          { id: "p1", quantity: 2, unit: "kg", status: "ordered", products: ["raw-product-001"] },
+          { id: "p2", quantity: 1, unit: "kg", status: "deleted", products: ["raw-product-001"] },
+          { id: "p3", quantity: 500, unit: "gr.", status: "delivered", products: ["raw-product-001"] },
         ],
       });
       const result = buildRawProductBase(raw);
@@ -212,7 +212,7 @@ describe("buildRawProductBase", () => {
       const raw = makeRawProduct({
         totalNeededOverride: JSON.stringify(override),
         purchases: [
-          { $id: "p1", quantity: 300, unit: "gr.", status: "ordered", products: ["raw-product-001"] },
+          { id: "p1", quantity: 300, unit: "gr.", status: "ordered", products: ["raw-product-001"] },
         ],
       });
       const result = buildRawProductBase(raw);
@@ -243,7 +243,7 @@ describe("buildRawProductBase", () => {
       const raw = makeRawProduct({
         specs: JSON.stringify({ quantity: { q: 1000, u: "gr." } }),
         purchases: [
-          { $id: "p1", quantity: 300, unit: "gr.", status: "ordered", products: ["raw-product-001"] },
+          { id: "p1", quantity: 300, unit: "gr.", status: "ordered", products: ["raw-product-001"] },
         ],
       });
       const result = buildRawProductBase(raw);
@@ -279,7 +279,7 @@ describe("buildRawProductBase", () => {
 describe("applyNeedToBase", () => {
   function makeNeed(overrides?: Partial<ParsedNeed>): ParsedNeed {
     return {
-      $id: "raw-product-001",
+      id: "raw-product-001",
       mainId: "event-001",
       productHugoUuid: "hugo-beurre-001",
       productName: "Beurre doux",
@@ -298,8 +298,8 @@ describe("applyNeedToBase", () => {
       nbRecipes: 1,
       totalAssiettes: 10,
       dateDisplayInfo: { "2026-04-20": { formattedDate: "Dim 20", timeIcon: null } },
-      $createdAt: "2026-01-01T00:00:00Z",
-      $updatedAt: "2026-01-01T00:00:00Z",
+      created: "2026-01-01T00:00:00Z",
+      updated: "2026-01-01T00:00:00Z",
       ...overrides,
     };
   }
@@ -338,7 +338,7 @@ describe("applyNeedToBase", () => {
   it("RECALCULE missingQuantityArray avec le bon totalNeededArray", () => {
     const raw = makeRawProduct({
       purchases: [
-        { $id: "p1", quantity: 200, unit: "gr.", status: "ordered", products: ["raw-product-001"] },
+        { id: "p1", quantity: 200, unit: "gr.", status: "ordered", products: ["raw-product-001"] },
       ],
     });
     const base = buildRawProductBase(raw);
@@ -372,7 +372,7 @@ describe("applyNeedToBase", () => {
     const raw = makeRawProduct({
       totalNeededOverride: JSON.stringify(override),
       purchases: [
-        { $id: "p1", quantity: 1000, unit: "gr.", status: "ordered", products: ["raw-product-001"] },
+        { id: "p1", quantity: 1000, unit: "gr.", status: "ordered", products: ["raw-product-001"] },
       ],
     });
     const base = buildRawProductBase(raw);

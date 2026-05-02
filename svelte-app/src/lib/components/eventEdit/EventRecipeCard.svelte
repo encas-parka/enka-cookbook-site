@@ -109,7 +109,7 @@
 </script>
 
 <div
-  id="recipe-{recipe.$id}"
+  id="recipe-{recipe.id}"
   class="card bg-base-100 border-base-300 border shadow-lg print:border-none print:shadow-none"
 >
   <div class="card-body p-2 md:p-6">

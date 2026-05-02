@@ -84,7 +84,7 @@
         eventId,
       );
       toastService.success("Document créé avec succès");
-      navigate(`/event/${eventId}/document/${doc.$id}/edit`);
+      navigate(`/event/${eventId}/document/${doc.id}/edit`);
     } catch (error) {
       console.error("[EventDocumentCreatePage] Erreur:", error);
       toastService.error("Erreur lors de la création du document");

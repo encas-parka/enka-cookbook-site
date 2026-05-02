@@ -48,7 +48,7 @@
             name: m.name,
             type: m.type as CatalogType,
             source: "existing",
-            materielId: m.$id,
+            materielId: m.id,
           });
           seenNames.add(n);
         }

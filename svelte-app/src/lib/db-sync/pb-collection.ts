@@ -8,7 +8,7 @@
  *
  * Key design decisions vs aw-collection:
  * - **Normalization**: PocketBase records (`id`/`created`/`updated`) are converted to
- *   Appwrite format (`$id`/`$createdAt`/`$updatedAt`) before touching Dexie or SvelteMap.
+ *   Appwrite format (`id`/`created`/`updated`) — no normalization needed.
  *   This means the entire rest of the codebase (types, bridge, stores, components) is untouched.
  * - **Delta sync**: Uses `updated > {:since}` filter on the `updated` field (auto-managed by PB).
  *   No separate `syncMeta` table needed — we read the latest `updated` from Dexie directly.
@@ -21,9 +21,9 @@
  * ```
  * PocketBase (REST + SSE Realtime)
  *   ↕ delta sync + optimistic writes
- * Dexie (IndexedDB) — records use $id as PK
+ * Dexie (IndexedDB) — records use id as PK
  *   ↕ liveQuery
- * SvelteMap / Components — reads $id, $updatedAt (unchanged)
+ * SvelteMap / Components — reads id, updated (unchanged)
  * ```
  *
  * @module db-sync/pb-collection
@@ -38,40 +38,19 @@ import type {
 	PbSyncOptions,
 	PbSubscriptionRef,
 	PbCollectionName
-} from './types';
-import type { AwDoc } from './aw-types';
+} from './pb-types';
+import type { PbDoc } from './aw-types';
 
 // =============================================================================
-// NORMALIZATION: PocketBase ↔ Appwrite format
+// SYSTEM FIELD HELPERS
 // =============================================================================
 
-/**
- * Normalizes a PocketBase record into Appwrite-compatible format.
- * PocketBase uses `id`/`created`/`updated`; the codebase uses `$id`/`$createdAt`/`$updatedAt`.
- *
- * This function is called on every record entering Dexie from PocketBase
- * (initial fetch, realtime events, CRUD responses).
- */
-function normalizeRecord<T extends AwDoc>(pbRecord: Record<string, unknown>): T {
-	const { id, created, updated, ...data } = pbRecord;
-	return {
-		...data,
-		$id: id as string,
-		$createdAt: created as string,
-		$updatedAt: updated as string
-	} as T;
-}
+const SYSTEM_FIELDS = new Set(['id', 'created', 'updated']);
 
-/**
- * Converts an internal record (Appwrite format) to PocketBase format.
- * Strips `$id`/`$createdAt`/`$updatedAt` — PocketBase manages `id`/`created`/`updated` itself.
- */
-function toPBRecord<T extends AwDoc>(doc: Partial<T>): Record<string, unknown> {
-	const { $id, $createdAt, $updatedAt, ...data } = doc as Record<string, unknown>;
+function stripSystemFields<T extends Record<string, unknown>>(data: Partial<T>): Record<string, unknown> {
 	const result: Record<string, unknown> = {};
 	for (const [key, value] of Object.entries(data)) {
-		// Skip internal fields and undefined values
-		if (!key.startsWith('$') && value !== undefined) {
+		if (!SYSTEM_FIELDS.has(key) && value !== undefined) {
 			result[key] = value;
 		}
 	}
@@ -101,7 +80,7 @@ export function mergeByKey<T>(key: keyof T & string) {
 }
 
 /** Apply merge strategies to a payload, using the server record as base. */
-function applyMergeStrategies<T extends AwDoc>(
+function applyMergeStrategies<T extends PbDoc>(
 	payload: Partial<T>,
 	serverRecord: T,
 	strategies: PbSyncOptions<T>['mergeStrategies']
@@ -169,7 +148,7 @@ export class RecordDeletedError extends Error {
  * PocketBase-specific query options (`filter` instead of `queries`).
  *
  * @param pb - PocketBase client instance
- * @param table - Dexie table (uses `$id` as primary key)
+ * @param table - Dexie table (uses `id` as primary key)
  * @param collectionName - PocketBase collection name
  * @param options - Optional sync configuration (merge strategies, soft-delete)
  *
@@ -182,7 +161,7 @@ export class RecordDeletedError extends Error {
  * // Components read via liveQuery on teamdocs.getTable()
  * ```
  */
-export function createSyncCollection<T extends AwDoc>(
+export function createSyncCollection<T extends PbDoc>(
 	pb: PocketBase,
 	table: Table<T>,
 	collectionName: PbCollectionName,
@@ -216,8 +195,8 @@ export function createSyncCollection<T extends AwDoc>(
 	 */
 	async function initialFetch(fetchOptions?: PbFetchOptions): Promise<void> {
 		// 1. Find the latest `updated` timestamp in local data
-		const latest = await table.orderBy('$updatedAt').last();
-		const since = (latest as any)?.$updatedAt ?? '2000-01-01 00:00:00';
+		const latest = await table.orderBy('updated').last();
+		const since = (latest as any)?.updated ?? '2000-01-01 00:00:00';
 
 		// 2. Build the delta filter
 		const userFilter = resolveFilter(pb, fetchOptions);
@@ -241,15 +220,13 @@ export function createSyncCollection<T extends AwDoc>(
 
 		// 4. Normalize and upsert into Dexie
 		if (freshRecords.length > 0) {
-			const normalized = freshRecords.map((r) =>
-				normalizeRecord<T>(r as unknown as Record<string, unknown>)
-			);
+			const records = freshRecords as unknown as T[];
 
 			await table.db.transaction('rw', table, async () => {
-				for (const record of normalized) {
-					const existing = await table.get(record.$id);
+				for (const record of records) {
+					const existing = await table.get(record.id);
 					if (existing) {
-						await table.update(record.$id, record as unknown as UpdateSpec<T>);
+						await table.update(record.id, record as unknown as UpdateSpec<T>);
 					} else {
 						await table.put(record);
 					}
@@ -293,32 +270,29 @@ export function createSyncCollection<T extends AwDoc>(
 			.subscribe(
 				topic,
 				async (event) => {
-					const normalized = normalizeRecord<T>(
-						event.record as unknown as Record<string, unknown>
-					);
+					const record = event.record as unknown as T;
 
 					if (event.action === 'delete') {
 						if (softDelete) {
-							const existing = await table.get(normalized.$id);
+							const existing = await table.get(record.id);
 							if (existing) {
 								await table.put({ ...existing, deleted: true } as unknown as T);
 							}
 						} else {
-							await table.delete(normalized.$id);
+							await table.delete(record.id);
 						}
 						console.log(
-							`[pb-sync] realtime DELETE ${collectionName}/${normalized.$id}`
+							`[pb-sync] realtime DELETE ${collectionName}/${record.id}`
 						);
 					} else {
-						// create or update — merge with existing to preserve local fields
-						const existing = await table.get(normalized.$id);
+						const existing = await table.get(record.id);
 						if (existing) {
-							await table.update(normalized.$id, normalized as unknown as UpdateSpec<T>);
+							await table.update(record.id, record as unknown as UpdateSpec<T>);
 						} else {
-							await table.put(normalized);
+							await table.put(record);
 						}
 						console.log(
-							`[pb-sync] realtime ${event.action.toUpperCase()} ${collectionName}/${normalized.$id}`
+							`[pb-sync] realtime ${event.action.toUpperCase()} ${collectionName}/${record.id}`
 						);
 					}
 				},
@@ -379,19 +353,19 @@ export function createSyncCollection<T extends AwDoc>(
 	/**
 	 * Creates a record on PocketBase, normalizes the response, and mirrors to Dexie.
 	 *
-	 * @param data - Record data (without $id, $createdAt, $updatedAt)
+	 * @param data - Record data (without id, created, updated)
 	 * @returns The confirmed record (normalized to Appwrite format)
 	 */
 	async function create(
-		data: Omit<T, '$id' | '$createdAt' | '$updatedAt'>
+		data: Omit<T, 'id' | 'created' | 'updated'>
 	): Promise<T> {
-		const pbData = toPBRecord(data as Partial<T>);
+		const pbData = stripSystemFields(data as Partial<T>);
 
 		const pbResult = await pb.collection(collectionName).create(pbData);
 
-		const confirmed = normalizeRecord<T>(pbResult as unknown as Record<string, unknown>);
+		const confirmed = pbResult as unknown as T;
 		await table.put(confirmed);
-		console.log(`[pb-sync] create ${collectionName}/${confirmed.$id}`);
+		console.log(`[pb-sync] create ${collectionName}/${confirmed.id}`);
 		return confirmed;
 	}
 
@@ -403,7 +377,7 @@ export function createSyncCollection<T extends AwDoc>(
 	 * Optimistic update: writes to Dexie immediately, pushes to PocketBase,
 	 * rolls back on failure. Applies merge strategies for array fields if configured.
 	 *
-	 * @param id - Record $id
+	 * @param id - Record id
 	 * @param data - Partial update data
 	 * @returns The confirmed record (normalized to Appwrite format)
 	 */
@@ -421,20 +395,17 @@ export function createSyncCollection<T extends AwDoc>(
 
 		try {
 			// 3. Apply merge strategies if needed
-			let payload = toPBRecord(data);
+			let payload = stripSystemFields(data);
 			if (mergeStrategies) {
 				const fieldsToMerge = Object.keys(mergeStrategies) as (keyof T)[];
 				const hasConflictableField = fieldsToMerge.some((f) => f in data);
 				if (hasConflictableField) {
-					// Fetch server record to resolve conflicts
 					const serverRaw = await pb.collection(collectionName).getOne(id, {
 						requestKey: null
 					});
-					const serverRecord = normalizeRecord<T>(
-						serverRaw as unknown as Record<string, unknown>
-					);
+					const serverRecord = serverRaw as unknown as T;
 					const merged = applyMergeStrategies(data, serverRecord, mergeStrategies);
-					payload = toPBRecord(merged);
+					payload = stripSystemFields(merged);
 				}
 			}
 
@@ -442,9 +413,7 @@ export function createSyncCollection<T extends AwDoc>(
 			const pbResult = await pb.collection(collectionName).update(id, payload);
 
 			// 5. Confirm with server state
-			const confirmed = normalizeRecord<T>(
-				pbResult as unknown as Record<string, unknown>
-			);
+			const confirmed = pbResult as unknown as T;
 			await table.update(id, confirmed as unknown as UpdateSpec<T>);
 			console.log(`[pb-sync] update ${collectionName}/${id}`);
 			return confirmed;
@@ -472,7 +441,7 @@ export function createSyncCollection<T extends AwDoc>(
 	 * Removes a record. Deletes optimistically from Dexie, then from PocketBase.
 	 * Rolls back on failure.
 	 *
-	 * @param id - Record $id
+	 * @param id - Record id
 	 */
 	async function remove(id: string): Promise<void> {
 		const snapshot = await table.get(id);
@@ -527,7 +496,7 @@ export function createSyncCollection<T extends AwDoc>(
 	}
 
 	interface CollectionBatch {
-		create(data: Omit<T, '$id' | '$createdAt' | '$updatedAt'>): CollectionBatch;
+		create(data: Omit<T, 'id' | 'created' | 'updated'>): CollectionBatch;
 		update(id: string, data: Partial<T>): CollectionBatch;
 		delete(id: string): CollectionBatch;
 		send(): Promise<BatchResult>;
@@ -542,11 +511,11 @@ export function createSyncCollection<T extends AwDoc>(
 
 		const builder: CollectionBatch = {
 			create(data) {
-				ops.push({ type: 'create', data: toPBRecord(data as Partial<T>) });
+				ops.push({ type: 'create', data: stripSystemFields(data as Partial<T>) });
 				return builder;
 			},
 			update(id, data) {
-				ops.push({ type: 'update', id, data: toPBRecord(data) });
+				ops.push({ type: 'update', id, data: stripSystemFields(data) });
 				return builder;
 			},
 			delete(id) {
@@ -570,11 +539,7 @@ export function createSyncCollection<T extends AwDoc>(
 						case 'update': {
 							const current = await table.get(op.id!);
 							if (current) {
-								const normalized = normalizeRecord<T>({
-									...(current as unknown as Record<string, unknown>),
-									...op.data
-								});
-								await table.put(normalized);
+								await table.put({ ...current, ...op.data } as unknown as T);
 							}
 							break;
 						}
@@ -604,13 +569,11 @@ export function createSyncCollection<T extends AwDoc>(
 
 					const results = await batch.send();
 
-					// Normalize and confirm
+					// Confirm
 					const confirmed = results
 						.map((r) => r.body)
 						.filter(Boolean)
-						.map((body) =>
-							normalizeRecord<T>(body as unknown as Record<string, unknown>)
-						);
+						.map((body) => body as unknown as T);
 
 					if (confirmed.length > 0) {
 						await table.bulkPut(confirmed);
@@ -638,7 +601,7 @@ export function createSyncCollection<T extends AwDoc>(
 
 	/** Bulk create multiple records in a single batch request. */
 	async function bulkCreate(
-		items: Omit<T, '$id' | '$createdAt' | '$updatedAt'>[]
+		items: Omit<T, 'id' | 'created' | 'updated'>[]
 	): Promise<T[]> {
 		const b = createBatch();
 		for (const item of items) b.create(item);
@@ -689,7 +652,7 @@ export function createSyncCollection<T extends AwDoc>(
 			...(params?.expand ? { expand: params.expand } : {}),
 			...(params?.query ? { query: params.query } : {})
 		});
-		return normalizeRecord<T>(raw as unknown as Record<string, unknown>);
+		return raw as unknown as T;
 	}
 
 	// =====================================================================
@@ -706,7 +669,7 @@ export function createSyncCollection<T extends AwDoc>(
 	 * Used on logout to prevent stale data from leaking across users.
 	 *
 	 * Note: Unlike aw-sync, we don't have a `syncMeta` table to clean up.
-	 * Delta sync is based on the latest `$updatedAt` in the Dexie table itself.
+	 * Delta sync is based on the latest `updated` in the Dexie table itself.
 	 */
 	async function clearLocal(): Promise<void> {
 		await table.clear();

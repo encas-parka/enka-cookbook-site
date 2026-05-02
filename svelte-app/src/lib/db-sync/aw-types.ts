@@ -13,12 +13,12 @@
 
 /**
  * Minimum shape for a document that can be synced.
- * Appwrite rows always expose $id, $createdAt, $updatedAt.
+ * PocketBase rows expose id, created, updated.
  */
-export interface AwDoc {
-	$id: string;
-	$createdAt: string;
-	$updatedAt: string;
+export interface PbDoc {
+	id: string;
+	created: string;
+	updated: string;
 }
 
 // =============================================================================
@@ -59,7 +59,7 @@ export type MergeStrategy<T> = (local: T, remote: T) => T;
 /**
  * Configuration for a sync collection.
  */
-export interface AwSyncOptions<T extends AwDoc> {
+export interface AwSyncOptions<T extends PbDoc> {
 	/** Per-field merge strategies for concurrent array resolution */
 	mergeStrategies?: {
 		[K in keyof T]?: MergeStrategy<NonNullable<T[K]>>;

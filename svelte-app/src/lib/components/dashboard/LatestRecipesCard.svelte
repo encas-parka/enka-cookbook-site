@@ -24,18 +24,18 @@
     return recipesStore.recipesIndex
       .filter((r) => r.auteur === globalState.userName)
       .sort((a, b) => {
-        const dateA = a.$updatedAt ? new Date(a.$updatedAt).getTime() : 0;
-        const dateB = b.$updatedAt ? new Date(b.$updatedAt).getTime() : 0;
+        const dateA = a.updated ? new Date(a.updated).getTime() : 0;
+        const dateB = b.updated ? new Date(b.updated).getTime() : 0;
         return dateB - dateA;
       })
       .slice(0, 5);
   });
 
   function formatRecipeDate(recipe: RecipeIndexEntry) {
-    return recipe.$updatedAt
-      ? formatDateRelative(recipe.$updatedAt)
-      : recipe.$createdAt
-        ? formatDateRelative(recipe.$updatedAt)
+    return recipe.updated
+      ? formatDateRelative(recipe.updated)
+      : recipe.created
+        ? formatDateRelative(recipe.updated)
         : "Date inconnue";
   }
 
@@ -80,12 +80,12 @@
     class="{withBorder
       ? 'border-accent/60 border-l-2'
       : ''} bg-base-200 hover:bg-base-300 flex cursor-pointer items-start gap-3 rounded-lg p-3 transition-colors"
-    onclick={() => viewRecipe(recipe.$id)}
+    onclick={() => viewRecipe(recipe.id)}
     role="button"
     tabindex="0"
     onkeydown={(e) => {
       if (e.key === "Enter" || e.key === " ") {
-        viewRecipe(recipe.$id);
+        viewRecipe(recipe.id);
       }
     }}
   >
@@ -170,7 +170,7 @@
   <!-- Mes dernières recettes -->
   {#if myLatestRecipes.length > 0}
     <div class="space-y-2">
-      {#each myLatestRecipes as recipe (recipe.$id)}
+      {#each myLatestRecipes as recipe (recipe.id)}
         {@render recipeCard(recipe, true)}
       {/each}
     </div>

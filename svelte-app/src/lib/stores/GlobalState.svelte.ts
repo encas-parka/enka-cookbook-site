@@ -1,17 +1,15 @@
 import { MediaQuery } from "svelte/reactivity";
 
 import { toastService } from "../services/toast.service.svelte";
-import { getAppwriteInstances, clearAppwriteCache } from "../services/appwrite";
+import { getCurrentUser, logout as pbLogout, type PBAuthUser } from "../services/pb-auth";
 import { nativeTeamsStore } from "./NativeTeamsStore.svelte";
 import { eventsStore } from "./EventsStore.svelte";
 import { materielStore } from "./MaterielStore.svelte";
 import { teamdocsStore } from "./TeamdocsStore.svelte";
 import { productsStore } from "./ProductsStore.svelte";
 import { notificationStore } from "./NotificationStore.svelte";
-import { destroyRealtime, initializeRealtime } from "$lib/db-sync/aw-sync";
 import { recipesStore } from "./RecipesStore.svelte";
-import { db } from "$lib/db-sync/aw-sync";
-import type { Models } from "appwrite";
+import { db } from "$lib/db-sync/pb-sync";
 import { route } from "$lib/router";
 
 class GlobalState {
@@ -22,7 +20,7 @@ class GlobalState {
   // AUTHENTIFICATION
   // =============================================================================
 
-  #user = $state<Models.User<Models.Preferences> | null>(null);
+  #user = $state<PBAuthUser | null>(null);
   #userTeams = $derived(nativeTeamsStore.myTeams.map((t) => t.$id));
   #authLoading = $state(false);
   #authError = $state<string | null>(null);
@@ -75,14 +73,17 @@ class GlobalState {
     this.#authError = null;
 
     try {
-      const { account } = await getAppwriteInstances();
-      this.#user = await account.get();
-
-      localStorage.setItem("appwrite-user-name", this.#user.name);
-      localStorage.setItem("appwrite-user-email", this.#user.email);
-      localStorage.setItem("appwrite-user-id", this.#user.$id);
-
-      console.log(`[GlobalState] Authentifié: ${this.#user.name}`);
+      const user = getCurrentUser();
+      if (user) {
+        this.#user = user;
+        localStorage.setItem("appwrite-user-name", user.name);
+        localStorage.setItem("appwrite-user-email", user.email);
+        localStorage.setItem("appwrite-user-id", user.$id);
+        console.log(`[GlobalState] Authentifié: ${user.name}`);
+      } else {
+        this.#user = null;
+        console.log("[GlobalState] Utilisateur non connecté");
+      }
     } catch (error) {
       this.#user = null;
       this.#authError =
@@ -97,7 +98,8 @@ class GlobalState {
 
   /**
    * Réinitialise l'authentification après un login/inscription réussie
-   * Set l'utilisateur + synchronise tous les stores + realtime
+   * Set l'utilisateur + synchronise tous les stores
+   * PocketBase : chaque store gère son propre realtime (pas de registry centralisé)
    */
   async refreshAuthAfterLogin(): Promise<void> {
     console.log("[GlobalState] Réinitialisation après login...");
@@ -105,15 +107,15 @@ class GlobalState {
     this.#authError = null;
 
     try {
-      const { account } = await getAppwriteInstances();
-      this.#user = await account.get();
+      const user = getCurrentUser();
+      if (!user) throw new Error("Aucun utilisateur après login");
+      this.#user = user;
 
-      localStorage.setItem("appwrite-user-name", this.#user.name);
-      localStorage.setItem("appwrite-user-email", this.#user.email);
-      localStorage.setItem("appwrite-user-id", this.#user.$id);
+      localStorage.setItem("appwrite-user-name", user.name);
+      localStorage.setItem("appwrite-user-email", user.email);
+      localStorage.setItem("appwrite-user-id", user.$id);
 
       // Phase 0: Initialiser le cache IDB pour les stores qui en dépendent
-      // (obligatoire avant syncFromRemote — sinon le guard #cache retourne silencieusement)
       await Promise.all([
         eventsStore.loadCache(),
         recipesStore.loadCache(),
@@ -133,6 +135,7 @@ class GlobalState {
       ]);
 
       // Phase 2: Setup realtime pour TOUS les stores
+      // (chaque store gère son propre realtime via pb.collection().subscribe())
       await Promise.all([
         nativeTeamsStore.setupRealtime(),
         eventsStore.setupRealtime(),
@@ -141,11 +144,8 @@ class GlobalState {
         recipesStore.setupRealtime(),
       ]);
 
-      // Phase 3: Centralized realtime en dernier (agrège tous les channels enregistrés)
-      await initializeRealtime();
-
       console.log(
-        `[GlobalState] Réinitialisé après login: ${this.#user.name} (${this.userTeams.length} équipes)`,
+        `[GlobalState] Réinitialisé après login: ${user.name} (${this.userTeams.length} équipes)`,
       );
     } catch (error) {
       console.error("[GlobalState] Erreur lors de la réinitialisation:", error);
@@ -157,14 +157,12 @@ class GlobalState {
   }
 
   /**
-   * Déconnexion : cleanup Appwrite + stores privés + realtime
+   * Déconnexion : cleanup PB + stores privés
+   * PocketBase : pas de cache Appwrite ni de realtime centralisé à détruire
    */
   async logout(): Promise<void> {
     try {
-      const { account } = await getAppwriteInstances();
-      await account.deleteSession({ sessionId: "current" });
-
-      clearAppwriteCache();
+      pbLogout();
 
       localStorage.removeItem("appwrite-user-name");
       localStorage.removeItem("appwrite-user-email");
@@ -178,7 +176,6 @@ class GlobalState {
       await materielStore.destroy();
       await teamdocsStore.destroy();
       await productsStore.destroy();
-      destroyRealtime();
 
       // Nettoyer le cache des liens d'invitation
       await db.joinLinks.clear();

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { getAppwriteInstances } from "../services/appwrite";
+  import { loginWithPassword, register, requestPasswordReset, emailExists } from "../services/pb-auth";
   import ModalContainer from "$lib/components/ui/modal/ModalContainer.svelte";
   import ModalHeader from "$lib/components/ui/modal/ModalHeader.svelte";
   import ModalContent from "$lib/components/ui/modal/ModalContent.svelte";
@@ -95,13 +95,7 @@
     isLoading = true;
 
     try {
-      const { account } = await getAppwriteInstances();
-
-      // Créer la session
-      await account.createEmailPasswordSession({
-        email: loginEmail,
-        password: loginPassword,
-      });
+      await loginWithPassword(loginEmail, loginPassword);
 
       successMessage = "Connexion réussie !";
       setTimeout(() => {
@@ -119,21 +113,7 @@
     isLoading = true;
 
     try {
-      const { account } = await getAppwriteInstances();
-
-      // Créer le compte
-      await account.create({
-        userId: "unique()",
-        email: registerEmail,
-        password: registerPassword,
-        name: registerName,
-      });
-
-      // Créer la session
-      await account.createEmailPasswordSession({
-        email: registerEmail,
-        password: registerPassword,
-      });
+      await register(registerName, registerEmail, registerPassword);
 
       successMessage = "Compte créé et connecté !";
       setTimeout(() => {
@@ -143,32 +123,18 @@
       console.error("Erreur d'inscription:", error);
 
       // Vérifier si l'email existe déjà
-      // Appwrite renvoie une erreur avec code 409 et message contenant "already registered"
       if (
-        error.response?.code === 409 ||
-        error.message?.includes("already registered") ||
-        error.message?.includes("already exists")
+        error.response?.code === 400 &&
+        (error.message?.includes("already") ||
+          error.response?.data?.email?.code === "validation_not_unique")
       ) {
         try {
-          const { account } = await getAppwriteInstances();
-
           // L'email existe déjà : envoyer un email de récupération de mot de passe
-          await account.createRecovery({
-            email: registerEmail,
-            url: `${window.location.origin}/reset-password`,
-          });
+          await requestPasswordReset(registerEmail);
 
           // Message informatif pour l'utilisateur
           successMessage =
             "Un compte avec cet email existe déjà. Un email pour réinitialiser votre mot de passe vous a été envoyé.";
-
-          // Basculer vers le mode login après 3 secondes
-          // setTimeout(() => {
-          //   showLogin = true;
-          //   // successMessage = "";
-          //   // Pré-remplir l'email dans le formulaire de login
-          //   loginEmail = registerEmail;
-          // }, 4000);
         } catch (recoveryError: any) {
           console.error(
             "Erreur lors de l'envoi de l'email de récupération:",
@@ -189,12 +155,7 @@
     isLoading = true;
 
     try {
-      const { account } = await getAppwriteInstances();
-
-      await account.createRecovery({
-        email: forgotEmail,
-        url: `${window.location.origin}/reset-password`,
-      });
+      await requestPasswordReset(forgotEmail);
 
       successMessage = "Email de réinitialisation envoyé !";
       setTimeout(() => {

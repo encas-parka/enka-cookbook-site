@@ -18,6 +18,7 @@ migrate(
         { name: "expiresAt", type: "date" },
         { name: "collection", type: "text" },
         { name: "recordId", type: "text" },
+        { name: "userName", type: "text" },
       ],
     });
     txApp.save(collection);

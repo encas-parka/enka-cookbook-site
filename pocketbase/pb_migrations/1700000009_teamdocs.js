@@ -31,6 +31,17 @@ migrate(
         { name: "title", type: "text" },
         { name: "content", type: "text" },
         { name: "status", type: "text" },
+        { name: "tags", type: "json" },
+        { name: "isPublic", type: "bool" },
+        { name: "teamName", type: "text" },
+        {
+          name: "createdBy",
+          type: "relation",
+          collectionId: "_pb_users_auth_",
+          maxSelect: 1,
+        },
+        { name: "lockedBy", type: "text" },
+        { name: "lockedByName", type: "text" },
       ],
     });
     txApp.save(collection);

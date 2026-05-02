@@ -13,6 +13,12 @@ migrate(
         { name: "link_type", type: "text" },
         { name: "isActive", type: "bool" },
         { name: "token", type: "text" },
+        {
+          name: "createdBy",
+          type: "relation",
+          collectionId: "_pb_users_auth_",
+          maxSelect: 1,
+        },
       ],
     });
     txApp.save(collection);

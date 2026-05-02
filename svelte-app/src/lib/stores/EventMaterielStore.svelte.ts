@@ -11,7 +11,6 @@
  * - CRUD via aw-sync (optimistic writes + rollback)
  */
 
-import { Permission, Query, Role } from "appwrite";
 import type { EventMateriel } from "$lib/types/appwrite";
 import type {
   CreateEventMaterielData,
@@ -23,7 +22,6 @@ import type {
   MaterielGroup,
 } from "$lib/types/event-materiel.types";
 import type { MaterielLoanItem } from "$lib/types/materiel.types";
-import { listEventMaterielByLoan } from "$lib/services/appwrite-event-materiel";
 import { getMaterielTypeConfig } from "$lib/utils/materiel.utils";
 import {
   exportMaterielToCsv,
@@ -35,8 +33,9 @@ import {
   createSyncCollection,
   bridgeToMapFiltered,
   db,
+  pb,
   type BridgeResult,
-} from "$lib/db-sync/aw-sync";
+} from "$lib/db-sync/pb-sync";
 
 /**
  * Formatte un apport inline : "jean x12", "marie (lieu1) x2", "(lieu3) x5"
@@ -65,11 +64,8 @@ function formatAllocsInline(allocs: EventMateriel[]): string {
 }
 
 export class EventMaterielStore {
-  // aw-sync collection (CRUD + sync)
-  #collection = createSyncCollection<EventMateriel>({
-    table: db.eventMateriels,
-    collectionName: "event_materiel",
-  });
+  // pb-sync collection (CRUD + sync)
+  #collection = createSyncCollection<EventMateriel>(pb, db.eventMateriels, "event_materiel");
 
   // Bridge scoped dynamiquement par eventId
   #bridge: BridgeResult<EventMateriel> | null = null;
@@ -161,7 +157,7 @@ export class EventMaterielStore {
       this.#items = this.#bridge.map;
 
       await this.#collection.initialFetch({
-        queries: [Query.equal("eventId", eventId)],
+        filter: ['eventId = {:eventId}', { eventId }],
       });
 
       // Phase 3: Realtime
@@ -218,11 +214,6 @@ export class EventMaterielStore {
           notes: data.notes || null,
           createdBy: userId,
         } as Omit<EventMateriel, "$id" | "$createdAt" | "$updatedAt">,
-        [
-          Permission.read(Role.label(data.eventId)),
-          Permission.update(Role.label(data.eventId)),
-          Permission.delete(Role.label(data.eventId)),
-        ],
       );
 
       return item;
@@ -663,7 +654,9 @@ export class EventMaterielStore {
     userId: string,
   ): Promise<void> {
     try {
-      const existingItems = await listEventMaterielByLoan(loanId);
+      const existingItems = Array.from(this.#items.values()).filter(
+        item => item.loanId === loanId
+      );
 
       const existingByMaterielId = new Map<string, (typeof existingItems)[0]>();
       for (const item of existingItems) {
@@ -749,7 +742,9 @@ export class EventMaterielStore {
 
   async removeByLoan(loanId: string): Promise<void> {
     try {
-      const existingItems = await listEventMaterielByLoan(loanId);
+      const existingItems = Array.from(this.#items.values()).filter(
+        item => item.loanId === loanId
+      );
 
       for (const item of existingItems) {
         await this.#collection.remove(item.$id);
@@ -766,7 +761,9 @@ export class EventMaterielStore {
 
   async removeByLoanAndEvent(loanId: string, eventId: string): Promise<void> {
     try {
-      const existingItems = await listEventMaterielByLoan(loanId);
+      const existingItems = Array.from(this.#items.values()).filter(
+        item => item.loanId === loanId
+      );
       const toDelete = existingItems.filter((item) => item.eventId === eventId);
 
       for (const item of toDelete) {

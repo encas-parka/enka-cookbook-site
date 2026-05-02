@@ -1,4 +1,3 @@
-import { Permission, Role } from "appwrite";
 import { liveQuery } from "dexie";
 import type { Subscription } from "dexie";
 import type { Materiel, MaterielLoan } from "$lib/types/appwrite";
@@ -18,7 +17,7 @@ import { materielTypeLabels } from "$lib/utils/share-utils";
 import { globalState } from "./GlobalState.svelte";
 import { nativeTeamsStore } from "./NativeTeamsStore.svelte";
 import { eventMaterielStore } from "./EventMaterielStore.svelte";
-import { createSyncCollection, db } from "$lib/db-sync/aw-sync";
+import { createSyncCollection, db, pb } from "$lib/db-sync/pb-sync";
 
 /**
  * MaterielStore — Gestion du matériel avec Svelte 5 + aw-sync
@@ -40,16 +39,9 @@ import { createSyncCollection, db } from "$lib/db-sync/aw-sync";
 
 export class MaterielStore {
   // aw-sync collections (CRUD + sync Appwrite ↔ Dexie)
-  #materielCollection = createSyncCollection<Materiel>({
-    table: db.materiels,
-    collectionName: "materiel",
-    syncOptions: { softDelete: true },
-  });
+  #materielCollection = createSyncCollection<Materiel>(pb, db.materiels, "materiel", { softDelete: true });
 
-  #loanCollection = createSyncCollection<MaterielLoan>({
-    table: db.materielLoans,
-    collectionName: "materiel_loan",
-  });
+  #loanCollection = createSyncCollection<MaterielLoan>(pb, db.materielLoans, "materiel_loan");
 
   // Single liveQuery subscription (observes both tables)
   #subscription: Subscription | null = null;
@@ -322,23 +314,6 @@ export class MaterielStore {
         throw new Error("Invalid owner format");
       }
 
-      // Permissions
-      const permissions = [
-        Permission.read(Role.user(globalState.userId)),
-        Permission.update(Role.user(globalState.userId)),
-      ];
-      if (ownerData.teamId) {
-        permissions.push(
-          Permission.read(Role.team(ownerData.teamId)),
-          Permission.update(Role.team(ownerData.teamId)),
-        );
-      } else if (ownerData.userId) {
-        permissions.push(
-          Permission.read(Role.user(ownerData.userId)),
-          Permission.update(Role.user(ownerData.userId)),
-        );
-      }
-
       const doc = await this.#materielCollection.create(
         {
           name: data.name,
@@ -353,7 +328,6 @@ export class MaterielStore {
           isStorage: false,
           storeIn: null,
         } as Omit<Materiel, "$id" | "$createdAt" | "$updatedAt">,
-        permissions,
       );
 
       // Return enriched (will also update via liveQuery)
@@ -436,13 +410,6 @@ export class MaterielStore {
         throw new Error("Utilisateur non connecté");
       }
 
-      const permissions = [
-        Permission.read(Role.user(globalState.userId)),
-        Permission.update(Role.user(globalState.userId)),
-        Permission.read(Role.team(data.ownerId)),
-        Permission.update(Role.team(data.ownerId)),
-      ];
-
       const loan = await this.#loanCollection.create(
         {
           startDate: data.startDate,
@@ -460,7 +427,6 @@ export class MaterielStore {
           eventId: data.eventId || null,
           eventName: data.eventName || null,
         } as Omit<MaterielLoan, "$id" | "$createdAt" | "$updatedAt">,
-        permissions,
       );
 
       const enriched = enrichLoanFromAppwrite(loan);

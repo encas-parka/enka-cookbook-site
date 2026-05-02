@@ -46,11 +46,16 @@ import type { PbDoc } from './aw-types';
 // =============================================================================
 
 const SYSTEM_FIELDS = new Set(['id', 'created', 'updated']);
+const SYSTEM_FIELDS_KEEP_ID = new Set(['created', 'updated']);
 
-function stripSystemFields<T extends Record<string, unknown>>(data: Partial<T>): Record<string, unknown> {
+function stripSystemFields<T extends Record<string, unknown>>(
+	data: Partial<T>,
+	keepId = false
+): Record<string, unknown> {
+	const strip = keepId ? SYSTEM_FIELDS_KEEP_ID : SYSTEM_FIELDS;
 	const result: Record<string, unknown> = {};
 	for (const [key, value] of Object.entries(data)) {
-		if (!SYSTEM_FIELDS.has(key) && value !== undefined) {
+		if (!strip.has(key) && value !== undefined) {
 			result[key] = value;
 		}
 	}
@@ -353,13 +358,13 @@ export function createSyncCollection<T extends PbDoc>(
 	/**
 	 * Creates a record on PocketBase, normalizes the response, and mirrors to Dexie.
 	 *
-	 * @param data - Record data (without id, created, updated)
-	 * @returns The confirmed record (normalized to Appwrite format)
+	 * @param data - Record data (id is optional and passed through to PocketBase)
+	 * @returns The confirmed record
 	 */
 	async function create(
-		data: Omit<T, 'id' | 'created' | 'updated'>
+		data: Omit<T, 'created' | 'updated'>
 	): Promise<T> {
-		const pbData = stripSystemFields(data as Partial<T>);
+		const pbData = stripSystemFields(data as Partial<T>, true);
 
 		const pbResult = await pb.collection(collectionName).create(pbData);
 
@@ -511,7 +516,7 @@ export function createSyncCollection<T extends PbDoc>(
 
 		const builder: CollectionBatch = {
 			create(data) {
-				ops.push({ type: 'create', data: stripSystemFields(data as Partial<T>) });
+				ops.push({ type: 'create', data: stripSystemFields(data as Partial<T>, true) });
 				return builder;
 			},
 			update(id, data) {

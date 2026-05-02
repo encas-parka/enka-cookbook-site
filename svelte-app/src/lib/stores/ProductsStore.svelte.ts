@@ -1,6 +1,5 @@
 import { SvelteMap } from "svelte/reactivity";
 import { useDebounce } from "runed";
-import { Query } from "appwrite";
 import { liveQuery } from "dexie";
 import type { Subscription } from "dexie";
 import type { Products, Purchases } from "../types/appwrite.d";
@@ -27,22 +26,12 @@ import {
   type MarkdownExportGroup,
 } from "../utils/product-markdown-export";
 import { exportProductsToCsv } from "../utils/product-csv-export";
-import { toastService } from "../services/toast.service.svelte";
 import type {
   EnrichedProduct,
   StoreInfo,
   BatchUpdateResult,
 } from "../types/store.types";
 import type { EnrichedEvent } from "../types/events";
-import {
-  createQuickValidationPurchases,
-  updatePurchase,
-  upsertProduct,
-  updateProduct as updateProductAppwrite,
-  updateProductBatch,
-  batchUpdateProductsOptimized,
-} from "../services/appwrite-products";
-import type { GroupPurchaseBatchResult } from "../services/appwrite-transaction";
 
 import { globalState } from "./GlobalState.svelte";
 import { ProductModel } from "../models/ProductModel.svelte";
@@ -52,11 +41,12 @@ import { recipesStore } from "./RecipesStore.svelte";
 import {
   createSyncCollection,
   db,
+  pb,
   type ProductNeedRow,
-} from "$lib/db-sync/aw-sync";
+} from "$lib/db-sync/pb-sync";
 
 /**
- * ProductsStore - Store principal de gestion des produits avec Svelte 5 + aw-sync
+ * ProductsStore - Store principal de gestion des produits avec Svelte 5 + pb-sync
  *
  * Architecture simplifiée :
  * - 1 liveQuery Dexie observe les 3 tables (products, purchases, productNeeds)
@@ -68,7 +58,7 @@ import {
  *   liveQuery → #onDataChange → #productModels + #rebuildGroups
  *   filtres   → setter → #rebuildGroups
  *   date      → $effect → #rebuildGroups
- *   CRUD      → Appwrite → realtime → Dexie → liveQuery → #onDataChange
+ *   CRUD      → PocketBase → realtime → Dexie → liveQuery → #onDataChange
  *
  * @usage
  * await productsStore.initialize('eventId');
@@ -85,14 +75,8 @@ class ProductsStore {
   // aw-sync COLLECTIONS (CRUD + sync Appwrite ↔ Dexie)
   // ===========================================================================
 
-  #productsCollection = createSyncCollection<Products>({
-    table: db.products,
-    collectionName: "products",
-  });
-  #purchasesCollection = createSyncCollection<Purchases>({
-    table: db.purchases,
-    collectionName: "purchases",
-  });
+  #productsCollection = createSyncCollection<Products>(pb, db.products, "products");
+  #purchasesCollection = createSyncCollection<Purchases>(pb, db.purchases, "purchases");
 
   // Map stable de ProductModel — UNIQUE source de vérité pour l'UI
   #productModels = new SvelteMap<string, ProductModel>();
@@ -691,13 +675,13 @@ class ProductsStore {
       this.#currentEventId = event.$id;
       this.#currentMainId = event.$id;
 
-      // 1. Delta sync Appwrite → Dexie
+      // 1. Delta sync PocketBase → Dexie
       this.#syncing = true;
       await this.#productsCollection.initialFetch({
-        queries: [Query.equal("mainId", this.#currentMainId!)],
+        filter: ["mainId = {:mainId}", { mainId: this.#currentMainId! }],
       });
       await this.#purchasesCollection.initialFetch({
-        queries: [Query.equal("mainId", this.#currentMainId!)],
+        filter: ["mainId = {:mainId}", { mainId: this.#currentMainId! }],
       });
       this.#syncing = false;
       this.#lastSync = new Date().toISOString();
@@ -721,7 +705,7 @@ class ProductsStore {
       // 3. Lancer le liveQuery unique (observe 3 tables → reconciler)
       this.#startDataSubscription(this.#currentMainId!);
 
-      // 4. Abonnements realtime (Appwrite → Dexie → liveQuery → reconciler)
+      // 4. Abonnements realtime (PocketBase SSE → Dexie → liveQuery → reconciler)
       this.#productsCollection.subscribe();
       this.#purchasesCollection.subscribe();
 
@@ -1110,14 +1094,11 @@ class ProductsStore {
   }
 
   /**
-   * Force un delta sync Appwrite → Dexie pour les produits et achats.
+   * Force un delta sync PocketBase → Dexie pour les produits et achats.
    *
-   * Appelé par NotificationStore après une notification batch_products_update
-   * (Cloud Functions : batchUpdate, groupPurchase).
-   *
-   * Le realtime Appwrite ne relaie pas toujours les événements de modification
-   * issus des Cloud Functions vers les clients, donc ce delta sync explicite
-   * garantit que Dexie (et donc le liveQuery → #onDataChange) est à jour.
+   * Appelé par NotificationStore après une notification batch_products_update.
+   * Avec PocketBase, le SSE relaie les modifications en temps réel,
+   * ce delta sync garantit que Dexie (et donc le liveQuery → #onDataChange) est à jour.
    */
   async syncFromAppwrite(): Promise<void> {
     if (!this.#currentMainId) {
@@ -1128,10 +1109,10 @@ class ProductsStore {
     try {
       await Promise.all([
         this.#productsCollection.initialFetch({
-          queries: [Query.equal("mainId", this.#currentMainId)],
+          filter: ["mainId = {:mainId}", { mainId: this.#currentMainId }],
         }),
         this.#purchasesCollection.initialFetch({
-          queries: [Query.equal("mainId", this.#currentMainId)],
+          filter: ["mainId = {:mainId}", { mainId: this.#currentMainId }],
         }),
       ]);
       this.#lastSync = new Date().toISOString();
@@ -1177,23 +1158,41 @@ class ProductsStore {
       deliveryDate?: string | null;
     },
   ): Promise<void> {
-    await createQuickValidationPurchases(
-      this.#currentMainId!,
-      productId,
-      quantities,
-      options,
-    );
+    const purchaseStatus = options.status || "delivered";
+    let deliveryDate = options.deliveryDate || null;
+    if (purchaseStatus === "delivered" && !deliveryDate) {
+      deliveryDate = new Date().toISOString();
+    }
+
+    for (const qty of quantities) {
+      await this.#purchasesCollection.create({
+        products: [productId],
+        mainId: this.#currentMainId!,
+        quantity: qty.q,
+        unit: qty.u,
+        status: purchaseStatus,
+        notes: options.notes || "",
+        store: options.store ?? null,
+        who: options.who || globalState.userName,
+        price: options.price || null,
+        orderDate: options.orderDate || null,
+        deliveryDate,
+        createdBy: globalState.userId,
+        invoiceId: options.invoiceId,
+        invoiceTotal: null,
+      } as unknown as Omit<Purchases, "$id" | "$createdAt" | "$updatedAt">);
+    }
   }
 
   async updatePurchase(
     purchaseId: string,
     updates: Partial<Purchases>,
   ): Promise<void> {
-    await updatePurchase(purchaseId, updates as Parameters<typeof updatePurchase>[1]);
+    await this.#purchasesCollection.update(purchaseId, updates);
   }
 
   async deletePurchase(purchaseId: string): Promise<void> {
-    await updatePurchase(purchaseId, { status: "deleted" });
+    await this.#purchasesCollection.update(purchaseId, { status: "deleted" } as Partial<Purchases>);
   }
 
   async createProduct(productData: {
@@ -1206,14 +1205,28 @@ class ProductsStore {
     store?: string;
     stockReel?: string;
   }): Promise<string> {
-    const newProduct = await upsertProduct(
-      crypto.randomUUID(),
-      productData,
-      (id) => this.getEnrichedProductById(id),
-    );
+    const productId = crypto.randomUUID();
 
-    // Persist to Dexie for immediate availability
-    await db.products.put(newProduct as Products);
+    const spec = { pF: productData.pF || false, pS: productData.pS || false };
+
+    const newProduct = await this.#productsCollection.create({
+      productHugoUuid: null,
+      productName: productData.productName,
+      productType: productData.productType || "Autre",
+      store: productData.store || null,
+      who: productData.who || [],
+      mainId: this.#currentMainId!,
+      status: productData.status || "active",
+      stockReel: productData.stockReel || null,
+      updatedBy: globalState.userName,
+      isMerged: false,
+      mergedFrom: null,
+      mergeDate: null,
+      mergeReason: null,
+      mergedInto: null,
+      totalNeededOverride: null,
+      specs: JSON.stringify(spec),
+    } as unknown as Omit<Products, "$id" | "$createdAt" | "$updatedAt">);
 
     return newProduct.$id;
   }
@@ -1222,42 +1235,62 @@ class ProductsStore {
     productId: string,
     updates: Partial<EnrichedProduct>,
   ): Promise<void> {
-    const enrichedProduct = this.getEnrichedProductById(productId);
-    if (enrichedProduct && !enrichedProduct.isSynced) {
-      await upsertProduct(productId, updates, (id: string) =>
-        this.getEnrichedProductById(id),
-      );
-    } else {
-      await updateProductAppwrite(productId, updates);
-    }
+    await this.#productsCollection.update(productId, updates as Partial<Products>);
   }
 
   async updateProductBatch(
     productId: string,
     updates: Partial<EnrichedProduct>,
-    callback?: (id: string) => EnrichedProduct | undefined,
+    _callback?: (id: string) => EnrichedProduct | undefined,
   ): Promise<void> {
-    await updateProductBatch(
-      productId,
-      updates,
-      callback || ((id) => this.getEnrichedProductById(id)),
-    );
+    await this.#productsCollection.update(productId, updates as Partial<Products>);
   }
 
   async batchUpdateProducts(
     productIds: string[],
-    products: EnrichedProduct[],
+    _products: EnrichedProduct[],
     updateType: "who" | "store",
     updateData: { names?: string[] } | StoreInfo,
   ): Promise<BatchUpdateResult> {
-    return await batchUpdateProductsOptimized(
-      productIds,
-      products,
-      updateType,
-      updateData,
-    );
+    try {
+      const batchSize = 50;
+      for (let i = 0; i < productIds.length; i += batchSize) {
+        const batch = pb.createBatch();
+        const chunk = productIds.slice(i, i + batchSize);
+
+        for (const productId of chunk) {
+          if (updateType === "who") {
+            const names = (updateData as { names?: string[] }).names || null;
+            batch.collection("products").update(productId, { who: names });
+          } else {
+            const storeInfo = updateData as StoreInfo;
+            batch.collection("products").update(productId, { store: JSON.stringify(storeInfo) });
+          }
+        }
+
+        await batch.send();
+      }
+
+      return {
+        success: true,
+        updatedCount: productIds.length,
+        updateType,
+        timestamp: new Date().toISOString(),
+      };
+    } catch (err) {
+      return {
+        success: false,
+        updatedCount: productIds.length,
+        updateType,
+        error: err instanceof Error ? err.message : "Erreur inconnue",
+        timestamp: new Date().toISOString(),
+      };
+    }
   }
 
+  /**
+   * Résultat d'un achat groupé (inline — remplace GroupPurchaseBatchResult d'Appwrite).
+   */
   async createGroupPurchase(
     productsData: Array<{
       productId: string;
@@ -1273,14 +1306,113 @@ class ProductsStore {
       purchaseStatus?: string | null;
       purchaseDeliveryDate?: string | null;
     },
-  ): Promise<GroupPurchaseBatchResult> {
-    const { createGroupPurchaseWithSync } =
-      await import("../services/appwrite-transaction");
-    return await createGroupPurchaseWithSync(
-      this.#currentMainId!,
-      productsData,
-      invoiceData,
-    );
+  ): Promise<{
+    success: boolean;
+    totalProductsCreated: number;
+    totalPurchasesCreated: number;
+    totalExpensesCreated: number;
+    error?: string;
+  }> {
+    if (!productsData.length) {
+      return { success: false, totalProductsCreated: 0, totalPurchasesCreated: 0, totalExpensesCreated: 0, error: "Aucun produit à traiter" };
+    }
+
+    const purchaseStatus = invoiceData.purchaseStatus || "delivered";
+    let deliveryDate = invoiceData.purchaseDeliveryDate || null;
+    if (purchaseStatus === "delivered" && !deliveryDate) {
+      deliveryDate = new Date().toISOString();
+    }
+
+    const mainId = this.#currentMainId!;
+    let totalPurchasesCreated = 0;
+    let totalExpensesCreated = 0;
+
+    try {
+      // Découpage en lots de 50 opérations max par createBatch()
+      const BATCH_SIZE = 50;
+      const allOperations: Array<{ productId: string; qty: { q: number; u: string } }> = [];
+
+      for (const p of productsData) {
+        if (!p.isSynced) {
+          // Product not yet created in PB — create it first
+          const enriched = this.getEnrichedProductById(p.productId);
+          if (enriched) {
+            await this.#productsCollection.create({
+              productHugoUuid: enriched.productHugoUuid,
+              productName: enriched.productName,
+              productType: enriched.productType || "",
+              store: enriched.store as string | null,
+              who: enriched.who || [],
+              mainId,
+              status: "active",
+              stockReel: enriched.stockReel,
+              isMerged: enriched.isMerged || false,
+              specs: enriched.specs || null,
+            } as unknown as Omit<Products, "$id" | "$createdAt" | "$updatedAt">);
+          }
+        }
+        for (const qty of p.missingQuantities) {
+          allOperations.push({ productId: p.productId, qty });
+        }
+      }
+
+      // Traiter par lots
+      for (let i = 0; i < allOperations.length; i += BATCH_SIZE) {
+        const batch = pb.createBatch();
+        const chunk = allOperations.slice(i, i + BATCH_SIZE);
+
+        for (const op of chunk) {
+          batch.collection("purchases").create({
+            products: [op.productId],
+            mainId,
+            quantity: op.qty.q,
+            unit: op.qty.u,
+            status: purchaseStatus,
+            notes: invoiceData.notes || "",
+            store: invoiceData.store || null,
+            who: invoiceData.who || globalState.userName,
+            orderDate: null,
+            deliveryDate,
+            createdBy: globalState.userId,
+            invoiceId: invoiceData.invoiceId,
+          });
+          totalPurchasesCreated++;
+        }
+
+        await batch.send();
+      }
+
+      // Expense optionnelle
+      if (invoiceData.invoiceTotal) {
+        await this.#purchasesCollection.create({
+          products: [],
+          mainId,
+          quantity: 1,
+          unit: "global",
+          status: "expense",
+          notes: invoiceData.notes || "",
+          store: invoiceData.store || null,
+          who: invoiceData.who || globalState.userName,
+          price: invoiceData.invoiceTotal,
+          invoiceId: invoiceData.invoiceId,
+          invoiceTotal: invoiceData.invoiceTotal,
+          orderDate: null,
+          deliveryDate: deliveryDate!,
+          createdBy: globalState.userId,
+        } as unknown as Omit<Purchases, "$id" | "$createdAt" | "$updatedAt">);
+        totalExpensesCreated = 1;
+      }
+
+      return { success: true, totalProductsCreated: productsData.length, totalPurchasesCreated, totalExpensesCreated };
+    } catch (err) {
+      return {
+        success: false,
+        totalProductsCreated: productsData.length,
+        totalPurchasesCreated,
+        totalExpensesCreated,
+        error: err instanceof Error ? err.message : "Erreur inconnue",
+      };
+    }
   }
 
   addProductOptimistic(product: Products) {
@@ -1307,7 +1439,7 @@ class ProductsStore {
     this.#dataSubscription?.unsubscribe();
     this.#dataSubscription = null;
 
-    // Cleanup aw-sync subscriptions
+    // Cleanup pb-sync subscriptions
     this.#productsCollection.unsubscribeAll();
     this.#purchasesCollection.unsubscribeAll();
 

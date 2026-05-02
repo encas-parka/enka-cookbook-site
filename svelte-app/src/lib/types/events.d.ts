@@ -145,6 +145,7 @@ export interface UpdateEventData {
   teams?: string[]; // Noms des équipes (pour affichage)
   teamsId?: string[]; // IDs des équipes (pour filtrage)
   contributors?: EventContributor[]; // Tableau d'objets EventContributor
+  guestEmails?: string[]; // Emails autorisés à accéder à l'event (API rules PB)
   todos?: EventTodo[];
   status?: EventStatus;
 }

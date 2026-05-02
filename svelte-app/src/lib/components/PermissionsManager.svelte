@@ -25,7 +25,6 @@
   import ModalContent from "$lib/components/ui/modal/ModalContent.svelte";
   import ModalFooter from "$lib/components/ui/modal/ModalFooter.svelte";
   import Fieldset from "$lib/components/ui/Fieldset.svelte";
-  import { fade } from "svelte/transition";
 
   // Interface des props
   interface Props {
@@ -54,7 +53,6 @@
   // État local - géré entièrement dans ce composant
   let selectedTeams = $state<string[]>([]);
   let newContributors = $state<EventContributor[]>([]);
-  let sendEmailToExistingMembers = $state(true);
 
   // État local pour le modal
   let showInviteModal = $state(false);
@@ -187,22 +185,43 @@
     // 2. Traiter les utilisateurs individuels (par email)
     const emails = newContributors.map((c) => c.email!).filter(Boolean);
 
-    // ✅ CRITIQUE : Validation AVANT d'appeler la cloud function
-    // Empêche l'erreur "Au moins un email ou un userId est requis"
-    if (teamsToAdd.length === 0 && emails.length === 0) {
+    // 3. Pré-calculer les emails des membres des teams sélectionnées
+    const teamMemberEmails: string[] = [];
+    for (const teamId of teamsToAdd) {
+      const team = nativeTeamsStore.getTeamById(teamId);
+      if (team && team.members) {
+        for (const member of team.members) {
+          if (member.userEmail) {
+            teamMemberEmails.push(member.userEmail);
+          }
+        }
+      }
+    }
+
+    // Fusionner tous les emails (individuels + membres des teams, dédupliqués)
+    const allEmails = [
+      ...emails,
+      ...teamMemberEmails.filter(
+        (e) =>
+          !emails.some(
+            (existing) => existing.toLowerCase() === e.toLowerCase(),
+          ),
+      ),
+    ];
+
+    // ✅ CRITIQUE : Validation AVANT d'appeler l'invitation
+    if (teamsToAdd.length === 0 && allEmails.length === 0) {
       toastService.warning(
         "Sélectionnez au moins une équipe ou entrez un email",
       );
       return;
     }
 
-    // ✅ Utiliser la fonction unifiée (atomicité)
     try {
       await toastService.track(
         eventsStore.inviteParticipants(eventId, {
           teamIds: teamsToAdd,
-          emails: emails,
-          sendEmailToExistingMembers: sendEmailToExistingMembers,
+          emails: allEmails,
         }),
         {
           loading: "Envoi des invitations en cours...",
@@ -632,31 +651,6 @@
             Vous ne faites partie d'aucune équipe. Créez une équipe pour inviter
             plusieurs personnes.
           </p>
-        {/if}
-        <!-- ✅ NOUVEAU: Contrôle de l'envoi d'emails aux membres existants -->
-        {#if selectedTeams.length > 0 || newContributors.length > 0}
-          <label
-            class="label border-base-300 mt-4 cursor-pointer gap-4 rounded border p-2"
-            transition:fade
-          >
-            <input
-              type="checkbox"
-              class="checkbox"
-              bind:checked={sendEmailToExistingMembers}
-              aria-label="Envoyer un email de notification"
-            />
-            <div class="flex flex-col gap-1">
-              <span class="label-text text-base"
-                >Envoyer un email de notification</span
-              >
-              <p class="label-text text-xs text-wrap">
-                Si désactivé, les membres auront accès à l'événement mais ne
-                recevront pas d'email. Les personnes invitées n'ayant pas de
-                compte enka-cookbook recevront toujours un email pour la
-                création de leur compte.
-              </p>
-            </div>
-          </label>
         {/if}
       </fieldset>
     </div>

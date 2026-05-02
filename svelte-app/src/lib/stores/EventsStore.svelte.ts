@@ -475,6 +475,9 @@ export class EventsStore {
     if (data.contributors !== undefined) {
       serialized.contributors = data.contributors;
     }
+    if (data.guestEmails !== undefined) {
+      serialized.guestEmails = data.guestEmails;
+    }
     if (data.todos !== undefined) {
       serialized.todos = data.todos;
     }
@@ -682,44 +685,161 @@ export class EventsStore {
    * STUB — le système d'invitation PocketBase sera implémenté à l'étape 1.3.
    * En attendant, les contributeurs sont ajoutés directement au record.
    */
+  /**
+   * Invite des participants à un événement.
+   *
+   * Flux PocketBase :
+   *   1. Ajoute les emails dans guestEmails[] et contributors[] (atomique)
+   *   2. Ajoute les teamIds dans les relations teams + teamsId
+   *   3. Crée/récupère un share link pour l'event
+   *   4. Appelle le hook email en fire-and-forget
+   *
+   * @param eventId - ID de l'événement
+   * @param options.emails - Emails à inviter (individuels + membres des teams, pré-calculé par l'appelant)
+   * @param options.teamIds - IDs des équipes à ajouter aux relations
+   */
   async inviteParticipants(
     eventId: string,
     options: {
       teamIds?: string[];
       emails?: string[];
-      userIds?: string[];
-      sendEmailToExistingMembers?: boolean;
     },
   ): Promise<EnrichedEvent> {
-    console.warn(
-      `[EventsStore] Système d'invitation PB à implémenter (étape 1.3). Ajout direct des contributeurs.`,
-    );
-
     const event = this.#enrichedMap.get(eventId);
     if (!event) throw new Error("Événement introuvable");
 
-    const { emails = [], userIds = [] } = options;
+    const { emails = [], teamIds = [] } = options;
 
-    if (emails.length === 0 && userIds.length === 0) {
+    if (emails.length === 0 && teamIds.length === 0) {
       return event;
     }
 
-    // Ajouter les contributeurs directement dans le record (provisoire)
-    const newContributors: EventContributor[] = [
-      ...event.contributors,
-      ...emails.map((email) => ({
-        email,
-        status: "invited" as const,
-        invitedAt: new Date().toISOString(),
-      })),
-      ...userIds.map((id) => ({
-        id,
-        status: "invited" as const,
-        invitedAt: new Date().toISOString(),
-      })),
-    ];
+    // --- 1. Construire les nouveaux contributeurs (dédupliqués) ---
+    const existingEmails = new Set(
+      event.contributors
+        .filter((c) => c.email)
+        .map((c) => c.email!.toLowerCase()),
+    );
+    const existingIds = new Set(
+      event.contributors.filter((c) => c.id).map((c) => c.id),
+    );
 
-    return await this.updateEvent(eventId, { contributors: newContributors });
+    const newContributors = [...event.contributors];
+    for (const email of emails) {
+      if (!existingEmails.has(email.toLowerCase())) {
+        newContributors.push({
+          id: nanoid(), // ID temporaire pour l'affichage
+          email,
+          status: "invited" as const,
+          invitedAt: new Date().toISOString(),
+        });
+        existingEmails.add(email.toLowerCase());
+      }
+    }
+
+    // --- 2. Construire les nouveaux guestEmails (dédupliqués) ---
+    const currentGuests: string[] = Array.isArray(
+      (event as Record<string, unknown>).guestEmails,
+    )
+      ? ((event as Record<string, unknown>).guestEmails as string[])
+      : [];
+
+    const guestSet = new Set(
+      currentGuests.map((e: string) => e.toLowerCase()),
+    );
+    for (const email of emails) {
+      guestSet.add(email.toLowerCase());
+    }
+    const updatedGuests = [...currentGuests];
+    for (const email of emails) {
+      if (!currentGuests.some((g: string) => g.toLowerCase() === email.toLowerCase())) {
+        updatedGuests.push(email);
+      }
+    }
+
+    // --- 3. Construire les nouvelles teams (dédupliquées) ---
+    const currentTeams: string[] = event.teams || [];
+    const currentTeamsId: string[] = event.teamsId || [];
+    const updatedTeams = [...currentTeams];
+    const updatedTeamsId = [...currentTeamsId];
+
+    for (const teamId of teamIds) {
+      if (!updatedTeamsId.includes(teamId)) {
+        updatedTeamsId.push(teamId);
+      }
+      // Ajouter aussi le nom de la team dans teams[] si pas déjà présent
+      const teamName = currentTeams.find((t) => t === teamId);
+      if (!teamName && !updatedTeams.includes(teamId)) {
+        updatedTeams.push(teamId);
+      }
+    }
+
+    // --- 4. Mise à jour atomique de l'event ---
+    const updatedEvent = await this.updateEvent(eventId, {
+      contributors: newContributors,
+      guestEmails: updatedGuests,
+      teams: updatedTeams,
+      teamsId: updatedTeamsId,
+    } as UpdateEventData);
+
+    // --- 5. Créer ou récupérer un share link pour l'event ---
+    let shareLinkId: string | null = null;
+    try {
+      const { getEventShareLinks, createShareLink } = await import(
+        "$lib/services/pb-invitations"
+      );
+      const userId = globalState.userId || event.createdBy;
+      const existingLinks = await getEventShareLinks(eventId);
+      if (existingLinks.length > 0) {
+        shareLinkId = existingLinks[0];
+      } else {
+        const link = await createShareLink(eventId, userId);
+        shareLinkId = link.id;
+      }
+    } catch (err) {
+      console.warn("[EventsStore] Impossible de créer le share link:", err);
+    }
+
+    // --- 6. Envoyer les emails (fire-and-forget) ---
+    if (shareLinkId && emails.length > 0) {
+      pb
+        .send("/api/enka/send-emails", {
+          method: "POST",
+          body: {
+            template: "invitation_to_event",
+            recipients: emails.map((email) => ({
+              email,
+              shareLinkId,
+            })),
+            eventName: event.name,
+            eventDescription: event.description || "",
+            dateStart: event.dateStart || "",
+            dateEnd: event.dateEnd || "",
+          },
+        })
+        .then((result) => {
+          const okCount = result.results?.filter((r: { ok: boolean }) => r.ok).length || 0;
+          const failCount = emails.length - okCount;
+          if (failCount > 0) {
+            console.warn(
+              `[EventsStore] Emails envoyés : ${okCount}/${emails.length} (${failCount} échec(s))`,
+            );
+          } else {
+            console.log(
+              `[EventsStore] Emails envoyés : ${okCount}/${emails.length}`,
+            );
+          }
+        })
+        .catch((err) => {
+          console.error("[EventsStore] Erreur d'envoi des emails:", err);
+        });
+
+      console.log(
+        `[EventsStore] Invitation: ${emails.length} email(s), ${teamIds.length} team(s) → event ${eventId}`,
+      );
+    }
+
+    return updatedEvent;
   }
 
   /**

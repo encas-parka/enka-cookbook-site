@@ -45,6 +45,7 @@
     "daisyui": "^5.5.19",
     "dexie": "^4.4.2",
     "fuzzysort": "^3.1.0",
+    "pocketbase": "^0.26.8",
     "rune-scroller": "^2.2.2",
     "runed": "^0.37.1",
     "sv-router": "^0.13.0",

@@ -8,7 +8,9 @@
     "dev:watch": "concurrently \"cd svelte-app && bun run dev:watch\" \"hugo serve --disableFastRender --forceSyncStatic\" --names \"VITE,HUGO\" --prefix-colors \"cyan,magenta\"",
     "build:app": "cd svelte-app && bun run build",
     "build:site": "hugo",
-    "build": "npm run build:app && npm run build:site"
+    "build": "npm run build:app && npm run build:site",
+    "dev:pb": "bash scripts_dev/pb-dev.sh",
+    "dev:all": "concurrently \"hugo server -D\" \"cd svelte-app && bun run dev\" \"bash scripts_dev/pb-dev.sh\" --names \"HUGO,VITE,PB\" --prefix-colors \"magenta,cyan,green\""
   },
   "devDependencies": {
     "concurrently": "^9.2.1"

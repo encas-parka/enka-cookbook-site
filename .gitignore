@@ -28,3 +28,7 @@ graphify-out
 
 # dev
 # static/app
+
+# PocketBase
+pocketbase/pb_data
+pocketbase/pocketbase

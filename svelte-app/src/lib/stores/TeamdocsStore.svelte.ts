@@ -1,17 +1,13 @@
-import { Permission, Role } from "appwrite";
 import type { Teamdocs } from "$lib/types/appwrite.d";
 import { globalState } from "./GlobalState.svelte";
-import { createSyncCollection, bridgeToMap, db } from "$lib/db-sync/aw-sync";
+import { createSyncCollection, bridgeToMap, db, pb } from "$lib/db-sync/pb-sync";
 
 export interface EnrichedTeamdoc extends Omit<Teamdocs, "lockedBy"> {
   lockedBy: string | null;
 }
 
 export class TeamdocsStore {
-  #collection = createSyncCollection<Teamdocs>({
-    table: db.teamdocs,
-    collectionName: "teamdocs",
-  });
+  #collection = createSyncCollection<Teamdocs>(pb, db.teamdocs, "teamdocs");
 
   #bridge = bridgeToMap<Teamdocs>(() => db.teamdocs.toArray());
   #documents = this.#bridge.map;
@@ -206,11 +202,6 @@ export class TeamdocsStore {
         teamId,
         createdBy: globalState.userId,
       } as Omit<Teamdocs, "$id" | "$createdAt" | "$updatedAt">,
-      [
-        Permission.read(Role.team(teamId)),
-        Permission.update(Role.team(teamId)),
-        Permission.delete(Role.team(teamId)),
-      ],
     );
 
     console.log(`[TeamdocsStore] Document créé : ${doc.$id}`);
@@ -231,11 +222,6 @@ export class TeamdocsStore {
         eventId,
         status: "doc",
       } as Omit<Teamdocs, "$id" | "$createdAt" | "$updatedAt">,
-      [
-        Permission.read(Role.label(eventId)),
-        Permission.update(Role.label(eventId)),
-        Permission.delete(Role.label(eventId)),
-      ],
     );
 
     console.log(`[TeamdocsStore] Document événement créé : ${doc.$id}`);

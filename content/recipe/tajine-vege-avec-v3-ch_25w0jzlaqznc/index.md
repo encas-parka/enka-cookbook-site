@@ -1,10 +1,11 @@
 ---
-title: Tajine de boeuf avec orange
-date: '2026-04-20T13:57:39.601Z'
+title: Tajine végé avec orange
+date: '2026-04-28T13:00:36.445Z'
 draft: true
 typeR: plat
 categories: []
 regime:
+  - vegan
   - sans-lactose
 plate: 100
 quantite_desc: null
@@ -15,7 +16,7 @@ description: null
 region: null
 saison:
   - ete
-id: tajine-avec-orange-a-a_17jjnrk1mgqm
+id: tajine-vege-avec-v3-ch_25w0jzlaqznc
 materiel: []
 ingredients:
   - uuid: rtavky
@@ -163,16 +164,6 @@ ingredients:
     type: legumes
     pF: false
     pS: false
-  - uuid: yc2ncb
-    name: Boeuf
-    originalQuantity: 12
-    originalUnit: kg
-    normalizedQuantity: 12000
-    normalizedUnit: gr.
-    comment: Plutôt sous forme de gros morceaux comme pour le boeuf bourguignon
-    allergens:
-      - Viande
-    type: animaux
   - uuid: 7sk3a5
     name: Aubergine
     originalQuantity: 70
@@ -202,16 +193,14 @@ ingredients:
       - Moutarde
     type: epices
 preparation: |-
-  Recette testée avec des légumes d'hiver et sans viande pour 4 personnes d'abord dans un plat à tajine puis pour 50 personnes avec une grande casserole/marmitte.
+  Recette testée avec des légumes d'hiver et pour 4 personnes d'abord dans un plat à tajine puis pour 50 personnes avec une grande casserole/marmitte.
 
   Les quantités ici ont donc été adaptées pour 100 personnes, et la description de la recette se base sur celle faite pour 50 personnes.
 
-  - La veille ou quelques heures avant le début de la cuisine, mélanger les épices (ras el hanout, cumin) et l'huile d'olive dans un gros contenant et laisser mariner les morceaux de boeufs avec. Couvrir et mettre au frais.
   - Couper les légumes (carottes, aubergines, oignons, ail, tomates) de la façon indiquée.
-  - Dans une grande marmitte, faire chauffer l'huile d'olive, avant d'y ajouter la viande et sa marinade pour la faire dorer (pendant 20min). La retourner régulièrement.
-  - Ajouter les carottes et les oignons. Laisser cuire.
+  - Dans une grande marmitte, faire chauffer l'huile d'olive et les épices (ras el hanout et cumin), avant d'y ajouter les carottes et les oignons. Laisser cuire. 
   - Presser les oranges pour en récolter le jus et rapper le zeste.
-  - Rajouter l'ail, les tomates hachées, les pois chiches cuits et les bouillons de légumes à la marmitte de légumes. Couvrir et laisser mijoter à feux doux (30min). Assaisoner en plus de la marinade et des bouillons au fur et à mesure de sel, ras el hanout, cumin et de canelle en dernier.
+  - Rajouter l'ail, les tomates hachées, les pois chiches cuits et les bouillons de légumes à la marmitte de légumes. Couvrir et laisser mijoter à feux doux (30min). Assaisoner en plus au fur et à mesure de sel, ras el hanout, cumin et de canelle en dernier.
   - Rajouter les aubergines qui vont fondre doucement, ainsi que le jus et les zestes d'orange. Laisser mijoter à couvert à feu doux (1h).
   - A côté, faire revenir le reste des oignons dans une autre casserole, et les faire caraméliser.
   - Faire torréfier les amandes dans une poêle et hâcher le persil.
@@ -221,19 +210,16 @@ preparation: |-
   Et bon appétit !
 prepAlt: []
 astuces: []
-preparation24h: |-
-  Viande de boeuf à faire mariner la veille ou quelques heures avant.
-
-  Si achat de pois chiche pas cuits, alors les faire tremper 12 à 24h avant le commencement de la préparation, dans un grand volume d’eau froide. Puis les rincer et les faire cuire avec les autres légumes, au moment indiqué dans la recette.
+preparation24h: Si achat de pois chiche pas cuits, alors les faire tremper 12 à 24h avant le commencement de la préparation, dans un grand volume d’eau froide. Puis les rincer et les faire cuire avec les autres légumes, au moment indiqué dans la recette.
 permissionWrite:
   - 69b01d0a001a6848cc4c
 auteur: chrismino28
-createdAt: '2026-03-11T14:21:26.193+00:00'
-updatedAt: '2026-04-20T13:57:39.253+00:00'
+createdAt: '2026-04-28T13:00:31.065+00:00'
+updatedAt: '2026-04-28T13:00:31.065+00:00'
 createdBy: 69b01d0a001a6848cc4c
 teams: []
 status: public
-rootRecipeId: null
-versionLabel: null
+rootRecipeId: tajine-avec-orange-a-a_17jjnrk1mgqm
+versionLabel: v3 - chrismino28
 ---
 

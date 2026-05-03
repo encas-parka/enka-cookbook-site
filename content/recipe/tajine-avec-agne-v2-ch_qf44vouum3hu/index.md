@@ -1,6 +1,6 @@
 ---
-title: Tajine de boeuf avec orange
-date: '2026-04-20T13:57:39.601Z'
+title: Tajine avec agneau et orange
+date: '2026-04-20T13:56:48.245Z'
 draft: true
 typeR: plat
 categories: []
@@ -15,7 +15,7 @@ description: null
 region: null
 saison:
   - ete
-id: tajine-avec-orange-a-a_17jjnrk1mgqm
+id: tajine-avec-agne-v2-ch_qf44vouum3hu
 materiel: []
 ingredients:
   - uuid: rtavky
@@ -163,16 +163,6 @@ ingredients:
     type: legumes
     pF: false
     pS: false
-  - uuid: yc2ncb
-    name: Boeuf
-    originalQuantity: 12
-    originalUnit: kg
-    normalizedQuantity: 12000
-    normalizedUnit: gr.
-    comment: Plutôt sous forme de gros morceaux comme pour le boeuf bourguignon
-    allergens:
-      - Viande
-    type: animaux
   - uuid: 7sk3a5
     name: Aubergine
     originalQuantity: 70
@@ -201,12 +191,22 @@ ingredients:
     allergens:
       - Moutarde
     type: epices
+  - uuid: mz93p4
+    name: Agneau
+    originalQuantity: 20
+    originalUnit: kg
+    normalizedQuantity: 20000
+    normalizedUnit: gr.
+    comment: Coupés en gros cubes réguliers
+    allergens:
+      - Viande
+    type: animaux
 preparation: |-
   Recette testée avec des légumes d'hiver et sans viande pour 4 personnes d'abord dans un plat à tajine puis pour 50 personnes avec une grande casserole/marmitte.
 
   Les quantités ici ont donc été adaptées pour 100 personnes, et la description de la recette se base sur celle faite pour 50 personnes.
 
-  - La veille ou quelques heures avant le début de la cuisine, mélanger les épices (ras el hanout, cumin) et l'huile d'olive dans un gros contenant et laisser mariner les morceaux de boeufs avec. Couvrir et mettre au frais.
+  - La veille ou quelques heures avant le début de la cuisine, mélanger les épices (ras el hanout, cumin) et l'huile d'olive dans un gros contenant et laisser mariner les morceaux d'agneau avec. Couvrir et mettre au frais.
   - Couper les légumes (carottes, aubergines, oignons, ail, tomates) de la façon indiquée.
   - Dans une grande marmitte, faire chauffer l'huile d'olive, avant d'y ajouter la viande et sa marinade pour la faire dorer (pendant 20min). La retourner régulièrement.
   - Ajouter les carottes et les oignons. Laisser cuire.
@@ -222,18 +222,18 @@ preparation: |-
 prepAlt: []
 astuces: []
 preparation24h: |-
-  Viande de boeuf à faire mariner la veille ou quelques heures avant.
+  Viande d'agneau à faire mariner la veille ou quelques heures avant.
 
   Si achat de pois chiche pas cuits, alors les faire tremper 12 à 24h avant le commencement de la préparation, dans un grand volume d’eau froide. Puis les rincer et les faire cuire avec les autres légumes, au moment indiqué dans la recette.
 permissionWrite:
   - 69b01d0a001a6848cc4c
 auteur: chrismino28
-createdAt: '2026-03-11T14:21:26.193+00:00'
-updatedAt: '2026-04-20T13:57:39.253+00:00'
+createdAt: '2026-04-20T13:29:35.541+00:00'
+updatedAt: '2026-04-20T13:56:47.698+00:00'
 createdBy: 69b01d0a001a6848cc4c
 teams: []
 status: public
-rootRecipeId: null
-versionLabel: null
+rootRecipeId: tajine-avec-orange-a-a_17jjnrk1mgqm
+versionLabel: v2 - chrismino28
 ---
 

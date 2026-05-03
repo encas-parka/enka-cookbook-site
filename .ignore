@@ -1,5 +1,7 @@
 !.agents
 !appwrite
 !docs/*
+!agent
 !docs
+!AGENTS.md
 static/app/assets

@@ -1,12 +1,13 @@
 ---
-title: Crumble aux abricots
-date: '2026-04-20T13:43:54.541Z'
+title: Crumble aux abricots sans gluten
+date: '2026-04-20T13:44:09.177Z'
 draft: true
 typeR: dessert
 categories: []
 regime:
   - vegetarien
-plate: 100
+  - sans-gluten
+plate: 20
 quantite_desc: null
 check: false
 cuisson: true
@@ -15,33 +16,23 @@ description: null
 region: null
 saison:
   - ete
-id: crumble-aux-fruits_fm-o9kzsk7xd
+id: crumble-aux-frui-v2-ch_dmvheh9zdtip
 materiel: []
 ingredients:
   - uuid: b77daa7e0067
     name: Bâtonnet de canelle
-    originalQuantity: 50
+    originalQuantity: 10
     originalUnit: unité
-    normalizedQuantity: 50
+    normalizedQuantity: 10
     normalizedUnit: unité
     comment: ''
     allergens: []
     type: epices
-  - uuid: 2av6w8
-    name: Farine de blé
-    originalQuantity: 5
-    originalUnit: kg
-    normalizedQuantity: 5000
-    normalizedUnit: gr.
-    comment: ''
-    allergens:
-      - Gluten
-    type: lof
   - uuid: kmq1zb
     name: Beurre doux
-    originalQuantity: 3
-    originalUnit: kg
-    normalizedQuantity: 3000
+    originalQuantity: 500
+    originalUnit: gr.
+    normalizedQuantity: 500
     normalizedUnit: gr.
     comment: ''
     allergens:
@@ -49,18 +40,27 @@ ingredients:
     type: frais
   - uuid: u9z2he
     name: Sucre en poudre
-    originalQuantity: 1.5
-    originalUnit: kg
-    normalizedQuantity: 1500
+    originalQuantity: 300
+    originalUnit: gr.
+    normalizedQuantity: 300
     normalizedUnit: gr.
     comment: ''
     allergens: []
     type: sucres
+  - uuid: oygozr
+    name: Farine de riz
+    originalQuantity: 500
+    originalUnit: gr.
+    normalizedQuantity: 500
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: lof
   - uuid: xo0ibs
     name: Abricot
-    originalQuantity: 5
+    originalQuantity: 1
     originalUnit: kg
-    normalizedQuantity: 5000
+    normalizedQuantity: 1000
     normalizedUnit: gr.
     comment: ''
     allergens: []
@@ -79,12 +79,12 @@ preparation24h: null
 permissionWrite:
   - 69b01d0a001a6848cc4c
 auteur: chrismino28
-createdAt: '2026-03-26T15:23:57.465+00:00'
-updatedAt: '2026-04-20T13:43:54.087+00:00'
+createdAt: '2026-04-20T13:42:12.043+00:00'
+updatedAt: '2026-04-20T13:44:08.815+00:00'
 createdBy: 69b01d0a001a6848cc4c
 teams: []
 status: public
-rootRecipeId: null
-versionLabel: null
+rootRecipeId: crumble-aux-fruits_fm-o9kzsk7xd
+versionLabel: v2 - chrismino28
 ---
 

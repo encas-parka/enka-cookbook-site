@@ -1,45 +1,50 @@
 /**
- * Types spécifiques pour la gestion des événements (collection 'main')
- * Ces types correspondent aux structures stockées sous forme de JSON stringified dans Appwrite.
+ * Types spécifiques pour la gestion des événements (collection 'events')
+ *
+ * Les champs contributors, meals, todos sont stockés en JSON dans PocketBase.
+ * Les types ci-dessous décrivent les structures parsées côté client.
  */
+
+import type { Main } from "./pb";
+import type { EventsStatusOptions, EventTodosPriorityOptions, EventTodosStatusOptions, RecipesTypeROptions } from "./pb-generated";
+
+// Re-export select types from pb-generated (single source of truth)
+export type {
+  EventTodosPriorityOptions as EventTodoPriority,
+  EventTodosStatusOptions as EventTodoStatus,
+} from "./pb-generated";
+
+// EventTodoTaskOn: not a PB select field — kept as local type
+export type EventTodoTaskOn = "beforeEvent" | "onEvent" | "afterEvent";
+
+// =============================================================================
+// EVENT STATUS (PB + client-side)
+// =============================================================================
 
 /**
  * Statut possible d'un événement
- *
- * - "local" : Événement de démonstration en mode local (sans Appwrite)
- * - "proposition" : Événement en cours de création
- * - "confirmed" : Événement confirmé
- * - "canceled" : Événement annulé
- * - "archive" : Événement archivé
- * - "locked" : Événement verrouillé
+ * - "local" : Événement de démonstration en mode local (sans backend)
+ * - Les autres statuts viennent de EventsStatusOptions (PB select field)
  */
-export type EventStatus =
-  | "local"
-  | "proposition"
-  | "confirmed"
-  | "canceled"
-  | "archive"
-  | "locked";
+export type EventStatus = EventsStatusOptions | "local";
 
-/**
- * Information sur un contributeur d'événement
- * Stocké dans le champ 'contributors' (string[]) sous forme de JSON stringified
- */
+// =============================================================================
+// JSON STRUCTURES — parsed from PocketBase JSON fields
+// =============================================================================
+
+/** Contributeur d'événement (stocké dans contributors JSON) */
 export interface EventContributor {
   id: string;
-  email?: string; // Optionnel car peut être un ID utilisateur
+  email?: string;
   name?: string;
   status: "invited" | "accepted" | "declined";
   invitedAt: string;
   respondedAt?: string;
-  teamId?: string; // Si l'invitation provient d'une équipe
+  teamId?: string;
   isKTeamMember?: boolean;
 }
 
-/**
- * Repas dans un événement
- * Stocké dans le champ 'meals' (string) sous forme de JSON stringified (EventMeal[])
- */
+/** Repas dans un événement (stocké dans meals JSON) */
 export interface EventMeal {
   id?: string; // UUID pour le tracking UI
   date: string; // DateTime ISO 8601 complet
@@ -47,60 +52,33 @@ export interface EventMeal {
   recipes: EventMealRecipe[];
 }
 
-/**
- * Recette dans un repas d'événement
- */
-/**
- * Recette dans un repas d'événement
- */
-import { type RecettesTypeR } from "./recipes.types";
-
+/** Recette dans un repas d'événement */
 export interface EventMealRecipe {
   recipeUuid: string;
-  plates: number; // Nombre de couverts
-  typeR: RecettesTypeR;
-  hasOwnPlatesNb?: boolean; // Si true, ne pas auto-sync avec meal.guests
-  locked?: boolean; // Verrouillage manuel si besoin
+  plates: number;
+  typeR: RecipesTypeROptions;
+  hasOwnPlatesNb?: boolean;
+  locked?: boolean;
 }
 
-import type { Main } from "./appwrite.d";
-
-export enum EventTodoPriority {
-  LOW = "low",
-  MEDIUM = "medium",
-  HIGH = "high",
-}
-
-export enum EventTodoStatus {
-  TODO = "todo",
-  DONE = "done",
-  WAITING = "waiting",
-  CANCELED = "canceled",
-  INPROGRESS = "inprogress",
-}
-
-export enum EventTodoTaskOn {
-  BEFORE_EVENT = "beforeEvent",
-  ON_EVENT = "onEvent",
-  AFTER_EVENT = "afterEvent",
-}
-
+/** Todo embarqué dans l'événement (ancien format JSON, avant collection event_todos) */
 export interface EventTodo {
-  id: string; // Identifiant unique (UUID généré client)
+  id: string;
   taskName: string;
   taskDescription: string | null;
   dueDate: string | null;
-  priority: EventTodoPriority | null;
-  status: EventTodoStatus | null; // Par défaut TODO
+  priority: EventTodosPriorityOptions | null;
+  status: EventTodosStatusOptions | null;
   taskOn: EventTodoTaskOn | null;
   requiredPeopleNb: number;
-  assignedTo: string[] | null; // IDs des utilisateurs
+  assignedTo: string[] | null;
 }
 
-/**
- * Événement enrichi avec les données parsées
- * Utilisé dans le store et l'UI
- */
+// =============================================================================
+// TYPES ENRICHIS
+// =============================================================================
+
+/** Événement enrichi avec les données JSON parsées */
 export interface EnrichedEvent extends Omit<
   Main,
   "meals" | "contributors" | "todos" | "status"
@@ -108,31 +86,31 @@ export interface EnrichedEvent extends Omit<
   meals: EventMeal[];
   contributors: EventContributor[];
   todos: EventTodo[];
-  teams?: string[]; // Noms des équipes (pour affichage)
-  teamsId?: string[]; // IDs des équipes (pour filtrage)
-  status: EventStatus; // Surcharge pour permettre "local"
+  teams?: string[];
+  teamsId?: string[];
+  status: EventStatus;
 }
 
-/**
- * Données pour créer un événement
- */
+// =============================================================================
+// CRÉATION / UPDATE
+// =============================================================================
+
+/** Données pour créer un événement */
 export interface CreateEventData {
   name: string;
   description?: string;
   dateStart: string;
   dateEnd: string;
-  allDates?: string[]; // Tableau de toutes les dates uniques des repas
+  allDates?: string[];
   meals?: EventMeal[];
-  teams?: string[]; // Noms des équipes (pour affichage)
-  teamsId?: string[]; // IDs des équipes (pour filtrage)
-  contributors?: EventContributor[]; // Tableau d'objets EventContributor
+  teams?: string[];
+  teamsId?: string[];
+  contributors?: EventContributor[];
   todos?: EventTodo[];
   status?: EventStatus;
 }
 
-/**
- * Données pour mettre à jour un événement
- */
+/** Données pour mettre à jour un événement */
 export interface UpdateEventData {
   updated?: Date;
   name?: string;
@@ -140,12 +118,12 @@ export interface UpdateEventData {
   minContrib?: number;
   dateStart?: string;
   dateEnd?: string;
-  allDates?: string[]; // Tableau de toutes les dates uniques des repas
+  allDates?: string[];
   meals?: EventMeal[];
-  teams?: string[]; // Noms des équipes (pour affichage)
-  teamsId?: string[]; // IDs des équipes (pour filtrage)
-  contributors?: EventContributor[]; // Tableau d'objets EventContributor
-  guestEmails?: string[]; // Emails autorisés à accéder à l'event (API rules PB)
+  teams?: string[];
+  teamsId?: string[];
+  contributors?: EventContributor[];
+  guestEmails?: string[];
   todos?: EventTodo[];
   status?: EventStatus;
 }

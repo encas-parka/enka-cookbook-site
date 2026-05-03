@@ -2,26 +2,18 @@
  * Types pour la gestion du matériel événement (collection 'event_materiel')
  *
  * Chaque document représente un item de matériel nécessaire pour un événement.
- * Pas de JSON à parser ici (contrairement à MaterielLoan), tout est en champs plats.
+ * Pas de JSON à parser ici, tout est en champs plats.
  */
 
-import type { EventMateriel } from "./appwrite";
+import type { EventMateriel } from "./pb";
+import type {
+  EventMaterielStatusOptions,
+  EventMaterielTypeOptions,
+} from "./pb-generated";
 
-// =============================================================================
-// STATUTS
-// =============================================================================
-
-export type EventMaterielStatus = "to_find" | "to_check" | "confirmed";
-
-export type EventMaterielType =
-  | "electronic"
-  | "manual"
-  | "other"
-  | "tools"
-  | "dish"
-  | "cooking"
-  | "gaz"
-  | "hygiene";
+// Re-export select types (single source of truth)
+export type { EventMaterielStatusOptions as EventMaterielStatus, EventMaterielTypeOptions as EventMaterielType } from "./pb-generated";
+export { EventMaterielStatusOptions, EventMaterielTypeOptions } from "./pb-generated";
 
 // =============================================================================
 // TYPES ENRICHIS
@@ -29,22 +21,17 @@ export type EventMaterielType =
 
 /**
  * Item de matériel événement enrichi
- *
- * Pas de JSON à parser, mais on ajoute le type strict pour les enums
- * et des champs dérivés pour l'UI.
+ * Hérite directement de EventMateriel (PbDoc + champs PB)
  */
-export interface EnrichedEventMateriel extends EventMateriel {
-  // Les champs Appwrite sont déjà plats, on hérite directement
-  // Les enums sont castés en types string stricts pour l'UI
-}
+export interface EnrichedEventMateriel extends EventMateriel {}
 
 // =============================================================================
 // FILTRES UI
 // =============================================================================
 
 export interface EventMaterielFilters {
-  types?: EventMaterielType[];
-  statuses?: EventMaterielStatus[];
+  types?: EventMaterielTypeOptions[];
+  statuses?: EventMaterielStatusOptions[];
   who?: string[];
   where?: string[];
   search?: string;
@@ -67,8 +54,8 @@ export interface CreateEventMaterielData {
   eventId: string;
   name: string;
   quantity: number;
-  type: EventMaterielType;
-  status?: EventMaterielStatus;
+  type: EventMaterielTypeOptions;
+  status?: EventMaterielStatusOptions;
   groupId?: string | null;
   who?: string | null;
   where?: string | null;

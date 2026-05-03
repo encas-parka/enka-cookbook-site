@@ -1,4 +1,4 @@
-import type { Main, Products, Purchases } from "./appwrite.d";
+import type { Main, Products, Purchases } from "./pb";
 
 /**
  * Types pour les statuts d'achat

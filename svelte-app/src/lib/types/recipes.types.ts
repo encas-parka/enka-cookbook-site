@@ -2,16 +2,18 @@
  * Types pour le système de recettes et ingrédients
  */
 
-import { type Recettes, RecettesTypeR, RecettesStatus } from "./appwrite.d";
+import type { Recettes } from "./pb";
+import { RecipesTypeROptions, RecipesStatusOptions } from "./pb-generated";
 import type { Astuce } from "../utils/recipeUtils";
-export { RecettesTypeR, RecettesStatus };
+
+export { RecipesTypeROptions as RecettesTypeR, RecipesStatusOptions as RecettesStatus };
 
 // =============================================================================
 // INGRÉDIENTS
 // =============================================================================
 
 /**
- * Ingrédient tel que chargé depuis data.json
+ * Ingrédient tel que chargé depuis data.json (Hugo)
  * Format compressé avec clés abrégées pour optimiser la taille du fichier
  */
 export interface Ingredient {
@@ -24,33 +26,23 @@ export interface Ingredient {
   saisons?: string[]; // Saisons (ex: ["printemps", "ete"])
 }
 
-/**
- * Ingrédient enrichi côté client (si nécessaire)
- */
+/** Ingrédient enrichi côté client */
 export interface EnrichedIngredient extends Ingredient {
-  // Ajout de propriétés calculées si besoin
-  searchableText?: string; // Pour la recherche
+  searchableText?: string;
 }
 
 // =============================================================================
-// RECETTES - Types basés sur Appwrite
+// RECETTES - Types basés sur PocketBase
 // =============================================================================
 
 /**
- * Format brut depuis/vers Appwrite
- * Les ingrédients sont au format string[] (JSON stringifié)
- *
- * @example
- * const recipe: RecipeFromAppwrite = await getRecipeAppwrite(uuid);
+ * @deprecated Use Recettes directly (alias for backward compatibility)
  */
 export type RecipeFromAppwrite = Recettes;
 
 /**
  * Format parsé pour affichage dans l'UI
- * Les ingrédients sont parsés en objets RecipeIngredient[]
- *
- * @example
- * const recipe: RecipeForDisplay = await recipesStore.getRecipeByUuid(uuid);
+ * Les ingrédients et astuces sont parsés depuis JSON
  */
 export type RecipeForDisplay = Omit<Recettes, "ingredients" | "astuces"> & {
   ingredients: RecipeIngredient[];
@@ -58,8 +50,7 @@ export type RecipeForDisplay = Omit<Recettes, "ingredients" | "astuces"> & {
 };
 
 /**
- * Alias pour RecipeForDisplay pour compatibilité
- * @deprecated Utiliser RecipeForDisplay à la place
+ * @deprecated Use RecipeForDisplay directly
  */
 export type RecipeData = RecipeForDisplay;
 
@@ -68,7 +59,7 @@ export type RecipeData = RecipeForDisplay;
 // =============================================================================
 
 /**
- * Entrée d'index de recette (depuis data.json ou Appwrite)
+ * Entrée d'index de recette (depuis data.json ou PocketBase)
  * Contient uniquement les champs nécessaires pour le filtrage rapide et l'affichage
  */
 export type RecipeIndexEntry = Pick<
@@ -92,26 +83,22 @@ export type RecipeIndexEntry = Pick<
   | "created"
   | "updated"
 > & {
-  ingredients: string[]; // Noms des ingrédients uniquement (pour filtrage rapide)
-  auteur?: string; // Auteur de la recette (optionnel)
-  // Champs optionnels (pas dans Hugo, présents dans Appwrite)
+  ingredients: string[];
+  auteur?: string;
   rootRecipeId?: string | null;
   versionLabel?: string | null;
   teams?: string[] | null;
-  status?: RecettesStatus;
+  status?: RecipesStatusOptions;
 };
 
 // =============================================================================
 // INGRÉDIENTS DANS UNE RECETTE
 // =============================================================================
 
-/**
- * Ingrédient dans une recette (depuis recipe.json)
- * Format : objets nommés pour meilleure lisibilité
- */
+/** Ingrédient dans une recette (depuis recipe.json) */
 export interface RecipeIngredient {
   uuid: string;
-  name: string; // Nom de l'ingrédient
+  name: string;
   originalQuantity: number;
   originalUnit: string;
   normalizedQuantity: number;
@@ -119,13 +106,11 @@ export interface RecipeIngredient {
   comment: string;
   allergens: string[];
   type: string;
-  pF?: boolean; // Produit frais
-  pS?: boolean; // Produit surgelé
+  pF?: boolean;
+  pS?: boolean;
 }
 
-/**
- * Ingrédient scalé pour un nombre de convives
- */
+/** Ingrédient scalé pour un nombre de convives */
 export interface ScaledIngredient extends RecipeIngredient {
   scaledQuantity: number;
   scaleFactor: number;
@@ -145,12 +130,9 @@ export interface RecipeInfo {
 // CACHE & METADATA
 // =============================================================================
 
-/**
- * Métadonnées du cache IndexedDB pour les ingrédients
- */
 export interface IngredientsCacheMetadata {
   lastSync: string | null;
-  dataJsonHash: string | null; // Hash du fichier data.json
+  dataJsonHash: string | null;
   ingredientsCount: number;
 }
 
@@ -160,38 +142,26 @@ export interface RecipeDataCacheMetadata {
   ingredientsCount: number;
 }
 
-/**
- * Métadonnées du cache IndexedDB pour les recettes
- */
 export interface RecipesCacheMetadata {
-  buildTimestamp: number | null; // Timestamp du dernier build Hugo traité
-  lastAppwriteSync: string | null; // Timestamp de la dernière sync Appwrite réussie
+  buildTimestamp: number | null;
+  lastAppwriteSync: string | null; // TODO: rename to lastPBSync after migration
   recipesCount: number;
-  cacheVersion?: number; // Version du format de cache
-  migrationVersion: number; // Version des migrations appliquées
-  syncVersion?: number; // Version du cache de synchronisation (cf. constants/sync.ts)
+  cacheVersion?: number;
+  migrationVersion: number;
+  syncVersion?: number;
 }
 
 // =============================================================================
 // TYPES DE CRÉATION/MISE À JOUR
 // =============================================================================
 
-/**
- * Données pour créer une recette (format Appwrite)
- * Exclut uniquement les champs auto-générés (id, created, updated)
- * Note: createdBy est un champ métier que NOTRE application renseigne, pas Appwrite
- */
+/** Données pour créer une recette (exclut id, created, updated auto-générés) */
 export type CreateRecipeData = Omit<Recettes, "id" | "created" | "updated">;
 
-/**
- * Données pour mettre à jour une recette
- * Tous les champs sont optionnels
- */
+/** Données pour mettre à jour une recette */
 export type UpdateRecipeData = Partial<CreateRecipeData>;
 
-/**
- * Données pour créer un nouvel ingrédient
- */
+/** Données pour créer un nouvel ingrédient */
 export interface CreateIngredientData {
   name: string;
   type: string;

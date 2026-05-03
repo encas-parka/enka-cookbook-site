@@ -119,6 +119,24 @@ export type CategoriesRecord = {
 	type: CategoriesTypeOptions
 }
 
+export const EventMaterielTypeOptions = {
+	"electronic": "electronic",
+	"manual": "manual",
+	"other": "other",
+	"tools": "tools",
+	"dish": "dish",
+	"gaz": "gaz",
+	"cooking": "cooking",
+	"hygiene": "hygiene",
+} as const
+export type EventMaterielTypeOptions = typeof EventMaterielTypeOptions[keyof typeof EventMaterielTypeOptions]
+
+export const EventMaterielStatusOptions = {
+	"to_find": "to_find",
+	"to_check": "to_check",
+	"confirmed": "confirmed",
+} as const
+export type EventMaterielStatusOptions = typeof EventMaterielStatusOptions[keyof typeof EventMaterielStatusOptions]
 export type EventMaterielRecord<Tspecs = unknown> = {
 	createdBy?: RecordIdString
 	deleted?: boolean
@@ -132,26 +150,49 @@ export type EventMaterielRecord<Tspecs = unknown> = {
 	quantity?: number
 	sourceMaterielId?: RecordIdString
 	specs?: null | Tspecs
-	status?: string
-	type?: string
+	status?: EventMaterielStatusOptions
+	type?: EventMaterielTypeOptions
 	where?: string
 	who?: string
 }
 
+export const EventTodosPriorityOptions = {
+	"low": "low",
+	"medium": "medium",
+	"high": "high",
+} as const
+export type EventTodosPriorityOptions = typeof EventTodosPriorityOptions[keyof typeof EventTodosPriorityOptions]
+
+export const EventTodosStatusOptions = {
+	"todo": "todo",
+	"done": "done",
+	"waiting": "waiting",
+	"canceled": "canceled",
+	"inprogress": "inprogress",
+} as const
+export type EventTodosStatusOptions = typeof EventTodosStatusOptions[keyof typeof EventTodosStatusOptions]
 export type EventTodosRecord = {
 	assignedTo?: RecordIdString
 	dueDate?: IsoDateString
 	eventId: RecordIdString
 	id: string
 	locked?: boolean
-	priority?: string
+	priority?: EventTodosPriorityOptions
 	requiredPeopleNb?: number
-	status?: string
+	status?: EventTodosStatusOptions
 	task: string
 	taskDescription?: string
 	taskOn?: IsoDateString
 }
 
+export const EventsStatusOptions = {
+	"archive": "archive",
+	"locked": "locked",
+	"proposition": "proposition",
+	"confirmed": "confirmed",
+	"canceled": "canceled",
+} as const
+export type EventsStatusOptions = typeof EventsStatusOptions[keyof typeof EventsStatusOptions]
 export type EventsRecord<Tcontributors = unknown, Tdate = unknown, TguestEmails = unknown, Tmeals = unknown, Ttodos = unknown> = {
 	contributors?: null | Tcontributors
 	createdBy?: RecordIdString
@@ -164,7 +205,7 @@ export type EventsRecord<Tcontributors = unknown, Tdate = unknown, TguestEmails 
 	location?: string
 	meals?: null | Tmeals
 	name: string
-	status?: string
+	status?: EventsStatusOptions
 	teams?: RecordIdString[]
 	todos?: null | Ttodos
 }
@@ -199,6 +240,24 @@ export type LocksRecord = {
 	userId?: RecordIdString
 }
 
+export const MaterielTypeOptions = {
+	"electronic": "electronic",
+	"manual": "manual",
+	"other": "other",
+	"tools": "tools",
+	"dish": "dish",
+	"gaz": "gaz",
+	"cooking": "cooking",
+	"hygiene": "hygiene",
+} as const
+export type MaterielTypeOptions = typeof MaterielTypeOptions[keyof typeof MaterielTypeOptions]
+
+export const MaterielStatusOptions = {
+	"ok": "ok",
+	"lost": "lost",
+	"torepair": "torepair",
+} as const
+export type MaterielStatusOptions = typeof MaterielStatusOptions[keyof typeof MaterielStatusOptions]
 export type MaterielRecord = {
 	createdBy?: RecordIdString
 	deleted?: boolean
@@ -210,12 +269,22 @@ export type MaterielRecord = {
 	ownerUser?: RecordIdString
 	quantity?: number
 	shareableWith?: RecordIdString[]
-	status?: string
+	status?: MaterielStatusOptions
 	storeIn?: RecordIdString
 	teamId?: RecordIdString
-	type?: string
+	type?: MaterielTypeOptions
 }
 
+export const MaterielLoanStatusOptions = {
+	"asked": "asked",
+	"accepted": "accepted",
+	"refused": "refused",
+	"canceled": "canceled",
+	"returned": "returned",
+	"completed": "completed",
+	"archived": "archived",
+} as const
+export type MaterielLoanStatusOptions = typeof MaterielLoanStatusOptions[keyof typeof MaterielLoanStatusOptions]
 export type MaterielLoanRecord<Tmateriels = unknown> = {
 	borrowerUser?: RecordIdString
 	completedAt?: IsoDateString
@@ -234,7 +303,7 @@ export type MaterielLoanRecord<Tmateriels = unknown> = {
 	returnNotes?: string
 	returnedAt?: IsoDateString
 	startDate?: IsoDateString
-	status?: string
+	status?: MaterielLoanStatusOptions
 }
 
 export type NotificationsRecord<Tdata = unknown> = {
@@ -273,7 +342,7 @@ export type ProductsRecord<TmergedFrom = unknown, TpreviousNames = unknown, Tspe
 	who?: null | Twho
 }
 
-export type PurchasesRecord<Tproducts = unknown, Tstore = unknown> = {
+export type PurchasesRecord<Tstore = unknown> = {
 	createdBy?: RecordIdString
 	deleted?: boolean
 	deliveryDate?: IsoDateString
@@ -284,7 +353,7 @@ export type PurchasesRecord<Tproducts = unknown, Tstore = unknown> = {
 	notes?: string
 	orderDate?: IsoDateString
 	price?: number
-	products?: null | Tproducts
+	products?: RecordIdString[]
 	quantity: number
 	status?: string
 	store?: null | Tstore
@@ -394,7 +463,7 @@ export type MaterielResponse<Texpand = unknown> = Required<MaterielRecord> & Bas
 export type MaterielLoanResponse<Tmateriels = unknown, Texpand = unknown> = Required<MaterielLoanRecord<Tmateriels>> & BaseSystemFields<Texpand>
 export type NotificationsResponse<Tdata = unknown, Texpand = unknown> = Required<NotificationsRecord<Tdata>> & BaseSystemFields<Texpand>
 export type ProductsResponse<TmergedFrom = unknown, TpreviousNames = unknown, Tspecs = unknown, TstockReel = unknown, Tstore = unknown, TtotalNeededOverride = unknown, Twho = unknown, Texpand = unknown> = Required<ProductsRecord<TmergedFrom, TpreviousNames, Tspecs, TstockReel, Tstore, TtotalNeededOverride, Twho>> & BaseSystemFields<Texpand>
-export type PurchasesResponse<Tproducts = unknown, Tstore = unknown, Texpand = unknown> = Required<PurchasesRecord<Tproducts, Tstore>> & BaseSystemFields<Texpand>
+export type PurchasesResponse<Tstore = unknown, Texpand = unknown> = Required<PurchasesRecord<Tstore>> & BaseSystemFields<Texpand>
 export type RecipesResponse<Tastuces = unknown, Tcategories = unknown, Tingredients = unknown, Tmateriel = unknown, TpermissionWrite = unknown, TprepAlt = unknown, Tregime = unknown, Tsaison = unknown, Tteams = unknown, Texpand = unknown> = Required<RecipesRecord<Tastuces, Tcategories, Tingredients, Tmateriel, TpermissionWrite, TprepAlt, Tregime, Tsaison, Tteams>> & BaseSystemFields<Texpand>
 export type ShareLinksResponse<Texpand = unknown> = Required<ShareLinksRecord> & BaseSystemFields<Texpand>
 export type TeamdocsResponse<Texpand = unknown> = Required<TeamdocsRecord> & BaseSystemFields<Texpand>

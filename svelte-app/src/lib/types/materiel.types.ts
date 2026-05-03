@@ -1,40 +1,45 @@
-import type {
-  Materiel,
-  MaterielType,
-  MaterielStatus,
-  MaterielLoan,
-  MaterielLoanStatus,
-} from "./appwrite";
-
-// =============================================================================
-// TYPES APPWRITE - Format brut depuis Appwrite
-// =============================================================================
-
 /**
- * Type union pour faciliter l'utilisation des status de prêt avec des string literals
- * Évite les problèmes de typage avec les enums auto-générés
+ * Types pour la gestion du matériel (collection 'materiel' + 'materiel_loan')
+ *
+ * Deux collections PB :
+ * - materiel : inventaire de matériel (propriété user ou team)
+ * - materiel_loan : emprunts de matériel entre users/teams pour des événements
  */
-export type MaterielLoanStatusUnion =
-  | "asked"
-  | "accepted"
-  | "refused"
-  | "canceled"
-  | "returned"
-  | "completed"
-  | "archived";
+
+import type { Materiel, MaterielLoan } from "./pb";
+import type {
+  MaterielTypeOptions,
+  MaterielStatusOptions,
+  MaterielLoanStatusOptions,
+} from "./pb-generated";
+
+// Re-export select types (single source of truth)
+export type { MaterielLoanStatusOptions } from "./pb-generated";
+
+// =============================================================================
+// DEPRECATED ALIASES — kept for backward compatibility with consumers
+// =============================================================================
 
 /**
- * Type alias pour clarifier qu'il s'agit du format brut Appwrite
- * C'est exactement le même type que Materiel mais rend explicite
- * qu'on travaille avec des données non-transformées
+ * @deprecated Use MaterielLoanStatusOptions directly
+ */
+export type MaterielLoanStatusUnion = MaterielLoanStatusOptions;
+
+/**
+ * @deprecated Use Materiel directly (PocketBase format, no transformation needed)
  */
 export type MaterielFromAppwrite = Materiel;
 
+/**
+ * @deprecated Use MaterielLoan directly
+ */
+export type MaterielLoanFromAppwrite = MaterielLoan;
+
 // =============================================================================
-// TYPES LOCAUX - Format parsé côté client
+// TYPES LOCAUX - Structures JSON dans les collections
 // =============================================================================
 
-// Structure d'un item d'emprunt dans MaterielLoan
+/** Structure d'un item d'emprunt dans le JSON materiels de MaterielLoan */
 export interface MaterielLoanItem {
   materielId: string;
   materielName: string; // Snapshot du nom au moment de l'emprunt
@@ -43,9 +48,9 @@ export interface MaterielLoanItem {
   brokenQuantity?: number; // Nombre d'articles cassés (retour d'emprunt)
 }
 
-// Détail d'un emprunt côté client (calculé depuis MaterielLoan)
+/** Détail d'un emprunt côté client (calculé depuis MaterielLoan) */
 export interface MaterielLoanDetail {
-  loanId: string; // ID du MaterielLoan
+  loanId: string;
   responsibleName: string;
   startDate: string;
   endDate: string;
@@ -53,12 +58,12 @@ export interface MaterielLoanDetail {
   status: "asked" | "accepted" | "canceled";
 }
 
-// Structure du propriétaire (après parsing du JSON depuis Appwrite)
+/** Structure du propriétaire (après parsing du JSON depuis Materiel.owner) */
 export interface MaterielOwner {
-  userName?: string; // Nom du user propriétaire
-  userId?: string; // ID du user (si owner = user)
-  teamName?: string; // Nom de l'équipe (si owner = team)
-  teamId?: string; // ID de l'équipe (si owner = team)
+  userName?: string;
+  userId?: string;
+  teamName?: string;
+  teamId?: string;
 }
 
 // =============================================================================
@@ -67,38 +72,34 @@ export interface MaterielOwner {
 
 /**
  * Statut calculé côté client pour le matériel enrichi
- * - Les statuts Appwrite bruts : ok, lost, torepair
+ * - Les statuts PB bruts : ok, lost, torepair
  * - Les statuts calculés depuis les emprunts : loan (en cours), reserved (futur)
  */
-export type EnrichedMaterielStatus = MaterielStatus | "loan" | "reserved";
+export type EnrichedMaterielStatus = MaterielStatusOptions | "loan" | "reserved";
 
 /**
  * Matériel enrichi avec données parsées et calculées
  *
- * Pattern similaire à EnrichedEvent :
- * - Conserve tous les champs Appwrite bruts (pour référence)
+ * - Conserve tous les champs PB bruts (pour référence)
  * - Ajoute les champs parsés (ownerData, loanDetails)
  * - Ajoute les champs calculés (availableQuantity, isAvailable, etc.)
  */
 export interface EnrichedMateriel extends Omit<
-  MaterielFromAppwrite,
-  "owner" | "status"
+  Materiel,
+  "status"
 > {
-  // Champ brut Appwrite (JSON stringifié)
-  owner: string | null; // Données brutes Appwrite (JSON string)
-
-  // Statut enrichi (peut être un statut Appwrite ou un statut calculé)
+  // Statut enrichi (PB ou calculé depuis emprunts)
   status: EnrichedMaterielStatus;
 
-  // Champs enrichis parsés depuis Appwrite
-  ownerData: MaterielOwner; // Owner parsé depuis le JSON
-  loanDetails: MaterielLoanDetail[]; // Emprunts actifs/planifiés calculés depuis MaterielLoan
+  // Champs enrichis parsés
+  ownerData: MaterielOwner;
+  loanDetails: MaterielLoanDetail[];
 
   // Champs dérivés calculés
-  availableQuantity: number; // Quantité disponible (quantity - totalLoanedQuantity)
-  totalLoanedQuantity: number; // Quantité totale empruntée
-  isAvailable: boolean; // Au moins 1 dispo
-  isFullyLoaned: boolean; // Tout est emprunté
+  availableQuantity: number;
+  totalLoanedQuantity: number;
+  isAvailable: boolean;
+  isFullyLoaned: boolean;
 }
 
 // =============================================================================
@@ -106,33 +107,31 @@ export interface EnrichedMateriel extends Omit<
 // =============================================================================
 
 /**
- * Type alias pour un loan Appwrite brut
- */
-export type MaterielLoanFromAppwrite = MaterielLoan;
-
-/**
  * Emprunt enrichi avec les données parsées
- * Pattern similaire à EnrichedEvent et EnrichedMateriel :
- * - Conserve tous les champs Appwrite bruts
+ * - Conserve tous les champs PB bruts
  * - Ajoute le champ materielItems parsé depuis le JSON
  */
 export interface EnrichedMaterielLoan extends Omit<
-  MaterielLoanFromAppwrite,
+  MaterielLoan,
   "materiels"
 > {
-  // Champ brut Appwrite (tableau de JSON strings)
-  materiels: string[] | null; // Tableau où chaque string est un MaterielLoanItem JSON-stringifié
+  // Champ brut PB (tableau de JSON strings)
+  materiels: string[] | null;
 
-  // Champ enrichi parsé depuis Appwrite
-  materielItems: MaterielLoanItem[]; // Items parsés en tableau d'objets
+  // Champ enrichi parsé
+  materielItems: MaterielLoanItem[];
 }
 
+// =============================================================================
+// FILTRES UI
+// =============================================================================
+
 export interface MaterielFilters {
-  type?: MaterielType | null;
-  status?: MaterielStatus | null;
+  type?: MaterielTypeOptions | null;
+  status?: MaterielStatusOptions | null;
   location?: string | null;
   loan?: string | null;
-  hasAvailable?: boolean; // true = a de la quantité dispo
+  hasAvailable?: boolean;
   ownerType?: "me" | "myTeams" | "others";
-  search?: string; // recherche textuelle
+  search?: string;
 }

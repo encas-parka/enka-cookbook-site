@@ -33,7 +33,7 @@ migrate(
           collectionId: "_pb_users_auth_",
           maxSelect: 1,
         },
-        { name: "status", type: "text" },
+        { name: "status", type: "select", values: ["archive", "locked", "proposition", "confirmed", "canceled"], maxSelect: 1 },
         { name: "dateStart", type: "date" },
         { name: "dateEnd", type: "date" },
       ],

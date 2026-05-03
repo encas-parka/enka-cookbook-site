@@ -24,8 +24,8 @@ migrate(
         },
         { name: "task", type: "text", required: true },
         { name: "taskOn", type: "date" },
-        { name: "priority", type: "text" },
-        { name: "status", type: "text" },
+        { name: "priority", type: "select", values: ["low", "medium", "high"], maxSelect: 1 },
+        { name: "status", type: "select", values: ["todo", "done", "waiting", "canceled", "inprogress"], maxSelect: 1 },
         {
           name: "assignedTo",
           type: "relation",

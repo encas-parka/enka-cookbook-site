@@ -35,7 +35,7 @@ migrate(
         },
         { name: "startDate", type: "date" },
         { name: "endDate", type: "date" },
-        { name: "status", type: "text" },
+        { name: "status", type: "select", values: ["asked", "accepted", "refused", "canceled", "returned", "completed", "archived"], maxSelect: 1 },
         {
           name: "createdBy",
           type: "relation",

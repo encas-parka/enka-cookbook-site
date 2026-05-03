@@ -14,7 +14,7 @@ migrate(
       deleteRule: '@request.auth.id != "" && createdBy = @request.auth.id',
       fields: [
         { name: "name", type: "text", required: true },
-        { name: "type", type: "text" },
+        { name: "type", type: "select", values: ["electronic", "manual", "other", "tools", "dish", "gaz", "cooking", "hygiene"], maxSelect: 1 },
         { name: "description", type: "text" },
         {
           name: "ownerUser",
@@ -28,7 +28,7 @@ migrate(
           collectionId: teamsId,
           maxSelect: 1,
         },
-        { name: "status", type: "text" },
+        { name: "status", type: "select", values: ["ok", "lost", "torepair"], maxSelect: 1 },
         { name: "deleted", type: "bool" },
         {
           name: "createdBy",

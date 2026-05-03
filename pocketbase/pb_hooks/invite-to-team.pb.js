@@ -124,8 +124,11 @@ routerAdd("POST", "/api/enka/invite-to-team", function(e) {
     team.set("roles", currentRoles);
     $app.save(team);
 
-    console.log(
-      "[invite-to-team] " + addedUserIds.length + " membre(s) ajoute(s) a l'equipe " + teamName
+    $app.logger().info(
+      "Members added to team",
+      "count", String(addedUserIds.length),
+      "teamId", teamId,
+      "teamName", teamName
     );
   }
 

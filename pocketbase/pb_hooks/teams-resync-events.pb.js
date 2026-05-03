@@ -106,8 +106,13 @@ onRecordAfterUpdateSuccess(function (e) {
   }
 
   if (sentCount > 0) {
-    console.log("[teams-resync] Team " + teamId + " : " + sentCount + " notification(s) envoyee(s)"
-      + " (+" + addedUserIds.length + " membres, -" + removedUserIds.length + " retires)");
+    $app.logger().info(
+      "Team resync notifications sent",
+      "teamId", teamId,
+      "notified", String(sentCount),
+      "added", String(addedUserIds.length),
+      "removed", String(removedUserIds.length)
+    );
   }
 
   e.next();

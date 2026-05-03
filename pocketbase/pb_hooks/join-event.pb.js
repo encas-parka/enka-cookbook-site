@@ -73,8 +73,10 @@ routerAdd("POST", "/api/enka/join-event", function(e) {
     var updatedGuests = guestArray.concat([userEmail]);
     event.set("guestEmails", updatedGuests);
     $app.save(event);
-    console.log(
-      "[join-event] " + userEmail + " ajoute a l'evenement " + targetId
+    $app.logger().info(
+      "User joined event",
+      "email", userEmail,
+      "eventId", targetId
     );
   } else {
     console.log(

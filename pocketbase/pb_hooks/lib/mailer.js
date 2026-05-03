@@ -73,10 +73,15 @@ function sendEmail(opts) {
 
     $app.newMailClient().send(message);
 
-    console.log("[" + senderName + "] Email envoye a " + to);
+    console.log("[" + senderName + "] Email envoye a " + to); // dev stdout
     return { ok: true };
   } catch (err) {
-    console.error("[" + senderName + "] Erreur d'envoi a " + to + ": " + String(err));
+    $app.logger().error(
+      "Email send failed",
+      "sender", senderName,
+      "to", to,
+      "error", String(err)
+    );
     return { ok: false, error: String(err) };
   }
 }
@@ -115,10 +120,12 @@ function sendBatch(emails, senderName) {
     }
   }
 
-  console.log(
-    "[" + (senderName || "send-batch") + "] Termine: " +
-    okCount + " ok, " + failCount + " echec(s) sur " +
-    emails.length + " destinataire(s)"
+  $app.logger().info(
+    "Batch email complete",
+    "sender", senderName || "send-batch",
+    "ok", String(okCount),
+    "failed", String(failCount),
+    "total", String(emails.length)
   );
 
   return results;

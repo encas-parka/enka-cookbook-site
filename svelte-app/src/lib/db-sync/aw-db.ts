@@ -23,7 +23,7 @@ import type {
   Locks,
   EventTodo,
   ShareLinks,
-} from "$lib/types/appwrite.d";
+} from "$lib/types/pb";
 import type { PbDoc } from "./aw-types";
 import type { EnrichedNativeTeam } from "$lib/types/aw_native_team.d";
 

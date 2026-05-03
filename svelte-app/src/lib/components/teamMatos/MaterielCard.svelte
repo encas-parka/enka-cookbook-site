@@ -21,7 +21,7 @@
     Pencil,
   } from "@lucide/svelte";
   import type { EnrichedMateriel } from "$lib/types/materiel.types";
-  import type { MaterielStatus } from "$lib/types/appwrite";
+  import type { MaterielStatus } from "$lib/types/pb";
   import { globalState } from "$lib/stores/GlobalState.svelte";
   import { online } from "svelte/reactivity/window";
   import { formatDateDayMonthShort } from "$lib/utils/date-helpers";

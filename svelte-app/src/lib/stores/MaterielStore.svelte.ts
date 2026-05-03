@@ -1,6 +1,6 @@
 import { liveQuery } from "dexie";
 import type { Subscription } from "dexie";
-import type { Materiel, MaterielLoan } from "$lib/types/appwrite";
+import type { Materiel, MaterielLoan } from "$lib/types/pb";
 import type {
   EnrichedMateriel,
   EnrichedMaterielLoan,

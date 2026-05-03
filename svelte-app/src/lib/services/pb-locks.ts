@@ -1,8 +1,6 @@
 /**
  * Service de gestion des verrous (Lock System) — PocketBase
  *
- * Remplace appwrite-locks.ts.
- *
  * Collection PB : `locks`
  *   - id = resourceId (ex: "doc_abc123" ou "event_xyz789")
  *   - userId : relation vers users (maxSelect: 1)

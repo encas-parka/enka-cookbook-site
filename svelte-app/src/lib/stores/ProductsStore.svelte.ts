@@ -2,7 +2,7 @@ import { SvelteMap } from "svelte/reactivity";
 import { useDebounce } from "runed";
 import { liveQuery } from "dexie";
 import type { Subscription } from "dexie";
-import type { Products, Purchases } from "../types/appwrite.d";
+import type { Products, Purchases } from "../types/pb";
 
 import {
   matchesFilters,

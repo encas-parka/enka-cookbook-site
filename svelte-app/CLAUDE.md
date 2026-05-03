@@ -22,7 +22,7 @@ npx prettier --check "**/*.{svelte,ts,js,css}"
 
 - Uses Svelte 5 with TypeScript
 - Type checking includes both app code (`tsconfig.app.json`) and Node/tooling (`tsconfig.node.json`)
-- Appwrite types are auto-generated in `src/lib/types/appwrite.d.ts`
+- PocketBase types are auto-generated in `src/lib/types/pb.d.ts`
 - Path aliases: `@/*` → `./src/*`, `$lib/*` → `./src/lib/*`
 
 ## Routing with sv-router
@@ -89,7 +89,7 @@ All routes are defined in `src/lib/router/routes.ts`:
 - **Frontend**: Svelte 5 with reactive runes (`$state`, `$props`, `$derived`)
 - **Build**: Vite with @sveltejs/vite-plugin-svelte
 - **Styling**: Tailwind CSS v4 with DaisyUI components
-- **Backend**: Appwrite (database, authentication, realtime)
+- **Backend**: PocketBase (database, authentication, realtime)
 - **Persistence**: Dexie (IndexedDB) via aw-sync layer for offline-first
 - **Icons**: Lucide Svelte (`@lucide/svelte` - NOT `lucide-svelte`)
 - **Markdown**: TipTap editor for rich text editing
@@ -99,12 +99,12 @@ All routes are defined in `src/lib/router/routes.ts`:
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│                 Appwrite Backend                           │
+│                 PocketBase Backend                           │
 │  • Database, Auth, Realtime, Cloud Functions               │
 └─────────────────▲───────────────────────────────────────────┘
                    │ Raw data access
 ┌─────────────────▼───────────────────────────────────────────┐
-│              Service Layer (appwrite-*.ts)                 │
+│              Service Layer (pb-*.ts)                 │
 │  • Pure CRUD functions                                      │
 │  • Stateless data transformations                           │
 │  • Realtime subscription management                         │
@@ -127,12 +127,12 @@ All routes are defined in `src/lib/router/routes.ts`:
 ┌─────────────────▼───────────────────────────────────────────┐
 │           Modal/State Factories (*ModalState.svelte.ts)    │
 │  • Local forms for specific entity management              │
-│  • Orchestration of Appwrite calls                         │
+│  • Orchestration of PocketBase calls                         │
 │  • Loading/error UI states with toast notifications        │
 └─────────────────▲───────────────────────────────────────────┘
                    │ Cloud Functions (Batch Ops)
 ┌─────────────────▼───────────────────────────────────────────┐
-│              appwrite-transaction.ts                       │
+│              PocketBase-transaction.ts                       │
 │  • Batch operations (Group Purchase)                        │
 │  • Cloud Function execution with retry logic                │
 └─────────────────────────────────────────────────────────────┘
@@ -142,10 +142,10 @@ All routes are defined in `src/lib/router/routes.ts`:
 
 **1. aw-sync: Offline-First Sync Layer**
 
-The `db-sync/` module provides the bridge between Appwrite (remote) and Svelte stores (UI):
+The `db-sync/` module provides the bridge between PocketBase (remote) and Svelte stores (UI):
 
 ```
-Appwrite (remote)
+PocketBase (remote)
   ↕  initialFetch() — delta sync (cursor-based, 500/page)
   ↕  subscribe()    — realtime WebSocket → Dexie put/delete
 Dexie / IndexedDB (local)
@@ -173,7 +173,7 @@ All major stores are singleton classes with Svelte 5 reactive runes:
 - **RealtimeManager** - Centralized WebSocket multiplexing
 - **MaterielStore** - Equipment/material management
 - **TeamdocsStore** - Team documents management
-- **NativeTeamsStore** - Native teams from Appwrite
+- **NativeTeamsStore** - Native teams from PocketBase
 - **NotificationStore** - User notifications
 - **NavBarStore** - Navigation bar state
 - **RecipeDataStore** - Hugo static data (ingredients, recipe-info)
@@ -184,7 +184,7 @@ All major stores are singleton classes with Svelte 5 reactive runes:
 // Phase 1: Fast cache load from Dexie (via bridgeToMap liveQuery)
 await store.loadCache();
 
-// Phase 2: Delta sync from Appwrite → Dexie
+// Phase 2: Delta sync from PocketBase → Dexie
 await store.syncFromRemote();
 
 // Phase 3: Realtime WebSocket → Dexie
@@ -198,7 +198,7 @@ Every store with private Dexie data must clean up on logout to prevent data leak
 ```typescript
 async destroy(): Promise<void> {
   this.#bridge.subscription.unsubscribe();   // Stop Dexie liveQuery
-  this.#collection.unsubscribeAll();          // Stop Appwrite realtime
+  this.#collection.unsubscribeAll();          // Stop PocketBase realtime
   await this.#collection.clearLocal();        // Clear Dexie table + syncMeta
   this.#rawMap.clear();
   this.#isInitialized = false;
@@ -288,19 +288,19 @@ src/
     │   ├── EventsStore.svelte.ts
     │   ├── RealtimeManager.svelte.ts
     │   └── ...
-    ├── db-sync/         # aw-sync: Appwrite ↔ Dexie offline-first layer
+    ├── db-sync/         # aw-sync: PocketBase ↔ Dexie offline-first layer
     │   ├── aw-sync.ts          # Barrel export (entry point)
     │   ├── aw-collection.ts    # createSyncCollection()
     │   ├── aw-bridge.ts        # bridgeToMap(), bridgeToMapFiltered()
     │   ├── aw-db.ts            # EnkaDB schema (Dexie)
     │   ├── aw-types.ts         # Shared types
     │   └── use-live-query.svelte.ts  # useLiveQuery() component hook
-    ├── services/        # Appwrite CRUD + utilities
-    │   ├── appwrite.ts  # Centralized Appwrite client
-    │   ├── appwrite-products.ts
-    │   ├── appwrite-recipes.ts
-    │   ├── appwrite-events.ts
-    │   ├── appwrite-transaction.ts
+    ├── services/        # PocketBase CRUD + utilities
+    │   ├── pb-auth.ts  # Centralized PocketBase client
+    │   ├── PocketBase-products.ts
+    │   ├── PocketBase-recipes.ts
+    │   ├── PocketBase-events.ts
+    │   ├── PocketBase-transaction.ts
     │   └── toast.service.svelte.ts
     ├── models/          # Reactive data wrappers
     │   └── ProductModel.svelte.ts
@@ -317,7 +317,7 @@ src/
     │   ├── EventEditPage.svelte
     │   └── ...
     ├── types/           # TypeScript definitions
-    │   ├── appwrite.d.ts  # Auto-generated
+    │   ├── pb.d.ts  # Auto-generated
     │   └── store.types.ts
     ├── constants/       # Constants (units, etc.)
     └── utils/           # Helper functions
@@ -347,11 +347,11 @@ Available reusable form components in `src/lib/components/ui/`:
 - **Reactive access**: Always use reactive derived values, never copy store data
 - **Stores**: Import singletons directly, don't create instances
 
-### Appwrite Integration
+### PocketBase Integration
 
-- **Centralized config**: Use `getAppwriteInstances()` from `appwrite.ts` service
-- **Services**: CRUD operations in `appwrite-*.ts` files
-- **Permissions**: Handled server-side by Appwrite
+- **Centralized config**: Use `getPocketBaseInstances()` from `pb-auth.ts` service
+- **Services**: CRUD operations in `pb-*.ts` files
+- **Permissions**: Handled server-side by PocketBase
 - **Auth required**: Check `globalState.isAuthenticated` before write operations
 
 ### Error Handling
@@ -366,7 +366,7 @@ Available reusable form components in `src/lib/components/ui/`:
 
 1. Add/update types in `src/lib/types/`
 2. Update store with new reactive calculations or methods
-3. Add Appwrite CRUD functions in appropriate `appwrite-*.ts` service
+3. Add PocketBase CRUD functions in appropriate `pb-*.ts` service
 4. Update modal/state factories with new forms/actions
 5. Create/update UI components consuming the store
 6. Register realtime channels if needed
@@ -375,7 +375,7 @@ Available reusable form components in `src/lib/components/ui/`:
 
 1. Add Dexie table in `src/lib/db-sync/aw-db.ts` (declare on `EnkaDB` + increment version)
 2. Add collection name to `AwCollectionName` in `src/lib/db-sync/aw-types.ts`
-3. Verify name is mapped in `APPWRITE_CONFIG.collections` (in `appwrite.ts`)
+3. Verify name is mapped in `APPWRITE_CONFIG.collections` (in `pb-auth.ts`)
 4. Create `src/lib/stores/YourStore.svelte.ts` with class-based singleton using `createSyncCollection` + `bridgeToMap`
 5. Add 3-phase initialization: `loadCache()`, `syncFromRemote()`, `setupRealtime()`
 6. Add `destroy()` with bridge unsubscribe + collection unsubscribeAll + clearLocal
@@ -387,7 +387,7 @@ Available reusable form components in `src/lib/components/ui/`:
 1. Check store initialization sequence (cache → sync → realtime)
 2. Verify IndexedDB cache contents with browser DevTools
 3. Confirm realtime subscription status in console logs
-4. Review Appwrite sync timestamps in cache metadata
+4. Review PocketBase sync timestamps in cache metadata
 5. Check GlobalState auth initialization for user context
 
 ## Build Configuration
@@ -396,7 +396,7 @@ Available reusable form components in `src/lib/components/ui/`:
 
 - **Output directory**: `../static/app/` (Hugo theme static folder)
 - **Base path**: `/app/`
-- **Code splitting**: Manual chunks for `@lucide/svelte` (icons) and `appwrite` (SDK)
+- **Code splitting**: Manual chunks for `@lucide/svelte` (icons) and `PocketBase` (SDK)
 - **Minification**: esbuild
 
 ### Dev Server Proxy
@@ -416,5 +416,5 @@ The Vite dev server proxies requests to Hugo:
 - **IndexedDB via aw-sync** - Dexie persistence is managed by `createSyncCollection` + `bridgeToMap`; stores call `clearLocal()` on destroy
 - **Realtime is multiplexed** - All stores share a single WebSocket via RealtimeManager
 - **Auth is required for most operations** - Check `globalState.isAuthenticated` before write operations
-- **Appwrite config is centralized** - Use `getAppwriteInstances()` from `appwrite.ts` service
-- **Permissions are handled server-side** - Appwrite enforces document-level access control
+- **PocketBase config is centralized** - Use `getPocketBaseInstances()` from `pb-auth.ts` service
+- **Permissions are handled server-side** - PocketBase enforces document-level access control

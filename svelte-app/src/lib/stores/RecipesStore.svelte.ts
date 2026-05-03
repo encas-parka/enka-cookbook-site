@@ -11,7 +11,7 @@
  */
 
 import { SvelteMap } from 'svelte/reactivity';
-import type { Recettes } from '$lib/types/appwrite.d';
+import type { Recettes } from '$lib/types/pb';
 import type {
 	RecipeIndexEntry,
 	RecipeForDisplay

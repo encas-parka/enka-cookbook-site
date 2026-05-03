@@ -42,7 +42,7 @@ Modal de récapitulatif des dépenses
   // Initialiser "who" avec l'utilisateur courant
   $effect(() => {
     if (isOpen && !editingPurchaseId) {
-      const currentUser = localStorage.getItem("appwrite-user-name");
+      const currentUser = localStorage.getItem("pb-user-name");
       if (currentUser) {
         newExpense.who = currentUser;
       }
@@ -144,7 +144,7 @@ Modal de récapitulatif des dépenses
   }
 
   function resetForm() {
-    const currentUser = localStorage.getItem("appwrite-user-name") || "";
+    const currentUser = localStorage.getItem("pb-user-name") || "";
     newExpense = {
       invoiceTotal: 0,
       store: "",

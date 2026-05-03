@@ -140,7 +140,7 @@ export function createDefaultRecipe(): RecipeFormState {
     permissionWrite: [globalState.userId || ""],
     // Métadonnées (valeurs par défaut)
     teams: null,
-    status: RecettesStatus.PUBLIC,
+    status: RecettesStatus.public,
     rootRecipeId: null,
     versionLabel: null,
     manuallyAddedVariants: [],

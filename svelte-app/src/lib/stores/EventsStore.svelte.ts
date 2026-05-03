@@ -18,7 +18,7 @@
  * const myEvents = eventsStore.events;
  */
 
-import type { Main, MainStatus } from "$lib/types/appwrite.d";
+import type { Main, MainStatus } from "$lib/types/pb";
 import type {
   CreateEventData,
   UpdateEventData,

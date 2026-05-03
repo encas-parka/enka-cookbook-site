@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { EventMateriel } from "$lib/types/appwrite";
+  import type { EventMateriel } from "$lib/types/pb";
   import type {
     CreateEventMaterielData,
     EventMaterielType,

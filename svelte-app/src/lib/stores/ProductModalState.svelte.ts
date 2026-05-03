@@ -1,5 +1,5 @@
 import { generateRecipesWithDates } from "../utils/productsUtils";
-import type { Purchases } from "../types/appwrite";
+import type { Purchases } from "../types/pb";
 import type {
   EnrichedProduct,
   StoreInfo,

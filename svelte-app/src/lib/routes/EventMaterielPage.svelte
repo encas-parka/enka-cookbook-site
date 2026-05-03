@@ -39,7 +39,7 @@ import {
   import EventMaterielControls, {
     type ActiveBadge,
   } from "$lib/components/eventMateriel/EventMaterielControls.svelte";
-  import type { EventMateriel } from "$lib/types/appwrite";
+  import type { EventMateriel } from "$lib/types/pb";
   import type {
     CreateEventMaterielData,
     EventMaterielFilters as EventMaterielFilterOptions,

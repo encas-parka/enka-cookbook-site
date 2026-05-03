@@ -1,8 +1,6 @@
 /**
  * Services pour la gestion des invitations — PocketBase
  *
- * Remplace appwrite-invitations.ts.
- *
  * createShareLink : CRUD direct sur la collection share_links
  * redeemShareLink : appelle la route custom PB /api/enka/join-event
  *                   (le hook server-side ajoute l'email dans guestEmails[])

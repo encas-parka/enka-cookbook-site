@@ -3,7 +3,7 @@
  * Logique de transformation Products → EnrichedProduct
  */
 
-import type { Products, Purchases, Main } from "$lib/types/appwrite";
+import type { Products, Purchases, Main } from "$lib/types/pb";
 import type { PbDoc } from "$lib/db-sync/aw-types";
 import type {
   EnrichedProduct,

@@ -10,7 +10,7 @@ import type {
   MaterielLoan,
   MaterielStatus,
   MaterielType,
-} from "$lib/types/appwrite.d";
+} from "$lib/types/pb";
 import type {
   EnrichedMateriel,
   EnrichedMaterielLoan,

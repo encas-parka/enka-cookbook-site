@@ -1,4 +1,4 @@
-import type { Teamdocs } from "$lib/types/appwrite.d";
+import type { Teamdocs } from "$lib/types/pb";
 import { globalState } from "./GlobalState.svelte";
 import { createSyncCollection, bridgeToMap, db, pb } from "$lib/db-sync/pb-sync";
 

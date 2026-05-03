@@ -1,6 +1,6 @@
 <script lang="ts">
   import { globalState } from "$lib/stores/GlobalState.svelte";
-  import type { EventMateriel } from "$lib/types/appwrite";
+  import type { EventMateriel } from "$lib/types/pb";
   import {
     getEventMaterielStatusConfig,
     getMaterielTypeBadgeClass,

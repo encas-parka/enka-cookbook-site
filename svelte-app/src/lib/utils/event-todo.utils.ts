@@ -15,9 +15,9 @@ export function parseEventTodoPriority(
   priority: string | undefined,
 ): EventTodoPriority {
   const validPriorities: EventTodoPriority[] = [
-    EventTodoPriority.HIGH,
-    EventTodoPriority.MEDIUM,
-    EventTodoPriority.LOW,
+    EventTodoPriority.high,
+    EventTodoPriority.medium,
+    EventTodoPriority.low,
   ];
 
   if (priority && validPriorities.includes(priority as EventTodoPriority)) {
@@ -27,16 +27,16 @@ export function parseEventTodoPriority(
   console.warn(
     `[event-todo.utils] Priority invalide: ${priority}, utilisation de "medium"`,
   );
-  return EventTodoPriority.MEDIUM; // Valeur par défaut
+  return EventTodoPriority.medium; // Valeur par défaut
 }
 
 /**
  * Ordre de tri pour les priorités (utilisé dans le store)
  */
 export const PRIORITY_ORDER: Record<EventTodoPriority, number> = {
-  [EventTodoPriority.HIGH]: 3,
-  [EventTodoPriority.MEDIUM]: 2,
-  [EventTodoPriority.LOW]: 1,
+  [EventTodoPriority.high]: 3,
+  [EventTodoPriority.medium]: 2,
+  [EventTodoPriority.low]: 1,
 };
 
 /**
@@ -44,9 +44,9 @@ export const PRIORITY_ORDER: Record<EventTodoPriority, number> = {
  */
 export function formatPriority(priority: EventTodoPriority): string {
   const labels: Record<EventTodoPriority, string> = {
-    [EventTodoPriority.HIGH]: "Haute",
-    [EventTodoPriority.MEDIUM]: "Moyenne",
-    [EventTodoPriority.LOW]: "Basse",
+    [EventTodoPriority.high]: "Haute",
+    [EventTodoPriority.medium]: "Moyenne",
+    [EventTodoPriority.low]: "Basse",
   };
 
   return labels[priority] || priority;
@@ -56,14 +56,14 @@ export function formatPriority(priority: EventTodoPriority): string {
  * Vérifie si un todo est complété
  */
 export function isTodoCompleted(todo: EventTodo): boolean {
-  return todo.status === EventTodoStatus.DONE;
+  return todo.status === EventTodoStatus.done;
 }
 
 /**
  * Vérifie si un todo est en retard
  */
 export function isTodoOverdue(todo: EventTodo): boolean {
-  if (!todo.dueDate || todo.status === EventTodoStatus.DONE) {
+  if (!todo.dueDate || todo.status === EventTodoStatus.done) {
     return false;
   }
 

@@ -1,11 +1,8 @@
 /**
  * pb-auth — PocketBase Authentication Service
  *
- * Remplace `services/appwrite.ts` pour l'authentification. PocketBase SDK gère
- * le stockage du token JWT dans localStorage automatiquement via `pb.authStore`.
- *
- * Normalisation : PocketBase utilise `id`/`created`/`updated` → on normalise
- * en `id`/`created`/`updated` pour compatibilité avec le reste du codebase.
+ * PocketBase SDK gère le stockage du token JWT dans localStorage
+ * automatiquement via `pb.authStore`.
  */
 
 import { pb } from '$lib/db-sync/pb-sync';

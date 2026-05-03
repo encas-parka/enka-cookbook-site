@@ -17,7 +17,7 @@
     Bubbles,
     Euro,
   } from "@lucide/svelte";
-  import type { Purchases } from "$lib/types/appwrite.d.ts";
+  import type { Purchases } from "$lib/types/pb";
   import type { ProductModalStateType } from "$lib/types/store.types.js";
   import {
     formatDate,

@@ -6,7 +6,7 @@
   import { globalState } from "$lib/stores/GlobalState.svelte";
   import { nativeTeamsStore as teamsStore } from "$lib/stores/NativeTeamsStore.svelte";
   import type { EventMeal } from "$lib/types/events";
-  import type { MainStatus } from "$lib/types/appwrite";
+  import type { MainStatus } from "$lib/types/pb";
   import { Calendar, CalendarPlus2, Info, Plus, Save } from "@lucide/svelte";
   import { nanoid } from "nanoid";
   import { flip } from "svelte/animate";

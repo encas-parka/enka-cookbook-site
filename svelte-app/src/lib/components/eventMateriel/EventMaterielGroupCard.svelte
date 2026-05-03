@@ -3,7 +3,7 @@
     MaterielGroup,
     EventMaterielStatus,
   } from "$lib/types/event-materiel.types";
-  import type { EventMateriel } from "$lib/types/appwrite";
+  import type { EventMateriel } from "$lib/types/pb";
   import { eventMaterielStore } from "$lib/stores/EventMaterielStore.svelte";
   import {
     getEventMaterielStatusConfig,

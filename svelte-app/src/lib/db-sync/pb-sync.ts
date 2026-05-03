@@ -44,4 +44,4 @@ export type {
 	PbDoc
 } from './pb-types';
 
-export type { AwCollectionName } from './aw-types';
+export type { PbCollectionName } from './aw-types';

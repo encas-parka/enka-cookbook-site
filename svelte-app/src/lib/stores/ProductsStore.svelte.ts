@@ -1100,9 +1100,9 @@ class ProductsStore {
    * Avec PocketBase, le SSE relaie les modifications en temps réel,
    * ce delta sync garantit que Dexie (et donc le liveQuery → #onDataChange) est à jour.
    */
-  async syncFromAppwrite(): Promise<void> {
+  async syncFromRemote(): Promise<void> {
     if (!this.#currentMainId) {
-      console.warn("[ProductsStore] syncFromAppwrite() appelé sans currentMainId");
+      console.warn("[ProductsStore] syncFromRemote() appelé sans currentMainId");
       return;
     }
 
@@ -1116,9 +1116,9 @@ class ProductsStore {
         }),
       ]);
       this.#lastSync = new Date().toISOString();
-      console.log("[ProductsStore] syncFromAppwrite() terminé");
+      console.log("[ProductsStore] syncFromRemote() terminé");
     } catch (err) {
-      console.error("[ProductsStore] syncFromAppwrite() échoué:", err);
+      console.error("[ProductsStore] syncFromRemote() échoué:", err);
     }
   }
 

@@ -89,10 +89,9 @@ export interface SubscriptionRef {
 // =============================================================================
 
 /**
- * Keys matching APPWRITE_CONFIG.collections.
- * Must be kept in sync with the collections defined in `appwrite.ts`.
+ * Keys matching PocketBase collections.
  */
-export type AwCollectionName =
+export type PbCollectionName =
 	| 'events'
 	| 'ingredients'
 	| 'main'

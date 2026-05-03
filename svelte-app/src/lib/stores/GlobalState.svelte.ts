@@ -8,7 +8,7 @@ import { materielStore } from "./MaterielStore.svelte";
 import { teamdocsStore } from "./TeamdocsStore.svelte";
 import { productsStore } from "./ProductsStore.svelte";
 import { recipesStore } from "./RecipesStore.svelte";
-import { db } from "$lib/db-sync/pb-sync";
+import { db, pb } from "$lib/db-sync/pb-sync";
 import { route } from "$lib/router";
 
 class GlobalState {
@@ -24,6 +24,7 @@ class GlobalState {
   #authLoading = $state(false);
   #authError = $state<string | null>(null);
   #authInitialized = $state(false);
+  #userRealtimeUnsub: (() => void) | null = null;
 
   get user() {
     return this.#user;
@@ -75,9 +76,9 @@ class GlobalState {
       const user = getCurrentUser();
       if (user) {
         this.#user = user;
-        localStorage.setItem("appwrite-user-name", user.name);
-        localStorage.setItem("appwrite-user-email", user.email);
-        localStorage.setItem("appwrite-user-id", user.id);
+        localStorage.setItem("enka-user-name", user.name);
+        localStorage.setItem("enka-user-email", user.email);
+        localStorage.setItem("enka-user-id", user.id);
         console.log(`[GlobalState] Authentifié: ${user.name}`);
       } else {
         this.#user = null;
@@ -110,9 +111,9 @@ class GlobalState {
       if (!user) throw new Error("Aucun utilisateur après login");
       this.#user = user;
 
-      localStorage.setItem("appwrite-user-name", user.name);
-      localStorage.setItem("appwrite-user-email", user.email);
-      localStorage.setItem("appwrite-user-id", user.id);
+      localStorage.setItem("enka-user-name", user.name);
+      localStorage.setItem("enka-user-email", user.email);
+      localStorage.setItem("enka-user-id", user.id);
 
       // Phase 0: Initialiser le cache IDB pour les stores qui en dépendent
       await Promise.all([
@@ -143,6 +144,9 @@ class GlobalState {
         recipesStore.setupRealtime(),
       ]);
 
+      // Phase 3: Abonnement realtime custom (messages ciblés du backend)
+      await this.#setupUserRealtime(user.id);
+
       console.log(
         `[GlobalState] Réinitialisé après login: ${user.name} (${this.userTeams.length} équipes)`,
       );
@@ -156,16 +160,59 @@ class GlobalState {
   }
 
   /**
+   * Abonne l'utilisateur aux messages SSE custom (topic "user_${userId}").
+   * Permet au backend d'envoyer des notifications cibles :
+   *   - team_joined : nouveau membre d'une team → refresh EventsStore
+   *   - team_left   : membre retire d'une team → refresh EventsStore
+   *   - team_updated : team renommee → refresh EventsStore
+   */
+  async #setupUserRealtime(userId: string): Promise<void> {
+    // Nettoyer l'abonnement precedent si necessaire
+    if (this.#userRealtimeUnsub) {
+      this.#userRealtimeUnsub();
+      this.#userRealtimeUnsub = null;
+    }
+
+    const topic = `user_${userId}`;
+
+    try {
+      this.#userRealtimeUnsub = await pb.realtime.subscribe(topic, async (e) => {
+        const data = typeof e === "string" ? JSON.parse(e) : e;
+        const action = data?.action || data?.record?.action;
+
+        if (action === "team_joined" || action === "team_left" || action === "team_updated") {
+          console.log(
+            `[GlobalState] Realtime custom: ${action} — team ${data.teamName || data.teamId}`,
+          );
+          // Re-sync EventsStore : les API rules PB filtrent dynamiquement
+          // les evenements visibles pour cet utilisateur
+          await eventsStore.forceRefresh();
+        }
+      });
+
+      console.log(`[GlobalState] Abonne au topic custom: ${topic}`);
+    } catch (err) {
+      console.error("[GlobalState] Erreur abonnement realtime custom:", err);
+    }
+  }
+
+  /**
    * Déconnexion : cleanup PB + stores privés
    * PocketBase : pas de cache Appwrite ni de realtime centralisé à détruire
    */
   async logout(): Promise<void> {
     try {
+      // Cleanup abonnement realtime custom
+      if (this.#userRealtimeUnsub) {
+        this.#userRealtimeUnsub();
+        this.#userRealtimeUnsub = null;
+      }
+
       pbLogout();
 
-      localStorage.removeItem("appwrite-user-name");
-      localStorage.removeItem("appwrite-user-email");
-      localStorage.removeItem("appwrite-user-id");
+      localStorage.removeItem("enka-user-name");
+      localStorage.removeItem("enka-user-email");
+      localStorage.removeItem("enka-user-id");
 
       // Cleanup des stores privés (recipesStore préservé pour les visiteurs)
       // Les destroy() sont async car ils nettoient IndexedDB (sécurité multi-user)
@@ -326,7 +373,7 @@ class GlobalState {
 
   get userName() {
     // Utiliser le user authentifié si disponible, sinon localStorage
-    return this.#user?.name || localStorage.getItem("appwrite-user-name") || "";
+    return this.#user?.name || localStorage.getItem("enka-user-name") || "";
   }
 
   /** Accès aux toasts */

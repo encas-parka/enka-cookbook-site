@@ -288,6 +288,19 @@ export class EventsStore {
   }
 
   /**
+   * Force un re-sync complet depuis PocketBase (safe, n'exception pas).
+   * Utilise par GlobalState quand un message realtime custom est recu
+   * (ex: ajout a une team → nouveaux evenements visibles).
+   */
+  async forceRefresh(): Promise<void> {
+    try {
+      await this.syncFromRemote();
+    } catch (err) {
+      console.error("[EventsStore] forceRefresh() failed:", err);
+    }
+  }
+
+  /**
    * Phase 3 : Activer le realtime PocketBase via pb-sync (SSE)
    */
   async setupRealtime(): Promise<void> {
@@ -497,39 +510,13 @@ export class EventsStore {
   }
 
   /**
-   * Crée un nouvel événement
-   * @deprecated : utiliser createEventWithTeams (action unifiée)
-   */
-  async createEvent(data: CreateEventData): Promise<EnrichedEvent> {
-    if (!globalState.userId) throw new Error("Utilisateur non connecté");
-
-    const record = await this.#collection.create({
-      name: data.name,
-      dateStart: data.dateStart,
-      dateEnd: data.dateEnd,
-      allDates: data.allDates,
-      meals: data.meals ?? [],
-      createdBy: globalState.userId,
-      teams: data.teams ?? [],
-      teamsId: data.teamsId ?? [],
-      contributors: data.contributors ?? [],
-      todos: data.todos ?? [],
-      status: "proposition",
-    } as unknown as Omit<Main, 'id' | 'created' | 'updated'>);
-
-    console.log(`[EventsStore] Événement créé: ${record.id}`);
-    return this.#enrichEvent(record);
-  }
-
-  /**
    * Crée un nouvel événement avec des teams.
    * Avec PocketBase, la création est directe (pas de CF atomique).
-   * Le système d'invitation PB (étape 1.3) remplacera le sendEmailToExistingMembers.
+   * Le système d'invitation PB (étape 1.3) gère les emails.
    */
   async createEventWithTeams(
     data: CreateEventData,
     teamIds: string[] = [],
-    sendEmailToExistingMembers: boolean = true,
   ): Promise<EnrichedEvent> {
     if (!globalState.userId) throw new Error("Utilisateur non connecté");
 
@@ -551,13 +538,6 @@ export class EventsStore {
     console.log(
       `[EventsStore] Événement créé avec ${teamIds.length} team(s): ${record.id}`,
     );
-
-    // TODO: système d'invitation PB (étape 1.3)
-    if (sendEmailToExistingMembers && teamIds.length > 0) {
-      console.warn(
-        `[EventsStore] Système d'invitation PB à implémenter — pas d'emails envoyés aux ${teamIds.length} team(s)`,
-      );
-    }
 
     return this.#enrichEvent(record);
   }

@@ -32,3 +32,4 @@ graphify-out
 # PocketBase
 pocketbase/pb_data
 pocketbase/pocketbase
+.env.local

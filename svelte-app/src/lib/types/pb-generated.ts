@@ -11,9 +11,11 @@ export const Collections = {
 	Mfas: "_mfas",
 	Otps: "_otps",
 	Superusers: "_superusers",
+	Categories: "categories",
 	EventMateriel: "event_materiel",
 	EventTodos: "event_todos",
 	Events: "events",
+	Ingredients: "ingredients",
 	Locks: "locks",
 	Materiel: "materiel",
 	MaterielLoan: "materiel_loan",
@@ -106,23 +108,47 @@ export type SuperusersRecord = {
 	verified?: boolean
 }
 
+export const CategoriesTypeOptions = {
+	"category": "category",
+	"equipment_tag": "equipment_tag",
+} as const
+export type CategoriesTypeOptions = typeof CategoriesTypeOptions[keyof typeof CategoriesTypeOptions]
+export type CategoriesRecord = {
+	id: string
+	name: string
+	type: CategoriesTypeOptions
+}
+
 export type EventMaterielRecord<Tspecs = unknown> = {
+	createdBy?: RecordIdString
 	deleted?: boolean
 	eventId: RecordIdString
+	fromTeamName?: string
 	groupId?: string
 	id: string
+	loanId?: RecordIdString
+	name?: string
+	notes?: string
+	quantity?: number
+	sourceMaterielId?: RecordIdString
 	specs?: null | Tspecs
 	status?: string
 	type?: string
+	where?: string
+	who?: string
 }
 
 export type EventTodosRecord = {
 	assignedTo?: RecordIdString
+	dueDate?: IsoDateString
 	eventId: RecordIdString
 	id: string
+	locked?: boolean
 	priority?: string
+	requiredPeopleNb?: number
 	status?: string
 	task: string
+	taskDescription?: string
 	taskOn?: IsoDateString
 }
 
@@ -143,6 +169,28 @@ export type EventsRecord<Tcontributors = unknown, Tdate = unknown, TguestEmails 
 	todos?: null | Ttodos
 }
 
+export const IngredientsTypeOptions = {
+	"legumes": "legumes",
+	"sec": "sec",
+	"epices": "epices",
+	"lof": "lof",
+	"autres": "autres",
+	"sucres": "sucres",
+	"animaux": "animaux",
+	"frais": "frais",
+} as const
+export type IngredientsTypeOptions = typeof IngredientsTypeOptions[keyof typeof IngredientsTypeOptions]
+export type IngredientsRecord<Tallergens = unknown, Tsaisons = unknown> = {
+	allergens?: null | Tallergens
+	id: string
+	name: string
+	pF?: boolean
+	pS?: boolean
+	saisons?: null | Tsaisons
+	type: IngredientsTypeOptions
+	uuid: string
+}
+
 export type LocksRecord = {
 	collection?: string
 	expiresAt?: IsoDateString
@@ -156,20 +204,35 @@ export type MaterielRecord = {
 	deleted?: boolean
 	description?: string
 	id: string
+	isStorage?: boolean
+	location?: string
 	name: string
 	ownerUser?: RecordIdString
+	quantity?: number
+	shareableWith?: RecordIdString[]
 	status?: string
+	storeIn?: RecordIdString
 	teamId?: RecordIdString
 	type?: string
 }
 
-export type MaterielLoanRecord = {
+export type MaterielLoanRecord<Tmateriels = unknown> = {
 	borrowerUser?: RecordIdString
+	completedAt?: IsoDateString
 	createdBy?: RecordIdString
 	endDate?: IsoDateString
 	eventId?: RecordIdString
+	eventName?: string
 	id: string
 	materielId: RecordIdString
+	materiels?: null | Tmateriels
+	notes?: string
+	ownerId?: RecordIdString
+	ownerName?: string
+	responsibleId?: RecordIdString
+	responsibleName?: string
+	returnNotes?: string
+	returnedAt?: IsoDateString
 	startDate?: IsoDateString
 	status?: string
 }
@@ -185,49 +248,106 @@ export type NotificationsRecord<Tdata = unknown> = {
 	userId: RecordIdString
 }
 
-export type ProductsRecord<Tspecs = unknown, Tstore = unknown> = {
+export type ProductsRecord<TmergedFrom = unknown, TpreviousNames = unknown, Tspecs = unknown, TstockReel = unknown, Tstore = unknown, TtotalNeededOverride = unknown, Twho = unknown> = {
 	deleted?: boolean
 	eventId: RecordIdString
 	id: string
+	isMerged?: boolean
+	isSynced?: boolean
+	mergeDate?: IsoDateString
+	mergeReason?: string
+	mergedFrom?: null | TmergedFrom
+	mergedInto?: RecordIdString
 	pF?: boolean
 	pS?: boolean
+	previousNames?: null | TpreviousNames
 	productHugoUuid?: string
 	productName?: string
 	productType?: string
 	specs?: null | Tspecs
 	status?: string
+	stockReel?: null | TstockReel
 	store?: null | Tstore
+	totalNeededOverride?: null | TtotalNeededOverride
+	updatedBy?: RecordIdString
+	who?: null | Twho
 }
 
-export type PurchasesRecord<Tstore = unknown> = {
+export type PurchasesRecord<Tproducts = unknown, Tstore = unknown> = {
+	createdBy?: RecordIdString
 	deleted?: boolean
+	deliveryDate?: IsoDateString
 	eventId: RecordIdString
 	id: string
+	invoiceId?: string
+	invoiceTotal?: number
+	notes?: string
+	orderDate?: IsoDateString
+	price?: number
+	products?: null | Tproducts
+	quantity: number
 	status?: string
 	store?: null | Tstore
+	unit: string
+	who?: string
 }
 
-export type RecipesRecord<Tcategories = unknown, Tingredients = unknown, Tsteps = unknown, Tyield = unknown> = {
+export const RecipesTypeROptions = {
+	"entree": "entree",
+	"plat": "plat",
+	"dessert": "dessert",
+	"autre": "autre",
+} as const
+export type RecipesTypeROptions = typeof RecipesTypeROptions[keyof typeof RecipesTypeROptions]
+
+export const RecipesStatusOptions = {
+	"public": "public",
+	"private": "private",
+	"deleted": "deleted",
+} as const
+export type RecipesStatusOptions = typeof RecipesStatusOptions[keyof typeof RecipesStatusOptions]
+export type RecipesRecord<Tastuces = unknown, Tcategories = unknown, Tingredients = unknown, Tmateriel = unknown, TpermissionWrite = unknown, TprepAlt = unknown, Tregime = unknown, Tsaison = unknown, Tteams = unknown> = {
+	astuces?: null | Tastuces
 	auteur?: string
 	categories?: null | Tcategories
+	check?: boolean
 	createdBy?: RecordIdString
+	cuisson?: boolean
 	description?: string
+	draft?: boolean
 	id: string
 	ingredients?: null | Tingredients
 	lockedBy?: string
-	published?: boolean
-	steps?: null | Tsteps
+	materiel?: null | Tmateriel
+	permissionWrite?: null | TpermissionWrite
+	plate?: number
+	prepAlt?: null | TprepAlt
+	preparation24h?: string
+	preparation?: string
+	publishedAt?: IsoDateString
+	quantite_desc?: string
+	regime?: null | Tregime
+	region?: string
+	rootRecipeId?: RecordIdString
+	saison?: null | Tsaison
+	serveHot?: boolean
+	status?: RecipesStatusOptions
+	teams?: null | Tteams
 	title: string
-	typeR?: string
-	yield?: null | Tyield
+	typeR?: RecipesTypeROptions
+	versionLabel?: string
 }
 
 export type ShareLinksRecord = {
+	access_level?: string
+	expiresAt?: IsoDateString
 	id: string
 	isActive?: boolean
 	link_type?: string
+	maxUses?: number
 	target_id?: string
 	token?: string
+	useCount?: number
 }
 
 export type TeamdocsRecord = {
@@ -264,16 +384,18 @@ export type ExternalauthsResponse<Texpand = unknown> = Required<ExternalauthsRec
 export type MfasResponse<Texpand = unknown> = Required<MfasRecord> & BaseSystemFields<Texpand>
 export type OtpsResponse<Texpand = unknown> = Required<OtpsRecord> & BaseSystemFields<Texpand>
 export type SuperusersResponse<Texpand = unknown> = Required<SuperusersRecord> & AuthSystemFields<Texpand>
+export type CategoriesResponse<Texpand = unknown> = Required<CategoriesRecord> & BaseSystemFields<Texpand>
 export type EventMaterielResponse<Tspecs = unknown, Texpand = unknown> = Required<EventMaterielRecord<Tspecs>> & BaseSystemFields<Texpand>
 export type EventTodosResponse<Texpand = unknown> = Required<EventTodosRecord> & BaseSystemFields<Texpand>
 export type EventsResponse<Tcontributors = unknown, Tdate = unknown, TguestEmails = unknown, Tmeals = unknown, Ttodos = unknown, Texpand = unknown> = Required<EventsRecord<Tcontributors, Tdate, TguestEmails, Tmeals, Ttodos>> & BaseSystemFields<Texpand>
+export type IngredientsResponse<Tallergens = unknown, Tsaisons = unknown, Texpand = unknown> = Required<IngredientsRecord<Tallergens, Tsaisons>> & BaseSystemFields<Texpand>
 export type LocksResponse<Texpand = unknown> = Required<LocksRecord> & BaseSystemFields<Texpand>
 export type MaterielResponse<Texpand = unknown> = Required<MaterielRecord> & BaseSystemFields<Texpand>
-export type MaterielLoanResponse<Texpand = unknown> = Required<MaterielLoanRecord> & BaseSystemFields<Texpand>
+export type MaterielLoanResponse<Tmateriels = unknown, Texpand = unknown> = Required<MaterielLoanRecord<Tmateriels>> & BaseSystemFields<Texpand>
 export type NotificationsResponse<Tdata = unknown, Texpand = unknown> = Required<NotificationsRecord<Tdata>> & BaseSystemFields<Texpand>
-export type ProductsResponse<Tspecs = unknown, Tstore = unknown, Texpand = unknown> = Required<ProductsRecord<Tspecs, Tstore>> & BaseSystemFields<Texpand>
-export type PurchasesResponse<Tstore = unknown, Texpand = unknown> = Required<PurchasesRecord<Tstore>> & BaseSystemFields<Texpand>
-export type RecipesResponse<Tcategories = unknown, Tingredients = unknown, Tsteps = unknown, Tyield = unknown, Texpand = unknown> = Required<RecipesRecord<Tcategories, Tingredients, Tsteps, Tyield>> & BaseSystemFields<Texpand>
+export type ProductsResponse<TmergedFrom = unknown, TpreviousNames = unknown, Tspecs = unknown, TstockReel = unknown, Tstore = unknown, TtotalNeededOverride = unknown, Twho = unknown, Texpand = unknown> = Required<ProductsRecord<TmergedFrom, TpreviousNames, Tspecs, TstockReel, Tstore, TtotalNeededOverride, Twho>> & BaseSystemFields<Texpand>
+export type PurchasesResponse<Tproducts = unknown, Tstore = unknown, Texpand = unknown> = Required<PurchasesRecord<Tproducts, Tstore>> & BaseSystemFields<Texpand>
+export type RecipesResponse<Tastuces = unknown, Tcategories = unknown, Tingredients = unknown, Tmateriel = unknown, TpermissionWrite = unknown, TprepAlt = unknown, Tregime = unknown, Tsaison = unknown, Tteams = unknown, Texpand = unknown> = Required<RecipesRecord<Tastuces, Tcategories, Tingredients, Tmateriel, TpermissionWrite, TprepAlt, Tregime, Tsaison, Tteams>> & BaseSystemFields<Texpand>
 export type ShareLinksResponse<Texpand = unknown> = Required<ShareLinksRecord> & BaseSystemFields<Texpand>
 export type TeamdocsResponse<Texpand = unknown> = Required<TeamdocsRecord> & BaseSystemFields<Texpand>
 export type TeamsResponse<Texpand = unknown> = Required<TeamsRecord> & BaseSystemFields<Texpand>
@@ -287,9 +409,11 @@ export type CollectionRecords = {
 	_mfas: MfasRecord
 	_otps: OtpsRecord
 	_superusers: SuperusersRecord
+	categories: CategoriesRecord
 	event_materiel: EventMaterielRecord
 	event_todos: EventTodosRecord
 	events: EventsRecord
+	ingredients: IngredientsRecord
 	locks: LocksRecord
 	materiel: MaterielRecord
 	materiel_loan: MaterielLoanRecord
@@ -309,9 +433,11 @@ export type CollectionResponses = {
 	_mfas: MfasResponse
 	_otps: OtpsResponse
 	_superusers: SuperusersResponse
+	categories: CategoriesResponse
 	event_materiel: EventMaterielResponse
 	event_todos: EventTodosResponse
 	events: EventsResponse
+	ingredients: IngredientsResponse
 	locks: LocksResponse
 	materiel: MaterielResponse
 	materiel_loan: MaterielLoanResponse

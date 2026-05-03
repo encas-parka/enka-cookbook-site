@@ -13,6 +13,8 @@
     "dev:all": "concurrently \"hugo server -D\" \"cd svelte-app && bun run dev\" \"bash scripts_dev/pb-dev.sh\" --names \"HUGO,VITE,PB\" --prefix-colors \"magenta,cyan,green\""
   },
   "devDependencies": {
-    "concurrently": "^9.2.1"
+    "concurrently": "^9.2.1",
+    "gray-matter": "^4.0.3",
+    "pocketbase": "0.26.8"
   }
 }

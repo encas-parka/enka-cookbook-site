@@ -1,6 +1,6 @@
 ---
-title: Crumble aux fruits
-date: '2026-03-26T15:23:57.962Z'
+title: Crumble aux abricots
+date: '2026-04-20T13:43:54.541Z'
 draft: true
 typeR: dessert
 categories: []
@@ -13,19 +13,11 @@ cuisson: true
 serveHot: false
 description: null
 region: null
-saison: []
+saison:
+  - ete
 id: crumble-aux-fruits_fm-o9kzsk7xd
 materiel: []
 ingredients:
-  - uuid: i6jlwm
-    name: Pomme
-    originalQuantity: 100
-    originalUnit: unité
-    normalizedQuantity: 100
-    normalizedUnit: unité
-    comment: Les pommes peuvent être un autre fruit suivant la saison, par exemple des cerises ou des abricots
-    allergens: []
-    type: legumes
   - uuid: b77daa7e0067
     name: Bâtonnet de canelle
     originalQuantity: 50
@@ -64,6 +56,15 @@ ingredients:
     comment: ''
     allergens: []
     type: sucres
+  - uuid: xo0ibs
+    name: Abricot
+    originalQuantity: 5
+    originalUnit: kg
+    normalizedQuantity: 5000
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
 preparation: |-
   Pâte à crumble : dans une terrine, mélanger la farine, le beurre doux mou, le sucre et la canelle rapée (ou en poudre). Pétrir à la main pour qu'elle soit granuleuse et s'émiette facilement.
 
@@ -77,11 +78,11 @@ astuces: []
 preparation24h: null
 permissionWrite:
   - 69b01d0a001a6848cc4c
-auteur: null
+auteur: chrismino28
 createdAt: '2026-03-26T15:23:57.465+00:00'
-updatedAt: '2026-03-26T15:23:57.465+00:00'
+updatedAt: '2026-04-20T13:43:54.087+00:00'
 createdBy: 69b01d0a001a6848cc4c
-teams: null
+teams: []
 status: public
 rootRecipeId: null
 versionLabel: null

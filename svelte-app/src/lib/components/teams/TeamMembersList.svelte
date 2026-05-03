@@ -13,7 +13,6 @@
   import { nativeTeamsStore as teamsStore } from "$lib/stores/NativeTeamsStore.svelte";
   import ManageMemberModal from "./ManageMemberModal.svelte";
   import ConfirmModal from "$lib/components/ui/ConfirmModal.svelte";
-  import { pb } from "$lib/db-sync/pb-sync";
   import { toastService } from "$lib/services/toast.service.svelte";
 
   interface Props {
@@ -116,21 +115,13 @@
     return role === "owner" ? "Admin" : "Membre";
   }
 
-  // Renvoyer une invitation à un membre (utilise native-invite)
+  // Renvoyer une invitation à un membre via le store
   async function resendInvite(member: (typeof team.members)[number]) {
     if (!canManageMembers) return;
 
     resendingInvite = member.id;
     try {
-      await pb.send("/api/enka/invite-to-team", {
-        method: "POST",
-        body: {
-          teamId: team.id,
-          emails: [member.userEmail],
-        },
-      });
-
-      toastService.success(`Invitation renvoyée à ${member.name}`);
+      await teamsStore.inviteTeamMember(team.id, [member.userEmail]);
     } catch (err: any) {
       console.error("[TeamMembersList] Erreur renvoi invitation:", err);
       toastService.error("Erreur lors du renvoi de l'invitation : " + (err.message || err));

@@ -76,6 +76,77 @@ function buildInvitationEmail(inviterName, eventName, eventDescription, dateStar
 }
 
 /**
+ * Construit le HTML pour le template "invitation_to_team".
+ *
+ * Deux variantes :
+ *   - Si hasAccount=true : "Vous avez été ajouté à l'équipe X"
+ *   - Si hasAccount=false : "Créez un compte pour rejoindre l'équipe X"
+ *
+ * @param {string} inviterName - Nom de la personne qui invite
+ * @param {string} teamName - Nom de l'équipe
+ * @param {string} teamDescription - Description (optionnelle, peut etre "")
+ * @param {boolean} hasAccount - Si le destinataire a déjà un compte
+ * @returns {string} HTML complet de l'email
+ */
+function buildTeamInvitationEmail(inviterName, teamName, teamDescription, hasAccount) {
+  var descriptionHtml = "";
+  if (teamDescription) {
+    descriptionHtml =
+      '<p style="color:#555;font-size:15px;margin:16px 0;">' +
+      escapeHtml(teamDescription) +
+      "</p>";
+  }
+
+  var baseUrl = $os.getenv("ENKA_BASE_URL") || "https://enka-cookbook.app";
+
+  var heading, bodyText, ctaText, ctaUrl;
+
+  if (hasAccount) {
+    heading = escapeHtml(inviterName) + " vous a ajout\u00e9 \u00e0 l'\u00e9quipe :";
+    bodyText =
+      '<p style="color:#555;font-size:15px;margin:16px 0;">' +
+      "Vous faites maintenant partie de cette \u00e9quipe. Connectez-vous pour voir les \u00e9v\u00e9nements et documents partag\u00e9s." +
+      "</p>";
+    ctaText = "Voir mes \u00e9quipes";
+    ctaUrl = baseUrl + "/dashboard";
+  } else {
+    heading = escapeHtml(inviterName) + " vous invite \u00e0 rejoindre l'\u00e9quipe :";
+    bodyText =
+      '<p style="color:#555;font-size:15px;margin:16px 0;">' +
+      "Pour rejoindre cette \u00e9quipe, vous devez cr\u00e9er un compte enka-cookbook. " +
+      "C'est gratuit et rapide !" +
+      "</p>";
+    ctaText = "Cr\u00e9er mon compte";
+    ctaUrl = baseUrl + "/register";
+  }
+
+  var html =
+    '<div style="font-family:Arial,Helvetica,sans-serif;max-width:600px;margin:0 auto;padding:24px;">' +
+    '<h2 style="color:#2d3748;margin-bottom:8px;">' +
+    heading +
+    "</h2>" +
+    '<h1 style="color:#1a365d;font-size:24px;margin-top:0;">' +
+    escapeHtml(teamName) +
+    "</h1>" +
+    descriptionHtml +
+    bodyText +
+    '<div style="margin:32px 0;">' +
+    '<a href="' +
+    ctaUrl +
+    '" style="background-color:#4299e1;color:white;padding:14px 32px;text-decoration:none;border-radius:6px;font-size:16px;">' +
+    ctaText +
+    "</a>" +
+    "</div>" +
+    '<p style="color:#a0aec0;font-size:13px;margin-top:32px;">' +
+    "Si le bouton ne fonctionne pas, copiez ce lien dans votre navigateur :<br/>" +
+    '<a href="' + ctaUrl + '" style="color:#4299e1;">' + ctaUrl + "</a>" +
+    "</p>" +
+    "</div>";
+
+  return html;
+}
+
+/**
  * Echappe les caracteres HTML speciaux pour eviter les injections.
  */
 function escapeHtml(str) {
@@ -91,5 +162,6 @@ function escapeHtml(str) {
 // CommonJS export
 module.exports = {
   buildInvitationEmail: buildInvitationEmail,
+  buildTeamInvitationEmail: buildTeamInvitationEmail,
   escapeHtml: escapeHtml,
 };

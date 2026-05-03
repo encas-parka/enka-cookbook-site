@@ -355,12 +355,49 @@ export class NativeTeamsStore {
     emails: string[],
     _message?: string,
   ): Promise<void> {
-    // TODO: Lot F-3 — implémenter les invitations via PB hooks ou service externe
-    console.warn(
-      `[NativeTeamsStore] inviteTeamMember: stub — emails=${emails.join(", ")}, teamId=${teamId}. En attente du Lot F-3.`,
-    );
-    toastService.info(
-      "L'invitation par email sera disponible prochainement (migration en cours).",
+    if (emails.length === 0) return;
+
+    const result = await pb.send("/api/enka/invite-to-team", {
+      method: "POST",
+      body: { teamId, emails },
+    });
+
+    // Analyser les résultats
+    const added = result.results?.filter(
+      (r: { action: string }) => r.action === "added",
+    ).length || 0;
+    const invited = result.results?.filter(
+      (r: { action: string }) => r.action === "invited",
+    ).length || 0;
+    const alreadyMember = result.results?.filter(
+      (r: { action: string }) => r.action === "already_member",
+    ).length || 0;
+    const failed = result.results?.filter(
+      (r: { ok: boolean }) => !r.ok,
+    ).length || 0;
+
+    // Rafraîchir la team pour refléter les nouveaux membres
+    await this.fetchTeam(teamId);
+
+    // Toast de feedback
+    const parts: string[] = [];
+    if (added > 0) parts.push(`${added} membre(s) ajouté(s)`);
+    if (invited > 0) parts.push(`${invited} invitation(s) envoyée(s) par email`);
+    if (alreadyMember > 0) parts.push(`${alreadyMember} déjà membre(s)`);
+
+    if (failed > 0) {
+      console.warn(
+        `[NativeTeamsStore] Invitation partielle : ${failed} échec(s) sur ${emails.length}`,
+      );
+      toastService.warning(
+        `Invitations : ${parts.join(", ")} — ${failed} échec(s)`,
+      );
+    } else if (parts.length > 0) {
+      toastService.success(`Invitations : ${parts.join(", ")}`);
+    }
+
+    console.log(
+      `[NativeTeamsStore] inviteTeamMember: ${emails.length} email(s) → team ${teamId}`,
     );
   }
 

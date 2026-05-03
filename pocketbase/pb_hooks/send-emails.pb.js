@@ -3,12 +3,11 @@
 // ==============================================================================
 // Route custom : POST /api/enka/send-emails
 //
-// Route agnostique d'envoi d'emails — pilotee par template.
-// Utilisable pour : invitation a un event, invitation a une team, etc.
-// L'echec d'un email individuel ne bloque pas les autres.
+// Route d'envoi d'emails pour les invitations evenements.
+// Pilotee par template, appelee par le client (EventsStore).
 //
-// Fonctions helper chargees via require() car les handlers JSVM sont executes
-// dans un contexte isole (cf. docs PB "Caveats and limitations").
+// Pour les invitations equipe, utiliser POST /api/enka/invite-to-team
+// qui gere aussi la logique metier (lookup users, ajout members).
 //
 // Body : {
 //   template: "invitation_to_event",
@@ -65,23 +64,18 @@ routerAdd("POST", "/api/enka/send-emails", function(e) {
     throw new BadRequestError("dateStart requis");
   }
 
-  // --- Config mailer ---
-  var senderAddress = $app.settings().meta.senderAddress;
-  if (!senderAddress) {
-    throw new InternalServerError(
-      "SMTP non configure. Configurez l'expediteur dans les parametres PocketBase."
-    );
-  }
-
   var inviterName = e.auth.getString("name") || e.auth.getString("email") || "Quelqu'un";
 
-  // --- Charger le module template (DOIT etre DANS le handler) ---
+  // --- Charger les modules (DOIT etre DANS le handler) ---
+  var mailer = require(__hooks + "/lib/mailer.js");
   var emailTemplates = require(__hooks + "/lib/email-templates.js");
 
-  // --- Envoyer les emails ---
-  var results = [];
-  var okCount = 0;
-  var failCount = 0;
+  // Verifier la config SMTP (throw si pas configuré)
+  mailer.getSenderAddress();
+
+  // --- Preparer les emails a envoyer ---
+  var emailsToSend = [];
+  var skippedResults = [];
 
   for (var i = 0; i < recipients.length; i++) {
     var recipient = recipients[i];
@@ -89,41 +83,36 @@ routerAdd("POST", "/api/enka/send-emails", function(e) {
     var shareLinkId = recipient.shareLinkId || "";
 
     if (!email) {
-      results.push({ email: email, ok: false, error: "Email manquant" });
-      failCount++;
+      skippedResults.push({ email: email, ok: false, error: "Email manquant" });
       continue;
     }
 
     if (!shareLinkId) {
-      results.push({ email: email, ok: false, error: "shareLinkId manquant" });
-      failCount++;
+      skippedResults.push({ email: email, ok: false, error: "shareLinkId manquant" });
       continue;
     }
 
     // Verifier que le share_link existe et est actif
     var linkValid = false;
-
     try {
       var shareLink = $app.findRecordById("share_links", shareLinkId);
-
       if (shareLink.getBool("isActive")) {
         linkValid = true;
       }
-    } catch (e) {
+    } catch (err) {
       // share_link introuvable
     }
 
     if (!linkValid) {
-      results.push({
+      skippedResults.push({
         email: email,
         ok: false,
         error: "Lien de partage introuvable ou inactif"
       });
-      failCount++;
       continue;
     }
 
-    // Construire le HTML via le module partage
+    // Construire le HTML via le module template
     var html = emailTemplates.buildInvitationEmail(
       inviterName,
       eventName,
@@ -133,34 +122,30 @@ routerAdd("POST", "/api/enka/send-emails", function(e) {
       shareLinkId
     );
 
-    // Envoyer - utiliser $app.newMailClient() pour PB v0.37+
-    try {
-      var message = new MailerMessage({
-        from: { address: senderAddress },
-        to: [{ address: email }],
-        subject: inviterName + " vous invite a l'evenement: " + eventName,
-        html: html
-      });
-
-      $app.newMailClient().send(message);
-
-      results.push({ email: email, ok: true });
-      okCount++;
-      console.log("[send-emails] Email envoye a " + email + " pour l'evenement " + eventName);
-    } catch (e) {
-      results.push({
-        email: email,
-        ok: false,
-        error: String(e)
-      });
-      failCount++;
-      console.error("[send-emails] Erreur d'envoi a " + email + ": " + String(e));
-    }
+    emailsToSend.push({
+      to: email,
+      subject: inviterName + " vous invite a l'evenement: " + eventName,
+      html: html
+    });
   }
 
-  console.log(
-    "[send-emails] Termine: " + okCount + " ok, " + failCount + " echec(s) sur " + recipients.length + " destinataire(s)"
-  );
+  // --- Envoi batch via le mailer agnostique ---
+  var sendResults = mailer.sendBatch(emailsToSend, "send-emails");
+
+  // --- Combiner les resultats (skipped + envoyes) ---
+  var results = [];
+
+  for (var s = 0; s < skippedResults.length; s++) {
+    results.push(skippedResults[s]);
+  }
+
+  for (var r = 0; r < sendResults.length; r++) {
+    results.push({
+      email: sendResults[r].to,
+      ok: sendResults[r].ok,
+      error: sendResults[r].error || undefined
+    });
+  }
 
   // --- Reponse ---
   return e.json(200, { success: true, results: results });

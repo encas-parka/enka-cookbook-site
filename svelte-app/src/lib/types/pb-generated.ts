@@ -138,6 +138,7 @@ export const EventMaterielStatusOptions = {
 } as const
 export type EventMaterielStatusOptions = typeof EventMaterielStatusOptions[keyof typeof EventMaterielStatusOptions]
 export type EventMaterielRecord<Tspecs = unknown> = {
+	created: IsoAutoDateString
 	createdBy?: RecordIdString
 	deleted?: boolean
 	eventId: RecordIdString
@@ -152,6 +153,7 @@ export type EventMaterielRecord<Tspecs = unknown> = {
 	specs?: null | Tspecs
 	status?: EventMaterielStatusOptions
 	type?: EventMaterielTypeOptions
+	updated: IsoAutoDateString
 	where?: string
 	who?: string
 }
@@ -173,6 +175,7 @@ export const EventTodosStatusOptions = {
 export type EventTodosStatusOptions = typeof EventTodosStatusOptions[keyof typeof EventTodosStatusOptions]
 export type EventTodosRecord = {
 	assignedTo?: RecordIdString
+	created: IsoAutoDateString
 	dueDate?: IsoDateString
 	eventId: RecordIdString
 	id: string
@@ -183,6 +186,7 @@ export type EventTodosRecord = {
 	task: string
 	taskDescription?: string
 	taskOn?: IsoDateString
+	updated: IsoAutoDateString
 }
 
 export const EventsStatusOptions = {
@@ -195,6 +199,7 @@ export const EventsStatusOptions = {
 export type EventsStatusOptions = typeof EventsStatusOptions[keyof typeof EventsStatusOptions]
 export type EventsRecord<Tcontributors = unknown, Tdate = unknown, TguestEmails = unknown, Tmeals = unknown, Ttodos = unknown> = {
 	contributors?: null | Tcontributors
+	created: IsoAutoDateString
 	createdBy?: RecordIdString
 	date?: null | Tdate
 	dateEnd?: IsoDateString
@@ -208,6 +213,7 @@ export type EventsRecord<Tcontributors = unknown, Tdate = unknown, TguestEmails 
 	status?: EventsStatusOptions
 	teams?: RecordIdString[]
 	todos?: null | Ttodos
+	updated: IsoAutoDateString
 }
 
 export const IngredientsTypeOptions = {
@@ -234,9 +240,11 @@ export type IngredientsRecord<Tallergens = unknown, Tsaisons = unknown> = {
 
 export type LocksRecord = {
 	collection?: string
+	created: IsoAutoDateString
 	expiresAt?: IsoDateString
 	id: string
 	recordId?: string
+	updated: IsoAutoDateString
 	userId?: RecordIdString
 }
 
@@ -258,7 +266,8 @@ export const MaterielStatusOptions = {
 	"torepair": "torepair",
 } as const
 export type MaterielStatusOptions = typeof MaterielStatusOptions[keyof typeof MaterielStatusOptions]
-export type MaterielRecord = {
+export type MaterielRecord<Towner = unknown> = {
+	created: IsoAutoDateString
 	createdBy?: RecordIdString
 	deleted?: boolean
 	description?: string
@@ -266,6 +275,7 @@ export type MaterielRecord = {
 	isStorage?: boolean
 	location?: string
 	name: string
+	owner?: null | Towner
 	ownerUser?: RecordIdString
 	quantity?: number
 	shareableWith?: RecordIdString[]
@@ -273,6 +283,7 @@ export type MaterielRecord = {
 	storeIn?: RecordIdString
 	teamId?: RecordIdString
 	type?: MaterielTypeOptions
+	updated: IsoAutoDateString
 }
 
 export const MaterielLoanStatusOptions = {
@@ -288,12 +299,13 @@ export type MaterielLoanStatusOptions = typeof MaterielLoanStatusOptions[keyof t
 export type MaterielLoanRecord<Tmateriels = unknown> = {
 	borrowerUser?: RecordIdString
 	completedAt?: IsoDateString
+	created: IsoAutoDateString
 	createdBy?: RecordIdString
 	endDate?: IsoDateString
 	eventId?: RecordIdString
 	eventName?: string
 	id: string
-	materielId: RecordIdString
+	materielId?: RecordIdString
 	materiels?: null | Tmateriels
 	notes?: string
 	ownerId?: RecordIdString
@@ -304,9 +316,11 @@ export type MaterielLoanRecord<Tmateriels = unknown> = {
 	returnedAt?: IsoDateString
 	startDate?: IsoDateString
 	status?: MaterielLoanStatusOptions
+	updated: IsoAutoDateString
 }
 
 export type NotificationsRecord<Tdata = unknown> = {
+	created: IsoAutoDateString
 	data?: null | Tdata
 	id: string
 	link?: string
@@ -314,10 +328,12 @@ export type NotificationsRecord<Tdata = unknown> = {
 	read?: boolean
 	title?: string
 	type?: string
+	updated: IsoAutoDateString
 	userId: RecordIdString
 }
 
 export type ProductsRecord<TmergedFrom = unknown, TpreviousNames = unknown, Tspecs = unknown, TstockReel = unknown, Tstore = unknown, TtotalNeededOverride = unknown, Twho = unknown> = {
+	created: IsoAutoDateString
 	deleted?: boolean
 	eventId: RecordIdString
 	id: string
@@ -338,11 +354,13 @@ export type ProductsRecord<TmergedFrom = unknown, TpreviousNames = unknown, Tspe
 	stockReel?: null | TstockReel
 	store?: null | Tstore
 	totalNeededOverride?: null | TtotalNeededOverride
+	updated: IsoAutoDateString
 	updatedBy?: RecordIdString
 	who?: null | Twho
 }
 
 export type PurchasesRecord<Tstore = unknown> = {
+	created: IsoAutoDateString
 	createdBy?: RecordIdString
 	deleted?: boolean
 	deliveryDate?: IsoDateString
@@ -358,6 +376,7 @@ export type PurchasesRecord<Tstore = unknown> = {
 	status?: string
 	store?: null | Tstore
 	unit: string
+	updated: IsoAutoDateString
 	who?: string
 }
 
@@ -380,6 +399,7 @@ export type RecipesRecord<Tastuces = unknown, Tcategories = unknown, Tingredient
 	auteur?: string
 	categories?: null | Tcategories
 	check?: boolean
+	created: IsoAutoDateString
 	createdBy?: RecordIdString
 	cuisson?: boolean
 	description?: string
@@ -404,11 +424,13 @@ export type RecipesRecord<Tastuces = unknown, Tcategories = unknown, Tingredient
 	teams?: null | Tteams
 	title: string
 	typeR?: RecipesTypeROptions
+	updated: IsoAutoDateString
 	versionLabel?: string
 }
 
 export type ShareLinksRecord = {
 	access_level?: string
+	created: IsoAutoDateString
 	expiresAt?: IsoDateString
 	id: string
 	isActive?: boolean
@@ -416,22 +438,27 @@ export type ShareLinksRecord = {
 	maxUses?: number
 	target_id?: string
 	token?: string
+	updated: IsoAutoDateString
 	useCount?: number
 }
 
 export type TeamdocsRecord = {
 	content?: string
+	created: IsoAutoDateString
 	eventId?: RecordIdString
 	id: string
 	status?: string
 	teamId?: RecordIdString
 	title?: string
+	updated: IsoAutoDateString
 }
 
 export type TeamsRecord = {
+	created: IsoAutoDateString
 	id: string
 	members?: RecordIdString[]
 	name: string
+	updated: IsoAutoDateString
 }
 
 export type UsersRecord = {
@@ -459,7 +486,7 @@ export type EventTodosResponse<Texpand = unknown> = Required<EventTodosRecord> &
 export type EventsResponse<Tcontributors = unknown, Tdate = unknown, TguestEmails = unknown, Tmeals = unknown, Ttodos = unknown, Texpand = unknown> = Required<EventsRecord<Tcontributors, Tdate, TguestEmails, Tmeals, Ttodos>> & BaseSystemFields<Texpand>
 export type IngredientsResponse<Tallergens = unknown, Tsaisons = unknown, Texpand = unknown> = Required<IngredientsRecord<Tallergens, Tsaisons>> & BaseSystemFields<Texpand>
 export type LocksResponse<Texpand = unknown> = Required<LocksRecord> & BaseSystemFields<Texpand>
-export type MaterielResponse<Texpand = unknown> = Required<MaterielRecord> & BaseSystemFields<Texpand>
+export type MaterielResponse<Towner = unknown, Texpand = unknown> = Required<MaterielRecord<Towner>> & BaseSystemFields<Texpand>
 export type MaterielLoanResponse<Tmateriels = unknown, Texpand = unknown> = Required<MaterielLoanRecord<Tmateriels>> & BaseSystemFields<Texpand>
 export type NotificationsResponse<Tdata = unknown, Texpand = unknown> = Required<NotificationsRecord<Tdata>> & BaseSystemFields<Texpand>
 export type ProductsResponse<TmergedFrom = unknown, TpreviousNames = unknown, Tspecs = unknown, TstockReel = unknown, Tstore = unknown, TtotalNeededOverride = unknown, Twho = unknown, Texpand = unknown> = Required<ProductsRecord<TmergedFrom, TpreviousNames, Tspecs, TstockReel, Tstore, TtotalNeededOverride, Twho>> & BaseSystemFields<Texpand>

@@ -199,6 +199,27 @@ export class EnkaDB extends Dexie {
       joinLinks: "linkId",
       catalog: "key",
     });
+
+    // v7: add 'updated' index for delta sync + rename mainId → eventId (products/purchases)
+    this.version(7).stores({
+      events: "id, updated, status, createdBy, dateStart",
+      products: "id, updated, eventId, productHugoUuid, store, status",
+      purchases: "id, updated, eventId, *products, status, store",
+      recipes: "id, updated, status, typeR, createdBy, lockedBy",
+      materiels: "id, updated, type, status, owner, deleted",
+      materielLoans: "id, updated, status, ownerId, eventId, startDate, endDate",
+      eventMateriels: "id, updated, eventId, type, status, groupId",
+      teamdocs: "id, updated, teamId, eventId, status",
+      locks: "id, updated, userId, expiresAt",
+      eventTodos: "id, updated, eventId, status, taskOn, priority",
+      shareLinks: "id, updated, target_id, link_type, isActive",
+      recipeData: "key",
+      productNeeds: "id, updated, mainId",
+      syncMeta: "collectionId",
+      nativeTeams: "id, updated",
+      joinLinks: "linkId",
+      catalog: "key",
+    });
   }
 }
 

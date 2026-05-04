@@ -127,14 +127,14 @@ class ProductsStore {
   /**
    * Lance la souscription liveQuery sur les 3 tables Dexie.
    */
-  #startDataSubscription(mainId: string) {
+  #startDataSubscription(eventId: string) {
     this.#dataSubscription?.unsubscribe();
 
     this.#dataSubscription = liveQuery(async () => {
       const [products, purchases, needs] = await Promise.all([
-        db.products.where("mainId").equals(mainId).toArray(),
-        db.purchases.where("mainId").equals(mainId).toArray(),
-        db.productNeeds.where("mainId").equals(mainId).toArray(),
+        db.products.where("eventId").equals(eventId).toArray(),
+        db.purchases.where("eventId").equals(eventId).toArray(),
+        db.productNeeds.where("mainId").equals(eventId).toArray(),
       ]);
       return { products, purchases, needs };
     }).subscribe({
@@ -678,10 +678,10 @@ class ProductsStore {
       // 1. Delta sync PocketBase → Dexie
       this.#syncing = true;
       await this.#productsCollection.initialFetch({
-        filter: ["mainId = {:mainId}", { mainId: this.#currentMainId! }],
+        filter: ["eventId = {:eventId}", { eventId: this.#currentEventId! }],
       });
       await this.#purchasesCollection.initialFetch({
-        filter: ["mainId = {:mainId}", { mainId: this.#currentMainId! }],
+        filter: ["eventId = {:eventId}", { eventId: this.#currentEventId! }],
       });
       this.#syncing = false;
       this.#lastSync = new Date().toISOString();
@@ -703,7 +703,7 @@ class ProductsStore {
       this.#lastMealsHash = JSON.stringify(event.meals);
 
       // 3. Lancer le liveQuery unique (observe 3 tables → reconciler)
-      this.#startDataSubscription(this.#currentMainId!);
+      this.#startDataSubscription(this.#currentEventId!);
 
       // 4. Abonnements realtime (PocketBase SSE → Dexie → liveQuery → reconciler)
       this.#productsCollection.subscribe();
@@ -1101,18 +1101,18 @@ class ProductsStore {
    * ce delta sync garantit que Dexie (et donc le liveQuery → #onDataChange) est à jour.
    */
   async syncFromRemote(): Promise<void> {
-    if (!this.#currentMainId) {
-      console.warn("[ProductsStore] syncFromRemote() appelé sans currentMainId");
+    if (!this.#currentEventId) {
+      console.warn("[ProductsStore] syncFromRemote() appelé sans currentEventId");
       return;
     }
 
     try {
       await Promise.all([
         this.#productsCollection.initialFetch({
-          filter: ["mainId = {:mainId}", { mainId: this.#currentMainId }],
+          filter: ["eventId = {:eventId}", { eventId: this.#currentEventId }],
         }),
         this.#purchasesCollection.initialFetch({
-          filter: ["mainId = {:mainId}", { mainId: this.#currentMainId }],
+          filter: ["eventId = {:eventId}", { eventId: this.#currentEventId }],
         }),
       ]);
       this.#lastSync = new Date().toISOString();
@@ -1167,7 +1167,7 @@ class ProductsStore {
     for (const qty of quantities) {
       await this.#purchasesCollection.create({
         products: [productId],
-        mainId: this.#currentMainId!,
+        eventId: this.#currentEventId!,
         quantity: qty.q,
         unit: qty.u,
         status: purchaseStatus,
@@ -1215,7 +1215,7 @@ class ProductsStore {
       productType: productData.productType || "Autre",
       store: productData.store || null,
       who: productData.who || [],
-      mainId: this.#currentMainId!,
+      eventId: this.#currentEventId!,
       status: productData.status || "active",
       stockReel: productData.stockReel || null,
       updatedBy: globalState.userName,
@@ -1237,12 +1237,12 @@ class ProductsStore {
     notes?: string;
     who?: string;
   }): Promise<void> {
-    const mainId = this.#currentMainId;
-    if (!mainId) throw new Error("Aucun événement principal actif");
+    const eventId = this.#currentEventId;
+    if (!eventId) throw new Error("Aucun événement principal actif");
 
     await this.#purchasesCollection.create({
       products: [],
-      mainId,
+      eventId,
       quantity: 1,
       unit: "global",
       status: "expense",
@@ -1350,7 +1350,7 @@ class ProductsStore {
       deliveryDate = new Date().toISOString();
     }
 
-    const mainId = this.#currentMainId!;
+    const eventId = this.#currentEventId!;
     let totalPurchasesCreated = 0;
     let totalExpensesCreated = 0;
 
@@ -1370,7 +1370,7 @@ class ProductsStore {
               productType: enriched.productType || "",
               store: enriched.store as string | null,
               who: enriched.who || [],
-              mainId,
+              eventId,
               status: "active",
               stockReel: enriched.stockReel,
               isMerged: enriched.isMerged || false,
@@ -1391,7 +1391,7 @@ class ProductsStore {
         for (const op of chunk) {
           batch.collection("purchases").create({
             products: [op.productId],
-            mainId,
+            eventId,
             quantity: op.qty.q,
             unit: op.qty.u,
             status: purchaseStatus,
@@ -1413,7 +1413,7 @@ class ProductsStore {
       if (invoiceData.invoiceTotal) {
         await this.#purchasesCollection.create({
           products: [],
-          mainId,
+          eventId,
           quantity: 1,
           unit: "global",
           status: "expense",

@@ -202,6 +202,7 @@ export function createSyncCollection<T extends PbDoc>(
 		// 1. Find the latest `updated` timestamp in local data
 		const latest = await table.orderBy('updated').last();
 		const since = (latest as any)?.updated ?? '2000-01-01 00:00:00';
+		const localCount = await table.count();
 
 		// 2. Build the delta filter
 		const userFilter = resolveFilter(pb, fetchOptions);
@@ -214,16 +215,39 @@ export function createSyncCollection<T extends PbDoc>(
 			? pb.filter(`(${userFilter}) && updated > {:since}`, combinedVars)
 			: pb.filter('updated > {:since}', { since });
 
-		// 3. Fetch all updated records from PocketBase
-		const freshRecords = await pb.collection(collectionName).getFullList({
-			filter: deltaFilter,
+		console.log(
+			`[pb-sync] ${collectionName}: fetching with filter="${deltaFilter}" (localCount=${localCount})`
+		);
+
+		// 3. Fetch all updated records from PocketBase (with delta filter)
+		const queryOpts = {
 			sort: 'updated',
 			...(fetchOptions?.fields ? { fields: fetchOptions.fields } : {}),
 			...(fetchOptions?.expand ? { expand: fetchOptions.expand } : {}),
 			...(fetchOptions?.query ? { query: fetchOptions.query } : {})
+		};
+
+		let freshRecords = await pb.collection(collectionName).getFullList({
+			filter: deltaFilter,
+			...queryOpts
 		});
 
-		// 4. Normalize and upsert into Dexie
+		// 3b. Fallback: if delta filter returned 0 but local DB is empty,
+		//     retry WITHOUT the updated filter (full fetch).
+		//     This handles the case where `updated` column was added after
+		//     the initial data import and existing records have null/empty values.
+		if (freshRecords.length === 0 && localCount === 0) {
+			const fullFilter = userFilter ?? undefined;
+			console.warn(
+				`[pb-sync] ${collectionName}: delta filter returned 0, local DB empty — retrying without updated filter`
+			);
+			freshRecords = await pb.collection(collectionName).getFullList({
+				...(fullFilter ? { filter: fullFilter } : {}),
+				...queryOpts
+			});
+		}
+
+		// 4. Upsert into Dexie
 		if (freshRecords.length > 0) {
 			const records = freshRecords as unknown as T[];
 

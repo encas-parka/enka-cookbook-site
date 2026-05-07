@@ -209,9 +209,10 @@ export class NativeTeamsStore {
     if (!userId) return;
 
     // Récupérer toutes les teams dont l'utilisateur est membre
+    // Note: utilise ~ au lieu de ?= (cassé dans PB v0.37.5)
     const teams = await pb.collection("teams").getFullList({
       expand: "members,createdBy",
-      filter: pb.filter("members ?= {:userId}", { userId }),
+      filter: pb.filter("members ~ {:userId}", { userId }),
     });
 
     // Vider les teams obsolètes

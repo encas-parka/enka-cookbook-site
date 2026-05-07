@@ -266,7 +266,7 @@ export const MaterielStatusOptions = {
 	"torepair": "torepair",
 } as const
 export type MaterielStatusOptions = typeof MaterielStatusOptions[keyof typeof MaterielStatusOptions]
-export type MaterielRecord<Towner = unknown> = {
+export type MaterielRecord = {
 	created: IsoAutoDateString
 	createdBy?: RecordIdString
 	deleted?: boolean
@@ -275,7 +275,6 @@ export type MaterielRecord<Towner = unknown> = {
 	isStorage?: boolean
 	location?: string
 	name: string
-	owner?: null | Towner
 	ownerUser?: RecordIdString
 	quantity?: number
 	shareableWith?: RecordIdString[]
@@ -485,7 +484,7 @@ export type EventTodosResponse<Texpand = unknown> = Required<EventTodosRecord> &
 export type EventsResponse<Tcontributors = unknown, Tdate = unknown, TguestEmails = unknown, Tmeals = unknown, Ttodos = unknown, Texpand = unknown> = Required<EventsRecord<Tcontributors, Tdate, TguestEmails, Tmeals, Ttodos>> & BaseSystemFields<Texpand>
 export type IngredientsResponse<Tallergens = unknown, Tsaisons = unknown, Texpand = unknown> = Required<IngredientsRecord<Tallergens, Tsaisons>> & BaseSystemFields<Texpand>
 export type LocksResponse<Texpand = unknown> = Required<LocksRecord> & BaseSystemFields<Texpand>
-export type MaterielResponse<Towner = unknown, Texpand = unknown> = Required<MaterielRecord<Towner>> & BaseSystemFields<Texpand>
+export type MaterielResponse<Texpand = unknown> = Required<MaterielRecord> & BaseSystemFields<Texpand>
 export type MaterielLoanResponse<Tmateriels = unknown, Texpand = unknown> = Required<MaterielLoanRecord<Tmateriels>> & BaseSystemFields<Texpand>
 export type NotificationsResponse<Tdata = unknown, Texpand = unknown> = Required<NotificationsRecord<Tdata>> & BaseSystemFields<Texpand>
 export type ProductsResponse<TmergedFrom = unknown, TpreviousNames = unknown, Tspecs = unknown, TstockReel = unknown, Tstore = unknown, TtotalNeededOverride = unknown, Twho = unknown, Texpand = unknown> = Required<ProductsRecord<TmergedFrom, TpreviousNames, Tspecs, TstockReel, Tstore, TtotalNeededOverride, Twho>> & BaseSystemFields<Texpand>

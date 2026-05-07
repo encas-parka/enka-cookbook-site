@@ -65,22 +65,44 @@ routerAdd("POST", "/api/enka/join-event", function(e) {
     throw new NotFoundError("Evenement introuvable");
   }
 
-  // --- Ajouter l'email dans guestEmails[] si pas deja present ---
+  // --- Ajouter l'utilisateur dans guestUsers[] si pas deja present ---
+  var currentGuestUsers = event.get("guestUsers") || [];
+  var guestUserArray = Array.isArray(currentGuestUsers) ? currentGuestUsers : [];
+
+  var alreadyJoined = false;
+  for (var i = 0; i < guestUserArray.length; i++) {
+    if (guestUserArray[i] === userId) {
+      alreadyJoined = true;
+      break;
+    }
+  }
+
+  if (!alreadyJoined) {
+    var updatedGuestUsers = guestUserArray.concat([userId]);
+    event.set("guestUsers", updatedGuestUsers);
+  }
+
+  // --- Ajouter l'email dans guestEmails[] pour tracking ---
   var currentGuests = event.get("guestEmails") || [];
   var guestArray = Array.isArray(currentGuests) ? currentGuests : [];
 
   if (guestArray.indexOf(userEmail) === -1) {
     var updatedGuests = guestArray.concat([userEmail]);
     event.set("guestEmails", updatedGuests);
+  }
+
+  // Save if anything changed
+  if (!alreadyJoined || guestArray.indexOf(userEmail) === -1) {
     $app.save(event);
     $app.logger().info(
       "User joined event",
       "email", userEmail,
+      "userId", userId,
       "eventId", targetId
     );
   } else {
     console.log(
-      "[join-event] " + userEmail + " deja dans l'evenement " + targetId
+      "[join-event] " + userEmail + " already in event " + targetId
     );
   }
 

@@ -295,12 +295,12 @@ Les mots de passe Appwrite sont hashés en **argon2** et ne sont pas portables d
 
 **H. Notes schéma PB — Spécificités materiel/materiel_loan** :
 
-Ces collections ont des différences structurelles par rapport à Appwrite qui méritent documentation :
-
-- **`materiel.owner`** (json, ajouté via Admin UI) : Stocke le JSON Appwrite brut `{"userName":"","userId":"","teamName":"Enka Parka","teamId":"..."}`. Le code app (`enrichMaterielFromAppwrite`) utilise `parseOwnerFromAppwrite(doc.owner)` pour parser ce JSON. Ce champ est la source de vérité pour l'affichage du propriétaire.
-- **`materiel.ownerUser`** (relation → users) et **`materiel.teamId`** (relation → teams) : Champs de relation dérivés du JSON `owner`. Utilisés par les API rules PB pour le contrôle d'accès (`ownerUser = @request.auth.id || teamId.members ~ @request.auth.id`). Peuvent être null si le userId/teamId n'est pas mappable.
+- ~~**`materiel.owner`**~~ → **Supprimé** `66015c58` : remplacé par les relations `teamId` (→ teams) et `ownerUser` (→ users). Le frontend résout `teamName` via `nativeTeamsStore`.
+- **`materiel.ownerUser`** (relation → users) et **`materiel.teamId`** (relation → teams) : Sources de vérité pour l'affichage et les permissions. API rules : `ownerUser = @request.auth.id || teamId.members ~ @request.auth.id`.
 - **`materiel.createdBy`** (relation → users) : Existe dans le schéma PB mais **pas dans Appwrite**. Sera toujours null pour les données migrées. Ce n'est pas bloquant.
+- ~~**`materiel_loan.materielId`**~~ → **Supprimé** `1b2531d9` : champ relation mort, jamais utilisé par le frontend. Le JSON `materiels` (MaterielLoanItem[]) gère le multi-matériel par loan.
 - **`materiel_loan.ownerId`** (relation → teams) : En Appwrite, `ownerId` contient toujours un **team ID** (pas un user ID). La relation PB pointe vers `teams`, ce qui est correct. Actuellement l'UI ne permet que la sélection d'une team comme propriétaire d'un emprunt — un `ownerUser` n'a pas été implémenté. Le nom `ownerId` est donc légèrement trompeur mais fonctionnellement correct.
+- ~~**`teams.memberNames`**~~ → **Supprimé** : champ JSON mort, jamais lu ni écrit. Les noms sont résolus via `team.members[]` (expand PB).
 
 **I. Bug PB v0.37.5 — Opérateur `?=` cassé + workaround `~`** :
 

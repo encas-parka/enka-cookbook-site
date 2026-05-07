@@ -63,31 +63,44 @@ function filterEventLabels(labels: string[]): string[] {
   return (labels || []).filter((l: string) => l.length === 20 && /^[0-9a-f]{20}$/.test(l));
 }
 
-/** Remap user IDs inside a contributors JSON array */
-function remapContributors(contributors: string[], userMap: UserMap): string[] {
+/** Parse string-encoded JSON array items into actual objects.
+ *  Appwrite stores JSON fields as arrays of strings like ["{\"id\":\"x\"}", ...].
+ *  PB expects actual objects: [{"id":"x"}, ...].
+ *  Returns parsed objects with refId remapping applied. */
+function remapContributors(contributors: string[], userMap: UserMap): any[] {
   return (contributors || []).map((cStr) => {
     try {
-      const c = JSON.parse(cStr);
+      const c = typeof cStr === "string" ? JSON.parse(cStr) : cStr;
       if (c.id && userMap[c.id]) c.id = userMap[c.id].refId;
-      return JSON.stringify(c);
+      return c; // Return object, not string!
     } catch {
       return cStr;
     }
   });
 }
 
-/** Remap user IDs inside a todos JSON array */
-function remapTodos(todos: string[], userMap: UserMap): string[] {
+/** Parse todos strings → objects, remap assignedTo user IDs */
+function remapTodos(todos: string[], userMap: UserMap): any[] {
   return (todos || []).map((tStr) => {
     try {
-      const t = JSON.parse(tStr);
+      const t = typeof tStr === "string" ? JSON.parse(tStr) : tStr;
       if (t.assignedTo && Array.isArray(t.assignedTo)) {
         t.assignedTo = t.assignedTo.map((uid: string) => userMap[uid]?.refId || null).filter(Boolean);
       }
-      return JSON.stringify(t);
+      return t; // Return object, not string!
     } catch {
       return tStr;
     }
+  });
+}
+
+/** Parse string-encoded JSON array items into actual objects */
+function parseJsonArray(items: any[]): any[] {
+  return (items || []).map((item) => {
+    if (typeof item === "string") {
+      try { return JSON.parse(item); } catch { return item; }
+    }
+    return item;
   });
 }
 
@@ -141,7 +154,6 @@ function main() {
     teamdocs: GenericMap;
     event_todos: GenericMap;
     share_links: GenericMap;
-    recipes: GenericMap;
     // NOTE: locks are NOT migrated — users will be disconnected post-migration anyway
   } = {
     _meta: { createdAt: new Date().toISOString(), source: "unknown" },
@@ -157,6 +169,8 @@ function main() {
     event_todos: {},
     share_links: {},
   };
+
+  // NOTE: recipes are NOT transformed here — use migrate-recipes.ts (Hugo markdown source)
 
   // Load all exports
   const usersExport = loadExport("users");
@@ -427,6 +441,13 @@ function main() {
     // todos (remap user IDs inside JSON strings, keep embedded in event)
     const remappedTodos = remapTodos(awEvent.todos || [], userMap);
 
+    // Build guestUsers: match guestEmails → known registered users
+    // guestEmails stays for invitation tracking (emails of non-registered users)
+    // guestUsers is a relation field resolved during import (IDs only, safe with ~ operator)
+    const guestUsers = guestEmails
+      .map(email => findUserByEmail(email, userMap))
+      .filter((id): id is string => id !== null);
+
     migrationMap.events[appwriteId] = { refId, name: awEvent.name };
 
     pbEvents.push({
@@ -438,8 +459,9 @@ function main() {
       createdBy,
       teams: pbTeamIds.length > 0 ? pbTeamIds : null,
       guestEmails: guestEmails.length > 0 ? guestEmails : null,
+      guestUsers: guestUsers.length > 0 ? guestUsers : null,
       contributors: contributors.length > 0 ? contributors : null,
-      meals: awEvent.meals || null,
+      meals: awEvent.meals ? parseJsonArray(awEvent.meals) : null,
       date: awEvent.allDates || null,
       todos: remappedTodos.length > 0 ? remappedTodos : null,
       created, // Mapped from $createdAt
@@ -635,16 +657,16 @@ function main() {
     const createdBy = resolveRelation(awLoan.createdBy, userMap, "createdBy", false, `Loan ${appwriteId}`);
     const materielId = resolveRelation(awLoan.materielId, materielMap, "materielId", false, `Loan ${appwriteId}`);
 
-    // Remap materielIds inside materiels JSON
+    // Remap materielIds inside materiels JSON — parse strings → objects
     let materiels = awLoan.materiels || null;
     if (Array.isArray(materiels)) {
       materiels = materiels.map((mStr: string) => {
         try {
-          const m = JSON.parse(mStr);
+          const m = typeof mStr === "string" ? JSON.parse(mStr) : mStr;
           if (m.materielId && materielMap[m.materielId]) {
             m.materielId = materielMap[m.materielId].refId;
           }
-          return JSON.stringify(m);
+          return m; // Return object, not string!
         } catch {
           return mStr;
         }
@@ -867,69 +889,6 @@ function main() {
    console.log("⏭️  Skipping locks (not migrated — users will reconnect post-migration)\n");
 
    // =========================================================================
-   // 13. RECIPES (from Appwrite — NOT from Hugo markdown)
-   // =========================================================================
-   console.log("🔄 Transforming recipes...");
-   const recipesExport = loadExport("recipes");
-   const pbRecipes: any[] = [];
-
-   // Initialize recipes map
-   migrationMap.recipes = migrationMap.recipes || {};
-
-   for (const awRecipe of recipesExport.rows) {
-     const appwriteId = awRecipe.$id;
-     const refId = `aw_${appwriteId}`;
-
-     // Map $createdAt → created, $updatedAt → updated (Appwrite system fields)
-     const created = awRecipe.$createdAt || null;
-     const updated = awRecipe.$updatedAt || null;
-
-     // createdBy: Appwrite user ID → refId (may be empty for legacy recipes)
-     const createdBy = awRecipe.createdBy ? resolveRelation(awRecipe.createdBy, userMap, "createdBy", false, `Recipe "${awRecipe.title}"`) : null;
-
-     migrationMap.recipes[appwriteId] = { refId, title: awRecipe.title };
-
-     pbRecipes.push({
-       id: appwriteId, // Keep Appwrite ID as PB ID (slug_uuid format)
-       title: awRecipe.title || null,
-       description: awRecipe.description || null,
-       ingredients: awRecipe.ingredients || null,
-       preparation: awRecipe.preparation || null,
-       typeR: awRecipe.typeR || null,
-       categories: awRecipe.categories || null,
-       createdBy,
-       auteur: awRecipe.auteur || null,
-       lockedBy: awRecipe.lockedBy || null,
-       plate: awRecipe.plate ?? 1,
-       draft: awRecipe.draft || false,
-       regime: awRecipe.regime || null,
-       publishedAt: awRecipe.publishDate || null,
-       teams: awRecipe.teams || null,
-       materiel: awRecipe.materiel || null,
-       prepAlt: awRecipe.prepAlt || null,
-       region: awRecipe.region || null,
-       cuisson: awRecipe.cuisson || false,
-       quantite_desc: awRecipe.quantite_desc || null,
-       check: awRecipe.check || false,
-       preparation24h: awRecipe.preparation24h || null,
-       permissionWrite: awRecipe.permissionWrite || null,
-       serveHot: awRecipe.serveHot || false,
-       saison: awRecipe.saison || null,
-       astuces: awRecipe.astuces || null,
-       status: awRecipe.status || "public",
-       versionLabel: awRecipe.versionLabel || null,
-       rootRecipeId: awRecipe.rootRecipeId ? resolveRelation(awRecipe.rootRecipeId, migrationMap.recipes, "rootRecipeId", false, `Recipe "${awRecipe.title}"`) : null,
-       created, // Mapped from $createdAt
-       updated, // Mapped from $updatedAt
-       _refId: refId,
-       _appwriteId: appwriteId,
-     });
-   }
-
-   saveImport("recipes", pbRecipes);
-   console.log(`   ✅ ${pbRecipes.length} recipes transformed (from Appwrite)\n`);
-
-   // =========================================================================
    // Save migration map
    // =========================================================================
   writeFileSync(MAP_FILE, JSON.stringify(migrationMap, null, 2) + "\n");
@@ -953,6 +912,7 @@ function main() {
     ["event_todos", pbEventTodos.length, todosSkipped ? `${todosSkipped} standalone skipped (orphan eventId)` : ""],
     ["share_links", pbShareLinks.length, ""],
     ["locks", 0, "SKIPPED — not migrated"],
+    ["recipes", 0, "SKIPPED — use migrate-recipes.ts (Hugo source)"],
   ];
 
   for (const [name, count, note] of summaries) {

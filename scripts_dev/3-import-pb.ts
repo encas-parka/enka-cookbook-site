@@ -13,7 +13,7 @@
  *   - scripts_dev/migration-map.json
  *   - PocketBase running locally
  */
-import { readFileSync, existsSync } from "fs";
+import { readFileSync, writeFileSync, existsSync } from "fs";
 import { join } from "path";
 
 // --- Config ---
@@ -34,7 +34,9 @@ const COLLECTION_ORDER = [
   "teamdocs",
   "event_todos",
   "share_links",
-  "recipes", // ← Added from Appwrite (no dependencies on other collections except users for createdBy)
+  "ingredients",     // no dependencies
+  "categories",      // no dependencies
+  "recipes",         // depends on users (createdBy) and categories
 ] as const;
 
 // Fields configuration per collection for refId remapping
@@ -43,15 +45,22 @@ const RELATION_FIELDS: Record<string, Record<string, "single" | "multi">> = {
   users: {},
   teams: { members: "multi" },
   materiel: { teamId: "single", ownerUser: "single", storeIn: "single", shareableWith: "multi" },
-  events: { createdBy: "single", teams: "multi" },
+  events: { createdBy: "single", teams: "multi", guestUsers: "multi" },
   products: { eventId: "single", updatedBy: "single", mergedInto: "single" },
   purchases: { eventId: "single", createdBy: "single", products: "multi" },
-  event_materiel: { eventId: "single", sourceMaterielId: "single", loanId: "single", createdBy: "single" },
+  event_materiel: { eventId: "single", sourceMaterielId: "single", loanId: "single", createdBy: "single", groupId: "single" },
   materiel_loan: { materielId: "single", eventId: "single", createdBy: "single", responsibleId: "single", ownerId: "single", borrowerUser: "single" },
   teamdocs: { teamId: "single", eventId: "single" },
   event_todos: { eventId: "single", assignedTo: "single" },
   share_links: {}, // target_id is text, handled separately
-  recipes: { createdBy: "single", rootRecipeId: "single" }, // ← Added recipes
+  ingredients: {},
+  categories: {},
+  recipes: {
+    createdBy: "single",
+    permissionWrite: "multi",
+    rootRecipeId: "single",
+    teams: "multi",
+  },
 };
 
 // JSON fields that may contain refIds (need string replacement)
@@ -67,7 +76,9 @@ const JSON_FIELDS: Record<string, string[]> = {
   teamdocs: [],
   event_todos: [],
   share_links: [],
-  recipes: ["ingredients", "categories", "regime", "teams", "materiel", "prepAlt", "who", "astuces", "saison"], // ← Added recipes
+  ingredients: [],
+  categories: [],
+  recipes: ["ingredients"],
 };
 
 // Text fields that contain refIds (not relations but need remapping)
@@ -158,7 +169,7 @@ async function pbList(collection: string, page = 1, perPage = 500): Promise<{ it
 const refToPb = new Map<string, string>(); // refId → PB ID
 
 function resolve(refId: string | null | undefined): string | null {
-  if (!refId) return null;
+  if (!refId || refId === "") return null;
   return refToPb.get(refId) ?? null;
 }
 
@@ -174,6 +185,20 @@ function remapString(str: string): string {
     result = result.replaceAll(refId, pbId);
   }
   return result;
+}
+
+/** Deep remap all refIds in an object's string values with PB IDs */
+function remapObject(obj: any): any {
+  if (typeof obj === "string") return remapString(obj);
+  if (Array.isArray(obj)) return obj.map(remapObject);
+  if (typeof obj === "object" && obj !== null) {
+    const result: any = {};
+    for (const key of Object.keys(obj)) {
+      result[key] = remapObject(obj[key]);
+    }
+    return result;
+  }
+  return obj;
 }
 
 /** Process a record: resolve relation fields and remap JSON fields */
@@ -203,7 +228,7 @@ function processRecord(collection: string, record: any): { data: Record<string, 
     }
   }
 
-  // Remap JSON fields
+  // Remap JSON fields — handles strings, arrays of strings, arrays of objects, and nested objects
   for (const field of jsons) {
     const val = data[field];
     if (val === null || val === undefined) continue;
@@ -213,8 +238,11 @@ function processRecord(collection: string, record: any): { data: Record<string, 
     } else if (Array.isArray(val)) {
       data[field] = val.map((item: any) => {
         if (typeof item === "string") return remapString(item);
+        if (typeof item === "object" && item !== null) return remapObject(item);
         return item;
       });
+    } else if (typeof val === "object") {
+      data[field] = remapObject(val);
     }
   }
 
@@ -363,6 +391,15 @@ async function main() {
   }
 
   console.log(`\n   NEXT: Run validate-migration.ts to verify, or test the app.`);
+
+  // Save refId → PB ID mapping for downstream scripts (e.g., 4-fix-timestamps.ts)
+  const idMapPath = join(IMPORT_DIR, "id-map.json");
+  const idMapObj: Record<string, string> = {};
+  for (const [refId, pbId] of refToPb) {
+    idMapObj[refId] = pbId;
+  }
+  writeFileSync(idMapPath, JSON.stringify(idMapObj, null, 2) + "\n");
+  console.log(`   💾 Saved ID mapping (${refToPb.size} entries) → ${idMapPath}`);
 }
 
 main().catch((err) => {

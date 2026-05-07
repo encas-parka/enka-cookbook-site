@@ -2,6 +2,10 @@
 
 Ce dossier contient des scripts utilitaires pour la maintenance du projet ENKA COOKBOOK.
 
+## Pipeline de migration Appwrite → PocketBase
+
+Voir [`doc_migrationPb.md`](./doc_migrationPb.md) pour la documentation complète du pipeline (4 phases, 8 scripts).
+
 ## Installation des dépendances
 
 ```bash

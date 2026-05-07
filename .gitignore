@@ -5,13 +5,17 @@ public
 *bak
 *BAK
 .hugo_build.lock
-.vscode
 _vendor
 node_modules
 content/recipe/uuid.sh
-*.code-workspace
 backups
+.env
+.env.local
+
+# Agent
 docs
+.vscode
+*.code-workspace
 svelte-app/.vite
 *.claude
 *.opencode
@@ -21,10 +25,11 @@ opencode.json
 AGENTS.md
 agent
 *skills-lock.json
+.serena
+
+#appwrite
 appwrite
 appwrite-ec-dev
-graphify-out
-.serena
 
 # dev
 # static/app
@@ -32,4 +37,8 @@ graphify-out
 # PocketBase
 pocketbase/pb_data
 pocketbase/pocketbase
-.env.local
+
+# Migration pipeline — données sensibles (users, emails, IDs)
+scripts_dev/appwrite-export/
+scripts_dev/pb-import/
+scripts_dev/migration-map*.json

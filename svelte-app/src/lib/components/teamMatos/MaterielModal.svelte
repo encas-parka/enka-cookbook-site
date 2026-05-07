@@ -1,6 +1,7 @@
 <script lang="ts">
   import { Users } from "@lucide/svelte";
   import { materielStore } from "$lib/stores/MaterielStore.svelte";
+  import { nativeTeamsStore } from "$lib/stores/NativeTeamsStore.svelte";
   import { toastService } from "$lib/services/toast.service.svelte";
   import ModalContainer from "$lib/components/ui/modal/ModalContainer.svelte";
   import ModalHeader from "$lib/components/ui/modal/ModalHeader.svelte";
@@ -122,10 +123,10 @@
         <div class="flex items-center gap-2 text-sm">
           <Users class="h-4 w-4" />
           <div>
-            {#if currentMateriel.ownerData?.teamId}
+            {#if currentMateriel.teamId}
               <div>
                 <span class="font-semibold">Équipe propriétaire :</span>
-                {currentMateriel.ownerData.teamName}
+                {nativeTeamsStore.getTeamById(currentMateriel.teamId)?.name ?? "Inconnue"}
               </div>
             {/if}
           </div>

@@ -45,7 +45,7 @@
       quantity: number;
       location: string | null;
       shareableWith: string[] | null;
-      owner: string; // JSON string
+      teamId: string | null;
     }) => void;
     onCancel?: () => void;
     onExistingSelected?: (materielId: string) => void;
@@ -129,23 +129,6 @@
     })),
   );
 
-  // Objet owner JSON - uniquement pour les teams
-  const ownerJson = $derived.by(() => {
-    // Si l'owner est verrouillé via les props, les utiliser
-    if (isOwnerLocked && ownerId) {
-      return JSON.stringify({
-        teamName: ownerName || "",
-        teamId: ownerId,
-      });
-    }
-
-    // Sinon, retourner un owner vide (ne devrait pas arriver en mode normal)
-    return JSON.stringify({
-      teamName: "",
-      teamId: "",
-    });
-  });
-
   // Validation
   const isValid = $derived(name.trim().length > 0 && quantity >= 1 && !loading);
 
@@ -173,7 +156,7 @@
       location: location.trim() || null,
       shareableWith:
         shareableWithTeamNames.length > 0 ? shareableWithTeamNames : null,
-      owner: ownerJson, // JSON string déjà construit
+      teamId: ownerId || null,
     };
 
     onSubmit?.(data);

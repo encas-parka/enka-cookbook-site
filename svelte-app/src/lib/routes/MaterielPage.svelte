@@ -69,10 +69,8 @@
   const teamMateriels = $derived.by(() => {
     if (!activeTeamId) return [];
     return materielStore.materiels.filter((m) => {
-      // Vérifier si le matériel appartient à l'équipe
-      const ownerData = m.ownerData;
       return (
-        ownerData.teamId === activeTeamId ||
+        m.teamId === activeTeamId ||
         m.shareableWith?.includes(activeTeamId!)
       );
     });

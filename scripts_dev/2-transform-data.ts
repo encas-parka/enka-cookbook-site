@@ -375,7 +375,6 @@ function main() {
       name: awMat.name,
       type: awMat.type || null,
       description: awMat.description || null,
-      owner: ownerRaw, // Keep raw JSON for display (parseOwnerFromAppwrite)
       ownerUser,
       teamId,
       status: awMat.status || "ok",

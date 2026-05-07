@@ -58,14 +58,6 @@ export interface MaterielLoanDetail {
   status: "asked" | "accepted" | "canceled";
 }
 
-/** Structure du propriétaire (après parsing du JSON depuis Materiel.owner) */
-export interface MaterielOwner {
-  userName?: string;
-  userId?: string;
-  teamName?: string;
-  teamId?: string;
-}
-
 // =============================================================================
 // TYPES ENRICHIS - Format calculé côté client
 // =============================================================================
@@ -78,11 +70,10 @@ export interface MaterielOwner {
 export type EnrichedMaterielStatus = MaterielStatusOptions | "loan" | "reserved";
 
 /**
- * Matériel enrichi avec données parsées et calculées
+ * Matériel enrichi avec données calculées
  *
- * - Conserve tous les champs PB bruts (pour référence)
- * - Ajoute les champs parsés (ownerData, loanDetails)
- * - Ajoute les champs calculés (availableQuantity, isAvailable, etc.)
+ * - Conserve tous les champs PB bruts (dont teamId, ownerUser)
+ * - Ajoute les champs calculés (loanDetails, availableQuantity, etc.)
  */
 export interface EnrichedMateriel extends Omit<
   Materiel,
@@ -91,8 +82,7 @@ export interface EnrichedMateriel extends Omit<
   // Statut enrichi (PB ou calculé depuis emprunts)
   status: EnrichedMaterielStatus;
 
-  // Champs enrichis parsés
-  ownerData: MaterielOwner;
+  // Champs enrichis
   loanDetails: MaterielLoanDetail[];
 
   // Champs dérivés calculés

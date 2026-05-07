@@ -6,7 +6,6 @@ import type {
   EnrichedMaterielLoan,
   MaterielLoanItem,
   MaterielLoanStatusUnion,
-  MaterielOwner,
 } from "$lib/types/materiel.types";
 import {
   enrichMaterielFromAppwrite,
@@ -111,7 +110,7 @@ export class MaterielStore {
       );
       return (
         isShareableWithMyTeams &&
-        !(m.ownerData?.teamId && myTeamIds.includes(m.ownerData.teamId))
+        !(m.teamId && myTeamIds.includes(m.teamId))
       );
     });
   });
@@ -126,7 +125,7 @@ export class MaterielStore {
   getAvailableMaterielsByOwner(teamId: string): EnrichedMateriel[] {
     return this.#enrichedMateriels.filter(
       (m) =>
-        m.ownerData?.teamId === teamId &&
+        m.teamId === teamId &&
         m.status !== "lost" &&
         m.status !== "torepair" &&
         m.isAvailable,
@@ -135,7 +134,7 @@ export class MaterielStore {
 
   getMaterielsByOwner(teamId: string): EnrichedMateriel[] {
     return this.#enrichedMateriels.filter(
-      (m) => m.ownerData?.teamId === teamId,
+      (m) => m.teamId === teamId,
     );
   }
 
@@ -150,7 +149,7 @@ export class MaterielStore {
     const allLoans = this.#raw.loans;
 
     return this.#enrichedMateriels
-      .filter((m) => m.ownerData?.teamId === teamId)
+      .filter((m) => m.teamId === teamId)
       .filter((m) => m.status !== "lost" && m.status !== "torepair")
       .map((materiel) => {
         const loanedQuantity = calculateLoanedQuantityForPeriod(
@@ -293,7 +292,7 @@ export class MaterielStore {
     status?: string;
     location?: string;
     shareableWith?: string[];
-    owner: string; // JSON string de MaterielOwner
+    teamId?: string | null;
   }): Promise<EnrichedMateriel> {
     this.#loading = true;
     this.#error = null;
@@ -301,17 +300,6 @@ export class MaterielStore {
     try {
       if (!globalState.userId) {
         throw new Error("Utilisateur non connecté");
-      }
-
-      // Parser owner pour les permissions
-      let ownerData: MaterielOwner;
-      try {
-        ownerData =
-          typeof data.owner === "string"
-            ? JSON.parse(data.owner)
-            : (data.owner as MaterielOwner);
-      } catch (e) {
-        throw new Error("Invalid owner format");
       }
 
       const doc = await this.#materielCollection.create(
@@ -323,7 +311,8 @@ export class MaterielStore {
           status: (data.status || "ok") as Materiel["status"],
           location: data.location || null,
           shareableWith: data.shareableWith || null,
-          owner: data.owner,
+          teamId: data.teamId || null,
+          ownerUser: globalState.userId,
           deleted: false,
           isStorage: false,
           storeIn: null,

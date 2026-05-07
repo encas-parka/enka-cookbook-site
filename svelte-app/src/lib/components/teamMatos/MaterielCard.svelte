@@ -23,6 +23,7 @@
   import type { EnrichedMateriel } from "$lib/types/materiel.types";
   import type { MaterielStatus } from "$lib/types/pb";
   import { globalState } from "$lib/stores/GlobalState.svelte";
+  import { nativeTeamsStore } from "$lib/stores/NativeTeamsStore.svelte";
   import { online } from "svelte/reactivity/window";
   import { formatDateDayMonthShort } from "$lib/utils/date-helpers";
   import {
@@ -118,16 +119,19 @@
     if (!globalState.userId) return false;
 
     // Owner = user
-    if (materiel.ownerData?.userId === globalState.userId) return true;
+    if (materiel.ownerUser === globalState.userId) return true;
 
-    // Owner = team, vérifier si l'utilisateur est membre
-    if (materiel.ownerData?.teamId) {
+    if (materiel.teamId) {
       // TODO: vérifier si l'utilisateur est membre de l'équipe
       return true; // Pour l'instant on simplifie
     }
 
     return false;
   });
+
+  const ownerTeamName = $derived(
+    materiel.teamId ? nativeTeamsStore.getTeamById(materiel.teamId)?.name : null,
+  );
 
   // Description tronquée
   const truncatedDescription = $derived.by(() => {
@@ -192,10 +196,10 @@
             {/if}
 
             <!-- Équipe -->
-            {#if materiel.ownerData?.teamName}
+            {#if ownerTeamName}
               <div class="flex items-center gap-1">
                 <Users class="h-3 w-3" />
-                <span class="">{materiel.ownerData.teamName}</span>
+                <span class="">{ownerTeamName}</span>
               </div>
             {/if}
           </div>

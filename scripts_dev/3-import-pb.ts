@@ -67,7 +67,7 @@ const RELATION_FIELDS: Record<string, Record<string, "single" | "multi">> = {
 const JSON_FIELDS: Record<string, string[]> = {
   users: [],
   teams: [],
-  materiel: ["owner"],
+  materiel: [],
   events: ["contributors", "todos", "date", "meals"],
   products: ["store", "specs", "stockReel", "who", "previousNames", "mergedFrom", "totalNeededOverride"],
   purchases: ["store"],

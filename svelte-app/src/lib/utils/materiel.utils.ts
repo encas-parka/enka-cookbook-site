@@ -15,7 +15,6 @@ import type {
   MaterielFromAppwrite,
   MaterielLoanItem,
   MaterielLoanDetail,
-  MaterielOwner,
 } from "$lib/types/materiel.types";
 import type { EventMaterielStatus } from "$lib/types/event-materiel.types";
 
@@ -190,141 +189,13 @@ export function getMaterielStatusLabel(
 }
 
 // =============================================================================
-// DEFAULT VALUES
-// =============================================================================
-
-const DEFAULT_OWNER: MaterielOwner = {
-  userName: "",
-  userId: "",
-  teamName: "",
-  teamId: "",
-};
-
-// =============================================================================
-// FROM APPWRITE - Parsing depuis Appwrite vers types locaux
+// ENRICHISSEMENT - Calcul des données dérivées depuis PocketBase
 // =============================================================================
 
 /**
- * Parse les données du propriétaire depuis le champ owner (JSON string) d'Appwrite
- * @param owner - Chaîne JSON depuis Appwrite ou objet déjà parsé
- * @returns Objet MaterielOwner typé
- */
-export function parseOwnerFromAppwrite(owner: string | null): MaterielOwner {
-  if (!owner) {
-    return DEFAULT_OWNER;
-  }
-
-  try {
-    return typeof owner === "string"
-      ? (JSON.parse(owner) as MaterielOwner)
-      : (owner as MaterielOwner);
-  } catch (e) {
-    console.error(
-      "[materiel.utils] Error parsing owner from Appwrite:",
-      owner,
-      e,
-    );
-    return DEFAULT_OWNER;
-  }
-}
-
-/**
- * Parse les items d'emprunt depuis le champ materiels (JSON string, string[] ou object[]) de PocketBase
- * Gère 3 formats :
- *   - string (JSON unique du tableau complet)  — legacy
- *   - string[] (chaque item JSON.stringify individuellement) — ancien format frontend
- *   - object[] (objets natifs, désérialisés par le SDK PB) — format cible
- * @param materiels - Valeur brute depuis PocketBase
- * @returns Tableau de MaterielLoanItem typé
- */
-export function parseLoanItemsFromDb(
-  materiels: unknown,
-): MaterielLoanItem[] {
-  if (!materiels) {
-    return [];
-  }
-
-  try {
-    // Format string[] ou object[] : chaque élément est un item
-    if (Array.isArray(materiels)) {
-      return materiels
-        .map((item) => {
-          // Objet natif (format cible : données créées après ce fix ou données migrées)
-          if (typeof item === "object" && item !== null) {
-            return item as MaterielLoanItem;
-          }
-          // String JSON (ancien format : chaque item JSON.stringify individuellement)
-          if (typeof item === "string") {
-            try {
-              return JSON.parse(item) as MaterielLoanItem;
-            } catch {
-              console.warn(
-                "[materiel.utils] Failed to parse loan item string:",
-                item,
-              );
-              return null;
-            }
-          }
-          return null;
-        })
-        .filter((item): item is MaterielLoanItem => item !== null);
-    }
-
-    // Format string : JSON unique du tableau complet (legacy)
-    if (typeof materiels === "string") {
-      return JSON.parse(materiels) as MaterielLoanItem[];
-    }
-
-    return [];
-  } catch (e) {
-    console.error(
-      "[materiel.utils] Error parsing loan items from PocketBase:",
-      materiels,
-      e,
-    );
-    return [];
-  }
-}
-
-/**
- * Parse le champ materiels d'un loan depuis PocketBase
- * Gère les 3 formats : string, string[], object[]
- * @param materielsField - Champ materiels brut depuis PocketBase
- * @returns Tableau de MaterielLoanItem
- */
-export function parseMaterielLoanFieldFromDb(
-  materielsField: unknown,
-): MaterielLoanItem[] {
-  return parseLoanItemsFromDb(materielsField);
-}
-
-// =============================================================================
-// ENRICHISSEMENT LOAN — Enrichissement des emprunts depuis PocketBase
-// =============================================================================
-
-/**
- * Enrichit un emprunt avec les items de matériel parsés
+ * Enrichit un document avec les données calculées (emprunts, disponibilité)
  *
- * @param loan - Emprunt brut (MaterielLoan)
- * @returns Emprunt enrichi avec les items parsés
- */
-export function enrichLoanFromDb(
-  loan: MaterielLoan,
-): EnrichedMaterielLoan {
-  return {
-    ...loan,
-    materielItems: parseMaterielLoanFieldFromDb(loan.materiels),
-  };
-}
-
-// =============================================================================
-// ENRICHISSEMENT - Calcul des données dérivées depuis Appwrite
-// =============================================================================
-
-/**
- * Enrichit un document Appwrite avec les données calculées (emprunts, disponibilité)
- *
- * @param doc - Document Appwrite brut (MaterielFromAppwrite)
+ * @param doc - Document brut (Materiel)
  * @param allLoans - Tous les emprunts pour calculer les statistiques
  * @param now - Date actuelle (pour éviter les appels répétés à new Date())
  * @returns Matériel enrichi avec toutes les données calculées
@@ -334,15 +205,12 @@ export function enrichMaterielFromAppwrite(
   allLoans: MaterielLoan[],
   now: Date = new Date(),
 ): EnrichedMateriel {
-  // 1. Parser le propriétaire depuis Appwrite
-  const ownerData = parseOwnerFromAppwrite(doc.owner);
-
-  // 2. Calculer les emprunts actifs/planifiés pour ce matériel
+  // 1. Calculer les emprunts actifs/planifiés pour ce matériel
   const loanDetails: MaterielLoanDetail[] = [];
   let totalLoanedQuantity = 0;
 
   allLoans.forEach((loan) => {
-    // Parser les items du loan depuis Appwrite
+    // Parser les items du loan
     const loanItems = parseLoanItemsFromDb(loan.materiels);
 
     // Filtrer les items pour ce matériel
@@ -414,8 +282,7 @@ export function enrichMaterielFromAppwrite(
     // Override du statut calculé
     status: status as MaterielStatus,
 
-    // Champs enrichis (parsés depuis Appwrite)
-    ownerData,
+    // Champs enrichis
     loanDetails,
 
     // Champs calculés

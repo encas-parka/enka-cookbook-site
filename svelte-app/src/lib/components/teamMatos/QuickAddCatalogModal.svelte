@@ -95,8 +95,6 @@
 
     loading = true;
 
-    const owner = JSON.stringify({ teamName, teamId });
-
     try {
       let created = 0;
       let updated = 0;
@@ -110,7 +108,7 @@
             name: item.name,
             type: item.type,
             quantity: newQty,
-            owner,
+            teamId,
             status: "ok",
           });
           created++;

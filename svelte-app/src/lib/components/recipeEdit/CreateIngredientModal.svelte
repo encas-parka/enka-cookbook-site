@@ -10,7 +10,7 @@
     PackagePlus,
   } from "@lucide/svelte";
   import { recipeDataStore } from "$lib/stores/RecipeDataStore.svelte";
-  import type { FuzzyIngredientResult } from "$lib/stores/RecipeDataStore.svelte";
+  import type { FuzzyIngredientResult } from "$lib/types/recipes.types";
   import { toastService } from "$lib/services/toast.service.svelte";
   import type { Ingredient } from "$lib/types/recipes.types";
   import ModalContainer from "$lib/components/ui/modal/ModalContainer.svelte";
@@ -221,7 +221,7 @@
       const newIngredient = await recipeDataStore.addIngredient(ingredientData);
 
       // Success
-      toastService.success(`Ingrédient "${newIngredient.n}" créé avec succès`);
+      toastService.success(`Ingrédient "${newIngredient.name}" créé avec succès`);
 
       // Callback parent
       if (onIngredientCreated) {
@@ -263,7 +263,7 @@
    * Utilise un ingrédient existant au lieu d'en créer un nouveau
    */
   function useExistingIngredient(ingredient: Ingredient) {
-    toastService.success(`Ingrédient "${ingredient.n}" sélectionné`);
+    toastService.success(`Ingrédient "${ingredient.name}" sélectionné`);
     if (onUseExisting) {
       onUseExisting(ingredient);
     } else if (onIngredientCreated) {
@@ -355,7 +355,7 @@
                         >{@html result.highlighted}</span
                       >
                       <span class="text-base-content/50 ml-auto text-xs"
-                        >{result.ingredient.t}</span
+                        >{result.ingredient.type}</span
                       >
                     </button>
                   {/each}

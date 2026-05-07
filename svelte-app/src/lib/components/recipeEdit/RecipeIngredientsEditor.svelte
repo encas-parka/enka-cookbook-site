@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { RecipeIngredient, Ingredient } from "$lib/types/recipes.types";
-  import type { FuzzyIngredientResult } from "$lib/stores/RecipeDataStore.svelte";
+  import type { FuzzyIngredientResult } from "$lib/types/recipes.types";
   import { recipeDataStore } from "$lib/stores/RecipeDataStore.svelte";
   import { getProductTypeInfo } from "$lib/utils/products-display";
   import { UnitConverter } from "$lib/utils/UnitConverter";
@@ -49,7 +49,7 @@
       return recipeDataStore.ingredients.map((ing) => ({
         ingredient: ing,
         score: 1,
-        highlighted: ing.n,
+        highlighted: ing.name,
       }));
     }
     // Sinon recherche fuzzy avec highlight
@@ -134,14 +134,14 @@
 
     const newIngredient: RecipeIngredient = {
       uuid: ingredientUuid,
-      name: ingredientData.n,
+      name: ingredientData.name,
       originalQuantity: 0,
       originalUnit: "gr.",
       normalizedQuantity: 0,
       normalizedUnit: "gr.",
       comment: "",
-      allergens: ingredientData.a || [],
-      type: ingredientData.t || "",
+      allergens: ingredientData.allergens || [],
+      type: ingredientData.type || "",
     };
 
     ingredients = [...ingredients, newIngredient];
@@ -209,7 +209,7 @@
         event.preventDefault();
         const currentResults = fuzzyResults();
         if (isOpen && currentResults.length > 0) {
-          addIngredientFromSearch(currentResults[selectedIndex].ingredient.u);
+          addIngredientFromSearch(currentResults[selectedIndex].ingredient.uuid);
         } else if (!isOpen) {
           openDropdown(true);
         }
@@ -272,7 +272,7 @@
    */
   function handleIngredientCreated(newIngredient: Ingredient) {
     // Ajouter automatiquement l'ingrédient créé à la recette
-    addIngredientFromSearch(newIngredient.u);
+    addIngredientFromSearch(newIngredient.uuid);
   }
 </script>
 
@@ -388,7 +388,7 @@
                     </div>
                   {/if}
                 {:else}
-                  {#each results as result, index (result.ingredient.u)}
+                  {#each results as result, index (result.ingredient.uuid)}
                     <button
                       type="button"
                       id="ingredient-{index}"
@@ -396,7 +396,7 @@
                       selectedIndex
                         ? 'bg-base-200'
                         : ''}"
-                      onclick={() => addIngredientFromSearch(result.ingredient.u)}
+                      onclick={() => addIngredientFromSearch(result.ingredient.uuid)}
                       onmouseenter={() => (selectedIndex = index)}
                       role="option"
                       aria-selected={index === selectedIndex}

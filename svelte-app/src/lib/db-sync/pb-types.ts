@@ -123,4 +123,6 @@ export type PbCollectionName =
   | "teamdocs"
   | "locks"
   | "notifications"
-  | "share_links";
+  | "share_links"
+  | "ingredients"
+  | "categories";

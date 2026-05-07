@@ -3,24 +3,35 @@
  */
 
 import type { Recettes } from "./pb";
-import { RecipesTypeROptions, RecipesStatusOptions } from "./pb-generated";
+import {
+  RecipesTypeROptions,
+  RecipesStatusOptions,
+  type IngredientsRecord,
+  type IngredientsTypeOptions,
+  type CategoriesRecord,
+} from "./pb-generated";
 import type { Astuce } from "../utils/recipeUtils";
+import type { PbDoc } from "$lib/db-sync/aw-types";
 
 export { RecipesTypeROptions as RecettesTypeR, RecipesStatusOptions as RecettesStatus };
+
+// Types étendus pour bridgeToMap + delta sync (nécessitent id, created, updated)
+export type IngredientsDoc = IngredientsRecord & PbDoc;
+export type CategoriesDoc = CategoriesRecord & PbDoc;
 
 // =============================================================================
 // INGRÉDIENTS
 // =============================================================================
 
 /**
- * Ingrédient tel que chargé depuis data.json (Hugo)
- * Format compressé avec clés abrégées pour optimiser la taille du fichier
+ * Ingrédient du catalogue (depuis PocketBase ingredients).
+ * Noms de champs normalisés (correspondent directement au schéma PB).
  */
 export interface Ingredient {
-  u: string; // UUID court (ex: "xo0ibs")
-  n: string; // Nom (ex: "Abricot")
-  t: string; // Type (ex: "legumes", "epices", etc.)
-  a?: string[]; // Allergènes optionnels (ex: ["Sésame"])
+  uuid: string; // UUID court (ex: "xo0ibs") — correspond au champ PB `uuid`
+  name: string; // Nom (ex: "Abricot")
+  type: string; // Type (ex: "legumes", "epices", etc.)
+  allergens?: string[]; // Allergènes optionnels (ex: ["Sésame"])
   pF?: boolean; // Produit frais
   pS?: boolean; // Produit surgelé
   saisons?: string[]; // Saisons (ex: ["printemps", "ete"])
@@ -29,6 +40,13 @@ export interface Ingredient {
 /** Ingrédient enrichi côté client */
 export interface EnrichedIngredient extends Ingredient {
   searchableText?: string;
+}
+
+/** Résultat de recherche fuzzy avec score et highlight */
+export interface FuzzyIngredientResult {
+  ingredient: Ingredient;
+  score: number;
+  highlighted: string;
 }
 
 // =============================================================================
@@ -169,4 +187,53 @@ export interface CreateIngredientData {
   pF: boolean;
   pS: boolean;
   saisons?: string[];
+}
+
+// =============================================================================
+// CONVERTISSEURS IngredientsRecord (PB) ↔ Ingredient (app)
+// =============================================================================
+
+/**
+ * Convertit un IngredientsDoc (PB + system fields) vers le format Ingredient.
+ *
+ * Normalise les valeurs par défaut et résout le uuid de fallback.
+ * La clé de mapping est le `uuid` PB (pas le `id` système), car les
+ * consommateurs de l'application (`getIngredientByUuid`) utilisent
+ * l'UUID métier comme identifiant.
+ */
+export function toAppIngredient(record: IngredientsRecord & { id?: string }): Ingredient {
+  // Le uuid PB est l'identifiant principal pour l'app
+  // Fallback sur record.id pour les ingrédients créés sans uuid explicite
+  const uuid = record.uuid || record.id || "";
+
+  return {
+    uuid,
+    name: record.name,
+    type: record.type,
+    allergens: (record.allergens as string[]) ?? [],
+    pF: record.pF ?? false,
+    pS: record.pS ?? false,
+    saisons: record.saisons as string[] | undefined,
+  };
+}
+
+/**
+ * Convertit un Ingredient app (noms courts) vers un payload de création
+ * PocketBase (noms longs).
+ *
+ * Utilisé par addIngredient() pour créer un enregistrement avec les
+ * bons noms de champs PB.
+ */
+export function toIngredientsRecord(
+  ingredient: Ingredient,
+): Omit<IngredientsRecord, "id" | "created" | "updated"> {
+  return {
+    uuid: ingredient.uuid,
+    name: ingredient.name,
+    type: ingredient.type as IngredientsTypeOptions,
+    allergens: ingredient.allergens ?? [],
+    pF: ingredient.pF ?? false,
+    pS: ingredient.pS ?? false,
+    saisons: ingredient.saisons ?? [],
+  };
 }

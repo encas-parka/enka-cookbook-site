@@ -1,14 +1,19 @@
 /**
- * RecipeDataStore - Store unifié pour les données statiques de recettes
- *
- * Gère 2 sources de données JSON statiques Hugo :
- * 1. /data/ingredients.json (~50ko, 800 items)
- * 2. /data/recipe-info.json (materiel, categories, regimes)
+ * RecipeDataStore — Données de référence des recettes (pb-sync + constantes)
  *
  * Architecture :
- * - Persistence via Dexie db.catalog (key-value)
- * - Chargement cache → Fetch JSON → Compare hash → Update si nécessaire
- * - Ajout d'ingrédients via fonction cloud Appwrite → Commit GitHub → Webhook → Rebuild
+ * ┌─────────────────────────────────────────────────────────┐
+ * │  PocketBase  (ingredients, categories)                  │
+ * │    ↕ initialFetch (delta sync) + subscribe (SSE)        │
+ * │  Dexie        (ingredients, categories)                 │
+ * │    ↕ liveQuery → bridgeToMap                             │
+ * │  SvelteMap    (IngredientsDoc, CategoriesDoc)           │
+ * │    ↕ $derived.by (conversion + filtrage)                │
+ * │  API publique (Ingredient[], string[])                  │
+ * └─────────────────────────────────────────────────────────┘
+ *
+ * Matériel et régimes : constantes TS + ajouts utilisateur dans db.catalog.
+ * Voir src/lib/data/recipe-reference.ts.
  *
  * @usage
  * await recipeDataStore.initialize();
@@ -16,70 +21,146 @@
  * const categories = recipeDataStore.categories;
  */
 
-import { SvelteMap } from "svelte/reactivity";
 import fuzzysort from "fuzzysort";
 import type {
   Ingredient,
-  RecipeInfo,
+  FuzzyIngredientResult,
 } from "../types/recipes.types";
-import { serializeRecipeInfo } from "$lib/utils/serialization.utils";
-import { pb, db } from "$lib/db-sync/pb-sync";
+import { toAppIngredient } from "../types/recipes.types";
+import type { IngredientsDoc, CategoriesDoc } from "../types/recipes.types";
+import type { IngredientsRecord, CategoriesRecord } from "../types/pb-generated";
+import {
+  createSyncCollection,
+  bridgeToMap,
+  db,
+  pb,
+} from "$lib/db-sync/pb-sync";
+import { DEFAULT_MATERIEL, DEFAULT_REGIMES, mergeWithCustom } from "$lib/data/recipe-reference";
+import { nanoid } from "nanoid";
 
 // =============================================================================
-// CONFIGURATION
+// CATALOG KEYS (db.catalog — persistance des ajouts utilisateur)
 // =============================================================================
 
-const INGREDIENTS_JSON_URL = "/data/ingredients.json";
-const RECIPE_INFO_JSON_URL = "/data/recipe-info.json";
-
-// Catalog keys in db.catalog
-const KEY_INGREDIENTS = "ingredients";
-const KEY_RECIPE_INFO = "recipe-info";
-const KEY_METADATA = "catalog-metadata";
+const KEY_CUSTOM_MATERIEL = "custom-materiel";
+const KEY_CUSTOM_REGIMES = "custom-regimes";
 
 // =============================================================================
-// TYPES
-// =============================================================================
-
-interface CatalogMetadata {
-  lastSync: string | null;
-  dataJsonHash: string | null;
-  ingredientsCount: number;
-}
-
-// =============================================================================
-// TYPES EXPORTÉS
-// =============================================================================
-
-/** Résultat de recherche fuzzy avec score et highlight */
-export interface FuzzyIngredientResult {
-  ingredient: Ingredient;
-  score: number;
-  highlighted: string;
-}
-
-// =============================================================================
-// STORE SINGLETON
+// STORE
 // =============================================================================
 
 class RecipeDataStore {
-  // État réactif
-  #ingredients = new SvelteMap<string, Ingredient>();
-  #recipeInfo = $state<RecipeInfo>({
-    materiel: [],
-    categories: [],
-    regimes: [],
-  });
+  // ===========================================================================
+  // PB-SYNC COLLECTIONS
+  // ===========================================================================
+
+  /** Sync collection : PocketBase ingredients ↔ Dexie ingredients */
+  #ingredientsCollection = createSyncCollection<IngredientsDoc>(
+    pb,
+    db.ingredients,
+    "ingredients",
+  );
+
+  /** Sync collection : PocketBase categories ↔ Dexie categories */
+  #categoriesCollection = createSyncCollection<CategoriesDoc>(
+    pb,
+    db.categories,
+    "categories",
+  );
+
+  // ===========================================================================
+  // BRIDGES (liveQuery Dexie → SvelteMap réactif)
+  // ===========================================================================
+
+  /** Bridge réactif ingredients (key = PB id) */
+  #ingredientsBridge = bridgeToMap<IngredientsDoc>(() =>
+    db.ingredients.toArray(),
+  );
+
+  /** Bridge réactif categories (key = PB id) */
+  #categoriesBridge = bridgeToMap<CategoriesDoc>(() =>
+    db.categories.toArray(),
+  );
+
+  // ===========================================================================
+  // ÉTAT RÉACTIF
+  // ===========================================================================
+
   #loading = $state(false);
   #error = $state<string | null>(null);
   #lastSync = $state<string | null>(null);
   #isInitialized = $state(false);
+  #initPromise: Promise<void> | null = null;
 
-  // Propriétés dérivées
-  #ingredientNames = $derived.by(() =>
-    Array.from(this.#ingredients.values())
-      .map((ing) => ing.n)
-      .sort(),
+  /** Ajouts utilisateur (matériel), persistés dans db.catalog */
+  #customMateriel = $state<string[]>([]);
+
+  /** Ajouts utilisateur (régimes), persistés dans db.catalog */
+  #customRegimes = $state<string[]>([]);
+
+  // ===========================================================================
+  // VUES DÉRIVÉES
+  // ===========================================================================
+
+  /**
+   * Map des ingrédients keyée par uuid (PB `uuid` field).
+   *
+   * Conversion IngredientsRecord (PB) → Ingredient (app).
+   * Après renormalisation, les noms de champs correspondent directement.
+   *
+   * Utilise un Map natif (pas SvelteMap) car la reconstruction complète est
+   * peu fréquente (845 items, rarement modifiés).
+   */
+  #ingredientsMap = $derived.by<Map<string, Ingredient>>(() => {
+    const map = new Map<string, Ingredient>();
+    for (const record of this.#ingredientsBridge.map.values()) {
+      const ingredient = toAppIngredient(record);
+      map.set(ingredient.uuid, ingredient);
+    }
+    return map;
+  });
+
+  /**
+   * Liste triée des ingrédients (pour affichage UI).
+   */
+  #ingredientsList = $derived.by<Ingredient[]>(() => {
+    return Array.from(this.#ingredientsMap.values()).sort((a, b) =>
+      a.name.localeCompare(b.name, "fr"),
+    );
+  });
+
+  /**
+   * Noms des ingrédients (pour autocomplete / suggestions).
+   */
+  #ingredientNames = $derived.by<string[]>(() =>
+    this.#ingredientsList.map((ing) => ing.name),
+  );
+
+  /**
+   * Catégories de recettes (depuis PB categories où type="category").
+   */
+  #categoriesList = $derived.by<string[]>(() => {
+    const names = new Set<string>();
+    for (const record of this.#categoriesBridge.map.values()) {
+      if (record.type === "category") {
+        names.add(record.name);
+      }
+    }
+    return Array.from(names).sort((a, b) => a.localeCompare(b, "fr"));
+  });
+
+  /**
+   * Matériel de référence (constantes + ajouts utilisateur).
+   */
+  #materielList = $derived.by<string[]>(() =>
+    mergeWithCustom(DEFAULT_MATERIEL, this.#customMateriel),
+  );
+
+  /**
+   * Régimes (constantes + ajouts utilisateur).
+   */
+  #regimesList = $derived.by<string[]>(() =>
+    mergeWithCustom(DEFAULT_REGIMES, this.#customRegimes),
   );
 
   // ===========================================================================
@@ -98,198 +179,167 @@ class RecipeDataStore {
   get isInitialized() {
     return this.#isInitialized;
   }
-  get ingredients() {
-    return Array.from(this.#ingredients.values()).sort((a, b) =>
-      a.n.localeCompare(b.n, "fr"),
-    );
+
+  /** Tous les ingrédients, triés par nom */
+  get ingredients(): Ingredient[] {
+    return this.#ingredientsList;
   }
-  get count() {
-    return this.#ingredients.size;
+
+  /** Nombre d'ingrédients */
+  get count(): number {
+    return this.#ingredientsMap.size;
   }
-  get ingredientNames() {
+
+  /** Noms de tous les ingrédients (triés) */
+  get ingredientNames(): string[] {
     return this.#ingredientNames;
   }
 
-  // Recipe Info getters
-  get materiel() {
-    return this.#recipeInfo.materiel;
+  /** Catégories de recettes (triées) */
+  get categories(): string[] {
+    return this.#categoriesList;
   }
-  get categories() {
-    return this.#recipeInfo.categories;
+
+  /** Équipements de cuisine (constantes + ajouts) */
+  get materiel(): string[] {
+    return this.#materielList;
   }
-  get regimes() {
-    return this.#recipeInfo.regimes;
+
+  /** Régimes alimentaires (constantes + ajouts) */
+  get regimes(): string[] {
+    return this.#regimesList;
   }
 
   // ===========================================================================
-  // INITIALISATION
+  // INITIALISATION (3 PHASES)
   // ===========================================================================
 
-  /**
-   * Initialise le store
-   * 1. Charge depuis db.catalog si disponible
-   * 2. Fetch JSON et compare hash
-   * 3. Met à jour si nécessaire
-   */
   async initialize(): Promise<void> {
     if (this.#isInitialized) {
       console.log("[RecipeDataStore] Déjà initialisé");
       return;
     }
 
+    if (this.#initPromise) {
+      console.log("[RecipeDataStore] Initialisation déjà en cours, attente...");
+      return this.#initPromise;
+    }
+
     console.log("[RecipeDataStore] Initialisation...");
-    this.#loading = true;
-    this.#error = null;
+    this.#initPromise = (async () => {
+      this.#loading = true;
+      this.#error = null;
 
+      try {
+        // Phase 1 : charger les ajouts utilisateur depuis db.catalog
+        await this.#loadCustomAdditions();
+
+        // Phase 2 : delta sync PocketBase → Dexie
+        await this.syncFromRemote();
+
+        // Phase 3 : abonnement SSE temps réel
+        await this.setupRealtime();
+
+        this.#isInitialized = true;
+        console.log(
+          `[RecipeDataStore] ✓ ${this.#ingredientsMap.size} ingrédients, ${this.#categoriesList.length} catégories`,
+        );
+      } catch (err) {
+        const message =
+          err instanceof Error ? err.message : "Erreur initialisation";
+        this.#error = message;
+        console.error("[RecipeDataStore]", message, err);
+        throw err;
+      } finally {
+        this.#loading = false;
+      }
+    })();
+
+    return this.#initPromise;
+  }
+
+  /**
+   * Charge les ajouts utilisateur depuis db.catalog (Dexie).
+   */
+  async #loadCustomAdditions(): Promise<void> {
     try {
-      // 1. Charger depuis le cache Dexie
-      await this.#loadFromCatalog();
+      const [materielRow, regimesRow] = await db.catalog.bulkGet([
+        KEY_CUSTOM_MATERIEL,
+        KEY_CUSTOM_REGIMES,
+      ]);
 
-      // 2. Charger depuis JSON et vérifier hash
-      await this.#loadFromJSON();
+      if (materielRow?.data) {
+        this.#customMateriel = materielRow.data as string[];
+      }
+      if (regimesRow?.data) {
+        this.#customRegimes = regimesRow.data as string[];
+      }
 
-      this.#isInitialized = true;
       console.log(
-        `[RecipeDataStore] ✓ ${this.#ingredients.size} ingrédients, ${this.#recipeInfo.categories.length} catégories`,
+        `[RecipeDataStore] Cache local: ${this.#customMateriel.length} matériels, ${this.#customRegimes.length} régimes`,
       );
     } catch (err) {
-      const message =
-        err instanceof Error ? err.message : "Erreur initialisation";
-      this.#error = message;
-      console.error("[RecipeDataStore]", message, err);
-      throw err;
-    } finally {
-      this.#loading = false;
-    }
-  }
-
-  /**
-   * Charge les données depuis db.catalog (Dexie)
-   */
-  async #loadFromCatalog(): Promise<void> {
-    const [ingredientsRow, recipeInfoRow, metadataRow] = await db.catalog.bulkGet([
-      KEY_INGREDIENTS,
-      KEY_RECIPE_INFO,
-      KEY_METADATA,
-    ]);
-
-    const ingredientsMap = ingredientsRow?.data as Map<string, Ingredient> | undefined;
-    const recipeInfo = recipeInfoRow?.data as RecipeInfo | undefined;
-    const metadata = metadataRow?.data as CatalogMetadata | undefined;
-
-    if (ingredientsMap && ingredientsMap.size > 0) {
-      this.#ingredients = new SvelteMap(ingredientsMap);
-      console.log(
-        `[RecipeDataStore] Cache: ${ingredientsMap.size} ingrédients`,
+      console.warn(
+        "[RecipeDataStore] Erreur chargement cache local:",
+        err,
       );
     }
-
-    if (recipeInfo) {
-      this.#recipeInfo = recipeInfo;
-    }
-
-    if (metadata) {
-      this.#lastSync = metadata.lastSync;
-    }
   }
 
   /**
-   * Charge depuis JSON statiques et compare les hash
+   * Delta sync PocketBase → Dexie (ingredients + categories).
    */
-  async #loadFromJSON(): Promise<void> {
+  async syncFromRemote(): Promise<void> {
     try {
-      console.log("[RecipeDataStore] Fetch JSON...");
-
-      const [ingredientsRes, recipeInfoRes] = await Promise.all([
-        fetch(INGREDIENTS_JSON_URL),
-        fetch(RECIPE_INFO_JSON_URL),
+      await Promise.all([
+        this.#ingredientsCollection.initialFetch(),
+        this.#categoriesCollection.initialFetch(),
       ]);
-
-      if (!ingredientsRes.ok || !recipeInfoRes.ok) {
-        throw new Error("Erreur HTTP lors du chargement des JSON");
-      }
-
-      const [ingredientsData, recipeInfoData] = await Promise.all([
-        ingredientsRes.json(),
-        recipeInfoRes.json(),
-      ]);
-
-      // Calculer hash du contenu
-      const contentHash = await this.#calculateHash(
-        JSON.stringify(ingredientsData) + JSON.stringify(recipeInfoData),
-      );
-
-      // Vérifier si changement
-      const metadataRow = await db.catalog.get(KEY_METADATA);
-      const metadata = metadataRow?.data as CatalogMetadata | undefined;
-
-      if (metadata?.dataJsonHash === contentHash) {
-        console.log("[RecipeDataStore] JSON inchangés, cache valide");
-        return;
-      }
-
-      console.log("[RecipeDataStore] Mise à jour depuis JSON...");
-
-      // Trier les ingrédients par nom alphabétique
-      const sortedIngredients = (ingredientsData as Ingredient[]).sort((a, b) =>
-        a.n.localeCompare(b.n, "fr"),
-      );
-
-      const ingredientsMap = new Map<string, Ingredient>();
-      sortedIngredients.forEach((ing) => {
-        ingredientsMap.set(ing.u, ing);
-      });
-
-      this.#ingredients = new SvelteMap(ingredientsMap);
-      this.#recipeInfo = recipeInfoData as RecipeInfo;
       this.#lastSync = new Date().toISOString();
-
-      // Sauvegarder dans db.catalog
-      await db.catalog.bulkPut([
-        { key: KEY_INGREDIENTS, data: ingredientsMap },
-        { key: KEY_RECIPE_INFO, data: serializeRecipeInfo(this.#recipeInfo) },
-        {
-          key: KEY_METADATA,
-          data: {
-            lastSync: this.#lastSync,
-            dataJsonHash: contentHash,
-            ingredientsCount: ingredientsMap.size,
-          } satisfies CatalogMetadata,
-        },
-      ]);
-
       console.log(
-        `[RecipeDataStore] ✓ Cache mis à jour (hash: ${contentHash.slice(0, 8)}...)`,
+        `[RecipeDataStore] Sync terminé: ${this.#ingredientsMap.size} ingrédients`,
       );
     } catch (err) {
-      console.error("[RecipeDataStore] Erreur chargement JSON:", err);
+      console.error("[RecipeDataStore] Erreur sync:", err);
       throw err;
     }
   }
 
   /**
-   * Calcule SHA-256 hash
+   * Abonnement SSE PocketBase temps réel.
    */
-  async #calculateHash(content: string): Promise<string> {
-    const encoder = new TextEncoder();
-    const data = encoder.encode(content);
-    const hashBuffer = await crypto.subtle.digest("SHA-256", data);
-    const hashArray = Array.from(new Uint8Array(hashBuffer));
-    return hashArray.map((b) => b.toString(16).padStart(2, "0")).join("");
+  async setupRealtime(): Promise<void> {
+    try {
+      this.#ingredientsCollection.subscribe();
+      this.#categoriesCollection.subscribe();
+      console.log("[RecipeDataStore] ✓ Realtime configuré");
+    } catch (err) {
+      console.error(
+        "[RecipeDataStore] Erreur configuration realtime:",
+        err,
+      );
+      throw err;
+    }
   }
 
   // ===========================================================================
-  // API PUBLIQUE - INGRÉDIENTS
+  // API PUBLIQUE — INGRÉDIENTS
   // ===========================================================================
 
+  /**
+   * Récupère un ingrédient par son uuid.
+   */
   getIngredientByUuid(uuid: string): Ingredient | null {
-    return this.#ingredients.get(uuid) || null;
+    return this.#ingredientsMap.get(uuid) || null;
   }
 
+  /**
+   * Recherche textuelle d'ingrédients par nom.
+   */
   searchIngredients(query: string): Ingredient[] {
-    if (!query.trim()) return this.ingredients;
-    const results = fuzzysort.go(query, this.ingredients, {
-      key: "n",
+    if (!query.trim()) return this.#ingredientsList;
+    const results = fuzzysort.go(query, this.#ingredientsList, {
+      key: "name",
       threshold: 0.3,
       limit: 50,
     });
@@ -306,8 +356,8 @@ class RecipeDataStore {
     limit = 50,
   ): FuzzyIngredientResult[] {
     if (!query.trim()) return [];
-    const results = fuzzysort.go(query, this.ingredients, {
-      key: "n",
+    const results = fuzzysort.go(query, this.#ingredientsList, {
+      key: "name",
       threshold,
       limit,
     });
@@ -325,8 +375,8 @@ class RecipeDataStore {
    */
   findSimilarIngredients(name: string, limit = 5): FuzzyIngredientResult[] {
     if (!name.trim() || name.trim().length < 2) return [];
-    const results = fuzzysort.go(name, this.ingredients, {
-      key: "n",
+    const results = fuzzysort.go(name, this.#ingredientsList, {
+      key: "name",
       threshold: 0.5,
       limit,
     });
@@ -337,30 +387,45 @@ class RecipeDataStore {
     }));
   }
 
+  /**
+   * Filtre les ingrédients par type.
+   */
   getIngredientsByType(type: string): Ingredient[] {
-    return this.ingredients.filter((ing) => ing.t === type);
+    return this.#ingredientsList.filter((ing) => ing.type === type);
   }
 
+  /**
+   * Types d'ingrédients disponibles.
+   */
   get availableTypes(): string[] {
     const types = new Set<string>();
-    this.ingredients.forEach((ing) => types.add(ing.t));
+    for (const ing of this.#ingredientsList) {
+      types.add(ing.type);
+    }
     return Array.from(types).sort();
   }
 
+  /**
+   * Ingrédients contenant un allergène donné.
+   */
   getIngredientsByAllergen(allergen: string): Ingredient[] {
-    return this.ingredients.filter((ing) => ing.a?.includes(allergen));
+    return this.#ingredientsList.filter((ing) => ing.allergens?.includes(allergen));
   }
 
+  /**
+   * Allergènes disponibles.
+   */
   get availableAllergens(): string[] {
     const allergens = new Set<string>();
-    this.ingredients.forEach((ing) => {
-      ing.a?.forEach((a) => allergens.add(a));
-    });
+    for (const ing of this.#ingredientsList) {
+      ing.allergens?.forEach((a) => allergens.add(a));
+    }
     return Array.from(allergens).sort();
   }
 
   /**
-   * Ajoute un ingrédient via PocketBase
+   * Ajoute un ingrédient via PocketBase.
+   * Utilise les vrais noms de champs PB (uuid, name, type, allergens…).
    */
   async addIngredient(data: {
     name: string;
@@ -377,40 +442,25 @@ class RecipeDataStore {
     try {
       console.log("[RecipeDataStore] Ajout ingrédient:", data.name);
 
-      const newIngredient: Ingredient = {
-        u: crypto.randomUUID(),
-        n: data.name,
-        t: data.type,
-        a: data.allergens,
+      // UUID court (7 chars, ~3.5T combinaisons) — cohérent avec les UUIDs Hugo legacy
+      const uuid = nanoid(7);
+
+      // Création via pb-sync (écrit PB + Dexie, bridge réactif propage)
+      // PB auto-génère l'id, on fournit le uuid métier
+      const record = await this.#ingredientsCollection.create({
+        uuid,
+        name: data.name,
+        type: data.type as IngredientsRecord["type"],
+        allergens: data.allergens,
         pF: data.pF,
         pS: data.pS,
-        ...(data.saisons ? { s: data.saisons } : {}),
-      };
+        ...(data.saisons ? { saisons: data.saisons } : {}),
+      } as Omit<IngredientsRecord, "created" | "updated">);
 
-      // Créer dans PocketBase
-      await (pb.collection as any)("ingredients").create({
-        id: newIngredient.u,
-        ...newIngredient,
-      });
-
-      // Mise à jour locale optimiste
-      this.#ingredients.set(newIngredient.u, newIngredient);
-
-      // Sauvegarder dans db.catalog
-      await db.catalog.put({ key: KEY_INGREDIENTS, data: new Map(this.#ingredients) });
-
-      // Invalider le hash pour forcer le reload au prochain refresh
-      await db.catalog.put({
-        key: KEY_METADATA,
-        data: {
-          lastSync: this.#lastSync,
-          dataJsonHash: null,
-          ingredientsCount: this.#ingredients.size,
-        } satisfies CatalogMetadata,
-      });
+      const newIngredient = toAppIngredient(record);
 
       console.log(
-        `[RecipeDataStore] ✓ Ingrédient ajouté: ${newIngredient.n} (${newIngredient.u})`,
+        `[RecipeDataStore] ✓ Ingrédient ajouté: ${newIngredient.name} (${newIngredient.uuid})`,
       );
 
       return newIngredient;
@@ -421,110 +471,118 @@ class RecipeDataStore {
   }
 
   // ===========================================================================
-  // API PUBLIQUE - RECIPE INFO
+  // API PUBLIQUE — CATÉGORIES
   // ===========================================================================
-
-  async addCategory(category: string): Promise<void> {
-    if (this.#recipeInfo.categories.includes(category)) {
-      console.warn(`[RecipeDataStore] Catégorie déjà existante: ${category}`);
-      return;
-    }
-
-    await this.#updateRecipeInfo({
-      ...this.#recipeInfo,
-      categories: [...this.#recipeInfo.categories, category].sort(),
-    });
-  }
-
-  async addMateriel(materiel: string): Promise<void> {
-    if (this.#recipeInfo.materiel.includes(materiel)) {
-      console.warn(`[RecipeDataStore] Matériel déjà existant: ${materiel}`);
-      return;
-    }
-
-    await this.#updateRecipeInfo({
-      ...this.#recipeInfo,
-      materiel: [...this.#recipeInfo.materiel, materiel].sort(),
-    });
-  }
-
-  async addRegime(regime: string): Promise<void> {
-    if (this.#recipeInfo.regimes.includes(regime)) {
-      console.warn(`[RecipeDataStore] Régime déjà existant: ${regime}`);
-      return;
-    }
-
-    await this.#updateRecipeInfo({
-      ...this.#recipeInfo,
-      regimes: [...this.#recipeInfo.regimes, regime].sort(),
-    });
-  }
 
   /**
-   * Met à jour recipe-info localement (Dexie)
-   * TODO: Remplacer par pb.collection('catalog') quand la collection PB existe
+   * Ajoute une catégorie dans PocketBase (categories, type="category").
+   * Le SSE la réplique → Dexie → bridge → vue dérivée.
    */
-  async #updateRecipeInfo(newInfo: RecipeInfo): Promise<void> {
-    console.log("[RecipeDataStore] Mise à jour recipe-info...");
-
-    // Mise à jour locale
-    this.#recipeInfo = newInfo;
-
-    // Sauvegarder dans db.catalog
-    await db.catalog.bulkPut([
-      { key: KEY_RECIPE_INFO, data: serializeRecipeInfo(newInfo) },
-      {
-        key: KEY_METADATA,
-        data: {
-          lastSync: this.#lastSync,
-          dataJsonHash: null,
-          ingredientsCount: this.#ingredients.size,
-        } satisfies CatalogMetadata,
-      },
-    ]);
-
-    console.log("[RecipeDataStore] ✓ recipe-info mis à jour");
-  }
-
-  // ===========================================================================
-  // UTILITAIRES
-  // ===========================================================================
-
-  async forceReload(): Promise<void> {
-    console.log("[RecipeDataStore] Rechargement forcé...");
-    this.#loading = true;
-    this.#error = null;
+  async addCategory(name: string): Promise<void> {
+    if (this.#categoriesList.includes(name)) {
+      console.warn(`[RecipeDataStore] Catégorie déjà existante: ${name}`);
+      return;
+    }
 
     try {
-      await db.catalog.put({
-        key: KEY_METADATA,
-        data: { lastSync: this.#lastSync, dataJsonHash: null, ingredientsCount: 0 } satisfies CatalogMetadata,
-      });
-      await this.#loadFromJSON();
-      console.log("[RecipeDataStore] ✓ Rechargement complété");
+      await this.#categoriesCollection.create({
+        name,
+        type: "category",
+      } as Omit<CategoriesRecord, "created" | "updated">);
+
+      console.log(`[RecipeDataStore] ✓ Catégorie ajoutée: ${name}`);
     } catch (err) {
-      const message =
-        err instanceof Error ? err.message : "Erreur rechargement";
-      this.#error = message;
-      console.error("[RecipeDataStore]", message, err);
+      console.error("[RecipeDataStore] Erreur ajout catégorie:", err);
       throw err;
-    } finally {
-      this.#loading = false;
     }
   }
 
+  // ===========================================================================
+  // API PUBLIQUE — MATÉRIEL
+  // ===========================================================================
+
+  /**
+   * Ajoute un matériel localement (db.catalog).
+   * Les matériels sont des constantes TS + ajouts utilisateur persistés.
+   */
+  async addMateriel(name: string): Promise<void> {
+    if (this.#materielList.includes(name)) {
+      console.warn(`[RecipeDataStore] Matériel déjà existant: ${name}`);
+      return;
+    }
+
+    try {
+      this.#customMateriel = [...this.#customMateriel, name].sort((a, b) =>
+        a.localeCompare(b, "fr"),
+      );
+      await db.catalog.put({
+        key: KEY_CUSTOM_MATERIEL,
+        data: this.#customMateriel,
+      });
+      console.log(`[RecipeDataStore] ✓ Matériel ajouté: ${name}`);
+    } catch (err) {
+      console.error("[RecipeDataStore] Erreur ajout matériel:", err);
+      throw err;
+    }
+  }
+
+  // ===========================================================================
+  // API PUBLIQUE — RÉGIMES
+  // ===========================================================================
+
+  /**
+   * Ajoute un régime localement (db.catalog).
+   * Les régimes sont des constantes TS + ajouts utilisateur persistés.
+   */
+  async addRegime(name: string): Promise<void> {
+    if (this.#regimesList.includes(name)) {
+      console.warn(`[RecipeDataStore] Régime déjà existant: ${name}`);
+      return;
+    }
+
+    try {
+      this.#customRegimes = [...this.#customRegimes, name].sort((a, b) =>
+        a.localeCompare(b, "fr"),
+      );
+      await db.catalog.put({
+        key: KEY_CUSTOM_REGIMES,
+        data: this.#customRegimes,
+      });
+      console.log(`[RecipeDataStore] ✓ Régime ajouté: ${name}`);
+    } catch (err) {
+      console.error("[RecipeDataStore] Erreur ajout régime:", err);
+      throw err;
+    }
+  }
+
+  // ===========================================================================
+  // NETTOYAGE
+  // ===========================================================================
+
+  /**
+   * Vide le cache local.
+   */
   async clearCache(): Promise<void> {
-    await db.catalog.clear();
-    this.#ingredients.clear();
-    this.#recipeInfo = { materiel: [], categories: [], regimes: [] };
+    await this.#ingredientsCollection.clearLocal();
+    await this.#categoriesCollection.clearLocal();
+    await db.catalog.where("key").startsWith("custom-").delete();
+    this.#customMateriel = [];
+    this.#customRegimes = [];
     this.#lastSync = null;
     this.#isInitialized = false;
     console.log("[RecipeDataStore] Cache vidé");
   }
 
+  /**
+   * Nettoie toutes les ressources (bridge, SSE, Dexie).
+   */
   destroy(): void {
-    this.#ingredients.clear();
+    this.#ingredientsBridge.subscription.unsubscribe();
+    this.#categoriesBridge.subscription.unsubscribe();
+    this.#ingredientsCollection.unsubscribeAll();
+    this.#categoriesCollection.unsubscribeAll();
     this.#isInitialized = false;
+    this.#initPromise = null;
     console.log("[RecipeDataStore] Ressources nettoyées");
   }
 }

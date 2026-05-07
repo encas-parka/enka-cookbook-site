@@ -94,6 +94,7 @@ export interface SubscriptionRef {
 export type PbCollectionName =
 	| 'events'
 	| 'ingredients'
+	| 'categories'
 	| 'main'
 	| 'purchases'
 	| 'products'

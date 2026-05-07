@@ -26,6 +26,10 @@ import type {
 } from "$lib/types/pb";
 import type { PbDoc } from "./aw-types";
 import type { EnrichedNativeTeam } from "$lib/types/aw_native_team.d";
+import type {
+  IngredientsRecord,
+  CategoriesRecord,
+} from "$lib/types/pb-generated";
 
 // =============================================================================
 // STATIC DATA TYPES (Hugo)
@@ -136,6 +140,10 @@ export class EnkaDB extends Dexie {
   // --- Native teams cache (Appwrite Teams API, not Tables) ---
   nativeTeams!: Table<EnrichedNativeTeam, string>;
 
+  // --- Ingredients & Categories (pb-sync, remplace Hugo JSON) ---
+  ingredients!: Table<IngredientsRecord, string>;
+  categories!: Table<CategoriesRecord, string>;
+
   constructor() {
     super("EnkaDB");
 
@@ -219,6 +227,29 @@ export class EnkaDB extends Dexie {
       nativeTeams: "id, updated",
       joinLinks: "linkId",
       catalog: "key",
+    });
+
+    // v8: add ingredients + categories tables for pb-sync (remplace Hugo JSON)
+    this.version(8).stores({
+      events: "id, updated, status, createdBy, dateStart",
+      products: "id, updated, eventId, productHugoUuid, store, status",
+      purchases: "id, updated, eventId, *products, status, store",
+      recipes: "id, updated, status, typeR, createdBy, lockedBy",
+      materiels: "id, updated, type, status, owner, deleted",
+      materielLoans: "id, updated, status, ownerId, eventId, startDate, endDate",
+      eventMateriels: "id, updated, eventId, type, status, groupId",
+      teamdocs: "id, updated, teamId, eventId, status",
+      locks: "id, updated, userId, expiresAt",
+      eventTodos: "id, updated, eventId, status, taskOn, priority",
+      shareLinks: "id, updated, target_id, link_type, isActive",
+      recipeData: "key",
+      productNeeds: "id, updated, mainId",
+      syncMeta: "collectionId",
+      nativeTeams: "id, updated",
+      joinLinks: "linkId",
+      catalog: "key",
+      ingredients: "id, updated, name, type",
+      categories: "id, updated, name, type",
     });
   }
 }

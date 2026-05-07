@@ -664,7 +664,6 @@ function main() {
     const responsibleId = resolveRelation(awLoan.responsibleId, userMap, "responsibleId", false, `Loan ${appwriteId}`);
     const eventId = resolveRelation(awLoan.eventId, eventMap, "eventId", false, `Loan ${appwriteId}`);
     const createdBy = resolveRelation(awLoan.createdBy, userMap, "createdBy", false, `Loan ${appwriteId}`);
-    const materielId = resolveRelation(awLoan.materielId, materielMap, "materielId", false, `Loan ${appwriteId}`);
 
     // Remap materielIds inside materiels JSON — parse strings → objects
     let materiels = awLoan.materiels || null;
@@ -685,7 +684,6 @@ function main() {
     migrationMap.materiel_loan[appwriteId] = { refId };
 
     pbMaterielLoans.push({
-      materielId,
       borrowerUser: null,
       eventId,
       startDate: awLoan.startDate || null,

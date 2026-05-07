@@ -115,10 +115,10 @@ export interface EnrichedMaterielLoan extends Omit<
   MaterielLoan,
   "materiels"
 > {
-  // Champ brut PB (tableau de JSON strings)
-  materiels: string[] | null;
+  // Champ brut PB (peut être string, string[] ou object[] selon la source)
+  materiels: unknown | null;
 
-  // Champ enrichi parsé
+  // Champ enrichi parsé (toujours MaterielLoanItem[])
   materielItems: MaterielLoanItem[];
 }
 

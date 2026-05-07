@@ -10,7 +10,7 @@ import type {
 } from "$lib/types/materiel.types";
 import {
   enrichMaterielFromAppwrite,
-  enrichLoanFromAppwrite,
+  enrichLoanFromDb,
   calculateLoanedQuantityForPeriod,
 } from "$lib/utils/materiel.utils";
 import { materielTypeLabels } from "$lib/utils/share-utils";
@@ -89,7 +89,7 @@ export class MaterielStore {
 
   /** All loans enriched with parsed materielItems */
   #enrichedLoans = $derived.by(() =>
-    this.#raw.loans.map((l) => enrichLoanFromAppwrite(l)),
+    this.#raw.loans.map((l) => enrichLoanFromDb(l)),
   );
 
   // Public reactive lists
@@ -418,7 +418,7 @@ export class MaterielStore {
           responsibleName: data.responsibleName,
           ownerId: data.ownerId,
           ownerName: data.ownerName,
-          materiels: data.materiels.map((item) => JSON.stringify(item)),
+          materiels: [...data.materiels],
           notes: data.notes || null,
           status: (data.status || "asked") as MaterielLoan["status"],
           completedAt: null,
@@ -429,7 +429,7 @@ export class MaterielStore {
         } as Omit<MaterielLoan, "id" | "created" | "updated">,
       );
 
-      const enriched = enrichLoanFromAppwrite(loan);
+      const enriched = enrichLoanFromDb(loan);
 
       // Sync vers EventMateriel si un eventId est lié
       if (data.eventId && data.materiels.length > 0) {
@@ -479,9 +479,7 @@ export class MaterielStore {
       if (data.startDate !== undefined) updateData.startDate = data.startDate;
       if (data.endDate !== undefined) updateData.endDate = data.endDate;
       if (data.materiels !== undefined)
-        updateData.materiels = data.materiels.map((item) =>
-          JSON.stringify(item),
-        );
+        updateData.materiels = [...data.materiels];
       if (data.status !== undefined)
         updateData.status = data.status as string;
       if (data.notes !== undefined) updateData.notes = data.notes;

@@ -205,8 +205,8 @@ export type EventsRecord<Tcontributors = unknown, Tdate = unknown, TguestEmails 
 	dateEnd?: IsoDateString
 	dateStart?: IsoDateString
 	guestEmails?: null | TguestEmails
+	guestUsers?: RecordIdString[]
 	id: string
-	joinToken?: string
 	location?: string
 	meals?: null | Tmeals
 	name: string
@@ -305,7 +305,6 @@ export type MaterielLoanRecord<Tmateriels = unknown> = {
 	eventId?: RecordIdString
 	eventName?: string
 	id: string
-	materielId?: RecordIdString
 	materiels?: null | Tmateriels
 	notes?: string
 	ownerId?: RecordIdString
@@ -394,7 +393,7 @@ export const RecipesStatusOptions = {
 	"deleted": "deleted",
 } as const
 export type RecipesStatusOptions = typeof RecipesStatusOptions[keyof typeof RecipesStatusOptions]
-export type RecipesRecord<Tastuces = unknown, Tcategories = unknown, Tingredients = unknown, Tmateriel = unknown, TpermissionWrite = unknown, TprepAlt = unknown, Tregime = unknown, Tsaison = unknown, Tteams = unknown> = {
+export type RecipesRecord<Tastuces = unknown, Tcategories = unknown, Tingredients = unknown, Tmateriel = unknown, TprepAlt = unknown, Tregime = unknown, Tsaison = unknown, Tteams = unknown> = {
 	astuces?: null | Tastuces
 	auteur?: string
 	categories?: null | Tcategories
@@ -408,7 +407,7 @@ export type RecipesRecord<Tastuces = unknown, Tcategories = unknown, Tingredient
 	ingredients?: null | Tingredients
 	lockedBy?: string
 	materiel?: null | Tmateriel
-	permissionWrite?: null | TpermissionWrite
+	permissionWrite?: RecordIdString[]
 	plate?: number
 	prepAlt?: null | TprepAlt
 	preparation24h?: string
@@ -491,7 +490,7 @@ export type MaterielLoanResponse<Tmateriels = unknown, Texpand = unknown> = Requ
 export type NotificationsResponse<Tdata = unknown, Texpand = unknown> = Required<NotificationsRecord<Tdata>> & BaseSystemFields<Texpand>
 export type ProductsResponse<TmergedFrom = unknown, TpreviousNames = unknown, Tspecs = unknown, TstockReel = unknown, Tstore = unknown, TtotalNeededOverride = unknown, Twho = unknown, Texpand = unknown> = Required<ProductsRecord<TmergedFrom, TpreviousNames, Tspecs, TstockReel, Tstore, TtotalNeededOverride, Twho>> & BaseSystemFields<Texpand>
 export type PurchasesResponse<Tstore = unknown, Texpand = unknown> = Required<PurchasesRecord<Tstore>> & BaseSystemFields<Texpand>
-export type RecipesResponse<Tastuces = unknown, Tcategories = unknown, Tingredients = unknown, Tmateriel = unknown, TpermissionWrite = unknown, TprepAlt = unknown, Tregime = unknown, Tsaison = unknown, Tteams = unknown, Texpand = unknown> = Required<RecipesRecord<Tastuces, Tcategories, Tingredients, Tmateriel, TpermissionWrite, TprepAlt, Tregime, Tsaison, Tteams>> & BaseSystemFields<Texpand>
+export type RecipesResponse<Tastuces = unknown, Tcategories = unknown, Tingredients = unknown, Tmateriel = unknown, TprepAlt = unknown, Tregime = unknown, Tsaison = unknown, Tteams = unknown, Texpand = unknown> = Required<RecipesRecord<Tastuces, Tcategories, Tingredients, Tmateriel, TprepAlt, Tregime, Tsaison, Tteams>> & BaseSystemFields<Texpand>
 export type ShareLinksResponse<Texpand = unknown> = Required<ShareLinksRecord> & BaseSystemFields<Texpand>
 export type TeamdocsResponse<Texpand = unknown> = Required<TeamdocsRecord> & BaseSystemFields<Texpand>
 export type TeamsResponse<Texpand = unknown> = Required<TeamsRecord> & BaseSystemFields<Texpand>

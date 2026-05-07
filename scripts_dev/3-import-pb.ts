@@ -49,7 +49,7 @@ const RELATION_FIELDS: Record<string, Record<string, "single" | "multi">> = {
   products: { eventId: "single", updatedBy: "single", mergedInto: "single" },
   purchases: { eventId: "single", createdBy: "single", products: "multi" },
   event_materiel: { eventId: "single", sourceMaterielId: "single", loanId: "single", createdBy: "single", groupId: "single" },
-  materiel_loan: { materielId: "single", eventId: "single", createdBy: "single", responsibleId: "single", ownerId: "single", borrowerUser: "single" },
+  materiel_loan: { eventId: "single", createdBy: "single", responsibleId: "single", ownerId: "single", borrowerUser: "single" },
   teamdocs: { teamId: "single", eventId: "single" },
   event_todos: { eventId: "single", assignedTo: "single" },
   share_links: {}, // target_id is text, handled separately

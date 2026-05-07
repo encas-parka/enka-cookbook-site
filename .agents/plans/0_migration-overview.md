@@ -2,8 +2,8 @@
 
 **Créé le :** 2026-04-21
 **Dernière MAJ :** 2026-05-07
-**Statut :** Phase 1 — 1.0→1.3b ✅, 1.7a ✅, 1.7b ✅ (pipeline terminé, données importées), 1.8 ⬜
-**Plan détaillé :** `.agents/plans/26-05-04_migration-pipeline-export-transform.md` (pipeline export+transform) + `.agents/plans/26-05-03_data-migration-pb_pre.md` (schéma + données statiques)
+**Statut :** Phase 1 — 1.0→1.3b ✅, 1.7a ✅, 1.7b ✅ (pipeline validé, 2279/2280 importés), 1.7c ✅ (cascade delete + fixes), 1.8 ⬜
+**Plan détaillé :** `.agents/plans/26-05-06_migration-pipeline-synthesis.md` (pipeline unification) + `.agents/plans/26-05-04_migration-pipeline-export-transform.md` (export+transform) + `.agents/plans/26-05-03_data-migration-pb_pre.md` (schéma + données statiques)
 **Documents source (pédagogiques) :** `../` — ce dossier `agent/` est la version synthétique destinée aux LLM
 
 ---
@@ -225,18 +225,22 @@ Les mots de passe Appwrite sont hashés en **argon2** et ne sont pas portables d
   - Types régénérés, `bun run check` → 0 erreurs ✅
 
 - [x] **1.7b** Migration données Appwrite → PB (users + données dynamiques) — **✅ terminé**
-  - Voir `.agents/plans/26-05-04_migration-pipeline-export-transform.md` (pipeline réécrit)
+  - Voir `.agents/plans/26-05-06_migration-pipeline-synthesis.md` (refonte pipeline unifié)
   - Voir `scripts_dev/doc_migrationPb.md` (documentation pipeline complète)
-  - ✅ Pipeline unifié 4 phases (A→D), 8 scripts :
-    - Phase A : Schéma PB (migrations auto au démarrage)
-    - Phase B : `1-export-appwrite.ts` → `2-transform-data.ts` → `3-import-pb.ts` (données Appwrite)
-    - Phase C : `migrate-recipes.ts` + `migrate-ingredients.ts` + `migrate-recipe-catalog.ts` (données Hugo → import direct PB)
-    - Phase D : `4-fix-timestamps.ts` (SQL direct) + `validate-migration.ts`
-  - ✅ Architecture unifiée : tous les transforms produisent du JSON PB-ready, un seul point d'import (`3-import-pb.ts` pour Appwrite, `migrate-*.ts` pour Hugo)
-  - ✅ 1094/1095 records importés, validés par `validate-migration.ts`
-  - ✅ Mapping appwriteId → pbId (`migration-map.json`, 4163 lignes)
+  - ✅ Pipeline unifié : tous les transforms produisent du JSON PB-ready → `3-import-pb.ts` unique
+  - ✅ Transforms : `2-transform-data.ts` (Appwrite), `2b-transform-recipes.ts` (Hugo), `2c-transform-ingredients.ts` (statique), `2d-transform-catalog.ts` (statique)
+  - ✅ 2279/2280 records importés (1 user sans email ignoré)
+  - ✅ `2-transform-data.ts` : orphan summary groupé par eventId, topo sort pour `event_materiel.groupId`
+  - ✅ Mapping appwriteId → pbId (`migration-map.json` + `id-map.json` post-import)
   - ✅ Transformation labels → guestEmails[]
-  - ⚠️ **Dettes data migration** (voir section I ci-dessous) : double-sérialisation JSON, IDs Appwrite dans owner, users listRule restrictif
+  - ⚠️ **Dettes data migration** (voir section J ci-dessous) : double-sérialisation JSON, IDs Appwrite dans owner, users listRule restrictif
+
+- [x] **1.7c** Corrections post-import + cascade delete — **✅ terminé** `d1d2da7f`
+  - ✅ `events.guestUsers` maxSelect **10→100** (fix 371 échecs en cascade — Résistances 2026: 18 invités)
+  - ✅ `recipes.permissionWrite` maxSelect **10→100** (prévention recettes collaboratives)
+  - ✅ Hook cascade delete event (`pb_hooks/cascade-delete-event.pb.js`) : products, purchases, event_materiel, event_todos, teamdocs, share_links
+  - ✅ Hook cascade delete team (`pb_hooks/cascade-delete-teams.pb.js`) : materiel, teamdocs, share_links (PAS les events — many-to-many)
+  - ✅ Cleanup pagination fix : loop jusqu'à 0 records (avant: limité à 500/page → doublons sur collections >500)
 
 - [ ] **1.8** Déploiement Dokploy (Nginx + PocketBase)
   - Dockerfile Nginx pour servir les fichiers statiques du build Vite
@@ -278,6 +282,11 @@ Les mots de passe Appwrite sont hashés en **argon2** et ne sont pas portables d
 - ⬜ Corriger `2-transform-data.ts` : double-sérialisation JSON (meals, contributors) + IDs Appwrite dans owner
 - ⬜ Re-importer les collections affectées après correction du script
 - ⬜ Corriger `users` listRule pour permettre `expand: 'members'` (ou modifier NativeTeamsStore)
+- ~~⬜ Valider pipeline end-to-end~~ → **✅ 1.7c** : 2279/2280 importés, 1 seul échec (user sans email), 0 échec cascade
+
+**E3. Cascade delete** :
+
+- ✅ Hooks `cascade-delete-event.pb.js` + `cascade-delete-teams.pb.js` — **1.7c**
 
 **G. Dette technique mineure résiduelle** :
 

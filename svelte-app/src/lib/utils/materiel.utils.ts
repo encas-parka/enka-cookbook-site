@@ -1,8 +1,6 @@
 /**
- * Utilitaires de parsing et d'enrichissement pour le matériel
- * Convention: fromAppwrite = depuis Appwrite vers le client, toAppwrite = du client vers Appwrite
- *
- * Inspiré de events.utils.ts - Parsing centralisé et testable
+ * Utilitaires de parsing et d'enrichissement pour la gestion du matériel
+ * Parsing centralisé et testable des données PocketBase
  */
 
 import type {
@@ -231,36 +229,48 @@ export function parseOwnerFromAppwrite(owner: string | null): MaterielOwner {
 }
 
 /**
- * Parse les items d'emprunt depuis le champ materiels (JSON string ou string[]) d'Appwrite
- * @param materiels - Chaîne JSON ou tableau de strings JSON depuis Appwrite
+ * Parse les items d'emprunt depuis le champ materiels (JSON string, string[] ou object[]) de PocketBase
+ * Gère 3 formats :
+ *   - string (JSON unique du tableau complet)  — legacy
+ *   - string[] (chaque item JSON.stringify individuellement) — ancien format frontend
+ *   - object[] (objets natifs, désérialisés par le SDK PB) — format cible
+ * @param materiels - Valeur brute depuis PocketBase
  * @returns Tableau de MaterielLoanItem typé
  */
-export function parseLoanItemsFromAppwrite(
-  materiels: string | string[] | null | undefined,
+export function parseLoanItemsFromDb(
+  materiels: unknown,
 ): MaterielLoanItem[] {
   if (!materiels) {
     return [];
   }
 
   try {
-    // Format string[] : chaque élément est un JSON stringifié
+    // Format string[] ou object[] : chaque élément est un item
     if (Array.isArray(materiels)) {
       return materiels
         .map((item) => {
-          try {
-            return JSON.parse(item) as MaterielLoanItem;
-          } catch {
-            console.warn(
-              "[materiel.utils] Failed to parse loan item string:",
-              item,
-            );
-            return null;
+          // Objet natif (format cible : données créées après ce fix ou données migrées)
+          if (typeof item === "object" && item !== null) {
+            return item as MaterielLoanItem;
           }
+          // String JSON (ancien format : chaque item JSON.stringify individuellement)
+          if (typeof item === "string") {
+            try {
+              return JSON.parse(item) as MaterielLoanItem;
+            } catch {
+              console.warn(
+                "[materiel.utils] Failed to parse loan item string:",
+                item,
+              );
+              return null;
+            }
+          }
+          return null;
         })
         .filter((item): item is MaterielLoanItem => item !== null);
     }
 
-    // Format string : JSON unique
+    // Format string : JSON unique du tableau complet (legacy)
     if (typeof materiels === "string") {
       return JSON.parse(materiels) as MaterielLoanItem[];
     }
@@ -268,7 +278,7 @@ export function parseLoanItemsFromAppwrite(
     return [];
   } catch (e) {
     console.error(
-      "[materiel.utils] Error parsing loan items from Appwrite:",
+      "[materiel.utils] Error parsing loan items from PocketBase:",
       materiels,
       e,
     );
@@ -277,73 +287,33 @@ export function parseLoanItemsFromAppwrite(
 }
 
 /**
- * Parse le champ materiels d'un loan depuis Appwrite
- * Gère à la fois le format string[] et string
- * @param materielsField - Champ materiels brut depuis Appwrite
+ * Parse le champ materiels d'un loan depuis PocketBase
+ * Gère les 3 formats : string, string[], object[]
+ * @param materielsField - Champ materiels brut depuis PocketBase
  * @returns Tableau de MaterielLoanItem
  */
-export function parseMaterielLoanFieldFromAppwrite(
-  materielsField: string | string[] | null | undefined,
+export function parseMaterielLoanFieldFromDb(
+  materielsField: unknown,
 ): MaterielLoanItem[] {
-  return parseLoanItemsFromAppwrite(materielsField);
+  return parseLoanItemsFromDb(materielsField);
 }
 
 // =============================================================================
-// TO APPWRITE - Formatage depuis types locaux vers Appwrite
+// ENRICHISSEMENT LOAN — Enrichissement des emprunts depuis PocketBase
 // =============================================================================
 
 /**
- * Formate un objet MaterielOwner en JSON string pour Appwrite
- * @param owner - Objet MaterielOwner
- * @returns JSON string pour Appwrite
- */
-export function formatOwnerToAppwrite(owner: MaterielOwner): string {
-  try {
-    return JSON.stringify(owner);
-  } catch (e) {
-    console.error(
-      "[materiel.utils] Error formatting owner to Appwrite:",
-      owner,
-      e,
-    );
-    return JSON.stringify(DEFAULT_OWNER);
-  }
-}
-
-/**
- * Formate un tableau d'items de loan en JSON string pour Appwrite
- * @param items - Tableau de MaterielLoanItem
- * @returns JSON string pour Appwrite
- */
-export function formatLoanItemsToAppwrite(items: MaterielLoanItem[]): string {
-  try {
-    return JSON.stringify(items);
-  } catch (e) {
-    console.error(
-      "[materiel.utils] Error formatting loan items to Appwrite:",
-      items,
-      e,
-    );
-    return "[]";
-  }
-}
-
-// =============================================================================
-// ENRICHISSEMENT LOAN - Enrichissement des emprunts depuis Appwrite
-// =============================================================================
-
-/**
- * Enrichit un emprunt Appwrite avec les items de matériel parsés
+ * Enrichit un emprunt avec les items de matériel parsés
  *
- * @param loan - Emprunt Appwrite brut (MaterielLoan)
+ * @param loan - Emprunt brut (MaterielLoan)
  * @returns Emprunt enrichi avec les items parsés
  */
-export function enrichLoanFromAppwrite(
+export function enrichLoanFromDb(
   loan: MaterielLoan,
 ): EnrichedMaterielLoan {
   return {
     ...loan,
-    materielItems: parseMaterielLoanFieldFromAppwrite(loan.materiels),
+    materielItems: parseMaterielLoanFieldFromDb(loan.materiels),
   };
 }
 
@@ -373,7 +343,7 @@ export function enrichMaterielFromAppwrite(
 
   allLoans.forEach((loan) => {
     // Parser les items du loan depuis Appwrite
-    const loanItems = parseLoanItemsFromAppwrite(loan.materiels);
+    const loanItems = parseLoanItemsFromDb(loan.materiels);
 
     // Filtrer les items pour ce matériel
     const itemsForThisMateriel = loanItems.filter(
@@ -523,7 +493,7 @@ export function calculateTotalLoanedQuantity(
     }
 
     // Parser les items et sommer les quantités pour ce matériel
-    const loanItems = parseLoanItemsFromAppwrite(loan.materiels);
+    const loanItems = parseLoanItemsFromDb(loan.materiels);
     const itemsForThisMateriel = loanItems.filter(
       (item) => item.materielId === materielId,
     );
@@ -546,7 +516,7 @@ export function extractMaterielIdsFromLoans(
   const materielIds = new Set<string>();
 
   loans.forEach((loan) => {
-    const loanItems = parseLoanItemsFromAppwrite(loan.materiels);
+    const loanItems = parseLoanItemsFromDb(loan.materiels);
     loanItems.forEach((item) => {
       materielIds.add(item.materielId);
     });
@@ -614,7 +584,7 @@ export function calculateLoanedQuantityForPeriod(
     }
 
     // Parser les items et sommer les quantités pour ce matériel
-    const loanItems = parseLoanItemsFromAppwrite(loan.materiels);
+    const loanItems = parseLoanItemsFromDb(loan.materiels);
     const itemsForThisMateriel = loanItems.filter(
       (item) => item.materielId === materielId,
     );
@@ -696,7 +666,7 @@ export function getMaterielConflictsForPeriod(
     }
 
     // Parser les items et vérifier si ce matériel est concerné
-    const loanItems = parseLoanItemsFromAppwrite(loan.materiels);
+    const loanItems = parseLoanItemsFromDb(loan.materiels);
     const itemsForThisMateriel = loanItems.filter(
       (item) => item.materielId === materielId,
     );

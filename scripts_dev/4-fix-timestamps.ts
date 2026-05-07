@@ -130,8 +130,10 @@ async function main() {
   console.log(`📊 ID mapping: ${idMap.size} entries\n`);
 
   // Open DB
-  const db = new Database(DB_PATH, { readonly: DRY_RUN });
-  db.exec("PRAGMA journal_mode = WAL;");
+  const db = new Database(DB_PATH, DRY_RUN ? { readonly: true } : undefined);
+  if (!DRY_RUN) {
+    db.exec("PRAGMA journal_mode = WAL;");
+  }
 
   if (!DRY_RUN) {
     db.exec("BEGIN TRANSACTION;");

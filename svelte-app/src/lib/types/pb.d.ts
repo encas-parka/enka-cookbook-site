@@ -197,7 +197,6 @@ export type Materiel = PbDoc & {
 
 /** MaterielLoan (collection: "materiel_loan") — aligned with MaterielLoanRecord */
 export type MaterielLoan = PbDoc & {
-  materielId: string;
   borrowerUser: string | null;
   eventId: string | null;
   startDate: string | null;

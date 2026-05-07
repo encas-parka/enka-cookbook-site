@@ -2,8 +2,6 @@
   import { recipesStore } from "$lib/stores/RecipesStore.svelte";
   import { recipeDataStore } from "$lib/stores/RecipeDataStore.svelte";
   import { globalState } from "$lib/stores/GlobalState.svelte";
-  import { ingredientsToAppwrite } from "$lib/utils/ingredientUtils";
-  import { astucesToAppwrite } from "$lib/utils/recipeUtils";
   import { toastService } from "$lib/services/toast.service.svelte";
   import { route, navigate } from "$lib/router";
   import { Save, Lock, Copy, Trash2 } from "@lucide/svelte";
@@ -22,7 +20,7 @@
     type ValidationError,
     transformStoreDataToForm,
     createRecipeSnapshot,
-    normalizeRecipeForAppwrite,
+    normalizeRecipeForSave,
     determineAllergensAndRegimes,
     validateRecipe,
     deleteRecipe,
@@ -325,19 +323,19 @@
       // Déterminer les régimes automatiquement
       const { regimes } = determineAllergensAndRegimes(recipe.ingredients);
 
-      // Normaliser les types UI vers types Appwrite
-      const normalized = normalizeRecipeForAppwrite(recipe);
+      // Normaliser les types UI vers types DB
+      const normalized = normalizeRecipeForSave(recipe);
 
       const recipeData: any = {
         ...normalized,
         categories: recipe.categories,
         regime: regimes,
         saison: recipe.saison,
-        ingredients: ingredientsToAppwrite(recipe.ingredients),
+        ingredients: recipe.ingredients,
         quantite_desc: recipe.quantite_desc,
         auteur: recipe.auteur,
         preparation24h: recipe.preparation24h,
-        astuces: astucesToAppwrite(recipe.astuces),
+        astuces: recipe.astuces,
         prepAlt: recipe.prepAlt,
         id: recipe.id,
         // Conserver createdBy pour l'upsert (création si nécessaire)

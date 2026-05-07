@@ -181,9 +181,9 @@ export function createRecipeSnapshot(recipe: RecipeFormState): string {
 }
 
 /**
- * Normalise l'état du formulaire vers les types stricts Appwrite
+ * Normalise l'état du formulaire vers les types stricts DB
  */
-export function normalizeRecipeForAppwrite(
+export function normalizeRecipeForSave(
   recipe: RecipeFormState,
 ): CreateRecipeData {
   return {

@@ -7,7 +7,7 @@ import type {
   RecipeForDisplay,
   RecipeIndexEntry,
 } from "../types/recipes.types";
-import { ingredientsFromAppwrite } from "./ingredientUtils";
+import { parseIngredients } from "./ingredientUtils";
 
 // =============================================================================
 // TYPE DE RECETTE - Labels et Icônes (Sprite SVG)
@@ -108,7 +108,7 @@ export function getTypeLabel(type: string): string {
 }
 
 // =============================================================================
-// ASTUCES - Transformation Appwrite ↔ App
+// ASTUCES - Parsing depuis DB
 // =============================================================================
 
 /**
@@ -119,57 +119,34 @@ export interface Astuce {
 }
 
 /**
- * Convertit les astuces depuis Appwrite (string[] JSON) vers le format applicatif
- *
- * @example
- * // Appwrite: ['{"astuce":"Conseil 1"}', '{"astuce":"Conseil 2"}']
- * // → [{astuce: "Conseil 1"}, {astuce: "Conseil 2"}]
+ * Parse des astuces depuis la DB (objets natifs PB ou legacy string[])
+ * Accepte Astuce[] (natif PB), string[] (legacy), null/undefined
  */
-export function astucesFromAppwrite(
-  astuces: string[] | null | undefined,
+export function parseAstuces(
+  astuces: Astuce[] | string[] | null | undefined,
 ): Astuce[] {
   if (!astuces || !Array.isArray(astuces)) {
     return [];
   }
 
   return astuces
-    .map((astuceStr) => {
-      try {
-        const parsed = JSON.parse(astuceStr);
-        if (parsed && typeof parsed.astuce === "string") {
-          return parsed;
-        }
-        // Fallback: si c'est juste une string
-        if (typeof astuceStr === "string") {
-          return { astuce: astuceStr };
-        }
-      } catch (e) {
-        console.warn("[recipeUtils] Failed to parse astuce:", astuceStr, e);
+    .map((item) => {
+      if (
+        item &&
+        typeof item === "object" &&
+        !Array.isArray(item) &&
+        typeof item.astuce === "string"
+      ) {
+        return item;
       }
+
+      if (typeof item === "string") {
+        return { astuce: item };
+      }
+
       return null;
     })
     .filter((item): item is Astuce => item !== null);
-}
-
-/**
- * Convertit les astuces vers Appwrite (string[] JSON)
- *
- * @example
- * // [{astuce: "Conseil 1"}, {astuce: "Conseil 2"}]
- * // → ['{"astuce":"Conseil 1"}', '{"astuce":"Conseil 2"}']
- */
-export function astucesToAppwrite(
-  astuces: string[] | { astuce: string }[] | null | undefined,
-): string[] | null {
-  if (!astuces || !Array.isArray(astuces) || astuces.length === 0) {
-    return null;
-  }
-
-  return astuces.map((astuce) =>
-    typeof astuce === "string"
-      ? JSON.stringify({ astuce })
-      : JSON.stringify(astuce),
-  );
 }
 
 /**
@@ -293,16 +270,16 @@ export function parseRecipeIndexEntry(rawData: any): RecipeIndexEntry {
 }
 
 /**
- * Convertit une recette Appwrite (Recettes) en entrée d'index (RecipeIndexEntry)
+ * Convertit une recette DB (Recettes) en entrée d'index (RecipeIndexEntry)
  *
- * @param recipe - Recette brute depuis Appwrite
+ * @param recipe - Recette brute depuis PocketBase
  * @returns RecipeIndexEntry pour l'index
  */
-export function parseAppwriteRecipeToIndexEntry(recipe: any): RecipeIndexEntry {
+export function parseRecipeToIndexEntry(recipe: any): RecipeIndexEntry {
   // Extraire les noms d'ingrédients
   let ingredientNames: string[] = [];
   if (recipe.ingredients) {
-    const ingredients = ingredientsFromAppwrite(recipe.ingredients);
+    const ingredients = parseIngredients(recipe.ingredients);
     ingredientNames = ingredients.map((ing) => ing.name);
   }
 

@@ -26,7 +26,7 @@ export interface Lock {
   updated: string;
 }
 
-// Alias de compatibilité pour la transition
+/** @deprecated Use Lock directly */
 export type AppwriteLock = Lock;
 
 // ===========================================================================

@@ -17,10 +17,10 @@ import type {
 	RecipeForDisplay
 } from '../types/recipes.types';
 import {
-	parseAppwriteRecipeToIndexEntry,
-	astucesFromAppwrite
+	parseRecipeToIndexEntry,
+	parseAstuces
 } from '../utils/recipeUtils';
-import { ingredientsFromAppwrite } from '../utils/ingredientUtils';
+import { parseIngredients } from '../utils/ingredientUtils';
 import fuzzysort from 'fuzzysort';
 import { globalState } from './GlobalState.svelte';
 import {
@@ -44,7 +44,7 @@ class RecipesStore {
 		const index = new SvelteMap<string, RecipeIndexEntry>();
 		for (const recipe of this.#rawRecipes.values()) {
 			if (recipe.status !== 'deleted') {
-				index.set(recipe.id, parseAppwriteRecipeToIndexEntry(recipe));
+				index.set(recipe.id, parseRecipeToIndexEntry(recipe));
 			}
 		}
 		return index;
@@ -673,12 +673,12 @@ class RecipesStore {
 	}
 
 	#recipeToDisplay(recipe: Recettes): RecipeForDisplay {
-		const ingredients = ingredientsFromAppwrite(recipe.ingredients || []);
+		const ingredients = parseIngredients(recipe.ingredients || []);
 
 		return {
 			...recipe,
 			ingredients,
-			astuces: astucesFromAppwrite(recipe.astuces),
+			astuces: parseAstuces(recipe.astuces),
 			prepAlt: recipe.prepAlt || null,
 			categories: recipe.categories,
 			regime: recipe.regime,

@@ -138,7 +138,7 @@ Importe TOUTES les données dans PocketBase via HTTP API (pas de SDK).
   4. `events` (createdBy, teams → users/teams)
   5. `products` (eventId, updatedBy → events/users)
   6. `purchases` (eventId, createdBy, products → events/users/products)
-  7. `materiel_loan` (materielId, eventId → materiel/events)
+  7. `materiel_loan` (eventId, ownerId → events/teams)
   8. `event_materiel` (eventId, sourceMaterielId, loanId → events/materiel/materiel_loan)
   9. `teamdocs` (teamId, eventId → teams/events)
   10. `event_todos` (eventId, assignedTo → events/users)
@@ -332,5 +332,5 @@ Les users sont créés avec un mot de passe aléatoire (`randomBytes(32).toStrin
 ### Dettes connues (qualité données)
 
 1. **Double-sérialisation JSON** : `events.meals` et `events.contributors` peuvent contenir des strings JSON au lieu d'objets. Fix : corriger `2-transform-data.ts` + re-importer.
-2. **IDs Appwrite dans owner JSON** : `materiel.owner.teamId` contient l'ID Appwrite au lieu de l'ID PB. Fix : ajouter remapping dans `2-transform-data.ts`.
+2. ~~**IDs Appwrite dans owner JSON**~~ : `materiel.owner` entièrement retiré du schéma PB (`66015c58`). Le transform résout désormais `owner.teamId` → `teamId` et `owner.userId` → `ownerUser` directement.
 3. **`users` listRule restrictif** : `id = @request.auth.id` empêche `expand: 'members'`. Fix : assouplir le listRule ou fetch séparément.

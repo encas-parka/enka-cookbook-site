@@ -23,7 +23,7 @@
   import { navBarStore } from "$lib/stores/NavBarStore.svelte";
   import { statusBarStore } from "$lib/stores/StatusBarStore.svelte";
   import { online } from "svelte/reactivity/window";
-  import { locksService, type AppwriteLock } from "$lib/services/pb-locks";
+  import { locksService, type Lock } from "$lib/services/pb-locks";
 
   // ============================================================================
   // ROUTE PARAMETERS
@@ -51,7 +51,7 @@
   let initialDocumentSnapshot = $state<string>("");
 
   // Lock state (locksService)
-  let activeLock = $state<AppwriteLock | null>(null);
+  let activeLock = $state<Lock | null>(null);
   let lockUnsub: (() => void) | null = null;
   let isAcquiringLock = $state(false);
   // resourceId non-réactif capturé au moment de l'acquisition du lock

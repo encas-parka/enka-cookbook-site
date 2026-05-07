@@ -4,7 +4,6 @@
  */
 
 import type {
-  Materiel,
   MaterielLoan,
   MaterielStatus,
   MaterielType,
@@ -12,7 +11,7 @@ import type {
 import type {
   EnrichedMateriel,
   EnrichedMaterielLoan,
-  MaterielFromAppwrite,
+  Materiel,
   MaterielLoanItem,
   MaterielLoanDetail,
 } from "$lib/types/materiel.types";
@@ -200,8 +199,8 @@ export function getMaterielStatusLabel(
  * @param now - Date actuelle (pour éviter les appels répétés à new Date())
  * @returns Matériel enrichi avec toutes les données calculées
  */
-export function enrichMaterielFromAppwrite(
-  doc: MaterielFromAppwrite,
+export function enrichMateriel(
+  doc: Materiel,
   allLoans: MaterielLoan[],
   now: Date = new Date(),
 ): EnrichedMateriel {

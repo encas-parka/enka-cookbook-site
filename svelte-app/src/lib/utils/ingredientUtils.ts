@@ -1,80 +1,56 @@
 /**
- * Utilitaires pour la conversion des ingrédients entre différents formats
- * Gère la transformation entre RecipeIngredient[] et string[] (Appwrite)
+ * Utilitaires pour la validation et le parsing des ingrédients
+ * Gère la transformation entre RecipeIngredient[] et le format DB (objets natifs)
  */
 
 import type { RecipeIngredient } from "../types/recipes.types";
 
 // =============================================================================
-// CONVERSION VERS APPWRITE (string[])
+// PARSING DEPUIS DB (objets natifs ou legacy string[])
 // =============================================================================
 
 /**
- * Convertit un tableau de RecipeIngredient en string[] pour Appwrite
- * Chaque ingrédient est transformé en JSON stringifié
+ * Parse des ingrédients depuis la DB (objets natifs PB ou legacy string[])
+ * Accepte RecipeIngredient[] (natif PB), string[] (legacy Appwrite), null/undefined
  */
-export function ingredientsToAppwrite(
-  ingredients: RecipeIngredient[],
-): string[] {
-  return ingredients.map((ingredient) => JSON.stringify(ingredient));
-}
-
-/**
- * Convertit un seul RecipeIngredient en string pour Appwrite
- */
-export function ingredientToAppwrite(ingredient: RecipeIngredient): string {
-  return JSON.stringify(ingredient);
-}
-
-// =============================================================================
-// CONVERSION DEPUIS APPWRITE (string[])
-// =============================================================================
-
-/**
- * Convertit un string[] d'Appwrite en RecipeIngredient[]
- * Gère les erreurs de parsing silencieusement
- */
-export function ingredientsFromAppwrite(
-  ingredients: string[] | null | undefined,
+export function parseIngredients(
+  ingredients: RecipeIngredient[] | string[] | null | undefined,
 ): RecipeIngredient[] {
   if (!ingredients || !Array.isArray(ingredients)) {
     return [];
   }
 
   return ingredients
-    .map((ingredientStr) => {
-      try {
-        return JSON.parse(ingredientStr) as RecipeIngredient;
-      } catch (error) {
-        console.warn(
-          "[ingredientUtils] Failed to parse ingredient:",
-          ingredientStr,
-          error,
-        );
-        return null;
+    .map((item) => {
+      if (
+        item &&
+        typeof item === "object" &&
+        !Array.isArray(item) &&
+        typeof item.uuid === "string"
+      ) {
+        return item as RecipeIngredient;
       }
+
+      if (typeof item === "string") {
+        try {
+          const parsed = JSON.parse(item);
+          if (
+            parsed &&
+            typeof parsed === "object" &&
+            typeof parsed.uuid === "string"
+          ) {
+            return parsed as RecipeIngredient;
+          }
+        } catch {
+          console.warn("[ingredientUtils] Failed to parse ingredient:", item);
+        }
+      }
+
+      return null;
     })
     .filter(
       (ingredient): ingredient is RecipeIngredient => ingredient !== null,
     );
-}
-
-/**
- * Convertit un seul string d'Appwrite en RecipeIngredient
- */
-export function ingredientFromAppwrite(
-  ingredientStr: string,
-): RecipeIngredient | null {
-  try {
-    return JSON.parse(ingredientStr) as RecipeIngredient;
-  } catch (error) {
-    console.warn(
-      "[ingredientUtils] Failed to parse ingredient:",
-      ingredientStr,
-      error,
-    );
-    return null;
-  }
 }
 
 // =============================================================================

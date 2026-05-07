@@ -8,7 +8,7 @@ import type {
   MaterielLoanStatusUnion,
 } from "$lib/types/materiel.types";
 import {
-  enrichMaterielFromAppwrite,
+  enrichMateriel,
   enrichLoanFromDb,
   calculateLoanedQuantityForPeriod,
 } from "$lib/utils/materiel.utils";
@@ -83,7 +83,7 @@ export class MaterielStore {
   #enrichedMateriels = $derived.by(() =>
     this.#raw.materiels
       .filter((m) => !m.deleted)
-      .map((m) => enrichMaterielFromAppwrite(m, this.#raw.loans)),
+      .map((m) => enrichMateriel(m, this.#raw.loans)),
   );
 
   /** All loans enriched with parsed materielItems */
@@ -320,7 +320,7 @@ export class MaterielStore {
       );
 
       // Return enriched (will also update via liveQuery)
-      return enrichMaterielFromAppwrite(doc, this.#raw.loans);
+      return enrichMateriel(doc, this.#raw.loans);
     } catch (err) {
       this.#error = err instanceof Error ? err.message : "Erreur de création";
       throw err;

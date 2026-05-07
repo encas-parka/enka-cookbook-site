@@ -42,7 +42,7 @@ export type RecipeFromAppwrite = Recettes;
 
 /**
  * Format parsé pour affichage dans l'UI
- * Les ingrédients et astuces sont parsés depuis JSON
+ * Les ingrédients et astuces sont typés pour l'affichage
  */
 export type RecipeForDisplay = Omit<Recettes, "ingredients" | "astuces"> & {
   ingredients: RecipeIngredient[];

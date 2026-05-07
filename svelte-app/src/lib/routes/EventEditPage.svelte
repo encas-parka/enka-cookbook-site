@@ -33,7 +33,7 @@
   import EventStats from "../components/EventStats.svelte";
   import EventDocumentsFieldset from "../components/eventEdit/EventDocumentsFieldset.svelte";
   import { navBarStore } from "../stores/NavBarStore.svelte";
-  import { locksService, type AppwriteLock } from "$lib/services/pb-locks";
+  import { locksService, type Lock } from "$lib/services/pb-locks";
   import { statusBarStore } from "../stores/StatusBarStore.svelte";
   import UnsavedChangesGuard from "../components/ui/UnsavedChangesGuard.svelte";
   import Fieldset from "../components/ui/Fieldset.svelte";
@@ -110,7 +110,7 @@
   });
 
   // État du verrou externe (via locksService)
-  let activeLock = $state<AppwriteLock | null>(null);
+  let activeLock = $state<Lock | null>(null);
   let lockUnsub: (() => void) | null = null;
 
   // eventId non-réactif capturé au moment de l'acquisition du lock

@@ -188,6 +188,68 @@ export function getMaterielStatusLabel(
 }
 
 // =============================================================================
+// PARSING - Parsing des données PocketBase (JSON multi-formats)
+// =============================================================================
+
+/**
+ * Parse les items d'emprunt depuis le champ materiels (JSON string, string[] ou object[]) de PocketBase
+ * Gère 3 formats :
+ *   - string (JSON unique du tableau complet)  — legacy
+ *   - string[] (chaque item JSON.stringify individuellement) — ancien format frontend
+ *   - object[] (objets natifs, désérialisés par le SDK PB) — format cible
+ * @param materiels - Valeur brute depuis PocketBase
+ * @returns Tableau de MaterielLoanItem typé
+ */
+export function parseLoanItemsFromDb(
+  materiels: unknown,
+): MaterielLoanItem[] {
+  if (!materiels) {
+    return [];
+  }
+
+  try {
+    // Format string[] ou object[] : chaque élément est un item
+    if (Array.isArray(materiels)) {
+      return materiels
+        .map((item) => {
+          // Objet natif (format cible : données créées après ce fix ou données migrées)
+          if (typeof item === "object" && item !== null) {
+            return item as MaterielLoanItem;
+          }
+          // String JSON (ancien format : chaque item JSON.stringify individuellement)
+          if (typeof item === "string") {
+            try {
+              return JSON.parse(item) as MaterielLoanItem;
+            } catch {
+              console.warn(
+                "[materiel.utils] Failed to parse loan item string:",
+                item,
+              );
+              return null;
+            }
+          }
+          return null;
+        })
+        .filter((item): item is MaterielLoanItem => item !== null);
+    }
+
+    // Format string : JSON unique du tableau complet (legacy)
+    if (typeof materiels === "string") {
+      return JSON.parse(materiels) as MaterielLoanItem[];
+    }
+
+    return [];
+  } catch (e) {
+    console.error(
+      "[materiel.utils] Error parsing loan items from PocketBase:",
+      materiels,
+      e,
+    );
+    return [];
+  }
+}
+
+// =============================================================================
 // ENRICHISSEMENT - Calcul des données dérivées depuis PocketBase
 // =============================================================================
 
@@ -289,6 +351,37 @@ export function enrichMateriel(
     totalLoanedQuantity,
     isAvailable: availableQuantity > 0,
     isFullyLoaned: availableQuantity === 0,
+  };
+}
+
+// =============================================================================
+// ENRICHISSEMENT LOAN — Enrichissement des emprunts depuis PocketBase
+// =============================================================================
+
+/**
+ * Parse le champ materiels d'un loan depuis PocketBase
+ * Gère les 3 formats : string, string[], object[]
+ * @param materielsField - Champ materiels brut depuis PocketBase
+ * @returns Tableau de MaterielLoanItem
+ */
+export function parseMaterielLoanFieldFromDb(
+  materielsField: unknown,
+): MaterielLoanItem[] {
+  return parseLoanItemsFromDb(materielsField);
+}
+
+/**
+ * Enrichit un emprunt avec les items de matériel parsés
+ *
+ * @param loan - Emprunt brut (MaterielLoan)
+ * @returns Emprunt enrichi avec les items parsés
+ */
+export function enrichLoanFromDb(
+  loan: MaterielLoan,
+): EnrichedMaterielLoan {
+  return {
+    ...loan,
+    materielItems: parseMaterielLoanFieldFromDb(loan.materiels),
   };
 }
 

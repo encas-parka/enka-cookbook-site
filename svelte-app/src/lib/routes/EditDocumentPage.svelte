@@ -8,7 +8,7 @@
   import {
     Save,
     X,
-    Lock,
+    Lock as LockIcon,
     Eye,
     Edit3,
     Loader2,
@@ -516,7 +516,7 @@
   <!-- Alertes -->
   {#if isLockedByOthers}
     <div class="alert alert-warning max-md:alert-vertical mb-4">
-      <Lock class="h-5 w-5" />
+      <LockIcon class="h-5 w-5" />
       <div>
         <h4 class="font-bold">Document verrouillé</h4>
         <p class="text-sm">

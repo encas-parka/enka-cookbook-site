@@ -15,7 +15,7 @@
     Calendar,
     Plus,
     Save,
-    Lock,
+    Lock as LockIcon,
     PencilLine,
     CheckCircle2,
     Clock,
@@ -1212,7 +1212,7 @@
         <!-- Alerte de verrouillage par un autre utilisateur -->
         {#if isLockedByOthers}
           <div class="alert alert-warning max-md:alert-vertical">
-            <Lock class="h-6 w-6 shrink-0" />
+            <LockIcon class="h-6 w-6 shrink-0" />
             <div>
               <h3 class="font-bold">Événement en cours de modification</h3>
               <div class="text-xs">

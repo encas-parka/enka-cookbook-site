@@ -6,7 +6,7 @@
   import { navigate, route, searchParams } from "$lib/router";
   import { onDestroy, onMount } from "svelte";
   import { fade } from "svelte/transition";
-  import { Save, Lock, Edit3, Eye, Download } from "@lucide/svelte";
+  import { Save, Lock as LockIcon, Edit3, Eye, Download } from "@lucide/svelte";
   import MarkdownEditorAdvanced from "$lib/components/MarkdownEditorAdvanced.svelte";
   import UnsavedChangesGuard from "$lib/components/ui/UnsavedChangesGuard.svelte";
   import SvelteMarkdown from "@humanspeak/svelte-markdown";
@@ -497,7 +497,7 @@
 
     {#if isLockedByOthers}
       <div class="alert alert-warning max-md:alert-vertical mb-4">
-        <Lock class="h-5 w-5" />
+        <LockIcon class="h-5 w-5" />
         <div>
           <h4 class="font-bold">Document verrouillé</h4>
           <p class="text-sm">

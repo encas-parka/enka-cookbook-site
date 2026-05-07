@@ -31,6 +31,14 @@ type GenericMap = Record<string, { refId: string; [k: string]: any }>;
 // --- Helpers ---
 const warnings: string[] = [];
 const errors: string[] = [];
+const orphanTracker = new Map<string, { products: number; purchases: number; event_materiel: number }>();
+
+function trackOrphan(eventId: string, collection: "products" | "purchases" | "event_materiel") {
+  if (!orphanTracker.has(eventId)) {
+    orphanTracker.set(eventId, { products: 0, purchases: 0, event_materiel: 0 });
+  }
+  orphanTracker.get(eventId)![collection]++;
+}
 
 function warn(msg: string) {
   warnings.push(msg);
@@ -526,12 +534,12 @@ function main() {
     const created = awProd.$createdAt || null;
     const updated = awProd.$updatedAt || null;
 
-    // mainId → eventId (required!)
-    const eventId = resolveRelation(awProd.mainId, eventMap, "mainId→eventId", true, `Product "${awProd.productName}" (${appwriteId})`);
-    if (!eventId) {
+    if (!eventMap[awProd.mainId]) {
+      trackOrphan(awProd.mainId, "products");
       prodSkipped++;
-      continue; // Skip products without valid event
+      continue;
     }
+    const eventId = eventMap[awProd.mainId].refId;
 
     // updatedBy: email → user refId (Appwrite stores names sometimes, not emails — skip those)
     const updatedBy = findUserByEmail(awProd.updatedBy, userMap);
@@ -593,11 +601,12 @@ function main() {
     const created = awPurch.$createdAt || null;
     const updated = awPurch.$updatedAt || null;
 
-    const eventId = resolveRelation(awPurch.mainId, eventMap, "mainId→eventId", true, `Purchase ${appwriteId}`);
-    if (!eventId) {
+    if (!eventMap[awPurch.mainId]) {
+      trackOrphan(awPurch.mainId, "purchases");
       purchSkipped++;
       continue;
     }
+    const eventId = eventMap[awPurch.mainId].refId;
 
     const createdBy = resolveRelation(awPurch.createdBy, userMap, "createdBy", false, `Purchase ${appwriteId}`);
 
@@ -717,12 +726,12 @@ function main() {
     const created = awEm.$createdAt || null;
     const updated = awEm.$updatedAt || null;
 
-    const eventId = resolveRelation(awEm.eventId, eventMap, "eventId", false, `EventMateriel ${appwriteId}`);
-    if (!eventId) {
+    if (!eventMap[awEm.eventId]) {
+      trackOrphan(awEm.eventId, "event_materiel");
       emSkipped++;
-      warn(`EventMateriel "${awEm.name}" (${appwriteId}): eventId="${awEm.eventId}" orphan → skip`);
       continue;
     }
+    const eventId = eventMap[awEm.eventId].refId;
     const sourceMaterielId = resolveRelation(awEm.sourceMaterielId, materielMap, "sourceMaterielId", false, `EventMateriel ${appwriteId}`);
     const createdBy = resolveRelation(awEm.createdBy, userMap, "createdBy", false, `EventMateriel ${appwriteId}`);
     const loanId = resolveRelation(awEm.loanId, migrationMap.materiel_loan, "loanId", false, `EventMateriel ${appwriteId}`);
@@ -755,8 +764,29 @@ function main() {
       _appwriteId: appwriteId,
     });
   }
-  saveImport("event_materiel", pbEventMateriel);
-  console.log(`   ✅ ${pbEventMateriel.length} event_materiel transformed${emSkipped ? `, ${emSkipped} skipped (orphan eventId)` : ""}\n`);
+  // --- Topological sort: headers (groupId=null) before allocations ---
+  const emHeaders = pbEventMateriel.filter((r) => !r.groupId || r.groupId === "");
+  const emAllocations = pbEventMateriel.filter((r) => r.groupId && r.groupId !== "");
+
+  const emKnownAppwriteIds = new Set(pbEventMateriel.map((r) => r._appwriteId));
+  let emOrphans = 0;
+  for (const alloc of emAllocations) {
+    if (!emKnownAppwriteIds.has(alloc.groupId)) {
+      warn(`EventMateriel allocation "${alloc.name}" (${alloc._appwriteId}): groupId="${alloc.groupId}" not found in data → cleared`);
+      alloc.groupId = null;
+      emOrphans++;
+    }
+  }
+
+  // Re-split after orphan cleanup (some allocations became headers)
+  const emFinalHeaders = pbEventMateriel.filter((r) => !r.groupId || r.groupId === "");
+  const emFinalAllocations = pbEventMateriel.filter((r) => r.groupId && r.groupId !== "");
+  const pbEventMaterielSorted = [...emFinalHeaders, ...emFinalAllocations];
+
+  saveImport("event_materiel", pbEventMaterielSorted);
+  console.log(
+    `   ✅ ${pbEventMaterielSorted.length} event_materiel transformed (${emFinalHeaders.length} headers, ${emFinalAllocations.length} allocations)${emSkipped ? `, ${emSkipped} skipped (orphan eventId)` : ""}${emOrphans ? `, ${emOrphans} orphan groupIds cleared` : ""}\n`,
+  );
 
   // =========================================================================
   // 9. TEAMDOCS
@@ -929,9 +959,38 @@ function main() {
   }
 
   if (errors.length > 0) {
-    console.log(`\n❌ Errors (${errors.length} records skipped):`);
-    for (const e of errors.slice(0, 20)) console.log(`   - ${e}`);
-    if (errors.length > 20) console.log(`   ... and ${errors.length - 20} more`);
+    console.log(`\n❌ Errors (${errors.length}):`);
+    for (const e of errors.slice(0, 10)) console.log(`   - ${e}`);
+    if (errors.length > 10) console.log(`   ... and ${errors.length - 10} more`);
+  }
+
+  if (orphanTracker.size > 0) {
+    console.log(`\n📊 Orphan events (eventId not in mapping):`);
+    let totalProducts = 0,
+      totalPurchases = 0,
+      totalEventMateriel = 0;
+    const entries = [...orphanTracker.entries()];
+    const showCount = Math.min(entries.length, 10);
+    for (let i = 0; i < entries.length; i++) {
+      const [eventId, counts] = entries[i];
+      totalProducts += counts.products;
+      totalPurchases += counts.purchases;
+      totalEventMateriel += counts.event_materiel;
+      if (i < showCount) {
+        const parts: string[] = [];
+        if (counts.products) parts.push(`${counts.products} products`);
+        if (counts.purchases) parts.push(`${counts.purchases} purchases`);
+        if (counts.event_materiel) parts.push(`${counts.event_materiel} event_materiel`);
+        console.log(`   ${eventId} → ${parts.join(", ")} skipped`);
+      }
+    }
+    if (entries.length > showCount) {
+      console.log(`   ... ${entries.length - showCount} more events`);
+    }
+    const total = totalProducts + totalPurchases + totalEventMateriel;
+    console.log(
+      `Total: ${totalProducts} products, ${totalPurchases} purchases, ${totalEventMateriel} event_materiel skipped (${total} orphan records)`,
+    );
   }
 
   console.log(`\n   Migration map: ${MAP_FILE}`);

@@ -6,8 +6,8 @@
  *
  * Modes:
  *   --target=migrated (default): Delete only records from migration-map.json
- *   --target=all: Delete ALL records from dynamic collections
- *                 (keeps static data: ingredients, categories)
+ *   --target=all: Delete ALL records from ALL collections
+ *                 (including static data: ingredients, categories)
  *
  * Requires:
  *   - scripts_dev/.env.local with PB_URL, PB_ADMIN_EMAIL, PB_ADMIN_PASSWORD
@@ -133,28 +133,41 @@ async function cleanImportDir(): Promise<void> {
   }
 }
 
-async function cleanupAll(): Promise<void> {
-  console.log("🗑️  Mode: ALL — Deleting all records from dynamic collections\n");
-  console.log(`   ⚠️  Static collections (${STATIC_COLLECTIONS.join(", ")}) will be preserved.\n`);
+async function cleanupAll(includeStatic = false): Promise<void> {
+  const collections = includeStatic
+    ? [...DYNAMIC_COLLECTIONS, ...STATIC_COLLECTIONS]
+    : [...DYNAMIC_COLLECTIONS];
 
-  for (const collection of DYNAMIC_COLLECTIONS) {
+  console.log(`🗑️  Mode: ALL — Deleting all records from ${collections.length} collections\n`);
+  if (!includeStatic) {
+    console.log(`   ⚠️  Static collections (${STATIC_COLLECTIONS.join(", ")}) will be preserved.\n`);
+  } else {
+    console.log(`   🧨 Static collections (${STATIC_COLLECTIONS.join(", ")}) will also be purged.\n`);
+  }
+
+  for (const collection of collections) {
     try {
-      const records = await pbListAll(collection);
-      if (records.length === 0) {
+      let totalDeleted = 0;
+      let totalFailed = 0;
+
+      while (true) {
+        const records = await pbListAll(collection);
+        if (records.length === 0) break;
+
+        for (const record of records) {
+          const ok = await pbDelete(collection, record.id);
+          if (ok) totalDeleted++;
+          else totalFailed++;
+        }
+      }
+
+      if (totalDeleted > 0 || totalFailed > 0) {
+        console.log(
+          `   🗑️  ${collection}: ${totalDeleted} deleted${totalFailed ? `, ${totalFailed} failed` : ""}`
+        );
+      } else {
         console.log(`   ⏭️  ${collection}: empty`);
-        continue;
       }
-
-      let deleted = 0;
-      let failed = 0;
-
-      for (const record of records) {
-        const ok = await pbDelete(collection, record.id);
-        if (ok) deleted++;
-        else failed++;
-      }
-
-      console.log(`   🗑️  ${collection}: ${deleted} deleted${failed ? `, ${failed} failed` : ""}`);
     } catch (err: any) {
       console.log(`   ❌ ${collection}: ${err.message?.slice(0, 150)}`);
     }
@@ -203,28 +216,27 @@ async function cleanupMigrated(): Promise<void> {
   // For each collection in reverse order, find and delete migrated records
   for (const collection of DYNAMIC_COLLECTIONS) {
     try {
-      const records = await pbListAll(collection);
-      if (records.length === 0) {
+      let totalDeleted = 0;
+      let totalFailed = 0;
+
+      while (true) {
+        const records = await pbListAll(collection);
+        if (records.length === 0) break;
+
+        for (const record of records) {
+          const ok = await pbDelete(collection, record.id);
+          if (ok) totalDeleted++;
+          else totalFailed++;
+        }
+      }
+
+      if (totalDeleted > 0 || totalFailed > 0) {
+        console.log(
+          `   🗑️  ${collection}: ${totalDeleted} deleted${totalFailed ? `, ${totalFailed} failed` : ""}`
+        );
+      } else {
         console.log(`   ⏭️  ${collection}: empty`);
-        continue;
       }
-
-      let deleted = 0;
-      let skipped = 0;
-
-      for (const record of records) {
-        // Check if this record was created by migration
-        // We can't easily identify migrated records without _appwriteId stored in PB
-        // So we'll use the PB ID → refId reverse mapping
-        // But we don't have that... 
-        // Alternative: if we stored the migration-map with PB IDs during import, we could use it.
-        // For now, let's just delete all records (same as cleanupAll for dynamic collections)
-        const ok = await pbDelete(collection, record.id);
-        if (ok) deleted++;
-        else skipped++;
-      }
-
-      console.log(`   🗑️  ${collection}: ${deleted} deleted${skipped ? `, ${skipped} failed` : ""}`);
     } catch (err: any) {
       console.log(`   ❌ ${collection}: ${err.message?.slice(0, 150)}`);
     }
@@ -281,14 +293,14 @@ async function main() {
   }
 
   if (target === "all") {
-    await cleanupAll();
+    await cleanupAll(true);
   } else {
     // For migrated mode, since we can't identify individual migrated records
     // without _appwriteId stored in PB, we delete all dynamic collection data.
     // This is equivalent to cleanupAll but documents the intent.
     console.log("   ℹ️  Note: migrated mode deletes all dynamic collection data");
     console.log("   (records don't store migration metadata in PB).\n");
-    await cleanupAll();
+    await cleanupAll(false);
   }
 
   console.log(`\n${"=".repeat(60)}`);

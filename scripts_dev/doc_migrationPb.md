@@ -317,9 +317,9 @@ Les recettes utilisent le nom du répertoire Hugo comme ID PB (ex: `babka-vegane
 2. Le transform Hugo (`2b-transform-recipes.ts`) résout name/email → Appwrite user ID via `pb-import/users.json`
 3. L'import (`3-import-pb.ts`) résout les Appwrite IDs via `refToPb` (peuplé lors de l'import des users)
 
-### `productHugoUuid`
+### `ingredientRef`
 
-Ce champ est **LEGACY mais ACTIF** — il distingue les produits manuels (`null`) des produits liés aux recettes (UUID Hugo). À conserver dans le pipeline.
+Ce champ (anciennement `productHugoUuid`) distingue les produits manuels (`null`) des produits liés aux recettes (ref ingrédient). Renommé pour clarifier le lien avec `ingredients.ref`.
 
 ### refId format
 

@@ -57,8 +57,8 @@ export interface ProductNeedRow {
   id: string;
   /** Event ID (for Dexie indexing/scoping) */
   mainId: string;
-  /** Product UUID (from recipe ingredient) */
-  productHugoUuid: string;
+  /** Ingredient ref (from recipe ingredient) */
+  ingredientRef: string;
   /** Product display name */
   productName: string;
   /** Product type (e.g. "cremerie", "boucherie") */
@@ -250,6 +250,12 @@ export class EnkaDB extends Dexie {
       catalog: "key",
       ingredients: "id, updated, name, type",
       categories: "id, updated, name, type",
+    });
+
+    // v9: rename productHugoUuid → ingredientRef (field rename in PB schema)
+    // Dexie will recreate the products index with the new name.
+    this.version(9).stores({
+      products: "id, updated, eventId, ingredientRef, store, status",
     });
   }
 }

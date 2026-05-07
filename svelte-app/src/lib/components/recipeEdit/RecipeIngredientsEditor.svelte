@@ -128,12 +128,12 @@
   // FONCTIONS
   // ============================================================================
 
-  function addIngredientFromSearch(ingredientUuid: string) {
-    const ingredientData = recipeDataStore.getIngredientByUuid(ingredientUuid);
+  function addIngredientFromSearch(ingredientRef: string) {
+    const ingredientData = recipeDataStore.getIngredientByRef(ingredientRef);
     if (!ingredientData) return;
 
     const newIngredient: RecipeIngredient = {
-      uuid: ingredientUuid,
+      ref: ingredientRef,
       name: ingredientData.name,
       originalQuantity: 0,
       originalUnit: "gr.",
@@ -180,8 +180,8 @@
     }
   }
 
-  function removeIngredient(uuid: string) {
-    ingredients = ingredients.filter((ing) => ing.uuid !== uuid);
+  function removeIngredient(ref: string) {
+    ingredients = ingredients.filter((ing) => ing.ref !== ref);
   }
 
   function handleKeydown(event: KeyboardEvent) {
@@ -209,7 +209,7 @@
         event.preventDefault();
         const currentResults = fuzzyResults();
         if (isOpen && currentResults.length > 0) {
-          addIngredientFromSearch(currentResults[selectedIndex].ingredient.uuid);
+          addIngredientFromSearch(currentResults[selectedIndex].ingredient.ref);
         } else if (!isOpen) {
           openDropdown(true);
         }
@@ -272,7 +272,7 @@
    */
   function handleIngredientCreated(newIngredient: Ingredient) {
     // Ajouter automatiquement l'ingrédient créé à la recette
-    addIngredientFromSearch(newIngredient.uuid);
+    addIngredientFromSearch(newIngredient.ref);
   }
 </script>
 
@@ -388,7 +388,7 @@
                     </div>
                   {/if}
                 {:else}
-                  {#each results as result, index (result.ingredient.uuid)}
+                  {#each results as result, index (result.ingredient.ref)}
                     <button
                       type="button"
                       id="ingredient-{index}"
@@ -396,7 +396,7 @@
                       selectedIndex
                         ? 'bg-base-200'
                         : ''}"
-                      onclick={() => addIngredientFromSearch(result.ingredient.uuid)}
+                      onclick={() => addIngredientFromSearch(result.ingredient.ref)}
                       onmouseenter={() => (selectedIndex = index)}
                       role="option"
                       aria-selected={index === selectedIndex}
@@ -530,7 +530,7 @@
                           <!-- Bouton supprimer -->
                           <button
                             class="btn btn-ghost btn-sm btn-square text-error"
-                            onclick={() => removeIngredient(ingredient.uuid)}
+                            onclick={() => removeIngredient(ingredient.ref)}
                             title="Supprimer cet ingrédient"
                             {disabled}
                           >

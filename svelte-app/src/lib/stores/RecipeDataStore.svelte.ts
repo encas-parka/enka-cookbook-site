@@ -17,7 +17,7 @@
  *
  * @usage
  * await recipeDataStore.initialize();
- * const ingredient = recipeDataStore.getIngredientByUuid('xo0ibs');
+ * const ingredient = recipeDataStore.getIngredientByRef('xo0ibs');
  * const categories = recipeDataStore.categories;
  */
 
@@ -103,7 +103,7 @@ class RecipeDataStore {
   // ===========================================================================
 
   /**
-   * Map des ingrédients keyée par uuid (PB `uuid` field).
+   * Map des ingrédients keyée par ref (PB `ref` field).
    *
    * Conversion IngredientsRecord (PB) → Ingredient (app).
    * Après renormalisation, les noms de champs correspondent directement.
@@ -115,7 +115,7 @@ class RecipeDataStore {
     const map = new Map<string, Ingredient>();
     for (const record of this.#ingredientsBridge.map.values()) {
       const ingredient = toAppIngredient(record);
-      map.set(ingredient.uuid, ingredient);
+      map.set(ingredient.ref, ingredient);
     }
     return map;
   });
@@ -327,10 +327,10 @@ class RecipeDataStore {
   // ===========================================================================
 
   /**
-   * Récupère un ingrédient par son uuid.
+   * Récupère un ingrédient par sa ref.
    */
-  getIngredientByUuid(uuid: string): Ingredient | null {
-    return this.#ingredientsMap.get(uuid) || null;
+  getIngredientByRef(ref: string): Ingredient | null {
+    return this.#ingredientsMap.get(ref) || null;
   }
 
   /**
@@ -425,7 +425,7 @@ class RecipeDataStore {
 
   /**
    * Ajoute un ingrédient via PocketBase.
-   * Utilise les vrais noms de champs PB (uuid, name, type, allergens…).
+   * Utilise les vrais noms de champs PB (ref, name, type, allergens…).
    */
   async addIngredient(data: {
     name: string;
@@ -442,13 +442,13 @@ class RecipeDataStore {
     try {
       console.log("[RecipeDataStore] Ajout ingrédient:", data.name);
 
-      // UUID court (7 chars, ~3.5T combinaisons) — cohérent avec les UUIDs Hugo legacy
-      const uuid = nanoid(7);
+      // Ref court (7 chars, ~3.5T combinaisons) — cohérent avec les refs Hugo legacy
+      const ref = nanoid(7);
 
       // Création via pb-sync (écrit PB + Dexie, bridge réactif propage)
-      // PB auto-génère l'id, on fournit le uuid métier
+      // PB auto-génère l'id, on fournit le ref métier
       const record = await this.#ingredientsCollection.create({
-        uuid,
+        ref,
         name: data.name,
         type: data.type as IngredientsRecord["type"],
         allergens: data.allergens,
@@ -460,7 +460,7 @@ class RecipeDataStore {
       const newIngredient = toAppIngredient(record);
 
       console.log(
-        `[RecipeDataStore] ✓ Ingrédient ajouté: ${newIngredient.name} (${newIngredient.uuid})`,
+        `[RecipeDataStore] ✓ Ingrédient ajouté: ${newIngredient.name} (${newIngredient.ref})`,
       );
 
       return newIngredient;

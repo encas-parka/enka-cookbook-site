@@ -129,15 +129,15 @@ export interface TotalNeededOverrideData {
   recipesNbWhenOverride: number; // Nombre de recettes utilisées (nbRecipes)
 }
 
-// ✅ EnrichedProduct = Données BRUTES Appwrite + Hugo statiques + Calculées
+// ✅ EnrichedProduct = Données BRUTES PocketBase + Calculées
 export interface EnrichedProduct {
   // MÉTADONNÉES (PocketBase)
   id: string;
   created?: string;
   updated?: string;
 
-  // DONNÉES MÉTIER DE BASE (brutes Appwrite / Hugo)
-  productHugoUuid: string | null;
+  // DONNÉES MÉTIER DE BASE (brutes PocketBase)
+  ingredientRef: string | null;
   productName: string;
   productType: string;
   pF: boolean;
@@ -334,7 +334,7 @@ export interface ProductData {
   recette: string; // Nom de la recette
   team: string; // Nom de l'équipe (si applicable)
   unit: string;
-  uuid: string;
+  uuid: string; // legacy recipe ingredient identifier
 }
 
 // ✅ NOUVEAUX : Types pour la structure byDate

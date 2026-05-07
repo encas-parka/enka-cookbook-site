@@ -132,9 +132,9 @@ export function calculateProductStatsForDateRange(
   startDate: string,
   endDate: string,
 ): ProductStatsForDateRange {
-  // Vérifier si c'est un produit manuel (sans lien Hugo)
-  // productHugoUuid peut être null, undefined ou "" (chaîne vide)
-  const isManualProduct = !product.productHugoUuid;
+  // Vérifier si c'est un produit manuel (sans lien ingredient)
+  // ingredientRef peut être null, undefined ou "" (chaîne vide)
+  const isManualProduct = !product.ingredientRef;
 
   // Vérifier si byDate est vide (undefined, null, ou objet vide {})
   const hasByDateEntries =

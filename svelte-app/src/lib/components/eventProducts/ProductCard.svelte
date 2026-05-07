@@ -119,7 +119,7 @@
               Ancien: {product.previousNames[0]}
             </div>
           {/if}
-          {#if !product.productHugoUuid}
+          {#if !product.ingredientRef}
             <div
               class="tooltip"
               data-tip="Ajouté manuellement, ne fait pas partie des recette"

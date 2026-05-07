@@ -17,7 +17,7 @@ function makeRawProduct(overrides?: Partial<any>): any {
     created: "2026-01-01T00:00:00Z",
     updated: "2026-01-01T00:00:00Z",
     productName: "Beurre doux",
-    productHugoUuid: "hugo-beurre-001",
+    ingredientRef: "hugo-beurre-001",
     productType: "cremerie",
     status: "active",
     who: ["Alice", "Bob"],
@@ -47,7 +47,7 @@ describe("buildRawProductBase", () => {
 
       expect(result.id).toBe("raw-product-001");
       expect(result.productName).toBe("Beurre doux");
-      expect(result.productHugoUuid).toBe("hugo-beurre-001");
+      expect(result.ingredientRef).toBe("hugo-beurre-001");
       expect(result.status).toBe("active");
       expect(result.isSynced).toBe(true);
       expect(result.mainId).toBe("event-001");
@@ -281,7 +281,7 @@ describe("applyNeedToBase", () => {
     return {
       id: "raw-product-001",
       mainId: "event-001",
-      productHugoUuid: "hugo-beurre-001",
+      ingredientRef: "hugo-beurre-001",
       productName: "Beurre doux",
       productType: "cremerie",
       pF: true,

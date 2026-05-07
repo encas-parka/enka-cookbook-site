@@ -26,7 +26,7 @@ export function parseIngredients(
         item &&
         typeof item === "object" &&
         !Array.isArray(item) &&
-        typeof item.uuid === "string"
+        typeof item.ref === "string"
       ) {
         return item as RecipeIngredient;
       }
@@ -37,7 +37,7 @@ export function parseIngredients(
           if (
             parsed &&
             typeof parsed === "object" &&
-            typeof parsed.uuid === "string"
+            typeof parsed.ref === "string"
           ) {
             return parsed as RecipeIngredient;
           }
@@ -66,7 +66,7 @@ export function isValidIngredient(
   return (
     ingredient &&
     typeof ingredient === "object" &&
-    typeof ingredient.uuid === "string" &&
+    typeof ingredient.ref === "string" &&
     typeof ingredient.name === "string" &&
     typeof ingredient.originalQuantity === "number" &&
     typeof ingredient.originalUnit === "string" &&

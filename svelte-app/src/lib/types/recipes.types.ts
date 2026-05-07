@@ -28,7 +28,7 @@ export type CategoriesDoc = CategoriesRecord & PbDoc;
  * Noms de champs normalisés (correspondent directement au schéma PB).
  */
 export interface Ingredient {
-  uuid: string; // UUID court (ex: "xo0ibs") — correspond au champ PB `uuid`
+  ref: string; // Ref court (ex: "xo0ibs") — correspond au champ PB `ref`
   name: string; // Nom (ex: "Abricot")
   type: string; // Type (ex: "legumes", "epices", etc.)
   allergens?: string[]; // Allergènes optionnels (ex: ["Sésame"])
@@ -115,7 +115,7 @@ export type RecipeIndexEntry = Pick<
 
 /** Ingrédient dans une recette (depuis recipe.json) */
 export interface RecipeIngredient {
-  uuid: string;
+  ref: string;
   name: string;
   originalQuantity: number;
   originalUnit: string;
@@ -196,18 +196,18 @@ export interface CreateIngredientData {
 /**
  * Convertit un IngredientsDoc (PB + system fields) vers le format Ingredient.
  *
- * Normalise les valeurs par défaut et résout le uuid de fallback.
- * La clé de mapping est le `uuid` PB (pas le `id` système), car les
- * consommateurs de l'application (`getIngredientByUuid`) utilisent
- * l'UUID métier comme identifiant.
+ * Normalise les valeurs par défaut et résout le ref de fallback.
+ * La clé de mapping est le `ref` PB (pas le `id` système), car les
+ * consommateurs de l'application (`getIngredientByRef`) utilisent
+ * la ref métier comme identifiant.
  */
 export function toAppIngredient(record: IngredientsRecord & { id?: string }): Ingredient {
-  // Le uuid PB est l'identifiant principal pour l'app
-  // Fallback sur record.id pour les ingrédients créés sans uuid explicite
-  const uuid = record.uuid || record.id || "";
+  // Le ref PB est l'identifiant principal pour l'app
+  // Fallback sur record.id pour les ingrédients créés sans ref explicite
+  const ref = record.ref || record.id || "";
 
   return {
-    uuid,
+    ref,
     name: record.name,
     type: record.type,
     allergens: (record.allergens as string[]) ?? [],
@@ -228,7 +228,7 @@ export function toIngredientsRecord(
   ingredient: Ingredient,
 ): Omit<IngredientsRecord, "id" | "created" | "updated"> {
   return {
-    uuid: ingredient.uuid,
+    ref: ingredient.ref,
     name: ingredient.name,
     type: ingredient.type as IngredientsTypeOptions,
     allergens: ingredient.allergens ?? [],

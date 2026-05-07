@@ -9,7 +9,7 @@ import type { ProductNeedRow } from "../db-sync/pb-sync";
 export interface ParsedNeed {
   id: string;
   mainId: string;
-  productHugoUuid: string;
+  ingredientRef: string;
   productName: string;
   productType: string;
   pF: boolean;
@@ -27,7 +27,7 @@ export function parseNeedRow(row: ProductNeedRow): ParsedNeed {
   return {
     id: row.id,
     mainId: row.mainId,
-    productHugoUuid: row.productHugoUuid,
+    ingredientRef: row.ingredientRef,
     productName: row.productName,
     productType: row.productType,
     pF: row.pF,
@@ -50,7 +50,7 @@ export function toNeedRow(
   return {
     id: enriched.id,
     mainId,
-    productHugoUuid: enriched.productHugoUuid || "",
+    ingredientRef: enriched.ingredientRef || "",
     productName: enriched.productName,
     productType: enriched.productType,
     pF: enriched.pF,

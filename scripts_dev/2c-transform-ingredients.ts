@@ -41,7 +41,7 @@ function main(): void {
   // Map fields
   const records: Record<string, any>[] = deduped.map((item) => {
     const record: Record<string, any> = {
-      uuid: item.u,
+      ref: item.u,
       name: item.n,
       type: item.t || "",
       allergens: item.a ?? [],
@@ -57,7 +57,7 @@ function main(): void {
 
   // Show sample
   if (records.length > 0) {
-    console.log(`Sample: "${records[0].name}" (uuid=${records[0].uuid})`);
+    console.log(`Sample: "${records[0].name}" (ref=${records[0].ref})`);
   }
 
   if (DRY_RUN) {

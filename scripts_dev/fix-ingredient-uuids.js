@@ -145,20 +145,20 @@ function analyzeRecipe(filePath, ingredientsIndex) {
   for (let i = 0; i < recipe.ingredients.length; i++) {
     const ingredient = recipe.ingredients[i];
 
-    if (!ingredient.uuid || !ingredient.name) {
+    if (!ingredient.ref || !ingredient.name) {
       continue;
     }
 
     // Vérifier si c'est un UUID nanoid
-    if (isNanoidUuid(ingredient.uuid)) {
-      const correctUuid = ingredientsIndex[ingredient.name];
+    if (isNanoidUuid(ingredient.ref)) {
+      const correctRef = ingredientsIndex[ingredient.name];
 
-      if (correctUuid) {
+      if (correctRef) {
         issues.push({
           index: i,
           name: ingredient.name,
-          oldUuid: ingredient.uuid,
-          newUuid: correctUuid,
+          oldUuid: ingredient.ref,
+          newUuid: correctRef,
           quantity: ingredient.originalQuantity || 0,
           unit: ingredient.originalUnit || ''
         });
@@ -166,7 +166,7 @@ function analyzeRecipe(filePath, ingredientsIndex) {
         issues.push({
           index: i,
           name: ingredient.name,
-          oldUuid: ingredient.uuid,
+          oldUuid: ingredient.ref,
           newUuid: null, // Non trouvé dans ingredients.json
           quantity: ingredient.originalQuantity || 0,
           unit: ingredient.originalUnit || ''

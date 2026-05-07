@@ -11,7 +11,7 @@ export function makeNeedRow(
   return {
     id: "test-product_abc1234567",
     mainId: "event-001",
-    productHugoUuid: "hugo-uuid-1",
+    ingredientRef: "hugo-uuid-1",
     productName: "Beurre",
     productType: "cremerie",
     pF: true,
@@ -42,7 +42,7 @@ export function makeEnrichedProduct(
     id: "test-product_abc1234567",
     created: now,
     updated: now,
-    productHugoUuid: "hugo-uuid-1",
+    ingredientRef: "hugo-uuid-1",
     productName: "Beurre",
     productType: "cremerie",
     pF: true,

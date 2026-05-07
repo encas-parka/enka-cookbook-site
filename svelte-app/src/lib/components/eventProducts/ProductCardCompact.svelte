@@ -95,7 +95,7 @@
       {#if product.pS}
         <Snowflake size={13} class="text-info shrink-0" />
       {/if}
-      {#if !product.productHugoUuid}
+      {#if !product.ingredientRef}
         <ClipboardPenLine size={13} class="text-warning shrink-0" />
       {/if}
       {#if product.status === "isSyncing"}

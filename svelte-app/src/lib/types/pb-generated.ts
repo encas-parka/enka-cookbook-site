@@ -233,9 +233,9 @@ export type IngredientsRecord<Tallergens = unknown, Tsaisons = unknown> = {
 	name: string
 	pF?: boolean
 	pS?: boolean
+	ref: string
 	saisons?: null | Tsaisons
 	type: IngredientsTypeOptions
-	uuid: string
 }
 
 export type LocksRecord = {
@@ -335,6 +335,7 @@ export type ProductsRecord<TmergedFrom = unknown, TpreviousNames = unknown, Tspe
 	deleted?: boolean
 	eventId: RecordIdString
 	id: string
+	ingredientRef?: string
 	isMerged?: boolean
 	isSynced?: boolean
 	mergeDate?: IsoDateString
@@ -344,7 +345,6 @@ export type ProductsRecord<TmergedFrom = unknown, TpreviousNames = unknown, Tspe
 	pF?: boolean
 	pS?: boolean
 	previousNames?: null | TpreviousNames
-	productHugoUuid?: string
 	productName?: string
 	productType?: string
 	specs?: null | Tspecs

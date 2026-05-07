@@ -196,17 +196,17 @@ function determineRegimes(ingredients) {
  * Met à jour un ingrédient avec les données fraîches d'ingredients.json
  */
 function updateIngredient(ingredient, ingredientsMap, recipeDir = "") {
-  const freshIngredient = ingredientsMap.get(ingredient.uuid);
+  const freshIngredient = ingredientsMap.get(ingredient.ref);
 
   if (!freshIngredient) {
     const prefix = recipeDir ? `[${recipeDir}] ` : "";
-    if (!ingredient.uuid || !ingredient.name) {
+    if (!ingredient.ref || !ingredient.name) {
       console.warn(
-        `  ⚠️  ${prefix}Ingrédient invalide: uuid="${ingredient.uuid}", name="${ingredient.name}"`,
+        `  ⚠️  ${prefix}Ingrédient invalide: ref="${ingredient.ref}", name="${ingredient.name}"`,
       );
     } else {
       console.warn(
-        `  ⚠️  ${prefix}Ingrédient ${ingredient.uuid} (${ingredient.name}) non trouvé dans ingredients.json`,
+        `  ⚠️  ${prefix}Ingrédient ${ingredient.ref} (${ingredient.name}) non trouvé dans ingredients.json`,
       );
     }
     return { updated: false, ingredient };
@@ -269,7 +269,7 @@ function updateRecipe(recipePath, ingredientsMap, dryRun, recipeDir = "") {
       ingredientsUpdated++;
       changes.push({
         name: ing.name,
-        uuid: ing.uuid,
+        ref: ing.ref,
         changes: result.changes,
       });
     }

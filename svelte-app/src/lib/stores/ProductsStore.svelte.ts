@@ -250,7 +250,7 @@ class ProductsStore {
         id: need.id,
         created: need.created,
         updated: need.updated,
-        productHugoUuid: need.productHugoUuid,
+        ingredientRef: need.ingredientRef,
         productName: need.productName,
         productType: need.productType,
         pF: need.pF,
@@ -360,7 +360,7 @@ class ProductsStore {
   /** Un ProductModel passe-t-il les filtres courants ? */
   #passesFilters(model: ProductModel, fuzzyMatchedIds?: Set<string>): boolean {
     const product = model.data;
-    const isManualProduct = !product.productHugoUuid;
+    const isManualProduct = !product.ingredientRef;
 
     if (!product.byDate && !isManualProduct) return false;
     if (!matchesFilters(product, this.#filters, fuzzyMatchedIds)) return false;
@@ -1210,7 +1210,7 @@ class ProductsStore {
     const spec = { pF: productData.pF || false, pS: productData.pS || false };
 
     const newProduct = await this.#productsCollection.create({
-      productHugoUuid: null,
+      ingredientRef: null,
       productName: productData.productName,
       productType: productData.productType || "Autre",
       store: productData.store || null,
@@ -1365,7 +1365,7 @@ class ProductsStore {
           const enriched = this.getEnrichedProductById(p.productId);
           if (enriched) {
             await this.#productsCollection.create({
-              productHugoUuid: enriched.productHugoUuid,
+              ingredientRef: enriched.ingredientRef,
               productName: enriched.productName,
               productType: enriched.productType || "",
               store: enriched.store as string | null,

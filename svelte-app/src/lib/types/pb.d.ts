@@ -93,7 +93,7 @@ export type Events = Main;
 /** Products (collection: "products") — aligned with ProductsRecord */
 export type Products = PbDoc & {
   eventId: string;
-  productHugoUuid: string | null;
+  ingredientRef: string | null;
   productName: string | null;
   productType: string | null;
   pF: boolean;

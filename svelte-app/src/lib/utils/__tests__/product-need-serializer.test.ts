@@ -75,7 +75,7 @@ describe("product-need-serializer", () => {
 
       expect(row.id).toBe(enriched.id);
       expect(row.mainId).toBe("event-001");
-      expect(row.productHugoUuid).toBe("hugo-uuid-1");
+      expect(row.ingredientRef).toBe("hugo-uuid-1");
       expect(row.productName).toBe("Beurre");
       expect(row.productType).toBe("cremerie");
       expect(row.pF).toBe(true);
@@ -102,11 +102,11 @@ describe("product-need-serializer", () => {
       expect(row.totalNeededArray).toBe(JSON.stringify(enriched.totalNeededArray));
     });
 
-    it("defaults productHugoUuid to empty string when null", () => {
-      const enriched = makeEnrichedProduct({ productHugoUuid: null as any });
+    it("defaults ingredientRef to empty string when null", () => {
+      const enriched = makeEnrichedProduct({ ingredientRef: null as any });
       const row = toNeedRow(enriched, "event-001");
 
-      expect(row.productHugoUuid).toBe("");
+      expect(row.ingredientRef).toBe("");
     });
 
     it("sets updated to a valid ISO string", () => {

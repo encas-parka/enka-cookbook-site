@@ -53,7 +53,7 @@ type ProductWithOptionalPurchases = Partial<PbDoc> & {
   id: string;
   purchases?: Purchases[];
   productName: string;
-  productHugoUuid: string | null;
+  ingredientRef: string | null;
   status: string;
   who: string[] | null;
   store: string;
@@ -126,7 +126,7 @@ export function buildRawProductBase(
     created: product.created,
     updated: product.updated,
 
-    productHugoUuid: product.productHugoUuid || "",
+    ingredientRef: product.ingredientRef || "",
     productName: product.productName,
     productType: product.productType || "none",
     pF: specsParsed?.pF ?? false,
@@ -205,7 +205,7 @@ export function applyNeedToBase(
  * Structure intermédiaire pour agréger les ingrédients par produit et par date
  */
 interface ProductAggregation {
-  productHugoUuid: string;
+  ingredientRef: string;
   productName: string;
   productType: string;
   pF?: boolean;
@@ -329,11 +329,11 @@ function addIngredientToAggregation(
   plates: number,
   recipeUuid?: string,
 ): void {
-  const uuid = ingredient.uuid;
+  const ref = ingredient.ref;
 
-  if (!aggregations.has(uuid)) {
-    aggregations.set(uuid, {
-      productHugoUuid: uuid,
+  if (!aggregations.has(ref)) {
+    aggregations.set(ref, {
+      ingredientRef: ref,
       productName: ingredient.name,
       productType: ingredient.type,
       pF: ingredient.pF ?? false,
@@ -343,7 +343,7 @@ function addIngredientToAggregation(
     });
   }
 
-  const aggregation = aggregations.get(uuid)!;
+  const aggregation = aggregations.get(ref)!;
 
   // Cas spécial : "au goût" - ne pas scaler
   const scaledQuantity =
@@ -468,7 +468,7 @@ function createEnrichedProductFromAggregation(
   const product: EnrichedProduct = {
     id: semanticId,
     mainId,
-    productHugoUuid: aggregation.productHugoUuid,
+    ingredientRef: aggregation.ingredientRef,
     productName: aggregation.productName,
     productType: aggregation.productType,
 

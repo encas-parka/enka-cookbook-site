@@ -152,7 +152,7 @@ export function parseAstuces(
 /**
  * Parse un ingrédient depuis le JSON Hugo
  *
- * Format : {uuid, name, originalQuantity, originalUnit, ...}
+ * Format : {ref, name, originalQuantity, originalUnit, ...}
  *
  * @param ingredientData - Données depuis recipe.json
  * @returns RecipeIngredient parsé
@@ -169,7 +169,7 @@ export function parseRecipeIngredient(ingredientData: any): RecipeIngredient {
   }
 
   return {
-    uuid: ingredientData.uuid || "",
+    ref: ingredientData.ref || ingredientData.uuid || "",
     name: ingredientData.name || "",
     originalQuantity: ingredientData.originalQuantity || 0,
     originalUnit: ingredientData.originalUnit || "",

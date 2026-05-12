@@ -1,6 +1,6 @@
 ---
 title: Boreks épinards fromage
-date: '2026-05-12T07:23:02.197Z'
+date: '2026-05-12T07:45:33.481Z'
 draft: true
 typeR: entree
 categories:
@@ -22,9 +22,9 @@ materiel: []
 ingredients:
   - uuid: 1uz8x5
     name: Sésame blanc
-    originalQuantity: 200
+    originalQuantity: 100
     originalUnit: gr.
-    normalizedQuantity: 200
+    normalizedQuantity: 100
     normalizedUnit: gr.
     comment: ''
     allergens:
@@ -114,7 +114,7 @@ permissionWrite:
   - 696faf80000078153479
 auteur: Auré
 createdAt: '2026-05-12T07:22:20.042+00:00'
-updatedAt: '2026-05-12T07:23:00.324+00:00'
+updatedAt: '2026-05-12T07:45:19.012+00:00'
 createdBy: 696faf80000078153479
 teams: []
 status: public

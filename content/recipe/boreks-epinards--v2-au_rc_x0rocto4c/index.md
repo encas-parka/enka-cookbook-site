@@ -1,7 +1,7 @@
 ---
 title: Boreks épinards fromage
-date: '2026-05-12T07:45:33.481Z'
-draft: true
+date: '2026-05-12T07:48:16.923Z'
+draft: false
 typeR: entree
 categories:
   - Accompagnement
@@ -114,7 +114,7 @@ permissionWrite:
   - 696faf80000078153479
 auteur: Auré
 createdAt: '2026-05-12T07:22:20.042+00:00'
-updatedAt: '2026-05-12T07:45:19.012+00:00'
+updatedAt: '2026-05-12T07:48:14.175+00:00'
 createdBy: 696faf80000078153479
 teams: []
 status: public

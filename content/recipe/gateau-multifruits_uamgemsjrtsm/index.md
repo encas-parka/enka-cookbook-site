@@ -1,6 +1,6 @@
 ---
 title: Gâteau multifruits
-date: '2026-05-12T12:21:08.047Z'
+date: '2026-05-12T12:26:11.787Z'
 draft: true
 typeR: dessert
 categories:
@@ -20,16 +20,13 @@ saison:
   - automne
   - hiver
 id: gateau-multifruits_uamgemsjrtsm
-materiel:
-  - Four
-  - Frigo
-  - Gastro 1/1 (10cm)
+materiel: []
 ingredients:
   - uuid: zf3zf8
     name: Oeuf
-    originalQuantity: 50
+    originalQuantity: 62
     originalUnit: unité
-    normalizedQuantity: 50
+    normalizedQuantity: 62
     normalizedUnit: unité
     comment: ''
     allergens:
@@ -37,18 +34,18 @@ ingredients:
     type: lof
   - uuid: lny16c
     name: sucre blanc
-    originalQuantity: 1.6
+    originalQuantity: 2
     originalUnit: kg
-    normalizedQuantity: 1600
+    normalizedQuantity: 2000
     normalizedUnit: gr.
     comment: 'génoise '
     allergens: []
     type: sucres
   - uuid: 2av6w8
     name: Farine de blé
-    originalQuantity: 1.6
+    originalQuantity: 2
     originalUnit: kg
-    normalizedQuantity: 1600
+    normalizedQuantity: 2000
     normalizedUnit: gr.
     comment: ''
     allergens:
@@ -56,9 +53,9 @@ ingredients:
     type: lof
   - uuid: vgec6e
     name: Levure chimique
-    originalQuantity: 70
+    originalQuantity: 84
     originalUnit: gr.
-    normalizedQuantity: 70
+    normalizedQuantity: 84
     normalizedUnit: gr.
     comment: ''
     allergens:
@@ -108,11 +105,11 @@ astuces: []
 preparation24h: null
 permissionWrite:
   - 696faf80000078153479
-auteur: null
+auteur: Auré
 createdAt: '2026-05-12T12:20:35.306+00:00'
-updatedAt: '2026-05-12T12:20:35.306+00:00'
+updatedAt: '2026-05-12T12:26:09.194+00:00'
 createdBy: 696faf80000078153479
-teams: null
+teams: []
 status: public
 rootRecipeId: null
 versionLabel: null

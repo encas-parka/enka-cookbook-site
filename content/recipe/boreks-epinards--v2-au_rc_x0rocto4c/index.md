@@ -1,6 +1,6 @@
 ---
 title: Boreks épinards fromage
-date: '2026-05-12T07:22:40.312Z'
+date: '2026-05-12T07:23:02.197Z'
 draft: true
 typeR: entree
 categories:
@@ -18,9 +18,7 @@ description: null
 region: null
 saison: []
 id: boreks-epinards--v2-au_rc_x0rocto4c
-materiel:
-  - Gastro 1/1 (Normaux)
-  - Four
+materiel: []
 ingredients:
   - uuid: 1uz8x5
     name: Sésame blanc
@@ -109,19 +107,18 @@ preparation: |-
   3. On recommence jusqu'à épuisement des feuilles,  on parsème de sésame;
 
   Au four à 200 jusqu'à ce que tout soit doré, genre 30mn
-prepAlt:
-  - recetteAlt: Boreks épinards vegan
+prepAlt: []
 astuces: []
 preparation24h: null
 permissionWrite:
   - 696faf80000078153479
 auteur: Auré
 createdAt: '2026-05-12T07:22:20.042+00:00'
-updatedAt: '2026-05-12T07:22:20.042+00:00'
+updatedAt: '2026-05-12T07:23:00.324+00:00'
 createdBy: 696faf80000078153479
-teams: null
+teams: []
 status: public
 rootRecipeId: boreks-epinards-fromag_8gqvh0zj4gwr
-versionLabel: v2 - aure
+versionLabel: 'v2 - '
 ---
 

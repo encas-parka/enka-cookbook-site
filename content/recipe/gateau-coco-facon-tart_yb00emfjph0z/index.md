@@ -1,7 +1,7 @@
 ---
 title: Gâteau coco façon tarte au citron
-date: '2026-05-12T13:06:56.721Z'
-draft: true
+date: '2026-05-18T08:27:50.188Z'
+draft: false
 typeR: dessert
 categories:
   - Gateau
@@ -9,7 +9,7 @@ regime:
   - vegetarien
 plate: 150
 quantite_desc: 25 parts par gastro
-check: false
+check: true
 cuisson: true
 serveHot: false
 description: Une dacquoise noix de coco et un lemon curd
@@ -20,8 +20,7 @@ saison:
   - automne
   - hiver
 id: gateau-coco-facon-tart_yb00emfjph0z
-materiel:
-  - Four
+materiel: []
 ingredients:
   - uuid: vk09o5
     name: lait de vache
@@ -202,11 +201,11 @@ astuces: []
 preparation24h: null
 permissionWrite:
   - 696faf80000078153479
-auteur: null
+auteur: Auré
 createdAt: '2026-05-12T13:06:47.752+00:00'
-updatedAt: '2026-05-12T13:06:47.752+00:00'
+updatedAt: '2026-05-18T08:27:49.768+00:00'
 createdBy: 696faf80000078153479
-teams: null
+teams: []
 status: public
 rootRecipeId: null
 versionLabel: null

@@ -1,6 +1,6 @@
 ---
 title: Gâteau multifruits
-date: '2026-05-12T12:26:11.787Z'
+date: '2026-05-18T08:23:45.750Z'
 draft: true
 typeR: dessert
 categories:
@@ -24,9 +24,9 @@ materiel: []
 ingredients:
   - uuid: zf3zf8
     name: Oeuf
-    originalQuantity: 62
+    originalQuantity: 41
     originalUnit: unité
-    normalizedQuantity: 62
+    normalizedQuantity: 41
     normalizedUnit: unité
     comment: ''
     allergens:
@@ -34,18 +34,18 @@ ingredients:
     type: lof
   - uuid: lny16c
     name: sucre blanc
-    originalQuantity: 2
+    originalQuantity: 1.3
     originalUnit: kg
-    normalizedQuantity: 2000
+    normalizedQuantity: 1300
     normalizedUnit: gr.
     comment: 'génoise '
     allergens: []
     type: sucres
   - uuid: 2av6w8
     name: Farine de blé
-    originalQuantity: 2
+    originalQuantity: 1.3
     originalUnit: kg
-    normalizedQuantity: 2000
+    normalizedQuantity: 1300
     normalizedUnit: gr.
     comment: ''
     allergens:
@@ -53,9 +53,9 @@ ingredients:
     type: lof
   - uuid: vgec6e
     name: Levure chimique
-    originalQuantity: 84
+    originalQuantity: 56
     originalUnit: gr.
-    normalizedQuantity: 84
+    normalizedQuantity: 56
     normalizedUnit: gr.
     comment: ''
     allergens:
@@ -63,9 +63,9 @@ ingredients:
     type: lof
   - uuid: 0tpvue
     name: Mascarpone
-    originalQuantity: 2.5
+    originalQuantity: 1.5
     originalUnit: kg
-    normalizedQuantity: 2500
+    normalizedQuantity: 1500
     normalizedUnit: gr.
     comment: ''
     allergens:
@@ -73,9 +73,9 @@ ingredients:
     type: frais
   - uuid: 6tnb6h
     name: Crème fraiche liquide entière
-    originalQuantity: 2.5
+    originalQuantity: 1.5
     originalUnit: l.
-    normalizedQuantity: 2500
+    normalizedQuantity: 1500
     normalizedUnit: ml
     comment: ''
     allergens:
@@ -92,9 +92,9 @@ ingredients:
     type: sucres
   - uuid: 4stcxn
     name: Fruits divers
-    originalQuantity: 7
+    originalQuantity: 5
     originalUnit: kg
-    normalizedQuantity: 7000
+    normalizedQuantity: 5000
     normalizedUnit: gr.
     comment: 'ex: kiwi, ananas, melon, pêche, fraise...'
     allergens: []
@@ -107,7 +107,7 @@ permissionWrite:
   - 696faf80000078153479
 auteur: Auré
 createdAt: '2026-05-12T12:20:35.306+00:00'
-updatedAt: '2026-05-12T12:26:09.194+00:00'
+updatedAt: '2026-05-18T08:23:40.973+00:00'
 createdBy: 696faf80000078153479
 teams: []
 status: public

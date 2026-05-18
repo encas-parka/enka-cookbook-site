@@ -1,7 +1,7 @@
 ---
 title: Gâteau multifruits
-date: '2026-05-18T08:23:45.750Z'
-draft: true
+date: '2026-05-18T08:23:57.292Z'
+draft: false
 typeR: dessert
 categories:
   - Gateau
@@ -9,7 +9,7 @@ regime:
   - vegetarien
 plate: 150
 quantite_desc: 6 gastros = 25 parts par gastro
-check: false
+check: true
 cuisson: true
 serveHot: false
 description: Une génoise, de la chantilly, des fruits frais
@@ -107,7 +107,7 @@ permissionWrite:
   - 696faf80000078153479
 auteur: Auré
 createdAt: '2026-05-12T12:20:35.306+00:00'
-updatedAt: '2026-05-18T08:23:40.973+00:00'
+updatedAt: '2026-05-18T08:23:56.867+00:00'
 createdBy: 696faf80000078153479
 teams: []
 status: public

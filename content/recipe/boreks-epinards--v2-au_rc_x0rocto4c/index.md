@@ -1,6 +1,6 @@
 ---
 title: Boreks épinards fromage
-date: '2026-05-12T07:48:16.923Z'
+date: '2026-05-18T08:26:12.461Z'
 draft: false
 typeR: entree
 categories:
@@ -14,7 +14,7 @@ quantite_desc: 15 couverts = 1 gastro
 check: true
 cuisson: true
 serveHot: true
-description: null
+description: Feuilleté aux épinards et feta
 region: null
 saison: []
 id: boreks-epinards--v2-au_rc_x0rocto4c
@@ -22,9 +22,9 @@ materiel: []
 ingredients:
   - uuid: 1uz8x5
     name: Sésame blanc
-    originalQuantity: 100
+    originalQuantity: 60
     originalUnit: gr.
-    normalizedQuantity: 100
+    normalizedQuantity: 60
     normalizedUnit: gr.
     comment: ''
     allergens:
@@ -114,11 +114,11 @@ permissionWrite:
   - 696faf80000078153479
 auteur: Auré
 createdAt: '2026-05-12T07:22:20.042+00:00'
-updatedAt: '2026-05-12T07:48:14.175+00:00'
+updatedAt: '2026-05-18T08:26:11.979+00:00'
 createdBy: 696faf80000078153479
 teams: []
 status: public
 rootRecipeId: boreks-epinards-fromag_8gqvh0zj4gwr
-versionLabel: 'v2 - '
+versionLabel: v2 - econnmique
 ---
 

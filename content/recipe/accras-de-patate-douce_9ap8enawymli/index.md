@@ -1,19 +1,26 @@
 ---
 title: Accras de patate douce
+date: '2026-05-21T10:05:05.482Z'
 draft: false
 typeR: plat
 categories:
   - Friture
 regime:
-  - sans-lactose
   - vegetarien
+  - sans-lactose
+plate: 100
+quantite_desc: null
+check: true
+cuisson: true
+serveHot: true
+description: null
 region: Antilles
 saison:
   - ete
-cuisson: true
-plate: 100
-check: true
-checkAlwaysOk: false
+id: accras-de-patate-douce_9ap8enawymli
+materiel:
+  - Friteuse
+  - Marmitte
 ingredients:
   - uuid: 5cg0yu
     name: Citron jaune
@@ -162,19 +169,23 @@ ingredients:
     type: epices
     pF: false
     pS: false
-materiel:
-  - Friteuse
-  - Marmitte
 preparation: |-
-  * Faire bouillir les patates douces pour en faire un purée bien sèche. Eplucher entre bouillon et écrasement.
-  * Faire suer oignons, échalotes coupés en petite dans huile puis déglacer au jus de citron
-  * Mélanger le tout. Mélanger le piment à l'oeil, faire gaffe au bon dosage !
-  * La pate ne doit pas être trop liquide, hop passer en friture
-publishDate: '2024-05-28T11:09:00+00:00'
-serveHot: true
-uuid: 9ap8enawymli
-id: accras-de-patate-douce_9ap8enawymli
-createdAt: '2024-05-28T11:09:00+00:00'
-updatedAt: '2024-05-28T11:09:00+00:00'
-createdBy: ''
+  - Faire bouillir les patates douces pour en faire un purée bien sèche. Eplucher entre bouillon et écrasement.
+  - Faire suer oignons, échalotes coupées en petit dans huile puis déglacer au jus de citron
+  - Mélanger le tout. Mélanger le piment à l'oeil, faire gaffe au bon dosage !
+  - La pate ne doit pas être trop liquide, hop passer en friture
+prepAlt: []
+astuces: []
+preparation24h: null
+permissionWrite:
+  - 68975cbc002469058f8b
+auteur: null
+createdAt: '2026-05-21T10:04:59.902+00:00'
+updatedAt: '2026-05-21T10:04:59.902+00:00'
+createdBy: 68975cbc002469058f8b
+teams: null
+status: public
+rootRecipeId: null
+versionLabel: null
 ---
+

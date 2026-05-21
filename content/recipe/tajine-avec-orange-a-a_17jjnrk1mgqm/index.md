@@ -1,6 +1,6 @@
 ---
 title: Tajine de boeuf au citron
-date: '2026-05-21T11:05:22.881Z'
+date: '2026-05-21T11:10:55.531Z'
 draft: true
 typeR: plat
 categories: []
@@ -210,7 +210,7 @@ preparation: |-
   - Ajouter les carottes et les oignons. Laisser cuire.
   - Presser les citrons pour en récolter le jus et rapper le zeste.
   - Rajouter l'ail, les tomates hachées, les pois chiches cuits et les bouillons de légumes à la marmitte de légumes. Couvrir et laisser mijoter à feux doux (30min). Assaisoner en plus de la marinade et des bouillons au fur et à mesure de sel, ras el hanout, cumin et de canelle en dernier.
-  - Rajouter les aubergines qui vont fondre doucement, ainsi que le jus et les zestes d'orange. Laisser mijoter à couvert à feu doux (1h).
+  - Rajouter les aubergines qui vont fondre doucement, ainsi que le jus et les zestes de citrons. Laisser mijoter à couvert à feu doux (1h).
   - A côté, faire revenir le reste des oignons dans une autre casserole, et les faire caraméliser.
   - Faire torréfier les amandes dans une poêle et hâcher le persil.
   - 30min/1h avant de servir : Préparer la semoule et le riz qui accompagneront le tajine.
@@ -227,7 +227,7 @@ permissionWrite:
   - 69b01d0a001a6848cc4c
 auteur: chrismino28
 createdAt: '2026-03-11T14:21:26.193+00:00'
-updatedAt: '2026-05-21T11:05:18.773+00:00'
+updatedAt: '2026-05-21T11:10:55.248+00:00'
 createdBy: 69b01d0a001a6848cc4c
 teams: []
 status: public

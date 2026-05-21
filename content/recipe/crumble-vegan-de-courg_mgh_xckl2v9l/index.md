@@ -1,7 +1,7 @@
 ---
 title: Crumble végan de courgette
-date: '2026-05-16T09:45:09.534Z'
-draft: true
+date: '2026-05-21T20:47:42.808Z'
+draft: false
 typeR: plat
 categories: []
 regime:
@@ -116,11 +116,11 @@ astuces: []
 preparation24h: null
 permissionWrite:
   - 696fb1cc000eb33adee7
-auteur: null
+auteur: Miki
 createdAt: '2026-05-16T09:45:08.494+00:00'
-updatedAt: '2026-05-16T09:45:08.494+00:00'
+updatedAt: '2026-05-21T20:47:38.242+00:00'
 createdBy: 696fb1cc000eb33adee7
-teams: null
+teams: []
 status: public
 rootRecipeId: null
 versionLabel: null

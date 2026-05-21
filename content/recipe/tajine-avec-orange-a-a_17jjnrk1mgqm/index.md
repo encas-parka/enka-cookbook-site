@@ -1,6 +1,6 @@
 ---
-title: Tajine de boeuf avec orange
-date: '2026-04-20T13:57:39.601Z'
+title: Tajine de boeuf au citron
+date: '2026-05-21T11:05:22.881Z'
 draft: true
 typeR: plat
 categories: []
@@ -31,9 +31,9 @@ ingredients:
     pS: false
   - uuid: eouu0v
     name: Carotte
-    originalQuantity: 70
+    originalQuantity: 50
     originalUnit: unité
-    normalizedQuantity: 8750
+    normalizedQuantity: 6250
     normalizedUnit: gr.
     comment: À couper en gros morceaux
     allergens: []
@@ -98,9 +98,9 @@ ingredients:
     pS: false
   - uuid: 3n8509
     name: Bouillon de légumes
-    originalQuantity: 10
+    originalQuantity: 5
     originalUnit: unité
-    normalizedQuantity: 10
+    normalizedQuantity: 5
     normalizedUnit: unité
     comment: La quantité est en nombre de bouillon cubes
     allergens:
@@ -132,31 +132,20 @@ ingredients:
     pS: false
   - uuid: v1kli8
     name: Gousse d'ail
-    originalQuantity: 42
+    originalQuantity: 20
     originalUnit: unité
-    normalizedQuantity: 42
+    normalizedQuantity: 20
     normalizedUnit: unité
     comment: À râper ou presser
     allergens: []
     type: epices
     pF: false
     pS: false
-  - uuid: yh2uod
-    name: Orange
-    originalQuantity: 14
-    originalUnit: unité
-    normalizedQuantity: 2800
-    normalizedUnit: gr.
-    comment: Jus + zeste
-    allergens: []
-    type: legumes
-    pF: false
-    pS: false
   - uuid: 9yf54l
     name: Raisin sec
-    originalQuantity: 500
+    originalQuantity: 250
     originalUnit: gr.
-    normalizedQuantity: 500
+    normalizedQuantity: 250
     normalizedUnit: gr.
     comment: À rajouter à la fin ou servir à côté
     allergens: []
@@ -175,9 +164,9 @@ ingredients:
     type: animaux
   - uuid: 7sk3a5
     name: Aubergine
-    originalQuantity: 70
+    originalQuantity: 35
     originalUnit: unité
-    normalizedQuantity: 17500
+    normalizedQuantity: 8750
     normalizedUnit: gr.
     comment: A couper en gros cubes
     allergens: []
@@ -201,6 +190,15 @@ ingredients:
     allergens:
       - Moutarde
     type: epices
+  - uuid: 5cg0yu
+    name: Citron jaune
+    originalQuantity: 20
+    originalUnit: unité
+    normalizedQuantity: 2000
+    normalizedUnit: gr.
+    comment: Jus + zeste
+    allergens: []
+    type: legumes
 preparation: |-
   Recette testée avec des légumes d'hiver et sans viande pour 4 personnes d'abord dans un plat à tajine puis pour 50 personnes avec une grande casserole/marmitte.
 
@@ -210,7 +208,7 @@ preparation: |-
   - Couper les légumes (carottes, aubergines, oignons, ail, tomates) de la façon indiquée.
   - Dans une grande marmitte, faire chauffer l'huile d'olive, avant d'y ajouter la viande et sa marinade pour la faire dorer (pendant 20min). La retourner régulièrement.
   - Ajouter les carottes et les oignons. Laisser cuire.
-  - Presser les oranges pour en récolter le jus et rapper le zeste.
+  - Presser les citrons pour en récolter le jus et rapper le zeste.
   - Rajouter l'ail, les tomates hachées, les pois chiches cuits et les bouillons de légumes à la marmitte de légumes. Couvrir et laisser mijoter à feux doux (30min). Assaisoner en plus de la marinade et des bouillons au fur et à mesure de sel, ras el hanout, cumin et de canelle en dernier.
   - Rajouter les aubergines qui vont fondre doucement, ainsi que le jus et les zestes d'orange. Laisser mijoter à couvert à feu doux (1h).
   - A côté, faire revenir le reste des oignons dans une autre casserole, et les faire caraméliser.
@@ -229,7 +227,7 @@ permissionWrite:
   - 69b01d0a001a6848cc4c
 auteur: chrismino28
 createdAt: '2026-03-11T14:21:26.193+00:00'
-updatedAt: '2026-04-20T13:57:39.253+00:00'
+updatedAt: '2026-05-21T11:05:18.773+00:00'
 createdBy: 69b01d0a001a6848cc4c
 teams: []
 status: public

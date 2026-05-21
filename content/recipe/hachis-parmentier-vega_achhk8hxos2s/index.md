@@ -1,6 +1,6 @@
 ---
-title: Hachis parmentier végan
-date: '2026-05-14T12:49:46.658Z'
+title: Hachis parmentier vegan
+date: '2026-05-21T12:53:14.042Z'
 draft: false
 typeR: plat
 categories:
@@ -190,7 +190,7 @@ permissionWrite:
   - 69e4e2c10884ec675d1b
 auteur: Mael
 createdAt: '2026-05-13T21:06:18.828+00:00'
-updatedAt: '2026-05-14T12:49:23.735+00:00'
+updatedAt: '2026-05-21T12:53:07.992+00:00'
 createdBy: 69e4e2c10884ec675d1b
 teams: []
 status: public

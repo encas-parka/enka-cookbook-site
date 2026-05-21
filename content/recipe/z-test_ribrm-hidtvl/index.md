@@ -1,6 +1,6 @@
 ---
 title: Z-test
-date: '2026-05-21T10:12:04.336Z'
+date: '2026-05-21T10:12:26.199Z'
 draft: true
 typeR: entree
 categories: []
@@ -13,7 +13,7 @@ quantite_desc: null
 check: false
 cuisson: true
 serveHot: true
-description: test
+description: test mod admin
 region: null
 saison: []
 id: z-test_ribrm-hidtvl
@@ -35,11 +35,11 @@ astuces: []
 preparation24h: null
 permissionWrite:
   - 693200b700222efe46a2
-auteur: null
+auteur: qaldek
 createdAt: '2026-05-21T10:12:03.895+00:00'
-updatedAt: '2026-05-21T10:12:03.895+00:00'
+updatedAt: '2026-05-21T10:12:25.603+00:00'
 createdBy: 693200b700222efe46a2
-teams: null
+teams: []
 status: public
 rootRecipeId: null
 versionLabel: null

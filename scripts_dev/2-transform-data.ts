@@ -554,7 +554,7 @@ function main() {
 
     pbProducts.push({
       eventId,
-      ingredientRef: awProd.ingredientRef || null,
+      ingredientRef: awProd.productHugoUuid || null,
       productName: awProd.productName || null,
       productType: awProd.productType || null,
       pF: awProd.pF || false,

@@ -244,11 +244,20 @@ export function computeFuzzySearchMatches(
   query: string,
 ): Set<string> {
   if (!query.trim()) return new Set();
-  const results = fuzzysort.go(query.trim(), products, {
-    key: "productName",
+  // Cherche à la fois dans le nom du produit et dans les noms des recettes associées
+  const searchable = products.map((p) => ({
+    $id: p.$id,
+    productName: p.productName,
+    recipeNames: Object.values(p.byDate ?? {})
+      .flatMap((entry) => entry.recipes.map((r) => r.r))
+      .filter(Boolean)
+      .join(" "),
+  }));
+  const results = fuzzysort.go(query.trim(), searchable, {
+    keys: ["productName", "recipeNames"],
     threshold: 0.3,
   });
-  return new Set(results.map(r => r.obj.$id));
+  return new Set(results.map((r) => r.obj.$id));
 }
 
 export function matchesFilters(

@@ -1,6 +1,6 @@
 ---
 title: Z test-jus citron
-date: '2026-05-22T12:57:58.108Z'
+date: '2026-05-22T12:58:16.002Z'
 draft: true
 typeR: entree
 categories: []
@@ -21,10 +21,10 @@ materiel: []
 ingredients:
   - uuid: e4mjd1
     name: Jus de citron
-    originalQuantity: 0
-    originalUnit: gr.
-    normalizedQuantity: 0
-    normalizedUnit: gr.
+    originalQuantity: 200
+    originalUnit: ml
+    normalizedQuantity: 200
+    normalizedUnit: ml
     comment: ''
     allergens: []
     type: sucres
@@ -34,11 +34,11 @@ astuces: []
 preparation24h: null
 permissionWrite:
   - 68975cbc002469058f8b
-auteur: null
+auteur: ghald
 createdAt: '2026-05-22T12:57:51.824+00:00'
-updatedAt: '2026-05-22T12:57:51.824+00:00'
+updatedAt: '2026-05-22T12:58:15.697+00:00'
 createdBy: 68975cbc002469058f8b
-teams: null
+teams: []
 status: public
 rootRecipeId: null
 versionLabel: null

@@ -59,7 +59,7 @@ outputFormats:
     path: data/
 
 caches:
-  getjson:
+  getresource:
     dir: :cacheDir/:project
     maxAge: 10s
 sitemap:

@@ -265,14 +265,98 @@ export async function createEnrichedProductsFromEvent(
     await processMeal(meal, getRecipeDetailsFromCache, aggregations);
   }
 
-  const products: EnrichedProduct[] = [];
+  // ⚡ ÉTAPE 5 : Créer les produits et détecter les collisions de $id
+  // Collision possible quand deux UUIDs ingrédients différents produisent le même
+  // nom slugifié → même $id. Ex : UUID Hugo "e4mjd1" + UUID Appwrite "hWq5pz..."
+  // tous deux nommés "Jus de citron" → $id = "jus-de-citron_01779725442"
+  const productById = new Map<string, EnrichedProduct>();
 
   for (const [uuid, aggregation] of aggregations) {
-    products.push(createEnrichedProductFromAggregation(aggregation, mainId));
+    const product = createEnrichedProductFromAggregation(aggregation, mainId);
+
+    const existing = productById.get(product.$id);
+    if (existing) {
+      mergeEnrichedProducts(existing, product);
+      console.warn(
+        `[productEnrichment] Collision $id "${product.$id}" fusionnée (UUIDs: ${existing.productHugoUuid} + ${product.productHugoUuid})`,
+      );
+    } else {
+      productById.set(product.$id, product);
+    }
   }
+
+  const products = [...productById.values()];
 
   console.log(`[productEnrichment] ${products.length} produits calculés`);
   return products;
+}
+
+/**
+ * Fusionne deux EnrichedProducts ayant le même $id (collision détectée).
+ * Le produit `target` est modifié en place pour absorber les données de `source`.
+ *
+ * Scénario typique : un ingrédient "Jus de citron" existe avec UUID Hugo "e4mjd1"
+ * ET UUID Appwrite "hWq5pz..." → deux agrégations → même $id → collision.
+ *
+ * Fusion :
+ * - byDate : concatène les recipes, somme les assiettes par date
+ * - totalNeededArray : recalcule depuis les byDate fusionnés
+ * - nbRecipes / totalAssiettes : recalculés
+ * - productHugoUuid : garde le UUID Hugo court (priorité) si disponible
+ */
+function mergeEnrichedProducts(target: EnrichedProduct, source: EnrichedProduct): void {
+  // 1. Fusionner les byDate
+  for (const [date, sourceEntry] of Object.entries(source.byDate)) {
+    if (target.byDate[date]) {
+      // Date commune : concaténer recipes et sommer les assiettes
+      const targetEntry = target.byDate[date];
+      targetEntry.recipes = [...targetEntry.recipes, ...sourceEntry.recipes];
+      targetEntry.totalAssiettes += sourceEntry.totalAssiettes;
+      targetEntry.recipeCount = targetEntry.recipes.length;
+      targetEntry.totalConsolidated = aggregateByUnit([
+        ...targetEntry.totalConsolidated,
+        ...sourceEntry.totalConsolidated,
+      ]);
+    } else {
+      // Nouvelle date : l'ajouter directement
+      target.byDate[date] = { ...sourceEntry };
+    }
+  }
+
+  // 2. Recalculer les totaux globaux depuis les byDate fusionnés
+  const allQuantities = Object.values(target.byDate).flatMap(
+    (e) => e.totalConsolidated,
+  );
+  target.totalNeededArray = aggregateByUnit(allQuantities);
+
+  // 3. Recalculer les métriques globales
+  target.nbRecipes = Object.values(target.byDate).reduce(
+    (acc, e) => acc + e.recipeCount,
+    0,
+  );
+  target.totalAssiettes = Object.values(target.byDate).reduce(
+    (acc, e) => acc + e.totalAssiettes,
+    0,
+  );
+
+  // 4. Recalculer le display
+  target.displayTotalNeeded = formatTotalQuantity(target.totalNeededArray);
+
+  // 5. Recalculer missing (sans purchases au stade initial)
+  const { numeric: missingQuantityArray, display: displayMissingQuantity } =
+    calculateAndFormatMissing(target.totalNeededArray, target.totalPurchasesArray);
+  target.missingQuantityArray = missingQuantityArray;
+  target.displayMissingQuantity = displayMissingQuantity;
+
+  // 6. Recalculer dateDisplayInfo
+  target.dateDisplayInfo = calculateAllDateDisplayInfo(Object.keys(target.byDate));
+
+  // 7. Garder le UUID Hugo (court) en priorité sur l'UUID Appwrite (long)
+  const targetLen = target.productHugoUuid?.length ?? Infinity;
+  const sourceLen = source.productHugoUuid?.length ?? Infinity;
+  if (sourceLen < targetLen) {
+    target.productHugoUuid = source.productHugoUuid;
+  }
 }
 
 /**

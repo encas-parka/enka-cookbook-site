@@ -1,6 +1,6 @@
 ---
 title: Petit déjeuner
-date: '2026-05-24T16:05:30.126Z'
+date: '2026-05-24T17:20:30.484Z'
 draft: false
 typeR: autre
 categories: []
@@ -207,6 +207,24 @@ ingredients:
     allergens:
       - Vérifier emballage
     type: lof
+  - uuid: i6jlwm
+    name: Pomme
+    originalQuantity: 3
+    originalUnit: kg
+    normalizedQuantity: 3000
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: 9vpwp5
+    name: Banane
+    originalQuantity: 4
+    originalUnit: kg
+    normalizedQuantity: 4000
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
 preparation: |-
   Faire cuire les oeufs
 
@@ -220,7 +238,7 @@ permissionWrite:
   - 696fb1cc000eb33adee7
 auteur: Miki
 createdAt: '2026-05-24T16:03:18.809+00:00'
-updatedAt: '2026-05-24T16:05:29.796+00:00'
+updatedAt: '2026-05-24T17:20:25.956+00:00'
 createdBy: 696fb1cc000eb33adee7
 teams: []
 status: public

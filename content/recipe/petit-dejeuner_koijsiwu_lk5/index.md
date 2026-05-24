@@ -1,6 +1,6 @@
 ---
 title: Petit déjeuner
-date: '2026-05-24T16:03:19.341Z'
+date: '2026-05-24T16:04:09.818Z'
 draft: false
 typeR: autre
 categories: []
@@ -188,6 +188,15 @@ ingredients:
     allergens:
       - Oeuf
     type: lof
+  - uuid: ibtbnq
+    name: Tomate
+    originalQuantity: 3
+    originalUnit: kg
+    normalizedQuantity: 3000
+    normalizedUnit: gr.
+    comment: si possible
+    allergens: []
+    type: legumes
 preparation: |-
   Faire cuire les oeufs
 
@@ -199,11 +208,11 @@ astuces: []
 preparation24h: null
 permissionWrite:
   - 696fb1cc000eb33adee7
-auteur: null
+auteur: Miki
 createdAt: '2026-05-24T16:03:18.809+00:00'
-updatedAt: '2026-05-24T16:03:18.809+00:00'
+updatedAt: '2026-05-24T16:04:09.379+00:00'
 createdBy: 696fb1cc000eb33adee7
-teams: null
+teams: []
 status: public
 rootRecipeId: null
 versionLabel: null

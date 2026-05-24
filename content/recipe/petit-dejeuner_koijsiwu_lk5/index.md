@@ -1,6 +1,6 @@
 ---
 title: Petit déjeuner
-date: '2026-05-24T16:04:09.818Z'
+date: '2026-05-24T16:05:30.126Z'
 draft: false
 typeR: autre
 categories: []
@@ -197,6 +197,16 @@ ingredients:
     comment: si possible
     allergens: []
     type: legumes
+  - uuid: 1btnhd
+    name: pain sans gluten
+    originalQuantity: 500
+    originalUnit: gr.
+    normalizedQuantity: 500
+    normalizedUnit: gr.
+    comment: vérifier selon les régimes
+    allergens:
+      - Vérifier emballage
+    type: lof
 preparation: |-
   Faire cuire les oeufs
 
@@ -210,7 +220,7 @@ permissionWrite:
   - 696fb1cc000eb33adee7
 auteur: Miki
 createdAt: '2026-05-24T16:03:18.809+00:00'
-updatedAt: '2026-05-24T16:04:09.379+00:00'
+updatedAt: '2026-05-24T16:05:29.796+00:00'
 createdBy: 696fb1cc000eb33adee7
 teams: []
 status: public

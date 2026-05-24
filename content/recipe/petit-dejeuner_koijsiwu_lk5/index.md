@@ -1,6 +1,6 @@
 ---
 title: Petit déjeuner
-date: '2026-05-24T17:20:30.484Z'
+date: '2026-05-24T17:32:17.011Z'
 draft: false
 typeR: autre
 categories: []
@@ -225,6 +225,25 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+  - uuid: u33083
+    name: Tahin
+    originalQuantity: 300
+    originalUnit: gr.
+    normalizedQuantity: 300
+    normalizedUnit: gr.
+    comment: ''
+    allergens:
+      - Sésame
+    type: autres
+  - uuid: 5cg0yu
+    name: Citron jaune
+    originalQuantity: 1
+    originalUnit: kg
+    normalizedQuantity: 1000
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
 preparation: |-
   Faire cuire les oeufs
 
@@ -238,7 +257,7 @@ permissionWrite:
   - 696fb1cc000eb33adee7
 auteur: Miki
 createdAt: '2026-05-24T16:03:18.809+00:00'
-updatedAt: '2026-05-24T17:20:25.956+00:00'
+updatedAt: '2026-05-24T17:32:16.404+00:00'
 createdBy: 696fb1cc000eb33adee7
 teams: []
 status: public

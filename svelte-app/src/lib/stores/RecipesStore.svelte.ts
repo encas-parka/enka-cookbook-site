@@ -33,7 +33,7 @@ import {
 	forceReloadAllAppwriteRecipes,
 	getRecipeAppwrite as getAppwriteRecipe
 } from '../services/appwrite-recipes';
-import fuzzysort from 'fuzzysort';
+import Fuse from 'fuse.js';
 import { globalState } from './GlobalState.svelte';
 import {
 	createSyncCollection,
@@ -95,6 +95,9 @@ class RecipesStore {
 	#error = $state<string | null>(null);
 	#isInitialized = $state(false);
 	#realtimeInitialized = false;
+
+	#fuseTitle: Fuse<RecipeIndexEntry> | null = null;
+	#fuseMulti: Fuse<RecipeIndexEntry> | null = null;
 
 	// Dedup loading
 	#loadingDetails = new Set<string>();
@@ -570,17 +573,51 @@ class RecipesStore {
 		return this.#recipesIndex.get($id) || null;
 	}
 
-	searchRecipes(query: string): RecipeIndexEntry[] {
-		if (!query.trim()) {
-			return this.recipesIndex;
+	#rebuildFuseIndex(): void {
+		const recipes = this.getAllRecipes();
+		if (recipes.length === 0) {
+			this.#fuseTitle = null;
+			this.#fuseMulti = null;
+			return;
 		}
 
-		const results = fuzzysort.go(query.trim(), this.recipesIndex, {
-			key: 'title',
+		this.#fuseTitle = new Fuse(recipes, {
+			keys: ['title'],
 			threshold: 0.3,
+			ignoreDiacritics: true,
+			useTokenSearch: true,
 		});
 
-		return results.map(r => r.obj);
+		this.#fuseMulti = new Fuse(recipes, {
+			keys: ['title', 'auteur', 'region'],
+			threshold: 0.3,
+			ignoreDiacritics: true,
+			useTokenSearch: true,
+		});
+	}
+
+	searchRecipes(query: string): RecipeIndexEntry[] {
+		if (!query.trim()) {
+			return this.getAllRecipes();
+		}
+
+		this.#rebuildFuseIndex();
+
+		if (!this.#fuseTitle) return this.getAllRecipes();
+
+		const results = this.#fuseTitle.search(query);
+		return results.map(r => r.item);
+	}
+
+	searchRecipesMulti(query: string): RecipeIndexEntry[] {
+		if (!query.trim()) return this.getAllRecipes();
+
+		this.#rebuildFuseIndex();
+
+		if (!this.#fuseMulti) return this.getAllRecipes();
+
+		const results = this.#fuseMulti.search(query);
+		return results.map(r => r.item);
 	}
 
 	get availableTypes(): string[] {

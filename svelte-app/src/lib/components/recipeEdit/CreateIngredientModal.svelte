@@ -69,7 +69,7 @@
   }>({});
 
   // Guard anti-doublon : ingrédients similaires détectés en temps réel
-  let similarIngredients = $derived<FuzzyIngredientResult[]>(() => {
+  let similarIngredients = $derived.by(() => {
     const name = formData.name.trim();
     if (name.length < 2) return [];
     return recipeDataStore.findSimilarIngredients(name);
@@ -335,8 +335,8 @@
           {/if}
 
           <!-- Guard anti-doublon : ingrédients similaires -->
-          {#if similarIngredients().length > 0}
-            {@const similar = similarIngredients()}
+          {#if similarIngredients.length > 0}
+            {@const similar = similarIngredients}
             <div class="alert alert-warning text-sm">
               <TriangleAlert size={18} class="shrink-0" />
               <div class="flex flex-col gap-2">

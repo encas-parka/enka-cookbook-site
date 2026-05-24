@@ -15,7 +15,7 @@
   import { globalState } from "../stores/GlobalState.svelte";
   import { fade } from "svelte/transition";
   import { flip } from "svelte/animate";
-  import fuzzysort from "fuzzysort";
+
 
   // État des filtres
   interface Filters {
@@ -85,13 +85,9 @@
     if (searchQuery.length >= 2) {
       const query = searchQuery.trim();
 
-      // Recherche fuzzy multi-champ en un seul passage
-      const results = fuzzysort.go(query, allRecipes, {
-        keys: ["title", "auteur", "region"],
-        threshold: 0.3,
-      });
-
-      const matchingIds = new Set(results.map(r => r.obj.$id));
+      // Recherche fuzzy multi-champ via le store (Fuse.js)
+      const results = recipesStore.searchRecipesMulti(query);
+      const matchingIds = new Set(results.map(r => r.$id));
 
       return allRecipes.filter((recipe) => {
         if (!matchingIds.has(recipe.$id)) return false;

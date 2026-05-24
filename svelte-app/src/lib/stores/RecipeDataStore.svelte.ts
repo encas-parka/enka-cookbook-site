@@ -17,7 +17,7 @@
  */
 
 import { SvelteMap } from "svelte/reactivity";
-import fuzzysort from "fuzzysort";
+import Fuse from "fuse.js";
 import type {
   Ingredient,
   RecipeInfo,
@@ -75,6 +75,8 @@ class RecipeDataStore {
   #error = $state<string | null>(null);
   #lastSync = $state<string | null>(null);
   #isInitialized = $state(false);
+
+  #fuse: Fuse<Ingredient> | null = null;
 
   // Propriétés dérivées
   #ingredientNames = $derived.by(() =>
@@ -148,6 +150,8 @@ class RecipeDataStore {
 
       // 2. Charger depuis JSON et vérifier hash
       await this.#loadFromJSON();
+
+      this.#rebuildFuseIndex();
 
       this.#isInitialized = true;
       console.log(
@@ -280,6 +284,54 @@ class RecipeDataStore {
   }
 
   // ===========================================================================
+  // HELPERS PRIVÉS - FUZZY SEARCH
+  // ===========================================================================
+
+  #rebuildFuseIndex(): void {
+    const ingredients = Array.from(this.#ingredients.values());
+    if (ingredients.length === 0) {
+      this.#fuse = null;
+      return;
+    }
+    this.#fuse = new Fuse(ingredients, {
+      keys: ['n'],
+      threshold: 0.4,
+      ignoreDiacritics: true,
+      useTokenSearch: true,
+      includeScore: true,
+      includeMatches: true,
+    });
+  }
+
+  #buildHighlight(ingredient: Ingredient, matches?: Fuse.FuseResult<Ingredient>['matches']): string {
+    if (!matches || matches.length === 0) return ingredient.n;
+    const indices = matches[0].indices;
+    if (!indices || indices.length === 0) return ingredient.n;
+    const text = ingredient.n;
+    let result = '';
+    let lastIdx = 0;
+    for (const [start, end] of indices) {
+      result += text.slice(lastIdx, start);
+      result += `<mark>${text.slice(start, end + 1)}</mark>`;
+      lastIdx = end + 1;
+    }
+    result += text.slice(lastIdx);
+    return result;
+  }
+
+  #rerankResults(results: Fuse.FuseResult<Ingredient>[]): Fuse.FuseResult<Ingredient>[] {
+    return [...results].sort((a, b) => {
+      if (a.score !== undefined && b.score !== undefined && Math.abs(a.score - b.score) > 0.001) {
+        return a.score - b.score;
+      }
+      const aStart = a.matches?.[0]?.indices?.[0]?.[0] ?? Infinity;
+      const bStart = b.matches?.[0]?.indices?.[0]?.[0] ?? Infinity;
+      if (aStart !== bStart) return aStart - bStart;
+      return a.item.n.length - b.item.n.length;
+    });
+  }
+
+  // ===========================================================================
   // API PUBLIQUE - INGRÉDIENTS
   // ===========================================================================
 
@@ -289,12 +341,9 @@ class RecipeDataStore {
 
   searchIngredients(query: string): Ingredient[] {
     if (!query.trim()) return this.ingredients;
-    const results = fuzzysort.go(query, this.ingredients, {
-      key: "n",
-      threshold: 0.3,
-      limit: 50,
-    });
-    return results.map((r) => r.obj);
+    if (!this.#fuse) return this.ingredients;
+    const results = this.#fuse.search(query);
+    return results.map((r) => r.item);
   }
 
   /**
@@ -303,19 +352,18 @@ class RecipeDataStore {
    */
   searchIngredientsFuzzy(
     query: string,
-    threshold = 0.3,
+    threshold = 0.4,
     limit = 50,
   ): FuzzyIngredientResult[] {
     if (!query.trim()) return [];
-    const results = fuzzysort.go(query, this.ingredients, {
-      key: "n",
-      threshold,
-      limit,
-    });
+    if (!this.#fuse) return [];
+    const results = this.#rerankResults(
+      this.#fuse.search(query, { limit })
+    );
     return results.map((r) => ({
-      ingredient: r.obj,
-      score: r.score,
-      highlighted: r.highlight("<mark>", "</mark>"),
+      ingredient: r.item,
+      score: r.score ?? 0,
+      highlighted: this.#buildHighlight(r.item, r.matches),
     }));
   }
 
@@ -326,15 +374,19 @@ class RecipeDataStore {
    */
   findSimilarIngredients(name: string, limit = 5): FuzzyIngredientResult[] {
     if (!name.trim() || name.trim().length < 2) return [];
-    const results = fuzzysort.go(name, this.ingredients, {
-      key: "n",
+    if (!this.#fuse) return [];
+    const fusePermissive = new Fuse(this.ingredients, {
+      keys: ['n'],
       threshold: 0.5,
-      limit,
+      ignoreDiacritics: true,
+      includeScore: true,
+      includeMatches: true,
     });
+    const results = this.#rerankResults(fusePermissive.search(name, { limit }));
     return results.map((r) => ({
-      ingredient: r.obj,
-      score: r.score,
-      highlighted: r.highlight("<mark>", "</mark>"),
+      ingredient: r.item,
+      score: r.score ?? 0,
+      highlighted: this.#buildHighlight(r.item, r.matches),
     }));
   }
 
@@ -408,6 +460,7 @@ class RecipeDataStore {
 
       // Mise à jour locale optimiste
       this.#ingredients.set(newIngredient.u, newIngredient);
+      this.#rebuildFuseIndex();
 
       // Sauvegarder dans db.catalog
       await db.catalog.put({ key: KEY_INGREDIENTS, data: new Map(this.#ingredients) });
@@ -537,6 +590,7 @@ class RecipeDataStore {
         data: { lastSync: this.#lastSync, dataJsonHash: null, ingredientsCount: 0 } satisfies CatalogMetadata,
       });
       await this.#loadFromJSON();
+      this.#rebuildFuseIndex();
       console.log("[RecipeDataStore] ✓ Rechargement complété");
     } catch (err) {
       const message =
@@ -554,6 +608,7 @@ class RecipeDataStore {
     this.#ingredients.clear();
     this.#recipeInfo = { materiel: [], categories: [], regimes: [] };
     this.#lastSync = null;
+    this.#fuse = null;
     this.#isInitialized = false;
     console.log("[RecipeDataStore] Cache vidé");
   }

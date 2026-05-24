@@ -43,7 +43,7 @@
   let searchQueryForModal = $state("");
 
   // Recherche fuzzy des ingrédients depuis le store
-  let fuzzyResults = $derived<FuzzyIngredientResult[]>(() => {
+  let fuzzyResults = $derived.by(() => {
     // Si mode "tout afficher" ou recherche vide, retourner tous les ingrédients sans highlight
     if (showAllIngredients || searchQuery.length === 0) {
       return recipeDataStore.ingredients.map((ing) => ({
@@ -57,7 +57,7 @@
   });
 
   // Grouper les ingrédients par type
-  let groupedIngredients = $derived(() => {
+  let groupedIngredients = $derived.by(() => {
     const groups: Record<string, RecipeIngredient[]> = {};
 
     ingredients.forEach((ingredient) => {
@@ -92,7 +92,7 @@
 
   // Gérer le selectedIndex de manière réactive
   $effect(() => {
-    const results = fuzzyResults();
+    const results = fuzzyResults;
     if (results.length > 0 && selectedIndex === -1) {
       selectedIndex = 0;
     } else if (results.length === 0) {
@@ -102,7 +102,7 @@
 
   // Réinitialiser l'index surligné quand les options changent
   $effect(() => {
-    const results = fuzzyResults();
+    const results = fuzzyResults;
     if (results.length > 0 && selectedIndex >= results.length) {
       selectedIndex = 0;
     }
@@ -190,7 +190,7 @@
     switch (event.key) {
       case "ArrowDown":
         event.preventDefault();
-        const results = fuzzyResults();
+        const results = fuzzyResults;
         if (!isOpen) {
           openDropdown(true);
         } else if (selectedIndex < results.length - 1) {
@@ -207,7 +207,7 @@
 
       case "Enter":
         event.preventDefault();
-        const currentResults = fuzzyResults();
+        const currentResults = fuzzyResults;
         if (isOpen && currentResults.length > 0) {
           addIngredientFromSearch(currentResults[selectedIndex].ingredient.u);
         } else if (!isOpen) {
@@ -356,7 +356,7 @@
 
             <!-- Dropdown options -->
             {#if isOpen}
-              {@const results = fuzzyResults()}
+              {@const results = fuzzyResults}
 
               <div
                 id="ingredients-list"
@@ -437,7 +437,7 @@
 
   <!-- Liste des ingrédients groupés par type -->
   {#if ingredients.length > 0}
-    {#each Object.entries(groupedIngredients()) as [type, typeIngredients] (type)}
+    {#each Object.entries(groupedIngredients) as [type, typeIngredients] (type)}
       {@const typeInfo = getProductTypeInfo(type)}
       {@const TypeIcon = typeInfo.icon}
 

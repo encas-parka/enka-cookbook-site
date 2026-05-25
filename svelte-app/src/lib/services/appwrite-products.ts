@@ -308,6 +308,34 @@ function getCurrentUserName(): string {
 }
 
 /**
+ * Détecte si l'erreur Appwrite indique qu'un document existe déjà (conflit 409).
+ * Utilisé par upsertProduct() pour retomber sur updateRow().
+ */
+export function isAlreadyExistsError(error: unknown): boolean {
+  if (!(error instanceof Error)) return false;
+  const anyError = error as any;
+  return (
+    anyError.code === 409 ||
+    anyError.message?.includes("Row with the requested ID already exists") ||
+    anyError.message?.includes("Document with the requested ID already exists")
+  );
+}
+
+/**
+ * Détecte si l'erreur Appwrite indique qu'un document est introuvable (404).
+ * Utilisé par updateProduct() et ses appelants pour retomber sur createRow().
+ */
+export function isNotFoundError(error: unknown): boolean {
+  if (!(error instanceof Error)) return false;
+  const anyError = error as any;
+  return (
+    anyError.code === 404 ||
+    anyError.message?.includes("Document not found") ||
+    anyError.message?.includes("Row not found")
+  );
+}
+
+/**
  * Charge les produits depuis Appwrite avec leurs achats associés
  *
  * Service principal de chargement initial pour ProductsStore.
@@ -697,56 +725,70 @@ export async function upsertProduct(
   updates: ProductUpdate,
   getEnrichedProduct: (productId: string) => any, // EnrichedProduct | null
 ): Promise<Products> {
+  // Récupérer le produit enrichi localement
+  const enrichedProduct = getEnrichedProduct(productId);
+  if (!enrichedProduct) {
+    throw new Error(
+      `Produit ${productId} non trouvé localement pour création`,
+    );
+  }
+
+  console.log(
+    `[Appwrite product] Upsert produit ${productId} sur Appwrite...`,
+  );
+
+  // Préparer les données une seule fois (utilisées pour create ET update)
+  const appwriteData = enrichedProductToAppwriteProduct(
+    enrichedProduct,
+    updates,
+  );
+  const enrichedData = await enrichProductWithUser(appwriteData);
+  const { tables, config } = await getAppwriteInstances();
+
+  // Permissions depuis l'événement
+  const event = eventsStore.getEventById(enrichedData.mainId);
+  const eventPermissions = getEventPermissionsFromEvent(event);
+
   try {
-    // Récupérer le produit enrichi localement
-    const enrichedProduct = getEnrichedProduct(productId);
-    if (!enrichedProduct) {
-      throw new Error(
-        `Produit ${productId} non trouvé localement pour création`,
-      );
-    }
-
-    console.log(
-      `[Appwrite product] Création produit ${productId} sur Appwrite...`,
-    );
-
-    // Transformer en données Appwrite avec les updates utilisateur
-    const appwriteData = enrichedProductToAppwriteProduct(
-      enrichedProduct,
-      updates,
-    );
-
-    // Enrichir les données avec updatedBy
-    const enrichedData = await enrichProductWithUser(appwriteData);
-
-    const { tables, config } = await getAppwriteInstances();
-
-    // 🔥 NOUVEAU: Récupérer les permissions depuis l'événement (inclut les teams)
-    const event = eventsStore.getEventById(enrichedData.mainId);
-    const eventPermissions = getEventPermissionsFromEvent(event);
-
+    // Tentative de création
     const response = await tables.createRow({
       databaseId: config.databaseId,
       tableId: config.collections.products,
       rowId: productId, // $id prédéfini
-      data: enrichedData, // ← Utiliser les données enrichies
-      permissions: eventPermissions, // ← Inclut les labels ET les teams
+      data: enrichedData,
+      permissions: eventPermissions,
     });
 
     console.log(
       `[Appwrite product] Produit ${productId} créé avec permissions (labels + teams)`,
     );
-
-    // Note : le ProductsStore mettra à jour isSynced via le realtime
     return response as unknown as Products;
   } catch (error) {
+    // ─── Solution A : fallback update si le produit existe déjà (desync) ───
+    if (isAlreadyExistsError(error)) {
+      console.warn(
+        `[Appwrite product] DESYNC: produit ${productId} existe déjà dans Appwrite, fallback vers update`,
+      );
+      const response = await tables.updateRow({
+        databaseId: config.databaseId,
+        tableId: config.collections.products,
+        rowId: productId,
+        data: enrichedData,
+        // permissions non fourni = Appwrite préserve les permissions existantes
+      });
+      console.log(
+        `[Appwrite product] Produit ${productId} mis à jour via fallback upsert`,
+      );
+      return response as unknown as Products;
+    }
+
     console.error(
-      `[Appwrite product] Erreur création produit ${productId}:`,
+      `[Appwrite product] Erreur upsert produit ${productId}:`,
       error,
     );
     const errorMessage =
       error instanceof Error ? error.message : "Erreur inconnue";
-    throw new Error(`Échec de la création du produit: ${errorMessage}`);
+    throw new Error(`Échec de l'upsert du produit: ${errorMessage}`);
   }
 }
 
@@ -874,7 +916,7 @@ export async function updateProductBatch(
 
     // ✅ LOGIQUE DE SYNC : Vérifier isSynced du produit
     if (!enrichedProduct.isSynced) {
-      // Produit local : utiliser upsertProduct pour créer sur Appwrite
+      // Produit local : utiliser upsertProduct (qui est défensif) pour créer sur Appwrite
       console.log(
         `[Appwrite product] Produit ${productId} local, création batch avec upsert...`,
       );
@@ -884,7 +926,18 @@ export async function updateProductBatch(
       console.log(
         `[Appwrite product] Produit ${productId} déjà sync, update batch normal...`,
       );
-      return await updateProduct(productId, productUpdates);
+      try {
+        return await updateProduct(productId, productUpdates);
+      } catch (error) {
+        // ─── Solution B : fallback upsert si le produit n'existe pas (desync) ───
+        if (isNotFoundError(error)) {
+          console.warn(
+            `[Appwrite product] DESYNC: produit ${productId} introuvable dans Appwrite, fallback vers upsert`,
+          );
+          return await upsertProduct(productId, productUpdates, getEnrichedProduct);
+        }
+        throw error;
+      }
     }
   } catch (error) {
     console.error(
@@ -1715,8 +1768,21 @@ export async function mergeProductsAppwrite(
   };
 
   if (sourceProduct?.isSynced) {
-    await updateProduct(sourceId, sourceUpdates);
+    try {
+      await updateProduct(sourceId, sourceUpdates);
+    } catch (error) {
+      // ─── Solution B : fallback upsert si le produit n'existe pas (desync) ───
+      if (isNotFoundError(error)) {
+        console.warn(
+          `[mergeProductsAppwrite] DESYNC: produit source ${sourceId} introuvable dans Appwrite, fallback vers upsert`,
+        );
+        await upsertProduct(sourceId, sourceUpdates, () => sourceProduct);
+      } else {
+        throw error;
+      }
+    }
   } else if (sourceProduct) {
+    // upsertProduct est déjà défensif (Solution A)
     await upsertProduct(sourceId, sourceUpdates, () => sourceProduct);
   }
 }

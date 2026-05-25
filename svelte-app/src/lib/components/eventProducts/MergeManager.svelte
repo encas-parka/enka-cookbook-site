@@ -129,7 +129,7 @@
         </div>
         {#each mergedFrom as item (item.id)}
           <div class="flex items-center justify-between">
-            <span class="badge badge-soft badge-sm">
+            <span class="badge badge-soft">
               {item.name}
             </span>
             <button

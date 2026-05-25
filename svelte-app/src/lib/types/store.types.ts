@@ -157,10 +157,7 @@ export interface EnrichedProduct {
   store: string; // ← Brut JSON
   stockReel: string | null; // ← Brut JSON
   previousNames: string[] | null;
-  isMerged: boolean;
-  mergedFrom: string[] | null;
   mergeDate: string | null;
-  mergeReason: string | null;
   mergedInto: string | null;
   mergedProductNames: string[]; // ← Dérivé au runtime : noms des produits mergés vers ce produit
   mergedProductIds: string[]; // ← Dérivé au runtime : $id des produits mergés vers ce produit

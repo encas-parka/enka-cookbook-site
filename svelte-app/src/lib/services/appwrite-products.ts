@@ -217,10 +217,7 @@ function prepareProductRow(
     store: storeValue,
     stockReel: product.stockReel || null,
     previousNames: product.previousNames || null,
-    isMerged: product.isMerged || false,
-    mergedFrom: product.mergedFrom || null,
     mergeDate: product.mergeDate || null,
-    mergeReason: product.mergeReason || null,
     mergedInto: product.mergedInto || null,
     totalNeededOverride: product.totalNeededOverride || null,
     // Permissions Label (read + update)
@@ -797,10 +794,7 @@ export async function createManualProduct(
       updatedBy: getCurrentUserName(),
       // Champs par défaut
       stockReel: null,
-      isMerged: false,
-      mergedFrom: null,
       mergeDate: null,
-      mergeReason: null,
       mergedInto: null,
       totalNeededOverride: null,
       specs: JSON.stringify(specs), // ✅ Stockage des métadonnées manuelles

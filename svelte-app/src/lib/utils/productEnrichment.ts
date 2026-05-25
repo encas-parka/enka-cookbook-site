@@ -53,10 +53,7 @@ type ProductWithOptionalPurchases = Partial<Models.Row> & {
   store: string;
   stockReel: string | null;
   previousNames: string[] | null;
-  isMerged: boolean;
-  mergedFrom: string[] | null;
   mergeDate: string | null;
-  mergeReason: string | null;
   mergedInto: string | null;
   totalNeededOverride: string | null;
   updatedBy: string | null;
@@ -135,10 +132,7 @@ export function buildRawProductBase(
     store: product.store,
     stockReel: product.stockReel,
     previousNames: product.previousNames,
-    isMerged: product.isMerged,
-    mergedFrom: product.mergedFrom,
     mergeDate: product.mergeDate,
-    mergeReason: product.mergeReason,
     mergedInto: product.mergedInto,
     mergedProductNames: [],
     mergedProductIds: [],
@@ -579,10 +573,7 @@ function createEnrichedProductFromAggregation(
     totalNeededOverrideParsed: null,
     displayTotalOverride: "",
     previousNames: null,
-    isMerged: false,
-    mergedFrom: [],
     mergeDate: null,
-    mergeReason: null,
     mergedInto: null,
     specs: null,
     pF: aggregation.pF ?? false,

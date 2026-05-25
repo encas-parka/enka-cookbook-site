@@ -349,10 +349,7 @@ class ProductsStore {
         store: "" as any,
         stockReel: null,
         previousNames: null,
-        isMerged: false,
-        mergedFrom: null,
         mergeDate: null,
-        mergeReason: null,
         mergedInto: null,
         mergedProductNames: [],
         mergedProductIds: [],
@@ -620,7 +617,7 @@ class ProductsStore {
     surgel: Array.from(this.#productModels.values()).filter((p) => p.data.pS)
       .length,
     merged: Array.from(this.#productModels.values()).filter(
-      (p) => p.data.isMerged,
+      (p) => p.data.mergedInto !== null,
     ).length,
   }));
 

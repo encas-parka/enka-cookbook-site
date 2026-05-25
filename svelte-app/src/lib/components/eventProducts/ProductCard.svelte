@@ -47,7 +47,7 @@
   // Stores
   import { globalState, hoverHelp } from "$lib/stores/GlobalState.svelte";
   import { productsStore } from "$lib/stores/ProductsStore.svelte";
-  import { fade, slide } from "svelte/transition";
+  import { slide } from "svelte/transition";
 
   // Récupérer les icônes de statut depuis le parent pour éviter la duplication
   const statusIcons = {
@@ -90,8 +90,8 @@
 </script>
 
 <!-- Card du produit -->
-<div
-  out:fade
+  <div
+  
   class="card bg-base-100 overflow-x-clip {globalState.isMobile &&
     'border-base-300 border shadow'} {product.status === 'isSyncing'
     ? 'border-accent bg-accent/30 animate-pulse border-2'
@@ -114,9 +114,14 @@
       >
         <!-- Nom du produit & type icon -->
         <div
-          class="text-primary flex items-center gap-2 text-base font-semibold"
+          class="text-primary flex flex-wrap items-center gap-x-2 gap-y-1 text-base font-semibold"
         >
           <typeInfo.icon class="h-4 w-4 shrink-0" />{product.productName}
+          {#if product.mergedProductNames?.length}
+            <div class="text-base-content/40 text-xs font-normal">
+              inclut: {product.mergedProductNames.join(", ")}
+            </div>
+          {/if}
           {#if product.previousNames && product.previousNames.length > 0}
             <div class="text-base-content/60 text-sm font-normal">
               Ancien: {product.previousNames[0]}

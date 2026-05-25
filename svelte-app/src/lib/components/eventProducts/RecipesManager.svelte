@@ -8,8 +8,10 @@
     UtensilsCrossed,
     Utensils,
     Pin,
+    SquareArrowOutUpRight,
   } from "@lucide/svelte";
   import OverrideManager from "./OverrideManager.svelte";
+  import MergeManager from "./MergeManager.svelte";
   import type { ProductModalStateType } from "$lib/types/store.types.js";
   import {
     extractTime,
@@ -46,6 +48,9 @@
 <!-- Section Override Manager -->
 <OverrideManager {modalState} {isArchiveMode} />
 
+<!-- Section Merge Manager -->
+<MergeManager {modalState} {isArchiveMode} {onClose} />
+
 <div class="space-y-6">
   <div></div>
   <h3 class="flex items-center gap-2 text-lg font-semibold">
@@ -73,6 +78,7 @@
                 {#if recipe.id}
                   {@const recipeId = recipe.id}
                   {@const mealDate = recipe.dateTimeService || "undated"}
+                  {recipe.r}
                   <button
                     class="text-primary link link-hover text-base text-wrap"
                     onclick={async () => {
@@ -86,7 +92,7 @@
                         search: { recipe: recipeId, meal: mealDate },
                         scrollToTop: false,
                       });
-                    }}>{recipe.r}</button
+                    }}><SquareArrowOutUpRight class="size-4" /></button
                   >
                 {:else}
                   <span class="text-primary text-base text-wrap"

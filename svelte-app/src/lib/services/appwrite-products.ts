@@ -1698,6 +1698,47 @@ export async function loadOrphanPurchases(
 // =============================================================================
 // EXPORTS
 // =============================================================================
+// SERVICES MERGE / UNMERGE
+// =============================================================================
+
+/**
+ * Fusionne un produit source vers un produit cible dans Appwrite.
+ * Un seul update : le source reçoit mergedInto=targetId.
+ * Le target n'est PAS modifié — le reconciler dérive les merge info par scan.
+ */
+export async function mergeProductsAppwrite(
+  sourceId: string,
+  targetId: string,
+  sourceProduct: EnrichedProduct | null,
+): Promise<void> {
+  const sourceUpdates: ProductUpdate = {
+    mergedInto: targetId,
+    mergeDate: new Date().toISOString(),
+  };
+
+  if (sourceProduct?.isSynced) {
+    await updateProduct(sourceId, sourceUpdates);
+  } else if (sourceProduct) {
+    await upsertProduct(sourceId, sourceUpdates, () => sourceProduct);
+  }
+}
+
+/**
+ * Annule un merge : le produit source redevient visible.
+ * Un seul update : le source reçoit mergedInto=null.
+ */
+export async function unmergeProductAppwrite(
+  sourceId: string,
+): Promise<void> {
+  const sourceUpdates: ProductUpdate = {
+    mergedInto: null,
+    mergeDate: null,
+  };
+
+  await updateProduct(sourceId, sourceUpdates, false);
+}
+
+// =============================================================================
 
 export default {
   // Services main
@@ -1718,7 +1759,8 @@ export default {
   deletePurchase,
 
   // Utilitaires de merge
-  // mergeProductsWithPurchases,
+  mergeProductsAppwrite,
+  unmergeProductAppwrite,
   applyProductUpdates,
 
   // Utilitaires de parsing

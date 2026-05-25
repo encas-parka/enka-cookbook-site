@@ -6,6 +6,7 @@ export interface CsvExportProduct {
   formattedQuantities: string;
   formattedAcquiredQuantities: string;
   formattedMissingQuantities: string;
+  mergedProductNames?: string; // Noms des produits fusionnés, séparés par ", "
 }
 
 export interface CsvExportOptions {
@@ -30,7 +31,7 @@ export function exportProductsToCsv(options: CsvExportOptions): string {
 
   // Column headers
   lines.push(
-    "Produit;Type;Magasin;Responsable(s);Besoin;Acheté;Manque",
+    "Produit;Type;Magasin;Responsable(s);Besoin;Acheté;Manque;Fusionné",
   );
 
   for (const product of options.products) {
@@ -43,6 +44,7 @@ export function exportProductsToCsv(options: CsvExportOptions): string {
         escapeCsvCell(product.formattedQuantities || "-"),
         escapeCsvCell(product.formattedAcquiredQuantities || "-"),
         escapeCsvCell(product.formattedMissingQuantities || "-"),
+        escapeCsvCell(product.mergedProductNames || ""),
       ].join(";"),
     );
   }

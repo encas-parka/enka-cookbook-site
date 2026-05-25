@@ -12,6 +12,7 @@ export interface MarkdownExportProduct {
   formattedAcquiredQuantities: string;
   missingQuantities: NumericQuantity[];
   formattedMissingQuantities: string;
+  mergedProductNames?: string[]; // Noms des produits fusionnés vers ce produit
 }
 
 export interface MarkdownExportOptions {
@@ -63,7 +64,10 @@ export function exportProductsToMarkdown(options: MarkdownExportOptions): string
         const total = product.formattedQuantities || "-";
         const hasAcquired = product.acquiredQuantities.length > 0;
         const hasMissing = product.missingQuantities.length > 0;
-        let line = `- ${product.productName}: ${total}`;
+        const name = product.mergedProductNames?.length
+          ? `${product.productName} (inclut: ${product.mergedProductNames.join(", ")})`
+          : product.productName;
+        let line = `- ${name}: ${total}`;
         if (hasAcquired) {
           const acquired = product.formattedAcquiredQuantities || "-";
           line += ` | acquis ${acquired}`;

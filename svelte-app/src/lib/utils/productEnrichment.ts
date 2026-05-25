@@ -140,6 +140,8 @@ export function buildRawProductBase(
     mergeDate: product.mergeDate,
     mergeReason: product.mergeReason,
     mergedInto: product.mergedInto,
+    mergedProductNames: [],
+    mergedProductIds: [],
     totalNeededOverride: product.totalNeededOverride,
     updatedBy: product.updatedBy ?? null,
     purchases: product.purchases ?? [],
@@ -304,7 +306,7 @@ export async function createEnrichedProductsFromEvent(
  * - nbRecipes / totalAssiettes : recalculés
  * - productHugoUuid : garde le UUID Hugo court (priorité) si disponible
  */
-function mergeEnrichedProducts(target: EnrichedProduct, source: EnrichedProduct): void {
+export function mergeEnrichedProducts(target: EnrichedProduct, source: EnrichedProduct): void {
   // 1. Fusionner les byDate
   for (const [date, sourceEntry] of Object.entries(source.byDate)) {
     if (target.byDate[date]) {

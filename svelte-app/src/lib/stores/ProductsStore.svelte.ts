@@ -8,6 +8,7 @@ import type { Products, Purchases } from "../types/appwrite.d";
 import {
   matchesFilters,
   computeFuzzySearchMatches,
+  extractNameFromProductId,
   type FiltersState,
   type TemperatureFilterMode,
   hasConversions,
@@ -16,6 +17,7 @@ import {
   buildRawProductBase,
   applyNeedToBase,
   createEnrichedProductsFromEvent,
+  mergeEnrichedProducts,
 } from "../utils/productEnrichment";
 import {
   parseNeedRow,
@@ -41,6 +43,8 @@ import {
   updateProduct as updateProductAppwrite,
   updateProductBatch,
   batchUpdateProductsOptimized,
+  mergeProductsAppwrite,
+  unmergeProductAppwrite,
 } from "../services/appwrite-products";
 import type { GroupPurchaseBatchResult } from "../services/appwrite-transaction";
 
@@ -190,6 +194,23 @@ class ProductsStore {
     this.#orphanPurchases = orphanPurchases;
     this.#purchasesByProductCache = purchasesByProduct;
 
+    // ── 1b. Remapping virtuel des purchases des produits mergés ──
+    const mergeTargetIds = new Set<string>(); // IDs des targets de merge (pour forcer rebuild)
+    for (const [sourceId, rawProduct] of productsById) {
+      if (!rawProduct.mergedInto) continue;
+      const targetId = rawProduct.mergedInto;
+      mergeTargetIds.add(targetId);
+      if (!productsById.has(targetId) && !needsById.has(targetId)) {
+        console.warn(`[ProductsStore] Merge target "${targetId}" introuvable pour "${sourceId}"`);
+        continue;
+      }
+      const sourcePurchases = purchasesByProduct.get(sourceId);
+      if (!sourcePurchases?.length) continue;
+      const targetPurchases = purchasesByProduct.get(targetId) ?? [];
+      purchasesByProduct.set(targetId, [...targetPurchases, ...sourcePurchases]);
+      purchasesByProduct.delete(sourceId); // les purchases sont maintenant sous le target
+    }
+
     // ── 2. Identifier tous les IDs connus ───────────────────
     const allIds = new Set<string>();
     for (const id of productsById.keys()) allIds.add(id);
@@ -198,6 +219,9 @@ class ProductsStore {
     const staleIds = new Set(this.#productModels.keys());
 
     // ── 3. Merge + fingerprint + mise à jour ────────────────
+    // Les targets de merge sont TOUJOURS reconstruits (jamais skippés)
+    // pour garantir que mergedProductNames/Ids et byDate sont calculés à partir
+    // de données fraîches, sans accumulation sur les passes multiples du reconciler.
     for (const id of allIds) {
       staleIds.delete(id);
 
@@ -214,8 +238,9 @@ class ProductsStore {
 
       const existing = this.#productModels.get(id);
 
-      // Skip si inchangé
-      if (existing && existing._version === version) continue;
+      // Skip si inchangé, SAUF pour les targets de merge (toujours reconstruits)
+      const isMergeTarget = mergeTargetIds.has(id);
+      if (existing && existing._version === version && !isMergeTarget) continue;
 
       // Merge des 3 sources → EnrichedProduct
       const need = needRow ? parseNeedRow(needRow) : null;
@@ -233,6 +258,27 @@ class ProductsStore {
       }
     }
 
+    // ── 3b. Agréger les produits mergés dans leurs targets ─────
+    const mergedSourceIds = new Set<string>();
+    for (const [id, model] of this.#productModels) {
+      if (!model.data.mergedInto) continue;
+      const targetId = model.data.mergedInto;
+      const targetModel = this.#productModels.get(targetId);
+      if (!targetModel) {
+        console.warn(`[ProductsStore] Merge target "${targetId}" non trouvé pour "${id}", le source reste visible`);
+        continue;
+      }
+      // Agréger les données du source dans le target
+      mergeEnrichedProducts(targetModel.data, model.data);
+      targetModel.data.mergedProductNames.push(model.data.productName);
+      targetModel.data.mergedProductIds.push(model.data.$id);
+      mergedSourceIds.add(id);
+    }
+    // Supprimer les modèles sources mergés
+    for (const id of mergedSourceIds) {
+      this.#productModels.delete(id);
+    }
+
     // ── 4. Supprimer les modèles obsolètes ──────────────────
     for (const id of staleIds) {
       this.#productModels.delete(id);
@@ -243,10 +289,14 @@ class ProductsStore {
     for (const [productId, purchs] of purchasesByProduct) {
       if (this.#productModels.has(productId)) continue;
       if (purchs.length === 0) continue;
+      // Guard anti-fuite : ne pas afficher les purchases des produits mergés
+      // (leurs purchases ont été remappées vers le target à l'étape 1b,
+      //  mais on garde ce guard comme filet de sécurité)
+      if (mergedSourceIds.has(productId)) continue;
       const cached = this.#productNameCache.get(productId);
       orphaned.push({
         productId,
-        productName: cached?.name ?? productId.split("_").slice(0, -1).join("_").replace(/-/g, " ").replace(/\b\w/g, c => c.toUpperCase()),
+        productName: cached?.name ?? extractNameFromProductId(productId),
         productType: cached?.type ?? "",
         purchases: purchs,
       });
@@ -304,6 +354,8 @@ class ProductsStore {
         mergeDate: null,
         mergeReason: null,
         mergedInto: null,
+        mergedProductNames: [],
+        mergedProductIds: [],
         totalNeededOverride: null,
         updatedBy: null,
         purchases,
@@ -899,6 +951,7 @@ class ProductsStore {
           formattedAcquiredQuantities: m.stats.formattedAcquiredQuantities,
           missingQuantities: m.stats.missingQuantities,
           formattedMissingQuantities: m.stats.formattedMissingQuantities,
+          mergedProductNames: m.data.mergedProductNames.length > 0 ? m.data.mergedProductNames : undefined,
         })),
       }),
     );
@@ -926,6 +979,7 @@ class ProductsStore {
         formattedQuantities: m.stats.formattedQuantities,
         formattedAcquiredQuantities: m.stats.formattedAcquiredQuantities,
         formattedMissingQuantities: m.stats.formattedMissingQuantities,
+        mergedProductNames: m.data.mergedProductNames.length > 0 ? m.data.mergedProductNames.join(", ") : undefined,
       })),
     });
   }
@@ -1113,6 +1167,96 @@ class ProductsStore {
 
   getProductModelById(productId: string): ProductModel | null {
     return this.#productModels.get(productId) ?? null;
+  }
+
+  // ===========================================================================
+  // MERGE / UNMERGE
+  // ===========================================================================
+
+  /**
+   * Fusionne un produit source vers un produit cible.
+   * Le source disparaît de la liste, ses données sont agrégées dans le target.
+   * Un seul appel Appwrite (source uniquement) → un seul événement realtime.
+   */
+  async mergeProducts(sourceId: string, targetId: string): Promise<void> {
+    // Validations
+    if (sourceId === targetId) {
+      toastService.error("Impossible de fusionner un produit avec lui-même");
+      return;
+    }
+    const sourceModel = this.#productModels.get(sourceId);
+    const targetModel = this.#productModels.get(targetId);
+    if (!sourceModel || !targetModel) {
+      toastService.error("Produit source ou cible introuvable");
+      return;
+    }
+    if (sourceModel.data.mergedInto) {
+      toastService.error("Ce produit est déjà fusionné");
+      return;
+    }
+    if (targetModel.data.mergedInto) {
+      toastService.error("Impossible de fusionner vers un produit déjà fusionné");
+      return;
+    }
+
+    await toastService.track(
+      mergeProductsAppwrite(sourceId, targetId, sourceModel.data),
+      {
+        loading: "Fusion en cours…",
+        success: `"${sourceModel.data.productName}" fusionné vers "${targetModel.data.productName}"`,
+        error: "Erreur lors de la fusion",
+      },
+    );
+  }
+
+  /**
+   * Annule un merge : le produit source redevient visible.
+   * Un seul appel Appwrite (source uniquement), puis invalidation du target
+   * pour forcer son rebuild au prochain passage du reconciler.
+   */
+  async unmergeProduct(sourceId: string, targetId: string): Promise<void> {
+    await toastService.track(
+      unmergeProductAppwrite(sourceId),
+      {
+        loading: "Annulation de la fusion…",
+        success: `Fusion annulée — le produit redevient visible`,
+        error: "Erreur lors de l'annulation de la fusion",
+      },
+    );
+    // Le target n'est pas modifié dans Appwrite, son $updatedAt n'a pas changé.
+    // On le supprime de #productModels pour forcer son rebuild (sans mergedProductNames/Ids).
+    this.#productModels.delete(targetId);
+  }
+
+  /**
+   * Recherche de produits (utilisé par le MergeManager UI).
+   * Exclut le produit courant et les produits déjà mergés (mergedInto non null).
+   */
+  searchProducts(query: string, currentProductId: string): EnrichedProduct[] {
+    if (!query.trim()) return [];
+
+    const current = this.#productModels.get(currentProductId)?.data;
+    const excludeIds = new Set<string>([currentProductId]);
+    // Exclure les produits déjà mergés (source ou target)
+    for (const [, model] of this.#productModels) {
+      if (model.data.mergedInto) excludeIds.add(model.data.$id);
+    }
+    // Exclure les produits déjà mergés VERS le courant
+    if (current?.mergedProductIds) {
+      for (const id of current.mergedProductIds) excludeIds.add(id);
+    }
+
+    const candidates = [...this.#productModels.values()]
+      .filter((m) => !excludeIds.has(m.data.$id))
+      .map((m) => m.data);
+
+    // Recherche fuzzy simple (indexOf + lowercase, suffisante pour ce cas)
+    const q = query.toLowerCase().trim();
+    return candidates.filter(
+      (p) =>
+        p.productName.toLowerCase().includes(q) ||
+        p.productType.toLowerCase().includes(q),
+    );
   }
 
   hasConversions(productId: string): boolean {

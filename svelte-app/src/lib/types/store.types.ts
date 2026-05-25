@@ -162,6 +162,8 @@ export interface EnrichedProduct {
   mergeDate: string | null;
   mergeReason: string | null;
   mergedInto: string | null;
+  mergedProductNames: string[]; // ← Dérivé au runtime : noms des produits mergés vers ce produit
+  mergedProductIds: string[]; // ← Dérivé au runtime : $id des produits mergés vers ce produit
   totalNeededOverride: string | null; // ← Brut JSON
   updatedBy: string | null; // ← Dernier utilisateur ayant modifié (Appwrite)
 

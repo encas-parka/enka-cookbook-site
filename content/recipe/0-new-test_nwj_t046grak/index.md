@@ -1,6 +1,6 @@
 ---
 title: 0 new test
-date: '2026-05-25T12:14:39.051Z'
+date: '2026-05-25T12:15:20.663Z'
 draft: true
 typeR: plat
 categories:
@@ -20,11 +20,11 @@ saison: []
 id: 0-new-test_nwj_t046grak
 materiel: []
 ingredients:
-  - uuid: nev77b
-    name: Orange confite
-    originalQuantity: 100
+  - uuid: mwrts8
+    name: Mandarine
+    originalQuantity: 0
     originalUnit: gr.
-    normalizedQuantity: 100
+    normalizedQuantity: 0
     normalizedUnit: gr.
     comment: ''
     allergens: []
@@ -40,7 +40,7 @@ permissionWrite:
   - 693200b700222efe46a2
 auteur: qaldek
 createdAt: '2026-04-14T10:14:37.538+00:00'
-updatedAt: '2026-05-25T12:14:38.409+00:00'
+updatedAt: '2026-05-25T12:15:20.302+00:00'
 createdBy: 693200b700222efe46a2
 teams: []
 status: public

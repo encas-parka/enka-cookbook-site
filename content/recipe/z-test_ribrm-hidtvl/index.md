@@ -1,6 +1,6 @@
 ---
 title: Z-test
-date: '2026-05-25T09:36:57.942Z'
+date: '2026-05-25T09:44:32.108Z'
 draft: true
 typeR: entree
 categories: []
@@ -21,9 +21,9 @@ materiel: []
 ingredients:
   - uuid: u33083
     name: Tahin
-    originalQuantity: 120
+    originalQuantity: 200
     originalUnit: gr.
-    normalizedQuantity: 120
+    normalizedQuantity: 200
     normalizedUnit: gr.
     comment: ''
     allergens:
@@ -46,7 +46,7 @@ permissionWrite:
   - 693200b700222efe46a2
 auteur: qaldek
 createdAt: '2026-05-21T10:12:03.895+00:00'
-updatedAt: '2026-05-25T09:36:53.484+00:00'
+updatedAt: '2026-05-25T09:44:31.665+00:00'
 createdBy: 693200b700222efe46a2
 teams: []
 status: public

@@ -1,12 +1,11 @@
 ---
 title: 0 new test
-date: '2026-05-25T12:15:20.663Z'
+date: '2026-05-25T12:39:09.227Z'
 draft: true
 typeR: plat
 categories:
   - Bouchées salées
 regime:
-  - vegan
   - sans-gluten
   - sans-lactose
 plate: 100
@@ -22,13 +21,23 @@ materiel: []
 ingredients:
   - uuid: mwrts8
     name: Mandarine
-    originalQuantity: 0
-    originalUnit: gr.
-    normalizedQuantity: 0
-    normalizedUnit: gr.
+    originalQuantity: 1
+    originalUnit: au goût
+    normalizedQuantity: 1
+    normalizedUnit: au goût
     comment: ''
     allergens: []
     type: legumes
+  - uuid: mz93p4
+    name: Agneau
+    originalQuantity: 1
+    originalUnit: au goût
+    normalizedQuantity: 1
+    normalizedUnit: au goût
+    comment: ''
+    allergens:
+      - Viande
+    type: animaux
 preparation: |-
   test
 
@@ -40,7 +49,7 @@ permissionWrite:
   - 693200b700222efe46a2
 auteur: qaldek
 createdAt: '2026-04-14T10:14:37.538+00:00'
-updatedAt: '2026-05-25T12:15:20.302+00:00'
+updatedAt: '2026-05-25T12:39:06.278+00:00'
 createdBy: 693200b700222efe46a2
 teams: []
 status: public

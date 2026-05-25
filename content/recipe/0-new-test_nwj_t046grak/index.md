@@ -1,6 +1,6 @@
 ---
 title: 0 new test
-date: '2026-05-25T11:49:40.632Z'
+date: '2026-05-25T12:14:39.051Z'
 draft: true
 typeR: plat
 categories:
@@ -20,11 +20,11 @@ saison: []
 id: 0-new-test_nwj_t046grak
 materiel: []
 ingredients:
-  - uuid: xo0ibs
-    name: Abricot
-    originalQuantity: 300
+  - uuid: nev77b
+    name: Orange confite
+    originalQuantity: 100
     originalUnit: gr.
-    normalizedQuantity: 300
+    normalizedQuantity: 100
     normalizedUnit: gr.
     comment: ''
     allergens: []
@@ -40,7 +40,7 @@ permissionWrite:
   - 693200b700222efe46a2
 auteur: qaldek
 createdAt: '2026-04-14T10:14:37.538+00:00'
-updatedAt: '2026-05-25T11:49:40.118+00:00'
+updatedAt: '2026-05-25T12:14:38.409+00:00'
 createdBy: 693200b700222efe46a2
 teams: []
 status: public

@@ -1,6 +1,6 @@
 ---
 title: Z-test
-date: '2026-05-25T10:31:38.777Z'
+date: '2026-05-25T10:33:02.152Z'
 draft: true
 typeR: entree
 categories: []
@@ -40,9 +40,9 @@ ingredients:
     type: sucres
   - uuid: yh2uod
     name: Orange
-    originalQuantity: 1
+    originalQuantity: 2
     originalUnit: kg
-    normalizedQuantity: 1000
+    normalizedQuantity: 2000
     normalizedUnit: gr.
     comment: ''
     allergens: []
@@ -55,7 +55,7 @@ permissionWrite:
   - 693200b700222efe46a2
 auteur: qaldek
 createdAt: '2026-05-21T10:12:03.895+00:00'
-updatedAt: '2026-05-25T10:31:38.532+00:00'
+updatedAt: '2026-05-25T10:33:01.860+00:00'
 createdBy: 693200b700222efe46a2
 teams: []
 status: public

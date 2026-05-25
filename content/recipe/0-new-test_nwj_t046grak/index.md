@@ -1,6 +1,6 @@
 ---
 title: 0 new test
-date: '2026-05-25T10:42:24.721Z'
+date: '2026-05-25T11:36:45.703Z'
 draft: true
 typeR: plat
 categories:
@@ -20,16 +20,19 @@ saison: []
 id: 0-new-test_nwj_t046grak
 materiel: []
 ingredients:
-  - uuid: t74e8y
-    name: Abricot sec
-    originalQuantity: 20
+  - uuid: xo0ibs
+    name: Abricot
+    originalQuantity: 300
     originalUnit: gr.
-    normalizedQuantity: 20
+    normalizedQuantity: 300
     normalizedUnit: gr.
     comment: ''
     allergens: []
-    type: sec
-preparation: test
+    type: legumes
+preparation: |-
+  test
+
+  Change abricot sec → abricot. Orphaned ?
 prepAlt: []
 astuces: []
 preparation24h: null
@@ -37,7 +40,7 @@ permissionWrite:
   - 693200b700222efe46a2
 auteur: qaldek
 createdAt: '2026-04-14T10:14:37.538+00:00'
-updatedAt: '2026-05-25T10:42:24.403+00:00'
+updatedAt: '2026-05-25T11:36:44.804+00:00'
 createdBy: 693200b700222efe46a2
 teams: []
 status: public

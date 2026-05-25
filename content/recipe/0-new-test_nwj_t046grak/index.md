@@ -1,6 +1,6 @@
 ---
 title: 0 new test
-date: '2026-05-25T11:38:16.745Z'
+date: '2026-05-25T11:49:40.632Z'
 draft: true
 typeR: plat
 categories:
@@ -29,15 +29,6 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
-  - uuid: ibtbnq
-    name: Tomate
-    originalQuantity: 100
-    originalUnit: gr.
-    normalizedQuantity: 100
-    normalizedUnit: gr.
-    comment: ''
-    allergens: []
-    type: legumes
 preparation: |-
   test
 
@@ -49,7 +40,7 @@ permissionWrite:
   - 693200b700222efe46a2
 auteur: qaldek
 createdAt: '2026-04-14T10:14:37.538+00:00'
-updatedAt: '2026-05-25T11:38:16.388+00:00'
+updatedAt: '2026-05-25T11:49:40.118+00:00'
 createdBy: 693200b700222efe46a2
 teams: []
 status: public

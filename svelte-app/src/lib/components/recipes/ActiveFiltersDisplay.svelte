@@ -86,12 +86,8 @@
     {/if}
     <!-- Recherche textuelle -->
     {#if searchQuery.length >= 2}
-      <div>
-        <span class="text-base-content/60 italic"
-          >contient (dans son titre/auteur·ice...) :
-        </span>
-        <span class="font-bold">{searchQuery}</span>
-      </div>
+      <span class="text-base-content/60 italic">résultat pour : </span>
+      <span class="font-bold">{searchQuery}</span>
     {:else if hasActiveFilters}
       <!-- Filtres actifs -->
       <div class="flex flex-wrap gap-2">

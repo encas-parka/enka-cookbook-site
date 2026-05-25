@@ -237,25 +237,17 @@ export function formatStockResult(result: NumericQuantity[]): string {
  */
 /**
  * Computes the set of product IDs matching a fuzzy text query.
- * Should be called once before iterating over products.
+ * Accepts a pre-built searchable array (cached by the store) to avoid
+ * O(P×R) flatMap on every keystroke.
  */
 export function computeFuzzySearchMatches(
-  products: EnrichedProduct[],
+  searchable: { $id: string; productName: string; recipeNames: string }[],
   query: string,
 ): Set<string> {
-  if (!query.trim()) return new Set();
-  // Cherche à la fois dans le nom du produit et dans les noms des recettes associées
-  const searchable = products.map((p) => ({
-    $id: p.$id,
-    productName: p.productName,
-    recipeNames: Object.values(p.byDate ?? {})
-      .flatMap((entry) => entry.recipes.map((r) => r.r))
-      .filter(Boolean)
-      .join(" "),
-  }));
+  if (!query.trim() || !searchable.length) return new Set();
   const results = fuzzysort.go(query.trim(), searchable, {
     keys: ["productName", "recipeNames"],
-    threshold: 0.3,
+    threshold: 0.6,
   });
   return new Set(results.map((r) => r.obj.$id));
 }
@@ -493,4 +485,3 @@ export function extractNameFromProductId(productId: string): string {
     .replace(/-/g, " ")
     .replace(/\b\w/g, (c) => c.toUpperCase());
 }
-

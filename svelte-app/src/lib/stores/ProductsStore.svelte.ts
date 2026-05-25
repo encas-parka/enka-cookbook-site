@@ -270,8 +270,7 @@ class ProductsStore {
       }
       // Agréger les données du source dans le target
       mergeEnrichedProducts(targetModel.data, model.data);
-      targetModel.data.mergedProductNames.push(model.data.productName);
-      targetModel.data.mergedProductIds.push(model.data.$id);
+      targetModel.data.mergedFrom.push({ id: model.data.$id, name: model.data.productName });
       mergedSourceIds.add(id);
     }
     // Supprimer les modèles sources mergés
@@ -303,7 +302,8 @@ class ProductsStore {
     }
     this.#orphanedPurchasesInfo = orphaned;
 
-    // ── 5. Reconstruire les groupes ─────────────────────────
+    // ── 5. Reconstruire le cache fuzzy + les groupes ──────────
+    this.#rebuildFuzzyCache();
     this.#rebuildGroups();
   }
 
@@ -312,6 +312,8 @@ class ProductsStore {
   #purchasesByProductCache = new Map<string, Purchases[]>();
   #productNameCache = new Map<string, { name: string; type: string }>();
   #orphanedPurchasesInfo = $state<Array<{ productId: string; productName: string; productType: string; purchases: Purchases[] }>>([]);
+  // Cache pour la recherche fuzzy — invalidé quand #productModels change
+  #fuzzySearchable: { $id: string; productName: string; recipeNames: string }[] = [];
 
   /**
    * Fusionne 0–3 sources en un seul EnrichedProduct.
@@ -351,8 +353,7 @@ class ProductsStore {
         previousNames: null,
         mergeDate: null,
         mergedInto: null,
-        mergedProductNames: [],
-        mergedProductIds: [],
+        mergedFrom: [],
         totalNeededOverride: null,
         updatedBy: null,
         purchases,
@@ -382,6 +383,23 @@ class ProductsStore {
    * Reconstruit #groups à partir de #productModels + #filters + dateRange.
    * Appelé par #onDataChange, les setters de filtres, et le date effect.
    */
+
+  /**
+   * Reconstruit le cache searchable pour la recherche fuzzy.
+   * Appelé uniquement quand #productModels change (dans #onDataChange),
+   * PAS à chaque frappe clavier.
+   */
+  #rebuildFuzzyCache() {
+    this.#fuzzySearchable = Array.from(this.#productModels.values()).map((m) => ({
+      $id: m.data.$id,
+      productName: m.data.productName,
+      recipeNames: Object.values(m.data.byDate ?? {})
+        .flatMap((entry) => entry.recipes.map((r) => r.r))
+        .filter(Boolean)
+        .join(" "),
+    }));
+  }
+
   #rebuildGroups() {
     if (!this.dateRange.start || !this.dateRange.end) {
       this.#groups = {};
@@ -390,12 +408,9 @@ class ProductsStore {
 
     const groups: Record<string, ProductModel[]> = {};
 
-    // Pre-compute fuzzy search matches once for all products
+    // Recherche fuzzy sur le cache pré-construit (pas de O(P×R) à chaque frappe)
     const fuzzyMatchedIds = this.#filters.searchQuery.trim()
-      ? computeFuzzySearchMatches(
-          Array.from(this.#productModels.values()).map(m => m.data),
-          this.#filters.searchQuery,
-        )
+      ? computeFuzzySearchMatches(this.#fuzzySearchable, this.#filters.searchQuery)
       : undefined;
 
     for (const [id, model] of this.#productModels) {
@@ -948,7 +963,7 @@ class ProductsStore {
           formattedAcquiredQuantities: m.stats.formattedAcquiredQuantities,
           missingQuantities: m.stats.missingQuantities,
           formattedMissingQuantities: m.stats.formattedMissingQuantities,
-          mergedProductNames: m.data.mergedProductNames.length > 0 ? m.data.mergedProductNames : undefined,
+          mergedProductNames: m.data.mergedFrom.length > 0 ? m.data.mergedFrom.map(f => f.name) : undefined,
         })),
       }),
     );
@@ -976,7 +991,7 @@ class ProductsStore {
         formattedQuantities: m.stats.formattedQuantities,
         formattedAcquiredQuantities: m.stats.formattedAcquiredQuantities,
         formattedMissingQuantities: m.stats.formattedMissingQuantities,
-        mergedProductNames: m.data.mergedProductNames.length > 0 ? m.data.mergedProductNames.join(", ") : undefined,
+        mergedProductNames: m.data.mergedFrom.length > 0 ? m.data.mergedFrom.map(f => f.name).join(", ") : undefined,
       })),
     });
   }
@@ -1212,6 +1227,11 @@ class ProductsStore {
    * pour forcer son rebuild au prochain passage du reconciler.
    */
   async unmergeProduct(sourceId: string, targetId: string): Promise<void> {
+    const sourceModel = this.#productModels.get(sourceId);
+    if (!sourceModel || sourceModel.data.mergedInto !== targetId) {
+      toastService.error("Impossible d'annuler la fusion : produit source invalide");
+      return;
+    }
     await toastService.track(
       unmergeProductAppwrite(sourceId),
       {
@@ -1239,8 +1259,8 @@ class ProductsStore {
       if (model.data.mergedInto) excludeIds.add(model.data.$id);
     }
     // Exclure les produits déjà mergés VERS le courant
-    if (current?.mergedProductIds) {
-      for (const id of current.mergedProductIds) excludeIds.add(id);
+    if (current?.mergedFrom) {
+      for (const m of current.mergedFrom) excludeIds.add(m.id);
     }
 
     const candidates = [...this.#productModels.values()]
@@ -1485,6 +1505,7 @@ class ProductsStore {
     this.#purchasesByProductCache = new Map();
     this.#productNameCache.clear();
     this.#orphanedPurchasesInfo = [];
+    this.#fuzzySearchable = [];
 
     // Reset metadata
     this.#currentMainId = null;

@@ -130,6 +130,12 @@ export interface TotalNeededOverrideData {
 }
 
 // ✅ EnrichedProduct = Données BRUTES Appwrite + Hugo statiques + Calculées
+/** Info about a product merged INTO this product (runtime-derived, not persisted) */
+export interface MergedFromInfo {
+  id: string;
+  name: string;
+}
+
 export interface EnrichedProduct {
   // MÉTADONNÉES APPWRITE (brutes)
   $id: string;
@@ -159,8 +165,7 @@ export interface EnrichedProduct {
   previousNames: string[] | null;
   mergeDate: string | null;
   mergedInto: string | null;
-  mergedProductNames: string[]; // ← Dérivé au runtime : noms des produits mergés vers ce produit
-  mergedProductIds: string[]; // ← Dérivé au runtime : $id des produits mergés vers ce produit
+  mergedFrom: MergedFromInfo[]; // ← Dérivé au runtime : produits mergés vers ce produit
   totalNeededOverride: string | null; // ← Brut JSON
   updatedBy: string | null; // ← Dernier utilisateur ayant modifié (Appwrite)
 

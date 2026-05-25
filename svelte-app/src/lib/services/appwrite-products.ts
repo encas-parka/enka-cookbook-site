@@ -1705,6 +1705,10 @@ export async function mergeProductsAppwrite(
   targetId: string,
   sourceProduct: EnrichedProduct | null,
 ): Promise<void> {
+  if (!sourceProduct) {
+    console.warn(`[mergeProductsAppwrite] sourceProduct ${sourceId} est null, skip`);
+    return;
+  }
   const sourceUpdates: ProductUpdate = {
     mergedInto: targetId,
     mergeDate: new Date().toISOString(),

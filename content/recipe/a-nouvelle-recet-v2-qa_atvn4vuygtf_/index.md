@@ -1,6 +1,6 @@
 ---
 title: A nouvelle recette locale de qaldek
-date: '2026-05-25T10:43:03.915Z'
+date: '2026-05-25T12:50:51.745Z'
 draft: true
 typeR: dessert
 categories:
@@ -32,19 +32,19 @@ ingredients:
     type: legumes
   - uuid: S9zUJqcHOP05D27C6KgWB
     name: compote de pomme
-    originalQuantity: 0
-    originalUnit: gr.
-    normalizedQuantity: 0
-    normalizedUnit: gr.
+    originalQuantity: 1
+    originalUnit: au goût
+    normalizedQuantity: 1
+    normalizedUnit: au goût
     comment: ''
     allergens: []
     type: sucres
   - uuid: IqwcWrJ2Hcli3PZTaeONJ
     name: Garam Masala
-    originalQuantity: 0
-    originalUnit: gr.
-    normalizedQuantity: 0
-    normalizedUnit: gr.
+    originalQuantity: 1
+    originalUnit: au goût
+    normalizedQuantity: 1
+    normalizedUnit: au goût
     comment: ''
     allergens: []
     type: epices
@@ -78,7 +78,7 @@ permissionWrite:
   - 68975cbc002469058f8b
 auteur: qaldek
 createdAt: '2026-04-09T03:12:41.063+00:00'
-updatedAt: '2026-05-25T10:43:03.618+00:00'
+updatedAt: '2026-05-25T12:50:51.316+00:00'
 createdBy: 693200b700222efe46a2
 teams: []
 status: public

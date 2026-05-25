@@ -1,6 +1,6 @@
 ---
 title: 0 new test
-date: '2026-05-25T10:42:06.534Z'
+date: '2026-05-25T10:42:24.721Z'
 draft: true
 typeR: plat
 categories:
@@ -22,9 +22,9 @@ materiel: []
 ingredients:
   - uuid: t74e8y
     name: Abricot sec
-    originalQuantity: 10
+    originalQuantity: 20
     originalUnit: gr.
-    normalizedQuantity: 10
+    normalizedQuantity: 20
     normalizedUnit: gr.
     comment: ''
     allergens: []
@@ -37,7 +37,7 @@ permissionWrite:
   - 693200b700222efe46a2
 auteur: qaldek
 createdAt: '2026-04-14T10:14:37.538+00:00'
-updatedAt: '2026-05-25T10:42:03.822+00:00'
+updatedAt: '2026-05-25T10:42:24.403+00:00'
 createdBy: 693200b700222efe46a2
 teams: []
 status: public

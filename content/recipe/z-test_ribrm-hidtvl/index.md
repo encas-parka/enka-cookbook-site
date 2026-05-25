@@ -1,6 +1,6 @@
 ---
 title: Z-test
-date: '2026-05-25T10:33:02.152Z'
+date: '2026-05-25T10:37:04.994Z'
 draft: true
 typeR: entree
 categories: []
@@ -21,28 +21,28 @@ materiel: []
 ingredients:
   - uuid: u33083
     name: Tahin
-    originalQuantity: 300
+    originalQuantity: 400
     originalUnit: gr.
-    normalizedQuantity: 300
+    normalizedQuantity: 400
     normalizedUnit: gr.
     comment: ''
     allergens:
       - Sésame
     type: autres
-  - uuid: e4mjd1
-    name: Jus de citron
-    originalQuantity: 3
-    originalUnit: l.
-    normalizedQuantity: 3000
-    normalizedUnit: ml
-    comment: ''
-    allergens: []
-    type: sucres
   - uuid: yh2uod
     name: Orange
     originalQuantity: 2
     originalUnit: kg
     normalizedQuantity: 2000
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: b83ol6
+    name: Poire
+    originalQuantity: 1
+    originalUnit: kg
+    normalizedQuantity: 1000
     normalizedUnit: gr.
     comment: ''
     allergens: []
@@ -55,7 +55,7 @@ permissionWrite:
   - 693200b700222efe46a2
 auteur: qaldek
 createdAt: '2026-05-21T10:12:03.895+00:00'
-updatedAt: '2026-05-25T10:33:01.860+00:00'
+updatedAt: '2026-05-25T10:37:04.668+00:00'
 createdBy: 693200b700222efe46a2
 teams: []
 status: public

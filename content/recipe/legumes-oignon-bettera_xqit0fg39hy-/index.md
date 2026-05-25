@@ -1,6 +1,6 @@
 ---
 title: Légumes oignon betterave poivron
-date: '2026-05-25T20:42:57.563Z'
+date: '2026-05-25T21:11:17.550Z'
 draft: false
 typeR: plat
 categories:
@@ -9,7 +9,7 @@ regime:
   - vegan
   - sans-gluten
   - sans-lactose
-plate: 15
+plate: 12
 quantite_desc: null
 check: true
 cuisson: true
@@ -92,11 +92,11 @@ astuces: []
 preparation24h: null
 permissionWrite:
   - 6a021d44e7881f37bda3
-auteur: null
+auteur: mar
 createdAt: '2026-05-25T20:42:56.374+00:00'
-updatedAt: '2026-05-25T20:42:56.374+00:00'
+updatedAt: '2026-05-25T21:11:16.295+00:00'
 createdBy: 6a021d44e7881f37bda3
-teams: null
+teams: []
 status: public
 rootRecipeId: null
 versionLabel: null

@@ -1,8 +1,10 @@
 {
   "name": "enka-cookbook-site",
-  "private": true,
   "version": "1.0.0",
-  "type": "module",
+  "devDependencies": {
+    "concurrently": "^9.2.1"
+  },
+  "private": true,
   "scripts": {
     "dev": "hugo server -D",
     "dev:watch": "concurrently \"cd svelte-app && bun run dev:watch\" \"hugo serve --disableFastRender --forceSyncStatic\" --names \"VITE,HUGO\" --prefix-colors \"cyan,magenta\"",
@@ -10,7 +12,5 @@
     "build:site": "hugo",
     "build": "npm run build:app && npm run build:site"
   },
-  "devDependencies": {
-    "concurrently": "^9.2.1"
-  }
+  "type": "module"
 }

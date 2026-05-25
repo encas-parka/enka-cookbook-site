@@ -77,3 +77,17 @@ node update-recipe-allergens.js [--dry-run] [--yes]
 - Après avoir mis à jour `ingredients.json` (ajout/modification d'allergènes)
 - Quand des ingrédients ont été mal renseignés initialement
 - Pour synchroniser toutes les recettes avec les données actuelles d'ingrédients
+
+### fix-appwrite-uuids/
+
+Corrige les UUIDs d'ingrédients dans les recettes Appwrite qui ont été créées via l'UI (UUIDs 21 chars au lieu des UUIDs Hugo 6 chars). Workflow en 3 étapes : audit → plan → application.
+
+```bash
+bun run scripts_dev/fix-appwrite-uuids/audit.ts          # Identifier les UUIDs divergents
+bun run scripts_dev/fix-appwrite-uuids/generate-plan.ts  # Générer le plan (dry run)
+bun run scripts_dev/fix-appwrite-uuids/apply.ts          # Appliquer les corrections
+```
+
+**Prérequis :** `appwrite login` dans le dossier `appwrite/`.
+
+→ Voir [`fix-appwrite-uuids/README.md`](fix-appwrite-uuids/README.md) pour la documentation complète.

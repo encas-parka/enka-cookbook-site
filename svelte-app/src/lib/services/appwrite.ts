@@ -31,10 +31,14 @@ const isDevLocal =
     window.location.hostname.includes(".enka-cookbook-site.pages.dev")) ||
   import.meta.env.VITE_APP_ENV === "dev"; //#DEV Pour les deployement de branche de dev, si on veut rester sur ec-dev. : + window.location.hostname.includes(".enka-cookbook-site.pages.dev") ||
 
+const AW_DEV_PROJECT_ID = "697a1fcf0005e3703e25";
+const AW_PROD_PROJECT_ID = "696b7acb0037bde79e3f";
+
 const APPWRITE_CONFIG = {
   endpoint: "https://aw.oupla.net/v1",
   // Utilisation du projet de développement en local ou branche de dev Cloudflare Pages
-  projectId: isDevLocal ? "697a1fcf0005e3703e25" : "696b7acb0037bde79e3f",
+  projectId: isDevLocal ? AW_DEV_PROJECT_ID : AW_PROD_PROJECT_ID,
+  // projectId: AW_PROD_PROJECT_ID, // for test with resistance; TODO comment before push !
   databaseId: "689d15b10003a5a13636",
   functions: {
     batchUpdate: "68f00487000c624533a3",

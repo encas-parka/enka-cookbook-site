@@ -129,6 +129,12 @@
       observer.observe(groupEl);
       activeObservers.push(observer);
     });
+
+    // Cleanup au démontage du composant
+    return () => {
+      activeObservers.forEach((o) => o.disconnect());
+      activeObservers = [];
+    };
   });
 
   // Lazy loading : charger le groupe suivant quand la sentinelle est visible

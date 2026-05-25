@@ -1,6 +1,6 @@
 ---
-title: Chutney menthe coriandre amande ndc
-date: '2026-05-25T20:29:05.240Z'
+title: Pesto menthe coriandre amande ndc
+date: '2026-05-25T21:09:36.798Z'
 draft: true
 typeR: plat
 categories:
@@ -15,7 +15,7 @@ check: true
 cuisson: false
 serveHot: false
 description: null
-region: Inde
+region: null
 saison:
   - printemps
   - ete
@@ -24,9 +24,9 @@ materiel: []
 ingredients:
   - uuid: e4mjd1
     name: Jus de citron
-    originalQuantity: 300
+    originalQuantity: 150
     originalUnit: gr.
-    normalizedQuantity: 300
+    normalizedQuantity: 150
     normalizedUnit: gr.
     comment: ''
     allergens: []
@@ -162,9 +162,9 @@ permissionWrite:
   - 6a021d44e7881f37bda3
 auteur: mar
 createdAt: '2026-05-25T20:29:03.144+00:00'
-updatedAt: '2026-05-25T20:29:03.144+00:00'
+updatedAt: '2026-05-25T21:09:35.186+00:00'
 createdBy: 6a021d44e7881f37bda3
-teams: null
+teams: []
 status: public
 rootRecipeId: chutney-menthe-coriand_6vcsz1j2vzjr
 versionLabel: v2 - mar

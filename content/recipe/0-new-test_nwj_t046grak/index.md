@@ -1,6 +1,6 @@
 ---
 title: 0 new test
-date: '2026-05-25T12:39:09.227Z'
+date: '2026-05-25T12:49:38.166Z'
 draft: true
 typeR: plat
 categories:
@@ -21,10 +21,10 @@ materiel: []
 ingredients:
   - uuid: mwrts8
     name: Mandarine
-    originalQuantity: 1
-    originalUnit: au goût
-    normalizedQuantity: 1
-    normalizedUnit: au goût
+    originalQuantity: 2
+    originalUnit: kg
+    normalizedQuantity: 2000
+    normalizedUnit: gr.
     comment: ''
     allergens: []
     type: legumes
@@ -49,7 +49,7 @@ permissionWrite:
   - 693200b700222efe46a2
 auteur: qaldek
 createdAt: '2026-04-14T10:14:37.538+00:00'
-updatedAt: '2026-05-25T12:39:06.278+00:00'
+updatedAt: '2026-05-25T12:49:37.702+00:00'
 createdBy: 693200b700222efe46a2
 teams: []
 status: public

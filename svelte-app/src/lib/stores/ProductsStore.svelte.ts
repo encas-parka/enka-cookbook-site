@@ -45,6 +45,7 @@ import {
   batchUpdateProductsOptimized,
   mergeProductsAppwrite,
   unmergeProductAppwrite,
+  isNotFoundError,
 } from "../services/appwrite-products";
 import type { GroupPurchaseBatchResult } from "../services/appwrite-transaction";
 
@@ -1227,11 +1228,8 @@ class ProductsStore {
    * pour forcer son rebuild au prochain passage du reconciler.
    */
   async unmergeProduct(sourceId: string, targetId: string): Promise<void> {
-    const sourceModel = this.#productModels.get(sourceId);
-    if (!sourceModel || sourceModel.data.mergedInto !== targetId) {
-      toastService.error("Impossible d'annuler la fusion : produit source invalide");
-      return;
-    }
+    // Le produit source n'est pas dans #productModels (retiré par le reconciler
+    // car mergedInto !== null). On lance directement l'update Appwrite.
     await toastService.track(
       unmergeProductAppwrite(sourceId),
       {
@@ -1410,12 +1408,28 @@ class ProductsStore {
     updates: Partial<EnrichedProduct>,
   ): Promise<void> {
     const enrichedProduct = this.getEnrichedProductById(productId);
-    if (enrichedProduct && !enrichedProduct.isSynced) {
-      await upsertProduct(productId, updates, (id: string) =>
-        this.getEnrichedProductById(id),
-      );
-    } else {
-      await updateProductAppwrite(productId, updates);
+
+    try {
+      if (enrichedProduct && !enrichedProduct.isSynced) {
+        // upsertProduct() est défensif (Solution A : gère déjà "already exists")
+        await upsertProduct(productId, updates, (id: string) =>
+          this.getEnrichedProductById(id),
+        );
+      } else {
+        await updateProductAppwrite(productId, updates);
+      }
+    } catch (error) {
+      // ─── Solution B : desync détecté, retry avec le chemin opposé ───
+      if (error instanceof Error && isNotFoundError(error) && enrichedProduct) {
+        console.warn(
+          `[ProductsStore] DESYNC: produit ${productId} introuvable dans Appwrite (isSynced=true), fallback vers création`,
+        );
+        await upsertProduct(productId, updates, (id: string) =>
+          this.getEnrichedProductById(id),
+        );
+      } else {
+        throw error;
+      }
     }
   }
 

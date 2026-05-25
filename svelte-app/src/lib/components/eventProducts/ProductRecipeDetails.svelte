@@ -28,7 +28,7 @@
   <div
     class="bg-neutral/5 grid grid-cols-1 gap-x-6 gap-y-0.5 rounded-lg p-2 text-xs lg:grid-cols-2"
   >
-    {#each recipeLines as { recipe, date } (`${recipe.id ?? recipe.r}-${date}`)}
+    {#each recipeLines as { recipe, date }, i (`${recipe.id ?? recipe.r}-${date}-${i}`)}
       {@const dateInfo = calculateDateDisplayInfo(date)}
       {@const DateIcon =
         dateInfo.timeIcon === "sun"

@@ -769,6 +769,10 @@ class RecipesStore {
 		}
 	}
 
+	getRecipeUpdatedAt(uuid: string): string | undefined {
+		return this.#appwriteRecipes.get(uuid)?.$updatedAt;
+	}
+
 	async getRecipesByUuidsBulk(
 		uuids: string[]
 	): Promise<Map<string, RecipeForDisplay>> {

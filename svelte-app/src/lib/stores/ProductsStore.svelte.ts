@@ -707,16 +707,19 @@ class ProductsStore {
         .where("mainId")
         .equals(this.#currentMainId!)
         .count();
+      await recipesStore.syncReady;
+
       if (existingNeedsCount === 0) {
         console.log(
           "[ProductsStore] Aucun besoin calculé en cache, calcul depuis event.meals...",
         );
-        await recipesStore.syncReady;
         await this.#calculateAndPersistNeeds(event);
       }
 
-      // Record meals hash to prevent redundant recalculation from meals sync effect
-      this.#lastMealsHash = JSON.stringify(event.meals);
+      const recipeTimestamps = event.meals
+        .flatMap(m => m.recipes)
+        .map(r => `${r.recipeUuid}:${recipesStore.getRecipeUpdatedAt(r.recipeUuid) ?? ''}`);
+      this.#lastMealsHash = JSON.stringify(event.meals) + '|' + recipeTimestamps.join('|');
 
       // 3. Lancer le liveQuery unique (observe 3 tables → reconciler)
       this.#startDataSubscription(this.#currentMainId!);
@@ -806,16 +809,19 @@ class ProductsStore {
       $effect(() => {
         const reactiveEvent = eventsStore.getEventById(eventId);
         if (reactiveEvent) {
-          this.#syncWithEventMeals(reactiveEvent);
+          const recipeTimestamps = reactiveEvent.meals
+            .flatMap(m => m.recipes)
+            .map(r => `${r.recipeUuid}:${recipesStore.getRecipeUpdatedAt(r.recipeUuid) ?? ''}`);
+          this.#syncWithEventMeals(reactiveEvent, recipeTimestamps);
         }
       });
     });
   }
 
-  async #syncWithEventMeals(event: EnrichedEvent) {
+  async #syncWithEventMeals(event: EnrichedEvent, recipeTimestamps: string[]) {
     if (!this.#isInitialized) return;
 
-    const mealsHash = JSON.stringify(event.meals);
+    const mealsHash = JSON.stringify(event.meals) + '|' + recipeTimestamps.join('|');
     if (this.#lastMealsHash === mealsHash) return;
 
     console.log(

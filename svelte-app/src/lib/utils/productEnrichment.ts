@@ -301,12 +301,20 @@ export async function createEnrichedProductsFromEvent(
  * - productHugoUuid : garde le UUID Hugo court (priorité) si disponible
  */
 export function mergeEnrichedProducts(target: EnrichedProduct, source: EnrichedProduct): void {
+  const sourceName = source.productName;
+
   // 1. Fusionner les byDate
   for (const [date, sourceEntry] of Object.entries(source.byDate)) {
+    // Marquer chaque recette avec le nom du produit source
+    const taggedRecipes = sourceEntry.recipes.map((r) => ({
+      ...r,
+      sourceProductName: sourceName,
+    }));
+
     if (target.byDate[date]) {
       // Date commune : concaténer recipes et sommer les assiettes
       const targetEntry = target.byDate[date];
-      targetEntry.recipes = [...targetEntry.recipes, ...sourceEntry.recipes];
+      targetEntry.recipes = [...targetEntry.recipes, ...taggedRecipes];
       targetEntry.totalAssiettes += sourceEntry.totalAssiettes;
       targetEntry.recipeCount = targetEntry.recipes.length;
       targetEntry.totalConsolidated = aggregateByUnit([
@@ -315,7 +323,7 @@ export function mergeEnrichedProducts(target: EnrichedProduct, source: EnrichedP
       ]);
     } else {
       // Nouvelle date : l'ajouter directement
-      target.byDate[date] = { ...sourceEntry };
+      target.byDate[date] = { ...sourceEntry, recipes: taggedRecipes };
     }
   }
 

@@ -123,6 +123,11 @@
 
               <!-- Couverts + quantités -->
               <div class="ms-auto flex flex-wrap items-center gap-4">
+                {#if recipe.sourceProductName}
+                  <span class="badge badge-soft badge-warning badge-xs gap-1">
+                    {recipe.sourceProductName}
+                  </span>
+                {/if}
                 <span class="badge badge-soft gap-1">
                   <Utensils class=" me-1 h-3 w-3 stroke-2" />
                   {recipe.a || 0} c.

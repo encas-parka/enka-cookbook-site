@@ -350,6 +350,7 @@ export interface RecipeOccurrence {
   a: number; // assiettes
   cRule?: string; // conversion rule (optionnel)
   id?: string; // recipeUuid (pour lien profond vers EventRecipesPage)
+  sourceProductName?: string; // produit d'origine si recette provient d'un merge
 }
 
 export interface ByDateEntry {

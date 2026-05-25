@@ -42,6 +42,7 @@
   import Tooltip from "$lib/components/ui/Tooltip.svelte";
   import DateBadge from "$lib/components/ui/DateBadge.svelte";
   import IconSprite from "../ui/IconSprite.svelte";
+  import ProductRecipeDetails from "./ProductRecipeDetails.svelte";
 
   // Stores
   import { globalState, hoverHelp } from "$lib/stores/GlobalState.svelte";
@@ -66,6 +67,7 @@
     shouldShowActionButtons: boolean;
     onOpenModal: (productId: string, tab?: string) => void;
     onQuickValidation: (product: any, productInDateRange: any) => void;
+    showRecipeDetails: boolean;
   }
 
   let {
@@ -73,6 +75,7 @@
     shouldShowActionButtons,
     onOpenModal,
     onQuickValidation,
+    showRecipeDetails,
   }: Props = $props();
 
   // Données réactives dérivées du productModel
@@ -455,5 +458,14 @@
         </div>
       </div>
     </div>
+
+    {#if showRecipeDetails}
+      <div transition:slide={{ duration: 200 }}>
+        <ProductRecipeDetails
+          recipesByDate={productInDateRange.recipesByDate}
+          concernedDates={productInDateRange.concernedDates}
+        />
+      </div>
+    {/if}
   </div>
 </div>

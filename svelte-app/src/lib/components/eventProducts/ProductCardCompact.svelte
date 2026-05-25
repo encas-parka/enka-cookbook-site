@@ -31,6 +31,10 @@
     ClipboardX,
   } from "@lucide/svelte";
 
+  // Shared components
+  import ProductRecipeDetails from "./ProductRecipeDetails.svelte";
+  import { slide } from "svelte/transition";
+
   // Stores
   import { globalState, hoverHelp } from "$lib/stores/GlobalState.svelte";
   import { productsStore } from "$lib/stores/ProductsStore.svelte";
@@ -53,6 +57,7 @@
     shouldShowActionButtons: boolean;
     onOpenModal: (productId: string, tab?: string) => void;
     onQuickValidation: (product: any, productInDateRange: any) => void;
+    showRecipeDetails: boolean;
   }
 
   let {
@@ -60,6 +65,7 @@
     shouldShowActionButtons,
     onOpenModal,
     onQuickValidation,
+    showRecipeDetails,
   }: Props = $props();
 
   // Reactive data from productModel
@@ -222,4 +228,13 @@
       {/if}
     </button>
   </div>
+
+  {#if showRecipeDetails}
+    <div class="w-full" transition:slide={{ duration: 200 }}>
+      <ProductRecipeDetails
+        recipesByDate={productInDateRange.recipesByDate}
+        concernedDates={productInDateRange.concernedDates}
+      />
+    </div>
+  {/if}
 </div>

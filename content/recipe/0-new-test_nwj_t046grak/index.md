@@ -1,6 +1,6 @@
 ---
-title: 0 new test
-date: '2026-05-25T12:49:38.166Z'
+title: New test title
+date: '2026-05-25T17:27:24.584Z'
 draft: true
 typeR: plat
 categories:
@@ -49,7 +49,7 @@ permissionWrite:
   - 693200b700222efe46a2
 auteur: qaldek
 createdAt: '2026-04-14T10:14:37.538+00:00'
-updatedAt: '2026-05-25T12:49:37.702+00:00'
+updatedAt: '2026-05-25T17:27:13.246+00:00'
 createdBy: 693200b700222efe46a2
 teams: []
 status: public

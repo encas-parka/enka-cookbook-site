@@ -1,6 +1,6 @@
 ---
 title: Falafels
-date: '2026-03-28T10:22:06.867Z'
+date: '2026-05-25T22:22:02.727Z'
 draft: false
 typeR: plat
 categories:
@@ -33,15 +33,6 @@ ingredients:
     comment: a tremper
     allergens: []
     type: sec
-  - uuid: v1kli8
-    name: Gousse d'ail
-    originalQuantity: 60
-    originalUnit: gousse·s
-    normalizedQuantity: 60
-    normalizedUnit: gousse·s
-    comment: émincé
-    allergens: []
-    type: epices
   - uuid: hgfa4e
     name: Persil frais
     originalQuantity: 6
@@ -88,15 +79,51 @@ ingredients:
     allergens:
       - Sésame
     type: sec
-  - uuid: kjh2pu
-    name: cumin, piment, sel, poivre
-    originalQuantity: 0
-    originalUnit: gr.
-    normalizedQuantity: 0
-    normalizedUnit: gr.
+  - uuid: he3u48
+    name: Cumin moulu
+    originalQuantity: 1
+    originalUnit: au goût
+    normalizedQuantity: 1
+    normalizedUnit: au goût
     comment: ''
     allergens: []
     type: epices
+  - uuid: 2juq3x
+    name: Sel
+    originalQuantity: 1
+    originalUnit: au goût
+    normalizedQuantity: 1
+    normalizedUnit: au goût
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: 2pps90
+    name: Poivre
+    originalQuantity: 1
+    originalUnit: au goût
+    normalizedQuantity: 1
+    normalizedUnit: au goût
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: fmc1dm
+    name: Piment en poudre
+    originalQuantity: 1
+    originalUnit: au goût
+    normalizedQuantity: 1
+    normalizedUnit: au goût
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: u2m28w
+    name: Ail
+    originalQuantity: 60
+    originalUnit: gousse·s
+    normalizedQuantity: 390
+    normalizedUnit: gr.
+    comment: émincé
+    allergens: []
+    type: legumes
 preparation: |-
   Tremper les pois chiches 24h à l'avance.
 
@@ -119,7 +146,7 @@ permissionWrite:
   - 69a063c400308d84e961
 auteur: georgetteetnono
 createdAt: '2026-03-28T09:32:09.107+00:00'
-updatedAt: '2026-03-28T10:22:06.506+00:00'
+updatedAt: '2026-05-25T22:21:43.601+00:00'
 createdBy: 69a063c400308d84e961
 teams: []
 status: public

@@ -11,7 +11,7 @@
   import { astucesToAppwrite } from "$lib/utils/recipeUtils";
   import { toastService } from "$lib/services/toast.service.svelte";
   import { route, navigate } from "$lib/router";
-  import { Save, Lock, Copy, Trash2 } from "@lucide/svelte";
+  import { Save, Lock, Copy, Trash2, TriangleAlert, Info } from "@lucide/svelte";
   import { onDestroy } from "svelte";
   import { fade } from "svelte/transition";
   import { navBarStore } from "../stores/NavBarStore.svelte";
@@ -22,6 +22,10 @@
   import UnsavedChangesGuard from "$lib/components/ui/UnsavedChangesGuard.svelte";
   import RecipeMetadata from "$lib/components/recipes/RecipeMetadata.svelte";
   import ConfirmModal from "$lib/components/ui/ConfirmModal.svelte";
+  import ModalContainer from "$lib/components/ui/modal/ModalContainer.svelte";
+  import ModalHeader from "$lib/components/ui/modal/ModalHeader.svelte";
+  import ModalContent from "$lib/components/ui/modal/ModalContent.svelte";
+  import ModalFooter from "$lib/components/ui/modal/ModalFooter.svelte";
   import {
     type RecipeFormState,
     type ValidationError,
@@ -31,6 +35,7 @@
     prepareHugoData,
     determineAllergensAndRegimes,
     validateRecipe,
+    findZeroQuantityIngredients,
     deleteRecipe,
   } from "./RecipeEditPage";
   import RecipeVariants from "../components/recipes/RecipeVariants.svelte";
@@ -75,11 +80,23 @@
     value: {},
   });
 
+  // Modal ingrédients sans quantité
+  let showZeroQtyModal = $state(false);
+  let zeroQtyItems = $state<{ uuid: string; name: string }[]>([]);
+
   // Calcul de isDirty par comparaison avec le snapshot initial
   const isDirty = $derived.by(() => {
     if (!recipe || !initialRecipeSnapshot) return false;
     return createRecipeSnapshot(recipe) !== initialRecipeSnapshot;
   });
+
+  // Présence d'ingrédients avec quantité à zéro (hors "au goût")
+  // Permet d'activer le bouton sauvegarder même sans autre modification
+  const hasZeroQtyIngredients = $derived(
+    recipe?.ingredients?.some(
+      (ing) => ing.originalQuantity <= 0 && ing.originalUnit !== "au goût",
+    ) ?? false,
+  );
 
   // Logique réactive pour le brouillon
   $effect(() => {
@@ -319,6 +336,14 @@
   async function save(): Promise<void> {
     if (!recipe || isSaving || !globalState.userId) return;
 
+    // Vérifier les ingrédients avec quantité à zéro (hors "au goût")
+    const zeroQty = findZeroQuantityIngredients(recipe);
+    if (zeroQty.length > 0) {
+      zeroQtyItems = zeroQty;
+      showZeroQtyModal = true;
+      return;
+    }
+
     const isValid = validateRecipe(recipe, validationErrors);
     if (!isValid) {
       return;
@@ -411,6 +436,27 @@
   }
 
   // ============================================================================
+  // ZERO-QUANTITY INGREDIENTS HANDLER
+  // ============================================================================
+
+  function handleFixZeroQuantities(): void {
+    if (!recipe) return;
+
+    for (const ing of recipe.ingredients) {
+      if (ing.originalQuantity <= 0 && ing.originalUnit !== "au goût") {
+        ing.originalQuantity = 1;
+        ing.originalUnit = "au goût";
+      }
+    }
+
+    showZeroQtyModal = false;
+    zeroQtyItems = [];
+
+    // Relancer la sauvegarde
+    save();
+  }
+
+  // ============================================================================
   // DUPLICATE
   // ============================================================================
 
@@ -471,7 +517,7 @@
     <!-- Save button -->
     <button
       onclick={save}
-      disabled={!canEdit || isSaving || !isDirty}
+      disabled={!canEdit || isSaving || (!isDirty && !hasZeroQtyIngredients)}
       class="btn btn-accent btn-sm"
     >
       {#if isSaving}
@@ -563,12 +609,12 @@
       {/if}
 
       <!-- Bouton flottant Sauvegarder (mobile uniquement) -->
-      {#if isDirty && !isSaving}
+      {#if (isDirty || hasZeroQtyIngredients) && !isSaving}
         <button
           class="btn btn-accent btn-sm sticky bottom-2 shadow-lg {!globalState.isMobile &&
             'hidden'}"
           onclick={save}
-          disabled={!canEdit || isSaving || !isDirty}
+          disabled={!canEdit || isSaving || (!isDirty && !hasZeroQtyIngredients)}
         >
           <Save size={16} class="mr-1" />
           Sauvegarder
@@ -614,3 +660,52 @@
   onConfirm={handleDelete}
   onCancel={() => (showDeleteModal = false)}
 />
+
+<!-- Modal ingrédients avec quantité à zéro -->
+<ModalContainer
+  isOpen={showZeroQtyModal}
+  onClose={() => (showZeroQtyModal = false)}
+  maxWidth="sm"
+>
+    <ModalHeader
+      title="Ingrédients sans quantité"
+      onClose={() => (showZeroQtyModal = false)}
+    />
+    <ModalContent>
+      <div class="alert alert-warning alert-soft">
+        <TriangleAlert class="h-5 w-5" />
+        <span>Certains ingrédients ont une quantité de 0.</span>
+      </div>
+
+      <ul class="mt-3 space-y-1">
+        {#each zeroQtyItems as item}
+          <li class="text-sm">• {item.name}</li>
+        {/each}
+      </ul>
+
+      <p class="mt-3 text-sm">
+        Vous pouvez leur assigner l'unité
+        <strong>"au goût"</strong> pour indiquer une quantité libre.
+      </p>
+
+      <div class="alert alert-info alert-soft mt-3">
+        <Info class="h-5 w-5 shrink-0" />
+        <span>
+          Attention : l'utilisation de l'unité "au goût" rendra
+          l'établissement des listes de courses plus complexe et
+          laborieuse, car les quantités exactes ne seront pas connues.
+        </span>
+      </div>
+    </ModalContent>
+    <ModalFooter>
+      <button
+        class="btn btn-ghost"
+        onclick={() => (showZeroQtyModal = false)}
+      >
+        Annuler
+      </button>
+      <button class="btn btn-warning" onclick={handleFixZeroQuantities}>
+        Assigner "au goût" et sauvegarder
+      </button>
+    </ModalFooter>
+  </ModalContainer>

@@ -294,6 +294,21 @@ export function normalizeAllIngredients(
 }
 
 /**
+ * Trouve les ingrédients dont la quantité est à zéro sans utiliser l'unité "au goût"
+ */
+export function findZeroQuantityIngredients(
+  recipe: RecipeFormState,
+): { uuid: string; name: string }[] {
+  if (!recipe.ingredients) return [];
+
+  return recipe.ingredients
+    .filter(
+      (ing) => ing.originalQuantity <= 0 && ing.originalUnit !== "au goût",
+    )
+    .map((ing) => ({ uuid: ing.uuid, name: ing.name }));
+}
+
+/**
  * Détermine les régimes alimentaires en fonction des allergènes
  */
 export function determineAllergensAndRegimes(ingredients: RecipeIngredient[]): {

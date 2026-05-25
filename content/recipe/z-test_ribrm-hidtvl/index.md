@@ -1,6 +1,6 @@
 ---
 title: Z-test
-date: '2026-05-25T09:48:36.005Z'
+date: '2026-05-25T10:30:58.161Z'
 draft: true
 typeR: entree
 categories: []
@@ -31,9 +31,9 @@ ingredients:
     type: autres
   - uuid: e4mjd1
     name: Jus de citron
-    originalQuantity: 2
+    originalQuantity: 3
     originalUnit: l.
-    normalizedQuantity: 2000
+    normalizedQuantity: 3000
     normalizedUnit: ml
     comment: ''
     allergens: []
@@ -46,7 +46,7 @@ permissionWrite:
   - 693200b700222efe46a2
 auteur: qaldek
 createdAt: '2026-05-21T10:12:03.895+00:00'
-updatedAt: '2026-05-25T09:48:35.624+00:00'
+updatedAt: '2026-05-25T10:30:57.761+00:00'
 createdBy: 693200b700222efe46a2
 teams: []
 status: public

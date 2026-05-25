@@ -22,6 +22,7 @@
 
   import ProductCard from "./ProductCard.svelte";
   import ProductCardCompact from "./ProductCardCompact.svelte";
+  import OrphanedPurchasesSection from "./OrphanedPurchasesSection.svelte";
   import {
     getProductTypeInfo,
     formatPurchasesWithBadges,
@@ -51,6 +52,7 @@
 
   const groupedProducts = $derived(productsStore.groupedProducts);
   const allGroupEntries = $derived(Object.entries(groupedProducts));
+  const orphanedPurchases = $derived(productsStore.orphanedPurchases);
   const filters = $derived(productsStore.filters);
 
   // View mode: 'card' (default) or 'compact'
@@ -366,6 +368,8 @@
       <span class="loading loading-spinner loading-md"></span>
     </div>
   {/if}
+
+  <OrphanedPurchasesSection {orphanedPurchases} />
 </div>
 
 <!-- Vue TABLEAU pour l'impression (Alternative compacte) -->

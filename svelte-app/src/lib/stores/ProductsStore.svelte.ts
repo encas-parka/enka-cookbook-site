@@ -221,6 +221,8 @@ class ProductsStore {
       const need = needRow ? parseNeedRow(needRow) : null;
       const enriched = this.#buildEnriched(raw, need, prods);
 
+      this.#productNameCache.set(id, { name: enriched.productName, type: enriched.productType });
+
       if (existing) {
         existing.update(enriched);
         existing._version = version;
@@ -236,6 +238,21 @@ class ProductsStore {
       this.#productModels.delete(id);
     }
 
+    // ── 4b. Détecter les achats orphelins (purchases sans produit actif) ──
+    const orphaned: Array<{ productId: string; productName: string; productType: string; purchases: Purchases[] }> = [];
+    for (const [productId, purchs] of purchasesByProduct) {
+      if (this.#productModels.has(productId)) continue;
+      if (purchs.length === 0) continue;
+      const cached = this.#productNameCache.get(productId);
+      orphaned.push({
+        productId,
+        productName: cached?.name ?? productId.split("_").slice(0, -1).join("_").replace(/-/g, " ").replace(/\b\w/g, c => c.toUpperCase()),
+        productType: cached?.type ?? "",
+        purchases: purchs,
+      });
+    }
+    this.#orphanedPurchasesInfo = orphaned;
+
     // ── 5. Reconstruire les groupes ─────────────────────────
     this.#rebuildGroups();
   }
@@ -243,6 +260,8 @@ class ProductsStore {
   // Cache pour financialStats (mis à jour par #onDataChange)
   #orphanPurchases = new SvelteMap<string, Purchases>();
   #purchasesByProductCache = new Map<string, Purchases[]>();
+  #productNameCache = new Map<string, { name: string; type: string }>();
+  #orphanedPurchasesInfo = $state<Array<{ productId: string; productName: string; productType: string; purchases: Purchases[] }>>([]);
 
   /**
    * Fusionne 0–3 sources en un seul EnrichedProduct.
@@ -381,14 +400,12 @@ class ProductsStore {
     if (!product.byDate && !isManualProduct) return false;
     if (!matchesFilters(product, this.#filters, fuzzyMatchedIds)) return false;
 
-    // Filtre completion (dépend de model.stats → dateRange)
     if (this.#filters.completionStatus !== "all") {
       const hasMissing = model.stats.hasMissing;
       if (this.#filters.completionStatus === "completed" && hasMissing) return false;
       if (this.#filters.completionStatus === "incomplete" && !hasMissing) return false;
     }
 
-    // Filtre date de livraison (produits avec purchase "ordered" à cette date)
     if (this.#filters.deliveryDateFilter) {
       const hasOrderedDelivery = product.purchases?.some(
         (p) =>
@@ -398,7 +415,6 @@ class ProductsStore {
       if (!hasOrderedDelivery) return false;
     }
 
-    // Filtre date range
     if (product.byDate) {
       const hasDataInRange = Object.keys(product.byDate).some(
         (dateStr) => dateStr >= this.dateRange.start! && dateStr <= this.dateRange.end!,
@@ -535,6 +551,10 @@ class ProductsStore {
 
   get groupedProducts() {
     return this.#groups;
+  }
+
+  get orphanedPurchases() {
+    return this.#orphanedPurchasesInfo;
   }
 
   // ===========================================================================
@@ -1322,6 +1342,8 @@ class ProductsStore {
     this.#groups = {};
     this.#orphanPurchases = new SvelteMap();
     this.#purchasesByProductCache = new Map();
+    this.#productNameCache.clear();
+    this.#orphanedPurchasesInfo = [];
 
     // Reset metadata
     this.#currentMainId = null;

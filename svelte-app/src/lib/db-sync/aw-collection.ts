@@ -32,6 +32,7 @@ import { db, type SyncMetaRow } from './aw-db';
 import {
 	registerRealtime as registerInRegistry,
 	registerRealtimeDynamic,
+	isRealtimeInitialized,
 	unregisterRealtime
 } from './aw-realtime';
 import type {
@@ -288,13 +289,32 @@ export function createSyncCollection<T extends AwDoc>(options: {
 			}
 		};
 
-		// Register in central registry (deferred WebSocket)
-		registerInRegistry(subId, channels, handler);
+		// Register in central realtime registry
+		// If WebSocket is already open, use dynamic registration (adds channels to existing connection).
+		// If not yet open, use static registration (will be picked up by initializeRealtime()).
+		let dynamicCleanup: (() => void) | null = null;
 
-		subscriptions.set(subId, { ref, unsubscribe: () => unregisterRealtime(subId) });
+		if (isRealtimeInitialized()) {
+			dynamicCleanup = registerRealtimeDynamic(channels, handler);
+		} else {
+			registerInRegistry(subId, channels, handler);
+		}
+
+		subscriptions.set(subId, {
+			ref,
+			unsubscribe: () => {
+				if (dynamicCleanup) {
+					dynamicCleanup();
+				} else {
+					unregisterRealtime(subId);
+				}
+			}
+		});
 		onSubscriptionChange?.(true);
 
-		console.log(`[aw-sync] subscribe ${subId} → ${channels.join(', ')}`);
+		console.log(
+			`[aw-sync] subscribe ${subId} → ${channels.join(', ')}${dynamicCleanup ? ' (dynamic)' : ''}`
+		);
 		return ref;
 	}
 
@@ -303,8 +323,9 @@ export function createSyncCollection<T extends AwDoc>(options: {
 	 */
 	async function unsubscribe(subRefOrId: SubscriptionRef | string): Promise<void> {
 		const subId = typeof subRefOrId === 'string' ? subRefOrId : subRefOrId.id;
-		if (subscriptions.has(subId)) {
-			unregisterRealtime(subId);
+		const sub = subscriptions.get(subId);
+		if (sub) {
+			sub.unsubscribe();
 			subscriptions.delete(subId);
 			console.log(`[aw-sync] unsubscribe ${subId}`);
 			if (subscriptions.size === 0) onSubscriptionChange?.(false);
@@ -315,9 +336,9 @@ export function createSyncCollection<T extends AwDoc>(options: {
 	 * Closes all active realtime subscriptions for this collection.
 	 */
 	async function unsubscribeAll(): Promise<void> {
-		for (const [subId] of subscriptions) {
+		for (const [, sub] of subscriptions) {
 			try {
-				unregisterRealtime(subId);
+				sub.unsubscribe();
 			} catch {
 				// Non-blocking
 			}

@@ -1,6 +1,6 @@
 ---
 title: Tajine à l orange végé aux légumes d hiver
-date: '2026-05-26T15:13:01.798Z'
+date: '2026-05-26T15:13:04.767Z'
 draft: true
 typeR: plat
 categories: []
@@ -15,7 +15,7 @@ serveHot: true
 description: null
 region: null
 saison:
-  - ete
+  - hiver
 id: tajine-a-l-orang-v4-ma_6n03c9t0y6fd
 materiel: []
 ingredients:
@@ -43,10 +43,10 @@ ingredients:
     pS: false
   - uuid: 2juq3x
     name: Sel
-    originalQuantity: 0
-    originalUnit: gr.
-    normalizedQuantity: 0
-    normalizedUnit: gr.
+    originalQuantity: 1
+    originalUnit: au goût
+    normalizedQuantity: 1
+    normalizedUnit: au goût
     comment: ''
     allergens: []
     type: epices
@@ -54,10 +54,10 @@ ingredients:
     pS: false
   - uuid: he3u48
     name: Cumin moulu
-    originalQuantity: 0
-    originalUnit: gr.
-    normalizedQuantity: 0
-    normalizedUnit: gr.
+    originalQuantity: 1
+    originalUnit: au goût
+    normalizedQuantity: 1
+    normalizedUnit: au goût
     comment: ''
     allergens: []
     type: epices
@@ -65,10 +65,10 @@ ingredients:
     pS: false
   - uuid: sk1gbb
     name: Cannelle
-    originalQuantity: 0
-    originalUnit: gr.
-    normalizedQuantity: 0
-    normalizedUnit: gr.
+    originalQuantity: 1
+    originalUnit: au goût
+    normalizedQuantity: 1
+    normalizedUnit: au goût
     comment: ''
     allergens: []
     type: epices
@@ -122,10 +122,10 @@ ingredients:
     pS: false
   - uuid: h3c8al
     name: huile d'olive
-    originalQuantity: 0
-    originalUnit: l.
-    normalizedQuantity: 0
-    normalizedUnit: l.
+    originalQuantity: 1
+    originalUnit: au goût
+    normalizedQuantity: 1
+    normalizedUnit: au goût
     comment: ''
     allergens: []
     type: lof
@@ -166,10 +166,10 @@ ingredients:
     pS: false
   - uuid: j40pyf
     name: Ras el hanout
-    originalQuantity: 0
-    originalUnit: gr.
-    normalizedQuantity: 0
-    normalizedUnit: gr.
+    originalQuantity: 1
+    originalUnit: au goût
+    normalizedQuantity: 1
+    normalizedUnit: au goût
     comment: ''
     allergens:
       - Moutarde
@@ -205,7 +205,7 @@ permissionWrite:
   - 6931ecdccd2c8d8d15e5
 auteur: Marion
 createdAt: '2026-05-26T15:12:48.856+00:00'
-updatedAt: '2026-05-26T15:12:48.856+00:00'
+updatedAt: '2026-05-26T15:13:01.606+00:00'
 createdBy: 6931ecdccd2c8d8d15e5
 teams: []
 status: public

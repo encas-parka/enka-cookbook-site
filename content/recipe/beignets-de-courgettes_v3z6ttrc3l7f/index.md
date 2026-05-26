@@ -1,6 +1,6 @@
 ---
 title: Beignets de courgettes
-date: "2026-04-07T21:50:32.621Z"
+date: '2026-05-26T15:56:15.648Z'
 draft: true
 typeR: plat
 categories:
@@ -11,7 +11,7 @@ plate: 100
 quantite_desc: null
 check: false
 cuisson: true
-serveHot: false
+serveHot: true
 description: null
 region: null
 saison: []
@@ -20,40 +20,40 @@ materiel: []
 ingredients:
   - uuid: 9zozfk
     name: Courgette
-    originalQuantity: 10
+    originalQuantity: 7.5
     originalUnit: kg
-    normalizedQuantity: 10000
+    normalizedQuantity: 7500
     normalizedUnit: gr.
-    comment: ""
+    comment: ''
     allergens: []
     type: legumes
-  - uuid: zf3zf8
-    name: Oeuf
-    originalQuantity: 50
+  - uuid: 0ue6i6
+    name: oeufs
+    originalQuantity: 15
     originalUnit: unité
-    normalizedQuantity: 50
+    normalizedQuantity: 15
     normalizedUnit: unité
-    comment: ""
+    comment: ''
     allergens:
       - Oeuf
     type: lof
   - uuid: 2av6w8
     name: Farine de blé
-    originalQuantity: 5
+    originalQuantity: 2
     originalUnit: kg
-    normalizedQuantity: 5000
+    normalizedQuantity: 2000
     normalizedUnit: gr.
-    comment: ""
+    comment: ''
     allergens:
       - Gluten
     type: lof
   - uuid: vk09o5
     name: lait de vache
-    originalQuantity: 10
+    originalQuantity: 2
     originalUnit: l.
-    normalizedQuantity: 10000
+    normalizedQuantity: 2000
     normalizedUnit: ml
-    comment: ""
+    comment: ''
     allergens:
       - Produit laitier
     type: lof
@@ -63,21 +63,31 @@ ingredients:
     originalUnit: l.
     normalizedQuantity: 5000
     normalizedUnit: ml
-    comment: ""
+    comment: ''
     allergens: []
     type: lof
-preparation: "1. Battez les oeufs entiers dans un saladier. Incorporez la farine puis le lait. Mélangez bien le tout afin d'obtenir une préparation lisse.\n2. Lavez et coupez la courgette en fines rondelles.\_Trempez les rondelles de courgettes dans la pâte à beignets.\n3. Déposez les courgettes enrobées de pâte une par une dans un bain de friture bien chaud. Tournez-les quand la pâte est prise. Laissez-les dorer.\_Égouttez-les sur du papier absorbant et servez chaud."
+  - uuid: he3u48
+    name: Cumin moulu
+    originalQuantity: 50
+    originalUnit: gr.
+    normalizedQuantity: 50
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: epices
+preparation: "(pour trois ou quatre beignets par personnes environ)\n\n1. Battez les oeufs entiers dans un saladier. Incorporez la farine puis le lait. Mélangez bien le tout afin d'obtenir une préparation lisse, type pate a crèpe épaisse.\n2. Lavez et coupez la courgette en deux ou trois, puis dans la longeur (epaisseur D'un peu moins d'un cm).\_Trempez les rondelles de courgettes dans la pâte à beignets.\n3. Déposez les courgettes enrobées de pâte une par une dans un bain de friture bien chaud. Tournez-les quand la pâte est prise. Laissez-les dorer.\_Égouttez-les sur du papier absorbant et servez chaud."
 prepAlt: []
 astuces: []
 preparation24h: null
 permissionWrite:
   - 698a0ed8cdbfef3c7606
-auteur: null
-createdAt: "2026-04-07T21:50:32.031+00:00"
-updatedAt: "2026-04-22T09:55:26.149+00:00"
+auteur: boris
+createdAt: '2026-04-07T21:50:32.031+00:00'
+updatedAt: '2026-05-26T15:56:13.493+00:00'
 createdBy: 698a0ed8cdbfef3c7606
-teams: null
+teams: []
 status: public
 rootRecipeId: null
 versionLabel: null
 ---
+

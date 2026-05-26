@@ -1,6 +1,6 @@
 ---
 title: Riz en accompagnement
-date: '2026-04-09T08:06:22.922Z'
+date: '2026-05-26T20:59:58.340Z'
 draft: false
 typeR: plat
 categories:
@@ -25,9 +25,9 @@ materiel:
 ingredients:
   - uuid: opblzb
     name: Riz basmati
-    originalQuantity: 500
+    originalQuantity: 600
     originalUnit: gr.
-    normalizedQuantity: 500
+    normalizedQuantity: 600
     normalizedUnit: gr.
     comment: ''
     allergens: []
@@ -48,7 +48,7 @@ permissionWrite:
   - 6931ecdccd2c8d8d15e5
 auteur: Marion
 createdAt: '2026-04-09T08:04:20.164+00:00'
-updatedAt: '2026-04-09T08:06:22.613+00:00'
+updatedAt: '2026-05-26T20:59:55.613+00:00'
 createdBy: 6931ecdccd2c8d8d15e5
 teams: []
 status: public

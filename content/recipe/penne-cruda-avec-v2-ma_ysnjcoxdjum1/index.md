@@ -1,6 +1,6 @@
 ---
 title: Penne cruda avec fromage et noix
-date: '2026-04-12T08:56:22.135Z'
+date: '2026-05-26T20:49:24.240Z'
 draft: true
 typeR: plat
 categories:
@@ -44,9 +44,9 @@ ingredients:
     pS: false
   - uuid: 163u4z
     name: Olives Vertes Dénoyautées
-    originalQuantity: 5
+    originalQuantity: 3
     originalUnit: kg
-    normalizedQuantity: 5000
+    normalizedQuantity: 3000
     normalizedUnit: gr.
     comment: ''
     allergens: []
@@ -55,9 +55,9 @@ ingredients:
     pS: false
   - uuid: 7ahzm0
     name: Olives Noires Dénoyautées
-    originalQuantity: 5
+    originalQuantity: 3
     originalUnit: kg
-    normalizedQuantity: 5000
+    normalizedQuantity: 3000
     normalizedUnit: gr.
     comment: ''
     allergens: []
@@ -128,6 +128,16 @@ ingredients:
     allergens:
       - Produit laitier
     type: frais
+  - uuid: 0d5y4q
+    name: Fromage frais
+    originalQuantity: 2
+    originalUnit: kg
+    normalizedQuantity: 2000
+    normalizedUnit: gr.
+    comment: ''
+    allergens:
+      - Produit laitier
+    type: frais
 preparation: |-
   Faire cuire les pennes al dente dans beaucoup d'eau salée.
 
@@ -149,9 +159,9 @@ permissionWrite:
   - 6931ecdccd2c8d8d15e5
 auteur: Marion
 createdAt: '2026-04-12T08:56:21.661+00:00'
-updatedAt: '2026-04-12T08:56:21.661+00:00'
+updatedAt: '2026-05-26T20:49:22.970+00:00'
 createdBy: 6931ecdccd2c8d8d15e5
-teams: null
+teams: []
 status: public
 rootRecipeId: penne-cruda_qavmivpa5mfj
 versionLabel: v2 - Marion

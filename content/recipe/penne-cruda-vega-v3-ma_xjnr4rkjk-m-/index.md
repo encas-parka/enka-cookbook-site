@@ -1,6 +1,6 @@
 ---
 title: Penne cruda vegan sans gluten
-date: '2026-04-12T08:58:16.366Z'
+date: '2026-05-26T20:50:04.476Z'
 draft: true
 typeR: plat
 categories:
@@ -33,9 +33,9 @@ ingredients:
     pS: false
   - uuid: 163u4z
     name: Olives Vertes Dénoyautées
-    originalQuantity: 5
+    originalQuantity: 3
     originalUnit: kg
-    normalizedQuantity: 5000
+    normalizedQuantity: 3000
     normalizedUnit: gr.
     comment: ''
     allergens: []
@@ -44,9 +44,9 @@ ingredients:
     pS: false
   - uuid: 7ahzm0
     name: Olives Noires Dénoyautées
-    originalQuantity: 5
+    originalQuantity: 3
     originalUnit: kg
-    normalizedQuantity: 5000
+    normalizedQuantity: 3000
     normalizedUnit: gr.
     comment: ''
     allergens: []
@@ -108,9 +108,9 @@ ingredients:
     type: sec
   - uuid: 4be4ic
     name: Levure de bière
-    originalQuantity: 300
+    originalQuantity: 500
     originalUnit: gr.
-    normalizedQuantity: 300
+    normalizedQuantity: 500
     normalizedUnit: gr.
     comment: ''
     allergens: []
@@ -146,9 +146,9 @@ permissionWrite:
   - 6931ecdccd2c8d8d15e5
 auteur: Marion
 createdAt: '2026-04-12T08:58:15.970+00:00'
-updatedAt: '2026-04-12T08:58:15.970+00:00'
+updatedAt: '2026-05-26T20:50:02.686+00:00'
 createdBy: 6931ecdccd2c8d8d15e5
-teams: null
+teams: []
 status: public
 rootRecipeId: penne-cruda_qavmivpa5mfj
 versionLabel: v3 - Marion

@@ -1,6 +1,6 @@
 ---
 title: Compote de pomme à la vanille
-date: '2026-05-26T09:16:32.738Z'
+date: '2026-05-26T09:16:44.302Z'
 draft: true
 typeR: dessert
 categories: []
@@ -11,7 +11,7 @@ regime:
 plate: 100
 quantite_desc: null
 check: false
-cuisson: false
+cuisson: true
 serveHot: true
 description: null
 region: null
@@ -50,11 +50,11 @@ astuces: []
 preparation24h: null
 permissionWrite:
   - 696fb1cc000eb33adee7
-auteur: null
+auteur: Miki
 createdAt: '2026-05-26T09:16:19.973+00:00'
-updatedAt: '2026-05-26T09:16:19.973+00:00'
+updatedAt: '2026-05-26T09:16:43.246+00:00'
 createdBy: 696fb1cc000eb33adee7
-teams: null
+teams: []
 status: public
 rootRecipeId: null
 versionLabel: null

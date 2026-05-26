@@ -1,6 +1,6 @@
 ---
 title: Xtipiti vegan
-date: '2026-04-09T08:22:45.586Z'
+date: '2026-05-26T18:27:19.574Z'
 draft: true
 typeR: entree
 categories:
@@ -23,9 +23,9 @@ materiel: []
 ingredients:
   - uuid: 0zglpj
     name: Poivron (rouge)
-    originalQuantity: 2
+    originalQuantity: 4
     originalUnit: unité
-    normalizedQuantity: 2
+    normalizedQuantity: 4
     normalizedUnit: unité
     comment: ''
     allergens: []
@@ -96,7 +96,7 @@ permissionWrite:
   - 6931ecdccd2c8d8d15e5
 auteur: Marion
 createdAt: '2026-04-09T08:22:45.163+00:00'
-updatedAt: '2026-04-09T08:22:45.163+00:00'
+updatedAt: '2026-05-26T18:27:18.245+00:00'
 createdBy: 6931ecdccd2c8d8d15e5
 teams: []
 status: public

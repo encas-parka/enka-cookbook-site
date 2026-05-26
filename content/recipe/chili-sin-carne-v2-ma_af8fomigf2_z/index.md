@@ -1,6 +1,6 @@
 ---
 title: Chili sin carne
-date: '2026-05-26T21:04:28.891Z'
+date: '2026-05-26T21:05:21.957Z'
 draft: true
 typeR: plat
 categories:
@@ -183,8 +183,8 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
-  - uuid: 09bywc
-    name: Coulis de tomates
+  - uuid: ftj0mq
+    name: Pulpe de tomate
     originalQuantity: 10
     originalUnit: l.
     normalizedQuantity: 10000
@@ -210,7 +210,7 @@ permissionWrite:
   - 6931ecdccd2c8d8d15e5
 auteur: Marion
 createdAt: '2026-05-26T21:04:27.806+00:00'
-updatedAt: '2026-05-26T21:04:27.806+00:00'
+updatedAt: '2026-05-26T21:05:20.829+00:00'
 createdBy: 6931ecdccd2c8d8d15e5
 teams: []
 status: public

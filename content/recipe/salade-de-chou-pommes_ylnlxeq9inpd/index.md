@@ -1,6 +1,6 @@
 ---
 title: Salade de chou pommes
-date: '2026-05-26T16:49:20.565Z'
+date: '2026-05-26T16:49:25.199Z'
 draft: true
 typeR: entree
 categories:
@@ -118,7 +118,6 @@ preparation: |-
   - Mélanger le reste du jus de citron au vinaigre, huile de colza, sucre, sel et poivre.
   - Tout rassembler, bien mélanger, et laisser reposer au réfrigérateur au moins une heure.
   - Parsemer les graines de sésame noir juste avant de servir
-  - 
 prepAlt: []
 astuces:
   - '{"astuce":"Les pommes croquant et acidulé c''est mieux (type granny smith)\n\n"}'
@@ -130,7 +129,7 @@ permissionWrite:
   - 68975cbc002469058f8b
 auteur: ghald
 createdAt: '2026-04-06T10:22:49.674+00:00'
-updatedAt: '2026-05-26T16:49:12.393+00:00'
+updatedAt: '2026-05-26T16:49:24.635+00:00'
 createdBy: 68975cbc002469058f8b
 teams: []
 status: public

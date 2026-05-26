@@ -1,6 +1,6 @@
 ---
 title: Beignets de courgettes
-date: '2026-05-26T15:56:15.648Z'
+date: '2026-05-26T15:57:22.689Z'
 draft: true
 typeR: plat
 categories:
@@ -75,7 +75,7 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
-preparation: "(pour trois ou quatre beignets par personnes environ)\n\n1. Battez les oeufs entiers dans un saladier. Incorporez la farine puis le lait. Mélangez bien le tout afin d'obtenir une préparation lisse, type pate a crèpe épaisse.\n2. Lavez et coupez la courgette en deux ou trois, puis dans la longeur (epaisseur D'un peu moins d'un cm).\_Trempez les rondelles de courgettes dans la pâte à beignets.\n3. Déposez les courgettes enrobées de pâte une par une dans un bain de friture bien chaud. Tournez-les quand la pâte est prise. Laissez-les dorer.\_Égouttez-les sur du papier absorbant et servez chaud."
+preparation: "(pour trois ou quatre beignets par personnes environ)\n\n1. Battez les oeufs entiers dans un saladier. Incorporez la farine puis le lait. Mélangez bien le tout afin d'obtenir une préparation lisse, type pate a crèpe épaisse.\n2. ajoutez le cumin, le sel (à ajuster en gouttant)\n3. Lavez et coupez la courgette en deux ou trois, puis dans la longeur (epaisseur D'un peu moins d'un cm).\_Trempez les rondelles de courgettes dans la pâte à beignets.\n4. Déposez les courgettes enrobées de pâte une par une dans un bain de friture bien chaud. Tournez-les quand la pâte est prise. Laissez-les dorer.\_Égouttez-les sur du papier absorbant et servez chaud."
 prepAlt: []
 astuces: []
 preparation24h: null
@@ -83,7 +83,7 @@ permissionWrite:
   - 698a0ed8cdbfef3c7606
 auteur: boris
 createdAt: '2026-04-07T21:50:32.031+00:00'
-updatedAt: '2026-05-26T15:56:13.493+00:00'
+updatedAt: '2026-05-26T15:57:22.035+00:00'
 createdBy: 698a0ed8cdbfef3c7606
 teams: []
 status: public

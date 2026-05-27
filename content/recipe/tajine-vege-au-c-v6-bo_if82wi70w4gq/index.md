@@ -1,6 +1,6 @@
 ---
-title: Tajine végé au citron
-date: '2026-05-27T10:43:56.138Z'
+title: Tajine végé au citron v2
+date: '2026-05-27T10:46:16.751Z'
 draft: true
 typeR: plat
 categories: []
@@ -122,10 +122,10 @@ ingredients:
     pS: false
   - uuid: h3c8al
     name: huile d'olive
-    originalQuantity: 0
+    originalQuantity: 2
     originalUnit: l.
-    normalizedQuantity: 0
-    normalizedUnit: l.
+    normalizedQuantity: 2000
+    normalizedUnit: ml
     comment: ''
     allergens: []
     type: lof
@@ -222,7 +222,7 @@ permissionWrite:
   - 698a0ed8cdbfef3c7606
 auteur: boris
 createdAt: '2026-05-27T10:43:54.390+00:00'
-updatedAt: '2026-05-27T10:43:54.390+00:00'
+updatedAt: '2026-05-27T10:46:15.412+00:00'
 createdBy: 698a0ed8cdbfef3c7606
 teams: []
 status: public

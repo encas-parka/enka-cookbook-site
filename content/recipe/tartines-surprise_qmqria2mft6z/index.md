@@ -1,6 +1,6 @@
 ---
 title: Tartines surprise
-date: '2026-04-04T20:26:30.191Z'
+date: '2026-05-27T08:33:00.727Z'
 draft: true
 typeR: entree
 categories:
@@ -16,8 +16,7 @@ description: tartines gratinées au four
 region: baba cool
 saison: []
 id: tartines-surprise_qmqria2mft6z
-materiel:
-  - Four
+materiel: []
 ingredients:
   - uuid: do20ro
     name: orties
@@ -78,11 +77,11 @@ ingredients:
     type: frais
   - uuid: kg0mr1
     name: Pain de mie
-    originalQuantity: 1
-    originalUnit: au goût
-    normalizedQuantity: 1
-    normalizedUnit: au goût
-    comment: tranches
+    originalQuantity: 10
+    originalUnit: unité
+    normalizedQuantity: 10
+    normalizedUnit: unité
+    comment: 10 tranches
     allergens:
       - Gluten
     type: autres
@@ -99,11 +98,11 @@ astuces: []
 preparation24h: null
 permissionWrite:
   - 69a0483c0031f868819d
-auteur: null
+auteur: aude.123
 createdAt: '2026-04-04T20:26:29.714+00:00'
-updatedAt: '2026-04-04T20:26:29.714+00:00'
+updatedAt: '2026-05-27T08:32:59.462+00:00'
 createdBy: 69a0483c0031f868819d
-teams: null
+teams: []
 status: public
 rootRecipeId: null
 versionLabel: null

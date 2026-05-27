@@ -1,6 +1,6 @@
 ---
 title: Petit déjeuner
-date: '2026-05-24T17:32:17.011Z'
+date: '2026-05-27T19:57:06.310Z'
 draft: false
 typeR: autre
 categories: []
@@ -244,6 +244,15 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+  - uuid: 6kg18g
+    name: sucre poudre
+    originalQuantity: 500
+    originalUnit: gr.
+    normalizedQuantity: 500
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: sec
 preparation: |-
   Faire cuire les oeufs
 
@@ -257,7 +266,7 @@ permissionWrite:
   - 696fb1cc000eb33adee7
 auteur: Miki
 createdAt: '2026-05-24T16:03:18.809+00:00'
-updatedAt: '2026-05-24T17:32:16.404+00:00'
+updatedAt: '2026-05-27T19:57:05.775+00:00'
 createdBy: 696fb1cc000eb33adee7
 teams: []
 status: public

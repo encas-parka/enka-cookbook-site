@@ -1,6 +1,6 @@
 ---
-title: Cheesecake sans cuisson au miel et au yaourt
-date: '2026-05-27T10:20:00.537Z'
+title: Cheesecake sans cuisson au miel et au yaourt v2
+date: '2026-05-27T10:21:17.517Z'
 draft: true
 typeR: dessert
 categories:
@@ -123,7 +123,7 @@ permissionWrite:
   - 698a0ed8cdbfef3c7606
 auteur: boris
 createdAt: '2026-05-27T10:19:58.740+00:00'
-updatedAt: '2026-05-27T10:19:58.740+00:00'
+updatedAt: '2026-05-27T10:21:16.297+00:00'
 createdBy: 698a0ed8cdbfef3c7606
 teams: []
 status: public

@@ -1,12 +1,12 @@
 ---
 title: Fondant au mars
-date: '2026-05-27T10:22:15.948Z'
+date: '2026-05-27T12:16:38.353Z'
 draft: true
 typeR: dessert
 categories: []
 regime:
   - vegetarien
-plate: 200
+plate: 3
 quantite_desc: null
 check: false
 cuisson: true
@@ -15,14 +15,13 @@ description: Recette de Moben "Mange ta peine"
 region: null
 saison: []
 id: fondant-au-mars_dzkvt4oi2msn
-materiel:
-  - Poêle
+materiel: []
 ingredients:
   - uuid: zf3zf8
     name: Oeuf
-    originalQuantity: 0
+    originalQuantity: 3
     originalUnit: gr.
-    normalizedQuantity: 0
+    normalizedQuantity: 3
     normalizedUnit: gr.
     comment: ''
     allergens:
@@ -30,18 +29,18 @@ ingredients:
     type: lof
   - uuid: c45liy
     name: Chocolat au lait
-    originalQuantity: 0
+    originalQuantity: 50
     originalUnit: gr.
-    normalizedQuantity: 0
+    normalizedQuantity: 50
     normalizedUnit: gr.
     comment: ''
     allergens: []
     type: sucres
   - uuid: kmq1zb
     name: Beurre doux
-    originalQuantity: 0
+    originalQuantity: 30
     originalUnit: gr.
-    normalizedQuantity: 0
+    normalizedQuantity: 30
     normalizedUnit: gr.
     comment: ''
     allergens:
@@ -49,9 +48,9 @@ ingredients:
     type: frais
   - uuid: 2av6w8
     name: Farine de blé
-    originalQuantity: 0
-    originalUnit: gr.
-    normalizedQuantity: 0
+    originalQuantity: 3
+    originalUnit: c. à soupe
+    normalizedQuantity: 30
     normalizedUnit: gr.
     comment: ''
     allergens:
@@ -60,19 +59,20 @@ ingredients:
 preparation: |-
   \*Ajouter les mars dans les ingrédients
 
-  Faites fondre le chocolat et les Mars coupés en morceaux dans le beurre à feu doux. Hors du feu, incorporez les œufs et la farine. 
-
-  Versez la pâte dans une poêle beurrée et farinée. Couvrez et faites cuire sur feu moyen 8 minutes, retournez et faites cuire l'autre face 2 minutes. Laissez refroidir au frais 2 heures. 
+  - Faites fondre le chocolat et les Mars coupés en morceaux dans le beurre à feu doux. 
+  - Hors du feu, incorporez les œufs et la farine.
+  - Versez la pâte dans une poêle beurrée et farinée. 
+  - Couvrez et faites cuire sur feu moyen 8 minutes, retournez et faites cuire l'autre face 2 minutes. Laissez refroidir au frais 2 heures.
 prepAlt: []
 astuces: []
 preparation24h: null
 permissionWrite:
   - 69b2b4d10025449a9043
-auteur: null
+auteur: frerylila
 createdAt: '2026-05-27T10:22:15.030+00:00'
-updatedAt: '2026-05-27T10:22:15.030+00:00'
+updatedAt: '2026-05-27T12:16:24.620+00:00'
 createdBy: 69b2b4d10025449a9043
-teams: null
+teams: []
 status: public
 rootRecipeId: null
 versionLabel: null

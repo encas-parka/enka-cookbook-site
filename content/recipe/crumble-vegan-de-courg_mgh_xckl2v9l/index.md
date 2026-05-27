@@ -1,6 +1,6 @@
 ---
 title: Crumble végan de courgette
-date: '2026-05-21T20:47:42.808Z'
+date: '2026-05-27T19:12:37.036Z'
 draft: false
 typeR: plat
 categories: []
@@ -105,6 +105,15 @@ ingredients:
     comment: au gout
     allergens: []
     type: epices
+  - uuid: 9zozfk
+    name: Courgette
+    originalQuantity: 9
+    originalUnit: kg
+    normalizedQuantity: 9000
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
 preparation: |-
   Faire précuire au four les courgettes en gros dés avec des échalotes, de l'huile, du sel, du poivre et des herbes de provence
 
@@ -118,7 +127,7 @@ permissionWrite:
   - 696fb1cc000eb33adee7
 auteur: Miki
 createdAt: '2026-05-16T09:45:08.494+00:00'
-updatedAt: '2026-05-21T20:47:38.242+00:00'
+updatedAt: '2026-05-27T19:12:32.434+00:00'
 createdBy: 696fb1cc000eb33adee7
 teams: []
 status: public

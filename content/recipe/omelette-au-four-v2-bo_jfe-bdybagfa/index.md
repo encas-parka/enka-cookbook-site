@@ -1,12 +1,13 @@
 ---
 title: Omelette au four -lait végétal
-date: '2026-05-27T09:56:26.549Z'
+date: '2026-05-27T09:56:49.866Z'
 draft: true
 typeR: plat
 categories: []
 regime:
   - vegetarien
   - sans-gluten
+  - sans-lactose
 plate: 100
 quantite_desc: null
 check: false
@@ -36,16 +37,6 @@ ingredients:
     normalizedUnit: gr.
     comment: ''
     allergens: []
-    type: lof
-  - uuid: dbbjuu
-    name: Lait entier
-    originalQuantity: 4.7
-    originalUnit: l.
-    normalizedQuantity: 4700
-    normalizedUnit: ml
-    comment: ''
-    allergens:
-      - Produit laitier
     type: lof
   - uuid: 2juq3x
     name: Sel
@@ -86,7 +77,7 @@ permissionWrite:
   - 698a0ed8cdbfef3c7606
 auteur: boris
 createdAt: '2026-05-27T09:56:25.536+00:00'
-updatedAt: '2026-05-27T09:56:25.536+00:00'
+updatedAt: '2026-05-27T09:56:48.667+00:00'
 createdBy: 698a0ed8cdbfef3c7606
 teams: []
 status: public

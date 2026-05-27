@@ -1,0 +1,80 @@
+---
+title: Fondant au mars
+date: '2026-05-27T10:22:15.948Z'
+draft: true
+typeR: dessert
+categories: []
+regime:
+  - vegetarien
+plate: 200
+quantite_desc: null
+check: false
+cuisson: true
+serveHot: false
+description: Recette de Moben "Mange ta peine"
+region: null
+saison: []
+id: fondant-au-mars_dzkvt4oi2msn
+materiel:
+  - Poêle
+ingredients:
+  - uuid: zf3zf8
+    name: Oeuf
+    originalQuantity: 0
+    originalUnit: gr.
+    normalizedQuantity: 0
+    normalizedUnit: gr.
+    comment: ''
+    allergens:
+      - Oeuf
+    type: lof
+  - uuid: c45liy
+    name: Chocolat au lait
+    originalQuantity: 0
+    originalUnit: gr.
+    normalizedQuantity: 0
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: sucres
+  - uuid: kmq1zb
+    name: Beurre doux
+    originalQuantity: 0
+    originalUnit: gr.
+    normalizedQuantity: 0
+    normalizedUnit: gr.
+    comment: ''
+    allergens:
+      - Produit laitier
+    type: frais
+  - uuid: 2av6w8
+    name: Farine de blé
+    originalQuantity: 0
+    originalUnit: gr.
+    normalizedQuantity: 0
+    normalizedUnit: gr.
+    comment: ''
+    allergens:
+      - Gluten
+    type: lof
+preparation: |-
+  \*Ajouter les mars dans les ingrédients
+
+  Faites fondre le chocolat et les Mars coupés en morceaux dans le beurre à feu doux. Hors du feu, incorporez les œufs et la farine. 
+
+  Versez la pâte dans une poêle beurrée et farinée. Couvrez et faites cuire sur feu moyen 8 minutes, retournez et faites cuire l'autre face 2 minutes. Laissez refroidir au frais 2 heures. 
+prepAlt: []
+astuces: []
+preparation24h: null
+permissionWrite:
+  - 69b2b4d10025449a9043
+auteur: null
+createdAt: '2026-05-27T10:22:15.030+00:00'
+updatedAt: '2026-05-27T10:22:15.030+00:00'
+createdBy: 69b2b4d10025449a9043
+teams: null
+status: public
+rootRecipeId: null
+versionLabel: null
+---
+

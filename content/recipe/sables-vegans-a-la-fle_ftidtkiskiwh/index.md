@@ -1,6 +1,6 @@
 ---
 title: Sablés vegans à la fleur doranger
-date: '2026-05-27T19:51:49.583Z'
+date: '2026-05-27T19:52:29.234Z'
 draft: true
 typeR: dessert
 categories: []
@@ -100,6 +100,8 @@ preparation: |-
 
   ajouter la fleur d'oranger, puis le lait végétal (ajuster selon la texture, peut se remplacer par de l'eau)
 
+  faire une boule et si possible laisser reposer au frai au moins 30min
+
   étaler sur du papier sulfurisé
 
   découper en 60 carrés ou losange avant d'enfourner 12-13min à 180° (jusqu'à légère dorure)
@@ -108,11 +110,11 @@ astuces: []
 preparation24h: null
 permissionWrite:
   - 696fb1cc000eb33adee7
-auteur: null
+auteur: Miki
 createdAt: '2026-05-27T19:51:46.010+00:00'
-updatedAt: '2026-05-27T19:51:46.010+00:00'
+updatedAt: '2026-05-27T19:52:28.764+00:00'
 createdBy: 696fb1cc000eb33adee7
-teams: null
+teams: []
 status: public
 rootRecipeId: null
 versionLabel: null

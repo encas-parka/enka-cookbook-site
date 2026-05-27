@@ -1,6 +1,6 @@
 ---
 title: Samousa
-date: "2026-04-04T21:33:41.845Z"
+date: '2026-05-27T08:31:14.741Z'
 draft: true
 typeR: entree
 categories:
@@ -13,12 +13,11 @@ quantite_desc: 2 /personne
 check: true
 cuisson: true
 serveHot: true
-description: " rouleaux croustillants fourrés parfumés "
+description: ' rouleaux croustillants fourrés parfumés '
 region: Indienne
 saison: []
 id: samousa_tqx7a61tluqw
-materiel:
-  - Four
+materiel: []
 ingredients:
   - uuid: 18dy4e
     name: Pomme de terre
@@ -35,7 +34,7 @@ ingredients:
     originalUnit: gr.
     normalizedQuantity: 100
     normalizedUnit: gr.
-    comment: "vert , haché menu "
+    comment: 'vert , haché menu '
     allergens: []
     type: legumes
   - uuid: jyius1
@@ -44,7 +43,7 @@ ingredients:
     originalUnit: gr.
     normalizedQuantity: 50
     normalizedUnit: gr.
-    comment: "surgelés "
+    comment: 'surgelés '
     allergens: []
     type: legumes
   - uuid: up1ydm
@@ -53,19 +52,19 @@ ingredients:
     originalUnit: unité
     normalizedQuantity: 20
     normalizedUnit: unité
-    comment: ""
+    comment: ''
     allergens:
       - Gluten
     type: sec
-  - uuid: e4mjd1
-    name: Jus de citron
+  - uuid: bwkn34
+    name: Citron (jus)
     originalQuantity: 15
     originalUnit: ml
     normalizedQuantity: 15
     normalizedUnit: ml
-    comment: ""
+    comment: ''
     allergens: []
-    type: sucres
+    type: legumes
   - uuid: rtavky
     name: Oignon
     originalQuantity: 2
@@ -81,25 +80,25 @@ ingredients:
     originalUnit: unité
     normalizedQuantity: 3
     normalizedUnit: unité
-    comment: ciselée
+    comment: '3 brins ciselés '
     allergens: []
     type: epices
   - uuid: he3u48
     name: Cumin moulu
-    originalQuantity: 0
+    originalQuantity: 5
     originalUnit: gr.
-    normalizedQuantity: 0
+    normalizedQuantity: 5
     normalizedUnit: gr.
-    comment: ""
+    comment: ''
     allergens: []
     type: epices
   - uuid: nf05n7
     name: Coriandre en poudre
-    originalQuantity: 0
+    originalQuantity: 5
     originalUnit: gr.
-    normalizedQuantity: 0
+    normalizedQuantity: 5
     normalizedUnit: gr.
-    comment: ""
+    comment: ''
     allergens: []
     type: epices
   - uuid: 0d1fzw
@@ -108,26 +107,26 @@ ingredients:
     originalUnit: c. à soupe
     normalizedQuantity: 15
     normalizedUnit: ml
-    comment: "râpé "
+    comment: 'râpé '
     allergens: []
     type: legumes
   - uuid: ljin96
     name: garam  massala
-    originalQuantity: 0
+    originalQuantity: 2
     originalUnit: gr.
-    normalizedQuantity: 0
+    normalizedQuantity: 2
     normalizedUnit: gr.
-    comment: ""
+    comment: ''
     allergens:
       - Moutarde
     type: epices
   - uuid: wr5x7u
     name: asa foetida
-    originalQuantity: 0
+    originalQuantity: 1
     originalUnit: gr.
-    normalizedQuantity: 0
+    normalizedQuantity: 1
     normalizedUnit: gr.
-    comment: ""
+    comment: ''
     allergens:
       - Céleri
     type: epices
@@ -142,12 +141,13 @@ astuces: []
 preparation24h: null
 permissionWrite:
   - 69a0483c0031f868819d
-auteur: null
-createdAt: "2026-04-04T21:33:41.362+00:00"
-updatedAt: "2026-04-22T11:15:54.150+00:00"
+auteur: aude.123
+createdAt: '2026-04-04T21:33:41.362+00:00'
+updatedAt: '2026-05-27T08:31:13.574+00:00'
 createdBy: 69a0483c0031f868819d
-teams: null
+teams: []
 status: public
 rootRecipeId: null
 versionLabel: null
 ---
+

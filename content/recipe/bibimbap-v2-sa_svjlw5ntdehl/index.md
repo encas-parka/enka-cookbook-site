@@ -1,6 +1,6 @@
 ---
 title: Bibimbap
-date: '2026-05-25T13:35:41.497Z'
+date: '2026-05-27T19:25:18.696Z'
 draft: true
 typeR: plat
 categories:
@@ -17,8 +17,7 @@ description: Bibimbap signifie en coréen « riz mélangé ». Au moment de la d
 region: Corée
 saison: []
 id: bibimbap-v2-sa_svjlw5ntdehl
-materiel:
-  - Four
+materiel: []
 ingredients:
   - uuid: fazth1
     name: huile de sésame
@@ -333,8 +332,7 @@ preparation: |-
 
   A cuire en plusieurs fois. Certainement 20 par 20.
 
-  Préchauffer l'eau de **64°C** à l'aide du thermoplongeur (si si la famille!). Plonger les
-  œufs à l'aide d'une araignée ou d'une écumoire. Cuire **54 min** exactement! Retirer les œufs à l'écumoire. Réserver.
+  Préchauffer l'eau de **64°C** à l'aide du thermoplongeur (si si la famille!). Plonger les œufs à l'aide d'une araignée ou d'une écumoire. Cuire **54 min** exactement! Retirer les œufs à l'écumoire. Réserver.
 
   **GARNITURE :**
 
@@ -378,7 +376,7 @@ preparation: |-
 
   Mixer à la girafe tous les ingrédients. Goûter et rectifier l'assaisonnement. Si la sauce est trop épaisse, la délayer avec plus d'eau.
 
-  **Pour les allergiques au gluten > voir recette sauce bibimbap sans allergènes.**
+  **Pour les allergiques au gluten &gt; voir recette sauce bibimbap sans allergènes.**
 
   **RIZ :** Cuire le riz dans deux rondo (3kg par rondo)
 
@@ -391,8 +389,7 @@ preparation: |-
   Déposer une portion de chaque garniture sur le riz en alternant les couleurs.
 
   Déposer l’œuf parfait écalé.
-prepAlt:
-  - recetteAlt: sauce-bibimbap-sans-allergenes_3n7u5n4d
+prepAlt: []
 astuces:
   - '{"astuce":"Attention : Il y a du sésame dans beaucoup de préparations. Et il y a du gluten dans le gochujan et le doenjang."}'
 preparation24h: null
@@ -400,9 +397,9 @@ permissionWrite:
   - 696fb1cc000eb33adee7
 auteur: Miki
 createdAt: '2026-05-25T13:35:41.020+00:00'
-updatedAt: '2026-05-25T13:35:41.020+00:00'
+updatedAt: '2026-05-27T19:25:18.033+00:00'
 createdBy: 696fb1cc000eb33adee7
-teams: null
+teams: []
 status: public
 rootRecipeId: bibimbap_xl5yo3cppn4p
 versionLabel: v2 - sans oeufs

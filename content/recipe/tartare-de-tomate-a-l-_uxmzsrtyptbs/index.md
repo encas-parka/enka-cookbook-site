@@ -1,6 +1,6 @@
 ---
 title: Tartare de tomate a l orientale
-date: '2026-05-27T09:12:59.079Z'
+date: '2026-05-27T09:25:16.967Z'
 draft: true
 typeR: entree
 categories: []
@@ -21,37 +21,37 @@ materiel: []
 ingredients:
   - uuid: ibtbnq
     name: Tomate
-    originalQuantity: 0
-    originalUnit: gr.
-    normalizedQuantity: 0
-    normalizedUnit: gr.
+    originalQuantity: 1
+    originalUnit: au goût
+    normalizedQuantity: 1
+    normalizedUnit: au goût
     comment: ''
     allergens: []
     type: legumes
   - uuid: 2juq3x
     name: Sel
-    originalQuantity: 0
-    originalUnit: gr.
-    normalizedQuantity: 0
-    normalizedUnit: gr.
+    originalQuantity: 1
+    originalUnit: au goût
+    normalizedQuantity: 1
+    normalizedUnit: au goût
     comment: ''
     allergens: []
     type: epices
   - uuid: g0lph5
     name: Miel
-    originalQuantity: 0
-    originalUnit: gr.
-    normalizedQuantity: 0
-    normalizedUnit: gr.
+    originalQuantity: 1
+    originalUnit: au goût
+    normalizedQuantity: 1
+    normalizedUnit: au goût
     comment: ''
     allergens: []
     type: sucres
   - uuid: j40pyf
     name: Ras el hanout
-    originalQuantity: 0
-    originalUnit: gr.
-    normalizedQuantity: 0
-    normalizedUnit: gr.
+    originalQuantity: 1
+    originalUnit: au goût
+    normalizedQuantity: 1
+    normalizedUnit: au goût
     comment: ''
     allergens:
       - Moutarde
@@ -67,11 +67,11 @@ astuces: []
 preparation24h: null
 permissionWrite:
   - 69b2b4d10025449a9043
-auteur: null
+auteur: frerylila
 createdAt: '2026-05-27T09:12:51.124+00:00'
-updatedAt: '2026-05-27T09:12:51.124+00:00'
+updatedAt: '2026-05-27T09:25:15.686+00:00'
 createdBy: 69b2b4d10025449a9043
-teams: null
+teams: []
 status: public
 rootRecipeId: null
 versionLabel: null

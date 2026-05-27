@@ -1,6 +1,6 @@
 ---
 title: Flan de courgette
-date: '2026-05-27T12:22:33.277Z'
+date: '2026-05-27T12:23:09.843Z'
 draft: true
 typeR: entree
 categories: []
@@ -77,8 +77,8 @@ ingredients:
     type: frais
 preparation: |-
   - Coupez la courgette en petits cubes et faites-les rissoler au beurre dans une poêle.
-  - Battez le petit-suisse avec les oeufs, le sel et poivere dans un bol et versez ce mélange dans la poêle sur les courgettes quand elles sont cuites à votre convenance.
-  - Cuire sur feu doux couvert pendants 30 minutes environ.
+  - Battez le petit-suisse avec les oeufs, le sel et poivre dans un bol et versez ce mélange dans la poêle sur les courgettes quand elles sont cuites à votre convenance.
+  - Cuire sur feu doux couvert pendant 30 minutes environ.
 prepAlt: []
 astuces: []
 preparation24h: null
@@ -86,7 +86,7 @@ permissionWrite:
   - 69b2b4d10025449a9043
 auteur: frerylila
 createdAt: '2026-05-27T09:40:29.150+00:00'
-updatedAt: '2026-05-27T12:22:32.432+00:00'
+updatedAt: '2026-05-27T12:23:09.252+00:00'
 createdBy: 69b2b4d10025449a9043
 teams: []
 status: public

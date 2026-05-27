@@ -1,6 +1,6 @@
 ---
-title: Tarte à la tomate chève miel
-date: '2026-05-27T09:48:54.535Z'
+title: Tarte à la tomate chève miel moutarde
+date: '2026-05-27T09:51:04.871Z'
 draft: true
 typeR: entree
 categories:
@@ -16,9 +16,7 @@ description: null
 region: null
 saison: []
 id: tarte-a-la-tomat-v2-bo_jswfb8a72lfk
-materiel:
-  - Four
-  - moule à tarte
+materiel: []
 ingredients:
   - uuid: iu5sb3
     name: Origan frais
@@ -223,9 +221,9 @@ permissionWrite:
   - 698a0ed8cdbfef3c7606
 auteur: boris
 createdAt: '2026-05-27T09:48:53.320+00:00'
-updatedAt: '2026-05-27T09:48:53.320+00:00'
+updatedAt: '2026-05-27T09:51:03.436+00:00'
 createdBy: 698a0ed8cdbfef3c7606
-teams: null
+teams: []
 status: public
 rootRecipeId: tarte-a-la-tomate-chev_b0xitdouzp0y
 versionLabel: v2 - boris

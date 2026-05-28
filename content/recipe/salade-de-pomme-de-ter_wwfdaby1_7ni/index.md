@@ -1,6 +1,6 @@
 ---
 title: Salade de pomme de terre
-date: '2026-05-27T20:21:01.548Z'
+date: '2026-05-28T08:52:02.705Z'
 draft: true
 typeR: plat
 categories:
@@ -104,23 +104,22 @@ ingredients:
     allergens: []
     type: legumes
 preparation: |-
-  Faire cuire les pommes de terre à la vapeur qu'elles soient bien cuites mais fermes
-
-  mandoliner les radis, cornichons, échalotes en très fin, hacher le persil
-
-  mélanger le yaourt, la moutarde, le vinaigre, saler poivrer, et l'huile
-
-  quand les pommes de terres sont bien froides bien mélanger sans écraser
+  - Eplucher les pommes de terre et les couper en morceau (environ 2/3cm). 
+  - Les faire cuire en les mettant dans l'eau froide, vérifier régulièrement la cuisson, le couteau doit pouvoir s'enfoncer mais la pomme de terre bien se tenir
+  - Mandoliner les radis, cornichons, échalotes en très fin, hacher le persil
+  - Mélanger le yaourt, la moutarde, le vinaigre, saler poivrer, et l'huile
+  - Quand les pommes de terres sont bien froides bien mélanger sans écraser
+  - Servir froid
 prepAlt: []
 astuces: []
 preparation24h: null
 permissionWrite:
   - 696fb1cc000eb33adee7
-auteur: null
+auteur: Miki
 createdAt: '2026-05-27T20:21:01.051+00:00'
-updatedAt: '2026-05-27T20:21:01.051+00:00'
+updatedAt: '2026-05-28T08:51:57.270+00:00'
 createdBy: 696fb1cc000eb33adee7
-teams: null
+teams: []
 status: public
 rootRecipeId: null
 versionLabel: null

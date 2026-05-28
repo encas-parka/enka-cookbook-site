@@ -1,6 +1,6 @@
 ---
 title: Risotto citronconfit cranberries et olives vertes au four
-date: '2026-03-22T09:58:10.549Z'
+date: '2026-05-28T09:06:49.454Z'
 draft: false
 typeR: plat
 categories:
@@ -103,7 +103,44 @@ ingredients:
     comment: méditérannéens c'est meilleur
     allergens: []
     type: epices
-preparation: a venir
+  - uuid: pvyqkq
+    name: papier aluminium
+    originalQuantity: 4
+    originalUnit: unité
+    normalizedQuantity: 4
+    normalizedUnit: unité
+    comment: ''
+    allergens: []
+    type: autres
+  - uuid: chfwwq
+    name: Crème soja
+    originalQuantity: 25
+    originalUnit: ml
+    normalizedQuantity: 25
+    normalizedUnit: ml
+    comment: ''
+    allergens:
+      - Soja
+    type: lof
+  - uuid: 4be4ic
+    name: Levure de bière
+    originalQuantity: 50
+    originalUnit: gr.
+    normalizedQuantity: 50
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: lof
+preparation: |-
+  - Faire tremper les cranberries dans le jus de citron (compléter avec de l'eau si nécessaire)
+  - Dans un rondo ou une grande poele, faire revenir le riz qu'il soit transparent.
+  - Ajouter l'ail haché ou pressé et le vin blanc, du sel, du poivre. Mélanger jusqu'à ce qu'il s'évapore
+  - Hors du feu ajouter les olives en morceaux, le citron confit haché très fin et bien mélanger
+  - Dispatcher le riz de manière équilibré dans des gastro profond, il doit rester assez de place pour le liquide
+  - Rajouter le bouillon de manière équilibré (si le transport jusqu'au four est délicat on peut le faire avec les gastros déjà au four)
+  - Couvrir d'aluminium et envoyer au four à 220°C pendant 30min (il reste encore beaucoup de liquide et le riz est "aldente" c'est normal)
+  - Laisser finir de cuire hors du feu (il faut donc prévoir en tout au moins 1h de cuisson)
+  - Bien mélanger et ajouter les cranberries, la crème soja et la levure de bière
 prepAlt: []
 astuces: []
 preparation24h: null
@@ -111,7 +148,7 @@ permissionWrite:
   - 696fb1cc000eb33adee7
 auteur: Miki
 createdAt: '2026-03-22T09:32:18.088+00:00'
-updatedAt: '2026-03-22T09:58:10.377+00:00'
+updatedAt: '2026-05-28T09:06:48.651+00:00'
 createdBy: 696fb1cc000eb33adee7
 teams: []
 status: public

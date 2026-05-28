@@ -1,6 +1,6 @@
 ---
 title: Boissons
-date: '2026-05-28T18:53:20.562Z'
+date: '2026-05-28T18:57:52.056Z'
 draft: true
 typeR: autre
 categories: []
@@ -49,11 +49,11 @@ ingredients:
     type: sucres
   - uuid: y16lzq
     name: Menthe fraîche
-    originalQuantity: null
-    originalUnit: bottes
-    normalizedQuantity: 0
-    normalizedUnit: bottes
-    comment: ''
+    originalQuantity: 5
+    originalUnit: unité
+    normalizedQuantity: 5
+    normalizedUnit: unité
+    comment: branches
     allergens: []
     type: epices
   - uuid: 5cg0yu
@@ -74,17 +74,26 @@ ingredients:
     comment: Sirop au choix
     allergens: []
     type: sucres
+  - uuid: ekw33n
+    name: Eau gazeuse
+    originalQuantity: 7
+    originalUnit: l.
+    normalizedQuantity: 7000
+    normalizedUnit: ml
+    comment: ''
+    allergens: []
+    type: autres
 preparation: 'Préparer 10L d''eau aromatiser an y ajoutant herbe, fleur et/ou citron. '
 prepAlt: []
 astuces: []
 preparation24h: null
 permissionWrite:
   - 6a021d44e7881f37bda3
-auteur: null
+auteur: mar
 createdAt: '2026-05-28T18:53:20.104+00:00'
-updatedAt: '2026-05-28T18:53:20.104+00:00'
+updatedAt: '2026-05-28T18:57:51.520+00:00'
 createdBy: 6a021d44e7881f37bda3
-teams: null
+teams: []
 status: public
 rootRecipeId: null
 versionLabel: null

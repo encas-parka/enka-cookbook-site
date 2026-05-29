@@ -1,6 +1,6 @@
 ---
 title: Tapioca perlée coco-muscade
-date: '2026-05-20T18:51:04.075Z'
+date: '2026-05-29T06:24:36.706Z'
 draft: true
 typeR: dessert
 categories:
@@ -18,11 +18,7 @@ description: null
 region: null
 saison: []
 id: tapioca-perlee-c-v2-ma_x9d2cdxoty_s
-materiel:
-  - Frigo
-  - Bruleur
-  - Marmitte
-  - Ramequins
+materiel: []
 ingredients:
   - uuid: mkttuh
     name: Tapioca perlée
@@ -71,10 +67,19 @@ ingredients:
     comment: ajuster selon la préférence
     allergens: []
     type: sec
+  - uuid: 1koje1
+    name: Citron vert
+    originalQuantity: 10
+    originalUnit: unité
+    normalizedQuantity: 1000
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
 preparation: |-
   1 - A feu moyen, faire chauffer le lait de coco, l'eau et le sucre
 
-  2 - Ajouter la noix de muscade rapée ( c'est un assaisonnement , tester avant de tout mettre )
+  2 - Ajouter la noix de muscade rapée ( c'est un assaisonnement , tester avant de tout mettre ) et les zest de citron vert
 
   3 - Ajouter les perles de tapioca tout en remuant 6min environ
 
@@ -82,7 +87,7 @@ preparation: |-
 
   5 - Laisser refroidir ( les perles continuent de gonfler) puis mettre au frigo pour que la préparation prenne en consistance.
 
-  Peut-être préparé 3heures environ avant de servir
+  Peut être préparé 3heures environ avant de servir ou la veille
 prepAlt: []
 astuces: []
 preparation24h: null
@@ -90,9 +95,9 @@ permissionWrite:
   - 6a021d44e7881f37bda3
 auteur: mar
 createdAt: '2026-05-20T18:50:58.147+00:00'
-updatedAt: '2026-05-20T18:50:58.147+00:00'
+updatedAt: '2026-05-29T06:24:28.678+00:00'
 createdBy: 6a021d44e7881f37bda3
-teams: null
+teams: []
 status: public
 rootRecipeId: tapioca-perlee-au-choc_cdgi7zr74m9y
 versionLabel: v2 - mar

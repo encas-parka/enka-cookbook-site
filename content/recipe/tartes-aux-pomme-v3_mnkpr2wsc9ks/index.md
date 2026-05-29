@@ -1,6 +1,6 @@
 ---
 title: Tartes aux pommes caramel cannelle
-date: '2026-05-20T19:54:26.355Z'
+date: '2026-05-29T06:42:13.656Z'
 draft: true
 typeR: dessert
 categories:
@@ -139,12 +139,44 @@ ingredients:
     comment: pommes au caramel
     allergens: []
     type: frais
+  - uuid: u33083
+    name: Tahin
+    originalQuantity: 80
+    originalUnit: gr.
+    normalizedQuantity: 80
+    normalizedUnit: gr.
+    comment: crème au tahin
+    allergens:
+      - Sésame
+    type: autres
+  - uuid: 6kg18g
+    name: sucre poudre
+    originalQuantity: 15
+    originalUnit: gr.
+    normalizedQuantity: 15
+    normalizedUnit: gr.
+    comment: crème au tahin
+    allergens: []
+    type: sec
+  - uuid: 8j3hna
+    name: Margarine végétale spécial cuisson
+    originalQuantity: 20
+    originalUnit: gr.
+    normalizedQuantity: 20
+    normalizedUnit: gr.
+    comment: crème de tahin
+    allergens: []
+    type: frais
 preparation: |-
   ### Pâte à tarte :
 
   Cuire 15 min à 180°C seul (idéalement avec poids dessus au début)
 
-  ### Étapes pommes 
+  ### Étapes crème de tahin
+
+  - fouetter les ingrédients ( tahin, sucre, margarine) pendant 5 min , réserver
+
+  ### Étapes pommes
 
   - **éplucher et découpez en lamelles les pommes, réservez 1/3 à caraméliser et le reste mettez les dans un cul de poule avec le jus d'orange et la cannelle**
 
@@ -158,9 +190,11 @@ preparation: |-
 
   ### Dressage
 
-  Dressez la tarte en alternant pommes aux caramel et pommes crue
+  tartiner le fond de tarte de crème de tahin
 
-  **Cuisson :** 
+  puis dressez en alternant pommes aux caramel et pommes crue
+
+  **Cuisson :**
 
   Cuire 20min à 180°C
 prepAlt: []
@@ -175,7 +209,7 @@ permissionWrite:
   - 6a021d44e7881f37bda3
 auteur: mar
 createdAt: '2026-05-20T19:54:21.590+00:00'
-updatedAt: '2026-05-20T19:54:21.590+00:00'
+updatedAt: '2026-05-29T06:42:08.956+00:00'
 createdBy: 6a021d44e7881f37bda3
 teams: []
 status: public

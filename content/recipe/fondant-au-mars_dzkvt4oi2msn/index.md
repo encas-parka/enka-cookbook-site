@@ -1,6 +1,6 @@
 ---
 title: Fondant au mars
-date: '2026-05-27T12:16:38.353Z'
+date: '2026-05-29T19:49:35.927Z'
 draft: true
 typeR: dessert
 categories: []
@@ -20,9 +20,9 @@ ingredients:
   - uuid: zf3zf8
     name: Oeuf
     originalQuantity: 3
-    originalUnit: gr.
+    originalUnit: unité
     normalizedQuantity: 3
-    normalizedUnit: gr.
+    normalizedUnit: unité
     comment: ''
     allergens:
       - Oeuf
@@ -70,7 +70,7 @@ permissionWrite:
   - 69b2b4d10025449a9043
 auteur: frerylila
 createdAt: '2026-05-27T10:22:15.030+00:00'
-updatedAt: '2026-05-27T12:16:24.620+00:00'
+updatedAt: '2026-05-29T19:49:35.419+00:00'
 createdBy: 69b2b4d10025449a9043
 teams: []
 status: public

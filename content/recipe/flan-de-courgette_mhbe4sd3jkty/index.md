@@ -1,6 +1,6 @@
 ---
 title: Flan de courgette
-date: '2026-05-27T12:23:09.843Z'
+date: '2026-05-29T19:35:15.555Z'
 draft: true
 typeR: entree
 categories: []
@@ -21,18 +21,18 @@ ingredients:
   - uuid: 9zozfk
     name: Courgette
     originalQuantity: 1
-    originalUnit: gr.
-    normalizedQuantity: 1
+    originalUnit: unité
+    normalizedQuantity: 200
     normalizedUnit: gr.
     comment: ''
     allergens: []
     type: legumes
   - uuid: b2dxf8
     name: Fromage blanc
-    originalQuantity: 1
-    originalUnit: unité
-    normalizedQuantity: 1
-    normalizedUnit: unité
+    originalQuantity: 100
+    originalUnit: gr.
+    normalizedQuantity: 100
+    normalizedUnit: gr.
     comment: '"1 petit suisse dans la recette à remplacer par du fromage blanc'
     allergens:
       - Produit laitier
@@ -86,7 +86,7 @@ permissionWrite:
   - 69b2b4d10025449a9043
 auteur: frerylila
 createdAt: '2026-05-27T09:40:29.150+00:00'
-updatedAt: '2026-05-27T12:23:09.252+00:00'
+updatedAt: '2026-05-29T19:35:04.314+00:00'
 createdBy: 69b2b4d10025449a9043
 teams: []
 status: public

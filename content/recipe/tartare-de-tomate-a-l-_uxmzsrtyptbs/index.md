@@ -1,6 +1,6 @@
 ---
 title: Tartare de tomate a l orientale
-date: '2026-05-27T12:25:30.703Z'
+date: '2026-05-29T20:12:03.465Z'
 draft: true
 typeR: entree
 categories: []
@@ -10,7 +10,7 @@ regime:
   - sans-lactose
 plate: 2
 quantite_desc: null
-check: false
+check: true
 cuisson: false
 serveHot: false
 description: Recette de Moben "Mange ta peine"
@@ -67,7 +67,7 @@ permissionWrite:
   - 69b2b4d10025449a9043
 auteur: frerylila
 createdAt: '2026-05-27T09:12:51.124+00:00'
-updatedAt: '2026-05-27T12:25:27.236+00:00'
+updatedAt: '2026-05-29T20:12:03.070+00:00'
 createdBy: 69b2b4d10025449a9043
 teams: []
 status: public

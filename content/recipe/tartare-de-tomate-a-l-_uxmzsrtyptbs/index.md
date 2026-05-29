@@ -1,6 +1,6 @@
 ---
 title: Tartare de tomate a l orientale
-date: '2026-05-29T20:12:03.465Z'
+date: '2026-05-29T20:12:11.043Z'
 draft: true
 typeR: entree
 categories: []
@@ -8,7 +8,7 @@ regime:
   - vegan
   - sans-gluten
   - sans-lactose
-plate: 2
+plate: 3
 quantite_desc: null
 check: true
 cuisson: false
@@ -67,7 +67,7 @@ permissionWrite:
   - 69b2b4d10025449a9043
 auteur: frerylila
 createdAt: '2026-05-27T09:12:51.124+00:00'
-updatedAt: '2026-05-29T20:12:03.070+00:00'
+updatedAt: '2026-05-29T20:12:10.635+00:00'
 createdBy: 69b2b4d10025449a9043
 teams: []
 status: public

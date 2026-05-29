@@ -1,0 +1,88 @@
+---
+title: Galette de legumes
+date: '2026-05-29T19:39:20.387Z'
+draft: true
+typeR: plat
+categories: []
+regime:
+  - vegan
+  - sans-lactose
+plate: 2
+quantite_desc: null
+check: false
+cuisson: false
+serveHot: true
+description: Recette de Moben "Mange ta peine"
+region: null
+saison: []
+id: galette-de-legum-v2-fr_-kbxbuif_gli
+materiel: []
+ingredients:
+  - uuid: khdlkd
+    name: Lentilles
+    originalQuantity: 250
+    originalUnit: gr.
+    normalizedQuantity: 250
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: sec
+  - uuid: h3c8al
+    name: huile d'olive
+    originalQuantity: 1
+    originalUnit: c. à soupe
+    normalizedQuantity: 15
+    normalizedUnit: ml
+    comment: ''
+    allergens: []
+    type: lof
+  - uuid: n2y6r7
+    name: 5 épices
+    originalQuantity: 1
+    originalUnit: au goût
+    normalizedQuantity: 1
+    normalizedUnit: au goût
+    comment: ''
+    allergens:
+      - Vérifier emballage
+    type: epices
+  - uuid: vgec6e
+    name: Levure chimique
+    originalQuantity: 1
+    originalUnit: c. à café
+    normalizedQuantity: 5
+    normalizedUnit: ml
+    comment: ''
+    allergens:
+      - Gluten
+    type: lof
+  - uuid: 2ej7fi
+    name: Farine de blé noir (sarrasin)
+    originalQuantity: 4
+    originalUnit: c. à soupe
+    normalizedQuantity: 40
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: lof
+preparation: |-
+  - Versez les lentilles dans un saladier. 
+  - Ajoutez l'huile, les épices, la farine et la levure. 
+  - Mélangez à l'aide d'une cuillère et n'hésitez pas à bien mélanger pour que cela forme une pâte. Laissez reposer 20 minutes. 
+  - Etalez cette pâte dans une poêle chaude, sur feu moyen et laissez colorer. 
+  - Retournez la galette pour colorer l'autre face.
+prepAlt: []
+astuces: []
+preparation24h: null
+permissionWrite:
+  - 69b2b4d10025449a9043
+auteur: frerylila
+createdAt: '2026-05-29T19:39:19.924+00:00'
+updatedAt: '2026-05-29T19:39:19.924+00:00'
+createdBy: 69b2b4d10025449a9043
+teams: []
+status: public
+rootRecipeId: galette-de-legumes_h6bprdp2h-pa
+versionLabel: v2 - frerylila
+---
+

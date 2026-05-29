@@ -1,6 +1,6 @@
 ---
 title: Galette de legumes
-date: '2026-05-29T19:37:07.979Z'
+date: '2026-05-29T20:11:16.907Z'
 draft: true
 typeR: plat
 categories: []
@@ -9,7 +9,7 @@ regime:
   - sans-lactose
 plate: 2
 quantite_desc: null
-check: false
+check: true
 cuisson: false
 serveHot: true
 description: Recette de Moben "Mange ta peine"
@@ -79,7 +79,7 @@ permissionWrite:
   - 69b2b4d10025449a9043
 auteur: frerylila
 createdAt: '2026-05-27T10:03:35.205+00:00'
-updatedAt: '2026-05-29T19:37:05.671+00:00'
+updatedAt: '2026-05-29T20:11:16.389+00:00'
 createdBy: 69b2b4d10025449a9043
 teams: []
 status: public

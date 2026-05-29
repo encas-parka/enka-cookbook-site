@@ -1,6 +1,6 @@
 ---
 title: Galette de legumes
-date: '2026-05-27T12:19:43.664Z'
+date: '2026-05-29T19:37:07.979Z'
 draft: true
 typeR: plat
 categories: []
@@ -24,7 +24,7 @@ ingredients:
     originalUnit: gr.
     normalizedQuantity: 250
     normalizedUnit: gr.
-    comment: 1 boite de conserve
+    comment: ''
     allergens: []
     type: sec
   - uuid: 2av6w8
@@ -79,7 +79,7 @@ permissionWrite:
   - 69b2b4d10025449a9043
 auteur: frerylila
 createdAt: '2026-05-27T10:03:35.205+00:00'
-updatedAt: '2026-05-27T12:19:42.690+00:00'
+updatedAt: '2026-05-29T19:37:05.671+00:00'
 createdBy: 69b2b4d10025449a9043
 teams: []
 status: public

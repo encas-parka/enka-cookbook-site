@@ -1,6 +1,6 @@
 ---
 title: Fondant au mars
-date: '2026-05-29T19:49:35.927Z'
+date: '2026-05-29T19:51:37.286Z'
 draft: true
 typeR: dessert
 categories: []
@@ -56,6 +56,17 @@ ingredients:
     allergens:
       - Gluten
     type: lof
+  - uuid: oz2hcf
+    name: Barre de mars
+    originalQuantity: 2
+    originalUnit: unité
+    normalizedQuantity: 2
+    normalizedUnit: unité
+    comment: ''
+    allergens:
+      - Produit laitier
+      - Vérifier emballage
+    type: autres
 preparation: |-
   \*Ajouter les mars dans les ingrédients
 
@@ -70,7 +81,7 @@ permissionWrite:
   - 69b2b4d10025449a9043
 auteur: frerylila
 createdAt: '2026-05-27T10:22:15.030+00:00'
-updatedAt: '2026-05-29T19:49:35.419+00:00'
+updatedAt: '2026-05-29T19:51:36.757+00:00'
 createdBy: 69b2b4d10025449a9043
 teams: []
 status: public

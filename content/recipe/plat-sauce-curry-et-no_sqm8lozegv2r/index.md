@@ -1,6 +1,6 @@
 ---
 title: Plat sauce curry et nouilles de riz
-date: '2026-05-25T14:12:49.035Z'
+date: '2026-05-30T09:48:39.692Z'
 draft: true
 typeR: plat
 categories:
@@ -22,9 +22,9 @@ materiel: []
 ingredients:
   - uuid: mesg7t
     name: Nouilles de riz
-    originalQuantity: 6
+    originalQuantity: 7.5
     originalUnit: kg
-    normalizedQuantity: 6000
+    normalizedQuantity: 7500
     normalizedUnit: gr.
     comment: ''
     allergens: []
@@ -67,9 +67,9 @@ ingredients:
     type: legumes
   - uuid: wwl5vn
     name: Pois chiche cuit
-    originalQuantity: 8
+    originalQuantity: 6
     originalUnit: kg
-    normalizedQuantity: 8000
+    normalizedQuantity: 6000
     normalizedUnit: gr.
     comment: ''
     allergens: []
@@ -124,11 +124,11 @@ astuces: []
 preparation24h: null
 permissionWrite:
   - 696fb1cc000eb33adee7
-auteur: null
+auteur: Miki
 createdAt: '2026-05-25T14:12:48.495+00:00'
-updatedAt: '2026-05-25T14:12:48.495+00:00'
+updatedAt: '2026-05-30T09:48:31.630+00:00'
 createdBy: 696fb1cc000eb33adee7
-teams: null
+teams: []
 status: public
 rootRecipeId: null
 versionLabel: null

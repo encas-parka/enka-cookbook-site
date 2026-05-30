@@ -1,6 +1,6 @@
 ---
 title: Plat sauce curry et nouilles de riz
-date: '2026-05-30T09:48:39.692Z'
+date: '2026-05-30T11:48:24.954Z'
 draft: true
 typeR: plat
 categories:
@@ -22,9 +22,9 @@ materiel: []
 ingredients:
   - uuid: mesg7t
     name: Nouilles de riz
-    originalQuantity: 7.5
+    originalQuantity: 6
     originalUnit: kg
-    normalizedQuantity: 7500
+    normalizedQuantity: 6000
     normalizedUnit: gr.
     comment: ''
     allergens: []
@@ -126,7 +126,7 @@ permissionWrite:
   - 696fb1cc000eb33adee7
 auteur: Miki
 createdAt: '2026-05-25T14:12:48.495+00:00'
-updatedAt: '2026-05-30T09:48:31.630+00:00'
+updatedAt: '2026-05-30T11:48:11.725+00:00'
 createdBy: 696fb1cc000eb33adee7
 teams: []
 status: public

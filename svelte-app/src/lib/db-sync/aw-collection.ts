@@ -170,9 +170,10 @@ export function createSyncCollection<T extends AwDoc>(options: {
 	async function initialFetch(fetchOptions?: AwFetchOptions): Promise<void> {
 		const { tables, config } = await getAppwriteInstances();
 		const collectionId = await resolveCollectionId();
+		const syncKey = fetchOptions?.scopeKey ? `${collectionId}:${fetchOptions.scopeKey}` : collectionId;
 
-		// 1. Read last sync timestamp from Dexie
-		const meta = await db.syncMeta.get(collectionId);
+		// 1. Read last sync timestamp from Dexie (scoped if scopeKey provided)
+		const meta = await db.syncMeta.get(syncKey);
 		const lastSync = meta?.lastSync ?? null;
 
 		// 2. Build queries
@@ -224,12 +225,12 @@ export function createSyncCollection<T extends AwDoc>(options: {
 				? allRows[allRows.length - 1].$updatedAt
 				: new Date().toISOString();
 		await db.syncMeta.put({
-			collectionId,
+			collectionId: syncKey,
 			lastSync: newTimestamp
 		} satisfies SyncMetaRow);
 
 		console.log(
-			`[aw-sync] ${String(collectionName)}: ${allRows.length} records synced (lastSync: ${lastSync ?? 'full'} → ${newTimestamp.slice(0, 19)})`
+			`[aw-sync] ${String(collectionName)}${fetchOptions?.scopeKey ? `:${fetchOptions.scopeKey}` : ''}: ${allRows.length} records synced (lastSync: ${lastSync ?? 'full'} → ${newTimestamp.slice(0, 19)})`
 		);
 	}
 
@@ -517,7 +518,7 @@ export function createSyncCollection<T extends AwDoc>(options: {
 		const collectionId = await resolveCollectionId();
 		await db.transaction('rw', [table, db.syncMeta], async () => {
 			await table.clear();
-			await db.syncMeta.delete(collectionId);
+			await db.syncMeta.where('collectionId').startsWith(collectionId).delete();
 		});
 		console.log(`[aw-sync] clearLocal ${String(collectionName)}`);
 	}

@@ -780,9 +780,11 @@ class ProductsStore {
       this.#syncing = true;
       await this.#productsCollection.initialFetch({
         queries: [Query.equal("mainId", this.#currentMainId!)],
+        scopeKey: this.#currentMainId!,
       });
       await this.#purchasesCollection.initialFetch({
         queries: [Query.equal("mainId", this.#currentMainId!)],
+        scopeKey: this.#currentMainId!,
       });
       this.#syncing = false;
       this.#lastSync = new Date().toISOString();
@@ -1314,9 +1316,11 @@ class ProductsStore {
       await Promise.all([
         this.#productsCollection.initialFetch({
           queries: [Query.equal("mainId", this.#currentMainId)],
+          scopeKey: this.#currentMainId,
         }),
         this.#purchasesCollection.initialFetch({
           queries: [Query.equal("mainId", this.#currentMainId)],
+          scopeKey: this.#currentMainId,
         }),
       ]);
       this.#lastSync = new Date().toISOString();

@@ -162,6 +162,7 @@ export class EventMaterielStore {
 
       await this.#collection.initialFetch({
         queries: [Query.equal("eventId", eventId)],
+        scopeKey: eventId,
       });
 
       // Phase 3: Realtime

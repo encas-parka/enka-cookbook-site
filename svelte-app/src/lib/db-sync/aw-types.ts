@@ -32,6 +32,12 @@ export interface AwDoc {
 export interface AwFetchOptions {
 	/** Additional Appwrite queries to scope the fetch (e.g. Query.equal("mainId", id)) */
 	queries?: unknown[];
+	/**
+	 * Scopes the syncMeta cursor to a specific context (e.g. eventId).
+	 * Without scope, cursor is global per collection — switching events can miss older records.
+	 * With scope, cursor becomes `collectionId:scopeKey`, giving per-event delta sync.
+	 */
+	scopeKey?: string;
 }
 
 /**

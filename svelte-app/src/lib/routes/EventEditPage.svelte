@@ -26,6 +26,7 @@
     CalendarPlus,
     XCircle,
     Download,
+    Trash2,
   } from "@lucide/svelte";
   import { nanoid } from "nanoid";
   import { flip } from "svelte/animate";
@@ -98,6 +99,13 @@
     recipeUuid: string;
     typeR: RecettesTypeR;
     sourceHasDate: boolean;
+  } | null>(null);
+
+  // Suppression de recette (recettes à planifier)
+  let showDeleteRecipeModal = $state(false);
+  let deletingRecipe = $state<{
+    mealId: string;
+    recipeUuid: string;
   } | null>(null);
 
   // Meals datés pour le modal (exclut le meal source si on réassigne depuis un meal daté)
@@ -888,6 +896,36 @@
   // AUTRES HANDLERS
   // ============================================================================
 
+  async function openDeleteRecipeModal(mealId: string, recipeUuid: string) {
+    if (!(await startEditing())) return;
+    deletingRecipe = { mealId, recipeUuid };
+    showDeleteRecipeModal = true;
+  }
+
+  function handleDeleteRecipe() {
+    if (!deletingRecipe) return;
+
+    const { mealId, recipeUuid } = deletingRecipe;
+    let newMeals = [...meals];
+    const mealIdx = newMeals.findIndex((m) => m.id === mealId);
+    if (mealIdx === -1) return;
+
+    const meal = newMeals[mealIdx];
+    const updatedRecipes = meal.recipes.filter(
+      (r) => r.recipeUuid !== recipeUuid,
+    );
+
+    if (updatedRecipes.length === 0 && meal.date === "") {
+      newMeals.splice(mealIdx, 1);
+    } else {
+      newMeals[mealIdx] = { ...meal, recipes: updatedRecipes };
+    }
+
+    meals = newMeals;
+    showDeleteRecipeModal = false;
+    deletingRecipe = null;
+  }
+
   async function handleInvitationResponse(accept: boolean) {
     if (!eventId || !globalState.userId) return;
 
@@ -1255,6 +1293,19 @@
                   >
                     <ChefHat class="size-4 shrink-0" />
                     <span class="leading-none">{recipeName}</span>
+                    <button
+                      class="btn btn-sm btn-square btn-outline btn-error"
+                      onclick={() =>
+                        openDeleteRecipeModal(
+                          undatedMeal.id || "",
+                          recipe.recipeUuid,
+                        )
+                      }
+                      disabled={!canEdit}
+                      title="Supprimer la recette"
+                    >
+                      <Trash2 class="size-3.5" />
+                    </button>
                     {#if sortedDatedMeals.length > 0}
                       <button
                         class="btn btn-sm btn-square btn-outline btn-primary"
@@ -1390,6 +1441,20 @@
     allowSetAside={assigningRecipe.sourceHasDate}
   />
 {/if}
+
+<ConfirmModal
+  isOpen={showDeleteRecipeModal}
+  title="Supprimer la recette"
+  message="Voulez-vous supprimer cette recette de l'événement ?"
+  variant="danger"
+  confirmLabel="Supprimer"
+  cancelLabel="Annuler"
+  onConfirm={handleDeleteRecipe}
+  onCancel={() => {
+    showDeleteRecipeModal = false;
+    deletingRecipe = null;
+  }}
+/>
 
 <!-- Guard de navigation pour modifications non sauvegardées -->
 <UnsavedChangesGuard

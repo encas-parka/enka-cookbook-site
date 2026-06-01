@@ -16,6 +16,7 @@
     Check,
     RefreshCcw,
     CalendarCog,
+    Trash,
   } from "@lucide/svelte";
   import type { EventMeal, EventMealRecipe } from "$lib/types/events.d";
   import type {
@@ -563,7 +564,7 @@
                       title="Retirer la recette"
                       {disabled}
                     >
-                      <X class="h-4 w-4" />
+                      <Trash2 class="h-4 w-4" />
                     </button>
                   </div>
                 </div>

@@ -1,6 +1,6 @@
 ---
 title: Tajine végé au citron v2
-date: '2026-06-02T01:02:15.153Z'
+date: '2026-06-02T01:03:02.670Z'
 draft: true
 typeR: plat
 categories: []
@@ -131,17 +131,6 @@ ingredients:
     type: lof
     pF: false
     pS: false
-  - uuid: v1kli8
-    name: Gousse d'ail
-    originalQuantity: 20
-    originalUnit: unité
-    normalizedQuantity: 20
-    normalizedUnit: unité
-    comment: ''
-    allergens: []
-    type: epices
-    pF: false
-    pS: false
   - uuid: 9yf54l
     name: Raisin sec
     originalQuantity: 250
@@ -231,7 +220,7 @@ permissionWrite:
   - 698a0ed8cdbfef3c7606
 auteur: boris
 createdAt: '2026-05-27T10:43:54.390+00:00'
-updatedAt: '2026-06-02T01:02:14.705+00:00'
+updatedAt: '2026-06-02T01:03:02.293+00:00'
 createdBy: 698a0ed8cdbfef3c7606
 teams: []
 status: public

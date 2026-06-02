@@ -1,6 +1,6 @@
 ---
 title: Tajine végé au citron v2
-date: '2026-05-27T10:46:16.751Z'
+date: '2026-06-02T01:02:15.153Z'
 draft: true
 typeR: plat
 categories: []
@@ -137,7 +137,7 @@ ingredients:
     originalUnit: unité
     normalizedQuantity: 20
     normalizedUnit: unité
-    comment: À râper ou presser
+    comment: ''
     allergens: []
     type: epices
     pF: false
@@ -199,6 +199,15 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+  - uuid: u2m28w
+    name: Ail
+    originalQuantity: 20
+    originalUnit: gousse·s
+    normalizedQuantity: 130
+    normalizedUnit: gr.
+    comment: À râper ou presser
+    allergens: []
+    type: legumes
 preparation: |-
   Recette testée avec des légumes d'hiver et pour 4 personnes d'abord dans un plat à tajine puis pour 50 personnes avec une grande casserole/marmitte.
 
@@ -222,7 +231,7 @@ permissionWrite:
   - 698a0ed8cdbfef3c7606
 auteur: boris
 createdAt: '2026-05-27T10:43:54.390+00:00'
-updatedAt: '2026-05-27T10:46:15.412+00:00'
+updatedAt: '2026-06-02T01:02:14.705+00:00'
 createdBy: 698a0ed8cdbfef3c7606
 teams: []
 status: public

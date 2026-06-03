@@ -1,6 +1,6 @@
 ---
 title: Nems v2
-date: '2026-05-26T20:44:51.459Z'
+date: '2026-06-03T08:27:19.601Z'
 draft: true
 typeR: plat
 categories:
@@ -18,8 +18,7 @@ description: null
 region: Asie
 saison: []
 id: nems-v2-v2-ma_xybnoyml2nu1
-materiel:
-  - Friteuse
+materiel: []
 ingredients:
   - uuid: 234nl4
     name: Feuilles de riz (galettes)
@@ -88,17 +87,6 @@ ingredients:
     type: sec
     pF: false
     pS: false
-  - uuid: 8doafu
-    name: Petits pois
-    originalQuantity: 2.2
-    originalUnit: kg
-    normalizedQuantity: 2200
-    normalizedUnit: gr.
-    comment: ''
-    allergens: []
-    type: legumes
-    pF: true
-    pS: false
   - uuid: c70jxb
     name: huile de tournesol
     originalQuantity: 10
@@ -143,6 +131,15 @@ ingredients:
     type: epices
     pF: true
     pS: false
+  - uuid: 9m3qo9
+    name: Petit pois conserve
+    originalQuantity: 2.2
+    originalUnit: kg
+    normalizedQuantity: 2200
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
 preparation: "* Faire revenir les oignons coupés en petits\n* Une fois dorer rajouter les champi noir préalablement trempés dans l'eau froide, rincés 3 fois et hâchés menu. \n* Puis rajouter les pousse de soja égoutté, les petits pois et les carotte rappées. \n* A côté faire bouillir\_ les vermicelles de riz selon le temps écrit sur le paquet et mélanger à la farce une fois égoutter. \n* Laisser cuire le temps de bien assécher la farce ( sinon les nems vont éclater), bien mélanger le tout. Epicer, saler, poivrer.\_\n* Faire tremper le feuille de riz, sur un torchon mouillé mettre de la farce en bonne quantité, rouler en serrant le max possible, rabattre les côtés seulement un fois au milieu de la feuille de riz. \n* Le nem doit être super tassé et sans trou. \n* Stocker sans faire toucher les uns des autres. Les laisser un peu sécher à l'air libre. \n* Les frire (attention ils se collent entre eux !) jusqu'à belle coloration. \n* Mettre sur du sopalin."
 prepAlt: []
 astuces:
@@ -152,9 +149,9 @@ permissionWrite:
   - 6931ecdccd2c8d8d15e5
 auteur: Marion
 createdAt: '2026-05-26T20:44:36.825+00:00'
-updatedAt: '2026-05-26T20:44:36.825+00:00'
+updatedAt: '2026-06-03T08:27:19.129+00:00'
 createdBy: 6931ecdccd2c8d8d15e5
-teams: null
+teams: []
 status: public
 rootRecipeId: nems_d28ow20pnpzc
 versionLabel: v2 - Marion

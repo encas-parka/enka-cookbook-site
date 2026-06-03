@@ -967,6 +967,7 @@ class ProductsStore {
           missingQuantities: m.stats.missingQuantities,
           formattedMissingQuantities: m.stats.formattedMissingQuantities,
           mergedProductNames: m.data.mergedFrom.length > 0 ? m.data.mergedFrom.map(f => f.name) : undefined,
+          displayTotalOverride: m.data.displayTotalOverride || undefined,
         })),
       }),
     );

@@ -177,6 +177,10 @@ export class EnkaDB extends Dexie {
     this.version(5).stores({
       nativeTeams: "$id",
     });
+
+    // v6: force full re-sync to clear stale data from pre-scoped syncMeta
+    // (no schema change — bumping version clears all IndexedDB data)
+    this.version(6).stores({});
   }
 }
 

@@ -305,10 +305,10 @@ export function matchesFilters(
   if (tempFilter && tempFilter !== "all") {
     switch (tempFilter) {
       case "frais":
-        if (!product.pF) return false;
+        if (!product.pF && product.productType !== "frais") return false;
         break;
       case "not-frais":
-        if (product.pF) return false;
+        if (product.pF || product.productType === "frais") return false;
         break;
       case "surgele":
         if (!product.pS) return false;

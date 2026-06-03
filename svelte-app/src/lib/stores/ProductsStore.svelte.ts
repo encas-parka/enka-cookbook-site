@@ -996,6 +996,8 @@ class ProductsStore {
         formattedAcquiredQuantities: m.stats.formattedAcquiredQuantities,
         formattedMissingQuantities: m.stats.formattedMissingQuantities,
         mergedProductNames: m.data.mergedFrom.length > 0 ? m.data.mergedFrom.map(f => f.name).join(", ") : undefined,
+        displayTotalOverride: m.data.displayTotalOverride || undefined,
+        formattedCalculatedQuantities: m.data.displayTotalOverride ? m.stats.formattedQuantities : undefined,
       })),
     });
   }

@@ -1,6 +1,6 @@
 ---
 title: Samousa
-date: '2026-05-27T08:31:14.741Z'
+date: '2026-06-03T08:17:24.442Z'
 draft: true
 typeR: entree
 categories:
@@ -35,15 +35,6 @@ ingredients:
     normalizedQuantity: 100
     normalizedUnit: gr.
     comment: 'vert , haché menu '
-    allergens: []
-    type: legumes
-  - uuid: jyius1
-    name: petit pois
-    originalQuantity: 50
-    originalUnit: gr.
-    normalizedQuantity: 50
-    normalizedUnit: gr.
-    comment: 'surgelés '
     allergens: []
     type: legumes
   - uuid: up1ydm
@@ -130,6 +121,15 @@ ingredients:
     allergens:
       - Céleri
     type: epices
+  - uuid: 8y3ngp
+    name: Petits pois surgelés
+    originalQuantity: 50
+    originalUnit: gr.
+    normalizedQuantity: 50
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
 preparation: |-
   Reserver la coriandre et les petits pois .
 
@@ -143,7 +143,7 @@ permissionWrite:
   - 69a0483c0031f868819d
 auteur: aude.123
 createdAt: '2026-04-04T21:33:41.362+00:00'
-updatedAt: '2026-05-27T08:31:13.574+00:00'
+updatedAt: '2026-06-03T08:17:18.498+00:00'
 createdBy: 69a0483c0031f868819d
 teams: []
 status: public

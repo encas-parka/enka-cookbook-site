@@ -1,6 +1,6 @@
 ---
-title: Gingembrette - boisson
-date: '2026-06-02T14:34:51.296Z'
+title: Gingembrette
+date: '2026-06-03T06:45:57.033Z'
 draft: true
 typeR: autre
 categories:
@@ -62,11 +62,11 @@ astuces: []
 preparation24h: null
 permissionWrite:
   - 68975cbc002469058f8b
-auteur: null
+auteur: ghald
 createdAt: '2026-06-02T14:34:50.838+00:00'
-updatedAt: '2026-06-02T14:34:50.838+00:00'
+updatedAt: '2026-06-03T06:45:52.209+00:00'
 createdBy: 68975cbc002469058f8b
-teams: null
+teams: []
 status: public
 rootRecipeId: null
 versionLabel: null

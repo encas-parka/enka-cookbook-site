@@ -1,6 +1,6 @@
 ---
 title: Tajine de boeuf au citron v2
-date: '2026-05-27T10:38:43.052Z'
+date: '2026-06-02T01:00:05.087Z'
 draft: true
 typeR: plat
 categories: []
@@ -121,24 +121,13 @@ ingredients:
     pS: false
   - uuid: h3c8al
     name: huile d'olive
-    originalQuantity: 0
-    originalUnit: l.
-    normalizedQuantity: 0
-    normalizedUnit: l.
+    originalQuantity: 200
+    originalUnit: ml
+    normalizedQuantity: 200
+    normalizedUnit: ml
     comment: ''
     allergens: []
     type: lof
-    pF: false
-    pS: false
-  - uuid: v1kli8
-    name: Gousse d'ail
-    originalQuantity: 20
-    originalUnit: unité
-    normalizedQuantity: 20
-    normalizedUnit: unité
-    comment: À râper ou presser
-    allergens: []
-    type: epices
     pF: false
     pS: false
   - uuid: 9yf54l
@@ -199,6 +188,15 @@ ingredients:
     comment: Jus + zeste
     allergens: []
     type: legumes
+  - uuid: u2m28w
+    name: Ail
+    originalQuantity: 20
+    originalUnit: gousse·s
+    normalizedQuantity: 130
+    normalizedUnit: gr.
+    comment: À râper ou presser
+    allergens: []
+    type: legumes
 preparation: |-
   Recette testée avec des légumes d'hiver et sans viande pour 4 personnes d'abord dans un plat à tajine puis pour 50 personnes avec une grande casserole/marmitte.
 
@@ -227,7 +225,7 @@ permissionWrite:
   - 698a0ed8cdbfef3c7606
 auteur: boris
 createdAt: '2026-05-27T10:38:34.970+00:00'
-updatedAt: '2026-05-27T10:38:34.970+00:00'
+updatedAt: '2026-06-02T00:59:57.680+00:00'
 createdBy: 698a0ed8cdbfef3c7606
 teams: []
 status: public

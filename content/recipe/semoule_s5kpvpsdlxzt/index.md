@@ -1,6 +1,6 @@
 ---
 title: Semoule
-date: '2026-05-03T11:16:21.736Z'
+date: '2026-06-03T17:30:38.353Z'
 draft: false
 typeR: plat
 categories:
@@ -19,16 +19,6 @@ saison: []
 id: semoule_s5kpvpsdlxzt
 materiel: []
 ingredients:
-  - uuid: yx78ae
-    name: Semoule moyenne (blé)
-    originalQuantity: 6
-    originalUnit: kg
-    normalizedQuantity: 6000
-    normalizedUnit: gr.
-    comment: ''
-    allergens:
-      - Gluten
-    type: sec
   - uuid: 2juq3x
     name: Sel
     originalQuantity: 90
@@ -56,6 +46,16 @@ ingredients:
     comment: ''
     allergens: []
     type: autres
+  - uuid: zan3nn
+    name: semoule couscous moyen
+    originalQuantity: 6
+    originalUnit: kg
+    normalizedQuantity: 6000
+    normalizedUnit: gr.
+    comment: ''
+    allergens:
+      - Gluten
+    type: sec
 preparation: "1. Huiler la semoule à sec: répartissez-la dans les bacs gastro (max 3 à 4 kg par gastro). Versez\_l'huile\_en filet sur la semoule sèche et mélangez à la main ou à la spatule pour bien enrober chaque grain.\n2. Faites bouillir de l'eau, ajouter le sel.\n3. Versez l'eau bouillante salée sur la semoule huilée dans chaque bac, en couvrant bien toute la surface. Mélangez brièvement à la spatule pour uniformiser.\n4. Laisser gonfler 5 minutes:\_Couvrez chaque bac. Laissez gonfler sans toucher.\n5. Égrainer la semoule à la fourchette ou à la main en soulevant bien depuis le fond pour aérer et séparer tous les grains. Ajustez l'assaisonnement si besoin.\n6. Maintenir au chaud et servir:\_Recouvrez les bacs et maintenez au chaud en bain-marie ou en étuve jusqu'au service. Égrainez à nouveau juste avant de servir si nécessaire..."
 prepAlt: []
 astuces: []
@@ -64,7 +64,7 @@ permissionWrite:
   - 68975cbc002469058f8b
 auteur: ghald
 createdAt: '2026-04-06T11:03:01.685+00:00'
-updatedAt: '2026-05-03T11:16:17.562+00:00'
+updatedAt: '2026-06-03T17:30:37.974+00:00'
 createdBy: 68975cbc002469058f8b
 teams: []
 status: public

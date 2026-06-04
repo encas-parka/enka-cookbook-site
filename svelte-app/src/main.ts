@@ -2,12 +2,17 @@ import { mount } from "svelte";
 import "./app.css";
 import App from "./App.svelte";
 import { productsStore } from "$lib/stores/ProductsStore.svelte";
+import { eventsStore } from "$lib/stores/EventsStore.svelte";
+import { materielStore } from "$lib/stores/MaterielStore.svelte";
+import { teamdocsStore } from "$lib/stores/TeamdocsStore.svelte";
+import { nativeTeamsStore } from "$lib/stores/NativeTeamsStore.svelte";
 import { setRealtimeOnReconnect } from "$lib/db-sync/aw-realtime";
 
 /**
  * Resyncs data for all currently active stores.
  * Called on visibility change (tab becomes visible) and WebSocket reconnection.
- * Stores that aren't initialized are safely skipped by their internal guards.
+ * Stores that aren't initialized are safely skipped by their internal guards
+ * (!userId, !currentMainId, etc.).
  * Debounced to avoid double sync when both signals fire simultaneously.
  */
 let resyncTimeout: ReturnType<typeof setTimeout> | null = null;
@@ -16,10 +21,18 @@ function resyncActiveStores(): void {
   resyncTimeout = setTimeout(async () => {
     resyncTimeout = null;
     console.log("[sync] Resyncing active stores...");
-    try {
-      await productsStore.syncFromAppwrite();
-    } catch (err) {
-      console.error("[sync] Resync failed:", err);
+    const results = await Promise.allSettled([
+      productsStore.syncFromAppwrite(),
+      eventsStore.syncFromRemote(),
+      materielStore.syncFromRemote(),
+      teamdocsStore.syncFromRemote(),
+      nativeTeamsStore.syncFromRemote(),
+    ]);
+    const failures = results.filter((r) => r.status === "rejected");
+    if (failures.length > 0) {
+      console.error(`[sync] ${failures.length} store(s) failed to resync:`, failures);
+    } else {
+      console.log("[sync] All stores resynced successfully");
     }
   }, 500);
 }

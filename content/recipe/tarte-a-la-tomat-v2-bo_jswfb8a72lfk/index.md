@@ -1,6 +1,6 @@
 ---
 title: Tarte à la tomate chève miel moutarde
-date: '2026-05-27T09:51:04.871Z'
+date: '2026-06-04T08:29:53.120Z'
 draft: true
 typeR: entree
 categories:
@@ -101,11 +101,11 @@ ingredients:
     pS: false
   - uuid: hlbwfd
     name: Yaourt de soja
-    originalQuantity: 8
-    originalUnit: unité
-    normalizedQuantity: 8
-    normalizedUnit: unité
-    comment: petits pots
+    originalQuantity: 1
+    originalUnit: kg
+    normalizedQuantity: 1000
+    normalizedUnit: gr.
+    comment: ''
     allergens:
       - Soja
     type: frais
@@ -221,7 +221,7 @@ permissionWrite:
   - 698a0ed8cdbfef3c7606
 auteur: boris
 createdAt: '2026-05-27T09:48:53.320+00:00'
-updatedAt: '2026-05-27T09:51:03.436+00:00'
+updatedAt: '2026-06-04T08:29:51.769+00:00'
 createdBy: 698a0ed8cdbfef3c7606
 teams: []
 status: public

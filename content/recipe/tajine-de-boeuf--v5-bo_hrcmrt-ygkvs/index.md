@@ -1,6 +1,6 @@
 ---
 title: Tajine de boeuf au citron v2
-date: '2026-06-02T01:00:05.087Z'
+date: '2026-06-03T12:24:13.519Z'
 draft: true
 typeR: plat
 categories: []
@@ -20,9 +20,9 @@ materiel: []
 ingredients:
   - uuid: rtavky
     name: Oignon
-    originalQuantity: 42
-    originalUnit: unité
-    normalizedQuantity: 5040
+    originalQuantity: 8
+    originalUnit: kg
+    normalizedQuantity: 8000
     normalizedUnit: gr.
     comment: 14 à couper en lamelles pour le tajine et 28 à couper en plus petits morceaux pour les caraméliser
     allergens: []
@@ -31,9 +31,9 @@ ingredients:
     pS: false
   - uuid: eouu0v
     name: Carotte
-    originalQuantity: 50
-    originalUnit: unité
-    normalizedQuantity: 6250
+    originalQuantity: 5
+    originalUnit: kg
+    normalizedQuantity: 5000
     normalizedUnit: gr.
     comment: À couper en gros morceaux
     allergens: []
@@ -153,9 +153,9 @@ ingredients:
     type: animaux
   - uuid: 7sk3a5
     name: Aubergine
-    originalQuantity: 35
-    originalUnit: unité
-    normalizedQuantity: 8750
+    originalQuantity: 6
+    originalUnit: kg
+    normalizedQuantity: 6000
     normalizedUnit: gr.
     comment: A couper en gros cubes
     allergens: []
@@ -225,7 +225,7 @@ permissionWrite:
   - 698a0ed8cdbfef3c7606
 auteur: boris
 createdAt: '2026-05-27T10:38:34.970+00:00'
-updatedAt: '2026-06-02T00:59:57.680+00:00'
+updatedAt: '2026-06-03T12:24:06.915+00:00'
 createdBy: 698a0ed8cdbfef3c7606
 teams: []
 status: public

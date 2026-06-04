@@ -1,6 +1,6 @@
 ---
-title: Galette de legumes
-date: '2026-06-04T08:15:55.559Z'
+title: Galette de legumes sans gluten
+date: '2026-06-04T08:16:52.667Z'
 draft: true
 typeR: plat
 categories: []
@@ -78,7 +78,7 @@ permissionWrite:
   - 69b2b4d10025449a9043
 auteur: frerylila
 createdAt: '2026-05-29T19:39:19.924+00:00'
-updatedAt: '2026-06-04T08:15:54.612+00:00'
+updatedAt: '2026-06-04T08:16:51.288+00:00'
 createdBy: 69b2b4d10025449a9043
 teams: []
 status: public

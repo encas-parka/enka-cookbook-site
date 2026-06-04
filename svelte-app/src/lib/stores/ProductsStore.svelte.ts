@@ -1287,6 +1287,11 @@ class ProductsStore {
 
   async forceReload(eventId: string) {
     this.reset();
+    // Clear all local data + syncMeta cursors to force a full fetch (lastSync = null)
+    await this.#productsCollection.clearLocal();
+    await this.#purchasesCollection.clearLocal();
+    // Clear productNeeds for this event only (not all events)
+    await db.productNeeds.where("mainId").equals(eventId).delete();
     await this.initialize(eventId);
   }
 
@@ -1294,8 +1299,10 @@ class ProductsStore {
     this.#lastSync = null;
     await this.#productsCollection.clearLocal();
     await this.#purchasesCollection.clearLocal();
-    // Also clear calculated needs
-    await db.productNeeds.clear();
+    // Clear productNeeds for current event only (not all events)
+    if (this.#currentMainId) {
+      await db.productNeeds.where("mainId").equals(this.#currentMainId).delete();
+    }
     console.log("[ProductsStore] Cache vidé");
   }
 
@@ -1315,22 +1322,30 @@ class ProductsStore {
       return;
     }
 
-    try {
-      await Promise.all([
-        this.#productsCollection.initialFetch({
-          queries: [Query.equal("mainId", this.#currentMainId)],
-          scopeKey: this.#currentMainId,
-        }),
-        this.#purchasesCollection.initialFetch({
-          queries: [Query.equal("mainId", this.#currentMainId)],
-          scopeKey: this.#currentMainId,
-        }),
-      ]);
+    const results = await Promise.allSettled([
+      this.#productsCollection.initialFetch({
+        queries: [Query.equal("mainId", this.#currentMainId)],
+        scopeKey: this.#currentMainId,
+      }),
+      this.#purchasesCollection.initialFetch({
+        queries: [Query.equal("mainId", this.#currentMainId)],
+        scopeKey: this.#currentMainId,
+      }),
+    ]);
+    const names = ["products", "purchases"] as const;
+    let hasFailure = false;
+    results.forEach((r, i) => {
+      if (r.status === "rejected") {
+        hasFailure = true;
+        console.error(`[ProductsStore] syncFromAppwrite: ${names[i]} failed:`, r.reason);
+      }
+    });
+    // Only update lastSync if all syncs succeeded
+    // (syncMeta cursors inside each collection are already correct either way)
+    if (!hasFailure) {
       this.#lastSync = new Date().toISOString();
-      console.log("[ProductsStore] syncFromAppwrite() terminé");
-    } catch (err) {
-      console.error("[ProductsStore] syncFromAppwrite() échoué:", err);
     }
+    console.log("[ProductsStore] syncFromAppwrite() terminé");
   }
 
   // ===========================================================================

@@ -1,6 +1,28 @@
 import { mount } from "svelte";
 import "./app.css";
 import App from "./App.svelte";
+import { productsStore } from "$lib/stores/ProductsStore.svelte";
+import { setRealtimeOnReconnect } from "$lib/db-sync/aw-realtime";
+
+/**
+ * Resyncs data for all currently active stores.
+ * Called on visibility change (tab becomes visible) and WebSocket reconnection.
+ * Stores that aren't initialized are safely skipped by their internal guards.
+ * Debounced to avoid double sync when both signals fire simultaneously.
+ */
+let resyncTimeout: ReturnType<typeof setTimeout> | null = null;
+function resyncActiveStores(): void {
+  if (resyncTimeout) clearTimeout(resyncTimeout);
+  resyncTimeout = setTimeout(async () => {
+    resyncTimeout = null;
+    console.log("[sync] Resyncing active stores...");
+    try {
+      await productsStore.syncFromAppwrite();
+    } catch (err) {
+      console.error("[sync] Resync failed:", err);
+    }
+  }, 500);
+}
 
 // Enregistrer le Service Worker en production uniquement
 if ("serviceWorker" in navigator && import.meta.env.PROD) {
@@ -16,7 +38,10 @@ if ("serviceWorker" in navigator && import.meta.env.PROD) {
     // (timers throttlés en arrière-plan sur mobile, ce check compense)
     document.addEventListener("visibilitychange", () => {
       if (document.visibilityState === "visible") {
+        // SW update pour les mises à jour JS
         registration?.update().catch(() => {});
+        // Resync data pour rattraper les événements manqués en arrière-plan
+        resyncActiveStores();
       }
     });
   });
@@ -27,7 +52,17 @@ if ("serviceWorker" in navigator && import.meta.env.PROD) {
     console.log("[PWA] Nouvelle version activée — rechargement de la page");
     window.location.reload();
   });
+} else {
+  // En dev, pas de SW mais on veut quand même le resync sur visibility
+  document.addEventListener("visibilitychange", () => {
+    if (document.visibilityState === "visible") {
+      resyncActiveStores();
+    }
+  });
 }
+
+// Resync sur reconnexion WebSocket (pertes réseau pendant onglet visible)
+setRealtimeOnReconnect(resyncActiveStores);
 
 const app = mount(App, {
   target: document.getElementById("app")!,

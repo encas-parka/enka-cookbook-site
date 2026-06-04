@@ -28,6 +28,8 @@ interface RealtimeRegistration {
 	channels: string[];
 	/** Handler invoked when a matching event arrives */
 	handler: (response: any) => void;
+	/** Cleanup function for dynamic Appwrite subscriptions */
+	appwriteUnsubscribe?: () => void;
 }
 
 // =============================================================================
@@ -43,6 +45,10 @@ class AwRealtimeRegistry {
 	#isInitialized = false;
 	/** Counter for generating unique dynamic IDs */
 	#dynamicCounter = 0;
+	/** Callback invoked when the WebSocket reconnects (client.connected event) */
+	#onReconnect: (() => void) | null = null;
+	/** Whether the first client.connected has been seen (to skip initial connection) */
+	#hasConnectedOnce = false;
 
 	// =========================================================================
 	// REGISTRATION (pre-init)
@@ -88,7 +94,7 @@ class AwRealtimeRegistry {
 
 		// If already initialized, subscribe these channels on the existing WebSocket
 		if (this.#isInitialized) {
-			this.#setupDynamicSubscription(channels, handler);
+			this.#setupDynamicSubscription(id, channels, handler);
 		}
 
 		// Return cleanup function
@@ -107,8 +113,11 @@ class AwRealtimeRegistry {
 	 * WebSocket (Appwrite SDK limitation). The handler simply won't be called.
 	 */
 	unregister(id: string): void {
-		const removed = this.#registrations.delete(id);
-		if (removed) {
+		const reg = this.#registrations.get(id);
+		try {
+			reg?.appwriteUnsubscribe?.();
+		} finally {
+			this.#registrations.delete(id);
 			console.log(`[aw-realtime] Unregistered: "${id}"`);
 		}
 	}
@@ -148,6 +157,16 @@ class AwRealtimeRegistry {
 			);
 
 			this.#unsubscribe = await appwriteSubscribe(allChannels, (response: any) => {
+				// Detect WebSocket reconnection — triggers data resync
+				if (response.event === 'client.connected') {
+					if (!this.#hasConnectedOnce) {
+						this.#hasConnectedOnce = true;
+						console.log('[aw-realtime] ✅ WebSocket connected for the first time');
+					} else {
+						console.log('[aw-realtime] ✅ WebSocket reconnected — triggering resync');
+						this.#onReconnect?.();
+					}
+				}
 				// Route event to all matching handlers
 				this.#routeEvent(response);
 			});
@@ -197,14 +216,18 @@ class AwRealtimeRegistry {
 	 * The Appwrite SDK handles adding channels to the active connection.
 	 */
 	async #setupDynamicSubscription(
+		id: string,
 		channels: string[],
 		handler: (response: any) => void
 	): Promise<void> {
 		try {
-			// The SDK reuses the existing WebSocket connection
-			await appwriteSubscribe(channels, (response: any) => {
+			const unsubscribe = await appwriteSubscribe(channels, (response: any) => {
 				handler(response);
 			});
+			const reg = this.#registrations.get(id);
+			if (reg) {
+				reg.appwriteUnsubscribe = unsubscribe;
+			}
 			console.log(
 				`[aw-realtime] ✅ Dynamic channels added: ${channels.join(', ')}`
 			);
@@ -233,16 +256,31 @@ class AwRealtimeRegistry {
 	}
 
 	/**
+	 * Registers a callback to be invoked when the WebSocket reconnects.
+	 * Used to trigger a data resync after a reconnection event.
+	 */
+	setOnReconnect(callback: (() => void) | null): void {
+		this.#onReconnect = callback;
+	}
+
+	/**
 	 * Closes the WebSocket and clears all registrations.
 	 * Used on logout.
 	 */
 	destroy(): void {
+		for (const reg of this.#registrations.values()) {
+			if (reg.appwriteUnsubscribe) {
+				reg.appwriteUnsubscribe();
+			}
+		}
 		if (this.#unsubscribe) {
 			this.#unsubscribe();
 			this.#unsubscribe = null;
 		}
 		this.#registrations.clear();
 		this.#isInitialized = false;
+		this.#hasConnectedOnce = false;
+		this.#onReconnect = null;
 		console.log('[aw-realtime] Destroyed. WebSocket closed.');
 	}
 }
@@ -304,4 +342,12 @@ export function destroyRealtime(): void {
  */
 export function isRealtimeInitialized(): boolean {
 	return awRealtimeRegistry.isInitialized;
+}
+
+/**
+ * Registers a callback invoked when the WebSocket reconnects.
+ * Use to trigger a delta sync on all active stores after a network gap.
+ */
+export function setRealtimeOnReconnect(callback: (() => void) | null): void {
+	awRealtimeRegistry.setOnReconnect(callback);
 }

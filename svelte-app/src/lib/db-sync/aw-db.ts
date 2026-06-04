@@ -181,6 +181,10 @@ export class EnkaDB extends Dexie {
     // v6: force full re-sync to clear stale data from pre-scoped syncMeta
     // (no schema change — bumping version clears all IndexedDB data)
     this.version(6).stores({});
+
+    // v7: force full re-sync after sync hardening (P1/P2 fixes)
+    // Clears stale data from callback leak zombies and missed realtime events
+    this.version(7).stores({});
   }
 }
 

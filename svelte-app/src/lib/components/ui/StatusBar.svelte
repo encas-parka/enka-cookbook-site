@@ -1,6 +1,6 @@
 <script lang="ts">
   import { onMount } from "svelte";
-  import { WifiOff, Lock, PencilLine } from "@lucide/svelte";
+  import { WifiOff, Lock, PencilLine, CloudOff } from "@lucide/svelte";
   import { statusBarStore } from "$lib/stores/StatusBarStore.svelte";
 
   // --- Offline state ---
@@ -26,7 +26,10 @@
   // --- Lock state (réactif) ---
   const lockStatus = $derived(statusBarStore.lockStatus);
 
-  // --- Affichage prioritaire : offline > lock by other > lock by me ---
+  // --- Server state (réactif) ---
+  const serverStatus = $derived(statusBarStore.serverStatus);
+
+  // --- Affichage prioritaire : offline > serveur inaccessible > lock by other > lock by me ---
   type StatusEntry = {
     variant: "warning" | "info";
     icon: typeof WifiOff;
@@ -36,6 +39,10 @@
   const activeStatus = $derived.by<StatusEntry | null>(() => {
     if (showOffline) {
       return { variant: "warning", icon: WifiOff, label: "Hors ligne" };
+    }
+
+    if (serverStatus === "unreachable") {
+      return { variant: "warning", icon: CloudOff, label: "Serveur indisponible" };
     }
 
     const lock = lockStatus;

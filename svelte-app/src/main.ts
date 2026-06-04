@@ -8,6 +8,7 @@ import { teamdocsStore } from "$lib/stores/TeamdocsStore.svelte";
 import { nativeTeamsStore } from "$lib/stores/NativeTeamsStore.svelte";
 import { recipesStore } from "$lib/stores/RecipesStore.svelte";
 import { setRealtimeOnReconnect } from "$lib/db-sync/aw-realtime";
+import { statusBarStore } from "$lib/stores/StatusBarStore.svelte";
 
 /**
  * Resyncs data for all currently active stores.
@@ -33,8 +34,10 @@ function resyncActiveStores(): void {
     const failures = results.filter((r) => r.status === "rejected");
     if (failures.length > 0) {
       console.error(`[sync] ${failures.length} store(s) failed to resync:`, failures);
+      statusBarStore.setServerStatus("unreachable");
     } else {
       console.log("[sync] All stores resynced successfully");
+      statusBarStore.setServerStatus("connected");
     }
   }, 500);
 }

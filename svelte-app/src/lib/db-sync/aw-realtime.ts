@@ -16,6 +16,7 @@
 import {
 	subscribe as appwriteSubscribe
 } from '$lib/services/appwrite';
+import { statusBarStore } from '$lib/stores/StatusBarStore.svelte';
 
 // =============================================================================
 // TYPES
@@ -163,8 +164,10 @@ class AwRealtimeRegistry {
 				if (response.event === 'client.connected') {
 					if (!this.#hasConnectedOnce) {
 						this.#hasConnectedOnce = true;
+						statusBarStore.setServerStatus('connected');
 						console.log('[aw-realtime] ✅ WebSocket connected for the first time');
 					} else {
+						statusBarStore.setServerStatus('connected');
 						console.log('[aw-realtime] ✅ WebSocket reconnected — triggering resync');
 						this.#onReconnect?.();
 					}
@@ -286,6 +289,7 @@ class AwRealtimeRegistry {
 		this.#isInitialized = false;
 		this.#hasConnectedOnce = false;
 		this.#onReconnect = null;
+		statusBarStore.setServerStatus(null);
 		console.log('[aw-realtime] Destroyed. WebSocket closed.');
 	}
 }

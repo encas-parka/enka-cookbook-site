@@ -3,10 +3,10 @@
  *
  * Sources de statut :
  *   - offline (géré automatiquement par le composant StatusBar)
+ *   - serveur inaccessible (détecté via échec resync / WebSocket)
  *   - lock by others / lock by me (poussé par les pages d'édition)
- *   - serveur inaccessible (plus tard)
  *
- * La priorité d'affichage est : offline > lock by others > lock by me
+ * La priorité d'affichage est : offline > serveur inaccessible > lock by others > lock by me
  */
 
 export type LockStatus =
@@ -14,11 +14,26 @@ export type LockStatus =
   | { type: "locked-by-other"; userName: string }
   | null;
 
+export type ServerStatus = "connected" | "disconnected" | "unreachable" | null;
+
 class StatusBarStore {
   #lockStatus = $state<LockStatus>(null);
+  #serverStatus = $state<ServerStatus>(null);
 
   get lockStatus(): LockStatus {
     return this.#lockStatus;
+  }
+
+  get serverStatus(): ServerStatus {
+    return this.#serverStatus;
+  }
+
+  /**
+   * Met à jour le statut du serveur.
+   * Appelé par aw-realtime (connect/reconnect/destroy) et main.ts (resync).
+   */
+  setServerStatus(status: ServerStatus) {
+    this.#serverStatus = status;
   }
 
   /**

@@ -152,7 +152,7 @@ export const locksService = {
 
   /**
    * S'abonne aux changements d'un verrou
-   * Utilise RealtimeManager avec inscription dynamique pour le multiplexage WebSocket
+   * Utilise le registre realtime centralisé (aw-sync) avec inscription dynamique
    */
   subscribeToLock(
     resourceId: string,

@@ -213,30 +213,15 @@ export async function deleteDocument(id: string): Promise<void> {
 
 /**
  * Récupère les channels realtime pour les documents
- * Utilisé par le RealtimeManager pour la souscription multiplexée
+ * Utilisé par le registre realtime centralisé (aw-sync) pour la souscription multiplexée
  */
-export function getDocumentsRealtimeChannels(): string[] {
-  const { config } = getAppwriteInstances() as any;
-  return [
-    `databases.${config.databaseId}.collections.${TEAMDOCS_COLLECTION_ID}.documents`,
-  ];
-}
+
 
 /**
- * S'abonne aux événements realtime des documents (standalone, sans RealtimeManager)
- * @deprecated — Préférer l'utilisation de RealtimeManager via le store
+ * S'abonne aux événements realtime des documents (standalone, sans aw-sync)
+ * @deprecated — Préférer l'utilisation du registre realtime centralisé (aw-sync) via le store
  */
-export function subscribeToDocuments(
-  callback: (payload: any) => void,
-): () => void {
-  const { client, config } = getAppwriteInstances() as any;
 
-  const channel = `databases.${config.databaseId}.collections.${TEAMDOCS_COLLECTION_ID}.documents`;
-  const unsubscribe = client.subscribe([channel], callback);
-
-  console.log("[appwrite-teamdocs] Subscribed to documents realtime");
-  return unsubscribe;
-}
 
 // =============================================================================
 // TAGS MANAGEMENT

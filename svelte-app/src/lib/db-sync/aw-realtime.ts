@@ -30,6 +30,8 @@ interface RealtimeRegistration {
 	handler: (response: any) => void;
 	/** Cleanup function for dynamic Appwrite subscriptions */
 	appwriteUnsubscribe?: () => void;
+	/** Whether this registration was added after initialization (skip in #routeEvent) */
+	isDynamic?: boolean;
 }
 
 // =============================================================================
@@ -89,7 +91,7 @@ class AwRealtimeRegistry {
 		handler: (response: any) => void
 	): () => void {
 		const id = `_dynamic_${++this.#dynamicCounter}`;
-		this.#registrations.set(id, { id, channels, handler });
+		this.#registrations.set(id, { id, channels, handler, isDynamic: true });
 		console.log(`[aw-realtime] Registered dynamic "${id}" → ${channels.join(', ')}`);
 
 		// If already initialized, subscribe these channels on the existing WebSocket
@@ -191,6 +193,9 @@ class AwRealtimeRegistry {
 	 */
 	#routeEvent(response: any): void {
 		for (const reg of this.#registrations.values()) {
+			// Dynamic registrations are delivered by their own appwriteSubscribe() callback
+			if (reg.isDynamic) continue;
+
 			const hasMatchingChannel = response.channels?.some((ch: string) =>
 				reg.channels.includes(ch)
 			);

@@ -6,6 +6,7 @@ import { eventsStore } from "$lib/stores/EventsStore.svelte";
 import { materielStore } from "$lib/stores/MaterielStore.svelte";
 import { teamdocsStore } from "$lib/stores/TeamdocsStore.svelte";
 import { nativeTeamsStore } from "$lib/stores/NativeTeamsStore.svelte";
+import { recipesStore } from "$lib/stores/RecipesStore.svelte";
 import { setRealtimeOnReconnect } from "$lib/db-sync/aw-realtime";
 
 /**
@@ -23,6 +24,7 @@ function resyncActiveStores(): void {
     console.log("[sync] Resyncing active stores...");
     const results = await Promise.allSettled([
       productsStore.syncFromAppwrite(),
+      recipesStore.syncFromAppwrite(),
       eventsStore.syncFromRemote(),
       materielStore.syncFromRemote(),
       teamdocsStore.syncFromRemote(),

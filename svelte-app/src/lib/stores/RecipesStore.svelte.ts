@@ -280,6 +280,21 @@ class RecipesStore {
     }
   }
 
+  /**
+   * Delta sync Appwrite uniquement (pas de re-fetch Hugo).
+   * Utilisé par resyncActiveStores() sur reconnexion/retour d'onglet.
+   * Sans impact sur #loading — silencieux en arrière-plan.
+   */
+  async syncFromAppwrite(): Promise<void> {
+    if (!globalState.userId) return;
+    try {
+      await this.#collection.initialFetch();
+      console.log("[RecipesStore] syncFromAppwrite() terminé");
+    } catch (err) {
+      console.warn("[RecipesStore] syncFromAppwrite error:", err);
+    }
+  }
+
   async setupRealtime(): Promise<void> {
     if (this.#realtimeInitialized) {
       console.log("[RecipesStore] Realtime déjà configuré");

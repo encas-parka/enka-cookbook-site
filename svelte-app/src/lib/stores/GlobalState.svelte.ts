@@ -7,6 +7,7 @@ import { eventsStore } from "./EventsStore.svelte";
 import { materielStore } from "./MaterielStore.svelte";
 import { teamdocsStore } from "./TeamdocsStore.svelte";
 import { productsStore } from "./ProductsStore.svelte";
+import { eventMaterielStore } from "./EventMaterielStore.svelte";
 import { notificationStore } from "./NotificationStore.svelte";
 import { destroyRealtime, initializeRealtime } from "$lib/db-sync/aw-sync";
 import { recipesStore } from "./RecipesStore.svelte";
@@ -176,6 +177,7 @@ class GlobalState {
       await nativeTeamsStore.destroy();
       await eventsStore.destroy();
       await materielStore.destroy();
+      await eventMaterielStore.destroy();
       await teamdocsStore.destroy();
       await productsStore.destroy();
       destroyRealtime();

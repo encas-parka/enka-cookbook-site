@@ -1,6 +1,6 @@
 ---
 title: Galette de legumes
-date: '2026-05-29T19:39:20.387Z'
+date: '2026-06-04T08:15:55.559Z'
 draft: true
 typeR: plat
 categories: []
@@ -18,15 +18,6 @@ saison: []
 id: galette-de-legum-v2-fr_-kbxbuif_gli
 materiel: []
 ingredients:
-  - uuid: khdlkd
-    name: Lentilles
-    originalQuantity: 250
-    originalUnit: gr.
-    normalizedQuantity: 250
-    normalizedUnit: gr.
-    comment: ''
-    allergens: []
-    type: sec
   - uuid: h3c8al
     name: huile d'olive
     originalQuantity: 1
@@ -65,6 +56,15 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+  - uuid: y10a6a
+    name: lentilles cuites
+    originalQuantity: 250
+    originalUnit: gr.
+    normalizedQuantity: 250
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: sec
 preparation: |-
   - Versez les lentilles dans un saladier. 
   - Ajoutez l'huile, les épices, la farine et la levure. 
@@ -78,7 +78,7 @@ permissionWrite:
   - 69b2b4d10025449a9043
 auteur: frerylila
 createdAt: '2026-05-29T19:39:19.924+00:00'
-updatedAt: '2026-05-29T19:39:19.924+00:00'
+updatedAt: '2026-06-04T08:15:54.612+00:00'
 createdBy: 69b2b4d10025449a9043
 teams: []
 status: public

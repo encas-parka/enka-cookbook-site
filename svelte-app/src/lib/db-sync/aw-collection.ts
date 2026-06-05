@@ -29,12 +29,7 @@ import {
 	getCollectionId
 } from '$lib/services/appwrite';
 import { db, type SyncMetaRow } from './aw-db';
-import {
-	registerRealtime as registerInRegistry,
-	registerRealtimeDynamic,
-	isRealtimeInitialized,
-	unregisterRealtime
-} from './aw-realtime';
+import { subscribeRealtime } from './aw-realtime';
 import type {
 	AwDoc,
 	AwFetchOptions,
@@ -290,32 +285,17 @@ export function createSyncCollection<T extends AwDoc>(options: {
 			}
 		};
 
-		// Register in central realtime registry
-		// If WebSocket is already open, use dynamic registration (adds channels to existing connection).
-		// If not yet open, use static registration (will be picked up by initializeRealtime()).
-		let dynamicCleanup: (() => void) | null = null;
-
-		if (isRealtimeInitialized()) {
-			dynamicCleanup = registerRealtimeDynamic(channels, handler);
-		} else {
-			registerInRegistry(subId, channels, handler);
-		}
+		const cleanup = subscribeRealtime(subId, channels, handler);
 
 		subscriptions.set(subId, {
 			ref,
 			unsubscribe: () => {
-				if (dynamicCleanup) {
-					dynamicCleanup();
-				} else {
-					unregisterRealtime(subId);
-				}
+				cleanup();
 			}
 		});
 		onSubscriptionChange?.(true);
 
-		console.log(
-			`[aw-sync] subscribe ${subId} → ${channels.join(', ')}${dynamicCleanup ? ' (dynamic)' : ''}`
-		);
+		console.log(`[aw-sync] subscribe ${subId} → ${channels.join(', ')}`);
 		return ref;
 	}
 

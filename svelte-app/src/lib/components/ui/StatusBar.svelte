@@ -29,7 +29,7 @@
   // --- Server state (réactif) ---
   const serverStatus = $derived(statusBarStore.serverStatus);
 
-  // --- Affichage prioritaire : offline > serveur inaccessible > lock by other > lock by me ---
+  // --- Affichage prioritaire : offline > disconnected > serveur inaccessible > lock by other > lock by me ---
   type StatusEntry = {
     variant: "warning" | "info";
     icon: typeof WifiOff;
@@ -39,6 +39,10 @@
   const activeStatus = $derived.by<StatusEntry | null>(() => {
     if (showOffline) {
       return { variant: "warning", icon: WifiOff, label: "Hors ligne" };
+    }
+
+    if (serverStatus === "disconnected") {
+      return { variant: "warning", icon: CloudOff, label: "Connexion perdue" };
     }
 
     if (serverStatus === "unreachable") {

@@ -22,9 +22,7 @@ import {
 } from "@/lib/services/appwrite-native-teams";
 import { globalState } from "./GlobalState.svelte";
 import {
-  registerRealtime,
-  unregisterRealtime,
-  isRealtimeInitialized,
+  subscribeRealtime,
   db,
 } from "$lib/db-sync/aw-sync";
 
@@ -35,6 +33,7 @@ export class NativeTeamsStore {
   #error = $state<string | null>(null);
   #isInitialized = $state(false);
   #realtimeInitialized = false;
+  #realtimeCleanup: (() => void) | null = null;
 
   // Getters simples
   get loading() {
@@ -124,22 +123,13 @@ export class NativeTeamsStore {
    * Phase 3 : Configure les abonnements realtime
    */
   async setupRealtime(): Promise<void> {
-    // ✅ Pas de realtime pour les visiteurs
     if (!globalState.isAuthenticated) {
       return;
     }
 
-    // Vérifier si déjà configuré pour éviter les doublons
-    // ✅ SAUF si le realtime centralisé a été détruit (changement auth)
-    if (this.#realtimeInitialized && isRealtimeInitialized()) {
+    if (this.#realtimeInitialized) {
       console.log("[NativeTeamsStore] Realtime déjà configuré");
       return;
-    }
-
-    // Réinitialiser le flag si le realtime centralisé a été détruit
-    if (this.#realtimeInitialized && !isRealtimeInitialized()) {
-      console.log("[NativeTeamsStore] Realtime détruit, réinitialisation...");
-      this.#realtimeInitialized = false;
     }
 
     try {
@@ -187,20 +177,14 @@ export class NativeTeamsStore {
   }
 
   async #setupRealtimeInternal(): Promise<void> {
-    // Les Teams natives utilisent des channels différents dans Appwrite
-    // Note: Pour les Teams, le channel est "teams" ou "memberships"
-    registerRealtime(
+    this.#realtimeCleanup = subscribeRealtime(
       "native-teams",
       ["teams", "memberships"],
       async (response: any) => {
-        // Logique de mise à jour basée sur les événements
-        // Les événements Team/Membership sont globaux car liés à l'utilisateur
         console.log(
           "[NativeTeamsStore] ⚡️ Realtime RECEIVED:",
           response.events,
         );
-
-        // On refresh tout pour simplifier car les événements natifs sont complexes à mapper 1:1 localement sans risque
         await this.#loadTeams();
       },
     );
@@ -333,9 +317,8 @@ export class NativeTeamsStore {
   }
 
   async destroy(): Promise<void> {
-    if (this.#realtimeInitialized) {
-      unregisterRealtime("native-teams");
-    }
+    this.#realtimeCleanup?.();
+    this.#realtimeCleanup = null;
     this.#teams.clear();
     await db.nativeTeams.clear();
     this.#isInitialized = false;

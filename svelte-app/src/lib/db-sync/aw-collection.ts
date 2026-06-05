@@ -214,6 +214,8 @@ export function createSyncCollection<T extends AwDoc>(options: {
 
 		// 4. Bulk put into Dexie (transaction)
 		if (allRows.length > 0) {
+			// SDK v24+ ajoute toString() sur chaque row — incompatble avec structuredClone (IndexedDB)
+			for (const row of allRows) delete (row as any).toString;
 			await db.transaction('rw', table, async () => {
 				await table.bulkPut(allRows);
 			});
@@ -283,6 +285,7 @@ export function createSyncCollection<T extends AwDoc>(options: {
 				}
 				console.log(`[aw-sync] realtime DELETE ${String(collectionName)}/${payload.$id}`);
 			} else if (isCreate || isUpdate) {
+				delete (payload as any).toString;
 				await table.put(payload as T);
 				console.log(
 					`[aw-sync] realtime ${isCreate ? 'CREATE' : 'UPDATE'} ${String(collectionName)}/${payload.$id}`
@@ -369,6 +372,8 @@ export function createSyncCollection<T extends AwDoc>(options: {
 			permissions
 		})) as unknown as T;
 
+		// SDK v24+ ajoute un toString() sur les réponses — incompatble avec structuredClone (IndexedDB)
+		delete (confirmed as any).toString;
 		await table.put(confirmed);
 		console.log(`[aw-sync] create ${String(collectionName)}/${confirmed.$id}`);
 		return confirmed;
@@ -424,6 +429,8 @@ export function createSyncCollection<T extends AwDoc>(options: {
 			})) as unknown as T;
 
 			// 5. Confirm with server state
+			// SDK v24+ ajoute un toString() sur les réponses — incompatble avec structuredClone (IndexedDB)
+			delete (confirmed as any).toString;
 			await table.put(confirmed);
 			console.log(`[aw-sync] update ${String(collectionName)}/${id}`);
 			return confirmed;

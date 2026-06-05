@@ -29,7 +29,12 @@ import {
 	getCollectionId
 } from '$lib/services/appwrite';
 import { db, type SyncMetaRow } from './aw-db';
-import { subscribeRealtime } from './aw-realtime';
+import {
+	registerRealtime as registerInRegistry,
+	registerRealtimeDynamic,
+	isRealtimeInitialized,
+	unregisterRealtime
+} from './aw-realtime';
 import type {
 	AwDoc,
 	AwFetchOptions,
@@ -285,17 +290,26 @@ export function createSyncCollection<T extends AwDoc>(options: {
 			}
 		};
 
-		const cleanup = subscribeRealtime(subId, channels, handler);
+		let dynamicCleanup: (() => void) | null = null;
+		if (isRealtimeInitialized()) {
+			dynamicCleanup = registerRealtimeDynamic(channels, handler);
+		} else {
+			registerInRegistry(subId, channels, handler);
+		}
 
 		subscriptions.set(subId, {
 			ref,
 			unsubscribe: () => {
-				cleanup();
+				if (dynamicCleanup) {
+					dynamicCleanup();
+				} else {
+					unregisterRealtime(subId);
+				}
 			}
 		});
 		onSubscriptionChange?.(true);
 
-		console.log(`[aw-sync] subscribe ${subId} → ${channels.join(', ')}`);
+		console.log(`[aw-sync] subscribe ${subId} → ${channels.join(', ')}${dynamicCleanup ? ' (dynamic)' : ''}`);
 		return ref;
 	}
 

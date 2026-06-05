@@ -16,7 +16,7 @@
 
 import { getDatabaseId, getAppwriteInstances } from "../services/appwrite";
 import { Permission, Role } from "appwrite";
-import { subscribeRealtime } from "$lib/db-sync/aw-realtime";
+import { registerRealtime, unregisterRealtime } from "$lib/db-sync/aw-sync";
 import { globalState } from "./GlobalState.svelte";
 import { toastService } from "$lib/services/toast.service.svelte";
 import { eventsStore } from "./EventsStore.svelte";
@@ -42,7 +42,6 @@ interface Notification {
 class NotificationStore {
   #isInitialized = $state(false);
   #realtimeInitialized = false;
-  #realtimeCleanup: (() => void) | null = null;
   #notifications: Notification[] = [];
 
   // ===========================================================================
@@ -116,7 +115,7 @@ class NotificationStore {
       console.log("[NotificationStore] Setting up realtime...");
       const DB_ID = getDatabaseId();
 
-      this.#realtimeCleanup = subscribeRealtime(
+      registerRealtime(
         "notifications",
         [`databases.${DB_ID}.collections.user_notifications.documents`],
         async (response: any) => await this.#handleRealtimeEvent(response),
@@ -125,7 +124,7 @@ class NotificationStore {
       this.#isInitialized = true;
       this.#realtimeInitialized = true;
       console.log(
-        "[NotificationStore] ✅ Realtime configured (SDK v25 Realtime class)",
+        "[NotificationStore] ✅ Realtime configured",
       );
     } catch (err) {
       console.error("[NotificationStore] Error configuring realtime:", err);
@@ -332,8 +331,7 @@ class NotificationStore {
    * Détruit le store et réinitialise
    */
   destroy(): void {
-    this.#realtimeCleanup?.();
-    this.#realtimeCleanup = null;
+    unregisterRealtime("notifications");
     this.#isInitialized = false;
     this.#realtimeInitialized = false;
     this.#notifications = [];

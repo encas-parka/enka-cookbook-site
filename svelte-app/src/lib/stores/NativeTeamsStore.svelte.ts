@@ -22,7 +22,9 @@ import {
 } from "@/lib/services/appwrite-native-teams";
 import { globalState } from "./GlobalState.svelte";
 import {
-  subscribeRealtime,
+  registerRealtime,
+  unregisterRealtime,
+  isRealtimeInitialized,
   db,
 } from "$lib/db-sync/aw-sync";
 
@@ -33,7 +35,6 @@ export class NativeTeamsStore {
   #error = $state<string | null>(null);
   #isInitialized = $state(false);
   #realtimeInitialized = false;
-  #realtimeCleanup: (() => void) | null = null;
 
   // Getters simples
   get loading() {
@@ -177,7 +178,7 @@ export class NativeTeamsStore {
   }
 
   async #setupRealtimeInternal(): Promise<void> {
-    this.#realtimeCleanup = subscribeRealtime(
+    registerRealtime(
       "native-teams",
       ["teams", "memberships"],
       async (response: any) => {
@@ -317,8 +318,7 @@ export class NativeTeamsStore {
   }
 
   async destroy(): Promise<void> {
-    this.#realtimeCleanup?.();
-    this.#realtimeCleanup = null;
+    unregisterRealtime("native-teams");
     this.#teams.clear();
     await db.nativeTeams.clear();
     this.#isInitialized = false;

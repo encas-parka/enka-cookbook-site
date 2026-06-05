@@ -13,7 +13,6 @@ export { db, cleanupLegacyCaches, type EnkaDB, type RecipeDataRow, type CatalogR
 export { createSyncCollection, mergeByKey, RecordDeletedError } from './aw-collection';
 export { bridgeToMap, bridgeToMapFiltered, type BridgeResult } from './aw-bridge';
 export {
-	subscribeRealtime,
 	registerRealtime,
 	registerRealtimeDynamic,
 	unregisterRealtime,

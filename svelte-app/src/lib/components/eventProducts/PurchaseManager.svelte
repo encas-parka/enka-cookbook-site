@@ -283,7 +283,7 @@
     <ShoppingCart class="mx-auto mb-2 h-12 w-12" />
     <p>Aucun achat enregistré pour ce produit</p>
   </div>
-{:else if !globalState.isMobile}
+  <!-- {:else if !globalState.isMobile}
   <!-- Desktop Table View -->
   <div class="mt-4 overflow-x-auto">
     <table class="table-zebra table-sm table">
@@ -352,101 +352,101 @@
       </tbody>
     </table>
   </div>
+  -->
 {:else}
-  <!-- Mobile Card View -->
-  <div class="mt-4 space-y-3">
+  <!-- Compact Card View -->
+  <div class="mt-4 space-y-2">
     {#each modalState.purchasesList as purchase (purchase.$id)}
       <div class="card bg-base-100 border-neutral/40 card-xs border shadow-sm">
-        <div class="card-body p-4">
-          <div class="flex items-center justify-between gap-3">
-            <!-- Quantité + Prix + Statut -->
-            <div class="flex flex-wrap items-center gap-4 text-base">
-              <div class="flex items-center gap-2">
-                <Weight class="size-4" />
-                <span class="font-medium">
-                  {formatSingleQuantity(purchase.quantity, purchase.unit)}
-                </span>
-              </div>
-              <div class="">
+        <div class="card-body">
+          <!-- Ligne 1 : données principales + contexte + actions -->
+          <div class="flex flex-wrap items-center gap-x-3 gap-y-1.5">
+            <!-- Groupe DATA : Quantité + Prix + Statut + Livraison si ordered -->
+            <div class="inline-flex shrink-0 items-center gap-2">
+              <span class="flex items-center gap-1.5 text-sm font-medium">
+                <Weight class="size-3.5" />
+                {formatSingleQuantity(purchase.quantity, purchase.unit)}
+              </span>
+              <span class="flex items-center">
                 {purchase.price ? purchase.price : "?"}
-                <Euro class="me-1 inline size-4" />
-              </div>
-              <!-- Statut badge -->
-              <div class="badge {getStatusBadge(purchase.status).class}">
+                <Euro class="ms-0.5 inline size-3.5" />
+              </span>
+              <div
+                class="badge badge-sm {getStatusBadge(purchase.status).class}"
+              >
                 {getStatusBadge(purchase.status).text}
               </div>
-            </div>
-
-            <!-- Bouton suppression en haut à droite -->
-            {#if !isArchiveMode}
-              <button
-                class="btn btn-ghost btn-square btn-sm text-error"
-                onclick={() => handleDeletePurchase(purchase.$id)}
-                disabled={modalState.loading}
-              >
-                {#if modalState.loading}
-                  <span class="loading loading-spinner loading-xs"></span>
-                {:else}
-                  <Trash2 size={16} />
-                {/if}
-              </button>
-            {/if}
-          </div>
-
-          <!-- Dates -->
-          <div class="mt-2 flex flex-wrap gap-3 text-sm">
-            {#if purchase.orderDate}
-              <div class="flex items-center gap-1 opacity-70">
-                <Calendar class="size-3.5" />
-                <span>Commande: {formatDateOrNull(purchase.orderDate)}</span>
-              </div>
-            {/if}
-            {#if purchase.status === "ordered"}
-              <div class="flex items-center gap-1 opacity-70">
-                <Calendar class="size-3.5" />
-                <span
-                  >Livraison: {purchase.deliveryDate
+              {#if purchase.status === "ordered"}
+                <span class="text-warning flex items-center gap-1 font-medium">
+                  <Calendar class="size-3.5" />
+                  {purchase.deliveryDate
                     ? formatDateOrNull(purchase.deliveryDate)
-                    : "non renseigné"}</span
-                >
-              </div>
-            {/if}
-          </div>
-
-          <!-- Notes -->
-          {#if purchase.notes}
-            <div class="mt-2 text-sm opacity-70">
-              <MessageCircle class="me-1 inline size-3.5" />
-              {purchase.notes}
+                    : "Livraison ?"}
+                </span>
+              {/if}
             </div>
-          {/if}
 
-          <!-- Magasin et Qui -->
-          <div class="mt-3 flex flex-wrap gap-3">
-            {#if purchase.store}
-              <div class="badge badge-soft gap-1">
-                <Store class="h-3 w-3" />
-                <span class="max-w-37.5 truncate">{purchase.store}</span>
+            <!-- Groupe CONTEXTE : Magasin + Qui -->
+            {#if purchase.store || purchase.who}
+              <div class="inline-flex shrink-0 items-center gap-1.5">
+                {#if purchase.store}
+                  <div class="badge badge-sm badge-soft gap-1">
+                    <Store class="size-3" />
+                    <span class="max-w-37.5 truncate">{purchase.store}</span>
+                  </div>
+                {/if}
+                {#if purchase.who}
+                  <div class="badge badge-sm badge-soft gap-1">
+                    <User class="size-3" />
+                    <span class="max-w-25 truncate">{purchase.who}</span>
+                  </div>
+                {/if}
               </div>
             {/if}
-            {#if purchase.who}
-              <div class="badge badge-soft gap-1">
-                <User class="size-3.5" />
-                <span class="max-w-25 truncate">{purchase.who}</span>
+
+            <!-- Groupe ACTIONS -->
+            {#if !isArchiveMode}
+              <div class="ml-auto inline-flex shrink-0 items-center gap-1">
+                <button
+                  class="btn btn-ghost btn-square btn-sm"
+                  onclick={() => handleStartEdit(purchase)}
+                  title="Modifier"
+                >
+                  <SquarePen size={16} />
+                </button>
+                <button
+                  class="btn btn-ghost btn-square btn-sm text-error"
+                  onclick={() => handleDeletePurchase(purchase.$id)}
+                  disabled={modalState.loading}
+                  title="Supprimer"
+                >
+                  {#if modalState.loading}
+                    <span class="loading loading-spinner loading-xs"></span>
+                  {:else}
+                    <Trash2 size={16} />
+                  {/if}
+                </button>
               </div>
             {/if}
           </div>
 
-          <!-- Bouton édition en bas à droite -->
-          {#if !isArchiveMode}
-            <div class="card-actions mt-2 justify-end">
-              <button
-                class="btn btn-ghost btn-sm"
-                onclick={() => handleStartEdit(purchase)}
-              >
-                <SquarePen size={16} class="mr-1" />
-                Modifier
-              </button>
+          <!-- Ligne 2 : date commande + notes (conditionnel) -->
+          {#if purchase.orderDate || purchase.notes}
+            <div
+              class="mt-1 flex flex-wrap items-center gap-2 text-xs opacity-70"
+            >
+              {#if purchase.orderDate}
+                <div class="inline-flex shrink-0 items-center gap-1">
+                  <Calendar class="size-3" />
+                  <span>Cde : {formatDateOrNull(purchase.orderDate)}</span>
+                </div>
+              {/if}
+              {#if purchase.notes}
+                <div class="inline-flex shrink-0 items-center gap-1">
+                  <MessageCircle class="size-3" />
+                  <span>{purchase.notes}</span>
+                </div>
+              {/if}
             </div>
           {/if}
         </div>

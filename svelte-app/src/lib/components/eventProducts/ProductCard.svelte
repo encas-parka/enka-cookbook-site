@@ -433,8 +433,14 @@
 
             {#each purchasesBadges as purchase, index (index)}
               {@const IconComponent = statusIcons[purchase.icon]}
+              {@const tooltipParts = [
+                purchase.store ? purchase.store : null,
+                purchase.who ? purchase.who : null,
+              ].filter(Boolean)}
+              {@const tooltipText = tooltipParts.length > 0 ? tooltipParts.join(' · ') : ''}
               <div
-                class="badge badge-outline badge-lg flex h-auto flex-col items-center gap-1 {purchase.badgeClass}"
+                class="badge badge-outline badge-lg flex h-auto flex-col items-center gap-1 {purchase.badgeClass} {tooltipText ? 'tooltip tooltip-top' : ''}"
+                data-tip={tooltipText || undefined}
               >
                 <div class="flex items-center gap-1">
                   <IconComponent class="h-4 w-4" />

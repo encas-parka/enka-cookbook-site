@@ -109,7 +109,7 @@ export function getStatusBadge(status: string | null): {
 
 export function formatDateOrNull(dateString: string | null): string {
   if (!dateString) return "-";
-  return formatDate(dateString);
+  return formatDateShort(dateString);
 }
 
 // Fonction pour formater les achats avec badges structurés
@@ -121,11 +121,51 @@ export function formatPurchasesWithBadges(purchases: any[]): Array<{
   badgeText: string;
   icon: string;
   deliveryDate?: string;
+  store?: string;
+  who?: string;
 }> {
   if (!purchases?.length) return [];
 
-  // Grouper par statut et unité
-  const grouped = purchases.reduce((acc, purchase) => {
+  // Séparer les achats "ordered" des autres
+  const orderedPurchases = purchases.filter(
+    (p) => (p.status || "direct") === "ordered",
+  );
+  const otherPurchases = purchases.filter(
+    (p) => (p.status || "direct") !== "ordered",
+  );
+
+  // Les achats "ordered" ne sont PAS agrégés : chacun son badge
+  const orderedBadges = orderedPurchases.map((purchase) => {
+    const status = "ordered";
+    const unit = purchase.unit || "unit";
+    const badgeInfo = getStatusBadge(status);
+    const { value: numericQty, unit: convertedUnit } = convertAndFormatQuantity(
+      purchase.quantity || 0,
+      unit,
+    );
+    let formattedQty: string;
+    if (convertedUnit === "kg" || convertedUnit === "l.") {
+      formattedQty = numericQty.toFixed(2).replace(/\.?0+$/, "");
+    } else {
+      formattedQty = numericQty.toString();
+    }
+    return {
+      status,
+      unit: convertedUnit,
+      quantity: formattedQty,
+      badgeClass: badgeInfo.class,
+      badgeText: badgeInfo.text,
+      icon: getStatusIcon(status),
+      deliveryDate: purchase.deliveryDate
+        ? formatDateShort(purchase.deliveryDate)
+        : undefined,
+      store: purchase.store?.trim() || undefined,
+      who: purchase.who?.trim() || undefined,
+    };
+  });
+
+  // Les autres achats sont agrégés par statut + unité (comportement existant)
+  const grouped = otherPurchases.reduce((acc: any, purchase: any) => {
     const status = purchase.status || "direct";
     const unit = purchase.unit || "unit";
     const key = `${status}_${unit}`;
@@ -139,10 +179,6 @@ export function formatPurchasesWithBadges(purchases: any[]): Array<{
         badgeClass: badgeInfo.class,
         badgeText: badgeInfo.text,
         icon: getStatusIcon(status),
-        deliveryDate:
-          status === "ordered" && purchase.deliveryDate
-            ? formatDateShort(purchase.deliveryDate)
-            : undefined,
       };
     }
 
@@ -150,18 +186,14 @@ export function formatPurchasesWithBadges(purchases: any[]): Array<{
     return acc;
   }, {});
 
-  // Formatter les quantités avec conversion d'unité si nécessaire
-  return Object.values(grouped).map((item: any) => {
-    // Utiliser convertAndFormatQuantity pour obtenir directement la valeur et l'unité converties
+  const otherBadges = Object.values(grouped).map((item: any) => {
     const { value: numericQty, unit: convertedUnit } = convertAndFormatQuantity(
       item.quantity,
       item.unit,
     );
 
-    // Convertir en chaîne pour l'affichage
     let formattedQty: string;
     if (convertedUnit === "kg" || convertedUnit === "l.") {
-      // Garder jusqu'à 2 décimales mais retirer les zéros superflus
       formattedQty = numericQty.toFixed(2).replace(/\.?0+$/, "");
     } else {
       formattedQty = numericQty.toString();
@@ -170,9 +202,12 @@ export function formatPurchasesWithBadges(purchases: any[]): Array<{
     return {
       ...item,
       quantity: formattedQty,
-      unit: convertedUnit, // Mettre à jour l'unité avec l'unité convertie
+      unit: convertedUnit,
     };
   });
+
+  // Ordered d'abord, puis les autres
+  return [...orderedBadges, ...otherBadges];
 }
 
 // Fonction pour obtenir l'icône correspondant au statut

@@ -114,7 +114,7 @@ class GlobalState {
       localStorage.setItem("appwrite-user-id", this.#user.$id);
 
       // Phase 0: Initialiser le cache IDB pour les stores qui en dépendent
-      // (obligatoire avant syncFromRemote — sinon le guard #cache retourne silencieusement)
+      // (obligatoire avant syncInitial — sinon le guard #cache retourne silencieusement)
       await Promise.all([
         eventsStore.loadCache(),
         recipesStore.loadCache(),
@@ -125,11 +125,11 @@ class GlobalState {
 
       // Phase 1: Sync de TOUS les stores en parallèle
       await Promise.all([
-        nativeTeamsStore.syncFromRemote(),
-        eventsStore.syncFromRemote(),
-        materielStore.syncFromRemote(),
-        teamdocsStore.syncFromRemote(),
-        recipesStore.syncFromRemote(),
+        nativeTeamsStore.syncInitial(),
+        eventsStore.syncInitial(),
+        materielStore.syncInitial(),
+        teamdocsStore.syncInitial(),
+        recipesStore.syncInitial(),
         notificationStore.initialize(),
       ]);
 

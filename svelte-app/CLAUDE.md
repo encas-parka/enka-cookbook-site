@@ -184,12 +184,14 @@ All major stores are singleton classes with Svelte 5 reactive runes:
 // Phase 1: Fast cache load from Dexie (via bridgeToMap liveQuery)
 await store.loadCache();
 
-// Phase 2: Delta sync from Appwrite → Dexie
-await store.syncFromRemote();
+// Phase 2: Delta sync from Appwrite → Dexie (toggles #loading)
+await store.syncInitial();
 
 // Phase 3: Realtime WebSocket → Dexie
 await store.setupRealtime();
 ```
+
+**Naming convention** (since 2026-06-05, plan `resync-robuste`): stores expose `syncInitial()` (with loading) and `syncRevalidate()` (silent, no loading toggle). Resync triggers (post-visibility, post-ws-reconnect, post-bfcache restore) use `syncRevalidate()` exclusively. See `svelte-app/src/main.ts` for the orchestrator and `svelte-app/src/lib/db-sync/AGENTS.md` for the full resync mechanism.
 
 **4. Store Cleanup (destroy / logout)**
 
@@ -377,7 +379,7 @@ Available reusable form components in `src/lib/components/ui/`:
 2. Add collection name to `AwCollectionName` in `src/lib/db-sync/aw-types.ts`
 3. Verify name is mapped in `APPWRITE_CONFIG.collections` (in `appwrite.ts`)
 4. Create `src/lib/stores/YourStore.svelte.ts` with class-based singleton using `createSyncCollection` + `bridgeToMap`
-5. Add 3-phase initialization: `loadCache()`, `syncFromRemote()`, `setupRealtime()`
+5. Add 3-phase initialization: `loadCache()`, `syncInitial()`, `setupRealtime()`. Expose `syncRevalidate()` for background revalidation (no loading toggle)
 6. Add `destroy()` with bridge unsubscribe + collection unsubscribeAll + clearLocal
 7. Wire into `GlobalState.logout()` if the store holds private user data
 8. Export singleton instance

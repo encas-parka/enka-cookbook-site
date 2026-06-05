@@ -282,7 +282,7 @@
   });
 
   onMount(() => {
-    // Note: recipesStore est déjà initialisé via App.svelte (loadCache + syncFromRemote)
+    // Note: recipesStore est déjà initialisé via App.svelte (loadCache + syncInitial)
 
     // recipeDataStore est initialisé à la demande (pas global)
     if (!recipeDataStore.isInitialized) {

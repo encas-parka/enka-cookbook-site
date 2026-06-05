@@ -228,8 +228,19 @@ export class MaterielStore {
     }
   }
 
-  async syncFromRemote(): Promise<void> {
-    this.#loading = true;
+  /**
+   * Phase 2 : Delta sync depuis Appwrite (premier chargement avec loading UI).
+   * Toggle `this.#loading` avant et après l'appel. Utilisé pendant l'init.
+   */
+  async syncInitial(): Promise<void> {
+    return this.#runWithLoading(() => this.syncRevalidate());
+  }
+
+  /**
+   * Revalidation silencieuse depuis le remote (sans flash UI skeleton).
+   * Ne toggle PAS le loading. Utilisé par `main.ts:performResync()`.
+   */
+  async syncRevalidate(): Promise<void> {
     this.#error = null;
 
     try {
@@ -247,8 +258,15 @@ export class MaterielStore {
     } catch (err) {
       this.#error =
         err instanceof Error ? err.message : "Erreur de synchronisation";
-      console.error("[MaterielStore] SyncFromRemote error:", err);
+      console.error("[MaterielStore] SyncRevalidate error:", err);
       throw err;
+    }
+  }
+
+  async #runWithLoading(work: () => Promise<void>): Promise<void> {
+    this.#loading = true;
+    try {
+      return await work();
     } finally {
       this.#loading = false;
     }
@@ -277,7 +295,7 @@ export class MaterielStore {
 
   async initialize(): Promise<void> {
     await this.loadCache();
-    await this.syncFromRemote();
+    await this.syncInitial();
     await this.setupRealtime();
   }
 

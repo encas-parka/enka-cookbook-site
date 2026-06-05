@@ -6,7 +6,7 @@
  *
  * Mécanisme :
  * - Chaque store compare CACHE_SYNC_VERSION avec le syncVersion stocké dans son cache IDB
- * - Si absent ou inférieur → nullifie lastSync → force un full fetch au prochain syncFromRemote()
+ * - Si absent ou inférieur → nullifie lastSync → force un full fetch au prochain syncInitial()
  * - Sauvegarde la nouvelle version dans le cache
  *
  * À retirer quand tous les utilisateurs auront eu au moins une session avec la version courante.

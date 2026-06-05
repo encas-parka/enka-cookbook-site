@@ -220,7 +220,7 @@ class NotificationStore {
    * Dispatche vers les stores appropriés selon le type :
    * - team_access_granted → NativeTeamsStore.reload()
    * - event_access_granted → EventsStore.reload()
-   * - batch_products_update → ProductsStore.syncFromAppwrite()
+   * - batch_products_update → ProductsStore.syncRevalidate()
    */
   async #processNotification(notif: Notification): Promise<void> {
     console.log("[NotificationStore] 🔔 Processing notification:", notif);
@@ -255,12 +255,12 @@ class NotificationStore {
         console.log("[NotificationStore] 🛒 batch_products_update received");
         if (notif.targetDocumentId === globalState.currentMainId) {
           console.log(
-            "[NotificationStore] ✅ Calling productsStore.syncFromAppwrite()",
+            "[NotificationStore] ✅ Calling productsStore.syncRevalidate()",
           );
           // Les Cloud Functions ne déclenchent pas toujours les événements
           // realtime Appwrite vers les clients. Un delta sync explicite
           // garantit que Dexie → liveQuery → #onDataChange est à jour.
-          await productsStore.syncFromAppwrite();
+          await productsStore.syncRevalidate();
 
           if (notif.from && notif.from !== globalState.userId) {
             if (notif.from === "system") {

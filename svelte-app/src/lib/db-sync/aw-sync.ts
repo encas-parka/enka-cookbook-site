@@ -18,7 +18,8 @@ export {
 	unregisterRealtime,
 	initializeRealtime,
 	destroyRealtime,
-	isRealtimeInitialized
+	isRealtimeInitialized,
+	reconnectRealtime
 } from './aw-realtime';
 export type {
 	AwDoc,

@@ -104,7 +104,7 @@ class RecipesStore {
   #loadingDetails = new Set<string>();
   #initPromise: Promise<void> | null = null;
 
-  // syncReady: resolved when syncFromRemote() finishes
+  // syncReady: resolved when syncInitial() finishes
   #syncPromise: Promise<void> = Promise.resolve();
   #syncResolve: (() => void) | null = null;
 
@@ -196,7 +196,11 @@ class RecipesStore {
     }
   }
 
-  async syncFromRemote(): Promise<void> {
+  /**
+   * Phase 2 : Premier chargement complet (Hugo + Appwrite) avec loading UI.
+   * Toggle `this.#loading` avant et après l'appel. Utilisé pendant l'init.
+   */
+  async syncInitial(): Promise<void> {
     this.#syncPromise = new Promise<void>((resolve) => {
       this.#syncResolve = resolve;
     });
@@ -281,17 +285,19 @@ class RecipesStore {
   }
 
   /**
-   * Delta sync Appwrite uniquement (pas de re-fetch Hugo).
-   * Utilisé par resyncActiveStores() sur reconnexion/retour d'onglet.
-   * Sans impact sur #loading — silencieux en arrière-plan.
+   * Revalidation silencieuse (delta sync Appwrite uniquement, pas de re-fetch Hugo).
+   * Ne toggle PAS le loading. Utilisé par `main.ts:performResync()`.
+   * Rethrow les erreurs pour permettre à `Promise.allSettled` de les détecter
+   * et à `statusBarStore` de signaler unreachable.
    */
-  async syncFromAppwrite(): Promise<void> {
+  async syncRevalidate(): Promise<void> {
     if (!globalState.userId) return;
     try {
       await this.#collection.initialFetch();
-      console.log("[RecipesStore] syncFromAppwrite() terminé");
+      console.log("[RecipesStore] syncRevalidate() terminé");
     } catch (err) {
-      console.warn("[RecipesStore] syncFromAppwrite error:", err);
+      console.warn("[RecipesStore] syncRevalidate error:", err);
+      throw err;
     }
   }
 
@@ -335,7 +341,7 @@ class RecipesStore {
     this.#initPromise = (async () => {
       try {
         await this.loadCache();
-        await this.syncFromRemote();
+        await this.syncInitial();
         await this.setupRealtime();
 
         if (this.#recipesIndex.size === 0) {

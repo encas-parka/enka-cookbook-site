@@ -296,72 +296,88 @@
   // ============================================================================
   // INITIALISATION
   // ============================================================================
+  // L'effet tracke `eventId` comme seule dépendance réactive. À chaque changement
+  // d'eventId (ex: navigation /event/abc → /event/xyz alors que sv-router réutilise
+  // l'instance du composant), la cleanup function s'exécute pour désabonner l'ancien
+  // lock, puis l'effet recrée la souscription pour le nouvel event.
 
   $effect(() => {
-    // Guard 1: déjà initialisé OU déjà en cours
-    if (isInitialised || isBusy) {
-      console.log("[Init] Guard 1 - Déjà initialisé ou occupé", {
-        isInitialised,
-        isBusy,
-      });
+    // Tracker eventId comme seule dépendance réactive (read au top-level)
+    const currentEventId = eventId;
+    if (!currentEventId) {
+      console.log("[Init] Pas d'eventId");
       return;
     }
 
-    // Guard 2: pas d'eventId
-    if (!eventId) {
-      console.log("[Init] Guard 2 - Pas d'eventId");
-      return;
-    }
+    // Reset l'état du lock pour le nouvel event (évite d'afficher l'ancien lock
+    // pendant la transition entre deux events).
+    activeLock = null;
 
-    console.log("[Init] Début initialisation pour eventId:", eventId);
+    // Flag d'annulation pour neutraliser toute mutation tardive provenant d'une
+    // init asynchrone après un changement d'eventId (race condition).
+    let canceled = false;
+
+    console.log("[Init] Début initialisation pour eventId:", currentEventId);
 
     untrack(async () => {
-      const event = eventsStore.getEventById(eventId);
+      const event = eventsStore.getEventById(currentEventId);
       console.log("[Init] Event récupéré:", event?.$id, event?.name);
 
       if (!event) {
         console.log("[Init] Event non trouvé dans le cache");
         return;
       }
+      if (canceled) return;
 
       isInitialised = true;
 
       // Charger le lock en arrière-plan (non-bloquant)
       isBusy = true;
       try {
-        activeLock = await locksService.getLock(`event_${eventId}`);
-        lockUnsub = locksService.subscribeToLock(`event_${eventId}`, (lock) => {
-          console.log("[EventEditPage] 🔒 Verrou mis à jour:", {
-            lockedBy: lock?.userName,
-            userId: lock?.userId,
-            expiresAt: lock?.expiresAt,
-          });
-          activeLock = lock;
-        });
+        const lock = await locksService.getLock(`event_${currentEventId}`);
+        if (canceled) return;
+        activeLock = lock;
+
+        const unsub = locksService.subscribeToLock(
+          `event_${currentEventId}`,
+          (newLock) => {
+            console.log("[EventEditPage] 🔒 Verrou mis à jour:", {
+              lockedBy: newLock?.userName,
+              userId: newLock?.userId,
+              expiresAt: newLock?.expiresAt,
+            });
+            activeLock = newLock;
+          },
+        );
+
+        if (canceled) {
+          // L'effet a été annulé pendant l'await → cleanup immédiat
+          unsub();
+          return;
+        }
+
+        lockUnsub = unsub;
       } finally {
         isBusy = false;
         console.log("[Init] Lock chargé, isBusy = false");
       }
     });
+
+    // Cleanup : exécutée AVANT le prochain run (changement d'eventId) OU à la
+    // destruction du composant. Garantit l'isolation des souscriptions lock entre
+    // events et évite la fuite WebSocket Appwrite.
+    return () => {
+      canceled = true;
+      if (lockUnsub) {
+        console.log(
+          "[Init] Cleanup - unsubscribe du lock pour event:",
+          currentEventId,
+        );
+        lockUnsub();
+        lockUnsub = null;
+      }
+    };
   });
-
-  // ============================================================================
-  // RESET AU CHANGEMENT DE ROUTE
-  // ============================================================================
-
-  // $effect(() => {
-  //   // Réinitialiser quand eventId change
-  //   // NOTE: Le cleanup s'exécute AVANT le prochain run de l'effect
-  //   return () => {
-  //     console.log("[EventEditPage] Changement de route, reset état...");
-  //     isInitialised = false;
-  //     activeLock = null;
-  //     if (lockUnsub) {
-  //       lockUnsub();
-  //       lockUnsub = null;
-  //     }
-  //   };
-  // });
 
   onDestroy(() => {
     // 1. Annuler l'auto-save planifié

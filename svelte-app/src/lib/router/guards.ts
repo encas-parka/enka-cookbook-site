@@ -30,7 +30,7 @@ export const authGuard: Hooks = {
  * Guard pour les routes events
  *
  * Ce guard initialise uniquement le cache IndexedDB (~10ms).
- * La synchronisation Appwrite (syncFromRemote + setupRealtime) est gérée
+ * La synchronisation Appwrite (syncInitial + setupRealtime) est gérée
  * en arrière-plan par App.svelte, avec un toast "Mise à jour en cours...".
  *
  * L'UI s'affiche immédiatement avec les données du cache.

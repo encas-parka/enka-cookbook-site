@@ -212,24 +212,26 @@ export function createSyncCollection<T extends AwDoc>(options: {
 			page++;
 		} while (cursor && (page * 500) === allRows.length);
 
-		// 4. Bulk put into Dexie (transaction)
-		if (allRows.length > 0) {
-			// SDK v24+ ajoute toString() sur chaque row — incompatble avec structuredClone (IndexedDB)
-			for (const row of allRows) delete (row as any).toString;
-			await db.transaction('rw', table, async () => {
-				await table.bulkPut(allRows);
-			});
-		}
-
-		// 5. Update sync metadata
+		// 4. Compute new sync timestamp (used inside the atomic transaction below)
 		const newTimestamp =
 			allRows.length > 0
 				? allRows[allRows.length - 1].$updatedAt
 				: new Date().toISOString();
-		await db.syncMeta.put({
-			collectionId: syncKey,
-			lastSync: newTimestamp
-		} satisfies SyncMetaRow);
+
+		// 5. Bulk put + syncMeta update in a SINGLE atomic transaction.
+		// If any step fails, Dexie rolls back BOTH operations — prevents the
+		// "rows in Dexie but stale lastSync cursor" desync window.
+		// SDK v24+ ajoute toString() sur chaque row — incompatble avec structuredClone (IndexedDB)
+		await db.transaction('rw', [table, db.syncMeta], async () => {
+			if (allRows.length > 0) {
+				for (const row of allRows) delete (row as any).toString;
+				await table.bulkPut(allRows);
+			}
+			await db.syncMeta.put({
+				collectionId: syncKey,
+				lastSync: newTimestamp
+			} satisfies SyncMetaRow);
+		});
 
 		console.log(
 			`[aw-sync] ${String(collectionName)}${fetchOptions?.scopeKey ? `:${fetchOptions.scopeKey}` : ''}: ${allRows.length} records synced (lastSync: ${lastSync ?? 'full'} → ${newTimestamp.slice(0, 19)})`

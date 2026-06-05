@@ -46,11 +46,11 @@
             });
 
             return Promise.all([
-              recipesStore.syncFromRemote(),
-              eventsStore.syncFromRemote(),
-              materielStore.syncFromRemote(),
-              teamsStore.syncFromRemote(),
-              teamdocsStore.syncFromRemote(),
+              recipesStore.syncInitial(),
+              eventsStore.syncInitial(),
+              materielStore.syncInitial(),
+              teamsStore.syncInitial(),
+              teamdocsStore.syncInitial(),
             ]);
           })
           .catch((err) => {

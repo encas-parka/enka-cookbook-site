@@ -273,12 +273,26 @@ export class EventsStore {
   }
 
   /**
-   * Phase 2 : Delta sync depuis Appwrite
+   * Phase 2 : Delta sync depuis Appwrite (premier chargement avec loading UI).
+   * Toggle `this.#loading` avant et après l'appel. Utilisé pendant l'init.
+   *
+   * Sémantique : si déjà initialisé, équivaut à `syncRevalidate()` avec loading
+   * toggle (pas de skip sur `#isInitialized`). Le toggle loading peut être
+   * visible si appelé après init — préférer `syncRevalidate()` pour les
+   * revalidations silencieuses.
    */
-  async syncFromRemote(): Promise<void> {
-    console.log("[EventsStore] Synchronisation depuis Appwrite...");
-    this.#loading = true;
+  async syncInitial(): Promise<void> {
+    return this.#runWithLoading(() => this.syncRevalidate());
+  }
 
+  /**
+   * Revalidation silencieuse depuis le remote (sans flash UI skeleton).
+   * Ne toggle PAS le loading. Met à jour Dexie en place (bridgeToMap propage
+   * aux composants). Utilisé par `main.ts:performResync()` et toute
+   * situation de revalidation en arrière-plan.
+   */
+  async syncRevalidate(): Promise<void> {
+    console.log("[EventsStore] Synchronisation depuis Appwrite...");
     try {
       await this.#collection.initialFetch();
       console.log(
@@ -292,6 +306,13 @@ export class EventsStore {
       this.#error = message;
       console.error("[EventsStore]", message, err);
       throw err;
+    }
+  }
+
+  async #runWithLoading(work: () => Promise<void>): Promise<void> {
+    this.#loading = true;
+    try {
+      return await work();
     } finally {
       this.#loading = false;
     }
@@ -332,7 +353,7 @@ export class EventsStore {
     this.#initPromise = (async () => {
       try {
         await this.loadCache();
-        await this.syncFromRemote();
+        await this.syncInitial();
         await this.setupRealtime();
 
         console.log(

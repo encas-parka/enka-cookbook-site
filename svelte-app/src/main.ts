@@ -7,42 +7,151 @@ import { materielStore } from "$lib/stores/MaterielStore.svelte";
 import { teamdocsStore } from "$lib/stores/TeamdocsStore.svelte";
 import { nativeTeamsStore } from "$lib/stores/NativeTeamsStore.svelte";
 import { recipesStore } from "$lib/stores/RecipesStore.svelte";
-import { setRealtimeOnReconnect } from "$lib/db-sync/aw-realtime";
+import { setRealtimeOnReconnect, reconnectRealtime } from "$lib/db-sync/aw-realtime";
 import { statusBarStore } from "$lib/stores/StatusBarStore.svelte";
 
 /**
- * Resyncs data for all currently active stores.
- * Called on visibility change (tab becomes visible) and WebSocket reconnection.
- * Stores that aren't initialized are safely skipped by their internal guards
- * (!userId, !currentMainId, etc.).
- * Debounced to avoid double sync when both signals fire simultaneously.
+ * Time threshold under which we skip the post-reconnect resync.
+ * 30s matches Firefox's budget-based throttling delay
+ * (`dom.timeout.throttling_delay: 30000`). Below this, the WebSocket is
+ * considered alive — the SDK's heartbeat setTimeout hasn't been throttled
+ * to the point of being missed.
  */
+const RESYNC_THRESHOLD_MS = 30_000;
+
+/**
+ * After this duration of hidden state, we assume the WebSocket is potentially
+ * zombie (Appwrite SDK bug #11271, iOS kill, proxy timeout, Chrome intensive
+ * throttling at 1/min). We force a fresh WebSocket connection before resyncing.
+ */
+const RECONNECT_THRESHOLD_MS = 5 * 60_000;
+
+/**
+ * Conservative default hidden duration when restoring from bfcache
+ * (iOS Safari). The bfcache restore can happen without a prior
+ * `visibilitychange` event, leaving `lastHiddenAt === null`. We assume
+ * the page has been away long enough to warrant both a resync AND a
+ * forced WebSocket reconnect (default > RECONNECT_THRESHOLD_MS).
+ */
+const BFCACHE_DEFAULT_HIDDEN_MS = 10 * 60_000;
+
+type ResyncReason = "visibility" | "pageshow" | "ws-reconnect" | "online";
+
+/** Timestamp (ms) at which the document last became hidden. */
+let lastHiddenAt: number | null = null;
+/** Pending debounce timer for coalescing rapid visibility/ws-reconnect triggers. */
 let resyncTimeout: ReturnType<typeof setTimeout> | null = null;
-function resyncActiveStores(): void {
+/**
+ * Re-entrancy guard: true while a resync's `await` is in flight.
+ * A new trigger arriving mid-resync is dropped (with a warn log) instead of
+ * stacking concurrent resyncs on top of each other.
+ */
+let isResyncing = false;
+
+/**
+ * Runs the actual resync work — separated from `scheduleResync` so the
+ * debounce/guard logic is testable in isolation. Called only by
+ * `scheduleResync` after the debounce window elapses.
+ */
+async function performResync(forceReconnect: boolean, reason: ResyncReason): Promise<void> {
+  if (forceReconnect) {
+    console.log("[sync] Forcing WS reconnect + resync");
+    try {
+      await reconnectRealtime();
+    } catch (err) {
+      console.error("[sync] reconnectRealtime() failed, continuing with resync:", err);
+    }
+  }
+
+  console.log(`[sync] Resyncing active stores (reason=${reason})...`);
+  const results = await Promise.allSettled([
+    productsStore.syncRevalidate(),
+    recipesStore.syncRevalidate(),
+    eventsStore.syncRevalidate(),
+    materielStore.syncRevalidate(),
+    teamdocsStore.syncRevalidate(),
+    nativeTeamsStore.syncRevalidate(),
+  ]);
+  const failures = results.filter((r) => r.status === "rejected");
+  if (failures.length > 0) {
+    console.error(`[sync] ${failures.length} store(s) failed to resync:`, failures);
+    statusBarStore.setServerStatus("unreachable");
+  } else {
+    console.log("[sync] All stores resynced successfully");
+    statusBarStore.setServerStatus("connected");
+  }
+}
+
+/**
+ * Coalesces rapid triggers (visibility + ws-reconnect firing in the same
+ * tick, or multiple visibility transitions within 500ms) into a single
+ * resync. Drops triggers arriving while a resync is already in flight.
+ */
+function scheduleResync({
+  forceReconnect,
+  reason,
+}: {
+  forceReconnect: boolean;
+  reason: ResyncReason;
+}): void {
+  if (isResyncing) {
+    console.warn(`[sync] Resync already in progress, skipping trigger (reason=${reason})`);
+    return;
+  }
   if (resyncTimeout) clearTimeout(resyncTimeout);
   resyncTimeout = setTimeout(async () => {
     resyncTimeout = null;
-    console.log("[sync] Resyncing active stores...");
-    const results = await Promise.allSettled([
-      productsStore.syncFromAppwrite(),
-      recipesStore.syncFromAppwrite(),
-      eventsStore.syncFromRemote(),
-      materielStore.syncFromRemote(),
-      teamdocsStore.syncFromRemote(),
-      nativeTeamsStore.syncFromRemote(),
-    ]);
-    const failures = results.filter((r) => r.status === "rejected");
-    if (failures.length > 0) {
-      console.error(`[sync] ${failures.length} store(s) failed to resync:`, failures);
-      statusBarStore.setServerStatus("unreachable");
-    } else {
-      console.log("[sync] All stores resynced successfully");
-      statusBarStore.setServerStatus("connected");
+    isResyncing = true;
+    try {
+      await performResync(forceReconnect, reason);
+    } finally {
+      isResyncing = false;
     }
   }, 500);
 }
 
-// Enregistrer le Service Worker en production uniquement
+/**
+ * Visibility change handler. Only triggers a resync on the visible→hidden
+ * →visible round-trip if the page was hidden long enough that the WebSocket
+ * state is suspect. Forces a WS reconnect past RECONNECT_THRESHOLD_MS.
+ */
+function handleVisibilityChange(): void {
+  if (document.hidden) {
+    lastHiddenAt = Date.now();
+    return;
+  }
+  const hiddenDuration = lastHiddenAt !== null ? Date.now() - lastHiddenAt : 0;
+  lastHiddenAt = null;
+  if (hiddenDuration < RESYNC_THRESHOLD_MS) return;
+  scheduleResync({
+    forceReconnect: hiddenDuration > RECONNECT_THRESHOLD_MS,
+    reason: "visibility",
+  });
+}
+
+/**
+ * Handles iOS Safari bfcache restore. The `pageshow` event fires with
+ * `event.persisted === true` when the page is restored from bfcache —
+ * a path that bypasses normal `load` and `visibilitychange` events.
+ * If `lastHiddenAt` is null (the typical bfcache case), we assume a long
+ * absence and trigger both resync + reconnect.
+ */
+function handlePageShow(event: PageTransitionEvent): void {
+  if (!event.persisted) return;
+  const hiddenDuration =
+    lastHiddenAt !== null ? Date.now() - lastHiddenAt : BFCACHE_DEFAULT_HIDDEN_MS;
+  lastHiddenAt = null;
+  if (hiddenDuration < RESYNC_THRESHOLD_MS) return;
+  scheduleResync({
+    forceReconnect: hiddenDuration > RECONNECT_THRESHOLD_MS,
+    reason: "pageshow",
+  });
+}
+
+// Enregistrer le Service Worker en production uniquement.
+// (Le resync post-visibility est branché globalement plus bas, pas dans ce
+// bloc — le SW ne sert qu'à forcer la mise à jour du JS et à recharger sur
+// activation d'une nouvelle version.)
 if ("serviceWorker" in navigator && import.meta.env.PROD) {
   window.addEventListener("load", async () => {
     const registration = await navigator.serviceWorker
@@ -52,14 +161,9 @@ if ("serviceWorker" in navigator && import.meta.env.PROD) {
         return null;
       });
 
-    // Vérification quand l'utilisateur revient sur l'onglet
-    // (timers throttlés en arrière-plan sur mobile, ce check compense)
     document.addEventListener("visibilitychange", () => {
       if (document.visibilityState === "visible") {
-        // SW update pour les mises à jour JS
         registration?.update().catch(() => {});
-        // Resync data pour rattraper les événements manqués en arrière-plan
-        resyncActiveStores();
       }
     });
   });
@@ -70,17 +174,32 @@ if ("serviceWorker" in navigator && import.meta.env.PROD) {
     console.log("[PWA] Nouvelle version activée — rechargement de la page");
     window.location.reload();
   });
-} else {
-  // En dev, pas de SW mais on veut quand même le resync sur visibility
-  document.addEventListener("visibilitychange", () => {
-    if (document.visibilityState === "visible") {
-      resyncActiveStores();
-    }
-  });
 }
 
-// Resync sur reconnexion WebSocket (pertes réseau pendant onglet visible)
-setRealtimeOnReconnect(resyncActiveStores);
+// Resync sur retour d'onglet après absence prolongée (prod + dev).
+// Toujours branché, indépendamment du SW, pour couvrir le cas dev.
+document.addEventListener("visibilitychange", handleVisibilityChange);
+
+// Resync sur restauration bfcache iOS Safari.
+// `event.persisted === true` est filtré dans le handler.
+window.addEventListener("pageshow", handlePageShow);
+
+// Resync sur reconnexion WebSocket (pertes réseau pendant onglet visible).
+// Pas de forceReconnect ici : le callback `client.connected` ne signale
+// pas une absence prolongée, juste une reconnexion réseau.
+setRealtimeOnReconnect(() => scheduleResync({ forceReconnect: false, reason: "ws-reconnect" }));
+
+/**
+ * Resync sur retour de connexion réseau (event `online` du navigateur).
+ * Une coupure réseau a très probablement tué le WebSocket (proxy timeout,
+ * Appwrite SDK heartbeat manqué) → on force la reconnexion + delta sync
+ * pour rattraper les events manqués. Indépendamment du `lastHiddenAt` :
+ * le user peut perdre le réseau sans changer d'onglet.
+ */
+function handleOnline(): void {
+  scheduleResync({ forceReconnect: true, reason: "online" });
+}
+window.addEventListener("online", handleOnline);
 
 const app = mount(App, {
   target: document.getElementById("app")!,

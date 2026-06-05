@@ -1307,18 +1307,20 @@ class ProductsStore {
   }
 
   /**
+   * Revalidation silencieuse depuis le remote (sans flash UI skeleton).
    * Force un delta sync Appwrite → Dexie pour les produits et achats.
    *
    * Appelé par NotificationStore après une notification batch_products_update
-   * (Cloud Functions : batchUpdate, groupPurchase).
+   * (Cloud Functions : batchUpdate, groupPurchase), et par
+   * `main.ts:performResync()`.
    *
    * Le realtime Appwrite ne relaie pas toujours les événements de modification
    * issus des Cloud Functions vers les clients, donc ce delta sync explicite
    * garantit que Dexie (et donc le liveQuery → #onDataChange) est à jour.
    */
-  async syncFromAppwrite(): Promise<void> {
+  async syncRevalidate(): Promise<void> {
     if (!this.#currentMainId) {
-      console.warn("[ProductsStore] syncFromAppwrite() appelé sans currentMainId");
+      console.warn("[ProductsStore] syncRevalidate() appelé sans currentMainId");
       return;
     }
 
@@ -1337,7 +1339,7 @@ class ProductsStore {
     results.forEach((r, i) => {
       if (r.status === "rejected") {
         hasFailure = true;
-        console.error(`[ProductsStore] syncFromAppwrite: ${names[i]} failed:`, r.reason);
+        console.error(`[ProductsStore] syncRevalidate: ${names[i]} failed:`, r.reason);
       }
     });
     // Only update lastSync if all syncs succeeded
@@ -1345,7 +1347,24 @@ class ProductsStore {
     if (!hasFailure) {
       this.#lastSync = new Date().toISOString();
     }
-    console.log("[ProductsStore] syncFromAppwrite() terminé");
+    console.log("[ProductsStore] syncRevalidate() terminé");
+  }
+
+  /**
+   * Wrapper de `syncRevalidate()` qui toggle `this.#loading` autour de l'appel.
+   * Premier chargement avec loading UI. Utilisé pendant l'init par `main.ts`.
+   */
+  async syncInitial(): Promise<void> {
+    return this.#runWithLoading(() => this.syncRevalidate());
+  }
+
+  async #runWithLoading(work: () => Promise<void>): Promise<void> {
+    this.#loading = true;
+    try {
+      return await work();
+    } finally {
+      this.#loading = false;
+    }
   }
 
   // ===========================================================================

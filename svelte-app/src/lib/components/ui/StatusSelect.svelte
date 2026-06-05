@@ -23,10 +23,8 @@
     </div>
   </div>
 
-  {#if status === "ordered"}
-    <label class="input w-fit">
-      <span class="label">Date de livraison</span>
-      <input type="date" bind:value={deliveryDate} {disabled} />
-    </label>
-  {/if}
+  <label class="input w-fit" class:hidden={status !== "ordered"}>
+    <span class="label">Date de livraison</span>
+    <input type="date" bind:value={deliveryDate} {disabled} />
+  </label>
 </div>

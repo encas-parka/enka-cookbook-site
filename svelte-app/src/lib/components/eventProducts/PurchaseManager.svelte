@@ -76,7 +76,9 @@
     modalState.forms.purchase.status =
       (purchase.status as "ordered" | "delivered") || null;
     modalState.forms.purchase.orderDate = purchase.orderDate || null;
-    modalState.forms.purchase.deliveryDate = purchase.deliveryDate || null;
+    modalState.forms.purchase.deliveryDate = purchase.deliveryDate
+      ? purchase.deliveryDate.split("T")[0]
+      : null;
 
     // Définir l'ID du purchase en cours d'édition via la méthode dédiée
     modalState.startEditPurchase(purchase);

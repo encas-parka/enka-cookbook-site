@@ -728,14 +728,10 @@ export async function upsertProduct(
   // Récupérer le produit enrichi localement
   const enrichedProduct = getEnrichedProduct(productId);
   if (!enrichedProduct) {
-    throw new Error(
-      `Produit ${productId} non trouvé localement pour création`,
-    );
+    throw new Error(`Produit ${productId} non trouvé localement pour création`);
   }
 
-  console.log(
-    `[Appwrite product] Upsert produit ${productId} sur Appwrite...`,
-  );
+  console.log(`[Appwrite product] Upsert produit ${productId} sur Appwrite...`);
 
   // Préparer les données une seule fois (utilisées pour create ET update)
   const appwriteData = enrichedProductToAppwriteProduct(
@@ -934,7 +930,11 @@ export async function updateProductBatch(
           console.warn(
             `[Appwrite product] DESYNC: produit ${productId} introuvable dans Appwrite, fallback vers upsert`,
           );
-          return await upsertProduct(productId, productUpdates, getEnrichedProduct);
+          return await upsertProduct(
+            productId,
+            productUpdates,
+            getEnrichedProduct,
+          );
         }
         throw error;
       }
@@ -1759,7 +1759,9 @@ export async function mergeProductsAppwrite(
   sourceProduct: EnrichedProduct | null,
 ): Promise<void> {
   if (!sourceProduct) {
-    console.warn(`[mergeProductsAppwrite] sourceProduct ${sourceId} est null, skip`);
+    console.warn(
+      `[mergeProductsAppwrite] sourceProduct ${sourceId} est null, skip`,
+    );
     return;
   }
   const sourceUpdates: ProductUpdate = {
@@ -1791,15 +1793,103 @@ export async function mergeProductsAppwrite(
  * Annule un merge : le produit source redevient visible.
  * Un seul update : le source reçoit mergedInto=null.
  */
-export async function unmergeProductAppwrite(
-  sourceId: string,
-): Promise<void> {
+export async function unmergeProductAppwrite(sourceId: string): Promise<void> {
   const sourceUpdates: ProductUpdate = {
     mergedInto: null,
     mergeDate: null,
   };
 
   await updateProduct(sourceId, sourceUpdates, false);
+}
+
+// ===========================================================================
+// TRANSACTIONS CLIENT-SIDE (Appwrite 1.9+)
+// ===========================================================================
+
+/**
+ * Opération élémentaire pour une transaction client-side.
+ * L'action "update" envoie uniquement les champs à modifier (patch).
+ */
+export interface ClientTransactionOperation {
+  action: "create" | "update" | "delete";
+  databaseId: string;
+  collectionId: string;
+  documentId: string;
+  data?: Record<string, unknown>;
+}
+
+/**
+ * Exécute un lot d'opérations dans une transaction atomique client-side.
+ *
+ * Flux : createTransaction → createOperations → commit (ou rollback si erreur).
+ *
+ * @param operations - Liste des opérations à exécuter atomiquement
+ * @returns `{ success, transactionId }`
+ *
+ * @example
+ * ```ts
+ * const config = getAppwriteConfig();
+ * await executeClientTransaction([
+ *   {
+ *     action: "update",
+ *     databaseId: config.APPWRITE_DATABASE_ID,
+ *     collectionId: config.APPWRITE_CONFIG.collections.purchases,
+ *     documentId: "purchase123",
+ *     data: { status: "delivered", deliveryDate: new Date().toISOString() },
+ *   },
+ * ]);
+ * ```
+ */
+export async function executeClientTransaction(
+  operations: ClientTransactionOperation[],
+): Promise<{ success: boolean; transactionId: string }> {
+  const { databases } = await getAppwriteInstances();
+
+  // 1. Créer la transaction
+  const transaction = await databases.createTransaction({ ttl: 60 });
+  const txId = transaction.$id;
+
+  try {
+    // 2. Stager les opérations
+    await databases.createOperations({
+      transactionId: txId,
+      operations: operations.map((op) => ({
+        action: op.action,
+        databaseId: op.databaseId,
+        collectionId: op.collectionId,
+        documentId: op.documentId,
+        ...(op.data ? { data: op.data } : {}),
+      })),
+    });
+
+    // 3. Commit
+    await databases.updateTransaction({
+      transactionId: txId,
+      commit: true,
+    });
+
+    console.log(
+      `[ClientTransaction] Transaction ${txId} commitée (${operations.length} opérations)`,
+    );
+    return { success: true, transactionId: txId };
+  } catch (error) {
+    // Rollback
+    try {
+      await databases.updateTransaction({
+        transactionId: txId,
+        rollback: true,
+      });
+      console.warn(
+        `[ClientTransaction] Transaction ${txId} rolllbackée suite à une erreur`,
+      );
+    } catch (rollbackError) {
+      console.error(
+        `[ClientTransaction] Échec du rollback pour ${txId}:`,
+        rollbackError,
+      );
+    }
+    throw error;
+  }
 }
 
 // =============================================================================

@@ -35,6 +35,8 @@
   import ProductsFilters from "$lib/components/eventProducts/ProductsFilters.svelte";
   import StoreBatchEditModal from "$lib/components/eventProducts/StoreBatchEditModal.svelte";
   import WhoBatchEditModal from "$lib/components/eventProducts/WhoBatchEditModal.svelte";
+  import GroupedInvoicesBar from "$lib/components/eventProducts/GroupedInvoicesBar.svelte";
+  import InvoiceDetailModal from "$lib/components/eventProducts/InvoiceDetailModal.svelte";
   import EventStats from "$lib/components/EventStats.svelte";
   import EventDocumentsBloc from "$lib/components/documents/EventDocumentsBloc.svelte";
   import ConfirmModal from "$lib/components/ui/ConfirmModal.svelte";
@@ -305,6 +307,17 @@
 
   let GlobalPurchasesModalisOpen = $state(false);
 
+  // État local pour le modal de détail facture groupée
+  let openInvoiceId = $state<string | null>(null);
+
+  function openInvoiceDetail(invoiceId: string) {
+    openInvoiceId = invoiceId;
+  }
+
+  function closeInvoiceDetail() {
+    openInvoiceId = null;
+  }
+
   // =========================================================================
   // PERMISSIONS & INVITATION
   // =========================================================================
@@ -515,6 +528,7 @@
           {/if}
         </div>
       </div>
+
       <!-- Stats -->
       {#if currentEvent}
         <div class="grow py-4 print:hidden">
@@ -539,7 +553,9 @@
       {/if}
 
       <!-- card deense et produits ok/manquant -->
-      <div class="flex w-full flex-wrap justify-center gap-10 md:justify-end">
+      <div
+        class="flex w-full flex-wrap justify-center gap-x-10 gap-y-4 md:justify-end"
+      >
         {#if eventIsPassed}
           <div
             class="alert alert-warning alert-soft max-sm:alert-vertical self-center"
@@ -559,6 +575,10 @@
               <div class="card-title text-orange-800">
                 <PackageCheck class="text-orange-800 opacity-60" />
                 Produits
+                <div class="text-error text-lg font-bold md:text-2xl">
+                  {productsStore.completionStats.missing}
+                </div>
+                <div class="text-base-content/60 text-xs">Manquants</div>
               </div>
 
               <!-- <div class="text-center">
@@ -568,12 +588,6 @@
                 <div class="text-base-content/60 text-xs">Ok</div>
               </div>
               <div class="divider divider-horizontal mx-1"></div> -->
-              <div class="text-center">
-                <div class="text-error text-lg font-bold md:text-2xl">
-                  {productsStore.completionStats.missing}
-                </div>
-                <div class="text-base-content/60 text-xs">Manquants</div>
-              </div>
               <div class="card-action mt-auto">
                 <button
                   class="btn btn-accent w-full"
@@ -597,13 +611,13 @@
             <div class="card-title text-orange-800">
               <BadgeEuro class="text-orange-800 opacity-60" />
               Dépenses
-            </div>
-            <div class="text-base-content/70 text-center text-lg font-medium">
-              {productsStore.financialStats.totalGlobal} €
+              <div class="text-base-content/70 text-center text-lg font-medium">
+                {productsStore.financialStats.totalGlobal} €
+              </div>
             </div>
             <div class="card-action mt-auto">
               <button
-                class="btn btn-soft btn-primary"
+                class="btn btn-soft btn-primary btn-wide"
                 onclick={() => (GlobalPurchasesModalisOpen = true)}
                 title="Ajouter une dépense générale"
                 onmouseenter={() =>
@@ -618,6 +632,11 @@
             </div>
           </div>
         </div>
+        <!-- Achats groupés -->
+        <GroupedInvoicesBar
+          canEdit={canEdit ?? false}
+          onInvoiceClick={openInvoiceDetail}
+        />
       </div>
     </div>
 
@@ -797,6 +816,8 @@
   <AddProductModal bind:open={isAddProductModalOpen} />
 
   <GlobalPurchasesModal bind:isOpen={GlobalPurchasesModalisOpen} />
+
+  <InvoiceDetailModal invoiceId={openInvoiceId} onClose={closeInvoiceDetail} />
 
   {#if globalState.isDesktop}
     <div class="fixed bottom-0 left-0 z-50 transition-all print:hidden">

@@ -34,6 +34,7 @@ import type {
   EnrichedProduct,
   StoreInfo,
   BatchUpdateResult,
+  GroupedInvoice,
 } from "../types/store.types";
 import type { EnrichedEvent } from "../types/events";
 import {
@@ -46,7 +47,9 @@ import {
   mergeProductsAppwrite,
   unmergeProductAppwrite,
   isNotFoundError,
+  executeClientTransaction,
 } from "../services/appwrite-products";
+import { getAppwriteConfig } from "../services/appwrite";
 import type { GroupPurchaseBatchResult } from "../services/appwrite-transaction";
 
 import { globalState } from "./GlobalState.svelte";
@@ -173,7 +176,11 @@ class ProductsStore {
    * Merge les 3 sources, compare les fingerprints, met à jour les ProductModels,
    * puis reconstruit les groupes.
    */
-  #onDataChange(products: Products[], purchases: Purchases[], needs: ProductNeedRow[]) {
+  #onDataChange(
+    products: Products[],
+    purchases: Purchases[],
+    needs: ProductNeedRow[],
+  ) {
     // ── 1. Indexer les sources ──────────────────────────────
     const productsById = new Map(products.map((p) => [p.$id, p]));
     const needsById = new Map(needs.map((n) => [n.$id, n]));
@@ -202,13 +209,18 @@ class ProductsStore {
       const targetId = rawProduct.mergedInto;
       mergeTargetIds.add(targetId);
       if (!productsById.has(targetId) && !needsById.has(targetId)) {
-        console.warn(`[ProductsStore] Merge target "${targetId}" introuvable pour "${sourceId}"`);
+        console.warn(
+          `[ProductsStore] Merge target "${targetId}" introuvable pour "${sourceId}"`,
+        );
         continue;
       }
       const sourcePurchases = purchasesByProduct.get(sourceId);
       if (!sourcePurchases?.length) continue;
       const targetPurchases = purchasesByProduct.get(targetId) ?? [];
-      purchasesByProduct.set(targetId, [...targetPurchases, ...sourcePurchases]);
+      purchasesByProduct.set(targetId, [
+        ...targetPurchases,
+        ...sourcePurchases,
+      ]);
       purchasesByProduct.delete(sourceId); // les purchases sont maintenant sous le target
     }
 
@@ -234,7 +246,10 @@ class ProductsStore {
       const version = [
         raw?.$updatedAt ?? "",
         needRow?.$updatedAt ?? "",
-        ...prods.map((p) => p.$updatedAt).filter(Boolean).sort(),
+        ...prods
+          .map((p) => p.$updatedAt)
+          .filter(Boolean)
+          .sort(),
       ].join("|");
 
       const existing = this.#productModels.get(id);
@@ -247,7 +262,10 @@ class ProductsStore {
       const need = needRow ? parseNeedRow(needRow) : null;
       const enriched = this.#buildEnriched(raw, need, prods);
 
-      this.#productNameCache.set(id, { name: enriched.productName, type: enriched.productType });
+      this.#productNameCache.set(id, {
+        name: enriched.productName,
+        type: enriched.productType,
+      });
 
       if (existing) {
         existing.update(enriched);
@@ -266,12 +284,17 @@ class ProductsStore {
       const targetId = model.data.mergedInto;
       const targetModel = this.#productModels.get(targetId);
       if (!targetModel) {
-        console.warn(`[ProductsStore] Merge target "${targetId}" non trouvé pour "${id}", le source reste visible`);
+        console.warn(
+          `[ProductsStore] Merge target "${targetId}" non trouvé pour "${id}", le source reste visible`,
+        );
         continue;
       }
       // Agréger les données du source dans le target
       mergeEnrichedProducts(targetModel.data, model.data);
-      targetModel.data.mergedFrom.push({ id: model.data.$id, name: model.data.productName });
+      targetModel.data.mergedFrom.push({
+        id: model.data.$id,
+        name: model.data.productName,
+      });
       mergedSourceIds.add(id);
     }
     // Supprimer les modèles sources mergés
@@ -285,7 +308,12 @@ class ProductsStore {
     }
 
     // ── 4b. Détecter les achats orphelins (purchases sans produit actif) ──
-    const orphaned: Array<{ productId: string; productName: string; productType: string; purchases: Purchases[] }> = [];
+    const orphaned: Array<{
+      productId: string;
+      productName: string;
+      productType: string;
+      purchases: Purchases[];
+    }> = [];
     for (const [productId, purchs] of purchasesByProduct) {
       if (this.#productModels.has(productId)) continue;
       if (purchs.length === 0) continue;
@@ -312,9 +340,20 @@ class ProductsStore {
   #orphanPurchases = new SvelteMap<string, Purchases>();
   #purchasesByProductCache = new Map<string, Purchases[]>();
   #productNameCache = new Map<string, { name: string; type: string }>();
-  #orphanedPurchasesInfo = $state<Array<{ productId: string; productName: string; productType: string; purchases: Purchases[] }>>([]);
+  #orphanedPurchasesInfo = $state<
+    Array<{
+      productId: string;
+      productName: string;
+      productType: string;
+      purchases: Purchases[];
+    }>
+  >([]);
   // Cache pour la recherche fuzzy — invalidé quand #productModels change
-  #fuzzySearchable: { $id: string; productName: string; recipeNames: string }[] = [];
+  #fuzzySearchable: {
+    $id: string;
+    productName: string;
+    recipeNames: string;
+  }[] = [];
 
   /**
    * Fusionne 0–3 sources en un seul EnrichedProduct.
@@ -391,14 +430,16 @@ class ProductsStore {
    * PAS à chaque frappe clavier.
    */
   #rebuildFuzzyCache() {
-    this.#fuzzySearchable = Array.from(this.#productModels.values()).map((m) => ({
-      $id: m.data.$id,
-      productName: m.data.productName,
-      recipeNames: Object.values(m.data.byDate ?? {})
-        .flatMap((entry) => entry.recipes.map((r) => r.r))
-        .filter(Boolean)
-        .join(" "),
-    }));
+    this.#fuzzySearchable = Array.from(this.#productModels.values()).map(
+      (m) => ({
+        $id: m.data.$id,
+        productName: m.data.productName,
+        recipeNames: Object.values(m.data.byDate ?? {})
+          .flatMap((entry) => entry.recipes.map((r) => r.r))
+          .filter(Boolean)
+          .join(" "),
+      }),
+    );
   }
 
   #rebuildGroups() {
@@ -411,7 +452,10 @@ class ProductsStore {
 
     // Recherche fuzzy sur le cache pré-construit (pas de O(P×R) à chaque frappe)
     const fuzzyMatchedIds = this.#filters.searchQuery.trim()
-      ? computeFuzzySearchMatches(this.#fuzzySearchable, this.#filters.searchQuery)
+      ? computeFuzzySearchMatches(
+          this.#fuzzySearchable,
+          this.#filters.searchQuery,
+        )
       : undefined;
 
     for (const [id, model] of this.#productModels) {
@@ -423,7 +467,8 @@ class ProductsStore {
     for (const key of Object.keys(groups)) {
       const models = groups[key]!;
       if (this.#filters.sortColumn) {
-        const col = this.#filters.sortColumn as keyof import("../types/store.types").EnrichedProduct;
+        const col = this.#filters
+          .sortColumn as keyof import("../types/store.types").EnrichedProduct;
         const dir = this.#filters.sortDirection === "asc" ? 1 : -1;
         models.sort((a, b) => {
           const aVal = a.data[col];
@@ -467,8 +512,10 @@ class ProductsStore {
 
     if (this.#filters.completionStatus !== "all") {
       const hasMissing = model.stats.hasMissing;
-      if (this.#filters.completionStatus === "completed" && hasMissing) return false;
-      if (this.#filters.completionStatus === "incomplete" && !hasMissing) return false;
+      if (this.#filters.completionStatus === "completed" && hasMissing)
+        return false;
+      if (this.#filters.completionStatus === "incomplete" && !hasMissing)
+        return false;
     }
 
     if (this.#filters.deliveryDateFilter) {
@@ -482,7 +529,8 @@ class ProductsStore {
 
     if (product.byDate) {
       const hasDataInRange = Object.keys(product.byDate).some(
-        (dateStr) => dateStr >= this.dateRange.start! && dateStr <= this.dateRange.end!,
+        (dateStr) =>
+          dateStr >= this.dateRange.start! && dateStr <= this.dateRange.end!,
       );
       if (!hasDataInRange && !isManualProduct) return false;
     }
@@ -743,6 +791,98 @@ class ProductsStore {
     return { totalGlobal, byStore, byWho, allPurchases };
   });
 
+  groupedInvoices = $derived.by<GroupedInvoice[]>(() => {
+    const byInvoiceId = new Map<string, Purchases[]>();
+
+    // Helper : collecter les purchases FACTURE_ d'une liste
+    const collectFacture = (purchases: Purchases[]) => {
+      for (const purchase of purchases) {
+        if (purchase.status === "deleted") continue;
+        if (!purchase.invoiceId?.startsWith("FACTURE_")) continue;
+        const list = byInvoiceId.get(purchase.invoiceId) ?? [];
+        list.push(purchase);
+        byInvoiceId.set(purchase.invoiceId, list);
+      }
+    };
+
+    // 1. Orphan purchases (expense avec FACTURE_)
+    collectFacture([...this.#orphanPurchases.values()]);
+
+    // 2. Purchases via #productModels (SvelteMap réactive — déclenche la réévaluation)
+    //    Même pattern que financialStats.
+    //    Les purchases sont déjà dans model.data.purchases (injectées par #buildEnriched).
+    for (const model of this.#productModels.values()) {
+      collectFacture(model.data.purchases);
+    }
+
+    // Construire les GroupedInvoice
+    const invoices: GroupedInvoice[] = [];
+    for (const [invoiceId, purchases] of byInvoiceId) {
+      if (purchases.length === 0) continue;
+
+      // Déduire les métadonnées communes du premier purchase
+      const first = purchases[0];
+      const store = first.store || "";
+      const who = first.who || "";
+      const notes = first.notes || "";
+      const invoiceTotal = first.invoiceTotal;
+      const deliveryDate = first.deliveryDate;
+
+      // Statut : homogène par construction (les purchases au statut différent sont détachés)
+      const statusPurchases = purchases.filter((p) => p.status !== "expense");
+      const purchaseStatus =
+        statusPurchases.length > 0
+          ? (statusPurchases[0].status as "ordered" | "delivered") ||
+            "delivered"
+          : "delivered";
+
+      // Noms des produits (dédupliqués)
+      const productNames: string[] = [];
+      const seenNames = new Set<string>();
+      for (const p of purchases) {
+        if (p.status === "expense") continue;
+        for (const productId of p.products ?? []) {
+          const cached = this.#productNameCache.get(productId);
+          if (cached && !seenNames.has(cached.name)) {
+            seenNames.add(cached.name);
+            productNames.push(cached.name);
+          }
+        }
+      }
+
+      // Date la plus ancienne
+      const createdAt = purchases
+        .map((p) => new Date(p.orderDate || p.$createdAt).getTime())
+        .reduce((min, t) => Math.min(min, t), Infinity);
+      const createdAtStr =
+        createdAt !== Infinity
+          ? new Date(createdAt).toISOString()
+          : first.$createdAt;
+
+      invoices.push({
+        invoiceId,
+        invoiceTotal,
+        store,
+        who,
+        notes,
+        purchaseStatus,
+        deliveryDate,
+        purchaseCount: statusPurchases.length,
+        productNames,
+        purchases,
+        createdAt: createdAtStr,
+      });
+    }
+
+    // Tri par date décroissante
+    invoices.sort(
+      (a, b) =>
+        new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
+    );
+
+    return invoices;
+  });
+
   // ===========================================================================
   // INITIALISATION
   // ===========================================================================
@@ -804,9 +944,13 @@ class ProductsStore {
       }
 
       const recipeTimestamps = event.meals
-        .flatMap(m => m.recipes)
-        .map(r => `${r.recipeUuid}:${recipesStore.getRecipeUpdatedAt(r.recipeUuid) ?? ''}`);
-      this.#lastMealsHash = JSON.stringify(event.meals) + '|' + recipeTimestamps.join('|');
+        .flatMap((m) => m.recipes)
+        .map(
+          (r) =>
+            `${r.recipeUuid}:${recipesStore.getRecipeUpdatedAt(r.recipeUuid) ?? ""}`,
+        );
+      this.#lastMealsHash =
+        JSON.stringify(event.meals) + "|" + recipeTimestamps.join("|");
 
       // 3. Lancer le liveQuery unique (observe 3 tables → reconciler)
       this.#startDataSubscription(this.#currentMainId!);
@@ -897,8 +1041,11 @@ class ProductsStore {
         const reactiveEvent = eventsStore.getEventById(eventId);
         if (reactiveEvent) {
           const recipeTimestamps = reactiveEvent.meals
-            .flatMap(m => m.recipes)
-            .map(r => `${r.recipeUuid}:${recipesStore.getRecipeUpdatedAt(r.recipeUuid) ?? ''}`);
+            .flatMap((m) => m.recipes)
+            .map(
+              (r) =>
+                `${r.recipeUuid}:${recipesStore.getRecipeUpdatedAt(r.recipeUuid) ?? ""}`,
+            );
           this.#syncWithEventMeals(reactiveEvent, recipeTimestamps);
         }
       });
@@ -908,7 +1055,8 @@ class ProductsStore {
   async #syncWithEventMeals(event: EnrichedEvent, recipeTimestamps: string[]) {
     if (!this.#isInitialized) return;
 
-    const mealsHash = JSON.stringify(event.meals) + '|' + recipeTimestamps.join('|');
+    const mealsHash =
+      JSON.stringify(event.meals) + "|" + recipeTimestamps.join("|");
     if (this.#lastMealsHash === mealsHash) return;
 
     console.log(
@@ -966,7 +1114,10 @@ class ProductsStore {
           formattedAcquiredQuantities: m.stats.formattedAcquiredQuantities,
           missingQuantities: m.stats.missingQuantities,
           formattedMissingQuantities: m.stats.formattedMissingQuantities,
-          mergedProductNames: m.data.mergedFrom.length > 0 ? m.data.mergedFrom.map(f => f.name) : undefined,
+          mergedProductNames:
+            m.data.mergedFrom.length > 0
+              ? m.data.mergedFrom.map((f) => f.name)
+              : undefined,
           displayTotalOverride: m.data.displayTotalOverride || undefined,
         })),
       }),
@@ -995,9 +1146,14 @@ class ProductsStore {
         formattedQuantities: m.stats.formattedQuantities,
         formattedAcquiredQuantities: m.stats.formattedAcquiredQuantities,
         formattedMissingQuantities: m.stats.formattedMissingQuantities,
-        mergedProductNames: m.data.mergedFrom.length > 0 ? m.data.mergedFrom.map(f => f.name).join(", ") : undefined,
+        mergedProductNames:
+          m.data.mergedFrom.length > 0
+            ? m.data.mergedFrom.map((f) => f.name).join(", ")
+            : undefined,
         displayTotalOverride: m.data.displayTotalOverride || undefined,
-        formattedCalculatedQuantities: m.data.displayTotalOverride ? m.stats.formattedQuantities : undefined,
+        formattedCalculatedQuantities: m.data.displayTotalOverride
+          ? m.stats.formattedQuantities
+          : undefined,
       })),
     });
   }
@@ -1187,6 +1343,18 @@ class ProductsStore {
     return this.#productModels.get(productId) ?? null;
   }
 
+  /**
+   * Récupère le nom du produit associé à un purchase.
+   * Utilise le productNameCache interne.
+   */
+  getProductNameForPurchase(purchase: Purchases): string {
+    for (const productId of purchase.products ?? []) {
+      const cached = this.#productNameCache.get(productId);
+      if (cached) return cached.name;
+    }
+    return "?";
+  }
+
   // ===========================================================================
   // MERGE / UNMERGE
   // ===========================================================================
@@ -1213,7 +1381,9 @@ class ProductsStore {
       return;
     }
     if (targetModel.data.mergedInto) {
-      toastService.error("Impossible de fusionner vers un produit déjà fusionné");
+      toastService.error(
+        "Impossible de fusionner vers un produit déjà fusionné",
+      );
       return;
     }
 
@@ -1235,14 +1405,11 @@ class ProductsStore {
   async unmergeProduct(sourceId: string, targetId: string): Promise<void> {
     // Le produit source n'est pas dans #productModels (retiré par le reconciler
     // car mergedInto !== null). On lance directement l'update Appwrite.
-    await toastService.track(
-      unmergeProductAppwrite(sourceId),
-      {
-        loading: "Annulation de la fusion…",
-        success: `Fusion annulée — le produit redevient visible`,
-        error: "Erreur lors de l'annulation de la fusion",
-      },
-    );
+    await toastService.track(unmergeProductAppwrite(sourceId), {
+      loading: "Annulation de la fusion…",
+      success: `Fusion annulée — le produit redevient visible`,
+      error: "Erreur lors de l'annulation de la fusion",
+    });
     // Le target n'est pas modifié dans Appwrite, son $updatedAt n'a pas changé.
     // On le supprime de #productModels pour forcer son rebuild (sans mergedProductNames/Ids).
     this.#productModels.delete(targetId);
@@ -1301,7 +1468,10 @@ class ProductsStore {
     await this.#purchasesCollection.clearLocal();
     // Clear productNeeds for current event only (not all events)
     if (this.#currentMainId) {
-      await db.productNeeds.where("mainId").equals(this.#currentMainId).delete();
+      await db.productNeeds
+        .where("mainId")
+        .equals(this.#currentMainId)
+        .delete();
     }
     console.log("[ProductsStore] Cache vidé");
   }
@@ -1320,7 +1490,9 @@ class ProductsStore {
    */
   async syncRevalidate(): Promise<void> {
     if (!this.#currentMainId) {
-      console.warn("[ProductsStore] syncRevalidate() appelé sans currentMainId");
+      console.warn(
+        "[ProductsStore] syncRevalidate() appelé sans currentMainId",
+      );
       return;
     }
 
@@ -1339,7 +1511,10 @@ class ProductsStore {
     results.forEach((r, i) => {
       if (r.status === "rejected") {
         hasFailure = true;
-        console.error(`[ProductsStore] syncRevalidate: ${names[i]} failed:`, r.reason);
+        console.error(
+          `[ProductsStore] syncRevalidate: ${names[i]} failed:`,
+          r.reason,
+        );
       }
     });
     // Only update lastSync if all syncs succeeded
@@ -1415,11 +1590,103 @@ class ProductsStore {
     purchaseId: string,
     updates: Partial<Purchases>,
   ): Promise<void> {
-    await updatePurchase(purchaseId, updates as Parameters<typeof updatePurchase>[1]);
+    await updatePurchase(
+      purchaseId,
+      updates as Parameters<typeof updatePurchase>[1],
+    );
   }
 
   async deletePurchase(purchaseId: string): Promise<void> {
     await updatePurchase(purchaseId, { status: "deleted" });
+  }
+
+  // ===========================================================================
+  // GESTION DES FACTURES GROUPÉES
+  // ===========================================================================
+
+  /**
+   * Met à jour les champs globaux de tous les purchases d'une facture groupée
+   * (statut, date de livraison, who, store), via transaction client-side atomique.
+   */
+  async updateInvoiceGroup(
+    invoiceId: string,
+    updates: {
+      status?: "ordered" | "delivered";
+      deliveryDate?: string | null;
+      who?: string | null;
+      store?: string | null;
+    },
+  ): Promise<void> {
+    const invoice = this.groupedInvoices.find(
+      (inv) => inv.invoiceId === invoiceId,
+    );
+    if (!invoice) throw new Error(`Facture ${invoiceId} introuvable`);
+
+    const config = getAppwriteConfig();
+    const purchasesToUpdate = invoice.purchases.filter(
+      (p) => p.status !== "expense" && p.status !== "deleted",
+    );
+    if (purchasesToUpdate.length === 0) return;
+
+    const data: Record<string, unknown> = {};
+    if (updates.status !== undefined) data.status = updates.status;
+    if (updates.deliveryDate !== undefined)
+      data.deliveryDate = updates.deliveryDate;
+    if (updates.who !== undefined) data.who = updates.who;
+    if (updates.store !== undefined) data.store = updates.store;
+
+    const operations = purchasesToUpdate.map((p) => ({
+      action: "update" as const,
+      databaseId: config.APPWRITE_DATABASE_ID,
+      collectionId: config.APPWRITE_CONFIG.collections.purchases,
+      documentId: p.$id,
+      data,
+    }));
+
+    await executeClientTransaction(operations);
+  }
+
+  /**
+   * Met à jour un purchase individuel.
+   * Si detachFromGroup=true, le purchase quitte la facture (invoiceId → null).
+   */
+  async updateInvoicePurchase(
+    purchaseId: string,
+    updates: Record<string, unknown>,
+    detachFromGroup = false,
+  ): Promise<void> {
+    const payload = detachFromGroup ? { ...updates, invoiceId: null } : updates;
+    await updatePurchase(
+      purchaseId,
+      payload as Parameters<typeof updatePurchase>[1],
+    );
+  }
+
+  /**
+   * Soft-delete tous les purchases d'une facture (status → "deleted"),
+   * via transaction client-side atomique.
+   */
+  async deleteInvoiceGroup(invoiceId: string): Promise<void> {
+    const invoice = this.groupedInvoices.find(
+      (inv) => inv.invoiceId === invoiceId,
+    );
+    if (!invoice) throw new Error(`Facture ${invoiceId} introuvable`);
+
+    const config = getAppwriteConfig();
+    const purchasesToDelete = invoice.purchases.filter(
+      (p) => p.status !== "deleted",
+    );
+    if (purchasesToDelete.length === 0) return;
+
+    const operations = purchasesToDelete.map((p) => ({
+      action: "update" as const,
+      databaseId: config.APPWRITE_DATABASE_ID,
+      collectionId: config.APPWRITE_CONFIG.collections.purchases,
+      documentId: p.$id,
+      data: { status: "deleted" },
+    }));
+
+    await executeClientTransaction(operations);
   }
 
   async createProduct(productData: {
@@ -1527,9 +1794,11 @@ class ProductsStore {
 
   addProductOptimistic(product: Products) {
     // Write to Dexie directly - liveQuery will pick it up
-    db.products.put(product).catch((err) =>
-      console.error("[ProductsStore] Optimistic write failed:", err),
-    );
+    db.products
+      .put(product)
+      .catch((err) =>
+        console.error("[ProductsStore] Optimistic write failed:", err),
+      );
   }
 
   // ===========================================================================

@@ -109,7 +109,7 @@
 
     const invoiceData = {
       invoiceId,
-      invoiceTotal: formData.expense || undefined,
+      invoiceTotal: formData.expense ?? 0,
       store: formData.store.trim() || undefined,
       notes:
         formData.notes || `Achat groupé pour ${activeProducts.length} produits`,

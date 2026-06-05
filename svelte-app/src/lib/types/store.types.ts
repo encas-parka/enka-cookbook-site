@@ -12,6 +12,26 @@ export type PurchaseStatus =
   | null; // Compatibilité (achat direct)
 
 /**
+ * Facture groupée (achats créés via GroupPurchaseModal).
+ * Agrège tous les purchases partageant un même invoiceId (préfixe FACTURE_).
+ * Les purchases au statut différent du groupe sont détachés (invoiceId → null),
+ * donc les statuts sont toujours homogènes au sein d'un GroupedInvoice.
+ */
+export interface GroupedInvoice {
+  invoiceId: string; // ex: FACTURE_1717123456789
+  invoiceTotal: number | null;
+  store: string;
+  who: string;
+  notes: string;
+  purchaseStatus: "ordered" | "delivered";
+  deliveryDate: string | null;
+  purchaseCount: number;
+  productNames: string[];
+  purchases: Purchases[];
+  createdAt: string; // date la plus ancienne du groupe
+}
+
+/**
  * Statistiques unifiées par produit pour une plage de dates
  * Optimisation : 1 seule itération pour calculer toutes les données
  */

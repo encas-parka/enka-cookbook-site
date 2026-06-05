@@ -235,7 +235,7 @@ Modal de récapitulatif des dépenses
           >
             Par Acheteur
           </h4>
-          <div class="w-max-3xl h-full space-y-1 text-sm">
+          <div class="w-max-3xl h-full space-y-1">
             {#each Object.entries(stats.byWho).sort((a, b) => b[1] - a[1]) as [who, amount]}
               <div class="flex justify-between">
                 <span>{who}</span>
@@ -252,10 +252,7 @@ Modal de récapitulatif des dépenses
           Liste des transactions
         </h4>
         {#if !showAddForm}
-          <button
-            class="btn btn-primary btn-sm"
-            onclick={() => (showAddForm = true)}
-          >
+          <button class="btn btn-primary" onclick={() => (showAddForm = true)}>
             <Plus class="mr-1 h-4 w-4" />
             Ajouter une dépense
           </button>
@@ -314,8 +311,10 @@ Modal de récapitulatif des dépenses
 
       <!-- Purchases Table (Desktop) -->
       {#if !globalState.isMobile}
-        <div class="bg-base-100 border-base-200 overflow-x-auto rounded-lg border">
-          <table class="table-zebra table-xs table w-full">
+        <div
+          class="bg-base-100 border-base-200 overflow-x-auto rounded-lg border"
+        >
+          <table class="table-zebra table-sm table w-full">
             <thead class="bg-base-200 sticky top-0">
               <tr>
                 <th
@@ -452,7 +451,7 @@ Modal de récapitulatif des dépenses
                       {purchase["_productName"] || "Produit inconnu"}
                     </div>
                     {#if purchase.notes}
-                      <div class="text-xs opacity-60">{purchase.notes}</div>
+                      <div class="text-sm opacity-60">{purchase.notes}</div>
                     {/if}
                   {/if}
                 </div>

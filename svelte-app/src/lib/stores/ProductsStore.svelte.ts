@@ -820,12 +820,13 @@ class ProductsStore {
     for (const [invoiceId, purchases] of byInvoiceId) {
       if (purchases.length === 0) continue;
 
-      // Déduire les métadonnées communes du premier purchase
+      // Déduire les métadonnées communes (expense pour le prix, premier purchase pour le reste)
       const first = purchases[0];
+      const expense = purchases.find((p) => p.status === "expense");
       const store = first.store || "";
       const who = first.who || "";
       const notes = first.notes || "";
-      const invoiceTotal = first.invoiceTotal;
+      const invoiceTotal = expense?.invoiceTotal ?? first.invoiceTotal;
       const deliveryDate = first.deliveryDate;
 
       // Statut : homogène par construction (les purchases au statut différent sont détachés)
@@ -1615,6 +1616,7 @@ class ProductsStore {
       deliveryDate?: string | null;
       who?: string | null;
       store?: string | null;
+      expense?: { purchaseId: string; price: number; invoiceTotal: number };
     },
   ): Promise<void> {
     const invoice = this.groupedInvoices.find(
@@ -1642,6 +1644,20 @@ class ProductsStore {
       documentId: p.$id,
       data,
     }));
+
+    // Inclure la mise à jour de l'expense dans la même transaction (atomicité)
+    if (updates.expense) {
+      operations.push({
+        action: "update",
+        databaseId: config.APPWRITE_DATABASE_ID,
+        collectionId: config.APPWRITE_CONFIG.collections.purchases,
+        documentId: updates.expense.purchaseId,
+        data: {
+          price: updates.expense.price,
+          invoiceTotal: updates.expense.invoiceTotal,
+        },
+      });
+    }
 
     await executeClientTransaction(operations);
   }

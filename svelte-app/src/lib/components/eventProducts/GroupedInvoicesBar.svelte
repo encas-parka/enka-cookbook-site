@@ -4,13 +4,10 @@
 -->
 <script lang="ts">
   import {
-    Calendar,
     CalendarArrowDown,
     CalendarMinus2,
-    CalendarOff,
     PackageCheck,
     ShoppingCart,
-    Store,
     User,
   } from "@lucide/svelte";
   import { formatDateOrNull } from "$lib/utils/products-display.js";

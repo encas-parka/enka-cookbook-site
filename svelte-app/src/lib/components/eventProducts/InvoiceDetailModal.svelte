@@ -234,36 +234,45 @@
     loading = true;
     error = null;
     try {
+      // Construire le payload expense pour inclusion dans la même transaction
+      const expenseUpdate:
+        | {
+            purchaseId: string;
+            price: number;
+            invoiceTotal: number;
+          }
+        | undefined =
+        expensePurchase &&
+        globalInvoiceTotal !== "" &&
+        !isNaN(Number(globalInvoiceTotal)) &&
+        Number(globalInvoiceTotal) !== expensePurchase.invoiceTotal
+          ? {
+              purchaseId: expensePurchase.$id,
+              price: Number(globalInvoiceTotal),
+              invoiceTotal: Number(globalInvoiceTotal),
+            }
+          : undefined;
+
       await productsStore.updateInvoiceGroup(invoice.invoiceId, {
         status: globalStatus as "ordered" | "delivered",
         deliveryDate: globalDeliveryDate || null,
         who: globalWho || null,
         store: globalStore || null,
+        expense: expenseUpdate,
       });
 
-      // Gestion du prix total (expense)
-      if (globalInvoiceTotal !== "") {
+      // Création de l'expense à la volée (séparée — cas edge : pas d'expense existant)
+      if (!expensePurchase && globalInvoiceTotal !== "") {
         const newTotal = Number(globalInvoiceTotal);
         if (!isNaN(newTotal)) {
-          if (expensePurchase) {
-            // Mettre à jour l'expense existant
-            if (newTotal !== expensePurchase.invoiceTotal) {
-              await productsStore.updateInvoicePurchase(expensePurchase.$id, {
-                price: newTotal,
-                invoiceTotal: newTotal,
-              });
-            }
-          } else {
-            // Créer l'expense à la volée
-            await createExpensePurchase(
-              productsStore.currentMainId!,
-              invoice.invoiceId,
-              newTotal,
-              globalStore || undefined,
-              undefined,
-              globalWho || undefined,
-            );
-          }
+          await createExpensePurchase(
+            productsStore.currentMainId!,
+            invoice.invoiceId,
+            newTotal,
+            globalStore || undefined,
+            undefined,
+            globalWho || undefined,
+          );
         }
       }
 
@@ -312,11 +321,9 @@
       loading = true;
       error = null;
       try {
-        await productsStore.updateInvoicePurchase(
-          purchase.$id,
-          { status: "deleted" },
-          true,
-        );
+        await productsStore.updateInvoicePurchase(purchase.$id, {
+          status: "deleted",
+        });
         toastService.success("Achat supprimé");
         onSuccess?.();
       } catch (e: any) {
@@ -330,9 +337,9 @@
 
   // ─── ConfirmModal handlers ────────────────────────────────
 
-  function handleConfirmOk() {
+  async function handleConfirmOk() {
     confirmOpen = false;
-    confirmAction?.();
+    await confirmAction?.();
   }
 
   function handleConfirmCancel() {

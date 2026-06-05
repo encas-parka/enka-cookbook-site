@@ -357,9 +357,10 @@
         }
 
         lockUnsub = unsub;
+      } catch (error) {
+        console.error("[EventEditPage] Erreur chargement lock:", error);
       } finally {
         isBusy = false;
-        console.log("[Init] Lock chargé, isBusy = false");
       }
     });
 
@@ -1315,8 +1316,7 @@
                         openDeleteRecipeModal(
                           undatedMeal.id || "",
                           recipe.recipeUuid,
-                        )
-                      }
+                        )}
                       disabled={!canEdit}
                       title="Supprimer la recette"
                     >

@@ -4,7 +4,7 @@
   import { globalState } from "$lib/stores/GlobalState.svelte";
   import { toastService } from "$lib/services/toast.service.svelte";
   import { navigate, route, searchParams } from "$lib/router";
-  import { onDestroy, onMount } from "svelte";
+  import { onDestroy, onMount, untrack } from "svelte";
   import { fade } from "svelte/transition";
   import { Save, Lock, Edit3, Eye, Download } from "@lucide/svelte";
   import MarkdownEditorAdvanced from "$lib/components/MarkdownEditorAdvanced.svelte";
@@ -13,7 +13,10 @@
   import { navBarStore } from "$lib/stores/NavBarStore.svelte";
   import { statusBarStore } from "$lib/stores/StatusBarStore.svelte";
   import { online } from "svelte/reactivity/window";
-  import { locksService, type AppwriteLock } from "$lib/services/appwrite-locks";
+  import {
+    locksService,
+    type AppwriteLock,
+  } from "$lib/services/appwrite-locks";
   import { shareOrDownload, toSlug } from "$lib/utils/share-utils";
 
   let eventId = $derived(route.params.id || "");
@@ -246,24 +249,7 @@
         tags: selectedTags,
       });
 
-      // Charger le lock en arrière-plan + souscription realtime
-      try {
-        const resourceId = `doc_${docId}`;
-        activeLock = await locksService.getLock(resourceId);
-        lockUnsub = locksService.subscribeToLock(resourceId, (lock) => {
-          console.log("[EventDocumentEditPage] 🔒 Verrou mis à jour:", {
-            lockedBy: lock?.userName,
-            userId: lock?.userId,
-            expiresAt: lock?.expiresAt,
-          });
-          activeLock = lock;
-        });
-      } catch (error) {
-        console.error("[EventDocumentEditPage] Erreur chargement lock:", error);
-      }
-
-      // Le lock est acquis réactivement via le $effect ci-dessous,
-      // uniquement si le mode initial est "edit"
+      // Le lock est chargé et souscrit via le $effect dédié ci-dessous,
     } catch (error) {
       console.error("[EventDocumentEditPage] Erreur chargement:", error);
       toastService.error("Erreur lors du chargement du document");
@@ -281,6 +267,52 @@
     // Libérer le lock si détenu
     releaseLock();
     statusBarStore.clearLockStatus();
+  });
+
+  // Souscription lock réactive au docId — quand le routeur réutilise le composant
+  // avec un nouveau docId, la cleanup function désabonne l'ancien lock, puis l'effet
+  // recrée la souscription pour le nouveau document.
+  $effect(() => {
+    const currentDocId = docId;
+    if (!currentDocId) return;
+
+    activeLock = null;
+    let canceled = false;
+
+    untrack(async () => {
+      if (!storeDoc) return;
+      if (canceled) return;
+
+      try {
+        const lock = await locksService.getLock(`doc_${currentDocId}`);
+        if (canceled) return;
+        activeLock = lock;
+
+        const unsub = locksService.subscribeToLock(
+          `doc_${currentDocId}`,
+          (newLock) => {
+            activeLock = newLock;
+          },
+        );
+
+        if (canceled) {
+          unsub();
+          return;
+        }
+
+        lockUnsub = unsub;
+      } catch (error) {
+        console.error("[EventDocumentEditPage] Erreur chargement lock:", error);
+      }
+    });
+
+    return () => {
+      canceled = true;
+      if (lockUnsub) {
+        lockUnsub();
+        lockUnsub = null;
+      }
+    };
   });
 
   // Lock réactif au mode
@@ -316,7 +348,7 @@
   // Rafraîchir le lock quand l'onglet redevient visible (mobile/tab arrière-plan)
   $effect(() => {
     const handleVisibility = async () => {
-      if (document.visibilityState !== 'visible') return;
+      if (document.visibilityState !== "visible") return;
       if (!lockedResourceId || !globalState.userId) return;
 
       const success = await locksService.acquireLock(
@@ -333,7 +365,8 @@
     };
 
     document.addEventListener("visibilitychange", handleVisibility);
-    return () => document.removeEventListener("visibilitychange", handleVisibility);
+    return () =>
+      document.removeEventListener("visibilitychange", handleVisibility);
   });
 
   // ============================================================================

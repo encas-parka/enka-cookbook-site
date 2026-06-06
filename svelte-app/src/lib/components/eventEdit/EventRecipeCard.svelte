@@ -12,7 +12,13 @@
   import RecipeIngredientsList from "$lib/components/recipes/RecipeIngredientsList.svelte";
   import RecipePreparation from "$lib/components/recipes/RecipePreparation.svelte";
   import RecipeRegimeBadges from "$lib/components/recipes/RecipeRegimeBadges.svelte";
-  import { Utensils, Calendar, ChefHat, Users } from "@lucide/svelte";
+  import {
+    Utensils,
+    Calendar,
+    ChefHat,
+    Users,
+    ExternalLink,
+  } from "@lucide/svelte";
   import { getTypeDisplay } from "$lib/utils/recipeUtils";
 
   interface Props {
@@ -229,6 +235,31 @@
           astuces={recipe.astuces || []}
         />
       </div>
+    </div>
+
+    <!-- Footer : auteur, date, lien détail -->
+    <div
+      class="text-base-content/40 mt-2 flex items-center justify-between text-xs"
+    >
+      <span>
+        {recipe.auteur || recipe.createdBy || "Inconnu"}
+        {#if recipe.$updatedAt}
+          · modifiée le {new Intl.DateTimeFormat("fr-FR", {
+            day: "2-digit",
+            month: "2-digit",
+            year: "numeric",
+          }).format(new Date(recipe.$updatedAt))}
+        {/if}
+      </span>
+      <a
+        href="/recipe/{recipe.$id}"
+        target="_blank"
+        rel="noopener"
+        class="btn btn-ghost btn-xs print:hidden"
+        aria-label="Voir la recette dans un nouvel onglet"
+      >
+        <ExternalLink size={14} />
+      </a>
     </div>
   </div>
 </div>

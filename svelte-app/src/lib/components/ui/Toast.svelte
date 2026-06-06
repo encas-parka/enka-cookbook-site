@@ -4,14 +4,41 @@
     type Toast,
     type ToastAction,
     type ToastPosition,
+    type ToastState,
   } from "$lib/services/toast.service.svelte";
-  import { X, LoaderCircle, ChevronDown } from "@lucide/svelte";
+  import {
+    X,
+    LoaderCircle,
+    ChevronDown,
+    Check,
+    XCircle,
+    TriangleAlert,
+    Info,
+  } from "@lucide/svelte";
   import { slide } from "svelte/transition";
+
+  // Mapping variant → { colorClasses, icon } — calqué sur StatusBar
+  type VariantConfig = { colorClasses: string; icon: typeof Info };
+  const VARIANT_CONFIG: Record<ToastState, VariantConfig> = {
+    success: {
+      colorClasses: "bg-success/90 text-success-content",
+      icon: Check,
+    },
+    error: { colorClasses: "bg-error/90 text-error-content", icon: XCircle },
+    warning: {
+      colorClasses: "bg-warning/90 text-warning-content",
+      icon: TriangleAlert,
+    },
+    info: { colorClasses: "bg-info/80 text-info-content", icon: Info },
+    loading: {
+      colorClasses: "bg-info/80 text-info-content",
+      icon: LoaderCircle,
+    },
+  };
 
   interface Props {
     /** Position par défaut pour les toasts sans position spécifiée */
     position?: ToastPosition;
-    padding?: "sm" | "md";
     onShowDetails?: (details: {
       id: string;
       message: string;
@@ -19,14 +46,8 @@
     }) => void;
   }
 
-  let {
-    position = "toast-center toast-bottom",
-    padding = "sm",
-    onShowDetails,
-  }: Props = $props();
-
-  // Dériver les classes de padding
-  const paddingClass = $derived(padding === "sm" ? " py-0.5" : "py-1");
+  let { position = "toast-center toast-bottom", onShowDetails }: Props =
+    $props();
 
   const toasts = $derived(toastService.toasts);
 
@@ -66,55 +87,56 @@
 {#each Array.from(toastsByPosition().entries()) as [pos, positionToasts] (pos)}
   <div class="toast {pos} z-1050">
     {#each positionToasts as toast (toast.id)}
+      {@const config = VARIANT_CONFIG[toast.state]}
+      {@const IconComponent = config.icon}
       <div
-        class="alert alert-{toast.state}  {paddingClass} shadow-lg"
+        class="flex items-center gap-2 rounded-lg px-2 py-1 shadow-lg transition-all duration-300 {config.colorClasses}"
+        role="status"
+        aria-live="polite"
         transition:slide
       >
-        <div class="flex items-center justify-between gap-4">
-          <div class="flex flex-1 items-center gap-2">
-            {#if toast.state === "loading"}
-              <LoaderCircle class="h-5 w-5 animate-spin" />
-            {/if}
+        <IconComponent
+          size={14}
+          class={toast.state === "loading" ? "animate-spin" : ""}
+        />
 
-            <span class="text-sm">{toast.message}</span>
-          </div>
+        <span class="text-sm font-medium">{toast.message}</span>
 
-          <!-- Boutons d'action personnalisés -->
-          {#if toast.actions && toast.actions.length > 0}
-            {#each toast.actions as action}
-              <button
-                class="btn btn-sm btn-primary"
-                onclick={() => handleActionClick(toast, action)}
-              >
-                {action.label}
-              </button>
-            {/each}
-          {/if}
-
-          <!-- Bouton détails si disponible -->
-          {#if toast.details}
+        <!-- Boutons d'action personnalisés -->
+        {#if toast.actions && toast.actions.length > 0}
+          {#each toast.actions as action}
             <button
-              class="btn btn-ghost btn-xs btn-square"
-              onclick={() => showDetails(toast)}
-              title="Voir les détails"
-              aria-label="Voir les détails"
+              class="btn btn-ghost btn-xs"
+              onclick={() => handleActionClick(toast, action)}
             >
-              <ChevronDown class="h-3 w-3" />
+              {action.label}
             </button>
-          {/if}
+          {/each}
+        {/if}
 
-          <!-- Bouton de fermeture (erreurs et warnings uniquement) -->
-          {#if toast.state === "error" || toast.state === "warning" || toast.state === "loading"}
-            <button
-              class="btn btn-ghost btn-xs btn-circle pe-0"
-              onclick={() => dismiss(toast)}
-              title="Fermer"
-              aria-label="Fermer la notification"
-            >
-              <X class="h-4 w-4" />
-            </button>
-          {/if}
-        </div>
+        <!-- Bouton détails si disponible -->
+        {#if toast.details}
+          <button
+            class="btn btn-ghost btn-xs btn-square"
+            onclick={() => showDetails(toast)}
+            title="Voir les détails"
+            aria-label="Voir les détails"
+          >
+            <ChevronDown size={14} />
+          </button>
+        {/if}
+
+        <!-- Bouton de fermeture (erreurs, warnings et loading) -->
+        {#if toast.state === "error" || toast.state === "warning" || toast.state === "loading"}
+          <button
+            class="btn btn-ghost btn-xs btn-circle"
+            onclick={() => dismiss(toast)}
+            title="Fermer"
+            aria-label="Fermer la notification"
+          >
+            <X size={14} />
+          </button>
+        {/if}
       </div>
     {/each}
   </div>

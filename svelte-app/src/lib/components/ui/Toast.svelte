@@ -100,7 +100,9 @@
           class={toast.state === "loading" ? "animate-spin" : ""}
         />
 
-        <span class="text-sm font-medium">{toast.message}</span>
+        {#if toast.message}
+          <span class="text-sm font-medium">{toast.message}</span>
+        {/if}
 
         <!-- Boutons d'action personnalisés -->
         {#if toast.actions && toast.actions.length > 0}

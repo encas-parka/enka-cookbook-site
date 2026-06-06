@@ -271,15 +271,17 @@
 
   // Validation rapide individuelle
   async function handleQuickValidation(product: any, productInDateRange: any) {
-    try {
-      const missingQuantities = productInDateRange.missingQuantities || [];
-      if (missingQuantities.length === 0) {
-        console.log(
-          "Aucune quantité manquante à valider pour ce produit dans cette période",
-        );
-        return;
-      }
+    const missingQuantities = productInDateRange.missingQuantities || [];
+    if (missingQuantities.length === 0) {
+      console.log(
+        "Aucune quantité manquante à valider pour ce produit dans cette période",
+      );
+      return;
+    }
 
+    const toastId = toastService.loading("");
+
+    try {
       // CONVERSIONS : Les missingQuantities sont négatives, les convertir en positif pour les achats
       // et normaliser les unités (kg→gr., l.→ml) pour le stockage
       const normalizedQuantities = missingQuantities
@@ -297,12 +299,18 @@
         invoiceId: `VALID_${Date.now()}`,
       });
 
-      console.log(
-        `[ProductsTable] Validation rapide créée pour ${product.productName}`,
-      );
+      toastService.update(toastId, {
+        state: "success",
+        message: "achat ajouté",
+        autoCloseDelay: 1000,
+      });
     } catch (error) {
       console.error("[ProductsTable] Erreur validation rapide:", error);
-      alert("Erreur lors de la validation rapide: " + (error as Error).message);
+      toastService.update(toastId, {
+        state: "error",
+        message: "Erreur lors de la validation",
+        autoCloseDelay: 5000,
+      });
     }
   }
 

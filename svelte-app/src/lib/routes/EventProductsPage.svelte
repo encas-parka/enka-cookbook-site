@@ -40,6 +40,7 @@
   import EventStats from "$lib/components/EventStats.svelte";
   import EventDocumentsBloc from "$lib/components/documents/EventDocumentsBloc.svelte";
   import ConfirmModal from "$lib/components/ui/ConfirmModal.svelte";
+  import RecipeDetailDrawer from "$lib/components/recipes/RecipeDetailDrawer.svelte";
   import { globalState, hoverHelp } from "$lib/stores/GlobalState.svelte";
   // Services
   import { toastService } from "$lib/services/toast.service.svelte";
@@ -786,6 +787,7 @@
     initialTab={openModalTab}
     onClose={closeModal}
   />
+  <RecipeDetailDrawer />
 
   {#if whoEditModalOpen}
     <WhoBatchEditModal

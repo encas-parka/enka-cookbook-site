@@ -4,6 +4,7 @@
     getProductTypeInfo,
     formatPurchasesWithBadges,
   } from "$lib/utils/products-display";
+  import { calculateDateDisplayInfo } from "$lib/utils/dateRange";
 
   // Types
   import { ProductModel } from "$lib/models/ProductModel.svelte";
@@ -30,6 +31,9 @@
     ScrollText,
     ClipboardX,
   } from "@lucide/svelte";
+
+  // UI Components
+  import DateBadge from "$lib/components/ui/DateBadge.svelte";
 
   // Shared components
   import ProductRecipeDetails from "./ProductRecipeDetails.svelte";
@@ -108,6 +112,19 @@
         <LoaderCircle size={13} class="text-accent shrink-0 animate-spin" />
       {/if}
     </button>
+
+    <!-- 📅 Dates concernées -->
+    {#if productInDateRange.concernedDates.length > 0}
+      <div class="text-base-content/60 flex flex-wrap items-center gap-1">
+        {#each productInDateRange.concernedDates as date (date)}
+          {@const recipes = productInDateRange.recipesByDate.get(date) || []}
+          {@const dateDisplayInfo =
+            productModel.data.dateDisplayInfo[date] ||
+            calculateDateDisplayInfo(date)}
+          <DateBadge {dateDisplayInfo} {recipes} />
+        {/each}
+      </div>
+    {/if}
 
     <!-- Store + Who sub-group (truncated) -->
     <div class="flex max-w-64 min-w-0 items-center gap-2">

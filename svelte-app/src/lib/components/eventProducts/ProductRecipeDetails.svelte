@@ -2,6 +2,7 @@
   import { Sun, Moon, Cloud, Utensils } from "@lucide/svelte";
   import type { RecipeOccurrence } from "$lib/types/store.types";
   import { calculateDateDisplayInfo } from "$lib/utils/dateRange";
+  import { recipeDrawer } from "$lib/stores/RecipeDrawer.svelte";
   import { formatSingleQuantity } from "$lib/utils/QuantityFormatter";
 
   interface Props {
@@ -38,11 +39,17 @@
             : dateInfo.timeIcon === "cloud"
               ? Cloud
               : null}
-      <div
-        class="text-base-content/60 border-neutral/10 flex min-w-0 items-center gap-2 border px-1 py-0.5"
+      <button
+        class="text-base-content/60 border-neutral/10 hover:border-accent/50 flex min-w-0 items-center gap-2 border px-1 py-0.5 hover:cursor-pointer"
+        onclick={() => {
+          if (recipe.id) recipeDrawer.openRecipeDrawer(recipe.id, recipe.a);
+        }}
+        title="Voir le détail de la recette"
       >
-        <span class="truncate font-medium">{recipe.r}</span>
-        <span class="flex shrink-0 items-center gap-0.5 whitespace-nowrap">
+        {recipe.r}
+        <span
+          class="text-base-content/90 flex shrink-0 items-center gap-0.5 whitespace-nowrap"
+        >
           {dateInfo.formattedDate}
           {#if DateIcon}
             <DateIcon size={11} class="stroke-2" />
@@ -54,7 +61,7 @@
         <span class="shrink-0 font-medium whitespace-nowrap">
           {formatSingleQuantity(recipe.qEq, recipe.uEq)}
         </span>
-      </div>
+      </button>
     {/each}
   </div>
 {/if}

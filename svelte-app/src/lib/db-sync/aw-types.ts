@@ -16,9 +16,9 @@
  * Appwrite rows always expose $id, $createdAt, $updatedAt.
  */
 export interface AwDoc {
-	$id: string;
-	$createdAt: string;
-	$updatedAt: string;
+  $id: string;
+  $createdAt: string;
+  $updatedAt: string;
 }
 
 // =============================================================================
@@ -30,22 +30,22 @@ export interface AwDoc {
  * Uses native Appwrite Query helpers (Query.equal, Query.greaterThan, …).
  */
 export interface AwFetchOptions {
-	/** Additional Appwrite queries to scope the fetch (e.g. Query.equal("mainId", id)) */
-	queries?: unknown[];
-	/**
-	 * Scopes the syncMeta cursor to a specific context (e.g. eventId).
-	 * Without scope, cursor is global per collection — switching events can miss older records.
-	 * With scope, cursor becomes `collectionId:scopeKey`, giving per-event delta sync.
-	 */
-	scopeKey?: string;
+  /** Additional Appwrite queries to scope the fetch (e.g. Query.equal("mainId", id)) */
+  queries?: unknown[];
+  /**
+   * Scopes the syncMeta cursor to a specific context (e.g. eventId).
+   * Without scope, cursor is global per collection — switching events can miss older records.
+   * With scope, cursor becomes `collectionId:scopeKey`, giving per-event delta sync.
+   */
+  scopeKey?: string;
 }
 
 /**
  * Options passed to `subscribe()`.
  */
 export interface AwSubscribeOptions extends AwFetchOptions {
-	/** Watch a specific document instead of the whole collection */
-	documentId?: string;
+  /** Watch a specific document instead of the whole collection */
+  documentId?: string;
 }
 
 // =============================================================================
@@ -66,18 +66,23 @@ export type MergeStrategy<T> = (local: T, remote: T) => T;
  * Configuration for a sync collection.
  */
 export interface AwSyncOptions<T extends AwDoc> {
-	/** Per-field merge strategies for concurrent array resolution */
-	mergeStrategies?: {
-		[K in keyof T]?: MergeStrategy<NonNullable<T[K]>>;
-	};
-	/**
-	 * Mark deleted instead of removing from Dexie.
-	 * Appwrite doesn't have native soft-delete, but the store may want
-	 * to keep tombstones locally.
-	 */
-	softDelete?: boolean;
-	/** Called when realtime subscription becomes active / inactive */
-	onSubscriptionChange?: (active: boolean) => void;
+  /** Per-field merge strategies for concurrent array resolution */
+  mergeStrategies?: {
+    [K in keyof T]?: MergeStrategy<NonNullable<T[K]>>;
+  };
+  /**
+   * Mark deleted instead of removing from Dexie.
+   * Appwrite doesn't have native soft-delete, but the store may want
+   * to keep tombstones locally.
+   */
+  softDelete?: boolean;
+  /** Called when realtime subscription becomes active / inactive */
+  onSubscriptionChange?: (active: boolean) => void;
+  /** Called after each realtime event is applied to Dexie (fire-and-forget) */
+  onRealtimeEvent?: (
+    payload: any,
+    event: "create" | "update" | "delete",
+  ) => void;
 }
 
 // =============================================================================
@@ -86,8 +91,8 @@ export interface AwSyncOptions<T extends AwDoc> {
 
 /** Opaque handle returned by `subscribe()`. */
 export interface SubscriptionRef {
-	readonly id: string;
-	readonly collectionId: string;
+  readonly id: string;
+  readonly collectionId: string;
 }
 
 // =============================================================================
@@ -99,16 +104,16 @@ export interface SubscriptionRef {
  * Must be kept in sync with the collections defined in `appwrite.ts`.
  */
 export type AwCollectionName =
-	| 'events'
-	| 'ingredients'
-	| 'main'
-	| 'purchases'
-	| 'products'
-	| 'kteams'
-	| 'locks'
-	| 'user_notifications'
-	| 'materiel'
-	| 'materiel_loan'
-	| 'event_materiel'
-	| 'teamdocs'
-	| 'recipes';
+  | "events"
+  | "ingredients"
+  | "main"
+  | "purchases"
+  | "products"
+  | "kteams"
+  | "locks"
+  | "user_notifications"
+  | "materiel"
+  | "materiel_loan"
+  | "event_materiel"
+  | "teamdocs"
+  | "recipes";

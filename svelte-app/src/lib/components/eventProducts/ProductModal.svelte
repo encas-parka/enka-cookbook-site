@@ -10,6 +10,8 @@
     Check,
   } from "@lucide/svelte";
 
+  import { untrack } from "svelte";
+
   // Stores and Global States
   import { ProductModalState } from "$lib/stores/ProductModalState.svelte";
 
@@ -42,7 +44,13 @@
   let modalState = $state<ProductModalState | null>(null);
 
   $effect(() => {
-    modalState = new ProductModalState(productId, initialTab);
+    // Capture props as explicit dependencies
+    const id = productId;
+    const tab = initialTab;
+    // Prevent tracking reactive reads inside the constructor
+    untrack(() => {
+      modalState = new ProductModalState(id, tab);
+    });
   });
 
   let isArchiveMode = $derived(productsStore.isEventPassed);
@@ -214,7 +222,11 @@
       <div>
         {#key modalState?.currentTab}
           {#if modalState?.currentTab === "recettes"}
-            <RecipesManager {modalState} {isArchiveMode} onClose={handleModalClose} />
+            <RecipesManager
+              {modalState}
+              {isArchiveMode}
+              onClose={handleModalClose}
+            />
           {:else if modalState?.currentTab === "achats"}
             <PurchaseManager {modalState} {isArchiveMode} />
           {:else if modalState?.currentTab === "stock"}

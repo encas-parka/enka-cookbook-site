@@ -90,7 +90,7 @@
       {@const config = VARIANT_CONFIG[toast.state]}
       {@const IconComponent = config.icon}
       <div
-        class="flex items-center gap-2 rounded-lg px-2 py-1 shadow-lg transition-all duration-300 {config.colorClasses}"
+        class="flex max-w-[90vw] items-center gap-2 rounded-lg px-2 py-1 shadow-lg transition-all duration-300 {config.colorClasses}"
         role="status"
         aria-live="polite"
         transition:slide
@@ -101,7 +101,7 @@
         />
 
         {#if toast.message}
-          <span class="text-sm font-medium">{toast.message}</span>
+          <span class="text-sm font-medium min-w-0">{toast.message}</span>
         {/if}
 
         <!-- Boutons d'action personnalisés -->

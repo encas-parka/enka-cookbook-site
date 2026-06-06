@@ -96,11 +96,70 @@ class ProductsStore {
   #productsCollection = createSyncCollection<Products>({
     table: db.products,
     collectionName: "products",
+    syncOptions: {
+      onRealtimeEvent: (payload, event) =>
+        this.#handleRealtimeNotification("products", payload, event),
+    },
   });
   #purchasesCollection = createSyncCollection<Purchases>({
     table: db.purchases,
     collectionName: "purchases",
+    syncOptions: {
+      onRealtimeEvent: (payload, event) =>
+        this.#handleRealtimeNotification("purchases", payload, event),
+    },
   });
+
+  // ===========================================================================
+  // REALTIME NOTIFICATIONS
+  // ===========================================================================
+
+  /**
+   * Traite les événements realtime et émet un toast si la modification
+   * vient d'un autre utilisateur sur l'événement courant.
+   */
+  #handleRealtimeNotification(
+    collectionName: string,
+    payload: any,
+    event: "create" | "update" | "delete",
+  ): void {
+    // Ignorer les événements hors de l'événement courant
+    if (!this.#currentMainId || payload.mainId !== this.#currentMainId) return;
+
+    // Les champs updatedBy/createdBy stockent un nom (getCurrentUserName()),
+    // pas un ID — on compare donc avec globalState.userName
+    const userName = globalState.userName;
+    if (!userName) return;
+
+    let isRemote = false;
+    if (collectionName === "products") {
+      // Products : updatedBy (nom) renseigné sur les updates, absent sur les creates
+      // On ne filtre que les updates — les creates sans updatedBy sont ignorés
+      if (event === "update" && payload.updatedBy) {
+        isRemote = payload.updatedBy !== userName;
+      }
+    } else if (collectionName === "purchases") {
+      // Purchases : createdBy (nom ou ID selon le chemin de création)
+      // La plupart des creates utilisent getCurrentUserName()
+      if (payload.createdBy) {
+        isRemote =
+          payload.createdBy !== userName &&
+          payload.createdBy !== globalState.userId;
+      }
+    }
+
+    if (!isRemote) return;
+
+    // Déterminer le message toast
+    let message: string;
+    if (collectionName === "products") {
+      message = "Produits modifiés par un•e autre utilisateur•ices";
+    } else {
+      message = "Achats modifiés par un•e autre utilisateur•ices";
+    }
+
+    toastService.info(message, { source: "realtime-other" });
+  }
 
   // Map stable de ProductModel — UNIQUE source de vérité pour l'UI
   #productModels = new SvelteMap<string, ProductModel>();
@@ -1064,6 +1123,10 @@ class ProductsStore {
       `[ProductsStore] Changement repas detecte pour ${event.$id}, recalcul...`,
     );
     this.#lastMealsHash = mealsHash;
+
+    toastService.info("Menus ou recettes modifiés", {
+      source: "realtime-other",
+    });
 
     // Recalculate needs and persist to Dexie
     // The bridge will detect changes → $derived merge fires automatically

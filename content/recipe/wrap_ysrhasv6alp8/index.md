@@ -1,6 +1,6 @@
 ---
 title: Wrap
-date: '2026-05-25T13:56:58.151Z'
+date: '2026-06-08T08:09:33.438Z'
 draft: true
 typeR: plat
 categories: []
@@ -20,9 +20,9 @@ materiel: []
 ingredients:
   - uuid: v2vkll
     name: galette wrap
-    originalQuantity: 10
+    originalQuantity: 100
     originalUnit: unité
-    normalizedQuantity: 10
+    normalizedQuantity: 100
     normalizedUnit: unité
     comment: ''
     allergens:
@@ -78,11 +78,11 @@ astuces: []
 preparation24h: null
 permissionWrite:
   - 696fb1cc000eb33adee7
-auteur: null
+auteur: Miki
 createdAt: '2026-05-25T13:56:57.680+00:00'
-updatedAt: '2026-05-25T13:56:57.680+00:00'
+updatedAt: '2026-06-08T08:09:21.152+00:00'
 createdBy: 696fb1cc000eb33adee7
-teams: null
+teams: []
 status: public
 rootRecipeId: null
 versionLabel: null

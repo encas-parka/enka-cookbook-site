@@ -1,0 +1,1 @@
+import{Un as e}from"./appwrite-CaGIufol.js";e();

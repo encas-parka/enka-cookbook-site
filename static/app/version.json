@@ -1,14 +1,13 @@
 {
   "versions": [
     {
-      "version": "0.2.0",
-      "date": "2026-06-06",
-      "changes": ["Nouvelle fonctionnalité X", "Correction du bug Y"]
-    },
-    {
-      "version": "0.1.0",
-      "date": "2026-06-06",
-      "changes": ["Première version versionnée du Service Worker"]
+      "version": "0.2.2",
+      "date": "2026-06-08",
+      "changes": [
+        "Aperçu des recettes depuis la page 'produits (lorsque 'detail recettes activé')",
+        "Affichage des auteurs dans les recettes des événements.",
+        "bug fix: desynchronisations des données"
+      ]
     }
   ]
 }

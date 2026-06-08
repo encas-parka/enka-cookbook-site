@@ -3,6 +3,7 @@ import { defineConfig } from "vite";
 import { svelte } from "@sveltejs/vite-plugin-svelte";
 import { VitePWA, type VitePWAOptions } from "vite-plugin-pwa";
 import path from "path";
+import version from "./public/version.json";
 import { fileURLToPath } from "url";
 // import { visualizer } from "rollup-plugin-visualizer";
 
@@ -11,8 +12,10 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const pwaConfig: Partial<VitePWAOptions> = {
+  // registerType n'a aucun effet ici car injectRegister: false.
+  // La gestion du SW est 100% manuelle dans main.ts.
   registerType: "autoUpdate" as const,
-  injectRegister: false, // Hugo contrôle le HTML, on enregistre le SW manuellement
+  injectRegister: false,
   manifest: {
     name: "Enka Cookbook",
     short_name: "Enka",
@@ -55,9 +58,21 @@ const pwaConfig: Partial<VitePWAOptions> = {
     globPatterns: ["assets/**/*.{js,css,woff2}", "fonts/**/*.{css,woff2}"],
     dontCacheBustURLsMatching: /-[a-f0-9]{8}\./,
     cleanupOutdatedCaches: true,
-    skipWaiting: true,
+    // skipWaiting: false → le SW reste en "waiting" jusqu'au postMessage SKIP_WAITING
+    // clientsClaim: true → le SW prend le contrôle des onglets après activation
+    // (sans clientsClaim, controllerchange ne se déclenche jamais)
+    skipWaiting: false,
     clientsClaim: true,
     runtimeCaching: [
+      {
+        urlPattern: /\/app\/version\.json$/,
+        handler: "NetworkFirst",
+        options: {
+          cacheName: "app-version",
+          networkTimeoutSeconds: 5,
+          expiration: { maxEntries: 1, maxAgeSeconds: 0 },
+        },
+      },
       {
         urlPattern: /^https?:\/\/.*\/api\/data\.json$/,
         handler: "StaleWhileRevalidate",
@@ -108,6 +123,10 @@ const pwaConfig: Partial<VitePWAOptions> = {
 
 export default defineConfig(({ mode }) => ({
   base: mode === "development" ? "/" : "/app/",
+
+  define: {
+    __APP_VERSION__: JSON.stringify(version.versions[0]?.version ?? "dev"),
+  },
 
   plugins: [
     tailwindcss(),

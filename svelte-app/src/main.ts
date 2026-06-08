@@ -9,6 +9,7 @@ import { nativeTeamsStore } from "$lib/stores/NativeTeamsStore.svelte";
 import { recipesStore } from "$lib/stores/RecipesStore.svelte";
 import { setRealtimeOnReconnect, reconnectRealtime } from "$lib/db-sync/aw-realtime";
 import { statusBarStore } from "$lib/stores/StatusBarStore.svelte";
+import { updateStore } from "$lib/stores/UpdateStore.svelte";
 
 /**
  * Time threshold under which we skip the post-reconnect resync.
@@ -123,6 +124,8 @@ function handleVisibilityChange(): void {
   const hiddenDuration = lastHiddenAt !== null ? Date.now() - lastHiddenAt : 0;
   lastHiddenAt = null;
   if (hiddenDuration < RESYNC_THRESHOLD_MS) return;
+  // Check SW si caché plus de 4h (délégué au store)
+  updateStore.checkForUpdate(hiddenDuration);
   scheduleResync({
     forceReconnect: hiddenDuration > RECONNECT_THRESHOLD_MS,
     reason: "visibility",
@@ -148,31 +151,47 @@ function handlePageShow(event: PageTransitionEvent): void {
   });
 }
 
-// Enregistrer le Service Worker en production uniquement.
-// (Le resync post-visibility est branché globalement plus bas, pas dans ce
-// bloc — le SW ne sert qu'à forcer la mise à jour du JS et à recharger sur
-// activation d'une nouvelle version.)
+// Le nouveau SW reste en "waiting" (pas de skipWaiting/clientsClaim).
+// L'utilisateur est informé via un modal, et le reload n'est déclenché
+// qu'à la fermeture du modal → élimine la race condition des chunks 404.
 if ("serviceWorker" in navigator && import.meta.env.PROD) {
   window.addEventListener("load", async () => {
     const registration = await navigator.serviceWorker
       .register("/app/sw.js")
       .catch((err) => {
-        console.warn("[PWA] Échec de l'enregistrement du Service Worker:", err);
+        console.warn("[SW] Échec de l'enregistrement:", err);
         return null;
       });
 
-    document.addEventListener("visibilitychange", () => {
-      if (document.visibilityState === "visible") {
-        registration?.update().catch(() => {});
-      }
-    });
-  });
+    if (!registration) return;
 
-  // Auto-reload quand une nouvelle version du SW est activée
-  // (skipWaiting + clientsClaim dans workbox → activation immédiate)
-  navigator.serviceWorker.addEventListener("controllerchange", () => {
-    console.log("[PWA] Nouvelle version activée — rechargement de la page");
-    window.location.reload();
+    // Stocker la registration pour applyUpdate()
+    updateStore.setRegistration(registration);
+
+    // Détecter un nouveau SW installé → signaler au store → ouvrir le modal
+    registration.addEventListener("updatefound", () => {
+      const newWorker = registration.installing;
+      if (!newWorker) return;
+
+      newWorker.addEventListener("statechange", () => {
+        if (
+          newWorker.state === "installed" &&
+          navigator.serviceWorker.controller
+        ) {
+          // Un nouveau SW est installé et en attente (waiting)
+          console.log(
+            "[SW] Nouvelle version installée, en attente d'activation",
+          );
+          updateStore.signalUpdateAvailable().catch(() => {});
+        }
+      });
+    });
+
+    // Si un SW est déjà en waiting au chargement de la page
+    // (cas : page rechargée manuellement mais SW toujours en attente)
+    if (registration.waiting && navigator.serviceWorker.controller) {
+      updateStore.signalUpdateAvailable().catch(() => {});
+    }
   });
 }
 

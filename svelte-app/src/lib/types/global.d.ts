@@ -102,4 +102,6 @@ declare module "svelte/elements" {
   }
 }
 
+declare const __APP_VERSION__: string;
+
 export {};

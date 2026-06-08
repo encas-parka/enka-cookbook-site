@@ -14,6 +14,8 @@
   import { globalState } from "./lib/stores/GlobalState.svelte";
   import { toastService } from "./lib/services/toast.service.svelte";
   import { Router, preload } from "$lib/router";
+  import { updateStore } from "./lib/stores/UpdateStore.svelte";
+  import UpdatePrompt from "./lib/components/ui/UpdatePrompt.svelte";
 
   type AppState = "BOOTING" | "READY" | "ERROR";
   let appState = $state<AppState>("BOOTING");
@@ -149,6 +151,12 @@
 </div>
 
 <Toast />
+
+<UpdatePrompt
+  isOpen={updateStore.updateAvailable}
+  changelog={updateStore.changelog}
+  onAccept={() => updateStore.applyUpdate()}
+/>
 
 {#await import("./lib/components/ui/ScrollToTopButton.svelte") then { default: ScrollToTopButton }}
   <ScrollToTopButton />

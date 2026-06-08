@@ -111,6 +111,7 @@ export class EventsStore {
     const map = new Map<string, EnrichedEvent>();
     // .size assure le suivi réactif de la SvelteMap
     const _s = this.#rawEvents.size;
+    console.log(`[EventsStore] #enrichedMap re-derive: size=${_s}, rawEvents keys=[${Array.from(this.#rawEvents.keys()).join(',')}]`);
     for (const [id, main] of this.#rawEvents) {
       map.set(id, this.#enrichEvent(main));
     }
@@ -1165,6 +1166,22 @@ export class EventsStore {
   }
 
   /**
+   * Soft reset : Vide le cache local (Dexie + syncMeta) et réinitialise les flags.
+   * Le bridge liveQuery reste actif — les données se repeupleront naturellement
+   * quand Dexie sera re-seedé. Contrairement à destroy(), les subscriptions
+   * (bridge, realtime) sont préservées.
+   */
+  async softReset(): Promise<void> {
+    console.log("[EventsStore] Soft reset...");
+    await this.#collection.clearLocal();
+    this.#rawEvents.clear();
+    this.#isInitialized = false;
+    this.#realtimeInitialized = false;
+    this.#error = null;
+    console.log("[EventsStore] Soft reset terminé");
+  }
+
+  /**
    * Hard reset : Vide TOUT (Dexie + sync meta) et recharge depuis Appwrite
    */
   async hardReset(): Promise<void> {
@@ -1194,13 +1211,9 @@ export class EventsStore {
    * de données entre utilisateurs sur un même navigateur.
    */
   async destroy(): Promise<void> {
+    await this.softReset();
     this.#bridge.subscription.unsubscribe();
     this.#collection.unsubscribeAll();
-    // Nettoyer IndexedDB pour éviter les fuites de données entre utilisateurs
-    await this.#collection.clearLocal();
-    this.#rawEvents.clear();
-    this.#isInitialized = false;
-    this.#realtimeInitialized = false;
     console.log("[EventsStore] Ressources nettoyées");
   }
 }

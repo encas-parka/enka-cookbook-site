@@ -52,9 +52,12 @@ export function bridgeToMap<T extends AwDoc>(
 	queryFn: () => T[] | Promise<T[]>
 ): BridgeResult<T> {
 	const map = new SvelteMap<string, T>();
+	let fireCount = 0;
 
 	const subscription = liveQuery(queryFn).subscribe({
 		next: (items) => {
+			fireCount++;
+			console.log(`[aw-bridge] liveQuery fire #${fireCount}: ${items.length} items, closed=${subscription.closed}`);
 			const currentIds = new Set(map.keys());
 
 			for (const item of items) {
@@ -63,12 +66,16 @@ export function bridgeToMap<T extends AwDoc>(
 				const existing = map.get(item.$id);
 				// Fast comparison via $updatedAt — avoids JSON.stringify overhead
 				if (!existing || existing.$updatedAt !== item.$updatedAt) {
+					console.log(`[aw-bridge] SET ${item.$id} (updatedAt: ${existing?.$updatedAt ?? 'null'} → ${item.$updatedAt})`);
 					map.set(item.$id, item);
+				} else {
+					console.log(`[aw-bridge] SKIP ${item.$id} (same updatedAt)`);
 				}
 			}
 
 			// Remove entries that no longer exist in Dexie
 			for (const id of currentIds) {
+				console.log(`[aw-bridge] DELETE ${id}`);
 				map.delete(id);
 			}
 		},

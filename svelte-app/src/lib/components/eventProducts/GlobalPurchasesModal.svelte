@@ -235,7 +235,7 @@ Modal de récapitulatif des dépenses
           >
             Par Acheteur
           </h4>
-          <div class="w-max-3xl h-full space-y-1">
+          <div class="w-max-3xl h-full space-y-1 text-sm">
             {#each Object.entries(stats.byWho).sort((a, b) => b[1] - a[1]) as [who, amount]}
               <div class="flex justify-between">
                 <span>{who}</span>

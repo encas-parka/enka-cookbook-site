@@ -109,9 +109,8 @@ export class EventsStore {
    */
   #enrichedMap = $derived.by(() => {
     const map = new Map<string, EnrichedEvent>();
-    // .size assure le suivi réactif de la SvelteMap
+    // .size assures le suivi réactif de la SvelteMap
     const _s = this.#rawEvents.size;
-    console.log(`[EventsStore] #enrichedMap re-derive: size=${_s}, rawEvents keys=[${Array.from(this.#rawEvents.keys()).join(',')}]`);
     for (const [id, main] of this.#rawEvents) {
       map.set(id, this.#enrichEvent(main));
     }

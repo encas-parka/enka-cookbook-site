@@ -1050,18 +1050,53 @@ class RecipesStore {
   }
 
   // =============================================================================
-  // CLEANUP
+  // RESET / DESTROY
   // =============================================================================
 
-  destroy(): void {
-    this.#bridge.subscription.unsubscribe();
+  /**
+   * Reset in-memory state without touching Dexie or the bridge liveQuery.
+   * The bridge stays alive and will detect subsequent Dexie writes.
+   * Call `loadCache()` after this to re-populate Hugo recipes.
+   */
+  reset(): void {
     this.#collection.unsubscribeAll();
-    this.#recipesIndex.clear();
+    this.#hugoRecipes.clear();
     this.#fuseTitle = null;
     this.#fuseMulti = null;
     this.#lastFuseSize = 0;
+    this.#loadingDetails.clear();
+    this.#initPromise = null;
+    this.#syncPromise = Promise.resolve();
+    this.#syncResolve = null;
+    this.#loading = false;
+    this.#error = null;
+    this.#versionTimestamp = null;
     this.#isInitialized = false;
     this.#realtimeInitialized = false;
+    console.log("[RecipesStore] Reset terminé");
+  }
+
+  /**
+   * Soft reset : reset() + clear Dexie tables (db.recipes, db.recipeData, syncMeta).
+   * The bridge liveQuery remains active — data will re-populate when Dexie is re-seeded.
+   */
+  async softReset(): Promise<void> {
+    console.log("[RecipesStore] Soft reset...");
+    this.reset();
+    await this.#collection.clearLocal();
+    await db.recipeData.clear();
+    await db.syncMeta.delete(this.#HUGO_META_KEY);
+    await db.syncMeta.delete("recettes");
+    console.log("[RecipesStore] Soft reset terminé");
+  }
+
+  /**
+   * Full teardown : softReset + kill the bridge liveQuery (irreversible).
+   * Used on logout. After this, the store cannot re-populate without re-instantiation.
+   */
+  async destroy(): Promise<void> {
+    await this.softReset();
+    this.#bridge.subscription.unsubscribe();
     console.log("[RecipesStore] Ressources nettoyées");
   }
 }

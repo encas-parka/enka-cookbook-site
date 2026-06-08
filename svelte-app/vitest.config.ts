@@ -13,6 +13,12 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src"),
       $lib: path.resolve(__dirname, "./src/lib"),
     },
+    // CRITICAL for Svelte 5 reactivity in tests:
+    // Without 'browser' conditions, Svelte resolves to its Node/SSR runtime
+    // which uses source() instead of state() for SvelteMap internal signals.
+    // This breaks $derived.by() dependency tracking — deriveds compute once
+    // but never re-derive when the SvelteMap is mutated.
+    conditions: process.env.VITEST ? ["browser"] : [],
   },
   test: {
     include: ["src/**/*.test.ts"],

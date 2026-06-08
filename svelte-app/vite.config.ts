@@ -145,6 +145,7 @@ export default defineConfig(({ mode }) => ({
 
     // Oxc (minifieur par défaut de Vite 8) — esbuild supprimé car Vite 8.0.16+
     // ne le bundle plus et nécessite une installation séparée
+    // manualPureFunctions supprime console.log/debug en production (console.error/warn intacts)
     target: "es2020",
     manifest: ".vite-manifest.json",
 
@@ -152,6 +153,13 @@ export default defineConfig(({ mode }) => ({
     rolldownOptions: {
       output: {
         keepNames: true, // CRUCIAL pour Svelte 5 (équivalent terser keep_classnames)
+        minify: {
+          compress: {
+            treeshake: {
+              manualPureFunctions: ["console.log", "console.debug"],
+            },
+          },
+        },
         entryFileNames:
           mode === "development"
             ? "assets/[name].js"

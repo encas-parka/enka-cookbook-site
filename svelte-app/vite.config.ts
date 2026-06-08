@@ -143,13 +143,8 @@ export default defineConfig(({ mode }) => ({
     outDir: "../static/app/",
     emptyOutDir: true,
 
-    // ⭐ esbuild comme minificateur (au lieu d'OxC par défaut)
-    // pure supprime uniquement console.log, console.error/warn restent intacts
-    minify: "esbuild",
-    esbuild: {
-      pure: mode === "production" ? ["console.log"] : [],
-    },
-
+    // Oxc (minifieur par défaut de Vite 8) — esbuild supprimé car Vite 8.0.16+
+    // ne le bundle plus et nécessite une installation séparée
     target: "es2020",
     manifest: ".vite-manifest.json",
 

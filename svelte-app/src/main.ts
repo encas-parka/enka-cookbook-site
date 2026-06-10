@@ -7,7 +7,10 @@ import { materielStore } from "$lib/stores/MaterielStore.svelte";
 import { teamdocsStore } from "$lib/stores/TeamdocsStore.svelte";
 import { nativeTeamsStore } from "$lib/stores/NativeTeamsStore.svelte";
 import { recipesStore } from "$lib/stores/RecipesStore.svelte";
-import { setRealtimeOnReconnect, reconnectRealtime } from "$lib/db-sync/aw-realtime";
+import {
+  setRealtimeOnReconnect,
+  reconnectRealtime,
+} from "$lib/db-sync/aw-realtime";
 import { statusBarStore } from "$lib/stores/StatusBarStore.svelte";
 import { updateStore } from "$lib/stores/UpdateStore.svelte";
 
@@ -54,13 +57,19 @@ let isResyncing = false;
  * debounce/guard logic is testable in isolation. Called only by
  * `scheduleResync` after the debounce window elapses.
  */
-async function performResync(forceReconnect: boolean, reason: ResyncReason): Promise<void> {
+async function performResync(
+  forceReconnect: boolean,
+  reason: ResyncReason,
+): Promise<void> {
   if (forceReconnect) {
     console.log("[sync] Forcing WS reconnect + resync");
     try {
       await reconnectRealtime();
     } catch (err) {
-      console.error("[sync] reconnectRealtime() failed, continuing with resync:", err);
+      console.error(
+        "[sync] reconnectRealtime() failed, continuing with resync:",
+        err,
+      );
     }
   }
 
@@ -75,7 +84,10 @@ async function performResync(forceReconnect: boolean, reason: ResyncReason): Pro
   ]);
   const failures = results.filter((r) => r.status === "rejected");
   if (failures.length > 0) {
-    console.error(`[sync] ${failures.length} store(s) failed to resync:`, failures);
+    console.error(
+      `[sync] ${failures.length} store(s) failed to resync:`,
+      failures,
+    );
     statusBarStore.setServerStatus("unreachable");
   } else {
     console.log("[sync] All stores resynced successfully");
@@ -96,7 +108,9 @@ function scheduleResync({
   reason: ResyncReason;
 }): void {
   if (isResyncing) {
-    console.warn(`[sync] Resync already in progress, skipping trigger (reason=${reason})`);
+    console.warn(
+      `[sync] Resync already in progress, skipping trigger (reason=${reason})`,
+    );
     return;
   }
   if (resyncTimeout) clearTimeout(resyncTimeout);
@@ -142,7 +156,9 @@ function handleVisibilityChange(): void {
 function handlePageShow(event: PageTransitionEvent): void {
   if (!event.persisted) return;
   const hiddenDuration =
-    lastHiddenAt !== null ? Date.now() - lastHiddenAt : BFCACHE_DEFAULT_HIDDEN_MS;
+    lastHiddenAt !== null
+      ? Date.now() - lastHiddenAt
+      : BFCACHE_DEFAULT_HIDDEN_MS;
   lastHiddenAt = null;
   if (hiddenDuration < RESYNC_THRESHOLD_MS) return;
   scheduleResync({
@@ -150,6 +166,39 @@ function handlePageShow(event: PageTransitionEvent): void {
     reason: "pageshow",
   });
 }
+
+/**
+ * Détecte une erreur de chargement de chunk (import dynamique échoué).
+ * Couvre Chrome, Firefox et Safari.
+ */
+function isChunkLoadError(error: unknown): boolean {
+  return (
+    error instanceof TypeError &&
+    /dynamically imported module|importing.*module.*script/i.test(
+      error.message ?? "",
+    )
+  );
+}
+
+// Filet de sécurité : si un chunk JS échoue à charger (build déployé,
+// onglet ouvert en arrière-plan, precache nettoyé…), on reload
+// automatiquement au lieu de laisser l'app dans un état cassé.
+// Flag sessionStorage pour éviter une boucle de reload infinie.
+window.addEventListener("unhandledrejection", (event) => {
+  if (
+    isChunkLoadError(event.reason) &&
+    !sessionStorage.getItem("sw-reload-attempted")
+  ) {
+    console.warn("[SW] Chunk load error — rechargement automatique");
+    sessionStorage.setItem("sw-reload-attempted", "1");
+    window.location.reload();
+  }
+});
+
+// Réinitialiser le flag après un chargement réussi.
+window.addEventListener("load", () => {
+  sessionStorage.removeItem("sw-reload-attempted");
+});
 
 // Le nouveau SW reste en "waiting" (pas de skipWaiting/clientsClaim).
 // L'utilisateur est informé via un modal, et le reload n'est déclenché
@@ -206,7 +255,9 @@ window.addEventListener("pageshow", handlePageShow);
 // Resync sur reconnexion WebSocket (pertes réseau pendant onglet visible).
 // Pas de forceReconnect ici : le callback `client.connected` ne signale
 // pas une absence prolongée, juste une reconnexion réseau.
-setRealtimeOnReconnect(() => scheduleResync({ forceReconnect: false, reason: "ws-reconnect" }));
+setRealtimeOnReconnect(() =>
+  scheduleResync({ forceReconnect: false, reason: "ws-reconnect" }),
+);
 
 /**
  * Resync sur retour de connexion réseau (event `online` du navigateur).

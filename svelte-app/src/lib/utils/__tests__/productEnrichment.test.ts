@@ -1,6 +1,10 @@
 import { describe, it, expect, vi } from "vitest";
 import { buildRawProductBase, applyNeedToBase } from "../productEnrichment";
-import type { EnrichedProduct, NumericQuantity, ByDateEntry } from "$lib/types/store.types";
+import type {
+  EnrichedProduct,
+  NumericQuantity,
+  ByDateEntry,
+} from "$lib/types/store.types";
 import type { ParsedNeed } from "../product-need-serializer";
 
 vi.mock("$lib/stores/RecipesStore.svelte", () => ({
@@ -66,7 +70,12 @@ describe("buildRawProductBase", () => {
 
     it("pars et normalise le stock (kg → gr.)", () => {
       const raw = makeRawProduct({
-        stockReel: JSON.stringify({ quantity: "2", unit: "kg", notes: "", dateTime: "" }),
+        stockReel: JSON.stringify({
+          quantity: "2",
+          unit: "kg",
+          notes: "",
+          dateTime: "",
+        }),
       });
       const result = buildRawProductBase(raw);
 
@@ -109,7 +118,11 @@ describe("buildRawProductBase", () => {
 
     it("pF/pS extraits des specs si présentes", () => {
       const raw = makeRawProduct({
-        specs: JSON.stringify({ pF: true, pS: false, quantity: { q: 500, u: "gr." } }),
+        specs: JSON.stringify({
+          pF: true,
+          pS: false,
+          quantity: { q: 500, u: "gr." },
+        }),
       });
       const result = buildRawProductBase(raw);
 
@@ -124,6 +137,15 @@ describe("buildRawProductBase", () => {
       const result = buildRawProductBase(raw);
 
       expect(result.totalNeededArray).toEqual([{ q: 500, u: "gr." }]);
+    });
+
+    it("totalNeededArray normalise les unités (kg → gr.) pour un produit manuel", () => {
+      const raw = makeRawProduct({
+        specs: JSON.stringify({ quantity: { q: 2, u: "kg" } }),
+      });
+      const result = buildRawProductBase(raw);
+
+      expect(result.totalNeededArray).toEqual([{ q: 2000, u: "gr." }]);
     });
 
     it("totalNeededArray est vide si pas de specs.quantity", () => {
@@ -158,9 +180,27 @@ describe("buildRawProductBase", () => {
     it("filtre les purchases avec status 'deleted'", () => {
       const raw = makeRawProduct({
         purchases: [
-          { $id: "p1", quantity: 2, unit: "kg", status: "ordered", products: ["raw-product-001"] },
-          { $id: "p2", quantity: 1, unit: "kg", status: "deleted", products: ["raw-product-001"] },
-          { $id: "p3", quantity: 500, unit: "gr.", status: "delivered", products: ["raw-product-001"] },
+          {
+            $id: "p1",
+            quantity: 2,
+            unit: "kg",
+            status: "ordered",
+            products: ["raw-product-001"],
+          },
+          {
+            $id: "p2",
+            quantity: 1,
+            unit: "kg",
+            status: "deleted",
+            products: ["raw-product-001"],
+          },
+          {
+            $id: "p3",
+            quantity: 500,
+            unit: "gr.",
+            status: "delivered",
+            products: ["raw-product-001"],
+          },
         ],
       });
       const result = buildRawProductBase(raw);
@@ -195,7 +235,10 @@ describe("buildRawProductBase", () => {
       const result = buildRawProductBase(raw);
 
       expect(result.totalNeededOverrideParsed).not.toBeNull();
-      expect(result.totalNeededOverrideParsed!.totalOverride).toEqual({ q: 1000, u: "gr." });
+      expect(result.totalNeededOverrideParsed!.totalOverride).toEqual({
+        q: 1000,
+        u: "gr.",
+      });
     });
 
     it("missingQuantityArray utilise l'override comme besoin effectif", () => {
@@ -209,12 +252,45 @@ describe("buildRawProductBase", () => {
       const raw = makeRawProduct({
         totalNeededOverride: JSON.stringify(override),
         purchases: [
-          { $id: "p1", quantity: 300, unit: "gr.", status: "ordered", products: ["raw-product-001"] },
+          {
+            $id: "p1",
+            quantity: 300,
+            unit: "gr.",
+            status: "ordered",
+            products: ["raw-product-001"],
+          },
         ],
       });
       const result = buildRawProductBase(raw);
 
       expect(result.missingQuantityArray).toEqual([{ q: 700, u: "gr." }]);
+    });
+
+    it("missingQuantityArray utilise l'override normalisé comme besoin effectif", () => {
+      // Override stocké en kg (données existantes non normalisées)
+      const override = {
+        totalOverride: { q: 2, u: "kg" },
+        comment: "Test",
+        totalComputedWhenOverride: [{ q: 500, u: "gr." }],
+        platesNbWhenOverride: 10,
+        recipesNbWhenOverride: 2,
+      };
+      const raw = makeRawProduct({
+        totalNeededOverride: JSON.stringify(override),
+        purchases: [
+          {
+            $id: "p1",
+            quantity: 500,
+            unit: "gr.",
+            status: "delivered",
+            products: ["raw-product-001"],
+          },
+        ],
+      });
+      const result = buildRawProductBase(raw);
+
+      // 2 kg normalisé → 2000 gr. , 2000 - 500 = 1500 gr.
+      expect(result.missingQuantityArray).toEqual([{ q: 1500, u: "gr." }]);
     });
 
     it("totalNeededOverrideParsed est null si pas d'override", () => {
@@ -240,7 +316,13 @@ describe("buildRawProductBase", () => {
       const raw = makeRawProduct({
         specs: JSON.stringify({ quantity: { q: 1000, u: "gr." } }),
         purchases: [
-          { $id: "p1", quantity: 300, unit: "gr.", status: "ordered", products: ["raw-product-001"] },
+          {
+            $id: "p1",
+            quantity: 300,
+            unit: "gr.",
+            status: "ordered",
+            products: ["raw-product-001"],
+          },
         ],
       });
       const result = buildRawProductBase(raw);
@@ -286,7 +368,9 @@ describe("applyNeedToBase", () => {
       byDate: {
         "2026-04-20": {
           totalConsolidated: [{ q: 500, u: "gr." }],
-          recipes: [{ r: "Gâteau", q: 500, u: "gr.", qEq: 500, uEq: "gr.", a: 10 }],
+          recipes: [
+            { r: "Gâteau", q: 500, u: "gr.", qEq: 500, uEq: "gr.", a: 10 },
+          ],
           totalAssiettes: 10,
           recipeCount: 1,
         },
@@ -294,7 +378,9 @@ describe("applyNeedToBase", () => {
       totalNeededArray: [{ q: 500, u: "gr." }],
       nbRecipes: 1,
       totalAssiettes: 10,
-      dateDisplayInfo: { "2026-04-20": { formattedDate: "Dim 20", timeIcon: null } },
+      dateDisplayInfo: {
+        "2026-04-20": { formattedDate: "Dim 20", timeIcon: null },
+      },
       $createdAt: "2026-01-01T00:00:00Z",
       $updatedAt: "2026-01-01T00:00:00Z",
       ...overrides,
@@ -311,7 +397,9 @@ describe("applyNeedToBase", () => {
   });
 
   it("surcharge pF/pS depuis le need", () => {
-    const raw = makeRawProduct({ specs: JSON.stringify({ pF: false, pS: true }) });
+    const raw = makeRawProduct({
+      specs: JSON.stringify({ pF: false, pS: true }),
+    });
     const base = buildRawProductBase(raw);
     const need = makeNeed({ pF: true, pS: false });
 
@@ -335,7 +423,13 @@ describe("applyNeedToBase", () => {
   it("RECALCULE missingQuantityArray avec le bon totalNeededArray", () => {
     const raw = makeRawProduct({
       purchases: [
-        { $id: "p1", quantity: 200, unit: "gr.", status: "ordered", products: ["raw-product-001"] },
+        {
+          $id: "p1",
+          quantity: 200,
+          unit: "gr.",
+          status: "ordered",
+          products: ["raw-product-001"],
+        },
       ],
     });
     const base = buildRawProductBase(raw);
@@ -369,7 +463,13 @@ describe("applyNeedToBase", () => {
     const raw = makeRawProduct({
       totalNeededOverride: JSON.stringify(override),
       purchases: [
-        { $id: "p1", quantity: 1000, unit: "gr.", status: "ordered", products: ["raw-product-001"] },
+        {
+          $id: "p1",
+          quantity: 1000,
+          unit: "gr.",
+          status: "ordered",
+          products: ["raw-product-001"],
+        },
       ],
     });
     const base = buildRawProductBase(raw);
@@ -388,5 +488,35 @@ describe("applyNeedToBase", () => {
 
     applyNeedToBase(base, need);
     expect(base.dateDisplayInfo).toBe(need.dateDisplayInfo);
+  });
+
+  it("normalise l'override legacy (kg → gr.) dans applyNeedToBase", () => {
+    // Override stocké en kg (données legacy non normalisées)
+    const override = {
+      totalOverride: { q: 2, u: "kg" },
+      comment: "Override test",
+      totalComputedWhenOverride: [{ q: 500, u: "gr." }],
+      platesNbWhenOverride: 10,
+      recipesNbWhenOverride: 1,
+    };
+    const raw = makeRawProduct({
+      totalNeededOverride: JSON.stringify(override),
+      purchases: [
+        {
+          $id: "p1",
+          quantity: 500,
+          unit: "gr.",
+          status: "delivered",
+          products: ["raw-product-001"],
+        },
+      ],
+    });
+    const base = buildRawProductBase(raw);
+    const need = makeNeed({ totalNeededArray: [{ q: 500, u: "gr." }] });
+
+    applyNeedToBase(base, need);
+
+    // 2 kg normalisé → 2000 gr. , 2000 - 500 = 1500 gr.
+    expect(base.missingQuantityArray).toEqual([{ q: 1500, u: "gr." }]);
   });
 });

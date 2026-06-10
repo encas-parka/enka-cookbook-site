@@ -15,6 +15,7 @@
     getProductTypeInfo,
     getProductTypeRawKey,
   } from "$lib/utils/products-display";
+  import { UnitConverter } from "$lib/utils/UnitConverter";
   import Suggestions from "../ui/Suggestions.svelte";
   import QuantityInput from "../ui/QuantityInput.svelte";
   import StoreInput from "../ui/StoreInput.svelte";
@@ -116,7 +117,13 @@
         pF: formData.pF,
         pS: formData.pS,
         quantity: formData.quantity
-          ? { q: formData.quantity, u: formData.unit.trim() || "pièces" }
+          ? (() => {
+              const n = UnitConverter.normalize(
+                formData.quantity,
+                formData.unit.trim() || "unité",
+              );
+              return { q: n.quantity, u: n.unit };
+            })()
           : undefined,
       };
 

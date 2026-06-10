@@ -124,7 +124,7 @@
               <!-- Couverts + quantités -->
               <div class="ms-auto flex flex-wrap items-center gap-4">
                 {#if recipe.sourceProductName}
-                  <span class="badge badge-soft badge-warning badge-xs gap-1">
+                  <span class="badge badge-soft badge-warning badge-sm gap-1">
                     {recipe.sourceProductName}
                   </span>
                 {/if}

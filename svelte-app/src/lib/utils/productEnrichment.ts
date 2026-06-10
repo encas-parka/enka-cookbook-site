@@ -68,6 +68,15 @@ type ProductWithOptionalPurchases = Partial<Models.Row> & {
  * Ne contient que les données Appwrite parsées + purchases agrégées.
  * Les champs Hugo (byDate, nbRecipes, etc.) sont à leurs valeurs par défaut.
  */
+/**
+ * Normalise une quantité via UnitConverter et retourne un NumericQuantity.
+ * Utilisé comme safety net pour les données legacy non normalisées.
+ */
+function normalizeQty(q: number, u: string): NumericQuantity {
+  const n = UnitConverter.normalize(q, u);
+  return { q: n.quantity, u: n.unit };
+}
+
 export function buildRawProductBase(
   product: ProductWithOptionalPurchases,
 ): EnrichedProduct {
@@ -80,16 +89,25 @@ export function buildRawProductBase(
     transformPurchasesToNumericQuantity(activePurchases),
   );
 
+  // Safety net : normaliser les unités (kg→gr., l.→ml) pour garantir
+  // la cohérence avec les achats (toujours normalisés via UnitConverter).
+  // Les nouvelles écritures normalisent avant stockage, mais les données
+  // existantes peuvent avoir des unités non normalisées.
   const totalNeededArray: NumericQuantity[] = specsParsed?.quantity
-    ? [specsParsed.quantity]
+    ? [normalizeQty(specsParsed.quantity.q, specsParsed.quantity.u)]
     : [];
 
   const totalNeededOverrideParsed = safeJsonParse<TotalNeededOverrideData>(
     product.totalNeededOverride,
   );
 
-  const effectiveNeededArray = totalNeededOverrideParsed
-    ? [totalNeededOverrideParsed.totalOverride]
+  // Safety net : normaliser l'override (même raison que totalNeededArray).
+  const rawOverride = totalNeededOverrideParsed?.totalOverride;
+  const normalizedOverride = rawOverride
+    ? normalizeQty(rawOverride.q, rawOverride.u)
+    : null;
+  const effectiveNeededArray: NumericQuantity[] = normalizedOverride
+    ? [normalizedOverride]
     : totalNeededArray;
 
   const { numeric: missingQuantityArray, display: displayMissingQuantity } =
@@ -149,8 +167,8 @@ export function buildRawProductBase(
     displayTotalNeeded: formatTotalQuantity(totalNeededArray),
     displayMissingQuantity,
     totalNeededOverrideParsed,
-    displayTotalOverride: totalNeededOverrideParsed
-      ? formatTotalQuantity([totalNeededOverrideParsed.totalOverride])
+    displayTotalOverride: normalizedOverride
+      ? formatTotalQuantity([normalizedOverride])
       : "",
     dateDisplayInfo: {},
   };
@@ -174,7 +192,12 @@ export function applyNeedToBase(
   base.dateDisplayInfo = need.dateDisplayInfo;
 
   const effectiveNeededArray = base.totalNeededOverrideParsed
-    ? [base.totalNeededOverrideParsed.totalOverride]
+    ? [
+        normalizeQty(
+          base.totalNeededOverrideParsed.totalOverride.q,
+          base.totalNeededOverrideParsed.totalOverride.u,
+        ),
+      ]
     : base.totalNeededArray;
   const { numeric: missingQuantityArray, display: displayMissingQuantity } =
     calculateAndFormatMissing(effectiveNeededArray, base.totalPurchasesArray);
@@ -299,7 +322,10 @@ export async function createEnrichedProductsFromEvent(
  * - nbRecipes / totalAssiettes : recalculés
  * - productHugoUuid : garde le UUID Hugo court (priorité) si disponible
  */
-export function mergeEnrichedProducts(target: EnrichedProduct, source: EnrichedProduct): void {
+export function mergeEnrichedProducts(
+  target: EnrichedProduct,
+  source: EnrichedProduct,
+): void {
   const sourceName = source.productName;
 
   // 1. Fusionner les byDate
@@ -347,12 +373,17 @@ export function mergeEnrichedProducts(target: EnrichedProduct, source: EnrichedP
 
   // 5. Recalculer missing (sans purchases au stade initial)
   const { numeric: missingQuantityArray, display: displayMissingQuantity } =
-    calculateAndFormatMissing(target.totalNeededArray, target.totalPurchasesArray);
+    calculateAndFormatMissing(
+      target.totalNeededArray,
+      target.totalPurchasesArray,
+    );
   target.missingQuantityArray = missingQuantityArray;
   target.displayMissingQuantity = displayMissingQuantity;
 
   // 6. Recalculer dateDisplayInfo
-  target.dateDisplayInfo = calculateAllDateDisplayInfo(Object.keys(target.byDate));
+  target.dateDisplayInfo = calculateAllDateDisplayInfo(
+    Object.keys(target.byDate),
+  );
 
   // 7. Garder le UUID Hugo (court) en priorité sur l'UUID Appwrite (long)
   const targetLen = target.productHugoUuid?.length ?? Infinity;

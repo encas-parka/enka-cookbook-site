@@ -21,6 +21,7 @@
     applyStandardRounding,
     formatTotalQuantity,
   } from "$lib/utils/QuantityFormatter";
+  import { UnitConverter } from "$lib/utils/UnitConverter";
   import { detectOverrideMismatch } from "$lib/utils/productsUtils";
 
   interface Props {
@@ -95,11 +96,9 @@
   async function handleSetOverride() {
     if (!modalState) return;
 
-    // Conversion pour le stockage (kg→gr, l→ml) afin de normaliser
-    const { q: storedQuantity, u: storedUnit } = autoConvertUnit(
-      quantity,
-      unit,
-    );
+    // Normalisation pour le stockage (kg→gr., l.→ml) via UnitConverter
+    const { quantity: storedQuantity, unit: storedUnit } =
+      UnitConverter.normalize(quantity, unit);
 
     // Récupérer les valeurs actuelles stockées
     const currentOverride =

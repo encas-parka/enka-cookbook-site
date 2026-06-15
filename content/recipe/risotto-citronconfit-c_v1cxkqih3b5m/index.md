@@ -1,6 +1,6 @@
 ---
 title: Risotto citronconfit cranberries et olives vertes au four
-date: '2026-06-15T21:34:47.502Z'
+date: '2026-06-15T21:35:10.729Z'
 draft: false
 typeR: plat
 categories:
@@ -114,9 +114,9 @@ ingredients:
     type: autres
   - uuid: chfwwq
     name: Crème soja
-    originalQuantity: 25
+    originalQuantity: 50
     originalUnit: ml
-    normalizedQuantity: 25
+    normalizedQuantity: 50
     normalizedUnit: ml
     comment: ''
     allergens:
@@ -151,7 +151,7 @@ permissionWrite:
   - 696fb1cc000eb33adee7
 auteur: Miki
 createdAt: '2026-03-22T09:32:18.088+00:00'
-updatedAt: '2026-06-15T21:34:46.867+00:00'
+updatedAt: '2026-06-15T21:35:10.264+00:00'
 createdBy: 696fb1cc000eb33adee7
 teams: []
 status: public

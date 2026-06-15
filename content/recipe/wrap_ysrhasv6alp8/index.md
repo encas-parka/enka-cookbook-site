@@ -1,7 +1,7 @@
 ---
 title: Wrap
-date: '2026-06-08T08:09:33.438Z'
-draft: true
+date: '2026-06-15T21:48:53.701Z'
+draft: false
 typeR: plat
 categories: []
 regime:
@@ -9,7 +9,7 @@ regime:
   - sans-lactose
 plate: 100
 quantite_desc: null
-check: false
+check: true
 cuisson: false
 serveHot: true
 description: à garnir avec viande ou protéine de soja ou autre et sauces
@@ -56,15 +56,6 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
-  - uuid: owsv5m
-    name: échalote
-    originalQuantity: 1
-    originalUnit: kg
-    normalizedQuantity: 1000
-    normalizedUnit: gr.
-    comment: ''
-    allergens: []
-    type: legumes
 preparation: |-
   râper les légumes
 
@@ -80,7 +71,7 @@ permissionWrite:
   - 696fb1cc000eb33adee7
 auteur: Miki
 createdAt: '2026-05-25T13:56:57.680+00:00'
-updatedAt: '2026-06-08T08:09:21.152+00:00'
+updatedAt: '2026-06-15T21:48:53.343+00:00'
 createdBy: 696fb1cc000eb33adee7
 teams: []
 status: public

@@ -1,7 +1,7 @@
 ---
 title: Plat sauce curry et nouilles de riz
-date: '2026-05-30T11:48:24.954Z'
-draft: true
+date: '2026-06-15T21:31:40.116Z'
+draft: false
 typeR: plat
 categories:
   - Plat en Sauce
@@ -11,7 +11,7 @@ regime:
   - sans-lactose
 plate: 100
 quantite_desc: null
-check: false
+check: true
 cuisson: true
 serveHot: true
 description: null
@@ -22,9 +22,9 @@ materiel: []
 ingredients:
   - uuid: mesg7t
     name: Nouilles de riz
-    originalQuantity: 6
+    originalQuantity: 5
     originalUnit: kg
-    normalizedQuantity: 6000
+    normalizedQuantity: 5000
     normalizedUnit: gr.
     comment: ''
     allergens: []
@@ -67,18 +67,18 @@ ingredients:
     type: legumes
   - uuid: wwl5vn
     name: Pois chiche cuit
-    originalQuantity: 6
+    originalQuantity: 5
     originalUnit: kg
-    normalizedQuantity: 6000
+    normalizedQuantity: 5000
     normalizedUnit: gr.
     comment: ''
     allergens: []
     type: sec
   - uuid: ljzb7j
     name: Eau
-    originalQuantity: 15
+    originalQuantity: 10
     originalUnit: l.
-    normalizedQuantity: 15000
+    normalizedQuantity: 10000
     normalizedUnit: ml
     comment: a ajuster pour la cuisson
     allergens: []
@@ -116,9 +116,9 @@ preparation: |-
 
   Immerger les nouilles de riz dans un grand volumes d'eau bouillantes
 
-  après quelques minutes lorsqu'elles sont presque cuites les immerger dans un grand volumes d'eau froide préparé à l'avance
+  après quelques minutes lorsqu'elles sont presque cuites les immerger dans un grand volume d'eau froide préparé à l'avance
 
-  Les nouilles sont servies froides avec les légumes en sauce très chauds dessus 
+  Les nouilles sont servies froides avec les légumes en sauce très chauds dessus
 prepAlt: []
 astuces: []
 preparation24h: null
@@ -126,7 +126,7 @@ permissionWrite:
   - 696fb1cc000eb33adee7
 auteur: Miki
 createdAt: '2026-05-25T14:12:48.495+00:00'
-updatedAt: '2026-05-30T11:48:11.725+00:00'
+updatedAt: '2026-06-15T21:31:28.230+00:00'
 createdBy: 696fb1cc000eb33adee7
 teams: []
 status: public

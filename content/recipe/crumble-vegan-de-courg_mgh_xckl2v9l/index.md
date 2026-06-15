@@ -1,6 +1,6 @@
 ---
 title: Crumble végan de courgette
-date: '2026-05-27T19:12:37.036Z'
+date: '2026-06-15T21:44:15.463Z'
 draft: false
 typeR: plat
 categories: []
@@ -8,7 +8,7 @@ regime:
   - vegan
   - sans-lactose
 plate: 36
-quantite_desc: '12 parts par gastro servi en plat '
+quantite_desc: 12 parts par gastro servi en plat en principal, moins en accompagnement
 check: true
 cuisson: true
 serveHot: true
@@ -51,38 +51,18 @@ ingredients:
     type: sec
   - uuid: 4be4ic
     name: Levure de bière
-    originalQuantity: 200
+    originalQuantity: 150
     originalUnit: gr.
-    normalizedQuantity: 200
+    normalizedQuantity: 150
     normalizedUnit: gr.
     comment: ''
     allergens: []
     type: lof
-  - uuid: t3a6qj
-    name: gomasio
-    originalQuantity: 100
-    originalUnit: gr.
-    normalizedQuantity: 100
-    normalizedUnit: gr.
-    comment: ''
-    allergens:
-      - Sésame
-    type: epices
-  - uuid: t3a6qj
-    name: gomasio
-    originalQuantity: 0
-    originalUnit: gr.
-    normalizedQuantity: 0
-    normalizedUnit: gr.
-    comment: ''
-    allergens:
-      - Sésame
-    type: epices
   - uuid: owsv5m
     name: échalote
-    originalQuantity: 200
+    originalQuantity: 300
     originalUnit: gr.
-    normalizedQuantity: 200
+    normalizedQuantity: 300
     normalizedUnit: gr.
     comment: ''
     allergens: []
@@ -115,11 +95,15 @@ ingredients:
     allergens: []
     type: legumes
 preparation: |-
+  (Attentions, quantités pour un plat principal)
+
   Faire précuire au four les courgettes en gros dés avec des échalotes, de l'huile, du sel, du poivre et des herbes de provence
 
   Sabler la farine, la margarine, la levure de bière, le gomasio, la poudre d'amande, vérifier que c'est assez salé sinon saler
 
-  Placer le persil haché sur les courgettes débarrassées de l'eau qu'elles ont rendu en cuisant, puis le crumble et  faire cuire 40min à 220°C
+  Placer le persil haché sur les courgettes débarrassées de l'eau qu'elles ont rendu en cuisant, puis le crumble et faire cuire 40min à 220°C
+
+  Cette recette peut être utilisée pour cuisiner des restes de légumes 
 prepAlt: []
 astuces: []
 preparation24h: null
@@ -127,7 +111,7 @@ permissionWrite:
   - 696fb1cc000eb33adee7
 auteur: Miki
 createdAt: '2026-05-16T09:45:08.494+00:00'
-updatedAt: '2026-05-27T19:12:32.434+00:00'
+updatedAt: '2026-06-15T21:44:14.931+00:00'
 createdBy: 696fb1cc000eb33adee7
 teams: []
 status: public

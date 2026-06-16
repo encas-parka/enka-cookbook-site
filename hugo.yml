@@ -12,7 +12,7 @@ disableAliases: true
 removePathAccents: true
 enableEmoji: true
 enableGitInfo: true
-enableRobotsTXT: true
+# enableRobotsTXT: true # Désactivé : utilise static/robots.txt à la place
 languageCode: fr-FR
 defaultContentLanguage: fr
 defaultContentLang: fr

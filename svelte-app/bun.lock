@@ -14,7 +14,7 @@
         "@tiptap/extension-highlight": "^3.26.0",
         "@tiptap/pm": "^3.26.0",
         "@tiptap/starter-kit": "^3.26.0",
-        "appwrite": "24.2.0",
+        "appwrite": "24.1.1",
         "daisyui": "^5.5.20",
         "dexie": "^4.4.3",
         "fuse.js": "^7.4.2",
@@ -534,7 +534,7 @@
 
     "ansi-styles": ["ansi-styles@6.2.3", "", {}, "sha512-4Dj6M28JB+oAH8kFkTLUo+a2jwOFkuqb3yucU0CANcRRUbxS0cP0nZYCGjcc3BNXwRIsUVmDGgzawme7zvJHvg=="],
 
-    "appwrite": ["appwrite@24.2.0", "", { "dependencies": { "json-bigint": "1.0.0" } }, "sha512-P5ZhB05RJ7wgCJ23cuu+IT/BtIl5hdru6qa5OXGEz13ZIrHp24gL3C5PGS8Xvv+SIlYGJeBiGpK1vCdekH9YOg=="],
+    "appwrite": ["appwrite@24.1.1", "", { "dependencies": { "json-bigint": "1.0.0" } }, "sha512-6dTKZe059GWyrH1AObfC0KR20vmQ9+wUo3iCRmM4lFofTRMrSzjCEcblpNERXHVKrLlzsr1T4kQweQEgrp89yQ=="],
 
     "argparse": ["argparse@2.0.1", "", {}, "sha512-8+9WqebbFzpX9OR+Wa6O29asIogeRMzcGtAINdpMHHyAg10f05aSFVBbcEqGf/PXw1EjAZ+q2/bEBg3DvurK3Q=="],
 

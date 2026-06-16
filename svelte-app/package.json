@@ -43,7 +43,7 @@
     "@tiptap/extension-highlight": "^3.26.0",
     "@tiptap/pm": "^3.26.0",
     "@tiptap/starter-kit": "^3.26.0",
-    "appwrite": "24.2.0",
+    "appwrite": "24.1.1",
     "daisyui": "^5.5.20",
     "dexie": "^4.4.3",
     "fuse.js": "^7.4.2",

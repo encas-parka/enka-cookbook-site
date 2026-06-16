@@ -198,6 +198,13 @@
   });
 
   const conflictSummary = $derived.by(() => {
+    // Pendant la sauvegarde, on fige pour éviter un flash de conflit :
+    // en mode create, le prêt fraîchement créé arrive dans le store
+    // (liveQuery/realtime) et est compté comme consommateur car
+    // excludeLoanId = undefined, créant un auto-conflit avec selectedMateriels.
+    // Cohérent avec la garde `loading` déjà présente dans getItemConflictInfo.
+    if (loading) return { toRemove: [], toReduce: [] };
+
     const toRemove: { name: string }[] = [];
     const toReduce: { name: string; requested: number; available: number }[] =
       [];
@@ -331,6 +338,10 @@
   // fallback = maxQuantity stocké (utile quand pas de dates)
   // Si absent de la map = matériel soft-deleté → 0
   function getEffectiveMax(materielId: string, fallbackMax: number): number {
+    // Pendant la sauvegarde, on fige l'affichage pour éviter un flash
+    // (disponibilité recalculée avec le prêt fraîchement créé en mode create).
+    if (loading) return fallbackMax;
+
     const available = availabilityMap.get(materielId);
     // Si le matériel est dans la map, c'est la vraie dispo sur la période
     if (available !== undefined) return available;

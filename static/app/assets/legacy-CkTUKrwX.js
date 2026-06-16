@@ -1,1 +1,0 @@
-import{Un as e}from"./appwrite-CYXBXd9Y.js";e();

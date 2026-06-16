@@ -1,12 +1,13 @@
 ---
-title: Dattes farcies au fromages crémeux
-date: '2026-05-29T20:09:36.330Z'
+title: Dattes farcies au fromages végétal crémeux
+date: '2026-06-16T10:36:43.801Z'
 draft: true
 typeR: entree
 categories: []
 regime:
-  - vegetarien
+  - vegan
   - sans-gluten
+  - sans-lactose
 plate: 3
 quantite_desc: null
 check: false
@@ -27,16 +28,6 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
-  - uuid: 0d5y4q
-    name: Fromage frais
-    originalQuantity: 20
-    originalUnit: gr.
-    normalizedQuantity: 20
-    normalizedUnit: gr.
-    comment: ''
-    allergens:
-      - Produit laitier
-    type: frais
   - uuid: usibcf
     name: Noix
     originalQuantity: 3
@@ -49,19 +40,19 @@ ingredients:
     type: sec
   - uuid: 2juq3x
     name: Sel
-    originalQuantity: 0
-    originalUnit: pincées
-    normalizedQuantity: 0
-    normalizedUnit: pincées
+    originalQuantity: 1
+    originalUnit: au goût
+    normalizedQuantity: 1
+    normalizedUnit: au goût
     comment: ''
     allergens: []
     type: epices
   - uuid: 2pps90
     name: Poivre
-    originalQuantity: 0
-    originalUnit: pincées
-    normalizedQuantity: 0
-    normalizedUnit: pincées
+    originalQuantity: 1
+    originalUnit: au goût
+    normalizedQuantity: 1
+    normalizedUnit: au goût
     comment: ''
     allergens: []
     type: epices
@@ -74,6 +65,15 @@ ingredients:
     comment: ''
     allergens: []
     type: lof
+  - uuid: uad8kc
+    name: Fromage à tartiner végétal (fauxmage)
+    originalQuantity: 20
+    originalUnit: gr.
+    normalizedQuantity: 20
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: frais
 preparation: |-
   - Dans un bol, fouettez à la fourchette le fromage, la crème, le sel et le poivre. 
   - Ouvrez les dattes en portefeuille, retirez le noyau et les farcir d'une petite cuillère de fromage fouetté. Disposez les dattes sur une assiette, concassez les noix et parsemez les dattes. 
@@ -85,7 +85,7 @@ permissionWrite:
   - 69b2b4d10025449a9043
 auteur: frerylila
 createdAt: '2026-05-29T20:09:35.557+00:00'
-updatedAt: '2026-05-29T20:09:35.557+00:00'
+updatedAt: '2026-06-16T10:36:43.153+00:00'
 createdBy: 69b2b4d10025449a9043
 teams: []
 status: public

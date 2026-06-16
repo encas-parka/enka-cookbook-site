@@ -20,6 +20,8 @@ export type TemperatureFilterMode =
 
 export interface FiltersState {
   searchQuery: string;
+  /** Inclure les titres de recettes dans la recherche fuzzy. Défaut : false. */
+  searchInRecipes: boolean;
   selectedStores: string[];
   selectedWho: string[];
   selectedProductTypes: string[];
@@ -239,14 +241,18 @@ export function formatStockResult(result: NumericQuantity[]): string {
  * Computes the set of product IDs matching a fuzzy text query.
  * Accepts a pre-built searchable array (cached by the store) to avoid
  * O(P×R) flatMap on every keystroke.
+ *
+ * @param searchInRecipes - Quand false, la recherche ne porte que sur le nom
+ *   du produit (les titres de recettes sont exclus).
  */
 export function computeFuzzySearchMatches(
   searchable: { $id: string; productName: string; recipeNames: string }[],
   query: string,
+  searchInRecipes: boolean,
 ): Set<string> {
   if (!query.trim() || !searchable.length) return new Set();
   const results = fuzzysort.go(query.trim(), searchable, {
-    keys: ["productName", "recipeNames"],
+    keys: searchInRecipes ? ["productName", "recipeNames"] : ["productName"],
     threshold: 0.6,
   });
   return new Set(results.map((r) => r.obj.$id));

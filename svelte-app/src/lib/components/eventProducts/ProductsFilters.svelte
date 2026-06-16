@@ -62,7 +62,9 @@
       <input
         id="search-input"
         type="text"
-        placeholder="Nom du produit, recette..."
+        placeholder={filters.searchInRecipes
+          ? "Nom du produit, recette..."
+          : "Nom du produit..."}
         class="grow"
         value={filters.searchQuery}
         oninput={(e) => productsStore.setSearchQuery(e.currentTarget.value)}
@@ -75,6 +77,18 @@
         <X class="h-4 w-4" />
       </button>
     </div>
+    <label class="label w-fit gap-2 pt-1">
+      <span class="label-text text-sm opacity-70"
+        >Inclure les titres de recettes</span
+      >
+      <input
+        type="checkbox"
+        class="toggle toggle-sm toggle-secondary"
+        checked={filters.searchInRecipes}
+        onchange={(e) =>
+          productsStore.setSearchInRecipes(e.currentTarget.checked)}
+      />
+    </label>
   </div>
 
   {#if !productsStore.hasSingleDateEvent}

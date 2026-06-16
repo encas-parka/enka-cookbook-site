@@ -186,6 +186,7 @@ class ProductsStore {
   // Filters
   #filters = $state<FiltersState>({
     searchQuery: "",
+    searchInRecipes: false,
     selectedStores: [],
     selectedWho: [],
     selectedProductTypes: [],
@@ -514,6 +515,7 @@ class ProductsStore {
       ? computeFuzzySearchMatches(
           this.#fuzzySearchable,
           this.#filters.searchQuery,
+          this.#filters.searchInRecipes,
         )
       : undefined;
 
@@ -1266,6 +1268,12 @@ class ProductsStore {
     () => 500,
   );
 
+  /** Active/désactive l'inclusion des titres de recettes dans la recherche. */
+  setSearchInRecipes(value: boolean) {
+    this.#filters.searchInRecipes = value;
+    this.#rebuildGroups();
+  }
+
   toggleProductType(type: string) {
     const idx = this.#filters.selectedProductTypes.indexOf(type);
     if (idx > -1) {
@@ -1379,6 +1387,7 @@ class ProductsStore {
   clearFilters() {
     this.#filters = {
       searchQuery: "",
+      searchInRecipes: false,
       selectedStores: [],
       selectedWho: [],
       selectedProductTypes: [],
@@ -1925,6 +1934,7 @@ class ProductsStore {
 
     this.#filters = {
       searchQuery: "",
+      searchInRecipes: false,
       selectedStores: [],
       selectedWho: [],
       selectedProductTypes: [],

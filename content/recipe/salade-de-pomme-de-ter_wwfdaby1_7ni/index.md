@@ -1,7 +1,7 @@
 ---
 title: Salade de pomme de terre
-date: '2026-05-28T08:52:02.705Z'
-draft: true
+date: '2026-06-15T21:46:42.633Z'
+draft: false
 typeR: plat
 categories:
   - Salade
@@ -11,7 +11,7 @@ regime:
   - sans-lactose
 plate: 20
 quantite_desc: null
-check: false
+check: true
 cuisson: true
 serveHot: false
 description: null
@@ -117,7 +117,7 @@ permissionWrite:
   - 696fb1cc000eb33adee7
 auteur: Miki
 createdAt: '2026-05-27T20:21:01.051+00:00'
-updatedAt: '2026-05-28T08:51:57.270+00:00'
+updatedAt: '2026-06-15T21:46:41.440+00:00'
 createdBy: 696fb1cc000eb33adee7
 teams: []
 status: public

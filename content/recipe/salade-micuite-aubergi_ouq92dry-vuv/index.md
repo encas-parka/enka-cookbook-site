@@ -1,6 +1,6 @@
 ---
 title: Salade micuite aubergine pois chiche
-date: '2026-04-25T13:31:44.742Z'
+date: '2026-06-15T21:39:33.837Z'
 draft: false
 typeR: entree
 categories:
@@ -113,7 +113,7 @@ ingredients:
     allergens: []
     type: epices
 preparation: |-
-  Couper les aubergine en dés et faire revenir dans une grande poêle pour qu'elles soient cuites, de préférence légèrement grillées et tenues
+  Couper les aubergine en dés et faire revenir dans une grande poêle pour qu'elles soient cuites, de préférence légèrement grillées et tenues (si c'est arrangeant c'est aussi possible au four)
 
   Une fois qu'elles ont a peu près refroidies rajouter les pois chiches cuits égouttés, rincés, les tomates cerises coupés en 2 ou 4, les échalotes émincées, le persil émincés, du jus de citron, de l'huile d'olive, du sel, du cumin en gouttant!
 
@@ -123,11 +123,11 @@ astuces: []
 preparation24h: null
 permissionWrite:
   - 696fb1cc000eb33adee7
-auteur: null
+auteur: Miki
 createdAt: '2026-04-25T13:31:41.687+00:00'
-updatedAt: '2026-04-25T13:31:41.687+00:00'
+updatedAt: '2026-06-15T21:39:32.611+00:00'
 createdBy: 696fb1cc000eb33adee7
-teams: null
+teams: []
 status: public
 rootRecipeId: null
 versionLabel: null

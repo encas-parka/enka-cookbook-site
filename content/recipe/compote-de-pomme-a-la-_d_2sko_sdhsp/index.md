@@ -1,16 +1,16 @@
 ---
 title: Compote de pomme à la vanille
-date: '2026-05-26T09:16:44.302Z'
-draft: true
+date: '2026-06-15T21:41:50.367Z'
+draft: false
 typeR: dessert
 categories: []
 regime:
   - vegan
   - sans-gluten
   - sans-lactose
-plate: 100
-quantite_desc: null
-check: false
+plate: 130
+quantite_desc: en ramequin
+check: true
 cuisson: true
 serveHot: true
 description: null
@@ -38,11 +38,9 @@ ingredients:
     allergens: []
     type: sucres
 preparation: |-
-  Eplucher et couper les fruits grossièrement 
+  Eplucher et couper les fruits grossièrement
 
-  Si c'est des fruits acides rajouter du sucre
-
-  faire cuire avec un fond d'eau à feu doux ça ne doit pas accrocher 
+  faire cuire avec un fond d'eau à feu doux ça ne doit pas accrocher
 
   servir froid
 prepAlt: []
@@ -52,7 +50,7 @@ permissionWrite:
   - 696fb1cc000eb33adee7
 auteur: Miki
 createdAt: '2026-05-26T09:16:19.973+00:00'
-updatedAt: '2026-05-26T09:16:43.246+00:00'
+updatedAt: '2026-06-15T21:41:49.885+00:00'
 createdBy: 696fb1cc000eb33adee7
 teams: []
 status: public

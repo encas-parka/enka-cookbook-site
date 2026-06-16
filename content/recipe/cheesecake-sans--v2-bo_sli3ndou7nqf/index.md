@@ -1,6 +1,6 @@
 ---
 title: Cheesecake sans cuisson au miel et au yaourt v2
-date: '2026-05-27T10:21:17.517Z'
+date: '2026-06-16T10:59:15.681Z'
 draft: true
 typeR: dessert
 categories:
@@ -46,16 +46,6 @@ ingredients:
     normalizedQuantity: 60
     normalizedUnit: gr.
     comment: fondu
-    allergens:
-      - Produit laitier
-    type: frais
-  - uuid: 0d5y4q
-    name: Fromage frais
-    originalQuantity: 400
-    originalUnit: gr.
-    normalizedQuantity: 400
-    normalizedUnit: gr.
-    comment: type philadelphia
     allergens:
       - Produit laitier
     type: frais
@@ -108,6 +98,16 @@ ingredients:
     comment: pas forcément séchés
     allergens: []
     type: legumes
+  - uuid: 2s1qoq
+    name: Philadelphia ou autre marque moins cher
+    originalQuantity: 400
+    originalUnit: gr.
+    normalizedQuantity: 400
+    normalizedUnit: gr.
+    comment: ''
+    allergens:
+      - Produit laitier
+    type: frais
 preparation: |-
   1. Idéalement place du papier sulfurisé dans les gastros (tu peux y froisser pour que ça prenne bien la forme) 
   2. Place une passoire au-dessus d'un saladier et tapisse-la d'une étamine ou d'un torchon en coton bien propre. Verse le yaourt, relève les bords de l'étamine, forme une boule. Presse fermement pour enlever un max de liquide. Réserve la boule. 
@@ -123,7 +123,7 @@ permissionWrite:
   - 698a0ed8cdbfef3c7606
 auteur: boris
 createdAt: '2026-05-27T10:19:58.740+00:00'
-updatedAt: '2026-05-27T10:21:16.297+00:00'
+updatedAt: '2026-06-16T10:59:14.973+00:00'
 createdBy: 698a0ed8cdbfef3c7606
 teams: []
 status: public

@@ -12,7 +12,8 @@ import type {
 import {
   enrichMaterielFromAppwrite,
   enrichLoanFromAppwrite,
-  calculateLoanedQuantityForPeriod,
+  buildLoanItemsIndex,
+  sumLoanQuantityForPeriod,
 } from "$lib/utils/materiel.utils";
 import { materielTypeLabels } from "$lib/utils/share-utils";
 import { globalState } from "./GlobalState.svelte";
@@ -88,17 +89,27 @@ export class MaterielStore {
   // ENRICHED DERIVED DATA
   // =============================================================================
 
-  /** All materiels enriched with loan data (soft-deleted excluded) */
-  #enrichedMateriels = $derived.by(() =>
-    this.#raw.materiels
-      .filter((m) => !m.deleted)
-      .map((m) => enrichMaterielFromAppwrite(m, this.#raw.loans)),
-  );
-
-  /** All loans enriched with parsed materielItems */
+  /** All loans enriched with parsed materielItems (parse unique par loan) */
   #enrichedLoans = $derived.by(() =>
     this.#raw.loans.map((l) => enrichLoanFromAppwrite(l)),
   );
+
+  /**
+   * Index Map<materielId, LoanItemRef[]> construit en un seul parcours des loans
+   * enrichis. Élimine le re-parsing dans l'enrichissement et le calcul de dispo
+   * période (complexité O(M×L) → O(L+M)). Reconstruit réactivement à chaque
+   * changement de #raw.loans.
+   */
+  #loanItemsIndex = $derived.by(() => buildLoanItemsIndex(this.#enrichedLoans));
+
+  /** All materiels enriched with loan data (soft-deleted excluded) */
+  #enrichedMateriels = $derived.by(() => {
+    const now = new Date();
+    const index = this.#loanItemsIndex;
+    return this.#raw.materiels
+      .filter((m) => !m.deleted)
+      .map((m) => enrichMaterielFromAppwrite(m, index.get(m.$id) ?? [], now));
+  });
 
   // Public reactive lists
   get materiels() {
@@ -155,15 +166,15 @@ export class MaterielStore {
   ): Array<EnrichedMateriel & { availableForPeriod: number }> {
     const periodStart = new Date(startDate);
     const periodEnd = new Date(endDate);
-    const allLoans = this.#raw.loans;
+    const index = this.#loanItemsIndex;
 
     return this.#enrichedMateriels
       .filter((m) => m.ownerData?.teamId === teamId)
       .filter((m) => m.status !== "lost" && m.status !== "torepair")
       .map((materiel) => {
-        const loanedQuantity = calculateLoanedQuantityForPeriod(
-          materiel.$id,
-          allLoans,
+        const refs = index.get(materiel.$id) ?? [];
+        const loanedQuantity = sumLoanQuantityForPeriod(
+          refs,
           periodStart,
           periodEnd,
           excludeLoanId,
@@ -375,7 +386,10 @@ export class MaterielStore {
       );
 
       // Return enriched (will also update via liveQuery)
-      return enrichMaterielFromAppwrite(doc, this.#raw.loans);
+      return enrichMaterielFromAppwrite(
+        doc,
+        this.#loanItemsIndex.get(doc.$id) ?? [],
+      );
     } catch (err) {
       this.#error = err instanceof Error ? err.message : "Erreur de création";
       throw err;

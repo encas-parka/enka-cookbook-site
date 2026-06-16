@@ -186,7 +186,7 @@ export function getMaterielStatusLabel(
     lost: "Perdu",
     torepair: "À réparer",
     loan: "Emprunté",
-    reserved: "Réserver",
+    reserved: "Réservé",
   };
   return labels[status || "ok"] || status || "OK";
 }
@@ -348,6 +348,50 @@ export function enrichLoanFromAppwrite(
 }
 
 // =============================================================================
+// INDEX PRÉ-PARSÉ - Optimisation du calcul de disponibilité (O(M×L) → O(L+M))
+// =============================================================================
+
+/**
+ * Référence vers un item de loan pré-parsé, associé à son loan enrichi d'origine.
+ * Produit par buildLoanItemsIndex pour éviter le re-parsing à chaque calcul
+ * de disponibilité.
+ */
+export interface LoanItemRef {
+  /** Loan enrichi d'origine (porte status, dates, responsibleName) */
+  loan: EnrichedMaterielLoan;
+  /** Item pré-parsé, déjà scoping à un materielId donné */
+  item: MaterielLoanItem;
+}
+
+/**
+ * Construit un index Map<materielId, LoanItemRef[]> en un seul parcours
+ * des loans enrichis. Chaque loan.materiels n'est parsé qu'une seule fois
+ * (en amont par enrichLoanFromAppwrite), puis réutilisé ici sans re-parse.
+ *
+ * Permet à enrichMaterielFromAppwrite et sumLoanQuantityForPeriod de faire
+ * une lookup O(1) par matériel au lieu de reparcourir + reparser tous les loans.
+ *
+ * Complexité : O(nombre total d'items) = O(L × itemsParLoan), une fois par recompute.
+ */
+export function buildLoanItemsIndex(
+  enrichedLoans: EnrichedMaterielLoan[],
+): Map<string, LoanItemRef[]> {
+  const index = new Map<string, LoanItemRef[]>();
+  for (const loan of enrichedLoans) {
+    for (const item of loan.materielItems) {
+      const ref: LoanItemRef = { loan, item };
+      const refs = index.get(item.materielId);
+      if (refs) {
+        refs.push(ref);
+      } else {
+        index.set(item.materielId, [ref]);
+      }
+    }
+  }
+  return index;
+}
+
+// =============================================================================
 // ENRICHISSEMENT - Calcul des données dérivées depuis Appwrite
 // =============================================================================
 
@@ -361,29 +405,19 @@ export function enrichLoanFromAppwrite(
  */
 export function enrichMaterielFromAppwrite(
   doc: MaterielFromAppwrite,
-  allLoans: MaterielLoan[],
+  refsForMateriel: LoanItemRef[],
   now: Date = new Date(),
 ): EnrichedMateriel {
   // 1. Parser le propriétaire depuis Appwrite
   const ownerData = parseOwnerFromAppwrite(doc.owner);
 
-  // 2. Calculer les emprunts actifs/planifiés pour ce matériel
+  // 2. Calculer les emprunts actifs/planifiés pour ce matériel.
+  //    refsForMateriel est déjà pré-parsé et scoping à doc.$id (via buildLoanItemsIndex) :
+  //    plus ni parcours des loans ni JSON.parse ici (O(1) par lookup au lieu de O(L)).
   const loanDetails: MaterielLoanDetail[] = [];
   let totalLoanedQuantity = 0;
 
-  allLoans.forEach((loan) => {
-    // Parser les items du loan depuis Appwrite
-    const loanItems = parseLoanItemsFromAppwrite(loan.materiels);
-
-    // Filtrer les items pour ce matériel
-    const itemsForThisMateriel = loanItems.filter(
-      (item) => item.materielId === doc.$id,
-    );
-
-    if (itemsForThisMateriel.length === 0) {
-      return;
-    }
-
+  for (const { loan, item } of refsForMateriel) {
     // Vérifier si l'emprunt est actif ou planifié
     const startDate = new Date(loan.startDate);
     const endDate = new Date(loan.endDate);
@@ -394,25 +428,21 @@ export function enrichMaterielFromAppwrite(
 
     // Ajouter aux loanDetails si actif OU planifié
     if ((isActive || isPlanned) && isAcceptedOrAsked) {
-      itemsForThisMateriel.forEach((item) => {
-        loanDetails.push({
-          loanId: loan.$id,
-          responsibleName: loan.responsibleName || "",
-          startDate: loan.startDate,
-          endDate: loan.endDate,
-          quantity: item.quantity,
-          status: loan.status as "asked" | "accepted" | "canceled",
-        });
+      loanDetails.push({
+        loanId: loan.$id,
+        responsibleName: loan.responsibleName || "",
+        startDate: loan.startDate,
+        endDate: loan.endDate,
+        quantity: item.quantity,
+        status: loan.status as "asked" | "accepted" | "canceled",
       });
     }
 
     // N'ajouter à totalLoanedQuantity QUE si actif (pas planifié)
     if (isActive && isAcceptedOrAsked) {
-      itemsForThisMateriel.forEach((item) => {
-        totalLoanedQuantity += item.quantity;
-      });
+      totalLoanedQuantity += item.quantity;
     }
-  });
+  }
 
   // 3. Calculer le statut du matériel
   const hasActiveLoans = loanDetails.some((detail) => {
@@ -622,6 +652,36 @@ export function calculateLoanedQuantityForPeriod(
     total += itemsForThisMateriel.reduce((sum, item) => sum + item.quantity, 0);
   });
 
+  return total;
+}
+
+/**
+ * Variante optimisée de calculateLoanedQuantityForPeriod travaillant sur les
+ * refs pré-parsées (issues de buildLoanItemsIndex) plutôt que sur des loans bruts.
+ * Évite le re-parsing de loan.materiels à chaque appel — utilisé par le hot path
+ * (MaterielStore.getAvailableMaterielsForPeriod).
+ *
+ * @param refsForMateriel - Refs pré-parsées et scoping au matériel (via l'index)
+ * @param periodStart - Date de début de la période
+ * @param periodEnd - Date de fin de la période
+ * @param excludeLoanId - Optionnel : ID d'un emprunt à exclure (pour l'édition)
+ * @returns Quantité totale empruntée sur la période
+ */
+export function sumLoanQuantityForPeriod(
+  refsForMateriel: LoanItemRef[],
+  periodStart: Date,
+  periodEnd: Date,
+  excludeLoanId?: string,
+): number {
+  let total = 0;
+  for (const { loan, item } of refsForMateriel) {
+    if (excludeLoanId && loan.$id === excludeLoanId) continue;
+    if (!isLoanValid(loan)) continue;
+    const loanStart = new Date(loan.startDate);
+    const loanEnd = new Date(loan.endDate);
+    if (!doPeriodsOverlap(loanStart, loanEnd, periodStart, periodEnd)) continue;
+    total += item.quantity;
+  }
   return total;
 }
 

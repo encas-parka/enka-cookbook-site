@@ -25,8 +25,11 @@ const pwaConfig: Partial<VitePWAOptions> = {
     background_color: "#ffffff",
     lang: "fr",
     display: "standalone" as const,
-    start_url: "/app/",
-    scope: "/app/",
+    // start_url/scope à la racine : le routeur sv-router travaille sans base
+    // (URLs à la racine, ex. /recipe/123). start_url "/app/" chargeait une URL
+    // que le routeur ne sait pas matcher → 404 ENKA au réveil de la PWA installée.
+    start_url: "/",
+    scope: "/",
     icons: [
       {
         src: "192x192.png",

@@ -6,6 +6,7 @@
     MapPin,
     User,
     CircleDot,
+    X,
   } from "@lucide/svelte";
   import Fieldset from "$lib/components/ui/Fieldset.svelte";
   import CheckboxBadge from "$lib/components/ui/CheckboxBadge.svelte";
@@ -73,14 +74,21 @@
   </div>
 
   <!-- Recherche -->
-  <div>
+  <div class="input flex items-center gap-2">
     <input
       type="text"
-      class="input w-full"
+      class="grow"
       placeholder="Rechercher..."
       bind:value={filters.search}
       {disabled}
     />
+    <button
+      class="btn btn-xs btn-circle btn-error btn-outline opacity-60"
+      onclick={() => (filters.search = "")}
+      disabled={!filters.search}
+    >
+      <X class="h-4 w-4" />
+    </button>
   </div>
 
   <!-- Types -->

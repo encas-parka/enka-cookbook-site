@@ -358,47 +358,82 @@ export class EventMaterielStore {
   // =============================================================================
 
   /**
-   * Vérifie si un item individuel matche les filtres donnés.
-   * Utilisé pour le filtrage au niveau groupe.
+   * Vérifie si un GROUPE (header + allocations) matche les filtres donnés.
+   *
+   * Le filtrage est sémantiquement au niveau du groupe, pas de l'item individuel :
+   * un header a par construction who=null, where=null, status=to_find, donc tester
+   * le header individuellement court-circuite systématiquement les filtres who/where/status.
+   *
+   * Règles :
+   * - type      : sur header.type (intrinsèque au besoin)
+   * - status    : agrégé sur le groupe (remainingQty pour to_find, présence d'allocations pour les autres)
+   * - who/where : sur les allocations du groupe (valeur ou __none__ = aucune allocation avec valeur)
+   * - search    : dans header (name, notes) ET dans les allocations (who, where, notes)
    */
-  #itemMatchesFilters(
-    item: EventMateriel,
+  #groupMatchesFilters(
+    group: MaterielGroup,
     filters: EventMaterielFilters,
   ): boolean {
-    // Filtre par types
+    // Filtre par types (porté par le header)
     if (filters.types?.length) {
-      if (!filters.types.includes(item.type as EventMaterielType)) return false;
+      if (!filters.types.includes(group.header.type as EventMaterielType))
+        return false;
     }
 
-    // Filtre par statuts
+    // Filtre par statuts (agrégé au niveau groupe)
     if (filters.statuses?.length) {
-      if (!filters.statuses.includes(this.resolveStatus(item))) return false;
+      const matchesStatus = filters.statuses.some((status) => {
+        if (status === "to_find") {
+          // "À trouver" = besoin non couvert par to_check + confirmed
+          return group.remainingQty > 0;
+        }
+        if (status === "to_check" || status === "confirmed") {
+          return group.allocations.some(
+            (a) => this.resolveStatus(a) === status,
+          );
+        }
+        return false;
+      });
+      if (!matchesStatus) return false;
     }
 
-    // Filtre par qui (who)
+    // Filtre par qui (who) — sur les allocations
     if (filters.who?.length) {
-      const matchesWho =
-        (filters.who.includes("__none__") && !item.who) ||
-        filters.who.some((w) => w !== "__none__" && item.who === w);
+      const matchesWho = filters.who.some((w) => {
+        if (w === "__none__") {
+          // "Personne" : aucune allocation n'a un who défini
+          // (couvre : groupe sans allocation ET groupe avec allocations toutes sans who)
+          return !group.allocations.some((a) => a.who && a.who.trim());
+        }
+        return group.allocations.some((a) => a.who === w);
+      });
       if (!matchesWho) return false;
     }
 
-    // Filtre par où (where)
+    // Filtre par où (where) — sur les allocations
     if (filters.where?.length) {
-      const matchesWhere =
-        (filters.where.includes("__none__") && !item.where) ||
-        filters.where.some((w) => w !== "__none__" && item.where === w);
+      const matchesWhere = filters.where.some((w) => {
+        if (w === "__none__") {
+          // "À trouver" : aucune allocation n'a un where défini
+          return !group.allocations.some((a) => a.where && a.where.trim());
+        }
+        return group.allocations.some((a) => a.where === w);
+      });
       if (!matchesWhere) return false;
     }
 
-    // Recherche globale
+    // Recherche globale — header + allocations
     if (filters.search) {
       const search = filters.search.toLowerCase();
       const matchesSearch =
-        (item.name || "").toLowerCase().includes(search) ||
-        item.who?.toLowerCase().includes(search) ||
-        item.where?.toLowerCase().includes(search) ||
-        item.notes?.toLowerCase().includes(search);
+        (group.header.name || "").toLowerCase().includes(search) ||
+        (group.header.notes?.toLowerCase().includes(search) ?? false) ||
+        group.allocations.some(
+          (a) =>
+            (a.who?.toLowerCase().includes(search) ?? false) ||
+            (a.where?.toLowerCase().includes(search) ?? false) ||
+            (a.notes?.toLowerCase().includes(search) ?? false),
+        );
       if (!matchesSearch) return false;
     }
 
@@ -495,19 +530,17 @@ export class EventMaterielStore {
     }
 
     // Allocations orphelines : groupId pointe vers un header introuvable
-    // (ex: header supprimé) → on les ignore dans le regroupement
-    // Elles resteront visibles dans les filtres si elles matchent
+    // (ex: header supprimé) → ignorées : le filtrage étant au niveau groupe,
+    // une allocation sans header n'est jamais affichée.
 
     // Étape 2 : Filtrer au niveau groupe
-    // Un groupe est affiché si son header OU au moins une allocation matche les filtres
+    // Un groupe est affiché si lui-même (header + allocations agrégés) matche les filtres.
+    // Voir #groupMatchesFilters pour la sémantique détaillée.
     let filteredGroups = allGroups;
     if (hasFilters) {
-      filteredGroups = allGroups.filter((group) => {
-        if (this.#itemMatchesFilters(group.header, filters)) return true;
-        return group.allocations.some((a) =>
-          this.#itemMatchesFilters(a, filters),
-        );
-      });
+      filteredGroups = allGroups.filter((group) =>
+        this.#groupMatchesFilters(group, filters),
+      );
     }
 
     // Étape 3 : Trier les groupes

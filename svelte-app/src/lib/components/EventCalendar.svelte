@@ -145,7 +145,9 @@
               {@const bgColor = getRecipeColor(recipe.typeR)}
               <div class="indicator w-full">
                 {#if recipe.preparation24h}
-                  <span class="indicator-item status status-md status-warning badge-xs"></span>
+                  <span
+                    class="indicator-item status status-md status-warning badge-xs"
+                  ></span>
                 {/if}
                 <button
                   class="mb-1 flex w-full items-center gap-1 rounded-md border px-1.5 py-0.5 text-left text-xs leading-tight transition-colors hover:cursor-pointer sm:text-sm {selectedRecipeUuid ===
@@ -179,7 +181,9 @@
                 {@const bgColor = getRecipeColor(recipe.typeR)}
                 <div class="indicator w-full">
                   {#if recipe.preparation24h}
-                    <span class="indicator-item status status-md status-warning badge-xs"></span>
+                    <span
+                      class="indicator-item status status-md status-warning badge-xs"
+                    ></span>
                   {/if}
                   <button
                     class="mb-1 flex w-full items-center gap-1 rounded-md border px-1.5 py-0.5 text-left text-xs leading-tight transition-colors sm:text-sm {selectedRecipeUuid ===

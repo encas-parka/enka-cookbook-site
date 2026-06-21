@@ -14,6 +14,7 @@
   import AutocompleteInput from "$lib/components/ui/AutocompleteInput.svelte";
   import { formatDateShort } from "$lib/utils/products-display";
   import EventCalendar from "$lib/components/EventCalendar.svelte";
+  import EventCalendarPrint from "$lib/components/EventCalendarPrint.svelte";
   import {
     ArrowLeft,
     Calendar,
@@ -49,7 +50,8 @@
   // Permission d'édition
   const canEdit = $derived(
     eventId && globalState.userId
-      ? online.current && eventsStore.canUserEditEvent(eventId, globalState.userId)
+      ? online.current &&
+          eventsStore.canUserEditEvent(eventId, globalState.userId)
       : false,
   );
 
@@ -431,6 +433,84 @@
     return () => observer.disconnect();
   });
 
+  // ============================================================================
+  // IMPRESSION : deux modes disponibles via dropdown navbar.
+  //  - "Imprimer les recettes" (handlePrintRecipes) : force la pagination
+  //    complète, attend le rendu, puis window.print(). C'est aussi le
+  //    comportement par défaut de Ctrl+P / Cmd+P (contenu principal).
+  //  - "Imprimer le tableau" (handlePrintCalendar) : bascule en mode calendrier
+  //    (recettes masquées, calendrier visible en noir et blanc), injecte la
+  //    règle @page landscape, ouvre le dialogue, puis nettoie via afterprint.
+  //    Disponible uniquement si calendarVisible.
+  // Le lazy load remplit son rôle (décharger le rendu initial) ; une fois tout
+  // chargé, currentPage reste à max — pas besoin de restaurer.
+  // ============================================================================
+  let isPreparingPrint = $state(false);
+  let isPrintingCalendar = $state(false);
+
+  /** Force la pagination complète pour révéler toutes les meals. */
+  function forceFullPaginationForPrint(): boolean {
+    if (currentPage * pageSize < mealsToPaginate.length) {
+      currentPage = Math.ceil(mealsToPaginate.length / pageSize) + 1;
+      return true;
+    }
+    return false;
+  }
+
+  /** Impression des recettes (bouton + Ctrl+P par défaut). */
+  async function handlePrintRecipes() {
+    if (isPreparingPrint) return;
+    isPrintingCalendar = false;
+    if (forceFullPaginationForPrint()) {
+      isPreparingPrint = true;
+      await tick();
+      // Laisser le navigateur peindre les nouvelles cartes
+      await new Promise<void>((resolve) =>
+        requestAnimationFrame(() => resolve()),
+      );
+      isPreparingPrint = false;
+    }
+    window.print();
+  }
+
+  /** Impression du calendrier en mode paysage (bouton, si calendarVisible). */
+  async function handlePrintCalendar() {
+    if (isPreparingPrint || !calendarVisible) return;
+    isPrintingCalendar = true;
+
+    // @page ne peut pas être conditionnel via classe : injection dynamique
+    const styleEl = document.createElement("style");
+    styleEl.id = "print-calendar-page";
+    styleEl.textContent = "@page { size: A4 landscape; margin: 1cm; }";
+    document.head.appendChild(styleEl);
+
+    const cleanup = () => {
+      styleEl.remove();
+      isPrintingCalendar = false;
+      window.removeEventListener("afterprint", cleanup);
+    };
+    window.addEventListener("afterprint", cleanup, { once: true });
+
+    await tick();
+    await new Promise<void>((resolve) =>
+      requestAnimationFrame(() => resolve()),
+    );
+    window.print();
+  }
+
+  // Capture Ctrl+P / Cmd+P : imprime les recettes par défaut (contenu principal).
+  $effect(() => {
+    const onKeyDown = (e: KeyboardEvent) => {
+      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "p") {
+        e.preventDefault();
+        e.stopPropagation();
+        handlePrintRecipes();
+      }
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  });
+
   // Reset pagination quand les filtres changent
   $effect(() => {
     urlFilter;
@@ -489,10 +569,40 @@
 
 {#snippet navActions()}
   <div class="flex gap-2 max-sm:hidden">
-    <button
-      class="btn btn-sm btn-circle btn-primary"
-      onclick={() => window.print()}><Printer size={18} /></button
-    >
+    <div class="dropdown dropdown-end">
+      <div
+        class="btn btn-sm btn-circle btn-primary"
+        tabindex="0"
+        role="button"
+        title="Imprimer"
+      >
+        {#if isPreparingPrint}
+          <span class="loading loading-spinner loading-sm"></span>
+        {:else}
+          <Printer size={18} />
+        {/if}
+      </div>
+      <!-- svelte-ignore a11y_no_noninteractive_tabindex -->
+      <ul
+        class="dropdown-content menu bg-base-100 rounded-box z-10 w-52 p-2 shadow-lg"
+        tabindex="0"
+      >
+        {#if calendarVisible}
+          <li>
+            <button onclick={handlePrintCalendar}>
+              <CalendarDays size={16} />
+              Imprimer le tableau
+            </button>
+          </li>
+        {/if}
+        <li>
+          <button onclick={handlePrintRecipes}>
+            <Printer size={16} />
+            Imprimer les recettes
+          </button>
+        </li>
+      </ul>
+    </div>
   </div>
 {/snippet}
 
@@ -552,6 +662,8 @@
 
     <!-- Calendrier (conditionnel) -->
     {#if calendarVisible}
+      <!-- Calendrier interactif (écran uniquement — jamais imprimé :
+           EventCalendarPrint dédié prend le relais en print mode calendrier) -->
       <div
         class="max-w-9xl mx-auto px-2 py-6 sm:px-4 print:hidden"
         transition:slide
@@ -565,6 +677,13 @@
           onFilterMeal={setFilterMeal}
           onClearFilters={clearAllFilters}
         />
+      </div>
+
+      <!-- Calendrier d'impression dédié (visible uniquement en print mode
+           calendrier). <table> sémantique, court-circuite les règles globales
+           app.css qui détruisent les grids en print. -->
+      <div class="hidden {isPrintingCalendar ? 'print:block' : ''}">
+        <EventCalendarPrint columns={calendarColumns} />
       </div>
     {/if}
 
@@ -790,7 +909,7 @@
         </div>
 
         <!-- Contenu principal (sans ml-96 car LeftPanel est sticky dans le flux) -->
-        <div class="flex-1">
+        <div class="flex-1 {isPrintingCalendar ? 'print:hidden' : ''}">
           <div class="mx-auto max-w-6xl p-4 pb-20">
             {#if urlFilter.ingredient}
               <!-- Mode recherche par ingrédient -->

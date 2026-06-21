@@ -1,1 +1,0 @@
-import"./rolldown-runtime-B9KmgOQC.js";import{Rn as e,jn as t,y as n,zn as r}from"./appwrite-DGhfQOkf.js";function OverrideConflictModal(i,a){r(a,!0),t(()=>n.modalOverride.conflicts),e()}export{OverrideConflictModal as default};

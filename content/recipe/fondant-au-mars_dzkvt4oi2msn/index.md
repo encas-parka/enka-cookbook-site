@@ -1,6 +1,6 @@
 ---
 title: Fondant au mars
-date: '2026-05-29T19:51:37.286Z'
+date: '2026-06-24T15:05:53.179Z'
 draft: true
 typeR: dessert
 categories: []
@@ -68,12 +68,13 @@ ingredients:
       - Vérifier emballage
     type: autres
 preparation: |-
-  \*Ajouter les mars dans les ingrédients
 
-  - Faites fondre le chocolat et les Mars coupés en morceaux dans le beurre à feu doux. 
+  - Faites fondre le chocolat et les Mars coupés en morceaux dans le beurre à feu doux.
   - Hors du feu, incorporez les œufs et la farine.
-  - Versez la pâte dans une poêle beurrée et farinée. 
+  - Versez la pâte dans une poêle beurrée et farinée.
   - Couvrez et faites cuire sur feu moyen 8 minutes, retournez et faites cuire l'autre face 2 minutes. Laissez refroidir au frais 2 heures.
+
+  (on se permet de cuire au four en bac gastro pour une version cuisine collective hors prison)
 prepAlt: []
 astuces: []
 preparation24h: null
@@ -81,7 +82,7 @@ permissionWrite:
   - 69b2b4d10025449a9043
 auteur: frerylila
 createdAt: '2026-05-27T10:22:15.030+00:00'
-updatedAt: '2026-05-29T19:51:36.757+00:00'
+updatedAt: '2026-06-24T15:05:52.737+00:00'
 createdBy: 69b2b4d10025449a9043
 teams: []
 status: public

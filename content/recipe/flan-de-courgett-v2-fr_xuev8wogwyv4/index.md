@@ -1,6 +1,6 @@
 ---
 title: Flan de courgette vegan
-date: '2026-06-24T14:34:08.395Z'
+date: '2026-06-24T14:41:19.450Z'
 draft: true
 typeR: entree
 categories: []
@@ -78,6 +78,8 @@ preparation: |-
   - Coupez la courgette en petits cubes et faites-les rissoler à la margarine dans une poêle.
   - Battez le yaourt de soja avec la farine de pois chiche, le sel et poivre dans un bol et versez ce mélange dans la poêle sur les courgettes quand elles sont cuites à votre convenance.
   - Cuire sur feu doux couvert pendant 30 minutes environ.
+
+  (on se permet de cuire au four en bac gastro pour une version cuisine collective hors prison)
 prepAlt: []
 astuces: []
 preparation24h: null
@@ -85,7 +87,7 @@ permissionWrite:
   - 69b2b4d10025449a9043
 auteur: frerylila
 createdAt: '2026-05-29T19:48:30.803+00:00'
-updatedAt: '2026-06-24T14:34:04.991+00:00'
+updatedAt: '2026-06-24T14:41:19.162+00:00'
 createdBy: 69b2b4d10025449a9043
 teams: []
 status: public

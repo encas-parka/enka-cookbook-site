@@ -30,6 +30,8 @@
     Smartphone,
     ScrollText,
     ClipboardX,
+    ChevronDown,
+    ChevronUp,
   } from "@lucide/svelte";
 
   // UI Components
@@ -42,6 +44,7 @@
   // Stores
   import { globalState, hoverHelp } from "$lib/stores/GlobalState.svelte";
   import { productsStore } from "$lib/stores/ProductsStore.svelte";
+  import { formatSingleQuantity } from "@/lib/utils/QuantityFormatter";
 
   // Status icon mapping (same as ProductCard)
   const statusIcons = {
@@ -71,6 +74,11 @@
     onQuickValidation,
     showRecipeDetails,
   }: Props = $props();
+
+  // Toggle local du détail des recettes (par card)
+  // combiné au réglage global : global ON déplie tout, local permet un dépliage ponctuel
+  let localShowDetails = $state(false);
+  const showDetails = $derived(showRecipeDetails || localShowDetails);
 
   // Reactive data from productModel
   const product = $derived(productModel.data);
@@ -115,15 +123,38 @@
 
     <!-- 📅 Dates concernées -->
     {#if productInDateRange.concernedDates.length > 0}
-      <div class="text-base-content/60 flex flex-wrap items-center gap-1">
-        {#each productInDateRange.concernedDates as date (date)}
-          {@const recipes = productInDateRange.recipesByDate.get(date) || []}
-          {@const dateDisplayInfo =
-            productModel.data.dateDisplayInfo[date] ||
-            calculateDateDisplayInfo(date)}
-          <DateBadge {dateDisplayInfo} {recipes} />
-        {/each}
-      </div>
+      {#if showRecipeDetails}
+        <div class="text-base-content/60 flex flex-wrap items-center gap-1">
+          {#each productInDateRange.concernedDates as date (date)}
+            {@const dateDisplayInfo =
+              productModel.data.dateDisplayInfo[date] ||
+              calculateDateDisplayInfo(date)}
+            <DateBadge {dateDisplayInfo} />
+          {/each}
+        </div>
+      {:else}
+        <button
+          type="button"
+          class="text-base-content/60 hover:bg-base-200/40 flex cursor-pointer flex-wrap items-center gap-1 rounded-md transition-colors"
+          onclick={() => (localShowDetails = !localShowDetails)}
+          aria-expanded={localShowDetails}
+          title={localShowDetails
+            ? "Masquer le détail des recettes"
+            : "Voir le détail des recettes"}
+        >
+          {#each productInDateRange.concernedDates as date (date)}
+            {@const dateDisplayInfo =
+              productModel.data.dateDisplayInfo[date] ||
+              calculateDateDisplayInfo(date)}
+            <DateBadge {dateDisplayInfo} />
+          {/each}
+          {#if localShowDetails}
+            <ChevronUp size={13} />
+          {:else}
+            <ChevronDown size={13} />
+          {/if}
+        </button>
+      {/if}
     {/if}
 
     <!-- Store + Who sub-group (truncated) -->
@@ -197,10 +228,11 @@
           </span>
           {productInDateRange.formattedMissingQuantities}
           <span class="text-base-content/60 text-sm font-normal"
-            >/
-            {totalNeededOverride.totalOverride.q}
-            {totalNeededOverride.totalOverride.u}</span
-          >
+            >/ {formatSingleQuantity(
+              totalNeededOverride.totalOverride.q,
+              totalNeededOverride.totalOverride.u,
+            )}
+          </span>
         {:else}
           <span>{productInDateRange.formattedMissingQuantities}</span>
           <span class="text-base-content/60 text-sm font-normal">
@@ -246,7 +278,7 @@
     </button>
   </div>
 
-  {#if showRecipeDetails}
+  {#if showDetails}
     <div class="w-full" transition:slide={{ duration: 200 }}>
       <ProductRecipeDetails
         recipesByDate={productInDateRange.recipesByDate}

@@ -36,6 +36,8 @@
     PackageCheck,
     Check,
     Package,
+    ChevronDown,
+    ChevronUp,
   } from "@lucide/svelte";
 
   // UI Components
@@ -46,8 +48,8 @@
 
   // Stores
   import { globalState, hoverHelp } from "$lib/stores/GlobalState.svelte";
-  import { productsStore } from "$lib/stores/ProductsStore.svelte";
   import { slide } from "svelte/transition";
+  import { formatSingleQuantity } from "@/lib/utils/QuantityFormatter";
 
   // Récupérer les icônes de statut depuis le parent pour éviter la duplication
   const statusIcons = {
@@ -78,6 +80,11 @@
     showRecipeDetails,
   }: Props = $props();
 
+  // Toggle local du détail des recettes (par card)
+  // combiné au réglage global : global ON déplie tout, local permet un dépliage ponctuel
+  let localShowDetails = $state(false);
+  const showDetails = $derived(showRecipeDetails || localShowDetails);
+
   // Données réactives dérivées du productModel
   const product = $derived(productModel.data);
   const productInDateRange = $derived(productModel.stats);
@@ -100,20 +107,18 @@
     <!-- Première ligne: Titre/Type à gauche, Store/Who à droite -->
     <div class="flex items-start justify-between">
       <!-- Section gauche: Titre & Type (prend la place disponible) -->
-      <div
-        class="flex flex-1 cursor-pointer flex-wrap items-center gap-4"
-        role="button"
-        tabindex="0"
-        onclick={() => onOpenModal(product.$id, "recettes")}
-        onkeydown={(e) =>
-          e.key === "Enter" && onOpenModal(product.$id, "recettes")}
-        onmouseenter={() =>
-          (hoverHelp.msg = "Afficher les informations sur ce produit")}
-        onmouseleave={() => hoverHelp.reset()}
-      >
+      <div class="flex flex-1 flex-wrap items-center gap-4">
         <!-- Nom du produit & type icon -->
         <div
-          class="text-primary flex flex-wrap items-center gap-x-2 gap-y-1 text-base font-semibold"
+          class="text-primary flex cursor-pointer flex-wrap items-center gap-x-2 gap-y-1 text-base font-semibold"
+          role="button"
+          tabindex="0"
+          onclick={() => onOpenModal(product.$id, "recettes")}
+          onkeydown={(e) =>
+            e.key === "Enter" && onOpenModal(product.$id, "recettes")}
+          onmouseenter={() =>
+            (hoverHelp.msg = "Afficher les informations sur ce produit")}
+          onmouseleave={() => hoverHelp.reset()}
         >
           <typeInfo.icon class="h-4 w-4 shrink-0" />{product.productName}
           {#if product.mergedFrom?.length}
@@ -164,16 +169,41 @@
         <!-- 📅 Dates concernées (desktop only: sinon wrap degeu) -->
         {#if !globalState.isMobile && productInDateRange.concernedDates.length > 0}
           <div class="text-base-content/60">
-            <div class="flex flex-wrap items-center gap-1">
-              {#each productInDateRange.concernedDates as date (date)}
-                {@const recipes =
-                  productInDateRange.recipesByDate.get(date) || []}
-                {@const dateDisplayInfo =
-                  productModel.data.dateDisplayInfo[date] ||
-                  calculateDateDisplayInfo(date)}
-                <DateBadge {dateDisplayInfo} {recipes} />
-              {/each}
-            </div>
+            {#if showRecipeDetails}
+              <div class="flex flex-wrap items-center gap-1">
+                {#each productInDateRange.concernedDates as date (date)}
+                  {@const dateDisplayInfo =
+                    productModel.data.dateDisplayInfo[date] ||
+                    calculateDateDisplayInfo(date)}
+                  <DateBadge {dateDisplayInfo} />
+                {/each}
+              </div>
+            {:else}
+              <button
+                type="button"
+                class="hover:bg-base-200/40 flex cursor-pointer flex-wrap items-center gap-1 rounded-md transition-colors"
+                onclick={() => (localShowDetails = !localShowDetails)}
+                onmouseenter={() =>
+                  (hoverHelp.msg = "Cliquez pour voir le détail des recettes")}
+                onmouseleave={() => hoverHelp.reset()}
+                aria-expanded={localShowDetails}
+                title={localShowDetails
+                  ? "Masquer le détail des recettes"
+                  : "Voir le détail des recettes"}
+              >
+                {#each productInDateRange.concernedDates as date (date)}
+                  {@const dateDisplayInfo =
+                    productModel.data.dateDisplayInfo[date] ||
+                    calculateDateDisplayInfo(date)}
+                  <DateBadge {dateDisplayInfo} />
+                {/each}
+                {#if localShowDetails}
+                  <ChevronUp size={14} />
+                {:else}
+                  <ChevronDown size={14} />
+                {/if}
+              </button>
+            {/if}
           </div>
         {/if}
       </div>
@@ -273,20 +303,46 @@
     <!-- 📅 Dates concernées (mobile only) -->
     {#if globalState.isMobile && productInDateRange.concernedDates.length > 0}
       <div class="text-base-content/60">
-        <div class="flex flex-wrap gap-1">
-          {#each productInDateRange.concernedDates as date (date)}
-            {@const recipes = productInDateRange.recipesByDate.get(date) || []}
-            {@const dateDisplayInfo =
-              productModel.data.dateDisplayInfo[date] ||
-              calculateDateDisplayInfo(date)}
-            <DateBadge {dateDisplayInfo} {recipes} />
-          {/each}
-        </div>
+        {#if showRecipeDetails}
+          <div class="flex flex-wrap items-center gap-1">
+            {#each productInDateRange.concernedDates as date (date)}
+              {@const dateDisplayInfo =
+                productModel.data.dateDisplayInfo[date] ||
+                calculateDateDisplayInfo(date)}
+              <DateBadge {dateDisplayInfo} />
+            {/each}
+          </div>
+        {:else}
+          <button
+            type="button"
+            class="hover:bg-base-200/40 flex cursor-pointer flex-wrap items-center gap-1 rounded-md transition-colors"
+            onclick={() => (localShowDetails = !localShowDetails)}
+            aria-expanded={localShowDetails}
+            title={localShowDetails
+              ? "Masquer le détail des recettes"
+              : "Voir le détail des recettes"}
+          >
+            {#each productInDateRange.concernedDates as date (date)}
+              {@const dateDisplayInfo =
+                productModel.data.dateDisplayInfo[date] ||
+                calculateDateDisplayInfo(date)}
+              <DateBadge {dateDisplayInfo} />
+            {/each}
+            {#if localShowDetails}
+              <ChevronUp size={14} />
+            {:else}
+              <ChevronDown size={14} />
+            {/if}
+          </button>
+        {/if}
       </div>
     {/if}
 
     <!-- Deuxième ligne: Groupe Besoins + Achats + Manquants (flex wrap) -->
-    <div class="flex min-h-12 flex-wrap gap-3" id="card-needs-missing">
+    <div
+      class="flex min-h-12 gap-3 max-md:flex-col md:flex-wrap"
+      id="card-needs-missing"
+    >
       <!-- Besoins -->
       <div class="flex min-w-75 flex-1 flex-col">
         <div class="text-base-content/60 ms-1 text-sm">
@@ -321,8 +377,10 @@
                     >{productInDateRange.formattedQuantities}</span
                   >
                   <ClipboardPenLine class="h-4 w-4" />
-                  {totalNeededOverride.totalOverride.q}
-                  {totalNeededOverride.totalOverride.u}
+                  {formatSingleQuantity(
+                    totalNeededOverride.totalOverride.q,
+                    totalNeededOverride.totalOverride.u,
+                  )}
                 </div>
               {:else}
                 <span> {productInDateRange.formattedQuantities}</span>
@@ -437,9 +495,12 @@
                 purchase.store ? purchase.store : null,
                 purchase.who ? purchase.who : null,
               ].filter(Boolean)}
-              {@const tooltipText = tooltipParts.length > 0 ? tooltipParts.join(' · ') : ''}
+              {@const tooltipText =
+                tooltipParts.length > 0 ? tooltipParts.join(" · ") : ""}
               <div
-                class="badge badge-outline badge-lg flex h-auto flex-col items-center gap-1 {purchase.badgeClass} {tooltipText ? 'tooltip tooltip-top' : ''}"
+                class="badge badge-outline badge-lg flex h-auto flex-col items-center gap-1 {purchase.badgeClass} {tooltipText
+                  ? 'tooltip tooltip-top'
+                  : ''}"
                 data-tip={tooltipText || undefined}
               >
                 <div class="flex items-center gap-1">
@@ -469,7 +530,7 @@
       </div>
     </div>
 
-    {#if showRecipeDetails}
+    {#if showDetails}
       <div transition:slide={{ duration: 200 }}>
         <ProductRecipeDetails
           recipesByDate={productInDateRange.recipesByDate}

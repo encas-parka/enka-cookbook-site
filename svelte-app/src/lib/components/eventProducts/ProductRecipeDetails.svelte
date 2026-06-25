@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Sun, Moon, Cloud, Utensils } from "@lucide/svelte";
+  import { Sun, Moon, Cloud, Utensils, Eye } from "@lucide/svelte";
   import type { RecipeOccurrence } from "$lib/types/store.types";
   import { calculateDateDisplayInfo } from "$lib/utils/dateRange";
   import { recipeDrawer } from "$lib/stores/RecipeDrawer.svelte";
@@ -61,6 +61,7 @@
         <span class="shrink-0 font-medium whitespace-nowrap">
           {formatSingleQuantity(recipe.qEq, recipe.uEq)}
         </span>
+        <Eye size={14} class="ms-auto" />
       </button>
     {/each}
   </div>

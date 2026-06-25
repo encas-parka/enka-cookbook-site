@@ -26,6 +26,9 @@ import {
   calculateAndFormatMissing,
   safeJsonParse,
   slugify,
+  normalizeQty,
+  getEffectiveNeededQuantities,
+  getNormalizedOverride,
 } from "./productsUtils";
 import {
   formatTotalQuantity,
@@ -68,15 +71,6 @@ type ProductWithOptionalPurchases = Partial<Models.Row> & {
  * Ne contient que les données Appwrite parsées + purchases agrégées.
  * Les champs Hugo (byDate, nbRecipes, etc.) sont à leurs valeurs par défaut.
  */
-/**
- * Normalise une quantité via UnitConverter et retourne un NumericQuantity.
- * Utilisé comme safety net pour les données legacy non normalisées.
- */
-function normalizeQty(q: number, u: string): NumericQuantity {
-  const n = UnitConverter.normalize(q, u);
-  return { q: n.quantity, u: n.unit };
-}
-
 export function buildRawProductBase(
   product: ProductWithOptionalPurchases,
 ): EnrichedProduct {
@@ -101,14 +95,16 @@ export function buildRawProductBase(
     product.totalNeededOverride,
   );
 
-  // Safety net : normaliser l'override (même raison que totalNeededArray).
-  const rawOverride = totalNeededOverrideParsed?.totalOverride;
-  const normalizedOverride = rawOverride
-    ? normalizeQty(rawOverride.q, rawOverride.u)
-    : null;
-  const effectiveNeededArray: NumericQuantity[] = normalizedOverride
-    ? [normalizedOverride]
-    : totalNeededArray;
+  // Besoin effectif : override normalisé s'il existe, sinon totalNeededArray.
+  // Passe par le point de vérité unique (productsUtils) pour garantir la
+  // normalisation de l'override (cohérence avec les achats normalisés).
+  const effectiveNeededArray = getEffectiveNeededQuantities(
+    { totalNeededOverrideParsed },
+    totalNeededArray,
+  );
+  const normalizedOverride = getNormalizedOverride({
+    totalNeededOverrideParsed,
+  });
 
   const { numeric: missingQuantityArray, display: displayMissingQuantity } =
     calculateAndFormatMissing(effectiveNeededArray, totalPurchasesArray);
@@ -191,14 +187,10 @@ export function applyNeedToBase(
   base.totalAssiettes = need.totalAssiettes;
   base.dateDisplayInfo = need.dateDisplayInfo;
 
-  const effectiveNeededArray = base.totalNeededOverrideParsed
-    ? [
-        normalizeQty(
-          base.totalNeededOverrideParsed.totalOverride.q,
-          base.totalNeededOverrideParsed.totalOverride.u,
-        ),
-      ]
-    : base.totalNeededArray;
+  const effectiveNeededArray = getEffectiveNeededQuantities(
+    base,
+    base.totalNeededArray,
+  );
   const { numeric: missingQuantityArray, display: displayMissingQuantity } =
     calculateAndFormatMissing(effectiveNeededArray, base.totalPurchasesArray);
 
@@ -372,11 +364,14 @@ export function mergeEnrichedProducts(
   target.displayTotalNeeded = formatTotalQuantity(target.totalNeededArray);
 
   // 5. Recalculer missing (sans purchases au stade initial)
+  // Passe par le point de vérité unique : si la cible a un override, il prime
+  // (et est normalisé) sur le totalNeededArray calculé.
+  const effectiveNeededArray = getEffectiveNeededQuantities(
+    target,
+    target.totalNeededArray,
+  );
   const { numeric: missingQuantityArray, display: displayMissingQuantity } =
-    calculateAndFormatMissing(
-      target.totalNeededArray,
-      target.totalPurchasesArray,
-    );
+    calculateAndFormatMissing(effectiveNeededArray, target.totalPurchasesArray);
   target.missingQuantityArray = missingQuantityArray;
   target.displayMissingQuantity = displayMissingQuantity;
 

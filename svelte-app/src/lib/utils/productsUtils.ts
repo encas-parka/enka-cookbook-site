@@ -4,9 +4,11 @@ import type {
   EnrichedProduct,
   NumericQuantity,
   RecipeWithDate,
+  TotalNeededOverrideData,
 } from "../types/store.types";
 
 import { aggregateByUnit, formatSingleQuantity } from "./QuantityFormatter";
+import { UnitConverter } from "./UnitConverter";
 
 /**
  * Interface pour l'état des filtres
@@ -44,6 +46,50 @@ export function safeJsonParse<T>(jsonString: string | null): T | null {
     console.warn("[ProductsStore] Erreur parsing JSON:", err);
     return null;
   }
+}
+
+/**
+ * Normalise une quantité via UnitConverter et retourne un NumericQuantity.
+ * Safety net pour les données legacy non normalisées (kg→gr., l.→ml).
+ */
+export function normalizeQty(q: number, u: string): NumericQuantity {
+  const n = UnitConverter.normalize(q, u);
+  return { q: n.quantity, u: n.unit };
+}
+
+/**
+ * Retourne l'override manuel normalisé (gr./ml.) ou null.
+ * Safety net pour les données legacy stockées dans une unité non normalisée
+ * (kg/l.) : la normalisation garantit la cohérence avec les achats.
+ */
+export function getNormalizedOverride(product: {
+  totalNeededOverrideParsed: TotalNeededOverrideData | null;
+}): NumericQuantity | null {
+  const rawOverride = product.totalNeededOverrideParsed?.totalOverride;
+  return rawOverride ? normalizeQty(rawOverride.q, rawOverride.u) : null;
+}
+
+/**
+ * Retourne le besoin effectif d'un produit : override manuel normalisé s'il
+ * existe, sinon le fallback fourni par l'appelant.
+ *
+ * POINT DE VÉRITÉ UNIQUE pour le « besoin effectif » : les chemins de calcul
+ * du stock manquant (calcul plat dans productEnrichment, calcul daté dans
+ * dateRange, merge de produits) doivent passer par ici. Cela garantit que
+ * l'override est TOUJOURS normalisé (gr./ml.), cohérent avec les achats.
+ *
+ * @param product  Produit enrichi (ou partie) contenant l'override parsé
+ * @param fallback Besoin à utiliser en l'absence d'override
+ *                   (totalNeededArray global, ou requiredQuantities datées)
+ */
+export function getEffectiveNeededQuantities(
+  product: {
+    totalNeededOverrideParsed: TotalNeededOverrideData | null;
+  },
+  fallback: NumericQuantity[],
+): NumericQuantity[] {
+  const normalizedOverride = getNormalizedOverride(product);
+  return normalizedOverride ? [normalizedOverride] : fallback;
 }
 
 /**

@@ -19,6 +19,7 @@
     "agent/*",
     ".agents/*",
     "AGENTS.md",
+    ".serena",
   ],
   "context_servers": {
     "serena": {

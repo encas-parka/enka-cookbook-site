@@ -1,0 +1,1 @@
+import{Un as e}from"./appwrite-Bopvl9a-.js";e();

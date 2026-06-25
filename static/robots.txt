@@ -9,7 +9,6 @@ Allow: /recipe/
 Allow: /data/
 Allow: /images/
 Allow: /icons/
-Allow: /evenements/
 Allow: /app/
 Allow: /index.html
 

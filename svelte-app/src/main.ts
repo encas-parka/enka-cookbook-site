@@ -13,6 +13,7 @@ import {
 } from "$lib/db-sync/aw-realtime";
 import { statusBarStore } from "$lib/stores/StatusBarStore.svelte";
 import { updateStore } from "$lib/stores/UpdateStore.svelte";
+import { handleChunkError, isChunkLoadError } from "$lib/sw-reload-guard";
 
 /**
  * Time threshold under which we skip the post-reconnect resync.
@@ -167,37 +168,12 @@ function handlePageShow(event: PageTransitionEvent): void {
   });
 }
 
-/**
- * Détecte une erreur de chargement de chunk (import dynamique échoué).
- * Couvre Chrome, Firefox et Safari.
- */
-function isChunkLoadError(error: unknown): boolean {
-  return (
-    error instanceof TypeError &&
-    /dynamically imported module|importing.*module.*script/i.test(
-      error.message ?? "",
-    )
-  );
-}
-
 // Filet de sécurité : si un chunk JS échoue à charger (build déployé,
-// onglet ouvert en arrière-plan, precache nettoyé…), on reload
-// automatiquement au lieu de laisser l'app dans un état cassé.
-// Flag sessionStorage pour éviter une boucle de reload infinie.
+// onglet ouvert en arrière-plan, precache nettoyé…), on tente un reload
+// de réparation. Borné à MAX_RELOADS tentatives consécutives pour éviter
+// une boucle infinie (cf. sw-reload-guard.ts). Réarmé après un boot réussi.
 window.addEventListener("unhandledrejection", (event) => {
-  if (
-    isChunkLoadError(event.reason) &&
-    !sessionStorage.getItem("sw-reload-attempted")
-  ) {
-    console.warn("[SW] Chunk load error — rechargement automatique");
-    sessionStorage.setItem("sw-reload-attempted", "1");
-    window.location.reload();
-  }
-});
-
-// Réinitialiser le flag après un chargement réussi.
-window.addEventListener("load", () => {
-  sessionStorage.removeItem("sw-reload-attempted");
+  if (isChunkLoadError(event.reason)) handleChunkError();
 });
 
 // Le nouveau SW reste en "waiting" (pas de skipWaiting/clientsClaim).

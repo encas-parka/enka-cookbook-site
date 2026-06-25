@@ -6,7 +6,10 @@
   import { recipesStore } from "./lib/stores/RecipesStore.svelte";
   import { notificationStore } from "./lib/stores/NotificationStore.svelte";
   import { materielStore } from "./lib/stores/MaterielStore.svelte";
-  import { cleanupLegacyCaches, initializeRealtime } from "$lib/db-sync/aw-sync";
+  import {
+    cleanupLegacyCaches,
+    initializeRealtime,
+  } from "$lib/db-sync/aw-sync";
   import { teamdocsStore } from "./lib/stores/TeamdocsStore.svelte";
   import ErrorAlert from "./lib/components/ui/ErrorAlert.svelte";
   import HeaderNav from "./lib/components/HeaderNav.svelte";
@@ -16,6 +19,7 @@
   import { Router, preload } from "$lib/router";
   import { updateStore } from "./lib/stores/UpdateStore.svelte";
   import UpdatePrompt from "./lib/components/ui/UpdatePrompt.svelte";
+  import { markBootSuccess } from "./lib/sw-reload-guard";
 
   type AppState = "BOOTING" | "READY" | "ERROR";
   let appState = $state<AppState>("BOOTING");
@@ -31,6 +35,8 @@
       await globalState.initializeAuth();
 
       appState = "READY";
+      // Réarme le garde-fou anti-boucle du filet chunk-error : le boot a réussi.
+      markBootSuccess();
 
       if (globalState.isAuthenticated) {
         const syncToastId = toastService.loading("Chargement des données...");

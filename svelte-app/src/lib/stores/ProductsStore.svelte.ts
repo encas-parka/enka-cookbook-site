@@ -1,4 +1,5 @@
 import { SvelteMap } from "svelte/reactivity";
+import { untrack } from "svelte";
 import { useDebounce } from "runed";
 import { Query } from "appwrite";
 import { liveQuery } from "dexie";
@@ -62,6 +63,7 @@ import {
   db,
   type ProductNeedRow,
 } from "$lib/db-sync/aw-sync";
+import { searchParams } from "$lib/router";
 
 /**
  * ProductsStore - Store principal de gestion des produits avec Svelte 5 + aw-sync
@@ -182,6 +184,7 @@ class ProductsStore {
   #lastMealsHash = "";
   #cleanupSyncEffect: (() => void) | null = null;
   #cleanupDateEffect: (() => void) | null = null;
+  #cleanupUrlEffect: (() => void) | null = null;
 
   // Filters
   #filters = $state<FiltersState>({
@@ -190,7 +193,6 @@ class ProductsStore {
     selectedStores: [],
     selectedWho: [],
     selectedProductTypes: [],
-    selectedTemperatures: [],
     temperatureFilter: "all",
     storeFilterMode: "all",
     whoFilterMode: "all",
@@ -571,21 +573,24 @@ class ProductsStore {
     if (!product.byDate && !isManualProduct) return false;
     if (!matchesFilters(product, this.#filters, fuzzyMatchedIds)) return false;
 
-    if (this.#filters.completionStatus !== "all") {
-      const hasMissing = model.stats.hasMissing;
-      if (this.#filters.completionStatus === "completed" && hasMissing)
-        return false;
-      if (this.#filters.completionStatus === "incomplete" && !hasMissing)
-        return false;
-    }
+    // Recherche active : on ignore completionStatus / deliveryDate (préservés)
+    if (!this.isSearchActive) {
+      if (this.#filters.completionStatus !== "all") {
+        const hasMissing = model.stats.hasMissing;
+        if (this.#filters.completionStatus === "completed" && hasMissing)
+          return false;
+        if (this.#filters.completionStatus === "incomplete" && !hasMissing)
+          return false;
+      }
 
-    if (this.#filters.deliveryDateFilter) {
-      const hasOrderedDelivery = product.purchases?.some(
-        (p) =>
-          p.status === "ordered" &&
-          p.deliveryDate === this.#filters.deliveryDateFilter,
-      );
-      if (!hasOrderedDelivery) return false;
+      if (this.#filters.deliveryDateFilter) {
+        const hasOrderedDelivery = product.purchases?.some(
+          (p) =>
+            p.status === "ordered" &&
+            p.deliveryDate === this.#filters.deliveryDateFilter,
+        );
+        if (!hasOrderedDelivery) return false;
+      }
     }
 
     if (product.byDate) {
@@ -668,7 +673,6 @@ class ProductsStore {
       this.filters.selectedStores.length > 0 ||
       this.filters.selectedWho.length > 0 ||
       this.filters.selectedProductTypes.length > 0 ||
-      this.filters.selectedTemperatures.length > 0 ||
       this.filters.temperatureFilter !== "all" ||
       this.filters.storeFilterMode !== "all" ||
       this.filters.whoFilterMode !== "all" ||
@@ -1031,6 +1035,10 @@ class ProductsStore {
       // 7. Date range effect : rebuild groups quand les dates changent
       this.#setupDateRangeEffect();
 
+      // 8. URL filters effect : hydrate depuis l'URL + sync réactive
+      //    (back/reload/partage). searchParams est réactif (SvelteURLSearchParams).
+      this.#setupUrlFiltersEffect();
+
       this.#isInitialized = true;
       this.#loading = false;
 
@@ -1255,14 +1263,9 @@ class ProductsStore {
   setSearchQuery = useDebounce(
     (query: string) => {
       this.#filters.searchQuery = query;
-      if (query.trim().length > 0) {
-        this.#filters.selectedStores = [];
-        this.#filters.selectedWho = [];
-        this.#filters.selectedProductTypes = [];
-        this.#filters.selectedTemperatures = [];
-        this.#filters.temperatureFilter = "all";
-        this.#filters.completionStatus = "all";
-      }
+      // Flag de présence dans l'URL (contenu hors URL) : permet au Back de
+      // sortir de la recherche. 1 entrée d'historique par session (debouncé).
+      this.#applyUrlChanges({ search: query.trim() ? "true" : null });
       this.#rebuildGroups();
     },
     () => 500,
@@ -1274,103 +1277,202 @@ class ProductsStore {
     this.#rebuildGroups();
   }
 
-  toggleProductType(type: string) {
-    const idx = this.#filters.selectedProductTypes.indexOf(type);
-    if (idx > -1) {
-      this.#filters.selectedProductTypes.splice(idx, 1);
-    } else {
-      this.#filters.selectedProductTypes.push(type);
+  // ===========================================================================
+  // URL <-> FILTRES "VUE"
+  //
+  // Architecture : l'URL est la source de vérité pour les filtres de vue.
+  //   UI → setter → #applyUrlChanges (écrit searchParams)
+  //   $effect.root (#setupUrlFiltersEffect) → #applyUrlFilters (lit searchParams → #filters + #rebuildGroups)
+  // Le read-side est le SEUL écrivain des champs "vue" de #filters → pas de boucle.
+  // searchQuery / searchInRecipes / sort restent en mémoire (hors URL).
+  // ===========================================================================
+
+  /** Crée l'effet réactif qui hydrate #filters depuis l'URL. À détruire dans reset(). */
+  #setupUrlFiltersEffect() {
+    this.#cleanupUrlEffect = $effect.root(() => {
+      $effect(() => this.#applyUrlFilters());
+    });
+  }
+
+  /** Lit les params URL (réactif) et met à jour les champs "vue" de #filters. */
+  #applyUrlFilters() {
+    // Back/navigation : le flag `search` a été retiré alors qu'une recherche
+    // était active (en mémoire) → on reset la recherche. untrack pour ne pas
+    // tracker searchQuery (sinon re-run inutile à chaque frappe).
+    if (
+      this.#urlGet("search") === null &&
+      untrack(() => this.#filters.searchQuery.trim())
+    ) {
+      this.#filters.searchQuery = "";
     }
+
+    const status = this.#urlGet("status");
+    const group = this.#urlGet("group");
+    const temp = this.#urlGet("temp");
+    const types = this.#urlGetList("types");
+    const stores = this.#urlGetList("stores");
+    const smode = this.#urlGet("smode");
+    const who = this.#urlGetList("who");
+    const wmode = this.#urlGet("wmode");
+    const delivery = this.#urlGet("delivery");
+
+    this.#filters.completionStatus =
+      status === "incomplete" || status === "completed" ? status : "all";
+    this.#filters.groupBy =
+      group === "store" || group === "productType" || group === "none"
+        ? group
+        : "productType";
+    this.#filters.temperatureFilter = (
+      ["all", "frais", "not-frais", "surgele", "not-surgele"] as const
+    ).includes(temp as TemperatureFilterMode)
+      ? (temp as TemperatureFilterMode)
+      : "all";
+    this.#filters.selectedProductTypes = types;
+    this.#filters.selectedStores = stores;
+    this.#filters.storeFilterMode = smode === "none" ? "none" : "all";
+    this.#filters.selectedWho = who;
+    this.#filters.whoFilterMode = wmode === "none" ? "none" : "all";
+    this.#filters.deliveryDateFilter = delivery ?? null;
+
     this.#rebuildGroups();
   }
 
-  toggleTemperature(temperature: "frais" | "surgele") {
-    const idx = this.#filters.selectedTemperatures.indexOf(temperature);
-    if (idx > -1) {
-      this.#filters.selectedTemperatures.splice(idx, 1);
-    } else {
-      this.#filters.selectedTemperatures.push(temperature);
+  /**
+   * Applique des changements d'URL en lot. `null` = supprimer la clé.
+   * Crée EXACTEMENT une entrée d'historique par action utilisateur si l'URL
+   * change (premier changement = pushState, suivants = replaceState), zéro sinon.
+   */
+  #applyUrlChanges(changes: Record<string, string | null>) {
+    let first = true;
+    for (const [key, value] of Object.entries(changes)) {
+      if (value === null) {
+        if (this.#urlGet(key) === null) continue;
+        searchParams.delete(
+          key,
+          undefined,
+          first ? undefined : { replace: true },
+        );
+        first = false;
+      } else {
+        if (this.#urlGet(key) === value) continue;
+        searchParams.set(key, value, first ? undefined : { replace: true });
+        first = false;
+      }
     }
-    this.#rebuildGroups();
+  }
+
+  /** Lit un param URL comme string (blinde la coercion parseSearchValue). */
+  #urlGet(key: string): string | null {
+    const v = searchParams.get(key);
+    return v === null ? null : String(v);
+  }
+
+  /** Lit un param URL comme liste (CSV encodé). */
+  #urlGetList(key: string): string[] {
+    const v = this.#urlGet(key);
+    if (!v) return [];
+    return v
+      .split(",")
+      .map((x) => {
+        try {
+          return decodeURIComponent(x);
+        } catch {
+          return x;
+        }
+      })
+      .filter((x) => x !== "");
+  }
+
+  /** Encode un tableau en CSV URL-safe. */
+  #csvEncode(values: string[]): string {
+    return values.map(encodeURIComponent).join(",");
+  }
+
+  toggleProductType(type: string) {
+    const current = this.#filters.selectedProductTypes;
+    const next = current.includes(type)
+      ? current.filter((t) => t !== type)
+      : [...current, type];
+    this.#applyUrlChanges({
+      types: next.length ? this.#csvEncode(next) : null,
+    });
   }
 
   setTemperatureFilter(mode: TemperatureFilterMode) {
-    this.#filters.temperatureFilter = mode;
-    this.#rebuildGroups();
+    this.#applyUrlChanges({ temp: mode === "all" ? null : mode });
   }
 
   clearTypeAndTemperatureFilters() {
-    this.#filters.selectedProductTypes = [];
-    this.#filters.selectedTemperatures = [];
-    this.#filters.temperatureFilter = "all";
-    this.#rebuildGroups();
+    this.#applyUrlChanges({ types: null, temp: null });
   }
 
   setGroupBy(groupBy: "store" | "productType" | "none") {
-    this.#filters.groupBy = groupBy;
-    this.#rebuildGroups();
+    this.#applyUrlChanges({
+      group: groupBy === "productType" ? null : groupBy,
+    });
   }
 
   toggleStore(store: string) {
-    this.#filters.storeFilterMode = "all";
-    const idx = this.#filters.selectedStores.indexOf(store);
-    if (idx > -1) {
-      this.#filters.selectedStores.splice(idx, 1);
-    } else {
-      this.#filters.selectedStores.push(store);
-    }
-    this.#rebuildGroups();
+    const current = this.#filters.selectedStores;
+    const next = current.includes(store)
+      ? current.filter((s) => s !== store)
+      : [...current, store];
+    this.#applyUrlChanges({
+      stores: next.length ? this.#csvEncode(next) : null,
+      smode: null, // sélection explicite → mode "all"
+    });
   }
 
   toggleWho(who: string) {
-    this.#filters.whoFilterMode = "all";
-    const idx = this.#filters.selectedWho.indexOf(who);
-    if (idx > -1) {
-      this.#filters.selectedWho.splice(idx, 1);
-    } else {
-      this.#filters.selectedWho.push(who);
-    }
-    this.#rebuildGroups();
+    const current = this.#filters.selectedWho;
+    const next = current.includes(who)
+      ? current.filter((w) => w !== who)
+      : [...current, who];
+    this.#applyUrlChanges({
+      who: next.length ? this.#csvEncode(next) : null,
+      wmode: null,
+    });
   }
 
   clearStoreFilters() {
-    this.#filters.selectedStores = [];
-    this.#filters.storeFilterMode = "all";
-    this.#rebuildGroups();
+    this.#applyUrlChanges({ stores: null, smode: null });
   }
 
   clearWhoFilters() {
-    this.#filters.selectedWho = [];
-    this.#filters.whoFilterMode = "all";
-    this.#rebuildGroups();
+    this.#applyUrlChanges({ who: null, wmode: null });
   }
 
   setStoreFilterMode(mode: "all" | "none") {
-    this.#filters.storeFilterMode = mode;
-    this.#filters.selectedStores = [];
-    this.#rebuildGroups();
+    this.#applyUrlChanges({
+      smode: mode === "all" ? null : mode,
+      stores: null,
+    });
   }
 
   setWhoFilterMode(mode: "all" | "none") {
-    this.#filters.whoFilterMode = mode;
-    this.#filters.selectedWho = [];
-    this.#rebuildGroups();
+    this.#applyUrlChanges({
+      wmode: mode === "all" ? null : mode,
+      who: null,
+    });
   }
 
   setCompletionStatus(status: "all" | "completed" | "incomplete") {
-    this.#filters.completionStatus = status;
-    if (status !== "all") {
-      this.#filters.deliveryDateFilter = null;
-    }
-    this.#rebuildGroups();
+    const changes: Record<string, string | null> = {
+      status: status === "all" ? null : status,
+    };
+    if (status !== "all") changes.delivery = null;
+    this.#applyUrlChanges(changes);
   }
 
   setDeliveryDateFilter(date: string | null) {
-    this.#filters.deliveryDateFilter = date;
+    const changes: Record<string, string | null> = {};
     if (date) {
-      this.#filters.completionStatus = "all";
+      changes.delivery = date;
+      changes.status = null;
+    } else {
+      changes.delivery = null;
     }
-    this.#rebuildGroups();
+    this.#applyUrlChanges(changes);
   }
 
   handleSort(column: string) {
@@ -1385,22 +1487,24 @@ class ProductsStore {
   }
 
   clearFilters() {
-    this.#filters = {
-      searchQuery: "",
-      searchInRecipes: false,
-      selectedStores: [],
-      selectedWho: [],
-      selectedProductTypes: [],
-      selectedTemperatures: [],
-      temperatureFilter: "all",
-      storeFilterMode: "all",
-      whoFilterMode: "all",
-      deliveryDateFilter: null,
-      completionStatus: "all",
-      groupBy: "productType",
-      sortColumn: "",
-      sortDirection: "asc",
-    };
+    // Filtres "vue" : vidés via l'URL (1 entrée d'historique, ou zéro si déjà vides)
+    this.#applyUrlChanges({
+      status: null,
+      group: null,
+      temp: null,
+      types: null,
+      stores: null,
+      smode: null,
+      who: null,
+      wmode: null,
+      delivery: null,
+      search: null,
+    });
+    // Filtres in-memory (search + tri) — hors URL
+    this.#filters.searchQuery = "";
+    this.#filters.searchInRecipes = false;
+    this.#filters.sortColumn = "";
+    this.#filters.sortDirection = "asc";
     this.#rebuildGroups();
   }
 
@@ -1901,6 +2005,8 @@ class ProductsStore {
     this.#cleanupSyncEffect = null;
     this.#cleanupDateEffect?.();
     this.#cleanupDateEffect = null;
+    this.#cleanupUrlEffect?.();
+    this.#cleanupUrlEffect = null;
 
     // Cleanup liveQuery
     this.#dataSubscription?.unsubscribe();
@@ -1938,7 +2044,6 @@ class ProductsStore {
       selectedStores: [],
       selectedWho: [],
       selectedProductTypes: [],
-      selectedTemperatures: [],
       temperatureFilter: "all",
       storeFilterMode: "all",
       whoFilterMode: "all",

@@ -27,7 +27,6 @@ export interface FiltersState {
   selectedStores: string[];
   selectedWho: string[];
   selectedProductTypes: string[];
-  selectedTemperatures: string[];
   temperatureFilter: TemperatureFilterMode;
   storeFilterMode: "all" | "none";
   whoFilterMode: "all" | "none";
@@ -309,11 +308,10 @@ export function matchesFilters(
   filters: FiltersState,
   fuzzyMatchedIds?: Set<string>,
 ): boolean {
-  // Recherche textuelle fuzzy
+  // Recherche active : bypass des autres filtres. Les filtres sont préservés
+  // (URL) et réappliqués au reset de la recherche.
   if (filters.searchQuery.trim()) {
-    if (!fuzzyMatchedIds?.has(product.$id)) {
-      return false;
-    }
+    return fuzzyMatchedIds?.has(product.$id) ?? false;
   }
 
   // Filtre par store

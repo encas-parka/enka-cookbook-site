@@ -46,13 +46,13 @@
         }}
         title="Voir le détail de la recette"
       >
-        {recipe.r}
+        <span class="max-w-2/3 truncate text-start">{recipe.r}</span>
         <span
           class="text-base-content/90 flex shrink-0 items-center gap-0.5 whitespace-nowrap"
         >
           {dateInfo.formattedDate}
           {#if DateIcon}
-            <DateIcon size={11} class="stroke-2" />
+            <DateIcon size={11} class="text-base-content/90 stroke-2" />
           {/if}
         </span>
         <span class="flex shrink-0 items-center gap-0.5 whitespace-nowrap">
@@ -61,7 +61,7 @@
         <span class="shrink-0 font-medium whitespace-nowrap">
           {formatSingleQuantity(recipe.qEq, recipe.uEq)}
         </span>
-        <Eye size={14} class="ms-auto" />
+        <Eye size={14} class="ms-auto shrink-0" />
       </button>
     {/each}
   </div>

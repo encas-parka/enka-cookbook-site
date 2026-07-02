@@ -1,6 +1,6 @@
 ---
 title: Salade pastèque feta
-date: '2026-07-02T07:34:00.184Z'
+date: '2026-07-02T07:35:23.867Z'
 draft: true
 typeR: entree
 categories: []
@@ -58,10 +58,10 @@ ingredients:
     type: legumes
   - uuid: h3c8al
     name: huile d'olive
-    originalQuantity: 0
-    originalUnit: gr.
-    normalizedQuantity: 0
-    normalizedUnit: gr.
+    originalQuantity: 10
+    originalUnit: c. à soupe
+    normalizedQuantity: 150
+    normalizedUnit: ml
     comment: ''
     allergens: []
     type: lof
@@ -78,11 +78,11 @@ astuces: []
 preparation24h: null
 permissionWrite:
   - 6a2639f9ad0810a40d35
-auteur: null
+auteur: Eve
 createdAt: '2026-07-02T07:33:28.035+00:00'
-updatedAt: '2026-07-02T07:33:28.035+00:00'
+updatedAt: '2026-07-02T07:35:23.594+00:00'
 createdBy: 6a2639f9ad0810a40d35
-teams: null
+teams: []
 status: public
 rootRecipeId: null
 versionLabel: null

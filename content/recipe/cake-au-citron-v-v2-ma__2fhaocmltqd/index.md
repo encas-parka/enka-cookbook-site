@@ -1,7 +1,7 @@
 ---
 title: Cake au citron végan sans gluten
-date: '2026-04-12T08:50:26.082Z'
-draft: true
+date: '2026-07-13T15:23:35.310Z'
+draft: false
 typeR: dessert
 categories:
   - Gateau
@@ -11,16 +11,14 @@ regime:
   - sans-lactose
 plate: 10
 quantite_desc: null
-check: false
+check: true
 cuisson: true
 serveHot: false
 description: null
 region: null
 saison: []
 id: cake-au-citron-v-v2-ma__2fhaocmltqd
-materiel:
-  - moule a cake
-  - Four
+materiel: []
 ingredients:
   - uuid: fnnx13
     name: Bicarbonate de soude
@@ -144,9 +142,9 @@ permissionWrite:
   - 6931ecdccd2c8d8d15e5
 auteur: Marion
 createdAt: '2026-04-12T08:50:22.779+00:00'
-updatedAt: '2026-04-12T08:50:22.779+00:00'
+updatedAt: '2026-07-13T15:23:34.927+00:00'
 createdBy: 6931ecdccd2c8d8d15e5
-teams: null
+teams: []
 status: public
 rootRecipeId: cake-au-citron-vegan_jlgmun6rtc8r
 versionLabel: v2 - Marion

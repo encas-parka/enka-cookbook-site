@@ -1,6 +1,6 @@
 ---
 title: Tiramisu aux pêches
-date: '2026-07-21T15:57:55.965Z'
+date: '2026-07-21T16:52:00.103Z'
 draft: true
 typeR: dessert
 categories: []
@@ -41,10 +41,10 @@ ingredients:
     type: sucres
   - uuid: n1vs7d
     name: Pêche
-    originalQuantity: 5
-    originalUnit: unité
-    normalizedQuantity: 5
-    normalizedUnit: unité
+    originalQuantity: 750
+    originalUnit: gr.
+    normalizedQuantity: 750
+    normalizedUnit: gr.
     comment: ''
     allergens: []
     type: legumes
@@ -100,11 +100,11 @@ astuces: []
 preparation24h: null
 permissionWrite:
   - 6931ecdccd2c8d8d15e5
-auteur: null
+auteur: Marion
 createdAt: '2026-07-21T15:57:52.500+00:00'
-updatedAt: '2026-07-21T15:57:52.500+00:00'
+updatedAt: '2026-07-21T16:51:59.639+00:00'
 createdBy: 6931ecdccd2c8d8d15e5
-teams: null
+teams: []
 status: public
 rootRecipeId: null
 versionLabel: null

@@ -1,6 +1,6 @@
 ---
 title: Crème de haricots blancs à la coriandre et au citron
-date: '2026-07-23T13:34:57.173Z'
+date: '2026-07-23T13:53:58.799Z'
 draft: true
 typeR: entree
 categories:
@@ -22,9 +22,7 @@ saison:
   - automne
   - hiver
 id: creme-de-haricots-blan_vkacroce4cgc
-materiel:
-  - Giraffe (Bras Mixeur)
-  - Robot Mixeur
+materiel: []
 ingredients:
   - uuid: znpoor
     name: Haricots blancs
@@ -32,7 +30,7 @@ ingredients:
     originalUnit: gr.
     normalizedQuantity: 300
     normalizedUnit: gr.
-    comment: cuits
+    comment: cuits-en boite
     allergens: []
     type: sec
   - uuid: e4mjd1
@@ -81,20 +79,22 @@ ingredients:
     allergens: []
     type: epices
 preparation: |-
-  mixer les haricots avec  le jus de citron, l'huile d'olive, le sel, le poivre jusqu'à obtenir une crème lisse.\
+  égoutter les haricots blancs cuits en boite\
+  \
+  mixer les haricots avec le jus de citron, l'huile d'olive, le sel, le poivre jusqu'à obtenir une crème lisse.\
   ajouter la coriandre ciselée.
 
-  conserver au frais.
+  conserver au frais jusqu'au moment du service
 prepAlt: []
 astuces: []
 preparation24h: null
 permissionWrite:
   - 6a27d1aaa873a23eca71
-auteur: null
+auteur: nadia
 createdAt: '2026-07-23T13:34:52.717+00:00'
-updatedAt: '2026-07-23T13:34:52.717+00:00'
+updatedAt: '2026-07-23T13:53:58.300+00:00'
 createdBy: 6a27d1aaa873a23eca71
-teams: null
+teams: []
 status: public
 rootRecipeId: null
 versionLabel: null

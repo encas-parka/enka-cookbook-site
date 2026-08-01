@@ -1,6 +1,6 @@
 ---
 title: Lait de coco frais aux billes de tapioca et bananes
-date: '2026-07-21T16:05:34.017Z'
+date: '2026-08-01T08:25:27.106Z'
 draft: true
 typeR: dessert
 categories:
@@ -18,10 +18,7 @@ description: cuisine de bernard, légèrement modifiée
 region: null
 saison: []
 id: lait-de-coco-frais-aux_tmbuoe2p0hdt
-materiel:
-  - Bruleur
-  - Frigo
-  - verrines
+materiel: []
 ingredients:
   - uuid: xdy736
     name: lait de coco
@@ -43,9 +40,9 @@ ingredients:
     type: sucres
   - uuid: 4m28od
     name: Perles de tapioca au pandan
-    originalQuantity: 0
+    originalQuantity: 60
     originalUnit: gr.
-    normalizedQuantity: 0
+    normalizedQuantity: 60
     normalizedUnit: gr.
     comment: sinon, aromatiser avec un peu de vanille
     allergens: []
@@ -80,11 +77,11 @@ astuces: []
 preparation24h: 'tout - faire la veille '
 permissionWrite:
   - 6931ecdccd2c8d8d15e5
-auteur: null
+auteur: Marion
 createdAt: '2026-07-21T16:05:33.612+00:00'
-updatedAt: '2026-07-21T16:05:33.612+00:00'
+updatedAt: '2026-08-01T08:24:52.889+00:00'
 createdBy: 6931ecdccd2c8d8d15e5
-teams: null
+teams: []
 status: public
 rootRecipeId: null
 versionLabel: null

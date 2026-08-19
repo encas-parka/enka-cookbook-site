@@ -1,6 +1,6 @@
 ---
 title: Tiramisu aux pêches
-date: '2026-07-21T16:52:00.103Z'
+date: '2026-08-19T08:01:01.405Z'
 draft: true
 typeR: dessert
 categories: []
@@ -50,9 +50,9 @@ ingredients:
     type: legumes
   - uuid: 0tpvue
     name: Mascarpone
-    originalQuantity: 250
+    originalQuantity: 150
     originalUnit: gr.
-    normalizedQuantity: 250
+    normalizedQuantity: 150
     normalizedUnit: gr.
     comment: ''
     allergens:
@@ -102,7 +102,7 @@ permissionWrite:
   - 6931ecdccd2c8d8d15e5
 auteur: Marion
 createdAt: '2026-07-21T15:57:52.500+00:00'
-updatedAt: '2026-07-21T16:51:59.639+00:00'
+updatedAt: '2026-08-19T08:01:01.163+00:00'
 createdBy: 6931ecdccd2c8d8d15e5
 teams: []
 status: public

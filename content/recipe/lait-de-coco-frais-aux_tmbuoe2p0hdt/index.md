@@ -1,7 +1,7 @@
 ---
 title: Lait de coco frais aux billes de tapioca et bananes
-date: '2026-08-01T08:25:27.106Z'
-draft: true
+date: '2026-08-19T07:57:26.837Z'
+draft: false
 typeR: dessert
 categories:
   - Crèmes dessert
@@ -11,7 +11,7 @@ regime:
   - sans-lactose
 plate: 6
 quantite_desc: null
-check: false
+check: true
 cuisson: true
 serveHot: false
 description: cuisine de bernard, légèrement modifiée
@@ -40,9 +40,9 @@ ingredients:
     type: sucres
   - uuid: 4m28od
     name: Perles de tapioca au pandan
-    originalQuantity: 60
+    originalQuantity: 50
     originalUnit: gr.
-    normalizedQuantity: 60
+    normalizedQuantity: 50
     normalizedUnit: gr.
     comment: sinon, aromatiser avec un peu de vanille
     allergens: []
@@ -79,7 +79,7 @@ permissionWrite:
   - 6931ecdccd2c8d8d15e5
 auteur: Marion
 createdAt: '2026-07-21T16:05:33.612+00:00'
-updatedAt: '2026-08-01T08:24:52.889+00:00'
+updatedAt: '2026-08-19T07:56:54.297+00:00'
 createdBy: 6931ecdccd2c8d8d15e5
 teams: []
 status: public

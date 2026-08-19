@@ -1,7 +1,7 @@
 ---
 title: Kimpira de carottes râpées
-date: '2026-07-07T17:26:23.669Z'
-draft: true
+date: '2026-08-19T17:29:42.279Z'
+draft: false
 typeR: entree
 categories:
   - Salade
@@ -11,16 +11,14 @@ regime:
   - sans-lactose
 plate: 100
 quantite_desc: null
-check: false
+check: true
 cuisson: true
 serveHot: false
 description: Adaptation fusion de recette japonaise, ces carottes mi-cuites sont très  bonnes et se conservent mieux que des carottes rapées
 region: Japonaise
 saison: []
 id: kimpira-de-carottes-ra__b66prwmtojx
-materiel:
-  - Bruleur
-  - Poêle
+materiel: []
 ingredients:
   - uuid: eouu0v
     name: Carotte
@@ -83,11 +81,11 @@ astuces: []
 preparation24h: null
 permissionWrite:
   - 6931ecdccd2c8d8d15e5
-auteur: null
+auteur: Marion
 createdAt: '2026-07-07T17:25:43.967+00:00'
-updatedAt: '2026-07-07T17:25:43.967+00:00'
+updatedAt: '2026-08-19T17:29:38.963+00:00'
 createdBy: 6931ecdccd2c8d8d15e5
-teams: null
+teams: []
 status: public
 rootRecipeId: null
 versionLabel: null

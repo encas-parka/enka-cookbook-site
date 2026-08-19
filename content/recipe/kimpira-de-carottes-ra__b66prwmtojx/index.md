@@ -1,6 +1,6 @@
 ---
 title: Kimpira de carottes râpées
-date: '2026-08-19T17:29:42.279Z'
+date: '2026-08-19T17:30:20.727Z'
 draft: false
 typeR: entree
 categories:
@@ -31,9 +31,9 @@ ingredients:
     type: legumes
   - uuid: fazth1
     name: huile de sésame
-    originalQuantity: 1.5
+    originalQuantity: 1
     originalUnit: l.
-    normalizedQuantity: 1500
+    normalizedQuantity: 1000
     normalizedUnit: ml
     comment: ''
     allergens:
@@ -83,7 +83,7 @@ permissionWrite:
   - 6931ecdccd2c8d8d15e5
 auteur: Marion
 createdAt: '2026-07-07T17:25:43.967+00:00'
-updatedAt: '2026-08-19T17:29:38.963+00:00'
+updatedAt: '2026-08-19T17:30:20.498+00:00'
 createdBy: 6931ecdccd2c8d8d15e5
 teams: []
 status: public

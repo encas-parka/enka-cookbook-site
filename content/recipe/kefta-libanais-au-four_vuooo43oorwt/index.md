@@ -1,7 +1,7 @@
 ---
 title: Kefta libanais au four
-date: '2026-07-21T16:13:33.732Z'
-draft: true
+date: '2026-08-19T08:00:35.085Z'
+draft: false
 typeR: plat
 categories:
   - Plat au Four
@@ -10,15 +10,14 @@ regime:
   - sans-lactose
 plate: 4
 quantite_desc: null
-check: false
+check: true
 cuisson: true
 serveHot: true
 description: null
 region: Libanais
 saison: []
 id: kefta-libanais-au-four_vuooo43oorwt
-materiel:
-  - Four
+materiel: []
 ingredients:
   - uuid: gnbf8z
     name: Viande hachée (boeuf)
@@ -122,19 +121,19 @@ ingredients:
     type: lof
   - uuid: 2juq3x
     name: Sel
-    originalQuantity: 0
-    originalUnit: gr.
-    normalizedQuantity: 0
-    normalizedUnit: gr.
+    originalQuantity: 1
+    originalUnit: au goût
+    normalizedQuantity: 1
+    normalizedUnit: au goût
     comment: ''
     allergens: []
     type: epices
   - uuid: 2pps90
     name: Poivre
-    originalQuantity: 0
-    originalUnit: gr.
-    normalizedQuantity: 0
-    normalizedUnit: gr.
+    originalQuantity: 1
+    originalUnit: au goût
+    normalizedQuantity: 1
+    normalizedUnit: au goût
     comment: ''
     allergens: []
     type: epices
@@ -144,11 +143,11 @@ astuces: []
 preparation24h: null
 permissionWrite:
   - 6931ecdccd2c8d8d15e5
-auteur: null
+auteur: Marion
 createdAt: '2026-07-21T16:13:33.268+00:00'
-updatedAt: '2026-07-21T16:13:33.268+00:00'
+updatedAt: '2026-08-19T08:00:34.812+00:00'
 createdBy: 6931ecdccd2c8d8d15e5
-teams: null
+teams: []
 status: public
 rootRecipeId: null
 versionLabel: null

@@ -1,14 +1,14 @@
 ---
 title: Tiramisu aux pêches
-date: '2026-08-19T08:01:01.405Z'
-draft: true
+date: '2026-08-19T08:01:18.672Z'
+draft: false
 typeR: dessert
 categories: []
 regime:
   - vegetarien
 plate: 6
 quantite_desc: null
-check: false
+check: true
 cuisson: false
 serveHot: false
 description: null
@@ -102,7 +102,7 @@ permissionWrite:
   - 6931ecdccd2c8d8d15e5
 auteur: Marion
 createdAt: '2026-07-21T15:57:52.500+00:00'
-updatedAt: '2026-08-19T08:01:01.163+00:00'
+updatedAt: '2026-08-19T08:01:18.415+00:00'
 createdBy: 6931ecdccd2c8d8d15e5
 teams: []
 status: public

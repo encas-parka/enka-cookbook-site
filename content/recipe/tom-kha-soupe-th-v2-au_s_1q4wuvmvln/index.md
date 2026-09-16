@@ -1,6 +1,6 @@
 ---
 title: Tom kha soupe thaï pour bol de 700ml
-date: '2026-09-16T16:57:12.944Z'
+date: '2026-09-16T16:57:31.451Z'
 draft: false
 typeR: plat
 categories:
@@ -14,7 +14,7 @@ quantite_desc: si les bols sont standards (350mml) = diviser les quantités d'ea
 check: true
 cuisson: true
 serveHot: true
-description: 'Soupe thaïlandaise avec du lait de coco et du Galanga, c’est un bouillon au goût citronné mais pas acide. Tom Kha (en thaï : ต้มข่า) veut dire soupe de galanga , Tom = Bouillon et Kha = Galanga.'
+description: 'Soupe thaïlandaise avec du lait de coco et du galanga, c’est un bouillon au goût citronné mais pas acide. Tom Kha (en thaï : ต้มข่า) veut dire soupe de galanga , Tom = Bouillon et Kha = Galanga.'
 region: Thaïlande
 saison: []
 id: tom-kha-soupe-th-v2-au_s_1q4wuvmvln
@@ -280,7 +280,7 @@ permissionWrite:
   - 696faf80000078153479
 auteur: Auré
 createdAt: '2026-09-16T12:55:02.677+00:00'
-updatedAt: '2026-09-16T16:57:12.533+00:00'
+updatedAt: '2026-09-16T16:57:31.011+00:00'
 createdBy: 696faf80000078153479
 teams: []
 status: public

@@ -1,7 +1,7 @@
 ---
 title: Borek par judith
-date: '2026-09-16T13:16:44.862Z'
-draft: true
+date: '2026-09-16T13:16:58.588Z'
+draft: false
 typeR: entree
 categories:
   - Mezze
@@ -127,7 +127,7 @@ permissionWrite:
   - 696faf80000078153479
 auteur: Auré
 createdAt: '2026-09-16T13:10:56.866+00:00'
-updatedAt: '2026-09-16T13:16:44.437+00:00'
+updatedAt: '2026-09-16T13:16:58.227+00:00'
 createdBy: 696faf80000078153479
 teams: []
 status: public

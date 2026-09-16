@@ -1,7 +1,7 @@
 ---
 title: Borek par judith
-date: '2026-09-16T13:10:57.238Z'
-draft: false
+date: '2026-09-16T13:16:44.862Z'
+draft: true
 typeR: entree
 categories:
   - Mezze
@@ -10,31 +10,102 @@ categories:
   - Snacking
 regime:
   - vegetarien
-  - sans-gluten
 plate: 100
-quantite_desc: null
+quantite_desc: 15 parts = 1 gastro
 check: true
 cuisson: true
 serveHot: true
-description: feuilleté aux épinards et fromage
+description: Feuilleté aux épinards et fromage. Il en existe des dizaines de versions. Celle-ci est simple et gourmande.
 region: null
 saison: []
 id: borek-par-judith_nkbnvevgil3-
-materiel:
-  - Four
-  - Gastro 1/1 (10cm)
-  - Bruleur
+materiel: []
 ingredients:
   - uuid: ue125d
     name: Lait écrémé
-    originalQuantity: 1.3
+    originalQuantity: 2.2
     originalUnit: l.
-    normalizedQuantity: 1300
+    normalizedQuantity: 2200
     normalizedUnit: ml
     comment: ''
     allergens:
       - Produit laitier
     type: lof
+  - uuid: atccqu
+    name: Huile végétale
+    originalQuantity: 1.3
+    originalUnit: l.
+    normalizedQuantity: 1300
+    normalizedUnit: ml
+    comment: ''
+    allergens: []
+    type: lof
+  - uuid: zf3zf8
+    name: Oeuf
+    originalQuantity: 20
+    originalUnit: unité
+    normalizedQuantity: 20
+    normalizedUnit: unité
+    comment: ''
+    allergens:
+      - Oeuf
+    type: lof
+  - uuid: rtavky
+    name: Oignon
+    originalQuantity: 3.5
+    originalUnit: kg
+    normalizedQuantity: 3500
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: u2m28w
+    name: Ail
+    originalQuantity: 3
+    originalUnit: tête·s
+    normalizedQuantity: 240
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: c4z22l
+    name: Epinards surgelés
+    originalQuantity: 7
+    originalUnit: kg
+    normalizedQuantity: 7000
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: m5dxyo
+    name: Feta
+    originalQuantity: 5
+    originalUnit: kg
+    normalizedQuantity: 5000
+    normalizedUnit: gr.
+    comment: ''
+    allergens:
+      - Produit laitier
+    type: frais
+  - uuid: mo4efz
+    name: Sésame
+    originalQuantity: 500
+    originalUnit: gr.
+    normalizedQuantity: 500
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: epices
+  - uuid: 7tvtlu
+    name: Pâte filo
+    originalQuantity: 3
+    originalUnit: kg
+    normalizedQuantity: 3000
+    normalizedUnit: gr.
+    comment: ''
+    allergens:
+      - Gluten
+    type: frais
 preparation: |-
   1. Fouetter les oeufs, l’huile et le lait ensemble.
 
@@ -54,11 +125,11 @@ astuces: []
 preparation24h: null
 permissionWrite:
   - 696faf80000078153479
-auteur: null
+auteur: Auré
 createdAt: '2026-09-16T13:10:56.866+00:00'
-updatedAt: '2026-09-16T13:10:56.866+00:00'
+updatedAt: '2026-09-16T13:16:44.437+00:00'
 createdBy: 696faf80000078153479
-teams: null
+teams: []
 status: public
 rootRecipeId: null
 versionLabel: null

@@ -1,6 +1,6 @@
 ---
 title: Bo bun vegan - version corrigée
-date: '2026-09-16T10:24:33.226Z'
+date: '2026-09-16T13:44:08.662Z'
 draft: false
 typeR: plat
 categories: []
@@ -21,8 +21,7 @@ saison:
   - automne
   - hiver
 id: bo-bun-vegan-ver-v2-au_rjdjqpvrkehr
-materiel:
-  - Plat Paela
+materiel: []
 ingredients:
   - uuid: cg3wgm
     name: Salade verte (chêne)
@@ -263,39 +262,33 @@ preparation: |-
 
   Possible 1 J avant
 
-  * Faire griller les protéines de soja dans la très grande poêle.
-  * Déglacer au jus d'orange et sauce soja.
-  * Ajouter poivre et 4épices, ail et gingembre pressés.
-  * Ensuite les faire caraméliser avec le sucre.
-
-
+  - Faire griller les protéines de soja dans la très grande poêle.
+  - Déglacer au jus d'orange et sauce soja.
+  - Ajouter poivre et 4épices, ail et gingembre pressés.
+  - Ensuite les faire caraméliser avec le sucre.
 
   **SAUCE VEGANE:**
 
   Possible 1 J avant
 
-  * Faire chauffer l'eau sans la bouillir en infusant l'algue Kombu minimum 20min.
-  * Mettre dans une gamelle, l'ail pressé,  le sucre, le jus de citrons verts, le vinaigre,jusqu'à ce que le sucre se dissolve.
-  * Ajoutez la sauce tamari, l'eau, l'algueet les échalottes hâchées menues.
-  * Mélanger et réserver au frais.
-
-
+  - Faire chauffer l'eau sans la bouillir en infusant l'algue Kombu minimum 20min.
+  - Mettre dans une gamelle, l'ail pressé, le sucre, le jus de citrons verts, le vinaigre,jusqu'à ce que le sucre se dissolve.
+  - Ajoutez la sauce tamari, l'eau, l'algueet les échalottes hâchées menues.
+  - Mélanger et réserver au frais.
 
   **GARNITURE :**
 
-  * Râper les carottes
-  * Couper les concombre pélés en bâtonnets
-  * Hâcher grossièrement la menthe et la coriandre
-  * Couper la salade
-  * Toaster les cacahuètes et les broyer légèrement.
-
-
+  - Râper les carottes
+  - Couper les concombre pélés en bâtonnets
+  - Hâcher grossièrement la menthe et la coriandre
+  - Couper la salade
+  - Toaster les cacahuètes et les broyer légèrement.
 
   **1h30 avant le service:**
 
-  * Cuire les vermicelles à l'eau bouillante et les rincer à la sortie de cuisson.
-  * Les cuire petit à petit, pas tout d'un coup.
-  * Les laisser reposer dans une passoire sous un torchon durant 1h.
+  - Cuire les vermicelles à l'eau bouillante et les rincer à la sortie de cuisson.
+  - Les cuire petit à petit, pas tout d'un coup.
+  - Les laisser reposer dans une passoire sous un torchon durant 1h.
 
   **ASSEMBLAGE DU BO BUN :**
 
@@ -310,9 +303,9 @@ permissionWrite:
   - 696faf80000078153479
 auteur: Auré
 createdAt: '2026-09-16T10:24:32.558+00:00'
-updatedAt: '2026-09-16T10:24:32.558+00:00'
+updatedAt: '2026-09-16T13:44:08.265+00:00'
 createdBy: 696faf80000078153479
-teams: null
+teams: []
 status: public
 rootRecipeId: bo-bun-vege_bg99tl1koegs
 versionLabel: v2 - aure

@@ -1,6 +1,6 @@
 ---
 title: Bo bun vegan - version corrigée
-date: '2026-09-16T13:44:08.662Z'
+date: '2026-09-16T13:45:38.383Z'
 draft: false
 typeR: plat
 categories: []
@@ -13,7 +13,7 @@ quantite_desc: 'une grosse assiette creuse, ou un bol standard + une assiette pl
 check: true
 cuisson: true
 serveHot: false
-description: 'Alors oui , bò veut dire « bœuf » et il serait préférable de dire : Bún (vermicelles de riz) xào (sautés) chay (végé/végan) mais déso c''est quand même plus compréhensible pour tout le monde.'
+description: 'Alors oui , bò veut dire « bœuf » et il serait préférable de dire : Bún (vermicelles de riz) xào (sautés) chay (végé/végan) mais déso Bo Bun, c''est quand même plus compréhensible pour tout le monde.'
 region: Vietnam
 saison:
   - printemps
@@ -303,7 +303,7 @@ permissionWrite:
   - 696faf80000078153479
 auteur: Auré
 createdAt: '2026-09-16T10:24:32.558+00:00'
-updatedAt: '2026-09-16T13:44:08.265+00:00'
+updatedAt: '2026-09-16T13:45:37.918+00:00'
 createdBy: 696faf80000078153479
 teams: []
 status: public

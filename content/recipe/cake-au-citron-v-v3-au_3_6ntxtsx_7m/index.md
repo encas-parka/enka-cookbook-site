@@ -1,7 +1,7 @@
 ---
 title: Cake au citron végan sans gluten corrigée
-date: '2026-09-16T12:34:52.664Z'
-draft: true
+date: '2026-09-16T13:08:09.690Z'
+draft: false
 typeR: dessert
 categories:
   - Gateau
@@ -142,7 +142,7 @@ permissionWrite:
   - 696faf80000078153479
 auteur: Auré
 createdAt: '2026-09-16T12:34:49.815+00:00'
-updatedAt: '2026-09-16T12:34:49.815+00:00'
+updatedAt: '2026-09-16T13:08:09.206+00:00'
 createdBy: 696faf80000078153479
 teams: []
 status: public

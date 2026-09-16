@@ -1,6 +1,6 @@
 ---
 title: Wraps fusion au tofu mariné
-date: '2026-09-16T10:30:53.632Z'
+date: '2026-09-16T10:38:20.513Z'
 draft: true
 typeR: plat
 categories:
@@ -17,9 +17,7 @@ description: Un wrap qui mélange différentes cuisines et textures
 region: null
 saison: []
 id: wraps-fusion-au-tofu-m_dkit6ryo2uji
-materiel:
-  - Bruleur
-  - Sauteuse
+materiel: []
 ingredients:
   - uuid: 3ahcls
     name: Tofu ferme
@@ -122,8 +120,54 @@ ingredients:
     comment: confit d'oignons
     allergens: []
     type: sucres
+  - uuid: eouu0v
+    name: Carotte
+    originalQuantity: 8
+    originalUnit: kg
+    normalizedQuantity: 8000
+    normalizedUnit: gr.
+    comment: crudités marinées
+    allergens: []
+    type: legumes
+  - uuid: 7sc3uw
+    name: Betterave rouge
+    originalQuantity: 4
+    originalUnit: kg
+    normalizedQuantity: 4000
+    normalizedUnit: gr.
+    comment: crudités marinées
+    allergens: []
+    type: legumes
+  - uuid: 7qo3ht
+    name: Vinaigre de cidre
+    originalQuantity: 1.5
+    originalUnit: l.
+    normalizedQuantity: 1500
+    normalizedUnit: ml
+    comment: crudités marinées
+    allergens:
+      - Alcool
+    type: epices
+  - uuid: u9z2he
+    name: Sucre en poudre
+    originalQuantity: 200
+    originalUnit: gr.
+    normalizedQuantity: 200
+    normalizedUnit: gr.
+    comment: crudités marinées
+    allergens: []
+    type: sucres
+  - uuid: 2juq3x
+    name: Sel
+    originalQuantity: 1
+    originalUnit: au goût
+    normalizedQuantity: 1
+    normalizedUnit: au goût
+    comment: crudités marinées
+    allergens: []
+    type: epices
 preparation: |-
-  Préparer tous les éléments du wrap : 
+  Préparer tous les éléments du wrap :
 
   **TOFU :**
 
@@ -144,16 +188,21 @@ preparation: |-
   - Laisser cuire jusqu'à ce que les oignons soient confits
 
   **CRUDITÉS MARINÉES :**
+
+  - Mettre le sucre dans le vinaigre pour qu'il fonde
+  - Raper les carottes et les betteraves
+  - Saler et verser la marinade
+  - Bien mélanger et réserver
 prepAlt: []
 astuces: []
 preparation24h: null
 permissionWrite:
   - 6931ecdccd2c8d8d15e5
-auteur: null
+auteur: Marion
 createdAt: '2026-09-16T10:30:53.126+00:00'
-updatedAt: '2026-09-16T10:30:53.126+00:00'
+updatedAt: '2026-09-16T10:38:20.074+00:00'
 createdBy: 6931ecdccd2c8d8d15e5
-teams: null
+teams: []
 status: public
 rootRecipeId: null
 versionLabel: null

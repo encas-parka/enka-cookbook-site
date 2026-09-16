@@ -1,7 +1,7 @@
 ---
 title: Gâteau de sésame
-date: '2026-09-16T13:36:02.321Z'
-draft: true
+date: '2026-09-16T13:36:16.332Z'
+draft: false
 typeR: dessert
 categories:
   - Gateau
@@ -9,16 +9,14 @@ regime:
   - vegetarien
 plate: 100
 quantite_desc: 25 parts = 1 gastro
-check: false
+check: true
 cuisson: true
 serveHot: true
 description: 'Gâteau au Sésame noir et chocolat '
 region: null
 saison: []
 id: gateau-de-sesame-v2-ve_gqhy_fdhzmke
-materiel:
-  - Gastro 1/1 (Fins)
-  - Four
+materiel: []
 ingredients:
   - uuid: vgec6e
     name: Levure chimique
@@ -126,17 +124,16 @@ ingredients:
     pF: false
     pS: false
 preparation: "* Four à 180°. Les gastros devront être sulfurisés.\n* Faire fondre le beurre et la purée de sésame noire. Hors du feu, incorporer les oeufs et le sucre et 5 pincées de sel. battus en remuant sans cesse. Tamiser la farine avec la levure. Verser dans les gastros sulfurisés.\n* Cuire 45 min à 1h. Test à la pointe du couteau qui doit être sèche.\_\n* Laisser reposer 15 min avant de démouler à l'envers sur les plateaux.\n* Pendant ce temps\_ faire un glaçage chocolat noir. \n\n  * Faire chauffer la crème liquide. \n  * Dans un saladier, verser la crème très chaude sur les carreaux de chocolat. \n* Enfin, glacer les gâteaux!"
-prepAlt:
-  - recetteAlt: gateau-de-sesame-vegan-et-sans-gluten_qwu5pitp
+prepAlt: []
 astuces: []
 preparation24h: null
 permissionWrite:
   - 696faf80000078153479
 auteur: Auré
 createdAt: '2026-09-16T13:35:59.236+00:00'
-updatedAt: '2026-09-16T13:35:59.236+00:00'
+updatedAt: '2026-09-16T13:36:16.030+00:00'
 createdBy: 696faf80000078153479
-teams: null
+teams: []
 status: public
 rootRecipeId: gateau-de-sesame_y3s38qkd0bc7
 versionLabel: v2 - version corrigee

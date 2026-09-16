@@ -1,13 +1,12 @@
 ---
-title: Wraps fusion au tofu mariné
-date: '2026-09-16T10:38:20.513Z'
+title: Wraps fusion gourmand au tofu mariné et halloumi
+date: '2026-09-16T10:50:50.681Z'
 draft: true
 typeR: plat
 categories:
   - Snacking
 regime:
   - vegetarien
-  - sans-gluten
 plate: 200
 quantite_desc: null
 check: false
@@ -17,7 +16,11 @@ description: Un wrap qui mélange différentes cuisines et textures
 region: null
 saison: []
 id: wraps-fusion-au-tofu-m_dkit6ryo2uji
-materiel: []
+materiel:
+  - Essoreuse à salade
+  - Bruleur
+  - Four
+  - Frigo
 ingredients:
   - uuid: 3ahcls
     name: Tofu ferme
@@ -98,7 +101,7 @@ ingredients:
     originalUnit: kg
     normalizedQuantity: 8000
     normalizedUnit: gr.
-    comment: ''
+    comment: halloumi grillé
     allergens:
       - Produit laitier
     type: frais
@@ -166,6 +169,90 @@ ingredients:
     comment: crudités marinées
     allergens: []
     type: epices
+  - uuid: tzv9yk
+    name: Galettes wrap (grandes)
+    originalQuantity: 180
+    originalUnit: unité
+    normalizedQuantity: 180
+    normalizedUnit: unité
+    comment: ''
+    allergens:
+      - Gluten
+    type: lof
+  - uuid: gvi1bt
+    name: Galettes wrap sans gluten
+    originalQuantity: 20
+    originalUnit: unité
+    normalizedQuantity: 20
+    normalizedUnit: unité
+    comment: ''
+    allergens: []
+    type: lof
+  - uuid: j1vp47
+    name: Salade
+    originalQuantity: 14
+    originalUnit: unité
+    normalizedQuantity: 14
+    normalizedUnit: unité
+    comment: ''
+    allergens: []
+    type: legumes
+  - uuid: e4mjd1
+    name: Jus de citron
+    originalQuantity: 500
+    originalUnit: ml
+    normalizedQuantity: 500
+    normalizedUnit: ml
+    comment: halloumi grillé
+    allergens: []
+    type: sucres
+  - uuid: 7cflkx
+    name: Sirop d'agave
+    originalQuantity: 300
+    originalUnit: ml
+    normalizedQuantity: 300
+    normalizedUnit: ml
+    comment: halloumi grillé
+    allergens: []
+    type: sucres
+  - uuid: hlbwfd
+    name: Yaourt de soja
+    originalQuantity: 3.2
+    originalUnit: l.
+    normalizedQuantity: 3200
+    normalizedUnit: ml
+    comment: sauce blanche
+    allergens:
+      - Soja
+    type: frais
+  - uuid: e4mjd1
+    name: Jus de citron
+    originalQuantity: 1.5
+    originalUnit: l.
+    normalizedQuantity: 1500
+    normalizedUnit: ml
+    comment: sauce blanche
+    allergens: []
+    type: sucres
+  - uuid: u33083
+    name: Tahin
+    originalQuantity: 700
+    originalUnit: gr.
+    normalizedQuantity: 700
+    normalizedUnit: gr.
+    comment: sauce blanche
+    allergens:
+      - Sésame
+    type: autres
+  - uuid: 2juq3x
+    name: Sel
+    originalQuantity: 1
+    originalUnit: au goût
+    normalizedQuantity: 1
+    normalizedUnit: au goût
+    comment: sauce blanche
+    allergens: []
+    type: epices
 preparation: |-
   Préparer tous les éléments du wrap :
 
@@ -193,6 +280,26 @@ preparation: |-
   - Raper les carottes et les betteraves
   - Saler et verser la marinade
   - Bien mélanger et réserver
+
+  **HALLOUMI GRILLÉ :**
+
+  - Faire griller les blocs de halloumi de chaque côté dans une grande poele ( si elle a tendance à accrocher ajouter un peu d'huile)
+  - Quand ils commencent à etre grillés, verser un peu de sirop d'agave dessus
+  - Déglacer au jus de citron
+  - Couper en petits cubes ou en tranches
+
+  **SAUCE BLANCHE :**
+
+  Mélanger les ingrédients de la sauce (ajouter le jus de citron petit à petit pour gouter). Saler au gout. Attention à ne pas trop saler : le tofu et le halloumi sont déjà bien salés.
+
+  **SALADE :** 
+
+  Laver, essorer, couper, réserver.
+
+  **ASSEMBLAGE :**
+
+  - Faire griller les galettes de chaque côté à feu vif
+  - Galette &gt; confit d'oignons &gt; crudités &gt; tofu &gt; halloumi &gt; sauce blanche &gt; salade &gt; Pliage
 prepAlt: []
 astuces: []
 preparation24h: null
@@ -200,7 +307,7 @@ permissionWrite:
   - 6931ecdccd2c8d8d15e5
 auteur: Marion
 createdAt: '2026-09-16T10:30:53.126+00:00'
-updatedAt: '2026-09-16T10:38:20.074+00:00'
+updatedAt: '2026-09-16T10:50:50.188+00:00'
 createdBy: 6931ecdccd2c8d8d15e5
 teams: []
 status: public

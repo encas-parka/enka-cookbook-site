@@ -1,6 +1,6 @@
 ---
 title: Wraps fusion gourmands au tofu mariné et halloumi
-date: '2026-09-16T11:09:11.978Z'
+date: '2026-09-16T19:43:36.459Z'
 draft: true
 typeR: plat
 categories:
@@ -116,9 +116,9 @@ ingredients:
     type: legumes
   - uuid: u9z2he
     name: Sucre en poudre
-    originalQuantity: 200
+    originalQuantity: 100
     originalUnit: gr.
-    normalizedQuantity: 200
+    normalizedQuantity: 100
     normalizedUnit: gr.
     comment: confit d'oignons
     allergens: []
@@ -153,9 +153,9 @@ ingredients:
     type: epices
   - uuid: u9z2he
     name: Sucre en poudre
-    originalQuantity: 200
+    originalQuantity: 100
     originalUnit: gr.
-    normalizedQuantity: 200
+    normalizedQuantity: 100
     normalizedUnit: gr.
     comment: crudités marinées
     allergens: []
@@ -208,9 +208,9 @@ ingredients:
     type: sucres
   - uuid: 7cflkx
     name: Sirop d'agave
-    originalQuantity: 300
+    originalQuantity: 150
     originalUnit: ml
-    normalizedQuantity: 300
+    normalizedQuantity: 150
     normalizedUnit: ml
     comment: halloumi grillé
     allergens: []
@@ -236,9 +236,9 @@ ingredients:
     type: sucres
   - uuid: u33083
     name: Tahin
-    originalQuantity: 700
+    originalQuantity: 500
     originalUnit: gr.
-    normalizedQuantity: 700
+    normalizedQuantity: 500
     normalizedUnit: gr.
     comment: sauce blanche
     allergens:
@@ -312,7 +312,7 @@ permissionWrite:
   - 6931ecdccd2c8d8d15e5
 auteur: Marion
 createdAt: '2026-09-16T10:30:53.126+00:00'
-updatedAt: '2026-09-16T11:09:11.543+00:00'
+updatedAt: '2026-09-16T19:43:32.521+00:00'
 createdBy: 6931ecdccd2c8d8d15e5
 teams: []
 status: public

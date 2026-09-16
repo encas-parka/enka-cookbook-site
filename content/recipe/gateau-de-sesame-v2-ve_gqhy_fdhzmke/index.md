@@ -1,6 +1,6 @@
 ---
 title: Gâteau de sésame
-date: '2026-09-16T13:36:16.332Z'
+date: '2026-09-16T13:40:49.589Z'
 draft: false
 typeR: dessert
 categories:
@@ -11,18 +11,20 @@ plate: 100
 quantite_desc: 25 parts = 1 gastro
 check: true
 cuisson: true
-serveHot: true
+serveHot: false
 description: 'Gâteau au Sésame noir et chocolat '
 region: null
 saison: []
 id: gateau-de-sesame-v2-ve_gqhy_fdhzmke
-materiel: []
+materiel:
+  - Four
+  - Gastro 1/1 (10cm)
 ingredients:
   - uuid: vgec6e
     name: Levure chimique
-    originalQuantity: 70
+    originalQuantity: 100
     originalUnit: gr.
-    normalizedQuantity: 70
+    normalizedQuantity: 100
     normalizedUnit: gr.
     comment: ''
     allergens:
@@ -32,9 +34,9 @@ ingredients:
     pS: false
   - uuid: 9d8hxn
     name: Purée de sésame noir
-    originalQuantity: 1
+    originalQuantity: 1.5
     originalUnit: kg
-    normalizedQuantity: 1000
+    normalizedQuantity: 1500
     normalizedUnit: gr.
     comment: ''
     allergens:
@@ -42,22 +44,11 @@ ingredients:
     type: autres
     pF: false
     pS: false
-  - uuid: 2juq3x
-    name: Sel
-    originalQuantity: 1
-    originalUnit: au goût
-    normalizedQuantity: 1
-    normalizedUnit: au goût
-    comment: ''
-    allergens: []
-    type: epices
-    pF: false
-    pS: false
   - uuid: mxub21
     name: Beurre demi-sel
-    originalQuantity: 2
+    originalQuantity: 3
     originalUnit: kg
-    normalizedQuantity: 2000
+    normalizedQuantity: 3000
     normalizedUnit: gr.
     comment: ''
     allergens:
@@ -79,9 +70,9 @@ ingredients:
     pS: false
   - uuid: zf3zf8
     name: Oeuf
-    originalQuantity: 25
+    originalQuantity: 40
     originalUnit: unité
-    normalizedQuantity: 25
+    normalizedQuantity: 40
     normalizedUnit: unité
     comment: ''
     allergens:
@@ -91,9 +82,9 @@ ingredients:
     pS: false
   - uuid: 2av6w8
     name: Farine de blé
-    originalQuantity: 1
+    originalQuantity: 1.5
     originalUnit: kg
-    normalizedQuantity: 1000
+    normalizedQuantity: 1500
     normalizedUnit: gr.
     comment: ''
     allergens:
@@ -114,16 +105,16 @@ ingredients:
     pS: false
   - uuid: u9z2he
     name: Sucre en poudre
-    originalQuantity: 3
+    originalQuantity: 4.5
     originalUnit: kg
-    normalizedQuantity: 3000
+    normalizedQuantity: 4500
     normalizedUnit: gr.
     comment: ''
     allergens: []
     type: sucres
     pF: false
     pS: false
-preparation: "* Four à 180°. Les gastros devront être sulfurisés.\n* Faire fondre le beurre et la purée de sésame noire. Hors du feu, incorporer les oeufs et le sucre et 5 pincées de sel. battus en remuant sans cesse. Tamiser la farine avec la levure. Verser dans les gastros sulfurisés.\n* Cuire 45 min à 1h. Test à la pointe du couteau qui doit être sèche.\_\n* Laisser reposer 15 min avant de démouler à l'envers sur les plateaux.\n* Pendant ce temps\_ faire un glaçage chocolat noir. \n\n  * Faire chauffer la crème liquide. \n  * Dans un saladier, verser la crème très chaude sur les carreaux de chocolat. \n* Enfin, glacer les gâteaux!"
+preparation: "1. Four à 180°. Les gastros devront être sulfurisés.\n\n- Faire fondre le beurre salé et la purée de sésame noire.\n\n- Hors du feu, incorporer les oeufs battus et le sucre en remuant sans cesse.\n\n- Tamiser la farine avec la levure. Verser  l'appareil dans les gastros sulfurisés.\n\n- Cuire 45 min à 1h. Tester à la pointe du couteau qui doit être sèche.\n\n- Laisser reposer 15 min avant de démouler à l'envers sur les plateaux.\n\n- Pendant ce temps\_ faire le glaçage de ganache au chocolat noir.\n\n  - Faire chauffer la crème liquide.\n\n  - Puis hors du feu, dans un saladier, verser petit à petit la crème très chaude sur les carreaux de chocolat et bien remuer jusqu'à ce que l'appareil soit lisse et brillant. Glacer les gâteaux!\n\n  - Enfin couper les parts avant que les gâteaux n'aient entièrement refroidi car ils durcissent et après c'est l'enfer."
 prepAlt: []
 astuces: []
 preparation24h: null
@@ -131,7 +122,7 @@ permissionWrite:
   - 696faf80000078153479
 auteur: Auré
 createdAt: '2026-09-16T13:35:59.236+00:00'
-updatedAt: '2026-09-16T13:36:16.030+00:00'
+updatedAt: '2026-09-16T13:40:48.997+00:00'
 createdBy: 696faf80000078153479
 teams: []
 status: public

@@ -1,6 +1,6 @@
 ---
-title: Wraps fusion gourmand au tofu mariné et halloumi
-date: '2026-09-16T10:50:50.681Z'
+title: Wraps fusion gourmands au tofu mariné et halloumi
+date: '2026-09-16T10:51:25.396Z'
 draft: true
 typeR: plat
 categories:
@@ -307,7 +307,7 @@ permissionWrite:
   - 6931ecdccd2c8d8d15e5
 auteur: Marion
 createdAt: '2026-09-16T10:30:53.126+00:00'
-updatedAt: '2026-09-16T10:50:50.188+00:00'
+updatedAt: '2026-09-16T10:51:25.127+00:00'
 createdBy: 6931ecdccd2c8d8d15e5
 teams: []
 status: public

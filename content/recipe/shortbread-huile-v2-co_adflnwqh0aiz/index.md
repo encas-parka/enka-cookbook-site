@@ -1,7 +1,7 @@
 ---
 title: Shortbread huile d olive et romarin et chocolat
-date: '2026-05-18T08:34:19.156Z'
-draft: true
+date: '2026-09-16T14:35:26.335Z'
+draft: false
 typeR: dessert
 categories:
   - Gateau
@@ -17,8 +17,7 @@ description: Petit biscuit bien gourmand
 region: null
 saison: []
 id: shortbread-huile-v2-co_adflnwqh0aiz
-materiel:
-  - Four
+materiel: []
 ingredients:
   - uuid: 6z655r
     name: Romarin
@@ -114,9 +113,9 @@ permissionWrite:
   - 696faf80000078153479
 auteur: Auré
 createdAt: '2026-05-18T08:34:18.598+00:00'
-updatedAt: '2026-05-18T08:34:18.598+00:00'
+updatedAt: '2026-09-16T14:35:23.672+00:00'
 createdBy: 696faf80000078153479
-teams: null
+teams: []
 status: public
 rootRecipeId: shortbread-huile-doliv_h02dur1pp23l
 versionLabel: v2 - correction

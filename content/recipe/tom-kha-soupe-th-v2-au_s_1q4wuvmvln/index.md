@@ -1,6 +1,6 @@
 ---
-title: Tom kha soupe thaï pour 700ml
-date: '2026-09-16T12:55:04.316Z'
+title: Tom kha soupe thaï pour bol de 700ml
+date: '2026-09-16T16:55:56.035Z'
 draft: false
 typeR: plat
 categories:
@@ -280,9 +280,9 @@ permissionWrite:
   - 696faf80000078153479
 auteur: Auré
 createdAt: '2026-09-16T12:55:02.677+00:00'
-updatedAt: '2026-09-16T12:55:02.677+00:00'
+updatedAt: '2026-09-16T16:55:53.063+00:00'
 createdBy: 696faf80000078153479
-teams: null
+teams: []
 status: public
 rootRecipeId: tom-kha-soupe-thai_fdy0l64ios9o
 versionLabel: v2 - aure

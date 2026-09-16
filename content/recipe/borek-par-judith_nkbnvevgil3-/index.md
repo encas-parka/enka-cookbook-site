@@ -1,6 +1,6 @@
 ---
 title: Borek par judith
-date: '2026-09-16T13:16:58.588Z'
+date: '2026-09-16T13:18:00.267Z'
 draft: false
 typeR: entree
 categories:
@@ -109,7 +109,7 @@ ingredients:
 preparation: |-
   1. Fouetter les oeufs, l’huile et le lait ensemble.
 
-  2. Faire revenir les oignons et l’ail, y ajouter les épinards. Faire égoutter avant de mélanger avec le fromage de façon pas trop lisse ( genre on laisse des bouts). Assaisonner de sel et poivre.
+  2. Faire revenir les oignons et l’ail finement émincés, y ajouter les épinards. Faire égoutter avant de mélanger avec le fromage de façon pas trop lisse ( genre on laisse des bouts). Assaisonner de sel et poivre.
 
   3. On étale avec un pinceau du gras au fond des gastro ou sinon une feuille de papier sulfurisée qui sera plus pratique pour la vaisselle. Attention au papier sulfurisé lors du service qui a tendance à s'accrocher à chaque part de börek.
 
@@ -127,7 +127,7 @@ permissionWrite:
   - 696faf80000078153479
 auteur: Auré
 createdAt: '2026-09-16T13:10:56.866+00:00'
-updatedAt: '2026-09-16T13:16:58.227+00:00'
+updatedAt: '2026-09-16T13:17:59.603+00:00'
 createdBy: 696faf80000078153479
 teams: []
 status: public

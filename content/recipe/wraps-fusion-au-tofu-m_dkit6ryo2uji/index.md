@@ -1,6 +1,6 @@
 ---
 title: Wraps fusion gourmands au tofu mariné et halloumi
-date: '2026-09-16T10:51:25.396Z'
+date: '2026-09-16T11:07:48.058Z'
 draft: true
 typeR: plat
 categories:
@@ -292,14 +292,14 @@ preparation: |-
 
   Mélanger les ingrédients de la sauce (ajouter le jus de citron petit à petit pour gouter). Saler au gout. Attention à ne pas trop saler : le tofu et le halloumi sont déjà bien salés.
 
-  **SALADE :** 
+  **SALADE :**
 
   Laver, essorer, couper, réserver.
 
   **ASSEMBLAGE :**
 
   - Faire griller les galettes de chaque côté à feu vif
-  - Galette &gt; confit d'oignons &gt; crudités &gt; tofu &gt; halloumi &gt; sauce blanche &gt; salade &gt; Pliage
+  - Galette - confit d'oignons - crudités - tofu - halloumi - sauce blanche -salade - Pliage
 prepAlt: []
 astuces: []
 preparation24h: null
@@ -307,7 +307,7 @@ permissionWrite:
   - 6931ecdccd2c8d8d15e5
 auteur: Marion
 createdAt: '2026-09-16T10:30:53.126+00:00'
-updatedAt: '2026-09-16T10:51:25.127+00:00'
+updatedAt: '2026-09-16T11:07:47.768+00:00'
 createdBy: 6931ecdccd2c8d8d15e5
 teams: []
 status: public

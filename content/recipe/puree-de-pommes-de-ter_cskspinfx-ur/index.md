@@ -1,7 +1,7 @@
 ---
 title: Purée de pommes de terres - gratinage optionnel - vegan
-date: '2026-04-09T08:31:01.177Z'
-draft: true
+date: '2026-09-17T15:35:37.436Z'
+draft: false
 typeR: plat
 categories:
   - Plat au Four
@@ -11,7 +11,7 @@ regime:
   - sans-lactose
 plate: 40
 quantite_desc: null
-check: false
+check: true
 cuisson: true
 serveHot: true
 description: null
@@ -77,10 +77,10 @@ ingredients:
     type: epices
   - uuid: 5dwrvm
     name: Gros sel
-    originalQuantity: 0
-    originalUnit: gr.
-    normalizedQuantity: 0
-    normalizedUnit: gr.
+    originalQuantity: 1
+    originalUnit: au goût
+    normalizedQuantity: 1
+    normalizedUnit: au goût
     comment: ''
     allergens: []
     type: epices
@@ -119,7 +119,7 @@ permissionWrite:
   - 6931ecdccd2c8d8d15e5
 auteur: Marion
 createdAt: '2026-03-28T14:50:18.387+00:00'
-updatedAt: '2026-04-09T08:31:00.710+00:00'
+updatedAt: '2026-09-17T15:35:37.212+00:00'
 createdBy: 6931ecdccd2c8d8d15e5
 teams: []
 status: public

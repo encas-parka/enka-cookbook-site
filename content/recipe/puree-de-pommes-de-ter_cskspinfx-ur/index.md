@@ -1,6 +1,6 @@
 ---
 title: Purée de pommes de terres - gratinage optionnel - vegan
-date: '2026-09-17T15:35:37.436Z'
+date: '2026-09-17T15:35:54.020Z'
 draft: false
 typeR: plat
 categories:
@@ -86,10 +86,10 @@ ingredients:
     type: epices
   - uuid: 2juq3x
     name: Sel
-    originalQuantity: 0.1
-    originalUnit: gr.
-    normalizedQuantity: 0.1
-    normalizedUnit: gr.
+    originalQuantity: 1
+    originalUnit: au goût
+    normalizedQuantity: 1
+    normalizedUnit: au goût
     comment: ''
     allergens: []
     type: epices
@@ -119,7 +119,7 @@ permissionWrite:
   - 6931ecdccd2c8d8d15e5
 auteur: Marion
 createdAt: '2026-03-28T14:50:18.387+00:00'
-updatedAt: '2026-09-17T15:35:37.212+00:00'
+updatedAt: '2026-09-17T15:35:53.742+00:00'
 createdBy: 6931ecdccd2c8d8d15e5
 teams: []
 status: public

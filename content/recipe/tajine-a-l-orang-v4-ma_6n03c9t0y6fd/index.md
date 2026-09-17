@@ -1,7 +1,7 @@
 ---
 title: Tajine à l orange végé aux légumes d hiver
-date: '2026-05-26T15:13:04.767Z'
-draft: true
+date: '2026-09-17T15:36:27.490Z'
+draft: false
 typeR: plat
 categories: []
 regime:
@@ -9,7 +9,7 @@ regime:
   - sans-lactose
 plate: 100
 quantite_desc: null
-check: false
+check: true
 cuisson: true
 serveHot: true
 description: null
@@ -32,9 +32,9 @@ ingredients:
     pS: false
   - uuid: eouu0v
     name: Carotte
-    originalQuantity: 70
+    originalQuantity: 60
     originalUnit: unité
-    normalizedQuantity: 8750
+    normalizedQuantity: 7500
     normalizedUnit: gr.
     comment: À couper en gros morceaux
     allergens: []
@@ -176,9 +176,9 @@ ingredients:
     type: epices
   - uuid: 18dy4e
     name: Pomme de terre
-    originalQuantity: 30
+    originalQuantity: 25
     originalUnit: unité
-    normalizedQuantity: 30
+    normalizedQuantity: 25
     normalizedUnit: unité
     comment: en gros morceaux
     allergens: []
@@ -205,7 +205,7 @@ permissionWrite:
   - 6931ecdccd2c8d8d15e5
 auteur: Marion
 createdAt: '2026-05-26T15:12:48.856+00:00'
-updatedAt: '2026-05-26T15:13:01.606+00:00'
+updatedAt: '2026-09-17T15:36:27.216+00:00'
 createdBy: 6931ecdccd2c8d8d15e5
 teams: []
 status: public

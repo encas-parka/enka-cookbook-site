@@ -1,14 +1,13 @@
 ---
 title: Velouté de brocoli
-date: '2026-03-17T10:00:31.023Z'
+date: '2026-09-17T15:37:16.239Z'
 draft: true
 typeR: entree
 categories:
   - Soupe
 regime:
-  - vegan
+  - vegetarien
   - sans-gluten
-  - sans-lactose
 plate: 6
 quantite_desc: null
 check: false
@@ -19,8 +18,7 @@ region: null
 saison:
   - hiver
 id: veloute-de-brocoli_m5p6ujexbwlm
-materiel:
-  - Giraffe (Bras Mixeur)
+materiel: []
 ingredients:
   - uuid: ix43bo
     name: Brocoli
@@ -85,6 +83,16 @@ ingredients:
     comment: ''
     allergens: []
     type: epices
+  - uuid: izd01q
+    name: Crème fraîche épaisse entière
+    originalQuantity: 60
+    originalUnit: ml
+    normalizedQuantity: 60
+    normalizedUnit: ml
+    comment: ''
+    allergens:
+      - Produit laitier
+    type: frais
 preparation: |-
   Découper les légumes grossièrement.
 
@@ -98,11 +106,11 @@ astuces: []
 preparation24h: null
 permissionWrite:
   - 6931ecdccd2c8d8d15e5
-auteur: null
+auteur: Marion
 createdAt: '2026-03-17T10:00:30.569+00:00'
-updatedAt: '2026-03-17T10:00:30.569+00:00'
+updatedAt: '2026-09-17T15:37:15.951+00:00'
 createdBy: 6931ecdccd2c8d8d15e5
-teams: null
+teams: []
 status: public
 rootRecipeId: null
 versionLabel: null

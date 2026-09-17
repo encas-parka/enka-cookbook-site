@@ -1,7 +1,7 @@
 ---
 title: Penne cruda vegan sans gluten
-date: '2026-05-26T20:50:04.476Z'
-draft: true
+date: '2026-09-17T15:32:37.198Z'
+draft: false
 typeR: plat
 categories:
   - Plat chaud
@@ -11,7 +11,7 @@ regime:
   - sans-lactose
 plate: 100
 quantite_desc: null
-check: false
+check: true
 cuisson: false
 serveHot: true
 description: null
@@ -146,7 +146,7 @@ permissionWrite:
   - 6931ecdccd2c8d8d15e5
 auteur: Marion
 createdAt: '2026-04-12T08:58:15.970+00:00'
-updatedAt: '2026-05-26T20:50:02.686+00:00'
+updatedAt: '2026-09-17T15:32:36.920+00:00'
 createdBy: 6931ecdccd2c8d8d15e5
 teams: []
 status: public

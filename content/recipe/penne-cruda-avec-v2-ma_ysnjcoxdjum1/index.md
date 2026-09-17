@@ -1,7 +1,7 @@
 ---
 title: Penne cruda avec fromage et noix
-date: '2026-09-17T15:32:19.312Z'
-draft: true
+date: '2026-09-17T15:32:20.866Z'
+draft: false
 typeR: plat
 categories:
   - Plat chaud
@@ -10,7 +10,7 @@ regime:
   - sans-gluten
 plate: 100
 quantite_desc: null
-check: false
+check: true
 cuisson: true
 serveHot: false
 description: null
@@ -159,7 +159,7 @@ permissionWrite:
   - 6931ecdccd2c8d8d15e5
 auteur: Marion
 createdAt: '2026-04-12T08:56:21.661+00:00'
-updatedAt: '2026-09-17T15:31:46.174+00:00'
+updatedAt: '2026-09-17T15:31:54.669+00:00'
 createdBy: 6931ecdccd2c8d8d15e5
 teams: []
 status: public

@@ -1,7 +1,7 @@
 ---
 title: Xtipiti
-date: '2026-05-26T18:25:11.506Z'
-draft: true
+date: '2026-09-17T15:37:31.750Z'
+draft: false
 typeR: entree
 categories:
   - Tartinade
@@ -10,7 +10,7 @@ regime:
   - sans-gluten
 plate: 8
 quantite_desc: null
-check: false
+check: true
 cuisson: true
 serveHot: false
 description: Tartinade grecque poivron feta
@@ -89,7 +89,7 @@ permissionWrite:
   - 6931ecdccd2c8d8d15e5
 auteur: Marion
 createdAt: '2026-03-26T10:34:58.241+00:00'
-updatedAt: '2026-05-26T18:24:51.847+00:00'
+updatedAt: '2026-09-17T15:37:31.335+00:00'
 createdBy: 6931ecdccd2c8d8d15e5
 teams: []
 status: public

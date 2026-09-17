@@ -1,7 +1,7 @@
 ---
 title: Boulettes de kasha vegan
-date: '2026-03-29T11:18:35.183Z'
-draft: true
+date: '2026-09-17T15:37:57.517Z'
+draft: false
 typeR: plat
 categories:
   - Bouchées salées
@@ -87,10 +87,10 @@ ingredients:
     type: epices
   - uuid: 2juq3x
     name: Sel
-    originalQuantity: 0
-    originalUnit: gr.
-    normalizedQuantity: 0
-    normalizedUnit: gr.
+    originalQuantity: 1
+    originalUnit: au goût
+    normalizedQuantity: 1
+    normalizedUnit: au goût
     comment: ''
     allergens: []
     type: epices
@@ -145,7 +145,7 @@ permissionWrite:
   - 6931ecdccd2c8d8d15e5
 auteur: Marion
 createdAt: '2026-03-29T11:18:34.650+00:00'
-updatedAt: '2026-03-29T11:18:34.650+00:00'
+updatedAt: '2026-09-17T15:37:57.256+00:00'
 createdBy: 6931ecdccd2c8d8d15e5
 teams: []
 status: public

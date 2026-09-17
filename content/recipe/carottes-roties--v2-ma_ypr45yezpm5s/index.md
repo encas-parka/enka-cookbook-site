@@ -1,7 +1,7 @@
 ---
 title: Carottes roties à la mélasse de grenade et feta
-date: '2026-06-03T12:44:35.416Z'
-draft: true
+date: '2026-09-17T15:33:21.180Z'
+draft: false
 typeR: entree
 categories:
   - Mezze
@@ -150,7 +150,7 @@ permissionWrite:
   - 6931ecdccd2c8d8d15e5
 auteur: Marion
 createdAt: '2026-03-26T10:09:44.247+00:00'
-updatedAt: '2026-06-03T12:44:34.771+00:00'
+updatedAt: '2026-09-17T15:33:20.799+00:00'
 createdBy: 6931ecdccd2c8d8d15e5
 teams: []
 status: public

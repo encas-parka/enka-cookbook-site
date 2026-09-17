@@ -1,7 +1,7 @@
 ---
 title: Imam bayildi - aubergines farcies
-date: "2026-03-28T15:09:19.970Z"
-draft: true
+date: '2026-09-17T15:34:39.509Z'
+draft: false
 typeR: plat
 categories:
   - Plat au Four
@@ -11,7 +11,7 @@ regime:
   - sans-lactose
 plate: 6
 quantite_desc: une demi aubergine par personne
-check: false
+check: true
 cuisson: true
 serveHot: false
 description: livre Méditerrannée, légèrement simplifiée
@@ -19,9 +19,7 @@ region: Turquie
 saison:
   - ete
 id: imam-bayildi-aubergine_ajwgdmwo00vd
-materiel:
-  - Four
-  - Bruleur
+materiel: []
 ingredients:
   - uuid: 7sk3a5
     name: Aubergine
@@ -29,7 +27,7 @@ ingredients:
     originalUnit: gr.
     normalizedQuantity: 900
     normalizedUnit: gr.
-    comment: ""
+    comment: ''
     allergens: []
     type: legumes
   - uuid: h3c8al
@@ -47,34 +45,34 @@ ingredients:
     originalUnit: ml
     normalizedQuantity: 250
     normalizedUnit: ml
-    comment: ""
+    comment: ''
     allergens: []
     type: epices
-  - uuid: e4mjd1
-    name: Jus de citron
+  - uuid: bwkn34
+    name: Citron (jus)
     originalQuantity: 35
     originalUnit: ml
     normalizedQuantity: 35
     normalizedUnit: ml
-    comment: ""
+    comment: ''
     allergens: []
-    type: sucres
+    type: legumes
   - uuid: u9z2he
     name: Sucre en poudre
     originalQuantity: 1
     originalUnit: c. à café
     normalizedQuantity: 5
     normalizedUnit: gr.
-    comment: ""
+    comment: ''
     allergens: []
     type: sucres
   - uuid: 2juq3x
     name: Sel
-    originalQuantity: 0
-    originalUnit: gr.
-    normalizedQuantity: 0
-    normalizedUnit: gr.
-    comment: ""
+    originalQuantity: 1
+    originalUnit: au goût
+    normalizedQuantity: 1
+    normalizedUnit: au goût
+    comment: ''
     allergens: []
     type: epices
   - uuid: rtavky
@@ -124,10 +122,10 @@ ingredients:
     type: lof
   - uuid: 2pps90
     name: Poivre
-    originalQuantity: 0
-    originalUnit: gr.
-    normalizedQuantity: 0
-    normalizedUnit: gr.
+    originalQuantity: 1
+    originalUnit: au goût
+    normalizedQuantity: 1
+    normalizedUnit: au goût
     comment: farce
     allergens: []
     type: epices
@@ -142,10 +140,10 @@ preparation: |-
 
   Préchauffer le four à 210°C.
 
-  Avec une cuillère, écarter la chair des aubergines en leur milieu, les farcir du mélange. Placer les aubergines dans un gastro bien serrées, farce vers le haut. Arroser d'huile d'olive (aubergine).
+  Avec une cuillère, écarter la chair des aubergines en leur milieu, les farcir du mélange. Placer les aubergines dans un gastro bien serrées, farce vers le haut. Arroser d'huile d'olive (aubergine). 
 
   Mélanger le coulis de tomates, jus de citron, saler et sucrer, verser sur les aubergines. Couvrir d'aluminium et enfourner pour 1h.\
-  Les aubergines doivent être tendres et la sauce avoir bien réduit.
+  Les aubergines doivent être tendres et la sauce avoir bien réduit. 
 
   Servir froid.
 prepAlt: []
@@ -153,12 +151,13 @@ astuces: []
 preparation24h: Faire la veille, mettre au frigo ?
 permissionWrite:
   - 6931ecdccd2c8d8d15e5
-auteur: null
-createdAt: "2026-03-28T15:09:19.513+00:00"
-updatedAt: "2026-04-22T11:15:54.150+00:00"
+auteur: Marion
+createdAt: '2026-03-28T15:09:19.513+00:00'
+updatedAt: '2026-09-17T15:34:39.095+00:00'
 createdBy: 6931ecdccd2c8d8d15e5
-teams: null
+teams: []
 status: public
 rootRecipeId: null
 versionLabel: null
 ---
+

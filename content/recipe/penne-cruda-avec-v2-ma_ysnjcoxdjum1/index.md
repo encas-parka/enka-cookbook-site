@@ -1,6 +1,6 @@
 ---
 title: Penne cruda avec fromage et noix
-date: '2026-05-26T20:49:24.240Z'
+date: '2026-09-17T15:32:19.312Z'
 draft: true
 typeR: plat
 categories:
@@ -145,9 +145,9 @@ preparation: |-
 
   Egoutter et refroidir les pates.
 
-  Mixer les tomates, les olives, l'aïl, les câpres
+  Mixer les tomates, les olives, l'aïl, les câpres,
 
-  Hacher le basilic et l'ajouter à la sauce ainsi que l'huile d'olive.
+  Hacher le basilic et l'ajouter à la sauce ainsi que l'huile d'olive et le fromage frais.
 
   Rectifier l'assaisonement
 
@@ -159,7 +159,7 @@ permissionWrite:
   - 6931ecdccd2c8d8d15e5
 auteur: Marion
 createdAt: '2026-04-12T08:56:21.661+00:00'
-updatedAt: '2026-05-26T20:49:22.970+00:00'
+updatedAt: '2026-09-17T15:31:46.174+00:00'
 createdBy: 6931ecdccd2c8d8d15e5
 teams: []
 status: public

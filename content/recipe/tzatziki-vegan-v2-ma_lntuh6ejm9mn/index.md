@@ -1,7 +1,7 @@
 ---
 title: Tzatziki vegan
-date: '2026-04-08T10:08:15.769Z'
-draft: true
+date: '2026-09-17T15:36:36.512Z'
+draft: false
 typeR: entree
 categories:
   - Tartinade
@@ -94,9 +94,9 @@ permissionWrite:
   - 6931ecdccd2c8d8d15e5
 auteur: Marion
 createdAt: '2026-04-08T10:08:11.501+00:00'
-updatedAt: '2026-04-08T10:08:11.501+00:00'
+updatedAt: '2026-09-17T15:36:36.237+00:00'
 createdBy: 6931ecdccd2c8d8d15e5
-teams: null
+teams: []
 status: public
 rootRecipeId: tzatziki_rw6fjexd723i
 versionLabel: v2 - Marion

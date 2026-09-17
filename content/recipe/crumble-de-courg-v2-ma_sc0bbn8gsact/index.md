@@ -1,7 +1,7 @@
 ---
 title: Crumble de courgette
-date: '2026-09-17T15:39:15.984Z'
-draft: true
+date: '2026-09-17T15:39:40.702Z'
+draft: false
 typeR: plat
 categories: []
 regime:
@@ -111,7 +111,7 @@ permissionWrite:
   - 6931ecdccd2c8d8d15e5
 auteur: Marion
 createdAt: '2026-07-21T14:52:06.375+00:00'
-updatedAt: '2026-09-17T15:39:15.717+00:00'
+updatedAt: '2026-09-17T15:39:40.453+00:00'
 createdBy: 6931ecdccd2c8d8d15e5
 teams: []
 status: public

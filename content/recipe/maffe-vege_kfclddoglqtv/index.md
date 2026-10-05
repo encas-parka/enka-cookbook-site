@@ -1,6 +1,6 @@
 ---
 title: Mafé végé
-date: '2026-10-05T11:40:52.051Z'
+date: '2026-10-05T16:56:43.197Z'
 draft: true
 typeR: plat
 categories:
@@ -176,9 +176,9 @@ ingredients:
     type: legumes
   - uuid: 7fwepk
     name: pois chiche secs
-    originalQuantity: 2400
+    originalQuantity: 1000
     originalUnit: gr.
-    normalizedQuantity: 2400
+    normalizedQuantity: 1000
     normalizedUnit: gr.
     comment: ''
     allergens: []
@@ -200,7 +200,7 @@ permissionWrite:
   - 68975cbc002469058f8b
 auteur: ghald
 createdAt: '2026-10-05T11:38:16.059+00:00'
-updatedAt: '2026-10-05T11:40:51.813+00:00'
+updatedAt: '2026-10-05T16:56:39.717+00:00'
 createdBy: 68975cbc002469058f8b
 teams: []
 status: public

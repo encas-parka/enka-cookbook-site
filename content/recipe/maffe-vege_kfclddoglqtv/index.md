@@ -1,6 +1,6 @@
 ---
-title: Maffé végé
-date: '2026-10-05T11:39:04.762Z'
+title: Mafé végé
+date: '2026-10-05T11:40:52.051Z'
 draft: true
 typeR: plat
 categories:
@@ -200,7 +200,7 @@ permissionWrite:
   - 68975cbc002469058f8b
 auteur: ghald
 createdAt: '2026-10-05T11:38:16.059+00:00'
-updatedAt: '2026-10-05T11:39:04.547+00:00'
+updatedAt: '2026-10-05T11:40:51.813+00:00'
 createdBy: 68975cbc002469058f8b
 teams: []
 status: public

@@ -11,26 +11,17 @@
 
 ## Header — état du monde
 
-_(rafraîchi par l'orchestrateur à chaque portail — dernière mise à jour : après T2, 06-10)_
+_(rafraîchi par l'orchestrateur à chaque portail — état courant : après T15, 06-10 ; l'historique vit dans les journaux ci-dessous)_
 
-- **Base** : `e9f8c6cd` « build » (HEAD `mig/pocketbase` = origin au démarrage, 06-10)
-- **HEAD après T14** : `5c95c595` (split syncInitial/syncRevalidate sur 7 stores ; renommage d'un coup, grep 0 occurrence ; fast-win App.svelte TypeError).
-- **HEAD après T15** : `a379f4d4` (signaux SSE debouncés + lifecycle auth ; orchestrateur resync visibility/pageshow/online/SSE ; StatusBar serveur). **Frontier : fin du Lot 4 prioritaire** — T15 était le dernier ticket ; portail requis pour la suite.
-- **Canon tests mis à jour : 93/93** (87 + 6 pb-realtime, 10 fichiers) ; **check-legacy : 189** (delta 0 aux tiers T15). Notes T15 : ProductsStore garde la politique allSettled (signal = lastSync, consommé par l'orchestrateur) ; gardes `#revalidating` par store en place ; gating visiteur fait à l'orchestration (recipesStore seul — REC-2), les stores mig n'ayant pas de garde auth dans syncRevalidate.
-- **Fait T13 mesuré** : bump Dexie `stores({})` ≠ purge de données (affirmation side fausse) — guérison des caches incomplets = curseur absent → full fetch par scope au 1er sync. Index `productNeeds` = `mainId` confirmé.
-- **Canon tests mis à jour : 84/84** (9 fichiers).
-- **Fait T10 majeur** : PB 0.37.5 nullifie les relations AVANT les hooks AfterSuccess — tout hook cascade AfterSuccess est un no-op ; pattern = `onRecordDelete` (before) + transaction. Le bloc `events.teams` est conservé dans le before-hook pour bumper `updated` (delta sync client).
-- **Fait T9** : sans host SMTP configuré, PB fallback sendmail (absent) → échec par destinataire capturé (`ok:false`), 200 propre — les 2 branches documentées dans le hook. `EventShareLinks.svelte` déjà conforme (note T5 obsolète). Note déploiement : `ENKA_BASE_URL` obligatoire en prod (différé S2 loggé).
-- **Piège JSVM majeur (T8)** : `record.get()` sur champ JSON = export goja du `[]byte` brut — muter corrompt la donnée ; utiliser `getString()` + `JSON.parse`. Bug latent restant : `invite-to-team.pb.js` (`roles`) → intégré à T10.
-- **Différé `!` ajouté (T8)** : invite-to-team roles JSON (cf. ci-dessus) — T10.
-- **Canon check-legacy mis à jour : baseline 192 erreurs** (T6 a corrigé RecipesStore:633:48 au passage ; exigence inchangée : 0 nouvelle erreur). Canon test : 61/61.
-- **Différé `!` ajouté (T6)** : teamdoc team-scopé bloqué par createRule (exige eventId) → à traiter en T11 (rule `teamId.members ~ auth || eventId.…`).
-- **Canon tests mis à jour : `bun run test` = 61/61** (3 fichiers utils + 1 fichier events). **Canon check affiné (découverte T5)** : `bun run check` (svelte-check-native) ne fait PAS de TS — ne capte que svelte compiler/a11y (0 err/6 warn) ; l'audit de types réel = `bun run check-legacy` = 193 erreurs préexistantes → **surveiller le delta** (aucune nouvelle erreur dans les hunks de ticket).
-- **Faits T4 portant les tickets client** : REC-4/SEC-1 enfants = no-op (le snapshot avait déjà figé les fix 042/043 dev) ; client envoie bien `events.createdBy` au create ; id locks garde min 15 (ids `doc_`/`event_` ≈ 20-21 chars OK) ; PB évalue les rules AVANT la validation (400 `data:{}` = rule, `data:{champ}` = validation).
-- **Piège T2 à porter par les deltas suivants** : toute nouvelle colonne PB = `DEFAULT '' NOT NULL` → backfills doivent cibler `''` ET NULL.
-- **Arbre** : propre hormis `.scratch/probes/t1-snapshot-summary.py` (untracked, probe transient T1 — connu, ne pas committer ni nettoyer).
-- **Décision portail post-T1** : ne PAS lancer `migrate history-sync` sur la dev DB pendant le run (les 9 lignes `_migrations` orphelines sont inoffensives) ; à noter dans la checklist déploiement.
-- **Deviation T1 validée** : snapshot généré depuis la copie de backup (jamais la dev DB en écriture) — équivalent et vérifié par sha256 avant/après identique.
+- **Base** : `e9f8c6cd` « build » · **HEAD** : `3e755f0b` (T15). **Frontier : T16** (Lot 2 — fixes pipeline import) ; puis T17 (re-import, possiblement bloqué creds Appwrite) et T18 (QA runtime).
+- **Progression** : Lot 0 ✓ (T1-T4) · Lot 1 ✓ (T5-T7) · Lot 3 ✓ (T8-T11) · Lot 4 prioritaire ✓ (T11-T15) · Étape 7 (notifications) et Étape 9 (SW/PWA) → backlog (hors priorité synthèse).
+- **Canons courants** : `bun run check` 0 err/6 warn (svelte compiler only — PAS de TS ; l'audit types = `check-legacy`, baseline **189**, delta 0 exigé) · `bun run test` **93/93** (10 fichiers) · baseline initiale 56/56 & logs `/tmp/orchestrate/`.
+- **Faits majeurs portés** : PB nullifie les relations AVANT les hooks AfterSuccess (cascade = before-hooks) · piège goja `record.get()` sur JSON (utiliser `getString()`+`JSON.parse`) · bump Dexie `stores({})` ≠ purge (guérison par full-fetch induit) · PB ignore silencieusement les champs inconnus (perte sans 400) · `check` natif ne typecheck pas.
+- **Arbre** : propre hormis 3 sondes python transient untracked (`.scratch/probes/t8,t9,t10-*` — pattern, nettoyage fin de run).
+- **Concurrency** : aucune (checkpoint COORDINATION avant 1re édition — règle permanente).
+- **Tooling** : binaire PB présent ; `pb_data` = DB dev (backup par ticket dans `/tmp/orchestrate/pb_data-backup-tN/`) ; bootcheck sur copie AVANT application dev ; un seul process PB par répertoire ; ports 8090/8091 à revérifier.
+- **Migration rule** : ne jamais éditer un fichier de migration appliqué — la chaîne actuelle = snapshot T1 + deltas datés ; tout correctif = nouveau timestamp > 1791280500.
+- **Décision portail permanente** : pas de `migrate history-sync` sur la dev DB pendant le run (checklist déploiement).
 - **Canon de tests** (baseline 06-10, logs `/tmp/orchestrate/baseline-{check,test}-mig-26-10-06.log`) :
   - `bun run check` (svelte-app) : 179 fichiers, **0 erreur**, 6 warnings (5 fichiers, a11y + state_referenced_locally — préexistants)
   - `bun run test` : vitest 4.1.4 — **56 tests / 3 fichiers, tous verts** (utils only)
@@ -568,6 +559,31 @@ Logs hooks vérifiés dans `_logs` (auxiliary.db) : cascade E1 → `materiel_loa
 - **Vitest** : `vi.mock("$lib/db-sync/pb")` par alias intercepte l'import relatif `./pb` de pb-realtime (résolution même module id) — pas besoin d'étendre le stub t12.
 
 **Décisions** : init AVANT les phases stores au login (sémantique `hasConnectedOnce`, voir ci-dessus) ; gating visiteur à l'orchestration plutôt qu'ajouter des gardes auth dans les 5 stores (hors périmètre T15, fichiers T14) ; tests via mock module plutôt qu'étendre le stub t12 (fichier hors périmètre T15).
+
+### T16 — Pipeline d'import : 7 fixes transforms/import/post-traitement/validation (06-10)
+
+**Fait établi** (5 fichiers `scripts_dev/`, commit `50d87068`) — lots 1/2/5 du plan §6 :
+1. **2b** : `created: fm.createdAt || fm.date || fm.publishDate || ""` (createdAt présent 372/372 ; `date` = timestamp de sync, fausse source).
+2. **2b** : refIds canoniques — `resolveCreatedBy`/`resolvePermissionWrite` retournent `aw_<id>` (contrat `refToPb` de 3-import). Ceinture de sécurité : 3-import alias `refToPb.set(appwriteId, pbId)` sans préfixe après import users.
+3. **2b** : orphelins poussés en sortie après les v2s (rootRecipeId retiré) — plus de drop silencieux ; compteur « N originals + N v2s + N orphans ».
+4. **2-transform** : `findUserByEmailOrName` (email exact, puis nom insensible à la casse) pour `updatedBy` + compteurs loggés `updatedBy resolved: X/Y non-empty`.
+5. **3-import** : self-map `refToPb.set(record.id, result.id)` pour les recettes à ID forcé → `rootRecipeId` (dirName) se résout.
+6. **4-fix-timestamps** : `toPbTimestamp()` (T→espace, +00:00→Z) + never-empty (`createdVal = created || updated_ts`, `updatedVal = updated_ts || created` ; garde skip si les deux vides) — plus jamais `""` en colonne.
+7. **validate-migration** : check 6 `recipes.fieldPopulation` — compte created/createdBy/permissionWrite/rootRecipeId attendus depuis `pb-import/recipes.json` et exige les mêmes en DB (exit 1 sinon) ; `counts.users` nomme les users manquants (« empty-email user fails creation silently ») ; miroir `RELATION_FIELDS` synchronisé sur 3-import (+guestUsers events, +permissionWrite/teams recipes, inferTargetCollection +permissionWrite/guestUsers).
+
+**Validations (aucune écriture sur pb_data — lectures sqlite3 readonly seules, mtime data.db inchangé)** :
+- **Dry-run 2b** sur `content/recipe/` actuel (log `t16-2b-dryrun.log`) : 372 records (353 originals + 19 v2s + **0 orphelin**) ; `created` peuplé **372/372** (était 94) ; createdBy 175 **tous aw_** ; permissionWrite 180 tous aw_ ; rootRecipeId 19. `pb-import/` intact (DRY_RUN n'écrit pas).
+- **2-transform run réel** avec backup/restauration de `pb-import/` + `migration-map.json` (`/tmp/orchestrate/t16-2t-backup/`, restauration vérifiée `diff -r` identique ; log `t16-2transform.log`) : **updatedBy résolus 167/167** non vides parmi les 375 produits importés, 0 warn. Élucidation de l'écart avec l'attendu « ~239/261 » : les **261** updatedBy non vides se comptent sur l'export entier (679 rows) ; 94 siègent sur des produits skippés (events orphelins, jamais importés) → la base pertinente (375 importés) n'en compte que **167, tous résolus (100 %)**. Les valeurs non résolvables de l'audit (`aldek@vivaldi.net` ×17, `qk-mail` ×3) ne siègent que sur des produits skippés — aucun user nommé aldek/qk-mail dans users.json (seul `qaldek` existe, résolu par email ×43).
+- **4-fix-timestamps fixture** (copie du script + DB sqlite jetable `/tmp/orchestrate/t16-fixture4/`, logs `t16-4fix-{dryrun,real-fixture}.log`) : cas A (2 ts) → normalisés `2026-04-07 21:50:32.031Z` ; cas B (created vide) → created=updated (l'ancien code écrivait `''`) ; cas C (updated vide) → updated=created ; cas D (2 vides) → skipped (autodate PB préservée). Dry-run ET run réel vérifiés en SQL.
+- **3-import + validate sur PB jetable** (dir fraîche /tmp, chaîne migrations T1+deltas appliquée, port 8091, jamais pb_data ; logs `t16-fixture3-*.log`) : 1 user + 3 recettes (original aw_ / v2 rootRecipeId=dirName / raw createdBy sans préfixe) importés 0 failed ; DB : createdBy = PB user id sur les **3** (dont la raw → ceinture prouvée), permissionWrite résolue, **rootRecipeId = dirName sur la v2** (self-map prouvée) ; id-map.json = 5 entrées attendues. validate : **37/37 verts** dont `recipes.fieldPopulation: created 3/3 · createdBy 3/3 · permissionWrite 1/1 · rootRecipeId 1/1` ; passe **négative** (createdBy nullifié en SQL direct sur la fixture) → 36/37, échec `recipes/t16-recipe-original.createdBy populated in pb-import but empty or missing in PB`, exit 1. Fixture nettoyée, serveur stoppé.
+
+**Creds Appwrite (pour T17)** : **PRÉSENTS** — `scripts_dev/.env.local` porte `APPWRITE_ENDPOINT`, `APPWRITE_PROJECT_ID`, `APPWRITE_API_KEY` (noms signalés, valeurs non lues ; variantes `_PROD` absentes, non requises — 1-export accepte les deux formes). Aucune var d'env `APPWRITE_*` dans le shell.
+
+**Canon** : `bun run check` 179 fichiers 0 err/6 warn ; `bun run test` **93/93** ; `check-legacy` **189 = baseline** delta 0 (exit 1 attendu) — logs `/tmp/orchestrate/t16-{check,test,check-legacy}-mig-26-10-06.log`.
+
+**Tooling scripts_dev (fait durable)** : aucun tooling ne typecheck `scripts_dev/` (pas de tsconfig local ni racine ; hors `check`/`check-legacy` svelte-app) — la preuve d'exécution bun (dry-runs + fixtures) tient lieu de vérification parse/type. Candidat doc domaine (analyste) : pas encore de doc `docs/` pour le pipeline d'import.
+
+**Note WIP fence** : le commit docs inclut l'édition orchestrateur du header run.md (portail post-T15, présente non commitée à l'arrivée, anodine) — commit whole-file d'un fichier que le ticket devait de toute façon amender, conformément au RUN-CONTRACT (pattern T2/T6-T9).
 
 ## Constats différés (deferred — tag `!` bientôt / `S2` gating déploiement / `?` conditionnel)
 

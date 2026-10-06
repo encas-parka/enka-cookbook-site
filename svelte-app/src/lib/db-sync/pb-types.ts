@@ -32,6 +32,13 @@ export interface PbFetchOptions {
    * - Parameterized tuple: `['field = {:var}', { var: value }]` (recommended)
    */
   filter?: string | [template: string, vars: Record<string, unknown>];
+  /**
+   * Scopes the delta-sync cursor in `syncMeta` (key `${collection}:${scopeKey}`).
+   * Required whenever `filter` scopes the fetch (ex. `eventId`) — without it,
+   * switching scope silently misses records whose `updated` predates the
+   * newest record of another scope.
+   */
+  scopeKey?: string;
   /** Fields to include in the response (projection) */
   fields?: string;
   /** Relations to expand (e.g. `'author,team'`) */

@@ -1082,6 +1082,10 @@ class ProductsStore {
 
   async forceReload(eventId: string) {
     this.reset();
+    // Purge local rows (and, via clearLocal, the scoped cursors) so that
+    // initialize() re-fetches from scratch instead of trusting stale Dexie data.
+    await this.#productsCollection.clearLocal();
+    await this.#purchasesCollection.clearLocal();
     await this.initialize(eventId);
   }
 
@@ -1089,8 +1093,13 @@ class ProductsStore {
     this.#lastSync = null;
     await this.#productsCollection.clearLocal();
     await this.#purchasesCollection.clearLocal();
-    // Also clear calculated needs
-    await db.productNeeds.clear();
+    // Calculated needs are event-scoped (the `mainId` index holds the eventId):
+    // purge only the current event's rows, keep other events' caches intact.
+    if (this.#currentEventId) {
+      await db.productNeeds.where("mainId").equals(this.#currentEventId).delete();
+    } else {
+      await db.productNeeds.clear();
+    }
     console.log("[ProductsStore] Cache vidé");
   }
 
@@ -1107,20 +1116,29 @@ class ProductsStore {
       return;
     }
 
-    try {
-      await Promise.all([
-        this.#productsCollection.initialFetch({
-          filter: ["eventId = {:eventId}", { eventId: this.#currentEventId }],
-        }),
-        this.#purchasesCollection.initialFetch({
-          filter: ["eventId = {:eventId}", { eventId: this.#currentEventId }],
-        }),
-      ]);
-      this.#lastSync = new Date().toISOString();
-      console.log("[ProductsStore] syncFromRemote() terminé");
-    } catch (err) {
-      console.error("[ProductsStore] syncFromRemote() échoué:", err);
+    const results = await Promise.allSettled([
+      this.#productsCollection.initialFetch({
+        filter: ["eventId = {:eventId}", { eventId: this.#currentEventId }],
+      }),
+      this.#purchasesCollection.initialFetch({
+        filter: ["eventId = {:eventId}", { eventId: this.#currentEventId }],
+      }),
+    ]);
+
+    const rejected = results.filter(
+      (r): r is PromiseRejectedResult => r.status === "rejected",
+    );
+    if (rejected.length > 0) {
+      // #lastSync only advances on a fully successful pass — a partial sync
+      // must not look fresh.
+      for (const r of rejected) {
+        console.error("[ProductsStore] syncFromRemote partiel:", r.reason);
+      }
+      return;
     }
+
+    this.#lastSync = new Date().toISOString();
+    console.log("[ProductsStore] syncFromRemote() terminé");
   }
 
   // ===========================================================================

@@ -29,8 +29,8 @@ Reconstruire `pocketbase/pb_migrations/` autour d'un **snapshot généré depuis
 
 ## Critères
 
-- [ ] `pb_migrations/` reconstruit : snapshot unique depuis dev DB (+ fichiers down fonctionnels), anciens fichiers retirés
-- [ ] Fresh DB (répertoire de données séparé) : `migrate up` OK de zéro
-- [ ] 4 sondes curl documentées dans run.md (commandes exactes + verdicts, état pré-deltas)
-- [ ] `pb_data` dev inchangée (vérifier mtime/état avant-après)
-- [ ] run.md amendé (journal T1 + pièges éventuels)
+- [x] `pb_migrations/` reconstruit : snapshot unique depuis dev DB (+ fichiers down fonctionnels), anciens fichiers retirés
+- [x] Fresh DB (répertoire de données séparé) : `migrate up` OK de zéro
+- [x] 4 sondes curl documentées dans run.md (commandes exactes + verdicts, état pré-deltas)
+- [x] `pb_data` dev inchangée (vérifier mtime/état avant-après)
+- [x] run.md amendé (journal T1 + pièges éventuels)

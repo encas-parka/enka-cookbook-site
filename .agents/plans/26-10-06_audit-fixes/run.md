@@ -37,7 +37,7 @@
 
 ## Faits localisés clés (ancres — les rapports font foi)
 
-- Migrations : `pocketbase/pb_migrations/` (40 fichiers, ordre lexicographique = piège ORD-1). Typegen : `svelte-app/src/lib/types/pb-generated.ts` (reflet DB dev, 08-05).
+- Migrations : `pocketbase/pb_migrations/` — **reconstruites en T1** : un seul snapshot `1791277647_collections_snapshot.js` depuis la DB dev (l'ancien chaînage de 74 fichiers vit dans git ; piège ORD-1 éradiqué). Typegen : `svelte-app/src/lib/types/pb-generated.ts` (reflet DB dev, 08-05).
 - Hooks : `pocketbase/pb_hooks/{join-event,cascade-delete-event,cascade-delete-teams,teams-resync-events,send-emails,invite-to-team}.pb.js` + `lib/{mailer,email-templates}.js`.
 - Client : stores `svelte-app/src/lib/stores/*.svelte.ts` ; services `pb-auth.ts`, `pb-invitations.ts`, `pb-locks.ts` ; sync `svelte-app/src/lib/db-sync/pb-collection.ts` (`initialFetch` L203-248 : orderBy `updated`, delta `updated > since`, fallback table vide).
 - Pipeline import : `scripts_dev/{1-export-appwrite,2-transform-data,2b-transform-recipes,2c-transform-ingredients,2d-transform-catalog,3-import-pb,4-fix-timestamps,cleanup-pb,validate-migration}.ts` + `pb-import/{id-map.json,recipes.json}` + `migration-map.json`.
@@ -54,7 +54,37 @@
 
 ## Journal par ticket (rempli par les implémenteurs à l'amend)
 
-_(chaque ticket ajoute sa section : fait établi / vérification empirique / décision / déviation)_
+### T1 — Snapshot migrations depuis la DB dev (06-10)
+
+**Fait établi** : `pocketbase/pb_migrations/` = 1 seul fichier `1791277647_collections_snapshot.js` (généré par `./pocketbase migrate collections` depuis une **copie** de la dev DB — la vraie `pb_data` n'a jamais été ouverte en écriture). Snapshot = 21 collections (18 app + `users` + 4 system `_mfas`/`_otps`/`_externalAuths`/`_authOrigins` + `_superusers`) avec **toutes les règles** (inventaire complet : `/tmp/orchestrate/t1-snapshot-summary.txt`). `down()` = `return null` explicite (no-op assumé : baseline du chaînage, rien avant lui à restaurer ; l'état pré-snapshot reste reconstructible via git). Anciens fichiers retirés via `trash` — **74 fichiers, pas 40** (le chiffre « 40 » du ticket/dispatch/run header était une erreur de résumé ; 74 fichiers .js sur disque, 90 lignes `_migrations` en comptant les .go système et 9 lignes orphelines de fichiers déjà supprimés du disque).
+
+**Vérifications empiriques** :
+- Fresh DB (`--dir /tmp/orchestrate/pb-fresh-t1`) : `migrate up` → `Applied 1791277647_collections_snapshot.js`, sans erreur (log : `/tmp/orchestrate/t1-fresh-migrate-up.log`).
+- Boot sur **copie byte-identique** de la dev DB (`--dir /tmp/orchestrate/pb_data-bootcheck-t1`, port 8091) : serve démarre, health 200, le snapshot s'applique en attente et s'enregistre dans `_migrations` (91 lignes = 90 + snapshot). C'est exactement ce qui se produira au prochain vrai boot dev.
+- `pb_data` réelle : **strictement inchangée** (sha256 des 7 fichiers avant/après identiques — logs `/tmp/orchestrate/t1-pbdata-sha-{before,after}.txt`). Seule dérive : mtime de `data.db-shm` (02:06 → 10:44), touché par mes lectures `sqlite3 -readonly`, contenu identique.
+- Canon client intact : `bun run check` = 0 erreur / 6 warnings (baseline) ; `bun run test` = 56/56 (logs `/tmp/orchestrate/t1-{check,test}-mig-26-10-06.log`).
+- `scripts_dev/pb-dev.sh` non modifié ; sa cible (`serve --dir pb_data --migrationsDir pb_migrations`) pointe toujours sur les bons répertoires.
+
+**Verdicts des 4 sondes curl (fresh DB, état pré-deltas — attendus tels quels, T3/T4 corrigent)** :
+
+| Sonde | Commande | Attendu | Obtenu |
+|---|---|---|---|
+| ORD-1 mort | `curl -H "Authorization: <token>" /api/collections/products/records` | 200 | **200** |
+| REC-2 public read | `curl /api/collections/recipes/records` (anonyme) | 200 | **200** (`{"items":[],"totalItems":0}`) |
+| REC-1 ouvert (attendu) | `curl -H "Authorization: <token>" /api/collections/share_links/records` (user non-propriétaire) | 200 | **200** |
+| LOCK-1 ouvert (attendu) | `POST /api/collections/locks/records` `{"id":"doc_test123456789","userId":"<uid>","expiresAt":"2026-10-07 00:00:00.000Z","collection":"recipes","recordId":"rec_test12345678"}` | 400 | **400** `validation_max_text_constraint` sur `id` : "Must be no more than 15 character(s)" — l'erreur porte bien sur l'id, pas sur un champ manquant |
+
+User de test créé sur la fresh DB (users `createRule` = public) : `POST /api/collections/users/records` puis `auth-with-password` → 200. Tous les process PB stoppés en fin de ticket.
+
+**Décisions d'implémentation** :
+- Snapshot généré depuis la **copie de backup** (`/tmp/orchestrate/pb_data-backup-t1`) plutôt que depuis `pb_data` : PB ouvre SQLite en read-write (risque de WAL/checkpoint) ; la copie est byte-identique, le résultat est identique, et la dev DB reste vierge.
+- Boot-check dev fait sur copie (`pb_data-bootcheck-t1`) : `bun run dev:pb` sur la vraie DB aurait **écrit** le snapshot dans `_migrations` (serve applique les migrations en attente au boot) — contradiction avec la contrainte « ne rien écrire dans pb_data ». Script inchangé + chaîne prouvée bootable sur l'état dev exact = vérification équivalente sans écriture.
+
+**Pièges découverts** :
+- `./pocketbase migrate collections` demande une confirmation y/N interactive — piper `echo y` en non-interactif, sinon « command has been cancelled ».
+- PB 0.37.5 résout `pb_migrations`/`pb_hooks` **relativement au parent du `--dir`** quand ils ne sont pas passés explicitement (avec `--dir /tmp/.../pb_data-backup-t1`, il proposait `/tmp/orchestrate/pb_migrations/`). Toujours passer `--migrationsDir`/`--hooksDir` absolus dès que `--dir` n'est pas le layout par défaut.
+- Au prochain boot d'une DB existante (dev ou prod), le snapshot s'applique comme migration en attente (no-op de contenu, +1 ligne `_migrations`) ; les 83 lignes des anciens fichiers (74 présents + 9 orphelines) y restent, inoffensives — `./pocketbase migrate history-sync` les purge si voulu (à considérer en T2+/déploiement).
+- La lecture `sqlite3 -readonly` touche le mtime de `data.db-shm` — un contrôle d'intégrité par mtime seul donnerait un faux positif ; utiliser les checksums.
 
 ## Constats différés (deferred — tag `!` bientôt / `S2` gating déploiement / `?` conditionnel)
 

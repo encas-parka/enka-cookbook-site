@@ -5,7 +5,8 @@
  *   bun run scripts_dev/2b-transform-recipes.ts [--dry-run]
  *
  * No PocketBase dependency. Pure file transform.
- * Stores Appwrite user IDs in createdBy/permissionWrite — 3-import-pb.ts resolves them.
+ * Stores aw_-prefixed Appwrite refIds in createdBy/permissionWrite — the refToPb
+ * contract of 3-import-pb.ts resolves them to real PB user IDs.
  */
 import { readFileSync, readdirSync, writeFileSync, mkdirSync, existsSync } from "fs";
 import { join } from "path";
@@ -47,11 +48,11 @@ function resolveCreatedBy(value: string | undefined): string | undefined {
   const trimmed = value.trim();
 
   if (/^[0-9a-f]{20}$/.test(trimmed)) {
-    return trimmed;
+    return `aw_${trimmed}`;
   }
 
   const awId = nameToAwId.get(trimmed.toLowerCase());
-  return awId || undefined;
+  return awId ? `aw_${awId}` : undefined;
 }
 
 function resolvePermissionWrite(values: string[] | undefined): string[] | undefined {
@@ -63,12 +64,12 @@ function resolvePermissionWrite(values: string[] | undefined): string[] | undefi
     const trimmed = v.trim();
 
     if (/^[0-9a-f]{20}$/.test(trimmed)) {
-      resolved.push(trimmed);
+      resolved.push(`aw_${trimmed}`);
       continue;
     }
 
     const awId = nameToAwId.get(trimmed.toLowerCase());
-    if (awId) resolved.push(awId);
+    if (awId) resolved.push(`aw_${awId}`);
   }
 
   return resolved.length > 0 ? resolved : undefined;
@@ -102,7 +103,7 @@ function buildRecord(dirName: string, fm: Record<string, any>): Record<string, a
     astuces: fm.astuces || [],
     status: fm.status || "public",
     versionLabel: fm.versionLabel || "",
-    created: fm.date || "",
+    created: fm.createdAt || fm.date || fm.publishDate || "",
     updated: fm.updatedAt || fm.date || "",
   };
 
@@ -113,7 +114,7 @@ function buildRecord(dirName: string, fm: Record<string, any>): Record<string, a
   // rootRecipeId — resolved during topological sort (set later)
   if (fm.rootRecipeId) record.rootRecipeId = fm.rootRecipeId;
 
-  // User references — store Appwrite IDs for 3-import-pb to resolve
+  // User references — aw_-prefixed refIds, resolved by 3-import-pb's refToPb map
   const createdBy = resolveCreatedBy(fm.createdBy);
   if (createdBy) record.createdBy = createdBy;
 
@@ -182,12 +183,14 @@ function main(): void {
     orphans.slice(0, 10).forEach((id) => console.warn(`   ${id} → "${parsed[id].rootRecipeId || "(removed)"}"`));
   }
 
-  // Build final ordered output
+  // Build final ordered output — orphans are included (never silently dropped),
+  // after the v2s, with their dangling rootRecipeId already removed above
   const records: Record<string, any>[] = [];
   for (const id of originals) records.push(parsed[id]);
   for (const id of v2s) records.push(parsed[id]);
+  for (const id of orphans) records.push(parsed[id]);
 
-  console.log(`📊 Records: ${originals.length} originals + ${v2s.length} v2s = ${records.length} total\n`);
+  console.log(`📊 Records: ${originals.length} originals + ${v2s.length} v2s + ${orphans.length} orphans = ${records.length} total\n`);
 
   // Show sample
   if (records.length > 0) {
@@ -201,7 +204,21 @@ function main(): void {
   }
 
   if (DRY_RUN) {
+    const withCreated = records.filter((r) => r.created).length;
+    const withCreatedBy = records.filter((r) => r.createdBy).length;
+    const createdByPrefixed = records.filter((r) => r.createdBy && r.createdBy.startsWith("aw_")).length;
+    const withPermission = records.filter((r) => Array.isArray(r.permissionWrite) && r.permissionWrite.length > 0).length;
+    const permissionPrefixed = records.filter(
+      (r) => Array.isArray(r.permissionWrite) && r.permissionWrite.length > 0 && r.permissionWrite.every((v: string) => v.startsWith("aw_"))
+    ).length;
+    const withRoot = records.filter((r) => r.rootRecipeId).length;
+
     console.log(`[DRY RUN] Would write ${records.length} records to pb-import/recipes.json`);
+    console.log(`[DRY RUN] created populated:         ${withCreated}/${records.length}`);
+    console.log(`[DRY RUN] createdBy populated:       ${withCreatedBy} (aw_-prefixed: ${createdByPrefixed})`);
+    console.log(`[DRY RUN] permissionWrite populated: ${withPermission} (all aw_-prefixed: ${permissionPrefixed === withPermission})`);
+    console.log(`[DRY RUN] rootRecipeId kept:         ${withRoot}`);
+    console.log(`[DRY RUN] orphans included:          ${orphans.length} (dropped: 0)`);
     if (records.length > 0) {
       console.log("\nFirst record preview:");
       console.log(JSON.stringify(records[0], null, 2));

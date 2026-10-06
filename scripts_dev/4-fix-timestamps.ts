@@ -84,6 +84,12 @@ function resolvePbId(record: ImportRecord, idMap: Map<string, string>, collectio
   return null;
 }
 
+/** Normalize an ISO timestamp to the PB convention: "YYYY-MM-DD HH:MM:SS.SSSZ" */
+function toPbTimestamp(ts: string | undefined): string {
+  if (!ts) return "";
+  return ts.replace("T", " ").replace("+00:00", "Z");
+}
+
 async function isPocketBaseRunning(): Promise<boolean> {
   try {
     const res = await fetch("http://127.0.0.1:8090/api/health", {
@@ -164,17 +170,22 @@ async function main() {
         continue;
       }
 
-      const created = record.created;
-      const updated_ts = record.updated;
+      const created = toPbTimestamp(record.created);
+      const updated_ts = toPbTimestamp(record.updated);
 
       if (!created && !updated_ts) {
         skipped++;
         continue;
       }
 
+      // Never write '' — an empty created would nullify PB's autodate;
+      // fall back to the sibling timestamp instead
+      const createdVal = created || updated_ts;
+      const updatedVal = updated_ts || created;
+
       if (DRY_RUN) {
         if (updated < 3) {
-          console.log(`   [DRY RUN] UPDATE ${collection} SET created='${created}', updated='${updated_ts}' WHERE id='${pbId}'`);
+          console.log(`   [DRY RUN] UPDATE ${collection} SET created='${createdVal}', updated='${updatedVal}' WHERE id='${pbId}'`);
         }
         updated++;
       } else {
@@ -182,7 +193,7 @@ async function main() {
           const stmt = db.query(
             `UPDATE ${collection} SET created = ?, updated = ? WHERE id = ?`
           );
-          stmt.run(created || "", updated_ts || created || "", pbId);
+          stmt.run(createdVal, updatedVal, pbId);
           updated++;
         } catch (err: any) {
           console.error(`   ❌ Failed ${collection} [${pbId}]: ${err.message}`);

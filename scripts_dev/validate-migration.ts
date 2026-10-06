@@ -4,8 +4,10 @@
  * Checks:
  *   1. Record counts: PB vs pb-import files
  *   2. Relation integrity: all relation fields point to existing PB records
- *   3. guestEmails: all events have their expected guest emails
- *   4. RefId coverage: all refIds in migration-map have a corresponding PB ID
+ *   3. Recipe field population: createdBy/permissionWrite/rootRecipeId/created
+ *      counts must match pb-import/recipes.json (import nullification regression)
+ *   4. guestEmails: all events have their expected guest emails
+ *   5. RefId coverage: all refIds in migration-map have a corresponding PB ID
  *
  * Usage:
  *   bun run scripts_dev/validate-migration.ts
@@ -45,7 +47,7 @@ const RELATION_FIELDS: Record<string, Record<string, "single" | "multi">> = {
   users: {},
   teams: { members: "multi" },
   materiel: { teamId: "single", ownerUser: "single", storeIn: "single", shareableWith: "multi" },
-  events: { createdBy: "single", teams: "multi" },
+  events: { createdBy: "single", teams: "multi", guestUsers: "multi" },
   products: { eventId: "single", updatedBy: "single", mergedInto: "single" },
   purchases: { eventId: "single", createdBy: "single", products: "multi" },
   materiel_loan: { eventId: "single", createdBy: "single", responsibleId: "single", ownerId: "single", borrowerUser: "single" },
@@ -53,7 +55,7 @@ const RELATION_FIELDS: Record<string, Record<string, "single" | "multi">> = {
   teamdocs: { teamId: "single", eventId: "single" },
   event_todos: { eventId: "single", assignedTo: "single" },
   share_links: {},
-  recipes: { createdBy: "single", rootRecipeId: "single" },
+  recipes: { createdBy: "single", permissionWrite: "multi", rootRecipeId: "single", teams: "multi" },
 };
 
 // Text reference fields (stored as text, not relation)
@@ -179,6 +181,15 @@ async function checkRecordCounts(): Promise<void> {
     const errors: string[] = [];
     if (!passed) {
       errors.push(`${collection}: expected ${importCount} records, found ${pbCount} in PB`);
+      if (isUsers) {
+        // Name the missing users — e.g. the empty-email "public" user fails creation silently
+        const pbEmails = new Set(pbRecords.map((r: any) => (r.email || "").toLowerCase()));
+        for (const imp of importRecords) {
+          if (!pbEmails.has((imp.email || "").toLowerCase())) {
+            errors.push(`users: missing "${imp.name || "(no name)"} <${imp.email || "no email"}>${imp.email ? "" : " — empty-email user fails creation silently"}`);
+          }
+        }
+      }
     }
 
     addResult(`counts.${collection}`, passed, details, errors);
@@ -271,9 +282,48 @@ function inferTargetCollection(field: string, sourceCollection: string): string 
     teams: "teams",
     shareableWith: "teams",
     products: "products",
+    permissionWrite: "users",
+    guestUsers: "users",
   };
 
   return fieldToCollection[field] || null;
+}
+
+// Fields whose population in pb-import/recipes.json must hold in PB too —
+// guards against the import-time nullification of relations and empty timestamps
+const RECIPE_POPULATION_FIELDS: { field: string; populated: (r: any) => boolean }[] = [
+  { field: "created", populated: (r) => typeof r.created === "string" && r.created !== "" },
+  { field: "createdBy", populated: (r) => typeof r.createdBy === "string" && r.createdBy !== "" },
+  { field: "permissionWrite", populated: (r) => Array.isArray(r.permissionWrite) && r.permissionWrite.length > 0 },
+  { field: "rootRecipeId", populated: (r) => typeof r.rootRecipeId === "string" && r.rootRecipeId !== "" },
+];
+
+async function checkRecipeFieldPopulation(): Promise<void> {
+  console.log("\n🥗 Check 6: Recipe field population (import nullification regression)\n");
+
+  const importRecords = loadImportFile("recipes");
+  const pbRecords = await pbListAll("recipes");
+  const pbById = new Map<string, any>(pbRecords.map((r: any) => [r.id, r]));
+
+  const errors: string[] = [];
+  const details: string[] = [];
+
+  for (const { field, populated } of RECIPE_POPULATION_FIELDS) {
+    const expectedIds = importRecords.filter((r) => populated(r)).map((r) => r.id);
+    const missing = expectedIds.filter((id) => {
+      const pb = pbById.get(id);
+      return !pb || !populated(pb);
+    });
+    details.push(`${field}: ${expectedIds.length - missing.length}/${expectedIds.length}`);
+    for (const id of missing.slice(0, 5)) {
+      errors.push(`recipes/${id}.${field} populated in pb-import but empty or missing in PB`);
+    }
+    if (missing.length > 5) {
+      errors.push(`... and ${missing.length - 5} more recipes with empty ${field}`);
+    }
+  }
+
+  addResult("recipes.fieldPopulation", errors.length === 0, details.join(" · "), errors);
 }
 
 async function checkGuestEmails(): Promise<void> {
@@ -473,6 +523,7 @@ async function main() {
   // Run all checks
   await checkRecordCounts();
   await checkRelationIntegrity();
+  await checkRecipeFieldPopulation();
   await checkGuestEmails();
   await checkRefIdCoverage();
   await checkTextReferences();

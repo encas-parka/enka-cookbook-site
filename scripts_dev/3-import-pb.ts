@@ -275,6 +275,11 @@ async function importCollection(collection: string): Promise<{ created: number; 
       if (refId) {
         refToPb.set(refId, result.id);
       }
+      // Recipes use forced IDs and carry no _refId: self-map the plain id so
+      // intra-collection refs (rootRecipeId = original dirName) resolve like any refId
+      if (collection === "recipes" && record.id) {
+        refToPb.set(record.id, result.id);
+      }
       created++;
     } catch (err: any) {
       failed++;
@@ -305,6 +310,11 @@ async function importUsers(): Promise<{ created: number; failed: number }> {
       const result = await pbCreate("users", data);
       if (refId) {
         refToPb.set(refId, result.id);
+      }
+      // Alias without the aw_ prefix — safety belt for raw Appwrite IDs reaching
+      // relation fields (e.g. recipes.json produced before the refId contract)
+      if (appwriteId) {
+        refToPb.set(appwriteId, result.id);
       }
       created++;
     } catch (err: any) {

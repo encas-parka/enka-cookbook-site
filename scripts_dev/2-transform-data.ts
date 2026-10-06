@@ -140,6 +140,19 @@ function findUserByEmail(email: string | null | undefined, userMap: UserMap): st
   return null;
 }
 
+/** Find user by email, or by display name (case-insensitive) — for free-text author fields (updatedBy) */
+function findUserByEmailOrName(value: string | null | undefined, userMap: UserMap): string | null {
+  const byEmail = findUserByEmail(value, userMap);
+  if (byEmail) return byEmail;
+  if (!value || typeof value !== "string") return null;
+  const lower = value.trim().toLowerCase();
+  if (!lower) return null;
+  for (const u of Object.values(userMap)) {
+    if (u.name && u.name.toLowerCase() === lower) return u.refId;
+  }
+  return null;
+}
+
 // --- Main ---
 
 function main() {
@@ -524,6 +537,8 @@ function main() {
   console.log("🔄 Transforming products...");
   const pbProducts: any[] = [];
   let prodSkipped = 0;
+  let updatedByTotal = 0;
+  let updatedByResolved = 0;
 
   for (const awProd of productsExport.rows) {
     const appwriteId = awProd.$id;
@@ -540,10 +555,12 @@ function main() {
     }
     const eventId = eventMap[awProd.mainId].refId;
 
-    // updatedBy: email → user refId (Appwrite stores names sometimes, not emails — skip those)
-    const updatedBy = findUserByEmail(awProd.updatedBy, userMap);
-    if (awProd.updatedBy && !updatedBy && awProd.updatedBy.includes("@")) {
-      warn(`Product "${awProd.productName}": updatedBy email "${awProd.updatedBy}" not found in user map`);
+    // updatedBy: Appwrite stores emails AND display names here — resolve by email, then by name (case-insensitive)
+    const updatedBy = findUserByEmailOrName(awProd.updatedBy, userMap);
+    if (awProd.updatedBy) {
+      updatedByTotal++;
+      if (updatedBy) updatedByResolved++;
+      else warn(`Product "${awProd.productName}": updatedBy "${awProd.updatedBy}" not found in user map (email or name)`);
     }
 
     // mergedInto: product ID → self-ref (will be resolved later)
@@ -581,7 +598,8 @@ function main() {
     });
   }
   saveImport("products", pbProducts);
-  console.log(`   ✅ ${pbProducts.length} products transformed${prodSkipped ? `, ${prodSkipped} skipped (missing eventId)` : ""}\n`);
+  console.log(`   ✅ ${pbProducts.length} products transformed${prodSkipped ? `, ${prodSkipped} skipped (missing eventId)` : ""}`);
+  console.log(`   📊 updatedBy resolved: ${updatedByResolved}/${updatedByTotal} non-empty\n`);
 
   const productMap = migrationMap.products;
 

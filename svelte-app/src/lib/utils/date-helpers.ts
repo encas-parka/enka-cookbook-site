@@ -14,10 +14,20 @@ export function dateToDateTime(
 }
 
 /**
+ * Extrait `YYYY-MM-DD` d'une valeur date, quel que soit le séparateur.
+ * PocketBase renvoie `YYYY-MM-DD HH:mm:ss.SSSZ` (espace, pas de `T`) —
+ * extraction lexicale : passer par `new Date()` converttrait en UTC et
+ * décalerait les dates proches de minuit.
+ */
+export function toInputDate(value: string | null | undefined): string {
+  return value?.match(/^\d{4}-\d{2}-\d{2}/)?.[0] ?? "";
+}
+
+/**
  * Extrait la partie date d'un datetime ISO
  */
 export function extractDate(datetime: string): string {
-  return datetime.split("T")[0];
+  return toInputDate(datetime);
 }
 
 /**

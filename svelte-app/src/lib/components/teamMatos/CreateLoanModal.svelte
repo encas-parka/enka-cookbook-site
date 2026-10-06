@@ -7,6 +7,7 @@
     EnrichedMateriel,
     EnrichedMaterielLoan,
   } from "$lib/types/materiel.types";
+  import { toInputDate } from "$lib/utils/date-helpers";
   import {
     AlertCircle,
     Box,
@@ -261,8 +262,8 @@
         const loan = materielStore.getLoanById(loanId);
         if (loan) {
           existingLoan = loan;
-          startDate = loan.startDate.split("T")[0];
-          endDate = loan.endDate.split("T")[0];
+          startDate = toInputDate(loan.startDate);
+          endDate = toInputDate(loan.endDate);
           notes = loan.notes || "";
           loanStatus = loan.status;
           selectedEventId = loan.eventId || null;
@@ -424,8 +425,8 @@
     if (mode === "edit" && selectedEventId) {
       const event = availableEvents.find((e) => e.id === selectedEventId);
       if (event?.dateEnd) {
-        const eventEndDate = event.dateEnd.split("T")[0];
-        if (startDate > eventEndDate) {
+        const eventEndDate = toInputDate(event.dateEnd);
+        if (toInputDate(startDate) > eventEndDate) {
           toastService.error(
             "La date de début doit être antérieure à la fin de l'événement",
           );

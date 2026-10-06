@@ -24,6 +24,7 @@
     getStatusBadge,
     formatDateOrNull,
   } from "$lib/utils/products-display.js";
+  import { toInputDate } from "$lib/utils/date-helpers.js";
   import {
     formatSingleQuantity,
     convertAndFormatQuantity,
@@ -75,8 +76,10 @@
     modalState.forms.purchase.notes = purchase.notes || "";
     modalState.forms.purchase.status =
       (purchase.status as "ordered" | "delivered") || null;
-    modalState.forms.purchase.orderDate = purchase.orderDate || null;
-    modalState.forms.purchase.deliveryDate = purchase.deliveryDate || null;
+    modalState.forms.purchase.orderDate =
+      toInputDate(purchase.orderDate) || null;
+    modalState.forms.purchase.deliveryDate =
+      toInputDate(purchase.deliveryDate) || null;
 
     // Définir l'ID du purchase en cours d'édition via la méthode dédiée
     modalState.startEditPurchase(purchase);

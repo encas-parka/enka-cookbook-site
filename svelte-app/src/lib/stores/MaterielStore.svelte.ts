@@ -340,6 +340,7 @@ export class MaterielStore {
           shareableWith: data.shareableWith || null,
           teamId: data.teamId || null,
           ownerUser: globalState.userId,
+          createdBy: globalState.userId,
           deleted: false,
           isStorage: false,
           storeIn: null,

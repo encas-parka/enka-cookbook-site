@@ -30,7 +30,6 @@ import {
   import QuickAddEventCatalogModal from "$lib/components/eventMateriel/QuickAddEventCatalogModal.svelte";
   import LeftPanel from "$lib/components/ui/LeftPanel.svelte";
   import ConfirmModal from "$lib/components/ui/ConfirmModal.svelte";
-  import EventDocumentsBloc from "$lib/components/documents/EventDocumentsBloc.svelte";
   import InfoCollapse from "$lib/components/ui/InfoCollapse.svelte";
   import ModalContainer from "$lib/components/ui/modal/ModalContainer.svelte";
   import ModalHeader from "$lib/components/ui/modal/ModalHeader.svelte";
@@ -520,14 +519,6 @@ import {
           Matériel ({eventMaterielStore?.count})- {currentEvent?.name}
         </h2>
       </div>
-
-      <!-- Bloc Documents attachés -->
-      <EventDocumentsBloc
-        {eventId}
-        tag="materiel"
-        tagLabel="Matériel"
-        {canEdit}
-      />
 
       <InfoCollapse
         title="Aide"

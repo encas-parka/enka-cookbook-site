@@ -9,7 +9,7 @@
   import MarkdownEditorAdvanced from "$lib/components/MarkdownEditorAdvanced.svelte";
   import UnsavedChangesGuard from "$lib/components/ui/UnsavedChangesGuard.svelte";
   import { navBarStore } from "$lib/stores/NavBarStore.svelte";
-  import { route, searchParams } from "$lib/router";
+  import { route } from "$lib/router";
 
   let eventId = $derived(route.params.id || "");
 
@@ -17,28 +17,6 @@
   let title = $state("");
   let content = $state("");
   let isSaving = $state(false);
-
-  // Tags prédéfinis pour lier aux pages d'événement
-  const PREDEFINED_TAGS = ["produit", "recette", "tache", "materiel"] as const;
-  const TAG_LABELS: Record<string, string> = {
-    produit: "Produits",
-    recette: "Recettes",
-    tache: "Tâches",
-    materiel: "Matériel",
-  };
-
-  // Tags sélectionnés
-  let selectedTags = $state<string[]>([]);
-
-  // Pré-cocher le tag depuis query param
-  $effect(() => {
-    const tagParam = searchParams.get("tag");
-    if (tagParam && PREDEFINED_TAGS.includes(tagParam as typeof PREDEFINED_TAGS[number])) {
-      if (!selectedTags.includes(tagParam)) {
-        selectedTags = [...selectedTags, tagParam];
-      }
-    }
-  });
 
   // Événement
   const currentEvent = $derived(eventsStore.getEventById(eventId));
@@ -48,7 +26,7 @@
 
   // Détection modifications
   const hasUnsavedChanges = $derived(
-    !isSaving && (title.trim().length > 0 || content.trim().length > 0 || selectedTags.length > 0),
+    !isSaving && (title.trim().length > 0 || content.trim().length > 0),
   );
 
   // Navbar
@@ -79,7 +57,6 @@
         {
           title: title.trim(),
           content,
-          tags: [...selectedTags],
         },
         eventId,
       );
@@ -149,33 +126,6 @@
               required
             />
           </label>
-        </fieldset>
-
-        <!-- Sélecteur de tags -->
-        <fieldset class="fieldset">
-          <legend class="fieldset-legend">Lier aux pages</legend>
-          <div class="flex flex-wrap gap-2">
-            {#each PREDEFINED_TAGS as tag}
-              <button
-                type="button"
-                class="btn btn-sm {selectedTags.includes(tag)
-                  ? 'btn-primary'
-                  : 'btn-outline'}"
-                onclick={() => {
-                  if (selectedTags.includes(tag)) {
-                    selectedTags = selectedTags.filter((t) => t !== tag);
-                  } else {
-                    selectedTags = [...selectedTags, tag];
-                  }
-                }}
-              >
-                {TAG_LABELS[tag]}
-              </button>
-            {/each}
-          </div>
-          <p class="text-base-content/60 text-xs">
-            Sélectionnez les pages où ce document apparaîtra
-          </p>
         </fieldset>
 
       <fieldset class="fieldset">

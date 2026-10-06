@@ -5,9 +5,8 @@
   import { toastService } from "$lib/services/toast.service.svelte";
   import { navigate } from "$lib/router";
   import { fade } from "svelte/transition";
-  import { Save, X, PlusIcon } from "@lucide/svelte";
+  import { Save } from "@lucide/svelte";
   import MarkdownEditorAdvanced from "$lib/components/MarkdownEditorAdvanced.svelte";
-  import BtnGroupCheck from "$lib/components/ui/BtnGroupCheck.svelte";
   import UnsavedChangesGuard from "$lib/components/ui/UnsavedChangesGuard.svelte";
   import { navBarStore } from "$lib/stores/NavBarStore.svelte";
   import { online } from "svelte/reactivity/window";
@@ -26,25 +25,10 @@
 
   let title = $state("");
   let content = $state("");
-  let tags = $state<string[]>([]);
-  let newTag = $state("");
-  let isPublic = $state(false);
   let isSaving = $state(false);
 
   // Équipe
   let team = $derived(nativeTeamsStore.myTeams.find((t) => t.id === teamId));
-
-  // Tags disponibles depuis le store + tags ajoutés par l'utilisateur
-  let availableTags = $derived.by(() => {
-    const teamTags = teamId ? teamdocsStore.getTeamTags(teamId) : [];
-    const allTags = new Set([...teamTags, ...tags]);
-
-    return Array.from(allTags).map((tag) => ({
-      id: tag,
-      label: tag,
-      selected: tags.includes(tag),
-    }));
-  });
 
   // ============================================================================
   // DERIVED STATES
@@ -58,8 +42,7 @@
   // Détection des modifications non sauvegardées
   // Retourne false pendant la sauvegarde pour autoriser la navigation
   const hasUnsavedChanges = $derived(
-    !isSaving &&
-      (title.trim().length > 0 || content.trim().length > 0 || tags.length > 0),
+    !isSaving && (title.trim().length > 0 || content.trim().length > 0),
   );
 
   // ============================================================================
@@ -104,38 +87,6 @@
   // ============================================================================
 
   /**
-   * Ajoute un nouveau tag
-   */
-  function addTag() {
-    const trimmedTag = newTag.trim().toLowerCase();
-    if (trimmedTag && !tags.includes(trimmedTag)) {
-      tags = [...tags, trimmedTag];
-      newTag = "";
-    }
-  }
-
-  /**
-   * Ajoute un tag avec la touche Entrée
-   */
-  function handleTagKeydown(e: KeyboardEvent) {
-    if (e.key === "Enter") {
-      e.preventDefault();
-      addTag();
-    }
-  }
-
-  /**
-   * Bascule un tag via BtnGroupCheck
-   */
-  function toggleTag(tagId: string) {
-    if (tags.includes(tagId)) {
-      tags = tags.filter((t) => t !== tagId);
-    } else {
-      tags = [...tags, tagId];
-    }
-  }
-
-  /**
    * Crée le document
    */
   async function handleCreate() {
@@ -148,9 +99,6 @@
         {
           title: title.trim(),
           content,
-          tags: tags.length > 0 ? tags : null,
-          isPublic,
-          teamName: team.name,
           status: "doc",
         },
         teamId,
@@ -248,64 +196,6 @@
         placeholder="Commencez à rédiger votre document..."
       />
     </fieldset>
-
-    <!-- Tags -->
-    <fieldset class="fieldset">
-      <legend class="fieldset-legend">Tags</legend>
-      <div class="flex flex-wrap items-center gap-x-6 gap-y-2">
-        {#if availableTags.length > 0}
-          <div class="">
-            <BtnGroupCheck
-              items={availableTags}
-              onToggleItem={(tagId) => toggleTag(tagId)}
-              size="md"
-              showStats={false}
-            />
-          </div>
-        {/if}
-        <label class="input w-80">
-          <input
-            type="text"
-            bind:value={newTag}
-            placeholder="Nouveau tag..."
-            onkeydown={handleTagKeydown}
-            disabled={isSaving}
-            maxlength="30"
-          />
-          <button
-            class="btn btn-primary btn-sm"
-            onclick={addTag}
-            disabled={isSaving || !newTag.trim()}
-          >
-            <PlusIcon class="h-4 w-4" />
-            Ajouter
-          </button>
-        </label>
-      </div>
-    </fieldset>
-
-    <!-- Visibilité -->
-    <!-- <fieldset class="fieldset">
-      <legend class="fieldset-legend">Visibilité</legend>
-      <label class="label cursor-pointer justify-start gap-4">
-        <input
-          type="checkbox"
-          class="checkbox checkbox-primary"
-          bind:checked={isPublic}
-          disabled={isSaving}
-        />
-        <div class="flex flex-col">
-          <span class="font-semibold"> Document public </span>
-          <span class="text-xs text-wrap">
-            Cochez pour rendre ce document accessible à n'importe qui possédant
-            l'url. Si non coché, seul les membres de l'équipe <span
-              class="font-semibold">{team?.name}</span
-            >
-            peuvent consulter ce document.
-          </span>
-        </div>
-      </label>
-    </fieldset> -->
 
     <!-- Bouton flottant Créer (mobile uniquement) -->
     {#if hasUnsavedChanges && !isSaving}

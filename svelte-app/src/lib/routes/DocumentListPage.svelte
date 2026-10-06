@@ -9,8 +9,6 @@
   import DocCard from "$lib/components/documents/DocCard.svelte";
   import DocumentSearchBar from "$lib/components/documents/DocumentSearchBar.svelte";
   import DocumentSortControls from "$lib/components/documents/DocumentSortControls.svelte";
-  import ActiveFiltersDisplay from "$lib/components/documents/ActiveFiltersDisplay.svelte";
-  import type { EnrichedTeamdoc } from "$lib/stores/TeamdocsStore.svelte";
 
   // ============================================================================
   // PROPS & ROUTE
@@ -24,15 +22,7 @@
   // ÉTAT LOCAL
   // ============================================================================
 
-  // État des filtres
-  interface Filters {
-    tags: string[];
-  }
-
   let searchQuery = $state("");
-  let filters = $state<Filters>({
-    tags: [],
-  });
 
   // Tri
   type SortBy = "title" | "created" | "updated";
@@ -57,12 +47,8 @@
     return teamdocsStore.getTeamDocuments(teamId);
   });
 
-  // Extraire les valeurs uniques pour les filtres
-  const availableTags = $derived.by(() => {
-    return teamId ? teamdocsStore.getTeamTags(teamId) : [];
-  });
-
-  // Logique de filtrage
+  // Logique de filtrage (recherche seule — les filtres tags sont morts avec le
+  // champ `tags`, supprimé du schéma teamdocs)
   const filteredDocs = $derived.by(() => {
     // Si recherche active (>= 2 chars), ignorer les autres filtres
     if (searchQuery.length >= 2) {
@@ -88,14 +74,7 @@
       });
     }
 
-    // Sinon, appliquer les filtres
-    return allDocs.filter((doc) => {
-      // Tags (OU logique)
-      const tagMatch =
-        !filters.tags.length || filters.tags.some((t) => doc.tags?.includes(t));
-
-      return tagMatch;
-    });
+    return allDocs;
   });
 
   // Tri des documents filtrés
@@ -129,20 +108,6 @@
   // Reset fonctions
   function resetSearch() {
     searchQuery = "";
-  }
-
-  function resetFilters() {
-    filters = {
-      tags: [],
-    };
-  }
-
-  function toggleTag(tag: string) {
-    if (filters.tags.includes(tag)) {
-      filters.tags = filters.tags.filter((t) => t !== tag);
-    } else {
-      filters.tags = [...filters.tags, tag];
-    }
   }
 
   // Lazy loading avec Intersection Observer
@@ -224,23 +189,10 @@
         />
       </div>
 
-      <!-- Résumé des filtres actifs -->
-      <!-- <div class="mb-6">
-        <ActiveFiltersDisplay
-          {searchQuery}
-          {filters}
-          resultCount={filteredDocs.length}
-          onResetFilters={resetFilters}
-        />
-      </div> -->
-
       <!-- Boutons de tri et filtres -->
       <DocumentSortControls
         {sortBy}
         {sortOrder}
-        {availableTags}
-        selectedTags={filters.tags}
-        onTagToggle={toggleTag}
         disabled={filtersDisabled}
         onSortChange={(s, o) => {
           sortBy = s;
@@ -257,12 +209,7 @@
     {:else}
       <div class="my-8 space-y-3">
         {#each paginatedDocs as doc (doc.id)}
-          <DocCard
-            {doc}
-            {teamId}
-            highlightedTags={filters.tags}
-            bgClass="bg-base-100"
-          />
+          <DocCard {doc} {teamId} bgClass="bg-base-100" />
         {/each}
       </div>
 

@@ -2,10 +2,6 @@ import type { Teamdocs } from "$lib/types/pb";
 import { globalState } from "./GlobalState.svelte";
 import { createSyncCollection, bridgeToMap, db, pb } from "$lib/db-sync/pb-sync";
 
-export interface EnrichedTeamdoc extends Omit<Teamdocs, "lockedBy"> {
-  lockedBy: string | null;
-}
-
 export class TeamdocsStore {
   #collection = createSyncCollection<Teamdocs>(pb, db.teamdocs, "teamdocs");
 
@@ -48,31 +44,12 @@ export class TeamdocsStore {
   // FILTRAGE
   // =============================================================================
 
-  getTeamDocuments(teamId: string): EnrichedTeamdoc[] {
+  getTeamDocuments(teamId: string): Teamdocs[] {
     return this.#documentsList.filter((doc) => doc.teamId === teamId);
   }
 
-  getTeamTags(teamId: string): string[] {
-    const tags = new Set<string>();
-    for (const doc of this.#documentsList) {
-      if (doc.teamId === teamId && doc.tags) {
-        for (const tag of doc.tags) tags.add(tag);
-      }
-    }
-    return Array.from(tags).sort();
-  }
-
-  getEventDocuments(eventId: string): EnrichedTeamdoc[] {
+  getEventDocuments(eventId: string): Teamdocs[] {
     return this.#documentsList.filter((doc) => doc.eventId === eventId);
-  }
-
-  /**
-   * Récupère les documents d'un événement filtrés par tag
-   */
-  getEventDocumentsByTag(eventId: string, tag: string): EnrichedTeamdoc[] {
-    return this.#documentsList.filter(
-      (doc) => doc.eventId === eventId && doc.tags?.includes(tag),
-    );
   }
 
   // =============================================================================
@@ -272,7 +249,7 @@ export class TeamdocsStore {
     console.log(`[TeamdocsStore] Document supprimé : ${id}`);
   }
 
-  getDocumentById(id: string): EnrichedTeamdoc | undefined {
+  getDocumentById(id: string): Teamdocs | undefined {
     return this.#documents.get(id);
   }
 

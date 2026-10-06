@@ -7,17 +7,14 @@
   import { onDestroy, onMount } from "svelte";
   import {
     Save,
-    X,
     Lock as LockIcon,
     Eye,
     Edit3,
     Loader2,
-    PlusIcon,
     Download,
   } from "@lucide/svelte";
   import { fade } from "svelte/transition";
   import MarkdownEditorAdvanced from "$lib/components/MarkdownEditorAdvanced.svelte";
-  import BtnGroupCheck from "$lib/components/ui/BtnGroupCheck.svelte";
   import UnsavedChangesGuard from "$lib/components/ui/UnsavedChangesGuard.svelte";
   import SvelteMarkdown from "@humanspeak/svelte-markdown";
   import { navBarStore } from "$lib/stores/NavBarStore.svelte";
@@ -41,9 +38,6 @@
 
   let title = $state("");
   let content = $state("");
-  let tags = $state<string[]>([]);
-  let newTag = $state("");
-  let isPublic = $state(false);
 
   let isLoading = $state(true);
   let isSaving = $state(false);
@@ -78,21 +72,9 @@
   // Équipe
   let team = $derived(nativeTeamsStore.myTeams.find((t) => t.id === teamId));
 
-  // Tags disponibles depuis le store + tags ajoutés par l'utilisateur
-  let availableTags = $derived.by(() => {
-    const teamTags = teamId ? teamdocsStore.getTeamTags(teamId) : [];
-    const allTags = new Set([...teamTags, ...tags]);
-
-    return Array.from(allTags).map((tag) => ({
-      id: tag,
-      label: tag,
-      selected: tags.includes(tag),
-    }));
-  });
-
   // Calcul de isDirty par comparaison avec le snapshot initial
   const isDirty = $derived.by(() => {
-    const currentSnapshot = JSON.stringify({ title, content, tags, isPublic });
+    const currentSnapshot = JSON.stringify({ title, content });
     return currentSnapshot !== initialDocumentSnapshot;
   });
 
@@ -235,15 +217,11 @@
 
       title = doc.title || "";
       content = doc.content || "";
-      tags = doc.tags || [];
-      isPublic = doc.isPublic || false;
 
       // Créer le snapshot initial
       initialDocumentSnapshot = JSON.stringify({
         title,
         content,
-        tags,
-        isPublic,
       });
 
       // Charger le lock en arrière-plan + souscription realtime
@@ -353,38 +331,6 @@
   // ============================================================================
 
   /**
-   * Ajoute un nouveau tag
-   */
-  function addTag() {
-    const trimmedTag = newTag.trim().toLowerCase();
-    if (trimmedTag && !tags.includes(trimmedTag)) {
-      tags = [...tags, trimmedTag];
-      newTag = "";
-    }
-  }
-
-  /**
-   * Ajoute un tag avec la touche Entrée
-   */
-  function handleTagKeydown(e: KeyboardEvent) {
-    if (e.key === "Enter") {
-      e.preventDefault();
-      addTag();
-    }
-  }
-
-  /**
-   * Bascule un tag via BtnGroupCheck
-   */
-  function toggleTag(tagId: string) {
-    if (tags.includes(tagId)) {
-      tags = tags.filter((t) => t !== tagId);
-    } else {
-      tags = [...tags, tagId];
-    }
-  }
-
-  /**
    * Sauvegarde le document
    */
   async function handleSave() {
@@ -396,16 +342,12 @@
       await teamdocsStore.updateDocument(docId, {
         title: title.trim(),
         content,
-        tags: tags.length > 0 ? [...tags] : null,
-        isPublic,
       });
 
       // Mettre à jour le snapshot → isDirty passe à false
       initialDocumentSnapshot = JSON.stringify({
         title,
         content,
-        tags,
-        isPublic,
       });
 
       // Basculer en mode preview
@@ -586,63 +528,6 @@
             placeholder="Commencez à rédiger votre document..."
           />
         </fieldset>
-
-        <!-- Tags -->
-        <fieldset class="fieldset">
-          <legend class="fieldset-legend">Tags</legend>
-          <div class="flex flex-wrap items-center gap-x-6 gap-y-2">
-            {#if availableTags.length > 0}
-              <div class="">
-                <BtnGroupCheck
-                  items={availableTags}
-                  onToggleItem={(tagId) => toggleTag(tagId)}
-                  size="md"
-                  showStats={false}
-                />
-              </div>
-            {/if}
-            <label class="input w-80">
-              <input
-                type="text"
-                bind:value={newTag}
-                placeholder="Nouveau tag..."
-                onkeydown={handleTagKeydown}
-                disabled={!canEdit}
-                maxlength="30"
-              />
-              <button
-                class="btn btn-primary btn-sm"
-                onclick={addTag}
-                disabled={!canEdit || !newTag.trim()}
-              >
-                <PlusIcon class="h-4 w-4" />
-                Ajouter
-              </button>
-            </label>
-          </div>
-        </fieldset>
-        <!-- Visibilité -->
-        <!-- <fieldset class="fieldset">
-          <legend class="fieldset-legend">Visibilité</legend>
-          <label class="label cursor-pointer justify-start gap-4">
-            <input
-              type="checkbox"
-              class="checkbox checkbox-primary"
-              bind:checked={isPublic}
-              disabled={!canEdit}
-            />
-            <div class="flex flex-col">
-              <span class="font-semibold"> Document public </span>
-              <span class="text-xs text-wrap">
-                Cochez pour rendre ce document accessible à n'importe qui
-                possédant l'url. Si non coché, seul les membres de l'équipe <span
-                  class="font-semibold">{team?.name}</span
-                >
-                peuvent consulter ce document.
-              </span>
-            </div>
-          </label>
-        </fieldset> -->
       {:else}
         <!-- Mode preview -->
         <div class="mb-6 flex items-center justify-between">
@@ -654,11 +539,6 @@
               <p class="text-sm opacity-70">
                 Équipe : <span class="font-medium">{team?.name}</span>
               </p>
-            </div>
-            <div class="flex flex-wrap gap-2">
-              {#each tags as tag, index (index)}
-                <span class="badge badge-secondary badge-soft">#{tag}</span>
-              {/each}
             </div>
           </div>
         </div>

@@ -14,7 +14,9 @@
 _(rafraîchi par l'orchestrateur à chaque portail — dernière mise à jour : après T2, 06-10)_
 
 - **Base** : `e9f8c6cd` « build » (HEAD `mig/pocketbase` = origin au démarrage, 06-10)
-- **HEAD après T5** : `8446c789` (A1/B5/C7 + fast-win C1 `d34ca5e0` ; invariant `date` JSON rétabli ; +5 tests). **Frontier : T6.**
+- **HEAD après T6** : `765e5580` (A2/C4/B6/A3/C9/B4 ; slugUtils supprimé ; 4 flux créations sondés 200). **Frontier : T7.**
+- **Canon check-legacy mis à jour : baseline 192 erreurs** (T6 a corrigé RecipesStore:633:48 au passage ; exigence inchangée : 0 nouvelle erreur). Canon test : 61/61.
+- **Différé `!` ajouté (T6)** : teamdoc team-scopé bloqué par createRule (exige eventId) → à traiter en T11 (rule `teamId.members ~ auth || eventId.…`).
 - **Canon tests mis à jour : `bun run test` = 61/61** (3 fichiers utils + 1 fichier events). **Canon check affiné (découverte T5)** : `bun run check` (svelte-check-native) ne fait PAS de TS — ne capte que svelte compiler/a11y (0 err/6 warn) ; l'audit de types réel = `bun run check-legacy` = 193 erreurs préexistantes → **surveiller le delta** (aucune nouvelle erreur dans les hunks de ticket).
 - **Faits T4 portant les tickets client** : REC-4/SEC-1 enfants = no-op (le snapshot avait déjà figé les fix 042/043 dev) ; client envoie bien `events.createdBy` au create ; id locks garde min 15 (ids `doc_`/`event_` ≈ 20-21 chars OK) ; PB évalue les rules AVANT la validation (400 `data:{}` = rule, `data:{champ}` = validation).
 - **Piège T2 à porter par les deltas suivants** : toute nouvelle colonne PB = `DEFAULT '' NOT NULL` → backfills doivent cibler `''` ET NULL.
@@ -56,7 +58,7 @@ _(rafraîchi par l'orchestrateur à chaque portail — dernière mise à jour : 
 - PB trie les migrations par **nom de fichier** — jamais rééditer un fichier déjà appliqué ; deltas = nouveaux timestamps.
 - `?=` est cassé en PB 0.37.5 → utiliser `~` pour les relations multi.
 - `~` sur JSON/texte = LIKE sous-chaîne (SEC-1 : `alice@` ⊂ `malice@`).
-- PB renvoie les dates `YYYY-MM-DD HH:mm:ss.SSSZ` (espace, pas de `T`) — ne jamais `split("T")` sur une date PB.
+- PB renvoie les dates `YYYY-MM-DD HH:mm:ss.SSSZ` (espace, pas de `T`) — ne jamais `split("T")` sur une date PB ; lecture = `toInputDate()` (`date-helpers.ts`, extraction lexicale null-safe, T7).
 - Relations PB : valider **ids** (pas noms) ; champs inconnus du body = rejet ou perte silencieuse.
 - `pb-collection.ts` : pas de curseur persisté — `since = max(updated)` de toute la table (bug scopé, port Étape 3).
 - JSVM : ES5 limité ; `console.log` incertain → `$app.logger()` ; `$os.getenv` pour l'env.
@@ -307,6 +309,23 @@ Logs : `/tmp/orchestrate/t6-probe-*.json`, serve `/tmp/orchestrate/t6-pb-serve.l
 - `ProductsStore.createProduct` : `const productId = crypto.randomUUID()` mort (jamais envoyé) — préexistant, laissé tel quel.
 - Mode duplication recette : `transformStoreDataToForm` hérite du `publishedAt` de la source → le duplicata hérite de la date de publication (discutable, préexistant).
 - `RecipePermissionsManager` fait `users.getList(filter email=…)` (B9 audit, rules restrictives) — inchangé, hors périmètre.
+
+### T7 — Client : lecture des dates PB (helper partagé, B7, B8, C8) (06-10)
+
+**Fait établi** (3 fichiers modifiés, 2 tests nouveaux, commit `0d348592`) :
+- **Helper** : `toInputDate(value: string | null | undefined): string` dans `date-helpers.ts` — extraction lexicale `/^\d{4}-\d{2}-\d{2}/` (couvre PB espace et ISO `T` en un motif ; `new Date()` écarté : la conversion UTC décalerait les dates proches de minuit). `extractDate` délègue désormais à `toInputDate` — l'helper préexistant partageait la classe de bug `split("T")` (innocenté en prod : alimenté uniquement par des dates repas JSON client, cas OK §5) ; un seul exemplaire de la logique, appelants inchangés. `extractTime` laissé tel quel (datetime repas, cas OK §5).
+- **B7** : `CreateLoanModal` — préremplissage édition `startDate/endDate = toInputDate(loan.startDate/endDate)` (ex L264-265) ; garde de date fin : comparaison sur les deux côtés normalisés `toInputDate(startDate) > toInputDate(event.dateEnd)` (ex L428).
+- **B8** : `PurchaseManager.startEdit` — `forms.purchase.orderDate/deliveryDate = toInputDate(...) || null` : la **source** est corrigée, pas le symptôme. `StatusSelect` inchangé (binding dumb `input[type=date]`, aucune donnée à normaliser chez lui ; l'autre consommateur `GroupPurchaseModal` initialise à `null`).
+- **C8 : constat déjà conforme — mesuré, aucune modif** : `ProductCard`/`ProductCardCompact` affichent `purchasesBadges` = sortie de `formatPurchasesWithBadges`, qui formate `deliveryDate` via `formatDateShort` (fr-FR) **depuis le 2026-02-04** (blame `6aa86897`) — l'audit n'a pas remonté la chaîne. Preuve par test : `__tests__/products-display.test.ts` (mock `@lucide/svelte`, non compilable par vitest) — `deliveryDate` exposé formaté, jamais au brut PB.
+
+**Canon** : `bun run check` = 179 fichiers, 0 erreur, 6 warnings (inchangés) ; `bun run test` = **69/69** (61 + 6 `date-helpers` + 2 `products-display`) — **NOUVEAU CANON** (logs `/tmp/orchestrate/t7-{check,test}-mig-26-10-06.log`). `check-legacy` = **190 vs 192 baseline** : les 2 disparues = `CreateLoanModal` « loan.startDate/endDate possibly null » (ex L264-265), corrigées par la signature nullable de `toInputDate` (effet du design, pas un fix séparé) ; les 3 erreurs restantes de mes fichiers = préexistantes, décalées de +1 par l'import (140→141, 254→255, 73→74 — diff hunk par hunk vs log T6 ; log `/tmp/orchestrate/t7-check-legacy-mig-26-10-06.log`).
+
+**Décisions/écarts** :
+- Critère « 5 sites remplacés » : 3 sites réellement fautifs remplacés (B7 ×2 blocs, B8 ×1 source) ; C8 ×2 déjà conformes (mesure ci-dessus). Grep vert final : les 9 `split("T")` restants sont tous des cas OK §5 (`toISOString()` générés client, JSON repas/todos écrits côté navigateur, `extractTime` repas).
+- Contrainte respectée : 0 ligne touchée dans db-sync ; `created`/`updated` jamais normalisés.
+- Aucune sonde curl (aucun changement backend) — validation = typecheck + tests + grep + blame.
+
+**Note WIP fence** : le commit docs inclut l'édition orchestrateur du header run.md (portail post-T6, présente non commitée à l'arrivée, anodine) — commit whole-file d'un fichier que le ticket devait de toute façon amender, conformément au RUN-CONTRACT (pattern T2/T6).
 
 ## Constats différés (deferred — tag `!` bientôt / `S2` gating déploiement / `?` conditionnel)
 

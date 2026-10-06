@@ -26,7 +26,7 @@
 
 ## Critères
 
-- [ ] Helper unique + 5 sites remplacés (grep vert sur `split("T")` hors JSON client écrit côté navigateur — cas OK du §5)
-- [ ] Tests unitaires verts (nouveau canon loggué dans run.md)
-- [ ] `created`/`updated` jamais touchés (aucune normalisation en db-sync)
-- [ ] `bun run check` au canon ; run.md amendé (journal T7)
+- [x] Helper unique + 5 sites remplacés (grep vert sur `split("T")` hors JSON client écrit côté navigateur — cas OK du §5) — 3 sites fautifs remplacés (B7 ×2 blocs, B8 ×1 source) ; C8 ×2 **déjà conformes (mesuré**, cf. journal T7 : `formatPurchasesWithBadges` formate depuis 6aa86897) ; grep vert : les 9 `split("T")` restants = cas OK §5
+- [x] Tests unitaires verts (nouveau canon loggué dans run.md) — **69/69**
+- [x] `created`/`updated` jamais touchés (aucune normalisation en db-sync) — 0 ligne db-sync dans le diff
+- [x] `bun run check` au canon ; run.md amendé (journal T7) — 0 err/6 warn ; check-legacy 190 (−2, corrigées par la signature nullable du helper)

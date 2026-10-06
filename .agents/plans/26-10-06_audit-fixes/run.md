@@ -14,7 +14,7 @@
 _(rafraîchi par l'orchestrateur à chaque portail — dernière mise à jour : après T2, 06-10)_
 
 - **Base** : `e9f8c6cd` « build » (HEAD `mig/pocketbase` = origin au démarrage, 06-10)
-- **HEAD après T2** : `2392b51a` (chaîne = snapshot T1 + delta `1791278400_autodates_ingredients_categories.js`, appliquée à la dev DB). **Frontier : T3.**
+- **HEAD après T3** : `635e617a` (deltas schéma T3 : locks id relax + userName, teams 5 champs, share_links.createdBy backfillé 3/3, events description/minContrib ; + fast-win hook teams-resync `original()`). **Frontier : T4.**
 - **Piège T2 à porter par les deltas suivants** : toute nouvelle colonne PB = `DEFAULT '' NOT NULL` → backfills doivent cibler `''` ET NULL.
 - **Arbre** : propre hormis `.scratch/probes/t1-snapshot-summary.py` (untracked, probe transient T1 — connu, ne pas committer ni nettoyer).
 - **Décision portail post-T1** : ne PAS lancer `migrate history-sync` sur la dev DB pendant le run (les 9 lignes `_migrations` orphelines sont inoffensives) ; à noter dans la checklist déploiement.
@@ -172,6 +172,57 @@ Logs probes : `/tmp/orchestrate/t3-dev-probe-*.json`.
 - `Record.originalCopy()` n'existe plus en 0.37.5 → `Record.original()` (fast-win ci-dessus).
 - Défauts SQL par type de colonne fraîche : TEXT/BOOLEAN = `''`/`FALSE` NOT NULL (piège T2 confirmé), **JSON = NULL nullable** (`roles` : `PRAGMA table_info` → notnull 0, dflt NULL) — un backfill JSON devra cibler NULL et non `''`.
 - Pattern diagnostic serveurs PB : le PID affiché par `nohup … &` est celui du shell wrapper, pas de PB ; un 2e boot sur le même port échoue en silence dans le log (bind error) et l'ANCIEN serveur continue de répondre — vérifier `pgrep -af 'pocketbase serve'` et le log de boot avant toute conclusion A/B.
+
+### T4 — Rules API : REC-3, REC-1, EVENT-1, REC-4/SEC-1, REC-5, REC-7, REC-9, SEC-2, REC-6 (06-10)
+
+**Fait établi** : 1 migration rules unique `1791278800_rules_api_hardening.js` (> delta T3) touchant 9 collections :
+
+| Rule | Avant | Après |
+|---|---|---|
+| recipes updateRule (REC-3) | `permissionWrite ?=` (cassé) | `permissionWrite ~ @request.auth.id` |
+| share_links list/view/update/delete (REC-1) | auth seul | `createdBy = @request.auth.id` |
+| share_links create (REC-1) | auth seul | `+ @request.body.createdBy = @request.auth.id` |
+| events list/view (EVENT-1) | teams/guests | `+ \|\| createdBy = @request.auth.id` |
+| teams deleteRule (REC-6) | `members ~` (tout membre) | `createdBy = @request.auth.id \|\| (createdBy = "" && members ~ @request.auth.id)` (grand-père) |
+| notifications create (REC-5) | auth seul | `+ @request.body.userId = @request.auth.id` |
+| materiel create (REC-7) | auth seul | `+ (teamId.members ~ auth \|\| ownerUser = auth)` |
+| materiel_loan create (REC-9) | auth seul | `+ (responsibleId = auth \|\| ownerId.members ~ auth)` (arbitré) |
+| locks create (SEC-2) | auth seul | `+ @request.body.userId = @request.auth.id` |
+
+teamss updateRule **inchangé** (collaboration members — le risque réel est le cascade delete, couvert ci-dessus).
+
+**No-op mesurés (pas dans la migration)** : events updateRule et les 5 collections enfants (products, purchases, event_materiel, event_todos, teamdocs) sont **déjà à la cible** REC-4/SEC-1 (`guestUsers ~`, sans `guestEmails ~` ni `joinToken` dans aucune règle) — le snapshot T1 reflétait la dev DB qui avait déjà les fix 042/043 ; le tableau du ticket décrivait l'état « fresh DB pré-T1 » de l'audit, périmé depuis la reconstruction de la chaîne. Sweep confirmé : 0 `joinToken`, 1 seul `guestEmails` (définition du champ, pas une règle), 1 seul `?=` (la ligne REC-3 fixée).
+
+**Arbitrage REC-9 (documenté)** : le client (`CreateLoanModal.doSubmit`) n'envoie **jamais** `borrowerUser` ni `createdBy` ; il pose `responsibleId = globalState.userId`. La garde mire `responsibleId = auth` (flux réel) `\|\| ownerId.members ~ auth` (membre de l'équipe propriétaire, miroir du modèle acteur list/update). La règle littérale du ticket (`borrowerUser/createdBy`) aurait cassé `createLoan` (403 systématique).
+
+**Compatibilité client vérifiée (grep, 0 modif)** : events `createEventWithTeams` envoie `createdBy` (L523-533) ✓ EVENT-1 matcheront ; `createShareLink` envoie `createdBy` ✓ REC-1 ; `acquireLock` envoie `userId = globalState.userId` ✓ SEC-2 ; `createMateriel` envoie toujours `ownerUser = globalState.userId` ✓ REC-7 ; notifications jamais créées côté client (C3) ✓ REC-5 sans impact.
+
+**Application** (backup préalable `/tmp/orchestrate/pb_data-backup-t4/`, sha256 `data.db` = `4144bb03…` ; checkpoint COORDINATION avant 1re édition — aucune claim, arbre conforme) :
+1. Bootcheck sur copie (`pb_data-bootcheck-t4`) : `migrate up` → « Applied 1791278800_rules_api_hardening.js » (seule migration en attente — `_migrations` dev porte déjà T1-T3) ; bootcheck serve 8091 + matrice complète verte pré-validation.
+2. Dev DB : `cd pocketbase && ./pocketbase migrate up` → même ligne (log `/tmp/orchestrate/t4-dev-migrate-up.log`). `_migrations` : **97 lignes** = 96 post-T3 + 1.
+
+**Matrice curl pos/neg** (52/52 OK sur copie bootcheck PUIS sur dev 8090 — 2 users minimum requis : 3 users de test `t4-alice/bob/carol@test.local`, register public, auto-supprimés en fin de run ; sonde `.scratch/probes/t4-rules-matrix.py`, log complet `/tmp/orchestrate/t4-matrix-8090.log`, chaque sonde = 1 curl littéral journalisé) :
+
+| # | Sonde | Verdict dev |
+|---|---|---|
+| P1-P5 | REC-1 : bob list → seul son lien ; carol list → vide ; bob view lien d'alice → 404 ; bob create spoof createdBy=alice → 400 ; alice view → 200 | **OK** |
+| P6-P8 | EVENT-1 : alice voit son event sans team (filter totalItems=1) ; carol list → 0 ; carol view → 404 | **OK** |
+| P9-P11 | REC-3 : bob update via permissionWrite → 200 ; carol → 404 ; alice (owner) → 200 | **OK** |
+| P12-P13 | REC-5 : alice notif chez bob → 400 (rejet règle, data `{}`) ; chez alice → 200 | **OK** |
+| P14-P16 | REC-7 : carol materiel sur T_A hors team (ownerUser=alice) → 400 ; carol perso (ownerUser=self) → 200 ; alice materiel de T_A (membre, ownerUser vide) → 200 | **OK** |
+| P17-P19 | REC-9 : carol loan (responsibleId=self) → 200 ; carol loan responsible=alice hors team → 400 ; bob loan (membre T_G) → 200 | **OK** |
+| P20-P21 | SEC-2 : alice lock au nom de bob → 400 ; en son nom → 200 | **OK** |
+| P22-P26 | REC-6 : bob delete T_B (membre non créateur) → 404 ; alice delete T_B → 204 ; carol delete T_G → 404 ; bob delete T_G (grand-père) → 204 ; alice delete T_A → 204 | **OK** |
+
+Setup S1-S13 (register/auth ×3, teams T_A/T_B/T_G dont grand-père sans createdBy, event sans team, recette partagée, 2 share_links) et teardown T (11 deletes records + 3 users self-delete) : **tous OK**, comptes SQL post-run = baseline (teams 6, share_links 3, materiel 110, materiel_loan 2, locks 0, notifications 0, recipes 372, events 10, 0 résidu `t4-%`).
+
+**Découvertes sonde (pièges)** :
+- Le champ id `locks` garde **min: 15** (T3 avait relaxé max→40 + pattern, pas min) — les ids client `doc_`+15 / `event_`+15 (18/21 chars) passent, mais toute sonde < 15 chars est rejetée en validation AVANT l'évaluation de la règle.
+- PB évalue la createRule **avant** la validation des champs : un rejet de règle = 400 `data: {}` (cf. P12/P20) ; une erreur de validation = 400 `data: {champ: …}` (cf. P21 du 1er run). Les deux formes distinguent le verdict.
+- PB renvoie **404** (pas 403) sur view/delete bloqués par règle sur records existants (pas de leak d'existence) — l'attendu « 403/404 » du ticket se matérialise en 404.
+- Piège sonde (run 1, corrigé) : un neg REC-7 avec `ownerUser = self` satisfaisait la clause 2 → 200 inattendu + record résidu sur la copie bootcheck (jetable, supprimée). Le vrai cas neg : ownerUser ≠ self ET hors team. Résiduel assumé : `ownerUser = self` + `teamId` d'une team dont on n'est pas membre passe la garde REC-7 (prescription littérale du ticket — pollution possible de l'inventaire d'une team par un tiers, mais list/view restent scopés).
+
+**Canon** : `bun run check` = 179 fichiers, 0 erreur, 6 warnings (inchangés) ; `bun run test` = 56/56 verts (logs `/tmp/orchestrate/t4-{check,test}-mig-26-10-06.log`). Typegen non requis (aucun changement de champs). Aucun fichier client modifié. Tous les process PB stoppés (ports 8090/8091 libres), copie bootcheck trashed.
 
 ## Constats différés (deferred — tag `!` bientôt / `S2` gating déploiement / `?` conditionnel)
 

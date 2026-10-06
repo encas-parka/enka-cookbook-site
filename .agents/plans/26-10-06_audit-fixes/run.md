@@ -14,7 +14,8 @@
 _(rafraîchi par l'orchestrateur à chaque portail — dernière mise à jour : après T2, 06-10)_
 
 - **Base** : `e9f8c6cd` « build » (HEAD `mig/pocketbase` = origin au démarrage, 06-10)
-- **HEAD après T9** : `deb9ba57` (send-emails ownership + réconciliation serveur ; client lookup migré ; 18/18 sondes). **Frontier : T10.**
+- **HEAD après T10** : `c09684ea` (cascades refondues en **before-delete hooks** — découverte : les AfterSuccess étaient des no-ops, PB 0.37.5 purge les relations avant ; events avec enfants in-suppimables → 204 ; teamdocs team-scopé débloqué ; goja roles fixé). **Frontier : T11.**
+- **Fait T10 majeur** : PB 0.37.5 nullifie les relations AVANT les hooks AfterSuccess — tout hook cascade AfterSuccess est un no-op ; pattern = `onRecordDelete` (before) + transaction. Le bloc `events.teams` est conservé dans le before-hook pour bumper `updated` (delta sync client).
 - **Fait T9** : sans host SMTP configuré, PB fallback sendmail (absent) → échec par destinataire capturé (`ok:false`), 200 propre — les 2 branches documentées dans le hook. `EventShareLinks.svelte` déjà conforme (note T5 obsolète). Note déploiement : `ENKA_BASE_URL` obligatoire en prod (différé S2 loggé).
 - **Piège JSVM majeur (T8)** : `record.get()` sur champ JSON = export goja du `[]byte` brut — muter corrompt la donnée ; utiliser `getString()` + `JSON.parse`. Bug latent restant : `invite-to-team.pb.js` (`roles`) → intégré à T10.
 - **Différé `!` ajouté (T8)** : invite-to-team roles JSON (cf. ci-dessus) — T10.
@@ -459,6 +460,16 @@ Logs hooks vérifiés dans `_logs` (auxiliary.db) : cascade E1 → `materiel_loa
 - Hooks BEFORE + fail-closed : un delete d'event/team déclenchant une erreur cascade est désormais annulé net (avant : partiel possible). Aucun cas connu où un enfant `$app.delete` échouerait (superuser) — comportement théorique, documenté dans les headers.
 
 **Note WIP fence** : le commit docs inclut l'édition orchestrateur du header run.md (portail post-T9, présente non commitée à l'arrivée, anodine) — commit whole-file d'un fichier que le ticket devait de toute façon amender, conformément au RUN-CONTRACT (pattern T2/T6/T7/T8/T9).
+
+### T11 — `eventMaterielStore.destroy()` au logout (fuite inter-utilisateurs) (06-10)
+
+**Fait établi** (1 fichier client, +2 lignes) : `GlobalState.logout()` — import `eventMaterielStore` (après `productsStore`) + appel `await eventMaterielStore.destroy()` inséré entre `materielStore.destroy()` et `teamdocsStore.destroy()`, miroir exact du fix d'origine `76948df7` (enka-next, vérifié par `git show` : même position dans le bloc, même placement d'import). La table Dexie `eventMateriels` est désormais vidée à chaque déconnexion.
+
+**Conformité du contrat destroy (vérifiée, aucune modif requise)** : `EventMaterielStore.destroy()` porte les 4 maillons du contrat AGENTS.md mig §Store Cleanup — unsubscribe bridge (avec garde `if (this.#bridge)`), `unsubscribeAll()`, `await clearLocal()`, `#isInitialized = false` — plus le reset des flags annexes (`#isRealtimeActive`, `#realtimeInitialized`, `#currentEventId`, `#loading`, `#error`), le plus complet des stores mig. Sûr à appeler sans initialisation préalable (bridge null, unsubscribeAll no-op, clearLocal sur table vide) : le logout d'un utilisateur B purge la table remplie par A même si B n'a jamais ouvert d'event — c'est le but sécurité.
+
+**Hors périmètre (assumé)** : le commit d'origine portait aussi un resync silencieux RecipesStore + main.ts — Étapes 5/6 du portage (orchestrateur), tickets dédiés, pas ici. Aucune sonde backend (aucun changement PB) — validation = canon client ; vérification runtime complète = QA T15.
+
+**Canon** : `bun run check` = 179 fichiers, 0 erreur, 6 warnings (inchangés) ; `bun run test` = **69/69** ; `check-legacy` = **190 = baseline**, 0 erreur GlobalState (logs `/tmp/orchestrate/t11-{check,test,check-legacy}-mig-26-10-06.log`).
 
 ## Constats différés (deferred — tag `!` bientôt / `S2` gating déploiement / `?` conditionnel)
 

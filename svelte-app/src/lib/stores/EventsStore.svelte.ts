@@ -790,10 +790,6 @@ export class EventsStore {
               email,
               shareLinkId,
             })),
-            eventName: event.name,
-            eventDescription: event.description || "",
-            dateStart: event.dateStart || "",
-            dateEnd: event.dateEnd || "",
           },
         })
         .then((result) => {

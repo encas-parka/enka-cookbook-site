@@ -111,8 +111,20 @@ routerAdd("POST", "/api/enka/invite-to-team", function(e) {
   // --- Mise a jour atomique de la team ---
   if (addedUserIds.length > 0) {
     var updatedMembers = memberArray.concat(addedUserIds);
-    var currentRoles = team.get("roles") || {};
-    if (typeof currentRoles !== "object" || Array.isArray(currentRoles)) {
+
+    // roles est un champ JSON : record.get() renvoie l'export goja du
+    // []byte brut — muter ce wrapper corrompt la donnee. Lire le texte
+    // JSON via getString() et parser en objet JS natif.
+    var currentRoles = {};
+    try {
+      var rolesRaw = team.getString("roles");
+      if (rolesRaw) {
+        var parsedRoles = JSON.parse(rolesRaw);
+        if (parsedRoles && typeof parsedRoles === "object" && !Array.isArray(parsedRoles)) {
+          currentRoles = parsedRoles;
+        }
+      }
+    } catch (rolesErr) {
       currentRoles = {};
     }
 

@@ -14,7 +14,7 @@
 _(rafraîchi par l'orchestrateur à chaque portail — dernière mise à jour : après T2, 06-10)_
 
 - **Base** : `e9f8c6cd` « build » (HEAD `mig/pocketbase` = origin au démarrage, 06-10)
-- **HEAD après T6** : `765e5580` (A2/C4/B6/A3/C9/B4 ; slugUtils supprimé ; 4 flux créations sondés 200). **Frontier : T7.**
+- **HEAD après T7** : `9cdf3454` (helper `toInputDate` + B7/B8 ; C8 réfuté par mesure — déjà conforme depuis 02/2024 ; canon test **69/69**, check-legacy 190). **Lot 1 terminé. Frontier : T8.** Tickets T9-T11 écrits (T9 dépend de T8 : route lookup-user).
 - **Canon check-legacy mis à jour : baseline 192 erreurs** (T6 a corrigé RecipesStore:633:48 au passage ; exigence inchangée : 0 nouvelle erreur). Canon test : 61/61.
 - **Différé `!` ajouté (T6)** : teamdoc team-scopé bloqué par createRule (exige eventId) → à traiter en T11 (rule `teamId.members ~ auth || eventId.…`).
 - **Canon tests mis à jour : `bun run test` = 61/61** (3 fichiers utils + 1 fichier events). **Canon check affiné (découverte T5)** : `bun run check` (svelte-check-native) ne fait PAS de TS — ne capte que svelte compiler/a11y (0 err/6 warn) ; l'audit de types réel = `bun run check-legacy` = 193 erreurs préexistantes → **surveiller le delta** (aucune nouvelle erreur dans les hunks de ticket).
@@ -66,6 +66,10 @@ _(rafraîchi par l'orchestrateur à chaque portail — dernière mise à jour : 
 - **`bun run check` (svelte-check-native 0.7.2) ne fait PAS de diagnostics TypeScript** (mesuré T5 : erreur de type délibérée dans un `.svelte` ET un `.svelte.ts` = 0 erreur rapportée ; il ne voit que a11y/runes/compil). Le vrai audit type = `bun run check-legacy` (svelte-check) — **193 erreurs préexistantes** sur 50 fichiers (dette invisible au canon natif) : raisonner par diff par fichier, pas par « 0 erreur ». Durable : `svelte-app/CLAUDE.md` § Development Commands.
 - Champ PB inconnu dans un **PATCH** events = ignoré **en silence** (200, champ absent de la réponse) — la classe B5 (allDates/teamsId) ne rejetait jamais : elle perdait les données sans erreur. Un POST avec relation invalide (noms de teams) rejette lui en 400 (A1). Confirmé T6 côté POST : les champs inconnus **non-relation** (`manuallyAddedVariants`…) sont ignorés en silence à la création aussi.
 - **Schéma `materiel_loan` (correction audit §2, mesuré T6)** : `ownerId` est une relation → **teams** (pas users) — `responsibleId`/`borrowerUser`/`createdBy` → users. Le payload createLoan passe `ownerId = id d'équipe` (celle du matériel emprunté) ; un id user dans `ownerId` = 400 `validation_missing_rel_records`.
+- **JSVM : `record.get()` sur un champ JSON renvoie l'export goja du `[]byte` brut** (T8, mesuré) — `[]byte("[]")` devient `[91, 93]` (codes ASCII de `[`/`]`), et muter CE wrapper (`concat`/`push` + `set`) corrompt la donnée stockée (`[91,93,"email"]`) ou rejette en `validation_invalid_json` (array mixte). Lire via `getString()` (texte JSON) + `JSON.parse` → objets JS purs, muter, `set()`. Les champs **relation** (ex. `guestUsers`) sont sains (`[]any` de strings). Piège actif dans `invite-to-team.pb.js` (`team.get("roles")` + mutation + `set`) — non corrigé, hors périmètre T8 (voir journal T8).
+- **JSVM : PB hot-reloade `pb_hooks` au changement de fichier** (« File … changed, restarting… » dans le log serveur) — itérer sur un hook sans restart, port 8090 reste servi.
+- **Logs PB 0.37** : `$app.logger()` n'imprime pas en console au niveau info/warn par défaut — les lignes vont dans la table `_logs` de **`auxiliary.db`** (pas `data.db`) ; vérification par `sqlite3 -readonly pocketbase/pb_data/auxiliary.db "SELECT … FROM _logs …"`.
+- **Tokens JWT dans les sondes curl** : un copier-coller manuel d'un token de 150+ chars = 401 fantôme quasi indétectable (T8, 1er run P1) — passer par la sonde python (pattern T4) qui garde les tokens en variables, jamais à la main.
 
 ## Journal par ticket (rempli par les implémenteurs à l'amend)
 
@@ -327,6 +331,48 @@ Logs : `/tmp/orchestrate/t6-probe-*.json`, serve `/tmp/orchestrate/t6-pb-serve.l
 
 **Note WIP fence** : le commit docs inclut l'édition orchestrateur du header run.md (portail post-T6, présente non commitée à l'arrivée, anodine) — commit whole-file d'un fichier que le ticket devait de toute façon amender, conformément au RUN-CONTRACT (pattern T2/T6).
 
+### T8 — Hooks : join-event complet (HOOK-1, HOOK-2, SEC-3) + route lookup-user (prérequis UI-1) (06-10)
+
+**Fait établi** (2 fichiers hooks + 2 fichiers client, 3 commits `5dc4e14b`/`58596e04`/docs) :
+- **join-event.pb.js durci** : (1) HOOK-1 — ajout d'une entrée contributor réelle `{id: userId, email, name, status: "accepted"}` ; **dédoublonnage par email** : une entrée existante de même email (id nanoid posé par `inviteParticipants`) est **rattachée au vrai userId**, son `status` n'est PAS écrasé (le RSVP client reste maître d'une invitation en attente : le bandeau `EventInvitationAlert` reste affiché jusqu'à acceptation explicite) ; `name` enrichi si absent. (2) HOOK-2 — vérifs dans l'ordre : `link_type === "event"`, `isActive`, `expiresAt` (si posé ; fail-closed si date illisible ; `replace(" ", "T")` avant `new Date()` — format PB espace, parse ES5), `maxUses`/`useCount` (0 = illimité ; refus si `useCount >= maxUses`), statut de l'event **whitelist fail-closed** : joignable uniquement `proposition`/`confirmed` (refus `archive`/`locked`/`canceled` et toute valeur inconnue). (3) `useCount` **incrémenté uniquement au premier join** — re-join idempotent (`guestUsers` déjà peuplé) ne consomme pas de use ; les refus n'incrémentent pas (P7b). (4) SEC-3 — `console.log` remplacé par `$app.logger()` partout ; chaque refus loggé en warn (`Join refused: <raison>` + linkId/userId) ; read-modify-save sans verrou **assumé et documenté** (commentaire header : deux joins concurrents peuvent déborder maxUses d'une unité) — pas de transaction JSVM exotique.
+- **lookup-user.pb.js (nouveau)** : `GET /api/enka/lookup-user` — auth requise (`$apis.requireAuth()` + check `e.auth`), query `email`, **match exact** (`findFirstRecordByFilter("users", "email = {:email}")`, pas de LIKE — leçon SEC-1), normalisation trim+lowercase ; renvoie `{id, name}` ou 404 (inconnu) / 400 (email manquant) / 401 (sans auth). Énumération d'emails par un authentifié : **acceptée et notée** dans le docstring (app collaborative). T9 consommera ; `invite-to-team` garde son lookup interne (non modifié).
+- **Client — décision `inviteParticipants` documentée et appliquée** : les emails sont résolus via `/api/enka/lookup-user` (**nouveau service `pb-users.ts`** : `lookupUserByEmail` — null sur 404, throw sur autre erreur — et `lookupUsersByEmails` batch Promise.all → Map) ; un compte connu reçoit son **vrai userId** dans contributors (bandeau RSVP + `getContributorStatus` fonctionnels immédiatement), fallback **nanoid silencieux** pour les inconnus et sur toute erreur unitaire (réseau/5xx) — l'invitation n'est jamais bloquée. Cohérent avec le dédoublonnage serveur : un nanoid sera rattaché au premier join. Coût : N GET parallèles par invitation (lot typique < 10). Le set mort `existingIds` est retiré au passage (dans le hunk).
+- **EventInvitationAlert / getContributorStatus / updateContributorStatus : vérifiés cohérents, aucune modif** — tous matchent `c.id === userId` (fonctionnels avec les vrais ids) avec fallback email ; le hook préservant `status: "invited"` au dédoublonnage, le flux RSVP reste complet.
+
+**Découvertes (pièges — détail en section Pièges globale)** :
+- **`record.get()` sur champ JSON = export goja du `[]byte` brut** : `[]byte("[]")` → `[91, 93]` (ASCII) — muter ce wrapper corrompt la donnée (`guestEmails` stocké `[91,93,"email"]`, `contributors` `[91,93,0]` — l'objet pushé coerce en byte) ou rejette `validation_invalid_json` (array mixte wrapper+JS). **Fix** : lecture `getString()` + `JSON.parse`. L'ancien hook avait le même bug latent sur `guestEmails` (son comportement « fonctionne » venait de la lecture de code, jamais prouvé en runtime). Données dev réelles vérifiées **propres** (SQL : 10 events, arrays bien formés — l'ancien hook n'a jamais tourné ici).
+- PB **hot-reloade pb_hooks** (« File … changed, restarting… ») — itération sans restart.
+- `$app.logger()` n'apparaît pas en console (info/warn) : lignes dans `_logs` de **auxiliary.db**.
+- 1er run P1 : 401 fantôme = token JWT re-copié à la main fautif — bascule immédiate sur la sonde python (pattern T4).
+
+**Bootcheck + application** : copie byte-identique `pb_data` → `pb_data-bootcheck-t8` (sert aussi de backup, aucune migration ce ticket — hooks = fichiers chauds, zéro écriture schéma) ; serve 8091 (`--hooksDir` absolu, piège T1) : health 200, routes `join-event` et `lookup-user` enregistrées (401 sans auth), 0 erreur de chargement hooks. Puis dev 8090 (`pb-dev.sh` nohup) pour la matrice complète. PB stoppé en fin de ticket (ports 8090/8091 libres), copie bootcheck trashed.
+
+**Verdicts des sondes** (52/52 OK — `.scratch/probes/t8-hooks-matrix.py`, log `/tmp/orchestrate/t8-matrix-8090.log`, 3 users `t8-o/j/x@test.local` créés puis auto-supprimés) :
+
+| # | Sonde | Verdict |
+|---|---|---|
+| P1-P1c | join valide : 200 `{eventId}` ; `guestUsers=[j]`, `guestEmails=[email]`, `contributors=[{id:j,email,name,status:accepted}]` exacts ; `useCount=1` | **OK** |
+| P2-P2c | re-join idempotent : 200 ; `useCount` et contributors inchangés | **OK** |
+| P3-P3d | dédoublonnage : contributor nanoid (même email) → id=réel userId, `status:invited` et `invitedAt` préservés, `name` enrichi, pas d'append ; `useCount=1` | **OK** |
+| P4 | lien `expiresAt` passé → 400 « expire » | **OK** |
+| P5 | `link_type=team` → 400 « ne permet pas de rejoindre un evenement » | **OK** |
+| P6-P7b | maxUses=1 : 1er join 200 (`useCount=1`), 2e user → 400 « limite » ; pas d'incrément au refus | **OK** |
+| P8 | event `canceled` → 400 « n'accepte pas de nouveaux participants » | **OK** |
+| P9 | lien désactivé → 400 « desactive » | **OK** |
+| P10-P13 | lookup-user : 200 `{id,name}` exacts / 404 inconnu / **401 sans auth** / 400 sans email | **OK** |
+| P14 | join sans auth → 401 | **OK** |
+
+Logs serveur : 5× `Join refused: …` en warn + `User joined event` / `Join reconciled existing participant` en info, vérifiés dans `_logs` (auxiliary.db). Teardown API 204×13 (6 links + 3 events + 3 users + désactivation) ; SQL readonly post-run : events **10**, share_links **3**, users **32**, **0 résidu `t8-%`** ; arrays JSON des 10 events réels vérifiés propres.
+
+**Canon** : `bun run check` = 179 fichiers, 0 erreur, 6 warnings (inchangés) ; `bun run test` = **69/69** ; `check-legacy` = **190 = baseline** (7 erreurs EventsStore préexistantes décalées +1 (import) puis +6 (hunk), colonnes identiques ; `pb-users.ts` 0 erreur — diff hunk par hunk vs log T7 ; logs `/tmp/orchestrate/t8-{check,test,check-legacy}-mig-26-10-06.log`). Typegen non requis (aucun changement de champs).
+
+**Observations reportées (hors périmètre T8)** :
+- `invite-to-team.pb.js` porte le même pattern `team.get("roles")` + mutation + `set` → **corruption `roles` latente au premier invite-to-team sur comptes existants** (même classe JSON que T8) ; non corrigé ici : la preuve réclamerait SMTP configuré (`mailer.getSenderAddress()` throw avant tout save) — candidat fast-win T-next avec le fix `getString()+JSON.parse` (≤ 5 lignes).
+- AGENTS.md (mig) : table Services à compléter (`pb-users.ts`) + section « Restant Phase 1 » obsolète (DOC-1 audit) — éditions hors périmètre T8, pour l'orchestrateur.
+- HOOK-3 (`send-emails` sans ownership) inchangé — ticket séparé, non planifié dans ce lot.
+
+**Note WIP fence** : le commit docs inclut l'édition orchestrateur du header run.md (portail post-T7, présente non commitée à l'arrivée, 1 ligne, anodine) — commit whole-file d'un fichier que le ticket devait de toute façon amender, conformément au RUN-CONTRACT (pattern T2/T6/T7).
+
 ## Constats différés (deferred — tag `!` bientôt / `S2` gating déploiement / `?` conditionnel)
 
 - **S2** : secret share_links ≠ id (token dédié) — refonte URL/invitations. (décision enveloppe, voir ci-dessus)
@@ -335,5 +381,6 @@ Logs : `/tmp/orchestrate/t6-probe-*.json`, serve `/tmp/orchestrate/t6-pb-serve.l
 - **?** : C5 — 3e argument `sendEmailToExistingMembers` de `createEventWithTeams` ignoré (implémenter ou retirer l'option UI — produit).
 - `!` côté SITE (pas ici) : régression `isDynamic` perdue par revert `88de525a` — à corriger upstream enka-next, NE PAS porter.
 - `!` backend delta : `teamdocs.createRule` exige `eventId.*` — le flux doc d'équipe (`createDocument`, teamId sans eventId) est rejeté 400 règle (mesuré T6 P4b) ; ajouter `|| teamId.members ~ @request.auth.id` (migration rules, pattern T4).
+- `!` backend : `invite-to-team.pb.js` — `team.get("roles")` + mutation + `set` = même corruption JSON que T8 (export goja du `[]byte`) ; fix `getString()+JSON.parse` (≤ 5 lignes, pattern join-event T8) ; preuve à construire avec SMTP configuré (mesuré T8, journal).
 - `!` backend ou client : `materiel_loan.deleteRule = createdBy = auth` mais le client ne set jamais `createdBy` à la création → loans UI indestructibles via l'API (T6 a contourné en SQL) ; setter `createdBy = userId` dans `createLoan` (pattern C9) ou revoir la règle.
 - Images recettes (20 valeurs `img` frontmatter, og:image déjà cassées côté Hugo) — décision produit Phase 2.

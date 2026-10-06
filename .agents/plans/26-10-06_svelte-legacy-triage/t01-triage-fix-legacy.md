@@ -22,8 +22,8 @@
 
 ## Critères
 
-- [ ] Table de triage complète (189 lignes regroupées, verdicts) dans run.md
-- [ ] Crash-risque fixé (10+7+cluster selon triage réel) ; tests ou preuves de non-vacuité
-- [ ] Null-safety triée (gardes réelles vs casts documentés)
-- [ ] Nouveau baseline check-legacy (objectif réaliste : ≤ 60 restants, tous classés bruit/dette assumée)
-- [ ] Canons verts ; run.md amendé ; commits en tiers
+- [x] Table de triage complète (189 lignes regroupées, verdicts) dans run.md
+- [x] Crash-risque fixé (cluster C1+C2+C5+RecipeHeaderForm) ; tests (10 nouveaux, preuve rouge→vert) ou preuves de non-vacuité
+- [x] Null-safety triée (gardes réelles vs casts documentés — cf. table run.md)
+- [x] Nouveau baseline check-legacy : **0** (objectif ≤60 largement tenu), tous classés
+- [x] Canons verts (check 0/6, test 104/104) ; run.md amendé ; commits en tiers (9)

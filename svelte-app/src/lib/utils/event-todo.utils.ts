@@ -3,8 +3,13 @@
  * Parsing et validation des priorités
  */
 
-import type { EventTodo } from "$lib/types/events";
-import { EventTodoPriority, EventTodoStatus } from "$lib/types/events";
+import type { EventTodo, EventTodoPriority, EventTodoStatus } from "$lib/types/events";
+// Valeurs runtime : les enums PB sont générés en `const` dans pb-generated
+// (events.d.ts n'expose que les types — pas de module runtime).
+import {
+	EventTodosPriorityOptions,
+	EventTodosStatusOptions,
+} from "$lib/types/pb-generated";
 
 /**
  * Parse et valide la priorité d'un todo
@@ -15,9 +20,9 @@ export function parseEventTodoPriority(
   priority: string | undefined,
 ): EventTodoPriority {
   const validPriorities: EventTodoPriority[] = [
-    EventTodoPriority.high,
-    EventTodoPriority.medium,
-    EventTodoPriority.low,
+    EventTodosPriorityOptions.high,
+    EventTodosPriorityOptions.medium,
+    EventTodosPriorityOptions.low,
   ];
 
   if (priority && validPriorities.includes(priority as EventTodoPriority)) {
@@ -27,16 +32,16 @@ export function parseEventTodoPriority(
   console.warn(
     `[event-todo.utils] Priority invalide: ${priority}, utilisation de "medium"`,
   );
-  return EventTodoPriority.medium; // Valeur par défaut
+  return EventTodosPriorityOptions.medium; // Valeur par défaut
 }
 
 /**
  * Ordre de tri pour les priorités (utilisé dans le store)
  */
 export const PRIORITY_ORDER: Record<EventTodoPriority, number> = {
-  [EventTodoPriority.high]: 3,
-  [EventTodoPriority.medium]: 2,
-  [EventTodoPriority.low]: 1,
+  [EventTodosPriorityOptions.high]: 3,
+  [EventTodosPriorityOptions.medium]: 2,
+  [EventTodosPriorityOptions.low]: 1,
 };
 
 /**
@@ -44,9 +49,9 @@ export const PRIORITY_ORDER: Record<EventTodoPriority, number> = {
  */
 export function formatPriority(priority: EventTodoPriority): string {
   const labels: Record<EventTodoPriority, string> = {
-    [EventTodoPriority.high]: "Haute",
-    [EventTodoPriority.medium]: "Moyenne",
-    [EventTodoPriority.low]: "Basse",
+    [EventTodosPriorityOptions.high]: "Haute",
+    [EventTodosPriorityOptions.medium]: "Moyenne",
+    [EventTodosPriorityOptions.low]: "Basse",
   };
 
   return labels[priority] || priority;
@@ -56,14 +61,14 @@ export function formatPriority(priority: EventTodoPriority): string {
  * Vérifie si un todo est complété
  */
 export function isTodoCompleted(todo: EventTodo): boolean {
-  return todo.status === EventTodoStatus.done;
+  return todo.status === EventTodosStatusOptions.done;
 }
 
 /**
  * Vérifie si un todo est en retard
  */
 export function isTodoOverdue(todo: EventTodo): boolean {
-  if (!todo.dueDate || todo.status === EventTodoStatus.done) {
+  if (!todo.dueDate || todo.status === EventTodosStatusOptions.done) {
     return false;
   }
 

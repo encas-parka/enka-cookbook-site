@@ -54,7 +54,7 @@ const RELATION_FIELDS: Record<string, Record<string, "single" | "multi">> = {
   event_materiel: { eventId: "single", sourceMaterielId: "single", loanId: "single", createdBy: "single" },
   teamdocs: { teamId: "single", eventId: "single" },
   event_todos: { eventId: "single", assignedTo: "single" },
-  share_links: {},
+  share_links: { createdBy: "single" },
   recipes: { createdBy: "single", permissionWrite: "multi", rootRecipeId: "single", teams: "multi" },
 };
 

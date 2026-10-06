@@ -906,10 +906,15 @@ function main() {
     // target_id: event ID → remap to event refId (stored as text field)
     const targetId = resolveRelation(awLink.target_id, eventMap, "target_id", false, `ShareLink ${appwriteId}`);
 
+    // createdBy: real field on the Appwrite collection — REC-1 list/view rules
+    // require it populated, otherwise re-imported links are orphaned for everyone
+    const createdBy = resolveRelation(awLink.createdBy, userMap, "createdBy", false, `ShareLink ${appwriteId}`);
+
     migrationMap.share_links[appwriteId] = { refId };
 
     pbShareLinks.push({
       target_id: targetId || awLink.target_id || null,
+      createdBy,
       link_type: awLink.link_type || "event",
       isActive: awLink.isActive ?? true,
       token: awLink.token || null,

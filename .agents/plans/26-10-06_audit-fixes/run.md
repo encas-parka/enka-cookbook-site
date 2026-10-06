@@ -13,7 +13,7 @@
 
 _(rafraîchi par l'orchestrateur à chaque portail — état courant : après T15, 06-10 ; l'historique vit dans les journaux ci-dessous)_
 
-- **Base** : `e9f8c6cd` « build » · **HEAD** : `3e755f0b` (T15). **Frontier : T16** (Lot 2 — fixes pipeline import) ; puis T17 (re-import, possiblement bloqué creds Appwrite) et T18 (QA runtime).
+- **Base** : `e9f8c6cd` « build » · **HEAD** : `02199cc5` (T16). **Frontier : T17** (merge contenu enka-next + export Appwrite frais + re-import complet — creds présentes `scripts_dev/.env.local`) ; puis T18 (QA runtime) et clôture.
 - **Progression** : Lot 0 ✓ (T1-T4) · Lot 1 ✓ (T5-T7) · Lot 3 ✓ (T8-T11) · Lot 4 prioritaire ✓ (T11-T15) · Étape 7 (notifications) et Étape 9 (SW/PWA) → backlog (hors priorité synthèse).
 - **Canons courants** : `bun run check` 0 err/6 warn (svelte compiler only — PAS de TS ; l'audit types = `check-legacy`, baseline **189**, delta 0 exigé) · `bun run test` **93/93** (10 fichiers) · baseline initiale 56/56 & logs `/tmp/orchestrate/`.
 - **Faits majeurs portés** : PB nullifie les relations AVANT les hooks AfterSuccess (cascade = before-hooks) · piège goja `record.get()` sur JSON (utiliser `getString()`+`JSON.parse`) · bump Dexie `stores({})` ≠ purge (guérison par full-fetch induit) · PB ignore silencieusement les champs inconnus (perte sans 400) · `check` natif ne typecheck pas.
@@ -76,6 +76,65 @@ _(rafraîchi par l'orchestrateur à chaque portail — état courant : après T1
 - **check-legacy typecheck les fichiers de test** (`src/**` entier) : tout nouveau `.test.ts` doit être type-clean, le « delta 0 » s'applique aussi aux tests (T12 : 3 erreurs de typing attrapées à la 1re passe).
 
 ## Journal par ticket (rempli par les implémenteurs à l'amend)
+
+### T18 — QA runtime round 2 : chaîne finale fresh-DB + matrice des fixes + boot dev + build (06-10)
+
+**Verdict global : TOUS VERTS — 33/33 sondes, 8/8 migrations, canons identiques à la baseline. Aucun écart sur les fixes clés T1-T10 : la matrice ne déclare aucun régressé.** État final du run attesté côté agent ; le click-through navigateur reste humain (liste en fin de journal).
+
+**1. Fresh DB — chaîne complète** (`./pocketbase migrate up` sur `/tmp/orchestrate/pb-fresh-t18`, vierge, `--migrationsDir`/`--hooksDir` absolus — piège T1 ; log `/tmp/orchestrate/t18-fresh-migrate-up.log`) :
+- 8× « Applied » : snapshot `1791277647` + deltas `1791278400` (T2), `1791278600-03` (T3), `1791278800` (T4), `1791280500` (T10) — sans erreur.
+- `_migrations` = **15 lignes** = 7 migrations système Go + les 8 fichiers JS de la chaîne (liste vérifiée SQL). `_collections` = 21 (18 app + system) — conforme snapshot T1.
+- Boot fresh (serve 8091) : health 200, 0 erreur de chargement hooks. Log `/tmp/orchestrate/t18-fresh-serve.log`.
+
+**2. Matrice de sondes finale — 33/33 OK au 1er run** (fresh DB, 3 users de test `t18-alice/bob/carol@test.local` créés puis auto-supprimés ; sonde `.scratch/probes/t18-final-matrix.py` — pattern T4/T10 : asserts durs, tokens en variables, teardown best-effort ; log `/tmp/orchestrate/t18-matrix-8091.log`) :
+
+| Fix (ticket d'origine) | Sonde | Verdict |
+|---|---|---|
+| ORD-1 (T1) | products list (auth) | **200 vide** |
+| REC-2 (enveloppe) | recipes list anonyme | **200** (public read) |
+| REC-3 (T4) | bob PATCH recipe via `permissionWrite` → 200 ; carol (ni owner ni permissionWrite) → **404** | **OK** |
+| LOCK-1 (T3) | locks create id `doc_test123456789` (17 chars, pattern relaxed) | **200** (+ delete 204) |
+| SEC-2 (T4) | locks create `userId` d'un tiers → **400 `data:{}`** (rejet règle, pattern T4) | **OK** |
+| REC-1 (T4) | bob list share_links → **200 vide** (scopé createdBy) ; create `createdBy` tiers → **400 `data:{}`** | **OK** |
+| REC-5 (T4) | notifications create `userId` tiers → **400 `data:{}`** ; userId soi → 200 | **OK** |
+| join-event HOOK-1/2 (T8, spot-check) | join valide → 200 `{eventId}`, `guestUsers=[bob]`, contributor `{id:bob, email, status:accepted}`, `useCount=1` ; lien `expiresAt` passé → 400 « expire » ; `maxUses=1` épuisé → 400 « limite » | **OK** |
+| lookup-user (T8) | email connu → 200 `{id,name}` ; inconnu → **404** ; sans auth → **401** | **OK** |
+| teamdocs team-scopé (T10) | bob membre create sans eventId → **200**, list visible ; carol non-membre → **400 `data:{}`** | **OK** |
+| Teardown | deletes API 204 ×10 (3 events cascade, team, recipe, lock, notif, 3 users) ; SQL final : **0 résidu, comptes 0 partout** | **OK** |
+
+**3. Dev DB boot** : `bun run dev:pb` (nohup, log `/tmp/orchestrate/t18-dev-serve.log`) → health 200, **0 ligne « Applied »** (migrations déjà en `_migrations`, no-op attendu), hooks chargés sans erreur. Stop propre : kill PID du binaire (183681), port 8090 confirmé libre. `pb_data` : aucune écriture de schéma (backup T17 `/tmp/orchestrate/pb_data-backup-t17/` reste la référence).
+
+**4. Build client** : `cd svelte-app && bun run build` → **« ✓ built in 10.18s », 0 erreur** ; sortie `../static/app/` + SW PWA regénéré (117 entrées precache). 2 warnings a11y `tabIndex` préexistants (EventMaterielPage/EventProductsPage). Log `/tmp/orchestrate/t18-build.log`.
+
+**5. Canons** : `bun run check` = 179 fichiers, **0 erreur, 6 warnings** (baseline) ; `bun run test` = **93/93** (10 fichiers) ; `check-legacy` = **189 erreurs = baseline, delta 0** (exit 1 attendu). Logs `/tmp/orchestrate/t18-{check,test,check-legacy}-mig-26-10-06.log`.
+
+**Commit build** : l'output `static/app/` (tracké, dernier commit `e9f8c6cd` = base du run) est committé dans un commit `build` dédié (convention repo) — il capture l'état final client T5-T16, jamais rebuildé depuis la base. Effet direct du critère 4, arbre propre sur `static/app` avant le build (vérifié au checkpoint).
+
+**Click-through navigateur — flux à tester par l'humain** (ce que les sondes curl ne couvrent pas ; l'app requires Hugo + PB dev : `bun run dev:all`) :
+- **Création/édition event** (EventCreatePage/EventEditPage) : sélection teams (ids), dates meals → JSON `date` dérivé, description/minContrib ; vérifier l'affichage EventCard après save.
+- **Création/édition recette** (RecipeCreatePage/RecipeEditPage) : création sans id custom (statut private), édition avec `permissionWrite` via PermissionsManager, save ne purge pas `publishedAt` ; mode duplication.
+- **Création produit/achat** (via event) : `updatedBy` posé, dates `orderDate`/`deliveryDate` préremplies correctement (toInputDate) ; calcul des besoins (needs) par date range.
+- **RSVP** : invitation d'un participant connu (EventEditPage → inviteParticipants) → bandeau `EventInvitationAlert` → accept/decline → statut contributor mis à jour.
+- **Invitation email** : send-emails — en dev, sans SMTP, chaque envoi répond `ok:false` (sendmail absent, comportement documenté T9) ; vérifier les toasts et le fait que les invitations restent posées. Le test email réel exige SMTP configuré.
+- **Invitation team** (invite-to-team) : ajout d'un membre existant → toast succès, roles préservés (vue TeamsManagement).
+- **Share links / JoinPage** : création d'un lien event depuis l'UI, ouverture du lien (redeem) → join-event → l'utilisateur voit l'event.
+- **Locks** : ouvrir la même recette dans 2 navigateurs → badge lock + userName affiché, expiry respecté.
+- **Docs d'équipe team-scopés** (CreateDocumentPage) : flux débloqué par la règle T10 (création sans eventId désormais possible pour un membre) — parcourir create → list → edit → delete.
+- **Logout/login** : logout purge les caches (dont eventMateriel, T11) ; login re-sync (syncInitial) sans flash ; changer d'utilisateur ne montre plus les données du précédent.
+- **Resync orchestrateur (T15)** : couper le serveur PB → StatusBar « Connexion perdue » après ~3 s ; le relancer → retour « connected » + resync silencieux ; cacher/rouvrir l'onglet → resync sans flash de loading.
+- **Visiteur (non logué)** : liste recettes publique lisible, 0 erreur console (fast-win T14 App.svelte:90).
+- **PWA** : le modal de mise à jour SW (version.json) n'est pas bumpé par ce run — à faire à la release.
+
+**Rappel T17** : Phases 2-3 (export Appwrite frais + re-import) toujours en attente d'une nouvelle clé API — rien tenté ici, conformément au dispatch.
+
+**Note WIP fence** : le commit docs inclut le journal T17 consigné par l'orchestrateur (présent non commité à l'arrivée, anodin) — commit whole-file d'un fichier que le ticket devait de toute façon amender, conformément au RUN-CONTRACT (pattern T2/T6-T9/T12).
+
+### T17 — STOP Phase 2 (état survivant, consigné par l'orchestrateur)
+
+- **Phase 1 ✓ committée** `3c81ea96` : merge contenu 372 → **456 recettes** (87 nouvelles, 33 mises à jour, renommages `ktipiti`/`salade-aubergine`/`tom-kha` résolus côté site, 2 z-tests exclus), Hugo sanity vert.
+- **Backup** `/tmp/orchestrate/pb_data-backup-t17/` (sha256 `30685dd8…` = dev) — **aucune écriture pb_data**.
+- **Blocage** : `1-export-appwrite.ts` → HTTP 401 `project_key_expired` (`aw.oupla.net`, serveur 1.9.0 vivant). **Action humaine requise** : nouvelle clé API Appwrite (console, scopes lecture users/teams/documents) dans `scripts_dev/.env.local` (`APPWRITE_API_KEY=`). Session T17 = `577212e3` (reprendre Phases 2-3 une fois la clé posée).
+- Log échec : `/tmp/orchestrate/t17-export.log`.
 
 ### T1 — Snapshot migrations depuis la DB dev (06-10)
 

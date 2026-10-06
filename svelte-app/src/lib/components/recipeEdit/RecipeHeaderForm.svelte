@@ -240,10 +240,10 @@
               aria-describedby="type-help"
             >
               <option value="" disabled selected>Sélectionner un type</option>
-              <option value={RecettesTypeR.ENTREE}>Entrée</option>
-              <option value={RecettesTypeR.PLAT}>Plat</option>
-              <option value={RecettesTypeR.DESSERT}>Dessert</option>
-              <option value={RecettesTypeR.AUTRE}>Autre</option>
+              <option value={RecettesTypeR.entree}>Entrée</option>
+              <option value={RecettesTypeR.plat}>Plat</option>
+              <option value={RecettesTypeR.dessert}>Dessert</option>
+              <option value={RecettesTypeR.autre}>Autre</option>
             </select>
           </label>
           {#if validationErrors.typeR}

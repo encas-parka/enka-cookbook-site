@@ -1,8 +1,7 @@
 <script lang="ts">
   import { teamdocsStore } from "$lib/stores/TeamdocsStore.svelte";
-  import { globalState } from "$lib/stores/GlobalState.svelte";
   import { navigate } from "$lib/router";
-  import { PlusIcon, FileText, Lock } from "@lucide/svelte";
+  import { PlusIcon, FileText } from "@lucide/svelte";
   import Fieldset from "$lib/components/ui/Fieldset.svelte";
 
   interface Props {
@@ -25,9 +24,6 @@
         >
           <FileText class="text-primary h-4 w-4 shrink-0" />
           <span class="flex-1 truncate font-medium">{doc.title}</span>
-          {#if doc.lockedBy && doc.lockedBy !== globalState.userId}
-            <Lock class="text-warning h-3 w-3 shrink-0" />
-          {/if}
         </a>
       {/each}
     {:else}

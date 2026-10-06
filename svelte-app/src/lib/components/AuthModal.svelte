@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { loginWithPassword, register, requestPasswordReset, emailExists } from "../services/pb-auth";
+  import { loginWithPassword, register, requestPasswordReset } from "../services/pb-auth";
   import ModalContainer from "$lib/components/ui/modal/ModalContainer.svelte";
   import ModalHeader from "$lib/components/ui/modal/ModalHeader.svelte";
   import ModalContent from "$lib/components/ui/modal/ModalContent.svelte";

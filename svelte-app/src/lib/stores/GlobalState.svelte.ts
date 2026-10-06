@@ -9,7 +9,7 @@ import { teamdocsStore } from "./TeamdocsStore.svelte";
 import { productsStore } from "./ProductsStore.svelte";
 import { eventMaterielStore } from "./EventMaterielStore.svelte";
 import { recipesStore } from "./RecipesStore.svelte";
-import { db, pb } from "$lib/db-sync/pb-sync";
+import { db, pb, initRealtimeSignals, teardownRealtimeSignals } from "$lib/db-sync/pb-sync";
 import { route } from "$lib/router";
 
 class GlobalState {
@@ -116,6 +116,12 @@ class GlobalState {
       localStorage.setItem("enka-user-email", user.email);
       localStorage.setItem("enka-user-id", user.id);
 
+      // Signaux SSE (StatusBar + resync orchestrateur). Branchés AVANT la
+      // souscription des stores : la première connexion SSE est consommée
+      // ici (hasConnectedOnce) — tout PB_CONNECT ultérieur est une
+      // reconnexion et déclenche le resync delta.
+      await initRealtimeSignals();
+
       // Phase 0: Initialiser le cache IDB pour les stores qui en dépendent
       await Promise.all([
         eventsStore.loadCache(),
@@ -208,6 +214,12 @@ class GlobalState {
         this.#userRealtimeUnsub();
         this.#userRealtimeUnsub = null;
       }
+
+      // Cleanup signaux SSE — AVANT la destruction des stores : la
+      // souscription PB_CONNECT est retirée en premier, l'autoclose final
+      // du SDK (dernier unsubscribe des stores) se produit sans abonné
+      // résiduel (pas d'EventSource zombie).
+      await teardownRealtimeSignals();
 
       pbLogout();
 

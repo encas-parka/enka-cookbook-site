@@ -27,6 +27,13 @@ export {
 // Core sync collection
 export { createSyncCollection, mergeByKey, RecordDeletedError } from './pb-collection';
 
+// Realtime signals (SSE connect/disconnect → StatusBar + resync orchestrateur)
+export {
+	initRealtimeSignals,
+	onRealtimeReconnect,
+	teardownRealtimeSignals
+} from './pb-realtime';
+
 // Bridge (100% backend-agnostic — 0 change)
 export { bridgeToMap, bridgeToMapFiltered, type BridgeResult } from './aw-bridge';
 

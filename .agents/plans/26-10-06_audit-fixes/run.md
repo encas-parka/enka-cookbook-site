@@ -14,7 +14,9 @@
 _(rafraîchi par l'orchestrateur à chaque portail — dernière mise à jour : après T2, 06-10)_
 
 - **Base** : `e9f8c6cd` « build » (HEAD `mig/pocketbase` = origin au démarrage, 06-10)
-- **HEAD après T7** : `9cdf3454` (helper `toInputDate` + B7/B8 ; C8 réfuté par mesure — déjà conforme depuis 02/2024 ; canon test **69/69**, check-legacy 190). **Lot 1 terminé. Frontier : T8.** Tickets T9-T11 écrits (T9 dépend de T8 : route lookup-user).
+- **HEAD après T8** : `385e6802` (join-event durci 52/52 sondes, route lookup-user, client `pb-users.ts` + inviteParticipants résolu). **Frontier : T9** (T9 dépend de T8 — endpoint en place).
+- **Piège JSVM majeur (T8)** : `record.get()` sur champ JSON = export goja du `[]byte` brut — muter corrompt la donnée ; utiliser `getString()` + `JSON.parse`. Bug latent restant : `invite-to-team.pb.js` (`roles`) → intégré à T10.
+- **Différé `!` ajouté (T8)** : invite-to-team roles JSON (cf. ci-dessus) — T10.
 - **Canon check-legacy mis à jour : baseline 192 erreurs** (T6 a corrigé RecipesStore:633:48 au passage ; exigence inchangée : 0 nouvelle erreur). Canon test : 61/61.
 - **Différé `!` ajouté (T6)** : teamdoc team-scopé bloqué par createRule (exige eventId) → à traiter en T11 (rule `teamId.members ~ auth || eventId.…`).
 - **Canon tests mis à jour : `bun run test` = 61/61** (3 fichiers utils + 1 fichier events). **Canon check affiné (découverte T5)** : `bun run check` (svelte-check-native) ne fait PAS de TS — ne capte que svelte compiler/a11y (0 err/6 warn) ; l'audit de types réel = `bun run check-legacy` = 193 erreurs préexistantes → **surveiller le delta** (aucune nouvelle erreur dans les hunks de ticket).
@@ -70,6 +72,7 @@ _(rafraîchi par l'orchestrateur à chaque portail — dernière mise à jour : 
 - **JSVM : PB hot-reloade `pb_hooks` au changement de fichier** (« File … changed, restarting… » dans le log serveur) — itérer sur un hook sans restart, port 8090 reste servi.
 - **Logs PB 0.37** : `$app.logger()` n'imprime pas en console au niveau info/warn par défaut — les lignes vont dans la table `_logs` de **`auxiliary.db`** (pas `data.db`) ; vérification par `sqlite3 -readonly pocketbase/pb_data/auxiliary.db "SELECT … FROM _logs …"`.
 - **Tokens JWT dans les sondes curl** : un copier-coller manuel d'un token de 150+ chars = 401 fantôme quasi indétectable (T8, 1er run P1) — passer par la sonde python (pattern T4) qui garde les tokens en variables, jamais à la main.
+- **PB sans host SMTP** : `settings.meta.senderAddress` a un défaut non vide en dev (le guard « SMTP non configure » du mailer ne throw pas) et `newMailClient().send()` bascule sur le binaire **sendmail** (absent en conteneur) → erreur par email, capturée (`ok:false`, « failed to locate a sendmail executable path ») — T9, mesuré. En prod : host SMTP configuré ; définir aussi `ENKA_BASE_URL` (fallback bruyant, cf. T9/différés).
 
 ## Journal par ticket (rempli par les implémenteurs à l'amend)
 
@@ -373,6 +376,48 @@ Logs serveur : 5× `Join refused: …` en warn + `User joined event` / `Join rec
 
 **Note WIP fence** : le commit docs inclut l'édition orchestrateur du header run.md (portail post-T7, présente non commitée à l'arrivée, 1 ligne, anodine) — commit whole-file d'un fichier que le ticket devait de toute façon amender, conformément au RUN-CONTRACT (pattern T2/T6/T7).
 
+### T9 — send-emails ownership + reconciliation serveur (HOOK-3, HOOK-8) + client lookup-user (UI-1, C6) (06-10)
+
+**Fait établi** (2 fichiers hooks + 4 fichiers client, 5 commits `1857acec`/`f5a4cc2d`/`2c04c442`/`4a0950a1`/`c2200fca` + docs) :
+- **HOOK-3 — ownership** : `send-emails.pb.js` exige `shareLink.createdBy === e.auth.id` (refus **per-recipient** `ok:false « Lien de partage non autorise »` + warn log ; **fail-closed** sur `createdBy` vide/orphelin). Décision : chemin simple « createdBy », PAS la variante membership — la listRule REC-1 (`createdBy = auth`) fait que `getEventShareLinks` ne peut de toute façon renvoyer au client que ses propres liens ; le check hook = défense en profondeur (appels directs API, liens pré-REC-1). Bonus miroir join-event : `link_type === "event"` exigé (un lien team ne déclenche pas d'email event).
+- **HOOK-3 — reconciliation** : nom/description/dates TOUJOURS relus depuis l'event cible (`target_id` → `findRecordById("events", …)`, event mort → refus per-recipient) ; les champs équivalents du body client (`eventName`/`eventDescription`/`dateStart`/`dateEnd`) sont **ignorés** — doc header hook mise à jour : body = `template` + `recipients` seulement. Chaque email construit est loggé en info (« Invitation email built », to/event/eventId/userId) — preuve de réconciliation indépendante du SMTP. Le SMTP (`getSenderAddress`) n'est vérifié QUE si au moins un email doit partir : un lot entièrement refusé répond 200 sans dépendre de la config SMTP.
+- **Comportement SMTP absent en dev (mesuré, documenté)** : `settings.meta.senderAddress` est NON vide en dev (défaut PB) → `getSenderAddress()` ne throw pas ; sans host SMTP, `newMailClient()` bascule sur le binaire **sendmail** (absent du conteneur) → échec capturé **par destinataire** (`ok:false`, « GoError: failed to locate a sendmail executable path »), réponse 200 propre, pas de crash. La branche « senderAddress vide → 500 propre `InternalServerError("SMTP non configure…")` » reste en place mais n'est pas testable en dev sans toucher aux settings.
+- **HOOK-8** : helper `getBaseUrl()` dans `email-templates.js` — les 2 sites de fallback centralisés ; fallback = `$app.logger().error()` bruyant (« ENKA_BASE_URL manquante… Definir ENKA_BASE_URL… ») + même URL prod par défaut (pas de fail-fast DX, prescription ticket). Preuve : le log erreur apparaît dans `_logs` exactement une fois par email construit (sonde P9).
+- **UI-1** : `RecipePermissionsManager.svelte` — `users.getList` remplacé par `lookupUserByEmail` (`pb-users.ts` T8, DRY — aucun appel dupliqué) ; import `pb` retiré (plus utilisé). Le message « Utilisateur introuvable » redevient **correct** (404 = vraiment aucun compte ; avant, systématiquement faux par la listRule).
+- **C6** : `pb-auth.emailExists` → `(await lookupUserByEmail(email)) !== null` (contrat booléen + catch→false conservés). **Limite documentée** : la route exige l'auth — pré-auth (inscription), retourne false ; le flux d'inscription détecte le doublon via le 400 PB `validation_not_unique` mappé dans AuthModal (déjà en place) — pas d'énumération d'emails pré-auth, par design.
+- **Fast-win (commit dédié `c2200fca`)** : `AuthModal.svelte` importait `emailExists` sans jamais l'appeler (import mort — le flux d'inscription n'utilise que le mapping 400) → import retiré.
+- **EventsStore.inviteParticipants** : les 4 champs d'event retirés du body send-emails (le serveur les reconstruit) — contrat client aligné. Compat : hook et client partent ensemble (même commit de déploiement) ; un vieux hook rejetterait en 400 « eventName requis » (fire-and-forget, console.error, invitations inchangées).
+
+**Fast-win de zone (EventShareLinks / DOC-1)** : déjà conforme — `EventShareLinks.svelte` itère `shareLinkIds` local rempli par `getEventShareLinks` (aucun `event.shareLinks` fantôme ; grep vert sur `shareLinks` dans les .svelte) — la note T5 était obsolète, aucune modif.
+
+**Verdicts des sondes** (18/18 OK — `.scratch/probes/t9-send-emails-matrix.py`, log `/tmp/orchestrate/t9-matrix-8090.log`, dev 8090 `pb-dev.sh` nohup, 2 users `t9-alice/bob@test.local` créés puis auto-supprimés) :
+
+| # | Sonde | Verdict |
+|---|---|---|
+| P1 | send-emails sans auth | **401** |
+| P2-P3 | template inconnu / recipients vide | **400** (whitelist/validation inchangées) |
+| P4 | OWNERSHIP : bob avec le lien d'alice (body mensonger) | **200 `ok:false « non autorise »`**, rien envoyé, warn loggé (linkId/userId/owner) |
+| P5 | OWNERSHIP inverse : alice avec le lien de bob | idem |
+| P6 | lien désactivé | `ok:false` « introuvable ou inactif » + warn |
+| P7 | `link_type=team` | `ok:false` « invalide pour une invitation evenement » + warn |
+| P8 | shareLinkId inexistant | `ok:false` « introuvable ou inactif » + warn |
+| P9 | positif alice/lien propre + body mensonger « HACKED » | 200 propre, échec sendmail capturé par destinataire ; log info « built » avec **le vrai nom** `t9-event-reel` ; log erreur ENKA_BASE_URL (HOOK-8) présent |
+
+(1er run : P9 attendait 500 « SMTP non configure » — attente réécrite après mesure, voir ci-dessus ; les 2 branches documentées. 17/18 au 1er run, 18/18 au 2e — seule l'assertion P9 a changé.)
+
+Teardown API (4 links + event + 2 users, 204) ; SQL readonly post-run : **0 résidu `t9-%`** (events/share_links/users) ; PB stoppé, port 8090 libre ; backup préalable `/tmp/orchestrate/pb_data-backup-t9/`.
+
+**Canon** : `bun run check` = 179 fichiers, 0 erreur, 6 warnings (inchangés) ; `bun run test` = **69/69** ; `check-legacy` = **190 = baseline** (7 erreurs EventsStore préexistantes aux colonnes IDENTIQUES — le hunk T9 est postérieur à la dernière ; pb-auth/AuthModal/RecipePermissionsManager 0 erreur — diff hunk par hunk vs log T8 ; logs `/tmp/orchestrate/t9-{check,test,check-legacy}-mig-26-10-06.log`). Typegen non requis (aucun changement de champs).
+
+**Note déploiement (HOOK-8)** : définir `ENKA_BASE_URL` (URL publique de l'app, sans slash final) dans l'env du serveur PocketBase — sans elle, les liens des emails pointent vers `https://enka-cookbook.app` et chaque email construit logge une erreur (volontairement bruyant). À ajouter à la checklist Dokploy (Phase 1.8) — cf. ligne différée. Le template reset natif PB utilise les settings méta PB, indépendant de cette variable.
+
+**Pièges T9** :
+- `settings.meta.senderAddress` a une **valeur par défaut non vide en dev** → le guard « SMTP non configure » du mailer ne se déclenche jamais ici ; le vrai point d'échec dev = fallback **sendmail** de `newMailClient().send()` (erreur par email, capturée par le mailer → `ok:false`).
+- Niveaux `_logs` vus (auxiliary.db) : info=0, warn=4, error=8 — le logger.error du fallback HOOK-8 est bien visible, contrairement à info/warn en console.
+- Le dir `.agents/` est gitignore (pattern `*.agents`, L23) : les tickets s'ajoutent avec `git add -f` (précédent t01-t08).
+
+**Note WIP fence** : le commit docs inclut l'édition orchestrateur du header run.md (portail post-T8, présente non commitée à l'arrivée, anodine) — commit whole-file d'un fichier que le ticket devait de toute façon amender, conformément au RUN-CONTRACT (pattern T2/T6/T7/T8).
+
 ## Constats différés (deferred — tag `!` bientôt / `S2` gating déploiement / `?` conditionnel)
 
 - **S2** : secret share_links ≠ id (token dédié) — refonte URL/invitations. (décision enveloppe, voir ci-dessus)
@@ -384,3 +429,4 @@ Logs serveur : 5× `Join refused: …` en warn + `User joined event` / `Join rec
 - `!` backend : `invite-to-team.pb.js` — `team.get("roles")` + mutation + `set` = même corruption JSON que T8 (export goja du `[]byte`) ; fix `getString()+JSON.parse` (≤ 5 lignes, pattern join-event T8) ; preuve à construire avec SMTP configuré (mesuré T8, journal).
 - `!` backend ou client : `materiel_loan.deleteRule = createdBy = auth` mais le client ne set jamais `createdBy` à la création → loans UI indestructibles via l'API (T6 a contourné en SQL) ; setter `createdBy = userId` dans `createLoan` (pattern C9) ou revoir la règle.
 - Images recettes (20 valeurs `img` frontmatter, og:image déjà cassées côté Hugo) — décision produit Phase 2.
+- **S2** déploiement : définir `ENKA_BASE_URL` dans l'env du serveur PB (URL publique sans slash final) — sans elle, les liens emails pointent vers la prod et chaque build d'email logge une erreur (fallback volontairement bruyant, T9). À intégrer à la checklist Dokploy (Phase 1.8).

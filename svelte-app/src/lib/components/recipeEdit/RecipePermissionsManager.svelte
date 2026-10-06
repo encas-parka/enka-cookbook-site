@@ -13,7 +13,7 @@
   import Fieldset from "../ui/Fieldset.svelte";
   import BtnGroupCheck from "../ui/BtnGroupCheck.svelte";
   import { toastService } from "$lib/services/toast.service.svelte";
-  import { pb } from "$lib/db-sync/pb-sync";
+  import { lookupUserByEmail } from "$lib/services/pb-users";
   import { fade } from "svelte/transition";
   import ModalContainer from "$lib/components/ui/modal/ModalContainer.svelte";
   import ModalHeader from "$lib/components/ui/modal/ModalHeader.svelte";
@@ -92,13 +92,10 @@
     inviteError = null;
 
     try {
-      const result = await pb.collection('users').getList(1, 1, {
-        filter: pb.filter('email = {:email}', { email }),
-      });
+      const user = await lookupUserByEmail(email);
 
-      if (result.items.length > 0) {
-        const user = result.items[0];
-        const userName = (user as Record<string, unknown>).name as string || email;
+      if (user) {
+        const userName = user.name || email;
 
         if (permissionWrite?.includes(user.id)) {
           inviteError = "Cet utilisateur a déjà les droits d'écriture.";

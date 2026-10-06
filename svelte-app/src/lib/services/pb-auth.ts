@@ -6,6 +6,7 @@
  */
 
 import { pb } from '$lib/db-sync/pb-sync';
+import { lookupUserByEmail } from './pb-users';
 
 // =============================================================================
 // TYPES
@@ -109,15 +110,17 @@ export async function requestPasswordReset(email: string): Promise<void> {
 }
 
 /**
- * Vérifie si l'email existe déjà (pour le flow d'inscription).
- * Retourne true si un utilisateur avec cet email existe.
+ * Vérifie si l'email existe déjà.
+ * Passe par la route serveur /api/enka/lookup-user (match exact) — la listRule
+ * users (`id = @request.auth.id`) bloque la recherche directe.
+ * Nécessite une session active (la route exige l'auth) : hors session, retourne
+ * false. Côté inscription, le doublon est volontairement détecté par le 400 PB
+ * (validation_not_unique) mappé dans AuthModal — pas d'énumération d'emails
+ * pré-authentifiés.
  */
 export async function emailExists(email: string): Promise<boolean> {
 	try {
-		const records = await pb.collection('users').getList(1, 1, {
-			filter: pb.filter('email = {:email}', { email })
-		});
-		return records.totalItems > 0;
+		return (await lookupUserByEmail(email)) !== null;
 	} catch {
 		return false;
 	}

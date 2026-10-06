@@ -384,7 +384,7 @@
 
   $effect(() => {
     navBarStore.setConfig({
-      title: storeDoc ? storeDoc.title : "Document",
+      title: storeDoc?.title || "Document",
       actions: navActions,
     });
   });

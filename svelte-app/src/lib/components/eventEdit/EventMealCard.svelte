@@ -204,7 +204,8 @@
     const newRecipe: EventMealRecipe = {
       recipeUuid: recipe.id,
       plates: meal.guests,
-      typeR: recipe.typeR,
+      // typeR nullable côté PB → fallback "autre"
+      typeR: recipe.typeR ?? "autre",
       hasOwnPlatesNb: false, // Auto-sync par défaut pour les nouvelles recettes
     };
 

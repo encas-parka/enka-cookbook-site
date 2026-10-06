@@ -43,7 +43,7 @@
         .normalize("NFD")
         .replace(/\p{Diacritic}/gu, "");
       return allDocs.filter((doc) => {
-        const titleMatch = doc.title
+        const titleMatch = (doc.title ?? "")
           .toLowerCase()
           .normalize("NFD")
           .replace(/\p{Diacritic}/gu, "")

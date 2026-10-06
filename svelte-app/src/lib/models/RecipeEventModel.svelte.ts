@@ -33,7 +33,8 @@ export class RecipeEventModel {
 
   constructor(recipeData: RecipeData, initialGuests?: number) {
     this.baseData = recipeData;
-    this.targetGuests = initialGuests || recipeData.plate;
+    // plate est nullable côté PB : fallback 1 (cohérent avec le calcul L44)
+    this.targetGuests = initialGuests || recipeData.plate || 1;
   }
 
   /**
@@ -84,7 +85,7 @@ export class RecipeEventModel {
    * Réinitialise au nombre de convives de base
    */
   resetToBase(): void {
-    this.targetGuests = this.baseData.plate;
+    this.targetGuests = this.baseData.plate || 1;
   }
 
   /**

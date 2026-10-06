@@ -355,7 +355,9 @@ class RecipesStore {
 
 	get availableTypes(): string[] {
 		const types = new Set<string>();
-		this.recipesIndex.forEach((recipe) => types.add(recipe.typeR));
+		this.recipesIndex.forEach((recipe) => {
+			if (recipe.typeR) types.add(recipe.typeR);
+		});
 		return Array.from(types).sort();
 	}
 

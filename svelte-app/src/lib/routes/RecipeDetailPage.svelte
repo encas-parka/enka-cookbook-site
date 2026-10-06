@@ -72,8 +72,8 @@
       }
       recipeDetails = details;
 
-      // Initialiser le nombre de couverts
-      currentServings = details.plate;
+      // Initialiser le nombre de couverts (plate nullable → 1 par défaut)
+      currentServings = details.plate ?? 1;
     } catch (err) {
       console.error("Erreur lors du chargement de la recette:", err);
       error = err instanceof Error ? err.message : "Erreur lors du chargement";
@@ -307,7 +307,7 @@
           {#if recipeDetails.check !== undefined}
             <RecipeAlerts
               isChecked={recipeDetails.check}
-              defaultServings={recipeDetails.plate}
+              defaultServings={recipeDetails.plate ?? 1}
             />
           {/if}
         </div>
@@ -331,7 +331,7 @@
               <RecipeIngredientsList
                 ingredients={recipeDetails.ingredients}
                 servings={currentServings}
-                defaultServings={recipeDetails.plate}
+                defaultServings={recipeDetails.plate ?? 1}
               />
             </div>
           </div>
@@ -339,7 +339,7 @@
           <!-- Préparation (2/3 à l'écran, 7/10 à l'impression) -->
           <div class="lg:col-span-2 print:col-span-7">
             <RecipePreparation
-              preparation={recipeDetails.preparation}
+              preparation={recipeDetails.preparation ?? ""}
               preparation24h={recipeDetails.preparation24h || undefined}
               astuces={recipeDetails.astuces || []}
             />
@@ -386,7 +386,7 @@
     onClose={() => (showAddToEventModal = false)}
     recipeId={recipeDetails.id}
     recipeTitle={recipeDetails.title}
-    recipeTypeR={recipeDetails.typeR}
+    recipeTypeR={recipeDetails.typeR ?? "autre"}
     events={upcomingEvents}
   />
 {/if}

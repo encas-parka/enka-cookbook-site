@@ -802,9 +802,14 @@ export class EventsStore {
       const existingLinks = await getEventShareLinks(eventId);
       if (existingLinks.length > 0) {
         shareLinkId = existingLinks[0];
-      } else {
+      } else if (userId) {
         const link = await createShareLink(eventId, userId);
         shareLinkId = link.id;
+      } else {
+        console.warn(
+          "[EventsStore] Pas de userId pour créer le share link de l'event",
+          eventId,
+        );
       }
     } catch (err) {
       console.warn("[EventsStore] Impossible de créer le share link:", err);

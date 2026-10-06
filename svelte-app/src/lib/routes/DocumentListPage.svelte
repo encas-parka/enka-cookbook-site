@@ -58,7 +58,7 @@
         .replace(/\p{Diacritic}/gu, "");
 
       return allDocs.filter((doc) => {
-        const titleMatch = doc.title
+        const titleMatch = (doc.title ?? "")
           .toLowerCase()
           .normalize("NFD")
           .replace(/\p{Diacritic}/gu, "")
@@ -83,8 +83,8 @@
     return docs.sort((a, b) => {
       if (sortBy === "title") {
         return sortOrder === "asc"
-          ? a.title.localeCompare(b.title, "fr")
-          : b.title.localeCompare(a.title, "fr");
+          ? (a.title ?? "").localeCompare(b.title ?? "", "fr")
+          : (b.title ?? "").localeCompare(a.title ?? "", "fr");
       } else if (sortBy === "created") {
         const diff =
           new Date(b.created || 0).getTime() -

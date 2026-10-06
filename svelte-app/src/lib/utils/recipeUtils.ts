@@ -66,7 +66,7 @@ export interface TypeDisplay {
  * getTypeDisplay("plat", "Snacking")         // → { label: "Snacking", iconId: "hamburger" }
  */
 export function getTypeDisplay(
-  typeR: string,
+  typeR: string | null,
   category?: string | string[],
 ): TypeDisplay {
   // Si une catégorie est fournie, l'utiliser en priorité
@@ -79,9 +79,9 @@ export function getTypeDisplay(
     };
   }
 
-  // Sinon, utiliser le type comme fallback
-  const label = getTypeLabel(typeR);
-  const iconId = TYPE_ICON_MAP[typeR] || "no-cat";
+  // Sinon, utiliser le type comme fallback (typeR nullable côté PB → "autre")
+  const label = getTypeLabel(typeR ?? "autre");
+  const iconId = (typeR && TYPE_ICON_MAP[typeR]) || "no-cat";
 
   return { label, iconId };
 }

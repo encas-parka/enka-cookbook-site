@@ -301,6 +301,9 @@ async function processMeal(
       continue;
     }
 
+    // plate null/0 → facteur d'échelle incalculable, recette ignorée
+    if (!recipeDetails.plate) continue;
+
     const scaleFactor = mealRecipe.plates / recipeDetails.plate;
 
     for (const ingredient of recipeDetails.ingredients) {

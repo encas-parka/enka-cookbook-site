@@ -129,7 +129,7 @@
           if (data) {
             recipe = transformStoreDataToForm(data, {
               created: data.created,
-              updated: data.updated,
+              updated: data.updated ?? undefined,
               createdBy: data.createdBy,
             });
             lockedBy = data.lockedBy || null;

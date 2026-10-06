@@ -217,14 +217,14 @@
         <RecipeIngredientsList
           ingredients={recipe.ingredients}
           servings={recipePlates}
-          defaultServings={recipe.plate}
+          defaultServings={recipe.plate ?? 1}
         />
       </div>
 
       <!-- Colonne droite : Préparation -->
       <div class="flex-1 space-y-4 print:w-4/6">
         <RecipePreparation
-          preparation={recipe.preparation}
+          preparation={recipe.preparation ?? ""}
           preparation24h={recipe.preparation24h || undefined}
           astuces={recipe.astuces || []}
         />

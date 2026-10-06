@@ -14,7 +14,8 @@
 _(rafraîchi par l'orchestrateur à chaque portail — dernière mise à jour : après T2, 06-10)_
 
 - **Base** : `e9f8c6cd` « build » (HEAD `mig/pocketbase` = origin au démarrage, 06-10)
-- **HEAD après T4** : `9ebe9297` (migration rules `1791278800_rules_api_hardening.js`, 9 règles durcies, matrice curl 52/52 copie+dev). **Lot 0 (fondations backend) terminé. Frontier : T5.**
+- **HEAD après T5** : `8446c789` (A1/B5/C7 + fast-win C1 `d34ca5e0` ; invariant `date` JSON rétabli ; +5 tests). **Frontier : T6.**
+- **Canon tests mis à jour : `bun run test` = 61/61** (3 fichiers utils + 1 fichier events). **Canon check affiné (découverte T5)** : `bun run check` (svelte-check-native) ne fait PAS de TS — ne capte que svelte compiler/a11y (0 err/6 warn) ; l'audit de types réel = `bun run check-legacy` = 193 erreurs préexistantes → **surveiller le delta** (aucune nouvelle erreur dans les hunks de ticket).
 - **Faits T4 portant les tickets client** : REC-4/SEC-1 enfants = no-op (le snapshot avait déjà figé les fix 042/043 dev) ; client envoie bien `events.createdBy` au create ; id locks garde min 15 (ids `doc_`/`event_` ≈ 20-21 chars OK) ; PB évalue les rules AVANT la validation (400 `data:{}` = rule, `data:{champ}` = validation).
 - **Piège T2 à porter par les deltas suivants** : toute nouvelle colonne PB = `DEFAULT '' NOT NULL` → backfills doivent cibler `''` ET NULL.
 - **Arbre** : propre hormis `.scratch/probes/t1-snapshot-summary.py` (untracked, probe transient T1 — connu, ne pas committer ni nettoyer).
@@ -61,7 +62,8 @@ _(rafraîchi par l'orchestrateur à chaque portail — dernière mise à jour : 
 - JSVM : ES5 limité ; `console.log` incertain → `$app.logger()` ; `$os.getenv` pour l'env.
 - Nouvelle colonne PB = `DEFAULT '' NOT NULL` (rows existantes = `''`, pas NULL) : backfill → `WHERE col = '' OR col IS NULL` (détails journal T2).
 - **`bun run check` (svelte-check-native 0.7.2) ne fait PAS de diagnostics TypeScript** (mesuré T5 : erreur de type délibérée dans un `.svelte` ET un `.svelte.ts` = 0 erreur rapportée ; il ne voit que a11y/runes/compil). Le vrai audit type = `bun run check-legacy` (svelte-check) — **193 erreurs préexistantes** sur 50 fichiers (dette invisible au canon natif) : raisonner par diff par fichier, pas par « 0 erreur ». Durable : `svelte-app/CLAUDE.md` § Development Commands.
-- Champ PB inconnu dans un **PATCH** events = ignoré **en silence** (200, champ absent de la réponse) — la classe B5 (allDates/teamsId) ne rejetait jamais : elle perdait les données sans erreur. Un POST avec relation invalide (noms de teams) rejette lui en 400 (A1).
+- Champ PB inconnu dans un **PATCH** events = ignoré **en silence** (200, champ absent de la réponse) — la classe B5 (allDates/teamsId) ne rejetait jamais : elle perdait les données sans erreur. Un POST avec relation invalide (noms de teams) rejette lui en 400 (A1). Confirmé T6 côté POST : les champs inconnus **non-relation** (`manuallyAddedVariants`…) sont ignorés en silence à la création aussi.
+- **Schéma `materiel_loan` (correction audit §2, mesuré T6)** : `ownerId` est une relation → **teams** (pas users) — `responsibleId`/`borrowerUser`/`createdBy` → users. Le payload createLoan passe `ownerId = id d'équipe` (celle du matériel emprunté) ; un id user dans `ownerId` = 400 `validation_missing_rel_records`.
 
 ## Journal par ticket (rempli par les implémenteurs à l'amend)
 
@@ -265,6 +267,47 @@ Logs : `/tmp/orchestrate/t5-probe-{user,auth,team,create1,create2,patch,ghost,ex
 - `types/store.types.ts` `MainEventData` (champ allDates) : type mort, 0 référence.
 - `EventShareLinks.svelte` itère `event.shareLinks` — champ inexistant au schéma (T7 ?).
 
+### T6 — Client créations : payloads conformes (A2 recette-id, C4, B6, A3, C9, B4) (06-10)
+
+**Fait établi** (6 fichiers client édités, 1 fichier util supprimé, zéro migration) :
+- **A2** : `RecipeCreatePage.save()` ne pose plus `recipe.id = generateSlugUuid35(...)` (bloc + import retirés) ; `RecipesStore.createRecipe` strippe l'id du payload (`const { id: _formId, ...dataWithoutId }`) — nécessaire car `pb-collection.create()` passe l'id tel quel à PB (`stripSystemFields(data, keepId=true)`) et le placeholder `"new-recipe"` du formulaire aurait été rejeté (pattern 15 alphanum). `slugUtils.ts` supprimé (orphelin après fix ; l'import de `RecipeEditPage.ts` était déjà orphelin préexistant ; pas de fichier de test) ; `nanoid` reste utilisé par 8+ autres fichiers (dépendance conservée). Grep vert : 0 `generateSlugUuid35` / `slugUtils` / `recipe.id =`.
+- **C4** : fallback `createRecipe` → `status: data.status || "private"` ("active" ∉ enum public/private/deleted — typegen `RecipesStatusOptions`).
+- **B6** : `publishedAt: null` retiré de `normalizeRecipeForSave` (RecipeEditPage.ts) — le payload d'update ne touche plus au champ, la date de publication est préservée. **Le flux publish n'existe pas côté client** : grep `publishedAt`/`publish` = seuls `createDefaultRecipe` (null, correct à la création), le normalize (retiré) et les types. La date n'est posée par personne (import pipeline / futur serveur) ; le fix empêche au moins son effacement à chaque save.
+- **A3** : `ProductsStore.createProduct` → `updatedBy: globalState.userId` (relation users ; le nom d'utilisateur = 400 relation invalide).
+- **C9** : `MaterielStore.createLoan` → `+ borrowerUser: globalState.userId` (l'emprunteur voit son loan via `listRule: borrowerUser = auth || …`).
+- **B4** : `TeamdocsStore.createDocument` → `createdBy` retiré du payload (champ volontairement absent du schéma, drop 1700000029).
+- **C12** : PAS de fix (NativeTeamsStore intact, conforme dispatch).
+
+**Verdicts des sondes curl** (dev 8090, `pb-dev.sh` nohup, user `t6-probe@test.local` créé puis auto-supprimé, team + event de setup supprimés ; payloads EXACTS post-fix, champs formulaire fantômes inclus volontairement) :
+
+| # | Sonde | Obtenu |
+|---|---|---|
+| P1 | POST recipes SANS id, status `"private"`, + `manuallyAddedVariants`/`variantsToRemove` (fuite réelle du formulaire) | **200** — id PB généré `lxbpvprbrbb55o0` (15 alphanum), status private persisté, champs inconnus ignorés en silence |
+| P2 | POST products (eventId d'un event lié à ma team) avec `updatedBy = uid` | **200** — `updatedBy` persisté = uid (relation users résolue) |
+| P3 | POST materiel_loan avec `borrowerUser = uid`, `responsibleId = uid`, `ownerId = teamId` | **200** — borrowerUser persisté, expand users ✓, lecture OK via listRule `borrowerUser = auth` |
+| P3-pré | POST materiel_loan avec `ownerId = uid` (audit §2 disait relation users) | **400** `validation_missing_rel_records` sur ownerId — **`ownerId` est une relation → teams**, pas users (correction de l'audit, voir Pièges) |
+| P4 | POST teamdocs event-scopé (`createEventDocument` : eventId + status doc, sans createdBy) | **200** — createdBy absent du schéma ✓ |
+| P4b | POST teamdocs team-scopé (`createDocument` : teamId, sans eventId, champs fantômes tags/isPublic/teamName inclus) | **400 `data:{}`** = rejet **règle** : `teamdocs.createRule = eventId.teams.members ~ auth ‖ eventId.guestUsers ~ auth` — impossible sans eventId |
+| P5 | GET loan `?expand=borrowerUser,responsibleId` | **200** — relations résolues vers le user de sonde |
+
+Logs : `/tmp/orchestrate/t6-probe-*.json`, serve `/tmp/orchestrate/t6-pb-serve.log`. Teardown : recipe/product/teamdoc/event/team/user supprimés API (**204×6**) ; loan détruit en SQL ciblé après arrêt PB (son `deleteRule = createdBy = auth` est infranchissable sans createdBy — le client n'en envoie pas, cf. constats). SQL readonly post-run : recipes **372**, events **10**, teams **6**, users **32**, materiel_loan **2**, **0 résidu des 7 ids de sonde** (vérif id par id).
+
+**Canon** : `bun run check` = 179 fichiers, 0 erreur, 6 warnings (inchangés) ; `bun run test` = **61/61** ; `check-legacy` = **192 erreurs vs 193 baseline** — la disparition est `RecipesStore.svelte.ts:633:48` (cast `Omit<…, "id"…>` corrigé par la réécriture de createRecipe) ; les autres entrées de mes fichiers = décalages de ligne purs (diff hunk par hunk vs log T5 ; logs `/tmp/orchestrate/t6-{check,test,check-legacy}-mig-26-10-06.log`).
+
+**Note WIP fence** : le commit docs inclut l'édition orchestrateur du header run.md (portail post-T5, présente non commitée à l'arrivée, anodine) — commit whole-file d'un fichier que le ticket devait de toute façon amender, conformément au RUN-CONTRACT (pattern T2).
+
+**Pièges T6** :
+- `materiel_loan.ownerId` est une relation → **teams** (l'audit §2 et le ticket disaient users) — cohérent avec la règle REC-9 `ownerId.members ~ auth` (« équipe propriétaire »). Correction portée en section Pièges globale.
+- **teamdocs.createRule exige un eventId** (`eventId.teams.members ~ ‖ eventId.guestUsers ~`) : le flux `createDocument` (doc d'équipe via `CreateDocumentPage`, teamId sans eventId) est **bloqué par la règle, indépendamment de B4** — B4 reste correct (cesser d'envoyer un champ fantôme) mais le flux ne passera qu'après un delta de règle backend (ex. `‖ teamId.members ~ @request.auth.id`).
+- `materiel_loan.deleteRule = createdBy = auth` : les loans créés sans createdBy (comportement du client) sont **indestructibles via l'API** par leur créateur — besoin SQL ou d'un fix client futur (setter createdBy).
+- `normalizeRecipeForSave` n'est appelé que par `RecipeEditPage.save()` — `RecipeCreatePage` envoie l'état du formulaire **brut** (`as any`) : les champs hors schéma (`manuallyAddedVariants`…) fuient dans le POST mais PB les ignore en silence (mesuré P1).
+
+**Observations reportées (hors périmètre T6)** :
+- `CreateDocumentPage` envoie encore `tags`/`isPublic`/`teamName` (3 champs fantômes teamdocs, en plus du createdBy retiré ici) — silencieusement perdus (excess-property error legacy préexistante L151) ; UI à aligner quand le flux doc d'équipe sera débloqué.
+- `ProductsStore.createProduct` : `const productId = crypto.randomUUID()` mort (jamais envoyé) — préexistant, laissé tel quel.
+- Mode duplication recette : `transformStoreDataToForm` hérite du `publishedAt` de la source → le duplicata hérite de la date de publication (discutable, préexistant).
+- `RecipePermissionsManager` fait `users.getList(filter email=…)` (B9 audit, rules restrictives) — inchangé, hors périmètre.
+
 ## Constats différés (deferred — tag `!` bientôt / `S2` gating déploiement / `?` conditionnel)
 
 - **S2** : secret share_links ≠ id (token dédié) — refonte URL/invitations. (décision enveloppe, voir ci-dessus)
@@ -272,4 +315,6 @@ Logs : `/tmp/orchestrate/t5-probe-{user,auth,team,create1,create2,patch,ghost,ex
 - **?** : C3 — collections mortes `event_todos` / `notifications` (trancher migrer vs supprimer — produit).
 - **?** : C5 — 3e argument `sendEmailToExistingMembers` de `createEventWithTeams` ignoré (implémenter ou retirer l'option UI — produit).
 - `!` côté SITE (pas ici) : régression `isDynamic` perdue par revert `88de525a` — à corriger upstream enka-next, NE PAS porter.
+- `!` backend delta : `teamdocs.createRule` exige `eventId.*` — le flux doc d'équipe (`createDocument`, teamId sans eventId) est rejeté 400 règle (mesuré T6 P4b) ; ajouter `|| teamId.members ~ @request.auth.id` (migration rules, pattern T4).
+- `!` backend ou client : `materiel_loan.deleteRule = createdBy = auth` mais le client ne set jamais `createdBy` à la création → loans UI indestructibles via l'API (T6 a contourné en SQL) ; setter `createdBy = userId` dans `createLoan` (pattern C9) ou revoir la règle.
 - Images recettes (20 valeurs `img` frontmatter, og:image déjà cassées côté Hugo) — décision produit Phase 2.

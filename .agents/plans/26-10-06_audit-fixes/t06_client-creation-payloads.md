@@ -25,8 +25,8 @@ Tous les flux de création passent (recette, produit manuel, loan, teamdoc) : id
 
 ## Critères
 
-- [ ] Aucun id custom posé à la création de recette (grep vert sur generateSlugUuid35/`recipe.id =`)
-- [ ] Sondes curl des 4 flux créations → 200 (loggées dans run.md)
-- [ ] `publishedAt` préservé au save (flux publish identifié et intact)
-- [ ] `updatedBy` = userId ; `borrowerUser` set ; teamdoc sans createdBy
-- [ ] `bun run check` au canon ; run.md amendé (journal T6)
+- [x] Aucun id custom posé à la création de recette (grep vert sur generateSlugUuid35/`recipe.id =` — slugUtils.ts supprimé, orphelin)
+- [x] Sondes curl des 4 flux créations → 200 (loggées dans run.md — recette P1, produit P2, loan P3, teamdoc P4 event-scopé ; note : le flux teamdoc team-scopé `createDocument` est 400 par createRule exigeant eventId, indépendamment de B4 → différé `!`)
+- [x] `publishedAt` préservé au save (retiré du normalize ; aucun flux publish client n'existe — documenté au journal)
+- [x] `updatedBy` = userId (sonde P2) ; `borrowerUser` set (P3) ; teamdoc sans createdBy (P4)
+- [x] `bun run check` au canon (0 err/6 warn) ; run.md amendé (journal T6). Bonus canon : test 61/61 ; check-legacy 192 vs 193 baseline (−1 : cast RecipesStore:633 corrigé, 0 nouvelle erreur)

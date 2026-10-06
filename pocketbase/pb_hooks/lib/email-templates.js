@@ -11,6 +11,26 @@
  */
 
 /**
+ * Base URL publique de l'app pour les liens des emails.
+ * ENKA_BASE_URL doit etre definie dans l'environnement du serveur PocketBase —
+ * sans elle, les liens emails pointent silencieusement vers la prod.
+ * Le fallback logge une ERREUR a chaque build d'email : volontairement bruyant,
+ * pour que la variable manquante saute aux yeux dans les logs au deploiement.
+ * @returns {string} base URL sans slash final
+ */
+function getBaseUrl() {
+  var baseUrl = $os.getenv("ENKA_BASE_URL");
+  if (!baseUrl) {
+    $app.logger().error(
+      "ENKA_BASE_URL manquante: fallback https://enka-cookbook.app utilise pour les liens email. " +
+        "Definir ENKA_BASE_URL a l'URL publique de l'app dans l'env du serveur PocketBase."
+    );
+    return "https://enka-cookbook.app";
+  }
+  return baseUrl;
+}
+
+/**
  * Construit le HTML pour le template "invitation_to_event".
  *
  * @param {string} inviterName - Nom de la personne qui invite
@@ -47,7 +67,7 @@ function buildInvitationEmail(inviterName, eventName, eventDescription, dateStar
       "</p>";
   }
 
-  var baseUrl = $os.getenv("ENKA_BASE_URL") || "https://enka-cookbook.app";
+  var baseUrl = getBaseUrl();
   var joinUrl = baseUrl + "/join/" + shareLinkId;
 
   var html =
@@ -97,7 +117,7 @@ function buildTeamInvitationEmail(inviterName, teamName, teamDescription, hasAcc
       "</p>";
   }
 
-  var baseUrl = $os.getenv("ENKA_BASE_URL") || "https://enka-cookbook.app";
+  var baseUrl = getBaseUrl();
 
   var heading, bodyText, ctaText, ctaUrl;
 

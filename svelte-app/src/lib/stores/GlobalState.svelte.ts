@@ -7,6 +7,7 @@ import { eventsStore } from "./EventsStore.svelte";
 import { materielStore } from "./MaterielStore.svelte";
 import { teamdocsStore } from "./TeamdocsStore.svelte";
 import { productsStore } from "./ProductsStore.svelte";
+import { eventMaterielStore } from "./EventMaterielStore.svelte";
 import { recipesStore } from "./RecipesStore.svelte";
 import { db, pb } from "$lib/db-sync/pb-sync";
 import { route } from "$lib/router";
@@ -219,6 +220,7 @@ class GlobalState {
       await nativeTeamsStore.destroy();
       await eventsStore.destroy();
       await materielStore.destroy();
+      await eventMaterielStore.destroy();
       await teamdocsStore.destroy();
       await productsStore.destroy();
 

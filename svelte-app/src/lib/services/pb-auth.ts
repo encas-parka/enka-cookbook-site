@@ -34,7 +34,8 @@ function normalizeUser(record: Record<string, unknown>): PBAuthUser {
 	return {
 		id: record.id as string,
 		name: (record.name as string) || (record.username as string) || '',
-		email: (record.email as string) || ''
+		email: (record.email as string) || '',
+		emailVerification: Boolean(record.emailVerification)
 	};
 }
 

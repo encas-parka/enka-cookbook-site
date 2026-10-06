@@ -289,9 +289,13 @@ export function enrichMateriel(
       return;
     }
 
+    // Snapshots narrowés : le narrowing TS ne traverse pas les callbacks imbriqués
+    const loanStartDate: string = loan.startDate;
+    const loanEndDate: string = loan.endDate;
+
     // Vérifier si l'emprunt est actif ou planifié
-    const startDate = new Date(loan.startDate);
-    const endDate = new Date(loan.endDate);
+    const startDate = new Date(loanStartDate);
+    const endDate = new Date(loanEndDate);
 
     const isActive = startDate <= now && endDate >= now;
     const isPlanned = startDate > now;
@@ -304,8 +308,8 @@ export function enrichMateriel(
         loanDetails.push({
           loanId: loan.id,
           responsibleName: loan.responsibleName || "",
-          startDate: loan.startDate,
-          endDate: loan.endDate,
+          startDate: loanStartDate,
+          endDate: loanEndDate,
           quantity: item.quantity,
           status: loan.status as "asked" | "accepted" | "canceled",
         });
@@ -332,7 +336,8 @@ export function enrichMateriel(
     return start > now;
   });
 
-  let status: MaterielStatus | "loan" | "reserved" = doc.status;
+  // Statut PB nullable : matériel sans statut explicite traité comme "ok"
+  let status: MaterielStatus | "loan" | "reserved" = doc.status ?? "ok";
 
   if (hasActiveLoans) {
     status = "loan"; // En cours d'utilisation
@@ -340,8 +345,8 @@ export function enrichMateriel(
     status = "reserved"; // Réservé pour le futur
   }
 
-  // 4. Calculer les quantités disponibles
-  const availableQuantity = doc.quantity - totalLoanedQuantity;
+  // 4. Calculer les quantités disponibles (stock inconnu → 0, conservateur)
+  const availableQuantity = (doc.quantity ?? 0) - totalLoanedQuantity;
 
   return {
     // Tous les champs de Materiel (y compris PbDoc)

@@ -66,11 +66,12 @@ type ProductWithOptionalPurchases = Partial<PbDoc> & {
   mergedInto: string | null;
   totalNeededOverride: string | null;
   updatedBy: string | null;
-  isSynced: boolean;
-  mainId: string | Main;
-  productType: string | null;
-  specs: string | null;
-};
+  	isSynced: boolean;
+  	// Champ Appwrite hérité : absent des records PB bruts (il vit sur ParsedNeed)
+  	mainId?: string | Main;
+  	productType: string | null;
+  	specs: string | null;
+  };
 
 /**
  * Construit un EnrichedProduct de base depuis un produit Appwrite brut.
@@ -134,11 +135,12 @@ export function buildRawProductBase(
     nbRecipes: 0,
     totalAssiettes: 0,
     isSynced: product.isSynced,
-    mainId: product.mainId,
+    // Produits PB bruts sans mainId (champ Appwrite hérité) → chaîne vide
+    mainId: product.mainId ?? "",
 
     status: product.status,
     who: product.who,
-    store: product.store,
+    store: product.store ?? "",
     stockReel: product.stockReel,
     previousNames: product.previousNames,
     isMerged: product.isMerged,

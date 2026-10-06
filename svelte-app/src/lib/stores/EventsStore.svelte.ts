@@ -755,10 +755,8 @@ export class EventsStore {
     }
 
     // --- 2. Construire les nouveaux guestEmails (dédupliqués) ---
-    const currentGuests: string[] = Array.isArray(
-      (event as Record<string, unknown>).guestEmails,
-    )
-      ? ((event as Record<string, unknown>).guestEmails as string[])
+    const currentGuests: string[] = Array.isArray(event.guestEmails)
+      ? event.guestEmails
       : [];
 
     const guestSet = new Set(

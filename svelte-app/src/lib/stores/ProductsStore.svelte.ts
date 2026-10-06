@@ -242,12 +242,23 @@ class ProductsStore {
     purchases: Purchases[],
   ): EnrichedProduct {
     if (raw && need) {
-      const base = buildRawProductBase({ ...raw, purchases });
+      const base = buildRawProductBase({
+        ...raw,
+        purchases,
+        // Champs nullable côté PB → neutralisés pour le type enrichi
+        productName: raw.productName ?? "",
+        store: raw.store ?? "",
+      });
       return applyNeedToBase(base, need);
     }
 
     if (raw) {
-      return buildRawProductBase({ ...raw, purchases });
+      return buildRawProductBase({
+        ...raw,
+        purchases,
+        productName: raw.productName ?? "",
+        store: raw.store ?? "",
+      });
     }
 
     if (need) {

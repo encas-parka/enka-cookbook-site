@@ -21,6 +21,10 @@ import type {
   RecipesTypeROptions,
   RecipesStatusOptions,
 } from "./pb-generated";
+import type { EventMeal, EventContributor, EventTodo } from "./events";
+import type { RecipeIngredient } from "./recipes.types";
+import type { Astuce } from "$lib/utils/recipeUtils";
+import type { MaterielLoanItem } from "./materiel.types";
 
 // =============================================================================
 // RE-EXPORTS from pb-generated.ts
@@ -74,19 +78,20 @@ export type {
 export type Main = PbDoc & {
   name: string;
   createdBy: string | null;
-  date: unknown | null;
+  date: string[] | null;
   dateStart: string | null;
   dateEnd: string | null;
   description: string | null;
   minContrib: number | null;
   teams: string[] | null;
   status: EventsStatusOptions | null;
-  guestEmails: unknown | null;
+  guestEmails: string[] | null;
   guestUsers: string[] | null;
   location: string | null;
-  meals: unknown | null;
-  contributors: unknown | null;
-  todos: unknown | null;
+  // JSON fields — shape écrit/parsé par le client (cf. events.d.ts)
+  meals: EventMeal[] | null;
+  contributors: EventContributor[] | null;
+  todos: EventTodo[] | null;
 };
 
 /** @deprecated Alias — will be renamed to Events in Phase 2 */
@@ -100,20 +105,21 @@ export type Products = PbDoc & {
   productType: string | null;
   pF: boolean;
   pS: boolean;
-  store: unknown | null;
-  specs: unknown | null;
+  // JSON fields — strings brutes parsées par safeJsonParse côté client
+  store: string | null;
+  specs: string | null;
   status: string;
   deleted: boolean;
-  stockReel: unknown | null;
-  who: unknown | null;
-  previousNames: unknown | null;
+  stockReel: string | null;
+  who: string[] | null;
+  previousNames: string[] | null;
   isMerged: boolean;
-  mergedFrom: unknown | null;
+  mergedFrom: string[] | null;
   mergeDate: string | null;
   mergeReason: string | null;
   isSynced: boolean;
   mergedInto: string | null;
-  totalNeededOverride: unknown | null;
+  totalNeededOverride: string | null;
   updatedBy: string | null;
 };
 
@@ -121,7 +127,7 @@ export type Products = PbDoc & {
 export type Purchases = PbDoc & {
   eventId: string;
   unit: string;
-  store: unknown | null;
+  store: string | null;
   status: string | null;
   deleted: boolean;
   notes: string | null;
@@ -143,26 +149,28 @@ export type Recettes = PbDoc & {
   preparation: string | null;
   draft: boolean;
   typeR: RecipesTypeROptions | null;
-  categories: unknown | null;
-  regime: unknown | null;
+  // JSON fields — shapes écrits/parsés par le client (parseIngredients,
+  // parseAstuces acceptent le natif PB et le legacy Appwrite string[])
+  categories: string[] | null;
+  regime: string[] | null;
   publishedAt: string | null;
   createdBy: string | null;
-  teams: unknown | null;
-  materiel: unknown | null;
-  prepAlt: unknown | null;
-  ingredients: unknown | null;
+  teams: string[] | null;
+  materiel: string[] | null;
+  prepAlt: string[] | null;
+  ingredients: RecipeIngredient[] | string[] | null;
   description: string | null;
   region: string | null;
   cuisson: boolean;
   quantite_desc: string | null;
   check: boolean;
   preparation24h: string | null;
-  permissionWrite: unknown | null;
+  permissionWrite: string[] | null;
   serveHot: boolean;
   lockedBy: string | null;
-  saison: unknown | null;
+  saison: string[] | null;
   auteur: string | null;
-  astuces: unknown | null;
+  astuces: Astuce[] | string[] | null;
   status: RecipesStatusOptions | null;
   rootRecipeId: string | null;
   versionLabel: string | null;
@@ -209,7 +217,7 @@ export type MaterielLoan = PbDoc & {
   responsibleName: string | null;
   ownerId: string | null;
   ownerName: string | null;
-  materiels: unknown | null;
+  materiels: MaterielLoanItem[] | null;
   notes: string | null;
   completedAt: string | null;
   returnedAt: string | null;
@@ -223,7 +231,7 @@ export type EventMateriel = PbDoc & {
   type: EventMaterielTypeOptions | null;
   status: EventMaterielStatusOptions | null;
   groupId: string | null;
-  specs: unknown | null;
+  specs: string | null;
   deleted: boolean;
   name: string | null;
   quantity: number | null;

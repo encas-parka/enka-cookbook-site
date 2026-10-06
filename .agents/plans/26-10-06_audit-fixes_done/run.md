@@ -11,7 +11,7 @@
 
 ## Header — état du monde
 
-_(rafraîchi par l'orchestrateur à chaque portail — état courant : après T15, 06-10 ; l'historique vit dans les journaux ci-dessous)_
+_(rafraîchi par l'orchestrateur à chaque portail — état courant : clôture post-micro-fixes revue, 06-10 ; l'historique vit dans les journaux ci-dessous)_
 
 - **Base** : `e9f8c6cd` « build » · **HEAD** : `02199cc5` (T16). **Frontier : T17** (merge contenu enka-next + export Appwrite frais + re-import complet — creds présentes `scripts_dev/.env.local`) ; puis T18 (QA runtime) et clôture.
 - **Progression** : Lot 0 ✓ (T1-T4) · Lot 1 ✓ (T5-T7) · Lot 3 ✓ (T8-T11) · Lot 4 prioritaire ✓ (T11-T15) · Étape 7 (notifications) et Étape 9 (SW/PWA) → backlog (hors priorité synthèse).
@@ -122,6 +122,7 @@ _(rafraîchi par l'orchestrateur à chaque portail — état courant : après T1
 - **Docs d'équipe team-scopés** (CreateDocumentPage) : flux débloqué par la règle T10 (création sans eventId désormais possible pour un membre) — parcourir create → list → edit → delete.
 - **Logout/login** : logout purge les caches (dont eventMateriel, T11) ; login re-sync (syncInitial) sans flash ; changer d'utilisateur ne montre plus les données du précédent.
 - **Resync orchestrateur (T15)** : couper le serveur PB → StatusBar « Connexion perdue » après ~3 s ; le relancer → retour « connected » + resync silencieux ; cacher/rouvrir l'onglet → resync sans flash de loading.
+- **Topic custom SSE `user_<id>`** (F5 revue B) : modifier les membres d'une team depuis un 2e navigateur → l'autre onglet rattrape ses events sans reload (round-trip teams-resync-events → abonnement topic, jamais prouvé bout-en-bout).
 - **Visiteur (non logué)** : liste recettes publique lisible, 0 erreur console (fast-win T14 App.svelte:90).
 - **PWA** : le modal de mise à jour SW (version.json) n'est pas bumpé par ce run — à faire à la release.
 
@@ -665,3 +666,7 @@ Trois micro-fixes, un commit chacun. Canons finaux : `bun run check` 179 fichier
 - `!` backend ou client : `materiel_loan.deleteRule = createdBy = auth` mais le client ne set jamais `createdBy` à la création → loans UI indestructibles via l'API (T6 a contourné en SQL) ; setter `createdBy = userId` dans `createLoan` (pattern C9) ou revoir la règle.
 - Images recettes (20 valeurs `img` frontmatter, og:image déjà cassées côté Hugo) — décision produit Phase 2.
 - **S2** déploiement : définir `ENKA_BASE_URL` dans l'env du serveur PB (URL publique sans slash final) — sans elle, les liens emails pointent vers la prod et chaque build d'email logge une erreur (fallback volontairement bruyant, T9). À intégrer à la checklist Dokploy (Phase 1.8).
+- **S2** déploiement (F2 revue B) : **re-import complet = gating déploiement** — les 4 B1 données de l'audit import (`created`, `createdBy`, `permissionWrite`, `rootRecipeId`) sont corrigés dans le pipeline (T16) mais la DB actuelle porte encore les données fausses tant que T17 Phases 2-3 ne sont pas rejoués (clé Appwrite expirée — action humaine).
+- `!` produit (F1 micro-fixe) : `materiel.createdBy` vide **structurel** (pipeline écrit `null` « Not in Appwrite », 110/110 records) — les records existants restent indestructibles via l'API. Décision : backfill `createdBy ← ownerUser` (heuristique) ou révision `deleteRule` (`|| ownerUser = auth`). Idem `materiel_loan` (ligne ci-dessus, même famille).
+- `?` (A6 revue A) : `lookup-user` — comparaison d'email sensible à la casse côté stockage (le hook normalise l'entrée, pas le stocké ; `=` SQLite est BINARY). Vérifier d'abord si PB lowercases les emails à la création (auth-with-password semble insensible à la casse) avant tout geste.
+- `?` (F7 revue B) : asymétrie `categories` (create = auth, update/delete = superuser only) — assumée mais jamais documentée ; à consigner dans la future doc domaine.

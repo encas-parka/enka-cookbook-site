@@ -191,7 +191,7 @@ await store.loadCache();
 //   skips if already in flight) — used by the resync orchestrator
 await store.syncInitial();
 
-// Phase 3: Realtime WebSocket → Dexie
+// Phase 3: Realtime SSE → Dexie
 await store.setupRealtime();
 ```
 

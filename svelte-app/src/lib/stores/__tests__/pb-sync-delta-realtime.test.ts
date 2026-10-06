@@ -96,7 +96,7 @@ describe("pb-sync — delta fetch et realtime via le serveur PB simulé", () => 
       makeProductRecord({ productName: "Eau minérale", updated: pbDate(T1) }),
     );
 
-    await productsStore.syncFromRemote();
+    await productsStore.syncRevalidate();
     await waitForTick(5);
 
     const model = productsStore.getEnrichedProductById(TEST_PRODUCT_ID);
@@ -112,7 +112,7 @@ describe("pb-sync — delta fetch et realtime via le serveur PB simulé", () => 
       makeProductRecord({ productName: "Hors curseur" }),
     );
 
-    await productsStore.syncFromRemote();
+    await productsStore.syncRevalidate();
     await waitForTick(5);
 
     expect(productsStore.getEnrichedProductById(TEST_PRODUCT_ID)!.productName).toBe("Eau");

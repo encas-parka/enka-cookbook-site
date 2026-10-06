@@ -186,7 +186,10 @@ All major stores are singleton classes with Svelte 5 reactive runes:
 await store.loadCache();
 
 // Phase 2: Delta sync from PocketBase → Dexie
-await store.syncFromRemote();
+// - syncInitial(): first load, toggles the store's #loading (UI skeleton)
+// - syncRevalidate(): silent background revalidation (no loading toggle,
+//   skips if already in flight) — used by the resync orchestrator
+await store.syncInitial();
 
 // Phase 3: Realtime WebSocket → Dexie
 await store.setupRealtime();
@@ -378,7 +381,7 @@ Available reusable form components in `src/lib/components/ui/`:
 2. Add collection name to `AwCollectionName` in `src/lib/db-sync/aw-types.ts`
 3. Verify name is mapped in `APPWRITE_CONFIG.collections` (in `pb-auth.ts`)
 4. Create `src/lib/stores/YourStore.svelte.ts` with class-based singleton using `createSyncCollection` + `bridgeToMap`
-5. Add 3-phase initialization: `loadCache()`, `syncFromRemote()`, `setupRealtime()`
+5. Add 3-phase initialization: `loadCache()`, `syncInitial()`, `setupRealtime()` (plus `syncRevalidate()` for silent background resync)
 6. Add `destroy()` with bridge unsubscribe + collection unsubscribeAll + clearLocal
 7. Wire into `GlobalState.logout()` if the store holds private user data
 8. Export singleton instance

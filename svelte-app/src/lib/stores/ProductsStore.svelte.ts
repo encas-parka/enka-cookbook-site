@@ -98,6 +98,10 @@ class ProductsStore {
   #realtimeConnected = $state(false);
   #lastSync = $state<string | null>(null);
   #lastMealsHash = "";
+
+  // Garde revalidation : une seule delta sync en vol (les appels concurrents
+  // skipent silencieusement). Réinitialisé par le finally.
+  #revalidating = false;
   #cleanupSyncEffect: (() => void) | null = null;
   #cleanupDateEffect: (() => void) | null = null;
 
@@ -1106,43 +1110,73 @@ class ProductsStore {
   }
 
   /**
-   * Force un delta sync PocketBase → Dexie pour les produits et achats.
+   * Revalidation silencieuse (delta sync des produits et achats, sans toggle
+   * loading — pas de flash UI skeleton). Utilisée par les resync en
+   * arrière-plan (post-visibility/reconnect). Skip silencieux si déjà en
+   * cours.
    *
-   * Appelé par NotificationStore après une notification batch_products_update.
-   * Avec PocketBase, le SSE relaie les modifications en temps réel,
-   * ce delta sync garantit que Dexie (et donc le liveQuery → #onDataChange) est à jour.
+   * Politique d'échec héritée du durcissement T13 : `Promise.allSettled` —
+   * les rejets sont loggés, `#lastSync` n'avance que si TOUT réussit. Pas de
+   * rethrow : un échec partiel reste observable via `lastSync` non rafraîchi
+   * (l'orchestrateur peut s'en servir comme signal de fraîcheur).
    */
-  async syncFromRemote(): Promise<void> {
-    if (!this.#currentEventId) {
-      console.warn("[ProductsStore] syncFromRemote() appelé sans currentEventId");
-      return;
-    }
+  async syncRevalidate(): Promise<void> {
+    if (this.#revalidating) return;
+    this.#revalidating = true;
 
-    const results = await Promise.allSettled([
-      this.#productsCollection.initialFetch({
-        filter: ["eventId = {:eventId}", { eventId: this.#currentEventId }],
-        scopeKey: this.#currentEventId,
-      }),
-      this.#purchasesCollection.initialFetch({
-        filter: ["eventId = {:eventId}", { eventId: this.#currentEventId }],
-        scopeKey: this.#currentEventId,
-      }),
-    ]);
-
-    const rejected = results.filter(
-      (r): r is PromiseRejectedResult => r.status === "rejected",
-    );
-    if (rejected.length > 0) {
-      // #lastSync only advances on a fully successful pass — a partial sync
-      // must not look fresh.
-      for (const r of rejected) {
-        console.error("[ProductsStore] syncFromRemote partiel:", r.reason);
+    try {
+      if (!this.#currentEventId) {
+        console.warn(
+          "[ProductsStore] syncRevalidate() appelé sans currentEventId",
+        );
+        return;
       }
-      return;
-    }
 
-    this.#lastSync = new Date().toISOString();
-    console.log("[ProductsStore] syncFromRemote() terminé");
+      const results = await Promise.allSettled([
+        this.#productsCollection.initialFetch({
+          filter: ["eventId = {:eventId}", { eventId: this.#currentEventId }],
+          scopeKey: this.#currentEventId,
+        }),
+        this.#purchasesCollection.initialFetch({
+          filter: ["eventId = {:eventId}", { eventId: this.#currentEventId }],
+          scopeKey: this.#currentEventId,
+        }),
+      ]);
+
+      const rejected = results.filter(
+        (r): r is PromiseRejectedResult => r.status === "rejected",
+      );
+      if (rejected.length > 0) {
+        // #lastSync only advances on a fully successful pass — a partial sync
+        // must not look fresh.
+        for (const r of rejected) {
+          console.error("[ProductsStore] syncRevalidate partiel:", r.reason);
+        }
+        return;
+      }
+
+      this.#lastSync = new Date().toISOString();
+      console.log("[ProductsStore] syncRevalidate() terminé");
+    } finally {
+      this.#revalidating = false;
+    }
+  }
+
+  /**
+   * Delta sync avec loading UI (premier chargement). Toggle `this.#loading`
+   * autour de la revalidation.
+   */
+  async syncInitial(): Promise<void> {
+    return this.#runWithLoading(() => this.syncRevalidate());
+  }
+
+  async #runWithLoading(work: () => Promise<void>): Promise<void> {
+    this.#loading = true;
+    try {
+      return await work();
+    } finally {
+      this.#loading = false;
+    }
   }
 
   // ===========================================================================

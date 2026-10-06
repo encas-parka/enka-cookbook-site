@@ -92,6 +92,10 @@ class RecipeDataStore {
   #isInitialized = $state(false);
   #initPromise: Promise<void> | null = null;
 
+  // Garde revalidation : une seule delta sync en vol (les appels concurrents
+  // skipent silencieusement). Réinitialisé par le finally.
+  #revalidating = false;
+
   /** Ajouts utilisateur (matériel), persistés dans db.catalog */
   #customMateriel = $state<string[]>([]);
 
@@ -235,7 +239,7 @@ class RecipeDataStore {
         await this.#loadCustomAdditions();
 
         // Phase 2 : delta sync PocketBase → Dexie
-        await this.syncFromRemote();
+        await this.syncRevalidate();
 
         // Phase 3 : abonnement SSE temps réel
         await this.setupRealtime();
@@ -287,9 +291,15 @@ class RecipeDataStore {
   }
 
   /**
-   * Delta sync PocketBase → Dexie (ingredients + categories).
+   * Revalidation silencieuse (delta sync, sans toggle loading — initialize()
+   * possède la fenêtre de chargement). Skip silencieux si déjà en cours.
+   * Rethrow pour laisser l'appelant (orchestrateur de resync) décider du
+   * signalement.
    */
-  async syncFromRemote(): Promise<void> {
+  async syncRevalidate(): Promise<void> {
+    if (this.#revalidating) return;
+    this.#revalidating = true;
+
     try {
       await Promise.all([
         this.#ingredientsCollection.initialFetch(),
@@ -302,6 +312,8 @@ class RecipeDataStore {
     } catch (err) {
       console.error("[RecipeDataStore] Erreur sync:", err);
       throw err;
+    } finally {
+      this.#revalidating = false;
     }
   }
 

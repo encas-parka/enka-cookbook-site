@@ -19,6 +19,10 @@ export class TeamdocsStore {
   #realtimeInitialized = false;
   #initPromise: Promise<void> | null = null;
 
+  // Garde revalidation : une seule delta sync en vol (les appels concurrents
+  // skipent silencieusement). Réinitialisé par le finally.
+  #revalidating = false;
+
   get loading() {
     return this.#loading;
   }
@@ -98,13 +102,27 @@ export class TeamdocsStore {
     }
   }
 
-  async syncFromRemote(): Promise<void> {
+  /**
+   * Delta sync depuis PocketBase (premier chargement, loading UI).
+   * Toggle `this.#loading` autour de la revalidation.
+   */
+  async syncInitial(): Promise<void> {
+    return this.#runWithLoading(() => this.syncRevalidate());
+  }
+
+  /**
+   * Revalidation silencieuse (delta sync, sans toggle loading — pas de flash
+   * UI skeleton). Skip silencieux si déjà en cours. Rethrow pour laisser
+   * l'appelant (orchestrateur de resync) décider du signalement.
+   */
+  async syncRevalidate(): Promise<void> {
     if (!globalState.userId) {
-      console.log("[TeamdocsStore] Pas de userId, skip syncFromRemote");
+      console.log("[TeamdocsStore] Pas de userId, skip syncRevalidate");
       return;
     }
 
-    this.#loading = true;
+    if (this.#revalidating) return;
+    this.#revalidating = true;
     this.#error = null;
 
     try {
@@ -116,8 +134,17 @@ export class TeamdocsStore {
     } catch (err) {
       this.#error =
         err instanceof Error ? err.message : "Erreur de synchronisation";
-      console.error("[TeamdocsStore] SyncFromRemote error:", err);
+      console.error("[TeamdocsStore] SyncRevalidate error:", err);
       throw err;
+    } finally {
+      this.#revalidating = false;
+    }
+  }
+
+  async #runWithLoading(work: () => Promise<void>): Promise<void> {
+    this.#loading = true;
+    try {
+      return await work();
     } finally {
       this.#loading = false;
     }
@@ -161,7 +188,7 @@ export class TeamdocsStore {
     this.#initPromise = (async () => {
       try {
         await this.loadCache();
-        await this.syncFromRemote();
+        await this.syncInitial();
         await this.setupRealtime();
 
         this.#isInitialized = true;

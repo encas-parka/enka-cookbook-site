@@ -190,8 +190,8 @@ The Svelte app uses **aw-sync** (`svelte-app/src/lib/db-sync/`) as the offline-f
 **Store initialization** follows a 3-phase pattern:
 
 1. `loadCache()` - Load from Dexie via `bridgeToMap` liveQuery (fast, offline-capable)
-2. `syncFromRemote()` - Delta sync Appwrite → Dexie via `initialFetch()`
-3. `setupRealtime()` - WebSocket → Dexie via `subscribe()`
+2. `syncInitial()` - Delta sync PocketBase → Dexie via `initialFetch()` (toggles loading; silent variant: `syncRevalidate()`)
+3. `setupRealtime()` - SSE → Dexie via `subscribe()`
 
 **Store cleanup** on logout: `destroy()` must call `bridge.subscription.unsubscribe()` + `collection.unsubscribeAll()` + `collection.clearLocal()`.
 

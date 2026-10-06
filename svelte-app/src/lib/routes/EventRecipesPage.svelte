@@ -317,7 +317,7 @@
     error = null;
 
     try {
-      // Note: eventsStore et recipesStore sont déjà initialisés via App.svelte (loadCache + syncFromRemote)
+      // Note: eventsStore et recipesStore sont déjà initialisés via App.svelte (loadCache + syncInitial)
 
       // Récupérer les repas de l'événement
       const event = eventsStore.getEventById(currentEventId);

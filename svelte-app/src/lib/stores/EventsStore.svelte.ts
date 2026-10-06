@@ -73,6 +73,11 @@ export class EventsStore {
   // Dedup init
   #initPromise: Promise<void> | null = null;
 
+  // Garde revalidation : une seule delta sync en vol (les appels concurrents
+  // skipent silencieusement — l'orchestrateur de resync peut déclencher
+  // plusieurs sources la même seconde). Réinitialisé par le finally.
+  #revalidating = false;
+
   // =============================================================================
   // DERIVED: Enriched events from raw Main data
   // =============================================================================
@@ -265,11 +270,23 @@ export class EventsStore {
   }
 
   /**
-   * Phase 2 : Delta sync depuis PocketBase
+   * Phase 2 : Delta sync depuis PocketBase (premier chargement, loading UI).
+   * Toggle `this.#loading` autour de la revalidation.
    */
-  async syncFromRemote(): Promise<void> {
+  async syncInitial(): Promise<void> {
+    return this.#runWithLoading(() => this.syncRevalidate());
+  }
+
+  /**
+   * Revalidation silencieuse (delta sync, sans toggle loading — pas de flash
+   * UI skeleton). Skip silencieux si déjà en cours. Rethrow pour laisser
+   * l'appelant (orchestrateur de resync) décider du signalement.
+   */
+  async syncRevalidate(): Promise<void> {
+    if (this.#revalidating) return;
+    this.#revalidating = true;
+
     console.log("[EventsStore] Synchronisation depuis PocketBase...");
-    this.#loading = true;
 
     try {
       await this.#collection.initialFetch();
@@ -285,6 +302,15 @@ export class EventsStore {
       console.error("[EventsStore]", message, err);
       throw err;
     } finally {
+      this.#revalidating = false;
+    }
+  }
+
+  async #runWithLoading(work: () => Promise<void>): Promise<void> {
+    this.#loading = true;
+    try {
+      return await work();
+    } finally {
       this.#loading = false;
     }
   }
@@ -296,7 +322,7 @@ export class EventsStore {
    */
   async forceRefresh(): Promise<void> {
     try {
-      await this.syncFromRemote();
+      await this.syncRevalidate();
     } catch (err) {
       console.error("[EventsStore] forceRefresh() failed:", err);
     }
@@ -337,7 +363,7 @@ export class EventsStore {
     this.#initPromise = (async () => {
       try {
         await this.loadCache();
-        await this.syncFromRemote();
+        await this.syncInitial();
         await this.setupRealtime();
 
         console.log(

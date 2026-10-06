@@ -81,9 +81,9 @@
         joinedAt: new Date().toISOString(),
       });
 
-      // FORCER la synchronisation avec Appwrite pour obtenir la nouvelle liste des contributeurs (sinon le cache idb est utilisé)
+      // FORCER la synchronisation avec PocketBase pour obtenir la nouvelle liste des contributeurs (sinon le cache idb est utilisé)
       const { eventsStore } = await import("$lib/stores/EventsStore.svelte");
-      await eventsStore.syncFromRemote();
+      await eventsStore.syncRevalidate();
 
       step = "success";
       toastService.success("Accès accordé ! Redirection en cours...");

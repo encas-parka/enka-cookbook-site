@@ -60,9 +60,13 @@ class RecipesStore {
 	#loadingDetails = new Set<string>();
 	#initPromise: Promise<void> | null = null;
 
-	// syncReady: resolved when syncFromRemote() finishes
+	// syncReady: resolved when syncInitial() finishes
 	#syncPromise: Promise<void> = Promise.resolve();
 	#syncResolve: (() => void) | null = null;
+
+	// Garde revalidation : une seule delta sync en vol (les appels concurrents
+	// skipent silencieusement). Réinitialisé par le finally.
+	#revalidating = false;
 
 	// =============================================================================
 	// GETTERS
@@ -125,13 +129,35 @@ class RecipesStore {
 		}
 	}
 
-	async syncFromRemote(): Promise<void> {
+	/**
+	 * Premier chargement complet depuis PocketBase (loading UI + syncReady).
+	 * Toggle `this.#loading` autour de la revalidation et résout `syncReady`
+	 * à la fin — le signal « l'index recettes est prêt » consommé par
+	 * ProductsStore avant son calcul de besoins.
+	 */
+	async syncInitial(): Promise<void> {
 		this.#syncPromise = new Promise<void>((resolve) => {
 			this.#syncResolve = resolve;
 		});
 
+		try {
+			return await this.#runWithLoading(() => this.syncRevalidate());
+		} finally {
+			this.#syncResolve?.();
+			this.#syncResolve = null;
+		}
+	}
+
+	/**
+	 * Revalidation silencieuse (delta sync, sans toggle loading — pas de flash
+	 * UI skeleton). Skip silencieux si déjà en cours. Rethrow explicite pour
+	 * laisser l'appelant (orchestrateur de resync) décider du signalement.
+	 */
+	async syncRevalidate(): Promise<void> {
+		if (this.#revalidating) return;
+		this.#revalidating = true;
+
 		console.log('[RecipesStore] Synchronisation depuis PocketBase...');
-		this.#loading = true;
 
 		try {
 			await this.#collection.initialFetch();
@@ -148,9 +174,16 @@ class RecipesStore {
 			console.error('[RecipesStore]', message, err);
 			throw err;
 		} finally {
+			this.#revalidating = false;
+		}
+	}
+
+	async #runWithLoading(work: () => Promise<void>): Promise<void> {
+		this.#loading = true;
+		try {
+			return await work();
+		} finally {
 			this.#loading = false;
-			this.#syncResolve?.();
-			this.#syncResolve = null;
 		}
 	}
 
@@ -195,7 +228,7 @@ class RecipesStore {
 		this.#initPromise = (async () => {
 			try {
 				await this.loadCache();
-				await this.syncFromRemote();
+				await this.syncInitial();
 				await this.setupRealtime();
 
 				if (this.#recipesIndex.size === 0) {

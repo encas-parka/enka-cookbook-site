@@ -127,11 +127,11 @@ class GlobalState {
 
       // Phase 1: Sync de TOUS les stores en parallèle
       await Promise.all([
-        nativeTeamsStore.syncFromRemote(),
-        eventsStore.syncFromRemote(),
-        materielStore.syncFromRemote(),
-        teamdocsStore.syncFromRemote(),
-        recipesStore.syncFromRemote(),
+        nativeTeamsStore.syncInitial(),
+        eventsStore.syncInitial(),
+        materielStore.syncInitial(),
+        teamdocsStore.syncInitial(),
+        recipesStore.syncInitial(),
 
       ]);
 

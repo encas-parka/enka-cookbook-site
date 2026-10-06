@@ -14,7 +14,8 @@
 _(rafraîchi par l'orchestrateur à chaque portail — dernière mise à jour : après T2, 06-10)_
 
 - **Base** : `e9f8c6cd` « build » (HEAD `mig/pocketbase` = origin au démarrage, 06-10)
-- **HEAD après T3** : `635e617a` (deltas schéma T3 : locks id relax + userName, teams 5 champs, share_links.createdBy backfillé 3/3, events description/minContrib ; + fast-win hook teams-resync `original()`). **Frontier : T4.**
+- **HEAD après T4** : `9ebe9297` (migration rules `1791278800_rules_api_hardening.js`, 9 règles durcies, matrice curl 52/52 copie+dev). **Lot 0 (fondations backend) terminé. Frontier : T5.**
+- **Faits T4 portant les tickets client** : REC-4/SEC-1 enfants = no-op (le snapshot avait déjà figé les fix 042/043 dev) ; client envoie bien `events.createdBy` au create ; id locks garde min 15 (ids `doc_`/`event_` ≈ 20-21 chars OK) ; PB évalue les rules AVANT la validation (400 `data:{}` = rule, `data:{champ}` = validation).
 - **Piège T2 à porter par les deltas suivants** : toute nouvelle colonne PB = `DEFAULT '' NOT NULL` → backfills doivent cibler `''` ET NULL.
 - **Arbre** : propre hormis `.scratch/probes/t1-snapshot-summary.py` (untracked, probe transient T1 — connu, ne pas committer ni nettoyer).
 - **Décision portail post-T1** : ne PAS lancer `migrate history-sync` sur la dev DB pendant le run (les 9 lignes `_migrations` orphelines sont inoffensives) ; à noter dans la checklist déploiement.

@@ -50,6 +50,7 @@ vi.mock("pocketbase", async () => {
 
 import { describe, it, expect, beforeEach, vi } from "vitest";
 import { currentFakePb, pbDate } from "./harness/stub-pb";
+import type { FakePocketBase, PbRecord } from "./harness/stub-pb";
 import { clearDexie, seedProductNeeds } from "./harness/seed-dexie";
 import { waitForTick } from "./harness/wait-for-tick";
 import {
@@ -64,6 +65,42 @@ import {
 import { productsStore } from "$lib/stores/ProductsStore.svelte";
 import { eventsStore } from "$lib/stores/EventsStore.svelte";
 import { db } from "$lib/db-sync/pb-sync";
+
+type FakeCollection = ReturnType<FakePocketBase["collection"]>;
+type FullListOptions = Parameters<FakeCollection["getFullList"]>[0];
+
+/**
+ * Blocks every `getFullList` behind a manual gate and counts the fetches.
+ * Lets a test observe concurrency (revalidate guard) and mid-flight state
+ * (loading toggle) deterministically. `restore()` MUST be called before the
+ * test ends — the spy would otherwise leak into the other tests of the file.
+ */
+function gateGetFullList(fakePb: FakePocketBase) {
+  const realCollection = fakePb.collection.bind(fakePb);
+  let fetchCount = 0;
+  let release: (() => void) | null = null;
+  const gate = new Promise<void>((resolve) => {
+    release = resolve;
+  });
+  const spy = vi
+    .spyOn(fakePb, "collection")
+    .mockImplementation((name: string): FakeCollection => {
+      const coll = realCollection(name);
+      return {
+        ...coll,
+        async getFullList(options?: FullListOptions): Promise<PbRecord[]> {
+          fetchCount += 1;
+          await gate;
+          return coll.getFullList(options);
+        },
+      };
+    });
+  return {
+    count: () => fetchCount,
+    release: () => release?.(),
+    restore: () => spy.mockRestore(),
+  };
+}
 
 describe("pb-sync — delta fetch et realtime via le serveur PB simulé", () => {
   beforeEach(async () => {
@@ -155,5 +192,65 @@ describe("pb-sync — delta fetch et realtime via le serveur PB simulé", () => 
     expect(local!.updated).toBe(created!.updated);
     const model = productsStore.getEnrichedProductById(TEST_PRODUCT_ID);
     expect(model!.purchases.length).toBeGreaterThanOrEqual(2);
+  });
+
+  it("syncRevalidate() ne toggle pas #loading (revalidation silencieuse)", async () => {
+    currentFakePb().putRecord(
+      "products",
+      makeProductRecord({ productName: "Silencieux", updated: pbDate(T1) }),
+    );
+
+    expect(productsStore.loading).toBe(false);
+    const pending = productsStore.syncRevalidate();
+    expect(productsStore.loading).toBe(false); // pendant le fetch
+    await pending;
+    await waitForTick(5);
+    expect(productsStore.loading).toBe(false); // après
+
+    // ...et la revalidation a bien livré la donnée
+    expect(
+      productsStore.getEnrichedProductById(TEST_PRODUCT_ID)!.productName,
+    ).toBe("Silencieux");
+  });
+
+  it("syncInitial() toggle #loading (premier chargement)", async () => {
+    currentFakePb().putRecord(
+      "products",
+      makeProductRecord({ productName: "Avec loading", updated: pbDate(T1) }),
+    );
+
+    const pending = productsStore.syncInitial();
+    // runWithLoading pose #loading = true de façon synchrone
+    expect(productsStore.loading).toBe(true);
+    await pending;
+    await waitForTick(5);
+    expect(productsStore.loading).toBe(false); // finally
+    expect(
+      productsStore.getEnrichedProductById(TEST_PRODUCT_ID)!.productName,
+    ).toBe("Avec loading");
+  });
+
+  it("syncRevalidate() déjà en cours → skip silencieux (pas de second fetch)", async () => {
+    currentFakePb().putRecord(
+      "products",
+      makeProductRecord({ productName: "Garde", updated: pbDate(T1) }),
+    );
+    const gate = gateGetFullList(currentFakePb());
+
+    const first = productsStore.syncRevalidate();
+    const second = productsStore.syncRevalidate(); // doit skipper
+    await waitForTick(5); // laisse la 1re passe atteindre getFullList (gated)
+    expect(gate.count()).toBe(2); // products + purchases, une seule passe
+
+    gate.release();
+    await first;
+    await second;
+    await waitForTick(5);
+    expect(gate.count()).toBe(2); // toujours une seule passe
+    gate.restore();
+
+    expect(
+      productsStore.getEnrichedProductById(TEST_PRODUCT_ID)!.productName,
+    ).toBe("Garde");
   });
 });

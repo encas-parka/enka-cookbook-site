@@ -11,10 +11,11 @@
 
 ## Header — état du monde
 
-_(rafraîchi par l'orchestrateur à chaque portail — dernière mise à jour : après T1, 06-10)_
+_(rafraîchi par l'orchestrateur à chaque portail — dernière mise à jour : après T2, 06-10)_
 
 - **Base** : `e9f8c6cd` « build » (HEAD `mig/pocketbase` = origin au démarrage, 06-10)
-- **HEAD après T1** : `b85d2b19` (snapshot migrations unique `1791277647_collections_snapshot.js`, 21 collections). **Frontier : T2.**
+- **HEAD après T2** : `2392b51a` (chaîne = snapshot T1 + delta `1791278400_autodates_ingredients_categories.js`, appliquée à la dev DB). **Frontier : T3.**
+- **Piège T2 à porter par les deltas suivants** : toute nouvelle colonne PB = `DEFAULT '' NOT NULL` → backfills doivent cibler `''` ET NULL.
 - **Arbre** : propre hormis `.scratch/probes/t1-snapshot-summary.py` (untracked, probe transient T1 — connu, ne pas committer ni nettoyer).
 - **Décision portail post-T1** : ne PAS lancer `migrate history-sync` sur la dev DB pendant le run (les 9 lignes `_migrations` orphelines sont inoffensives) ; à noter dans la checklist déploiement.
 - **Deviation T1 validée** : snapshot généré depuis la copie de backup (jamais la dev DB en écriture) — équivalent et vérifié par sha256 avant/après identique.
@@ -124,6 +125,53 @@ Contrôle SQL direct (`sqlite3 -readonly pocketbase/pb_data/data.db`) : ingredie
 - Une colonne fraîchement ajoutée par PB est `DEFAULT '' NOT NULL` (texte) : les rows existantes portent `''`, pas NULL — un backfill doit cibler les deux (`WHERE col = '' OR col IS NULL`). Utile pour T3 (mêmes deltas backfill).
 - Colonne de `_migrations` = `file` (pas `filename`).
 - `migrate up` ne demande pas de confirmation (contrairement à `migrate collections`, piège T1).
+
+### T3 — Deltas schéma : locks (id relax + userName), teams (5 champs), share_links.createdBy, events (description, minContrib) (06-10)
+
+**Fait établi** : 4 migrations delta par thème (timestamps 1791278600-03, > delta T2) :
+- `1791278600_locks_id_relax_username.js` — id locks `text3208210256` : max 15→40, pattern `^[a-z0-9]+$`→`^[a-z0-9_-]+$` (miroir exact du précédent recipes `1777813747`, même field id) + champ texte `userName` (down : restauration symétrique).
+- `1791278601_teams_fields.js` — `createdBy` (relation users maxSelect 1), `roles` (json), `description`/`city` (text), `isPublic` (bool) ; typage miroir de `1700000001` (consulté dans l'historique git).
+- `1791278602_share_links_createdby_backfill.js` — `createdBy` (relation users maxSelect 1) + backfill SQL.
+- `1791278603_events_description_mincontrib.js` — `description` (text), `minContrib` (number, onlyInt false).
+
+**Décisions de backfill (arbitrage enveloppe)** :
+- `share_links.createdBy` ← `events.createdBy` du target (`target_id` + `link_type="event"`) uniquement quand résolvable ; garde `EXISTS (... AND e.createdBy != '')` pour ne jamais écrire une valeur vide. Colonne fraîche = `DEFAULT '' NOT NULL` → `WHERE createdBy = '' OR createdBy IS NULL` (piège T2). Résultat dev : **3/3 liens backfillés**, 0 non résolu (prévisible : les 10 events portaient tous un createdBy non vide ; vérification SQL `sqlite3 -readonly` avant/après, cf. logs `t3-pbdata-sha.txt`, probes json).
+- `teams.createdBy` : **pas de backfill** (heuristique invérifiable — le créateur n'est pas dérivable de `members` sur les teams existantes). Les 6 teams dev portent `createdBy = ''` ; les rules T4 devront porter une clause grand-père (`createdBy = "" || ...`).
+- `locks.userName` : pas de backfill (0 row locks en dev ; valeur d'affichage, `''` acceptable).
+
+**Application** (backup préalable `/tmp/orchestrate/pb_data-backup-t3/`, sha256 `data.db` backup = dev vérifié identique `b5ebaa40…`) :
+1. Bootcheck sur copie fraîche du backup (`pb_data-bootcheck-t3`) : `migrate up --dir <copie> --migrationsDir <abs> --hooksDir <abs>` → 4× « Applied » (log `/tmp/orchestrate/t3-bootcheck-migrate-up.log`) ; bootcheck serve 8091 + sondes vertes pré-validation.
+2. Dev DB : `cd pocketbase && ./pocketbase migrate up` → mêmes 4 lignes (log `/tmp/orchestrate/t3-dev-migrate-up.log`). `_migrations` : **96 lignes** = 92 post-T2 + 4.
+
+**Verdicts des sondes curl** (dev, port 8090, `pb-dev.sh` nohup, user de test créé puis auto-supprimé — register users public ; nettoyage vérifié SQL : counts initiaux restaurés) :
+
+| Sonde | Commande | Obtenu |
+|---|---|---|
+| LOCK-1 | `POST locks` `{"id":"doc_test123456789","userName":"probe-t3",...}` puis DELETE | **200** / **204** |
+| HOOK-7 (teams) | `POST teams` (roles/description/city/isPublic) puis `PATCH {"roles":{...},"description":"x"}` puis DELETE | **200** / **200** / **204** |
+| B3 (share_links) | `POST share_links` avec `createdBy` | **200** (`createdBy` persisté) |
+| A1/B5 (events) | `POST events` avec `description`/`minContrib` | **200** (valeurs persistées) |
+
+Logs probes : `/tmp/orchestrate/t3-dev-probe-*.json`.
+
+**Fast-win (défaut découvert par les sondes, fixé dans son propre commit)** : `pb_hooks/teams-resync-events.pb.js` appelait `team.originalCopy()` — **méthode supprimée des bindings JSVM PB 0.37.5** → TypeError sur CHAQUE update teams, enveloppé par PB en `400 "Failed to update record."` (data vide) alors que le save persiste (hook AfterSuccess : erreur propagée au client, écriture conservée). Symptôme piégeux : PATCH 400 + données modifiées. Fix : `originalCopy()` → `original()` (1 ligne, sémantique identique — « shallow copy populated with its ORIGINAL db data state » selon types.d.ts). Preuve : PATCH teams 400 avant / 200 après, log `--dev` `/tmp/orchestrate/t3-bootcheck-serve4.log` (trace `TypeError: Object has no member 'originalCopy'`). Impact client latent : toute édition d'équipe renvoyait 400 côté API (l'UI devait tolérer/enregistrer l'erreur) — le hook tournait-il en dev ? Oui, pb-dev.sh charge pb_hooks ; bug présent depuis l'introduction du hook (API 0.23-era) si aucune mise à jour d'équipe n'a été faite depuis.
+
+**Typegen** : `bun run generate-types` → `pb-generated.ts` +11/-2 : `EventsRecord` +description/minContrib, `LocksRecord` +userName, `ShareLinksRecord` +createdBy (RecordIdString), `TeamsRecord` devient générique `<Troles = unknown>` + 5 champs, `TeamsResponse` suit. Canon intact malgré le generic (défaut de type param).
+
+**Écarts `pb.d.ts` vs schéma (à traiter en T5/T6, non édités ici)** :
+- `Kteams`/`Teams` : `{name, members}` — manque createdBy/roles/description/city/isPublic.
+- `Locks` : manque `userName`.
+- `Main`/`Events` : manque `description`/`minContrib`/`guestUsers` ; porte toujours `joinToken` (type mort, connu audit).
+- `ShareLinks` : déjà à jour (`createdBy` présent — le client était en avance sur la DB).
+
+**Canon** : `bun run check` = 179 fichiers, 0 erreur, 6 warnings (inchangés) ; `bun run test` = 56/56 verts (logs `/tmp/orchestrate/t3-{check,test}-mig-26-10-06.log`). Tous les process PB stoppés (ports 8090/8091 libres).
+
+**Pièges T3** :
+- Le constructeur JSVM est `JSONField`, **pas** `JsonField` (`ReferenceError` à l'apply — types.d.ts L541).
+- `query.one()` SANS argument DynamicModel → **panic Go** (`dbx.(*Rows).one` nil dest, SIGSEGV) : pas de `.one()` nu en JSVM ; pour compter, passer par l'API core (`app.countRecords(...)`) ou vérifier hors migration (choix retenu : sqlite3 externe, journal ci-dessus).
+- `Record.originalCopy()` n'existe plus en 0.37.5 → `Record.original()` (fast-win ci-dessus).
+- Défauts SQL par type de colonne fraîche : TEXT/BOOLEAN = `''`/`FALSE` NOT NULL (piège T2 confirmé), **JSON = NULL nullable** (`roles` : `PRAGMA table_info` → notnull 0, dflt NULL) — un backfill JSON devra cibler NULL et non `''`.
+- Pattern diagnostic serveurs PB : le PID affiché par `nohup … &` est celui du shell wrapper, pas de PB ; un 2e boot sur le même port échoue en silence dans le log (bind error) et l'ANCIEN serveur continue de répondre — vérifier `pgrep -af 'pocketbase serve'` et le log de boot avant toute conclusion A/B.
 
 ## Constats différés (deferred — tag `!` bientôt / `S2` gating déploiement / `?` conditionnel)
 

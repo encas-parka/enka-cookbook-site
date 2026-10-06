@@ -30,7 +30,7 @@ Ré-ajouter par **nouvelles migrations** (jamais éditer les fichiers existants)
 
 ## Critères
 
-- [ ] Migrations delta appliquées (backup fait) ; 4 sondes curl vertes loggées dans run.md
-- [ ] `pb-generated.ts` régénéré ; `pb.d.ts` écartés documentés (fix en T5/T6)
-- [ ] `bun run check` au canon (0 erreur / 6 warnings connus)
-- [ ] run.md amendé (journal T3)
+- [x] Migrations delta appliquées (backup fait) ; 4 sondes curl vertes loggées dans run.md
+- [x] `pb-generated.ts` régénéré ; `pb.d.ts` écartés documentés (fix en T5/T6)
+- [x] `bun run check` au canon (0 erreur / 6 warnings connus)
+- [x] run.md amendé (journal T3)

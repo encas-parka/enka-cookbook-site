@@ -206,11 +206,13 @@ export type EventsRecord<Tcontributors = unknown, Tdate = unknown, TguestEmails 
 	date?: null | Tdate
 	dateEnd?: IsoDateString
 	dateStart?: IsoDateString
+	description?: string
 	guestEmails?: null | TguestEmails
 	guestUsers?: RecordIdString[]
 	id: string
 	location?: string
 	meals?: null | Tmeals
+	minContrib?: number
 	name: string
 	status?: EventsStatusOptions
 	teams?: RecordIdString[]
@@ -250,6 +252,7 @@ export type LocksRecord = {
 	recordId?: string
 	updated: IsoAutoDateString
 	userId?: RecordIdString
+	userName?: string
 }
 
 export const MaterielTypeOptions = {
@@ -433,6 +436,7 @@ export type RecipesRecord<Tastuces = unknown, Tcategories = unknown, Tingredient
 export type ShareLinksRecord = {
 	access_level?: string
 	created: IsoAutoDateString
+	createdBy?: RecordIdString
 	expiresAt?: IsoDateString
 	id: string
 	isActive?: boolean
@@ -455,11 +459,16 @@ export type TeamdocsRecord = {
 	updated: IsoAutoDateString
 }
 
-export type TeamsRecord = {
+export type TeamsRecord<Troles = unknown> = {
+	city?: string
 	created: IsoAutoDateString
+	createdBy?: RecordIdString
+	description?: string
 	id: string
+	isPublic?: boolean
 	members?: RecordIdString[]
 	name: string
+	roles?: null | Troles
 	updated: IsoAutoDateString
 }
 
@@ -496,7 +505,7 @@ export type PurchasesResponse<Tstore = unknown, Texpand = unknown> = Required<Pu
 export type RecipesResponse<Tastuces = unknown, Tcategories = unknown, Tingredients = unknown, Tmateriel = unknown, TprepAlt = unknown, Tregime = unknown, Tsaison = unknown, Tteams = unknown, Texpand = unknown> = Required<RecipesRecord<Tastuces, Tcategories, Tingredients, Tmateriel, TprepAlt, Tregime, Tsaison, Tteams>> & BaseSystemFields<Texpand>
 export type ShareLinksResponse<Texpand = unknown> = Required<ShareLinksRecord> & BaseSystemFields<Texpand>
 export type TeamdocsResponse<Texpand = unknown> = Required<TeamdocsRecord> & BaseSystemFields<Texpand>
-export type TeamsResponse<Texpand = unknown> = Required<TeamsRecord> & BaseSystemFields<Texpand>
+export type TeamsResponse<Troles = unknown, Texpand = unknown> = Required<TeamsRecord<Troles>> & BaseSystemFields<Texpand>
 export type UsersResponse<Texpand = unknown> = Required<UsersRecord> & AuthSystemFields<Texpand>
 
 // Types containing all Records and Responses, useful for creating typing helper functions

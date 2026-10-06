@@ -14,7 +14,8 @@
 _(rafraîchi par l'orchestrateur à chaque portail — dernière mise à jour : après T2, 06-10)_
 
 - **Base** : `e9f8c6cd` « build » (HEAD `mig/pocketbase` = origin au démarrage, 06-10)
-- **HEAD après T8** : `385e6802` (join-event durci 52/52 sondes, route lookup-user, client `pb-users.ts` + inviteParticipants résolu). **Frontier : T9** (T9 dépend de T8 — endpoint en place).
+- **HEAD après T9** : `deb9ba57` (send-emails ownership + réconciliation serveur ; client lookup migré ; 18/18 sondes). **Frontier : T10.**
+- **Fait T9** : sans host SMTP configuré, PB fallback sendmail (absent) → échec par destinataire capturé (`ok:false`), 200 propre — les 2 branches documentées dans le hook. `EventShareLinks.svelte` déjà conforme (note T5 obsolète). Note déploiement : `ENKA_BASE_URL` obligatoire en prod (différé S2 loggé).
 - **Piège JSVM majeur (T8)** : `record.get()` sur champ JSON = export goja du `[]byte` brut — muter corrompt la donnée ; utiliser `getString()` + `JSON.parse`. Bug latent restant : `invite-to-team.pb.js` (`roles`) → intégré à T10.
 - **Différé `!` ajouté (T8)** : invite-to-team roles JSON (cf. ci-dessus) — T10.
 - **Canon check-legacy mis à jour : baseline 192 erreurs** (T6 a corrigé RecipesStore:633:48 au passage ; exigence inchangée : 0 nouvelle erreur). Canon test : 61/61.
@@ -72,7 +73,9 @@ _(rafraîchi par l'orchestrateur à chaque portail — dernière mise à jour : 
 - **JSVM : PB hot-reloade `pb_hooks` au changement de fichier** (« File … changed, restarting… » dans le log serveur) — itérer sur un hook sans restart, port 8090 reste servi.
 - **Logs PB 0.37** : `$app.logger()` n'imprime pas en console au niveau info/warn par défaut — les lignes vont dans la table `_logs` de **`auxiliary.db`** (pas `data.db`) ; vérification par `sqlite3 -readonly pocketbase/pb_data/auxiliary.db "SELECT … FROM _logs …"`.
 - **Tokens JWT dans les sondes curl** : un copier-coller manuel d'un token de 150+ chars = 401 fantôme quasi indétectable (T8, 1er run P1) — passer par la sonde python (pattern T4) qui garde les tokens en variables, jamais à la main.
-- **PB sans host SMTP** : `settings.meta.senderAddress` a un défaut non vide en dev (le guard « SMTP non configure » du mailer ne throw pas) et `newMailClient().send()` bascule sur le binaire **sendmail** (absent en conteneur) → erreur par email, capturée (`ok:false`, « failed to locate a sendmail executable path ») — T9, mesuré. En prod : host SMTP configuré ; définir aussi `ENKA_BASE_URL` (fallback bruyant, cf. T9/différés).
+- **PB 0.37.5 purge nativement les références de relation pendantes au delete du parent** (single → `''`, multi → id retiré ; T10, mesuré) : les cascades `onRecordAfterDeleteSuccess` basées sur filtres relation sont des no-ops (relations déjà nettoyées), les enfants à relation **required** rendent le parent in-suppimable (400 « required reference ») avant tout hook — les cascades doivent être des hooks BEFORE (`onRecordDelete`) si elles veulent voir/matchter les enfants. Les hooks T10 (events/teams) sont des before-hooks fail-closed. L'affirmation audit « events.teams garde des ids pendants » est fausse sur 0.37.5 (purge native) ; le bloc explicite reste pour le bump `updated` (delta sync).
+- `_logs.created` (auxiliary.db) = **UTC avec `Z`** (`strftime('%Y-%m-%d %H:%M:%fZ')`) — un filtre `created >= '<heure locale>'` sans Z renvoie 0 ligne silencieusement (T10) ; filtrer en UTC ou par `rowid`.
+- PB sans host SMTP : `settings.meta.senderAddress` a un défaut non vide en dev (le guard « SMTP non configure » du mailer ne throw pas) et `newMailClient().send()` bascule sur le binaire **sendmail** (absent en conteneur) → erreur par email, capturée (`ok:false`, « failed to locate a sendmail executable path ») — T9, mesuré. En prod : host SMTP configuré ; définir aussi `ENKA_BASE_URL` (fallback bruyant, cf. T9/différés).
 
 ## Journal par ticket (rempli par les implémenteurs à l'amend)
 
@@ -418,6 +421,45 @@ Teardown API (4 links + event + 2 users, 204) ; SQL readonly post-run : **0 rés
 
 **Note WIP fence** : le commit docs inclut l'édition orchestrateur du header run.md (portail post-T8, présente non commitée à l'arrivée, anodine) — commit whole-file d'un fichier que le ticket devait de toute façon amender, conformément au RUN-CONTRACT (pattern T2/T6/T7/T8).
 
+### T10 — Cascade deletes complètes (HOOK-4, HOOK-5, C10) + règle teamdocs team-scopé + fix invite-to-team roles (06-10)
+
+**Fait établi** (3 fichiers hooks + 1 migration, matrice 44/44 sur copie bootcheck PUIS sur dev 8090) :
+- **HOOK-4/C10 — `cascade-delete-event.pb.js` refondu en hook BEFORE (`onRecordDelete`)** : ajout des blocs manquants (materiel_loan eventId, notifications purge `link ~ eventId || data ~ eventId`) ET changement d'architecture — **découverte majeure** (voir Pièges) : en `onRecordAfterDeleteSuccess`, PB 0.37.5 a déjà nullifié les relations pendantes des enfants → les filtres `eventId = ...` trouvent 0 row (hooks historiques = no-ops pour tout sauf les références TEXTE), et un event référencé par une relation **required** (products/purchases/event_materiel/event_todos.eventId) est **in-suppimable** (400 « required reference ») AVANT tout hook. Le hook before supprime les enfants quand leurs relations sont intactes, rend le delete des events chargés possible, et rend le cascade atomique (même transaction). **Fail-closed** : les try/catch log-only historiques sont retirés — tout échec de cascade propage et annule le delete (angle mort audit « delete partiel sans échec visible » corrigé).
+- **HOOK-5 — `cascade-delete-teams.pb.js` refondu en `onRecordDelete`** : ajout materiel_loan `ownerId = teamId` → **DELETE** (décision ticket : un loan sans équipe propriétaire n'a pas de sens ; alternative null écartée) ; bloc `events.teams` conservé mais déplacé en before — le save explicite **bumpe `updated`** des events nettoyés (mesuré : bump effectif) → delta sync client, alors que le cleanup natif PB ne bump pas. Fail-closed idem.
+- **invite-to-team `roles` (différé T8 clos)** : `team.get("roles")` (wrapper goja `[]byte`) → `getString("roles")` + `JSON.parse` + garde (objet pur, pas array) + `set` objet natif ; parse error → `{}`. **Preuve par sonde structurée** (SMTP absent, pas d'envoi réel — le save a lieu AVANT l'envoi) : team avec roles pré-existants `{"t10preset":"custom"}` + invite d'un user existant → SQL `roles = {"t10preset":"custom","<bobId>":"member"}` — JSON valide, preset préservé, pas de corruption byte (l'ancien code aurait produit un array mixte ou un rejet `validation_invalid_json`). Re-invite → `already_member`, roles inchangés. L'email part quand même (build template + sendBatch) → échec sendmail capturé par destinataire (`ok:false`), 200 propre — cohérent T9.
+- **teamdocs team-scopé (différé T6 clos)** : migration `1791280500_teamdocs_team_scoped_rules.js` (> 1791278800) — les 5 règles (identiques eventId-only dans le snapshot) étendues symétriquement : create `+ @request.body.teamId.members ~ auth`, list/view/update/delete `+ teamId.members ~ auth` (miroir REC-7 materiel, pattern T4 prouvé). down() = restauration eventId-only.
+
+**Verdicts des sondes** (44/44 — `.scratch/probes/t10-cascade-matrix.py`, logs `/tmp/orchestrate/t10-matrix-{8091,8090}.log`, 3 users `t10-alice/bob/carol@test.local` créés puis auto-supprimés ; chaque sonde = 1 assert dur, teardown best-effort en finally) :
+
+| # | Sonde | Verdict dev |
+|---|---|---|
+| P1-P20 | setup : 3 users, 3 teams, 3 events (E1=[A], E2=[A,B], E3=[B]), 6 enfants E1 (product, purchase, event_materiel, event_todo, teamdoc event-scopé, share_link), loan L1 (eventId+ownerId), notif match + notif contrôle, 4 enfants T10B (materiel, teamdoc team-scopé, share_link team, loan L2) | **OK** (tout 200) |
+| P21-P28 | teamdocs rules : bob (membre) create team-scopé sans eventId → 200 ; update/view/list → 200/200/visible ; delete → 204 ; carol (non-membre) create → **400 règle data:{}** (matérialisation PB du « 403 » du ticket, pattern T4) ; list → absent ; view → 404 | **OK** |
+| P29-P34 | invite-to-team : carol non-membre → 403 ; PATCH roles preset → 200 ; invite bob (existant) → `action=added` ; roles SQL = JSON valide preset+bob ; re-invite → `already_member` ; roles inchangés | **OK** |
+| P35-P37 | cascade EVENT : comptes pré-delete = 1 partout ; alice DELETE E1 → **204** (avant fix : 400 required-reference, cf. Pièges) ; post : 0 orphelin sur les 8 zones + notif contrôle vivante + 0 product détaché | **OK** |
+| P38-P41 | cascade TEAM : comptes pré = 1 partout ; DELETE T10B → 204 ; E2.teams=[A], E3.teams=[] ; **E2.updated bumpé** (12:40:14.011Z → 12:40:14.209Z) ; 0 orphelin + 0 détaché (materiel/teamdocs/loans supprimés par le hook, counts loggés `deleted:1`) | **OK** |
+| P42-P43 | comptes finaux = baseline exacte (events 10, teams 6, users 32, materiel 110, loans 2, notifs 0, share_links 3, teamdocs 10) + **0 résidu `t10-`** | **OK** |
+
+Logs hooks vérifiés dans `_logs` (auxiliary.db) : cascade E1 → `materiel_loan deleted:1`, `notifications deleted:1`, `teamdocs deleted:1` ; cascade T10B → `totalDeleted:4` + `events.teams nettoye events:2`.
+
+**Application** (backup préalable `/tmp/orchestrate/pb_data-backup-t10/`, sha256 `data.db` avant `4287c2c6...`) : bootcheck sur copie fraîche du backup (`migrate up` → « Applied 1791280500... », serve 8091, 0 erreur hooks, matrice 44/44) PUIS dev : `cd pocketbase && ./pocketbase migrate up` → même ligne (log `/tmp/orchestrate/t10-dev-migrate-up.log`). `_migrations` : **98 lignes** = 97 post-T4 + 1. Règles vérifiées SQL (`_collections.listRule` teamdocs). Hooks = fichiers chauds (pas de migration) mais revalidés par la matrice dev complète. PB stoppé en fin de ticket (ports 8090/8091 libres), copie bootcheck trashed.
+
+**Canon** : `bun run check` = 179 fichiers, 0 erreur, 6 warnings (inchangés) ; `bun run test` = **69/69** ; `check-legacy` = **190 = baseline** (aucun fichier client touché — logs `/tmp/orchestrate/t10-{check,test,check-legacy}-mig-26-10-06.log`). Typegen non requis (migration de règles, 0 changement de champs).
+
+**Découvertes (pièges — détail en section Pièges globale)** :
+- **PB 0.37.5 nullifie les références de relation pendantes AU delete du parent** (après le hook AfterSuccess) : single → `''`, multi → id retiré du array. Trois conséquences : (1) les cascades AfterSuccess basées sur des filtres relation sont des **no-ops** (les 6 blocs historiques du hook events loggaient `deleted:0` depuis toujours — vérifié dans les logs T5/T6 historiques de la copie) ; (2) les relations **required** des enfants **refusent le delete du parent** (400 « the record cannot be deleted because it is part of a required reference ») — un event avec products/purchases/event_materiel/event_todos était **in-suppimable** via l'API (mesuré : le même delete E1 passe de 400 à 204 avec le hook before) ; (3) l'affirmation HOOK-5 de l'audit « events.teams garde des ids pendants » est **fausse pour PB 0.37.5** (purge native mesurée : E2=[A], E3=[] sans intervention) — le bloc explicite reste pour le bump `updated` (delta sync).
+- **Enfants détachés par PB ≠ orphelins référencant un mort** : le constat audit « loans orphelins (eventId) » se matérialise en « loans DETACHÉS (eventId=""  ownerId="") mais toujours en base » — la pollution est réelle, le mécanisme différent ; c'est ce qui rend le hook before nécessaire.
+- `_logs.created` = `strftime('%Y-%m-%d %H:%M:%fZ')` **UTC avec Z** — un filtre `created >= '14:26'` (heure locale sans Z) renvoie 0 ligne silencieusement ; filtrer en UTC ou par `rowid`.
+- `sqlite3 -readonly` ne voit pas le contenu WAL non checkpointé — mais PB 0.37.5 checkpointe vite (wal 0 octet observé en activité) ; les logs `_logs` restent la méthode fiable.
+
+**Observations reportées (hors périmètre T10)** :
+- La purge notifications reste pragmatique (match sous-chaîne link/data) : faux positifs théoriques (id PB 15 chars réapparaissant par hasard — négligeable) et faux négatifs (notification référençant l'event autrement que par son id) — limites documentées dans le header du hook.
+- Les events dont les teams sont supprimées gardent `contributor`/`guestUsers` intacts (pas du ressort team-cascade) ; C3 (collection notifications morte côté client) inchangé — les notifications créées pour un event sont désormais au moins purgées à sa suppression.
+- `materiel_loan.deleteRule = createdBy = auth` + client sans createdBy (loans UI indestructibles) : différée T6, TOUJOURS VALABLE (T10 n'y touche pas ; la sonde a posé createdBy explicitement).
+- Hooks BEFORE + fail-closed : un delete d'event/team déclenchant une erreur cascade est désormais annulé net (avant : partiel possible). Aucun cas connu où un enfant `$app.delete` échouerait (superuser) — comportement théorique, documenté dans les headers.
+
+**Note WIP fence** : le commit docs inclut l'édition orchestrateur du header run.md (portail post-T9, présente non commitée à l'arrivée, anodine) — commit whole-file d'un fichier que le ticket devait de toute façon amender, conformément au RUN-CONTRACT (pattern T2/T6/T7/T8/T9).
+
 ## Constats différés (deferred — tag `!` bientôt / `S2` gating déploiement / `?` conditionnel)
 
 - **S2** : secret share_links ≠ id (token dédié) — refonte URL/invitations. (décision enveloppe, voir ci-dessus)
@@ -425,8 +467,8 @@ Teardown API (4 links + event + 2 users, 204) ; SQL readonly post-run : **0 rés
 - **?** : C3 — collections mortes `event_todos` / `notifications` (trancher migrer vs supprimer — produit).
 - **?** : C5 — 3e argument `sendEmailToExistingMembers` de `createEventWithTeams` ignoré (implémenter ou retirer l'option UI — produit).
 - `!` côté SITE (pas ici) : régression `isDynamic` perdue par revert `88de525a` — à corriger upstream enka-next, NE PAS porter.
-- `!` backend delta : `teamdocs.createRule` exige `eventId.*` — le flux doc d'équipe (`createDocument`, teamId sans eventId) est rejeté 400 règle (mesuré T6 P4b) ; ajouter `|| teamId.members ~ @request.auth.id` (migration rules, pattern T4).
-- `!` backend : `invite-to-team.pb.js` — `team.get("roles")` + mutation + `set` = même corruption JSON que T8 (export goja du `[]byte`) ; fix `getString()+JSON.parse` (≤ 5 lignes, pattern join-event T8) ; preuve à construire avec SMTP configuré (mesuré T8, journal).
+- `!` backend delta : ~~`teamdocs.createRule` exige `eventId.*`~~ **Fait T10** (migration `1791280500`, 5 règles étendues symétriquement, matrice pos/neg verte).
+- `!` backend : ~~`invite-to-team.pb.js` roles goja~~ **Fait T10** (getString+JSON.parse+set natif ; preuve sonde : preset préservé + roles valides en SQL, sans SMTP).
 - `!` backend ou client : `materiel_loan.deleteRule = createdBy = auth` mais le client ne set jamais `createdBy` à la création → loans UI indestructibles via l'API (T6 a contourné en SQL) ; setter `createdBy = userId` dans `createLoan` (pattern C9) ou revoir la règle.
 - Images recettes (20 valeurs `img` frontmatter, og:image déjà cassées côté Hugo) — décision produit Phase 2.
 - **S2** déploiement : définir `ENKA_BASE_URL` dans l'env du serveur PB (URL publique sans slash final) — sans elle, les liens emails pointent vers la prod et chaque build d'email logge une erreur (fallback volontairement bruyant, T9). À intégrer à la checklist Dokploy (Phase 1.8).

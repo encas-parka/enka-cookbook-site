@@ -8,7 +8,8 @@
  * - Pas de cache statique (évite les bugs de synchronisation)
  * - Fonctions pures testables
  * - Réactivité garantie via Svelte 5 $derived
- * - Utilise directement les données de EnrichedEvent (dateStart, dateEnd, allDates déjà présents)
+ * - Utilise directement les données de EnrichedEvent (dateStart, dateEnd déjà présents ;
+ *   les dates dérivées viennent de getEventDates dans events.utils)
  */
 
 import type { EnrichedEvent } from "$lib/types/events";
@@ -177,7 +178,7 @@ export function useEventStats(event: EnrichedEvent | null) {
     contributors,
     contributorsStats: getContributorsStats(event),
     eventName: event?.name || "",
-    // NOTE: dateStart, dateEnd et allDates sont déjà dans EnrichedEvent (hérités de Main)
+    // NOTE: dateStart et dateEnd sont déjà dans EnrichedEvent (hérités de Main)
     startDate: event?.dateStart || null,
     endDate: event?.dateEnd || null,
     missingRecipes,

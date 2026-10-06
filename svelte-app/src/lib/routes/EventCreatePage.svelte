@@ -163,27 +163,18 @@
       new Set(sortedMeals.map((m) => m.date)),
     ).sort();
 
-    // Récupérer les noms des teams sélectionnés pour l'affichage
-    const teamNames = selectedTeams
-      .map((teamId) => {
-        const team = teamsStore.getTeamById(teamId);
-        return team?.name || "";
-      })
-      .filter(Boolean);
-
     // Préparer les données de l'événement
+    // `teams` = relation PocketBase → ids ; `date` (JSON) est dérivé des repas côté store
     const eventData = {
       name: eventName,
       description,
       status: status as MainStatus,
-      allDates: allDatesSorted as string[],
-      dateStart: allDatesSorted.length > 0 ? allDatesSorted[0] : "",
+      dateStart: allDatesSorted.length > 0 ? allDatesSorted[0] : null,
       dateEnd:
         allDatesSorted.length > 0
           ? allDatesSorted[allDatesSorted.length - 1]
-          : "",
-      teams: teamNames, // Noms des équipes pour affichage
-      teamsId: selectedTeams, // IDs des équipes pour filtrage
+          : null,
+      teams: selectedTeams,
       contributors: contributorsToSave,
       meals: sortedMeals,
     };

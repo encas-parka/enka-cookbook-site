@@ -53,18 +53,12 @@
   // Les événements entrants sont déjà triés par date dans le store
   // Le filtre préserve l'ordre établi
   const teamCurrentEvents = $derived.by(() => {
-    return currentEvents.filter(
-      (event) =>
-        event.teamsId?.includes(team.id) || event.teams?.includes(team.name),
-    );
+    return currentEvents.filter((event) => event.teams?.includes(team.id));
   });
 
   const teamPastEvents = $derived.by(() => {
     return pastEvents
-      .filter(
-        (event) =>
-          event.teamsId?.includes(team.id) || event.teams?.includes(team.name),
-      )
+      .filter((event) => event.teams?.includes(team.id))
       .slice(0, 3); // 3 événements passés récents
   });
 

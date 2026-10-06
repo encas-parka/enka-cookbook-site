@@ -187,7 +187,6 @@
   // DONNÉES RÉACTIVES DÉRIVÉES EN LECTURE SEULE (Single Source of Truth depuis currentEvent)
   // Note: eventName est maintenant un $state local (shadow draft), pas un $derived
   const contributors = $derived(getContributors(currentEvent));
-  const selectedTeams = $derived(currentEvent?.teamsId ?? []);
 
   const isLockedByOthers = $derived.by(() => {
     if (!activeLock) return false;
@@ -525,44 +524,23 @@
       return false;
     }
 
-    // Contributors existants
-    const contributorsToSave = contributors;
-
     const allDatesSorted = Array.from(
       new Set(sortedMeals.filter((m) => m.date !== "").map((m) => m.date)),
     ).sort();
-
-    // Récupérer les noms des teams sélectionnés
-    // 1. Commencer avec les noms existants de currentEvent
-    const existingTeamNames = currentEvent?.teams || [];
-    const existingTeamIds = currentEvent?.teamsId || [];
-    const teamNamesMap = new Map(
-      existingTeamIds.map((id, index) => [id, existingTeamNames[index]]),
-    );
-
-    // 2. Ajouter/mettre à jour les noms depuis nativeTeamsStore pour les teams sélectionnés
-    const teamNames = selectedTeams.map((teamId) => {
-      // Priorité: valeur depuis nativeTeamsStore, sinon valeur existante, sinon ID
-      const team = nativeTeamsStore.getTeamById(teamId);
-      return team?.name || teamNamesMap.get(teamId) || teamId;
-    });
 
     const eventData = {
       name: eventName,
       description,
       status,
       minContrib,
-      allDates: allDatesSorted as string[],
-      dateStart: allDatesSorted.length > 0 ? allDatesSorted[0] : "",
+      dateStart: allDatesSorted.length > 0 ? allDatesSorted[0] : null,
       dateEnd:
         allDatesSorted.length > 0
           ? allDatesSorted[allDatesSorted.length - 1]
-          : "",
+          : null,
 
-      // ON ne save pas, car peut etre édité de manière concurrente par d'autre utilisateur
-      // teams: teamNames, // Noms des équipes pour affichage
-      // teamsId: selectedTeams, // IDs des équipes pour filtrage
-      // contributors: contributorsToSave,
+      // Pas de teams/contributors ici : éditables de manière concurrente
+      // par d'autres utilisateurs (gestion via PermissionsManager/invitations)
       meals: sortedMeals,
     };
     try {

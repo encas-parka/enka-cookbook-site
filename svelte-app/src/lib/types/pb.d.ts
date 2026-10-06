@@ -77,6 +77,8 @@ export type Main = PbDoc & {
   date: unknown | null;
   dateStart: string | null;
   dateEnd: string | null;
+  description: string | null;
+  minContrib: number | null;
   teams: string[] | null;
   status: EventsStatusOptions | null;
   guestEmails: unknown | null;

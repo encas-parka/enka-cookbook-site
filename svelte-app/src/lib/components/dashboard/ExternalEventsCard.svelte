@@ -24,7 +24,8 @@
 
     return currentEvents.filter((event) => {
       // L'événement n'appartient pas aux équipes de l'utilisateur
-      const belongsToUserTeams = event.teamsId?.some((id) =>
+      // (la relation teams porte des ids PocketBase)
+      const belongsToUserTeams = event.teams?.some((id) =>
         userTeamIds.includes(id),
       );
 
@@ -40,7 +41,7 @@
   // Événements des équipes de l'utilisateur
   const teamEvents = $derived.by(() => {
     return currentEvents.filter((event) => {
-      return event.teamsId?.some((id) => userTeamIds.includes(id));
+      return event.teams?.some((id) => userTeamIds.includes(id));
     });
   });
 

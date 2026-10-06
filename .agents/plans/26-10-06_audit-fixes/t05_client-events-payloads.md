@@ -24,8 +24,8 @@ Faire passer les flux create/update d'event : la relation `teams` reçoit des **
 
 ## Critères
 
-- [ ] Create event avec team sélectionnée : payload = ids + champs valides (sonde curl 200 loggée dans run.md)
-- [ ] Update/auto-save : plus d'`allDates`/`teamsId` dans le serializer (grep vert) ; lecteurs allDates convertis ou confirmés inexistants
-- [ ] Dates vides → `null`
-- [ ] `Main.joinToken` retiré du type
-- [ ] `bun run check` au canon ; run.md amendé (journal T5)
+- [x] Create event avec team sélectionnée : payload = ids + champs valides (sonde curl 200 loggée dans run.md)
+- [x] Update/auto-save : plus d'`allDates`/`teamsId` dans le serializer (grep vert) ; lecteurs allDates convertis ou confirmés inexistants
+- [x] Dates vides → `null`
+- [x] `Main.joinToken` retiré du type
+- [x] `bun run check` au canon ; run.md amendé (journal T5)

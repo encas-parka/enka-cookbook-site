@@ -15,6 +15,7 @@
   import type { EnrichedEvent } from "$lib/types/events.d";
   import { navigate } from "$lib/router";
   import { formatDateShort } from "@/lib/utils/products-display";
+  import { getEventDates } from "$lib/utils/events.utils";
   import {
     getMealsCount,
     getTotalRecipes,
@@ -30,6 +31,9 @@
   }
 
   let { event, cardClass = "", contributorStatus = null }: Props = $props();
+
+  // Dates dérivées du JSON `date` (fallback : dates des repas)
+  const eventDates = $derived(getEventDates(event));
 </script>
 
 <div
@@ -52,7 +56,7 @@
         {event.name}
       </div>
       <div class="badge h-auto font-medium">
-        {#if event.allDates && event.allDates.length > 1 && event.dateStart && event.dateEnd}
+        {#if eventDates.length > 1 && event.dateStart && event.dateEnd}
           <Calendar class="h-4 w-4" />
           {formatDateShort(event.dateStart)} au {formatDateShort(event.dateEnd)}
         {:else if event.dateStart}

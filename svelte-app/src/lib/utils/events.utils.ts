@@ -115,3 +115,22 @@ export function parseEventTodos(
     },
   });
 }
+
+/**
+ * Liste unique et triée des dates d'un événement.
+ *
+ * Source de vérité : le champ JSON `date` (peuplé à l'écriture, dérivé des repas).
+ * Retombe sur les dates des repas pour les records antérieurs où `date` est vide.
+ * Sert à la fois côté lecture (affichage) et côté écriture (peuplement de `date`).
+ */
+export function getEventDates(event: {
+  date?: unknown | null;
+  meals?: Pick<EventMeal, "date">[] | null;
+}): string[] {
+  const stored = Array.isArray(event.date) ? event.date : [];
+  const dates =
+    stored.length > 0
+      ? stored
+      : (event.meals ?? []).map((m) => m.date).filter(Boolean);
+  return [...new Set(dates)].sort();
+}

@@ -87,7 +87,6 @@ export interface EnrichedEvent extends Omit<
   contributors: EventContributor[];
   todos: EventTodo[];
   teams?: string[];
-  teamsId?: string[];
   status: EventStatus;
 }
 
@@ -99,12 +98,10 @@ export interface EnrichedEvent extends Omit<
 export interface CreateEventData {
   name: string;
   description?: string;
-  dateStart: string;
-  dateEnd: string;
-  allDates?: string[];
+  dateStart: string | null;
+  dateEnd: string | null;
   meals?: EventMeal[];
   teams?: string[];
-  teamsId?: string[];
   contributors?: EventContributor[];
   todos?: EventTodo[];
   status?: EventStatus;
@@ -116,12 +113,10 @@ export interface UpdateEventData {
   name?: string;
   description?: string;
   minContrib?: number;
-  dateStart?: string;
-  dateEnd?: string;
-  allDates?: string[];
+  dateStart?: string | null;
+  dateEnd?: string | null;
   meals?: EventMeal[];
   teams?: string[];
-  teamsId?: string[];
   contributors?: EventContributor[];
   guestEmails?: string[];
   todos?: EventTodo[];

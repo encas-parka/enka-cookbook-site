@@ -21,6 +21,7 @@ import {
   toNeedRow,
   type ParsedNeed,
 } from "../utils/product-need-serializer";
+import { getEventDates } from "../utils/events.utils";
 import {
   exportProductsToMarkdown,
   type MarkdownExportGroup,
@@ -713,7 +714,7 @@ class ProductsStore {
       this.#setupMealsSyncEffect(eventId);
 
       // 6. Date range
-      this.dateStore.setAvailableDates([...(event.allDates || [])]);
+      this.dateStore.setAvailableDates(getEventDates(event));
       this.dateStore.initializeSmartRange();
 
       // 7. Date range effect : rebuild groups quand les dates changent
@@ -839,7 +840,7 @@ class ProductsStore {
       await db.productNeeds.bulkDelete(staleIds);
     }
 
-    this.dateStore.setAvailableDates([...(event.allDates || [])]);
+    this.dateStore.setAvailableDates(getEventDates(event));
   }
 
   // ===========================================================================

@@ -60,6 +60,8 @@ _(rafraîchi par l'orchestrateur à chaque portail — dernière mise à jour : 
 - `pb-collection.ts` : pas de curseur persisté — `since = max(updated)` de toute la table (bug scopé, port Étape 3).
 - JSVM : ES5 limité ; `console.log` incertain → `$app.logger()` ; `$os.getenv` pour l'env.
 - Nouvelle colonne PB = `DEFAULT '' NOT NULL` (rows existantes = `''`, pas NULL) : backfill → `WHERE col = '' OR col IS NULL` (détails journal T2).
+- **`bun run check` (svelte-check-native 0.7.2) ne fait PAS de diagnostics TypeScript** (mesuré T5 : erreur de type délibérée dans un `.svelte` ET un `.svelte.ts` = 0 erreur rapportée ; il ne voit que a11y/runes/compil). Le vrai audit type = `bun run check-legacy` (svelte-check) — **193 erreurs préexistantes** sur 50 fichiers (dette invisible au canon natif) : raisonner par diff par fichier, pas par « 0 erreur ». Durable : `svelte-app/CLAUDE.md` § Development Commands.
+- Champ PB inconnu dans un **PATCH** events = ignoré **en silence** (200, champ absent de la réponse) — la classe B5 (allDates/teamsId) ne rejetait jamais : elle perdait les données sans erreur. Un POST avec relation invalide (noms de teams) rejette lui en 400 (A1).
 
 ## Journal par ticket (rempli par les implémenteurs à l'amend)
 
@@ -224,6 +226,44 @@ Setup S1-S13 (register/auth ×3, teams T_A/T_B/T_G dont grand-père sans created
 - Piège sonde (run 1, corrigé) : un neg REC-7 avec `ownerUser = self` satisfaisait la clause 2 → 200 inattendu + record résidu sur la copie bootcheck (jetable, supprimée). Le vrai cas neg : ownerUser ≠ self ET hors team. Résiduel assumé : `ownerUser = self` + `teamId` d'une team dont on n'est pas membre passe la garde REC-7 (prescription littérale du ticket — pollution possible de l'inventaire d'une team par un tiers, mais list/view restent scopés).
 
 **Canon** : `bun run check` = 179 fichiers, 0 erreur, 6 warnings (inchangés) ; `bun run test` = 56/56 verts (logs `/tmp/orchestrate/t4-{check,test}-mig-26-10-06.log`). Typegen non requis (aucun changement de champs). Aucun fichier client modifié. Tous les process PB stoppés (ports 8090/8091 libres), copie bootcheck trashed.
+
+### T5 — Client events : payloads conformes au schéma (A1, B5, C7, C1) (06-10)
+
+**Fait établi** (11 fichiers modifiés + 1 test, 61/61 tests verts) :
+- **A1** : `EventCreatePage.saveEventData` envoie `teams: selectedTeams` (**ids**, relation PB) ; `teamsId` supprimé du payload ; `allDates` supprimé (pas de champ — remplacé par le JSON `date`, ci-dessous) ; bloc `teamNames` (lookup noms pour affichage) retiré, mort.
+- **B5** : `#serializeUpdateData` ne sérialise plus `allDates`/`teamsId` (grep vert : seuls restent des variables locales `allDatesValidation`/`allDatesSorted` — calculs meals, et le **prop** `allDates` d'`EventMealCard`, alimenté localement par les appelants — ni l'un ni l'autre champ du record). `EventsStore` : `#enrichEvent` (ligne teamsId), `inviteParticipants` (dédup ids seule, cast `as UpdateEventData` devenu inutile), `removeTeam` — plus aucun `teamsId`. Types `events.d.ts` : `EnrichedEvent`/`CreateEventData`/`UpdateEventData` purgés ; `dateStart`/`dateEnd` nullables.
+- **JSON `date` = source de vérité des dates** : le pipeline d'import écrit déjà `date: awEvent.allDates` (2-transform-data.ts L470-474) ; le client l'avait abandonné. Invariant rétabli **à l'écriture** : `#serializeUpdateData` et `createEventWithTeams` dérivent `date` des meals via `getEventDates()` (unique + trié) — tout update portant des meals resynchronise `date`, y compris les mutations granulaires addMeal/updateMeal/removeMeal. **À la lecture** : `getEventDates(event)` (events.utils.ts) lit le JSON `date` avec fallback meals (records antérieurs au fix, `date` vide) ; consommateurs convertis : `EventCard` (affichage plage), `ProductsStore` ×2 (`setAvailableDates`). Testé : 5 tests unitaires `__tests__/events-utils.test.ts` (mock toast.service, pattern productEnrichment.test.ts — la chaîne d'imports events.utils → safe-operation tire le service runes, non compilé par vitest).
+- **C7** : `dateStart`/`dateEnd` vides → `null` (EventCreatePage + EventEditPage ; le store passe-through, PB normalise en `''`).
+- **C1 (fast-win, commit dédié)** : `Main.joinToken` retiré de `pb.d.ts`. Dans le même type : alignement schéma post-T3 — `description`/`minContrib`/`guestUsers` ajoutés (écarts T3 « à traiter en T5/T6 » ; l'UI lit déjà `event.minContrib` (EventCard) et `event.description` (inviteParticipants) — accès fantômes au typage, invisibles du canon natif).
+- **C5** : non traité (différé produit — l'appel 3-arguments à `createEventWithTeams` reste, cf. deferred).
+
+**Lecteurs `teamsId` convertis vers `teams` (ids)** — tous morts aujourd'hui (champ jamais existé en PB), corrects post-fix : `getUpcomingEventsForUser` (EventsStore L213-215), `ExternalEventsCard` ×2, `TeamDashboardCard` ×2 (fallback sur noms supprimé — `event.teams` ne porte plus de noms), `EventEditPage` `selectedTeams` (L190, derived + bloc mort L535-548 supprimés — `selectedTeams` n'alimentait que le bloc mort) + `contributorsToSave` mort retiré. Blocage des commentaires de saveEventData mis à jour (pas de teams/contributors à l'édition : concurrence).
+
+**Verdicts des sondes curl** (dev 8090, `pb-dev.sh`, user `t5-probe@test.local` créé puis auto-supprimé) :
+
+| # | Sonde (payload EXACT post-fix) | Obtenu |
+|---|---|---|
+| P1 | POST events : teams [id team], description, minContrib, date JSON, meals, createdBy, contributors, todos, status | **200** — tout persisté ; GET expand : `teams: ['n4kk85x0265h39f']` résout `t5-team-probe` ✓ |
+| P2 | POST events : `dateStart: null, dateEnd: null, date: []` (C7, sans meals) | **200** — null accepté (PB renvoie `''`, normalisation vide) |
+| P3 | PATCH events (payload serializer post-fix : description/minContrib/dateStart/dateEnd/meals→date dérivée, sans teams) | **200** — `teams` intact, tout persisté |
+| P4 | PATCH avec `allDates`/`teamsId` (payload PRÉ-fix) | **200 mais champs ignorés en silence** (absents de la réponse) — mesure : B5 ne rejetait jamais, ça perdait silencieusement (cf. pièges) |
+| P5 | GET anonyme du record | **404** (EVENT-1 viewRule, pas de leak — cohérent T4 ; 1er run de sonde sans Authorization, corrigé) |
+| P6 | PATCH inviteParticipants post-fix (contributors + guestEmails + teams ids en 1 appel) | **200** |
+
+Logs : `/tmp/orchestrate/t5-probe-{user,auth,team,create1,create2,patch,ghost,expand,invite}.json`, serve `/tmp/orchestrate/t5-pb-serve.log`. Teardown : 2 events + team + user supprimés (204×4) ; SQL readonly post-run : events **10**, teams **6**, users **32**, **0 résidu `t5-%`** (events/teams/users). PB stoppé, ports libres.
+
+**Canon** : `bun run check` = 179 fichiers, 0 erreur, 6 warnings (inchangés) ; `bun run test` = **61/61** (56 + 5 nouveaux, logs `/tmp/orchestrate/t5-{check,test}-mig-26-10-06.log`). Mesure type réelle : `check-legacy` = 193 erreurs **préexistantes**/50 fichiers — vérifiées hunk par hunk : **0 dans mes hunks** (elles portent sur casts `as unknown as`, `parseEventMeals(main.meals)` sur `unknown`, l'appel 3-args C5 — code verbatim antérieur ; logs `/tmp/orchestrate/t5-check-legacy-mig-26-10-06.log`).
+
+**Pièges T5** :
+- `svelte-check-native` ne typecheck pas (voir Pièges, ligne dédiée).
+- Un test vitest important `events.utils` doit mocker `$lib/services/toast.service.svelte` (chaîne safe-operation → runes) — pattern existant `productEnrichment.test.ts`.
+- GET sans auth sur un record scopé = 404 (pas 401) — toujours authentifier les sondes de lecture.
+
+**Observations reportées (hors périmètre T5, pour T6+/produit)** :
+- `PermissionsManager.svelte` suppose que `event.teams` porte des **noms** (lookup nom→id L63-75, dédup `includes(team.name)` L179/255, badges affichant la valeur brute L370/590, filtre dispo L611) — mismatch préexistant depuis l'import (ids en DB) ; l'affichage EventCard `event.teams.join(", ")` montre déjà des ids pour les events importés. Résolution ids→noms à l'affichage = polish produit.
+- `types/appwrite.d.ts` (Main legacy avec allDates/teamsId) : référencé uniquement pour `Purchases` (GlobalPurchasesModal) — fichier à retirer en Phase 2.
+- `types/store.types.ts` `MainEventData` (champ allDates) : type mort, 0 référence.
+- `EventShareLinks.svelte` itère `event.shareLinks` — champ inexistant au schéma (T7 ?).
 
 ## Constats différés (deferred — tag `!` bientôt / `S2` gating déploiement / `?` conditionnel)
 

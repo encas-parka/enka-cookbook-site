@@ -37,6 +37,7 @@ import {
   parseEventMeals,
   parseEventContributors,
   parseEventTodos,
+  getEventDates,
 } from "$lib/utils/events.utils";
 import {
   createSyncCollection,
@@ -85,7 +86,6 @@ export class EventsStore {
       ...main,
       status: (main.status as EventStatus) ?? "proposition",
       teams: main.teams || undefined,
-      teamsId: main.teamsId || undefined,
       meals: parseEventMeals(main.meals),
       contributors: parseEventContributors(main.contributors),
       todos: parseEventTodos(main.todos),
@@ -211,7 +211,8 @@ export class EventsStore {
         return true;
 
       // Membre d'une équipe de l'événement → inclus
-      if (event.teamsId?.some((teamId) => this.#userTeams.includes(teamId)))
+      // (la relation teams porte des ids PocketBase)
+      if (event.teams?.some((teamId) => this.#userTeams.includes(teamId)))
         return true;
 
       return false;
@@ -473,10 +474,8 @@ export class EventsStore {
     if (data.name !== undefined) serialized.name = data.name;
     if (data.dateStart !== undefined) serialized.dateStart = data.dateStart;
     if (data.dateEnd !== undefined) serialized.dateEnd = data.dateEnd;
-    if (data.allDates !== undefined) serialized.allDates = data.allDates;
     if (data.status !== undefined) serialized.status = data.status;
     if (data.teams !== undefined) serialized.teams = data.teams;
-    if (data.teamsId !== undefined) serialized.teamsId = data.teamsId;
     if (data.description !== undefined)
       serialized.description = data.description;
     if (data.minContrib !== undefined) serialized.minContrib = data.minContrib;
@@ -484,6 +483,8 @@ export class EventsStore {
     // PocketBase gère le JSON nativement — pas de stringify
     if (data.meals !== undefined) {
       serialized.meals = data.meals;
+      // Le JSON `date` reflète toujours les dates uniques des repas
+      serialized.date = getEventDates({ meals: data.meals });
     }
     if (data.contributors !== undefined) {
       serialized.contributors = data.contributors;
@@ -525,11 +526,10 @@ export class EventsStore {
       description: data.description || "",
       dateStart: data.dateStart,
       dateEnd: data.dateEnd,
-      allDates: data.allDates,
+      date: getEventDates({ meals: data.meals ?? [] }),
       meals: data.meals ?? [],
       createdBy: globalState.userId,
       teams: data.teams ?? [],
-      teamsId: teamIds,
       contributors: data.contributors ?? [],
       todos: data.todos ?? [],
       status: data.status || "proposition",
@@ -670,7 +670,7 @@ export class EventsStore {
    *
    * Flux PocketBase :
    *   1. Ajoute les emails dans guestEmails[] et contributors[] (atomique)
-   *   2. Ajoute les teamIds dans les relations teams + teamsId
+   *   2. Ajoute les teamIds dans la relation teams (ids PocketBase)
    *   3. Crée/récupère un share link pour l'event
    *   4. Appelle le hook email en fire-and-forget
    *
@@ -738,18 +738,12 @@ export class EventsStore {
     }
 
     // --- 3. Construire les nouvelles teams (dédupliquées) ---
+    // La relation teams porte des ids PocketBase
     const currentTeams: string[] = event.teams || [];
-    const currentTeamsId: string[] = event.teamsId || [];
     const updatedTeams = [...currentTeams];
-    const updatedTeamsId = [...currentTeamsId];
 
     for (const teamId of teamIds) {
-      if (!updatedTeamsId.includes(teamId)) {
-        updatedTeamsId.push(teamId);
-      }
-      // Ajouter aussi le nom de la team dans teams[] si pas déjà présent
-      const teamName = currentTeams.find((t) => t === teamId);
-      if (!teamName && !updatedTeams.includes(teamId)) {
+      if (!updatedTeams.includes(teamId)) {
         updatedTeams.push(teamId);
       }
     }
@@ -759,8 +753,7 @@ export class EventsStore {
       contributors: newContributors,
       guestEmails: updatedGuests,
       teams: updatedTeams,
-      teamsId: updatedTeamsId,
-    } as UpdateEventData);
+    });
 
     // --- 5. Créer ou récupérer un share link pour l'event ---
     let shareLinkId: string | null = null;
@@ -832,12 +825,10 @@ export class EventsStore {
       if (!event) throw new Error("Événement introuvable");
 
       const teams = (event.teams ?? []).filter((t) => t !== teamId);
-      const teamsId = (event.teamsId ?? []).filter((t) => t !== teamId);
 
       return await this.updateEvent(eventId, {
         teams,
-        teamsId,
-      } as UpdateEventData);
+      });
     } catch (err) {
       console.error(`[EventsStore] Erreur retrait team:`, err);
       throw err;

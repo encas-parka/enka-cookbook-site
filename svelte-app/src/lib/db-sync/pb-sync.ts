@@ -50,5 +50,3 @@ export type {
 	PbCollectionName,
 	PbDoc
 } from './pb-types';
-
-export type { PbCollectionName } from './aw-types';

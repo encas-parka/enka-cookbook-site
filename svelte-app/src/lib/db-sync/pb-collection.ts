@@ -161,6 +161,21 @@ export class RecordDeletedError extends Error {
 }
 
 // =============================================================================
+// BATCH TYPES (module scope — referenced by the public return type)
+// =============================================================================
+
+export interface BatchResult<T extends PbDoc> {
+	records: T[];
+}
+
+export interface CollectionBatch<T extends PbDoc> {
+	create(data: Omit<T, 'id' | 'created' | 'updated'>): CollectionBatch<T>;
+	update(id: string, data: Partial<T>): CollectionBatch<T>;
+	delete(id: string): CollectionBatch<T>;
+	send(): Promise<BatchResult<T>>;
+}
+
+// =============================================================================
 // createSyncCollection
 // =============================================================================
 
@@ -426,7 +441,7 @@ export function createSyncCollection<T extends PbDoc>(
 	 * @returns The confirmed record
 	 */
 	async function create(
-		data: Omit<T, 'created' | 'updated'>
+		data: Omit<T, 'id' | 'created' | 'updated'> & { id?: string }
 	): Promise<T> {
 		const pbData = stripSystemFields(data as Partial<T>, true);
 
@@ -560,25 +575,14 @@ export function createSyncCollection<T extends PbDoc>(
 		data?: Record<string, unknown>;
 	}
 
-	interface BatchResult {
-		records: T[];
-	}
-
-	interface CollectionBatch {
-		create(data: Omit<T, 'id' | 'created' | 'updated'>): CollectionBatch;
-		update(id: string, data: Partial<T>): CollectionBatch;
-		delete(id: string): CollectionBatch;
-		send(): Promise<BatchResult>;
-	}
-
 	/**
 	 * Creates a batch builder for atomic multi-operation requests.
 	 * Uses PocketBase native `pb.createBatch()`.
 	 */
-	function createBatch(): CollectionBatch {
+	function createBatch(): CollectionBatch<T> {
 		const ops: PendingOp[] = [];
 
-		const builder: CollectionBatch = {
+		const builder: CollectionBatch<T> = {
 			create(data) {
 				ops.push({ type: 'create', data: stripSystemFields(data as Partial<T>, true) });
 				return builder;
@@ -592,7 +596,7 @@ export function createSyncCollection<T extends PbDoc>(
 				return builder;
 			},
 
-			async send(): Promise<BatchResult> {
+			async send(): Promise<BatchResult<T>> {
 				if (ops.length === 0) return { records: [] };
 
 				// Snapshot for rollback

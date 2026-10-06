@@ -11,10 +11,10 @@ import type {
 import type {
   EnrichedMateriel,
   EnrichedMaterielLoan,
-  Materiel,
   MaterielLoanItem,
   MaterielLoanDetail,
 } from "$lib/types/materiel.types";
+import type { Materiel } from "$lib/types/pb";
 import type { EventMaterielStatus } from "$lib/types/event-materiel.types";
 
 export interface EventMaterielStatusConfig {
@@ -283,13 +283,20 @@ export function enrichMateriel(
       return;
     }
 
+    // Un emprunt sans dates n'est ni actif ni planifié (champs PB nullables ;
+    // new Date(null) donnerait l'epoch et fausserait les comparaisons)
+    if (loan.startDate === null || loan.endDate === null) {
+      return;
+    }
+
     // Vérifier si l'emprunt est actif ou planifié
     const startDate = new Date(loan.startDate);
     const endDate = new Date(loan.endDate);
 
     const isActive = startDate <= now && endDate >= now;
     const isPlanned = startDate > now;
-    const isAcceptedOrAsked = ["accepted", "asked"].includes(loan.status);
+    const isAcceptedOrAsked =
+      loan.status !== null && ["accepted", "asked"].includes(loan.status);
 
     // Ajouter aux loanDetails si actif OU planifié
     if ((isActive || isPlanned) && isAcceptedOrAsked) {
@@ -399,6 +406,7 @@ export function isLoanActive(
   loan: MaterielLoan,
   date: Date = new Date(),
 ): boolean {
+  if (loan.startDate === null || loan.endDate === null) return false;
   const startDate = new Date(loan.startDate);
   const endDate = new Date(loan.endDate);
   return startDate <= date && endDate >= date;
@@ -414,6 +422,7 @@ export function isLoanPlanned(
   loan: MaterielLoan,
   date: Date = new Date(),
 ): boolean {
+  if (loan.startDate === null) return false;
   const startDate = new Date(loan.startDate);
   return startDate > date;
 }
@@ -424,7 +433,9 @@ export function isLoanPlanned(
  * @returns true si l'emprunt est "asked" ou "accepted"
  */
 export function isLoanValid(loan: MaterielLoan): boolean {
-  return ["asked", "accepted"].includes(loan.status);
+  return (
+    loan.status !== null && ["asked", "accepted"].includes(loan.status)
+  );
 }
 
 /**
@@ -534,6 +545,11 @@ export function calculateLoanedQuantityForPeriod(
       return;
     }
 
+    // Comparaison de période sans sens si les dates manquent
+    if (loan.startDate === null || loan.endDate === null) {
+      return;
+    }
+
     // Vérifier si les périodes se chevauchent
     const loanStart = new Date(loan.startDate);
     const loanEnd = new Date(loan.endDate);
@@ -570,6 +586,9 @@ export function isMaterielAvailableForPeriod(
   periodEnd: Date,
   requestedQuantity: number = 1,
 ): boolean {
+  // Quantité inconnue (null) → déclaré non disponible
+  if (materiel.quantity === null) return false;
+
   const loanedQuantity = calculateLoanedQuantityForPeriod(
     materiel.id,
     loans,
@@ -613,6 +632,11 @@ export function getMaterielConflictsForPeriod(
   loans.forEach((loan) => {
     // Vérifier si le loan est valide
     if (!isLoanValid(loan)) {
+      return;
+    }
+
+    // Comparaison de période sans sens si les dates manquent
+    if (loan.startDate === null || loan.endDate === null) {
       return;
     }
 

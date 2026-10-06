@@ -416,7 +416,8 @@ export class EventMaterielStore {
   getItemsByType(): Record<string, number> {
     const counts: Record<string, number> = {};
     this.#itemsList.forEach((item) => {
-      counts[item.type] = (counts[item.type] || 0) + 1;
+      const typeKey = item.type ?? "autres";
+      counts[typeKey] = (counts[typeKey] || 0) + 1;
     });
     return counts;
   }
@@ -509,7 +510,7 @@ export class EventMaterielStore {
           cmp = (a.header.name || "").localeCompare(b.header.name || "");
           break;
         case "type":
-          cmp = a.header.type.localeCompare(b.header.type);
+          cmp = (a.header.type ?? "").localeCompare(b.header.type ?? "");
           if (cmp === 0) {
             cmp = (a.header.name || "").localeCompare(b.header.name || "");
           }

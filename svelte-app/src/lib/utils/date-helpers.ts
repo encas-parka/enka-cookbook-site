@@ -87,7 +87,8 @@ export function formatDateRelative(dateStr: string): string {
 /**
  * Formate une date pour l'affichage (français) - jour et mois court
  */
-export function formatDateDayMonthShort(dateStr: string): string {
+export function formatDateDayMonthShort(dateStr: string | null): string {
+  if (!dateStr) return "";
   return new Date(dateStr).toLocaleDateString("fr-FR", {
     day: "numeric",
     month: "short",

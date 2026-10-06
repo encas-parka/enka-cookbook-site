@@ -163,7 +163,8 @@ export class MaterielStore {
           periodEnd,
           excludeLoanId,
         );
-        const availableForPeriod = materiel.quantity - loanedQuantity;
+        // Stock inconnu (null) traité comme 0 — conservateur
+        const availableForPeriod = (materiel.quantity ?? 0) - loanedQuantity;
         return { ...materiel, availableForPeriod };
       })
       .filter((m) => m.availableForPeriod > 0);
@@ -643,14 +644,16 @@ export class MaterielStore {
 
     lines.push(`- **Responsable** : ${loan.responsibleName ?? ""}`);
 
-    const start = new Date(loan.startDate).toLocaleDateString("fr-FR", {
-      day: "2-digit",
-      month: "2-digit",
-    });
-    const end = new Date(loan.endDate).toLocaleDateString("fr-FR", {
-      day: "2-digit",
-      month: "2-digit",
-    });
+    // Dates nullables côté PB : "?" signale une donnée manquante dans l'export
+    const formatDate = (d: string | null) =>
+      d
+        ? new Date(d).toLocaleDateString("fr-FR", {
+            day: "2-digit",
+            month: "2-digit",
+          })
+        : "?";
+    const start = formatDate(loan.startDate);
+    const end = formatDate(loan.endDate);
     lines.push(`- **Période** : ${start} - ${end}`);
 
     if (loan.eventName) {

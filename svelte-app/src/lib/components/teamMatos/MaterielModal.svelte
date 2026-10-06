@@ -148,7 +148,7 @@
                 description: currentMateriel.description,
                 type: currentMateriel.type,
                 status: formStatus,
-                quantity: currentMateriel.quantity,
+                quantity: currentMateriel.quantity ?? 0,
                 location: currentMateriel.location,
                 shareableWith: currentMateriel.shareableWith,
               }

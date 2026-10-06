@@ -67,8 +67,9 @@
   // Déterminer l'état temporel du prêt
   const timeStatus = $derived.by(() => {
     const now = new Date();
-    const startDate = new Date(loan.startDate);
-    const endDate = new Date(loan.endDate);
+    // Dates null → epoch : comportement runtime historique conservé
+    const startDate = new Date(loan.startDate ?? 0);
+    const endDate = new Date(loan.endDate ?? 0);
 
     if (now < startDate) {
       return "future"; // À venir

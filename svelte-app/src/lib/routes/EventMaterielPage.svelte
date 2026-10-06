@@ -99,7 +99,7 @@ import {
     for (const item of eventMaterielStore.items) {
       if (item.loanId) {
         const loan = materielStore.getLoanById(item.loanId);
-        if (loan && myTeamIds.has(loan.ownerId)) {
+        if (loan && loan.ownerId !== null && myTeamIds.has(loan.ownerId)) {
           loanIds.add(item.loanId);
         }
       }

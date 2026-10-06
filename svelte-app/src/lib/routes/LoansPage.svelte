@@ -146,7 +146,7 @@
   let showOldCompleted = $state(false);
 
   function isOldCompleted(loan: {
-    status: string;
+    status: string | null;
     completedAt: string | null;
   }): boolean {
     if (loan.status !== "completed" || !loan.completedAt) return false;

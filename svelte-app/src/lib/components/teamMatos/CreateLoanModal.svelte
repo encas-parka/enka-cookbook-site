@@ -138,7 +138,8 @@
     return eventsStore.events.filter(
       (e) =>
         e.status !== "canceled" &&
-        (new Date(e.dateEnd) >= now || e.id === selectedEventId),
+        // dateEnd null → epoch : comportement runtime historique conservé
+        (new Date(e.dateEnd ?? 0) >= now || e.id === selectedEventId),
     );
   });
 
@@ -252,7 +253,8 @@
     if (!existingLoan) return false;
     const today = new Date();
     today.setHours(0, 0, 0, 0);
-    return new Date(existingLoan.startDate) <= today;
+    // startDate null → epoch : comportement runtime historique conservé
+    return new Date(existingLoan.startDate ?? 0) <= today;
   });
 
   $effect(() => {

@@ -116,7 +116,7 @@ async function pbListAll(collection: string): Promise<any[]> {
     const data = await res.json();
     const items = data.items || [];
     all.push(...items);
-    if (all.length >= (data.total || 0)) break;
+    if (all.length >= (data.totalItems || 0) || items.length < perPage) break;
     page++;
   }
 
@@ -342,14 +342,15 @@ async function checkGuestEmails(): Promise<void> {
     }
   }
 
-  // Build PB events by refId (stored in _refId or tracked via migration map)
-  // Actually PB events have real IDs, we need to match via migration map
-  // The import script stores _refId in migration-map but PB records have real IDs
-  // We match by event name + dateStart as a fallback
-
-  const pbEventsByName = new Map<string, any>();
+  // PB events carry generated ids — match via id-map.json (refId → PB id, saved by
+  // 3-import). Matching by name is ambiguous: prod data has homonym events.
+  const idMapFile = join(IMPORT_DIR, "id-map.json");
+  const idMap: Record<string, string> = existsSync(idMapFile)
+    ? JSON.parse(readFileSync(idMapFile, "utf-8"))
+    : {};
+  const pbEventsById = new Map<string, any>();
   for (const ev of pbEvents) {
-    pbEventsByName.set(ev.name, ev);
+    pbEventsById.set(ev.id, ev);
   }
 
   let checked = 0;
@@ -361,7 +362,7 @@ async function checkGuestEmails(): Promise<void> {
     if (expected.length === 0) continue;
 
     checked++;
-    const pbEvent = pbEventsByName.get(impEvent.name);
+    const pbEvent = pbEventsById.get(idMap[impEvent._refId]);
     if (!pbEvent) {
       errors.push(`Event "${impEvent.name}" not found in PB`);
       continue;

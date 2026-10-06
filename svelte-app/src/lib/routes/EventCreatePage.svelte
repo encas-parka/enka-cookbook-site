@@ -181,10 +181,11 @@
 
     try {
       // Utiliser la nouvelle méthode unifiée qui crée l'événement ET invite les teams
+      // (l'envoi d'emails est géré par le système d'invitation PB — le flag
+      // sendEmailToExistingMembers de la checkbox est actuellement sans effet)
       const savedEvent = await eventsStore.createEventWithTeams(
         eventData,
         selectedTeams,
-        sendEmailToExistingMembers,
       );
 
       navigate(`/event/${savedEvent.id}`);

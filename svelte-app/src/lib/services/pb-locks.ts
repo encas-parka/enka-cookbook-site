@@ -49,7 +49,7 @@ function normalizeLock(record: Record<string, any>): Lock {
   };
 }
 
-function isLockExpired(lock: { userId?: string; expiresAt?: string }): boolean {
+function isLockExpired(lock: Record<string, any>): boolean {
   return !lock.userId || new Date(lock.expiresAt || 0) < new Date();
 }
 

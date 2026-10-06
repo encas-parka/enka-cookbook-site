@@ -20,6 +20,7 @@ export interface PBAuthUser {
 	id: string;
 	name: string;
 	email: string;
+	emailVerification: boolean;
 }
 
 // =============================================================================

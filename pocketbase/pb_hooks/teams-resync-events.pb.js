@@ -23,7 +23,7 @@ onRecordAfterUpdateSuccess(function (e) {
   // --- Comparer les membres avant/apres ---
   var newMembers = team.getStringSlice("members") || [];
   // e.record.originalCopy() contient l'etat avant modification
-  var original = team.originalCopy();
+  var original = team.original();
   var oldMembers = (original && original.getStringSlice("members")) || [];
 
   // Identifier les ajouts et retraits

@@ -1,6 +1,6 @@
 ---
 title: Crumble aux pêches
-date: '2026-10-01T09:42:06.575Z'
+date: '2026-10-06T12:46:23.144Z'
 draft: true
 typeR: dessert
 categories:
@@ -30,18 +30,18 @@ ingredients:
     type: legumes
   - uuid: 6kg18g
     name: sucre poudre
-    originalQuantity: 700
+    originalQuantity: 500
     originalUnit: gr.
-    normalizedQuantity: 700
+    normalizedQuantity: 500
     normalizedUnit: gr.
     comment: ''
     allergens: []
     type: sec
   - uuid: mxub21
     name: Beurre demi-sel
-    originalQuantity: 700
+    originalQuantity: 750
     originalUnit: gr.
-    normalizedQuantity: 700
+    normalizedQuantity: 750
     normalizedUnit: gr.
     comment: ''
     allergens:
@@ -57,6 +57,16 @@ ingredients:
     allergens:
       - Gluten
     type: lof
+  - uuid: abl0tz
+    name: Poudre d'amande
+    originalQuantity: 200
+    originalUnit: gr.
+    normalizedQuantity: 200
+    normalizedUnit: gr.
+    comment: ''
+    allergens:
+      - Fruits à coque
+    type: sec
 preparation: |-
   Disposer les pêches épluchées et dénoyautées au fond des gastros.
 
@@ -70,11 +80,11 @@ astuces: []
 preparation24h: null
 permissionWrite:
   - 6931ecdccd2c8d8d15e5
-auteur: null
+auteur: Marion
 createdAt: '2026-10-01T09:41:33.544+00:00'
-updatedAt: '2026-10-01T09:41:33.544+00:00'
+updatedAt: '2026-10-06T12:45:56.136+00:00'
 createdBy: 6931ecdccd2c8d8d15e5
-teams: null
+teams: []
 status: public
 rootRecipeId: null
 versionLabel: null

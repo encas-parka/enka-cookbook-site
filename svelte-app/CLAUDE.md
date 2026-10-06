@@ -25,6 +25,8 @@ npx prettier --check "**/*.{svelte,ts,js,css}"
 - Type checking includes both app code (`tsconfig.app.json`) and Node/tooling (`tsconfig.node.json`)
 - PocketBase types are auto-generated in `src/lib/types/pb.d.ts`
 - Path aliases: `@/*` → `./src/*`, `$lib/*` → `./src/lib/*`
+- **Champs JSON PB** : le typegen les produit en `unknown`/génériques — les shapes clients (parsés/écrits par le SPA) sont typés dans `pb.d.ts` (`Main.meals/todos`, `Recettes.ingredients/astuces`, `Products.store`…). Les parse fns (`parseIngredients`, `parseAstuces`) acceptent natif PB + legacy `string[]`. Toute nouvelle collection JSON doit y être typée, sinon réapparition du cluster `{}`/`unknown` au `check-legacy`
+- **Valeurs des options PB** (enums select) : uniquement dans `pb-generated.ts` (const `as const`) — les `.d.ts` (`events.d.ts`, `pb.d.ts`) n'exposent que les types, aucun runtime
 
 ## Routing with sv-router
 

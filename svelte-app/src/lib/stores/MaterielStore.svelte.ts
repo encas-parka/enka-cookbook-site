@@ -415,6 +415,7 @@ export class MaterielStore {
           returnNotes: null,
           eventId: data.eventId || null,
           eventName: data.eventName || null,
+          borrowerUser: globalState.userId,
         } as Omit<MaterielLoan, "id" | "created" | "updated">,
       );
 

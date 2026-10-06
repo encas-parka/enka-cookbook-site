@@ -10,7 +10,6 @@
   import RecipePrepaForm from "$lib/components/recipeEdit/RecipePrepaForm.svelte";
   import RecipePermissionsManager from "$lib/components/recipeEdit/RecipePermissionsManager.svelte";
   import UnsavedChangesGuard from "$lib/components/ui/UnsavedChangesGuard.svelte";
-  import { generateSlugUuid35 } from "$lib/utils/slugUtils";
   import {
     type RecipeFormState,
     type ValidationError,
@@ -184,12 +183,7 @@
     const toastId = toastService.loading("Sauvegarde en cours...");
 
     try {
-      // Générer l'ID de la recette avec le versionLabel si présent
-      recipe.id = generateSlugUuid35(
-        recipe.title,
-        recipe.versionLabel || undefined,
-      );
-
+      // L'id est généré par PocketBase (15 alphanum) — ne jamais en poser côté client.
       const created = await recipesStore.createRecipe(
         recipe as any,
         globalState.userId,

@@ -1219,7 +1219,7 @@ class ProductsStore {
       eventId: this.#currentEventId!,
       status: productData.status || "active",
       stockReel: productData.stockReel || null,
-      updatedBy: globalState.userName,
+      updatedBy: globalState.userId,
       isMerged: false,
       mergedFrom: null,
       mergeDate: null,

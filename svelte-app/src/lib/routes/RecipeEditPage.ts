@@ -10,7 +10,6 @@ import {
 } from "$lib/types/recipes.types";
 import { SvelteSet } from "svelte/reactivity";
 import { UnitConverter } from "$lib/utils/UnitConverter";
-import { generateSlugUuid35 } from "$lib/utils/slugUtils";
 
 // ============================================================================
 // TYPES
@@ -214,7 +213,6 @@ export function normalizeRecipeForSave(
     astuces: null,
     prepAlt: null,
     lockedBy: null,
-    publishedAt: null,
     rootRecipeId: recipe.rootRecipeId || null,
     versionLabel: recipe.versionLabel || null,
   } as CreateRecipeData;

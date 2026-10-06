@@ -200,7 +200,6 @@ export class TeamdocsStore {
       {
         ...data,
         teamId,
-        createdBy: globalState.userId,
       } as Omit<Teamdocs, "id" | "created" | "updated">,
     );
 

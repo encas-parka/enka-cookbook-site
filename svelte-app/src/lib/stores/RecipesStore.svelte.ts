@@ -622,17 +622,17 @@ class RecipesStore {
 		data: Partial<Recettes>,
 		userId: string
 	): Promise<Recettes> {
-		const slugUuid = data.id || crypto.randomUUID();
+		// PocketBase génère l'id : le placeholder du formulaire ne doit pas fuiter dans le payload.
+		const { id: _formId, ...dataWithoutId } = data;
 		const recipeData = {
-			...data,
-			id: slugUuid,
+			...dataWithoutId,
 			createdBy: userId,
-			status: data.status || "active"
+			status: data.status || "private"
 		};
 
-		const recipe = await this.#collection.create(recipeData as unknown as Omit<Recettes, "id" | "created" | "updated">);
+		const recipe = await this.#collection.create(recipeData as unknown as Omit<Recettes, "created" | "updated">);
 
-		console.log(`[RecipesStore] Recipe created: ${slugUuid}`);
+		console.log(`[RecipesStore] Recipe created: ${recipe.id}`);
 		return recipe;
 	}
 

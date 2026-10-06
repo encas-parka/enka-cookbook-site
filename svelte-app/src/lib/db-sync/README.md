@@ -25,7 +25,14 @@ Offline-first synchronization layer bridging **PocketBase** (remote) and **Dexie
 
 ### 1. Initial Fetch — Delta Sync
 
-`initialFetch()` retrieves only records changed since the last known `updated` timestamp.
+`initialFetch()` retrieves only records changed since the persisted cursor of this
+collection — scoped by `scopeKey` when the fetch is filtered (ex. per-event), key
+`collection:scope` in the `syncMeta` table. The cursor is written in the SAME
+Dexie transaction as the upserts: a failed upsert rolls back both. The delta
+filter is `updated >= since` (boundary records replay; the by-id upsert makes it
+idempotent). With no cursor yet (first sync of a scope), `since` is the epoch —
+a full fetch of the scope, which also heals caches left by the old table-derived
+cursor (Dexie v10 bump).
 
 ```mermaid
 %%{init: {'theme': 'base', 'themeVariables': {'background':'#f8f9fa','primaryColor':'#e8f0fe','secondaryColor':'#fef3e2','tertiaryColor':'#e8f5e9','lineColor':'#555','fontSize':'13px'}, 'sequence': {'wrap':true,'width':180,'actorMargin':70,'messageMargin':36,'boxMargin':10,'noteMargin':10}}}%%
@@ -35,20 +42,19 @@ sequenceDiagram
     participant DX as Dexie
     participant PB as PocketBase
 
-    UI->>SC: initialFetch()
-    SC->>DX: last updated?
-    DX-->>SC: since timestamp
+    UI->>SC: initialFetch({ scopeKey? })
+    SC->>DX: syncMeta.get(collection:scope)
+    DX-->>SC: since (epoch when absent)
 
-    SC->>PB: getFullList(updated > since)
+    SC->>PB: getFullList(updated >= since)
     PB-->>SC: fresh records
 
-    SC->>DX: bulkPut(fresh)
-
-    alt tombstones exist
-        SC->>PB: get tombstones
-        PB-->>SC: deleted IDs
-        SC->>DX: mark or delete
+    alt delta empty + local table empty
+        SC->>PB: getFullList() — full fetch
+        PB-->>SC: all records (imports without updated)
     end
+
+    SC->>DX: transaction(upserts + syncMeta.put(cursor = max updated))
 
     SC-->>UI: done
 ```

@@ -31,8 +31,8 @@ Scénarios tests : event1 (ancien) sync → event2 (récent) sync → **retour e
 
 ## Critères
 
-- [ ] `syncMeta` écrit/lu en transaction atomique avec les upserts (test le prouve)
-- [ ] Scénario multi-événements vert (test) ; idempotence delta verte (test)
-- [ ] Dexie v10 bumpé (ou justification mesurée d'un non-bump) ; fallback conservé (test)
-- [ ] Étape 2 appliquée (index `productNeeds` vérifié par mesure)
-- [ ] scopeKey passé dans les stores filtrés (grep) ; canons verts (check/test/check-legacy delta 0) ; run.md amendé (journal T13)
+- [x] `syncMeta` écrit/lu en transaction atomique avec les upserts (test le prouve)
+- [x] Scénario multi-événements vert (test) ; idempotence delta verte (test)
+- [x] Dexie v10 bumpé (ou justification mesurée d'un non-bump) ; fallback conservé (test)
+- [x] Étape 2 appliquée (index `productNeeds` vérifié par mesure)
+- [x] scopeKey passé dans les stores filtrés (grep) ; canons verts (check/test/check-legacy delta 0) ; run.md amendé (journal T13)

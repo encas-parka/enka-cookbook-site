@@ -9,7 +9,7 @@
  * (Étape 3 du portage) relies on:
  *  - records are `PbDoc { id, created, updated }`, dates in PB format
  *    `YYYY-MM-DD HH:mm:ss.SSSZ` (space, no `T`)
- *  - the delta filter `updated > {:since}` is evaluated LEXICALLY
+ *  - the delta filter `updated >= {:since}` is evaluated LEXICALLY
  *    server-side — a mutation only reaches Dexie when its PB datetime
  *    string sorts strictly after the local maximum
  *  - SSE realtime events (`{ action, record }`) land in Dexie through the
@@ -90,7 +90,7 @@ describe("pb-sync — delta fetch et realtime via le serveur PB simulé", () => 
     expect(productsStore.getEnrichedProductById(TEST_PRODUCT_ID)!.productName).toBe("Eau");
 
     // Server-side mutation with a STRICTLY GREATER PB datetime — the delta
-    // cursor (`updated > since`, lexical) must pick it up.
+    // cursor (`updated >= since`, lexical) must pick it up.
     currentFakePb().putRecord(
       "products",
       makeProductRecord({ productName: "Eau minérale", updated: pbDate(T1) }),
@@ -105,7 +105,7 @@ describe("pb-sync — delta fetch et realtime via le serveur PB simulé", () => 
 
   it("mutation serveur SANS bump updated → delta ne ramène rien (curseur lexical)", async () => {
     // Remote edit with an updated string STRICTLY BEFORE the local max:
-    // a real PB server never returns it for `updated > since` — the fake
+    // a real PB server never returns it for `updated >= since` — the fake
     // must behave the same, otherwise the tests lie about the cursor.
     currentFakePb().putRecord(
       "products",

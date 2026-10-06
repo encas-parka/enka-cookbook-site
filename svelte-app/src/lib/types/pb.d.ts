@@ -80,7 +80,7 @@ export type Main = PbDoc & {
   teams: string[] | null;
   status: EventsStatusOptions | null;
   guestEmails: unknown | null;
-  joinToken: string | null;
+  guestUsers: string[] | null;
   location: string | null;
   meals: unknown | null;
   contributors: unknown | null;

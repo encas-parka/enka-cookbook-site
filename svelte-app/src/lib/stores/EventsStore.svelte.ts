@@ -32,6 +32,7 @@ import type {
 } from "$lib/types/events.d";
 import type { RecettesTypeR } from "$lib/types/recipes.types";
 import { nanoid } from "nanoid";
+import { lookupUsersByEmails } from "$lib/services/pb-users";
 import { globalState } from "./GlobalState.svelte";
 import {
   parseEventMeals,
@@ -695,26 +696,31 @@ export class EventsStore {
     }
 
     // --- 1. Construire les nouveaux contributeurs (dédupliqués) ---
+    // Les emails résolus vers un compte PB reçoivent le vrai userId (bandeau
+    // RSVP et getContributorStatus fonctionnels immédiatement) ; fallback
+    // nanoid pour les inconnus — le hook join-event rattache l'id au vrai
+    // userId au premier join (dédoublonnage par email côté serveur).
     const existingEmails = new Set(
       event.contributors
         .filter((c) => c.email)
         .map((c) => c.email!.toLowerCase()),
     );
-    const existingIds = new Set(
-      event.contributors.filter((c) => c.id).map((c) => c.id),
+    const newEmails = emails.filter(
+      (email) => !existingEmails.has(email.toLowerCase()),
     );
+    const knownUsers = await lookupUsersByEmails(newEmails);
 
     const newContributors = [...event.contributors];
-    for (const email of emails) {
-      if (!existingEmails.has(email.toLowerCase())) {
-        newContributors.push({
-          id: nanoid(), // ID temporaire pour l'affichage
-          email,
-          status: "invited" as const,
-          invitedAt: new Date().toISOString(),
-        });
-        existingEmails.add(email.toLowerCase());
-      }
+    for (const email of newEmails) {
+      const known = knownUsers.get(email.toLowerCase());
+      newContributors.push({
+        id: known ? known.id : nanoid(), // nanoid : id temporaire pour l'affichage
+        email,
+        name: known?.name || undefined,
+        status: "invited" as const,
+        invitedAt: new Date().toISOString(),
+      });
+      existingEmails.add(email.toLowerCase());
     }
 
     // --- 2. Construire les nouveaux guestEmails (dédupliqués) ---

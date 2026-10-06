@@ -87,7 +87,9 @@
         recipesStore
           .loadCache()
           .then(() => {
-            return recipesStore.syncFromRemotePublicOnly();
+            // Recettes en lecture publique PB (REC-2) : syncInitial câble
+            // syncReady et le loading, comme l'ancienne sync publique dédiée.
+            return recipesStore.syncInitial();
           })
           .then(() => {
             setTimeout(() => {

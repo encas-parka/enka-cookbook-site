@@ -1509,12 +1509,23 @@ class ProductsStore {
     console.log("[ProductsStore] Reset termine");
   }
 
-  async destroy() {
+  /**
+   * Soft reset : reset() complet + vidage des tables Dexie locales
+   * (products, purchases, productNeeds).
+   * La souscription liveQuery reste active — les données se repeuplent
+   * naturellement quand Dexie est re-rempli (delta sync ou seed de test).
+   * Contrairement à reset(), les collections restent utilisables
+   * immédiatement après ; contrairement à destroy(), rien d'irréversible.
+   */
+  async softReset(): Promise<void> {
     this.reset();
-    // Nettoyer IndexedDB pour éviter les fuites de données entre utilisateurs
     await this.#productsCollection.clearLocal();
     await this.#purchasesCollection.clearLocal();
     await db.productNeeds.clear();
+  }
+
+  async destroy() {
+    await this.softReset();
     console.log("[ProductsStore] Ressources nettoyees");
   }
 }

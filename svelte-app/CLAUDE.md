@@ -9,6 +9,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - `bun run dev` - Start development server with Vite HMR and Hugo proxy
 - `bun run build` - Build for production (outputs to `../static/app/`)
 - `bun run check` - Svelte checks only (a11y, runes, compile errors) via `svelte-check-native` — **does NOT report TypeScript type errors** (measured 2026-10-06: a deliberate type error in a `.svelte` and a `.svelte.ts` goes undetected). Use `bun run check-legacy` (real `svelte-check`) for a true type audit — it surfaces the pre-existing type debt (~193 errors), so diff per-file rather than expecting 0
+- `bun run test` - vitest. Store/db-sync integration tests live in `src/lib/stores/__tests__/` — fake-indexeddb + jsdom (per-file `@vitest-environment jsdom` docblock; utils tests stay node) + a fake PocketBase SDK (`harness/stub-pb.ts`: PB records `PbDoc {id, created, updated}`, datetimes `YYYY-MM-DD HH:mm:ss.SSSZ`, lexical `updated > since` delta evaluation, `emit()` for SSE events). The `conditions: ["browser"]` guard in vitest.config.ts is REQUIRED for Svelte 5 reactivity in tests (without it SvelteMap/$derived never re-derive)
 
 ### Code Quality
 

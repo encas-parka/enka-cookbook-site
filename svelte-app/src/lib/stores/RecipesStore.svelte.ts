@@ -689,15 +689,45 @@ class RecipesStore {
 	}
 
 	// =============================================================================
-	// CLEANUP
+	// RESET / DESTROY
 	// =============================================================================
 
-	destroy(): void {
-		this.#bridge.subscription.unsubscribe();
+	/**
+	 * Reset in-memory state without touching Dexie or the bridge liveQuery.
+	 * The bridge stays alive and will detect subsequent Dexie writes.
+	 * Call `loadCache()` after this to re-populate from the bridge.
+	 */
+	reset(): void {
 		this.#collection.unsubscribeAll();
-		this.#recipesIndex.clear();
+		this.#rawRecipes.clear();
+		this.#loadingDetails.clear();
+		this.#initPromise = null;
+		this.#syncPromise = Promise.resolve();
+		this.#syncResolve = null;
+		this.#loading = false;
+		this.#error = null;
 		this.#isInitialized = false;
 		this.#realtimeInitialized = false;
+		console.log('[RecipesStore] Reset terminé');
+	}
+
+	/**
+	 * Soft reset : reset() + clear des tables Dexie du store (db.recipes).
+	 * Le bridge liveQuery reste actif — les données se repeuplent quand Dexie
+	 * est re-rempli (delta sync ou seed de test).
+	 */
+	async softReset(): Promise<void> {
+		this.reset();
+		await this.#collection.clearLocal();
+	}
+
+	/**
+	 * Full teardown : softReset + kill du bridge liveQuery (irréversible).
+	 * Le store ne peut plus se repeupler sans réinitialisation complète.
+	 */
+	async destroy(): Promise<void> {
+		await this.softReset();
+		this.#bridge.subscription.unsubscribe();
 		console.log('[RecipesStore] Ressources nettoyées');
 	}
 }

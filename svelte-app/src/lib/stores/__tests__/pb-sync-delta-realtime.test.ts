@@ -63,7 +63,16 @@ import {
   T1,
 } from "./harness/fixtures";
 import { productsStore } from "$lib/stores/ProductsStore.svelte";
+import { globalState } from "$lib/stores/GlobalState.svelte";
 import { eventsStore } from "$lib/stores/EventsStore.svelte";
+
+/**
+ * The GlobalState mock replaces a getter-only `userId` — the runtime mock is
+ * a plain mutable object, only the (real) type is read-only.
+ */
+const setMockUserId = (id: string) => {
+  (globalState as { userId: string }).userId = id;
+};
 import { db } from "$lib/db-sync/pb-sync";
 
 type FakeCollection = ReturnType<FakePocketBase["collection"]>;
@@ -252,5 +261,37 @@ describe("pb-sync — delta fetch et realtime via le serveur PB simulé", () => 
     expect(
       productsStore.getEnrichedProductById(TEST_PRODUCT_ID)!.productName,
     ).toBe("Garde");
+  });
+
+  it("logout en vol → résultat discardé (lastSync non avancé)", async () => {
+    currentFakePb().putRecord(
+      "products",
+      makeProductRecord({ productName: "Discard", updated: pbDate(T1) }),
+    );
+    const gate = gateGetFullList(currentFakePb());
+    const lastSyncBefore = productsStore.lastSync;
+
+    const pending = productsStore.syncRevalidate();
+    await waitForTick(5); // laisse la passe atteindre getFullList (gated)
+
+    // Un autre utilisateur prend le relais pendant que le fetch est en vol.
+    setMockUserId("next-user");
+    try {
+      gate.release();
+      await pending;
+      await waitForTick(5);
+
+      // Le résultat de la passe de l'utilisateur précédent est discardé : il
+      // ne doit pas marquer la cache fraîche (lastSync inchangé).
+      expect(productsStore.lastSync).toBe(lastSyncBefore);
+
+      // La garde #revalidating est bien relâchée : une passe suivante marche.
+      await productsStore.syncRevalidate();
+      await waitForTick(5);
+      expect(productsStore.lastSync).not.toBe(lastSyncBefore);
+    } finally {
+      setMockUserId("test-user");
+      gate.restore();
+    }
   });
 });

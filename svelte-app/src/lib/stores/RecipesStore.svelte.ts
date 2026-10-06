@@ -152,6 +152,7 @@ class RecipesStore {
 	 * Revalidation silencieuse (delta sync, sans toggle loading — pas de flash
 	 * UI skeleton). Skip silencieux si déjà en cours. Rethrow explicite pour
 	 * laisser l'appelant (orchestrateur de resync) décider du signalement.
+	 * Un changement d'utilisateur en vol (logout) discard le résultat.
 	 */
 	async syncRevalidate(): Promise<void> {
 		if (this.#revalidating) return;
@@ -160,7 +161,11 @@ class RecipesStore {
 		console.log('[RecipesStore] Synchronisation depuis PocketBase...');
 
 		try {
+			const uid = globalState.userId;
 			await this.#collection.initialFetch();
+			// Logout en vol : ne pas livrer les données de l'utilisateur précédent
+			// à la cache du suivant.
+			if (globalState.userId !== uid) return;
 
 			console.log(
 				`[RecipesStore] Synchronisation terminée: ${this.#recipesIndex.size} recettes`

@@ -114,6 +114,7 @@ export class TeamdocsStore {
    * Revalidation silencieuse (delta sync, sans toggle loading — pas de flash
    * UI skeleton). Skip silencieux si déjà en cours. Rethrow pour laisser
    * l'appelant (orchestrateur de resync) décider du signalement.
+   * Un changement d'utilisateur en vol (logout) discard le résultat.
    */
   async syncRevalidate(): Promise<void> {
     if (!globalState.userId) {
@@ -126,7 +127,11 @@ export class TeamdocsStore {
     this.#error = null;
 
     try {
+      const uid = globalState.userId;
       await this.#collection.initialFetch();
+      // Logout en vol : ne pas livrer les données de l'utilisateur précédent
+      // à la cache du suivant.
+      if (globalState.userId !== uid) return;
 
       console.log(
         `[TeamdocsStore] Sync terminé : ${this.#documents.size} documents`,

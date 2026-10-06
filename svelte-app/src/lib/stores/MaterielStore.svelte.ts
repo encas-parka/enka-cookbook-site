@@ -235,6 +235,7 @@ export class MaterielStore {
    * Revalidation silencieuse (delta sync, sans toggle loading — pas de flash
    * UI skeleton). Skip silencieux si déjà en cours. Rethrow pour laisser
    * l'appelant (orchestrateur de resync) décider du signalement.
+   * Un changement d'utilisateur en vol (logout) discard le résultat.
    */
   async syncRevalidate(): Promise<void> {
     if (this.#revalidating) return;
@@ -244,8 +245,13 @@ export class MaterielStore {
     try {
       if (!globalState.userId) return;
 
+      const uid = globalState.userId;
       await this.#materielCollection.initialFetch();
+      // Logout en vol : ne pas livrer les données de l'utilisateur précédent
+      // à la cache du suivant.
+      if (globalState.userId !== uid) return;
       await this.#loanCollection.initialFetch();
+      if (globalState.userId !== uid) return;
 
       // Start observing Dexie tables after data is populated
       this.#startObservation();

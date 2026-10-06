@@ -281,6 +281,7 @@ export class EventsStore {
    * Revalidation silencieuse (delta sync, sans toggle loading — pas de flash
    * UI skeleton). Skip silencieux si déjà en cours. Rethrow pour laisser
    * l'appelant (orchestrateur de resync) décider du signalement.
+   * Un changement d'utilisateur en vol (logout) discard le résultat.
    */
   async syncRevalidate(): Promise<void> {
     if (this.#revalidating) return;
@@ -289,7 +290,11 @@ export class EventsStore {
     console.log("[EventsStore] Synchronisation depuis PocketBase...");
 
     try {
+      const uid = globalState.userId;
       await this.#collection.initialFetch();
+      // Logout en vol : ne pas livrer les données de l'utilisateur précédent
+      // à la cache du suivant.
+      if (globalState.userId !== uid) return;
       console.log(
         `[EventsStore] Synchronisation terminée: ${this.#rawEvents.size} événements`,
       );

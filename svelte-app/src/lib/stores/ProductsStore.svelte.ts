@@ -1119,6 +1119,7 @@ class ProductsStore {
    * les rejets sont loggés, `#lastSync` n'avance que si TOUT réussit. Pas de
    * rethrow : un échec partiel reste observable via `lastSync` non rafraîchi
    * (l'orchestrateur peut s'en servir comme signal de fraîcheur).
+   * Un changement d'utilisateur en vol (logout) discard le résultat.
    */
   async syncRevalidate(): Promise<void> {
     if (this.#revalidating) return;
@@ -1132,6 +1133,7 @@ class ProductsStore {
         return;
       }
 
+      const uid = globalState.userId;
       const results = await Promise.allSettled([
         this.#productsCollection.initialFetch({
           filter: ["eventId = {:eventId}", { eventId: this.#currentEventId }],
@@ -1142,6 +1144,10 @@ class ProductsStore {
           scopeKey: this.#currentEventId,
         }),
       ]);
+
+      // Logout en vol : ne pas livrer les données de l'utilisateur précédent
+      // à la cache du suivant — surtout, ne pas marquer la cache fraîche.
+      if (globalState.userId !== uid) return;
 
       const rejected = results.filter(
         (r): r is PromiseRejectedResult => r.status === "rejected",

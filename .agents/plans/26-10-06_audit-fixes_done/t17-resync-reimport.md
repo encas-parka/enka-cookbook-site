@@ -43,7 +43,7 @@ cleanup-pb.ts --target=all   (préserve ingredients + categories ; PB STOPPÉ ap
 ## Critères
 
 - [x] Contenu mergé (comptage avant/après + mapping des 3 renommages documentés) ; commit contenu séparé — **fait `3c81ea96`** (372 → 456 : 87 nouvelles, 33 màj, 3 renommages côté site, 2 z-tests exclus), Hugo sanity vert
-- [!] Export Appwrite frais — **bloqué** : clé API expirée (HTTP 401 `project_key_expired`, log `/tmp/orchestrate/t17-export.log`) — action humaine : nouvelle clé dans `scripts_dev/.env.local`, puis reprendre (session run.md § journal T17)
-- [!] Re-import complet : validate-migration vert — **bloqué en aval de l'export** (même cause)
-- [!] Sondes post-import — **bloquées en aval de l'export** (même cause)
-- [x] run.md amendé — journal T17 consigné par l'orchestrateur (STOP + état survivant + backup vérifié)
+- [x] Export Appwrite frais — **fait (session 2)** : clé renouvelée par l'utilisateur après STOP 401 ; export OK (`t17-export2.log`, prod, 2026-10-06T23:01Z) ; comptages dans run.md § journal T17
+- [x] Re-import complet : validate-migration **36/38** — tout vert sauf 2 checks du MÊME défaut réel et documenté : 1 teamdocs prod `content` > 5000 chars rejeté par le schéma PB (échec bruyant, différé). Les 4 B1 réparés : created 456/456, createdBy 262, permissionWrite 267, rootRecipeId 54
+- [x] Sondes post-import — share_links.createdBy 6/6 (fix pipeline `84698500`, prérequis REC-1 tenu) ; recipes anonyme 200 ; comptages 456/262/267/54 = attendus 2b ; users 59/59 (le 33e `public` a disparu de la source — verdict, pas un échec) ; détail run.md § journal T17
+- [x] run.md amendé — journal T17 (chiffres avant/après, mapping renommages, 2 fixes pipeline, verdicts) + 2 lignes différées (teamdocs >5000, warns materiel prod)

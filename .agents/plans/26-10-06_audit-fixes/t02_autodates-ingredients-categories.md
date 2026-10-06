@@ -17,8 +17,8 @@ Ajouter les autodates `created`/`updated` aux collections `ingredients` et `cate
 
 ## Critères
 
-- [ ] Migration delta (autodates + backfill) appliquée à la DB dev (backup fait)
-- [ ] Sonde curl : ingredients + categories avec autodates peuplées (verdict loggé dans run.md)
-- [ ] `pb-generated.ts` régénéré (`bun run generate-types`, diff cohérent)
-- [ ] `bun run check` au canon (0 erreur)
-- [ ] run.md amendé (journal T2)
+- [x] Migration delta (autodates + backfill) appliquée à la DB dev (backup fait)
+- [x] Sonde curl : ingredients + categories avec autodates peuplées (verdict loggé dans run.md)
+- [x] `pb-generated.ts` régénéré (`bun run generate-types`, diff cohérent)
+- [x] `bun run check` au canon (0 erreur)
+- [x] run.md amendé (journal T2)

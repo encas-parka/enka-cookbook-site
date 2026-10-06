@@ -114,9 +114,11 @@ export const CategoriesTypeOptions = {
 } as const
 export type CategoriesTypeOptions = typeof CategoriesTypeOptions[keyof typeof CategoriesTypeOptions]
 export type CategoriesRecord = {
+	created: IsoAutoDateString
 	id: string
 	name: string
 	type: CategoriesTypeOptions
+	updated: IsoAutoDateString
 }
 
 export const EventMaterielTypeOptions = {
@@ -229,6 +231,7 @@ export const IngredientsTypeOptions = {
 export type IngredientsTypeOptions = typeof IngredientsTypeOptions[keyof typeof IngredientsTypeOptions]
 export type IngredientsRecord<Tallergens = unknown, Tsaisons = unknown> = {
 	allergens?: null | Tallergens
+	created: IsoAutoDateString
 	id: string
 	name: string
 	pF?: boolean
@@ -236,6 +239,7 @@ export type IngredientsRecord<Tallergens = unknown, Tsaisons = unknown> = {
 	ref: string
 	saisons?: null | Tsaisons
 	type: IngredientsTypeOptions
+	updated: IsoAutoDateString
 }
 
 export type LocksRecord = {

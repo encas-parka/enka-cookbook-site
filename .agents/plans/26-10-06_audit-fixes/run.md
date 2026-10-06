@@ -11,7 +11,13 @@
 
 ## Header — état du monde
 
+_(rafraîchi par l'orchestrateur à chaque portail — dernière mise à jour : après T1, 06-10)_
+
 - **Base** : `e9f8c6cd` « build » (HEAD `mig/pocketbase` = origin au démarrage, 06-10)
+- **HEAD après T1** : `b85d2b19` (snapshot migrations unique `1791277647_collections_snapshot.js`, 21 collections). **Frontier : T2.**
+- **Arbre** : propre hormis `.scratch/probes/t1-snapshot-summary.py` (untracked, probe transient T1 — connu, ne pas committer ni nettoyer).
+- **Décision portail post-T1** : ne PAS lancer `migrate history-sync` sur la dev DB pendant le run (les 9 lignes `_migrations` orphelines sont inoffensives) ; à noter dans la checklist déploiement.
+- **Deviation T1 validée** : snapshot généré depuis la copie de backup (jamais la dev DB en écriture) — équivalent et vérifié par sha256 avant/après identique.
 - **Canon de tests** (baseline 06-10, logs `/tmp/orchestrate/baseline-{check,test}-mig-26-10-06.log`) :
   - `bun run check` (svelte-app) : 179 fichiers, **0 erreur**, 6 warnings (5 fichiers, a11y + state_referenced_locally — préexistants)
   - `bun run test` : vitest 4.1.4 — **56 tests / 3 fichiers, tous verts** (utils only)
@@ -51,6 +57,7 @@
 - Relations PB : valider **ids** (pas noms) ; champs inconnus du body = rejet ou perte silencieuse.
 - `pb-collection.ts` : pas de curseur persisté — `since = max(updated)` de toute la table (bug scopé, port Étape 3).
 - JSVM : ES5 limité ; `console.log` incertain → `$app.logger()` ; `$os.getenv` pour l'env.
+- Nouvelle colonne PB = `DEFAULT '' NOT NULL` (rows existantes = `''`, pas NULL) : backfill → `WHERE col = '' OR col IS NULL` (détails journal T2).
 
 ## Journal par ticket (rempli par les implémenteurs à l'amend)
 
@@ -85,6 +92,38 @@ User de test créé sur la fresh DB (users `createRule` = public) : `POST /api/c
 - PB 0.37.5 résout `pb_migrations`/`pb_hooks` **relativement au parent du `--dir`** quand ils ne sont pas passés explicitement (avec `--dir /tmp/.../pb_data-backup-t1`, il proposait `/tmp/orchestrate/pb_migrations/`). Toujours passer `--migrationsDir`/`--hooksDir` absolus dès que `--dir` n'est pas le layout par défaut.
 - Au prochain boot d'une DB existante (dev ou prod), le snapshot s'applique comme migration en attente (no-op de contenu, +1 ligne `_migrations`) ; les 83 lignes des anciens fichiers (74 présents + 9 orphelines) y restent, inoffensives — `./pocketbase migrate history-sync` les purge si voulu (à considérer en T2+/déploiement).
 - La lecture `sqlite3 -readonly` touche le mtime de `data.db-shm` — un contrôle d'intégrité par mtime seul donnerait un faux positif ; utiliser les checksums.
+
+### T2 — Autodates `created`/`updated` sur ingredients + categories (06-10)
+
+**Fait établi** : nouvelle migration `1791278400_autodates_ingredients_categories.js` (> snapshot, trie après `1791277647_`). `up()` : ajout des autodates canoniques aux 2 collections via `collection.fields.add(new AutodateField({...}))` + `app.save()` — `created` (onCreate:true, onUpdate:false, id `autodate2990389176`) et `updated` (onCreate:true, onUpdate:true, id `autodate3332085495`), ids identiques à toutes les autres collections. Puis backfill SQL : `app.db().newQuery("UPDATE <table> SET created = {:d}, updated = {:d} WHERE created = '' OR created IS NULL").bind({d: ...}).execute()` — named params + `.bind()` fonctionnent en JSVM 0.37.5. `down()` fonctionnel : retrait des 2 champs (drop columns) + save.
+
+**Choix de backfill (documenté)** : date fixe `2026-10-06 00:00:00.000Z` (jour de migration, 00:00 UTC). Aucune row n'a de date antérieure (autodates inexistantes avant) ; la valeur est déterministe dev/prod, antérieure à toute écriture future. Le curseur client `max(updated)` repart de la valeur backfillée → toutes les rows franchissent le filtre delta, et les updates ultérieurs (autodate `onUpdate`) sont strictement supérieurs.
+
+**Application** (backup préalable `/tmp/orchestrate/pb_data-backup-t2/`, sha256 `data.db` vérifié identique) :
+1. Bootcheck sur copie (`cp -a` du backup → `/tmp/orchestrate/pb_data-bootcheck-t2`) : `./pocketbase/pocketbase migrate up --dir /tmp/orchestrate/pb_data-bootcheck-t2 --migrationsDir <abs>` → « Applied 1791277647_collections_snapshot.js » + « Applied 1791278400_autodates_ingredients_categories.js » (log `/tmp/orchestrate/t2-bootcheck-migrate-up.log`), puis serve port 8091 + sondes vertes. Le copie-test reproduit exactement le premier boot dev (snapshot pending + delta pending).
+2. Vraie DB dev : `cd pocketbase && ./pocketbase migrate up` (layout par défaut : `--dir`/`--migrationsDir` par défaut corrects, le piège T1 des chemins absolus ne s'applique pas) → mêmes 2 lignes « Applied » (log `/tmp/orchestrate/t2-dev-migrate-up.log`). `_migrations` : **92 lignes** = 90 historiques (dont 9 orphelines) + snapshot + delta.
+
+**Verdicts des sondes curl** (dev, port 8090, boot `scripts_dev/pb-dev.sh` nohup) :
+
+| Sonde | Commande | Obtenu |
+|---|---|---|
+| health | `curl -s http://127.0.0.1:8090/api/health` | **200** |
+| autodates peuplées | `curl -s 'http://127.0.0.1:8090/api/collections/ingredients/records?perPage=2'` | **200** — `created`/`updated` = `"2026-10-06 00:00:00.000Z"` sur toutes les rows, `totalItems: 845` |
+| delta ingredients | `curl -sG 'http://127.0.0.1:8090/api/collections/ingredients/records' --data-urlencode 'perPage=1' --data-urlencode "filter=updated > '2000-01-01'"` | **totalItems 845/845** (toutes les rows franchissent le filtre delta) |
+| delta categories | idem sur `categories` | **totalItems 60/60** |
+
+Contrôle SQL direct (`sqlite3 -readonly pocketbase/pb_data/data.db`) : ingredients **845/845** backfilled, categories **60/60**, **0** row vide (`created = '' OR created IS NULL OR updated = '' OR updated IS NULL`). Mêmes chiffres sur la copie bootcheck. Schema : colonnes ajoutées en `"created" TEXT DEFAULT '' NOT NULL` (idem `updated`).
+
+**Typegen** : `cd svelte-app && bun run generate-types` → diff `pb-generated.ts` = **+4 lignes uniquement** : `created: IsoAutoDateString` / `updated: IsoAutoDateString` ajoutés à `CategoriesRecord` et `IngredientsRecord`. Cohérent avec l'attendu.
+
+**Canon** : `bun run check` = 179 fichiers, 0 erreur, 6 warnings (inchangés) ; `bun run test` = 56/56 verts (logs `/tmp/orchestrate/t2-{check,test}-mig-26-10-06.log`). Tous les process PB stoppés en fin de ticket (ports 8090/8091 libres).
+
+**Note WIP fence** : le commit T2 inclut le header « état du monde post-T1 » de run.md (édition orchestrateur présente non commitée à l'arrivée, anodine) — commit whole-file d'un fichier que le ticket devait de toute façon amender, conformément au RUN-CONTRACT.
+
+**Pièges T2** :
+- Une colonne fraîchement ajoutée par PB est `DEFAULT '' NOT NULL` (texte) : les rows existantes portent `''`, pas NULL — un backfill doit cibler les deux (`WHERE col = '' OR col IS NULL`). Utile pour T3 (mêmes deltas backfill).
+- Colonne de `_migrations` = `file` (pas `filename`).
+- `migrate up` ne demande pas de confirmation (contrairement à `migrate collections`, piège T1).
 
 ## Constats différés (deferred — tag `!` bientôt / `S2` gating déploiement / `?` conditionnel)
 

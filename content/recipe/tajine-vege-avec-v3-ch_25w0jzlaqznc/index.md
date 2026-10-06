@@ -1,6 +1,6 @@
 ---
-title: Tajine végé avec orange
-date: '2026-04-28T13:00:36.445Z'
+title: Tajine végé au citron
+date: '2026-05-21T11:09:56.637Z'
 draft: true
 typeR: plat
 categories: []
@@ -32,9 +32,9 @@ ingredients:
     pS: false
   - uuid: eouu0v
     name: Carotte
-    originalQuantity: 70
+    originalQuantity: 50
     originalUnit: unité
-    normalizedQuantity: 8750
+    normalizedQuantity: 6250
     normalizedUnit: gr.
     comment: À couper en gros morceaux
     allergens: []
@@ -99,9 +99,9 @@ ingredients:
     pS: false
   - uuid: 3n8509
     name: Bouillon de légumes
-    originalQuantity: 10
+    originalQuantity: 5
     originalUnit: unité
-    normalizedQuantity: 10
+    normalizedQuantity: 5
     normalizedUnit: unité
     comment: La quantité est en nombre de bouillon cubes
     allergens:
@@ -133,31 +133,20 @@ ingredients:
     pS: false
   - uuid: v1kli8
     name: Gousse d'ail
-    originalQuantity: 42
+    originalQuantity: 20
     originalUnit: unité
-    normalizedQuantity: 42
+    normalizedQuantity: 20
     normalizedUnit: unité
     comment: À râper ou presser
     allergens: []
     type: epices
     pF: false
     pS: false
-  - uuid: yh2uod
-    name: Orange
-    originalQuantity: 14
-    originalUnit: unité
-    normalizedQuantity: 2800
-    normalizedUnit: gr.
-    comment: Jus + zeste
-    allergens: []
-    type: legumes
-    pF: false
-    pS: false
   - uuid: 9yf54l
     name: Raisin sec
-    originalQuantity: 500
+    originalQuantity: 250
     originalUnit: gr.
-    normalizedQuantity: 500
+    normalizedQuantity: 250
     normalizedUnit: gr.
     comment: À rajouter à la fin ou servir à côté
     allergens: []
@@ -166,9 +155,9 @@ ingredients:
     pS: false
   - uuid: 7sk3a5
     name: Aubergine
-    originalQuantity: 70
+    originalQuantity: 35
     originalUnit: unité
-    normalizedQuantity: 17500
+    normalizedQuantity: 8750
     normalizedUnit: gr.
     comment: A couper en gros cubes
     allergens: []
@@ -192,16 +181,25 @@ ingredients:
     allergens:
       - Moutarde
     type: epices
+  - uuid: 5cg0yu
+    name: Citron jaune
+    originalQuantity: 10
+    originalUnit: unité
+    normalizedQuantity: 1000
+    normalizedUnit: gr.
+    comment: Jus + zeste
+    allergens: []
+    type: legumes
 preparation: |-
   Recette testée avec des légumes d'hiver et pour 4 personnes d'abord dans un plat à tajine puis pour 50 personnes avec une grande casserole/marmitte.
 
   Les quantités ici ont donc été adaptées pour 100 personnes, et la description de la recette se base sur celle faite pour 50 personnes.
 
   - Couper les légumes (carottes, aubergines, oignons, ail, tomates) de la façon indiquée.
-  - Dans une grande marmitte, faire chauffer l'huile d'olive et les épices (ras el hanout et cumin), avant d'y ajouter les carottes et les oignons. Laisser cuire. 
-  - Presser les oranges pour en récolter le jus et rapper le zeste.
+  - Dans une grande marmitte, faire chauffer l'huile d'olive et les épices (ras el hanout et cumin), avant d'y ajouter les carottes et les oignons. Laisser cuire.
+  - Presser les citrons pour en récolter le jus et rapper le zeste.
   - Rajouter l'ail, les tomates hachées, les pois chiches cuits et les bouillons de légumes à la marmitte de légumes. Couvrir et laisser mijoter à feux doux (30min). Assaisoner en plus au fur et à mesure de sel, ras el hanout, cumin et de canelle en dernier.
-  - Rajouter les aubergines qui vont fondre doucement, ainsi que le jus et les zestes d'orange. Laisser mijoter à couvert à feu doux (1h).
+  - Rajouter les aubergines qui vont fondre doucement, ainsi que le jus et les zestes de citrons. Laisser mijoter à couvert à feu doux (1h).
   - A côté, faire revenir le reste des oignons dans une autre casserole, et les faire caraméliser.
   - Faire torréfier les amandes dans une poêle et hâcher le persil.
   - 30min/1h avant de servir : Préparer la semoule et le riz qui accompagneront le tajine.
@@ -215,7 +213,7 @@ permissionWrite:
   - 69b01d0a001a6848cc4c
 auteur: chrismino28
 createdAt: '2026-04-28T13:00:31.065+00:00'
-updatedAt: '2026-04-28T13:00:31.065+00:00'
+updatedAt: '2026-05-21T11:09:56.086+00:00'
 createdBy: 69b01d0a001a6848cc4c
 teams: []
 status: public

@@ -1,6 +1,6 @@
 ---
 title: Millionnaire shortbread à la cacahuète - vegan sans gluten
-date: '2026-03-26T10:24:08.062Z'
+date: '2026-07-13T15:21:28.858Z'
 draft: false
 typeR: dessert
 categories: []
@@ -8,7 +8,7 @@ regime:
   - vegan
   - sans-gluten
   - sans-lactose
-plate: 9
+plate: 6
 quantite_desc: null
 check: true
 cuisson: true
@@ -17,8 +17,7 @@ description: 'Vegan world '
 region: Américain
 saison: []
 id: millionnaire-shortbrea_zld--ge77gc-
-materiel:
-  - Four
+materiel: []
 ingredients:
   - uuid: 6bm4lq
     name: huile de coco
@@ -166,11 +165,11 @@ astuces: []
 preparation24h: Tout faire la veille, sauf la ganache qui peut être faite minimum 2-3h avant.
 permissionWrite:
   - 6931ecdccd2c8d8d15e5
-auteur: null
+auteur: Marion
 createdAt: '2026-03-26T10:24:07.623+00:00'
-updatedAt: '2026-03-26T10:24:07.623+00:00'
+updatedAt: '2026-07-13T15:20:53.046+00:00'
 createdBy: 6931ecdccd2c8d8d15e5
-teams: null
+teams: []
 status: public
 rootRecipeId: null
 versionLabel: null

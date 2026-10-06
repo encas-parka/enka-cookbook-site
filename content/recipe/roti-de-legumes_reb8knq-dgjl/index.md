@@ -1,6 +1,6 @@
 ---
 title: Rôti de légumes
-date: '2026-04-12T17:25:03.967Z'
+date: '2026-05-27T08:28:22.541Z'
 draft: true
 typeR: plat
 categories:
@@ -19,9 +19,7 @@ region: null
 saison:
   - ete
 id: roti-de-legumes_reb8knq-dgjl
-materiel:
-  - Four
-  - cuiseur vapeur
+materiel: []
 ingredients:
   - uuid: bq423s
     name: patate
@@ -34,9 +32,9 @@ ingredients:
     type: legumes
   - uuid: rtavky
     name: Oignon
-    originalQuantity: 0.75
-    originalUnit: gr.
-    normalizedQuantity: 0.75
+    originalQuantity: 1
+    originalUnit: kg
+    normalizedQuantity: 1000
     normalizedUnit: gr.
     comment: 'morceaux grossiers dorés '
     allergens: []
@@ -52,9 +50,9 @@ ingredients:
     type: legumes
   - uuid: mhsals
     name: Fenouil
-    originalQuantity: 0.75
+    originalQuantity: 750
     originalUnit: gr.
-    normalizedQuantity: 0.75
+    normalizedQuantity: 750
     normalizedUnit: gr.
     comment: gros morceaux
     allergens: []
@@ -108,11 +106,11 @@ astuces: []
 preparation24h: null
 permissionWrite:
   - 69a0483c0031f868819d
-auteur: null
+auteur: aude.123
 createdAt: '2026-04-12T17:25:03.195+00:00'
-updatedAt: '2026-04-12T17:25:03.195+00:00'
+updatedAt: '2026-05-27T08:28:21.835+00:00'
 createdBy: 69a0483c0031f868819d
-teams: null
+teams: []
 status: public
 rootRecipeId: null
 versionLabel: null

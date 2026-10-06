@@ -1,7 +1,7 @@
 ---
 title: Chorba végé boulgour
-date: '2026-03-07T13:38:02.659Z'
-draft: true
+date: '2026-09-17T15:39:26.610Z'
+draft: false
 typeR: plat
 categories:
   - Soupe
@@ -11,7 +11,7 @@ regime:
   - sans-lactose
 plate: 12
 quantite_desc: un bol d'environ 600ml par personne
-check: false
+check: true
 cuisson: true
 serveHot: true
 description: null
@@ -165,7 +165,7 @@ ingredients:
     type: sec
     pF: false
     pS: false
-  - uuid: rFuTuJv6Su3HnTJI_qTWO
+  - uuid: f5fy8w
     name: Navet
     originalQuantity: 300
     originalUnit: gr.
@@ -174,7 +174,7 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
-  - uuid: jU4Z5rXlcHLtxRyuZ9baT
+  - uuid: omf24t
     name: Boulgour
     originalQuantity: 150
     originalUnit: gr.
@@ -206,7 +206,7 @@ permissionWrite:
   - 6931ecdccd2c8d8d15e5
 auteur: Marion
 createdAt: '2026-02-15T18:05:14.180+00:00'
-updatedAt: '2026-03-07T13:37:59.729+00:00'
+updatedAt: '2026-09-17T15:39:26.332+00:00'
 createdBy: 6931ecdccd2c8d8d15e5
 teams: []
 status: public

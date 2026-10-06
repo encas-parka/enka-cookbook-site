@@ -1,7 +1,7 @@
 ---
 title: Xtipiti vegan
-date: '2026-04-09T08:22:45.586Z'
-draft: true
+date: '2026-09-17T15:37:38.850Z'
+draft: false
 typeR: entree
 categories:
   - Tartinade
@@ -11,7 +11,7 @@ regime:
   - sans-lactose
 plate: 8
 quantite_desc: null
-check: false
+check: true
 cuisson: true
 serveHot: false
 description: Tartinade grecque poivron feta véganisée
@@ -23,9 +23,9 @@ materiel: []
 ingredients:
   - uuid: 0zglpj
     name: Poivron (rouge)
-    originalQuantity: 2
+    originalQuantity: 4
     originalUnit: unité
-    normalizedQuantity: 2
+    normalizedQuantity: 4
     normalizedUnit: unité
     comment: ''
     allergens: []
@@ -96,7 +96,7 @@ permissionWrite:
   - 6931ecdccd2c8d8d15e5
 auteur: Marion
 createdAt: '2026-04-09T08:22:45.163+00:00'
-updatedAt: '2026-04-09T08:22:45.163+00:00'
+updatedAt: '2026-09-17T15:37:38.594+00:00'
 createdBy: 6931ecdccd2c8d8d15e5
 teams: []
 status: public

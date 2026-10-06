@@ -1,7 +1,7 @@
 ---
 title: Penne cruda avec fromage et noix
-date: '2026-04-12T08:56:22.135Z'
-draft: true
+date: '2026-09-17T15:32:20.866Z'
+draft: false
 typeR: plat
 categories:
   - Plat chaud
@@ -10,7 +10,7 @@ regime:
   - sans-gluten
 plate: 100
 quantite_desc: null
-check: false
+check: true
 cuisson: true
 serveHot: false
 description: null
@@ -44,9 +44,9 @@ ingredients:
     pS: false
   - uuid: 163u4z
     name: Olives Vertes Dénoyautées
-    originalQuantity: 5
+    originalQuantity: 3
     originalUnit: kg
-    normalizedQuantity: 5000
+    normalizedQuantity: 3000
     normalizedUnit: gr.
     comment: ''
     allergens: []
@@ -55,9 +55,9 @@ ingredients:
     pS: false
   - uuid: 7ahzm0
     name: Olives Noires Dénoyautées
-    originalQuantity: 5
+    originalQuantity: 3
     originalUnit: kg
-    normalizedQuantity: 5000
+    normalizedQuantity: 3000
     normalizedUnit: gr.
     comment: ''
     allergens: []
@@ -128,6 +128,16 @@ ingredients:
     allergens:
       - Produit laitier
     type: frais
+  - uuid: 0d5y4q
+    name: Fromage frais
+    originalQuantity: 2
+    originalUnit: kg
+    normalizedQuantity: 2000
+    normalizedUnit: gr.
+    comment: ''
+    allergens:
+      - Produit laitier
+    type: frais
 preparation: |-
   Faire cuire les pennes al dente dans beaucoup d'eau salée.
 
@@ -135,9 +145,9 @@ preparation: |-
 
   Egoutter et refroidir les pates.
 
-  Mixer les tomates, les olives, l'aïl, les câpres
+  Mixer les tomates, les olives, l'aïl, les câpres,
 
-  Hacher le basilic et l'ajouter à la sauce ainsi que l'huile d'olive.
+  Hacher le basilic et l'ajouter à la sauce ainsi que l'huile d'olive et le fromage frais.
 
   Rectifier l'assaisonement
 
@@ -149,9 +159,9 @@ permissionWrite:
   - 6931ecdccd2c8d8d15e5
 auteur: Marion
 createdAt: '2026-04-12T08:56:21.661+00:00'
-updatedAt: '2026-04-12T08:56:21.661+00:00'
+updatedAt: '2026-09-17T15:31:54.669+00:00'
 createdBy: 6931ecdccd2c8d8d15e5
-teams: null
+teams: []
 status: public
 rootRecipeId: penne-cruda_qavmivpa5mfj
 versionLabel: v2 - Marion

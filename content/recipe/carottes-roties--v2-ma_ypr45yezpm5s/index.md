@@ -1,7 +1,7 @@
 ---
 title: Carottes roties à la mélasse de grenade et feta
-date: '2026-03-26T10:09:47.696Z'
-draft: true
+date: '2026-09-17T15:33:21.180Z'
+draft: false
 typeR: entree
 categories:
   - Mezze
@@ -103,9 +103,9 @@ ingredients:
     type: epices
   - uuid: m5dxyo
     name: Feta
-    originalQuantity: 300
+    originalQuantity: 120
     originalUnit: gr.
-    normalizedQuantity: 300
+    normalizedQuantity: 120
     normalizedUnit: gr.
     comment: ''
     allergens:
@@ -150,7 +150,7 @@ permissionWrite:
   - 6931ecdccd2c8d8d15e5
 auteur: Marion
 createdAt: '2026-03-26T10:09:44.247+00:00'
-updatedAt: '2026-03-26T10:09:44.247+00:00'
+updatedAt: '2026-09-17T15:33:20.799+00:00'
 createdBy: 6931ecdccd2c8d8d15e5
 teams: []
 status: public

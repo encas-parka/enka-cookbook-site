@@ -1,10 +1,26 @@
 ---
+title: Salade grecque végan
+date: '2026-07-29T10:35:12.659Z'
+draft: false
+typeR: entree
 categories:
   - Salade
+regime:
+  - vegan
+  - sans-gluten
+  - sans-lactose
+plate: 180
+quantite_desc: null
 check: true
-checkAlwaysOk: false
 cuisson: false
-draft: false
+serveHot: false
+description: null
+region: Grece
+saison:
+  - ete
+id: salade-grecque-vegan_twvpx3jyr0rn
+materiel:
+  - Grand Saladier
 ingredients:
   - uuid: fkftyb
     name: Origan
@@ -30,9 +46,9 @@ ingredients:
     pS: false
   - uuid: doxujz
     name: Oignon rouge
-    originalQuantity: 4.5
+    originalQuantity: 2
     originalUnit: kg
-    normalizedQuantity: 4500
+    normalizedQuantity: 2000
     normalizedUnit: gr.
     comment: ''
     allergens: []
@@ -41,9 +57,9 @@ ingredients:
     pS: false
   - uuid: ibtbnq
     name: Tomate
-    originalQuantity: 10
+    originalQuantity: 14
     originalUnit: kg
-    normalizedQuantity: 10000
+    normalizedQuantity: 14000
     normalizedUnit: gr.
     comment: ''
     allergens: []
@@ -52,9 +68,9 @@ ingredients:
     pS: false
   - uuid: l5p1a5
     name: Concombre
-    originalQuantity: 16
+    originalQuantity: 12
     originalUnit: kg
-    normalizedQuantity: 16000
+    normalizedQuantity: 12000
     normalizedUnit: gr.
     comment: ''
     allergens: []
@@ -72,24 +88,19 @@ ingredients:
     type: lof
     pF: false
     pS: false
-materiel:
-  - Grand Saladier
-plate: 180
 preparation: Coupez, mélanger.
-publishDate: '2024-06-18T12:39:00+00:00'
-regime:
-  - sans-gluten
-  - sans-lactose
-  - vegan
-region: Grece
-saison:
-  - ete
-title: Salade grecque végan
-typeR: entree
-serveHot: false
-uuid: twvpx3jyr0rn
-id: salade-grecque-vegan_twvpx3jyr0rn
-createdAt: '2024-06-18T12:39:00+00:00'
-updatedAt: '2024-06-18T12:39:00+00:00'
-createdBy: ''
+prepAlt: []
+astuces: []
+preparation24h: null
+permissionWrite:
+  - 6931ecdccd2c8d8d15e5
+auteur: null
+createdAt: '2026-07-29T10:35:06.653+00:00'
+updatedAt: '2026-07-29T10:35:06.653+00:00'
+createdBy: 6931ecdccd2c8d8d15e5
+teams: null
+status: public
+rootRecipeId: null
+versionLabel: null
 ---
+

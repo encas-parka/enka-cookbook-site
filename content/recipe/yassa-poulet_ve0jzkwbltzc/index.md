@@ -1,6 +1,6 @@
 ---
 title: Yassa poulet
-date: '2026-04-12T18:16:40.496Z'
+date: '2026-05-26T19:24:28.223Z'
 draft: true
 typeR: plat
 categories:
@@ -67,10 +67,10 @@ ingredients:
     type: epices
   - uuid: vs2dfm
     name: Ail en poudre
-    originalQuantity: 0
-    originalUnit: gr.
-    normalizedQuantity: 0
-    normalizedUnit: gr.
+    originalQuantity: 1
+    originalUnit: au goût
+    normalizedQuantity: 1
+    normalizedUnit: au goût
     comment: ''
     allergens: []
     type: epices
@@ -85,9 +85,9 @@ ingredients:
     type: lof
   - uuid: a3widy
     name: Emincés de poulet (volaille et gibier)
-    originalQuantity: 150
+    originalQuantity: 600
     originalUnit: gr.
-    normalizedQuantity: 150
+    normalizedQuantity: 600
     normalizedUnit: gr.
     comment: le moins possible de blanc de poulet .
     allergens:
@@ -111,11 +111,11 @@ astuces: []
 preparation24h: null
 permissionWrite:
   - 69a0483c0031f868819d
-auteur: null
+auteur: aude.123
 createdAt: '2026-04-12T18:16:39.803+00:00'
-updatedAt: '2026-04-12T18:16:39.803+00:00'
+updatedAt: '2026-05-26T19:24:13.604+00:00'
 createdBy: 69a0483c0031f868819d
-teams: null
+teams: []
 status: public
 rootRecipeId: null
 versionLabel: null

@@ -1,6 +1,6 @@
 ---
 title: Cigares aux amandes
-date: '2026-04-04T20:02:15.902Z'
+date: '2026-05-27T08:25:14.905Z'
 draft: true
 typeR: dessert
 categories:
@@ -18,10 +18,7 @@ region: Algerienne
 saison:
   - ete
 id: cigares-aux-amandes_-gm-t_otyay2
-materiel:
-  - Bruleur
-  - Grand Saladier
-  - lèche frite ou plaque de cuisson
+materiel: []
 ingredients:
   - uuid: n85gmi
     name: sucre de canne (blond)
@@ -54,10 +51,10 @@ ingredients:
     type: sec
   - uuid: lw52ml
     name: essence amandes amères
-    originalQuantity: null
+    originalQuantity: 1
     originalUnit: c. à café
-    normalizedQuantity: 0
-    normalizedUnit: c. à café
+    normalizedQuantity: 5
+    normalizedUnit: ml
     comment: ''
     allergens: []
     type: epices
@@ -82,11 +79,11 @@ astuces: []
 preparation24h: null
 permissionWrite:
   - 69a0483c0031f868819d
-auteur: null
+auteur: aude.123
 createdAt: '2026-04-04T20:02:15.452+00:00'
-updatedAt: '2026-04-04T20:02:15.452+00:00'
+updatedAt: '2026-05-27T08:25:12.677+00:00'
 createdBy: 69a0483c0031f868819d
-teams: null
+teams: []
 status: public
 rootRecipeId: null
 versionLabel: null

@@ -1,7 +1,7 @@
 ---
 title: Lassi à la rose vegan
-date: '2026-04-08T11:27:17.265Z'
-draft: true
+date: '2026-09-17T15:35:09.134Z'
+draft: false
 typeR: dessert
 categories:
   - Crèmes dessert
@@ -78,7 +78,7 @@ permissionWrite:
   - 6931ecdccd2c8d8d15e5
 auteur: Marion
 createdAt: '2026-04-08T11:27:13.233+00:00'
-updatedAt: '2026-04-08T11:27:13.233+00:00'
+updatedAt: '2026-09-17T15:35:08.849+00:00'
 createdBy: 6931ecdccd2c8d8d15e5
 teams: []
 status: public

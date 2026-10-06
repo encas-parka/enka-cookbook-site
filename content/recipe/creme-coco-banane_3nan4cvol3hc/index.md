@@ -1,6 +1,6 @@
 ---
 title: Creme coco-banane
-date: '2026-04-04T20:14:29.275Z'
+date: '2026-05-27T08:16:39.948Z'
 draft: true
 typeR: dessert
 categories:
@@ -19,10 +19,7 @@ region: Chinoise
 saison:
   - ete
 id: creme-coco-banane_3nan4cvol3hc
-materiel:
-  - Bruleur
-  - Grand Saladier
-  - Marmitte
+materiel: []
 ingredients:
   - uuid: 9vpwp5
     name: Banane
@@ -60,33 +57,25 @@ ingredients:
     comment: 'cuites '
     allergens: []
     type: sec
-  - uuid: 0cng0w
-    name: dessert ya
-    originalQuantity: 200
-    originalUnit: gr.
-    normalizedQuantity: 200
-    normalizedUnit: gr.
-    comment: creme coco épaisse fermentee
-    allergens: []
-    type: autres
 preparation: |-
-  Mettre de cote la ya.
+  1. Mettre de côté  2 belles bananes .
 
-  1 Cuire les bananes avec le sucre a feu doux , 10 mn.
+  2 Cuire les bananes avec le sucre a feu doux , 10 mn.
 
-  2 Cuire les perles du japon.20mn a feu doux en remuant sans cesse.
+  3. Cuire les perles du japon.20mn a feu doux en remuant sans cesse.
+  4. Au dernier moment couper les 2 bananes réservées en jolies rondelles.
 
-  Melanger 1 et 2 avec le lait de coco . Agrémenter d une cuillère a dessert de creme ya dans chaque verrine.
+  Melanger 1 et 2 avec le lait de coco . Agrémenter d une  rondelle de banane dans chaque verrine.
 prepAlt: []
 astuces: []
 preparation24h: null
 permissionWrite:
   - 69a0483c0031f868819d
-auteur: null
+auteur: aude.123
 createdAt: '2026-04-04T20:14:28.788+00:00'
-updatedAt: '2026-04-04T20:14:28.788+00:00'
+updatedAt: '2026-05-27T08:16:30.060+00:00'
 createdBy: 69a0483c0031f868819d
-teams: null
+teams: []
 status: public
 rootRecipeId: null
 versionLabel: null

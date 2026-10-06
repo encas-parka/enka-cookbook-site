@@ -676,13 +676,15 @@ class ProductsStore {
       this.#currentEventId = event.id;
       this.#currentMainId = event.id;
 
-      // 1. Delta sync PocketBase → Dexie
+      // 1. Delta sync PocketBase → Dexie (cursor scoped to this event)
       this.#syncing = true;
       await this.#productsCollection.initialFetch({
         filter: ["eventId = {:eventId}", { eventId: this.#currentEventId! }],
+        scopeKey: this.#currentEventId!,
       });
       await this.#purchasesCollection.initialFetch({
         filter: ["eventId = {:eventId}", { eventId: this.#currentEventId! }],
+        scopeKey: this.#currentEventId!,
       });
       this.#syncing = false;
       this.#lastSync = new Date().toISOString();
@@ -1119,9 +1121,11 @@ class ProductsStore {
     const results = await Promise.allSettled([
       this.#productsCollection.initialFetch({
         filter: ["eventId = {:eventId}", { eventId: this.#currentEventId }],
+        scopeKey: this.#currentEventId,
       }),
       this.#purchasesCollection.initialFetch({
         filter: ["eventId = {:eventId}", { eventId: this.#currentEventId }],
+        scopeKey: this.#currentEventId,
       }),
     ]);
 

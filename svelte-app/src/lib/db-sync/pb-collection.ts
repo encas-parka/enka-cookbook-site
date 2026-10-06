@@ -10,8 +10,11 @@
  * - **Normalization**: PocketBase records (`id`/`created`/`updated`) are converted to
  *   Appwrite format (`id`/`created`/`updated`) — no normalization needed.
  *   This means the entire rest of the codebase (types, bridge, stores, components) is untouched.
- * - **Delta sync**: Uses `updated > {:since}` filter on the `updated` field (auto-managed by PB).
- *   No separate `syncMeta` table needed — we read the latest `updated` from Dexie directly.
+ * - **Delta sync**: Uses `updated >= {:since}` filter on the `updated` field (auto-managed by PB).
+ *   The cursor is persisted per scope in the `syncMeta` table (key
+ *   `${collection}:${scopeKey}` — see `scopeKey` in `PbFetchOptions`) and
+ *   written atomically with the upserts in a single Dexie transaction:
+ *   a failed upsert never advances the cursor.
  * - **Realtime**: PocketBase SSE replaces Appwrite WebSocket. No central registry needed —
  *   each collection subscribes directly via `pb.collection().subscribe()`.
  * - **Pagination**: Uses `getFullList()` for initial sync (auto-paginates internally).
@@ -31,6 +34,7 @@
 
 import type { Table, UpdateSpec } from 'dexie';
 import type PocketBase from 'pocketbase';
+import { db, type SyncMetaRow } from './aw-db';
 import type {
 	PbFetchOptions,
 	PbSubscribeOptions,
@@ -60,6 +64,21 @@ function stripSystemFields<T extends Record<string, unknown>>(
 		}
 	}
 	return result;
+}
+
+/**
+ * Lexical max of the `updated` field across records — PB datetime strings
+ * (`YYYY-MM-DD HH:mm:ss.SSSZ`) sort lexically, the same contract as the
+ * delta filter. Returns '' when no record carries a usable value, in which
+ * case the cursor keeps its previous position (never skips unfetched data).
+ */
+function maxUpdated(records: PbDoc[]): string {
+	let max = '';
+	for (const record of records) {
+		const u = record.updated || '';
+		if (u > max) max = u;
+	}
+	return max;
 }
 
 // =============================================================================
@@ -191,20 +210,30 @@ export function createSyncCollection<T extends PbDoc>(
 	// =====================================================================
 
 	/**
-	 * Incremental sync: fetches records updated since the latest `updated`
-	 * timestamp found in the local Dexie table.
+	 * Incremental sync: fetches records updated since the persisted cursor of
+	 * this collection (scoped by `scopeKey` when provided, key
+	 * `${collectionName}:${scopeKey}` in the `syncMeta` table).
+	 *
+	 * The cursor is written in the SAME Dexie transaction as the upserts —
+	 * if any upsert fails, both roll back, so the cursor never skips
+	 * unfetched data (the old table-derived cursor made older scopes
+	 * unfetchable after a newer scope had been synced).
 	 *
 	 * Uses `getFullList()` with auto-pagination (PocketBase SDK handles this).
 	 *
 	 * @param fetchOptions - Optional PocketBase filter/scope for the fetch
 	 */
 	async function initialFetch(fetchOptions?: PbFetchOptions): Promise<void> {
-		// 1. Find the latest `updated` timestamp in local data
-		const latest = await table.orderBy('updated').last();
-		const since = (latest as any)?.updated ?? '2000-01-01 00:00:00';
+		// 1. Read the persisted delta cursor (scoped when scopeKey is provided)
+		const syncKey = fetchOptions?.scopeKey
+			? `${collectionName}:${fetchOptions.scopeKey}`
+			: collectionName;
+		const meta = await db.syncMeta.get(syncKey);
+		const since = meta?.lastSync ?? '2000-01-01 00:00:00.000Z';
 		const localCount = await table.count();
 
-		// 2. Build the delta filter
+		// 2. Build the delta filter — `>=` replays boundary records (the upsert
+		//    is idempotent by id) so same-timestamp mutations are never dropped
 		const userFilter = resolveFilter(pb, fetchOptions);
 		const combinedVars = {
 			...(Array.isArray(fetchOptions?.filter) ? fetchOptions!.filter[1] : {}),
@@ -212,11 +241,11 @@ export function createSyncCollection<T extends PbDoc>(
 		};
 
 		const deltaFilter = userFilter
-			? pb.filter(`(${userFilter}) && updated > {:since}`, combinedVars)
-			: pb.filter('updated > {:since}', { since });
+			? pb.filter(`(${userFilter}) && updated >= {:since}`, combinedVars)
+			: pb.filter('updated >= {:since}', { since });
 
 		console.log(
-			`[pb-sync] ${collectionName}: fetching with filter="${deltaFilter}" (localCount=${localCount})`
+			`[pb-sync] ${collectionName}${fetchOptions?.scopeKey ? `:${fetchOptions.scopeKey}` : ''}: fetching with filter="${deltaFilter}" (localCount=${localCount})`
 		);
 
 		// 3. Fetch all updated records from PocketBase (with delta filter)
@@ -247,11 +276,14 @@ export function createSyncCollection<T extends PbDoc>(
 			});
 		}
 
-		// 4. Upsert into Dexie
-		if (freshRecords.length > 0) {
-			const records = freshRecords as unknown as T[];
+		// 4. Upsert into Dexie + advance the cursor in ONE transaction — if any
+		//    upsert fails, Dexie rolls back both ("rows written but cursor moved"
+		//    desync is impossible)
+		const records = freshRecords as unknown as T[];
+		const newCursor = maxUpdated(records);
 
-			await table.db.transaction('rw', table, async () => {
+		if (records.length > 0) {
+			await db.transaction('rw', [table, db.syncMeta], async () => {
 				for (const record of records) {
 					const existing = await table.get(record.id);
 					if (existing) {
@@ -259,6 +291,14 @@ export function createSyncCollection<T extends PbDoc>(
 					} else {
 						await table.put(record);
 					}
+				}
+				// A usable cursor only exists after records were observed — no
+				// write when nothing (or only `updated`-less rows) came back
+				if (newCursor) {
+					await db.syncMeta.put({
+						collectionId: syncKey,
+						lastSync: newCursor
+					} satisfies SyncMetaRow);
 				}
 			});
 		}
@@ -694,14 +734,20 @@ export function createSyncCollection<T extends PbDoc>(
 	}
 
 	/**
-	 * Clears the Dexie table for this collection.
-	 * Used on logout to prevent stale data from leaking across users.
+	 * Clears the Dexie table for this collection plus its delta cursors in
+	 * `syncMeta`: scoped keys (`${name}:${scope}`) by prefix, the unscoped
+	 * key explicitly. The `:` suffix keeps `materiel` from matching
+	 * `materiel_loan:*` keys.
 	 *
-	 * Note: Unlike aw-sync, we don't have a `syncMeta` table to clean up.
-	 * Delta sync is based on the latest `updated` in the Dexie table itself.
+	 * Used on logout / force reload to prevent stale data from leaking
+	 * across users or events — the next sync performs a full fetch.
 	 */
 	async function clearLocal(): Promise<void> {
-		await table.clear();
+		await db.transaction('rw', [table, db.syncMeta], async () => {
+			await table.clear();
+			await db.syncMeta.where('collectionId').startsWith(`${collectionName}:`).delete();
+			await db.syncMeta.delete(collectionName);
+		});
 		console.log(`[pb-sync] clearLocal ${collectionName}`);
 	}
 

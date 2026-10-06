@@ -257,6 +257,13 @@ export class EnkaDB extends Dexie {
     this.version(9).stores({
       products: "id, updated, eventId, ingredientRef, store, status",
     });
+
+    // v10: delta-sync cursors move to persisted syncMeta rows (scoped cursors).
+    // No schema change — bumping the version marks the cursor-semantics change:
+    // clients reopen every scope with no cursor, so the next online sync
+    // performs one full fetch per scope, healing partial caches left behind
+    // by the old table-derived cursor.
+    this.version(10).stores({});
   }
 }
 

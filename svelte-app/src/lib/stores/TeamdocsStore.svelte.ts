@@ -48,8 +48,27 @@ export class TeamdocsStore {
     return this.#documentsList.filter((doc) => doc.teamId === teamId);
   }
 
+  getTeamTags(teamId: string): string[] {
+    const tags = new Set<string>();
+    for (const doc of this.#documentsList) {
+      if (doc.teamId === teamId && doc.tags) {
+        for (const tag of doc.tags) tags.add(tag);
+      }
+    }
+    return Array.from(tags).sort();
+  }
+
   getEventDocuments(eventId: string): Teamdocs[] {
     return this.#documentsList.filter((doc) => doc.eventId === eventId);
+  }
+
+  /**
+   * Récupère les documents d'un événement filtrés par tag
+   */
+  getEventDocumentsByTag(eventId: string, tag: string): Teamdocs[] {
+    return this.#documentsList.filter(
+      (doc) => doc.eventId === eventId && doc.tags?.includes(tag),
+    );
   }
 
   // =============================================================================
@@ -256,6 +275,22 @@ export class TeamdocsStore {
   // =============================================================================
   // CLEANUP
   // =============================================================================
+
+  /**
+   * Reset non destructif (tests / resync locale) : purge l'état en mémoire et
+   * les tables Dexie SANS désabonner le bridge liveQuery — une fois
+   * désabonné (destroy), le singleton ne peut plus être repeuplé. Le store
+   * reste utilisable immédiatement après.
+   */
+  async softReset(): Promise<void> {
+    this.#loading = false;
+    this.#error = null;
+    this.#isInitialized = false;
+    this.#isRealtimeActive = false;
+    this.#realtimeInitialized = false;
+    this.#initPromise = null;
+    await this.#collection.clearLocal();
+  }
 
   async destroy(): Promise<void> {
     // Unsubscribe bridge en premier pour arrêter le liveQuery Dexie

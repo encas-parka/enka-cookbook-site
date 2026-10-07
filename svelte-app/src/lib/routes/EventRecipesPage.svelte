@@ -8,6 +8,7 @@
   import { navigate, route, searchParams } from "$lib/router";
   import { onMount, tick } from "svelte";
   import EventStats from "$lib/components/EventStats.svelte";
+  import EventDocumentsBloc from "$lib/components/documents/EventDocumentsBloc.svelte";
   import EventRecipeCard from "$lib/components/eventEdit/EventRecipeCard.svelte";
   import LeftPanel from "$lib/components/ui/LeftPanel.svelte";
   import AutocompleteInput from "$lib/components/ui/AutocompleteInput.svelte";
@@ -525,8 +526,17 @@
             <EventStats {currentEvent} />
           </div>
 
-          </div>
+          <!-- Bloc Documents attachés -->
+          {#if eventId}
+            <EventDocumentsBloc
+              {eventId}
+              tag="recette"
+              tagLabel="Recettes"
+              canEdit={!!canEdit}
+            />
+          {/if}
         </div>
+      </div>
     {/if}
 
     <!-- Toggle calendrier -->

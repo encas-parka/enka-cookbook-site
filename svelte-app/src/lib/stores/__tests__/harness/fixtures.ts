@@ -8,7 +8,7 @@
  * strings. All dates below are fixed so tests are deterministic.
  */
 import type { EnrichedEvent } from "$lib/types/events";
-import type { Products, Purchases } from "$lib/types/pb";
+import type { Products, Purchases, Teamdocs } from "$lib/types/pb";
 import type { ProductNeedRow } from "$lib/db-sync/pb-sync";
 import { pbDate } from "./stub-pb";
 
@@ -19,6 +19,7 @@ export const T1 = new Date("2026-06-08T11:30:00.000Z");
 
 /** 15 chars, PB-id shaped. */
 export const TEST_EVENT_ID = "t12event00000001";
+export const TEST_TEAMDOC_ID = "t02teamdoc000001";
 export const TEST_PRODUCT_ID = "eau_t12test0001";
 export const TEST_PURCHASE_ID = "t12purchase0001";
 
@@ -102,6 +103,22 @@ export function makePurchaseRecord(overrides: Partial<Purchases> = {}): Purchase
     deliveryDate: null,
     invoiceId: null,
     invoiceTotal: null,
+    ...overrides,
+  };
+}
+
+/** A PB "teamdocs" record (server-side shape — id/created/updated native). */
+export function makeTeamdocsRecord(overrides: Partial<Teamdocs> = {}): Teamdocs {
+  return {
+    id: TEST_TEAMDOC_ID,
+    created: pbDate(T0),
+    updated: pbDate(T0),
+    title: "Doc test",
+    content: null,
+    status: "doc",
+    teamId: null,
+    eventId: TEST_EVENT_ID,
+    tags: null,
     ...overrides,
   };
 }

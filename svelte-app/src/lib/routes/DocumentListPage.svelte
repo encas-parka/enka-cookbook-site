@@ -22,7 +22,15 @@
   // ÉTAT LOCAL
   // ============================================================================
 
+  // État des filtres
+  interface Filters {
+    tags: string[];
+  }
+
   let searchQuery = $state("");
+  let filters = $state<Filters>({
+    tags: [],
+  });
 
   // Tri
   type SortBy = "title" | "created" | "updated";
@@ -47,8 +55,12 @@
     return teamdocsStore.getTeamDocuments(teamId);
   });
 
-  // Logique de filtrage (recherche seule — les filtres tags sont morts avec le
-  // champ `tags`, supprimé du schéma teamdocs)
+  // Extraire les valeurs uniques pour les filtres
+  const availableTags = $derived.by(() => {
+    return teamId ? teamdocsStore.getTeamTags(teamId) : [];
+  });
+
+  // Logique de filtrage
   const filteredDocs = $derived.by(() => {
     // Si recherche active (>= 2 chars), ignorer les autres filtres
     if (searchQuery.length >= 2) {
@@ -74,7 +86,14 @@
       });
     }
 
-    return allDocs;
+    // Sinon, appliquer les filtres
+    return allDocs.filter((doc) => {
+      // Tags (OU logique)
+      const tagMatch =
+        !filters.tags.length || filters.tags.some((t) => doc.tags?.includes(t));
+
+      return tagMatch;
+    });
   });
 
   // Tri des documents filtrés
@@ -108,6 +127,14 @@
   // Reset fonctions
   function resetSearch() {
     searchQuery = "";
+  }
+
+  function toggleTag(tag: string) {
+    if (filters.tags.includes(tag)) {
+      filters.tags = filters.tags.filter((t) => t !== tag);
+    } else {
+      filters.tags = [...filters.tags, tag];
+    }
   }
 
   // Lazy loading avec Intersection Observer
@@ -193,6 +220,9 @@
       <DocumentSortControls
         {sortBy}
         {sortOrder}
+        {availableTags}
+        selectedTags={filters.tags}
+        onTagToggle={toggleTag}
         disabled={filtersDisabled}
         onSortChange={(s, o) => {
           sortBy = s;
@@ -209,7 +239,7 @@
     {:else}
       <div class="my-8 space-y-3">
         {#each paginatedDocs as doc (doc.id)}
-          <DocCard {doc} {teamId} bgClass="bg-base-100" />
+          <DocCard {doc} {teamId} highlightedTags={filters.tags} bgClass="bg-base-100" />
         {/each}
       </div>
 

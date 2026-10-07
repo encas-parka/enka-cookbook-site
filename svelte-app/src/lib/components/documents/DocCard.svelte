@@ -8,6 +8,7 @@
     doc: Teamdocs;
     teamId?: string;
     eventId?: string;
+    highlightedTags?: string[];
     bgClass?: string;
   }
 
@@ -15,6 +16,7 @@
     doc,
     teamId,
     eventId,
+    highlightedTags = [],
     bgClass = "bg-base-200/60",
   }: Props = $props();
 
@@ -47,6 +49,20 @@
           {getStatusLabel(doc.status)}
         </div>
       {/if} -->
+
+      <!-- Tags -->
+      {#if doc.tags && doc.tags.length > 0}
+        <div class="flex flex-wrap gap-1">
+          {#each doc.tags as tag}
+            <span
+              class="badge badge-outline badge-xs"
+              class:badge-primary={highlightedTags.includes(tag)}
+            >
+              #{tag}
+            </span>
+          {/each}
+        </div>
+      {/if}
 
       <!-- Metadata -->
       <div class="text-base-content/50 me-4 flex items-center gap-3 text-xs">

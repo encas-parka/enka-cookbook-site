@@ -274,6 +274,58 @@ export class EnkaDB extends Dexie {
 export const db = new EnkaDB();
 
 // =============================================================================
+// OPEN DÉFENSIF (portage du pattern oupla `ensureDbReady`)
+// =============================================================================
+
+let readyPromise: Promise<void> | null = null;
+
+/**
+ * Ouvre la base IndexedDB avec un reset défensif sur erreur d'open/migration.
+ * Mémoïsé : plusieurs appels partagent le même `readyPromise`. À appeler au
+ * boot client AVANT la première opération DB.
+ *
+ * Cas couvert : une base locale incompatible (version IndexedDB supérieure à
+ * celle déclarée — ex. bump manuel pour forcer un wipe, ou schéma d'une autre
+ * app sur le même origin). Sans cette garde, Dexie lève VersionError et TOUTES
+ * les opérations (liveQuery des bridges comprises) échouent en silence côté
+ * stores : la sync écrit, les lecteurs ne voient jamais les rows.
+ *
+ * Stratégie : si `open()` échoue, on drop la base — ce ne sont que des caches
+ * de PocketBase, source de vérité serveur — puis on rouvre. Si le reopen
+ * échoue aussi, on propage (IndexedDB corrompu au-delà du schéma applicatif).
+ */
+export function ensureDbReady(): Promise<void> {
+  if (readyPromise) return readyPromise;
+  readyPromise = (async () => {
+    // SSR / environnements sans IndexedDB : rien à faire (jamais d'accès DB).
+    if (typeof indexedDB === "undefined") return;
+
+    try {
+      await db.open();
+      // Sanity check : Dexie déclare ses tables indépendamment des stores
+      // réellement présents. Une base « ouverte » mais incohérente (version
+      // montée manuellement, stores absents) doit déclencher le reset — sinon
+      // les opérations échouent en silence (NotFoundError) et les bridges
+      // liveQuery restent vides malgré une sync apparemment OK.
+      const probe = db.tables[0];
+      if (probe) await probe.limit(1).toArray();
+    } catch (err) {
+      console.error("[aw-db] Open failed, attempting full reset:", err);
+      try {
+        await db.delete();
+      } catch (deleteErr) {
+        console.error("[aw-db] Reset (delete) also failed:", deleteErr);
+      }
+      await db.open();
+      console.warn(
+        "[aw-db] Database reset successful — local cache rebuilt from scratch.",
+      );
+    }
+  })();
+  return readyPromise;
+}
+
+// =============================================================================
 // CLEANUP OLD CACHES
 // =============================================================================
 

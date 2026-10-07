@@ -5,7 +5,7 @@
   import { nativeTeamsStore as teamsStore } from "./lib/stores/NativeTeamsStore.svelte";
   import { recipesStore } from "./lib/stores/RecipesStore.svelte";
   import { materielStore } from "./lib/stores/MaterielStore.svelte";
-  import { cleanupLegacyCaches } from "$lib/db-sync/pb-sync";
+  import { cleanupLegacyCaches, ensureDbReady } from "$lib/db-sync/pb-sync";
   import { teamdocsStore } from "./lib/stores/TeamdocsStore.svelte";
   import ErrorAlert from "./lib/components/ui/ErrorAlert.svelte";
   import HeaderNav from "./lib/components/HeaderNav.svelte";
@@ -24,6 +24,12 @@
 
       // Nettoyer les anciens caches IDB (migration PocketBase → Dexie)
       await cleanupLegacyCaches();
+
+      // Open défensif Dexie : une base locale incompatible (version supérieure,
+      // upgrade cassé) est droppée et recréée — le cache n'est pas source de
+      // vérité (PocketBase l'est). Sans cette garde, les liveQuery des bridges
+      // échouent en silence et les stores restent vides malgré une sync OK.
+      await ensureDbReady();
 
       await globalState.initializeAuth();
 

@@ -15,13 +15,14 @@ export { pb } from './pb';
 
 // Dexie database (unchanged — same EnkaDB, same id PK)
 export {
-	db,
-	cleanupLegacyCaches,
-	type EnkaDB,
-	type RecipeDataRow,
-	type CatalogRow,
-	type ProductNeedRow,
-	type SyncMetaRow
+  db,
+  cleanupLegacyCaches,
+  ensureDbReady,
+  type EnkaDB,
+  type RecipeDataRow,
+  type CatalogRow,
+  type ProductNeedRow,
+  type SyncMetaRow
 } from './aw-db';
 
 // Core sync collection
@@ -29,9 +30,9 @@ export { createSyncCollection, mergeByKey, RecordDeletedError } from './pb-colle
 
 // Realtime signals (SSE connect/disconnect → StatusBar + resync orchestrateur)
 export {
-	initRealtimeSignals,
-	onRealtimeReconnect,
-	teardownRealtimeSignals
+  initRealtimeSignals,
+  onRealtimeReconnect,
+  teardownRealtimeSignals
 } from './pb-realtime';
 
 // Bridge (100% backend-agnostic — 0 change)
@@ -42,11 +43,11 @@ export { useLiveQuery } from './use-live-query.svelte';
 
 // PocketBase-specific types
 export type {
-	PbFetchOptions,
-	PbSubscribeOptions,
-	PbListOptions,
-	PbSyncOptions,
-	PbSubscriptionRef,
-	PbCollectionName,
-	PbDoc
+  PbFetchOptions,
+  PbSubscribeOptions,
+  PbListOptions,
+  PbSyncOptions,
+  PbSubscriptionRef,
+  PbCollectionName,
+  PbDoc
 } from './pb-types';

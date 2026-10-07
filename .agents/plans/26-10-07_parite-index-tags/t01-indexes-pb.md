@@ -31,7 +31,11 @@ Ajouter les index que les patterns de requêtes réels réclament, avec preuve m
 
 ## Critères
 
-- [ ] Inventaire des patterns vérifié par grep (complété si besoin) dans run.md
-- [ ] EXPLAIN avant/après par requête représentative (SCAN → USING INDEX), commandes exactes loggées
-- [ ] Migration appliquée (copie puis dev, backups faits) ; down() fonctionnel (testé sur copie)
-- [ ] Aucune régression sonde ; canons inchangés ; run.md amendé (journal T01)
+- [x] Inventaire des patterns vérifié par grep (complété si besoin) dans run.md
+- [x] EXPLAIN avant/après par requête représentative (SCAN → USING INDEX), commandes exactes loggées
+- [x] Migration appliquée (copie puis dev, backups faits) ; down() fonctionnel (testé sur copie)
+- [x] Aucune régression sonde ; canons inchangés ; run.md amendé (journal T01)
+
+## Résultat (07-10)
+
+11 index posés (`1791333000_query_indexes.js`) : `updated` simple ×7, `(eventId, updated)` ×3 (products/purchases/event_materiel — toujours fetchés scopés, pas d'index `updated` simple pour eux), `(target_id, link_type)` share_links. Candidats rejetés par la preuve : `events.createdBy` (règles en OR avec `~` non-indexable, EXPLAIN reste SCAN), locks (client 100 % PK, `recordId`/`collection` vestiges jamais requêtés). Journal complet : run.md.

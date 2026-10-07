@@ -1,5 +1,9 @@
 # Handoff — régressions click-through du 07-10 (post-runs audit-fixes)
 
+> **RÉSOLUTION 07-10 (soir)** — P1/P2/P3 corrigés et validés, voir la section
+> « Résolution » en bas de ce fichier. Deux résidus tracés (cold-start liveQuery,
+> renommage uuid→ref dans le transform).
+
 **Contexte** : click-through utilisateur après les 3 runs (`26-10-06_audit-fixes_done`, `26-10-06_svelte-legacy-triage_done`, `26-10-07_parite-index-tags_done` — journaux complets dans `.agents/plans/`). La branche est fonctionnelle sur les flux de création ; les problèmes ci-dessous sont apparus aux étapes suivantes.
 **Protocole attendu** : *diagnose-first* (reproduire → isoler → racine → fix), pas de correctif à l'aveugle. Skills utiles : `diagnosing-bugs`, `pb-sync` (.agents/skills/).
 
@@ -49,3 +53,22 @@ Or les lecteurs clients attendaient des **chaînes** (`safeJsonParse` fait `json
 - Runs de contexte : `.agents/plans/{26-10-06_audit-fixes,26-10-06_svelte-legacy-triage,26-10-07_parite-index-tags}_done/run.md`.
 - Fichiers clés : `svelte-app/src/lib/db-sync/pb-collection.ts` (fallback L285, cursor T13) · `svelte-app/src/lib/utils/productsUtils.ts` (safeJsonParse L4) · `productEnrichment.ts` (buildRawProductBase L28) · `stores/ProductsStore.svelte.ts` (#buildEnriched L219) · `routes/EventEditPage.svelte` (save L811) · `services/pb-locks.ts` · `stores/TeamdocsStore.svelte.ts` (tags natif, référence de consommation json) · `scripts_dev/2-transform-data.ts` (shapes écrits).
 - Backlog : ligne `!` click-through pointe ici ; ne pas réinitialiser pb_data ni IndexedDB avant diagnostic (l'état post-re-import est une pièce à conviction).
+
+## Résolution (07-10, run click-through-fixes)
+
+Protocole `diagnosing-bugs` : boucles de repro d'abord (vitest harnais + séquences HTTP live), fixes ensuite, 130/130 tests, check 0 erreur.
+
+| # | Racine confirmée | Fix | Validation |
+|---|---|---|---|
+| P1-products | `safeJsonParse` : garde `jsonString?.trim()` hors try/catch → TypeError sur le JSON natif post-re-import | lecteur tolérant aux deux shapes (`productsUtils.ts`) | boucle rouge→verte |
+| P2 DataCloneError | shadow draft `$state` d'EventEditPage → proxies atteignant le put optimiste Dexie (structured clone). `create()` passait au travers : PB d'abord, réponse plain ensuite — d'où « création OK / sauvegarde KO » | `toPlain()` aux entrées `create`/`update`/`batch` de `pb-collection.ts` | boucle rouge→verte |
+| P3 lock fantôme | `updateRule` locks (`userId = @request.auth.id`) : reprise d'un lock **libéré** (`userId=""`) impossible → PB 404 → create 400 not_unique → `acquireLock` false. Les `expiresAt=1970` sont le marqueur normal de `releaseLock` | migration `1791400000_locks_takeover_rule.js` : `userId = @request.auth.id \|\| userId = "" \|\| expiresAt < @now` | boucle HTTP live rouge→verte (404→200) |
+| P1-recettes | **4255/4255** objets ingrédients en DB portent `uuid` (shape Appwrite préservée par le transform), lecteur `parseIngredients` exigeait `ref` → filtrage silencieux 100 %, stores pleins, zéro erreur. Confirmation live : stores 456/845 peuplés, liveQuery OK, UI vide | `parseIngredients` accepte `ref \|\| uuid` et normalise vers `ref` | boucle rouge→verte + click-through utilisateur ✓ |
+
+Bonus porté du pb-sync oupla (analyse sous-agent) : `ensureDbReady()` — open défensif Dexie + sanity-check des stores, branché dans `App.svelte` avant l'init auth. Couvre le scénario « base EnkaDB montée à une version supérieure » (v100 observée sur l'origin 5173 ; fake-indexeddb ne lève pas VersionError → sanity-check ajouté).
+
+### Résidus tracés
+
+1. **Cold-start liveQuery** : au premier chargement d'une base vide, les bridges singletons restent à 0 jusqu'au refresh, alors qu'un liveQuery créé après coup voit tout (mesuré : `recipeDataCount: 0` vs `liveQuery frais: 845` dans la même session). Non reproductible en harnais. À diagnostiquer séparément — non bloquant (refresh + realtime prennent le relais).
+2. **Transform re-import** : `2-transform-data.ts` préserve le json tel quel ; pour un futur import propre, renommer `uuid → ref` dans les objets `ingredients` à la source (Phase 1.7). Le writer client écrit déjà `ref` (normalisation progressive à l'édition).
+3. **Bug latent `remove()`** : `softDelete=true` appelle quand même `pb.delete()` (oupla fait un update serveur `{deleted:true}` dans ce cas). À tracker.

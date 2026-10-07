@@ -34,10 +34,21 @@ export interface FiltersState {
   sortDirection: "asc" | "desc";
 }
 
-export function safeJsonParse<T>(jsonString: string | null): T | null {
-  if (!jsonString?.trim()) return null;
+/**
+ * Parse un champ json PocketBase tolérant aux deux shapes portés en DB :
+ * - JSON natif (objet/array, écrit par le re-import T17 et l'API PB) →
+ *   retourné tel quel ;
+ * - JSON double-encodé legacy Appwrite (chaîne) → JSON.parse.
+ * Le garde historique `jsonString?.trim()` levait un TypeError sur le shape
+ * natif (garde hors try/catch) et faisait planter tout l'enrichissement.
+ */
+export function safeJsonParse<T>(json: string | T | null | undefined): T | null {
+  if (json == null) return null;
+  if (typeof json === "object") return json as T;
+  if (typeof json !== "string") return null;
+  if (!json.trim()) return null;
   try {
-    return JSON.parse(jsonString);
+    return JSON.parse(json);
   } catch (err) {
     console.warn("[ProductsStore] Erreur parsing JSON:", err);
     return null;
@@ -455,15 +466,13 @@ export function detectOverrideMismatch(
     recipesChanged,
     details: hasMismatch
       ? {
-          oldComputed,
-          newComputed,
-          oldPlates,
-          newPlates,
-          oldRecipes,
-          newRecipes,
-        }
+        oldComputed,
+        newComputed,
+        oldPlates,
+        newPlates,
+        oldRecipes,
+        newRecipes,
+      }
       : undefined,
   };
 }
-
-

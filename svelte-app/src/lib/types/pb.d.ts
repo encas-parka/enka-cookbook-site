@@ -105,7 +105,8 @@ export type Products = PbDoc & {
   productType: string | null;
   pF: boolean;
   pS: boolean;
-  // JSON fields — strings brutes parsées par safeJsonParse côté client
+  // JSON fields — dual shape : JSON natif (re-import T17 / API PB) ou chaîne
+  // double-encodée legacy Appwrite. safeJsonParse tolère les deux.
   store: string | null;
   specs: string | null;
   status: string;

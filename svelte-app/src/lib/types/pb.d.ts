@@ -251,6 +251,8 @@ export type Teamdocs = PbDoc & {
   status: string | null;
   teamId: string | null;
   eventId: string | null;
+  // JSON field — array natif PB (sonde T02 : shape array côté API)
+  tags: string[] | null;
 };
 
 /** Locks (collection: "locks") — aligned with LocksRecord */

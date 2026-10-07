@@ -448,12 +448,13 @@ export type ShareLinksRecord = {
 	useCount?: number
 }
 
-export type TeamdocsRecord = {
+export type TeamdocsRecord<Ttags = unknown> = {
 	content?: string
 	created: IsoAutoDateString
 	eventId?: RecordIdString
 	id: string
 	status?: string
+	tags?: null | Ttags
 	teamId?: RecordIdString
 	title?: string
 	updated: IsoAutoDateString
@@ -504,7 +505,7 @@ export type ProductsResponse<TmergedFrom = unknown, TpreviousNames = unknown, Ts
 export type PurchasesResponse<Tstore = unknown, Texpand = unknown> = Required<PurchasesRecord<Tstore>> & BaseSystemFields<Texpand>
 export type RecipesResponse<Tastuces = unknown, Tcategories = unknown, Tingredients = unknown, Tmateriel = unknown, TprepAlt = unknown, Tregime = unknown, Tsaison = unknown, Tteams = unknown, Texpand = unknown> = Required<RecipesRecord<Tastuces, Tcategories, Tingredients, Tmateriel, TprepAlt, Tregime, Tsaison, Tteams>> & BaseSystemFields<Texpand>
 export type ShareLinksResponse<Texpand = unknown> = Required<ShareLinksRecord> & BaseSystemFields<Texpand>
-export type TeamdocsResponse<Texpand = unknown> = Required<TeamdocsRecord> & BaseSystemFields<Texpand>
+export type TeamdocsResponse<Ttags = unknown, Texpand = unknown> = Required<TeamdocsRecord<Ttags>> & BaseSystemFields<Texpand>
 export type TeamsResponse<Troles = unknown, Texpand = unknown> = Required<TeamsRecord<Troles>> & BaseSystemFields<Texpand>
 export type UsersResponse<Texpand = unknown> = Required<UsersRecord> & AuthSystemFields<Texpand>
 

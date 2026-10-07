@@ -828,6 +828,7 @@ function main() {
       teamId,
       eventId,
       status: awDoc.status || "draft",
+      tags: awDoc.tags || null, // Appwrite prod n'a jamais eu l'attribut → null (les futures docs créeront leurs tags via l'UI)
       created, // Mapped from $createdAt
       updated, // Mapped from $updatedAt
       _refId: refId,

@@ -20,7 +20,7 @@
 ## Critères de fin de run
 
 - [x] T01 : indexes posés + preuves EXPLAIN QUERY PLAN avant/après
-- [ ] T02 : fonctionnalité restaurée bout-en-bout (schéma + client + pipeline) + tests
+- [x] T02 : fonctionnalité restaurée bout-en-bout (schéma + client + pipeline) + tests
 - [ ] Canons verts aux deux portails ; run.md amendés ; backlog mis à jour (orchestrateur)
 
 ## Journal par ticket (rempli par les implémenteurs à l'amend)
@@ -64,3 +64,31 @@ Le composite couvre filtre ET tri (plus de temp b-tree). Logs : `/tmp/orchestrat
 - JSVM `collection.indexes` (`types.JSONArray<string>`) : lire via boucle + réassigner un array neuf ; ne jamais push/muter le wrapper.
 
 **Note WIP fence** : aucune édition étrangère rencontrée (checkpoint propre, `??` = uniquement mes 2 fichiers) ; commit filet : migration + sonde (convention repo : sondes versionnées) + ticket + run.md.
+
+### T02 — Restaurer « documents liés par tag » : schéma + client + pipeline (07-10)
+
+**Verdict global : VERT — fonctionnalité rendue réellement fonctionnelle bout-en-bout : champ `tags` json posé (bootcheck up/down/up sur copie puis dev), sondes curl 200 + persistance SQL vérifiée, client restauré depuis `8d4541a9^` (hunks seuls, fixes du triage préservés), blocs rendus sur les 4 pages événement avec les tags parité site, mapping pipeline ajouté. Canons : check 0 err/6 warn (178 fichiers), test 107/107 (104 + 3 nouveaux), check-legacy 0 err/2 warn (baseline exacte).** Deux commits en tiers : `2f3440f8` (données) + `efa6f33e` (client).
+
+**Contradiction flaguée (artefact prime sur le dispatch)** : le fait établi n°9 (« export frais : 22 rows sans une seule clé tags ») est **contredit par l'export local** `scripts_dev/appwrite-export/teamdocs.json` (07-10 01:01, re-import audit-fixes T17) : les 22 rows portent TOUS la clé `tags`, avec des **valeurs réelles** sur 10 d'entre elles (`["materiel"]`, `["produit","tache","recette"]`, etc.) et `[]` sur les 12 autres. L'attribut `tags` existe donc dans la collection Appwrite de cet export — la restauration est encore plus utile qu'anticipé : le mapping `tags: awDoc.tags || null` **préserve** ces valeurs au prochain re-import. Nota : `[]` est truthy en JS → 12 rows importeront `[]` (pas null) — comportement du pattern repo standard demandé par le ticket, sans impact client (`doc.tags?.includes(tag)` et `doc.tags.length > 0` sont faux sur `[]`). Dry-run : 22 rows transformées, zéro crash, verdict réel = 10 tags préservés + 12 `[]` (log `/tmp/orchestrate/t02-transform-dryrun.log`). Les warnings teamId orphelin préexistaient (test doc sans team).
+
+**Décisions de design** :
+- **`EnrichedTeamdoc` non ressuscité** : pré-suppression c'était `Omit<Teamdocs, "lockedBy"> & { lockedBy: string | null }` — un shim legacy (lockedBy n'existe plus au schéma PB) et `doc.tags` n'y était même pas typé (d'où le « fix EnrichedTeamdoc » du triage = sa suppression). `tags` étant maintenant un vrai champ, il vit sur `Teamdocs` (`pb.d.ts` : `tags: string[] | null` ; `pb-generated.ts` régénéré par `bun run generate-types` → `tags?: null | Ttags`, pattern générique json du repo). Le store retourne `Teamdocs[]` — `doc.tags?.includes(tag)` type proprement, check-legacy 0 tenu dès l'écriture.
+- **`isPublic`/`teamName` non restaurés** : même sous-système mort mais features distinctes (visibilité/nommage) sans champ au schéma — hors objectif ticket « documents liés par tag ». Les hunks restaurés les excluent ; les fieldsets « Visibilité » (déjà commentés pré-suppression) et l'import `ActiveFiltersDisplay` (usage mort commenté) restent hors.
+- **Champ json, nommage `tags`** : conforme à l'intention 1700000009 (vérifiée via `git show 165062d4:pocketbase/pb_migrations/1700000009_teamdocs.js`) ET à la référence site. Id de champ `json4321650987` (sans collision, 24 ids json existants vérifiés).
+- **Tag strings parité site** (grep confirmé sur les 4 pages site + hunks `8d4541a9^`) : `materiel` (EventMaterielPage), `produit` (EventProductsPage), `recette` (EventRecipesPage), `tache` (EventTodosPage) — labels Produits/Recettes/Tâches/Matériel ; `PREDEFINED_TAGS` identiques sur les pages create/edit.
+- **`TeamdocsStore.softReset()` ajouté** (miroir `ProductsStore.softReset()`) : le harness a besoin d'un reset non destructif — voir piège ci-dessous.
+
+**Chaîne d'exécution** : sha pb_data avant `eb12d00e…` / après `2e5ea6fb…` (`/tmp/orchestrate/t02-pbdata-sha-{before,after}.txt`) ; backup pré-boot `/tmp/orchestrate/pb_data-backup-t02p/` ; bootcheck sur copie `pb-bootcheck-t02` (« Applied 1791340000 » ; `pragma table_info(teamdocs)` = colonne `tags` JSON nullable ; `_collections.fields` = `tags/json/required:false` ; `echo y | migrate down` → « Reverted », colonne retirée, `_migrations` 100, les 11 index T01 + `idx_ingredients_uuid` intacts ; re-up OK) ; application dev (`_migrations` 100 → 101) ; boot dev 8090 (health 200, hooks OK, log sans erreur, stoppé en fin de ticket, ports libres).
+
+**Sondes** (`.scratch/probes/t02-teamdocs-tags-probe.py`, log `/tmp/orchestrate/t02-probe.log`, superuser de sonde créé puis supprimé, teardown vérifié en SQL) : create avec `tags: ["produit","recette"]` → **200 + SQL `'["produit","recette"]'`** ; create sans tags → 200 + SQL NULL ; PATCH tags → 200 + SQL `'["tache"]'` ; liste API → **tags arrive en array natif** (pas une string — la consommation directe `doc.tags?.includes()` est correcte, pas de safeJsonParse nécessaire : les helpers existants parsent des strings legacy Hugo/Appwrite, pas du json PB natif).
+
+**Test store** (`teamdocs-store-tags.test.ts`, 3 tests) : `getEventDocumentsByTag` filtre eventId+tag avec event B sans rapport exclu et docs sans tags exclus ; `getTeamTags` dédoublonne/tri et scope par équipe. Harness fake PB inchangé ; fixture `makeTeamdocsRecord` ajoutée.
+
+**Pièges T02** :
+- **`destroy()` sur un singleton store tue son bridge liveQuery définitivement** : `#bridge` est un field créé au chargement du module ; `destroy()` unsubcribe et rien ne le recrée — le store devient aveugle à Dexie (diagnostiqué par sondes jetables : Dexie peuplé, bridge neuf voit la row, bridge du store à 0). Dans l'app c'est sans effet (destroy = logout terminal, re-login = reload), mais dans les tests `destroy()` entre deux tests casse toute propagation ultérieure. Les tests passants « avec destroy » du diagnostic ne passaient que par accident (map pétrie, même record id). → `softReset()` (état mémoire + `clearLocal()`, bridge intact) pour le harness ; finding lifecycle différé (les stores n'ont pas tous un softReset).
+- sv-router `route.params` = `Partial<Record<..., string>>` → `eventId` est `string | undefined` selon les pages et `canEdit` peut être `boolean | undefined` : les props requis du bloc exigent `canEdit={!!canEdit}` et `eventId={eventId ?? ""}` aux sites d'appel (check-legacy, plus strict que check, les attrape).
+- `searchParams.get()` retourne `string | number | boolean | null` (wrapper sv-router) → narrowing `typeof tagParam === "string"` avant le `includes` du pré-check.
+
+**Canon** : `bun run check` = 178 fichiers, **0 erreur, 6 warnings** (baseline exacte) · `bun run test` = **107/107** (104 + 3) · `bun run check-legacy` = **0 erreur, 2 warnings** (baseline : les 2 warnings a11y tabindex préexistaient — logs triage `f3-check-legacy-full2.log`, lignes 373/418 non touchées par mes hunks). Logs : `/tmp/orchestrate/t02-check-mig-tier1.log`, `t02-check-mig-tier2.log`, `t02-check-mig-tier2b.log`, `t02-check-legacy.log`, `t02-test-teamdocs-tags.log`, `t02-test-full.log`.
+
+**Note WIP fence** : aucune édition étrangère dans la zone (checkpoint propre avant édition) ; les stashes du repo datent de 2025/2026-janvier sur l'ancien arbre (1650 fichiers, aucun fichier svelte-app actuel) — non touchés. Commits : `2f3440f8` (migration + sonde + pipeline + types), `efa6f33e` (client + tests), le présent amend (ticket + run.md).

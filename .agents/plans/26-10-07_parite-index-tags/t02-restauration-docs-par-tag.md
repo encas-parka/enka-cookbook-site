@@ -33,8 +33,8 @@ Rendre la fonctionnalité réellement fonctionnelle (elle n'a jamais eu sa couch
 
 ## Critères
 
-- [ ] Migration tags appliquée (copie puis dev, backups) ; sondes curl create/persist
-- [ ] Pipeline : mapping tags + dry-run 22 rows (verdict loggé)
-- [ ] Client restauré : bloc sur les 4 pages (tags identiques au site), store + type complétés
-- [ ] Tests verts ; canons verts (legacy 0)
-- [ ] run.md amendé (journal T02 : décisions, preuves)
+- [x] Migration tags appliquée (copie puis dev, backups) ; sondes curl create/persist
+- [x] Pipeline : mapping tags + dry-run 22 rows (verdict loggé)
+- [x] Client restauré : bloc sur les 4 pages (tags identiques au site), store + type complétés
+- [x] Tests verts ; canons verts (legacy 0)
+- [x] run.md amendé (journal T02 : décisions, preuves)

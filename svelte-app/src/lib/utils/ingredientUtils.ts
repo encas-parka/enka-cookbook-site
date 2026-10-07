@@ -12,6 +12,10 @@ import type { RecipeIngredient } from "../types/recipes.types";
 /**
  * Parse des ingrédients depuis la DB (objets natifs PB ou legacy string[])
  * Accepte RecipeIngredient[] (natif PB), string[] (legacy Appwrite), null/undefined
+ *
+ * Dual-shape identifiant : les objets natifs portent `ref` (canonical, écrit
+ * par le client) ou `uuid` (re-import T17, shape Appwrite historique —
+ * 100% des 4255 items importés). Le ref est normalisé dans l'objet retourné.
  */
 export function parseIngredients(
   ingredients: RecipeIngredient[] | string[] | null | undefined,
@@ -26,9 +30,10 @@ export function parseIngredients(
         item &&
         typeof item === "object" &&
         !Array.isArray(item) &&
-        typeof item.ref === "string"
+        (typeof item.ref === "string" || typeof item.uuid === "string")
       ) {
-        return item as RecipeIngredient;
+        if (typeof item.ref === "string") return item as RecipeIngredient;
+        return { ...item, ref: item.uuid } as RecipeIngredient;
       }
 
       if (typeof item === "string") {
@@ -37,9 +42,10 @@ export function parseIngredients(
           if (
             parsed &&
             typeof parsed === "object" &&
-            typeof parsed.ref === "string"
+            (typeof parsed.ref === "string" || typeof parsed.uuid === "string")
           ) {
-            return parsed as RecipeIngredient;
+            if (typeof parsed.ref === "string") return parsed as RecipeIngredient;
+            return { ...parsed, ref: parsed.uuid } as RecipeIngredient;
           }
         } catch {
           console.warn("[ingredientUtils] Failed to parse ingredient:", item);

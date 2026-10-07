@@ -14,7 +14,7 @@
 
 - `!` Décision produit `materiel.createdBy` — vide structurellement (110/110, pipeline écrit `null`, confirmé au re-import) → records indestructibles via l'API (`deleteRule = createdBy = auth`). Options : backfill `createdBy ← ownerUser`, ou révision `deleteRule` (`|| ownerUser = auth`). Idem `materiel_loan` (client ne set jamais `createdBy`).
 - `!` teamdocs prod : 1 document rejeté à l'import (`content` > 5000 chars, limite du champ PB) — delta schéma (text illimité) ou tronquage, décision produit.
-- `!` Click-through navigateur complet — liste des flux dans run.md § journal T18 (créations UI, RSVP, invitation email réel via SMTP, locks concurrents, resync SSE topic custom `user_<id>`, logout/login, visiteur, PWA version.json à bumper à la release) + suppression du bloc « documents liés par tag » (commit `8d4541a9` — à valider visuellement, revert facile si réticence).
+- `!` Click-through navigateur complet — liste des flux dans run.md § journal T18 (créations UI, RSVP, invitation email réel via SMTP, locks concurrents, resync SSE topic custom `user_<id>`, logout/login, visiteur, PWA version.json à bumper à la release) + **fonctionnalité « documents liés par tag » restaurée (run 26-10-07 : champ tags PB + bloc sur 4 pages événement, tags parité site `materiel`/`produit`/`recette`/`tache` ; les 10 teamdocs prod tagués préservés au re-import)** — à valider visuellement.
 
 ## Conditionnels (?)
 
@@ -24,7 +24,7 @@
 - `?` `lookup-user` casse d'email — comparaison `=` BINARY côté SQLite ; vérifier si PB lowercases à la création avant tout geste.
 - `?` Asymétrie `categories` (create auth, update/delete superuser) — assumer et documenter dans la doc domaine.
 - `?` Résidu REC-7 — `ownerUser = self` + team étrangère au create materiel reste possible (garde team ou owner, au choix).
-- `?` Perf PB : pas d'index sur `updated` (les delta-sync full-scan) ni équivalent des index Appwrite prod `idx_updatedAt` — à ajouter si les volumes croissent (recettes 456+, products 1286).
+- `?` Perf PB : ~~pas d'index sur `updated`~~ **Fait (run 26-10-07, T01)** : 11 index posés avec preuves EXPLAIN (delta `updated` ×7, composites `(eventId, updated)` ×3, share_links `(target_id, link_type)`) ; candidats rejetés par la preuve : locks (client 100 % PK), events.createdBy (rules OR avec `~` JSON non-indexables).
 
 ## Hors périmètre (autre repo / produit)
 
@@ -32,4 +32,4 @@
 - Images recettes (20 valeurs `img` frontmatter, og:image Hugo déjà cassées) — décision produit Phase 2 ; noter que le bucket Appwrite `recipe_img` existe (identique dev/prod) mais rien n'est prévu côté PB (stockage ou abandon).
 - Étape 7 du portage (notifications realtime cross-user) et Étape 9 (robustesse SW/PWA) — hors priorité synthèse, plans dans `.agents/plans/26-10-06_audit-fixes_done/` (source : audit port-hardening §4).
 - Nettoyage site : recettes `z-test` côté enka-next (2 exclus côté mig).
-- Feature « documents liés par tag » teamdocs : réimplémentation exige un changement de schéma PB (tags) — produit (le sous-système client mort a été supprimé, commit `8d4541a9`).
+- Feature « documents liés par tag » teamdocs : **RESTAURÉE et fonctionnelle** (run 26-10-07, T02 : champ `tags` json + bloc sur 4 pages + mapping pipeline ; les tags prod existants — 10 docs — sont préservés au re-import). Résiduel : `isPublic`/`teamName` restent hors schéma (features distinctes, jamais portées en prod).

@@ -451,6 +451,7 @@ export class MaterielStore {
           eventId: data.eventId || null,
           eventName: data.eventName || null,
           borrowerUser: globalState.userId,
+          createdBy: globalState.userId,
         } as Omit<MaterielLoan, "id" | "created" | "updated">,
       );
 
@@ -648,9 +649,9 @@ export class MaterielStore {
     const formatDate = (d: string | null) =>
       d
         ? new Date(d).toLocaleDateString("fr-FR", {
-            day: "2-digit",
-            month: "2-digit",
-          })
+          day: "2-digit",
+          month: "2-digit",
+        })
         : "?";
     const start = formatDate(loan.startDate);
     const end = formatDate(loan.endDate);

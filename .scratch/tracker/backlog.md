@@ -12,8 +12,8 @@
 
 ## Bientôt (!)
 
-- `!` Décision produit `materiel.createdBy` — vide structurellement (110/110, pipeline écrit `null`, confirmé au re-import) → records indestructibles via l'API (`deleteRule = createdBy = auth`). Options : backfill `createdBy ← ownerUser`, ou révision `deleteRule` (`|| ownerUser = auth`). Idem `materiel_loan` (client ne set jamais `createdBy`).
-- `!` teamdocs prod : 1 document rejeté à l'import (`content` > 5000 chars, limite du champ PB) — delta schéma (text illimité) ou tronquage, décision produit.
+- ~~`!` Décision produit `materiel.createdBy`~~ **TRANCHÉ 08-10 (plan A)** : l'option backfill était morte (ownerUser vide aussi — la source Appwrite n'a jamais porté ces valeurs, owner.userId = "" sur 110/110). Retenu : deleteRule team-scopées (`createdBy = auth || teamId.members ~ auth` ; loans : `ownerId.members ~ auth`, parité avec les permissions Appwrite réelles : delete("team:…") sur 80/110), `createLoan` écrit désormais `createdBy`, et backfill `teams.roles` des 8 teams legacy (migrations 1791500000 + 1791600000). Suites : purge des 2440 doublons d'un import accidentel (idem 08-10, voir handoff), et ticket `need-triage_admin-only-server-enforcement.md` pour le durcissement serveur éventuel.
+- `!` teamdocs prod : 1 document rejeté à l'import (`content` > 5000 chars) — **limite déjà levée** : le schéma live PB a `content max: 0` (snapshot 1791277647 postérieur à l'import T17) ; reste uniquement à ré-importer le doc (`6a3ff71f0008dcb17ba5`, présent dans `scripts_dev/appwrite-export/teamdocs.json`), puis validate-migration devrait passer 38/38.
 - `!` Click-through navigateur complet — liste des flux dans run.md § journal T18 (créations UI, RSVP, invitation email réel via SMTP, locks concurrents, resync SSE topic custom `user_<id>`, logout/login, visiteur, PWA version.json à bumper à la release) + **fonctionnalité « documents liés par tag » restaurée (run 26-10-07 : champ tags PB + bloc sur 4 pages événement, tags parité site `materiel`/`produit`/`recette`/`tache` ; les 10 teamdocs prod tagués préservés au re-import)** — à valider visuellement.
 
 ## Conditionnels (?)

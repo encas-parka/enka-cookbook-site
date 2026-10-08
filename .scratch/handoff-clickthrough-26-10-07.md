@@ -73,3 +73,32 @@ Bonus porté du pb-sync oupla (analyse sous-agent) : `ensureDbReady()` — open 
 2. **Transform re-import** : `2-transform-data.ts` préserve le json tel quel ; pour un futur import propre : renommer `uuid → ref` dans les objets `ingredients`, et normaliser les items `astuces` double-encodés. Le writer client écrit déjà `ref` (normalisation progressive à l'édition).
 3. **Astuces double-encodées par item (28 recettes)** — **CORRIGÉ 07-10** : `parseAstuces` décode les items string JSON `{"astuce":…}` (fallback texte brut si non-JSON ou sans clé astuce) ; 2 tests ajoutés (`recipes-json-shape.test.ts`, suite 132/132). **prepAlt vérifié : sain** — 28/28 recettes en shape natif `[{"recetteAlt":…}]` (0 double-encodage), le lecteur `RecipeAlternatives.svelte` attend déjà des objets. Résiduel cosmétique : le type `prepAlt: string[] | null` dans `pb.d.ts`/`appwrite.d.ts` est inexact (objets `{recetteAlt}` en réalité) — à corriger à l'occasion. Reste la normalisation côté transform pour un futur re-import (résidu 2).
 4. **Bug latent `remove()` soft-delete** : `softDelete: true` n'est utilisé que par MaterielStore (materiels) ; dans ce cas `remove()` hard-delete quand même côté PB (`pb.collection().delete()`), la branche soft ne marque que Dexie. Utilisateur : « peut-être pas pertinent dans cette app » — à trancher si le soft-delete materiel devient réel (sinon : retirer l'option ou aligner remove() sur update serveur `{deleted:true}`).
+
+## Incident 08-10 — import accidentel et purge (résolu)
+
+Pendant l'implémentation du plan A, un `import()` dynamique de diagnostic a
+exécuté `main()` de `3-import-pb.ts` (le script s'exécute au chargement, pas
+de garde CLI) → ~2440 doublons créés (teams, materiel, events, products,
+purchases, materiel_loan, event_materiel, share_links, categories). Les
+collections à ids explicites (users, recipes, ingredients, teamdocs,
+event_todos, locks) ont rejeté les creates en `not_unique` — intactes.
+
+**Purge (même soir)** : script `.scratch/probes/cleanup-accidental-import.ts`
+— les doublons identifiés via l'id-map écrasé par le run accidentel (refId →
+id doublon) croisé avec migration-map.json (intact) ; categories par fenêtre
+rowid + appariement de nom. Validations bloquantes (existence, fenêtre UTC
+de l'accident 16:50+, rowids max stricts), suppression transactionnelle,
+comptes finaux conformes sur les 15 collections. Pièges rencontrés : dates
+PB en UTC (shell en UTC+2) et l'import n'envoie PAS les dates Appwrite
+(créées à l'heure du run — c'est `4-fix-timestamps.ts` qui les rétablit).
+
+**Séquelles à connaître** :
+- `scripts_dev/pb-import/id-map.json` contient désormais les ids des
+doublons supprimés (l'artefact T17 est perdu) — régénérable en re-tournant
+le pipeline ; aucun script downstream ne l'utilise à ce jour.
+- Les 8 teams originales ont `updated` bumpé au 08-10 16:56 (save de la
+migration roles, contenu inchangé).
+- Si l'onglet SPA est resté ouvert pendant l'accident (~16:57-17:00 UTC),
+la realtime a pu pousser des doublons dans IndexedDB — PB ne diffusant pas
+les deletes externes, un nettoyage IndexedDB (ou un re-sync complet) est à
+faire avant le prochain click-through.

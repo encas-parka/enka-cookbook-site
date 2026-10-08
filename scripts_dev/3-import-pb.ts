@@ -246,6 +246,17 @@ function processRecord(collection: string, record: any): { data: Record<string, 
     }
   }
 
+  // teams.roles : map {refId user: role} — remapObject ne remappe que les
+  // valeurs, les clés doivent l'être explicitement (le SPA indexe la map par
+  // id PB user : enrichTeamFromPB `roles[user.id]`).
+  if (collection === "teams" && data.roles && typeof data.roles === "object" && !Array.isArray(data.roles)) {
+    const resolvedRoles: Record<string, any> = {};
+    for (const [refKey, role] of Object.entries(data.roles as Record<string, any>)) {
+      resolvedRoles[resolve(refKey) || refKey] = role;
+    }
+    data.roles = resolvedRoles;
+  }
+
   return { data, refId: _refId || "", appwriteId: _appwriteId || "" };
 }
 

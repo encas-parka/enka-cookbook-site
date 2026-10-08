@@ -26,7 +26,7 @@ const MAP_FILE = join(import.meta.dir, "migration-map.json");
 type UserMap = Record<string, { refId: string; email: string; name: string; eventLabels: string[] }>;
 type TeamMap = Record<string, { refId: string; name: string }>;
 type EventMap = Record<string, { refId: string; name: string }>;
-type GenericMap = Record<string, { refId: string; [k: string]: any }>;
+type GenericMap = Record<string, { refId: string;[k: string]: any }>;
 
 // --- Helpers ---
 const warnings: string[] = [];
@@ -162,7 +162,7 @@ function main() {
 
   mkdirSync(IMPORT_DIR, { recursive: true });
 
-   const migrationMap: {
+  const migrationMap: {
     _meta: { createdAt: string; source: string };
     users: UserMap;
     teams: TeamMap;
@@ -265,10 +265,17 @@ function main() {
     const updated = team.$updatedAt || null;
 
     const members: string[] = [];
+    // roles = map {refId user: role} — les _memberships Appwrite portent les
+    // rôles ("owner"/"member") ; seuls les owners sont stockés (défaut member).
+    // Les clés refId sont résolues en ids PB par 3-import-pb.ts (processRecord).
+    const roles: Record<string, string> = {};
 
     for (const m of team._memberships || []) {
       if (userMap[m.userId]) {
         members.push(userMap[m.userId].refId);
+        if ((m.roles || []).includes("owner")) {
+          roles[userMap[m.userId].refId] = "owner";
+        }
       } else {
         warn(`Team "${team.name}": member userId="${m.userId}" not found in user map`);
       }
@@ -278,6 +285,7 @@ function main() {
     pbTeams.push({
       name: team.name,
       members: members.length > 0 ? members : null,
+      roles,
       created, // Mappé depuis $createdAt
       updated, // Mappé depuis $updatedAt
       _refId: refId,
@@ -316,7 +324,7 @@ function main() {
   }
 
   let orphanCount = 0;
-   for (const tid of orphanTeamIds) {
+  for (const tid of orphanTeamIds) {
     const name = orphanNames[tid] || `orphan_${tid.slice(0, 8)}`;
     const refId = `aw_${tid}`;
     // Orphan teams: no $createdAt/$updatedAt from Appwrite
@@ -327,6 +335,7 @@ function main() {
     pbTeams.push({
       name,
       members: null,
+      roles: {}, // teams orphelines : aucun membership exporté
       created, // Pas de donnée Appwrite pour les orphans
       updated, // Pas de donnée Appwrite pour les orphans
       _refId: refId,
@@ -932,16 +941,16 @@ function main() {
   saveImport("share_links", pbShareLinks);
   console.log(`   ✅ ${pbShareLinks.length} share_links transformed\n`);
 
-   // =========================================================================
-   // 12. LOCKS — SKIPPED (not migrated)
-   // =========================================================================
-   // Locks are intentionally NOT migrated. Users will be disconnected post-migration
-   // (new passwords required). Any locks would be stale anyway.
-   console.log("⏭️  Skipping locks (not migrated — users will reconnect post-migration)\n");
+  // =========================================================================
+  // 12. LOCKS — SKIPPED (not migrated)
+  // =========================================================================
+  // Locks are intentionally NOT migrated. Users will be disconnected post-migration
+  // (new passwords required). Any locks would be stale anyway.
+  console.log("⏭️  Skipping locks (not migrated — users will reconnect post-migration)\n");
 
-   // =========================================================================
-   // Save migration map
-   // =========================================================================
+  // =========================================================================
+  // Save migration map
+  // =========================================================================
   writeFileSync(MAP_FILE, JSON.stringify(migrationMap, null, 2) + "\n");
 
   // =========================================================================

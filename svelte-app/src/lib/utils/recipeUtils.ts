@@ -141,6 +141,21 @@ export function parseAstuces(
       }
 
       if (typeof item === "string") {
+        // Legacy Appwrite double-encodé par item : "[{\"astuce\":\"…\"}]"
+        if (item.trimStart().startsWith("{")) {
+          try {
+            const parsed = JSON.parse(item);
+            if (
+              parsed &&
+              typeof parsed === "object" &&
+              typeof parsed.astuce === "string"
+            ) {
+              return { astuce: parsed.astuce };
+            }
+          } catch {
+            // JSON invalide → fallback texte brut
+          }
+        }
         return { astuce: item };
       }
 

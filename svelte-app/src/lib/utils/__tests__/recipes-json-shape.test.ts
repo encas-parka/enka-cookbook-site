@@ -87,6 +87,19 @@ describe("parseAstuces — double shape (natif PB + legacy)", () => {
     ]);
   });
 
+  it("décode le legacy double-encodé par item (string JSON {astuce})", () => {
+    expect(
+      parseAstuces(['{"astuce":"Servir avec de la sauce chili"}'] as any),
+    ).toEqual([{ astuce: "Servir avec de la sauce chili" }]);
+  });
+
+  it("fallback texte brut pour une string { non-JSON ou sans astuce", () => {
+    expect(parseAstuces(["{not json"] as any)).toEqual([{ astuce: "{not json" }]);
+    expect(parseAstuces(['{"foo":"bar"}'] as any)).toEqual([
+      { astuce: '{"foo":"bar"}' },
+    ]);
+  });
+
   it("retourne [] pour null/undefined (sans lever)", () => {
     expect(parseAstuces(null)).toEqual([]);
     expect(parseAstuces(undefined)).toEqual([]);

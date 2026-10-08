@@ -1,8 +1,8 @@
 # Handoff — régressions click-through du 07-10 (post-runs audit-fixes)
 
 > **RÉSOLUTION 07-10 (soir)** — P1/P2/P3 corrigés et validés, voir la section
-> « Résolution » en bas de ce fichier. Deux résidus tracés (cold-start liveQuery,
-> renommage uuid→ref dans le transform).
+> « Résolution » en bas de ce fichier. Résidu astuces double-encodées corrigé
+> dans la foulée (parseAstuces + tests) ; résidus restants listés en bas.
 
 **Contexte** : click-through utilisateur après les 3 runs (`26-10-06_audit-fixes_done`, `26-10-06_svelte-legacy-triage_done`, `26-10-07_parite-index-tags_done` — journaux complets dans `.agents/plans/`). La branche est fonctionnelle sur les flux de création ; les problèmes ci-dessous sont apparus aux étapes suivantes.
 **Protocole attendu** : *diagnose-first* (reproduire → isoler → racine → fix), pas de correctif à l'aveugle. Skills utiles : `diagnosing-bugs`, `pb-sync` (.agents/skills/).
@@ -69,6 +69,7 @@ Bonus porté du pb-sync oupla (analyse sous-agent) : `ensureDbReady()` — open 
 
 ### Résidus tracés
 
-1. **Cold-start liveQuery** : au premier chargement d'une base vide, les bridges singletons restent à 0 jusqu'au refresh, alors qu'un liveQuery créé après coup voit tout (mesuré : `recipeDataCount: 0` vs `liveQuery frais: 845` dans la même session). Non reproductible en harnais. À diagnostiquer séparément — non bloquant (refresh + realtime prennent le relais).
-2. **Transform re-import** : `2-transform-data.ts` préserve le json tel quel ; pour un futur import propre, renommer `uuid → ref` dans les objets `ingredients` à la source (Phase 1.7). Le writer client écrit déjà `ref` (normalisation progressive à l'édition).
-3. **Bug latent `remove()`** : `softDelete=true` appelle quand même `pb.delete()` (oupla fait un update serveur `{deleted:true}` dans ce cas). À tracker.
+1. **Cold-start : logs d'init trompeurs, pas de bug bloquant** — au premier sync d'une base vide, `Synchronisation terminée: 0 recettes` / `✓ 0 ingrédients` loggent la taille des bridges AVANT la première délivrance du liveQuery ; l'UI (réactive) affiche les données dès la délivrance (constaté en click-through). Amélioration cosmétique possible : faire attendre `syncInitial` la première délivrance du bridge, ou logguer après un micro-délai. Historique : la v100 EnkaDB observée sur l'origin 5173 (incompatible v10 déclarée) est couverte par `ensureDbReady` (fa51ae61).
+2. **Transform re-import** : `2-transform-data.ts` préserve le json tel quel ; pour un futur import propre : renommer `uuid → ref` dans les objets `ingredients`, et normaliser les items `astuces` double-encodés. Le writer client écrit déjà `ref` (normalisation progressive à l'édition).
+3. **Astuces double-encodées par item (28 recettes)** — **CORRIGÉ 07-10** : `parseAstuces` décode les items string JSON `{"astuce":…}` (fallback texte brut si non-JSON ou sans clé astuce) ; 2 tests ajoutés (`recipes-json-shape.test.ts`, suite 132/132). **prepAlt vérifié : sain** — 28/28 recettes en shape natif `[{"recetteAlt":…}]` (0 double-encodage), le lecteur `RecipeAlternatives.svelte` attend déjà des objets. Résiduel cosmétique : le type `prepAlt: string[] | null` dans `pb.d.ts`/`appwrite.d.ts` est inexact (objets `{recetteAlt}` en réalité) — à corriger à l'occasion. Reste la normalisation côté transform pour un futur re-import (résidu 2).
+4. **Bug latent `remove()` soft-delete** : `softDelete: true` n'est utilisé que par MaterielStore (materiels) ; dans ce cas `remove()` hard-delete quand même côté PB (`pb.collection().delete()`), la branche soft ne marque que Dexie. Utilisateur : « peut-être pas pertinent dans cette app » — à trancher si le soft-delete materiel devient réel (sinon : retirer l'option ou aligner remove() sur update serveur `{deleted:true}`).

@@ -1,6 +1,6 @@
 ---
 title: Trofies bolognèse végé avec courgettes roties en frite
-date: '2026-10-04T17:10:27.400Z'
+date: '2026-10-08T09:36:57.663Z'
 draft: true
 typeR: plat
 categories: []
@@ -50,9 +50,9 @@ ingredients:
     type: legumes
   - uuid: 1r89qf
     name: Protéines de soja (petites)
-    originalQuantity: 600
+    originalQuantity: 750
     originalUnit: gr.
-    normalizedQuantity: 600
+    normalizedQuantity: 750
     normalizedUnit: gr.
     comment: sauce
     allergens: []
@@ -66,16 +66,6 @@ ingredients:
     comment: sauce+pates+courgettes+prot de soja
     allergens: []
     type: lof
-  - uuid: jjrwlj
-    name: Sauce soja
-    originalQuantity: 1
-    originalUnit: au goût
-    normalizedQuantity: 1
-    normalizedUnit: au goût
-    comment: pr griller les proteines de soja
-    allergens:
-      - Soja
-    type: epices
   - uuid: ique18
     name: Paprika fumé
     originalQuantity: 1
@@ -150,9 +140,9 @@ ingredients:
     type: epices
   - uuid: pr1fiu
     name: Parmesan
-    originalQuantity: 650
+    originalQuantity: 700
     originalUnit: gr.
-    normalizedQuantity: 650
+    normalizedQuantity: 700
     normalizedUnit: gr.
     comment: topping
     allergens:
@@ -169,14 +159,24 @@ ingredients:
     type: epices
   - uuid: qmqncm
     name: trofies
-    originalQuantity: 5
+    originalQuantity: 5.5
     originalUnit: kg
-    normalizedQuantity: 5000
+    normalizedQuantity: 5500
     normalizedUnit: gr.
     comment: pates
     allergens:
       - Gluten
     type: sec
+  - uuid: bbwo4n
+    name: Tamari (sauce)
+    originalQuantity: 1
+    originalUnit: au goût
+    normalizedQuantity: 1
+    normalizedUnit: au goût
+    comment: pour griller les protéines de soja
+    allergens:
+      - Soja
+    type: epices
 preparation: |-
   Sauce :
 
@@ -210,7 +210,7 @@ permissionWrite:
   - 6a0c4c380c4af727a5ee
 auteur: lino
 createdAt: '2026-10-04T17:05:11.636+00:00'
-updatedAt: '2026-10-04T17:10:26.819+00:00'
+updatedAt: '2026-10-08T09:36:31.791+00:00'
 createdBy: 6a0c4c380c4af727a5ee
 teams: []
 status: public

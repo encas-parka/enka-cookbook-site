@@ -1,6 +1,6 @@
 ---
 title: Mafé végé
-date: '2026-10-05T16:56:43.197Z'
+date: '2026-10-08T15:01:38.954Z'
 draft: true
 typeR: plat
 categories:
@@ -183,6 +183,15 @@ ingredients:
     comment: ''
     allergens: []
     type: sec
+  - uuid: mck2wl
+    name: Concentré de tomate
+    originalQuantity: 750
+    originalUnit: gr.
+    normalizedQuantity: 750
+    normalizedUnit: gr.
+    comment: ''
+    allergens: []
+    type: epices
 preparation: |-
   1. **Cuire les pois chiches:** Égoutter les pois chiches secs, les couvrir d'eau non salée et cuire jusqu'à ce qu'ils soient tendres. Les égoutter en gardant un peu d'eau de cuisson.
   2. **Préparer les légumes:** Émincer les oignons, hacher l'ail, râper le gingembre frais. Éplucher et couper les carottes et patates douces en cubes de 2 cm, couper le chou blanc en lanières.
@@ -200,7 +209,7 @@ permissionWrite:
   - 68975cbc002469058f8b
 auteur: ghald
 createdAt: '2026-10-05T11:38:16.059+00:00'
-updatedAt: '2026-10-05T16:56:39.717+00:00'
+updatedAt: '2026-10-08T15:01:35.226+00:00'
 createdBy: 68975cbc002469058f8b
 teams: []
 status: public

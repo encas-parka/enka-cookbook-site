@@ -50,7 +50,7 @@ function loadEnv(): Record<string, string> {
   }
   const content = readFileSync(ENV_FILE, "utf-8");
   const env: Record<string, string> = {};
-  for (const line of content.split("\n") ) {
+  for (const line of content.split("\n")) {
     const trimmed = line.trim();
     if (!trimmed || trimmed.startsWith("#")) continue;
     const eqIdx = trimmed.indexOf("=");
@@ -308,7 +308,9 @@ async function main() {
   console.log(`   Run: bun run scripts_dev/3-import-pb.ts\n`);
 }
 
-main().catch((err) => {
-  console.error("Fatal:", err);
-  process.exit(1);
-});
+if (import.meta.main) {
+  main().catch((err) => {
+    console.error("Fatal:", err);
+    process.exit(1);
+  });
+}

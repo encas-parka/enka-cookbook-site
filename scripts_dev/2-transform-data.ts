@@ -1028,4 +1028,6 @@ function main() {
   console.log(`\n   NEXT: Run 3-import-pb.ts to import into PocketBase`);
 }
 
-main();
+if (import.meta.main) {
+  main();
+}

@@ -45,7 +45,15 @@ const rolesByTeamId = {
 
 function applyRolesBackfill(app) {
   for (const teamId in rolesByTeamId) {
-    var team = app.findRecordById("teams", teamId);
+    // setup à froid : les records teams n'existent pas encore (l'import
+    // pipeline tourne APRÈS les migrations) — findRecordById lève en JSVM
+    // sur id inconnu, ce n'est pas un cas d'erreur ici.
+    var team;
+    try {
+      team = app.findRecordById("teams", teamId);
+    } catch (err) {
+      continue;
+    }
     if (!team) continue;
     var current = {};
     var raw = team.getString("roles");
@@ -67,7 +75,12 @@ function applyRolesBackfill(app) {
 
 function revertRoles(app) {
   for (const teamId in rolesByTeamId) {
-    var team = app.findRecordById("teams", teamId);
+    var team;
+    try {
+      team = app.findRecordById("teams", teamId);
+    } catch (err) {
+      continue;
+    }
     if (!team) continue;
     team.set("roles", null);
     app.save(team);

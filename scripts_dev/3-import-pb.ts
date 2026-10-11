@@ -161,7 +161,8 @@ async function pbList(collection: string, page = 1, perPage = 500): Promise<{ it
   );
   if (!res.ok) throw new Error(`PB list ${collection} failed: ${await res.text()}`);
   const data = await res.json();
-  return { items: data.items || [], total: data.total || 0 };
+  // PB liste : le total est `totalItems` (pas `total`)
+  return { items: data.items || [], total: data.totalItems || 0 };
 }
 
 // --- RefId remapping ---
@@ -186,6 +187,20 @@ function remapString(str: string): string {
   }
   return result;
 }
+
+/**
+ * Id PB déterministe : SHA-256 → 15 premiers chars hex ([a-z0-9]).
+ * Même refId → même id PB, quel que soit le run ou la machine : un ré-import
+ * ne peut plus dupliquer (not_unique = skip). Charset compatible avec toutes
+ * les configs d'id PB (`^[a-z0-9]+$` 15–15). Collision ~7e-12 pour 4k
+ * records (60 bits) — check d'unicité par collection en filet.
+ */
+function hash15(refId: string): string {
+  const hex = new Bun.CryptoHasher("sha256").update(refId).digest("hex");
+  return hex.slice(0, 15);
+}
+
+const seenIds = new Map<string, Set<string>>(); // collection → ids du run (anti-collision)
 
 /** Deep remap all refIds in an object's string values with PB IDs */
 function remapObject(obj: any): any {
@@ -255,6 +270,23 @@ function processRecord(collection: string, record: any): { data: Record<string, 
       resolvedRoles[resolve(refKey) || refKey] = role;
     }
     data.roles = resolvedRoles;
+  }
+
+  // Id déterministe : les records sans id explicite (recettes = slugs)
+  // reçoivent hash15(_refId). Unicité par collection vérifiée en filet
+  // (collision astronomiquement improbable mais silencieuse si elle
+  // advenait — mieux vaut abort).
+  if (!data.id && _refId) {
+    data.id = hash15(_refId);
+    let seen = seenIds.get(collection);
+    if (!seen) {
+      seen = new Set();
+      seenIds.set(collection, seen);
+    }
+    if (seen.has(data.id)) {
+      throw new Error(`collision hash15 dans ${collection} : ${_refId} → ${data.id}`);
+    }
+    seen.add(data.id);
   }
 
   return { data, refId: _refId || "", appwriteId: _appwriteId || "" };
@@ -340,6 +372,39 @@ async function importUsers(): Promise<{ created: number; failed: number }> {
 
 // --- Main ---
 
+/**
+ * Preflight bloquant : la cible doit être VIDE (contrat reset du pipeline).
+ * Un import sur PB peuplé crée des doublons silencieux (collections sans id
+ * explicite ni index unique) — incident du 08-10. `--force` court-circuite
+ * (mode dev explicite).
+ */
+async function preflightEmptyTarget(): Promise<void> {
+  if (process.argv.includes("--force")) {
+    console.log("⚠️  --force : preflight cible vide ignoré (mode dev explicite)");
+    return;
+  }
+  let nonEmpty: string[] = [];
+  for (const collection of COLLECTION_ORDER) {
+    try {
+      const { total } = await pbList(collection, 1, 1);
+      if (total > 0) nonEmpty.push(`${collection}(${total})`);
+    } catch (err: any) {
+      // collection inexistante sur cette instance : pas un blocage ;
+      // tout autre échec API doit rester visible (jamais avalé)
+      console.warn(`   preflight: ${collection}: ${err.message?.slice(0, 120)}`);
+    }
+  }
+  if (nonEmpty.length > 0) {
+    console.error(
+      `❌ Cible non vide : ${nonEmpty.join(", ")} — le contrat du pipeline est un reset complet (cleanup-pb) avant import.\n` +
+      `   Ré-importer sur des données existantes crée des doublons silencieux.\n` +
+      `   Relancez avec --force pour ignorer (mode dev explicite).`,
+    );
+    process.exit(1);
+  }
+  console.log("✅ Preflight : cible vide");
+}
+
 async function main() {
   console.log(`\n${"=".repeat(60)}`);
   console.log(`📥 3-import-pb.ts — Import PB-ready JSON → PocketBase`);
@@ -347,7 +412,9 @@ async function main() {
 
   // Load env
   const env = loadEnv();
-  pbBaseUrl = env.PB_URL || "http://127.0.0.1:8090";
+  // PB_URL surchargeable par variable d'environnement (tests sur instance
+  // jetable) — sinon .env.local (dev)
+  pbBaseUrl = process.env.PB_URL_OVERRIDE || env.PB_URL || "http://127.0.0.1:8090";
   const adminEmail = env.PB_ADMIN_EMAIL;
   const adminPassword = env.PB_ADMIN_PASSWORD;
 
@@ -370,6 +437,9 @@ async function main() {
     console.error(`❌ Auth failed: ${err.message}`);
     process.exit(1);
   }
+
+  // Preflight : la cible doit être vide (sauf --force)
+  await preflightEmptyTarget();
 
   // Import in dependency order
   const results: Record<string, { created: number; failed: number }> = {};
@@ -423,7 +493,9 @@ async function main() {
   console.log(`   💾 Saved ID mapping (${refToPb.size} entries) → ${idMapPath}`);
 }
 
-main().catch((err) => {
-  console.error("Fatal:", err);
-  process.exit(1);
-});
+if (import.meta.main) {
+  main().catch((err) => {
+    console.error("Fatal:", err);
+    process.exit(1);
+  });
+}

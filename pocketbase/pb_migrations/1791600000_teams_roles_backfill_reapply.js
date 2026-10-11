@@ -31,7 +31,12 @@ const rolesByTeamId = {
 
 migrate((app) => {
   for (var teamId in rolesByTeamId) {
-    var team = app.findRecordById("teams", teamId);
+    var team;
+    try {
+      team = app.findRecordById("teams", teamId);
+    } catch (err) {
+      continue; // setup à froid : records pas encore importés
+    }
     if (!team) continue;
     var current = {};
     var raw = team.getString("roles");

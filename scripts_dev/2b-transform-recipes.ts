@@ -232,4 +232,6 @@ function main(): void {
   console.log(`✅ Written ${records.length} records → ${outPath}`);
 }
 
-main();
+if (import.meta.main) {
+  main();
+}

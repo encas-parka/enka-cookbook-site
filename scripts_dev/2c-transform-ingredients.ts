@@ -41,6 +41,8 @@ function main(): void {
   // Map fields
   const records: Record<string, any>[] = deduped.map((item) => {
     const record: Record<string, any> = {
+      // _refId → id PB déterministe à l'import (hash15, cf. 3-import-pb.ts)
+      _refId: `ing_${item.u}`,
       ref: item.u,
       name: item.n,
       type: item.t || "",
@@ -75,4 +77,6 @@ function main(): void {
   console.log(`\n✅ Written ${records.length} records → ${outPath}`);
 }
 
-main();
+if (import.meta.main) {
+  main();
+}

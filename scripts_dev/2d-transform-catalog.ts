@@ -31,14 +31,16 @@ function main(): void {
 
   const records: Record<string, any>[] = [];
 
+  // _refId → id PB déterministe à l'import (hash15, cf. 3-import-pb.ts) ;
+  // clé = type + name (les deux types partagent le même espace de noms).
   // Equipment tags first
   for (const name of info.materiel) {
-    records.push({ name, type: "equipment_tag" });
+    records.push({ _refId: `cat_equipment_tag_${name}`, name, type: "equipment_tag" });
   }
 
   // Then categories
   for (const name of info.categories) {
-    records.push({ name, type: "category" });
+    records.push({ _refId: `cat_category_${name}`, name, type: "category" });
   }
 
   console.log(`📊 Total: ${info.materiel.length} equipment_tags + ${info.categories.length} categories = ${records.length}`);
@@ -56,4 +58,6 @@ function main(): void {
   console.log(`\n✅ Written ${records.length} records → ${outPath}`);
 }
 
-main();
+if (import.meta.main) {
+  main();
+}

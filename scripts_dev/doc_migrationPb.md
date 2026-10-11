@@ -232,18 +232,42 @@ bun run scripts_dev/4-fix-timestamps.ts --dry-run
 
 ### `validate-migration.ts`
 
-Vérifie l'intégrité des données importées.
+Vérifie l'intégrité des données importées. Cible retargetable par env
+`PB_URL_OVERRIDE` (instance jetable), sinon `.env.local` `PB_URL`.
 
 - **Vérifications** :
-  1. Record counts : PB vs fichiers `pb-import/`
+  1. Record counts : PB vs **sources brutes** (appwrite-export + Hugo `content/recipe` + `static/data`) — tout écart doit être couvert par un verdict
   2. Relation integrity : tous les champs relation pointent vers des records PB existants
-  3. guestEmails : tous les events ont leurs emails attendus
-  4. RefId coverage : tous les refIds dans `migration-map.json` ont un PB ID correspondant
-- **Collections validées** : users, teams, materiel, events, products, purchases, materiel_loan, event_materiel, teamdocs, event_todos, share_links, recipes
+  3. Recipe field population : created/createdBy/permissionWrite/rootRecipeId peuplés comme dans `pb-import/recipes.json`
+  4. guestEmails : tous les events ont leurs emails attendus
+  5. RefId coverage : tous les refIds dans `migration-map.json` ont un PB ID correspondant (tolère les absences couvertes par un verdict)
+  6. Convergence des recettes Appwrite (id = slug Hugo) vs leur copie PB : divergence de contenu = bloquant sauf verdict ; drift de `updatedAt` au jour = informatif (Hugo est la source la plus fraîche) ; absentes = inventaire verdicté
+  7. Structurel : `teams.roles` peuplé (non-NULL), `materiel.createdBy`/`ownerUser` vides par design (deleteRules team-scopées, pas de backfill)
+  8. teamdocs over-limit : absence expliquée par la limite du champ texte et verdictée
+- **Collections validées** : users, teams, materiel, events, products, purchases, materiel_loan, event_materiel, teamdocs, event_todos, share_links, recipes, ingredients, categories
+
+#### Verdicts attendus (`pb-import/expected-verdicts.json`)
+
+Inventaire machino-lisible des écarts acceptés pour le run courant. Émis par
+les transforms (à venir), effacé par `cleanup-pb` avec le reste de
+`pb-import/*.json`. Schéma et règles de matching documentés en tête de
+`validate-migration.ts` : chaque écart observé doit consommer exactement un
+verdict — un écart sans verdict (compteur « non-verdicté » > 0) ou un verdict
+sans écart (« stale ») fait échouer validate.
+
+> **Limite texte PocketBase** : un champ texte dont le schéma déclare `max: 0`
+> applique quand même une limite par défaut de **5000 caractères** à la
+> validation (`validation_max_text_constraint`) — cf. `core/field_text.go`
+> ("If zero, a default limit of 5000 is applied"). C'est ce qui rejette le
+> teamdocs de 6317 chars malgré `content.max: 0` ; décision produit en attente
+> (relever le `max` du schéma ou tronquer).
 
 ```bash
 # PB doit tourner
 bun run scripts_dev/validate-migration.ts
+
+# Instance jetable (harness)
+PB_URL_OVERRIDE=http://127.0.0.1:8091 bun run scripts_dev/validate-migration.ts
 ```
 
 ---

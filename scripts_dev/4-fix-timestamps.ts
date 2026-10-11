@@ -9,6 +9,13 @@
  * Usage:
  *   bun run scripts_dev/4-fix-timestamps.ts [--dry-run]
  *
+ * Target selection (env, same convention as PB_URL_OVERRIDE in 3-import-pb.ts):
+ *   PB_DB_PATH_OVERRIDE  — path of the target data.db
+ *                          (default: pocketbase/pb_data/data.db)
+ *   PB_URL_OVERRIDE      — base URL of the PocketBase serving that data.db;
+ *                          the running-instance guard probes <base>/api/health
+ *                          (default: http://127.0.0.1:8090)
+ *
  * Requires:
  *   - PocketBase STOPPED (WAL mode, cache consistency)
  *   - scripts_dev/pb-import/*.json (from 2-transform-data.ts or migrate-*.ts)
@@ -22,7 +29,11 @@ import { Database } from "bun:sqlite";
 // --- Config ---
 const IMPORT_DIR = join(import.meta.dir, "pb-import");
 const ID_MAP_FILE = join(IMPORT_DIR, "id-map.json");
-const DB_PATH = join(import.meta.dir, "..", "pocketbase", "pb_data", "data.db");
+// Target overridable via env (disposable instance / orchestrator) — same
+// convention as PB_URL_OVERRIDE in 3-import-pb.ts
+const DB_PATH = process.env.PB_DB_PATH_OVERRIDE
+  || join(import.meta.dir, "..", "pocketbase", "pb_data", "data.db");
+const PB_BASE_URL = (process.env.PB_URL_OVERRIDE || "http://127.0.0.1:8090").replace(/\/+$/, "");
 const DRY_RUN = process.argv.includes("--dry-run");
 
 const COLLECTIONS_TO_FIX = [
@@ -92,7 +103,7 @@ function toPbTimestamp(ts: string | undefined): string {
 
 async function isPocketBaseRunning(): Promise<boolean> {
   try {
-    const res = await fetch("http://127.0.0.1:8090/api/health", {
+    const res = await fetch(`${PB_BASE_URL}/api/health`, {
       signal: AbortSignal.timeout(2000),
     });
     return res.ok;
@@ -106,12 +117,15 @@ async function isPocketBaseRunning(): Promise<boolean> {
 async function main() {
   console.log(`\n${"=".repeat(60)}`);
   console.log(`🔧 4-fix-timestamps.ts — Fix PB autodate timestamps via SQL`);
-  console.log(`${"=".repeat(60)}\n`);
+  console.log(`${"=".repeat(60)}`);
+  console.log(`🎯 Target DB: ${DB_PATH}`);
+  console.log(`🩺 Guard probe: ${PB_BASE_URL}/api/health\n`);
 
-  // Safety: check PB is stopped
+  // Safety: check the PB serving this target is stopped (the orchestrator
+  // handles stop/start around this step)
   if (await isPocketBaseRunning()) {
-    console.error(`❌ PocketBase is running! Stop it first to avoid data corruption.`);
-    console.error(`   Run: kill $(pgrep pocketbase) or pkill -f pocketbase`);
+    console.error(`❌ PocketBase is running on ${PB_BASE_URL} — stop the instance serving this target first.`);
+    console.error(`   Writing the SQLite DB while served risks corruption (WAL).`);
     process.exit(1);
   }
 

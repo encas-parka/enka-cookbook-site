@@ -78,19 +78,26 @@ Bonus porté du pb-sync oupla (analyse sous-agent) : `ensureDbReady()` — open 
 
 Pendant l'implémentation du plan A, un `import()` dynamique de diagnostic a
 exécuté `main()` de `3-import-pb.ts` (le script s'exécute au chargement, pas
-de garde CLI) → ~2440 doublons créés (teams, materiel, events, products,
-purchases, materiel_loan, event_materiel, share_links, categories). Les
-collections à ids explicites (users, recipes, ingredients, teamdocs,
-event_todos, locks) ont rejeté les creates en `not_unique` — intactes.
+de garde CLI) → ~2477 doublons créés dans **11 collections** : teams,
+materiel, events, products, purchases, materiel_loan, event_materiel,
+share_links, categories (9, purgées le soir même) **et event_todos (17) +
+teamdocs (21), manquées par la première passe** — leur json d'import ne
+porte pas d'id explicite, contrairement à l'hypothèse alors documentée ici.
+Seconde passe de purge le 08-10 au soir, même méthode (id-map croisé
+migration-map, fenêtre UTC, invariants) → comptes finaux exacts sur les 15
+collections. Les collections à vrais ids explicites (users, recipes,
+ingredients) ont rejeté les creates en `not_unique` — intactes.
 
-**Purge (même soir)** : script `.scratch/probes/cleanup-accidental-import.ts`
+**Purge (08-10, 2 passes)** : script `.scratch/probes/cleanup-accidental-import.ts`
 — les doublons identifiés via l'id-map écrasé par le run accidentel (refId →
 id doublon) croisé avec migration-map.json (intact) ; categories par fenêtre
 rowid + appariement de nom. Validations bloquantes (existence, fenêtre UTC
-de l'accident 16:50+, rowids max stricts), suppression transactionnelle,
-comptes finaux conformes sur les 15 collections. Pièges rencontrés : dates
-PB en UTC (shell en UTC+2) et l'import n'envoie PAS les dates Appwrite
-(créées à l'heure du run — c'est `4-fix-timestamps.ts` qui les rétablit).
+de l'accident 16:50+, rowids max stricts), suppression transactionnelle.
+Pass 2 (teamdocs 21, event_todos 17) : même méthode, ids id-map = les 38
+clés « hors couverture migration-map ». Comptes finaux conformes sur les 15
+collections. Pièges rencontrés : dates PB en UTC (shell en UTC+2) et l'import
+n'envoie PAS les dates Appwrite (créées à l'heure du run — c'est
+`4-fix-timestamps.ts` qui les rétablit).
 
 **Séquelles à connaître** :
 - `scripts_dev/pb-import/id-map.json` contient désormais les ids des

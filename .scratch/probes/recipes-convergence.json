@@ -1,0 +1,314 @@
+{
+  "ok": 47,
+  "divergent": 37,
+  "absentPB": 8,
+  "report": [
+    {
+      "slug": "0-test_i0nfriakw1tb",
+      "issue": "ABSENTE_EN_PB"
+    },
+    {
+      "slug": "a-test_eu2hiim84f9c",
+      "issue": "ABSENTE_EN_PB"
+    },
+    {
+      "slug": "chorba-agneau-bo-v2_9opwp49wzltj",
+      "diffs": [
+        "prepLen: aw=900 pb=833"
+      ]
+    },
+    {
+      "slug": "chorba-vege-boul-v4_fuibsrcs4dpl",
+      "diffs": [
+        "draft: aw=true pb=0",
+        "updatedAt: aw=2026-03-07 pb=2026-09-17"
+      ]
+    },
+    {
+      "slug": "kalb-el-louz-gateau-de_hn7u4fndnq39",
+      "diffs": [
+        "updatedAt: aw=2026-02-15 pb=2026-02-27"
+      ]
+    },
+    {
+      "slug": "abricots-poches--v2-gh_sybjcd3a0k6d",
+      "issue": "ABSENTE_EN_PB"
+    },
+    {
+      "slug": "abricots-poches--v2-gh_irxfitxnkoix",
+      "issue": "ABSENTE_EN_PB"
+    },
+    {
+      "slug": "ktipiti_ez-yo8_dromj",
+      "issue": "ABSENTE_EN_PB"
+    },
+    {
+      "slug": "tajine-avec-orange-a-a_17jjnrk1mgqm",
+      "diffs": [
+        "title: aw=\"Tajine de boeuf avec orange\" pb=\"Tajine de boeuf au citron\"",
+        "sumQty: aw=59144 pb=46817",
+        "prepLen: aw=1785 pb=1787",
+        "updatedAt: aw=2026-04-20 pb=2026-05-21"
+      ]
+    },
+    {
+      "slug": "compote-pommes-p-v2-gh_ix9zubfaikgf",
+      "issue": "ABSENTE_EN_PB"
+    },
+    {
+      "slug": "veloute-de-brocoli_m5p6ujexbwlm",
+      "diffs": [
+        "draft: aw=true pb=0",
+        "ingredients: aw=7 pb=8",
+        "sumQty: aw=753 pb=813",
+        "updatedAt: aw=2026-03-17 pb=2026-09-17"
+      ]
+    },
+    {
+      "slug": "risotto-citronconfit-c_v1cxkqih3b5m",
+      "diffs": [
+        "ingredients: aw=9 pb=12",
+        "sumQty: aw=10735 pb=10839",
+        "prepLen: aw=7 pb=1065",
+        "updatedAt: aw=2026-03-22 pb=2026-06-15"
+      ]
+    },
+    {
+      "slug": "carottes-roties--v2-ma_ypr45yezpm5s",
+      "diffs": [
+        "draft: aw=true pb=0",
+        "sumQty: aw=1198 pb=1018",
+        "updatedAt: aw=2026-03-26 pb=2026-09-17"
+      ]
+    },
+    {
+      "slug": "millionnaire-shortbrea_zld--ge77gc-",
+      "diffs": [
+        "updatedAt: aw=2026-03-26 pb=2026-07-13"
+      ]
+    },
+    {
+      "slug": "xtipiti_kcesllc4boqm",
+      "diffs": [
+        "draft: aw=true pb=0",
+        "sumQty: aw=455 pb=456",
+        "updatedAt: aw=2026-04-09 pb=2026-09-17"
+      ]
+    },
+    {
+      "slug": "falafels-georgette_bdut81lbkyk4",
+      "diffs": [
+        "ingredients: aw=8 pb=11",
+        "sumQty: aw=6882 pb=7216",
+        "updatedAt: aw=2026-03-28 pb=2026-05-25"
+      ]
+    },
+    {
+      "slug": "pain-burger-georgette_h8m3v0lbcbno",
+      "diffs": [
+        "updatedAt: aw=2026-03-28 pb=2026-04-22"
+      ]
+    },
+    {
+      "slug": "puree-de-pommes-de-ter_cskspinfx-ur",
+      "diffs": [
+        "draft: aw=true pb=0",
+        "sumQty: aw=13209 pb=13211",
+        "updatedAt: aw=2026-04-09 pb=2026-09-17"
+      ]
+    },
+    {
+      "slug": "imam-bayildi-aubergine_ajwgdmwo00vd",
+      "diffs": [
+        "draft: aw=true pb=0",
+        "sumQty: aw=2128 pb=2130",
+        "updatedAt: aw=2026-03-28 pb=2026-09-17"
+      ]
+    },
+    {
+      "slug": "boulettes-de-kas-v2-ma_lhssbbnm4nua",
+      "issue": "ABSENTE_EN_PB"
+    },
+    {
+      "slug": "boulettes-de-kas-v2-ma_wtvzhb0zn3k5",
+      "diffs": [
+        "draft: aw=true pb=0",
+        "sumQty: aw=677 pb=678",
+        "updatedAt: aw=2026-03-29 pb=2026-09-17"
+      ]
+    },
+    {
+      "slug": "salade-carotte-cumin-o_frd2vlmxviq8",
+      "diffs": [
+        "prepLen: aw=379 pb=378",
+        "updatedAt: aw=2026-04-04 pb=2026-04-22"
+      ]
+    },
+    {
+      "slug": "tiramisu_rvzmj2nqfcso",
+      "diffs": [
+        "prepLen: aw=1004 pb=996",
+        "updatedAt: aw=2026-04-04 pb=2026-04-22"
+      ]
+    },
+    {
+      "slug": "cigares-aux-amandes_-gm-t_otyay2",
+      "diffs": [
+        "sumQty: aw=495 pb=500",
+        "updatedAt: aw=2026-04-04 pb=2026-05-27"
+      ]
+    },
+    {
+      "slug": "creme-coco-banane_3nan4cvol3hc",
+      "diffs": [
+        "ingredients: aw=5 pb=4",
+        "sumQty: aw=1005 pb=805",
+        "prepLen: aw=253 pb=332",
+        "updatedAt: aw=2026-04-04 pb=2026-05-27"
+      ]
+    },
+    {
+      "slug": "tartines-surprise_qmqria2mft6z",
+      "diffs": [
+        "sumQty: aw=771 pb=780",
+        "updatedAt: aw=2026-04-04 pb=2026-05-27"
+      ]
+    },
+    {
+      "slug": "mimosa_fp_8gbohgfu8",
+      "diffs": [
+        "updatedAt: aw=2026-04-04 pb=2026-04-22"
+      ]
+    },
+    {
+      "slug": "yassa-vege_47rrmv2csi2_",
+      "diffs": [
+        "updatedAt: aw=2026-04-04 pb=2026-04-22"
+      ]
+    },
+    {
+      "slug": "samousa_tqx7a61tluqw",
+      "diffs": [
+        "sumQty: aw=1043 pb=1056",
+        "updatedAt: aw=2026-04-04 pb=2026-06-03"
+      ]
+    },
+    {
+      "slug": "salade-de-chou-pommes_ylnlxeq9inpd",
+      "diffs": [
+        "updatedAt: aw=2026-04-06 pb=2026-05-26"
+      ]
+    },
+    {
+      "slug": "semoule_s5kpvpsdlxzt",
+      "diffs": [
+        "updatedAt: aw=2026-05-03 pb=2026-06-03"
+      ]
+    },
+    {
+      "slug": "nougas-glace-et-coulis_sx6qm4w0epck",
+      "diffs": [
+        "sumQty: aw=5720 pb=6475",
+        "prepLen: aw=1517 pb=1565",
+        "updatedAt: aw=2026-04-07 pb=2026-05-26"
+      ]
+    },
+    {
+      "slug": "beignets-de-courgettes_v3z6ttrc3l7f",
+      "diffs": [
+        "ingredients: aw=5 pb=6",
+        "sumQty: aw=30050 pb=16565",
+        "prepLen: aw=454 pb=643",
+        "updatedAt: aw=2026-04-07 pb=2026-05-26"
+      ]
+    },
+    {
+      "slug": "tzatziki-vegan-v2-ma_lntuh6ejm9mn",
+      "diffs": [
+        "draft: aw=true pb=0",
+        "updatedAt: aw=2026-04-08 pb=2026-09-17"
+      ]
+    },
+    {
+      "slug": "lassi-a-la-rose--v2-ma_ymcb2chtkel6",
+      "diffs": [
+        "draft: aw=true pb=0",
+        "updatedAt: aw=2026-04-08 pb=2026-09-17"
+      ]
+    },
+    {
+      "slug": "riz-en-accompagnement_vk27qsv7mpbr",
+      "diffs": [
+        "sumQty: aw=500 pb=600",
+        "updatedAt: aw=2026-04-09 pb=2026-05-26"
+      ]
+    },
+    {
+      "slug": "xtipiti-vegan-v2-ma_wnf4yfnwudlg",
+      "diffs": [
+        "draft: aw=true pb=0",
+        "sumQty: aw=252 pb=254",
+        "updatedAt: aw=2026-04-09 pb=2026-09-17"
+      ]
+    },
+    {
+      "slug": "cake-au-citron-v-v2-ma__2fhaocmltqd",
+      "diffs": [
+        "draft: aw=true pb=0",
+        "updatedAt: aw=2026-04-12 pb=2026-07-13"
+      ]
+    },
+    {
+      "slug": "penne-cruda-avec-v2-ma_ysnjcoxdjum1",
+      "diffs": [
+        "draft: aw=true pb=0",
+        "ingredients: aw=10 pb=11",
+        "sumQty: aw=33670 pb=31670",
+        "prepLen: aw=401 pb=422",
+        "updatedAt: aw=2026-04-12 pb=2026-09-17"
+      ]
+    },
+    {
+      "slug": "penne-cruda-vega-v3-ma_xjnr4rkjk-m-",
+      "diffs": [
+        "draft: aw=true pb=0",
+        "sumQty: aw=32970 pb=29170",
+        "updatedAt: aw=2026-04-12 pb=2026-09-17"
+      ]
+    },
+    {
+      "slug": "roti-de-legumes_reb8knq-dgjl",
+      "diffs": [
+        "sumQty: aw=4618 pb=6366",
+        "updatedAt: aw=2026-04-12 pb=2026-05-27"
+      ]
+    },
+    {
+      "slug": "yassa-poulet_ve0jzkwbltzc",
+      "diffs": [
+        "sumQty: aw=1855 pb=2306",
+        "updatedAt: aw=2026-04-12 pb=2026-05-26"
+      ]
+    },
+    {
+      "slug": "salade-aubergine-micui__txz4__ct_ir",
+      "issue": "ABSENTE_EN_PB"
+    },
+    {
+      "slug": "salade-micuite-aubergi_ouq92dry-vuv",
+      "diffs": [
+        "prepLen: aw=439 pb=490",
+        "updatedAt: aw=2026-04-25 pb=2026-06-15"
+      ]
+    },
+    {
+      "slug": "tajine-vege-avec-v3-ch_25w0jzlaqznc",
+      "diffs": [
+        "title: aw=\"Tajine végé avec orange\" pb=\"Tajine végé au citron\"",
+        "sumQty: aw=47144 pb=33817",
+        "prepLen: aw=1459 pb=1460",
+        "updatedAt: aw=2026-04-28 pb=2026-05-21"
+      ]
+    }
+  ]
+}

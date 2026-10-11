@@ -1,14 +1,24 @@
 /**
  * Utilitaires pour EventTodo
  * Parsing et validation des priorités
+ *
+ * ÉTAT (documenté 08-10, décision C3 reportée) : ce module n'a plus
+ * d'importeur — la page Tâches lit/écrit le champ JSON `events.todos`
+ * (embedded), pas la collection `event_todos`. Celle-ci reste en base
+ * DORMANTE (17 records d'archive migrés : 2 standalone Appwrite + 15
+ * extraits des events) : son schéma relationnel (`assignedTo`) offre une
+ * granularité par-tâche que le JSON embedded n'a pas — la conserver
+ * facilite une migration vers une collection dédiée si le produit la veut
+ * (permissions par todo). Ne pas supprimer sans trancher C3.
+ * Contexte : .agents/plans/6_migration-evaluation.md § 5.
  */
 
 import type { EventTodo, EventTodoPriority, EventTodoStatus } from "$lib/types/events";
 // Valeurs runtime : les enums PB sont générés en `const` dans pb-generated
 // (events.d.ts n'expose que les types — pas de module runtime).
 import {
-	EventTodosPriorityOptions,
-	EventTodosStatusOptions,
+  EventTodosPriorityOptions,
+  EventTodosStatusOptions,
 } from "$lib/types/pb-generated";
 
 /**

@@ -19,7 +19,7 @@
 ## Conditionnels (?)
 
 - `?` HOOK-6 — invité sans compte jamais rattaché à la team après inscription (refonte flux invitation, produit).
-- `?` C3 — collections mortes `event_todos` / `notifications` : migrer les todos ou supprimer (produit) ; module `event-todo.utils.ts` mort (crash au chargement corrigé, mais plus aucun import) — supprimer ou ressusciter avec C3.
+- `?` C3 — collections mortes `event_todos` / `notifications` : **état documenté 08-10** (voir `.agents/plans/6_migration-evaluation.md` § 5) — la vérité live des todos est le champ `events.todos` ; la collection `event_todos` reste **dormante** (17 records d'archive, schéma `assignedTo` conservé pour une éventuelle collection dédiée à granularité par-tâche — ne pas supprimer) ; module `event-todo.utils.ts` conservé non importé. À trancher produit : ressusciter la collection dédiée ou l'abandonner (et purger archives + module).
 - `?` C5 — checkbox « Envoyer un email aux membres » (EventCreatePage) sans effet (3e argument ignoré, confirmé par triage) — implémenter ou retirer l'option UI.
 - `?` `lookup-user` casse d'email — comparaison `=` BINARY côté SQLite ; vérifier si PB lowercases à la création avant tout geste.
 - `?` Asymétrie `categories` (create auth, update/delete superuser) — assumer et documenter dans la doc domaine.

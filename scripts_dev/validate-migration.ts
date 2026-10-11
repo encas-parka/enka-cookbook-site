@@ -12,8 +12,12 @@
  * Usage:
  *   bun run scripts_dev/validate-migration.ts
  *
+ * Target selection (env, same convention as 3-import-pb.ts):
+ *   PB_URL_OVERRIDE — base URL of the PB instance to validate; falls back to
+ *                     .env.local PB_URL, then http://127.0.0.1:8090
+ *
  * Requires:
- *   - scripts_dev/.env.local with PB_URL, PB_ADMIN_EMAIL, PB_ADMIN_PASSWORD
+ *   - scripts_dev/.env.local with PB_ADMIN_EMAIL, PB_ADMIN_PASSWORD
  *   - scripts_dev/pb-import/*.json (from 2-transform-data.ts)
  *   - scripts_dev/migration-map.json
  *   - PocketBase running locally with imported data
@@ -489,9 +493,11 @@ async function main() {
   console.log(`🔍 validate-migration.ts — Post-import validation`);
   console.log(`${"=".repeat(60)}\n`);
 
-  // Load env
+  // Load env — PB_URL_OVERRIDE retargets the instance under validation
+  // (throwaway harness), same convention as 3-import-pb.ts / 4-fix-timestamps.ts
   const env = loadEnv();
-  pbBaseUrl = env.PB_URL || "http://127.0.0.1:8090";
+  pbBaseUrl = (process.env.PB_URL_OVERRIDE || env.PB_URL || "http://127.0.0.1:8090").replace(/\/+$/, "");
+  console.log(`   🎯 Target: ${pbBaseUrl}`);
   const adminEmail = env.PB_ADMIN_EMAIL;
   const adminPassword = env.PB_ADMIN_PASSWORD;
 

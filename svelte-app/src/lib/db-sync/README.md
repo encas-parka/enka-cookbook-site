@@ -93,8 +93,17 @@ sequenceDiagram
 
 Writes are optimistic: Dexie updates immediately, then PocketBase. On failure, Dexie rolls back.
 
+Offline-first contract (T02): when the record is missing from the local cache,
+`update` first tries to **attach** it — `getOne`, mirror to Dexie — then proceeds
+with the optimistic write. If the server returns 404 too, `update` throws the
+typed `RecordNotFoundError`: the caller decides whether to upsert (e.g.
+materialize a virtual record client-side, then update the new server id — see
+`ProductsStore.#updateWithUpsert`) or surface the error. A 404 on the push
+itself (record deleted server-side, or update-rule rejection — PB answers 404
+there) still takes the `RecordDeletedError` soft-delete path.
+
 ```mermaid
-%%{init: {'theme': 'base', 'themeVariables': {'background':'#f8f9fa','primaryColor':'#e8f0fe','secondaryColor':'#fef3e2','tertiaryColor':'#e8f5e9','lineColor':'#555','fontSize':'13px'}, 'sequence': {'wrap':true,'width':180,'actorMargin':70,'messageMargin':36,'boxMargin':10,'noteMargin':10}}}%%
+%%{"init": {"theme": "base", "themeVariables": {"background":"#f8f9fa","primaryColor":"#e8f0fe","secondaryColor":"#fef3e2","tertiaryColor":"#e8f5e9","lineColor":"#555","fontSize":"13px"}, "sequence": {"wrap":true,"width":180,"actorMargin":70,"messageMargin":36,"boxMargin":10,"noteMargin":10}}}%%
 sequenceDiagram
     participant UI as Service
     participant SC as Sync
@@ -103,6 +112,18 @@ sequenceDiagram
 
     UI->>SC: update(id, data)
     SC->>DX: snapshot current
+
+    alt record missing from cache
+        SC->>PB: getOne(id)
+        alt found
+            PB-->>SC: server record
+            SC->>DX: put (attach)
+        else 404
+            PB-->>SC: 404
+            SC-->>UI: throw RecordNotFoundError
+        end
+    end
+
     SC->>DX: put optimistic
 
     alt merge strategies
@@ -271,7 +292,7 @@ interface SyncCollectionOptions<T> {
 | Method   | Signature                                                                | Description                                                                                                          |
 | -------- | ------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------- |
 | `create` | `(data: Omit<T, 'id' \| 'updated' \| 'created'>, params?) => Promise<T>` | Creates a record on PocketBase, then mirrors to Dexie.                                                               |
-| `update` | `(id: string, data: Partial<T>, params?) => Promise<T>`                  | Optimistic write to Dexie, then PocketBase. On failure, rolls back Dexie. Applies merge strategies for array fields. |
+| `update` | `(id: string, data: Partial<T>, params?) => Promise<T>`                  | Optimistic write to Dexie, then PocketBase. On failure, rolls back Dexie. Applies merge strategies for array fields. Missing from cache: attaches the server record first; `RecordNotFoundError` when absent from both (the caller may upsert). |
 | `remove` | `(id: string, params?) => Promise<void>`                                 | Soft-delete or hard-delete (based on `softDelete` option). Rolls back on failure.                                    |
 
 #### Read (direct PocketBase)

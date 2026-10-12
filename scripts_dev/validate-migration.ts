@@ -64,6 +64,7 @@
  */
 import { readFileSync, existsSync, readdirSync } from "fs";
 import { join } from "path";
+import { diffRecipeConvergence } from "./recipe-convergence.ts";
 
 // --- Config ---
 const ENV_FILE = join(import.meta.dir, ".env.local");
@@ -727,40 +728,8 @@ async function checkTextReferences(): Promise<void> {
 }
 
 // --- Recipe convergence (Appwrite export vs PB copy of the Hugo content) ---
-function normDay(value: any): string {
-  return value ? String(value).slice(0, 10) : "";
-}
-
-// Appwrite stores ingredient items as JSON-encoded strings (double-encoded
-// pattern); PB (post 2b) has them native. Normalize both sides.
-function ingredientStats(raw: any): { n: number; sum: number } {
-  let list = raw;
-  if (typeof list === "string") {
-    try {
-      list = JSON.parse(list);
-    } catch {
-      list = [];
-    }
-  }
-  if (!Array.isArray(list)) return { n: 0, sum: 0 };
-  const objs = list.map((i: any) => (typeof i === "string" ? JSON.parse(i) : i));
-  return {
-    n: objs.length,
-    sum: Math.round(objs.reduce((s: number, i: any) => s + (i.normalizedQuantity || 0), 0)),
-  };
-}
-
-function jsonLen(raw: any): number {
-  let v = raw;
-  if (typeof v === "string") {
-    try {
-      v = JSON.parse(v);
-    } catch {
-      return 0;
-    }
-  }
-  return Array.isArray(v) ? v.length : 0;
-}
+// The comparison primitives (normDay / ingredientStats / jsonLen / field diff)
+// live in recipe-convergence.ts — shared with the 2b emission side.
 
 async function checkRecipeConvergence(): Promise<void> {
   console.log("\n🥘 Check 7: Recipe convergence (Appwrite export vs PB/Hugo)\n");
@@ -783,17 +752,7 @@ async function checkRecipeConvergence(): Promise<void> {
       continue;
     }
 
-    const awIng = ingredientStats(aw.ingredients);
-    const pbIng = ingredientStats(pb.ingredients);
-    const divergentFields: string[] = [];
-    if ((aw.title || "") !== (pb.title || "")) divergentFields.push("title");
-    if (!!aw.draft !== !!pb.draft) divergentFields.push("draft");
-    if (awIng.n !== pbIng.n) divergentFields.push("ingredients");
-    if (awIng.sum !== pbIng.sum) divergentFields.push("sumQty");
-    if (jsonLen(aw.astuces) !== jsonLen(pb.astuces)) divergentFields.push("astuces");
-    if ((aw.preparation || "").length !== (pb.preparation || "").length) divergentFields.push("prepLen");
-
-    const hasDateDrift = normDay(aw["$updatedAt"]) !== normDay(pb.updated);
+    const { divergentFields, hasDateDrift } = diffRecipeConvergence(aw, pb);
     if (hasDateDrift) dateDriftCount++;
 
     if (divergentFields.length === 0) {

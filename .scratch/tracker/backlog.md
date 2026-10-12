@@ -1,6 +1,7 @@
 # Backlog — branche `mig/pocketbase`
 
 > Alimenté par le run `26-10-06_audit-fixes` (synthèse : `.agents/plans/26-10-06_audit-fixes_done/run.md` § Constats différés).
+> Alimenté aussi par le run `26-10-08_phase-1-7-pipeline-robuste` (synthèse : `.agents/plans/26-10-08_phase-1-7-pipeline-robuste_done/run.md` § Découvertes différées).
 > Tags : `!` à traiter bientôt · `S2` gating déploiement · `?` conditionnel · (sans tag) dette légère.
 > Règle : une ligne par constat, avec ancre. Le détail vit dans le run report archivé.
 
@@ -9,6 +10,8 @@
 - **S2** ~~Re-import complet des données~~ **FAIT 06-10** (T17 Phases 2-3, export prod frais : users 59, events 39, products 1286, purchases 1329, recipes 456/456 created peuplés). Reste : 1 teamdocs prod rejeté (content > 5000 — voir `!`).
 - **S2** Secret share_links ≠ id (token dédié) — REC-1 fermant l'énumération, le risque résiduel est faible ; refonte URL/invitations à faire avec la refonte du flux invitation.
 - **S2** Définir `ENKA_BASE_URL` dans l'env du serveur PB (checklist Dokploy 1.8) — sans elle les emails pointent vers la prod.
+- **S2** Upgrade PB 0.37.5 → 0.40.5+ — fixes sécurité (0.39.7 panic workers, 0.40.5 net/http DoS) ; aucun gain timestamps (autodate by design, inchangé jusqu'à 0.40.5, cf. run 26-10-08).
+- **S2** Checklist 1.8 : fetch/merge du contenu Hugo (sync site) avant `migrate.ts` — les 30 verdicts `recipe-convergence` du run 26-10-08 viennent du gel du contenu au 06-10 ; après sync ils deviennent `stale` (re-dérivation attendue, puis validate vert).
 
 ## Bientôt (!)
 
@@ -25,6 +28,8 @@
 - `?` Asymétrie `categories` (create auth, update/delete superuser) — assumer et documenter dans la doc domaine.
 - `?` Résidu REC-7 — `ownerUser = self` + team étrangère au create materiel reste possible (garde team ou owner, au choix).
 - `?` Perf PB : ~~pas d'index sur `updated`~~ **Fait (run 26-10-07, T01)** : 11 index posés avec preuves EXPLAIN (delta `updated` ×7, composites `(eventId, updated)` ×3, share_links `(target_id, link_type)`) ; candidats rejetés par la preuve : locks (client 100 % PK), events.createdBy (rules OR avec `~` JSON non-indexables).
+- `?` T05 : 1 team sur 8 a `roles` = `{}` (aucun owner résolu par le backfill) — passe le check non-NULL ; trancher produit (team sans owner légitime ?).
+- (sans tag) id-map : écrit en fin de run seulement (énoncé T02 « incrémental » non landé) — sans impact sous contrat reset (ids hash15 dérivables à la demande).
 
 ## Hors périmètre (autre repo / produit)
 

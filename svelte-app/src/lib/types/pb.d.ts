@@ -224,6 +224,12 @@ export type MaterielLoan = PbDoc & {
   returnedAt: string | null;
   returnNotes: string | null;
   eventName: string | null;
+  /**
+   * Marqueur local de suppression (pb-sync pose deleted:true sur un 404
+   * d'update) — absent du schéma PB materiel_loan ; un record marqué ne doit
+   * plus compter dans les calculs de disponibilité.
+   */
+  deleted?: boolean;
 };
 
 /** EventMateriel (collection: "event_materiel") — aligned with EventMaterielRecord */

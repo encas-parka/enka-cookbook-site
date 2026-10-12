@@ -8,7 +8,7 @@
  * strings. All dates below are fixed so tests are deterministic.
  */
 import type { EnrichedEvent } from "$lib/types/events";
-import type { Products, Purchases, Teamdocs } from "$lib/types/pb";
+import type { Materiel, MaterielLoan, Products, Purchases, Teamdocs } from "$lib/types/pb";
 import type { ProductNeedRow } from "$lib/db-sync/pb-sync";
 import { pbDate } from "./stub-pb";
 
@@ -22,6 +22,9 @@ export const TEST_EVENT_ID = "t12event00000001";
 export const TEST_TEAMDOC_ID = "t02teamdoc000001";
 export const TEST_PRODUCT_ID = "eau_t12test0001";
 export const TEST_PURCHASE_ID = "t12purchase0001";
+export const TEST_TEAM_ID = "t12team00000001";
+export const TEST_MATERIEL_ID = "t12mater0000001";
+export const TEST_LOAN_ID = "t12loan00000001";
 
 /** Service date used in byDate / dateDisplayInfo fixtures. */
 export const TEST_DATE = "2026-12-19";
@@ -119,6 +122,57 @@ export function makeTeamdocsRecord(overrides: Partial<Teamdocs> = {}): Teamdocs 
     teamId: null,
     eventId: TEST_EVENT_ID,
     tags: null,
+    ...overrides,
+  };
+}
+
+/** A PB "materiel" record owned by the fixture team. */
+export function makeMaterielRecord(overrides: Partial<Materiel> = {}): Materiel {
+  return {
+    id: TEST_MATERIEL_ID,
+    created: pbDate(T0),
+    updated: pbDate(T0),
+    name: "Gastro 1/1",
+    type: "other",
+    description: null,
+    ownerUser: null,
+    teamId: TEST_TEAM_ID,
+    status: "ok",
+    deleted: false,
+    createdBy: null,
+    quantity: 5,
+    location: null,
+    shareableWith: null,
+    isStorage: false,
+    storeIn: null,
+    ...overrides,
+  };
+}
+
+/** A PB "materiel_loan" record overlapping the loans-test period. */
+export function makeLoanRecord(overrides: Partial<MaterielLoan> = {}): MaterielLoan {
+  return {
+    id: TEST_LOAN_ID,
+    created: pbDate(T0),
+    updated: pbDate(T0),
+    borrowerUser: "otheruser123456",
+    eventId: null,
+    startDate: "2026-12-19",
+    endDate: "2026-12-20",
+    status: "accepted",
+    createdBy: "otheruser123456",
+    responsibleId: "otheruser123456",
+    responsibleName: "other",
+    ownerId: TEST_TEAM_ID,
+    ownerName: "Team One",
+    materiels: [
+      { materielId: TEST_MATERIEL_ID, materielName: "Gastro 1/1", quantity: 3 },
+    ],
+    notes: null,
+    completedAt: null,
+    returnedAt: null,
+    returnNotes: null,
+    eventName: null,
     ...overrides,
   };
 }

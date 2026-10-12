@@ -2,7 +2,10 @@
   import { toastService } from "$lib/services/toast.service.svelte";
   import { eventsStore } from "$lib/stores/EventsStore.svelte";
   import { globalState } from "$lib/stores/GlobalState.svelte";
-  import { materielStore } from "$lib/stores/MaterielStore.svelte";
+  import {
+    materielStore,
+    EventMaterielSyncError,
+  } from "$lib/stores/MaterielStore.svelte";
   import type {
     EnrichedMateriel,
     EnrichedMaterielLoan,
@@ -259,6 +262,12 @@
 
   $effect(() => {
     if (isOpen) {
+      // Conflits calculés sur des données fraîchement synchronisées : delta
+      // sync silencieux à l'ouverture ; l'affichage se met à jour quand le
+      // résultat atterrit en Dexie (échec silencieux — le statut serveur est
+      // déjà porté par la barre d'état).
+      materielStore.syncRevalidate().catch(() => {});
+
       if (mode === "edit" && loanId && !loading) {
         loadingLoan = true;
         const loan = materielStore.getLoanById(loanId);
@@ -517,11 +526,18 @@
           : "Erreur mise à jour emprunt:",
         error,
       );
-      toastService.error(
-        mode === "create"
-          ? "Erreur lors de la création de la réservation"
-          : "Erreur lors de la modification de la réservation",
-      );
+      if (error instanceof EventMaterielSyncError) {
+        // Échec partiel : le prêt est modifié (visible partout), seule la
+        // liste du materiel de l'événement n'a pas suivi — pas une erreur
+        // globale.
+        toastService.warning(error.message);
+      } else {
+        toastService.error(
+          mode === "create"
+            ? "Erreur lors de la création de la réservation"
+            : "Erreur lors de la modification de la réservation",
+        );
+      }
     } finally {
       loading = false;
     }

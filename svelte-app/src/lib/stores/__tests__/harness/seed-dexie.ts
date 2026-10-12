@@ -13,13 +13,25 @@ import type { ProductNeedRow } from "$lib/db-sync/pb-sync";
 export async function clearDexie(): Promise<void> {
   await db.transaction(
     "rw",
-    [db.products, db.purchases, db.productNeeds, db.recipes, db.syncMeta],
+    [
+      db.products,
+      db.purchases,
+      db.productNeeds,
+      db.recipes,
+      db.syncMeta,
+      db.materiels,
+      db.materielLoans,
+      db.eventMateriels,
+    ],
     async () => {
       await db.products.clear();
       await db.purchases.clear();
       await db.productNeeds.clear();
       await db.recipes.clear();
       await db.syncMeta.clear();
+      await db.materiels.clear();
+      await db.materielLoans.clear();
+      await db.eventMateriels.clear();
     }
   );
 }

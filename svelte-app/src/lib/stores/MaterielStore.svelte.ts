@@ -36,6 +36,22 @@ import { createSyncCollection, db, pb } from "$lib/db-sync/pb-sync";
  * qu'une SvelteMap qui serait immédiatement détruite par la chaîne $derived.
  */
 
+/**
+ * La mise à jour du prêt est appliquée côté serveur, mais la projection
+ * event_materiel (syncFromLoan) a échoué — erreur typée pour que l'appelant
+ * (modal) distingue l'échec partiel d'un échec complet : l'état reste cohérent
+ * avec le serveur, la projection peut être retentée.
+ */
+export class EventMaterielSyncError extends Error {
+  constructor(
+    message: string,
+    options: { cause: unknown },
+  ) {
+    super(message, options);
+    this.name = "EventMaterielSyncError";
+  }
+}
+
 export class MaterielStore {
   // aw-sync collections (CRUD + sync Appwrite ↔ Dexie)
   #materielCollection = createSyncCollection<Materiel>(pb, db.materiels, "materiel", { softDelete: true });
@@ -87,8 +103,15 @@ export class MaterielStore {
   #enrichedMateriels = $derived.by(() =>
     this.#raw.materiels
       .filter((m) => !m.deleted)
-      .map((m) => enrichMateriel(m, this.#raw.loans)),
+      .map((m) => enrichMateriel(m, this.#liveLoans)),
   );
+
+  /**
+   * Prêts sans marqueur local de suppression (pb-sync pose deleted:true sur un
+   * 404 d'update — sinon des records fantômes comptent dans la disponibilité).
+   * Ne filtre PAS #enrichedLoans : les vues UI doivent voir le marqueur.
+   */
+  #liveLoans = $derived(this.#raw.loans.filter((l) => !l.deleted));
 
   /** All loans enriched with parsed materielItems */
   #enrichedLoans = $derived.by(() =>
@@ -150,7 +173,7 @@ export class MaterielStore {
   ): Array<EnrichedMateriel & { availableForPeriod: number }> {
     const periodStart = new Date(startDate);
     const periodEnd = new Date(endDate);
-    const allLoans = this.#raw.loans;
+    const allLoans = this.#liveLoans;
 
     return this.#enrichedMateriels
       .filter((m) => m.teamId === teamId)
@@ -355,7 +378,7 @@ export class MaterielStore {
       );
 
       // Return enriched (will also update via liveQuery)
-      return enrichMateriel(doc, this.#raw.loans);
+      return enrichMateriel(doc, this.#liveLoans);
     } catch (err) {
       this.#error = err instanceof Error ? err.message : "Erreur de création";
       throw err;
@@ -427,7 +450,6 @@ export class MaterielStore {
     eventName?: string | null;
   }): Promise<EnrichedMaterielLoan> {
     this.#loading = true;
-    this.#error = null;
 
     try {
       if (!globalState.userId) {
@@ -457,23 +479,39 @@ export class MaterielStore {
 
       const enriched = enrichLoanFromDb(loan);
 
-      // Sync vers EventMateriel si un eventId est lié
+      // Sync vers EventMateriel si un eventId est lié. Tout ou rien : si la
+      // projection échoue, le prêt est compensé — un prêt fantôme compterait
+      // dans la disponibilité et « réapparaîtrait créé » après refresh.
       if (data.eventId && data.materiels.length > 0) {
-        await eventMaterielStore.syncFromLoan(
-          loan.id,
-          data.eventId,
-          data.materiels,
-          data.responsibleName,
-          data.ownerName,
-          globalState.userId,
-        );
+        try {
+          await eventMaterielStore.syncFromLoan(
+            loan.id,
+            data.eventId,
+            data.materiels,
+            data.responsibleName,
+            data.ownerName,
+            globalState.userId,
+          );
+        } catch (syncErr) {
+          try {
+            await eventMaterielStore.removeByLoan(loan.id);
+          } catch {
+            // Meilleur effort — ne pas masquer l'échec de sync
+          }
+          try {
+            await this.#loanCollection.remove(loan.id);
+          } catch {
+            // Meilleur effort — ne pas masquer l'échec de sync
+          }
+          throw syncErr;
+        }
       }
 
       return enriched;
-    } catch (err) {
-      this.#error = err instanceof Error ? err.message : "Erreur de création";
-      throw err;
     } finally {
+      // Pas d'écriture de #error ici : l'échec appartient à l'appelant (modal
+      // ou action de page) qui l'affiche lui-même — sinon il fuit vers les
+      // pages loans/materiel, toutes équipes confondues.
       this.#loading = false;
     }
   }
@@ -493,7 +531,6 @@ export class MaterielStore {
     },
   ): Promise<void> {
     this.#loading = true;
-    this.#error = null;
 
     try {
       const currentLoan = this.getLoanById(loanId);
@@ -521,32 +558,39 @@ export class MaterielStore {
         updateData as Partial<MaterielLoan>,
       );
 
-      // Sync vers EventMateriel si nécessaire
+      // Sync vers EventMateriel si nécessaire. La mise à jour du prêt est
+      // déjà appliquée (source de vérité de la disponibilité) : en cas
+      // d'échec de projection on ne rollback pas le prêt — on signale un
+      // échec partiel typé, la projection reste retentable.
       if (data.eventId !== undefined || data.materiels !== undefined) {
         const materiels = data.materiels || currentLoan?.materielItems || [];
 
-        if (oldEventId && oldEventId !== newEventId) {
-          await eventMaterielStore.removeByLoanAndEvent(loanId, oldEventId);
-        }
+        try {
+          if (oldEventId && oldEventId !== newEventId) {
+            await eventMaterielStore.removeByLoanAndEvent(loanId, oldEventId);
+          }
 
-        if (newEventId && materiels.length > 0) {
-          await eventMaterielStore.syncFromLoan(
-            loanId,
-            newEventId,
-            materiels,
-            currentLoan?.responsibleName || "",
-            currentLoan?.ownerName || "",
-            globalState.userId || "",
+          if (newEventId && materiels.length > 0) {
+            await eventMaterielStore.syncFromLoan(
+              loanId,
+              newEventId,
+              materiels,
+              currentLoan?.responsibleName || "",
+              currentLoan?.ownerName || "",
+              globalState.userId || "",
+            );
+          } else if (!newEventId && oldEventId) {
+            await eventMaterielStore.removeByLoan(loanId);
+          }
+        } catch (syncErr) {
+          throw new EventMaterielSyncError(
+            "La réservation est modifiée, mais la liste du matériel de l'événement n'a pas pu être synchronisée",
+            { cause: syncErr },
           );
-        } else if (!newEventId && oldEventId) {
-          await eventMaterielStore.removeByLoan(loanId);
         }
       }
-    } catch (err) {
-      this.#error =
-        err instanceof Error ? err.message : "Erreur de mise à jour";
-      throw err;
     } finally {
+      // Pas d'écriture de #error ici : voir createLoan.
       this.#loading = false;
     }
   }

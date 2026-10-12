@@ -119,6 +119,7 @@ export interface UpdateEventData {
   teams?: string[];
   contributors?: EventContributor[];
   guestEmails?: string[];
+  guestUsers?: string[];
   todos?: EventTodo[];
   status?: EventStatus;
 }

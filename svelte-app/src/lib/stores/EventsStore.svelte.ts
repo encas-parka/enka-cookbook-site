@@ -524,6 +524,9 @@ export class EventsStore {
     if (data.guestEmails !== undefined) {
       serialized.guestEmails = data.guestEmails;
     }
+    if (data.guestUsers !== undefined) {
+      serialized.guestUsers = data.guestUsers;
+    }
     if (data.todos !== undefined) {
       serialized.todos = data.todos;
     }
@@ -694,15 +697,15 @@ export class EventsStore {
 
   /**
    * Invite des participants à un événement.
-   * STUB — le système d'invitation PocketBase sera implémenté à l'étape 1.3.
-   * En attendant, les contributeurs sont ajoutés directement au record.
-   */
-  /**
-   * Invite des participants à un événement.
    *
-   * Flux PocketBase :
-   *   1. Ajoute les emails dans guestEmails[] et contributors[] (atomique)
-   *   2. Ajoute les teamIds dans la relation teams (ids PocketBase)
+   * Flux PocketBase — une seule écriture atomique de l'event :
+   *   1. contributors[] (état RSVP pour l'UI) + guestEmails[] + guestUsers[]
+   *      pour les emails résolus vers un compte PB — guestUsers est la RELATION
+   *      filtrée par les règles events (list/view/update) : sans elle, l'event
+   *      n'est jamais livré à l'invité et son RSVP est rejeté (les ids nanoid
+   *      des emails inconnus restent hors relation — le hook join-event les y
+   *      rattache au premier join) ;
+   *   2. teamIds dans la relation teams (ids PocketBase)
    *   3. Crée/récupère un share link pour l'event
    *   4. Appelle le hook email en fire-and-forget
    *
@@ -783,10 +786,25 @@ export class EventsStore {
       }
     }
 
+    // --- 3b. Résoudre les guestUsers (dédupliqués) ---
+    // La relation guestUsers est le champ filtré par les règles events
+    // (list/view/update) — contributors est un json non traversable par les
+    // règles. N'écrire que contributors laisse l'invité connu hors de toute
+    // règle : l'event ne lui est jamais livré et son RSVP est rejeté.
+    const currentGuestUsers: string[] = Array.isArray(event.guestUsers)
+      ? event.guestUsers
+      : [];
+    const guestUserIds = new Set(currentGuestUsers);
+    for (const known of knownUsers.values()) {
+      guestUserIds.add(known.id);
+    }
+    const updatedGuestUsers = [...guestUserIds];
+
     // --- 4. Mise à jour atomique de l'event ---
     const updatedEvent = await this.updateEvent(eventId, {
       contributors: newContributors,
       guestEmails: updatedGuests,
+      guestUsers: updatedGuestUsers,
       teams: updatedTeams,
     });
 

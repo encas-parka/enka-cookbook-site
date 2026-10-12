@@ -1,6 +1,6 @@
 ---
 title: Moussaka végé améliorée
-date: '2026-06-27T07:42:00.172Z'
+date: '2026-10-12T08:13:03.260Z'
 draft: false
 typeR: plat
 categories:
@@ -17,9 +17,7 @@ region: null
 saison:
   - ete
 id: moussaka-vege-am-v3-ma_gaks8lbfi8nx
-materiel:
-  - Four
-  - Gastro 1/1 (Normaux)
+materiel: []
 ingredients:
   - uuid: u2m28w
     name: Ail
@@ -103,9 +101,9 @@ ingredients:
     pS: false
   - uuid: pbydyr
     name: Chunks (protéine de soja)
-    originalQuantity: 450
+    originalQuantity: 300
     originalUnit: gr.
-    normalizedQuantity: 450
+    normalizedQuantity: 300
     normalizedUnit: gr.
     comment: ''
     allergens:
@@ -175,9 +173,9 @@ permissionWrite:
   - 6931ecdccd2c8d8d15e5
 auteur: Marion
 createdAt: '2026-06-27T07:41:20.161+00:00'
-updatedAt: '2026-06-27T07:41:20.161+00:00'
+updatedAt: '2026-10-12T08:13:02.557+00:00'
 createdBy: 6931ecdccd2c8d8d15e5
-teams: null
+teams: []
 status: public
 rootRecipeId: moussaka-vege_pz6tjg37kqw5
 versionLabel: v3 - Marion

@@ -148,10 +148,45 @@ Importe TOUTES les données dans PocketBase via HTTP API (pas de SDK).
 
 - **Résolution des refIds** : chaque refId `aw_xxx` est mappé au vrai PB ID après création
 - **Gère** : relations single/multi, champs JSON (remappage deep), champs texte avec refIds, IDs forcés (recipes)
+- **Préflight** : la cible doit être vide (exit 1 sinon) — `--force` ignore (mode dev explicite)
 
 ```bash
 bun run scripts_dev/3-import-pb.ts
 ```
+
+#### Mode dev `--upsert`
+
+Ré-importe les sources sur une cible **déjà peuplée par ce pipeline** : POST
+par record ; en cas de rejet `not_unique` (id déterministe déjà présent, ou
+autre champ unique), PATCH du record existant par son id déterministe
+(`hash15(refId)`, ou le slug pour les recettes).
+
+```bash
+PB_URL_OVERRIDE=http://127.0.0.1:8094 bun run scripts_dev/3-import-pb.ts --upsert
+```
+
+- **⚠️ Ne garantit pas PB = sources** : aucun record absent des sources n'est
+  purgé (pas de delete). Les records supprimés côté source restent en PB.
+- **Cible** : doit avoir été peuplée par ce pipeline (ids déterministes). Une
+  cible peuplée autrement produit des PATCH 404 — visibles, jamais silencieux.
+- **Compteurs** : `created` (nouveaux records) / `patched` (rafraîchis) /
+  `failed` (POST et PATCH échoués). Il n'y a pas d'état « skipped » : tout
+  `not_unique` débouche sur un PATCH.
+- **Timestamps** (comportement attendu, mesuré PB 0.37.5 — pas un bug) : le
+  PATCH ignore silencieusement `created`/`updated` fournis — `created` est
+  conservée, `updated` devient la date de l'upsert. Relancer
+  `4-fix-timestamps` ensuite (PB arrêté) pour restaurer les dates sources.
+- **users** : le PATCH ne touche jamais `password`/`passwordConfirm` (les
+  mots de passe sources sont aléatoires à chaque transform — les tourner à
+  chaque upsert serait une rotation silencieuse).
+- **Verdicts** : un run `--upsert` n'émet aucun count-delta pour les records
+  patchés (comptes inchangés) ; les rejets éventuels restent émis
+  (`import-rejected`, mêmes clés que le mode normal). `validate-migration`
+  en sortie d'upsert n'est pas un critère : son contrat suppose le reset du
+  pipeline (cible vide → fix timestamps → validate).
+- **Flags** : `--upsert` implique la tolérance cible peuplée (pas besoin de
+  `--force`, qui reste l'échappatoire du mode normal). Cible vide + upsert =
+  équivalent à un import normal.
 
 ---
 

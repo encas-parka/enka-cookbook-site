@@ -5,13 +5,23 @@
  * Uses fetch HTTP (no SDK dependency) for consistency with export.
  *
  * Usage:
- *   bun run scripts_dev/3-import-pb.ts
+ *   bun run scripts_dev/3-import-pb.ts [--upsert]
  *
  * Requires:
  *   - scripts_dev/.env.local with PB_URL, PB_ADMIN_EMAIL, PB_ADMIN_PASSWORD
  *   - scripts_dev/pb-import/*.json (from 2-transform-data.ts)
  *   - scripts_dev/migration-map.json
  *   - PocketBase running locally
+ *
+ * --upsert (dev only): POST each record; on a not_unique rejection, PATCH the
+ * existing record by its deterministic id (hash15(refId), or the recipe slug).
+ * NO purge of records absent from the sources — this does NOT guarantee
+ * PB = sources. The target must have been populated by this pipeline
+ * (deterministic ids), otherwise PATCHes fail with 404 (visible, never
+ * silent). Expected timestamps on patched records (measured on PB 0.37.5):
+ * PATCH silently ignores provided created/updated — `created` is preserved,
+ * `updated` becomes the upsert time; run 4-fix-timestamps afterwards
+ * (PB stopped) to restore source dates.
  */
 import { readFileSync, writeFileSync, existsSync } from "fs";
 import { join } from "path";
@@ -21,6 +31,9 @@ import { emitVerdicts, VERDICT_CATEGORY } from "./verdicts-file.ts";
 const ENV_FILE = join(import.meta.dir, ".env.local");
 const IMPORT_DIR = join(import.meta.dir, "pb-import");
 const MAP_FILE = join(import.meta.dir, "migration-map.json");
+
+// Dev-only upsert mode: refresh existing records instead of failing on them
+const UPSERT = process.argv.includes("--upsert");
 
 // Import order (dependencies first)
 const COLLECTION_ORDER = [
@@ -153,6 +166,38 @@ async function pbCreate(collection: string, data: Record<string, any>): Promise<
   }
 
   return res.json();
+}
+
+async function pbPatch(collection: string, id: string, data: Record<string, any>): Promise<any> {
+  const res = await fetch(`${pbBaseUrl}/api/collections/${collection}/records/${id}`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: pbToken,
+    },
+    body: JSON.stringify(data),
+  });
+
+  if (!res.ok) {
+    const body = await res.text();
+    const err = new Error(`PB patch ${collection}/${id} failed (${res.status}): ${body.slice(0, 300)}`);
+    try {
+      (err as any).pbBody = JSON.parse(body);
+    } catch {
+      // non-JSON body — no structured codes, the reason will say so
+    }
+    throw err;
+  }
+
+  return res.json();
+}
+
+// True when PB refused a create because a unique constraint already exists
+// (the deterministic id, or another unique field like users.email)
+function isNotUnique(err: any): boolean {
+  const fieldErrors = err?.pbBody?.data ?? err?.pbBody?.response?.data;
+  if (!fieldErrors || typeof fieldErrors !== "object") return false;
+  return Object.values<any>(fieldErrors).some((f) => f?.code === "validation_not_unique");
 }
 
 async function pbDelete(collection: string, id: string): Promise<boolean> {
@@ -347,37 +392,57 @@ function rejectionVerdicts(): Parameters<typeof emitVerdicts>[1] {
 
 // --- Import functions ---
 
-async function importCollection(collection: string): Promise<{ created: number; failed: number }> {
+async function importCollection(collection: string): Promise<{ created: number; patched: number; failed: number }> {
   const filePath = join(IMPORT_DIR, `${collection}.json`);
   if (!existsSync(filePath)) {
     console.log(`   ⏭️  No ${collection}.json — skipping`);
-    return { created: 0, failed: 0 };
+    return { created: 0, patched: 0, failed: 0 };
   }
 
   const records: any[] = JSON.parse(readFileSync(filePath, "utf-8"));
   if (records.length === 0) {
     console.log(`   ⏭️  ${collection}.json is empty — skipping`);
-    return { created: 0, failed: 0 };
+    return { created: 0, patched: 0, failed: 0 };
   }
 
   let created = 0;
+  let patched = 0;
   let failed = 0;
 
   for (const record of records) {
     const { data, refId } = processRecord(collection, record);
+    // Recipes use forced IDs and carry no _refId: self-map the plain id so
+    // intra-collection refs (rootRecipeId = original dirName) resolve like any refId
+    const registerMapping = (pbId: string) => {
+      if (refId) {
+        refToPb.set(refId, pbId);
+      }
+      if (collection === "recipes" && record.id) {
+        refToPb.set(record.id, pbId);
+      }
+    };
 
     try {
       const result = await pbCreate(collection, data);
-      if (refId) {
-        refToPb.set(refId, result.id);
-      }
-      // Recipes use forced IDs and carry no _refId: self-map the plain id so
-      // intra-collection refs (rootRecipeId = original dirName) resolve like any refId
-      if (collection === "recipes" && record.id) {
-        refToPb.set(record.id, result.id);
-      }
+      registerMapping(result.id);
       created++;
     } catch (err: any) {
+      // Upsert: not_unique on a deterministic id means the record already
+      // exists — refresh it in place instead of counting a failure
+      if (UPSERT && data.id && isNotUnique(err)) {
+        try {
+          const { id: _omit, ...patchBody } = data;
+          const result = await pbPatch(collection, data.id, patchBody);
+          registerMapping(result.id);
+          patched++;
+        } catch (patchErr: any) {
+          failed++;
+          recordRejection(collection, refId, patchErr);
+          const errMsg = patchErr.message?.slice(0, 200) || String(patchErr);
+          console.log(`   ❌ ${collection} [${refId}]: ${errMsg}`);
+        }
+        continue;
+      }
       failed++;
       recordRejection(collection, refId, err);
       const errMsg = err.message?.slice(0, 200) || String(err);
@@ -385,19 +450,20 @@ async function importCollection(collection: string): Promise<{ created: number; 
     }
   }
 
-  return { created, failed };
+  return { created, patched, failed };
 }
 
 // Special import for users (auth collection requires passwordConfirm)
-async function importUsers(): Promise<{ created: number; failed: number }> {
+async function importUsers(): Promise<{ created: number; patched: number; failed: number }> {
   const filePath = join(IMPORT_DIR, "users.json");
   if (!existsSync(filePath)) {
     console.log(`   ⏭️  No users.json — skipping`);
-    return { created: 0, failed: 0 };
+    return { created: 0, patched: 0, failed: 0 };
   }
 
   const records: any[] = JSON.parse(readFileSync(filePath, "utf-8"));
   let created = 0;
+  let patched = 0;
   let failed = 0;
 
   for (const record of records) {
@@ -415,6 +481,27 @@ async function importUsers(): Promise<{ created: number; failed: number }> {
       }
       created++;
     } catch (err: any) {
+      // Upsert: never rotate credentials on a refresh — password/passwordConfirm
+      // are stripped from the PATCH (the source passwords are random per transform run)
+      if (UPSERT && data.id && isNotUnique(err)) {
+        try {
+          const { id: _omit, password: _pw, passwordConfirm: _pc, ...patchBody } = data;
+          const result = await pbPatch("users", data.id, patchBody);
+          if (refId) {
+            refToPb.set(refId, result.id);
+          }
+          if (appwriteId) {
+            refToPb.set(appwriteId, result.id);
+          }
+          patched++;
+        } catch (patchErr: any) {
+          failed++;
+          recordRejection("users", appwriteId, patchErr);
+          const errMsg = patchErr.message?.slice(0, 200) || String(patchErr);
+          console.log(`   ❌ user [${appwriteId}]: ${errMsg}`);
+        }
+        continue;
+      }
       failed++;
       recordRejection("users", appwriteId, err);
       const errMsg = err.message?.slice(0, 200) || String(err);
@@ -422,7 +509,7 @@ async function importUsers(): Promise<{ created: number; failed: number }> {
     }
   }
 
-  return { created, failed };
+  return { created, patched, failed };
 }
 
 // --- Main ---
@@ -431,9 +518,17 @@ async function importUsers(): Promise<{ created: number; failed: number }> {
  * Preflight bloquant : la cible doit être VIDE (contrat reset du pipeline).
  * Un import sur PB peuplé crée des doublons silencieux (collections sans id
  * explicite ni index unique) — incident du 08-10. `--force` court-circuite
- * (mode dev explicite).
+ * (mode dev explicite). `--upsert` le court-circuite aussi : une cible
+ * peuplée EST son cas d'usage (PATCH par id déterministe, sans purge).
  */
 async function preflightEmptyTarget(): Promise<void> {
+  if (UPSERT) {
+    console.log(
+      "⚠️  --upsert : preflight cible vide ignoré — une cible peuplée est le cas d'usage (PATCH par id déterministe).\n" +
+      "   Rappel : sans purge des absents — ne garantit PAS PB = sources.",
+    );
+    return;
+  }
   if (process.argv.includes("--force")) {
     console.log("⚠️  --force : preflight cible vide ignoré (mode dev explicite)");
     return;
@@ -460,10 +555,47 @@ async function preflightEmptyTarget(): Promise<void> {
   console.log("✅ Preflight : cible vide");
 }
 
+const HELP = `3-import-pb.ts — Import PB-ready JSON into local PocketBase
+
+Usage:
+  bun run scripts_dev/3-import-pb.ts [flags]
+
+Flags:
+  --upsert    Dev-only upsert mode: POST each record; on a not_unique
+              rejection, PATCH the existing record by its deterministic id
+              (hash15(refId), or the recipe slug). NO purge of records absent
+              from the sources — does NOT guarantee PB = sources. Requires a
+              target populated by this pipeline (deterministic ids), otherwise
+              PATCHes fail with 404 (visible). Patched records keep their
+              'created' and get 'updated' = upsert time (PB autodate by
+              design); run 4-fix-timestamps afterwards (PB stopped) to restore
+              source dates. Implies the populated-target preflight tolerance
+              (--force not needed). No count-delta verdicts are emitted for
+              patched records (counts unchanged); rejections, if any, are
+              emitted as in normal mode.
+  --force     Normal mode only: skip the empty-target preflight.
+  -h, --help  Show this help.
+
+Env:
+  PB_URL_OVERRIDE  Target instance URL (default: PB_URL from .env.local,
+                   else http://127.0.0.1:8090). Superuser credentials come
+                   from scripts_dev/.env.local.
+`;
+
 async function main() {
+  if (process.argv.includes("-h") || process.argv.includes("--help")) {
+    console.log(HELP);
+    return;
+  }
+
   console.log(`\n${"=".repeat(60)}`);
   console.log(`📥 3-import-pb.ts — Import PB-ready JSON → PocketBase`);
   console.log(`${"=".repeat(60)}\n`);
+
+  if (UPSERT) {
+    console.log(`   ♻️  Mode --upsert (dev only) : POST → not_unique → PATCH par id déterministe`);
+    console.log(`   ⚠️  sans purge des absents — ne garantit PAS PB = sources\n`);
+  }
 
   // Load env
   const env = loadEnv();
@@ -497,18 +629,18 @@ async function main() {
   await preflightEmptyTarget();
 
   // Import in dependency order
-  const results: Record<string, { created: number; failed: number }> = {};
+  const results: Record<string, { created: number; patched: number; failed: number }> = {};
 
   // Users first (special handling)
   console.log("📥 Importing users...");
   results.users = await importUsers();
-  console.log(`   ✅ ${results.users.created} created, ${results.users.failed} failed\n`);
+  console.log(`   ✅ ${results.users.created} created${results.users.patched ? `, ${results.users.patched} patched` : ""}, ${results.users.failed} failed\n`);
 
   // Then all other collections
   for (const collection of COLLECTION_ORDER.slice(1)) {
     console.log(`📥 Importing ${collection}...`);
     results[collection] = await importCollection(collection);
-    console.log(`   ✅ ${results[collection].created} created, ${results[collection].failed} failed\n`);
+    console.log(`   ✅ ${results[collection].created} created${results[collection].patched ? `, ${results[collection].patched} patched` : ""}, ${results[collection].failed} failed\n`);
   }
 
   // Summary
@@ -516,18 +648,25 @@ async function main() {
   console.log(`📊 Import Summary\n`);
 
   let totalCreated = 0;
+  let totalPatched = 0;
   let totalFailed = 0;
 
   for (const collection of COLLECTION_ORDER) {
     const r = results[collection];
     if (!r) continue;
     totalCreated += r.created;
+    totalPatched += r.patched;
     totalFailed += r.failed;
     const label = (collection + ":").padEnd(18);
-    console.log(`   ${label} ${String(r.created).padStart(5)} created${r.failed ? `, ${r.failed} failed` : ""}`);
+    console.log(
+      `   ${label} ${String(r.created).padStart(5)} created` +
+      (r.patched ? `, ${r.patched} patched` : "") +
+      (r.failed ? `, ${r.failed} failed` : ""),
+    );
   }
 
   console.log(`\n   Total: ${totalCreated} created, ${totalFailed} failed`);
+  if (UPSERT) console.log(`   Upsert: ${totalPatched} patched`);
   console.log(`   RefId mapping: ${refToPb.size} entries`);
 
   if (totalFailed > 0) {

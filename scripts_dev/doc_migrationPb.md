@@ -130,6 +130,7 @@ Importe TOUTES les données dans PocketBase via HTTP API (pas de SDK).
 - **Input** : `pb-import/*.json` + `migration-map.json`
 - **Output** : `pb-import/id-map.json` (refId → PB ID mapping)
 - **Auth** : superuser via `PB_ADMIN_EMAIL` / `PB_ADMIN_PASSWORD`
+- **Cible** : `PB_URL_OVERRIDE` > `.env.local` `PB_URL` > 8090 (convention commune au pipeline)
 - **Import par ordre de dépendance** :
 
   1. `users` (auth collection, password random)
@@ -252,7 +253,8 @@ bun run scripts_dev/2d-transform-catalog.ts --dry-run
 Corrige les timestamps `created`/`updated` (ignorés par PB AutodateField lors de l'import API).
 
 - **Input** : `pb-import/*.json` (timestamps originaux) + `pb-import/id-map.json` (mapping IDs)
-- **Action** : SQL direct sur `pocketbase/pb_data/data.db` via `bun:sqlite`
+- **Action** : SQL direct sur le `data.db` de la cible via `bun:sqlite`
+- **Cible** : `PB_DB_PATH_OVERRIDE` (chemin du `data.db`, défaut `pocketbase/pb_data/data.db`) ; garde "instance servie" sondée via `PB_URL_OVERRIDE` > `.env.local` `PB_URL` > 8090 (convention commune au pipeline)
 - **Collections** : users, teams, materiel, events, products, purchases, materiel_loan, event_materiel, teamdocs, event_todos, share_links, recipes
 - **Safety** : backup automatique de `data.db` avant modification
 - **Options** : `--dry-run`

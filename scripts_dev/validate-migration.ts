@@ -79,6 +79,26 @@ const EXPORT_DIR = join(import.meta.dir, "appwrite-export");
 const VERDICTS_FILE = join(IMPORT_DIR, "expected-verdicts.json");
 const HUGO_RECIPE_DIR = join(import.meta.dir, "..", "content", "recipe");
 const INGREDIENTS_FILE = join(import.meta.dir, "..", "static", "data", "ingredients.json");
+
+// Collections whose source timestamps 4-fix-timestamps restores — the same
+// list it fixes (ingredients/categories have no source dates, locks is not
+// imported). Sampled, not exhaustively checked: the exhaustive proof lives
+// in the 4-fix verification probes.
+const TIMESTAMP_SAMPLE_COLLECTIONS = [
+  "users",
+  "teams",
+  "materiel",
+  "events",
+  "products",
+  "purchases",
+  "materiel_loan",
+  "event_materiel",
+  "teamdocs",
+  "event_todos",
+  "share_links",
+  "recipes",
+];
+const SAMPLES_PER_COLLECTION = 2;
 const RECIPE_INFO_FILE = join(import.meta.dir, "..", "static", "data", "recipe-info.json");
 
 // --- Collections to validate (same order as import) ---
@@ -908,6 +928,83 @@ async function checkTeamdocsOverLimit(): Promise<void> {
   );
 }
 
+// Timestamps — PB's autodate overwrites created/updated at import; 4-fix
+// restores the source values via sqlite (T04 probe: the API cannot). This
+// check re-reads a deterministic sample through the API so a silent no-op
+// or partial fix fails validation instead of shipping a green report.
+function toEpochMs(ts: string): number {
+  // PB convention "YYYY-MM-DD HH:MM:SS.SSSZ" and ISO "...T...Z" both parse
+  // once the space is normalized; a malformed value yields NaN → mismatch.
+  return Date.parse(ts.replace(" ", "T"));
+}
+
+async function checkTimestampSample(): Promise<void> {
+  const idMap: Record<string, string> = loadIdMap();
+  const errors: string[] = [];
+  let sampled = 0;
+  let skipped = 0; // no source ts / unresolvable id — 4-fix skips these too
+
+  for (const collection of TIMESTAMP_SAMPLE_COLLECTIONS) {
+    const records = loadImportFile(collection);
+    let taken = 0;
+    for (const record of records) {
+      if (taken >= SAMPLES_PER_COLLECTION) break;
+
+      const pbId = collection === "recipes" && record.id
+        ? record.id
+        : record._refId
+          ? idMap[record._refId]
+          : record._appwriteId
+            ? idMap[`aw_${record._appwriteId}`]
+            : undefined;
+      if (!pbId) {
+        skipped++;
+        continue;
+      }
+
+      // Same never-empty fallback as 4-fix: a missing sibling would nullify
+      // PB's autodate, so the fix writes the other timestamp in its place.
+      const created = record.created || record.updated || "";
+      const updated = record.updated || record.created || "";
+      if (!created && !updated) {
+        skipped++;
+        continue;
+      }
+
+      const res = await fetch(
+        `${pbBaseUrl}/api/collections/${collection}/records/${pbId}?fields=id,created,updated`,
+        { headers: { Authorization: pbToken } },
+      );
+      if (!res.ok) {
+        errors.push(`${collection}/${pbId}: PB read failed (${res.status})`);
+        taken++;
+        sampled++;
+        continue;
+      }
+      const got = await res.json();
+      sampled++;
+      taken++;
+
+      for (const [field, expected] of [["created", created], ["updated", updated]] as const) {
+        const expectedMs = toEpochMs(expected);
+        const gotMs = toEpochMs(got[field] ?? "");
+        if (expectedMs !== gotMs) {
+          errors.push(
+            `${collection}/${pbId}: ${field} = "${got[field]}" (PB) vs "${expected}" (source)`,
+          );
+        }
+      }
+    }
+  }
+
+  addResult(
+    "timestamps.sample",
+    errors.length === 0 && sampled > 0,
+    `${sampled} record(s) sampled (${SAMPLES_PER_COLLECTION}/collection, source dates) · ${skipped} skipped (no source ts / unresolved id)`,
+    errors,
+  );
+}
+
 // --- Main ---
 async function main() {
   console.log(`\n${"=".repeat(60)}`);
@@ -961,6 +1058,7 @@ async function main() {
   await checkRecipeConvergence();
   await checkStructuralInvariants();
   await checkTeamdocsOverLimit();
+  await checkTimestampSample();
   checkStaleVerdicts();
 
   // Summary

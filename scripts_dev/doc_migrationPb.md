@@ -281,6 +281,7 @@ Vérifie l'intégrité des données importées. Cible retargetable par env
   6. Convergence des recettes Appwrite (id = slug Hugo) vs leur copie PB : divergence de contenu = bloquant sauf verdict ; drift de `updatedAt` au jour = informatif (Hugo est la source la plus fraîche) ; absentes = inventaire verdicté
   7. Structurel : `teams.roles` peuplé (non-NULL), `materiel.createdBy`/`ownerUser` vides par design (deleteRules team-scopées, pas de backfill)
   8. teamdocs over-limit : absence expliquée par la limite du champ texte et verdictée
+  9. Timestamps sample : 2 records/collection fixée par 4-fix relus via l'API, `created`/`updated` comparés aux dates sources — toute divergence = bloquant (un 4-fix no-op ou partiel ne peut pas donner un rapport vert)
 - **Collections validées** : users, teams, materiel, events, products, purchases, materiel_loan, event_materiel, teamdocs, event_todos, share_links, recipes, ingredients, categories
 
 #### Verdicts attendus (`pb-import/expected-verdicts.json`)
@@ -368,6 +369,12 @@ Enchaînement : preflight (env + superuser + cible adressable) → cleanup
 étape en échec stoppe le run, **le rapport est écrit quand même** (état atteint
 + erreur) et l'exit est non-zéro. Verdict global VERT seulement si toutes les
 étapes passent et validate est 100 % vert.
+
+- **Garde 4-fix** : après l'étape, l'orchestrateur vérifie que le compteur
+  `Records updated` est > 0 — un fix no-op (id-map manquante, mauvais
+  `PB_DB_PATH_OVERRIDE`…) laisserait toutes les dates à l'autodate d'import
+  en sortant exit 0. Parse manquant = 0 = échec (jamais de faux vert) ; le
+  check `timestamps.sample` de validate couvre en plus les fixes partiels.
 
 - **Mode managé** (`--pb-bin` + `--pb-dir`, les deux requis) : l'orchestrateur
   spawn lui-même la cible (`serve`), la stoppe **par PID** autour de

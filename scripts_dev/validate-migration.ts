@@ -69,6 +69,7 @@
 import { readFileSync, existsSync, readdirSync } from "fs";
 import { join } from "path";
 import { diffRecipeConvergence } from "./recipe-convergence.ts";
+import type { ExpectedVerdict } from "./verdicts-file.ts";
 
 // --- Config ---
 const ENV_FILE = join(import.meta.dir, ".env.local");
@@ -229,17 +230,8 @@ function loadMigrationMap(): any {
 }
 
 // --- Expected verdicts (machine-readable accepted deviations) ---
-// Schema of pb-import/expected-verdicts.json: see the file header.
-type ExpectedVerdict = {
-  type: "count-delta" | "absent-recipe" | "recipe-convergence";
-  collection?: string;
-  delta?: number;
-  slug?: string;
-  fields?: string[];
-  category?: string;
-  reason?: string;
-  emitter?: string;
-};
+// Schema: the shared `ExpectedVerdict` from verdicts-file.ts (single source
+// of truth for the pb-import/expected-verdicts.json contract).
 
 let verdicts: ExpectedVerdict[] = [];
 const consumedVerdicts = new Set<number>();

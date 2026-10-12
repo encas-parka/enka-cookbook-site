@@ -465,7 +465,7 @@ function pbVersion(pbBin: string | undefined): string {
   }
 }
 
-function gitHead(): string {
+function gitHead(): Promise<string> {
   return new Promise<string>((resolve) => {
     execFile("git", ["rev-parse", "--short", "HEAD"], { cwd: REPO_ROOT }, (err, stdout) => {
       resolve(err ? "unknown" : stdout.trim());

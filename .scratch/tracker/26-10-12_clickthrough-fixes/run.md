@@ -5,26 +5,173 @@
 - **Base commit** : `5ccfa32d` (mig/pocketbase). Commit scaffold du run : cf. dispatch.
 - **Arbre** : propre au démarrage ; `.scratch/wip/` vide (aucun claim, aucun WIP étranger) au 12-10.
 - **Contrat de run** : `~/.agents/docs/RUN-CONTRACT.md` — fences, sandbox, attestation, STOP. En force pour tous les implémenteurs.
-- **Test canon** : à rafraîchir. Baseline datée 07-10 : `bun run check` 0 erreur (6 a11y warnings), `bun run test` 104/104 (11 fichiers) — logs `/tmp/orchestrate/2026-10-07_mig-baseline_*.log`.
-- **Déps** : protocole update-deps EN PAUSE à sa porte de décision (session 07-10) — aucune cohorte supposée appliquée ; à vérifier (versions installées vs cohortes proposées : svelte 5.57.2, vite 8.3.3, pocketbase 0.28.1, sv-router 0.19, fuzzysort 4).
+- **Test canon — RAFRAÎCHI 12-10** (Investigator, HEAD `fb99f363`, arbre propre) : `bun run check` → **0 erreur, 6 warnings, 178 fichiers** (5 fichiers à problèmes : 5 a11y + 1 warning Svelte `state_referenced_locally` dans `CreateIngredientModal.svelte` — composition changée vs baseline 07-10 qui annonçait 6 a11y) ; `bun run test` → **132/132 verts, 17 fichiers** (la suite a grossi depuis la baseline 07-10 : 104 tests / 11 fichiers). Logs : `/tmp/orchestrate/tests-check-26-10-12.log`, `/tmp/orchestrate/tests-vitest-26-10-12.log`.
+- **Déps — verdict `doc` : AUCUNE cohorte appliquée**, protocole update-deps toujours en pause. Versions installées (lockfiles `bun.lock` racine + `svelte-app/`) vs cohortes proposées : svelte **5.55.2** vs 5.57.2 · vite **8.0.8** vs 8.3.3 · pocketbase npm **0.26.8** (racine épinglé exact + svelte-app ^0.26.8) vs 0.28.1 · sv-router **0.13.0** vs 0.19 · fuzzysort **3.1.0** vs 4 · @tiptap/core **3.22.3** (cohorte non énoncée dans le run report ; le dépôt sœur `enka-cookbook-site` porte 3.26.0 — une version plus récente existe en amont). Écart systématique : tout est en dessous des cohortes. Pas de `svelte-routing` (sv-router seul). Manifests : `package.json` (racine, workspace pocketbase/concurrently/gray-matter), `svelte-app/package.json`, `scripts_dev/package.json` (gray-matter/js-yaml, hors cohortes).
 - **Tooling** : bun 1.4.2, node 22, Hugo server (proxy assets, 1313), PocketBase v0.37.5 (`scripts_dev/pb-dev.sh`, 8090), vitest, pocketbase-typegen.
 
 ## Faits localisés (anchor symbole/chemin — pas de numéros de ligne ; certitude : mesuré / inféré / doc)
 
 <!-- Rempli par l'Investigator, amendé par ticket. Hypothèse jamais énoncée en fait. -->
 
+### Lecture croisée du cluster écritures (T01/T03/T04) — hypothèse dominante partagée
+
+Les 4 collections en échec partagent la même forme de règle create, **non durcie** par `1791278800_rules_api_hardening.js` (qui ne touche ni products, ni purchases, ni event_materiel, ni teamdocs ; il ne modifie events que list/view) : `@request.auth.id != "" && (eventId.teams.members ~ @request.auth.id || eventId.guestUsers ~ @request.auth.id)` — **sans clause `eventId.createdBy = @request.auth.id`**, alors que la listRule events en a reçu une (hardening). Or la checklist constate que **le créateur de l'event lui-même** reçoit 400 sur create teamdocs. `events.contributors` est un champ **json** (non traversable en règle) tandis que `events.guestUsers` est une **relation users** (traversable) — et le flux d'invitation in-app n'écrit que contributors/guestEmails (voir T06). **Hypothèse dominante (inféré — à vérifier par sonde)** : l'utilisateur agissant n'est pas couvert par `eventId.teams.members`/`eventId.guestUsers` sur l'event testé (créateur non membre des teams sélectionnées ; participants trackés en contributors json), la règle create évalue faux → 400. Attention : PocketBase répond aussi **400 « Failed to create record. »** pour un échec de règle create (réponse volontairement vague) — la sonde discrimine : `error.response.data` vide → règle ; erreurs par champ → validation. Les payloads client sont par ailleurs **conformes aux schémas** (croisement champ par champ, voir tickets).
+
+### T01 — products/purchases
+
+- Site client : `ProductsStore.createProduct` (payload conforme au schéma : seul `eventId` requis, fourni ; `who`/`specs`/`stockReel`/`store` sont des champs json, valeurs passées OK ; `updatedBy` relation users ; **aucun `id` client envoyé** — le `const productId = crypto.randomUUID()` est du **code mort**, cf. findings) ; `ProductsStore.createPurchase` (payload conforme : `eventId`/`unit`/`quantity` requis fournis ; `products: [productId]` relation multi vers products ; `who`/`store` texte/json ; `createdBy` relation users). Les deux passent par `pb-collection.create` (mesuré : `stripSystemFields(..., keepId)` → `pb.collection().create` → miroir Dexie, `table.put`).
+- Achat rapide : `EventProductsPage.handleQuickValidation` → `createPurchase(product.id, ...)` — **aucune création implicite du produit** dans le store ; le commentaire « Utiliser ProductsStore qui a déjà le guard intégré » ne correspond à rien dans le code (cf. findings). Les produits affichés peuvent être **virtuels** : `#calculateAndPersistNeeds` n'écrit que `db.productNeeds` (table dérivée, jamais synchronisée) — un id de produit virtuel n'existe pas serveur, et la relation `products` d'un purchase vers un record inexistant → 400 validation.
+- Site serveur : règles create/list products & purchases dans `pocketbase/pb_migrations/1791277647_collections_snapshot.js` (eventId-scopées, voir lecture croisée) ; hooks : aucun sur ces collections.
+- Tests à faire pivoter : `products-store-reactivity.test.ts`, `pb-sync-proxy-write.test.ts` (machinerie update) — aucune suite ne couvre createProduct/createPurchase aujourd'hui.
+
+### T02 — upsert produit
+
+- Chemin update : `pb-collection.update` lit `table.get(id)` et **throw `[pb-sync] Record ${id} not found in Dexie`** si absent — **aucun attach/upsert** (mesuré). Rollback : 404 → `RecordDeletedError` (+ put `{deleted:true}`), sinon `table.put(current)`.
+- Consommateurs : `ProductsStore.updateProduct` et `updateProductBatch` (les deux → `#productsCollection.update`) ; `ProductModalState.updateStore` → `updateProductBatch` (stack de la checklist).
+- Hypothèse (inféré — à vérifier) : le produit édité depuis le modal peut être un produit virtuel needs (pas de ligne `products` en Dexie/serveur) → throw. Le « contrat offline-first d'avant migration » attendu par le ticket = attach local ou create-avant-update ; `create` accepte déjà un id client (`keepId`), ce qui pré-positionne l'upsert.
+
+### T03 — loan ↔ event_materiel
+
+- Chemin : `MaterielStore.createLoan`/`updateLoan` → `#loanCollection.create/update` (payload conforme ; `responsibleId`/`borrowerUser`/`createdBy` posés — la règle create durcie de materiel_loan exige `@request.body.responsibleId = auth`) → si eventId+materiels : `EventMaterielStore.syncFromLoan(loanId, eventId, materiels, ...)` → `addItem`/`addHeaderWithAllocation` (payload conforme au schéma event_materiel : selects `type` (other, tools, dish, gaz, cooking, hygiene, electronic, manual) et `status` (to_find, to_check, confirmed) couvrent les valeurs envoyées ; `who`/`fromTeamName`/`where` texte ; relations `sourceMaterielId`→materiel, `loanId`→materiel_loan, `createdBy`→users ; `eventId` requis, fourni). Changement d'event : `removeByLoanAndEvent`.
+- Règles event_materiel : même forme eventId-scopée (voir lecture croisée).
+- Conflits de disponibilité : `CreateLoanModal` (`availabilityMap` ← `allMaterielsWithAvailability` ← `MaterielStore.getAvailableMaterielsForPeriod(ownerId, start, end, excludeLoanId)` → `calculateLoanedQuantityForPeriod` dans `utils/materiel.utils.ts`, calculé sur `#raw.loans` = Dexie via liveQuery). **`excludeLoanId` n'est passé qu'en mode edit** — en création, le loan courant peut se compter lui-même (hypothèse du faux conflit, inféré — à vérifier). Loan sans event : le calcul reste actif dès que dates posées (inféré).
+- Pollution cross-page : `MaterielStore.#error`/`#loading` sont des états **store-globaux** posés par createLoan/updateLoan (mesuré) — site candidat de la diffusion d'un échec hors modal.
+- Fraîcheur : « conflits sur données fraîchement synchronisées » ⇒ le calcul lit Dexie ; la fraîcheur dépend de syncRevalidate — site de fix candidat.
+
+### T04 — docs event
+
+- Client : `EventDocumentCreatePage.handleCreate` → `TeamdocsStore.createEventDocument({title, content, tags}, eventId)` → create `{...data, eventId, status: "doc"}` — **pas de teamId envoyé** (mesuré).
+- Règles teamdocs actuelles (`1791280500_teamdocs_team_scoped_rules.js`, complétées par `1791340000_teamdocs_tags.js` pour le champ tags) : create = `@request.body.teamId.members ~ auth || eventId.teams.members ~ auth || eventId.guestUsers ~ auth` ; list = view = update = delete = `(teamId.members || eventId.teams.members || eventId.guestUsers ~ auth)` sur record.
+- Mécanisme tag-docs : **filtre client** — `getEventDocumentsByTag(eventId, tag)` filtre la carte synchronisée ; la livraison serveur = listRule (sync teamdocs **sans filtre**, curseur global `teamdocs`). Les deux couches doivent tenir.
+- Hypothèses (inféré — à vérifier par sonde) : 400 création = règle (créateur non couvert, cf. lecture croisée) ; invisibilité userB = listRule fausse pour lui (participant présent en contributors json mais ni teamId.members ni guestUsers) — même racine que T06.
+- Tests : `teamdocs-store-tags.test.ts` (3) à faire pivoter.
+
+### T05 — realtime teamdocs
+
+- Page d'édition : `EditDocumentPage` — `storeDoc = $derived(teamdocsStore.getDocumentById(docId))` n'est consommé que pour le lock, le titre nav, le guard de save et les conditions de rendu ; `title`/`content`/`tags` locaux sont initialisés **one-shot dans `onMount`** — **aucune propagation storeDoc → champs locaux** (mesuré par usage grep). Le realtime store est collection-wide (`TeamdocsStore.setupRealtime` → `#collection.subscribe()` → SSE → Dexie → liveQuery) : les updates de userA arrivent bien en Dexie chez userB (inféré), mais la page ne les affiche pas.
+- Prior art locks : `locksService.subscribeToLock(resourceId, cb)` = `pb.collection("locks").subscribe(recordId, ...)` (SSE par document) ; la page souscrit `doc_${docId}` + heartbeat `acquireLock` + re-acquire au visibilitychange. locksService : `getLock`/`acquireLock` (update si heartbeat ou expiré, create sinon, refus si détenu par autrui)/`releaseLock`.
+- Anti-écrasement : le lock existe déjà ; la propagation du contenu ne doit pas le contourner (spec) — écrire storeDoc → editor seulement hors dirty (inféré, décision d'implémentation).
+
+### T06 — RSVP
+
+- Écriture d'invitation : `EventsStore.inviteParticipants` écrit `contributors` (json, status "invited", vrai userId si résolu via `lookupUsersByEmails`, sinon nanoid) + `guestEmails` (json) + `teams` (relation) — **jamais `guestUsers`**. Acceptation : `updateContributorStatus` → contributors json (UI : `EventInvitationAlert` → `onRespond` du parent).
+- `guestUsers` : **unique écrivain = hook `join-event.pb.js`** (grep src + pb_hooks : 1 seul site d'écriture) — le contre-exemple fonctionnel : le join par share-link ajoute guestUsers + guestEmails + contributors (id réel) → l'event devient visible.
+- Filtrage « events visibles par moi » : livraison serveur = listRule events (durcie) `teams.members || guestUsers || createdBy = auth` — la sync events est **sans filtre client** (`createSyncCollection(pb, db.events, "events")`) donc c'est la règle qui décide de ce qui atterrit en Dexie. Filtre UI : `getUpcomingEventsForUser()` = createdBy || contributor-accepté (json) || teams ∩ #userTeams.
+- Schéma events : `contributors` json, `guestEmails` json, `guestUsers` relation users (maxSelect 100), `teams` relation teams (maxSelect 999), `status` select (archive/locked/proposition/confirmed/canceled), `createdBy` relation users.
+- **Hypothèse dominante (inféré — à vérifier par sonde)** : l'event n'arrive jamais en Dexie de l'invité car la listRule l'exclut (guestUsers vide) ; l'écriture d'invitation doit atterrir dans le champ réellement filtré — guestUsers (relation) — tout en gardant contributors pour l'UI RSVP (le filtre client l'expose déjà). Source unique de vérité à documenter dans le ticket.
+
+### T07 — race login/IndexedDB
+
+- Lifecycle auth (mesuré) : boot `App.svelte.initializeApp` → `cleanupLegacyCaches` + `ensureDbReady` + `globalState.initializeAuth` (lecture seule de pb.authStore) puis, si authentifié : loadCache(recipes, events, materiel, teamdocs) → syncInitial(+nativeTeamsStore, alias `teamsStore` dans App.svelte) → setupRealtime ; sinon chemin visiteur = recipes seulement. Login modal : `GlobalState.refreshAuthAfterLogin` → `initRealtimeSignals()` AVANT les 3 phases (loadCache×5 → syncInitial×5 → setupRealtime×5) + `#setupUserRealtime`. Logout : `teardownRealtimeSignals()` → `pbLogout()` → destroy×6 (chaque destroy = unsubscribe + `clearLocal`).
+- `onAuthChange` (pb-auth.ts, wrap `pb.authStore.onChange`) est **défini mais jamais consommé** (grep : 1 seule occurrence = sa définition) — aucun re-run des stores sur changement d'auth hors ces trois chemins explicites.
+- Purge Dexie : `pb-collection.clearLocal` purge table + curseurs syncMeta (clés `${collection}:` préfixe + clé nue) — appelé uniquement via destroy (logout), forceReload, hardReset, softReset (teamdocs). **Aucune purge à l'arrivée d'un visiteur** au boot (seulement legacy caches / defensive open).
+- Delta sync : `initialFetch` = fetch `updated >= curseur` (curseur persisté en `syncMeta`, clé collection ou collection:scope, écrit dans la même transaction que les upserts) ; fallback full fetch **seulement si delta vide ET localCount === 0**.
+- Hypothèses (inféré — à vérifier) : (a) cache résiduel d'une session précédente + curseur récent → le delta post-login est quasi muet (les events anciens non mutés depuis le curseur ne sont jamais refetchés ; les lignes résiduelles bloquent le fallback localCount===0) ; (b) ou course boot/login (stores initialisés pendant la transition auth). Sites de fix candidats : purge renforcée visiteur au boot, invalidation curseurs/tables au changement d'identité (clearLocal existe déjà), re-run des 3 phases piloté par authStore plutôt que par les appels explicites.
+- Tests : `aw-db-defensive-open.test.ts` (Dexie), suites pb-sync (curseurs) — le seam lifecycle est testable via harness.
+
+### T08 — guards visiteur
+
+- `guards.ts` : `authGuard` = redirect `throw navigate("/", { replace: true })` **sans feedback** ; `eventGuard` = **pas de check auth** — fait seulement `eventsStore.loadCache()`, qui **throw « Utilisateur non connecté »** dans beforeLoad → ni redirect ni toast → page vide headerbar (évidence checklist sur /event/:id).
+- Déclaration des routes (`router/routes.ts`) : authGuard sur /dashboard (+ eventCreate, materiel, loans, user, teams…), /recipe/my (+ /draft), /recipe/new, /recipe/:uuid/edit (hooks attachés au composant), /recipe/:uuid/duplicate, /eventList, /createdocument/:teamId/new, /editdocument/:teamId/:docId, /documents/:teamId. eventGuard sur /event/:id (+ recipes, products, materiel, posters, todos, documents, document/create). Les autres routes (/, /recipe, /recipe/:uuid, /join/:linkId, /verify-email…) publiques.
+- Crash d'effet : `RecipeEditPage` porte 3 `$effect` — (1) check-auth : `if (!globalState.userId)` → toast + navigate("/") sans bloquer le reste ; (2) chargement : early-returns délicats sur `loaded`/`isLoading` → si jamais branché, spinner infini ; (3) snapshot initial. Site du crash `effect_update_depth_exceeded` = cette zone (toast dans effet + navigate dans effet + states mutés) ; le garde commenté `FIXIT: la reaquisition du lock ne fonctionne pas` y préexiste (cf. findings). Ordre guard↔fetch : les hooks du composant /recipe/:uuid/edit n'empêchent visiblement pas le mount visiteur (évidence : page vue + crash) — l'implémenteur vérifiera le timing hooks-vs-mount dans sv-router.
+- Feedback : `toastService` (`services/toast.service.svelte.ts`) disponible et déjà utilisé partout (mesuré).
+- Tests : aucune suite guards — à créer (seam router/store, logique pure testable).
+
+### T09 — alerte PB down
+
+- Signaux : `db-sync/pb-realtime.ts` — `initRealtimeSignals()` pose `pb.realtime.onDisconnect` (ignore le débranchement propre à 0 abonnés ; debounce 3 s → `statusBarStore.setServerStatus("disconnected")`) et souscrit `PB_CONNECT` (1re connexion consommée via `hasConnectedOnce`, reconnexions → `onRealtimeReconnect`). `teardownRealtimeSignals()` au logout (statut null).
+- Orchestrateur : `main.ts` — `onRealtimeReconnect(() => scheduleResync({reason: "sse-reconnect"}))` ; aussi visibilitychange/pageshow(bfcache)/online. `performResync` → `setServerStatus("unreachable")` si stores en échec, `"connected"` sinon (visitor : recipes seul, cf. commentaire REC-2).
+- Affichage : `StatusBar.svelte` affiche **DÉJÀ** les trois états avec priorité offline (`navigator.onLine`, handlers onoffline/ononline — c'est le badge « hors-ligne » actuel) > disconnected (« Connexion perdue ») > unreachable (« Serveur indisponible ») > locks.
+- **GAP mesuré** : `initRealtimeSignals` n'est appelé **que** dans `GlobalState.refreshAuthAfterLogin` (login modal) — **jamais au boot avec session existante** (ni `initializeApp`, ni `initializeAuth`). Sur le chemin le plus courant (reload avec session valide), les signaux sont morts → jamais d'alerte PB-down, et le resync sse-reconnect ne se déclenche pas non plus. Cf. contradiction #1 : l'énoncé du ticket 09 (« c'est le raccord au statut visible qui manque ») est inexact — le raccord StatusBar existe, c'est le lifecycle d'init qui manque.
+- Tests : `pb-realtime-signals.test.ts` (6) couvre déjà debounce/teardown/re-init — à étendre au lifecycle boot.
+
+### T10 — double-création event
+
+- Chemin : `EventCreatePage.saveEventData` → `EventsStore.createEventWithTeams` = **un seul `#collection.create`** (payload name/description/dateStart/dateEnd/date json/meals json/createdBy/teams relation/contributors json/todos json/status défaut "proposition" ; **pas d'id client** → PB génère ; pas de clé d'idempotence). Guard local double-submit : `isBusy` (boutons disabled, spinner, bloc formulaire disabled, overlay « Création de l'événement... »).
+- File de replay offline : **inexistante** (mesuré) — `PendingOp`/`createBatch` est un batch mémoire envoyé immédiatement ; `create` est server-first (throw, rien de persisté). Prior art offline queue : aucun dans pb-sync.
+- Exposition (inféré — tranchera le diag du ticket) : fenêtre = retry/timeout réseau (le serveur a créé, le client croit à l'échec et retente). Garde candidates : id client fourni à create (PB accepte, 15 chars [a-z0-9]) comme clé d'idempotence, ou dédup par name+dateStart côté client au retry. Le test click-through n'était pas décisif (checklist) → décision conditionnelle par l'investigation du ticket.
+
+### T11 — drafts liste publique
+
+- Serveur : listRule recipes = `""` (**public, tout le monde reçoit tout, y compris les drafts**) — sync recipes sans filtre client.
+- Client : `RecipesListPage.filteredRecipes` — scope "drafts" = `createdBy === userId && draft === true` ; **le scope par défaut n'exclut pas les drafts**. Un visiteur les voit donc dans la liste générale (évidence).
+- Donnée (mesuré) : `recipes.status` = select `public|private|deleted` (défaut création : `createRecipe` pose `status: data.status || "private"` ; soft-delete utilise "deleted") **et** bool `draft` (posé true à la création/édition si `check !== true`, dans RecipeCreatePage/RecipeEditPage). Le marqueur porteur du « brouillon » dans la liste existante = `draft`, pas `status`.
+- Fix minimal au même site : au scope par défaut, si visiteur (`!globalState.isAuthenticated`) exclure `draft === true`. L'accès direct par URL reste possible (`getRecipeByUuid`, vue publique) — conforme au ticket.
+- Arbitrage requis (cf. contradiction #2) : le ticket parle de « valeur par défaut de status à la création » mais la donnée filtrée dans la liste est `draft` — l'implémenteur filtre sur `draft` (usage existant) et documente.
+- Tests : à créer au seam store/filtre (le shape est couvert par recipes-json-shape).
+
+### T12 — gate
+
+Rien à ancrer côté code : porte d'intégration (re-click-through ciblé) + gravure du critère de sortie dans `backlog.md` et `AGENTS.md` (section Restant Phase 1). Le canon de test de ce rapport (132/132, check 0 erreur) est la baseline d'entrée du gate.
+
+### Inventaire harness (mission 4)
+
+- **Suites vitest** (17 fichiers / 132 tests, tous verts) : utils purs — `product-markdown-export` (12), `product-need-serializer` (14), `products-display` (2), `productEnrichment` (30), `event-todo.utils` (10), `products-json-shape` (7), `recipes-json-shape` (11), `events-utils` (5), `date-helpers` (6) ; db-sync — `aw-db-defensive-open` (2, fake-indexeddb) ; stores/db-sync machinerie — `pb-realtime-signals` (6), `pb-sync-scoped-cursor` (9), `pb-sync-delta-realtime` (8), `pb-sync-proxy-write` (3), `pb-sync-fullchain` (2), `products-store-reactivity` (2), `teamdocs-store-tags` (3).
+- **Stub PB** : `stores/__tests__/harness/stub-pb.ts` — `FakePocketBase` (store en mémoire, `filter()` réél-like via tokenizer/évaluateur PB filter, collections getFullList/getOne/getList/create/update/delete, `subscribe` SSE fake + `emit`, ids 15 chars [a-z0-9]). Accompagnateurs : `fixtures.ts` (makeEvent, etc.), `reactive-fixtures.svelte.ts`, `seed-dexie.ts`, `setup.ts`, `wait-for-tick.ts`. Couverture actuelle : machinerie pb-sync + locks signaux + teamdocs tags + products réactivité. **Non couvert** : chemins create/update des stores métier (T01/T02/T03), guards, lifecycle auth (T07), EditDocumentPage (T05).
+- **Probes HTTP prior art** : `scripts_dev/migrate.ts` — health probe `GET /api/health` + `verifySuperuser` (`POST /api/collections/_superusers/auth-with-password`, creds dans `scripts_dev/.env.local` : PB_ADMIN_EMAIL/PB_ADMIN_PASSWORD), mode managé `--pb-bin/--pb-dir`. Nuance : le libellé « probes T18 » de la spec ne correspond à aucun littéral dans migrate.ts ni `doc_migrationPb.md` (grep vide) — ce sont les probes preflight du pipeline. Les sondes des tickets (create product/purchase/event_materiel/teamdocs par un membre, lecture event par l'invité) sont à écrire sur ce modèle : auth `users/auth-with-password` puis POST/GET records avec `error.response.data` examiné.
+- **PB dev** : `bun run dev:pb` (racine) → `scripts_dev/pb-dev.sh` (télécharge PB v0.37.5 si absent) → `pocketbase serve --dir=pocketbase/pb_data --migrationsDir=pocketbase/pb_migrations`, port 8090, Admin UI `/_/`. Les migrations (14 fichiers) s'appliquent au démarrage ; pour repartir propre : pipeline `scripts_dev/migrate.ts` (reset complet + verdicts).
+
+### Findings structurels transverses
+
+- **Tags checklist ↔ tickets** : les annotations `[!]` de `.scratch/tracker/clickthrough-checklist.md` §3/§4/§6/§7/§9 et « Problèmes constatés » #1 correspondent exactement aux tickets 01-11 (aucun écart trouvé).
+- **Règles non durcies** : products/purchases/event_materiel absentes de `rules_api_hardening.js` — le durcissement create (identity guards) n'a couvert ni ces collections ni le cas créateur-d'event. À intégrer au diag du cluster écritures (une migration de règles pourrait corriger T01+T03+T04 d'un coup — décision produit, pas de l'Investigator).
+
 ## Vérifications empiriques (commande exacte → verdict)
 
-<!-- Chaque verdict grep/probe/check porte sa commande exacte, loggée. -->
+- `mkdir -p /tmp/orchestrate && git --no-pager log --oneline -3 && git --no-optional-locks status --short` → HEAD `fb99f363` (baseline du run attendue), arbre propre, `.scratch/wip/` vide. **verdict : conforme au dispatch**.
+- `bun run check` (workdir `svelte-app/`, pipe `tee /tmp/orchestrate/tests-check-26-10-12.log`) → `COMPLETED 178 FILES 0 ERRORS 6 WARNINGS 5 FILES_WITH_PROBLEMS`. **verdict : 0 erreur ; 6 warnings** (5 a11y : EditDocumentPage, EventMaterielPage, EventProductsPage, EventRecipesPage ×2 ; 1 Svelte `state_referenced_locally` : CreateIngredientModal).
+- `bun run test` (workdir `svelte-app/`, pipe `tee /tmp/orchestrate/tests-vitest-26-10-12.log`) → `Test Files 17 passed (17)`, `Tests 132 passed (132)`, ~6 s. **verdict : 132/132 verts**.
+- Versions installées : grep lockfiles (`**/bun.lock`, motifs `"(svelte|vite|@tiptap/core|pocketbase|sv-router|fuzzysort)"` puis `"(pocketbase|fuzzysort|svelte-routing)@[0-9]"`) → svelte@5.55.2, vite@8.0.8, @tiptap/core@3.22.3, pocketbase@0.26.8 (racine + svelte-app), sv-router@0.13.0, fuzzysort@3.1.0, pas de svelte-routing. **verdict : cohortes en pause non appliquées (`doc`)**.
+- Règles API : grep `"name": "(products|purchases|event_materiel|teamdocs|events|recipes)"` sur `1791277647_collections_snapshot.js` puis lecture des blocs → formes de règles et champs requis ci-dessus. `grep "products|purchases"` sur `1791278800_rules_api_hardening.js` → **aucune occurrence** (ces collections non durcies).
+- Écrivains `guestUsers` : grep `guestUsers` sur `svelte-app/src` + `pocketbase/pb_hooks` → 7 matches, **unique site d'écriture = `join-event.pb.js`** (les autres : fixtures de test, types générés).
+- Lifecycle signaux : grep `initRealtimeSignals|teardownRealtimeSignals` (ts puis svelte) → appelés uniquement dans `GlobalState` (login/logout) et les tests ; **absents du boot App**.
+- État serveur : grep `setServerStatus` → pousseurs = `pb-realtime.ts` (disconnected/null) et `main.ts` performResync (unreachable/connected) ; consommateur = `StatusBar.svelte` (déjà câblé).
+- Abonnements auth : grep `onAuthChange` → 1 seul match = sa définition dans `pb-auth.ts` (**jamais consommé**).
+- « guard intégré » : lecture `handleQuickValidation` + grep `createPurchase` → aucune création implicite de produit dans le code (commentaire stale).
+- « T18 » : grep `T18|probe|sonde` sur `scripts_dev/doc_migrationPb.md` et `migrate.ts` → aucun littéral T18 ; probes réelles = preflight health + superuser.
+- `head scripts_dev/pb-dev.sh` → PB v0.37.5, serve sur `pocketbase/pb_data` + `pb_migrations`, port 8090.
 
 ## Pièges (pitfalls)
 
-<!-- Comportements non évidents rencontrés en cours de run. -->
+- **400 ≠ validation** : PocketBase répond 400 « Failed to create record. » aussi pour un échec de **règle create** (réponse vague volontaire). Discriminer via `error.response.data` : vide = règle ; erreurs par champ = validation. Ne pas « corriger le payload » à l'aveugle (spec : couche du défaut).
+- **update pb-sync est server-first avec lecture Dexie obligatoire** : tout write sur un id absent de Dexie throw (« Record not found in Dexie ») ; `create` en revanche accepte un id client (`keepId`) — c'est le levier naturel de l'upsert T02 et de l'idempotence T10.
+- **Les curseurs delta survivent aux utilisateurs** (syncMeta en Dexie) ; seul `clearLocal` les purge — et il n'est appelé ni au boot visiteur, ni au changement d'identité sans logout.
+- **Produits virtuels** : la liste products d'un event mélange records `products` synchronisés et produits **dérivés des besoins** (`db.productNeeds`, table non synchronisée) — les ids virtuels n'existent pas serveur (T01 relation, T02 not-found).
+- **Deux noms pour un store** : `App.svelte` importe `nativeTeamsStore as teamsStore` — même singleton.
+- **Le check compte différemment de la baseline 07-10** : 178 fichiers / 6 warnings dont 1 non-a11y (`state_referenced_locally`) — ne pas s'attendre à « 6 a11y ».
+- **`events.contributors` est json** : non traversable en règle PB ; `guestUsers` (relation) l'est — toute règle ou filtre serveur doit porter sur guestUsers/teams.
+- **Debounce SSE 3 s obligatoire** : `pb.realtime.onDisconnect` tire à chaque cycle de backoff SDK (~2 s) — ne pas câbler d'affichage direct.
+- **JSVM hooks** : syntaxe ES5 (`join-event.pb.js` en contre-exemple : `var`, pas de `?=` — piège documenté dans les skills pocketbase-jsvm).
 
 ## Décisions par ticket (une ligne chacune)
 
-<!-- -->
+- **T01** : payloads conformes aux schémas ; hypothèse dominante = règles create event-scopées évaluées fausses (cf. lecture croisée), sonde HTTP discriminante ; création implicite produit à construire (inexistante).
+- **T02** : absence d'upsert confirmée dans `pb-collection.update` (throw not-found) ; fix au site unique, contrat aw-era = attach/create-avant-update ; probablement produits virtuels en cause.
+- **T03** : payloads event_materiel conformes ; 400 = même famille de règle ; conflits calculés sur Dexie (`calculateLoanedQuantityForPeriod`, `excludeLoanId` absent en create) ; pollution = états store-globaux `#error`/`#loading` de MaterielStore.
+- **T04** : création sans teamId (create rule → clauses eventId seules) ; visibilité tag-docs = filtre client sur livraison listRule — même racine T06 probable pour l'invisibilité userB.
+- **T05** : realtime store OK (collection-wide) mais page one-shot (`storeDoc` jamais propagé vers title/content) ; locks déjà par-document (`subscribeToLock`) — ne pas casser.
+- **T06** : invitation écrit contributors json, jamais guestUsers ; unique écrivain guestUsers = hook join-event ; fix = écrire guestUsers (relation filtrée par la listRule) + garder contributors pour l'UI.
+- **T07** : re-run 3 phases au boot/login-modal seulement ; `onAuthChange` mort ; purge visiteur absente ; curseurs delta résiduels + fallback bloqué par localCount>0 = hypothèse dominante du Ctrl-R.
+- **T08** : eventGuard ne vérifie pas l'auth (throw loadCache → page vide) ; authGuard redirige sans feedback ; crash RecipeEditPage = zone des 3 `$effect` (auth-check non bloquant + chargement fragile) ; pattern unique = guard centralisant redirect+toast avant tout fetch.
+- **T09** : contradiction avec l'énoncé du ticket — StatusBar affiche déjà disconnected/unreachable ; le gap mesuré = `initRealtimeSignals` jamais appelé au boot avec session (login modal seulement).
+- **T10** : un seul create sans id client ni file offline ; isBusy protège le double-clic local ; exposition = retry réseau — garde candidate = id client idempotent.
+- **T11** : listRule recipes publique + filtre liste sans exclusion drafts ; marqueur porteur = bool `draft` (pas `status`) ; fix = exclusion drafts pour visiteur au scope par défaut de `RecipesListPage`.
+- **T12** : rien à ancrer — porte d'intégration ; canon de test de ce rapport = baseline d'entrée.
+
+## Contradictions artifact↔code (arbitrage orchestrateur)
+
+1. **Ticket 09 vs code** : le ticket énonce « le signal de déconnexion débounce ~3 s existe déjà côté signaux SSE — c'est le raccord au statut visible qui manque ». Mesuré : le raccord visible **existe déjà** (`StatusBar.svelte` affiche « Connexion perdue »/« Serveur indisponible » depuis `statusBarStore.serverStatus`, et `main.ts` pousse déjà unreachable/connected). Le gap réel est le **lifecycle d'init** : `initRealtimeSignals()` n'est appelé qu'au login modal, jamais au boot avec session existante — chemin pourtant dominant. L'énoncé du ticket oriente l'implémenteur vers le mauvais site ; le périmètre du fix est ajusté d'un cran (init des signaux, pas l'affichage).
+2. **Ticket 11 vs code** : le ticket demande de vérifier « la valeur par défaut de `status` à la création ». Mesuré : le défaut existe (`createRecipe` → `status: "private"`) mais **la liste ne filtre pas sur `status`** — le marqueur porteur du brouillon dans `RecipesListPage` est le bool `draft` (deux marqueurs coexistent : `draft` bool et `status` select public/private/deleted). Arbitrage requis : sur quel champ porte l'exclusion visiteur (recommandation : `draft`, usage existant).
+3. **Checklist T01 vs code** (évidence, pas une contradiction stricte du ticket) : « validation rapide censée créer le product si il n'existe pas » — aucun guard de création implicite n'existe ; la user story 2 de la spec demande ce comportement : c'est **à construire**, pas à réparer.
 
 ## Findings différés (tag : `!` bientôt · `S2` gating déploiement · `?` conditionnel · rien = dette légère)
 
-<!-- Bugs préexistants, typos, incohérences de commentaires — constatés, jamais ticketés ici ; l'orchestrateur les file au backlog en fin de run. -->
+- `!` `ProductsStore.createProduct` : `const productId = crypto.randomUUID()` est du **code mort** (aucun champ `id` dans le payload ; retour = id serveur) — reliquat offline-first Appwrite. Supprimer ou exploiter pour l'idempotence T10.
+- `!` `EventProductsPage.handleQuickValidation` : commentaire « Utiliser ProductsStore qui a déjà le guard intégré » **sans réalité dans le code** (aucun guard de création implicite dans `createPurchase`) — commentaire dangereux pour le diag T01.
+- `!` `guards.ts` docstring eventGuard : « La sécurité (permissions, accès) est gérée par **Appwrite** au niveau backend » — stale (PocketBase) ; de plus la phrase décrit mal le guard (il ne fait que loadCache).
+- `?` `RecipeEditPage` : commentaire préexistant `FIXIT: la reaquisition du lock ne fonctionne pas` — défaut connu, proche de la zone T08/T05.
+- `?` `PermissionsManager.svelte` `handleBack` : appelle `updateContributorStatus(..., "accepted")` avec des toasts « Désinscription... » — incohérence suspecte (copier-coller de handleUnregister ?) à vérifier.
+- `?` `EventsStore.inviteParticipants` : double docstring — un bloc « STUB — sera implémenté à l'étape 1.3 » (obsolète) doublonne au-dessus du vrai commentaire.
+- `?` `EventProductsPage.handleQuickValidation` : erreur utilisateur via `alert()` au lieu de `toastService` — incohérence UX.
+- `doc` `AGENTS.md` racine : « Migrations : pb_migrations (13 collections) » — 14 fichiers de migration présents ; « pb-generated.ts (19 collections) » non vérifié (types générés) — rafraîchir au prochain passage.
+- Rien = dette légère : warnings a11y du check (5, préexistants), warning Svelte `state_referenced_locally` (CreateIngredientModal) — candidats fast-wins pour les implémenteurs des zones voisines.

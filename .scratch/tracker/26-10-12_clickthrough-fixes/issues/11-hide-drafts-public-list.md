@@ -11,6 +11,11 @@ d'un point de vue ux/ui : le site ne doit afficher les brouillons que pour les
 auth, du moins dans la page de liste recipes. Si un user non-auth va directement
 sur l'url, c'est ok.) »
 
+> Arbitration investigation 12-10 (`mesuré`) : le marqueur porteur de la liste est
+> le booléen `draft`, pas `status` (deux marqueurs coexistent ; défaut création
+> constaté : `status: "private"`). Filtre à poser sur `draft` ; listRule recipes
+> publique (`""`) confirmée.
+
 **Blocked by:** None (can start immediately).
 
 **Status:** ready-for-agent

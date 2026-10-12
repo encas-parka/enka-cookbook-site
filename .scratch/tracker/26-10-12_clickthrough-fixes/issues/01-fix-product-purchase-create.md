@@ -8,6 +8,10 @@ n'existe pas encore (création implicite). Plus aucune erreur 400 au POST.
 création produit / création achat (stack traces console : `createProduct`,
 `createPurchase` → 400 Bad Request).
 
+> Arbitration investigation 12-10 (`mesuré`) : aucune création implicite de produit
+> n'existe dans le code actuel — l'AC 2 est une construction, pas une régression à
+> réparer.
+
 **Blocked by:** None (can start immediately).
 
 **Status:** ready-for-agent

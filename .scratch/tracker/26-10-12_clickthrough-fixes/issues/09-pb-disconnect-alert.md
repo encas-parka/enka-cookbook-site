@@ -10,6 +10,13 @@ en cas de coupure internet, s'affiche, avec resync ok ». Le signal de déconnex
 débounce ~3 s existe déjà côté signaux SSE — c'est le raccord au statut visible
 qui manque.
 
+> Arbitration investigation 12-10 (`mesuré`) — l'évidence ci-dessus est inexacte :
+> le raccord existe déjà (StatusBar affiche « Connexion perdue »/« Serveur
+> indisponible » via le chemin resync de `main.ts`). Le gap réel :
+> `initRealtimeSignals` n'est pas appelé au boot avec une session existante
+> (uniquement via le modal de login) — signaux morts sur le chemin dominant. Le fix
+> est un chantier d'init/lifecycle (d'où le blocker 07), pas de câblage.
+
 **Blocked by:** 07 (même zone d'écriture probable — lifecycle/signaux temps réel —
 écrivain unique).
 

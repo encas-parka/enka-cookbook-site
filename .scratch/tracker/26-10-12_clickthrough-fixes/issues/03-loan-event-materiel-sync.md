@@ -12,14 +12,27 @@ en réalité créée ; loan sans event : warn de disponibilité suspect a priori
 
 **Blocked by:** None (can start immediately).
 
-**Status:** ready-for-agent
+**Status:** done
 
-- [ ] Création d'un loan lié à un event : event_materiel créé sans 400, reflété
-      sans refresh manuel.
-- [ ] Modification d'un loan lié à un event : idem.
-- [ ] Loan sans event : plus de warn de disponibilité faux.
-- [ ] Les conflits de disponibilité sont calculés sur des données fraîchement
-      synchronisées.
-- [ ] Un échec reste scopé au modal : aucune pollution des pages `loan/<id>` /
-      `materiel/<id>`, y compris d'une autre team.
-- [ ] Probe HTTP sur PB dev : create event_materiel → 200 ; cause racine documentée.
+- [x] Création d'un loan lié à un event : event_materiel créé sans 400, reflété
+      sans refresh manuel. *(migration `1791800000` — sonde après : create header
+      + allocation 200 ; test store `materiel-store-loan-sync` pin du chemin sans
+      refresh)*
+- [x] Modification d'un loan lié à un event : idem. *(règles update/delete
+      également couvertes par la migration — PATCH 200 / DELETE 204 mesurés ; le
+      piège 404→soft-delete locale est levé)*
+- [x] Loan sans event : plus de warn de disponibilité faux. *(racine : prêts
+      fantômes — créés malgré l'échec affiché — comptés par le calcul de
+      conflits ; createLoan est désormais tout-ou-rien et les prêts marqués
+      `deleted` localement sont exclus du calcul)*
+- [x] Les conflits de disponibilité sont calculés sur des données fraîchement
+      synchronisées. *(delta sync silencieux à l'ouverture du modal, avant tout
+      calcul de conflits — `syncRevalidate`, garde anti-concurrence existante)*
+- [x] Un échec reste scopé au modal : aucune pollution des pages `loan/<id>` /
+      `materiel/<id>`, y compris d'une autre team. *(createLoan/updateLoan
+      n'écrivent plus l'`#error` global — tous leurs appelants catchent et
+      toastent déjà ; échec partiel d'update signalé par erreur typée
+      `EventMaterielSyncError`)*
+- [x] Probe HTTP sur PB dev : create event_materiel → 200 ; cause racine documentée.
+      *(sondes `scripts_dev/probe-t03-loan-eventmateriel.ts` avant/après, logs
+      `/tmp/orchestrate/probe-t03-{before,after}-26-10-12.log`)*

@@ -305,6 +305,62 @@ bun run dev:pb
 bun run scripts_dev/validate-migration.ts
 ```
 
+Ou en une commande : `migrate.ts` (section suivante).
+
+---
+
+## Orchestration — `migrate.ts`
+
+Point d'entrée opérateur : enchaîne tout le pipeline (phases A–D) contre une
+cible PocketBase et écrit un rapport daté. Les scripts individuels restent
+utiles pour le débogage — le chemin canonique d'un run complet, c'est celui-ci.
+
+```bash
+bun run scripts_dev/migrate.ts --help
+
+# Run complet en mode managé (cible spawnée par l'orchestrateur) :
+bun run scripts_dev/migrate.ts \
+  --pb-bin=pocketbase/pocketbase \
+  --pb-dir=/chemin/vers/pb_data_vierge \
+  --content-synced --yes
+```
+
+Enchaînement : preflight (env + superuser + cible adressable) → cleanup
+`--target=all` → transforms (2, 2b, 2c, 2d) → import (3) → **stop cible** →
+`4-fix-timestamps` → **restart cible** → validate → rapport. Fail-fast : toute
+étape en échec stoppe le run, **le rapport est écrit quand même** (état atteint
++ erreur) et l'exit est non-zéro. Verdict global VERT seulement si toutes les
+étapes passent et validate est 100 % vert.
+
+- **Mode managé** (`--pb-bin` + `--pb-dir`, les deux requis) : l'orchestrateur
+  spawn lui-même la cible (`serve`), la stoppe **par PID** autour de
+  `4-fix-timestamps` (le fix sqlite exige la cible arrêtée), la relance pour
+  validate, et ne tue jamais un process qu'il n'a pas spawné. Le `pb_data`
+  doit être pré-provisionné : migrations appliquées
+  (`pocketbase migrate up`), vide (contrat du run = reset complet), avec un
+  superuser correspondant à `.env.local` (`pocketbase superuser upsert`).
+  Lancez l'instance avec `--migrationsDir`/`--hooksDir` pointés **hors du
+  repo** : PB y écrit ses migrations dynamiques.
+- **Mode opérateur** (sans ces flags) : cible déjà démarrée requise ; le run
+  s'arrête à `4-fix-timestamps` si la cible répond (message d'arrêt explicite —
+  c'est à celui qui a démarré l'instance de l'arrêter), puis attend le
+  redémarrage (120 s) avant validate.
+- **Gates humaines** : rappel du pré-requis de sync du contenu Hugo
+  (`content/recipe` vient du repo site — non automatisable ici), ack par
+  prompt interactif ou `--content-synced` ; un run `--yes` ne fabrique jamais
+  cet ack. `cleanup-pb` reçoit toujours `--yes` de l'orchestrateur (le run
+  entier EST la confirmation du reset).
+- **Cible** : `PB_URL_OVERRIDE` > `.env.local` `PB_URL` > 8090 (convention
+  commune) ; port explicite requis en mode managé.
+- **Sortie** : rapport `scripts_dev/runs/<date>.md` — sources (mtimes),
+  étapes (durées, exit, comptes clés), verdicts émis par le pipeline, récap
+  validate, verdict global — plus logs par étape dans
+  `scripts_dev/runs/<date>-logs/`. Gitignored (artefact de run, comme
+  `pb-import/`).
+- **Prérequis Phase B/C** : `appwrite-export/*.json` frais
+  (`1-export-appwrite.ts`), `content/recipe` synchronisé du repo site,
+  `static/data/ingredients.json` + `recipe-info.json` (trackés).
+
 ---
 
 ## Ré-initialisation
@@ -314,8 +370,8 @@ bun run scripts_dev/validate-migration.ts
 Purge les données migrées de PocketBase pour re-tester.
 
 ```bash
-bun run scripts_dev/cleanup-pb.ts                     # supprime les records du migration-map
-bun run scripts_dev/cleanup-pb.ts --target=migrated   # idem (défaut)
+bun run scripts_dev/cleanup-pb.ts [--target=migrated|all] [--yes]
+bun run scripts_dev/cleanup-pb.ts                     # idem --target=migrated
 bun run scripts_dev/cleanup-pb.ts --target=all        # supprime TOUT sauf ingredients + categories
 ```
 
@@ -323,6 +379,9 @@ bun run scripts_dev/cleanup-pb.ts --target=all        # supprime TOUT sauf ingre
 - **Mode `all`** : supprime tous les records des collections dynamiques (users, teams, events, products, purchases, materiel, materiel_loan, event_materiel, teamdocs, event_todos, share_links, locks, recipes)
 - **Collections statiques préservées** : `ingredients`, `categories` (jamais supprimées)
 - **Suppression** : ordre inverse des dépendances (records référençants d'abord)
+- **Confirmation** : demande un « yes » interactif avant toute purge ; `--yes` le
+  court-circuite (requis en non-interactif — l'orchestrateur `migrate.ts` le passe toujours)
+- **Cible** : `PB_URL_OVERRIDE` > `.env.local` `PB_URL` > 8090 (convention commune au pipeline)
 
 ---
 

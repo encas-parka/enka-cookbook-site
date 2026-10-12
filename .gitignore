@@ -42,3 +42,4 @@ pocketbase/pocketbase
 scripts_dev/appwrite-export/
 scripts_dev/pb-import/
 scripts_dev/migration-map*.json
+scripts_dev/runs/

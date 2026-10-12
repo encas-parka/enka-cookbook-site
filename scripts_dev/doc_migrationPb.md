@@ -249,11 +249,17 @@ Vérifie l'intégrité des données importées. Cible retargetable par env
 #### Verdicts attendus (`pb-import/expected-verdicts.json`)
 
 Inventaire machino-lisible des écarts acceptés pour le run courant. Émis par
-les transforms (à venir), effacé par `cleanup-pb` avec le reste de
-`pb-import/*.json`. Schéma et règles de matching documentés en tête de
-`validate-migration.ts` : chaque écart observé doit consommer exactement un
-verdict — un écart sans verdict (compteur « non-verdicté » > 0) ou un verdict
-sans écart (« stale ») fait échouer validate.
+le pipeline, pas écrit à la main : `2-transform-data` (deltas d'orphelins),
+`2b-transform-recipes` (absents + convergence), `2c-transform-ingredients`
+(dédup UUID) et `3-import-pb` (rejets d'import) — writer partagé
+`verdicts-file.ts`, règles d'ownership en tête de fichier : chaque émetteur
+remplace ses propres verdicts et ceux de même clé (type, collection/slug),
+l'output est canoniquement trié (déterministe : 2 runs = bytes identiques).
+Effacé par `cleanup-pb` avec le reste de `pb-import/*.json`. Schéma et règles
+de matching documentés en tête de `validate-migration.ts` : chaque écart
+observé doit consommer exactement un verdict — un écart sans verdict
+(compteur « non-verdicté » > 0) ou un verdict sans écart (« stale ») fait
+échouer validate.
 
 > **Limite texte PocketBase** : un champ texte dont le schéma déclare `max: 0`
 > applique quand même une limite par défaut de **5000 caractères** à la

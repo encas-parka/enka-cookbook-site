@@ -8,6 +8,7 @@
  */
 import { readFileSync, writeFileSync, mkdirSync } from "fs";
 import { join } from "path";
+import { emitVerdicts, VERDICT_CATEGORY } from "./verdicts-file.ts";
 
 const PROJECT_ROOT = join(import.meta.dir, "..");
 const SOURCE_FILE = join(PROJECT_ROOT, "static", "data", "ingredients.json");
@@ -34,7 +35,7 @@ function main(): void {
   });
 
   if (duplicates.length > 0) {
-    console.warn(`⚠️  ${duplicates.length} duplicate UUIDs — keeping first occurrence only`);
+    console.warn(`⚠️  ${duplicates.length} duplicate UUIDs — keeping first occurrence only (category: ingredients.duplicate-uuid)`);
   }
   console.log(`📊 After dedup: ${deduped.length} unique ingredients\n`);
 
@@ -75,6 +76,23 @@ function main(): void {
   const outPath = join(IMPORT_DIR, "ingredients.json");
   writeFileSync(outPath, JSON.stringify(records, null, 2));
   console.log(`\n✅ Written ${records.length} records → ${outPath}`);
+
+  // validate counts ingredients as the RAW catalog length — every dropped
+  // duplicate is a source→PB count gap; emitting [] keeps our scope clean
+  emitVerdicts(
+    "2c-transform-ingredients",
+    duplicates.length > 0
+      ? [
+        {
+          type: "count-delta",
+          collection: "ingredients",
+          delta: -duplicates.length,
+          category: VERDICT_CATEGORY.duplicateIngredientUuid,
+          reason: "duplicate ingredient UUIDs in the Hugo catalog — first occurrence kept",
+        },
+      ]
+      : [],
+  );
 }
 
 if (import.meta.main) {

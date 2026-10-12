@@ -16,6 +16,7 @@
 import { readFileSync, writeFileSync, mkdirSync, existsSync } from "fs";
 import { join } from "path";
 import { randomBytes } from "crypto";
+import { emitVerdicts, VERDICT_CATEGORY } from "./verdicts-file.ts";
 
 // --- Config ---
 const EXPORT_DIR = join(import.meta.dir, "appwrite-export");
@@ -32,6 +33,14 @@ type GenericMap = Record<string, { refId: string;[k: string]: any }>;
 const warnings: string[] = [];
 const errors: string[] = [];
 const orphanTracker = new Map<string, { products: number; purchases: number; event_materiel: number }>();
+// Stable warn categories — every warn belongs to one, counted for the recap
+// table (the categories are report-only: the verdicts/validate side owns the
+// source→PB count gaps).
+const warnCategories = new Map<string, number>();
+
+function categorize(category: string, n = 1): void {
+  warnCategories.set(category, (warnCategories.get(category) ?? 0) + n);
+}
 
 function trackOrphan(eventId: string, collection: "products" | "purchases" | "event_materiel") {
   if (!orphanTracker.has(eventId)) {
@@ -40,8 +49,9 @@ function trackOrphan(eventId: string, collection: "products" | "purchases" | "ev
   orphanTracker.get(eventId)![collection]++;
 }
 
-function warn(msg: string) {
+function warn(msg: string, category?: string) {
   warnings.push(msg);
+  if (category) categorize(category);
   console.log(`   ⚠️  ${msg}`);
 }
 
@@ -118,14 +128,15 @@ function resolveRelation(
   map: Record<string, { refId: string }>,
   fieldName: string,
   required: boolean,
-  context: string
+  context: string,
+  category?: string
 ): string | null {
   if (!appwriteId) return null;
   const mapped = map[appwriteId];
   if (!mapped) {
     const msg = `${context}: ${fieldName}="${appwriteId}" not found in mapping`;
     if (required) error(msg);
-    else warn(msg);
+    else warn(msg, category);
     return null;
   }
   return mapped.refId;
@@ -277,7 +288,7 @@ function main() {
           roles[userMap[m.userId].refId] = "owner";
         }
       } else {
-        warn(`Team "${team.name}": member userId="${m.userId}" not found in user map`);
+        warn(`Team "${team.name}": member userId="${m.userId}" not found in user map`, "teams.memberUnknown");
       }
     }
 
@@ -374,22 +385,22 @@ function main() {
     try {
       const owner = typeof ownerRaw === "string" ? JSON.parse(ownerRaw) : ownerRaw;
       if (owner?.teamId) {
-        teamId = resolveRelation(owner.teamId, teamMap, "teamId", false, `Materiel "${awMat.name}"`);
+        teamId = resolveRelation(owner.teamId, teamMap, "teamId", false, `Materiel "${awMat.name}"`, "materiel.relation.teamId");
       }
       if (owner?.userId) {
-        ownerUser = resolveRelation(owner.userId, userMap, "ownerUser", false, `Materiel "${awMat.name}"`);
+        ownerUser = resolveRelation(owner.userId, userMap, "ownerUser", false, `Materiel "${awMat.name}"`, "materiel.relation.ownerUser");
       }
     } catch {
-      warn(`Materiel "${awMat.name}": owner JSON parse failed`);
+      warn(`Materiel "${awMat.name}": owner JSON parse failed`, "materiel.ownerJsonParse");
     }
 
     // shareableWith → remap team IDs
     const shareableWith = (awMat.shareableWith || [])
-      .map((tid: string) => resolveRelation(tid, teamMap, "shareableWith", false, `Materiel "${awMat.name}"`))
+      .map((tid: string) => resolveRelation(tid, teamMap, "shareableWith", false, `Materiel "${awMat.name}"`, "materiel.relation.shareableWith"))
       .filter(Boolean);
 
     // storeIn → self-ref (remap materiel ID)
-    const storeIn = resolveRelation(awMat.storeIn, migrationMap.materiel, "storeIn", false, `Materiel "${awMat.name}"`);
+    const storeIn = resolveRelation(awMat.storeIn, migrationMap.materiel, "storeIn", false, `Materiel "${awMat.name}"`, "materiel.relation.storeIn");
 
     migrationMap.materiel[appwriteId] = { refId, name: awMat.name };
 
@@ -430,6 +441,7 @@ function main() {
   const guestEmailsLookup = new Map<string, string[]>();
   let orphanLabelCount = 0;
   const orphanLabelEventIds = new Set<string>();
+  let embeddedTodoParseErrors = 0;
   for (const [_awId, userData] of Object.entries(userMap)) {
     for (const eventId of userData.eventLabels) {
       if (!guestEmailsLookup.has(eventId)) guestEmailsLookup.set(eventId, []);
@@ -444,6 +456,7 @@ function main() {
   if (orphanLabelEventIds.size > 0) {
     warn(`Orphan labels: ${orphanLabelCount} user labels reference ${orphanLabelEventIds.size} deleted events: ${[...orphanLabelEventIds].slice(0, 5).join(", ")}${orphanLabelEventIds.size > 5 ? " ..." : ""}`);
     warn(`  These labels will be ignored — guestEmails only populated for existing events`);
+    categorize("events.orphanLabels", orphanLabelCount);
   }
 
   for (const awEvent of eventsExport.rows) {
@@ -458,11 +471,11 @@ function main() {
 
     // teamsId → PB team refIds
     const pbTeamIds = (awEvent.teamsId || [])
-      .map((tid: string) => resolveRelation(tid, teamMap, "teamsId", false, `Event "${awEvent.name}"`))
+      .map((tid: string) => resolveRelation(tid, teamMap, "teamsId", false, `Event "${awEvent.name}"`, "events.relation.teamsId"))
       .filter(Boolean);
 
     // createdBy
-    const createdBy = resolveRelation(awEvent.createdBy, userMap, "createdBy", false, `Event "${awEvent.name}"`);
+    const createdBy = resolveRelation(awEvent.createdBy, userMap, "createdBy", false, `Event "${awEvent.name}"`, "events.relation.createdBy");
 
     // contributors (remap user IDs inside JSON strings)
     const contributors = remapContributors(awEvent.contributors || [], userMap);
@@ -530,9 +543,15 @@ function main() {
           _sourceEvent: awEvent.name,
         });
       } catch {
-        // Skip malformed todo
+        // Malformed todo strings never become records — validate's expected
+        // count uses the same parseable-only definition (countParseableTodos).
+        embeddedTodoParseErrors++;
       }
     }
+  }
+
+  if (embeddedTodoParseErrors > 0) {
+    warn(`${embeddedTodoParseErrors} embedded todos failed to parse — dropped (validate excludes them from the expected count too)`, "events.embeddedTodoParseError");
   }
 
   saveImport("events", pbEvents);
@@ -569,12 +588,12 @@ function main() {
     if (awProd.updatedBy) {
       updatedByTotal++;
       if (updatedBy) updatedByResolved++;
-      else warn(`Product "${awProd.productName}": updatedBy "${awProd.updatedBy}" not found in user map (email or name)`);
+      else warn(`Product "${awProd.productName}": updatedBy "${awProd.updatedBy}" not found in user map (email or name)`, "products.updatedByUnknown");
     }
 
     // mergedInto: product ID → self-ref (will be resolved later)
     // For now, store as null — it's a rare case
-    const mergedInto = resolveRelation(awProd.mergedInto, migrationMap.products, "mergedInto", false, `Product "${awProd.productName}"`);
+    const mergedInto = resolveRelation(awProd.mergedInto, migrationMap.products, "mergedInto", false, `Product "${awProd.productName}"`, "products.relation.mergedInto");
 
     migrationMap.products[appwriteId] = { refId, productName: awProd.productName };
 
@@ -634,12 +653,12 @@ function main() {
     }
     const eventId = eventMap[awPurch.mainId].refId;
 
-    const createdBy = resolveRelation(awPurch.createdBy, userMap, "createdBy", false, `Purchase ${appwriteId}`);
+    const createdBy = resolveRelation(awPurch.createdBy, userMap, "createdBy", false, `Purchase ${appwriteId}`, "purchases.relation.createdBy");
 
     // products: array of Appwrite product $id → refIds
     const products = (awPurch.products || [])
       .map((pid: string) => {
-        const resolved = resolveRelation(pid, productMap, "products", false, `Purchase ${appwriteId}`);
+        const resolved = resolveRelation(pid, productMap, "products", false, `Purchase ${appwriteId}`, "purchases.relation.products");
         return resolved;
       })
       .filter(Boolean);
@@ -686,10 +705,10 @@ function main() {
     const updated = awLoan.$updatedAt || null;
 
     // ownerId = team ID (NOT user ID!)
-    const ownerId = resolveRelation(awLoan.ownerId, teamMap, "ownerId", false, `Loan ${appwriteId}`);
-    const responsibleId = resolveRelation(awLoan.responsibleId, userMap, "responsibleId", false, `Loan ${appwriteId}`);
-    const eventId = resolveRelation(awLoan.eventId, eventMap, "eventId", false, `Loan ${appwriteId}`);
-    const createdBy = resolveRelation(awLoan.createdBy, userMap, "createdBy", false, `Loan ${appwriteId}`);
+    const ownerId = resolveRelation(awLoan.ownerId, teamMap, "ownerId", false, `Loan ${appwriteId}`, "materiel_loan.relation.ownerId");
+    const responsibleId = resolveRelation(awLoan.responsibleId, userMap, "responsibleId", false, `Loan ${appwriteId}`, "materiel_loan.relation.responsibleId");
+    const eventId = resolveRelation(awLoan.eventId, eventMap, "eventId", false, `Loan ${appwriteId}`, "materiel_loan.relation.eventId");
+    const createdBy = resolveRelation(awLoan.createdBy, userMap, "createdBy", false, `Loan ${appwriteId}`, "materiel_loan.relation.createdBy");
 
     // Remap materielIds inside materiels JSON — parse strings → objects
     let materiels = awLoan.materiels || null;
@@ -756,9 +775,9 @@ function main() {
       continue;
     }
     const eventId = eventMap[awEm.eventId].refId;
-    const sourceMaterielId = resolveRelation(awEm.sourceMaterielId, materielMap, "sourceMaterielId", false, `EventMateriel ${appwriteId}`);
-    const createdBy = resolveRelation(awEm.createdBy, userMap, "createdBy", false, `EventMateriel ${appwriteId}`);
-    const loanId = resolveRelation(awEm.loanId, migrationMap.materiel_loan, "loanId", false, `EventMateriel ${appwriteId}`);
+    const sourceMaterielId = resolveRelation(awEm.sourceMaterielId, materielMap, "sourceMaterielId", false, `EventMateriel ${appwriteId}`, "event_materiel.relation.sourceMaterielId");
+    const createdBy = resolveRelation(awEm.createdBy, userMap, "createdBy", false, `EventMateriel ${appwriteId}`, "event_materiel.relation.createdBy");
+    const loanId = resolveRelation(awEm.loanId, migrationMap.materiel_loan, "loanId", false, `EventMateriel ${appwriteId}`, "event_materiel.relation.loanId");
 
     // Map status: needed → to_find
     let status = awEm.status || null;
@@ -796,7 +815,7 @@ function main() {
   let emOrphans = 0;
   for (const alloc of emAllocations) {
     if (!emKnownAppwriteIds.has(alloc.groupId)) {
-      warn(`EventMateriel allocation "${alloc.name}" (${alloc._appwriteId}): groupId="${alloc.groupId}" not found in data → cleared`);
+      warn(`EventMateriel allocation "${alloc.name}" (${alloc._appwriteId}): groupId="${alloc.groupId}" not found in data → cleared`, "event_materiel.groupIdCleared");
       alloc.groupId = null;
       emOrphans++;
     }
@@ -826,8 +845,8 @@ function main() {
     const created = awDoc.$createdAt || null;
     const updated = awDoc.$updatedAt || null;
 
-    const teamId = resolveRelation(awDoc.teamId, teamMap, "teamId", false, `Teamdoc "${awDoc.title}"`);
-    const eventId = resolveRelation(awDoc.eventId, eventMap, "eventId", false, `Teamdoc "${awDoc.title}"`);
+    const teamId = resolveRelation(awDoc.teamId, teamMap, "teamId", false, `Teamdoc "${awDoc.title}"`, "teamdocs.relation.teamId");
+    const eventId = resolveRelation(awDoc.eventId, eventMap, "eventId", false, `Teamdoc "${awDoc.title}"`, "teamdocs.relation.eventId");
 
     migrationMap.teamdocs[appwriteId] = { refId };
 
@@ -862,10 +881,12 @@ function main() {
     const created = todo.$createdAt || null;
     const updated = todo.$updatedAt || null;
 
+    // (no category on the resolveRelation warn — the skip below is the
+    // counted event; a category here would double-count the same orphan)
     const eventId = resolveRelation(todo.eventId, eventMap, "eventId", false, `EventTodo ${appwriteId}`);
     if (!eventId) {
       todosSkipped++;
-      warn(`EventTodo "${todo.taskName}" (${appwriteId}): eventId="${todo.eventId}" orphan → skip`);
+      warn(`EventTodo "${todo.taskName}" (${appwriteId}): eventId="${todo.eventId}" orphan → skip`, "event_todos.orphanEventId");
       continue;
     }
     let assignedTo: string | null = null;
@@ -914,11 +935,11 @@ function main() {
     const updated = awLink.$updatedAt || null;
 
     // target_id: event ID → remap to event refId (stored as text field)
-    const targetId = resolveRelation(awLink.target_id, eventMap, "target_id", false, `ShareLink ${appwriteId}`);
+    const targetId = resolveRelation(awLink.target_id, eventMap, "target_id", false, `ShareLink ${appwriteId}`, "share_links.relation.target_id");
 
     // createdBy: real field on the Appwrite collection — REC-1 list/view rules
     // require it populated, otherwise re-imported links are orphaned for everyone
-    const createdBy = resolveRelation(awLink.createdBy, userMap, "createdBy", false, `ShareLink ${appwriteId}`);
+    const createdBy = resolveRelation(awLink.createdBy, userMap, "createdBy", false, `ShareLink ${appwriteId}`, "share_links.relation.createdBy");
 
     migrationMap.share_links[appwriteId] = { refId };
 
@@ -980,6 +1001,69 @@ function main() {
     const num = String(count).padStart(5);
     const extra = note ? `  (${note})` : "";
     console.log(`   ${label} ${num} records${extra}`);
+  }
+
+  // =========================================================================
+  // Expected verdicts — every source→PB count gap this transform created,
+  // emitted for validate-migration (same contract as expected-verdicts.json)
+  // =========================================================================
+  const verdicts: Parameters<typeof emitVerdicts>[1] = [];
+  if (orphanCount > 0) {
+    verdicts.push({
+      type: "count-delta",
+      collection: "teams",
+      delta: orphanCount,
+      category: VERDICT_CATEGORY.orphanTeamRecreated,
+      reason: "teams referenced by events/teamdocs but absent from the export — recreated as empty-shell teams",
+    });
+  }
+  if (prodSkipped > 0) {
+    verdicts.push({
+      type: "count-delta",
+      collection: "products",
+      delta: -prodSkipped,
+      category: VERDICT_CATEGORY.orphanSourceRecord,
+      reason: "products whose mainId references an event absent from the export — skipped (orphan tracker)",
+    });
+  }
+  if (purchSkipped > 0) {
+    verdicts.push({
+      type: "count-delta",
+      collection: "purchases",
+      delta: -purchSkipped,
+      category: VERDICT_CATEGORY.orphanSourceRecord,
+      reason: "purchases whose mainId references an event absent from the export — skipped (orphan tracker)",
+    });
+  }
+  if (emSkipped > 0) {
+    verdicts.push({
+      type: "count-delta",
+      collection: "event_materiel",
+      delta: -emSkipped,
+      category: VERDICT_CATEGORY.orphanSourceRecord,
+      reason: "event_materiel whose eventId references an event absent from the export — skipped (orphan tracker)",
+    });
+  }
+  if (todosSkipped > 0) {
+    verdicts.push({
+      type: "count-delta",
+      collection: "event_todos",
+      delta: -todosSkipped,
+      category: VERDICT_CATEGORY.orphanSourceRecord,
+      reason: "standalone event_todos whose eventId references an event absent from the export — skipped",
+    });
+  }
+  emitVerdicts("2-transform-data", verdicts);
+
+  // =========================================================================
+  // Warn categories — stable labels + counts for the recap (report-only:
+  // these do not move source→PB counts, unlike the verdicts above)
+  // =========================================================================
+  if (warnCategories.size > 0) {
+    console.log(`\n🏷️  Warn categories:`);
+    for (const [cat, n] of [...warnCategories.entries()].sort((a, b) => (a[0] < b[0] ? -1 : 1))) {
+      console.log(`   ${cat.padEnd(38)} ${n}`);
+    }
   }
 
   if (warnings.length > 0) {

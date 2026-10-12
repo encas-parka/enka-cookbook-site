@@ -11,11 +11,14 @@
 import { readFileSync, readdirSync, writeFileSync, mkdirSync, existsSync } from "fs";
 import { join } from "path";
 import matter from "gray-matter";
+import { diffRecipeConvergence } from "./recipe-convergence.ts";
+import { emitVerdicts, VERDICT_CATEGORY, type ExpectedVerdict } from "./verdicts-file.ts";
 
 const PROJECT_ROOT = join(import.meta.dir, "..");
 const RECIPES_DIR = join(PROJECT_ROOT, "content", "recipe");
 const IMPORT_DIR = join(import.meta.dir, "pb-import");
 const USERS_FILE = join(IMPORT_DIR, "users.json");
+const EXPORT_RECIPES_FILE = join(import.meta.dir, "appwrite-export", "recipes.json");
 
 const DRY_RUN = process.argv.includes("--dry-run");
 
@@ -124,6 +127,86 @@ function buildRecord(dirName: string, fm: Record<string, any>): Record<string, a
   return record;
 }
 
+// --- Verdict emission: Appwrite export vs Hugo content ---
+
+// Recipes are imported from the Hugo content (this transform), so the
+// pb-import records predict PB exactly for the compared fields. A slug in
+// the Appwrite export with no Hugo dir will be ABSENT from PB (inventory
+// verdict); a present one diverging from its Appwrite copy is a convergence
+// verdict — the same diff validate runs against live PB (recipe-convergence.ts).
+// Heuristic: an absent slug whose title/slug matches /test/i is a test
+// artifact; anything else is a renamed/superseded slug (measured 11-10:
+// 3 test + 5 renamed, incl. twin slugs abricots-poches--v2-gh_* split only
+// by the "test" title suffix).
+function categorizeAbsent(slug: string, title: string): { category: string; reason: string } {
+  if (/test/i.test(`${slug} ${title}`)) {
+    return {
+      category: VERDICT_CATEGORY.testRecipe,
+      reason: "draft test artifact — never published to the Hugo content",
+    };
+  }
+  return {
+    category: VERDICT_CATEGORY.renamedSlug,
+    reason: "Appwrite slug absent from the Hugo content (renamed or superseded)",
+  };
+}
+
+function emitRecipeVerdicts(records: Record<string, any>[], parseErrorCount: number): void {
+  if (!existsSync(EXPORT_RECIPES_FILE)) {
+    throw new Error(`Export file not found: ${EXPORT_RECIPES_FILE}. Run 1-export-appwrite.ts first.`);
+  }
+  const exportRows: any[] = JSON.parse(readFileSync(EXPORT_RECIPES_FILE, "utf-8")).rows || [];
+
+  const hugoById = new Map(records.map((r) => [r.id, r]));
+  const verdicts: ExpectedVerdict[] = [];
+  let testCount = 0;
+  let renamedCount = 0;
+  let divergedCount = 0;
+  let dateOnlyDrift = 0;
+
+  if (parseErrorCount > 0) {
+    // validate counts recipes as Hugo dirs — a record dropped by a parse
+    // error is a source→PB count gap and needs its verdict
+    verdicts.push({
+      type: "count-delta",
+      collection: "recipes",
+      delta: -parseErrorCount,
+      category: VERDICT_CATEGORY.recipeParseError,
+      reason: "Hugo recipes dropped by frontmatter parse errors — absent from PB",
+    });
+  }
+
+  for (const aw of exportRows) {
+    const slug = aw["$id"];
+    const hugo = hugoById.get(slug);
+    if (!hugo) {
+      const { category, reason } = categorizeAbsent(slug, aw.title || "");
+      if (category === VERDICT_CATEGORY.testRecipe) testCount++;
+      else renamedCount++;
+      verdicts.push({ type: "absent-recipe", slug, category, reason });
+      continue;
+    }
+
+    const { divergentFields, hasDateDrift } = diffRecipeConvergence(aw, hugo);
+    if (hasDateDrift) dateOnlyDrift++;
+    if (divergentFields.length === 0) continue;
+
+    divergedCount++;
+    verdicts.push({
+      type: "recipe-convergence",
+      slug,
+      fields: divergentFields,
+      category: VERDICT_CATEGORY.contentDriftSinceFreeze,
+      reason: "edited on Appwrite after the Hugo content freeze — Hugo content is the import source",
+    });
+  }
+
+  emitVerdicts("2b-transform-recipes", verdicts);
+  console.log(
+    `📊 Absent inventory: ${testCount} test + ${renamedCount} renamed · convergence: ${divergedCount} diverged, ${dateOnlyDrift} date-only drift (informative)`,
+  );
+}
+
 // --- Main ---
 
 function main(): void {
@@ -154,7 +237,7 @@ function main(): void {
   }
 
   if (parseErrors.length > 0) {
-    console.warn(`⚠️  ${parseErrors.length} parse errors:`);
+    console.warn(`⚠️  ${parseErrors.length} parse errors (category: recipes.parse-error):`);
     parseErrors.slice(0, 10).forEach((e) => console.warn(`   ${e}`));
     if (parseErrors.length > 10) console.warn(`   ... and ${parseErrors.length - 10} more`);
   }
@@ -179,7 +262,7 @@ function main(): void {
   }
 
   if (orphans.length > 0) {
-    console.warn(`⚠️  ${orphans.length} orphan rootRecipeIds (referencing non-existent recipes):`);
+    console.warn(`⚠️  ${orphans.length} orphan rootRecipeIds (referencing non-existent recipes) (category: recipes.rootRecipeId-orphan):`);
     orphans.slice(0, 10).forEach((id) => console.warn(`   ${id} → "${parsed[id].rootRecipeId || "(removed)"}"`));
   }
 
@@ -230,6 +313,8 @@ function main(): void {
   const outPath = join(IMPORT_DIR, "recipes.json");
   writeFileSync(outPath, JSON.stringify(records, null, 2));
   console.log(`✅ Written ${records.length} records → ${outPath}`);
+
+  emitRecipeVerdicts(records, parseErrors.length);
 }
 
 if (import.meta.main) {

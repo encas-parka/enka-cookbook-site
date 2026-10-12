@@ -26,20 +26,24 @@
  *      re-imported, the stale verdict forces the verdict file refresh.
  *
  * Expected verdicts — machine-readable inventory of the deviations accepted
- * for this run, at pb-import/expected-verdicts.json. The transforms are
- * expected to emit it (hand-written is valid); cleanup-pb wipes it with the
- * rest of pb-import/*.json. Schema (version 1):
+ * for this run, at pb-import/expected-verdicts.json. The file is EMITTED by
+ * the pipeline (2-transform-data, 2b-transform-recipes and
+ * 2c-transform-ingredients own the transform-side scopes; 3-import-pb owns
+ * its rejection-side scope — see verdicts-file.ts ownership rules);
+ * hand-written remains valid. Cleanup-pb wipes it with the rest of
+ * pb-import/*.json. Schema (version 1):
  *
  * {
  *   "version": 1,
  *   "verdicts": [
  *     { "type": "count-delta", "collection": "teamdocs", "delta": -1,
- *       "category": "teamdocs-content-over-limit", "reason": "…" },
+ *       "category": "teamdocs-content-over-limit", "reason": "…",
+ *       "emitter": "3-import-pb" },
  *     { "type": "absent-recipe", "slug": "a-test_…", "category": "test-recipe",
- *       "reason": "…" },
+ *       "reason": "…", "emitter": "2b-transform-recipes" },
  *     { "type": "recipe-convergence", "slug": "tarte-tatin",
  *       "fields": ["draft", "sumQty"], "category": "content-drift-since-freeze",
- *       "reason": "…" }
+ *       "reason": "…", "emitter": "2b-transform-recipes" }
  *   ]
  * }
  *
@@ -234,6 +238,7 @@ type ExpectedVerdict = {
   fields?: string[];
   category?: string;
   reason?: string;
+  emitter?: string;
 };
 
 let verdicts: ExpectedVerdict[] = [];
@@ -278,14 +283,15 @@ function formatDelta(delta: number): string {
 // reality (fixed data, re-import, raised limit…) — that must be refreshed.
 function checkStaleVerdicts(): void {
   const stale: string[] = [];
+  const from = (v: ExpectedVerdict) => (v.emitter ? ` [${v.emitter}]` : "");
   verdicts.forEach((v, i) => {
     if (consumedVerdicts.has(i)) return;
     if (v.type === "count-delta") {
-      stale.push(`count-delta ${v.collection} ${formatDelta(v.delta ?? 0)} — no such count deviation observed`);
+      stale.push(`count-delta ${v.collection} ${formatDelta(v.delta ?? 0)}${from(v)} — no such count deviation observed`);
     } else if (v.type === "absent-recipe") {
-      stale.push(`absent-recipe ${v.slug} — recipe is present in PB`);
+      stale.push(`absent-recipe ${v.slug}${from(v)} — recipe is present in PB`);
     } else if (v.type === "recipe-convergence") {
-      stale.push(`recipe-convergence ${v.slug} [${(v.fields || []).join(", ")}] — no such divergence observed`);
+      stale.push(`recipe-convergence ${v.slug} [${(v.fields || []).join(", ")}]${from(v)} — no such divergence observed`);
     } else {
       stale.push(`unknown verdict type "${v.type}"`);
     }

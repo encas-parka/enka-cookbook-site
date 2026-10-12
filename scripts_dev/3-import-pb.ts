@@ -13,7 +13,8 @@
  *   - scripts_dev/migration-map.json
  *   - PocketBase running locally
  *
- * --upsert (dev only): POST each record; on a not_unique rejection, PATCH the
+ * --upsert (dev only): POST each record; on an existence rejection (a unique
+ * field conflict, or the deterministic id already taken), PATCH the
  * existing record by its deterministic id (hash15(refId), or the recipe slug).
  * NO purge of records absent from the sources — this does NOT guarantee
  * PB = sources. The target must have been populated by this pipeline
@@ -565,8 +566,9 @@ Usage:
   bun run scripts_dev/3-import-pb.ts [flags]
 
 Flags:
-  --upsert    Dev-only upsert mode: POST each record; on a not_unique
-              rejection, PATCH the existing record by its deterministic id
+  --upsert    Dev-only upsert mode: POST each record; on an existence
+              rejection (unique field conflict, or deterministic id already
+              taken), PATCH the existing record by its deterministic id
               (hash15(refId), or the recipe slug). NO purge of records absent
               from the sources — does NOT guarantee PB = sources. Requires a
               target populated by this pipeline (deterministic ids), otherwise

@@ -157,9 +157,9 @@ bun run scripts_dev/3-import-pb.ts
 #### Mode dev `--upsert`
 
 Ré-importe les sources sur une cible **déjà peuplée par ce pipeline** : POST
-par record ; en cas de rejet `not_unique` (id déterministe déjà présent, ou
-autre champ unique), PATCH du record existant par son id déterministe
-(`hash15(refId)`, ou le slug pour les recettes).
+par record ; en cas de rejet d'existence (champ unique → `validation_not_unique`,
+id déterministe déjà pris → `validation_pk_invalid`), PATCH du record existant
+par son id déterministe (`hash15(refId)`, ou le slug pour les recettes).
 
 ```bash
 PB_URL_OVERRIDE=http://127.0.0.1:8094 bun run scripts_dev/3-import-pb.ts --upsert

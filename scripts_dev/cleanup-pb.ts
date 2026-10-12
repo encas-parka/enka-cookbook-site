@@ -2,12 +2,18 @@
  * cleanup-pb.ts — Purge migrated data from PocketBase for re-testing
  *
  * Usage:
- *   bun run scripts_dev/cleanup-pb.ts [--target=migrated|all]
+ *   bun run scripts_dev/cleanup-pb.ts [--target=migrated|all] [--yes]
  *
  * Modes:
  *   --target=migrated (default): Delete only records from migration-map.json
  *   --target=all: Delete ALL records from ALL collections
  *                 (including static data: ingredients, categories)
+ *   --yes: skip the interactive confirmation (required for non-interactive
+ *          runs — the orchestrator migrate.ts always passes it)
+ *
+ * Target selection (env, same convention as 3-import-pb.ts):
+ *   PB_URL_OVERRIDE — base URL of the PB instance to purge; falls back to
+ *                     .env.local PB_URL, then http://127.0.0.1:8090
  *
  * Requires:
  *   - scripts_dev/.env.local with PB_URL, PB_ADMIN_EMAIL, PB_ADMIN_PASSWORD
@@ -265,15 +271,18 @@ async function main() {
   const args = process.argv.slice(2);
   const targetArg = args.find((a) => a.startsWith("--target="));
   const target = targetArg ? targetArg.split("=")[1] : "migrated";
+  const assumeYes = args.includes("--yes");
 
   if (target !== "migrated" && target !== "all") {
     console.error(`Invalid --target: ${target}. Use "migrated" or "all".`);
     process.exit(1);
   }
 
-  // Load env
+  // Load env — PB_URL_OVERRIDE retargets the instance to purge (disposable
+  // instance / orchestrator), same convention as 3-import-pb.ts
   const env = loadEnv();
-  pbBaseUrl = env.PB_URL || "http://127.0.0.1:8090";
+  pbBaseUrl = (process.env.PB_URL_OVERRIDE || env.PB_URL || "http://127.0.0.1:8090").replace(/\/+$/, "");
+  console.log(`   🎯 Target: ${pbBaseUrl}`);
   const adminEmail = env.PB_ADMIN_EMAIL;
   const adminPassword = env.PB_ADMIN_PASSWORD;
 
@@ -290,6 +299,30 @@ async function main() {
   } catch (err: any) {
     console.error(`❌ Auth failed: ${err.message}`);
     process.exit(1);
+  }
+
+  // Confirmation — the 08-10 incident (accidental import, ~2477 duplicates)
+  // charges this gate: no purge without an explicit yes, except --yes
+  if (!assumeYes) {
+    const scope =
+      target === "all"
+        ? `ALL records from ${DYNAMIC_COLLECTIONS.length + STATIC_COLLECTIONS.length} collections (including static: ${STATIC_COLLECTIONS.join(", ")})`
+        : `all dynamic data from ${DYNAMIC_COLLECTIONS.length} collections (static preserved: ${STATIC_COLLECTIONS.join(", ")})`;
+    console.log(`\n⚠️  About to purge ${scope}`);
+    console.log(`   on ${pbBaseUrl}, plus pb-import/*.json and migration-map.json.`);
+    if (!process.stdin.isTTY) {
+      console.error(`\n❌ Non-interactive run: pass --yes to skip the confirmation.`);
+      process.exit(1);
+    }
+    const { createInterface } = await import("node:readline/promises");
+    const rl = createInterface({ input: process.stdin, output: process.stdout });
+    const answer = (await rl.question(`   Type "yes" to continue: `)).trim().toLowerCase();
+    rl.close();
+    if (answer !== "yes" && answer !== "y") {
+      console.log(`\n⏭️  Aborted — nothing was deleted.`);
+      process.exit(1);
+    }
+    console.log();
   }
 
   if (target === "all") {

@@ -1364,8 +1364,6 @@ class ProductsStore {
     store?: string;
     stockReel?: string;
   }): Promise<string> {
-    const productId = crypto.randomUUID();
-
     const spec = { pF: productData.pF || false, pS: productData.pS || false };
 
     const newProduct = await this.#productsCollection.create({

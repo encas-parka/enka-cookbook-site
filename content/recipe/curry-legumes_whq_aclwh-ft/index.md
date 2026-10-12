@@ -1,6 +1,6 @@
 ---
 title: Curry légumes
-date: '2026-09-18T15:09:56.260Z'
+date: '2026-10-12T07:12:56.643Z'
 draft: true
 typeR: plat
 categories: []
@@ -10,7 +10,7 @@ regime:
   - sans-lactose
 plate: 100
 quantite_desc: null
-check: false
+check: true
 cuisson: true
 serveHot: true
 description: null
@@ -175,9 +175,9 @@ ingredients:
     type: epices
   - uuid: pdrpau
     name: Cacahuètes grilléées
-    originalQuantity: null
+    originalQuantity: 1000
     originalUnit: gr.
-    normalizedQuantity: 0
+    normalizedQuantity: 1000
     normalizedUnit: gr.
     comment: ''
     allergens:
@@ -269,11 +269,11 @@ astuces: []
 preparation24h: null
 permissionWrite:
   - 6aa8602a1f5aaaaa8040
-auteur: null
+auteur: pone
 createdAt: '2026-09-18T15:09:53.577+00:00'
-updatedAt: '2026-09-18T15:09:53.577+00:00'
+updatedAt: '2026-10-12T07:12:32.405+00:00'
 createdBy: 6aa8602a1f5aaaaa8040
-teams: null
+teams: []
 status: public
 rootRecipeId: null
 versionLabel: null

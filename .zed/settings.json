@@ -10,6 +10,7 @@
     "**/.obsidian",
     "/.obsidian/*",
     "**/static/app/*",
+    ".serena/cache/*"
   ],
   "file_scan_inclusions": [
     "appwrite/*",
@@ -18,12 +19,17 @@
     "content/*",
     "agent/*",
     ".agents/*",
+    ".scratch/*",
     "AGENTS.md",
   ],
   "context_servers": {
     "serena": {
       "command": "serena",
-      "args": ["start-mcp-server", "--context=ide", "--project-from-cwd"],
+      "args": [
+        "start-mcp-server",
+        "--context=ide",
+        "--project-from-cwd"
+      ],
       "env": {},
     },
   },
@@ -33,7 +39,9 @@
         "format_on_save": "on",
         "allowed": true,
         "parser": "go-template",
-        "plugins": ["prettier-plugin-go-template"],
+        "plugins": [
+          "prettier-plugin-go-template"
+        ],
       },
     },
   },

@@ -13,7 +13,11 @@ backups
 .env.local
 
 # Agent
-docs
+docs/audit/
+docs/local/
+.scratch/*
+!.scratch/tracker/
+!.scratch/tracker/**
 .vscode
 *.code-workspace
 svelte-app/.vite

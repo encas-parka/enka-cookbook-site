@@ -1,7 +1,7 @@
 # Backlog — branche `mig/pocketbase`
 
-> Alimenté par le run `26-10-06_audit-fixes` (synthèse : `.agents/plans/26-10-06_audit-fixes_done/run.md` § Constats différés).
-> Alimenté aussi par le run `26-10-08_phase-1-7-pipeline-robuste` (synthèse : `.agents/plans/26-10-08_phase-1-7-pipeline-robuste_done/run.md` § Découvertes différées).
+> Alimenté par le run `26-10-06_audit-fixes` (synthèse : `.agents/plans/archive/26-10-06_audit-fixes_done/run.md` § Constats différés).
+> Alimenté aussi par le run `26-10-08_phase-1-7-pipeline-robuste` (synthèse : `.agents/plans/archive/26-10-08_phase-1-7-pipeline-robuste_done/run.md` § Découvertes différées).
 > Tags : `!` à traiter bientôt · `S2` gating déploiement · `?` conditionnel · (sans tag) dette légère.
 > Règle : une ligne par constat, avec ancre. Le détail vit dans le run report archivé.
 
@@ -36,6 +36,6 @@
 
 - Côté SITE (enka-next) : régression `isDynamic` perdue par revert `88de525a` — à corriger upstream, NE PAS porter ici.
 - Images recettes (20 valeurs `img` frontmatter, og:image Hugo déjà cassées) — décision produit Phase 2 ; noter que le bucket Appwrite `recipe_img` existe (identique dev/prod) mais rien n'est prévu côté PB (stockage ou abandon).
-- Étape 7 du portage (notifications realtime cross-user) et Étape 9 (robustesse SW/PWA) — hors priorité synthèse, plans dans `.agents/plans/26-10-06_audit-fixes_done/` (source : audit port-hardening §4).
+- Étape 7 du portage (notifications realtime cross-user) et Étape 9 (robustesse SW/PWA) — hors priorité synthèse, plans dans `.agents/plans/archive/26-10-06_audit-fixes_done/` (source : audit port-hardening §4).
 - Nettoyage site : recettes `z-test` côté enka-next (2 exclus côté mig).
 - Feature « documents liés par tag » teamdocs : **RESTAURÉE et fonctionnelle** (run 26-10-07, T02 : champ `tags` json + bloc sur 4 pages + mapping pipeline ; les tags prod existants — 10 docs — sont préservés au re-import). Résiduel : `isPublic`/`teamName` restent hors schéma (features distinctes, jamais portées en prod).

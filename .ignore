@@ -1,4 +1,5 @@
 !.agents
+!.scratch/*
 !appwrite
 !docs/*
 !docs

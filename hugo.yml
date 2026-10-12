@@ -58,10 +58,7 @@ outputFormats:
     notAlternative: true
     path: data/
 
-caches:
-  getjson:
-    dir: :cacheDir/:project
-    maxAge: 10s
+
 sitemap:
   changefreq: monthly
   filename: sitemap.xml

@@ -1,6 +1,6 @@
 ---
 title: Crumble aux pêches
-date: '2026-10-06T12:46:23.144Z'
+date: '2026-10-12T08:14:46.984Z'
 draft: true
 typeR: dessert
 categories:
@@ -39,9 +39,9 @@ ingredients:
     type: sec
   - uuid: mxub21
     name: Beurre demi-sel
-    originalQuantity: 750
+    originalQuantity: 900
     originalUnit: gr.
-    normalizedQuantity: 750
+    normalizedQuantity: 900
     normalizedUnit: gr.
     comment: ''
     allergens:
@@ -49,9 +49,9 @@ ingredients:
     type: frais
   - uuid: 2av6w8
     name: Farine de blé
-    originalQuantity: 1
+    originalQuantity: 0.8
     originalUnit: kg
-    normalizedQuantity: 1000
+    normalizedQuantity: 800
     normalizedUnit: gr.
     comment: ''
     allergens:
@@ -82,7 +82,7 @@ permissionWrite:
   - 6931ecdccd2c8d8d15e5
 auteur: Marion
 createdAt: '2026-10-01T09:41:33.544+00:00'
-updatedAt: '2026-10-06T12:45:56.136+00:00'
+updatedAt: '2026-10-12T08:14:46.669+00:00'
 createdBy: 6931ecdccd2c8d8d15e5
 teams: []
 status: public

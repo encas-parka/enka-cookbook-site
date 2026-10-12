@@ -366,7 +366,16 @@ interface PbQueryOptions {
 interface PbSubscribeOptions extends PbQueryOptions {
 	record?: string; // specific record ID, or omit for '*'
 }
+```
 
+> **SSE naming (measured on PB 0.37.5, probe T05)** : the SSE event is named
+> after the SUBSCRIBED pattern (`teamdocs/*` or `teamdocs/<id>`), not the
+> concrete record topic — a hand-rolled client must match on its own
+> subscription string and `record.id` in the payload. Delivery follows the
+> viewRule per record (cross-user delivery probed by
+> `scripts_dev/probe-t05-teamdocs-sse.ts`).
+
+```
 interface PbListOptions extends PbQueryOptions {
 	sort?: string;
 	page?: number;

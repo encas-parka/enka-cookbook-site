@@ -23,6 +23,10 @@
   import { statusBarStore } from "$lib/stores/StatusBarStore.svelte";
   import { online } from "svelte/reactivity/window";
   import { locksService, type Lock } from "$lib/services/pb-locks";
+  import {
+    resolveRemoteDocUpdate,
+    type DocDraftState,
+  } from "$lib/utils/doc-remote-sync";
 
   // ============================================================================
   // ROUTE PARAMETERS
@@ -92,6 +96,36 @@
   const isDirty = $derived.by(() => {
     const currentSnapshot = JSON.stringify({ title, content, tags });
     return currentSnapshot !== initialDocumentSnapshot;
+  });
+
+  // ============================================================================
+  // PROPAGATION REALTIME DU CONTENU (T05)
+  // ============================================================================
+
+  // Les updates distants (saves des autres users) arrivent en Dexie via la
+  // subscription collection-wide déjà en place du store — storeDoc est réactif.
+  // On répercute le contenu sur les inputs locaux tant que l'utilisateur n'a
+  // rien modifié (resolveRemoteDocUpdate : skip si dirty — anti-écrasement
+  // minimal ; le lock reste le garde-fou de l'édition concurrente). Le snapshot
+  // suit la propagation pour que isDirty reste faux après application.
+  $effect(() => {
+    if (isLoading || !storeDoc || !initialDocumentSnapshot) return;
+
+    const incoming: DocDraftState = {
+      title: storeDoc.title || "",
+      content: storeDoc.content || "",
+      tags: storeDoc.tags || [],
+    };
+    const local: DocDraftState = { title, content, tags };
+    const snapshot = JSON.parse(initialDocumentSnapshot) as DocDraftState;
+
+    const decision = resolveRemoteDocUpdate(local, snapshot, incoming);
+    if (decision.action === "apply") {
+      title = decision.draft.title;
+      content = decision.draft.content;
+      tags = [...decision.draft.tags];
+      initialDocumentSnapshot = JSON.stringify(decision.draft);
+    }
   });
 
   // ============================================================================

@@ -14,7 +14,26 @@ création produit / création achat (stack traces console : `createProduct`,
 
 **Blocked by:** None (can start immediately).
 
-**Status:** ready-for-agent
+**Status:** in-progress (tier 1 landed)
+
+## Diagnostique (12-10 — mesuré par sonde HTTP `scripts_dev/probe-t01-products.ts`)
+
+**Cause racine = règle API, pas payload.** Les 5 règles (create/list/view/update/delete) de
+`products` et `purchases` = `@request.auth.id != "" && (eventId.teams.members ~ auth ||
+eventId.guestUsers ~ auth)` — aucune clause créateur. L'organisateur de l'event
+`wqw07qq9ziy9kpw` (celui du click-through) est créateur, sans team, ni guest : chaque POST
+reçoit 400 « Failed to create record. » avec `data` vide = rejet de règle (PB évalue la règle
+avant la validation — l'erreur de relation purchases→products est masquée). La listRule
+filtre au lieu de rejeter : `list products` → 200, 0 items — la page se rend sans erreur
+console avec seulement les produits virtuels (needs).
+
+**Second défaut, masqué par le premier** : la relation `purchases.products` exige des ids
+record `[a-z0-9]{15}` ; la validation rapide référence l'id virtuel sémantique du besoin
+(`slugProduit_eventShort`, ex. `cannelle_qq9ziy9kpw`) qui ne peut pas exister serveur. Une
+fois la règle corrigée, ce défaut devient la cause active du 400 sur validation rapide →
+création implicite du produit côté client (le client seul connaît les données du besoin),
+puis re-key de la ligne needs locale (id sémantique → id serveur) pour que la fusion
+needs↔produits (par égalité d'id, `#buildEnriched`) opère sans doublon d'affichage.
 
 - [ ] Créer un produit via le modal aboutit : record créé, visible dans la liste,
       sans erreur console.

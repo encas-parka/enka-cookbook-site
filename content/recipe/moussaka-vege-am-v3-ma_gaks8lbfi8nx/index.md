@@ -1,6 +1,6 @@
 ---
 title: Moussaka végé améliorée
-date: '2026-10-12T08:13:03.260Z'
+date: '2026-10-12T08:13:24.392Z'
 draft: false
 typeR: plat
 categories:
@@ -54,9 +54,9 @@ ingredients:
     pS: false
   - uuid: 7sk3a5
     name: Aubergine
-    originalQuantity: 1.7
+    originalQuantity: 2
     originalUnit: kg
-    normalizedQuantity: 1700
+    normalizedQuantity: 2000
     normalizedUnit: gr.
     comment: ''
     allergens: []
@@ -173,7 +173,7 @@ permissionWrite:
   - 6931ecdccd2c8d8d15e5
 auteur: Marion
 createdAt: '2026-06-27T07:41:20.161+00:00'
-updatedAt: '2026-10-12T08:13:02.557+00:00'
+updatedAt: '2026-10-12T08:13:24.131+00:00'
 createdBy: 6931ecdccd2c8d8d15e5
 teams: []
 status: public

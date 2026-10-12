@@ -15,6 +15,7 @@
  */
 import { readFileSync, writeFileSync, existsSync } from "fs";
 import { join } from "path";
+import { emitVerdicts, VERDICT_CATEGORY } from "./verdicts-file.ts";
 
 // --- Config ---
 const ENV_FILE = join(import.meta.dir, ".env.local");
@@ -140,7 +141,15 @@ async function pbCreate(collection: string, data: Record<string, any>): Promise<
 
   if (!res.ok) {
     const body = await res.text();
-    throw new Error(`PB create ${collection} failed (${res.status}): ${body.slice(0, 300)}`);
+    const err = new Error(`PB create ${collection} failed (${res.status}): ${body.slice(0, 300)}`);
+    // Structured rejection codes for the verdict emission — every record the
+    // import fails to create is a source→PB count gap that must be verdicted
+    try {
+      (err as any).pbBody = JSON.parse(body);
+    } catch {
+      // non-JSON body — no structured codes, the reason will say so
+    }
+    throw err;
   }
 
   return res.json();
@@ -292,6 +301,50 @@ function processRecord(collection: string, record: any): { data: Record<string, 
   return { data, refId: _refId || "", appwriteId: _appwriteId || "" };
 }
 
+// --- Import rejections → verdicts ---
+// Every record PB refuses is a source→PB count gap; the counts are collected
+// per collection (with the validation codes) and emitted as count-delta
+// verdicts at the end of a successful run — same file as the transforms'
+// emission (verdicts-file.ts ownership rules).
+const rejections: Record<string, { count: number; codes: Map<string, number>; sample: string }> = {};
+
+function recordRejection(collection: string, refId: string, err: any): void {
+  let rej = rejections[collection];
+  if (!rej) {
+    rej = { count: 0, codes: new Map(), sample: refId || "(no refId)" };
+    rejections[collection] = rej;
+  }
+  rej.count++;
+  // PB 0.37.x error body: { code, message, data: { field: { code, ... } } }
+  // (older shapes wrapped the field errors in a `response` object — tolerated)
+  const body = err?.pbBody ?? {};
+  const fieldErrors = body.data ?? body.response?.data;
+  if (fieldErrors && typeof fieldErrors === "object") {
+    for (const code of Object.values<any>(fieldErrors).map((f) => f?.code).filter(Boolean)) {
+      rej.codes.set(code, (rej.codes.get(code) ?? 0) + 1);
+    }
+  } else {
+    rej.codes.set("unknown", (rej.codes.get("unknown") ?? 0) + 1);
+  }
+}
+
+function rejectionVerdicts(): Parameters<typeof emitVerdicts>[1] {
+  const verdicts: Parameters<typeof emitVerdicts>[1] = [];
+  for (const collection of COLLECTION_ORDER) {
+    const rej = rejections[collection];
+    if (!rej) continue;
+    const codes = [...rej.codes.entries()].map(([code, n]) => `${code}×${n}`).join(", ");
+    verdicts.push({
+      type: "count-delta",
+      collection,
+      delta: -rej.count,
+      category: VERDICT_CATEGORY.importRejected,
+      reason: `${rej.count} record(s) rejected by PB validation (${codes}) — e.g. ${rej.sample}`,
+    });
+  }
+  return verdicts;
+}
+
 // --- Import functions ---
 
 async function importCollection(collection: string): Promise<{ created: number; failed: number }> {
@@ -326,6 +379,7 @@ async function importCollection(collection: string): Promise<{ created: number; 
       created++;
     } catch (err: any) {
       failed++;
+      recordRejection(collection, refId, err);
       const errMsg = err.message?.slice(0, 200) || String(err);
       console.log(`   ❌ ${collection} [${refId}]: ${errMsg}`);
     }
@@ -362,6 +416,7 @@ async function importUsers(): Promise<{ created: number; failed: number }> {
       created++;
     } catch (err: any) {
       failed++;
+      recordRejection("users", appwriteId, err);
       const errMsg = err.message?.slice(0, 200) || String(err);
       console.log(`   ❌ user [${appwriteId}]: ${errMsg}`);
     }
@@ -491,6 +546,10 @@ async function main() {
   }
   writeFileSync(idMapPath, JSON.stringify(idMapObj, null, 2) + "\n");
   console.log(`   💾 Saved ID mapping (${refToPb.size} entries) → ${idMapPath}`);
+
+  // Emit the rejection-side verdicts — a rejection is a source→PB count gap
+  // validate will observe, folded into the same file as the transforms' verdicts
+  emitVerdicts("3-import-pb", rejectionVerdicts());
 }
 
 if (import.meta.main) {

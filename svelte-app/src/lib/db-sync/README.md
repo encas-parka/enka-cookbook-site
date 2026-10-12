@@ -374,6 +374,13 @@ interface PbSubscribeOptions extends PbQueryOptions {
 > subscription string and `record.id` in the payload. Delivery follows the
 > viewRule per record (cross-user delivery probed by
 > `scripts_dev/probe-t05-teamdocs-sse.ts`).
+>
+> **Delivery rule timing (measured on PB 0.37.5, probe T06)** : for an
+> `update` action the viewRule is evaluated on the POST-update record state —
+> a write that GRANTS a user visibility (e.g. adding them to `events.guestUsers`)
+> delivers that very update to them in real time. Subscribers therefore see a
+> record appear without any refetch the moment a rule clause starts covering
+> them (probed by `scripts_dev/probe-t06-rsvp-visibility.ts`, `--fixed` mode).
 
 ```
 interface PbListOptions extends PbQueryOptions {

@@ -26,7 +26,12 @@ export {
 } from './aw-db';
 
 // Core sync collection
-export { createSyncCollection, mergeByKey, RecordDeletedError } from './pb-collection';
+export {
+  createSyncCollection,
+  mergeByKey,
+  RecordDeletedError,
+  RecordNotFoundError
+} from './pb-collection';
 
 // Realtime signals (SSE connect/disconnect → StatusBar + resync orchestrateur)
 export {

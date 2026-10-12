@@ -186,6 +186,23 @@ export class RecordDeletedError extends Error {
   }
 }
 
+/**
+ * Thrown by `update` when the record is neither in the local cache nor on the
+ * server (verified live). The caller may upsert — e.g. materialize a virtual
+ * record — or surface the error; an unknown id is still a legitimate failure.
+ */
+export class RecordNotFoundError extends Error {
+  readonly recordId: string;
+  readonly collectionId: string;
+
+  constructor(recordId: string, collectionId: string) {
+    super(`Record "${recordId}" not found on "${collectionId}" (server 404)`);
+    this.name = 'RecordNotFoundError';
+    this.recordId = recordId;
+    this.collectionId = collectionId;
+  }
+}
+
 // =============================================================================
 // BATCH TYPES (module scope — referenced by the public return type)
 // =============================================================================
@@ -496,12 +513,26 @@ export function createSyncCollection<T extends PbDoc>(
     //    optimistic Dexie write (structured clone cannot clone proxies)
     data = toPlain(data);
 
-    // 1. Snapshot current state (for rollback)
-    const current = await table.get(id);
+    // 1. Snapshot current state (for rollback). Offline-first attach: the
+    //    record may exist server-side while still missing from the local
+    //    cache (delta sync behind) — mirror it instead of failing. A server
+    //    404 throws typed: the caller decides whether to upsert (e.g. a
+    //    virtual record) or surface the error.
+    let current = await table.get(id);
     if (!current) {
-      throw new Error(
-        `[pb-sync] Record ${id} not found in Dexie (${collectionName})`
-      );
+      let serverRaw;
+      try {
+        serverRaw = await pb.collection(collectionName).getOne(id, {
+          requestKey: null
+        });
+      } catch (err: any) {
+        if (err?.status === 404) {
+          throw new RecordNotFoundError(id, collectionName);
+        }
+        throw err;
+      }
+      current = serverRaw as unknown as T;
+      await table.put(current);
     }
 
     // 2. Optimistic write to Dexie

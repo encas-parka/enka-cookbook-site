@@ -72,8 +72,8 @@ const REPO_ROOT = join(SCRIPTS_DIR, "..");
 const POCKETBASE_DIR = join(REPO_ROOT, "pocketbase");
 const CONTENT_RECIPE_DIR = join(REPO_ROOT, "content", "recipe");
 const SOURCE_FILES = [
-  join(SCRIPTS_DIR, "static", "data", "ingredients.json"),
-  join(SCRIPTS_DIR, "static", "data", "recipe-info.json"),
+  join(REPO_ROOT, "static", "data", "ingredients.json"),
+  join(REPO_ROOT, "static", "data", "recipe-info.json"),
 ];
 
 // --- Types ---

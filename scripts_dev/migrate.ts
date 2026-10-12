@@ -809,6 +809,20 @@ async function main(): Promise<number> {
       }),
     );
     if (!outcomes[outcomes.length - 1].ok) throw new Error("4-fix-timestamps failed");
+    // Guard — a no-op fix (missing id-map, wrong DB path…) would leave every
+    // timestamp at import-time autodate and still exit 0. The validate
+    // timestamps.sample check catches this too, but here it fails at the
+    // faulty step. Parse miss counts as 0: never a false green.
+    {
+      const fixStep = outcomes[outcomes.length - 1];
+      const updated = Number(fixStep.counts.find(([k]) => k === "updated")?.[1] ?? "0");
+      if (!Number.isFinite(updated) || updated <= 0) {
+        throw new Error(
+          `4-fix-timestamps updated 0 records — timestamps would stay at import-time autodate ` +
+          `(check id-map.json and PB_DB_PATH_OVERRIDE)`,
+        );
+      }
+    }
 
     // 5. Validate — target served again.
     if (managed) {

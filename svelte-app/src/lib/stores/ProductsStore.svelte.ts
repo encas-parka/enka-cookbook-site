@@ -43,6 +43,7 @@ import {
   createSyncCollection,
   db,
   pb,
+  RecordNotFoundError,
   type ProductNeedRow,
 } from "$lib/db-sync/pb-sync";
 
@@ -1245,15 +1246,17 @@ class ProductsStore {
   // ===========================================================================
 
   /**
-   * Retourne l'id serveur du produit à référencer dans un achat.
+   * Retourne l'id serveur d'un produit, créé si nécessaire.
    *
    * Un produit virtuel (besoin calculé, id sémantique `${slug}_${eventShort}`)
    * ne peut pas exister côté PB (ids `[a-z0-9]{15}`) : il est créé ici, marqué
    * isSynced, et sa ligne needs est re-keyée sur l'id serveur pour que la
    * fusion needs↔produits (égalité d'id dans #onDataChange) conserve une
-   * seule entrée. Un id déjà miroité (ou inconnu — peut-être un record pas
-   * encore synchronisé) passe tel quel : dans le pire cas l'achat échouera
-   * avec l'erreur de relation du serveur.
+   * seule entrée. Utilisé par le chemin achat ET le chemin update (contrat
+   * offline-first d'avant migration : attach-or-create, pas un throw). Un id
+   * déjà miroité (ou inconnu — peut-être un record pas encore synchronisé)
+   * passe tel quel : dans le pire cas l'écriture échouera avec l'erreur du
+   * serveur.
    */
   async #ensureSyncedProduct(productId: string): Promise<string> {
     if (await db.products.get(productId)) return productId;
@@ -1311,7 +1314,7 @@ class ProductsStore {
       orderDate?: string | null;
       deliveryDate?: string | null;
     },
-  ): Promise<void> {
+  ): Promise<string> {
     const purchaseStatus = options.status || "delivered";
     let deliveryDate = options.deliveryDate || null;
     if (purchaseStatus === "delivered" && !deliveryDate) {
@@ -1341,6 +1344,8 @@ class ProductsStore {
         invoiceTotal: null,
       } as unknown as Omit<Purchases, "id" | "created" | "updated">);
     }
+
+    return targetProductId;
   }
 
   async updatePurchase(
@@ -1416,19 +1421,61 @@ class ProductsStore {
     } as unknown as Omit<Purchases, "id" | "created" | "updated">);
   }
 
+  /**
+   * Traduit un patch de niveau enrichi en champs schéma PB : `storeInfo`
+   * (objet StoreInfo) part dans le champ json natif `store`. Parité
+   * ère-Appwrite (`upsertProductBatch` stringifiait — PB re-parse en json) ;
+   * `safeJsonParse` du rendu accepte les deux formes.
+   */
+  #toSchemaUpdates(updates: Partial<EnrichedProduct>): Partial<Products> {
+    const { storeInfo, ...schemaUpdates } = updates;
+    const result = { ...schemaUpdates } as Partial<Products>;
+    if (storeInfo !== undefined) {
+      result.store = storeInfo as unknown as Partial<Products>["store"];
+    }
+    return result;
+  }
+
+  /**
+   * Update au contrat offline-first d'avant migration (attach-or-create) :
+   * la sync collection rattache seule un record présent côté serveur mais
+   * absent du cache ; un produit virtuel pur (besoin calculé, jamais poussé
+   * au serveur) est créé avant update via #ensureSyncedProduct, sa ligne
+   * needs re-keyée. Un id inconnu (ni cache, ni serveur, ni besoin) reste
+   * une erreur légitime.
+   *
+   * @returns L'id du record réellement mis à jour (id serveur si re-key).
+   */
+  async #updateWithUpsert(
+    productId: string,
+    updates: Partial<EnrichedProduct>,
+  ): Promise<string> {
+    const schemaUpdates = this.#toSchemaUpdates(updates);
+    try {
+      await this.#productsCollection.update(productId, schemaUpdates);
+      return productId;
+    } catch (err) {
+      if (!(err instanceof RecordNotFoundError)) throw err;
+      const targetId = await this.#ensureSyncedProduct(productId);
+      if (targetId === productId) throw err;
+      await this.#productsCollection.update(targetId, schemaUpdates);
+      return targetId;
+    }
+  }
+
   async updateProduct(
     productId: string,
     updates: Partial<EnrichedProduct>,
-  ): Promise<void> {
-    await this.#productsCollection.update(productId, updates as Partial<Products>);
+  ): Promise<string> {
+    return this.#updateWithUpsert(productId, updates);
   }
 
   async updateProductBatch(
     productId: string,
     updates: Partial<EnrichedProduct>,
     _callback?: (id: string) => EnrichedProduct | undefined,
-  ): Promise<void> {
-    await this.#productsCollection.update(productId, updates as Partial<Products>);
+  ): Promise<string> {
+    return this.#updateWithUpsert(productId, updates);
   }
 
   async batchUpdateProducts(

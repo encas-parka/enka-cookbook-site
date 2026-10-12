@@ -14,7 +14,7 @@ création produit / création achat (stack traces console : `createProduct`,
 
 **Blocked by:** None (can start immediately).
 
-**Status:** in-progress (tier 1 landed)
+**Status:** done (vérifié aux seams HTTP + store ; re-click navigateur = porte T12)
 
 ## Diagnostique (12-10 — mesuré par sonde HTTP `scripts_dev/probe-t01-products.ts`)
 
@@ -35,12 +35,43 @@ création implicite du produit côté client (le client seul connaît les donné
 puis re-key de la ligne needs locale (id sémantique → id serveur) pour que la fusion
 needs↔produits (par égalité d'id, `#buildEnriched`) opère sans doublon d'affichage.
 
-- [ ] Créer un produit via le modal aboutit : record créé, visible dans la liste,
+## Fix livré (12-10)
+
+- **Serveur** : migration `1791700000_products_purchases_creator_rules.js` — clause
+  `eventId.createdBy = @request.auth.id` ajoutée aux 5 règles des 2 collections (down
+  restaure l'original). Prouve par sonde avant/après : create product 400→**200**, purchase
+  sans relation 400→**200**, purchase ref inexistante 400 (règle)→**400 validation
+  `products`** (`validation_missing_rel_records` — le second défaut devient visible),
+  purchase ref réelle →**200**. Logs : `/tmp/orchestrate/probe-t01-after-26-10-12.log`.
+- **Client** (`ProductsStore`) : `createPurchase` crée implicitement le produit virtuel
+  (`#ensureSyncedProduct`) puis achète sur l'id serveur, et re-keye la ligne needs
+  (`#rekeyNeedRow`) ; le recalcul des besoins (`#resolveNeedRows`) clé désormais chaque
+  ligne sur le produit synchronisé correspondant (ingredientRef, sinon productName) — les
+  ids remappés à l'import ne cassent plus la fusion ; `createProduct` pose `isSynced: true`
+  (parité ère-Appwrite). Dead code `crypto.randomUUID()` supprimé.
+- **Tests** : `products-store-create.test.ts` (4) — createProduct, achat direct, création
+  implicite + re-key, recalcul clés sur produits synchronisés. Suite complète 136/136, check
+  0 erreur (canon inchangé côté warnings).
+
+> Re-click navigateur des deux flux (modal + validation rapide) : porte d'intégration T12.
+
+- [x] Créer un produit via le modal aboutit : record créé, visible dans la liste,
       sans erreur console.
-- [ ] Validation rapide d'un achat sur produit inexistant crée le purchase et le
+      *(Vérifié aux seams : sonde HTTP create product → 200 par le créateur ; vitest
+      `createProduct` → record + miroir + modèle enrichi isSynced. L'appel UI du modal
+      est inchangé — le 400 était le seul bloqueur.)*
+- [x] Validation rapide d'un achat sur produit inexistant crée le purchase et le
       product implicite.
-- [ ] Probe HTTP sur PB dev : create product et purchase par un membre de l'event
+      *(Vitest seam store : `createPurchase` sur id virtuel → produit créé côté serveur,
+      achat sur le nouvel id, needs re-keyés, vue fusionnée à une entrée.)*
+- [x] Probe HTTP sur PB dev : create product et purchase par un membre de l'event
       → 200 (règles/hooks vérifiés au seam HTTP).
-- [ ] Cause racine documentée dans le ticket (règle API, hook, ou champ requis
+      *(Sonde avant/après : create product 200, purchase sans relation 200, purchase avec
+      ref réelle 200 — par le créateur ; les membres/guests étaient couverts par les clauses
+      d'origine. Logs `/tmp/orchestrate/probe-t01-after-26-10-12.log`.)*
+- [x] Cause racine documentée dans le ticket (règle API, hook, ou champ requis
       manquant côté payload).
-- [ ] Test vitest au seam store (PB stubbé) sur le chemin de création, vert.
+      *(Section Diagnostique ci-dessus — règle API, mesuré ; second défaut relation
+      documenté.)*
+- [x] Test vitest au seam store (PB stubbé) sur le chemin de création, vert.
+      *(`products-store-create.test.ts`, 4 tests ; suite complète 136/136, 18 fichiers.)*

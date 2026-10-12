@@ -761,6 +761,31 @@ class ProductsStore {
    * Calculate product needs from event.meals and persist to Dexie.
    * The bridge liveQuery will detect the change → $derived merge fires automatically.
    */
+  /**
+   * Clé chaque besoin calculé sur l'id du produit synchronisé du même event
+   * auquel il correspond (ingredientRef, sinon productName) — l'égalité d'id
+   * est le joint de fusion needs↔produits de #onDataChange. Sans
+   * correspondance, l'id sémantique (virtuel) est conservé.
+   */
+  async #resolveNeedRows(
+    freshProducts: EnrichedProduct[],
+    eventId: string,
+  ): Promise<ProductNeedRow[]> {
+    const synced = await db.products.where("eventId").equals(eventId).toArray();
+    const byRef = new Map<string, Products>();
+    const byName = new Map<string, Products>();
+    for (const p of synced) {
+      if (p.ingredientRef) byRef.set(p.ingredientRef, p);
+      byName.set(p.productName ?? "", p);
+    }
+    return freshProducts.map((p) => {
+      const match =
+        (p.ingredientRef ? byRef.get(p.ingredientRef) : undefined) ??
+        byName.get(p.productName);
+      return toNeedRow(match ? { ...p, id: match.id } : p, eventId);
+    });
+  }
+
   async #calculateAndPersistNeeds(event: EnrichedEvent): Promise<void> {
     const getRecipeDetails = async (uuid: string) => {
       return await recipesStore.getRecipeByUuid(uuid);
@@ -773,7 +798,7 @@ class ProductsStore {
     );
 
     // Persist to Dexie as ProductNeedRows
-    const rows = products.map((p) => toNeedRow(p, event.id));
+    const rows = await this.#resolveNeedRows(products, event.id);
     await db.productNeeds.bulkPut(rows);
 
     console.log(
@@ -837,15 +862,16 @@ class ProductsStore {
       event.id,
     );
 
-    // Persist to Dexie as ProductNeedRows
-    const rows = freshProducts.map((p) => toNeedRow(p, event.id));
+    // Persist to Dexie as ProductNeedRows (clées sur les produits synchronisés
+    // correspondants — voir #resolveNeedRows)
+    const rows = await this.#resolveNeedRows(freshProducts, event.id);
     await db.productNeeds.bulkPut(rows);
     console.log(
       `[ProductsStore] ${freshProducts.length} besoins calculés et persistés depuis ${event.meals.length} repas`,
     );
 
     // Delete stale needs from Dexie
-    const freshIds = new Set(freshProducts.map((p) => p.id));
+    const freshIds = new Set(rows.map((r) => r.id));
     const existingNeeds = await db.productNeeds
       .where("mainId")
       .equals(event.id)
@@ -1218,6 +1244,60 @@ class ProductsStore {
   // CRUD API PUBLIQUE
   // ===========================================================================
 
+  /**
+   * Retourne l'id serveur du produit à référencer dans un achat.
+   *
+   * Un produit virtuel (besoin calculé, id sémantique `${slug}_${eventShort}`)
+   * ne peut pas exister côté PB (ids `[a-z0-9]{15}`) : il est créé ici, marqué
+   * isSynced, et sa ligne needs est re-keyée sur l'id serveur pour que la
+   * fusion needs↔produits (égalité d'id dans #onDataChange) conserve une
+   * seule entrée. Un id déjà miroité (ou inconnu — peut-être un record pas
+   * encore synchronisé) passe tel quel : dans le pire cas l'achat échouera
+   * avec l'erreur de relation du serveur.
+   */
+  async #ensureSyncedProduct(productId: string): Promise<string> {
+    if (await db.products.get(productId)) return productId;
+
+    const enriched = this.getEnrichedProductById(productId);
+    if (!enriched) return productId;
+
+    const created = await this.#productsCollection.create({
+      ingredientRef: enriched.ingredientRef || null,
+      productName: enriched.productName,
+      productType: enriched.productType || "Autre",
+      store: null,
+      who: [],
+      eventId: this.#currentEventId!,
+      status: "active",
+      stockReel: null,
+      updatedBy: globalState.userId,
+      isMerged: false,
+      mergedFrom: null,
+      mergeDate: null,
+      mergeReason: null,
+      mergedInto: null,
+      totalNeededOverride: null,
+      isSynced: true,
+      specs: JSON.stringify({
+        pF: enriched.pF || false,
+        pS: enriched.pS || false,
+      }),
+    } as unknown as Omit<Products, "id" | "created" | "updated">);
+
+    await this.#rekeyNeedRow(productId, created.id);
+    return created.id;
+  }
+
+  /** Déplace la ligne needs d'un id sémantique vers l'id serveur du produit créé. */
+  async #rekeyNeedRow(oldId: string, newId: string): Promise<void> {
+    const row = await db.productNeeds.get(oldId);
+    if (!row) return;
+    await db.transaction("rw", db.productNeeds, async () => {
+      await db.productNeeds.delete(oldId);
+      await db.productNeeds.put({ ...row, id: newId });
+    });
+  }
+
   async createPurchase(
     productId: string,
     quantities: Array<{ q: number; u: string }>,
@@ -1238,9 +1318,14 @@ class ProductsStore {
       deliveryDate = new Date().toISOString();
     }
 
+    // La validation rapide peut référencer un produit virtuel (besoin calculé,
+    // jamais poussé au serveur — id sémantique refusé par la relation PB) :
+    // créer le produit d'abord, acheter sur son id serveur.
+    const targetProductId = await this.#ensureSyncedProduct(productId);
+
     for (const qty of quantities) {
       await this.#purchasesCollection.create({
-        products: [productId],
+        products: [targetProductId],
         eventId: this.#currentEventId!,
         quantity: qty.q,
         unit: qty.u,
@@ -1293,6 +1378,7 @@ class ProductsStore {
       status: productData.status || "active",
       stockReel: productData.stockReel || null,
       updatedBy: globalState.userId,
+      isSynced: true,
       isMerged: false,
       mergedFrom: null,
       mergeDate: null,

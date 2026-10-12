@@ -1,0 +1,271 @@
+/**
+ * @vitest-environment jsdom
+ */
+
+/**
+ * ProductsStore — chemins de création produit/achat (write paths).
+ *
+ * Seam : vrai store + vrai pb-sync + transport PB factice (sans réseau),
+ * fake-indexeddb pour le vrai Dexie. Même machinerie que
+ * products-store-reactivity.test.ts.
+ *
+ * Couvre (causes racines mesurées par la sonde HTTP T01) :
+ *  - createProduct : record serveur (id PB généré `[a-z0-9]{15}`), miroir
+ *    Dexie, produit marqué isSynced (parité ère-Appwrite perdue à la migration)
+ *  - createPurchase sur produit synchronisé : achat référençant l'id produit,
+ *    sans création implicite
+ *  - createPurchase sur produit VIRTUEL (ligne needs sans record serveur) :
+ *    création implicite du produit (nouvel id serveur), achat référençant CE
+ *    nouvel id (PB refuse les ids sémantiques hors `[a-z0-9]{15}`), ligne
+ *    needs re-keyée pour que la fusion needs↔produits (égalité d'id dans
+ *    #onDataChange) reste cohérente — une seule entrée, synchronisée, avec
+ *    l'achat attaché
+ *  - recalcul des besoins : chaque ligne est clé sur l'id du produit
+ *    synchronisé correspondant (match par ingredientRef, sinon productName) —
+ *    les ids PB remappés à l'import ne cassent plus la fusion
+ */
+
+// Mocks MUST be declared before importing the store under test
+// (Vitest hoists `vi.mock` calls to the top of the file).
+vi.mock("$lib/stores/EventsStore.svelte", () => ({
+  eventsStore: {
+    getEventById: vi.fn(),
+    initialize: vi.fn(),
+  },
+}));
+
+vi.mock("$lib/stores/RecipesStore.svelte", () => ({
+  recipesStore: {
+    syncReady: Promise.resolve(),
+    // Valeur figée : un timestamp frais par appel ferait basculer le hash
+    // repas entre initialize() et le premier $effect.
+    getRecipeUpdatedAt: vi.fn(),
+    getRecipesByUuidsBulk: vi.fn(async () => new Map()),
+    getRecipeByUuid: vi.fn(async () => null),
+  },
+}));
+
+vi.mock("$lib/stores/GlobalState.svelte", () => ({
+  globalState: {
+    userName: "test-user",
+    userId: "test-user",
+    isAuthenticated: true,
+  },
+}));
+
+vi.mock("pocketbase", async () => {
+  const { FakePocketBase } = await import("./harness/stub-pb");
+  return { default: FakePocketBase };
+});
+
+import { describe, it, expect, beforeEach, vi } from "vitest";
+import { currentFakePb, pbDate } from "./harness/stub-pb";
+import { clearDexie, seedProductNeeds } from "./harness/seed-dexie";
+import { waitForTick } from "./harness/wait-for-tick";
+import {
+  makeEvent,
+  makeNeedRow,
+  makeProductRecord,
+  makePurchaseRecord,
+  TEST_EVENT_ID,
+  TEST_PRODUCT_ID,
+} from "./harness/fixtures";
+import { productsStore } from "$lib/stores/ProductsStore.svelte";
+import { eventsStore } from "$lib/stores/EventsStore.svelte";
+import { recipesStore } from "$lib/stores/RecipesStore.svelte";
+import { db, pb } from "$lib/db-sync/pb-sync";
+import type { RecipeData } from "$lib/types/recipes.types";
+
+/** Produit virtuel echo de l'évidence click-through (`cannelle_qq9ziy9kpw`). */
+const VIRTUAL_ID = "cannelle_qq9ziy9kpw";
+const VIRTUAL_NEED = makeNeedRow({
+  id: VIRTUAL_ID,
+  ingredientRef: "cannelle",
+  productName: "Cannelle",
+  productType: "épices",
+});
+
+describe("ProductsStore — création produit & achat (write paths)", () => {
+  beforeEach(async () => {
+    const fakePb = currentFakePb();
+    fakePb.reset();
+    await productsStore.softReset();
+    await clearDexie();
+
+    vi.mocked(eventsStore.getEventById).mockImplementation(
+      (id: string) => (id === TEST_EVENT_ID ? makeEvent() : null),
+    );
+  });
+
+  it("createProduct → record serveur (id PB généré), miroir Dexie, isSynced", async () => {
+    await productsStore.initialize(TEST_EVENT_ID);
+    await waitForTick(3);
+
+    const id = await productsStore.createProduct({
+      productName: "Huile d'olive",
+      productType: "épicerie",
+    });
+
+    // L'id renvoyé est celui du serveur (format PB), pas un id client
+    expect(id).toMatch(/^[a-z0-9]{15}$/);
+
+    const server = await pb.collection("products").getOne(id);
+    expect(server.productName).toBe("Huile d'olive");
+    expect(server.eventId).toBe(TEST_EVENT_ID);
+    expect(server.isSynced).toBe(true);
+    expect(server.specs).toBe(JSON.stringify({ pF: false, pS: false }));
+
+    const mirrored = await db.products.get(id);
+    expect(mirrored?.productName).toBe("Huile d'olive");
+
+    await waitForTick(5);
+    const model = productsStore.getEnrichedProductById(id);
+    expect(model?.productName).toBe("Huile d'olive");
+    expect(model?.isSynced).toBe(true);
+  });
+
+  it("createPurchase sur produit synchronisé → achat référençant l'id produit, pas de création implicite", async () => {
+    currentFakePb().seed("products", [makeProductRecord()]);
+    currentFakePb().seed("purchases", []);
+    await seedProductNeeds([makeNeedRow()]);
+
+    await productsStore.initialize(TEST_EVENT_ID);
+    await waitForTick(5);
+
+    await productsStore.createPurchase(TEST_PRODUCT_ID, [{ q: 500, u: "gr." }], {
+      store: "Marché",
+      notes: "rapide",
+    });
+    await waitForTick(5);
+
+    const purchases = await pb.collection("purchases").getFullList();
+    expect(purchases).toHaveLength(1);
+    expect(purchases[0].products).toEqual([TEST_PRODUCT_ID]);
+    expect(purchases[0].quantity).toBe(500);
+    expect(purchases[0].eventId).toBe(TEST_EVENT_ID);
+
+    // Le produit existait : aucune création implicite côté serveur
+    const products = await pb.collection("products").getFullList();
+    expect(products).toHaveLength(1);
+  });
+
+  it("createPurchase sur produit virtuel → produit implicite créé, achat sur son id serveur, needs re-keyés", async () => {
+    await seedProductNeeds([VIRTUAL_NEED]);
+
+    await productsStore.initialize(TEST_EVENT_ID);
+    await waitForTick(5);
+
+    // État initial : produit virtuel (besoin calculé, aucun record serveur)
+    const virtualBefore = productsStore.getEnrichedProductById(VIRTUAL_ID);
+    expect(virtualBefore?.isSynced).toBe(false);
+
+    await productsStore.createPurchase(VIRTUAL_ID, [{ q: 100, u: "gr." }], {
+      notes: "",
+      invoiceId: "VALID_1",
+    });
+    await waitForTick(5);
+
+    // Le produit implicite existe côté serveur, marqué synchronisé
+    const products = await pb.collection("products").getFullList();
+    expect(products).toHaveLength(1);
+    const implicit = products[0];
+    expect(implicit.productName).toBe("Cannelle");
+    expect(implicit.eventId).toBe(TEST_EVENT_ID);
+    expect(implicit.isSynced).toBe(true);
+    expect(implicit.ingredientRef).toBe("cannelle");
+
+    // L'achat référence le NOUVEL id serveur (l'id virtuel n'existe pas côté PB)
+    const purchases = await pb.collection("purchases").getFullList();
+    expect(purchases).toHaveLength(1);
+    expect(purchases[0].products).toEqual([implicit.id]);
+
+    // La ligne needs est re-keyée : fusion needs↔produits par égalité d'id
+    expect(await db.productNeeds.get(VIRTUAL_ID)).toBeUndefined();
+    const rekeyed = await db.productNeeds.get(implicit.id as string);
+    expect(rekeyed).toBeDefined();
+    expect(JSON.parse(rekeyed!.totalNeededArray)).toEqual([{ q: 2, u: "l" }]);
+
+    // Vue enrichie : l'entrée virtuelle a disparu, l'entrée fusionnée porte
+    // l'achat et le besoin
+    expect(productsStore.getEnrichedProductById(VIRTUAL_ID)).toBeNull();
+    const merged = productsStore.getEnrichedProductById(implicit.id as string);
+    expect(merged).not.toBeNull();
+    expect(merged!.isSynced).toBe(true);
+    expect(merged!.purchases).toHaveLength(1);
+  });
+
+  it("recalcul des besoins : les lignes sont clées sur le produit synchronisé correspondant (match par nom)", async () => {
+    const recipe = {
+      title: "Punch",
+      plate: 10,
+      astuces: [],
+      ingredients: [
+        {
+          ref: "eau",
+          name: "Eau",
+          originalQuantity: 2,
+          originalUnit: "l",
+          normalizedQuantity: 2,
+          normalizedUnit: "l",
+          comment: "",
+          allergens: [],
+          type: "boissons",
+        },
+        {
+          ref: "cannelle",
+          name: "Cannelle",
+          originalQuantity: 10,
+          originalUnit: "gr",
+          normalizedQuantity: 10,
+          normalizedUnit: "gr",
+          comment: "",
+          allergens: [],
+          type: "épices",
+        },
+      ],
+    } as unknown as RecipeData;
+
+    vi.mocked(recipesStore.getRecipesByUuidsBulk).mockImplementation(
+      async () => new Map([["rec1", recipe]]),
+    );
+
+    const event = makeEvent({
+      meals: [
+        {
+          date: "2026-12-19T12:00:00.000Z",
+          guests: 10,
+          recipes: [{ recipeUuid: "rec1", plates: 10, typeR: "plat" }],
+        },
+      ],
+    });
+    vi.mocked(eventsStore.getEventById).mockImplementation(
+      (id: string) => (id === TEST_EVENT_ID ? event : null),
+    );
+
+    // Produit synchronisé "Eau" (id PB remappé ≠ id sémantique) + son achat.
+    // AUCUN need seedé → initialize déclenche le calcul depuis event.meals.
+    currentFakePb().seed("products", [makeProductRecord()]);
+    currentFakePb().seed("purchases", [makePurchaseRecord()]);
+
+    await productsStore.initialize(TEST_EVENT_ID);
+    await waitForTick(5);
+
+    const rows = await db.productNeeds.toArray();
+    const byName = new Map(rows.map((r) => [r.productName, r]));
+
+    // Le besoin "Eau" est clé sur l'id du produit synchronisé (match par nom)
+    // → la fusion needs↔produits opère malgré le remappage des ids PB
+    expect(byName.get("Eau")?.id).toBe(TEST_PRODUCT_ID);
+
+    // Le besoin sans produit correspondant garde l'id sémantique (virtuel)
+    expect(byName.get("Cannelle")?.id).toBe(
+      `cannelle_${TEST_EVENT_ID.slice(-10)}`,
+    );
+
+    await waitForTick(5);
+    const eau = productsStore.getEnrichedProductById(TEST_PRODUCT_ID);
+    expect(eau?.isSynced).toBe(true);
+    expect(eau?.purchases).toHaveLength(1);
+    expect(eau?.totalNeededArray).toContainEqual({ q: 2, u: "l" });
+  });
+});

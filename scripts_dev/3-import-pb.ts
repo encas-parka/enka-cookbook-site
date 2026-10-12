@@ -192,12 +192,16 @@ async function pbPatch(collection: string, id: string, data: Record<string, any>
   return res.json();
 }
 
-// True when PB refused a create because a unique constraint already exists
-// (the deterministic id, or another unique field like users.email)
+// True when PB refused a create because the record already exists: a unique
+// field conflict (users.email) comes back as validation_not_unique, an
+// existing deterministic id as validation_pk_invalid ("The record primary key
+// is invalid or already exists" — measured on PB 0.37.5)
 function isNotUnique(err: any): boolean {
   const fieldErrors = err?.pbBody?.data ?? err?.pbBody?.response?.data;
   if (!fieldErrors || typeof fieldErrors !== "object") return false;
-  return Object.values<any>(fieldErrors).some((f) => f?.code === "validation_not_unique");
+  return Object.values<any>(fieldErrors).some(
+    (f) => f?.code === "validation_not_unique" || f?.code === "validation_pk_invalid",
+  );
 }
 
 async function pbDelete(collection: string, id: string): Promise<boolean> {

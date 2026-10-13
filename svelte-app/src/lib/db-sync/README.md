@@ -11,7 +11,7 @@ Offline-first synchronization layer bridging **PocketBase** (remote) and **Dexie
 └─────────────┘                                 └────┬─────┘
                                                      │
                                                useLiveQuery()
-                                               liveQuery()
+                                               bridgeToMap()
                                                      │
                                                ┌──────▼──────┐
                                                │  Svelte 5   │
@@ -64,6 +64,36 @@ Why it matters: nothing else protects against duplication on a flaky
 connection — there is no offline replay queue (`create` is server-first:
 throw on failure, nothing persisted) and no SDK retry; only the user's manual
 resubmission after an error toast can duplicate, and this seam closes it.
+
+---
+
+## Upsert primitive
+
+`upsert()` (unit sugar), `bulkUpsert(items)` and `createBatch().upsert(data)`
+expose the **PocketBase native upsert** (`PUT /api/collections/{name}/records`,
+registered through `pb.createBatch()`): the server executes the request as an
+**update when the body carries an id that already exists**, as a **create
+otherwise**. Use it when the caller cannot know whether the record is already
+on the server — the primitive tranches both ways.
+
+- The SDK has **no single-record upsert on `RecordService`** (0.26.x) —
+  everything goes through a batch; the unit sugar is a one-operation batch.
+- A client-provided id is preserved (same `keepId` seam as `create`), so an
+  upsert replayed after an ambiguous failure can never duplicate.
+- `created`/`updated` are stripped from the body (`keepId=true` strip) — the
+  server owns the timestamps on both legs.
+- Local mirror: rows with an id are written optimistically (patch on an
+  existing row, plain put otherwise); the confirmed `bulkPut` after `send()`
+  replaces them with the server state. Id-less upserts mirror only from the
+  confirmation.
+- Rollback on batch failure: snapshots of pre-existing rows are restored, and
+  the rows an optimistic upsert **created** (no pre-batch snapshot) are
+  deleted — a failed batch leaves no orphan line behind.
+- Not a replacement for materializing a **virtual record** (semantic id like
+  `cannelle_xxxxxxxxxxxxxxx`): PB only takes the update leg for an id that
+  *exists* server-side; an unknown/invalid id lands on the create leg, which
+  rejects a malformed id. `ProductsStore.#ensureSyncedProduct` stays the path
+  for those.
 
 ---
 
@@ -139,7 +169,7 @@ sequenceDiagram
 
 Writes are optimistic: Dexie updates immediately, then PocketBase. On failure, Dexie rolls back.
 
-Offline-first contract (T02): when the record is missing from the local cache,
+Offline-first contract: when the record is missing from the local cache,
 `update` first tries to **attach** it — `getOne`, mirror to Dexie — then proceeds
 with the optimistic write. If the server returns 404 too, `update` throws the
 typed `RecordNotFoundError`: the caller decides whether to upsert (e.g.
@@ -205,7 +235,7 @@ sequenceDiagram
 
     UI->>B: createBatch()
     loop chain
-        UI->>B: .create() .update() .delete()
+        UI->>B: .create() .upsert() .update() .delete()
     end
 
     UI->>B: .send()
@@ -218,78 +248,26 @@ sequenceDiagram
         B-->>UI: {records}
     else any fails
         PB-->>B: error
-        B->>DX: rollback all
+        B->>DX: restore snapshots + delete new upsert rows
         B-->>UI: throw error
     end
-```
-
-### 5. Guest vs Auth Activation Flow
-
-Two different paths depending on whether the user is authenticated.
-
-```mermaid
-%%{init: {'theme': 'base', 'themeVariables': {'background':'#f8f9fa','primaryColor':'#e8f0fe','secondaryColor':'#fef3e2','tertiaryColor':'#e8f5e9','lineColor':'#555','fontSize':'13px'}, 'flowchart': {'nodeSpacing':50,'rankSpacing':50,'padding':15}}}%%
-flowchart TD
-    A["setActiveToken()"] --> B{"logged in?"}
-
-    B -->|"Yes"| C["Dexie lookup"]
-    C --> D{"found?"}
-    D -->|"Yes"| E["subscribe Dexie"]
-    E --> F["savePlanning"]
-    F --> G["done"]
-    D -->|"No"| H
-
-    B -->|"No"| H["fetch network"]
-    H --> I{"ok?"}
-    I -->|"error"| J["set error"]
-    I -->|"ok"| K["put Dexie"]
-    K --> L["initialFetch occurrences"]
-    L --> M["subscribe realtime"]
-    M --> N["savePlanning"]
-    N --> O["done"]
-```
-
-### 6. Component Read — Dexie → Reactive UI
-
-Components read from Dexie via `liveQuery` or `useLiveQuery`, never directly from PocketBase.
-
-```mermaid
-%%{init: {'theme': 'base', 'themeVariables': {'background':'#f8f9fa','primaryColor':'#e8f0fe','secondaryColor':'#fef3e2','tertiaryColor':'#e8f5e9','lineColor':'#555','fontSize':'13px'}, 'flowchart': {'nodeSpacing':60,'rankSpacing':60,'padding':20}}}%%
-flowchart LR
-    subgraph Dexie
-        T1[masters]
-        T2[occurrences]
-        T3[commentState]
-    end
-
-    subgraph Store
-        S1[liveQuery]
-        S2[master state]
-        S3[occurrences state]
-    end
-
-    subgraph UI
-        C1[useLiveQuery]
-        C2[store.master]
-        C3[store.occurrences]
-    end
-
-    T1 --> S1 --> S2 --> C2 --> R1[render]
-    T2 --> S1 --> S3 --> C3 --> R1
-    T3 --> C1 --> R2[unread dot]
 ```
 
 ---
 
 ## Modules
 
-| File                       | Purpose                                                     |
-| -------------------------- | ----------------------------------------------------------- |
-| `collection.ts`            | `createSyncCollection()` — main bridge API                  |
-| `types.ts`                 | Shared TypeScript types                                     |
-| `db.ts`                    | Dexie database schema (`appDB`)                             |
-| `batch.ts`                 | Standalone `executeBatch()` for multi-collection operations |
-| `use-live-query.svelte.ts` | Svelte 5 reactive wrapper around Dexie `liveQuery`          |
+| File                       | Purpose                                                                  |
+| -------------------------- | ------------------------------------------------------------------------ |
+| `pb.ts`                    | PocketBase client singleton (`new PocketBase(PB_URL)`)                   |
+| `pb-collection.ts`         | `createSyncCollection()` — main bridge API (CRUD, batch, upsert, delta)  |
+| `pb-types.ts`              | Shared TypeScript types (`PbDoc`, `PbFetchOptions`, `PbSyncOptions`…)    |
+| `pb-sync.ts`               | Barrel export — single entry point for stores                            |
+| `pb-realtime.ts`           | SSE connection signals (`initRealtimeSignals` / `teardownRealtimeSignals`) |
+| `aw-db.ts`                 | Dexie database schema (`EnkaDB`) + `syncMeta` cursor table               |
+| `aw-bridge.ts`             | `bridgeToMap()` / `bridgeToMapFiltered()` — Dexie liveQuery → SvelteMap  |
+| `aw-types.ts`              | `PbDoc` canonical shape + merge strategies                               |
+| `use-live-query.svelte.ts` | Svelte 5 reactive wrapper around Dexie `liveQuery`                       |
 
 ---
 
@@ -301,24 +279,23 @@ Creates a sync collection that binds a PocketBase collection to a Dexie table wi
 
 **Parameters:**
 
-| Param            | Type                       | Description                        |
-| ---------------- | -------------------------- | ---------------------------------- |
-| `pb`             | `PocketBase`               | PocketBase client instance         |
-| `table`          | `Dexie.Table<T>`           | Dexie table to sync with           |
-| `collectionName` | `string`                   | PocketBase collection name         |
-| `options`        | `SyncCollectionOptions<T>` | Optional configuration (see below) |
+| Param            | Type                  | Description                        |
+| ---------------- | --------------------- | ---------------------------------- |
+| `pb`             | `PocketBase`          | PocketBase client instance         |
+| `table`          | `Dexie.Table<T>`      | Dexie table to sync with           |
+| `collectionName` | `PbCollectionName`    | PocketBase collection name         |
+| `options`        | `PbSyncOptions<T>`    | Optional configuration (see below) |
 
 **Options:**
 
 ```ts
-interface SyncCollectionOptions<T> {
+interface PbSyncOptions<T> {
 	mergeStrategies?: {
 		// Per-field merge function: (localValue, remoteValue) => mergedValue
 		[K in keyof T]?: (local: T[K], remote: T[K]) => T[K];
 	};
-	softDelete?: boolean; // default: true — mark deleted instead of removing
-	tombstoneCollection?: string; // PocketBase collection tracking server-side deletions
-	localTrash?: boolean; // keep soft-deleted records locally with {deleted: true}
+	softDelete?: boolean; // default: false — mark deleted instead of removing
+	onSubscriptionChange?: (active: boolean) => void;
 }
 ```
 
@@ -326,44 +303,58 @@ interface SyncCollectionOptions<T> {
 
 #### Lifecycle
 
-| Method           | Signature                                                  | Description                                                                                                                                      |
-| ---------------- | ---------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `initialFetch`   | `(params?: PbQueryOptions) => Promise<void>`               | Incremental sync: fetches records updated since last local `updated` timestamp. Also reconciles server-side deletions via `tombstoneCollection`. |
-| `subscribe`      | `(params?: PbSubscribeOptions) => SubscriptionRef`         | Opens a PocketBase realtime subscription. Events are applied to Dexie. Returns a `SubscriptionRef` for later unsubscription.                     |
-| `unsubscribe`    | `(subRefOrId: SubscriptionRef \| string) => Promise<void>` | Closes a specific realtime subscription.                                                                                                         |
-| `unsubscribeAll` | `() => Promise<void>`                                      | Closes all active realtime subscriptions for this collection.                                                                                    |
+| Method           | Signature                                                          | Description                                                                                                                                  |
+| ---------------- | ------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------- |
+| `initialFetch`   | `(fetchOptions?: PbFetchOptions) => Promise<void>`                 | Incremental sync: fetches records updated since the persisted cursor (scoped by `scopeKey`). Cursor + upserts written in one transaction.     |
+| `subscribe`      | `(subOptions?: PbSubscribeOptions) => PbSubscriptionRef`           | Opens a PocketBase realtime subscription. Events are applied to Dexie. Returns a `PbSubscriptionRef` for later unsubscription.                |
+| `unsubscribe`    | `(subRefOrId: PbSubscriptionRef \| string) => Promise<void>`       | Closes a specific realtime subscription.                                                                                                     |
+| `unsubscribeAll` | `() => Promise<void>`                                              | Closes all active realtime subscriptions for this collection.                                                                                |
 
 #### CRUD
 
-| Method   | Signature                                                                | Description                                                                                                          |
-| -------- | ------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------- |
-| `create` | `(data: Omit<T, 'id' \| 'updated' \| 'created'>, params?) => Promise<T>` | Creates a record on PocketBase, then mirrors to Dexie.                                                               |
-| `update` | `(id: string, data: Partial<T>, params?) => Promise<T>`                  | Optimistic write to Dexie, then PocketBase. On failure, rolls back Dexie. Applies merge strategies for array fields. Missing from cache: attaches the server record first; `RecordNotFoundError` when absent from both (the caller may upsert). |
-| `remove` | `(id: string, params?) => Promise<void>`                                 | Soft-delete or hard-delete (based on `softDelete` option). Rolls back on failure.                                    |
+| Method   | Signature                                                              | Description                                                                                                          |
+| -------- | ---------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| `create` | `(data: Omit<T, 'id' \| 'created' \| 'updated'> & { id?: string }) => Promise<T>` | Creates a record on PocketBase (client id preserved), then mirrors to Dexie.                            |
+| `update` | `(id: string, data: Partial<T>) => Promise<T>`                         | Optimistic write to Dexie, then PocketBase. On failure, rolls back Dexie. Applies merge strategies for array fields. Missing from cache: attaches the server record first; `RecordNotFoundError` when absent from both. |
+| `remove` | `(id: string) => Promise<void>`                                        | Deletes from Dexie and PocketBase — hard by default, marked `{deleted: true}` when the `softDelete` option is set. Rolls back on failure. |
+
+#### Batch & Upsert
+
+| Method        | Signature                                                                                 | Description                                        |
+| ------------- | ----------------------------------------------------------------------------------------- | -------------------------------------------------- |
+| `createBatch` | `() => CollectionBatch<T>`                                                                | Returns a chainable batch builder.                 |
+| `upsert`      | `(data: Omit<T, 'id' \| 'created' \| 'updated'> & { id?: string }) => Promise<T>`         | Sugar: one-operation batch upsert (update if the id exists server-side, create otherwise). |
+| `bulkCreate`  | `(items: Omit<T, 'id' \| 'created' \| 'updated'>[]) => Promise<T[]>`                      | Shorthand: create multiple records.                |
+| `bulkUpdate`  | `(items: { id, data: Partial<T> }[]) => Promise<T[]>`                                     | Shorthand: update multiple records.                |
+| `bulkUpsert`  | `(items: (Omit<T, 'id' \| 'created' \| 'updated'> & { id?: string })[]) => Promise<T[]>`  | Shorthand: upsert multiple records.                |
+| `bulkDelete`  | `(ids: string[]) => Promise<void>`                                                        | Shorthand: delete multiple records.                |
+
+`CollectionBatch<T>` — chainable, terminates with `send(): Promise<{ records: T[] }>`:
+
+```ts
+interface CollectionBatch<T> {
+	create(data: Omit<T, 'id' | 'created' | 'updated'> & { id?: string }): CollectionBatch<T>;
+	upsert(data: Omit<T, 'id' | 'created' | 'updated'> & { id?: string }): CollectionBatch<T>;
+	update(id: string, data: Partial<T>): CollectionBatch<T>;
+	delete(id: string): CollectionBatch<T>;
+	send(): Promise<BatchResult<T>>;
+}
+```
 
 #### Read (direct PocketBase)
 
-| Method | Signature                                               | Description                                     |
-| ------ | ------------------------------------------------------- | ----------------------------------------------- |
+| Method | Signature                                             | Description                                     |
+| ------ | ----------------------------------------------------- | ----------------------------------------------- |
 | `list` | `(params?: PbListOptions) => Promise<PaginatedList<T>>` | Paginated query directly to PocketBase.         |
-| `view` | `(id: string, params?) => Promise<T>`                   | Fetch a single record directly from PocketBase. |
-
-#### Batch
-
-| Method        | Signature                                 | Description                         |
-| ------------- | ----------------------------------------- | ----------------------------------- |
-| `createBatch` | `(params?) => CollectionBatch`            | Returns a chainable batch builder.  |
-| `bulkCreate`  | `(items[], params?) => Promise<T[]>`      | Shorthand: create multiple records. |
-| `bulkUpdate`  | `({id, data}[], params?) => Promise<T[]>` | Shorthand: update multiple records. |
-| `bulkUpsert`  | `(items[], params?) => Promise<T[]>`      | Shorthand: upsert multiple records. |
-| `bulkDelete`  | `(ids[], params?) => Promise<void>`       | Shorthand: delete multiple records. |
+| `view` | `(id: string, params?: PbFetchOptions) => Promise<T>` | Fetch a single record directly from PocketBase. |
 
 #### Utility
 
-| Method           | Signature        | Description                                            |
-| ---------------- | ---------------- | ------------------------------------------------------ |
-| `getTable`       | `() => Table<T>` | Returns the underlying Dexie table for direct queries. |
-| `collectionName` | getter           | Returns the PocketBase collection name.                |
+| Method           | Signature                   | Description                                                                        |
+| ---------------- | --------------------------- | ---------------------------------------------------------------------------------- |
+| `getTable`       | `() => Table<T>`            | Returns the underlying Dexie table for direct queries.                              |
+| `collectionName` | getter                      | Returns the PocketBase collection name.                                             |
+| `clearLocal`     | `() => Promise<void>`       | Clears the Dexie table + this collection's `syncMeta` cursors (logout / identity).  |
 
 ---
 
@@ -372,9 +363,9 @@ interface SyncCollectionOptions<T> {
 Factory that creates a merge strategy for array fields. Merges local and remote arrays by a unique key, preferring local values on conflict.
 
 ```ts
-// Example: merge participants by 'id'
+// Example: merge the materiels lines of a loan by their key
 mergeStrategies: {
-	participants: mergeByKey<Participant>('id');
+	materiels: mergeByKey<MaterielLine>('materielId');
 }
 ```
 
@@ -386,8 +377,8 @@ Svelte 5 reactive wrapper. Must be called from a component `<script>` block (req
 
 ```ts
 const query = useLiveQuery(
-	() => db.masters.get(masterId),
-	() => [masterId] // optional reactive deps
+	() => db.products.get(productId),
+	() => [productId] // optional reactive deps
 );
 
 // query.current  — latest value
@@ -399,18 +390,26 @@ const query = useLiveQuery(
 
 ### Query Options
 
-All operations accept optional `PbQueryOptions`:
+All fetches accept `PbFetchOptions`:
 
 ```ts
-interface PbQueryOptions {
+interface PbFetchOptions {
 	filter?: string | [template: string, vars: Record<string, unknown>];
-	expand?: string; // e.g. 'master,owner'
+	scopeKey?: string; // scopes the syncMeta delta cursor (collection:scope) —
+	// required whenever `filter` scopes the fetch (ex. per-event)
+	expand?: string; // e.g. 'author,team'
 	fields?: string; // e.g. 'id,title,updated'
-	query?: Record<string, string>; // raw query params, e.g. { _token: '...' }
+	query?: Record<string, string>; // raw query params
 }
 
-interface PbSubscribeOptions extends PbQueryOptions {
+interface PbSubscribeOptions extends PbFetchOptions {
 	record?: string; // specific record ID, or omit for '*'
+}
+
+interface PbListOptions extends PbFetchOptions {
+	sort?: string;
+	page?: number;
+	perPage?: number;
 }
 ```
 
@@ -428,145 +427,86 @@ interface PbSubscribeOptions extends PbQueryOptions {
 > record appear without any refetch the moment a rule clause starts covering
 > them (probed by `scripts_dev/probe-t06-rsvp-visibility.ts`, `--fixed` mode).
 
-```
-interface PbListOptions extends PbQueryOptions {
-	sort?: string;
-	page?: number;
-	perPage?: number;
-}
-```
-
----
-
-### `executeBatch(pb, operations)`
-
-Standalone batch executor for operations spanning **multiple collections**. Takes snapshots before applying, rolls back on failure.
-
-```ts
-await executeBatch(pb, [
-  { type: 'create', table: db.masters, collection: 'planning_masters', data: {...} },
-  { type: 'update', table: db.occurrences, collection: 'planning_occurrences', id: '...', data: {...} },
-]);
-```
-
 ---
 
 ## Usage in the Project
 
-### 1. Store Setup (`planningStore.svelte.ts`)
+### 1. Store Setup — the 3-phase pattern
 
-Two sync collections are created with merge strategies for concurrent array field resolution:
-
-```ts
-export const mastersCollection = createSyncCollection<PlanningMaster>(
-	pb,
-	db.masters,
-	'planning_masters',
-	{ mergeStrategies: { participants: mergeByKey('id'), tasks: mergeByKey('id') } }
-);
-
-export const occurrencesCollection = createSyncCollection<PlanningOccurrence>(
-	pb,
-	db.occurrences,
-	'planning_occurrences',
-	{
-		mergeStrategies: {
-			responses: mergeByKey('participantId'),
-			comments: mergeByKey('id'),
-			tasks: mergeByKey('id')
-		}
-	}
-);
-```
-
-### 2. Guest Flow — Full Sync (`#setActiveGuest`)
+Stores own one sync collection each and drive it through three phases:
 
 ```ts
-// 1. Initial fetch (incremental delta)
-await occurrencesCollection.initialFetch({
-	filter: ['master = {:masterId}', { masterId: master.id }],
-	query: { _token: token }
-});
-
-// 2. Subscribe to realtime updates
-mastersCollection.subscribe({ record: master.id, query: { _token: token } });
-occurrencesCollection.subscribe({
-	filter: ['master = {:masterId}', { masterId: master.id }],
-	query: { _token: token }
-});
+await store.loadCache(); // Dexie → SvelteMap via bridgeToMap liveQuery
+await store.syncInitial(); // PocketBase → Dexie via initialFetch()
+await store.setupRealtime(); // SSE → Dexie via subscribe()
 ```
 
-### 3. Auth Flow — Dexie-Only (`#setActiveAuth`)
+Logout delegates to the cache-identity path (`purgeLocal()` / `clearLocal()`) —
+see « Cache identity invariant » above.
 
-Authenticated users skip network fetch — data is already synced by the layout. They subscribe directly to Dexie `liveQuery`:
+### 2. CRUD via the collection
+
+Components never call PocketBase directly. Stores go through the sync collection:
 
 ```ts
-this.#masterSub = liveQuery(() => db.masters.get(masterId)).subscribe({
-	next: (val) => {
-		this.#master = val ?? null;
-	}
-});
+// Create (client id optional — keepId seam)
+const product = await productsCollection.create({ eventId, productName, ... });
+
+// Optimistic update with rollback
+await productsCollection.update(id, { who: [...] });
+
+// Delete
+await productsCollection.remove(id);
 ```
 
-### 4. CRUD via Service Layer (`planningActions.ts`)
-
-Components never call PocketBase directly. All mutations go through the service layer:
+### 3. Batch and upsert
 
 ```ts
-// Create
-const master = await mastersCollection.create({ title, ... });
+// Chain several operations into one atomic request
+const batch = productsCollection.createBatch();
+for (const p of items) batch.update(p.id, { status: 'archived' });
+const { records } = await batch.send();
 
-// Create with batch
-const batch = occurrencesCollection.createBatch();
-for (const date of dates) batch.create({ master: master.id, date, ... });
-await batch.send();
-
-// Update (with merge strategy for array fields)
-await mastersCollection.update(masterId, { participants: [...] }, { query: { _token } });
-
-// Delete (soft-delete by default)
-await mastersCollection.remove(masterId, { query: { _token } });
+// Create-or-update decided server-side (id exists → update, else create)
+const record = await productsCollection.upsert(data);
+const many = await productsCollection.bulkUpsert(items);
 ```
 
-### 5. Component Reactive Reads (`OccurrenceView.svelte`)
+### 4. Component Reactive Reads
 
-Components use `useLiveQuery` for local Dexie tables that aren't covered by the store:
-
-```ts
-const commentStateQuery = useLiveQuery(
-	() => db.commentState.get(occurrence.id),
-	() => [occurrence.id]
-);
-```
-
-### 6. Cleanup
-
-On planning deactivation, all realtime subscriptions are torn down:
-
-```ts
-mastersCollection.unsubscribeAll();
-occurrencesCollection.unsubscribeAll();
-```
+Components read from Dexie — via `bridgeToMap()` (SvelteMap-backed) or
+`useLiveQuery` — never directly from PocketBase.
 
 ---
 
-## Database Schema (`db.ts`)
+## Database Schema (`aw-db.ts`)
+
+`EnkaDB` — one table per synced PocketBase collection (`id` primary key, `updated`
+index for the delta cursor) plus local-only tables:
 
 ```ts
-// Dexie tables (appDB)
-masters: 'id, updated, participantToken, adminToken, deleted';
-occurrences: 'id, updated, master, date, deleted';
-deletions: 'id, collection, deletedAt, recordId';
-localMeta: 'masterId';
-commentState: 'occurrenceId, masterId, isUserInConversation, lastReadAt';
+// Synced collections (pb-sync)
+events, products, purchases, recipes, materiels, materielLoans,
+eventMateriels, teamdocs, locks, eventTodos, shareLinks,
+ingredients, categories
+
+// Local-only
+recipeData, catalog      // Hugo static data
+productNeeds             // calculated needs (event.meals → recipes → ingredients)
+nativeTeams, joinLinks   // caches
+syncMeta                 // delta cursors — key `${collection}:${scopeKey}`
 ```
 
-A `dbcore` middleware strips Svelte 5 `$state` Proxy objects before Dexie writes (IndexedDB `structuredClone` cannot handle Proxies).
+Svelte 5 `$state` proxies are dereferenced at the pb-sync write boundary
+(`toPlain()` in `pb-collection.ts`) — IndexedDB `structuredClone` cannot clone
+proxies.
 
 ---
 
 ## Error Handling
 
 - **CRUD rollback**: `update()` and `remove()` snapshot the local record before sending to PocketBase. On failure, the snapshot is restored.
-- **Batch rollback**: `createBatch().send()` snapshots all affected records. On failure, the transaction is rolled back to the pre-batch state.
-- **Subscription failures**: Non-blocking — logged as warnings, do not prevent planning activation.
+- **Batch rollback**: `createBatch().send()` snapshots all affected records before the optimistic phase. On failure, snapshots are restored and the rows a *new* upsert created locally are deleted — no orphan line survives.
+- **Typed errors**: `RecordDeletedError` (404 on push — hard-deleted server-side) and `RecordNotFoundError` (record absent from cache AND server — the caller may upsert or surface it), both exported from the barrel.
+- **Unsubscription failures**: swallowed in `unsubscribeAll()` (non-blocking) — teardown never prevents identity transitions.
+

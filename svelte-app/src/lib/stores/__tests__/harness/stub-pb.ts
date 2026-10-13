@@ -332,13 +332,28 @@ function sortRecords(records: PbRecord[], sort: string): PbRecord[] {
 // FAKE POCKETBASE CLIENT
 // =============================================================================
 
-interface FakeNotFoundError extends Error {
+interface FakeRequestError extends Error {
   status: number;
+  response?: Record<string, unknown>;
 }
 
-function notFoundError(id: string): FakeNotFoundError {
-  const err = new Error(`The requested resource wasn't found. id=${id}`) as FakeNotFoundError;
+function notFoundError(id: string): FakeRequestError {
+  const err = new Error(`The requested resource wasn't found. id=${id}`) as FakeRequestError;
   err.status = 404;
+  return err;
+}
+
+/** PB wire contract (measured, probe-t10): a create carrying an id that
+ * already exists is rejected with 400 + a field error on `id` — this is what
+ * makes a client-provided id usable as an idempotency key. */
+function duplicateIdError(id: string): FakeRequestError {
+  const err = new Error(`Failed to create record. id=${id}`) as FakeRequestError;
+  err.status = 400;
+  err.response = {
+    code: 400,
+    message: "Failed to create record.",
+    data: { id: { code: "validation_not_unique", message: "Value must be unique." } },
+  };
   return err;
 }
 
@@ -415,13 +430,17 @@ export class FakePocketBase {
 
       async create(data: Record<string, unknown>): Promise<PbRecord> {
         const now = pbDate();
+        const records = store.records(name);
+        if (data.id !== undefined && records.some((r) => r.id === data.id)) {
+          throw duplicateIdError(data.id as string);
+        }
         const record = {
           ...data,
           id: (data.id as string) ?? makeFakeId(),
           created: now,
           updated: now,
         } as PbRecord;
-        store.records(name).push(record);
+        records.push(record);
         return { ...record };
       },
 

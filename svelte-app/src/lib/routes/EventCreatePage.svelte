@@ -12,6 +12,7 @@
   import { flip } from "svelte/animate";
   import { untrack } from "svelte";
   import { navigate, route, searchParams } from "$lib/router";
+  import { newPbId } from "$lib/utils/pb-id";
 
   import { navBarStore } from "../stores/NavBarStore.svelte";
 
@@ -141,6 +142,12 @@
   // SAUVEGARDE
   // ============================================================================
 
+  // Clé d'idempotence de la soumission : générée à la première tentative,
+  // réutilisée tant que le formulaire vit — une re-soumission après un échec
+  // réseau ambigu ne peut pas dupliquer l'event (le serveur rejette l'id déjà
+  // pris et le store réconcilie l'event déjà créé).
+  let submissionKey: string | null = null;
+
   async function saveEventData(): Promise<boolean> {
     const validation = validateEventData();
     if (!validation.isValid) {
@@ -183,9 +190,11 @@
       // Utiliser la nouvelle méthode unifiée qui crée l'événement ET invite les teams
       // (l'envoi d'emails est géré par le système d'invitation PB — le flag
       // sendEmailToExistingMembers de la checkbox est actuellement sans effet)
+      if (submissionKey === null) submissionKey = newPbId();
       const savedEvent = await eventsStore.createEventWithTeams(
         eventData,
         selectedTeams,
+        submissionKey,
       );
 
       navigate(`/event/${savedEvent.id}`);

@@ -549,14 +549,22 @@ export class EventsStore {
    * Crée un nouvel événement avec des teams.
    * Avec PocketBase, la création est directe (pas de CF atomique).
    * Le système d'invitation PB (étape 1.3) gère les emails.
+   *
+   * Idempotence réseau : `submissionKey` (id PB [a-z0-9]{15}) rend la
+   * re-soumission après un échec ambigu (requête partie, réponse perdue)
+   * sans duplication — le serveur rejette un id déjà pris (400
+   * validation_not_unique, mesuré sonde T10) et l'event déjà créé est
+   * réconcilié par relecture sous cette clé. La même clé doit être réutilisée
+   * d'une tentative à l'autre (côté appelant : une par session de formulaire).
    */
   async createEventWithTeams(
     data: CreateEventData,
     teamIds: string[] = [],
+    submissionKey?: string,
   ): Promise<EnrichedEvent> {
     if (!globalState.userId) throw new Error("Utilisateur non connecté");
 
-    const record = await this.#collection.create({
+    const payload = {
       name: data.name,
       description: data.description || "",
       dateStart: data.dateStart,
@@ -568,13 +576,46 @@ export class EventsStore {
       contributors: data.contributors ?? [],
       todos: data.todos ?? [],
       status: data.status || "proposition",
-    } as unknown as Omit<Main, 'id' | 'created' | 'updated'>);
+    } as unknown as Omit<Main, 'id' | 'created' | 'updated'>;
 
-    console.log(
-      `[EventsStore] Événement créé avec ${teamIds.length} team(s): ${record.id}`,
+    try {
+      const record = await this.#collection.create(
+        submissionKey ? { ...payload, id: submissionKey } : payload,
+      );
+
+      console.log(
+        `[EventsStore] Événement créé avec ${teamIds.length} team(s): ${record.id}`,
+      );
+
+      return this.#enrichEvent(record);
+    } catch (err) {
+      // Rejet d'un id déjà pris ou réponse à nouveau perdue : la première
+      // tentative a pu aboutir côté serveur — relire sous la clé avant de
+      // laisser l'appelant re-créer. Clé absente ou inconnue serveur →
+      // l'erreur d'origine est la vraie.
+      if (!submissionKey) throw err;
+      const reconciled = await this.#reconcileCreatedEvent(submissionKey).catch(
+        () => null,
+      );
+      if (reconciled) return this.#enrichEvent(reconciled);
+      throw err;
+    }
+  }
+
+  /**
+   * Relit un event créé côté serveur mais dont la réponse a été perdue.
+   * Retourne null si rien n'existe sous cette clé (l'échec de create était
+   * réel). Le record réconcilié est remiroité en Dexie : le SSE a pu manquer
+   * pendant la panne réseau.
+   */
+  async #reconcileCreatedEvent(submissionKey: string): Promise<Main | null> {
+    const record = await this.#collection.view(submissionKey);
+    if (record.createdBy !== globalState.userId) return null;
+    await this.#collection.getTable().put(record);
+    console.warn(
+      `[EventsStore] Création réconciliée après échec ambigu: ${record.id}`,
     );
-
-    return this.#enrichEvent(record);
+    return record;
   }
 
   /**

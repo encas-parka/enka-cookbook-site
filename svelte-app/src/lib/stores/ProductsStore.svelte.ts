@@ -834,16 +834,22 @@ class ProductsStore {
         .where("mainId")
         .equals(this.#currentMainId!)
         .count();
+      // syncReady attendu AVANT le calcul du hash : les timestamps de recettes
+      // doivent être les vrais, sinon le premier run de l'effect verrait un
+      // hash différent et déclencherait un recalcul parasite.
+      await recipesStore.syncReady;
       if (existingNeedsCount === 0) {
         console.log(
           "[ProductsStore] Aucun besoin calculé en cache, calcul depuis event.meals...",
         );
-        await recipesStore.syncReady;
         await this.#calculateAndPersistNeeds(event);
       }
 
-      // Record meals hash to prevent redundant recalculation from meals sync effect
-      this.#lastMealsHash = JSON.stringify(event.meals);
+      // Record meals+recipes hash to prevent redundant recalculation from
+      // meals sync effect (même formule que #buildMealsHash)
+      const recipeTimestamps = this.#collectRecipeTimestamps(event);
+      this.#lastMealsHash =
+        JSON.stringify(event.meals) + "|" + recipeTimestamps.join("|");
 
       // 3. Lancer le liveQuery unique (observe 3 tables → reconciler)
       this.#startDataSubscription(this.#currentEventId!);
@@ -958,20 +964,42 @@ class ProductsStore {
       $effect(() => {
         const reactiveEvent = eventsStore.getEventById(eventId);
         if (reactiveEvent) {
-          this.#syncWithEventMeals(reactiveEvent);
+          // getRecipeUpdatedAt lit l'index réactif de RecipesStore : la
+          // modification d'un ingrédient d'une recette liée à l'event fait
+          // bouger le hash → recalcule les besoins (pas seulement meals).
+          const recipeTimestamps = this.#collectRecipeTimestamps(reactiveEvent);
+          this.#syncWithEventMeals(reactiveEvent, recipeTimestamps);
         }
       });
     });
   }
 
-  async #syncWithEventMeals(event: EnrichedEvent) {
+  /**
+   * Timestamps des recettes liées à l'event, sous forme "uuid:updated" —
+   * composant réactif du guard de recalcul. Lecture de l'index SvelteMap :
+   * à appeler depuis un contexte de tracking (effect ou initialize).
+   */
+  #collectRecipeTimestamps(event: EnrichedEvent): string[] {
+    return event.meals
+      .flatMap((m) => m.recipes)
+      .map(
+        (r) =>
+          `${r.recipeUuid}:${recipesStore.getRecipeUpdatedAt(r.recipeUuid) ?? ""}`,
+      );
+  }
+
+  async #syncWithEventMeals(
+    event: EnrichedEvent,
+    recipeTimestamps: string[],
+  ) {
     if (!this.#isInitialized) return;
 
-    const mealsHash = JSON.stringify(event.meals);
+    const mealsHash =
+      JSON.stringify(event.meals) + "|" + recipeTimestamps.join("|");
     if (this.#lastMealsHash === mealsHash) return;
 
     console.log(
-      `[ProductsStore] Changement repas detecte pour ${event.id}, recalcul...`,
+      `[ProductsStore] Changement repas ou recettes detecte pour ${event.id}, recalcul...`,
     );
     this.#lastMealsHash = mealsHash;
 

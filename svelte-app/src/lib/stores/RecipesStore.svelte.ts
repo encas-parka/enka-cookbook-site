@@ -402,6 +402,16 @@ class RecipesStore {
 		return entry?.lockedBy || null;
 	}
 
+	/**
+	 * Timestamp de dernière mise à jour d'une recette (lecture réactive de
+	 * l'index SvelteMap). Lu depuis un $effect consommateur (ex. ProductsStore
+	 * recalcule ses besoins quand une recette liée à l'event change), la
+	 * modification d'un ingrédient fait bouger le `updated` → dérive le guard.
+	 */
+	getRecipeUpdatedAt(uuid: string): string | undefined {
+		return this.#recipesIndex.get(uuid)?.updated;
+	}
+
 	// =============================================================================
 	// PUBLIC API - LOCKING
 	// =============================================================================

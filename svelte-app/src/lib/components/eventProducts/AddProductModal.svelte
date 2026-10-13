@@ -7,6 +7,7 @@
     Thermometer,
     Snowflake,
     History,
+    Info,
   } from "@lucide/svelte";
   import { productsStore } from "$lib/stores/ProductsStore.svelte";
   import { toastService } from "$lib/services/toast.service.svelte";
@@ -117,19 +118,10 @@
         who: formData.who.trim() ? [formData.who.trim()] : undefined,
         pF: formData.pF,
         pS: formData.pS,
+        // Besoin déclaré (hors recettes) : normalisé et stocké en specs par le store
+        quantity: formData.quantity ?? undefined,
+        unit: formData.unit,
       });
-
-      // Si une quantité initiale est fournie, créer un achat associé
-      if (formData.quantity && formData.quantity > 0) {
-        await productsStore.createPurchase(
-          productId,
-          [{ q: formData.quantity, u: formData.unit.trim() || "pièces" }],
-          {
-            store: formData.store.trim(),
-            who: formData.who.trim(),
-          },
-        );
-      }
 
       success = true;
       toastService.success(`Produit "${productName}" ajouté`);
@@ -224,6 +216,14 @@
           <span class="opacity-75">Événement terminé</span>
         </div>
       {/if}
+
+      <div class="alert alert-info px-4 py-2 text-xs">
+        <Info class="h-4 w-4 shrink-0" />
+        <span>
+          Produit <strong>hors recettes</strong>&nbsp;: déclarez votre besoin
+          (quantité), le magasin et la personne qui s'en charge.
+        </span>
+      </div>
 
       <fieldset disabled={loading} class="space-y-4">
         <div class="flex flex-wrap gap-4">

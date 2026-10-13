@@ -1,7 +1,12 @@
 import { MediaQuery } from "svelte/reactivity";
 
 import { toastService } from "../services/toast.service.svelte";
-import { getCurrentUser, logout as pbLogout, type PBAuthUser } from "../services/pb-auth";
+import {
+  getCurrentUser,
+  logout as pbLogout,
+  onAuthChange,
+  type PBAuthUser,
+} from "../services/pb-auth";
 import { nativeTeamsStore } from "./NativeTeamsStore.svelte";
 import { eventsStore } from "./EventsStore.svelte";
 import { materielStore } from "./MaterielStore.svelte";
@@ -11,6 +16,15 @@ import { eventMaterielStore } from "./EventMaterielStore.svelte";
 import { recipesStore } from "./RecipesStore.svelte";
 import { db, pb, initRealtimeSignals, teardownRealtimeSignals } from "$lib/db-sync/pb-sync";
 import { route } from "$lib/router";
+
+/**
+ * Marqueur localStorage de l'identité qui a produit le cache Dexie courant.
+ * Sans lui, un résidu de session précédente (onglet fermé sans logout, token
+ * expiré) survit aux transitions : le curseur syncMeta de l'ancienne identité
+ * rend la delta sync muette au login et le fallback full-fetch est bloqué par
+ * les lignes résiduelles (localCount > 0).
+ */
+const CACHE_OWNER_KEY = "enka-cache-owner";
 
 class GlobalState {
   private isMobileQuery = new MediaQuery("max-width: 768px");
@@ -26,6 +40,18 @@ class GlobalState {
   #authError = $state<string | null>(null);
   #authInitialized = $state(false);
   #userRealtimeUnsub: (() => void) | null = null;
+  // Purge d'identité en vol — sérialise le watcher onAuthChange et les
+  // appels explicites (boot, login) vers une seule purge.
+  #identityPurge: Promise<void> | null = null;
+
+  constructor() {
+    // Consomme onAuthChange : toute transition d'identité (login modal,
+    // inscription, magic link) re-scope le cache local. Idempotent — un
+    // refresh de token (même identité) ne purge pas.
+    onAuthChange((user) => {
+      void this.#ensureCacheForIdentity(user?.id ?? null);
+    });
+  }
 
   get user() {
     return this.#user;
@@ -94,6 +120,12 @@ class GlobalState {
     } finally {
       this.#authLoading = false;
       this.#authInitialized = true;
+      // Boot : purge des résidus d'une session précédente (visiteur ou autre
+      // identité) — sans elle, le curseur d'un tiers rend la delta sync muette
+      // au prochain login. Ne bloque pas le boot en cas d'échec IDB.
+      await this.#ensureCacheForIdentity(this.#user?.id ?? null).catch((err) =>
+        console.error("[GlobalState] Purge du cache au boot échouée:", err),
+      );
     }
   }
 
@@ -115,6 +147,13 @@ class GlobalState {
       localStorage.setItem("enka-user-name", user.name);
       localStorage.setItem("enka-user-email", user.email);
       localStorage.setItem("enka-user-id", user.id);
+
+      // Ferme la course auth/stores : si le cache porte encore l'identité
+      // précédente (résidu de session crashée), la purge AVANT les 3 phases
+      // évite une delta sync muette (curseur étranger + fallback bloqué).
+      await this.#ensureCacheForIdentity(user.id).catch((err) =>
+        console.error("[GlobalState] Purge du cache au login échouée:", err),
+      );
 
       // Signaux SSE (StatusBar + resync orchestrateur). Branchés AVANT la
       // souscription des stores : la première connexion SSE est consommée
@@ -203,6 +242,60 @@ class GlobalState {
     }
   }
 
+  // =============================================================================
+  // CACHE IDENTITY — re-scope du cache local aux transitions d'identité
+  // =============================================================================
+
+  #cacheOwner(): string | null {
+    return localStorage.getItem(CACHE_OWNER_KEY);
+  }
+
+  /**
+   * Re-scope le cache local (tables privées + curseurs delta) à l'identité
+   * donnée ; no-op si le cache lui appartient déjà. Sérialisé : le watcher
+   * onAuthChange et les appels explicites (boot, login, logout) convergent
+   * vers une seule purge.
+   */
+  async #ensureCacheForIdentity(identity: string | null): Promise<void> {
+    if (this.#cacheOwner() === identity) return;
+    while (this.#identityPurge) {
+      await this.#identityPurge;
+      if (this.#cacheOwner() === identity) return;
+    }
+    const purge = this.#purgePrivateCaches(identity);
+    this.#identityPurge = purge;
+    try {
+      await purge;
+    } finally {
+      if (this.#identityPurge === purge) this.#identityPurge = null;
+    }
+  }
+
+  /**
+   * Purge unique des caches liés à l'identité — logout délègue ici aussi
+   * (exemplaire unique du destroy list). recipesStore est préservé : données
+   * publiques, non scopées par identité. Le marqueur n'est écrit qu'après
+   * succès : un échec IDB laisse le cache « sans propriétaire », la transition
+   * suivante re-purge.
+   */
+  async #purgePrivateCaches(identity: string | null): Promise<void> {
+    await nativeTeamsStore.destroy();
+    await eventsStore.purgeLocal();
+    await materielStore.purgeLocal();
+    await eventMaterielStore.purgeLocal();
+    await teamdocsStore.purgeLocal();
+    await productsStore.softReset();
+    await db.joinLinks.clear();
+    if (identity === null) {
+      localStorage.removeItem(CACHE_OWNER_KEY);
+    } else {
+      localStorage.setItem(CACHE_OWNER_KEY, identity);
+    }
+    console.log(
+      `[GlobalState] Cache local re-scopé : ${identity ?? "visiteur"}`,
+    );
+  }
+
   /**
    * Déconnexion : cleanup PB + stores privés
    * PocketBase : pas de cache Appwrite ni de realtime centralisé à détruire
@@ -227,17 +320,10 @@ class GlobalState {
       localStorage.removeItem("enka-user-email");
       localStorage.removeItem("enka-user-id");
 
-      // Cleanup des stores privés (recipesStore préservé pour les visiteurs)
-      // Les destroy() sont async car ils nettoient IndexedDB (sécurité multi-user)
-      await nativeTeamsStore.destroy();
-      await eventsStore.destroy();
-      await materielStore.destroy();
-      await eventMaterielStore.destroy();
-      await teamdocsStore.destroy();
-      await productsStore.destroy();
-
-      // Nettoyer le cache des liens d'invitation
-      await db.joinLinks.clear();
+      // Même chemin que les autres transitions : purge des caches privés +
+      // reset du marqueur d'identité (recipesStore préservé pour les
+      // visiteurs — données publiques).
+      await this.#ensureCacheForIdentity(null);
 
       this.#user = null;
       this.#authInitialized = false;

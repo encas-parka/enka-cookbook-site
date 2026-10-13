@@ -970,6 +970,18 @@ export class EventMaterielStore {
     this.#error = null;
     console.log("[EventMaterielStore] Store détruit");
   }
+
+  /**
+   * Purge du cache local (table + curseurs scopés) sans toucher aux
+   * abonnements — le store reste utilisable dans la session (re-scope
+   * d'identité) : le prochain initializeForEvent recrée le bridge.
+   */
+  async purgeLocal(): Promise<void> {
+    await this.#collection.clearLocal();
+    this.#items = new Map();
+    this.#currentEventId = null;
+    this.#isInitialized = false;
+  }
 }
 
 // Singleton

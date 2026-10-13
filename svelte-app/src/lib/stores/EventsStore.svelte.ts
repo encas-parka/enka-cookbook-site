@@ -1332,6 +1332,18 @@ export class EventsStore {
     this.#realtimeInitialized = false;
     console.log("[EventsStore] Ressources nettoyées");
   }
+
+  /**
+   * Purge du cache local (table + curseurs delta) sans toucher aux
+   * abonnements : contrairement à destroy(), le bridge liveQuery reste vivant
+   * et la map se réconcilie seule au prochain changement de table — le store
+   * reste utilisable dans la session (re-scope d'identité).
+   */
+  async purgeLocal(): Promise<void> {
+    await this.#collection.clearLocal();
+    this.#rawEvents.clear();
+    this.#isInitialized = false;
+  }
 }
 
 // =============================================================================

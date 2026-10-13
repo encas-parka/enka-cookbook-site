@@ -807,6 +807,20 @@ export class MaterielStore {
     this.#error = null;
     console.log("[MaterielStore] Store détruit");
   }
+
+  /**
+   * Purge du cache local (tables + curseurs delta) sans toucher aux
+   * abonnements : la liveQuery reste vivante et #raw se réconcilie seul —
+   * le store reste utilisable dans la session (re-scope d'identité).
+   */
+  async purgeLocal(): Promise<void> {
+    await Promise.all([
+      this.#materielCollection.clearLocal(),
+      this.#loanCollection.clearLocal(),
+    ]);
+    this.#raw = { materiels: [], loans: [] };
+    this.#isInitialized = false;
+  }
 }
 
 // Singleton

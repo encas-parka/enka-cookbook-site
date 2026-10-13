@@ -292,6 +292,20 @@ export class TeamdocsStore {
     await this.#collection.clearLocal();
   }
 
+  /**
+   * Purge du cache local (table + curseurs delta) sans toucher aux
+   * abonnements : contrairement à softReset(), la souscription SSE reste
+   * vivante (#realtimeInitialized inchangé — pas de double-abonnement au
+   * re-login) et le bridge reste branché — re-scope d'identité.
+   */
+  async purgeLocal(): Promise<void> {
+    this.#loading = false;
+    this.#error = null;
+    this.#isInitialized = false;
+    this.#initPromise = null;
+    await this.#collection.clearLocal();
+  }
+
   async destroy(): Promise<void> {
     // Unsubscribe bridge en premier pour arrêter le liveQuery Dexie
     this.#bridge.subscription.unsubscribe();

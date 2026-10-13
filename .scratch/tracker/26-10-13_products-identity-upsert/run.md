@@ -31,6 +31,8 @@ Base : `befc6d54` (verdict : arbre sale au démarrage — baseline tracker commi
 - (mesuré) `3-import-pb.ts --upsert` exit 0 : products 982 patched / 0 failed, purchases 955 / 0 ; seul fail teamdocs −1 = écart connu verdicté (`content > 5000 chars`, préexistant). Log `/tmp/orchestrate/import-upsert-t11.log`.
 - (doc) `ProductsStore.createProduct` (`svelte-app/src/lib/stores/ProductsStore.svelte.ts:1362`) écrit toujours productName — le requis ne bloque aucun appelant SPA ; le payload SPA miroité par la sonde.
 - (doc) Ids déterministes de l'import = `hash15(_refId)` (15 car., `[a-z0-9]`, `3-import-pb.ts` § Id déterministe) — admissibles sous min 11 ; slug recettes idem.
+- (mesuré, T02) Suites zone produits : 7 fichiers / **35 tests** vert (33 canon T11 + 2 nouveaux T02), check **0 erreur / 6 warnings** — canon intact. Logs `/tmp/orchestrate/tests-t02-products-zone.log`, `/tmp/orchestrate/check-t02.log`.
+- (doc, T02) `ProductsStore.createProduct` accepte `quantity?`/`unit?` : normalisation `UnitConverter.normalize` (fallback `'unité'`) puis `specs = { quantity: {q,u}, pF, pS }` — parité `createManualProduct` sœur. `AddProductModal` passe `quantity ?? undefined` et le bloc `createPurchase` est supprimé ; en-tête « hors recettes » (besoin, magasin, responsable) ajouté en tête du formulaire. Lecteur `buildRawProductBase` inchangé (lisait déjà `specs.quantity`).
 
 ## Pièges
 
@@ -38,6 +40,7 @@ Base : `befc6d54` (verdict : arbre sale au démarrage — baseline tracker commi
 - Le kill du pocketbase enfant d'un `dev:all` user est refusé par le sandbox (permission.rejected) → technique des **instances jetables** : copie `sqlite3 .backup` du pb_data dans `/tmp/opencode/` + `pocketbase serve --http=127.0.0.1:8091` (ou `migrate up` sur répertoire vierge) + `PB_URL_OVERRIDE` que la sonde et l'import honorent déjà. Ne touche ni au process user ni à ses timestamps (`updated` bumpés seulement sur la copie jetable).
 - Typage `CollectionBatch.create` sans `id?` alors que le runtime le garde (écart à corriger au ticket 03).
 - `||` vs `??` dans GroupPurchaseModal (micro-régression, ticket 06 ou backlog).
+- (T02) `UnitConverter.normalize` ne reconnaît que `kg`, `l.`, `gr.`, `ml` (+ règles café/soupe/pincée/gousse/unité) : toute autre unité (`gr` sans point, `bottes`…) repart **verbatim** (q et u inchangés). Parité historique sœur, et QUANTITY_UNITS n'expose que des valeurs reconnues ou pass-through voulues — mais à savoir en lisant des specs. Le fallback `'unité'` en specs (voie besoin) remplace le fallback `'pièces'` qu'avait la voie achat supprimée.
 - `stats.merged` mort des deux côtés (trancher au ticket 05).
 
 ## Vérifications empiriques
@@ -46,11 +49,13 @@ Base : `befc6d54` (verdict : arbre sale au démarrage — baseline tracker commi
 - Replay chaîne migrations from scratch : `pocketbase migrate up` sur pb_data vierge — 29 appliquées, état final products.id (min11/max40/underscore) + productName requis conforme (sqlite sur la copie).
 - Import pipeline : `/tmp/orchestrate/import-upsert-t11.log` — exit 0, 3838 patched, 1 failed (teamdocs −1, verdict attendu) ; post-run sqlite copie : 993 produits, 0 nom vide, ids 15/15.
 - Suites zone + check : `/tmp/orchestrate/tests-products-zone-t11.log` (7 fichiers / 33 tests vert), `/tmp/orchestrate/check-t11.log` (0 erreur / 6 warnings — canon).
+- (T02) Suites zone + check : `/tmp/orchestrate/tests-t02-products-zone.log` (7 fichiers / 35 tests vert — 33 canon + 2 nouveaux), `/tmp/orchestrate/check-t02.log` (0 erreur / 6 warnings — canon) ; svelte-autofixer sur le fragment modal : 0 issue / 0 suggestion.
 
 ## Décisions par ticket
 
 - **01** : le « nom requis » du critère 1 venu en 5e migration manuelle (`1791920000_products_productname_required.js`) — le lot console ne le portait pas ; committé avec lui pour tenir « versionnées ensemble ». Sondes et import passés sur instance jetable 8091 (kill du dev PB user refusé sandbox) — même données, zéro impact sur le dev 8090. Vérif pipeline en mode `--upsert` (cible peuplée, pas de purge) ; `4-fix-timestamps` non requis (timestamps bumpés sur la copie jetable seulement). WIP étranger croisé (`.gitignore`, gate-recheck T12) : non touché, non committé.
 - **01 (nettoyage)** : instance jetable 8091 (`serve` sur `/tmp/opencode/pb-t11-copy`) **arrêtée par l'user** après le run (13-10) — plus rien ne tourne côté implementer ; le dev 8090 (`dev:all` user) n'a jamais été touché. La copie jetable reste dans `/tmp/opencode/pb-t11-copy` (et le vierge `/tmp/opencode/pb-t11-fresh`) si une re-mesure est utile.
+- **02** : la normalisation d'unité vit dans `createProduct` (store) alors que la sœur la fait dans son modal — décision dispatch (« createProduct l'accepte, la normalise »), même sortie `{q,u}`, invariant testé sans UI au point d'entrée unique. Le fallback d'unité `'unité'` (sœur, specs) remplace `'pièces'` (ancien fallback de la voie achat supprimée). Deux tiers : `beb08988` (store + tests), `881dd31e` (modal). WIP étranger croisé (`.gitignore`, gate-recheck T12) : non touché, non committé.
 
 ## Deferred findings
 

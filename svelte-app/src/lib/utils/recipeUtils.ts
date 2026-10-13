@@ -331,3 +331,26 @@ export function parseRecipeToIndexEntry(recipe: any): RecipeIndexEntry {
     versionLabel: recipe.versionLabel || null,
   };
 }
+
+// =============================================================================
+// LISTE PUBLIQUE - Visibilité des brouillons
+// =============================================================================
+
+/**
+ * Visibilité de la liste des recettes : un visiteur non authentifié ne voit
+ * pas les brouillons. Le marqueur porteur est le booléen `draft` (le select
+ * `status` porte une autre sémantique — défaut création "private", soft-delete
+ * "deleted" — les deux marqueurs coexistent). Filtre UX de liste uniquement :
+ * l'accès direct par URL d'un brouillon reste possible.
+ *
+ * @param recipes - Entrées d'index (`draft` normalisé booléen par les parsers)
+ * @param isAuthenticated - Session authentifiée ?
+ * @returns La liste inchangée si authentifié, sinon sans les brouillons
+ */
+export function filterRecipesForViewer(
+  recipes: RecipeIndexEntry[],
+  isAuthenticated: boolean,
+): RecipeIndexEntry[] {
+  if (isAuthenticated) return recipes;
+  return recipes.filter((recipe) => recipe.draft !== true);
+}

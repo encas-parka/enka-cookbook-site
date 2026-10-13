@@ -9,6 +9,7 @@
   import RecipeSortControls from "$lib/components/recipes/RecipeSortControls.svelte";
   import LeftPanel from "$lib/components/ui/LeftPanel.svelte";
   import { recipeDataStore } from "$lib/stores/RecipeDataStore.svelte";
+  import { filterRecipesForViewer } from "$lib/utils/recipeUtils";
   import { navBarStore } from "../stores/NavBarStore.svelte";
   import { PlusIcon } from "@lucide/svelte";
   import { navigate, p, route, searchParams } from "$lib/router";
@@ -61,10 +62,16 @@
     return recipesStore.getAllRecipes();
   });
 
+  // Visibilité de base : un visiteur ne voit pas les brouillons (accès direct
+  // par URL inchangé) — la liste filtrée et les facettes partent de cette liste
+  const visibleRecipes = $derived(
+    filterRecipesForViewer(allRecipes, globalState.isAuthenticated),
+  );
+
   // Extraire les valeurs uniques pour les filtres
   const availableCategories = $derived.by(() => {
     const cats = new Set<string>();
-    allRecipes.forEach((r) => r.categories?.forEach((c) => cats.add(c)));
+    visibleRecipes.forEach((r) => r.categories?.forEach((c) => cats.add(c)));
     return Array.from(cats).sort();
   });
 
@@ -86,21 +93,21 @@
       const query = searchQuery.trim();
 
       // Recherche fuzzy multi-champ en un seul passage
-      const results = fuzzysort.go(query, allRecipes, {
+      const results = fuzzysort.go(query, visibleRecipes, {
         keys: ["title", "auteur", "region"],
         threshold: 0.3,
       });
 
       const matchingIds = new Set(results.map(r => r.obj.id));
 
-      return allRecipes.filter((recipe) => {
+      return visibleRecipes.filter((recipe) => {
         if (!matchingIds.has(recipe.id)) return false;
         return !filters.typeR || recipe.typeR === filters.typeR;
       });
     }
 
     // Sinon, appliquer les filtres
-    return allRecipes.filter((recipe) => {
+    return visibleRecipes.filter((recipe) => {
       // Catégories (OU logique)
       const categoryMatch =
         !filters.categories.length ||

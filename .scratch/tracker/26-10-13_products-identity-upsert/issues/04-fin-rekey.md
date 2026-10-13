@@ -4,10 +4,10 @@
 
 **Blocked by:** 01 (ids stables), 03 (primitive upsert).
 
-**Status:** ready-for-agent
+**Status:** done (13-10 — implementer ticket 04, commits e7798c42 + 1cbcd39e + docs tracker)
 
-- [ ] La matérialisation pousse avec le même id (re-key et suivi d'id côté modal supprimés)
-- [ ] L'orchestration privée de mise à jour devient un appelant mince de l'upsert
-- [ ] La matérialisation dupliquée de l'achat groupé est alignée (id retourné utilisé, relation valide)
-- [ ] La modification groupée utilise l'upsert de lot et compte les résultats réels (sélection mixte synchronisé/virtuel verte)
-- [ ] Vérification de gate : achat rapide et modification sans flash ni « chargement », base dev régénérée par reset + ré-import
+- [x] La matérialisation pousse avec le même id (re-key et suivi d'id côté modal supprimés)
+- [x] L'orchestration privée de mise à jour devient un appelant mince de l'upsert
+- [x] La matérialisation dupliquée de l'achat groupé est alignée (id retourné utilisé, relation valide)
+- [x] La modification groupée utilise l'upsert de lot et compte les résultats réels (sélection mixte synchronisé/virtuel verte)
+- [!] Vérification de gate : achat rapide et modification sans flash ni « chargement », base dev régénérée par reset + ré-import — preuve automatisable livrée (contrat nouveau testé à la couture : zone produits 4 fichiers / 20 tests vertes, lot mixte et achat groupé inclus) ; la vérification visuelle reste au gate humain, et le reset + ré-import de la base dev est une opération maintainer (aucun artefact à migrer — les doublons du gate disparaissent au prochain reset).

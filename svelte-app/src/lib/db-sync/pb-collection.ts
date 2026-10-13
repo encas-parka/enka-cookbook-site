@@ -18,7 +18,9 @@
  * - **Realtime**: PocketBase SSE replaces Appwrite WebSocket. No central registry needed —
  *   each collection subscribes directly via `pb.collection().subscribe()`.
  * - **Pagination**: Uses `getFullList()` for initial sync (auto-paginates internally).
- * - **Batch**: Uses PocketBase native `pb.createBatch()` for bulk operations.
+ * - **Batch**: Uses PocketBase native `pb.createBatch()` for bulk operations,
+ *   including the native upsert (update when the body carries an existing id,
+ *   create otherwise).
  *
  * Architecture:
  * ```
@@ -212,7 +214,15 @@ export interface BatchResult<T extends PbDoc> {
 }
 
 export interface CollectionBatch<T extends PbDoc> {
-  create(data: Omit<T, 'id' | 'created' | 'updated'>): CollectionBatch<T>;
+  create(data: Omit<T, 'id' | 'created' | 'updated'> & { id?: string }): CollectionBatch<T>;
+  /**
+   * Create-or-update decided server-side: PocketBase executes the request
+   * as an update when the body carries an id that already exists, as a
+   * create otherwise (`PUT /records`). For callers that cannot know
+   * whether the record is already on the server — the primitive tranches
+   * both ways. A client id is preserved (same keepId seam as `create`).
+   */
+  upsert(data: Omit<T, 'id' | 'created' | 'updated'> & { id?: string }): CollectionBatch<T>;
   update(id: string, data: Partial<T>): CollectionBatch<T>;
   delete(id: string): CollectionBatch<T>;
   send(): Promise<BatchResult<T>>;
@@ -631,7 +641,7 @@ export function createSyncCollection<T extends PbDoc>(
   // =====================================================================
 
   interface PendingOp {
-    type: 'create' | 'update' | 'delete';
+    type: 'create' | 'update' | 'upsert' | 'delete';
     id?: string;
     data?: Record<string, unknown>;
   }
@@ -648,6 +658,11 @@ export function createSyncCollection<T extends PbDoc>(
         ops.push({ type: 'create', data: stripSystemFields(toPlain(data) as Partial<T>, true) });
         return builder;
       },
+      upsert(data) {
+        const stripped = stripSystemFields(toPlain(data) as Partial<T>, true);
+        ops.push({ type: 'upsert', id: stripped.id as string | undefined, data: stripped });
+        return builder;
+      },
       update(id, data) {
         ops.push({ type: 'update', id, data: stripSystemFields(toPlain(data)) });
         return builder;
@@ -660,9 +675,16 @@ export function createSyncCollection<T extends PbDoc>(
       async send(): Promise<BatchResult<T>> {
         if (ops.length === 0) return { records: [] };
 
-        // Snapshot for rollback
+        // Snapshot for rollback — update/delete target an existing row;
+        // an upsert carrying an id may too (its pre-batch state, or the
+        // absence of a snapshot, drives the rollback below)
         const snapshotIds = ops
-          .filter((op) => op.type === 'update' || op.type === 'delete')
+          .filter(
+            (op) =>
+              op.type === 'update' ||
+              op.type === 'delete' ||
+              (op.type === 'upsert' && op.id !== undefined)
+          )
           .map((op) => op.id!);
         const snapshots =
           snapshotIds.length > 0 ? await table.bulkGet(snapshotIds) : [];
@@ -674,6 +696,17 @@ export function createSyncCollection<T extends PbDoc>(
               const current = await table.get(op.id!);
               if (current) {
                 await table.put({ ...current, ...op.data } as unknown as T);
+              }
+              break;
+            }
+            case 'upsert': {
+              // Patch semantics on an existing row, plain put otherwise.
+              // Without an id there is nothing sensible to write yet —
+              // the server generates it and the confirmed bulkPut below
+              // mirrors the created row.
+              if (op.id !== undefined) {
+                const current = await table.get(op.id);
+                await table.put({ ...(current ?? {}), ...op.data } as unknown as T);
               }
               break;
             }
@@ -691,6 +724,9 @@ export function createSyncCollection<T extends PbDoc>(
             switch (op.type) {
               case 'create':
                 batch.collection(collectionName).create(op.data);
+                break;
+              case 'upsert':
+                batch.collection(collectionName).upsert(op.data);
                 break;
               case 'update':
                 batch.collection(collectionName).update(op.id!, op.data);
@@ -715,13 +751,17 @@ export function createSyncCollection<T extends PbDoc>(
 
           return { records: confirmed };
         } catch (err) {
-          // Rollback
+          // Rollback: restore snapshots, then drop the rows the optimistic
+          // upserts CREATED locally (no pre-batch snapshot → the record did
+          // not exist; a failed batch leaves no orphan line behind). Creates
+          // are never written locally before send — nothing to undo there.
           const valid = snapshots.filter(Boolean) as T[];
           if (valid.length > 0) await table.bulkPut(valid);
 
           for (const op of ops) {
-            if (op.type === 'create') {
-              // Can't know the ID — best effort
+            if (op.type === 'upsert' && op.id !== undefined) {
+              const wasExisting = snapshots.some((s) => s && (s as T).id === op.id);
+              if (!wasExisting) await table.delete(op.id);
             }
           }
 
@@ -747,6 +787,31 @@ export function createSyncCollection<T extends PbDoc>(
   async function bulkUpdate(items: { id: string; data: Partial<T> }[]): Promise<T[]> {
     const b = createBatch();
     for (const item of items) b.update(item.id, item.data);
+    const { records } = await b.send();
+    return records;
+  }
+
+  /**
+   * Upserts a single record — sugar for a one-operation batch (the SDK has
+   * no single-record upsert on RecordService, everything goes through
+   * `pb.createBatch()`). The server updates when the body's id exists,
+   * creates otherwise.
+   */
+  async function upsert(
+    data: Omit<T, 'id' | 'created' | 'updated'> & { id?: string }
+  ): Promise<T> {
+    const b = createBatch();
+    b.upsert(data);
+    const { records } = await b.send();
+    return records[0];
+  }
+
+  /** Bulk upsert multiple records in a single batch request. */
+  async function bulkUpsert(
+    items: (Omit<T, 'id' | 'created' | 'updated'> & { id?: string })[]
+  ): Promise<T[]> {
+    const b = createBatch();
+    for (const item of items) b.upsert(item);
     const { records } = await b.send();
     return records;
   }
@@ -832,7 +897,9 @@ export function createSyncCollection<T extends PbDoc>(
     createBatch,
     bulkCreate,
     bulkUpdate,
+    bulkUpsert,
     bulkDelete,
+    upsert,
 
     // Convenience queries
     list,

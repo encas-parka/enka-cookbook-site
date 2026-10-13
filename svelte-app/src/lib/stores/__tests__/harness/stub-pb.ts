@@ -20,6 +20,11 @@
  *   `null` literal, Date → ISO-with-space inside single quotes
  * - `collection().subscribe()` resolves to an async unsubscribe; events are
  *   `{ action, record }` delivered to '*' and matching record-id topics
+ * - relation fields declared via `defineRelations()` are validated on every
+ *   write (single or batch): a non-empty value referencing no existing record
+ *   of the target collection is rejected with 400 `validation_invalid_relation`,
+ *   like the real server — undeclared collections accept any value; `seed()`
+ *   and `putRecord()` stay raw (no validation, test-state manipulation)
  *
  * Usage in a test file:
  * ```ts
@@ -361,7 +366,23 @@ function duplicateIdError(id: string): FakeRequestError {
 // RECORD OPERATIONS — single semantic source for collection() and batch
 // =============================================================================
 
-function opCreate(records: PbRecord[], data: Record<string, unknown>): PbRecord {
+/**
+ * Résout le tableau de records d'une collection : le store vivant pour les
+ * requêtes unitaires, l'ombre transactionnelle pour les ops d'un batch —
+ * la validation relationnelle d'une op voit alors les ops antérieures du
+ * même lot, comme chaque sous-requête du serveur voit l'état de sa
+ * transaction.
+ */
+type RecordsView = (name: string) => PbRecord[];
+
+interface WriteGuard {
+  relations: Map<string, Map<string, string>>;
+  view: RecordsView;
+}
+
+function opCreate(guard: WriteGuard, name: string, data: Record<string, unknown>): PbRecord {
+  validateWriteRelations(guard.relations, guard.view, name, data, "create");
+  const records = guard.view(name);
   if (data.id !== undefined && records.some((r) => r.id === data.id)) {
     throw duplicateIdError(data.id as string);
   }
@@ -376,7 +397,9 @@ function opCreate(records: PbRecord[], data: Record<string, unknown>): PbRecord 
   return { ...record };
 }
 
-function opUpdate(records: PbRecord[], id: string, data: Record<string, unknown>): PbRecord {
+function opUpdate(guard: WriteGuard, name: string, id: string, data: Record<string, unknown>): PbRecord {
+  validateWriteRelations(guard.relations, guard.view, name, data, "update");
+  const records = guard.view(name);
   const idx = records.findIndex((r) => r.id === id);
   if (idx === -1) throw notFoundError(id);
   const updated = {
@@ -399,11 +422,58 @@ function opDelete(records: PbRecord[], id: string): boolean {
 /** PB batch upsert (wire contract: `PUT /records`) — executed as an update
  * when the body carries an id that already exists, as a create otherwise
  * (a client-provided id is preserved on the create leg). */
-function opUpsert(records: PbRecord[], data: Record<string, unknown>): PbRecord {
-  if (data.id !== undefined && records.some((r) => r.id === data.id)) {
-    return opUpdate(records, data.id as string, data);
+function opUpsert(guard: WriteGuard, name: string, data: Record<string, unknown>): PbRecord {
+  if (data.id !== undefined && guard.view(name).some((r) => r.id === data.id)) {
+    return opUpdate(guard, name, data.id as string, data);
   }
-  return opCreate(records, data);
+  return opCreate(guard, name, data);
+}
+
+/**
+ * Valide les champs relation déclarés pour la collection (defineRelations) :
+ * une valeur non vide qui ne référence aucun record existant de la collection
+ * cible est rejetée — un patch sans le champ, ou qui le pose à null/"",
+ * reste valide (clear de relation).
+ */
+function validateWriteRelations(
+  relations: Map<string, Map<string, string>>,
+  view: RecordsView,
+  name: string,
+  data: Record<string, unknown>,
+  verb: "create" | "update",
+): void {
+  const fields = relations.get(name);
+  if (!fields) return;
+  for (const [field, targetCollection] of fields) {
+    const value = data[field];
+    if (value === null || value === undefined || value === "") continue;
+    const targets = view(targetCollection);
+    const known = (candidate: unknown) =>
+      typeof candidate === "string" && targets.some((r) => r.id === candidate);
+    const dangling = Array.isArray(value)
+      ? value.some((v) => !known(v))
+      : !known(value);
+    if (dangling) throw invalidRelationError(field, verb);
+  }
+}
+
+/** PB relation validation — a write carrying a value that references no
+ * existing record of the target collection is rejected (400), which is what
+ * makes a relation field unusable as a free-form pointer. */
+function invalidRelationError(field: string, verb: string): FakeRequestError {
+  const err = new Error(`Failed to ${verb} record.`) as FakeRequestError;
+  err.status = 400;
+  err.response = {
+    code: 400,
+    message: `Failed to ${verb} record.`,
+    data: {
+      [field]: {
+        code: "validation_invalid_relation",
+        message: "Invalid or missing relation.",
+      },
+    },
+  };
+  return err;
 }
 
 /** Realtime payload, as delivered by the PB SSE channel. */
@@ -418,12 +488,41 @@ export class FakePocketBase {
   baseUrl: string;
   #store = new Map<string, PbRecord[]>();
   #subs = new Map<string, Set<{ topic: string; cb: SubscribeCallback }>>();
+  /**
+   * Fragment de schéma relationnel (defineRelations) : collection → champ →
+   * collection cible. Survit à reset() — le schéma n'est pas des données.
+   */
+  relations = new Map<string, Map<string, string>>();
 
   constructor(baseUrl?: string) {
     this.baseUrl = baseUrl ?? "http://localhost:8090";
     // The app ($lib/db-sync/pb) creates the client once at module load —
     // keep a handle so tests can reach the instance through currentFakePb().
     currentInstance = this;
+  }
+
+  /**
+   * Déclare des champs relation : les écritures qui les portent valident la
+   * cible comme le vrai serveur (400 `validation_invalid_relation` quand la
+   * valeur ne référence aucun record existant de la collection cible). Une
+   * collection sans déclaration accepte toute valeur ; idempotent.
+   */
+  defineRelations(spec: Record<string, Record<string, string>>): void {
+    for (const [collectionName, fields] of Object.entries(spec)) {
+      const map = this.relations.get(collectionName) ?? new Map<string, string>();
+      for (const [field, target] of Object.entries(fields)) {
+        map.set(field, target);
+      }
+      this.relations.set(collectionName, map);
+    }
+  }
+
+  /** Garde d'écriture : validation + vue sur le store (ou l'ombre d'un batch). */
+  #writeGuard(shadow?: Map<string, PbRecord[]>): WriteGuard {
+    return {
+      relations: this.relations,
+      view: (name) => shadow?.get(name) ?? this.records(name),
+    };
   }
 
   /** Mirrors the real SDK filter interpolation. */
@@ -478,11 +577,11 @@ export class FakePocketBase {
       },
 
       async create(data: Record<string, unknown>): Promise<PbRecord> {
-        return opCreate(store.records(name), data);
+        return opCreate(store.#writeGuard(), name, data);
       },
 
       async update(id: string, data: Record<string, unknown>): Promise<PbRecord> {
-        return opUpdate(store.records(name), id, data);
+        return opUpdate(store.#writeGuard(), name, id, data);
       },
 
       async delete(id: string): Promise<boolean> {
@@ -551,20 +650,20 @@ export class FakePocketBase {
           );
         }
         const results: Array<{ status: number; body: unknown }> = [];
+        const guard = store.#writeGuard(shadow);
         for (const req of requests) {
-          const records = shadow.get(req.name)!;
           switch (req.kind) {
             case "create":
-              results.push({ status: 200, body: opCreate(records, req.data) });
+              results.push({ status: 200, body: opCreate(guard, req.name, req.data) });
               break;
             case "update":
-              results.push({ status: 200, body: opUpdate(records, req.id, req.data) });
+              results.push({ status: 200, body: opUpdate(guard, req.name, req.id, req.data) });
               break;
             case "upsert":
-              results.push({ status: 200, body: opUpsert(records, req.data) });
+              results.push({ status: 200, body: opUpsert(guard, req.name, req.data) });
               break;
             case "delete":
-              opDelete(records, req.id);
+              opDelete(guard.view(req.name), req.id);
               // PB delete answers 204 No Content
               results.push({ status: 204, body: null });
               break;

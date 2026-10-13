@@ -21,6 +21,28 @@ Offline-first synchronization layer bridging **PocketBase** (remote) and **Dexie
 
 ---
 
+## Cache identity invariant
+
+The local cache (private tables + `syncMeta` cursors) belongs to **exactly one
+identity**. The owner is recorded in `localStorage` (`enka-cache-owner`, written
+by `GlobalState.#purgePrivateCaches` only after a successful purge).
+
+Every identity transition — boot, login, logout, register — runs
+`GlobalState.#ensureCacheForIdentity` (serialized, idempotent, driven by the
+`onAuthChange` watcher plus explicit boot/login calls): when the observed
+identity differs from the marker, private stores are purged via their
+`purgeLocal()` (cache only — subscriptions and live bridges stay alive and
+self-reconcile; `recipes` is public and never purged).
+
+Why it matters: a cache inherited from another session (tab closed without
+logout, expired token) leaves a stale delta cursor — the next `syncInitial`
+fetches `updated >= staleCursor` (mute) and the full-fetch fallback is blocked
+because `localCount > 0`. Data would never load without a manual reload.
+Cursors are per-collection keys in `syncMeta`; only `clearLocal()` removes
+them — never treat a cursor as identity-independent.
+
+---
+
 ## Flow Diagrams
 
 ### 1. Initial Fetch — Delta Sync

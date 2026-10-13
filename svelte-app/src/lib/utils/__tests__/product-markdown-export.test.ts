@@ -182,6 +182,46 @@ describe("product-markdown-export", () => {
       expect(md).toContain("- Sel: 1 pincée");
     });
 
+    it("appends merged product names as (inclut: …)", () => {
+      const md = exportProductsToMarkdown(
+        makeOptions({
+          groups: [
+            {
+              label: "Crémerie",
+              products: [
+                {
+                  productName: "Crème de soja",
+                  mergedProductNames: ["Crème d'amande", "Crème liquide"],
+                  formattedQuantities: "3 l",
+                  acquiredQuantities: [],
+                  formattedAcquiredQuantities: "",
+                  missingQuantities: [],
+                  formattedMissingQuantities: "",
+                },
+                {
+                  productName: "Beurre",
+                  mergedProductNames: [],
+                  formattedQuantities: "500 gr.",
+                  acquiredQuantities: [],
+                  formattedAcquiredQuantities: "",
+                  missingQuantities: [],
+                  formattedMissingQuantities: "",
+                },
+              ],
+            },
+          ],
+        }),
+      );
+
+      expect(md).toContain(
+        "- Crème de soja (inclut: Crème d'amande, Crème liquide): 3 l",
+      );
+      // Pas de suffixe quand aucune source fusionnée
+      expect(
+        md.split("\n").find((l) => l.startsWith("- Beurre")),
+      ).toBe("- Beurre: 500 gr.");
+    });
+
     it("renders multiple groups", () => {
       const md = exportProductsToMarkdown(
         makeOptions({

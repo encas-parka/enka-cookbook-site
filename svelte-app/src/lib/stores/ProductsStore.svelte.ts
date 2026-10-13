@@ -969,6 +969,7 @@ class ProductsStore {
         label,
         products: models.map((m) => ({
           productName: m.data.productName,
+          mergedProductNames: m.data.mergedFrom.map((f) => f.name),
           formattedQuantities: m.stats.formattedQuantities,
           acquiredQuantities: m.stats.acquiredQuantities,
           formattedAcquiredQuantities: m.stats.formattedAcquiredQuantities,
@@ -1001,6 +1002,7 @@ class ProductsStore {
         formattedQuantities: m.stats.formattedQuantities,
         formattedAcquiredQuantities: m.stats.formattedAcquiredQuantities,
         formattedMissingQuantities: m.stats.formattedMissingQuantities,
+        mergedProductNames: m.data.mergedFrom.map((f) => f.name).join(", "),
       })),
     });
   }

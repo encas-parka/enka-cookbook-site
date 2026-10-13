@@ -111,9 +111,14 @@
       >
         <!-- Nom du produit & type icon -->
         <div
-          class="text-primary flex items-center gap-2 text-base font-semibold"
+          class="text-primary flex flex-wrap items-center gap-x-2 gap-y-1 text-base font-semibold"
         >
           <typeInfo.icon class="h-4 w-4 shrink-0" />{product.productName}
+          {#if product.mergedFrom?.length}
+            <div class="text-base-content/70 text-xs font-normal">
+              dont: {product.mergedFrom.map((f) => f.name).join(", ")}
+            </div>
+          {/if}
           {#if product.previousNames && product.previousNames.length > 0}
             <div class="text-base-content/60 text-sm font-normal">
               Ancien: {product.previousNames[0]}

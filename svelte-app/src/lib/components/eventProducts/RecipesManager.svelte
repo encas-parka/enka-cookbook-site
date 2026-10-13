@@ -10,6 +10,7 @@
     Pin,
   } from "@lucide/svelte";
   import OverrideManager from "./OverrideManager.svelte";
+  import MergeManager from "./MergeManager.svelte";
   import type { ProductModalStateType } from "$lib/types/store.types.js";
   import {
     extractTime,
@@ -45,6 +46,9 @@
 
 <!-- Section Override Manager -->
 <OverrideManager {modalState} {isArchiveMode} />
+
+<!-- Section Fusion de produits (source / cible / recherche de cible) -->
+<MergeManager {modalState} {isArchiveMode} {onClose} />
 
 <div class="space-y-6">
   <div></div>

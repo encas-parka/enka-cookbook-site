@@ -7,6 +7,7 @@ import type { Products, Purchases } from "../types/pb";
 import {
   matchesFilters,
   computeFuzzySearchMatches,
+  extractNameFromProductId,
   type FiltersState,
   type TemperatureFilterMode,
   hasConversions,
@@ -192,10 +193,12 @@ class ProductsStore {
     const needsById = new Map(needs.map((n) => [n.id, n]));
 
     const purchasesByProduct = new Map<string, Purchases[]>();
-    const orphanPurchases = new SvelteMap<string, Purchases>();
+    // Achats au statut "expense" (finances) — hors liste de courses.
+    // NB : sans rapport avec les achats orphelins (#orphanedPurchasesInfo).
+    const expensePurchases = new SvelteMap<string, Purchases>();
     for (const purchase of purchases) {
       if (purchase.status === "expense") {
-        orphanPurchases.set(purchase.id, purchase);
+        expensePurchases.set(purchase.id, purchase);
         continue;
       }
       if (purchase.status === "deleted") continue;
@@ -205,7 +208,7 @@ class ProductsStore {
         purchasesByProduct.set(productId, list);
       }
     }
-    this.#orphanPurchases = orphanPurchases;
+    this.#expensePurchases = expensePurchases;
     this.#purchasesByProductCache = purchasesByProduct;
 
     // ── 1b. Remappage virtuel des purchases des produits mergés ──
@@ -269,6 +272,11 @@ class ProductsStore {
       const need = needRow ? parseNeedRow(needRow) : null;
       const enriched = this.#buildEnriched(raw, need, prods);
 
+      this.#productNameCache.set(id, {
+        name: enriched.productName,
+        type: enriched.productType,
+      });
+
       if (existing) {
         existing.update(enriched);
         existing._version = version;
@@ -309,13 +317,53 @@ class ProductsStore {
       this.#productModels.delete(id);
     }
 
+    // ── 4b. Détecter les achats orphelins (sans produit actif) ──
+    // Calculé APRÈS le remappage merge (1b) et le masquage des sources (3b) :
+    // sont orphelins les achats qui n'atterrissent dans aucune map produit
+    // affichée. Le guard mergedSourceIds est un filet de sécurité (leurs
+    // achats ont déjà été remappés vers la cible).
+    const orphaned: Array<{
+      productId: string;
+      productName: string;
+      productType: string;
+      purchases: Purchases[];
+    }> = [];
+    for (const [productId, purchs] of purchasesByProduct) {
+      if (this.#productModels.has(productId)) continue;
+      if (purchs.length === 0) continue;
+      if (mergedSourceIds.has(productId)) continue;
+      const cached = this.#productNameCache.get(productId);
+      orphaned.push({
+        productId,
+        productName: cached?.name ?? extractNameFromProductId(productId),
+        productType: cached?.type ?? "",
+        purchases: purchs,
+      });
+    }
+    this.#orphanedPurchasesInfo = orphaned;
+
     // ── 5. Reconstruire les groupes ─────────────────────────
     this.#rebuildGroups();
   }
 
   // Cache pour financialStats (mis à jour par #onDataChange)
-  #orphanPurchases = new SvelteMap<string, Purchases>();
+  #expensePurchases = new SvelteMap<string, Purchases>();
   #purchasesByProductCache = new Map<string, Purchases[]>();
+
+  // Dernier nom/type connus par id produit (alimenté à chaque rebuild de
+  // modèle) — nomme les achats orphelins dont le produit n'existe plus.
+  #productNameCache = new Map<string, { name: string; type: string }>();
+
+  // Achats dont le produit n'a plus de modèle actif (besoin recalculé,
+  // produit supprimé...) — section « Achats sans produit actif ».
+  #orphanedPurchasesInfo = $state<
+    Array<{
+      productId: string;
+      productName: string;
+      productType: string;
+      purchases: Purchases[];
+    }>
+  >([]);
 
   /**
    * Fusionne 0–3 sources en un seul EnrichedProduct.
@@ -621,6 +669,10 @@ class ProductsStore {
     return this.#groups;
   }
 
+  get orphanedPurchases() {
+    return this.#orphanedPurchasesInfo;
+  }
+
   // ===========================================================================
   // DERIVED: Stats globales (lisent directement #productModels)
   // ===========================================================================
@@ -693,7 +745,7 @@ class ProductsStore {
     const allPurchases: (Purchases & { _productName?: string })[] = [];
 
     // Utilise les caches mis à jour par le reconciler
-    for (const purchase of this.#orphanPurchases.values()) {
+    for (const purchase of this.#expensePurchases.values()) {
       if (purchase.status === "deleted") continue;
       const amount = purchase.invoiceTotal || purchase.price || 0;
       totalGlobal += amount;
@@ -1896,8 +1948,10 @@ class ProductsStore {
     // Vider les structures de données
     this.#productModels.clear();
     this.#groups = {};
-    this.#orphanPurchases = new SvelteMap();
+    this.#expensePurchases = new SvelteMap();
     this.#purchasesByProductCache = new Map();
+    this.#productNameCache.clear();
+    this.#orphanedPurchasesInfo = [];
 
     // Reset metadata
     this.#currentMainId = null;

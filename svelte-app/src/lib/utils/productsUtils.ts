@@ -476,3 +476,22 @@ export function detectOverrideMismatch(
       : undefined,
   };
 }
+
+// =============================================================================
+// PRODUCT ID UTILITIES
+// =============================================================================
+
+/**
+ * Extrait un nom lisible depuis un productId au format "nameSlug_eventIdShort".
+ * Fallback quand le produit n'est plus dans le cache (orphelin ou mergé).
+ *
+ * Exemple : "jus-de-citron_a1b2" → "Jus De Citron"
+ */
+export function extractNameFromProductId(productId: string): string {
+  return productId
+    .split("_")
+    .slice(0, -1)
+    .join("_")
+    .replace(/-/g, " ")
+    .replace(/\b\w/g, (c) => c.toUpperCase());
+}

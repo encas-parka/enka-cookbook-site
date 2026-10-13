@@ -103,15 +103,6 @@
   // AUTO-EFFECTS
   // ============================================================================
 
-  // Vérifier que l'utilisateur est connecté
-  $effect(() => {
-    if (!globalState.userId) {
-      toastService.error("Vous devez être connecté");
-      navigate("/");
-      return;
-    }
-  });
-
   // Charger la recette depuis le store
   $effect(() => {
     if (recipeId && !loaded && !isLoading) {

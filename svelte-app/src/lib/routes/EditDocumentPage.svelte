@@ -229,14 +229,8 @@
   // LIFECYCLE
   // ============================================================================
 
-  // Charger le document et initialiser
+  // Charger le document et initialiser (l'auth est garantie par authGuard)
   onMount(async () => {
-    if (!globalState.userId) {
-      toastService.error("Vous devez être connecté");
-      navigate("/");
-      return;
-    }
-
     if (!team) {
       toastService.error("Équipe introuvable");
       navigate("/");

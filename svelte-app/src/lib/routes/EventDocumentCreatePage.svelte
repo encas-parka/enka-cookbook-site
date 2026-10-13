@@ -63,12 +63,8 @@
     });
   });
 
-  // Vérification
+  // Initialisation du store (l'auth est garantie par eventGuard)
   $effect(() => {
-    if (!globalState.userId) {
-      toastService.error("Vous devez être connecté");
-      navigate("/");
-    }
     if (!teamdocsStore.isInitialized) {
       teamdocsStore.initialize();
     }

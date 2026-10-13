@@ -65,14 +65,8 @@
   // LIFECYCLE
   // ============================================================================
 
-  // Vérifier que l'utilisateur est connecté et que l'équipe existe
+  // Vérifier que l'équipe existe (l'auth est garantie par authGuard)
   $effect(() => {
-    if (!globalState.userId) {
-      toastService.error("Vous devez être connecté");
-      navigate("/");
-      return;
-    }
-
     if (!team) {
       toastService.error("Équipe introuvable");
       navigate("/");

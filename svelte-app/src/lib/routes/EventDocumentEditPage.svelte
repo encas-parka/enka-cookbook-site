@@ -218,12 +218,6 @@
   // ============================================================================
 
   onMount(async () => {
-    if (!globalState.userId) {
-      toastService.error("Vous devez être connecté");
-      navigate("/");
-      return;
-    }
-
     if (!teamdocsStore.isInitialized) {
       await teamdocsStore.initialize();
     }

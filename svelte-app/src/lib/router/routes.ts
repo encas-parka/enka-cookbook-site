@@ -84,17 +84,15 @@ export const routes: Routes = {
     "/": () => import("$lib/routes/RecipeCreatePage.svelte"),
   },
 
-  "/recipe/:uuid/edit": (() => {
-    const component = () => import("$lib/routes/RecipeEditPage.svelte");
-    (component as any).hooks = authGuard;
-    return component;
-  })(),
+  "/recipe/:uuid/edit": {
+    hooks: authGuard,
+    "/": () => import("$lib/routes/RecipeEditPage.svelte"),
+  },
 
-  "/recipe/:uuid/duplicate": (() => {
-    const component = () => import("$lib/routes/RecipeCreatePage.svelte");
-    (component as any).hooks = authGuard;
-    return component;
-  })(),
+  "/recipe/:uuid/duplicate": {
+    hooks: authGuard,
+    "/": () => import("$lib/routes/RecipeCreatePage.svelte"),
+  },
 
   // Liste des événements
   "/eventList": {
@@ -103,23 +101,20 @@ export const routes: Routes = {
   },
 
   // Gestion des documents
-  "/createdocument/:teamId/new": (() => {
-    const component = () => import("$lib/routes/CreateDocumentPage.svelte");
-    (component as any).hooks = authGuard;
-    return component;
-  })(),
+  "/createdocument/:teamId/new": {
+    hooks: authGuard,
+    "/": () => import("$lib/routes/CreateDocumentPage.svelte"),
+  },
 
-  "/editdocument/:teamId/:docId": (() => {
-    const component = () => import("$lib/routes/EditDocumentPage.svelte");
-    (component as any).hooks = authGuard;
-    return component;
-  })(),
+  "/editdocument/:teamId/:docId": {
+    hooks: authGuard,
+    "/": () => import("$lib/routes/EditDocumentPage.svelte"),
+  },
 
-  "/documents/:teamId": (() => {
-    const component = () => import("$lib/routes/DocumentListPage.svelte");
-    (component as any).hooks = authGuard;
-    return component;
-  })(),
+  "/documents/:teamId": {
+    hooks: authGuard,
+    "/": () => import("$lib/routes/DocumentListPage.svelte"),
+  },
 
   // ============================================
   // ROUTES EVENTS UNIFIÉES (mode agnostic)

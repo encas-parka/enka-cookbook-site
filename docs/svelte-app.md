@@ -31,9 +31,10 @@ await store.setupRealtime(); // SSE → Dexie
 ## Routing — sv-router
 
 - Routes : `src/lib/router/routes.ts` (lazy `import()`), guards : `authGuard`, `eventGuard` (`src/lib/router/guards.ts`).
-- Publiques : `/`, `/recipe`, `/recipe/:uuid`, `/join/:linkId` (magic link), `/verify-email`.
-- Privées (authGuard) : `/dashboard/*`, `/recipe/my/*`, `/recipe/new`, `/eventList`.
-- Events (eventGuard, mode agnostic démo/normal) : `/event/:id/*`. Documents : `/createdocument/*`, `/editdocument/*`, `/documents/*`. Catch-all 404 en dernier.
+- Publiques : `/`, `/recipe`, `/recipe/:uuid`, `/join/:linkId` (magic link), `/verify-email`, `/reset-password`.
+- Privées (authGuard) : `/dashboard/*`, `/recipe/my/*`, `/recipe/new`, `/recipe/:uuid/edit`, `/recipe/:uuid/duplicate`, `/eventList`, `/createdocument/*`, `/editdocument/*`, `/documents/*`.
+- Events (eventGuard : auth + cache) : `/event/:id/*`. Catch-all 404 en dernier.
+- Piège : `hooks` n'est lu par sv-router que sur les **objets** de route (`{ hooks, "/": comp }`) — attaché à la fonction composant (`(component as any).hooks`), il est **silencieusement ignoré** (route sans guard). Épinglé par `src/lib/router/__tests__/guards.test.ts` ; les guards centralisent redirect + feedback (`requireAuth`), avant tout accès au cache.
 
 ## Conventions
 

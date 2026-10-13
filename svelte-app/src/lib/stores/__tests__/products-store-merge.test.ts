@@ -5,14 +5,18 @@
 /**
  * ProductsStore — fusion de produits (dérivation client, modèle sœur).
  *
- * Le record PocketBase ne porte que `mergedInto` + `mergeDate` sur la SOURCE
- * (un seul write serveur) ; tout le reste est dérivé à chaque passe du
- * reconciler (#onDataChange) :
+ * La fusion porte `mergedInto` + `mergeDate` sur la SOURCE seule ; tout le
+ * reste est dérivé à chaque passe du reconciler (#onDataChange) :
  *  - étape 1b : les achats des sources sont remappés dans la map de la cible ;
  *  - étape 3  : les cibles de merge sont TOUJOURS reconstruites (jamais
  *    skippées par le fingerprint) pour que `mergedFrom` reparte de [] ;
  *  - étape 3b : agrégation byDate + `mergedFrom.push({id, name})` + masquage
  *    des modèles sources.
+ *
+ * Côté serveur, `mergedInto` est une relation : une cible virtuelle est
+ * matérialisée avant l'écriture de la source (le harnais mime la validation
+ * via defineRelations) ; une source virtuelle est créée par l'écriture de
+ * fusion elle-même (jambe create de l'upsert).
  *
  * Couvre : dérivation au chargement (données importées), absence
  * d'accumulation de `mergedFrom` sur les passes multiples du liveQuery,
@@ -143,6 +147,10 @@ describe("ProductsStore — fusion de produits (dérivation client)", () => {
   beforeEach(async () => {
     const fakePb = currentFakePb();
     fakePb.reset();
+    // Schéma relationnel : mergedInto est une self-relation products→products
+    // (single, cascadeDelete false) — les écritures qui la portent valident
+    // la cible côté serveur, comme le vrai PocketBase (400).
+    fakePb.defineRelations({ products: { mergedInto: "products" } });
     await productsStore.softReset();
     await clearDexie();
 
@@ -289,6 +297,134 @@ describe("ProductsStore — fusion de produits (dérivation client)", () => {
       { id: SOURCE_ID, name: "Lait de soja" },
     ]);
     expect(target!.purchases).toHaveLength(2);
+  });
+
+  it("matérialise une cible virtuelle avant la fusion (réelle→virtuelle)", async () => {
+    const fakePb = currentFakePb();
+    // Source réelle (record), cible virtuelle (besoin calculé, jamais écrit)
+    fakePb.seed("products", [makeSourceRecord(), makeOtherRecord()]);
+    fakePb.seed("purchases", [
+      makePurchaseRecord({ id: "t12purchsrc0001", products: [SOURCE_ID] }),
+    ]);
+    await seedProductNeeds([makeSourceNeed(), makeTargetNeed()]);
+    await productsStore.initialize(TEST_EVENT_ID);
+    await waitForTick(5);
+
+    await productsStore.mergeProducts(SOURCE_ID, TARGET_ID);
+    await waitForTick(5);
+
+    // La cible existe désormais côté serveur — la relation mergedInto
+    // l'exige, l'écriture de la source serait sinon rejetée (400).
+    const serverTarget = fakePb
+      .records("products")
+      .find((r) => r.id === TARGET_ID);
+    expect(serverTarget).toBeDefined();
+    expect(serverTarget!.productName).toBe("Lait");
+    expect(serverTarget!.mergedInto).toBeNull();
+
+    // Un seul write de fusion : mergedInto + mergeDate sur la source
+    const serverSource = fakePb
+      .records("products")
+      .find((r) => r.id === SOURCE_ID);
+    expect(serverSource!.mergedInto).toBe(TARGET_ID);
+    expect(serverSource!.mergeDate).toBeTruthy();
+
+    // Dérivation : source masquée, cible agrégée (achats + besoins)
+    expect(productsStore.getEnrichedProductById(SOURCE_ID)).toBeNull();
+    const target = productsStore.getEnrichedProductById(TARGET_ID);
+    expect(target!.mergedFrom).toEqual([
+      { id: SOURCE_ID, name: "Lait de soja" },
+    ]);
+    expect(target!.purchases.map((p) => p.id)).toEqual(["t12purchsrc0001"]);
+    expect(target!.totalNeededArray).toEqual([{ q: 3, u: "l" }]);
+  });
+
+  it("fusionne deux virtuels — cible puis source matérialisées par les écritures (virtuelle→virtuelle)", async () => {
+    const fakePb = currentFakePb();
+    // Aucun record produits pour le couple : deux besoins purs
+    fakePb.seed("products", [makeOtherRecord()]);
+    fakePb.seed("purchases", []);
+    await seedProductNeeds([makeSourceNeed(), makeTargetNeed()]);
+    await productsStore.initialize(TEST_EVENT_ID);
+    await waitForTick(5);
+
+    await productsStore.mergeProducts(SOURCE_ID, TARGET_ID);
+    await waitForTick(5);
+
+    // La cible est matérialisée avant l'écriture, la source est créée PAR
+    // l'écriture de fusion (jambe create de l'upsert, mergedInto inclus)
+    const serverTarget = fakePb
+      .records("products")
+      .find((r) => r.id === TARGET_ID);
+    const serverSource = fakePb
+      .records("products")
+      .find((r) => r.id === SOURCE_ID);
+    expect(serverTarget).toBeDefined();
+    expect(serverSource).toBeDefined();
+    expect(serverSource!.mergedInto).toBe(TARGET_ID);
+    expect(serverTarget!.mergedInto).toBeNull();
+
+    expect(productsStore.getEnrichedProductById(SOURCE_ID)).toBeNull();
+    const target = productsStore.getEnrichedProductById(TARGET_ID);
+    expect(target!.mergedFrom).toEqual([
+      { id: SOURCE_ID, name: "Lait de soja" },
+    ]);
+    expect(target!.totalNeededArray).toEqual([{ q: 3, u: "l" }]);
+  });
+
+  it("fusionne un virtuel vers une réelle — la source matérialisée par l'écriture reste masquée (virtuelle→réelle)", async () => {
+    const fakePb = currentFakePb();
+    // Cible réelle (record), source virtuelle (besoin seul)
+    fakePb.seed("products", [makeTargetRecord(), makeOtherRecord()]);
+    fakePb.seed("purchases", [
+      makePurchaseRecord({ id: "t12purchtgt0001", products: [TARGET_ID] }),
+    ]);
+    await seedProductNeeds([makeSourceNeed(), makeTargetNeed()]);
+    await productsStore.initialize(TEST_EVENT_ID);
+    await waitForTick(5);
+
+    await productsStore.mergeProducts(SOURCE_ID, TARGET_ID);
+    await waitForTick(5);
+
+    // La source n'existait pas avant le merge : elle est créée PAR l'écriture
+    // (mergedInto posé d'un coup, pas de matérialisation séparée)
+    const serverSource = fakePb
+      .records("products")
+      .find((r) => r.id === SOURCE_ID);
+    expect(serverSource).toBeDefined();
+    expect(serverSource!.mergedInto).toBe(TARGET_ID);
+    const serverTarget = fakePb
+      .records("products")
+      .find((r) => r.id === TARGET_ID);
+    expect(serverTarget!.mergedInto).toBeNull();
+
+    expect(productsStore.getEnrichedProductById(SOURCE_ID)).toBeNull();
+    const target = productsStore.getEnrichedProductById(TARGET_ID);
+    expect(target!.mergedFrom).toEqual([
+      { id: SOURCE_ID, name: "Lait de soja" },
+    ]);
+    expect(target!.totalNeededArray).toEqual([{ q: 3, u: "l" }]);
+
+    // Vigilance : la ligne productNeeds de la source persiste et le masquage
+    // dérive du mergedInto du brut matérialisé (propagé par la reconstruction
+    // raw+need) — les passes suivantes du reconciler ne doivent pas faire
+    // réapparaître la carte source.
+    await db.purchases.put(
+      makePurchaseRecord({
+        id: "t12purchextra02",
+        products: [TARGET_ID],
+        updated: pbDate(T1),
+      }),
+    );
+    await db.productNeeds.put({
+      ...makeTargetNeed(),
+      updated: pbDate(T1),
+    });
+    await waitForTick(5);
+    expect(productsStore.getEnrichedProductById(SOURCE_ID)).toBeNull();
+    expect(
+      productsStore.getEnrichedProductById(TARGET_ID)!.mergedFrom,
+    ).toHaveLength(1);
   });
 
   it("refuse l'auto-fusion, les ids inconnus et le chaînage (aucune écriture)", async () => {

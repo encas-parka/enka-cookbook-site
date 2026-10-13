@@ -1646,9 +1646,11 @@ class ProductsStore {
   // ===========================================================================
 
   /**
-   * Fusionne un produit source dans un produit cible. Un seul write serveur :
-   * `mergedInto` + `mergeDate` sur la SOURCE — la cible n'est jamais modifiée,
-   * tout le reste (agrégation, masquage) est dérivé par le reconciler.
+   * Fusionne un produit source dans un produit cible. Un seul write de
+   * fusion : `mergedInto` + `mergeDate` sur la SOURCE — la cible n'est pas
+   * modifiée par la fusion (une cible virtuelle est matérialisée avant à
+   * son état de besoin, voir ci-dessous), tout le reste (agrégation,
+   * masquage) est dérivé par le reconciler.
    * Validations : pas d'auto-fusion, pas de chaînage (une source ne peut pas
    * devenir la cible d'un nouveau merge).
    */
@@ -1675,10 +1677,20 @@ class ProductsStore {
     }
 
     await toastService.track(
-      this.#updateWithUpsert(sourceId, {
-        mergedInto: targetId,
-        mergeDate: new Date().toISOString(),
-      }),
+      (async () => {
+        // `mergedInto` est une relation PB : la cible doit exister côté
+        // serveur AVANT l'écriture de la source, sinon rejet 400 (relation
+        // invalide). Une cible virtuelle (besoin calculé, jamais écrit) est
+        // matérialisée à son id sémantique ; une cible déjà connue du cache
+        // passe sans écriture (garde db.products). La source, elle, est
+        // matérialisée par l'écriture de fusion elle-même (#updateWithUpsert,
+        // jambe create de l'upsert avec mergedInto dans la charge).
+        await this.#ensureSyncedProduct(targetId);
+        return this.#updateWithUpsert(sourceId, {
+          mergedInto: targetId,
+          mergeDate: new Date().toISOString(),
+        });
+      })(),
       {
         loading: "Fusion en cours…",
         success: `"${sourceModel.data.productName}" fusionné vers "${targetModel.data.productName}"`,

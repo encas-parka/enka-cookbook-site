@@ -50,7 +50,7 @@ Base : `befc6d54` (verdict : arbre sale au démarrage — baseline tracker commi
 ## Décisions par ticket
 
 - **01** : le « nom requis » du critère 1 venu en 5e migration manuelle (`1791920000_products_productname_required.js`) — le lot console ne le portait pas ; committé avec lui pour tenir « versionnées ensemble ». Sondes et import passés sur instance jetable 8091 (kill du dev PB user refusé sandbox) — même données, zéro impact sur le dev 8090. Vérif pipeline en mode `--upsert` (cible peuplée, pas de purge) ; `4-fix-timestamps` non requis (timestamps bumpés sur la copie jetable seulement). WIP étranger croisé (`.gitignore`, gate-recheck T12) : non touché, non committé.
-- **01 (nettoyage)** : `pkill` refusé sandbox — l'instance jetable 8091 (`serve` sur `/tmp/opencode/pb-t11-copy`, lancée par la session implementer) reste allumée après le run ; sans état, jetable, disparaît au reboot. À arrêter à la main si besoin : `pkill -f "127.0.0.1:8091"`.
+- **01 (nettoyage)** : instance jetable 8091 (`serve` sur `/tmp/opencode/pb-t11-copy`) **arrêtée par l'user** après le run (13-10) — plus rien ne tourne côté implementer ; le dev 8090 (`dev:all` user) n'a jamais été touché. La copie jetable reste dans `/tmp/opencode/pb-t11-copy` (et le vierge `/tmp/opencode/pb-t11-fresh`) si une re-mesure est utile.
 
 ## Deferred findings
 

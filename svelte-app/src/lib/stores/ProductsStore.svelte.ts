@@ -27,10 +27,12 @@ import {
   type MarkdownExportGroup,
 } from "../utils/product-markdown-export";
 import { exportProductsToCsv } from "../utils/product-csv-export";
+import { UnitConverter } from "../utils/UnitConverter";
 import type {
   EnrichedProduct,
   StoreInfo,
   BatchUpdateResult,
+  ManualSpecs,
 } from "../types/store.types";
 import type { EnrichedEvent } from "../types/events";
 
@@ -1368,8 +1370,26 @@ class ProductsStore {
     who?: string[];
     store?: string;
     stockReel?: string;
+    /** Besoin déclaré hors recettes : normalisé en unité de base puis stocké dans specs.quantity — ne crée pas d'achat. */
+    quantity?: number;
+    unit?: string;
   }): Promise<string> {
-    const spec = { pF: productData.pF || false, pS: productData.pS || false };
+    // Une quantité fournie déclare un besoin (specs.quantity, lu par
+    // buildRawProductBase), pas un achat — parité createManualProduct sœur.
+    let spec: ManualSpecs = {
+      pF: productData.pF || false,
+      pS: productData.pS || false,
+    };
+    if (productData.quantity != null && productData.quantity > 0) {
+      const normalized = UnitConverter.normalize(
+        productData.quantity,
+        productData.unit?.trim() || "unité",
+      );
+      spec = {
+        quantity: { q: normalized.quantity, u: normalized.unit },
+        ...spec,
+      };
+    }
 
     const newProduct = await this.#productsCollection.create({
       ingredientRef: null,

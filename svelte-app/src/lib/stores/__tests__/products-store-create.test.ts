@@ -124,6 +124,53 @@ describe("ProductsStore — création produit & achat (write paths)", () => {
     expect(model?.isSynced).toBe(true);
   });
 
+  it("createProduct avec quantité → specs.quantity normalisé (besoin), aucun achat créé", async () => {
+    await productsStore.initialize(TEST_EVENT_ID);
+    await waitForTick(3);
+
+    const id = await productsStore.createProduct({
+      productName: "Farine",
+      productType: "épicerie",
+      quantity: 1,
+      unit: "kg",
+    });
+
+    // La quantité est un besoin : normalisée en unité de base dans specs
+    const server = await pb.collection("products").getOne(id);
+    expect(JSON.parse(server.specs)).toEqual({
+      quantity: { q: 1000, u: "gr." },
+      pF: false,
+      pS: false,
+    });
+
+    // Besoin, pas achat : aucune purchase à la création produit
+    const purchases = await pb.collection("purchases").getFullList();
+    expect(purchases).toHaveLength(0);
+
+    // Le lecteur existant du besoin affiche la quantité normalisée
+    await waitForTick(5);
+    const model = productsStore.getEnrichedProductById(id);
+    expect(model?.totalNeededArray).toContainEqual({ q: 1000, u: "gr." });
+  });
+
+  it("createProduct avec quantité sans unité → fallback 'unité' (parité sœur)", async () => {
+    await productsStore.initialize(TEST_EVENT_ID);
+    await waitForTick(3);
+
+    const id = await productsStore.createProduct({
+      productName: "Sacs poubelle",
+      productType: "autre",
+      quantity: 3,
+    });
+
+    const server = await pb.collection("products").getOne(id);
+    expect(JSON.parse(server.specs)).toEqual({
+      quantity: { q: 3, u: "unité" },
+      pF: false,
+      pS: false,
+    });
+  });
+
   it("createPurchase sur produit synchronisé → achat référençant l'id produit, pas de création implicite", async () => {
     currentFakePb().seed("products", [makeProductRecord()]);
     currentFakePb().seed("purchases", []);

@@ -448,9 +448,15 @@ export class ProductModalState implements ProductModalStateType {
         this.forms.stock.quantity &&
         this.forms.stock.unit
       ) {
+        // Normalisation identique à setStock() — kg→gr., l.→ml — pour que les
+        // deux chemins de saisie du stock produisent le même stockage.
+        const normalized = UnitConverter.normalize(
+          this.forms.stock.quantity,
+          this.forms.stock.unit,
+        );
         const newEntry = {
-          quantity: this.forms.stock.quantity.toString(),
-          unit: this.forms.stock.unit,
+          quantity: normalized.quantity.toString(),
+          unit: normalized.unit,
           notes: this.forms.stock.notes,
           dateTime: this.forms.stock.dateTime,
         };

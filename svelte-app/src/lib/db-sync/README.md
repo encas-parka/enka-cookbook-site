@@ -43,6 +43,30 @@ them — never treat a cursor as identity-independent.
 
 ---
 
+## Create idempotency seam
+
+`create()` passes a client-provided `id` through to PocketBase (`keepId`), and
+PocketBase **preserves** it (format: exactly 15 chars of `[a-z0-9]`) and
+**rejects a second create carrying the same id** with `400
+validation_not_unique` on the `id` field (measured on PB 0.37.5). A client id
+is therefore an idempotency key: after an ambiguous failure (request sent,
+response lost), resubmitting with the SAME key can never duplicate — the
+record already created is read back under the key (`view()`) and mirrored to
+Dexie, while a key the server has never seen proves the failure was real and
+the original error is rethrown.
+
+Usage: generate the key once per submission intent (`newPbId()` from
+`$lib/utils/pb-id`) and hold it across retries of that intent — reference
+implementation: `EventsStore.createEventWithTeams(data, teamIds,
+submissionKey)`.
+
+Why it matters: nothing else protects against duplication on a flaky
+connection — there is no offline replay queue (`create` is server-first:
+throw on failure, nothing persisted) and no SDK retry; only the user's manual
+resubmission after an error toast can duplicate, and this seam closes it.
+
+---
+
 ## Flow Diagrams
 
 ### 1. Initial Fetch — Delta Sync

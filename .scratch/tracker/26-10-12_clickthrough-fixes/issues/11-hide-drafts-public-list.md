@@ -18,9 +18,36 @@ sur l'url, c'est ok.) »
 
 **Blocked by:** None (can start immediately).
 
-**Status:** ready-for-agent
+**Status:** done (13-10)
 
-- [ ] Liste de recettes en visiteur : les brouillons n'apparaissent pas.
-- [ ] Liste de recettes en user authentifié : comportement actuel préservé.
-- [ ] Accès direct par URL d'un brouillon en visiteur : inchangé (toujours ok).
-- [ ] Test vitest du filtre au seam store, vert.
+## Verdict — filtre UX livré au marqueur `draft` (arbitration suivie)
+
+Fait de cohérence demandé par le dispatch, vérifié dans le code : **la création
+UI pose bien `draft`** — `$effect` sur RecipeCreatePage/RecipeEditPage
+(`check !== true` → `draft = true`), duplication explicite `draft: true`, et le
+payload passe par le spread de `createRecipe` (qui pose en parallèle
+`status: "private"`). Les deux marqueurs coexistent et divergent structurellement
+; le filtre n'en consomme qu'un (`draft`).
+
+Fix (client-only, aucune règle PB touchée — listRule `""` inchangée) :
+
+- `filterRecipesForViewer(recipes, isAuthenticated)` (`$lib/utils/recipeUtils`)
+  — liste retournée telle quelle si authentifié, sinon sans les `draft === true` ;
+- `RecipesListPage` dérive `visibleRecipes` une fois : les DEUX chemins de
+  `filteredRecipes` (recherche fuzzy — qui ignorait les filtres — et filtres)
+  et les facettes catégories en partent ;
+- accès direct par URL inchangé (`getRecipeByUuid` / vue publique non touchés).
+
+**Tests** : `recipeUtils.test.ts` (4 — rouges avant fix : export absent, log
+`/tmp/orchestrate/vitest-t11-red-26-10-13.log` ; verts après, log
+`/tmp/orchestrate/vitest-t11-green-26-10-13.log`) ; canon : check 0 erreur /
+6 warnings, suite **175/175, 26 fichiers** (logs
+`/tmp/orchestrate/tests-check-26-10-13-fix11.log`,
+`/tmp/orchestrate/tests-vitest-26-10-13-fix11.log`). Commits : `e2ad02f0`
+(test rouge), `8f9320ee` (fix). Re-click-through navigateur (visiteur sur
+`/recipe`) = porte T12.
+
+- [x] Liste de recettes en visiteur : les brouillons n'apparaissent pas. (seam unitaire + câblage des deux chemins de la liste et des facettes ; navigateur = T12)
+- [x] Liste de recettes en user authentifié : comportement actuel préservé. (liste retournée telle quelle si authentifié — test 2)
+- [x] Accès direct par URL d'un brouillon en visiteur : inchangé (toujours ok). (aucun diff sur `getRecipeByUuid` / RecipeDetailPage)
+- [x] Test vitest du filtre au seam store, vert. (`recipeUtils.test.ts`, 4/4)

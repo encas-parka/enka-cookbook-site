@@ -40,4 +40,7 @@ règles/abonnements posés en 04 conditionnent la propagation).
       garde-fou de l'édition concurrente. Trade-off assumé : un userB avec des
       saisies non sauvegardées ne voit pas les saves de userA tant qu'il n'a
       pas sauvegardé (ou rechargé) — c'est l'anti-écrasement voulu, pas un
-      contournement du lock)*
+      contournement du lock. Précision review spec 13-10 : les saves de userA
+      survenus pendant la période dirty de userB ne sont **jamais** re-livrés
+      tant que userB ne recharge pas la page (pas de refetch au dirty-clear) —
+      c'est le reload qui les ramène, pas la sauvegarde de userB)*

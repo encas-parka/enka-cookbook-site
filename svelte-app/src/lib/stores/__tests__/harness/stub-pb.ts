@@ -357,6 +357,55 @@ function duplicateIdError(id: string): FakeRequestError {
   return err;
 }
 
+// =============================================================================
+// RECORD OPERATIONS — single semantic source for collection() and batch
+// =============================================================================
+
+function opCreate(records: PbRecord[], data: Record<string, unknown>): PbRecord {
+  if (data.id !== undefined && records.some((r) => r.id === data.id)) {
+    throw duplicateIdError(data.id as string);
+  }
+  const now = pbDate();
+  const record = {
+    ...data,
+    id: (data.id as string) ?? makeFakeId(),
+    created: now,
+    updated: now,
+  } as PbRecord;
+  records.push(record);
+  return { ...record };
+}
+
+function opUpdate(records: PbRecord[], id: string, data: Record<string, unknown>): PbRecord {
+  const idx = records.findIndex((r) => r.id === id);
+  if (idx === -1) throw notFoundError(id);
+  const updated = {
+    ...records[idx],
+    ...data,
+    id,
+    updated: pbDate(),
+  } as PbRecord;
+  records[idx] = updated;
+  return { ...updated };
+}
+
+function opDelete(records: PbRecord[], id: string): boolean {
+  const idx = records.findIndex((r) => r.id === id);
+  if (idx === -1) throw notFoundError(id);
+  records.splice(idx, 1);
+  return true;
+}
+
+/** PB batch upsert (wire contract: `PUT /records`) — executed as an update
+ * when the body carries an id that already exists, as a create otherwise
+ * (a client-provided id is preserved on the create leg). */
+function opUpsert(records: PbRecord[], data: Record<string, unknown>): PbRecord {
+  if (data.id !== undefined && records.some((r) => r.id === data.id)) {
+    return opUpdate(records, data.id as string, data);
+  }
+  return opCreate(records, data);
+}
+
 /** Realtime payload, as delivered by the PB SSE channel. */
 export interface FakeRealtimeEvent {
   action: "create" | "update" | "delete";
@@ -429,41 +478,15 @@ export class FakePocketBase {
       },
 
       async create(data: Record<string, unknown>): Promise<PbRecord> {
-        const now = pbDate();
-        const records = store.records(name);
-        if (data.id !== undefined && records.some((r) => r.id === data.id)) {
-          throw duplicateIdError(data.id as string);
-        }
-        const record = {
-          ...data,
-          id: (data.id as string) ?? makeFakeId(),
-          created: now,
-          updated: now,
-        } as PbRecord;
-        records.push(record);
-        return { ...record };
+        return opCreate(store.records(name), data);
       },
 
       async update(id: string, data: Record<string, unknown>): Promise<PbRecord> {
-        const records = store.records(name);
-        const idx = records.findIndex((r) => r.id === id);
-        if (idx === -1) throw notFoundError(id);
-        const updated = {
-          ...records[idx],
-          ...data,
-          id,
-          updated: pbDate(),
-        } as PbRecord;
-        records[idx] = updated;
-        return { ...updated };
+        return opUpdate(store.records(name), id, data);
       },
 
       async delete(id: string): Promise<boolean> {
-        const records = store.records(name);
-        const idx = records.findIndex((r) => r.id === id);
-        if (idx === -1) throw notFoundError(id);
-        records.splice(idx, 1);
-        return true;
+        return opDelete(store.records(name), id);
       },
 
       async subscribe(
@@ -476,6 +499,80 @@ export class FakePocketBase {
         return async () => {
           store.#subs.get(name)?.delete(entry);
         };
+      },
+    };
+  }
+
+  /**
+   * Batch request builder — mirrors the real SDK `pb.createBatch()`:
+   * requests are queued per collection (SubBatchService shape) and executed
+   * in ONE transaction on send(). A failing sub-request aborts the whole
+   * batch with nothing applied (the server wraps batch execution in a
+   * transaction); send() resolves with the per-request results
+   * (`{ status, body }`) or throws the failing request's error.
+   */
+  createBatch() {
+    const store = this;
+    type BatchOp =
+      | { kind: "create"; name: string; data: Record<string, unknown> }
+      | { kind: "update"; name: string; id: string; data: Record<string, unknown> }
+      | { kind: "upsert"; name: string; data: Record<string, unknown> }
+      | { kind: "delete"; name: string; id: string };
+    const requests: BatchOp[] = [];
+
+    return {
+      collection(name: string) {
+        return {
+          create(data: Record<string, unknown> = {}): void {
+            requests.push({ kind: "create", name, data });
+          },
+          update(id: string, data: Record<string, unknown> = {}): void {
+            requests.push({ kind: "update", name, id, data });
+          },
+          upsert(data: Record<string, unknown> = {}): void {
+            requests.push({ kind: "upsert", name, data });
+          },
+          delete(id: string): void {
+            requests.push({ kind: "delete", name, id });
+          },
+        };
+      },
+
+      async send(): Promise<Array<{ status: number; body: unknown }>> {
+        if (requests.length === 0) return [];
+        // Transactional semantics: execute on shadow copies of every touched
+        // collection, commit only if ALL sub-requests succeeded.
+        const names = new Set(requests.map((r) => r.name));
+        const shadow = new Map<string, PbRecord[]>();
+        for (const batchName of names) {
+          shadow.set(
+            batchName,
+            store.records(batchName).map((r) => ({ ...r }))
+          );
+        }
+        const results: Array<{ status: number; body: unknown }> = [];
+        for (const req of requests) {
+          const records = shadow.get(req.name)!;
+          switch (req.kind) {
+            case "create":
+              results.push({ status: 200, body: opCreate(records, req.data) });
+              break;
+            case "update":
+              results.push({ status: 200, body: opUpdate(records, req.id, req.data) });
+              break;
+            case "upsert":
+              results.push({ status: 200, body: opUpsert(records, req.data) });
+              break;
+            case "delete":
+              opDelete(records, req.id);
+              // PB delete answers 204 No Content
+              results.push({ status: 204, body: null });
+              break;
+          }
+        }
+        // Commit (seed() deep-copies — live arrays swap atomically per collection)
+        for (const [batchName, arr] of shadow) store.seed(batchName, arr);
+        return results;
       },
     };
   }

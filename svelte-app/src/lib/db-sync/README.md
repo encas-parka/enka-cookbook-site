@@ -89,11 +89,13 @@ on the server — the primitive tranches both ways.
 - Rollback on batch failure: snapshots of pre-existing rows are restored, and
   the rows an optimistic upsert **created** (no pre-batch snapshot) are
   deleted — a failed batch leaves no orphan line behind.
-- Not a replacement for materializing a **virtual record** (semantic id like
-  `cannelle_xxxxxxxxxxxxxxx`): PB only takes the update leg for an id that
-  *exists* server-side; an unknown/invalid id lands on the create leg, which
-  rejects a malformed id. `ProductsStore.#ensureSyncedProduct` stays the path
-  for those.
+- Materializing a **virtual record** (semantic id like `cannelle_qq9ziy9kpw`)
+  rides the create leg: since the products/locks id relaxation (min 11-12,
+  `^[a-z0-9_-]+$`), a well-formed semantic id is admissible, so the first
+  write of a virtual product is an upsert carrying its own id — needs and
+  product share the id from birth, the id-equality merge never sees an entry
+  disappear. `ProductsStore.#ensureSyncedProduct` is that path; a malformed
+  id (too short, bad pattern) still lands 400 on the create leg.
 
 ---
 
@@ -173,8 +175,8 @@ Offline-first contract: when the record is missing from the local cache,
 `update` first tries to **attach** it — `getOne`, mirror to Dexie — then proceeds
 with the optimistic write. If the server returns 404 too, `update` throws the
 typed `RecordNotFoundError`: the caller decides whether to upsert (e.g.
-materialize a virtual record client-side, then update the new server id — see
-`ProductsStore.#updateWithUpsert`) or surface the error. A 404 on the push
+materialize a virtual record at its stable semantic id in the same write —
+see `ProductsStore.#updateWithUpsert`) or surface the error. A 404 on the push
 itself (record deleted server-side, or update-rule rejection — PB answers 404
 there) still takes the `RecordDeletedError` soft-delete path.
 

@@ -24,7 +24,9 @@
  *  - login sur session sale : purge au changement d'identité AVANT les 3
  *    phases → full fetch (curseur vierge) → events chargés sans rechargement ;
  *  - même identité : aucune purge (curseur conservé — pas de full fetch) ;
- *  - logout : purge + marqueur d'identité réinitialisé, recipes préservé.
+ *  - logout : purge + marqueur d'identité réinitialisé, recipes préservé ;
+ *  - boot avec session existante : les signaux SSE sont branchés (miroir du
+ *    login) ; boot visiteur : non (le login les activera).
  */
 
 const authMock = vi.hoisted(() => {
@@ -106,9 +108,9 @@ vi.mock("$lib/services/pb-auth", () => ({
 	onAuthChange: authMock.onAuthChange,
 }));
 
-// Les signaux SSE n'ont pas de surface fake (pb.realtime absent du stub) —
-// hors périmètre : le cycle de vie des signaux est couvert par
-// pb-realtime-signals.test.ts.
+// Les signaux SSE n'ont pas de surface fake (pb.realtime absent du stub) :
+// le branchement est mocké ici (pilotable), le comportement des signaux
+// eux-mêmes (debounce, reconnexion) est couvert par pb-realtime-signals.
 vi.mock("$lib/db-sync/pb-realtime", () => ({
 	initRealtimeSignals: vi.fn(async () => {}),
 	teardownRealtimeSignals: vi.fn(async () => {}),
@@ -131,6 +133,7 @@ import { currentFakePb } from "./harness/stub-pb";
 import { waitForTick } from "./harness/wait-for-tick";
 import { makeEvent, T1 } from "./harness/fixtures";
 import { globalState } from "$lib/stores/GlobalState.svelte";
+import { initRealtimeSignals } from "$lib/db-sync/pb-realtime";
 import { eventsStore } from "$lib/stores/EventsStore.svelte";
 import { recipesStore } from "$lib/stores/RecipesStore.svelte";
 import { db } from "$lib/db-sync/pb-sync";
@@ -248,6 +251,37 @@ describe("GlobalState — cache local mono-identité (login sans Ctrl-R)", () =>
 		expect(await db.syncMeta.get("events")).toBeUndefined();
 		expect(localStorage.getItem(CACHE_OWNER_KEY)).toBeNull();
 		// recipes (public) reste disponible pour la session visiteur
-		expect(recipesStore.isInitialized).toBe(true);
+			expect(recipesStore.isInitialized).toBe(true);
+		});
 	});
-});
+
+	describe("GlobalState — signaux SSE au boot (alerte perte serveur)", () => {
+		beforeEach(async () => {
+			currentFakePb().reset();
+			authMock.reset();
+			localStorage.clear();
+			await Promise.all(db.tables.map((t) => t.clear()));
+			vi.mocked(initRealtimeSignals).mockClear();
+			await waitForTick(1);
+		});
+
+		afterEach(async () => {
+			await globalState.logout().catch(() => {});
+		});
+
+		it("boot avec session existante : les signaux SSE sont branchés (miroir du login)", async () => {
+			authMock.set(authMock.USER_A);
+
+			await globalState.initializeAuth();
+
+			expect(initRealtimeSignals).toHaveBeenCalledTimes(1);
+		});
+
+		it("boot visiteur : signaux non branchés (le login modal les activera)", async () => {
+			authMock.set(null);
+
+			await globalState.initializeAuth();
+
+			expect(initRealtimeSignals).not.toHaveBeenCalled();
+		});
+	});

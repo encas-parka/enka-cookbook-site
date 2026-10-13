@@ -75,9 +75,6 @@
     PackageCheck,
   };
 
-  // Accès réactif aux valeurs dérivées du store
-  const stats = $derived(productsStore.stats);
-
   // État local : quel produit a son modal ouvert, et sur quel onglet
   let openModalProductId = $state<string | null>(null);
   let openModalTab = $state<string>("recettes");

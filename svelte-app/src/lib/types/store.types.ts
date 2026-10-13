@@ -129,6 +129,15 @@ export interface TotalNeededOverrideData {
   recipesNbWhenOverride: number; // Nombre de recettes utilisées (nbRecipes)
 }
 
+/**
+ * Produit source absorbé par un merge, dérivé au runtime par le reconciler
+ * (le record PB ne porte que `mergedInto` sur la source — jamais l'inverse).
+ */
+export interface MergedFromInfo {
+  id: string;
+  name: string;
+}
+
 // ✅ EnrichedProduct = Données BRUTES PocketBase + Calculées
 export interface EnrichedProduct {
   // MÉTADONNÉES (PocketBase)
@@ -154,7 +163,8 @@ export interface EnrichedProduct {
   stockReel: string | null; // ← Brut JSON
   previousNames: string[] | null;
   isMerged: boolean;
-  mergedFrom: string[] | null;
+  /** Dérivé au runtime par le reconciler (étape merge) — jamais lu du record brut. */
+  mergedFrom: MergedFromInfo[];
   mergeDate: string | null;
   mergeReason: string | null;
   mergedInto: string | null;
@@ -347,6 +357,7 @@ export interface RecipeOccurrence {
   a: number; // assiettes
   cRule?: string; // conversion rule (optionnel)
   id?: string; // recipeUuid (pour lien profond vers EventRecipesPage)
+  sourceProductName?: string; // produit d'origine si la recette provient d'un merge
 }
 
 export interface ByDateEntry {

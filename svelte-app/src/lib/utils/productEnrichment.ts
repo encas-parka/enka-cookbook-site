@@ -144,7 +144,9 @@ export function buildRawProductBase(
     stockReel: product.stockReel,
     previousNames: product.previousNames,
     isMerged: product.isMerged,
-    mergedFrom: product.mergedFrom,
+    // Dérivé au runtime par le reconciler — le brut PB (legacy array de
+    // strings importé d'Appwrite) n'est jamais recopié dans l'enrichi.
+    mergedFrom: [],
     mergeDate: product.mergeDate,
     mergeReason: product.mergeReason,
     mergedInto: product.mergedInto,
@@ -197,6 +199,76 @@ export function applyNeedToBase(
   base.displayTotalNeeded = formatTotalQuantity(base.totalNeededArray);
 
   return base;
+}
+
+/**
+ * Fusionne un produit source dans un produit cible (merge de doublons).
+ * Le target est muté en place : byDate concaténé (recettes taggées du nom du
+ * source), totaux recalculés, missing recalculé. L'appelant (reconciler)
+ * pose ensuite `mergedFrom` et retire le modèle source de la carte.
+ *
+ * ⚠️ À n'appeler que sur un target fraîchement reconstruit — le reconciler
+ * force le rebuild des cibles de merge à chaque passe pour éviter
+ * l'accumulation (jamais skippées par le fingerprint).
+ */
+export function mergeEnrichedProducts(
+  target: EnrichedProduct,
+  source: EnrichedProduct,
+): void {
+  const sourceName = source.productName;
+
+  // 1. Fusionner les byDate
+  for (const [date, sourceEntry] of Object.entries(source.byDate)) {
+    // Marquer chaque recette avec le nom du produit source
+    const taggedRecipes = sourceEntry.recipes.map((r) => ({
+      ...r,
+      sourceProductName: sourceName,
+    }));
+
+    if (target.byDate[date]) {
+      // Date commune : concaténer recipes et sommer les assiettes
+      const targetEntry = target.byDate[date];
+      targetEntry.recipes = [...targetEntry.recipes, ...taggedRecipes];
+      targetEntry.totalAssiettes += sourceEntry.totalAssiettes;
+      targetEntry.recipeCount = targetEntry.recipes.length;
+      targetEntry.totalConsolidated = aggregateByUnit([
+        ...targetEntry.totalConsolidated,
+        ...sourceEntry.totalConsolidated,
+      ]);
+    } else {
+      // Nouvelle date : l'ajouter directement
+      target.byDate[date] = { ...sourceEntry, recipes: taggedRecipes };
+    }
+  }
+
+  // 2. Recalculer les totaux globaux depuis les byDate fusionnés
+  const allQuantities = Object.values(target.byDate).flatMap(
+    (e) => e.totalConsolidated,
+  );
+  target.totalNeededArray = aggregateByUnit(allQuantities);
+
+  // 3. Recalculer les métriques globales
+  target.nbRecipes = Object.values(target.byDate).reduce(
+    (acc, e) => acc + e.recipeCount,
+    0,
+  );
+  target.totalAssiettes = Object.values(target.byDate).reduce(
+    (acc, e) => acc + e.totalAssiettes,
+    0,
+  );
+
+  // 4. Recalculer le display
+  target.displayTotalNeeded = formatTotalQuantity(target.totalNeededArray);
+
+  // 5. Recalculer missing — si la cible a un override, il prime sur le
+  // totalNeededArray calculé (même règle que buildRawProductBase).
+  const effectiveNeededArray = target.totalNeededOverrideParsed
+    ? [target.totalNeededOverrideParsed.totalOverride]
+    : target.totalNeededArray;
+  const { numeric: missingQuantityArray, display: displayMissingQuantity } =
+    calculateAndFormatMissing(effectiveNeededArray, target.totalPurchasesArray);
+  target.missingQuantityArray = missingQuantityArray;
+  target.displayMissingQuantity = displayMissingQuantity;
 }
 
 // =============================================================================

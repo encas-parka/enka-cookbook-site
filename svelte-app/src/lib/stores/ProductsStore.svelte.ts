@@ -15,6 +15,7 @@ import {
   buildRawProductBase,
   applyNeedToBase,
   createEnrichedProductsFromEvent,
+  mergeEnrichedProducts,
 } from "../utils/productEnrichment";
 import {
   parseNeedRow,
@@ -37,6 +38,7 @@ import type {
 import type { EnrichedEvent } from "../types/events";
 
 import { globalState } from "./GlobalState.svelte";
+import { toastService } from "../services/toast.service.svelte";
 import { ProductModel } from "../models/ProductModel.svelte";
 import { DateRangeStore } from "./DateRangeStore.svelte";
 import { eventsStore } from "./EventsStore.svelte";
@@ -138,14 +140,9 @@ class ProductsStore {
   #startDataSubscription(eventId: string) {
     this.#dataSubscription?.unsubscribe();
 
-    this.#dataSubscription = liveQuery(async () => {
-      const [products, purchases, needs] = await Promise.all([
-        db.products.where("eventId").equals(eventId).toArray(),
-        db.purchases.where("eventId").equals(eventId).toArray(),
-        db.productNeeds.where("mainId").equals(eventId).toArray(),
-      ]);
-      return { products, purchases, needs };
-    }).subscribe({
+    this.#dataSubscription = liveQuery(() =>
+      this.#readEventSnapshot(eventId),
+    ).subscribe({
       next: ({ products, purchases, needs }) => {
         this.#onDataChange(products, purchases, needs);
       },
@@ -153,6 +150,35 @@ class ProductsStore {
         console.error("[ProductsStore] liveQuery error:", err);
       },
     });
+  }
+
+  /**
+   * Snapshot des 3 tables Dexie pour une passe du reconciler — partagé par le
+   * liveQuery et le rerun explicite.
+   */
+  async #readEventSnapshot(eventId: string) {
+    const [products, purchases, needs] = await Promise.all([
+      db.products.where("eventId").equals(eventId).toArray(),
+      db.purchases.where("eventId").equals(eventId).toArray(),
+      db.productNeeds.where("mainId").equals(eventId).toArray(),
+    ]);
+    return { products, purchases, needs };
+  }
+
+  /**
+   * Force une passe du reconciler (relecture Dexie → #onDataChange). Le
+   * liveQuery ne se réveille que sur écriture Dexie : les invalidations
+   * purement en mémoire (rebuild forcé d'un modèle) doivent provoquer leur
+   * propre passe, sans dépendre d'un event realtime ultérieur.
+   */
+  async #rerunReconciliation(): Promise<void> {
+    if (!this.#currentEventId) return;
+    const snapshot = await this.#readEventSnapshot(this.#currentEventId);
+    this.#onDataChange(
+      snapshot.products,
+      snapshot.purchases,
+      snapshot.needs,
+    );
   }
 
   /**
@@ -182,6 +208,31 @@ class ProductsStore {
     this.#orphanPurchases = orphanPurchases;
     this.#purchasesByProductCache = purchasesByProduct;
 
+    // ── 1b. Remappage virtuel des purchases des produits mergés ──
+    // Le record PB ne porte que `mergedInto` sur la source ; tout le reste
+    // (achats rattachés à la cible, masquage des sources) est dérivé ici,
+    // à chaque passe du reconciler.
+    const mergeTargetIds = new Set<string>();
+    for (const [sourceId, rawProduct] of productsById) {
+      if (!rawProduct.mergedInto) continue;
+      const targetId = rawProduct.mergedInto;
+      mergeTargetIds.add(targetId);
+      if (!productsById.has(targetId) && !needsById.has(targetId)) {
+        console.warn(
+          `[ProductsStore] Merge target "${targetId}" introuvable pour "${sourceId}"`,
+        );
+        continue;
+      }
+      const sourcePurchases = purchasesByProduct.get(sourceId);
+      if (!sourcePurchases?.length) continue;
+      const targetPurchases = purchasesByProduct.get(targetId) ?? [];
+      purchasesByProduct.set(targetId, [
+        ...targetPurchases,
+        ...sourcePurchases,
+      ]);
+      purchasesByProduct.delete(sourceId); // les purchases vivent maintenant sous la cible
+    }
+
     // ── 2. Identifier tous les IDs connus ───────────────────
     const allIds = new Set<string>();
     for (const id of productsById.keys()) allIds.add(id);
@@ -206,8 +257,13 @@ class ProductsStore {
 
       const existing = this.#productModels.get(id);
 
-      // Skip si inchangé
-      if (existing && existing._version === version) continue;
+      // Skip si inchangé — SAUF les cibles de merge, toujours reconstruites :
+      // `mergedFrom` repart de [] à chaque rebuild (#buildEnriched), et la
+      // passe 3b y repousse exactement une entrée par source. Sans ce contournement
+      // du fingerprint, les passes multiples du liveQuery accumuleraient les
+      // entrées (le target lui-même n'a pas changé).
+      const isMergeTarget = mergeTargetIds.has(id);
+      if (existing && existing._version === version && !isMergeTarget) continue;
 
       // Merge des 3 sources → EnrichedProduct
       const need = needRow ? parseNeedRow(needRow) : null;
@@ -221,6 +277,31 @@ class ProductsStore {
         model._version = version;
         this.#productModels.set(id, model);
       }
+    }
+
+    // ── 3b. Agréger les sources mergées dans leurs cibles ─────
+    const mergedSourceIds = new Set<string>();
+    for (const [id, model] of this.#productModels) {
+      if (!model.data.mergedInto) continue;
+      const targetId = model.data.mergedInto;
+      const targetModel = this.#productModels.get(targetId);
+      if (!targetModel) {
+        console.warn(
+          `[ProductsStore] Merge target "${targetId}" non trouvé pour "${id}", la source reste visible`,
+        );
+        continue;
+      }
+      // Agréger les données de la source dans la cible
+      mergeEnrichedProducts(targetModel.data, model.data);
+      targetModel.data.mergedFrom.push({
+        id: model.data.id,
+        name: model.data.productName,
+      });
+      mergedSourceIds.add(id);
+    }
+    // Supprimer les modèles sources (leurs données vivent dans la cible)
+    for (const id of mergedSourceIds) {
+      this.#productModels.delete(id);
     }
 
     // ── 4. Supprimer les modèles obsolètes ──────────────────
@@ -284,7 +365,7 @@ class ProductsStore {
         stockReel: null,
         previousNames: null,
         isMerged: false,
-        mergedFrom: null,
+        mergedFrom: [],
         mergeDate: null,
         mergeReason: null,
         mergedInto: null,
@@ -543,17 +624,6 @@ class ProductsStore {
   // ===========================================================================
   // DERIVED: Stats globales (lisent directement #productModels)
   // ===========================================================================
-
-  stats = $derived.by(() => ({
-    total: this.#productModels.size,
-    frais: Array.from(this.#productModels.values()).filter((p) => p.data.pF)
-      .length,
-    surgel: Array.from(this.#productModels.values()).filter((p) => p.data.pS)
-      .length,
-    merged: Array.from(this.#productModels.values()).filter(
-      (p) => p.data.isMerged,
-    ).length,
-  }));
 
   uniqueStores = $derived.by(() => {
     const storeNames = Array.from(this.#productModels.values())
@@ -1567,6 +1637,110 @@ class ProductsStore {
         timestamp: new Date().toISOString(),
       };
     }
+  }
+
+  // ===========================================================================
+  // MERGE / UNMERGE
+  // ===========================================================================
+
+  /**
+   * Fusionne un produit source dans un produit cible. Un seul write serveur :
+   * `mergedInto` + `mergeDate` sur la SOURCE — la cible n'est jamais modifiée,
+   * tout le reste (agrégation, masquage) est dérivé par le reconciler.
+   * Validations : pas d'auto-fusion, pas de chaînage (une source ne peut pas
+   * devenir la cible d'un nouveau merge).
+   */
+  async mergeProducts(sourceId: string, targetId: string): Promise<void> {
+    if (sourceId === targetId) {
+      toastService.error("Impossible de fusionner un produit avec lui-même");
+      return;
+    }
+    const sourceModel = this.#productModels.get(sourceId);
+    const targetModel = this.#productModels.get(targetId);
+    if (!sourceModel || !targetModel) {
+      toastService.error("Produit source ou cible introuvable");
+      return;
+    }
+    if (sourceModel.data.mergedInto) {
+      toastService.error("Ce produit est déjà fusionné");
+      return;
+    }
+    if (targetModel.data.mergedInto) {
+      toastService.error(
+        "Impossible de fusionner vers un produit déjà fusionné",
+      );
+      return;
+    }
+
+    await toastService.track(
+      this.#updateWithUpsert(sourceId, {
+        mergedInto: targetId,
+        mergeDate: new Date().toISOString(),
+      }),
+      {
+        loading: "Fusion en cours…",
+        success: `"${sourceModel.data.productName}" fusionné vers "${targetModel.data.productName}"`,
+        error: "Erreur lors de la fusion",
+      },
+    );
+  }
+
+  /**
+   * Annule un merge : la source redevient visible. Écriture serveur
+   * `{ mergedInto: null, mergeDate: null }` sur la source, puis invalidation
+   * du modèle de la cible et passe de reconciliation forcée : ses données
+   * (fingerprint) n'ont pas bougé et le liveQuery ne se réveille que sur
+   * écriture Dexie — sans ce rerun, la cible resterait figée avec un
+   * `mergedFrom` périmé (voire absente du map) jusqu'à la prochaine écriture.
+   */
+  async unmergeProduct(sourceId: string, targetId: string): Promise<void> {
+    // La source n'est plus dans #productModels (retirée par le reconciler
+    // car mergedInto !== null) — on lance directement l'écriture.
+    await toastService.track(
+      this.#updateWithUpsert(sourceId, {
+        mergedInto: null,
+        mergeDate: null,
+      }),
+      {
+        loading: "Annulation de la fusion…",
+        success: "Fusion annulée — le produit redevient visible",
+        error: "Erreur lors de l'annulation de la fusion",
+      },
+    );
+    const targetModel = this.#productModels.get(targetId);
+    if (targetModel) targetModel._version = "";
+    await this.#rerunReconciliation();
+  }
+
+  /**
+   * Recherche de cibles de fusion (MergeManager). Exclut le produit courant,
+   * tout produit déjà source d'un merge, et tout produit déjà fusionné vers
+   * le courant. Fuzzy simple (includes) sur nom + type.
+   */
+  searchProducts(query: string, currentProductId: string): EnrichedProduct[] {
+    if (!query.trim()) return [];
+
+    const current = this.#productModels.get(currentProductId)?.data;
+    const excludeIds = new Set<string>([currentProductId]);
+    // Exclure les produits déjà mergés (sources d'un merge)
+    for (const [, model] of this.#productModels) {
+      if (model.data.mergedInto) excludeIds.add(model.data.id);
+    }
+    // Exclure les produits déjà fusionnés VERS le courant
+    if (current?.mergedFrom) {
+      for (const m of current.mergedFrom) excludeIds.add(m.id);
+    }
+
+    const candidates = [...this.#productModels.values()]
+      .filter((m) => !excludeIds.has(m.data.id))
+      .map((m) => m.data);
+
+    const q = query.toLowerCase().trim();
+    return candidates.filter(
+      (p) =>
+        p.productName.toLowerCase().includes(q) ||
+        p.productType.toLowerCase().includes(q),
+    );
   }
 
   /**

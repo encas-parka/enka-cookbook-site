@@ -126,6 +126,14 @@ class GlobalState {
       await this.#ensureCacheForIdentity(this.#user?.id ?? null).catch((err) =>
         console.error("[GlobalState] Purge du cache au boot échouée:", err),
       );
+      // Session existante au boot : signaux SSE vivants — c'est le chemin
+      // dominant (reload avec session valide), sans eux « Connexion perdue »
+      // n'apparaît jamais. Miroir du login : branchés ici, donc AVANT les
+      // phases d'initializeApp (la première connexion SSE est consommée par
+      // hasConnectedOnce) ; idempotent, le re-init du login est un no-op.
+      if (this.#user) {
+        await initRealtimeSignals();
+      }
     }
   }
 
@@ -158,7 +166,8 @@ class GlobalState {
       // Signaux SSE (StatusBar + resync orchestrateur). Branchés AVANT la
       // souscription des stores : la première connexion SSE est consommée
       // ici (hasConnectedOnce) — tout PB_CONNECT ultérieur est une
-      // reconnexion et déclenche le resync delta.
+      // reconnexion et déclenche le resync delta. (Au boot avec session
+      // existante, initializeAuth les branche de la même façon.)
       await initRealtimeSignals();
 
       // Phase 0: Initialiser le cache IDB pour les stores qui en dépendent

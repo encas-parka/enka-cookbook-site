@@ -15,11 +15,12 @@
  *    micro-coupure. Un reconnect dans la fenêtre de debounce annule
  *    l'affichage (micro-coupure guérie avant d'avoir été montrée).
  *
- * Cycle de vie auth : `initRealtimeSignals()` au login,
- * `teardownRealtimeSignals()` au logout (câblé dans GlobalState, pattern
- * destroy() des stores). La souscription `PB_CONNECT` vit dans la map de
- * souscriptions du SDK : oubliée au logout, elle maintiendrait l'EventSource
- * ouvert (zombie) et bloquerait l'autoclose.
+ * Cycle de vie auth : `initRealtimeSignals()` au boot avec une session
+ * existante (dans `initializeAuth` — chemin dominant, miroir du login) puis
+ * à chaque login ; `teardownRealtimeSignals()` au logout (câblé dans
+ * GlobalState, pattern destroy() des stores). La souscription `PB_CONNECT`
+ * vit dans la map de souscriptions du SDK : oubliée au logout, elle
+ * maintiendrait l'EventSource ouvert (zombie) et bloquerait l'autoclose.
  *
  * @module db-sync/pb-realtime
  */
@@ -47,14 +48,16 @@ function clearDisconnectTimer(): void {
 }
 
 /**
- * Active les signaux SSE (idempotent). Appelé au login, AVANT la souscription
- * des stores : la connexion initiale consomme `hasConnectedOnce` ici, de sorte
- * que tout PB_CONNECT ultérieur soit traité comme une reconnexion (resync).
+ * Active les signaux SSE (idempotent). Appelé au boot avec une session
+ * existante et au login, AVANT la souscription des stores : la connexion
+ * initiale consomme `hasConnectedOnce` ici, de sorte que tout PB_CONNECT
+ * ultérieur soit traité comme une reconnexion (resync).
  *
- * Résilient : un échec de connexion au moment du login (serveur momentanément
- * injoignable — le SDK rejette la 1re tentative) est loggé sans casser le
- * flux d'authentification ; les signaux resteront inactifs jusqu'au prochain
- * login, le resync par visibilitychange/online de main.ts couvre entre-temps.
+ * Résilient : un échec de connexion au moment de l'init (serveur
+ * momentanément injoignable — le SDK rejette la 1re tentative) est loggé
+ * sans casser le flux d'authentification ; les signaux resteront inactifs
+ * jusqu'au prochain login, le resync par visibilitychange/online de main.ts
+ * couvre entre-temps.
  */
 async function initRealtimeSignals(): Promise<void> {
 	if (pbConnectUnsub) return;

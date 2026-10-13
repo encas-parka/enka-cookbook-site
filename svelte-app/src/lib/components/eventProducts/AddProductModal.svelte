@@ -64,6 +64,8 @@
 
     if (!formData.productName.trim()) {
       errors.productName = "Le nom du produit est requis";
+    } else if (formData.productName.trim().length > 60) {
+      errors.productName = "60 caractères maximum";
     }
     if (!formData.productType.trim()) {
       errors.productType = "Le type/catégorie est requis";
@@ -240,6 +242,7 @@
                 id="product-name"
                 type="text"
                 placeholder="Nom du produit"
+                maxlength="60"
                 bind:value={formData.productName}
                 disabled={loading}
               />

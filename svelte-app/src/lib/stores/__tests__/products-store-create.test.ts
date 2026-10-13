@@ -347,9 +347,10 @@ describe("ProductsStore — création produit & achat (write paths)", () => {
     // → la fusion needs↔produits opère malgré le remappage des ids PB
     expect(byName.get("Eau")?.id).toBe(TEST_PRODUCT_ID);
 
-    // Le besoin sans produit correspondant garde l'id sémantique (virtuel)
+    // Le besoin sans produit correspondant garde l'id sémantique (virtuel),
+    // désormais au format complet : slug entier + eventId entier
     expect(byName.get("Cannelle")?.id).toBe(
-      `cannelle_${TEST_EVENT_ID.slice(-10)}`,
+      `cannelle_${TEST_EVENT_ID}`,
     );
 
     await waitForTick(5);
@@ -357,5 +358,74 @@ describe("ProductsStore — création produit & achat (write paths)", () => {
     expect(eau?.isSynced).toBe(true);
     expect(eau?.purchases).toHaveLength(1);
     expect(eau?.totalNeededArray).toContainEqual({ q: 2, u: "l" });
+  });
+
+  it("compat ascendante : un produit à l'ancien format d'id (slug court + 10 car.) reste recollé par nom — pas de re-dérivation", async () => {
+    // Produit matérialisé par l'ANCIEN générateur (slug tronqué à 20 +
+    // 10 derniers caractères de l'event) : il reste valide tel quel. Le
+    // recalcul recolle le besoin par productName sur l'id existant au lieu
+    // de dériver un nouveau-format — aucun produit matérialisé n'est recalculé.
+    const OLD_FORMAT_ID = "cannelle_qq9ziy9kpw";
+
+    vi.mocked(recipesStore.getRecipesByUuidsBulk).mockImplementation(
+      async () =>
+        new Map([
+          [
+            "rec1",
+            {
+              title: "Punch",
+              plate: 10,
+              astuces: [],
+              ingredients: [
+                {
+                  ref: "cannelle",
+                  name: "Cannelle",
+                  originalQuantity: 10,
+                  originalUnit: "gr",
+                  normalizedQuantity: 10,
+                  normalizedUnit: "gr",
+                  comment: "",
+                  allergens: [],
+                  type: "épices",
+                },
+              ],
+            } as unknown as RecipeData,
+          ],
+        ]),
+    );
+
+    const event = makeEvent({
+      meals: [
+        {
+          date: "2026-12-19T12:00:00.000Z",
+          guests: 10,
+          recipes: [{ recipeUuid: "rec1", plates: 10, typeR: "plat" }],
+        },
+      ],
+    });
+    vi.mocked(eventsStore.getEventById).mockImplementation(
+      (id: string) => (id === TEST_EVENT_ID ? event : null),
+    );
+
+    currentFakePb().seed("products", [
+      makeProductRecord({
+        id: OLD_FORMAT_ID,
+        ingredientRef: "cannelle",
+        productName: "Cannelle",
+      }),
+    ]);
+
+    await productsStore.initialize(TEST_EVENT_ID);
+    await waitForTick(5);
+
+    const rows = await db.productNeeds.toArray();
+    const cannelle = rows.find((r) => r.productName === "Cannelle");
+
+    // Le besoin porte l'id ANCIEN format — ni écrasé, ni redérivé
+    expect(cannelle?.id).toBe(OLD_FORMAT_ID);
+    expect(cannelle?.id).not.toBe(`cannelle_${TEST_EVENT_ID}`);
+    expect(productsStore.getEnrichedProductById(OLD_FORMAT_ID)?.isSynced).toBe(
+      true,
+    );
   });
 });

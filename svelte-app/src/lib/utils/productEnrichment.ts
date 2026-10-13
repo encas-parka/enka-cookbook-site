@@ -346,10 +346,10 @@ export async function createEnrichedProductsFromEvent(
   }
 
   // ⚡ ÉTAPE 5 : Créer les produits et détecter les collisions d'id
-  // Collision possible quand deux refs d'ingrédients différents produisent le
-  // même nom slugifié → même id dérivé (slug 20 car. + suffixe event). Sans
-  // dédup, les deux besoins partagent la même clé primaire Dexie (productNeeds)
-  // et le bulkPut écrase silencieusement le premier par le second.
+  // Collision possible quand deux refs d'ingrédients différents portent le
+  // même nom → même id dérivé (slug complet du nom + event). Sans dédup, les
+  // deux besoins partagent la même clé primaire Dexie (productNeeds) et le
+  // bulkPut écrase silencieusement le premier par le second.
   const productById = new Map<string, EnrichedProduct>();
 
   for (const [uuid, aggregation] of aggregations) {
@@ -493,26 +493,33 @@ function addIngredientToAggregation(
  * Crée un EnrichedProduct final conforme à l'interface
  *
  * 🎯 Génération de l'id unique par événement :
- * - Utilise une partie du productName slugifié
- * - Ajoute une portion de l'eventId (mainId) pour garantir l'unicité
- * - Limite à 36 caractères max (contrainte Appwrite)
+ * - Slug COMPLET du productName (sans troncature : deux noms distincts ne
+ *   convergent plus vers le même id — l'ancien slice à 20 fusionnait à tort
+ *   « beurre de cacahuètes (salé) » et « beurre de cacahuètes »)
+ * - eventId (mainId) COMPLET — 15 caractères pour un id PB natif
+ * - Longueur garantie ≤ 76 = slug (≤ longueur du nom ≤ 60, borne
+ *   productName) + «_» + eventId (15) — admissible par products.id (max 76)
  *
- * Format : {productNameSlug}_{eventIdShort}
- * Exemple : "beurre_confiture_x9k2m4n8" (25 caractères)
+ * Format : {productNameSlug}_{eventId}
+ * Exemple : "beurre-confiture_qq9ziy9kpwabcde"
+ *
+ * Les ids de l'ancien format (slug tronqué à 20 + 10 derniers caractères de
+ * l'event) restent valides tels que matérialisés : le recollage
+ * besoins↔produits opère par (ingredientRef, productName), jamais par
+ * re-dérivation de l'id — seul un nouveau besoin porte le nouveau format.
  */
 function createEnrichedProductFromAggregation(
   aggregation: ProductAggregation,
   mainId: string,
 ): EnrichedProduct {
-  // Slugifier le nom du produit et limiter à 20 caractères
-  const nameSlug = slugify(aggregation.productName).substring(0, 20);
+  // Slug complet du nom du produit (≤ longueur du nom, borné à 60 côté
+  // client et serveur) — slugify ne peut que raccourcir : accents décomposés
+  // puis retirés, séparateurs remplacés 1:1, caractères non alphanumériques
+  // supprimés.
+  const nameSlug = slugify(aggregation.productName);
 
-  // Extraire une portion unique de l'eventId (mainId)
-  // Utiliser les 10 derniers caractères en base36, ou moins si l'ID est court
-  const eventIdShort = mainId.slice(-10);
-
-  // Construire l'id unique (max 36 caractères)
-  const semanticId = `${nameSlug}_${eventIdShort}`;
+  // Id sémantique : slug complet + event complet, séparés par «_»
+  const semanticId = `${nameSlug}_${mainId}`;
 
   // Construction de la structure byDate finale (ByDateEntry)
   const byDate: Record<string, ByDateEntry> = {};

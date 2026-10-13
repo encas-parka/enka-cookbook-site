@@ -1,8 +1,8 @@
 /**
  * productEnrichment — collisions d'id dérivé (deux refs → même nom → même id).
  *
- * L'id d'un besoin calculé est dérivé du slug du nom (20 car.) + suffixe
- * event. Deux ingrédients de refs distinctes portant le même nom produisent
+ * L'id d'un besoin calculé est dérivé du slug complet du nom + eventId
+ * complet. Deux ingrédients de refs distinctes portant le même nom produisent
  * deux EnrichedProduct au même id : sans dédup, le bulkPut Dexie (clé
  * primaire `id`) écrase silencieusement le premier besoin par le second.
  * La dédup fusionne les agrégations (byDate, totaux, assiettes) et pose un
@@ -134,7 +134,7 @@ describe("createEnrichedProductsFromEvent — collision d'id dérivé", () => {
 
     // Un seul produit (au lieu de deux au même id)
     expect(products).toHaveLength(1);
-    expect(products[0].id).toBe(`jus-de-citron_${MAIN_ID.slice(-10)}`);
+    expect(products[0].id).toBe(`jus-de-citron_${MAIN_ID}`);
 
     // Les deux agrégations sont absorbées : 2 occurrences de recette,
     // assiettes sommées, quantités additionnées (200 + 300 gr.)
@@ -153,7 +153,7 @@ describe("createEnrichedProductsFromEvent — collision d'id dérivé", () => {
     const warns = warnSpy.mock.calls.map((args) => String(args[0]));
     expect(warns).toHaveLength(1);
     expect(warns[0]).toContain(
-      `Collision id "jus-de-citron_${MAIN_ID.slice(-10)}"`,
+      `Collision id "jus-de-citron_${MAIN_ID}"`,
     );
   });
 
@@ -185,9 +185,11 @@ describe("createEnrichedProductsFromEvent — collision d'id dérivé", () => {
     expect(warnSpy.mock.calls).toHaveLength(0);
   });
 
-  it("fusionne aussi les produits d'ingrédients dont le slug de 20 car. converge", async () => {
-    // Noms distincts mais même préfixe slugifié de 20 caractères :
-    // "Beurre de cacahuètes (salé)" et "Beurre de cacahuètes" → "beurre-de-cacahuetes"
+  it("ne fusionne plus deux noms distincts dont le slug tronqué convergait (faux positif du slice-20 résolu)", async () => {
+    // Noms distincts : "Beurre de cacahuètes (salé)" → "beurre-de-cacahuetes-sale"
+    // et "Beurre de cacahuètes" → "beurre-de-cacahuetes". Avec le slug
+    // complet (fini le slice à 20 qui amputait le suffixe), les deux ids
+    // dérivés sont DISTINCTS : chaque nom garde son besoin.
     const recipesByUuid = new Map<string, RecipeForDisplay>([
       [
         "recA",
@@ -210,8 +212,43 @@ describe("createEnrichedProductsFromEvent — collision d'id dérivé", () => {
       MAIN_ID,
     );
 
-    // Parité sœur : la collision de préfixe est fusionnée (limite connue du
-    // slug 20 car. — la révision de la limite est hors périmètre du port).
+    expect(products).toHaveLength(2);
+    expect(new Set(products.map((p) => p.id))).toEqual(
+      new Set([
+        `beurre-de-cacahuetes-sale_${MAIN_ID}`,
+        `beurre-de-cacahuetes_${MAIN_ID}`,
+      ]),
+    );
+    expect(warnSpy.mock.calls).toHaveLength(0);
+  });
+
+  it("dérive un id complet dans la borne serveur pour un nom long (60 caractères)", async () => {
+    // Nom à la borne client/serveur (60) : slug complet préservé, id
+    // = slug + «_» + eventId — ≤ 76, la max posée sur products.id.
+    const longName = "Suprêmes de volaille à la crème d'éstragon fraîche du marché"; // 60 chars
+    expect(longName).toHaveLength(60);
+    const recipesByUuid = new Map<string, RecipeForDisplay>([
+      [
+        "recA",
+        makeRecipe("recA", "Festin", [
+          makeIngredient({ ref: "ref-long", name: longName, normalizedQuantity: 100 }),
+        ]),
+      ],
+    ]);
+    (globalThis as any).__collisionFixtures = { recipesByUuid };
+
+    const products = await createEnrichedProductsFromEvent(
+      makeEvent(["recA"]),
+      async () => null,
+      MAIN_ID,
+    );
+
     expect(products).toHaveLength(1);
+    expect(products[0].id).toBe(
+      `supremes-de-volaille-a-la-creme-destragon-fraiche-du-marche_${MAIN_ID}`,
+    );
+    // borne products.id (migration 1791933669) : 60 + 1 + 15 = 76 — ici
+    // 59 + 1 + 16 (id de test) = 76 pile
+    expect(products[0].id.length).toBeLessThanOrEqual(76);
   });
 });

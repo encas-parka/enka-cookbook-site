@@ -345,11 +345,28 @@ export async function createEnrichedProductsFromEvent(
     await processMeal(meal, getRecipeDetailsFromCache, aggregations);
   }
 
-  const products: EnrichedProduct[] = [];
+  // ⚡ ÉTAPE 5 : Créer les produits et détecter les collisions d'id
+  // Collision possible quand deux refs d'ingrédients différents produisent le
+  // même nom slugifié → même id dérivé (slug 20 car. + suffixe event). Sans
+  // dédup, les deux besoins partagent la même clé primaire Dexie (productNeeds)
+  // et le bulkPut écrase silencieusement le premier par le second.
+  const productById = new Map<string, EnrichedProduct>();
 
   for (const [uuid, aggregation] of aggregations) {
-    products.push(createEnrichedProductFromAggregation(aggregation, mainId));
+    const product = createEnrichedProductFromAggregation(aggregation, mainId);
+
+    const existing = productById.get(product.id);
+    if (existing) {
+      mergeEnrichedProducts(existing, product);
+      console.warn(
+        `[productEnrichment] Collision id "${product.id}" fusionnée (refs: ${existing.ingredientRef} + ${product.ingredientRef})`,
+      );
+    } else {
+      productById.set(product.id, product);
+    }
   }
+
+  const products = [...productById.values()];
 
   console.log(`[productEnrichment] ${products.length} produits calculés`);
   return products;

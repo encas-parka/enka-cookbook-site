@@ -14,12 +14,12 @@
  *    Dexie, produit marqué isSynced (parité ère-Appwrite perdue à la migration)
  *  - createPurchase sur produit synchronisé : achat référençant l'id produit,
  *    sans création implicite
- *  - createPurchase sur produit VIRTUEL (ligne needs sans record serveur) :
- *    création implicite du produit (nouvel id serveur), achat référençant CE
- *    nouvel id (PB refuse les ids sémantiques hors `[a-z0-9]{15}`), ligne
- *    needs re-keyée pour que la fusion needs↔produits (égalité d'id dans
- *    #onDataChange) reste cohérente — une seule entrée, synchronisée, avec
- *    l'achat attaché
+ *  - createPurchase / createGroupPurchase sur produit VIRTUEL (ligne needs
+ *    sans record serveur) : matérialisation à SON id sémantique via la
+ *    primitive upsert (admissible depuis la relaxation products.id) — achat
+ *    référençant ce même id (relation valide dès la création), ligne needs
+ *    intacte, fusion needs↔produits (égalité d'id dans #onDataChange) sur
+ *    une seule entrée, synchronisée
  *  - recalcul des besoins : chaque ligne est clé sur l'id du produit
  *    synchronisé correspondant (match par ingredientRef, sinon productName) —
  *    les ids PB remappés à l'import ne cassent plus la fusion
@@ -196,7 +196,7 @@ describe("ProductsStore — création produit & achat (write paths)", () => {
     expect(products).toHaveLength(1);
   });
 
-  it("createPurchase sur produit virtuel → produit implicite créé, achat sur son id serveur, needs re-keyés", async () => {
+  it("createPurchase sur produit virtuel → matérialisé à l'id sémantique (pas de re-key), achat dessus", async () => {
     await seedProductNeeds([VIRTUAL_NEED]);
 
     await productsStore.initialize(TEST_EVENT_ID);
@@ -212,33 +212,76 @@ describe("ProductsStore — création produit & achat (write paths)", () => {
     });
     await waitForTick(5);
 
-    // Le produit implicite existe côté serveur, marqué synchronisé
+    // Le produit implicite existe côté serveur sous SON id sémantique,
+    // marqué synchronisé
     const products = await pb.collection("products").getFullList();
     expect(products).toHaveLength(1);
     const implicit = products[0];
+    expect(implicit.id).toBe(VIRTUAL_ID);
     expect(implicit.productName).toBe("Cannelle");
     expect(implicit.eventId).toBe(TEST_EVENT_ID);
     expect(implicit.isSynced).toBe(true);
     expect(implicit.ingredientRef).toBe("cannelle");
 
-    // L'achat référence le NOUVEL id serveur (l'id virtuel n'existe pas côté PB)
+    // L'achat référence ce même id → relation products valide dès la création
     const purchases = await pb.collection("purchases").getFullList();
     expect(purchases).toHaveLength(1);
-    expect(purchases[0].products).toEqual([implicit.id]);
+    expect(purchases[0].products).toEqual([VIRTUAL_ID]);
 
-    // La ligne needs est re-keyée : fusion needs↔produits par égalité d'id
-    expect(await db.productNeeds.get(VIRTUAL_ID)).toBeUndefined();
-    const rekeyed = await db.productNeeds.get(implicit.id as string);
-    expect(rekeyed).toBeDefined();
-    expect(JSON.parse(rekeyed!.totalNeededArray)).toEqual([{ q: 2, u: "l" }]);
+    // La ligne needs reste à la même adresse (pas de re-key)
+    const needRow = await db.productNeeds.get(VIRTUAL_ID);
+    expect(needRow).toBeDefined();
+    expect(JSON.parse(needRow!.totalNeededArray)).toEqual([{ q: 2, u: "l" }]);
 
-    // Vue enrichie : l'entrée virtuelle a disparu, l'entrée fusionnée porte
-    // l'achat et le besoin
-    expect(productsStore.getEnrichedProductById(VIRTUAL_ID)).toBeNull();
-    const merged = productsStore.getEnrichedProductById(implicit.id as string);
+    // Vue enrichie : la MÊME entrée, fusionnée (achat + besoin), synchronisée
+    const merged = productsStore.getEnrichedProductById(VIRTUAL_ID);
     expect(merged).not.toBeNull();
     expect(merged!.isSynced).toBe(true);
     expect(merged!.purchases).toHaveLength(1);
+  });
+
+  it("createGroupPurchase sur produit virtuel → matérialisé à l'id sémantique, relation purchases valide", async () => {
+    await seedProductNeeds([VIRTUAL_NEED]);
+
+    await productsStore.initialize(TEST_EVENT_ID);
+    await waitForTick(5);
+
+    const result = await productsStore.createGroupPurchase(
+      [
+        {
+          productId: VIRTUAL_ID,
+          isSynced: false,
+          missingQuantities: [{ q: 250, u: "gr." }],
+        },
+      ],
+      { invoiceId: "INV_GROUP_1" },
+    );
+    await waitForTick(5);
+
+    expect(result.success).toBe(true);
+    expect(result.totalProductsCreated).toBe(1);
+    expect(result.totalPurchasesCreated).toBe(1);
+
+    // Le produit est matérialisé sous son id sémantique
+    const products = await pb.collection("products").getFullList();
+    expect(products).toHaveLength(1);
+    expect(products[0].id).toBe(VIRTUAL_ID);
+    expect(products[0].productName).toBe("Cannelle");
+    expect(products[0].isSynced).toBe(true);
+
+    // L'achat du lot référence ce même id → relation products valide
+    const purchases = await pb.collection("purchases").getFullList();
+    expect(purchases).toHaveLength(1);
+    expect(purchases[0].products).toEqual([VIRTUAL_ID]);
+    expect(purchases[0].quantity).toBe(250);
+    expect(purchases[0].invoiceId).toBe("INV_GROUP_1");
+
+    // Vue enrichie fusionnée : besoin + produit matérialisé sur la même
+    // entrée. (Les achats du lot passent par le batch PB brut : leur miroir
+    // Dexie arrive par realtime SSE, non émulé par le transport factice.)
+    const merged = productsStore.getEnrichedProductById(VIRTUAL_ID);
+    expect(merged).not.toBeNull();
+    expect(merged!.isSynced).toBe(true);
   });
 
   it("recalcul des besoins : les lignes sont clées sur le produit synchronisé correspondant (match par nom)", async () => {

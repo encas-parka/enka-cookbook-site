@@ -99,9 +99,9 @@ export class ProductModalState implements ProductModalStateType {
     whoList: string[];
   } | null>(null);
 
-  // Id du produit édité — $state pour suivre le re-key (matérialisation d'un
-  // produit virtuel : id sémantique → id serveur) sans perdre la session modal.
-  private productId = $state<string>("");
+  // Id du produit édité — constant sur la vie du modal (une instance par
+  // produit, cf. ProductModal) : plus de re-key, l'id ne change jamais.
+  private productId: string;
 
   constructor(
     productId: string,
@@ -112,17 +112,6 @@ export class ProductModalState implements ProductModalStateType {
 
     // Initialisation immédiate
     this.initForms();
-  }
-
-  /**
-   * Après un write : si le store a matérialisé le produit (re-key id virtuel
-   * → id serveur), ré-ancrer le modal sur le nouvel id pour que `product`
-   * reste résolu et que la session d'édition continue.
-   */
-  #trackProductId(resolvedId: string): void {
-    if (resolvedId && resolvedId !== this.productId) {
-      this.productId = resolvedId;
-    }
   }
 
   private initForms() {
@@ -249,7 +238,7 @@ export class ProductModalState implements ProductModalStateType {
       const normalizedUnit = normalized.unit;
 
       // Utiliser ProductsStore (guard interne local/Appwrite)
-      const resolvedId = await productsStore.createPurchase(
+      await productsStore.createPurchase(
         this.product!.id,
         [{ q: normalizedQuantity, u: normalizedUnit }],
         {
@@ -263,7 +252,6 @@ export class ProductModalState implements ProductModalStateType {
           invoiceId: undefined,
         },
       );
-      this.#trackProductId(resolvedId);
 
       // Reset form
       const firstMissingAfterAdd = this.product!.missingQuantityArray[0];
@@ -374,10 +362,9 @@ export class ProductModalState implements ProductModalStateType {
       };
 
       // Utiliser ProductsStore - updateProduct générique
-      const resolvedId = await productsStore.updateProduct(this.product!.id, {
+      await productsStore.updateProduct(this.product!.id, {
         stockReel: JSON.stringify(newEntry),
       });
-      this.#trackProductId(resolvedId);
 
       this.forms.stock.quantity = null;
       this.forms.stock.notes = "";
@@ -392,10 +379,9 @@ export class ProductModalState implements ProductModalStateType {
 
     await this.withLoading(async () => {
       // Utiliser ProductsStore - updateProduct générique
-      const resolvedId = await productsStore.updateProduct(this.product!.id, {
+      await productsStore.updateProduct(this.product!.id, {
         stockReel: null,
       });
-      this.#trackProductId(resolvedId);
     }, "Stock supprimé");
   }
 
@@ -404,10 +390,9 @@ export class ProductModalState implements ProductModalStateType {
 
     await this.withLoading(async () => {
       // Utiliser ProductsStore - updateProduct générique
-      const resolvedId = await productsStore.updateProduct(this.product!.id, {
+      await productsStore.updateProduct(this.product!.id, {
         who: newWhoList,
       });
-      this.#trackProductId(resolvedId);
     }, "Volontaires mis à jour");
   }
 
@@ -415,13 +400,13 @@ export class ProductModalState implements ProductModalStateType {
     if (!this.product) return;
 
     await this.withLoading(async () => {
-      // Conversion storeInfo -> store (json natif) gérée par updateProductBatch
-      const resolvedId = await productsStore.updateProductBatch(
+      // Conversion storeInfo (objet enrichi) → champ json natif `store`
+      // gérée par updateProductBatch (#toSchemaUpdates)
+      await productsStore.updateProductBatch(
         this.product!.id,
         { storeInfo },
         (id) => productsStore.getEnrichedProductById(id) ?? undefined,
       );
-      this.#trackProductId(resolvedId);
     }, "Magasin mis à jour");
   }
 
@@ -430,10 +415,9 @@ export class ProductModalState implements ProductModalStateType {
 
     await this.withLoading(async () => {
       // Utiliser ProductsStore - updateProduct générique
-      const resolvedId = await productsStore.updateProduct(this.product!.id, {
+      await productsStore.updateProduct(this.product!.id, {
         totalNeededOverride: JSON.stringify(overrideData),
       });
-      this.#trackProductId(resolvedId);
     }, "Override appliqué");
   }
 
@@ -447,10 +431,9 @@ export class ProductModalState implements ProductModalStateType {
 
     await this.withLoading(async () => {
       // Utiliser ProductsStore - updateProduct générique
-      const resolvedId = await productsStore.updateProduct(this.product!.id, {
+      await productsStore.updateProduct(this.product!.id, {
         totalNeededOverride: null,
       });
-      this.#trackProductId(resolvedId);
     }, "Override supprimé");
   }
 
@@ -488,12 +471,11 @@ export class ProductModalState implements ProductModalStateType {
 
       if (Object.keys(batchUpdates).length > 0) {
         // Utiliser ProductsStore (guard gère le mode)
-        const resolvedId = await productsStore.updateProductBatch(
+        await productsStore.updateProductBatch(
           this.product!.id,
           batchUpdates,
           (id) => productsStore.getEnrichedProductById(id) ?? undefined,
         );
-        this.#trackProductId(resolvedId);
 
         this.originalFormsSnapshot = {
           purchase: { ...this.forms.purchase },

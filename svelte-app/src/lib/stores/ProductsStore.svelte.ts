@@ -1248,25 +1248,14 @@ class ProductsStore {
   // ===========================================================================
 
   /**
-   * Retourne l'id serveur d'un produit, créé si nécessaire.
-   *
-   * Un produit virtuel (besoin calculé, id sémantique `${slug}_${eventShort}`)
-   * ne peut pas exister côté PB (ids `[a-z0-9]{15}`) : il est créé ici, marqué
-   * isSynced, et sa ligne needs est re-keyée sur l'id serveur pour que la
-   * fusion needs↔produits (égalité d'id dans #onDataChange) conserve une
-   * seule entrée. Utilisé par le chemin achat ET le chemin update (contrat
-   * offline-first d'avant migration : attach-or-create, pas un throw). Un id
-   * déjà miroité (ou inconnu — peut-être un record pas encore synchronisé)
-   * passe tel quel : dans le pire cas l'écriture échouera avec l'erreur du
-   * serveur.
+   * Charge utile PB complète d'un produit virtuel matérialisé. L'id n'y figure
+   * pas : chaque appelant porte le sien (upsert à id stable — voir
+   * #ensureSyncedProduct).
    */
-  async #ensureSyncedProduct(productId: string): Promise<string> {
-    if (await db.products.get(productId)) return productId;
-
-    const enriched = this.getEnrichedProductById(productId);
-    if (!enriched) return productId;
-
-    const created = await this.#productsCollection.create({
+  #virtualProductPayload(
+    enriched: EnrichedProduct,
+  ): Omit<Products, "id" | "created" | "updated"> {
+    return {
       ingredientRef: enriched.ingredientRef || null,
       productName: enriched.productName,
       productType: enriched.productType || "Autre",
@@ -1287,19 +1276,30 @@ class ProductsStore {
         pF: enriched.pF || false,
         pS: enriched.pS || false,
       }),
-    } as unknown as Omit<Products, "id" | "created" | "updated">);
-
-    await this.#rekeyNeedRow(productId, created.id);
-    return created.id;
+    } as unknown as Omit<Products, "id" | "created" | "updated">;
   }
 
-  /** Déplace la ligne needs d'un id sémantique vers l'id serveur du produit créé. */
-  async #rekeyNeedRow(oldId: string, newId: string): Promise<void> {
-    const row = await db.productNeeds.get(oldId);
-    if (!row) return;
-    await db.transaction("rw", db.productNeeds, async () => {
-      await db.productNeeds.delete(oldId);
-      await db.productNeeds.put({ ...row, id: newId });
+  /**
+   * Pousse au serveur un produit virtuel (besoin calculé, jamais écrit) en
+   * conservant SON id sémantique `${slug}_${eventShort}` — admissible depuis
+   * la relaxation products.id (min 11, `^[a-z0-9_-]+$`) : la primitive upsert
+   * crée la ligne verbatim (update si le serveur la connaît déjà, create
+   * sinon). Needs et produits portent donc le même id dès la première écriture
+   * et la fusion (#onDataChange, égalité d'id) ne voit jamais d'entrée
+   * disparaître — plus de re-key, plus de carte qui clignote. Un produit déjà
+   * miroité (ou inconnu — peut-être un record pas encore synchronisé) passe
+   * tel quel : dans le pire cas l'écriture de l'appelant échouera avec
+   * l'erreur du serveur.
+   */
+  async #ensureSyncedProduct(productId: string): Promise<void> {
+    if (await db.products.get(productId)) return;
+
+    const enriched = this.getEnrichedProductById(productId);
+    if (!enriched) return;
+
+    await this.#productsCollection.upsert({
+      id: productId,
+      ...this.#virtualProductPayload(enriched),
     });
   }
 
@@ -1324,13 +1324,14 @@ class ProductsStore {
     }
 
     // La validation rapide peut référencer un produit virtuel (besoin calculé,
-    // jamais poussé au serveur — id sémantique refusé par la relation PB) :
-    // créer le produit d'abord, acheter sur son id serveur.
-    const targetProductId = await this.#ensureSyncedProduct(productId);
+    // jamais poussé au serveur) : matérialiser d'abord à l'id sémantique —
+    // l'achat référence cet id, la relation purchases.products est valide dès
+    // la création.
+    await this.#ensureSyncedProduct(productId);
 
     for (const qty of quantities) {
       await this.#purchasesCollection.create({
-        products: [targetProductId],
+        products: [productId],
         eventId: this.#currentEventId!,
         quantity: qty.q,
         unit: qty.u,
@@ -1347,7 +1348,7 @@ class ProductsStore {
       } as unknown as Omit<Purchases, "id" | "created" | "updated">);
     }
 
-    return targetProductId;
+    return productId;
   }
 
   async updatePurchase(
@@ -1457,14 +1458,15 @@ class ProductsStore {
   }
 
   /**
-   * Update au contrat offline-first d'avant migration (attach-or-create) :
-   * la sync collection rattache seule un record présent côté serveur mais
-   * absent du cache ; un produit virtuel pur (besoin calculé, jamais poussé
-   * au serveur) est créé avant update via #ensureSyncedProduct, sa ligne
-   * needs re-keyée. Un id inconnu (ni cache, ni serveur, ni besoin) reste
-   * une erreur légitime.
+   * Update au contrat offline-first (attach-or-create) : la sync collection
+   * rattache seule un record présent côté serveur mais absent du cache ; un
+   * produit virtuel pur (besoin calculé, jamais poussé au serveur) est
+   * upserté à son id sémantique stable — la primitive crée si le serveur
+   * l'ignore, met à jour s'il le connaît. Un id inconnu (ni cache, ni
+   * serveur, ni besoin) reste une erreur légitime, aucune création
+   * silencieuse.
    *
-   * @returns L'id du record réellement mis à jour (id serveur si re-key).
+   * @returns L'id du record écrit (stable : le même que l'entrée).
    */
   async #updateWithUpsert(
     productId: string,
@@ -1476,10 +1478,15 @@ class ProductsStore {
       return productId;
     } catch (err) {
       if (!(err instanceof RecordNotFoundError)) throw err;
-      const targetId = await this.#ensureSyncedProduct(productId);
-      if (targetId === productId) throw err;
-      await this.#productsCollection.update(targetId, schemaUpdates);
-      return targetId;
+      const enriched = this.getEnrichedProductById(productId);
+      if (!enriched) throw err;
+      // Un seul write : matérialisation + patch dans la même charge utile
+      await this.#productsCollection.upsert({
+        id: productId,
+        ...this.#virtualProductPayload(enriched),
+        ...schemaUpdates,
+      } as Omit<Products, "id" | "created" | "updated"> & { id: string });
+      return productId;
     }
   }
 
@@ -1504,35 +1511,57 @@ class ProductsStore {
     updateType: "who" | "store",
     updateData: { names?: string[] } | StoreInfo,
   ): Promise<BatchUpdateResult> {
+    let updatedCount = 0;
     try {
       const batchSize = 50;
       for (let i = 0; i < productIds.length; i += batchSize) {
-        const batch = pb.createBatch();
         const chunk = productIds.slice(i, i + batchSize);
+        const batch = this.#productsCollection.createBatch();
 
         for (const productId of chunk) {
-          if (updateType === "who") {
-            const names = (updateData as { names?: string[] }).names || null;
-            batch.collection("products").update(productId, { who: names });
+          const patch: Partial<Products> =
+            updateType === "who"
+              ? { who: (updateData as { names?: string[] }).names || null }
+              : { store: JSON.stringify(updateData as StoreInfo) };
+
+          if (await db.products.get(productId)) {
+            // Déjà miroité : patch pur
+            batch.update(productId, patch);
           } else {
-            const storeInfo = updateData as StoreInfo;
-            batch.collection("products").update(productId, { store: JSON.stringify(storeInfo) });
+            const enriched = this.getEnrichedProductById(productId);
+            if (!enriched) {
+              // Id inconnu : garder l'échec explicite du serveur (update brut)
+              batch.update(productId, patch);
+            } else {
+              // Produit virtuel : matérialisation à l'id sémantique + patch
+              // dans la même opération — un update brut sur un record absent
+              // ferait échouer le lot entier côté serveur.
+              batch.upsert({
+                id: productId,
+                ...this.#virtualProductPayload(enriched),
+                ...patch,
+              } as Omit<Products, "id" | "created" | "updated"> & {
+                id: string;
+              });
+            }
           }
         }
 
-        await batch.send();
+        // Compteur sur les confirmations serveur, pas sur la sélection postulée
+        const { records } = await batch.send();
+        updatedCount += records.length;
       }
 
       return {
         success: true,
-        updatedCount: productIds.length,
+        updatedCount,
         updateType,
         timestamp: new Date().toISOString(),
       };
     } catch (err) {
       return {
         success: false,
-        updatedCount: productIds.length,
+        updatedCount,
         updateType,
         error: err instanceof Error ? err.message : "Erreur inconnue",
         timestamp: new Date().toISOString(),
@@ -1586,22 +1615,10 @@ class ProductsStore {
 
       for (const p of productsData) {
         if (!p.isSynced) {
-          // Product not yet created in PB — create it first
-          const enriched = this.getEnrichedProductById(p.productId);
-          if (enriched) {
-            await this.#productsCollection.create({
-              ingredientRef: enriched.ingredientRef,
-              productName: enriched.productName,
-              productType: enriched.productType || "",
-              store: enriched.store as string | null,
-              who: enriched.who || [],
-              eventId,
-              status: "active",
-              stockReel: enriched.stockReel,
-              isMerged: enriched.isMerged || false,
-              specs: enriched.specs || null,
-            } as unknown as Omit<Products, "id" | "created" | "updated">);
-          }
+          // Même matérialisation que le chemin achat (#ensureSyncedProduct) :
+          // upsert à l'id sémantique, les achats créés ci-dessous référencent
+          // cet id → relation products valide dès la création.
+          await this.#ensureSyncedProduct(p.productId);
         }
         for (const qty of p.missingQuantities) {
           allOperations.push({ productId: p.productId, qty });
@@ -1665,13 +1682,6 @@ class ProductsStore {
         error: err instanceof Error ? err.message : "Erreur inconnue",
       };
     }
-  }
-
-  addProductOptimistic(product: Products) {
-    // Write to Dexie directly - liveQuery will pick it up
-    db.products.put(product).catch((err) =>
-      console.error("[ProductsStore] Optimistic write failed:", err),
-    );
   }
 
   // ===========================================================================

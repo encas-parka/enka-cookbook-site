@@ -3,19 +3,28 @@
  */
 
 /**
- * ProductsStore — chemins d'update produit (contrat offline-first attach-or-create).
+ * ProductsStore — chemins d'écriture produit au contrat d'identité stable.
  *
  * Seam : vrai store + vrai pb-sync + transport PB factice (sans réseau),
  * fake-indexeddb pour le vrai Dexie. Même machinerie que
  * products-store-create.test.ts.
  *
- * Couvre (ticket 02 — évidence click-through « Record not found in Dexie ») :
+ * Contrat : le premier enregistrement d'un produit garde SON id sémantique
+ * (`${slug}_${eventShort}`, admissible depuis la relaxation products.id) —
+ * la primitive upsert (pb-collection) crée si le serveur ignore l'id, met à
+ * jour sinon. Needs et produits portent le même id dès la création : la
+ * fusion (#onDataChange, égalité d'id) ne voit jamais d'entrée disparaître,
+ * plus de re-key ni de carte qui clignote.
+ *
+ * Couvre :
  *  - updateProductBatch sur produit VIRTUEL PUR (ligne needs, jamais poussé
- *    au serveur) : création avant update (#ensureSyncedProduct, id serveur
- *    généré — PB refuse les ids sémantiques), ligne needs re-keyée, updates
- *    appliqués sur le nouveau record, re-rendu enrichi synchronisé
+ *    au serveur) : upsert à l'id sémantique, updates appliqués dessus,
+ *    ligne needs intacte, re-rendu enrichi synchronisé
  *  - conversion storeInfo (objet enrichi) → champ json natif `store` —
  *    parité ère-Appwrite (upsertProductBatch la faisait ; perdue à la migration)
+ *  - batchUpdateProducts sur sélection mixte (synchronisé + virtuel) :
+ *    patch pur côté miroité, upsert côté virtuel, compteur sur les
+ *    confirmations serveur (plus la taille de la sélection)
  *  - update sur record absent du cache local mais présent côté serveur :
  *    attach par la sync collection (miroir Dexie puis update optimiste),
  *    sans doublon serveur
@@ -81,7 +90,7 @@ const VIRTUAL_NEED = makeNeedRow({
   productType: "épices",
 });
 
-describe("ProductsStore — update produit (contrat offline-first attach-or-create)", () => {
+describe("ProductsStore — update produit (contrat identité stable, upsert même id)", () => {
   beforeEach(async () => {
     const fakePb = currentFakePb();
     fakePb.reset();
@@ -93,7 +102,7 @@ describe("ProductsStore — update produit (contrat offline-first attach-or-crea
     );
   });
 
-  it("updateProductBatch sur produit virtuel pur → créé avant update, needs re-keyés, json natif rendu", async () => {
+  it("updateProductBatch sur produit virtuel pur → upsert à l'id sémantique (pas de re-key), json natif rendu", async () => {
     await seedProductNeeds([VIRTUAL_NEED]);
 
     await productsStore.initialize(TEST_EVENT_ID);
@@ -109,33 +118,64 @@ describe("ProductsStore — update produit (contrat offline-first attach-or-crea
     });
     await waitForTick(5);
 
-    // Le produit existe désormais côté serveur (id PB généré — les ids
-    // sémantiques sont refusés), avec les updates appliqués dessus
+    // Le produit existe côté serveur sous SON id sémantique, updates appliqués
     const products = await pb.collection("products").getFullList();
     expect(products).toHaveLength(1);
-    const implicit = products[0];
-    expect(implicit.productName).toBe("Cannelle");
-    expect(implicit.eventId).toBe(TEST_EVENT_ID);
-    expect(implicit.isSynced).toBe(true);
-    expect(implicit.store).toEqual({ storeName: "Épicerie du coin" });
-    expect(implicit.who).toEqual(["Geo"]);
+    const materialized = products[0];
+    expect(materialized.id).toBe(VIRTUAL_ID);
+    expect(materialized.productName).toBe("Cannelle");
+    expect(materialized.eventId).toBe(TEST_EVENT_ID);
+    expect(materialized.isSynced).toBe(true);
+    expect(materialized.store).toEqual({ storeName: "Épicerie du coin" });
+    expect(materialized.who).toEqual(["Geo"]);
 
-    // L'id résolu retourné au caller est l'id serveur
-    expect(resolvedId).toBe(implicit.id);
+    // L'id résolu retourné au caller est l'entrée elle-même (identité stable)
+    expect(resolvedId).toBe(VIRTUAL_ID);
 
-    // Le miroir Dexie et la ligne needs sont cohérents (re-key)
-    expect(await db.products.get(implicit.id as string)).toBeDefined();
-    expect(await db.productNeeds.get(VIRTUAL_ID)).toBeUndefined();
-    expect(await db.productNeeds.get(implicit.id as string)).toBeDefined();
+    // Miroir Dexie et ligne needs restent à la même adresse (pas de re-key)
+    expect(await db.products.get(VIRTUAL_ID)).toBeDefined();
+    expect(await db.productNeeds.get(VIRTUAL_ID)).toBeDefined();
 
-    // Re-rendu enrichi : l'entrée virtuelle a disparu, l'entrée synchronisée
-    // porte les updates (json natif parsé)
-    expect(productsStore.getEnrichedProductById(VIRTUAL_ID)).toBeNull();
-    const merged = productsStore.getEnrichedProductById(implicit.id as string);
+    // Re-rendu enrichi : la MÊME entrée, désormais synchronisée, porte les
+    // updates (json natif parsé) — aucune carte qui disparaît/réapparaît
+    const merged = productsStore.getEnrichedProductById(VIRTUAL_ID);
     expect(merged).not.toBeNull();
     expect(merged!.isSynced).toBe(true);
     expect(merged!.storeInfo?.storeName).toBe("Épicerie du coin");
     expect(merged!.who).toEqual(["Geo"]);
+  });
+
+  it("batchUpdateProducts sur sélection mixte (synchronisé + virtuel) → upsert de lot, compteur réel", async () => {
+    currentFakePb().seed("products", [makeProductRecord()]);
+    await seedProductNeeds([VIRTUAL_NEED]);
+
+    await productsStore.initialize(TEST_EVENT_ID);
+    await waitForTick(5);
+
+    const result = await productsStore.batchUpdateProducts(
+      [TEST_PRODUCT_ID, VIRTUAL_ID],
+      [],
+      "who",
+      { names: ["Geo"] },
+    );
+    await waitForTick(5);
+
+    expect(result.success).toBe(true);
+    // Le compteur reflète les confirmations serveur (2 records), pas la
+    // taille de la sélection postulée
+    expect(result.updatedCount).toBe(2);
+
+    const products = await pb.collection("products").getFullList();
+    expect(products).toHaveLength(2);
+    const byId = new Map(products.map((p) => [p.id as string, p]));
+    // Le synchronisé est patché sans matérialisation parasite
+    expect(byId.get(TEST_PRODUCT_ID)?.who).toEqual(["Geo"]);
+    // Le virtuel est matérialisé à son id sémantique, patch inclus
+    const virtual = byId.get(VIRTUAL_ID);
+    expect(virtual?.productName).toBe("Cannelle");
+    expect(virtual?.eventId).toBe(TEST_EVENT_ID);
+    expect(virtual?.isSynced).toBe(true);
+    expect(virtual?.who).toEqual(["Geo"]);
   });
 
   it("updateProductBatch convertit storeInfo → champ json natif store (produit synchronisé)", async () => {

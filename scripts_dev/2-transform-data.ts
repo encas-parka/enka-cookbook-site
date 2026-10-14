@@ -625,8 +625,74 @@ function main() {
       _appwriteId: appwriteId,
     });
   }
-  saveImport("products", pbProducts);
-  console.log(`   ✅ ${pbProducts.length} products transformed${prodSkipped ? `, ${prodSkipped} skipped (missing eventId)` : ""}`);
+  // --- Dedup (eventId, productName) ---------------------------------------
+  // The unique index on (eventId, productName) rejects duplicates at import,
+  // and the export carries historical double creations (manual re-creates,
+  // same user, minutes apart). Collapse each duplicate group to ONE survivor
+  // row and repoint every dropped row's migration-map entry at it, so purchase
+  // relations resolve to the survivor during import — purchases are kept
+  // one-for-one, nothing is lost, only the name-bearer row is.
+  // Survivor: the row carrying the recipe-linked ingredientRef when exactly
+  // one does (the recipe need points at it; a manual twin is pure redundancy
+  // and its purchases remap); otherwise the row attached to the most
+  // non-deleted purchases; ties go to the oldest row, then the lowest
+  // Appwrite id for determinism.
+  const livePurchasesByProduct = new Map<string, number>();
+  for (const awPurch of purchasesExport.rows) {
+    if (awPurch.deleted) continue;
+    for (const pid of awPurch.products || []) {
+      livePurchasesByProduct.set(pid, (livePurchasesByProduct.get(pid) ?? 0) + 1);
+    }
+  }
+
+  const eventNameByRefId = new Map(Object.values(eventMap).map((e) => [e.refId, e.name]));
+  const dedupGroups = new Map<string, any[]>();
+  for (const p of pbProducts) {
+    if (!p.productName) continue;
+    const key = `${p.eventId}||${p.productName}`;
+    const group = dedupGroups.get(key);
+    if (group) group.push(p);
+    else dedupGroups.set(key, [p]);
+  }
+
+  const dedupedProducts: any[] = [];
+  let dedupDropped = 0;
+  let dedupRemappedPurchases = 0;
+  for (const group of dedupGroups.values()) {
+    if (group.length === 1) {
+      dedupedProducts.push(group[0]);
+      continue;
+    }
+    const withRef = group.filter((p) => p.ingredientRef);
+    const survivor =
+      withRef.length === 1
+        ? withRef[0]
+        : [...group].sort(
+            (a, b) =>
+              (livePurchasesByProduct.get(b._appwriteId) ?? 0) - (livePurchasesByProduct.get(a._appwriteId) ?? 0) ||
+              String(a.created ?? "").localeCompare(String(b.created ?? "")) ||
+              String(a._appwriteId).localeCompare(String(b._appwriteId)),
+          )[0];
+    dedupedProducts.push(survivor);
+    const evName = eventNameByRefId.get(survivor.eventId) ?? survivor.eventId;
+    for (const loser of group) {
+      if (loser === survivor) continue;
+      dedupDropped++;
+      const loserPurchases = livePurchasesByProduct.get(loser._appwriteId) ?? 0;
+      dedupRemappedPurchases += loserPurchases;
+      migrationMap.products[loser._appwriteId] = migrationMap.products[survivor._appwriteId];
+      warn(
+        `Product "${survivor.productName}" (event "${evName}"): duplicate (event, name) — ${loser._appwriteId} dropped, ${survivor._appwriteId} survives (${loserPurchases} purchase(s) remapped)`,
+        "products.dedup",
+      );
+    }
+  }
+
+  saveImport("products", dedupedProducts);
+  console.log(
+    `   ✅ ${dedupedProducts.length} products transformed${prodSkipped ? `, ${prodSkipped} skipped (missing eventId)` : ""}` +
+      `${dedupDropped ? `, ${dedupDropped} duplicates (event, name) dropped (${dedupRemappedPurchases} purchase(s) remapped)` : ""}`,
+  );
   console.log(`   📊 updatedBy resolved: ${updatedByResolved}/${updatedByTotal} non-empty\n`);
 
   const productMap = migrationMap.products;
@@ -1017,13 +1083,18 @@ function main() {
       reason: "teams referenced by events/teamdocs but absent from the export — recreated as empty-shell teams",
     });
   }
-  if (prodSkipped > 0) {
+  // Single verdict per (type, collection) key: the products gap folds the
+  // dedup drop into the orphan skip — the reason carries the exact split.
+  const productGapParts: string[] = [];
+  if (prodSkipped > 0) productGapParts.push(`${prodSkipped} orphans skipped`);
+  if (dedupDropped > 0) productGapParts.push(`${dedupDropped} duplicate (event, name) rows dropped, purchases remapped to survivors`);
+  if (productGapParts.length > 0) {
     verdicts.push({
       type: "count-delta",
       collection: "products",
-      delta: -prodSkipped,
-      category: VERDICT_CATEGORY.orphanSourceRecord,
-      reason: "products whose mainId references an event absent from the export — skipped (orphan tracker)",
+      delta: -(prodSkipped + dedupDropped),
+      category: dedupDropped > 0 ? VERDICT_CATEGORY.duplicateProductName : VERDICT_CATEGORY.orphanSourceRecord,
+      reason: `products: ${productGapParts.join(" + ")}`,
     });
   }
   if (purchSkipped > 0) {

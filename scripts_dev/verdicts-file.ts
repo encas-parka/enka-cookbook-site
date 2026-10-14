@@ -92,6 +92,7 @@ export const VERDICT_CATEGORY = {
   orphanSourceRecord: "orphan-source-record",
   orphanTeamRecreated: "orphan-team-recreated",
   duplicateIngredientUuid: "duplicate-ingredient-uuid",
+  duplicateProductName: "duplicate-product-name",
   recipeParseError: "recipe-parse-error",
   testRecipe: "test-recipe",
   renamedSlug: "renamed-slug",

@@ -1489,7 +1489,7 @@ class ProductsStore {
 
   /**
    * Pousse au serveur un produit virtuel (besoin calculé, jamais écrit) en
-   * conservant SON id sémantique `${slug}_${eventShort}` — admissible depuis
+   * conservant SON id sémantique `${slug}_${mainId}` — admissible depuis
    * la relaxation products.id (min 11, `^[a-z0-9_-]+$`) : la primitive upsert
    * crée la ligne verbatim (update si le serveur la connaît déjà, create
    * sinon). Needs et produits portent donc le même id dès la première écriture

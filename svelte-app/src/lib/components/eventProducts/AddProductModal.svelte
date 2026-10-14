@@ -11,7 +11,7 @@
   } from "@lucide/svelte";
   import {
     productsStore,
-    DuplicateProductNameError,
+    resolveProductWriteError,
   } from "$lib/stores/ProductsStore.svelte";
   import { toastService } from "$lib/services/toast.service.svelte";
   import {
@@ -116,7 +116,7 @@
         ? JSON.stringify({ storeName: formData.store.trim() })
         : undefined;
 
-      const productId = await productsStore.createProduct({
+      await productsStore.createProduct({
         productName,
         productType: getProductTypeRawKey(formData.productType.trim()),
         store: storeValue,
@@ -156,9 +156,8 @@
       // Conflit d'unicité (event, nom) : message métier explicite, pas
       // l'erreur brute du serveur.
       error =
-        err instanceof DuplicateProductNameError
-          ? err.message
-          : "Erreur lors de la création du produit. Veuillez réessayer.";
+        resolveProductWriteError(err) ??
+        "Erreur lors de la création du produit. Veuillez réessayer.";
       toastService.error(error);
     } finally {
       loading = false;

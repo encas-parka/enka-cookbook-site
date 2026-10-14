@@ -81,7 +81,7 @@ function makeEvent(recipeUuids: string[]): EnrichedEvent {
     id: MAIN_ID,
     created: "2026-01-01 00:00:00.000Z",
     updated: "2026-01-01 00:00:00.000Z",
-    name: "T12 collision event",
+    name: "collision event",
     meals: [
       {
         date: DATE,

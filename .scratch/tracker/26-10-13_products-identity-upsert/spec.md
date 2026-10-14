@@ -31,7 +31,7 @@ Rendre l'id produit stable du calcul du besoin jusqu'à la base : le premier enr
 
 - Seule couture de test et d'interface : la couche de synchronisation (module de collection synchronisée). L'upsert y vit comme complément de l'opération d'attachement existante : l'attachement couvre « présent serveur / absent du cache », l'upsert couvre « absent des deux ». Les stores deviennent des appelants minces. Aucune nouvelle couture ailleurs.
 - L'id sémantique (slug du nom + suffixe d'événement) devient l'id définitif du produit : la création avec id client fourni est le chemin nominal, le re-key et le suivi d'id côté modal sont supprimés.
-- Contraintes d'id produit : longueur max large, longueur min abaissée au niveau déjà posé via console, motif autorisant lettres minuscules, chiffres, tiret et tiret-bas (parité avec les collections déjà relaxées). Les quatre migrations auto-générées correspondantes sont versionnées ensemble.
+- Contraintes d'id produit : longueur max large, longueur min abaissée au niveau déjà posé via console, motif autorisant lettres minuscules, chiffres, tiret et tiret-bas (parité avec les collections déjà relaxées). Les quatre migrations auto-générées correspondantes sont versionnées ensemble. *(Amend en cours de run — périmètre final : 4 migrations console du ticket 01 + migrations manuelles des tickets 01, 07 (bornes 60/76, index unique) et 08 ; état exact dans les migrations versionnées et le run report.)*
 - Le nom de produit devient requis côté base (alignement avec le schéma source ; zéro ligne vide mesurée des deux côtés, donc sans backfill), en coordination avec l'index unique envisagé.
 - La quantité à la création redevient un besoin stocké dans les caractéristiques, normalisée en unité, sans création d'achat associée ; le modal porte un en-tête « hors recettes ».
 - La modification groupée passe par l'upsert de lot natif (mise à jour si l'id existe, création sinon) et compte les résultats réels.
@@ -52,7 +52,7 @@ Rendre l'id produit stable du calcul du besoin jusqu'à la base : le premier enr
 - Factures groupées et leur modale de détail, détail recette par carte et tiroir associé, recherche dans les titres de recettes, synchronisation des filtres avec l'URL, exports enrichis, pastille de livraison des achats commandés : arbitrages produit ultérieurs, inventoriés dans l'investigation de backport.
 - Notifications temps réel inter-utilisateurs et robustesse du service worker : déjà actés au backlog général, hors priorité de ce lot.
 - Retry réseau générique de la couche de synchronisation : décision séparée, indépendante de l'upsert.
-- Index unique par (événement, nom) et message de doublon serveur : durcissement coordonné après la fusion, pas dans ce lot.
+- Index unique par (événement, nom) et message de doublon serveur : initialement hors lot (durcissement post-fusion), **incorporé au run en cours de route** — tickets 07 (contrainte + retour doublon, arbitré par le maintainer avec les bornes 60/76 et le générateur sans slice) et 08 (assainissement des données par dédup pipeline, prérequis de la pose).
 - Suppression des colonnes de fusion héritées et mortes : nettoyage ultérieur, hors périmètre.
 
 ## Further Notes

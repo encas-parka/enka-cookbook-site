@@ -4,7 +4,7 @@
 
 **Blocked by:** 01 (contraintes), 04 (identité stable, coordination index unique).
 
-**Status:** ready-for-agent
+**Status:** done (13-10 + fix 14-10 — implementer ticket 05, commits 3a93835c + 013486d6 + bd9c1251 + fix c515e978/3a30a6a5)
 
 - [x] Fusion / annulation / recherche de cible au niveau du store (validations : pas d'auto-fusion, pas de chaînage)
 - [x] Dérivation client : remappage des achats vers la cible, agrégation, masquage des sources, reconstruction forcée des cibles

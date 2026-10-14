@@ -488,8 +488,9 @@ function invalidRelationError(field: string, verb: string): FakeRequestError {
  * Valide les index uniques déclarés pour la collection (defineUniqueIndexes) :
  * un tuple déjà porté par un AUTRE record est rejeté — sémantique SQLite
  * (NULL jamais en collision, "" collationne), self exclu sur update. L'erreur
- * est rapportée sur la dernière colonne du groupe, comme le serveur pour un
- * index composite.
+ * est rapportée sur TOUTES les colonnes du groupe (shape mesuré 13-10 sur
+ * instance réelle : un conflit (eventId, productName) porte
+ * `validation_not_unique` sur eventId ET productName).
  */
 function validateWriteUniques(
   uniques: Map<string, string[][]>,
@@ -512,24 +513,27 @@ function validateWriteUniques(
       const other = tupleOf(r, cols);
       return !hasNull(other) && other.every((v, i) => v === tuple[i]);
     });
-    if (clash) throw notUniqueError(cols[cols.length - 1], verb);
+    if (clash) throw notUniqueError(cols, verb);
   }
 }
 
-/** PB unique index validation (measured shape: field-scoped
- * `validation_not_unique`, what the client maps to a friendly message). */
-function notUniqueError(field: string, verb: string): FakeRequestError {
+/**
+ * PB unique index validation — a write duplicating a tuple held by another
+ * record is rejected with 400 carrying `validation_not_unique` on EVERY
+ * column of the group (measured wire shape, probe-t07 verdict C). The client
+ * maps any non-`id` field error to its DuplicateProductNameError.
+ */
+function notUniqueError(fields: string[], verb: string): FakeRequestError {
   const err = new Error(`Failed to ${verb} record.`) as FakeRequestError;
+  const data: Record<string, { code: string; message: string }> = {};
+  for (const field of fields) {
+    data[field] = { code: "validation_not_unique", message: "Value must be unique." };
+  }
   err.status = 400;
   err.response = {
     code: 400,
     message: `Failed to ${verb} record.`,
-    data: {
-      [field]: {
-        code: "validation_not_unique",
-        message: "Value must be unique.",
-      },
-    },
+    data,
   };
   return err;
 }

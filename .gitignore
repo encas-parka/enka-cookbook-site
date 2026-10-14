@@ -21,13 +21,11 @@ docs/local/
 .vscode
 *.code-workspace
 svelte-app/.vite
-*.claude
 *.opencode
 opencode.json
 *.agents
 .zed
 AGENTS.md
-agent
 *skills-lock.json
 .serena
 
@@ -47,3 +45,4 @@ scripts_dev/appwrite-export/
 scripts_dev/pb-import/
 scripts_dev/migration-map*.json
 scripts_dev/runs/
+opencode.json.openchamber.backup

@@ -31,15 +31,25 @@ Compilée depuis les notes gate des tickets + review spec — dans l'ordre :
 5. **§4** — création produit via modal ; validation rapide d'achat sur produit
    inexistant (produit implicite) ; édition store/specs, y compris sur produit
    non synchronisé — plus de « Record not found in Dexie » (T01/T02).
+  - creation d'un produit via modal: le produit est créer, mais la quantité indiqué est ajouté comme purchases plutot que besoins. Je ne crois pas que ce soit le comportement initial de l'app appwrite.
+  - Les modifications produit batch echoue : `[StoreEditModal] Mise à jour groupée: échec, 1 produits modifiés StoreBatchEditModal.svelte:138:14
+  [StoreEditModal] Erreur mise à jour: Error: Batch transaction failed.
+      updateResult http://localhost:5173/src/lib/components/eventProducts/StoreBatchEditModal.svelte:142`
+  - l'ajout d'achat rapide ok, ainsi que la modification des produits individuel (who, where), mais il y a une apparition / disparition d'une nouvelle card product lors de ces modification dans la page event/id/product si le product n'existait pas initialement.
+  - pour les ajour d'achat depuis le modal PurchaseManager: si le product n'existait pas en base initialement, lors de l'ajout de l'achat, le modal devient vide: "chargement".
+  → La façon dont a été géré l'implementation d'upsert a des side-effect problématique en terme d'ui....
 6. **§6** — loan lié à un event : création/modification sans 400 ni faux conflit,
    event_materiel reflété sans refresh, échec éventuel confiné au modal (T03).
+ - net progres, mais toujours un toast warn indiquant des indiposnibilité factice lors de la creation du loan...
 7. **§7** — création doc event par le créateur ; tag-doc visible par le
    participant (Ctrl-R inclus) ; 2 navigateurs sur `editdocument/<id>` : les
    saves de userA apparaissent chez userB (si userB est dirty, ils arrivent après
    son save/reload — trade-off documenté au ticket 05) (T04/T05).
+  - net progres: mais si userA et userB sont tous les deux sur le document, que userA rentre en mode edition, modifie, puis save, userB ne vois pas les modifications en realtime du document, peut rentré en mode edition avec sa version stale, et ecrasé les modification de userA.
 8. **§9** — PB dev coupé ~3 s → alerte visible distincte du badge « Hors-ligne »
    internet (reload-avec-session d'abord, chemin dominant) ; relance → connected
    + resync silencieux ; cacher/rouvrir l'onglet → resync sans flash (T09).
+- semble ok, mais plus de log lors du retour de visibilité, donc difficile de dire si le resync est effectué.
 9. **§5** — visiteur sur `/recipe` : brouillons absents ; user logué : inchangé ;
    accès direct URL d'un draft : toujours ok (T11).
 

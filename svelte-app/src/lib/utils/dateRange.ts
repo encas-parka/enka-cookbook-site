@@ -15,6 +15,7 @@ import {
   formatTotalQuantity as formatTotalQuantityFromFormatter,
   subtractQuantities,
 } from "./QuantityFormatter";
+import { getEffectiveNeededQuantities } from "./productsUtils";
 
 export interface DateRange {
   start: string | null;
@@ -169,10 +170,12 @@ export function calculateProductStatsForDateRange(
 
   // Cas produit manuel : utiliser directement totalNeededArray ou override
   if (isManualProduct && !hasByDateEntries) {
-    // Récupérer la quantité requise depuis override ou totalNeededArray
-    const requiredQuantities = product.totalNeededOverrideParsed
-      ? [product.totalNeededOverrideParsed.totalOverride]
-      : product.totalNeededArray || [];
+    // Besoin effectif : override normalisé (legacy-safe) ou totalNeededArray.
+    // Passe par le point de vérité unique pour garantir la normalisation.
+    const requiredQuantities = getEffectiveNeededQuantities(
+      product,
+      product.totalNeededArray || [],
+    );
 
     const requiredQuantitiesFormatted =
       requiredQuantities.length > 0
@@ -263,11 +266,13 @@ export function calculateProductStatsForDateRange(
       ? formatTotalQuantityFromFormatter(requiredQuantities)
       : "-";
 
-  // 🎯 Priorité : Override manuel > Calcul auto (byDate)
-  // Si un override existe, l'utiliser pour calculer le stock manquant
-  const quantitiesForStockCalc = product.totalNeededOverrideParsed
-    ? [product.totalNeededOverrideParsed.totalOverride]
-    : requiredQuantities;
+  // 🎯 Priorité : Override manuel normalisé > Calcul auto (byDate)
+  // Passe par le point de vérité unique : l'override est normalisé (legacy-safe)
+  // pour rester cohérent avec les achats (eux-mêmes normalisés).
+  const quantitiesForStockCalc = getEffectiveNeededQuantities(
+    product,
+    requiredQuantities,
+  );
 
   // Calcul du stock pour CETTE plage
   const stockResult = calculateStockBalanceForDateRange(

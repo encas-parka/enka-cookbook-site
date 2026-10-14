@@ -26,6 +26,8 @@ import {
   calculateAndFormatMissing,
   safeJsonParse,
   slugify,
+  getEffectiveNeededQuantities,
+  getNormalizedOverride,
 } from "./productsUtils";
 import {
   formatTotalQuantity,
@@ -98,9 +100,16 @@ export function buildRawProductBase(
     product.totalNeededOverride,
   );
 
-  const effectiveNeededArray = totalNeededOverrideParsed
-    ? [totalNeededOverrideParsed.totalOverride]
-    : totalNeededArray;
+  // Besoin effectif : override normalisé s'il existe, sinon totalNeededArray.
+  // Passe par le point de vérité unique (productsUtils) pour garantir la
+  // normalisation de l'override (cohérence avec les achats normalisés).
+  const effectiveNeededArray = getEffectiveNeededQuantities(
+    { totalNeededOverrideParsed },
+    totalNeededArray,
+  );
+  const normalizedOverride = getNormalizedOverride({
+    totalNeededOverrideParsed,
+  });
 
   const { numeric: missingQuantityArray, display: displayMissingQuantity } =
     calculateAndFormatMissing(effectiveNeededArray, totalPurchasesArray);
@@ -164,8 +173,8 @@ export function buildRawProductBase(
     displayTotalNeeded: formatTotalQuantity(totalNeededArray),
     displayMissingQuantity,
     totalNeededOverrideParsed,
-    displayTotalOverride: totalNeededOverrideParsed
-      ? formatTotalQuantity([totalNeededOverrideParsed.totalOverride])
+    displayTotalOverride: normalizedOverride
+      ? formatTotalQuantity([normalizedOverride])
       : "",
     dateDisplayInfo: {},
   };
@@ -188,9 +197,10 @@ export function applyNeedToBase(
   base.totalAssiettes = need.totalAssiettes;
   base.dateDisplayInfo = need.dateDisplayInfo;
 
-  const effectiveNeededArray = base.totalNeededOverrideParsed
-    ? [base.totalNeededOverrideParsed.totalOverride]
-    : base.totalNeededArray;
+  const effectiveNeededArray = getEffectiveNeededQuantities(
+    base,
+    base.totalNeededArray,
+  );
   const { numeric: missingQuantityArray, display: displayMissingQuantity } =
     calculateAndFormatMissing(effectiveNeededArray, base.totalPurchasesArray);
 
@@ -261,10 +271,12 @@ export function mergeEnrichedProducts(
   target.displayTotalNeeded = formatTotalQuantity(target.totalNeededArray);
 
   // 5. Recalculer missing — si la cible a un override, il prime sur le
-  // totalNeededArray calculé (même règle que buildRawProductBase).
-  const effectiveNeededArray = target.totalNeededOverrideParsed
-    ? [target.totalNeededOverrideParsed.totalOverride]
-    : target.totalNeededArray;
+  // totalNeededArray calculé (même règle que buildRawProductBase), normalisé
+  // via le point de vérité unique.
+  const effectiveNeededArray = getEffectiveNeededQuantities(
+    target,
+    target.totalNeededArray,
+  );
   const { numeric: missingQuantityArray, display: displayMissingQuantity } =
     calculateAndFormatMissing(effectiveNeededArray, target.totalPurchasesArray);
   target.missingQuantityArray = missingQuantityArray;

@@ -36,12 +36,15 @@
     PackageCheck,
     Check,
     Package,
+    ChevronDown,
+    ChevronUp,
   } from "@lucide/svelte";
 
   // UI Components
   import Tooltip from "$lib/components/ui/Tooltip.svelte";
   import DateBadge from "$lib/components/ui/DateBadge.svelte";
   import IconSprite from "../ui/IconSprite.svelte";
+  import ProductRecipeDetails from "./ProductRecipeDetails.svelte";
 
   // Stores
   import { globalState, hoverHelp } from "$lib/stores/GlobalState.svelte";
@@ -66,6 +69,7 @@
     shouldShowActionButtons: boolean;
     onOpenModal: (productId: string, tab?: string) => void;
     onQuickValidation: (product: any, productInDateRange: any) => void;
+    showRecipeDetails: boolean;
   }
 
   let {
@@ -73,7 +77,13 @@
     shouldShowActionButtons,
     onOpenModal,
     onQuickValidation,
+    showRecipeDetails,
   }: Props = $props();
+
+  // Toggle local du détail des recettes (par carte), combiné au réglage
+  // global : global ON déplie tout, local permet un dépliage ponctuel
+  let localShowDetails = $state(false);
+  const showDetails = $derived(showRecipeDetails || localShowDetails);
 
   // Données réactives dérivées du productModel
   const product = $derived(productModel.data);
@@ -162,16 +172,45 @@
         <!-- 📅 Dates concernées (desktop only: sinon wrap degeu) -->
         {#if !globalState.isMobile && productInDateRange.concernedDates.length > 0}
           <div class="text-base-content/60">
-            <div class="flex flex-wrap items-center gap-1">
-              {#each productInDateRange.concernedDates as date (date)}
-                {@const recipes =
-                  productInDateRange.recipesByDate.get(date) || []}
-                {@const dateDisplayInfo =
-                  productModel.data.dateDisplayInfo[date] ||
-                  calculateDateDisplayInfo(date)}
-                <DateBadge {dateDisplayInfo} {recipes} />
-              {/each}
-            </div>
+            {#if showRecipeDetails}
+              <div class="flex flex-wrap items-center gap-1">
+                {#each productInDateRange.concernedDates as date (date)}
+                  {@const recipes =
+                    productInDateRange.recipesByDate.get(date) || []}
+                  {@const dateDisplayInfo =
+                    productModel.data.dateDisplayInfo[date] ||
+                    calculateDateDisplayInfo(date)}
+                  <DateBadge {dateDisplayInfo} {recipes} />
+                {/each}
+              </div>
+            {:else}
+              <button
+                type="button"
+                class="hover:bg-base-200/40 flex cursor-pointer flex-wrap items-center gap-1 rounded-md transition-colors"
+                onclick={() => (localShowDetails = !localShowDetails)}
+                onmouseenter={() =>
+                  (hoverHelp.msg = "Cliquez pour voir le détail des recettes")}
+                onmouseleave={() => hoverHelp.reset()}
+                aria-expanded={localShowDetails}
+                title={localShowDetails
+                  ? "Masquer le détail des recettes"
+                  : "Voir le détail des recettes"}
+              >
+                {#each productInDateRange.concernedDates as date (date)}
+                  {@const recipes =
+                    productInDateRange.recipesByDate.get(date) || []}
+                  {@const dateDisplayInfo =
+                    productModel.data.dateDisplayInfo[date] ||
+                    calculateDateDisplayInfo(date)}
+                  <DateBadge {dateDisplayInfo} {recipes} />
+                {/each}
+                {#if localShowDetails}
+                  <ChevronUp size={14} />
+                {:else}
+                  <ChevronDown size={14} />
+                {/if}
+              </button>
+            {/if}
           </div>
         {/if}
       </div>
@@ -271,15 +310,42 @@
     <!-- 📅 Dates concernées (mobile only) -->
     {#if globalState.isMobile && productInDateRange.concernedDates.length > 0}
       <div class="text-base-content/60">
-        <div class="flex flex-wrap gap-1">
-          {#each productInDateRange.concernedDates as date (date)}
-            {@const recipes = productInDateRange.recipesByDate.get(date) || []}
-            {@const dateDisplayInfo =
-              productModel.data.dateDisplayInfo[date] ||
-              calculateDateDisplayInfo(date)}
-            <DateBadge {dateDisplayInfo} {recipes} />
-          {/each}
-        </div>
+        {#if showRecipeDetails}
+          <div class="flex flex-wrap gap-1">
+            {#each productInDateRange.concernedDates as date (date)}
+              {@const recipes =
+                productInDateRange.recipesByDate.get(date) || []}
+              {@const dateDisplayInfo =
+                productModel.data.dateDisplayInfo[date] ||
+                calculateDateDisplayInfo(date)}
+              <DateBadge {dateDisplayInfo} {recipes} />
+            {/each}
+          </div>
+        {:else}
+          <button
+            type="button"
+            class="hover:bg-base-200/40 flex cursor-pointer flex-wrap items-center gap-1 rounded-md transition-colors"
+            onclick={() => (localShowDetails = !localShowDetails)}
+            aria-expanded={localShowDetails}
+            title={localShowDetails
+              ? "Masquer le détail des recettes"
+              : "Voir le détail des recettes"}
+          >
+            {#each productInDateRange.concernedDates as date (date)}
+              {@const recipes =
+                productInDateRange.recipesByDate.get(date) || []}
+              {@const dateDisplayInfo =
+                productModel.data.dateDisplayInfo[date] ||
+                calculateDateDisplayInfo(date)}
+              <DateBadge {dateDisplayInfo} {recipes} />
+            {/each}
+            {#if localShowDetails}
+              <ChevronUp size={14} />
+            {:else}
+              <ChevronDown size={14} />
+            {/if}
+          </button>
+        {/if}
       </div>
     {/if}
 
@@ -460,5 +526,14 @@
         </div>
       </div>
     </div>
+
+    {#if showDetails}
+      <div transition:slide={{ duration: 200 }}>
+        <ProductRecipeDetails
+          recipesByDate={productInDateRange.recipesByDate}
+          concernedDates={productInDateRange.concernedDates}
+        />
+      </div>
+    {/if}
   </div>
 </div>

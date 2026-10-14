@@ -31,6 +31,7 @@
   import GlobalPurchasesModal from "$lib/components/eventProducts/GlobalPurchasesModal.svelte";
   import GroupPurchaseModal from "$lib/components/eventProducts/GroupPurchaseModal.svelte";
   import ProductModal from "$lib/components/eventProducts/ProductModal.svelte";
+  import RecipeDetailDrawer from "$lib/components/recipes/RecipeDetailDrawer.svelte";
   import ProductsCards from "$lib/components/eventProducts/ProductsCards.svelte";
   import ProductsFilters from "$lib/components/eventProducts/ProductsFilters.svelte";
   import StoreBatchEditModal from "$lib/components/eventProducts/StoreBatchEditModal.svelte";
@@ -769,6 +770,7 @@
     initialTab={openModalTab}
     onClose={closeModal}
   />
+  <RecipeDetailDrawer />
 
   {#if whoEditModalOpen}
     <WhoBatchEditModal

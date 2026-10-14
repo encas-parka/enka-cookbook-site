@@ -29,7 +29,11 @@
     Smartphone,
     ScrollText,
     ClipboardX,
+    ChevronDown,
+    ChevronUp,
   } from "@lucide/svelte";
+  import ProductRecipeDetails from "./ProductRecipeDetails.svelte";
+  import { slide } from "svelte/transition";
 
   // Stores
   import { globalState, hoverHelp } from "$lib/stores/GlobalState.svelte";
@@ -53,6 +57,7 @@
     shouldShowActionButtons: boolean;
     onOpenModal: (productId: string, tab?: string) => void;
     onQuickValidation: (product: any, productInDateRange: any) => void;
+    showRecipeDetails: boolean;
   }
 
   let {
@@ -60,7 +65,13 @@
     shouldShowActionButtons,
     onOpenModal,
     onQuickValidation,
+    showRecipeDetails,
   }: Props = $props();
+
+  // Toggle local du détail des recettes (par carte), combiné au réglage
+  // global : global ON déplie tout, local permet un dépliage ponctuel
+  let localShowDetails = $state(false);
+  const showDetails = $derived(showRecipeDetails || localShowDetails);
 
   // Reactive data from productModel
   const product = $derived(productModel.data);
@@ -145,6 +156,23 @@
           {productInDateRange.totalAssiettes}<Utensils size={12} />
         </span>
       {/if}
+      {#if !showRecipeDetails && productInDateRange.concernedDates.length > 0}
+        <button
+          type="button"
+          class="text-base-content/60 hover:bg-base-200/40 flex cursor-pointer items-center gap-0.5 rounded-md transition-colors"
+          onclick={() => (localShowDetails = !localShowDetails)}
+          aria-expanded={localShowDetails}
+          title={localShowDetails
+            ? "Masquer le détail des recettes"
+            : "Voir le détail des recettes"}
+        >
+          {#if localShowDetails}
+            <ChevronUp size={13} />
+          {:else}
+            <ChevronDown size={13} />
+          {/if}
+        </button>
+      {/if}
     </div>
   </div>
 
@@ -222,4 +250,13 @@
       {/if}
     </button>
   </div>
+
+  {#if showDetails}
+    <div class="w-full" transition:slide={{ duration: 200 }}>
+      <ProductRecipeDetails
+        recipesByDate={productInDateRange.recipesByDate}
+        concernedDates={productInDateRange.concernedDates}
+      />
+    </div>
+  {/if}
 </div>

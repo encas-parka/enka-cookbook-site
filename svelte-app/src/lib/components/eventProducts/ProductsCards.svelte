@@ -57,6 +57,7 @@
 
   // View mode: 'card' (default) or 'compact'
   let viewMode = $state<"card" | "compact">("card");
+  let showRecipeDetails = $state(false);
 
   // Pagination progressive (lazy loading, 1 groupe à la fois)
   let currentPage = $state(1);
@@ -161,7 +162,15 @@
     : ''}"
 >
   <!-- View mode toggle -->
-  <div class="flex justify-end px-1">
+  <div class="flex items-center justify-between px-1">
+    <label class="flex cursor-pointer items-center gap-2">
+      <input
+        type="checkbox"
+        class="toggle toggle-sm toggle-primary"
+        bind:checked={showRecipeDetails}
+      />
+      <span class="text-sm">Détails recettes</span>
+    </label>
     <div class="join">
       <button
         class="btn join-item {viewMode === 'card'
@@ -344,6 +353,7 @@
               {shouldShowActionButtons}
               {onOpenModal}
               {onQuickValidation}
+              {showRecipeDetails}
             />
           {/each}
         </div>
@@ -355,6 +365,7 @@
               {shouldShowActionButtons}
               {onOpenModal}
               {onQuickValidation}
+              {showRecipeDetails}
             />
           {/each}
         </div>

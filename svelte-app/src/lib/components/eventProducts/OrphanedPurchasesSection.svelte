@@ -34,6 +34,10 @@
         achats sur {orphanedPurchases.length} produits)</span
       >
     </div>
+    <div class="alert alert-soft m-2">
+      Des achats ont été déclaré pour ces produits, mais ceux-ci ne sont plus
+      présents dans les recettes de l'événement.
+    </div>
     <div class="divide-neutral/20 my-2 divide-y">
       {#each orphanedPurchases as orphan (orphan.productId)}
         {@const typeInfo = getProductTypeInfo(orphan.productType)}
@@ -44,7 +48,7 @@
               class="text-warning/80 flex shrink-0 items-center gap-1.5 rounded-sm px-0.5"
             >
               <typeInfo.icon size={16} class="shrink-0" />
-              <span class="decoration-warning/40 font-semibold line-through"
+              <span class="decoration-warning/40 font-semibold"
                 >{orphan.productName}</span
               >
               <Ghost size={13} class="shrink-0" />

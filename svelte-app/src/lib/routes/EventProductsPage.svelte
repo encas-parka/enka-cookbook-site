@@ -735,7 +735,7 @@
           <Search class="size-4 shrink-0" />
           <input
             type="text"
-            placeholder="Rechercher un produit..."
+            placeholder="Rechercher un produit, une recette..."
             class="grow"
             value={productsStore.filters.searchQuery}
             oninput={(e) => productsStore.setSearchQuery(e.currentTarget.value)}

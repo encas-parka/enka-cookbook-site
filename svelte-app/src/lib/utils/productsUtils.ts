@@ -22,6 +22,8 @@ export type TemperatureFilterMode =
 
 export interface FiltersState {
   searchQuery: string;
+  /** Inclure les titres de recettes dans la recherche fuzzy. Défaut : false. */
+  searchInRecipes: boolean;
   selectedStores: string[];
   selectedWho: string[];
   selectedProductTypes: string[];
@@ -295,17 +297,22 @@ export function formatStockResult(result: NumericQuantity[]): string {
 /**
  * Computes the set of product IDs matching a fuzzy text query.
  * Should be called once before iterating over products.
+ * @param searchable - Pré-calculé par le store (noms produits + recettes), pas
+ *   à chaque frappe.
+ * @param searchInRecipes - Quand false, la recherche ne porte que sur le nom
+ *   du produit (les titres de recettes sont exclus).
  */
 export function computeFuzzySearchMatches(
-  products: EnrichedProduct[],
+  searchable: { id: string; productName: string; recipeNames: string }[],
   query: string,
+  searchInRecipes: boolean,
 ): Set<string> {
-  if (!query.trim()) return new Set();
-  const results = fuzzysort.go(query.trim(), products, {
-    key: "productName",
-    threshold: 0.3,
+  if (!query.trim() || !searchable.length) return new Set();
+  const results = fuzzysort.go(query.trim(), searchable, {
+    keys: searchInRecipes ? ["productName", "recipeNames"] : ["productName"],
+    threshold: 0.6,
   });
-  return new Set(results.map(r => r.obj.id));
+  return new Set(results.map((r) => r.obj.id));
 }
 
 export function matchesFilters(
@@ -313,11 +320,10 @@ export function matchesFilters(
   filters: FiltersState,
   fuzzyMatchedIds?: Set<string>,
 ): boolean {
-  // Recherche textuelle fuzzy
+  // Recherche active : bypass des autres filtres. Les filtres sont préservés
+  // et réappliqués au reset de la recherche.
   if (filters.searchQuery.trim()) {
-    if (!fuzzyMatchedIds?.has(product.id)) {
-      return false;
-    }
+    return fuzzyMatchedIds?.has(product.id) ?? false;
   }
 
   // Filtre par store

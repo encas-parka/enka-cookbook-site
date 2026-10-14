@@ -145,7 +145,7 @@ Base : `befc6d54` (verdict : arbre sale au démarrage — baseline tracker commi
   - **Reset par trash de `pb_data`** (récupérable, 42 Mo) + provision frais (`migrate up` 25 migrations + `superuser upsert` creds `.env.local`) puis orchestrateur managé — PAS de `--upsert` (les perdantes auraient survécu : le mode ne purge pas). Les 11 produits créés runtime après le dernier import full (Deferred T11) sont détruits — destruction des données dev actée par le maintainer (events clos).
   - **Import sous l'index** (migrations appliquées avant l'import, chaîne du mode managé) : preuve plus forte que le scénario nominal du ticket — 974 créés / 0 failed sous `UNIQUE(eventId, productName)` ; le `migrate up` explicite post-import (« No new migrations to apply. », exit 0) + sqlite_master + 0 paire complètent le critère.
   - **Password user sonde re-posé** (admin API, `ghald@riseup.net` → valeur `.env.local`) : les users ré-importés portent des mots de passe aléatoires ; le reset password général des users migrés reste au backlog Phase 1.8.
-  - **PB dev relancé sur 8090** en fin de ticket (`bun run dev:pb`, fond, process implementer — à reprendre/matcher par le user) ; serveur jetable 8093 (T07) toujours actif — arrêt côté orchestrateur/user. WIP étranger croisé (`.gitignore`, gate-recheck T12) : non touché, non committé.
+  - **PB dev relancé sur 8090** en fin de ticket (`bun run dev:pb`, fond, process implementer) — **arrêté par le user immédiatement après** (vérifié : 8090 libre) ; la base ré-importée sur disque est l'état de référence, relance au besoin (`bun run dev:pb`) ; serveur jetable 8093 (T07) toujours actif — arrêt côté orchestrateur/user. WIP étranger croisé (`.gitignore`, gate-recheck T12) : non touché, non committé.
 
 ## Deferred findings
 

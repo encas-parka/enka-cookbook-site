@@ -36,7 +36,7 @@
 - `?` (T04 26-10-13) Deux formes pour le champ json `store` : `JSON.stringify(storeInfo)` en batch vs objet natif au modal (tolérées par `safeJsonParse`) — unifier au profit de l'objet natif.
 - `?` (T08 26-10-13) `3-import-pb.ts --upsert` : les produits présents en PB mais absents des sources ne sont ni purgés ni verdictés (contrat « NO purge » du mode) — à savoir en lisant les chiffres (982 patched ≠ 993 en base).
 - `?` (T04 26-10-13) `createGroupPurchase.totalProductsCreated` compte la sélection (`productsData.length`), pas les matérialisations réelles — compteur approximatif hérité.
-- `?` `GroupPurchaseModal` L112 : `invoiceTotal: formData.expense || undefined` vs sœur `?? 0` — `0`/chaîne vide passent différemment.
+- `?` (26-10-14, lot 2) Export markdown : `displayTotalOverride` non rendu (sœur `product-markdown-export.ts:68-73` biffe le besoin `~~total~~ override`) — à porter pour la parité avec le CSV (colonne « Besoin calculé »).
 - `?` `initialFetch` sans epoch/abort : une `syncRevalidate` de l'ancienne identité en vol au moment d'une transition peut réécrire lignes + curseur APRÈS la purge — fenêtre étroite, se guérit à la transition suivante ; fix candidat : epoch de purge consulté par la transaction d'écriture de pb-collection. (T07 26-10-12)
 - `?` Logout sans désabonnement SSE des stores (purge `purgeLocal` au lieu de `destroy`) : EventSource ouvert en période visiteur — livraisons filtrées par les règles (aucune fuite). À reconsidérer si besoin d'autoclose strict. (T07 26-10-12)
 - `?` `EventMaterielStore.addItem`/`addHeaderWithAllocation` posent l'`#error` du store, rendu en alerte persistante par `EventMaterielPage` — scopage modal à revoir si souhaité. (T03 26-10-12)

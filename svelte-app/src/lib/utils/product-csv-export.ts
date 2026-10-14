@@ -7,6 +7,8 @@ export interface CsvExportProduct {
   formattedAcquiredQuantities: string;
   formattedMissingQuantities: string;
   mergedProductNames?: string; // Noms des produits fusionnés, séparés par ", "
+  displayTotalOverride?: string; // Quantité overwrite (besoin manuel)
+  formattedCalculatedQuantities?: string; // Besoin calculé (uniquement si override existe)
 }
 
 export interface CsvExportOptions {
@@ -31,20 +33,27 @@ export function exportProductsToCsv(options: CsvExportOptions): string {
 
   // Column headers
   lines.push(
-    "Produit;Type;Magasin;Responsable(s);Besoin;Acheté;Manque;Fusionné",
+    "Produit;Type;Magasin;Responsable(s);Besoin;Acheté;Manque;Fusionné;Besoin calculé",
   );
 
   for (const product of options.products) {
+    // Si un override existe, "Besoin" = override, "Besoin calculé" = valeur calculée
+    const besoin = product.displayTotalOverride || product.formattedQuantities || "-";
+    const besoinCalcule = product.displayTotalOverride
+      ? (product.formattedCalculatedQuantities || product.formattedQuantities || "-")
+      : "";
+
     lines.push(
       [
         escapeCsvCell(product.productName),
         escapeCsvCell(product.productType),
         escapeCsvCell(product.storeName),
         escapeCsvCell(product.who),
-        escapeCsvCell(product.formattedQuantities || "-"),
+        escapeCsvCell(besoin),
         escapeCsvCell(product.formattedAcquiredQuantities || "-"),
         escapeCsvCell(product.formattedMissingQuantities || "-"),
         escapeCsvCell(product.mergedProductNames || ""),
+        escapeCsvCell(besoinCalcule),
       ].join(";"),
     );
   }

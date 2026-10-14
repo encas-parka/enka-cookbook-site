@@ -10,6 +10,8 @@
     productId: string;
     productName: string;
     productType: string;
+    /** Pourquoi le produit n'est plus affiché : record supprimé ou besoin retiré des recettes. */
+    kind: "product-removed" | "need-removed";
     purchases: Purchases[];
   }
 
@@ -52,7 +54,11 @@
           <div
             class="ml-auto flex flex-wrap items-center justify-end gap-x-2 gap-y-1"
           >
-            <span class="text-warning/60 text-xs italic">produit retiré</span>
+            <span class="text-warning/60 text-xs italic"
+              >{orphan.kind === "need-removed"
+                ? "besoin retiré des recettes"
+                : "produit supprimé"}</span
+            >
 
             <div
               class="bg-success/5 flex min-h-6 flex-wrap items-center justify-end gap-2 rounded px-1"

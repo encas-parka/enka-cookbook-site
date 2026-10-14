@@ -129,6 +129,16 @@ function toProductWriteError(err: unknown): never {
   throw isUniqueNameRejection(err) ? new DuplicateProductNameError() : err;
 }
 
+/**
+ * Discriminant des achats orphelins, dérivés à chaque passe du reconciler :
+ * - "product-removed" : aucun record produit (cas garde-fou — aucun flux UI
+ *   ne supprime de record produit).
+ * - "need-removed" : produit réel (ingredientRef non null) dont les recettes
+ *   ne déclarent plus le besoin — carte masquée par le filtre date-range
+ *   (byDate vide), l'achat reste tracé dans la section orphelins.
+ */
+type OrphanedPurchaseKind = "product-removed" | "need-removed";
+
 // =============================================================================
 // STORE
 // =============================================================================
@@ -373,24 +383,53 @@ class ProductsStore {
       this.#productModels.delete(id);
     }
 
-    // ── 4b. Détecter les achats orphelins (sans produit actif) ──
-    // Calculé APRÈS le remappage merge (1b) et le masquage des sources (3b) :
-    // sont orphelins les achats qui n'atterrissent dans aucune map produit
-    // affichée. Le guard mergedSourceIds est un filet de sécurité (leurs
-    // achats ont déjà été remappés vers la cible).
+    // ── 4b. Détecter les achats orphelins (sans produit affiché) ──
+    // Calculé APRÈS le remappage merge (1b) et le masquage des sources (3b).
+    // Deux cas, dérivés à chaque passe (aucun marquage persistant) :
+    // - product-removed : aucun modèle produit (garde-fou).
+    // - need-removed : produit réel dont aucune recette ne déclare plus le
+    //   besoin — la carte est masquée par le filtre date-range (byDate vide)
+    //   mais les achats restent tracés ici. Ré-ajouter la recette recrée la
+    //   ligne need → l'orphelin s'efface naturellement.
+    // L'override (totalNeededOverride) ne rescuent pas : c'est un ajustement
+    // lié aux recettes — recettes parties = besoin parti. Les produits
+    // manuels (ingredientRef null) ne dépendent pas des recettes : jamais
+    // éligibles, leur carte reste affichée.
     const orphaned: Array<{
       productId: string;
       productName: string;
       productType: string;
+      kind: OrphanedPurchaseKind;
       purchases: Purchases[];
     }> = [];
     for (const [productId, purchs] of purchasesByProduct) {
-      if (this.#productModels.has(productId)) continue;
       if (purchs.length === 0) continue;
+      // Guard mergedSourceIds — filet de sécurité pour les deux types :
+      // les achats d'une source ont déjà été remappés vers la cible (1b).
       if (mergedSourceIds.has(productId)) continue;
+      // Besoin actif → le produit a une carte affichée : pas orphelin.
+      if (needsById.has(productId)) continue;
+
+      const raw = productsById.get(productId);
+      let kind: OrphanedPurchaseKind;
+      if (!raw) {
+        // Cas 1 : aucun modèle produit (achat sans record).
+        kind = "product-removed";
+      } else if (raw.mergedInto) {
+        // Source mergée : jamais orpheline — ses achats vivent sous la
+        // cible, ou elle reste visible si la cible est introuvable (3b).
+        continue;
+      } else if (raw.ingredientRef) {
+        // Cas 2 : produit réel, besoin retiré des recettes.
+        kind = "need-removed";
+      } else {
+        continue; // produit manuel : carte toujours affichée, hors orphelins
+      }
+
       const cached = this.#productNameCache.get(productId);
       orphaned.push({
         productId,
+        kind,
         productName: cached?.name ?? extractNameFromProductId(productId),
         productType: cached?.type ?? "",
         purchases: purchs,
@@ -410,13 +449,14 @@ class ProductsStore {
   // modèle) — nomme les achats orphelins dont le produit n'existe plus.
   #productNameCache = new Map<string, { name: string; type: string }>();
 
-  // Achats dont le produit n'a plus de modèle actif (besoin recalculé,
-  // produit supprimé...) — section « Achats sans produit actif ».
+  // Achats orphelins (dérivés à chaque passe du reconciler, discriminés par
+  // kind — cf. OrphanedPurchaseKind) — section « Achats sans produit actif ».
   #orphanedPurchasesInfo = $state<
     Array<{
       productId: string;
       productName: string;
       productType: string;
+      kind: OrphanedPurchaseKind;
       purchases: Purchases[];
     }>
   >([]);

@@ -85,8 +85,11 @@ export interface ToastTrackOptions {
   loading: string;
   /** Message en cas de succès */
   success?: string;
-  /** Message en cas d'erreur */
-  error?: string;
+  /**
+   * Message en cas d'erreur — statique, ou résolveur consulté au rejet
+   * (retourne le message à afficher, ou undefined pour le libellé par défaut).
+   */
+  error?: string | ((error: unknown) => string | undefined);
   /** ID personnalisé du toast */
   id?: string;
   /** Durée d'auto-fermeture pour le toast de succès (0 = persistant) */
@@ -214,10 +217,14 @@ export class ToastService {
 
       return result;
     } catch (error) {
-      // Erreur
+      // Erreur — le résolveur (si fourni) peut spécialiser le message
+      const resolvedError =
+        typeof options.error === "function"
+          ? options.error(error)
+          : options.error;
       this.update(toastId, {
         state: "error",
-        message: options.error || "Erreur lors de l'opération",
+        message: resolvedError || "Erreur lors de l'opération",
         autoCloseDelay: options.errorDelay,
       });
 

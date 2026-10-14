@@ -25,6 +25,11 @@
  *   of the target collection is rejected with 400 `validation_invalid_relation`,
  *   like the real server — undeclared collections accept any value; `seed()`
  *   and `putRecord()` stay raw (no validation, test-state manipulation)
+ * - unique column groups declared via `defineUniqueIndexes()` are enforced on
+ *   every write (single or batch): duplicating a tuple held by ANOTHER record
+ *   is rejected with 400 `validation_not_unique` (field-scoped, last column
+ *   of the group), like the real server — SQLite semantics (NULL never
+ *   clashes, self excluded on update)
  *
  * Usage in a test file:
  * ```ts
@@ -377,11 +382,13 @@ type RecordsView = (name: string) => PbRecord[];
 
 interface WriteGuard {
   relations: Map<string, Map<string, string>>;
+  uniques: Map<string, string[][]>;
   view: RecordsView;
 }
 
 function opCreate(guard: WriteGuard, name: string, data: Record<string, unknown>): PbRecord {
   validateWriteRelations(guard.relations, guard.view, name, data, "create");
+  validateWriteUniques(guard.uniques, guard.view, name, data, undefined, "create");
   const records = guard.view(name);
   if (data.id !== undefined && records.some((r) => r.id === data.id)) {
     throw duplicateIdError(data.id as string);
@@ -408,6 +415,7 @@ function opUpdate(guard: WriteGuard, name: string, id: string, data: Record<stri
     id,
     updated: pbDate(),
   } as PbRecord;
+  validateWriteUniques(guard.uniques, guard.view, name, updated, id, "update");
   records[idx] = updated;
   return { ...updated };
 }
@@ -476,6 +484,56 @@ function invalidRelationError(field: string, verb: string): FakeRequestError {
   return err;
 }
 
+/**
+ * Valide les index uniques déclarés pour la collection (defineUniqueIndexes) :
+ * un tuple déjà porté par un AUTRE record est rejeté — sémantique SQLite
+ * (NULL jamais en collision, "" collationne), self exclu sur update. L'erreur
+ * est rapportée sur la dernière colonne du groupe, comme le serveur pour un
+ * index composite.
+ */
+function validateWriteUniques(
+  uniques: Map<string, string[][]>,
+  view: RecordsView,
+  name: string,
+  data: Record<string, unknown>,
+  selfId: string | undefined,
+  verb: "create" | "update",
+): void {
+  const groups = uniques.get(name);
+  if (!groups) return;
+  const tupleOf = (r: Record<string, unknown>, cols: string[]) =>
+    cols.map((c) => r[c]);
+  const hasNull = (tuple: unknown[]) => tuple.some((v) => v === null || v === undefined);
+  for (const cols of groups) {
+    const tuple = tupleOf(data, cols);
+    if (hasNull(tuple)) continue;
+    const clash = view(name).some((r) => {
+      if (selfId !== undefined && r.id === selfId) return false;
+      const other = tupleOf(r, cols);
+      return !hasNull(other) && other.every((v, i) => v === tuple[i]);
+    });
+    if (clash) throw notUniqueError(cols[cols.length - 1], verb);
+  }
+}
+
+/** PB unique index validation (measured shape: field-scoped
+ * `validation_not_unique`, what the client maps to a friendly message). */
+function notUniqueError(field: string, verb: string): FakeRequestError {
+  const err = new Error(`Failed to ${verb} record.`) as FakeRequestError;
+  err.status = 400;
+  err.response = {
+    code: 400,
+    message: `Failed to ${verb} record.`,
+    data: {
+      [field]: {
+        code: "validation_not_unique",
+        message: "Value must be unique.",
+      },
+    },
+  };
+  return err;
+}
+
 /** Realtime payload, as delivered by the PB SSE channel. */
 export interface FakeRealtimeEvent {
   action: "create" | "update" | "delete";
@@ -493,6 +551,11 @@ export class FakePocketBase {
    * collection cible. Survit à reset() — le schéma n'est pas des données.
    */
   relations = new Map<string, Map<string, string>>();
+  /**
+   * Fragment de schéma d'unicité (defineUniqueIndexes) : collection →
+   * groupes de colonnes uniques. Survit à reset().
+   */
+  uniques = new Map<string, string[][]>();
 
   constructor(baseUrl?: string) {
     this.baseUrl = baseUrl ?? "http://localhost:8090";
@@ -517,10 +580,27 @@ export class FakePocketBase {
     }
   }
 
+  /**
+   * Déclare des index uniques (groupes de colonnes) : les écritures qui
+   * dupliquent un tuple porté par un autre record sont rejetées comme le
+   * serveur (400 `validation_not_unique` sur la dernière colonne du groupe).
+   * Une collection sans déclaration n'impose aucune unicité ; idempotent.
+   */
+  defineUniqueIndexes(spec: Record<string, string[][]>): void {
+    for (const [collectionName, groups] of Object.entries(spec)) {
+      const list = this.uniques.get(collectionName) ?? [];
+      for (const group of groups) {
+        if (!list.some((g) => g.join(",") === group.join(","))) list.push(group);
+      }
+      this.uniques.set(collectionName, list);
+    }
+  }
+
   /** Garde d'écriture : validation + vue sur le store (ou l'ombre d'un batch). */
   #writeGuard(shadow?: Map<string, PbRecord[]>): WriteGuard {
     return {
       relations: this.relations,
+      uniques: this.uniques,
       view: (name) => shadow?.get(name) ?? this.records(name),
     };
   }

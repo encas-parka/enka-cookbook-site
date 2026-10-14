@@ -74,6 +74,62 @@ import {
  */
 
 // =============================================================================
+// ERREUR MÉTIER — unicité (event, nom)
+// =============================================================================
+
+/**
+ * Message utilisateur du conflit d'unicité (eventId, productName) — l'index
+ * unique PB rejette le create/update d'un second produit de même nom dans le
+ * même événement (400, `validation_not_unique` en erreur de champ). Le
+ * mapping du code PB vit ICI (createProduct et #ensureSyncedProduct, les
+ * deux seuls sites qui lancent des creates produits) : les couches UI ne
+ * voient jamais l'erreur brute, seulement cette erreur typée.
+ */
+export const DUPLICATE_PRODUCT_NAME_MESSAGE =
+  "Un produit de ce nom existe déjà dans cet événement";
+
+export class DuplicateProductNameError extends Error {
+  constructor() {
+    super(DUPLICATE_PRODUCT_NAME_MESSAGE);
+    this.name = "DuplicateProductNameError";
+  }
+}
+
+/**
+ * Résout le message du toast d'erreur pour un échec d'écriture produit :
+ * le message explicite sur conflit d'unicité, undefined sinon (le toast
+ * garde alors son libellé statique par défaut).
+ */
+export function resolveProductWriteError(
+  err: unknown,
+): string | undefined {
+  return err instanceof DuplicateProductNameError ? err.message : undefined;
+}
+
+/**
+ * Détecte le rejet d'unicité PB : 400 avec une erreur de champ
+ * `validation_not_unique` hors champ `id` (le seul autre rejet d'unicité
+ * possible est la clé primaire — un create à id déjà pris n'est PAS un
+ * conflit de nom). Robuste à la colonne rapportée par l'index composite.
+ */
+function isUniqueNameRejection(err: unknown): boolean {
+  const e = err as {
+    status?: number;
+    response?: { code?: number; data?: Record<string, { code?: string }> };
+  } | null;
+  const data = e?.response?.data;
+  if ((e?.status ?? e?.response?.code) !== 400 || !data) return false;
+  return Object.entries(data).some(
+    ([field, fieldError]) => field !== "id" && fieldError?.code === "validation_not_unique",
+  );
+}
+
+/** Traduit un rejet serveur en erreur métier typée, laisse passer le reste. */
+function toProductWriteError(err: unknown): never {
+  throw isUniqueNameRejection(err) ? new DuplicateProductNameError() : err;
+}
+
+// =============================================================================
 // STORE
 // =============================================================================
 
@@ -1449,10 +1505,15 @@ class ProductsStore {
     const enriched = this.getEnrichedProductById(productId);
     if (!enriched) return;
 
-    await this.#productsCollection.upsert({
-      id: productId,
-      ...this.#virtualProductPayload(enriched),
-    });
+    // La matérialisation d'un virtuel peut heurter l'unicité (event, nom) :
+    // un produit réel du même nom a pu être créé entre-temps (besoin calculé
+    // avant la création manuelle). Même traduction typée que createProduct.
+    await this.#productsCollection
+      .upsert({
+        id: productId,
+        ...this.#virtualProductPayload(enriched),
+      })
+      .catch(toProductWriteError);
   }
 
   async createPurchase(
@@ -1544,25 +1605,27 @@ class ProductsStore {
       };
     }
 
-    const newProduct = await this.#productsCollection.create({
-      ingredientRef: null,
-      productName: productData.productName,
-      productType: productData.productType || "Autre",
-      store: productData.store || null,
-      who: productData.who || [],
-      eventId: this.#currentEventId!,
-      status: productData.status || "active",
-      stockReel: productData.stockReel || null,
-      updatedBy: globalState.userId,
-      isSynced: true,
-      isMerged: false,
-      mergedFrom: null,
-      mergeDate: null,
-      mergeReason: null,
-      mergedInto: null,
-      totalNeededOverride: null,
-      specs: JSON.stringify(spec),
-    } as unknown as Omit<Products, "id" | "created" | "updated">);
+    const newProduct = await this.#productsCollection
+      .create({
+        ingredientRef: null,
+        productName: productData.productName,
+        productType: productData.productType || "Autre",
+        store: productData.store || null,
+        who: productData.who || [],
+        eventId: this.#currentEventId!,
+        status: productData.status || "active",
+        stockReel: productData.stockReel || null,
+        updatedBy: globalState.userId,
+        isSynced: true,
+        isMerged: false,
+        mergedFrom: null,
+        mergeDate: null,
+        mergeReason: null,
+        mergedInto: null,
+        totalNeededOverride: null,
+        specs: JSON.stringify(spec),
+      } as unknown as Omit<Products, "id" | "created" | "updated">)
+      .catch(toProductWriteError);
 
     return newProduct.id;
   }
@@ -1774,7 +1837,10 @@ class ProductsStore {
       {
         loading: "Fusion en cours…",
         success: `"${sourceModel.data.productName}" fusionné vers "${targetModel.data.productName}"`,
-        error: "Erreur lors de la fusion",
+        // La matérialisation de la cible peut heurter l'unicité (event, nom) :
+        // message métier explicite à la place du libellé statique.
+        error: (err) =>
+          resolveProductWriteError(err) ?? "Erreur lors de la fusion",
       },
     );
   }
@@ -1942,6 +2008,9 @@ class ProductsStore {
 
       return { success: true, totalProductsCreated: productsData.length, totalPurchasesCreated, totalExpensesCreated };
     } catch (err) {
+      // Le conflit d'unicité doit garder sa forme typée : le modal le passe
+      // au résolveur de toast (message explicite), pas au libellé statique.
+      if (err instanceof DuplicateProductNameError) throw err;
       return {
         success: false,
         totalProductsCreated: productsData.length,

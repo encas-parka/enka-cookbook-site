@@ -70,7 +70,11 @@ import {
   TEST_EVENT_ID,
   TEST_PRODUCT_ID,
 } from "./harness/fixtures";
-import { productsStore } from "$lib/stores/ProductsStore.svelte";
+import {
+  productsStore,
+  DuplicateProductNameError,
+  DUPLICATE_PRODUCT_NAME_MESSAGE,
+} from "$lib/stores/ProductsStore.svelte";
 import { eventsStore } from "$lib/stores/EventsStore.svelte";
 import { recipesStore } from "$lib/stores/RecipesStore.svelte";
 import { db, pb } from "$lib/db-sync/pb-sync";
@@ -89,6 +93,10 @@ describe("ProductsStore — création produit & achat (write paths)", () => {
   beforeEach(async () => {
     const fakePb = currentFakePb();
     fakePb.reset();
+    // Unicité (event, nom) — la contrainte serveur visée par l'index unique :
+    // les chemins de création sont testés sous elle (2e create homonyme →
+    // erreur typée, jamais un second record discret).
+    fakePb.defineUniqueIndexes({ products: [["eventId", "productName"]] });
     await productsStore.softReset();
     await clearDexie();
 
@@ -122,6 +130,72 @@ describe("ProductsStore — création produit & achat (write paths)", () => {
     const model = productsStore.getEnrichedProductById(id);
     expect(model?.productName).toBe("Huile d'olive");
     expect(model?.isSynced).toBe(true);
+  });
+
+  it("createProduct en doublon (event, nom) → erreur typée explicite, pas de second record", async () => {
+    await productsStore.initialize(TEST_EVENT_ID);
+    await waitForTick(3);
+
+    await productsStore.createProduct({
+      productName: "Huile d'olive",
+      productType: "épicerie",
+    });
+
+    // Le second create de même nom est rejeté par l'unicité (event, nom) et
+    // traduit en erreur métier — jamais un doublon discret.
+    let caught: unknown = null;
+    try {
+      await productsStore.createProduct({
+        productName: "Huile d'olive",
+        productType: "épicerie",
+      });
+    } catch (err) {
+      caught = err;
+    }
+    expect(caught).toBeInstanceOf(DuplicateProductNameError);
+    expect((caught as Error).message).toBe(DUPLICATE_PRODUCT_NAME_MESSAGE);
+    expect((caught as Error).message).toContain(
+      "existe déjà dans cet événement",
+    );
+
+    // Un seul record serveur, un seul miroir Dexie
+    const all = await pb.collection("products").getFullList({
+      filter: pb.filter("productName = {:n}", { n: "Huile d'olive" }),
+    });
+    expect(all).toHaveLength(1);
+    const mirrored = await db.products.toArray();
+    expect(mirrored.filter((p) => p.productName === "Huile d'olive")).toHaveLength(1);
+  });
+
+  it("achat rapide sur un virtuel homonyme d'un produit réel → erreur typée, aucun achat créé", async () => {
+    // Besoin virtuel "Cannelle" (id sémantique, jamais poussé) + produit RÉEL
+    // "Cannelle" créé entre-temps à un id PB : la matérialisation du virtuel
+    // heurterait l'unicité (event, nom) — l'achat doit échouer AVANT de créer
+    // quoi que ce soit, avec le message métier.
+    currentFakePb().seed("products", [
+      makeProductRecord({ id: "cannellesync001", ingredientRef: null, productName: "Cannelle" }),
+    ]);
+    await seedProductNeeds([VIRTUAL_NEED]);
+
+    await productsStore.initialize(TEST_EVENT_ID);
+    await waitForTick(5);
+    expect(productsStore.getEnrichedProductById(VIRTUAL_ID)).not.toBeNull();
+
+    let caught: unknown = null;
+    try {
+      await productsStore.createPurchase(VIRTUAL_ID, [{ q: 1, u: "gr." }], {
+        store: null,
+      });
+    } catch (err) {
+      caught = err;
+    }
+    expect(caught).toBeInstanceOf(DuplicateProductNameError);
+
+    // Rien n'a été créé : ni le produit à l'id virtuel, ni un achat
+    const virtualServer = await pb.collection("products").getOne(VIRTUAL_ID).catch(() => null);
+    expect(virtualServer).toBeNull();
+    const purchases = await pb.collection("purchases").getFullList();
+    expect(purchases).toHaveLength(0);
   });
 
   it("createProduct avec quantité → specs.quantity normalisé (besoin), aucun achat créé", async () => {

@@ -151,6 +151,13 @@ describe("ProductsStore — fusion de produits (dérivation client)", () => {
     // (single, cascadeDelete false) — les écritures qui la portent valident
     // la cible côté serveur, comme le vrai PocketBase (400).
     fakePb.defineRelations({ products: { mergedInto: "products" } });
+    // Coordination fusion × unicité (event, nom) : TOUTE la suite tourne sous
+    // la contrainte — les écritures de merge (mergedInto+mergeDate sur la
+    // source, matérialisation de la cible, unmerge) ne dupliquent jamais le
+    // tuple, sinon ces tests passent au rouge. Un renommage libère son ancien
+    // nom (l'index porte sur la valeur courante) ; une source fusionnée garde
+    // son nom mais n'entre plus en collision (fusion ≠ doublon actif).
+    fakePb.defineUniqueIndexes({ products: [["eventId", "productName"]] });
     await productsStore.softReset();
     await clearDexie();
 

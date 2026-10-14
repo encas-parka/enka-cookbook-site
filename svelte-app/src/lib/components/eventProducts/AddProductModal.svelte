@@ -9,7 +9,10 @@
     History,
     Info,
   } from "@lucide/svelte";
-  import { productsStore } from "$lib/stores/ProductsStore.svelte";
+  import {
+    productsStore,
+    DuplicateProductNameError,
+  } from "$lib/stores/ProductsStore.svelte";
   import { toastService } from "$lib/services/toast.service.svelte";
   import {
     getProductTypeInfo,
@@ -150,7 +153,12 @@
       }
     } catch (err) {
       console.error("Error creating product:", err);
-      error = "Erreur lors de la création du produit. Veuillez réessayer.";
+      // Conflit d'unicité (event, nom) : message métier explicite, pas
+      // l'erreur brute du serveur.
+      error =
+        err instanceof DuplicateProductNameError
+          ? err.message
+          : "Erreur lors de la création du produit. Veuillez réessayer.";
       toastService.error(error);
     } finally {
       loading = false;

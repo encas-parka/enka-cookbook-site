@@ -1,6 +1,9 @@
 <script lang="ts">
   import { TriangleAlert, Check, ShoppingCart, X } from "@lucide/svelte";
-  import { productsStore } from "$lib/stores/ProductsStore.svelte";
+  import {
+    productsStore,
+    resolveProductWriteError,
+  } from "$lib/stores/ProductsStore.svelte";
   import { toastService } from "$lib/services/toast.service.svelte";
   import { globalState } from "$lib/stores/GlobalState.svelte";
   import type { EnrichedProduct } from "$lib/types/store.types";
@@ -152,7 +155,11 @@
         {
           loading: `Création de l'achat groupé en cours...`,
           success: "Achat groupé créé avec succès",
-          error: "Erreur lors de la création de l'achat groupé",
+          // Conflit d'unicité (event, nom) sur la matérialisation d'un
+          // produit : message métier explicite à la place du libellé statique.
+          error: (err) =>
+            resolveProductWriteError(err) ??
+            "Erreur lors de la création de l'achat groupé",
         },
       );
     } catch (error) {

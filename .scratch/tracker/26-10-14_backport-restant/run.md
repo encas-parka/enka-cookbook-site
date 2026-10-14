@@ -12,7 +12,7 @@
 | 1 | [01](issues/01-lot1-override-legacy.md) | E (paire écriture+lecture override) + micro-fix `GroupPurchaseModal` L112 | ✅ implémenté, non commité (39 tests ciblés verts, check 0 erreur) |
 | 2 | [02](issues/02-lot2-finitions-parite.md) | M (badge `sourceProductName`) + H (colonne CSV « Besoin calculé ») | ✅ implémenté, non commité (57 tests ciblés verts, check 0 erreur) |
 | 3 | [03](issues/03-lot3-recherche-url.md) | C (`setSearchInRecipes`) + G (sync filtres ↔ URL) — **investigation design d'abord** | 🔄 investigation lancée |
-| 4 | [04](issues/04-lot4-purchasemanager.md) | I (résiduel livraison `ordered`) + alignement cosmétique sœur, dates PB gardées | ⏳ après vagues 1-2 |
+| 4 | [04](issues/04-lot4-purchasemanager.md) | I (résiduel livraison `ordered`) + alignement cosmétique sœur, dates PB gardées | ✅ implémenté, non commité (check 0 erreur ; carte compacte DATA/CONTEXTE/ACTIONS, table desktop conservée) |
 | 5 | [05](issues/05-lot5-recette-details.md) | J (`ProductRecipeDetails` + `RecipeDetailDrawer` + branchement) | ⏳ après lot 4 (page partagée avec 6) |
 | 6 | [06](issues/06-lot6-factures-groupees.md) | K (`GroupedInvoicesBar` + `InvoiceDetailModal` + branchement) | ⏳ après lot 5 (même page) |
 

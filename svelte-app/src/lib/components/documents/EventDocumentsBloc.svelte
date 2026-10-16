@@ -20,17 +20,16 @@
   const sortedDocs = $derived(
     [...docs].sort(
       (a, b) =>
-        new Date(b.updated || 0).getTime() -
-        new Date(a.updated || 0).getTime(),
+        new Date(b.updated || 0).getTime() - new Date(a.updated || 0).getTime(),
     ),
   );
 </script>
 
 {#if canEdit}
-  <div class="rounded-box bg-base-100 p-4 shadow">
+  <div class="rounded-box bg-base-100 shadow-accent p-4 shadow">
     <div class="mb-3 flex items-start justify-between">
-      <h3 class="flex items-center gap-2 text-sm font-semibold">
-        <FileText class="h-4 w-4" />
+      <h3 class="flex items-center gap-2 text-base font-semibold">
+        <FileText size={22} />
         Documents {tagLabel}
       </h3>
       {#if canEdit}

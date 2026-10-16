@@ -9,6 +9,7 @@ import { makeEnrichedProduct } from "./fixtures/enriched-products";
 function makeFilters(overrides: Partial<FiltersState> = {}): FiltersState {
   return {
     searchQuery: "",
+    searchInRecipes: false,
     selectedStores: [],
     selectedWho: [],
     selectedProductTypes: [],

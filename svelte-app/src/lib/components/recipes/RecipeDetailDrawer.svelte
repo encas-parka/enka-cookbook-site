@@ -1,11 +1,12 @@
 <script lang="ts">
-  import type {
-    RecipeForDisplay,
-    RecettesTypeR,
-  } from "$lib/types/recipes.types";
+  import type { RecipeForDisplay } from "$lib/types/recipes.types";
   import { recipeDrawer } from "$lib/stores/RecipeDrawer.svelte";
   import { recipesStore } from "$lib/stores/RecipesStore.svelte";
-  import { getTypeDisplay } from "$lib/utils/recipeUtils";
+  import {
+    getTypeDisplay,
+    getRecipeTypeColor,
+    getTypeLabel,
+  } from "$lib/utils/recipeUtils";
   import RecipeIngredientsList from "./RecipeIngredientsList.svelte";
   import RecipePreparation from "./RecipePreparation.svelte";
   import RecipeRegimeBadges from "./RecipeRegimeBadges.svelte";
@@ -64,28 +65,6 @@
     return `${plates} couverts`;
   }
 
-  function getRecipeColor(typeR: RecettesTypeR): string {
-    if (typeR === "entree") return "bg-lime-100 border-lime-200";
-    if (typeR === "plat") return "bg-orange-100 border-orange-200";
-    if (typeR === "dessert") return "bg-pink-100 border-pink-200";
-    if (typeR === "autre") return "bg-purple-100 border-purple-200";
-    return "bg-base-200";
-  }
-
-  function getTypeLabel(type: string): string {
-    switch (type) {
-      case "entree":
-        return "Entrée";
-      case "plat":
-        return "Plat";
-      case "dessert":
-        return "Dessert";
-      case "autre":
-        return "Autre";
-      default:
-        return type;
-    }
-  }
 </script>
 
 <Drawer bind:open={recipeDrawer.isOpen} direction="right">
@@ -142,7 +121,7 @@
             <!-- Ligne badges -->
             <div class="mt-3 flex flex-wrap items-center gap-3">
               {#if recipe.typeR}
-                <div class="badge font-medium {getRecipeColor(recipe.typeR)}">
+                <div class="badge font-medium {getRecipeTypeColor(recipe.typeR)}">
                   {getTypeLabel(recipe.typeR)}
                 </div>
               {/if}

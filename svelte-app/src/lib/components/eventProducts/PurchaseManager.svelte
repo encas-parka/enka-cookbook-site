@@ -18,7 +18,10 @@
     Euro,
   } from "@lucide/svelte";
   import type { Purchases } from "$lib/types/pb";
-  import type { ProductModalStateType } from "$lib/types/store.types.js";
+  import type {
+    ProductModalStateType,
+    DeliveryStatus,
+  } from "$lib/types/store.types.js";
   import {
     formatDate,
     getStatusBadge,
@@ -75,7 +78,7 @@
     modalState.forms.purchase.who = purchase.who || "";
     modalState.forms.purchase.notes = purchase.notes || "";
     modalState.forms.purchase.status =
-      (purchase.status as "ordered" | "delivered") || null;
+      (purchase.status as DeliveryStatus) || null;
     modalState.forms.purchase.orderDate =
       toInputDate(purchase.orderDate) || null;
     modalState.forms.purchase.deliveryDate =

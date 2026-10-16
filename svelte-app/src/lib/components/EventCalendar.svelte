@@ -4,6 +4,7 @@
     formatDateWdDayMonthShort,
     extractDate,
   } from "$lib/utils/date-helpers";
+  import { getRecipeTypeColor } from "$lib/utils/recipeUtils";
 
   interface CalendarRecipe {
     recipeUuid: string;
@@ -57,14 +58,6 @@
       columns.some((col) => (col.mealsByMoment.get(m.key) ?? []).length > 0),
     ),
   );
-
-  function getRecipeColor(typeR: string): string {
-    if (typeR === "entree") return "bg-lime-100 border-lime-200";
-    if (typeR === "plat") return "bg-orange-100 border-orange-200";
-    if (typeR === "dessert") return "bg-pink-100 border-pink-200";
-    if (typeR === "autre") return "bg-purple-100 border-purple-200";
-    return "bg-base-200";
-  }
 
   function handleRecipeClick(recipe: CalendarRecipe) {
     if (selectedRecipeUuid === recipe.recipeUuid) {
@@ -142,7 +135,7 @@
             class="border-base-300 border-r border-b px-1 py-1.5 align-top sm:px-2"
           >
             {#each recipes as recipe (recipe.recipeUuid)}
-              {@const bgColor = getRecipeColor(recipe.typeR)}
+              {@const bgColor = getRecipeTypeColor(recipe.typeR)}
               <div class="indicator w-full">
                 {#if recipe.preparation24h}
                   <span class="indicator-item status status-md status-warning badge-xs"></span>
@@ -176,7 +169,7 @@
           >
             {#if isRow0}
               {#each undatedRecipes as recipe (recipe.recipeUuid)}
-                {@const bgColor = getRecipeColor(recipe.typeR)}
+                {@const bgColor = getRecipeTypeColor(recipe.typeR)}
                 <div class="indicator w-full">
                   {#if recipe.preparation24h}
                     <span class="indicator-item status status-md status-warning badge-xs"></span>

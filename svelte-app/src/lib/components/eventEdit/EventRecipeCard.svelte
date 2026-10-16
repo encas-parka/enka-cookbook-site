@@ -1,8 +1,5 @@
 <script lang="ts">
-  import type {
-    RecettesTypeR,
-    RecipeForDisplay,
-  } from "$lib/types/recipes.types";
+  import type { RecipeForDisplay } from "$lib/types/recipes.types";
   import { scaleAndFormatIngredient } from "$lib/utils/QuantityFormatter";
   import {
     extractDate,
@@ -13,7 +10,11 @@
   import RecipePreparation from "$lib/components/recipes/RecipePreparation.svelte";
   import RecipeRegimeBadges from "$lib/components/recipes/RecipeRegimeBadges.svelte";
   import { Utensils, Calendar, ChefHat, Users } from "@lucide/svelte";
-  import { getTypeDisplay } from "$lib/utils/recipeUtils";
+  import {
+    getTypeDisplay,
+    getRecipeTypeColor,
+    getTypeLabel,
+  } from "$lib/utils/recipeUtils";
 
   interface Props {
     recipe: RecipeForDisplay;
@@ -72,30 +73,6 @@
     return `${plates} couverts`;
   }
 
-  // Type de repas affiché
-  function getTypeLabel(type: string): string {
-    switch (type) {
-      case "entree":
-        return "Entrée";
-      case "plat":
-        return "Plat";
-      case "dessert":
-        return "Dessert";
-      case "autre":
-        return "Autre";
-      default:
-        return type;
-    }
-  }
-
-  function getRecipeColor(typeR: RecettesTypeR) {
-    if (typeR === "entree") return "bg-lime-100 border-lime-200";
-    else if (typeR === "plat") return "bg-orange-100 border-orange-200";
-    else if (typeR === "dessert") return "bg-pink-100 border-pink-200";
-    else if (typeR === "autre") return "bg-purple-100 border-purple-200";
-    else return "bg-base-200";
-  }
-
   // Date formatée pour l'affichage
   const formattedDate = $derived.by(() => {
     if (!mealDate) return "";
@@ -140,7 +117,7 @@
 
           {#if recipeTypeInEvent}
             <div
-              class="badge text-base-content/80 font-medium {getRecipeColor(
+              class="badge text-base-content/80 font-medium {getRecipeTypeColor(
                 recipeTypeInEvent,
               )}"
             >

@@ -1,9 +1,9 @@
 <script lang="ts">
-  import { Sun, Moon, Cloud } from "@lucide/svelte";
   import type {
     RecipeOccurrence,
     DateDisplayInfo,
   } from "$lib/types/store.types";
+  import { getTimeIconComponent } from "$lib/utils/time-icon";
 
   interface Props {
     dateDisplayInfo: DateDisplayInfo;
@@ -22,13 +22,7 @@
   );
 
   const IconComponent = $derived(
-    dateDisplayInfo.timeIcon === "sun"
-      ? Sun
-      : dateDisplayInfo.timeIcon === "moon"
-        ? Moon
-        : dateDisplayInfo.timeIcon === "cloud"
-          ? Cloud
-          : null,
+    getTimeIconComponent(dateDisplayInfo.timeIcon),
   );
 </script>
 

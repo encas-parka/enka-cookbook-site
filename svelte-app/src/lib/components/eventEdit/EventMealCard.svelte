@@ -27,6 +27,7 @@
   import ConfirmModal from "$lib/components/ui/ConfirmModal.svelte";
   import { recipesStore } from "$lib/stores/RecipesStore.svelte";
   import { formatDateShort } from "$lib/utils/products-display";
+  import { getRecipeTypeColor } from "$lib/utils/recipeUtils";
   import { fade } from "svelte/transition";
   import {
     extractDate,
@@ -271,12 +272,7 @@
   // });
 
   function getRecipeColor(typeR: RecettesTypeR, isMissing: boolean = false) {
-    if (isMissing) return "badge-error";
-    else if (typeR === "entree") return "bg-lime-100 border-lime-200";
-    else if (typeR === "plat") return "bg-orange-100 border-orange-200";
-    else if (typeR === "dessert") return "bg-pink-100 border-pink-200";
-    else if (typeR === "autre") return "bg-purple-100 border-purple-200";
-    else return "bg-base-200";
+    return isMissing ? "badge-error" : getRecipeTypeColor(typeR);
   }
 </script>
 

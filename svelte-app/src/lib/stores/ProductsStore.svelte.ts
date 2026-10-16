@@ -41,6 +41,7 @@ import type {
   BatchUpdateResult,
   ManualSpecs,
   GroupedInvoice,
+  DeliveryStatus,
 } from "../types/store.types";
 import type { EnrichedEvent } from "../types/events";
 
@@ -913,10 +914,11 @@ class ProductsStore {
       }
     }
 
+    // Tri par date décroissante (chaînes PB comparables en ordre lexical)
     allPurchases.sort((a, b) => {
-      const dateA = new Date(a.orderDate || a.created).getTime();
-      const dateB = new Date(b.orderDate || b.created).getTime();
-      return dateB - dateA;
+      const dateA = a.orderDate || a.created;
+      const dateB = b.orderDate || b.created;
+      return dateA === dateB ? 0 : dateA < dateB ? 1 : -1;
     });
 
     return { totalGlobal, byStore, byWho, allPurchases };
@@ -968,7 +970,7 @@ class ProductsStore {
       const statusPurchases = purchases.filter((p) => p.status !== "expense");
       const purchaseStatus =
         statusPurchases.length > 0
-          ? (statusPurchases[0].status as "ordered" | "delivered") || "delivered"
+          ? (statusPurchases[0].status as DeliveryStatus) || "delivered"
           : "delivered";
 
       // Noms des produits (dédupliqués)
@@ -985,14 +987,16 @@ class ProductsStore {
         }
       }
 
-      // Date la plus ancienne
-      const createdAt = purchases
-        .map((p) => new Date(p.orderDate || p.created).getTime())
-        .reduce((min, t) => Math.min(min, t), Infinity);
+      // Date la plus ancienne — comparaison lexicale des chaînes PocketBase
+      // (jamais `new Date()` sur une date PB : le parsing de
+      // "YYYY-MM-DD HH:mm:ss.SSSZ" n'est pas standard et décale selon le fuseau)
       const createdAtStr =
-        createdAt !== Infinity
-          ? new Date(createdAt).toISOString()
-          : first.created;
+        purchases
+          .map((p) => p.orderDate || p.created)
+          .reduce<string | null>(
+            (min, v) => (min === null || v < min ? v : min),
+            null,
+          ) ?? first.created;
 
       invoices.push({
         invoiceId,
@@ -1009,10 +1013,9 @@ class ProductsStore {
       });
     }
 
-    // Tri par date décroissante
-    invoices.sort(
-      (a, b) =>
-        new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
+    // Tri par date décroissante (chaînes PB comparables en ordre lexical)
+    invoices.sort((a, b) =>
+      a.createdAt === b.createdAt ? 0 : a.createdAt < b.createdAt ? 1 : -1,
     );
 
     return invoices;
@@ -1962,7 +1965,7 @@ class ProductsStore {
   async updateInvoiceGroup(
     invoiceId: string,
     updates: {
-      status?: "ordered" | "delivered";
+      status?: DeliveryStatus;
       deliveryDate?: string | null;
       who?: string | null;
       store?: string | null;

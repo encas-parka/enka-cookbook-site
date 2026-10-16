@@ -20,7 +20,7 @@
     Weight,
   } from "@lucide/svelte";
   import { productsStore } from "$lib/stores/ProductsStore.svelte";
-  import type { GroupedInvoice } from "$lib/types/store.types";
+  import type { DeliveryStatus } from "$lib/types/store.types";
   import type { Purchases } from "$lib/types/pb";
   import {
     formatDateOrNull,
@@ -47,10 +47,6 @@
 
   let { invoiceId, onClose, onSuccess }: Props = $props();
 
-  function getProductName(purchase: Purchases): string {
-    return productsStore.getProductNameForPurchase(purchase);
-  }
-
   // ─── État local ───────────────────────────────────────────
   let loading = $state(false);
   let error = $state<string | null>(null);
@@ -69,6 +65,22 @@
   let globalStore = $state<string>("");
   let globalInvoiceTotal = $state<string>("");
 
+  // ─── Édition individuelle par purchase ────────────────────
+  let editingPurchaseId = $state<string | null>(null);
+  let editData = $state({
+    quantity: 0,
+    unit: "",
+    price: "",
+    status: "",
+    deliveryDate: "",
+    who: "",
+    store: "",
+  });
+
+  // Dernier invoiceId synchronisé (pour ne réinitialiser qu'au changement)
+  let prevInvoiceId = $state<string | null>(null);
+
+  // ─── Données dérivées ─────────────────────────────────────
   let invoice = $derived(
     invoiceId
       ? (productsStore.groupedInvoices.find(
@@ -81,31 +93,6 @@
   let expensePurchase = $derived(
     invoice?.purchases.find((p) => p.status === "expense") ?? null,
   );
-
-  // Suggestions pour acheteur et magasin
-  let whoSuggestions = $derived(productsStore.uniqueWho);
-  let storeSuggestions = $derived(productsStore.uniqueStores);
-
-  // Synchroniser les champs globaux quand l'invoice change
-  let prevInvoiceId = $state<string | null>(null);
-  $effect(() => {
-    if (invoiceId && invoiceId !== prevInvoiceId) {
-      prevInvoiceId = invoiceId;
-      resetGlobalFields();
-    }
-  });
-
-  function resetGlobalFields() {
-    if (!invoice) return;
-    globalStatus = invoice.purchaseStatus ?? "ordered";
-    globalDeliveryDate = toInputDate(invoice.deliveryDate);
-    globalWho = invoice.who ?? "";
-    globalStore = invoice.store ?? "";
-    globalInvoiceTotal =
-      expensePurchase?.invoiceTotal != null
-        ? String(expensePurchase.invoiceTotal)
-        : "";
-  }
 
   let globalDirty = $derived.by(() => {
     if (!invoice) return false;
@@ -127,17 +114,31 @@
     invoice?.purchases.filter((p) => p.status !== "expense") ?? [],
   );
 
-  // ─── Édition individuelle par purchase ────────────────────
-  let editingPurchaseId = $state<string | null>(null);
-  let editData = $state({
-    quantity: 0,
-    unit: "",
-    price: "",
-    status: "",
-    deliveryDate: "",
-    who: "",
-    store: "",
+  // Suggestions pour acheteur et magasin
+  let whoSuggestions = $derived(productsStore.uniqueWho);
+  let storeSuggestions = $derived(productsStore.uniqueStores);
+
+  // ─── Effet : synchroniser les champs globaux au changement d'invoice ──
+  $effect(() => {
+    if (invoiceId && invoiceId !== prevInvoiceId) {
+      prevInvoiceId = invoiceId;
+      resetGlobalFields();
+    }
   });
+
+  // ─── Fonctions ────────────────────────────────────────────
+
+  function resetGlobalFields() {
+    if (!invoice) return;
+    globalStatus = invoice.purchaseStatus ?? "ordered";
+    globalDeliveryDate = toInputDate(invoice.deliveryDate);
+    globalWho = invoice.who ?? "";
+    globalStore = invoice.store ?? "";
+    globalInvoiceTotal =
+      expensePurchase?.invoiceTotal != null
+        ? String(expensePurchase.invoiceTotal)
+        : "";
+  }
 
   function startEditPurchase(purchase: Purchases) {
     editingPurchaseId = purchase.id;
@@ -180,25 +181,31 @@
           editData.quantity ?? 0,
           editData.unit,
         );
-        await productsStore.updateInvoicePurchase(
-          purchase.id,
+        await toastService.track(
+          productsStore.updateInvoicePurchase(
+            purchase.id,
+            {
+              quantity: normalized.quantity,
+              unit: normalized.unit,
+              price: editData.price !== "" ? Number(editData.price) : null,
+              ...(shouldDetach && { status: editData.status || null }),
+              ...(shouldDetach && {
+                deliveryDate: editData.deliveryDate || null,
+              }),
+              ...(shouldDetach && { who: editData.who || null }),
+              ...(shouldDetach && { store: editData.store || null }),
+            },
+            shouldDetach,
+          ),
           {
-            quantity: normalized.quantity,
-            unit: normalized.unit,
-            price: editData.price !== "" ? Number(editData.price) : null,
-            ...(shouldDetach && { status: editData.status || null }),
-            ...(shouldDetach && {
-              deliveryDate: editData.deliveryDate || null,
-            }),
-            ...(shouldDetach && { who: editData.who || null }),
-            ...(shouldDetach && { store: editData.store || null }),
+            loading: "Enregistrement de l'achat…",
+            success: shouldDetach
+              ? "Achat modifié et détaché du groupe"
+              : "Achat modifié",
+            error: (e) => (e as Error).message,
           },
-          shouldDetach,
         );
         editingPurchaseId = null;
-        toastService.success(
-          shouldDetach ? "Achat modifié et détaché du groupe" : "Achat modifié",
-        );
         onSuccess?.();
       } catch (e: any) {
         error = e.message;
@@ -245,28 +252,36 @@
             }
           : undefined;
 
-      await productsStore.updateInvoiceGroup(invoice.invoiceId, {
-        status: globalStatus as "ordered" | "delivered",
-        deliveryDate: globalDeliveryDate || null,
-        who: globalWho || null,
-        store: globalStore || null,
-        expense: expenseUpdate,
-      });
-
-      // Création de l'expense à la volée (cas edge : pas d'expense existant)
-      if (!expensePurchase && globalInvoiceTotal !== "") {
-        const newTotal = Number(globalInvoiceTotal);
-        if (!isNaN(newTotal)) {
-          await productsStore.createExpense({
-            invoiceTotal: newTotal,
-            store: globalStore || undefined,
-            who: globalWho || undefined,
-            invoiceId: invoice.invoiceId,
+      await toastService.track(
+        (async () => {
+          await productsStore.updateInvoiceGroup(invoice.invoiceId, {
+            status: globalStatus as DeliveryStatus,
+            deliveryDate: globalDeliveryDate || null,
+            who: globalWho || null,
+            store: globalStore || null,
+            expense: expenseUpdate,
           });
-        }
-      }
 
-      toastService.success("Achat groupé mis à jour");
+          // Création de l'expense à la volée (cas edge : pas d'expense existant)
+          if (!expensePurchase && globalInvoiceTotal !== "") {
+            const newTotal = Number(globalInvoiceTotal);
+            if (!isNaN(newTotal)) {
+              await productsStore.createExpense({
+                invoiceTotal: newTotal,
+                store: globalStore || undefined,
+                who: globalWho || undefined,
+                invoiceId: invoice.invoiceId,
+              });
+            }
+          }
+        })(),
+        {
+          loading: "Mise à jour de l'achat groupé…",
+          success: "Achat groupé mis à jour",
+          error: (e) => (e as Error).message,
+        },
+      );
+
       onSuccess?.();
     } catch (e: any) {
       error = e.message;
@@ -285,8 +300,14 @@
       loading = true;
       error = null;
       try {
-        await productsStore.deleteInvoiceGroup(invoice.invoiceId);
-        toastService.success("Achat groupé annulé");
+        await toastService.track(
+          productsStore.deleteInvoiceGroup(invoice.invoiceId),
+          {
+            loading: "Annulation de l'achat groupé…",
+            success: "Achat groupé annulé",
+            error: (e) => (e as Error).message,
+          },
+        );
         onClose();
         onSuccess?.();
       } catch (e: any) {
@@ -302,7 +323,7 @@
 
   function confirmDeletePurchase(purchase: Purchases) {
     if (!invoice) return;
-    const productName = getProductName(purchase);
+    const productName = productsStore.getProductNameForPurchase(purchase);
     const qty = formatSingleQuantity(purchase.quantity, purchase.unit);
     confirmTitle = "Supprimer cet achat";
     confirmMessage = `Supprimer l'achat de « ${productName} » (${qty}) de cet achat groupé ? Cette action est irréversible.`;
@@ -311,10 +332,16 @@
       loading = true;
       error = null;
       try {
-        await productsStore.updateInvoicePurchase(purchase.id, {
-          status: "deleted",
-        });
-        toastService.success("Achat supprimé");
+        await toastService.track(
+          productsStore.updateInvoicePurchase(purchase.id, {
+            status: "deleted",
+          }),
+          {
+            loading: "Suppression de l'achat…",
+            success: "Achat supprimé",
+            error: (e) => (e as Error).message,
+          },
+        );
         onSuccess?.();
       } catch (e: any) {
         error = e.message;
@@ -528,7 +555,7 @@
               >
                 <div class="card-body">
                   <div class="mb-2 text-sm font-medium">
-                    {getProductName(purchase)}
+                    {productsStore.getProductNameForPurchase(purchase)}
                   </div>
                   <div class="grid grid-cols-2 gap-2 sm:grid-cols-3">
                     <fieldset>
@@ -609,7 +636,7 @@
                 <div class="card-body">
                   <div class="flex flex-wrap items-center gap-x-3 gap-y-1.5">
                     <span class="text-sm font-medium">
-                      {getProductName(purchase)}
+                      {productsStore.getProductNameForPurchase(purchase)}
                     </span>
 
                     <span class="flex items-center gap-1 text-sm">

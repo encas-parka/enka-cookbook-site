@@ -1,7 +1,8 @@
 <script lang="ts">
-  import { Sun, Moon, Cloud, Utensils, Eye } from "@lucide/svelte";
+  import { Utensils, Eye } from "@lucide/svelte";
   import type { RecipeOccurrence } from "$lib/types/store.types";
   import { calculateDateDisplayInfo } from "$lib/utils/dateRange";
+  import { getTimeIconComponent } from "$lib/utils/time-icon";
   import { recipeDrawer } from "$lib/stores/RecipeDrawer.svelte";
   import { formatSingleQuantity } from "$lib/utils/QuantityFormatter";
 
@@ -31,14 +32,7 @@
   >
     {#each recipeLines as { recipe, date }, i (`${recipe.id ?? recipe.r}-${date}-${i}`)}
       {@const dateInfo = calculateDateDisplayInfo(date)}
-      {@const DateIcon =
-        dateInfo.timeIcon === "sun"
-          ? Sun
-          : dateInfo.timeIcon === "moon"
-            ? Moon
-            : dateInfo.timeIcon === "cloud"
-              ? Cloud
-              : null}
+      {@const DateIcon = getTimeIconComponent(dateInfo.timeIcon)}
       <button
         class="text-base-content/60 border-neutral/10 hover:border-accent/50 flex min-w-0 items-center gap-2 border px-1 py-0.5 hover:cursor-pointer"
         onclick={() => {

@@ -10,6 +10,7 @@
   import { globalState } from "$lib/stores/GlobalState.svelte";
   import type { EventMeal, EventMealRecipe } from "$lib/types/events";
   import type { RecettesTypeR } from "$lib/types/recipes.types";
+  import { getRecipeTypeColor } from "$lib/utils/recipeUtils";
 
   import {
     Calendar,
@@ -917,14 +918,6 @@
     // depuis currentEvent une fois isEditing passé à false
   }
 
-  function getRecipeColor(typeR: RecettesTypeR) {
-    if (typeR === "entree") return "bg-lime-100 border-lime-200";
-    if (typeR === "plat") return "bg-orange-100 border-orange-200";
-    if (typeR === "dessert") return "bg-pink-100 border-pink-200";
-    if (typeR === "autre") return "bg-purple-100 border-purple-200";
-    return "bg-base-200";
-  }
-
   function handleExportRecipes() {
     const lines: string[] = [];
 
@@ -1229,7 +1222,7 @@
                   {@const recipeName =
                     recipeIndex?.title ?? recipe.recipeUuid.slice(0, 8)}
                   <div
-                    class="badge badge-lg {getRecipeColor(
+                    class="badge badge-lg {getRecipeTypeColor(
                       recipe.typeR,
                     )} h-auto gap-3 border py-1 font-medium"
                     transition:slide

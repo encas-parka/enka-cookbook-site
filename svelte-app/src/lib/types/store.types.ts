@@ -12,6 +12,12 @@ export type PurchaseStatus =
   | null; // Compatibilité (achat direct)
 
 /**
+ * Sous-ensemble de `PurchaseStatus` restreint au suivi d'une commande
+ * (commandé / livré) — statut d'une facture groupée ou d'un formulaire d'achat.
+ */
+export type DeliveryStatus = Extract<PurchaseStatus, "ordered" | "delivered">;
+
+/**
  * Facture groupée (achats créés via GroupPurchaseModal).
  * Agrège tous les purchases partageant un même invoiceId (préfixe FACTURE_).
  * Les purchases au statut différent du groupe sont détachés (invoiceId → null),
@@ -23,7 +29,7 @@ export interface GroupedInvoice {
   store: string;
   who: string;
   notes: string;
-  purchaseStatus: "ordered" | "delivered";
+  purchaseStatus: DeliveryStatus;
   deliveryDate: string | null;
   purchaseCount: number;
   productNames: string[];
@@ -238,7 +244,7 @@ export interface PurchaseFormData {
   who: string;
   price: number | null;
   notes: string;
-  status: "ordered" | "delivered" | null;
+  status: DeliveryStatus | null;
   orderDate: string | null;
   deliveryDate: string | null;
 }

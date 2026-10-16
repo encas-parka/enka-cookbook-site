@@ -6,7 +6,7 @@
   } from "$lib/stores/ProductsStore.svelte";
   import { toastService } from "$lib/services/toast.service.svelte";
   import { globalState } from "$lib/stores/GlobalState.svelte";
-  import type { EnrichedProduct } from "$lib/types/store.types";
+  import type { EnrichedProduct, DeliveryStatus } from "$lib/types/store.types";
   import { formatDateWdDayMonthShort } from "$lib/utils/date-helpers";
   import BtnGroupCheck from "../ui/BtnGroupCheck.svelte";
   import InfoCollapse from "../ui/InfoCollapse.svelte";
@@ -40,7 +40,7 @@
     who: "",
     expense: null as number | null,
     notes: "",
-    status: "delivered" as "ordered" | "delivered" | null,
+    status: "delivered" as DeliveryStatus | null,
     deliveryDate: null as string | null,
   });
 

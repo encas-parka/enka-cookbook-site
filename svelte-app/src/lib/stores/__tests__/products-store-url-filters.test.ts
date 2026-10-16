@@ -3,10 +3,9 @@
  */
 
 /**
- * ProductsStore — recherche recettes (C) + sync filtres↔URL (G).
+ * ProductsStore — recherche recettes et sync filtres↔URL.
  *
- * Plan de tests issu de `.scratch/tracker/26-10-14_backport-restant/design-lot3.md`
- * §6 : hydratation, écriture+historique, non-boucle, back simulé, fuzzy
+ * Couvre : hydratation, écriture+historique, non-boucle, back simulé, fuzzy
  * recettes, bypass, debounce, cycle de vie.
  *
  * Point d'attention : `searchParams` (sv-router) garde son propre état,

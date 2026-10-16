@@ -308,14 +308,6 @@
   // Facture groupée ouverte dans la modale de détail (FACTURE_*)
   let openInvoiceId = $state<string | null>(null);
 
-  function openInvoiceDetail(invoiceId: string) {
-    openInvoiceId = invoiceId;
-  }
-
-  function closeInvoiceDetail() {
-    openInvoiceId = null;
-  }
-
   // =========================================================================
   // PERMISSIONS & INVITATION
   // =========================================================================
@@ -632,7 +624,7 @@
         <!-- Achats groupés -->
         <GroupedInvoicesBar
           canEdit={!!canEdit}
-          onInvoiceClick={openInvoiceDetail}
+          onInvoiceClick={(id) => (openInvoiceId = id)}
         />
       </div>
     </div>
@@ -789,7 +781,10 @@
     onClose={closeModal}
   />
   <RecipeDetailDrawer />
-  <InvoiceDetailModal invoiceId={openInvoiceId} onClose={closeInvoiceDetail} />
+  <InvoiceDetailModal
+    invoiceId={openInvoiceId}
+    onClose={() => (openInvoiceId = null)}
+  />
 
   {#if whoEditModalOpen}
     <WhoBatchEditModal

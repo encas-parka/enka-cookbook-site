@@ -107,6 +107,28 @@ export function getTypeLabel(type: string): string {
   }
 }
 
+/**
+ * Retourne les classes de fond/bordure d'un badge selon le type de recette.
+ *
+ * @example
+ * getRecipeTypeColor("entree") // → "bg-lime-100 border-lime-200"
+ * getRecipeTypeColor("plat")   // → "bg-orange-100 border-orange-200"
+ */
+export function getRecipeTypeColor(typeR: string): string {
+  switch (typeR) {
+    case "entree":
+      return "bg-lime-100 border-lime-200";
+    case "plat":
+      return "bg-orange-100 border-orange-200";
+    case "dessert":
+      return "bg-pink-100 border-pink-200";
+    case "autre":
+      return "bg-purple-100 border-purple-200";
+    default:
+      return "bg-base-200";
+  }
+}
+
 // =============================================================================
 // ASTUCES - Parsing depuis DB
 // =============================================================================

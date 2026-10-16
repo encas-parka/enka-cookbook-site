@@ -1,5 +1,7 @@
 # hugo
 
+> **ARCHIVÉ (16-10)** — la toolchain Hugo est supprimée du worktree (étape A du plan `5b_csr-hosting-option-a.md`). L'app ne lit plus rien de Hugo au runtime. Ce document ne reste utile que pour deux choses vivantes : les **sources de migration** `content/` + `static/data/` (inputs du pipeline jusqu'au cutover, gate `--content-synced`) et l'historique des formats.
+
 Scope: rôle de Hugo en Phase 1 — génération des recettes, de l'API JSON et des assets consommés par la SPA.
 Maintenance: mettre à jour au retrait de Hugo (Phase 2, SvelteKit) ; d'ici là, tout changement de formats/content doit être répercuté ici.
 **Legacy** : Hugo est appelé à disparaître en Phase 2 — voir `.agents/plans/4_routing-sveltekit.md`.

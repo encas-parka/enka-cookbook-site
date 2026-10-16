@@ -50,8 +50,8 @@ await store.setupRealtime(); // SSE → Dexie
 
 ## Build & dev
 
-- `bun run build` → `../static/app/`, base `/app/` en prod (`/` en dev), chunks manuels `@lucide/svelte` + `pocketbase`, minify esbuild.
-- Proxy dev vers Hugo : `/recipe` (JSON seulement), `/data`, `/icons`, `/images`.
+- `bun run build` → `svelte-app/dist/`, base `/` en dev comme en prod, chunks manuels `@lucide/svelte` + `pocketbase`, minify esbuild.
+- Pas de proxy : les assets (`/icons/`, `/images/`, `/fonts/`, PWA) sont servis depuis `svelte-app/public/` en dev comme au build (toolchain Hugo supprimée 16-10).
 
 ## Canons de vérification
 

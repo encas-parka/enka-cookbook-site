@@ -102,6 +102,8 @@ export function getTypeLabel(type: string): string {
       return "Plat";
     case "dessert":
       return "Dessert";
+    case "autre":
+      return "Autre";
     default:
       return type;
   }

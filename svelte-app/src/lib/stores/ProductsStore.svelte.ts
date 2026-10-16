@@ -40,6 +40,7 @@ import type {
   StoreInfo,
   BatchUpdateResult,
   ManualSpecs,
+  GroupedInvoice,
 } from "../types/store.types";
 import type { EnrichedEvent } from "../types/events";
 
@@ -919,6 +920,102 @@ class ProductsStore {
     });
 
     return { totalGlobal, byStore, byWho, allPurchases };
+  });
+
+  /**
+   * Factures groupées (achats créés via GroupPurchaseModal → invoiceId FACTURE_*).
+   * Agrège tous les purchases partageant un même invoiceId. Les purchases au
+   * statut différent du groupe sont détachés (invoiceId → null), donc les
+   * statuts sont homogènes au sein d'une facture.
+   */
+  groupedInvoices = $derived.by<GroupedInvoice[]>(() => {
+    const byInvoiceId = new Map<string, Purchases[]>();
+
+    const collectFacture = (purchases: Iterable<Purchases>) => {
+      for (const purchase of purchases) {
+        if (purchase.status === "deleted") continue;
+        if (!purchase.invoiceId?.startsWith("FACTURE_")) continue;
+        const list = byInvoiceId.get(purchase.invoiceId) ?? [];
+        list.push(purchase);
+        byInvoiceId.set(purchase.invoiceId, list);
+      }
+    };
+
+    // 1. Achats au statut expense (portent le total de la facture)
+    collectFacture(this.#expensePurchases.values());
+
+    // 2. Achats rattachés aux produits — via #productModels (SvelteMap réactive,
+    //    déclenche la réévaluation, même pattern que financialStats).
+    for (const model of this.#productModels.values()) {
+      collectFacture(model.data.purchases);
+    }
+
+    const invoices: GroupedInvoice[] = [];
+    for (const [invoiceId, purchases] of byInvoiceId) {
+      if (purchases.length === 0) continue;
+
+      // Métadonnées communes (expense pour le prix, premier purchase pour le reste)
+      const first = purchases[0];
+      const expense = purchases.find((p) => p.status === "expense");
+      const store = first.store || "";
+      const who = first.who || "";
+      const notes = first.notes || "";
+      const invoiceTotal = expense?.invoiceTotal ?? first.invoiceTotal;
+      const deliveryDate = first.deliveryDate;
+
+      // Statut : homogène par construction (les purchases au statut différent
+      // sont détachés du groupe au moment de l'édition individuelle)
+      const statusPurchases = purchases.filter((p) => p.status !== "expense");
+      const purchaseStatus =
+        statusPurchases.length > 0
+          ? (statusPurchases[0].status as "ordered" | "delivered") || "delivered"
+          : "delivered";
+
+      // Noms des produits (dédupliqués)
+      const productNames: string[] = [];
+      const seenNames = new Set<string>();
+      for (const p of purchases) {
+        if (p.status === "expense") continue;
+        for (const productId of p.products ?? []) {
+          const cached = this.#productNameCache.get(productId);
+          if (cached && !seenNames.has(cached.name)) {
+            seenNames.add(cached.name);
+            productNames.push(cached.name);
+          }
+        }
+      }
+
+      // Date la plus ancienne
+      const createdAt = purchases
+        .map((p) => new Date(p.orderDate || p.created).getTime())
+        .reduce((min, t) => Math.min(min, t), Infinity);
+      const createdAtStr =
+        createdAt !== Infinity
+          ? new Date(createdAt).toISOString()
+          : first.created;
+
+      invoices.push({
+        invoiceId,
+        invoiceTotal,
+        store,
+        who,
+        notes,
+        purchaseStatus,
+        deliveryDate,
+        purchaseCount: statusPurchases.length,
+        productNames,
+        purchases,
+        createdAt: createdAtStr,
+      });
+    }
+
+    // Tri par date décroissante
+    invoices.sort(
+      (a, b) =>
+        new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
+    );
+
+    return invoices;
   });
 
   // ===========================================================================
@@ -1841,6 +1938,105 @@ class ProductsStore {
     await this.#purchasesCollection.update(purchaseId, { status: "deleted" } as Partial<Purchases>);
   }
 
+  /**
+   * Nom du produit associé à un purchase (via le cache interne de noms).
+   */
+  getProductNameForPurchase(purchase: Purchases): string {
+    for (const productId of purchase.products ?? []) {
+      const cached = this.#productNameCache.get(productId);
+      if (cached) return cached.name;
+    }
+    return "?";
+  }
+
+  // ===========================================================================
+  // FACTURES GROUPÉES : actions
+  // ===========================================================================
+
+  /**
+   * Met à jour les champs globaux de tous les purchases d'une facture groupée
+   * (statut, date de livraison, who, store) + l'expense (total), via un batch
+   * PocketBase (une seule requête). PB n'offre pas de transaction client
+   * multi-record — le batch en est la primitive la plus proche.
+   */
+  async updateInvoiceGroup(
+    invoiceId: string,
+    updates: {
+      status?: "ordered" | "delivered";
+      deliveryDate?: string | null;
+      who?: string | null;
+      store?: string | null;
+      expense?: { purchaseId: string; price: number; invoiceTotal: number };
+    },
+  ): Promise<void> {
+    const invoice = this.groupedInvoices.find(
+      (inv) => inv.invoiceId === invoiceId,
+    );
+    if (!invoice) throw new Error(`Facture ${invoiceId} introuvable`);
+
+    const purchasesToUpdate = invoice.purchases.filter(
+      (p) => p.status !== "expense" && p.status !== "deleted",
+    );
+    if (purchasesToUpdate.length === 0) return;
+
+    const data: Record<string, unknown> = {};
+    if (updates.status !== undefined) data.status = updates.status;
+    if (updates.deliveryDate !== undefined)
+      data.deliveryDate = updates.deliveryDate;
+    if (updates.who !== undefined) data.who = updates.who;
+    if (updates.store !== undefined) data.store = updates.store;
+
+    const batch = pb.createBatch();
+    for (const p of purchasesToUpdate) {
+      batch.collection("purchases").update(p.id, data);
+    }
+
+    // Inclure la mise à jour de l'expense (total) dans le même batch
+    if (updates.expense) {
+      batch.collection("purchases").update(updates.expense.purchaseId, {
+        price: updates.expense.price,
+        invoiceTotal: updates.expense.invoiceTotal,
+      });
+    }
+
+    await batch.send();
+  }
+
+  /**
+   * Met à jour un purchase individuel.
+   * Si detachFromGroup=true, le purchase quitte la facture (invoiceId → null).
+   */
+  async updateInvoicePurchase(
+    purchaseId: string,
+    updates: Partial<Purchases>,
+    detachFromGroup = false,
+  ): Promise<void> {
+    const payload = detachFromGroup ? { ...updates, invoiceId: null } : updates;
+    await this.updatePurchase(purchaseId, payload);
+  }
+
+  /**
+   * Soft-delete tous les purchases d'une facture (status → "deleted"), via un
+   * batch PocketBase (une seule requête).
+   */
+  async deleteInvoiceGroup(invoiceId: string): Promise<void> {
+    const invoice = this.groupedInvoices.find(
+      (inv) => inv.invoiceId === invoiceId,
+    );
+    if (!invoice) throw new Error(`Facture ${invoiceId} introuvable`);
+
+    const purchasesToDelete = invoice.purchases.filter(
+      (p) => p.status !== "deleted",
+    );
+    if (purchasesToDelete.length === 0) return;
+
+    const batch = pb.createBatch();
+    for (const p of purchasesToDelete) {
+      batch.collection("purchases").update(p.id, { status: "deleted" });
+    }
+    await batch.send();
+  }
+
   async createProduct(productData: {
     productName: string;
     productType?: string;
@@ -1901,6 +2097,8 @@ class ProductsStore {
     store?: string;
     notes?: string;
     who?: string;
+    /** Rattachée à une facture groupée (FACTURE_*) — laisse null sinon. */
+    invoiceId?: string;
   }): Promise<void> {
     const eventId = this.#currentEventId;
     if (!eventId) throw new Error("Aucun événement principal actif");
@@ -1915,7 +2113,7 @@ class ProductsStore {
       store: data.store || null,
       who: data.who || globalState.userName,
       price: data.invoiceTotal,
-      invoiceId: null,
+      invoiceId: data.invoiceId ?? null,
       invoiceTotal: data.invoiceTotal,
       orderDate: null,
       deliveryDate: new Date().toISOString(),

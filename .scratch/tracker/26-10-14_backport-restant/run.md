@@ -14,7 +14,7 @@
 | 3 | [03](issues/03-lot3-recherche-url.md) | C (`setSearchInRecipes`) + G (sync filtres ↔ URL) — mitigation anti-boucle + seuil 0.6 | ✅ implémenté, non commité (21 tests store/OU + 69 voisins verts, check 0 erreur ; test de non-boucle sur vrai chemin) |
 | 4 | [04](issues/04-lot4-purchasemanager.md) | I (résiduel livraison `ordered`) + alignement cosmétique sœur, dates PB gardées | ✅ implémenté, non commité (check 0 erreur ; carte compacte DATA/CONTEXTE/ACTIONS, table desktop conservée) |
 | 5 | [05](issues/05-lot5-recette-details.md) | J (`ProductRecipeDetails` + `RecipeDetailDrawer` + branchement) | ✅ implémenté, non commité (check 0 erreur ; store recipeDrawer + 2 composants + toggle global/local + tiroir monté) |
-| 6 | [06](issues/06-lot6-factures-groupees.md) | K (`GroupedInvoicesBar` + `InvoiceDetailModal` + branchement) | ⏳ après lot 5 (même page) |
+| 6 | [06](issues/06-lot6-factures-groupees.md) | K (`GroupedInvoicesBar` + `InvoiceDetailModal` + branchement) | ✅ implémenté, non commité (check 0 erreur ; type `GroupedInvoice` + `groupedInvoices` dérivé + 3 actions batch PB + `getProductNameForPurchase` + `createExpense` avec `invoiceId` + 2 composants + branchement page) |
 
 ## Conventions (rappelées à chaque agent)
 

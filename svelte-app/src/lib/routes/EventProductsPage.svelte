@@ -30,6 +30,8 @@
   import AddProductModal from "$lib/components/eventProducts/AddProductModal.svelte";
   import GlobalPurchasesModal from "$lib/components/eventProducts/GlobalPurchasesModal.svelte";
   import GroupPurchaseModal from "$lib/components/eventProducts/GroupPurchaseModal.svelte";
+  import GroupedInvoicesBar from "$lib/components/eventProducts/GroupedInvoicesBar.svelte";
+  import InvoiceDetailModal from "$lib/components/eventProducts/InvoiceDetailModal.svelte";
   import ProductModal from "$lib/components/eventProducts/ProductModal.svelte";
   import RecipeDetailDrawer from "$lib/components/recipes/RecipeDetailDrawer.svelte";
   import ProductsCards from "$lib/components/eventProducts/ProductsCards.svelte";
@@ -302,6 +304,17 @@
   }
 
   let GlobalPurchasesModalisOpen = $state(false);
+
+  // Facture groupée ouverte dans la modale de détail (FACTURE_*)
+  let openInvoiceId = $state<string | null>(null);
+
+  function openInvoiceDetail(invoiceId: string) {
+    openInvoiceId = invoiceId;
+  }
+
+  function closeInvoiceDetail() {
+    openInvoiceId = null;
+  }
 
   // =========================================================================
   // PERMISSIONS & INVITATION
@@ -616,6 +629,11 @@
             </div>
           </div>
         </div>
+        <!-- Achats groupés -->
+        <GroupedInvoicesBar
+          canEdit={!!canEdit}
+          onInvoiceClick={openInvoiceDetail}
+        />
       </div>
     </div>
 
@@ -771,6 +789,7 @@
     onClose={closeModal}
   />
   <RecipeDetailDrawer />
+  <InvoiceDetailModal invoiceId={openInvoiceId} onClose={closeInvoiceDetail} />
 
   {#if whoEditModalOpen}
     <WhoBatchEditModal

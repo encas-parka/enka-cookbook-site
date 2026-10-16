@@ -108,20 +108,18 @@
     <!-- Première ligne: Titre/Type à gauche, Store/Who à droite -->
     <div class="flex items-start justify-between">
       <!-- Section gauche: Titre & Type (prend la place disponible) -->
-      <div
-        class="flex flex-1 cursor-pointer flex-wrap items-center gap-4"
-        role="button"
-        tabindex="0"
-        onclick={() => onOpenModal(product.id, "recettes")}
-        onkeydown={(e) =>
-          e.key === "Enter" && onOpenModal(product.id, "recettes")}
-        onmouseenter={() =>
-          (hoverHelp.msg = "Afficher les informations sur ce produit")}
-        onmouseleave={() => hoverHelp.reset()}
-      >
+      <div class="flex flex-1 flex-wrap items-center gap-4">
         <!-- Nom du produit & type icon -->
         <div
-          class="text-primary flex flex-wrap items-center gap-x-2 gap-y-1 text-base font-semibold"
+          class="text-primary flex cursor-pointer flex-wrap items-center gap-x-2 gap-y-1 text-base font-semibold"
+          role="button"
+          tabindex="0"
+          onclick={() => onOpenModal(product.id, "recettes")}
+          onkeydown={(e) =>
+            e.key === "Enter" && onOpenModal(product.id, "recettes")}
+          onmouseenter={() =>
+            (hoverHelp.msg = "Afficher les informations sur ce produit")}
+          onmouseleave={() => hoverHelp.reset()}
         >
           <typeInfo.icon class="h-4 w-4 shrink-0" />{product.productName}
           {#if product.mergedFrom?.length}

@@ -326,7 +326,7 @@
     const productName = productsStore.getProductNameForPurchase(purchase);
     const qty = formatSingleQuantity(purchase.quantity, purchase.unit);
     confirmTitle = "Supprimer cet achat";
-    confirmMessage = `Supprimer l'achat de « ${productName} » (${qty}) de cet achat groupé ? Cette action est irréversible.`;
+    confirmMessage = `Supprimer l'achat de « ${productName} » (${qty}) de cet achat groupé (ceci supprimera l'achat, la quantité déclarée par celui-ci sera rétablie comme "manquante") ?  Cette action est irréversible.`;
     confirmVariant = "danger";
     confirmAction = async () => {
       loading = true;

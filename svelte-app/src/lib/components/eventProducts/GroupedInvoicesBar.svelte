@@ -26,7 +26,7 @@
 </script>
 
 {#if hasInvoices}
-  <div class="mt-auto">
+  <div class="ms-auto mt-auto">
     <span
       class="text-base-content/60 text-xs font-medium tracking-wider uppercase"
     >

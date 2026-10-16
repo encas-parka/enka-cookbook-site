@@ -1,6 +1,5 @@
 <script lang="ts">
   import {
-    BadgeEuro,
     Calendar,
     CircleAlert,
     CircleCheck,
@@ -14,7 +13,6 @@
     MessageCircleQuestionMark,
     Package,
     PackageCheck,
-    Plus,
     Printer,
     ShoppingCart,
     Store,
@@ -36,6 +34,7 @@
   import RecipeDetailDrawer from "$lib/components/recipes/RecipeDetailDrawer.svelte";
   import ProductsCards from "$lib/components/eventProducts/ProductsCards.svelte";
   import ProductsFilters from "$lib/components/eventProducts/ProductsFilters.svelte";
+  import SummaryBar from "$lib/components/eventProducts/SummaryBar.svelte";
   import StoreBatchEditModal from "$lib/components/eventProducts/StoreBatchEditModal.svelte";
   import WhoBatchEditModal from "$lib/components/eventProducts/WhoBatchEditModal.svelte";
   import EventStats from "$lib/components/EventStats.svelte";
@@ -423,32 +422,9 @@
         <div class="skeleton mt-4 h-20 w-full"></div>
       </div>
 
-      <!-- Skeleton stats cards -->
+      <!-- Skeleton barre résumé -->
       <div class="flex w-full flex-wrap justify-center gap-10 md:justify-end">
-        <div class="card card-xs sm:card-sm border-base-300 w-40 border-2">
-          <div class="card-body">
-            <div class="card-title">
-              <div class="skeleton h-6 w-6 rounded"></div>
-              <span class="skeleton inline-block h-6 w-24"></span>
-            </div>
-            <div class="flex items-center justify-center px-2">
-              <div class="text-center">
-                <div class="skeleton mx-auto h-8 w-12"></div>
-                <div class="skeleton mx-auto mt-1 h-4 w-16"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="card card-xs sm:card-sm border-base-300 w-40 border-2">
-          <div class="card-body">
-            <div class="card-title">
-              <div class="skeleton h-6 w-6 rounded"></div>
-              <span class="skeleton inline-block h-6 w-24"></span>
-            </div>
-            <div class="skeleton mx-auto mt-2 h-8 w-16"></div>
-          </div>
-        </div>
+        <div class="skeleton h-14 w-72"></div>
       </div>
 
       <!-- Skeleton aide collapse -->
@@ -553,80 +529,23 @@
             de modifier les produits.
           </div>
         {/if}
-        {#if !eventIsPassed}
-          <!-- Carte des produits complétés/manquants -->
-          <div
-            class="card card-xs max-sm:card-side sm:card-sm border-2 border-orange-700"
-          >
-            <div class="card-body">
-              <div class="card-title text-orange-800">
-                <PackageCheck class="text-orange-800 opacity-60" />
-                Produits
-              </div>
-
-              <!-- <div class="text-center">
-                <div class="text-success text-lg font-bold md:text-2xl">
-                  {productsStore.completionStats.completed}
-                </div>
-                <div class="text-base-content/60 text-xs">Ok</div>
-              </div>
-              <div class="divider divider-horizontal mx-1"></div> -->
-              <div class="text-center">
-                <div class="text-error text-lg font-bold md:text-2xl">
-                  {productsStore.completionStats.missing}
-                </div>
-                <div class="text-base-content/60 text-xs">Manquants</div>
-              </div>
-              <div class="card-action mt-auto">
-                <button
-                  class="btn btn-accent w-full"
-                  onclick={handleOpenAddProductModal}
-                  onmouseenter={() =>
-                    (hoverHelp.msg = "Ajouter un produit manuellement")}
-                  onmouseleave={() => hoverHelp.reset()}
-                  title="Ajouter un produit manuellement"
-                  disabled={!canEdit}
-                >
-                  <Plus class="mr-1 h-4 w-4" />
-                  <span class="hidden sm:inline">Ajouter un</span>Produit
-                </button>
-              </div>
-            </div>
-          </div>
-        {/if}
-        <!-- Carte des dépenses -->
-        <div class="card card-xs sm:card-sm border-2 border-orange-700 shadow">
-          <div class="card-body">
-            <div class="card-title text-orange-800">
-              <BadgeEuro class="text-orange-800 opacity-60" />
-              Dépenses
-            </div>
-            <div class="text-base-content/70 text-center text-lg font-medium">
-              {productsStore.financialStats.totalGlobal} €
-            </div>
-            <div class="card-action mt-auto">
-              <button
-                class="btn btn-soft btn-primary"
-                onclick={() => (GlobalPurchasesModalisOpen = true)}
-                title="Ajouter une dépense générale"
-                onmouseenter={() =>
-                  (hoverHelp.msg =
-                    "Consulter ou modifie le détail des dépenses")}
-                onmouseleave={() => hoverHelp.reset()}
-                disabled={!canEdit}
-              >
-                <Plus class="size-4" />
-                Voir, ajouter
-              </button>
-            </div>
-          </div>
-        </div>
-        <!-- Achats groupés -->
-        <GroupedInvoicesBar
+        <!-- Barre résumé produits/dépenses (segment produits masqué si event passé) -->
+        <SummaryBar
+          completed={productsStore.completionStats.completed}
+          missing={productsStore.completionStats.missing}
+          total={productsStore.completionStats.total}
+          totalGlobal={productsStore.financialStats.totalGlobal}
           canEdit={!!canEdit}
-          onInvoiceClick={(id) => (openInvoiceId = id)}
+          showProducts={!eventIsPassed}
+          onAddProduct={handleOpenAddProductModal}
+          onOpenPurchases={() => (GlobalPurchasesModalisOpen = true)}
         />
       </div>
+      <!-- Achats groupés -->
+      <GroupedInvoicesBar
+        canEdit={!!canEdit}
+        onInvoiceClick={(id) => (openInvoiceId = id)}
+      />
     </div>
 
     <!-- Bloc Documents attachés -->

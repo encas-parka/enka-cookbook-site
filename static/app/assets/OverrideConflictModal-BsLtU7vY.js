@@ -1,1 +1,0 @@
-import"./rolldown-runtime-C3mKaglU.js";import{gi as o,hi as a,si as e}from"./icons-C8XrfKe0.js";import{r as i}from"./ProductsStore.svelte-WvRaNzV1.js";function l(t,r){o(r,!0),e(()=>i.modalOverride.conflicts),a()}export{l as default};

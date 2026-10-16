@@ -12,7 +12,7 @@ const __dirname = path.dirname(__filename);
 
 const pwaConfig: Partial<VitePWAOptions> = {
   registerType: "autoUpdate" as const,
-  injectRegister: false, // Hugo contrôle le HTML, on enregistre le SW manuellement
+  injectRegister: false, // SW enregistré manuellement dans main.ts
   manifest: {
     name: "Enka Cookbook",
     short_name: "Enka",
@@ -22,8 +22,8 @@ const pwaConfig: Partial<VitePWAOptions> = {
     background_color: "#ffffff",
     lang: "fr",
     display: "standalone" as const,
-    start_url: "/app/",
-    scope: "/app/",
+    start_url: "/",
+    scope: "/",
     icons: [
       {
         src: "192x192.png",
@@ -59,22 +59,6 @@ const pwaConfig: Partial<VitePWAOptions> = {
     clientsClaim: true,
     runtimeCaching: [
       {
-        urlPattern: /^https?:\/\/.*\/api\/data\.json$/,
-        handler: "StaleWhileRevalidate",
-        options: {
-          cacheName: "hugo-api",
-          expiration: { maxEntries: 10, maxAgeSeconds: 60 * 60 },
-        },
-      },
-      {
-        urlPattern: /^https?:\/\/.*\/recipe\/.*\/recipe\.json$/,
-        handler: "StaleWhileRevalidate",
-        options: {
-          cacheName: "hugo-recipes",
-          expiration: { maxEntries: 100, maxAgeSeconds: 60 * 60 },
-        },
-      },
-      {
         urlPattern: /^https?:\/\/.*\/(icons|images)\/.*/,
         handler: "CacheFirst",
         options: {
@@ -107,7 +91,7 @@ const pwaConfig: Partial<VitePWAOptions> = {
 };
 
 export default defineConfig(({ mode }) => ({
-  base: mode === "development" ? "/" : "/app/",
+  base: "/",
 
   plugins: [
     tailwindcss(),
@@ -121,7 +105,7 @@ export default defineConfig(({ mode }) => ({
   ],
 
   build: {
-    outDir: "../static/app/",
+    outDir: "dist",
     emptyOutDir: true,
 
     // ⭐ esbuild comme minificateur (au lieu d'OxC par défaut)
@@ -169,50 +153,6 @@ export default defineConfig(({ mode }) => ({
     alias: {
       "@": path.resolve(__dirname, "./src"),
       $lib: path.resolve(__dirname, "./src/lib"),
-    },
-  },
-
-  server: {
-    proxy: {
-      "/recipe": {
-        target: "http://localhost:1313",
-        changeOrigin: true,
-        // Ne proxy que les fichiers JSON vers Hugo.
-        // Pour les pages HTML, laisser Vite servir index.html (SPA fallback)
-        // afin que le HMR et l'inspecteur Svelte fonctionnent.
-        bypass: (req, _res, _options) => {
-          if (!req.url?.includes(".json")) {
-            return "/index.html";
-          }
-        },
-      },
-      "/data": {
-        target: "http://localhost:1313",
-        changeOrigin: true,
-        configure: (proxy, _options) => {
-          proxy.on("error", (_err, _req, _res) => {
-            console.log("[Vite Proxy] Hugo server not available for /data/");
-          });
-        },
-      },
-      "/icons": {
-        target: "http://localhost:1313",
-        changeOrigin: true,
-        configure: (proxy, _options) => {
-          proxy.on("error", (_err, _req, _res) => {
-            console.log("[Vite Proxy] Hugo server not available for /icons/");
-          });
-        },
-      },
-      "/images": {
-        target: "http://localhost:1313",
-        changeOrigin: true,
-        configure: (proxy, _options) => {
-          proxy.on("error", (_err, _req, _res) => {
-            console.log("[Vite Proxy] Hugo server not available for /images/");
-          });
-        },
-      },
     },
   },
 }));

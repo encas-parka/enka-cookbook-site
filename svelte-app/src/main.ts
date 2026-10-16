@@ -16,7 +16,20 @@ import { pb, onRealtimeReconnect } from "$lib/db-sync/pb-sync";
 // (modal de mise à jour, chunk guard) est l'Étape 9 du portage, différée.
 if ("serviceWorker" in navigator && import.meta.env.PROD) {
   window.addEventListener("load", () => {
-    navigator.serviceWorker.register("/app/sw.js").catch((err) => {
+    // La SPA est servie à la racine (fin du sous-chemin /app/ de l'ère Hugo).
+    // Un SW ancien au scope /app/ resterait actif sur ces URL : on le
+    // désenregistre et on purge ses caches runtime orphelins (idempotent).
+    navigator.serviceWorker.getRegistrations().then((regs) => {
+      for (const reg of regs) {
+        if (new URL(reg.scope).pathname.startsWith("/app/")) {
+          void reg.unregister();
+        }
+      }
+    });
+    void caches.delete("hugo-api");
+    void caches.delete("hugo-recipes");
+
+    navigator.serviceWorker.register("/sw.js").catch((err) => {
       console.warn("[PWA] Échec de l'enregistrement du Service Worker:", err);
     });
   });

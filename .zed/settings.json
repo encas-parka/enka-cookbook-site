@@ -22,17 +22,7 @@
     ".scratch/*",
     "AGENTS.md",
   ],
-  "context_servers": {
-    "serena": {
-      "command": "serena",
-      "args": [
-        "start-mcp-server",
-        "--context=ide",
-        "--project-from-cwd"
-      ],
-      "env": {},
-    },
-  },
+  "context_servers": {},
   "languages": {
     "HTML": {
       "prettier": {

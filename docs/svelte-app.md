@@ -65,5 +65,5 @@ await store.setupRealtime(); // SSE → Dexie
 
 ## Pistes
 
-- Pièges PocketBase (JSVM, `?=` cassé en 0.37.5, ids `_pb_users_auth_`) : skills `pocketbase-jsvm` / `pocketbase-sdk` dans `.agents/skills/` — mémoire Serena `pocketbase-jsvm-migrations`.
+- Pièges PocketBase (JSVM, `?=` cassé en 0.37.5, ids `_pb_users_auth_`) : skills `pocketbase-jsvm` / `pocketbase-sdk` dans `.agents/skills/`
 - Phase 2 (SvelteKit) : `.agents/plans/4_routing-sveltekit.md`.

@@ -1,1 +1,0 @@
-import"./rolldown-runtime.js";import{Si as o,pi as a,xi as i}from"./icons.js";import{i as e}from"./ProductsStore.svelte.js";function f(t,r){o(r,!0),a(()=>e.modalOverride.conflicts),i()}export{f as default};

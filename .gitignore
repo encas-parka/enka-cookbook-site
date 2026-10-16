@@ -1,11 +1,7 @@
 .directory
-resources
-public
 **/jsconfig.json
 *bak
 *BAK
-.hugo_build.lock
-_vendor
 node_modules
 content/recipe/uuid.sh
 backups
@@ -34,7 +30,9 @@ appwrite
 appwrite-ec-dev
 
 # dev
-# static/app
+svelte-app/dist
+# output d'un éventuel hugo server résiduel (côté host) — jamais une source
+/public
 
 # PocketBase
 pocketbase/pb_data

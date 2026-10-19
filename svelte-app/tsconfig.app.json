@@ -9,7 +9,6 @@
       "svelte",
       "vite/client"
     ],
-    "baseUrl": ".",
     "paths": {
       "@/*": [
         "./src/*"
@@ -34,5 +33,8 @@
     "src/**/*.ts",
     "src/**/*.js",
     "src/**/*.svelte"
+  ],
+  "exclude": [
+    "src/**/__tests__/**"
   ]
 }

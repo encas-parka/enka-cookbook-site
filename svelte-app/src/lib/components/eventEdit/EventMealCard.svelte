@@ -12,7 +12,7 @@
     Moon,
     CloudSun,
     Sun,
-    type Icon as IconType,
+    type LucideProps,
     Check,
     RefreshCcw,
     CalendarCog,
@@ -35,7 +35,7 @@
     dateToDateTime,
   } from "$lib/utils/date-helpers";
   import { flip } from "svelte/animate";
-  import { untrack } from "svelte";
+  import { untrack, type Component } from "svelte";
 
   interface Props {
     meal: EventMeal;
@@ -113,7 +113,7 @@
     }
   }
 
-  const TimeIcon: typeof IconType = $derived.by(() => {
+  const TimeIcon: Component<LucideProps> = $derived.by(() => {
     const time = displayTime || "";
     if (time === "matin") {
       return CloudSun;

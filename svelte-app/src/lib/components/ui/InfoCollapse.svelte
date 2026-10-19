@@ -1,10 +1,10 @@
 <script lang="ts">
-  import { Info, type Icon as IconType, ChevronDown } from "@lucide/svelte";
-  import type { Snippet } from "svelte";
+  import { Info, ChevronDown, type LucideProps } from "@lucide/svelte";
+  import type { Snippet, Component } from "svelte";
 
   interface Props {
     children?: Snippet;
-    icon?: typeof IconType;
+    icon?: Component<LucideProps>;
     title?: string;
     contentVisible?: string;
     style?: string;

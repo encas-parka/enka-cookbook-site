@@ -17,7 +17,7 @@
         "daisyui": "^5.7.50",
         "dexie": "^4.4.6",
         "fuzzysort": "^4.0.2",
-        "pocketbase": "^0.26.9",
+        "pocketbase": "^0.28.1",
         "runed": "^0.37.1",
         "sv-router": "^0.19.0",
         "tailwindcss": "^4.3.3",
@@ -1023,7 +1023,7 @@
 
     "picomatch": ["picomatch@4.0.7", "", {}, "sha512-qcJu88Q2IWqJsDD529JKMdwGm/dvInW4HvQnRwiH9JtihJvzGOscDtHE3x1pBKeUOTysQ8kVmLnJ2kJu7yhcGA=="],
 
-    "pocketbase": ["pocketbase@0.26.9", "", {}, "sha512-Tiv1/hNuUzRdvT0d8hF03dfzuefQ1WdSRp1A1q3wzFC/WYhQcbU/Qlaubl/3ZDo6xvFXBS8JAgBS/L+ms7nkVQ=="],
+    "pocketbase": ["pocketbase@0.28.1", "", {}, "sha512-/3ihkq+rvfcs0MQgrK4sEElOg6gfenHW9S/O+3BSO+V1yT+4B10+9aT22uTQUPqze9ItwNtwWyY5ZmdgVCTdVA=="],
 
     "pocketbase-typegen": ["pocketbase-typegen@1.5.0", "", { "dependencies": { "better-sqlite3": "^12.6.0", "commander": "^9.4.1", "dotenv-flow": "^4.1.0" }, "bin": { "pocketbase-typegen": "dist/cli.js" } }, "sha512-8B6MByVOX4mJGm+83zwmI/zmsbpOLcQ/lysRtnVx5NqyAcMg+aPUKE3ZZN3pINn+Tquv/cwcm3GJmFNTEGoQjg=="],
 

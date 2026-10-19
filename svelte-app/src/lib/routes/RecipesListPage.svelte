@@ -96,6 +96,7 @@
       const results = fuzzysort.go(query, visibleRecipes, {
         keys: ["title", "auteur", "region"],
         threshold: 0.3,
+        limit: 0, // recherche exhaustive : pas de plafond de résultats
       });
 
       const matchingIds = new Set(results.map(r => r.obj.id));

@@ -311,6 +311,7 @@ export function computeFuzzySearchMatches(
   const results = fuzzysort.go(query.trim(), searchable, {
     keys: searchInRecipes ? ["productName", "recipeNames"] : ["productName"],
     threshold: 0.6,
+    limit: 0, // recherche exhaustive : pas de plafond de résultats
   });
   return new Set(results.map((r) => r.obj.id));
 }

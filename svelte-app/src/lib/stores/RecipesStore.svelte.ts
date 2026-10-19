@@ -348,6 +348,7 @@ class RecipesStore {
 		const results = fuzzysort.go(query.trim(), this.recipesIndex, {
 			key: 'title',
 			threshold: 0.3,
+			limit: 0, // recherche exhaustive : pas de plafond de résultats
 		});
 
 		return results.map(r => r.obj);

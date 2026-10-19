@@ -50,7 +50,6 @@
     "dexie": "^4.4.6",
     "fuzzysort": "^3.1.0",
     "pocketbase": "^0.26.9",
-    "rune-scroller": "^2.2.2",
     "runed": "^0.37.1",
     "sv-router": "^0.13.0",
     "tailwindcss": "^4.3.3",

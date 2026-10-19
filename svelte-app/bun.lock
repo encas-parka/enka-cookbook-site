@@ -18,7 +18,6 @@
         "dexie": "^4.4.6",
         "fuzzysort": "^3.1.0",
         "pocketbase": "^0.26.9",
-        "rune-scroller": "^2.2.2",
         "runed": "^0.37.1",
         "sv-router": "^0.13.0",
         "tailwindcss": "^4.3.3",
@@ -1131,8 +1130,6 @@
     "rope-sequence": ["rope-sequence@1.3.4", "", {}, "sha512-UT5EDe2cu2E/6O4igUr5PSFs23nvvukicWHx6GnOPlHAiiYbzNuCRQCuiUdHJQcqKalLKlrYJnjY0ySGsXNQXQ=="],
 
     "run-applescript": ["run-applescript@7.1.0", "", {}, "sha512-DPe5pVFaAsinSaV6QjQ6gdiedWDcRCbUuiQfQa2wmWV7+xC9bGulGI8+TdRmoFkAPaBXk8CrAbnlY2ISniJ47Q=="],
-
-    "rune-scroller": ["rune-scroller@2.2.2", "", { "peerDependencies": { "svelte": "^5.0.0" } }, "sha512-qIgCB6z3qdWTzwindJXKFQImwy647xlvbMCdczf2RDkUZm0eMY9w9puwb/VNb0QtkT6WH2VHXJVKG3aIoZFMpw=="],
 
     "runed": ["runed@0.37.1", "", { "dependencies": { "dequal": "^2.0.3", "esm-env": "^1.0.0", "lz-string": "^1.5.0" }, "peerDependencies": { "@sveltejs/kit": "^2.21.0", "svelte": "^5.7.0", "zod": "^4.1.0" }, "optionalPeers": ["@sveltejs/kit", "zod"] }, "sha512-MeFY73xBW8IueWBm012nNFIGy19WUGPLtknavyUPMpnyt350M47PhGSGrGoSLbidwn+Zlt/O0cp8/OZE3LASWA=="],
 

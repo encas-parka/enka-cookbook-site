@@ -4,6 +4,7 @@
 > Alimenté aussi par le run `26-10-08_phase-1-7-pipeline-robuste` (synthèse : `.agents/plans/archive/26-10-08_phase-1-7-pipeline-robuste_done/run.md` § Découvertes différées).
 > Alimenté aussi par le run `26-10-12_clickthrough-fixes` (détail : `.scratch/tracker/26-10-12_clickthrough-fixes/run.md` § Findings différés — non archivé tant que le gate T12 n'est pas passé).
 > Alimenté aussi par le run `26-10-13_products-identity-upsert` (détail : `.scratch/tracker/26-10-13_products-identity-upsert/run.md` § Deferred findings).
+> Alimenté aussi par le run `26-10-19_update-deps` (rapports transitoires : `.scratch/26-10-19_update-deps-major-recon.md`, `.scratch/26-10-19_repo-shape-investigation.md`).
 > Tags : `!` à traiter bientôt · `S2` gating déploiement · `?` conditionnel · (sans tag) dette légère.
 > Règle : une ligne par constat, avec ancre. Le détail vit dans le run report archivé.
 > Soldés : retirés ; les promotions récentes (constat réglé par un ticket) sont tracées en fin de section du run concerné.
@@ -21,6 +22,8 @@
 - `!` teamdocs prod : 1 document rejeté (`content` > 5000 chars) — **toujours absent après le reset+ré-import du run 26-10-13 (T08, mesuré 14-10 : 21 docs, `6a3ff71f0008dcb17ba5` absent)** : le filtre est donc dans le transform/import, pas un simple ré-import à relancer ; localiser où la ligne saute, puis ré-importer (schéma live : `content max: 0`).
 - `!` Doublons d'events **dans la source Appwrite** (9 copies / 6 noms, ex. `concert 2908` ×3) — côté SPA l'idempotence est **FAIT** (run 26-10-12, T10 : `createEventWithTeams` + `#reconcileCreatedEvent`) ; reste à décider si le transform garde les copies hors import (verdict T06-style) et/ou nettoyage source — pour la finalisation 1.8.
 - `!` Click-through navigateur complet — **checklist : `.scratch/tracker/clickthrough-checklist.md`** ; gate T12 ouvert (`.scratch/tracker/26-10-12_clickthrough-fixes/issues/12-gate-recheck-phase1-exit.md` : §4 relis post-run 26-10-13, §6, §7, §9) ; inclut PWA version.json à bumper à la release.
+- `!` **lucide 1.59 : 2 usages du composant générique `Icon` cassés (types + rendu probable)** — l'union `icon`/`iconNode` est désormais requise ; corriger `TimeIcon` (`EventMealCard.svelte` :116/308) et `Icon` (`InfoCollapse.svelte` :49) : passer le data d'icône ou retyper le dérivé en `Component<LucideProps>` ; recette visuelle des icônes au prochain click-through. (run 26-10-19 update-deps)
+- `!` **Adoption svelte-check-native 1.9.1** (épinglé 0.7.2, commit `7840a285`) — prérequis : corriger les 19 erreurs de type que le nouveau moteur expose (14 dans `__tests__/` — mocks/fixtures désalignés des types, dont des divergences types↔runtime à l'œil ; 4 dans des composants), puis retirer `"baseUrl"` de `tsconfig.app.json` (le retirer AVANT le bump casse la résolution 0.7.2 : 40 erreurs — A/B vérifié), puis ajouter `--incremental` au script `check`. Gain : tests type-checkés + moteur à jour. (run 26-10-19 update-deps)
 
 ## Conditionnels (?)
 
@@ -28,6 +31,8 @@
 - `?` C3 — collections mortes `event_todos` / `notifications` : **état documenté 08-10** (`.agents/plans/6_migration-evaluation.md` § 5) — `event_todos` dormante (17 records d'archive, ne pas supprimer) ; à trancher produit : ressusciter ou abandonner (et purger archives + module).
 - `?` C5 — checkbox « Envoyer un email aux membres » (EventCreatePage) sans effet (3e argument ignoré, confirmé par triage) — implémenter ou retirer l'option UI.
 - `?` `lookup-user` casse d'email — comparaison `=` BINARY côté SQLite ; vérifier si PB lowercases à la création avant tout geste.
+- `?` fuzzysort 4 : défauts nouveaux (`limit` 10, `threshold` 0.5) plafonneraient 3 call sites sans `limit` explicite (`RecipesListPage.svelte` :96, `RecipesStore.svelte.ts` :348, `productsUtils.ts` :311) — ajouter `limit` + validation UX de la recherche, puis bump. (run 26-10-19 update-deps)
+- `?` pocketbase SDK 0.26.9 → 0.28.1 : strictement additif, compatible serveur 0.37.5, mais le fix realtime 0.27.1 touche `pb-realtime.ts` — bump + click-through realtime ensemble ; coupler avec S2 upgrade serveur 0.40.5+. (run 26-10-19 update-deps)
 - `?` Asymétrie `categories` (create auth, update/delete superuser) — assumer et documenter dans la doc domaine.
 - `?` Résidu REC-7 — `ownerUser = self` + team étrangère au create materiel reste possible (garde team ou owner, au choix).
 - `?` T05 : 1 team sur 8 a `roles` = `{}` (aucun owner résolu par le backfill) — passe le check non-NULL ; trancher produit (team sans owner légitime ?).
@@ -61,6 +66,7 @@
 - F4 (review 26-10-12, mineur) : docstring `GlobalState.logout()` mentionne encore Appwrite (préexiste au range) — reformuler au prochain passage.
 - F5 (review 16-10 backport, mineur) : `docs/svelte-app.md` §Conventions prescrit les icônes via classes `size-3`..`size-6`, mais le code (sœur incluse) dimensionne par prop numérique (`size={16}`…) — dérive préexistante, propagée aux composants neufs du backport (`RecipeDetailDrawer`, `GroupedInvoicesBar`, `InvoiceDetailModal`, `ProductCardCompact`/`ProductCard`, `ProductRecipeDetails`) ; trancher convention vs réalité.
 - F6 (run 16-10 hugo-removal, mineur) : `HomePage.svelte:167` charge `fonts/cherry-bomb-one.css` (utilisé §188/450) — fichier absent de `svelte-app/public/fonts/` (seuls fredoka + sora existent) ; 404 préexistant (déjà absent de `static/app/fonts`) → le titre hero tombe sur la font fallback. Restaurer l'asset webfont ou retirer la classe/ref.
+- F7 (run 26-10-19 update-deps, mineur) : **116 fichiers non conformes aux défauts prettier** (quotes simples vs défaut doubles ; aucune étape du workflow ne lance `prettier --check`) — le bump prettier-plugin-svelte 4 ne change rien au format réel (diff vide sur échantillon svelte) ; à trancher : reformat dédié vs config `singleQuote: true`.
 
 ## Run 26-10-13_products-identity-upsert — promotions (soldés, pour trace)
 

@@ -5,7 +5,7 @@
     "": {
       "name": "svelte-app",
       "dependencies": {
-        "@abhivarde/svelte-drawer": "^1.0.8",
+        "@abhivarde/svelte-drawer": "^2.0.1",
         "@humanspeak/svelte-markdown": "^1.9.5",
         "@lucide/svelte": "^0.545.0",
         "@tailwindcss/typography": "^0.5.20",
@@ -47,7 +47,7 @@
     },
   },
   "packages": {
-    "@abhivarde/svelte-drawer": ["@abhivarde/svelte-drawer@1.0.8", "", { "peerDependencies": { "svelte": "^5.46.4" } }, "sha512-RcUbGPARC4rf8ZOYnNVjfSATKua34wCdmCGnl68KdNrTA7XpGRMdg4bZ0f19X4bfZvnNNpu8ElJjrEdWmVv6yQ=="],
+    "@abhivarde/svelte-drawer": ["@abhivarde/svelte-drawer@2.0.1", "", { "peerDependencies": { "svelte": "^5.46.4" } }, "sha512-Nz6U2Dqp3KXXdkJBZUtOHke/bVJSPnqDrX/xNSxR/b7vTUTZs3hmrRe2F+VNPOcXcO3CyEaQyOxk8kfJrktycg=="],
 
     "@apideck/better-ajv-errors": ["@apideck/better-ajv-errors@0.3.7", "", { "dependencies": { "jsonpointer": "^5.0.1", "leven": "^3.1.0" }, "peerDependencies": { "ajv": ">=8" } }, "sha512-TajUJwGWbDwkCx/CZi7tRE8PVB7simCvKJfHUsSdvps+aTM/PDPP4gkLmKnc+x3CE//y9i/nj74GqdL/hwk7Iw=="],
 

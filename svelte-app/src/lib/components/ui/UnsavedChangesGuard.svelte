@@ -18,7 +18,7 @@
 
   // Guard qui utilise la confirmation native du navigateur
   // Suivant le pattern officiel de sv-router
-  blockNavigation(() => {
+  const unblockNavigation = blockNavigation(() => {
     if (!shouldProtect()) {
       return true; // Autoriser la navigation
     }
@@ -39,7 +39,7 @@
   // Nettoyer le blocker au destroy du composant pour éviter
   // qu'une closure fantôme ne persiste après navigation
   onDestroy(() => {
-    blockNavigation(null as any);
+    unblockNavigation();
   });
 </script>
 

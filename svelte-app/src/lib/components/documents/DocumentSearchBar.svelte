@@ -21,10 +21,10 @@
 </script>
 
 <div class="input input-lg w-full">
-  <Search class="text-base-content/50 join-item h-5 w-5" />
+  <Search class="text-base-content/50 h-5 w-5" />
   <input
     type="text"
-    class="join-item grow"
+    class="min-w-0 grow"
     bind:value={searchQuery}
     onkeydown={handleKeydown}
     {placeholder}
@@ -32,7 +32,7 @@
   />
   {#if searchQuery.length > 0}
     <button
-      class="btn join-item btn-ghost btn-lg"
+      class="btn btn-ghost btn-lg"
       onclick={onReset}
       aria-label="Effacer la recherche"
     >

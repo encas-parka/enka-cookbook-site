@@ -221,7 +221,9 @@
       const newIngredient = await recipeDataStore.addIngredient(ingredientData);
 
       // Success
-      toastService.success(`Ingrédient "${newIngredient.name}" créé avec succès`);
+      toastService.success(
+        `Ingrédient "${newIngredient.name}" créé avec succès`,
+      );
 
       // Callback parent
       if (onIngredientCreated) {
@@ -341,8 +343,7 @@
               <TriangleAlert size={18} class="shrink-0" />
               <div class="flex flex-col gap-2">
                 <span class="font-medium"
-                  >Cet ingrédient ressemble à des ingrédients existants
-                  :</span
+                  >Cet ingrédient ressemble à des ingrédients existants :</span
                 >
                 <div class="flex flex-col gap-1">
                   {#each similar as result}
@@ -441,11 +442,7 @@
             <p class="text-base-content/60 mb-2 text-xs">
               Fruits et légumes frais, ou ingrédients qui se conservent au frigo
             </p>
-            <div
-              class="join w-full {showErrors && validationErrors.pF
-                ? 'join-error'
-                : ''}"
-            >
+            <div class="join w-full">
               <button
                 type="button"
                 class="btn join-item flex-1 {formData.pF === true
@@ -481,11 +478,7 @@
             <p class="text-base-content/60 mb-2 text-xs">
               Ingrédients qui se conservent au congélateur
             </p>
-            <div
-              class="join w-full {showErrors && validationErrors.pS
-                ? 'join-error'
-                : ''}"
-            >
+            <div class="join w-full">
               <button
                 type="button"
                 class="btn join-item flex-1 {formData.pS === true

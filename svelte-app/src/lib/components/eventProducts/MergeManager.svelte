@@ -153,29 +153,25 @@
           mais uniquement la liste de courses.
         </div>
         <div class="relative">
-          <div class="flex items-center gap-2">
-            <div class="join join-horizontal flex-1">
-              <div class="join-item bg-base-100 flex items-center px-2">
-                <Search class="text-base-content/40 h-4 w-4" />
-              </div>
-              <input
-                type="text"
-                role="combobox"
-                aria-expanded={isDropdownOpen && searchResults.length > 0}
-                aria-controls="merge-search-listbox"
-                aria-autocomplete="list"
-                aria-activedescendant={activeIndex >= 0
-                  ? `merge-option-${activeIndex}`
-                  : undefined}
-                class="join-item input bg-base-100 flex-1 border-0"
-                placeholder="Rechercher un produit cible…"
-                bind:value={searchQuery}
-                onfocus={handleSearchFocus}
-                onblur={handleSearchBlur}
-                onkeydown={handleKeydown}
-              />
-            </div>
-          </div>
+          <label class="input w-full border-0">
+            <Search class="text-base-content/40 h-4 w-4 shrink-0" />
+            <input
+              type="text"
+              role="combobox"
+              aria-expanded={isDropdownOpen && searchResults.length > 0}
+              aria-controls="merge-search-listbox"
+              aria-autocomplete="list"
+              aria-activedescendant={activeIndex >= 0
+                ? `merge-option-${activeIndex}`
+                : undefined}
+              class="bg-base-100 min-w-0 grow"
+              placeholder="Rechercher un produit cible…"
+              bind:value={searchQuery}
+              onfocus={handleSearchFocus}
+              onblur={handleSearchBlur}
+              onkeydown={handleKeydown}
+            />
+          </label>
 
           <!-- Dropdown des résultats -->
           {#if isDropdownOpen && searchResults.length > 0}

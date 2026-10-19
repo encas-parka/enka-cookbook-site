@@ -10,7 +10,7 @@
     "build": "cd svelte-app && bun run build"
   },
   "devDependencies": {
-    "concurrently": "^9.2.1",
+    "concurrently": "^9.2.5",
     "gray-matter": "^4.0.3",
     "pocketbase": "0.26.8"
   }

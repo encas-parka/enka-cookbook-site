@@ -60,6 +60,7 @@
 - F3 (review 26-10-12, mineur) : `pb_migrations/1791900000` header cite un chemin `/tmp` éphémère — garder le chemin de sonde committé.
 - F4 (review 26-10-12, mineur) : docstring `GlobalState.logout()` mentionne encore Appwrite (préexiste au range) — reformuler au prochain passage.
 - F5 (review 16-10 backport, mineur) : `docs/svelte-app.md` §Conventions prescrit les icônes via classes `size-3`..`size-6`, mais le code (sœur incluse) dimensionne par prop numérique (`size={16}`…) — dérive préexistante, propagée aux composants neufs du backport (`RecipeDetailDrawer`, `GroupedInvoicesBar`, `InvoiceDetailModal`, `ProductCardCompact`/`ProductCard`, `ProductRecipeDetails`) ; trancher convention vs réalité.
+- F6 (run 16-10 hugo-removal, mineur) : `HomePage.svelte:167` charge `fonts/cherry-bomb-one.css` (utilisé §188/450) — fichier absent de `svelte-app/public/fonts/` (seuls fredoka + sora existent) ; 404 préexistant (déjà absent de `static/app/fonts`) → le titre hero tombe sur la font fallback. Restaurer l'asset webfont ou retirer la classe/ref.
 
 ## Run 26-10-13_products-identity-upsert — promotions (soldés, pour trace)
 

@@ -10,6 +10,6 @@
     "build": "cd svelte-app && bun run build"
   },
   "devDependencies": {
-    "concurrently": "^9.2.5"
+    "concurrently": "^10.0.6"
   }
 }

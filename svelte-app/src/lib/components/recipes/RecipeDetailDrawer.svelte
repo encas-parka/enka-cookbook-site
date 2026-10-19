@@ -183,12 +183,12 @@
               <RecipeIngredientsList
                 ingredients={recipe.ingredients}
                 servings={recipeDrawer.servings}
-                defaultServings={recipe.plate}
+                defaultServings={recipe.plate ?? 1}
               />
             </div>
             <div class="flex-1 space-y-4">
               <RecipePreparation
-                preparation={recipe.preparation}
+                preparation={recipe.preparation ?? ""}
                 preparation24h={recipe.preparation24h || undefined}
                 astuces={recipe.astuces || []}
               />

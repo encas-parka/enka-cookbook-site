@@ -41,37 +41,38 @@ export async function lookupUserByEmail(
 }
 
 /**
- * Résout des ids users en noms d'affichage. Passe par des getOne unitaires :
- * la viewRule users autorise tout authentifié (c'est le chemin de l'expand
- * `members` des équipes), tandis que la listRule reste verrouillée à soi —
- * pas d'énumération. Les échecs unitaires (id inconnu, compte supprimé,
- * panne) tombent silencieusement : l'appelant garde son fallback sur l'id
- * brut.
+ * Résout des ids users en noms d'affichage via la route custom
+ * `/api/enka/lookup-users` (hook serveur) : les règles users — listRule ET
+ * viewRule `id = @request.auth.id` — n'autorisent un client à lire que son
+ * propre record, l'API standard ne peut rien résoudre pour autrui. Le hook
+ * renvoie {id, name} sans email (même périmètre que lookup-user).
+ *
+ * Jamais throw : les introuvables (compte supprimé, résidu de données) et
+ * les erreurs réseau laissent simplement l'appelant sur son fallback.
  *
  * @returns une Map id → nom (seuls les ids résolus y figurent)
  */
 export async function resolveUserNames(
   ids: string[],
 ): Promise<Map<string, string>> {
-  const unique = Array.from(new Set(ids.filter(Boolean)));
-  const settled = await Promise.allSettled(
-    unique.map(async (id) => {
-      const user = await pb.collection("users").getOne<{
-        id: string;
-        name?: string;
-        email?: string;
-      }>(id);
-      return [id, user.name || user.email || id] as const;
-    }),
-  );
+  const unique = Array.from(new Set(ids.filter(Boolean))).slice(0, 50);
+  if (unique.length === 0) return new Map();
 
-  const resolved = new Map<string, string>();
-  for (const result of settled) {
-    if (result.status === "fulfilled") {
-      resolved.set(result.value[0], result.value[1]);
+  try {
+    const result = await pb.send<{ users: LookupUser[] }>(
+      "/api/enka/lookup-users",
+      { method: "GET", query: { ids: unique.join(",") } },
+    );
+
+    const resolved = new Map<string, string>();
+    for (const user of result.users || []) {
+      if (user.name) resolved.set(user.id, user.name);
     }
+    return resolved;
+  } catch (err) {
+    console.warn("[pb-users] resolveUserNames indisponible:", err);
+    return new Map();
   }
-  return resolved;
 }
 
 /**

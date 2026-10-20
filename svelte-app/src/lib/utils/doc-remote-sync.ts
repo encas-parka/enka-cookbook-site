@@ -1,7 +1,7 @@
 /**
  * Décision de propagation du contenu distant d'un teamdoc vers les inputs
- * locaux de la page d'édition (EditDocumentPage) — logique extraite pour
- * être testable au seam vitest (ticket T05).
+ * locaux des pages d'édition (EditDocumentPage, EventDocumentEditPage) —
+ * logique extraite pour être testable au seam vitest (ticket T05).
  *
  * Contrat :
  *  - l'utilisateur local non modifié (local == snapshot) reçoit le contenu

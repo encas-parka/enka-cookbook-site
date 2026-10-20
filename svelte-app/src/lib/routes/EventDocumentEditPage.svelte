@@ -15,6 +15,10 @@
   import { online } from "svelte/reactivity/window";
   import { locksService, type Lock } from "$lib/services/pb-locks";
   import { shareOrDownload, toSlug } from "$lib/utils/share-utils";
+  import {
+    resolveRemoteDocUpdate,
+    type DocDraftState,
+  } from "$lib/utils/doc-remote-sync";
 
   let eventId = $derived(route.params.id || "");
   let docId = $derived(route.params.docId || "");
@@ -62,6 +66,38 @@
 
   const storeDoc = $derived(teamdocsStore.getDocumentById(docId));
   const currentEvent = $derived(eventsStore.getEventById(eventId));
+
+  // ============================================================================
+  // PROPAGATION REALTIME DU CONTENU (T05)
+  // ============================================================================
+
+  // Les updates distants (saves des autres users) arrivent en Dexie via la
+  // subscription collection-wide du store — storeDoc est réactif. On
+  // répercute le contenu sur les inputs locaux tant que l'utilisateur n'a
+  // rien modifié (resolveRemoteDocUpdate : skip si dirty — anti-écrasement
+  // minimal ; le lock reste le garde-fou de l'édition concurrente). Sans
+  // cette propagation, un save distant suivi d'une entrée en édition
+  // réouvrirait le formulaire sur les données du mount — stale, donc
+  // écrasement possible à la sauvegarde.
+  $effect(() => {
+    if (isLoading || !storeDoc || !initialDocumentSnapshot) return;
+
+    const incoming: DocDraftState = {
+      title: storeDoc.title || "",
+      content: storeDoc.content || "",
+      tags: storeDoc.tags || [],
+    };
+    const local: DocDraftState = { title, content, tags: selectedTags };
+    const snapshot = JSON.parse(initialDocumentSnapshot) as DocDraftState;
+
+    const decision = resolveRemoteDocUpdate(local, snapshot, incoming);
+    if (decision.action === "apply") {
+      title = decision.draft.title;
+      content = decision.draft.content;
+      selectedTags = [...decision.draft.tags];
+      initialDocumentSnapshot = JSON.stringify(decision.draft);
+    }
+  });
 
   // ============================================================================
   // DERIVED STATES

@@ -72,7 +72,9 @@ export function formatDateRelative(dateStr: string): string {
   const date = new Date(dateStr);
   const now = new Date();
   const diffTime = Math.abs(now.getTime() - date.getTime());
-  const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+  // floor : tout écart < 24 h reste « Aujourd'hui » (ceil classait « Hier »
+  // une modification vieille de quelques secondes)
+  const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
 
   if (diffDays === 0) return "Aujourd'hui";
   if (diffDays === 1) return "Hier";

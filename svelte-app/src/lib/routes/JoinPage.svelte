@@ -85,6 +85,12 @@
       const { eventsStore } = await import("$lib/stores/EventsStore.svelte");
       await eventsStore.syncRevalidate();
 
+      // Le join élargit le périmètre autorisé (eventId.guestUsers) : les
+      // teamdocs existants de l'event ont un `updated` antérieur au curseur
+      // delta et n'y remonteraient jamais — on l'invalide avant de resync.
+      const { teamdocsStore } = await import("$lib/stores/TeamdocsStore.svelte");
+      await teamdocsStore.resetCursorAndSync();
+
       step = "success";
       toastService.success("Accès accordé ! Redirection en cours...");
 

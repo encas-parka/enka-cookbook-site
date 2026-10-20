@@ -382,6 +382,27 @@ export function createSyncCollection<T extends PbDoc>(
     );
   }
 
+  /**
+   * Invalide le curseur delta de cette collection SANS toucher aux données
+   * locales : le prochain `initialFetch` repart de l'époque et rejoue un
+   * fetch complet en upserts idempotents (pas de fenêtre d'état vide).
+   *
+   * À appeler quand le périmètre autorisé côté serveur s'élargit (join
+   * d'event par share link, invitation team…) : les records nouvellement
+   * autorisés portent un `updated` antérieur au curseur local, qu'aucun
+   * delta ne ramènera jamais.
+   *
+   * @param scopeKey - n'invalide que le curseur de ce scope ; sans argument,
+   *   c'est le curseur non-scopé de la collection qui est invalidé.
+   */
+  async function resetCursor(scopeKey?: string): Promise<void> {
+    const key = scopeKey ? `${collectionName}:${scopeKey}` : collectionName;
+    await db.syncMeta.delete(key);
+    console.log(
+      `[pb-sync] resetCursor ${collectionName}${scopeKey ? `:${scopeKey}` : ""}`,
+    );
+  }
+
   // =====================================================================
   // LIFECYCLE — REALTIME SUBSCRIPTION
   // =====================================================================
@@ -946,5 +967,6 @@ export function createSyncCollection<T extends PbDoc>(
       return collectionName;
     },
     clearLocal,
+    resetCursor,
   };
 }

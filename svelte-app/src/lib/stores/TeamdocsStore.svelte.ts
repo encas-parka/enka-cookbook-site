@@ -147,6 +147,18 @@ export class TeamdocsStore {
     }
   }
 
+  /**
+   * Invalide le curseur delta des teamdocs puis resynchronise, SANS vider la
+   * table locale (pas de fenêtre d'état vide). À appeler quand le périmètre
+   * autorisé s'élargit — join d'event par share link : les teamdocs existants
+   * de l'event portent un `updated` antérieur au curseur, qu'aucun delta ne
+   * ramènerait (trou P12 du click-through 20-10).
+   */
+  async resetCursorAndSync(): Promise<void> {
+    await this.#collection.resetCursor();
+    await this.syncRevalidate();
+  }
+
   async #runWithLoading(work: () => Promise<void>): Promise<void> {
     this.#loading = true;
     try {

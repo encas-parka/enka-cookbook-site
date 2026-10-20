@@ -20,6 +20,7 @@ export interface PBAuthUser {
   id: string;
   name: string;
   email: string;
+  /** Reflète `users.verified` de PocketBase (bannière « email non vérifié »). */
   emailVerification: boolean;
 }
 
@@ -35,7 +36,9 @@ function normalizeUser(record: Record<string, unknown>): PBAuthUser {
     id: record.id as string,
     name: (record.name as string) || (record.username as string) || "",
     email: (record.email as string) || "",
-    emailVerification: Boolean(record.emailVerification),
+    // PocketBase expose `verified` — `emailVerification` est le champ Appwrite
+    // (toujours undefined en PB → bannière « email non vérifié » pour tous)
+    emailVerification: Boolean(record.verified),
   };
 }
 

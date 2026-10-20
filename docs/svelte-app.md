@@ -21,8 +21,8 @@ PocketBase (remote)  ↔  pb-sync (`src/lib/db-sync/`)  ↔  Dexie / IndexedDB  
 ## Pattern store (3-phase)
 
 ```typescript
-await store.loadCache();      // Dexie → SvelteMap (bridge liveQuery)
-await store.syncInitial();   // PB → Dexie (toggle #loading) ; variante silencieuse : syncRevalidate()
+await store.loadCache(); // Dexie → SvelteMap (bridge liveQuery)
+await store.syncInitial(); // PB → Dexie (toggle #loading) ; variante silencieuse : syncRevalidate()
 await store.setupRealtime(); // SSE → Dexie
 ```
 
@@ -52,6 +52,7 @@ await store.setupRealtime(); // SSE → Dexie
 
 - `bun run build` → `svelte-app/dist/`, base `/` en dev comme en prod, chunks manuels `@lucide/svelte` + `pocketbase`, minify esbuild.
 - Pas de proxy : les assets (`/icons/`, `/images/`, `/fonts/`, PWA) sont servis depuis `svelte-app/public/` en dev comme au build (toolchain Hugo supprimée 16-10).
+- `bun run format` / `bun run format:check` (depuis la racine) : prettier sur tout le repo, config `.prettierrc` à la racine (`prettier-plugin-tailwindcss` avec `tailwindStylesheet` → tri des classes). Exclus : `content/`, `static/`, `pocketbase/pb_migrations`, `pb-generated.ts`, dotfiles locaux (`.prettierignore`).
 
 ## Canons de vérification
 

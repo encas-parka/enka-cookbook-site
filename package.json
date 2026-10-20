@@ -7,9 +7,14 @@
     "dev:pb": "bash scripts_dev/pb-dev.sh",
     "dev:app": "cd svelte-app && bun run dev",
     "dev:all": "concurrently \"cd svelte-app && bun run dev\" \"bash scripts_dev/pb-dev.sh\" --names \"VITE,PB\" --prefix-colors \"cyan,green\"",
-    "build": "cd svelte-app && bun run build"
+    "build": "cd svelte-app && bun run build",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
   },
   "devDependencies": {
-    "concurrently": "^10.0.6"
+    "concurrently": "^10.0.6",
+    "prettier": "^3.9.10",
+    "prettier-plugin-svelte": "^4.1.1",
+    "prettier-plugin-tailwindcss": "^0.8.1"
   }
 }

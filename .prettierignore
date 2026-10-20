@@ -1,0 +1,39 @@
+# Dépendances et artefacts de build
+node_modules
+**/node_modules
+svelte-app/dist
+svelte-app/.vite
+pocketbase/pb_data
+pocketbase/pb_public
+
+# Sorties générées, réécrites par leur outil
+svelte-app/src/lib/types/pb-generated.ts
+pocketbase/pb_migrations
+
+# Entrées du pipeline Hugo (disparaissent au cutover)
+content
+static
+
+# Fichiers locaux, non versionnés (les dotfiles racine sont des périphériques
+# de masquage du sandbox : illisibles pour prettier)
+AGENTS.md
+.claude
+.opencode
+.idea
+.serena
+.env
+.env.*
+opencode.json*
+.bash_profile
+.bashrc
+.gitconfig
+.gitmodules
+.mcp.json
+.profile
+.ripgreprc
+.zprofile
+.zshrc
+
+# Binaires et fichiers de verrouillage
+pocketbase/pocketbase
+*.lock

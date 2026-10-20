@@ -622,6 +622,15 @@ Format : page / action / attendu vs obtenu / console (coller l'erreur exacte).
 > schéma et des types au cutover). Contrat du socle piné par
 > `services/__tests__/pb-locks.test.ts` (9 cas). À revalider à l'écran :
 > A quitte → B peut éditer ; badge avec le nom ; reprise après expiration.
+>
+> Suivi du premier test écran (ghald, même jour) : (1) le create du verrou
+> renvoyait 400 — l'id `recipe_<slug>_<uuid>` dépasse la borne 40 des ids
+> `locks` (migration LOCK-3 `1792515000_locks_id_max_recipe.js`, borne 255 ;
+> **PB doit être relancé** pour l'appliquer) ; (2) l'autocancel du SDK sur la
+> lecture initiale empêchait la souscription temps réel — découplée ;
+> (3) `acquireLock` distingue désormais refus (`false`) et panne (lève) ;
+> (4) les ids bruts des contributeurs dans le panneau permissions se
+> résolvent en noms (`resolveUserNames`, getOne users via viewRule).
 
 - Page : `/recipe/:uuid/edit`, ouverte par A puis quittée par navigation SPA.
 - Attendu : le verrou est relâché en quittant la page (ou périmé après 5 min),

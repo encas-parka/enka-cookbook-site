@@ -32,6 +32,11 @@
 
 ## Restes tracés (pour le handoff)
 
+0. **Correctifs du premier test écran P14 (ghald)** : borne id `locks` 40→255
+   (migration LOCK-3, PB à relancer), souscription lock découplée de la
+   lecture initiale (autocancel), contrat `acquireLock` (false = refus,
+   lève = panne), résolution des noms de contributeurs du panneau
+   permissions (`resolveUserNames` dans pb-users, viewRule users).
 1. **Audit delta-sync** : ticket research
    `26-10-20_delta-sync-audit/issues/01-audit-delta-vs-full-fetch.md`.
 2. **Trou join-team symétrique (P12)** : pas de point d'entrée client unique

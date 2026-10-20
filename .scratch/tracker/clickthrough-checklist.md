@@ -7,7 +7,9 @@
 > depuis le run du 13-10 (et les prérequis Hugo, toolchain supprimée) ont été
 > retirées — leur historique vit dans `.agents/plans/archive/`.
 >
-> **État du run 20-10 : 45 cochés / 23 restants** — sections 0→10 passées.
+> **État du run 20-10 : 46 cochés / 29 restants** — sections 0→10 passées ;
+> §11 re-scénarisée le 20-10 (verrous : gate recette validé à l'écran, autres
+> pages à jouer).
 > Re-qualification 20-10 (click-through humain) : P2 et P8 = faux positifs du
 > driver, items §1-recherche et §5-recherche cochés. P5 différé.
 > Corrections 20-10 (deux vagues, voir `.scratch/tracker/26-10-20_clickthrough-fixes/run.md`) :
@@ -366,16 +368,45 @@
 
 ## 11. Locks & temps réel
 
-- [ ] Même recette ouverte dans 2 navigateurs : badge de lock + `userName` ;
-      expiration respectée ; reprise possible après release.
-      _(passe 20-10 : **partiel, avec P14** — (a) badge ✓ : côté B,
-      « Vérouillé : document en cours d'édition par un·e autre utilisateur·ice »
-      + « Édition par un autre utilisateur », bouton Sauvegarder
-      `disabled` (acquisition côté A confirmée en base, `recipes.lockedBy`) ;
-      (b) **`userName` non affiché** — texte figé, seul le doc affiche
-      « édité par Marion » ; (c) **expiration non respectée et reprise
-      impossible** : A quitte la page (navigation SPA), `lockedBy` reste posé,
-      B reste bloquée. Voir P14 — verrou orphelin définitif)_
+### 11a. Verrou de recette (gate bloquant)
+
+Livré 20-10 : collection `locks` (TTL `expiresAt`), gate bloquant, re-cycle
+complet au clic (commits `9748dac3`, `8e4db46c`). **Scénario principal validé
+vert à l'écran le 20-10 par l'humain.**
+
+- [x] Recette verrouillée par A, B ouvre `/recipe/:uuid/edit` (nav **ou** URL
+      directe) → gate « Édition en cours — {user} modifie… », aucun
+      formulaire rendu, bouton Retour seul.
+      _(passe 20-10 : ✓ vert — marion édite, ghald voit le gate ; la reprise
+      à chaud par SSE a été supprimée, l'ouverture du formulaire passe par le
+      clic Éditer)_
+- [ ] A sauve et libère → le gate de B bascule seul en « Édition terminée »
+      (bouton **Éditer**) ; B clique → formulaire chargé avec la version de
+      A ; B modifie et sauve → part de cette version (pas d'écrasement).
+      _(principe : la réactivité SSE pilote le message du gate, jamais
+      l'ouverture du formulaire)_
+- [ ] Recette mono-contributeur (Smart Lock) : ouverte dans 2 navigateurs →
+      aucun verrou posé, les deux peuvent éditer (comportement attendu).
+- [ ] TTL : verrou laissé expirer (~7 min sans activité) → reprise possible
+      par B. _(optionnel — lent à jouer à la main)_
+
+### 11b. Verrous des autres pages (audit 20-10)
+
+- [ ] Teamdoc (`editdocument/<id>`) : A édite, B ouvre le même doc → B forcé
+      en preview + alerte « verrouillé par A » ; à la libération, B entre en
+      édition → contenu de A visible (propagation T05 déjà en place).
+- [ ] Doc d'event : B consulte en preview, A édite + sauve, B entre en
+      édition → B voit la version de A (fix stale `868df575` — c'était le
+      bug noté en passe gate §7 : B pouvait écraser A avec sa version figée).
+- [ ] Événement : A modifie un champ (verrou posé au premier geste), B tente
+      une modification → toast « verrouillé par A » + contrôles disabled ;
+      après le save de A, B peut éditer — son shadow draft suit déjà les
+      données en continu (pas de formulaire figé sur cette page).
+- [ ] Course d'acquisition : deux users cliquent Édition quasi
+      simultanément → l'un gagne, l'autre voit l'état réel « verrouillé par
+      X » (re-lecture du verrou, commit `26fddcf7`) et non une erreur
+      générique. _(optionnel — course difficile à provoquer à la main)_
+
 - [x] SSE : modification dans A visible dans B sans reload (event, recette,
       produit, teamdoc). **À rejouer sur SDK pocketbase 0.28** (les deux items
       SSE de cette section).
@@ -622,6 +653,10 @@ Format : page / action / attendu vs obtenu / console (coller l'erreur exacte).
 > schéma et des types au cutover). Contrat du socle piné par
 > `services/__tests__/pb-locks.test.ts` (9 cas). À revalider à l'écran :
 > A quitte → B peut éditer ; badge avec le nom ; reprise après expiration.
+>
+> **Validé à l'écran 20-10 (humain) : vert.** Complété le même jour par le
+> gate bloquant (commits `9748dac3`, `8e4db46c`) : la reprise à chaud par SSE
+> a été remplacée par gate + re-cycle au clic — scénarios en §11a.
 >
 > Suivi du premier test écran (ghald, même jour) : (1) le create du verrou
 > renvoyait 400 — l'id `recipe_<slug>_<uuid>` dépasse la borne 40 des ids

@@ -19,7 +19,9 @@ docs/local/
 svelte-app/.vite
 *.opencode
 opencode.json
-*.agents
+*.agents/*
+!.agents/skills/
+!.agents/skills/**
 .zed
 AGENTS.md
 *skills-lock.json

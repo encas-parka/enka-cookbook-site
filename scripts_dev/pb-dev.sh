@@ -21,4 +21,13 @@ echo "Starting PocketBase dev server..."
 echo "  Admin UI: http://localhost:8090/_/"
 echo "  API:      http://localhost:8090/api/"
 echo ""
-"$PB_DIR/pocketbase" serve --dir="$PB_DIR/pb_data" --publicDir="$PB_DIR/pb_public" --migrationsDir="$PB_DIR/pb_migrations"
+
+# PB_DEV=1 → imprime les logs et les requêtes SQL (utile pour diagnostiquer un 400/403)
+EXTRA_FLAGS=()
+if [ "${PB_DEV:-}" = "1" ]; then
+    EXTRA_FLAGS+=(--dev)
+    echo "  Mode dev verbeux activé (PB_DEV=1)"
+    echo ""
+fi
+
+"$PB_DIR/pocketbase" serve "${EXTRA_FLAGS[@]}" --dir="$PB_DIR/pb_data" --publicDir="$PB_DIR/pb_public" --migrationsDir="$PB_DIR/pb_migrations"

@@ -109,6 +109,38 @@ function maxUpdated(records: PbDoc[]): string {
   return max;
 }
 
+/**
+ * Marge retirée à l'horloge client avant de plafonner le curseur — absorbe
+ * une petite avance de l'horloge client sans re-fetch superflu.
+ */
+const CURSOR_CLOCK_MARGIN_MS = 5 * 60 * 1000;
+
+/**
+ * Horloge client au format PB (`YYYY-MM-DD HH:mm:ss.SSSZ`, UTC) — le même
+ * gabarit lexical que `maxUpdated` et le filtre delta. NB : `toISOString()`
+ * produit un séparateur `T`, qui trierait lexiquement AU-DESSUS de tout
+ * timestamp PB du même jour (espace < T) et rendrait le plafond inopérant
+ * pour les dérives intra-journal — d'où le remplacement.
+ */
+function clientClockCap(now: number = Date.now()): string {
+  return new Date(now - CURSOR_CLOCK_MARGIN_MS).toISOString().replace("T", " ");
+}
+
+/**
+ * Garde « anti-curseur empoisonné » : plafonne le curseur delta à l'horloge
+ * client (moins marge). Un `updated` futur (dérive d'horloge serveur) ne
+ * doit jamais hisser le curseur au-dessus du présent — une fois l'horloge
+ * corrigée, tout record écrit après correction passerait sous le curseur :
+ * trou permanent. `min()` ne peut qu'abaisser le curseur — au pire (horloge
+ * client fausse) le delta re-fetch des records connus (upserts idempotents),
+ * il ne saute jamais de données.
+ */
+function capToClientClock(cursor: string): string {
+  if (!cursor) return cursor;
+  const cap = clientClockCap();
+  return cursor > cap ? cap : cursor;
+}
+
 // =============================================================================
 // MERGE HELPERS
 // =============================================================================
@@ -361,7 +393,7 @@ export function createSyncCollection<T extends PbDoc>(
     //    upsert fails, Dexie rolls back both ("rows written but cursor moved"
     //    desync is impossible)
     const records = freshRecords as unknown as T[];
-    const newCursor = maxUpdated(records);
+    const newCursor = capToClientClock(maxUpdated(records));
 
     if (records.length > 0) {
       await db.transaction("rw", [table, db.syncMeta], async () => {

@@ -335,6 +335,18 @@ export class EventsStore {
   }
 
   /**
+   * Invalide le curseur delta des events puis resynchronise, SANS vider la
+   * table locale (pas de fenêtre d'état vide). À appeler quand le périmètre
+   * autorisé s'élargit SANS toucher aux records (join d'équipe :
+   * `teams.members`) : leur `updated` antérieur au curseur est invisible au
+   * delta comme au SSE. Même pattern que TeamdocsStore (fix P12).
+   */
+  async resetCursorAndSync(): Promise<void> {
+    await this.#collection.resetCursor();
+    await this.syncRevalidate();
+  }
+
+  /**
    * Phase 3 : Activer le realtime PocketBase via pb-sync (SSE)
    */
   async setupRealtime(): Promise<void> {

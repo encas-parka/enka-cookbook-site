@@ -16,6 +16,7 @@ PocketBase (remote)  ↔  pb-sync (`src/lib/db-sync/`)  ↔  Dexie / IndexedDB  
 - Entrée unique : `import { createSyncCollection, bridgeToMap, db, pb } from "$lib/db-sync/pb-sync"`.
 - `pb-collection.ts` : CRUD + delta sync (curseur `updated`) + SSE → Dexie. `aw-bridge.ts` : `bridgeToMap()` / `bridgeToMapFiltered()` (liveQuery Dexie → SvelteMap, granulaire). `use-live-query.svelte.ts` : hook one-shot.
 - `pb-realtime.ts` : signaux SSE globaux (`PB_CONNECT` + resync debouncée) — lifecycle auth géré dans GlobalState.
+- Invariant du curseur delta (portée curseur = portée du grant ; `resetCursor` sur élargissement d'autorisation ; plafond anti-horloge) : [ADR 0001](adr/0001-delta-sync-cursor-invalidation.md).
 - Détail des flux : `src/lib/db-sync/README.md`.
 
 ## Pattern store (3-phase)

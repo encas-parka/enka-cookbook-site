@@ -249,9 +249,28 @@ class GlobalState {
             console.log(
               `[GlobalState] Realtime custom: ${action} — team ${data.teamName || data.teamId}`,
             );
-            // Re-sync EventsStore : les API rules PB filtrent dynamiquement
-            // les evenements visibles pour cet utilisateur
-            await eventsStore.forceRefresh();
+            if (action === "team_joined") {
+              // Élargissement de périmètre (audit delta-sync, classe A) :
+              // le join d'équipe modifie `teams` seulement — les records
+              // nouvellement autorisés (events, teamdocs, materiel, loans)
+              // gardent leur `updated` antérieur au curseur : invisibles au
+              // delta comme au SSE. Reset des curseurs AVANT resync — un
+              // simple forceRefresh reproduit le trou P12.
+              try {
+                await eventsStore.resetCursorAndSync();
+                await teamdocsStore.resetCursorAndSync();
+                await materielStore.resetCursorAndSync();
+              } catch (err) {
+                console.error(
+                  "[GlobalState] team_joined — resync post-join échoué:",
+                  err,
+                );
+              }
+            } else {
+              // team_left (rétrécissement) / team_updated (pas d'impact
+              // visibilité) : le delta suffit
+              await eventsStore.forceRefresh();
+            }
           }
         },
       );

@@ -94,3 +94,60 @@ describe("pb-sync resetCursor — élargissement de périmètre", () => {
     expect(await db.syncMeta.get("products")).toBeDefined();
   });
 });
+
+/**
+ * Classe B de l'audit delta-sync : le « curseur empoisonné ». Un `updated`
+ * futur (dérive d'horloge serveur, puis correction NTP) hisse le curseur
+ * au-dessus du présent — tous les records écrits après correction passent
+ * sous le curseur : trou permanent. Le garde `capToClientClock` plafonne le
+ * curseur à l'horloge client (moins 5 min) : min() ne peut qu'abaisser le
+ * curseur — au pire on re-fetch (upserts idempotents), jamais on ne saute.
+ */
+describe("pb-sync cap curseur — anti « curseur empoisonné »", () => {
+  beforeEach(async () => {
+    currentFakePb().reset();
+    await clearDexie();
+  });
+
+  it("un `updated` futur n'hisse pas le curseur au-dessus du plafond client", async () => {
+    const fakePb = currentFakePb();
+    // Dérive serveur : le record est estampillé 1 h dans le futur
+    const T_FUTURE = pbDate(new Date(Date.now() + 60 * 60 * 1000));
+    fakePb.seed("products", [
+      makeProductRecord({ id: "t13prod00000004", updated: T_FUTURE }),
+    ]);
+    await products.initialFetch();
+
+    const cursor = (await db.syncMeta.get("products"))?.lastSync ?? "";
+    // Le curseur reste au format PB (espace, ms, Z — pas le `T` d'ISO)
+    expect(cursor).toMatch(/^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}\.\d{3}Z$/);
+    // Plafonné strictement sous le futur, et pas absurde : dans la fenêtre
+    // [horloge client − 6 min, horloge client] (marge 5 min + tolérance)
+    expect(cursor < T_FUTURE).toBe(true);
+    expect(cursor >= pbDate(new Date(Date.now() - 6 * 60 * 1000))).toBe(true);
+  });
+
+  it("les records écrits après correction serveur ne passent pas sous le curseur", async () => {
+    const fakePb = currentFakePb();
+    // Le serveur dérive, écrit un record futur, puis se corrige
+    const T_FUTURE = pbDate(new Date(Date.now() + 60 * 60 * 1000));
+    fakePb.seed("products", [
+      makeProductRecord({ id: "t13prod00000005", updated: T_FUTURE }),
+    ]);
+    await products.initialFetch();
+
+    // Record écrit APRÈS correction : `updated` ~ maintenant. Sans plafond,
+    // le curseur vaudrait T_FUTURE > now : ce record serait invisible pour
+    // toujours (le trou de classe B)
+    fakePb.putRecord(
+      "products",
+      makeProductRecord({
+        id: "t13prod00000006",
+        updated: pbDate(new Date()),
+      }),
+    );
+    await products.initialFetch();
+
+    expect(await db.products.get("t13prod00000006")).toBeDefined();
+  });
+});

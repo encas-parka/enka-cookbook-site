@@ -603,6 +603,38 @@ export class FakePocketBase {
   baseUrl: string;
   #store = new Map<string, PbRecord[]>();
   #subs = new Map<string, Set<{ topic: string; cb: SubscribeCallback }>>();
+  #topicSubs = new Map<string, Set<(e: unknown) => void>>();
+
+  // ===========================================================================
+  // CUSTOM-TOPIC REALTIME — `pb.realtime.subscribe(topic, cb)` : topics hors
+  // collections (ex. `user_${id}`), où les hooks JSVM poussent des payloads
+  // libres. Le vrai SDK expose ce namespace sur le client lui-même ; le
+  // callback reçoit le payload tel quel (objet ou chaîne JSON).
+  // ===========================================================================
+  realtime = {
+    subscribe: (
+      topic: string,
+      cb: (e: unknown) => void,
+    ): Promise<() => Promise<void>> => {
+      let subs = this.#topicSubs.get(topic);
+      if (!subs) {
+        subs = new Set();
+        this.#topicSubs.set(topic, subs);
+      }
+      subs.add(cb);
+      return Promise.resolve(async () => {
+        this.#topicSubs.get(topic)?.delete(cb);
+      });
+    },
+  };
+
+  /** Push a payload on a custom topic, like a JSVM hook would. */
+  emitToTopic(topic: string, payload: unknown): void {
+    const subs = this.#topicSubs.get(topic);
+    if (!subs) return;
+    for (const cb of [...subs]) cb(structuredClone(payload));
+  }
+
   /**
    * Fragment de schéma relationnel (defineRelations) : collection → champ →
    * collection cible. Survit à reset() — le schéma n'est pas des données.
@@ -892,6 +924,7 @@ export class FakePocketBase {
   reset(): void {
     this.#store.clear();
     this.#subs.clear();
+    this.#topicSubs.clear();
   }
 }
 

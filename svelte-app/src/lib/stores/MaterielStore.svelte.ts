@@ -305,6 +305,20 @@ export class MaterielStore {
     }
   }
 
+  /**
+   * Invalide les curseurs delta (materiel + materiel_loan) puis
+   * resynchronise, SANS vider les tables locales (pas de fenêtre d'état
+   * vide). À appeler quand le périmètre autorisé s'élargit SANS toucher aux
+   * records (join d'équipe : `teamId.members`) : leur `updated` antérieur
+   * au curseur est invisible au delta comme au SSE. Même pattern que
+   * TeamdocsStore (fix P12).
+   */
+  async resetCursorAndSync(): Promise<void> {
+    await this.#materielCollection.resetCursor();
+    await this.#loanCollection.resetCursor();
+    await this.syncRevalidate();
+  }
+
   async setupRealtime(): Promise<void> {
     if (!globalState.isAuthenticated) return;
     if (this.#realtimeInitialized) {

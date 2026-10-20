@@ -57,6 +57,10 @@
   let activeLock = $state<PbLock | null>(null);
   let lockedResourceId: string | null = null;
   let isAcquiringLock = $state(false);
+  // Résolution du verrou : smart lock (contributeur unique, pas de verrou
+  // posé) et tentative d'acquisition terminée (succès, refus ou panne).
+  let smartLock = $state(false);
+  let lockSettled = $state(false);
   let lockUnsub: (() => void) | null = null;
   let heartbeatInterval: any = null;
   let initialRecipeSnapshot = $state<string | null>(null);
@@ -101,6 +105,29 @@
       !isLoading &&
       !isAcquiringLock &&
       !isSaving,
+  );
+
+  const lockedByUserName = $derived(
+    activeLock?.userName || "un autre utilisateur",
+  );
+
+  // Machine à états de rendu (option A, gate bloquant) : le formulaire
+  // n'est JAMAIS rendu sans verrou résolu en notre faveur — détenu par nous
+  // ou smart lock. Pas de handover à chaud, donc pas de formulaire périmé.
+  const pageState = $derived.by(() => {
+    if (isLoading || isAcquiringLock) return "loading";
+    if (isLockedByOthers) return "gate";
+    if (isLockedByMe || smartLock) return "ready";
+    if (!lockSettled) return "loading"; // acquisition en cours de résolution
+    return "gate"; // échec d'acquisition sans état lisible : bloquer (fail-closed)
+  });
+  const gateTitle = $derived(
+    isLockedByOthers ? "Édition en cours" : "Édition indisponible",
+  );
+  const gateMessage = $derived(
+    isLockedByOthers
+      ? `${lockedByUserName} modifie actuellement cette recette. Attendez la fin de son édition pour la modifier à votre tour.`
+      : "Impossible de vérifier le verrou d'édition. Vérifiez votre connexion puis réessayez.",
   );
 
   // Données de référence depuis RecipeDataStore
@@ -155,7 +182,6 @@
     }
   });
 
-  // FIXIT: la reaquisition du lock ne fonctionne pas
   // Capturer le snapshot initial quand la recette est chargée
   $effect(() => {
     if (recipe && loaded && !initialRecipeSnapshot) {
@@ -164,7 +190,7 @@
   });
 
   // Acquérir le lock quand la page est chargée et le verrou libre — réactif :
-  // si le détenteur libère (SSE), la reprise repart toute seule.
+  // si le détenteur libère (SSE), le gate bascule seul vers l'acquisition.
   $effect(() => {
     if (loaded && !isLockedByOthers && !isLockedByMe) {
       acquireLock().catch((err) =>
@@ -192,7 +218,7 @@
     if (isLockedByOthers) {
       statusBarStore.setLockStatus({
         type: "locked-by-other",
-        userName: activeLock?.userName || "un autre utilisateur",
+        userName: lockedByUserName,
       });
     } else if (isLockedByMe) {
       statusBarStore.setLockStatus({ type: "locked-by-me" });
@@ -287,6 +313,7 @@
     // Smart Lock: on ne verrouille que s'il y a plus d'un contributeur potentiel
     const contributors = recipe.permissionWrite || [];
     if (contributors.length <= 1) {
+      smartLock = true;
       console.log("ℹ️ Verrou ignoré (contributeur unique)");
       return true;
     }
@@ -307,19 +334,25 @@
       if (lock.userId === globalState.userId) {
         lockedResourceId = resourceId;
         startHeartbeat();
-        await reloadAfterAcquisition();
         console.log(`[RecipeEditPage] Lock acquis pour ${resourceId}`);
         return true;
       }
-      // Verrou d'autrui : le statusBar informe de façon persistante —
-      // pas de toast éphémère.
+      // Verrou d'autrui : le gate bloque l'accès au formulaire.
       return false;
     } catch (error) {
       console.error("[RecipeEditPage] Erreur acquisition lock:", error);
-      toastService.error("Impossible de verrouiller la recette");
+      // L'échec peut masquer une prise concurrente (la règle update répond
+      // 404 quand le verrou vient d'être repris par autrui) : relire l'état
+      // réel du verrou avant quoi que ce soit — le gate suivra.
+      try {
+        activeLock = await locksService.getLock(`recipe_${recipeId}`);
+      } catch {
+        toastService.error("Impossible de vérifier le verrou de la recette");
+      }
       return false;
     } finally {
       isAcquiringLock = false;
+      lockSettled = true;
     }
   }
 
@@ -341,35 +374,30 @@
   }
 
   /**
-   * À l'acquisition du verrou, la page peut être périmée : la période
-   * « verrouillé par autrui » est celle où autrui a pu sauvegarder. On
-   * recharge le formulaire depuis le store (Dexie, déjà à jour par SSE).
-   * Hors verrou, l'état local n'est pas une version autorisée — et l'édition
-   * hors verrou est impossible (canEdit fermé pendant toute l'acquisition).
+   * Re-cycle complet depuis le gate : désabonner le verrou, repartir du
+   * chargement (recette puis verrou puis acquisition). Le formulaire
+   * n'étant jamais rendu sans verrou résolu, tout rechargement est frais
+   * par construction — il n'existe aucun handover à chaud.
    */
-  async function reloadAfterAcquisition(): Promise<void> {
-    if (!recipeId || !recipe) return;
-    try {
-      const before = createRecipeSnapshot(recipe);
-      const fresh = await recipesStore.getRecipeByUuid(recipeId);
-      if (!fresh) return;
-      recipe = transformStoreDataToForm(fresh, {
-        created: fresh.created,
-        updated: fresh.updated ?? undefined,
-        createdBy: fresh.createdBy ?? undefined,
-      });
-      initialRecipeSnapshot = createRecipeSnapshot(recipe);
-      if (createRecipeSnapshot(recipe) !== before) {
-        toastService.info(
-          "Recette rechargée — l'éditeur précédent l'avait modifiée",
-        );
-      }
-    } catch (error) {
-      console.error(
-        "[RecipeEditPage] Erreur rechargement après acquisition du lock:",
-        error,
-      );
+  function retryAcquisition(): void {
+    if (!recipeId) return;
+    if (lockUnsub) {
+      lockUnsub();
+      lockUnsub = null;
     }
+    stopHeartbeat();
+    lockedResourceId = null;
+    activeLock = null;
+    smartLock = false;
+    lockSettled = false;
+    loaded = false;
+    isLoading = true;
+    recipe = null;
+    initialRecipeSnapshot = null;
+  }
+
+  function goBackToRecipe(): void {
+    navigate(`/recipe/${recipeId}`);
   }
 
   // ============================================================================
@@ -517,9 +545,24 @@
 <!-- ============================================================================ -->
 
 <div transition:fade class="max-w-9xl container mx-auto px-4 py-8">
-  {#if isLoading}
-    <div class="flex items-center justify-center py-20">
-      <div class="loading loading-lg loading-spinner"></div>
+  {#if pageState === "gate"}
+    <!-- Gate bloquant : aucun formulaire rendu sans verrou résolu en notre
+         faveur — l'écrasement de modifications concurrentes est impossible
+         par construction. -->
+    <div
+      class="flex flex-col items-center justify-center gap-4 py-24 text-center"
+    >
+      <div class="rounded-full bg-warning/20 p-4">
+        <Lock class="h-8 w-8 text-warning" />
+      </div>
+      <h2 class="text-lg font-bold">{gateTitle}</h2>
+      <p class="max-w-md text-base-content/70">{gateMessage}</p>
+      <div class="mt-2 flex gap-2">
+        <button class="btn btn-ghost" onclick={goBackToRecipe}>Retour</button>
+        <button class="btn btn-primary" onclick={retryAcquisition}>
+          Réessayer
+        </button>
+      </div>
     </div>
   {:else if recipe}
     <!-- Form -->
@@ -602,20 +645,12 @@
         </button>
       {/if}
     </div>
+  {:else}
+    <div class="flex items-center justify-center py-20">
+      <div class="loading loading-lg loading-spinner"></div>
+    </div>
   {/if}
 </div>
-
-<!-- Lock indicator -->
-{#if isLockedByOthers}
-  <div class="fixed bottom-0 left-0 rounded-t-box bg-base-100">
-    <div
-      class=" flex size-full items-center rounded-t-box bg-warning/40 px-4 py-1"
-    >
-      <Lock class="me-2 h-4 w-4" />
-      Vérouillé : document en cours d'édition par un·e autre utilisateur·ice.
-    </div>
-  </div>
-{/if}
 
 <!-- Guard de navigation pour modifications non sauvegardées -->
 <UnsavedChangesGuard

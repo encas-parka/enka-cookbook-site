@@ -296,7 +296,6 @@ export function parseRecipeIndexEntry(rawData: any): RecipeIndexEntry {
     permissionWrite: Array.isArray(rawData.permissionWrite)
       ? rawData.permissionWrite
       : [],
-    lockedBy: rawData.lockedBy || null,
     plate: rawData.plate ?? 100,
     ingredients,
     auteur: rawData.auteur || "",
@@ -343,7 +342,6 @@ export function parseRecipeToIndexEntry(recipe: any): RecipeIndexEntry {
     permissionWrite: recipe.permissionWrite,
 
     // Champs de gestion
-    lockedBy: recipe.lockedBy || null,
     id: recipe.id,
     created: recipe.created,
     updated: recipe.updated,

@@ -97,7 +97,6 @@ export type RecipeIndexEntry = Pick<
   | "check"
   | "saison"
   | "permissionWrite"
-  | "lockedBy"
   | "plate"
   | "createdBy"
   | "id"
@@ -177,7 +176,10 @@ export interface RecipesCacheMetadata {
 // =============================================================================
 
 /** Données pour créer une recette (exclut id, created, updated auto-générés) */
-export type CreateRecipeData = Omit<Recettes, "id" | "created" | "updated">;
+export type CreateRecipeData = Omit<
+  Recettes,
+  "id" | "created" | "updated" | "lockedBy"
+>;
 
 /** Données pour mettre à jour une recette */
 export type UpdateRecipeData = Partial<CreateRecipeData>;

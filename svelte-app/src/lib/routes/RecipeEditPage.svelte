@@ -3,6 +3,7 @@
   import { recipeDataStore } from "$lib/stores/RecipeDataStore.svelte";
   import { globalState } from "$lib/stores/GlobalState.svelte";
   import { toastService } from "$lib/services/toast.service.svelte";
+  import { locksService, type Lock as PbLock } from "$lib/services/pb-locks";
   import { route, navigate } from "$lib/router";
   import { Save, Lock, Copy, Trash2 } from "@lucide/svelte";
   import { onDestroy } from "svelte";
@@ -49,14 +50,16 @@
   let loaded = $state(false);
   let isLoading = $state(true);
   let isSaving = $state(false);
-  let lockedBy = $state<string | null>(null);
+
+  // Verrou porté par la collection `locks` (locksService) : TTL `expiresAt`,
+  // takeover de l'expiré, release idempotent. L'ancien champ recipes.lockedBy
+  // est mort — retrait du schéma au cutover.
+  let activeLock = $state<PbLock | null>(null);
+  let lockedResourceId: string | null = null;
+  let isAcquiringLock = false;
+  let lockUnsub: (() => void) | null = null;
   let heartbeatInterval: any = null;
   let initialRecipeSnapshot = $state<string | null>(null);
-
-  // recipeId non-réactif capturé au moment de l'acquisition du lock
-  // pour garantir sa disponibilité lors du cleanup (onDestroy)
-  // car recipeId ($derived de route.params) peut déjà être vide après navigation
-  let lockedRecipeId: string | null = null;
 
   // Modal de suppression
   let showDeleteModal = $state(false);
@@ -85,10 +88,10 @@
   // ============================================================================
 
   const isLockedByOthers = $derived.by(
-    () => !!lockedBy && lockedBy !== globalState.userId,
+    () => !!activeLock && activeLock.userId !== globalState.userId,
   );
   const isLockedByMe = $derived.by(
-    () => !!lockedBy && lockedBy === globalState.userId,
+    () => !!activeLock && activeLock.userId === globalState.userId,
   );
   const canEdit = $derived(!!online.current && !isLockedByOthers && !isLoading);
 
@@ -123,9 +126,11 @@
               updated: data.updated ?? undefined,
               createdBy: data.createdBy ?? undefined,
             });
-            lockedBy = data.lockedBy || null;
             loaded = true;
             isLoading = false;
+            // Verrou : lecture initiale + souscription temps réel —
+            // l'acquisition est pilotée par l'$effect réactif plus bas
+            setupLockSubscription();
           } else {
             toastService.error("Recette introuvable");
             navigate("/recipe");
@@ -150,13 +155,8 @@
     }
   });
 
-  // Synchroniser le lock depuis le store (realtime)
-  $effect(() => {
-    if (!recipeId || !loaded) return;
-    lockedBy = recipesStore.getRecipeIndexByUuid(recipeId)?.lockedBy || null;
-  });
-
-  // Acquérir le lock quand il est disponible et non détenu
+  // Acquérir le lock quand la page est chargée et le verrou libre — réactif :
+  // si le détenteur libère (SSE), la reprise repart toute seule.
   $effect(() => {
     if (loaded && !isLockedByOthers && !isLockedByMe) {
       acquireLock().catch((err) =>
@@ -184,7 +184,7 @@
     if (isLockedByOthers) {
       statusBarStore.setLockStatus({
         type: "locked-by-other",
-        userName: "un autre utilisateur",
+        userName: activeLock?.userName || "un autre utilisateur",
       });
     } else if (isLockedByMe) {
       statusBarStore.setLockStatus({ type: "locked-by-me" });
@@ -193,11 +193,13 @@
     }
   });
 
-  onDestroy(async () => {
-    stopHeartbeat();
-    if (isLockedByMe && !isSaving) {
-      await releaseLock();
+  onDestroy(() => {
+    if (lockUnsub) {
+      lockUnsub();
+      lockUnsub = null;
     }
+    stopHeartbeat();
+    releaseLock();
     statusBarStore.clearLockStatus();
     window.removeEventListener("beforeunload", handleBeforeUnload);
   });
@@ -219,16 +221,19 @@
 
   function startHeartbeat() {
     stopHeartbeat();
-    if (!recipeId || !isLockedByMe) return;
-
     heartbeatInterval = setInterval(async () => {
-      try {
-        console.log("💓 Heartbeat: Refreshing lock...");
-        await recipesStore.updateRecipeLock(recipeId, globalState.userId);
-      } catch (error) {
-        console.error("❌ Heartbeat failed:", error);
+      if (lockedResourceId && globalState.userId) {
+        try {
+          await locksService.acquireLock(
+            lockedResourceId,
+            globalState.userId,
+            globalState.userName || "",
+          );
+        } catch (e) {
+          console.error("[RecipeEditPage] Erreur heartbeat lock:", e);
+        }
       }
-    }, 120000); // 2 minutes
+    }, 240000); // 4 minutes (le lock expire à 7 min)
   }
 
   function stopHeartbeat() {
@@ -239,59 +244,80 @@
   }
 
   // ============================================================================
-  // LOCK MANAGEMENT
+  // LOCK MANAGEMENT (locksService — collection `locks`)
   // ============================================================================
 
-  async function acquireLock(): Promise<boolean> {
-    if (!recipeId || !globalState.userId || !recipe) return false;
+  /**
+   * Lecture initiale du verrou + souscription temps réel. L'état local
+   * `activeLock` est la seule source du badge : plus aucun aller-retour via
+   * l'index des recettes (source des releases manquées au destroy).
+   */
+  async function setupLockSubscription(): Promise<void> {
+    if (!recipeId) return;
+    const resourceId = `recipe_${recipeId}`;
+    try {
+      activeLock = await locksService.getLock(resourceId);
+      lockUnsub = await locksService.subscribeToLock(resourceId, (lock) => {
+        activeLock = lock;
+      });
+    } catch (error) {
+      console.error("[RecipeEditPage] Erreur chargement lock:", error);
+    }
+  }
 
-    // Smart Lock: On ne verrouille que s'il y a plus d'un contributeur potentiel
+  async function acquireLock(): Promise<boolean> {
+    if (!recipeId || !globalState.userId || !recipe || isAcquiringLock)
+      return false;
+
+    // Smart Lock: on ne verrouille que s'il y a plus d'un contributeur potentiel
     const contributors = recipe.permissionWrite || [];
     if (contributors.length <= 1) {
       console.log("ℹ️ Verrou ignoré (contributeur unique)");
       return true;
     }
 
+    isAcquiringLock = true;
     try {
-      // Vérifier si le verrou actuel est expiré (plus de 5 minutes)
-      const currentLockedBy = recipe.lockedBy;
-      const lastUpdate = recipe.updated ? new Date(recipe.updated) : null;
-      const isExpired =
-        lastUpdate && Date.now() - lastUpdate.getTime() > 300000; // 5 min
+      const resourceId = `recipe_${recipeId}`;
+      const success = await locksService.acquireLock(
+        resourceId,
+        globalState.userId,
+        globalState.userName || "",
+      );
 
-      if (currentLockedBy && currentLockedBy !== globalState.userId) {
-        if (isExpired) {
-          console.log("⏳ Verrou précédent expiré, reprise de contrôle...");
-        } else {
-          return false;
-        }
+      if (success) {
+        lockedResourceId = resourceId;
+        startHeartbeat();
+        console.log(`[RecipeEditPage] Lock acquis pour ${resourceId}`);
+        return true;
       }
-
-      await recipesStore.updateRecipeLock(recipeId, globalState.userId);
-      lockedBy = globalState.userId;
-      lockedRecipeId = recipeId;
-      console.log("🔒 Verrou acquis");
-      startHeartbeat();
-      return true;
+      toastService.warning(
+        `Recette en cours de modification par ${activeLock?.userName || "un autre utilisateur"}`,
+      );
+      return false;
     } catch (error) {
-      console.error("❌ Erreur acquisition verrou:", error);
+      console.error("[RecipeEditPage] Erreur acquisition lock:", error);
       toastService.error("Impossible de verrouiller la recette");
       return false;
+    } finally {
+      isAcquiringLock = false;
     }
   }
 
   async function releaseLock(): Promise<void> {
-    const recipeIdToRelease = lockedRecipeId;
-    if (!recipeIdToRelease) return;
-    stopHeartbeat();
+    const resourceIdToRelease = lockedResourceId;
+    if (!resourceIdToRelease || !globalState.userId) return;
 
+    // 1. Cleanup local IMMÉDIAT (synchrone) — rend le release idempotent
+    //    quand onDestroy suit le release du save
+    stopHeartbeat();
+    lockedResourceId = null;
+
+    // 2. Release serveur ; activeLock suivra par SSE
     try {
-      await recipesStore.updateRecipeLock(recipeIdToRelease, null);
-      lockedBy = null;
-      lockedRecipeId = null;
-      console.log("🔓 Verrou libéré");
+      await locksService.releaseLock(resourceIdToRelease, globalState.userId);
     } catch (error) {
-      console.error("❌ Erreur libération verrou:", error);
+      console.error("[RecipeEditPage] Erreur libération lock:", error);
     }
   }
 
@@ -331,11 +357,12 @@
         id: recipe.id,
         // Conserver createdBy pour l'upsert (création si nécessaire)
         createdBy: recipe.createdBy || globalState.userId,
-        // Libérer le lock atomiquement avec la sauvegarde
-        lockedBy: null,
       };
 
       const updated = await recipesStore.updateRecipe(recipeId, recipeData);
+
+      // Libérer le verrou — la consultation n'en a plus besoin
+      await releaseLock();
 
       // Réinitialiser isDirty après sauvegarde réussie en recapturant le snapshot
       initialRecipeSnapshot = createRecipeSnapshot(recipe);

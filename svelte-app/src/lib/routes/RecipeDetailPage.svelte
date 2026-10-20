@@ -32,11 +32,6 @@
   let showAddToEventModal = $state(false);
   const upcomingEvents = $derived(eventsStore.getUpcomingEventsForUser());
 
-  // Réactivité du lock depuis le store (seule info venant de l'index en temps réel)
-  const lockedBy = $derived(
-    recipeDetails ? recipesStore.getRecipeLockStatus(recipeDetails.id) : null,
-  );
-
   // Réagir aux changements d'UUID
   $effect(() => {
     if (recipeId) {

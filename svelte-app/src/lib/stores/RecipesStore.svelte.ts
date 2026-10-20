@@ -380,11 +380,6 @@ class RecipesStore {
     }
   }
 
-  getRecipeLockStatus(uuid: string): string | null {
-    const entry = this.#recipesIndex.get(uuid);
-    return entry?.lockedBy || null;
-  }
-
   /**
    * Timestamp de dernière mise à jour d'une recette (lecture réactive de
    * l'index SvelteMap). Lu depuis un $effect consommateur (ex. ProductsStore
@@ -393,25 +388,6 @@ class RecipesStore {
    */
   getRecipeUpdatedAt(uuid: string): string | undefined {
     return this.#recipesIndex.get(uuid)?.updated;
-  }
-
-  // =============================================================================
-  // PUBLIC API - LOCKING
-  // =============================================================================
-
-  async updateRecipeLock(uuid: string, lockedBy: string | null): Promise<void> {
-    if (!globalState.userId) return;
-
-    try {
-      await this.#collection.update(uuid, { lockedBy } as Partial<Recettes>);
-
-      console.log(
-        `[RecipesStore] Verrou ${uuid} mis à jour: ${lockedBy || "libéré"}`,
-      );
-    } catch (error) {
-      console.error(`[RecipesStore] Erreur verrouillage ${uuid}:`, error);
-      throw error;
-    }
   }
 
   // =============================================================================

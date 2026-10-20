@@ -132,7 +132,6 @@ export function createDefaultRecipe(): RecipeFormState {
     prepAlt: [],
     check: null,
     draft: true,
-    lockedBy: null,
     auteur: null,
     publishedAt: null,
     createdBy: globalState.userId || "",
@@ -212,7 +211,6 @@ export function normalizeRecipeForSave(
     ingredients: [] as string[],
     astuces: null,
     prepAlt: null,
-    lockedBy: null,
     rootRecipeId: recipe.rootRecipeId || null,
     versionLabel: recipe.versionLabel || null,
   } as CreateRecipeData;

@@ -98,7 +98,6 @@
               id: "new-recipe",
               created: undefined,
               updated: undefined,
-              lockedBy: null,
               createdBy: globalState.userId || "",
               auteur: userName, // IMPORTANT: Nouvel auteur pour la duplication
               permissionWrite: [globalState.userId || ""],

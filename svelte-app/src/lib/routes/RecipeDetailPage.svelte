@@ -6,6 +6,7 @@
   import RecipeIngredientsList from "$lib/components/recipes/RecipeIngredientsList.svelte";
   import RecipePreparation from "$lib/components/recipes/RecipePreparation.svelte";
   import RecipeAlerts from "$lib/components/recipes/RecipeAlerts.svelte";
+  import RecipeAlternatives from "$lib/components/recipes/RecipeAlternatives.svelte";
   import RecipeVariants from "$lib/components/recipes/RecipeVariants.svelte";
   import { ChefHat, PencilIcon, Copy, CalendarPlus } from "@lucide/svelte";
   import { navigate } from "$lib/router";
@@ -346,6 +347,16 @@
           </div>
         </div>
       </div>
+    </div>
+
+    <!-- Préparations alternatives (prepAlt → recettes liées) -->
+    <div class="mt-8">
+      <RecipeAlternatives
+        alternatives={(recipeDetails.prepAlt ?? []).map((id) => ({
+          recetteAlt: id,
+        }))}
+        recipesIndex={recipesIndexMap}
+      />
     </div>
 
     <!-- Bouton Ajouter à un événement -->

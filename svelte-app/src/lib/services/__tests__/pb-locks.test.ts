@@ -41,6 +41,9 @@ function lockRecord(overrides: Record<string, unknown> = {}) {
 describe("locksService — contrat du verrou", () => {
   beforeEach(() => {
     currentFakePb().reset();
+    // L'instance fake est un singleton : restaurer les propriétés espionnées
+    // par les tests précédents (sinon le bind capture le mock voisin).
+    vi.restoreAllMocks();
   });
 
   it("getLock : 404 → null", async () => {
@@ -91,6 +94,48 @@ describe("locksService — contrat du verrou", () => {
     expect(await locksService.getLock("recipe_r1")).toMatchObject({
       userId: "user_b",
     });
+  });
+
+  it("acquireLock : erreur serveur au getOne (non 404) → lève (panne ≠ refus)", async () => {
+    const fakePb = currentFakePb();
+    const original = fakePb.collection.bind(fakePb);
+    vi.spyOn(fakePb, "collection").mockImplementation((name: string) => {
+      const api = original(name);
+      if (name === "locks") {
+        return {
+          ...api,
+          getOne: async () => {
+            throw { status: 500, message: "boom" };
+          },
+        };
+      }
+      return api;
+    });
+
+    await expect(
+      locksService.acquireLock("recipe_r1", "user_b", "bob"),
+    ).rejects.toMatchObject({ status: 500 });
+  });
+
+  it("acquireLock : course de création (400 not_unique) → lève", async () => {
+    const fakePb = currentFakePb();
+    const original = fakePb.collection.bind(fakePb);
+    vi.spyOn(fakePb, "collection").mockImplementation((name: string) => {
+      const api = original(name);
+      if (name === "locks") {
+        return {
+          ...api,
+          create: async () => {
+            throw { status: 400, message: "Failed to create record." };
+          },
+        };
+      }
+      return api;
+    });
+
+    await expect(
+      locksService.acquireLock("recipe_r1", "user_b", "bob"),
+    ).rejects.toMatchObject({ status: 400 });
   });
 
   it("releaseLock : réinitialise le verrou", async () => {

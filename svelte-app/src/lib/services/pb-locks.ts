@@ -81,6 +81,10 @@ export const locksService = {
    *   3. Si même utilisateur → refresh (heartbeat)
    *   4. Si utilisateur différent + non expiré → refuser
    *   5. Si utilisateur différent + expiré → prendre le relais
+   *
+   * Contrat : `false` signifie UNIQUEMENT « verrou activement détenu par
+   * autrui » ; toute erreur technique (réseau, validation, règle PB, course
+   * de création) LÈVE — les appelants distinguent ainsi le refus du panne.
    */
   async acquireLock(
     resourceId: string,
@@ -93,36 +97,29 @@ export const locksService = {
 
     const data = { userId, userName, expiresAt };
 
+    let existing: Record<string, any>;
     try {
-      const existing = await pb.collection("locks").getOne(resourceId);
-
-      // Lock actif détenu par un autre utilisateur → refuser
-      if (
-        existing.userId &&
-        existing.userId !== userId &&
-        new Date(existing.expiresAt) >= new Date()
-      ) {
-        return false;
-      }
-
-      // Même utilisateur (heartbeat) OU lock expiré → update
-      await pb.collection("locks").update(resourceId, data);
-      return true;
+      existing = await pb.collection("locks").getOne(resourceId);
     } catch (err: any) {
-      // Pas de document → créer avec ID personnalisé
-      if (err.status === 404) {
-        try {
-          await pb.collection("locks").create({ id: resourceId, ...data });
-          return true;
-        } catch (createErr) {
-          console.error("[locksService] Erreur création verrou:", createErr);
-          return false;
-        }
-      }
+      if (err.status !== 404) throw err; // panne réseau/serveur : lever
+      // Pas de document → créer avec ID personnalisé (une course de création
+      // simultanée lève 400 not_unique : contrat « erreur technique »)
+      await pb.collection("locks").create({ id: resourceId, ...data });
+      return true;
+    }
 
-      console.warn("[locksService] Erreur acquisition verrou:", err.message);
+    // Lock actif détenu par un autre utilisateur → refuser
+    if (
+      existing.userId &&
+      existing.userId !== userId &&
+      new Date(existing.expiresAt) >= new Date()
+    ) {
       return false;
     }
+
+    // Même utilisateur (heartbeat) OU lock expiré → update
+    await pb.collection("locks").update(resourceId, data);
+    return true;
   },
 
   /**

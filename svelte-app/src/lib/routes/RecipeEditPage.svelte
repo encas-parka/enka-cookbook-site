@@ -61,6 +61,13 @@
   // posé) et tentative d'acquisition terminée (succès, refus ou panne).
   let smartLock = $state(false);
   let lockSettled = $state(false);
+  // Latch « verrou d'autrui déjà vu » : passé par le gate, l'acquisition ne
+  // repart plus seule au release (SSE) — le formulaire ne s'ouvre que par
+  // le bouton, sur un re-chargement complet. C'est ce qui garantit des
+  // données fraîches : jamais le form monté sur les données du montage.
+  let hasBeenGated = $state(false);
+  // Dernier détenteur vu (le nom disparaît du lock au release).
+  let lastLockerName = $state("un autre utilisateur");
   let lockUnsub: (() => void) | null = null;
   let heartbeatInterval: any = null;
   let initialRecipeSnapshot = $state<string | null>(null);
@@ -121,14 +128,27 @@
     if (!lockSettled) return "loading"; // acquisition en cours de résolution
     return "gate"; // échec d'acquisition sans état lisible : bloquer (fail-closed)
   });
-  const gateTitle = $derived(
-    isLockedByOthers ? "Édition en cours" : "Édition indisponible",
-  );
-  const gateMessage = $derived(
-    isLockedByOthers
-      ? `${lockedByUserName} modifie actuellement cette recette. Attendez la fin de son édition pour la modifier à votre tour.`
-      : "Impossible de vérifier le verrou d'édition. Vérifiez votre connexion puis réessayez.",
-  );
+  // Variante du gate : verrou d'autrui détenu (attente passive), verrou
+  // parti (prêt à ouvrir le formulaire), ou résolution impossible.
+  const gateVariant = $derived.by(() => {
+    if (isLockedByOthers) return "held";
+    if (hasBeenGated && !activeLock) return "released";
+    return "unresolved";
+  });
+  const gateTitle = $derived.by(() => {
+    if (gateVariant === "held") return "Édition en cours";
+    if (gateVariant === "released") return "Édition terminée";
+    return "Édition indisponible";
+  });
+  const gateMessage = $derived.by(() => {
+    if (gateVariant === "held") {
+      return `${lockedByUserName} modifie actuellement cette recette. Vous pouvez patienter sur cette page : le bouton d'édition apparaîtra dès que le verrou sera libéré.`;
+    }
+    if (gateVariant === "released") {
+      return `L'édition par ${lastLockerName} est terminée et ses modifications sont enregistrées. Ouvrez le formulaire pour éditer à votre tour.`;
+    }
+    return "Impossible de vérifier le verrou d'édition. Vérifiez votre connexion puis réessayez.";
+  });
 
   // Données de référence depuis RecipeDataStore
   const recipeInfo = $derived.by(() => ({
@@ -189,10 +209,22 @@
     }
   });
 
-  // Acquérir le lock quand la page est chargée et le verrou libre — réactif :
-  // si le détenteur libère (SSE), le gate bascule seul vers l'acquisition.
+  // Latch : mémoriser le passage d'un verrou d'autrui (et son détenteur —
+  // le nom disparaît du lock au release).
   $effect(() => {
-    if (loaded && !isLockedByOthers && !isLockedByMe) {
+    if (isLockedByOthers) {
+      hasBeenGated = true;
+      lastLockerName = lockedByUserName;
+    }
+  });
+
+  // Acquérir le lock au montage si la page est chargée et le verrou libre.
+  // Après un passage par le gate (hasBeenGated), plus d'acquisition
+  // automatique : le gate annonce la fin du verrou (SSE) et le bouton
+  // déclenche un re-cycle complet — le formulaire ne s'ouvre jamais sur
+  // des données chargées avant l'édition d'autrui.
+  $effect(() => {
+    if (loaded && !hasBeenGated && !isLockedByOthers && !isLockedByMe) {
       acquireLock().catch((err) =>
         console.error("[RecipeEditPage] Auto-acquire lock failed:", err),
       );
@@ -390,6 +422,7 @@
     activeLock = null;
     smartLock = false;
     lockSettled = false;
+    hasBeenGated = false;
     loaded = false;
     isLoading = true;
     recipe = null;
@@ -559,9 +592,15 @@
       <p class="max-w-md text-base-content/70">{gateMessage}</p>
       <div class="mt-2 flex gap-2">
         <button class="btn btn-ghost" onclick={goBackToRecipe}>Retour</button>
-        <button class="btn btn-primary" onclick={retryAcquisition}>
-          Réessayer
-        </button>
+        {#if gateVariant === "released"}
+          <button class="btn btn-primary" onclick={retryAcquisition}>
+            Éditer
+          </button>
+        {:else if gateVariant === "unresolved"}
+          <button class="btn btn-primary" onclick={retryAcquisition}>
+            Réessayer
+          </button>
+        {/if}
       </div>
     </div>
   {:else if recipe}

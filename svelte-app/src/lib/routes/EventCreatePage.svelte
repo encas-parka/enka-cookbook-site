@@ -184,6 +184,7 @@
       teams: selectedTeams,
       contributors: contributorsToSave,
       meals: sortedMeals,
+      minContrib,
     };
 
     try {

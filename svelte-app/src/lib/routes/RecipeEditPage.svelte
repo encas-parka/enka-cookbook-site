@@ -255,13 +255,20 @@
   async function setupLockSubscription(): Promise<void> {
     if (!recipeId) return;
     const resourceId = `recipe_${recipeId}`;
+    // Lecture initiale best-effort : un échec (autocancel du SDK au remount
+    // rapide, panne passagère) ne doit pas empêcher la souscription — le
+    // temps réel fait foi pour la suite.
     try {
       activeLock = await locksService.getLock(resourceId);
+    } catch (error) {
+      console.warn("[RecipeEditPage] Lock initial illisible:", error);
+    }
+    try {
       lockUnsub = await locksService.subscribeToLock(resourceId, (lock) => {
         activeLock = lock;
       });
     } catch (error) {
-      console.error("[RecipeEditPage] Erreur chargement lock:", error);
+      console.error("[RecipeEditPage] Erreur souscription lock:", error);
     }
   }
 

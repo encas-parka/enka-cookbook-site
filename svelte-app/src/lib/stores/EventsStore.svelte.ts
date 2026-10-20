@@ -33,6 +33,7 @@ import type {
 import type { RecettesTypeR } from "$lib/types/recipes.types";
 import { nanoid } from "nanoid";
 import { lookupUsersByEmails } from "$lib/services/pb-users";
+import { toastService } from "$lib/services/toast.service.svelte";
 import { globalState } from "./GlobalState.svelte";
 import {
   parseEventMeals,
@@ -893,6 +894,11 @@ export class EventsStore {
             console.warn(
               `[EventsStore] Emails envoyés : ${okCount}/${emails.length} (${failCount} échec(s))`,
             );
+            // L'invitation est posée, mais l'utilisateur doit savoir que le
+            // mail n'est pas parti (même traitement que NativeTeamsStore).
+            toastService.warning(
+              `Emails d'invitation : ${okCount}/${emails.length} envoyé(s)`,
+            );
           } else {
             console.log(
               `[EventsStore] Emails envoyés : ${okCount}/${emails.length}`,
@@ -901,6 +907,7 @@ export class EventsStore {
         })
         .catch((err) => {
           console.error("[EventsStore] Erreur d'envoi des emails:", err);
+          toastService.error("Échec de l'envoi des emails d'invitation");
         });
 
       console.log(

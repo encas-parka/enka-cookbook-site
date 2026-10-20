@@ -41,6 +41,40 @@ export async function lookupUserByEmail(
 }
 
 /**
+ * Résout des ids users en noms d'affichage. Passe par des getOne unitaires :
+ * la viewRule users autorise tout authentifié (c'est le chemin de l'expand
+ * `members` des équipes), tandis que la listRule reste verrouillée à soi —
+ * pas d'énumération. Les échecs unitaires (id inconnu, compte supprimé,
+ * panne) tombent silencieusement : l'appelant garde son fallback sur l'id
+ * brut.
+ *
+ * @returns une Map id → nom (seuls les ids résolus y figurent)
+ */
+export async function resolveUserNames(
+  ids: string[],
+): Promise<Map<string, string>> {
+  const unique = Array.from(new Set(ids.filter(Boolean)));
+  const settled = await Promise.allSettled(
+    unique.map(async (id) => {
+      const user = await pb.collection("users").getOne<{
+        id: string;
+        name?: string;
+        email?: string;
+      }>(id);
+      return [id, user.name || user.email || id] as const;
+    }),
+  );
+
+  const resolved = new Map<string, string>();
+  for (const result of settled) {
+    if (result.status === "fulfilled") {
+      resolved.set(result.value[0], result.value[1]);
+    }
+  }
+  return resolved;
+}
+
+/**
  * Résout un lot d'emails en parallèle.
  * Les introuvables (null) et les erreurs unitaires sont exclus du résultat —
  * l'appelant applique son fallback sur les emails absents de la Map.

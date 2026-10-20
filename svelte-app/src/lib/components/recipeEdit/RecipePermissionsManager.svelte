@@ -13,7 +13,7 @@
   import Fieldset from "../ui/Fieldset.svelte";
   import BtnGroupCheck from "../ui/BtnGroupCheck.svelte";
   import { toastService } from "$lib/services/toast.service.svelte";
-  import { lookupUserByEmail } from "$lib/services/pb-users";
+  import { lookupUserByEmail, resolveUserNames } from "$lib/services/pb-users";
   import { fade } from "svelte/transition";
   import ModalContainer from "$lib/components/ui/modal/ModalContainer.svelte";
   import ModalHeader from "$lib/components/ui/modal/ModalHeader.svelte";
@@ -53,6 +53,20 @@
           }
         }
       }
+    }
+
+    // Contributeurs posés par d'autres sessions (ni moi, ni mes équipes) :
+    // résolution serveur par getOne (viewRule users : tout authentifié).
+    // Converge : réécriture seulement quand un id inconnu a été résolu.
+    const unknownIds = [...(permissionWrite || []), createdBy].filter(
+      (id): id is string => !!id && !memberNames[id],
+    );
+    if (unknownIds.length > 0) {
+      resolveUserNames(unknownIds).then((names) => {
+        for (const [id, name] of names) {
+          if (!memberNames[id]) memberNames[id] = name;
+        }
+      });
     }
   });
 

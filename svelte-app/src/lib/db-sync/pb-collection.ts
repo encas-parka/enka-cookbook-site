@@ -284,6 +284,15 @@ export function createSyncCollection<T extends PbDoc>(
   // =====================================================================
 
   /**
+   * Clé du curseur delta de cette collection dans `syncMeta` — scoped
+   * (`${collectionName}:${scopeKey}`) ou non. Une seule définition du
+   * format : initialFetch, resetCursor et clearLocal la partagent.
+   */
+  function syncMetaKey(scopeKey?: string): string {
+    return scopeKey ? `${collectionName}:${scopeKey}` : collectionName;
+  }
+
+  /**
    * Incremental sync: fetches records updated since the persisted cursor of
    * this collection (scoped by `scopeKey` when provided, key
    * `${collectionName}:${scopeKey}` in the `syncMeta` table).
@@ -299,9 +308,7 @@ export function createSyncCollection<T extends PbDoc>(
    */
   async function initialFetch(fetchOptions?: PbFetchOptions): Promise<void> {
     // 1. Read the persisted delta cursor (scoped when scopeKey is provided)
-    const syncKey = fetchOptions?.scopeKey
-      ? `${collectionName}:${fetchOptions.scopeKey}`
-      : collectionName;
+    const syncKey = syncMetaKey(fetchOptions?.scopeKey);
     const meta = await db.syncMeta.get(syncKey);
     const since = meta?.lastSync ?? "2000-01-01 00:00:00.000Z";
     const localCount = await table.count();
@@ -396,11 +403,8 @@ export function createSyncCollection<T extends PbDoc>(
    *   c'est le curseur non-scopé de la collection qui est invalidé.
    */
   async function resetCursor(scopeKey?: string): Promise<void> {
-    const key = scopeKey ? `${collectionName}:${scopeKey}` : collectionName;
-    await db.syncMeta.delete(key);
-    console.log(
-      `[pb-sync] resetCursor ${collectionName}${scopeKey ? `:${scopeKey}` : ""}`,
-    );
+    await db.syncMeta.delete(syncMetaKey(scopeKey));
+    console.log(`[pb-sync] resetCursor ${syncMetaKey(scopeKey)}`);
   }
 
   // =====================================================================
@@ -932,7 +936,7 @@ export function createSyncCollection<T extends PbDoc>(
         .where("collectionId")
         .startsWith(`${collectionName}:`)
         .delete();
-      await db.syncMeta.delete(collectionName);
+      await db.syncMeta.delete(syncMetaKey());
     });
     console.log(`[pb-sync] clearLocal ${collectionName}`);
   }

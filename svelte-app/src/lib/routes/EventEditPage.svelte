@@ -413,7 +413,14 @@
       return false;
     } catch (error) {
       console.error("❌ Erreur acquisition verrou:", error);
-      toastService.error("Impossible de verrouiller l'événement");
+      // L'échec peut masquer une prise concurrente (la règle update répond
+      // 404 quand le verrou vient d'être repris par autrui) : relire l'état
+      // réel du verrou avant quoi que ce soit — l'alerte de page suivra.
+      try {
+        activeLock = await locksService.getLock(`event_${eventId}`);
+      } catch {
+        toastService.error("Impossible de vérifier le verrou de l'événement");
+      }
       return false;
     } finally {
       isAcquiringLock = false;

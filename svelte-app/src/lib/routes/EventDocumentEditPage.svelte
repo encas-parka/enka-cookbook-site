@@ -158,7 +158,14 @@
       return false;
     } catch (error) {
       console.error("[EventDocumentEditPage] Erreur acquisition lock:", error);
-      toastService.error("Impossible de verrouiller le document");
+      // L'échec peut masquer une prise concurrente (la règle update répond
+      // 404 quand le verrou vient d'être repris par autrui) : relire l'état
+      // réel du verrou avant quoi que ce soit — l'alerte de page suivra.
+      try {
+        activeLock = await locksService.getLock(`doc_${docId}`);
+      } catch {
+        toastService.error("Impossible de vérifier le verrou du document");
+      }
       return false;
     } finally {
       isAcquiringLock = false;

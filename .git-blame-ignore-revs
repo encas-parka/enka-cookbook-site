@@ -1,0 +1,6 @@
+# Révisions à ignorer dans git blame / git log -S (reformatages mécaniques).
+# Usage ponctuel : git blame --ignore-revs-file .git-blame-ignore-revs
+# GitHub le lit automatiquement pour la vue "Blame".
+
+# style: format repository with prettier
+338e3ebd

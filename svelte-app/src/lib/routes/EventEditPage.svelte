@@ -204,6 +204,7 @@
     !!online.current &&
       eventsStore.canUserEditEvent(eventId, globalState.userId || "") &&
       !isLockedByOthers &&
+      !isAcquiringLock &&
       !isBusy,
   );
 

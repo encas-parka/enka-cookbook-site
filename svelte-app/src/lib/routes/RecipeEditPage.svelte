@@ -56,7 +56,7 @@
   // est mort — retrait du schéma au cutover.
   let activeLock = $state<PbLock | null>(null);
   let lockedResourceId: string | null = null;
-  let isAcquiringLock = false;
+  let isAcquiringLock = $state(false);
   let lockUnsub: (() => void) | null = null;
   let heartbeatInterval: any = null;
   let initialRecipeSnapshot = $state<string | null>(null);
@@ -93,7 +93,15 @@
   const isLockedByMe = $derived.by(
     () => !!activeLock && activeLock.userId === globalState.userId,
   );
-  const canEdit = $derived(!!online.current && !isLockedByOthers && !isLoading);
+  // isAcquiringLock ferme l'édition pendant l'acquisition : aucune fenêtre
+  // éditable hors verrou (la refus du lock verrouille dès sa réponse).
+  const canEdit = $derived(
+    !!online.current &&
+      !isLockedByOthers &&
+      !isLoading &&
+      !isAcquiringLock &&
+      !isSaving,
+  );
 
   // Données de référence depuis RecipeDataStore
   const recipeInfo = $derived.by(() => ({
@@ -299,6 +307,7 @@
       if (lock.userId === globalState.userId) {
         lockedResourceId = resourceId;
         startHeartbeat();
+        await reloadAfterAcquisition();
         console.log(`[RecipeEditPage] Lock acquis pour ${resourceId}`);
         return true;
       }
@@ -328,6 +337,38 @@
       await locksService.releaseLock(resourceIdToRelease, globalState.userId);
     } catch (error) {
       console.error("[RecipeEditPage] Erreur libération lock:", error);
+    }
+  }
+
+  /**
+   * À l'acquisition du verrou, la page peut être périmée : la période
+   * « verrouillé par autrui » est celle où autrui a pu sauvegarder. On
+   * recharge le formulaire depuis le store (Dexie, déjà à jour par SSE).
+   * Hors verrou, l'état local n'est pas une version autorisée — et l'édition
+   * hors verrou est impossible (canEdit fermé pendant toute l'acquisition).
+   */
+  async function reloadAfterAcquisition(): Promise<void> {
+    if (!recipeId || !recipe) return;
+    try {
+      const before = createRecipeSnapshot(recipe);
+      const fresh = await recipesStore.getRecipeByUuid(recipeId);
+      if (!fresh) return;
+      recipe = transformStoreDataToForm(fresh, {
+        created: fresh.created,
+        updated: fresh.updated ?? undefined,
+        createdBy: fresh.createdBy ?? undefined,
+      });
+      initialRecipeSnapshot = createRecipeSnapshot(recipe);
+      if (createRecipeSnapshot(recipe) !== before) {
+        toastService.info(
+          "Recette rechargée — l'éditeur précédent l'avait modifiée",
+        );
+      }
+    } catch (error) {
+      console.error(
+        "[RecipeEditPage] Erreur rechargement après acquisition du lock:",
+        error,
+      );
     }
   }
 

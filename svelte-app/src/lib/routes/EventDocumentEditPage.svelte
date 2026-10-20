@@ -85,7 +85,11 @@
     return activeLock.userId !== globalState.userId;
   });
   const canEdit = $derived(
-    online.current && !isLockedByOthers && !isLoading && !isSaving,
+    online.current &&
+      !isLockedByOthers &&
+      !isLoading &&
+      !isAcquiringLock &&
+      !isSaving,
   );
   const isValid = $derived(title.trim().length > 0);
 

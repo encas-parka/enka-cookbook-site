@@ -644,7 +644,7 @@
                 <ListPlus class="h-4 w-4" />
                 Ajouts multiples
               </button>
-              {#if myTeams.length >= 1}
+              {#if myTeams.length === 1}
                 <button
                   class="btn btn-outline btn-sm"
                   onclick={() => openImportModal()}
@@ -652,6 +652,28 @@
                   <ClipboardCopy class="h-4 w-4" />
                   Importer depuis {myTeams[0].name}
                 </button>
+              {:else if myTeams.length > 1}
+                <!-- Plusieurs équipes : l'appel sans teamId sortirait sans
+                     effet (openImportModal), on laisse choisir l'équipe. -->
+                <div class="dropdown dropdown-end">
+                  <div tabindex="0" role="button" class="btn btn-outline btn-sm">
+                    <ClipboardCopy class="h-4 w-4" />
+                    Importer depuis…
+                    <ChevronDown size={14} class="opacity-50" />
+                  </div>
+                  <ul
+                    class="menu dropdown-content z-1 mt-3 w-52 rounded-xl border border-base-200 bg-base-100 p-2 font-medium shadow-xl"
+                  >
+                    {#each myTeams as team (team.id)}
+                      <li>
+                        <button onclick={() => openImportModal(team.id)}>
+                          <ClipboardCopy size={16} />
+                          {team.name}
+                        </button>
+                      </li>
+                    {/each}
+                  </ul>
+                </div>
               {/if}
             </div>
           {/if}

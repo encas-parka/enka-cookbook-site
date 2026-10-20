@@ -10,6 +10,9 @@
 > **État du run 20-10 : 45 cochés / 23 restants** — sections 0→10 passées.
 > Re-qualification 20-10 (click-through humain) : P2 et P8 = faux positifs du
 > driver, items §1-recherche et §5-recherche cochés. P5 différé.
+> Corrections 20-10 (deux vagues, voir `.scratch/tracker/26-10-20_clickthrough-fixes/run.md`) :
+> P9, P12 (court terme) et lot B (P1, P3, P4, P7, P10, P11, P13) puis P14
+> (migration locks) — à revalider à l'écran au prochain click-through.
 > 14 problèmes qualifiés (P1→P14) + 10 observations (O1→O10). Les cases
 > restantes sont soit des bugs constatés (laissés décochés), soit des items
 > bloqués par le driver (selects natifs, Échap, émulation print) — chacun
@@ -607,6 +610,18 @@ Format : page / action / attendu vs obtenu / console (coller l'erreur exacte).
   homogène.
 
 ### P14 — Verrou de recette orphelin : la recette reste bloquée pour tout le monde
+
+> **Corrigé 20-10 (migration vers la collection `locks`)** : le verrou vit
+> désormais dans `locks` via `locksService` (resourceId `recipe_<uuid>`,
+> même socle que les documents et événements) — TTL `expiresAt` 7 min
+> (heartbeat 4 min, refresh au retour d'onglet), takeover du verrou expiré,
+> reprise réactive quand le détenteur libère (SSE), releases idempotents
+> (save + onDestroy), nom du détenteur affiché. Le « Smart Lock »
+> (contributeur unique → pas de verrou) est conservé. `recipes.lockedBy`
+> est mort : plus aucun code applicatif ne le lit ou l'écrit (retrait du
+> schéma et des types au cutover). Contrat du socle piné par
+> `services/__tests__/pb-locks.test.ts` (9 cas). À revalider à l'écran :
+> A quitte → B peut éditer ; badge avec le nom ; reprise après expiration.
 
 - Page : `/recipe/:uuid/edit`, ouverte par A puis quittée par navigation SPA.
 - Attendu : le verrou est relâché en quittant la page (ou périmé après 5 min),

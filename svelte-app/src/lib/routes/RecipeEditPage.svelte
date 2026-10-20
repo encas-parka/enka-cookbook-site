@@ -286,21 +286,24 @@
     isAcquiringLock = true;
     try {
       const resourceId = `recipe_${recipeId}`;
-      const success = await locksService.acquireLock(
+      // Le service renvoie TOUJOURS l'état du verrou après tentative — on le
+      // pose immédiatement : acquis ou pas, la page reflète qui détient le
+      // verrou (statusBar + canEdit), sans attendre le SSE.
+      const lock = await locksService.acquireLock(
         resourceId,
         globalState.userId,
         globalState.userName || "",
       );
+      activeLock = lock;
 
-      if (success) {
+      if (lock.userId === globalState.userId) {
         lockedResourceId = resourceId;
         startHeartbeat();
         console.log(`[RecipeEditPage] Lock acquis pour ${resourceId}`);
         return true;
       }
-      toastService.warning(
-        `Recette en cours de modification par ${activeLock?.userName || "un autre utilisateur"}`,
-      );
+      // Verrou d'autrui : le statusBar informe de façon persistante —
+      // pas de toast éphémère.
       return false;
     } catch (error) {
       console.error("[RecipeEditPage] Erreur acquisition lock:", error);

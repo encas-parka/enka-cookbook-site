@@ -61,17 +61,18 @@ describe("locksService — contrat du verrou", () => {
     expect(await locksService.getLock("recipe_r1")).toBeNull();
   });
 
-  it("acquireLock : sans document → création avec id = resourceId", async () => {
-    const ok = await locksService.acquireLock("recipe_r1", "user_b", "bob");
-    expect(ok).toBe(true);
-    const lock = await locksService.getLock("recipe_r1");
-    expect(lock).toMatchObject({ userId: "user_b", userName: "bob" });
+  it("acquireLock : sans document → crée et renvoie le verrou créé", async () => {
+    const lock = await locksService.acquireLock("recipe_r1", "user_b", "bob");
+    expect(lock).toMatchObject({ id: "recipe_r1", userId: "user_b", userName: "bob" });
+    const stored = await locksService.getLock("recipe_r1");
+    expect(stored).toMatchObject({ userId: "user_b", userName: "bob" });
   });
 
-  it("acquireLock : actif d'autrui → refus sans écriture", async () => {
+  it("acquireLock : actif d'autrui → renvoie le verrou détenu, sans écriture", async () => {
     currentFakePb().seed("locks", [lockRecord()]);
-    const ok = await locksService.acquireLock("recipe_r1", "user_b", "bob");
-    expect(ok).toBe(false);
+    const lock = await locksService.acquireLock("recipe_r1", "user_b", "bob");
+    // Le refus transporte l'état : l'appelant verrouille la page immédiatement
+    expect(lock.userId).toBe("user_a");
     expect(await locksService.getLock("recipe_r1")).toMatchObject({
       userId: "user_a",
     });
@@ -79,18 +80,17 @@ describe("locksService — contrat du verrou", () => {
 
   it("acquireLock : même utilisateur → heartbeat (refresh du TTL)", async () => {
     currentFakePb().seed("locks", [lockRecord({ expiresAt: future() })]);
-    const ok = await locksService.acquireLock("recipe_r1", "user_a", "alice");
-    expect(ok).toBe(true);
-    const lock = await locksService.getLock("recipe_r1");
-    expect(new Date(lock!.expiresAt).getTime()).toBeGreaterThan(
+    const lock = await locksService.acquireLock("recipe_r1", "user_a", "alice");
+    expect(lock.userId).toBe("user_a");
+    expect(new Date(lock.expiresAt).getTime()).toBeGreaterThan(
       Date.now() + 6 * 60 * 1000,
     );
   });
 
   it("acquireLock : expiré d'autrui → takeover", async () => {
     currentFakePb().seed("locks", [lockRecord({ expiresAt: past() })]);
-    const ok = await locksService.acquireLock("recipe_r1", "user_b", "bob");
-    expect(ok).toBe(true);
+    const lock = await locksService.acquireLock("recipe_r1", "user_b", "bob");
+    expect(lock).toMatchObject({ userId: "user_b" });
     expect(await locksService.getLock("recipe_r1")).toMatchObject({
       userId: "user_b",
     });

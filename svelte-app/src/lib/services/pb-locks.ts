@@ -60,10 +60,15 @@ function isLockExpired(lock: Record<string, any>): boolean {
 export const locksService = {
   /**
    * Lit un verrou. Retourne null si inexistant ou expiré.
+   * `requestKey: null` désactive l'autocancel du SDK : deux lectures
+   * simultanées du même verrou (souscription initiale + acquisition) ne
+   * doivent pas s'annuler entre elles.
    */
   async getLock(resourceId: string): Promise<Lock | null> {
     try {
-      const record = await pb.collection("locks").getOne(resourceId);
+      const record = await pb
+        .collection("locks")
+        .getOne(resourceId, { requestKey: null });
       if (isLockExpired(record)) return null;
       return normalizeLock(record);
     } catch (err: any) {
@@ -82,15 +87,16 @@ export const locksService = {
    *   4. Si utilisateur différent + non expiré → refuser
    *   5. Si utilisateur différent + expiré → prendre le relais
    *
-   * Contrat : `false` signifie UNIQUEMENT « verrou activement détenu par
-   * autrui » ; toute erreur technique (réseau, validation, règle PB, course
-   * de création) LÈVE — les appelants distinguent ainsi le refus du panne.
+   * Contrat : renvoie TOUJOURS l'état du verrou après tentative — le lock
+   * détenu par l'appelant s'il a été acquis/rafraîchi, le lock d'autrui
+   * sinon (à l'appelant de verrouiller sa page). Lève sur toute erreur
+   * technique (réseau, validation, règle PB, course de création).
    */
   async acquireLock(
     resourceId: string,
     userId: string,
     userName: string,
-  ): Promise<boolean> {
+  ): Promise<Lock> {
     const expiresAt = new Date(
       Date.now() + LOCK_DURATION_MINUTES * 60 * 1000,
     ).toISOString();
@@ -99,27 +105,33 @@ export const locksService = {
 
     let existing: Record<string, any>;
     try {
-      existing = await pb.collection("locks").getOne(resourceId);
+      existing = await pb
+        .collection("locks")
+        .getOne(resourceId, { requestKey: null });
     } catch (err: any) {
       if (err.status !== 404) throw err; // panne réseau/serveur : lever
       // Pas de document → créer avec ID personnalisé (une course de création
       // simultanée lève 400 not_unique : contrat « erreur technique »)
-      await pb.collection("locks").create({ id: resourceId, ...data });
-      return true;
+      const created = await pb
+        .collection("locks")
+        .create({ id: resourceId, ...data }, { requestKey: null });
+      return normalizeLock(created);
     }
 
-    // Lock actif détenu par un autre utilisateur → refuser
+    // Lock actif détenu par un autre utilisateur → renvoyer son état
     if (
       existing.userId &&
       existing.userId !== userId &&
       new Date(existing.expiresAt) >= new Date()
     ) {
-      return false;
+      return normalizeLock(existing);
     }
 
     // Même utilisateur (heartbeat) OU lock expiré → update
-    await pb.collection("locks").update(resourceId, data);
-    return true;
+    const updated = await pb
+      .collection("locks")
+      .update(resourceId, data, { requestKey: null });
+    return normalizeLock(updated);
   },
 
   /**

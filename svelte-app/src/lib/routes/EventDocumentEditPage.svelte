@@ -99,22 +99,23 @@
     isAcquiringLock = true;
     try {
       const resourceId = `doc_${docId}`;
-      const success = await locksService.acquireLock(
+      const lock = await locksService.acquireLock(
         resourceId,
         globalState.userId,
         globalState.userName || "",
       );
+      // L'état du verrou est posé immédiatement (le realtime confirmera)
+      activeLock = lock;
 
-      if (success) {
+      if (lock.userId === globalState.userId) {
         lockedResourceId = resourceId;
         startAutosave();
         return true;
-      } else {
-        toastService.warning(
-          `Ce document est en cours de modification par ${activeLock?.userName || "un autre utilisateur"}`,
-        );
-        return false;
       }
+      toastService.warning(
+        `Ce document est en cours de modification par ${lock.userName || "un autre utilisateur"}`,
+      );
+      return false;
     } catch (error) {
       console.error("[EventDocumentEditPage] Erreur acquisition lock:", error);
       toastService.error("Impossible de verrouiller le document");
@@ -313,15 +314,16 @@
       if (document.visibilityState !== "visible") return;
       if (!lockedResourceId || !globalState.userId) return;
 
-      const success = await locksService.acquireLock(
+      const lock = await locksService.acquireLock(
         lockedResourceId,
         globalState.userId,
         globalState.userName || "",
       );
+      activeLock = lock;
 
-      if (!success) {
+      if (lock.userId !== globalState.userId) {
         toastService.warning(
-          `Ce document est maintenant édité par ${activeLock?.userName || "un autre utilisateur"}`,
+          `Ce document est maintenant édité par ${lock.userName || "un autre utilisateur"}`,
         );
       }
     };

@@ -392,24 +392,24 @@
 
     isAcquiringLock = true;
     try {
-      const success = await locksService.acquireLock(
+      const lock = await locksService.acquireLock(
         `event_${eventId}`,
         globalState.userId,
         globalState.userName,
       );
+      // L'état du verrou est posé immédiatement (le realtime confirmera)
+      activeLock = lock;
 
-      if (success) {
+      if (lock.userId === globalState.userId) {
         // Capturer l'ID de manière non-réactive pour le cleanup
         lockedEventId = eventId;
-        // On laisse le realtime mettre à jour activeLock (pas d'optimistic update)
         scheduleAutoSave();
         return true;
-      } else {
-        toastService.warning(
-          `Cet événement est en cours de modification par ${lockedByUserName}`,
-        );
-        return false;
       }
+      toastService.warning(
+        `Cet événement est en cours de modification par ${lockedByUserName}`,
+      );
+      return false;
     } catch (error) {
       console.error("❌ Erreur acquisition verrou:", error);
       toastService.error("Impossible de verrouiller l'événement");
@@ -657,13 +657,14 @@
       if (document.visibilityState !== "visible") return;
       if (!lockedEventId || !globalState.userId) return;
 
-      const success = await locksService.acquireLock(
+      const lock = await locksService.acquireLock(
         `event_${lockedEventId}`,
         globalState.userId,
         globalState.userName,
       );
+      activeLock = lock;
 
-      if (!success) {
+      if (lock.userId !== globalState.userId) {
         toastService.warning(
           `Cet événement est maintenant édité par ${lockedByUserName}`,
         );

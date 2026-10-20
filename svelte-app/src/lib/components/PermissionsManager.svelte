@@ -373,7 +373,7 @@
           <fieldset class="fieldset">
             <legend class="legend">Équipes invitées</legend>
             <div class="flex flex-wrap gap-2">
-              {#each event.teams as teamName}
+              {#each nativeTeamsStore.teamNames(event.teams) as teamName}
                 <div class="badge gap-2 badge-soft p-3 badge-lg badge-primary">
                   <Users class="inline size-4" />
                   <span class="font-medium">{teamName}</span>
@@ -596,7 +596,7 @@
                 Équipes déjà invitées :
               </p>
               <div class="flex flex-wrap gap-2">
-                {#each event.teams as teamName}
+                {#each nativeTeamsStore.teamNames(event.teams) as teamName}
                   <div class="badge badge-soft badge-lg badge-primary">
                     <Users class="inline size-4" />{teamName}
                   </div>

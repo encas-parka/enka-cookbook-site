@@ -98,6 +98,14 @@ export class NativeTeamsStore {
     );
   }
 
+  /**
+   * Résout des ids de teams en noms pour l'affichage. Fallback sur l'id brut
+   * si l'équipe n'est pas dans le cache (équipe hors périmètre utilisateur).
+   */
+  teamNames(teamIds: string[]): string[] {
+    return teamIds.map((id) => this.#teams.get(id)?.name || id);
+  }
+
   // Simplifié : utiliser directement #teamsList
   get myTeams() {
     if (!globalState.userId) return [];

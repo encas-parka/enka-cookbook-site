@@ -22,6 +22,7 @@
     getTodosCount,
   } from "$lib/utils/event-stats-helpers";
   import { slide } from "svelte/transition";
+  import { nativeTeamsStore } from "$lib/stores/NativeTeamsStore.svelte";
   import BadgeEventStatus from "../ui/BadgeEventStatus.svelte";
 
   interface Props {
@@ -86,7 +87,7 @@
       {#if event.teams && event.teams.length > 0}
         <div class="flex items-center gap-1 font-semibold text-primary">
           <Users class="h-3 w-3 stroke-3" />
-          <span>{event.teams.join(", ")}</span>
+          <span>{nativeTeamsStore.teamNames(event.teams).join(", ")}</span>
         </div>
       {/if}
 

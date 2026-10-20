@@ -148,7 +148,9 @@
       <ul
         class="max-h-60 overflow-y-auto rounded-box border border-base-300 bg-base-100 shadow-lg"
       >
-        {#each filteredItems as item, index (itemToString(item))}
+        <!-- Clé composée : le libellé n'est pas unique (doublons d'inventaire,
+             titres de recettes homonymes) — un each keyé au libellé plante. -->
+        {#each filteredItems as item, index (`${itemToString(item)}-${index}`)}
           <li>
             <button
               class="w-full px-3 py-2 text-left text-sm hover:bg-base-200 focus:bg-base-200 {index ===

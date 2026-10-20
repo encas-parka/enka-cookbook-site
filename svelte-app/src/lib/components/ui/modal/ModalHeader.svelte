@@ -20,11 +20,11 @@
   }: Props = $props();
 </script>
 
-<div class="border-base-300 min-w-0 flex-none border-b px-4 py-3">
+<div class="min-w-0 flex-none border-b border-base-300 px-4 py-3">
   <div class="absolute top-2 right-2">
     {#if !globalState.isMobile}
       <button
-        class="btn btn-circle btn-ghost btn-sm flex-none"
+        class="btn btn-circle flex-none btn-ghost btn-sm"
         onclick={onClose}
         aria-label="Retour"
       >
@@ -37,7 +37,7 @@
     <div class="flex min-w-0 flex-1 items-center gap-2">
       {#if showBackButton && globalState.isMobile}
         <button
-          class="btn btn-circle btn-ghost btn-sm flex-none"
+          class="btn btn-circle flex-none btn-ghost btn-sm"
           onclick={onClose}
           aria-label="Retour"
         >
@@ -48,7 +48,7 @@
       <div class="min-w-0 flex-1 items-baseline sm:max-w-10/12">
         <h3 class="truncate text-lg font-bold">{title}</h3>
         {#if subtitle}
-          <p class="text-base-content/70 truncate text-sm">{subtitle}</p>
+          <p class="truncate text-sm text-base-content/70">{subtitle}</p>
         {/if}
       </div>
     </div>

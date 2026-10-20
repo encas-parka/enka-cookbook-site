@@ -42,15 +42,15 @@
   });
 </script>
 
-<div class="card bg-base-100 card-sm border-neutral/20 border shadow-sm">
+<div class="card border border-neutral/20 bg-base-100 shadow-sm card-sm">
   <div class="card-body">
     <div class="flex flex-wrap items-center justify-between">
       <h2 class="card-title flex items-center gap-2">
-        <FileText class="text-primary h-5 w-5" />
+        <FileText class="h-5 w-5 text-primary" />
         Documents récents
       </h2>
       <a
-        class="btn btn-sm btn-link"
+        class="btn btn-link btn-sm"
         href={p(`/documents/${teamId}`)}
         title="Voir tous les documents"
       >
@@ -61,22 +61,22 @@
 
     {#if teamdocsStore.loading}
       <div class="py-6 text-center">
-        <span class="loading loading-spinner loading-md text-primary"></span>
-        <p class="text-base-content/60 mt-2 text-sm">Chargement...</p>
+        <span class="loading loading-md loading-spinner text-primary"></span>
+        <p class="mt-2 text-sm text-base-content/60">Chargement...</p>
       </div>
     {:else if teamdocsStore.error}
       <div class="py-6 text-center">
-        <div class="text-error mb-2">
+        <div class="mb-2 text-error">
           <AlertTriangle class="mx-auto h-8 w-8" />
         </div>
-        <p class="text-base-content/60 text-sm">
+        <p class="text-sm text-base-content/60">
           Erreur de chargement des documents
         </p>
       </div>
     {:else if latestDocs.length === 0}
       <div class="py-6 text-center">
-        <FilePlus size={32} class="text-base-content/20 mx-auto mb-3" />
-        <p class="text-base-content/60 mb-4 text-sm">Aucun document</p>
+        <FilePlus size={32} class="mx-auto mb-3 text-base-content/20" />
+        <p class="mb-4 text-sm text-base-content/60">Aucun document</p>
       </div>
     {:else}
       <div class="space-y-2">
@@ -86,9 +86,9 @@
       </div>
     {/if}
     <!-- Bouton Créer -->
-    <div class="card-actions mt-4 justify-end pt-4">
+    <div class="mt-4 card-actions justify-end pt-4">
       <a
-        class="btn btn-primary btn-soft sm:btn-sm"
+        class="btn btn-soft btn-primary sm:btn-sm"
         href={p(`/createdocument/${teamId}/new`)}
       >
         <Plus class="h-4 w-4" />

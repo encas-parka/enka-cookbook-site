@@ -278,13 +278,13 @@
       {#if badgeItems.length > 0}
         <div>
           <h4 class="mb-2 font-medium">Produits concernés</h4>
-          <div class="text-base-content/70 mb-4 text-sm">
+          <div class="mb-4 text-sm text-base-content/70">
             Les quantités manquantes du
-            <span class="badge badge-info badge-sm">
+            <span class="badge badge-sm badge-info">
               {formatDateWdDayMonthShort(productsStore.dateRange.start)}
             </span>
             au
-            <span class="badge badge-info badge-sm">
+            <span class="badge badge-sm badge-info">
               {formatDateWdDayMonthShort(productsStore.dateRange.end)}
             </span>
             pour les produits suivants seront déclarées "achetées"
@@ -297,7 +297,7 @@
           />
         </div>
       {:else}
-        <div class="alert alert-warning alert-soft font-medium">
+        <div class="alert alert-soft font-medium alert-warning">
           Aucun besoin dans le groupe séléctionné
         </div>
       {/if}
@@ -316,7 +316,7 @@
         disabled={loading || !isFormValid}
       >
         {#if loading}
-          <span class="loading loading-spinner loading-sm"></span>
+          <span class="loading loading-sm loading-spinner"></span>
           En cours...
         {:else}
           <ShoppingCart class="h-4 w-4" />

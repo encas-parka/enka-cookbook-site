@@ -8,17 +8,31 @@
  * Stores aw_-prefixed Appwrite refIds in createdBy/permissionWrite — the refToPb
  * contract of 3-import-pb.ts resolves them to real PB user IDs.
  */
-import { readFileSync, readdirSync, writeFileSync, mkdirSync, existsSync } from "fs";
+import {
+  readFileSync,
+  readdirSync,
+  writeFileSync,
+  mkdirSync,
+  existsSync,
+} from "fs";
 import { join } from "path";
 import matter from "gray-matter";
 import { diffRecipeConvergence } from "./recipe-convergence.ts";
-import { emitVerdicts, VERDICT_CATEGORY, type ExpectedVerdict } from "./verdicts-file.ts";
+import {
+  emitVerdicts,
+  VERDICT_CATEGORY,
+  type ExpectedVerdict,
+} from "./verdicts-file.ts";
 
 const PROJECT_ROOT = join(import.meta.dir, "..");
 const RECIPES_DIR = join(PROJECT_ROOT, "content", "recipe");
 const IMPORT_DIR = join(import.meta.dir, "pb-import");
 const USERS_FILE = join(IMPORT_DIR, "users.json");
-const EXPORT_RECIPES_FILE = join(import.meta.dir, "appwrite-export", "recipes.json");
+const EXPORT_RECIPES_FILE = join(
+  import.meta.dir,
+  "appwrite-export",
+  "recipes.json",
+);
 
 const DRY_RUN = process.argv.includes("--dry-run");
 
@@ -28,7 +42,9 @@ const nameToAwId = new Map<string, string>();
 
 function loadUserMaps(): void {
   if (!existsSync(USERS_FILE)) {
-    console.warn("⚠️  pb-import/users.json not found — createdBy/permissionWrite resolution disabled");
+    console.warn(
+      "⚠️  pb-import/users.json not found — createdBy/permissionWrite resolution disabled",
+    );
     return;
   }
   const users: any[] = JSON.parse(readFileSync(USERS_FILE, "utf-8"));
@@ -58,8 +74,11 @@ function resolveCreatedBy(value: string | undefined): string | undefined {
   return awId ? `aw_${awId}` : undefined;
 }
 
-function resolvePermissionWrite(values: string[] | undefined): string[] | undefined {
-  if (!values || !Array.isArray(values) || values.length === 0) return undefined;
+function resolvePermissionWrite(
+  values: string[] | undefined,
+): string[] | undefined {
+  if (!values || !Array.isArray(values) || values.length === 0)
+    return undefined;
 
   const resolved: string[] = [];
   for (const v of values) {
@@ -80,7 +99,10 @@ function resolvePermissionWrite(values: string[] | undefined): string[] | undefi
 
 // --- Record builder ---
 
-function buildRecord(dirName: string, fm: Record<string, any>): Record<string, any> {
+function buildRecord(
+  dirName: string,
+  fm: Record<string, any>,
+): Record<string, any> {
   const record: Record<string, any> = {
     id: dirName,
     title: fm.title || "Sans titre",
@@ -138,7 +160,10 @@ function buildRecord(dirName: string, fm: Record<string, any>): Record<string, a
 // artifact; anything else is a renamed/superseded slug (measured 11-10:
 // 3 test + 5 renamed, incl. twin slugs abricots-poches--v2-gh_* split only
 // by the "test" title suffix).
-function categorizeAbsent(slug: string, title: string): { category: string; reason: string } {
+function categorizeAbsent(
+  slug: string,
+  title: string,
+): { category: string; reason: string } {
   if (/test/i.test(`${slug} ${title}`)) {
     return {
       category: VERDICT_CATEGORY.testRecipe,
@@ -147,15 +172,22 @@ function categorizeAbsent(slug: string, title: string): { category: string; reas
   }
   return {
     category: VERDICT_CATEGORY.renamedSlug,
-    reason: "Appwrite slug absent from the Hugo content (renamed or superseded)",
+    reason:
+      "Appwrite slug absent from the Hugo content (renamed or superseded)",
   };
 }
 
-function emitRecipeVerdicts(records: Record<string, any>[], parseErrorCount: number): void {
+function emitRecipeVerdicts(
+  records: Record<string, any>[],
+  parseErrorCount: number,
+): void {
   if (!existsSync(EXPORT_RECIPES_FILE)) {
-    throw new Error(`Export file not found: ${EXPORT_RECIPES_FILE}. Run 1-export-appwrite.ts first.`);
+    throw new Error(
+      `Export file not found: ${EXPORT_RECIPES_FILE}. Run 1-export-appwrite.ts first.`,
+    );
   }
-  const exportRows: any[] = JSON.parse(readFileSync(EXPORT_RECIPES_FILE, "utf-8")).rows || [];
+  const exportRows: any[] =
+    JSON.parse(readFileSync(EXPORT_RECIPES_FILE, "utf-8")).rows || [];
 
   const hugoById = new Map(records.map((r) => [r.id, r]));
   const verdicts: ExpectedVerdict[] = [];
@@ -172,7 +204,8 @@ function emitRecipeVerdicts(records: Record<string, any>[], parseErrorCount: num
       collection: "recipes",
       delta: -parseErrorCount,
       category: VERDICT_CATEGORY.recipeParseError,
-      reason: "Hugo recipes dropped by frontmatter parse errors — absent from PB",
+      reason:
+        "Hugo recipes dropped by frontmatter parse errors — absent from PB",
     });
   }
 
@@ -197,7 +230,8 @@ function emitRecipeVerdicts(records: Record<string, any>[], parseErrorCount: num
       slug,
       fields: divergentFields,
       category: VERDICT_CATEGORY.contentDriftSinceFreeze,
-      reason: "edited on Appwrite after the Hugo content freeze — Hugo content is the import source",
+      reason:
+        "edited on Appwrite after the Hugo content freeze — Hugo content is the import source",
     });
   }
 
@@ -210,7 +244,9 @@ function emitRecipeVerdicts(records: Record<string, any>[], parseErrorCount: num
 // --- Main ---
 
 function main(): void {
-  console.log("🔄 2b-transform-recipes — Hugo markdown → pb-import/recipes.json\n");
+  console.log(
+    "🔄 2b-transform-recipes — Hugo markdown → pb-import/recipes.json\n",
+  );
 
   loadUserMaps();
 
@@ -237,9 +273,12 @@ function main(): void {
   }
 
   if (parseErrors.length > 0) {
-    console.warn(`⚠️  ${parseErrors.length} parse errors (category: recipes.parse-error):`);
+    console.warn(
+      `⚠️  ${parseErrors.length} parse errors (category: recipes.parse-error):`,
+    );
     parseErrors.slice(0, 10).forEach((e) => console.warn(`   ${e}`));
-    if (parseErrors.length > 10) console.warn(`   ... and ${parseErrors.length - 10} more`);
+    if (parseErrors.length > 10)
+      console.warn(`   ... and ${parseErrors.length - 10} more`);
   }
 
   // Topological sort: originals first, then v2s
@@ -262,8 +301,14 @@ function main(): void {
   }
 
   if (orphans.length > 0) {
-    console.warn(`⚠️  ${orphans.length} orphan rootRecipeIds (referencing non-existent recipes) (category: recipes.rootRecipeId-orphan):`);
-    orphans.slice(0, 10).forEach((id) => console.warn(`   ${id} → "${parsed[id].rootRecipeId || "(removed)"}"`));
+    console.warn(
+      `⚠️  ${orphans.length} orphan rootRecipeIds (referencing non-existent recipes) (category: recipes.rootRecipeId-orphan):`,
+    );
+    orphans
+      .slice(0, 10)
+      .forEach((id) =>
+        console.warn(`   ${id} → "${parsed[id].rootRecipeId || "(removed)"}"`),
+      );
   }
 
   // Build final ordered output — orphans are included (never silently dropped),
@@ -273,35 +318,58 @@ function main(): void {
   for (const id of v2s) records.push(parsed[id]);
   for (const id of orphans) records.push(parsed[id]);
 
-  console.log(`📊 Records: ${originals.length} originals + ${v2s.length} v2s + ${orphans.length} orphans = ${records.length} total\n`);
+  console.log(
+    `📊 Records: ${originals.length} originals + ${v2s.length} v2s + ${orphans.length} orphans = ${records.length} total\n`,
+  );
 
   // Show sample
   if (records.length > 0) {
     const sample = records[0];
     console.log(`Sample record: "${sample.title}" (id=${sample.id})`);
     console.log(`  fields: ${Object.keys(sample).length}`);
-    if (sample.rootRecipeId) console.log(`  rootRecipeId: ${sample.rootRecipeId}`);
+    if (sample.rootRecipeId)
+      console.log(`  rootRecipeId: ${sample.rootRecipeId}`);
     if (sample.createdBy) console.log(`  createdBy: ${sample.createdBy}`);
-    if (sample.permissionWrite) console.log(`  permissionWrite: ${JSON.stringify(sample.permissionWrite)}`);
+    if (sample.permissionWrite)
+      console.log(
+        `  permissionWrite: ${JSON.stringify(sample.permissionWrite)}`,
+      );
     console.log();
   }
 
   if (DRY_RUN) {
     const withCreated = records.filter((r) => r.created).length;
     const withCreatedBy = records.filter((r) => r.createdBy).length;
-    const createdByPrefixed = records.filter((r) => r.createdBy && r.createdBy.startsWith("aw_")).length;
-    const withPermission = records.filter((r) => Array.isArray(r.permissionWrite) && r.permissionWrite.length > 0).length;
+    const createdByPrefixed = records.filter(
+      (r) => r.createdBy && r.createdBy.startsWith("aw_"),
+    ).length;
+    const withPermission = records.filter(
+      (r) => Array.isArray(r.permissionWrite) && r.permissionWrite.length > 0,
+    ).length;
     const permissionPrefixed = records.filter(
-      (r) => Array.isArray(r.permissionWrite) && r.permissionWrite.length > 0 && r.permissionWrite.every((v: string) => v.startsWith("aw_"))
+      (r) =>
+        Array.isArray(r.permissionWrite) &&
+        r.permissionWrite.length > 0 &&
+        r.permissionWrite.every((v: string) => v.startsWith("aw_")),
     ).length;
     const withRoot = records.filter((r) => r.rootRecipeId).length;
 
-    console.log(`[DRY RUN] Would write ${records.length} records to pb-import/recipes.json`);
-    console.log(`[DRY RUN] created populated:         ${withCreated}/${records.length}`);
-    console.log(`[DRY RUN] createdBy populated:       ${withCreatedBy} (aw_-prefixed: ${createdByPrefixed})`);
-    console.log(`[DRY RUN] permissionWrite populated: ${withPermission} (all aw_-prefixed: ${permissionPrefixed === withPermission})`);
+    console.log(
+      `[DRY RUN] Would write ${records.length} records to pb-import/recipes.json`,
+    );
+    console.log(
+      `[DRY RUN] created populated:         ${withCreated}/${records.length}`,
+    );
+    console.log(
+      `[DRY RUN] createdBy populated:       ${withCreatedBy} (aw_-prefixed: ${createdByPrefixed})`,
+    );
+    console.log(
+      `[DRY RUN] permissionWrite populated: ${withPermission} (all aw_-prefixed: ${permissionPrefixed === withPermission})`,
+    );
     console.log(`[DRY RUN] rootRecipeId kept:         ${withRoot}`);
-    console.log(`[DRY RUN] orphans included:          ${orphans.length} (dropped: 0)`);
+    console.log(
+      `[DRY RUN] orphans included:          ${orphans.length} (dropped: 0)`,
+    );
     if (records.length > 0) {
       console.log("\nFirst record preview:");
       console.log(JSON.stringify(records[0], null, 2));

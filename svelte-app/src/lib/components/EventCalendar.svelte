@@ -70,7 +70,7 @@
 
 <div class="print:hidden">
   <div
-    class="rounded-box border-base-300 bg-base-100 mx-auto w-fit max-w-full overflow-x-auto border shadow-lg"
+    class="mx-auto w-fit max-w-full overflow-x-auto rounded-box border border-base-300 bg-base-100 shadow-lg"
   >
     <div
       class="grid min-w-fit"
@@ -79,7 +79,7 @@
       <!-- ═══ En-tête : dates (pas de coin vide sur mobile) ═══ -->
       {#each columns as col, i (col.dateISO)}
         <div
-          class="bg-secondary/10 border-base-300 sticky top-0 z-10 border-r border-b px-2 py-2 text-center text-xs font-semibold sm:text-sm {selectedMealDate &&
+          class="sticky top-0 z-10 border-r border-b border-base-300 bg-secondary/10 px-2 py-2 text-center text-xs font-semibold sm:text-sm {selectedMealDate &&
           extractDate(selectedMealDate) === col.dateISO &&
           !selectedRecipeUuid
             ? 'bg-primary text-primary-content'
@@ -106,7 +106,7 @@
 
       {#if hasUndated}
         <div
-          class="bg-base-200 border-base-300 sticky top-0 z-10 border-b px-2 py-2 text-center text-xs font-semibold sm:text-sm {selectedMealDate ===
+          class="sticky top-0 z-10 border-b border-base-300 bg-base-200 px-2 py-2 text-center text-xs font-semibold sm:text-sm {selectedMealDate ===
             'undated' && !selectedRecipeUuid
             ? 'bg-warning text-warning-content'
             : ''}"
@@ -132,18 +132,20 @@
         {#each columns as col (col.dateISO)}
           {@const recipes = col.mealsByMoment.get(moment.key) ?? []}
           <div
-            class="border-base-300 border-r border-b px-1 py-1.5 align-top sm:px-2"
+            class="border-r border-b border-base-300 px-1 py-1.5 align-top sm:px-2"
           >
             {#each recipes as recipe (recipe.recipeUuid)}
               {@const bgColor = getRecipeTypeColor(recipe.typeR)}
               <div class="indicator w-full">
                 {#if recipe.preparation24h}
-                  <span class="indicator-item status status-md status-warning badge-xs"></span>
+                  <span
+                    class="indicator-item status status-warning badge-xs status-md"
+                  ></span>
                 {/if}
                 <button
                   class="mb-1 flex w-full items-center gap-1 rounded-md border px-1.5 py-0.5 text-left text-xs leading-tight transition-colors hover:cursor-pointer sm:text-sm {selectedRecipeUuid ===
                   recipe.recipeUuid
-                    ? 'bg-accent text-accent-content border-accent font-semibold'
+                    ? 'border-accent bg-accent font-semibold text-accent-content'
                     : `${bgColor} text-base-content hover:brightness-95`}"
                   onclick={() => handleRecipeClick(recipe)}
                   title="{recipe.title} ({recipe.plates} couverts)"
@@ -162,7 +164,7 @@
         {#if hasUndated}
           {@const isRow0 = mIdx === 0}
           <div
-            class="border-base-300 border-b px-1 py-1.5 align-top sm:px-2 {isRow0
+            class="border-b border-base-300 px-1 py-1.5 align-top sm:px-2 {isRow0
               ? 'border-r'
               : ''}"
             style={isRow0 ? "grid-row: span {activeMoments.length}" : ""}
@@ -172,12 +174,14 @@
                 {@const bgColor = getRecipeTypeColor(recipe.typeR)}
                 <div class="indicator w-full">
                   {#if recipe.preparation24h}
-                    <span class="indicator-item status status-md status-warning badge-xs"></span>
+                    <span
+                      class="indicator-item status status-warning badge-xs status-md"
+                    ></span>
                   {/if}
                   <button
                     class="mb-1 flex w-full items-center gap-1 rounded-md border px-1.5 py-0.5 text-left text-xs leading-tight transition-colors sm:text-sm {selectedRecipeUuid ===
                     recipe.recipeUuid
-                      ? 'bg-accent text-accent-content border-accent font-semibold'
+                      ? 'border-accent bg-accent font-semibold text-accent-content'
                       : `${bgColor} text-base-content hover:brightness-95`}"
                     onclick={() => handleRecipeClick(recipe)}
                     title="{recipe.title} ({recipe.plates} couverts)"

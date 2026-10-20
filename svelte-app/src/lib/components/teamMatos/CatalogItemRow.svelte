@@ -39,13 +39,13 @@
   <div class="flex min-w-0 flex-1 items-center gap-2">
     <span class="truncate text-sm">{name}</span>
     {#if hasExisting}
-      <span class="badge badge-ghost badge-xs flex-none"
+      <span class="badge flex-none badge-ghost badge-xs"
         >{existingLabel} {existingQuantity}</span
       >
     {/if}
     {#if sourcedBatches.length > 0}
       {#each sourcedBatches as batch (batch.label)}
-        <span class="badge badge-success badge-xs flex-none gap-0.5">
+        <span class="badge flex-none gap-0.5 badge-xs badge-success">
           <Check class="size-2.5" />
           {batch.label}: {batch.qty}
         </span>
@@ -72,7 +72,7 @@
         const v = parseInt(e.currentTarget.value);
         if (!isNaN(v) && v >= 0) onchange(v);
       }}
-      class="quantity-input input input-xs w-14 text-center font-semibold tabular-nums {isActive
+      class="quantity-input input w-14 text-center font-semibold tabular-nums input-xs {isActive
         ? 'input-primary'
         : ''}"
       aria-label="Quantité"

@@ -141,7 +141,7 @@
   <div class=" mb-4 space-y-3">
     <!-- ⚠️ Alerte si le contexte a changé depuis l'override -->
     {#if overrideMismatch?.hasMismatch && overrideMismatch?.details}
-      <div class="alert alert-warning alert-soft">
+      <div class="alert alert-soft alert-warning">
         <AlertCircle size={18} />
         <div class="text-sm">
           <div class="font-bold">
@@ -180,7 +180,7 @@
               </span>
             </div>
             <div class="flex items-center gap-2">
-              <span class="text-base-content/60 text-xs">
+              <span class="text-xs text-base-content/60">
                 Votre override : {overrideDisplay}
               </span>
             </div>
@@ -191,16 +191,16 @@
 
     <!-- Besoins calculés -->
     <div
-      class="rounded-box bg-base-200 flex items-center justify-between px-4 py-3"
+      class="flex items-center justify-between rounded-box bg-base-200 px-4 py-3"
     >
-      <span class="text-base-content/70 font-medium">Besoin total calculés</span
+      <span class="font-medium text-base-content/70">Besoin total calculés</span
       >
       <div class="flex items-center gap-3">
-        <span class="text-base-content/80 flex items-center gap-1 text-xs">
+        <span class="flex items-center gap-1 text-xs text-base-content/80">
           {modalState.product.nbRecipes}
           <CookingPot class="h-3 w-3" />
         </span>
-        <span class="text-base-content/80 flex items-center gap-1 text-xs">
+        <span class="flex items-center gap-1 text-xs text-base-content/80">
           {modalState.product.totalAssiettes}
           <Utensils class="h-3 w-3" />
         </span>
@@ -213,10 +213,10 @@
     <!-- Mode édition des besoins redéfinis -->
     {#if editMode}
       <div
-        class="rounded-box bg-primary/10 flex flex-wrap items-center gap-3 px-4 py-3"
+        class="flex flex-wrap items-center gap-3 rounded-box bg-primary/10 px-4 py-3"
         in:slide
       >
-        <span class="text-base-content/70 font-medium"
+        <span class="font-medium text-base-content/70"
           >Besoin redéfinis manuellement</span
         >
         <QuantityInput bind:quantity bind:unit />
@@ -232,7 +232,7 @@
             disabled={modalState.loading || !isFormValid}
           >
             {#if modalState.loading}
-              <span class="loading loading-spinner loading-sm"></span>
+              <span class="loading loading-sm loading-spinner"></span>
             {:else}
               ✓
             {/if}
@@ -243,15 +243,15 @@
       <!-- Affichage des besoins redéfinis ou bouton d'action -->
       {#if overrideDisplay && overrideData}
         <div
-          class="rounded-box bg-primary/10 flex items-center justify-between px-4 py-3"
+          class="flex items-center justify-between rounded-box bg-primary/10 px-4 py-3"
         >
           <div class="flex items-center gap-3">
-            <span class="text-base-content/70 font-medium"
+            <span class="font-medium text-base-content/70"
               >Besoins redéfinis manuellement</span
             >
             {#if !isArchiveMode}
               <button
-                class="btn btn-ghost btn-sm btn-circle"
+                class="btn btn-circle btn-ghost btn-sm"
                 onclick={() =>
                   (modalState.uiStates.overrideManagerEditMode = true)}
                 title="Modifier"
@@ -264,7 +264,7 @@
                 {overrideData.comment}
                 <MessageSquare
                   size={12}
-                  class="text-base-content/60 absolute top-0 right-0"
+                  class="absolute top-0 right-0 text-base-content/60"
                 />
               </div>
             {/if}
@@ -277,7 +277,7 @@
         <!-- Bouton Redéfinir les besoins -->
         <div class="flex justify-end">
           <button
-            class="btn btn-primary btn-sm btn-soft"
+            class="btn btn-soft btn-primary btn-sm"
             onclick={() => (modalState.uiStates.overrideManagerEditMode = true)}
           >
             Redéfinir manuellement les besoins

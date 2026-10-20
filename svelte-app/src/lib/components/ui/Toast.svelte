@@ -83,7 +83,7 @@
           {#if toast.actions && toast.actions.length > 0}
             {#each toast.actions as action}
               <button
-                class="btn btn-sm btn-primary"
+                class="btn btn-primary btn-sm"
                 onclick={() => handleActionClick(toast, action)}
               >
                 {action.label}
@@ -94,7 +94,7 @@
           <!-- Bouton détails si disponible -->
           {#if toast.details}
             <button
-              class="btn btn-ghost btn-xs btn-square"
+              class="btn btn-square btn-ghost btn-xs"
               onclick={() => showDetails(toast)}
               title="Voir les détails"
               aria-label="Voir les détails"
@@ -106,7 +106,7 @@
           <!-- Bouton de fermeture (erreurs et warnings uniquement) -->
           {#if toast.state === "error" || toast.state === "warning" || toast.state === "loading"}
             <button
-              class="btn btn-ghost btn-xs btn-circle pe-0"
+              class="btn btn-circle btn-ghost pe-0 btn-xs"
               onclick={() => dismiss(toast)}
               title="Fermer"
               aria-label="Fermer la notification"

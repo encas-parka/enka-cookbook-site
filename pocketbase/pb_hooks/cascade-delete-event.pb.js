@@ -54,16 +54,20 @@ onRecordDelete(function (e) {
       undefined,
       999,
       0,
-      { eventId: eventId }
+      { eventId: eventId },
     );
     for (var i = 0; i < records.length; i++) {
       $app.delete(records[i]);
     }
-    $app.logger().info(
-      "Cascade delete " + child.label,
-      "eventId", eventId,
-      "deleted", String(records.length)
-    );
+    $app
+      .logger()
+      .info(
+        "Cascade delete " + child.label,
+        "eventId",
+        eventId,
+        "deleted",
+        String(records.length),
+      );
   }
 
   // --- 6. Supprimer les share_links (link_type = "event" ET target_id = eventId) ---
@@ -73,16 +77,20 @@ onRecordDelete(function (e) {
     undefined,
     999,
     0,
-    { linkType: "event", targetId: eventId }
+    { linkType: "event", targetId: eventId },
   );
   for (var n = 0; n < shareLinks.length; n++) {
     $app.delete(shareLinks[n]);
   }
-  $app.logger().info(
-    "Cascade delete share_links",
-    "eventId", eventId,
-    "deleted", String(shareLinks.length)
-  );
+  $app
+    .logger()
+    .info(
+      "Cascade delete share_links",
+      "eventId",
+      eventId,
+      "deleted",
+      String(shareLinks.length),
+    );
 
   // --- 8. Purger les notifications referencant l'event ---
   // Pas de relation dedicatee : match pragmatique par sous-chaine sur
@@ -93,16 +101,20 @@ onRecordDelete(function (e) {
     undefined,
     999,
     0,
-    { eventId: eventId }
+    { eventId: eventId },
   );
   for (var q = 0; q < notifs.length; q++) {
     $app.delete(notifs[q]);
   }
-  $app.logger().info(
-    "Cascade delete notifications",
-    "eventId", eventId,
-    "deleted", String(notifs.length)
-  );
+  $app
+    .logger()
+    .info(
+      "Cascade delete notifications",
+      "eventId",
+      eventId,
+      "deleted",
+      String(notifs.length),
+    );
 
   e.next();
 }, "events");

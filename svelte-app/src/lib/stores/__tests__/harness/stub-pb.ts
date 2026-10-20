@@ -96,7 +96,8 @@ function pbFilter(raw: string, vars?: Record<string, unknown>): string {
 // FILTER EVALUATION — minimal PB expression engine over one record
 // =============================================================================
 
-type TokenType = "LPAREN" | "RPAREN" | "AND" | "OR" | "OP" | "IDENT" | "LITERAL";
+type TokenType =
+  "LPAREN" | "RPAREN" | "AND" | "OR" | "OP" | "IDENT" | "LITERAL";
 
 interface Token {
   type: TokenType;
@@ -133,7 +134,12 @@ function tokenize(input: string): Token[] {
       continue;
     }
     const twoCharOp = input.slice(i, i + 2);
-    if (twoCharOp === ">=" || twoCharOp === "<=" || twoCharOp === "!=" || twoCharOp === "!~") {
+    if (
+      twoCharOp === ">=" ||
+      twoCharOp === "<=" ||
+      twoCharOp === "!=" ||
+      twoCharOp === "!~"
+    ) {
       tokens.push({ type: "OP", value: twoCharOp });
       i += 2;
       continue;
@@ -184,7 +190,9 @@ function tokenize(input: string): Token[] {
       }
       continue;
     }
-    throw new Error(`[stub-pb] Unexpected character in filter at ${i}: '${ch}' in "${input}"`);
+    throw new Error(
+      `[stub-pb] Unexpected character in filter at ${i}: '${ch}' in "${input}"`,
+    );
   }
   return tokens;
 }
@@ -223,7 +231,9 @@ function compareValues(left: unknown, op: string, right: unknown): boolean {
   switch (op) {
     case "=":
       if (bothNumeric) return Number(l) === Number(r);
-      return l === r || (l === null && r === "null") || (r === null && l === "null");
+      return (
+        l === r || (l === null && r === "null") || (r === null && l === "null")
+      );
     case "!=":
       return !compareValues(left, "=", right);
     case ">":
@@ -234,7 +244,13 @@ function compareValues(left: unknown, op: string, right: unknown): boolean {
       if (bothNumeric) {
         const ln = Number(l);
         const rn = Number(r);
-        return op === ">" ? ln > rn : op === ">=" ? ln >= rn : op === "<" ? ln < rn : ln <= rn;
+        return op === ">"
+          ? ln > rn
+          : op === ">="
+            ? ln >= rn
+            : op === "<"
+              ? ln < rn
+              : ln <= rn;
       }
       {
         const ls = l ?? "";
@@ -300,8 +316,14 @@ function evaluateFilter(filter: string, record: PbRecord): boolean {
       throw new Error(`[stub-pb] Malformed comparison in filter: ${filter}`);
     }
     pos += 3;
-    const left = leftTok.type === "IDENT" ? resolveField(record, leftTok.value) : parseLiteral(leftTok);
-    const right = rightTok.type === "IDENT" ? resolveField(record, rightTok.value) : parseLiteral(rightTok);
+    const left =
+      leftTok.type === "IDENT"
+        ? resolveField(record, leftTok.value)
+        : parseLiteral(leftTok);
+    const right =
+      rightTok.type === "IDENT"
+        ? resolveField(record, rightTok.value)
+        : parseLiteral(rightTok);
     return compareValues(left, opTok.value, right);
   }
 
@@ -309,7 +331,8 @@ function evaluateFilter(filter: string, record: PbRecord): boolean {
     if (token.value === "null") return null;
     if (token.value === "true") return true;
     if (token.value === "false") return false;
-    if (!isNaN(Number(token.value)) && token.value.trim() !== "") return Number(token.value);
+    if (!isNaN(Number(token.value)) && token.value.trim() !== "")
+      return Number(token.value);
     return token.value;
   }
 
@@ -348,7 +371,9 @@ interface FakeRequestError extends Error {
 }
 
 function notFoundError(id: string): FakeRequestError {
-  const err = new Error(`The requested resource wasn't found. id=${id}`) as FakeRequestError;
+  const err = new Error(
+    `The requested resource wasn't found. id=${id}`,
+  ) as FakeRequestError;
   err.status = 404;
   return err;
 }
@@ -357,12 +382,16 @@ function notFoundError(id: string): FakeRequestError {
  * already exists is rejected with 400 + a field error on `id` — this is what
  * makes a client-provided id usable as an idempotency key. */
 function duplicateIdError(id: string): FakeRequestError {
-  const err = new Error(`Failed to create record. id=${id}`) as FakeRequestError;
+  const err = new Error(
+    `Failed to create record. id=${id}`,
+  ) as FakeRequestError;
   err.status = 400;
   err.response = {
     code: 400,
     message: "Failed to create record.",
-    data: { id: { code: "validation_not_unique", message: "Value must be unique." } },
+    data: {
+      id: { code: "validation_not_unique", message: "Value must be unique." },
+    },
   };
   return err;
 }
@@ -386,9 +415,20 @@ interface WriteGuard {
   view: RecordsView;
 }
 
-function opCreate(guard: WriteGuard, name: string, data: Record<string, unknown>): PbRecord {
+function opCreate(
+  guard: WriteGuard,
+  name: string,
+  data: Record<string, unknown>,
+): PbRecord {
   validateWriteRelations(guard.relations, guard.view, name, data, "create");
-  validateWriteUniques(guard.uniques, guard.view, name, data, undefined, "create");
+  validateWriteUniques(
+    guard.uniques,
+    guard.view,
+    name,
+    data,
+    undefined,
+    "create",
+  );
   const records = guard.view(name);
   if (data.id !== undefined && records.some((r) => r.id === data.id)) {
     throw duplicateIdError(data.id as string);
@@ -404,7 +444,12 @@ function opCreate(guard: WriteGuard, name: string, data: Record<string, unknown>
   return { ...record };
 }
 
-function opUpdate(guard: WriteGuard, name: string, id: string, data: Record<string, unknown>): PbRecord {
+function opUpdate(
+  guard: WriteGuard,
+  name: string,
+  id: string,
+  data: Record<string, unknown>,
+): PbRecord {
   validateWriteRelations(guard.relations, guard.view, name, data, "update");
   const records = guard.view(name);
   const idx = records.findIndex((r) => r.id === id);
@@ -430,7 +475,11 @@ function opDelete(records: PbRecord[], id: string): boolean {
 /** PB batch upsert (wire contract: `PUT /records`) — executed as an update
  * when the body carries an id that already exists, as a create otherwise
  * (a client-provided id is preserved on the create leg). */
-function opUpsert(guard: WriteGuard, name: string, data: Record<string, unknown>): PbRecord {
+function opUpsert(
+  guard: WriteGuard,
+  name: string,
+  data: Record<string, unknown>,
+): PbRecord {
   if (data.id !== undefined && guard.view(name).some((r) => r.id === data.id)) {
     return opUpdate(guard, name, data.id as string, data);
   }
@@ -504,7 +553,8 @@ function validateWriteUniques(
   if (!groups) return;
   const tupleOf = (r: Record<string, unknown>, cols: string[]) =>
     cols.map((c) => r[c]);
-  const hasNull = (tuple: unknown[]) => tuple.some((v) => v === null || v === undefined);
+  const hasNull = (tuple: unknown[]) =>
+    tuple.some((v) => v === null || v === undefined);
   for (const cols of groups) {
     const tuple = tupleOf(data, cols);
     if (hasNull(tuple)) continue;
@@ -527,7 +577,10 @@ function notUniqueError(fields: string[], verb: string): FakeRequestError {
   const err = new Error(`Failed to ${verb} record.`) as FakeRequestError;
   const data: Record<string, { code: string; message: string }> = {};
   for (const field of fields) {
-    data[field] = { code: "validation_not_unique", message: "Value must be unique." };
+    data[field] = {
+      code: "validation_not_unique",
+      message: "Value must be unique.",
+    };
   }
   err.status = 400;
   err.response = {
@@ -576,7 +629,8 @@ export class FakePocketBase {
    */
   defineRelations(spec: Record<string, Record<string, string>>): void {
     for (const [collectionName, fields] of Object.entries(spec)) {
-      const map = this.relations.get(collectionName) ?? new Map<string, string>();
+      const map =
+        this.relations.get(collectionName) ?? new Map<string, string>();
       for (const [field, target] of Object.entries(fields)) {
         map.set(field, target);
       }
@@ -594,7 +648,8 @@ export class FakePocketBase {
     for (const [collectionName, groups] of Object.entries(spec)) {
       const list = this.uniques.get(collectionName) ?? [];
       for (const group of groups) {
-        if (!list.some((g) => g.join(",") === group.join(","))) list.push(group);
+        if (!list.some((g) => g.join(",") === group.join(",")))
+          list.push(group);
       }
       this.uniques.set(collectionName, list);
     }
@@ -642,15 +697,23 @@ export class FakePocketBase {
       async getList(
         page = 1,
         perPage = 30,
-        options?: { filter?: string; sort?: string }
-      ): Promise<{ page: number; perPage: number; totalItems: number; totalPages: number; items: PbRecord[] }> {
+        options?: { filter?: string; sort?: string },
+      ): Promise<{
+        page: number;
+        perPage: number;
+        totalItems: number;
+        totalPages: number;
+        items: PbRecord[];
+      }> {
         let records = store.records(name);
         if (options?.filter) {
           records = records.filter((r) => evaluateFilter(options.filter!, r));
         }
         if (options?.sort) records = sortRecords(records, options.sort);
         const start = (page - 1) * perPage;
-        const items = records.slice(start, start + perPage).map((r) => ({ ...r }));
+        const items = records
+          .slice(start, start + perPage)
+          .map((r) => ({ ...r }));
         return {
           page,
           perPage,
@@ -664,7 +727,10 @@ export class FakePocketBase {
         return opCreate(store.#writeGuard(), name, data);
       },
 
-      async update(id: string, data: Record<string, unknown>): Promise<PbRecord> {
+      async update(
+        id: string,
+        data: Record<string, unknown>,
+      ): Promise<PbRecord> {
         return opUpdate(store.#writeGuard(), name, id, data);
       },
 
@@ -674,7 +740,7 @@ export class FakePocketBase {
 
       async subscribe(
         topic: string,
-        cb: SubscribeCallback
+        cb: SubscribeCallback,
       ): Promise<() => Promise<void>> {
         const entry = { topic, cb };
         if (!store.#subs.has(name)) store.#subs.set(name, new Set());
@@ -698,7 +764,12 @@ export class FakePocketBase {
     const store = this;
     type BatchOp =
       | { kind: "create"; name: string; data: Record<string, unknown> }
-      | { kind: "update"; name: string; id: string; data: Record<string, unknown> }
+      | {
+          kind: "update";
+          name: string;
+          id: string;
+          data: Record<string, unknown>;
+        }
       | { kind: "upsert"; name: string; data: Record<string, unknown> }
       | { kind: "delete"; name: string; id: string };
     const requests: BatchOp[] = [];
@@ -730,7 +801,7 @@ export class FakePocketBase {
         for (const batchName of names) {
           shadow.set(
             batchName,
-            store.records(batchName).map((r) => ({ ...r }))
+            store.records(batchName).map((r) => ({ ...r })),
           );
         }
         const results: Array<{ status: number; body: unknown }> = [];
@@ -738,13 +809,22 @@ export class FakePocketBase {
         for (const req of requests) {
           switch (req.kind) {
             case "create":
-              results.push({ status: 200, body: opCreate(guard, req.name, req.data) });
+              results.push({
+                status: 200,
+                body: opCreate(guard, req.name, req.data),
+              });
               break;
             case "update":
-              results.push({ status: 200, body: opUpdate(guard, req.name, req.id, req.data) });
+              results.push({
+                status: 200,
+                body: opUpdate(guard, req.name, req.id, req.data),
+              });
               break;
             case "upsert":
-              results.push({ status: 200, body: opUpsert(guard, req.name, req.data) });
+              results.push({
+                status: 200,
+                body: opUpsert(guard, req.name, req.data),
+              });
               break;
             case "delete":
               opDelete(guard.view(req.name), req.id);
@@ -777,7 +857,7 @@ export class FakePocketBase {
   seed(name: string, records: object[]): void {
     this.#store.set(
       name,
-      records.map((r) => structuredClone(r) as PbRecord)
+      records.map((r) => structuredClone(r) as PbRecord),
     );
   }
 
@@ -792,7 +872,11 @@ export class FakePocketBase {
   }
 
   /** Deliver a realtime event, like the PB SSE channel would. */
-  emit(name: string, action: FakeRealtimeEvent["action"], record: object): void {
+  emit(
+    name: string,
+    action: FakeRealtimeEvent["action"],
+    record: object,
+  ): void {
     const pbRecord = record as PbRecord;
     const payload: FakeRealtimeEvent = { action, record: { ...pbRecord } };
     const subs = this.#subs.get(name);
@@ -830,7 +914,7 @@ let currentInstance: FakePocketBase | null = null;
 export function currentFakePb(): FakePocketBase {
   if (!currentInstance) {
     throw new Error(
-      "[stub-pb] No FakePocketBase instance yet — import the store under test (or `$lib/db-sync/pb`) before calling currentFakePb()."
+      "[stub-pb] No FakePocketBase instance yet — import the store under test (or `$lib/db-sync/pb`) before calling currentFakePb().",
     );
   }
   return currentInstance;

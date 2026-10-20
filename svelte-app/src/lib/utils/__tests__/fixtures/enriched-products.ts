@@ -19,7 +19,9 @@ export function makeNeedRow(
     byDate: JSON.stringify({
       "2026-04-20": {
         totalConsolidated: [{ q: 500, u: "gr." }],
-        recipes: [{ r: "Gâteau", q: 500, u: "gr.", qEq: 500, uEq: "gr.", a: 10 }],
+        recipes: [
+          { r: "Gâteau", q: 500, u: "gr.", qEq: 500, uEq: "gr.", a: 10 },
+        ],
         totalAssiettes: 10,
         recipeCount: 1,
       },
@@ -67,7 +69,9 @@ export function makeEnrichedProduct(
     byDate: {
       "2026-04-20": {
         totalConsolidated: [{ q: 500, u: "gr." }],
-        recipes: [{ r: "Gâteau", q: 500, u: "gr.", qEq: 500, uEq: "gr.", a: 10 }],
+        recipes: [
+          { r: "Gâteau", q: 500, u: "gr.", qEq: 500, uEq: "gr.", a: 10 },
+        ],
         totalAssiettes: 10,
         recipeCount: 1,
       },

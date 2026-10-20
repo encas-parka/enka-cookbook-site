@@ -39,7 +39,9 @@ const COLLECTIONS: { id: string; name: string }[] = [
 
 function loadEnv(): Record<string, string> {
   if (!existsSync(ENV_FILE)) {
-    console.error(`❌ Missing ${ENV_FILE}. Create it with Appwrite API key and PB credentials.`);
+    console.error(
+      `❌ Missing ${ENV_FILE}. Create it with Appwrite API key and PB credentials.`,
+    );
     process.exit(1);
   }
   const content = readFileSync(ENV_FILE, "utf-8");
@@ -58,7 +60,10 @@ function loadEnv(): Record<string, string> {
 
 // --- Helpers ---
 
-function makeHeaders(projectId: string, apiKey: string): Record<string, string> {
+function makeHeaders(
+  projectId: string,
+  apiKey: string,
+): Record<string, string> {
   return {
     "Content-Type": "application/json",
     "X-Appwrite-Project": projectId,
@@ -70,7 +75,7 @@ async function appwriteFetch(
   endpoint: string,
   path: string,
   headers: Record<string, string>,
-  params?: Record<string, string>
+  params?: Record<string, string>,
 ): Promise<any> {
   const url = new URL(`${endpoint}${path}`);
   if (params) {
@@ -82,7 +87,9 @@ async function appwriteFetch(
   const res = await fetch(url.toString(), { headers });
   if (!res.ok) {
     const body = await res.text();
-    throw new Error(`Appwrite API ${res.status} on ${path}: ${body.slice(0, 500)}`);
+    throw new Error(
+      `Appwrite API ${res.status} on ${path}: ${body.slice(0, 500)}`,
+    );
   }
   return res.json();
 }
@@ -96,7 +103,7 @@ async function fetchAll(
   endpoint: string,
   path: string,
   headers: Record<string, string>,
-  dataKey: string
+  dataKey: string,
 ): Promise<any[]> {
   const all: any[] = [];
   let offset = 0;
@@ -104,13 +111,21 @@ async function fetchAll(
   while (true) {
     // Appwrite 1.8.1 requires JSON query format for limit/offset
     const params = new URLSearchParams();
-    params.append("queries[]", JSON.stringify({ method: "limit", values: [PAGE_SIZE] }));
-    params.append("queries[]", JSON.stringify({ method: "offset", values: [offset] }));
+    params.append(
+      "queries[]",
+      JSON.stringify({ method: "limit", values: [PAGE_SIZE] }),
+    );
+    params.append(
+      "queries[]",
+      JSON.stringify({ method: "offset", values: [offset] }),
+    );
 
     const url = `${endpoint}${path}?${params.toString()}`;
     const res = await fetch(url, { headers });
     if (!res.ok) {
-      throw new Error(`Appwrite API ${res.status} on ${path}: ${(await res.text()).slice(0, 500)}`);
+      throw new Error(
+        `Appwrite API ${res.status} on ${path}: ${(await res.text()).slice(0, 500)}`,
+      );
     }
     const result: PaginatedResult = await res.json();
 
@@ -154,7 +169,9 @@ async function main() {
   const apiKey = env.APPWRITE_API_KEY || env.APPWRITE_API_KEY_PROD;
 
   if (!endpoint || !projectId || !apiKey) {
-    console.error("❌ Missing APPWRITE_ENDPOINT, APPWRITE_PROJECT_ID or APPWRITE_API_KEY in .env.local");
+    console.error(
+      "❌ Missing APPWRITE_ENDPOINT, APPWRITE_PROJECT_ID or APPWRITE_API_KEY in .env.local",
+    );
     process.exit(1);
   }
 
@@ -176,7 +193,11 @@ async function main() {
   // 1. Export users
   console.log("📥 Exporting users...");
   const users = await fetchAll(endpoint, "/users", headers, "users");
-  saveJson("users", { _meta: makeMeta(source, env), total: users.length, users });
+  saveJson("users", {
+    _meta: makeMeta(source, env),
+    total: users.length,
+    users,
+  });
   console.log(`   ✅ ${users.length} users saved\n`);
 
   // 2. Export native teams + memberships
@@ -189,12 +210,18 @@ async function main() {
       endpoint,
       `/teams/${team.$id}/memberships`,
       headers,
-      "memberships"
+      "memberships",
     );
     teamsWithMembers.push({ ...team, _memberships: memberships });
   }
-  saveJson("teams", { _meta: makeMeta(source, env), total: teamsWithMembers.length, teams: teamsWithMembers });
-  console.log(`   ✅ ${teamsWithMembers.length} teams (with memberships) saved\n`);
+  saveJson("teams", {
+    _meta: makeMeta(source, env),
+    total: teamsWithMembers.length,
+    teams: teamsWithMembers,
+  });
+  console.log(
+    `   ✅ ${teamsWithMembers.length} teams (with memberships) saved\n`,
+  );
 
   // 3. Export all database collections
   for (const col of COLLECTIONS) {
@@ -204,13 +231,22 @@ async function main() {
         endpoint,
         `/databases/${DB_ID}/collections/${col.id}/documents`,
         headers,
-        "documents"
+        "documents",
       );
-      saveJson(col.name, { _meta: makeMeta(source, env), total: rows.length, rows });
+      saveJson(col.name, {
+        _meta: makeMeta(source, env),
+        total: rows.length,
+        rows,
+      });
       console.log(`   ✅ ${rows.length} rows saved\n`);
     } catch (err: any) {
       console.error(`   ❌ Failed: ${err.message}\n`);
-      saveJson(col.name, { _meta: makeMeta(source, env), total: 0, rows: [], error: String(err) });
+      saveJson(col.name, {
+        _meta: makeMeta(source, env),
+        total: 0,
+        rows: [],
+        error: String(err),
+      });
     }
   }
 
@@ -219,10 +255,16 @@ async function main() {
   console.log(`📊 Export complete. Files in ${EXPORT_DIR}/\n`);
 
   const files = import("fs").then((fs) => {
-    const jsonFiles = fs.readdirSync(EXPORT_DIR).filter((f: string) => f.endsWith(".json"));
+    const jsonFiles = fs
+      .readdirSync(EXPORT_DIR)
+      .filter((f: string) => f.endsWith(".json"));
     for (const f of jsonFiles.sort()) {
       const content = JSON.parse(fs.readFileSync(join(EXPORT_DIR, f), "utf-8"));
-      const count = content.users?.length || content.teams?.length || content.rows?.length || 0;
+      const count =
+        content.users?.length ||
+        content.teams?.length ||
+        content.rows?.length ||
+        0;
       const label = f.padEnd(28);
       console.log(`   ${label} ${String(count).padStart(5)} records`);
     }

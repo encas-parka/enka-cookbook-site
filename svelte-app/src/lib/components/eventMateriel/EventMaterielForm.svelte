@@ -228,14 +228,14 @@
 </script>
 
 <form onsubmit={handleSubmit} class="space-y-4">
-  <div class="text-base-content/70 py-2 text-sm">
+  <div class="py-2 text-sm text-base-content/70">
     {#if isEdit}
       <div class="mb-2">
         <strong>{initialData?.name}</strong>
         {#if mode === "allocation"}
-          <span class="badge badge-info badge-xs ml-1">allocation</span>
+          <span class="ml-1 badge badge-xs badge-info">allocation</span>
         {:else}
-          <span class="badge badge-warning badge-xs ml-1">besoin</span>
+          <span class="ml-1 badge badge-xs badge-warning">besoin</span>
         {/if}
       </div>
       <p>
@@ -250,10 +250,10 @@
   </div>
 
   {#if isLoanLinked}
-    <div class="bg-base-200/80 rounded-lg p-3">
+    <div class="rounded-lg bg-base-200/80 p-3">
       <div class="flex items-center justify-between gap-2">
         <div class="flex flex-wrap items-center gap-2 text-sm">
-          <ExternalLink class="text-secondary size-4 shrink-0" />
+          <ExternalLink class="size-4 shrink-0 text-secondary" />
           <span class="text-base-content/70">Réservation de</span>
           <span class="font-medium"
             >{initialData?.fromTeamName || "une équipe"}</span
@@ -262,7 +262,7 @@
         {#if onEditLoan && initialData?.loanId}
           <button
             type="button"
-            class="btn btn-ghost btn-xs text-secondary gap-1"
+            class="btn gap-1 btn-ghost text-secondary btn-xs"
             onclick={() => onEditLoan(initialData!.loanId!)}
           >
             <ExternalLink class="size-3" />
@@ -270,7 +270,7 @@
           </button>
         {/if}
       </div>
-      <p class="text-base-content/50 mt-1 text-xs">
+      <p class="mt-1 text-xs text-base-content/50">
         Nom, quantité, type et statut sont gérés par la réservation.
       </p>
     </div>
@@ -396,8 +396,7 @@
         bind:value={notes}
         placeholder="Notes supplémentaires..."
         class="textarea w-full"
-        maxlength="255"
-      ></textarea>
+        maxlength="255"></textarea>
     </fieldset>
   </div>
 </form>

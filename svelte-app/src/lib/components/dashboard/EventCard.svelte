@@ -37,7 +37,7 @@
 </script>
 
 <div
-  class="bg-base-200/60 hover:bg-base-200 flex cursor-pointer items-start gap-3 rounded-lg p-3 shadow-sm transition-colors {cardClass} @container"
+  class="flex cursor-pointer items-start gap-3 rounded-lg bg-base-200/60 p-3 shadow-sm transition-colors hover:bg-base-200 {cardClass} @container"
   onclick={() => navigate(`/event/${event.id}`)}
   role="button"
   tabindex="0"
@@ -52,7 +52,7 @@
 >
   <div class="min-w-0 flex-1 space-y-4">
     <div class="flex flex-wrap items-center gap-4">
-      <div class="text-primary truncate text-base font-semibold">
+      <div class="truncate text-base font-semibold text-primary">
         {event.name}
       </div>
       <div class="badge h-auto font-medium">
@@ -72,7 +72,7 @@
       />
 
       {#if contributorStatus === "invited"}
-        <div class="badge badge-info badge-lg ms-auto h-auto">
+        <div class="ms-auto badge h-auto badge-lg badge-info">
           <Rocket class="size-4" />
           Vous êtes invité à participer
         </div>
@@ -81,10 +81,10 @@
 
     <!-- Métadonnées -->
     <div
-      class="text-base-content/70 mt-2 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm"
+      class="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-base-content/70"
     >
       {#if event.teams && event.teams.length > 0}
-        <div class="text-primary flex items-center gap-1 font-semibold">
+        <div class="flex items-center gap-1 font-semibold text-primary">
           <Users class="h-3 w-3 stroke-3" />
           <span>{event.teams.join(", ")}</span>
         </div>
@@ -94,7 +94,7 @@
         {@const acceptedCount = event.contributors.filter(
           (c) => c.status === "accepted",
         ).length}
-        <div class="text-base-content/90 flex items-center gap-1">
+        <div class="flex items-center gap-1 text-base-content/90">
           <Users class="h-3 w-3" />
           <span>{acceptedCount} participant{acceptedCount > 1 ? "s" : ""}</span>
           <span>({event.minContrib} requis)</span>

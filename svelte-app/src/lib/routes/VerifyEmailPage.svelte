@@ -23,7 +23,7 @@
     }
 
     try {
-      await pb.collection('users').confirmVerification(token);
+      await pb.collection("users").confirmVerification(token);
 
       await globalState.refreshAuthAfterLogin();
 
@@ -50,11 +50,11 @@
   }
 </script>
 
-<div class="bg-base-200 flex min-h-screen items-center justify-center p-4">
-  <div class="bg-base-100 max-w-md rounded-xl p-8 shadow-lg" in:fade>
+<div class="flex min-h-screen items-center justify-center bg-base-200 p-4">
+  <div class="max-w-md rounded-xl bg-base-100 p-8 shadow-lg" in:fade>
     {#if status === "loading"}
       <div class="flex flex-col items-center gap-4 text-center">
-        <Loader2 class="text-primary size-16 animate-spin" />
+        <Loader2 class="size-16 animate-spin text-primary" />
         <h2 class="text-2xl font-bold">Vérification en cours...</h2>
         <p class="text-base-content/70">
           Veuillez patienter pendant que nous vérifions votre email.
@@ -62,8 +62,8 @@
       </div>
     {:else if status === "success"}
       <div class="flex flex-col items-center gap-4 text-center">
-        <MailCheck class="text-success size-16" />
-        <h2 class="text-success text-2xl font-bold">Email vérifié !</h2>
+        <MailCheck class="size-16 text-success" />
+        <h2 class="text-2xl font-bold text-success">Email vérifié !</h2>
         <p class="text-base-content/70">{message}</p>
         <button class="btn btn-primary" onclick={goToDashboard}>
           Aller au tableau de bord
@@ -71,8 +71,8 @@
       </div>
     {:else if status === "error"}
       <div class="flex flex-col items-center gap-4 text-center">
-        <XCircle class="text-error size-16" />
-        <h2 class="text-error text-2xl font-bold">Erreur de vérification</h2>
+        <XCircle class="size-16 text-error" />
+        <h2 class="text-2xl font-bold text-error">Erreur de vérification</h2>
         <p class="text-base-content/70">{message}</p>
         <div class="flex gap-2">
           <button class="btn btn-outline" onclick={() => navigate("/")}>

@@ -64,13 +64,12 @@
     if (plates === 1) return "1 couvert";
     return `${plates} couverts`;
   }
-
 </script>
 
 <Drawer bind:open={recipeDrawer.isOpen} direction="right">
   <DrawerOverlay class="fixed inset-0 z-1050 bg-black/40 backdrop-blur-sm" />
   <DrawerContent
-    class="bg-base-100 fixed top-0 right-0 bottom-0 z-1060 flex h-full w-[90vw] max-w-lg flex-row shadow-xl"
+    class="fixed top-0 right-0 bottom-0 z-1060 flex h-full w-[90vw] max-w-lg flex-row bg-base-100 shadow-xl"
   >
     <DrawerHandle class="mx-1 my-auto items-center bg-black/20 px-1" />
 
@@ -84,7 +83,7 @@
     >
       <!-- Bouton fermer -->
       <button
-        class="btn btn-circle absolute top-5 right-3 z-10 md:top-15"
+        class="btn absolute top-5 right-3 z-10 btn-circle md:top-15"
         onclick={handleClose}
         aria-label="Fermer"
       >
@@ -93,8 +92,8 @@
 
       {#if isLoading}
         <div class="flex flex-col items-center justify-center py-20">
-          <span class="loading loading-spinner loading-lg text-primary"></span>
-          <p class="text-base-content/60 mt-4">Chargement…</p>
+          <span class="loading loading-lg loading-spinner text-primary"></span>
+          <p class="mt-4 text-base-content/60">Chargement…</p>
         </div>
       {:else if error}
         <div class="p-6">
@@ -109,7 +108,7 @@
         )}
         <div class="p-6">
           <!-- Header -->
-          <div class="border-base-300 border-b pb-4">
+          <div class="border-b border-base-300 pb-4">
             <!-- Ligne titre -->
             <div class="flex items-center gap-2 pr-10">
               <svg class="size-6 shrink-0">
@@ -121,7 +120,9 @@
             <!-- Ligne badges -->
             <div class="mt-3 flex flex-wrap items-center gap-3">
               {#if recipe.typeR}
-                <div class="badge font-medium {getRecipeTypeColor(recipe.typeR)}">
+                <div
+                  class="badge font-medium {getRecipeTypeColor(recipe.typeR)}"
+                >
                   {getTypeLabel(recipe.typeR)}
                 </div>
               {/if}
@@ -137,26 +138,26 @@
 
           <!-- Infos -->
           <div class="flex flex-wrap items-center gap-4 py-4">
-            <div class="text-base-content/80 flex items-center gap-2 text-lg">
+            <div class="flex items-center gap-2 text-lg text-base-content/80">
               <Users class="h-4 w-4" />
               <span>{formatPlates(recipeDrawer.servings)}</span>
             </div>
             <div class="flex flex-wrap gap-1">
               {#if recipe.serveHot}
-                <span class="badge badge-error badge-sm badge-soft"
+                <span class="badge badge-soft badge-sm badge-error"
                   >Servir Chaud</span
                 >
               {:else}
-                <span class="badge badge-info badge-sm badge-soft"
+                <span class="badge badge-soft badge-sm badge-info"
                   >Servir Froid</span
                 >
               {/if}
               {#if recipe.cuisson}
-                <span class="badge badge-warning badge-sm badge-soft"
+                <span class="badge badge-soft badge-sm badge-warning"
                   >Avec Cuisson</span
                 >
               {:else}
-                <span class="badge badge-success badge-sm badge-soft"
+                <span class="badge badge-soft badge-sm badge-success"
                   >Sans Cuisson</span
                 >
               {/if}
@@ -172,7 +173,7 @@
 
           <!-- Description -->
           {#if recipe.quantite_desc}
-            <p class="text-base-content/70 pb-4 text-sm italic">
+            <p class="pb-4 text-sm text-base-content/70 italic">
               {recipe.quantite_desc}
             </p>
           {/if}

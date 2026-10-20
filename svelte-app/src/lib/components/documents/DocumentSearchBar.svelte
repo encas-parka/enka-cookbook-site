@@ -20,8 +20,8 @@
   }
 </script>
 
-<div class="input input-lg w-full">
-  <Search class="text-base-content/50 h-5 w-5" />
+<div class="input w-full input-lg">
+  <Search class="h-5 w-5 text-base-content/50" />
   <input
     type="text"
     class="min-w-0 grow"

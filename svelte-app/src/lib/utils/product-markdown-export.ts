@@ -21,7 +21,9 @@ export interface MarkdownExportOptions {
   groups: MarkdownExportGroup[];
 }
 
-export function exportProductsToMarkdown(options: MarkdownExportOptions): string {
+export function exportProductsToMarkdown(
+  options: MarkdownExportOptions,
+): string {
   const lines: string[] = [];
   lines.push("---");
   lines.push(`# ${options.eventName}`);

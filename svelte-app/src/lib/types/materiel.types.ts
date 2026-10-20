@@ -67,7 +67,8 @@ export interface MaterielLoanDetail {
  * - Les statuts PB bruts : ok, lost, torepair
  * - Les statuts calculés depuis les emprunts : loan (en cours), reserved (futur)
  */
-export type EnrichedMaterielStatus = MaterielStatusOptions | "loan" | "reserved";
+export type EnrichedMaterielStatus =
+  MaterielStatusOptions | "loan" | "reserved";
 
 /**
  * Matériel enrichi avec données calculées
@@ -75,10 +76,7 @@ export type EnrichedMaterielStatus = MaterielStatusOptions | "loan" | "reserved"
  * - Conserve tous les champs PB bruts (dont teamId, ownerUser)
  * - Ajoute les champs calculés (loanDetails, availableQuantity, etc.)
  */
-export interface EnrichedMateriel extends Omit<
-  Materiel,
-  "status"
-> {
+export interface EnrichedMateriel extends Omit<Materiel, "status"> {
   // Statut enrichi (PB ou calculé depuis emprunts)
   status: EnrichedMaterielStatus;
 
@@ -101,10 +99,7 @@ export interface EnrichedMateriel extends Omit<
  * - Conserve tous les champs PB bruts
  * - Ajoute le champ materielItems parsé depuis le JSON
  */
-export interface EnrichedMaterielLoan extends Omit<
-  MaterielLoan,
-  "materiels"
-> {
+export interface EnrichedMaterielLoan extends Omit<MaterielLoan, "materiels"> {
   // Champ brut PB (peut être string, string[] ou object[] selon la source)
   materiels: unknown | null;
 

@@ -19,7 +19,6 @@ Ces pages événements permettent:
 Les pages de recettes, de menus et de listes de course sont optimisés pour des rendu d'impression propres (noir et blanc, saut de page automatique, boutons et menu de navigations masqué, etc.)
 Une section permet d'imprime les menus pour un affichage destiné au mangeur•euses.
 
-
 ### License
 
 Ce site est diffusé sous licence [GPL-3.0](https://opensource.org/license/gpl-3-0/). En publiant des recettes sur celui-ci, vous acceptez que celle-ci hérite de cette licence.

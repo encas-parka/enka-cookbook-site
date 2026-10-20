@@ -14,7 +14,7 @@ règle d'API ne distingue l'admin** :
   configuration d'équipe (nom, prefs, `members[]`, `roles{}`) — le gating
   admin n'existe que dans l'UI ;
 - materiel / materiel_loan deleteRule (08-10) = `createdBy = auth ||
-  teamId.members ~ auth` → tout membre peut supprimer, là aussi avec
+teamId.members ~ auth` → tout membre peut supprimer, là aussi avec
   attente produit « l'admin peut supprimer » seulement garanti côté UI.
 
 Le produit vise à terme : les utilisateurs au rôle « admin » (owner) ont des

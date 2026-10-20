@@ -100,7 +100,7 @@
 {#if product && showMergeSection}
   <div class="space-y-3 pt-2">
     <h4
-      class="text-base-content/70 flex items-center gap-2 text-sm font-semibold"
+      class="flex items-center gap-2 text-sm font-semibold text-base-content/70"
     >
       <GitMerge class="h-4 w-4" />
       Fusion de produits
@@ -109,7 +109,7 @@
     <!-- Cas 1 : Ce produit est fusionné VERS un autre (source) -->
     {#if mergedIntoId}
       <div
-        class="rounded-box bg-warning/10 flex items-center justify-between px-4 py-3"
+        class="flex items-center justify-between rounded-box bg-warning/10 px-4 py-3"
       >
         <div class="flex items-center gap-2 text-sm">
           <span class="text-base-content/70">Fusionné vers</span>
@@ -123,8 +123,8 @@
 
       <!-- Cas 2 : Ce produit est une cible (a des produits mergés vers lui) -->
     {:else if isTarget}
-      <div class="rounded-box bg-base-200 space-y-2 px-4 py-3">
-        <div class="text-base-content/70 text-sm">
+      <div class="space-y-2 rounded-box bg-base-200 px-4 py-3">
+        <div class="text-sm text-base-content/70">
           Produits fusionnés vers celui-ci :
         </div>
         {#each mergedFrom as item (item.id)}
@@ -145,8 +145,8 @@
 
       <!-- Cas 3 : Produit normal — recherche de cible -->
     {:else}
-      <div class="rounded-box bg-base-200 space-y-2 px-4 py-3">
-        <div class="text-base-content/50 flex items-center gap-2 text-sm">
+      <div class="space-y-2 rounded-box bg-base-200 px-4 py-3">
+        <div class="flex items-center gap-2 text-sm text-base-content/50">
           <Info class=" size-4 shrink-0 max-sm:hidden" />
           Fusionner ce produit vers un autre: les quantités requises et les achats
           effectués seront ajoutés au produit cible. Cela ne modifie pas les recettes,
@@ -154,7 +154,7 @@
         </div>
         <div class="relative">
           <label class="input w-full border-0">
-            <Search class="text-base-content/40 h-4 w-4 shrink-0" />
+            <Search class="h-4 w-4 shrink-0 text-base-content/40" />
             <input
               type="text"
               role="combobox"
@@ -164,7 +164,7 @@
               aria-activedescendant={activeIndex >= 0
                 ? `merge-option-${activeIndex}`
                 : undefined}
-              class="bg-base-100 min-w-0 grow"
+              class="min-w-0 grow bg-base-100"
               placeholder="Rechercher un produit cible…"
               bind:value={searchQuery}
               onfocus={handleSearchFocus}
@@ -178,7 +178,7 @@
             <div
               id="merge-search-listbox"
               role="listbox"
-              class="rounded-box bg-base-100 border-base-300 absolute z-50 mt-1 max-h-48 w-full overflow-y-auto border shadow-lg"
+              class="absolute z-50 mt-1 max-h-48 w-full overflow-y-auto rounded-box border border-base-300 bg-base-100 shadow-lg"
               in:fade={{ duration: 100 }}
             >
               {#each searchResults as result, i (result.id)}
@@ -186,7 +186,7 @@
                   id="merge-option-{i}"
                   role="option"
                   aria-selected={i === activeIndex}
-                  class="hover:bg-base-200 flex w-full items-center justify-between px-3 py-2 text-sm {i ===
+                  class="flex w-full items-center justify-between px-3 py-2 text-sm hover:bg-base-200 {i ===
                   activeIndex
                     ? 'bg-base-200'
                     : ''}"
@@ -197,7 +197,7 @@
                     <span class="badge badge-ghost badge-xs"
                       >{result.productType}</span
                     >
-                    <ChevronRight class="text-base-content/30 h-3 w-3" />
+                    <ChevronRight class="h-3 w-3 text-base-content/30" />
                   </div>
                 </button>
               {/each}
@@ -205,7 +205,7 @@
           {:else if isDropdownOpen && searchResults.length === 0}
             <div
               role="status"
-              class="rounded-box bg-base-100 border-base-300 text-base-content/50 absolute z-50 mt-1 w-full border px-3 py-2 text-sm shadow-lg"
+              class="absolute z-50 mt-1 w-full rounded-box border border-base-300 bg-base-100 px-3 py-2 text-sm text-base-content/50 shadow-lg"
             >
               Aucun produit trouvé
             </div>

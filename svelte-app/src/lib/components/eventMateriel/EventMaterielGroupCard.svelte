@@ -40,12 +40,7 @@
     onAddAllocation?: (headerId: string, status?: EventMaterielStatus) => void;
   }
 
-  let {
-    group,
-    canEdit = true,
-    onEditItem,
-    onAddAllocation,
-  }: Props = $props();
+  let { group, canEdit = true, onEditItem, onAddAllocation }: Props = $props();
 
   const header = $derived(group.header);
 
@@ -81,7 +76,7 @@
   }
 </script>
 
-<div class="card card-xs border-base-200 bg-base-100 border shadow-sm">
+<div class="card border border-base-200 bg-base-100 shadow-sm card-xs">
   <div class="card-body">
     <!-- Header row -->
     <div class="flex flex-wrap items-center gap-3">
@@ -99,7 +94,7 @@
             >
             {#if canEdit}
               <button
-                class="btn btn-ghost btn-sm btn-squarre"
+                class="btn-squarre btn btn-ghost btn-sm"
                 onclick={handleEditHeader}
                 title="Editer"
               >
@@ -114,7 +109,7 @@
             <span
               class="badge hidden sm:flex {getMaterielTypeBadgeClass(
                 header.type,
-              )} badge-soft badge-sm gap-1 py-0"
+              )} gap-1 badge-soft py-0 badge-sm"
             >
               {getMaterielTypeConfig(header.type).label}
             </span>
@@ -153,17 +148,17 @@
                     </div>
                   {/if}
                   {#if alloc.fromTeamName}
-                    <span class="text-base-content/50 text-sm sm:text-xs">
+                    <span class="text-sm text-base-content/50 sm:text-xs">
                       ({alloc.fromTeamName})
                     </span>
                   {/if}
 
                   {#if alloc.notes}
                     <div
-                      class="tooltip tooltip-info max-w-24"
+                      class="tooltip max-w-24 tooltip-info"
                       data-tip={alloc.notes}
                     >
-                      <span class="text-base-content/60 max-w-24 truncate">
+                      <span class="max-w-24 truncate text-base-content/60">
                         <MessageSquareWarning class="inline-block size-4" />
                       </span>
                     </div>

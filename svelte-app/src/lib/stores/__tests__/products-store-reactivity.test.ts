@@ -84,8 +84,8 @@ describe("ProductsStore — sync initiale + réactivité (pb-sync)", () => {
     await seedProductNeeds([makeNeedRow()]);
 
     const event = makeEvent();
-    vi.mocked(eventsStore.getEventById).mockImplementation(
-      (id: string) => (id === TEST_EVENT_ID ? event : null),
+    vi.mocked(eventsStore.getEventById).mockImplementation((id: string) =>
+      id === TEST_EVENT_ID ? event : null,
     );
 
     await productsStore.initialize(TEST_EVENT_ID);

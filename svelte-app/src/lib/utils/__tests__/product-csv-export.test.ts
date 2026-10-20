@@ -5,7 +5,9 @@ import {
   type CsvExportProduct,
 } from "../product-csv-export";
 
-function makeProduct(overrides: Partial<CsvExportProduct> = {}): CsvExportProduct {
+function makeProduct(
+  overrides: Partial<CsvExportProduct> = {},
+): CsvExportProduct {
   return {
     productName: "Crème de soja",
     productType: "Crémerie",
@@ -18,7 +20,9 @@ function makeProduct(overrides: Partial<CsvExportProduct> = {}): CsvExportProduc
   };
 }
 
-function makeOptions(products: CsvExportProduct[] = [makeProduct()]): CsvExportOptions {
+function makeOptions(
+  products: CsvExportProduct[] = [makeProduct()],
+): CsvExportOptions {
   return { products };
 }
 

@@ -1,6 +1,6 @@
 <script lang="ts">
   import { onMount } from "svelte";
-import {
+  import {
     Plus,
     LoaderCircle,
     Package,
@@ -409,7 +409,7 @@ import {
   <div class="flex items-center gap-2">
     <div class="dropdown dropdown-end">
       <div
-        class="btn btn-sm btn-circle btn-primary"
+        class="btn btn-circle btn-primary btn-sm"
         tabindex="0"
         role="button"
         title="Exporter"
@@ -417,7 +417,7 @@ import {
         <Download size={18} />
       </div>
       <ul
-        class="dropdown-content menu bg-base-100 rounded-box z-10 w-48 p-2 shadow-lg"
+        class="menu dropdown-content z-10 w-48 rounded-box bg-base-100 p-2 shadow-lg"
         tabindex="0"
       >
         <li>
@@ -435,7 +435,7 @@ import {
       </ul>
     </div>
     <button
-      class="btn btn-sm btn-circle btn-primary"
+      class="btn btn-circle btn-primary btn-sm"
       onclick={() => (printModalOpen = true)}
       title="Imprimer la liste"
     >
@@ -452,7 +452,7 @@ import {
       <ChevronDown size={14} class="opacity-50" />
     </div>
     <ul
-      class="menu dropdown-content bg-base-100 border-base-200 z-1 mt-3 w-52 rounded-xl border p-2 font-medium shadow-xl"
+      class="menu dropdown-content z-1 mt-3 w-52 rounded-xl border border-base-200 bg-base-100 p-2 font-medium shadow-xl"
     >
       <li>
         <button onclick={openAddForm}>
@@ -472,7 +472,7 @@ import {
             <ClipboardCopy size={16} />
             {myTeams[0].name}
             {#if materielStore.loans.some((l) => l.ownerId === myTeams[0].id && l.eventId === eventId)}
-              <span class="text-base-content/50 text-xs"
+              <span class="text-xs text-base-content/50"
                 >(réservation existante)</span
               >
             {/if}
@@ -486,7 +486,7 @@ import {
               <ClipboardCopy size={16} />
               {team.name}
               {#if materielStore.loans.some((l) => l.ownerId === team.id && l.eventId === eventId)}
-                <span class="text-base-content/50 text-xs">(résa.)</span>
+                <span class="text-xs text-base-content/50">(résa.)</span>
               {/if}
             </button>
           </li>
@@ -515,7 +515,7 @@ import {
     <div class="mt-4 flex-1 lg:ml-96">
       <!-- Header -->
       <div class="mb-4 flex flex-wrap items-center gap-4">
-        <Package class="text-primary size-5" />
+        <Package class="size-5 text-primary" />
         <h2 class="text-xl font-bold">
           Matériel ({eventMaterielStore?.count})- {currentEvent?.name}
         </h2>
@@ -532,7 +532,7 @@ import {
       <InfoCollapse
         title="Aide"
         contentVisible="Gestion du matériel requis pour l'événement : lister les besoins, suivre ce qui est trouvé, emprunté ou confirmé. Cliquez pour en savoir plus…"
-        class="shadow-info my-8 shadow "
+        class="my-8 shadow shadow-info "
       >
         <p>
           Cette page sert à <span class="font-semibold"
@@ -622,10 +622,10 @@ import {
       <!-- Loading -->
       {#if eventMaterielStore.loading && eventMaterielStore.count === 0}
         <div class="flex justify-center py-12">
-          <LoaderCircle class="text-base-content/30 h-8 w-8 animate-spin" />
+          <LoaderCircle class="h-8 w-8 animate-spin text-base-content/30" />
         </div>
       {:else if groupedItems.length === 0}
-        <div class="text-base-content/50 py-12 text-center">
+        <div class="py-12 text-center text-base-content/50">
           <Package class="mx-auto mb-2 h-12 w-12 opacity-30" />
           <p>
             {#if eventMaterielStore.count === 0}Aucun matériel ajouté{:else}Aucun
@@ -673,7 +673,7 @@ import {
       {/if}
 
       {#if eventMaterielStore.error}
-        <div class="alert alert-error mt-4">
+        <div class="mt-4 alert alert-error">
           {eventMaterielStore.error}
         </div>
       {/if}

@@ -170,7 +170,7 @@
         disabled={loading || !teamName.trim()}
       >
         {#if loading}
-          <span class="loading loading-spinner loading-sm"></span>
+          <span class="loading loading-sm loading-spinner"></span>
         {:else}
           <Plus class="h-5 w-5" />
         {/if}
@@ -185,7 +185,7 @@
 
       <ModalContent>
         <div class="mb-4">
-          <div class="alert alert-success alert-soft flex flex-col">
+          <div class="alert flex flex-col alert-soft alert-success">
             <p>Équipe "{team.name}" créée avec succès !</p>
             <p>Ajoutez les email des personnes que vous souhaitez inviter</p>
           </div>
@@ -210,7 +210,7 @@
           disabled={inviteLoading || invitedEmails.length === 0}
         >
           {#if inviteLoading}
-            <span class="loading loading-spinner loading-sm"></span>
+            <span class="loading loading-sm loading-spinner"></span>
           {:else}
             Envoyer {invitedEmails.length} invitation{invitedEmails.length > 1
               ? "s"

@@ -71,7 +71,7 @@
     {#if !modalState.stockParsed || isEditMode}
       <div
         class="card bg-base-200 {isEditMode
-          ? 'ring-accent ring-2 ring-offset-2'
+          ? 'ring-2 ring-accent ring-offset-2'
           : ''}"
       >
         <div class="card-body">
@@ -118,7 +118,7 @@
               disabled={modalState.loading}
             />
           </div>
-          <div class="card-actions mt-4 justify-end">
+          <div class="mt-4 card-actions justify-end">
             {#if isEditMode}
               <button
                 class="btn btn-ghost btn-sm"
@@ -144,7 +144,7 @@
               disabled={modalState.loading || !modalState.forms.stock.quantity}
             >
               {#if modalState.loading}
-                <span class="loading loading-spinner loading-xs"></span>
+                <span class="loading loading-xs loading-spinner"></span>
               {:else}
                 {isEditMode
                   ? "Enregistrer les modifications"
@@ -166,11 +166,11 @@
 {:else}
   <!-- Affichage du stock existant (masqué en mode édition) -->
   {#if !isEditMode}
-    <div class="card bg-base-300 my-4">
+    <div class="card my-4 bg-base-300">
       <div class="card-body">
         <div class="flex flex-wrap items-center gap-4 text-lg font-medium">
           <div class="">Stock enregistré :</div>
-          <div class="badge badge-primary badge-lg ml-2">
+          <div class="ml-2 badge badge-lg badge-primary">
             {modalState.stockParsed.quantity}
             {modalState.stockParsed.unit}
           </div>
@@ -188,14 +188,14 @@
           {/if}
         </div>
         {#if !isArchiveMode}
-          <div class="card-actions mt-4 justify-end space-x-4">
+          <div class="mt-4 card-actions justify-end space-x-4">
             <button
               class="btn btn-error btn-sm"
               onclick={handleDeleteStock}
               disabled={modalState.loading}
             >
               {#if modalState.loading}
-                <span class="loading loading-spinner loading-xs"></span>
+                <span class="loading loading-xs loading-spinner"></span>
               {:else}
                 Supprimer le stock
               {/if}

@@ -62,7 +62,13 @@ import { describe, it, expect, beforeEach, vi } from "vitest";
 import { currentFakePb, pbDate } from "./harness/stub-pb";
 import { clearDexie } from "./harness/seed-dexie";
 import { waitForTick } from "./harness/wait-for-tick";
-import { makeEvent, TEST_DATE, TEST_EVENT_ID, T0, T1 } from "./harness/fixtures";
+import {
+  makeEvent,
+  TEST_DATE,
+  TEST_EVENT_ID,
+  T0,
+  T1,
+} from "./harness/fixtures";
 import { productsStore } from "$lib/stores/ProductsStore.svelte";
 import { eventsStore } from "$lib/stores/EventsStore.svelte";
 import {
@@ -71,7 +77,10 @@ import {
   __recipeUpdatedIndex as recipeUpdatedIndex,
 } from "$lib/stores/RecipesStore.svelte";
 import { db } from "$lib/db-sync/pb-sync";
-import type { RecipeForDisplay, RecipeIngredient } from "$lib/types/recipes.types";
+import type {
+  RecipeForDisplay,
+  RecipeIngredient,
+} from "$lib/types/recipes.types";
 
 const RECIPE_UUID = "rec-ingr-0001";
 
@@ -124,7 +133,9 @@ type EnrichedEventLike = ReturnType<typeof makeEvent> & {
   }>;
 };
 
-async function readNeed(): Promise<{ id: string; totalNeededArray: string } | undefined> {
+async function readNeed(): Promise<
+  { id: string; totalNeededArray: string } | undefined
+> {
   return db.productNeeds
     .where("mainId")
     .equals(TEST_EVENT_ID)
@@ -144,8 +155,8 @@ describe("ProductsStore — recalcul des besoins au changement d'ingrédient", (
     recipeUpdatedIndex.clear();
     recipeUpdatedIndex.set(RECIPE_UUID, pbDate(T0));
 
-    vi.mocked(eventsStore.getEventById).mockImplementation(
-      (id: string) => (id === TEST_EVENT_ID ? (makeEventWithRecipe() as any) : null),
+    vi.mocked(eventsStore.getEventById).mockImplementation((id: string) =>
+      id === TEST_EVENT_ID ? (makeEventWithRecipe() as any) : null,
     );
   });
 

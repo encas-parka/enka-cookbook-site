@@ -1,5 +1,8 @@
 <script lang="ts">
-  import { MATERIEL_CATALOG, type CatalogType } from "$lib/constants/materiel-catalog";
+  import {
+    MATERIEL_CATALOG,
+    type CatalogType,
+  } from "$lib/constants/materiel-catalog";
   import { materielStore } from "$lib/stores/MaterielStore.svelte";
   import { Search, Package, Plus } from "@lucide/svelte";
 
@@ -138,14 +141,17 @@
 
   {#if showDropdown && suggestions.length > 0}
     <ul
-      class="bg-base-100 border-base-200 rounded-box absolute z-50 mt-1 w-full border shadow-lg"
+      class="absolute z-50 mt-1 w-full rounded-box border border-base-200 bg-base-100 shadow-lg"
       role="listbox"
     >
       {#each suggestions as suggestion, i (suggestion.name + suggestion.source)}
         <li>
           <button
             type="button"
-            class="flex w-full items-center gap-2 px-3 py-2 text-left text-sm {i === highlightedIndex ? 'bg-primary/10' : 'hover:bg-base-200'}"
+            class="flex w-full items-center gap-2 px-3 py-2 text-left text-sm {i ===
+            highlightedIndex
+              ? 'bg-primary/10'
+              : 'hover:bg-base-200'}"
             role="option"
             aria-selected={i === highlightedIndex}
             onclick={() => selectSuggestion(suggestion)}
@@ -158,7 +164,7 @@
             {/if}
             <span class="flex-1 truncate">{suggestion.name}</span>
             {#if suggestion.source === "existing"}
-              <span class="badge badge-secondary badge-xs">Inventaire</span>
+              <span class="badge badge-xs badge-secondary">Inventaire</span>
             {/if}
           </button>
         </li>

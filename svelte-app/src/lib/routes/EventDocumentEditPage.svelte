@@ -310,7 +310,7 @@
   // Rafraîchir le lock quand l'onglet redevient visible (mobile/tab arrière-plan)
   $effect(() => {
     const handleVisibility = async () => {
-      if (document.visibilityState !== 'visible') return;
+      if (document.visibilityState !== "visible") return;
       if (!lockedResourceId || !globalState.userId) return;
 
       const success = await locksService.acquireLock(
@@ -327,7 +327,8 @@
     };
 
     document.addEventListener("visibilitychange", handleVisibility);
-    return () => document.removeEventListener("visibilitychange", handleVisibility);
+    return () =>
+      document.removeEventListener("visibilitychange", handleVisibility);
   });
 
   // ============================================================================
@@ -431,7 +432,7 @@
 {#snippet navActions()}
   <div class="flex items-center gap-2">
     <button
-      class="btn btn-primary btn-circle btn-sm"
+      class="btn btn-circle btn-primary btn-sm"
       onclick={handleExport}
       title="Exporter le document"
     >
@@ -444,7 +445,7 @@
         disabled={!canEdit || !isValid || isSaving}
       >
         {#if isSaving}
-          <span class="loading loading-spinner loading-sm"></span>
+          <span class="loading loading-sm loading-spinner"></span>
         {:else}
           <Save class="h-4 w-4" />
         {/if}
@@ -456,7 +457,7 @@
 
 <!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
 <div
-  class="bg-base-200 min-h-lvh px-4 pt-4 pb-20 md:px-20"
+  class="min-h-lvh bg-base-200 px-4 pt-4 pb-20 md:px-20"
   onkeydown={handleKeydown}
   role="region"
   tabindex="-1"
@@ -490,7 +491,7 @@
     {/if}
 
     {#if isLockedByOthers}
-      <div class="alert alert-warning max-md:alert-vertical mb-4">
+      <div class="mb-4 alert alert-warning max-md:alert-vertical">
         <LockIcon class="h-5 w-5" />
         <div>
           <h4 class="font-bold">Document verrouillé</h4>
@@ -506,13 +507,13 @@
 
     {#if isLoading}
       <div class="flex justify-center py-20">
-        <div class="loading loading-spinner loading-lg"></div>
+        <div class="loading loading-lg loading-spinner"></div>
       </div>
     {:else if storeDoc}
       <div class="space-y-4">
         {#if mode === "edit"}
           <fieldset class="fieldset flex">
-            <label class="input input-lg w-full">
+            <label class="input w-full input-lg">
               <span class="label">Nom</span>
               <input
                 type="text"
@@ -548,7 +549,7 @@
                   </button>
                 {/each}
               </div>
-              <p class="text-base-content/60 text-xs">
+              <p class="text-xs text-base-content/60">
                 Sélectionnez les pages où ce document apparaîtra
               </p>
             </fieldset>
@@ -576,7 +577,7 @@
               </div>
             </div>
           </div>
-          <div class="prose bg-base-100 max-w-none rounded-lg p-6 shadow-lg">
+          <div class="prose max-w-none rounded-lg bg-base-100 p-6 shadow-lg">
             {#if content}
               <SvelteMarkdown source={content} />
             {:else}
@@ -598,7 +599,7 @@
 <!-- Bouton flottant Enregistrer (mobile uniquement) -->
 {#if isDirty && !isSaving}
   <button
-    class="btn btn-primary btn-sm sticky bottom-2 shadow-lg {!globalState.isMobile &&
+    class="btn sticky bottom-2 shadow-lg btn-primary btn-sm {!globalState.isMobile &&
       'hidden'}"
     onclick={handleSave}
     disabled={!canEdit || !isValid || isSaving}

@@ -309,7 +309,7 @@
 </script>
 
 <div
-  class="navbar bg-base-100 border-base-300 justify-items-between sticky top-0 z-1000 min-h-12 border-b px-4 py-0 shadow-sm transition-transform duration-300 print:hidden {globalState.isMobile &&
+  class="justify-items-between navbar sticky top-0 z-1000 min-h-12 border-b border-base-300 bg-base-100 px-4 py-0 shadow-sm transition-transform duration-300 print:hidden {globalState.isMobile &&
     'min-h-12'}
     {globalState.isMobile && !globalState.headerVisible
     ? '-translate-y-full'
@@ -319,7 +319,7 @@
     <!-- Brand -->
     <a
       href={globalState.isAuthenticated ? p("/dashboard") : p("/")}
-      class="btn btn-ghost sm:btn-sm max-sm:btn-circle"
+      class="btn btn-ghost max-sm:btn-circle sm:btn-sm"
     >
       <img src="/images/favicon.png" alt="logo" class="size-7" />
       <span class="hidden md:inline">Tableau de bord</span>
@@ -329,7 +329,7 @@
     <div class=" flex items-center gap-1">
       <a
         href={p("/recipe")}
-        class="btn sm:btn-sm btn-ghost not-md:btn-square md:gap-2"
+        class="btn btn-ghost not-md:btn-square sm:btn-sm md:gap-2"
       >
         <CookingPot size={18} />
         <span class="hidden md:inline">Recettes</span>
@@ -348,13 +348,13 @@
   </div>
 
   <!-- navbar-center : onglet actif + dropdown des autres routes -->
-  <div class="navbar-center mx-auto min-w-0 flex-1 items-center px-2">
+  <div class="mx-auto navbar-center min-w-0 flex-1 items-center px-2">
     {#if eventContext && eventActiveTab}
       <div class="dropdown mx-auto">
         <div
           tabindex="0"
           role="button"
-          class="btn max-sm:btn-sm btn-ghost font-family-fredoka gap-2 font-bold uppercase"
+          class="btn gap-2 btn-ghost font-family-fredoka font-bold uppercase max-sm:btn-sm"
         >
           {#if globalState.isDesktop && eventTitle}
             <span class="max-w-28 truncate opacity-70">{eventTitle}</span>
@@ -364,7 +364,7 @@
           <ChevronDown size={16} class="opacity-50" />
         </div>
         <ul
-          class="menu dropdown-content bg-base-100 border-base-200 z-1 mt-3 w-48 rounded-xl border p-2 font-medium shadow-xl"
+          class="menu dropdown-content z-1 mt-3 w-48 rounded-xl border border-base-200 bg-base-100 p-2 font-medium shadow-xl"
         >
           {#each eventOtherTabs as tab (tab.relativePath)}
             {@const TabIcon = tab.icon}
@@ -390,7 +390,7 @@
         <div
           tabindex="0"
           role="button"
-          class="btn max-sm:btn-sm btn-ghost font-family-fredoka gap-2 font-bold uppercase"
+          class="btn gap-2 btn-ghost font-family-fredoka font-bold uppercase max-sm:btn-sm"
         >
           {#if globalState.isDesktop && matosTeamName}
             <span class="max-w-28 truncate opacity-70">{matosTeamName}</span>
@@ -402,7 +402,7 @@
           <ChevronDown size={16} class="opacity-50" />
         </div>
         <ul
-          class="menu dropdown-content bg-base-100 border-base-200 z-1 mt-3 w-48 rounded-xl border p-2 shadow-xl"
+          class="menu dropdown-content z-1 mt-3 w-48 rounded-xl border border-base-200 bg-base-100 p-2 shadow-xl"
         >
           {#if context?.type === "loans"}
             <li>
@@ -422,10 +422,10 @@
         </ul>
       </div>
     {:else if context?.type === "documentEdit"}
-      <span class="btn btn-sm btn-ghost font-medium">Documents</span>
+      <span class="btn btn-ghost font-medium btn-sm">Documents</span>
     {:else if navBarStore.title}
       <h1
-        class="font-family-fredoka mx-auto truncate text-sm font-bold tracking-wider uppercase opacity-70"
+        class="mx-auto truncate font-family-fredoka text-sm font-bold tracking-wider uppercase opacity-70"
         title={navBarStore.title}
       >
         {navBarStore.title}
@@ -433,7 +433,7 @@
     {/if}
   </div>
 
-  <div class="navbar-end z-10 ms-auto w-fit flex-1 shrink-0 gap-4">
+  <div class="z-10 ms-auto navbar-end w-fit flex-1 shrink-0 gap-4">
     <!-- Actions -->
     <div class="flex items-center gap-2">
       {#if navBarStore.actions}
@@ -447,7 +447,7 @@
         <div
           tabindex="0"
           role="button"
-          class="btn sm:btn-sm btn-ghost btn-circle avatar bg-primary/10 text-primary border-primary/20 border"
+          class="btn avatar btn-circle border border-primary/20 bg-primary/10 btn-ghost text-primary sm:btn-sm"
         >
           <div
             class="flex w-10 items-center justify-center rounded-full text-lg font-bold"
@@ -456,10 +456,10 @@
           </div>
         </div>
         <ul
-          class="menu dropdown-content bg-base-100 border-base-200 z-1 mt-3 w-60 rounded-xl border p-2 shadow-xl"
+          class="menu dropdown-content z-1 mt-3 w-60 rounded-xl border border-base-200 bg-base-100 p-2 shadow-xl"
         >
           <!-- Email -->
-          <li class="border-base-100 mb-1 border-b px-4 py-2">
+          <li class="mb-1 border-b border-base-100 px-4 py-2">
             <span
               class="block truncate p-0 text-xs font-medium italic opacity-60"
             >
@@ -488,7 +488,7 @@
           </li>
 
           <!-- Création & contenu -->
-          <li class="border-base-100 my-1 border-t"></li>
+          <li class="my-1 border-t border-base-100"></li>
           <li>
             <a
               href={p("/dashboard/eventCreate")}
@@ -519,7 +519,7 @@
 
           <!-- Prochains événements -->
           {#if upcomingEvents.length > 0}
-            <li class="border-base-100 my-1 border-t"></li>
+            <li class="my-1 border-t border-base-100"></li>
             <li
               class="pointer-events-none px-4 pt-1 pb-0.5 text-xs font-semibold uppercase opacity-40"
             >
@@ -549,7 +549,7 @@
           {/if}
 
           <!-- Actions -->
-          <li class="border-base-100 my-1 border-t"></li>
+          <li class="my-1 border-t border-base-100"></li>
           <li>
             <button
               onclick={handleReloadRecipes}
@@ -578,7 +578,7 @@
               </button>
             </li>
           {/if}
-          <li class="border-base-100 my-1 border-t"></li>
+          <li class="my-1 border-t border-base-100"></li>
           <li><InstallButton /></li>
           <li>
             <button class="text-error hover:bg-error/10" onclick={handleLogout}
@@ -588,7 +588,7 @@
         </ul>
       </div>
     {:else}
-      <button class="btn btn-primary sm:btn-sm shadow-md" onclick={handleLogin}>
+      <button class="btn shadow-md btn-primary sm:btn-sm" onclick={handleLogin}>
         <LogInIcon size={16} />
         <span class="hidden sm:inline">Connexion</span>
       </button>
@@ -599,7 +599,9 @@
 <!-- SECTION SOUS NAVBAR : tabs (non-sticky, tout le temps) -->
 {#if eventContext}
   <div
-    class=" h-fit px-4 py-2 print:hidden {globalState.isDesktop && hasLeftPanel && !navBarStore.stickyLeftPanel
+    class=" h-fit px-4 py-2 print:hidden {globalState.isDesktop &&
+    hasLeftPanel &&
+    !navBarStore.stickyLeftPanel
       ? 'ml-96'
       : ''}"
   >

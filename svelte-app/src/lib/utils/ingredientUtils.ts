@@ -44,7 +44,8 @@ export function parseIngredients(
             typeof parsed === "object" &&
             (typeof parsed.ref === "string" || typeof parsed.uuid === "string")
           ) {
-            if (typeof parsed.ref === "string") return parsed as RecipeIngredient;
+            if (typeof parsed.ref === "string")
+              return parsed as RecipeIngredient;
             return { ...parsed, ref: parsed.uuid } as RecipeIngredient;
           }
         } catch {

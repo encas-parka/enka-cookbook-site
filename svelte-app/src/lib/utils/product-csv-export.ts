@@ -38,9 +38,12 @@ export function exportProductsToCsv(options: CsvExportOptions): string {
 
   for (const product of options.products) {
     // Si un override existe, "Besoin" = override, "Besoin calculé" = valeur calculée
-    const besoin = product.displayTotalOverride || product.formattedQuantities || "-";
+    const besoin =
+      product.displayTotalOverride || product.formattedQuantities || "-";
     const besoinCalcule = product.displayTotalOverride
-      ? (product.formattedCalculatedQuantities || product.formattedQuantities || "-")
+      ? product.formattedCalculatedQuantities ||
+        product.formattedQuantities ||
+        "-"
       : "";
 
     lines.push(

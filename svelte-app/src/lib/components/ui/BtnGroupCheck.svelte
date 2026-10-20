@@ -87,12 +87,12 @@
   <div class="mt-4 flex items-center justify-between text-sm opacity-70">
     <div class="flex items-center gap-4">
       <span class="flex items-center gap-1">
-        <Check class="text-success h-3 w-3" />
+        <Check class="h-3 w-3 text-success" />
         {activeCount} actifs
       </span>
       {#if inactiveCount > 0}
         <span class="flex items-center gap-1">
-          <X class="text-error h-3 w-3" />
+          <X class="h-3 w-3 text-error" />
           {inactiveCount} retirés
         </span>
       {/if}

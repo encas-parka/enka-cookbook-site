@@ -46,7 +46,11 @@
     }
 
     if (serverStatus === "unreachable") {
-      return { variant: "warning", icon: CloudOff, label: "Serveur indisponible" };
+      return {
+        variant: "warning",
+        icon: CloudOff,
+        label: "Serveur indisponible",
+      };
     }
 
     const lock = lockStatus;

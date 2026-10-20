@@ -44,7 +44,9 @@ interface Env {
 
 function loadEnv(): Env {
   if (!existsSync(ENV_FILE)) {
-    console.error(`Missing ${ENV_FILE} — add PB_URL / PB_ADMIN_* / PB_USER_* there.`);
+    console.error(
+      `Missing ${ENV_FILE} — add PB_URL / PB_ADMIN_* / PB_USER_* there.`,
+    );
     process.exit(1);
   }
   const env: Record<string, string> = {};
@@ -55,8 +57,13 @@ function loadEnv(): Env {
     if (eqIdx === -1) continue;
     env[trimmed.slice(0, eqIdx).trim()] = trimmed.slice(eqIdx + 1).trim();
   }
-  const missing = ["PB_URL", "PB_ADMIN_EMAIL", "PB_ADMIN_PASSWORD", "PB_USER_EMAIL", "PB_USER_PASSWORD"]
-    .filter((k) => !env[k]);
+  const missing = [
+    "PB_URL",
+    "PB_ADMIN_EMAIL",
+    "PB_ADMIN_PASSWORD",
+    "PB_USER_EMAIL",
+    "PB_USER_PASSWORD",
+  ].filter((k) => !env[k]);
   if (missing.length > 0) {
     console.error(`Missing env keys in ${ENV_FILE}: ${missing.join(", ")}`);
     process.exit(1);
@@ -103,7 +110,8 @@ function classify(status: number, json: any): string {
   const data = json?.data ?? {};
   const fieldErrors = Object.keys(data).filter((k) => data[k]);
   if (fieldErrors.length === 0) {
-    if (status === 404) return "rule-rejection-or-missing (404 — PB leak-protection)";
+    if (status === 404)
+      return "rule-rejection-or-missing (404 — PB leak-protection)";
     return "rule-rejection (data empty)";
   }
   return `validation-rejection (fields: ${fieldErrors.join(", ")})`;
@@ -127,23 +135,35 @@ async function main(): Promise<void> {
   }
 
   // 1. Admin auth (inspection + control-row creation + cleanup only)
-  const admin = await pbFetch(env.base, "/api/collections/_superusers/auth-with-password", {
-    method: "POST",
-    body: { identity: env.adminEmail, password: env.adminPassword },
-  });
+  const admin = await pbFetch(
+    env.base,
+    "/api/collections/_superusers/auth-with-password",
+    {
+      method: "POST",
+      body: { identity: env.adminEmail, password: env.adminPassword },
+    },
+  );
   if (admin.status !== 200) {
-    console.error(`Admin auth failed (${admin.status}) — check PB_ADMIN_* in .env.local`);
+    console.error(
+      `Admin auth failed (${admin.status}) — check PB_ADMIN_* in .env.local`,
+    );
     process.exit(1);
   }
   const adminToken = admin.json.token as string;
 
   // 2. User auth (the SPA's identity)
-  const user = await pbFetch(env.base, "/api/collections/users/auth-with-password", {
-    method: "POST",
-    body: { identity: env.userEmail, password: env.userPassword },
-  });
+  const user = await pbFetch(
+    env.base,
+    "/api/collections/users/auth-with-password",
+    {
+      method: "POST",
+      body: { identity: env.userEmail, password: env.userPassword },
+    },
+  );
   if (user.status !== 200) {
-    console.error(`User auth failed (${user.status}) — check PB_USER_* in .env.local`);
+    console.error(
+      `User auth failed (${user.status}) — check PB_USER_* in .env.local`,
+    );
     process.exit(1);
   }
   const userToken = user.json.token as string;
@@ -153,7 +173,9 @@ async function main(): Promise<void> {
 
   // 3. Live rules (what the migrations actually produced)
   for (const collection of ["event_materiel", "materiel_loan"]) {
-    const col = await pbFetch(env.base, `/api/collections/${collection}`, { token: adminToken });
+    const col = await pbFetch(env.base, `/api/collections/${collection}`, {
+      token: adminToken,
+    });
     if (col.status !== 200) {
       console.log(`rules ${collection}: UNAVAILABLE (${col.status})`);
       continue;
@@ -174,7 +196,9 @@ async function main(): Promise<void> {
     process.exit(1);
   }
   const items: any[] = events.json.items ?? [];
-  console.log(`events visible to user: ${items.length}/${events.json.totalItems}`);
+  console.log(
+    `events visible to user: ${items.length}/${events.json.totalItems}`,
+  );
 
   // 5. Coverage per event (full fields read via admin)
   interface Target {
@@ -188,16 +212,24 @@ async function main(): Promise<void> {
   }
   const targets: Target[] = [];
   for (const ev of items) {
-    const full = await pbFetch(env.base, `/api/collections/events/records/${ev.id}`, {
-      token: adminToken,
-    });
+    const full = await pbFetch(
+      env.base,
+      `/api/collections/events/records/${ev.id}`,
+      {
+        token: adminToken,
+      },
+    );
     if (full.status !== 200) continue;
     const teamIds: string[] = full.json.teams ?? [];
     let inTeamMembers = false;
     for (const teamId of teamIds) {
-      const team = await pbFetch(env.base, `/api/collections/teams/records/${teamId}`, {
-        token: adminToken,
-      });
+      const team = await pbFetch(
+        env.base,
+        `/api/collections/teams/records/${teamId}`,
+        {
+          token: adminToken,
+        },
+      );
       if (team.status === 200 && (team.json.members ?? []).includes(userId)) {
         inTeamMembers = true;
       }
@@ -240,15 +272,23 @@ async function main(): Promise<void> {
   );
 
   // 7. Pick a materiel (admin read — the SPA picks one owned by a team)
-  const materiels = await pbFetch(env.base, "/api/collections/materiel/records?perPage=1", {
-    token: adminToken,
-  });
+  const materiels = await pbFetch(
+    env.base,
+    "/api/collections/materiel/records?perPage=1",
+    {
+      token: adminToken,
+    },
+  );
   const materiel: any = materiels.json?.items?.[0];
   if (!materiel) {
-    console.log("no materiel record in dev DB — cannot build a faithful loan payload");
+    console.log(
+      "no materiel record in dev DB — cannot build a faithful loan payload",
+    );
     process.exit(1);
   }
-  console.log(`materiel: ${materiel.id} "${materiel.name}" teamId=${materiel.teamId}`);
+  console.log(
+    `materiel: ${materiel.id} "${materiel.name}" teamId=${materiel.teamId}`,
+  );
 
   const createdLoanIds: string[] = [];
   let createdEventMaterielIds: string[] = [];
@@ -272,15 +312,28 @@ async function main(): Promise<void> {
       borrowerUser: userId,
       createdBy: userId,
     };
-    const createLoan = await pbFetch(env.base, "/api/collections/materiel_loan/records", {
-      method: "POST",
-      token: userToken,
-      body: loanPayload,
-    });
-    console.log(`create materiel_loan: ${createLoan.status} ${JSON.stringify(createLoan.json).slice(0, 300)}`);
-    verdict("create-loan", `${createLoan.status} → ${classify(createLoan.status, createLoan.json)}`);
-    if (createLoan.status === 200) createdLoanIds.push(createLoan.json.id as string);
-    const loanId = createLoan.status === 200 ? (createLoan.json.id as string) : "probet03noloan";
+    const createLoan = await pbFetch(
+      env.base,
+      "/api/collections/materiel_loan/records",
+      {
+        method: "POST",
+        token: userToken,
+        body: loanPayload,
+      },
+    );
+    console.log(
+      `create materiel_loan: ${createLoan.status} ${JSON.stringify(createLoan.json).slice(0, 300)}`,
+    );
+    verdict(
+      "create-loan",
+      `${createLoan.status} → ${classify(createLoan.status, createLoan.json)}`,
+    );
+    if (createLoan.status === 200)
+      createdLoanIds.push(createLoan.json.id as string);
+    const loanId =
+      createLoan.status === 200
+        ? (createLoan.json.id as string)
+        : "probet03noloan";
 
     // 9. POST event_materiel header as the user (exact syncFromLoan →
     //    addHeaderWithAllocation payload)
@@ -299,17 +352,24 @@ async function main(): Promise<void> {
       notes: null,
       createdBy: userId,
     };
-    const createHeader = await pbFetch(env.base, "/api/collections/event_materiel/records", {
-      method: "POST",
-      token: userToken,
-      body: headerPayload,
-    });
-    console.log(`create event_materiel header: ${createHeader.status} ${JSON.stringify(createHeader.json).slice(0, 300)}`);
+    const createHeader = await pbFetch(
+      env.base,
+      "/api/collections/event_materiel/records",
+      {
+        method: "POST",
+        token: userToken,
+        body: headerPayload,
+      },
+    );
+    console.log(
+      `create event_materiel header: ${createHeader.status} ${JSON.stringify(createHeader.json).slice(0, 300)}`,
+    );
     verdict(
       "create-event-materiel-header",
       `${createHeader.status} → ${classify(createHeader.status, createHeader.json)}`,
     );
-    if (createHeader.status === 200) createdEventMaterielIds.push(createHeader.json.id as string);
+    if (createHeader.status === 200)
+      createdEventMaterielIds.push(createHeader.json.id as string);
 
     // 10. POST event_materiel allocation (second sync write — groupId → header)
     if (createHeader.status === 200) {
@@ -324,7 +384,9 @@ async function main(): Promise<void> {
         "/api/collections/event_materiel/records",
         { method: "POST", token: userToken, body: allocationPayload },
       );
-      console.log(`create event_materiel allocation: ${createAllocation.status} ${JSON.stringify(createAllocation.json).slice(0, 200)}`);
+      console.log(
+        `create event_materiel allocation: ${createAllocation.status} ${JSON.stringify(createAllocation.json).slice(0, 200)}`,
+      );
       verdict(
         "create-event-materiel-allocation",
         `${createAllocation.status} → ${classify(createAllocation.status, createAllocation.json)}`,
@@ -336,11 +398,19 @@ async function main(): Promise<void> {
 
     // 11. Control row via ADMIN (bypasses createRule) → measure update/delete
     //     semantics for a rule-uncovered user (the T02 trap: update rejected → 404).
-    const control = await pbFetch(env.base, "/api/collections/event_materiel/records", {
-      method: "POST",
-      token: adminToken,
-      body: { ...headerPayload, name: `probe-t03-control-${Date.now()}`, loanId: null },
-    });
+    const control = await pbFetch(
+      env.base,
+      "/api/collections/event_materiel/records",
+      {
+        method: "POST",
+        token: adminToken,
+        body: {
+          ...headerPayload,
+          name: `probe-t03-control-${Date.now()}`,
+          loanId: null,
+        },
+      },
+    );
     if (control.status === 200) {
       const controlId = control.json.id as string;
       createdEventMaterielIds.push(controlId);
@@ -350,8 +420,13 @@ async function main(): Promise<void> {
         `/api/collections/event_materiel/records/${controlId}`,
         { method: "PATCH", token: userToken, body: { quantity: 2 } },
       );
-      console.log(`patch event_materiel (control, as user): ${patch.status} ${JSON.stringify(patch.json).slice(0, 200)}`);
-      verdict("update-event-materiel", `${patch.status} → ${classify(patch.status, patch.json)}`);
+      console.log(
+        `patch event_materiel (control, as user): ${patch.status} ${JSON.stringify(patch.json).slice(0, 200)}`,
+      );
+      verdict(
+        "update-event-materiel",
+        `${patch.status} → ${classify(patch.status, patch.json)}`,
+      );
 
       const del = await pbFetch(
         env.base,
@@ -359,10 +434,15 @@ async function main(): Promise<void> {
         { method: "DELETE", token: userToken },
       );
       console.log(`delete event_materiel (control, as user): ${del.status}`);
-      verdict("delete-event-materiel", `${del.status} → ${classify(del.status, del.json)}`);
+      verdict(
+        "delete-event-materiel",
+        `${del.status} → ${classify(del.status, del.json)}`,
+      );
       if (del.status < 300) {
         // deleted by the user — don't double-delete in cleanup
-        createdEventMaterielIds = createdEventMaterielIds.filter((id) => id !== controlId);
+        createdEventMaterielIds = createdEventMaterielIds.filter(
+          (id) => id !== controlId,
+        );
       }
     } else {
       console.log(`control row creation (admin) failed: ${control.status}`);
@@ -370,17 +450,25 @@ async function main(): Promise<void> {
   } finally {
     // 12. Cleanup (admin) — event_materiel rows first (they reference the loan)
     for (const id of createdEventMaterielIds) {
-      const del = await pbFetch(env.base, `/api/collections/event_materiel/records/${id}`, {
-        method: "DELETE",
-        token: adminToken,
-      });
+      const del = await pbFetch(
+        env.base,
+        `/api/collections/event_materiel/records/${id}`,
+        {
+          method: "DELETE",
+          token: adminToken,
+        },
+      );
       console.log(`cleanup event_materiel ${id}: ${del.status}`);
     }
     for (const id of createdLoanIds) {
-      const del = await pbFetch(env.base, `/api/collections/materiel_loan/records/${id}`, {
-        method: "DELETE",
-        token: adminToken,
-      });
+      const del = await pbFetch(
+        env.base,
+        `/api/collections/materiel_loan/records/${id}`,
+        {
+          method: "DELETE",
+          token: adminToken,
+        },
+      );
       console.log(`cleanup materiel_loan ${id}: ${del.status}`);
     }
   }

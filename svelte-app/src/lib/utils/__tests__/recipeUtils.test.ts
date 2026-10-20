@@ -1,6 +1,9 @@
 import { describe, it, expect } from "vitest";
 
-import { filterRecipesForViewer, parseRecipeToIndexEntry } from "../recipeUtils";
+import {
+  filterRecipesForViewer,
+  parseRecipeToIndexEntry,
+} from "../recipeUtils";
 
 /**
  * Entrée d'index construite par le builder réel du store — il normalise

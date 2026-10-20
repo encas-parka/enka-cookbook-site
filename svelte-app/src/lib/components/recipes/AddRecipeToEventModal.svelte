@@ -60,7 +60,7 @@
 <ModalContainer {isOpen} {onClose} maxWidth="sm">
   <ModalHeader title="Ajouter à un événement" {onClose} />
   <ModalContent>
-    <p class="text-base-content/70 mb-4 text-sm">
+    <p class="mb-4 text-sm text-base-content/70">
       Ajouter <span class="font-semibold">{recipeTitle}</span> à un événement à venir.
       La recette sera mise de côté sans date — vous pourrez lui attribuer un repas
       depuis la page de l'événement.
@@ -73,21 +73,21 @@
           {@const isSelected = selectedEventId === event.id}
           <label
             class="cursor-pointer rounded-lg px-3 py-2 transition-colors {isSelected
-              ? 'bg-primary/20 ring-primary ring-1'
+              ? 'bg-primary/20 ring-1 ring-primary'
               : 'bg-base-200 hover:bg-base-300'}"
           >
             <div class="flex items-center gap-3">
               <input
                 type="radio"
                 name="event-select"
-                class="radio radio-primary radio-sm"
+                class="radio radio-sm radio-primary"
                 bind:group={selectedEventId}
                 value={event.id}
               />
               <div class="flex-1">
                 <div class="font-medium">{event.name}</div>
                 {#if event.dateStart}
-                  <div class="text-base-content/60 text-xs">
+                  <div class="text-xs text-base-content/60">
                     {formatDateDayMonthShort(event.dateStart)}
                     {#if event.dateEnd && event.dateEnd !== event.dateStart}
                       — {formatDateDayMonthShort(event.dateEnd)}
@@ -111,7 +111,7 @@
       disabled={!selectedEventId || isSubmitting}
     >
       {#if isSubmitting}
-        <span class="loading loading-spinner loading-xs"></span>
+        <span class="loading loading-xs loading-spinner"></span>
       {:else}
         <CalendarPlus class="h-4 w-4" />
       {/if}

@@ -30,7 +30,9 @@ function tagsEqual(a: string[], b: string[]): boolean {
 }
 
 function draftsEqual(a: DocDraftState, b: DocDraftState): boolean {
-  return a.title === b.title && a.content === b.content && tagsEqual(a.tags, b.tags);
+  return (
+    a.title === b.title && a.content === b.content && tagsEqual(a.tags, b.tags)
+  );
 }
 
 export function resolveRemoteDocUpdate(

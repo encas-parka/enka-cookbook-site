@@ -65,7 +65,7 @@
 </script>
 
 <div
-  class="bg-base-200 flex-1 overflow-auto p-4 print:mx-auto print:overflow-visible print:p-0"
+  class="flex-1 overflow-auto bg-base-200 p-4 print:mx-auto print:overflow-visible print:p-0"
 >
   <div
     class="mx-auto max-w-5xl print:mx-auto print:my-0 print:w-full print:max-w-none"

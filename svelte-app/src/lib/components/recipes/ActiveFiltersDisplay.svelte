@@ -49,10 +49,10 @@
   });
 </script>
 
-<fieldset class="fieldset border-base-300 relative rounded-lg border-2">
+<fieldset class="relative fieldset rounded-lg border-2 border-base-300">
   <!-- Compteur de résultats -->
   {#if hasActiveFilters}
-    <legend class="legend text-base-content/70 ms-4">
+    <legend class="legend ms-4 text-base-content/70">
       {#if resultCount > 1}
         {#if typeRLabel}
           <span class="font-semibold">{resultCount} {typeRLabel}s</span> correspondent
@@ -76,7 +76,7 @@
   {/if}
   <div class="p-4">
     {#if !hasActiveFilters}
-      <div class="text-base-content/70 text-base">
+      <div class="text-base text-base-content/70">
         {#if typeRLabel}
           {resultCount} {typeRLabel}s
         {:else}
@@ -107,7 +107,7 @@
 
         <!-- Température -->
         {#if filters.temperature === "Chaud"}
-          <span class="badge badge-error text-white">Servir Chaud</span>
+          <span class="badge text-white badge-error">Servir Chaud</span>
         {:else if filters.temperature === "Froid"}
           <span class="badge badge-info">Servir Froid</span>
         {/if}
@@ -144,7 +144,7 @@
 
       <!-- Bouton reset -->
       <div class="mt-3 text-end">
-        <button class="btn btn-warning btn-sm" onclick={onResetFilters}>
+        <button class="btn btn-sm btn-warning" onclick={onResetFilters}>
           <Eraser class="h-4 w-4" />
           Effacer tous les filtres
         </button>

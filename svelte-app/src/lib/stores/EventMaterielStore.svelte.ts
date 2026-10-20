@@ -65,7 +65,11 @@ function formatAllocsInline(allocs: EventMateriel[]): string {
 
 export class EventMaterielStore {
   // pb-sync collection (CRUD + sync)
-  #collection = createSyncCollection<EventMateriel>(pb, db.eventMateriels, "event_materiel");
+  #collection = createSyncCollection<EventMateriel>(
+    pb,
+    db.eventMateriels,
+    "event_materiel",
+  );
 
   // Bridge scoped dynamiquement par eventId
   #bridge: BridgeResult<EventMateriel> | null = null;
@@ -157,7 +161,7 @@ export class EventMaterielStore {
       this.#items = this.#bridge.map;
 
       await this.#collection.initialFetch({
-        filter: ['eventId = {:eventId}', { eventId }],
+        filter: ["eventId = {:eventId}", { eventId }],
         scopeKey: eventId,
       });
 
@@ -199,23 +203,21 @@ export class EventMaterielStore {
           ? "to_check"
           : (data.status as EventMaterielStatus) || "to_find";
 
-      const item = await this.#collection.create(
-        {
-          eventId: data.eventId,
-          name: data.name,
-          quantity: data.quantity,
-          type: data.type || "other",
-          who: data.who || null,
-          where: data.where || null,
-          fromTeamName: data.fromTeamName || null,
-          sourceMaterielId: data.sourceMaterielId || null,
-          loanId: data.loanId || null,
-          status,
-          groupId: data.groupId || null,
-          notes: data.notes || null,
-          createdBy: userId,
-        } as Omit<EventMateriel, "id" | "created" | "updated">,
-      );
+      const item = await this.#collection.create({
+        eventId: data.eventId,
+        name: data.name,
+        quantity: data.quantity,
+        type: data.type || "other",
+        who: data.who || null,
+        where: data.where || null,
+        fromTeamName: data.fromTeamName || null,
+        sourceMaterielId: data.sourceMaterielId || null,
+        loanId: data.loanId || null,
+        status,
+        groupId: data.groupId || null,
+        notes: data.notes || null,
+        createdBy: userId,
+      } as Omit<EventMateriel, "id" | "created" | "updated">);
 
       return item;
     } catch (err) {
@@ -657,7 +659,7 @@ export class EventMaterielStore {
   ): Promise<void> {
     try {
       const existingItems = Array.from(this.#items.values()).filter(
-        item => item.loanId === loanId
+        (item) => item.loanId === loanId,
       );
 
       const existingByMaterielId = new Map<string, (typeof existingItems)[0]>();
@@ -745,7 +747,7 @@ export class EventMaterielStore {
   async removeByLoan(loanId: string): Promise<void> {
     try {
       const existingItems = Array.from(this.#items.values()).filter(
-        item => item.loanId === loanId
+        (item) => item.loanId === loanId,
       );
 
       for (const item of existingItems) {
@@ -764,7 +766,7 @@ export class EventMaterielStore {
   async removeByLoanAndEvent(loanId: string, eventId: string): Promise<void> {
     try {
       const existingItems = Array.from(this.#items.values()).filter(
-        item => item.loanId === loanId
+        (item) => item.loanId === loanId,
       );
       const toDelete = existingItems.filter((item) => item.eventId === eventId);
 

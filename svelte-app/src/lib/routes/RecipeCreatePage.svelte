@@ -230,7 +230,7 @@
 <div class="max-w-9xl container mx-auto p-4 pb-20" in:fade>
   {#if !loaded}
     <div class="flex items-center justify-center py-20">
-      <div class="loading loading-spinner loading-lg"></div>
+      <div class="loading loading-lg loading-spinner"></div>
     </div>
   {:else if recipe}
     <!-- Form -->
@@ -260,7 +260,7 @@
       <!-- Bouton flottant Créer (mobile uniquement) -->
       {#if isDirty && !isSaving}
         <button
-          class="btn btn-primary btn-sm sticky bottom-2 shadow-lg {!globalState.isMobile &&
+          class="btn sticky bottom-2 shadow-lg btn-primary btn-sm {!globalState.isMobile &&
             'hidden'}"
           onclick={save}
           disabled={isSaving || !isDirty}

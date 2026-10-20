@@ -36,7 +36,10 @@ vi.mock("$lib/services/toast.service.svelte", () => ({
 import { describe, it, expect, beforeEach, afterAll, vi } from "vitest";
 import { createEnrichedProductsFromEvent } from "../productEnrichment";
 import type { EnrichedEvent } from "$lib/types/events";
-import type { RecipeForDisplay, RecipeIngredient } from "$lib/types/recipes.types";
+import type {
+  RecipeForDisplay,
+  RecipeIngredient,
+} from "$lib/types/recipes.types";
 
 const MAIN_ID = "t12event00000001";
 const DATE = "2026-12-19";
@@ -114,13 +117,21 @@ describe("createEnrichedProductsFromEvent — collision d'id dérivé", () => {
       [
         "recA",
         makeRecipe("recA", "Tarte au citron", [
-          makeIngredient({ ref: "ref-hugo-a", name: "Jus de citron", normalizedQuantity: 200 }),
+          makeIngredient({
+            ref: "ref-hugo-a",
+            name: "Jus de citron",
+            normalizedQuantity: 200,
+          }),
         ]),
       ],
       [
         "recB",
         makeRecipe("recB", "Limonade", [
-          makeIngredient({ ref: "ref-aw-b", name: "Jus de citron", normalizedQuantity: 300 }),
+          makeIngredient({
+            ref: "ref-aw-b",
+            name: "Jus de citron",
+            normalizedQuantity: 300,
+          }),
         ]),
       ],
     ]);
@@ -152,9 +163,7 @@ describe("createEnrichedProductsFromEvent — collision d'id dérivé", () => {
 
     const warns = warnSpy.mock.calls.map((args) => String(args[0]));
     expect(warns).toHaveLength(1);
-    expect(warns[0]).toContain(
-      `Collision id "jus-de-citron_${MAIN_ID}"`,
-    );
+    expect(warns[0]).toContain(`Collision id "jus-de-citron_${MAIN_ID}"`);
   });
 
   it("ne logge pas de collision quand deux recettes partagent le même ref (agrégation normale)", async () => {
@@ -162,13 +171,21 @@ describe("createEnrichedProductsFromEvent — collision d'id dérivé", () => {
       [
         "recA",
         makeRecipe("recA", "Tarte au citron", [
-          makeIngredient({ ref: "ref-commun", name: "Jus de citron", normalizedQuantity: 200 }),
+          makeIngredient({
+            ref: "ref-commun",
+            name: "Jus de citron",
+            normalizedQuantity: 200,
+          }),
         ]),
       ],
       [
         "recB",
         makeRecipe("recB", "Limonade", [
-          makeIngredient({ ref: "ref-commun", name: "Jus de citron", normalizedQuantity: 300 }),
+          makeIngredient({
+            ref: "ref-commun",
+            name: "Jus de citron",
+            normalizedQuantity: 300,
+          }),
         ]),
       ],
     ]);
@@ -194,13 +211,21 @@ describe("createEnrichedProductsFromEvent — collision d'id dérivé", () => {
       [
         "recA",
         makeRecipe("recA", "Sandwich", [
-          makeIngredient({ ref: "ref-sale", name: "Beurre de cacahuètes (salé)", normalizedQuantity: 100 }),
+          makeIngredient({
+            ref: "ref-sale",
+            name: "Beurre de cacahuètes (salé)",
+            normalizedQuantity: 100,
+          }),
         ]),
       ],
       [
         "recB",
         makeRecipe("recB", "Dessert", [
-          makeIngredient({ ref: "ref-sucre", name: "Beurre de cacahuètes", normalizedQuantity: 50 }),
+          makeIngredient({
+            ref: "ref-sucre",
+            name: "Beurre de cacahuètes",
+            normalizedQuantity: 50,
+          }),
         ]),
       ],
     ]);
@@ -225,13 +250,18 @@ describe("createEnrichedProductsFromEvent — collision d'id dérivé", () => {
   it("dérive un id complet dans la borne serveur pour un nom long (60 caractères)", async () => {
     // Nom à la borne client/serveur (60) : slug complet préservé, id
     // = slug + «_» + eventId — ≤ 76, la max posée sur products.id.
-    const longName = "Suprêmes de volaille à la crème d'éstragon fraîche du marché"; // 60 chars
+    const longName =
+      "Suprêmes de volaille à la crème d'éstragon fraîche du marché"; // 60 chars
     expect(longName).toHaveLength(60);
     const recipesByUuid = new Map<string, RecipeForDisplay>([
       [
         "recA",
         makeRecipe("recA", "Festin", [
-          makeIngredient({ ref: "ref-long", name: longName, normalizedQuantity: 100 }),
+          makeIngredient({
+            ref: "ref-long",
+            name: longName,
+            normalizedQuantity: 100,
+          }),
         ]),
       ],
     ]);

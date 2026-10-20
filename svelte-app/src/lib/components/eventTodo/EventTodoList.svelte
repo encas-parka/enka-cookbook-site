@@ -107,7 +107,7 @@
 
 <!-- Header / Actions -->
 <div class="mb-4 flex items-center justify-end">
-  <button class="btn btn-sm btn-primary gap-2" onclick={handleAdd} {disabled}>
+  <button class="btn gap-2 btn-primary btn-sm" onclick={handleAdd} {disabled}>
     <Plus class="size-4" /> Nouvelle tâche
   </button>
 </div>
@@ -115,7 +115,7 @@
 <!-- List - Grouped by taskOn type -->
 {#if todos.length === 0}
   <div
-    class="text-base-content/50 border-base-200 hover:border-primary/50 cursor-pointer rounded-lg border-2 border-dashed py-8 text-center text-sm italic transition-colors"
+    class="cursor-pointer rounded-lg border-2 border-dashed border-base-200 py-8 text-center text-sm text-base-content/50 italic transition-colors hover:border-primary/50"
     onclick={handleAdd}
     onkeydown={(e) => e.key === "Enter" && handleAdd()}
     role="button"
@@ -123,7 +123,7 @@
   >
     Aucune tâche pour le moment.
     <br />
-    <span class="text-primary mt-1 inline-block font-medium"
+    <span class="mt-1 inline-block font-medium text-primary"
       >Créer la première tâche +</span
     >
   </div>
@@ -140,10 +140,10 @@
       <div class="flex flex-col gap-3">
         <!-- Column Header -->
         <div
-          class="text-base-content/70 border-base-200 border-b pb-2 text-sm font-medium"
+          class="border-b border-base-200 pb-2 text-sm font-medium text-base-content/70"
         >
           {getTaskOnLabel(taskOnType)}
-          <span class="text-base-content/40 ml-1 text-xs"
+          <span class="ml-1 text-xs text-base-content/40"
             >({groupedTodos[taskOnType]?.length ?? 0})</span
           >
         </div>

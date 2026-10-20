@@ -1,6 +1,9 @@
 <script lang="ts">
   import { ArrowDownNarrowWide } from "@lucide/svelte";
-  import type { EventMaterielSortField, EventMaterielSort } from "$lib/types/event-materiel.types";
+  import type {
+    EventMaterielSortField,
+    EventMaterielSort,
+  } from "$lib/types/event-materiel.types";
 
   interface Props {
     sort: EventMaterielSort;
@@ -27,7 +30,7 @@
   }
 </script>
 
-<div class="bg-base-300 rounded-box flex items-center gap-4 px-4 py-3">
+<div class="flex items-center gap-4 rounded-box bg-base-300 px-4 py-3">
   <fieldset class="fieldset">
     <legend class="legend label">
       <ArrowDownNarrowWide class="inline size-4" /> Trier par :

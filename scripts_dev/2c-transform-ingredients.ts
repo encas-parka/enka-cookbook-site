@@ -35,7 +35,9 @@ function main(): void {
   });
 
   if (duplicates.length > 0) {
-    console.warn(`⚠️  ${duplicates.length} duplicate UUIDs — keeping first occurrence only (category: ingredients.duplicate-uuid)`);
+    console.warn(
+      `⚠️  ${duplicates.length} duplicate UUIDs — keeping first occurrence only (category: ingredients.duplicate-uuid)`,
+    );
   }
   console.log(`📊 After dedup: ${deduped.length} unique ingredients\n`);
 
@@ -64,7 +66,9 @@ function main(): void {
   }
 
   if (DRY_RUN) {
-    console.log(`\n[DRY RUN] Would write ${records.length} records to pb-import/ingredients.json`);
+    console.log(
+      `\n[DRY RUN] Would write ${records.length} records to pb-import/ingredients.json`,
+    );
     if (records.length > 0) {
       console.log("\nFirst 3 records:");
       records.slice(0, 3).forEach((r) => console.log(JSON.stringify(r)));
@@ -83,14 +87,15 @@ function main(): void {
     "2c-transform-ingredients",
     duplicates.length > 0
       ? [
-        {
-          type: "count-delta",
-          collection: "ingredients",
-          delta: -duplicates.length,
-          category: VERDICT_CATEGORY.duplicateIngredientUuid,
-          reason: "duplicate ingredient UUIDs in the Hugo catalog — first occurrence kept",
-        },
-      ]
+          {
+            type: "count-delta",
+            collection: "ingredients",
+            delta: -duplicates.length,
+            category: VERDICT_CATEGORY.duplicateIngredientUuid,
+            reason:
+              "duplicate ingredient UUIDs in the Hugo catalog — first occurrence kept",
+          },
+        ]
       : [],
   );
 }

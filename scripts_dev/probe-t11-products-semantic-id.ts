@@ -45,7 +45,9 @@ interface Env {
 
 function loadEnv(): Env {
   if (!existsSync(ENV_FILE)) {
-    console.error(`Missing ${ENV_FILE} — add PB_URL / PB_ADMIN_* / PB_USER_* there.`);
+    console.error(
+      `Missing ${ENV_FILE} — add PB_URL / PB_ADMIN_* / PB_USER_* there.`,
+    );
     process.exit(1);
   }
   const env: Record<string, string> = {};
@@ -56,8 +58,13 @@ function loadEnv(): Env {
     if (eqIdx === -1) continue;
     env[trimmed.slice(0, eqIdx).trim()] = trimmed.slice(eqIdx + 1).trim();
   }
-  const missing = ["PB_URL", "PB_ADMIN_EMAIL", "PB_ADMIN_PASSWORD", "PB_USER_EMAIL", "PB_USER_PASSWORD"]
-    .filter((k) => !env[k]);
+  const missing = [
+    "PB_URL",
+    "PB_ADMIN_EMAIL",
+    "PB_ADMIN_PASSWORD",
+    "PB_USER_EMAIL",
+    "PB_USER_PASSWORD",
+  ].filter((k) => !env[k]);
   if (missing.length > 0) {
     console.error(`Missing env keys in ${ENV_FILE}: ${missing.join(", ")}`);
     process.exit(1);
@@ -107,7 +114,12 @@ function classify(status: number, json: any): string {
 }
 
 /** Exact payload shape of ProductsStore.createProduct, plus an optional id. */
-function productPayload(eventId: string, userId: string, productName: string, id?: string) {
+function productPayload(
+  eventId: string,
+  userId: string,
+  productName: string,
+  id?: string,
+) {
   return {
     ...(id ? { id } : {}),
     ingredientRef: null,
@@ -140,22 +152,34 @@ async function main(): Promise<void> {
     process.exit(1);
   }
 
-  const admin = await pbFetch(env.base, "/api/collections/_superusers/auth-with-password", {
-    method: "POST",
-    body: { identity: env.adminEmail, password: env.adminPassword },
-  });
+  const admin = await pbFetch(
+    env.base,
+    "/api/collections/_superusers/auth-with-password",
+    {
+      method: "POST",
+      body: { identity: env.adminEmail, password: env.adminPassword },
+    },
+  );
   if (admin.status !== 200) {
-    console.error(`Admin auth failed (${admin.status}) — check PB_ADMIN_* in .env.local`);
+    console.error(
+      `Admin auth failed (${admin.status}) — check PB_ADMIN_* in .env.local`,
+    );
     process.exit(1);
   }
   const adminToken = admin.json.token as string;
 
-  const user = await pbFetch(env.base, "/api/collections/users/auth-with-password", {
-    method: "POST",
-    body: { identity: env.userEmail, password: env.userPassword },
-  });
+  const user = await pbFetch(
+    env.base,
+    "/api/collections/users/auth-with-password",
+    {
+      method: "POST",
+      body: { identity: env.userEmail, password: env.userPassword },
+    },
+  );
   if (user.status !== 200) {
-    console.error(`User auth failed (${user.status}) — check PB_USER_* in .env.local`);
+    console.error(
+      `User auth failed (${user.status}) — check PB_USER_* in .env.local`,
+    );
     process.exit(1);
   }
   const userToken = user.json.token as string;
@@ -164,9 +188,13 @@ async function main(): Promise<void> {
 
   // Target event: one the user can write on (creator, else first visible) —
   // the same coverage the SPA's products create rule requires.
-  const events = await pbFetch(env.base, "/api/collections/events/records?perPage=200&sort=-created", {
-    token: userToken,
-  });
+  const events = await pbFetch(
+    env.base,
+    "/api/collections/events/records?perPage=200&sort=-created",
+    {
+      token: userToken,
+    },
+  );
   const items: any[] = events.json?.items ?? [];
   if (items.length === 0) {
     console.log("no visible event — nothing to probe");
@@ -189,20 +217,32 @@ async function main(): Promise<void> {
     { token: adminToken },
   );
   for (const rec of stale.json?.items ?? []) {
-    const del = await pbFetch(env.base, `/api/collections/purchases/records/${rec.id}`, {
-      method: "DELETE",
-      token: adminToken,
-    });
+    const del = await pbFetch(
+      env.base,
+      `/api/collections/purchases/records/${rec.id}`,
+      {
+        method: "DELETE",
+        token: adminToken,
+      },
+    );
     console.log(`purge stale purchase ${rec.id}: ${del.status}`);
   }
-  const staleProduct = await pbFetch(env.base, `/api/collections/products/records/${SEMANTIC_ID}`, {
-    token: adminToken,
-  });
-  if (staleProduct.status === 200) {
-    const del = await pbFetch(env.base, `/api/collections/products/records/${SEMANTIC_ID}`, {
-      method: "DELETE",
+  const staleProduct = await pbFetch(
+    env.base,
+    `/api/collections/products/records/${SEMANTIC_ID}`,
+    {
       token: adminToken,
-    });
+    },
+  );
+  if (staleProduct.status === 200) {
+    const del = await pbFetch(
+      env.base,
+      `/api/collections/products/records/${SEMANTIC_ID}`,
+      {
+        method: "DELETE",
+        token: adminToken,
+      },
+    );
     console.log(`purge stale product ${SEMANTIC_ID}: ${del.status}`);
   }
 
@@ -210,12 +250,23 @@ async function main(): Promise<void> {
   let semanticProductCreated = false;
   try {
     // 1. Positive: create under the final semantic id (explicit id + name).
-    const create = await pbFetch(env.base, "/api/collections/products/records", {
-      method: "POST",
-      token: userToken,
-      body: productPayload(targetId, userId, `probe ${SEMANTIC_ID}`, SEMANTIC_ID),
-    });
-    console.log(`create product id=${SEMANTIC_ID}: ${create.status} ${JSON.stringify(create.json)}`);
+    const create = await pbFetch(
+      env.base,
+      "/api/collections/products/records",
+      {
+        method: "POST",
+        token: userToken,
+        body: productPayload(
+          targetId,
+          userId,
+          `probe ${SEMANTIC_ID}`,
+          SEMANTIC_ID,
+        ),
+      },
+    );
+    console.log(
+      `create product id=${SEMANTIC_ID}: ${create.status} ${JSON.stringify(create.json)}`,
+    );
     verdict(
       "semantic-id-create",
       create.status === 200
@@ -228,9 +279,16 @@ async function main(): Promise<void> {
     const short = await pbFetch(env.base, "/api/collections/products/records", {
       method: "POST",
       token: userToken,
-      body: productPayload(targetId, userId, `probe ${TOO_SHORT_ID}`, TOO_SHORT_ID),
+      body: productPayload(
+        targetId,
+        userId,
+        `probe ${TOO_SHORT_ID}`,
+        TOO_SHORT_ID,
+      ),
     });
-    console.log(`create product id=${TOO_SHORT_ID} (10 chars): ${short.status} ${JSON.stringify(short.json)}`);
+    console.log(
+      `create product id=${TOO_SHORT_ID} (10 chars): ${short.status} ${JSON.stringify(short.json)}`,
+    );
     verdict(
       "too-short-id",
       short.status === 400 && short.json?.data?.id
@@ -239,12 +297,18 @@ async function main(): Promise<void> {
     );
 
     // 3. Missing name: must be rejected on productName (required).
-    const noName = await pbFetch(env.base, "/api/collections/products/records", {
-      method: "POST",
-      token: userToken,
-      body: productPayload(targetId, userId, ""),
-    });
-    console.log(`create product without productName: ${noName.status} ${JSON.stringify(noName.json)}`);
+    const noName = await pbFetch(
+      env.base,
+      "/api/collections/products/records",
+      {
+        method: "POST",
+        token: userToken,
+        body: productPayload(targetId, userId, ""),
+      },
+    );
+    console.log(
+      `create product without productName: ${noName.status} ${JSON.stringify(noName.json)}`,
+    );
     verdict(
       "productname-required",
       noName.status === 400 && noName.json?.data?.productName
@@ -254,48 +318,63 @@ async function main(): Promise<void> {
 
     // 4. Purchase referencing the semantic product id.
     if (semanticProductCreated) {
-      const purchase = await pbFetch(env.base, "/api/collections/purchases/records", {
-        method: "POST",
-        token: userToken,
-        body: {
-          products: [SEMANTIC_ID],
-          eventId: targetId,
-          quantity: 100,
-          unit: "gr.",
-          status: "delivered",
-          notes: "probe semantic id",
-          store: null,
-          who: "probe",
-          price: null,
-          orderDate: null,
-          deliveryDate: null,
-          createdBy: userId,
-          invoiceId: "PROBE_SEMANTIC_ID",
-          invoiceTotal: null,
+      const purchase = await pbFetch(
+        env.base,
+        "/api/collections/purchases/records",
+        {
+          method: "POST",
+          token: userToken,
+          body: {
+            products: [SEMANTIC_ID],
+            eventId: targetId,
+            quantity: 100,
+            unit: "gr.",
+            status: "delivered",
+            notes: "probe semantic id",
+            store: null,
+            who: "probe",
+            price: null,
+            orderDate: null,
+            deliveryDate: null,
+            createdBy: userId,
+            invoiceId: "PROBE_SEMANTIC_ID",
+            invoiceTotal: null,
+          },
         },
-      });
-      console.log(`create purchase on ${SEMANTIC_ID}: ${purchase.status} ${JSON.stringify(purchase.json)}`);
+      );
+      console.log(
+        `create purchase on ${SEMANTIC_ID}: ${purchase.status} ${JSON.stringify(purchase.json)}`,
+      );
       verdict(
         "purchase-on-semantic-id",
         purchase.status === 200
           ? "accepted — relation points at the semantic id"
           : `${purchase.status} → ${classify(purchase.status, purchase.json)}`,
       );
-      if (purchase.status === 200) createdPurchaseIds.push(purchase.json.id as string);
+      if (purchase.status === 200)
+        createdPurchaseIds.push(purchase.json.id as string);
     }
   } finally {
     for (const id of createdPurchaseIds) {
-      const del = await pbFetch(env.base, `/api/collections/purchases/records/${id}`, {
-        method: "DELETE",
-        token: adminToken,
-      });
+      const del = await pbFetch(
+        env.base,
+        `/api/collections/purchases/records/${id}`,
+        {
+          method: "DELETE",
+          token: adminToken,
+        },
+      );
       console.log(`cleanup purchase ${id}: ${del.status}`);
     }
     if (semanticProductCreated) {
-      const del = await pbFetch(env.base, `/api/collections/products/records/${SEMANTIC_ID}`, {
-        method: "DELETE",
-        token: adminToken,
-      });
+      const del = await pbFetch(
+        env.base,
+        `/api/collections/products/records/${SEMANTIC_ID}`,
+        {
+          method: "DELETE",
+          token: adminToken,
+        },
+      );
       console.log(`cleanup product ${SEMANTIC_ID}: ${del.status}`);
     }
   }

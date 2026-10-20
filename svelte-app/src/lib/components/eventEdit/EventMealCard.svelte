@@ -277,11 +277,11 @@
 </script>
 
 <div
-  class="card bg-base-100 border-base-200 border shadow-sm transition-all hover:shadow-md {isEditing
-    ? 'ring-accent/40 ring-2'
+  class="card border border-base-200 bg-base-100 shadow-sm transition-all hover:shadow-md {isEditing
+    ? 'ring-2 ring-accent/40'
     : ''} {isEditing || disabled
     ? ''
-    : 'hover:ring-accent/60 cursor-pointer hover:ring-2'} {disabled
+    : 'cursor-pointer hover:ring-2 hover:ring-accent/60'} {disabled
     ? 'opacity-75'
     : ''}"
   role="button"
@@ -296,7 +296,7 @@
     <div class="mb-2 flex items-start justify-between">
       <div class="flex flex-wrap items-center gap-4">
         <span
-          class="text-primary text-lg font-medium {isDuplicateDate &&
+          class="text-lg font-medium text-primary {isDuplicateDate &&
             'text-error'}"
         >
           {meal.date ? formatDateShort(meal.date) : "Date non définie"}
@@ -308,7 +308,7 @@
           <TimeIcon size={16} />
           <div>{displayTime ? displayTime.toUpperCase() : "REPAS"}</div>
         </div>
-        <div class="text-base-content/80 flex items-center gap-1 font-semibold">
+        <div class="flex items-center gap-1 font-semibold text-base-content/80">
           <Users class="size-4 stroke-3" />
           {meal.guests} pers.
         </div>
@@ -336,7 +336,7 @@
             <Copy class="h-4 w-4" />
           </button> -->
           <button
-            class="btn btn-ghost btn-square text-error"
+            class="btn btn-square btn-ghost text-error"
             onclick={handleDeleteClick}
             title="Supprimer"
             {disabled}
@@ -375,7 +375,7 @@
               />
             </label>
             {#if isDuplicateDate}
-              <p class="text-error mt-1 text-xs">
+              <p class="mt-1 text-xs text-error">
                 Cette date/heure est déjà utilisée
               </p>
             {/if}
@@ -400,7 +400,7 @@
           <div>
             <label class="input">
               <span class="label">
-                <Utensils class="text-base-content/50 me-1 h-4 w-4" />
+                <Utensils class="me-1 h-4 w-4 text-base-content/50" />
                 Couverts
               </span>
               <input
@@ -410,7 +410,7 @@
                 min="1"
               />
             </label>
-            <p class="text-base-content/60 pl-2 text-xs">
+            <p class="pl-2 text-xs text-base-content/60">
               Peut etre modifié individuellement pour chaque recette
             </p>
           </div>
@@ -420,7 +420,7 @@
         <div class="w-full space-y-2 py-4">
           <div class="flex items-center justify-between">
             <div
-              class="text-base-content/70 flex items-center gap-2 font-medium"
+              class="flex items-center gap-2 font-medium text-base-content/70"
             >
               <ChefHat class="size-5" />
               Recettes
@@ -434,8 +434,8 @@
                 {@const isMissing = isRecipeMissing(recipe.recipeUuid)}
                 <div
                   animate:flip={{ duration: 200 }}
-                  class="bg-base-200 flex flex-wrap items-center gap-3 rounded-lg p-3 {isMissing &&
-                    'border-error border-2'}"
+                  class="flex flex-wrap items-center gap-3 rounded-lg bg-base-200 p-3 {isMissing &&
+                    'border-2 border-error'}"
                 >
                   <!-- Icône -->
                   <div class="flex flex-1 items-center gap-2">
@@ -454,7 +454,7 @@
                         {recipeIndex?.title ||
                           getRecipeShortUuid(recipe.recipeUuid)}
                         {#if isMissing}
-                          <span class="text-error ms-2 text-sm font-normal">
+                          <span class="ms-2 text-sm font-normal text-error">
                             (Recette introuvable)
                           </span>
                         {/if}
@@ -477,7 +477,7 @@
                     <!-- Couverts -->
                     {#if editablePlates[getRecipeKey(recipe.recipeUuid)]}
                       <div
-                        class="ring-base-300 flex items-center gap-1 rounded-xl p-1 ring-1"
+                        class="flex items-center gap-1 rounded-xl p-1 ring-1 ring-base-300"
                       >
                         <div class="input w-28">
                           <Utensils class="h-4 w-4 opacity-50" />
@@ -490,17 +490,17 @@
                         </div>
 
                         <button
-                          class="btn btn-sm btn-circle me-1"
+                          class="btn me-1 btn-circle btn-sm"
                           onclick={() => {
                             editablePlates[getRecipeKey(recipe.recipeUuid)] =
                               false;
                           }}
                           title="Valider"
                         >
-                          <Check class="text-success h-4 w-4" />
+                          <Check class="h-4 w-4 text-success" />
                         </button>
                         <button
-                          class="btn btn-sm btn-circle"
+                          class="btn btn-circle btn-sm"
                           onclick={() => {
                             editablePlates[getRecipeKey(recipe.recipeUuid)] =
                               false;
@@ -509,7 +509,7 @@
                           }}
                           title="Revenir au nombre de couvert du repas ({meal.guests})"
                         >
-                          <RefreshCcw class="text-secondary h-4 w-4" />
+                          <RefreshCcw class="h-4 w-4 text-secondary" />
                         </button>
                       </div>
                     {:else}
@@ -530,7 +530,7 @@
                         </span>
                         <PencilLine
                           size={14}
-                          class="text-base-content/70  ms-1"
+                          class="ms-1  text-base-content/70"
                         />
                       </button>
                     {/if}
@@ -539,7 +539,7 @@
                     {#if onOpenReassignMealDate && meal.id}
                       {@const mealId = meal.id}
                       <button
-                        class="btn btn-ghost btn-sm btn-square"
+                        class="btn btn-square btn-ghost btn-sm"
                         onclick={() =>
                           onOpenReassignMealDate(
                             mealId,
@@ -555,7 +555,7 @@
                   <div class="ms-auto">
                     <!-- Supprimer -->
                     <button
-                      class="btn btn-ghost btn-sm btn-square text-error"
+                      class="btn btn-square btn-ghost text-error btn-sm"
                       onclick={() => removeRecipe(recipe.recipeUuid)}
                       title="Retirer la recette"
                       {disabled}
@@ -589,7 +589,7 @@
                   recipe.typeR,
                   isMissing,
                 )} h-auto gap-2 py-1 font-medium {isMissing
-                  ? 'ring-error ring-1'
+                  ? 'ring-1 ring-error'
                   : ''}"
               >
                 <ChefHat class="size-4 shrink-0" />
@@ -597,7 +597,7 @@
                   >{recipeIndex?.title ||
                     getRecipeShortUuid(recipe.recipeUuid)}</span
                 >
-                <span class="badge badge-sm badge-outline font-normal">
+                <span class="badge badge-outline badge-sm font-normal">
                   {recipe.plates}
                   <Utensils size={12} />
                 </span>
@@ -605,7 +605,7 @@
             {/each}
           </div>
         {:else}
-          <p class="text-base-content/60 text-sm italic">Aucune recette</p>
+          <p class="text-sm text-base-content/60 italic">Aucune recette</p>
         {/if}
       </div>
     {/if}

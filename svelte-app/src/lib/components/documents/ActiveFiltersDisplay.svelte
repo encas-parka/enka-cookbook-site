@@ -17,10 +17,10 @@
   const hasActiveFilters = $derived(filters.tags.length > 0);
 </script>
 
-<fieldset class="fieldset border-base-300 relative rounded-lg border-2">
+<fieldset class="relative fieldset rounded-lg border-2 border-base-300">
   <!-- Compteur de résultats -->
   {#if hasActiveFilters || searchQuery.length >= 2}
-    <legend class="legend text-base-content/70 ms-4">
+    <legend class="legend ms-4 text-base-content/70">
       {#if resultCount > 1}
         <span class="font-semibold">{resultCount} documents</span> correspondent aux
         critères
@@ -34,7 +34,7 @@
 
   <div class="p-4">
     {#if !hasActiveFilters && searchQuery.length < 2}
-      <div class="text-base-content/70 text-base">
+      <div class="text-base text-base-content/70">
         {resultCount} document{resultCount > 1 ? "s" : ""}
       </div>
     {/if}
@@ -58,7 +58,7 @@
 
       <!-- Bouton reset -->
       <div class="mt-3 text-end">
-        <button class="btn btn-warning btn-sm" onclick={onResetFilters}>
+        <button class="btn btn-sm btn-warning" onclick={onResetFilters}>
           <Eraser class="h-4 w-4" />
           Effacer tous les filtres
         </button>

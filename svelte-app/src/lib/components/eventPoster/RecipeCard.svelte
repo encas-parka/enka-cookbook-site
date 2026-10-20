@@ -236,7 +236,7 @@
     <!-- Actions (no-print) -->
     <div class="recipe-actions no-print flex gap-1">
       <button
-        class="btn btn-ghost btn-circle hover:bg-error/10 hover:text-error transition-colors"
+        class="btn btn-circle btn-ghost transition-colors hover:bg-error/10 hover:text-error"
         onclick={() => onToggle(recipeKey)}
         title="Masquer la recette"
       >
@@ -249,7 +249,7 @@
       <!-- Recipe Name -->
       {#if isEditing}
         <div class="mx-auto mb-2 max-w-sm">
-          <label class="input input-sm w-full">
+          <label class="input w-full input-sm">
             <input
               bind:this={editInput}
               type="text"
@@ -284,13 +284,12 @@
             <div class="mx-auto mt-2 max-w-sm">
               <textarea
                 bind:this={descriptionInput}
-                class="textarea textarea-xs w-full text-center"
+                class="textarea w-full text-center textarea-xs"
                 rows="2"
                 bind:value={tempDescription}
                 onblur={handleFinishEditDescription}
                 onkeydown={handleDescriptionKeyDown}
-                placeholder="Ajouter une description..."
-              ></textarea>
+                placeholder="Ajouter une description..."></textarea>
             </div>
           {:else}
             <div class="flex items-center justify-center gap-2 px-4">
@@ -314,7 +313,7 @@
               </button>
 
               <button
-                class="no-print btn btn-ghost btn-circle btn-xs hover:bg-error/10 hover:text-error opacity-0 transition-opacity group-hover/desc:opacity-100"
+                class="no-print btn btn-circle btn-ghost opacity-0 transition-opacity btn-xs group-hover/desc:opacity-100 hover:bg-error/10 hover:text-error"
                 onclick={() => onToggleDescription(recipeKey)}
                 title="Masquer la description"
               >
@@ -369,7 +368,7 @@
               <div class="mx-auto mt-1 max-w-sm">
                 <textarea
                   bind:this={ingredientInput}
-                  class="textarea textarea-xs w-full text-center"
+                  class="textarea w-full text-center textarea-xs"
                   rows="3"
                   bind:value={tempIngredients}
                   onblur={handleFinishEditIngredients}

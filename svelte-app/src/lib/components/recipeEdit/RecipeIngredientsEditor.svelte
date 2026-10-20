@@ -279,18 +279,18 @@
 <div class="space-y-4" id="recipe-ingredients-editor">
   <!-- Indicateur de chargement -->
   {#if recipeDataStore.loading}
-    <div class="card bg-base-100 border-base-300 border shadow-sm">
+    <div class="card border border-base-300 bg-base-100 shadow-sm">
       <div class="card-body p-4">
         <div class="flex items-center gap-3">
-          <div class="loading loading-spinner loading-sm"></div>
+          <div class="loading loading-sm loading-spinner"></div>
           <span class="text-sm">Chargement des ingrédients...</span>
         </div>
       </div>
     </div>
   {:else if recipeDataStore.error}
-    <div class="card bg-error/10 border-error/20 border shadow-sm">
+    <div class="card border border-error/20 bg-error/10 shadow-sm">
       <div class="card-body p-4">
-        <div class="text-error flex items-center gap-3">
+        <div class="flex items-center gap-3 text-error">
           <TriangleAlert class="h-4 w-4" />
           <span class="text-sm"
             >Erreur lors du chargement: {recipeDataStore.error}</span
@@ -300,10 +300,10 @@
     </div>
   {:else}
     <!-- Recherche et ajout d'ingrédient -->
-    <div class="card bg-base-100 border-base-300 border shadow-sm">
+    <div class="card border border-base-300 bg-base-100 shadow-sm">
       <div class="card-body gap-3 p-3">
         <div class="flex items-center gap-2 font-bold">
-          <Plus class="text-primary h-4 w-4" />
+          <Plus class="h-4 w-4 text-primary" />
           Ajouter un ingrédient
         </div>
 
@@ -342,7 +342,7 @@
             <!-- Dropdown toggle button -->
             <button
               type="button"
-              class="btn btn-ghost btn-sm absolute top-1/2 right-1 -translate-y-1/2"
+              class="btn absolute top-1/2 right-1 -translate-y-1/2 btn-ghost btn-sm"
               onclick={toggleDropdown}
               {disabled}
               aria-label={isOpen ? "Fermer le menu" : "Ouvrir le menu"}
@@ -360,20 +360,20 @@
 
               <div
                 id="ingredients-list"
-                class="border-base-300 bg-base-100 absolute z-50 mt-1 max-h-60 w-full overflow-auto rounded-lg border shadow-lg"
+                class="absolute z-50 mt-1 max-h-60 w-full overflow-auto rounded-lg border border-base-300 bg-base-100 shadow-lg"
                 role="listbox"
               >
                 {#if results.length === 0}
-                  <div class="text-base-content/50 px-4 py-2 text-sm">
+                  <div class="px-4 py-2 text-sm text-base-content/50">
                     Aucun ingrédient trouvé
                   </div>
 
                   <!-- Option "Créer" -->
                   {#if searchQuery.trim().length > 0}
-                    <div class="border-base-300 mt-1 border-t pt-1">
+                    <div class="mt-1 border-t border-base-300 pt-1">
                       <button
                         type="button"
-                        class="hover:bg-primary/20 text-primary flex w-full items-center gap-3 px-4 py-3 text-left hover:cursor-pointer"
+                        class="flex w-full items-center gap-3 px-4 py-3 text-left text-primary hover:cursor-pointer hover:bg-primary/20"
                         onclick={() => openCreateModal()}
                         {disabled}
                       >
@@ -381,7 +381,7 @@
                         <span class="text-sm font-medium"
                           >Créer un nouvel ingrédient...</span
                         >
-                        <span class="text-base-content/50 text-xs"
+                        <span class="text-xs text-base-content/50"
                           >"{searchQuery}"</span
                         >
                       </button>
@@ -392,18 +392,19 @@
                     <button
                       type="button"
                       id="ingredient-{index}"
-                      class="hover:bg-base-200 flex w-full items-center gap-3 px-4 py-3 text-left hover:cursor-pointer {index ===
+                      class="flex w-full items-center gap-3 px-4 py-3 text-left hover:cursor-pointer hover:bg-base-200 {index ===
                       selectedIndex
                         ? 'bg-base-200'
                         : ''}"
-                      onclick={() => addIngredientFromSearch(result.ingredient.ref)}
+                      onclick={() =>
+                        addIngredientFromSearch(result.ingredient.ref)}
                       onmouseenter={() => (selectedIndex = index)}
                       role="option"
                       aria-selected={index === selectedIndex}
                       {disabled}
                     >
                       <div class="flex-1">
-                        <span class="text-sm font-medium fuzzysort-highlight"
+                        <span class="fuzzysort-highlight text-sm font-medium"
                           >{@html result.highlighted}</span
                         >
                       </div>
@@ -412,10 +413,10 @@
 
                   <!-- Option "Créer" après les résultats -->
                   {#if searchQuery.trim().length > 0}
-                    <div class="border-base-300 mt-1 border-t pt-1">
+                    <div class="mt-1 border-t border-base-300 pt-1">
                       <button
                         type="button"
-                        class="hover:bg-primary/20 text-primary flex w-full items-center gap-3 px-4 py-3 text-left hover:cursor-pointer"
+                        class="flex w-full items-center gap-3 px-4 py-3 text-left text-primary hover:cursor-pointer hover:bg-primary/20"
                         onclick={() => openCreateModal()}
                         {disabled}
                       >
@@ -442,14 +443,14 @@
       {@const TypeIcon = typeInfo.icon}
 
       <!-- Card pour le type -->
-      <div class="card bg-base-300 border-base-300 border shadow-sm">
+      <div class="card border border-base-300 bg-base-300 shadow-sm">
         <div class="card-body p-2">
           <div
-            class="card-title text-secondary/80 flex items-center gap-2 px-4 text-sm font-semibold"
+            class="card-title flex items-center gap-2 px-4 text-sm font-semibold text-secondary/80"
           >
             <TypeIcon class="h-4 w-4" />
             {typeInfo.displayName}
-            <span class="badge badge-xs badge-primary badge-soft"
+            <span class="badge badge-soft badge-xs badge-primary"
               >{typeIngredients.length}</span
             >
           </div>
@@ -460,7 +461,7 @@
               {@const preview = getNormalizedPreview(ingredient)}
 
               <div
-                class="card bg-base-100 border-base-200 border shadow-sm"
+                class="card border border-base-200 bg-base-100 shadow-sm"
                 transition:slide
               >
                 <div class="card-body p-3">
@@ -478,7 +479,7 @@
                             </div>
 
                             <div class="flex flex-wrap items-center gap-2">
-                              <label class="input input-sm w-fit">
+                              <label class="input w-fit input-sm">
                                 <span class="label text-base-content/80"
                                   >Quantité</span
                                 >
@@ -497,7 +498,7 @@
                                   />
                                 </div>
                               </label>
-                              <label class="select select-sm w-fit">
+                              <label class="select w-fit select-sm">
                                 <span class="label text-base-content/80"
                                   >unité</span
                                 >
@@ -529,7 +530,7 @@
                           </div>
                           <!-- Bouton supprimer -->
                           <button
-                            class="btn btn-ghost btn-sm btn-square text-error"
+                            class="btn btn-square btn-ghost text-error btn-sm"
                             onclick={() => removeIngredient(ingredient.ref)}
                             title="Supprimer cet ingrédient"
                             {disabled}
@@ -540,14 +541,14 @@
 
                         <!-- Aperçu de la normalisation -->
                         {#if preview}
-                          <div class="text-base-content/60 text-xs italic">
+                          <div class="text-xs text-base-content/60 italic">
                             {preview}
                           </div>
                         {/if}
                       </div>
 
                       <!-- Commentaire -->
-                      <label class="input input-sm w-full">
+                      <label class="input w-full input-sm">
                         <span class="label">Note</span>
                         <input
                           type="text"
@@ -568,7 +569,6 @@
     {/each}
   {/if}
 </div>
-
 
 <!-- Modal de création d'ingrédient -->
 <CreateIngredientModal

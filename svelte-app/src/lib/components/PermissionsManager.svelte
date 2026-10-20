@@ -321,7 +321,7 @@
 
 <Fieldset legend="Participants">
   <!-- Équipe minimale -->
-  <fieldset class="fieldset mb-4">
+  <fieldset class="mb-4 fieldset">
     {#if editingMinContrib}
       <label class="input w-56">
         <span class="label">Minimum</span>
@@ -358,7 +358,7 @@
         </div>
       </button>
     {/if}
-    <div class="fieldset-label ms-1">
+    <div class="ms-1 fieldset-label">
       Combien faudrait-il être pour tout gérer ?
     </div>
   </fieldset>
@@ -374,7 +374,7 @@
             <legend class="legend">Équipes invitées</legend>
             <div class="flex flex-wrap gap-2">
               {#each event.teams as teamName}
-                <div class="badge badge-primary badge-soft badge-lg gap-2 p-3">
+                <div class="badge gap-2 badge-soft p-3 badge-lg badge-primary">
                   <Users class="inline size-4" />
                   <span class="font-medium">{teamName}</span>
                 </div>
@@ -391,7 +391,7 @@
 
           <div class="flex flex-wrap gap-2">
             {#each acceptedContributors as contributor (contributor.id)}
-              <div class="badge badge-soft badge-success gap-2 p-3">
+              <div class="badge gap-2 badge-soft p-3 badge-success">
                 <span class="font-medium"
                   >{contributor.name || contributor.email}</span
                 >
@@ -416,12 +416,12 @@
       <!-- Invited -->
       {#if invitedContributors.length > 0}
         <fieldset class="fieldset">
-          <legend class="text-base-content/70 text-sm font-medium"
+          <legend class="text-sm font-medium text-base-content/70"
             >Invité·es</legend
           >
           <div class="flex flex-wrap gap-2">
             {#each invitedContributors as contributor (contributor.id)}
-              <div class="badge badge-warning badge-soft gap-2 p-3">
+              <div class="badge gap-2 badge-soft p-3 badge-warning">
                 <span class="font-medium"
                   >{contributor.name || contributor.email}</span
                 >
@@ -434,12 +434,12 @@
       <!-- Declined -->
       {#if declinedContributors.length > 0}
         <fieldset class="fieldset">
-          <legend class="text-base-content/70 text-sm font-medium"
+          <legend class="text-sm font-medium text-base-content/70"
             >ne participent pas</legend
           >
           <div class="flex flex-wrap items-center gap-2">
             {#each declinedContributors as contributor (contributor.id)}
-              <div class="badge badge-error badge-soft gap-2 p-3">
+              <div class="badge gap-2 badge-soft p-3 badge-error">
                 <span class="font-medium"
                   >{contributor.name || contributor.email}</span
                 >
@@ -461,7 +461,7 @@
     <!-- Bouton pour ouvrir le modal d'invitation -->
     <div class="my-2">
       <button
-        class="btn btn-primary btn-outline btn-block gap-1"
+        class="btn btn-block gap-1 btn-outline btn-primary"
         onclick={() => (showInviteModal = true)}
       >
         <UserPlus class="mr-2 h-4 w-4" />
@@ -478,7 +478,7 @@
       <LinkIcon class="inline size-4 shrink-0" /> Lien de partage
     </div>
 
-    <div class="alert alert-info mt-6">
+    <div class="mt-6 alert alert-info">
       <div class="text-sm">
         <p>
           Les liens de partage permettent à n'importe qui d'accéder à
@@ -494,15 +494,15 @@
       <div class="mt-4 space-y-2">
         {#each shareLinkIds as linkId (linkId)}
           <div
-            class="bg-base-200 flex items-center justify-between gap-2 rounded-md p-2"
+            class="flex items-center justify-between gap-2 rounded-md bg-base-200 p-2"
           >
             <div
-              class="text-base-content/80 flex-1 overflow-auto font-mono text-xs"
+              class="flex-1 overflow-auto font-mono text-xs text-base-content/80"
             >
               {window.location.origin}/join/{linkId}
             </div>
             <button
-              class="btn btn-ghost btn-xs text-primary"
+              class="btn btn-ghost text-primary btn-xs"
               aria-label="Copier"
               title="Copier le lien"
               onclick={() => copyToClipboard(linkId)}
@@ -513,17 +513,17 @@
         {/each}
       </div>
     {:else}
-      <p class="text-base-content/50 mt-2 py-4 text-sm italic">
+      <p class="mt-2 py-4 text-sm text-base-content/50 italic">
         Aucun lien de partage généré pour le moment.
       </p>
       <button
-        class="btn btn-outline btn-primary mt-4 w-full"
+        class="btn mt-4 w-full btn-outline btn-primary"
         onclick={handleGenerateLink}
         disabled={isGenerating}
       >
         {#if isGenerating}
           <span
-            class="loading loading-spinner loading-xs hidden md:inline-block"
+            class="loading hidden loading-xs loading-spinner md:inline-block"
           ></span>
           Génération...
         {:else}
@@ -568,7 +568,7 @@
           </button>
         </div>
         {#if inviteError}
-          <p class="text-error mt-1 text-xs">{inviteError}</p>
+          <p class="mt-1 text-xs text-error">{inviteError}</p>
         {/if}
 
         <div class="flex flex-wrap gap-2">
@@ -597,7 +597,7 @@
               </p>
               <div class="flex flex-wrap gap-2">
                 {#each event.teams as teamName}
-                  <div class="badge badge-primary badge-soft badge-lg">
+                  <div class="badge badge-soft badge-lg badge-primary">
                     <Users class="inline size-4" />{teamName}
                   </div>
                 {/each}
@@ -619,7 +619,7 @@
             <div class="flex flex-wrap gap-4">
               {#each availableTeams as team}
                 <label
-                  class="hover:bg-secondary/20 bg-secondary/10 flex cursor-pointer items-center gap-3 rounded-lg px-4 py-2 transition-colors"
+                  class="flex cursor-pointer items-center gap-3 rounded-lg bg-secondary/10 px-4 py-2 transition-colors hover:bg-secondary/20"
                 >
                   <input
                     type="checkbox"

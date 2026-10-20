@@ -27,7 +27,11 @@ function makeFilters(overrides: Partial<FiltersState> = {}): FiltersState {
 }
 
 const searchable = [
-  { id: "p1", productName: "Crème liquide", recipeNames: "Tarte aux pommes Quiche" },
+  {
+    id: "p1",
+    productName: "Crème liquide",
+    recipeNames: "Tarte aux pommes Quiche",
+  },
   { id: "p2", productName: "Beurre doux", recipeNames: "Gâteau" },
 ];
 

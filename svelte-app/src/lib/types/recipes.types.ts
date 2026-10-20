@@ -13,7 +13,10 @@ import {
 import type { Astuce } from "../utils/recipeUtils";
 import type { PbDoc } from "$lib/db-sync/aw-types";
 
-export { RecipesTypeROptions as RecettesTypeR, RecipesStatusOptions as RecettesStatus };
+export {
+  RecipesTypeROptions as RecettesTypeR,
+  RecipesStatusOptions as RecettesStatus,
+};
 
 // Types étendus pour bridgeToMap + delta sync (nécessitent id, created, updated)
 export type IngredientsDoc = IngredientsRecord & PbDoc;
@@ -201,7 +204,9 @@ export interface CreateIngredientData {
  * consommateurs de l'application (`getIngredientByRef`) utilisent
  * la ref métier comme identifiant.
  */
-export function toAppIngredient(record: IngredientsRecord & { id?: string }): Ingredient {
+export function toAppIngredient(
+  record: IngredientsRecord & { id?: string },
+): Ingredient {
   // Le ref PB est l'identifiant principal pour l'app
   // Fallback sur record.id pour les ingrédients créés sans ref explicite
   const ref = record.ref || record.id || "";

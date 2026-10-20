@@ -6,7 +6,7 @@
  * @module db-sync/pb
  */
 
-import PocketBase from 'pocketbase';
+import PocketBase from "pocketbase";
 
 // =============================================================================
 // CONFIGURATION
@@ -17,8 +17,7 @@ import PocketBase from 'pocketbase';
  * - Dev: http://localhost:8090 (Vite proxies are NOT used — direct access)
  * - Prod: env var VITE_POCKETBASE_URL or same origin
  */
-const PB_URL =
-	import.meta.env.VITE_POCKETBASE_URL ?? 'http://localhost:8090';
+const PB_URL = import.meta.env.VITE_POCKETBASE_URL ?? "http://localhost:8090";
 
 // =============================================================================
 // SINGLETON

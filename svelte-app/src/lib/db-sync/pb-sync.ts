@@ -11,7 +11,7 @@
  */
 
 // PocketBase client
-export { pb } from './pb';
+export { pb } from "./pb";
 
 // Dexie database (unchanged — same EnkaDB, same id PK)
 export {
@@ -22,29 +22,33 @@ export {
   type RecipeDataRow,
   type CatalogRow,
   type ProductNeedRow,
-  type SyncMetaRow
-} from './aw-db';
+  type SyncMetaRow,
+} from "./aw-db";
 
 // Core sync collection
 export {
   createSyncCollection,
   mergeByKey,
   RecordDeletedError,
-  RecordNotFoundError
-} from './pb-collection';
+  RecordNotFoundError,
+} from "./pb-collection";
 
 // Realtime signals (SSE connect/disconnect → StatusBar + resync orchestrateur)
 export {
   initRealtimeSignals,
   onRealtimeReconnect,
-  teardownRealtimeSignals
-} from './pb-realtime';
+  teardownRealtimeSignals,
+} from "./pb-realtime";
 
 // Bridge (100% backend-agnostic — 0 change)
-export { bridgeToMap, bridgeToMapFiltered, type BridgeResult } from './aw-bridge';
+export {
+  bridgeToMap,
+  bridgeToMapFiltered,
+  type BridgeResult,
+} from "./aw-bridge";
 
 // LiveQuery hook (100% backend-agnostic — 0 change)
-export { useLiveQuery } from './use-live-query.svelte';
+export { useLiveQuery } from "./use-live-query.svelte";
 
 // PocketBase-specific types
 export type {
@@ -54,5 +58,5 @@ export type {
   PbSyncOptions,
   PbSubscriptionRef,
   PbCollectionName,
-  PbDoc
-} from './pb-types';
+  PbDoc,
+} from "./pb-types";

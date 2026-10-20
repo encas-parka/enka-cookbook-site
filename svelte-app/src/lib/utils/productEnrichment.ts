@@ -68,12 +68,12 @@ type ProductWithOptionalPurchases = Partial<PbDoc> & {
   mergedInto: string | null;
   totalNeededOverride: string | null;
   updatedBy: string | null;
-  	isSynced: boolean;
-  	// Champ Appwrite hérité : absent des records PB bruts (il vit sur ParsedNeed)
-  	mainId?: string | Main;
-  	productType: string | null;
-  	specs: string | null;
-  };
+  isSynced: boolean;
+  // Champ Appwrite hérité : absent des records PB bruts (il vit sur ParsedNeed)
+  mainId?: string | Main;
+  productType: string | null;
+  specs: string | null;
+};
 
 /**
  * Construit un EnrichedProduct de base depuis un produit Appwrite brut.

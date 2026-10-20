@@ -48,7 +48,9 @@ interface Env {
 
 function loadEnv(): Env {
   if (!existsSync(ENV_FILE)) {
-    console.error(`Missing ${ENV_FILE} — add PB_URL / PB_ADMIN_* / PB_USER_* there.`);
+    console.error(
+      `Missing ${ENV_FILE} — add PB_URL / PB_ADMIN_* / PB_USER_* there.`,
+    );
     process.exit(1);
   }
   const env: Record<string, string> = {};
@@ -59,8 +61,13 @@ function loadEnv(): Env {
     if (eqIdx === -1) continue;
     env[trimmed.slice(0, eqIdx).trim()] = trimmed.slice(eqIdx + 1).trim();
   }
-  const missing = ["PB_URL", "PB_ADMIN_EMAIL", "PB_ADMIN_PASSWORD", "PB_USER_EMAIL", "PB_USER_PASSWORD"]
-    .filter((k) => !env[k]);
+  const missing = [
+    "PB_URL",
+    "PB_ADMIN_EMAIL",
+    "PB_ADMIN_PASSWORD",
+    "PB_USER_EMAIL",
+    "PB_USER_PASSWORD",
+  ].filter((k) => !env[k]);
   if (missing.length > 0) {
     console.error(`Missing env keys in ${ENV_FILE}: ${missing.join(", ")}`);
     process.exit(1);
@@ -156,7 +163,10 @@ class RealtimeClient {
     return { event, data };
   }
 
-  async waitFor(pred: (e: SseEvent) => boolean, ms: number): Promise<SseEvent | null> {
+  async waitFor(
+    pred: (e: SseEvent) => boolean,
+    ms: number,
+  ): Promise<SseEvent | null> {
     const deadline = Date.now() + ms;
     let start = 0;
     for (;;) {
@@ -190,23 +200,35 @@ async function main(): Promise<void> {
   }
 
   // 1. Admin auth (setup + inspection + cleanup only)
-  const admin = await pbFetch(env.base, "/api/collections/_superusers/auth-with-password", {
-    method: "POST",
-    body: { identity: env.adminEmail, password: env.adminPassword },
-  });
+  const admin = await pbFetch(
+    env.base,
+    "/api/collections/_superusers/auth-with-password",
+    {
+      method: "POST",
+      body: { identity: env.adminEmail, password: env.adminPassword },
+    },
+  );
   if (admin.status !== 200) {
-    console.error(`Admin auth failed (${admin.status}) — check PB_ADMIN_* in .env.local`);
+    console.error(
+      `Admin auth failed (${admin.status}) — check PB_ADMIN_* in .env.local`,
+    );
     process.exit(1);
   }
   const adminToken = admin.json.token as string;
 
   // 2. ghald auth (userA — creator, does the save)
-  const user = await pbFetch(env.base, "/api/collections/users/auth-with-password", {
-    method: "POST",
-    body: { identity: env.userEmail, password: env.userPassword },
-  });
+  const user = await pbFetch(
+    env.base,
+    "/api/collections/users/auth-with-password",
+    {
+      method: "POST",
+      body: { identity: env.userEmail, password: env.userPassword },
+    },
+  );
   if (user.status !== 200) {
-    console.error(`User auth failed (${user.status}) — check PB_USER_* in .env.local`);
+    console.error(
+      `User auth failed (${user.status}) — check PB_USER_* in .env.local`,
+    );
     process.exit(1);
   }
   const userToken = user.json.token as string;
@@ -229,15 +251,21 @@ async function main(): Promise<void> {
     },
   });
   if (probeUser.status !== 200) {
-    console.log(`probe user creation failed: ${probeUser.status} ${JSON.stringify(probeUser.json).slice(0, 300)}`);
+    console.log(
+      `probe user creation failed: ${probeUser.status} ${JSON.stringify(probeUser.json).slice(0, 300)}`,
+    );
     process.exit(1);
   }
   const probeUserId = probeUser.json.id as string;
 
-  const probeAuth = await pbFetch(env.base, "/api/collections/users/auth-with-password", {
-    method: "POST",
-    body: { identity: probeEmail, password: probePassword },
-  });
+  const probeAuth = await pbFetch(
+    env.base,
+    "/api/collections/users/auth-with-password",
+    {
+      method: "POST",
+      body: { identity: probeEmail, password: probePassword },
+    },
+  );
   if (probeAuth.status !== 200) {
     console.log(`probe user auth failed: ${probeAuth.status}`);
     process.exit(1);
@@ -256,7 +284,9 @@ async function main(): Promise<void> {
     },
   });
   if (event.status !== 200) {
-    console.log(`probe event creation failed: ${event.status} ${JSON.stringify(event.json).slice(0, 300)}`);
+    console.log(
+      `probe event creation failed: ${event.status} ${JSON.stringify(event.json).slice(0, 300)}`,
+    );
     process.exit(1);
   }
   const eventId = event.json.id as string;
@@ -266,19 +296,25 @@ async function main(): Promise<void> {
   let docId: string | null = null;
   try {
     // 5. ghald creates the teamdoc (exact SPA payload of createEventDocument)
-    const create = await pbFetch(env.base, "/api/collections/teamdocs/records", {
-      method: "POST",
-      token: userToken,
-      body: {
-        title: "probe-t05 doc",
-        content: "version 1",
-        tags: ["materiel"],
-        eventId,
-        status: "doc",
+    const create = await pbFetch(
+      env.base,
+      "/api/collections/teamdocs/records",
+      {
+        method: "POST",
+        token: userToken,
+        body: {
+          title: "probe-t05 doc",
+          content: "version 1",
+          tags: ["materiel"],
+          eventId,
+          status: "doc",
+        },
       },
-    });
+    );
     if (create.status !== 200) {
-      console.log(`ghald doc create failed: ${create.status} ${JSON.stringify(create.json).slice(0, 300)}`);
+      console.log(
+        `ghald doc create failed: ${create.status} ${JSON.stringify(create.json).slice(0, 300)}`,
+      );
       process.exit(1);
     }
     docId = create.json.id as string;
@@ -286,12 +322,16 @@ async function main(): Promise<void> {
 
     // 6. userB opens the SSE connection — collection-wide, like the SPA store
     await sse.connect(env.base);
-    const connectEvent = await sse.waitFor((e) => e.event === "PB_CONNECT", TIMEOUT_MS);
+    const connectEvent = await sse.waitFor(
+      (e) => e.event === "PB_CONNECT",
+      TIMEOUT_MS,
+    );
     if (!connectEvent) {
       verdict("sse-connect", "PB_CONNECT NOT received within timeout");
       return;
     }
-    const clientId = (JSON.parse(connectEvent.data) as { clientId: string }).clientId;
+    const clientId = (JSON.parse(connectEvent.data) as { clientId: string })
+      .clientId;
     verdict("sse-connect", `PB_CONNECT received (clientId ${clientId})`);
 
     const sub = await pbFetch(env.base, "/api/realtime", {
@@ -299,21 +339,35 @@ async function main(): Promise<void> {
       token: probeToken,
       body: { clientId, subscriptions: ["teamdocs/*"] },
     });
-    verdict("sse-subscribe", `teamdocs/* ${sub.status === 204 ? "accepted (204)" : `rejected (${sub.status})`}`);
+    verdict(
+      "sse-subscribe",
+      `teamdocs/* ${sub.status === 204 ? "accepted (204)" : `rejected (${sub.status})`}`,
+    );
     if (sub.status !== 204) return;
 
     // Let the subscription register server-side before the write
     await sleep(300);
 
     // 7. ghald saves — the app's update path (PATCH)
-    const patch = await pbFetch(env.base, `/api/collections/teamdocs/records/${docId}`, {
-      method: "PATCH",
-      token: userToken,
-      body: { title: "probe-t05 doc", content: "version 2 — saved by userA", tags: ["materiel", "tache"] },
-    });
+    const patch = await pbFetch(
+      env.base,
+      `/api/collections/teamdocs/records/${docId}`,
+      {
+        method: "PATCH",
+        token: userToken,
+        body: {
+          title: "probe-t05 doc",
+          content: "version 2 — saved by userA",
+          tags: ["materiel", "tache"],
+        },
+      },
+    );
     console.log(`update teamdocs (by ghald): ${patch.status}`);
     if (patch.status !== 200) {
-      verdict("sse-delivery", `update itself failed (${patch.status}) — probe setup broken`);
+      verdict(
+        "sse-delivery",
+        `update itself failed (${patch.status}) — probe setup broken`,
+      );
       return;
     }
 
@@ -325,7 +379,10 @@ async function main(): Promise<void> {
       TIMEOUT_MS,
     );
     if (!received) {
-      verdict("sse-delivery", "NOT delivered within timeout (no teamdocs/* event carrying the doc for the guest)");
+      verdict(
+        "sse-delivery",
+        "NOT delivered within timeout (no teamdocs/* event carrying the doc for the guest)",
+      );
       console.log(
         `events received: ${JSON.stringify(sse.snapshot().map((e) => ({ event: e.event, data: e.data.slice(0, 120) })))}`,
       );
@@ -336,7 +393,8 @@ async function main(): Promise<void> {
       record: { id: string; title?: string; content?: string; tags?: string[] };
     };
     const contentOk = payload.record?.content === "version 2 — saved by userA";
-    const tagsOk = Array.isArray(payload.record?.tags) && payload.record.tags.length === 2;
+    const tagsOk =
+      Array.isArray(payload.record?.tags) && payload.record.tags.length === 2;
     verdict(
       "sse-delivery",
       `DELIVERED cross-user (event=${received.event}, action=${payload.action ?? "n/a"}, content matches: ${contentOk}, tags match: ${tagsOk}) — the payload the page consumes via Dexie`,
@@ -345,21 +403,33 @@ async function main(): Promise<void> {
     sse.close();
     // 9. Cleanup (admin) — doc, event, probe user
     if (docId) {
-      const delDoc = await pbFetch(env.base, `/api/collections/teamdocs/records/${docId}`, {
-        method: "DELETE",
-        token: adminToken,
-      });
+      const delDoc = await pbFetch(
+        env.base,
+        `/api/collections/teamdocs/records/${docId}`,
+        {
+          method: "DELETE",
+          token: adminToken,
+        },
+      );
       console.log(`cleanup teamdocs ${docId}: ${delDoc.status}`);
     }
-    const delEvent = await pbFetch(env.base, `/api/collections/events/records/${eventId}`, {
-      method: "DELETE",
-      token: adminToken,
-    });
+    const delEvent = await pbFetch(
+      env.base,
+      `/api/collections/events/records/${eventId}`,
+      {
+        method: "DELETE",
+        token: adminToken,
+      },
+    );
     console.log(`cleanup event ${eventId}: ${delEvent.status}`);
-    const delUser = await pbFetch(env.base, `/api/collections/users/records/${probeUserId}`, {
-      method: "DELETE",
-      token: adminToken,
-    });
+    const delUser = await pbFetch(
+      env.base,
+      `/api/collections/users/records/${probeUserId}`,
+      {
+        method: "DELETE",
+        token: adminToken,
+      },
+    );
     console.log(`cleanup user ${probeUserId}: ${delUser.status}`);
   }
 }

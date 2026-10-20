@@ -83,8 +83,8 @@ describe("ProductsStore — achats orphelins (sans produit actif)", () => {
     await clearDexie();
 
     const event = makeEvent();
-    vi.mocked(eventsStore.getEventById).mockImplementation(
-      (id: string) => (id === TEST_EVENT_ID ? event : null),
+    vi.mocked(eventsStore.getEventById).mockImplementation((id: string) =>
+      id === TEST_EVENT_ID ? event : null,
     );
   });
 
@@ -115,9 +115,7 @@ describe("ProductsStore — achats orphelins (sans produit actif)", () => {
     // extractNameFromProductId("jus-de-citron_t12event0") → "Jus De Citron"
     expect(orphans[0].productName).toBe("Jus De Citron");
     // Montant d'information : les achats complets sont exposés
-    expect(orphans[0].purchases.map((p) => p.id)).toEqual([
-      "t12ghostpurch001",
-    ]);
+    expect(orphans[0].purchases.map((p) => p.id)).toEqual(["t12ghostpurch001"]);
     expect(orphans[0].purchases[0].quantity).toBe(2);
     expect(orphans[0].purchases[0].unit).toBe("l.");
   });
@@ -129,7 +127,9 @@ describe("ProductsStore — achats orphelins (sans produit actif)", () => {
 
     await initializeSeeded();
 
-    expect(productsStore.getEnrichedProductById(TEST_PRODUCT_ID)).not.toBeNull();
+    expect(
+      productsStore.getEnrichedProductById(TEST_PRODUCT_ID),
+    ).not.toBeNull();
     expect(productsStore.orphanedPurchases).toEqual([]);
   });
 
@@ -137,7 +137,11 @@ describe("ProductsStore — achats orphelins (sans produit actif)", () => {
     const TARGET_ID = "lait_t12test0001";
     const SOURCE_ID = "lsoja_t12test001";
     await db.products.bulkPut([
-      makeProductRecord({ id: TARGET_ID, ingredientRef: "lait", productName: "Lait" }),
+      makeProductRecord({
+        id: TARGET_ID,
+        ingredientRef: "lait",
+        productName: "Lait",
+      }),
       makeProductRecord({
         id: SOURCE_ID,
         ingredientRef: "lait-de-soja",
@@ -146,7 +150,11 @@ describe("ProductsStore — achats orphelins (sans produit actif)", () => {
       }),
     ]);
     await seedProductNeeds([
-      makeNeedRow({ id: TARGET_ID, ingredientRef: "lait", productName: "Lait" }),
+      makeNeedRow({
+        id: TARGET_ID,
+        ingredientRef: "lait",
+        productName: "Lait",
+      }),
       makeNeedRow({
         id: SOURCE_ID,
         ingredientRef: "lait-de-soja",
@@ -240,7 +248,9 @@ describe("ProductsStore — achats orphelins (sans produit actif)", () => {
     await waitForTick(5);
 
     expect(productsStore.orphanedPurchases).toEqual([]);
-    expect(productsStore.getEnrichedProductById(TEST_PRODUCT_ID)).not.toBeNull();
+    expect(
+      productsStore.getEnrichedProductById(TEST_PRODUCT_ID),
+    ).not.toBeNull();
   });
 
   it("ne rescuent pas un produit portant un totalNeededOverride sans besoin (cas 2)", async () => {
@@ -274,14 +284,20 @@ describe("ProductsStore — achats orphelins (sans produit actif)", () => {
     await initializeSeeded();
 
     expect(productsStore.orphanedPurchases).toEqual([]);
-    expect(productsStore.getEnrichedProductById(TEST_PRODUCT_ID)).not.toBeNull();
+    expect(
+      productsStore.getEnrichedProductById(TEST_PRODUCT_ID),
+    ).not.toBeNull();
   });
 
   it("ne liste jamais une source mergée sans besoin : achats remappés, cible seule en cas 2", async () => {
     const TARGET_ID = "lait_t12test0001";
     const SOURCE_ID = "lsoja_t12test001";
     await db.products.bulkPut([
-      makeProductRecord({ id: TARGET_ID, ingredientRef: "lait", productName: "Lait" }),
+      makeProductRecord({
+        id: TARGET_ID,
+        ingredientRef: "lait",
+        productName: "Lait",
+      }),
       makeProductRecord({
         id: SOURCE_ID,
         ingredientRef: "lait-de-soja",
@@ -315,9 +331,7 @@ describe("ProductsStore — achats orphelins (sans produit actif)", () => {
         mergedInto: "cible_absente_t12e0",
       }),
     );
-    await db.purchases.put(
-      makePurchaseRecord({ products: [SOURCE_ID] }),
-    );
+    await db.purchases.put(makePurchaseRecord({ products: [SOURCE_ID] }));
 
     await initializeSeeded();
 

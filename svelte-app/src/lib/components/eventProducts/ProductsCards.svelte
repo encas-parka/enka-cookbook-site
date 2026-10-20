@@ -166,7 +166,7 @@
     <label class="flex cursor-pointer items-center gap-2">
       <input
         type="checkbox"
-        class="toggle toggle-sm toggle-primary"
+        class="toggle toggle-primary toggle-sm"
         bind:checked={showRecipeDetails}
       />
       <span class="text-sm">Détails recettes</span>
@@ -217,12 +217,12 @@
             class="flex items-center gap-2 font-bold text-shadow-md/20 @md:min-w-48"
           >
             {#if filters.groupBy === "store"}
-              <div class="text-primary-content flex items-center gap-2">
+              <div class="flex items-center gap-2 text-primary-content">
                 <Store class="size-4 md:size-5" />
                 {groupKey} ({groupProducts!.length})
               </div>
             {:else if filters.groupBy === "productType"}
-              <div class="text-primary-content flex items-center gap-2">
+              <div class="flex items-center gap-2 text-primary-content">
                 <groupTypeInfo.icon class="size-4 md:size-5" />
                 <span>{groupTypeInfo.displayName}</span>
                 <span class="text-sm opacity-70">({groupProducts!.length})</span
@@ -234,7 +234,7 @@
           </div>
 
           {#if !globalState.isMobile}
-            <div class="text-primary-content px-2 text-sm text-shadow-md">
+            <div class="px-2 text-sm text-primary-content text-shadow-md">
               {#if productsStore.dateStore.isFullRange && productsStore.dateStore.start !== productsStore.dateStore.end}
                 <div class="font-semibold">Sur toute la période</div>
               {:else if productsStore.dateStore.start !== productsStore.dateStore.end}
@@ -273,7 +273,7 @@
               class="ms-auto mt-1 flex flex-wrap items-center justify-end gap-2"
             >
               <button
-                class="btn btn-sm btn-primary btn-soft"
+                class="btn btn-soft btn-primary btn-sm"
                 onclick={() =>
                   onOpenGroupEditModal(
                     "store",
@@ -292,7 +292,7 @@
               </button>
 
               <button
-                class="btn btn-sm btn-primary btn-soft"
+                class="btn btn-soft btn-primary btn-sm"
                 onclick={() =>
                   onOpenGroupEditModal(
                     "who",
@@ -313,7 +313,7 @@
               <!-- Bouton validation groupée -->
               {#if groupProducts!.some((p) => p.data.displayMissingQuantity !== "✅ Complet")}
                 <button
-                  class="btn btn-sm btn-primary btn-soft"
+                  class="btn btn-soft btn-primary btn-sm"
                   onclick={() =>
                     onOpenGroupPurchaseModal(groupProducts!.map((p) => p.data))}
                   title="Ouvrir le modal d'achat groupé"
@@ -346,7 +346,7 @@
 
       <!-- Cards des produits du groupe -->
       {#if viewMode === "compact"}
-        <div class="divide-neutral/20 my-2 mb-8 divide-y">
+        <div class="my-2 mb-8 divide-y divide-neutral/20">
           {#each groupProducts as productModel (productModel.data.id)}
             <ProductCardCompact
               {productModel}
@@ -376,7 +376,7 @@
   <!-- Sentinelle pour lazy loading -->
   {#if paginatedGroupEntries.length < allGroupEntries.length}
     <div bind:this={sentinel} class="py-8 text-center print:hidden">
-      <span class="loading loading-spinner loading-md"></span>
+      <span class="loading loading-md loading-spinner"></span>
     </div>
   {/if}
 

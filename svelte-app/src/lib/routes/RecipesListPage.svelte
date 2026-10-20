@@ -99,7 +99,7 @@
         limit: 0, // recherche exhaustive : pas de plafond de résultats
       });
 
-      const matchingIds = new Set(results.map(r => r.obj.id));
+      const matchingIds = new Set(results.map((r) => r.obj.id));
 
       return visibleRecipes.filter((recipe) => {
         if (!matchingIds.has(recipe.id)) return false;
@@ -340,7 +340,7 @@
     <!-- header -->
     <div class="mb-10 space-y-6">
       <!-- Tabs de filtrage par type -->
-      <div class="tabs tabs-border sm:tabs-lg mb-6 flex-wrap font-bold">
+      <div class="tabs tabs-border mb-6 flex-wrap font-bold sm:tabs-lg">
         <button
           class="tab {filters.typeR === '' ? 'tab-active' : ''}"
           onclick={() => setTypeR("")}
@@ -406,15 +406,15 @@
       <!-- État initial : Skeleton loader -->
       <div class="my-8 space-y-10">
         {#each Array(5) as _, i (i)}
-          <div class="skeleton h-40 w-full rounded-lg"></div>
+          <div class="h-40 w-full skeleton rounded-lg"></div>
         {/each}
       </div>
     {:else if recipesStore.loading && paginatedRecipes.length === 0}
       <!-- Chargement en cours (après initialisation) -->
       <div class="flex justify-center py-12">
         <div class="text-center">
-          <div class="loading loading-spinner loading-lg text-primary"></div>
-          <p class="text-base-content/60 mt-4 text-sm">
+          <div class="loading loading-lg loading-spinner text-primary"></div>
+          <p class="mt-4 text-sm text-base-content/60">
             Chargement des recettes...
           </p>
         </div>
@@ -432,14 +432,14 @@
       <!-- Sentinelle pour lazy loading -->
       {#if paginatedRecipes.length < filteredRecipes.length}
         <div bind:this={sentinel} class="py-8 text-center">
-          <span class="loading loading-spinner loading-md"></span>
+          <span class="loading loading-md loading-spinner"></span>
         </div>
       {/if}
 
       <!-- Message si aucun résultat -->
       {#if filteredRecipes.length === 0 && recipesStore.isInitialized}
         <div class="py-12 text-center">
-          <p class="text-base-content/60 text-lg">
+          <p class="text-lg text-base-content/60">
             Aucune recette ne correspond aux critères...
           </p>
         </div>

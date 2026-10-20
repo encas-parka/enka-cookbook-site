@@ -44,7 +44,9 @@
 
   const isEdit = $derived(activeMaterielId !== null);
 
-  const title = $derived(isEdit ? "Modifier le matériel" : "Ajouter du matériel");
+  const title = $derived(
+    isEdit ? "Modifier le matériel" : "Ajouter du matériel",
+  );
 
   // Convertir les statuts calculés (loan, reserved) en "ok" pour l'édition
   const formStatus = $derived.by(() => {
@@ -99,14 +101,11 @@
     if (!activeMaterielId) return;
     loading = true;
     try {
-      await toastService.track(
-        materielStore.deleteMateriel(activeMaterielId),
-        {
-          loading: "Suppression en cours...",
-          success: "Matériel supprimé avec succès",
-          error: "Erreur lors de la suppression du matériel",
-        },
-      );
+      await toastService.track(materielStore.deleteMateriel(activeMaterielId), {
+        loading: "Suppression en cours...",
+        success: "Matériel supprimé avec succès",
+        error: "Erreur lors de la suppression du matériel",
+      });
       handleClose();
     } finally {
       loading = false;
@@ -119,14 +118,15 @@
 
   <ModalContent>
     {#if isEdit && currentMateriel}
-      <div class="alert alert-soft mb-4">
+      <div class="mb-4 alert alert-soft">
         <div class="flex items-center gap-2 text-sm">
           <Users class="h-4 w-4" />
           <div>
             {#if currentMateriel.teamId}
               <div>
                 <span class="font-semibold">Équipe propriétaire :</span>
-                {nativeTeamsStore.getTeamById(currentMateriel.teamId)?.name ?? "Inconnue"}
+                {nativeTeamsStore.getTeamById(currentMateriel.teamId)?.name ??
+                  "Inconnue"}
               </div>
             {/if}
           </div>
@@ -158,7 +158,7 @@
           onDelete={isEdit ? handleDelete : null}
           ownerId={teamId}
           ownerName={teamName}
-          teamId={teamId}
+          {teamId}
           {availableLocations}
           onExistingSelected={handleExistingSelected}
         />
@@ -166,7 +166,7 @@
     {/if}
 
     {#if error}
-      <div class="alert alert-error mt-4">
+      <div class="mt-4 alert alert-error">
         <span class="text-sm">{error}</span>
       </div>
     {/if}

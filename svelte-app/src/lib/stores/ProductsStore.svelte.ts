@@ -107,9 +107,7 @@ export class DuplicateProductNameError extends Error {
  * le message explicite sur conflit d'unicité, undefined sinon (le toast
  * garde alors son libellé statique par défaut).
  */
-export function resolveProductWriteError(
-  err: unknown,
-): string | undefined {
+export function resolveProductWriteError(err: unknown): string | undefined {
   return err instanceof DuplicateProductNameError ? err.message : undefined;
 }
 
@@ -127,7 +125,8 @@ function isUniqueNameRejection(err: unknown): boolean {
   const data = e?.response?.data;
   if ((e?.status ?? e?.response?.code) !== 400 || !data) return false;
   return Object.entries(data).some(
-    ([field, fieldError]) => field !== "id" && fieldError?.code === "validation_not_unique",
+    ([field, fieldError]) =>
+      field !== "id" && fieldError?.code === "validation_not_unique",
   );
 }
 
@@ -155,8 +154,16 @@ class ProductsStore {
   // aw-sync COLLECTIONS (CRUD + sync Appwrite ↔ Dexie)
   // ===========================================================================
 
-  #productsCollection = createSyncCollection<Products>(pb, db.products, "products");
-  #purchasesCollection = createSyncCollection<Purchases>(pb, db.purchases, "purchases");
+  #productsCollection = createSyncCollection<Products>(
+    pb,
+    db.products,
+    "products",
+  );
+  #purchasesCollection = createSyncCollection<Purchases>(
+    pb,
+    db.purchases,
+    "purchases",
+  );
 
   // Map stable de ProductModel — UNIQUE source de vérité pour l'UI
   #productModels = new SvelteMap<string, ProductModel>();
@@ -250,11 +257,7 @@ class ProductsStore {
   async #rerunReconciliation(): Promise<void> {
     if (!this.#currentEventId) return;
     const snapshot = await this.#readEventSnapshot(this.#currentEventId);
-    this.#onDataChange(
-      snapshot.products,
-      snapshot.purchases,
-      snapshot.needs,
-    );
+    this.#onDataChange(snapshot.products, snapshot.purchases, snapshot.needs);
   }
 
   /**
@@ -262,7 +265,11 @@ class ProductsStore {
    * Merge les 3 sources, compare les fingerprints, met à jour les ProductModels,
    * puis reconstruit les groupes.
    */
-  #onDataChange(products: Products[], purchases: Purchases[], needs: ProductNeedRow[]) {
+  #onDataChange(
+    products: Products[],
+    purchases: Purchases[],
+    needs: ProductNeedRow[],
+  ) {
     // ── 1. Indexer les sources ──────────────────────────────
     const productsById = new Map(products.map((p) => [p.id, p]));
     const needsById = new Map(needs.map((n) => [n.id, n]));
@@ -330,7 +337,10 @@ class ProductsStore {
       const version = [
         raw?.updated ?? "",
         needRow?.updated ?? "",
-        ...prods.map((p) => p.updated).filter(Boolean).sort(),
+        ...prods
+          .map((p) => p.updated)
+          .filter(Boolean)
+          .sort(),
       ].join("|");
 
       const existing = this.#productModels.get(id);
@@ -607,7 +617,8 @@ class ProductsStore {
     for (const key of Object.keys(groups)) {
       const models = groups[key]!;
       if (this.#filters.sortColumn) {
-        const col = this.#filters.sortColumn as keyof import("../types/store.types").EnrichedProduct;
+        const col = this.#filters
+          .sortColumn as keyof import("../types/store.types").EnrichedProduct;
         const dir = this.#filters.sortDirection === "asc" ? 1 : -1;
         models.sort((a, b) => {
           const aVal = a.data[col];
@@ -655,8 +666,10 @@ class ProductsStore {
       // Filtre completion (dépend de model.stats → dateRange)
       if (this.#filters.completionStatus !== "all") {
         const hasMissing = model.stats.hasMissing;
-        if (this.#filters.completionStatus === "completed" && hasMissing) return false;
-        if (this.#filters.completionStatus === "incomplete" && !hasMissing) return false;
+        if (this.#filters.completionStatus === "completed" && hasMissing)
+          return false;
+        if (this.#filters.completionStatus === "incomplete" && !hasMissing)
+          return false;
       }
 
       // Filtre date de livraison (produits avec purchase "ordered" à cette date)
@@ -673,7 +686,8 @@ class ProductsStore {
     // Filtre date range
     if (product.byDate) {
       const hasDataInRange = Object.keys(product.byDate).some(
-        (dateStr) => dateStr >= this.dateRange.start! && dateStr <= this.dateRange.end!,
+        (dateStr) =>
+          dateStr >= this.dateRange.start! && dateStr <= this.dateRange.end!,
       );
       if (!hasDataInRange && !isManualProduct) return false;
     }
@@ -1230,10 +1244,7 @@ class ProductsStore {
       );
   }
 
-  async #syncWithEventMeals(
-    event: EnrichedEvent,
-    recipeTimestamps: string[],
-  ) {
+  async #syncWithEventMeals(event: EnrichedEvent, recipeTimestamps: string[]) {
     if (!this.#isInitialized) return;
 
     const mealsHash =
@@ -1429,10 +1440,7 @@ class ProductsStore {
   #applyUrlFilters(snapshot: Record<string, string | null>) {
     // Back/navigation : le flag `search` a été retiré alors qu'une recherche
     // était active (en mémoire) → on reset la recherche.
-    if (
-      snapshot.search === null &&
-      this.#filters.searchQuery.trim()
-    ) {
+    if (snapshot.search === null && this.#filters.searchQuery.trim()) {
       this.#filters.searchQuery = "";
     }
 
@@ -1466,15 +1474,9 @@ class ProductsStore {
     );
     this.#setFilterField("selectedProductTypes", types);
     this.#setFilterField("selectedStores", stores);
-    this.#setFilterField(
-      "storeFilterMode",
-      smode === "none" ? "none" : "all",
-    );
+    this.#setFilterField("storeFilterMode", smode === "none" ? "none" : "all");
     this.#setFilterField("selectedWho", who);
-    this.#setFilterField(
-      "whoFilterMode",
-      wmode === "none" ? "none" : "all",
-    );
+    this.#setFilterField("whoFilterMode", wmode === "none" ? "none" : "all");
     this.#setFilterField("deliveryDateFilter", delivery ?? null);
 
     this.#rebuildGroups();
@@ -1716,7 +1718,10 @@ class ProductsStore {
     // Calculated needs are event-scoped (the `mainId` index holds the eventId):
     // purge only the current event's rows, keep other events' caches intact.
     if (this.#currentEventId) {
-      await db.productNeeds.where("mainId").equals(this.#currentEventId).delete();
+      await db.productNeeds
+        .where("mainId")
+        .equals(this.#currentEventId)
+        .delete();
     } else {
       await db.productNeeds.clear();
     }
@@ -1938,7 +1943,9 @@ class ProductsStore {
   }
 
   async deletePurchase(purchaseId: string): Promise<void> {
-    await this.#purchasesCollection.update(purchaseId, { status: "deleted" } as Partial<Purchases>);
+    await this.#purchasesCollection.update(purchaseId, {
+      status: "deleted",
+    } as Partial<Purchases>);
   }
 
   /**
@@ -2396,7 +2403,13 @@ class ProductsStore {
     error?: string;
   }> {
     if (!productsData.length) {
-      return { success: false, totalProductsCreated: 0, totalPurchasesCreated: 0, totalExpensesCreated: 0, error: "Aucun produit à traiter" };
+      return {
+        success: false,
+        totalProductsCreated: 0,
+        totalPurchasesCreated: 0,
+        totalExpensesCreated: 0,
+        error: "Aucun produit à traiter",
+      };
     }
 
     const purchaseStatus = invoiceData.purchaseStatus || "delivered";
@@ -2412,7 +2425,10 @@ class ProductsStore {
     try {
       // Découpage en lots de 50 opérations max par createBatch()
       const BATCH_SIZE = 50;
-      const allOperations: Array<{ productId: string; qty: { q: number; u: string } }> = [];
+      const allOperations: Array<{
+        productId: string;
+        qty: { q: number; u: string };
+      }> = [];
 
       for (const p of productsData) {
         if (!p.isSynced) {
@@ -2473,7 +2489,12 @@ class ProductsStore {
         totalExpensesCreated = 1;
       }
 
-      return { success: true, totalProductsCreated: productsData.length, totalPurchasesCreated, totalExpensesCreated };
+      return {
+        success: true,
+        totalProductsCreated: productsData.length,
+        totalPurchasesCreated,
+        totalExpensesCreated,
+      };
     } catch (err) {
       // Le conflit d'unicité doit garder sa forme typée : le modal le passe
       // au résolveur de toast (message explicite), pas au libellé statique.

@@ -98,11 +98,11 @@
 </script>
 
 <form onsubmit={handleSubmit} class="space-y-4">
-  <div class="text-base-content/70 py-2 text-sm">
+  <div class="py-2 text-sm text-base-content/70">
     <div class="mb-2">
       <strong>{headerName}</strong>
       {#if maxQuantity > 0}
-        <span class="badge badge-warning float-end"
+        <span class="float-end badge badge-warning"
           >besoin total: {maxQuantity}</span
         >
       {/if}
@@ -126,7 +126,7 @@
         />
       </label>
       {#if exceedsMax}
-        <span class="text-warning/80 flex items-center gap-1 text-xs">
+        <span class="flex items-center gap-1 text-xs text-warning/80">
           <CircleAlert class="size-3" />
           Dépasse la quantité à trouver ({maxQuantity})
         </span>
@@ -145,7 +145,7 @@
     </fieldset>
 
     <fieldset class="fieldset">
-      <legend class="fieldset-legend required"
+      <legend class="required fieldset-legend"
         ><User class="inline size-4" /> Qui ?</legend
       >
       <label class="input w-full {whoError ? 'input-error' : ''}">
@@ -159,7 +159,7 @@
     </fieldset>
 
     <fieldset class="fieldset">
-      <legend class="fieldset-legend required"
+      <legend class="required fieldset-legend"
         ><MapPin class="inline size-4" /> Où ?</legend
       >
       <label class="input w-full {whereError ? 'input-error' : ''}">
@@ -179,8 +179,7 @@
         bind:value={notes}
         placeholder="Notes supplémentaires..."
         class="textarea w-full"
-        maxlength="255"
-      ></textarea>
+        maxlength="255"></textarea>
     </fieldset>
   </div>
 </form>

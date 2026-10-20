@@ -215,7 +215,8 @@ export class EnkaDB extends Dexie {
       purchases: "id, updated, eventId, *products, status, store",
       recipes: "id, updated, status, typeR, createdBy, lockedBy",
       materiels: "id, updated, type, status, owner, deleted",
-      materielLoans: "id, updated, status, ownerId, eventId, startDate, endDate",
+      materielLoans:
+        "id, updated, status, ownerId, eventId, startDate, endDate",
       eventMateriels: "id, updated, eventId, type, status, groupId",
       teamdocs: "id, updated, teamId, eventId, status",
       locks: "id, updated, userId, expiresAt",
@@ -236,7 +237,8 @@ export class EnkaDB extends Dexie {
       purchases: "id, updated, eventId, *products, status, store",
       recipes: "id, updated, status, typeR, createdBy, lockedBy",
       materiels: "id, updated, type, status, owner, deleted",
-      materielLoans: "id, updated, status, ownerId, eventId, startDate, endDate",
+      materielLoans:
+        "id, updated, status, ownerId, eventId, startDate, endDate",
       eventMateriels: "id, updated, eventId, type, status, groupId",
       teamdocs: "id, updated, teamId, eventId, status",
       locks: "id, updated, userId, expiresAt",

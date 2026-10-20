@@ -54,9 +54,7 @@ export async function redeemShareLink(
 /**
  * Récupère les share links d'un événement.
  */
-export async function getEventShareLinks(
-  eventId: string,
-): Promise<string[]> {
+export async function getEventShareLinks(eventId: string): Promise<string[]> {
   const links = await pb.collection("share_links").getFullList({
     filter: pb.filter("target_id = {:eventId} && isActive = true", {
       eventId,

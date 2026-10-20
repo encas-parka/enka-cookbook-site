@@ -25,7 +25,9 @@ describe("product-need-serializer", () => {
       expect(parsed.byDate).toEqual({
         "2026-04-20": {
           totalConsolidated: [{ q: 500, u: "gr." }],
-          recipes: [{ r: "Gâteau", q: 500, u: "gr.", qEq: 500, uEq: "gr.", a: 10 }],
+          recipes: [
+            { r: "Gâteau", q: 500, u: "gr.", qEq: 500, uEq: "gr.", a: 10 },
+          ],
           totalAssiettes: 10,
           recipeCount: 1,
         },
@@ -99,7 +101,9 @@ describe("product-need-serializer", () => {
       const enriched = makeEnrichedProduct();
       const row = toNeedRow(enriched, "event-001");
 
-      expect(row.totalNeededArray).toBe(JSON.stringify(enriched.totalNeededArray));
+      expect(row.totalNeededArray).toBe(
+        JSON.stringify(enriched.totalNeededArray),
+      );
     });
 
     it("defaults ingredientRef to empty string when null", () => {

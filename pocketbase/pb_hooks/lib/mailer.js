@@ -30,7 +30,7 @@ function getSenderAddress() {
   var senderAddress = $app.settings().meta.senderAddress;
   if (!senderAddress) {
     throw new InternalServerError(
-      "SMTP non configure. Configurez l'expediteur dans les parametres PocketBase."
+      "SMTP non configure. Configurez l'expediteur dans les parametres PocketBase.",
     );
   }
   return senderAddress;
@@ -68,7 +68,7 @@ function sendEmail(opts) {
       from: { address: from },
       to: [{ address: to }],
       subject: subject,
-      html: html
+      html: html,
     });
 
     $app.newMailClient().send(message);
@@ -76,12 +76,17 @@ function sendEmail(opts) {
     console.log("[" + senderName + "] Email envoye a " + to); // dev stdout
     return { ok: true };
   } catch (err) {
-    $app.logger().error(
-      "Email send failed",
-      "sender", senderName,
-      "to", to,
-      "error", String(err)
-    );
+    $app
+      .logger()
+      .error(
+        "Email send failed",
+        "sender",
+        senderName,
+        "to",
+        to,
+        "error",
+        String(err),
+      );
     return { ok: false, error: String(err) };
   }
 }
@@ -104,13 +109,13 @@ function sendBatch(emails, senderName) {
       to: opts.to,
       subject: opts.subject,
       html: opts.html,
-      senderName: senderName || "send-batch"
+      senderName: senderName || "send-batch",
     });
 
     results.push({
       to: opts.to,
       ok: result.ok,
-      error: result.error || undefined
+      error: result.error || undefined,
     });
 
     if (result.ok) {
@@ -120,13 +125,19 @@ function sendBatch(emails, senderName) {
     }
   }
 
-  $app.logger().info(
-    "Batch email complete",
-    "sender", senderName || "send-batch",
-    "ok", String(okCount),
-    "failed", String(failCount),
-    "total", String(emails.length)
-  );
+  $app
+    .logger()
+    .info(
+      "Batch email complete",
+      "sender",
+      senderName || "send-batch",
+      "ok",
+      String(okCount),
+      "failed",
+      String(failCount),
+      "total",
+      String(emails.length),
+    );
 
   return results;
 }

@@ -59,7 +59,9 @@ interface Env {
 
 function loadEnv(): Env {
   if (!existsSync(ENV_FILE)) {
-    console.error(`Missing ${ENV_FILE} — add PB_URL / PB_ADMIN_* / PB_USER_* there.`);
+    console.error(
+      `Missing ${ENV_FILE} — add PB_URL / PB_ADMIN_* / PB_USER_* there.`,
+    );
     process.exit(1);
   }
   const env: Record<string, string> = {};
@@ -70,8 +72,13 @@ function loadEnv(): Env {
     if (eqIdx === -1) continue;
     env[trimmed.slice(0, eqIdx).trim()] = trimmed.slice(eqIdx + 1).trim();
   }
-  const missing = ["PB_URL", "PB_ADMIN_EMAIL", "PB_ADMIN_PASSWORD", "PB_USER_EMAIL", "PB_USER_PASSWORD"]
-    .filter((k) => !env[k]);
+  const missing = [
+    "PB_URL",
+    "PB_ADMIN_EMAIL",
+    "PB_ADMIN_PASSWORD",
+    "PB_USER_EMAIL",
+    "PB_USER_PASSWORD",
+  ].filter((k) => !env[k]);
   if (missing.length > 0) {
     console.error(`Missing env keys in ${ENV_FILE}: ${missing.join(", ")}`);
     process.exit(1);
@@ -118,7 +125,8 @@ function classify(status: number, json: any): string {
   const data = json?.data ?? {};
   const fieldErrors = Object.keys(data).filter((k) => data[k]);
   if (fieldErrors.length === 0) {
-    if (status === 404) return "rule-rejection-or-missing (404 — PB leak-protection)";
+    if (status === 404)
+      return "rule-rejection-or-missing (404 — PB leak-protection)";
     return "rule-rejection (data empty)";
   }
   return `validation-rejection (fields: ${fieldErrors.join(", ")})`;
@@ -179,7 +187,10 @@ class RealtimeClient {
     return { event, data };
   }
 
-  async waitFor(pred: (e: SseEvent) => boolean, ms: number): Promise<SseEvent | null> {
+  async waitFor(
+    pred: (e: SseEvent) => boolean,
+    ms: number,
+  ): Promise<SseEvent | null> {
     const deadline = Date.now() + ms;
     let start = 0;
     for (;;) {
@@ -203,7 +214,9 @@ class RealtimeClient {
 
 async function main(): Promise<void> {
   const env = loadEnv();
-  console.log(`# T06 probe against ${env.base} (mode: ${FIXED_MODE ? "FIXED payload (guestUsers written)" : "LEGACY payload (current SPA — no guestUsers)"})`);
+  console.log(
+    `# T06 probe against ${env.base} (mode: ${FIXED_MODE ? "FIXED payload (guestUsers written)" : "LEGACY payload (current SPA — no guestUsers)"})`,
+  );
 
   // 0. Health
   const health = await pbFetch(env.base, "/api/health");
@@ -213,23 +226,35 @@ async function main(): Promise<void> {
   }
 
   // 1. Admin auth (setup + inspection + cleanup only)
-  const admin = await pbFetch(env.base, "/api/collections/_superusers/auth-with-password", {
-    method: "POST",
-    body: { identity: env.adminEmail, password: env.adminPassword },
-  });
+  const admin = await pbFetch(
+    env.base,
+    "/api/collections/_superusers/auth-with-password",
+    {
+      method: "POST",
+      body: { identity: env.adminEmail, password: env.adminPassword },
+    },
+  );
   if (admin.status !== 200) {
-    console.error(`Admin auth failed (${admin.status}) — check PB_ADMIN_* in .env.local`);
+    console.error(
+      `Admin auth failed (${admin.status}) — check PB_ADMIN_* in .env.local`,
+    );
     process.exit(1);
   }
   const adminToken = admin.json.token as string;
 
   // 2. ghald auth (PB_USER_* — the invitee, a KNOWN account, as in the click-through)
-  const user = await pbFetch(env.base, "/api/collections/users/auth-with-password", {
-    method: "POST",
-    body: { identity: env.userEmail, password: env.userPassword },
-  });
+  const user = await pbFetch(
+    env.base,
+    "/api/collections/users/auth-with-password",
+    {
+      method: "POST",
+      body: { identity: env.userEmail, password: env.userPassword },
+    },
+  );
   if (user.status !== 200) {
-    console.error(`User auth failed (${user.status}) — check PB_USER_* in .env.local`);
+    console.error(
+      `User auth failed (${user.status}) — check PB_USER_* in .env.local`,
+    );
     process.exit(1);
   }
   const ghaldToken = user.json.token as string;
@@ -255,16 +280,22 @@ async function main(): Promise<void> {
     },
   });
   if (probeUser.status !== 200) {
-    console.log(`probe user creation failed: ${probeUser.status} ${JSON.stringify(probeUser.json).slice(0, 300)}`);
+    console.log(
+      `probe user creation failed: ${probeUser.status} ${JSON.stringify(probeUser.json).slice(0, 300)}`,
+    );
     process.exit(1);
   }
   const organizerId = probeUser.json.id as string;
   console.log(`organizer (transitory): ${organizerId} (${probeEmail})`);
 
-  const organizerAuth = await pbFetch(env.base, "/api/collections/users/auth-with-password", {
-    method: "POST",
-    body: { identity: probeEmail, password: probePassword },
-  });
+  const organizerAuth = await pbFetch(
+    env.base,
+    "/api/collections/users/auth-with-password",
+    {
+      method: "POST",
+      body: { identity: probeEmail, password: probePassword },
+    },
+  );
   if (organizerAuth.status !== 200) {
     console.log(`probe user auth failed: ${organizerAuth.status}`);
     process.exit(1);
@@ -272,7 +303,9 @@ async function main(): Promise<void> {
   const organizerToken = organizerAuth.json.token as string;
 
   // 4. Live events rules (what the migrations actually produced)
-  const col = await pbFetch(env.base, "/api/collections/events", { token: adminToken });
+  const col = await pbFetch(env.base, "/api/collections/events", {
+    token: adminToken,
+  });
   if (col.status !== 200) {
     console.log(`rules events: UNAVAILABLE (${col.status})`);
     process.exit(1);
@@ -299,16 +332,22 @@ async function main(): Promise<void> {
     },
   });
   if (event.status !== 200) {
-    console.log(`probe event creation failed: ${event.status} ${JSON.stringify(event.json).slice(0, 300)}`);
+    console.log(
+      `probe event creation failed: ${event.status} ${JSON.stringify(event.json).slice(0, 300)}`,
+    );
     process.exit(1);
   }
   const eventId = event.json.id as string;
   console.log(`probe event: ${eventId}`);
 
   // Coverage read-back (admin) — proves the setup means what the rules evaluate
-  const evFull = await pbFetch(env.base, `/api/collections/events/records/${eventId}`, {
-    token: adminToken,
-  });
+  const evFull = await pbFetch(
+    env.base,
+    `/api/collections/events/records/${eventId}`,
+    {
+      token: adminToken,
+    },
+  );
   const evGuests: string[] = evFull.json?.guestUsers ?? [];
   const evTeams: string[] = evFull.json?.teams ?? [];
   verdict(
@@ -320,18 +359,24 @@ async function main(): Promise<void> {
   try {
     // 6. ghald opens the SSE connection — collection-wide, like the SPA store
     await sse.connect(env.base);
-    const connectEvent = await sse.waitFor((e) => e.event === "PB_CONNECT", TIMEOUT_MS);
+    const connectEvent = await sse.waitFor(
+      (e) => e.event === "PB_CONNECT",
+      TIMEOUT_MS,
+    );
     if (!connectEvent) {
       verdict("sse-connect", "PB_CONNECT NOT received within timeout");
       return;
     }
-    const clientId = (JSON.parse(connectEvent.data) as { clientId: string }).clientId;
+    const clientId = (JSON.parse(connectEvent.data) as { clientId: string })
+      .clientId;
     const sub = await pbFetch(env.base, "/api/realtime", {
       method: "POST",
       token: ghaldToken,
       body: { clientId, subscriptions: ["events/*"] },
     });
-    console.log(`sse-subscribe events/*: ${sub.status === 204 ? "accepted (204)" : `rejected (${sub.status})`}`);
+    console.log(
+      `sse-subscribe events/*: ${sub.status === 204 ? "accepted (204)" : `rejected (${sub.status})`}`,
+    );
     if (sub.status !== 204) return;
     // Let the subscription register server-side before the write
     await sleep(300);
@@ -354,19 +399,32 @@ async function main(): Promise<void> {
     if (FIXED_MODE) {
       inviteBody.guestUsers = [ghaldId];
     }
-    const invite = await pbFetch(env.base, `/api/collections/events/records/${eventId}`, {
-      method: "PATCH",
-      token: organizerToken,
-      body: inviteBody,
-    });
-    console.log(`invite patch: ${invite.status} ${JSON.stringify(invite.json).slice(0, 200)}`);
-    verdict("invite-patch", `${invite.status} → ${classify(invite.status, invite.json)}`);
+    const invite = await pbFetch(
+      env.base,
+      `/api/collections/events/records/${eventId}`,
+      {
+        method: "PATCH",
+        token: organizerToken,
+        body: inviteBody,
+      },
+    );
+    console.log(
+      `invite patch: ${invite.status} ${JSON.stringify(invite.json).slice(0, 200)}`,
+    );
+    verdict(
+      "invite-patch",
+      `${invite.status} → ${classify(invite.status, invite.json)}`,
+    );
     if (invite.status !== 200) return;
 
     // 8. Read-back (admin) — what the invitation ACTUALLY landed in
-    const after = await pbFetch(env.base, `/api/collections/events/records/${eventId}`, {
-      token: adminToken,
-    });
+    const after = await pbFetch(
+      env.base,
+      `/api/collections/events/records/${eventId}`,
+      {
+        token: adminToken,
+      },
+    );
     const contributors: any[] = after.json?.contributors ?? [];
     const guests: string[] = after.json?.guestUsers ?? [];
     const ghaldEntry = contributors.find((c) => c.id === ghaldId);
@@ -382,12 +440,18 @@ async function main(): Promise<void> {
       SSE_WAIT_MS,
     );
     if (!received) {
-      verdict("sse-delivery", "NOT delivered within timeout (ghald's subscription received no events/* update for the event)");
+      verdict(
+        "sse-delivery",
+        "NOT delivered within timeout (ghald's subscription received no events/* update for the event)",
+      );
       console.log(
         `events received: ${JSON.stringify(sse.snapshot().map((e) => ({ event: e.event, data: e.data.slice(0, 120) })))}`,
       );
     } else {
-      const payload = JSON.parse(received.data) as { action?: string; record?: { id?: string; guestUsers?: string[] } };
+      const payload = JSON.parse(received.data) as {
+        action?: string;
+        record?: { id?: string; guestUsers?: string[] };
+      };
       const payloadCovers = Array.isArray(payload.record?.guestUsers)
         ? payload.record!.guestUsers!.includes(ghaldId)
         : false;
@@ -404,8 +468,12 @@ async function main(): Promise<void> {
       `/api/collections/events/records?perPage=200&filter=${encodeURIComponent(`id="${eventId}"`)}`,
       { token: ghaldToken },
     );
-    const listed: boolean = (list.json?.items ?? []).some((e: any) => e.id === eventId);
-    console.log(`list events (invitee): ${list.status}, ${list.json?.totalItems ?? "?"} item(s) for the exact filter`);
+    const listed: boolean = (list.json?.items ?? []).some(
+      (e: any) => e.id === eventId,
+    );
+    console.log(
+      `list events (invitee): ${list.status}, ${list.json?.totalItems ?? "?"} item(s) for the exact filter`,
+    );
     verdict(
       "list-to-invitee",
       listed
@@ -415,20 +483,37 @@ async function main(): Promise<void> {
 
     // 11. direct GET (ghald) — strictest proof (viewRule; also what an event
     //     page deep-link needs)
-    const view = await pbFetch(env.base, `/api/collections/events/records/${eventId}`, {
-      token: ghaldToken,
-    });
-    verdict("get-by-invitee", `${view.status} → ${classify(view.status, view.json)}`);
+    const view = await pbFetch(
+      env.base,
+      `/api/collections/events/records/${eventId}`,
+      {
+        token: ghaldToken,
+      },
+    );
+    verdict(
+      "get-by-invitee",
+      `${view.status} → ${classify(view.status, view.json)}`,
+    );
 
     // 12. Accept PATCH (ghald) — the updateContributorStatus path (contributors
     //     json only). Also the RSVP banner's action.
-    const acceptEntry = { ...contributorEntry, status: "accepted", respondedAt: new Date().toISOString() };
-    const accept = await pbFetch(env.base, `/api/collections/events/records/${eventId}`, {
-      method: "PATCH",
-      token: ghaldToken,
-      body: { contributors: [acceptEntry] },
-    });
-    console.log(`accept patch (invitee): ${accept.status} ${JSON.stringify(accept.json).slice(0, 200)}`);
+    const acceptEntry = {
+      ...contributorEntry,
+      status: "accepted",
+      respondedAt: new Date().toISOString(),
+    };
+    const accept = await pbFetch(
+      env.base,
+      `/api/collections/events/records/${eventId}`,
+      {
+        method: "PATCH",
+        token: ghaldToken,
+        body: { contributors: [acceptEntry] },
+      },
+    );
+    console.log(
+      `accept patch (invitee): ${accept.status} ${JSON.stringify(accept.json).slice(0, 200)}`,
+    );
     verdict(
       "accept-by-invitee",
       `${accept.status} → ${accept.status === 200 ? "accepted — the RSVP lands (updateRule covers the guest)" : classify(accept.status, accept.json)}`,
@@ -440,7 +525,9 @@ async function main(): Promise<void> {
       `/api/collections/events/records?perPage=200&filter=${encodeURIComponent(`id="${eventId}"`)}`,
       { token: ghaldToken },
     );
-    const listed2: boolean = (list2.json?.items ?? []).some((e: any) => e.id === eventId);
+    const listed2: boolean = (list2.json?.items ?? []).some(
+      (e: any) => e.id === eventId,
+    );
     verdict(
       "list-after-accept",
       listed2
@@ -450,15 +537,23 @@ async function main(): Promise<void> {
   } finally {
     sse.close();
     // Cleanup (admin) — event, probe user
-    const delEvent = await pbFetch(env.base, `/api/collections/events/records/${eventId}`, {
-      method: "DELETE",
-      token: adminToken,
-    });
+    const delEvent = await pbFetch(
+      env.base,
+      `/api/collections/events/records/${eventId}`,
+      {
+        method: "DELETE",
+        token: adminToken,
+      },
+    );
     console.log(`cleanup event ${eventId}: ${delEvent.status}`);
-    const delUser = await pbFetch(env.base, `/api/collections/users/records/${organizerId}`, {
-      method: "DELETE",
-      token: adminToken,
-    });
+    const delUser = await pbFetch(
+      env.base,
+      `/api/collections/users/records/${organizerId}`,
+      {
+        method: "DELETE",
+        token: adminToken,
+      },
+    );
     console.log(`cleanup user ${organizerId}: ${delUser.status}`);
   }
 }

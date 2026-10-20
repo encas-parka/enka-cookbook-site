@@ -24,15 +24,21 @@ const IMPORT_DIR = join(import.meta.dir, "pb-import");
 const MAP_FILE = join(import.meta.dir, "migration-map.json");
 
 // --- Types ---
-type UserMap = Record<string, { refId: string; email: string; name: string; eventLabels: string[] }>;
+type UserMap = Record<
+  string,
+  { refId: string; email: string; name: string; eventLabels: string[] }
+>;
 type TeamMap = Record<string, { refId: string; name: string }>;
 type EventMap = Record<string, { refId: string; name: string }>;
-type GenericMap = Record<string, { refId: string;[k: string]: any }>;
+type GenericMap = Record<string, { refId: string; [k: string]: any }>;
 
 // --- Helpers ---
 const warnings: string[] = [];
 const errors: string[] = [];
-const orphanTracker = new Map<string, { products: number; purchases: number; event_materiel: number }>();
+const orphanTracker = new Map<
+  string,
+  { products: number; purchases: number; event_materiel: number }
+>();
 // Stable warn categories — every warn belongs to one, counted for the recap
 // table (the categories are report-only: the verdicts/validate side owns the
 // source→PB count gaps).
@@ -42,9 +48,16 @@ function categorize(category: string, n = 1): void {
   warnCategories.set(category, (warnCategories.get(category) ?? 0) + n);
 }
 
-function trackOrphan(eventId: string, collection: "products" | "purchases" | "event_materiel") {
+function trackOrphan(
+  eventId: string,
+  collection: "products" | "purchases" | "event_materiel",
+) {
   if (!orphanTracker.has(eventId)) {
-    orphanTracker.set(eventId, { products: 0, purchases: 0, event_materiel: 0 });
+    orphanTracker.set(eventId, {
+      products: 0,
+      purchases: 0,
+      event_materiel: 0,
+    });
   }
   orphanTracker.get(eventId)![collection]++;
 }
@@ -63,13 +76,18 @@ function error(msg: string) {
 function loadExport(name: string): any {
   const path = join(EXPORT_DIR, `${name}.json`);
   if (!existsSync(path)) {
-    throw new Error(`Export file not found: ${path}. Run 1-export-appwrite.ts first.`);
+    throw new Error(
+      `Export file not found: ${path}. Run 1-export-appwrite.ts first.`,
+    );
   }
   return JSON.parse(readFileSync(path, "utf-8"));
 }
 
 function saveImport(name: string, records: any[]): void {
-  writeFileSync(join(IMPORT_DIR, `${name}.json`), JSON.stringify(records, null, 2) + "\n");
+  writeFileSync(
+    join(IMPORT_DIR, `${name}.json`),
+    JSON.stringify(records, null, 2) + "\n",
+  );
 }
 
 function generatePassword(): string {
@@ -78,7 +96,9 @@ function generatePassword(): string {
 
 /** Extract event IDs from Appwrite labels (20-char hex strings, excluding "owner", "admin") */
 function filterEventLabels(labels: string[]): string[] {
-  return (labels || []).filter((l: string) => l.length === 20 && /^[0-9a-f]{20}$/.test(l));
+  return (labels || []).filter(
+    (l: string) => l.length === 20 && /^[0-9a-f]{20}$/.test(l),
+  );
 }
 
 /** Parse string-encoded JSON array items into actual objects.
@@ -103,7 +123,9 @@ function remapTodos(todos: string[], userMap: UserMap): any[] {
     try {
       const t = typeof tStr === "string" ? JSON.parse(tStr) : tStr;
       if (t.assignedTo && Array.isArray(t.assignedTo)) {
-        t.assignedTo = t.assignedTo.map((uid: string) => userMap[uid]?.refId || null).filter(Boolean);
+        t.assignedTo = t.assignedTo
+          .map((uid: string) => userMap[uid]?.refId || null)
+          .filter(Boolean);
       }
       return t; // Return object, not string!
     } catch {
@@ -116,7 +138,11 @@ function remapTodos(todos: string[], userMap: UserMap): any[] {
 function parseJsonArray(items: any[]): any[] {
   return (items || []).map((item) => {
     if (typeof item === "string") {
-      try { return JSON.parse(item); } catch { return item; }
+      try {
+        return JSON.parse(item);
+      } catch {
+        return item;
+      }
     }
     return item;
   });
@@ -129,7 +155,7 @@ function resolveRelation(
   fieldName: string,
   required: boolean,
   context: string,
-  category?: string
+  category?: string,
 ): string | null {
   if (!appwriteId) return null;
   const mapped = map[appwriteId];
@@ -143,7 +169,10 @@ function resolveRelation(
 }
 
 /** Find user by email */
-function findUserByEmail(email: string | null | undefined, userMap: UserMap): string | null {
+function findUserByEmail(
+  email: string | null | undefined,
+  userMap: UserMap,
+): string | null {
   if (!email || typeof email !== "string") return null;
   for (const u of Object.values(userMap)) {
     if (u.email === email) return u.refId;
@@ -152,7 +181,10 @@ function findUserByEmail(email: string | null | undefined, userMap: UserMap): st
 }
 
 /** Find user by email, or by display name (case-insensitive) — for free-text author fields (updatedBy) */
-function findUserByEmailOrName(value: string | null | undefined, userMap: UserMap): string | null {
+function findUserByEmailOrName(
+  value: string | null | undefined,
+  userMap: UserMap,
+): string | null {
   const byEmail = findUserByEmail(value, userMap);
   if (byEmail) return byEmail;
   if (!value || typeof value !== "string") return null;
@@ -219,7 +251,8 @@ function main() {
   // NOTE: locks export is intentionally NOT loaded — not migrated
 
   // Set source from export metadata
-  if (usersExport._meta?.source) migrationMap._meta.source = usersExport._meta.source;
+  if (usersExport._meta?.source)
+    migrationMap._meta.source = usersExport._meta.source;
 
   // =========================================================================
   // 1. USERS
@@ -288,7 +321,10 @@ function main() {
           roles[userMap[m.userId].refId] = "owner";
         }
       } else {
-        warn(`Team "${team.name}": member userId="${m.userId}" not found in user map`, "teams.memberUnknown");
+        warn(
+          `Team "${team.name}": member userId="${m.userId}" not found in user map`,
+          "teams.memberUnknown",
+        );
       }
     }
 
@@ -329,7 +365,12 @@ function main() {
   }
   // Also check teamdocs
   for (const doc of teamdocsExport.rows) {
-    if (doc.teamId && orphanTeamIds.has(doc.teamId) && !orphanNames[doc.teamId] && doc.teamName) {
+    if (
+      doc.teamId &&
+      orphanTeamIds.has(doc.teamId) &&
+      !orphanNames[doc.teamId] &&
+      doc.teamName
+    ) {
       orphanNames[doc.teamId] = doc.teamName;
     }
   }
@@ -358,7 +399,9 @@ function main() {
 
   saveImport("teams", pbTeams);
   const nativeCount = teamsExport.teams.length;
-  console.log(`   ✅ ${pbTeams.length} teams (${nativeCount} native + ${orphanCount} orphan)\n`);
+  console.log(
+    `   ✅ ${pbTeams.length} teams (${nativeCount} native + ${orphanCount} orphan)\n`,
+  );
 
   const teamMap = migrationMap.teams;
 
@@ -383,24 +426,58 @@ function main() {
     let teamId: string | null = null;
 
     try {
-      const owner = typeof ownerRaw === "string" ? JSON.parse(ownerRaw) : ownerRaw;
+      const owner =
+        typeof ownerRaw === "string" ? JSON.parse(ownerRaw) : ownerRaw;
       if (owner?.teamId) {
-        teamId = resolveRelation(owner.teamId, teamMap, "teamId", false, `Materiel "${awMat.name}"`, "materiel.relation.teamId");
+        teamId = resolveRelation(
+          owner.teamId,
+          teamMap,
+          "teamId",
+          false,
+          `Materiel "${awMat.name}"`,
+          "materiel.relation.teamId",
+        );
       }
       if (owner?.userId) {
-        ownerUser = resolveRelation(owner.userId, userMap, "ownerUser", false, `Materiel "${awMat.name}"`, "materiel.relation.ownerUser");
+        ownerUser = resolveRelation(
+          owner.userId,
+          userMap,
+          "ownerUser",
+          false,
+          `Materiel "${awMat.name}"`,
+          "materiel.relation.ownerUser",
+        );
       }
     } catch {
-      warn(`Materiel "${awMat.name}": owner JSON parse failed`, "materiel.ownerJsonParse");
+      warn(
+        `Materiel "${awMat.name}": owner JSON parse failed`,
+        "materiel.ownerJsonParse",
+      );
     }
 
     // shareableWith → remap team IDs
     const shareableWith = (awMat.shareableWith || [])
-      .map((tid: string) => resolveRelation(tid, teamMap, "shareableWith", false, `Materiel "${awMat.name}"`, "materiel.relation.shareableWith"))
+      .map((tid: string) =>
+        resolveRelation(
+          tid,
+          teamMap,
+          "shareableWith",
+          false,
+          `Materiel "${awMat.name}"`,
+          "materiel.relation.shareableWith",
+        ),
+      )
       .filter(Boolean);
 
     // storeIn → self-ref (remap materiel ID)
-    const storeIn = resolveRelation(awMat.storeIn, migrationMap.materiel, "storeIn", false, `Materiel "${awMat.name}"`, "materiel.relation.storeIn");
+    const storeIn = resolveRelation(
+      awMat.storeIn,
+      migrationMap.materiel,
+      "storeIn",
+      false,
+      `Materiel "${awMat.name}"`,
+      "materiel.relation.storeIn",
+    );
 
     migrationMap.materiel[appwriteId] = { refId, name: awMat.name };
 
@@ -425,7 +502,9 @@ function main() {
     });
   }
   saveImport("materiel", pbMateriel);
-  console.log(`   ✅ ${pbMateriel.length} materiel items transformed${matSkipped ? `, ${matSkipped} skipped` : ""}\n`);
+  console.log(
+    `   ✅ ${pbMateriel.length} materiel items transformed${matSkipped ? `, ${matSkipped} skipped` : ""}\n`,
+  );
 
   const materielMap = migrationMap.materiel;
 
@@ -454,8 +533,12 @@ function main() {
     }
   }
   if (orphanLabelEventIds.size > 0) {
-    warn(`Orphan labels: ${orphanLabelCount} user labels reference ${orphanLabelEventIds.size} deleted events: ${[...orphanLabelEventIds].slice(0, 5).join(", ")}${orphanLabelEventIds.size > 5 ? " ..." : ""}`);
-    warn(`  These labels will be ignored — guestEmails only populated for existing events`);
+    warn(
+      `Orphan labels: ${orphanLabelCount} user labels reference ${orphanLabelEventIds.size} deleted events: ${[...orphanLabelEventIds].slice(0, 5).join(", ")}${orphanLabelEventIds.size > 5 ? " ..." : ""}`,
+    );
+    warn(
+      `  These labels will be ignored — guestEmails only populated for existing events`,
+    );
     categorize("events.orphanLabels", orphanLabelCount);
   }
 
@@ -471,11 +554,27 @@ function main() {
 
     // teamsId → PB team refIds
     const pbTeamIds = (awEvent.teamsId || [])
-      .map((tid: string) => resolveRelation(tid, teamMap, "teamsId", false, `Event "${awEvent.name}"`, "events.relation.teamsId"))
+      .map((tid: string) =>
+        resolveRelation(
+          tid,
+          teamMap,
+          "teamsId",
+          false,
+          `Event "${awEvent.name}"`,
+          "events.relation.teamsId",
+        ),
+      )
       .filter(Boolean);
 
     // createdBy
-    const createdBy = resolveRelation(awEvent.createdBy, userMap, "createdBy", false, `Event "${awEvent.name}"`, "events.relation.createdBy");
+    const createdBy = resolveRelation(
+      awEvent.createdBy,
+      userMap,
+      "createdBy",
+      false,
+      `Event "${awEvent.name}"`,
+      "events.relation.createdBy",
+    );
 
     // contributors (remap user IDs inside JSON strings)
     const contributors = remapContributors(awEvent.contributors || [], userMap);
@@ -487,7 +586,7 @@ function main() {
     // guestEmails stays for invitation tracking (emails of non-registered users)
     // guestUsers is a relation field resolved during import (IDs only, safe with ~ operator)
     const guestUsers = guestEmails
-      .map(email => findUserByEmail(email, userMap))
+      .map((email) => findUserByEmail(email, userMap))
       .filter((id): id is string => id !== null);
 
     migrationMap.events[appwriteId] = { refId, name: awEvent.name };
@@ -520,12 +619,18 @@ function main() {
         if (t.assignedTo && Array.isArray(t.assignedTo)) {
           for (const uid of t.assignedTo) {
             const mapped = userMap[uid]?.refId;
-            if (mapped) { assignedTo = mapped; break; }
+            if (mapped) {
+              assignedTo = mapped;
+              break;
+            }
           }
         }
 
         const todoRefId = `aw_todo_emb_${appwriteId}_${pbEventTodos.length}`;
-        migrationMap.event_todos[`emb_${appwriteId}_${pbEventTodos.length}`] = { refId: todoRefId, task: t.taskName };
+        migrationMap.event_todos[`emb_${appwriteId}_${pbEventTodos.length}`] = {
+          refId: todoRefId,
+          task: t.taskName,
+        };
 
         pbEventTodos.push({
           eventId: refId,
@@ -551,11 +656,16 @@ function main() {
   }
 
   if (embeddedTodoParseErrors > 0) {
-    warn(`${embeddedTodoParseErrors} embedded todos failed to parse — dropped (validate excludes them from the expected count too)`, "events.embeddedTodoParseError");
+    warn(
+      `${embeddedTodoParseErrors} embedded todos failed to parse — dropped (validate excludes them from the expected count too)`,
+      "events.embeddedTodoParseError",
+    );
   }
 
   saveImport("events", pbEvents);
-  console.log(`   ✅ ${pbEvents.length} events, guestEmails peuplés pour ${eventLabelsExtracted}/${pbEvents.length}\n`);
+  console.log(
+    `   ✅ ${pbEvents.length} events, guestEmails peuplés pour ${eventLabelsExtracted}/${pbEvents.length}\n`,
+  );
 
   const eventMap = migrationMap.events;
 
@@ -588,14 +698,28 @@ function main() {
     if (awProd.updatedBy) {
       updatedByTotal++;
       if (updatedBy) updatedByResolved++;
-      else warn(`Product "${awProd.productName}": updatedBy "${awProd.updatedBy}" not found in user map (email or name)`, "products.updatedByUnknown");
+      else
+        warn(
+          `Product "${awProd.productName}": updatedBy "${awProd.updatedBy}" not found in user map (email or name)`,
+          "products.updatedByUnknown",
+        );
     }
 
     // mergedInto: product ID → self-ref (will be resolved later)
     // For now, store as null — it's a rare case
-    const mergedInto = resolveRelation(awProd.mergedInto, migrationMap.products, "mergedInto", false, `Product "${awProd.productName}"`, "products.relation.mergedInto");
+    const mergedInto = resolveRelation(
+      awProd.mergedInto,
+      migrationMap.products,
+      "mergedInto",
+      false,
+      `Product "${awProd.productName}"`,
+      "products.relation.mergedInto",
+    );
 
-    migrationMap.products[appwriteId] = { refId, productName: awProd.productName };
+    migrationMap.products[appwriteId] = {
+      refId,
+      productName: awProd.productName,
+    };
 
     pbProducts.push({
       eventId,
@@ -641,11 +765,16 @@ function main() {
   for (const awPurch of purchasesExport.rows) {
     if (awPurch.deleted) continue;
     for (const pid of awPurch.products || []) {
-      livePurchasesByProduct.set(pid, (livePurchasesByProduct.get(pid) ?? 0) + 1);
+      livePurchasesByProduct.set(
+        pid,
+        (livePurchasesByProduct.get(pid) ?? 0) + 1,
+      );
     }
   }
 
-  const eventNameByRefId = new Map(Object.values(eventMap).map((e) => [e.refId, e.name]));
+  const eventNameByRefId = new Map(
+    Object.values(eventMap).map((e) => [e.refId, e.name]),
+  );
   const dedupGroups = new Map<string, any[]>();
   for (const p of pbProducts) {
     if (!p.productName) continue;
@@ -669,7 +798,8 @@ function main() {
         ? withRef[0]
         : [...group].sort(
             (a, b) =>
-              (livePurchasesByProduct.get(b._appwriteId) ?? 0) - (livePurchasesByProduct.get(a._appwriteId) ?? 0) ||
+              (livePurchasesByProduct.get(b._appwriteId) ?? 0) -
+                (livePurchasesByProduct.get(a._appwriteId) ?? 0) ||
               String(a.created ?? "").localeCompare(String(b.created ?? "")) ||
               String(a._appwriteId).localeCompare(String(b._appwriteId)),
           )[0];
@@ -680,7 +810,8 @@ function main() {
       dedupDropped++;
       const loserPurchases = livePurchasesByProduct.get(loser._appwriteId) ?? 0;
       dedupRemappedPurchases += loserPurchases;
-      migrationMap.products[loser._appwriteId] = migrationMap.products[survivor._appwriteId];
+      migrationMap.products[loser._appwriteId] =
+        migrationMap.products[survivor._appwriteId];
       warn(
         `Product "${survivor.productName}" (event "${evName}"): duplicate (event, name) — ${loser._appwriteId} dropped, ${survivor._appwriteId} survives (${loserPurchases} purchase(s) remapped)`,
         "products.dedup",
@@ -693,7 +824,9 @@ function main() {
     `   ✅ ${dedupedProducts.length} products transformed${prodSkipped ? `, ${prodSkipped} skipped (missing eventId)` : ""}` +
       `${dedupDropped ? `, ${dedupDropped} duplicates (event, name) dropped (${dedupRemappedPurchases} purchase(s) remapped)` : ""}`,
   );
-  console.log(`   📊 updatedBy resolved: ${updatedByResolved}/${updatedByTotal} non-empty\n`);
+  console.log(
+    `   📊 updatedBy resolved: ${updatedByResolved}/${updatedByTotal} non-empty\n`,
+  );
 
   const productMap = migrationMap.products;
 
@@ -719,12 +852,26 @@ function main() {
     }
     const eventId = eventMap[awPurch.mainId].refId;
 
-    const createdBy = resolveRelation(awPurch.createdBy, userMap, "createdBy", false, `Purchase ${appwriteId}`, "purchases.relation.createdBy");
+    const createdBy = resolveRelation(
+      awPurch.createdBy,
+      userMap,
+      "createdBy",
+      false,
+      `Purchase ${appwriteId}`,
+      "purchases.relation.createdBy",
+    );
 
     // products: array of Appwrite product $id → refIds
     const products = (awPurch.products || [])
       .map((pid: string) => {
-        const resolved = resolveRelation(pid, productMap, "products", false, `Purchase ${appwriteId}`, "purchases.relation.products");
+        const resolved = resolveRelation(
+          pid,
+          productMap,
+          "products",
+          false,
+          `Purchase ${appwriteId}`,
+          "purchases.relation.products",
+        );
         return resolved;
       })
       .filter(Boolean);
@@ -754,7 +901,9 @@ function main() {
     });
   }
   saveImport("purchases", pbPurchases);
-  console.log(`   ✅ ${pbPurchases.length} purchases transformed${purchSkipped ? `, ${purchSkipped} skipped` : ""}\n`);
+  console.log(
+    `   ✅ ${pbPurchases.length} purchases transformed${purchSkipped ? `, ${purchSkipped} skipped` : ""}\n`,
+  );
 
   // =========================================================================
   // 7. MATERIEL LOAN (before event_materiel — needed for loanId refs)
@@ -771,10 +920,38 @@ function main() {
     const updated = awLoan.$updatedAt || null;
 
     // ownerId = team ID (NOT user ID!)
-    const ownerId = resolveRelation(awLoan.ownerId, teamMap, "ownerId", false, `Loan ${appwriteId}`, "materiel_loan.relation.ownerId");
-    const responsibleId = resolveRelation(awLoan.responsibleId, userMap, "responsibleId", false, `Loan ${appwriteId}`, "materiel_loan.relation.responsibleId");
-    const eventId = resolveRelation(awLoan.eventId, eventMap, "eventId", false, `Loan ${appwriteId}`, "materiel_loan.relation.eventId");
-    const createdBy = resolveRelation(awLoan.createdBy, userMap, "createdBy", false, `Loan ${appwriteId}`, "materiel_loan.relation.createdBy");
+    const ownerId = resolveRelation(
+      awLoan.ownerId,
+      teamMap,
+      "ownerId",
+      false,
+      `Loan ${appwriteId}`,
+      "materiel_loan.relation.ownerId",
+    );
+    const responsibleId = resolveRelation(
+      awLoan.responsibleId,
+      userMap,
+      "responsibleId",
+      false,
+      `Loan ${appwriteId}`,
+      "materiel_loan.relation.responsibleId",
+    );
+    const eventId = resolveRelation(
+      awLoan.eventId,
+      eventMap,
+      "eventId",
+      false,
+      `Loan ${appwriteId}`,
+      "materiel_loan.relation.eventId",
+    );
+    const createdBy = resolveRelation(
+      awLoan.createdBy,
+      userMap,
+      "createdBy",
+      false,
+      `Loan ${appwriteId}`,
+      "materiel_loan.relation.createdBy",
+    );
 
     // Remap materielIds inside materiels JSON — parse strings → objects
     let materiels = awLoan.materiels || null;
@@ -841,9 +1018,30 @@ function main() {
       continue;
     }
     const eventId = eventMap[awEm.eventId].refId;
-    const sourceMaterielId = resolveRelation(awEm.sourceMaterielId, materielMap, "sourceMaterielId", false, `EventMateriel ${appwriteId}`, "event_materiel.relation.sourceMaterielId");
-    const createdBy = resolveRelation(awEm.createdBy, userMap, "createdBy", false, `EventMateriel ${appwriteId}`, "event_materiel.relation.createdBy");
-    const loanId = resolveRelation(awEm.loanId, migrationMap.materiel_loan, "loanId", false, `EventMateriel ${appwriteId}`, "event_materiel.relation.loanId");
+    const sourceMaterielId = resolveRelation(
+      awEm.sourceMaterielId,
+      materielMap,
+      "sourceMaterielId",
+      false,
+      `EventMateriel ${appwriteId}`,
+      "event_materiel.relation.sourceMaterielId",
+    );
+    const createdBy = resolveRelation(
+      awEm.createdBy,
+      userMap,
+      "createdBy",
+      false,
+      `EventMateriel ${appwriteId}`,
+      "event_materiel.relation.createdBy",
+    );
+    const loanId = resolveRelation(
+      awEm.loanId,
+      migrationMap.materiel_loan,
+      "loanId",
+      false,
+      `EventMateriel ${appwriteId}`,
+      "event_materiel.relation.loanId",
+    );
 
     // Map status: needed → to_find
     let status = awEm.status || null;
@@ -874,22 +1072,33 @@ function main() {
     });
   }
   // --- Topological sort: headers (groupId=null) before allocations ---
-  const emHeaders = pbEventMateriel.filter((r) => !r.groupId || r.groupId === "");
-  const emAllocations = pbEventMateriel.filter((r) => r.groupId && r.groupId !== "");
+  const emHeaders = pbEventMateriel.filter(
+    (r) => !r.groupId || r.groupId === "",
+  );
+  const emAllocations = pbEventMateriel.filter(
+    (r) => r.groupId && r.groupId !== "",
+  );
 
   const emKnownAppwriteIds = new Set(pbEventMateriel.map((r) => r._appwriteId));
   let emOrphans = 0;
   for (const alloc of emAllocations) {
     if (!emKnownAppwriteIds.has(alloc.groupId)) {
-      warn(`EventMateriel allocation "${alloc.name}" (${alloc._appwriteId}): groupId="${alloc.groupId}" not found in data → cleared`, "event_materiel.groupIdCleared");
+      warn(
+        `EventMateriel allocation "${alloc.name}" (${alloc._appwriteId}): groupId="${alloc.groupId}" not found in data → cleared`,
+        "event_materiel.groupIdCleared",
+      );
       alloc.groupId = null;
       emOrphans++;
     }
   }
 
   // Re-split after orphan cleanup (some allocations became headers)
-  const emFinalHeaders = pbEventMateriel.filter((r) => !r.groupId || r.groupId === "");
-  const emFinalAllocations = pbEventMateriel.filter((r) => r.groupId && r.groupId !== "");
+  const emFinalHeaders = pbEventMateriel.filter(
+    (r) => !r.groupId || r.groupId === "",
+  );
+  const emFinalAllocations = pbEventMateriel.filter(
+    (r) => r.groupId && r.groupId !== "",
+  );
   const pbEventMaterielSorted = [...emFinalHeaders, ...emFinalAllocations];
 
   saveImport("event_materiel", pbEventMaterielSorted);
@@ -911,8 +1120,22 @@ function main() {
     const created = awDoc.$createdAt || null;
     const updated = awDoc.$updatedAt || null;
 
-    const teamId = resolveRelation(awDoc.teamId, teamMap, "teamId", false, `Teamdoc "${awDoc.title}"`, "teamdocs.relation.teamId");
-    const eventId = resolveRelation(awDoc.eventId, eventMap, "eventId", false, `Teamdoc "${awDoc.title}"`, "teamdocs.relation.eventId");
+    const teamId = resolveRelation(
+      awDoc.teamId,
+      teamMap,
+      "teamId",
+      false,
+      `Teamdoc "${awDoc.title}"`,
+      "teamdocs.relation.teamId",
+    );
+    const eventId = resolveRelation(
+      awDoc.eventId,
+      eventMap,
+      "eventId",
+      false,
+      `Teamdoc "${awDoc.title}"`,
+      "teamdocs.relation.eventId",
+    );
 
     migrationMap.teamdocs[appwriteId] = { refId };
 
@@ -949,17 +1172,29 @@ function main() {
 
     // (no category on the resolveRelation warn — the skip below is the
     // counted event; a category here would double-count the same orphan)
-    const eventId = resolveRelation(todo.eventId, eventMap, "eventId", false, `EventTodo ${appwriteId}`);
+    const eventId = resolveRelation(
+      todo.eventId,
+      eventMap,
+      "eventId",
+      false,
+      `EventTodo ${appwriteId}`,
+    );
     if (!eventId) {
       todosSkipped++;
-      warn(`EventTodo "${todo.taskName}" (${appwriteId}): eventId="${todo.eventId}" orphan → skip`, "event_todos.orphanEventId");
+      warn(
+        `EventTodo "${todo.taskName}" (${appwriteId}): eventId="${todo.eventId}" orphan → skip`,
+        "event_todos.orphanEventId",
+      );
       continue;
     }
     let assignedTo: string | null = null;
     if (todo.assignedTo && Array.isArray(todo.assignedTo)) {
       for (const uid of todo.assignedTo) {
         const mapped = userMap[uid]?.refId;
-        if (mapped) { assignedTo = mapped; break; }
+        if (mapped) {
+          assignedTo = mapped;
+          break;
+        }
       }
     }
 
@@ -984,7 +1219,9 @@ function main() {
   }
 
   saveImport("event_todos", pbEventTodos);
-  console.log(`   ✅ ${pbEventTodos.length} event_todos total (${standaloneTodoCount} embedded + ${pbEventTodos.length - standaloneTodoCount} standalone)${todosSkipped ? `, ${todosSkipped} skipped (orphan eventId)` : ""}\n`);
+  console.log(
+    `   ✅ ${pbEventTodos.length} event_todos total (${standaloneTodoCount} embedded + ${pbEventTodos.length - standaloneTodoCount} standalone)${todosSkipped ? `, ${todosSkipped} skipped (orphan eventId)` : ""}\n`,
+  );
 
   // =========================================================================
   // 11. SHARE LINKS
@@ -1001,11 +1238,25 @@ function main() {
     const updated = awLink.$updatedAt || null;
 
     // target_id: event ID → remap to event refId (stored as text field)
-    const targetId = resolveRelation(awLink.target_id, eventMap, "target_id", false, `ShareLink ${appwriteId}`, "share_links.relation.target_id");
+    const targetId = resolveRelation(
+      awLink.target_id,
+      eventMap,
+      "target_id",
+      false,
+      `ShareLink ${appwriteId}`,
+      "share_links.relation.target_id",
+    );
 
     // createdBy: real field on the Appwrite collection — REC-1 list/view rules
     // require it populated, otherwise re-imported links are orphaned for everyone
-    const createdBy = resolveRelation(awLink.createdBy, userMap, "createdBy", false, `ShareLink ${appwriteId}`, "share_links.relation.createdBy");
+    const createdBy = resolveRelation(
+      awLink.createdBy,
+      userMap,
+      "createdBy",
+      false,
+      `ShareLink ${appwriteId}`,
+      "share_links.relation.createdBy",
+    );
 
     migrationMap.share_links[appwriteId] = { refId };
 
@@ -1033,7 +1284,9 @@ function main() {
   // =========================================================================
   // Locks are intentionally NOT migrated. Users will be disconnected post-migration
   // (new passwords required). Any locks would be stale anyway.
-  console.log("⏭️  Skipping locks (not migrated — users will reconnect post-migration)\n");
+  console.log(
+    "⏭️  Skipping locks (not migrated — users will reconnect post-migration)\n",
+  );
 
   // =========================================================================
   // Save migration map
@@ -1047,16 +1300,40 @@ function main() {
   console.log(`📊 Transform Report\n`);
 
   const summaries: [string, number, string][] = [
-    ["users", pbUsers.length, `${Object.keys(userMap).length} eventLabels extracted`],
+    [
+      "users",
+      pbUsers.length,
+      `${Object.keys(userMap).length} eventLabels extracted`,
+    ],
     ["teams", pbTeams.length, `${nativeCount} native + ${orphanCount} orphan`],
     ["materiel", pbMateriel.length, ""],
-    ["events", pbEvents.length, `guestEmails: ${eventLabelsExtracted}/${pbEvents.length}${orphanLabelEventIds.size > 0 ? `, ${orphanLabelEventIds.size} orphan labels ignored` : ""}`],
-    ["products", pbProducts.length, prodSkipped ? `${prodSkipped} skipped (orphan eventId)` : ""],
-    ["purchases", pbPurchases.length, purchSkipped ? `${purchSkipped} skipped (orphan eventId)` : ""],
+    [
+      "events",
+      pbEvents.length,
+      `guestEmails: ${eventLabelsExtracted}/${pbEvents.length}${orphanLabelEventIds.size > 0 ? `, ${orphanLabelEventIds.size} orphan labels ignored` : ""}`,
+    ],
+    [
+      "products",
+      pbProducts.length,
+      prodSkipped ? `${prodSkipped} skipped (orphan eventId)` : "",
+    ],
+    [
+      "purchases",
+      pbPurchases.length,
+      purchSkipped ? `${purchSkipped} skipped (orphan eventId)` : "",
+    ],
     ["materiel_loan", pbMaterielLoans.length, ""],
-    ["event_materiel", pbEventMateriel.length, emSkipped ? `${emSkipped} skipped (orphan eventId)` : ""],
+    [
+      "event_materiel",
+      pbEventMateriel.length,
+      emSkipped ? `${emSkipped} skipped (orphan eventId)` : "",
+    ],
     ["teamdocs", pbTeamdocs.length, ""],
-    ["event_todos", pbEventTodos.length, todosSkipped ? `${todosSkipped} standalone skipped (orphan eventId)` : ""],
+    [
+      "event_todos",
+      pbEventTodos.length,
+      todosSkipped ? `${todosSkipped} standalone skipped (orphan eventId)` : "",
+    ],
     ["share_links", pbShareLinks.length, ""],
     ["locks", 0, "SKIPPED — not migrated"],
     ["recipes", 0, "SKIPPED — use migrate-recipes.ts (Hugo source)"],
@@ -1080,20 +1357,27 @@ function main() {
       collection: "teams",
       delta: orphanCount,
       category: VERDICT_CATEGORY.orphanTeamRecreated,
-      reason: "teams referenced by events/teamdocs but absent from the export — recreated as empty-shell teams",
+      reason:
+        "teams referenced by events/teamdocs but absent from the export — recreated as empty-shell teams",
     });
   }
   // Single verdict per (type, collection) key: the products gap folds the
   // dedup drop into the orphan skip — the reason carries the exact split.
   const productGapParts: string[] = [];
   if (prodSkipped > 0) productGapParts.push(`${prodSkipped} orphans skipped`);
-  if (dedupDropped > 0) productGapParts.push(`${dedupDropped} duplicate (event, name) rows dropped, purchases remapped to survivors`);
+  if (dedupDropped > 0)
+    productGapParts.push(
+      `${dedupDropped} duplicate (event, name) rows dropped, purchases remapped to survivors`,
+    );
   if (productGapParts.length > 0) {
     verdicts.push({
       type: "count-delta",
       collection: "products",
       delta: -(prodSkipped + dedupDropped),
-      category: dedupDropped > 0 ? VERDICT_CATEGORY.duplicateProductName : VERDICT_CATEGORY.orphanSourceRecord,
+      category:
+        dedupDropped > 0
+          ? VERDICT_CATEGORY.duplicateProductName
+          : VERDICT_CATEGORY.orphanSourceRecord,
       reason: `products: ${productGapParts.join(" + ")}`,
     });
   }
@@ -1103,7 +1387,8 @@ function main() {
       collection: "purchases",
       delta: -purchSkipped,
       category: VERDICT_CATEGORY.orphanSourceRecord,
-      reason: "purchases whose mainId references an event absent from the export — skipped (orphan tracker)",
+      reason:
+        "purchases whose mainId references an event absent from the export — skipped (orphan tracker)",
     });
   }
   if (emSkipped > 0) {
@@ -1112,7 +1397,8 @@ function main() {
       collection: "event_materiel",
       delta: -emSkipped,
       category: VERDICT_CATEGORY.orphanSourceRecord,
-      reason: "event_materiel whose eventId references an event absent from the export — skipped (orphan tracker)",
+      reason:
+        "event_materiel whose eventId references an event absent from the export — skipped (orphan tracker)",
     });
   }
   if (todosSkipped > 0) {
@@ -1121,7 +1407,8 @@ function main() {
       collection: "event_todos",
       delta: -todosSkipped,
       category: VERDICT_CATEGORY.orphanSourceRecord,
-      reason: "standalone event_todos whose eventId references an event absent from the export — skipped",
+      reason:
+        "standalone event_todos whose eventId references an event absent from the export — skipped",
     });
   }
   emitVerdicts("2-transform-data", verdicts);
@@ -1132,7 +1419,9 @@ function main() {
   // =========================================================================
   if (warnCategories.size > 0) {
     console.log(`\n🏷️  Warn categories:`);
-    for (const [cat, n] of [...warnCategories.entries()].sort((a, b) => (a[0] < b[0] ? -1 : 1))) {
+    for (const [cat, n] of [...warnCategories.entries()].sort((a, b) =>
+      a[0] < b[0] ? -1 : 1,
+    )) {
       console.log(`   ${cat.padEnd(38)} ${n}`);
     }
   }
@@ -1140,13 +1429,15 @@ function main() {
   if (warnings.length > 0) {
     console.log(`\n⚠️  Warnings (${warnings.length}):`);
     for (const w of warnings.slice(0, 20)) console.log(`   - ${w}`);
-    if (warnings.length > 20) console.log(`   ... and ${warnings.length - 20} more`);
+    if (warnings.length > 20)
+      console.log(`   ... and ${warnings.length - 20} more`);
   }
 
   if (errors.length > 0) {
     console.log(`\n❌ Errors (${errors.length}):`);
     for (const e of errors.slice(0, 10)) console.log(`   - ${e}`);
-    if (errors.length > 10) console.log(`   ... and ${errors.length - 10} more`);
+    if (errors.length > 10)
+      console.log(`   ... and ${errors.length - 10} more`);
   }
 
   if (orphanTracker.size > 0) {
@@ -1165,7 +1456,8 @@ function main() {
         const parts: string[] = [];
         if (counts.products) parts.push(`${counts.products} products`);
         if (counts.purchases) parts.push(`${counts.purchases} purchases`);
-        if (counts.event_materiel) parts.push(`${counts.event_materiel} event_materiel`);
+        if (counts.event_materiel)
+          parts.push(`${counts.event_materiel} event_materiel`);
         console.log(`   ${eventId} → ${parts.join(", ")} skipped`);
       }
     }

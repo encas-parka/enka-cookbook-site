@@ -8,7 +8,13 @@
  * strings. All dates below are fixed so tests are deterministic.
  */
 import type { EnrichedEvent } from "$lib/types/events";
-import type { Materiel, MaterielLoan, Products, Purchases, Teamdocs } from "$lib/types/pb";
+import type {
+  Materiel,
+  MaterielLoan,
+  Products,
+  Purchases,
+  Teamdocs,
+} from "$lib/types/pb";
 import type { ProductNeedRow } from "$lib/db-sync/pb-sync";
 import { pbDate } from "./stub-pb";
 
@@ -30,7 +36,9 @@ export const TEST_LOAN_ID = "t12loan00000001";
 export const TEST_DATE = "2026-12-19";
 
 /** Minimal valid EnrichedEvent — no meals, so the store skips needs recalc. */
-export function makeEvent(overrides: Partial<EnrichedEvent> = {}): EnrichedEvent {
+export function makeEvent(
+  overrides: Partial<EnrichedEvent> = {},
+): EnrichedEvent {
   return {
     id: TEST_EVENT_ID,
     created: pbDate(T0),
@@ -86,7 +94,9 @@ export function makeProductRecord(overrides: Partial<Products> = {}): Products {
 }
 
 /** A PB "purchases" record linked to the fixture product. */
-export function makePurchaseRecord(overrides: Partial<Purchases> = {}): Purchases {
+export function makePurchaseRecord(
+  overrides: Partial<Purchases> = {},
+): Purchases {
   return {
     id: TEST_PURCHASE_ID,
     created: pbDate(T0),
@@ -111,7 +121,9 @@ export function makePurchaseRecord(overrides: Partial<Purchases> = {}): Purchase
 }
 
 /** A PB "teamdocs" record (server-side shape — id/created/updated native). */
-export function makeTeamdocsRecord(overrides: Partial<Teamdocs> = {}): Teamdocs {
+export function makeTeamdocsRecord(
+  overrides: Partial<Teamdocs> = {},
+): Teamdocs {
   return {
     id: TEST_TEAMDOC_ID,
     created: pbDate(T0),
@@ -127,7 +139,9 @@ export function makeTeamdocsRecord(overrides: Partial<Teamdocs> = {}): Teamdocs 
 }
 
 /** A PB "materiel" record owned by the fixture team. */
-export function makeMaterielRecord(overrides: Partial<Materiel> = {}): Materiel {
+export function makeMaterielRecord(
+  overrides: Partial<Materiel> = {},
+): Materiel {
   return {
     id: TEST_MATERIEL_ID,
     created: pbDate(T0),
@@ -150,7 +164,9 @@ export function makeMaterielRecord(overrides: Partial<Materiel> = {}): Materiel 
 }
 
 /** A PB "materiel_loan" record overlapping the loans-test period. */
-export function makeLoanRecord(overrides: Partial<MaterielLoan> = {}): MaterielLoan {
+export function makeLoanRecord(
+  overrides: Partial<MaterielLoan> = {},
+): MaterielLoan {
   return {
     id: TEST_LOAN_ID,
     created: pbDate(T0),
@@ -182,7 +198,9 @@ export function makeLoanRecord(overrides: Partial<MaterielLoan> = {}): MaterielL
  * The store skips its meals→needs recalculation when needs already exist
  * for the event, so seeding this makes `initialize()` deterministic.
  */
-export function makeNeedRow(overrides: Partial<ProductNeedRow> = {}): ProductNeedRow {
+export function makeNeedRow(
+  overrides: Partial<ProductNeedRow> = {},
+): ProductNeedRow {
   return {
     id: TEST_PRODUCT_ID,
     mainId: TEST_EVENT_ID,

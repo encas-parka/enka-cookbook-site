@@ -51,7 +51,7 @@
   <!-- FAB flottant pour mobile -->
   <div class="fixed bottom-10 left-[2%] z-50 print:hidden">
     <button
-      class="btn btn-primary btn-circle"
+      class="btn btn-circle btn-primary"
       onclick={() => (filtersDrawerOpen = !filtersDrawerOpen)}
       aria-label="Ouvrir les filtres"
     >

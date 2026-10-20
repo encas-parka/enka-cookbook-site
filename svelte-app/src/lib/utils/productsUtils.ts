@@ -14,11 +14,7 @@ import { UnitConverter } from "./UnitConverter";
  * Interface pour l'état des filtres
  */
 export type TemperatureFilterMode =
-  | "all"
-  | "frais"
-  | "not-frais"
-  | "surgele"
-  | "not-surgele";
+  "all" | "frais" | "not-frais" | "surgele" | "not-surgele";
 
 export interface FiltersState {
   searchQuery: string;
@@ -46,7 +42,9 @@ export interface FiltersState {
  * Le garde historique `jsonString?.trim()` levait un TypeError sur le shape
  * natif (garde hors try/catch) et faisait planter tout l'enrichissement.
  */
-export function safeJsonParse<T>(json: string | T | null | undefined): T | null {
+export function safeJsonParse<T>(
+  json: string | T | null | undefined,
+): T | null {
   if (json == null) return null;
   if (typeof json === "object") return json as T;
   if (typeof json !== "string") return null;
@@ -519,13 +517,13 @@ export function detectOverrideMismatch(
     recipesChanged,
     details: hasMismatch
       ? {
-        oldComputed,
-        newComputed,
-        oldPlates,
-        newPlates,
-        oldRecipes,
-        newRecipes,
-      }
+          oldComputed,
+          newComputed,
+          oldPlates,
+          newPlates,
+          oldRecipes,
+          newRecipes,
+        }
       : undefined,
   };
 }

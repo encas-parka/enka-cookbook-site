@@ -22,20 +22,24 @@
  */
 
 import fuzzysort from "fuzzysort";
-import type {
-  Ingredient,
-  FuzzyIngredientResult,
-} from "../types/recipes.types";
+import type { Ingredient, FuzzyIngredientResult } from "../types/recipes.types";
 import { toAppIngredient } from "../types/recipes.types";
 import type { IngredientsDoc, CategoriesDoc } from "../types/recipes.types";
-import type { IngredientsRecord, CategoriesRecord } from "../types/pb-generated";
+import type {
+  IngredientsRecord,
+  CategoriesRecord,
+} from "../types/pb-generated";
 import {
   createSyncCollection,
   bridgeToMap,
   db,
   pb,
 } from "$lib/db-sync/pb-sync";
-import { DEFAULT_MATERIEL, DEFAULT_REGIMES, mergeWithCustom } from "$lib/data/recipe-reference";
+import {
+  DEFAULT_MATERIEL,
+  DEFAULT_REGIMES,
+  mergeWithCustom,
+} from "$lib/data/recipe-reference";
 import { nanoid } from "nanoid";
 
 // =============================================================================
@@ -78,9 +82,7 @@ class RecipeDataStore {
   );
 
   /** Bridge réactif categories (key = PB id) */
-  #categoriesBridge = bridgeToMap<CategoriesDoc>(() =>
-    db.categories.toArray(),
-  );
+  #categoriesBridge = bridgeToMap<CategoriesDoc>(() => db.categories.toArray());
 
   // ===========================================================================
   // ÉTAT RÉACTIF
@@ -283,10 +285,7 @@ class RecipeDataStore {
         `[RecipeDataStore] Cache local: ${this.#customMateriel.length} matériels, ${this.#customRegimes.length} régimes`,
       );
     } catch (err) {
-      console.warn(
-        "[RecipeDataStore] Erreur chargement cache local:",
-        err,
-      );
+      console.warn("[RecipeDataStore] Erreur chargement cache local:", err);
     }
   }
 
@@ -326,10 +325,7 @@ class RecipeDataStore {
       this.#categoriesCollection.subscribe();
       console.log("[RecipeDataStore] ✓ Realtime configuré");
     } catch (err) {
-      console.error(
-        "[RecipeDataStore] Erreur configuration realtime:",
-        err,
-      );
+      console.error("[RecipeDataStore] Erreur configuration realtime:", err);
       throw err;
     }
   }
@@ -421,7 +417,9 @@ class RecipeDataStore {
    * Ingrédients contenant un allergène donné.
    */
   getIngredientsByAllergen(allergen: string): Ingredient[] {
-    return this.#ingredientsList.filter((ing) => ing.allergens?.includes(allergen));
+    return this.#ingredientsList.filter((ing) =>
+      ing.allergens?.includes(allergen),
+    );
   }
 
   /**

@@ -87,11 +87,11 @@
 
 <div
   id="recipe-{recipe.id}"
-  class="card bg-base-100 border-base-300 border shadow-lg print:border-none print:shadow-none"
+  class="card border border-base-300 bg-base-100 shadow-lg print:border-none print:shadow-none"
 >
   <div class="card-body p-2 md:p-6">
     <!-- En-tête de la carte -->
-    <div class="border-base-300 mb-4 border-b pb-4">
+    <div class="mb-4 border-b border-base-300 pb-4">
       <div
         class="flex flex-wrap items-baseline justify-between gap-4 print:gap-1"
       >
@@ -105,7 +105,7 @@
         <div class="ms-auto flex flex-wrap items-center justify-end gap-4">
           {#if formattedDate}
             <div
-              class="text-base-content/80 flex items-center gap-2 text-base font-bold"
+              class="flex items-center gap-2 text-base font-bold text-base-content/80"
             >
               <Calendar class="h-4 w-4" />
               <span>{formattedDate}</span>
@@ -117,7 +117,7 @@
 
           {#if recipeTypeInEvent}
             <div
-              class="badge text-base-content/80 font-medium {getRecipeTypeColor(
+              class="badge font-medium text-base-content/80 {getRecipeTypeColor(
                 recipeTypeInEvent,
               )}"
             >
@@ -142,27 +142,27 @@
       <div
         class=" flex flex-wrap items-center gap-4 pt-4 print:gap-2 print:pt-0"
       >
-        <div class="text-base-content/80 flex items-center gap-2 py-2 text-lg">
+        <div class="flex items-center gap-2 py-2 text-lg text-base-content/80">
           <Users class="h-4 w-4" />
           <span>{formatPlates(recipePlates)}</span>
         </div>
         <div class="flex flex-wrap gap-1">
           {#if recipe.serveHot}
-            <span class="badge badge-error badge-sm badge-soft"
+            <span class="badge badge-soft badge-sm badge-error"
               >Servir Chaud</span
             >
           {:else}
-            <span class="badge badge-info badge-sm badge-soft"
+            <span class="badge badge-soft badge-sm badge-info"
               >Servir Froid</span
             >
           {/if}
 
           {#if recipe.cuisson}
-            <span class="badge badge-warning badge-sm badge-soft"
+            <span class="badge badge-soft badge-sm badge-warning"
               >Avec Cuisson</span
             >
           {:else}
-            <span class="badge badge-success badge-sm badge-soft"
+            <span class="badge badge-soft badge-sm badge-success"
               >Sans Cuisson</span
             >
           {/if}
@@ -180,7 +180,7 @@
       <!-- Description quantité -->
       {#if recipe.quantite_desc}
         <div class="pt-3 print:pt-1">
-          <p class="text-base-content/70 text-end text-sm italic">
+          <p class="text-end text-sm text-base-content/70 italic">
             {recipe.quantite_desc}
           </p>
         </div>

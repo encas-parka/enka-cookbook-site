@@ -393,18 +393,18 @@ export class NativeTeamsStore {
     });
 
     // Analyser les résultats
-    const added = result.results?.filter(
-      (r: { action: string }) => r.action === "added",
-    ).length || 0;
-    const invited = result.results?.filter(
-      (r: { action: string }) => r.action === "invited",
-    ).length || 0;
-    const alreadyMember = result.results?.filter(
-      (r: { action: string }) => r.action === "already_member",
-    ).length || 0;
-    const failed = result.results?.filter(
-      (r: { ok: boolean }) => !r.ok,
-    ).length || 0;
+    const added =
+      result.results?.filter((r: { action: string }) => r.action === "added")
+        .length || 0;
+    const invited =
+      result.results?.filter((r: { action: string }) => r.action === "invited")
+        .length || 0;
+    const alreadyMember =
+      result.results?.filter(
+        (r: { action: string }) => r.action === "already_member",
+      ).length || 0;
+    const failed =
+      result.results?.filter((r: { ok: boolean }) => !r.ok).length || 0;
 
     // Rafraîchir la team pour refléter les nouveaux membres
     await this.fetchTeam(teamId);
@@ -412,7 +412,8 @@ export class NativeTeamsStore {
     // Toast de feedback
     const parts: string[] = [];
     if (added > 0) parts.push(`${added} membre(s) ajouté(s)`);
-    if (invited > 0) parts.push(`${invited} invitation(s) envoyée(s) par email`);
+    if (invited > 0)
+      parts.push(`${invited} invitation(s) envoyée(s) par email`);
     if (alreadyMember > 0) parts.push(`${alreadyMember} déjà membre(s)`);
 
     if (failed > 0) {

@@ -191,7 +191,7 @@
       disabled={!canEdit || !isValid || isSaving}
     >
       {#if isSaving}
-        <span class="loading loading-spinner loading-sm"></span>
+        <span class="loading loading-sm loading-spinner"></span>
       {:else}
         <Save class="h-4 w-4" />
       {/if}
@@ -219,7 +219,7 @@
   <div class="space-y-4">
     <!-- Titre -->
     <fieldset class="fieldset flex">
-      <label class="input input-lg w-full">
+      <label class="input w-full input-lg">
         <span class="label">Nom</span>
         <input
           type="text"
@@ -278,7 +278,7 @@
     <!-- Bouton flottant Créer (mobile uniquement) -->
     {#if hasUnsavedChanges && !isSaving}
       <button
-        class="btn btn-primary btn-sm sticky bottom-2 shadow-lg {!globalState.isMobile &&
+        class="btn sticky bottom-2 shadow-lg btn-primary btn-sm {!globalState.isMobile &&
           'hidden'}"
         onclick={handleCreate}
         disabled={!canEdit || !isValid || isSaving}

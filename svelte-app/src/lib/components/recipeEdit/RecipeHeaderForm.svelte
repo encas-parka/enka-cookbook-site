@@ -58,9 +58,9 @@
   }
 </script>
 
-<div class="card bg-base-100 max-sm:card-sm shadow-xl">
+<div class="card bg-base-100 shadow-xl max-sm:card-sm">
   <div class="card-body">
-    <h2 class="card-title mb-4">
+    <h2 class="mb-4 card-title">
       <BookOpen class="h-5 w-5" />
       Informations générales
     </h2>
@@ -71,10 +71,10 @@
         <div class="flex flex-wrap items-start gap-x-6 sm:gap-x-10">
           <!-- Titre -->
           <fieldset class="fieldset w-full min-w-3/5 flex-1">
-            <legend class="fieldset-legend required">Titre de la recette</legend
+            <legend class="required fieldset-legend">Titre de la recette</legend
             >
             <label
-              class="input input-lg w-full flex-1 {validationErrors.title
+              class="input w-full flex-1 input-lg {validationErrors.title
                 ? 'input-error'
                 : ''}"
             >
@@ -94,7 +94,7 @@
               {#if validationErrors.title}
                 <span class="text-error">{validationErrors.title}</span>
               {/if}
-              <span class="fieldset-label ms-auto italic"
+              <span class="ms-auto fieldset-label italic"
                 >{recipe.title?.length || 0}/80 caractères</span
               >
             </div>
@@ -109,7 +109,7 @@
               {#if versionNumber}
                 <fieldset class="fieldset w-full flex-1 sm:min-w-1/5">
                   <legend class="fieldset-legend">Version</legend>
-                  <label class="input input-lg w-max">
+                  <label class="input w-max input-lg">
                     <span class="badge badge-ghost font-mono"
                       >v{versionNumber}</span
                     >
@@ -134,7 +134,7 @@
                     ex: "économique", "sans fromages", "plus rapide"...
                   </p>
                   {#if validationErrors.versionLabel}
-                    <span class="text-error text-wrap"
+                    <span class="text-wrap text-error"
                       >{validationErrors.versionLabel}</span
                     >
                   {/if}
@@ -142,7 +142,7 @@
               {/if}
             {/if}
           {:else if recipe.versionLabel}
-            <span class="badge badge-secondary badge-lg h-full">
+            <span class="badge h-full badge-lg badge-secondary">
               {recipe.versionLabel}
             </span>
           {/if}
@@ -176,7 +176,7 @@
       <div class="flex flex-wrap justify-between gap-10">
         <div class="flex flex-wrap gap-x-10 gap-y-2">
           <fieldset class="fieldset">
-            <legend class="fieldset-legend required">Nombre de couverts</legend>
+            <legend class="required fieldset-legend">Nombre de couverts</legend>
             <label class="input {validationErrors.plate ? 'input-error' : ''}">
               <Utensils class="h-4 w-4 opacity-50" />
               <input
@@ -230,7 +230,7 @@
       <!-- Type et Catégories -->
       <div class="flex flex-col gap-x-10 gap-y-2 sm:flex-row sm:items-start">
         <fieldset class="fieldset sm:w-auto">
-          <legend class="fieldset-legend required">Type de recette</legend>
+          <legend class="required fieldset-legend">Type de recette</legend>
           <label class="select {validationErrors.typeR ? 'select-error' : ''}">
             <ChefHat class="h-4 w-4 opacity-50" />
             <select
@@ -272,7 +272,7 @@
       <!-- Température et Cuisson -->
       <div class="flex flex-col gap-x-10 gap-y-2 sm:flex-row sm:items-start">
         <fieldset class="fieldset flex-1 sm:max-w-xs">
-          <legend class="fieldset-legend required">
+          <legend class="required fieldset-legend">
             <Thermometer class="h-4 w-4" />
             <span>Température de service</span>
           </legend>
@@ -299,7 +299,7 @@
         </fieldset>
 
         <fieldset class="fieldset flex-1 sm:max-w-xs">
-          <legend class="fieldset-legend required">
+          <legend class="required fieldset-legend">
             <Flame class="h-4 w-4" />
             <span>Nécessite une cuisson</span>
           </legend>
@@ -405,7 +405,7 @@
                 checked={recipe?.check === true}
                 onchange={() => recipe && (recipe.check = true)}
                 disabled={!canEdit}
-                class="radio radio-primary radio-sm"
+                class="radio radio-sm radio-primary"
               />
               <span class="text-sm">Oui</span>
             </label>
@@ -416,7 +416,7 @@
                 checked={recipe?.check === false}
                 onchange={() => recipe && (recipe.check = false)}
                 disabled={!canEdit}
-                class="radio radio-primary radio-sm"
+                class="radio radio-sm radio-primary"
               />
               <span class="text-sm">Non</span>
             </label>
@@ -430,7 +430,7 @@
         <label class="flex cursor-pointer gap-3 sm:w-full">
           <input
             type="checkbox"
-            class="checkbox checkbox-primary checkbox-sm mt-1"
+            class="checkbox mt-1 checkbox-sm checkbox-primary"
             bind:checked={recipe.draft}
             disabled={!canEdit || recipe.check !== true}
           />

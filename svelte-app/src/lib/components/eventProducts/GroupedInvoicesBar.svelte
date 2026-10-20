@@ -28,14 +28,14 @@
 {#if hasInvoices}
   <div class="ms-auto mt-auto">
     <span
-      class="text-base-content/60 text-xs font-medium tracking-wider uppercase"
+      class="text-xs font-medium tracking-wider text-base-content/60 uppercase"
     >
       Achats groupés
     </span>
     <div class="mt-1 flex flex-wrap gap-2">
       {#each invoices as invoice (invoice.invoiceId)}
         <button
-          class="btn btn-sm gap-1.5 {invoice.purchaseStatus === 'delivered'
+          class="btn gap-1.5 btn-sm {invoice.purchaseStatus === 'delivered'
             ? 'btn-outline btn-success'
             : 'btn-outline btn-info'}"
           onclick={() => onInvoiceClick(invoice.invoiceId)}
@@ -61,19 +61,19 @@
               : "?"}
           </span>
 
-          <span class="badge badge-sm badge-ghost">{invoice.purchaseCount}</span
+          <span class="badge badge-ghost badge-sm">{invoice.purchaseCount}</span
           >
 
           {#if invoice.purchaseStatus === "ordered" && invoice.deliveryDate}
             <span
-              class="text-base-content/80 flex items-center gap-0.5 text-sm"
+              class="flex items-center gap-0.5 text-sm text-base-content/80"
             >
               <CalendarArrowDown class="size-4" />
               {formatDateOrNull(invoice.deliveryDate)}
             </span>
           {:else}
             <span
-              class="text-base-content/80 flex items-center gap-0.5 text-sm"
+              class="flex items-center gap-0.5 text-sm text-base-content/80"
             >
               <CalendarMinus2 class="size-4" />
             </span>
@@ -81,7 +81,7 @@
 
           {#if invoice.who}
             <span
-              class="text-base-content/50 flex items-center gap-0.5 text-sm"
+              class="flex items-center gap-0.5 text-sm text-base-content/50"
             >
               <User class="size-4" />
               {invoice.who}

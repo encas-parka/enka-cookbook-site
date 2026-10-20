@@ -1,5 +1,3 @@
-
-
 /**
  * Interface pour une équipe native enrichie avec ses membres et préférences
  */

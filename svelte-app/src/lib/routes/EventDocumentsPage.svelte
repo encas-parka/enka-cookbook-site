@@ -63,8 +63,7 @@
   const sortedDocs = $derived(
     [...filteredDocs].sort(
       (a, b) =>
-        new Date(b.updated || 0).getTime() -
-        new Date(a.updated || 0).getTime(),
+        new Date(b.updated || 0).getTime() - new Date(a.updated || 0).getTime(),
     ),
   );
 
@@ -111,7 +110,7 @@
 
 {#snippet navActions()}{/snippet}
 
-<div class="bg-base-200 min-h-lvh px-4 pt-4 pb-20 md:px-20" transition:fade>
+<div class="min-h-lvh bg-base-200 px-4 pt-4 pb-20 md:px-20" transition:fade>
   <div class="mx-auto mt-6 max-w-4xl">
     <!-- Header -->
     <div class="mb-4 flex flex-wrap items-center justify-between gap-4">
@@ -122,7 +121,7 @@
       {/if}
       {#if canEdit}
         <button
-          class="btn btn-primary btn-sm ms-auto"
+          class="btn ms-auto btn-primary btn-sm"
           onclick={() => navigate(`/event/${eventId}/document/create`)}
         >
           <PlusIcon class="mr-1 size-4" />
@@ -152,21 +151,21 @@
 
       {#if paginatedDocs.length < filteredDocs.length}
         <div bind:this={sentinel} class="py-8 text-center">
-          <span class="loading loading-spinner loading-md"></span>
+          <span class="loading loading-md loading-spinner"></span>
         </div>
       {/if}
 
       {#if filteredDocs.length === 0 && !teamdocsStore.loading}
         <div class="py-12 text-center">
-          <p class="text-base-content/60 text-lg">
+          <p class="text-lg text-base-content/60">
             {searchQuery.length >= 2
               ? "Aucun document ne correspond à la recherche"
               : "Aucun document pour cet événement"}
           </p>
           {#if canEdit && searchQuery.length < 2}
             <button
-              class="btn btn-primary mt-4"
-onclick={() => navigate(`/event/${eventId}/document/create`)}
+              class="btn mt-4 btn-primary"
+              onclick={() => navigate(`/event/${eventId}/document/create`)}
             >
               <PlusIcon size={18} />
               Créer le premier document

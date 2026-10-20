@@ -16,9 +16,8 @@
  */
 
 vi.mock("pocketbase", async () => {
-  const { FakePocketBase } = await import(
-    "../../stores/__tests__/harness/stub-pb"
-  );
+  const { FakePocketBase } =
+    await import("../../stores/__tests__/harness/stub-pb");
   return { default: FakePocketBase };
 });
 
@@ -79,7 +78,12 @@ describe("pb-collection — primitive upsert", () => {
   it("upsert sans id → create (id serveur généré), sucre unitaire", async () => {
     const col = productsCollection();
     const full = makeProductRecord({ productName: "Muscade" });
-    const { id: _dropId, created: _dropCreated, updated: _dropUpdated, ...payload } = full;
+    const {
+      id: _dropId,
+      created: _dropCreated,
+      updated: _dropUpdated,
+      ...payload
+    } = full;
 
     const confirmed = await col.upsert(payload);
 
@@ -197,6 +201,8 @@ function createDate(): string {
 /** Garde-fou de forme PB sur un timestamp renvoyé par le fake. */
 function pbDateOf(value: unknown): string {
   expect(typeof value).toBe("string");
-  expect(value as string).toMatch(/^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}\.\d{3}Z$/);
+  expect(value as string).toMatch(
+    /^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}\.\d{3}Z$/,
+  );
   return value as string;
 }

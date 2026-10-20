@@ -5,8 +5,8 @@
  * automatiquement via `pb.authStore`.
  */
 
-import { pb } from '$lib/db-sync/pb-sync';
-import { lookupUserByEmail } from './pb-users';
+import { pb } from "$lib/db-sync/pb-sync";
+import { lookupUserByEmail } from "./pb-users";
 
 // =============================================================================
 // TYPES
@@ -17,10 +17,10 @@ import { lookupUserByEmail } from './pb-users';
  * Seuls les champs utilisés par le codebase sont exposés.
  */
 export interface PBAuthUser {
-	id: string;
-	name: string;
-	email: string;
-	emailVerification: boolean;
+  id: string;
+  name: string;
+  email: string;
+  emailVerification: boolean;
 }
 
 // =============================================================================
@@ -31,12 +31,12 @@ export interface PBAuthUser {
  * Normalise un RecordModel PocketBase en PBAuthUser.
  */
 function normalizeUser(record: Record<string, unknown>): PBAuthUser {
-	return {
-		id: record.id as string,
-		name: (record.name as string) || (record.username as string) || '',
-		email: (record.email as string) || '',
-		emailVerification: Boolean(record.emailVerification)
-	};
+  return {
+    id: record.id as string,
+    name: (record.name as string) || (record.username as string) || "",
+    email: (record.email as string) || "",
+    emailVerification: Boolean(record.emailVerification),
+  };
 }
 
 // =============================================================================
@@ -48,17 +48,17 @@ function normalizeUser(record: Record<string, unknown>): PBAuthUser {
  * Retourne null si non authentifié.
  */
 export function getCurrentUser(): PBAuthUser | null {
-	if (pb.authStore.isValid && pb.authStore.record) {
-		return normalizeUser(pb.authStore.record);
-	}
-	return null;
+  if (pb.authStore.isValid && pb.authStore.record) {
+    return normalizeUser(pb.authStore.record);
+  }
+  return null;
 }
 
 /**
  * Vérifie si un utilisateur est authentifié.
  */
 export function isAuthenticated(): boolean {
-	return pb.authStore.isValid;
+  return pb.authStore.isValid;
 }
 
 /**
@@ -66,11 +66,11 @@ export function isAuthenticated(): boolean {
  * Le token JWT est automatiquement stocké dans pb.authStore (localStorage).
  */
 export async function loginWithPassword(
-	email: string,
-	password: string
+  email: string,
+  password: string,
 ): Promise<PBAuthUser> {
-	const result = await pb.collection('users').authWithPassword(email, password);
-	return normalizeUser(result.record);
+  const result = await pb.collection("users").authWithPassword(email, password);
+  return normalizeUser(result.record);
 }
 
 /**
@@ -79,20 +79,20 @@ export async function loginWithPassword(
  * l'utilisateur puis on le connecte immédiatement.
  */
 export async function register(
-	name: string,
-	email: string,
-	password: string
+  name: string,
+  email: string,
+  password: string,
 ): Promise<PBAuthUser> {
-	// 1. Créer l'utilisateur
-	await pb.collection('users').create({
-		email,
-		password,
-		passwordConfirm: password,
-		name
-	});
+  // 1. Créer l'utilisateur
+  await pb.collection("users").create({
+    email,
+    password,
+    passwordConfirm: password,
+    name,
+  });
 
-	// 2. Connecter immédiatement
-	return loginWithPassword(email, password);
+  // 2. Connecter immédiatement
+  return loginWithPassword(email, password);
 }
 
 /**
@@ -100,7 +100,7 @@ export async function register(
  * Le SDK PocketBase nettoie automatiquement le localStorage.
  */
 export function logout(): void {
-	pb.authStore.clear();
+  pb.authStore.clear();
 }
 
 /**
@@ -108,7 +108,7 @@ export function logout(): void {
  * Envoie un email avec un lien de reset via le template PocketBase configuré.
  */
 export async function requestPasswordReset(email: string): Promise<void> {
-	await pb.collection('users').requestPasswordReset(email);
+  await pb.collection("users").requestPasswordReset(email);
 }
 
 /**
@@ -121,11 +121,11 @@ export async function requestPasswordReset(email: string): Promise<void> {
  * pré-authentifiés.
  */
 export async function emailExists(email: string): Promise<boolean> {
-	try {
-		return (await lookupUserByEmail(email)) !== null;
-	} catch {
-		return false;
-	}
+  try {
+    return (await lookupUserByEmail(email)) !== null;
+  } catch {
+    return false;
+  }
 }
 
 /**
@@ -133,13 +133,13 @@ export async function emailExists(email: string): Promise<boolean> {
  * Retourne une fonction de désabonnement.
  */
 export function onAuthChange(
-	callback: (user: PBAuthUser | null) => void
+  callback: (user: PBAuthUser | null) => void,
 ): () => void {
-	return pb.authStore.onChange((_token, record) => {
-		if (record) {
-			callback(normalizeUser(record));
-		} else {
-			callback(null);
-		}
-	});
+  return pb.authStore.onChange((_token, record) => {
+    if (record) {
+      callback(normalizeUser(record));
+    } else {
+      callback(null);
+    }
+  });
 }

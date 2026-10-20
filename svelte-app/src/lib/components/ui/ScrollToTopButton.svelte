@@ -13,7 +13,7 @@
 {#if showButton}
   <button
     onclick={scrollToTop}
-    class="btn btn-primary btn-circle fixed right-[2%] bottom-10 z-50 rounded-full shadow-lg"
+    class="btn fixed right-[2%] bottom-10 z-50 btn-circle rounded-full shadow-lg btn-primary"
     aria-label="Retour en haut de page"
     transition:fade
   >

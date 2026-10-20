@@ -43,10 +43,7 @@ import { createSyncCollection, db, pb } from "$lib/db-sync/pb-sync";
  * avec le serveur, la projection peut être retentée.
  */
 export class EventMaterielSyncError extends Error {
-  constructor(
-    message: string,
-    options: { cause: unknown },
-  ) {
+  constructor(message: string, options: { cause: unknown }) {
     super(message, options);
     this.name = "EventMaterielSyncError";
   }
@@ -54,9 +51,18 @@ export class EventMaterielSyncError extends Error {
 
 export class MaterielStore {
   // aw-sync collections (CRUD + sync Appwrite ↔ Dexie)
-  #materielCollection = createSyncCollection<Materiel>(pb, db.materiels, "materiel", { softDelete: true });
+  #materielCollection = createSyncCollection<Materiel>(
+    pb,
+    db.materiels,
+    "materiel",
+    { softDelete: true },
+  );
 
-  #loanCollection = createSyncCollection<MaterielLoan>(pb, db.materielLoans, "materiel_loan");
+  #loanCollection = createSyncCollection<MaterielLoan>(
+    pb,
+    db.materielLoans,
+    "materiel_loan",
+  );
 
   // Single liveQuery subscription (observes both tables)
   #subscription: Subscription | null = null;
@@ -136,8 +142,7 @@ export class MaterielStore {
         myTeamIds.includes(teamId),
       );
       return (
-        isShareableWithMyTeams &&
-        !(m.teamId && myTeamIds.includes(m.teamId))
+        isShareableWithMyTeams && !(m.teamId && myTeamIds.includes(m.teamId))
       );
     });
   });
@@ -160,9 +165,7 @@ export class MaterielStore {
   }
 
   getMaterielsByOwner(teamId: string): EnrichedMateriel[] {
-    return this.#enrichedMateriels.filter(
-      (m) => m.teamId === teamId,
-    );
+    return this.#enrichedMateriels.filter((m) => m.teamId === teamId);
   }
 
   getAvailableMaterielsForPeriod(
@@ -359,23 +362,21 @@ export class MaterielStore {
         throw new Error("Utilisateur non connecté");
       }
 
-      const doc = await this.#materielCollection.create(
-        {
-          name: data.name,
-          description: data.description || null,
-          type: data.type || null,
-          quantity: data.quantity,
-          status: (data.status || "ok") as Materiel["status"],
-          location: data.location || null,
-          shareableWith: data.shareableWith || null,
-          teamId: data.teamId || null,
-          ownerUser: globalState.userId,
-          createdBy: globalState.userId,
-          deleted: false,
-          isStorage: false,
-          storeIn: null,
-        } as Omit<Materiel, "id" | "created" | "updated">,
-      );
+      const doc = await this.#materielCollection.create({
+        name: data.name,
+        description: data.description || null,
+        type: data.type || null,
+        quantity: data.quantity,
+        status: (data.status || "ok") as Materiel["status"],
+        location: data.location || null,
+        shareableWith: data.shareableWith || null,
+        teamId: data.teamId || null,
+        ownerUser: globalState.userId,
+        createdBy: globalState.userId,
+        deleted: false,
+        isStorage: false,
+        storeIn: null,
+      } as Omit<Materiel, "id" | "created" | "updated">);
 
       // Return enriched (will also update via liveQuery)
       return enrichMateriel(doc, this.#liveLoans);
@@ -422,7 +423,9 @@ export class MaterielStore {
     this.#error = null;
 
     try {
-      await this.#materielCollection.update(materielId, { deleted: true } as Partial<Materiel>);
+      await this.#materielCollection.update(materielId, {
+        deleted: true,
+      } as Partial<Materiel>);
     } catch (err) {
       this.#error =
         err instanceof Error ? err.message : "Erreur de suppression";
@@ -456,26 +459,24 @@ export class MaterielStore {
         throw new Error("Utilisateur non connecté");
       }
 
-      const loan = await this.#loanCollection.create(
-        {
-          startDate: data.startDate,
-          endDate: data.endDate,
-          responsibleId: data.responsibleId,
-          responsibleName: data.responsibleName,
-          ownerId: data.ownerId,
-          ownerName: data.ownerName,
-          materiels: [...data.materiels],
-          notes: data.notes || null,
-          status: (data.status || "asked") as MaterielLoan["status"],
-          completedAt: null,
-          returnedAt: null,
-          returnNotes: null,
-          eventId: data.eventId || null,
-          eventName: data.eventName || null,
-          borrowerUser: globalState.userId,
-          createdBy: globalState.userId,
-        } as Omit<MaterielLoan, "id" | "created" | "updated">,
-      );
+      const loan = await this.#loanCollection.create({
+        startDate: data.startDate,
+        endDate: data.endDate,
+        responsibleId: data.responsibleId,
+        responsibleName: data.responsibleName,
+        ownerId: data.ownerId,
+        ownerName: data.ownerName,
+        materiels: [...data.materiels],
+        notes: data.notes || null,
+        status: (data.status || "asked") as MaterielLoan["status"],
+        completedAt: null,
+        returnedAt: null,
+        returnNotes: null,
+        eventId: data.eventId || null,
+        eventName: data.eventName || null,
+        borrowerUser: globalState.userId,
+        createdBy: globalState.userId,
+      } as Omit<MaterielLoan, "id" | "created" | "updated">);
 
       const enriched = enrichLoanFromDb(loan);
 
@@ -535,16 +536,14 @@ export class MaterielStore {
     try {
       const currentLoan = this.getLoanById(loanId);
       const oldEventId = currentLoan?.eventId || null;
-      const newEventId =
-        data.eventId !== undefined ? data.eventId : oldEventId;
+      const newEventId = data.eventId !== undefined ? data.eventId : oldEventId;
 
       const updateData: Record<string, unknown> = {};
       if (data.startDate !== undefined) updateData.startDate = data.startDate;
       if (data.endDate !== undefined) updateData.endDate = data.endDate;
       if (data.materiels !== undefined)
         updateData.materiels = [...data.materiels];
-      if (data.status !== undefined)
-        updateData.status = data.status as string;
+      if (data.status !== undefined) updateData.status = data.status as string;
       if (data.notes !== undefined) updateData.notes = data.notes;
       if (data.returnedAt !== undefined)
         updateData.returnedAt = data.returnedAt;
@@ -693,9 +692,9 @@ export class MaterielStore {
     const formatDate = (d: string | null) =>
       d
         ? new Date(d).toLocaleDateString("fr-FR", {
-          day: "2-digit",
-          month: "2-digit",
-        })
+            day: "2-digit",
+            month: "2-digit",
+          })
         : "?";
     const start = formatDate(loan.startDate);
     const end = formatDate(loan.endDate);
@@ -715,9 +714,7 @@ export class MaterielStore {
     const byType = new Map<string, typeof items>();
 
     for (const item of items) {
-      const m = this.#enrichedMateriels.find(
-        (em) => em.id === item.materielId,
-      );
+      const m = this.#enrichedMateriels.find((em) => em.id === item.materielId);
       const typeLabel = materielTypeLabels[m?.type ?? "other"] ?? "Autre";
       if (!byType.has(typeLabel)) byType.set(typeLabel, []);
       byType.get(typeLabel)!.push(item);

@@ -28,13 +28,13 @@
 
 {#if recipeLines.length > 0}
   <div
-    class="bg-neutral/5 grid grid-cols-1 gap-x-6 gap-y-0.5 rounded-lg p-2 text-xs lg:grid-cols-2"
+    class="grid grid-cols-1 gap-x-6 gap-y-0.5 rounded-lg bg-neutral/5 p-2 text-xs lg:grid-cols-2"
   >
     {#each recipeLines as { recipe, date }, i (`${recipe.id ?? recipe.r}-${date}-${i}`)}
       {@const dateInfo = calculateDateDisplayInfo(date)}
       {@const DateIcon = getTimeIconComponent(dateInfo.timeIcon)}
       <button
-        class="text-base-content/60 border-neutral/10 hover:border-accent/50 flex min-w-0 items-center gap-2 border px-1 py-0.5 hover:cursor-pointer"
+        class="flex min-w-0 items-center gap-2 border border-neutral/10 px-1 py-0.5 text-base-content/60 hover:cursor-pointer hover:border-accent/50"
         onclick={() => {
           if (recipe.id) recipeDrawer.openRecipeDrawer(recipe.id, recipe.a);
         }}
@@ -42,11 +42,11 @@
       >
         <span class="max-w-2/3 truncate text-start">{recipe.r}</span>
         <span
-          class="text-base-content/90 flex shrink-0 items-center gap-0.5 whitespace-nowrap"
+          class="flex shrink-0 items-center gap-0.5 whitespace-nowrap text-base-content/90"
         >
           {dateInfo.formattedDate}
           {#if DateIcon}
-            <DateIcon size={11} class="text-base-content/90 stroke-2" />
+            <DateIcon size={11} class="stroke-2 text-base-content/90" />
           {/if}
         </span>
         <span class="flex shrink-0 items-center gap-0.5 whitespace-nowrap">

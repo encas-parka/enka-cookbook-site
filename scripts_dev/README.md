@@ -33,6 +33,7 @@ node update-recipe-allergens.js [--dry-run] [--yes]
 ```
 
 **Options :**
+
 - `--dry-run` : Affiche les modifications sans les écrire
 - `--yes` : Confirme automatiquement toutes les questions
 

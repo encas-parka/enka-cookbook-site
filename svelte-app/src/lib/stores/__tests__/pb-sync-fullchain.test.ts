@@ -26,7 +26,12 @@ import { describe, it, expect, beforeEach, vi } from "vitest";
 import { currentFakePb, pbDate } from "./harness/stub-pb";
 import { clearDexie } from "./harness/seed-dexie";
 import { waitForTick } from "./harness/wait-for-tick";
-import { bridgeToMap, createSyncCollection, db, pb } from "$lib/db-sync/pb-sync";
+import {
+  bridgeToMap,
+  createSyncCollection,
+  db,
+  pb,
+} from "$lib/db-sync/pb-sync";
 import type { Recettes } from "$lib/types/pb";
 import type { IngredientsRecord } from "$lib/types/pb-generated";
 

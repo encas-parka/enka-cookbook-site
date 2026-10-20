@@ -42,7 +42,7 @@
 
 <div class="flex flex-wrap items-center gap-1">
   <button
-    class="btn btn-soft {toFindQty > 0 && 'btn-error'} sm:btn-sm gap-1 pe-1"
+    class="btn btn-soft {toFindQty > 0 && 'btn-error'} gap-1 pe-1 sm:btn-sm"
     onclick={(e) => {
       e.stopPropagation();
       onEditHeader(headerId);
@@ -54,12 +54,12 @@
       >Manque: <strong>{toFindQty}</strong></span
     >
     <strong class=" sm:hidden">{toFindQty}</strong>
-    <span class="btn btn-square btn-error ms-2 size-6 p-0.5 opacity-60">
+    <span class="btn ms-2 btn-square size-6 p-0.5 opacity-60 btn-error">
       <PencilLine size="14" /></span
     >
   </button>
   <button
-    class="btn btn-soft {toCheckQty > 0 && 'btn-warning'} sm:btn-sm gap-1 pe-1"
+    class="btn btn-soft {toCheckQty > 0 && 'btn-warning'} gap-1 pe-1 sm:btn-sm"
     onclick={(e) => {
       e.stopPropagation();
       onAddAllocation(headerId, "to_check");
@@ -71,13 +71,13 @@
       >vérifier: <strong>{toCheckQty}</strong></span
     >
     <strong class=" sm:hidden">{toCheckQty}</strong>
-    <span class="btn btn-square btn-warning ms-2 size-6 p-0.5 opacity-60">
+    <span class="btn ms-2 btn-square size-6 p-0.5 opacity-60 btn-warning">
       <Plus size="14" /></span
     >
   </button>
   <button
     class="btn btn-soft {confirmedQty > 0 &&
-      'btn-success'} sm:btn-sm gap-1 pe-1"
+      'btn-success'} gap-1 pe-1 sm:btn-sm"
     onclick={(e) => {
       e.stopPropagation();
       onAddAllocation(headerId, "confirmed");
@@ -89,7 +89,7 @@
       >Ok: <strong>{confirmedQty}</strong></span
     >
     <strong class=" sm:hidden">{confirmedQty}</strong>
-    <span class="btn btn-square btn-success ms-2 size-6 p-0.5 opacity-60">
+    <span class="btn ms-2 btn-square size-6 p-0.5 opacity-60 btn-success">
       <Plus size="14" /></span
     >
   </button>

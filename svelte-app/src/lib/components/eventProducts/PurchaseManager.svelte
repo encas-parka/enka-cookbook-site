@@ -213,7 +213,7 @@
 
     <div
       class="card bg-base-200 {isEditMode
-        ? 'ring-accent ring-2 ring-offset-2'
+        ? 'ring-2 ring-accent ring-offset-2'
         : ''}"
       id="purchase-form-card"
     >
@@ -260,7 +260,7 @@
             disabled={modalState.loading}
           />
         </div>
-        <div class="card-actions mt-4 justify-end">
+        <div class="mt-4 card-actions justify-end">
           {#if isEditMode}
             <button class="btn btn-ghost btn-sm" onclick={resetForm}>
               Annuler
@@ -272,7 +272,7 @@
             disabled={modalState.loading || !modalState.isPurchaseFormValid}
           >
             {#if modalState.loading}
-              <span class="loading loading-spinner loading-sm"></span>
+              <span class="loading loading-sm loading-spinner"></span>
             {:else}
               {buttonText}
             {/if}
@@ -292,7 +292,7 @@
 {:else if !globalState.isMobile}
   <!-- Desktop Table View -->
   <div class="mt-4 overflow-x-auto">
-    <table class="table-zebra table-sm table">
+    <table class="table table-zebra table-sm">
       <thead>
         <tr>
           <th>Quantité</th>
@@ -340,12 +340,12 @@
                     <SquarePen class="h-4 w-4" />
                   </button>
                   <button
-                    class="btn btn-ghost btn-sm text-error"
+                    class="btn btn-ghost text-error btn-sm"
                     onclick={() => handleDeletePurchase(purchase.id)}
                     disabled={modalState.loading}
                   >
                     {#if modalState.loading}
-                      <span class="loading loading-spinner loading-sm"></span>
+                      <span class="loading loading-sm loading-spinner"></span>
                     {:else}
                       <X class="h-4 w-4" />
                     {/if}
@@ -363,7 +363,7 @@
     livraison ordered en warning) -->
   <div class="mt-4 space-y-2">
     {#each modalState.purchasesList as purchase (purchase.id)}
-      <div class="card bg-base-100 border-neutral/40 card-xs border shadow-sm">
+      <div class="card border border-neutral/40 bg-base-100 shadow-sm card-xs">
         <div class="card-body">
           <!-- Ligne 1 : données principales + contexte + actions -->
           <div class="flex flex-wrap items-center gap-x-3 gap-y-1.5">
@@ -383,7 +383,7 @@
                 {getStatusBadge(purchase.status).text}
               </div>
               {#if purchase.status === "ordered"}
-                <span class="text-warning flex items-center gap-1 font-medium">
+                <span class="flex items-center gap-1 font-medium text-warning">
                   <Calendar class="size-3.5" />
                   {purchase.deliveryDate
                     ? formatDateOrNull(purchase.deliveryDate)
@@ -396,13 +396,13 @@
             {#if purchase.store || purchase.who}
               <div class="inline-flex shrink-0 items-center gap-1.5">
                 {#if purchase.store}
-                  <div class="badge badge-sm badge-soft gap-1">
+                  <div class="badge gap-1 badge-soft badge-sm">
                     <Store class="size-3" />
                     <span class="max-w-37.5 truncate">{purchase.store}</span>
                   </div>
                 {/if}
                 {#if purchase.who}
-                  <div class="badge badge-sm badge-soft gap-1">
+                  <div class="badge gap-1 badge-soft badge-sm">
                     <User class="size-3" />
                     <span class="max-w-25 truncate">{purchase.who}</span>
                   </div>
@@ -414,20 +414,20 @@
             {#if !isArchiveMode}
               <div class="ml-auto inline-flex shrink-0 items-center gap-1">
                 <button
-                  class="btn btn-ghost btn-square btn-sm"
+                  class="btn btn-square btn-ghost btn-sm"
                   onclick={() => handleStartEdit(purchase)}
                   title="Modifier"
                 >
                   <SquarePen size={16} />
                 </button>
                 <button
-                  class="btn btn-ghost btn-square btn-sm text-error"
+                  class="btn btn-square btn-ghost text-error btn-sm"
                   onclick={() => handleDeletePurchase(purchase.id)}
                   disabled={modalState.loading}
                   title="Supprimer"
                 >
                   {#if modalState.loading}
-                    <span class="loading loading-spinner loading-xs"></span>
+                    <span class="loading loading-xs loading-spinner"></span>
                   {:else}
                     <Trash2 size={16} />
                   {/if}

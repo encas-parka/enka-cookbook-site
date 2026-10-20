@@ -1,10 +1,11 @@
 import { describe, it, expect } from "vitest";
-import {
-  resolveRemoteDocUpdate,
-  type DocDraftState,
-} from "../doc-remote-sync";
+import { resolveRemoteDocUpdate, type DocDraftState } from "../doc-remote-sync";
 
-const draft = (title: string, content: string, tags: string[]): DocDraftState => ({
+const draft = (
+  title: string,
+  content: string,
+  tags: string[],
+): DocDraftState => ({
   title,
   content,
   tags,
@@ -18,7 +19,10 @@ describe("resolveRemoteDocUpdate — propagation du contenu distant (T05)", () =
     const decision = resolveRemoteDocUpdate(
       local,
       snapshot,
-      draft("Recette à jour", "Version 2 — modifiée par userA", ["produit", "tache"]),
+      draft("Recette à jour", "Version 2 — modifiée par userA", [
+        "produit",
+        "tache",
+      ]),
     );
 
     expect(decision).toEqual({
@@ -53,7 +57,9 @@ describe("resolveRemoteDocUpdate — propagation du contenu distant (T05)", () =
   });
 
   it("ignore l'écho d'une sauvegarde déjà reflétée en local (pas de churn)", () => {
-    const saved = draft("Recette enregistrée", "Contenu sauvegardé", ["materiel"]);
+    const saved = draft("Recette enregistrée", "Contenu sauvegardé", [
+      "materiel",
+    ]);
 
     const decision = resolveRemoteDocUpdate(saved, saved, saved);
 

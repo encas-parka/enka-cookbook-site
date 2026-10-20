@@ -280,7 +280,7 @@
       disabled={isBusy || !hasData}
     >
       {#if isBusy}
-        <span class="loading loading-spinner loading-xs text-primary"></span>
+        <span class="loading loading-xs loading-spinner text-primary"></span>
       {:else}
         <Save size={18} class="mr-1" />
       {/if}
@@ -289,10 +289,10 @@
   </div>
 {/snippet}
 
-<div class="bg-base-200 min-h-lvh space-y-10 px-4 pt-4 pb-20 md:px-20">
-  <div class="card card-sm bg-base-100">
+<div class="min-h-lvh space-y-10 bg-base-200 px-4 pt-4 pb-20 md:px-20">
+  <div class="card bg-base-100 card-sm">
     <div class="card-body">
-      <div class="card-title mb-2">
+      <div class="mb-2 card-title">
         <CalendarPlus2 /> Création d'un événement
       </div>
       <p>
@@ -308,7 +308,7 @@
     <div class="min-w-80 flex-1 gap-2">
       <input
         type="text"
-        class="input input-lg min-w-2/3 shadow-md"
+        class="input min-w-2/3 shadow-md input-lg"
         value={eventName}
         oninput={handleNameInput}
         disabled={isBusy}
@@ -318,12 +318,11 @@
     <div class="flex flex-wrap gap-x-10 gap-y-6">
       <div class="span-2 flex min-w-xs flex-1 flex-col">
         <textarea
-          class="textarea shamd-sm w-full"
+          class="shamd-sm textarea w-full"
           placeholder="Décrivez l'événement..."
           bind:value={description}
           maxlength="3000"
-          rows="9"
-        ></textarea>
+          rows="9"></textarea>
         <p class="label ms-auto me-2 text-end text-sm">
           {description.length}/3000 caractères
         </p>
@@ -362,7 +361,7 @@
             </label>
           </div>
           {#if statusError}
-            <p class="text-error mt-2 text-sm">
+            <p class="mt-2 text-sm text-error">
               Veuillez sélectionner un statut
             </p>
           {/if}
@@ -374,7 +373,7 @@
   {#if isBusy}
     <div class="flex items-center justify-center py-20">
       <div class="flex flex-col items-center gap-4">
-        <span class="loading loading-spinner loading-lg text-primary"></span>
+        <span class="loading loading-lg loading-spinner text-primary"></span>
         <p class="text-base-content/60">Création de l'événement...</p>
       </div>
     </div>
@@ -385,7 +384,7 @@
         <!-- Sélection des teams -->
         <Fieldset legend="Équipes participantes">
           {#if teamsStore.myTeams.length > 0}
-            <fieldset class="fieldset mb-6">
+            <fieldset class="mb-6 fieldset">
               <legend class="fieldset-legend">Minimum de participant·es</legend>
               <label class="input">
                 <input
@@ -401,16 +400,16 @@
               </p>
             </fieldset>
 
-            <fieldset class="fieldset mb-4">
+            <fieldset class="mb-4 fieldset">
               <legend class="fieldset-legend"
                 >Sélectionnez les équipes à inviter à l'événement :</legend
               >
               <div class="flex flex-wrap gap-2">
                 {#each teamsStore.myTeams as team (team.id)}
                   <label
-                    class="bg-secondary/10 hover:bg-secondary/20 flex cursor-pointer items-center gap-3 rounded-lg px-4 py-2 {selectedTeams.includes(
+                    class="flex cursor-pointer items-center gap-3 rounded-lg bg-secondary/10 px-4 py-2 hover:bg-secondary/20 {selectedTeams.includes(
                       team.id,
-                    ) && 'ring-secondary ring-2'}"
+                    ) && 'ring-2 ring-secondary'}"
                   >
                     <input
                       type="checkbox"
@@ -433,7 +432,7 @@
                 {/each}
               </div>
               <div
-                class="text-base-content/70 alert alert-vertical mt-4 text-sm"
+                class="mt-4 alert alert-vertical text-sm text-base-content/70"
               >
                 <Info class="size-4 shrink-0" />
                 Une fois l'événement crée, il vous sera possible d'inviter des personnes
@@ -453,7 +452,7 @@
                   Envoyer un email de notification aux membres des équipes
                 </span>
               </label>
-              <p class="text-base-content/60 mt-1 text-xs">
+              <p class="mt-1 text-xs text-base-content/60">
                 Si désactivé, les membres auront accès à l'événement mais ne
                 recevront pas d'email.
               </p>
@@ -480,9 +479,9 @@
 
         {#if sortedMeals.length === 0}
           <div
-            class="text-base-content/60 bg-base-200 rounded-box border-base-200 flex flex-col items-center justify-center border-2 border-dashed py-12"
+            class="flex flex-col items-center justify-center rounded-box border-2 border-dashed border-base-200 bg-base-200 py-12 text-base-content/60"
           >
-            <div class="bg-base-200 mb-4 rounded-full p-4">
+            <div class="mb-4 rounded-full bg-base-200 p-4">
               <Calendar class="h-8 w-8 opacity-50" />
             </div>
             <p class="font-medium">Aucun repas planifié</p>
@@ -508,7 +507,7 @@
         {/if}
         <div class="flex">
           <button
-            class="btn btn-outline btn-primary btn-block mt-4"
+            class="btn mt-4 btn-block btn-outline btn-primary"
             onclick={addMeal}
           >
             <Plus class="mr-1 h-4 w-4" />
@@ -522,7 +521,7 @@
   <!-- Bouton flottant Créer (mobile uniquement) -->
   {#if hasData && !isBusy}
     <button
-      class="btn btn-accent btn-sm sticky bottom-2 shadow-lg {!globalState.isMobile &&
+      class="btn sticky bottom-2 shadow-lg btn-accent btn-sm {!globalState.isMobile &&
         'hidden'}"
       onclick={handleSave}
       disabled={isBusy || !hasData}

@@ -22,10 +22,10 @@
 </script>
 
 <fieldset
-  class="text-sm {bgClass}  rounded-box border-neutral/20 border-y-2 p-4 md:border print:p-2"
+  class="text-sm {bgClass}  rounded-box border-y-2 border-neutral/20 p-4 md:border print:p-2"
 >
   <legend
-    class="fieldset-legend {legendFont} {bgClass} rounded-box border-neutral/20 text-base-content/80 border-t px-4 py-1 print:text-sm {legendSize}"
+    class="fieldset-legend {legendFont} {bgClass} rounded-box border-t border-neutral/20 px-4 py-1 text-base-content/80 print:text-sm {legendSize}"
   >
     {#if iconComponent}
       {@const IconComp = iconComponent}

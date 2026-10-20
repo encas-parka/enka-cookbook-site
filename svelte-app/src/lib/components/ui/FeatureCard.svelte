@@ -28,7 +28,7 @@
   };
 </script>
 
-<div class="card bg-base-100 h-[60vh] w-full shadow-xl">
+<div class="card h-[60vh] w-full bg-base-100 shadow-xl">
   <!-- Figure with hover gallery -->
   {#if images.length > 0}
     <figure class="hover-gallery">
@@ -56,7 +56,7 @@
 
     {#if buttonText && buttonAction}
       <button
-        class="btn btn-{theme} btn-sm absolute right-4 bottom-4"
+        class="btn btn-{theme} absolute right-4 bottom-4 btn-sm"
         onclick={buttonAction}
       >
         {buttonText}

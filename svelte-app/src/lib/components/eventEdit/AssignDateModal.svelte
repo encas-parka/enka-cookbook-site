@@ -64,22 +64,22 @@
       <div class="flex flex-col gap-2">
         {#if allowSetAside}
           <label
-            class="bg-base-100/50 ring-warning/30 cursor-pointer rounded-lg px-3 py-2 ring-1 transition-colors {selectedMealId ===
+            class="cursor-pointer rounded-lg bg-base-100/50 px-3 py-2 ring-1 ring-warning/30 transition-colors {selectedMealId ===
             '__undated__'
-              ? 'bg-warning/20 ring-warning ring-2'
+              ? 'bg-warning/20 ring-2 ring-warning'
               : 'hover:bg-base-200'}"
           >
             <div class="flex items-center gap-3">
               <input
                 type="radio"
                 name="meal-select"
-                class="radio radio-warning radio-sm"
+                class="radio radio-sm radio-warning"
                 bind:group={selectedMealId}
                 value="__undated__"
               />
               <div class="flex-1">
                 <div class="font-medium">Mettre de côté</div>
-                <div class="text-base-content/60 text-xs">
+                <div class="text-xs text-base-content/60">
                   Retirer des repas planifiés
                 </div>
               </div>
@@ -90,20 +90,20 @@
           {@const isSelected = selectedMealId === meal.id}
           <label
             class="cursor-pointer rounded-lg px-3 py-2 transition-colors {isSelected
-              ? 'bg-primary/20 ring-primary ring-1'
+              ? 'bg-primary/20 ring-1 ring-primary'
               : 'bg-base-200 hover:bg-base-300'}"
           >
             <div class="flex items-center gap-3">
               <input
                 type="radio"
                 name="meal-select"
-                class="radio radio-primary radio-sm"
+                class="radio radio-sm radio-primary"
                 bind:group={selectedMealId}
                 value={meal.id}
               />
               <div class="flex-1">
                 <div class="font-medium">{formatMealLabel(meal)}</div>
-                <div class="text-base-content/60 text-xs">
+                <div class="text-xs text-base-content/60">
                   {meal.recipes.length} recette{meal.recipes.length !== 1
                     ? "s"
                     : ""}

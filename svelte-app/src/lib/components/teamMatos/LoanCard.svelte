@@ -252,7 +252,7 @@
 </script>
 
 <div
-  class="card max-sm:card-sm bg-base-100 border-base-200 border text-left shadow-sm"
+  class="card border border-base-200 bg-base-100 text-left shadow-sm max-sm:card-sm"
 >
   <!-- Badge statut -->
   <!-- <div class="hidden pl-4 sm:flex sm:items-center">
@@ -291,7 +291,7 @@
           <!-- Événement lié (si présent) -->
           {#if loan.eventId && loan.eventName}
             <button
-              class="badge badge-soft badge-primary badge-sm hover:badge-primary gap-1"
+              class="badge gap-1 badge-soft badge-sm badge-primary hover:badge-primary"
               onclick={() => navigate(`/event/${loan.eventId}`)}
               title="Voir l'événement"
             >
@@ -302,14 +302,14 @@
         </div>
         <!-- Notes (si présentes) -->
         {#if loan.notes}
-          <div class="text-base-content/60 text-xs italic">
+          <div class="text-xs text-base-content/60 italic">
             "{loan.notes}"
           </div>
         {/if}
         <!-- Matériels -->
         <div class="flex flex-wrap gap-2">
           {#each materiels as m (m.materielId)}
-            <span class="badge badge-sm badge-soft h-auto {getBadgeClass(m)}">
+            <span class="badge h-auto badge-soft badge-sm {getBadgeClass(m)}">
               <span> {m.materielName} </span>
               <span class="badge badge-sm"> × {m.quantity}</span>
             </span>
@@ -318,7 +318,7 @@
 
         <!-- Return notes (si présentes) -->
         {#if loan.returnNotes}
-          <div class="text-warning bg-warning/10 rounded p-2 text-xs">
+          <div class="rounded bg-warning/10 p-2 text-xs text-warning">
             <strong>Retour :</strong>
             {loan.returnNotes}
           </div>

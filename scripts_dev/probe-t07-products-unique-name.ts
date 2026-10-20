@@ -46,7 +46,9 @@ interface Env {
 
 function loadEnv(): Env {
   if (!existsSync(ENV_FILE)) {
-    console.error(`Missing ${ENV_FILE} — add PB_URL / PB_ADMIN_* / PB_USER_* there.`);
+    console.error(
+      `Missing ${ENV_FILE} — add PB_URL / PB_ADMIN_* / PB_USER_* there.`,
+    );
     process.exit(1);
   }
   const env: Record<string, string> = {};
@@ -57,8 +59,13 @@ function loadEnv(): Env {
     if (eqIdx === -1) continue;
     env[trimmed.slice(0, eqIdx).trim()] = trimmed.slice(eqIdx + 1).trim();
   }
-  const missing = ["PB_URL", "PB_ADMIN_EMAIL", "PB_ADMIN_PASSWORD", "PB_USER_EMAIL", "PB_USER_PASSWORD"]
-    .filter((k) => !env[k]);
+  const missing = [
+    "PB_URL",
+    "PB_ADMIN_EMAIL",
+    "PB_ADMIN_PASSWORD",
+    "PB_USER_EMAIL",
+    "PB_USER_PASSWORD",
+  ].filter((k) => !env[k]);
   if (missing.length > 0) {
     console.error(`Missing env keys in ${ENV_FILE}: ${missing.join(", ")}`);
     process.exit(1);
@@ -124,7 +131,9 @@ function productPayload(eventId: string, userId: string, productName: string) {
 
 async function main(): Promise<void> {
   const env = loadEnv();
-  console.log(`# probe products unique-name (WITH_UNIQUE=${WITH_UNIQUE ? "1" : "0"}) against ${env.base}`);
+  console.log(
+    `# probe products unique-name (WITH_UNIQUE=${WITH_UNIQUE ? "1" : "0"}) against ${env.base}`,
+  );
 
   const health = await pbFetch(env.base, "/api/health");
   if (health.status !== 200) {
@@ -132,31 +141,47 @@ async function main(): Promise<void> {
     process.exit(1);
   }
 
-  const admin = await pbFetch(env.base, "/api/collections/_superusers/auth-with-password", {
-    method: "POST",
-    body: { identity: env.adminEmail, password: env.adminPassword },
-  });
+  const admin = await pbFetch(
+    env.base,
+    "/api/collections/_superusers/auth-with-password",
+    {
+      method: "POST",
+      body: { identity: env.adminEmail, password: env.adminPassword },
+    },
+  );
   if (admin.status !== 200) {
-    console.error(`Admin auth failed (${admin.status}) — check PB_ADMIN_* in .env.local`);
+    console.error(
+      `Admin auth failed (${admin.status}) — check PB_ADMIN_* in .env.local`,
+    );
     process.exit(1);
   }
   const adminToken = admin.json.token as string;
 
-  const user = await pbFetch(env.base, "/api/collections/users/auth-with-password", {
-    method: "POST",
-    body: { identity: env.userEmail, password: env.userPassword },
-  });
+  const user = await pbFetch(
+    env.base,
+    "/api/collections/users/auth-with-password",
+    {
+      method: "POST",
+      body: { identity: env.userEmail, password: env.userPassword },
+    },
+  );
   if (user.status !== 200) {
-    console.error(`User auth failed (${user.status}) — check PB_USER_* in .env.local`);
+    console.error(
+      `User auth failed (${user.status}) — check PB_USER_* in .env.local`,
+    );
     process.exit(1);
   }
   const userToken = user.json.token as string;
   const userId = user.json.record.id as string;
   console.log(`user id: ${userId}`);
 
-  const events = await pbFetch(env.base, "/api/collections/events/records?perPage=200&sort=-created", {
-    token: userToken,
-  });
+  const events = await pbFetch(
+    env.base,
+    "/api/collections/events/records?perPage=200&sort=-created",
+    {
+      token: userToken,
+    },
+  );
   const items: any[] = events.json?.items ?? [];
   if (items.length === 0) {
     console.log("no visible event — nothing to probe");
@@ -179,23 +204,35 @@ async function main(): Promise<void> {
     { token: adminToken },
   );
   for (const rec of stale.json?.items ?? []) {
-    const del = await pbFetch(env.base, `/api/collections/products/records/${rec.id}`, {
-      method: "DELETE",
-      token: adminToken,
-    });
-    console.log(`purge stale product ${rec.id} (${rec.productName}): ${del.status}`);
+    const del = await pbFetch(
+      env.base,
+      `/api/collections/products/records/${rec.id}`,
+      {
+        method: "DELETE",
+        token: adminToken,
+      },
+    );
+    console.log(
+      `purge stale product ${rec.id} (${rec.productName}): ${del.status}`,
+    );
   }
 
   const createdIds: string[] = [];
   try {
     if (!WITH_UNIQUE) {
       // A. Over-long name: must be rejected on productName (max 60).
-      const long = await pbFetch(env.base, "/api/collections/products/records", {
-        method: "POST",
-        token: userToken,
-        body: productPayload(targetId, userId, TOO_LONG_NAME),
-      });
-      console.log(`create product name=61chars: ${long.status} ${JSON.stringify(long.json)}`);
+      const long = await pbFetch(
+        env.base,
+        "/api/collections/products/records",
+        {
+          method: "POST",
+          token: userToken,
+          body: productPayload(targetId, userId, TOO_LONG_NAME),
+        },
+      );
+      console.log(
+        `create product name=61chars: ${long.status} ${JSON.stringify(long.json)}`,
+      );
       verdict(
         "productname-max60",
         long.status === 400 && long.json?.data?.productName
@@ -205,18 +242,26 @@ async function main(): Promise<void> {
 
       // B. Duplicate (event, name) without the unique index: accepted twice —
       // no guard today, which is what the DDL migration fixes (after cleanup).
-      const first = await pbFetch(env.base, "/api/collections/products/records", {
-        method: "POST",
-        token: userToken,
-        body: productPayload(targetId, userId, DUP_NAME),
-      });
+      const first = await pbFetch(
+        env.base,
+        "/api/collections/products/records",
+        {
+          method: "POST",
+          token: userToken,
+          body: productPayload(targetId, userId, DUP_NAME),
+        },
+      );
       console.log(`create product "${DUP_NAME}": ${first.status}`);
       if (first.status === 200) createdIds.push(first.json.id);
-      const second = await pbFetch(env.base, "/api/collections/products/records", {
-        method: "POST",
-        token: userToken,
-        body: productPayload(targetId, userId, DUP_NAME),
-      });
+      const second = await pbFetch(
+        env.base,
+        "/api/collections/products/records",
+        {
+          method: "POST",
+          token: userToken,
+          body: productPayload(targetId, userId, DUP_NAME),
+        },
+      );
       console.log(`re-create same (event, name): ${second.status}`);
       if (second.status === 200) createdIds.push(second.json.id);
       verdict(
@@ -228,18 +273,26 @@ async function main(): Promise<void> {
     } else {
       // C. Duplicate (event, name) WITH the unique index: 200 then 400 —
       // print the exact wire shape the client maps.
-      const first = await pbFetch(env.base, "/api/collections/products/records", {
-        method: "POST",
-        token: userToken,
-        body: productPayload(targetId, userId, DUP_NAME),
-      });
+      const first = await pbFetch(
+        env.base,
+        "/api/collections/products/records",
+        {
+          method: "POST",
+          token: userToken,
+          body: productPayload(targetId, userId, DUP_NAME),
+        },
+      );
       console.log(`create product "${DUP_NAME}": ${first.status}`);
       if (first.status === 200) createdIds.push(first.json.id);
-      const second = await pbFetch(env.base, "/api/collections/products/records", {
-        method: "POST",
-        token: userToken,
-        body: productPayload(targetId, userId, DUP_NAME),
-      });
+      const second = await pbFetch(
+        env.base,
+        "/api/collections/products/records",
+        {
+          method: "POST",
+          token: userToken,
+          body: productPayload(targetId, userId, DUP_NAME),
+        },
+      );
       const shape = JSON.stringify(second.json);
       console.log(`re-create same (event, name): ${second.status} ${shape}`);
       const fieldCodes = Object.entries(second.json?.data ?? {})
@@ -254,10 +307,14 @@ async function main(): Promise<void> {
     }
   } finally {
     for (const id of createdIds) {
-      const del = await pbFetch(env.base, `/api/collections/products/records/${id}`, {
-        method: "DELETE",
-        token: adminToken,
-      });
+      const del = await pbFetch(
+        env.base,
+        `/api/collections/products/records/${id}`,
+        {
+          method: "DELETE",
+          token: adminToken,
+        },
+      );
       console.log(`cleanup product ${id}: ${del.status}`);
     }
   }

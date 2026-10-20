@@ -15,9 +15,9 @@
 // DOCUMENT CONSTRAINT — PbDoc is now the canonical shape
 // =============================================================================
 
-import type { PbDoc } from './aw-types';
+import type { PbDoc } from "./aw-types";
 
-export type { PbDoc } from './aw-types';
+export type { PbDoc } from "./aw-types";
 
 // =============================================================================
 // QUERY OPTIONS

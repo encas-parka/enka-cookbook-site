@@ -108,9 +108,7 @@
     const availableItems = items.filter((m) => !m.isUnavailable);
     if (availableItems.length === 0) return;
 
-    const allSelected = availableItems.every((m) =>
-      localSelectedIds.has(m.id),
-    );
+    const allSelected = availableItems.every((m) => localSelectedIds.has(m.id));
 
     if (allSelected) {
       availableItems.forEach((m) => localSelectedIds.delete(m.id));
@@ -151,7 +149,7 @@
   <ModalContent>
     <div class="space-y-6">
       <!-- Alerte info -->
-      <div class="alert alert-info alert-soft text-base">
+      <div class="alert alert-soft text-base alert-info">
         <Info class="h-5 w-5" />
         <span>
           Les nombres indiquent les quantités disponibles de chaque matériel,
@@ -161,7 +159,7 @@
 
       <!-- Alerte warning si matériels indisponibles -->
       {#if unavailableMateriels.length > 0}
-        <div class="alert alert-warning alert-soft text-base">
+        <div class="alert alert-soft text-base alert-warning">
           <AlertTriangle class="h-5 w-5" />
           <span>
             {unavailableMateriels.length} matériel{unavailableMateriels.length >
@@ -178,12 +176,12 @@
         {@const TypeIcon = TypeIcons[type]}
         <div class="mb-6">
           <h4 class="mb-3 flex items-center gap-2 text-base font-semibold">
-            <div class="bg-primary/10 rounded-lg p-1.5">
-              <TypeIcon class="text-primary h-4 w-4" />
+            <div class="rounded-lg bg-primary/10 p-1.5">
+              <TypeIcon class="h-4 w-4 text-primary" />
             </div>
             {typeLabels[type]}
             <button
-              class="btn btn-link btn-xs ml-auto"
+              class="btn ml-auto btn-link btn-xs"
               onclick={() => handleToggleAllByType(materiels)}
               disabled={materiels.filter((m) => !m.isUnavailable).length === 0}
             >
@@ -221,10 +219,10 @@
         </div>
       {:else}
         <div class="mb-6">
-          <div class="text-center py-12 opacity-50">
-            <Box class="h-16 w-16 mx-auto mb-4" />
+          <div class="py-12 text-center opacity-50">
+            <Box class="mx-auto mb-4 h-16 w-16" />
             <p class="text-lg font-medium">Aucun matériel disponible</p>
-            <p class="text-sm mt-2">
+            <p class="mt-2 text-sm">
               Vérifiez que l'équipe possède du matériel ou sélectionnez une
               période différente
             </p>

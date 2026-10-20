@@ -1,11 +1,7 @@
 <script lang="ts">
   import { onMount } from "svelte";
   import { fade } from "svelte/transition";
-  import {
-    Plus,
-    Users,
-    LoaderCircle,
-  } from "@lucide/svelte";
+  import { Plus, Users, LoaderCircle } from "@lucide/svelte";
   import { materielStore } from "$lib/stores/MaterielStore.svelte";
   import { globalState } from "$lib/stores/GlobalState.svelte";
   import { nativeTeamsStore } from "$lib/stores/NativeTeamsStore.svelte";
@@ -153,9 +149,7 @@
     return Date.now() - new Date(loan.completedAt).getTime() >= SEVEN_DAYS_MS;
   }
 
-  const oldCompletedCount = $derived(
-    teamLoans.filter(isOldCompleted).length,
-  );
+  const oldCompletedCount = $derived(teamLoans.filter(isOldCompleted).length);
 
   const visibleLoans = $derived(
     showOldCompleted
@@ -216,7 +210,7 @@
 <div class="container mx-auto p-4 pb-20" transition:fade>
   <div class="mx-auto max-w-7xl sm:px-4 sm:py-8">
     <!-- Tabs Inventaire / Réservation -->
-    <div class="tabs tabs-border bg-base-200 sm:tabs-lg mb-6 font-semibold">
+    <div class="tabs tabs-border mb-6 bg-base-200 font-semibold sm:tabs-lg">
       <button
         class="tab"
         onclick={() => navigate(`/dashboard/materiel/${activeTeamId}`)}
@@ -224,9 +218,7 @@
       >
         Inventaire
       </button>
-      <button class="tab tab-active">
-        Réservation
-      </button>
+      <button class="tab tab-active"> Réservation </button>
     </div>
 
     <!-- Contenu -->
@@ -247,11 +239,11 @@
       {#if teamLoans.length === 0}
         <!-- Empty state -->
         <div
-          class="bg-base-200 rounded-box border-base-200 border-2 border-dashed py-20 text-center"
+          class="rounded-box border-2 border-dashed border-base-200 bg-base-200 py-20 text-center"
         >
           <Users class="mx-auto mb-4 h-12 w-12  text-center opacity-50" />
           <h3 class="mb-2 text-lg font-bold">Aucune réservation</h3>
-          <p class="text-base-content/60 mb-6">
+          <p class="mb-6 text-base-content/60">
             Cette équipe n'a pas encore d'emprunt.
           </p>
           <button class="btn btn-primary btn-sm" onclick={openCreateLoanModal}>
@@ -263,7 +255,7 @@
         <div class="space-y-4">
           <div class="mb-6 flex justify-end">
             <button
-              class="btn btn-primary btn-sm flex gap-2"
+              class="btn flex gap-2 btn-primary btn-sm"
               onclick={openCreateLoanModal}
             >
               <Plus size={16} />

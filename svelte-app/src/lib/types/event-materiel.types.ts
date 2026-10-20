@@ -12,8 +12,14 @@ import type {
 } from "./pb-generated";
 
 // Re-export select types (single source of truth)
-export type { EventMaterielStatusOptions as EventMaterielStatus, EventMaterielTypeOptions as EventMaterielType } from "./pb-generated";
-export { EventMaterielStatusOptions, EventMaterielTypeOptions } from "./pb-generated";
+export type {
+  EventMaterielStatusOptions as EventMaterielStatus,
+  EventMaterielTypeOptions as EventMaterielType,
+} from "./pb-generated";
+export {
+  EventMaterielStatusOptions,
+  EventMaterielTypeOptions,
+} from "./pb-generated";
 
 // =============================================================================
 // TYPES ENRICHIS
@@ -37,7 +43,8 @@ export interface EventMaterielFilters {
   search?: string;
 }
 
-export type EventMaterielSortField = "name" | "type" | "status" | "who" | "where";
+export type EventMaterielSortField =
+  "name" | "type" | "status" | "who" | "where";
 
 export type SortDirection = "asc" | "desc";
 

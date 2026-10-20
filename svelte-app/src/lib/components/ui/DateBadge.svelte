@@ -28,7 +28,7 @@
 
 <div class="tooltip" data-tip={tooltipText}>
   <div
-    class="badge badge-soft sm:badge-sm hover:badge-primary flex items-center gap-1"
+    class="badge flex items-center gap-1 badge-soft hover:badge-primary sm:badge-sm"
   >
     <span class="whitespace-nowrap">{dateDisplayInfo.formattedDate}</span>
 

@@ -39,6 +39,7 @@ Applique les corrections aux fichiers de recettes.
 ## Résultat attendu
 
 Après correction :
+
 - ✅ Tous les ingrédients avec le même nom partagent le même UUID
 - ✅ Les quantités sont correctement agrégées dans les événements
 - ✅ Plus de duplications dans la liste des produits

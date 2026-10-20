@@ -41,11 +41,11 @@
     transition:scale={{ duration: 200, start: 0.8 }}
   >
     <div
-      class=" bg-secondary/80 text-secondary-content flex items-center gap-2 rounded-full px-3 py-1.5 shadow-lg"
+      class=" flex items-center gap-2 rounded-full bg-secondary/80 px-3 py-1.5 text-secondary-content shadow-lg"
     >
       <span class="max-w-32 truncate text-xs font-medium">{displayText}</span>
       <button
-        class="btn btn-sm btn-circle btn-secondary"
+        class="btn btn-circle btn-secondary btn-sm"
         onclick={handleReset}
         title={resetTitle}
       >

@@ -43,7 +43,7 @@
     Filtres
   </h3>
   <button
-    class="btn btn-sm btn-error btn-outline"
+    class="btn btn-outline btn-error btn-sm"
     onclick={() => productsStore.clearFilters()}
     disabled={!productsStore.hasFilters}
   >
@@ -70,7 +70,7 @@
         oninput={(e) => productsStore.setSearchQuery(e.currentTarget.value)}
       />
       <button
-        class="btn btn-xs btn-circle btn-error btn-outline opacity-60"
+        class="btn btn-circle btn-outline opacity-60 btn-error btn-xs"
         onclick={() => productsStore.setSearchQuery("")}
         disabled={!filters.searchQuery}
       >
@@ -83,7 +83,7 @@
       >
       <input
         type="checkbox"
-        class="toggle toggle-sm toggle-secondary"
+        class="toggle toggle-secondary toggle-sm"
         checked={filters.searchInRecipes}
         onchange={(e) =>
           productsStore.setSearchInRecipes(e.currentTarget.checked)}
@@ -105,7 +105,7 @@
   {/if}
 
   {#if isSearchActive}
-    <div class="alert alert-warning text-sm" transition:slide>
+    <div class="alert text-sm alert-warning" transition:slide>
       <span>🔎 Les filtres sont désactivés pendant une recherche par nom.</span>
     </div>
   {/if}
@@ -120,18 +120,18 @@
         <span class="label-text">Statut :</span>
       </label>
       <div
-        class="bg-base-100 flex flex-wrap gap-1 rounded-xl p-2 font-semibold"
+        class="flex flex-wrap gap-1 rounded-xl bg-base-100 p-2 font-semibold"
         id="completion-status"
       >
         <button
-          class="btn btn-sm flex-1 uppercase {filters.completionStatus ===
+          class="btn flex-1 uppercase btn-sm {filters.completionStatus ===
             'all' && 'btn-primary'}"
           type="button"
           aria-label="Tous"
           onclick={() => productsStore.setCompletionStatus("all")}>Tous</button
         >
         <button
-          class="btn btn-sm flex-1 {filters.completionStatus === 'incomplete' &&
+          class="btn flex-1 btn-sm {filters.completionStatus === 'incomplete' &&
             'btn-warning'}"
           type="button"
           aria-label="Incomplets"
@@ -139,7 +139,7 @@
           ><span class="add-to-cart"></span> Manque</button
         >
         <button
-          class="btn btn-sm flex-1 {filters.completionStatus === 'completed' &&
+          class="btn flex-1 btn-sm {filters.completionStatus === 'completed' &&
             'btn-success'}"
           type="button"
           aria-label="Complétés"
@@ -151,11 +151,11 @@
 
     {#if uniqueDeliveryDates.length > 0}
       <div class="flex flex-col">
-        <label class="label label-text flex" for="delivery-date-filter"
+        <label class="label-text label flex" for="delivery-date-filter"
           >Livraison prévue :</label
         >
         <div
-          class="bg-base-100 flex flex-wrap gap-1 rounded-xl p-2 font-semibold"
+          class="flex flex-wrap gap-1 rounded-xl bg-base-100 p-2 font-semibold"
           role="group"
           id="delivery-date-filter"
         >
@@ -185,25 +185,25 @@
         <span class="label-text">Groupement par:</span>
       </label>
       <div
-        class=" bg-base-100 flex gap-1 rounded-xl p-2 font-semibold"
+        class=" flex gap-1 rounded-xl bg-base-100 p-2 font-semibold"
         id="grouping-select"
       >
         <button
-          class="btn btn-sm flex-1 {filters.groupBy === 'none' &&
+          class="btn flex-1 btn-sm {filters.groupBy === 'none' &&
             'btn-secondary'}"
           type="button"
           aria-label="Aucun"
           onclick={() => productsStore.setGroupBy("none")}>Aucun</button
         >
         <button
-          class="btn btn-sm flex-1 {filters.groupBy === 'store' &&
+          class="btn flex-1 btn-sm {filters.groupBy === 'store' &&
             'btn-secondary'}"
           type="button"
           aria-label="Par magasin"
           onclick={() => productsStore.setGroupBy("store")}>Magasins</button
         >
         <button
-          class="btn btn-sm flex-1 {filters.groupBy === 'productType' &&
+          class="btn flex-1 btn-sm {filters.groupBy === 'productType' &&
             'btn-secondary'}"
           type="button"
           aria-label="Par type"
@@ -217,7 +217,7 @@
       <Fieldset legend="Types & Température" iconComponent={Thermometer}>
         <div class="mb-2 flex flex-wrap items-center gap-2" role="group">
           <button
-            class="btn btn-sm uppercase {filters.selectedProductTypes.length ===
+            class="btn uppercase btn-sm {filters.selectedProductTypes.length ===
             0
               ? 'btn-secondary'
               : 'btn-soft btn-secondary'}"
@@ -244,11 +244,11 @@
         <!-- Filtres température -->
         <div class="mt-4 opacity-60">Température :</div>
         <div
-          class="bg-base-100 flex flex-wrap gap-1 rounded-xl p-2 font-semibold"
+          class="flex flex-wrap gap-1 rounded-xl bg-base-100 p-2 font-semibold"
           role="group"
         >
           <button
-            class="btn btn-sm flex-1 uppercase {filters.temperatureFilter ===
+            class="btn flex-1 uppercase btn-sm {filters.temperatureFilter ===
             'all'
               ? 'btn-secondary'
               : 'btn-soft btn-secondary'}"
@@ -260,7 +260,7 @@
             onmouseleave={() => hoverHelp.reset()}>Tous</button
           >
           <button
-            class="btn btn-sm flex-1 {filters.temperatureFilter === 'frais'
+            class="btn flex-1 btn-sm {filters.temperatureFilter === 'frais'
               ? 'btn-success'
               : 'btn-soft btn-success'}"
             onclick={() => productsStore.setTemperatureFilter("frais")}
@@ -274,7 +274,7 @@
             Frais
           </button>
           <button
-            class="btn btn-sm flex-1 {filters.temperatureFilter === 'not-frais'
+            class="btn flex-1 btn-sm {filters.temperatureFilter === 'not-frais'
               ? 'btn-error'
               : 'btn-soft btn-error'}"
             onclick={() => productsStore.setTemperatureFilter("not-frais")}
@@ -287,7 +287,7 @@
             <span class="line-through">Frais</span>
           </button>
           <button
-            class="btn btn-sm flex-1 {filters.temperatureFilter === 'surgele'
+            class="btn flex-1 btn-sm {filters.temperatureFilter === 'surgele'
               ? 'btn-info'
               : 'btn-soft btn-info'}"
             onclick={() => productsStore.setTemperatureFilter("surgele")}
@@ -301,7 +301,7 @@
             Surgelés
           </button>
           <button
-            class="btn btn-sm flex-1 {filters.temperatureFilter ===
+            class="btn flex-1 btn-sm {filters.temperatureFilter ===
             'not-surgele'
               ? 'btn-error'
               : 'btn-soft btn-error'}"
@@ -323,7 +323,7 @@
         <div class="flex flex-wrap items-center gap-2" role="group">
           <div class="join mr-2">
             <button
-              class="btn btn-sm join-item uppercase {filters.storeFilterMode ===
+              class="btn join-item uppercase btn-sm {filters.storeFilterMode ===
                 'all' && filters.selectedStores.length === 0
                 ? 'btn-secondary'
                 : 'btn-soft'}"
@@ -332,7 +332,7 @@
               >Tous</button
             >
             <button
-              class="btn btn-sm join-item uppercase {filters.storeFilterMode ===
+              class="btn join-item uppercase btn-sm {filters.storeFilterMode ===
               'none'
                 ? 'btn-secondary'
                 : 'btn-soft'}"
@@ -364,7 +364,7 @@
         <div class="flex flex-wrap items-center gap-2" role="group">
           <div class="join mr-2">
             <button
-              class="btn btn-sm join-item uppercase {filters.whoFilterMode ===
+              class="btn join-item uppercase btn-sm {filters.whoFilterMode ===
                 'all' && filters.selectedWho.length === 0
                 ? 'btn-secondary'
                 : 'btn-soft'}"
@@ -372,7 +372,7 @@
               onclick={() => productsStore.setWhoFilterMode("all")}>Tous</button
             >
             <button
-              class="btn btn-sm join-item uppercase {filters.whoFilterMode ===
+              class="btn join-item uppercase btn-sm {filters.whoFilterMode ===
               'none'
                 ? 'btn-secondary'
                 : 'btn-soft'}"

@@ -30,10 +30,14 @@ export function ingredientStats(raw: any): { n: number; sum: number } {
     }
   }
   if (!Array.isArray(list)) return { n: 0, sum: 0 };
-  const objs = list.map((i: any) => (typeof i === "string" ? JSON.parse(i) : i));
+  const objs = list.map((i: any) =>
+    typeof i === "string" ? JSON.parse(i) : i,
+  );
   return {
     n: objs.length,
-    sum: Math.round(objs.reduce((s: number, i: any) => s + (i.normalizedQuantity || 0), 0)),
+    sum: Math.round(
+      objs.reduce((s: number, i: any) => s + (i.normalizedQuantity || 0), 0),
+    ),
   };
 }
 
@@ -54,7 +58,7 @@ export function jsonLen(raw: any): number {
 // it is informative only (Hugo is the fresher source), never a verdict.
 export function diffRecipeConvergence(
   aw: any,
-  pbLike: any
+  pbLike: any,
 ): { divergentFields: string[]; hasDateDrift: boolean } {
   const divergentFields: string[] = [];
   const awIng = ingredientStats(aw.ingredients);
@@ -63,8 +67,10 @@ export function diffRecipeConvergence(
   if (!!aw.draft !== !!pbLike.draft) divergentFields.push("draft");
   if (awIng.n !== pbIng.n) divergentFields.push("ingredients");
   if (awIng.sum !== pbIng.sum) divergentFields.push("sumQty");
-  if (jsonLen(aw.astuces) !== jsonLen(pbLike.astuces)) divergentFields.push("astuces");
-  if ((aw.preparation || "").length !== (pbLike.preparation || "").length) divergentFields.push("prepLen");
+  if (jsonLen(aw.astuces) !== jsonLen(pbLike.astuces))
+    divergentFields.push("astuces");
+  if ((aw.preparation || "").length !== (pbLike.preparation || "").length)
+    divergentFields.push("prepLen");
 
   const dateDrift = normDay(aw["$updatedAt"]) !== normDay(pbLike.updated);
   return { divergentFields, hasDateDrift: dateDrift };

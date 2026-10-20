@@ -72,7 +72,7 @@
 </script>
 
 <div
-  class="bg-base-300 rounded-box flex flex-wrap items-center justify-between gap-6 px-6 py-6"
+  class="flex flex-wrap items-center justify-between gap-6 rounded-box bg-base-300 px-6 py-6"
 >
   <fieldset class="fieldset w-full sm:flex-1">
     <legend class="legend label"
@@ -137,8 +137,8 @@
         {#each availableTags as tag}
           <button
             class="badge {selectedTags.includes(tag)
-              ? 'badge-primary cursor-pointer'
-              : 'badge-outline hover:badge-primary cursor-pointer'} gap-1 py-3"
+              ? 'cursor-pointer badge-primary'
+              : 'cursor-pointer badge-outline hover:badge-primary'} gap-1 py-3"
             onclick={() => onTagToggle?.(tag)}
             {disabled}
           >

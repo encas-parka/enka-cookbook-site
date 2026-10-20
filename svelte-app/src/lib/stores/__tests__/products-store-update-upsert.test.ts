@@ -97,8 +97,8 @@ describe("ProductsStore — update produit (contrat identité stable, upsert mê
     await productsStore.softReset();
     await clearDexie();
 
-    vi.mocked(eventsStore.getEventById).mockImplementation(
-      (id: string) => (id === TEST_EVENT_ID ? makeEvent() : null),
+    vi.mocked(eventsStore.getEventById).mockImplementation((id: string) =>
+      id === TEST_EVENT_ID ? makeEvent() : null,
     );
   });
 

@@ -45,7 +45,7 @@
       <div class="mb-1 text-xs opacity-70">{title}</div>
     {/if}
     <div class="ms-1 flex flex-wrap items-center gap-1">
-      <PencilLine class="text-base-content/70 mr-1" size={14} />
+      <PencilLine class="mr-1 text-base-content/70" size={14} />
       {#each displaySuggestions as suggestion (suggestion.id)}
         <button
           type="button"

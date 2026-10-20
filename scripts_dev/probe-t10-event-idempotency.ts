@@ -39,7 +39,9 @@ interface Env {
 
 function loadEnv(): Env {
   if (!existsSync(ENV_FILE)) {
-    console.error(`Missing ${ENV_FILE} — add PB_URL / PB_ADMIN_* / PB_USER_* there.`);
+    console.error(
+      `Missing ${ENV_FILE} — add PB_URL / PB_ADMIN_* / PB_USER_* there.`,
+    );
     process.exit(1);
   }
   const env: Record<string, string> = {};
@@ -50,8 +52,13 @@ function loadEnv(): Env {
     if (eqIdx === -1) continue;
     env[trimmed.slice(0, eqIdx).trim()] = trimmed.slice(eqIdx + 1).trim();
   }
-  const missing = ["PB_URL", "PB_ADMIN_EMAIL", "PB_ADMIN_PASSWORD", "PB_USER_EMAIL", "PB_USER_PASSWORD"]
-    .filter((k) => !env[k]);
+  const missing = [
+    "PB_URL",
+    "PB_ADMIN_EMAIL",
+    "PB_ADMIN_PASSWORD",
+    "PB_USER_EMAIL",
+    "PB_USER_PASSWORD",
+  ].filter((k) => !env[k]);
   if (missing.length > 0) {
     console.error(`Missing env keys in ${ENV_FILE}: ${missing.join(", ")}`);
     process.exit(1);
@@ -114,23 +121,35 @@ async function main(): Promise<void> {
   }
 
   // 1. Admin auth (cleanup only)
-  const admin = await pbFetch(env.base, "/api/collections/_superusers/auth-with-password", {
-    method: "POST",
-    body: { identity: env.adminEmail, password: env.adminPassword },
-  });
+  const admin = await pbFetch(
+    env.base,
+    "/api/collections/_superusers/auth-with-password",
+    {
+      method: "POST",
+      body: { identity: env.adminEmail, password: env.adminPassword },
+    },
+  );
   if (admin.status !== 200) {
-    console.error(`Admin auth failed (${admin.status}) — check PB_ADMIN_* in .env.local`);
+    console.error(
+      `Admin auth failed (${admin.status}) — check PB_ADMIN_* in .env.local`,
+    );
     process.exit(1);
   }
   const adminToken = admin.json.token as string;
 
   // 2. User auth (the SPA's identity — events createRule is auth-only)
-  const user = await pbFetch(env.base, "/api/collections/users/auth-with-password", {
-    method: "POST",
-    body: { identity: env.userEmail, password: env.userPassword },
-  });
+  const user = await pbFetch(
+    env.base,
+    "/api/collections/users/auth-with-password",
+    {
+      method: "POST",
+      body: { identity: env.userEmail, password: env.userPassword },
+    },
+  );
   if (user.status !== 200) {
-    console.error(`User auth failed (${user.status}) — check PB_USER_* in .env.local`);
+    console.error(
+      `User auth failed (${user.status}) — check PB_USER_* in .env.local`,
+    );
     process.exit(1);
   }
   const userToken = user.json.token as string;
@@ -160,13 +179,19 @@ async function main(): Promise<void> {
   console.log(`create with client id ${clientId} → ${first.status}`);
   if (first.status !== 200) {
     console.log(`  response: ${JSON.stringify(first.json)}`);
-    verdict("ID_ACCEPTED", "FAILED — create with client id rejected, guard premise invalid");
+    verdict(
+      "ID_ACCEPTED",
+      "FAILED — create with client id rejected, guard premise invalid",
+    );
     process.exit(1);
   }
   const preserved = first.json.id === clientId;
-  verdict("ID_ACCEPTED", first.json.id === clientId
-    ? `id preserved (server id = client id ${clientId})`
-    : `id REGENERATED (server id ${first.json.id} ≠ client id) — guard premise invalid`);
+  verdict(
+    "ID_ACCEPTED",
+    first.json.id === clientId
+      ? `id preserved (server id = client id ${clientId})`
+      : `id REGENERATED (server id ${first.json.id} ≠ client id) — guard premise invalid`,
+  );
   if (!preserved) process.exit(1);
 
   // 4. Re-create with the SAME id (the resubmission after an ambiguous failure)
@@ -177,32 +202,58 @@ async function main(): Promise<void> {
   });
   console.log(`re-create with same id → ${second.status}`);
   console.log(`  response: ${JSON.stringify(second.json)}`);
-  verdict("DUPLICATE_REJECTED", second.status === 400
-    ? "400 on duplicate client id — id IS an idempotency key"
-    : `unexpected status ${second.status} — inspect before relying on it`);
+  verdict(
+    "DUPLICATE_REJECTED",
+    second.status === 400
+      ? "400 on duplicate client id — id IS an idempotency key"
+      : `unexpected status ${second.status} — inspect before relying on it`,
+  );
 
   // 5. Reconciliation read: GET by the client id
-  const read = await pbFetch(env.base, `/api/collections/events/records/${clientId}`, {
-    token: userToken,
-  });
-  verdict("RECONCILIATION_READ", read.status === 200
-    ? "record readable under its client id (reconciliation path works)"
-    : `unexpected status ${read.status}`);
+  const read = await pbFetch(
+    env.base,
+    `/api/collections/events/records/${clientId}`,
+    {
+      token: userToken,
+    },
+  );
+  verdict(
+    "RECONCILIATION_READ",
+    read.status === 200
+      ? "record readable under its client id (reconciliation path works)"
+      : `unexpected status ${read.status}`,
+  );
 
   // 6. Reconciliation miss control: GET by a never-created id
-  const miss = await pbFetch(env.base, `/api/collections/events/records/${makePbId()}`, {
-    token: userToken,
-  });
-  verdict("RECONCILIATION_MISS", miss.status === 404
-    ? "404 on unknown id — genuine failures stay distinguishable"
-    : `unexpected status ${miss.status}`);
+  const miss = await pbFetch(
+    env.base,
+    `/api/collections/events/records/${makePbId()}`,
+    {
+      token: userToken,
+    },
+  );
+  verdict(
+    "RECONCILIATION_MISS",
+    miss.status === 404
+      ? "404 on unknown id — genuine failures stay distinguishable"
+      : `unexpected status ${miss.status}`,
+  );
 
   // 7. Cleanup — the probe leaves the database unchanged
-  const del = await pbFetch(env.base, `/api/collections/events/records/${clientId}`, {
-    method: "DELETE",
-    token: adminToken,
-  });
-  verdict("CLEANUP", del.status === 204 ? "probe record deleted (204)" : `unexpected status ${del.status}`);
+  const del = await pbFetch(
+    env.base,
+    `/api/collections/events/records/${clientId}`,
+    {
+      method: "DELETE",
+      token: adminToken,
+    },
+  );
+  verdict(
+    "CLEANUP",
+    del.status === 204
+      ? "probe record deleted (204)"
+      : `unexpected status ${del.status}`,
+  );
 
   process.exit(del.status === 204 ? 0 : 1);
 }

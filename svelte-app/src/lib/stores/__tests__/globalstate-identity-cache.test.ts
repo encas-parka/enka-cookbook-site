@@ -30,102 +30,102 @@
  */
 
 const authMock = vi.hoisted(() => {
-	type FakeUser = {
-		id: string;
-		name: string;
-		email: string;
-		emailVerification: boolean;
-	};
-	let current: FakeUser | null = null;
-	// Les listeners survivent aux tests : le singleton GlobalState s'y est
-	// abonné une seule fois, au chargement du module.
-	const listeners = new Set<(user: FakeUser | null) => void>();
-	const emit = (user: FakeUser | null) => {
-		for (const cb of [...listeners]) cb(user);
-	};
-	return {
-		USER_A: {
-			id: "userghald00001",
-			name: "ghald",
-			email: "ghald@dev.local",
-			emailVerification: true,
-		},
-		USER_B: {
-			id: "userold00000001",
-			name: "olduser",
-			email: "old@dev.local",
-			emailVerification: true,
-		},
-		set(user: FakeUser | null) {
-			current = user;
-		},
-		reset() {
-			current = null;
-		},
-		getCurrentUser: (): FakeUser | null => current,
-		loginWithPassword: vi.fn(async (): Promise<FakeUser> => {
-			if (!current) throw new Error("[authMock] no current user");
-			emit(current);
-			return current;
-		}),
-		logout: vi.fn(() => {
-			current = null;
-			emit(null);
-		}),
-		onAuthChange: (cb: (user: FakeUser | null) => void) => {
-			listeners.add(cb);
-			return () => {
-				listeners.delete(cb);
-			};
-		},
-	};
+  type FakeUser = {
+    id: string;
+    name: string;
+    email: string;
+    emailVerification: boolean;
+  };
+  let current: FakeUser | null = null;
+  // Les listeners survivent aux tests : le singleton GlobalState s'y est
+  // abonné une seule fois, au chargement du module.
+  const listeners = new Set<(user: FakeUser | null) => void>();
+  const emit = (user: FakeUser | null) => {
+    for (const cb of [...listeners]) cb(user);
+  };
+  return {
+    USER_A: {
+      id: "userghald00001",
+      name: "ghald",
+      email: "ghald@dev.local",
+      emailVerification: true,
+    },
+    USER_B: {
+      id: "userold00000001",
+      name: "olduser",
+      email: "old@dev.local",
+      emailVerification: true,
+    },
+    set(user: FakeUser | null) {
+      current = user;
+    },
+    reset() {
+      current = null;
+    },
+    getCurrentUser: (): FakeUser | null => current,
+    loginWithPassword: vi.fn(async (): Promise<FakeUser> => {
+      if (!current) throw new Error("[authMock] no current user");
+      emit(current);
+      return current;
+    }),
+    logout: vi.fn(() => {
+      current = null;
+      emit(null);
+    }),
+    onAuthChange: (cb: (user: FakeUser | null) => void) => {
+      listeners.add(cb);
+      return () => {
+        listeners.delete(cb);
+      };
+    },
+  };
 });
 
 // jsdom n'implémente pas matchMedia — requis par MediaQuery (champ de classe
 // de GlobalState, évalué au chargement du module).
 vi.hoisted(() => {
-	if (typeof window !== "undefined" && !window.matchMedia) {
-		Object.defineProperty(window, "matchMedia", {
-			writable: true,
-			value: (query: string) => ({
-				matches: false,
-				media: query,
-				onchange: null,
-				addListener: () => {},
-				removeListener: () => {},
-				addEventListener: () => {},
-				removeEventListener: () => {},
-				dispatchEvent: () => false,
-			}),
-		});
-	}
+  if (typeof window !== "undefined" && !window.matchMedia) {
+    Object.defineProperty(window, "matchMedia", {
+      writable: true,
+      value: (query: string) => ({
+        matches: false,
+        media: query,
+        onchange: null,
+        addListener: () => {},
+        removeListener: () => {},
+        addEventListener: () => {},
+        removeEventListener: () => {},
+        dispatchEvent: () => false,
+      }),
+    });
+  }
 });
 
 vi.mock("$lib/services/pb-auth", () => ({
-	getCurrentUser: authMock.getCurrentUser,
-	loginWithPassword: authMock.loginWithPassword,
-	logout: authMock.logout,
-	onAuthChange: authMock.onAuthChange,
+  getCurrentUser: authMock.getCurrentUser,
+  loginWithPassword: authMock.loginWithPassword,
+  logout: authMock.logout,
+  onAuthChange: authMock.onAuthChange,
 }));
 
 // Les signaux SSE n'ont pas de surface fake (pb.realtime absent du stub) :
 // le branchement est mocké ici (pilotable), le comportement des signaux
 // eux-mêmes (debounce, reconnexion) est couvert par pb-realtime-signals.
 vi.mock("$lib/db-sync/pb-realtime", () => ({
-	initRealtimeSignals: vi.fn(async () => {}),
-	teardownRealtimeSignals: vi.fn(async () => {}),
-	onRealtimeReconnect: vi.fn(() => () => {}),
+  initRealtimeSignals: vi.fn(async () => {}),
+  teardownRealtimeSignals: vi.fn(async () => {}),
+  onRealtimeReconnect: vi.fn(() => () => {}),
 }));
 
 // sv-router crée le routeur (et enregistre les pages) au chargement —
 // GlobalState ne consomme que `route`.
 vi.mock("$lib/router", () => ({
-	route: { pathname: "/", params: {}, search: {} },
+  route: { pathname: "/", params: {}, search: {} },
 }));
 
 vi.mock("pocketbase", async () => {
-	const { FakePocketBase } = await import("./harness/stub-pb");
-	return { default: FakePocketBase };
+  const { FakePocketBase } = await import("./harness/stub-pb");
+  return { default: FakePocketBase };
 });
 
 import { describe, it, expect, beforeEach, afterEach, vi } from "vitest";
@@ -149,139 +149,144 @@ const CACHE_OWNER_KEY = "enka-cache-owner";
 
 /** Session sale : lignes + curseur d'un user précédent (crash sans logout). */
 async function seedResidualSession() {
-	await db.events.bulkPut([
-		makeEvent({ id: EV_B1, createdBy: authMock.USER_B.id }),
-	]);
-	await db.syncMeta.put({ collectionId: "events", lastSync: CURSOR_RESIDUAL });
-	localStorage.setItem(CACHE_OWNER_KEY, authMock.USER_B.id);
+  await db.events.bulkPut([
+    makeEvent({ id: EV_B1, createdBy: authMock.USER_B.id }),
+  ]);
+  await db.syncMeta.put({ collectionId: "events", lastSync: CURSOR_RESIDUAL });
+  localStorage.setItem(CACHE_OWNER_KEY, authMock.USER_B.id);
 }
 
 /** Données serveur du nouveau user : `updated` < curseur résiduel (muet). */
 function seedServerEventsForUserA() {
-	currentFakePb().seed("events", [
-		makeEvent({ id: EV_A1, createdBy: authMock.USER_A.id, updated: pbDate(T1) }),
-		makeEvent({ id: EV_A2, createdBy: authMock.USER_A.id, updated: pbDate(T1) }),
-	]);
+  currentFakePb().seed("events", [
+    makeEvent({
+      id: EV_A1,
+      createdBy: authMock.USER_A.id,
+      updated: pbDate(T1),
+    }),
+    makeEvent({
+      id: EV_A2,
+      createdBy: authMock.USER_A.id,
+      updated: pbDate(T1),
+    }),
+  ]);
 }
 
 describe("GlobalState — cache local mono-identité (login sans Ctrl-R)", () => {
-	beforeEach(async () => {
-		currentFakePb().reset();
-		authMock.reset();
-		localStorage.clear();
-		await Promise.all(db.tables.map((t) => t.clear()));
-		await waitForTick(1);
-	});
+  beforeEach(async () => {
+    currentFakePb().reset();
+    authMock.reset();
+    localStorage.clear();
+    await Promise.all(db.tables.map((t) => t.clear()));
+    await waitForTick(1);
+  });
 
-	afterEach(async () => {
-		await globalState.logout().catch(() => {});
-	});
+  afterEach(async () => {
+    await globalState.logout().catch(() => {});
+  });
 
-	it("arrivée visiteur : le résidu IndexedDB d'une session précédente est purgé", async () => {
-		await seedResidualSession();
-		authMock.set(null);
+  it("arrivée visiteur : le résidu IndexedDB d'une session précédente est purgé", async () => {
+    await seedResidualSession();
+    authMock.set(null);
 
-		await globalState.initializeAuth();
+    await globalState.initializeAuth();
 
-		expect(await db.events.count()).toBe(0);
-		expect(await db.syncMeta.get("events")).toBeUndefined();
-		expect(localStorage.getItem(CACHE_OWNER_KEY)).toBeNull();
-	});
+    expect(await db.events.count()).toBe(0);
+    expect(await db.syncMeta.get("events")).toBeUndefined();
+    expect(localStorage.getItem(CACHE_OWNER_KEY)).toBeNull();
+  });
 
-	it("login sur session sale : les events sont chargés sans Ctrl-R", async () => {
-		await seedResidualSession();
-		seedServerEventsForUserA();
-		authMock.set(null);
-		await globalState.initializeAuth(); // boot visiteur
+  it("login sur session sale : les events sont chargés sans Ctrl-R", async () => {
+    await seedResidualSession();
+    seedServerEventsForUserA();
+    authMock.set(null);
+    await globalState.initializeAuth(); // boot visiteur
 
-		// Chemin AuthModal : loginWithPassword (déclenche authStore.onChange)
-		// puis refreshAuthAfterLogin (3 phases).
-		authMock.set(authMock.USER_A);
-		await authMock.loginWithPassword("ghald@dev.local", "x");
-		await globalState.refreshAuthAfterLogin();
-		await waitForTick(3);
+    // Chemin AuthModal : loginWithPassword (déclenche authStore.onChange)
+    // puis refreshAuthAfterLogin (3 phases).
+    authMock.set(authMock.USER_A);
+    await authMock.loginWithPassword("ghald@dev.local", "x");
+    await globalState.refreshAuthAfterLogin();
+    await waitForTick(3);
 
-		// Les events du user atterrissent en cache (full fetch, curseur vierge)
-		expect(await db.events.get(EV_A1)).toBeTruthy();
-		expect(await db.events.get(EV_A2)).toBeTruthy();
-		// Les résidus de l'ancienne session ont disparu
-		expect(await db.events.get(EV_B1)).toBeUndefined();
-		// Le curseur repart de max(updated) des données fraîches
-		expect((await db.syncMeta.get("events"))?.lastSync).toBe(pbDate(T1));
-		// La vue store (ce que rend le dashboard) contient les events du user
-		expect(eventsStore.events.map((e) => e.id).sort()).toEqual([
-			EV_A1,
-			EV_A2,
-		]);
-	});
+    // Les events du user atterrissent en cache (full fetch, curseur vierge)
+    expect(await db.events.get(EV_A1)).toBeTruthy();
+    expect(await db.events.get(EV_A2)).toBeTruthy();
+    // Les résidus de l'ancienne session ont disparu
+    expect(await db.events.get(EV_B1)).toBeUndefined();
+    // Le curseur repart de max(updated) des données fraîches
+    expect((await db.syncMeta.get("events"))?.lastSync).toBe(pbDate(T1));
+    // La vue store (ce que rend le dashboard) contient les events du user
+    expect(eventsStore.events.map((e) => e.id).sort()).toEqual([EV_A1, EV_A2]);
+  });
 
-	it("boot avec la même identité : cache et curseur conservés (pas de purge)", async () => {
-		seedServerEventsForUserA();
-		await db.events.bulkPut([
-			makeEvent({
-				id: EV_A1,
-				createdBy: authMock.USER_A.id,
-				updated: pbDate(T1),
-			}),
-		]);
-		await db.syncMeta.put({ collectionId: "events", lastSync: pbDate(T1) });
-		localStorage.setItem(CACHE_OWNER_KEY, authMock.USER_A.id);
-		authMock.set(authMock.USER_A);
+  it("boot avec la même identité : cache et curseur conservés (pas de purge)", async () => {
+    seedServerEventsForUserA();
+    await db.events.bulkPut([
+      makeEvent({
+        id: EV_A1,
+        createdBy: authMock.USER_A.id,
+        updated: pbDate(T1),
+      }),
+    ]);
+    await db.syncMeta.put({ collectionId: "events", lastSync: pbDate(T1) });
+    localStorage.setItem(CACHE_OWNER_KEY, authMock.USER_A.id);
+    authMock.set(authMock.USER_A);
 
-		await globalState.initializeAuth();
+    await globalState.initializeAuth();
 
-		expect((await db.syncMeta.get("events"))?.lastSync).toBe(pbDate(T1));
-		expect(await db.events.get(EV_A1)).toBeTruthy();
-		expect(localStorage.getItem(CACHE_OWNER_KEY)).toBe(authMock.USER_A.id);
-	});
+    expect((await db.syncMeta.get("events"))?.lastSync).toBe(pbDate(T1));
+    expect(await db.events.get(EV_A1)).toBeTruthy();
+    expect(localStorage.getItem(CACHE_OWNER_KEY)).toBe(authMock.USER_A.id);
+  });
 
-	it("logout : purge des tables privées + curseurs, marqueur réinitialisé, recipes préservé", async () => {
-		seedServerEventsForUserA();
-		authMock.set(null);
-		await globalState.initializeAuth();
-		authMock.set(authMock.USER_A);
-		await authMock.loginWithPassword("ghald@dev.local", "x");
-		await globalState.refreshAuthAfterLogin();
-		expect(await db.events.count()).toBe(2);
+  it("logout : purge des tables privées + curseurs, marqueur réinitialisé, recipes préservé", async () => {
+    seedServerEventsForUserA();
+    authMock.set(null);
+    await globalState.initializeAuth();
+    authMock.set(authMock.USER_A);
+    await authMock.loginWithPassword("ghald@dev.local", "x");
+    await globalState.refreshAuthAfterLogin();
+    expect(await db.events.count()).toBe(2);
 
-		await globalState.logout();
-		await waitForTick(2);
+    await globalState.logout();
+    await waitForTick(2);
 
-		expect(await db.events.count()).toBe(0);
-		expect(await db.syncMeta.get("events")).toBeUndefined();
-		expect(localStorage.getItem(CACHE_OWNER_KEY)).toBeNull();
-		// recipes (public) reste disponible pour la session visiteur
-			expect(recipesStore.isInitialized).toBe(true);
-		});
-	});
+    expect(await db.events.count()).toBe(0);
+    expect(await db.syncMeta.get("events")).toBeUndefined();
+    expect(localStorage.getItem(CACHE_OWNER_KEY)).toBeNull();
+    // recipes (public) reste disponible pour la session visiteur
+    expect(recipesStore.isInitialized).toBe(true);
+  });
+});
 
-	describe("GlobalState — signaux SSE au boot (alerte perte serveur)", () => {
-		beforeEach(async () => {
-			currentFakePb().reset();
-			authMock.reset();
-			localStorage.clear();
-			await Promise.all(db.tables.map((t) => t.clear()));
-			vi.mocked(initRealtimeSignals).mockClear();
-			await waitForTick(1);
-		});
+describe("GlobalState — signaux SSE au boot (alerte perte serveur)", () => {
+  beforeEach(async () => {
+    currentFakePb().reset();
+    authMock.reset();
+    localStorage.clear();
+    await Promise.all(db.tables.map((t) => t.clear()));
+    vi.mocked(initRealtimeSignals).mockClear();
+    await waitForTick(1);
+  });
 
-		afterEach(async () => {
-			await globalState.logout().catch(() => {});
-		});
+  afterEach(async () => {
+    await globalState.logout().catch(() => {});
+  });
 
-		it("boot avec session existante : les signaux SSE sont branchés (miroir du login)", async () => {
-			authMock.set(authMock.USER_A);
+  it("boot avec session existante : les signaux SSE sont branchés (miroir du login)", async () => {
+    authMock.set(authMock.USER_A);
 
-			await globalState.initializeAuth();
+    await globalState.initializeAuth();
 
-			expect(initRealtimeSignals).toHaveBeenCalledTimes(1);
-		});
+    expect(initRealtimeSignals).toHaveBeenCalledTimes(1);
+  });
 
-		it("boot visiteur : signaux non branchés (le login modal les activera)", async () => {
-			authMock.set(null);
+  it("boot visiteur : signaux non branchés (le login modal les activera)", async () => {
+    authMock.set(null);
 
-			await globalState.initializeAuth();
+    await globalState.initializeAuth();
 
-			expect(initRealtimeSignals).not.toHaveBeenCalled();
-		});
-	});
+    expect(initRealtimeSignals).not.toHaveBeenCalled();
+  });
+});

@@ -97,7 +97,7 @@
 <div class="mb-2 flex flex-wrap gap-2">
   {#each dateStore.dates as date (date)}
     <button
-      class="btn btn-sm btn-secondary {getDateButtonClass(date)}"
+      class="btn btn-secondary btn-sm {getDateButtonClass(date)}"
       onclick={() => handleDateClick(date)}
       onmouseenter={() => (hoveredDate = date)}
       onmouseleave={() => (hoveredDate = null)}
@@ -116,7 +116,7 @@
 
 {#if dateStore.isEventPassed}
   <!-- Événement terminé : afficher le message -->
-  <div class="text-base-content/60 p-1 text-end text-xs italic">
+  <div class="p-1 text-end text-xs text-base-content/60 italic">
     événement terminé
   </div>
 {:else}
@@ -126,7 +126,7 @@
     <button
       type="button"
       name="options"
-      class="join-item btn btn-sm {dateStore.isUpcomingRange
+      class="btn join-item btn-sm {dateStore.isUpcomingRange
         ? ' btn-secondary'
         : 'btn-soft'}"
       aria-label=" Dates à venir"
@@ -137,7 +137,7 @@
     <button
       type="button"
       name="options"
-      class="join-item btn btn-sm {dateStore.isFullRange
+      class="btn join-item btn-sm {dateStore.isFullRange
         ? ' btn-secondary'
         : 'btn-soft'}"
       aria-label=" Toutes les dates"

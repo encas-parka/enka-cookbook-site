@@ -224,7 +224,7 @@
         <!-- Gestion des volontaires avec BtnGroupCheck -->
         <div>
           <h5
-            class="text-base-content/70 mb-2 hidden text-sm {volunteerItems.length &&
+            class="mb-2 hidden text-sm text-base-content/70 {volunteerItems.length &&
               'inline'}"
           >
             Sélection rapide
@@ -282,7 +282,7 @@
       disabled={loading || !isFormValid}
     >
       {#if loading}
-        <span class="loading loading-spinner loading-sm"></span>
+        <span class="loading loading-sm loading-spinner"></span>
         En cours...
       {:else}
         <Check class="h-4 w-4" />

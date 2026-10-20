@@ -6,7 +6,12 @@
  */
 
 import type { Main } from "./pb";
-import type { EventsStatusOptions, EventTodosPriorityOptions, EventTodosStatusOptions, RecipesTypeROptions } from "./pb-generated";
+import type {
+  EventsStatusOptions,
+  EventTodosPriorityOptions,
+  EventTodosStatusOptions,
+  RecipesTypeROptions,
+} from "./pb-generated";
 
 // Re-export select types from pb-generated (single source of truth)
 export type {

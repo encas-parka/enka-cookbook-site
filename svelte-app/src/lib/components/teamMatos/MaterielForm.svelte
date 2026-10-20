@@ -187,7 +187,11 @@
     source?: string;
     materielId?: string;
   }) {
-    if (suggestion.source === "existing" && suggestion.materielId && onExistingSelected) {
+    if (
+      suggestion.source === "existing" &&
+      suggestion.materielId &&
+      onExistingSelected
+    ) {
       onExistingSelected(suggestion.materielId);
       return;
     }
@@ -214,7 +218,7 @@
       <!-- Nom -->
       {#if isEdit}
         <label class="input min-w-1/2">
-          <span class="label required"
+          <span class="required label"
             ><Package class="h-4 w-4" />
             Nom</span
           >
@@ -259,13 +263,12 @@
     <fieldset class="fieldset bg-base-100">
       <legend class="fieldset-legend">Description</legend>
       <textarea
-        class="textarea textarea-bordered w-full"
+        class="textarea-bordered textarea w-full"
         rows="2"
         bind:value={description}
         placeholder="Décrivez le matériel..."
         maxlength="500"
-        disabled={loading}
-      ></textarea>
+        disabled={loading}></textarea>
     </fieldset>
   </div>
 
@@ -299,7 +302,7 @@
   <div class="flex flex-1 flex-wrap gap-x-6 gap-y-4">
     <!-- Quantité -->
     <label class="input w-58">
-      <span class="label required"> <Hash class="size-4" />Quantité</span>
+      <span class="required label"> <Hash class="size-4" />Quantité</span>
       <input
         type="number"
         class=""
@@ -351,7 +354,7 @@
 
   <!-- Message d'erreur -->
   {#if error}
-    <div class="alert alert-error alert-sm">
+    <div class="alert-sm alert alert-error">
       <span class="text-sm">{error}</span>
     </div>
   {/if}
@@ -382,7 +385,7 @@
           disabled={!isValid}
         >
           {#if loading}
-            <span class="loading loading-spinner loading-sm"></span>
+            <span class="loading loading-sm loading-spinner"></span>
           {:else}
             <Check class="h-5 w-5" />
           {/if}

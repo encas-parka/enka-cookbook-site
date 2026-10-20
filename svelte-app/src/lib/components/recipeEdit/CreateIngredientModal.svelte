@@ -305,7 +305,7 @@
     >
       <!-- Erreur -->
       {#if serverError}
-        <div class="alert alert-error max-md:alert-vertical text-sm">
+        <div class="alert text-sm alert-error max-md:alert-vertical">
           <TriangleAlert size={18} />
           <span>{serverError}</span>
         </div>
@@ -314,13 +314,13 @@
       <fieldset disabled={loading} class="space-y-4">
         <!-- Nom -->
         <div class="fieldset">
-          <legend class="fieldset-legend required">Nom</legend>
+          <legend class="required fieldset-legend">Nom</legend>
           <label
             class="input w-full {showErrors && validationErrors.name
               ? 'input-error'
               : ''}"
           >
-            <PackagePlus class="text-base-content/50 h-5 w-5" />
+            <PackagePlus class="h-5 w-5 text-base-content/50" />
             <input
               id="ingredient-name-input"
               type="text"
@@ -333,13 +333,13 @@
             />
           </label>
           {#if showErrors && validationErrors.name}
-            <p class="text-error text-xs">{validationErrors.name}</p>
+            <p class="text-xs text-error">{validationErrors.name}</p>
           {/if}
 
           <!-- Guard anti-doublon : ingrédients similaires -->
           {#if similarIngredients.length > 0}
             {@const similar = similarIngredients}
-            <div class="alert alert-warning text-sm">
+            <div class="alert text-sm alert-warning">
               <TriangleAlert size={18} class="shrink-0" />
               <div class="flex flex-col gap-2">
                 <span class="font-medium"
@@ -349,19 +349,19 @@
                   {#each similar as result}
                     <button
                       type="button"
-                      class="btn btn-sm btn-outline btn-primary justify-start text-left"
+                      class="btn justify-start btn-outline text-left btn-primary btn-sm"
                       onclick={() => useExistingIngredient(result.ingredient)}
                     >
                       <span class="fuzzysort-highlight"
                         >{@html result.highlighted}</span
                       >
-                      <span class="text-base-content/50 ml-auto text-xs"
+                      <span class="ml-auto text-xs text-base-content/50"
                         >{result.ingredient.type}</span
                       >
                     </button>
                   {/each}
                 </div>
-                <span class="text-base-content/60 text-xs"
+                <span class="text-xs text-base-content/60"
                   >Cliquez sur un ingrédient ci-dessus pour l'utiliser, ou
                   continuez la création.</span
                 >
@@ -372,7 +372,7 @@
 
         <!-- Type -->
         <div class="fieldset">
-          <legend class="fieldset-legend required">Type</legend>
+          <legend class="required fieldset-legend">Type</legend>
           <select
             class="select w-full {showErrors && validationErrors.type
               ? 'select-error'
@@ -387,14 +387,14 @@
             {/each}
           </select>
           {#if showErrors && validationErrors.type}
-            <p class="text-error text-xs">{validationErrors.type}</p>
+            <p class="text-xs text-error">{validationErrors.type}</p>
           {/if}
         </div>
 
         <!-- Allergènes -->
         <div class="fieldset">
-          <legend class="fieldset-legend required">Allergènes</legend>
-          <p class="text-base-content/60 mb-2 text-xs">
+          <legend class="required fieldset-legend">Allergènes</legend>
+          <p class="mb-2 text-xs text-base-content/60">
             Précisez les allergènes présents dans l'ingrédient et/ou la nature
             de l'ingrédients (ou cochez "Aucun"). Sert notamment à la
             classification des recettes comme végétarienne, sans-gluten, etc.)
@@ -402,10 +402,10 @@
           <div class="flex flex-wrap gap-2">
             {#each ALLERGENS as allergen (allergen)}
               <label
-                class="label border-base-300 cursor-pointer gap-2 rounded-lg border px-3 py-1 {formData.allergens.includes(
+                class="label cursor-pointer gap-2 rounded-lg border border-base-300 px-3 py-1 {formData.allergens.includes(
                   allergen,
                 )
-                  ? 'bg-primary/20 border-primary'
+                  ? 'border-primary bg-primary/20'
                   : 'bg-base-200'} {showErrors &&
                 validationErrors.allergens &&
                 !formData.allergens.length
@@ -414,7 +414,7 @@
               >
                 <input
                   type="checkbox"
-                  class="checkbox checkbox-sm bg-base-100"
+                  class="checkbox bg-base-100 checkbox-sm"
                   checked={formData.allergens.includes(allergen)}
                   onchange={() => toggleAllergen(allergen)}
                 />
@@ -423,7 +423,7 @@
             {/each}
           </div>
           {#if showErrors && validationErrors.allergens}
-            <p class="text-error text-xs">
+            <p class="text-xs text-error">
               {validationErrors.allergens}
             </p>
           {/if}
@@ -439,7 +439,7 @@
                 <span class="required">frais ?</span>
               </div></legend
             >
-            <p class="text-base-content/60 mb-2 text-xs">
+            <p class="mb-2 text-xs text-base-content/60">
               Fruits et légumes frais, ou ingrédients qui se conservent au frigo
             </p>
             <div class="join w-full">
@@ -463,7 +463,7 @@
               </button>
             </div>
             {#if showErrors && validationErrors.pF}
-              <p class="text-error text-xs">{validationErrors.pF}</p>
+              <p class="text-xs text-error">{validationErrors.pF}</p>
             {/if}
           </div>
 
@@ -475,7 +475,7 @@
                 <span class="required">Produit surgelé ?</span>
               </div></legend
             >
-            <p class="text-base-content/60 mb-2 text-xs">
+            <p class="mb-2 text-xs text-base-content/60">
               Ingrédients qui se conservent au congélateur
             </p>
             <div class="join w-full">
@@ -499,7 +499,7 @@
               </button>
             </div>
             {#if showErrors && validationErrors.pS}
-              <p class="text-error text-xs">
+              <p class="text-xs text-error">
                 {validationErrors.pS}
               </p>
             {/if}
@@ -509,21 +509,21 @@
         <!-- Saisons -->
         <div class="fieldset">
           <legend class="fieldset-legend">Saisons (optionnel)</legend>
-          <p class="text-base-content/60 mb-2 text-xs">
+          <p class="mb-2 text-xs text-base-content/60">
             Si l'ingrédient se trouve surtout à certaines saisons
           </p>
           <div class="flex flex-wrap gap-2">
             {#each SAISONS as saison (saison.value)}
               <label
-                class="label border-base-300 cursor-pointer gap-2 rounded-lg px-3 py-1 {formData.saisons.includes(
+                class="label cursor-pointer gap-2 rounded-lg border-base-300 px-3 py-1 {formData.saisons.includes(
                   saison.value,
                 )
-                  ? 'bg-success/20 border-success'
+                  ? 'border-success bg-success/20'
                   : 'bg-base-200'}"
               >
                 <input
                   type="checkbox"
-                  class="checkbox checkbox-sm bg-base-100"
+                  class="checkbox bg-base-100 checkbox-sm"
                   checked={formData.saisons.includes(saison.value)}
                   onchange={(e) => {
                     if (e.currentTarget.checked) {

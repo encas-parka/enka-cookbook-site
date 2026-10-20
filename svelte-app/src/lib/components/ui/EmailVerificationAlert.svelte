@@ -7,7 +7,9 @@
 
   async function resendVerificationEmail() {
     try {
-      await pb.collection('users').requestVerification(pb.authStore.record!.email);
+      await pb
+        .collection("users")
+        .requestVerification(pb.authStore.record!.email);
 
       toastService.success(
         "Email de vérification envoyé ! Vérifiez votre boîte de réception.",
@@ -34,7 +36,7 @@
 
 {#if show}
   <div
-    class="alert alert-warning max-md:alert-vertical mx-auto mt-4 max-w-4xl shadow-lg"
+    class="mx-auto mt-4 alert max-w-4xl alert-warning shadow-lg max-md:alert-vertical"
     role="alert"
     in:fade={{ duration: 300 }}
   >

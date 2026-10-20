@@ -67,13 +67,13 @@
   {:else if teamsStore.count === 0}
     <!-- Empty state -->
     <div
-      class="bg-base-200 rounded-box border-base-200 border-2 border-dashed py-20 text-center"
+      class="rounded-box border-2 border-dashed border-base-200 bg-base-200 py-20 text-center"
     >
-      <div class="bg-base-200 mb-4 inline-block rounded-full p-4">
+      <div class="mb-4 inline-block rounded-full bg-base-200 p-4">
         <Users class="h-8 w-8 opacity-50" />
       </div>
       <h3 class="mb-2 text-lg font-bold">Aucune équipe</h3>
-      <p class="text-base-content/60 mb-6">
+      <p class="mb-6 text-base-content/60">
         Vous n'avez pas encore créé ou rejoint d'équipe.
       </p>
       <button class="btn btn-primary btn-sm" onclick={openCreateModal}>

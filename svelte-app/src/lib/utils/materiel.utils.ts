@@ -3,11 +3,7 @@
  * Parsing centralisé et testable des données PocketBase
  */
 
-import type {
-  MaterielLoan,
-  MaterielStatus,
-  MaterielType,
-} from "$lib/types/pb";
+import type { MaterielLoan, MaterielStatus, MaterielType } from "$lib/types/pb";
 import type {
   EnrichedMateriel,
   EnrichedMaterielLoan,
@@ -200,9 +196,7 @@ export function getMaterielStatusLabel(
  * @param materiels - Valeur brute depuis PocketBase
  * @returns Tableau de MaterielLoanItem typé
  */
-export function parseLoanItemsFromDb(
-  materiels: unknown,
-): MaterielLoanItem[] {
+export function parseLoanItemsFromDb(materiels: unknown): MaterielLoanItem[] {
   if (!materiels) {
     return [];
   }
@@ -388,9 +382,7 @@ export function parseMaterielLoanFieldFromDb(
  * @param loan - Emprunt brut (MaterielLoan)
  * @returns Emprunt enrichi avec les items parsés
  */
-export function enrichLoanFromDb(
-  loan: MaterielLoan,
-): EnrichedMaterielLoan {
+export function enrichLoanFromDb(loan: MaterielLoan): EnrichedMaterielLoan {
   return {
     ...loan,
     materielItems: parseMaterielLoanFieldFromDb(loan.materiels),
@@ -438,9 +430,7 @@ export function isLoanPlanned(
  * @returns true si l'emprunt est "asked" ou "accepted"
  */
 export function isLoanValid(loan: MaterielLoan): boolean {
-  return (
-    loan.status !== null && ["asked", "accepted"].includes(loan.status)
-  );
+  return loan.status !== null && ["asked", "accepted"].includes(loan.status);
 }
 
 /**

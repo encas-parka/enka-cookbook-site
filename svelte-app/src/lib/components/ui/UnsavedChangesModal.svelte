@@ -31,7 +31,7 @@
 
   <ModalContent>
     <!-- Contenu avec alerte -->
-    <div class="alert alert-warning alert-soft max-md:alert-vertical text-base">
+    <div class="alert alert-soft text-base alert-warning max-md:alert-vertical">
       <TriangleAlert class="h-5 w-5" />
       <span>{message}</span>
     </div>
@@ -54,7 +54,7 @@
       disabled={isSaving}
     >
       {#if isSaving}
-        <span class="loading loading-spinner loading-xs"></span>
+        <span class="loading loading-xs loading-spinner"></span>
         Enregistrement...
       {:else}
         <Save class="mr-1 h-4 w-4" />

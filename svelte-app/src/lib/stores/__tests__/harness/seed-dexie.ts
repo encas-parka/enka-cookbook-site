@@ -32,7 +32,7 @@ export async function clearDexie(): Promise<void> {
       await db.materiels.clear();
       await db.materielLoans.clear();
       await db.eventMateriels.clear();
-    }
+    },
   );
 }
 

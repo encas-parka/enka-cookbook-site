@@ -334,7 +334,7 @@
 
   <ModalContent>
     {#if !todoToEdit}
-      <div role="tablist" class="tabs tabs-border sm:tabs-lg mb-4 font-bold">
+      <div role="tablist" class="tabs tabs-border mb-4 font-bold sm:tabs-lg">
         <button
           role="tab"
           class="tab {activeTab === 'individual' ? 'tab-active' : ''}"
@@ -375,8 +375,7 @@
           <textarea
             class="textarea h-24 w-full"
             placeholder="Détails supplémentaires..."
-            bind:value={taskDescription}
-          ></textarea>
+            bind:value={taskDescription}></textarea>
         </fieldset>
 
         <div class="flex flex-wrap gap-4">
@@ -434,11 +433,11 @@
           <legend class="fieldset-legend flex items-center gap-2">
             <Users class="size-4 opacity-50" /> Assignation ({assignedTo.length}/{requiredPeopleNb})
             {#if assignedTo.length < requiredPeopleNb}
-              <span class="badge badge-warning badge-sm"
+              <span class="badge badge-sm badge-warning"
                 >Manque {requiredPeopleNb - assignedTo.length} pers.</span
               >
             {:else}
-              <span class="badge badge-success badge-sm flex items-center gap-1"
+              <span class="badge flex items-center gap-1 badge-sm badge-success"
                 ><Check class="size-3" /> ok</span
               >
             {/if}
@@ -464,7 +463,7 @@
           {@const momentTasks = bulkTasks.filter((t) => t.taskOn === moment)}
 
           {#if momentTasks.length > 0}
-            <div class="collapse-arrow bg-base-200 collapse">
+            <div class="collapse-arrow collapse bg-base-200">
               <input type="checkbox" checked />
               <div
                 class="collapse-title flex items-center gap-2 text-base font-medium"
@@ -478,7 +477,7 @@
                   {#each momentTasks as task, index}
                     {@const globalIndex = bulkTasks.indexOf(task)}
                     <div
-                      class="bg-base-100 flex items-center gap-4 rounded-lg p-3"
+                      class="flex items-center gap-4 rounded-lg bg-base-100 p-3"
                     >
                       <input
                         type="checkbox"
@@ -522,7 +521,7 @@
         disabled={isSaving}
       >
         {#if isSaving}
-          <span class="loading loading-spinner loading-sm"></span>
+          <span class="loading loading-sm loading-spinner"></span>
         {:else}
           <List class="size-4" />
         {/if}
@@ -546,7 +545,7 @@
         disabled={isSaving}
       >
         {#if isSaving}
-          <span class="loading loading-spinner loading-sm"></span>
+          <span class="loading loading-sm loading-spinner"></span>
         {:else}
           <Save class="size-4" />
         {/if}

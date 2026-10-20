@@ -1,6 +1,11 @@
 import type { Teamdocs } from "$lib/types/pb";
 import { globalState } from "./GlobalState.svelte";
-import { createSyncCollection, bridgeToMap, db, pb } from "$lib/db-sync/pb-sync";
+import {
+  createSyncCollection,
+  bridgeToMap,
+  db,
+  pb,
+} from "$lib/db-sync/pb-sync";
 
 export class TeamdocsStore {
   #collection = createSyncCollection<Teamdocs>(pb, db.teamdocs, "teamdocs");
@@ -224,12 +229,10 @@ export class TeamdocsStore {
       throw new Error("Utilisateur non connecté");
     }
 
-    const doc = await this.#collection.create(
-      {
-        ...data,
-        teamId,
-      } as Omit<Teamdocs, "id" | "created" | "updated">,
-    );
+    const doc = await this.#collection.create({
+      ...data,
+      teamId,
+    } as Omit<Teamdocs, "id" | "created" | "updated">);
 
     console.log(`[TeamdocsStore] Document créé : ${doc.id}`);
     return doc;
@@ -243,13 +246,11 @@ export class TeamdocsStore {
       throw new Error("Utilisateur non connecté");
     }
 
-    const doc = await this.#collection.create(
-      {
-        ...data,
-        eventId,
-        status: "doc",
-      } as Omit<Teamdocs, "id" | "created" | "updated">,
-    );
+    const doc = await this.#collection.create({
+      ...data,
+      eventId,
+      status: "doc",
+    } as Omit<Teamdocs, "id" | "created" | "updated">);
 
     console.log(`[TeamdocsStore] Document événement créé : ${doc.id}`);
     return doc;

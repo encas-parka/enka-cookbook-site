@@ -165,7 +165,11 @@ describe("MaterielStore — loan ↔ event_materiel (write paths)", () => {
         ownerId: TEST_TEAM_ID,
         ownerName: "Team One",
         materiels: [
-          { materielId: TEST_MATERIEL_ID, materielName: "Gastro 1/1", quantity: 1 },
+          {
+            materielId: TEST_MATERIEL_ID,
+            materielName: "Gastro 1/1",
+            quantity: 1,
+          },
         ],
         status: "accepted",
         eventId: TEST_EVENT_ID,
@@ -198,7 +202,11 @@ describe("MaterielStore — loan ↔ event_materiel (write paths)", () => {
       ownerId: TEST_TEAM_ID,
       ownerName: "Team One",
       materiels: [
-        { materielId: TEST_MATERIEL_ID, materielName: "Gastro 1/1", quantity: 1 },
+        {
+          materielId: TEST_MATERIEL_ID,
+          materielName: "Gastro 1/1",
+          quantity: 1,
+        },
       ],
       status: "accepted",
       eventId: null,
@@ -214,7 +222,11 @@ describe("MaterielStore — loan ↔ event_materiel (write paths)", () => {
         eventId: TEST_EVENT_ID,
         eventName: "T12 Harness Event",
         materiels: [
-          { materielId: TEST_MATERIEL_ID, materielName: "Gastro 1/1", quantity: 1 },
+          {
+            materielId: TEST_MATERIEL_ID,
+            materielName: "Gastro 1/1",
+            quantity: 1,
+          },
         ],
       });
     } catch (err) {

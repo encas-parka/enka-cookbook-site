@@ -34,12 +34,16 @@ describe("normalizeQty", () => {
 describe("getNormalizedOverride", () => {
   it("normalise un override legacy saisi en kg", () => {
     expect(
-      getNormalizedOverride({ totalNeededOverrideParsed: makeOverride(4, "kg") }),
+      getNormalizedOverride({
+        totalNeededOverrideParsed: makeOverride(4, "kg"),
+      }),
     ).toEqual({ q: 4000, u: "gr." });
   });
 
   it("retourne null sans override", () => {
-    expect(getNormalizedOverride({ totalNeededOverrideParsed: null })).toBeNull();
+    expect(
+      getNormalizedOverride({ totalNeededOverrideParsed: null }),
+    ).toBeNull();
   });
 });
 
@@ -56,7 +60,10 @@ describe("getEffectiveNeededQuantities", () => {
   it("retourne le fallback sans override", () => {
     const fallback = [{ q: 500, u: "gr." }];
     expect(
-      getEffectiveNeededQuantities({ totalNeededOverrideParsed: null }, fallback),
+      getEffectiveNeededQuantities(
+        { totalNeededOverrideParsed: null },
+        fallback,
+      ),
     ).toBe(fallback);
   });
 });

@@ -135,7 +135,7 @@
     >
       <!-- Erreur -->
       {#if serverError}
-        <div class="alert alert-error max-md:alert-vertical text-sm">
+        <div class="alert text-sm alert-error max-md:alert-vertical">
           <TriangleAlert size={18} />
           <span>{serverError}</span>
         </div>
@@ -144,13 +144,13 @@
       <fieldset disabled={loading} class="space-y-4">
         <!-- Nom -->
         <div class="fieldset">
-          <legend class="fieldset-legend required">Nom de la catégorie</legend>
+          <legend class="required fieldset-legend">Nom de la catégorie</legend>
           <label
-            class="input input-lg w-full {showErrors && validationErrors.name
+            class="input w-full input-lg {showErrors && validationErrors.name
               ? 'input-error'
               : ''}"
           >
-            <Tag class="text-base-content/50 h-5 w-5" />
+            <Tag class="h-5 w-5 text-base-content/50" />
             <input
               id="category-name-input"
               type="text"
@@ -163,9 +163,9 @@
             />
           </label>
           {#if showErrors && validationErrors.name}
-            <p class="text-error text-xs">{validationErrors.name}</p>
+            <p class="text-xs text-error">{validationErrors.name}</p>
           {/if}
-          <p class="text-base-content/60 text-xs italic">
+          <p class="text-xs text-base-content/60 italic">
             2 à 50 caractères. Ex: "Bouchées salées", "Plat en Sauce", "Tarte
             (salée)"
           </p>

@@ -103,9 +103,7 @@
           permissionWrite = [...(permissionWrite || []), user.id];
           memberNames[user.id] = userName;
           emailInput = "";
-          toastService.success(
-            `Permission d'édition ajouté pour ${userName}`,
-          );
+          toastService.success(`Permission d'édition ajouté pour ${userName}`);
         }
       } else {
         inviteError =
@@ -142,7 +140,7 @@
 <Fieldset iconComponent={Users} legend="Permissions">
   <div class="space-y-4">
     <div
-      class="alert alert-info alert-soft border-info/20 max-md:alert-vertical text-xs"
+      class="alert border-info/20 alert-soft text-xs alert-info max-md:alert-vertical"
     >
       <Info size={16} />
       <span>
@@ -155,7 +153,7 @@
 
     <div class="flex flex-wrap gap-2">
       <!-- Propriétaire -->
-      <div class="badge badge-lg badge-soft badge-info gap-2 p-4">
+      <div class="badge gap-2 badge-soft p-4 badge-lg badge-info">
         <Lock size={14} />
         <span class=""
           >{createdBy
@@ -168,13 +166,13 @@
       <!-- Autres collaborateurs -->
       {#each (permissionWrite || []).filter((id) => createdBy !== undefined && id !== createdBy) as contributorId}
         <div
-          class="badge badge-lg badge-soft gap-2 p-4"
+          class="badge gap-2 badge-soft p-4 badge-lg"
           transition:fade={{ duration: 200 }}
         >
           <span>{memberNames[contributorId] || contributorId}</span>
           {#if canEdit}
             <button
-              class="btn btn-circle btn-xs btn-error btn-ghost ms-2"
+              class="btn ms-2 btn-circle btn-ghost btn-error btn-xs"
               onclick={() => removeContributor(contributorId)}
               title="Retirer les droits"
             >
@@ -186,7 +184,7 @@
 
       {#if canEdit}
         <button
-          class="btn btn-primary btn-sm btn-outline ms-4"
+          class="btn ms-4 btn-outline btn-primary btn-sm"
           onclick={() => (showInviteModal = true)}
           title="Gérer les collaborateurs"
         >
@@ -225,14 +223,14 @@
             disabled={isChecking || !emailInput}
           >
             {#if isChecking}
-              <span class="loading loading-spinner loading-xs"></span>
+              <span class="loading loading-xs loading-spinner"></span>
             {:else}
               Ajouter
             {/if}
           </button>
         </div>
         {#if inviteError}
-          <p class="text-error mt-2 flex items-center gap-1 text-xs">
+          <p class="mt-2 flex items-center gap-1 text-xs text-error">
             <ShieldAlert size={14} />
             {inviteError}
           </p>

@@ -54,7 +54,9 @@ describe("product-markdown-export", () => {
   describe("empty state", () => {
     it("shows placeholder when no groups", () => {
       const md = exportProductsToMarkdown(makeOptions());
-      expect(md).toContain("_Aucun produit ne correspond aux filtres actuels._");
+      expect(md).toContain(
+        "_Aucun produit ne correspond aux filtres actuels._",
+      );
     });
   });
 
@@ -217,9 +219,9 @@ describe("product-markdown-export", () => {
         "- Crème de soja (inclut: Crème d'amande, Crème liquide): 3 l",
       );
       // Pas de suffixe quand aucune source fusionnée
-      expect(
-        md.split("\n").find((l) => l.startsWith("- Beurre")),
-      ).toBe("- Beurre: 500 gr.");
+      expect(md.split("\n").find((l) => l.startsWith("- Beurre"))).toBe(
+        "- Beurre: 500 gr.",
+      );
     });
 
     it("renders multiple groups", () => {

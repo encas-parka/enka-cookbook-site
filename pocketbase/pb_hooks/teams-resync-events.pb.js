@@ -50,7 +50,8 @@ onRecordAfterUpdateSuccess(function (e) {
   // --- Envoyer les messages SSE custom ---
   var broker = $app.subscriptionsBroker();
   var clients = broker.clients();
-  var hasNotifications = addedUserIds.length > 0 || removedUserIds.length > 0 || nameChanged;
+  var hasNotifications =
+    addedUserIds.length > 0 || removedUserIds.length > 0 || nameChanged;
 
   if (!hasNotifications) {
     e.next();
@@ -76,7 +77,7 @@ onRecordAfterUpdateSuccess(function (e) {
       msgData = JSON.stringify({
         action: "team_joined",
         teamId: teamId,
-        teamName: teamName
+        teamName: teamName,
       });
     }
     // Membre retire → team_left
@@ -84,7 +85,7 @@ onRecordAfterUpdateSuccess(function (e) {
       msgData = JSON.stringify({
         action: "team_left",
         teamId: teamId,
-        teamName: teamName
+        teamName: teamName,
       });
     }
     // Membre existant et team renommee → team_updated
@@ -92,27 +93,35 @@ onRecordAfterUpdateSuccess(function (e) {
       msgData = JSON.stringify({
         action: "team_updated",
         teamId: teamId,
-        teamName: teamName
+        teamName: teamName,
       });
     }
 
     if (msgData) {
-      client.send(new SubscriptionMessage({
-        name: topic,
-        data: msgData
-      }));
+      client.send(
+        new SubscriptionMessage({
+          name: topic,
+          data: msgData,
+        }),
+      );
       sentCount++;
     }
   }
 
   if (sentCount > 0) {
-    $app.logger().info(
-      "Team resync notifications sent",
-      "teamId", teamId,
-      "notified", String(sentCount),
-      "added", String(addedUserIds.length),
-      "removed", String(removedUserIds.length)
-    );
+    $app
+      .logger()
+      .info(
+        "Team resync notifications sent",
+        "teamId",
+        teamId,
+        "notified",
+        String(sentCount),
+        "added",
+        String(addedUserIds.length),
+        "removed",
+        String(removedUserIds.length),
+      );
   }
 
   e.next();

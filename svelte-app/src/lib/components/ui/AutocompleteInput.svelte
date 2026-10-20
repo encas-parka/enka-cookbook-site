@@ -61,7 +61,7 @@
     if (isFocused && value.trim().length === 0 && showAllOnFocus) {
       return maxResults ? items.slice(0, maxResults) : items;
     }
-    return fuzzyResults.map(r => r.obj);
+    return fuzzyResults.map((r) => r.obj);
   });
 
   // Déterminer si les résultats doivent être affichés
@@ -139,24 +139,28 @@
       })}
     />
     {#if loading}
-      <div class="loading loading-spinner loading-xs"></div>
+      <div class="loading loading-xs loading-spinner"></div>
     {/if}
   </label>
 
   {#if shouldShowResults}
     <div class="absolute z-10 mt-1 w-full">
       <ul
-        class="rounded-box bg-base-100 border-base-300 max-h-60 overflow-y-auto border shadow-lg"
+        class="max-h-60 overflow-y-auto rounded-box border border-base-300 bg-base-100 shadow-lg"
       >
         {#each filteredItems as item, index (itemToString(item))}
           <li>
             <button
-              class="hover:bg-base-200 focus:bg-base-200 w-full px-3 py-2 text-left text-sm {index ===
+              class="w-full px-3 py-2 text-left text-sm hover:bg-base-200 focus:bg-base-200 {index ===
                 selectedIndex && 'bg-base-200'}"
               onclick={() => handleSelectItem(item)}
               {disabled}
             >
-              <span class="block truncate">{#if highlightMap.has(itemToString(item))}{@html highlightMap.get(itemToString(item))!}{:else}{itemToString(item)}{/if}</span>
+              <span class="block truncate"
+                >{#if highlightMap.has(itemToString(item))}{@html highlightMap.get(
+                    itemToString(item),
+                  )!}{:else}{itemToString(item)}{/if}</span
+              >
             </button>
           </li>
         {/each}
@@ -166,10 +170,9 @@
 
   {#if isFocused && value.length >= minQueryLength && filteredItems.length === 0 && !loading}
     <div
-      class="rounded-box bg-base-100 border-base-300 text-base-content/60 absolute z-10 mt-1 w-full border p-4 text-center text-sm shadow-lg"
+      class="absolute z-10 mt-1 w-full rounded-box border border-base-300 bg-base-100 p-4 text-center text-sm text-base-content/60 shadow-lg"
     >
       Aucun résultat trouvé
     </div>
   {/if}
 </div>
-

@@ -43,13 +43,13 @@
 </script>
 
 {#if loading}
-  <div class="card bg-base-100 mt-4 shadow-sm">
+  <div class="card mt-4 bg-base-100 shadow-sm">
     <div class="card-body p-4">
-      <div class="loading loading-spinner loading-sm"></div>
+      <div class="loading loading-sm loading-spinner"></div>
     </div>
   </div>
 {:else if displayVariants.length > 0}
-  <div class="card bg-base-100 mt-4 shadow-sm">
+  <div class="card mt-4 bg-base-100 shadow-sm">
     <div class="card-body p-4">
       <h4 class="card-title flex items-center gap-2">
         <Copy class="h-4 w-4" />
@@ -59,7 +59,7 @@
 
       <div class="flex flex-wrap gap-x-4 gap-y-2">
         {#each displayVariants as variant}
-          <a class="btn btn-ghost h-auto" href={p(`/recipe/${variant.id}`)}>
+          <a class="btn h-auto btn-ghost" href={p(`/recipe/${variant.id}`)}>
             <div class="flex flex-wrap items-center gap-2 text-sm text-wrap">
               {variant.title}
 
@@ -69,7 +69,7 @@
                 </span>
               {/if}
               {#if variant.id === root?.id}
-                <span class="badge badge-primary badge-xs badge-soft"
+                <span class="badge badge-soft badge-xs badge-primary"
                   >Originale</span
                 >
               {/if}

@@ -130,7 +130,9 @@
   });
 
   const ownerTeamName = $derived(
-    materiel.teamId ? nativeTeamsStore.getTeamById(materiel.teamId)?.name : null,
+    materiel.teamId
+      ? nativeTeamsStore.getTeamById(materiel.teamId)?.name
+      : null,
   );
 
   // Description tronquée
@@ -143,7 +145,7 @@
 </script>
 
 <div
-  class="card card-side card-xs bg-base-100 border-base-200 hover:border-primary/50 group cursor-pointer border text-left shadow-sm transition-all hover:shadow-md"
+  class="group card card-side cursor-pointer border border-base-200 bg-base-100 text-left shadow-sm transition-all card-xs hover:border-primary/50 hover:shadow-md"
   role="button"
   tabindex="0"
   onclick={() => canEdit && onEdit?.(materiel.id)}
@@ -172,20 +174,20 @@
         <div class="flex flex-wrap items-center gap-x-4 gap-y-0">
           <div class="flex items-center gap-2">
             <h3
-              class="text-primary group-hover:text-primary/80 text-base font-semibold transition-colors"
+              class="text-base font-semibold text-primary transition-colors group-hover:text-primary/80"
             >
               {materiel.name}
             </h3>
             <span
               class="badge {getMaterielTypeBadgeClass(
                 materiel.type,
-              )} badge-soft badge-sm gap-1 py-0"
+              )} gap-1 badge-soft py-0 badge-sm"
             >
               {getMaterielTypeConfig(materiel.type).label}
             </span>
           </div>
           <div
-            class="text-base-content/80 flex flex-wrap items-center gap-x-2 gap-y-1 text-sm"
+            class="flex flex-wrap items-center gap-x-2 gap-y-1 text-sm text-base-content/80"
           >
             <!-- Localisation -->
             {#if materiel.location}
@@ -215,7 +217,7 @@
             >
               {materiel.availableQuantity}/{materiel.quantity}
             </span>
-            <span class="text-base-content/60 ml-1 text-xs">disp.</span>
+            <span class="ml-1 text-xs text-base-content/60">disp.</span>
           </div>
 
           <!-- Info sur les prêts (si présent) -->
@@ -226,14 +228,14 @@
           {/if}
           <!-- Description -->
           {#if truncatedDescription}
-            <div class="text-base-content/60 line-clamp-1 text-xs">
+            <div class="line-clamp-1 text-xs text-base-content/60">
               {truncatedDescription}
             </div>
           {/if}
 
           <!-- Statut principal -->
           {#if materiel.status !== "ok" && materiel.status !== "loan"}
-            <div class="badge {StatusConfig.badgeClass} badge-sm gap-1 py-0">
+            <div class="badge {StatusConfig.badgeClass} gap-1 py-0 badge-sm">
               {StatusConfig.label}
             </div>
           {/if}
@@ -261,11 +263,11 @@
         {#if materiel.loanDetails.length > 0}
           <div class="">
             <div class="text-xs">
-              <span class="text-info font-semibold">
+              <span class="font-semibold text-info">
                 {materiel.loanDetails.length} réservation
                 {materiel.loanDetails.length > 1 ? "s" : ""} :
               </span>
-              <span class="text-base-content/80 ml-2">
+              <span class="ml-2 text-base-content/80">
                 {#each materiel.loanDetails as loan, index}
                   {#if index > 0}
                     <span class="opacity-50"> • </span>
@@ -289,7 +291,7 @@
   {#if canEdit}
     <div class="flex items-center p-2">
       <button
-        class="btn btn-ghost btn-xs text-primary"
+        class="btn btn-ghost text-primary btn-xs"
         onclick={(e) => {
           e.stopPropagation();
           onEdit?.(materiel.id);

@@ -106,7 +106,7 @@
 </script>
 
 <div
-  class="card card-side card-xs bg-base-100 border-base-200 hover:border-primary/50 group cursor-pointer border text-left shadow-sm transition-all hover:shadow-md"
+  class="group card card-side cursor-pointer border border-base-200 bg-base-100 text-left shadow-sm transition-all card-xs hover:border-primary/50 hover:shadow-md"
   role="button"
   tabindex="0"
   onclick={() => canUserEdit && onEdit(item)}
@@ -132,7 +132,7 @@
             <span
               class="badge hidden sm:flex {getMaterielTypeBadgeClass(
                 item.type,
-              )} badge-soft badge-sm gap-1 py-0"
+              )} gap-1 badge-soft py-0 badge-sm"
             >
               {getMaterielTypeConfig(item.type).label}
             </span>
@@ -142,7 +142,7 @@
         <div class="flex flex-wrap items-baseline gap-x-4 gap-y-2">
           <!-- Location -->
           {#if item.where}
-            <div class="text-base-content/70 flex items-center gap-1 text-sm">
+            <div class="flex items-center gap-1 text-sm text-base-content/70">
               <MapPin class="h-3 w-3" />
               <span class="max-w-60 truncate">{item.where}</span>
             </div>
@@ -150,7 +150,7 @@
 
           <!-- Who -->
           {#if item.who}
-            <div class="text-base-content/70 flex items-center gap-1 text-sm">
+            <div class="flex items-center gap-1 text-sm text-base-content/70">
               <User class="h-3 w-3" />
               <span class="truncate">{item.who}</span>
             </div>
@@ -158,7 +158,7 @@
 
           <!-- From Team -->
           {#if item.fromTeamName}
-            <div class="text-base-content/50 flex items-center gap-1 text-xs">
+            <div class="flex items-center gap-1 text-xs text-base-content/50">
               <Users class="h-3 w-3" />
               <span class="truncate">{item.fromTeamName}</span>
             </div>
@@ -167,7 +167,7 @@
           <!-- Notes -->
           {#if item.notes}
             <button
-              class="text-base-content/50 hover:text-base-content/80 flex items-center gap-1 text-xs transition-colors hover:cursor-pointer"
+              class="flex items-center gap-1 text-xs text-base-content/50 transition-colors hover:cursor-pointer hover:text-base-content/80"
               onclick={toggleNotes}
               title={notesExpanded ? "Masquer la note" : "Afficher la note"}
             >
@@ -178,7 +178,7 @@
         </div>
         {#if notesExpanded}
           <div
-            class="text-base-content/60 bg-base-200 w-full rounded px-2 text-sm"
+            class="w-full rounded bg-base-200 px-2 text-sm text-base-content/60"
           >
             <MessageSquare class="inline h-3 w-3" />
 
@@ -191,7 +191,7 @@
       <div class="ms-auto flex items-center gap-2">
         <!-- Status badge -->
         <span
-          class="badge {statusConfig.badgeClass} badge-soft gap-1 py-0"
+          class="badge {statusConfig.badgeClass} gap-1 badge-soft py-0"
           title={statusConfig.label}
         >
           <StatusIcon class="size-3" />
@@ -200,7 +200,7 @@
         <!-- Edit button (only if can edit) -->
         {#if canUserEdit}
           <button
-            class="btn btn-ghost btn-xs text-primary"
+            class="btn btn-ghost text-primary btn-xs"
             onclick={(e) => {
               e.stopPropagation();
               onEdit(item);
@@ -213,7 +213,7 @@
         <!-- Edit loan button (only if sourced from a loan and user has access) -->
         {#if canUserEditLoan && onEditLoan}
           <button
-            class="btn btn-ghost btn-xs text-secondary"
+            class="btn btn-ghost text-secondary btn-xs"
             onclick={(e) => {
               e.stopPropagation();
               onEditLoan(item.loanId!);

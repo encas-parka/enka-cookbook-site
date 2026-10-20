@@ -34,29 +34,29 @@
  * @module db-sync/pb-collection
  */
 
-import type { Table, UpdateSpec } from 'dexie';
-import type PocketBase from 'pocketbase';
-import { db, type SyncMetaRow } from './aw-db';
+import type { Table, UpdateSpec } from "dexie";
+import type PocketBase from "pocketbase";
+import { db, type SyncMetaRow } from "./aw-db";
 import type {
   PbFetchOptions,
   PbSubscribeOptions,
   PbListOptions,
   PbSyncOptions,
   PbSubscriptionRef,
-  PbCollectionName
-} from './pb-types';
-import type { PbDoc } from './aw-types';
+  PbCollectionName,
+} from "./pb-types";
+import type { PbDoc } from "./aw-types";
 
 // =============================================================================
 // SYSTEM FIELD HELPERS
 // =============================================================================
 
-const SYSTEM_FIELDS = new Set(['id', 'created', 'updated']);
-const SYSTEM_FIELDS_KEEP_ID = new Set(['created', 'updated']);
+const SYSTEM_FIELDS = new Set(["id", "created", "updated"]);
+const SYSTEM_FIELDS_KEEP_ID = new Set(["created", "updated"]);
 
 function stripSystemFields<T extends Record<string, unknown>>(
   data: Partial<T>,
-  keepId = false
+  keepId = false,
 ): Record<string, unknown> {
   const strip = keepId ? SYSTEM_FIELDS_KEEP_ID : SYSTEM_FIELDS;
   const result: Record<string, unknown> = {};
@@ -79,7 +79,7 @@ function stripSystemFields<T extends Record<string, unknown>>(
  * pb-sync write boundary, protects every write path at once.
  */
 function toPlain<T>(value: T): T {
-  if (value === null || typeof value !== 'object') return value;
+  if (value === null || typeof value !== "object") return value;
   if (value instanceof Date) {
     return new Date(value.getTime()) as unknown as T;
   }
@@ -88,7 +88,7 @@ function toPlain<T>(value: T): T {
   }
   const result: Record<string, unknown> = {};
   for (const [key, v] of Object.entries(value as Record<string, unknown>)) {
-    if (typeof v === 'function') continue;
+    if (typeof v === "function") continue;
     result[key] = toPlain(v);
   }
   return result as unknown as T;
@@ -101,9 +101,9 @@ function toPlain<T>(value: T): T {
  * case the cursor keeps its previous position (never skips unfetched data).
  */
 function maxUpdated(records: PbDoc[]): string {
-  let max = '';
+  let max = "";
   for (const record of records) {
-    const u = record.updated || '';
+    const u = record.updated || "";
     if (u > max) max = u;
   }
   return max;
@@ -125,8 +125,10 @@ function maxUpdated(records: PbDoc[]): string {
 export function mergeByKey<T>(key: keyof T & string) {
   return (local: T[], remote: T[]): T[] => {
     const map = new Map<unknown, T>();
-    for (const item of remote ?? []) map.set((item as Record<string, unknown>)[key], item);
-    for (const item of local ?? []) map.set((item as Record<string, unknown>)[key], item);
+    for (const item of remote ?? [])
+      map.set((item as Record<string, unknown>)[key], item);
+    for (const item of local ?? [])
+      map.set((item as Record<string, unknown>)[key], item);
     return Array.from(map.values());
   };
 }
@@ -135,7 +137,7 @@ export function mergeByKey<T>(key: keyof T & string) {
 function applyMergeStrategies<T extends PbDoc>(
   payload: Partial<T>,
   serverRecord: T,
-  strategies: PbSyncOptions<T>['mergeStrategies']
+  strategies: PbSyncOptions<T>["mergeStrategies"],
 ): Partial<T> {
   if (!strategies) return payload;
   const merged = { ...payload };
@@ -143,7 +145,7 @@ function applyMergeStrategies<T extends PbDoc>(
     if (field in payload && strategies[field]) {
       (merged as Record<string, unknown>)[field as string] = strategies[field]!(
         payload[field] as NonNullable<T[keyof T]>,
-        serverRecord[field] as NonNullable<T[keyof T]>
+        serverRecord[field] as NonNullable<T[keyof T]>,
       );
     }
   }
@@ -160,7 +162,7 @@ function applyMergeStrategies<T extends PbDoc>(
  */
 function resolveFilter(
   pb: PocketBase,
-  params?: PbFetchOptions
+  params?: PbFetchOptions,
 ): string | undefined {
   if (!params?.filter) return undefined;
   if (Array.isArray(params.filter)) {
@@ -182,7 +184,7 @@ export class RecordDeletedError extends Error {
 
   constructor(recordId: string, collectionId: string) {
     super(`Record "${recordId}" was deleted from "${collectionId}"`);
-    this.name = 'RecordDeletedError';
+    this.name = "RecordDeletedError";
     this.recordId = recordId;
     this.collectionId = collectionId;
   }
@@ -199,7 +201,7 @@ export class RecordNotFoundError extends Error {
 
   constructor(recordId: string, collectionId: string) {
     super(`Record "${recordId}" not found on "${collectionId}" (server 404)`);
-    this.name = 'RecordNotFoundError';
+    this.name = "RecordNotFoundError";
     this.recordId = recordId;
     this.collectionId = collectionId;
   }
@@ -214,7 +216,9 @@ export interface BatchResult<T extends PbDoc> {
 }
 
 export interface CollectionBatch<T extends PbDoc> {
-  create(data: Omit<T, 'id' | 'created' | 'updated'> & { id?: string }): CollectionBatch<T>;
+  create(
+    data: Omit<T, "id" | "created" | "updated"> & { id?: string },
+  ): CollectionBatch<T>;
   /**
    * Create-or-update decided server-side: PocketBase executes the request
    * as an update when the body carries an id that already exists, as a
@@ -222,7 +226,9 @@ export interface CollectionBatch<T extends PbDoc> {
    * whether the record is already on the server — the primitive tranches
    * both ways. A client id is preserved (same keepId seam as `create`).
    */
-  upsert(data: Omit<T, 'id' | 'created' | 'updated'> & { id?: string }): CollectionBatch<T>;
+  upsert(
+    data: Omit<T, "id" | "created" | "updated"> & { id?: string },
+  ): CollectionBatch<T>;
   update(id: string, data: Partial<T>): CollectionBatch<T>;
   delete(id: string): CollectionBatch<T>;
   send(): Promise<BatchResult<T>>;
@@ -257,7 +263,7 @@ export function createSyncCollection<T extends PbDoc>(
   pb: PocketBase,
   table: Table<T>,
   collectionName: PbCollectionName,
-  options?: PbSyncOptions<T>
+  options?: PbSyncOptions<T>,
 ) {
   const mergeStrategies = options?.mergeStrategies;
   const softDelete = options?.softDelete ?? false;
@@ -297,7 +303,7 @@ export function createSyncCollection<T extends PbDoc>(
       ? `${collectionName}:${fetchOptions.scopeKey}`
       : collectionName;
     const meta = await db.syncMeta.get(syncKey);
-    const since = meta?.lastSync ?? '2000-01-01 00:00:00.000Z';
+    const since = meta?.lastSync ?? "2000-01-01 00:00:00.000Z";
     const localCount = await table.count();
 
     // 2. Build the delta filter — `>=` replays boundary records (the upsert
@@ -305,28 +311,28 @@ export function createSyncCollection<T extends PbDoc>(
     const userFilter = resolveFilter(pb, fetchOptions);
     const combinedVars = {
       ...(Array.isArray(fetchOptions?.filter) ? fetchOptions!.filter[1] : {}),
-      since
+      since,
     };
 
     const deltaFilter = userFilter
       ? pb.filter(`(${userFilter}) && updated >= {:since}`, combinedVars)
-      : pb.filter('updated >= {:since}', { since });
+      : pb.filter("updated >= {:since}", { since });
 
     console.log(
-      `[pb-sync] ${collectionName}${fetchOptions?.scopeKey ? `:${fetchOptions.scopeKey}` : ''}: fetching with filter="${deltaFilter}" (localCount=${localCount})`
+      `[pb-sync] ${collectionName}${fetchOptions?.scopeKey ? `:${fetchOptions.scopeKey}` : ""}: fetching with filter="${deltaFilter}" (localCount=${localCount})`,
     );
 
     // 3. Fetch all updated records from PocketBase (with delta filter)
     const queryOpts = {
-      sort: 'updated',
+      sort: "updated",
       ...(fetchOptions?.fields ? { fields: fetchOptions.fields } : {}),
       ...(fetchOptions?.expand ? { expand: fetchOptions.expand } : {}),
-      ...(fetchOptions?.query ? { query: fetchOptions.query } : {})
+      ...(fetchOptions?.query ? { query: fetchOptions.query } : {}),
     };
 
     let freshRecords = await pb.collection(collectionName).getFullList({
       filter: deltaFilter,
-      ...queryOpts
+      ...queryOpts,
     });
 
     // 3b. Fallback: if delta filter returned 0 but local DB is empty,
@@ -336,11 +342,11 @@ export function createSyncCollection<T extends PbDoc>(
     if (freshRecords.length === 0 && localCount === 0) {
       const fullFilter = userFilter ?? undefined;
       console.warn(
-        `[pb-sync] ${collectionName}: delta filter returned 0, local DB empty — retrying without updated filter`
+        `[pb-sync] ${collectionName}: delta filter returned 0, local DB empty — retrying without updated filter`,
       );
       freshRecords = await pb.collection(collectionName).getFullList({
         ...(fullFilter ? { filter: fullFilter } : {}),
-        ...queryOpts
+        ...queryOpts,
       });
     }
 
@@ -351,7 +357,7 @@ export function createSyncCollection<T extends PbDoc>(
     const newCursor = maxUpdated(records);
 
     if (records.length > 0) {
-      await db.transaction('rw', [table, db.syncMeta], async () => {
+      await db.transaction("rw", [table, db.syncMeta], async () => {
         for (const record of records) {
           const existing = await table.get(record.id);
           if (existing) {
@@ -365,14 +371,14 @@ export function createSyncCollection<T extends PbDoc>(
         if (newCursor) {
           await db.syncMeta.put({
             collectionId: syncKey,
-            lastSync: newCursor
+            lastSync: newCursor,
           } satisfies SyncMetaRow);
         }
       });
     }
 
     console.log(
-      `[pb-sync] ${collectionName}: ${freshRecords.length} records synced (since: ${since.slice(0, 19)})`
+      `[pb-sync] ${collectionName}: ${freshRecords.length} records synced (since: ${since.slice(0, 19)})`,
     );
   }
 
@@ -390,54 +396,54 @@ export function createSyncCollection<T extends PbDoc>(
    * @param subOptions - Optional: scope to a specific record or add filter
    * @returns A PbSubscriptionRef for later unsubscription
    */
-  function subscribeToCollection(subOptions?: PbSubscribeOptions): PbSubscriptionRef {
+  function subscribeToCollection(
+    subOptions?: PbSubscribeOptions,
+  ): PbSubscriptionRef {
     const subId = `${collectionName}_${++subCounter}`;
     const resolvedFilter = resolveFilter(pb, subOptions);
-    const topic = subOptions?.record ?? '*';
+    const topic = subOptions?.record ?? "*";
 
     const ref: PbSubscriptionRef = {
       id: subId,
       collection: collectionName,
-      filter: resolvedFilter
+      filter: resolvedFilter,
     };
 
     // Handler: applies realtime events to Dexie (with normalization)
-    const subscribePromise = pb
-      .collection(collectionName)
-      .subscribe(
-        topic,
-        async (event) => {
-          const record = event.record as unknown as T;
+    const subscribePromise = pb.collection(collectionName).subscribe(
+      topic,
+      async (event) => {
+        const record = event.record as unknown as T;
 
-          if (event.action === 'delete') {
-            if (softDelete) {
-              const existing = await table.get(record.id);
-              if (existing) {
-                await table.put({ ...existing, deleted: true } as unknown as T);
-              }
-            } else {
-              await table.delete(record.id);
-            }
-            console.log(
-              `[pb-sync] realtime DELETE ${collectionName}/${record.id}`
-            );
-          } else {
+        if (event.action === "delete") {
+          if (softDelete) {
             const existing = await table.get(record.id);
             if (existing) {
-              await table.update(record.id, record as unknown as UpdateSpec<T>);
-            } else {
-              await table.put(record);
+              await table.put({ ...existing, deleted: true } as unknown as T);
             }
-            console.log(
-              `[pb-sync] realtime ${event.action.toUpperCase()} ${collectionName}/${record.id}`
-            );
+          } else {
+            await table.delete(record.id);
           }
-        },
-        {
-          ...(resolvedFilter ? { filter: resolvedFilter } : {}),
-          ...(subOptions?.query ? { query: subOptions.query } : {})
+          console.log(
+            `[pb-sync] realtime DELETE ${collectionName}/${record.id}`,
+          );
+        } else {
+          const existing = await table.get(record.id);
+          if (existing) {
+            await table.update(record.id, record as unknown as UpdateSpec<T>);
+          } else {
+            await table.put(record);
+          }
+          console.log(
+            `[pb-sync] realtime ${event.action.toUpperCase()} ${collectionName}/${record.id}`,
+          );
         }
-      );
+      },
+      {
+        ...(resolvedFilter ? { filter: resolvedFilter } : {}),
+        ...(subOptions?.query ? { query: subOptions.query } : {}),
+      },
+    );
 
     subscriptions.set(subId, { ref, unsub: null, promise: subscribePromise });
     subscribePromise.then((unsub) => {
@@ -454,8 +460,10 @@ export function createSyncCollection<T extends PbDoc>(
   /**
    * Closes a specific realtime subscription.
    */
-  async function unsubscribe(subRefOrId: PbSubscriptionRef | string): Promise<void> {
-    const subId = typeof subRefOrId === 'string' ? subRefOrId : subRefOrId.id;
+  async function unsubscribe(
+    subRefOrId: PbSubscriptionRef | string,
+  ): Promise<void> {
+    const subId = typeof subRefOrId === "string" ? subRefOrId : subRefOrId.id;
     const entry = subscriptions.get(subId);
     if (entry) {
       const unsub = entry.unsub ?? (await entry.promise);
@@ -494,7 +502,7 @@ export function createSyncCollection<T extends PbDoc>(
    * @returns The confirmed record
    */
   async function create(
-    data: Omit<T, 'id' | 'created' | 'updated'> & { id?: string }
+    data: Omit<T, "id" | "created" | "updated"> & { id?: string },
   ): Promise<T> {
     const pbData = stripSystemFields(toPlain(data) as Partial<T>, true);
 
@@ -533,7 +541,7 @@ export function createSyncCollection<T extends PbDoc>(
       let serverRaw;
       try {
         serverRaw = await pb.collection(collectionName).getOne(id, {
-          requestKey: null
+          requestKey: null,
         });
       } catch (err: any) {
         if (err?.status === 404) {
@@ -556,10 +564,14 @@ export function createSyncCollection<T extends PbDoc>(
         const hasConflictableField = fieldsToMerge.some((f) => f in data);
         if (hasConflictableField) {
           const serverRaw = await pb.collection(collectionName).getOne(id, {
-            requestKey: null
+            requestKey: null,
           });
           const serverRecord = serverRaw as unknown as T;
-          const merged = applyMergeStrategies(data, serverRecord, mergeStrategies);
+          const merged = applyMergeStrategies(
+            data,
+            serverRecord,
+            mergeStrategies,
+          );
           payload = stripSystemFields(merged);
         }
       }
@@ -582,7 +594,7 @@ export function createSyncCollection<T extends PbDoc>(
       await table.put(current);
       console.warn(
         `[pb-sync] update ROLLBACK ${collectionName}/${id}`,
-        err.message
+        err.message,
       );
       throw err;
     }
@@ -602,7 +614,7 @@ export function createSyncCollection<T extends PbDoc>(
     const snapshot = await table.get(id);
     if (!snapshot) {
       throw new Error(
-        `[pb-sync] Record ${id} not found in Dexie (${collectionName})`
+        `[pb-sync] Record ${id} not found in Dexie (${collectionName})`,
       );
     }
 
@@ -630,7 +642,7 @@ export function createSyncCollection<T extends PbDoc>(
       await table.put(snapshot);
       console.warn(
         `[pb-sync] remove ROLLBACK ${collectionName}/${id}`,
-        err.message
+        err.message,
       );
       throw err;
     }
@@ -641,7 +653,7 @@ export function createSyncCollection<T extends PbDoc>(
   // =====================================================================
 
   interface PendingOp {
-    type: 'create' | 'update' | 'upsert' | 'delete';
+    type: "create" | "update" | "upsert" | "delete";
     id?: string;
     data?: Record<string, unknown>;
   }
@@ -655,20 +667,31 @@ export function createSyncCollection<T extends PbDoc>(
 
     const builder: CollectionBatch<T> = {
       create(data) {
-        ops.push({ type: 'create', data: stripSystemFields(toPlain(data) as Partial<T>, true) });
+        ops.push({
+          type: "create",
+          data: stripSystemFields(toPlain(data) as Partial<T>, true),
+        });
         return builder;
       },
       upsert(data) {
         const stripped = stripSystemFields(toPlain(data) as Partial<T>, true);
-        ops.push({ type: 'upsert', id: stripped.id as string | undefined, data: stripped });
+        ops.push({
+          type: "upsert",
+          id: stripped.id as string | undefined,
+          data: stripped,
+        });
         return builder;
       },
       update(id, data) {
-        ops.push({ type: 'update', id, data: stripSystemFields(toPlain(data)) });
+        ops.push({
+          type: "update",
+          id,
+          data: stripSystemFields(toPlain(data)),
+        });
         return builder;
       },
       delete(id) {
-        ops.push({ type: 'delete', id });
+        ops.push({ type: "delete", id });
         return builder;
       },
 
@@ -681,9 +704,9 @@ export function createSyncCollection<T extends PbDoc>(
         const snapshotIds = ops
           .filter(
             (op) =>
-              op.type === 'update' ||
-              op.type === 'delete' ||
-              (op.type === 'upsert' && op.id !== undefined)
+              op.type === "update" ||
+              op.type === "delete" ||
+              (op.type === "upsert" && op.id !== undefined),
           )
           .map((op) => op.id!);
         const snapshots =
@@ -692,25 +715,28 @@ export function createSyncCollection<T extends PbDoc>(
         // Optimistic local writes
         for (const op of ops) {
           switch (op.type) {
-            case 'update': {
+            case "update": {
               const current = await table.get(op.id!);
               if (current) {
                 await table.put({ ...current, ...op.data } as unknown as T);
               }
               break;
             }
-            case 'upsert': {
+            case "upsert": {
               // Patch semantics on an existing row, plain put otherwise.
               // Without an id there is nothing sensible to write yet —
               // the server generates it and the confirmed bulkPut below
               // mirrors the created row.
               if (op.id !== undefined) {
                 const current = await table.get(op.id);
-                await table.put({ ...(current ?? {}), ...op.data } as unknown as T);
+                await table.put({
+                  ...(current ?? {}),
+                  ...op.data,
+                } as unknown as T);
               }
               break;
             }
-            case 'delete':
+            case "delete":
               await table.delete(op.id!);
               break;
           }
@@ -722,16 +748,16 @@ export function createSyncCollection<T extends PbDoc>(
 
           for (const op of ops) {
             switch (op.type) {
-              case 'create':
+              case "create":
                 batch.collection(collectionName).create(op.data);
                 break;
-              case 'upsert':
+              case "upsert":
                 batch.collection(collectionName).upsert(op.data);
                 break;
-              case 'update':
+              case "update":
                 batch.collection(collectionName).update(op.id!, op.data);
                 break;
-              case 'delete':
+              case "delete":
                 batch.collection(collectionName).delete(op.id!);
                 break;
             }
@@ -759,15 +785,17 @@ export function createSyncCollection<T extends PbDoc>(
           if (valid.length > 0) await table.bulkPut(valid);
 
           for (const op of ops) {
-            if (op.type === 'upsert' && op.id !== undefined) {
-              const wasExisting = snapshots.some((s) => s && (s as T).id === op.id);
+            if (op.type === "upsert" && op.id !== undefined) {
+              const wasExisting = snapshots.some(
+                (s) => s && (s as T).id === op.id,
+              );
               if (!wasExisting) await table.delete(op.id);
             }
           }
 
           throw err;
         }
-      }
+      },
     };
 
     return builder;
@@ -775,7 +803,7 @@ export function createSyncCollection<T extends PbDoc>(
 
   /** Bulk create multiple records in a single batch request. */
   async function bulkCreate(
-    items: Omit<T, 'id' | 'created' | 'updated'>[]
+    items: Omit<T, "id" | "created" | "updated">[],
   ): Promise<T[]> {
     const b = createBatch();
     for (const item of items) b.create(item);
@@ -784,7 +812,9 @@ export function createSyncCollection<T extends PbDoc>(
   }
 
   /** Bulk update multiple records in a single batch request. */
-  async function bulkUpdate(items: { id: string; data: Partial<T> }[]): Promise<T[]> {
+  async function bulkUpdate(
+    items: { id: string; data: Partial<T> }[],
+  ): Promise<T[]> {
     const b = createBatch();
     for (const item of items) b.update(item.id, item.data);
     const { records } = await b.send();
@@ -798,7 +828,7 @@ export function createSyncCollection<T extends PbDoc>(
    * creates otherwise.
    */
   async function upsert(
-    data: Omit<T, 'id' | 'created' | 'updated'> & { id?: string }
+    data: Omit<T, "id" | "created" | "updated"> & { id?: string },
   ): Promise<T> {
     const b = createBatch();
     b.upsert(data);
@@ -808,7 +838,7 @@ export function createSyncCollection<T extends PbDoc>(
 
   /** Bulk upsert multiple records in a single batch request. */
   async function bulkUpsert(
-    items: (Omit<T, 'id' | 'created' | 'updated'> & { id?: string })[]
+    items: (Omit<T, "id" | "created" | "updated"> & { id?: string })[],
   ): Promise<T[]> {
     const b = createBatch();
     for (const item of items) b.upsert(item);
@@ -833,13 +863,15 @@ export function createSyncCollection<T extends PbDoc>(
    */
   async function list(params?: PbListOptions) {
     const resolvedFilter = resolveFilter(pb, params);
-    return pb.collection(collectionName).getList(params?.page ?? 1, params?.perPage ?? 30, {
-      ...(resolvedFilter ? { filter: resolvedFilter } : {}),
-      ...(params?.sort ? { sort: params.sort } : {}),
-      ...(params?.fields ? { fields: params.fields } : {}),
-      ...(params?.expand ? { expand: params.expand } : {}),
-      ...(params?.query ? { query: params.query } : {})
-    });
+    return pb
+      .collection(collectionName)
+      .getList(params?.page ?? 1, params?.perPage ?? 30, {
+        ...(resolvedFilter ? { filter: resolvedFilter } : {}),
+        ...(params?.sort ? { sort: params.sort } : {}),
+        ...(params?.fields ? { fields: params.fields } : {}),
+        ...(params?.expand ? { expand: params.expand } : {}),
+        ...(params?.query ? { query: params.query } : {}),
+      });
   }
 
   /**
@@ -849,7 +881,7 @@ export function createSyncCollection<T extends PbDoc>(
     const raw = await pb.collection(collectionName).getOne(id, {
       ...(params?.fields ? { fields: params.fields } : {}),
       ...(params?.expand ? { expand: params.expand } : {}),
-      ...(params?.query ? { query: params.query } : {})
+      ...(params?.query ? { query: params.query } : {}),
     });
     return raw as unknown as T;
   }
@@ -873,9 +905,12 @@ export function createSyncCollection<T extends PbDoc>(
    * across users or events — the next sync performs a full fetch.
    */
   async function clearLocal(): Promise<void> {
-    await db.transaction('rw', [table, db.syncMeta], async () => {
+    await db.transaction("rw", [table, db.syncMeta], async () => {
       await table.clear();
-      await db.syncMeta.where('collectionId').startsWith(`${collectionName}:`).delete();
+      await db.syncMeta
+        .where("collectionId")
+        .startsWith(`${collectionName}:`)
+        .delete();
       await db.syncMeta.delete(collectionName);
     });
     console.log(`[pb-sync] clearLocal ${collectionName}`);
@@ -910,6 +945,6 @@ export function createSyncCollection<T extends PbDoc>(
     get collectionName() {
       return collectionName;
     },
-    clearLocal
+    clearLocal,
   };
 }

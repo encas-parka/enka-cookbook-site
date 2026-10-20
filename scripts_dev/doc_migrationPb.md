@@ -4,12 +4,12 @@
 
 4 phases, 8 scripts :
 
-| Phase | Rôle | Scripts |
-| ----- | ---- | ------- |
-| A | Schéma PB (migrations automatiques) | — |
-| B | Export Appwrite → Transform → Import PB | `1-export-appwrite.ts`, `2-transform-data.ts`, `3-import-pb.ts` |
-| C | Données Hugo (recettes, ingrédients, catalog) → JSON | `2b-transform-recipes.ts`, `2c-transform-ingredients.ts`, `2d-transform-catalog.ts` |
-| D | Post-import (timestamps) → Validation | `4-fix-timestamps.ts`, `validate-migration.ts` |
+| Phase | Rôle                                                 | Scripts                                                                             |
+| ----- | ---------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| A     | Schéma PB (migrations automatiques)                  | —                                                                                   |
+| B     | Export Appwrite → Transform → Import PB              | `1-export-appwrite.ts`, `2-transform-data.ts`, `3-import-pb.ts`                     |
+| C     | Données Hugo (recettes, ingrédients, catalog) → JSON | `2b-transform-recipes.ts`, `2c-transform-ingredients.ts`, `2d-transform-catalog.ts` |
+| D     | Post-import (timestamps) → Validation                | `4-fix-timestamps.ts`, `validate-migration.ts`                                      |
 
 ### Flux de données
 
@@ -143,9 +143,9 @@ Importe TOUTES les données dans PocketBase via HTTP API (pas de SDK).
   8. `event_materiel` (eventId, sourceMaterielId, loanId → events/materiel/materiel_loan)
   9. `teamdocs` (teamId, eventId → teams/events)
   10. `event_todos` (eventId, assignedTo → events/users)
-  12. `ingredients` (standalone)
-  13. `categories` (standalone)
-  14. `recipes` (createdBy → users, IDs forcés, rootRecipeId self-ref)
+  11. `ingredients` (standalone)
+  12. `categories` (standalone)
+  13. `recipes` (createdBy → users, IDs forcés, rootRecipeId self-ref)
 
 - **Résolution des refIds** : chaque refId `aw_xxx` est mappé au vrai PB ID après création
 - **Gère** : relations single/multi, champs JSON (remappage deep), champs texte avec refIds, IDs forcés (recipes)
@@ -367,16 +367,17 @@ Enchaînement : preflight (env + superuser + cible adressable) → cleanup
 `--target=all` → transforms (2, 2b, 2c, 2d) → import (3) → **stop cible** →
 `4-fix-timestamps` → **restart cible** → validate → rapport. Fail-fast : toute
 étape en échec stoppe le run, **le rapport est écrit quand même** (état atteint
-+ erreur) et l'exit est non-zéro. Verdict global VERT seulement si toutes les
-étapes passent et validate est 100 % vert.
 
-- **Garde 4-fix** : après l'étape, l'orchestrateur vérifie que le compteur
+- erreur) et l'exit est non-zéro. Verdict global VERT seulement si toutes les
+  étapes passent et validate est 100 % vert.
+
+* **Garde 4-fix** : après l'étape, l'orchestrateur vérifie que le compteur
   `Records updated` est > 0 — un fix no-op (id-map manquante, mauvais
   `PB_DB_PATH_OVERRIDE`…) laisserait toutes les dates à l'autodate d'import
   en sortant exit 0. Parse manquant = 0 = échec (jamais de faux vert) ; le
   check `timestamps.sample` de validate couvre en plus les fixes partiels.
 
-- **Mode managé** (`--pb-bin` + `--pb-dir`, les deux requis) : l'orchestrateur
+* **Mode managé** (`--pb-bin` + `--pb-dir`, les deux requis) : l'orchestrateur
   spawn lui-même la cible (`serve`), la stoppe **par PID** autour de
   `4-fix-timestamps` (le fix sqlite exige la cible arrêtée), la relance pour
   validate, et ne tue jamais un process qu'il n'a pas spawné. Le `pb_data`
@@ -385,23 +386,23 @@ Enchaînement : preflight (env + superuser + cible adressable) → cleanup
   superuser correspondant à `.env.local` (`pocketbase superuser upsert`).
   Lancez l'instance avec `--migrationsDir`/`--hooksDir` pointés **hors du
   repo** : PB y écrit ses migrations dynamiques.
-- **Mode opérateur** (sans ces flags) : cible déjà démarrée requise ; le run
+* **Mode opérateur** (sans ces flags) : cible déjà démarrée requise ; le run
   s'arrête à `4-fix-timestamps` si la cible répond (message d'arrêt explicite —
   c'est à celui qui a démarré l'instance de l'arrêter), puis attend le
   redémarrage (120 s) avant validate.
-- **Gates humaines** : rappel du pré-requis de sync du contenu Hugo
+* **Gates humaines** : rappel du pré-requis de sync du contenu Hugo
   (`content/recipe` vient du repo site — non automatisable ici), ack par
   prompt interactif ou `--content-synced` ; un run `--yes` ne fabrique jamais
   cet ack. `cleanup-pb` reçoit toujours `--yes` de l'orchestrateur (le run
   entier EST la confirmation du reset).
-- **Cible** : `PB_URL_OVERRIDE` > `.env.local` `PB_URL` > 8090 (convention
+* **Cible** : `PB_URL_OVERRIDE` > `.env.local` `PB_URL` > 8090 (convention
   commune) ; port explicite requis en mode managé.
-- **Sortie** : rapport `scripts_dev/runs/<date>.md` — sources (mtimes),
+* **Sortie** : rapport `scripts_dev/runs/<date>.md` — sources (mtimes),
   étapes (durées, exit, comptes clés), verdicts émis par le pipeline, récap
   validate, verdict global — plus logs par étape dans
   `scripts_dev/runs/<date>-logs/`. Gitignored (artefact de run, comme
   `pb-import/`).
-- **Prérequis Phase B/C** : `appwrite-export/*.json` frais
+* **Prérequis Phase B/C** : `appwrite-export/*.json` frais
   (`1-export-appwrite.ts`), `content/recipe` synchronisé du repo site,
   `static/data/ingredients.json` + `recipe-info.json` (trackés).
 

@@ -35,7 +35,9 @@ interface Env {
 
 function loadEnv(): Env {
   if (!existsSync(ENV_FILE)) {
-    console.error(`Missing ${ENV_FILE} — add PB_URL / PB_ADMIN_* / PB_USER_* there.`);
+    console.error(
+      `Missing ${ENV_FILE} — add PB_URL / PB_ADMIN_* / PB_USER_* there.`,
+    );
     process.exit(1);
   }
   const env: Record<string, string> = {};
@@ -46,8 +48,13 @@ function loadEnv(): Env {
     if (eqIdx === -1) continue;
     env[trimmed.slice(0, eqIdx).trim()] = trimmed.slice(eqIdx + 1).trim();
   }
-  const missing = ["PB_URL", "PB_ADMIN_EMAIL", "PB_ADMIN_PASSWORD", "PB_USER_EMAIL", "PB_USER_PASSWORD"]
-    .filter((k) => !env[k]);
+  const missing = [
+    "PB_URL",
+    "PB_ADMIN_EMAIL",
+    "PB_ADMIN_PASSWORD",
+    "PB_USER_EMAIL",
+    "PB_USER_PASSWORD",
+  ].filter((k) => !env[k]);
   if (missing.length > 0) {
     console.error(`Missing env keys in ${ENV_FILE}: ${missing.join(", ")}`);
     process.exit(1);
@@ -100,23 +107,35 @@ async function main(): Promise<void> {
   }
 
   // 1. Admin auth (inspection + cleanup only)
-  const admin = await pbFetch(env.base, "/api/collections/_superusers/auth-with-password", {
-    method: "POST",
-    body: { identity: env.adminEmail, password: env.adminPassword },
-  });
+  const admin = await pbFetch(
+    env.base,
+    "/api/collections/_superusers/auth-with-password",
+    {
+      method: "POST",
+      body: { identity: env.adminEmail, password: env.adminPassword },
+    },
+  );
   if (admin.status !== 200) {
-    console.error(`Admin auth failed (${admin.status}) — check PB_ADMIN_* in .env.local`);
+    console.error(
+      `Admin auth failed (${admin.status}) — check PB_ADMIN_* in .env.local`,
+    );
     process.exit(1);
   }
   const adminToken = admin.json.token as string;
 
   // 2. User auth (the SPA's identity)
-  const user = await pbFetch(env.base, "/api/collections/users/auth-with-password", {
-    method: "POST",
-    body: { identity: env.userEmail, password: env.userPassword },
-  });
+  const user = await pbFetch(
+    env.base,
+    "/api/collections/users/auth-with-password",
+    {
+      method: "POST",
+      body: { identity: env.userEmail, password: env.userPassword },
+    },
+  );
   if (user.status !== 200) {
-    console.error(`User auth failed (${user.status}) — check PB_USER_* in .env.local`);
+    console.error(
+      `User auth failed (${user.status}) — check PB_USER_* in .env.local`,
+    );
     process.exit(1);
   }
   const userToken = user.json.token as string;
@@ -124,7 +143,9 @@ async function main(): Promise<void> {
   console.log(`user id: ${userId}`);
 
   // 3. Live update rule (should already carry the creator clause — T01)
-  const col = await pbFetch(env.base, "/api/collections/products", { token: adminToken });
+  const col = await pbFetch(env.base, "/api/collections/products", {
+    token: adminToken,
+  });
   console.log(`rules products.update = ${col.json?.updateRule}`);
   verdict(
     "update-rule",
@@ -142,9 +163,13 @@ async function main(): Promise<void> {
   const items: any[] = events.json?.items ?? [];
   let target: any = null;
   for (const ev of items) {
-    const full = await pbFetch(env.base, `/api/collections/events/records/${ev.id}`, {
-      token: adminToken,
-    });
+    const full = await pbFetch(
+      env.base,
+      `/api/collections/events/records/${ev.id}`,
+      {
+        token: adminToken,
+      },
+    );
     if (full.status !== 200) continue;
     const isCreator = full.json.createdBy === userId;
     const inTeams = (full.json.teams ?? []).length > 0;
@@ -155,39 +180,50 @@ async function main(): Promise<void> {
     }
   }
   if (!target) {
-    console.log("no creator-only event found — cannot probe the rule gap profile");
+    console.log(
+      "no creator-only event found — cannot probe the rule gap profile",
+    );
     process.exit(1);
   }
-  console.log(`target event: ${target.id} "${target.name}" (creator, 0 team, not guest)`);
+  console.log(
+    `target event: ${target.id} "${target.name}" (creator, 0 team, not guest)`,
+  );
 
   let createdProductId: string | null = null;
   try {
     // 5. Create product (SPA payload — same as T01 probe)
-    const create = await pbFetch(env.base, "/api/collections/products/records", {
-      method: "POST",
-      token: userToken,
-      body: {
-        ingredientRef: null,
-        productName: `probe-t02-${Date.now()}`,
-        productType: "Autre",
-        store: null,
-        who: [],
-        eventId: target.id,
-        status: "active",
-        stockReel: null,
-        updatedBy: userId,
-        isMerged: false,
-        mergedFrom: null,
-        mergeDate: null,
-        mergeReason: null,
-        mergedInto: null,
-        totalNeededOverride: null,
-        specs: JSON.stringify({ pF: false, pS: false }),
+    const create = await pbFetch(
+      env.base,
+      "/api/collections/products/records",
+      {
+        method: "POST",
+        token: userToken,
+        body: {
+          ingredientRef: null,
+          productName: `probe-t02-${Date.now()}`,
+          productType: "Autre",
+          store: null,
+          who: [],
+          eventId: target.id,
+          status: "active",
+          stockReel: null,
+          updatedBy: userId,
+          isMerged: false,
+          mergedFrom: null,
+          mergeDate: null,
+          mergeReason: null,
+          mergedInto: null,
+          totalNeededOverride: null,
+          specs: JSON.stringify({ pF: false, pS: false }),
+        },
       },
-    });
+    );
     console.log(`create product: ${create.status}`);
     if (create.status !== 200) {
-      verdict("create-product", `${create.status} — cannot pursue update probe`);
+      verdict(
+        "create-product",
+        `${create.status} — cannot pursue update probe`,
+      );
       process.exit(1);
     }
     createdProductId = create.json.id as string;
@@ -203,7 +239,10 @@ async function main(): Promise<void> {
       },
     );
     console.log(`patch product (who): ${patch.status}`);
-    verdict("patch-owned", patch.status === 200 ? "200 accepted" : `${patch.status} REJECTED`);
+    verdict(
+      "patch-owned",
+      patch.status === 200 ? "200 accepted" : `${patch.status} REJECTED`,
+    );
 
     // 7. PATCH with native json store field (the storeInfo conversion)
     const patchStore = await pbFetch(
@@ -223,7 +262,12 @@ async function main(): Promise<void> {
     console.log(
       `patch product (store json natif): ${patchStore.status} store=${JSON.stringify(patchStore.json?.store)}`,
     );
-    verdict("patch-store-native-json", storeRoundTrips ? "200, json object round-trips" : `${patchStore.status} — inspect`);
+    verdict(
+      "patch-store-native-json",
+      storeRoundTrips
+        ? "200, json object round-trips"
+        : `${patchStore.status} — inspect`,
+    );
 
     // 8. Control: PATCH a product whose event does NOT cover the user →
     //    rule semantics (404, PB hides the record). On this dev dataset the
@@ -246,10 +290,15 @@ async function main(): Promise<void> {
       const inGuests = (ev.json.guestUsers ?? []).includes(userId);
       let inTeams = false;
       for (const teamId of ev.json.teams ?? []) {
-        const team = await pbFetch(env.base, `/api/collections/teams/records/${teamId}`, {
-          token: adminToken,
-        });
-        if (team.status === 200 && (team.json.members ?? []).includes(userId)) inTeams = true;
+        const team = await pbFetch(
+          env.base,
+          `/api/collections/teams/records/${teamId}`,
+          {
+            token: adminToken,
+          },
+        );
+        if (team.status === 200 && (team.json.members ?? []).includes(userId))
+          inTeams = true;
       }
       if (isCreator || inGuests || inTeams) continue; // covered — not a control
 
@@ -271,7 +320,9 @@ async function main(): Promise<void> {
       break;
     }
     if (!controlDone) {
-      console.log("control skipped: user is covered on every event owning products (dataset) — 404 control not buildable");
+      console.log(
+        "control skipped: user is covered on every event owning products (dataset) — 404 control not buildable",
+      );
     }
   } finally {
     // 9. Cleanup (admin)

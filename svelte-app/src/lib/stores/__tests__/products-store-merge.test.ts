@@ -162,8 +162,8 @@ describe("ProductsStore — fusion de produits (dérivation client)", () => {
     await clearDexie();
 
     const event = makeEvent();
-    vi.mocked(eventsStore.getEventById).mockImplementation(
-      (id: string) => (id === TEST_EVENT_ID ? event : null),
+    vi.mocked(eventsStore.getEventById).mockImplementation((id: string) =>
+      id === TEST_EVENT_ID ? event : null,
     );
   });
 

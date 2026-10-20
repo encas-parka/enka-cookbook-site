@@ -35,7 +35,11 @@ function main(): void {
   // clé = type + name (les deux types partagent le même espace de noms).
   // Equipment tags first
   for (const name of info.materiel) {
-    records.push({ _refId: `cat_equipment_tag_${name}`, name, type: "equipment_tag" });
+    records.push({
+      _refId: `cat_equipment_tag_${name}`,
+      name,
+      type: "equipment_tag",
+    });
   }
 
   // Then categories
@@ -43,10 +47,14 @@ function main(): void {
     records.push({ _refId: `cat_category_${name}`, name, type: "category" });
   }
 
-  console.log(`📊 Total: ${info.materiel.length} equipment_tags + ${info.categories.length} categories = ${records.length}`);
+  console.log(
+    `📊 Total: ${info.materiel.length} equipment_tags + ${info.categories.length} categories = ${records.length}`,
+  );
 
   if (DRY_RUN) {
-    console.log(`\n[DRY RUN] Would write ${records.length} records to pb-import/categories.json`);
+    console.log(
+      `\n[DRY RUN] Would write ${records.length} records to pb-import/categories.json`,
+    );
     console.log("\nFirst 3:");
     records.slice(0, 3).forEach((r) => console.log(JSON.stringify(r)));
     return;

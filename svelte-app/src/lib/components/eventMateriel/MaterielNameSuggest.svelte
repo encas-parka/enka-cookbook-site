@@ -166,7 +166,7 @@
 
   {#if showDropdown && suggestions.length > 0}
     <ul
-      class="bg-base-100 border-base-200 rounded-box absolute z-50 mt-1 w-full border shadow-lg"
+      class="absolute z-50 mt-1 w-full rounded-box border border-base-200 bg-base-100 shadow-lg"
       role="listbox"
     >
       {#each suggestions as suggestion, i (suggestion.name + suggestion.source)}
@@ -189,7 +189,7 @@
               </span>
             {/if}
             {#if suggestion.source === "header"}
-              <span class="badge badge-secondary badge-xs">
+              <span class="badge badge-xs badge-secondary">
                 {sourceLabel(suggestion.source)}
               </span>
             {:else}

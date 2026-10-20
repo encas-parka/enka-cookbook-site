@@ -178,7 +178,7 @@
         >
           <Users class="mr-1 h-5 w-5" />
           Membres
-          <span class="badge badge-sm badge-secondary ml-1">
+          <span class="ml-1 badge badge-sm badge-secondary">
             {team.members.length}
           </span>
         </button>
@@ -200,7 +200,7 @@
           <Settings class="mr-1 h-5 w-5" />
           Paramètres
           {#if hasChanges}
-            <div class="bg-warning ml-1 h-2 w-2 rounded-full"></div>
+            <div class="ml-1 h-2 w-2 rounded-full bg-warning"></div>
           {/if}
         </button>
       </div>
@@ -245,7 +245,7 @@
           disabled={loading || !hasChanges}
         >
           {#if loading}
-            <span class="loading loading-spinner loading-sm"></span>
+            <span class="loading loading-sm loading-spinner"></span>
           {:else}
             Enregistrer
           {/if}
@@ -258,7 +258,7 @@
           disabled={inviteLoading || invitedEmails.length === 0}
         >
           {#if inviteLoading}
-            <span class="loading loading-spinner loading-sm"></span>
+            <span class="loading loading-sm loading-spinner"></span>
           {:else}
             Envoyer {invitedEmails.length} invitation{invitedEmails.length > 1
               ? "s"

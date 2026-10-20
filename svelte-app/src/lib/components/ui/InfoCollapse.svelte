@@ -33,7 +33,7 @@
 </script>
 
 <div
-  class={`bg-base-100 border-base-200 relative min-w-0 rounded-2xl border ${className}`}
+  class={`relative min-w-0 rounded-2xl border border-base-200 bg-base-100 ${className}`}
   {style}
 >
   <button
@@ -46,20 +46,20 @@
   >
     <div class="flex gap-6 max-md:flex-col">
       <div class=" flex items-center gap-3 self-start">
-        <Icon size={24} class="text-base-content shrink-0" />
+        <Icon size={24} class="shrink-0 text-base-content" />
         {#if title}
-          <span class="text-base-content font-semibold">{title}</span>
+          <span class="font-semibold text-base-content">{title}</span>
         {/if}
       </div>
       {#if contentVisible}
-        <div class="text-base-content/80 flex-1 md:max-w-4/5">
+        <div class="flex-1 text-base-content/80 md:max-w-4/5">
           {contentVisible}
         </div>
       {/if}
     </div>
     {#if hasChildren}
       <div class="absolute right-2 bottom-1 flex items-center gap-1">
-        <div class="text-base-content/70 text-sm italic">
+        <div class="text-sm text-base-content/70 italic">
           {#if !isOpen}
             en savoir plus
           {:else}
@@ -67,7 +67,7 @@
           {/if}
         </div>
         <ChevronDown
-          class={`text-base-content h-4 w-4 shrink-0 transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`}
+          class={`h-4 w-4 shrink-0 text-base-content transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`}
         />
       </div>
     {/if}
@@ -88,7 +88,7 @@
       }}
       aria-label="Afficher/Masquer le contenu"
     >
-      <div class="text-base-content p-4 pt-0 text-sm">
+      <div class="p-4 pt-0 text-sm text-base-content">
         {@render children?.()}
       </div>
     </div>

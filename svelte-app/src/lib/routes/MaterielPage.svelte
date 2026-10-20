@@ -70,8 +70,7 @@
     if (!activeTeamId) return [];
     return materielStore.materiels.filter((m) => {
       return (
-        m.teamId === activeTeamId ||
-        m.shareableWith?.includes(activeTeamId!)
+        m.teamId === activeTeamId || m.shareableWith?.includes(activeTeamId!)
       );
     });
   });
@@ -185,7 +184,7 @@
 <div class="p-4 pb-20 lg:ml-96" transition:fade>
   <div class="mx-auto max-w-7xl sm:px-4 sm:py-8">
     <!-- Tabs Inventaire / Réservation -->
-    <div class="tabs tabs-border bg-base-200 sm:tabs-lg mb-6 font-semibold">
+    <div class="tabs tabs-border mb-6 bg-base-200 font-semibold sm:tabs-lg">
       <button class="tab tab-active"> Inventaire </button>
       <button
         class="tab"
@@ -198,13 +197,13 @@
 
     <div class="mb-6 flex justify-end gap-2">
       <button
-        class="btn btn-sm btn-outline btn-primary"
+        class="btn btn-outline btn-primary btn-sm"
         onclick={() => (catalogModalOpen = true)}
       >
         <ListPlus class="h-4 w-4" />
         Catalogue
       </button>
-      <button class="btn btn-sm btn-primary" onclick={openCreateModal}>
+      <button class="btn btn-primary btn-sm" onclick={openCreateModal}>
         <Plus class="h-4 w-4" />
         Ajouter
       </button>
@@ -230,23 +229,23 @@
         {#if filters.types.length > 0 || filters.locations.length > 0 || filters.statuses.length > 0}
           <!-- Aucun résultat avec les filtres -->
           <div class="py-12 text-center">
-            <p class="text-base-content/60 mb-4 text-lg">
+            <p class="mb-4 text-lg text-base-content/60">
               Aucun matériel ne correspond aux critères de filtrage...
             </p>
-            <button class="btn btn-warning btn-sm" onclick={resetFilters}>
+            <button class="btn btn-sm btn-warning" onclick={resetFilters}>
               Effacer les filtres
             </button>
           </div>
         {:else}
           <!-- Empty state -->
           <div
-            class="bg-base-200 rounded-box border-base-200 border-2 border-dashed py-20 text-center"
+            class="rounded-box border-2 border-dashed border-base-200 bg-base-200 py-20 text-center"
           >
-            <div class="bg-base-200 mb-4 inline-block rounded-full p-4">
+            <div class="mb-4 inline-block rounded-full bg-base-200 p-4">
               <Package class="h-8 w-8 opacity-50" />
             </div>
             <h3 class="mb-2 text-lg font-bold">Aucun matériel</h3>
-            <p class="text-base-content/60 mb-6">
+            <p class="mb-6 text-base-content/60">
               Cette équipe n'a pas encore de matériel.
             </p>
           </div>

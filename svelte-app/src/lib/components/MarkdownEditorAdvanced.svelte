@@ -137,20 +137,20 @@
   {/if}
 
   <div
-    class="bg-base-100 border-base-300 overflow-hidden rounded-lg border shadow-lg transition-all"
+    class="overflow-hidden rounded-lg border border-base-300 bg-base-100 shadow-lg transition-all"
     class:border-error={error}
   >
     <!-- Toolbar -->
     {#if editor}
       <div
-        class="border-base-200 bg-base-100 flex flex-wrap items-center gap-1 border-b p-1"
+        class="flex flex-wrap items-center gap-1 border-b border-base-200 bg-base-100 p-1"
       >
         <!-- Heading Dropdown -->
         <div class="dropdown" class:dropdown-open={showHeadingDropdown}>
           <button
             type="button"
             tabindex="0"
-            class="btn btn-ghost btn-sm gap-1"
+            class="btn gap-1 btn-ghost btn-sm"
             onclick={() => (showHeadingDropdown = !showHeadingDropdown)}
             title="Titre"
           >
@@ -167,7 +167,7 @@
 
           <ul
             tabindex="-1"
-            class="menu dropdown-content bg-base-100 rounded-box z-50 w-52 shadow-xl"
+            class="menu dropdown-content z-50 w-52 rounded-box bg-base-100 shadow-xl"
           >
             <li>
               <button type="button" onclick={() => setHeading(0)}>
@@ -192,12 +192,12 @@
           </ul>
         </div>
 
-        <div class="divider divider-horizontal mx-0 h-6"></div>
+        <div class="divider mx-0 divider-horizontal h-6"></div>
 
         <!-- Text Formatting -->
         <button
           type="button"
-          class="btn btn-ghost btn-square btn-sm"
+          class="btn btn-square btn-ghost btn-sm"
           class:btn-active={updateTrigger >= 0 && editor.isActive("bold")}
           onclick={() => editor!.chain().focus().toggleBold().run()}
           title="Gras"
@@ -206,7 +206,7 @@
         </button>
         <button
           type="button"
-          class="btn btn-ghost btn-square btn-sm"
+          class="btn btn-square btn-ghost btn-sm"
           class:btn-active={updateTrigger >= 0 && editor.isActive("italic")}
           onclick={() => editor!.chain().focus().toggleItalic().run()}
           title="Italique"
@@ -215,7 +215,7 @@
         </button>
         <button
           type="button"
-          class="btn btn-ghost btn-square btn-sm"
+          class="btn btn-square btn-ghost btn-sm"
           class:btn-active={updateTrigger >= 0 && editor.isActive("strike")}
           onclick={() => editor!.chain().focus().toggleStrike().run()}
           title="Barré"
@@ -237,12 +237,12 @@
         </button>
         -->
 
-        <div class="divider divider-horizontal mx-0 h-6"></div>
+        <div class="divider mx-0 divider-horizontal h-6"></div>
 
         <!-- Lists -->
         <button
           type="button"
-          class="btn btn-ghost btn-square btn-sm"
+          class="btn btn-square btn-ghost btn-sm"
           class:btn-active={updateTrigger >= 0 && editor.isActive("bulletList")}
           onclick={() => editor!.chain().focus().toggleBulletList().run()}
           title="Liste à puces"
@@ -251,7 +251,7 @@
         </button>
         <button
           type="button"
-          class="btn btn-ghost btn-square btn-sm"
+          class="btn btn-square btn-ghost btn-sm"
           class:btn-active={updateTrigger >= 0 &&
             editor.isActive("orderedList")}
           onclick={() => editor!.chain().focus().toggleOrderedList().run()}
@@ -260,24 +260,24 @@
           <ListOrdered class="h-4 w-4" />
         </button>
 
-        <div class="divider divider-horizontal mx-0 h-6"></div>
+        <div class="divider mx-0 divider-horizontal h-6"></div>
 
         <!-- Horizontal Rule -->
         <button
           type="button"
-          class="btn btn-ghost btn-square btn-sm"
+          class="btn btn-square btn-ghost btn-sm"
           onclick={insertHorizontalRule}
           title="Ligne horizontale"
         >
           <Minus class="h-4 w-4" />
         </button>
 
-        <div class="divider divider-horizontal mx-0 h-6"></div>
+        <div class="divider mx-0 divider-horizontal h-6"></div>
 
         <!-- Undo/Redo -->
         <button
           type="button"
-          class="btn btn-ghost btn-square btn-sm"
+          class="btn btn-square btn-ghost btn-sm"
           onclick={() => editor!.chain().focus().undo().run()}
           disabled={!(updateTrigger >= 0 && editor.can().undo())}
           title="Annuler"
@@ -286,7 +286,7 @@
         </button>
         <button
           type="button"
-          class="btn btn-ghost btn-square btn-sm"
+          class="btn btn-square btn-ghost btn-sm"
           onclick={() => editor!.chain().focus().redo().run()}
           disabled={!(updateTrigger >= 0 && editor.can().redo())}
           title="Rétablir"

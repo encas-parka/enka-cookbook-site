@@ -73,7 +73,7 @@
     try {
       const userId = pb.authStore.record!.id;
       await toastService.track(
-        pb.collection('users').update(userId, { name: newName.trim() }),
+        pb.collection("users").update(userId, { name: newName.trim() }),
         {
           loading: "Mise à jour du nom d'utilisateur...",
           success: "Nom d'utilisateur mis à jour avec succès",
@@ -100,7 +100,7 @@
     try {
       const userId = pb.authStore.record!.id;
       await toastService.track(
-        pb.collection('users').update(userId, {
+        pb.collection("users").update(userId, {
           oldPassword,
           password: newPassword,
           passwordConfirm: newPassword,
@@ -137,7 +137,7 @@
   <div class="mb-6 flex items-center gap-4">
     <button
       onclick={handleBack}
-      class="btn btn-ghost btn-circle btn-sm"
+      class="btn btn-circle btn-ghost btn-sm"
       aria-label="Retour au tableau de bord"
     >
       <ArrowLeft size={20} />
@@ -146,9 +146,9 @@
   </div>
 
   <!-- Section 1 : Nom d'utilisateur -->
-  <section class="card bg-base-100 mb-6 shadow-xl">
+  <section class="card mb-6 bg-base-100 shadow-xl">
     <div class="card-body">
-      <h2 class="card-title mb-4 flex items-center gap-2">
+      <h2 class="mb-4 card-title flex items-center gap-2">
         <User size={20} />
         Modifier le nom d'utilisateur
       </h2>
@@ -166,14 +166,14 @@
           />
         </label>
 
-        <div class="card-actions mt-4 justify-end">
+        <div class="mt-4 card-actions justify-end">
           <button
             type="submit"
             class="btn btn-primary"
             disabled={!hasNameChanges || isUpdatingName}
           >
             {#if isUpdatingName}
-              <span class="loading loading-spinner loading-sm"></span>
+              <span class="loading loading-sm loading-spinner"></span>
             {:else}
               <Save size={16} />
             {/if}
@@ -187,13 +187,13 @@
   <!-- Section 2 : Mot de passe -->
   <section class="card bg-base-100 shadow-xl">
     <div class="card-body">
-      <h2 class="card-title mb-4 flex items-center gap-2">
+      <h2 class="mb-4 card-title flex items-center gap-2">
         <Lock size={20} />
         Modifier le mot de passe
       </h2>
 
       <form onsubmit={handleUpdatePassword}>
-        <fieldset class="fieldset mb-4">
+        <fieldset class="mb-4 fieldset">
           <legend class="fieldset-legend">Ancien mot de passe</legend>
           <label class="input flex items-center gap-2">
             <Key class="h-4 w-4 opacity-50" />
@@ -207,7 +207,7 @@
           </label>
         </fieldset>
 
-        <fieldset class="fieldset mb-4">
+        <fieldset class="mb-4 fieldset">
           <legend class="fieldset-legend">Nouveau mot de passe</legend>
           <label class="input flex items-center gap-2">
             <Lock class="h-4 w-4 opacity-50" />
@@ -221,7 +221,7 @@
           </label>
         </fieldset>
 
-        <fieldset class="fieldset mb-4">
+        <fieldset class="mb-4 fieldset">
           <legend class="fieldset-legend"
             >Confirmer le nouveau mot de passe</legend
           >
@@ -251,7 +251,7 @@
               !!passwordError}
           >
             {#if isUpdatingPassword}
-              <span class="loading loading-spinner loading-sm"></span>
+              <span class="loading loading-sm loading-spinner"></span>
             {:else}
               <Save size={16} />
             {/if}

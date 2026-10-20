@@ -173,7 +173,7 @@
 
   <!-- SECTION 1: Hero -->
   <section
-    class="hero bg-base-200 flex flex-col justify-center gap-20 md:min-w-full md:py-15"
+    class="hero flex flex-col justify-center gap-20 bg-base-200 md:min-w-full md:py-15"
   >
     <div class="hero-content text-center">
       <div class="max-w-3xl">
@@ -189,18 +189,18 @@
           in:fly={{ y: 30, duration: 600, delay: 100 }}
         >
           {#each "Enka Cookbook" as l}
-            <span class="hover:text-primary transition-colors duration-200"
+            <span class="transition-colors duration-200 hover:text-primary"
               >{l}</span
             >
           {/each}
         </h1>
         <div
-          class="text-base-content/70 mt-6 space-x-1 text-base md:text-xl"
+          class="mt-6 space-x-1 text-base text-base-content/70 md:text-xl"
           in:fly={{ y: 20, duration: 800, delay: 200 }}
         >
           {#each ["Outils", " de", " planification", " pour", " les", " cantines", " autogérées"] as w, i (i)}
             <div
-              class=" hover:text-primary inline-block transition-all duration-75 hover:rotate-3"
+              class=" inline-block transition-all duration-75 hover:rotate-3 hover:text-primary"
             >
               {w}
             </div>
@@ -213,7 +213,7 @@
       in:fadeScale={{ duration: 400, delay: 400, start: 0.9 }}
     >
       <button
-        class="btn btn-primary md:btn-lg transition-all duration-300 hover:scale-110"
+        class="btn transition-all duration-300 btn-primary hover:scale-110 md:btn-lg"
         onclick={() => navigate("/recipe")}
         in:fadeScale={{ duration: 400, delay: 450, start: 0.9 }}
       >
@@ -223,7 +223,7 @@
 
       {#if globalState.isAuthenticated}
         <button
-          class="btn btn-outline btn-secondary md:btn-lg transition-all duration-300 hover:scale-110"
+          class="btn btn-outline transition-all duration-300 btn-secondary hover:scale-110 md:btn-lg"
           onclick={() => navigate("/dashboard")}
           in:fadeScale={{ duration: 400, delay: 500, start: 0.9 }}
         >
@@ -234,7 +234,7 @@
         <InstallButton />
       {:else}
         <button
-          class="btn btn-secondary md:btn-lg transition-all duration-300 hover:scale-110"
+          class="btn transition-all duration-300 btn-secondary hover:scale-110 md:btn-lg"
           onclick={openRegisterModal}
         >
           Créer un compte pour commencer
@@ -244,7 +244,7 @@
     </div>
 
     {#if !globalState.isAuthenticated}
-      <p class="text-base-content/60 text-center">
+      <p class="text-center text-base-content/60">
         Déjà membre ? <button class="link" onclick={openAuthModal}>
           Connectez-vous
         </button> pour gérer vos cantines et équipes
@@ -253,10 +253,10 @@
     <EmailVerificationAlert />
 
     <div
-      class="text-base-content/40 flex flex-col items-center justify-center gap-2"
+      class="flex flex-col items-center justify-center gap-2 text-base-content/40"
     >
       <div>En savoir plus</div>
-      <button class="btn btn-circle btn-ghost mt-auto animate-bounce">
+      <button class="btn mt-auto btn-circle animate-bounce btn-ghost">
         <ArrowDown class=" size-8" />
       </button>
     </div>
@@ -266,14 +266,14 @@
   <section class=" relative" bind:this={featuresContainer}>
     <!-- Contenu fixe visible -->
     <div
-      class="to-neutral/20 from-base-100 sticky top-10 flex min-h-screen flex-col items-center justify-center bg-linear-to-l px-4 pb-10"
+      class="sticky top-10 flex min-h-screen flex-col items-center justify-center bg-linear-to-l from-base-100 to-neutral/20 px-4 pb-10"
     >
       <div
         class="grid w-full grid-cols-1 items-center gap-12 lg:grid-cols-5 lg:gap-16"
       >
         <!-- Screenshot avec cross-fade clean et défilement vertical fluide -->
         <div
-          class="bg-base-300 relative col-span-3 hidden aspect-video overflow-hidden rounded-4xl shadow-2xl lg:block"
+          class="relative col-span-3 hidden aspect-video overflow-hidden rounded-4xl bg-base-300 shadow-2xl lg:block"
         >
           {#each features as feature, i}
             {@const state = getSnapState(i)}
@@ -314,7 +314,7 @@
               <div class="space-y-6">
                 <!-- Titre avec délai 0 -->
                 <h3
-                  class="text-base-content mt-10 text-3xl font-bold md:text-4xl"
+                  class="mt-10 text-3xl font-bold text-base-content md:text-4xl"
                   style="
                       opacity: {isActive ? 1 : 0};
                       transform:  translateX({isActive ? 0 : 55}px);
@@ -333,7 +333,7 @@
 
                 <!-- Description avec délai 1 -->
                 <p
-                  class="text-base-content/70 text-lg leading-relaxed"
+                  class="text-lg leading-relaxed text-base-content/70"
                   style="
                       opacity: {isActive ? 1 : 0};
                       transform: translateX({isActive ? 0 : 35}px);
@@ -369,7 +369,7 @@
                   >
                     {#each feature.items as item, itemIdx}
                       <li
-                        class="text-base-content flex items-start gap-3"
+                        class="flex items-start gap-3 text-base-content"
                         style="
                             opacity: {isActive ? 1 : 0};
                             transform: translateX({isActive ? 0 : -10}px);
@@ -386,7 +386,7 @@
                           "
                       >
                         <svg
-                          class="text-primary mt-0.5 h-6 w-6 shrink-0"
+                          class="mt-0.5 h-6 w-6 shrink-0 text-primary"
                           fill="none"
                           viewBox="0 0 24 24"
                           stroke="currentColor"
@@ -412,15 +412,15 @@
       <!-- Indicateur de progression avec double layer -->
       <div class="absolute right-0 bottom-15 left-0 flex justify-center px-4">
         <div
-          class="bg-base-100/80 flex max-w-full gap-2 overflow-x-auto rounded-full px-4 py-3 shadow-lg backdrop-blur-sm md:gap-3 md:px-6 md:py-4"
+          class="flex max-w-full gap-2 overflow-x-auto rounded-full bg-base-100/80 px-4 py-3 shadow-lg backdrop-blur-sm md:gap-3 md:px-6 md:py-4"
         >
           {#each features as _, idx}
             <div
-              class="bg-base-300 relative h-2 w-12 shrink-0 overflow-hidden rounded-full md:w-16"
+              class="relative h-2 w-12 shrink-0 overflow-hidden rounded-full bg-base-300 md:w-16"
             >
               <!-- Barre de progression continue (transparente) -->
               <div
-                class="bg-primary/30 absolute inset-y-0 left-0 rounded-full transition-all duration-200 ease-out"
+                class="absolute inset-y-0 left-0 rounded-full bg-primary/30 transition-all duration-200 ease-out"
                 style="width: {Math.max(
                   0,
                   Math.min(1, continuousProgress - idx),
@@ -428,7 +428,7 @@
               ></div>
               <!-- Barre d'état actif (opaque) -->
               <div
-                class="bg-primary absolute inset-y-0 left-0 rounded-full transition-all duration-500 ease-out"
+                class="absolute inset-y-0 left-0 rounded-full bg-primary transition-all duration-500 ease-out"
                 style="width: {activeIndex === idx ? 100 : 0}%"
               ></div>
             </div>

@@ -139,7 +139,9 @@ function parseArgs() {
 // --- Health probes ---
 async function isUp(base: string): Promise<boolean> {
   try {
-    const res = await fetch(`${base}/api/health`, { signal: AbortSignal.timeout(1500) });
+    const res = await fetch(`${base}/api/health`, {
+      signal: AbortSignal.timeout(1500),
+    });
     return res.ok;
   } catch {
     return false;
@@ -152,7 +154,9 @@ async function waitUp(base: string, timeoutMs: number): Promise<void> {
     if (await isUp(base)) return;
     await sleep(400);
   }
-  throw new Error(`PocketBase not healthy on ${base} after ${timeoutMs / 1000}s`);
+  throw new Error(
+    `PocketBase not healthy on ${base} after ${timeoutMs / 1000}s`,
+  );
 }
 
 async function waitDown(base: string, timeoutMs: number): Promise<void> {
@@ -161,7 +165,9 @@ async function waitDown(base: string, timeoutMs: number): Promise<void> {
     if (!(await isUp(base))) return;
     await sleep(400);
   }
-  throw new Error(`PocketBase still responding on ${base} after ${timeoutMs / 1000}s`);
+  throw new Error(
+    `PocketBase still responding on ${base} after ${timeoutMs / 1000}s`,
+  );
 }
 
 function sleep(ms: number): Promise<void> {
@@ -180,15 +186,25 @@ let pbLogsDir: string | null = null;
  * the pb_migrations dir it resolves — pointing it into the repo would leak
  * files there (pitfall measured 11-10).
  */
-async function startManagedPb(pbBin: string, pbDir: string, target: string): Promise<StepOutcome> {
+async function startManagedPb(
+  pbBin: string,
+  pbDir: string,
+  target: string,
+): Promise<StepOutcome> {
   const t0 = Date.now();
   // Restart: release the previous instance's log fd and temp dir first.
   if (pbLogFd !== null) closeSync(pbLogFd);
   if (pbTmpDir) rmSync(pbTmpDir, { recursive: true, force: true });
   pbTmpDir = mkdtempSync(join(tmpdir(), "enka-migrate-"));
-  cpSync(join(POCKETBASE_DIR, "pb_migrations"), join(pbTmpDir, "pb_migrations"), { recursive: true });
+  cpSync(
+    join(POCKETBASE_DIR, "pb_migrations"),
+    join(pbTmpDir, "pb_migrations"),
+    { recursive: true },
+  );
   if (existsSync(join(POCKETBASE_DIR, "pb_hooks"))) {
-    cpSync(join(POCKETBASE_DIR, "pb_hooks"), join(pbTmpDir, "pb_hooks"), { recursive: true });
+    cpSync(join(POCKETBASE_DIR, "pb_hooks"), join(pbTmpDir, "pb_hooks"), {
+      recursive: true,
+    });
   }
   pbLogFd = openSync(join(pbLogsDir!, "pb-instance.log"), "a");
   const url = new URL(target);
@@ -231,9 +247,22 @@ async function startManagedPb(pbBin: string, pbDir: string, target: string): Pro
   const becameHealthy = await Promise.race([healthy, exited]);
   if (!becameHealthy) {
     pbChild = null;
-    return stepOutcome("pb-start (managed)", `${basename(pbBin)} serve`, t0, 1, undefined, exitNote ?? "instance did not become healthy");
+    return stepOutcome(
+      "pb-start (managed)",
+      `${basename(pbBin)} serve`,
+      t0,
+      1,
+      undefined,
+      exitNote ?? "instance did not become healthy",
+    );
   }
-  return stepOutcome("pb-start (managed)", `${basename(pbBin)} serve`, t0, 0, undefined);
+  return stepOutcome(
+    "pb-start (managed)",
+    `${basename(pbBin)} serve`,
+    t0,
+    0,
+    undefined,
+  );
 }
 
 /** Stop the managed instance by PID — never anything migrate.ts did not spawn. */
@@ -242,12 +271,21 @@ async function stopManagedPb(): Promise<StepOutcome> {
   const child = pbChild;
   pbChild = null;
   if (!child) {
-    return stepOutcome("pb-stop (managed)", "kill managed instance", t0, 1, undefined, "no managed instance running");
+    return stepOutcome(
+      "pb-stop (managed)",
+      "kill managed instance",
+      t0,
+      1,
+      undefined,
+      "no managed instance running",
+    );
   }
   if (child.exitCode !== null || child.signalCode !== null) {
     // Already dead (crash mid-run) — the exit event already fired; make sure
     // the port is actually free before the sqlite step.
-    console.log("   ⚠️  managed instance already exited — checking the port is free");
+    console.log(
+      "   ⚠️  managed instance already exited — checking the port is free",
+    );
   } else {
     await new Promise<void>((resolve) => {
       const escalate = setTimeout(() => child.kill("SIGKILL"), 10_000);
@@ -259,7 +297,13 @@ async function stopManagedPb(): Promise<StepOutcome> {
     });
   }
   await waitDown(TARGET, 10_000);
-  return stepOutcome("pb-stop (managed)", "kill (SIGTERM) managed instance", t0, 0, undefined);
+  return stepOutcome(
+    "pb-stop (managed)",
+    "kill (SIGTERM) managed instance",
+    t0,
+    0,
+    undefined,
+  );
 }
 
 /** Best-effort cleanup — runs on every exit path; the child must never outlive us. */
@@ -340,7 +384,15 @@ async function runStep(
 
   writeFileSync(logFile, output);
   const counts = opts.extract ? opts.extract(output) : [];
-  return stepOutcome(name, displayCmd, t0, exitCode, logFile, undefined, counts);
+  return stepOutcome(
+    name,
+    displayCmd,
+    t0,
+    exitCode,
+    logFile,
+    undefined,
+    counts,
+  );
 }
 
 // Extractors — regex on the step's own output, kept tolerant (a parse miss
@@ -397,7 +449,12 @@ function collectImportDirCounts(): [string, string][] {
   let totalRecords = 0;
   const perCollection: [string, number][] = [];
   for (const f of readdirSync(PB_IMPORT_DIR).sort()) {
-    if (!f.endsWith(".json") || f === "expected-verdicts.json" || f === "id-map.json") continue;
+    if (
+      !f.endsWith(".json") ||
+      f === "expected-verdicts.json" ||
+      f === "id-map.json"
+    )
+      continue;
     try {
       const parsed = JSON.parse(readFileSync(join(PB_IMPORT_DIR, f), "utf-8"));
       if (Array.isArray(parsed)) {
@@ -423,7 +480,9 @@ function collectVerdictCounts(): [string, string][] {
     for (const v of verdicts) byType.set(v.type, (byType.get(v.type) ?? 0) + 1);
     return [
       ["verdicts emitted", String(verdicts.length)],
-      ...[...byType.entries()].map(([t, n]) => [`  ${t}`, String(n)] as [string, string]),
+      ...[...byType.entries()].map(
+        ([t, n]) => [`  ${t}`, String(n)] as [string, string],
+      ),
     ];
   } catch (err: any) {
     return [["verdicts emitted", `unreadable: ${err.message}`]];
@@ -435,22 +494,42 @@ function collectSources(): SourceInfo[] {
   const sources: SourceInfo[] = [];
   const exportDir = join(SCRIPTS_DIR, "appwrite-export");
   if (existsSync(exportDir)) {
-    const files = readdirSync(exportDir).filter((f) => f.endsWith(".json")).sort();
+    const files = readdirSync(exportDir)
+      .filter((f) => f.endsWith(".json"))
+      .sort();
     for (const f of files) {
-      sources.push({ label: `appwrite-export/${f}`, mtime: statSync(join(exportDir, f)).mtime.toISOString() });
+      sources.push({
+        label: `appwrite-export/${f}`,
+        mtime: statSync(join(exportDir, f)).mtime.toISOString(),
+      });
     }
   } else {
-    sources.push({ label: "appwrite-export/", mtime: "MISSING", note: "run 1-export-appwrite.ts" });
+    sources.push({
+      label: "appwrite-export/",
+      mtime: "MISSING",
+      note: "run 1-export-appwrite.ts",
+    });
   }
   if (existsSync(CONTENT_RECIPE_DIR)) {
     const n = readdirSync(CONTENT_RECIPE_DIR).length;
-    sources.push({ label: `content/recipe (${n} recipes)`, mtime: statSync(CONTENT_RECIPE_DIR).mtime.toISOString() });
+    sources.push({
+      label: `content/recipe (${n} recipes)`,
+      mtime: statSync(CONTENT_RECIPE_DIR).mtime.toISOString(),
+    });
   } else {
-    sources.push({ label: "content/recipe", mtime: "MISSING", note: "sync Hugo content from the site repo" });
+    sources.push({
+      label: "content/recipe",
+      mtime: "MISSING",
+      note: "sync Hugo content from the site repo",
+    });
   }
   for (const p of SOURCE_FILES) {
     const label = `static/data/${basename(p)}`;
-    sources.push(existsSync(p) ? { label, mtime: statSync(p).mtime.toISOString() } : { label, mtime: "MISSING" });
+    sources.push(
+      existsSync(p)
+        ? { label, mtime: statSync(p).mtime.toISOString() }
+        : { label, mtime: "MISSING" },
+    );
   }
   return sources;
 }
@@ -467,41 +546,65 @@ function pbVersion(pbBin: string | undefined): string {
 
 function gitHead(): Promise<string> {
   return new Promise<string>((resolve) => {
-    execFile("git", ["rev-parse", "--short", "HEAD"], { cwd: REPO_ROOT }, (err, stdout) => {
-      resolve(err ? "unknown" : stdout.trim());
-    });
+    execFile(
+      "git",
+      ["rev-parse", "--short", "HEAD"],
+      { cwd: REPO_ROOT },
+      (err, stdout) => {
+        resolve(err ? "unknown" : stdout.trim());
+      },
+    );
   });
 }
 
 // --- Human gates ---
-async function verifySuperuser(env: Record<string, string>, target: string): Promise<void> {
+async function verifySuperuser(
+  env: Record<string, string>,
+  target: string,
+): Promise<void> {
   const email = env.PB_ADMIN_EMAIL;
   const password = env.PB_ADMIN_PASSWORD;
   if (!email || !password) {
-    throw new Error(`Missing PB_ADMIN_EMAIL or PB_ADMIN_PASSWORD in ${ENV_FILE}`);
+    throw new Error(
+      `Missing PB_ADMIN_EMAIL or PB_ADMIN_PASSWORD in ${ENV_FILE}`,
+    );
   }
-  const res = await fetch(`${target}/api/collections/_superusers/auth-with-password`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ identity: email, password }),
-    signal: AbortSignal.timeout(5000),
-  });
+  const res = await fetch(
+    `${target}/api/collections/_superusers/auth-with-password`,
+    {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ identity: email, password }),
+      signal: AbortSignal.timeout(5000),
+    },
+  );
   if (!res.ok) {
     throw new Error(
       `Superuser auth failed on ${target} (${res.status}) — the provisioned target must have a ` +
-      `superuser matching PB_ADMIN_EMAIL/PB_ADMIN_PASSWORD from scripts_dev/.env.local ` +
-      `(provision it with: pocketbase superuser upsert).`,
+        `superuser matching PB_ADMIN_EMAIL/PB_ADMIN_PASSWORD from scripts_dev/.env.local ` +
+        `(provision it with: pocketbase superuser upsert).`,
     );
   }
 }
 
-async function contentGate(opts: { yes: boolean; contentSynced: boolean }): Promise<void> {
-  const n = existsSync(CONTENT_RECIPE_DIR) ? readdirSync(CONTENT_RECIPE_DIR).length : 0;
+async function contentGate(opts: {
+  yes: boolean;
+  contentSynced: boolean;
+}): Promise<void> {
+  const n = existsSync(CONTENT_RECIPE_DIR)
+    ? readdirSync(CONTENT_RECIPE_DIR).length
+    : 0;
   console.log(`\n${"─".repeat(60)}`);
   console.log(`📎 Human prerequisite — Hugo content sync`);
-  console.log(`   content/recipe (${n} recipes) is the SOURCE of the recipe data.`);
-  console.log(`   Sync it from the site repo (fetch) BEFORE this run — the pipeline`);
-  console.log(`   migrates what is on disk, staleness is only caught afterwards.`);
+  console.log(
+    `   content/recipe (${n} recipes) is the SOURCE of the recipe data.`,
+  );
+  console.log(
+    `   Sync it from the site repo (fetch) BEFORE this run — the pipeline`,
+  );
+  console.log(
+    `   migrates what is on disk, staleness is only caught afterwards.`,
+  );
   console.log(`   Latest local commit: see git log -1 -- content/recipe`);
   console.log(`${"─".repeat(60)}`);
   if (opts.contentSynced) {
@@ -511,15 +614,21 @@ async function contentGate(opts: { yes: boolean; contentSynced: boolean }): Prom
   if (opts.yes || !process.stdin.isTTY) {
     throw new Error(
       `Hugo content sync not acknowledged — re-run with --content-synced after syncing ` +
-      `content/recipe from the site repo (a --yes run never fabricates this ack).`,
+        `content/recipe from the site repo (a --yes run never fabricates this ack).`,
     );
   }
   const { createInterface } = await import("node:readline/promises");
   const rl = createInterface({ input: process.stdin, output: process.stdout });
-  const answer = (await rl.question(`   Is content/recipe synced? Type "yes" to continue: `)).trim().toLowerCase();
+  const answer = (
+    await rl.question(`   Is content/recipe synced? Type "yes" to continue: `)
+  )
+    .trim()
+    .toLowerCase();
   rl.close();
   if (answer !== "yes" && answer !== "y") {
-    throw new Error(`Aborted at the content-sync gate — sync content/recipe, then re-run.`);
+    throw new Error(
+      `Aborted at the content-sync gate — sync content/recipe, then re-run.`,
+    );
   }
   console.log();
 }
@@ -561,7 +670,9 @@ function writeReport(opts: {
   lines.push(`- **Target** : ${opts.target} (${opts.mode})`);
   for (const [k, v] of opts.versionInfo) lines.push(`- **${k}** : ${v}`);
   lines.push(`- **Cleanup scope** : --target=${opts.cleanupTarget}`);
-  lines.push(`- **Verdict global** : ${opts.verdict === "VERT" ? "✅ VERT" : "❌ ROUGE"}`);
+  lines.push(
+    `- **Verdict global** : ${opts.verdict === "VERT" ? "✅ VERT" : "❌ ROUGE"}`,
+  );
   if (opts.failure) lines.push(`- **Échec** : ${opts.failure}`);
   lines.push("");
 
@@ -579,16 +690,26 @@ function writeReport(opts: {
   lines.push(`| # | Step | Duration | Exit | Key counts |`);
   lines.push(`| - | ---- | -------- | ---- | ---------- |`);
   opts.outcomes.forEach((o, i) => {
-    const counts = o.counts.map(([k, v]) => `${k}: ${v}`).join(", ") || (o.error ? o.error.slice(0, 120) : "—");
-    lines.push(`| ${i + 1} | ${o.name} | ${fmtDuration(o.durationMs)} | ${o.exitCode ?? "?"} | ${counts} |`);
+    const counts =
+      o.counts.map(([k, v]) => `${k}: ${v}`).join(", ") ||
+      (o.error ? o.error.slice(0, 120) : "—");
+    lines.push(
+      `| ${i + 1} | ${o.name} | ${fmtDuration(o.durationMs)} | ${o.exitCode ?? "?"} | ${counts} |`,
+    );
   });
   lines.push("");
-  lines.push(`Total pipeline: ${fmtDuration(totalMs)}. Per-step logs: \`scripts_dev/runs/${opts.stem}-logs/\`.`);
+  lines.push(
+    `Total pipeline: ${fmtDuration(totalMs)}. Per-step logs: \`scripts_dev/runs/${opts.stem}-logs/\`.`,
+  );
   lines.push("");
 
-  const verdictCounts = opts.outcomes.flatMap((o) => o.counts).filter(([k]) => k === "verdicts emitted" || k.startsWith("  "));
+  const verdictCounts = opts.outcomes
+    .flatMap((o) => o.counts)
+    .filter(([k]) => k === "verdicts emitted" || k.startsWith("  "));
   if (verdictCounts.length > 0) {
-    lines.push(`## Verdicts émis (pb-import/expected-verdicts.json — artefact)`);
+    lines.push(
+      `## Verdicts émis (pb-import/expected-verdicts.json — artefact)`,
+    );
     lines.push("");
     for (const [k, v] of verdictCounts) {
       if (k.startsWith("  ")) lines.push(`  - ${k.trim()} : ${v}`);
@@ -675,22 +796,34 @@ async function main(): Promise<number> {
   }
   if (args.unknown.length > 0) {
     console.error(`❌ Unknown argument(s): ${args.unknown.join(", ")}`);
-    console.error(`   Supported: --yes --content-synced --target=migrated|all --pb-bin=<path> --pb-dir=<path> --help`);
+    console.error(
+      `   Supported: --yes --content-synced --target=migrated|all --pb-bin=<path> --pb-dir=<path> --help`,
+    );
     return 1;
   }
   const env = loadEnv();
-  TARGET = (process.env.PB_URL_OVERRIDE || env.PB_URL || "http://127.0.0.1:8090").replace(/\/+$/, "");
+  TARGET = (
+    process.env.PB_URL_OVERRIDE ||
+    env.PB_URL ||
+    "http://127.0.0.1:8090"
+  ).replace(/\/+$/, "");
   const managed = Boolean(args.pbBin || args.pbDir);
   if (managed && (!args.pbBin || !args.pbDir)) {
-    console.error(`❌ Managed mode requires BOTH --pb-bin=<path> and --pb-dir=<path>.`);
+    console.error(
+      `❌ Managed mode requires BOTH --pb-bin=<path> and --pb-dir=<path>.`,
+    );
     return 1;
   }
   if (managed && !new URL(TARGET).port) {
-    console.error(`❌ Managed mode needs an explicit port in the target URL (got ${TARGET}).`);
+    console.error(
+      `❌ Managed mode needs an explicit port in the target URL (got ${TARGET}).`,
+    );
     return 1;
   }
   if (args.cleanupTarget !== "migrated" && args.cleanupTarget !== "all") {
-    console.error(`❌ Invalid --target: ${args.cleanupTarget}. Use "migrated" or "all".`);
+    console.error(
+      `❌ Invalid --target: ${args.cleanupTarget}. Use "migrated" or "all".`,
+    );
     return 1;
   }
   if (!existsSync(join(SCRIPTS_DIR, "2-transform-data.ts"))) {
@@ -703,7 +836,9 @@ async function main(): Promise<number> {
   pbLogsDir = join(RUNS_DIR, `${stem}-logs`);
   mkdirSync(pbLogsDir, { recursive: true });
 
-  const mode = managed ? `managed: pb-bin=${args.pbBin}, pb-dir=${args.pbDir}` : "operator (external instance)";
+  const mode = managed
+    ? `managed: pb-bin=${args.pbBin}, pb-dir=${args.pbDir}`
+    : "operator (external instance)";
   console.log(`\n${"=".repeat(60)}`);
   console.log(`🚀 migrate.ts — full migration pipeline`);
   console.log(`   target: ${TARGET} (${mode})`);
@@ -718,27 +853,41 @@ async function main(): Promise<number> {
   const bun = process.execPath;
   const script = (f: string) => join(SCRIPTS_DIR, f);
   const pbStepEnv = { PB_URL_OVERRIDE: TARGET };
-  const fixEnv = managed ? { ...pbStepEnv, PB_DB_PATH_OVERRIDE: join(args.pbDir!, "data.db") } : pbStepEnv;
+  const fixEnv = managed
+    ? { ...pbStepEnv, PB_DB_PATH_OVERRIDE: join(args.pbDir!, "data.db") }
+    : pbStepEnv;
 
   try {
     // Preflight — target reachable (managed: spawn it), superuser matches.
     if (managed) {
       outcomes.push(await startManagedPb(args.pbBin!, args.pbDir!, TARGET));
-      if (!outcomes[outcomes.length - 1].ok) throw new Error("managed PocketBase failed to start");
+      if (!outcomes[outcomes.length - 1].ok)
+        throw new Error("managed PocketBase failed to start");
     } else {
       const t0 = Date.now();
       if (!(await isUp(TARGET))) {
         outcomes.push(
-          stepOutcome("preflight", `health probe ${TARGET}`, t0, 1, undefined, `target down — start PocketBase or use managed mode (--pb-bin/--pb-dir)`),
+          stepOutcome(
+            "preflight",
+            `health probe ${TARGET}`,
+            t0,
+            1,
+            undefined,
+            `target down — start PocketBase or use managed mode (--pb-bin/--pb-dir)`,
+          ),
         );
         throw new Error(`target ${TARGET} is not reachable`);
       }
-      outcomes.push(stepOutcome("preflight", `health probe ${TARGET}`, t0, 0, undefined));
+      outcomes.push(
+        stepOutcome("preflight", `health probe ${TARGET}`, t0, 0, undefined),
+      );
     }
     {
       const t0 = Date.now();
       await verifySuperuser(env, TARGET);
-      outcomes.push(stepOutcome("preflight", "superuser auth probe", t0, 0, undefined));
+      outcomes.push(
+        stepOutcome("preflight", "superuser auth probe", t0, 0, undefined),
+      );
     }
 
     // Human gate — Hugo content sync.
@@ -749,7 +898,12 @@ async function main(): Promise<number> {
       await runStep(
         "1-cleanup",
         `bun run scripts_dev/cleanup-pb.ts --target=${args.cleanupTarget} --yes`,
-        [bun, script("cleanup-pb.ts"), `--target=${args.cleanupTarget}`, "--yes"],
+        [
+          bun,
+          script("cleanup-pb.ts"),
+          `--target=${args.cleanupTarget}`,
+          "--yes",
+        ],
         { env: pbStepEnv, extract: extractCleanup },
       ),
     );
@@ -763,7 +917,9 @@ async function main(): Promise<number> {
       ["2d-transform-catalog", "2d-transform-catalog.ts"],
     ];
     for (const [name, file] of transformSteps) {
-      outcomes.push(await runStep(name, `bun run scripts_dev/${file}`, [bun, script(file)]));
+      outcomes.push(
+        await runStep(name, `bun run scripts_dev/${file}`, [bun, script(file)]),
+      );
       if (!outcomes[outcomes.length - 1].ok) throw new Error(`${name} failed`);
     }
     // Inventory of what the transforms produced (counts + emitted verdicts).
@@ -774,17 +930,23 @@ async function main(): Promise<number> {
 
     // 3. Import (target must be empty — its own preflight enforces it).
     outcomes.push(
-      await runStep("3-import", `bun run scripts_dev/3-import-pb.ts`, [bun, script("3-import-pb.ts")], {
-        env: pbStepEnv,
-        extract: extractImport,
-      }),
+      await runStep(
+        "3-import",
+        `bun run scripts_dev/3-import-pb.ts`,
+        [bun, script("3-import-pb.ts")],
+        {
+          env: pbStepEnv,
+          extract: extractImport,
+        },
+      ),
     );
     if (!outcomes[outcomes.length - 1].ok) throw new Error("import failed");
 
     // 4. Timestamps — requires the target NOT served (WAL/sqlite safety).
     if (managed) {
       outcomes.push(await stopManagedPb());
-      if (!outcomes[outcomes.length - 1].ok) throw new Error("failed to stop the managed instance");
+      if (!outcomes[outcomes.length - 1].ok)
+        throw new Error("failed to stop the managed instance");
     } else {
       const t0 = Date.now();
       if (await isUp(TARGET)) {
@@ -796,30 +958,38 @@ async function main(): Promise<number> {
             1,
             undefined,
             `PocketBase is running on ${TARGET} — stop the instance serving this target first ` +
-            `(or use managed mode --pb-bin/--pb-dir)`,
+              `(or use managed mode --pb-bin/--pb-dir)`,
           ),
         );
         throw new Error("4-fix-timestamps requires the target to be stopped");
       }
     }
     outcomes.push(
-      await runStep("4-fix-timestamps", `bun run scripts_dev/4-fix-timestamps.ts`, [bun, script("4-fix-timestamps.ts")], {
-        env: fixEnv,
-        extract: extractFix,
-      }),
+      await runStep(
+        "4-fix-timestamps",
+        `bun run scripts_dev/4-fix-timestamps.ts`,
+        [bun, script("4-fix-timestamps.ts")],
+        {
+          env: fixEnv,
+          extract: extractFix,
+        },
+      ),
     );
-    if (!outcomes[outcomes.length - 1].ok) throw new Error("4-fix-timestamps failed");
+    if (!outcomes[outcomes.length - 1].ok)
+      throw new Error("4-fix-timestamps failed");
     // Guard — a no-op fix (missing id-map, wrong DB path…) would leave every
     // timestamp at import-time autodate and still exit 0. The validate
     // timestamps.sample check catches this too, but here it fails at the
     // faulty step. Parse miss counts as 0: never a false green.
     {
       const fixStep = outcomes[outcomes.length - 1];
-      const updated = Number(fixStep.counts.find(([k]) => k === "updated")?.[1] ?? "0");
+      const updated = Number(
+        fixStep.counts.find(([k]) => k === "updated")?.[1] ?? "0",
+      );
       if (!Number.isFinite(updated) || updated <= 0) {
         throw new Error(
           `4-fix-timestamps updated 0 records — timestamps would stay at import-time autodate ` +
-          `(check id-map.json and PB_DB_PATH_OVERRIDE)`,
+            `(check id-map.json and PB_DB_PATH_OVERRIDE)`,
         );
       }
     }
@@ -827,29 +997,57 @@ async function main(): Promise<number> {
     // 5. Validate — target served again.
     if (managed) {
       outcomes.push(await startManagedPb(args.pbBin!, args.pbDir!, TARGET));
-      if (!outcomes[outcomes.length - 1].ok) throw new Error("failed to restart the managed instance");
+      if (!outcomes[outcomes.length - 1].ok)
+        throw new Error("failed to restart the managed instance");
       outcomes[outcomes.length - 1].name = "pb-restart (managed)";
     } else {
       const t0 = Date.now();
-      console.log(`\n⏳ Waiting for the target to be restarted on ${TARGET} (up to 120s)...`);
+      console.log(
+        `\n⏳ Waiting for the target to be restarted on ${TARGET} (up to 120s)...`,
+      );
       try {
         await waitUp(TARGET, 120_000);
-        outcomes.push(stepOutcome("pb-restart (operator)", "wait for external restart", t0, 0, undefined));
+        outcomes.push(
+          stepOutcome(
+            "pb-restart (operator)",
+            "wait for external restart",
+            t0,
+            0,
+            undefined,
+          ),
+        );
       } catch (err: any) {
         outcomes.push(
-          stepOutcome("pb-restart (operator)", "wait for external restart", t0, 1, undefined, err.message),
+          stepOutcome(
+            "pb-restart (operator)",
+            "wait for external restart",
+            t0,
+            1,
+            undefined,
+            err.message,
+          ),
         );
-        throw new Error(`validate requires the target up — restart the instance serving ${TARGET}`);
+        throw new Error(
+          `validate requires the target up — restart the instance serving ${TARGET}`,
+        );
       }
     }
     {
-      const step = await runStep("5-validate", `bun run scripts_dev/validate-migration.ts`, [bun, script("validate-migration.ts")], {
-        env: pbStepEnv,
-        extract: extractValidate,
-      });
-      validateSummary = validateSummaryBlock(readFileSync(step.logFile!, "utf-8"));
+      const step = await runStep(
+        "5-validate",
+        `bun run scripts_dev/validate-migration.ts`,
+        [bun, script("validate-migration.ts")],
+        {
+          env: pbStepEnv,
+          extract: extractValidate,
+        },
+      );
+      validateSummary = validateSummaryBlock(
+        readFileSync(step.logFile!, "utf-8"),
+      );
       outcomes.push(step);
-      if (!step.ok) throw new Error("validation failed — see the récap in the report");
+      if (!step.ok)
+        throw new Error("validation failed — see the récap in the report");
     }
 
     verdict = "VERT";

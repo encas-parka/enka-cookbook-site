@@ -18,6 +18,5 @@
     rows="2"
     maxlength="250"
     {disabled}
-    {id}
-  ></textarea>
+    {id}></textarea>
 </div>

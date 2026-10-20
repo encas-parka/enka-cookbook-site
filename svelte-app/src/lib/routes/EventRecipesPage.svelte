@@ -49,7 +49,8 @@
   // Permission d'édition
   const canEdit = $derived(
     eventId && globalState.userId
-      ? online.current && eventsStore.canUserEditEvent(eventId, globalState.userId)
+      ? online.current &&
+          eventsStore.canUserEditEvent(eventId, globalState.userId)
       : false,
   );
 
@@ -490,13 +491,13 @@
 {#snippet navActions()}
   <div class="flex gap-2 max-sm:hidden">
     <button
-      class="btn btn-sm btn-circle btn-primary"
+      class="btn btn-circle btn-primary btn-sm"
       onclick={() => window.print()}><Printer size={18} /></button
     >
   </div>
 {/snippet}
 
-<div class="bg-base-200 overflow-x-clip" in:fade>
+<div class="overflow-x-clip bg-base-200" in:fade>
   {#if !loading && eventName}
     <!-- ═══════════════════════════════════════════════════════════ -->
     <!-- HEADER : titre, dates, stats (uniquement mode calendrier) -->
@@ -509,7 +510,7 @@
           <div class="flex flex-wrap items-center justify-between gap-4">
             <div>
               <h1 class="">{eventName}</h1>
-              <div class="text-base-content/60 text-sm">
+              <div class="text-sm text-base-content/60">
                 {#if startDate && endDate}
                   <Calendar class="inline h-4 w-4" />
                   {formatDateShort(startDate)} au {formatDateShort(endDate)}
@@ -542,10 +543,10 @@
     <!-- Toggle calendrier -->
     {#if !showCalendar}
       <div class="flex justify-end px-6">
-        <label class="btn btn-ghost swap" class:swap-active={calendarVisible}>
+        <label class="btn swap btn-ghost" class:swap-active={calendarVisible}>
           <input type="checkbox" bind:checked={calendarVisible} />
-          <CalendarMinus class="swap-on size-6" />
-          <CalendarDays class="swap-off size-6 opacity-40" />
+          <CalendarMinus class="size-6 swap-on" />
+          <CalendarDays class="size-6 swap-off opacity-40" />
         </label>
       </div>
     {/if}
@@ -595,7 +596,7 @@
                 />
                 {#if urlFilter.ingredient}
                   <button
-                    class="btn btn-circle btn-error btn-outline btn-xs absolute top-1/2 right-2 z-10 -translate-y-1/2 opacity-60 hover:opacity-100"
+                    class="btn absolute top-1/2 right-2 z-10 btn-circle -translate-y-1/2 btn-outline opacity-60 btn-error btn-xs hover:opacity-100"
                     onclick={resetIngredientFilter}
                     aria-label="Effacer la recherche"
                   >
@@ -606,7 +607,7 @@
             </div>
 
             <!-- Sommaire réactif des recettes avec filtrage -->
-            <ul class="menu bg-base-100 rounded-box w-full drop-shadow-lg">
+            <ul class="menu w-full rounded-box bg-base-100 drop-shadow-lg">
               {#each Array.from(mealsByDate.entries()) as [date, times] (date)}
                 {@const dateISO =
                   Array.from(
@@ -614,7 +615,7 @@
                   )[0]?.[0]?.date?.split("T")[0] ?? ""}
                 <li>
                   <button
-                    class="btn btn-sm justify-start {urlFilter.mealDate ===
+                    class="btn justify-start btn-sm {urlFilter.mealDate ===
                       dateISO && !urlFilter.recipeUuid
                       ? 'btn-accent'
                       : 'btn-ghost'}"
@@ -638,7 +639,7 @@
                     {@const mealISO = meals[0].date}
                     <li>
                       <button
-                        class="btn btn-sm mb-1 h-auto justify-start pl-4 {urlFilter.mealDate ===
+                        class="btn mb-1 h-auto justify-start pl-4 btn-sm {urlFilter.mealDate ===
                           mealISO && !urlFilter.recipeUuid
                           ? 'btn-accent'
                           : 'btn-ghost '}"
@@ -673,7 +674,7 @@
                         {#if recipe}
                           <li>
                             <button
-                              class="btn btn-sm mb-1 ml-8 justify-start {urlFilter.recipeUuid ===
+                              class="btn mb-1 ml-8 justify-start btn-sm {urlFilter.recipeUuid ===
                               mealRecipe.recipeUuid
                                 ? 'btn-accent'
                                 : 'btn-ghost'}"
@@ -696,7 +697,7 @@
                                 {recipe.title}
                               </span>
                               {#if recipe.preparation24h}<span
-                                  class="status status-md status-warning pb-2"
+                                  class="status status-warning pb-2 status-md"
                                 ></span>{/if}
                             </button>
                           </li>
@@ -711,7 +712,7 @@
               {#if undatedMeals.length > 0}
                 <li class="mt-2">
                   <button
-                    class="btn btn-sm justify-start {urlFilter.mealDate ===
+                    class="btn justify-start btn-sm {urlFilter.mealDate ===
                       'undated' && !urlFilter.recipeUuid
                       ? 'btn-accent'
                       : 'btn-ghost'}"
@@ -744,7 +745,7 @@
                         {#if recipe}
                           <li>
                             <button
-                              class="btn btn-sm mb-1 ml-4 justify-start {urlFilter.recipeUuid ===
+                              class="btn mb-1 ml-4 justify-start btn-sm {urlFilter.recipeUuid ===
                               mealRecipe.recipeUuid
                                 ? 'btn-accent'
                                 : 'btn-ghost'}"
@@ -777,7 +778,7 @@
             {#if hasActiveFilter}
               <div class="my-4">
                 <button
-                  class="btn btn-dash btn-block btn-primary"
+                  class="btn btn-block btn-dash btn-primary"
                   onclick={clearAllFilters}
                   aria-label="Afficher toutes les recettes"
                 >
@@ -796,9 +797,9 @@
               <!-- Mode recherche par ingrédient -->
               {#if filteredRecipes.length === 0}
                 <div
-                  class="bg-base-100 border-base-300 rounded-xl border p-8 text-center print:hidden"
+                  class="rounded-xl border border-base-300 bg-base-100 p-8 text-center print:hidden"
                 >
-                  <p class="text-base-content/60 text-lg">
+                  <p class="text-lg text-base-content/60">
                     Aucune recette ne contient l'ingrédient "{urlFilter.ingredient}".
                   </p>
                 </div>
@@ -860,13 +861,13 @@
               <!-- Mode normal -->
               {#if filteredMeals.length === 0 && urlFilter.mealDate}
                 <div
-                  class="bg-base-100 border-base-300 rounded-xl border p-8 text-center"
+                  class="rounded-xl border border-base-300 bg-base-100 p-8 text-center"
                 >
-                  <p class="text-base-content/60 text-lg">
+                  <p class="text-lg text-base-content/60">
                     Aucune recette ne correspond aux filtres sélectionnés.
                   </p>
                   <button
-                    class="btn btn-primary mt-4"
+                    class="btn mt-4 btn-primary"
                     onclick={clearAllFilters}
                   >
                     Réinitialiser les filtres
@@ -929,7 +930,7 @@
                 </div>
                 {#if hasActiveFilter}
                   <button
-                    class="btn btn-dash btn-block my-5"
+                    class="btn my-5 btn-block btn-dash"
                     onclick={clearAllFilters}
                     aria-label="Afficher toutes les recettes"
                   >
@@ -943,16 +944,16 @@
             <!-- Sentinelle pour lazy loading -->
             {#if paginatedMeals.length < mealsToPaginate.length}
               <div bind:this={sentinel} class="py-8 text-center print:hidden">
-                <span class="loading loading-spinner loading-md"></span>
+                <span class="loading loading-md loading-spinner"></span>
               </div>
             {/if}
 
             <!-- Message si pas de recettes du tout -->
             {#if !urlFilter.ingredient && recipesDetails.length === 0 && !loading}
               <div
-                class="bg-base-100 border-base-300 rounded-xl border p-8 text-center"
+                class="rounded-xl border border-base-300 bg-base-100 p-8 text-center"
               >
-                <p class="text-base-content/60 text-lg">
+                <p class="text-lg text-base-content/60">
                   Aucune recette n'a encore été ajoutée à cet événement.
                 </p>
               </div>
@@ -990,7 +991,7 @@
               />
               {#if urlFilter.ingredient}
                 <button
-                  class="btn btn-circle btn-error btn-outline btn-xs absolute top-1/2 right-2 z-10 -translate-y-1/2 opacity-60 hover:opacity-100"
+                  class="btn absolute top-1/2 right-2 z-10 btn-circle -translate-y-1/2 btn-outline opacity-60 btn-error btn-xs hover:opacity-100"
                   onclick={resetIngredientFilter}
                   aria-label="Effacer la recherche"
                 >
@@ -1001,7 +1002,7 @@
           </div>
 
           <!-- Sommaire réactif des recettes avec filtrage -->
-          <ul class="menu bg-base-100 rounded-box w-full drop-shadow-lg">
+          <ul class="menu w-full rounded-box bg-base-100 drop-shadow-lg">
             {#each Array.from(mealsByDate.entries()) as [date, times] (date)}
               {@const dateISO =
                 Array.from(
@@ -1009,7 +1010,7 @@
                 )[0]?.[0]?.date?.split("T")[0] ?? ""}
               <li>
                 <button
-                  class="btn btn-sm justify-start {urlFilter.mealDate ===
+                  class="btn justify-start btn-sm {urlFilter.mealDate ===
                     dateISO && !urlFilter.recipeUuid
                     ? 'btn-accent'
                     : 'btn-ghost'}"
@@ -1033,7 +1034,7 @@
                   {@const mealISO = meals[0].date}
                   <li>
                     <button
-                      class="btn btn-sm mb-1 h-auto justify-start pl-4 {urlFilter.mealDate ===
+                      class="btn mb-1 h-auto justify-start pl-4 btn-sm {urlFilter.mealDate ===
                         mealISO && !urlFilter.recipeUuid
                         ? 'btn-accent'
                         : 'btn-ghost '}"
@@ -1068,7 +1069,7 @@
                       {#if recipe}
                         <li>
                           <button
-                            class="btn btn-sm mb-1 ml-8 justify-start {urlFilter.recipeUuid ===
+                            class="btn mb-1 ml-8 justify-start btn-sm {urlFilter.recipeUuid ===
                             mealRecipe.recipeUuid
                               ? 'btn-accent'
                               : 'btn-ghost'}"
@@ -1100,7 +1101,7 @@
             {#if undatedMeals.length > 0}
               <li class="mt-2">
                 <button
-                  class="btn btn-sm justify-start {urlFilter.mealDate ===
+                  class="btn justify-start btn-sm {urlFilter.mealDate ===
                     'undated' && !urlFilter.recipeUuid
                     ? 'btn-accent'
                     : 'btn-ghost'}"
@@ -1133,7 +1134,7 @@
                       {#if recipe}
                         <li>
                           <button
-                            class="btn btn-sm mb-1 ml-4 justify-start {urlFilter.recipeUuid ===
+                            class="btn mb-1 ml-4 justify-start btn-sm {urlFilter.recipeUuid ===
                             mealRecipe.recipeUuid
                               ? 'btn-accent'
                               : 'btn-ghost'}"
@@ -1166,7 +1167,7 @@
           {#if hasActiveFilter}
             <div class="my-4">
               <button
-                class="btn btn-dash btn-block btn-primary"
+                class="btn btn-block btn-dash btn-primary"
                 onclick={clearAllFilters}
                 aria-label="Afficher toutes les recettes"
               >
@@ -1190,12 +1191,12 @@
             <div class="mb-8 space-y-4 print:hidden">
               <div class="flex flex-wrap items-center justify-between gap-4">
                 <div class="space-y-2">
-                  <div class="skeleton h-6 w-64"></div>
-                  <div class="skeleton h-4 w-48"></div>
+                  <div class="h-6 w-64 skeleton"></div>
+                  <div class="h-4 w-48 skeleton"></div>
                 </div>
               </div>
               <div class="flex justify-end p-4">
-                <div class="skeleton h-10 w-3/4"></div>
+                <div class="h-10 w-3/4 skeleton"></div>
               </div>
             </div>
 
@@ -1205,12 +1206,12 @@
                 <div class="space-y-6">
                   <!-- Skeleton de l'en-tête de repas -->
                   <div
-                    class="card bg-accent/20 flex flex-row items-center justify-center gap-6 p-4"
+                    class="card flex flex-row items-center justify-center gap-6 bg-accent/20 p-4"
                   >
-                    <div class="skeleton h-6 w-32"></div>
-                    <div class="skeleton h-6 w-20"></div>
-                    <div class="skeleton h-8 w-16 rounded-full"></div>
-                    <div class="skeleton h-8 w-16 rounded-full"></div>
+                    <div class="h-6 w-32 skeleton"></div>
+                    <div class="h-6 w-20 skeleton"></div>
+                    <div class="h-8 w-16 skeleton rounded-full"></div>
+                    <div class="h-8 w-16 skeleton rounded-full"></div>
                   </div>
 
                   <!-- Skeleton de la carte de recette -->
@@ -1219,18 +1220,18 @@
                       <div class="flex justify-between">
                         <div class="flex-1">
                           <div class="mb-4">
-                            <div class="skeleton mb-2 h-8 w-3/4"></div>
+                            <div class="mb-2 h-8 w-3/4 skeleton"></div>
                             <div class="flex gap-2">
-                              <div class="skeleton h-5 w-20 rounded-full"></div>
-                              <div class="skeleton h-5 w-16 rounded-full"></div>
+                              <div class="h-5 w-20 skeleton rounded-full"></div>
+                              <div class="h-5 w-16 skeleton rounded-full"></div>
                             </div>
                           </div>
 
                           <!-- Skeleton des métadonnées -->
                           <div class="mb-4 flex flex-wrap gap-4 text-sm">
-                            <div class="skeleton h-4 w-24"></div>
-                            <div class="skeleton h-4 w-24"></div>
-                            <div class="skeleton h-4 w-24"></div>
+                            <div class="h-4 w-24 skeleton"></div>
+                            <div class="h-4 w-24 skeleton"></div>
+                            <div class="h-4 w-24 skeleton"></div>
                           </div>
 
                           <!-- Skeleton des ingrédients -->
@@ -1239,12 +1240,12 @@
                               class="mb-2 flex items-center gap-2 font-semibold"
                               aria-label="Chargement des ingrédients"
                             >
-                              <div class="skeleton h-5 w-6"></div>
-                              <div class="skeleton h-5 w-32"></div>
+                              <div class="h-5 w-6 skeleton"></div>
+                              <div class="h-5 w-32 skeleton"></div>
                             </h3>
                             <div class="space-y-2">
                               {#each Array(4) as _, j}
-                                <div class="skeleton h-4 w-full"></div>
+                                <div class="h-4 w-full skeleton"></div>
                               {/each}
                             </div>
                           </div>
@@ -1255,14 +1256,14 @@
                               class="mb-2 flex items-center gap-2 font-semibold"
                               aria-label="Chargement de la préparation"
                             >
-                              <div class="skeleton h-5 w-6"></div>
-                              <div class="skeleton h-5 w-32"></div>
+                              <div class="h-5 w-6 skeleton"></div>
+                              <div class="h-5 w-32 skeleton"></div>
                             </h3>
                             <div class="space-y-2">
                               {#each Array(3) as _, k}
                                 <div class="flex gap-2">
-                                  <div class="skeleton h-4 w-6 shrink-0"></div>
-                                  <div class="skeleton h-4 w-full"></div>
+                                  <div class="h-4 w-6 shrink-0 skeleton"></div>
+                                  <div class="h-4 w-full skeleton"></div>
                                 </div>
                               {/each}
                             </div>
@@ -1287,7 +1288,7 @@
               <div class="flex flex-wrap items-center justify-between gap-4">
                 <div>
                   <h1 class="">{eventName}</h1>
-                  <div class="text-base-content/60 text-sm">
+                  <div class="text-sm text-base-content/60">
                     {#if startDate && endDate}
                       <Calendar class="inline h-4 w-4" />
                       {formatDateShort(startDate)} au {formatDateShort(endDate)}
@@ -1346,9 +1347,9 @@
               <!-- Mode recherche par ingrédient : afficher les recettes filtrées -->
               {#if filteredRecipes.length === 0}
                 <div
-                  class="bg-base-100 border-base-300 rounded-xl border p-8 text-center print:hidden"
+                  class="rounded-xl border border-base-300 bg-base-100 p-8 text-center print:hidden"
                 >
-                  <p class="text-base-content/60 text-lg">
+                  <p class="text-lg text-base-content/60">
                     Aucune recette ne contient l'ingrédient "{urlFilter.ingredient}".
                   </p>
                 </div>
@@ -1412,13 +1413,13 @@
               <!-- Mode normal : afficher les repas filtrés par meal/recette -->
               {#if filteredMeals.length === 0 && urlFilter.mealDate}
                 <div
-                  class="bg-base-100 border-base-300 rounded-xl border p-8 text-center"
+                  class="rounded-xl border border-base-300 bg-base-100 p-8 text-center"
                 >
-                  <p class="text-base-content/60 text-lg">
+                  <p class="text-lg text-base-content/60">
                     Aucune recette ne correspond aux filtres sélectionnés.
                   </p>
                   <button
-                    class="btn btn-primary mt-4"
+                    class="btn mt-4 btn-primary"
                     onclick={clearAllFilters}
                   >
                     Réinitialiser les filtres
@@ -1483,7 +1484,7 @@
                 </div>
                 {#if hasActiveFilter}
                   <button
-                    class="btn btn-dash btn-block my-5"
+                    class="btn my-5 btn-block btn-dash"
                     onclick={clearAllFilters}
                     aria-label="Afficher toutes les recettes"
                   >
@@ -1497,16 +1498,16 @@
             <!-- Sentinelle pour lazy loading -->
             {#if paginatedMeals.length < mealsToPaginate.length}
               <div bind:this={sentinel} class="py-8 text-center print:hidden">
-                <span class="loading loading-spinner loading-md"></span>
+                <span class="loading loading-md loading-spinner"></span>
               </div>
             {/if}
 
             <!-- Message si pas de recettes du tout -->
             {#if !urlFilter.ingredient && recipesDetails.length === 0 && !loading}
               <div
-                class="bg-base-100 border-base-300 rounded-xl border p-8 text-center"
+                class="rounded-xl border border-base-300 bg-base-100 p-8 text-center"
               >
-                <p class="text-base-content/60 text-lg">
+                <p class="text-lg text-base-content/60">
                   Aucune recette n'a encore été ajoutée à cet événement.
                 </p>
               </div>

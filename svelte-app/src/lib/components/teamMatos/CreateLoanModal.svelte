@@ -624,14 +624,14 @@
         <div class="flex items-center justify-center py-12">
           <div class="text-center">
             <LoaderCircle
-              class="text-primary mx-auto mb-4 h-12 w-12 animate-spin"
+              class="mx-auto mb-4 h-12 w-12 animate-spin text-primary"
             />
             <p class="text-lg font-medium">Chargement de la réservation...</p>
           </div>
         </div>
       {:else}
         {#if mode === "edit" && isEndDatePast}
-          <div class="alert alert-info alert-soft">
+          <div class="alert alert-soft alert-info">
             <Info class="h-5 w-5" />
             <span>
               La date de fin est passée. Vous pouvez modifier les dates et les
@@ -695,7 +695,7 @@
           </div>
 
           {#if selectedEvent && selectedEvent.dateStart && selectedEvent.dateEnd}
-            <p class="text-base-content/50 -mt-2 px-1 text-sm">
+            <p class="-mt-2 px-1 text-sm text-base-content/50">
               L'événement aura lieu du <span class="font-medium"
                 >{formatShortDate(selectedEvent.dateStart)}</span
               >
@@ -727,8 +727,7 @@
               bind:value={notes}
               placeholder="Informations complémentaires sur l'emprunt..."
               maxlength="500"
-              disabled={loading}
-            ></textarea>
+              disabled={loading}></textarea>
           </fieldset>
         </div>
 
@@ -767,9 +766,9 @@
                               ? SoapDispenserDroplet
                               : Box}
 
-                <div class="bg-base-200 rounded-lg p-2">
+                <div class="rounded-lg bg-base-200 p-2">
                   <div class="flex items-center gap-2">
-                    <div class="bg-base-300 rounded p-1">
+                    <div class="rounded bg-base-300 p-1">
                       <TypeIcon class="h-4 w-4 opacity-70" />
                     </div>
                     <div
@@ -798,7 +797,7 @@
                 />
               </div>
               <button
-                class="btn btn-secondary btn-md flex-1 gap-2"
+                class="btn flex-1 gap-2 btn-md btn-secondary"
                 onclick={() => (showQuickSelection = true)}
                 disabled={loading || availableMateriels.length === 0}
               >
@@ -817,7 +816,7 @@
           {/if}
 
           {#if hasConflicts && !(mode === "edit" && isEndDatePast)}
-            <div class="alert alert-warning alert-soft">
+            <div class="alert alert-soft alert-warning">
               <AlertCircle class="h-5 w-5" />
               <div>
                 <p class="font-semibold">
@@ -872,7 +871,7 @@
                   return eMax > m.quantity && !getItemConflictInfo(m.materielId, m.quantity).isUnavailable;
                 })}
                   <button
-                    class="link link-primary text-xs font-medium"
+                    class="link text-xs font-medium link-primary"
                     onclick={handleTakeAll}
                     disabled={loading}
                   >
@@ -916,7 +915,7 @@
                       : 'bg-base-200'}"
                 >
                   <div class="flex items-center gap-2">
-                    <div class="bg-base-300 rounded p-1">
+                    <div class="rounded bg-base-300 p-1">
                       <TypeIcon class="h-4 w-4 opacity-70" />
                     </div>
 
@@ -931,9 +930,9 @@
                         {materiel.materielName}
                       </div>
                       {#if materiel.isDeleted}
-                        <span class="badge badge-error badge-sm">Supprimé</span>
+                        <span class="badge badge-sm badge-error">Supprimé</span>
                       {:else if hasConflict}
-                        <span class="badge badge-error badge-sm">
+                        <span class="badge badge-sm badge-error">
                           {conflict.isUnavailable
                             ? "Indisponible"
                             : `${conflict.unavailableCount} indisponible${conflict.unavailableCount > 1 ? "s" : ""}`}
@@ -949,7 +948,7 @@
 
                     <div class="flex items-center gap-1">
                       <button
-                        class="btn btn-ghost btn-xs btn-circle text-error"
+                        class="btn btn-circle btn-ghost text-error btn-xs"
                         onclick={() =>
                           handleRemoveMateriel(materiel.materielId)}
                         disabled={loading || materiel.quantity === 0}
@@ -958,7 +957,7 @@
                         <X class="size-3" />
                       </button>
                       <button
-                        class="btn btn-ghost btn-xs btn-circle hidden sm:flex"
+                        class="btn hidden btn-circle btn-ghost btn-xs sm:flex"
                         onclick={() =>
                           handleQuantityChange(
                             materiel.materielId,
@@ -971,7 +970,7 @@
                       </button>
                       <input
                         type="number"
-                        class="input input-sm w-16 [appearance:textfield] text-center [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
+                        class="input w-16 [appearance:textfield] text-center input-sm [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
                         min={0}
                         max={effectiveMax}
                         step={getStep(effectiveMax)}
@@ -986,7 +985,7 @@
                         disabled={loading}
                       />
                       <button
-                        class="btn btn-ghost btn-xs btn-circle hidden sm:flex"
+                        class="btn hidden btn-circle btn-ghost btn-xs sm:flex"
                         onclick={() =>
                           handleQuantityChange(
                             materiel.materielId,
@@ -1031,7 +1030,7 @@
   <ModalFooter>
     {#if mode === "edit" && existingLoan?.status === "accepted"}
       <button
-        class="btn btn-error btn-outline btn-sm"
+        class="btn btn-outline btn-error btn-sm"
         onclick={handleCancelReservation}
         disabled={loading}
       >
@@ -1057,7 +1056,7 @@
         disabled={!isValid}
       >
         {#if loading}
-          <span class="loading loading-spinner loading-sm"></span>
+          <span class="loading loading-sm loading-spinner"></span>
         {:else}
           <Check class="h-5 w-5" />
         {/if}

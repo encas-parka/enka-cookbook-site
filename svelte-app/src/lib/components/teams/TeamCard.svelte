@@ -56,7 +56,7 @@
 </script>
 
 <div
-  class="card bg-base-100 border-base-200 hover:border-primary/50 group cursor-pointer border text-left shadow-xl transition-all hover:shadow-2xl"
+  class="group card cursor-pointer border border-base-200 bg-base-100 text-left shadow-xl transition-all hover:border-primary/50 hover:shadow-2xl"
   role="button"
   tabindex="0"
   onclick={() => onClick(team.id)}
@@ -70,7 +70,7 @@
   <div class="card-body">
     <!-- Header avec nom et rôle -->
     <div class="mb-2 flex items-start justify-between">
-      <h3 class="card-title group-hover:text-primary text-lg transition-colors">
+      <h3 class="card-title text-lg transition-colors group-hover:text-primary">
         {team.name}
       </h3>
       <!-- {#if userRole}
@@ -85,13 +85,13 @@
 
     <!-- Description -->
     {#if description}
-      <p class="text-base-content/70 mb-2 line-clamp-2 text-sm">
+      <p class="mb-2 line-clamp-2 text-sm text-base-content/70">
         {description}
       </p>
     {/if}
 
     <!-- Stats -->
-    <div class="text-base-content/70 mt-2 flex items-center gap-4 text-sm">
+    <div class="mt-2 flex items-center gap-4 text-sm text-base-content/70">
       <div class="flex items-center gap-1">
         <Users class="h-4 w-4" />
         <span
@@ -101,7 +101,7 @@
         >
       </div>
       {#if userRole === "owner" && pendingInvitationsCount > 0}
-        <div class="badge badge-warning badge-sm gap-1">
+        <div class="badge gap-1 badge-sm badge-warning">
           {pendingInvitationsCount} invitation{pendingInvitationsCount > 1
             ? "s"
             : ""}
@@ -110,10 +110,10 @@
     </div>
 
     <!-- Actions -->
-    <div class="card-actions mt-4 justify-between">
+    <div class="mt-4 card-actions justify-between">
       {#if isUserMember && userRole !== "owner"}
         <button
-          class="btn btn-ghost btn-xs text-error"
+          class="btn btn-ghost text-error btn-xs"
           onclick={(e) => {
             e.stopPropagation();
             leaveTeam();
@@ -127,7 +127,7 @@
         <span></span>
       {/if}
       <span
-        class="text-primary flex items-center gap-1 text-xs font-semibold opacity-0 transition-opacity group-hover:opacity-100"
+        class="flex items-center gap-1 text-xs font-semibold text-primary opacity-0 transition-opacity group-hover:opacity-100"
       >
         Gérer
         <ChevronRight class="h-4 w-4" />

@@ -45,7 +45,10 @@ const T_RECENT = pbDate(new Date("2026-03-10T09:00:00.000Z"));
 
 /** Standard per-event fetch options — filter + scoped cursor key. */
 const eventFilter = (eventId: string) => ({
-  filter: ["eventId = {:eventId}", { eventId }] as [string, Record<string, unknown>],
+  filter: ["eventId = {:eventId}", { eventId }] as [
+    string,
+    Record<string, unknown>,
+  ],
   scopeKey: eventId,
 });
 
@@ -69,7 +72,11 @@ describe("pb-sync curseur scopé — scénario multi-événements", () => {
     // 2. Sync event 2 (récent) — pousse le max local à T_RECENT
     fakePb.putRecord(
       "products",
-      makeProductRecord({ id: "t13prod00000002", eventId: E2, updated: T_RECENT }),
+      makeProductRecord({
+        id: "t13prod00000002",
+        eventId: E2,
+        updated: T_RECENT,
+      }),
     );
     await products.initialFetch(eventFilter(E2));
 
@@ -89,7 +96,11 @@ describe("pb-sync curseur scopé — scénario multi-événements", () => {
     await products.initialFetch(eventFilter(E1));
 
     const ids = (await db.products.toArray()).map((p) => p.id).sort();
-    expect(ids).toEqual(["t13prod00000001", "t13prod00000002", "t13prod00000003"]);
+    expect(ids).toEqual([
+      "t13prod00000001",
+      "t13prod00000002",
+      "t13prod00000003",
+    ]);
   });
 
   it("première ouverture d'un event ancien après un event récent → ses records sont fetchés (pas de trou silencieux)", async () => {
@@ -97,7 +108,11 @@ describe("pb-sync curseur scopé — scénario multi-événements", () => {
 
     // Event récent d'abord
     fakePb.seed("products", [
-      makeProductRecord({ id: "t13prod00000002", eventId: E2, updated: T_RECENT }),
+      makeProductRecord({
+        id: "t13prod00000002",
+        eventId: E2,
+        updated: T_RECENT,
+      }),
     ]);
     await products.initialFetch(eventFilter(E2));
 
@@ -116,7 +131,11 @@ describe("pb-sync curseur scopé — scénario multi-événements", () => {
     const fakePb = currentFakePb();
     fakePb.seed("products", [
       makeProductRecord({ id: "t13prod00000001", eventId: E1, updated: T_OLD }),
-      makeProductRecord({ id: "t13prod00000004", eventId: E1, updated: T_OLD2 }),
+      makeProductRecord({
+        id: "t13prod00000004",
+        eventId: E1,
+        updated: T_OLD2,
+      }),
     ]);
     await products.initialFetch(eventFilter(E1));
     const before = await db.products.toArray();
@@ -189,7 +208,11 @@ describe("pb-sync curseur syncMeta — atomicité", () => {
     // Un autre scope écrit sa propre ligne — les curseurs sont indépendants
     fakePb.putRecord(
       "products",
-      makeProductRecord({ id: "t13prod00000002", eventId: E2, updated: T_RECENT }),
+      makeProductRecord({
+        id: "t13prod00000002",
+        eventId: E2,
+        updated: T_RECENT,
+      }),
     );
     await products.initialFetch(eventFilter(E2));
 
@@ -250,7 +273,9 @@ describe("pb-sync clearLocal — purge des curseurs scopés par préfixe", () =>
     await products.clearLocal();
 
     expect(await db.products.count()).toBe(0);
-    const keys = (await db.syncMeta.toArray()).map((m) => m.collectionId).sort();
+    const keys = (await db.syncMeta.toArray())
+      .map((m) => m.collectionId)
+      .sort();
     expect(keys).toEqual(["events", "materiel", "materiel:x"]);
   });
 
@@ -264,7 +289,9 @@ describe("pb-sync clearLocal — purge des curseurs scopés par préfixe", () =>
 
     await materiel.clearLocal();
 
-    const keys = (await db.syncMeta.toArray()).map((m) => m.collectionId).sort();
+    const keys = (await db.syncMeta.toArray())
+      .map((m) => m.collectionId)
+      .sort();
     expect(keys).toEqual(["materiel_loan:x"]);
   });
 });

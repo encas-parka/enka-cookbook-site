@@ -100,8 +100,8 @@ describe("ProductsStore — création produit & achat (write paths)", () => {
     await productsStore.softReset();
     await clearDexie();
 
-    vi.mocked(eventsStore.getEventById).mockImplementation(
-      (id: string) => (id === TEST_EVENT_ID ? makeEvent() : null),
+    vi.mocked(eventsStore.getEventById).mockImplementation((id: string) =>
+      id === TEST_EVENT_ID ? makeEvent() : null,
     );
   });
 
@@ -164,7 +164,9 @@ describe("ProductsStore — création produit & achat (write paths)", () => {
     });
     expect(all).toHaveLength(1);
     const mirrored = await db.products.toArray();
-    expect(mirrored.filter((p) => p.productName === "Huile d'olive")).toHaveLength(1);
+    expect(
+      mirrored.filter((p) => p.productName === "Huile d'olive"),
+    ).toHaveLength(1);
   });
 
   it("achat rapide sur un virtuel homonyme d'un produit réel → erreur typée, aucun achat créé", async () => {
@@ -173,7 +175,11 @@ describe("ProductsStore — création produit & achat (write paths)", () => {
     // heurterait l'unicité (event, nom) — l'achat doit échouer AVANT de créer
     // quoi que ce soit, avec le message métier.
     currentFakePb().seed("products", [
-      makeProductRecord({ id: "cannellesync001", ingredientRef: null, productName: "Cannelle" }),
+      makeProductRecord({
+        id: "cannellesync001",
+        ingredientRef: null,
+        productName: "Cannelle",
+      }),
     ]);
     await seedProductNeeds([VIRTUAL_NEED]);
 
@@ -192,7 +198,10 @@ describe("ProductsStore — création produit & achat (write paths)", () => {
     expect(caught).toBeInstanceOf(DuplicateProductNameError);
 
     // Rien n'a été créé : ni le produit à l'id virtuel, ni un achat
-    const virtualServer = await pb.collection("products").getOne(VIRTUAL_ID).catch(() => null);
+    const virtualServer = await pb
+      .collection("products")
+      .getOne(VIRTUAL_ID)
+      .catch(() => null);
     expect(virtualServer).toBeNull();
     const purchases = await pb.collection("purchases").getFullList();
     expect(purchases).toHaveLength(0);
@@ -253,10 +262,14 @@ describe("ProductsStore — création produit & achat (write paths)", () => {
     await productsStore.initialize(TEST_EVENT_ID);
     await waitForTick(5);
 
-    await productsStore.createPurchase(TEST_PRODUCT_ID, [{ q: 500, u: "gr." }], {
-      store: "Marché",
-      notes: "rapide",
-    });
+    await productsStore.createPurchase(
+      TEST_PRODUCT_ID,
+      [{ q: 500, u: "gr." }],
+      {
+        store: "Marché",
+        notes: "rapide",
+      },
+    );
     await waitForTick(5);
 
     const purchases = await pb.collection("purchases").getFullList();
@@ -402,8 +415,8 @@ describe("ProductsStore — création produit & achat (write paths)", () => {
         },
       ],
     });
-    vi.mocked(eventsStore.getEventById).mockImplementation(
-      (id: string) => (id === TEST_EVENT_ID ? event : null),
+    vi.mocked(eventsStore.getEventById).mockImplementation((id: string) =>
+      id === TEST_EVENT_ID ? event : null,
     );
 
     // Produit synchronisé "Eau" (id PB remappé ≠ id sémantique) + son achat.
@@ -423,9 +436,7 @@ describe("ProductsStore — création produit & achat (write paths)", () => {
 
     // Le besoin sans produit correspondant garde l'id sémantique (virtuel),
     // désormais au format complet : slug entier + eventId entier
-    expect(byName.get("Cannelle")?.id).toBe(
-      `cannelle_${TEST_EVENT_ID}`,
-    );
+    expect(byName.get("Cannelle")?.id).toBe(`cannelle_${TEST_EVENT_ID}`);
 
     await waitForTick(5);
     const eau = productsStore.getEnrichedProductById(TEST_PRODUCT_ID);
@@ -477,8 +488,8 @@ describe("ProductsStore — création produit & achat (write paths)", () => {
         },
       ],
     });
-    vi.mocked(eventsStore.getEventById).mockImplementation(
-      (id: string) => (id === TEST_EVENT_ID ? event : null),
+    vi.mocked(eventsStore.getEventById).mockImplementation((id: string) =>
+      id === TEST_EVENT_ID ? event : null,
     );
 
     currentFakePb().seed("products", [

@@ -78,7 +78,7 @@
                   {@const recipeId = recipe.id}
                   {@const mealDate = recipe.dateTimeService || "undated"}
                   <button
-                    class="text-primary link link-hover text-base text-wrap"
+                    class="link text-base text-wrap text-primary link-hover"
                     onclick={async () => {
                       const eventId = modalState.product?.mainId;
                       if (!eventId) return;
@@ -93,7 +93,7 @@
                     }}>{recipe.r}</button
                   >
                 {:else}
-                  <span class="text-primary text-base text-wrap"
+                  <span class="text-base text-wrap text-primary"
                     >{recipe.r}</span
                   >
                 {/if}
@@ -122,11 +122,11 @@
               <!-- Couverts + quantités -->
               <div class="ms-auto flex flex-wrap items-center gap-4">
                 {#if recipe.sourceProductName}
-                  <span class="badge badge-soft badge-warning badge-sm gap-1">
+                  <span class="badge gap-1 badge-soft badge-sm badge-warning">
                     {recipe.sourceProductName}
                   </span>
                 {/if}
-                <span class="badge badge-soft gap-1">
+                <span class="badge gap-1 badge-soft">
                   <Utensils class=" me-1 h-3 w-3 stroke-2" />
                   {recipe.a || 0} c.
                 </span>

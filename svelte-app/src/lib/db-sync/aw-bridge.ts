@@ -9,20 +9,20 @@
  * @module aw-sync/bridge
  */
 
-import { liveQuery } from 'dexie';
-import type { Subscription } from 'dexie';
-import { SvelteMap } from 'svelte/reactivity';
-import type { PbDoc } from './aw-types';
+import { liveQuery } from "dexie";
+import type { Subscription } from "dexie";
+import { SvelteMap } from "svelte/reactivity";
+import type { PbDoc } from "./aw-types";
 
 /**
  * Result of bridging a liveQuery to a SvelteMap.
  * Call `subscription.unsubscribe()` on teardown.
  */
 export interface BridgeResult<T extends PbDoc> {
-	/** Reactive SvelteMap keyed by id, kept in sync with Dexie */
-	map: SvelteMap<string, T>;
-	/** Dexie subscription — call .unsubscribe() to stop updates */
-	subscription: Subscription;
+  /** Reactive SvelteMap keyed by id, kept in sync with Dexie */
+  map: SvelteMap<string, T>;
+  /** Dexie subscription — call .unsubscribe() to stop updates */
+  subscription: Subscription;
 }
 
 /**
@@ -49,35 +49,35 @@ export interface BridgeResult<T extends PbDoc> {
  * ```
  */
 export function bridgeToMap<T extends PbDoc>(
-	queryFn: () => T[] | Promise<T[]>
+  queryFn: () => T[] | Promise<T[]>,
 ): BridgeResult<T> {
-	const map = new SvelteMap<string, T>();
+  const map = new SvelteMap<string, T>();
 
-	const subscription = liveQuery(queryFn).subscribe({
-		next: (items) => {
-			const currentIds = new Set(map.keys());
+  const subscription = liveQuery(queryFn).subscribe({
+    next: (items) => {
+      const currentIds = new Set(map.keys());
 
-			for (const item of items) {
-				currentIds.delete(item.id);
+      for (const item of items) {
+        currentIds.delete(item.id);
 
-				const existing = map.get(item.id);
-				// Fast comparison via updated — avoids JSON.stringify overhead
-				if (!existing || existing.updated !== item.updated) {
-					map.set(item.id, item);
-				}
-			}
+        const existing = map.get(item.id);
+        // Fast comparison via updated — avoids JSON.stringify overhead
+        if (!existing || existing.updated !== item.updated) {
+          map.set(item.id, item);
+        }
+      }
 
-			// Remove entries that no longer exist in Dexie
-			for (const id of currentIds) {
-				map.delete(id);
-			}
-		},
-		error: (err) => {
-			console.error('[aw-bridge] liveQuery error:', err);
-		}
-	});
+      // Remove entries that no longer exist in Dexie
+      for (const id of currentIds) {
+        map.delete(id);
+      }
+    },
+    error: (err) => {
+      console.error("[aw-bridge] liveQuery error:", err);
+    },
+  });
 
-	return { map, subscription };
+  return { map, subscription };
 }
 
 /**
@@ -96,8 +96,8 @@ export function bridgeToMap<T extends PbDoc>(
  * ```
  */
 export function bridgeToMapFiltered<T extends PbDoc>(
-	table: import('dexie').Table<T>,
-	filterFn: (table: import('dexie').Table<T>) => T[] | Promise<T[]>
+  table: import("dexie").Table<T>,
+  filterFn: (table: import("dexie").Table<T>) => T[] | Promise<T[]>,
 ): BridgeResult<T> {
-	return bridgeToMap(() => filterFn(table));
+  return bridgeToMap(() => filterFn(table));
 }

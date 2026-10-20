@@ -43,19 +43,24 @@ onRecordDelete(function (e) {
     "",
     999,
     0,
-    { teamId: teamId }
+    { teamId: teamId },
   );
   var materielCount = materielRecords.length;
   for (var i = 0; i < materielCount; i++) {
     $app.delete(materielRecords[i]);
   }
   totalDeleted += materielCount;
-  $app.logger().info(
-    "Cascade delete team: materiel supprimes",
-    "teamId", teamId,
-    "teamName", teamName,
-    "count", String(materielCount)
-  );
+  $app
+    .logger()
+    .info(
+      "Cascade delete team: materiel supprimes",
+      "teamId",
+      teamId,
+      "teamName",
+      teamName,
+      "count",
+      String(materielCount),
+    );
 
   // --- 2. Supprimer les teamdocs de la team ---
   var teamdocsRecords = $app.findRecordsByFilter(
@@ -64,19 +69,24 @@ onRecordDelete(function (e) {
     "",
     999,
     0,
-    { teamId: teamId }
+    { teamId: teamId },
   );
   var teamdocsCount = teamdocsRecords.length;
   for (var j = 0; j < teamdocsCount; j++) {
     $app.delete(teamdocsRecords[j]);
   }
   totalDeleted += teamdocsCount;
-  $app.logger().info(
-    "Cascade delete team: teamdocs supprimes",
-    "teamId", teamId,
-    "teamName", teamName,
-    "count", String(teamdocsCount)
-  );
+  $app
+    .logger()
+    .info(
+      "Cascade delete team: teamdocs supprimes",
+      "teamId",
+      teamId,
+      "teamName",
+      teamName,
+      "count",
+      String(teamdocsCount),
+    );
 
   // --- 3. Supprimer les share_links de type "team" ciblant cette team ---
   var shareLinksRecords = $app.findRecordsByFilter(
@@ -85,19 +95,24 @@ onRecordDelete(function (e) {
     "",
     999,
     0,
-    { linkType: "team", targetId: teamId }
+    { linkType: "team", targetId: teamId },
   );
   var shareLinksCount = shareLinksRecords.length;
   for (var k = 0; k < shareLinksCount; k++) {
     $app.delete(shareLinksRecords[k]);
   }
   totalDeleted += shareLinksCount;
-  $app.logger().info(
-    "Cascade delete team: share_links supprimes",
-    "teamId", teamId,
-    "teamName", teamName,
-    "count", String(shareLinksCount)
-  );
+  $app
+    .logger()
+    .info(
+      "Cascade delete team: share_links supprimes",
+      "teamId",
+      teamId,
+      "teamName",
+      teamName,
+      "count",
+      String(shareLinksCount),
+    );
 
   // --- 4. Supprimer les materiel_loan dont la team est propriétaire ---
   // Decision : delete (pas de detach sur NULL) — un loan sans equipe
@@ -108,19 +123,24 @@ onRecordDelete(function (e) {
     "",
     999,
     0,
-    { teamId: teamId }
+    { teamId: teamId },
   );
   var loansCount = loansRecords.length;
   for (var m = 0; m < loansCount; m++) {
     $app.delete(loansRecords[m]);
   }
   totalDeleted += loansCount;
-  $app.logger().info(
-    "Cascade delete team: materiel_loan supprimes",
-    "teamId", teamId,
-    "teamName", teamName,
-    "count", String(loansCount)
-  );
+  $app
+    .logger()
+    .info(
+      "Cascade delete team: materiel_loan supprimes",
+      "teamId",
+      teamId,
+      "teamName",
+      teamName,
+      "count",
+      String(loansCount),
+    );
 
   // --- 5. Retirer l'id de la team des relations events.teams ---
   // events.teams est une relation multi (maxSelect 999) : record.get()
@@ -132,7 +152,7 @@ onRecordDelete(function (e) {
     "",
     999,
     0,
-    { teamId: teamId }
+    { teamId: teamId },
   );
   var eventsCount = eventsRecords.length;
   for (var n = 0; n < eventsCount; n++) {
@@ -150,21 +170,31 @@ onRecordDelete(function (e) {
     ev.set("teams", cleaned);
     $app.save(ev);
   }
-  $app.logger().info(
-    "Cascade delete team: events.teams nettoye",
-    "teamId", teamId,
-    "teamName", teamName,
-    "events", String(eventsCount)
-  );
+  $app
+    .logger()
+    .info(
+      "Cascade delete team: events.teams nettoye",
+      "teamId",
+      teamId,
+      "teamName",
+      teamName,
+      "events",
+      String(eventsCount),
+    );
 
   // Resume global
   if (totalDeleted > 0) {
-    $app.logger().info(
-      "Cascade delete team: total ressources supprimees",
-      "teamId", teamId,
-      "teamName", teamName,
-      "totalDeleted", String(totalDeleted)
-    );
+    $app
+      .logger()
+      .info(
+        "Cascade delete team: total ressources supprimees",
+        "teamId",
+        teamId,
+        "teamName",
+        teamName,
+        "totalDeleted",
+        String(totalDeleted),
+      );
   }
 
   e.next();

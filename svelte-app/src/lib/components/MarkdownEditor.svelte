@@ -110,7 +110,7 @@
   {/if}
 
   <div
-    class="bg-base-100 overflow-hidden rounded-lg border-2 transition-all {disabled
+    class="overflow-hidden rounded-lg border-2 bg-base-100 transition-all {disabled
       ? 'pointer-events-none opacity-60'
       : ''}"
     class:border-primary={isFocused && !disabled}
@@ -120,11 +120,11 @@
     <!-- Toolbar -->
     {#if editor}
       <div
-        class="border-base-200 bg-base-200 flex flex-wrap items-center gap-1 border-b p-1"
+        class="flex flex-wrap items-center gap-1 border-b border-base-200 bg-base-200 p-1"
       >
         <button
           type="button"
-          class="btn btn-ghost btn-square btn-sm"
+          class="btn btn-square btn-ghost btn-sm"
           class:btn-active={updateTrigger >= 0 && editor.isActive("bold")}
           onclick={() => editor!.chain().focus().toggleBold().run()}
           title="Gras"
@@ -133,17 +133,17 @@
         </button>
         <button
           type="button"
-          class="btn btn-ghost btn-square btn-sm"
+          class="btn btn-square btn-ghost btn-sm"
           class:btn-active={updateTrigger >= 0 && editor.isActive("italic")}
           onclick={() => editor!.chain().focus().toggleItalic().run()}
           title="Italique"
         >
           <Italic class="h-4 w-4" />
         </button>
-        <div class="divider divider-horizontal mx-0 h-6"></div>
+        <div class="divider mx-0 divider-horizontal h-6"></div>
         <button
           type="button"
-          class="btn btn-ghost btn-square btn-sm"
+          class="btn btn-square btn-ghost btn-sm"
           class:btn-active={updateTrigger >= 0 && editor.isActive("bulletList")}
           onclick={() => editor!.chain().focus().toggleBulletList().run()}
           title="Liste à puces"
@@ -152,7 +152,7 @@
         </button>
         <button
           type="button"
-          class="btn btn-ghost btn-square btn-sm"
+          class="btn btn-square btn-ghost btn-sm"
           class:btn-active={updateTrigger >= 0 &&
             editor.isActive("orderedList")}
           onclick={() => editor!.chain().focus().toggleOrderedList().run()}
@@ -160,10 +160,10 @@
         >
           <ListOrdered class="h-4 w-4" />
         </button>
-        <div class="divider divider-horizontal mx-0 h-6"></div>
+        <div class="divider mx-0 divider-horizontal h-6"></div>
         <button
           type="button"
-          class="btn btn-ghost btn-square btn-sm"
+          class="btn btn-square btn-ghost btn-sm"
           onclick={() => editor!.chain().focus().undo().run()}
           disabled={!(updateTrigger >= 0 && editor.can().undo())}
           title="Annuler"
@@ -172,7 +172,7 @@
         </button>
         <button
           type="button"
-          class="btn btn-ghost btn-square btn-sm"
+          class="btn btn-square btn-ghost btn-sm"
           onclick={() => editor!.chain().focus().redo().run()}
           disabled={!(updateTrigger >= 0 && editor.can().redo())}
           title="Rétablir"

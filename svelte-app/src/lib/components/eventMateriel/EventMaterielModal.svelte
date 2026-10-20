@@ -318,21 +318,21 @@
       <!-- Link/Reattach section (edit mode only) -->
       {#if isEdit && currentItem}
         {#if isAllocation}
-          <div class="bg-base-200 mt-4 rounded-lg p-3">
+          <div class="mt-4 rounded-lg bg-base-200 p-3">
             <div class="mb-2 flex items-center gap-2 text-sm">
-              <Link class="text-primary size-4" />
+              <Link class="size-4 text-primary" />
               <span class="text-base-content/70">Lié au besoin :</span>
               <span class="font-medium">{currentHeaderName ?? "Inconnu"}</span>
             </div>
             {#if reattachHeaders.length > 0}
               <div class="mt-2">
-                <p class="text-base-content/60 mb-1 text-xs">
+                <p class="mb-1 text-xs text-base-content/60">
                   <ArrowRight class="inline size-3" />
                   Rattacher à un autre besoin :
                 </p>
                 <div class="flex items-center gap-2">
                   <select
-                    class="select select-sm grow"
+                    class="select grow select-sm"
                     bind:value={reattachTargetId}
                   >
                     <option value="" disabled selected
@@ -355,15 +355,15 @@
                 </div>
               </div>
             {:else}
-              <p class="text-base-content/40 mt-1 text-xs">
+              <p class="mt-1 text-xs text-base-content/40">
                 Aucun autre besoin disponible pour le rattacher.
               </p>
             {/if}
           </div>
         {:else if !!currentItem?.loanId && availableHeaders.length > 0}
-          <div class="bg-base-200 mt-4 rounded-lg p-3">
+          <div class="mt-4 rounded-lg bg-base-200 p-3">
             <div class="mb-2 flex items-center gap-2 text-sm">
-              <Link class="text-base-content/50 size-4" />
+              <Link class="size-4 text-base-content/50" />
               <span class="text-base-content/70"
                 >Lier à un besoin existant :</span
               >
@@ -371,12 +371,12 @@
             <div class="flex max-h-32 flex-col gap-1 overflow-y-auto">
               {#each availableHeaders as header (header.id)}
                 <button
-                  class="btn btn-ghost btn-xs justify-start text-left"
+                  class="btn justify-start btn-ghost text-left btn-xs"
                   onclick={() => handleLinkToHeader(header.id)}
                 >
                   <Link class="size-3" />
                   {header.name}
-                  <span class="badge badge-ghost badge-xs ml-auto">
+                  <span class="ml-auto badge badge-ghost badge-xs">
                     x{header.quantity || 0}
                   </span>
                 </button>
@@ -387,7 +387,7 @@
       {/if}
 
       {#if error}
-        <div class="alert alert-error mt-4">
+        <div class="mt-4 alert alert-error">
           <span class="text-sm">{error}</span>
         </div>
       {/if}
@@ -398,7 +398,7 @@
     {#if isEdit && currentItem}
       <button
         type="button"
-        class="btn btn-ghost btn-sm text-error"
+        class="btn btn-ghost text-error btn-sm"
         onclick={() => (showDeleteConfirm = true)}
         disabled={submitting}
         title="Supprimer"
@@ -418,7 +418,7 @@
       disabled={submitting}
     >
       {#if submitting}
-        <span class="loading loading-spinner loading-xs"></span>
+        <span class="loading loading-xs loading-spinner"></span>
       {:else if isEdit}
         <Save class="size-4" />
       {:else}

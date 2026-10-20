@@ -66,7 +66,7 @@
           />
         </div>
 
-        <div class="card-actions mt-4 justify-end">
+        <div class="mt-4 card-actions justify-end">
           <button
             class="btn btn-ghost btn-sm"
             onclick={() => {

@@ -29,7 +29,7 @@
   <!-- Badge Température -->
   {#if temperature}
     {#if temperature === "Chaud"}
-      <span class="badge badge-lg badge-soft badge-warning">Servir Chaud</span>
+      <span class="badge badge-soft badge-lg badge-warning">Servir Chaud</span>
     {:else}
       <span class="badge badge-info">Servir Froid</span>
     {/if}
@@ -38,9 +38,9 @@
   <!-- Badge Cuisson -->
   {#if cuisson !== undefined}
     {#if hasCuisson}
-      <span class="badge badge-lg badge-soft badge-warning">Avec Cuisson</span>
+      <span class="badge badge-soft badge-lg badge-warning">Avec Cuisson</span>
     {:else}
-      <span class="badge badge-lg badge-soft badge-info">Sans Cuisson</span>
+      <span class="badge badge-soft badge-lg badge-info">Sans Cuisson</span>
     {/if}
   {/if}
 
@@ -53,6 +53,6 @@
 
   <!-- Badges Allergènes -->
   {#each allergens as allergen}
-    <span class="badge badge-error badge-soft">{allergen}</span>
+    <span class="badge badge-soft badge-error">{allergen}</span>
   {/each}
 </div>

@@ -62,9 +62,9 @@ describe("parseIngredients — double shape (natif PB + legacy)", () => {
   });
 
   it("accepte le legacy Appwrite string[] (chaque item est un JSON string)", () => {
-    expect(parseIngredients([JSON.stringify(NATIVE_INGREDIENT)] as any)).toEqual([
-      NATIVE_INGREDIENT,
-    ]);
+    expect(
+      parseIngredients([JSON.stringify(NATIVE_INGREDIENT)] as any),
+    ).toEqual([NATIVE_INGREDIENT]);
   });
 
   it("retourne [] pour null/undefined/champ string (sans lever)", () => {
@@ -94,7 +94,9 @@ describe("parseAstuces — double shape (natif PB + legacy)", () => {
   });
 
   it("fallback texte brut pour une string { non-JSON ou sans astuce", () => {
-    expect(parseAstuces(["{not json"] as any)).toEqual([{ astuce: "{not json" }]);
+    expect(parseAstuces(["{not json"] as any)).toEqual([
+      { astuce: "{not json" },
+    ]);
     expect(parseAstuces(['{"foo":"bar"}'] as any)).toEqual([
       { astuce: '{"foo":"bar"}' },
     ]);

@@ -80,7 +80,7 @@
     <h4 class="text-lg font-bold">
       <Funnel class="inline size-4 align-baseline" /> Filtres
     </h4>
-    <button class="btn btn-warning btn-sm" onclick={onReset} {disabled}>
+    <button class="btn btn-sm btn-warning" onclick={onReset} {disabled}>
       <FunnelX class="h-4 w-4" />
       Effacer
     </button>

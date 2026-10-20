@@ -25,8 +25,8 @@
  * @module db-sync/pb-realtime
  */
 
-import { pb } from './pb';
-import { statusBarStore } from '$lib/stores/StatusBarStore.svelte';
+import { pb } from "./pb";
+import { statusBarStore } from "$lib/stores/StatusBarStore.svelte";
 
 /**
  * Debounce de l'état « déconnecté ». Doit rester > au backoff interne du SDK
@@ -41,10 +41,10 @@ let pbConnectUnsub: (() => Promise<void>) | null = null;
 const reconnectListeners = new Set<() => void>();
 
 function clearDisconnectTimer(): void {
-	if (disconnectTimer !== null) {
-		clearTimeout(disconnectTimer);
-		disconnectTimer = null;
-	}
+  if (disconnectTimer !== null) {
+    clearTimeout(disconnectTimer);
+    disconnectTimer = null;
+  }
 }
 
 /**
@@ -60,42 +60,42 @@ function clearDisconnectTimer(): void {
  * couvre entre-temps.
  */
 async function initRealtimeSignals(): Promise<void> {
-	if (pbConnectUnsub) return;
+  if (pbConnectUnsub) return;
 
-	hasConnectedOnce = false;
+  hasConnectedOnce = false;
 
-	pb.realtime.onDisconnect = (activeSubscriptions: string[]) => {
-		// Débranchement propre (plus aucun abonné — ex. teardown logout) :
-		// ce n'est pas une panne, ne pas afficher « Connexion perdue ».
-		if (activeSubscriptions.length === 0) return;
-		clearDisconnectTimer();
-		disconnectTimer = setTimeout(() => {
-			disconnectTimer = null;
-			console.warn(
-				'[pb-realtime] SSE déconnecté de façon stable — serveur injoignable',
-			);
-			statusBarStore.setServerStatus('disconnected');
-		}, DISCONNECT_DEBOUNCE_MS);
-	};
+  pb.realtime.onDisconnect = (activeSubscriptions: string[]) => {
+    // Débranchement propre (plus aucun abonné — ex. teardown logout) :
+    // ce n'est pas une panne, ne pas afficher « Connexion perdue ».
+    if (activeSubscriptions.length === 0) return;
+    clearDisconnectTimer();
+    disconnectTimer = setTimeout(() => {
+      disconnectTimer = null;
+      console.warn(
+        "[pb-realtime] SSE déconnecté de façon stable — serveur injoignable",
+      );
+      statusBarStore.setServerStatus("disconnected");
+    }, DISCONNECT_DEBOUNCE_MS);
+  };
 
-	try {
-		pbConnectUnsub = await pb.realtime.subscribe('PB_CONNECT', () => {
-			// Reconnecté avant l'expiration du debounce : micro-coupure
-			// guérie, jamais affichée.
-			clearDisconnectTimer();
-			if (!hasConnectedOnce) {
-				hasConnectedOnce = true;
-				console.log('[pb-realtime] SSE connecté (première connexion)');
-				return;
-			}
-			console.log('[pb-realtime] SSE reconnecté — resync orchestrateur');
-			for (const listener of reconnectListeners) listener();
-		});
-	} catch (err) {
-		console.error('[pb-realtime] Abonnement PB_CONNECT échoué:', err);
-		pb.realtime.onDisconnect = undefined;
-		hasConnectedOnce = false;
-	}
+  try {
+    pbConnectUnsub = await pb.realtime.subscribe("PB_CONNECT", () => {
+      // Reconnecté avant l'expiration du debounce : micro-coupure
+      // guérie, jamais affichée.
+      clearDisconnectTimer();
+      if (!hasConnectedOnce) {
+        hasConnectedOnce = true;
+        console.log("[pb-realtime] SSE connecté (première connexion)");
+        return;
+      }
+      console.log("[pb-realtime] SSE reconnecté — resync orchestrateur");
+      for (const listener of reconnectListeners) listener();
+    });
+  } catch (err) {
+    console.error("[pb-realtime] Abonnement PB_CONNECT échoué:", err);
+    pb.realtime.onDisconnect = undefined;
+    hasConnectedOnce = false;
+  }
 }
 
 /**
@@ -103,8 +103,8 @@ async function initRealtimeSignals(): Promise<void> {
  * première). Retourne la fonction de désenregistrement.
  */
 function onRealtimeReconnect(listener: () => void): () => void {
-	reconnectListeners.add(listener);
-	return () => reconnectListeners.delete(listener);
+  reconnectListeners.add(listener);
+  return () => reconnectListeners.delete(listener);
 }
 
 /**
@@ -114,14 +114,14 @@ function onRealtimeReconnect(listener: () => void): () => void {
  * unsubscribe des stores) se produit sans abonné résiduel.
  */
 async function teardownRealtimeSignals(): Promise<void> {
-	clearDisconnectTimer();
-	if (pbConnectUnsub) {
-		await pbConnectUnsub();
-		pbConnectUnsub = null;
-	}
-	pb.realtime.onDisconnect = undefined;
-	hasConnectedOnce = false;
-	statusBarStore.setServerStatus(null);
+  clearDisconnectTimer();
+  if (pbConnectUnsub) {
+    await pbConnectUnsub();
+    pbConnectUnsub = null;
+  }
+  pb.realtime.onDisconnect = undefined;
+  hasConnectedOnce = false;
+  statusBarStore.setServerStatus(null);
 }
 
 export { initRealtimeSignals, onRealtimeReconnect, teardownRealtimeSignals };

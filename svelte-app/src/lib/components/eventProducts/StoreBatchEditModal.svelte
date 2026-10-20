@@ -254,7 +254,7 @@
       disabled={loading || !isFormValid}
     >
       {#if loading}
-        <span class="loading loading-spinner loading-sm"></span>
+        <span class="loading loading-sm loading-spinner"></span>
         En cours...
       {:else}
         <Check class="h-4 w-4" />

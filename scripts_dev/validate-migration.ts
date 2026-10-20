@@ -78,7 +78,13 @@ const MAP_FILE = join(import.meta.dir, "migration-map.json");
 const EXPORT_DIR = join(import.meta.dir, "appwrite-export");
 const VERDICTS_FILE = join(IMPORT_DIR, "expected-verdicts.json");
 const HUGO_RECIPE_DIR = join(import.meta.dir, "..", "content", "recipe");
-const INGREDIENTS_FILE = join(import.meta.dir, "..", "static", "data", "ingredients.json");
+const INGREDIENTS_FILE = join(
+  import.meta.dir,
+  "..",
+  "static",
+  "data",
+  "ingredients.json",
+);
 
 // Collections whose source timestamps 4-fix-timestamps restores — the same
 // list it fixes (ingredients/categories have no source dates, locks is not
@@ -99,7 +105,13 @@ const TIMESTAMP_SAMPLE_COLLECTIONS = [
   "recipes",
 ];
 const SAMPLES_PER_COLLECTION = 2;
-const RECIPE_INFO_FILE = join(import.meta.dir, "..", "static", "data", "recipe-info.json");
+const RECIPE_INFO_FILE = join(
+  import.meta.dir,
+  "..",
+  "static",
+  "data",
+  "recipe-info.json",
+);
 
 // --- Collections to validate (same order as import) ---
 // ingredients + categories are Hugo-catalog collections: no relation fields,
@@ -125,16 +137,37 @@ const COLLECTIONS = [
 const RELATION_FIELDS: Record<string, Record<string, "single" | "multi">> = {
   users: {},
   teams: { members: "multi" },
-  materiel: { teamId: "single", ownerUser: "single", storeIn: "single", shareableWith: "multi" },
+  materiel: {
+    teamId: "single",
+    ownerUser: "single",
+    storeIn: "single",
+    shareableWith: "multi",
+  },
   events: { createdBy: "single", teams: "multi", guestUsers: "multi" },
   products: { eventId: "single", updatedBy: "single", mergedInto: "single" },
   purchases: { eventId: "single", createdBy: "single", products: "multi" },
-  materiel_loan: { eventId: "single", createdBy: "single", responsibleId: "single", ownerId: "single", borrowerUser: "single" },
-  event_materiel: { eventId: "single", sourceMaterielId: "single", loanId: "single", createdBy: "single" },
+  materiel_loan: {
+    eventId: "single",
+    createdBy: "single",
+    responsibleId: "single",
+    ownerId: "single",
+    borrowerUser: "single",
+  },
+  event_materiel: {
+    eventId: "single",
+    sourceMaterielId: "single",
+    loanId: "single",
+    createdBy: "single",
+  },
   teamdocs: { teamId: "single", eventId: "single" },
   event_todos: { eventId: "single", assignedTo: "single" },
   share_links: { createdBy: "single" },
-  recipes: { createdBy: "single", permissionWrite: "multi", rootRecipeId: "single", teams: "multi" },
+  recipes: {
+    createdBy: "single",
+    permissionWrite: "multi",
+    rootRecipeId: "single",
+    teams: "multi",
+  },
 };
 
 // Text reference fields (stored as text, not relation)
@@ -167,11 +200,14 @@ function loadEnv(): Record<string, string> {
 }
 
 async function pbAuth(email: string, password: string): Promise<void> {
-  const res = await fetch(`${pbBaseUrl}/api/collections/_superusers/auth-with-password`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ identity: email, password }),
-  });
+  const res = await fetch(
+    `${pbBaseUrl}/api/collections/_superusers/auth-with-password`,
+    {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ identity: email, password }),
+    },
+  );
 
   if (!res.ok) {
     throw new Error(`PB auth failed (${res.status}): ${await res.text()}`);
@@ -202,9 +238,10 @@ async function pbListAllFetch(collection: string): Promise<any[]> {
   while (true) {
     const res = await fetch(
       `${pbBaseUrl}/api/collections/${collection}/records?page=${page}&perPage=${perPage}`,
-      { headers: { Authorization: pbToken } }
+      { headers: { Authorization: pbToken } },
     );
-    if (!res.ok) throw new Error(`PB list ${collection} failed: ${await res.text()}`);
+    if (!res.ok)
+      throw new Error(`PB list ${collection} failed: ${await res.text()}`);
     const data = await res.json();
     const items = data.items || [];
     all.push(...items);
@@ -218,9 +255,10 @@ async function pbListAllFetch(collection: string): Promise<any[]> {
 async function pbCount(collection: string): Promise<number> {
   const res = await fetch(
     `${pbBaseUrl}/api/collections/${collection}/records?perPage=1`,
-    { headers: { Authorization: pbToken } }
+    { headers: { Authorization: pbToken } },
   );
-  if (!res.ok) throw new Error(`PB count ${collection} failed: ${await res.text()}`);
+  if (!res.ok)
+    throw new Error(`PB count ${collection} failed: ${await res.text()}`);
   const data = await res.json();
   return data.totalItems || 0;
 }
@@ -238,7 +276,9 @@ function loadImportFile(collection: string): any[] {
 // assigned at import time, so id-map is THE way to resolve them.
 function loadIdMap(): Record<string, string> {
   const idMapFile = join(IMPORT_DIR, "id-map.json");
-  return existsSync(idMapFile) ? JSON.parse(readFileSync(idMapFile, "utf-8")) : {};
+  return existsSync(idMapFile)
+    ? JSON.parse(readFileSync(idMapFile, "utf-8"))
+    : {};
 }
 
 function loadMigrationMap(): any {
@@ -259,7 +299,9 @@ let unverdictedDeviations = 0;
 
 function loadVerdicts(): void {
   if (!existsSync(VERDICTS_FILE)) {
-    console.log("   ℹ️  no expected-verdicts.json — every deviation will be unverdicted");
+    console.log(
+      "   ℹ️  no expected-verdicts.json — every deviation will be unverdicted",
+    );
     return;
   }
   const parsed = JSON.parse(readFileSync(VERDICTS_FILE, "utf-8"));
@@ -267,7 +309,9 @@ function loadVerdicts(): void {
   console.log(`   ℹ️  ${verdicts.length} expected verdict(s) loaded`);
 }
 
-function consumeVerdict(match: (v: ExpectedVerdict) => boolean): ExpectedVerdict | null {
+function consumeVerdict(
+  match: (v: ExpectedVerdict) => boolean,
+): ExpectedVerdict | null {
   for (let i = 0; i < verdicts.length; i++) {
     if (!consumedVerdicts.has(i) && match(verdicts[i])) {
       consumedVerdicts.add(i);
@@ -280,7 +324,9 @@ function consumeVerdict(match: (v: ExpectedVerdict) => boolean): ExpectedVerdict
 // Same deviation observed by several checks (e.g. a verdicted count delta
 // also explains missing refId coverage): the first observer consumes the
 // verdict, the others just peek it.
-function peekVerdict(match: (v: ExpectedVerdict) => boolean): ExpectedVerdict | null {
+function peekVerdict(
+  match: (v: ExpectedVerdict) => boolean,
+): ExpectedVerdict | null {
   for (const v of verdicts) {
     if (match(v)) return v;
   }
@@ -299,11 +345,15 @@ function checkStaleVerdicts(): void {
   verdicts.forEach((v, i) => {
     if (consumedVerdicts.has(i)) return;
     if (v.type === "count-delta") {
-      stale.push(`count-delta ${v.collection} ${formatDelta(v.delta ?? 0)}${from(v)} — no such count deviation observed`);
+      stale.push(
+        `count-delta ${v.collection} ${formatDelta(v.delta ?? 0)}${from(v)} — no such count deviation observed`,
+      );
     } else if (v.type === "absent-recipe") {
       stale.push(`absent-recipe ${v.slug}${from(v)} — recipe is present in PB`);
     } else if (v.type === "recipe-convergence") {
-      stale.push(`recipe-convergence ${v.slug} [${(v.fields || []).join(", ")}]${from(v)} — no such divergence observed`);
+      stale.push(
+        `recipe-convergence ${v.slug} [${(v.fields || []).join(", ")}]${from(v)} — no such divergence observed`,
+      );
     } else {
       stale.push(`unknown verdict type "${v.type}"`);
     }
@@ -329,7 +379,12 @@ interface CheckResult {
 
 const results: CheckResult[] = [];
 
-function addResult(name: string, passed: boolean, details: string, errors: string[] = []) {
+function addResult(
+  name: string,
+  passed: boolean,
+  details: string,
+  errors: string[] = [],
+) {
   results.push({ name, passed, details, errors });
   const icon = passed ? "✅" : "❌";
   console.log(`   ${icon} ${name}: ${details}`);
@@ -389,14 +444,19 @@ function computeSourceCounts(): Record<string, number> {
     teamdocs: exportRows("teamdocs").length,
     // event_todos are extracted from events' embedded todos + standalone rows
     event_todos:
-      events.reduce((sum: number, e: any) => sum + countParseableTodos(e.todos), 0) +
-      exportRows("event_todos").length,
+      events.reduce(
+        (sum: number, e: any) => sum + countParseableTodos(e.todos),
+        0,
+      ) + exportRows("event_todos").length,
     share_links: exportRows("share_links").length,
     // recipes come from the Hugo content (2b), not from the Appwrite export
-    recipes: readdirSync(HUGO_RECIPE_DIR, { withFileTypes: true }).filter((d) => d.isDirectory()).length,
+    recipes: readdirSync(HUGO_RECIPE_DIR, { withFileTypes: true }).filter((d) =>
+      d.isDirectory(),
+    ).length,
     ingredients: JSON.parse(readFileSync(INGREDIENTS_FILE, "utf-8")).length,
     // regimes are intentionally not migrated (catalog transform)
-    categories: (recipeInfo.materiel?.length || 0) + (recipeInfo.categories?.length || 0),
+    categories:
+      (recipeInfo.materiel?.length || 0) + (recipeInfo.categories?.length || 0),
   };
 }
 
@@ -417,10 +477,17 @@ async function checkCountsAgainstSources(): Promise<void> {
     }
 
     const verdict = consumeVerdict(
-      (v) => v.type === "count-delta" && v.collection === collection && v.delta === delta
+      (v) =>
+        v.type === "count-delta" &&
+        v.collection === collection &&
+        v.delta === delta,
     );
     if (verdict) {
-      addResult(`counts.${collection}`, true, `${details} — verdict: ${verdict.category}`);
+      addResult(
+        `counts.${collection}`,
+        true,
+        `${details} — verdict: ${verdict.category}`,
+      );
       continue;
     }
 
@@ -446,7 +513,10 @@ async function sampleMissingRecords(collection: string): Promise<string[]> {
   });
   return missing
     .slice(0, 5)
-    .map((r: any) => `${collection}: missing "${r.name || r.task || r.title || r._refId || r.id}"`);
+    .map(
+      (r: any) =>
+        `${collection}: missing "${r.name || r.task || r.title || r._refId || r.id}"`,
+    );
 }
 
 async function checkRelationIntegrity(): Promise<void> {
@@ -481,10 +551,14 @@ async function checkRelationIntegrity(): Promise<void> {
           totalRelations++;
           // Determine target collection from field name heuristics
           const targetCollection = inferTargetCollection(field, collection);
-          if (targetCollection && pbIdSets[targetCollection] && !pbIdSets[targetCollection].has(value)) {
+          if (
+            targetCollection &&
+            pbIdSets[targetCollection] &&
+            !pbIdSets[targetCollection].has(value)
+          ) {
             brokenRelations++;
             errorsByCollection[collection].push(
-              `${collection}/${record.id}.${field}="${value}" → not found in ${targetCollection}`
+              `${collection}/${record.id}.${field}="${value}" → not found in ${targetCollection}`,
             );
           }
         } else if (type === "multi") {
@@ -492,10 +566,14 @@ async function checkRelationIntegrity(): Promise<void> {
           for (const id of ids) {
             totalRelations++;
             const targetCollection = inferTargetCollection(field, collection);
-            if (targetCollection && pbIdSets[targetCollection] && !pbIdSets[targetCollection].has(id)) {
+            if (
+              targetCollection &&
+              pbIdSets[targetCollection] &&
+              !pbIdSets[targetCollection].has(id)
+            ) {
               brokenRelations++;
               errorsByCollection[collection].push(
-                `${collection}/${record.id}.${field}[].${id} → not found in ${targetCollection}`
+                `${collection}/${record.id}.${field}[].${id} → not found in ${targetCollection}`,
               );
             }
           }
@@ -505,15 +583,27 @@ async function checkRelationIntegrity(): Promise<void> {
 
     const collErrors = errorsByCollection[collection];
     if (collErrors.length === 0) {
-      addResult(`relations.${collection}`, true, `${totalRelations} relations checked, all valid`);
+      addResult(
+        `relations.${collection}`,
+        true,
+        `${totalRelations} relations checked, all valid`,
+      );
     } else {
-      addResult(`relations.${collection}`, false, `${collErrors.length} broken relations out of ${totalRelations}`, collErrors);
+      addResult(
+        `relations.${collection}`,
+        false,
+        `${collErrors.length} broken relations out of ${totalRelations}`,
+        collErrors,
+      );
     }
     totalRelations = 0;
   }
 }
 
-function inferTargetCollection(field: string, sourceCollection: string): string | null {
+function inferTargetCollection(
+  field: string,
+  sourceCollection: string,
+): string | null {
   // Direct field → collection mapping
   const fieldToCollection: Record<string, string> = {
     eventId: "events",
@@ -544,15 +634,34 @@ function inferTargetCollection(field: string, sourceCollection: string): string 
 
 // Fields whose population in pb-import/recipes.json must hold in PB too —
 // guards against the import-time nullification of relations and empty timestamps
-const RECIPE_POPULATION_FIELDS: { field: string; populated: (r: any) => boolean }[] = [
-  { field: "created", populated: (r) => typeof r.created === "string" && r.created !== "" },
-  { field: "createdBy", populated: (r) => typeof r.createdBy === "string" && r.createdBy !== "" },
-  { field: "permissionWrite", populated: (r) => Array.isArray(r.permissionWrite) && r.permissionWrite.length > 0 },
-  { field: "rootRecipeId", populated: (r) => typeof r.rootRecipeId === "string" && r.rootRecipeId !== "" },
+const RECIPE_POPULATION_FIELDS: {
+  field: string;
+  populated: (r: any) => boolean;
+}[] = [
+  {
+    field: "created",
+    populated: (r) => typeof r.created === "string" && r.created !== "",
+  },
+  {
+    field: "createdBy",
+    populated: (r) => typeof r.createdBy === "string" && r.createdBy !== "",
+  },
+  {
+    field: "permissionWrite",
+    populated: (r) =>
+      Array.isArray(r.permissionWrite) && r.permissionWrite.length > 0,
+  },
+  {
+    field: "rootRecipeId",
+    populated: (r) =>
+      typeof r.rootRecipeId === "string" && r.rootRecipeId !== "",
+  },
 ];
 
 async function checkRecipeFieldPopulation(): Promise<void> {
-  console.log("\n🥗 Check 6: Recipe field population (import nullification regression)\n");
+  console.log(
+    "\n🥗 Check 6: Recipe field population (import nullification regression)\n",
+  );
 
   const importRecords = loadImportFile("recipes");
   const pbRecords = await pbListAll("recipes");
@@ -562,21 +671,34 @@ async function checkRecipeFieldPopulation(): Promise<void> {
   const details: string[] = [];
 
   for (const { field, populated } of RECIPE_POPULATION_FIELDS) {
-    const expectedIds = importRecords.filter((r) => populated(r)).map((r) => r.id);
+    const expectedIds = importRecords
+      .filter((r) => populated(r))
+      .map((r) => r.id);
     const missing = expectedIds.filter((id) => {
       const pb = pbById.get(id);
       return !pb || !populated(pb);
     });
-    details.push(`${field}: ${expectedIds.length - missing.length}/${expectedIds.length}`);
+    details.push(
+      `${field}: ${expectedIds.length - missing.length}/${expectedIds.length}`,
+    );
     for (const id of missing.slice(0, 5)) {
-      errors.push(`recipes/${id}.${field} populated in pb-import but empty or missing in PB`);
+      errors.push(
+        `recipes/${id}.${field} populated in pb-import but empty or missing in PB`,
+      );
     }
     if (missing.length > 5) {
-      errors.push(`... and ${missing.length - 5} more recipes with empty ${field}`);
+      errors.push(
+        `... and ${missing.length - 5} more recipes with empty ${field}`,
+      );
     }
   }
 
-  addResult("recipes.fieldPopulation", errors.length === 0, details.join(" · "), errors);
+  addResult(
+    "recipes.fieldPopulation",
+    errors.length === 0,
+    details.join(" · "),
+    errors,
+  );
 }
 
 async function checkGuestEmails(): Promise<void> {
@@ -626,10 +748,14 @@ async function checkGuestEmails(): Promise<void> {
       passed++;
     } else {
       if (missing.length > 0) {
-        errors.push(`Event "${impEvent.name}": missing ${missing.length} emails: ${missing.slice(0, 3).join(", ")}`);
+        errors.push(
+          `Event "${impEvent.name}": missing ${missing.length} emails: ${missing.slice(0, 3).join(", ")}`,
+        );
       }
       if (extra.length > 0) {
-        errors.push(`Event "${impEvent.name}": ${extra.length} unexpected emails: ${extra.slice(0, 3).join(", ")}`);
+        errors.push(
+          `Event "${impEvent.name}": ${extra.length} unexpected emails: ${extra.slice(0, 3).join(", ")}`,
+        );
       }
     }
   }
@@ -638,7 +764,7 @@ async function checkGuestEmails(): Promise<void> {
     "guestEmails",
     errors.length === 0,
     `${passed}/${checked} events have correct guestEmails`,
-    errors
+    errors,
   );
 }
 
@@ -664,28 +790,36 @@ async function checkRefIdCoverage(): Promise<void> {
     if (collection === "users") {
       // Users: match by email (refId → mapSection[email] → PB user email)
       const pbEmails = new Set(pbRecords.map((r: any) => r.email));
-      for (const [appwriteId, userData] of Object.entries(mapSection as Record<string, any>)) {
+      for (const [appwriteId, userData] of Object.entries(
+        mapSection as Record<string, any>,
+      )) {
         if (pbEmails.has(userData.email)) found++;
         else missing.push(`${userData.refId} (email: ${userData.email})`);
       }
     } else if (collection === "events") {
       // Events: match by name (refId → mapSection[name] → PB event name)
       const pbNames = new Set(pbRecords.map((r: any) => r.name));
-      for (const [appwriteId, eventData] of Object.entries(mapSection as Record<string, any>)) {
+      for (const [appwriteId, eventData] of Object.entries(
+        mapSection as Record<string, any>,
+      )) {
         if (pbNames.has(eventData.name)) found++;
         else missing.push(`${eventData.refId} (name: ${eventData.name})`);
       }
     } else if (collection === "recipes") {
       // Recipes: keep Appwrite ID as PB ID (check appwriteId directly in PB IDs)
       const pbIds = new Set(pbRecords.map((r: any) => r.id));
-      for (const [appwriteId, recipeData] of Object.entries(mapSection as Record<string, any>)) {
+      for (const [appwriteId, recipeData] of Object.entries(
+        mapSection as Record<string, any>,
+      )) {
         if (pbIds.has(appwriteId)) found++;
         else missing.push(`${recipeData.refId} (id: ${appwriteId})`);
       }
     } else {
       // Generic: match by position (same order as import → same order as PB creation)
       const countMatch = pbRecords.length === importRecords.length;
-      found = countMatch ? total : Math.min(pbRecords.length, importRecords.length);
+      found = countMatch
+        ? total
+        : Math.min(pbRecords.length, importRecords.length);
       if (!countMatch) {
         missing.push(`PB=${pbRecords.length}, Import=${importRecords.length}`);
       }
@@ -698,15 +832,27 @@ async function checkRefIdCoverage(): Promise<void> {
       // A verdicted count deviation also covers the map entries that have no
       // PB record — same absence, observed from the counts side.
       const verdict = peekVerdict(
-        (v) => v.type === "count-delta" && v.collection === collection && v.delta === found - total
+        (v) =>
+          v.type === "count-delta" &&
+          v.collection === collection &&
+          v.delta === found - total,
       );
       if (verdict) {
-        addResult(`refId.${collection}`, true, `${details} — verdict: ${verdict.category}`);
+        addResult(
+          `refId.${collection}`,
+          true,
+          `${details} — verdict: ${verdict.category}`,
+        );
         continue;
       }
     }
 
-    addResult(`refId.${collection}`, passed, details, passed ? [] : missing.slice(0, 5).map(r => `refId "${r}" not found`));
+    addResult(
+      `refId.${collection}`,
+      passed,
+      details,
+      passed ? [] : missing.slice(0, 5).map((r) => `refId "${r}" not found`),
+    );
   }
 }
 
@@ -730,7 +876,9 @@ async function checkTextReferences(): Promise<void> {
           const events = await pbListAll("events");
           const eventIds = new Set(events.map((e: any) => e.id));
           if (!eventIds.has(value)) {
-            errors.push(`${collection}/${record.id}.${field}="${value}" → not a valid event ID`);
+            errors.push(
+              `${collection}/${record.id}.${field}="${value}" → not a valid event ID`,
+            );
           }
         }
       }
@@ -739,7 +887,7 @@ async function checkTextReferences(): Promise<void> {
         `textRef.${collection}.${field}`,
         errors.length === 0,
         `${checked} text refs checked${errors.length > 0 ? `, ${errors.length} broken` : ""}`,
-        errors
+        errors,
       );
     }
   }
@@ -750,7 +898,9 @@ async function checkTextReferences(): Promise<void> {
 // live in recipe-convergence.ts — shared with the 2b emission side.
 
 async function checkRecipeConvergence(): Promise<void> {
-  console.log("\n🥘 Check 7: Recipe convergence (Appwrite export vs PB/Hugo)\n");
+  console.log(
+    "\n🥘 Check 7: Recipe convergence (Appwrite export vs PB/Hugo)\n",
+  );
 
   const awRecipes = exportRows("recipes");
   const pbRecipes = await pbListAll("recipes");
@@ -783,7 +933,7 @@ async function checkRecipeConvergence(): Promise<void> {
       (v) =>
         v.type === "recipe-convergence" &&
         v.slug === slug &&
-        divergentFields.every((f) => (v.fields || []).includes(f))
+        divergentFields.every((f) => (v.fields || []).includes(f)),
     );
     if (verdict) {
       verdictedDivergences++;
@@ -798,16 +948,24 @@ async function checkRecipeConvergence(): Promise<void> {
         `convergence.${slug}`,
         false,
         `content divergence [${divergentFields.join(", ")}]${hasDateDrift ? " + updatedAt (day)" : ""}`,
-        [`recipes/${slug}: diverges on ${divergentFields.join(", ")} — no verdict covers it`],
+        [
+          `recipes/${slug}: diverges on ${divergentFields.join(", ")} — no verdict covers it`,
+        ],
       );
     }
   }
 
   // Inventory of the Appwrite recipes absent from PB (Hugo is the recipe source).
   for (const slug of absentSlugs) {
-    const verdict = consumeVerdict((v) => v.type === "absent-recipe" && v.slug === slug);
+    const verdict = consumeVerdict(
+      (v) => v.type === "absent-recipe" && v.slug === slug,
+    );
     if (verdict) {
-      addResult(`absentRecipe.${slug}`, true, `absent from PB — verdict: ${verdict.category}`);
+      addResult(
+        `absentRecipe.${slug}`,
+        true,
+        `absent from PB — verdict: ${verdict.category}`,
+      );
     } else {
       unverdictedDeviations++;
       addResult(
@@ -832,7 +990,9 @@ async function checkStructuralInvariants(): Promise<void> {
 
   const teams = await pbListAll("teams");
   const nullRoles = teams.filter((t: any) => t.roles == null);
-  const emptyRoles = teams.filter((t: any) => t.roles != null && Object.keys(t.roles).length === 0);
+  const emptyRoles = teams.filter(
+    (t: any) => t.roles != null && Object.keys(t.roles).length === 0,
+  );
   addResult(
     "structural.teams.roles",
     nullRoles.length === 0,
@@ -848,7 +1008,12 @@ async function checkStructuralInvariants(): Promise<void> {
     "structural.materiel.ownershipEmpty",
     withOwner.length === 0,
     `${materiel.length - withOwner.length}/${materiel.length} materiel without owner`,
-    withOwner.slice(0, 5).map((m: any) => `materiel/${m.id} "${m.name}": createdBy="${m.createdBy || ""}" ownerUser="${m.ownerUser || ""}"`),
+    withOwner
+      .slice(0, 5)
+      .map(
+        (m: any) =>
+          `materiel/${m.id} "${m.name}": createdBy="${m.createdBy || ""}" ownerUser="${m.ownerUser || ""}"`,
+      ),
   );
 }
 
@@ -887,7 +1052,8 @@ async function checkTeamdocsOverLimit(): Promise<void> {
   const pbIds = new Set(pbDocs.map((d: any) => d.id));
 
   const max = await fetchTeamdocsContentMax();
-  const maxLabel = max == null ? "unknown (collection schema unreadable)" : `${max} chars`;
+  const maxLabel =
+    max == null ? "unknown (collection schema unreadable)" : `${max} chars`;
 
   // id-map only holds successfully imported records — a record the import
   // rejected has no entry there, so "emitted by the transform" is decided on
@@ -896,7 +1062,8 @@ async function checkTeamdocsOverLimit(): Promise<void> {
   const emittedAppwriteIds = new Set<string>();
   for (const d of importDocs) {
     if (d._appwriteId) emittedAppwriteIds.add(d._appwriteId);
-    else if (d._refId) emittedAppwriteIds.add(String(d._refId).replace(/^aw_/, ""));
+    else if (d._refId)
+      emittedAppwriteIds.add(String(d._refId).replace(/^aw_/, ""));
   }
 
   let present = 0;
@@ -912,11 +1079,17 @@ async function checkTeamdocsOverLimit(): Promise<void> {
 
     const len = (doc.content || "").length;
     if (!emittedAppwriteIds.has(appwriteId)) {
-      unexplained.push(`${appwriteId} (${len} chars) — not emitted by the transform`);
+      unexplained.push(
+        `${appwriteId} (${len} chars) — not emitted by the transform`,
+      );
     } else if (max != null && len > max) {
-      absentExplained.push(`${appwriteId} (${len} chars, over the ${maxLabel} limit)`);
+      absentExplained.push(
+        `${appwriteId} (${len} chars, over the ${maxLabel} limit)`,
+      );
     } else {
-      unexplained.push(`${appwriteId} (${len} chars) — emitted but rejected by the import for an unknown reason`);
+      unexplained.push(
+        `${appwriteId} (${len} chars) — emitted but rejected by the import for an unknown reason`,
+      );
     }
   }
 
@@ -950,13 +1123,14 @@ async function checkTimestampSample(): Promise<void> {
     for (const record of records) {
       if (taken >= SAMPLES_PER_COLLECTION) break;
 
-      const pbId = collection === "recipes" && record.id
-        ? record.id
-        : record._refId
-          ? idMap[record._refId]
-          : record._appwriteId
-            ? idMap[`aw_${record._appwriteId}`]
-            : undefined;
+      const pbId =
+        collection === "recipes" && record.id
+          ? record.id
+          : record._refId
+            ? idMap[record._refId]
+            : record._appwriteId
+              ? idMap[`aw_${record._appwriteId}`]
+              : undefined;
       if (!pbId) {
         skipped++;
         continue;
@@ -985,7 +1159,10 @@ async function checkTimestampSample(): Promise<void> {
       sampled++;
       taken++;
 
-      for (const [field, expected] of [["created", created], ["updated", updated]] as const) {
+      for (const [field, expected] of [
+        ["created", created],
+        ["updated", updated],
+      ] as const) {
         const expectedMs = toEpochMs(expected);
         const gotMs = toEpochMs(got[field] ?? "");
         if (expectedMs !== gotMs) {
@@ -1014,13 +1191,19 @@ async function main() {
   // Load env — PB_URL_OVERRIDE retargets the instance under validation
   // (throwaway harness), same convention as 3-import-pb.ts / 4-fix-timestamps.ts
   const env = loadEnv();
-  pbBaseUrl = (process.env.PB_URL_OVERRIDE || env.PB_URL || "http://127.0.0.1:8090").replace(/\/+$/, "");
+  pbBaseUrl = (
+    process.env.PB_URL_OVERRIDE ||
+    env.PB_URL ||
+    "http://127.0.0.1:8090"
+  ).replace(/\/+$/, "");
   console.log(`   🎯 Target: ${pbBaseUrl}`);
   const adminEmail = env.PB_ADMIN_EMAIL;
   const adminPassword = env.PB_ADMIN_PASSWORD;
 
   if (!adminEmail || !adminPassword) {
-    console.error("❌ Missing PB_ADMIN_EMAIL or PB_ADMIN_PASSWORD in .env.local");
+    console.error(
+      "❌ Missing PB_ADMIN_EMAIL or PB_ADMIN_PASSWORD in .env.local",
+    );
     process.exit(1);
   }
 
@@ -1076,14 +1259,18 @@ async function main() {
 
   console.log(`\n   Total: ${passed}/${total} checks passed`);
   console.log(
-    `   Non-verdicted deviations: ${unverdictedDeviations}${unverdictedDeviations > 0 ? " (must be 0 — cover them in pb-import/expected-verdicts.json)" : ""}`
+    `   Non-verdicted deviations: ${unverdictedDeviations}${unverdictedDeviations > 0 ? " (must be 0 — cover them in pb-import/expected-verdicts.json)" : ""}`,
   );
 
   if (failed > 0 || unverdictedDeviations > 0) {
-    console.log(`\n   ⚠️  ${failed} checks failed, ${unverdictedDeviations} deviation(s) without verdict. Review errors above.`);
+    console.log(
+      `\n   ⚠️  ${failed} checks failed, ${unverdictedDeviations} deviation(s) without verdict. Review errors above.`,
+    );
     process.exit(1);
   } else {
-    console.log(`\n   🎉 All checks passed (or verdicted). Migration is valid.`);
+    console.log(
+      `\n   🎉 All checks passed (or verdicted). Migration is valid.`,
+    );
   }
 }
 

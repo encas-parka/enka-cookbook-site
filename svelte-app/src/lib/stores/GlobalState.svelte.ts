@@ -14,7 +14,12 @@ import { teamdocsStore } from "./TeamdocsStore.svelte";
 import { productsStore } from "./ProductsStore.svelte";
 import { eventMaterielStore } from "./EventMaterielStore.svelte";
 import { recipesStore } from "./RecipesStore.svelte";
-import { db, pb, initRealtimeSignals, teardownRealtimeSignals } from "$lib/db-sync/pb-sync";
+import {
+  db,
+  pb,
+  initRealtimeSignals,
+  teardownRealtimeSignals,
+} from "$lib/db-sync/pb-sync";
 import { route } from "$lib/router";
 
 /**
@@ -186,7 +191,6 @@ class GlobalState {
         materielStore.syncInitial(),
         teamdocsStore.syncInitial(),
         recipesStore.syncInitial(),
-
       ]);
 
       // Phase 2: Setup realtime pour TOUS les stores
@@ -231,19 +235,26 @@ class GlobalState {
     const topic = `user_${userId}`;
 
     try {
-      this.#userRealtimeUnsub = await pb.realtime.subscribe(topic, async (e) => {
-        const data = typeof e === "string" ? JSON.parse(e) : e;
-        const action = data?.action || data?.record?.action;
+      this.#userRealtimeUnsub = await pb.realtime.subscribe(
+        topic,
+        async (e) => {
+          const data = typeof e === "string" ? JSON.parse(e) : e;
+          const action = data?.action || data?.record?.action;
 
-        if (action === "team_joined" || action === "team_left" || action === "team_updated") {
-          console.log(
-            `[GlobalState] Realtime custom: ${action} — team ${data.teamName || data.teamId}`,
-          );
-          // Re-sync EventsStore : les API rules PB filtrent dynamiquement
-          // les evenements visibles pour cet utilisateur
-          await eventsStore.forceRefresh();
-        }
-      });
+          if (
+            action === "team_joined" ||
+            action === "team_left" ||
+            action === "team_updated"
+          ) {
+            console.log(
+              `[GlobalState] Realtime custom: ${action} — team ${data.teamName || data.teamId}`,
+            );
+            // Re-sync EventsStore : les API rules PB filtrent dynamiquement
+            // les evenements visibles pour cet utilisateur
+            await eventsStore.forceRefresh();
+          }
+        },
+      );
 
       console.log(`[GlobalState] Abonne au topic custom: ${topic}`);
     } catch (err) {

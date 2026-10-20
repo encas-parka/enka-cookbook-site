@@ -256,10 +256,10 @@
 
     {#if loan}
       <!-- Info emprunt -->
-      <div class="card bg-base-100 max-sm:card-xs mb-6 shadow-sm">
+      <div class="card mb-6 bg-base-100 shadow-sm max-sm:card-xs">
         <div class="card-body">
           {#if isReadOnly && returnedAt}
-            <div class="alert alert-info max-md:alert-vertical mb-4">
+            <div class="mb-4 alert alert-info max-md:alert-vertical">
               <Package class="h-5 w-5" />
               <div>
                 <div class="font-bold">Retour enregistré</div>
@@ -268,7 +268,7 @@
             </div>
           {/if}
 
-          <h2 class="card-title mb-4">
+          <h2 class="mb-4 card-title">
             <Package class="h-5 w-5" />
             Matériels empruntés
           </h2>
@@ -282,7 +282,7 @@
                 item.lostQuantity === 0 && item.brokenQuantity === 0}
 
               <div
-                class="bg-base-200 rounded-box flex flex-wrap items-center justify-between px-2 py-1 sm:px-4"
+                class="flex flex-wrap items-center justify-between rounded-box bg-base-200 px-2 py-1 sm:px-4"
               >
                 <!-- Nom du matériel -->
                 <div class="mb-2 flex items-center gap-4">
@@ -314,19 +314,19 @@
                       class="ms-auto flex items-center justify-end gap-6 p-2"
                     >
                       {#if item.brokenQuantity > 0}
-                        <div class="badge badge-warning gap-2">
+                        <div class="badge gap-2 badge-warning">
                           <AlertTriangle class="h-4 w-4" />
                           À réparer : {item.brokenQuantity}
                         </div>
                       {/if}
                       {#if item.lostQuantity > 0}
-                        <div class="badge badge-error gap-2">
+                        <div class="badge gap-2 badge-error">
                           <X class="h-4 w-4" />
                           Perdu : {item.lostQuantity}
                         </div>
                       {/if}
                       {#if item.okQuantity > 0}
-                        <div class="badge badge-success gap-2">
+                        <div class="badge gap-2 badge-success">
                           <Check class="h-4 w-4" />
                           OK : {item.okQuantity}
                         </div>
@@ -392,19 +392,19 @@
                     <!-- Mode lecture seule : afficher les quantités -->
                     <div class="ms-auto flex flex-wrap justify-end gap-4">
                       {#if item.brokenQuantity > 0}
-                        <div class="badge badge-warning gap-2">
+                        <div class="badge gap-2 badge-warning">
                           <AlertTriangle class="h-4 w-4" />
                           À réparer : {item.brokenQuantity}
                         </div>
                       {/if}
                       {#if item.lostQuantity > 0}
-                        <div class="badge badge-error gap-2">
+                        <div class="badge gap-2 badge-error">
                           <X class="h-4 w-4" />
                           Perdus : {item.lostQuantity}
                         </div>
                       {/if}
                       {#if item.okQuantity > 0}
-                        <div class="badge badge-success gap-2">
+                        <div class="badge gap-2 badge-success">
                           <Check class="h-4 w-4" />
                           OK : {item.okQuantity}
                         </div>
@@ -418,7 +418,7 @@
                           <span class="label-text">À réparer</span>
                           <input
                             type="number"
-                            class="  input-sm w-full"
+                            class="  w-full input-sm"
                             aria-label="Marquer comme à réparer"
                             min={0}
                             max={item.quantity}
@@ -485,7 +485,7 @@
           </div>
 
           <!-- Notes de retour -->
-          <fieldset class="fieldset bg-base-100 mt-6">
+          <fieldset class="mt-6 fieldset bg-base-100">
             <legend class="fieldset-legend">Notes de retour (optionnel)</legend>
             {#if isReadOnly}
               <!-- Mode lecture seule -->
@@ -499,18 +499,17 @@
             {:else}
               <!-- Mode édition -->
               <textarea
-                class="textarea textarea-bordered w-full"
+                class="textarea-bordered textarea w-full"
                 rows="2"
                 bind:value={returnNotes}
                 placeholder="Remarques sur l'état du matériel, problèmes constatés..."
                 maxlength="500"
-                disabled={saving}
-              ></textarea>
+                disabled={saving}></textarea>
             {/if}
           </fieldset>
         </div>
         {#if error}
-          <div class="text-error label">
+          <div class="label text-error">
             <span>{error}</span>
           </div>
         {/if}
@@ -523,12 +522,12 @@
             "Annuler"
           </button>
           <button
-            class="btn btn-primary gap-2"
+            class="btn gap-2 btn-primary"
             onclick={handleSubmit}
             disabled={!isValid || saving}
           >
             {#if saving}
-              <span class="loading loading-spinner loading-sm"></span>
+              <span class="loading loading-sm loading-spinner"></span>
             {:else}
               <RotateCcw class="h-4 w-4" />
             {/if}
@@ -568,7 +567,7 @@
           disabled={saving}
         >
           {#if saving}
-            <span class="loading loading-spinner loading-sm"></span>
+            <span class="loading loading-sm loading-spinner"></span>
           {:else}
             Confirmer le retour
           {/if}

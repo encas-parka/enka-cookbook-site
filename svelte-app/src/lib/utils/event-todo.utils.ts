@@ -13,7 +13,11 @@
  * Contexte : .agents/plans/6_migration-evaluation.md § 5.
  */
 
-import type { EventTodo, EventTodoPriority, EventTodoStatus } from "$lib/types/events";
+import type {
+  EventTodo,
+  EventTodoPriority,
+  EventTodoStatus,
+} from "$lib/types/events";
 // Valeurs runtime : les enums PB sont générés en `const` dans pb-generated
 // (events.d.ts n'expose que les types — pas de module runtime).
 import {

@@ -123,8 +123,8 @@ describe("pb-sync — delta fetch et realtime via le serveur PB simulé", () => 
     await seedProductNeeds([makeNeedRow()]);
 
     const event = makeEvent();
-    vi.mocked(eventsStore.getEventById).mockImplementation(
-      (id: string) => (id === TEST_EVENT_ID ? event : null),
+    vi.mocked(eventsStore.getEventById).mockImplementation((id: string) =>
+      id === TEST_EVENT_ID ? event : null,
     );
 
     await productsStore.initialize(TEST_EVENT_ID);
@@ -133,7 +133,9 @@ describe("pb-sync — delta fetch et realtime via le serveur PB simulé", () => 
 
   it("mutation serveur (updated bumpé) → delta initialFetch → store mis à jour", async () => {
     // Sanity: pre-sync state
-    expect(productsStore.getEnrichedProductById(TEST_PRODUCT_ID)!.productName).toBe("Eau");
+    expect(
+      productsStore.getEnrichedProductById(TEST_PRODUCT_ID)!.productName,
+    ).toBe("Eau");
 
     // Server-side mutation with a STRICTLY GREATER PB datetime — the delta
     // cursor (`updated >= since`, lexical) must pick it up.
@@ -161,11 +163,15 @@ describe("pb-sync — delta fetch et realtime via le serveur PB simulé", () => 
     await productsStore.syncRevalidate();
     await waitForTick(5);
 
-    expect(productsStore.getEnrichedProductById(TEST_PRODUCT_ID)!.productName).toBe("Eau");
+    expect(
+      productsStore.getEnrichedProductById(TEST_PRODUCT_ID)!.productName,
+    ).toBe("Eau");
   });
 
   it("événement realtime (SSE simulé) → Dexie → store réactif", async () => {
-    expect(productsStore.getEnrichedProductById(TEST_PRODUCT_ID)!.purchases).toHaveLength(1);
+    expect(
+      productsStore.getEnrichedProductById(TEST_PRODUCT_ID)!.purchases,
+    ).toHaveLength(1);
 
     const emitted = makePurchaseRecord({
       id: "t12purchase0003",
@@ -188,12 +194,18 @@ describe("pb-sync — delta fetch et realtime via le serveur PB simulé", () => 
     // Server side: the fake stamped native PB system fields
     const serverRecords = currentFakePb().records("purchases");
     const created = serverRecords.find(
-      (r) => (r.products as string[] | null)?.includes(TEST_PRODUCT_ID) && r.quantity === 3,
+      (r) =>
+        (r.products as string[] | null)?.includes(TEST_PRODUCT_ID) &&
+        r.quantity === 3,
     );
     expect(created).toBeDefined();
     expect(typeof created!.created).toBe("string");
-    expect(created!.created).toMatch(/^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}\.\d{3}Z$/);
-    expect(created!.updated).toMatch(/^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}\.\d{3}Z$/);
+    expect(created!.created).toMatch(
+      /^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}\.\d{3}Z$/,
+    );
+    expect(created!.updated).toMatch(
+      /^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}\.\d{3}Z$/,
+    );
 
     // Dexie mirror (optimistic confirm) + reactive propagation
     const local = await db.purchases.get(created!.id);

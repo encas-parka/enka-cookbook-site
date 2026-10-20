@@ -21,10 +21,12 @@
 function getBaseUrl() {
   var baseUrl = $os.getenv("ENKA_BASE_URL");
   if (!baseUrl) {
-    $app.logger().error(
-      "ENKA_BASE_URL manquante: fallback https://enka-cookbook.app utilise pour les liens email. " +
-        "Definir ENKA_BASE_URL a l'URL publique de l'app dans l'env du serveur PocketBase."
-    );
+    $app
+      .logger()
+      .error(
+        "ENKA_BASE_URL manquante: fallback https://enka-cookbook.app utilise pour les liens email. " +
+          "Definir ENKA_BASE_URL a l'URL publique de l'app dans l'env du serveur PocketBase.",
+      );
     return "https://enka-cookbook.app";
   }
   return baseUrl;
@@ -41,7 +43,14 @@ function getBaseUrl() {
  * @param {string} shareLinkId - ID du share_link
  * @returns {string} HTML complet de l'email
  */
-function buildInvitationEmail(inviterName, eventName, eventDescription, dateStart, dateEnd, shareLinkId) {
+function buildInvitationEmail(
+  inviterName,
+  eventName,
+  eventDescription,
+  dateStart,
+  dateEnd,
+  shareLinkId,
+) {
   var descriptionHtml = "";
   if (eventDescription) {
     descriptionHtml =
@@ -88,7 +97,11 @@ function buildInvitationEmail(inviterName, eventName, eventDescription, dateStar
     "</div>" +
     '<p style="color:#a0aec0;font-size:13px;margin-top:32px;">' +
     "Si le bouton ne fonctionne pas, copiez ce lien dans votre navigateur :<br/>" +
-    '<a href="' + joinUrl + '" style="color:#4299e1;">' + joinUrl + "</a>" +
+    '<a href="' +
+    joinUrl +
+    '" style="color:#4299e1;">' +
+    joinUrl +
+    "</a>" +
     "</p>" +
     "</div>";
 
@@ -108,7 +121,12 @@ function buildInvitationEmail(inviterName, eventName, eventDescription, dateStar
  * @param {boolean} hasAccount - Si le destinataire a déjà un compte
  * @returns {string} HTML complet de l'email
  */
-function buildTeamInvitationEmail(inviterName, teamName, teamDescription, hasAccount) {
+function buildTeamInvitationEmail(
+  inviterName,
+  teamName,
+  teamDescription,
+  hasAccount,
+) {
   var descriptionHtml = "";
   if (teamDescription) {
     descriptionHtml =
@@ -122,7 +140,8 @@ function buildTeamInvitationEmail(inviterName, teamName, teamDescription, hasAcc
   var heading, bodyText, ctaText, ctaUrl;
 
   if (hasAccount) {
-    heading = escapeHtml(inviterName) + " vous a ajout\u00e9 \u00e0 l'\u00e9quipe :";
+    heading =
+      escapeHtml(inviterName) + " vous a ajout\u00e9 \u00e0 l'\u00e9quipe :";
     bodyText =
       '<p style="color:#555;font-size:15px;margin:16px 0;">' +
       "Vous faites maintenant partie de cette \u00e9quipe. Connectez-vous pour voir les \u00e9v\u00e9nements et documents partag\u00e9s." +
@@ -130,7 +149,8 @@ function buildTeamInvitationEmail(inviterName, teamName, teamDescription, hasAcc
     ctaText = "Voir mes \u00e9quipes";
     ctaUrl = baseUrl + "/dashboard";
   } else {
-    heading = escapeHtml(inviterName) + " vous invite \u00e0 rejoindre l'\u00e9quipe :";
+    heading =
+      escapeHtml(inviterName) + " vous invite \u00e0 rejoindre l'\u00e9quipe :";
     bodyText =
       '<p style="color:#555;font-size:15px;margin:16px 0;">' +
       "Pour rejoindre cette \u00e9quipe, vous devez cr\u00e9er un compte enka-cookbook. " +
@@ -159,7 +179,11 @@ function buildTeamInvitationEmail(inviterName, teamName, teamDescription, hasAcc
     "</div>" +
     '<p style="color:#a0aec0;font-size:13px;margin-top:32px;">' +
     "Si le bouton ne fonctionne pas, copiez ce lien dans votre navigateur :<br/>" +
-    '<a href="' + ctaUrl + '" style="color:#4299e1;">' + ctaUrl + "</a>" +
+    '<a href="' +
+    ctaUrl +
+    '" style="color:#4299e1;">' +
+    ctaUrl +
+    "</a>" +
     "</p>" +
     "</div>";
 

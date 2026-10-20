@@ -40,7 +40,7 @@
 
   {#if loading}
     <div class="flex items-center justify-center py-8">
-      <span class="loading loading-spinner loading-md"></span>
+      <span class="loading loading-md loading-spinner"></span>
     </div>
   {:else if pastEvents.length === 0}
     <div class="py-6 text-center">

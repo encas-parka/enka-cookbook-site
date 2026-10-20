@@ -31,7 +31,11 @@ export type ExpectedVerdict = {
   emitter?: string;
 };
 
-const VERDICTS_FILE = join(import.meta.dir, "pb-import", "expected-verdicts.json");
+const VERDICTS_FILE = join(
+  import.meta.dir,
+  "pb-import",
+  "expected-verdicts.json",
+);
 
 const TYPE_RANK: Record<ExpectedVerdict["type"], number> = {
   "count-delta": 0,
@@ -60,30 +64,43 @@ function compareVerdicts(a: ExpectedVerdict, b: ExpectedVerdict): number {
  * stale entries). Throws on a malformed existing file — never silently
  * rebuild over unreadable content.
  */
-export function emitVerdicts(emitter: string, verdicts: ExpectedVerdict[]): void {
+export function emitVerdicts(
+  emitter: string,
+  verdicts: ExpectedVerdict[],
+): void {
   let existing: ExpectedVerdict[] = [];
   if (existsSync(VERDICTS_FILE)) {
     const parsed = JSON.parse(readFileSync(VERDICTS_FILE, "utf-8"));
     if (!parsed || !Array.isArray(parsed.verdicts)) {
-      throw new Error(`Malformed verdicts file (expected { version, verdicts[] }): ${VERDICTS_FILE}`);
+      throw new Error(
+        `Malformed verdicts file (expected { version, verdicts[] }): ${VERDICTS_FILE}`,
+      );
     }
     existing = parsed.verdicts;
   }
 
   const mine = verdicts.map((v) => ({ ...v, emitter }));
   const replacedKeys = new Set(mine.map(verdictKey));
-  const kept = existing.filter((v) => v.emitter !== emitter && !replacedKeys.has(verdictKey(v)));
+  const kept = existing.filter(
+    (v) => v.emitter !== emitter && !replacedKeys.has(verdictKey(v)),
+  );
   const merged = [...kept, ...mine].sort(compareVerdicts);
 
-  writeFileSync(VERDICTS_FILE, JSON.stringify({ version: 1, verdicts: merged }, null, 2) + "\n");
+  writeFileSync(
+    VERDICTS_FILE,
+    JSON.stringify({ version: 1, verdicts: merged }, null, 2) + "\n",
+  );
 
   const breakdown = mine
     .map((v) => {
-      const key = v.type === "count-delta" ? `${v.collection} ${v.delta}` : v.slug;
+      const key =
+        v.type === "count-delta" ? `${v.collection} ${v.delta}` : v.slug;
       return `${v.type} ${key}`;
     })
     .join(", ");
-  console.log(`   📋 verdicts emitted (${mine.length})${breakdown ? `: ${breakdown}` : ""} → ${VERDICTS_FILE}`);
+  console.log(
+    `   📋 verdicts emitted (${mine.length})${breakdown ? `: ${breakdown}` : ""} → ${VERDICTS_FILE}`,
+  );
 }
 
 // Stable category labels for the verdicts the pipeline emits — one place so

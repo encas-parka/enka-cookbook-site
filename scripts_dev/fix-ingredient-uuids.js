@@ -14,10 +14,10 @@
  *   node scripts_dev/fix-ingredient-uuids.js              # Appliquer les modifications
  */
 
-import fs from 'fs';
-import path from 'path';
-import yaml from 'js-yaml';
-import { fileURLToPath } from 'url';
+import fs from "fs";
+import path from "path";
+import yaml from "js-yaml";
+import { fileURLToPath } from "url";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -26,8 +26,11 @@ const __dirname = path.dirname(__filename);
 // CONFIGURATION
 // ============================================================================
 
-const RECIPES_DIR = path.resolve(__dirname, '../content/recipe');
-const INGREDIENTS_FILE = path.resolve(__dirname, '../static/data/ingredients.json');
+const RECIPES_DIR = path.resolve(__dirname, "../content/recipe");
+const INGREDIENTS_FILE = path.resolve(
+  __dirname,
+  "../static/data/ingredients.json",
+);
 
 // ============================================================================
 // UTILITAIRES
@@ -37,7 +40,7 @@ const INGREDIENTS_FILE = path.resolve(__dirname, '../static/data/ingredients.jso
  * Vérifie si un UUID est généré par nanoid (21 caractères)
  */
 function isNanoidUuid(uuid) {
-  return typeof uuid === 'string' && uuid.length === 21;
+  return typeof uuid === "string" && uuid.length === 21;
 }
 
 /**
@@ -51,7 +54,7 @@ function loadIngredientsIndex() {
     process.exit(1);
   }
 
-  const ingredients = JSON.parse(fs.readFileSync(INGREDIENTS_FILE, 'utf8'));
+  const ingredients = JSON.parse(fs.readFileSync(INGREDIENTS_FILE, "utf8"));
 
   // Créer un index: nom -> UUID
   const index = {};
@@ -61,7 +64,9 @@ function loadIngredientsIndex() {
     }
   }
 
-  console.log(`✅ ${ingredients.length} ingrédients chargés, ${Object.keys(index).length} entrées dans l'index`);
+  console.log(
+    `✅ ${ingredients.length} ingrédients chargés, ${Object.keys(index).length} entrées dans l'index`,
+  );
   return index;
 }
 
@@ -76,7 +81,7 @@ function findRecipeFiles(dir, files = []) {
 
     if (entry.isDirectory()) {
       findRecipeFiles(fullPath, files);
-    } else if (entry.name === 'index.md') {
+    } else if (entry.name === "index.md") {
       files.push(fullPath);
     }
   }
@@ -88,8 +93,8 @@ function findRecipeFiles(dir, files = []) {
  * Parse un fichier de recette YAML
  */
 function parseRecipe(filePath) {
-  const content = fs.readFileSync(filePath, 'utf8');
-  const parts = content.split('---');
+  const content = fs.readFileSync(filePath, "utf8");
+  const parts = content.split("---");
 
   if (parts.length < 2) {
     return null;
@@ -98,7 +103,10 @@ function parseRecipe(filePath) {
   try {
     return yaml.load(parts[1]);
   } catch (error) {
-    console.error(`⚠️  Erreur de parsing YAML pour ${filePath}:`, error.message);
+    console.error(
+      `⚠️  Erreur de parsing YAML pour ${filePath}:`,
+      error.message,
+    );
     return null;
   }
 }
@@ -107,22 +115,24 @@ function parseRecipe(filePath) {
  * Génère le contenu complet du fichier avec les métadonnées mises à jour
  */
 function generateRecipeContent(originalContent, updatedFrontmatter) {
-  const parts = originalContent.split('---');
+  const parts = originalContent.split("---");
 
   if (parts.length < 2) {
     return originalContent;
   }
 
   // Garder le contenu original après le second '---'
-  const bodyContent = parts.slice(2).join('---').trim();
+  const bodyContent = parts.slice(2).join("---").trim();
 
   // Recréer le fichier avec les métadonnées mises à jour
-  return `---\n${yaml.dump(updatedFrontmatter, {
-    lineWidth: -1, // Pas de limite de longueur de ligne
-    noRefs: true,  // Pas de références YAML
-    quotingType: '"',
-    forceQuotes: false
-  }).trim()}\n---\n\n${bodyContent}\n`;
+  return `---\n${yaml
+    .dump(updatedFrontmatter, {
+      lineWidth: -1, // Pas de limite de longueur de ligne
+      noRefs: true, // Pas de références YAML
+      quotingType: '"',
+      forceQuotes: false,
+    })
+    .trim()}\n---\n\n${bodyContent}\n`;
 }
 
 // ============================================================================
@@ -160,7 +170,7 @@ function analyzeRecipe(filePath, ingredientsIndex) {
           oldUuid: ingredient.uuid,
           newUuid: correctUuid,
           quantity: ingredient.originalQuantity || 0,
-          unit: ingredient.originalUnit || ''
+          unit: ingredient.originalUnit || "",
         });
       } else {
         issues.push({
@@ -169,7 +179,7 @@ function analyzeRecipe(filePath, ingredientsIndex) {
           oldUuid: ingredient.uuid,
           newUuid: null, // Non trouvé dans ingredients.json
           quantity: ingredient.originalQuantity || 0,
-          unit: ingredient.originalUnit || ''
+          unit: ingredient.originalUnit || "",
         });
       }
     }
@@ -178,7 +188,7 @@ function analyzeRecipe(filePath, ingredientsIndex) {
   return {
     hasIssues: issues.length > 0,
     issues,
-    recipe
+    recipe,
   };
 }
 
@@ -187,7 +197,7 @@ function analyzeRecipe(filePath, ingredientsIndex) {
  */
 function fixRecipe(filePath, analysis, ingredientsIndex) {
   if (!analysis.hasIssues) {
-    return { fixed: false, reason: 'Aucun problème détecté' };
+    return { fixed: false, reason: "Aucun problème détecté" };
   }
 
   const updatedIngredients = [...analysis.recipe.ingredients];
@@ -205,12 +215,12 @@ function fixRecipe(filePath, analysis, ingredientsIndex) {
   analysis.recipe.updatedAt = new Date().toISOString();
 
   // Lire le contenu original pour préserver le body
-  const originalContent = fs.readFileSync(filePath, 'utf8');
+  const originalContent = fs.readFileSync(filePath, "utf8");
   const newContent = generateRecipeContent(originalContent, analysis.recipe);
 
   return {
     fixed: true,
-    content: newContent
+    content: newContent,
   };
 }
 
@@ -223,28 +233,33 @@ function fixRecipe(filePath, analysis, ingredientsIndex) {
  */
 function printReport(recipesWithIssues, dryRun = true) {
   const totalRecipes = recipesWithIssues.length;
-  const totalIssues = recipesWithIssues.reduce((sum, r) => sum + r.issues.length, 0);
+  const totalIssues = recipesWithIssues.reduce(
+    (sum, r) => sum + r.issues.length,
+    0,
+  );
   const resolvedIssues = recipesWithIssues.reduce(
-    (sum, r) => sum + r.issues.filter(i => i.newUuid).length,
-    0
+    (sum, r) => sum + r.issues.filter((i) => i.newUuid).length,
+    0,
   );
   const unresolvedIssues = totalIssues - resolvedIssues;
 
-  console.log('\n' + '='.repeat(80));
-  console.log('📊 RAPPORT');
-  console.log('='.repeat(80));
+  console.log("\n" + "=".repeat(80));
+  console.log("📊 RAPPORT");
+  console.log("=".repeat(80));
   console.log(`📁 Recettes analysées avec problèmes: ${totalRecipes}`);
   console.log(`🔧 Total des problèmes détectés: ${totalIssues}`);
   console.log(`✅ Problèmes résolubles: ${resolvedIssues}`);
-  console.log(`❌ Problèmes non résolubles (ingrédient non trouvé): ${unresolvedIssues}`);
-  console.log('='.repeat(80));
+  console.log(
+    `❌ Problèmes non résolubles (ingrédient non trouvé): ${unresolvedIssues}`,
+  );
+  console.log("=".repeat(80));
 
   if (totalRecipes === 0) {
-    console.log('\n✨ Aucune correction nécessaire !');
+    console.log("\n✨ Aucune correction nécessaire !");
     return;
   }
 
-  console.log('\n📋 Détail par recette:\n');
+  console.log("\n📋 Détail par recette:\n");
 
   for (const { filePath, relativePath, issues } of recipesWithIssues) {
     console.log(`\n📄 ${relativePath}`);
@@ -256,21 +271,25 @@ function printReport(recipesWithIssues, dryRun = true) {
         console.log(`      ${issue.oldUuid} → ${issue.newUuid}`);
       } else {
         console.log(`   ❌ "${issue.name}" (${issue.quantity} ${issue.unit})`);
-        console.log(`      ${issue.oldUuid} → NON TROUVÉ dans ingredients.json`);
+        console.log(
+          `      ${issue.oldUuid} → NON TROUVÉ dans ingredients.json`,
+        );
       }
     }
   }
 
-  console.log('\n' + '='.repeat(80));
+  console.log("\n" + "=".repeat(80));
 
   if (dryRun) {
-    console.log('⚠️  MODE DRY RUN - Aucune modification appliquée');
-    console.log('    Pour appliquer les modifications, relancez sans --dry-run');
+    console.log("⚠️  MODE DRY RUN - Aucune modification appliquée");
+    console.log(
+      "    Pour appliquer les modifications, relancez sans --dry-run",
+    );
   } else {
-    console.log('✅ Modifications appliquées avec succès !');
+    console.log("✅ Modifications appliquées avec succès !");
   }
 
-  console.log('='.repeat(80) + '\n');
+  console.log("=".repeat(80) + "\n");
 }
 
 // ============================================================================
@@ -279,8 +298,8 @@ function printReport(recipesWithIssues, dryRun = true) {
 
 function main() {
   const args = process.argv.slice(2);
-  const dryRun = args.includes('--dry-run') || args.includes('-d');
-  const help = args.includes('--help') || args.includes('-h');
+  const dryRun = args.includes("--dry-run") || args.includes("-d");
+  const help = args.includes("--help") || args.includes("-h");
 
   if (help) {
     console.log(`
@@ -297,17 +316,17 @@ Exemples:
     process.exit(0);
   }
 
-  console.log('🔧 Script de correction des UUIDs d\'ingrédients\n');
+  console.log("🔧 Script de correction des UUIDs d'ingrédients\n");
 
   if (dryRun) {
-    console.log('⚠️  MODE DRY RUN activé\n');
+    console.log("⚠️  MODE DRY RUN activé\n");
   }
 
   // Charger l'index des ingrédients
   const ingredientsIndex = loadIngredientsIndex();
 
   if (Object.keys(ingredientsIndex).length === 0) {
-    console.error('❌ Erreur: L\'index des ingrédients est vide');
+    console.error("❌ Erreur: L'index des ingrédients est vide");
     process.exit(1);
   }
 
@@ -327,7 +346,7 @@ Exemples:
       recipesWithIssues.push({
         filePath,
         relativePath,
-        ...analysis
+        ...analysis,
       });
     }
   }
@@ -337,7 +356,7 @@ Exemples:
 
   // Appliquer les modifications si pas en dry-run
   if (!dryRun && recipesWithIssues.length > 0) {
-    console.log('⏳ Application des modifications...\n');
+    console.log("⏳ Application des modifications...\n");
 
     let successCount = 0;
     let failCount = 0;
@@ -349,14 +368,16 @@ Exemples:
         const result = fixRecipe(filePath, analysis, ingredientsIndex);
 
         if (result.fixed) {
-          fs.writeFileSync(filePath, result.content, 'utf8');
+          fs.writeFileSync(filePath, result.content, "utf8");
           console.log(`✅ ${relativePath}`);
           successCount++;
         } else {
           console.log(`⏭️  ${relativePath}: ${result.reason}`);
         }
       } catch (error) {
-        console.error(`❌ ${path.relative(RECIPES_DIR, filePath)}: ${error.message}`);
+        console.error(
+          `❌ ${path.relative(RECIPES_DIR, filePath)}: ${error.message}`,
+        );
         failCount++;
       }
     }

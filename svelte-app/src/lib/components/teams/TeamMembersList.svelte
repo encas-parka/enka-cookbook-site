@@ -124,7 +124,9 @@
       await teamsStore.inviteTeamMember(team.id, [member.userEmail]);
     } catch (err: any) {
       console.error("[TeamMembersList] Erreur renvoi invitation:", err);
-      toastService.error("Erreur lors du renvoi de l'invitation : " + (err.message || err));
+      toastService.error(
+        "Erreur lors du renvoi de l'invitation : " + (err.message || err),
+      );
     } finally {
       resendingInvite = null;
     }
@@ -151,7 +153,7 @@
         {@const canRemove = canManageMembers && !isCurrentUser}
 
         <div
-          class="card bg-base-100 border-base-200 border p-4 transition-shadow hover:shadow-md"
+          class="card border border-base-200 bg-base-100 p-4 transition-shadow hover:shadow-md"
         >
           <div class="flex items-center justify-between gap-4">
             <!-- Avatar et infos -->
@@ -161,7 +163,7 @@
                 <div
                   class="{member.name === globalState.userName
                     ? 'bg-accent'
-                    : 'bg-neutral'} text-neutral-content w-12 rounded-full"
+                    : 'bg-neutral'} w-12 rounded-full text-neutral-content"
                 >
                   <span class="text-lg">
                     {member.name
@@ -186,13 +188,13 @@
                   Membre depuis {formatDate(member.joinedAt)}
                   <!-- Bouton renvoyer l'invitation (visible pour tous les membres) -->
                   <button
-                    class="btn btn-info btn-link btn-xs py-4"
+                    class="btn btn-link py-4 btn-info btn-xs"
                     onclick={() => resendInvite(member)}
                     disabled={resendingInvite === member.id}
                     title="Renvoyer l'invitation par email"
                   >
                     {#if resendingInvite === member.id}
-                      <span class="loading loading-spinner loading-xs"></span>
+                      <span class="loading loading-xs loading-spinner"></span>
                     {:else}
                       <Mail class="h-4 w-4" /> Renvoyer l'invitation
                     {/if}
@@ -211,7 +213,7 @@
               {#if canManageMembers && !isCurrentUser}
                 <!-- Bouton de gestion du membre (uniquement pour les owners sur les autres membres) -->
                 <button
-                  class="btn btn-ghost btn-sm btn-circle"
+                  class="btn btn-circle btn-ghost btn-sm"
                   onclick={() => openManageModal(member)}
                   disabled={loading}
                   title="Gérer ce membre"

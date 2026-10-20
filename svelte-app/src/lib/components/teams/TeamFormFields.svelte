@@ -37,7 +37,7 @@
   {/if}
   <!-- Nom de l'équipe -->
   <fieldset class="fieldset">
-    <legend class="fieldset-legend required">Nom de l'équipe</legend>
+    <legend class="required fieldset-legend">Nom de l'équipe</legend>
     <label class="input">
       <input
         type="text"
@@ -63,8 +63,7 @@
       bind:value={description}
       rows="3"
       maxlength={descriptionMaxLength}
-      {disabled}
-    ></textarea>
+      {disabled}></textarea>
     <span class="fieldset-label text-xs"
       >{description.length}/{descriptionMaxLength} caractères</span
     >

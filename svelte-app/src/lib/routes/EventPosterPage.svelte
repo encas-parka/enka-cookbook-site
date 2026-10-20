@@ -465,7 +465,7 @@
 
 {#if eventLoading}
   <div class="flex min-h-[60vh] items-center justify-center">
-    <div class="loading loading-spinner loading-lg text-primary"></div>
+    <div class="loading loading-lg loading-spinner text-primary"></div>
   </div>
 {:else if eventError}
   <div class="container mx-auto p-4">
@@ -476,7 +476,7 @@
   </div>
 {:else if !event || (event.meals && event.meals.length > 0 && event.meals.every((meal) => !meal.recipes || meal.recipes.length === 0))}
   <div class="flex min-h-[60vh] items-center justify-center">
-    <div class="alert alert-info alert-vertical">
+    <div class="alert alert-vertical alert-info">
       <Info />
       <p class="text-lg">Aucune recette pour le moment</p>
     </div>
@@ -498,7 +498,7 @@
 
   <!-- Main Content Area with left margin for desktop -->
   <div
-    class="bg-base-200 min-h-screen print:h-auto print:min-h-0"
+    class="min-h-screen bg-base-200 print:h-auto print:min-h-0"
     transition:fade
   >
     <!-- Invitation Alert -->

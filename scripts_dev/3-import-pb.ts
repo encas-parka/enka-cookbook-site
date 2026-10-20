@@ -44,14 +44,14 @@ const COLLECTION_ORDER = [
   "events",
   "products",
   "purchases",
-  "materiel_loan",   // before event_materiel — loanId relation
-  "event_materiel",  // references materiel_loan via loanId
+  "materiel_loan", // before event_materiel — loanId relation
+  "event_materiel", // references materiel_loan via loanId
   "teamdocs",
   "event_todos",
   "share_links",
-  "ingredients",     // no dependencies
-  "categories",      // no dependencies
-  "recipes",         // depends on users (createdBy) and categories
+  "ingredients", // no dependencies
+  "categories", // no dependencies
+  "recipes", // depends on users (createdBy) and categories
 ] as const;
 
 // Fields configuration per collection for refId remapping
@@ -59,12 +59,29 @@ const COLLECTION_ORDER = [
 const RELATION_FIELDS: Record<string, Record<string, "single" | "multi">> = {
   users: {},
   teams: { members: "multi" },
-  materiel: { teamId: "single", ownerUser: "single", storeIn: "single", shareableWith: "multi" },
+  materiel: {
+    teamId: "single",
+    ownerUser: "single",
+    storeIn: "single",
+    shareableWith: "multi",
+  },
   events: { createdBy: "single", teams: "multi", guestUsers: "multi" },
   products: { eventId: "single", updatedBy: "single", mergedInto: "single" },
   purchases: { eventId: "single", createdBy: "single", products: "multi" },
-  event_materiel: { eventId: "single", sourceMaterielId: "single", loanId: "single", createdBy: "single", groupId: "single" },
-  materiel_loan: { eventId: "single", createdBy: "single", responsibleId: "single", ownerId: "single", borrowerUser: "single" },
+  event_materiel: {
+    eventId: "single",
+    sourceMaterielId: "single",
+    loanId: "single",
+    createdBy: "single",
+    groupId: "single",
+  },
+  materiel_loan: {
+    eventId: "single",
+    createdBy: "single",
+    responsibleId: "single",
+    ownerId: "single",
+    borrowerUser: "single",
+  },
   teamdocs: { teamId: "single", eventId: "single" },
   event_todos: { eventId: "single", assignedTo: "single" },
   share_links: { createdBy: "single" }, // target_id is text, handled separately
@@ -84,7 +101,15 @@ const JSON_FIELDS: Record<string, string[]> = {
   teams: [],
   materiel: [],
   events: ["contributors", "todos", "date", "meals"],
-  products: ["store", "specs", "stockReel", "who", "previousNames", "mergedFrom", "totalNeededOverride"],
+  products: [
+    "store",
+    "specs",
+    "stockReel",
+    "who",
+    "previousNames",
+    "mergedFrom",
+    "totalNeededOverride",
+  ],
   purchases: ["store"],
   event_materiel: ["specs"],
   materiel_loan: ["materiels"],
@@ -128,11 +153,14 @@ let pbToken = "";
 let pbBaseUrl = "";
 
 async function pbAuth(email: string, password: string): Promise<void> {
-  const res = await fetch(`${pbBaseUrl}/api/collections/_superusers/auth-with-password`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ identity: email, password }),
-  });
+  const res = await fetch(
+    `${pbBaseUrl}/api/collections/_superusers/auth-with-password`,
+    {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ identity: email, password }),
+    },
+  );
 
   if (!res.ok) {
     throw new Error(`PB auth failed (${res.status}): ${await res.text()}`);
@@ -143,19 +171,27 @@ async function pbAuth(email: string, password: string): Promise<void> {
   console.log(`   🔑 Authenticated as superuser\n`);
 }
 
-async function pbCreate(collection: string, data: Record<string, any>): Promise<any> {
-  const res = await fetch(`${pbBaseUrl}/api/collections/${collection}/records`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: pbToken,
+async function pbCreate(
+  collection: string,
+  data: Record<string, any>,
+): Promise<any> {
+  const res = await fetch(
+    `${pbBaseUrl}/api/collections/${collection}/records`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: pbToken,
+      },
+      body: JSON.stringify(data),
     },
-    body: JSON.stringify(data),
-  });
+  );
 
   if (!res.ok) {
     const body = await res.text();
-    const err = new Error(`PB create ${collection} failed (${res.status}): ${body.slice(0, 300)}`);
+    const err = new Error(
+      `PB create ${collection} failed (${res.status}): ${body.slice(0, 300)}`,
+    );
     // Structured rejection codes for the verdict emission — every record the
     // import fails to create is a source→PB count gap that must be verdicted
     try {
@@ -169,19 +205,28 @@ async function pbCreate(collection: string, data: Record<string, any>): Promise<
   return res.json();
 }
 
-async function pbPatch(collection: string, id: string, data: Record<string, any>): Promise<any> {
-  const res = await fetch(`${pbBaseUrl}/api/collections/${collection}/records/${id}`, {
-    method: "PATCH",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: pbToken,
+async function pbPatch(
+  collection: string,
+  id: string,
+  data: Record<string, any>,
+): Promise<any> {
+  const res = await fetch(
+    `${pbBaseUrl}/api/collections/${collection}/records/${id}`,
+    {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: pbToken,
+      },
+      body: JSON.stringify(data),
     },
-    body: JSON.stringify(data),
-  });
+  );
 
   if (!res.ok) {
     const body = await res.text();
-    const err = new Error(`PB patch ${collection}/${id} failed (${res.status}): ${body.slice(0, 300)}`);
+    const err = new Error(
+      `PB patch ${collection}/${id} failed (${res.status}): ${body.slice(0, 300)}`,
+    );
     try {
       (err as any).pbBody = JSON.parse(body);
     } catch {
@@ -201,24 +246,34 @@ function isNotUnique(err: any): boolean {
   const fieldErrors = err?.pbBody?.data ?? err?.pbBody?.response?.data;
   if (!fieldErrors || typeof fieldErrors !== "object") return false;
   return Object.values<any>(fieldErrors).some(
-    (f) => f?.code === "validation_not_unique" || f?.code === "validation_pk_invalid",
+    (f) =>
+      f?.code === "validation_not_unique" ||
+      f?.code === "validation_pk_invalid",
   );
 }
 
 async function pbDelete(collection: string, id: string): Promise<boolean> {
-  const res = await fetch(`${pbBaseUrl}/api/collections/${collection}/records/${id}`, {
-    method: "DELETE",
-    headers: { Authorization: pbToken },
-  });
+  const res = await fetch(
+    `${pbBaseUrl}/api/collections/${collection}/records/${id}`,
+    {
+      method: "DELETE",
+      headers: { Authorization: pbToken },
+    },
+  );
   return res.ok;
 }
 
-async function pbList(collection: string, page = 1, perPage = 500): Promise<{ items: any[]; total: number }> {
+async function pbList(
+  collection: string,
+  page = 1,
+  perPage = 500,
+): Promise<{ items: any[]; total: number }> {
   const res = await fetch(
     `${pbBaseUrl}/api/collections/${collection}/records?page=${page}&perPage=${perPage}`,
-    { headers: { Authorization: pbToken } }
+    { headers: { Authorization: pbToken } },
   );
-  if (!res.ok) throw new Error(`PB list ${collection} failed: ${await res.text()}`);
+  if (!res.ok)
+    throw new Error(`PB list ${collection} failed: ${await res.text()}`);
   const data = await res.json();
   // PB liste : le total est `totalItems` (pas `total`)
   return { items: data.items || [], total: data.totalItems || 0 };
@@ -276,8 +331,12 @@ function remapObject(obj: any): any {
 }
 
 /** Process a record: resolve relation fields and remap JSON fields */
-function processRecord(collection: string, record: any): { data: Record<string, any>; refId: string; appwriteId: string } {
-  const { _refId, _appwriteId, _source, _sourceEvent, _orphan, ...rest } = record;
+function processRecord(
+  collection: string,
+  record: any,
+): { data: Record<string, any>; refId: string; appwriteId: string } {
+  const { _refId, _appwriteId, _source, _sourceEvent, _orphan, ...rest } =
+    record;
 
   const data = { ...rest };
   const rels = RELATION_FIELDS[collection] || {};
@@ -323,9 +382,16 @@ function processRecord(collection: string, record: any): { data: Record<string, 
   // teams.roles : map {refId user: role} — remapObject ne remappe que les
   // valeurs, les clés doivent l'être explicitement (le SPA indexe la map par
   // id PB user : enrichTeamFromPB `roles[user.id]`).
-  if (collection === "teams" && data.roles && typeof data.roles === "object" && !Array.isArray(data.roles)) {
+  if (
+    collection === "teams" &&
+    data.roles &&
+    typeof data.roles === "object" &&
+    !Array.isArray(data.roles)
+  ) {
     const resolvedRoles: Record<string, any> = {};
-    for (const [refKey, role] of Object.entries(data.roles as Record<string, any>)) {
+    for (const [refKey, role] of Object.entries(
+      data.roles as Record<string, any>,
+    )) {
       resolvedRoles[resolve(refKey) || refKey] = role;
     }
     data.roles = resolvedRoles;
@@ -343,7 +409,9 @@ function processRecord(collection: string, record: any): { data: Record<string, 
       seenIds.set(collection, seen);
     }
     if (seen.has(data.id)) {
-      throw new Error(`collision hash15 dans ${collection} : ${_refId} → ${data.id}`);
+      throw new Error(
+        `collision hash15 dans ${collection} : ${_refId} → ${data.id}`,
+      );
     }
     seen.add(data.id);
   }
@@ -356,7 +424,10 @@ function processRecord(collection: string, record: any): { data: Record<string, 
 // per collection (with the validation codes) and emitted as count-delta
 // verdicts at the end of a successful run — same file as the transforms'
 // emission (verdicts-file.ts ownership rules).
-const rejections: Record<string, { count: number; codes: Map<string, number>; sample: string }> = {};
+const rejections: Record<
+  string,
+  { count: number; codes: Map<string, number>; sample: string }
+> = {};
 
 function recordRejection(collection: string, refId: string, err: any): void {
   let rej = rejections[collection];
@@ -370,7 +441,9 @@ function recordRejection(collection: string, refId: string, err: any): void {
   const body = err?.pbBody ?? {};
   const fieldErrors = body.data ?? body.response?.data;
   if (fieldErrors && typeof fieldErrors === "object") {
-    for (const code of Object.values<any>(fieldErrors).map((f) => f?.code).filter(Boolean)) {
+    for (const code of Object.values<any>(fieldErrors)
+      .map((f) => f?.code)
+      .filter(Boolean)) {
       rej.codes.set(code, (rej.codes.get(code) ?? 0) + 1);
     }
   } else {
@@ -383,7 +456,9 @@ function rejectionVerdicts(): Parameters<typeof emitVerdicts>[1] {
   for (const collection of COLLECTION_ORDER) {
     const rej = rejections[collection];
     if (!rej) continue;
-    const codes = [...rej.codes.entries()].map(([code, n]) => `${code}×${n}`).join(", ");
+    const codes = [...rej.codes.entries()]
+      .map(([code, n]) => `${code}×${n}`)
+      .join(", ");
     verdicts.push({
       type: "count-delta",
       collection,
@@ -397,7 +472,9 @@ function rejectionVerdicts(): Parameters<typeof emitVerdicts>[1] {
 
 // --- Import functions ---
 
-async function importCollection(collection: string): Promise<{ created: number; patched: number; failed: number }> {
+async function importCollection(
+  collection: string,
+): Promise<{ created: number; patched: number; failed: number }> {
   const filePath = join(IMPORT_DIR, `${collection}.json`);
   if (!existsSync(filePath)) {
     console.log(`   ⏭️  No ${collection}.json — skipping`);
@@ -459,7 +536,11 @@ async function importCollection(collection: string): Promise<{ created: number; 
 }
 
 // Special import for users (auth collection requires passwordConfirm)
-async function importUsers(): Promise<{ created: number; patched: number; failed: number }> {
+async function importUsers(): Promise<{
+  created: number;
+  patched: number;
+  failed: number;
+}> {
   const filePath = join(IMPORT_DIR, "users.json");
   if (!existsSync(filePath)) {
     console.log(`   ⏭️  No users.json — skipping`);
@@ -490,7 +571,12 @@ async function importUsers(): Promise<{ created: number; patched: number; failed
       // are stripped from the PATCH (the source passwords are random per transform run)
       if (UPSERT && data.id && isNotUnique(err)) {
         try {
-          const { id: _omit, password: _pw, passwordConfirm: _pc, ...patchBody } = data;
+          const {
+            id: _omit,
+            password: _pw,
+            passwordConfirm: _pc,
+            ...patchBody
+          } = data;
           const result = await pbPatch("users", data.id, patchBody);
           if (refId) {
             refToPb.set(refId, result.id);
@@ -530,12 +616,14 @@ async function preflightEmptyTarget(): Promise<void> {
   if (UPSERT) {
     console.log(
       "⚠️  --upsert : preflight cible vide ignoré — une cible peuplée est le cas d'usage (PATCH par id déterministe).\n" +
-      "   Rappel : sans purge des absents — ne garantit PAS PB = sources.",
+        "   Rappel : sans purge des absents — ne garantit PAS PB = sources.",
     );
     return;
   }
   if (process.argv.includes("--force")) {
-    console.log("⚠️  --force : preflight cible vide ignoré (mode dev explicite)");
+    console.log(
+      "⚠️  --force : preflight cible vide ignoré (mode dev explicite)",
+    );
     return;
   }
   let nonEmpty: string[] = [];
@@ -546,14 +634,16 @@ async function preflightEmptyTarget(): Promise<void> {
     } catch (err: any) {
       // collection inexistante sur cette instance : pas un blocage ;
       // tout autre échec API doit rester visible (jamais avalé)
-      console.warn(`   preflight: ${collection}: ${err.message?.slice(0, 120)}`);
+      console.warn(
+        `   preflight: ${collection}: ${err.message?.slice(0, 120)}`,
+      );
     }
   }
   if (nonEmpty.length > 0) {
     console.error(
       `❌ Cible non vide : ${nonEmpty.join(", ")} — le contrat du pipeline est un reset complet (cleanup-pb) avant import.\n` +
-      `   Ré-importer sur des données existantes crée des doublons silencieux.\n` +
-      `   Relancez avec --force pour ignorer (mode dev explicite).`,
+        `   Ré-importer sur des données existantes crée des doublons silencieux.\n` +
+        `   Relancez avec --force pour ignorer (mode dev explicite).`,
     );
     process.exit(1);
   }
@@ -599,20 +689,27 @@ async function main() {
   console.log(`${"=".repeat(60)}\n`);
 
   if (UPSERT) {
-    console.log(`   ♻️  Mode --upsert (dev only) : POST → not_unique → PATCH par id déterministe`);
-    console.log(`   ⚠️  sans purge des absents — ne garantit PAS PB = sources\n`);
+    console.log(
+      `   ♻️  Mode --upsert (dev only) : POST → not_unique → PATCH par id déterministe`,
+    );
+    console.log(
+      `   ⚠️  sans purge des absents — ne garantit PAS PB = sources\n`,
+    );
   }
 
   // Load env
   const env = loadEnv();
   // PB_URL surchargeable par variable d'environnement (tests sur instance
   // jetable) — sinon .env.local (dev)
-  pbBaseUrl = process.env.PB_URL_OVERRIDE || env.PB_URL || "http://127.0.0.1:8090";
+  pbBaseUrl =
+    process.env.PB_URL_OVERRIDE || env.PB_URL || "http://127.0.0.1:8090";
   const adminEmail = env.PB_ADMIN_EMAIL;
   const adminPassword = env.PB_ADMIN_PASSWORD;
 
   if (!adminEmail || !adminPassword) {
-    console.error("❌ Missing PB_ADMIN_EMAIL or PB_ADMIN_PASSWORD in .env.local");
+    console.error(
+      "❌ Missing PB_ADMIN_EMAIL or PB_ADMIN_PASSWORD in .env.local",
+    );
     process.exit(1);
   }
 
@@ -635,18 +732,25 @@ async function main() {
   await preflightEmptyTarget();
 
   // Import in dependency order
-  const results: Record<string, { created: number; patched: number; failed: number }> = {};
+  const results: Record<
+    string,
+    { created: number; patched: number; failed: number }
+  > = {};
 
   // Users first (special handling)
   console.log("📥 Importing users...");
   results.users = await importUsers();
-  console.log(`   ✅ ${results.users.created} created${results.users.patched ? `, ${results.users.patched} patched` : ""}, ${results.users.failed} failed\n`);
+  console.log(
+    `   ✅ ${results.users.created} created${results.users.patched ? `, ${results.users.patched} patched` : ""}, ${results.users.failed} failed\n`,
+  );
 
   // Then all other collections
   for (const collection of COLLECTION_ORDER.slice(1)) {
     console.log(`📥 Importing ${collection}...`);
     results[collection] = await importCollection(collection);
-    console.log(`   ✅ ${results[collection].created} created${results[collection].patched ? `, ${results[collection].patched} patched` : ""}, ${results[collection].failed} failed\n`);
+    console.log(
+      `   ✅ ${results[collection].created} created${results[collection].patched ? `, ${results[collection].patched} patched` : ""}, ${results[collection].failed} failed\n`,
+    );
   }
 
   // Summary
@@ -666,8 +770,8 @@ async function main() {
     const label = (collection + ":").padEnd(18);
     console.log(
       `   ${label} ${String(r.created).padStart(5)} created` +
-      (r.patched ? `, ${r.patched} patched` : "") +
-      (r.failed ? `, ${r.failed} failed` : ""),
+        (r.patched ? `, ${r.patched} patched` : "") +
+        (r.failed ? `, ${r.failed} failed` : ""),
     );
   }
 
@@ -681,7 +785,9 @@ async function main() {
     console.log(`\n   ✅ All records imported successfully!`);
   }
 
-  console.log(`\n   NEXT: Run validate-migration.ts to verify, or test the app.`);
+  console.log(
+    `\n   NEXT: Run validate-migration.ts to verify, or test the app.`,
+  );
 
   // Save refId → PB ID mapping for downstream scripts (e.g., 4-fix-timestamps.ts)
   const idMapPath = join(IMPORT_DIR, "id-map.json");
@@ -690,7 +796,9 @@ async function main() {
     idMapObj[refId] = pbId;
   }
   writeFileSync(idMapPath, JSON.stringify(idMapObj, null, 2) + "\n");
-  console.log(`   💾 Saved ID mapping (${refToPb.size} entries) → ${idMapPath}`);
+  console.log(
+    `   💾 Saved ID mapping (${refToPb.size} entries) → ${idMapPath}`,
+  );
 
   // Emit the rejection-side verdicts — a rejection is a source→PB count gap
   // validate will observe, folded into the same file as the transforms' verdicts

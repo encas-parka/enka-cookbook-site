@@ -207,7 +207,7 @@ Modal de récapitulatif des dépenses
         </div>
 
         <!-- Breakdown Lists -->
-        <div class="card bg-base-200 w-max-3xl h-full p-4 shadow-sm">
+        <div class="w-max-3xl card h-full bg-base-200 p-4 shadow-sm">
           <h4
             class="mb-2 text-sm font-semibold tracking-wider uppercase opacity-70"
           >
@@ -223,7 +223,7 @@ Modal de récapitulatif des dépenses
           </div>
         </div>
 
-        <div class="card bg-base-200 w-max-3xl h-full p-4 shadow-sm">
+        <div class="w-max-3xl card h-full bg-base-200 p-4 shadow-sm">
           <h4
             class="mb-2 text-sm font-semibold tracking-wider uppercase opacity-70"
           >
@@ -259,7 +259,7 @@ Modal de récapitulatif des dépenses
       <!-- Add Expense Form -->
       {#if showAddForm}
         <div
-          class="card bg-base-200 animate-in fade-in slide-in-from-top-4 shadow-md duration-300"
+          class="animate-in fade-in slide-in-from-top-4 card bg-base-200 shadow-md duration-300"
         >
           <div class="card-body p-4">
             <h4 class="card-title text-sm">
@@ -285,22 +285,22 @@ Modal de récapitulatif des dépenses
                 disabled={loading}
               />
             </div>
-            <div class="card-actions mt-2 justify-end">
-              <button class="btn btn-sm btn-ghost" onclick={resetForm}
+            <div class="mt-2 card-actions justify-end">
+              <button class="btn btn-ghost btn-sm" onclick={resetForm}
                 >Annuler</button
               >
               <button
-                class="btn btn-sm btn-primary"
+                class="btn btn-primary btn-sm"
                 onclick={handleAddOrUpdateExpense}
                 disabled={loading}
               >
-                {#if loading}<span class="loading loading-spinner loading-xs"
+                {#if loading}<span class="loading loading-xs loading-spinner"
                   ></span>{/if}
                 {editingPurchaseId ? "Enregistrer" : "Ajouter"}
               </button>
             </div>
             {#if error}
-              <div class="text-error mt-2 text-xs">{error}</div>
+              <div class="mt-2 text-xs text-error">{error}</div>
             {/if}
           </div>
         </div>
@@ -308,12 +308,14 @@ Modal de récapitulatif des dépenses
 
       <!-- Purchases Table (Desktop) -->
       {#if !globalState.isMobile}
-        <div class="bg-base-100 border-base-200 overflow-x-auto rounded-lg border">
-          <table class="table-zebra table-xs table w-full">
-            <thead class="bg-base-200 sticky top-0">
+        <div
+          class="overflow-x-auto rounded-lg border border-base-200 bg-base-100"
+        >
+          <table class="table w-full table-zebra table-xs">
+            <thead class="sticky top-0 bg-base-200">
               <tr>
                 <th
-                  class="hover:bg-base-300 cursor-pointer"
+                  class="cursor-pointer hover:bg-base-300"
                   onclick={() => toggleSort("date")}
                 >
                   Date {sortColumn === "date"
@@ -324,7 +326,7 @@ Modal de récapitulatif des dépenses
                 </th>
                 <th>Description</th>
                 <th
-                  class="hover:bg-base-300 cursor-pointer"
+                  class="cursor-pointer hover:bg-base-300"
                   onclick={() => toggleSort("store")}
                 >
                   Magasin {sortColumn === "store"
@@ -334,7 +336,7 @@ Modal de récapitulatif des dépenses
                     : ""}
                 </th>
                 <th
-                  class="hover:bg-base-300 cursor-pointer"
+                  class="cursor-pointer hover:bg-base-300"
                   onclick={() => toggleSort("who")}
                 >
                   Qui {sortColumn === "who"
@@ -344,7 +346,7 @@ Modal de récapitulatif des dépenses
                     : ""}
                 </th>
                 <th
-                  class="hover:bg-base-300 cursor-pointer text-right"
+                  class="cursor-pointer text-right hover:bg-base-300"
                   onclick={() => toggleSort("amount")}
                 >
                   Montant {sortColumn === "amount"
@@ -373,7 +375,7 @@ Modal de récapitulatif des dépenses
                         >{purchase["_productName"] || "Produit inconnu"}</span
                       >
                       {#if purchase.notes}
-                        <span class="text-base-content/50 ml-1 text-xs"
+                        <span class="ml-1 text-xs text-base-content/50"
                           >- {purchase.notes}</span
                         >
                       {/if}
@@ -386,7 +388,7 @@ Modal de récapitulatif des dépenses
                   </td>
                   <td>
                     <button
-                      class="btn btn-ghost btn-square"
+                      class="btn btn-square btn-ghost"
                       onclick={() => startEdit(purchase)}
                     >
                       <SquarePen size={14} />
@@ -396,7 +398,7 @@ Modal de récapitulatif des dépenses
               {/each}
               {#if displayedPurchases.length === 0}
                 <tr>
-                  <td colspan="7" class="text-base-content/50 py-8 text-center"
+                  <td colspan="7" class="py-8 text-center text-base-content/50"
                     >Aucune dépense trouvée</td
                   >
                 </tr>
@@ -428,7 +430,7 @@ Modal de récapitulatif des dépenses
 
                   <!-- Bouton édition -->
                   <button
-                    class="btn btn-ghost btn-square btn-sm"
+                    class="btn btn-square btn-ghost btn-sm"
                     onclick={() => startEdit(purchase)}
                   >
                     <SquarePen size={16} />
@@ -454,7 +456,7 @@ Modal de récapitulatif des dépenses
                 <!-- Magasin et Qui -->
                 <div class="mt-3 flex flex-wrap gap-3">
                   {#if purchase.store}
-                    <div class="badge badge-soft gap-1">
+                    <div class="badge gap-1 badge-soft">
                       <StoreIcon class="h-3 w-3" />
                       <span class="max-w-[150px] truncate"
                         >{purchase.store}</span
@@ -462,7 +464,7 @@ Modal de récapitulatif des dépenses
                     </div>
                   {/if}
                   {#if purchase.who}
-                    <div class="badge badge-soft gap-1">
+                    <div class="badge gap-1 badge-soft">
                       <User class="h-3 w-3" />
                       <span class="max-w-[100px] truncate">{purchase.who}</span>
                     </div>

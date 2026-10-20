@@ -1,5 +1,9 @@
 <script lang="ts">
-  import { loginWithPassword, register, requestPasswordReset } from "../services/pb-auth";
+  import {
+    loginWithPassword,
+    register,
+    requestPasswordReset,
+  } from "../services/pb-auth";
   import ModalContainer from "$lib/components/ui/modal/ModalContainer.svelte";
   import ModalHeader from "$lib/components/ui/modal/ModalHeader.svelte";
   import ModalContent from "$lib/components/ui/modal/ModalContent.svelte";
@@ -220,7 +224,7 @@
           class="space-y-4"
         >
           <fieldset>
-            <label class="input validator required w-full">
+            <label class="required validator input w-full">
               <Mail class="h-4 w-4 opacity-50" />
               <input
                 type="email"
@@ -236,7 +240,7 @@
             >
           </fieldset>
 
-          <div class="alert alert-info alert-soft">
+          <div class="alert alert-soft alert-info">
             Un email avec un lien vous sera envoyé pour renouveller votre mot de
             passe.". Pensez à vérifier s'il n'a pas attéri dans votre dossier
             spam.
@@ -262,7 +266,7 @@
           class="space-y-4"
         >
           <fieldset>
-            <label class="input validator required w-full">
+            <label class="required validator input w-full">
               <Mail class="h-4 w-4 opacity-50" />
               <input
                 type="email"
@@ -279,7 +283,7 @@
           </fieldset>
 
           <fieldset>
-            <label class="input validator required w-full">
+            <label class="required validator input w-full">
               <Lock class="h-4 w-4 opacity-50" />
               <input
                 type="password"
@@ -297,17 +301,17 @@
         <div class="space-y-2 text-center">
           <button
             onclick={() => (showForgotPassword = true)}
-            class="btn btn-link btn-sm btn-primary"
+            class="btn btn-link btn-primary btn-sm"
             disabled={isLoading}
           >
             Mot de passe oublié ?
           </button>
 
-          <div class="text-base-content/70 text-sm">
+          <div class="text-sm text-base-content/70">
             Pas encore de compte ?
             <button
               onclick={() => (showLogin = false)}
-              class="btn btn-primary btn-link"
+              class="btn btn-link btn-primary"
               disabled={isLoading}
             >
               Créer un compte
@@ -324,7 +328,7 @@
           class="space-y-4"
         >
           <fieldset>
-            <label class="input validator required w-full">
+            <label class="required validator input w-full">
               <User class="h-4 w-4 opacity-50" />
               <input
                 type="text"
@@ -343,7 +347,7 @@
           </fieldset>
 
           <fieldset>
-            <label class="input validator required w-full">
+            <label class="required validator input w-full">
               <Mail class="h-4 w-4 opacity-50" />
               <input
                 type="email"
@@ -360,7 +364,7 @@
           </fieldset>
 
           <fieldset>
-            <label class="input validator required w-full">
+            <label class="required validator input w-full">
               <Lock class="h-4 w-4 opacity-50" />
               <input
                 type="password"
@@ -379,7 +383,7 @@
           </fieldset>
 
           <fieldset>
-            <label class="input validator required w-full">
+            <label class="required validator input w-full">
               <Lock class="h-4 w-4 opacity-50" />
               <input
                 type="password"
@@ -397,13 +401,13 @@
             </span>
           </fieldset>
 
-          <div class="alert alert-info alert-soft">
+          <div class="alert alert-soft alert-info">
             Un email avec un lien vous sera envoyé. Pensez à vérifier s'il n'a
             pas attéri dans votre dossier spam.
           </div>
         </form>
 
-        <div class="text-base-content/70 text-center text-sm">
+        <div class="text-center text-sm text-base-content/70">
           Déjà un compte ?
           <button
             onclick={() => (showLogin = true)}
@@ -422,7 +426,7 @@
       <button
         form="forgotForm"
         type="submit"
-        class="btn btn-primary btn-block"
+        class="btn btn-block btn-primary"
         disabled={isLoading}
       >
         {#if isLoading}
@@ -435,7 +439,7 @@
       <button
         form="loginForm"
         type="submit"
-        class="btn btn-primary btn-block"
+        class="btn btn-block btn-primary"
         disabled={isLoading}
       >
         {#if isLoading}
@@ -448,7 +452,7 @@
       <button
         form="registerForm"
         type="submit"
-        class="btn btn-success btn-block"
+        class="btn btn-block btn-success"
         disabled={isLoading}
       >
         {#if isLoading}

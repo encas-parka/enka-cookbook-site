@@ -4,11 +4,7 @@
     EventMaterielSortField,
   } from "$lib/types/event-materiel.types";
   import type { Snippet } from "svelte";
-  import {
-    ArrowDownNarrowWide,
-    ArrowDownAZ,
-    X,
-  } from "@lucide/svelte";
+  import { ArrowDownNarrowWide, ArrowDownAZ, X } from "@lucide/svelte";
 
   export interface ActiveBadge {
     id: string;
@@ -62,7 +58,7 @@
 
 <div class="space-y-2">
   <div
-    class="bg-base-300 rounded-box flex flex-wrap items-center justify-between gap-3 px-4 py-3"
+    class="flex flex-wrap items-center justify-between gap-3 rounded-box bg-base-300 px-4 py-3"
   >
     <fieldset class="fieldset">
       <legend class="legend label">
@@ -88,7 +84,7 @@
 
   {#if activeBadges.length > 0}
     <div class="flex flex-wrap items-center gap-2">
-      <span class="text-base-content/50 text-sm">Filtres :</span>
+      <span class="text-sm text-base-content/50">Filtres :</span>
       {#each activeBadges as badge (badge.id)}
         <button
           type="button"
@@ -102,7 +98,7 @@
       {/each}
       {#if activeBadges.length > 1}
         <button
-          class="btn btn-ghost btn-xs text-error"
+          class="btn btn-ghost text-error btn-xs"
           onclick={onResetFilters}
         >
           Réinitialiser

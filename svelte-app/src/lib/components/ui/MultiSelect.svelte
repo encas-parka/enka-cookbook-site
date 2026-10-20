@@ -223,7 +223,7 @@
     <!-- Dropdown toggle button -->
     <button
       type="button"
-      class="btn btn-ghost btn-sm absolute top-1/2 right-1 -translate-y-1/2"
+      class="btn absolute top-1/2 right-1 -translate-y-1/2 btn-ghost btn-sm"
       onclick={toggleDropdown}
       {disabled}
       aria-label={isOpen ? "Fermer le menu" : "Ouvrir le menu"}
@@ -237,7 +237,7 @@
     {#if isOpen}
       <div
         id="options-list"
-        class="border-base-300 bg-base-100 absolute z-50 mt-1 max-h-60 w-full overflow-auto rounded-lg border shadow-lg"
+        class="absolute z-50 mt-1 max-h-60 w-full overflow-auto rounded-lg border border-base-300 bg-base-100 shadow-lg"
         role="listbox"
       >
         {#if filteredOptions.length > 0}
@@ -246,7 +246,7 @@
             <button
               type="button"
               id="option-{index}"
-              class="hover:bg-base-200 flex w-full items-center justify-between gap-2 px-4 py-2 text-left hover:cursor-pointer {index ===
+              class="flex w-full items-center justify-between gap-2 px-4 py-2 text-left hover:cursor-pointer hover:bg-base-200 {index ===
               highlightedIndex
                 ? 'bg-base-200'
                 : ''} {selected ? 'bg-success/20' : ''}"
@@ -257,22 +257,22 @@
             >
               <span>{option}</span>
               {#if selected}
-                <Check class="text-success h-4 w-4" />
+                <Check class="h-4 w-4 text-success" />
               {/if}
             </button>
           {/each}
         {:else}
-          <div class="text-base-content/50 px-4 py-2 text-sm">
+          <div class="px-4 py-2 text-sm text-base-content/50">
             Aucune option disponible
           </div>
         {/if}
 
         <!-- Option de création quand aucune correspondance -->
         {#if onCreateNew}
-          <div class="border-base-300 mt-1 border-t pt-1">
+          <div class="mt-1 border-t border-base-300 pt-1">
             <button
               type="button"
-              class="hover:bg-primary/20 text-primary flex w-full items-center gap-3 px-4 py-3 text-left hover:cursor-pointer"
+              class="flex w-full items-center gap-3 px-4 py-3 text-left text-primary hover:cursor-pointer hover:bg-primary/20"
               onclick={() => {
                 onCreateNew();
                 closeDropdown();
@@ -291,11 +291,11 @@
   {#if selected.length > 0}
     <div class="mt-2 flex flex-wrap gap-2">
       {#each selected as selectedItem}
-        <div class="badge badge-lg badge-primary gap-2">
+        <div class="badge gap-2 badge-lg badge-primary">
           <span>{selectedItem}</span>
           <button
             type="button"
-            class="btn btn-ghost btn-sm hover:bg-primary-focus h-4 min-h-0 w-4 p-0"
+            class="hover:bg-primary-focus btn h-4 min-h-0 w-4 btn-ghost p-0 btn-sm"
             onclick={() => removeOption(selectedItem)}
             {disabled}
             aria-label="Supprimer {selectedItem}"

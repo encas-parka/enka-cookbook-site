@@ -22,8 +22,6 @@ export default defineConfig({
   },
   test: {
     include: ["src/**/*.test.ts"],
-    setupFiles: [
-      "./src/lib/stores/__tests__/harness/setup.ts",
-    ],
+    setupFiles: ["./src/lib/stores/__tests__/harness/setup.ts"],
   },
 });

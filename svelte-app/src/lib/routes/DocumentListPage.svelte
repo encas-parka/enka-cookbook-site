@@ -239,21 +239,26 @@
     {:else}
       <div class="my-8 space-y-3">
         {#each paginatedDocs as doc (doc.id)}
-          <DocCard {doc} {teamId} highlightedTags={filters.tags} bgClass="bg-base-100" />
+          <DocCard
+            {doc}
+            {teamId}
+            highlightedTags={filters.tags}
+            bgClass="bg-base-100"
+          />
         {/each}
       </div>
 
       <!-- Sentinelle pour lazy loading -->
       {#if paginatedDocs.length < filteredDocs.length}
         <div bind:this={sentinel} class="py-8 text-center">
-          <span class="loading loading-spinner loading-md"></span>
+          <span class="loading loading-md loading-spinner"></span>
         </div>
       {/if}
 
       <!-- Message si aucun résultat -->
       {#if filteredDocs.length === 0}
         <div class="py-12 text-center">
-          <p class="text-base-content/60 text-lg">
+          <p class="text-lg text-base-content/60">
             Aucun document ne correspond aux critères...
           </p>
         </div>
@@ -262,7 +267,7 @@
       <!-- Message si aucun document dans l'équipe -->
       {#if allDocs.length === 0 && !teamdocsStore.loading}
         <div class="py-12 text-center">
-          <p class="text-base-content/60 mb-4 text-lg">
+          <p class="mb-4 text-lg text-base-content/60">
             Aucun document dans cette équipe
           </p>
           <button

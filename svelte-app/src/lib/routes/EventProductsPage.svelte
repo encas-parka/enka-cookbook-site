@@ -366,7 +366,7 @@
   <div class="flex items-center gap-2">
     <div class="dropdown dropdown-end">
       <div
-        class="btn btn-sm btn-circle btn-primary"
+        class="btn btn-circle btn-primary btn-sm"
         tabindex="0"
         role="button"
         title="Exporter"
@@ -374,7 +374,7 @@
         <Download size={18} />
       </div>
       <ul
-        class="dropdown-content menu bg-base-100 rounded-box z-10 w-48 p-2 shadow-lg"
+        class="menu dropdown-content z-10 w-48 rounded-box bg-base-100 p-2 shadow-lg"
         tabindex="0"
       >
         <li>
@@ -392,7 +392,7 @@
       </ul>
     </div>
     <button
-      class="btn btn-sm btn-circle btn-primary"
+      class="btn btn-circle btn-primary btn-sm"
       onclick={() => (printModalOpen = true)}
       title="Imprimer la liste"
     >
@@ -414,47 +414,47 @@
     <!-- Skeletons pendant le chargement -->
     <div class="space-y-6">
       <!-- Skeleton header -->
-      <div class="rounded-box border-base-300 bg-base-100 border-2 p-4">
+      <div class="rounded-box border-2 border-base-300 bg-base-100 p-4">
         <div class="flex w-full flex-wrap justify-between gap-6">
-          <div class="skeleton h-8 w-48 shrink-0"></div>
-          <div class="skeleton h-6 w-40 shrink-0"></div>
+          <div class="h-8 w-48 shrink-0 skeleton"></div>
+          <div class="h-6 w-40 shrink-0 skeleton"></div>
         </div>
-        <div class="skeleton mt-4 h-20 w-full"></div>
+        <div class="mt-4 h-20 w-full skeleton"></div>
       </div>
 
       <!-- Skeleton barre résumé -->
       <div class="flex w-full flex-wrap justify-center gap-10 md:justify-end">
-        <div class="skeleton h-14 w-72"></div>
+        <div class="h-14 w-72 skeleton"></div>
       </div>
 
       <!-- Skeleton aide collapse -->
-      <div class="border-base-300 bg-base-100 rounded-box border-2 p-4">
-        <div class="skeleton mb-2 h-6 w-32"></div>
+      <div class="rounded-box border-2 border-base-300 bg-base-100 p-4">
+        <div class="mb-2 h-6 w-32 skeleton"></div>
         <div class="space-y-2">
-          <div class="skeleton h-4 w-full"></div>
-          <div class="skeleton h-4 w-5/6"></div>
-          <div class="skeleton h-4 w-4/6"></div>
+          <div class="h-4 w-full skeleton"></div>
+          <div class="h-4 w-5/6 skeleton"></div>
+          <div class="h-4 w-4/6 skeleton"></div>
         </div>
       </div>
 
       <!-- Skeleton produits list -->
       <div class="space-y-4">
         {#each Array(3) as _}
-          <div class="border-base-300 bg-base-100 rounded-box border-2 p-4">
+          <div class="rounded-box border-2 border-base-300 bg-base-100 p-4">
             <div class="mb-3 flex items-center justify-between">
-              <div class="skeleton h-6 w-48"></div>
+              <div class="h-6 w-48 skeleton"></div>
               <div class="flex gap-2">
-                <div class="skeleton h-8 w-8 rounded-full"></div>
-                <div class="skeleton h-8 w-8 rounded-full"></div>
+                <div class="h-8 w-8 skeleton rounded-full"></div>
+                <div class="h-8 w-8 skeleton rounded-full"></div>
               </div>
             </div>
             <div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
               {#each Array(3) as __}
-                <div class="card card-compact bg-base-200">
+                <div class="card-compact card bg-base-200">
                   <div class="card-body">
-                    <div class="skeleton mb-2 h-5 w-32"></div>
-                    <div class="skeleton h-4 w-full"></div>
-                    <div class="skeleton mt-1 h-4 w-3/4"></div>
+                    <div class="mb-2 h-5 w-32 skeleton"></div>
+                    <div class="h-4 w-full skeleton"></div>
+                    <div class="mt-1 h-4 w-3/4 skeleton"></div>
                   </div>
                 </div>
               {/each}
@@ -473,7 +473,7 @@
 
     <!-- Contenu une fois chargé -->
     <div
-      class="rounded-box border-base-300 bg-base-100 flex flex-wrap items-baseline justify-between gap-4 border-2 p-4 print:hidden"
+      class="flex flex-wrap items-baseline justify-between gap-4 rounded-box border-2 border-base-300 bg-base-100 p-4 print:hidden"
     >
       <div class="flex w-full flex-wrap justify-between gap-6">
         <div class="flex flex-wrap items-center gap-8">
@@ -484,7 +484,7 @@
             <BadgeEventStatus status={currentEvent.status} />
           {/if}
         </div>
-        <div class="text-base-content/70 text-base">
+        <div class="text-base text-base-content/70">
           {#if startDate && endDate}
             <Calendar class="inline h-4 w-4" />
             {formatDateShort(startDate)} au {formatDateShort(endDate)}
@@ -503,7 +503,7 @@
 
       {#if hasUndatedRecipes}
         <div
-          class="alert alert-warning alert-soft max-sm:alert-vertical mb-4 w-full"
+          class="mb-4 alert w-full alert-soft alert-warning max-sm:alert-vertical"
         >
           <CircleAlert size={20} class="shrink-0" />
           <div>
@@ -521,7 +521,7 @@
       <div class="flex w-full flex-wrap justify-center gap-10 md:justify-end">
         {#if eventIsPassed}
           <div
-            class="alert alert-warning alert-soft max-sm:alert-vertical self-center"
+            class="alert self-center alert-soft alert-warning max-sm:alert-vertical"
             id="info-past-event"
           >
             <CircleAlert size={20} class="shrink-0" />
@@ -559,7 +559,7 @@
     <InfoCollapse
       title="Aide"
       contentVisible="Page de gestion des produits nécéssaire pour l'événement. Cliquer pour découvrir ce que vous pouvez y faire..."
-      class="shadow-info shadow print:hidden"
+      class="shadow shadow-info print:hidden"
     >
       <p class="">
         Cette page liste l'ensemble des produits présents dans les recettes de
@@ -599,9 +599,9 @@
           Définir des magasins où vous mandater pour l'achat de produits
           (individuel ou par groupe) → <Store
             size={14}
-            class="text-primary inline"
+            class="inline text-primary"
           />
-          <Users size={14} class="text-primary inline" />
+          <Users size={14} class="inline text-primary" />
         </li>
         <li>
           Modifier la quantité réclamée pour un produit. Si les recettes et
@@ -661,7 +661,7 @@
 
     {#if !globalState.isDesktop}
       <div class="flex items-center gap-2 px-4">
-        <div class="input input-lg flex flex-1 items-center gap-2">
+        <div class="input flex flex-1 items-center gap-2 input-lg">
           <Search class="size-4 shrink-0" />
           <input
             type="text"
@@ -672,7 +672,7 @@
           />
           {#if productsStore.filters.searchQuery}
             <button
-              class="btn btn-xs btn-circle btn-error btn-outline opacity-60"
+              class="btn btn-circle btn-outline opacity-60 btn-error btn-xs"
               onclick={() => productsStore.setSearchQuery("")}
             >
               <X class="size-4" />
@@ -748,7 +748,7 @@
             {hoverHelp.msg}
 
             <button
-              class="btn btn-xs btn-circle btn-ghost ms-3"
+              class="btn ms-3 btn-circle btn-ghost btn-xs"
               onclick={() => hoverHelp.collapse()}
             >
               <X class="h-4 w-4" />

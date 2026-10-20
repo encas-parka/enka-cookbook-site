@@ -35,7 +35,7 @@
     const tagParam = searchParams.get("tag");
     if (
       typeof tagParam === "string" &&
-      PREDEFINED_TAGS.includes(tagParam as typeof PREDEFINED_TAGS[number])
+      PREDEFINED_TAGS.includes(tagParam as (typeof PREDEFINED_TAGS)[number])
     ) {
       if (!selectedTags.includes(tagParam)) {
         selectedTags = [...selectedTags, tagParam];
@@ -52,7 +52,9 @@
   // Détection modifications
   const hasUnsavedChanges = $derived(
     !isSaving &&
-      (title.trim().length > 0 || content.trim().length > 0 || selectedTags.length > 0),
+      (title.trim().length > 0 ||
+        content.trim().length > 0 ||
+        selectedTags.length > 0),
   );
 
   // Navbar
@@ -113,7 +115,7 @@
     disabled={!isValid || isSaving}
   >
     {#if isSaving}
-      <span class="loading loading-spinner loading-sm"></span>
+      <span class="loading loading-sm loading-spinner"></span>
     {:else}
       <Save class="h-4 w-4" />
     {/if}
@@ -129,7 +131,7 @@
 
 <!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
 <div
-  class="bg-base-200 min-h-lvh px-4 pt-4 pb-20 md:px-20"
+  class="min-h-lvh bg-base-200 px-4 pt-4 pb-20 md:px-20"
   onkeydown={handleKeydown}
   role="region"
   tabindex="-1"
@@ -137,19 +139,19 @@
 >
   <div class="mx-auto mt-6 max-w-5xl">
     <div class="space-y-4">
-<fieldset class="fieldset flex">
-          <label class="input input-lg w-full">
-            <span class="label">Nom</span>
-            <input
-              type="text"
-              bind:value={title}
-              placeholder="Titre du document"
-              disabled={isSaving}
-              maxlength="50"
-              required
-            />
-          </label>
-        </fieldset>
+      <fieldset class="fieldset flex">
+        <label class="input w-full input-lg">
+          <span class="label">Nom</span>
+          <input
+            type="text"
+            bind:value={title}
+            placeholder="Titre du document"
+            disabled={isSaving}
+            maxlength="50"
+            required
+          />
+        </label>
+      </fieldset>
 
       <fieldset class="fieldset">
         <MarkdownEditorAdvanced
@@ -180,7 +182,7 @@
             </button>
           {/each}
         </div>
-        <p class="text-base-content/60 text-xs">
+        <p class="text-xs text-base-content/60">
           Sélectionnez les pages où ce document apparaîtra
         </p>
       </fieldset>
@@ -190,7 +192,7 @@
   <!-- Bouton flottant Créer (mobile uniquement) -->
   {#if hasUnsavedChanges && !isSaving}
     <button
-      class="btn btn-primary btn-sm sticky bottom-2 shadow-lg {!globalState.isMobile &&
+      class="btn sticky bottom-2 shadow-lg btn-primary btn-sm {!globalState.isMobile &&
         'hidden'}"
       onclick={handleCreate}
       disabled={!isValid || isSaving}

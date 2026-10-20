@@ -53,7 +53,9 @@ interface Env {
 
 function loadEnv(): Env {
   if (!existsSync(ENV_FILE)) {
-    console.error(`Missing ${ENV_FILE} — add PB_URL / PB_ADMIN_* / PB_USER_* there.`);
+    console.error(
+      `Missing ${ENV_FILE} — add PB_URL / PB_ADMIN_* / PB_USER_* there.`,
+    );
     process.exit(1);
   }
   const env: Record<string, string> = {};
@@ -64,8 +66,13 @@ function loadEnv(): Env {
     if (eqIdx === -1) continue;
     env[trimmed.slice(0, eqIdx).trim()] = trimmed.slice(eqIdx + 1).trim();
   }
-  const missing = ["PB_URL", "PB_ADMIN_EMAIL", "PB_ADMIN_PASSWORD", "PB_USER_EMAIL", "PB_USER_PASSWORD"]
-    .filter((k) => !env[k]);
+  const missing = [
+    "PB_URL",
+    "PB_ADMIN_EMAIL",
+    "PB_ADMIN_PASSWORD",
+    "PB_USER_EMAIL",
+    "PB_USER_PASSWORD",
+  ].filter((k) => !env[k]);
   if (missing.length > 0) {
     console.error(`Missing env keys in ${ENV_FILE}: ${missing.join(", ")}`);
     process.exit(1);
@@ -112,7 +119,8 @@ function classify(status: number, json: any): string {
   const data = json?.data ?? {};
   const fieldErrors = Object.keys(data).filter((k) => data[k]);
   if (fieldErrors.length === 0) {
-    if (status === 404) return "rule-rejection-or-missing (404 — PB leak-protection)";
+    if (status === 404)
+      return "rule-rejection-or-missing (404 — PB leak-protection)";
     return "rule-rejection (data empty)";
   }
   return `validation-rejection (fields: ${fieldErrors.join(", ")})`;
@@ -130,23 +138,35 @@ async function main(): Promise<void> {
   }
 
   // 1. Admin auth (setup + inspection + cleanup only)
-  const admin = await pbFetch(env.base, "/api/collections/_superusers/auth-with-password", {
-    method: "POST",
-    body: { identity: env.adminEmail, password: env.adminPassword },
-  });
+  const admin = await pbFetch(
+    env.base,
+    "/api/collections/_superusers/auth-with-password",
+    {
+      method: "POST",
+      body: { identity: env.adminEmail, password: env.adminPassword },
+    },
+  );
   if (admin.status !== 200) {
-    console.error(`Admin auth failed (${admin.status}) — check PB_ADMIN_* in .env.local`);
+    console.error(
+      `Admin auth failed (${admin.status}) — check PB_ADMIN_* in .env.local`,
+    );
     process.exit(1);
   }
   const adminToken = admin.json.token as string;
 
   // 2. Regular user auth (ghald — the SPA's identity in the click-through)
-  const user = await pbFetch(env.base, "/api/collections/users/auth-with-password", {
-    method: "POST",
-    body: { identity: env.userEmail, password: env.userPassword },
-  });
+  const user = await pbFetch(
+    env.base,
+    "/api/collections/users/auth-with-password",
+    {
+      method: "POST",
+      body: { identity: env.userEmail, password: env.userPassword },
+    },
+  );
   if (user.status !== 200) {
-    console.error(`User auth failed (${user.status}) — check PB_USER_* in .env.local`);
+    console.error(
+      `User auth failed (${user.status}) — check PB_USER_* in .env.local`,
+    );
     process.exit(1);
   }
   const userToken = user.json.token as string;
@@ -154,7 +174,9 @@ async function main(): Promise<void> {
   console.log(`user id: ${userId}`);
 
   // 3. Live rules (what the migrations actually produced)
-  const col = await pbFetch(env.base, "/api/collections/teamdocs", { token: adminToken });
+  const col = await pbFetch(env.base, "/api/collections/teamdocs", {
+    token: adminToken,
+  });
   if (col.status !== 200) {
     console.log(`rules teamdocs: UNAVAILABLE (${col.status})`);
     process.exit(1);
@@ -191,17 +213,23 @@ async function main(): Promise<void> {
     },
   });
   if (probeUser.status !== 200) {
-    console.log(`probe user creation failed: ${probeUser.status} ${JSON.stringify(probeUser.json).slice(0, 300)}`);
+    console.log(
+      `probe user creation failed: ${probeUser.status} ${JSON.stringify(probeUser.json).slice(0, 300)}`,
+    );
     process.exit(1);
   }
   const probeUserId = probeUser.json.id as string;
   console.log(`probe user: ${probeUserId} (${probeEmail})`);
 
   // Probe-user auth (needed to act as the participant)
-  const probeAuth = await pbFetch(env.base, "/api/collections/users/auth-with-password", {
-    method: "POST",
-    body: { identity: probeEmail, password: probePassword },
-  });
+  const probeAuth = await pbFetch(
+    env.base,
+    "/api/collections/users/auth-with-password",
+    {
+      method: "POST",
+      body: { identity: probeEmail, password: probePassword },
+    },
+  );
   if (probeAuth.status !== 200) {
     console.log(`probe user auth failed: ${probeAuth.status}`);
     process.exit(1);
@@ -222,16 +250,22 @@ async function main(): Promise<void> {
     },
   });
   if (event.status !== 200) {
-    console.log(`probe event creation failed: ${event.status} ${JSON.stringify(event.json).slice(0, 300)}`);
+    console.log(
+      `probe event creation failed: ${event.status} ${JSON.stringify(event.json).slice(0, 300)}`,
+    );
     process.exit(1);
   }
   const eventId = event.json.id as string;
   console.log(`probe event: ${eventId}`);
 
   // Coverage read-back (admin) — proves the setup means what the rules evaluate
-  const evFull = await pbFetch(env.base, `/api/collections/events/records/${eventId}`, {
-    token: adminToken,
-  });
+  const evFull = await pbFetch(
+    env.base,
+    `/api/collections/events/records/${eventId}`,
+    {
+      token: adminToken,
+    },
+  );
   const evCreatedBy = evFull.json?.createdBy;
   const evGuests: string[] = evFull.json?.guestUsers ?? [];
   const evTeams: string[] = evFull.json?.teams ?? [];
@@ -250,15 +284,26 @@ async function main(): Promise<void> {
       eventId,
       status: "doc",
     };
-    const ghaldCreate = await pbFetch(env.base, "/api/collections/teamdocs/records", {
-      method: "POST",
-      token: userToken,
-      body: ghaldPayload,
-    });
-    console.log(`create teamdocs (creator, no teamId): ${ghaldCreate.status} ${JSON.stringify(ghaldCreate.json).slice(0, 300)}`);
-    verdict("create-by-creator", `${ghaldCreate.status} → ${classify(ghaldCreate.status, ghaldCreate.json)}`);
-    if (ghaldCreate.status === 200) createdDocIds.push(ghaldCreate.json.id as string);
-    const ghaldDocId = ghaldCreate.status === 200 ? (ghaldCreate.json.id as string) : null;
+    const ghaldCreate = await pbFetch(
+      env.base,
+      "/api/collections/teamdocs/records",
+      {
+        method: "POST",
+        token: userToken,
+        body: ghaldPayload,
+      },
+    );
+    console.log(
+      `create teamdocs (creator, no teamId): ${ghaldCreate.status} ${JSON.stringify(ghaldCreate.json).slice(0, 300)}`,
+    );
+    verdict(
+      "create-by-creator",
+      `${ghaldCreate.status} → ${classify(ghaldCreate.status, ghaldCreate.json)}`,
+    );
+    if (ghaldCreate.status === 200)
+      createdDocIds.push(ghaldCreate.json.id as string);
+    const ghaldDocId =
+      ghaldCreate.status === 200 ? (ghaldCreate.json.id as string) : null;
 
     // 7. probe user (guest) creates an event doc — simulates "userA created a doc"
     const guestPayload = {
@@ -268,13 +313,22 @@ async function main(): Promise<void> {
       eventId,
       status: "doc",
     };
-    const guestCreate = await pbFetch(env.base, "/api/collections/teamdocs/records", {
-      method: "POST",
-      token: probeToken,
-      body: guestPayload,
-    });
-    console.log(`create teamdocs (guest): ${guestCreate.status} ${JSON.stringify(guestCreate.json).slice(0, 300)}`);
-    verdict("create-by-guest", `${guestCreate.status} → ${classify(guestCreate.status, guestCreate.json)}`);
+    const guestCreate = await pbFetch(
+      env.base,
+      "/api/collections/teamdocs/records",
+      {
+        method: "POST",
+        token: probeToken,
+        body: guestPayload,
+      },
+    );
+    console.log(
+      `create teamdocs (guest): ${guestCreate.status} ${JSON.stringify(guestCreate.json).slice(0, 300)}`,
+    );
+    verdict(
+      "create-by-guest",
+      `${guestCreate.status} → ${classify(guestCreate.status, guestCreate.json)}`,
+    );
     let guestDocId: string | null = null;
     if (guestCreate.status === 200) {
       guestDocId = guestCreate.json.id as string;
@@ -290,7 +344,9 @@ async function main(): Promise<void> {
       );
       const items: any[] = list.json?.items ?? [];
       const guestDocVisible = items.some((d) => d.id === guestDocId);
-      console.log(`list teamdocs (creator): ${list.status}, ${items.length}/${list.json?.totalItems} items, guest doc in list: ${guestDocVisible}`);
+      console.log(
+        `list teamdocs (creator): ${list.status}, ${items.length}/${list.json?.totalItems} items, guest doc in list: ${guestDocVisible}`,
+      );
       verdict(
         "list-to-creator",
         guestDocVisible
@@ -299,20 +355,34 @@ async function main(): Promise<void> {
       );
 
       // 9. Visibility — direct GET by the creator (strictest proof: viewRule)
-      const view = await pbFetch(env.base, `/api/collections/teamdocs/records/${guestDocId}`, {
-        token: userToken,
-      });
+      const view = await pbFetch(
+        env.base,
+        `/api/collections/teamdocs/records/${guestDocId}`,
+        {
+          token: userToken,
+        },
+      );
       console.log(`view guest doc (creator): ${view.status}`);
-      verdict("view-by-creator", `${view.status} → ${classify(view.status, view.json)}`);
+      verdict(
+        "view-by-creator",
+        `${view.status} → ${classify(view.status, view.json)}`,
+      );
     }
 
     // 10. Visibility — probe user sees the creator's doc (participant direction)
     if (ghaldDocId) {
-      const viewByGuest = await pbFetch(env.base, `/api/collections/teamdocs/records/${ghaldDocId}`, {
-        token: probeToken,
-      });
+      const viewByGuest = await pbFetch(
+        env.base,
+        `/api/collections/teamdocs/records/${ghaldDocId}`,
+        {
+          token: probeToken,
+        },
+      );
       console.log(`view creator doc (guest): ${viewByGuest.status}`);
-      verdict("view-by-guest", `${viewByGuest.status} → ${classify(viewByGuest.status, viewByGuest.json)}`);
+      verdict(
+        "view-by-guest",
+        `${viewByGuest.status} → ${classify(viewByGuest.status, viewByGuest.json)}`,
+      );
     }
 
     // 11. Server-side presence (admin, rule-free) — discriminator: record EXISTS,
@@ -323,29 +393,47 @@ async function main(): Promise<void> {
         `/api/collections/teamdocs/records?perPage=200&filter=${encodeURIComponent(`eventId="${eventId}"`)}`,
         { token: adminToken },
       );
-      const adminIds: string[] = (adminList.json?.items ?? []).map((d: any) => d.id);
-      console.log(`admin list (eventId=${eventId}): ${adminList.status}, ${adminIds.length}/${adminList.json?.totalItems} items`);
-      if (ghaldDocId) console.log(`admin sees ghald doc: ${adminIds.includes(ghaldDocId)}`);
-      if (guestDocId) console.log(`admin sees guest doc: ${adminIds.includes(guestDocId)}`);
+      const adminIds: string[] = (adminList.json?.items ?? []).map(
+        (d: any) => d.id,
+      );
+      console.log(
+        `admin list (eventId=${eventId}): ${adminList.status}, ${adminIds.length}/${adminList.json?.totalItems} items`,
+      );
+      if (ghaldDocId)
+        console.log(`admin sees ghald doc: ${adminIds.includes(ghaldDocId)}`);
+      if (guestDocId)
+        console.log(`admin sees guest doc: ${adminIds.includes(guestDocId)}`);
     }
   } finally {
     // 12. Cleanup (admin) — docs, event, probe user
     for (const id of createdDocIds) {
-      const del = await pbFetch(env.base, `/api/collections/teamdocs/records/${id}`, {
-        method: "DELETE",
-        token: adminToken,
-      });
+      const del = await pbFetch(
+        env.base,
+        `/api/collections/teamdocs/records/${id}`,
+        {
+          method: "DELETE",
+          token: adminToken,
+        },
+      );
       console.log(`cleanup teamdocs ${id}: ${del.status}`);
     }
-    const delEvent = await pbFetch(env.base, `/api/collections/events/records/${eventId}`, {
-      method: "DELETE",
-      token: adminToken,
-    });
+    const delEvent = await pbFetch(
+      env.base,
+      `/api/collections/events/records/${eventId}`,
+      {
+        method: "DELETE",
+        token: adminToken,
+      },
+    );
     console.log(`cleanup event ${eventId}: ${delEvent.status}`);
-    const delUser = await pbFetch(env.base, `/api/collections/users/records/${probeUserId}`, {
-      method: "DELETE",
-      token: adminToken,
-    });
+    const delUser = await pbFetch(
+      env.base,
+      `/api/collections/users/records/${probeUserId}`,
+      {
+        method: "DELETE",
+        token: adminToken,
+      },
+    );
     console.log(`cleanup user ${probeUserId}: ${delUser.status}`);
   }
 }

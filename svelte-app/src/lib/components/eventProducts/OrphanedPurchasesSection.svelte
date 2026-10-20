@@ -25,7 +25,7 @@
 {#if orphanedPurchases.length > 0}
   <div class="mt-8 mb-8 print:hidden">
     <div
-      class="bg-warning/20 sticky top-12 z-2 flex items-center gap-2 rounded-lg px-4 py-1 opacity-70 shadow-md"
+      class="sticky top-12 z-2 flex items-center gap-2 rounded-lg bg-warning/20 px-4 py-1 opacity-70 shadow-md"
     >
       <Ghost size={16} />
       <span class="font-bold">Achats sans produit actif</span>
@@ -34,21 +34,21 @@
         achats sur {orphanedPurchases.length} produits)</span
       >
     </div>
-    <div class="alert alert-soft m-2">
+    <div class="m-2 alert alert-soft">
       Des achats ont été déclaré pour ces produits, mais ceux-ci ne sont plus
       présents dans les recettes de l'événement.
     </div>
-    <div class="divide-neutral/20 my-2 divide-y">
+    <div class="my-2 divide-y divide-neutral/20">
       {#each orphanedPurchases as orphan (orphan.productId)}
         {@const typeInfo = getProductTypeInfo(orphan.productType)}
         {@const badges = formatPurchasesWithBadges(orphan.purchases)}
         <div class="flex flex-wrap items-center gap-x-4 gap-y-1.5 px-3 py-1.5">
           <div class="flex min-w-0 flex-wrap items-center gap-3">
             <div
-              class="text-warning/80 flex shrink-0 items-center gap-1.5 rounded-sm px-0.5"
+              class="flex shrink-0 items-center gap-1.5 rounded-sm px-0.5 text-warning/80"
             >
               <typeInfo.icon size={16} class="shrink-0" />
-              <span class="decoration-warning/40 font-semibold"
+              <span class="font-semibold decoration-warning/40"
                 >{orphan.productName}</span
               >
               <Ghost size={13} class="shrink-0" />
@@ -58,18 +58,18 @@
           <div
             class="ml-auto flex flex-wrap items-center justify-end gap-x-2 gap-y-1"
           >
-            <span class="text-warning/60 text-xs italic"
+            <span class="text-xs text-warning/60 italic"
               >{orphan.kind === "need-removed"
                 ? "besoin retiré des recettes"
                 : "produit supprimé"}</span
             >
 
             <div
-              class="bg-success/5 flex min-h-6 flex-wrap items-center justify-end gap-2 rounded px-1"
+              class="flex min-h-6 flex-wrap items-center justify-end gap-2 rounded bg-success/5 px-1"
             >
               <div class="flex items-center gap-1">
-                <ShoppingCart size={13} class="text-base-content/30 shrink-0" />
-                <span class="text-base-content/50 text-xs font-light"
+                <ShoppingCart size={13} class="shrink-0 text-base-content/30" />
+                <span class="text-xs font-light text-base-content/50"
                   >achats:</span
                 >
               </div>
@@ -86,7 +86,7 @@
                   </span>
                 {/each}
               {:else}
-                <span class="text-base-content/60 text-xs font-light"
+                <span class="text-xs font-light text-base-content/60"
                   >aucun...</span
                 >
               {/if}

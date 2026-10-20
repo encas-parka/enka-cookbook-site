@@ -31,9 +31,12 @@ const IMPORT_DIR = join(import.meta.dir, "pb-import");
 const ID_MAP_FILE = join(IMPORT_DIR, "id-map.json");
 // Target overridable via env (disposable instance / orchestrator) — same
 // convention as PB_URL_OVERRIDE in 3-import-pb.ts
-const DB_PATH = process.env.PB_DB_PATH_OVERRIDE
-  || join(import.meta.dir, "..", "pocketbase", "pb_data", "data.db");
-const PB_BASE_URL = (process.env.PB_URL_OVERRIDE || "http://127.0.0.1:8090").replace(/\/+$/, "");
+const DB_PATH =
+  process.env.PB_DB_PATH_OVERRIDE ||
+  join(import.meta.dir, "..", "pocketbase", "pb_data", "data.db");
+const PB_BASE_URL = (
+  process.env.PB_URL_OVERRIDE || "http://127.0.0.1:8090"
+).replace(/\/+$/, "");
 const DRY_RUN = process.argv.includes("--dry-run");
 
 const COLLECTIONS_TO_FIX = [
@@ -55,10 +58,14 @@ const COLLECTIONS_TO_FIX = [
 
 function loadIdMap(): Map<string, string> {
   if (!existsSync(ID_MAP_FILE)) {
-    console.warn(`   ⚠️  No id-map.json found — recipes with forced IDs will still work, Appwrite collections may fail.`);
+    console.warn(
+      `   ⚠️  No id-map.json found — recipes with forced IDs will still work, Appwrite collections may fail.`,
+    );
     return new Map();
   }
-  const obj: Record<string, string> = JSON.parse(readFileSync(ID_MAP_FILE, "utf-8"));
+  const obj: Record<string, string> = JSON.parse(
+    readFileSync(ID_MAP_FILE, "utf-8"),
+  );
   return new Map(Object.entries(obj));
 }
 
@@ -76,7 +83,11 @@ function loadImportRecords(collection: string): ImportRecord[] {
   return JSON.parse(readFileSync(filePath, "utf-8"));
 }
 
-function resolvePbId(record: ImportRecord, idMap: Map<string, string>, collection: string): string | null {
+function resolvePbId(
+  record: ImportRecord,
+  idMap: Map<string, string>,
+  collection: string,
+): string | null {
   if (collection === "recipes" && record.id) {
     return record.id;
   }
@@ -124,8 +135,12 @@ async function main() {
   // Safety: check the PB serving this target is stopped (the orchestrator
   // handles stop/start around this step)
   if (await isPocketBaseRunning()) {
-    console.error(`❌ PocketBase is running on ${PB_BASE_URL} — stop the instance serving this target first.`);
-    console.error(`   Writing the SQLite DB while served risks corruption (WAL).`);
+    console.error(
+      `❌ PocketBase is running on ${PB_BASE_URL} — stop the instance serving this target first.`,
+    );
+    console.error(
+      `   Writing the SQLite DB while served risks corruption (WAL).`,
+    );
     process.exit(1);
   }
 
@@ -137,7 +152,8 @@ async function main() {
   }
 
   // Backup
-  const backupPath = DB_PATH + `.backup-${new Date().toISOString().replace(/[:.]/g, "-")}`;
+  const backupPath =
+    DB_PATH + `.backup-${new Date().toISOString().replace(/[:.]/g, "-")}`;
   if (!DRY_RUN) {
     copyFileSync(DB_PATH, backupPath);
     console.log(`📦 Backup saved: ${backupPath}\n`);
@@ -199,13 +215,15 @@ async function main() {
 
       if (DRY_RUN) {
         if (updated < 3) {
-          console.log(`   [DRY RUN] UPDATE ${collection} SET created='${createdVal}', updated='${updatedVal}' WHERE id='${pbId}'`);
+          console.log(
+            `   [DRY RUN] UPDATE ${collection} SET created='${createdVal}', updated='${updatedVal}' WHERE id='${pbId}'`,
+          );
         }
         updated++;
       } else {
         try {
           const stmt = db.query(
-            `UPDATE ${collection} SET created = ?, updated = ? WHERE id = ?`
+            `UPDATE ${collection} SET created = ?, updated = ? WHERE id = ?`,
           );
           stmt.run(createdVal, updatedVal, pbId);
           updated++;
@@ -220,7 +238,9 @@ async function main() {
     totalSkipped += skipped;
     totalMissing += missing;
 
-    console.log(`   ✅ ${collection}: ${updated} updated, ${skipped} no timestamps, ${missing} no PB ID`);
+    console.log(
+      `   ✅ ${collection}: ${updated} updated, ${skipped} no timestamps, ${missing} no PB ID`,
+    );
   }
 
   if (!DRY_RUN) {
@@ -237,7 +257,9 @@ async function main() {
   console.log(`   Missing (no ID):  ${totalMissing}`);
 
   if (DRY_RUN) {
-    console.log(`\n   [DRY RUN] No changes were made. Run without --dry-run to apply.`);
+    console.log(
+      `\n   [DRY RUN] No changes were made. Run without --dry-run to apply.`,
+    );
   } else {
     console.log(`\n   ✅ Timestamps fixed! You can now start PocketBase.`);
   }

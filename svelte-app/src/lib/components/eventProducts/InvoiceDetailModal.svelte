@@ -384,7 +384,7 @@
       <div class="space-y-5">
         <!-- Erreur -->
         {#if error}
-          <div class="alert alert-error alert-soft">
+          <div class="alert alert-soft alert-error">
             <span class="text-sm">{error}</span>
           </div>
         {/if}
@@ -419,7 +419,7 @@
             </div>
           {/if}
 
-          <span class="text-base-content/50 text-xs">
+          <span class="text-xs text-base-content/50">
             {displayPurchases.length} achat{displayPurchases.length > 1
               ? "s"
               : ""}
@@ -427,7 +427,7 @@
         </div>
 
         <!-- ═══ Zone : Modifier l'achat groupé ═══ -->
-        <div class="bg-base-200 rounded-lg p-4">
+        <div class="rounded-lg bg-base-200 p-4">
           <div class="mb-3 text-sm font-semibold">Modifier l'achat groupé</div>
 
           <div class="grid grid-cols-1 gap-3 sm:grid-cols-2">
@@ -523,7 +523,7 @@
                 disabled={loading || !globalDirty}
               >
                 {#if loading}
-                  <span class="loading loading-spinner loading-xs"></span>
+                  <span class="loading loading-xs loading-spinner"></span>
                 {:else}
                   <Check class="size-4" />
                 {/if}
@@ -551,7 +551,7 @@
             {#if editingPurchaseId === purchase.id}
               <!-- ─── Card en mode édition ─── -->
               <div
-                class="card bg-base-100 border-primary/40 card-xs border shadow-sm"
+                class="card border border-primary/40 bg-base-100 shadow-sm card-xs"
               >
                 <div class="card-body">
                   <div class="mb-2 text-sm font-medium">
@@ -619,7 +619,7 @@
                       disabled={loading}
                     >
                       {#if loading}
-                        <span class="loading loading-spinner loading-xs"></span>
+                        <span class="loading loading-xs loading-spinner"></span>
                       {:else}
                         <Check class="size-3.5" />
                       {/if}
@@ -631,7 +631,7 @@
             {:else}
               <!-- ─── Card en mode lecture ─── -->
               <div
-                class="card bg-base-100 border-neutral/40 card-xs border shadow-sm"
+                class="card border border-neutral/40 bg-base-100 shadow-sm card-xs"
               >
                 <div class="card-body">
                   <div class="flex flex-wrap items-center gap-x-3 gap-y-1.5">
@@ -660,7 +660,7 @@
                       class="ml-auto inline-flex shrink-0 items-center gap-1"
                     >
                       <button
-                        class="btn btn-ghost btn-square btn-sm"
+                        class="btn btn-square btn-ghost btn-sm"
                         onclick={() => startEditPurchase(purchase)}
                         disabled={loading}
                         title="Modifier cet achat"
@@ -668,7 +668,7 @@
                         <SquarePen size={16} />
                       </button>
                       <button
-                        class="btn btn-ghost btn-square btn-sm text-error"
+                        class="btn btn-square btn-ghost text-error btn-sm"
                         onclick={() => confirmDeletePurchase(purchase)}
                         disabled={loading}
                         title="Supprimer"
@@ -683,14 +683,14 @@
           {/each}
 
           {#if displayPurchases.length === 0}
-            <div class="text-base-content/50 py-8 text-center text-sm">
+            <div class="py-8 text-center text-sm text-base-content/50">
               Aucun achat dans ce groupe
             </div>
           {/if}
         </div>
       </div>
     {:else}
-      <div class="text-base-content/50 py-8 text-center text-sm">
+      <div class="py-8 text-center text-sm text-base-content/50">
         Achat groupé introuvable
       </div>
     {/if}

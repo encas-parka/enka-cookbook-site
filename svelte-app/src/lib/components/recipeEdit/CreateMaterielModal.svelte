@@ -135,7 +135,7 @@
     >
       <!-- Erreur -->
       {#if serverError}
-        <div class="alert alert-error max-md:alert-vertical text-sm">
+        <div class="alert text-sm alert-error max-md:alert-vertical">
           <TriangleAlert size={18} />
           <span>{serverError}</span>
         </div>
@@ -146,11 +146,11 @@
         <div class="fieldset">
           <legend class="fieldset-legend">Nom du matériel</legend>
           <label
-            class="input input-lg w-full {showErrors && validationErrors.name
+            class="input w-full input-lg {showErrors && validationErrors.name
               ? 'input-error'
               : ''}"
           >
-            <Wrench class="text-base-content/50 h-5 w-5" />
+            <Wrench class="h-5 w-5 text-base-content/50" />
             <input
               id="materiel-name-input"
               type="text"
@@ -163,9 +163,9 @@
             />
           </label>
           {#if showErrors && validationErrors.name}
-            <p class="text-error text-xs">{validationErrors.name}</p>
+            <p class="text-xs text-error">{validationErrors.name}</p>
           {/if}
-          <p class="text-base-content/60 text-xs italic">
+          <p class="text-xs text-base-content/60 italic">
             2 à 50 caractères. Ex: "Four", "Robot Mixeur", "Gastro 1/1 (10cm)"
           </p>
         </div>

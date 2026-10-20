@@ -576,7 +576,7 @@ export class EventsStore {
       contributors: data.contributors ?? [],
       todos: data.todos ?? [],
       status: data.status || "proposition",
-    } as unknown as Omit<Main, 'id' | 'created' | 'updated'>;
+    } as unknown as Omit<Main, "id" | "created" | "updated">;
 
     try {
       const record = await this.#collection.create(
@@ -803,15 +803,17 @@ export class EventsStore {
       ? event.guestEmails
       : [];
 
-    const guestSet = new Set(
-      currentGuests.map((e: string) => e.toLowerCase()),
-    );
+    const guestSet = new Set(currentGuests.map((e: string) => e.toLowerCase()));
     for (const email of emails) {
       guestSet.add(email.toLowerCase());
     }
     const updatedGuests = [...currentGuests];
     for (const email of emails) {
-      if (!currentGuests.some((g: string) => g.toLowerCase() === email.toLowerCase())) {
+      if (
+        !currentGuests.some(
+          (g: string) => g.toLowerCase() === email.toLowerCase(),
+        )
+      ) {
         updatedGuests.push(email);
       }
     }
@@ -852,9 +854,8 @@ export class EventsStore {
     // --- 5. Créer ou récupérer un share link pour l'event ---
     let shareLinkId: string | null = null;
     try {
-      const { getEventShareLinks, createShareLink } = await import(
-        "$lib/services/pb-invitations"
-      );
+      const { getEventShareLinks, createShareLink } =
+        await import("$lib/services/pb-invitations");
       const userId = globalState.userId || event.createdBy;
       const existingLinks = await getEventShareLinks(eventId);
       if (existingLinks.length > 0) {
@@ -874,19 +875,19 @@ export class EventsStore {
 
     // --- 6. Envoyer les emails (fire-and-forget) ---
     if (shareLinkId && emails.length > 0) {
-      pb
-        .send("/api/enka/send-emails", {
-          method: "POST",
-          body: {
-            template: "invitation_to_event",
-            recipients: emails.map((email) => ({
-              email,
-              shareLinkId,
-            })),
-          },
-        })
+      pb.send("/api/enka/send-emails", {
+        method: "POST",
+        body: {
+          template: "invitation_to_event",
+          recipients: emails.map((email) => ({
+            email,
+            shareLinkId,
+          })),
+        },
+      })
         .then((result) => {
-          const okCount = result.results?.filter((r: { ok: boolean }) => r.ok).length || 0;
+          const okCount =
+            result.results?.filter((r: { ok: boolean }) => r.ok).length || 0;
           const failCount = emails.length - okCount;
           if (failCount > 0) {
             console.warn(

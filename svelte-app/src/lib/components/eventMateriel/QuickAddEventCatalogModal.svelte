@@ -241,7 +241,7 @@
       {#each CATALOG_TYPE_GROUPS as group (group.type)}
         {@const items = catalogByType.get(group.type) || []}
         {#if items.length > 0}
-          <div class="collapse-arrow bg-base-200 collapse">
+          <div class="collapse-arrow collapse bg-base-200">
             <input
               type="checkbox"
               checked={group.defaultOpen || searchQuery.trim().length > 0}
@@ -254,7 +254,7 @@
                 <Icon class="size-4" />
               {/if}
               {group.label}
-              <span class="badge badge-sm badge-ghost">{items.length}</span>
+              <span class="badge badge-ghost badge-sm">{items.length}</span>
             </div>
             <div class="collapse-content">
               <div class="space-y-1 pt-1">
@@ -276,7 +276,7 @@
       {/each}
 
       {#if catalogByType.size === 0}
-        <div class="text-base-content/60 py-8 text-center">
+        <div class="py-8 text-center text-base-content/60">
           Aucun résultat pour "{searchQuery}"
         </div>
       {/if}
@@ -285,7 +285,7 @@
 
   <ModalFooter>
     <div class="flex w-full items-center justify-between">
-      <span class="text-base-content/70 text-sm">
+      <span class="text-sm text-base-content/70">
         {#if hasSelection}
           {summary.itemCount} item{summary.itemCount > 1 ? "s" : ""} — quantité totale
           : {summary.totalQty}
@@ -305,7 +305,7 @@
           disabled={!hasChanges || loading}
         >
           {#if loading}
-            <span class="loading loading-spinner loading-xs"></span>
+            <span class="loading loading-xs loading-spinner"></span>
           {:else}
             <Check class="size-4" />
           {/if}

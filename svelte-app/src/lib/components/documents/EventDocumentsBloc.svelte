@@ -26,7 +26,7 @@
 </script>
 
 {#if canEdit}
-  <div class="rounded-box bg-base-100 shadow-accent p-4 shadow">
+  <div class="rounded-box bg-base-100 p-4 shadow shadow-accent">
     <div class="mb-3 flex items-start justify-between">
       <h3 class="flex items-center gap-2 text-base font-semibold">
         <FileText size={22} />
@@ -34,7 +34,7 @@
       </h3>
       {#if canEdit}
         <button
-          class="btn btn-primary btn-sm btn-soft"
+          class="btn btn-soft btn-primary btn-sm"
           onclick={() =>
             navigate(`/event/${eventId}/document/create`, { search: { tag } })}
         >
@@ -48,13 +48,13 @@
       <div class="flex flex-wrap items-center gap-4">
         {#each sortedDocs.slice(0, 5) as doc (doc.id)}
           <a
-            class="bg-base-200/60 hover:bg-base-200 flex cursor-pointer items-center gap-2 rounded-lg p-3 text-sm shadow-sm transition-colors"
+            class="flex cursor-pointer items-center gap-2 rounded-lg bg-base-200/60 p-3 text-sm shadow-sm transition-colors hover:bg-base-200"
             href={`/event/${eventId}/document/${doc.id}`}
           >
-            <FileText class="text-primary h-3 w-3 shrink-0" />
+            <FileText class="h-3 w-3 shrink-0 text-primary" />
             <span class="truncate font-medium">{doc.title}</span>
             <div
-              class="text-base-content/60 ms-4 flex items-center gap-1 text-xs"
+              class="ms-4 flex items-center gap-1 text-xs text-base-content/60"
             >
               <Clock class="h-3 w-3" />
               <span>Modifié {formatDateRelative(doc.updated)}</span>
@@ -63,7 +63,7 @@
         {/each}
         {#if sortedDocs.length > 5}
           <a
-            class="link link-primary link-sm"
+            class="link-sm link link-primary"
             href={`/event/${eventId}/documents`}
           >
             Voir les {sortedDocs.length} documents →
@@ -71,7 +71,7 @@
         {/if}
       </div>
     {:else}
-      <p class="text-base-content/60 text-sm">Aucun document pour cette page</p>
+      <p class="text-sm text-base-content/60">Aucun document pour cette page</p>
     {/if}
   </div>
 {/if}

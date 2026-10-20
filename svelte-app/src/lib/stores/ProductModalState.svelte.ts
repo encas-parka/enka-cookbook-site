@@ -103,10 +103,7 @@ export class ProductModalState implements ProductModalStateType {
   // produit, cf. ProductModal) : plus de re-key, l'id ne change jamais.
   private productId: string;
 
-  constructor(
-    productId: string,
-    initialTab: string = "recettes",
-  ) {
+  constructor(productId: string, initialTab: string = "recettes") {
     this.productId = productId;
     this.currentTab = initialTab;
 

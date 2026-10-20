@@ -123,7 +123,7 @@
     </div>
   {/if}
   <!-- Input email avec bouton d'ajout -->
-  <div class="rounded-box bg-base-200 flex flex-col gap-2 p-4">
+  <div class="flex flex-col gap-2 rounded-box bg-base-200 p-4">
     <div class="flex flex-wrap gap-2">
       <label class="input min-w-56 flex-1 gap-2">
         <Mail class="h-4 w-4 opacity-50" />
@@ -150,7 +150,7 @@
       informations concernant l'équipe et à supprimer des membres.
     </div>
     <button
-      class="btn btn-primary btn-sm ml-auto w-fit"
+      class="btn ml-auto w-fit btn-primary btn-sm"
       onclick={addEmail}
       disabled={loading || !emailInput.trim()}
       title="Ajouter à la liste"
@@ -168,7 +168,7 @@
       </div>
       <div class="flex flex-wrap gap-2">
         {#each invitedEmails as email (email)}
-          <div class="badge badge-primary badge-lg gap-2">
+          <div class="badge gap-2 badge-lg badge-primary">
             <Mail class="h-3 w-3" />
             {email}
             <button
@@ -192,14 +192,13 @@
     </label>
     <textarea
       id="invite-message"
-      class="textarea textarea-bordered w-full"
+      class="textarea-bordered textarea w-full"
       bind:value={customMessage}
       placeholder="Ajoutez un message pour les personnes invitées..."
       rows="3"
       maxlength="200"
-      disabled={loading}
-    ></textarea>
-    <span class="label label-text-alt opacity-50"
+      disabled={loading}></textarea>
+    <span class="label-text-alt label opacity-50"
       >{customMessage.length}/200 caractères</span
     >
   </div>

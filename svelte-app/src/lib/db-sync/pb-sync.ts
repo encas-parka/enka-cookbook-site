@@ -29,6 +29,7 @@ export {
 export {
   createSyncCollection,
   mergeByKey,
+  pbDate,
   RecordDeletedError,
   RecordNotFoundError,
 } from "./pb-collection";

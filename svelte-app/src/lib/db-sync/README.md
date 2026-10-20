@@ -21,6 +21,26 @@ Offline-first synchronization layer bridging **PocketBase** (remote) and **Dexie
 
 ---
 
+## Session cursor invariant
+
+Collections whose authorization grant is **dynamic** (`events`, `teamdocs`,
+`materiel`, `materiel_loan`) do not let their delta cursor survive across
+sessions: `syncInitial` resets it before fetching (ADR
+`docs/adr/0001-delta-sync-cursor-invalidation.md`). The epoch fetch that
+follows catches everything missed while away — mutations **and**
+authorization widenings (team join offline, invitations), which no timestamp
+can express. Within a session, `syncRevalidate` stays a pure delta (SSE
+gaps), with a 24 h TTL fallback (`SESSION_FULL_SYNC_TTL_MS`) for long-lived
+background tabs. The session full fetch of `events` is bounded by
+`epochFilter` (`dateEnd >= now - 90 days`, empty dates included) — a bound
+that never applies to incremental fetches.
+
+Cursor-aligned collections (`recipes`/`ingredients` public,
+`products`/`purchases`/`event_materiel` scoped by `eventId`) keep the plain
+delta: their cursor scope already matches their grant.
+
+---
+
 ## Cache identity invariant
 
 The local cache (private tables + `syncMeta` cursors) belongs to **exactly one

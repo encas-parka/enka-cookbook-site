@@ -17,6 +17,7 @@ import { globalState } from "./GlobalState.svelte";
 import { nativeTeamsStore } from "./NativeTeamsStore.svelte";
 import { eventMaterielStore } from "./EventMaterielStore.svelte";
 import { createSyncCollection, db, pb } from "$lib/db-sync/pb-sync";
+import { SESSION_FULL_SYNC_TTL_MS } from "$lib/constants/sync";
 
 /**
  * MaterielStore — Gestion du matériel avec Svelte 5 + aw-sync
@@ -251,10 +252,14 @@ export class MaterielStore {
   }
 
   /**
-   * Delta sync depuis PocketBase (premier chargement, loading UI).
-   * Toggle `this.#loading` autour de la revalidation.
+   * Phase 2 : sync de session (ADR 0001 « curseurs de session ») — les
+   * curseurs (materiel + materiel_loan) sont resetés AVANT le fetch : tout
+   * ce qui a été manqué pendant l'absence (mutations ET élargissements de
+   * grant) est rattrapé ici, une fois par session. Toggle `this.#loading`
+   * autour de la revalidation.
    */
   async syncInitial(): Promise<void> {
+    await this.#resetCursorForSession();
     return this.#runWithLoading(() => this.syncRevalidate());
   }
 
@@ -271,6 +276,12 @@ export class MaterielStore {
 
     try {
       if (!globalState.userId) return;
+      // Filet TTL : une session restée en arrière-plan au-delà du TTL n'a
+      // plus de curseur fiable (grants manqués pendant l'absence) — on
+      // repasse par un full de session avant le delta.
+      if (Date.now() - this.#lastFullSyncAt > SESSION_FULL_SYNC_TTL_MS) {
+        await this.#resetCursorForSession();
+      }
 
       const uid = globalState.userId;
       await this.#materielCollection.initialFetch();
@@ -305,6 +316,16 @@ export class MaterielStore {
     }
   }
 
+  /** Horodatage du dernier fetch complet de session (mémoire — vie de page). */
+  #lastFullSyncAt = Date.now();
+
+  /** Reset des curseurs delta (les deux collections) + horodatage du full. */
+  async #resetCursorForSession(): Promise<void> {
+    await this.#materielCollection.resetCursor();
+    await this.#loanCollection.resetCursor();
+    this.#lastFullSyncAt = Date.now();
+  }
+
   /**
    * Invalide les curseurs delta (materiel + materiel_loan) puis
    * resynchronise, SANS vider les tables locales (pas de fenêtre d'état
@@ -314,8 +335,7 @@ export class MaterielStore {
    * TeamdocsStore (fix P12).
    */
   async resetCursorAndSync(): Promise<void> {
-    await this.#materielCollection.resetCursor();
-    await this.#loanCollection.resetCursor();
+    await this.#resetCursorForSession();
     await this.syncRevalidate();
   }
 

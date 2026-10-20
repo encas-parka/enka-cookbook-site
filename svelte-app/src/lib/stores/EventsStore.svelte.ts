@@ -46,8 +46,14 @@ import {
   bridgeToMap,
   db,
   pb,
+  pbDate,
   type BridgeResult,
+  type PbFetchOptions,
 } from "$lib/db-sync/pb-sync";
+import {
+  EVENTS_EPOCH_FLOOR_DAYS,
+  SESSION_FULL_SYNC_TTL_MS,
+} from "$lib/constants/sync";
 
 // =============================================================================
 // STORE CLASS
@@ -271,10 +277,14 @@ export class EventsStore {
   }
 
   /**
-   * Phase 2 : Delta sync depuis PocketBase (premier chargement, loading UI).
-   * Toggle `this.#loading` autour de la revalidation.
+   * Phase 2 : sync de session (ADR 0001 « curseurs de session ») — le
+   * curseur est reseté AVANT le fetch, qui repart donc de l'époque : tout ce
+   * qui a été manqué pendant l'absence (mutations ET élargissements de
+   * grant : join d'équipe hors ligne, invitation) est rattrapé ici, une fois
+   * par session. Toggle `this.#loading` autour de la revalidation.
    */
   async syncInitial(): Promise<void> {
+    await this.#resetCursorForSession();
     return this.#runWithLoading(() => this.syncRevalidate());
   }
 
@@ -286,13 +296,19 @@ export class EventsStore {
    */
   async syncRevalidate(): Promise<void> {
     if (this.#revalidating) return;
+    // Filet TTL : une session restée en arrière-plan au-delà du TTL n'a plus
+    // de curseur fiable (grants manqués pendant l'absence) — on repasse par
+    // un full de session avant le delta.
+    if (Date.now() - this.#lastFullSyncAt > SESSION_FULL_SYNC_TTL_MS) {
+      await this.#resetCursorForSession();
+    }
     this.#revalidating = true;
 
     console.log("[EventsStore] Synchronisation depuis PocketBase...");
 
     try {
       const uid = globalState.userId;
-      await this.#collection.initialFetch();
+      await this.#collection.initialFetch(this.#sessionFetchOptions());
       // Logout en vol : ne pas livrer les données de l'utilisateur précédent
       // à la cache du suivant.
       if (globalState.userId !== uid) return;
@@ -321,6 +337,32 @@ export class EventsStore {
     }
   }
 
+  /** Horodatage du dernier fetch complet de session (mémoire — vie de page). */
+  #lastFullSyncAt = Date.now();
+
+  /**
+   * Bornes du fetch complet de session : les events terminés depuis plus de
+   * EVENTS_EPOCH_FLOOR_DAYS ne sont pas re-populés (l'historique s'accumule,
+   * le présent compte). Les mutations des events hors fenêtre restent
+   * rattrapées par le delta — l'epochFilter ne s'applique qu'au fetch
+   * complet. `dateEnd = ''` inclut les events sans date (champ non requis au
+   * schéma) : une borne ne doit jamais rendre un record invisible.
+   */
+  #sessionFetchOptions(): PbFetchOptions {
+    const floor = pbDate(
+      new Date(Date.now() - EVENTS_EPOCH_FLOOR_DAYS * 24 * 60 * 60 * 1000),
+    );
+    return {
+      epochFilter: ["dateEnd >= {:floor} || dateEnd = ''", { floor }],
+    };
+  }
+
+  /** Reset du curseur delta + horodatage du full de session qui suivra. */
+  async #resetCursorForSession(): Promise<void> {
+    await this.#collection.resetCursor();
+    this.#lastFullSyncAt = Date.now();
+  }
+
   /**
    * Force un re-sync complet depuis PocketBase (safe, n'exception pas).
    * Utilise par GlobalState quand un message realtime custom est recu
@@ -342,7 +384,7 @@ export class EventsStore {
    * delta comme au SSE. Même pattern que TeamdocsStore (fix P12).
    */
   async resetCursorAndSync(): Promise<void> {
-    await this.#collection.resetCursor();
+    await this.#resetCursorForSession();
     await this.syncRevalidate();
   }
 

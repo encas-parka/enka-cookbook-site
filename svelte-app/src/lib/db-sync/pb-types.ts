@@ -35,6 +35,14 @@ export interface PbFetchOptions {
    */
   filter?: string | [template: string, vars: Record<string, unknown>];
   /**
+   * Filter applied ONLY when the delta cursor is absent (first sync, or the
+   * post-reset session full fetch): bounds the otherwise-unbounded fetch
+   * (ex. `dateEnd >= {:floor}` on events). Deliberately ignored on every
+   * incremental fetch — a bound must never exclude *mutations* of records
+   * outside the window, only their initial population.
+   */
+  epochFilter?: string | [template: string, vars: Record<string, unknown>];
+  /**
    * Scopes the delta-sync cursor in `syncMeta` (key `${collection}:${scopeKey}`).
    * Required whenever `filter` scopes the fetch (ex. `eventId`) — without it,
    * switching scope silently misses records whose `updated` predates the

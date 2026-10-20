@@ -232,7 +232,12 @@ function compareValues(left: unknown, op: string, right: unknown): boolean {
     case "=":
       if (bothNumeric) return Number(l) === Number(r);
       return (
-        l === r || (l === null && r === "null") || (r === null && l === "null")
+        l === r ||
+        (l === null && r === "null") ||
+        (r === null && l === "null") ||
+        // PB expands `field = ''` to (field = '' OR field IS NULL): an
+        // unset field matches the empty-string literal.
+        (l === null && r === "")
       );
     case "!=":
       return !compareValues(left, "=", right);

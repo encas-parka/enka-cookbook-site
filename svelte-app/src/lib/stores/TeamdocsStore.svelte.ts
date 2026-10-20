@@ -6,6 +6,7 @@ import {
   db,
   pb,
 } from "$lib/db-sync/pb-sync";
+import { SESSION_FULL_SYNC_TTL_MS } from "$lib/constants/sync";
 
 export class TeamdocsStore {
   #collection = createSyncCollection<Teamdocs>(pb, db.teamdocs, "teamdocs");
@@ -104,10 +105,13 @@ export class TeamdocsStore {
   }
 
   /**
-   * Delta sync depuis PocketBase (premier chargement, loading UI).
-   * Toggle `this.#loading` autour de la revalidation.
+   * Phase 2 : sync de session (ADR 0001 « curseurs de session ») — le
+   * curseur est reseté AVANT le fetch : tout ce qui a été manqué pendant
+   * l'absence (mutations ET élargissements de grant) est rattrapé ici, une
+   * fois par session. Toggle `this.#loading` autour de la revalidation.
    */
   async syncInitial(): Promise<void> {
+    await this.#resetCursorForSession();
     return this.#runWithLoading(() => this.syncRevalidate());
   }
 
@@ -124,6 +128,12 @@ export class TeamdocsStore {
     }
 
     if (this.#revalidating) return;
+    // Filet TTL : une session restée en arrière-plan au-delà du TTL n'a plus
+    // de curseur fiable (grants manqués pendant l'absence) — on repasse par
+    // un full de session avant le delta.
+    if (Date.now() - this.#lastFullSyncAt > SESSION_FULL_SYNC_TTL_MS) {
+      await this.#resetCursorForSession();
+    }
     this.#revalidating = true;
     this.#error = null;
 
@@ -155,8 +165,17 @@ export class TeamdocsStore {
    * ramènerait (trou P12 du click-through 20-10).
    */
   async resetCursorAndSync(): Promise<void> {
-    await this.#collection.resetCursor();
+    await this.#resetCursorForSession();
     await this.syncRevalidate();
+  }
+
+  /** Horodatage du dernier fetch complet de session (mémoire — vie de page). */
+  #lastFullSyncAt = Date.now();
+
+  /** Reset du curseur delta + horodatage du full de session qui suivra. */
+  async #resetCursorForSession(): Promise<void> {
+    await this.#collection.resetCursor();
+    this.#lastFullSyncAt = Date.now();
   }
 
   async #runWithLoading(work: () => Promise<void>): Promise<void> {

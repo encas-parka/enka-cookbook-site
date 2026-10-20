@@ -110,6 +110,15 @@ function maxUpdated(records: PbDoc[]): string {
 }
 
 /**
+ * Format a Date in PocketBase's canonical datetime format
+ * (`YYYY-MM-DD HH:mm:ss.SSSZ` — space separator, UTC): the shared lexical
+ * contract of delta cursors and datetime filters.
+ */
+export function pbDate(date: Date = new Date()): string {
+  return date.toISOString().replace("T", " ");
+}
+
+/**
  * Marge retirée à l'horloge client avant de plafonner le curseur — absorbe
  * une petite avance de l'horloge client sans re-fetch superflu.
  */
@@ -120,10 +129,10 @@ const CURSOR_CLOCK_MARGIN_MS = 5 * 60 * 1000;
  * gabarit lexical que `maxUpdated` et le filtre delta. NB : `toISOString()`
  * produit un séparateur `T`, qui trierait lexiquement AU-DESSUS de tout
  * timestamp PB du même jour (espace < T) et rendrait le plafond inopérant
- * pour les dérives intra-journal — d'où le remplacement.
+ * pour les dérives intra-journal — d'où `pbDate()`.
  */
 function clientClockCap(now: number = Date.now()): string {
-  return new Date(now - CURSOR_CLOCK_MARGIN_MS).toISOString().replace("T", " ");
+  return pbDate(new Date(now - CURSOR_CLOCK_MARGIN_MS));
 }
 
 /**
@@ -346,15 +355,27 @@ export function createSyncCollection<T extends PbDoc>(
     const localCount = await table.count();
 
     // 2. Build the delta filter — `>=` replays boundary records (the upsert
-    //    is idempotent by id) so same-timestamp mutations are never dropped
+    //    is idempotent by id) so same-timestamp mutations are never dropped.
+    //    The epochFilter only applies when the cursor is ABSENT (session
+    //    full fetch): it bounds the unbounded fetch and must NEVER apply to
+    //    incremental fetches — mutations of out-of-window records stay live.
     const userFilter = resolveFilter(pb, fetchOptions);
+    const epochFilter =
+      meta?.lastSync && fetchOptions?.epochFilter
+        ? undefined
+        : resolveFilter(pb, { filter: fetchOptions?.epochFilter });
+    const scopeFilter =
+      [userFilter, epochFilter].filter(Boolean).join(" && ") || undefined;
     const combinedVars = {
       ...(Array.isArray(fetchOptions?.filter) ? fetchOptions!.filter[1] : {}),
+      ...(Array.isArray(fetchOptions?.epochFilter)
+        ? fetchOptions!.epochFilter[1]
+        : {}),
       since,
     };
 
-    const deltaFilter = userFilter
-      ? pb.filter(`(${userFilter}) && updated >= {:since}`, combinedVars)
+    const deltaFilter = scopeFilter
+      ? pb.filter(`(${scopeFilter}) && updated >= {:since}`, combinedVars)
       : pb.filter("updated >= {:since}", { since });
 
     console.log(
@@ -379,7 +400,9 @@ export function createSyncCollection<T extends PbDoc>(
     //     This handles the case where `updated` column was added after
     //     the initial data import and existing records have null/empty values.
     if (freshRecords.length === 0 && localCount === 0) {
-      const fullFilter = userFilter ?? undefined;
+      // Keeps the epochFilter (a scope bound, not a delta-time filter);
+      // only the `updated >=` replay condition is dropped.
+      const fullFilter = scopeFilter;
       console.warn(
         `[pb-sync] ${collectionName}: delta filter returned 0, local DB empty — retrying without updated filter`,
       );
@@ -391,7 +414,9 @@ export function createSyncCollection<T extends PbDoc>(
 
     // 4. Upsert into Dexie + advance the cursor in ONE transaction — if any
     //    upsert fails, Dexie rolls back both ("rows written but cursor moved"
-    //    desync is impossible)
+    //    desync is impossible). The upsert is unconditional (no updated-only
+    //    skip): the `>=` boundary replay exists for same-timestamp mutations,
+    //    which an updated-only guard would silently drop.
     const records = freshRecords as unknown as T[];
     const newCursor = capToClientClock(maxUpdated(records));
 

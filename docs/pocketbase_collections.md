@@ -16,32 +16,32 @@ multi se traduit en LIKE sur JSON — non indexable, mesuré : voir
 migration (delta sync `updated`, composites `(eventId, updated)`,
 `share_links (target_id, link_type)`).
 
-| Collection | Sync app | Règles (résumé) |
-| --- | --- | --- |
-| `events` | EventsStore | membres/guests/créateur sur list/view/update ; create = self ; delete = créateur |
-| `teams` | NativeTeamsStore | membres partout ; delete = créateur (ou membre si `createdBy` vide — comptes importés) |
-| `products` | ProductsStore | via `eventId.*` ; unique `(eventId, productName)` |
-| `purchases` | ProductsStore | via `eventId.*` |
-| `event_materiel` | EventMaterielStore | via `eventId.*` |
-| `event_todos` | **aucun** | via `eventId.*` (mais sans `eventId.createdBy` — voir anomalies) |
-| `materiel` | MaterielStore | owner ou équipe |
-| `materiel_loan` | MaterielStore | emprunteur / équipe propriétaire ; create = responsable ou équipe |
-| `recipes` | RecipesStore | **lecture publique** (list/view vides) ; update = créateur ou `permissionWrite ~` |
-| `ingredients` | RecipeDataStore | **lecture publique** ; écriture authentifiée |
-| `categories` | RecipeDataStore | **lecture publique** ; create authentifié ; **update/delete : None** |
-| `teamdocs` | TeamdocsStore | team OU event (membres/guests/créateur) |
-| `locks` | pb-locks.ts (PK directe) | auth ; update = owner ou lock vide/expiré (takeover) |
-| `share_links` | pb-invitations.ts | strictement `createdBy =` |
-| `notifications` | **aucun** | self-only sur toutes les opérations |
+| Collection       | Sync app                 | Règles (résumé)                                                                        |
+| ---------------- | ------------------------ | -------------------------------------------------------------------------------------- |
+| `events`         | EventsStore              | membres/guests/créateur sur list/view/update ; create = self ; delete = créateur       |
+| `teams`          | NativeTeamsStore         | membres partout ; delete = créateur (ou membre si `createdBy` vide — comptes importés) |
+| `products`       | ProductsStore            | via `eventId.*` ; unique `(eventId, productName)`                                      |
+| `purchases`      | ProductsStore            | via `eventId.*`                                                                        |
+| `event_materiel` | EventMaterielStore       | via `eventId.*`                                                                        |
+| `event_todos`    | **aucun**                | via `eventId.*` (mais sans `eventId.createdBy` — voir anomalies)                       |
+| `materiel`       | MaterielStore            | owner ou équipe                                                                        |
+| `materiel_loan`  | MaterielStore            | emprunteur / équipe propriétaire ; create = responsable ou équipe                      |
+| `recipes`        | RecipesStore             | **lecture publique** (list/view vides) ; update = créateur ou `permissionWrite ~`      |
+| `ingredients`    | RecipeDataStore          | **lecture publique** ; écriture authentifiée                                           |
+| `categories`     | RecipeDataStore          | **lecture publique** ; create authentifié ; **update/delete : None**                   |
+| `teamdocs`       | TeamdocsStore            | team OU event (membres/guests/créateur)                                                |
+| `locks`          | pb-locks.ts (PK directe) | auth ; update = owner ou lock vide/expiré (takeover)                                   |
+| `share_links`    | pb-invitations.ts        | strictement `createdBy =`                                                              |
+| `notifications`  | **aucun**                | self-only sur toutes les opérations                                                    |
 
 ## Champs inutilisés (morts à l'exécution)
 
-| Champ | Collection | État |
-| --- | --- | --- |
-| `access_level` | share_links | Jamais lu ni écrit hors pipeline d'import (`scripts_dev/2-transform-data.ts`) — héritage Appwrite. Candidat naturel pour des liens « read only » (cf. discussion 21-10), mais sans la chaîne règles + hook + front il reste décoratif. |
-| `token` | share_links | Écrit à `""` à la création (`pb-invitations.ts`), jamais lu ; l'ID du record sert de token. |
-| `collection`, `recordId` | locks | Vestiges de l'ancien schéma : jamais remplis ni requêtés. Le client locks travaille exclusivement par PK (`id = resourceId`). |
-| `lockedBy` | recipes | Texte coexistant avec la collection `locks` ; lu pour affichage mais le verrouillage effectif passe par `locks`. Statut ambigu, à clarifier (champ d'affichage dénormalisé ou vestige ?). |
+| Champ                    | Collection  | État                                                                                                                                                                                                                                   |
+| ------------------------ | ----------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `access_level`           | share_links | Jamais lu ni écrit hors pipeline d'import (`scripts_dev/2-transform-data.ts`) — héritage Appwrite. Candidat naturel pour des liens « read only » (cf. discussion 21-10), mais sans la chaîne règles + hook + front il reste décoratif. |
+| `token`                  | share_links | Écrit à `""` à la création (`pb-invitations.ts`), jamais lu ; l'ID du record sert de token.                                                                                                                                            |
+| `collection`, `recordId` | locks       | Vestiges de l'ancien schéma : jamais remplis ni requêtés. Le client locks travaille exclusivement par PK (`id = resourceId`).                                                                                                          |
+| `lockedBy`               | recipes     | Texte coexistant avec la collection `locks` ; lu pour affichage mais le verrouillage effectif passe par `locks`. Statut ambigu, à clarifier (champ d'affichage dénormalisé ou vestige ?).                                              |
 
 ## Collections inutilisées
 
@@ -113,7 +113,7 @@ products.ingredientRef = ref agrégée + productName (snapshot au calcul)
 ### Ce qui est design assumé (à préserver)
 
 - **Snapshot embarqué dans la recette** : une version (`rootRecipeId`)
-  doit garder ses ingrédients *tels qu'à la création* — une relation
+  doit garder ses ingrédients _tels qu'à la création_ — une relation
   vivante vers le catalogue casserait l'immuabilité des versions.
 - **Tout-JSON = offline-first** : Dexie/`bridgeToMap` n'a pas de join ;
   le calcul des besoins (`productEnrichment.ts`) marche hors-ligne sans
@@ -152,6 +152,7 @@ comme une seule ligne de course, **sans modifier les recettes**. Elle
 vit uniquement sur products/purchases (index unique
 `(eventId, productName)` en garde-fou). Ne pas la confondre avec la
 déduplication du catalogue, qui est une autre opération (cf. ci-dessus).
+
 - **recipes (versions/permissions)** : `rootRecipeId` (arbre de versions,
   détection de cycle côté client), `permissionWrite` (relation partage
   d'écriture, reflétée dans la règle update), `versionLabel`, `draft`.

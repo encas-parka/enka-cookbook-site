@@ -85,19 +85,25 @@ services:
     environment:
       GOMEMLIMIT: "512MiB"
       PB_ENCRYPTION_KEY: "${PB_ENCRYPTION_KEY}"
-    command: ["/pb/pocketbase", "serve", "--http=0.0.0.0:8080", "--encryptionEnv=PB_ENCRYPTION_KEY"]
+    command:
+      [
+        "/pb/pocketbase",
+        "serve",
+        "--http=0.0.0.0:8080",
+        "--encryptionEnv=PB_ENCRYPTION_KEY",
+      ]
 volumes:
   pb_data:
 ```
 
 **Quick-reference checklist:**
 
-| Concern | Fix |
-|---------|-----|
-| `Too many open files` errors | `ulimit -n 4096` (or `LimitNOFILE=4096` in systemd) |
-| OOM kill on constrained host | `GOMEMLIMIT=512MiB` env var |
+| Concern                          | Fix                                                  |
+| -------------------------------- | ---------------------------------------------------- |
+| `Too many open files` errors     | `ulimit -n 4096` (or `LimitNOFILE=4096` in systemd)  |
+| OOM kill on constrained host     | `GOMEMLIMIT=512MiB` env var                          |
 | Credentials visible in DB backup | `--encryptionEnv=YOUR_VAR` with a 32-char random key |
-| Persistent data in Docker | Mount volume at `/pb/pb_data` |
+| Persistent data in Docker        | Mount volume at `/pb/pb_data`                        |
 
 > **v0.38+:** PocketBase processes sharing one `pb_data` sync runtime state (settings, collections, memory store) through a debounced watcher on the special `pb_data/.notify` dir. Running a console command (e.g. `./pocketbase superuser ips ...`) against a live server's `pb_data` is now safe — the server picks the change up without a restart.
 

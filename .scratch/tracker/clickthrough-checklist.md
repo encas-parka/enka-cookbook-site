@@ -119,7 +119,7 @@
 - [x] Réglages des repas d'un event (`EventMealCard`) : compteur de parts
       modifiable, icônes lucide rendues (pas de trou ni décalage).
       _(passe 20-10 : parts recette 100→80 persistées — `hasOwnPlatesNb:true,
-      plates:80` en base ; screenshot `eventmealcard-icons-*.jpg` propre)_
+    plates:80` en base ; screenshot `eventmealcard-icons-*.jpg` propre)_
 - [ ] Création `/recipe/new` : statut par défaut, id PB natif (le slug lisible
       est une idée produit, pas un bug).
       _(passe 20-10 : **partiel** — statut par défaut ✓ (brouillon forcé pour
@@ -239,7 +239,7 @@
       _(passe 20-10 : tâche créée + assignation « Moi » → « Assignation 1/1 »
       ✓, groupée sous « Pendant l'événement ». En base :
       `events.todos=[{taskName, taskOn:"onEvent", assignedTo:[ghald],
-      requiredPeopleNb:1, status:"todo"}]` ✓)_
+    requiredPeopleNb:1, status:"todo"}]` ✓)_
 - [ ] Modification et suppression d'une tâche ; persistance après reload
       (stockage `events.todos`).
       _(passe 20-10 : **partiel** — modification ✓ (titre + `updatedAt`
@@ -282,7 +282,7 @@
       localStorage) le voit dans `/documents/111c8999e321489`, l'ouvre, passe
       en Édition et enregistre ✓. API confirmée en parallèle : le GET teamdocs
       avec le token de Marion renvoie bien le record (règle `teamId.members ~
-      auth`))_
+    auth`))_
 - [ ] Realtime document : A édite, B reste sur `editdocument/<id>` → mise à
       jour visible sans quitter la page ; pas d'écrasement silencieux.
       _(passe 20-10 : **partiel / comportement à arbitrer** — (a) un onglet
@@ -336,8 +336,7 @@
 - [x] Share link event : création depuis l'UI → ouverture du lien → l'event
       apparaît.
       _(passe 20-10 : `/event/tve170thokuayig` → « Lien de partage » →
-      « Nouveau lien de partage » → `http://localhost:5173/join/cvjeoujbgk98qu9`
-      + toast « Lien généré avec succès ! ». Le même lien rejoué sur l'autre
+      « Nouveau lien de partage » → `http://localhost:5173/join/cvjeoujbgk98qu9` + toast « Lien généré avec succès ! ». Le même lien rejoué sur l'autre
       origine (`http://[::1]:5173/join/cvjeoujbgk98qu9`, session Marion non
       participante) → redirection vers `/event/tve170thokuayig`, Marion passée
       « Participant confirmé », `guestUsers` + `contributors` écrits en base ✓.
@@ -359,7 +358,7 @@
       1 échec(s) » (l'échec = email sans SMTP, comme attendu) ✓, console
       `[NativeTeamsStore] Invitation partielle : 1 échec(s) sur 1`. Rôles
       préservés en base : `roles={qaldek:"owner", ghald:"owner",
-      marion:"member"}` ✓. Côté invité : toujours **aucun feedback** (ni
+    marion:"member"}` ✓. Côté invité : toujours **aucun feedback** (ni
       notification ni mention) — Marion voit simplement Q88 apparaître)_
 - [ ] Invitation team avec cache établi (fix delta-sync `01b5f6fa`, ADR 0001) :
       A invite B pendant que la session de B est **ouverte avec un cache
@@ -582,8 +581,8 @@ Format : page / action / attendu vs obtenu / console (coller l'erreur exacte).
 - Obtenu : le composant plante et le dropdown devient inutilisable ; le
   matériel n'est pas ajouté. Console :
   `Uncaught Svelte error: each_key_duplicate — Keyed each block has duplicate
-  key 'Bols' at indexes 5 and 12 ... in AutocompleteInput.svelte in
-  CreateLoanModal.svelte`.
+key 'Bols' at indexes 5 and 12 ... in AutocompleteInput.svelte in
+CreateLoanModal.svelte`.
 - Cause : `ui/AutocompleteInput.svelte` l.151
   `{#each filteredItems as item, index (itemToString(item))}` — la clé est le
   libellé, or l'inventaire contient des noms en double (Bols ×2, Couteaux ×2,
@@ -647,7 +646,7 @@ Format : page / action / attendu vs obtenu / console (coller l'erreur exacte).
   complété) et toast **« Opération réussie »** — l'échec n'apparaît que dans la
   console (`[EventsStore] Emails envoyés : 0/1 (1 échec(s))`). L'utilisateur
   croit avoir prévenu les gens.
-- Cause : `EventsStore.svelte.ts` l.876-904, l'envoi est *fire-and-forget* et
+- Cause : `EventsStore.svelte.ts` l.876-904, l'envoi est _fire-and-forget_ et
   les erreurs sont seulement `console.warn`/`console.error`. À comparer avec
   l'invitation d'équipe, qui affiche bien « 1 membre(s) ajouté(s) — 1
   échec(s) » (`NativeTeamsStore.svelte.ts` l.386) : le traitement devrait être
@@ -699,14 +698,14 @@ Format : page / action / attendu vs obtenu / console (coller l'erreur exacte).
   Sortie de secours actuelle : nettoyage manuel de `recipes.lockedBy` en base.
 - À noter aussi : le nom du détenteur n'est pas affiché (texte figé « un·e
   autre utilisateur·ice », `statusBarStore.setLockStatus({userName: "un autre
-  utilisateur"})` l.185-188), alors que les documents affichent bien
+utilisateur"})` l.185-188), alors que les documents affichent bien
   « édité par Marion ».
 
 ### Observations (pas des bugs)
 
 - **O1** — Au premier rendu d'une collection vide (products, purchases,
   event_materiel) : warning `[pb-sync] <col>: delta filter returned 0, local
-  DB empty — retrying without updated filter` (`pb-collection.ts:215`),
+DB empty — retrying without updated filter` (`pb-collection.ts:215`),
   auto-récupéré. Bruit de log à faire taire éventuellement.
 - **O2** — La validation `EventCreatePage` exige ≥ 1 repas (« Veuillez ajouter
   au moins un repas », toast 5 s) : bloquant volontaire, mais un utilisateur
@@ -718,11 +717,11 @@ Format : page / action / attendu vs obtenu / console (coller l'erreur exacte).
   modification des parts au niveau recette (80, `hasOwnPlatesNb`) ne change
   pas les besoins affichés. À qualifier : attendu ou effet de bord ?
 - **O5** — Warning récurrent `[ProductsStore] syncRevalidate() appelé sans
-  currentEventId` sur les pages hors event (loans, matériel, tâches). Bruit de
+currentEventId` sur les pages hors event (loans, matériel, tâches). Bruit de
   log ; à vérifier que la revalidation est bien court-circuitée proprement.
 - **O6** — Fiche de retour de prêt : pour une quantité de 1, le choix « tout
   est ok » est un bouton **icône seule** (aucun libellé, `aria-label="Tout
-  OK"`), et tant qu'il n'est pas cliqué le bouton « Valider le retour » reste
+OK"`), et tant qu'il n'est pas cliqué le bouton « Valider le retour » reste
   désactivé **sans expliquer ce qui manque**. Un utilisateur peut rester
   bloqué sans comprendre. (Pour une quantité > 1, un bouton texte « tout est
   ok » existe.)
@@ -771,19 +770,19 @@ n'ont pas à être retirés à la main. Le tableau reste comme inventaire de ce 
 la passe a touché — utile si un constat doit être rejoué ou si une donnée
 semble suspecte plus tard.
 
-| Objet | Id / champ | État |
-| --- | --- | --- |
-| Event « Passe navigateur 20-10 bis » | `tve170thokuayig` | conservé |
-| Event « Passe navigateur 20-10 » | `pk9cibecuofw8yn` | conservé |
-| Materiel « Atelier test » | `a1xrdjfdhgo3c39` | soft-deleted (`deleted=1`) |
-| Loan 10→12 nov | `0hkp0udgb4g6jgx` | `completed` |
-| Headers event_materiel | `af0x04vba21x9ki`, `qy4qiybq85w6pdc` | via API superuser |
-| Allocation | `vcsii3fm7pkt0fb` | sous `af0x04vba21x9ki` |
-| Tâche `zeB-8jOljb` | dans `events.todos` de `tve170thokuayig` | — |
-| Doc event « Doc taches passe 20-10 » | `f6x1xsz3w62qm2d` | — |
-| Teamdoc « Doc equipe passe 20-10 » | `e6yk7j9l29t47a8` | contenu écrasé par les tests |
-| Share link | `cvjeoujbgk98qu9` | actif |
-| Invité factice | `passe20-10@example.com` | dans `contributors`/`guestEmails` |
-| Marion dans Q88 | `f2a557b645f699a` | `roles: member` |
-| Recette Accras | `accras-de-patate-douce_9ap8enawymli` | description, `permissionWrite`, `publishedAt` mutés ; **`lockedBy` de ghald encore posé (P14)** |
-| Event (description) | `tve170thokuayig.description` | poussée via SSE |
+| Objet                                | Id / champ                               | État                                                                                            |
+| ------------------------------------ | ---------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| Event « Passe navigateur 20-10 bis » | `tve170thokuayig`                        | conservé                                                                                        |
+| Event « Passe navigateur 20-10 »     | `pk9cibecuofw8yn`                        | conservé                                                                                        |
+| Materiel « Atelier test »            | `a1xrdjfdhgo3c39`                        | soft-deleted (`deleted=1`)                                                                      |
+| Loan 10→12 nov                       | `0hkp0udgb4g6jgx`                        | `completed`                                                                                     |
+| Headers event_materiel               | `af0x04vba21x9ki`, `qy4qiybq85w6pdc`     | via API superuser                                                                               |
+| Allocation                           | `vcsii3fm7pkt0fb`                        | sous `af0x04vba21x9ki`                                                                          |
+| Tâche `zeB-8jOljb`                   | dans `events.todos` de `tve170thokuayig` | —                                                                                               |
+| Doc event « Doc taches passe 20-10 » | `f6x1xsz3w62qm2d`                        | —                                                                                               |
+| Teamdoc « Doc equipe passe 20-10 »   | `e6yk7j9l29t47a8`                        | contenu écrasé par les tests                                                                    |
+| Share link                           | `cvjeoujbgk98qu9`                        | actif                                                                                           |
+| Invité factice                       | `passe20-10@example.com`                 | dans `contributors`/`guestEmails`                                                               |
+| Marion dans Q88                      | `f2a557b645f699a`                        | `roles: member`                                                                                 |
+| Recette Accras                       | `accras-de-patate-douce_9ap8enawymli`    | description, `permissionWrite`, `publishedAt` mutés ; **`lockedBy` de ghald encore posé (P14)** |
+| Event (description)                  | `tve170thokuayig.description`            | poussée via SSE                                                                                 |

@@ -33,8 +33,8 @@ app.OnRecordAfterCreateSuccess("articles").BindFunc(func(e *core.RecordEvent) er
 ```javascript
 // JSVM
 onRecordAfterCreateSuccess((e) => {
-    // ❌ no e.next() = downstream hooks and response serialization skipped
-    console.log("created", e.record.id);
+  // ❌ no e.next() = downstream hooks and response serialization skipped
+  console.log("created", e.record.id);
 }, "articles");
 ```
 
@@ -63,11 +63,11 @@ app.OnRecordAfterCreateSuccess("articles").Bind(&hook.Handler[*core.RecordEvent]
 ```javascript
 // JSVM - e.app is the transactional app instance
 onRecordAfterCreateSuccess((e) => {
-    const audit = new Record($app.findCollectionByNameOrId("audit"));
-    audit.set("record", e.record.id);
-    e.app.save(audit);
+  const audit = new Record($app.findCollectionByNameOrId("audit"));
+  audit.set("record", e.record.id);
+  e.app.save(audit);
 
-    e.next(); // REQUIRED
+  e.next(); // REQUIRED
 }, "articles");
 ```
 

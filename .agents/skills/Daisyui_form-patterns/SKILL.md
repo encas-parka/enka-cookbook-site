@@ -10,26 +10,24 @@ description: DaisyUI v5 form patterns. Use for inputs, selects, textareas, valid
 
 ```svelte
 <form {...my_form} class="space-y-4">
-	<fieldset class="fieldset">
-		<legend class="fieldset-legend">Name</legend>
-		<label class="validator input w-full">
-			<input
-				type="text"
-				name="name"
-				placeholder="Your name"
-				class="grow"
-				required
-			/>
-		</label>
-	</fieldset>
+  <fieldset class="fieldset">
+    <legend class="fieldset-legend">Name</legend>
+    <label class="validator input w-full">
+      <input
+        type="text"
+        name="name"
+        placeholder="Your name"
+        class="grow"
+        required
+      />
+    </label>
+  </fieldset>
 
-	{#if my_form.error}
-		<div class="alert alert-error">{my_form.error}</div>
-	{/if}
+  {#if my_form.error}
+    <div class="alert alert-error">{my_form.error}</div>
+  {/if}
 
-	<button class="btn btn-block btn-primary" type="submit"
-		>Submit</button
-	>
+  <button class="btn btn-block btn-primary" type="submit">Submit</button>
 </form>
 ```
 

@@ -13,9 +13,9 @@ PocketBase uses SQLite which benefits significantly from proper indexing. Querie
 
 ```javascript
 // Querying without indexes
-const posts = await pb.collection('posts').getList(1, 20, {
+const posts = await pb.collection("posts").getList(1, 20, {
   filter: 'author = "user123" && status = "published"',
-  sort: '-publishedAt'
+  sort: "-publishedAt",
 });
 // Full table scan on large collections - very slow
 
@@ -41,9 +41,9 @@ const posts = await pb.collection('posts').getList(1, 20, {
 //    CREATE INDEX idx_posts_status_published ON posts(status, publishedAt DESC)
 
 // Queries now use indexes
-const posts = await pb.collection('posts').getList(1, 20, {
+const posts = await pb.collection("posts").getList(1, 20, {
   filter: 'author = "user123" && status = "published"',
-  sort: '-publishedAt'
+  sort: "-publishedAt",
 });
 // Index scan - fast even with millions of records
 
@@ -52,6 +52,7 @@ const posts = await pb.collection('posts').getList(1, 20, {
 ```
 
 **Index recommendations:**
+
 - Fields used in `filter` expressions
 - Fields used in `sort` parameters
 - Fields used in API rules (`listRule`, `viewRule`, etc.)
@@ -59,6 +60,7 @@ const posts = await pb.collection('posts').getList(1, 20, {
 - Unique fields like slugs or codes
 
 **Index considerations for SQLite:**
+
 - Composite indexes work left-to-right (order matters)
 - Too many indexes slow down writes
 - Use `EXPLAIN QUERY PLAN` in SQL to verify index usage

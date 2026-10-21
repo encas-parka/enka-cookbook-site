@@ -29,20 +29,20 @@ Regular backups are essential for production deployments. PocketBase provides bu
 
 ```javascript
 // 1. Using PocketBase Admin API for backups
-const adminPb = new PocketBase('http://127.0.0.1:8090');
-await adminPb.collection('_superusers').authWithPassword(admin, password);
+const adminPb = new PocketBase("http://127.0.0.1:8090");
+await adminPb.collection("_superusers").authWithPassword(admin, password);
 
 // Create backup (includes database and files)
-async function createBackup(name = '') {
+async function createBackup(name = "") {
   const backup = await adminPb.backups.create(name);
-  console.log('Backup created:', backup.key);
+  console.log("Backup created:", backup.key);
   return backup;
 }
 
 // List available backups
 async function listBackups() {
   const backups = await adminPb.backups.getFullList();
-  backups.forEach(b => {
+  backups.forEach((b) => {
     console.log(`${b.key} - ${b.size} bytes - ${b.modified}`);
   });
   return backups;
@@ -59,7 +59,7 @@ async function downloadBackup(key) {
 // Restore from backup (CAUTION: overwrites current data!)
 async function restoreBackup(key) {
   await adminPb.backups.restore(key);
-  console.log('Restore initiated - server will restart');
+  console.log("Restore initiated - server will restart");
 }
 
 // Delete old backups
@@ -67,14 +67,14 @@ async function cleanupOldBackups(keepCount = 7) {
   const backups = await adminPb.backups.getFullList();
 
   // Sort by date, keep newest
-  const sorted = backups.sort((a, b) =>
-    new Date(b.modified) - new Date(a.modified)
+  const sorted = backups.sort(
+    (a, b) => new Date(b.modified) - new Date(a.modified),
   );
 
   const toDelete = sorted.slice(keepCount);
   for (const backup of toDelete) {
     await adminPb.backups.delete(backup.key);
-    console.log('Deleted old backup:', backup.key);
+    console.log("Deleted old backup:", backup.key);
   }
 }
 ```
@@ -115,27 +115,28 @@ await adminPb.settings.update({
   backups: {
     s3: {
       enabled: true,
-      bucket: 'my-pocketbase-backups',
-      region: 'us-east-1',
-      endpoint: 's3.amazonaws.com',
+      bucket: "my-pocketbase-backups",
+      region: "us-east-1",
+      endpoint: "s3.amazonaws.com",
       accessKey: process.env.AWS_ACCESS_KEY,
-      secret: process.env.AWS_SECRET_KEY
-    }
-  }
+      secret: process.env.AWS_SECRET_KEY,
+    },
+  },
 });
 ```
 
 **Backup best practices:**
 
-| Aspect | Recommendation |
-|--------|---------------|
-| Frequency | Daily minimum, hourly for critical apps |
-| Retention | 7-30 days of daily backups |
-| Storage | Off-site (S3, separate server) |
-| Testing | Monthly restore tests |
-| Monitoring | Alert on backup failures |
+| Aspect     | Recommendation                          |
+| ---------- | --------------------------------------- |
+| Frequency  | Daily minimum, hourly for critical apps |
+| Retention  | 7-30 days of daily backups              |
+| Storage    | Off-site (S3, separate server)          |
+| Testing    | Monthly restore tests                   |
+| Monitoring | Alert on backup failures                |
 
 **Pre-backup checklist:**
+
 - [ ] S3 or external storage configured
 - [ ] Automated schedule set up
 - [ ] Retention policy defined

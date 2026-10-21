@@ -15,12 +15,12 @@ Batch operations combine multiple create/update/delete operations into a single 
 // Creating multiple records individually
 async function createOrderWithItems(order, items) {
   // If any fails, partial data remains!
-  const createdOrder = await pb.collection('orders').create(order);
+  const createdOrder = await pb.collection("orders").create(order);
 
   for (const item of items) {
-    await pb.collection('order_items').create({
+    await pb.collection("order_items").create({
       ...item,
-      order: createdOrder.id
+      order: createdOrder.id,
     });
   }
   // 1 + N API calls, not atomic
@@ -29,8 +29,8 @@ async function createOrderWithItems(order, items) {
 // Updating multiple records
 async function updatePrices(products) {
   for (const product of products) {
-    await pb.collection('products').update(product.id, {
-      price: product.newPrice
+    await pb.collection("products").update(product.id, {
+      price: product.newPrice,
     });
   }
   // N API calls, some might fail leaving inconsistent state
@@ -39,9 +39,9 @@ async function updatePrices(products) {
 // Mixed operations
 async function transferFunds(fromId, toId, amount) {
   // NOT ATOMIC - can leave invalid state!
-  await pb.collection('accounts').update(fromId, { 'balance-': amount });
+  await pb.collection("accounts").update(fromId, { "balance-": amount });
   // If this fails, money disappears!
-  await pb.collection('accounts').update(toId, { 'balance+': amount });
+  await pb.collection("accounts").update(toId, { "balance+": amount });
 }
 ```
 
@@ -54,16 +54,16 @@ async function createOrderWithItems(order, items) {
 
   // Pre-generate order ID so items can reference it in the same batch
   // PocketBase accepts custom IDs (15-char alphanumeric)
-  const orderId = crypto.randomUUID().replaceAll('-', '').slice(0, 15);
+  const orderId = crypto.randomUUID().replaceAll("-", "").slice(0, 15);
 
   // Queue order creation with known ID
-  batch.collection('orders').create({ ...order, id: orderId });
+  batch.collection("orders").create({ ...order, id: orderId });
 
   // Queue all items referencing the pre-generated order ID
-  items.forEach(item => {
-    batch.collection('order_items').create({
+  items.forEach((item) => {
+    batch.collection("order_items").create({
       ...item,
-      order: orderId
+      order: orderId,
     });
   });
 
@@ -73,7 +73,7 @@ async function createOrderWithItems(order, items) {
 
   return {
     order: results[0],
-    items: results.slice(1)
+    items: results.slice(1),
   };
 }
 
@@ -81,9 +81,9 @@ async function createOrderWithItems(order, items) {
 async function updatePrices(products) {
   const batch = pb.createBatch();
 
-  products.forEach(product => {
-    batch.collection('products').update(product.id, {
-      price: product.newPrice
+  products.forEach((product) => {
+    batch.collection("products").update(product.id, {
+      price: product.newPrice,
     });
   });
 
@@ -96,12 +96,12 @@ async function updatePrices(products) {
 async function syncProducts(products) {
   const batch = pb.createBatch();
 
-  products.forEach(product => {
-    batch.collection('products').upsert({
-      id: product.sku,  // Use SKU as ID for upsert matching
+  products.forEach((product) => {
+    batch.collection("products").upsert({
+      id: product.sku, // Use SKU as ID for upsert matching
       name: product.name,
       price: product.price,
-      stock: product.stock
+      stock: product.stock,
     });
   });
 
@@ -115,15 +115,15 @@ async function syncProducts(products) {
 async function transferFunds(fromId, toId, amount) {
   const batch = pb.createBatch();
 
-  batch.collection('accounts').update(fromId, { 'balance-': amount });
-  batch.collection('accounts').update(toId, { 'balance+': amount });
+  batch.collection("accounts").update(fromId, { "balance-": amount });
+  batch.collection("accounts").update(toId, { "balance+": amount });
 
   // Create audit record
-  batch.collection('transfers').create({
+  batch.collection("transfers").create({
     from: fromId,
     to: toId,
     amount,
-    timestamp: new Date()
+    timestamp: new Date(),
   });
 
   // All three operations atomic
@@ -134,18 +134,18 @@ async function transferFunds(fromId, toId, amount) {
 // Batch delete
 async function deletePostWithComments(postId) {
   // First get comment IDs
-  const comments = await pb.collection('comments').getFullList({
-    filter: pb.filter('post = {:postId}', { postId }),
-    fields: 'id'
+  const comments = await pb.collection("comments").getFullList({
+    filter: pb.filter("post = {:postId}", { postId }),
+    fields: "id",
   });
 
   const batch = pb.createBatch();
 
   // Queue all deletions
-  comments.forEach(comment => {
-    batch.collection('comments').delete(comment.id);
+  comments.forEach((comment) => {
+    batch.collection("comments").delete(comment.id);
   });
-  batch.collection('posts').delete(postId);
+  batch.collection("posts").delete(postId);
 
   await batch.send();
   // Post and all comments deleted atomically
@@ -153,6 +153,7 @@ async function deletePostWithComments(postId) {
 ```
 
 **Batch operation limits:**
+
 - **Must be enabled first** in Dashboard > Settings > Application (disabled by default; returns 403 otherwise)
 - Operations execute in a single database transaction
 - All succeed or all rollback
@@ -163,12 +164,12 @@ async function deletePostWithComments(postId) {
 
 **When to use batch:**
 
-| Scenario | Use Batch? |
-|----------|-----------|
-| Creating parent + children | Yes |
-| Bulk import/update | Yes |
-| Financial transactions | Yes |
-| Single record operations | No |
-| Independent operations | Optional |
+| Scenario                   | Use Batch? |
+| -------------------------- | ---------- |
+| Creating parent + children | Yes        |
+| Bulk import/update         | Yes        |
+| Financial transactions     | Yes        |
+| Single record operations   | No         |
+| Independent operations     | Optional   |
 
 Reference: [PocketBase Batch API](https://pocketbase.io/docs/api-records/#batch-operations)

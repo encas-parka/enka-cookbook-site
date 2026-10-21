@@ -12,9 +12,8 @@
  */
 
 vi.mock("pocketbase", async () => {
-  const { FakePocketBase } = await import(
-    "../../stores/__tests__/harness/stub-pb"
-  );
+  const { FakePocketBase } =
+    await import("../../stores/__tests__/harness/stub-pb");
   return { default: FakePocketBase };
 });
 
@@ -63,7 +62,11 @@ describe("locksService — contrat du verrou", () => {
 
   it("acquireLock : sans document → crée et renvoie le verrou créé", async () => {
     const lock = await locksService.acquireLock("recipe_r1", "user_b", "bob");
-    expect(lock).toMatchObject({ id: "recipe_r1", userId: "user_b", userName: "bob" });
+    expect(lock).toMatchObject({
+      id: "recipe_r1",
+      userId: "user_b",
+      userName: "bob",
+    });
     const stored = await locksService.getLock("recipe_r1");
     expect(stored).toMatchObject({ userId: "user_b", userName: "bob" });
   });

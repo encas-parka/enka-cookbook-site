@@ -22,21 +22,22 @@ Every rule carries an impact level: **Critical** = security holes or broken data
 
 ## What's covered
 
-| Category | Impact | What it protects you from |
-|----------|--------|---------------------------|
-| Collection Design | Critical | Wrong field types, missing indexes, manual ID strings instead of relations |
-| API Rules & Security | Critical | Data leaks from empty/incorrect access rules, filter injection |
-| Authentication | Critical | Broken password/OAuth2/OTP/MFA flows, token mishandling |
-| SDK Usage | High | Bad client setup, swallowed errors, cancelled-request bugs |
-| Query Performance | High | N+1 queries, over-fetching, missing pagination |
-| Realtime | Medium | Dropped subscriptions, unauthenticated realtime access |
-| File Handling | Medium | Unvalidated uploads, wrong file URLs, missing thumbnails |
-| Production & Deployment | Medium | No backups, no rate limits, exposed superuser access |
-| Server-Side Extending | High | Go/JSVM hook mistakes, transaction misuse, unsafe filter binding |
+| Category                | Impact   | What it protects you from                                                  |
+| ----------------------- | -------- | -------------------------------------------------------------------------- |
+| Collection Design       | Critical | Wrong field types, missing indexes, manual ID strings instead of relations |
+| API Rules & Security    | Critical | Data leaks from empty/incorrect access rules, filter injection             |
+| Authentication          | Critical | Broken password/OAuth2/OTP/MFA flows, token mishandling                    |
+| SDK Usage               | High     | Bad client setup, swallowed errors, cancelled-request bugs                 |
+| Query Performance       | High     | N+1 queries, over-fetching, missing pagination                             |
+| Realtime                | Medium   | Dropped subscriptions, unauthenticated realtime access                     |
+| File Handling           | Medium   | Unvalidated uploads, wrong file URLs, missing thumbnails                   |
+| Production & Deployment | Medium   | No backups, no rate limits, exposed superuser access                       |
+| Server-Side Extending   | High     | Go/JSVM hook mistakes, transaction misuse, unsafe filter binding           |
 
 ## Quick Reference
 
 ### Collection Design (CRITICAL)
+
 - **coll-field-types**: Use appropriate field types (json for objects, select for enums)
 - **coll-auth-vs-base**: Extend auth collection for users, base for non-auth data
 - **coll-relations**: Use relation fields, not manual ID strings
@@ -45,6 +46,7 @@ Every rule carries an impact level: **Critical** = security holes or broken data
 - **coll-geopoint**: Store coordinates as json field with lat/lng
 
 ### API Rules (CRITICAL)
+
 - **rules-basics**: Always set API rules; empty = public access
 - **rules-filter-syntax**: Use @request.auth, @collection, @now in rules
 - **rules-request-context**: Access request data via @request.body, @request.query; `@request.context` values: `default`/`oauth2`/`otp`/`password`/`realtime`/`protectedFile`
@@ -53,6 +55,7 @@ Every rule carries an impact level: **Critical** = security holes or broken data
 - **rules-strftime**: Use `strftime('%Y-%m-%d', created)` for date arithmetic (v0.36+)
 
 ### Authentication (CRITICAL)
+
 - **auth-password**: Use authWithPassword for email/password login
 - **auth-oauth2**: Configure OAuth2 providers via Admin UI; run ≥v0.38.2 (pre-linking hijack fix); provider logos come inline from `listAuthMethods()` (v0.37+)
 - **auth-otp**: Two-step `requestOTP` → `authWithOTP`; rate-limit requestOTP and never leak email existence
@@ -61,6 +64,7 @@ Every rule carries an impact level: **Critical** = security holes or broken data
 - **auth-impersonation**: Use impersonation for admin actions on behalf of users
 
 ### SDK Usage (HIGH)
+
 - **sdk-initialization**: Initialize client once, reuse instance
 - **sdk-auth-store**: Use AsyncAuthStore for React Native/SSR
 - **sdk-error-handling**: Catch ClientResponseError, check status codes
@@ -68,23 +72,27 @@ Every rule carries an impact level: **Critical** = security holes or broken data
 - **sdk-filter-binding**: Use filter binding to prevent injection
 
 ### Query Performance (HIGH)
+
 - **query-expand**: Expand relations to avoid N+1 queries
 - **query-field-selection**: Select only needed fields
 - **query-pagination**: Use cursor pagination for large datasets
 - **query-batch-operations**: Batch creates/updates when possible
 
 ### Realtime (MEDIUM)
+
 - **realtime-subscribe**: Subscribe to specific records or collections
 - **realtime-events**: Handle create, update, delete events separately
 - **realtime-auth**: Realtime respects API rules automatically; auth unsets on password change; ~30min absolute connection cap (v0.38+)
 - **realtime-reconnection**: Implement reconnection logic — periodic reconnects are by design, re-sync state instead of fighting them
 
 ### File Handling (MEDIUM)
+
 - **file-upload**: Use FormData for uploads, set proper content types
 - **file-serving**: Use pb.files.getURL() for file URLs
 - **file-validation**: Validate file types and sizes server-side
 
 ### Deployment (MEDIUM)
+
 - **deploy-backup**: Schedule regular backups of pb_data
 - **deploy-configuration**: Use environment variables for config; mind v0.40 log caps (`Log.Data` ~16KB) and treat the SQL console (v0.39+) as debug-only
 - **deploy-reverse-proxy**: Put behind nginx/caddy in production
@@ -94,6 +102,7 @@ Every rule carries an impact level: **Critical** = security holes or broken data
 - **deploy-superuser-ips**: Whitelist superuser access by IP/CIDR in production (v0.38+); recovery via the `superuser ips` console command
 
 ### Server-Side Extending (HIGH)
+
 - **ext-go-setup**: Use `app.OnServe()` to register routes; use `e.App` inside hooks, not the parent-scope app; v0.40 needs Go 1.27 (`encoding/json/v2` — test before shipping)
 - **ext-js-setup**: Drop `*.pb.js` in `pb_hooks/`; add `/// <reference path="../pb_data/types.d.ts" />`
 - **ext-hooks-chain**: Always call `e.Next()`/`e.next()`; use `Bind` with an Id for later `Unbind`
@@ -118,30 +127,35 @@ Every rule carries an impact level: **Critical** = security holes or broken data
 Try these with your AI agent to see the skill in action:
 
 **Building a new feature:**
+
 - "Design a PocketBase schema for an e-commerce app with products, orders, and reviews"
 - "Implement OAuth2 login with Google and GitHub for my app"
 - "Build a real-time notification system with PocketBase subscriptions"
 - "Create a file upload form with image validation and thumbnail previews"
 
 **Fixing issues:**
+
 - "My list query is slow on 100k records -- optimize it"
 - "I'm getting 403 errors on my batch operations"
 - "Fix the N+1 query problem in my posts list that loads author data in a loop"
 - "My realtime subscriptions stop working after a few minutes"
 
 **Security review:**
+
 - "Review my API rules -- users should only access their own data"
 - "Set up proper access control: admins manage all content, users edit only their own"
 - "Are my authentication cookies configured securely for SSR?"
 - "Audit my collection rules for IDOR vulnerabilities"
 
 **Going to production:**
+
 - "Configure Nginx with HTTPS, rate limiting, and security headers for PocketBase"
 - "Set up automated backups for my PocketBase database"
 - "Optimize SQLite settings for a production workload with ~500 concurrent users"
 - "Deploy PocketBase with Docker Compose and Caddy"
 
 **Extending PocketBase:**
+
 - "Add a custom Go route that sends a Slack notification after a record is created"
 - "Write a pb_hooks script that validates an email domain before user signup"
 - "Set up FTS5 full-text search with a custom SQLite driver in my Go app"

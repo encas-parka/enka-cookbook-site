@@ -174,15 +174,15 @@ app.OnRecordEnrich("posts").BindFunc(func(e *core.RecordEnrichEvent) error {
 
 ### The cheat sheet: "which app am I holding?"
 
-| Where you are | Use | Why |
-|---|---|---|
-| Top of a route handler (`func(e *core.RequestEvent)`) | `e.App` | Framework's top-level app; same object the server started with |
-| Inside `RunInTransaction(func(txApp) { ... })` | `txApp` **only** | Capturing the outer app deadlocks on the SQLite writer lock |
-| Inside a record hook fired from a `Save` inside a tx | `e.App` | The framework has already rebound `e.App` to `txApp` for you |
-| Inside a record hook fired from a non-tx `Save` | `e.App` | Same identifier, same rules, just points to the top-level app |
-| Inside `OnRecordEnrich` | `e.App` | Runs during response serialization, **after** the tx has committed |
-| Inside a `app.Cron()` callback | captured `app` / `se.App` | Cron has no per-run scoped app; wrap in `RunInTransaction` if you need atomicity |
-| Inside a migration function | the `app` argument | `m.Register(func(app core.App) error { ... })` - already transactional |
+| Where you are                                         | Use                       | Why                                                                              |
+| ----------------------------------------------------- | ------------------------- | -------------------------------------------------------------------------------- |
+| Top of a route handler (`func(e *core.RequestEvent)`) | `e.App`                   | Framework's top-level app; same object the server started with                   |
+| Inside `RunInTransaction(func(txApp) { ... })`        | `txApp` **only**          | Capturing the outer app deadlocks on the SQLite writer lock                      |
+| Inside a record hook fired from a `Save` inside a tx  | `e.App`                   | The framework has already rebound `e.App` to `txApp` for you                     |
+| Inside a record hook fired from a non-tx `Save`       | `e.App`                   | Same identifier, same rules, just points to the top-level app                    |
+| Inside `OnRecordEnrich`                               | `e.App`                   | Runs during response serialization, **after** the tx has committed               |
+| Inside a `app.Cron()` callback                        | captured `app` / `se.App` | Cron has no per-run scoped app; wrap in `RunInTransaction` if you need atomicity |
+| Inside a migration function                           | the `app` argument        | `m.Register(func(app core.App) error { ... })` - already transactional           |
 
 ### Error propagation in the chain
 

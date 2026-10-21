@@ -14,19 +14,27 @@ Relation fields connect collections together. Proper cascade configuration ensur
 ```javascript
 // Relation without considering deletion behavior
 const ordersSchema = [
-  { name: 'customer', type: 'relation', options: {
-    collectionId: 'customers_collection_id',
-    maxSelect: 1
-    // No cascade options specified - defaults may cause issues
-  }},
-  { name: 'products', type: 'relation', options: {
-    collectionId: 'products_collection_id'
-    // Multiple products, no cascade handling
-  }}
+  {
+    name: "customer",
+    type: "relation",
+    options: {
+      collectionId: "customers_collection_id",
+      maxSelect: 1,
+      // No cascade options specified - defaults may cause issues
+    },
+  },
+  {
+    name: "products",
+    type: "relation",
+    options: {
+      collectionId: "products_collection_id",
+      // Multiple products, no cascade handling
+    },
+  },
 ];
 
 // Deleting a customer may fail or orphan orders
-await pb.collection('customers').delete(customerId);
+await pb.collection("customers").delete(customerId);
 // Error: record is referenced by other records
 ```
 
@@ -36,37 +44,37 @@ await pb.collection('customers').delete(customerId);
 // Carefully configured relations
 const ordersSchema = [
   {
-    name: 'customer',
-    type: 'relation',
+    name: "customer",
+    type: "relation",
     required: true,
     options: {
-      collectionId: 'customers_collection_id',
+      collectionId: "customers_collection_id",
       maxSelect: 1,
-      cascadeDelete: false  // Prevent accidental mass deletion
-    }
+      cascadeDelete: false, // Prevent accidental mass deletion
+    },
   },
   {
-    name: 'products',
-    type: 'relation',
+    name: "products",
+    type: "relation",
     options: {
-      collectionId: 'products_collection_id',
+      collectionId: "products_collection_id",
       maxSelect: 99,
-      cascadeDelete: false
-    }
-  }
+      cascadeDelete: false,
+    },
+  },
 ];
 
 // For dependent data like comments - cascade delete makes sense
 const commentsSchema = [
   {
-    name: 'post',
-    type: 'relation',
+    name: "post",
+    type: "relation",
     options: {
-      collectionId: 'posts_collection_id',
+      collectionId: "posts_collection_id",
       maxSelect: 1,
-      cascadeDelete: true  // Delete comments when post is deleted
-    }
-  }
+      cascadeDelete: true, // Delete comments when post is deleted
+    },
+  },
 ];
 // NOTE: For audit logs, avoid cascadeDelete - logs should be retained
 // for compliance/forensics even after the referenced user is deleted.
@@ -74,7 +82,7 @@ const commentsSchema = [
 
 // Handle deletion manually when cascade is false
 try {
-  await pb.collection('customers').delete(customerId);
+  await pb.collection("customers").delete(customerId);
 } catch (e) {
   if (e.status === 400) {
     // Customer has orders - handle appropriately
@@ -86,10 +94,12 @@ try {
 ```
 
 **Cascade options:**
+
 - `cascadeDelete: true` - Delete referencing records when referenced record is deleted
 - `cascadeDelete: false` - Block deletion if references exist (default for required relations)
 
 **Best practices:**
+
 - Use `cascadeDelete: true` for dependent data (comments on posts, logs for users)
 - Use `cascadeDelete: false` for important data (orders, transactions)
 - Consider soft deletes for audit trails

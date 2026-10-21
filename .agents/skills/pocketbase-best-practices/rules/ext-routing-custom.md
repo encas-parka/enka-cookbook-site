@@ -55,31 +55,42 @@ app.OnServe().BindFunc(func(se *core.ServeEvent) error {
 
 ```javascript
 // JSVM
-routerAdd("GET", "/api/myapp/profile", (e) => {
+routerAdd(
+  "GET",
+  "/api/myapp/profile",
+  (e) => {
     return e.json(200, {
-        id: e.auth.id,
-        email: e.auth.getString("email"),
+      id: e.auth.id,
+      email: e.auth.getString("email"),
     });
-}, $apis.requireAuth());
+  },
+  $apis.requireAuth(),
+);
 
-routerAdd("POST", "/api/myapp/admin/rebuild-index", (e) => {
+routerAdd(
+  "POST",
+  "/api/myapp/admin/rebuild-index",
+  (e) => {
     return e.json(200, { ok: true });
-}, $apis.requireSuperuserAuth());
+  },
+  $apis.requireSuperuserAuth(),
+);
 ```
 
 **Built-in middlewares (Go: `apis.*`, JS: `$apis.*`):**
 
-| Middleware | Use |
-|---|---|
-| `RequireGuestOnly()` | Reject authenticated clients (e.g. public signup forms) |
-| `RequireAuth(...collections)` | Require any auth record; optionally restrict to specific auth collections |
-| `RequireSuperuserAuth()` | Alias for `RequireAuth("_superusers")` |
+| Middleware                          | Use                                                                       |
+| ----------------------------------- | ------------------------------------------------------------------------- |
+| `RequireGuestOnly()`                | Reject authenticated clients (e.g. public signup forms)                   |
+| `RequireAuth(...collections)`       | Require any auth record; optionally restrict to specific auth collections |
+| `RequireSuperuserAuth()`            | Alias for `RequireAuth("_superusers")`                                    |
 | `RequireSuperuserOrOwnerAuth("id")` | Allow superusers OR the auth record whose id matches the named path param |
-| `Gzip()` | Gzip-compress the response |
-| `BodyLimit(bytes)` | Override the default 32MB request body cap (0 = no limit) |
-| `SkipSuccessActivityLog()` | Suppress activity log for successful responses |
+| `Gzip()`                            | Gzip-compress the response                                                |
+| `BodyLimit(bytes)`                  | Override the default 32MB request body cap (0 = no limit)                 |
+| `SkipSuccessActivityLog()`          | Suppress activity log for successful responses                            |
 
 **Path details:**
+
 - Patterns follow `net/http.ServeMux`: `{name}` = single segment, `{name...}` = catch-all.
 - A trailing `/` acts as a prefix wildcard; use `{$}` to anchor to the exact path only.
 - **Always** prefix custom routes with `/api/{yourapp}/` - do not put them under `/api/` alone, which collides with built-in collection / realtime / settings endpoints.

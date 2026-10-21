@@ -16,7 +16,7 @@ PocketBase v0.36 added the `strftime()` function to the filter expression gramma
 //    as your DB stores sub-second precision or you cross a month boundary
 const todayPrefix = new Date().toISOString().slice(0, 10);
 const results = await pb.collection("orders").getList(1, 50, {
-    filter: `created ~ "${todayPrefix}"`, // ❌
+  filter: `created ~ "${todayPrefix}"`, // ❌
 });
 ```
 
@@ -25,17 +25,17 @@ const results = await pb.collection("orders").getList(1, 50, {
 ```javascript
 // "all orders created today (UTC)"
 const results = await pb.collection("orders").getList(1, 50, {
-    filter: `strftime('%Y-%m-%d', created) = strftime('%Y-%m-%d', @now)`,
+  filter: `strftime('%Y-%m-%d', created) = strftime('%Y-%m-%d', @now)`,
 });
 
 // "all orders from March 2026"
 await pb.collection("orders").getList(1, 50, {
-    filter: `strftime('%Y-%m', created) = "2026-03"`,
+  filter: `strftime('%Y-%m', created) = "2026-03"`,
 });
 
 // "orders created this hour"
 await pb.collection("orders").getList(1, 50, {
-    filter: `strftime('%Y-%m-%d %H', created) = strftime('%Y-%m-%d %H', @now)`,
+  filter: `strftime('%Y-%m-%d %H', created) = strftime('%Y-%m-%d %H', @now)`,
 });
 ```
 
@@ -49,25 +49,25 @@ await pb.collection("orders").getList(1, 50, {
 
 **Common format specifiers:**
 
-| Specifier | Meaning |
-|---|---|
-| `%Y` | 4-digit year |
-| `%m` | month (01-12) |
-| `%d` | day of month (01-31) |
-| `%H` | hour (00-23) |
-| `%M` | minute (00-59) |
-| `%S` | second (00-59) |
-| `%W` | ISO week (00-53) |
-| `%j` | day of year (001-366) |
-| `%w` | day of week (0=Sunday) |
+| Specifier | Meaning                |
+| --------- | ---------------------- |
+| `%Y`      | 4-digit year           |
+| `%m`      | month (01-12)          |
+| `%d`      | day of month (01-31)   |
+| `%H`      | hour (00-23)           |
+| `%M`      | minute (00-59)         |
+| `%S`      | second (00-59)         |
+| `%W`      | ISO week (00-53)       |
+| `%j`      | day of year (001-366)  |
+| `%w`      | day of week (0=Sunday) |
 
 **Other filter functions worth knowing:**
 
-| Function | Use |
-|---|---|
-| `strftime(fmt, datetime)` | Format/extract datetime parts (v0.36+) |
-| `length(field)` | Count elements in a multi-value field (file, relation, select) |
-| `each(field, expr)` | Iterate over multi-value fields: `each(tags, ? ~ "urgent")` |
-| `issetIf(field, val)` | Conditional presence check used in complex rules |
+| Function                  | Use                                                            |
+| ------------------------- | -------------------------------------------------------------- |
+| `strftime(fmt, datetime)` | Format/extract datetime parts (v0.36+)                         |
+| `length(field)`           | Count elements in a multi-value field (file, relation, select) |
+| `each(field, expr)`       | Iterate over multi-value fields: `each(tags, ? ~ "urgent")`    |
+| `issetIf(field, val)`     | Conditional presence check used in complex rules               |
 
 Reference: [Filter Syntax - Functions](https://pocketbase.io/docs/api-rules-and-filters/#filters) · [v0.36.0 release](https://github.com/pocketbase/pocketbase/releases/tag/v0.36.0)

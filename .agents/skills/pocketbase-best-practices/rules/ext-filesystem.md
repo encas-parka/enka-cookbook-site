@@ -66,7 +66,10 @@ func importAvatar(app core.App, record *core.Record, path string) error {
 ```javascript
 // JSVM - file factories live on the $filesystem global
 const file1 = $filesystem.fileFromPath("/tmp/import.jpg");
-const file2 = $filesystem.fileFromBytes(new Uint8Array([0xff, 0xd8]), "logo.jpg");
+const file2 = $filesystem.fileFromBytes(
+  new Uint8Array([0xff, 0xd8]),
+  "logo.jpg",
+);
 const file3 = $filesystem.fileFromURL("https://example.com/a.jpg");
 
 // Assigning to a record field triggers upload on save
@@ -76,16 +79,17 @@ $app.save(record);
 // Low-level client - MUST be closed
 const fs = $app.newFilesystem();
 try {
-    const list = fs.list("thumbs/");
-    for (const obj of list) {
-        console.log(obj.key, obj.size);
-    }
+  const list = fs.list("thumbs/");
+  for (const obj of list) {
+    console.log(obj.key, obj.size);
+  }
 } finally {
-    fs.close(); // REQUIRED
+  fs.close(); // REQUIRED
 }
 ```
 
 **Rules:**
+
 - `defer fs.Close()` **immediately** after a successful `NewFilesystem()` / `NewBackupsFilesystem()` call (Go). In JS, wrap in `try { ... } finally { fs.close() }`.
 - Prefer the high-level record-field API (`record.Set("field", file)` + `app.Save`) over direct `fs.Upload` calls - it handles thumbs regeneration, orphan cleanup, and hook integration.
 - File factory functions (`filesystem.NewFileFromPath`, `NewFileFromBytes`, `NewFileFromURL` / JS `$filesystem.fileFromPath|Bytes|URL`) capture their input; they do not stream until save.

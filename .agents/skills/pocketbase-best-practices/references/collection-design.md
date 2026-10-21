@@ -17,18 +17,18 @@ Auth collections provide built-in authentication features including secure passw
 ```javascript
 // Base collection loses all auth features
 const usersCollection = {
-  name: 'users',
-  type: 'base',  // Wrong! No auth capabilities
+  name: "users",
+  type: "base", // Wrong! No auth capabilities
   schema: [
-    { name: 'email', type: 'email' },
-    { name: 'password', type: 'text' },  // Stored in plain text!
-    { name: 'name', type: 'text' }
-  ]
+    { name: "email", type: "email" },
+    { name: "password", type: "text" }, // Stored in plain text!
+    { name: "name", type: "text" },
+  ],
 };
 
 // Manual login implementation - insecure
-const user = await pb.collection('users').getFirstListItem(
-  `email = "${email}" && password = "${password}"`  // SQL injection risk!
+const user = await pb.collection("users").getFirstListItem(
+  `email = "${email}" && password = "${password}"`, // SQL injection risk!
 );
 ```
 
@@ -37,32 +37,32 @@ const user = await pb.collection('users').getFirstListItem(
 ```javascript
 // Auth collection with built-in security
 const usersCollection = {
-  name: 'users',
-  type: 'auth',  // Enables authentication features
+  name: "users",
+  type: "auth", // Enables authentication features
   schema: [
-    { name: 'name', type: 'text' },
-    { name: 'avatar', type: 'file', options: { maxSelect: 1 } }
+    { name: "name", type: "text" },
+    { name: "avatar", type: "file", options: { maxSelect: 1 } },
   ],
   options: {
     allowEmailAuth: true,
     allowOAuth2Auth: true,
     requireEmail: true,
-    minPasswordLength: 8
-  }
+    minPasswordLength: 8,
+  },
 };
 
 // Secure authentication with password hashing
-const authData = await pb.collection('users').authWithPassword(
-  'user@example.com',
-  'securePassword123'
-);
+const authData = await pb
+  .collection("users")
+  .authWithPassword("user@example.com", "securePassword123");
 
 // Token automatically stored in authStore
 // NOTE: Never log tokens in production - shown here for illustration only
-console.log('Authenticated as:', pb.authStore.record.id);
+console.log("Authenticated as:", pb.authStore.record.id);
 ```
 
 **When to use each type:**
+
 - **Auth collection**: User accounts, admin accounts, any entity that needs to log in
 - **Base collection**: Regular data like posts, products, orders, comments
 - **View collection**: Read-only aggregations or complex queries
@@ -80,15 +80,15 @@ Selecting the wrong field type leads to data validation issues, wasted storage, 
 ```javascript
 // Using plain text fields for structured data
 const collection = {
-  name: 'products',
+  name: "products",
   schema: [
-    { name: 'price', type: 'text' },      // Should be number
-    { name: 'email', type: 'text' },       // Should be email
-    { name: 'website', type: 'text' },     // Should be url
-    { name: 'active', type: 'text' },      // Should be bool
-    { name: 'tags', type: 'text' },        // Should be select or json
-    { name: 'created', type: 'text' }      // Should be autodate
-  ]
+    { name: "price", type: "text" }, // Should be number
+    { name: "email", type: "text" }, // Should be email
+    { name: "website", type: "text" }, // Should be url
+    { name: "active", type: "text" }, // Should be bool
+    { name: "tags", type: "text" }, // Should be select or json
+    { name: "created", type: "text" }, // Should be autodate
+  ],
 };
 // No validation, inconsistent data, manual parsing required
 ```
@@ -98,25 +98,30 @@ const collection = {
 ```javascript
 // Using specialized field types with proper validation
 const collection = {
-  name: 'products',
-  type: 'base',
+  name: "products",
+  type: "base",
   schema: [
-    { name: 'price', type: 'number', options: { min: 0 } },
-    { name: 'email', type: 'email' },
-    { name: 'website', type: 'url' },
-    { name: 'active', type: 'bool' },
-    { name: 'tags', type: 'select', options: {
-      maxSelect: 5,
-      values: ['electronics', 'clothing', 'food', 'other']
-    }},
-    { name: 'metadata', type: 'json' }
+    { name: "price", type: "number", options: { min: 0 } },
+    { name: "email", type: "email" },
+    { name: "website", type: "url" },
+    { name: "active", type: "bool" },
+    {
+      name: "tags",
+      type: "select",
+      options: {
+        maxSelect: 5,
+        values: ["electronics", "clothing", "food", "other"],
+      },
+    },
+    { name: "metadata", type: "json" },
     // created/updated are automatic system fields
-  ]
+  ],
 };
 // Built-in validation, proper indexing, type-safe queries
 ```
 
 **Available field types:**
+
 - `text` - Plain text with optional min/max length, regex pattern
 - `number` - Integer or decimal with optional min/max
 - `bool` - True/false values
@@ -145,17 +150,17 @@ PocketBase provides a dedicated GeoPoint field type for storing geographic coord
 ```javascript
 // Separate lat/lon fields - no built-in distance queries
 const placesSchema = [
-  { name: 'name', type: 'text' },
-  { name: 'latitude', type: 'number' },
-  { name: 'longitude', type: 'number' }
+  { name: "name", type: "text" },
+  { name: "latitude", type: "number" },
+  { name: "longitude", type: "number" },
 ];
 
 // Manual distance calculation - complex and slow
 async function findNearby(lat, lon, maxKm) {
-  const places = await pb.collection('places').getFullList();
+  const places = await pb.collection("places").getFullList();
 
   // Calculate distance for every record client-side
-  return places.filter(place => {
+  return places.filter((place) => {
     const dist = haversine(lat, lon, place.latitude, place.longitude);
     return dist <= maxKm;
   });
@@ -167,41 +172,38 @@ async function findNearby(lat, lon, maxKm) {
 ```javascript
 // GeoPoint field stores coordinates as { lon, lat } object
 const placesSchema = [
-  { name: 'name', type: 'text' },
-  { name: 'location', type: 'geopoint' }
+  { name: "name", type: "text" },
+  { name: "location", type: "geopoint" },
 ];
 
 // Creating a record with GeoPoint
-await pb.collection('places').create({
-  name: 'Coffee Shop',
-  location: { lon: -73.9857, lat: 40.7484 }  // Note: lon first!
+await pb.collection("places").create({
+  name: "Coffee Shop",
+  location: { lon: -73.9857, lat: 40.7484 }, // Note: lon first!
 });
 
 // Or using "lon,lat" string format
-await pb.collection('places').create({
-  name: 'Restaurant',
-  location: '-73.9857,40.7484'  // String format also works
+await pb.collection("places").create({
+  name: "Restaurant",
+  location: "-73.9857,40.7484", // String format also works
 });
 
 // Query nearby locations using geoDistance()
 async function findNearby(lon, lat, maxKm) {
   // geoDistance returns distance in kilometers
-  const places = await pb.collection('places').getList(1, 50, {
-    filter: pb.filter(
-      'geoDistance(location, {:point}) <= {:maxKm}',
-      {
-        point: { lon, lat },
-        maxKm: maxKm
-      }
-    ),
-    sort: pb.filter('geoDistance(location, {:point})', { point: { lon, lat } })
+  const places = await pb.collection("places").getList(1, 50, {
+    filter: pb.filter("geoDistance(location, {:point}) <= {:maxKm}", {
+      point: { lon, lat },
+      maxKm: maxKm,
+    }),
+    sort: pb.filter("geoDistance(location, {:point})", { point: { lon, lat } }),
   });
 
   return places;
 }
 
 // Find places within 5km of Times Square
-const nearbyPlaces = await findNearby(-73.9857, 40.7580, 5);
+const nearbyPlaces = await findNearby(-73.9857, 40.758, 5);
 
 // Use in API rules for location-based access
 // listRule: geoDistance(location, @request.query.point) <= 10
@@ -214,17 +216,17 @@ const nearbyPlaces = await findNearby(-73.9857, 40.7580, 5);
 // Returns: distance in kilometers
 
 // In filter expressions
-filter: 'geoDistance(location, "-73.9857,40.7484") <= 5'
+filter: 'geoDistance(location, "-73.9857,40.7484") <= 5';
 
 // With parameter binding (recommended)
-filter: pb.filter('geoDistance(location, {:center}) <= {:radius}', {
+filter: pb.filter("geoDistance(location, {:center}) <= {:radius}", {
   center: { lon: -73.9857, lat: 40.7484 },
-  radius: 5
-})
+  radius: 5,
+});
 
 // Sorting by distance
-sort: 'geoDistance(location, "-73.9857,40.7484")'  // Closest first
-sort: '-geoDistance(location, "-73.9857,40.7484")' // Farthest first
+sort: 'geoDistance(location, "-73.9857,40.7484")'; // Closest first
+sort: '-geoDistance(location, "-73.9857,40.7484")'; // Farthest first
 ```
 
 **GeoPoint data format:**
@@ -240,12 +242,14 @@ sort: '-geoDistance(location, "-73.9857,40.7484")' // Farthest first
 ```
 
 **Use cases:**
+
 - Store-locator / find nearby
 - Delivery radius validation
 - Geofencing in API rules
 - Location-based search results
 
 **Limitations:**
+
 - Spherical Earth calculation (accurate to ~0.3%)
 - No polygon/area containment queries
 - Single point per field (use multiple fields for routes)
@@ -262,9 +266,9 @@ PocketBase uses SQLite which benefits significantly from proper indexing. Querie
 
 ```javascript
 // Querying without indexes
-const posts = await pb.collection('posts').getList(1, 20, {
+const posts = await pb.collection("posts").getList(1, 20, {
   filter: 'author = "user123" && status = "published"',
-  sort: '-publishedAt'
+  sort: "-publishedAt",
 });
 // Full table scan on large collections - very slow
 
@@ -290,9 +294,9 @@ const posts = await pb.collection('posts').getList(1, 20, {
 //    CREATE INDEX idx_posts_status_published ON posts(status, publishedAt DESC)
 
 // Queries now use indexes
-const posts = await pb.collection('posts').getList(1, 20, {
+const posts = await pb.collection("posts").getList(1, 20, {
   filter: 'author = "user123" && status = "published"',
-  sort: '-publishedAt'
+  sort: "-publishedAt",
 });
 // Index scan - fast even with millions of records
 
@@ -301,6 +305,7 @@ const posts = await pb.collection('posts').getList(1, 20, {
 ```
 
 **Index recommendations:**
+
 - Fields used in `filter` expressions
 - Fields used in `sort` parameters
 - Fields used in API rules (`listRule`, `viewRule`, etc.)
@@ -308,6 +313,7 @@ const posts = await pb.collection('posts').getList(1, 20, {
 - Unique fields like slugs or codes
 
 **Index considerations for SQLite:**
+
 - Composite indexes work left-to-right (order matters)
 - Too many indexes slow down writes
 - Use `EXPLAIN QUERY PLAN` in SQL to verify index usage
@@ -333,19 +339,27 @@ Relation fields connect collections together. Proper cascade configuration ensur
 ```javascript
 // Relation without considering deletion behavior
 const ordersSchema = [
-  { name: 'customer', type: 'relation', options: {
-    collectionId: 'customers_collection_id',
-    maxSelect: 1
-    // No cascade options specified - defaults may cause issues
-  }},
-  { name: 'products', type: 'relation', options: {
-    collectionId: 'products_collection_id'
-    // Multiple products, no cascade handling
-  }}
+  {
+    name: "customer",
+    type: "relation",
+    options: {
+      collectionId: "customers_collection_id",
+      maxSelect: 1,
+      // No cascade options specified - defaults may cause issues
+    },
+  },
+  {
+    name: "products",
+    type: "relation",
+    options: {
+      collectionId: "products_collection_id",
+      // Multiple products, no cascade handling
+    },
+  },
 ];
 
 // Deleting a customer may fail or orphan orders
-await pb.collection('customers').delete(customerId);
+await pb.collection("customers").delete(customerId);
 // Error: record is referenced by other records
 ```
 
@@ -355,37 +369,37 @@ await pb.collection('customers').delete(customerId);
 // Carefully configured relations
 const ordersSchema = [
   {
-    name: 'customer',
-    type: 'relation',
+    name: "customer",
+    type: "relation",
     required: true,
     options: {
-      collectionId: 'customers_collection_id',
+      collectionId: "customers_collection_id",
       maxSelect: 1,
-      cascadeDelete: false  // Prevent accidental mass deletion
-    }
+      cascadeDelete: false, // Prevent accidental mass deletion
+    },
   },
   {
-    name: 'products',
-    type: 'relation',
+    name: "products",
+    type: "relation",
     options: {
-      collectionId: 'products_collection_id',
+      collectionId: "products_collection_id",
       maxSelect: 99,
-      cascadeDelete: false
-    }
-  }
+      cascadeDelete: false,
+    },
+  },
 ];
 
 // For dependent data like comments - cascade delete makes sense
 const commentsSchema = [
   {
-    name: 'post',
-    type: 'relation',
+    name: "post",
+    type: "relation",
     options: {
-      collectionId: 'posts_collection_id',
+      collectionId: "posts_collection_id",
       maxSelect: 1,
-      cascadeDelete: true  // Delete comments when post is deleted
-    }
-  }
+      cascadeDelete: true, // Delete comments when post is deleted
+    },
+  },
 ];
 // NOTE: For audit logs, avoid cascadeDelete - logs should be retained
 // for compliance/forensics even after the referenced user is deleted.
@@ -393,7 +407,7 @@ const commentsSchema = [
 
 // Handle deletion manually when cascade is false
 try {
-  await pb.collection('customers').delete(customerId);
+  await pb.collection("customers").delete(customerId);
 } catch (e) {
   if (e.status === 400) {
     // Customer has orders - handle appropriately
@@ -405,10 +419,12 @@ try {
 ```
 
 **Cascade options:**
+
 - `cascadeDelete: true` - Delete referencing records when referenced record is deleted
 - `cascadeDelete: false` - Block deletion if references exist (default for required relations)
 
 **Best practices:**
+
 - Use `cascadeDelete: true` for dependent data (comments on posts, logs for users)
 - Use `cascadeDelete: false` for important data (orders, transactions)
 - Consider soft deletes for audit trails
@@ -426,16 +442,19 @@ View collections execute custom SQL queries and expose results through the stand
 
 ```javascript
 // Fetching all records to compute stats client-side
-const orders = await pb.collection('orders').getFullList();
-const products = await pb.collection('products').getFullList();
+const orders = await pb.collection("orders").getFullList();
+const products = await pb.collection("products").getFullList();
 
 // Expensive client-side computation
-const stats = orders.reduce((acc, order) => {
-  const product = products.find(p => p.id === order.product);
-  acc.totalRevenue += order.quantity * product.price;
-  acc.orderCount++;
-  return acc;
-}, { totalRevenue: 0, orderCount: 0 });
+const stats = orders.reduce(
+  (acc, order) => {
+    const product = products.find((p) => p.id === order.product);
+    acc.totalRevenue += order.quantity * product.price;
+    acc.orderCount++;
+    return acc;
+  },
+  { totalRevenue: 0, orderCount: 0 },
+);
 // Fetches all data, slow, memory-intensive
 ```
 
@@ -455,17 +474,18 @@ const stats = orders.reduce((acc, order) => {
 // GROUP BY p.id
 
 // Simple, efficient query
-const productStats = await pb.collection('product_stats').getList(1, 20, {
-  sort: '-revenue'
+const productStats = await pb.collection("product_stats").getList(1, 20, {
+  sort: "-revenue",
 });
 
 // Each record has computed fields
-productStats.items.forEach(stat => {
+productStats.items.forEach((stat) => {
   console.log(`${stat.name}: ${stat.order_count} orders, $${stat.revenue}`);
 });
 ```
 
 **View collection use cases:**
+
 - Aggregations (COUNT, SUM, AVG)
 - Joining data from multiple collections
 - Computed/derived fields
@@ -473,10 +493,10 @@ productStats.items.forEach(stat => {
 - Dashboard statistics
 
 **Limitations:**
+
 - Read-only (no create/update/delete)
 - Must return `id` column
 - No realtime subscriptions
 - API rules still apply for access control
 
 Reference: [PocketBase View Collections](https://pocketbase.io/docs/collections/#view-collection)
-

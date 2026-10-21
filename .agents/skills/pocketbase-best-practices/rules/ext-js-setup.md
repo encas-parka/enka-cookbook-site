@@ -22,8 +22,8 @@ routerAdd("GET", "/hello", (e) => e.json(200, { ok: true }));
 // pb_hooks/hooks.js  ❌ wrong extension - must be *.pb.js
 // No /// reference -> editor shows every call as "any"
 onRecordAfterUpdateSuccess((e) => {
-    console.log(e.record.get("email"));
-    // Missing e.next() - stops the execution chain silently
+  console.log(e.record.get("email"));
+  // Missing e.next() - stops the execution chain silently
 }, "users");
 ```
 
@@ -37,17 +37,18 @@ onRecordAfterUpdateSuccess((e) => {
 // Use prefixes like "01_", "10_", "99_" if order matters.
 
 routerAdd("GET", "/api/myapp/hello/{name}", (e) => {
-    const name = e.request.pathValue("name");
-    return e.json(200, { message: "Hello " + name });
+  const name = e.request.pathValue("name");
+  return e.json(200, { message: "Hello " + name });
 });
 
 onRecordAfterUpdateSuccess((e) => {
-    console.log("user updated:", e.record.get("email"));
-    e.next(); // REQUIRED - otherwise the execution chain is broken
+  console.log("user updated:", e.record.get("email"));
+  e.next(); // REQUIRED - otherwise the execution chain is broken
 }, "users");
 ```
 
 **Key details:**
+
 - JS method names are **camelCase** versions of their Go equivalents (`FindRecordById` → `$app.findRecordById`).
 - Errors are thrown as regular JS exceptions, not returned as values.
 - Global objects: `$app` (the app), `$apis` (routing helpers/middlewares), `$os` (OS primitives), `$security` (JWT, random strings, AES), `$filesystem` (file factories), `$dbx` (query builder), `$mails` (email helpers), `__hooks` (absolute path to `pb_hooks`).

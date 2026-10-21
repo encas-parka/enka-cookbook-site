@@ -23,7 +23,7 @@ const privateUrl = pb.files.getURL(record, record.document);
 // Returns URL but file access denied if protected!
 
 // Wrong thumbnail syntax
-const thumb = `${imageUrl}?thumb=100x100`;  // Wrong format
+const thumb = `${imageUrl}?thumb=100x100`; // Wrong format
 ```
 
 **Correct (using SDK methods):**
@@ -35,17 +35,17 @@ const imageUrl = pb.files.getURL(record, record.image);
 
 // With thumbnail (for images only)
 const thumbUrl = pb.files.getURL(record, record.image, {
-  thumb: '100x100'  // Width x Height
+  thumb: "100x100", // Width x Height
 });
 
 // Thumbnail options
 const thumbs = {
-  square: pb.files.getURL(record, record.image, { thumb: '100x100' }),
-  fit: pb.files.getURL(record, record.image, { thumb: '100x0' }),     // Fit width
-  fitHeight: pb.files.getURL(record, record.image, { thumb: '0x100' }), // Fit height
-  crop: pb.files.getURL(record, record.image, { thumb: '100x100t' }), // Top crop
-  cropBottom: pb.files.getURL(record, record.image, { thumb: '100x100b' }), // Bottom
-  force: pb.files.getURL(record, record.image, { thumb: '100x100f' }), // Force exact
+  square: pb.files.getURL(record, record.image, { thumb: "100x100" }),
+  fit: pb.files.getURL(record, record.image, { thumb: "100x0" }), // Fit width
+  fitHeight: pb.files.getURL(record, record.image, { thumb: "0x100" }), // Fit height
+  crop: pb.files.getURL(record, record.image, { thumb: "100x100t" }), // Top crop
+  cropBottom: pb.files.getURL(record, record.image, { thumb: "100x100b" }), // Bottom
+  force: pb.files.getURL(record, record.image, { thumb: "100x100f" }), // Force exact
 };
 
 // Protected files (require auth)
@@ -63,7 +63,7 @@ async function downloadDocument(record) {
   const url = pb.files.getURL(record, record.document, { token });
 
   // Token is appended: ...?token=xxx
-  window.open(url, '_blank');
+  window.open(url, "_blank");
 }
 ```
 
@@ -76,7 +76,7 @@ function UserAvatar({ user, size = 50 }) {
   }
 
   const avatarUrl = pb.files.getURL(user, user.avatar, {
-    thumb: `${size}x${size}`
+    thumb: `${size}x${size}`,
   });
 
   return (
@@ -99,7 +99,7 @@ function ImageGallery({ record }) {
       {images.map((filename, index) => (
         <img
           key={filename}
-          src={pb.files.getURL(record, filename, { thumb: '200x200' })}
+          src={pb.files.getURL(record, filename, { thumb: "200x200" })}
           onClick={() => openFullSize(record, filename)}
           loading="lazy"
         />
@@ -110,7 +110,7 @@ function ImageGallery({ record }) {
 
 function openFullSize(record, filename) {
   const fullUrl = pb.files.getURL(record, filename);
-  window.open(fullUrl, '_blank');
+  window.open(fullUrl, "_blank");
 }
 ```
 
@@ -118,30 +118,32 @@ function openFullSize(record, filename) {
 
 ```javascript
 // Efficiently generate URLs for list of records
-const posts = await pb.collection('posts').getList(1, 20, {
-  expand: 'author'
+const posts = await pb.collection("posts").getList(1, 20, {
+  expand: "author",
 });
 
-const postsWithUrls = posts.items.map(post => ({
+const postsWithUrls = posts.items.map((post) => ({
   ...post,
   thumbnailUrl: post.image
-    ? pb.files.getURL(post, post.image, { thumb: '300x200' })
+    ? pb.files.getURL(post, post.image, { thumb: "300x200" })
     : null,
   authorAvatarUrl: post.expand?.author?.avatar
-    ? pb.files.getURL(post.expand.author, post.expand.author.avatar, { thumb: '40x40' })
-    : null
+    ? pb.files.getURL(post.expand.author, post.expand.author.avatar, {
+        thumb: "40x40",
+      })
+    : null,
 }));
 ```
 
 **Thumbnail format reference:**
 
-| Format | Description |
-|--------|-------------|
-| `WxH` | Fit within dimensions |
-| `Wx0` | Fit width, auto height |
-| `0xH` | Auto width, fit height |
-| `WxHt` | Crop from top |
-| `WxHb` | Crop from bottom |
+| Format | Description            |
+| ------ | ---------------------- |
+| `WxH`  | Fit within dimensions  |
+| `Wx0`  | Fit width, auto height |
+| `0xH`  | Auto width, fit height |
+| `WxHt` | Crop from top          |
+| `WxHb` | Crop from bottom       |
 | `WxHf` | Force exact dimensions |
 
 **Performance and caching:**
@@ -156,13 +158,17 @@ const postsWithUrls = posts.items.map(post => ({
 // Thumbnails are generated on first request and cached by PocketBase.
 // Pre-generate expected thumb sizes after upload to avoid cold-start latency:
 async function uploadWithThumbs(record, file) {
-  const updated = await pb.collection('posts').update(record.id, { image: file });
+  const updated = await pb
+    .collection("posts")
+    .update(record.id, { image: file });
 
   // Pre-warm thumbnail cache by requesting expected sizes
-  const sizes = ['100x100', '300x200', '800x600'];
-  await Promise.all(sizes.map(size =>
-    fetch(pb.files.getURL(updated, updated.image, { thumb: size }))
-  ));
+  const sizes = ["100x100", "300x200", "800x600"];
+  await Promise.all(
+    sizes.map((size) =>
+      fetch(pb.files.getURL(updated, updated.image, { thumb: size })),
+    ),
+  );
 
   return updated;
 }
@@ -178,7 +184,7 @@ const url = pb.files.getURL(record, record.image);
 // -> https://myapp.com/api/files/COLLECTION/ID/filename.jpg (proxied)
 
 // For public files with S3 + CDN, construct CDN URL directly:
-const cdnBase = 'https://cdn.myapp.com';  // Your S3 CDN domain
+const cdnBase = "https://cdn.myapp.com"; // Your S3 CDN domain
 const cdnUrl = `${cdnBase}/${record.collectionId}/${record.id}/${record.image}`;
 // Bypasses PocketBase, served directly from CDN edge
 
@@ -201,24 +207,24 @@ File uploads can use plain objects or FormData. Handle large files properly with
 ```javascript
 // Missing error handling
 async function uploadFile(file) {
-  await pb.collection('documents').create({
+  await pb.collection("documents").create({
     title: file.name,
-    file: file
+    file: file,
   });
   // No error handling, no progress feedback
 }
 
 // Uploading without validation
 async function uploadAvatar(file) {
-  await pb.collection('users').update(userId, {
-    avatar: file  // No size/type check - might fail server-side
+  await pb.collection("users").update(userId, {
+    avatar: file, // No size/type check - might fail server-side
   });
 }
 
 // Base64 upload (inefficient)
 async function uploadImage(base64) {
-  await pb.collection('images').create({
-    image: base64  // Wrong! PocketBase expects File/Blob
+  await pb.collection("images").create({
+    image: base64, // Wrong! PocketBase expects File/Blob
   });
 }
 ```
@@ -229,10 +235,10 @@ async function uploadImage(base64) {
 // Basic upload with object (auto-converts to FormData)
 async function uploadDocument(file, metadata) {
   try {
-    const record = await pb.collection('documents').create({
+    const record = await pb.collection("documents").create({
       title: metadata.title,
       description: metadata.description,
-      file: file  // File object from input
+      file: file, // File object from input
     });
     return record;
   } catch (error) {
@@ -245,8 +251,8 @@ async function uploadDocument(file, metadata) {
 
 // Upload multiple files
 async function uploadGallery(files, albumId) {
-  const record = await pb.collection('albums').update(albumId, {
-    images: files  // Array of File objects
+  const record = await pb.collection("albums").update(albumId, {
+    images: files, // Array of File objects
   });
   return record;
 }
@@ -254,20 +260,20 @@ async function uploadGallery(files, albumId) {
 // FormData for more control
 async function uploadWithProgress(file, onProgress) {
   const formData = new FormData();
-  formData.append('title', file.name);
-  formData.append('file', file);
+  formData.append("title", file.name);
+  formData.append("file", file);
 
   // Using fetch directly for progress (SDK doesn't expose progress)
   return new Promise((resolve, reject) => {
     const xhr = new XMLHttpRequest();
 
-    xhr.upload.addEventListener('progress', (e) => {
+    xhr.upload.addEventListener("progress", (e) => {
       if (e.lengthComputable) {
         onProgress(Math.round((e.loaded / e.total) * 100));
       }
     });
 
-    xhr.addEventListener('load', () => {
+    xhr.addEventListener("load", () => {
       if (xhr.status >= 200 && xhr.status < 300) {
         resolve(JSON.parse(xhr.responseText));
       } else {
@@ -275,10 +281,10 @@ async function uploadWithProgress(file, onProgress) {
       }
     });
 
-    xhr.addEventListener('error', () => reject(new Error('Upload failed')));
+    xhr.addEventListener("error", () => reject(new Error("Upload failed")));
 
-    xhr.open('POST', `${pb.baseURL}/api/collections/documents/records`);
-    xhr.setRequestHeader('Authorization', pb.authStore.token);
+    xhr.open("POST", `${pb.baseURL}/api/collections/documents/records`);
+    xhr.setRequestHeader("Authorization", pb.authStore.token);
     xhr.send(formData);
   });
 }
@@ -286,9 +292,9 @@ async function uploadWithProgress(file, onProgress) {
 // Client-side validation before upload
 function validateFile(file, options = {}) {
   const {
-    maxSize = 10 * 1024 * 1024,  // 10MB default
-    allowedTypes = ['image/jpeg', 'image/png', 'image/gif', 'application/pdf'],
-    maxNameLength = 100
+    maxSize = 10 * 1024 * 1024, // 10MB default
+    allowedTypes = ["image/jpeg", "image/png", "image/gif", "application/pdf"],
+    maxNameLength = 100,
   } = options;
 
   const errors = [];
@@ -316,11 +322,11 @@ async function handleFileUpload(inputEvent) {
   // Validate
   const validation = validateFile(file, {
     maxSize: 5 * 1024 * 1024,
-    allowedTypes: ['image/jpeg', 'image/png']
+    allowedTypes: ["image/jpeg", "image/png"],
   });
 
   if (!validation.valid) {
-    showError(validation.errors.join(', '));
+    showError(validation.errors.join(", "));
     return;
   }
 
@@ -328,7 +334,7 @@ async function handleFileUpload(inputEvent) {
   try {
     setUploading(true);
     const record = await uploadWithProgress(file, setProgress);
-    showSuccess('Upload complete!');
+    showSuccess("Upload complete!");
     return record;
   } catch (error) {
     showError(error.message);
@@ -342,13 +348,13 @@ async function handleFileUpload(inputEvent) {
 
 ```javascript
 // Remove specific file(s) from record
-await pb.collection('albums').update(albumId, {
-  'images-': ['filename1.jpg', 'filename2.jpg']  // Remove these files
+await pb.collection("albums").update(albumId, {
+  "images-": ["filename1.jpg", "filename2.jpg"], // Remove these files
 });
 
 // Clear all files
-await pb.collection('documents').update(docId, {
-  file: null  // Removes the file
+await pb.collection("documents").update(docId, {
+  file: null, // Removes the file
 });
 ```
 
@@ -365,24 +371,24 @@ Validate files on both client and server side. Client validation improves UX; se
 ```javascript
 // Accepting any file without checks
 async function uploadFile(file) {
-  return pb.collection('uploads').create({ file });
+  return pb.collection("uploads").create({ file });
   // Could upload 1GB executable!
 }
 
 // Only checking extension (easily bypassed)
 function validateFile(file) {
-  const ext = file.name.split('.').pop();
-  return ['jpg', 'png'].includes(ext);
+  const ext = file.name.split(".").pop();
+  return ["jpg", "png"].includes(ext);
   // User can rename virus.exe to virus.jpg
 }
 
 // Client-only validation (can be bypassed)
 async function uploadAvatar(file) {
   if (file.size > 1024 * 1024) {
-    throw new Error('Too large');
+    throw new Error("Too large");
   }
   // Attacker can bypass this with dev tools
-  return pb.collection('users').update(userId, { avatar: file });
+  return pb.collection("users").update(userId, { avatar: file });
 }
 ```
 
@@ -394,48 +400,49 @@ async function uploadAvatar(file) {
 const collectionConfig = {
   schema: [
     {
-      name: 'avatar',
-      type: 'file',
+      name: "avatar",
+      type: "file",
       options: {
-        maxSelect: 1,           // Single file only
-        maxSize: 5242880,       // 5MB in bytes
-        mimeTypes: [            // Allowed types
-          'image/jpeg',
-          'image/png',
-          'image/gif',
-          'image/webp'
+        maxSelect: 1, // Single file only
+        maxSize: 5242880, // 5MB in bytes
+        mimeTypes: [
+          // Allowed types
+          "image/jpeg",
+          "image/png",
+          "image/gif",
+          "image/webp",
         ],
-        thumbs: ['100x100', '200x200']  // Auto-generate thumbnails
-      }
+        thumbs: ["100x100", "200x200"], // Auto-generate thumbnails
+      },
     },
     {
-      name: 'documents',
-      type: 'file',
+      name: "documents",
+      type: "file",
       options: {
         maxSelect: 10,
-        maxSize: 10485760,  // 10MB
+        maxSize: 10485760, // 10MB
         mimeTypes: [
-          'application/pdf',
-          'application/msword',
-          'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
-        ]
-      }
-    }
-  ]
+          "application/pdf",
+          "application/msword",
+          "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+        ],
+      },
+    },
+  ],
 };
 
 // 2. Client-side validation for better UX
 const FILE_CONSTRAINTS = {
   avatar: {
     maxSize: 5 * 1024 * 1024,
-    allowedTypes: ['image/jpeg', 'image/png', 'image/gif', 'image/webp'],
-    maxFiles: 1
+    allowedTypes: ["image/jpeg", "image/png", "image/gif", "image/webp"],
+    maxFiles: 1,
   },
   documents: {
     maxSize: 10 * 1024 * 1024,
-    allowedTypes: ['application/pdf'],
-    maxFiles: 10
-  }
+    allowedTypes: ["application/pdf"],
+    maxFiles: 10,
+  },
 };
 
 function validateFiles(files, constraintKey) {
@@ -460,11 +467,13 @@ function validateFiles(files, constraintKey) {
     // Client-side file.type is based on extension, not file content.
     // Always enforce mimeTypes in PocketBase collection settings for server-side validation.
     if (!constraints.allowedTypes.includes(file.type)) {
-      fileErrors.push(`${file.name}: invalid file type (${file.type || 'unknown'})`);
+      fileErrors.push(
+        `${file.name}: invalid file type (${file.type || "unknown"})`,
+      );
     }
 
     // Check for suspicious patterns
-    if (file.name.includes('..') || file.name.includes('/')) {
+    if (file.name.includes("..") || file.name.includes("/")) {
       fileErrors.push(`${file.name}: invalid filename`);
     }
 
@@ -478,7 +487,7 @@ function validateFiles(files, constraintKey) {
   return {
     valid: errors.length === 0,
     errors,
-    validFiles
+    validFiles,
   };
 }
 
@@ -487,7 +496,7 @@ async function handleAvatarUpload(inputElement) {
   const files = Array.from(inputElement.files);
 
   // Client validation
-  const validation = validateFiles(files, 'avatar');
+  const validation = validateFiles(files, "avatar");
   if (!validation.valid) {
     showErrors(validation.errors);
     return null;
@@ -495,17 +504,17 @@ async function handleAvatarUpload(inputElement) {
 
   // Upload (server will also validate)
   try {
-    const updated = await pb.collection('users').update(userId, {
-      avatar: validation.validFiles[0]
+    const updated = await pb.collection("users").update(userId, {
+      avatar: validation.validFiles[0],
     });
-    showSuccess('Avatar updated!');
+    showSuccess("Avatar updated!");
     return updated;
   } catch (error) {
     // Handle server validation errors
     if (error.response?.data?.avatar) {
       showError(error.response.data.avatar.message);
     } else {
-      showError('Upload failed');
+      showError("Upload failed");
     }
     return null;
   }
@@ -513,7 +522,12 @@ async function handleAvatarUpload(inputElement) {
 
 // 4. Image-specific validation
 async function validateImage(file, options = {}) {
-  const { minWidth = 0, minHeight = 0, maxWidth = Infinity, maxHeight = Infinity } = options;
+  const {
+    minWidth = 0,
+    minHeight = 0,
+    maxWidth = Infinity,
+    maxHeight = Infinity,
+  } = options;
 
   return new Promise((resolve) => {
     const img = new Image();
@@ -527,13 +541,18 @@ async function validateImage(file, options = {}) {
         errors.push(`Image must be at most ${maxWidth}x${maxHeight}px`);
       }
 
-      resolve({ valid: errors.length === 0, errors, width: img.width, height: img.height });
+      resolve({
+        valid: errors.length === 0,
+        errors,
+        width: img.width,
+        height: img.height,
+      });
     };
-    img.onerror = () => resolve({ valid: false, errors: ['Invalid image file'] });
+    img.onerror = () =>
+      resolve({ valid: false, errors: ["Invalid image file"] });
     img.src = URL.createObjectURL(file);
   });
 }
 ```
 
 Reference: [PocketBase Files Configuration](https://pocketbase.io/docs/files-handling/)
-

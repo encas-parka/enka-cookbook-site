@@ -30,7 +30,7 @@ filtre de collecte, invalidation après changement de droits).
 messages d'état vide légitimes. Pendant un chargement initial, ils s'affichent
 puis disparaissent.
 
-*Trancher* : délai → rechargement → oracle. Si l'oracle confirme l'absence, ce
+_Trancher_ : délai → rechargement → oracle. Si l'oracle confirme l'absence, ce
 n'est pas un bug ; si le chargement dure plusieurs secondes, c'est une
 observation d'ergonomie (pas de squelette, message trompeur), pas un bug de
 données.
@@ -41,7 +41,7 @@ Après une navigation SPA, le DOM peut encore contenir l'ancienne vue, y compris
 ses bandeaux et ses boutons. Lire ce texte comme un défaut d'affichage est une
 erreur classique.
 
-*Trancher* : re-snapshoter après un délai ; vérifier l'URL réelle de la page.
+_Trancher_ : re-snapshoter après un délai ; vérifier l'URL réelle de la page.
 Un contenu incohérent avec l'URL est presque toujours transitoire.
 
 ### 3. L'instrument qui modifie les données
@@ -50,7 +50,7 @@ Remplacer le contenu d'un éditeur riche, cocher une case d'un formulaire dont o
 ne voulait que lire l'état, déclencher un enregistrement en quittant : ces
 mutations viennent du pilotage.
 
-*Trancher* : se demander « qu'est-ce que j'ai envoyé comme événement ? » avant
+_Trancher_ : se demander « qu'est-ce que j'ai envoyé comme événement ? » avant
 « qu'est-ce que l'app a fait ? ». Consigner l'artefact dans la note de clôture
 pour ne pas le confondre plus tard avec une mutation applicative.
 
@@ -60,7 +60,7 @@ Un bouton `disabled`, un toast d'erreur, un 403 peuvent être exactement le
 comportement attendu (droit manquant, verrou détenu par un autre, formulaire
 incomplet, SMTP absent).
 
-*Trancher* : vérifier l'intention dans le code avant de qualifier. Un bouton
+_Trancher_ : vérifier l'intention dans le code avant de qualifier. Un bouton
 désactivé qui protège un verrou est une preuve que le verrou fonctionne — c'est
 un point **positif** à cocher, pas un bug.
 
@@ -70,19 +70,19 @@ L'extracteur d'éléments peut ne rien rendre dans une modale ou un tiroir, alor
 que la page affiche bel et bien des champs. Conclure « la modale est vide » est
 faux.
 
-*Trancher* : cibler par type de champ ou par placeholder, ou utiliser le texte
+_Trancher_ : cibler par type de champ ou par placeholder, ou utiliser le texte
 de la page comme preuve de présence ; ne pas conclure sur l'absence d'une liste
 d'éléments.
 
 ## Le tableau UI ↔ oracle
 
-| Écran | Oracle | Verdict |
-| --- | --- | --- |
-| montre la donnée | confirme | coché |
-| ne montre pas | confirme l'absence | état vide légitime → observation |
-| ne montre pas | renvoie la donnée | **bug** : synchronisation, filtre, droit côté client |
-| montre la donnée | refuse l'accès | **bug** de règle ou de cache de permission |
-| erreur affichée | erreur serveur | comportement attendu, vérifier le message |
+| Écran            | Oracle             | Verdict                                              |
+| ---------------- | ------------------ | ---------------------------------------------------- |
+| montre la donnée | confirme           | coché                                                |
+| ne montre pas    | confirme l'absence | état vide légitime → observation                     |
+| ne montre pas    | renvoie la donnée  | **bug** : synchronisation, filtre, droit côté client |
+| montre la donnée | refuse l'accès     | **bug** de règle ou de cache de permission           |
+| erreur affichée  | erreur serveur     | comportement attendu, vérifier le message            |
 
 La troisième ligne est la plus rentable de toute une passe : c'est la signature
 d'un cache local qui ne se resynchronise jamais. Elle se creuse en lisant le

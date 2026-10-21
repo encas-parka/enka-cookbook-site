@@ -9,11 +9,11 @@ tags: hooks, onRecordEnrich, onRecordRequest, model-hooks, extending
 
 PocketBase v0.23+ splits record hooks into three families. Using the wrong one is the #1 source of "my hook doesn't fire" and "my hidden field still shows up in realtime events" bugs.
 
-| Family | Examples | Fires for | Has request context? |
-|--------|----------|-----------|----------------------|
-| **Model hooks** | `OnRecordCreate`, `OnRecordAfterCreateSuccess`, `OnRecordValidate` | Any save path - Web API **and** cron jobs, custom commands, migrations, calls from other hooks | No - `e.Record`, `e.App`, **no** `e.RequestInfo` |
-| **Request hooks** | `OnRecordCreateRequest`, `OnRecordsListRequest`, `OnRecordViewRequest` | **Only** the built-in Web API endpoints | Yes - `e.RequestInfo`, `e.Auth`, HTTP headers/body |
-| **Enrich hook** | `OnRecordEnrich` | Every response serialization, **including realtime SSE events** and `apis.enrichRecord` | Yes, via `e.RequestInfo` |
+| Family            | Examples                                                               | Fires for                                                                                      | Has request context?                               |
+| ----------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | -------------------------------------------------- |
+| **Model hooks**   | `OnRecordCreate`, `OnRecordAfterCreateSuccess`, `OnRecordValidate`     | Any save path - Web API **and** cron jobs, custom commands, migrations, calls from other hooks | No - `e.Record`, `e.App`, **no** `e.RequestInfo`   |
+| **Request hooks** | `OnRecordCreateRequest`, `OnRecordsListRequest`, `OnRecordViewRequest` | **Only** the built-in Web API endpoints                                                        | Yes - `e.RequestInfo`, `e.Auth`, HTTP headers/body |
+| **Enrich hook**   | `OnRecordEnrich`                                                       | Every response serialization, **including realtime SSE events** and `apis.enrichRecord`        | Yes, via `e.RequestInfo`                           |
 
 **Incorrect (hiding a field in the request hook - leaks in realtime):**
 
@@ -44,18 +44,21 @@ app.OnRecordEnrich("users").BindFunc(func(e *core.RecordEnrichEvent) error {
 ```javascript
 // JSVM
 onRecordEnrich((e) => {
-    e.record.hide("role");
+  e.record.hide("role");
 
-    if (e.requestInfo.auth?.collection()?.name === "users") {
-        e.record.withCustomData(true);
-        e.record.set("computedScore",
-            e.record.get("score") * e.requestInfo.auth.get("base"));
-    }
-    e.next();
+  if (e.requestInfo.auth?.collection()?.name === "users") {
+    e.record.withCustomData(true);
+    e.record.set(
+      "computedScore",
+      e.record.get("score") * e.requestInfo.auth.get("base"),
+    );
+  }
+  e.next();
 }, "users");
 ```
 
 **Selection guide:**
+
 - Need to mutate the record before **any** save (API, cron, migration, nested hook)? → `OnRecordCreate` / `OnRecordUpdate` (pre-save) or `OnRecord*Success` (post-save).
 - Need access to HTTP headers, query params, or the authenticated client? → `OnRecord*Request`.
 - Need to hide fields, redact values, or attach computed props on responses including realtime? → **`OnRecordEnrich`** - this is the safest default for response shaping.

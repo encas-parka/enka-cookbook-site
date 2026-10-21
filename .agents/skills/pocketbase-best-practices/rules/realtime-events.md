@@ -13,22 +13,22 @@ Realtime events should update local state correctly, handle edge cases, and main
 
 ```javascript
 // Blindly appending creates - may add duplicates
-pb.collection('posts').subscribe('*', (e) => {
-  if (e.action === 'create') {
-    posts.push(e.record);  // Might already exist from optimistic update!
+pb.collection("posts").subscribe("*", (e) => {
+  if (e.action === "create") {
+    posts.push(e.record); // Might already exist from optimistic update!
   }
 });
 
 // Not handling own actions
-pb.collection('posts').subscribe('*', (e) => {
+pb.collection("posts").subscribe("*", (e) => {
   // User creates post -> optimistic update
   // Realtime event arrives -> duplicate!
-  setPosts(prev => [...prev, e.record]);
+  setPosts((prev) => [...prev, e.record]);
 });
 
 // Missing action types
-pb.collection('posts').subscribe('*', (e) => {
-  if (e.action === 'create') handleCreate(e);
+pb.collection("posts").subscribe("*", (e) => {
+  if (e.action === "create") handleCreate(e);
   // Ignoring update and delete!
 });
 ```
@@ -44,29 +44,29 @@ function useRealtimePosts() {
   useEffect(() => {
     loadPosts();
 
-    const unsub = pb.collection('posts').subscribe('*', (e) => {
+    const unsub = pb.collection("posts").subscribe("*", (e) => {
       switch (e.action) {
-        case 'create':
+        case "create":
           // Skip if we created it (optimistic update already applied)
           if (pendingCreates.current.has(e.record.id)) {
             pendingCreates.current.delete(e.record.id);
             return;
           }
-          setPosts(prev => {
+          setPosts((prev) => {
             // Deduplicate - might already exist
-            if (prev.some(p => p.id === e.record.id)) return prev;
+            if (prev.some((p) => p.id === e.record.id)) return prev;
             return [e.record, ...prev];
           });
           break;
 
-        case 'update':
-          setPosts(prev => prev.map(p =>
-            p.id === e.record.id ? e.record : p
-          ));
+        case "update":
+          setPosts((prev) =>
+            prev.map((p) => (p.id === e.record.id ? e.record : p)),
+          );
           break;
 
-        case 'delete':
-          setPosts(prev => prev.filter(p => p.id !== e.record.id));
+        case "delete":
+          setPosts((prev) => prev.filter((p) => p.id !== e.record.id));
           break;
       }
     });
@@ -78,20 +78,18 @@ function useRealtimePosts() {
     // Optimistic update
     const tempId = `temp_${Date.now()}`;
     const optimisticPost = { ...data, id: tempId };
-    setPosts(prev => [optimisticPost, ...prev]);
+    setPosts((prev) => [optimisticPost, ...prev]);
 
     try {
-      const created = await pb.collection('posts').create(data);
+      const created = await pb.collection("posts").create(data);
       // Mark as pending so realtime event is ignored
       pendingCreates.current.add(created.id);
       // Replace optimistic with real
-      setPosts(prev => prev.map(p =>
-        p.id === tempId ? created : p
-      ));
+      setPosts((prev) => prev.map((p) => (p.id === tempId ? created : p)));
       return created;
     } catch (error) {
       // Rollback optimistic update
-      setPosts(prev => prev.filter(p => p.id !== tempId));
+      setPosts((prev) => prev.filter((p) => p.id !== tempId));
       throw error;
     }
   }
@@ -106,7 +104,7 @@ function useRealtimeWithBatching() {
   const flushTimeout = useRef(null);
 
   useEffect(() => {
-    const unsub = pb.collection('posts').subscribe('*', (e) => {
+    const unsub = pb.collection("posts").subscribe("*", (e) => {
       pendingUpdates.current.push(e);
 
       // Batch updates every 100ms
@@ -128,17 +126,17 @@ function useRealtimeWithBatching() {
     const updates = pendingUpdates.current;
     pendingUpdates.current = [];
 
-    setPosts(prev => {
+    setPosts((prev) => {
       let next = [...prev];
       for (const e of updates) {
-        if (e.action === 'create') {
-          if (!next.some(p => p.id === e.record.id)) {
+        if (e.action === "create") {
+          if (!next.some((p) => p.id === e.record.id)) {
             next.unshift(e.record);
           }
-        } else if (e.action === 'update') {
-          next = next.map(p => p.id === e.record.id ? e.record : p);
-        } else if (e.action === 'delete') {
-          next = next.filter(p => p.id !== e.record.id);
+        } else if (e.action === "update") {
+          next = next.map((p) => (p.id === e.record.id ? e.record : p));
+        } else if (e.action === "delete") {
+          next = next.filter((p) => p.id !== e.record.id);
         }
       }
       return next;
@@ -151,9 +149,9 @@ function useRealtimeWithBatching() {
 
 ```javascript
 // Only handle events matching certain criteria
-pb.collection('posts').subscribe('*', (e) => {
+pb.collection("posts").subscribe("*", (e) => {
   // Only published posts
-  if (e.record.status !== 'published') return;
+  if (e.record.status !== "published") return;
 
   // Only posts by current user
   if (e.record.author !== pb.authStore.record?.id) return;
@@ -162,11 +160,15 @@ pb.collection('posts').subscribe('*', (e) => {
 });
 
 // Subscribe with expand to get related data
-pb.collection('posts').subscribe('*', (e) => {
-  // Note: expand data is included in realtime events
-  // if the subscription options include expand
-  console.log(e.record.expand?.author?.name);
-}, { expand: 'author' });
+pb.collection("posts").subscribe(
+  "*",
+  (e) => {
+    // Note: expand data is included in realtime events
+    // if the subscription options include expand
+    console.log(e.record.expand?.author?.name);
+  },
+  { expand: "author" },
+);
 ```
 
 Reference: [PocketBase Realtime Events](https://pocketbase.io/docs/api-realtime/)

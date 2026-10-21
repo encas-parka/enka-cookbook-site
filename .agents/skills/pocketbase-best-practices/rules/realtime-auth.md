@@ -13,16 +13,16 @@ Realtime subscriptions respect collection API rules. Ensure the connection is au
 
 ```javascript
 // Subscribing before authentication
-const pb = new PocketBase('http://127.0.0.1:8090');
+const pb = new PocketBase("http://127.0.0.1:8090");
 
 // This will fail or return no data if collection requires auth
-pb.collection('private_messages').subscribe('*', (e) => {
+pb.collection("private_messages").subscribe("*", (e) => {
   // Won't receive events - not authenticated!
   console.log(e.record);
 });
 
 // Later user logs in, but subscription doesn't update
-await pb.collection('users').authWithPassword(email, password);
+await pb.collection("users").authWithPassword(email, password);
 // Existing subscription still unauthenticated!
 ```
 
@@ -30,16 +30,16 @@ await pb.collection('users').authWithPassword(email, password);
 
 ```javascript
 // Subscribe after authentication
-const pb = new PocketBase('http://127.0.0.1:8090');
+const pb = new PocketBase("http://127.0.0.1:8090");
 
 async function initRealtime() {
   // First authenticate
-  await pb.collection('users').authWithPassword(email, password);
+  await pb.collection("users").authWithPassword(email, password);
 
   // Now subscribe - will use auth context
-  pb.collection('private_messages').subscribe('*', (e) => {
+  pb.collection("private_messages").subscribe("*", (e) => {
     // Receives events for messages user can access
-    console.log('New message:', e.record);
+    console.log("New message:", e.record);
   });
 }
 
@@ -72,20 +72,22 @@ function useAuthenticatedRealtime() {
   }, []);
 
   async function setupSubscription() {
-    unsubRef.current = await pb.collection('private_messages').subscribe('*', (e) => {
-      handleMessage(e);
-    });
+    unsubRef.current = await pb
+      .collection("private_messages")
+      .subscribe("*", (e) => {
+        handleMessage(e);
+      });
   }
 }
 
 // Handle auth token refresh with realtime
-pb.realtime.subscribe('PB_CONNECT', async (e) => {
-  console.log('Realtime connected');
+pb.realtime.subscribe("PB_CONNECT", async (e) => {
+  console.log("Realtime connected");
 
   // Verify auth is still valid
   if (pb.authStore.isValid) {
     try {
-      await pb.collection('users').authRefresh();
+      await pb.collection("users").authRefresh();
     } catch {
       pb.authStore.clear();
       // Redirect to login
@@ -100,8 +102,8 @@ pb.realtime.subscribe('PB_CONNECT', async (e) => {
 // Collection rule: listRule: 'owner = @request.auth.id'
 
 // User A subscribed
-await pb.collection('users').authWithPassword('a@test.com', 'password');
-pb.collection('notes').subscribe('*', handler);
+await pb.collection("users").authWithPassword("a@test.com", "password");
+pb.collection("notes").subscribe("*", handler);
 // Only receives events for notes where owner = User A
 
 // Events from other users' notes are filtered out automatically
@@ -120,7 +122,7 @@ pb.collection('notes').subscribe('*', handler);
 ```javascript
 // Setup disconnect handler
 pb.realtime.onDisconnect = (subscriptions) => {
-  console.log('Disconnected, had subscriptions:', subscriptions);
+  console.log("Disconnected, had subscriptions:", subscriptions);
 
   // Check if auth expired
   if (!pb.authStore.isValid) {
@@ -131,14 +133,14 @@ pb.realtime.onDisconnect = (subscriptions) => {
 
   // Connection issue - realtime will auto-reconnect
   // Re-subscribe after reconnection
-  pb.realtime.subscribe('PB_CONNECT', () => {
+  pb.realtime.subscribe("PB_CONNECT", () => {
     resubscribeAll(subscriptions);
   });
 };
 
 function resubscribeAll(subscriptions) {
-  subscriptions.forEach(sub => {
-    const [collection, topic] = sub.split('/');
+  subscriptions.forEach((sub) => {
+    const [collection, topic] = sub.split("/");
     pb.collection(collection).subscribe(topic, handlers[sub]);
   });
 }

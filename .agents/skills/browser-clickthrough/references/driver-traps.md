@@ -21,7 +21,7 @@ identifiants eux-mêmes changent à chaque ouverture.
   passer `tabId` **à chaque** appel : clic, saisie, snapshot.
 - Ne jamais supposer qu'un `tabId` capturé plus tôt est encore valide après une
   nouvelle ouverture.
-- Après un `open`, faire un snapshot *avant* d'agir : on découvre parfois que la
+- Après un `open`, faire un snapshot _avant_ d'agir : on découvre parfois que la
   page n'a pas fini de charger, ou qu'on regarde le mauvais onglet.
 - Les onglets s'accumulent et alourdissent le navigateur : garder deux ou trois
   onglets vivants, réutiliser plutôt que rouvrir.
@@ -173,12 +173,12 @@ depuis le snapshot précédent, pas depuis le début de la session.
 
 À traiter par un substitut explicite, jamais par un verdict inventé :
 
-| Geste | Substitut |
-| --- | --- |
-| `Échap` (fermeture de tiroir) | naviguer ailleurs puis revenir ; vérifier l'état |
-| Émulation d'impression / média | lecture statique du code (`print:hidden`, feuille `@media print`) |
+| Geste                                | Substitut                                                                |
+| ------------------------------------ | ------------------------------------------------------------------------ |
+| `Échap` (fermeture de tiroir)        | naviguer ailleurs puis revenir ; vérifier l'état                         |
+| Émulation d'impression / média       | lecture statique du code (`print:hidden`, feuille `@media print`)        |
 | DevTools (IndexedDB, `localStorage`) | vérification comportementale (changer d'identité, observer les fantômes) |
-| Coupure d'un service, relance | action humaine, avec surveillance de la barre d'état |
+| Coupure d'un service, relance        | action humaine, avec surveillance de la barre d'état                     |
 
-Écrire dans le gate *comment* l'item a été couvert, pour qu'un relecteur sache
+Écrire dans le gate _comment_ l'item a été couvert, pour qu'un relecteur sache
 que ce n'est pas une vérification à l'écran.

@@ -160,6 +160,7 @@ func TestAuditHookRollsBackOnAuditFailure(t *testing.T) {
 ```
 
 **Rules:**
+
 - **Always `defer app.Cleanup()`** - otherwise temp directories leak under `/tmp`.
 - **Use a checked-in `test_pb_data/` fixture** with the collections you need. Do not depend on the dev `pb_data/` - tests must be hermetic.
 - **Register hooks against the test app**, not against a package-level `app` singleton. The test app is a fresh instance each time.

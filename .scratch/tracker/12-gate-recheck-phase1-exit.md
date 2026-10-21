@@ -17,6 +17,7 @@ opérationnelle unique) cochée ou requalifiée case par case. Le verdict pipeli
 passe vivent dans la checklist (annotations par item), pas ici.
 
 ---
-*Historique de la passe datée du 13-10 (observations §5-§8) : dans l'historique
+
+_Historique de la passe datée du 13-10 (observations §5-§8) : dans l'historique
 git de ce fichier et le run report `.scratch/tracker/26-10-20_clickthrough-fixes/run.md` —
-purge du 20-10 : observations corrigées depuis, le reste requalifié.*
+purge du 20-10 : observations corrigées depuis, le reste requalifié._

@@ -13,16 +13,19 @@ View collections execute custom SQL queries and expose results through the stand
 
 ```javascript
 // Fetching all records to compute stats client-side
-const orders = await pb.collection('orders').getFullList();
-const products = await pb.collection('products').getFullList();
+const orders = await pb.collection("orders").getFullList();
+const products = await pb.collection("products").getFullList();
 
 // Expensive client-side computation
-const stats = orders.reduce((acc, order) => {
-  const product = products.find(p => p.id === order.product);
-  acc.totalRevenue += order.quantity * product.price;
-  acc.orderCount++;
-  return acc;
-}, { totalRevenue: 0, orderCount: 0 });
+const stats = orders.reduce(
+  (acc, order) => {
+    const product = products.find((p) => p.id === order.product);
+    acc.totalRevenue += order.quantity * product.price;
+    acc.orderCount++;
+    return acc;
+  },
+  { totalRevenue: 0, orderCount: 0 },
+);
 // Fetches all data, slow, memory-intensive
 ```
 
@@ -42,17 +45,18 @@ const stats = orders.reduce((acc, order) => {
 // GROUP BY p.id
 
 // Simple, efficient query
-const productStats = await pb.collection('product_stats').getList(1, 20, {
-  sort: '-revenue'
+const productStats = await pb.collection("product_stats").getList(1, 20, {
+  sort: "-revenue",
 });
 
 // Each record has computed fields
-productStats.items.forEach(stat => {
+productStats.items.forEach((stat) => {
   console.log(`${stat.name}: ${stat.order_count} orders, $${stat.revenue}`);
 });
 ```
 
 **View collection use cases:**
+
 - Aggregations (COUNT, SUM, AVG)
 - Joining data from multiple collections
 - Computed/derived fields
@@ -60,6 +64,7 @@ productStats.items.forEach(stat => {
 - Dashboard statistics
 
 **Limitations:**
+
 - Read-only (no create/update/delete)
 - Must return `id` column
 - No realtime subscriptions

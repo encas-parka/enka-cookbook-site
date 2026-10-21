@@ -176,15 +176,15 @@ app.OnRecordEnrich("posts").BindFunc(func(e *core.RecordEnrichEvent) error {
 
 ### The cheat sheet: "which app am I holding?"
 
-| Where you are | Use | Why |
-|---|---|---|
-| Top of a route handler (`func(e *core.RequestEvent)`) | `e.App` | Framework's top-level app; same object the server started with |
-| Inside `RunInTransaction(func(txApp) { ... })` | `txApp` **only** | Capturing the outer app deadlocks on the SQLite writer lock |
-| Inside a record hook fired from a `Save` inside a tx | `e.App` | The framework has already rebound `e.App` to `txApp` for you |
-| Inside a record hook fired from a non-tx `Save` | `e.App` | Same identifier, same rules, just points to the top-level app |
-| Inside `OnRecordEnrich` | `e.App` | Runs during response serialization, **after** the tx has committed |
-| Inside a `app.Cron()` callback | captured `app` / `se.App` | Cron has no per-run scoped app; wrap in `RunInTransaction` if you need atomicity |
-| Inside a migration function | the `app` argument | `m.Register(func(app core.App) error { ... })` - already transactional |
+| Where you are                                         | Use                       | Why                                                                              |
+| ----------------------------------------------------- | ------------------------- | -------------------------------------------------------------------------------- |
+| Top of a route handler (`func(e *core.RequestEvent)`) | `e.App`                   | Framework's top-level app; same object the server started with                   |
+| Inside `RunInTransaction(func(txApp) { ... })`        | `txApp` **only**          | Capturing the outer app deadlocks on the SQLite writer lock                      |
+| Inside a record hook fired from a `Save` inside a tx  | `e.App`                   | The framework has already rebound `e.App` to `txApp` for you                     |
+| Inside a record hook fired from a non-tx `Save`       | `e.App`                   | Same identifier, same rules, just points to the top-level app                    |
+| Inside `OnRecordEnrich`                               | `e.App`                   | Runs during response serialization, **after** the tx has committed               |
+| Inside a `app.Cron()` callback                        | captured `app` / `se.App` | Cron has no per-run scoped app; wrap in `RunInTransaction` if you need atomicity |
+| Inside a migration function                           | the `app` argument        | `m.Register(func(app core.App) error { ... })` - already transactional           |
 
 ### Error propagation in the chain
 
@@ -287,11 +287,12 @@ func main() {
 // Top-level cronAdd() registers the job at hook-load time.
 // The handler runs in its own goroutine and has access to $app.
 cronAdd("notify-unpublished", "*/30 * * * *", () => {
-    // Runs every 30 minutes
-    const records = $app.findAllRecords("posts",
-        $dbx.hashExp({ status: "draft" })
-    );
-    console.log(`Found ${records.length} unpublished posts`);
+  // Runs every 30 minutes
+  const records = $app.findAllRecords(
+    "posts",
+    $dbx.hashExp({ status: "draft" }),
+  );
+  console.log(`Found ${records.length} unpublished posts`);
 });
 
 // Remove a registered job by ID (useful in tests or feature toggles)
@@ -317,6 +318,7 @@ Examples:
 ```
 
 **Key rules:**
+
 - System jobs use the `__pb*__` ID prefix (e.g. `__pbLogsCleanup__`). Never call `RemoveAll()` or use that prefix for your own jobs.
 - All registered cron jobs are visible and can be manually triggered from _Dashboard > Settings > Crons_.
 - JSVM handlers have access to `$app` but **not** to outer-scope variables (see JSVM scope rule).
@@ -387,7 +389,10 @@ func importAvatar(app core.App, record *core.Record, path string) error {
 ```javascript
 // JSVM - file factories live on the $filesystem global
 const file1 = $filesystem.fileFromPath("/tmp/import.jpg");
-const file2 = $filesystem.fileFromBytes(new Uint8Array([0xff, 0xd8]), "logo.jpg");
+const file2 = $filesystem.fileFromBytes(
+  new Uint8Array([0xff, 0xd8]),
+  "logo.jpg",
+);
 const file3 = $filesystem.fileFromURL("https://example.com/a.jpg");
 
 // Assigning to a record field triggers upload on save
@@ -397,16 +402,17 @@ $app.save(record);
 // Low-level client - MUST be closed
 const fs = $app.newFilesystem();
 try {
-    const list = fs.list("thumbs/");
-    for (const obj of list) {
-        console.log(obj.key, obj.size);
-    }
+  const list = fs.list("thumbs/");
+  for (const obj of list) {
+    console.log(obj.key, obj.size);
+  }
 } finally {
-    fs.close(); // REQUIRED
+  fs.close(); // REQUIRED
 }
 ```
 
 **Rules:**
+
 - `defer fs.Close()` **immediately** after a successful `NewFilesystem()` / `NewBackupsFilesystem()` call (Go). In JS, wrap in `try { ... } finally { fs.close() }`.
 - Prefer the high-level record-field API (`record.Set("field", file)` + `app.Save`) over direct `fs.Upload` calls - it handles thumbs regeneration, orphan cleanup, and hook integration.
 - File factory functions (`filesystem.NewFileFromPath`, `NewFileFromBytes`, `NewFileFromURL` / JS `$filesystem.fileFromPath|Bytes|URL`) capture their input; they do not stream until save.
@@ -437,8 +443,8 @@ record, err := app.FindFirstRecordByFilter(
 // JSVM - same class of bug
 const email = e.request.url.query().get("email");
 const record = $app.findFirstRecordByFilter(
-    "users",
-    `email = '${email}' && verified = true`, // ❌
+  "users",
+  `email = '${email}' && verified = true`, // ❌
 );
 ```
 
@@ -470,20 +476,23 @@ recs, err := app.FindRecordsByFilter(
 ```javascript
 // JSVM - second argument after the filter is the params object
 const record = $app.findFirstRecordByFilter(
-    "users",
-    "email = {:email} && verified = true",
-    { email: email },
+  "users",
+  "email = {:email} && verified = true",
+  { email: email },
 );
 
 const recs = $app.findRecordsByFilter(
-    "posts",
-    "author = {:author} && status = {:status}",
-    "-created", 20, 0,
-    { author: e.auth.id, status: "published" },
+  "posts",
+  "author = {:author} && status = {:status}",
+  "-created",
+  20,
+  0,
+  { author: e.auth.id, status: "published" },
 );
 ```
 
 **Rules:**
+
 - Placeholder syntax is `{:name}` inside the filter string, and the value is supplied via `dbx.Params{"name": value}` (Go) or a plain object (JS).
 - The same applies to `dbx.NewExp("LOWER(email) = {:email}", dbx.Params{"email": email})` when writing raw `dbx` expressions.
 - Passing a `types.DateTime` / `DateTime` value binds it correctly - do not stringify dates manually.
@@ -615,12 +624,12 @@ app := pocketbase.NewWithConfig(pocketbase.Config{
 
 **Decision guide:**
 
-| Need | Driver |
-|------|--------|
-| Default (no extensions) | Built-in `modernc.org/sqlite` — no `DBConnect` config needed |
-| FTS5, ICU, spatialite | `mattn/go-sqlite3` (CGO) or `ncruces/go-sqlite3` (WASM, no CGO) |
-| Reduce binary size | `go build -tags no_default_driver` to exclude the default driver (~4 MB saved) |
-| Conditional fallback | Call `core.DefaultDBConnect(dbPath)` inside your `DBConnect` function |
+| Need                    | Driver                                                                         |
+| ----------------------- | ------------------------------------------------------------------------------ |
+| Default (no extensions) | Built-in `modernc.org/sqlite` — no `DBConnect` config needed                   |
+| FTS5, ICU, spatialite   | `mattn/go-sqlite3` (CGO) or `ncruces/go-sqlite3` (WASM, no CGO)                |
+| Reduce binary size      | `go build -tags no_default_driver` to exclude the default driver (~4 MB saved) |
+| Conditional fallback    | Call `core.DefaultDBConnect(dbPath)` inside your `DBConnect` function          |
 
 Reference: [Extend with Go - Custom SQLite driver](https://pocketbase.io/docs/go-overview/#custom-sqlite-driver)
 
@@ -751,6 +760,7 @@ go run . migrate down 1    # revert the last applied migration
 ```
 
 **Key details:**
+
 - Migration functions receive a **transactional** `core.App` – treat it as the database source of truth. Never use the outer `app` variable inside migration callbacks.
 - New unapplied migrations run automatically on every `serve` start – no manual step in production.
 - `Automigrate: osutils.IsProbablyGoRun()` limits auto-generation to `go run` (development) and prevents accidental file creation in production binaries.
@@ -841,6 +851,7 @@ go build && ./myapp serve  # production (statically linked binary)
 ```
 
 **Key details:**
+
 - Requires **Go 1.27.0+** (PocketBase v0.40.0 bumped the minimum; v0.36.7+ required 1.25.0).
 - **v0.40 upgrade caution:** PocketBase v0.40 migrated to Go's `encoding/json/v2`. Go 1.27 retrofitted `encoding/json` onto the v2 engine and it is not fully backward compatible — test your app locally before shipping a v0.40 upgrade to production.
 - **v0.40 behavioral change:** console command errors and recovered panics now propagate to `app.Start()` and exit non-zero (previously exit 0). If you chain commands like `./pocketbase somecmd && next`, `next` no longer runs on failure — use `;` if you relied on the old behavior.
@@ -882,8 +893,8 @@ app.OnRecordAfterCreateSuccess("articles").BindFunc(func(e *core.RecordEvent) er
 ```javascript
 // JSVM
 onRecordAfterCreateSuccess((e) => {
-    // ❌ no e.next() = downstream hooks and response serialization skipped
-    console.log("created", e.record.id);
+  // ❌ no e.next() = downstream hooks and response serialization skipped
+  console.log("created", e.record.id);
 }, "articles");
 ```
 
@@ -912,11 +923,11 @@ app.OnRecordAfterCreateSuccess("articles").Bind(&hook.Handler[*core.RecordEvent]
 ```javascript
 // JSVM - e.app is the transactional app instance
 onRecordAfterCreateSuccess((e) => {
-    const audit = new Record($app.findCollectionByNameOrId("audit"));
-    audit.set("record", e.record.id);
-    e.app.save(audit);
+  const audit = new Record($app.findCollectionByNameOrId("audit"));
+  audit.set("record", e.record.id);
+  e.app.save(audit);
 
-    e.next(); // REQUIRED
+  e.next(); // REQUIRED
 }, "articles");
 ```
 
@@ -936,11 +947,11 @@ Reference: [Go Event hooks](https://pocketbase.io/docs/go-event-hooks/) · [JS E
 
 PocketBase v0.23+ splits record hooks into three families. Using the wrong one is the #1 source of "my hook doesn't fire" and "my hidden field still shows up in realtime events" bugs.
 
-| Family | Examples | Fires for | Has request context? |
-|--------|----------|-----------|----------------------|
-| **Model hooks** | `OnRecordCreate`, `OnRecordAfterCreateSuccess`, `OnRecordValidate` | Any save path - Web API **and** cron jobs, custom commands, migrations, calls from other hooks | No - `e.Record`, `e.App`, **no** `e.RequestInfo` |
-| **Request hooks** | `OnRecordCreateRequest`, `OnRecordsListRequest`, `OnRecordViewRequest` | **Only** the built-in Web API endpoints | Yes - `e.RequestInfo`, `e.Auth`, HTTP headers/body |
-| **Enrich hook** | `OnRecordEnrich` | Every response serialization, **including realtime SSE events** and `apis.enrichRecord` | Yes, via `e.RequestInfo` |
+| Family            | Examples                                                               | Fires for                                                                                      | Has request context?                               |
+| ----------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | -------------------------------------------------- |
+| **Model hooks**   | `OnRecordCreate`, `OnRecordAfterCreateSuccess`, `OnRecordValidate`     | Any save path - Web API **and** cron jobs, custom commands, migrations, calls from other hooks | No - `e.Record`, `e.App`, **no** `e.RequestInfo`   |
+| **Request hooks** | `OnRecordCreateRequest`, `OnRecordsListRequest`, `OnRecordViewRequest` | **Only** the built-in Web API endpoints                                                        | Yes - `e.RequestInfo`, `e.Auth`, HTTP headers/body |
+| **Enrich hook**   | `OnRecordEnrich`                                                       | Every response serialization, **including realtime SSE events** and `apis.enrichRecord`        | Yes, via `e.RequestInfo`                           |
 
 **Incorrect (hiding a field in the request hook - leaks in realtime):**
 
@@ -971,18 +982,21 @@ app.OnRecordEnrich("users").BindFunc(func(e *core.RecordEnrichEvent) error {
 ```javascript
 // JSVM
 onRecordEnrich((e) => {
-    e.record.hide("role");
+  e.record.hide("role");
 
-    if (e.requestInfo.auth?.collection()?.name === "users") {
-        e.record.withCustomData(true);
-        e.record.set("computedScore",
-            e.record.get("score") * e.requestInfo.auth.get("base"));
-    }
-    e.next();
+  if (e.requestInfo.auth?.collection()?.name === "users") {
+    e.record.withCustomData(true);
+    e.record.set(
+      "computedScore",
+      e.record.get("score") * e.requestInfo.auth.get("base"),
+    );
+  }
+  e.next();
 }, "users");
 ```
 
 **Selection guide:**
+
 - Need to mutate the record before **any** save (API, cron, migration, nested hook)? → `OnRecordCreate` / `OnRecordUpdate` (pre-save) or `OnRecord*Success` (post-save).
 - Need access to HTTP headers, query params, or the authenticated client? → `OnRecord*Request`.
 - Need to hide fields, redact values, or attach computed props on responses including realtime? → **`OnRecordEnrich`** - this is the safest default for response shaping.
@@ -1001,10 +1015,11 @@ JSVM migrations live in `pb_migrations/` next to the executable. Unlike Go migra
 ```javascript
 // pb_migrations/add_audit.js   ❌ missing <unix>_ prefix - never runs
 migrate((app) => {
-    // ❌ Raw ALTER TABLE leaves PocketBase's internal collection cache stale
-    app.db().newQuery(
-        "ALTER TABLE posts ADD COLUMN summary TEXT DEFAULT ''"
-    ).execute();
+  // ❌ Raw ALTER TABLE leaves PocketBase's internal collection cache stale
+  app
+    .db()
+    .newQuery("ALTER TABLE posts ADD COLUMN summary TEXT DEFAULT ''")
+    .execute();
 });
 // ❌ No down callback - `migrate down` cannot revert this in dev
 ```
@@ -1016,29 +1031,34 @@ migrate((app) => {
 /// <reference path="../pb_data/types.d.ts" />
 
 migrate(
-    // UP - runs on `serve` / `migrate up`
-    (app) => {
-        const collection = new Collection({
-            type: "base",
-            name: "audit",
-            fields: [
-                { name: "action", type: "text", required: true },
-                { name: "actor",  type: "relation", collectionId: "_pb_users_auth_", cascadeDelete: false },
-                { name: "meta",   type: "json" },
-                { name: "created", type: "autodate", onCreate: true },
-            ],
-            indexes: [
-                "CREATE INDEX idx_audit_actor ON audit (actor)",
-                "CREATE INDEX idx_audit_created ON audit (created)",
-            ],
-        });
-        app.save(collection);
-    },
-    // DOWN - runs on `migrate down N`
-    (app) => {
-        const collection = app.findCollectionByNameOrId("audit");
-        app.delete(collection);
-    },
+  // UP - runs on `serve` / `migrate up`
+  (app) => {
+    const collection = new Collection({
+      type: "base",
+      name: "audit",
+      fields: [
+        { name: "action", type: "text", required: true },
+        {
+          name: "actor",
+          type: "relation",
+          collectionId: "_pb_users_auth_",
+          cascadeDelete: false,
+        },
+        { name: "meta", type: "json" },
+        { name: "created", type: "autodate", onCreate: true },
+      ],
+      indexes: [
+        "CREATE INDEX idx_audit_actor ON audit (actor)",
+        "CREATE INDEX idx_audit_created ON audit (created)",
+      ],
+    });
+    app.save(collection);
+  },
+  // DOWN - runs on `migrate down N`
+  (app) => {
+    const collection = app.findCollectionByNameOrId("audit");
+    app.delete(collection);
+  },
 );
 ```
 
@@ -1049,25 +1069,21 @@ migrate(
 /// <reference path="../pb_data/types.d.ts" />
 
 migrate(
-    (app) => {
-        const tags = app.findCollectionByNameOrId("tags");
-        for (const name of ["urgent", "bug", "feature", "docs"]) {
-            const r = new Record(tags);
-            r.set("name", name);
-            app.save(r); // `app` here is the transactional app - all or nothing
-        }
-    },
-    (app) => {
-        const tags = app.findCollectionByNameOrId("tags");
-        for (const name of ["urgent", "bug", "feature", "docs"]) {
-            const r = app.findFirstRecordByFilter(
-                "tags",
-                "name = {:name}",
-                { name },
-            );
-            if (r) app.delete(r);
-        }
-    },
+  (app) => {
+    const tags = app.findCollectionByNameOrId("tags");
+    for (const name of ["urgent", "bug", "feature", "docs"]) {
+      const r = new Record(tags);
+      r.set("name", name);
+      app.save(r); // `app` here is the transactional app - all or nothing
+    }
+  },
+  (app) => {
+    const tags = app.findCollectionByNameOrId("tags");
+    for (const name of ["urgent", "bug", "feature", "docs"]) {
+      const r = app.findFirstRecordByFilter("tags", "name = {:name}", { name });
+      if (r) app.delete(r);
+    }
+  },
 );
 ```
 
@@ -1081,6 +1097,7 @@ migrate(
 ```
 
 **Rules:**
+
 - **Filename format**: `<unix_timestamp>_<description>.js`. The timestamp sets ordering. Never renumber a committed file.
 - **The `app` argument is transactional**: every migration runs inside its own transaction. Throw to roll back. Do not capture `$app` from the outer scope - use the `app` parameter so the work participates in the tx.
 - **Use the collection API** (`new Collection`, `app.save(collection)`), not raw `ALTER TABLE`. Raw SQL leaves PocketBase's in-memory schema cache stale until the next restart.
@@ -1110,8 +1127,8 @@ routerAdd("GET", "/hello", (e) => e.json(200, { ok: true }));
 // pb_hooks/hooks.js  ❌ wrong extension - must be *.pb.js
 // No /// reference -> editor shows every call as "any"
 onRecordAfterUpdateSuccess((e) => {
-    console.log(e.record.get("email"));
-    // Missing e.next() - stops the execution chain silently
+  console.log(e.record.get("email"));
+  // Missing e.next() - stops the execution chain silently
 }, "users");
 ```
 
@@ -1125,17 +1142,18 @@ onRecordAfterUpdateSuccess((e) => {
 // Use prefixes like "01_", "10_", "99_" if order matters.
 
 routerAdd("GET", "/api/myapp/hello/{name}", (e) => {
-    const name = e.request.pathValue("name");
-    return e.json(200, { message: "Hello " + name });
+  const name = e.request.pathValue("name");
+  return e.json(200, { message: "Hello " + name });
 });
 
 onRecordAfterUpdateSuccess((e) => {
-    console.log("user updated:", e.record.get("email"));
-    e.next(); // REQUIRED - otherwise the execution chain is broken
+  console.log("user updated:", e.record.get("email"));
+  e.next(); // REQUIRED - otherwise the execution chain is broken
 }, "users");
 ```
 
 **Key details:**
+
 - JS method names are **camelCase** versions of their Go equivalents (`FindRecordById` → `$app.findRecordById`).
 - Errors are thrown as regular JS exceptions, not returned as values.
 - Global objects: `$app` (the app), `$apis` (routing helpers/middlewares), `$os` (OS primitives), `$security` (JWT, random strings, AES), `$filesystem` (file factories), `$dbx` (query builder), `$mails` (email helpers), `__hooks` (absolute path to `pb_hooks`).
@@ -1171,39 +1189,44 @@ module.exports = { increment: () => ++requestCount }; // race condition
 ```javascript
 // pb_hooks/utils.js  — stateless helper module
 module.exports = {
-    formatDate: (d) => new Date(d).toISOString().slice(0, 10),
-    validateEmail: (addr) => /^[^@]+@[^@]+\.[^@]+$/.test(addr),
+  formatDate: (d) => new Date(d).toISOString().slice(0, 10),
+  validateEmail: (addr) => /^[^@]+@[^@]+\.[^@]+$/.test(addr),
 };
 
 // pb_hooks/main.pb.js
 /// <reference path="../pb_data/types.d.ts" />
 
 onRecordAfterCreateSuccess((e) => {
-    const utils = require(`${__hooks}/utils.js`);
-    const date = utils.formatDate(e.record.get("created"));
-    console.log("Record created on:", date);
-    e.next();
+  const utils = require(`${__hooks}/utils.js`);
+  const date = utils.formatDate(e.record.get("created"));
+  console.log("Record created on:", date);
+  e.next();
 }, "posts");
 
 // Use $os.* for file system operations (not Node.js fs)
 routerAdd("GET", "/api/myapp/read-config", (e) => {
-    const raw = $os.readFile(`${__hooks}/config.json`);
-    const cfg = JSON.parse(raw);
-    return e.json(200, { name: cfg.appName });
+  const raw = $os.readFile(`${__hooks}/config.json`);
+  const cfg = JSON.parse(raw);
+  return e.json(200, { name: cfg.appName });
 });
 
 // Use $filesystem.s3(...) or $filesystem.local(...) for storage (v0.36.4+)
-routerAdd("POST", "/api/myapp/upload", (e) => {
+routerAdd(
+  "POST",
+  "/api/myapp/upload",
+  (e) => {
     const bucket = $filesystem.s3({
-        endpoint: "s3.amazonaws.com",
-        bucket:   "my-bucket",
-        region:   "us-east-1",
-        accessKey: $app.settings().s3.accessKey,
-        secret:    $app.settings().s3.secret,
+      endpoint: "s3.amazonaws.com",
+      bucket: "my-bucket",
+      region: "us-east-1",
+      accessKey: $app.settings().s3.accessKey,
+      secret: $app.settings().s3.secret,
     });
     // ... use bucket to store/retrieve files
     return e.json(200, { ok: true });
-}, $apis.requireAuth());
+  },
+  $apis.requireAuth(),
+);
 ```
 
 **Using third-party CJS packages:**
@@ -1212,10 +1235,10 @@ routerAdd("POST", "/api/myapp/upload", (e) => {
 // node_modules/ is searched automatically alongside __hooks.
 // Install packages with npm next to the pb_hooks directory, then require by name.
 onBootstrap((e) => {
-    e.next();
-    // Only CJS-compatible packages work without bundling
-    const slugify = require("slugify");
-    console.log(slugify("Hello World")); // "Hello-World"
+  e.next();
+  // Only CJS-compatible packages work without bundling
+  const slugify = require("slugify");
+  console.log(slugify("Hello World")); // "Hello-World"
 });
 ```
 
@@ -1230,12 +1253,13 @@ npx rollup node_modules/some-esm-pkg/index.js \
 
 ```javascript
 onBootstrap((e) => {
-    e.next();
-    const pkg = require(`${__hooks}/vendor/some-esm-pkg.js`);
+  e.next();
+  const pkg = require(`${__hooks}/vendor/some-esm-pkg.js`);
 });
 ```
 
 **JSVM engine limitations:**
+
 - No `setTimeout` / `setInterval` — no async scheduling inside handlers.
 - No Node.js APIs (`fs`, `Buffer`, `process`, etc.) — use `$os.*` and `$filesystem.*` JSVM bindings instead.
 - No browser APIs (`fetch`, `window`, `localStorage`) — use `$app.newHttpClient()` for outbound HTTP requests.
@@ -1258,15 +1282,15 @@ Each JSVM handler (hook, route, middleware) is **serialized and executed as an i
 const APP_NAME = "myapp"; // ❌ will be undefined inside handlers
 
 onBootstrap((e) => {
-    e.next();
-    console.log(APP_NAME); // ❌ undefined — APP_NAME is not in handler scope
+  e.next();
+  console.log(APP_NAME); // ❌ undefined — APP_NAME is not in handler scope
 });
 
 // ❌ Even $app references captured here may not work as expected
 const helper = (id) => $app.findRecordById("posts", id);
 
 onRecordAfterCreateSuccess((e) => {
-    helper(e.record.id); // ❌ helper is undefined inside the handler
+  helper(e.record.id); // ❌ helper is undefined inside the handler
 }, "posts");
 ```
 
@@ -1275,33 +1299,34 @@ onRecordAfterCreateSuccess((e) => {
 ```javascript
 // pb_hooks/config.js  — stateless CommonJS module
 module.exports = {
-    APP_NAME: "myapp",
-    MAX_RETRIES: 3,
+  APP_NAME: "myapp",
+  MAX_RETRIES: 3,
 };
 
 // pb_hooks/main.pb.js
 /// <reference path="../pb_data/types.d.ts" />
 
 onBootstrap((e) => {
-    e.next();
-    // Load the shared module INSIDE the handler
-    const config = require(`${__hooks}/config.js`);
-    console.log(config.APP_NAME); // ✅ "myapp"
+  e.next();
+  // Load the shared module INSIDE the handler
+  const config = require(`${__hooks}/config.js`);
+  console.log(config.APP_NAME); // ✅ "myapp"
 });
 
 routerAdd("GET", "/api/myapp/status", (e) => {
-    const config = require(`${__hooks}/config.js`);
-    return e.json(200, { app: config.APP_NAME });
+  const config = require(`${__hooks}/config.js`);
+  return e.json(200, { app: config.APP_NAME });
 });
 
 onRecordAfterCreateSuccess((e) => {
-    // Access the app directly via e.app inside the handler
-    const post = e.app.findRecordById("posts", e.record.id);
-    e.next();
+  // Access the app directly via e.app inside the handler
+  const post = e.app.findRecordById("posts", e.record.id);
+  e.next();
 }, "posts");
 ```
 
 **Key rules:**
+
 - Every handler body is serialized to a string and executed in its own isolated goja runtime context. There is no shared global state between handlers at runtime.
 - `require()` loads modules from a **shared registry** — modules are evaluated once and cached. Keep module-level code stateless; avoid mutable module exports to prevent data races under concurrent requests.
 - `__hooks` is always available inside handlers and resolves to the absolute path of the `pb_hooks` directory.
@@ -1374,25 +1399,27 @@ app.OnRecordAfterCreateSuccess("orders").BindFunc(func(e *core.RecordEvent) erro
 ```javascript
 // JSVM - $mails global exposes message factories
 onRecordAfterCreateSuccess((e) => {
-    const meta = $app.settings().meta;
+  const meta = $app.settings().meta;
 
-    const message = new MailerMessage({
-        from: {
-            address: meta.senderAddress,
-            name:    meta.senderName,
-        },
-        to:      [{ address: e.record.get("email") }],
-        subject: "Order confirmed",
-        html:    `<p>Thanks for order ${e.record.id}</p>`,
-    });
+  const message = new MailerMessage({
+    from: {
+      address: meta.senderAddress,
+      name: meta.senderName,
+    },
+    to: [{ address: e.record.get("email") }],
+    subject: "Order confirmed",
+    html: `<p>Thanks for order ${e.record.id}</p>`,
+  });
 
-    try {
-        $app.newMailClient().send(message);
-    } catch (err) {
-        $app.logger().error("order email send failed", "err", err, "id", e.record.id);
-        // swallow - do not rollback the order
-    }
-    e.next();
+  try {
+    $app.newMailClient().send(message);
+  } catch (err) {
+    $app
+      .logger()
+      .error("order email send failed", "err", err, "id", e.record.id);
+    // swallow - do not rollback the order
+  }
+  e.next();
 }, "orders");
 ```
 
@@ -1410,6 +1437,7 @@ onRecordAfterCreateSuccess((e) => {
 ```
 
 **Rules:**
+
 - **Always change `Meta.SenderAddress`** before shipping. In development, use Mailpit or MailHog; in production, use a verified domain that matches your SPF/DKIM records.
 - **Resolve the sender from `app.Settings().Meta` at send-time**, not at startup. Settings are mutable from the admin UI.
 - **Create the client per send** (`app.NewMailClient()` / `$app.newMailClient()`). It is cheap - it re-reads the SMTP settings each time, so config changes take effect without a restart.
@@ -1472,31 +1500,42 @@ app.OnServe().BindFunc(func(se *core.ServeEvent) error {
 
 ```javascript
 // JSVM
-routerAdd("GET", "/api/myapp/profile", (e) => {
+routerAdd(
+  "GET",
+  "/api/myapp/profile",
+  (e) => {
     return e.json(200, {
-        id: e.auth.id,
-        email: e.auth.getString("email"),
+      id: e.auth.id,
+      email: e.auth.getString("email"),
     });
-}, $apis.requireAuth());
+  },
+  $apis.requireAuth(),
+);
 
-routerAdd("POST", "/api/myapp/admin/rebuild-index", (e) => {
+routerAdd(
+  "POST",
+  "/api/myapp/admin/rebuild-index",
+  (e) => {
     return e.json(200, { ok: true });
-}, $apis.requireSuperuserAuth());
+  },
+  $apis.requireSuperuserAuth(),
+);
 ```
 
 **Built-in middlewares (Go: `apis.*`, JS: `$apis.*`):**
 
-| Middleware | Use |
-|---|---|
-| `RequireGuestOnly()` | Reject authenticated clients (e.g. public signup forms) |
-| `RequireAuth(...collections)` | Require any auth record; optionally restrict to specific auth collections |
-| `RequireSuperuserAuth()` | Alias for `RequireAuth("_superusers")` |
+| Middleware                          | Use                                                                       |
+| ----------------------------------- | ------------------------------------------------------------------------- |
+| `RequireGuestOnly()`                | Reject authenticated clients (e.g. public signup forms)                   |
+| `RequireAuth(...collections)`       | Require any auth record; optionally restrict to specific auth collections |
+| `RequireSuperuserAuth()`            | Alias for `RequireAuth("_superusers")`                                    |
 | `RequireSuperuserOrOwnerAuth("id")` | Allow superusers OR the auth record whose id matches the named path param |
-| `Gzip()` | Gzip-compress the response |
-| `BodyLimit(bytes)` | Override the default 32MB request body cap (0 = no limit) |
-| `SkipSuccessActivityLog()` | Suppress activity log for successful responses |
+| `Gzip()`                            | Gzip-compress the response                                                |
+| `BodyLimit(bytes)`                  | Override the default 32MB request body cap (0 = no limit)                 |
+| `SkipSuccessActivityLog()`          | Suppress activity log for successful responses                            |
 
 **Path details:**
+
 - Patterns follow `net/http.ServeMux`: `{name}` = single segment, `{name...}` = catch-all.
 - A trailing `/` acts as a prefix wildcard; use `{$}` to anchor to the exact path only.
 - **Always** prefix custom routes with `/api/{yourapp}/` - do not put them under `/api/` alone, which collides with built-in collection / realtime / settings endpoints.
@@ -1559,11 +1598,11 @@ if err := app.Save(settings); err != nil {
 ```javascript
 // JSVM
 onBootstrap((e) => {
-    e.next();
+  e.next();
 
-    const settings = $app.settings();
-    settings.meta.appName = "MyApp";
-    $app.save(settings);
+  const settings = $app.settings();
+  settings.meta.appName = "MyApp";
+  $app.save(settings);
 });
 
 // At send-time
@@ -1579,6 +1618,7 @@ const meta = $app.settings().meta;
 `app.Settings()` is for things an **admin** should be able to rotate through the UI. Everything else lives in env vars, injected by your process supervisor (systemd, Docker, Kubernetes).
 
 **Key details:**
+
 - **`PB_ENCRYPTION` must be exactly 32 characters.** Anything else crashes at startup.
 - **Losing the key is unrecoverable** - the settings blob cannot be decrypted, and the server refuses to boot. Back up the key alongside (but separately from) your `pb_data` backups.
 - **Rotating the key**: start with the old key set, call `app.Settings()` → `app.Save(settings)` to re-encrypt under the new key, then restart with the new key. Do this under a maintenance window.
@@ -1745,6 +1785,7 @@ func TestAuditHookRollsBackOnAuditFailure(t *testing.T) {
 ```
 
 **Rules:**
+
 - **Always `defer app.Cleanup()`** - otherwise temp directories leak under `/tmp`.
 - **Use a checked-in `test_pb_data/` fixture** with the collections you need. Do not depend on the dev `pb_data/` - tests must be hermetic.
 - **Register hooks against the test app**, not against a package-level `app` singleton. The test app is a fresh instance each time.
@@ -1806,19 +1847,20 @@ if err != nil {
 ```javascript
 // JSVM - the callback receives the transactional app
 $app.runInTransaction((txApp) => {
-    const user = new Record(txApp.findCollectionByNameOrId("users"));
-    user.set("email", "a@b.co");
-    txApp.save(user);
+  const user = new Record(txApp.findCollectionByNameOrId("users"));
+  user.set("email", "a@b.co");
+  txApp.save(user);
 
-    const audit = new Record(txApp.findCollectionByNameOrId("audit"));
-    audit.set("user", user.id);
-    txApp.save(audit);
+  const audit = new Record(txApp.findCollectionByNameOrId("audit"));
+  audit.set("user", user.id);
+  txApp.save(audit);
 
-    // throw anywhere in this block to roll back the whole tx
+  // throw anywhere in this block to roll back the whole tx
 });
 ```
 
 **Rules of the transaction:**
+
 - **Use only `txApp` / the callback's scoped app** inside the block. Capturing the outer `app` defeats the purpose and can deadlock.
 - Inside event hooks, `e.App` is already the transactional app when the hook fires inside a tx - prefer it over a captured parent-scope `app` for the same reason.
 - Return an error (Go) or `throw` (JS) to roll back. A successful return commits.
@@ -1827,4 +1869,3 @@ $app.runInTransaction((txApp) => {
 - Hooks (`OnRecordAfterCreateSuccess`, etc.) fired from a `Save` inside a tx run **inside that tx**. Anything they do through `e.App` participates in the rollback; anything they do through a captured outer `app` does not.
 
 Reference: [Go database](https://pocketbase.io/docs/go-database/#transaction) · [JS database](https://pocketbase.io/docs/js-database/#transaction)
-

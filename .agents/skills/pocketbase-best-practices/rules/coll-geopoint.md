@@ -14,17 +14,17 @@ PocketBase provides a dedicated GeoPoint field type for storing geographic coord
 ```javascript
 // Separate lat/lon fields - no built-in distance queries
 const placesSchema = [
-  { name: 'name', type: 'text' },
-  { name: 'latitude', type: 'number' },
-  { name: 'longitude', type: 'number' }
+  { name: "name", type: "text" },
+  { name: "latitude", type: "number" },
+  { name: "longitude", type: "number" },
 ];
 
 // Manual distance calculation - complex and slow
 async function findNearby(lat, lon, maxKm) {
-  const places = await pb.collection('places').getFullList();
+  const places = await pb.collection("places").getFullList();
 
   // Calculate distance for every record client-side
-  return places.filter(place => {
+  return places.filter((place) => {
     const dist = haversine(lat, lon, place.latitude, place.longitude);
     return dist <= maxKm;
   });
@@ -36,41 +36,38 @@ async function findNearby(lat, lon, maxKm) {
 ```javascript
 // GeoPoint field stores coordinates as { lon, lat } object
 const placesSchema = [
-  { name: 'name', type: 'text' },
-  { name: 'location', type: 'geopoint' }
+  { name: "name", type: "text" },
+  { name: "location", type: "geopoint" },
 ];
 
 // Creating a record with GeoPoint
-await pb.collection('places').create({
-  name: 'Coffee Shop',
-  location: { lon: -73.9857, lat: 40.7484 }  // Note: lon first!
+await pb.collection("places").create({
+  name: "Coffee Shop",
+  location: { lon: -73.9857, lat: 40.7484 }, // Note: lon first!
 });
 
 // Or using "lon,lat" string format
-await pb.collection('places').create({
-  name: 'Restaurant',
-  location: '-73.9857,40.7484'  // String format also works
+await pb.collection("places").create({
+  name: "Restaurant",
+  location: "-73.9857,40.7484", // String format also works
 });
 
 // Query nearby locations using geoDistance()
 async function findNearby(lon, lat, maxKm) {
   // geoDistance returns distance in kilometers
-  const places = await pb.collection('places').getList(1, 50, {
-    filter: pb.filter(
-      'geoDistance(location, {:point}) <= {:maxKm}',
-      {
-        point: { lon, lat },
-        maxKm: maxKm
-      }
-    ),
-    sort: pb.filter('geoDistance(location, {:point})', { point: { lon, lat } })
+  const places = await pb.collection("places").getList(1, 50, {
+    filter: pb.filter("geoDistance(location, {:point}) <= {:maxKm}", {
+      point: { lon, lat },
+      maxKm: maxKm,
+    }),
+    sort: pb.filter("geoDistance(location, {:point})", { point: { lon, lat } }),
   });
 
   return places;
 }
 
 // Find places within 5km of Times Square
-const nearbyPlaces = await findNearby(-73.9857, 40.7580, 5);
+const nearbyPlaces = await findNearby(-73.9857, 40.758, 5);
 
 // Use in API rules for location-based access
 // listRule: geoDistance(location, @request.query.point) <= 10
@@ -83,17 +80,17 @@ const nearbyPlaces = await findNearby(-73.9857, 40.7580, 5);
 // Returns: distance in kilometers
 
 // In filter expressions
-filter: 'geoDistance(location, "-73.9857,40.7484") <= 5'
+filter: 'geoDistance(location, "-73.9857,40.7484") <= 5';
 
 // With parameter binding (recommended)
-filter: pb.filter('geoDistance(location, {:center}) <= {:radius}', {
+filter: pb.filter("geoDistance(location, {:center}) <= {:radius}", {
   center: { lon: -73.9857, lat: 40.7484 },
-  radius: 5
-})
+  radius: 5,
+});
 
 // Sorting by distance
-sort: 'geoDistance(location, "-73.9857,40.7484")'  // Closest first
-sort: '-geoDistance(location, "-73.9857,40.7484")' // Farthest first
+sort: 'geoDistance(location, "-73.9857,40.7484")'; // Closest first
+sort: '-geoDistance(location, "-73.9857,40.7484")'; // Farthest first
 ```
 
 **GeoPoint data format:**
@@ -109,12 +106,14 @@ sort: '-geoDistance(location, "-73.9857,40.7484")' // Farthest first
 ```
 
 **Use cases:**
+
 - Store-locator / find nearby
 - Delivery radius validation
 - Geofencing in API rules
 - Location-based search results
 
 **Limitations:**
+
 - Spherical Earth calculation (accurate to ~0.3%)
 - No polygon/area containment queries
 - Single point per field (use multiple fields for routes)

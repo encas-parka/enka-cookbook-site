@@ -13,7 +13,7 @@ tags: relevant, comma-separated, tags
 
 ```javascript
 // Comment explaining what makes this problematic
-const result = await pb.collection('posts').getList();
+const result = await pb.collection("posts").getList();
 // Problem explanation
 ```
 
@@ -21,9 +21,9 @@ const result = await pb.collection('posts').getList();
 
 ```javascript
 // Comment explaining why this is better
-const result = await pb.collection('posts').getList(1, 20, {
-  filter: 'published = true',
-  sort: '-created'
+const result = await pb.collection("posts").getList(1, 20, {
+  filter: "published = true",
+  sort: "-created",
 });
 // Benefit explanation
 ```

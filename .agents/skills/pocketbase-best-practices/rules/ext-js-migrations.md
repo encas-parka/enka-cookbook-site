@@ -14,10 +14,11 @@ JSVM migrations live in `pb_migrations/` next to the executable. Unlike Go migra
 ```javascript
 // pb_migrations/add_audit.js   ❌ missing <unix>_ prefix - never runs
 migrate((app) => {
-    // ❌ Raw ALTER TABLE leaves PocketBase's internal collection cache stale
-    app.db().newQuery(
-        "ALTER TABLE posts ADD COLUMN summary TEXT DEFAULT ''"
-    ).execute();
+  // ❌ Raw ALTER TABLE leaves PocketBase's internal collection cache stale
+  app
+    .db()
+    .newQuery("ALTER TABLE posts ADD COLUMN summary TEXT DEFAULT ''")
+    .execute();
 });
 // ❌ No down callback - `migrate down` cannot revert this in dev
 ```
@@ -29,29 +30,34 @@ migrate((app) => {
 /// <reference path="../pb_data/types.d.ts" />
 
 migrate(
-    // UP - runs on `serve` / `migrate up`
-    (app) => {
-        const collection = new Collection({
-            type: "base",
-            name: "audit",
-            fields: [
-                { name: "action", type: "text", required: true },
-                { name: "actor",  type: "relation", collectionId: "_pb_users_auth_", cascadeDelete: false },
-                { name: "meta",   type: "json" },
-                { name: "created", type: "autodate", onCreate: true },
-            ],
-            indexes: [
-                "CREATE INDEX idx_audit_actor ON audit (actor)",
-                "CREATE INDEX idx_audit_created ON audit (created)",
-            ],
-        });
-        app.save(collection);
-    },
-    // DOWN - runs on `migrate down N`
-    (app) => {
-        const collection = app.findCollectionByNameOrId("audit");
-        app.delete(collection);
-    },
+  // UP - runs on `serve` / `migrate up`
+  (app) => {
+    const collection = new Collection({
+      type: "base",
+      name: "audit",
+      fields: [
+        { name: "action", type: "text", required: true },
+        {
+          name: "actor",
+          type: "relation",
+          collectionId: "_pb_users_auth_",
+          cascadeDelete: false,
+        },
+        { name: "meta", type: "json" },
+        { name: "created", type: "autodate", onCreate: true },
+      ],
+      indexes: [
+        "CREATE INDEX idx_audit_actor ON audit (actor)",
+        "CREATE INDEX idx_audit_created ON audit (created)",
+      ],
+    });
+    app.save(collection);
+  },
+  // DOWN - runs on `migrate down N`
+  (app) => {
+    const collection = app.findCollectionByNameOrId("audit");
+    app.delete(collection);
+  },
 );
 ```
 
@@ -62,25 +68,21 @@ migrate(
 /// <reference path="../pb_data/types.d.ts" />
 
 migrate(
-    (app) => {
-        const tags = app.findCollectionByNameOrId("tags");
-        for (const name of ["urgent", "bug", "feature", "docs"]) {
-            const r = new Record(tags);
-            r.set("name", name);
-            app.save(r); // `app` here is the transactional app - all or nothing
-        }
-    },
-    (app) => {
-        const tags = app.findCollectionByNameOrId("tags");
-        for (const name of ["urgent", "bug", "feature", "docs"]) {
-            const r = app.findFirstRecordByFilter(
-                "tags",
-                "name = {:name}",
-                { name },
-            );
-            if (r) app.delete(r);
-        }
-    },
+  (app) => {
+    const tags = app.findCollectionByNameOrId("tags");
+    for (const name of ["urgent", "bug", "feature", "docs"]) {
+      const r = new Record(tags);
+      r.set("name", name);
+      app.save(r); // `app` here is the transactional app - all or nothing
+    }
+  },
+  (app) => {
+    const tags = app.findCollectionByNameOrId("tags");
+    for (const name of ["urgent", "bug", "feature", "docs"]) {
+      const r = app.findFirstRecordByFilter("tags", "name = {:name}", { name });
+      if (r) app.delete(r);
+    }
+  },
 );
 ```
 
@@ -94,6 +96,7 @@ migrate(
 ```
 
 **Rules:**
+
 - **Filename format**: `<unix_timestamp>_<description>.js`. The timestamp sets ordering. Never renumber a committed file.
 - **The `app` argument is transactional**: every migration runs inside its own transaction. Throw to roll back. Do not capture `$app` from the outer scope - use the `app` parameter so the work participates in the tx.
 - **Use the collection API** (`new Collection`, `app.save(collection)`), not raw `ALTER TABLE`. Raw SQL leaves PocketBase's in-memory schema cache stale until the next restart.

@@ -14,7 +14,9 @@ MFA requires users to authenticate with two different methods. PocketBase suppor
 ```javascript
 // Insufficient for sensitive applications
 async function login(email, password) {
-  const authData = await pb.collection('users').authWithPassword(email, password);
+  const authData = await pb
+    .collection("users")
+    .authWithPassword(email, password);
   // User immediately has full access - no second factor
   return authData;
 }
@@ -23,25 +25,26 @@ async function login(email, password) {
 **Correct (MFA flow with OTP):**
 
 ```javascript
-import PocketBase from 'pocketbase';
+import PocketBase from "pocketbase";
 
-const pb = new PocketBase('http://127.0.0.1:8090');
+const pb = new PocketBase("http://127.0.0.1:8090");
 
 async function loginWithMFA(email, password) {
   try {
     // First factor: password
-    const authData = await pb.collection('users').authWithPassword(email, password);
+    const authData = await pb
+      .collection("users")
+      .authWithPassword(email, password);
 
     // If MFA not required, auth succeeds immediately
     return { success: true, authData };
-
   } catch (error) {
     // MFA required - returns 401 with mfaId
     if (error.status === 401 && error.response?.mfaId) {
       return {
         success: false,
         mfaRequired: true,
-        mfaId: error.response.mfaId
+        mfaId: error.response.mfaId,
       };
     }
     throw error;
@@ -50,7 +53,7 @@ async function loginWithMFA(email, password) {
 
 async function requestOTP(email) {
   // Request OTP to be sent via email
-  const result = await pb.collection('users').requestOTP(email);
+  const result = await pb.collection("users").requestOTP(email);
 
   // Returns otpId - needed to verify the OTP
   // Note: Returns otpId even if email doesn't exist (prevents enumeration)
@@ -60,16 +63,16 @@ async function requestOTP(email) {
 async function completeMFAWithOTP(mfaId, otpId, otpCode) {
   try {
     // Second factor: OTP verification
-    const authData = await pb.collection('users').authWithOTP(
+    const authData = await pb.collection("users").authWithOTP(
       otpId,
       otpCode,
-      { mfaId }  // Include mfaId from first factor
+      { mfaId }, // Include mfaId from first factor
     );
 
     return { success: true, authData };
   } catch (error) {
     if (error.status === 400) {
-      throw new Error('Invalid or expired code');
+      throw new Error("Invalid or expired code");
     }
     throw error;
   }
@@ -81,7 +84,7 @@ async function fullMFAFlow(email, password, otpCode = null) {
   const step1 = await loginWithMFA(email, password);
 
   if (step1.success) {
-    return step1.authData;  // MFA not required
+    return step1.authData; // MFA not required
   }
 
   if (step1.mfaRequired) {
@@ -106,26 +109,27 @@ async function fullMFAFlow(email, password, otpCode = null) {
 
 ```javascript
 // Enable MFA on auth collection (superuser only)
-await pb.collections.update('users', {
+await pb.collections.update("users", {
   mfa: {
     enabled: true,
-    duration: 1800,  // MFA session duration (30 min)
-    rule: ''  // When to require MFA (empty = always for all users)
+    duration: 1800, // MFA session duration (30 min)
+    rule: "", // When to require MFA (empty = always for all users)
     // rule: '@request.auth.role = "admin"' // Only for admins
   },
   otp: {
     enabled: true,
-    duration: 300,  // OTP validity (5 min)
-    length: 6,      // OTP code length
+    duration: 300, // OTP validity (5 min)
+    length: 6, // OTP code length
     emailTemplate: {
-      subject: 'Your verification code',
-      body: 'Your code is: {OTP}'
-    }
-  }
+      subject: "Your verification code",
+      body: "Your code is: {OTP}",
+    },
+  },
 });
 ```
 
 **MFA best practices:**
+
 - Always enable for admin accounts
 - Consider making MFA optional for regular users
 - Use short OTP durations (5-10 minutes)

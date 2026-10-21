@@ -58,11 +58,11 @@ if err := app.Save(settings); err != nil {
 ```javascript
 // JSVM
 onBootstrap((e) => {
-    e.next();
+  e.next();
 
-    const settings = $app.settings();
-    settings.meta.appName = "MyApp";
-    $app.save(settings);
+  const settings = $app.settings();
+  settings.meta.appName = "MyApp";
+  $app.save(settings);
 });
 
 // At send-time
@@ -78,6 +78,7 @@ const meta = $app.settings().meta;
 `app.Settings()` is for things an **admin** should be able to rotate through the UI. Everything else lives in env vars, injected by your process supervisor (systemd, Docker, Kubernetes).
 
 **Key details:**
+
 - **`PB_ENCRYPTION` must be exactly 32 characters.** Anything else crashes at startup.
 - **Losing the key is unrecoverable** - the settings blob cannot be decrypted, and the server refuses to boot. Back up the key alongside (but separately from) your `pb_data` backups.
 - **Rotating the key**: start with the old key set, call `app.Settings()` → `app.Save(settings)` to re-encrypt under the new key, then restart with the new key. Do this under a maintenance window.

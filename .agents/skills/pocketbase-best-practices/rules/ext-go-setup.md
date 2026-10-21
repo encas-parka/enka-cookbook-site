@@ -85,6 +85,7 @@ go build && ./myapp serve  # production (statically linked binary)
 ```
 
 **Key details:**
+
 - Requires **Go 1.27.0+** (PocketBase v0.40.0 bumped the minimum; v0.36.7+ required 1.25.0).
 - **v0.40 upgrade caution:** PocketBase v0.40 migrated to Go's `encoding/json/v2`. Go 1.27 retrofitted `encoding/json` onto the v2 engine and it is not fully backward compatible — test your app locally before shipping a v0.40 upgrade to production.
 - **v0.40 behavioral change:** console command errors and recovered panics now propagate to `app.Start()` and exit non-zero (previously exit 0). If you chain commands like `./pocketbase somecmd && next`, `next` no longer runs on failure — use `;` if you relied on the old behavior.

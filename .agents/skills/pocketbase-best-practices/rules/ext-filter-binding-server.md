@@ -25,8 +25,8 @@ record, err := app.FindFirstRecordByFilter(
 // JSVM - same class of bug
 const email = e.request.url.query().get("email");
 const record = $app.findFirstRecordByFilter(
-    "users",
-    `email = '${email}' && verified = true`, // ❌
+  "users",
+  `email = '${email}' && verified = true`, // ❌
 );
 ```
 
@@ -58,20 +58,23 @@ recs, err := app.FindRecordsByFilter(
 ```javascript
 // JSVM - second argument after the filter is the params object
 const record = $app.findFirstRecordByFilter(
-    "users",
-    "email = {:email} && verified = true",
-    { email: email },
+  "users",
+  "email = {:email} && verified = true",
+  { email: email },
 );
 
 const recs = $app.findRecordsByFilter(
-    "posts",
-    "author = {:author} && status = {:status}",
-    "-created", 20, 0,
-    { author: e.auth.id, status: "published" },
+  "posts",
+  "author = {:author} && status = {:status}",
+  "-created",
+  20,
+  0,
+  { author: e.auth.id, status: "published" },
 );
 ```
 
 **Rules:**
+
 - Placeholder syntax is `{:name}` inside the filter string, and the value is supplied via `dbx.Params{"name": value}` (Go) or a plain object (JS).
 - The same applies to `dbx.NewExp("LOWER(email) = {:email}", dbx.Params{"email": email})` when writing raw `dbx` expressions.
 - Passing a `types.DateTime` / `DateTime` value binds it correctly - do not stringify dates manually.

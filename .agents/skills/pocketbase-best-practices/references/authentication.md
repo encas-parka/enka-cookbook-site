@@ -17,40 +17,42 @@ Impersonation allows superusers to generate tokens for other users, enabling adm
 ```javascript
 // Bad: sharing user passwords for support
 async function helpUser(userId, userPassword) {
-  await pb.collection('users').authWithPassword(userEmail, userPassword);
+  await pb.collection("users").authWithPassword(userEmail, userPassword);
   // Support team knows user's password!
 }
 
 // Bad: directly modifying records without proper context
 async function fixUserData(userId) {
   // Bypasses user's perspective and rules
-  await pb.collection('posts').update(postId, { fixed: true });
+  await pb.collection("posts").update(postId, { fixed: true });
 }
 ```
 
 **Correct (using impersonation):**
 
 ```javascript
-import PocketBase from 'pocketbase';
+import PocketBase from "pocketbase";
 
 // Admin client with superuser auth (use environment variables, never hardcode)
 const adminPb = new PocketBase(process.env.PB_URL);
-await adminPb.collection('_superusers').authWithPassword(
-  process.env.PB_SUPERUSER_EMAIL,
-  process.env.PB_SUPERUSER_PASSWORD
-);
+await adminPb
+  .collection("_superusers")
+  .authWithPassword(
+    process.env.PB_SUPERUSER_EMAIL,
+    process.env.PB_SUPERUSER_PASSWORD,
+  );
 
 async function impersonateUser(userId) {
   // Generate impersonation token (non-renewable)
   const impersonatedClient = await adminPb
-    .collection('users')
-    .impersonate(userId, 3600);  // 1 hour duration
+    .collection("users")
+    .impersonate(userId, 3600); // 1 hour duration
 
   // impersonatedClient has user's auth context
-  console.log('Acting as:', impersonatedClient.authStore.record.email);
+  console.log("Acting as:", impersonatedClient.authStore.record.email);
 
   // Operations use user's permissions
-  const userPosts = await impersonatedClient.collection('posts').getList();
+  const userPosts = await impersonatedClient.collection("posts").getList();
 
   return impersonatedClient;
 }
@@ -60,7 +62,7 @@ async function adminViewUserPosts(userId) {
   const userClient = await impersonateUser(userId);
 
   // See exactly what the user sees (respects API rules)
-  const posts = await userClient.collection('posts').getList();
+  const posts = await userClient.collection("posts").getList();
 
   return posts;
 }
@@ -69,8 +71,8 @@ async function adminViewUserPosts(userId) {
 async function createApiKey(serviceUserId) {
   // Create a service impersonation token (use short durations, rotate regularly)
   const serviceClient = await adminPb
-    .collection('service_accounts')
-    .impersonate(serviceUserId, 86400);  // 24 hours max, rotate via scheduled task
+    .collection("service_accounts")
+    .impersonate(serviceUserId, 86400); // 24 hours max, rotate via scheduled task
 
   // Return token for service to use
   return serviceClient.authStore.token;
@@ -78,13 +80,13 @@ async function createApiKey(serviceUserId) {
 
 // Using API key token in another service
 async function useApiKey(apiToken) {
-  const pb = new PocketBase('http://127.0.0.1:8090');
+  const pb = new PocketBase("http://127.0.0.1:8090");
 
   // Manually set the token
   pb.authStore.save(apiToken, null);
 
   // Now requests use the service account's permissions
-  const data = await pb.collection('data').getList();
+  const data = await pb.collection("data").getList();
   return data;
 }
 ```
@@ -93,11 +95,11 @@ async function useApiKey(apiToken) {
 
 ```javascript
 // Impersonation tokens are non-renewable
-const client = await adminPb.collection('users').impersonate(userId, 3600);
+const client = await adminPb.collection("users").impersonate(userId, 3600);
 
 // This will fail - can't refresh impersonation tokens
 try {
-  await client.collection('users').authRefresh();
+  await client.collection("users").authRefresh();
 } catch (error) {
   // Expected: impersonation tokens can't be refreshed
 }
@@ -110,11 +112,12 @@ async function getImpersonatedClient(userId) {
   }
 
   // Generate fresh token
-  return await adminPb.collection('users').impersonate(userId, 3600);
+  return await adminPb.collection("users").impersonate(userId, 3600);
 }
 ```
 
 **Security best practices:**
+
 - Use short durations for support tasks
 - Log all impersonation events
 - Restrict impersonation to specific admin roles
@@ -134,7 +137,9 @@ MFA requires users to authenticate with two different methods. PocketBase suppor
 ```javascript
 // Insufficient for sensitive applications
 async function login(email, password) {
-  const authData = await pb.collection('users').authWithPassword(email, password);
+  const authData = await pb
+    .collection("users")
+    .authWithPassword(email, password);
   // User immediately has full access - no second factor
   return authData;
 }
@@ -143,25 +148,26 @@ async function login(email, password) {
 **Correct (MFA flow with OTP):**
 
 ```javascript
-import PocketBase from 'pocketbase';
+import PocketBase from "pocketbase";
 
-const pb = new PocketBase('http://127.0.0.1:8090');
+const pb = new PocketBase("http://127.0.0.1:8090");
 
 async function loginWithMFA(email, password) {
   try {
     // First factor: password
-    const authData = await pb.collection('users').authWithPassword(email, password);
+    const authData = await pb
+      .collection("users")
+      .authWithPassword(email, password);
 
     // If MFA not required, auth succeeds immediately
     return { success: true, authData };
-
   } catch (error) {
     // MFA required - returns 401 with mfaId
     if (error.status === 401 && error.response?.mfaId) {
       return {
         success: false,
         mfaRequired: true,
-        mfaId: error.response.mfaId
+        mfaId: error.response.mfaId,
       };
     }
     throw error;
@@ -170,7 +176,7 @@ async function loginWithMFA(email, password) {
 
 async function requestOTP(email) {
   // Request OTP to be sent via email
-  const result = await pb.collection('users').requestOTP(email);
+  const result = await pb.collection("users").requestOTP(email);
 
   // Returns otpId - needed to verify the OTP
   // Note: Returns otpId even if email doesn't exist (prevents enumeration)
@@ -180,16 +186,16 @@ async function requestOTP(email) {
 async function completeMFAWithOTP(mfaId, otpId, otpCode) {
   try {
     // Second factor: OTP verification
-    const authData = await pb.collection('users').authWithOTP(
+    const authData = await pb.collection("users").authWithOTP(
       otpId,
       otpCode,
-      { mfaId }  // Include mfaId from first factor
+      { mfaId }, // Include mfaId from first factor
     );
 
     return { success: true, authData };
   } catch (error) {
     if (error.status === 400) {
-      throw new Error('Invalid or expired code');
+      throw new Error("Invalid or expired code");
     }
     throw error;
   }
@@ -201,7 +207,7 @@ async function fullMFAFlow(email, password, otpCode = null) {
   const step1 = await loginWithMFA(email, password);
 
   if (step1.success) {
-    return step1.authData;  // MFA not required
+    return step1.authData; // MFA not required
   }
 
   if (step1.mfaRequired) {
@@ -226,26 +232,27 @@ async function fullMFAFlow(email, password, otpCode = null) {
 
 ```javascript
 // Enable MFA on auth collection (superuser only)
-await pb.collections.update('users', {
+await pb.collections.update("users", {
   mfa: {
     enabled: true,
-    duration: 1800,  // MFA session duration (30 min)
-    rule: ''  // When to require MFA (empty = always for all users)
+    duration: 1800, // MFA session duration (30 min)
+    rule: "", // When to require MFA (empty = always for all users)
     // rule: '@request.auth.role = "admin"' // Only for admins
   },
   otp: {
     enabled: true,
-    duration: 300,  // OTP validity (5 min)
-    length: 6,      // OTP code length
+    duration: 300, // OTP validity (5 min)
+    length: 6, // OTP code length
     emailTemplate: {
-      subject: 'Your verification code',
-      body: 'Your code is: {OTP}'
-    }
-  }
+      subject: "Your verification code",
+      body: "Your code is: {OTP}",
+    },
+  },
 });
 ```
 
 **MFA best practices:**
+
 - Always enable for admin accounts
 - Consider making MFA optional for regular users
 - Use short OTP durations (5-10 minutes)
@@ -266,15 +273,15 @@ OAuth2 integration should use the all-in-one method for simplicity and security.
 // Don't manually handle OAuth flow
 async function loginWithGoogle() {
   // Redirect user to Google manually
-  window.location.href = 'https://accounts.google.com/oauth/authorize?...';
+  window.location.href = "https://accounts.google.com/oauth/authorize?...";
 }
 
 // Manual callback handling
 async function handleCallback(code) {
   // Exchange code manually - error prone!
-  const response = await fetch('/api/auth/callback', {
-    method: 'POST',
-    body: JSON.stringify({ code })
+  const response = await fetch("/api/auth/callback", {
+    method: "POST",
+    body: JSON.stringify({ code }),
   });
 }
 ```
@@ -282,30 +289,30 @@ async function handleCallback(code) {
 **Correct (using SDK's all-in-one method):**
 
 ```javascript
-import PocketBase from 'pocketbase';
+import PocketBase from "pocketbase";
 
-const pb = new PocketBase('http://127.0.0.1:8090');
+const pb = new PocketBase("http://127.0.0.1:8090");
 
 // All-in-one OAuth2 (recommended for web apps)
 async function loginWithOAuth2(providerName) {
   try {
-    const authData = await pb.collection('users').authWithOAuth2({
-      provider: providerName,  // 'google', 'github', 'microsoft', etc.
+    const authData = await pb.collection("users").authWithOAuth2({
+      provider: providerName, // 'google', 'github', 'microsoft', etc.
       // Optional: create new user data if not exists
       createData: {
         emailVisibility: true,
-        name: ''  // Will be populated from OAuth provider
-      }
+        name: "", // Will be populated from OAuth provider
+      },
     });
 
-    console.log('Logged in via', providerName);
-    console.log('User:', authData.record.email);
-    console.log('Is new user:', authData.meta?.isNew);
+    console.log("Logged in via", providerName);
+    console.log("User:", authData.record.email);
+    console.log("Is new user:", authData.meta?.isNew);
 
     return authData;
   } catch (error) {
     if (error.isAbort) {
-      console.log('OAuth popup was closed');
+      console.log("OAuth popup was closed");
       return null;
     }
     throw error;
@@ -313,8 +320,8 @@ async function loginWithOAuth2(providerName) {
 }
 
 // Usage
-document.getElementById('google-btn').onclick = () => loginWithOAuth2('google');
-document.getElementById('github-btn').onclick = () => loginWithOAuth2('github');
+document.getElementById("google-btn").onclick = () => loginWithOAuth2("google");
+document.getElementById("github-btn").onclick = () => loginWithOAuth2("github");
 ```
 
 **Manual code exchange (for React Native / deep links):**
@@ -323,16 +330,18 @@ document.getElementById('github-btn').onclick = () => loginWithOAuth2('github');
 // Only use when all-in-one isn't possible
 async function loginWithOAuth2Manual() {
   // Get auth methods - PocketBase provides state and codeVerifier
-  const authMethods = await pb.collection('users').listAuthMethods();
-  const provider = authMethods.oauth2.providers.find(p => p.name === 'google');
+  const authMethods = await pb.collection("users").listAuthMethods();
+  const provider = authMethods.oauth2.providers.find(
+    (p) => p.name === "google",
+  );
 
   // Store the provider's state and codeVerifier for callback verification
   // PocketBase generates these for you - don't create your own
-  sessionStorage.setItem('oauth_state', provider.state);
-  sessionStorage.setItem('oauth_code_verifier', provider.codeVerifier);
+  sessionStorage.setItem("oauth_state", provider.state);
+  sessionStorage.setItem("oauth_code_verifier", provider.codeVerifier);
 
   // Build the OAuth URL using provider.authURL + redirect
-  const redirectUrl = window.location.origin + '/oauth-callback';
+  const redirectUrl = window.location.origin + "/oauth-callback";
   const authUrl = provider.authURL + encodeURIComponent(redirectUrl);
 
   // Redirect to OAuth provider
@@ -344,26 +353,24 @@ async function handleOAuth2Callback() {
   const params = new URLSearchParams(window.location.search);
 
   // CSRF protection: verify state matches
-  if (params.get('state') !== sessionStorage.getItem('oauth_state')) {
-    throw new Error('State mismatch - potential CSRF attack');
+  if (params.get("state") !== sessionStorage.getItem("oauth_state")) {
+    throw new Error("State mismatch - potential CSRF attack");
   }
 
-  const code = params.get('code');
-  const codeVerifier = sessionStorage.getItem('oauth_code_verifier');
-  const redirectUrl = window.location.origin + '/oauth-callback';
+  const code = params.get("code");
+  const codeVerifier = sessionStorage.getItem("oauth_code_verifier");
+  const redirectUrl = window.location.origin + "/oauth-callback";
 
   // Exchange code for auth token
-  const authData = await pb.collection('users').authWithOAuth2Code(
-    'google',
-    code,
-    codeVerifier,
-    redirectUrl,
-    { emailVisibility: true }
-  );
+  const authData = await pb
+    .collection("users")
+    .authWithOAuth2Code("google", code, codeVerifier, redirectUrl, {
+      emailVisibility: true,
+    });
 
   // Clean up
-  sessionStorage.removeItem('oauth_state');
-  sessionStorage.removeItem('oauth_code_verifier');
+  sessionStorage.removeItem("oauth_state");
+  sessionStorage.removeItem("oauth_code_verifier");
 
   return authData;
 }
@@ -374,18 +381,20 @@ async function handleOAuth2Callback() {
 ```javascript
 // Via API (superuser only) - usually done in Admin UI
 // IMPORTANT: Never hardcode client secrets. Use environment variables.
-await pb.collections.update('users', {
+await pb.collections.update("users", {
   oauth2: {
     enabled: true,
-    providers: [{
-      name: 'google',
-      clientId: process.env.GOOGLE_CLIENT_ID,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET
-    }],
+    providers: [
+      {
+        name: "google",
+        clientId: process.env.GOOGLE_CLIENT_ID,
+        clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+      },
+    ],
     mappedFields: {
-      avatarURL: 'avatar'  // Map OAuth field to collection field
-    }
-  }
+      avatarURL: "avatar", // Map OAuth field to collection field
+    },
+  },
 });
 ```
 
@@ -408,18 +417,18 @@ Auth collections can enable **OTP login** from the admin UI (Collection → Opti
 ```javascript
 // ❌ Client-side existence check - ignore the 404 and expose it to the user
 try {
-    await pb.collection("users").getFirstListItem(`email="${email}"`);
+  await pb.collection("users").getFirstListItem(`email="${email}"`);
 } catch (e) {
-    alert("No account with that email"); // ❌ account enumeration
-    return;
+  alert("No account with that email"); // ❌ account enumeration
+  return;
 }
 
 // ❌ Ad-hoc route with no rate limit - attacker hammers this to spam mailboxes
 routerAdd("POST", "/api/myapp/otp", (e) => {
-    const body = e.requestInfo().body;
-    const user = $app.findAuthRecordByEmail("users", body.email);
-    // send custom email...
-    return e.json(200, { ok: true });
+  const body = e.requestInfo().body;
+  const user = $app.findAuthRecordByEmail("users", body.email);
+  // send custom email...
+  return e.json(200, { ok: true });
 });
 ```
 
@@ -432,10 +441,7 @@ routerAdd("POST", "/api/myapp/otp", (e) => {
 const { otpId } = await pb.collection("users").requestOTP("user@example.com");
 
 // Step 2: exchange otpId + the 8-digit code the user typed
-const authData = await pb.collection("users").authWithOTP(
-    otpId,
-    "12345678",
-);
+const authData = await pb.collection("users").authWithOTP(otpId, "12345678");
 // pb.authStore is now populated
 ```
 
@@ -452,6 +458,7 @@ app.OnRecordRequestOTPRequest("users").BindFunc(func(e *core.RecordRequestOTPReq
 ```
 
 **Rules:**
+
 - `requestOTP` **always returns 200 with an otpId**, even for non-existent emails - preserve that by never adding a pre-check or a different error path.
 - Enable the built-in rate limiter (see `deploy-rate-limiting.md`) and raise the cost for the `*:requestOTP` label. Without this, an attacker can email-bomb arbitrary users.
 - The OTP code is 8 digits by default, with a 3-minute TTL. Do not extend the TTL - short windows are the whole point.
@@ -472,14 +479,16 @@ Password authentication should include proper error handling, avoid exposing whe
 ```javascript
 // Dangerous: exposes whether email exists
 async function login(email, password) {
-  const user = await pb.collection('users').getFirstListItem(`email = "${email}"`);
+  const user = await pb
+    .collection("users")
+    .getFirstListItem(`email = "${email}"`);
   if (!user) {
-    throw new Error('Email not found');  // Reveals email doesn't exist
+    throw new Error("Email not found"); // Reveals email doesn't exist
   }
 
   // Manual password check - never do this!
   if (user.password !== password) {
-    throw new Error('Wrong password');  // Reveals password is wrong
+    throw new Error("Wrong password"); // Reveals password is wrong
   }
 
   return user;
@@ -489,24 +498,26 @@ async function login(email, password) {
 **Correct (secure authentication):**
 
 ```javascript
-import PocketBase from 'pocketbase';
+import PocketBase from "pocketbase";
 
-const pb = new PocketBase('http://127.0.0.1:8090');
+const pb = new PocketBase("http://127.0.0.1:8090");
 
 async function login(email, password) {
   try {
     // authWithPassword handles hashing and returns token
-    const authData = await pb.collection('users').authWithPassword(email, password);
+    const authData = await pb
+      .collection("users")
+      .authWithPassword(email, password);
 
     // Token is automatically stored in pb.authStore
-    console.log('Logged in as:', authData.record.email);
-    console.log('Token valid:', pb.authStore.isValid);
+    console.log("Logged in as:", authData.record.email);
+    console.log("Token valid:", pb.authStore.isValid);
 
     return authData;
   } catch (error) {
     // Generic error message - don't reveal if email exists
     if (error.status === 400) {
-      throw new Error('Invalid email or password');
+      throw new Error("Invalid email or password");
     }
     throw error;
   }
@@ -529,8 +540,8 @@ function logout() {
 
 // Listen for auth changes
 pb.authStore.onChange((token, record) => {
-  console.log('Auth state changed:', record?.email || 'logged out');
-}, true);  // true = fire immediately with current state
+  console.log("Auth state changed:", record?.email || "logged out");
+}, true); // true = fire immediately with current state
 ```
 
 **Auth collection configuration for password auth:**
@@ -538,15 +549,15 @@ pb.authStore.onChange((token, record) => {
 ```javascript
 // When creating auth collection via API (superuser only)
 await pb.collections.create({
-  name: 'users',
-  type: 'auth',
+  name: "users",
+  type: "auth",
   fields: [
-    { name: 'name', type: 'text' },
-    { name: 'avatar', type: 'file', options: { maxSelect: 1 } }
+    { name: "name", type: "text" },
+    { name: "avatar", type: "file", options: { maxSelect: 1 } },
   ],
   passwordAuth: {
     enabled: true,
-    identityFields: ['email', 'username']  // Fields that can be used to login
+    identityFields: ["email", "username"], // Fields that can be used to login
   },
   // Require minimum password length
   // (configured in Admin UI under collection options)
@@ -554,6 +565,7 @@ await pb.collections.create({
 ```
 
 **Security considerations:**
+
 - Never store passwords in plain text
 - Use generic error messages
 - Implement rate limiting on your server
@@ -573,33 +585,33 @@ Auth tokens should be refreshed before expiration, validated on critical operati
 // Bad: never checking token validity
 async function fetchUserData() {
   // Token might be expired!
-  const records = await pb.collection('posts').getList();
+  const records = await pb.collection("posts").getList();
   return records;
 }
 
 // Bad: manually managing tokens
-let authToken = localStorage.getItem('token');
-fetch('/api/posts', {
-  headers: { 'Authorization': authToken }  // Token might be invalid
+let authToken = localStorage.getItem("token");
+fetch("/api/posts", {
+  headers: { Authorization: authToken }, // Token might be invalid
 });
 ```
 
 **Correct (proper token management):**
 
 ```javascript
-import PocketBase from 'pocketbase';
+import PocketBase from "pocketbase";
 
-const pb = new PocketBase('http://127.0.0.1:8090');
+const pb = new PocketBase("http://127.0.0.1:8090");
 
 // Check token validity before operations
 async function fetchSecureData() {
   // authStore.isValid is a client-side check only (JWT expiry parsing).
   // Always verify server-side with authRefresh() for critical operations.
   if (!pb.authStore.isValid) {
-    throw new Error('Please log in');
+    throw new Error("Please log in");
   }
 
-  return pb.collection('posts').getList();
+  return pb.collection("posts").getList();
 }
 
 // Refresh token periodically or before expiration
@@ -610,8 +622,8 @@ async function refreshAuthIfNeeded() {
 
   try {
     // Verifies current token and returns fresh one
-    await pb.collection('users').authRefresh();
-    console.log('Token refreshed');
+    await pb.collection("users").authRefresh();
+    console.log("Token refreshed");
     return true;
   } catch (error) {
     // Token invalid - user needs to re-authenticate
@@ -624,7 +636,7 @@ async function refreshAuthIfNeeded() {
 async function initializeAuth() {
   if (pb.authStore.token) {
     try {
-      await pb.collection('users').authRefresh();
+      await pb.collection("users").authRefresh();
     } catch {
       pb.authStore.clear();
     }
@@ -640,15 +652,18 @@ pb.authStore.onChange((token, record) => {
 });
 
 // Setup periodic refresh (e.g., every 10 minutes)
-setInterval(async () => {
-  if (pb.authStore.isValid) {
-    try {
-      await pb.collection('users').authRefresh();
-    } catch {
-      pb.authStore.clear();
+setInterval(
+  async () => {
+    if (pb.authStore.isValid) {
+      try {
+        await pb.collection("users").authRefresh();
+      } catch {
+        pb.authStore.clear();
+      }
     }
-  }
-}, 10 * 60 * 1000);
+  },
+  10 * 60 * 1000,
+);
 ```
 
 **SSR / Server-side token handling:**
@@ -656,15 +671,15 @@ setInterval(async () => {
 ```javascript
 // Server-side: create fresh client per request
 export async function handleRequest(request) {
-  const pb = new PocketBase('http://127.0.0.1:8090');
+  const pb = new PocketBase("http://127.0.0.1:8090");
 
   // Load auth from cookie
-  pb.authStore.loadFromCookie(request.headers.get('cookie') || '');
+  pb.authStore.loadFromCookie(request.headers.get("cookie") || "");
 
   // Validate and refresh
   if (pb.authStore.isValid) {
     try {
-      await pb.collection('users').authRefresh();
+      await pb.collection("users").authRefresh();
     } catch {
       pb.authStore.clear();
     }
@@ -674,11 +689,14 @@ export async function handleRequest(request) {
 
   // Send updated cookie with secure options
   const response = new Response();
-  response.headers.set('set-cookie', pb.authStore.exportToCookie({
-    httpOnly: true,   // Prevent XSS access to auth token
-    secure: true,     // HTTPS only
-    sameSite: 'Lax',  // CSRF protection
-  }));
+  response.headers.set(
+    "set-cookie",
+    pb.authStore.exportToCookie({
+      httpOnly: true, // Prevent XSS access to auth token
+      secure: true, // HTTPS only
+      sameSite: "Lax", // CSRF protection
+    }),
+  );
   return response;
 }
 ```
@@ -687,15 +705,14 @@ export async function handleRequest(request) {
 
 ```javascript
 // Configure token durations (superuser only)
-await pb.collections.update('users', {
+await pb.collections.update("users", {
   authToken: {
-    duration: 1209600  // 14 days in seconds
+    duration: 1209600, // 14 days in seconds
   },
   verificationToken: {
-    duration: 604800   // 7 days
-  }
+    duration: 604800, // 7 days
+  },
 });
 ```
 
 Reference: [PocketBase Auth Store](https://pocketbase.io/docs/authentication/)
-

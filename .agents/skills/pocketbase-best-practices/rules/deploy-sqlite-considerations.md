@@ -15,24 +15,24 @@ PocketBase uses SQLite with optimized defaults. Understanding its characteristic
 // Heavy concurrent writes - SQLite bottleneck
 async function bulkInsert(items) {
   // Parallel writes cause lock contention
-  await Promise.all(items.map(item =>
-    pb.collection('items').create(item)
-  ));
+  await Promise.all(items.map((item) => pb.collection("items").create(item)));
 }
 
 // Not using transactions for batch operations
 async function updateMany(items) {
   for (const item of items) {
-    await pb.collection('items').update(item.id, item);
+    await pb.collection("items").update(item.id, item);
   }
   // Each write is a separate transaction - slow!
 }
 
 // Large text fields without consideration
-const schema = [{
-  name: 'content',
-  type: 'text'  // Could be megabytes - affects all queries
-}];
+const schema = [
+  {
+    name: "content",
+    type: "text", // Could be megabytes - affects all queries
+  },
+];
 ```
 
 **Correct (SQLite-optimized patterns):**
@@ -41,17 +41,17 @@ const schema = [{
 // Use batch operations for multiple writes
 async function bulkInsert(items) {
   const batch = pb.createBatch();
-  items.forEach(item => {
-    batch.collection('items').create(item);
+  items.forEach((item) => {
+    batch.collection("items").create(item);
   });
-  await batch.send();  // Single transaction, much faster
+  await batch.send(); // Single transaction, much faster
 }
 
 // Batch updates
 async function updateMany(items) {
   const batch = pb.createBatch();
-  items.forEach(item => {
-    batch.collection('items').update(item.id, item);
+  items.forEach((item) => {
+    batch.collection("items").update(item.id, item);
   });
   await batch.send();
 }
@@ -61,7 +61,7 @@ async function bulkInsertLarge(items, chunkSize = 100) {
   for (let i = 0; i < items.length; i += chunkSize) {
     const chunk = items.slice(i, i + chunkSize);
     const batch = pb.createBatch();
-    chunk.forEach(item => batch.collection('items').create(item));
+    chunk.forEach((item) => batch.collection("items").create(item));
     await batch.send();
   }
 }
@@ -72,27 +72,27 @@ async function bulkInsertLarge(items, chunkSize = 100) {
 ```javascript
 // Separate large content into dedicated collection
 const postsSchema = [
-  { name: 'title', type: 'text' },
-  { name: 'summary', type: 'text', options: { maxLength: 500 } },
-  { name: 'author', type: 'relation' }
+  { name: "title", type: "text" },
+  { name: "summary", type: "text", options: { maxLength: 500 } },
+  { name: "author", type: "relation" },
   // Content in separate collection
 ];
 
 const postContentsSchema = [
-  { name: 'post', type: 'relation', required: true },
-  { name: 'content', type: 'editor' }  // Large HTML content
+  { name: "post", type: "relation", required: true },
+  { name: "content", type: "editor" }, // Large HTML content
 ];
 
 // Fetch content only when needed
 async function getPostList() {
-  return pb.collection('posts').getList(1, 20);  // Fast, no content
+  return pb.collection("posts").getList(1, 20); // Fast, no content
 }
 
 async function getPostWithContent(id) {
-  const post = await pb.collection('posts').getOne(id);
-  const content = await pb.collection('post_contents').getFirstListItem(
-    pb.filter('post = {:id}', { id })
-  );
+  const post = await pb.collection("posts").getOne(id);
+  const content = await pb
+    .collection("post_contents")
+    .getFirstListItem(pb.filter("post = {:id}", { id }));
   return { ...post, content: content.content };
 }
 ```
@@ -129,12 +129,12 @@ SELECT * FROM posts WHERE author = 'xxx' ORDER BY created DESC;
 
 **SQLite limitations and workarounds:**
 
-| Limitation | Workaround |
-|------------|------------|
-| Single writer | Use batch operations, queue writes |
-| No full-text by default | Use view collections with FTS5 |
-| File-based | SSD storage, avoid network mounts |
-| Memory for large queries | Pagination, limit result sizes |
+| Limitation               | Workaround                         |
+| ------------------------ | ---------------------------------- |
+| Single writer            | Use batch operations, queue writes |
+| No full-text by default  | Use view collections with FTS5     |
+| File-based               | SSD storage, avoid network mounts  |
+| Memory for large queries | Pagination, limit result sizes     |
 
 **Performance monitoring:**
 
@@ -157,6 +157,7 @@ SELECT * FROM posts WHERE author = 'xxx' ORDER BY created DESC;
 **When to consider alternatives:**
 
 Consider migrating from single PocketBase if:
+
 - Write throughput consistently > 1000/sec needed
 - Database size > 100GB
 - Complex transactions across tables
@@ -194,6 +195,7 @@ func main() {
 Note: CGO requires C compiler toolchain and cannot be cross-compiled as easily as pure Go.
 
 **Scaling options:**
+
 1. **Read replicas**: Litestream for SQLite replication
 2. **Sharding**: Multiple PocketBase instances by tenant/feature
 3. **Caching**: Redis/Memcached for read-heavy loads

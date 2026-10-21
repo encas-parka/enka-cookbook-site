@@ -13,40 +13,40 @@ All SDK methods return Promises that may reject with `ClientResponseError`. Prop
 
 ```javascript
 // No error handling
-const posts = await pb.collection('posts').getList();
+const posts = await pb.collection("posts").getList();
 
 // Generic catch that loses information
 try {
-  await pb.collection('posts').create({ title: '' });
+  await pb.collection("posts").create({ title: "" });
 } catch (e) {
-  alert('Something went wrong');  // No useful info
+  alert("Something went wrong"); // No useful info
 }
 
 // Not checking specific error types
 try {
-  await pb.collection('posts').getOne('nonexistent');
+  await pb.collection("posts").getOne("nonexistent");
 } catch (e) {
-  console.log(e.message);  // Missing status, response details
+  console.log(e.message); // Missing status, response details
 }
 ```
 
 **Correct (comprehensive error handling):**
 
 ```javascript
-import PocketBase, { ClientResponseError } from 'pocketbase';
+import PocketBase, { ClientResponseError } from "pocketbase";
 
-const pb = new PocketBase('http://127.0.0.1:8090');
+const pb = new PocketBase("http://127.0.0.1:8090");
 
 // Basic error handling with ClientResponseError
 async function createPost(data) {
   try {
-    return await pb.collection('posts').create(data);
+    return await pb.collection("posts").create(data);
   } catch (error) {
     if (error instanceof ClientResponseError) {
-      console.log('Status:', error.status);
-      console.log('Response:', error.response);
-      console.log('URL:', error.url);
-      console.log('Is abort:', error.isAbort);
+      console.log("Status:", error.status);
+      console.log("Response:", error.response);
+      console.log("URL:", error.url);
+      console.log("Is abort:", error.isAbort);
 
       // Handle specific status codes
       switch (error.status) {
@@ -56,32 +56,34 @@ async function createPost(data) {
           // as it may leak internal field names and validation rules
           const fieldErrors = {};
           if (error.response?.data) {
-            for (const [field, details] of Object.entries(error.response.data)) {
+            for (const [field, details] of Object.entries(
+              error.response.data,
+            )) {
               fieldErrors[field] = details.message;
             }
           }
-          return { error: 'validation', fields: fieldErrors };
+          return { error: "validation", fields: fieldErrors };
         case 401:
           // Unauthorized - need to login
-          return { error: 'unauthorized' };
+          return { error: "unauthorized" };
         case 403:
           // Forbidden - no permission
-          return { error: 'forbidden' };
+          return { error: "forbidden" };
         case 404:
           // Not found
-          return { error: 'not_found' };
+          return { error: "not_found" };
         default:
-          return { error: 'server_error' };
+          return { error: "server_error" };
       }
     }
-    throw error;  // Re-throw non-PocketBase errors
+    throw error; // Re-throw non-PocketBase errors
   }
 }
 
 // Handle validation errors with field details
 async function updateProfile(userId, data) {
   try {
-    return await pb.collection('users').update(userId, data);
+    return await pb.collection("users").update(userId, data);
   } catch (error) {
     if (error.status === 400 && error.response?.data) {
       // Extract field-specific errors
@@ -99,13 +101,13 @@ async function updateProfile(userId, data) {
 // Handle request cancellation
 async function searchWithCancel(query) {
   try {
-    return await pb.collection('posts').getList(1, 20, {
-      filter: pb.filter('title ~ {:query}', { query })
+    return await pb.collection("posts").getList(1, 20, {
+      filter: pb.filter("title ~ {:query}", { query }),
     });
   } catch (error) {
     if (error.isAbort) {
       // Request was cancelled (e.g., user typed again)
-      console.log('Search cancelled');
+      console.log("Search cancelled");
       return null;
     }
     throw error;
@@ -122,27 +124,27 @@ async function pbRequest(fn) {
         data: null,
         error: {
           status: error.status,
-          message: error.response?.message || 'Request failed',
-          data: error.response?.data || null
-        }
+          message: error.response?.message || "Request failed",
+          data: error.response?.data || null,
+        },
       };
     }
     return {
       data: null,
-      error: { status: 0, message: error.message, data: null }
+      error: { status: 0, message: error.message, data: null },
     };
   }
 }
 
 // Usage
 const { data, error } = await pbRequest(() =>
-  pb.collection('posts').getList(1, 20)
+  pb.collection("posts").getList(1, 20),
 );
 
 if (error) {
-  console.log('Failed:', error.message);
+  console.log("Failed:", error.message);
 } else {
-  console.log('Posts:', data.items);
+  console.log("Posts:", data.items);
 }
 ```
 
@@ -150,15 +152,16 @@ if (error) {
 
 ```typescript
 interface ClientResponseError {
-  url: string;           // The request URL
-  status: number;        // HTTP status code (0 if network error)
-  response: {            // API response body
+  url: string; // The request URL
+  status: number; // HTTP status code (0 if network error)
+  response: {
+    // API response body
     code: number;
     message: string;
     data: { [field: string]: { code: string; message: string } };
   };
-  isAbort: boolean;      // True if request was cancelled
-  cause: Error | null;   // Original error (added in JS SDK v0.26.1)
+  isAbort: boolean; // True if request was cancelled
+  cause: Error | null; // Original error (added in JS SDK v0.26.1)
 }
 ```
 

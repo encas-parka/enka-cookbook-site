@@ -51,19 +51,20 @@ if err != nil {
 ```javascript
 // JSVM - the callback receives the transactional app
 $app.runInTransaction((txApp) => {
-    const user = new Record(txApp.findCollectionByNameOrId("users"));
-    user.set("email", "a@b.co");
-    txApp.save(user);
+  const user = new Record(txApp.findCollectionByNameOrId("users"));
+  user.set("email", "a@b.co");
+  txApp.save(user);
 
-    const audit = new Record(txApp.findCollectionByNameOrId("audit"));
-    audit.set("user", user.id);
-    txApp.save(audit);
+  const audit = new Record(txApp.findCollectionByNameOrId("audit"));
+  audit.set("user", user.id);
+  txApp.save(audit);
 
-    // throw anywhere in this block to roll back the whole tx
+  // throw anywhere in this block to roll back the whole tx
 });
 ```
 
 **Rules of the transaction:**
+
 - **Use only `txApp` / the callback's scoped app** inside the block. Capturing the outer `app` defeats the purpose and can deadlock.
 - Inside event hooks, `e.App` is already the transactional app when the hook fires inside a tx - prefer it over a captured parent-scope `app` for the same reason.
 - Return an error (Go) or `throw` (JS) to roll back. A successful return commits.

@@ -155,7 +155,7 @@ server {
 
 ```yaml
 # docker-compose.yml
-version: '3.8'
+version: "3.8"
 
 services:
   pocketbase:
@@ -189,12 +189,12 @@ volumes:
 
 **Key configuration points:**
 
-| Feature | Why It Matters |
-|---------|---------------|
-| HTTPS | Encrypts traffic, required for auth |
-| SSE support | `proxy_buffering off` for realtime |
-| Rate limiting | Prevents abuse |
-| Security headers | XSS/clickjacking protection |
-| Keepalive | Connection reuse, better performance |
+| Feature          | Why It Matters                       |
+| ---------------- | ------------------------------------ |
+| HTTPS            | Encrypts traffic, required for auth  |
+| SSE support      | `proxy_buffering off` for realtime   |
+| Rate limiting    | Prevents abuse                       |
+| Security headers | XSS/clickjacking protection          |
+| Keepalive        | Connection reuse, better performance |
 
 Reference: [PocketBase Going to Production](https://pocketbase.io/docs/going-to-production/)

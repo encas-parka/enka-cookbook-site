@@ -32,20 +32,20 @@ Regular backups are essential for production deployments. PocketBase provides bu
 
 ```javascript
 // 1. Using PocketBase Admin API for backups
-const adminPb = new PocketBase('http://127.0.0.1:8090');
-await adminPb.collection('_superusers').authWithPassword(admin, password);
+const adminPb = new PocketBase("http://127.0.0.1:8090");
+await adminPb.collection("_superusers").authWithPassword(admin, password);
 
 // Create backup (includes database and files)
-async function createBackup(name = '') {
+async function createBackup(name = "") {
   const backup = await adminPb.backups.create(name);
-  console.log('Backup created:', backup.key);
+  console.log("Backup created:", backup.key);
   return backup;
 }
 
 // List available backups
 async function listBackups() {
   const backups = await adminPb.backups.getFullList();
-  backups.forEach(b => {
+  backups.forEach((b) => {
     console.log(`${b.key} - ${b.size} bytes - ${b.modified}`);
   });
   return backups;
@@ -62,7 +62,7 @@ async function downloadBackup(key) {
 // Restore from backup (CAUTION: overwrites current data!)
 async function restoreBackup(key) {
   await adminPb.backups.restore(key);
-  console.log('Restore initiated - server will restart');
+  console.log("Restore initiated - server will restart");
 }
 
 // Delete old backups
@@ -70,14 +70,14 @@ async function cleanupOldBackups(keepCount = 7) {
   const backups = await adminPb.backups.getFullList();
 
   // Sort by date, keep newest
-  const sorted = backups.sort((a, b) =>
-    new Date(b.modified) - new Date(a.modified)
+  const sorted = backups.sort(
+    (a, b) => new Date(b.modified) - new Date(a.modified),
   );
 
   const toDelete = sorted.slice(keepCount);
   for (const backup of toDelete) {
     await adminPb.backups.delete(backup.key);
-    console.log('Deleted old backup:', backup.key);
+    console.log("Deleted old backup:", backup.key);
   }
 }
 ```
@@ -118,27 +118,28 @@ await adminPb.settings.update({
   backups: {
     s3: {
       enabled: true,
-      bucket: 'my-pocketbase-backups',
-      region: 'us-east-1',
-      endpoint: 's3.amazonaws.com',
+      bucket: "my-pocketbase-backups",
+      region: "us-east-1",
+      endpoint: "s3.amazonaws.com",
       accessKey: process.env.AWS_ACCESS_KEY,
-      secret: process.env.AWS_SECRET_KEY
-    }
-  }
+      secret: process.env.AWS_SECRET_KEY,
+    },
+  },
 });
 ```
 
 **Backup best practices:**
 
-| Aspect | Recommendation |
-|--------|---------------|
-| Frequency | Daily minimum, hourly for critical apps |
-| Retention | 7-30 days of daily backups |
-| Storage | Off-site (S3, separate server) |
-| Testing | Monthly restore tests |
-| Monitoring | Alert on backup failures |
+| Aspect     | Recommendation                          |
+| ---------- | --------------------------------------- |
+| Frequency  | Daily minimum, hourly for critical apps |
+| Retention  | 7-30 days of daily backups              |
+| Storage    | Off-site (S3, separate server)          |
+| Testing    | Monthly restore tests                   |
+| Monitoring | Alert on backup failures                |
 
 **Pre-backup checklist:**
+
 - [ ] S3 or external storage configured
 - [ ] Automated schedule set up
 - [ ] Retention policy defined
@@ -196,18 +197,18 @@ await adminPb.settings.update({
     port: parseInt(process.env.SMTP_PORT),
     username: process.env.SMTP_USER,
     password: process.env.SMTP_PASS,
-    tls: true
+    tls: true,
   },
   meta: {
-    appName: 'My App',
-    appURL: 'https://myapp.com',
-    senderName: 'My App',
-    senderAddress: 'noreply@myapp.com'
-  }
+    appName: "My App",
+    appURL: "https://myapp.com",
+    senderName: "My App",
+    senderAddress: "noreply@myapp.com",
+  },
 });
 
 // Test email configuration
-await adminPb.settings.testEmail('users', 'test@example.com', 'verification');
+await adminPb.settings.testEmail("users", "test@example.com", "verification");
 ```
 
 **Configure S3 for file storage:**
@@ -217,17 +218,17 @@ await adminPb.settings.testEmail('users', 'test@example.com', 'verification');
 await adminPb.settings.update({
   s3: {
     enabled: true,
-    bucket: 'my-app-files',
-    region: 'us-east-1',
-    endpoint: 's3.amazonaws.com',
+    bucket: "my-app-files",
+    region: "us-east-1",
+    endpoint: "s3.amazonaws.com",
     accessKey: process.env.AWS_ACCESS_KEY,
     secret: process.env.AWS_SECRET_KEY,
-    forcePathStyle: false
-  }
+    forcePathStyle: false,
+  },
 });
 
 // Test S3 connection
-await adminPb.settings.testS3('storage');
+await adminPb.settings.testS3("storage");
 ```
 
 **Systemd service file:**
@@ -354,6 +355,7 @@ PocketBase v0.23+ includes built-in rate limiting. Enable it to protect against 
 **Configure via Admin Dashboard:**
 
 Navigate to Settings > Rate Limiter:
+
 - **Enable rate limiter**: Toggle on
 - **Max requests/second**: Default 10, adjust based on needs
 - **Exempt endpoints**: Optionally whitelist certain paths
@@ -362,14 +364,24 @@ Navigate to Settings > Rate Limiter:
 
 ```javascript
 // In pb_hooks/rate_limit.pb.js
-routerAdd("GET", "/api/public/*", (e) => {
-  // Custom rate limit for specific endpoints
-}, $apis.rateLimit(100, "10s")); // 100 requests per 10 seconds
+routerAdd(
+  "GET",
+  "/api/public/*",
+  (e) => {
+    // Custom rate limit for specific endpoints
+  },
+  $apis.rateLimit(100, "10s"),
+); // 100 requests per 10 seconds
 
 // Stricter limit for auth endpoints
-routerAdd("POST", "/api/collections/users/auth-*", (e) => {
-  // Auth endpoints need stricter limits
-}, $apis.rateLimit(5, "1m")); // 5 attempts per minute
+routerAdd(
+  "POST",
+  "/api/collections/users/auth-*",
+  (e) => {
+    // Auth endpoints need stricter limits
+  },
+  $apis.rateLimit(5, "1m"),
+); // 5 attempts per minute
 ```
 
 **Rate limiting with reverse proxy (additional layer):**
@@ -442,10 +454,12 @@ async function makeRequest(fn, retries = 0, maxRetries = 3) {
     if (error.status === 429 && retries < maxRetries) {
       // Rate limited - wait and retry with limit
       const retryAfter = error.response?.retryAfter || 60;
-      console.log(`Rate limited. Retry ${retries + 1}/${maxRetries} after ${retryAfter}s`);
+      console.log(
+        `Rate limited. Retry ${retries + 1}/${maxRetries} after ${retryAfter}s`,
+      );
 
       // Show user-friendly message
-      showMessage('Too many requests. Please wait a moment.');
+      showMessage("Too many requests. Please wait a moment.");
 
       await sleep(retryAfter * 1000);
       return makeRequest(fn, retries + 1, maxRetries);
@@ -455,21 +469,19 @@ async function makeRequest(fn, retries = 0, maxRetries = 3) {
 }
 
 // Usage
-const result = await makeRequest(() =>
-  pb.collection('posts').getList(1, 20)
-);
+const result = await makeRequest(() => pb.collection("posts").getList(1, 20));
 ```
 
 **Recommended limits by endpoint type:**
 
-| Endpoint Type | Suggested Limit | Reason |
-|--------------|-----------------|--------|
-| Auth endpoints | 5-10/min | Prevent brute-force |
-| Password reset | 3/hour | Prevent enumeration |
-| Record creation | 30/min | Prevent spam |
-| General API | 60-100/min | Normal usage |
-| Public read | 100-200/min | Higher for reads |
-| File uploads | 10/min | Resource-intensive |
+| Endpoint Type   | Suggested Limit | Reason              |
+| --------------- | --------------- | ------------------- |
+| Auth endpoints  | 5-10/min        | Prevent brute-force |
+| Password reset  | 3/hour          | Prevent enumeration |
+| Record creation | 30/min          | Prevent spam        |
+| General API     | 60-100/min      | Normal usage        |
+| Public read     | 100-200/min     | Higher for reads    |
+| File uploads    | 10/min          | Resource-intensive  |
 
 **Monitoring rate limit hits:**
 
@@ -478,11 +490,11 @@ const result = await makeRequest(() =>
 // Or set up alerting in your monitoring system
 
 // Client-side tracking
-pb.afterSend = function(response, data) {
+pb.afterSend = function (response, data) {
   if (response.status === 429) {
-    trackEvent('rate_limit_hit', {
+    trackEvent("rate_limit_hit", {
       endpoint: response.url,
-      timestamp: new Date()
+      timestamp: new Date(),
     });
   }
   return data;
@@ -643,7 +655,7 @@ server {
 
 ```yaml
 # docker-compose.yml
-version: '3.8'
+version: "3.8"
 
 services:
   pocketbase:
@@ -677,13 +689,13 @@ volumes:
 
 **Key configuration points:**
 
-| Feature | Why It Matters |
-|---------|---------------|
-| HTTPS | Encrypts traffic, required for auth |
-| SSE support | `proxy_buffering off` for realtime |
-| Rate limiting | Prevents abuse |
-| Security headers | XSS/clickjacking protection |
-| Keepalive | Connection reuse, better performance |
+| Feature          | Why It Matters                       |
+| ---------------- | ------------------------------------ |
+| HTTPS            | Encrypts traffic, required for auth  |
+| SSE support      | `proxy_buffering off` for realtime   |
+| Rate limiting    | Prevents abuse                       |
+| Security headers | XSS/clickjacking protection          |
+| Keepalive        | Connection reuse, better performance |
 
 Reference: [PocketBase Going to Production](https://pocketbase.io/docs/going-to-production/)
 
@@ -769,19 +781,25 @@ services:
     environment:
       GOMEMLIMIT: "512MiB"
       PB_ENCRYPTION_KEY: "${PB_ENCRYPTION_KEY}"
-    command: ["/pb/pocketbase", "serve", "--http=0.0.0.0:8080", "--encryptionEnv=PB_ENCRYPTION_KEY"]
+    command:
+      [
+        "/pb/pocketbase",
+        "serve",
+        "--http=0.0.0.0:8080",
+        "--encryptionEnv=PB_ENCRYPTION_KEY",
+      ]
 volumes:
   pb_data:
 ```
 
 **Quick-reference checklist:**
 
-| Concern | Fix |
-|---------|-----|
-| `Too many open files` errors | `ulimit -n 4096` (or `LimitNOFILE=4096` in systemd) |
-| OOM kill on constrained host | `GOMEMLIMIT=512MiB` env var |
+| Concern                          | Fix                                                  |
+| -------------------------------- | ---------------------------------------------------- |
+| `Too many open files` errors     | `ulimit -n 4096` (or `LimitNOFILE=4096` in systemd)  |
+| OOM kill on constrained host     | `GOMEMLIMIT=512MiB` env var                          |
 | Credentials visible in DB backup | `--encryptionEnv=YOUR_VAR` with a 32-char random key |
-| Persistent data in Docker | Mount volume at `/pb/pb_data` |
+| Persistent data in Docker        | Mount volume at `/pb/pb_data`                        |
 
 > **v0.38+:** PocketBase processes sharing one `pb_data` sync runtime state (settings, collections, memory store) through a debounced watcher on the special `pb_data/.notify` dir. Running a console command (e.g. `./pocketbase superuser ips ...`) against a live server's `pb_data` is now safe — the server picks the change up without a restart.
 
@@ -799,24 +817,24 @@ PocketBase uses SQLite with optimized defaults. Understanding its characteristic
 // Heavy concurrent writes - SQLite bottleneck
 async function bulkInsert(items) {
   // Parallel writes cause lock contention
-  await Promise.all(items.map(item =>
-    pb.collection('items').create(item)
-  ));
+  await Promise.all(items.map((item) => pb.collection("items").create(item)));
 }
 
 // Not using transactions for batch operations
 async function updateMany(items) {
   for (const item of items) {
-    await pb.collection('items').update(item.id, item);
+    await pb.collection("items").update(item.id, item);
   }
   // Each write is a separate transaction - slow!
 }
 
 // Large text fields without consideration
-const schema = [{
-  name: 'content',
-  type: 'text'  // Could be megabytes - affects all queries
-}];
+const schema = [
+  {
+    name: "content",
+    type: "text", // Could be megabytes - affects all queries
+  },
+];
 ```
 
 **Correct (SQLite-optimized patterns):**
@@ -825,17 +843,17 @@ const schema = [{
 // Use batch operations for multiple writes
 async function bulkInsert(items) {
   const batch = pb.createBatch();
-  items.forEach(item => {
-    batch.collection('items').create(item);
+  items.forEach((item) => {
+    batch.collection("items").create(item);
   });
-  await batch.send();  // Single transaction, much faster
+  await batch.send(); // Single transaction, much faster
 }
 
 // Batch updates
 async function updateMany(items) {
   const batch = pb.createBatch();
-  items.forEach(item => {
-    batch.collection('items').update(item.id, item);
+  items.forEach((item) => {
+    batch.collection("items").update(item.id, item);
   });
   await batch.send();
 }
@@ -845,7 +863,7 @@ async function bulkInsertLarge(items, chunkSize = 100) {
   for (let i = 0; i < items.length; i += chunkSize) {
     const chunk = items.slice(i, i + chunkSize);
     const batch = pb.createBatch();
-    chunk.forEach(item => batch.collection('items').create(item));
+    chunk.forEach((item) => batch.collection("items").create(item));
     await batch.send();
   }
 }
@@ -856,27 +874,27 @@ async function bulkInsertLarge(items, chunkSize = 100) {
 ```javascript
 // Separate large content into dedicated collection
 const postsSchema = [
-  { name: 'title', type: 'text' },
-  { name: 'summary', type: 'text', options: { maxLength: 500 } },
-  { name: 'author', type: 'relation' }
+  { name: "title", type: "text" },
+  { name: "summary", type: "text", options: { maxLength: 500 } },
+  { name: "author", type: "relation" },
   // Content in separate collection
 ];
 
 const postContentsSchema = [
-  { name: 'post', type: 'relation', required: true },
-  { name: 'content', type: 'editor' }  // Large HTML content
+  { name: "post", type: "relation", required: true },
+  { name: "content", type: "editor" }, // Large HTML content
 ];
 
 // Fetch content only when needed
 async function getPostList() {
-  return pb.collection('posts').getList(1, 20);  // Fast, no content
+  return pb.collection("posts").getList(1, 20); // Fast, no content
 }
 
 async function getPostWithContent(id) {
-  const post = await pb.collection('posts').getOne(id);
-  const content = await pb.collection('post_contents').getFirstListItem(
-    pb.filter('post = {:id}', { id })
-  );
+  const post = await pb.collection("posts").getOne(id);
+  const content = await pb
+    .collection("post_contents")
+    .getFirstListItem(pb.filter("post = {:id}", { id }));
   return { ...post, content: content.content };
 }
 ```
@@ -913,12 +931,12 @@ SELECT * FROM posts WHERE author = 'xxx' ORDER BY created DESC;
 
 **SQLite limitations and workarounds:**
 
-| Limitation | Workaround |
-|------------|------------|
-| Single writer | Use batch operations, queue writes |
-| No full-text by default | Use view collections with FTS5 |
-| File-based | SSD storage, avoid network mounts |
-| Memory for large queries | Pagination, limit result sizes |
+| Limitation               | Workaround                         |
+| ------------------------ | ---------------------------------- |
+| Single writer            | Use batch operations, queue writes |
+| No full-text by default  | Use view collections with FTS5     |
+| File-based               | SSD storage, avoid network mounts  |
+| Memory for large queries | Pagination, limit result sizes     |
 
 **Performance monitoring:**
 
@@ -941,6 +959,7 @@ SELECT * FROM posts WHERE author = 'xxx' ORDER BY created DESC;
 **When to consider alternatives:**
 
 Consider migrating from single PocketBase if:
+
 - Write throughput consistently > 1000/sec needed
 - Database size > 100GB
 - Complex transactions across tables
@@ -978,6 +997,7 @@ func main() {
 Note: CGO requires C compiler toolchain and cannot be cross-compiled as easily as pure Go.
 
 **Scaling options:**
+
 1. **Read replicas**: Litestream for SQLite replication
 2. **Sharding**: Multiple PocketBase instances by tenant/feature
 3. **Caching**: Redis/Memcached for read-heavy loads
@@ -1016,4 +1036,3 @@ PocketBase v0.38 added an optional superuser IPs/CIDR whitelist (Dashboard > Set
 Pair this with a reverse proxy that forwards the real client IP (see deploy-reverse-proxy) — the whitelist checks the client IP PocketBase resolves, so a misconfigured proxy that reports its own IP will either lock everyone out or let everyone through.
 
 Reference: [Going to production - Limit superusers to specific IPs/subnets](https://pocketbase.io/docs/going-to-production/#limit-superusers-to-specific-ipssubnets)
-

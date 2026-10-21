@@ -16,10 +16,10 @@ significantly from v4**.
 
 ```svelte
 <div class="dock z-40 lg:hidden">
-	<button class={is_active ? 'dock-active' : ''} onclick={navigate}>
-		<Icon size="24px" />
-		<span class="dock-label">Label</span>
-	</button>
+  <button class={is_active ? "dock-active" : ""} onclick={navigate}>
+    <Icon size="24px" />
+    <span class="dock-label">Label</span>
+  </button>
 </div>
 ```
 
@@ -39,13 +39,13 @@ ring** on inputs. Add this CSS fix to `app.css`:
 ```css
 /* Fix double focus ring on daisyUI inputs */
 .input:has(input:focus) {
-	outline: 2px solid var(--input-color, var(--color-base-content));
-	outline-offset: 2px;
+  outline: 2px solid var(--input-color, var(--color-base-content));
+  outline-offset: 2px;
 }
 
 .input input:focus {
-	outline: none;
-	box-shadow: none;
+  outline: none;
+  box-shadow: none;
 }
 ```
 
@@ -55,16 +55,16 @@ ring** on inputs. Add this CSS fix to `app.css`:
 
 ```svelte
 <fieldset class="fieldset">
-	<legend class="fieldset-legend">Email</legend>
-	<label class="input w-full">
-		<input
-			type="email"
-			name="email"
-			placeholder="Email"
-			class="grow"
-			required
-		/>
-	</label>
+  <legend class="fieldset-legend">Email</legend>
+  <label class="input w-full">
+    <input
+      type="email"
+      name="email"
+      placeholder="Email"
+      class="grow"
+      required
+    />
+  </label>
 </fieldset>
 ```
 
@@ -77,18 +77,18 @@ Use the `validator` class for automatic validation UI:
 
 ```svelte
 <fieldset class="fieldset">
-	<legend class="fieldset-legend">Password</legend>
-	<label class="validator input w-full">
-		<input
-			type="password"
-			name="password"
-			placeholder="At least 8 characters"
-			class="grow"
-			required
-			minlength="8"
-		/>
-	</label>
-	<p class="label">Must be at least 8 characters</p>
+  <legend class="fieldset-legend">Password</legend>
+  <label class="validator input w-full">
+    <input
+      type="password"
+      name="password"
+      placeholder="At least 8 characters"
+      class="grow"
+      required
+      minlength="8"
+    />
+  </label>
+  <p class="label">Must be at least 8 characters</p>
 </fieldset>
 ```
 
@@ -98,20 +98,18 @@ Use `<p class="label">` for helper text below inputs:
 
 ```svelte
 <fieldset class="fieldset">
-	<legend class="fieldset-legend">Username</legend>
-	<label class="validator input w-full">
-		<input
-			type="text"
-			name="username"
-			placeholder="johndoe"
-			class="grow"
-			required
-			pattern="[a-z0-9_]+"
-		/>
-	</label>
-	<p class="label">
-		Lowercase letters, numbers, and underscores only
-	</p>
+  <legend class="fieldset-legend">Username</legend>
+  <label class="validator input w-full">
+    <input
+      type="text"
+      name="username"
+      placeholder="johndoe"
+      class="grow"
+      required
+      pattern="[a-z0-9_]+"
+    />
+  </label>
+  <p class="label">Lowercase letters, numbers, and underscores only</p>
 </fieldset>
 ```
 
@@ -119,41 +117,39 @@ Use `<p class="label">` for helper text below inputs:
 
 ```svelte
 <script lang="ts">
-	import { my_form_function } from './my.remote';
+  import { my_form_function } from "./my.remote";
 </script>
 
 <h2 class="mb-6 card-title text-2xl">Form Title</h2>
 
 <form {...my_form_function} class="space-y-4">
-	<fieldset class="fieldset">
-		<legend class="fieldset-legend">Name</legend>
-		<label class="validator input w-full">
-			<input
-				type="text"
-				name="name"
-				placeholder="Your name"
-				class="grow"
-				required
-			/>
-		</label>
-	</fieldset>
+  <fieldset class="fieldset">
+    <legend class="fieldset-legend">Name</legend>
+    <label class="validator input w-full">
+      <input
+        type="text"
+        name="name"
+        placeholder="Your name"
+        class="grow"
+        required
+      />
+    </label>
+  </fieldset>
 
-	<fieldset class="fieldset">
-		<legend class="fieldset-legend">Email</legend>
-		<label class="validator input w-full">
-			<input
-				type="email"
-				name="email"
-				placeholder="Email"
-				class="grow"
-				required
-			/>
-		</label>
-	</fieldset>
+  <fieldset class="fieldset">
+    <legend class="fieldset-legend">Email</legend>
+    <label class="validator input w-full">
+      <input
+        type="email"
+        name="email"
+        placeholder="Email"
+        class="grow"
+        required
+      />
+    </label>
+  </fieldset>
 
-	<button class="btn mt-6 btn-block btn-primary" type="submit">
-		Submit
-	</button>
+  <button class="btn mt-6 btn-block btn-primary" type="submit"> Submit </button>
 </form>
 ```
 
@@ -163,21 +159,19 @@ Remote functions automatically provide error states:
 
 ```svelte
 <script lang="ts">
-	import { my_form } from './my.remote';
+  import { my_form } from "./my.remote";
 </script>
 
 <form {...my_form}>
-	<!-- form fields -->
+  <!-- form fields -->
 
-	{#if my_form.error}
-		<div class="alert alert-error">
-			<span>{my_form.error}</span>
-		</div>
-	{/if}
+  {#if my_form.error}
+    <div class="alert alert-error">
+      <span>{my_form.error}</span>
+    </div>
+  {/if}
 
-	<button class="btn btn-block btn-primary" type="submit">
-		Submit
-	</button>
+  <button class="btn btn-block btn-primary" type="submit"> Submit </button>
 </form>
 ```
 
@@ -188,10 +182,8 @@ Remote functions automatically provide error states:
 ```html
 <label class="input w-full"><!-- Basic input --></label>
 <label class="validator input w-full"><!-- With validation --></label>
-<label class="input w-full input-primary"
-	><!-- Colored border --></label
->
-<label class="input input-lg w-full"><!-- Large size --></label>
+<label class="input w-full input-primary"><!-- Colored border --></label>
+<label class="input w-full input-lg"><!-- Large size --></label>
 ```
 
 ### Input Element Classes
@@ -218,12 +210,12 @@ Always use `class="grow"` on the actual `<input>` element:
 
 ```svelte
 <fieldset class="fieldset">
-	<legend class="fieldset-legend">Choose option</legend>
-	<select name="type" class="select w-full" required>
-		<option value="" disabled>Select type</option>
-		<option value="meeting">Meeting</option>
-		<option value="call">Call</option>
-	</select>
+  <legend class="fieldset-legend">Choose option</legend>
+  <select name="type" class="select w-full" required>
+    <option value="" disabled>Select type</option>
+    <option value="meeting">Meeting</option>
+    <option value="call">Call</option>
+  </select>
 </fieldset>
 ```
 
@@ -238,12 +230,12 @@ Always use `class="grow"` on the actual `<input>` element:
 
 ```svelte
 <fieldset class="fieldset">
-	<legend class="fieldset-legend">Required Selection</legend>
-	<select class="validator select w-full" required>
-		<option value="" disabled selected>Choose</option>
-		<option value="1">Option 1</option>
-	</select>
-	<p class="validator-hint">Please select an option</p>
+  <legend class="fieldset-legend">Required Selection</legend>
+  <select class="validator select w-full" required>
+    <option value="" disabled selected>Choose</option>
+    <option value="1">Option 1</option>
+  </select>
+  <p class="validator-hint">Please select an option</p>
 </fieldset>
 ```
 
@@ -253,14 +245,13 @@ Always use `class="grow"` on the actual `<input>` element:
 
 ```svelte
 <fieldset class="fieldset">
-	<legend class="fieldset-legend">Notes</legend>
-	<textarea
-		name="notes"
-		class="textarea w-full"
-		rows="4"
-		placeholder="Enter your notes..."
-	></textarea>
-	<p class="label">Helper text here</p>
+  <legend class="fieldset-legend">Notes</legend>
+  <textarea
+    name="notes"
+    class="textarea w-full"
+    rows="4"
+    placeholder="Enter your notes..."></textarea>
+  <p class="label">Helper text here</p>
 </fieldset>
 ```
 
@@ -274,8 +265,7 @@ Always use `class="grow"` on the actual `<input>` element:
 ### With Validation
 
 ```svelte
-<textarea class="validator textarea w-full" required minlength="10"
-></textarea>
+<textarea class="validator textarea w-full" required minlength="10"></textarea>
 <p class="validator-hint">Minimum 10 characters required</p>
 ```
 
@@ -299,7 +289,7 @@ Always use `class="grow"` on the actual `<input>` element:
 
 ```html
 <label class="validator input">
-	<input type="text" class="grow" />
+  <input type="text" class="grow" />
 </label>
 ```
 
@@ -307,7 +297,7 @@ Always use `class="grow"` on the actual `<input>` element:
 
 ```html
 <label class="validator input w-full">
-	<input type="text" class="grow" />
+  <input type="text" class="grow" />
 </label>
 ```
 
@@ -315,9 +305,9 @@ Always use `class="grow"` on the actual `<input>` element:
 
 ```html
 <label class="select w-full">
-	<select name="type">
-		<option>Option 1</option>
-	</select>
+  <select name="type">
+    <option>Option 1</option>
+  </select>
 </label>
 ```
 
@@ -325,7 +315,7 @@ Always use `class="grow"` on the actual `<input>` element:
 
 ```html
 <select name="type" class="select w-full">
-	<option>Option 1</option>
+  <option>Option 1</option>
 </select>
 ```
 
@@ -349,10 +339,10 @@ Always use `class="grow"` on the actual `<input>` element:
 
 ```html
 <div class="form-control">
-	<label class="label">
-		<span class="label-text">Email</span>
-	</label>
-	<input type="email" class="input-bordered input" />
+  <label class="label">
+    <span class="label-text">Email</span>
+  </label>
+  <input type="email" class="input-bordered input" />
 </div>
 ```
 
@@ -360,10 +350,10 @@ Always use `class="grow"` on the actual `<input>` element:
 
 ```html
 <fieldset class="fieldset">
-	<legend class="fieldset-legend">Email</legend>
-	<label class="validator input w-full">
-		<input type="email" class="grow" />
-	</label>
+  <legend class="fieldset-legend">Email</legend>
+  <label class="validator input w-full">
+    <input type="email" class="grow" />
+  </label>
 </fieldset>
 ```
 
@@ -373,6 +363,6 @@ Use `space-y-4` on the form for consistent spacing:
 
 ```html
 <form class="space-y-4">
-	<!-- fields here -->
+  <!-- fields here -->
 </form>
 ```

@@ -67,25 +67,27 @@ app.OnRecordAfterCreateSuccess("orders").BindFunc(func(e *core.RecordEvent) erro
 ```javascript
 // JSVM - $mails global exposes message factories
 onRecordAfterCreateSuccess((e) => {
-    const meta = $app.settings().meta;
+  const meta = $app.settings().meta;
 
-    const message = new MailerMessage({
-        from: {
-            address: meta.senderAddress,
-            name:    meta.senderName,
-        },
-        to:      [{ address: e.record.get("email") }],
-        subject: "Order confirmed",
-        html:    `<p>Thanks for order ${e.record.id}</p>`,
-    });
+  const message = new MailerMessage({
+    from: {
+      address: meta.senderAddress,
+      name: meta.senderName,
+    },
+    to: [{ address: e.record.get("email") }],
+    subject: "Order confirmed",
+    html: `<p>Thanks for order ${e.record.id}</p>`,
+  });
 
-    try {
-        $app.newMailClient().send(message);
-    } catch (err) {
-        $app.logger().error("order email send failed", "err", err, "id", e.record.id);
-        // swallow - do not rollback the order
-    }
-    e.next();
+  try {
+    $app.newMailClient().send(message);
+  } catch (err) {
+    $app
+      .logger()
+      .error("order email send failed", "err", err, "id", e.record.id);
+    // swallow - do not rollback the order
+  }
+  e.next();
 }, "orders");
 ```
 
@@ -103,6 +105,7 @@ onRecordAfterCreateSuccess((e) => {
 ```
 
 **Rules:**
+
 - **Always change `Meta.SenderAddress`** before shipping. In development, use Mailpit or MailHog; in production, use a verified domain that matches your SPF/DKIM records.
 - **Resolve the sender from `app.Settings().Meta` at send-time**, not at startup. Settings are mutable from the admin UI.
 - **Create the client per send** (`app.NewMailClient()` / `$app.newMailClient()`). It is cheap - it re-reads the SMTP settings each time, so config changes take effect without a restart.

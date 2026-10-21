@@ -90,11 +90,12 @@ func main() {
 // Top-level cronAdd() registers the job at hook-load time.
 // The handler runs in its own goroutine and has access to $app.
 cronAdd("notify-unpublished", "*/30 * * * *", () => {
-    // Runs every 30 minutes
-    const records = $app.findAllRecords("posts",
-        $dbx.hashExp({ status: "draft" })
-    );
-    console.log(`Found ${records.length} unpublished posts`);
+  // Runs every 30 minutes
+  const records = $app.findAllRecords(
+    "posts",
+    $dbx.hashExp({ status: "draft" }),
+  );
+  console.log(`Found ${records.length} unpublished posts`);
 });
 
 // Remove a registered job by ID (useful in tests or feature toggles)
@@ -120,6 +121,7 @@ Examples:
 ```
 
 **Key rules:**
+
 - System jobs use the `__pb*__` ID prefix (e.g. `__pbLogsCleanup__`). Never call `RemoveAll()` or use that prefix for your own jobs.
 - All registered cron jobs are visible and can be manually triggered from _Dashboard > Settings > Crons_.
 - JSVM handlers have access to `$app` but **not** to outer-scope variables (see JSVM scope rule).

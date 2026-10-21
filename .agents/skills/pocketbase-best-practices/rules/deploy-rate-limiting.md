@@ -38,6 +38,7 @@ PocketBase v0.23+ includes built-in rate limiting. Enable it to protect against 
 **Configure via Admin Dashboard:**
 
 Navigate to Settings > Rate Limiter:
+
 - **Enable rate limiter**: Toggle on
 - **Max requests/second**: Default 10, adjust based on needs
 - **Exempt endpoints**: Optionally whitelist certain paths
@@ -46,14 +47,24 @@ Navigate to Settings > Rate Limiter:
 
 ```javascript
 // In pb_hooks/rate_limit.pb.js
-routerAdd("GET", "/api/public/*", (e) => {
-  // Custom rate limit for specific endpoints
-}, $apis.rateLimit(100, "10s")); // 100 requests per 10 seconds
+routerAdd(
+  "GET",
+  "/api/public/*",
+  (e) => {
+    // Custom rate limit for specific endpoints
+  },
+  $apis.rateLimit(100, "10s"),
+); // 100 requests per 10 seconds
 
 // Stricter limit for auth endpoints
-routerAdd("POST", "/api/collections/users/auth-*", (e) => {
-  // Auth endpoints need stricter limits
-}, $apis.rateLimit(5, "1m")); // 5 attempts per minute
+routerAdd(
+  "POST",
+  "/api/collections/users/auth-*",
+  (e) => {
+    // Auth endpoints need stricter limits
+  },
+  $apis.rateLimit(5, "1m"),
+); // 5 attempts per minute
 ```
 
 **Rate limiting with reverse proxy (additional layer):**
@@ -126,10 +137,12 @@ async function makeRequest(fn, retries = 0, maxRetries = 3) {
     if (error.status === 429 && retries < maxRetries) {
       // Rate limited - wait and retry with limit
       const retryAfter = error.response?.retryAfter || 60;
-      console.log(`Rate limited. Retry ${retries + 1}/${maxRetries} after ${retryAfter}s`);
+      console.log(
+        `Rate limited. Retry ${retries + 1}/${maxRetries} after ${retryAfter}s`,
+      );
 
       // Show user-friendly message
-      showMessage('Too many requests. Please wait a moment.');
+      showMessage("Too many requests. Please wait a moment.");
 
       await sleep(retryAfter * 1000);
       return makeRequest(fn, retries + 1, maxRetries);
@@ -139,21 +152,19 @@ async function makeRequest(fn, retries = 0, maxRetries = 3) {
 }
 
 // Usage
-const result = await makeRequest(() =>
-  pb.collection('posts').getList(1, 20)
-);
+const result = await makeRequest(() => pb.collection("posts").getList(1, 20));
 ```
 
 **Recommended limits by endpoint type:**
 
-| Endpoint Type | Suggested Limit | Reason |
-|--------------|-----------------|--------|
-| Auth endpoints | 5-10/min | Prevent brute-force |
-| Password reset | 3/hour | Prevent enumeration |
-| Record creation | 30/min | Prevent spam |
-| General API | 60-100/min | Normal usage |
-| Public read | 100-200/min | Higher for reads |
-| File uploads | 10/min | Resource-intensive |
+| Endpoint Type   | Suggested Limit | Reason              |
+| --------------- | --------------- | ------------------- |
+| Auth endpoints  | 5-10/min        | Prevent brute-force |
+| Password reset  | 3/hour          | Prevent enumeration |
+| Record creation | 30/min          | Prevent spam        |
+| General API     | 60-100/min      | Normal usage        |
+| Public read     | 100-200/min     | Higher for reads    |
+| File uploads    | 10/min          | Resource-intensive  |
 
 **Monitoring rate limit hits:**
 
@@ -162,11 +173,11 @@ const result = await makeRequest(() =>
 // Or set up alerting in your monitoring system
 
 // Client-side tracking
-pb.afterSend = function(response, data) {
+pb.afterSend = function (response, data) {
   if (response.status === 429) {
-    trackEvent('rate_limit_hit', {
+    trackEvent("rate_limit_hit", {
       endpoint: response.url,
-      timestamp: new Date()
+      timestamp: new Date(),
     });
   }
   return data;

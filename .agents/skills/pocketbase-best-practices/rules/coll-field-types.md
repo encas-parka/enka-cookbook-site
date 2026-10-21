@@ -14,15 +14,15 @@ Selecting the wrong field type leads to data validation issues, wasted storage, 
 ```javascript
 // Using plain text fields for structured data
 const collection = {
-  name: 'products',
+  name: "products",
   schema: [
-    { name: 'price', type: 'text' },      // Should be number
-    { name: 'email', type: 'text' },       // Should be email
-    { name: 'website', type: 'text' },     // Should be url
-    { name: 'active', type: 'text' },      // Should be bool
-    { name: 'tags', type: 'text' },        // Should be select or json
-    { name: 'created', type: 'text' }      // Should be autodate
-  ]
+    { name: "price", type: "text" }, // Should be number
+    { name: "email", type: "text" }, // Should be email
+    { name: "website", type: "text" }, // Should be url
+    { name: "active", type: "text" }, // Should be bool
+    { name: "tags", type: "text" }, // Should be select or json
+    { name: "created", type: "text" }, // Should be autodate
+  ],
 };
 // No validation, inconsistent data, manual parsing required
 ```
@@ -32,25 +32,30 @@ const collection = {
 ```javascript
 // Using specialized field types with proper validation
 const collection = {
-  name: 'products',
-  type: 'base',
+  name: "products",
+  type: "base",
   schema: [
-    { name: 'price', type: 'number', options: { min: 0 } },
-    { name: 'email', type: 'email' },
-    { name: 'website', type: 'url' },
-    { name: 'active', type: 'bool' },
-    { name: 'tags', type: 'select', options: {
-      maxSelect: 5,
-      values: ['electronics', 'clothing', 'food', 'other']
-    }},
-    { name: 'metadata', type: 'json' }
+    { name: "price", type: "number", options: { min: 0 } },
+    { name: "email", type: "email" },
+    { name: "website", type: "url" },
+    { name: "active", type: "bool" },
+    {
+      name: "tags",
+      type: "select",
+      options: {
+        maxSelect: 5,
+        values: ["electronics", "clothing", "food", "other"],
+      },
+    },
+    { name: "metadata", type: "json" },
     // created/updated are automatic system fields
-  ]
+  ],
 };
 // Built-in validation, proper indexing, type-safe queries
 ```
 
 **Available field types:**
+
 - `text` - Plain text with optional min/max length, regex pattern
 - `number` - Integer or decimal with optional min/max
 - `bool` - True/false values

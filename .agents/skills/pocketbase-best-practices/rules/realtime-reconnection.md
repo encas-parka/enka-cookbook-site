@@ -15,7 +15,7 @@ Realtime connections can disconnect due to network issues or server restarts. Im
 
 ```javascript
 // No reconnection handling - stale data after disconnect
-pb.collection('posts').subscribe('*', (e) => {
+pb.collection("posts").subscribe("*", (e) => {
   updateUI(e.record);
 });
 // If connection drops, UI shows stale data indefinitely
@@ -23,7 +23,7 @@ pb.collection('posts').subscribe('*', (e) => {
 // Assuming connection is always stable
 function PostList() {
   useEffect(() => {
-    pb.collection('posts').subscribe('*', handleChange);
+    pb.collection("posts").subscribe("*", handleChange);
   }, []);
   // No awareness of connection state
 }
@@ -39,8 +39,8 @@ function useRealtimeConnection() {
 
   useEffect(() => {
     // Track connection state
-    const unsubConnect = pb.realtime.subscribe('PB_CONNECT', (e) => {
-      console.log('Connected, client ID:', e.clientId);
+    const unsubConnect = pb.realtime.subscribe("PB_CONNECT", (e) => {
+      console.log("Connected, client ID:", e.clientId);
       setConnected(true);
 
       // Re-sync data after reconnection
@@ -52,7 +52,7 @@ function useRealtimeConnection() {
 
     // Handle disconnection
     pb.realtime.onDisconnect = (activeSubscriptions) => {
-      console.log('Disconnected');
+      console.log("Disconnected");
       setConnected(false);
       showOfflineIndicator();
     };
@@ -68,9 +68,9 @@ function useRealtimeConnection() {
 // Sync missed updates after reconnection
 async function syncMissedUpdates(since) {
   // Fetch records modified since last sync
-  const updatedPosts = await pb.collection('posts').getList(1, 100, {
-    filter: pb.filter('updated > {:since}', { since }),
-    sort: '-updated'
+  const updatedPosts = await pb.collection("posts").getList(1, 100, {
+    filter: pb.filter("updated > {:since}", { since }),
+    sort: "-updated",
   });
 
   // Merge with local state
@@ -90,14 +90,14 @@ class RealtimeManager {
   }
 
   setupConnectionHandlers() {
-    this.pb.realtime.subscribe('PB_CONNECT', () => {
-      console.log('Realtime connected');
+    this.pb.realtime.subscribe("PB_CONNECT", () => {
+      console.log("Realtime connected");
       this.reconnectAttempts = 0;
       this.onReconnect();
     });
 
     this.pb.realtime.onDisconnect = (subs) => {
-      console.log('Realtime disconnected');
+      console.log("Realtime disconnected");
       this.scheduleReconnect();
     };
   }
@@ -106,7 +106,7 @@ class RealtimeManager {
     // Exponential backoff with jitter
     const delay = Math.min(
       1000 * Math.pow(2, this.reconnectAttempts) + Math.random() * 1000,
-      this.maxReconnectDelay
+      this.maxReconnectDelay,
     );
 
     this.reconnectAttempts++;
@@ -128,15 +128,15 @@ class RealtimeManager {
   async syncCollection(collection, since) {
     try {
       const updates = await this.pb.collection(collection).getList(1, 1000, {
-        filter: this.pb.filter('updated > {:since}', { since }),
-        sort: 'updated'
+        filter: this.pb.filter("updated > {:since}", { since }),
+        sort: "updated",
       });
 
       // Notify subscribers of missed updates
       const handler = this.subscriptions.get(collection);
       if (handler) {
-        updates.items.forEach(record => {
-          handler({ action: 'update', record });
+        updates.items.forEach((record) => {
+          handler({ action: "update", record });
         });
       }
 
@@ -150,7 +150,7 @@ class RealtimeManager {
     this.subscriptions.set(collection, handler);
     this.lastSyncTimes.set(collection, new Date());
 
-    return this.pb.collection(collection).subscribe('*', (e) => {
+    return this.pb.collection(collection).subscribe("*", (e) => {
       this.lastSyncTimes.set(collection, new Date());
       handler(e);
     });
@@ -160,21 +160,21 @@ class RealtimeManager {
     // Refresh auth token before resubscribing to ensure valid credentials
     if (this.pb.authStore.isValid) {
       try {
-        await this.pb.collection('users').authRefresh();
+        await this.pb.collection("users").authRefresh();
       } catch {
         this.pb.authStore.clear();
       }
     }
 
     for (const [collection, handler] of this.subscriptions) {
-      this.pb.collection(collection).subscribe('*', handler);
+      this.pb.collection(collection).subscribe("*", handler);
     }
   }
 }
 
 // Usage
 const realtime = new RealtimeManager(pb);
-await realtime.subscribe('posts', handlePostChange);
+await realtime.subscribe("posts", handlePostChange);
 ```
 
 **Connection timeout handling:**
@@ -185,14 +185,14 @@ await realtime.subscribe('posts', handlePostChange);
 
 let lastHeartbeat = Date.now();
 
-pb.realtime.subscribe('PB_CONNECT', () => {
+pb.realtime.subscribe("PB_CONNECT", () => {
   lastHeartbeat = Date.now();
 });
 
 // Check for stale connection
 setInterval(() => {
   if (Date.now() - lastHeartbeat > 6 * 60 * 1000) {
-    console.log('Connection may be stale, refreshing...');
+    console.log("Connection may be stale, refreshing...");
     pb.realtime.unsubscribe();
     resubscribeAll();
   }

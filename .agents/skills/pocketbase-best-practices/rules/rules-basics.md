@@ -14,12 +14,12 @@ PocketBase uses five collection-level rules to control access. Understanding the
 ```javascript
 // Collection with overly permissive rules
 const collection = {
-  name: 'messages',
-  listRule: '',      // Anyone can list all messages!
-  viewRule: '',      // Anyone can view any message!
-  createRule: '',    // Anyone can create messages!
-  updateRule: '',    // Anyone can update any message!
-  deleteRule: ''     // Anyone can delete any message!
+  name: "messages",
+  listRule: "", // Anyone can list all messages!
+  viewRule: "", // Anyone can view any message!
+  createRule: "", // Anyone can create messages!
+  updateRule: "", // Anyone can update any message!
+  deleteRule: "", // Anyone can delete any message!
 };
 // Complete security bypass - all data exposed
 ```
@@ -29,27 +29,27 @@ const collection = {
 ```javascript
 // Collection with proper access control
 const collection = {
-  name: 'messages',
+  name: "messages",
   // null = locked, only superusers can access
-  listRule: null,    // Default: locked to superusers
+  listRule: null, // Default: locked to superusers
 
   // '' (empty string) = open to everyone (use sparingly)
-  viewRule: '@request.auth.id != ""',  // Any authenticated user
+  viewRule: '@request.auth.id != ""', // Any authenticated user
 
   // Expression = conditional access
-  createRule: '@request.auth.id != ""',  // Must be logged in
-  updateRule: 'author = @request.auth.id',  // Only author
-  deleteRule: 'author = @request.auth.id'   // Only author
+  createRule: '@request.auth.id != ""', // Must be logged in
+  updateRule: "author = @request.auth.id", // Only author
+  deleteRule: "author = @request.auth.id", // Only author
 };
 ```
 
 **Rule types explained:**
 
-| Rule Value | Meaning | Use Case |
-|------------|---------|----------|
-| `null` | Locked (superusers only) | Admin-only data, system tables |
-| `''` (empty string) | Open to everyone | Public content, no auth required |
-| `'expression'` | Conditional access | Most common - check auth, ownership |
+| Rule Value          | Meaning                  | Use Case                            |
+| ------------------- | ------------------------ | ----------------------------------- |
+| `null`              | Locked (superusers only) | Admin-only data, system tables      |
+| `''` (empty string) | Open to everyone         | Public content, no auth required    |
+| `'expression'`      | Conditional access       | Most common - check auth, ownership |
 
 **Common patterns:**
 
@@ -77,6 +77,7 @@ deleteRule: null
 ```
 
 **Error responses by rule type:**
+
 - List rule fail: 200 with empty items
 - View/Update/Delete fail: 404 (hides existence)
 - Create fail: 400

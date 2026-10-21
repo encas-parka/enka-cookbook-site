@@ -57,7 +57,7 @@ seulement si le temps le permet.
 
 Deux vérifications distinctes, souvent confondues :
 
-- **Le serveur tourne-t-il ?** Pour le frontend, la seule preuve qui compte est que *le navigateur* affiche la page.
+- **Le serveur tourne-t-il ?** Pour le frontend, la seule preuve qui compte est que _le navigateur_ affiche la page.
 - **Mon shell voit-il ce serveur ?** Pas forcément. Un shell confiné (sandbox, conteneur) peut n'avoir aucune route vers la loopback de l'hôte : `curl` échoue alors que le navigateur charge parfaitement. Un `curl` en échec n'est donc **pas** une preuve que le serveur est arrêté.
 
 Sonde rapide si un doute existe : servir un fichier trivial depuis le shell, puis l'ouvrir dans le navigateur. Si le navigateur renvoie une erreur de chargement, le shell est isolé — demander à l'humain de lancer les serveurs, et ne plus interpréter les échecs réseau du shell.
@@ -129,12 +129,12 @@ Avant de rapporter, relire ses propres constats en se demandant : « est-ce que 
 
 Une checklist binaire pousse au mensonge. Quatre verdicts, tous écrits dans le fichier :
 
-| Verdict | Signe | Ce qu'on écrit |
-| --- | --- | --- |
-| **Coché** | Fait, prouvé, avec un oracle | la preuve en une ligne |
-| **Partiel** | Le chemin principal passe, un sous-cas échoue ou n'est pas atteignable | ce qui passe / ce qui ne passe pas, et pourquoi |
-| **Bloqué pilote** | L'UI refuse le pilotage (sélecteur natif, dialogue système) | la limite nommée + le contournement tenté |
-| **Obsolète** | La checklist décrit une route, un composant ou une feature qui n'existe pas | la réalité du code (fichier:ligne), item à reformuler |
+| Verdict           | Signe                                                                       | Ce qu'on écrit                                        |
+| ----------------- | --------------------------------------------------------------------------- | ----------------------------------------------------- |
+| **Coché**         | Fait, prouvé, avec un oracle                                                | la preuve en une ligne                                |
+| **Partiel**       | Le chemin principal passe, un sous-cas échoue ou n'est pas atteignable      | ce qui passe / ce qui ne passe pas, et pourquoi       |
+| **Bloqué pilote** | L'UI refuse le pilotage (sélecteur natif, dialogue système)                 | la limite nommée + le contournement tenté             |
+| **Obsolète**      | La checklist décrit une route, un composant ou une feature qui n'existe pas | la réalité du code (fichier:ligne), item à reformuler |
 
 Décocher honnêtement est un résultat, pas un échec : une case fausse coûte une régression en prod.
 
@@ -154,7 +154,7 @@ Une passe interrompue doit laisser un document qu'un inconnu peut reprendre sans
 ## 7. Clore
 
 - Passer le build si le gate le demande, et lire le log (chercher `error`/`warn`, pas seulement le code de sortie).
-- Compter les cases : `cochés / total` en tête de fichier, avec la liste de ce qui reste et *pourquoi* il reste.
+- Compter les cases : `cochés / total` en tête de fichier, avec la liste de ce qui reste et _pourquoi_ il reste.
 - Séparer nettement : bugs constatés (décochés exprès), limites du pilote, items obsolètes à reformuler.
 - Rendre l'inventaire des artefacts de test et laisser l'humain décider du nettoyage.
 
@@ -166,7 +166,7 @@ Ce sont les pièges qui font écrire un bug là où il n'y en a pas. La liste d�
 2. **Contenu résiduel de la page précédente** — après une navigation, un snapshot peut encore montrer l'ancienne route (keep-alive). Le texte périmé n'est pas un bug d'affichage.
 3. **Saisie remplacée par le pilote** — taper dans un éditeur riche (`contenteditable`) remplace tout le contenu. Ce n'est pas l'app qui écrase : c'est l'instrument.
 4. **Bouton désactivé** — un bouton `disabled` peut être le comportement correct (verrou détenu par un autre, formulaire incomplet). Vérifier l'intention avant de crier au blocage.
-5. **« Le rechargement ne corrige rien, donc c'est un bug de cache »** — parfois c'est pire : un cache local qui ne se rafraîchit *jamais* (sync incrémentale + curseur avancé). L'API qui renvoie la donnée alors que l'UI ne l'a pas est la signature à chercher.
+5. **« Le rechargement ne corrige rien, donc c'est un bug de cache »** — parfois c'est pire : un cache local qui ne se rafraîchit _jamais_ (sync incrémentale + curseur avancé). L'API qui renvoie la donnée alors que l'UI ne l'a pas est la signature à chercher.
 
 ## Les limites du pilote
 

@@ -14,18 +14,18 @@ Auth collections can enable **OTP login** from the admin UI (Collection → Opti
 ```javascript
 // ❌ Client-side existence check - ignore the 404 and expose it to the user
 try {
-    await pb.collection("users").getFirstListItem(`email="${email}"`);
+  await pb.collection("users").getFirstListItem(`email="${email}"`);
 } catch (e) {
-    alert("No account with that email"); // ❌ account enumeration
-    return;
+  alert("No account with that email"); // ❌ account enumeration
+  return;
 }
 
 // ❌ Ad-hoc route with no rate limit - attacker hammers this to spam mailboxes
 routerAdd("POST", "/api/myapp/otp", (e) => {
-    const body = e.requestInfo().body;
-    const user = $app.findAuthRecordByEmail("users", body.email);
-    // send custom email...
-    return e.json(200, { ok: true });
+  const body = e.requestInfo().body;
+  const user = $app.findAuthRecordByEmail("users", body.email);
+  // send custom email...
+  return e.json(200, { ok: true });
 });
 ```
 
@@ -38,10 +38,7 @@ routerAdd("POST", "/api/myapp/otp", (e) => {
 const { otpId } = await pb.collection("users").requestOTP("user@example.com");
 
 // Step 2: exchange otpId + the 8-digit code the user typed
-const authData = await pb.collection("users").authWithOTP(
-    otpId,
-    "12345678",
-);
+const authData = await pb.collection("users").authWithOTP(otpId, "12345678");
 // pb.authStore is now populated
 ```
 
@@ -58,6 +55,7 @@ app.OnRecordRequestOTPRequest("users").BindFunc(func(e *core.RecordRequestOTPReq
 ```
 
 **Rules:**
+
 - `requestOTP` **always returns 200 with an otpId**, even for non-existent emails - preserve that by never adding a pre-check or a different error path.
 - Enable the built-in rate limiter (see `deploy-rate-limiting.md`) and raise the cost for the `*:requestOTP` label. Without this, an attacker can email-bomb arbitrary users.
 - The OTP code is 8 digits by default, with a 3-minute TTL. Do not extend the TTL - short windows are the whole point.

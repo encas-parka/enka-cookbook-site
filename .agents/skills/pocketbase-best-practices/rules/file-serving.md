@@ -20,7 +20,7 @@ const privateUrl = pb.files.getURL(record, record.document);
 // Returns URL but file access denied if protected!
 
 // Wrong thumbnail syntax
-const thumb = `${imageUrl}?thumb=100x100`;  // Wrong format
+const thumb = `${imageUrl}?thumb=100x100`; // Wrong format
 ```
 
 **Correct (using SDK methods):**
@@ -32,17 +32,17 @@ const imageUrl = pb.files.getURL(record, record.image);
 
 // With thumbnail (for images only)
 const thumbUrl = pb.files.getURL(record, record.image, {
-  thumb: '100x100'  // Width x Height
+  thumb: "100x100", // Width x Height
 });
 
 // Thumbnail options
 const thumbs = {
-  square: pb.files.getURL(record, record.image, { thumb: '100x100' }),
-  fit: pb.files.getURL(record, record.image, { thumb: '100x0' }),     // Fit width
-  fitHeight: pb.files.getURL(record, record.image, { thumb: '0x100' }), // Fit height
-  crop: pb.files.getURL(record, record.image, { thumb: '100x100t' }), // Top crop
-  cropBottom: pb.files.getURL(record, record.image, { thumb: '100x100b' }), // Bottom
-  force: pb.files.getURL(record, record.image, { thumb: '100x100f' }), // Force exact
+  square: pb.files.getURL(record, record.image, { thumb: "100x100" }),
+  fit: pb.files.getURL(record, record.image, { thumb: "100x0" }), // Fit width
+  fitHeight: pb.files.getURL(record, record.image, { thumb: "0x100" }), // Fit height
+  crop: pb.files.getURL(record, record.image, { thumb: "100x100t" }), // Top crop
+  cropBottom: pb.files.getURL(record, record.image, { thumb: "100x100b" }), // Bottom
+  force: pb.files.getURL(record, record.image, { thumb: "100x100f" }), // Force exact
 };
 
 // Protected files (require auth)
@@ -60,7 +60,7 @@ async function downloadDocument(record) {
   const url = pb.files.getURL(record, record.document, { token });
 
   // Token is appended: ...?token=xxx
-  window.open(url, '_blank');
+  window.open(url, "_blank");
 }
 ```
 
@@ -73,7 +73,7 @@ function UserAvatar({ user, size = 50 }) {
   }
 
   const avatarUrl = pb.files.getURL(user, user.avatar, {
-    thumb: `${size}x${size}`
+    thumb: `${size}x${size}`,
   });
 
   return (
@@ -96,7 +96,7 @@ function ImageGallery({ record }) {
       {images.map((filename, index) => (
         <img
           key={filename}
-          src={pb.files.getURL(record, filename, { thumb: '200x200' })}
+          src={pb.files.getURL(record, filename, { thumb: "200x200" })}
           onClick={() => openFullSize(record, filename)}
           loading="lazy"
         />
@@ -107,7 +107,7 @@ function ImageGallery({ record }) {
 
 function openFullSize(record, filename) {
   const fullUrl = pb.files.getURL(record, filename);
-  window.open(fullUrl, '_blank');
+  window.open(fullUrl, "_blank");
 }
 ```
 
@@ -115,30 +115,32 @@ function openFullSize(record, filename) {
 
 ```javascript
 // Efficiently generate URLs for list of records
-const posts = await pb.collection('posts').getList(1, 20, {
-  expand: 'author'
+const posts = await pb.collection("posts").getList(1, 20, {
+  expand: "author",
 });
 
-const postsWithUrls = posts.items.map(post => ({
+const postsWithUrls = posts.items.map((post) => ({
   ...post,
   thumbnailUrl: post.image
-    ? pb.files.getURL(post, post.image, { thumb: '300x200' })
+    ? pb.files.getURL(post, post.image, { thumb: "300x200" })
     : null,
   authorAvatarUrl: post.expand?.author?.avatar
-    ? pb.files.getURL(post.expand.author, post.expand.author.avatar, { thumb: '40x40' })
-    : null
+    ? pb.files.getURL(post.expand.author, post.expand.author.avatar, {
+        thumb: "40x40",
+      })
+    : null,
 }));
 ```
 
 **Thumbnail format reference:**
 
-| Format | Description |
-|--------|-------------|
-| `WxH` | Fit within dimensions |
-| `Wx0` | Fit width, auto height |
-| `0xH` | Auto width, fit height |
-| `WxHt` | Crop from top |
-| `WxHb` | Crop from bottom |
+| Format | Description            |
+| ------ | ---------------------- |
+| `WxH`  | Fit within dimensions  |
+| `Wx0`  | Fit width, auto height |
+| `0xH`  | Auto width, fit height |
+| `WxHt` | Crop from top          |
+| `WxHb` | Crop from bottom       |
 | `WxHf` | Force exact dimensions |
 
 **Performance and caching:**
@@ -153,13 +155,17 @@ const postsWithUrls = posts.items.map(post => ({
 // Thumbnails are generated on first request and cached by PocketBase.
 // Pre-generate expected thumb sizes after upload to avoid cold-start latency:
 async function uploadWithThumbs(record, file) {
-  const updated = await pb.collection('posts').update(record.id, { image: file });
+  const updated = await pb
+    .collection("posts")
+    .update(record.id, { image: file });
 
   // Pre-warm thumbnail cache by requesting expected sizes
-  const sizes = ['100x100', '300x200', '800x600'];
-  await Promise.all(sizes.map(size =>
-    fetch(pb.files.getURL(updated, updated.image, { thumb: size }))
-  ));
+  const sizes = ["100x100", "300x200", "800x600"];
+  await Promise.all(
+    sizes.map((size) =>
+      fetch(pb.files.getURL(updated, updated.image, { thumb: size })),
+    ),
+  );
 
   return updated;
 }
@@ -175,7 +181,7 @@ const url = pb.files.getURL(record, record.image);
 // -> https://myapp.com/api/files/COLLECTION/ID/filename.jpg (proxied)
 
 // For public files with S3 + CDN, construct CDN URL directly:
-const cdnBase = 'https://cdn.myapp.com';  // Your S3 CDN domain
+const cdnBase = "https://cdn.myapp.com"; // Your S3 CDN domain
 const cdnUrl = `${cdnBase}/${record.collectionId}/${record.id}/${record.image}`;
 // Bypasses PocketBase, served directly from CDN edge
 

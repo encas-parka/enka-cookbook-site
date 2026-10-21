@@ -126,11 +126,11 @@ app := pocketbase.NewWithConfig(pocketbase.Config{
 
 **Decision guide:**
 
-| Need | Driver |
-|------|--------|
-| Default (no extensions) | Built-in `modernc.org/sqlite` — no `DBConnect` config needed |
-| FTS5, ICU, spatialite | `mattn/go-sqlite3` (CGO) or `ncruces/go-sqlite3` (WASM, no CGO) |
-| Reduce binary size | `go build -tags no_default_driver` to exclude the default driver (~4 MB saved) |
-| Conditional fallback | Call `core.DefaultDBConnect(dbPath)` inside your `DBConnect` function |
+| Need                    | Driver                                                                         |
+| ----------------------- | ------------------------------------------------------------------------------ |
+| Default (no extensions) | Built-in `modernc.org/sqlite` — no `DBConnect` config needed                   |
+| FTS5, ICU, spatialite   | `mattn/go-sqlite3` (CGO) or `ncruces/go-sqlite3` (WASM, no CGO)                |
+| Reduce binary size      | `go build -tags no_default_driver` to exclude the default driver (~4 MB saved) |
+| Conditional fallback    | Call `core.DefaultDBConnect(dbPath)` inside your `DBConnect` function          |
 
 Reference: [Extend with Go - Custom SQLite driver](https://pocketbase.io/docs/go-overview/#custom-sqlite-driver)

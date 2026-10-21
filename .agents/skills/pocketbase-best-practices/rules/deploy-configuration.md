@@ -52,18 +52,18 @@ await adminPb.settings.update({
     port: parseInt(process.env.SMTP_PORT),
     username: process.env.SMTP_USER,
     password: process.env.SMTP_PASS,
-    tls: true
+    tls: true,
   },
   meta: {
-    appName: 'My App',
-    appURL: 'https://myapp.com',
-    senderName: 'My App',
-    senderAddress: 'noreply@myapp.com'
-  }
+    appName: "My App",
+    appURL: "https://myapp.com",
+    senderName: "My App",
+    senderAddress: "noreply@myapp.com",
+  },
 });
 
 // Test email configuration
-await adminPb.settings.testEmail('users', 'test@example.com', 'verification');
+await adminPb.settings.testEmail("users", "test@example.com", "verification");
 ```
 
 **Configure S3 for file storage:**
@@ -73,17 +73,17 @@ await adminPb.settings.testEmail('users', 'test@example.com', 'verification');
 await adminPb.settings.update({
   s3: {
     enabled: true,
-    bucket: 'my-app-files',
-    region: 'us-east-1',
-    endpoint: 's3.amazonaws.com',
+    bucket: "my-app-files",
+    region: "us-east-1",
+    endpoint: "s3.amazonaws.com",
     accessKey: process.env.AWS_ACCESS_KEY,
     secret: process.env.AWS_SECRET_KEY,
-    forcePathStyle: false
-  }
+    forcePathStyle: false,
+  },
 });
 
 // Test S3 connection
-await adminPb.settings.testS3('storage');
+await adminPb.settings.testS3("storage");
 ```
 
 **Systemd service file:**

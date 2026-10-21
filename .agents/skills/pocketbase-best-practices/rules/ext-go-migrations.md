@@ -130,6 +130,7 @@ go run . migrate down 1    # revert the last applied migration
 ```
 
 **Key details:**
+
 - Migration functions receive a **transactional** `core.App` – treat it as the database source of truth. Never use the outer `app` variable inside migration callbacks.
 - New unapplied migrations run automatically on every `serve` start – no manual step in production.
 - `Automigrate: osutils.IsProbablyGoRun()` limits auto-generation to `go run` (development) and prevents accidental file creation in production binaries.

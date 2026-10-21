@@ -16,17 +16,17 @@ The auth store persists authentication state. Choose the right store type based 
 
 ```javascript
 // React Native: LocalAuthStore doesn't work correctly
-import PocketBase from 'pocketbase';
-const pb = new PocketBase('http://127.0.0.1:8090');
+import PocketBase from "pocketbase";
+const pb = new PocketBase("http://127.0.0.1:8090");
 // Auth state lost on app restart!
 
 // Deno server: LocalStorage shared between all clients
-import PocketBase from 'pocketbase';
-const pb = new PocketBase('http://127.0.0.1:8090');
+import PocketBase from "pocketbase";
+const pb = new PocketBase("http://127.0.0.1:8090");
 // All clients share the same auth state!
 
 // Server-side: Reusing single client for multiple users
-const pb = new PocketBase('http://127.0.0.1:8090');
+const pb = new PocketBase("http://127.0.0.1:8090");
 // User A logs in...
 // User B's request uses User A's auth!
 ```
@@ -35,56 +35,56 @@ const pb = new PocketBase('http://127.0.0.1:8090');
 
 ```javascript
 // Browser (default LocalAuthStore - works automatically)
-import PocketBase from 'pocketbase';
-const pb = new PocketBase('http://127.0.0.1:8090');
+import PocketBase from "pocketbase";
+const pb = new PocketBase("http://127.0.0.1:8090");
 // Automatically persists to localStorage and syncs between tabs
 
 // React Native (AsyncAuthStore)
-import PocketBase, { AsyncAuthStore } from 'pocketbase';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import PocketBase, { AsyncAuthStore } from "pocketbase";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const store = new AsyncAuthStore({
   save: async (serialized) => {
-    await AsyncStorage.setItem('pb_auth', serialized);
+    await AsyncStorage.setItem("pb_auth", serialized);
   },
-  initial: AsyncStorage.getItem('pb_auth'),
+  initial: AsyncStorage.getItem("pb_auth"),
   clear: async () => {
-    await AsyncStorage.removeItem('pb_auth');
-  }
+    await AsyncStorage.removeItem("pb_auth");
+  },
 });
 
-const pb = new PocketBase('http://127.0.0.1:8090', store);
+const pb = new PocketBase("http://127.0.0.1:8090", store);
 
 // Server-side / SSR (create client per request)
-import PocketBase from 'pocketbase';
+import PocketBase from "pocketbase";
 
 export function createServerClient(cookieHeader) {
-  const pb = new PocketBase('http://127.0.0.1:8090');
-  pb.authStore.loadFromCookie(cookieHeader || '');
+  const pb = new PocketBase("http://127.0.0.1:8090");
+  pb.authStore.loadFromCookie(cookieHeader || "");
   return pb;
 }
 
 // Deno/Cloudflare Workers (memory-only store)
-import PocketBase, { BaseAuthStore } from 'pocketbase';
+import PocketBase, { BaseAuthStore } from "pocketbase";
 
 class MemoryAuthStore extends BaseAuthStore {
   // Token only persists for request duration
   // Each request must include auth via cookie/header
 }
 
-const pb = new PocketBase('http://127.0.0.1:8090', new MemoryAuthStore());
+const pb = new PocketBase("http://127.0.0.1:8090", new MemoryAuthStore());
 ```
 
 **Custom auth store example:**
 
 ```javascript
-import PocketBase, { BaseAuthStore } from 'pocketbase';
+import PocketBase, { BaseAuthStore } from "pocketbase";
 
 class SecureAuthStore extends BaseAuthStore {
   constructor() {
     super();
     // Load initial state from secure storage
-    const data = secureStorage.get('pb_auth');
+    const data = secureStorage.get("pb_auth");
     if (data) {
       const { token, record } = JSON.parse(data);
       this.save(token, record);
@@ -94,34 +94,34 @@ class SecureAuthStore extends BaseAuthStore {
   save(token, record) {
     super.save(token, record);
     // Persist to secure storage
-    secureStorage.set('pb_auth', JSON.stringify({ token, record }));
+    secureStorage.set("pb_auth", JSON.stringify({ token, record }));
   }
 
   clear() {
     super.clear();
-    secureStorage.remove('pb_auth');
+    secureStorage.remove("pb_auth");
   }
 }
 
-const pb = new PocketBase('http://127.0.0.1:8090', new SecureAuthStore());
+const pb = new PocketBase("http://127.0.0.1:8090", new SecureAuthStore());
 ```
 
 **Auth store methods:**
 
 ```javascript
 // Available on all auth stores
-pb.authStore.token;        // Current token
-pb.authStore.record;       // Current auth record
-pb.authStore.isValid;      // Token exists and not expired
-pb.authStore.isSuperuser;  // Is superuser token
+pb.authStore.token; // Current token
+pb.authStore.record; // Current auth record
+pb.authStore.isValid; // Token exists and not expired
+pb.authStore.isSuperuser; // Is superuser token
 
-pb.authStore.save(token, record);  // Save auth state
-pb.authStore.clear();              // Clear auth state
+pb.authStore.save(token, record); // Save auth state
+pb.authStore.clear(); // Clear auth state
 
 // Listen for changes
 const unsubscribe = pb.authStore.onChange((token, record) => {
-  console.log('Auth changed:', record?.email);
-}, true);  // true = fire immediately
+  console.log("Auth changed:", record?.email);
+}, true); // true = fire immediately
 
 // Cookie helpers (for SSR)
 pb.authStore.loadFromCookie(cookieString);
@@ -142,18 +142,18 @@ The SDK automatically cancels duplicate pending requests. This prevents race con
 // These requests will interfere with each other!
 async function loadDashboard() {
   // Only the last one executes, others cancelled
-  const posts = pb.collection('posts').getList(1, 20);
-  const users = pb.collection('posts').getList(1, 10);  // Different params but same path
-  const comments = pb.collection('posts').getList(1, 5);
+  const posts = pb.collection("posts").getList(1, 20);
+  const users = pb.collection("posts").getList(1, 10); // Different params but same path
+  const comments = pb.collection("posts").getList(1, 5);
 
   // posts and users are cancelled, only comments executes
-  return Promise.all([posts, users, comments]);  // First two fail!
+  return Promise.all([posts, users, comments]); // First two fail!
 }
 
 // Realtime combined with polling causes cancellation
-pb.collection('posts').subscribe('*', callback);
+pb.collection("posts").subscribe("*", callback);
 setInterval(() => {
-  pb.collection('posts').getList();  // May cancel realtime!
+  pb.collection("posts").getList(); // May cancel realtime!
 }, 5000);
 ```
 
@@ -163,9 +163,9 @@ setInterval(() => {
 // Disable auto-cancellation for parallel requests
 async function loadDashboard() {
   const [posts, users, recent] = await Promise.all([
-    pb.collection('posts').getList(1, 20, { requestKey: null }),
-    pb.collection('users').getList(1, 10, { requestKey: null }),
-    pb.collection('posts').getList(1, 5, { requestKey: 'recent' })
+    pb.collection("posts").getList(1, 20, { requestKey: null }),
+    pb.collection("users").getList(1, 10, { requestKey: null }),
+    pb.collection("posts").getList(1, 5, { requestKey: "recent" }),
   ]);
   // All requests complete independently
   return { posts, users, recent };
@@ -173,23 +173,23 @@ async function loadDashboard() {
 
 // Use unique request keys for different purposes
 async function searchPosts(query) {
-  return pb.collection('posts').getList(1, 20, {
-    filter: pb.filter('title ~ {:q}', { q: query }),
-    requestKey: 'post-search'  // Cancels previous searches only
+  return pb.collection("posts").getList(1, 20, {
+    filter: pb.filter("title ~ {:q}", { q: query }),
+    requestKey: "post-search", // Cancels previous searches only
   });
 }
 
 async function loadPostDetails(postId) {
-  return pb.collection('posts').getOne(postId, {
-    requestKey: `post-${postId}`  // Unique per post
+  return pb.collection("posts").getOne(postId, {
+    requestKey: `post-${postId}`, // Unique per post
   });
 }
 
 // Typeahead search - auto-cancellation is helpful here
 async function typeaheadSearch(query) {
   // Previous search automatically cancelled when user types more
-  return pb.collection('products').getList(1, 10, {
-    filter: pb.filter('name ~ {:q}', { q: query })
+  return pb.collection("products").getList(1, 10, {
+    filter: pb.filter("name ~ {:q}", { q: query }),
     // No requestKey = uses default (path-based), previous cancelled
   });
 }
@@ -199,9 +199,9 @@ pb.autoCancellation(false);
 
 // Now all requests are independent
 await Promise.all([
-  pb.collection('posts').getList(1, 20),
-  pb.collection('posts').getList(1, 10),
-  pb.collection('posts').getList(1, 5)
+  pb.collection("posts").getList(1, 20),
+  pb.collection("posts").getList(1, 10),
+  pb.collection("posts").getList(1, 5),
 ]);
 
 // Re-enable
@@ -215,7 +215,7 @@ pb.autoCancellation(true);
 pb.cancelAllRequests();
 
 // Cancel specific request by key
-pb.cancelRequest('post-search');
+pb.cancelRequest("post-search");
 
 // Example: Cancel on component unmount
 function PostList() {
@@ -224,13 +224,13 @@ function PostList() {
 
     return () => {
       // Cleanup: cancel pending requests
-      pb.cancelRequest('post-list');
+      pb.cancelRequest("post-list");
     };
   }, []);
 
   async function loadPosts() {
-    const result = await pb.collection('posts').getList(1, 20, {
-      requestKey: 'post-list'
+    const result = await pb.collection("posts").getList(1, 20, {
+      requestKey: "post-list",
     });
     setPosts(result.items);
   }
@@ -239,11 +239,11 @@ function PostList() {
 // Handle cancellation in catch
 async function fetchWithCancellation() {
   try {
-    return await pb.collection('posts').getList();
+    return await pb.collection("posts").getList();
   } catch (error) {
     if (error.isAbort) {
       // Request was cancelled - this is expected
-      console.log('Request cancelled');
+      console.log("Request cancelled");
       return null;
     }
     throw error;
@@ -253,14 +253,14 @@ async function fetchWithCancellation() {
 
 **When to use each approach:**
 
-| Scenario | Approach |
-|----------|----------|
-| Search/typeahead | Default (let it cancel) |
-| Parallel data loading | `requestKey: null` |
-| Grouped requests | Custom `requestKey` |
-| Component cleanup | `cancelRequest(key)` |
-| Testing/debugging | `autoCancellation(false)` |
-| OAuth2 flow cancel | `cancelRequest(requestKey)` — properly rejects the `authWithOAuth2()` Promise (JS SDK v0.26.8+) |
+| Scenario              | Approach                                                                                        |
+| --------------------- | ----------------------------------------------------------------------------------------------- |
+| Search/typeahead      | Default (let it cancel)                                                                         |
+| Parallel data loading | `requestKey: null`                                                                              |
+| Grouped requests      | Custom `requestKey`                                                                             |
+| Component cleanup     | `cancelRequest(key)`                                                                            |
+| Testing/debugging     | `autoCancellation(false)`                                                                       |
+| OAuth2 flow cancel    | `cancelRequest(requestKey)` — properly rejects the `authWithOAuth2()` Promise (JS SDK v0.26.8+) |
 
 > **Note (JS SDK v0.26.8):** Calling `pb.cancelRequest(requestKey)` while `authWithOAuth2()` is waiting now properly rejects the returned Promise. In earlier versions the manual cancellation did not account for the waiting realtime subscription, so the Promise could hang indefinitely.
 
@@ -276,40 +276,40 @@ All SDK methods return Promises that may reject with `ClientResponseError`. Prop
 
 ```javascript
 // No error handling
-const posts = await pb.collection('posts').getList();
+const posts = await pb.collection("posts").getList();
 
 // Generic catch that loses information
 try {
-  await pb.collection('posts').create({ title: '' });
+  await pb.collection("posts").create({ title: "" });
 } catch (e) {
-  alert('Something went wrong');  // No useful info
+  alert("Something went wrong"); // No useful info
 }
 
 // Not checking specific error types
 try {
-  await pb.collection('posts').getOne('nonexistent');
+  await pb.collection("posts").getOne("nonexistent");
 } catch (e) {
-  console.log(e.message);  // Missing status, response details
+  console.log(e.message); // Missing status, response details
 }
 ```
 
 **Correct (comprehensive error handling):**
 
 ```javascript
-import PocketBase, { ClientResponseError } from 'pocketbase';
+import PocketBase, { ClientResponseError } from "pocketbase";
 
-const pb = new PocketBase('http://127.0.0.1:8090');
+const pb = new PocketBase("http://127.0.0.1:8090");
 
 // Basic error handling with ClientResponseError
 async function createPost(data) {
   try {
-    return await pb.collection('posts').create(data);
+    return await pb.collection("posts").create(data);
   } catch (error) {
     if (error instanceof ClientResponseError) {
-      console.log('Status:', error.status);
-      console.log('Response:', error.response);
-      console.log('URL:', error.url);
-      console.log('Is abort:', error.isAbort);
+      console.log("Status:", error.status);
+      console.log("Response:", error.response);
+      console.log("URL:", error.url);
+      console.log("Is abort:", error.isAbort);
 
       // Handle specific status codes
       switch (error.status) {
@@ -319,32 +319,34 @@ async function createPost(data) {
           // as it may leak internal field names and validation rules
           const fieldErrors = {};
           if (error.response?.data) {
-            for (const [field, details] of Object.entries(error.response.data)) {
+            for (const [field, details] of Object.entries(
+              error.response.data,
+            )) {
               fieldErrors[field] = details.message;
             }
           }
-          return { error: 'validation', fields: fieldErrors };
+          return { error: "validation", fields: fieldErrors };
         case 401:
           // Unauthorized - need to login
-          return { error: 'unauthorized' };
+          return { error: "unauthorized" };
         case 403:
           // Forbidden - no permission
-          return { error: 'forbidden' };
+          return { error: "forbidden" };
         case 404:
           // Not found
-          return { error: 'not_found' };
+          return { error: "not_found" };
         default:
-          return { error: 'server_error' };
+          return { error: "server_error" };
       }
     }
-    throw error;  // Re-throw non-PocketBase errors
+    throw error; // Re-throw non-PocketBase errors
   }
 }
 
 // Handle validation errors with field details
 async function updateProfile(userId, data) {
   try {
-    return await pb.collection('users').update(userId, data);
+    return await pb.collection("users").update(userId, data);
   } catch (error) {
     if (error.status === 400 && error.response?.data) {
       // Extract field-specific errors
@@ -362,13 +364,13 @@ async function updateProfile(userId, data) {
 // Handle request cancellation
 async function searchWithCancel(query) {
   try {
-    return await pb.collection('posts').getList(1, 20, {
-      filter: pb.filter('title ~ {:query}', { query })
+    return await pb.collection("posts").getList(1, 20, {
+      filter: pb.filter("title ~ {:query}", { query }),
     });
   } catch (error) {
     if (error.isAbort) {
       // Request was cancelled (e.g., user typed again)
-      console.log('Search cancelled');
+      console.log("Search cancelled");
       return null;
     }
     throw error;
@@ -385,27 +387,27 @@ async function pbRequest(fn) {
         data: null,
         error: {
           status: error.status,
-          message: error.response?.message || 'Request failed',
-          data: error.response?.data || null
-        }
+          message: error.response?.message || "Request failed",
+          data: error.response?.data || null,
+        },
       };
     }
     return {
       data: null,
-      error: { status: 0, message: error.message, data: null }
+      error: { status: 0, message: error.message, data: null },
     };
   }
 }
 
 // Usage
 const { data, error } = await pbRequest(() =>
-  pb.collection('posts').getList(1, 20)
+  pb.collection("posts").getList(1, 20),
 );
 
 if (error) {
-  console.log('Failed:', error.message);
+  console.log("Failed:", error.message);
 } else {
-  console.log('Posts:', data.items);
+  console.log("Posts:", data.items);
 }
 ```
 
@@ -413,15 +415,16 @@ if (error) {
 
 ```typescript
 interface ClientResponseError {
-  url: string;           // The request URL
-  status: number;        // HTTP status code (0 if network error)
-  response: {            // API response body
+  url: string; // The request URL
+  status: number; // HTTP status code (0 if network error)
+  response: {
+    // API response body
     code: number;
     message: string;
     data: { [field: string]: { code: string; message: string } };
   };
-  isAbort: boolean;      // True if request was cancelled
-  cause: Error | null;   // Original error (added in JS SDK v0.26.1)
+  isAbort: boolean; // True if request was cancelled
+  cause: Error | null; // Original error (added in JS SDK v0.26.1)
 }
 ```
 
@@ -438,20 +441,20 @@ PocketBase supports `+` and `-` modifiers for incrementing numbers, appending/re
 ```javascript
 // Race condition: two users adding tags simultaneously
 async function addTag(postId, newTagId) {
-  const post = await pb.collection('posts').getOne(postId);
+  const post = await pb.collection("posts").getOne(postId);
   const currentTags = post.tags || [];
 
   // Another user might have added a tag in between!
-  await pb.collection('posts').update(postId, {
-    tags: [...currentTags, newTagId]  // Might overwrite the other user's tag
+  await pb.collection("posts").update(postId, {
+    tags: [...currentTags, newTagId], // Might overwrite the other user's tag
   });
 }
 
 // Inefficient for incrementing counters
 async function incrementViews(postId) {
-  const post = await pb.collection('posts').getOne(postId);
-  await pb.collection('posts').update(postId, {
-    views: post.views + 1  // Extra read, race condition
+  const post = await pb.collection("posts").getOne(postId);
+  await pb.collection("posts").update(postId, {
+    views: post.views + 1, // Extra read, race condition
   });
 }
 ```
@@ -461,89 +464,90 @@ async function incrementViews(postId) {
 ```javascript
 // Atomic relation append with + modifier
 async function addTag(postId, newTagId) {
-  await pb.collection('posts').update(postId, {
-    'tags+': newTagId  // Appends to existing tags atomically
+  await pb.collection("posts").update(postId, {
+    "tags+": newTagId, // Appends to existing tags atomically
   });
 }
 
 // Append multiple relations
 async function addTags(postId, tagIds) {
-  await pb.collection('posts').update(postId, {
-    'tags+': tagIds  // Appends array of IDs
+  await pb.collection("posts").update(postId, {
+    "tags+": tagIds, // Appends array of IDs
   });
 }
 
 // Prepend relations (+ prefix)
 async function prependTag(postId, tagId) {
-  await pb.collection('posts').update(postId, {
-    '+tags': tagId  // Prepends to start of array
+  await pb.collection("posts").update(postId, {
+    "+tags": tagId, // Prepends to start of array
   });
 }
 
 // Remove relations with - modifier
 async function removeTag(postId, tagId) {
-  await pb.collection('posts').update(postId, {
-    'tags-': tagId  // Removes specific tag
+  await pb.collection("posts").update(postId, {
+    "tags-": tagId, // Removes specific tag
   });
 }
 
 // Remove multiple relations
 async function removeTags(postId, tagIds) {
-  await pb.collection('posts').update(postId, {
-    'tags-': tagIds  // Removes all specified tags
+  await pb.collection("posts").update(postId, {
+    "tags-": tagIds, // Removes all specified tags
   });
 }
 
 // Atomic number increment
 async function incrementViews(postId) {
-  await pb.collection('posts').update(postId, {
-    'views+': 1  // Atomic increment, no race condition
+  await pb.collection("posts").update(postId, {
+    "views+": 1, // Atomic increment, no race condition
   });
 }
 
 // Atomic number decrement
 async function decrementStock(productId, quantity) {
-  await pb.collection('products').update(productId, {
-    'stock-': quantity  // Atomic decrement
+  await pb.collection("products").update(productId, {
+    "stock-": quantity, // Atomic decrement
   });
 }
 
 // File append (for multi-file fields)
 async function addImage(albumId, newImage) {
-  await pb.collection('albums').update(albumId, {
-    'images+': newImage  // Appends new file to existing
+  await pb.collection("albums").update(albumId, {
+    "images+": newImage, // Appends new file to existing
   });
 }
 
 // File removal
 async function removeImage(albumId, filename) {
-  await pb.collection('albums').update(albumId, {
-    'images-': filename  // Removes specific file by name
+  await pb.collection("albums").update(albumId, {
+    "images-": filename, // Removes specific file by name
   });
 }
 
 // Combined modifiers in single update
 async function updatePost(postId, data) {
-  await pb.collection('posts').update(postId, {
-    title: data.title,        // Replace field
-    'views+': 1,              // Increment number
-    'tags+': data.newTagId,   // Append relation
-    'tags-': data.oldTagId,   // Remove relation
-    'images+': data.newImage  // Append file
+  await pb.collection("posts").update(postId, {
+    title: data.title, // Replace field
+    "views+": 1, // Increment number
+    "tags+": data.newTagId, // Append relation
+    "tags-": data.oldTagId, // Remove relation
+    "images+": data.newImage, // Append file
   });
 }
 ```
 
 **Modifier reference:**
 
-| Modifier | Field Types | Description |
-|----------|-------------|-------------|
+| Modifier             | Field Types    | Description             |
+| -------------------- | -------------- | ----------------------- |
 | `field+` or `+field` | relation, file | Append/prepend to array |
-| `field-` | relation, file | Remove from array |
-| `field+` | number | Increment by value |
-| `field-` | number | Decrement by value |
+| `field-`             | relation, file | Remove from array       |
+| `field+`             | number         | Increment by value      |
+| `field-`             | number         | Decrement by value      |
 
 **Benefits:**
+
 - **Atomic**: No read-modify-write race conditions
 - **Efficient**: Single request, no extra read needed
 - **Clean**: Expresses intent clearly
@@ -564,17 +568,17 @@ Always use `pb.filter()` with parameter binding when constructing filters with u
 // SQL/filter injection vulnerability!
 async function searchPosts(userInput) {
   // User input: `test" || id != "` breaks out of string
-  const posts = await pb.collection('posts').getList(1, 20, {
-    filter: `title ~ "${userInput}"`  // VULNERABLE!
+  const posts = await pb.collection("posts").getList(1, 20, {
+    filter: `title ~ "${userInput}"`, // VULNERABLE!
   });
   return posts;
 }
 
 // Even with escaping, easy to get wrong
 async function searchByEmail(email) {
-  const escaped = email.replace(/"/g, '\\"');  // Incomplete escaping
-  const users = await pb.collection('users').getList(1, 1, {
-    filter: `email = "${escaped}"`  // Still potentially vulnerable
+  const escaped = email.replace(/"/g, '\\"'); // Incomplete escaping
+  const users = await pb.collection("users").getList(1, 1, {
+    filter: `email = "${escaped}"`, // Still potentially vulnerable
   });
   return users;
 }
@@ -588,30 +592,30 @@ const filter = `status = "${status}" && author = "${authorId}"`;
 ```javascript
 // Safe parameter binding
 async function searchPosts(userInput) {
-  const posts = await pb.collection('posts').getList(1, 20, {
-    filter: pb.filter('title ~ {:search}', { search: userInput })
+  const posts = await pb.collection("posts").getList(1, 20, {
+    filter: pb.filter("title ~ {:search}", { search: userInput }),
   });
   return posts;
 }
 
 // Multiple parameters
 async function filterPosts(status, authorId, minViews) {
-  const posts = await pb.collection('posts').getList(1, 20, {
+  const posts = await pb.collection("posts").getList(1, 20, {
     filter: pb.filter(
-      'status = {:status} && author = {:author} && views >= {:views}',
-      { status, author: authorId, views: minViews }
-    )
+      "status = {:status} && author = {:author} && views >= {:views}",
+      { status, author: authorId, views: minViews },
+    ),
   });
   return posts;
 }
 
 // Reusing parameters
 async function searchBothFields(query) {
-  const results = await pb.collection('posts').getList(1, 20, {
+  const results = await pb.collection("posts").getList(1, 20, {
     filter: pb.filter(
-      'title ~ {:q} || content ~ {:q}',
-      { q: query }  // Same parameter used twice
-    )
+      "title ~ {:q} || content ~ {:q}",
+      { q: query }, // Same parameter used twice
+    ),
   });
   return results;
 }
@@ -619,25 +623,25 @@ async function searchBothFields(query) {
 // Different parameter types
 async function complexFilter(options) {
   const filter = pb.filter(
-    'created > {:date} && active = {:active} && category = {:cat}',
+    "created > {:date} && active = {:active} && category = {:cat}",
     {
-      date: new Date('2024-01-01'),  // Date objects handled correctly
-      active: true,                    // Booleans
-      cat: options.category            // Strings auto-escaped
-    }
+      date: new Date("2024-01-01"), // Date objects handled correctly
+      active: true, // Booleans
+      cat: options.category, // Strings auto-escaped
+    },
   );
 
-  return pb.collection('posts').getList(1, 20, { filter });
+  return pb.collection("posts").getList(1, 20, { filter });
 }
 
 // Null handling
 async function filterWithOptional(category) {
   // Only include filter if value provided
   const filter = category
-    ? pb.filter('category = {:cat}', { cat: category })
-    : '';
+    ? pb.filter("category = {:cat}", { cat: category })
+    : "";
 
-  return pb.collection('posts').getList(1, 20, { filter });
+  return pb.collection("posts").getList(1, 20, { filter });
 }
 
 // Building dynamic filters
@@ -646,38 +650,37 @@ async function dynamicSearch(filters) {
   const params = {};
 
   if (filters.title) {
-    conditions.push('title ~ {:title}');
+    conditions.push("title ~ {:title}");
     params.title = filters.title;
   }
 
   if (filters.author) {
-    conditions.push('author = {:author}');
+    conditions.push("author = {:author}");
     params.author = filters.author;
   }
 
   if (filters.minDate) {
-    conditions.push('created >= {:minDate}');
+    conditions.push("created >= {:minDate}");
     params.minDate = filters.minDate;
   }
 
-  const filter = conditions.length > 0
-    ? pb.filter(conditions.join(' && '), params)
-    : '';
+  const filter =
+    conditions.length > 0 ? pb.filter(conditions.join(" && "), params) : "";
 
-  return pb.collection('posts').getList(1, 20, { filter });
+  return pb.collection("posts").getList(1, 20, { filter });
 }
 ```
 
 **Supported parameter types:**
 
-| Type | Example | Notes |
-|------|---------|-------|
-| string | `'hello'` | Auto-escaped, quotes handled |
-| number | `123`, `45.67` | No quotes added |
-| boolean | `true`, `false` | Converted correctly |
-| Date | `new Date()` | Formatted for PocketBase |
-| null | `null` | For null comparisons |
-| other | `{...}` | JSON.stringify() applied |
+| Type    | Example         | Notes                        |
+| ------- | --------------- | ---------------------------- |
+| string  | `'hello'`       | Auto-escaped, quotes handled |
+| number  | `123`, `45.67`  | No quotes added              |
+| boolean | `true`, `false` | Converted correctly          |
+| Date    | `new Date()`    | Formatted for PocketBase     |
+| null    | `null`          | For null comparisons         |
+| other   | `{...}`         | JSON.stringify() applied     |
 
 **Server-side is especially critical:**
 
@@ -686,11 +689,11 @@ async function dynamicSearch(filters) {
 // because malicious users control the input directly
 
 export async function searchHandler(req) {
-  const userQuery = req.query.q;  // Untrusted input!
+  const userQuery = req.query.q; // Untrusted input!
 
   // ALWAYS use pb.filter() on server
-  const results = await pb.collection('posts').getList(1, 20, {
-    filter: pb.filter('title ~ {:q}', { q: userQuery })
+  const results = await pb.collection("posts").getList(1, 20, {
+    filter: pb.filter("title ~ {:q}", { q: userQuery }),
   });
 
   return results;
@@ -711,14 +714,14 @@ Client initialization should consider the environment (browser, Node.js, SSR), a
 
 ```javascript
 // Missing polyfills in Node.js
-import PocketBase from 'pocketbase';
-const pb = new PocketBase('http://127.0.0.1:8090');
+import PocketBase from "pocketbase";
+const pb = new PocketBase("http://127.0.0.1:8090");
 
 // Node.js: EventSource not defined error on realtime
-pb.collection('posts').subscribe('*', callback);  // Fails!
+pb.collection("posts").subscribe("*", callback); // Fails!
 
 // Missing base URL
-const pb = new PocketBase();  // Uses '/' - likely wrong
+const pb = new PocketBase(); // Uses '/' - likely wrong
 ```
 
 **Correct (environment-aware initialization):**
@@ -726,32 +729,32 @@ const pb = new PocketBase();  // Uses '/' - likely wrong
 ```javascript
 // Browser setup (no polyfills needed)
 // IMPORTANT: Use HTTPS in production (http is only for local development)
-import PocketBase from 'pocketbase';
+import PocketBase from "pocketbase";
 
-const pb = new PocketBase('http://127.0.0.1:8090');  // Use https:// in production
+const pb = new PocketBase("http://127.0.0.1:8090"); // Use https:// in production
 
 // Node.js setup (requires polyfills for realtime)
-import PocketBase from 'pocketbase';
-import { EventSource } from 'eventsource';
+import PocketBase from "pocketbase";
+import { EventSource } from "eventsource";
 
 // Global polyfill for realtime
 global.EventSource = EventSource;
 
-const pb = new PocketBase('http://127.0.0.1:8090');
+const pb = new PocketBase("http://127.0.0.1:8090");
 
 // React Native setup (async auth store)
-import PocketBase, { AsyncAuthStore } from 'pocketbase';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import EventSource from 'react-native-sse';
+import PocketBase, { AsyncAuthStore } from "pocketbase";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import EventSource from "react-native-sse";
 
 global.EventSource = EventSource;
 
 const store = new AsyncAuthStore({
-  save: async (serialized) => AsyncStorage.setItem('pb_auth', serialized),
-  initial: AsyncStorage.getItem('pb_auth'),
+  save: async (serialized) => AsyncStorage.setItem("pb_auth", serialized),
+  initial: AsyncStorage.getItem("pb_auth"),
 });
 
-const pb = new PocketBase('http://127.0.0.1:8090', store);
+const pb = new PocketBase("http://127.0.0.1:8090", store);
 ```
 
 **SSR initialization (per-request client):**
@@ -759,21 +762,21 @@ const pb = new PocketBase('http://127.0.0.1:8090', store);
 ```javascript
 // SvelteKit example
 // src/hooks.server.js
-import PocketBase from 'pocketbase';
+import PocketBase from "pocketbase";
 
 export async function handle({ event, resolve }) {
   // Create fresh client for each request
-  event.locals.pb = new PocketBase('http://127.0.0.1:8090');
+  event.locals.pb = new PocketBase("http://127.0.0.1:8090");
 
   // Load auth from request cookie
   event.locals.pb.authStore.loadFromCookie(
-    event.request.headers.get('cookie') || ''
+    event.request.headers.get("cookie") || "",
   );
 
   // Validate token
   if (event.locals.pb.authStore.isValid) {
     try {
-      await event.locals.pb.collection('users').authRefresh();
+      await event.locals.pb.collection("users").authRefresh();
     } catch {
       event.locals.pb.authStore.clear();
     }
@@ -783,12 +786,12 @@ export async function handle({ event, resolve }) {
 
   // Send updated auth cookie with secure options
   response.headers.append(
-    'set-cookie',
+    "set-cookie",
     event.locals.pb.authStore.exportToCookie({
-      httpOnly: true,   // Prevent XSS access to auth token
-      secure: true,     // HTTPS only
-      sameSite: 'Lax',  // CSRF protection
-    })
+      httpOnly: true, // Prevent XSS access to auth token
+      secure: true, // HTTPS only
+      sameSite: "Lax", // CSRF protection
+    }),
   );
 
   return response;
@@ -798,7 +801,7 @@ export async function handle({ event, resolve }) {
 **TypeScript with typed collections:**
 
 ```typescript
-import PocketBase, { RecordService } from 'pocketbase';
+import PocketBase, { RecordService } from "pocketbase";
 
 // Define your record types
 interface User {
@@ -819,15 +822,15 @@ interface Post {
 // Create typed client interface
 interface TypedPocketBase extends PocketBase {
   collection(idOrName: string): RecordService;
-  collection(idOrName: 'users'): RecordService<User>;
-  collection(idOrName: 'posts'): RecordService<Post>;
+  collection(idOrName: "users"): RecordService<User>;
+  collection(idOrName: "posts"): RecordService<Post>;
 }
 
-const pb = new PocketBase('http://127.0.0.1:8090') as TypedPocketBase;
+const pb = new PocketBase("http://127.0.0.1:8090") as TypedPocketBase;
 
 // Now methods are typed
-const post = await pb.collection('posts').getOne('abc');  // Returns Post
-const users = await pb.collection('users').getList();      // Returns ListResult<User>
+const post = await pb.collection("posts").getOne("abc"); // Returns Post
+const users = await pb.collection("users").getList(); // Returns ListResult<User>
 ```
 
 **Current SDK (v0.28):** admin/meta surfaces added in v0.27–v0.28 — `pb.logs.truncate()` (clear all logs, PB v0.40+), `pb.sql.run(query)` (debug SQL console, PB v0.39+, superuser-only; never use from app code), `pb.collections.dryRunViewQuery(query)` and `pb.collections.getAllOAuth2Providers()` (PB v0.37+). Keep the SDK minor version paired with your PocketBase minor version — these handlers 404 on older servers.
@@ -844,33 +847,33 @@ The SDK provides `beforeSend` and `afterSend` hooks for intercepting and modifyi
 
 ```javascript
 // Adding headers to every request manually
-const posts = await pb.collection('posts').getList(1, 20, {
-  headers: { 'X-Custom-Header': 'value' }
+const posts = await pb.collection("posts").getList(1, 20, {
+  headers: { "X-Custom-Header": "value" },
 });
 
-const users = await pb.collection('users').getList(1, 20, {
-  headers: { 'X-Custom-Header': 'value' }  // Repeated!
+const users = await pb.collection("users").getList(1, 20, {
+  headers: { "X-Custom-Header": "value" }, // Repeated!
 });
 
 // Logging each request manually
-console.log('Fetching posts...');
-const posts = await pb.collection('posts').getList();
-console.log('Done');
+console.log("Fetching posts...");
+const posts = await pb.collection("posts").getList();
+console.log("Done");
 ```
 
 **Correct (using send hooks):**
 
 ```javascript
-import PocketBase from 'pocketbase';
+import PocketBase from "pocketbase";
 
-const pb = new PocketBase('http://127.0.0.1:8090');
+const pb = new PocketBase("http://127.0.0.1:8090");
 
 // beforeSend - modify requests before they're sent
-pb.beforeSend = function(url, options) {
+pb.beforeSend = function (url, options) {
   // Add custom headers to all requests
   options.headers = Object.assign({}, options.headers, {
-    'X-Custom-Header': 'value',
-    'X-Request-ID': crypto.randomUUID()
+    "X-Custom-Header": "value",
+    "X-Request-ID": crypto.randomUUID(),
   });
 
   // Log outgoing requests
@@ -881,12 +884,12 @@ pb.beforeSend = function(url, options) {
 };
 
 // afterSend - process responses
-pb.afterSend = function(response, data) {
+pb.afterSend = function (response, data) {
   // Log response status
   console.log(`Response: ${response.status}`);
 
   // Transform or extend response data
-  if (data && typeof data === 'object') {
+  if (data && typeof data === "object") {
     data._fetchedAt = new Date().toISOString();
   }
 
@@ -895,8 +898,8 @@ pb.afterSend = function(response, data) {
 };
 
 // All requests now automatically have headers and logging
-const posts = await pb.collection('posts').getList();
-const users = await pb.collection('users').getList();
+const posts = await pb.collection("posts").getList();
+const users = await pb.collection("users").getList();
 ```
 
 **Practical examples:**
@@ -904,12 +907,12 @@ const users = await pb.collection('users').getList();
 ```javascript
 // Request timing / performance monitoring
 let requestStart;
-pb.beforeSend = function(url, options) {
+pb.beforeSend = function (url, options) {
   requestStart = performance.now();
   return { url, options };
 };
 
-pb.afterSend = function(response, data) {
+pb.afterSend = function (response, data) {
   const duration = performance.now() - requestStart;
   console.log(`${response.url}: ${duration.toFixed(2)}ms`);
 
@@ -920,18 +923,18 @@ pb.afterSend = function(response, data) {
 };
 
 // Add auth token from different source
-pb.beforeSend = function(url, options) {
+pb.beforeSend = function (url, options) {
   const externalToken = getTokenFromExternalAuth();
   if (externalToken) {
     options.headers = Object.assign({}, options.headers, {
-      'X-External-Auth': externalToken
+      "X-External-Auth": externalToken,
     });
   }
   return { url, options };
 };
 
 // Handle specific response codes globally
-pb.afterSend = function(response, data) {
+pb.afterSend = function (response, data) {
   if (response.status === 401) {
     // Token expired - trigger re-auth
     handleAuthExpired();
@@ -947,13 +950,14 @@ pb.afterSend = function(response, data) {
 
 // Retry failed requests (simplified example)
 const originalSend = pb.send.bind(pb);
-pb.send = async function(path, options) {
+pb.send = async function (path, options) {
   try {
     return await originalSend(path, options);
   } catch (error) {
-    if (error.status === 429) {  // Rate limited
+    if (error.status === 429) {
+      // Rate limited
       await sleep(1000);
-      return originalSend(path, options);  // Retry once
+      return originalSend(path, options); // Retry once
     }
     throw error;
   }
@@ -961,19 +965,19 @@ pb.send = async function(path, options) {
 
 // Add request correlation for debugging
 let requestId = 0;
-pb.beforeSend = function(url, options) {
+pb.beforeSend = function (url, options) {
   requestId++;
   const correlationId = `req-${Date.now()}-${requestId}`;
 
   options.headers = Object.assign({}, options.headers, {
-    'X-Correlation-ID': correlationId
+    "X-Correlation-ID": correlationId,
   });
 
   console.log(`[${correlationId}] Starting: ${url}`);
   return { url, options };
 };
 
-pb.afterSend = function(response, data) {
+pb.afterSend = function (response, data) {
   console.log(`Complete: ${response.status}`);
   return data;
 };
@@ -996,6 +1000,7 @@ afterSend?: (
 ```
 
 **Use cases:**
+
 - Add custom headers (API keys, correlation IDs)
 - Request/response logging
 - Performance monitoring
@@ -1004,4 +1009,3 @@ afterSend?: (
 - Authentication middleware
 
 Reference: [PocketBase Send Hooks](https://github.com/pocketbase/js-sdk#send-hooks)
-

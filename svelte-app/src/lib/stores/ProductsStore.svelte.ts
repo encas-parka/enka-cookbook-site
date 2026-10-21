@@ -2203,57 +2203,57 @@ class ProductsStore {
     updateType: "who" | "store",
     updateData: { names?: string[] } | StoreInfo,
   ): Promise<BatchUpdateResult> {
-    let updatedCount = 0;
+    let confirmedCount = 0;
     try {
-      const batchSize = 50;
-      for (let i = 0; i < productIds.length; i += batchSize) {
-        const chunk = productIds.slice(i, i + batchSize);
-        const batch = this.#productsCollection.createBatch();
+      const patch: Partial<Products> =
+        updateType === "who"
+          ? { who: (updateData as { names?: string[] }).names || null }
+          : { store: JSON.stringify(updateData as StoreInfo) };
 
-        for (const productId of chunk) {
-          const patch: Partial<Products> =
-            updateType === "who"
-              ? { who: (updateData as { names?: string[] }).names || null }
-              : { store: JSON.stringify(updateData as StoreInfo) };
-
-          if (await db.products.get(productId)) {
-            // Déjà miroité : patch pur
-            batch.update(productId, patch);
-          } else {
-            const enriched = this.getEnrichedProductById(productId);
-            if (!enriched) {
-              // Id inconnu : garder l'échec explicite du serveur (update brut)
-              batch.update(productId, patch);
-            } else {
-              // Produit virtuel : matérialisation à l'id sémantique + patch
-              // dans la même opération — un update brut sur un record absent
-              // ferait échouer le lot entier côté serveur.
-              batch.upsert({
-                id: productId,
-                ...this.#virtualProductPayload(enriched),
-                ...patch,
-              } as Omit<Products, "id" | "created" | "updated"> & {
-                id: string;
-              });
-            }
-          }
+      // Tri par item : patch pur pour un record déjà miroité, matérialisation
+      // upsert pour un virtuel, patch brut pour un id sans empreinte locale —
+      // le serveur tranche (404 explicite si réellement absent, succès si le
+      // cache local était simplement en retard).
+      const updates: { id: string; data: Partial<Products> }[] = [];
+      const upserts: (Omit<Products, "id" | "created" | "updated"> & {
+        id: string;
+      })[] = [];
+      for (const productId of productIds) {
+        if (await db.products.get(productId)) {
+          updates.push({ id: productId, data: patch });
+          continue;
         }
-
-        // Compteur sur les confirmations serveur, pas sur la sélection postulée
-        const { records } = await batch.send();
-        updatedCount += records.length;
+        const enriched = this.getEnrichedProductById(productId);
+        if (!enriched) {
+          updates.push({ id: productId, data: patch });
+        } else {
+          upserts.push({
+            id: productId,
+            ...this.#virtualProductPayload(enriched),
+            ...patch,
+          } as Omit<Products, "id" | "created" | "updated"> & { id: string });
+        }
       }
+
+      // bulkUpdate d'abord : un id réellement absent fait échouer ce lot
+      // (échec explicite) avant toute matérialisation virtuelle. Les bulk*
+      // découpent seuls aux limites batch PB ; le rollback reste par lot.
+      const updated = await this.#productsCollection.bulkUpdate(updates);
+      confirmedCount += updated.length;
+      const upserted = await this.#productsCollection.bulkUpsert(upserts);
+      confirmedCount += upserted.length;
 
       return {
         success: true,
-        updatedCount,
+        updatedCount: confirmedCount,
         updateType,
         timestamp: new Date().toISOString(),
       };
     } catch (err) {
       return {
         success: false,
-        updatedCount,
+        // Confirmations acquises avant l'échec (lots déjà committés)
+        updatedCount: confirmedCount,
         updateType,
         error: err instanceof Error ? err.message : "Erreur inconnue",
         timestamp: new Date().toISOString(),

@@ -51,7 +51,6 @@
 - (sans tag) id-map : écrit en fin de run seulement (énoncé T02 « incrémental » non landé) — sans impact sous contrat reset (ids hash15 dérivables à la demande).
 - (sans tag) Warnings check : 5 a11y préexistants + 1 Svelte `state_referenced_locally` (CreateIngredientModal) — candidats fast-wins pour les zones voisines.
 - (sans tag) `QuantityInput` rendu avec `required` (défaut du composant) dans AddProductModal alors que la validation du formulaire ne l'exige pas — identique à la sœur ; durcissement dédié si voulu. (T02 26-10-13)
-- (sans tag) `batchUpdateProducts` garde un chunking manuel à 50 (`createBatch` de la collection + boucle) — la primitive `bulkUpsert` de pb-sync chunk désormais toute seule à `PB_BATCH_MAX_REQUESTS` ; migrer supprimerait le second mécanisme de découpage (un changement de limite serveur n'éditerait qu'un endroit). Chemin testé, à embarquer dans un prochain passage products. (review 21-10)
 
 ## Doc & conventions
 

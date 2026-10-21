@@ -178,6 +178,27 @@ describe("ProductsStore — update produit (contrat identité stable, upsert mê
     expect(virtual?.who).toEqual(["Geo"]);
   });
 
+  it("batchUpdateProducts avec un id inconnu (ni cache ni besoin) → échec explicite, aucune création fantôme", async () => {
+    currentFakePb().seed("products", [makeProductRecord()]);
+    await productsStore.initialize(TEST_EVENT_ID);
+    await waitForTick(5);
+
+    const result = await productsStore.batchUpdateProducts(
+      [TEST_PRODUCT_ID, "absent000000001"],
+      [],
+      "who",
+      { names: ["Geo"] },
+    );
+    await waitForTick(5);
+
+    // L'id inconnu fait échouer son lot côté serveur (404 transactionnel) :
+    // échec explicite, jamais un upsert qui créerait une ligne fantôme
+    expect(result.success).toBe(false);
+    const products = await pb.collection("products").getFullList();
+    expect(products).toHaveLength(1);
+    expect(products[0].id).toBe(TEST_PRODUCT_ID);
+  });
+
   it("updateProductBatch convertit storeInfo → champ json natif store (produit synchronisé)", async () => {
     currentFakePb().seed("products", [makeProductRecord()]);
 

@@ -41,6 +41,7 @@ import type {
   PbFetchOptions,
   PbSubscribeOptions,
   PbListOptions,
+  PbBulkOptions,
   PbSyncOptions,
   PbSubscriptionRef,
   PbCollectionName,
@@ -273,6 +274,24 @@ export interface CollectionBatch<T extends PbDoc> {
   update(id: string, data: Partial<T>): CollectionBatch<T>;
   delete(id: string): CollectionBatch<T>;
   send(): Promise<BatchResult<T>>;
+}
+
+/**
+ * Sub-requests per batch chunk — mirrors the server `batch.maxRequests`
+ * setting (default 100). The server rejects a batch carrying more than
+ * that; keep the two in sync at deployment time (checklist S2).
+ */
+export const PB_BATCH_MAX_REQUESTS = 100;
+
+/**
+ * Splits items into batch-sized chunks, clamped to PB_BATCH_MAX_REQUESTS.
+ */
+function* batchChunks<X>(items: X[], size?: number): Generator<X[]> {
+  const step = Math.max(
+    1,
+    Math.min(size ?? PB_BATCH_MAX_REQUESTS, PB_BATCH_MAX_REQUESTS),
+  );
+  for (let i = 0; i < items.length; i += step) yield items.slice(i, i + step);
 }
 
 // =============================================================================
@@ -883,24 +902,41 @@ export function createSyncCollection<T extends PbDoc>(
     return builder;
   }
 
-  /** Bulk create multiple records in a single batch request. */
+  /**
+   * Bulk create multiple records in batched requests. Chunks automatically
+   * at `options.batchSize` (default `PB_BATCH_MAX_REQUESTS`). Rollback is
+   * per chunk — chunks already sent before a failing one stay committed.
+   */
   async function bulkCreate(
     items: Omit<T, "id" | "created" | "updated">[],
+    options?: PbBulkOptions,
   ): Promise<T[]> {
-    const b = createBatch();
-    for (const item of items) b.create(item);
-    const { records } = await b.send();
-    return records;
+    const out: T[] = [];
+    for (const chunk of batchChunks(items, options?.batchSize)) {
+      const b = createBatch();
+      for (const item of chunk) b.create(item);
+      const { records } = await b.send();
+      out.push(...records);
+    }
+    return out;
   }
 
-  /** Bulk update multiple records in a single batch request. */
+  /**
+   * Bulk update multiple records in batched requests. Same chunking and
+   * per-chunk rollback semantics as `bulkCreate`.
+   */
   async function bulkUpdate(
     items: { id: string; data: Partial<T> }[],
+    options?: PbBulkOptions,
   ): Promise<T[]> {
-    const b = createBatch();
-    for (const item of items) b.update(item.id, item.data);
-    const { records } = await b.send();
-    return records;
+    const out: T[] = [];
+    for (const chunk of batchChunks(items, options?.batchSize)) {
+      const b = createBatch();
+      for (const item of chunk) b.update(item.id, item.data);
+      const { records } = await b.send();
+      out.push(...records);
+    }
+    return out;
   }
 
   /**
@@ -918,21 +954,37 @@ export function createSyncCollection<T extends PbDoc>(
     return records[0];
   }
 
-  /** Bulk upsert multiple records in a single batch request. */
+  /**
+   * Bulk upsert multiple records in batched requests. Same chunking and
+   * per-chunk rollback semantics as `bulkCreate`.
+   */
   async function bulkUpsert(
     items: (Omit<T, "id" | "created" | "updated"> & { id?: string })[],
+    options?: PbBulkOptions,
   ): Promise<T[]> {
-    const b = createBatch();
-    for (const item of items) b.upsert(item);
-    const { records } = await b.send();
-    return records;
+    const out: T[] = [];
+    for (const chunk of batchChunks(items, options?.batchSize)) {
+      const b = createBatch();
+      for (const item of chunk) b.upsert(item);
+      const { records } = await b.send();
+      out.push(...records);
+    }
+    return out;
   }
 
-  /** Bulk delete multiple records in a single batch request. */
-  async function bulkDelete(ids: string[]): Promise<void> {
-    const b = createBatch();
-    for (const id of ids) b.delete(id);
-    await b.send();
+  /**
+   * Bulk delete multiple records in batched requests. Same chunking and
+   * per-chunk rollback semantics as `bulkCreate`.
+   */
+  async function bulkDelete(
+    ids: string[],
+    options?: PbBulkOptions,
+  ): Promise<void> {
+    for (const chunk of batchChunks(ids, options?.batchSize)) {
+      const b = createBatch();
+      for (const id of chunk) b.delete(id);
+      await b.send();
+    }
   }
 
   // =====================================================================

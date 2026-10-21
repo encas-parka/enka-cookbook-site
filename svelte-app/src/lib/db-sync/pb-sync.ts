@@ -30,6 +30,7 @@ export {
   createSyncCollection,
   mergeByKey,
   pbDate,
+  PB_BATCH_MAX_REQUESTS,
   RecordDeletedError,
   RecordNotFoundError,
 } from "./pb-collection";
@@ -56,6 +57,7 @@ export type {
   PbFetchOptions,
   PbSubscribeOptions,
   PbListOptions,
+  PbBulkOptions,
   PbSyncOptions,
   PbSubscriptionRef,
   PbCollectionName,

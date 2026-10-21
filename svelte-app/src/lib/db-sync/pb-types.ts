@@ -78,6 +78,19 @@ export interface PbListOptions extends PbFetchOptions {
   perPage?: number;
 }
 
+/**
+ * Options shared by the bulk write operations.
+ */
+export interface PbBulkOptions {
+  /**
+   * Sub-requests per batch chunk. Defaults to `PB_BATCH_MAX_REQUESTS`
+   * (mirrors the server `batch.maxRequests` setting); clamped to it —
+   * a larger value would make the server reject the batch.
+   */
+  batchSize?: number;
+}
+
+
 // =============================================================================
 // MERGE STRATEGIES
 // =============================================================================

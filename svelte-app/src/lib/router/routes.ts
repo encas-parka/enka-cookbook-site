@@ -126,6 +126,8 @@ export const routes: Routes = {
 
   "/event/:id": {
     hooks: eventGuard,
+    // Bandeau d'invitation partagé : monté une fois pour toute la branche.
+    layout: () => import("$lib/routes/EventLayout.svelte"),
     "/": () => import("$lib/routes/EventEditPage.svelte"),
     "/recipes": () => import("$lib/routes/EventRecipesPage.svelte"),
     "/products": () => import("$lib/routes/EventProductsPage.svelte"),

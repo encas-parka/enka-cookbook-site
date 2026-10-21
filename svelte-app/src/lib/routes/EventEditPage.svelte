@@ -2,7 +2,6 @@
   import EventMealCard from "$lib/components/eventEdit/EventMealCard.svelte";
   import PermissionsManager from "$lib/components/PermissionsManager.svelte";
 
-  import EventInvitationAlert from "$lib/components/EventInvitationAlert.svelte";
   import { toastService } from "$lib/services/toast.service.svelte";
   import { eventsStore } from "$lib/stores/EventsStore.svelte";
   import { nativeTeamsStore } from "$lib/stores/NativeTeamsStore.svelte";
@@ -903,31 +902,6 @@
   // AUTRES HANDLERS
   // ============================================================================
 
-  async function handleInvitationResponse(accept: boolean) {
-    if (!eventId || !globalState.userId) return;
-
-    try {
-      isBusy = true;
-
-      const newStatus = accept ? "accepted" : "declined";
-
-      await eventsStore.updateContributorStatus(
-        eventId,
-        globalState.userId,
-        newStatus,
-      );
-
-      toastService.success(
-        accept ? "Invitation acceptée" : "Invitation déclinée",
-      );
-    } catch (error) {
-      console.error("Erreur réponse invitation:", error);
-      toastService.error("Erreur lors de la réponse");
-    } finally {
-      isBusy = false;
-    }
-  }
-
   // ============================================================================
   // STATUS CONFIRMATION HANDLERS
   // ============================================================================
@@ -1170,13 +1144,6 @@
       </div>
     </div>
   {/if}
-
-  <!-- Alerte d'invitation pour les utilisateurs invités -->
-  <EventInvitationAlert
-    {currentEvent}
-    {isBusy}
-    onRespond={handleInvitationResponse}
-  />
 
   {#if isBusy && !isInitialised}
     <div class="flex items-center justify-center py-20">

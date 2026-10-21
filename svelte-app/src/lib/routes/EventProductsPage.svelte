@@ -23,7 +23,6 @@
   import { productsStore } from "$lib/stores/ProductsStore.svelte";
 
   // Components
-  import EventInvitationAlert from "$lib/components/EventInvitationAlert.svelte";
   import ActiveFiltersIndicator from "$lib/components/eventProducts/ActiveFiltersIndicator.svelte";
   import AddProductModal from "$lib/components/eventProducts/AddProductModal.svelte";
   import GlobalPurchasesModal from "$lib/components/eventProducts/GlobalPurchasesModal.svelte";
@@ -326,34 +325,6 @@
       currentEvent?.status !== "canceled",
   );
 
-  /**
-   * Gère la réponse à l'invitation (accepter/refuser)
-   */
-  async function handleInvitationResponse(accept: boolean) {
-    if (!eventId || !globalState.userId) return;
-
-    try {
-      isLoading = true;
-
-      const newStatus = accept ? "accepted" : "declined";
-
-      await eventsStore.updateContributorStatus(
-        eventId,
-        globalState.userId,
-        newStatus,
-      );
-
-      toastService.success(
-        accept ? "Invitation acceptée" : "Invitation déclinée",
-      );
-    } catch (error) {
-      console.error("Erreur réponse invitation:", error);
-      toastService.error("Erreur lors de la réponse");
-    } finally {
-      isLoading = false;
-    }
-  }
-
   // =========================================================================
   // NAVBAR CONFIGURATION
   // =========================================================================
@@ -468,13 +439,6 @@
       </div>
     </div>
   {:else}
-    <!-- Alerte d'invitation pour les utilisateurs invités -->
-    <EventInvitationAlert
-      {currentEvent}
-      isBusy={isLoading}
-      onRespond={handleInvitationResponse}
-    />
-
     <!-- Contenu une fois chargé -->
     <div
       class="flex flex-wrap items-baseline justify-between gap-4 rounded-box border-2 border-base-300 bg-base-100 p-4 print:hidden"

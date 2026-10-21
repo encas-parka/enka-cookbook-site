@@ -528,65 +528,23 @@ export class EventsStore {
   }
 
   /**
-   * Vérifie si l'utilisateur peut éditer un événement
+   * Point de passage unique du droit d'édition d'un événement : le créateur,
+   * ou un participant confirmé (entrée accepted au registre). Une équipe
+   * invitée ouvre la visibilité et l'invitation — jamais l'édition.
    */
-  canEditEvent(eventId: string): boolean {
-    if (!this.#userId) return false;
-
+  canUserEditEvent(eventId: string, userId: string): boolean {
     const event = this.#enrichedMap.get(eventId);
-    if (!event) return false;
-
-    // Créateur
-    if (event.createdBy === this.#userId) return true;
-
-    // Membre d'une équipe autorisée
-    if (event.teams?.some((teamId) => this.#userTeams.includes(teamId)))
-      return true;
-
-    // Contributeur accepté
-    if (
-      event.contributors?.some(
-        (c) => c.id === this.#userId && c.status === "accepted",
-      )
-    ) {
-      return true;
-    }
-
-    return false;
-  }
-
-  /**
-   * Vérifie si un utilisateur spécifique peut éditer un événement
-   */
-  canUserEditEvent(
-    eventId: string,
-    userId: string,
-    userTeams?: string[],
-  ): boolean {
-    const event = this.#enrichedMap.get(eventId);
-    if (!event) return false;
-    if (!userId) return false;
+    if (!event || !userId) return false;
 
     // Créateur
     if (event.createdBy === userId) return true;
 
-    // Membre d'une équipe autorisée
-    if (event.teams?.length && userTeams?.length) {
-      if (event.teams.some((teamId) => userTeams.includes(teamId))) {
-        return true;
-      }
-    }
-
-    // Contributeur accepté
-    if (
+    // Participant confirmé
+    return (
       event.contributors?.some(
         (c) => c.id === userId && c.status === "accepted",
-      )
-    ) {
-      return true;
-    }
-
-    return false;
+      ) ?? false
+    );
   }
 
   // =============================================================================
@@ -769,6 +727,74 @@ export class EventsStore {
     if (!event) return "";
     const user = event.contributors.filter((c) => c.id === this.#userId);
     return user.length > 0 ? user[0].status : "";
+  }
+
+  /**
+   * Statut de participation de l'utilisateur courant, dérivé.
+   *
+   * Une entrée au registre fait foi ; sans entrée, toute personne rendue
+   * visible (équipe invitée, invité individuel) est une invitation
+   * virtuelle — statut `invited` sans aucune écriture. Le créateur et les
+   * hors canaux ne sont pas des invités (null).
+   */
+  getRsvpStatus(eventId: string): "accepted" | "invited" | "declined" | null {
+    if (!this.#userId) return null;
+
+    const event = this.#enrichedMap.get(eventId);
+    if (!event) return null;
+
+    const entry = event.contributors?.find((c) => c.id === this.#userId);
+    if (entry) return entry.status;
+
+    if (event.createdBy === this.#userId) return null;
+
+    const viaTeam = event.teams?.some((teamId) =>
+      this.#userTeams.includes(teamId),
+    );
+    const viaGuestUser = event.guestUsers?.includes(this.#userId) ?? false;
+
+    return viaTeam || viaGuestUser ? "invited" : null;
+  }
+
+  /**
+   * Enregistre la réponse de l'utilisateur courant à son invitation (upsert).
+   *
+   * Sans entrée au registre (invitation virtuelle), la réponse crée l'entrée
+   * avec l'email et le nom de la session ; avec entrée, elle met à jour le
+   * statut. L'écriture ne porte que contributors — aucun canal de
+   * visibilité n'est touché.
+   */
+  async respondToInvitation(
+    eventId: string,
+    accept: boolean,
+  ): Promise<EnrichedEvent> {
+    if (!this.#userId) throw new Error("Utilisateur non connecté");
+
+    const event = this.#enrichedMap.get(eventId);
+    if (!event) throw new Error("Événement introuvable");
+
+    const status = accept ? ("accepted" as const) : ("declined" as const);
+    const contributors = [...event.contributors];
+    const index = contributors.findIndex((c) => c.id === this.#userId);
+
+    if (index === -1) {
+      contributors.push({
+        id: this.#userId,
+        email: globalState.userEmail || undefined,
+        name: globalState.userName || undefined,
+        status,
+        invitedAt: new Date().toISOString(),
+        respondedAt: new Date().toISOString(),
+      });
+    } else {
+      contributors[index] = {
+        ...contributors[index],
+        status,
+        respondedAt: new Date().toISOString(),
+      };
+    }
+
+    return await this.updateEvent(eventId, { contributors });
   }
 
   /**

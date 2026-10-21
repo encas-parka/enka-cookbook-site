@@ -13,7 +13,7 @@
   let { events = [], loading = false, cardClass = "" }: Props = $props();
 
   function hasInvitation(eventId: string) {
-    return eventsStore.getContributorStatus(eventId) === "invited";
+    return eventsStore.getRsvpStatus(eventId) === "invited";
   }
 </script>
 

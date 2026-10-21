@@ -11,7 +11,7 @@
   import { online } from "svelte/reactivity/window";
   import { navBarStore } from "$lib/stores/NavBarStore.svelte";
   import LeftPanel from "../components/ui/LeftPanel.svelte";
-  import EventInvitationAlert from "../components/EventInvitationAlert.svelte";
+
   import PosterDisplay from "../components/eventPoster/PosterDisplay.svelte";
   import PosterConfiguration from "../components/eventPoster/PosterConfiguration.svelte";
   import { fade } from "svelte/transition";
@@ -92,23 +92,12 @@
   // Print state - null = print all, string = print only this section
   let currentPrintTarget = $state<string | null>(null);
 
-  // Invitation state
-  let isBusy = $state(false);
-
-  // Check if user has accepted invitation
+  // Check if user has accepted invitation — même gate que les autres pages
   const canEdit = $derived.by(() => {
     if (!event) return false;
     if (!online.current) return false;
 
-    const userId = globalState.userId || "";
-
-    // Creator can always edit
-    if (event.createdBy === userId) return true;
-
-    // Contributor with accepted status can edit
-    const contributor = event.contributors?.find((c) => c.id === userId);
-
-    return contributor?.status === "accepted";
+    return eventsStore.canUserEditEvent(eventId, globalState.userId || "");
   });
 
   // Recipe modifications (temporary for printing)
@@ -418,31 +407,6 @@
     return recipeNames[recipeKey] || originalName;
   }
 
-  async function handleInvitationResponse(accept: boolean) {
-    if (!route.params.id || !globalState.userId) return;
-
-    try {
-      isBusy = true;
-
-      const newStatus = accept ? "accepted" : "declined";
-
-      await eventsStore.updateContributorStatus(
-        route.params.id,
-        globalState.userId,
-        newStatus,
-      );
-
-      globalState.toast.success(
-        accept ? "Invitation acceptée" : "Invitation déclinée",
-      );
-    } catch (error) {
-      console.error("Erreur réponse invitation:", error);
-      globalState.toast.error("Erreur lors de la réponse");
-    } finally {
-      isBusy = false;
-    }
-  }
-
   // Configure nav bar
   $effect(() => {
     if (event) {
@@ -502,15 +466,6 @@
     class="min-h-screen bg-base-200 print:h-auto print:min-h-0"
     transition:fade
   >
-    <!-- Invitation Alert -->
-    <div class="mx-auto px-4 py-4 print:hidden">
-      <EventInvitationAlert
-        currentEvent={event}
-        {isBusy}
-        onRespond={handleInvitationResponse}
-      />
-    </div>
-
     <div class="print:m-0 print:p-0 {globalState.isDesktop ? 'ml-96' : ''}">
       <PosterDisplay
         {event}

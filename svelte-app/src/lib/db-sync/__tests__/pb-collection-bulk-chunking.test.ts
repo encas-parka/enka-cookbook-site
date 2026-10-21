@@ -18,7 +18,7 @@ vi.mock("pocketbase", async () => {
   return { default: FakePocketBase };
 });
 
-import { describe, it, expect, beforeEach, vi } from "vitest";
+import { describe, it, expect, beforeEach, afterEach, vi } from "vitest";
 import { currentFakePb } from "../../stores/__tests__/harness/stub-pb";
 import { clearDexie } from "../../stores/__tests__/harness/seed-dexie";
 import {
@@ -42,7 +42,12 @@ function productsCollection() {
 
 /** Payload create (champs système retirés) pour l'index i. */
 function bulkPayload(i: number) {
-  const { id: _id, created: _c, updated: _u, ...payload } = makeProductRecord({
+  const {
+    id: _id,
+    created: _c,
+    updated: _u,
+    ...payload
+  } = makeProductRecord({
     id: bulkId(i),
     productName: `Bulk ${i}`,
   });
@@ -54,6 +59,8 @@ describe("pb-collection — bulk* découpés à la limite batch PB", () => {
     currentFakePb().reset();
     await clearDexie();
   });
+
+  afterEach(() => vi.restoreAllMocks());
 
   it("bulkCreate au-delà de la limite : découpage en lots, serveur et miroir complets", async () => {
     const col = productsCollection();
@@ -70,7 +77,6 @@ describe("pb-collection — bulk* découpés à la limite batch PB", () => {
       PB_BATCH_MAX_REQUESTS + 5,
     );
     expect(await db.products.count()).toBe(PB_BATCH_MAX_REQUESTS + 5);
-    spy.mockRestore();
   });
 
   it("option batchSize : découpage plus fin que la limite serveur", async () => {
@@ -82,7 +88,6 @@ describe("pb-collection — bulk* découpés à la limite batch PB", () => {
 
     expect(spy).toHaveBeenCalledTimes(4); // 3 + 3 + 3 + 1
     expect(records).toHaveLength(10);
-    spy.mockRestore();
   });
 
   it("rollback PAR LOT : un lot qui échoue préserve les lots déjà envoyés (serveur + miroir)", async () => {
@@ -106,9 +111,7 @@ describe("pb-collection — bulk* découpés à la limite batch PB", () => {
 
     // Lot 1 committé des deux côtés ; lot 2 absent des deux côtés
     const server = await pb.collection("products").getFullList();
-    const names = Object.fromEntries(
-      server.map((r) => [r.id, r.productName]),
-    );
+    const names = Object.fromEntries(server.map((r) => [r.id, r.productName]));
     expect(names[TEST_PRODUCT_ID]).toBe("Eau gazeuse");
     expect(names[bulkId(1)]).toBe("Bulk 1 modifié");
     expect(names["absent000000001"]).toBeUndefined();
@@ -134,8 +137,7 @@ describe("pb-collection — bulk* découpés à la limite batch PB", () => {
     expect(records).toHaveLength(total);
 
     await col.bulkDelete(items.map((item) => item.id));
-    expect(spy).toHaveBeenCalledTimes(6); // 100 + 100 + 1
+    expect(spy).toHaveBeenCalledTimes(6); // cumulé : 3 (upsert) + 3 (delete)
     expect(await pb.collection("products").getFullList()).toHaveLength(0);
-    spy.mockRestore();
   });
 });

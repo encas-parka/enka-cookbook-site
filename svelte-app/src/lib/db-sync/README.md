@@ -345,9 +345,9 @@ interface PbSyncOptions<T> {
 | Method        | Signature                                                                                                         | Description                                                                                |
 | ------------- | ----------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
 | `createBatch` | `() => CollectionBatch<T>`                                                                                        | Returns a chainable batch builder.                                                         |
-| `upsert`      | `(data: Omit<T, 'id' \| 'created' \| 'updated'> & { id?: string }) => Promise<T>`                                  | Sugar: one-operation batch upsert (update if the id exists server-side, create otherwise). |
-| `bulkCreate`  | `(items: Omit<T, 'id' \| 'created' \| 'updated'>[], options?: PbBulkOptions) => Promise<T[]>`                      | Shorthand: create multiple records.                                                        |
-| `bulkUpdate`  | `(items: { id, data: Partial<T> }[], options?: PbBulkOptions) => Promise<T[]>`                                     | Shorthand: update multiple records.                                                        |
+| `upsert`      | `(data: Omit<T, 'id' \| 'created' \| 'updated'> & { id?: string }) => Promise<T>`                                 | Sugar: one-operation batch upsert (update if the id exists server-side, create otherwise). |
+| `bulkCreate`  | `(items: Omit<T, 'id' \| 'created' \| 'updated'>[], options?: PbBulkOptions) => Promise<T[]>`                     | Shorthand: create multiple records.                                                        |
+| `bulkUpdate`  | `(items: { id, data: Partial<T> }[], options?: PbBulkOptions) => Promise<T[]>`                                    | Shorthand: update multiple records.                                                        |
 | `bulkUpsert`  | `(items: (Omit<T, 'id' \| 'created' \| 'updated'> & { id?: string })[], options?: PbBulkOptions) => Promise<T[]>` | Shorthand: upsert multiple records.                                                        |
 | `bulkDelete`  | `(ids: string[], options?: PbBulkOptions) => Promise<void>`                                                       | Shorthand: delete multiple records.                                                        |
 

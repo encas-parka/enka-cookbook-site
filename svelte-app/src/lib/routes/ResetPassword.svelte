@@ -1,7 +1,9 @@
 <script lang="ts">
   import { onMount } from "svelte";
   import { navBarStore } from "$lib/stores/NavBarStore.svelte";
+  import { globalState } from "$lib/stores/GlobalState.svelte";
   import { pb } from "$lib/db-sync/pb-sync";
+  import { readResetTokenEmail } from "$lib/services/pb-auth";
   import { navigate, route } from "$lib/router";
 
   import {
@@ -76,8 +78,14 @@
 
       successMessage = "Mot de passe réinitialisé avec succès !";
 
+      // `confirmPasswordReset` n'ouvre pas de session : on ramène sur
+      // l'accueil avec la modale de connexion, email prérempli depuis le
+      // token — le flux post-login reprend ensuite (dashboard).
+      const email = readResetTokenEmail(token);
       setTimeout(() => {
-        navigate("/dashboard");
+        void navigate("/", { replace: true }).then(() =>
+          globalState.openAuthModal({ prefillEmail: email ?? undefined }),
+        );
       }, 3000);
     } catch (error: any) {
       console.error("Erreur réinitialisation:", error);
@@ -97,7 +105,10 @@
   }
 
   function goToLogin() {
-    navigate("/");
+    // Le lien est mort (ou le reset est terminé) : place à la connexion.
+    void navigate("/", { replace: true }).then(() =>
+      globalState.openAuthModal(),
+    );
   }
 </script>
 

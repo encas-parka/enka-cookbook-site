@@ -132,6 +132,34 @@ export async function emailExists(email: string): Promise<boolean> {
 }
 
 /**
+ * Lit l'email porté par un token de réinitialisation de mot de passe.
+ *
+ * PocketBase embarque `email` dans les claims de ce token — son propre
+ * dashboard s'en sert pour afficher le compte concerné — mais ce n'est pas un
+ * contrat public : toute anomalie rend `null` et l'appelant se rabat sur une
+ * saisie manuelle.
+ */
+export function readResetTokenEmail(token: string): string | null {
+  try {
+    const payload = token.split(".")[1];
+    if (!payload) return null;
+
+    const base64 = payload.replace(/-/g, "+").replace(/_/g, "/");
+    const padded = base64.padEnd(Math.ceil(base64.length / 4) * 4, "=");
+    const bytes = Uint8Array.from(atob(padded), (char) => char.charCodeAt(0));
+    const claims = JSON.parse(new TextDecoder().decode(bytes)) as {
+      email?: unknown;
+    };
+
+    return typeof claims.email === "string" && claims.email
+      ? claims.email
+      : null;
+  } catch {
+    return null;
+  }
+}
+
+/**
  * Écoute les changements d'authentification (login/logout).
  * Retourne une fonction de désabonnement.
  */

@@ -21,6 +21,9 @@
 > annoté. §11-3 (coupure PB) et §11-4 (onglet caché) seront joués à la main.
 > Ajout 20-10 (post-audit delta-sync, commit `01b5f6fa`) : 1 item en §10 —
 > join d'équipe avec cache établi (30 restants).
+> **Ajout 21-10 (redirection post-login — `fac8e326`, `3c0ac6ce`, `ce80a318`,
+> `0fa77110`) : §1 « route privée en visiteur » requalifiée (modale, pas toast ;
+> décochée) + 4 items (§2 ×3, §10 ×1). État : 46 cochés / 34 restants.**
 
 ## 0. Prérequis
 
@@ -58,12 +61,15 @@
       _(passe 20-10 : résultats pertinents (« pomme » → 13/13) ; re-qualifié
       20-10 par click-through humain : **recherche + typeR fonctionnent** —
       P2 était un faux positif du driver, code vérifié correct statiquement)_
-- [x] Route privée en visiteur → tableau de bord, avec un feedback lisible :
-      jamais page vide, jamais loading infini, jamais `effect_update_depth_exceeded`
-      (vérifier `/event/:id`, `/recipe/:uuid/edit`, `/dashboard/*`, `/createdocument/*`).
-      _(passe 20-10 : comportement réel = redirect `/` + toast — épinglé par
-      guards.test.ts, pas « tableau de bord » ; toast vu sur `/dashboard/*`,
-      redirect sans page vide sur les autres ; flash « Démarrage... » sur
+- [ ] Route privée en visiteur → **modale de connexion** (le feedback), puis
+      `/` : aucun toast d'erreur, et la page visée est rejouée après login.
+      Jamais page vide, jamais loading infini, jamais
+      `effect_update_depth_exceeded` (vérifier `/event/:id`, `/recipe/:uuid/edit`,
+      `/dashboard/*`, `/createdocument/*`).
+      _(requalifié 21-10 — commit `fac8e326` : le guard n'affiche plus de toast,
+      il ouvre la modale et mémorise le `pathname`. **À rejouer** : modale
+      visible sur chaque route privée, aucun toast résiduel, redirect `/`.
+      Historique 20-10 : redirect `/` + toast, flash « Démarrage... » sur
       `/createdocument/*` — voir P5)_
 - [x] URL inconnue → page 404.
 
@@ -78,6 +84,21 @@
       problèmes P3/P4 touchent tous les comptes)_
 - [x] Visite non authentifiée puis login → aucun résidu IndexedDB.
       _(passe 20-10 : séquence visiteur → Marion → logout → ghald, propre)_
+- [ ] Login depuis la home → atterrissage sur `/dashboard` (plus de retour à la
+      home) ; bouton retour du navigateur → home.
+      _(ajouté 21-10 — `fac8e326` : la navigation part au cache local prêt, la
+      sync réseau continue derrière et son issue arrive en toast « données à
+      jour » ou « mode hors ligne »)_
+- [ ] Route privée en visiteur → modale → identifiants → retour **sur la page
+      refusée**, pas sur la home.
+      _(ajouté 21-10 — `fac8e326` + `3c0ac6ce` : intention de guard rejouée.
+      Vérifier aussi qu'une modale ouverte depuis le header n'hérite pas d'une
+      intention restante : elle doit mener au dashboard)_
+- [ ] « Mot de passe oublié » → reset abouti → retour `/` avec la modale ouverte
+      et **l'email prérempli** → login → dashboard.
+      _(ajouté 21-10 — `ce80a318` : l'email vient des claims du token. Réserve :
+      le lien du mail pointe encore l'Admin UI PB, donc à jouer depuis
+      `/reset-password?token=…` — backlog `26-10-21_templates-email-pb-defaut.md`)_
 
 ## 3. Events
 
@@ -342,6 +363,12 @@
       « Participant confirmé », `guestUsers` + `contributors` écrits en base ✓.
       **Réserve majeure : P12** — à l'arrivée, l'event s'ouvre mais ses
       données existantes (documents) restent invisibles)_
+- [ ] Share link ouvert **en visiteur** → « Se connecter » → modale → login →
+      le lien reprend seul, l'event s'ouvre, et le participant apparaît dans la
+      liste des contributeurs **sans reload**.
+      _(ajouté 21-10 — `0fa77110` : la revalidation post-join est un skip
+      silencieux tant que la sync de session tourne ; ce parcours est le seul
+      qui prouve le correctif à l'écran)_
 - [x] Email d'invitation : toast `ok:false` attendu sans SMTP, invitation
       malgré tout posée.
       _(passe 20-10 : invitation `passe20-10@example.com` posée

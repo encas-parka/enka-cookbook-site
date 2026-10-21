@@ -18,6 +18,7 @@
  * */
 
 import { createRouter, Router as SvRouter, searchParams } from "sv-router";
+import type { NavigateOptions, Navigation } from "sv-router";
 import { routes } from "./routes";
 
 /**
@@ -38,6 +39,28 @@ export const { p, navigate, isActive, preload, route } = createRouter(routes);
  * </Router>
  */
 export const Router = SvRouter;
+
+/**
+ * `navigate` type ses cibles par littéral de route et ses arguments par route
+ * paramétrée ; un chemin runtime (`/event/abc123`) n'y est pas assignable.
+ * Le cast reste au bord : le chemin vient de `route` ou d'un `pathname` de
+ * guard, donc il désigne toujours une route réelle.
+ */
+const navigateRuntime = navigate as (
+  path: string,
+  options?: NavigateOptions,
+) => Promise<Navigation>;
+
+/**
+ * Navigation vers un chemin construit à l'exécution (intention mémorisée par
+ * un guard, cible de redirection post-login).
+ */
+export function navigateTo(
+  path: string,
+  options?: NavigateOptions,
+): Promise<Navigation> {
+  return navigateRuntime(path, options);
+}
 
 /**
  * searchParams - Manipulation réactive des query params

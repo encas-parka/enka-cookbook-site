@@ -12,7 +12,7 @@
   import Toast from "./lib/components/ui/Toast.svelte";
   import { globalState } from "./lib/stores/GlobalState.svelte";
   import { toastService } from "./lib/services/toast.service.svelte";
-  import { Router, preload } from "$lib/router";
+  import { Router, navigateTo, preload, route } from "$lib/router";
 
   type AppState = "BOOTING" | "READY" | "ERROR";
   let appState = $state<AppState>("BOOTING");
@@ -121,8 +121,37 @@
   let displayError = $derived(initError || productsStore.error);
 
   async function handleLoginSuccess() {
+    const origin = route.pathname;
     globalState.authModal.isOpen = false;
+
+    // Cible : la page qu'un guard avait refusée, sinon le dashboard.
+    const target = globalState.consumePendingPath() ?? "/dashboard";
+    // `preload` type ses cibles par littéral ; la cible est un chemin runtime.
+    void preload(target as `/${string}`);
+
+    // Point de coupe : purge d'identité + cache Dexie. La synchronisation
+    // réseau continue derrière la navigation (les stores sont des
+    // singletons, rien ne l'interrompt).
     await globalState.refreshAuthAfterLogin();
+    if (!globalState.isAuthenticated) return;
+
+    // Feedback différé : la navigation est immédiate, ce toast ne s'affiche
+    // qu'une fois les données réellement à jour (ou hors ligne assumé).
+    void globalState.hydration.then((complete) => {
+      if (!globalState.isAuthenticated) return;
+      if (complete) {
+        toastService.success("Vos données sont à jour");
+      } else {
+        toastService.warning("Mode hors ligne : données mises en cache", {
+          autoCloseDelay: 5000,
+        });
+      }
+    });
+
+    // L'utilisateur a repris la main pendant l'hydratation locale : sa
+    // navigation prime sur la redirection différée.
+    if (route.pathname !== origin) return;
+    navigateTo(target);
   }
 </script>
 
@@ -176,6 +205,7 @@
   <AuthModal
     bind:isOpen={globalState.authModal.isOpen}
     showLogin={globalState.authModal.showLogin}
+    defaultEmail={globalState.authModal.prefillEmail ?? ""}
     onAuth_success={handleLoginSuccess}
   />
 {/await}

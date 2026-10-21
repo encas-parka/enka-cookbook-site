@@ -14,6 +14,8 @@
     isOpen = $bindable(),
     onAuth_success = async () => {},
     showLogin: initialShowLogin = true,
+    /** Email prérempli (retour d'un lien de réinitialisation de mot de passe). */
+    defaultEmail = "",
   } = $props();
 
   // États avec runes Svelte 5
@@ -29,6 +31,7 @@
     if (isOpen) {
       showLogin = initialShowLogin;
       showForgotPassword = false;
+      if (defaultEmail) loginEmail = defaultEmail;
     }
   });
 
@@ -101,10 +104,8 @@
     try {
       await loginWithPassword(loginEmail, loginPassword);
 
-      successMessage = "Connexion réussie !";
-      setTimeout(() => {
-        onAuth_success();
-      }, 1000);
+      // Pas de message de succès : la redirection qui suit est le feedback.
+      await onAuth_success();
     } catch (error: any) {
       console.error("Erreur de connexion:", error);
       errorMessage = error.message || "Erreur lors de la connexion";
@@ -119,10 +120,8 @@
     try {
       await register(registerName, registerEmail, registerPassword);
 
-      successMessage = "Compte créé et connecté !";
-      setTimeout(() => {
-        onAuth_success();
-      }, 1000);
+      // Pas de message de succès : la redirection qui suit est le feedback.
+      await onAuth_success();
     } catch (error: any) {
       console.error("Erreur d'inscription:", error);
 

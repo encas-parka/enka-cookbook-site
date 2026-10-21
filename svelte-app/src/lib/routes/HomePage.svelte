@@ -7,13 +7,12 @@
   import EmailVerificationAlert from "../components/ui/EmailVerificationAlert.svelte";
   import { globalState } from "../stores/GlobalState.svelte";
 
-  function openAuthModal() {
-    globalState.authModal.isOpen = true;
+  function openLoginModal() {
+    globalState.openAuthModal();
   }
 
   function openRegisterModal() {
-    globalState.authModal.showLogin = false;
-    globalState.authModal.isOpen = true;
+    globalState.openAuthModal({ showLogin: false });
   }
 
   export function fadeScale(
@@ -245,7 +244,7 @@
 
     {#if !globalState.isAuthenticated}
       <p class="text-center text-base-content/60">
-        Déjà membre ? <button class="link" onclick={openAuthModal}>
+        Déjà membre ? <button class="link" onclick={openLoginModal}>
           Connectez-vous
         </button> pour gérer vos cantines et équipes
       </p>

@@ -244,8 +244,7 @@
   }
 
   function handleLogin() {
-    globalState.authModal.showLogin = true;
-    globalState.authModal.isOpen = true;
+    globalState.openAuthModal();
   }
 
   async function handleReloadRecipes() {

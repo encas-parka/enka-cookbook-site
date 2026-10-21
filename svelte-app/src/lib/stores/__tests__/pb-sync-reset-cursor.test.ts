@@ -5,7 +5,7 @@
 /**
  * pb-sync resetCursor — invalidation du curseur delta.
  *
- * Le trou P12 (click-through 20-10) : quand le périmètre autorisé s'élargit
+ * Quand le périmètre autorisé s'élargit
  * (join d'event par share link, invitation team), des records deviennent
  * visibles côté serveur avec un `updated` ANTÉRIEUR au curseur local —
  * aucun delta ne les ramène jamais. `resetCursor()` supprime la clé
@@ -53,7 +53,7 @@ describe("pb-sync resetCursor — élargissement de périmètre", () => {
       makeProductRecord({ id: "t13prod00000002", updated: T_GRANTED }),
     );
 
-    // Le delta ne le ramène pas — c'est le trou P12
+    // Le delta ne le ramène pas
     await products.initialFetch();
     expect(await db.products.get("t13prod00000002")).toBeUndefined();
 
@@ -96,7 +96,7 @@ describe("pb-sync resetCursor — élargissement de périmètre", () => {
 });
 
 /**
- * Classe B de l'audit delta-sync : le « curseur empoisonné ». Un `updated`
+ * Le « curseur empoisonné » : un `updated`
  * futur (dérive d'horloge serveur, puis correction NTP) hisse le curseur
  * au-dessus du présent — tous les records écrits après correction passent
  * sous le curseur : trou permanent. Le garde `capToClientClock` plafonne le
@@ -138,7 +138,7 @@ describe("pb-sync cap curseur — anti « curseur empoisonné »", () => {
 
     // Record écrit APRÈS correction : `updated` ~ maintenant. Sans plafond,
     // le curseur vaudrait T_FUTURE > now : ce record serait invisible pour
-    // toujours (le trou de classe B)
+    // toujours
     fakePb.putRecord(
       "products",
       makeProductRecord({

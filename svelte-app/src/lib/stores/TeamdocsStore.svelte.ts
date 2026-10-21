@@ -162,7 +162,7 @@ export class TeamdocsStore {
    * table locale (pas de fenêtre d'état vide). À appeler quand le périmètre
    * autorisé s'élargit — join d'event par share link : les teamdocs existants
    * de l'event portent un `updated` antérieur au curseur, qu'aucun delta ne
-   * ramènerait (trou P12 du click-through 20-10).
+   * ramènerait.
    */
   async resetCursorAndSync(): Promise<void> {
     await this.#resetCursorForSession();

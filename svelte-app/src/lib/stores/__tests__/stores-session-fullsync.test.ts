@@ -55,7 +55,7 @@ import { materielStore } from "$lib/stores/MaterielStore.svelte";
 import { db } from "$lib/db-sync/pb-sync";
 
 // Curseur établi par les données fraîches ; les records "grant élargi"
-// portent un updated strictement antérieur — c'est le trou de classe A.
+// portent un updated strictement antérieur — invisibles au delta comme au SSE.
 const T_CACHE = pbDate(new Date("2026-06-08T11:30:00.000Z"));
 const T_OLD = pbDate(new Date("2026-01-10T09:00:00.000Z"));
 

@@ -381,7 +381,7 @@ export class EventsStore {
    * table locale (pas de fenêtre d'état vide). À appeler quand le périmètre
    * autorisé s'élargit SANS toucher aux records (join d'équipe :
    * `teams.members`) : leur `updated` antérieur au curseur est invisible au
-   * delta comme au SSE. Même pattern que TeamdocsStore (fix P12).
+   * delta comme au SSE.
    */
   async resetCursorAndSync(): Promise<void> {
     await this.#resetCursorForSession();

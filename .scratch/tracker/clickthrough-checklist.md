@@ -27,7 +27,8 @@
 > Passe 21-10 (fix event pages — `807d2bac`, `b4c45ea4`) : §2
 > « /event/:id visiteur → modale → login → meals + produits » **coché** (vert) ;
 > §1 vert sur `/event/:id` seulement — les autres routes privées restent à
-> jouer. **État : 47 cochés / 34 restants.**
+> jouer. **État : 47 cochés / 35 restants** (ajout §3 : édition A→B, verrou
+> libéré au changement d'id — fix « init par id » `21-10`).**
 
 ## 0. Prérequis
 
@@ -113,6 +114,13 @@
 
 ## 3. Events
 
+- [ ] Éditer l'event A (verrou pris, modifs en cours) → naviguer vers l'event B
+      (lien direct) → B affiché vierge, verrou de A libéré, sauvegarde de B
+      sous verrou B.
+      _(ajouté 21-10 — « init par id » : le cleanup du cycle de vie libère le
+      lock de A au changement d'id ; avant, B était édité puis sauvé sous le
+      verrou de A. Le cleanup doit lire `eventId` — un `$effect` sans
+      dépendance ne rejoue jamais)_
 - [x] `/dashboard/eventCreate` : création (teams, dates/repas, description,
       minContrib) → EventCard correcte après save.
       _(passe 20-10 : create → redirect `/event/:id`, repas + recette + team

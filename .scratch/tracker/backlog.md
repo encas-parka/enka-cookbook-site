@@ -15,6 +15,7 @@
 - **S2** Définir `ENKA_BASE_URL` dans l'env du serveur PB (checklist Dokploy 1.8) — sans elle les emails pointent vers la prod.
 - **S2** Upgrade PB 0.37.5 → 0.40.5+ — fixes sécurité (0.39.7 panic workers, 0.40.5 net/http DoS) ; aucun gain timestamps (autodate by design, inchangé jusqu'à 0.40.5, cf. run 26-10-08).
 - **S2** Checklist 1.8 : fetch/merge du contenu Hugo (sync site) avant `migrate.ts` — les 30 verdicts `recipe-convergence` du run 26-10-08 viennent du gel du contenu au 06-10 ; après sync ils deviennent `stale` (re-dérivation attendue, puis validate vert). Inclut le reset password des users migrés.
+- **S2** Porter les settings serveur PB en prod (Dokploy 1.8) — (a) `batch` : `{enabled: true, maxRequests: 100, timeout: 3}` (constante client `PB_BATCH_MAX_REQUESTS` = 100, à garder alignée) ; (b) `rateLimits` : activé avec les règles dev (`*:auth` 2/3s, `*:create` 300/1s, `/api/batch` 3/1s, `/api/` 300/10s). Faits sondez par probe (21-10, dev DB) : les sous-requêtes d'un batch sont rate-limitées **individuellement** par les règles de collection (un lot crée donc du 429 interne si `*:create` est serré — l'interdépendance est réelle) ; `/api/batch` est limitée au niveau HTTP ; **les requêtes superuser sont exemptées du limiter** (sonder toujours en user ordinaire) ; le batch s'arrête à la première sous-requête en erreur (transaction).
 
 ## Bientôt (!)
 

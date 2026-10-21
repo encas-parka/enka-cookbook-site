@@ -54,24 +54,30 @@ export const authGuard: Hooks = {
  * « Utilisateur non connecté » dans beforeLoad : sv-router quitte sans changer
  * l'arbre de composants → page vide sans feedback).
  *
- * Ce guard initialise ensuite uniquement le cache IndexedDB (~10ms).
- * La synchronisation (syncInitial + setupRealtime) est gérée
- * en arrière-plan par App.svelte, avec un toast "Mise à jour en cours...".
+ * Initialise ensuite le cache IndexedDB (~10ms), puis **matérialise l'event
+ * ciblé** (`ensureEvent`) : le cache Dexie peut être vide (login après purge,
+ * deep link), et une page qui monte sur `null` ne se rattrape pas toute seule
+ * — `getEventById` confond « pas encore chargé » et « absent ». Cette attente
+ * est bornée : au-delà, la navigation continue et la réactivité de la page
+ * prend le relais.
  *
- * L'UI s'affiche immédiatement avec les données du cache.
+ * La synchronisation complète (syncInitial + setupRealtime) reste gérée en
+ * arrière-plan par App.svelte / GlobalState.
  */
 export const eventGuard: Hooks = {
-  async beforeLoad({ pathname }) {
+  async beforeLoad({ pathname, params }) {
     requireAuth(pathname);
 
     if (eventsStore.isInitialized) {
       console.log("[EventGuard] ✅ Store déjà initialisé");
-      return;
+    } else {
+      console.log("[EventGuard] Mode normal > loadCache (rapide)");
+      await eventsStore.loadCache();
     }
 
-    console.log("[EventGuard] Mode normal > loadCache (rapide)");
-    await eventsStore.loadCache();
+    const eventId = params?.id;
+    if (eventId) await eventsStore.ensureEvent(eventId);
 
-    console.log("[EventGuard] ✅ Store prêt (cache chargé)");
+    console.log("[EventGuard] ✅ Event prêt");
   },
 };

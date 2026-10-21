@@ -79,6 +79,10 @@ export class EventsStore {
   // Dedup init
   #initPromise: Promise<void> | null = null;
 
+  // Dedup des matérialisations ciblées : un guard et une page qui demandent
+  // le même event en même temps partagent un seul fetch.
+  #ensurePromises = new Map<string, Promise<EnrichedEvent | null>>();
+
   // Garde revalidation : une seule delta sync en vol (les appels concurrents
   // skipent silencieusement — l'orchestrateur de resync peut déclencher
   // plusieurs sources la même seconde). Réinitialisé par le finally.
@@ -443,7 +447,7 @@ export class EventsStore {
   }
 
   /**
-   * Récupère un événement depuis PocketBase (force refresh)
+   * Récupère un événement depuis PocketBase (force refresh, sans cache).
    */
   async fetchEvent(eventId: string): Promise<EnrichedEvent | null> {
     try {
@@ -452,6 +456,60 @@ export class EventsStore {
     } catch (err) {
       console.error(`[EventsStore] Erreur lors du fetch de ${eventId}:`, err);
       return null;
+    }
+  }
+
+  /**
+   * Garantit la disponibilité d'un événement précis avant le montage de sa
+   * page : no-op si le cache local le porte, sinon `view` ciblé puis écriture
+   * Dexie (le bridge liveQuery propage vers `#rawEvents`).
+   *
+   * `null` couvre trois cas que le store ne distingue pas — 404, droits
+   * refusés, réseau indisponible — sans jeter : un guard ne doit jamais
+   * bloquer la navigation sur une absence. L'attente est bornée par
+   * `timeoutMs` ; au-delà la navigation continue et la phase réseau (ou la
+   * réactivité de la page) rattrape.
+   */
+  async ensureEvent(
+    eventId: string,
+    timeoutMs = 2500,
+  ): Promise<EnrichedEvent | null> {
+    const cached = this.getEventById(eventId);
+    if (cached) return cached;
+
+    const inFlight = this.#ensurePromises.get(eventId);
+    if (inFlight) return inFlight;
+
+    const fetchPromise = (async () => {
+      try {
+        const record = await this.#collection.view(eventId);
+        // Écriture locale : la source de vérité UI reste le bridge liveQuery,
+        // pas le retour de `view` (sinon deux chemins de lecture).
+        await db.events.put(record);
+        return this.#enrichEvent(record);
+      } catch (err) {
+        console.warn(
+          `[EventsStore] ensureEvent(${eventId}) indisponible:`,
+          err,
+        );
+        return null;
+      } finally {
+        this.#ensurePromises.delete(eventId);
+      }
+    })();
+
+    this.#ensurePromises.set(eventId, fetchPromise);
+
+    let timer: ReturnType<typeof setTimeout> | undefined;
+    try {
+      return await Promise.race([
+        fetchPromise,
+        new Promise<null>((resolve) => {
+          timer = setTimeout(() => resolve(null), timeoutMs);
+        }),
+      ]);
+    } finally {
+      if (timer) clearTimeout(timer);
     }
   }
 

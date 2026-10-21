@@ -121,6 +121,7 @@ vi.mock("pocketbase", async () => {
 import { describe, it, expect, beforeEach, afterEach, vi } from "vitest";
 import { currentFakePb } from "../../stores/__tests__/harness/stub-pb";
 import { waitForTick } from "../../stores/__tests__/harness/wait-for-tick";
+import { makeEvent } from "../../stores/__tests__/harness/fixtures";
 import { authGuard, eventGuard } from "$lib/router/guards";
 import { routes } from "$lib/router/routes";
 import { globalState } from "$lib/stores/GlobalState.svelte";
@@ -129,8 +130,8 @@ import { toastService } from "$lib/services/toast.service.svelte";
 import { db } from "$lib/db-sync/pb-sync";
 
 /** Contexte HooksContext minimal pour beforeLoad. */
-function hooksContext(pathname: string) {
-  return { pathname, meta: {}, search: {} } as Parameters<
+function hooksContext(pathname: string, params: Record<string, string> = {}) {
+  return { pathname, params, meta: {}, search: {} } as Parameters<
     NonNullable<typeof authGuard.beforeLoad>
   >[0];
 }
@@ -212,6 +213,25 @@ describe("Guards — visiteur redirigé vers la connexion, cache intact", () => 
     expect(eventsStore.isInitialized).toBe(true);
     expect(navigateMock).not.toHaveBeenCalled();
     expect(toastSpy).not.toHaveBeenCalled();
+  });
+
+  it("eventGuard, authentifié : matérialise l'event ciblé avant le montage", async () => {
+    authMock.set(authMock.USER_A);
+    await globalState.initializeAuth();
+    // Cache froid : l'event existe côté serveur, pas dans Dexie.
+    currentFakePb().seed("events", [
+      makeEvent({ id: "cold000000000001", createdBy: "userghald00001" }),
+    ]);
+
+    await eventGuard.beforeLoad!(
+      hooksContext("/event/cold000000000001", { id: "cold000000000001" }),
+    );
+
+    // La page qui montera ensuite trouve sa donnée — plus de montage sur null
+    // (cause du bug meals/produits après login).
+    expect(await db.events.get("cold000000000001")).toBeTruthy();
+    await waitForTick(1);
+    expect(eventsStore.getEventById("cold000000000001")).not.toBeNull();
   });
 });
 

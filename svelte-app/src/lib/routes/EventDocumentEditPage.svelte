@@ -642,6 +642,12 @@
 <UnsavedChangesGuard
   routeKey={`event-document-edit/${eventId}/${docId}`}
   shouldProtect={() => isDirty && isLockedByMe}
+  onLeaveWithoutSave={async () => {
+    // Libérer le lock si on le détient
+    if (isLockedByMe) {
+      await releaseLock();
+    }
+  }}
   message="Vous avez des modifications non sauvegardées. Voulez-vous quitter sans sauvegarder ?"
 />
 

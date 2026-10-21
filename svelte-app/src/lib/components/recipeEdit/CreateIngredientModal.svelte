@@ -313,8 +313,8 @@
 
       <div class="alert alert-outline alert-warning">
         Faites attention à ne pas créer d'ingrédients qui existent déjà (avec
-        une orthographe différente par exemple), cela rend les aggrégations pour
-        les listes de courses foireuses...
+        une orthographe différente par exemple) : cela fausse les agrégations
+        des listes de courses.
       </div>
 
       <fieldset disabled={loading} class="space-y-4">

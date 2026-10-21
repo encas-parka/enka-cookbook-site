@@ -10,6 +10,7 @@
     EnrichedMateriel,
     EnrichedMaterielLoan,
   } from "$lib/types/materiel.types";
+  import { untrack } from "svelte";
   import { toInputDate } from "$lib/utils/date-helpers";
   import {
     AlertCircle,
@@ -260,12 +261,26 @@
     return new Date(existingLoan.startDate ?? 0) <= today;
   });
 
+  // Passe d'ouverture : une exécution par (mode, loanId), hors graphe
+  // réactif — syncRevalidate et getLoanById réécrivent #raw (sync → Dexie →
+  // liveQuery) ; trackés, chaque écriture relancerait cet effet et
+  // re-syncerait en boucle. Fraîcheur en session : SSE + orchestrateur de
+  // resync ; disponibilités/conflits restent réactifs via les $derived.
+  let lastOpenKey: string | null = null;
+
   $effect(() => {
-    if (isOpen) {
-      // Conflits calculés sur des données fraîchement synchronisées : delta
-      // sync silencieux à l'ouverture ; l'affichage se met à jour quand le
-      // résultat atterrit en Dexie (échec silencieux — le statut serveur est
-      // déjà porté par la barre d'état).
+    if (!isOpen) {
+      lastOpenKey = null;
+      return;
+    }
+    const openKey = `${mode}:${loanId ?? "new"}`;
+    if (lastOpenKey === openKey) return;
+    lastOpenKey = openKey;
+
+    untrack(() => {
+      // Delta sync silencieux à l'ouverture ; l'affichage se met à jour
+      // quand le résultat atterrit en Dexie (échec silencieux — le statut
+      // serveur est déjà porté par la barre d'état).
       materielStore.syncRevalidate().catch(() => {});
 
       if (mode === "edit" && loanId && !loading) {
@@ -303,7 +318,7 @@
           selectedEventId = preselectedEventId;
         }
       }
-    }
+    });
   });
 
   function handleAddMateriel(

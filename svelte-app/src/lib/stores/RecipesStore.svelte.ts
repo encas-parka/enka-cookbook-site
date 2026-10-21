@@ -61,9 +61,11 @@ class RecipesStore {
   #syncPromise: Promise<void> = Promise.resolve();
   #syncResolve: (() => void) | null = null;
 
-  // Garde revalidation : une seule delta sync en vol (les appels concurrents
-  // skipent silencieusement). Réinitialisé par le finally.
-  #revalidating = false;
+  // Garde revalidation : une seule delta sync en vol. Les appels concurrents
+  // s'attachent à la promesse en cours au lieu de rendre la main — sinon
+  // `syncInitial` résoudrait `syncReady` avant la fin réelle du fetch (index
+  // recettes incomplet livré à ProductsStore). Réinitialisé par le finally.
+  #revalidatePromise: Promise<void> | null = null;
 
   // =============================================================================
   // GETTERS
@@ -131,11 +133,18 @@ class RecipesStore {
    * Toggle `this.#loading` autour de la revalidation et résout `syncReady`
    * à la fin — le signal « l'index recettes est prêt » consommé par
    * ProductsStore avant son calcul de besoins.
+   *
+   * Un `syncReady` unique est installé par le premier appelant : deux
+   * `syncInitial` concurrents (boot visiteur + login) partagent la même
+   * promesse, sinon le second écraserait le résolveur du premier et son
+   * consommateur resterait bloqué.
    */
   async syncInitial(): Promise<void> {
-    this.#syncPromise = new Promise<void>((resolve) => {
-      this.#syncResolve = resolve;
-    });
+    if (!this.#syncResolve) {
+      this.#syncPromise = new Promise<void>((resolve) => {
+        this.#syncResolve = resolve;
+      });
+    }
 
     try {
       return await this.#runWithLoading(() => this.syncRevalidate());
@@ -147,14 +156,25 @@ class RecipesStore {
 
   /**
    * Revalidation silencieuse (delta sync, sans toggle loading — pas de flash
-   * UI skeleton). Skip silencieux si déjà en cours. Rethrow explicite pour
-   * laisser l'appelant (orchestrateur de resync) décider du signalement.
+   * UI skeleton). Un appel concurrent rejoint la requête en vol (même
+   * promesse) : l'appelant attend la fin réelle du fetch, il ne reçoit pas
+   * une résolution prématurée. Rethrow explicite pour laisser l'appelant
+   * (orchestrateur de resync) décider du signalement.
    * Un changement d'utilisateur en vol (logout) discard le résultat.
    */
   async syncRevalidate(): Promise<void> {
-    if (this.#revalidating) return;
-    this.#revalidating = true;
+    if (this.#revalidatePromise) return this.#revalidatePromise;
 
+    const run = this.#fetchAndMerge();
+    this.#revalidatePromise = run;
+    try {
+      return await run;
+    } finally {
+      if (this.#revalidatePromise === run) this.#revalidatePromise = null;
+    }
+  }
+
+  async #fetchAndMerge(): Promise<void> {
     console.log("[RecipesStore] Synchronisation depuis PocketBase...");
 
     try {
@@ -175,8 +195,6 @@ class RecipesStore {
       this.#error = message;
       console.error("[RecipesStore]", message, err);
       throw err;
-    } finally {
-      this.#revalidating = false;
     }
   }
 
@@ -703,6 +721,9 @@ class RecipesStore {
     this.#rawRecipes.clear();
     this.#loadingDetails.clear();
     this.#initPromise = null;
+    // Un `syncReady` en attente doit être résolu : le remplacer par
+    // Promise.resolve() laisserait son consommateur suspendu à jamais.
+    this.#syncResolve?.();
     this.#syncPromise = Promise.resolve();
     this.#syncResolve = null;
     this.#loading = false;

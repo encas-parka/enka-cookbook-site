@@ -287,13 +287,13 @@
       await toastService.track(
         eventsStore.updateContributorStatus(eventId, userId, "accepted"),
         {
-          loading: "Désinscription en cours...",
-          success: "Vous avez été désinscrit de l'événement",
-          error: "Erreur lors de la désinscription",
+          loading: "Inscription en cours...",
+          success: "Vous participez à l'événement",
+          error: "Erreur lors de l'inscription",
         },
       );
     } catch (error) {
-      console.error("Erreur lors de la désinscription:", error);
+      console.error("Erreur lors de l'inscription:", error);
     }
   }
 
@@ -583,7 +583,7 @@
       <!-- Sélection des teams NATIVES -->
       <fieldset class="fieldset">
         <legend class="fieldset-legend"
-          ><Users size={16} class="inline shrink-0 opacity-60" /> Inviter des équipes
+          ><Users class="inline size-4 shrink-0 opacity-60" /> Inviter des équipes
           entières</legend
         >
 

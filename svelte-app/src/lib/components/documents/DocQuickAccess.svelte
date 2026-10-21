@@ -55,7 +55,7 @@
         title="Voir tous les documents"
       >
         Voir tout
-        <ArrowRight size={16} />
+        <ArrowRight class="size-4" />
       </a>
     </div>
 

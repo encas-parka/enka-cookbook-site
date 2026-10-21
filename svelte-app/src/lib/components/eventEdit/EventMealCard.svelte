@@ -305,7 +305,7 @@
           class="font-base flex items-center gap-1 {isDuplicateDate &&
             'text-error'}"
         >
-          <TimeIcon size={16} />
+          <TimeIcon class="size-4" />
           <div>{displayTime ? displayTime.toUpperCase() : "REPAS"}</div>
         </div>
         <div class="flex items-center gap-1 font-semibold text-base-content/80">
@@ -599,7 +599,7 @@
                 >
                 <span class="badge badge-outline badge-sm font-normal">
                   {recipe.plates}
-                  <Utensils size={12} />
+                  <Utensils class="size-3" />
                 </span>
               </div>
             {/each}

@@ -433,7 +433,7 @@ Modal de récapitulatif des dépenses
                     class="btn btn-square btn-ghost btn-sm"
                     onclick={() => startEdit(purchase)}
                   >
-                    <SquarePen size={16} />
+                    <SquarePen class="size-4" />
                   </button>
                 </div>
 

@@ -298,7 +298,9 @@
       );
     } catch (error) {
       console.error("[ProductsTable] Erreur validation rapide:", error);
-      alert("Erreur lors de la validation rapide: " + (error as Error).message);
+      toastService.error(
+        "Erreur lors de la validation rapide: " + (error as Error).message,
+      );
     }
   }
 
@@ -375,17 +377,16 @@
       </div>
       <ul
         class="menu dropdown-content z-10 w-48 rounded-box bg-base-100 p-2 shadow-lg"
-        tabindex="0"
       >
         <li>
           <button onclick={handleExportMarkdown}>
-            <Download size={16} />
+            <Download class="size-4" />
             Texte
           </button>
         </li>
         <li>
           <button onclick={handleExportCsv}>
-            <Download size={16} />
+            <Download class="size-4" />
             Excel / Calc
           </button>
         </li>
@@ -505,7 +506,7 @@
         <div
           class="mb-4 alert w-full alert-soft alert-warning max-sm:alert-vertical"
         >
-          <CircleAlert size={20} class="shrink-0" />
+          <CircleAlert class="size-5 shrink-0" />
           <div>
             <span class="font-bold">Recettes non planifiées</span>
             <p class="text-sm">
@@ -524,7 +525,7 @@
             class="alert self-center alert-soft alert-warning max-sm:alert-vertical"
             id="info-past-event"
           >
-            <CircleAlert size={20} class="shrink-0" />
+            <CircleAlert class="size-5 shrink-0" />
             Toutes les dates de cet événement sont passées. Il n'est plus possible
             de modifier les produits.
           </div>

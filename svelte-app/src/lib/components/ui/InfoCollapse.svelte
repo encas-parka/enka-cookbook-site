@@ -46,7 +46,7 @@
   >
     <div class="flex gap-6 max-md:flex-col">
       <div class=" flex items-center gap-3 self-start">
-        <Icon size={24} class="shrink-0 text-base-content" />
+        <Icon class="size-6 shrink-0 text-base-content" />
         {#if title}
           <span class="font-semibold text-base-content">{title}</span>
         {/if}

@@ -286,9 +286,9 @@
                 onmouseleave={() => hoverHelp.reset()}
                 title="Attribuer un magasin à tous les produits de ce groupe"
               >
-                <Store size={16} />
+                <Store class="size-4" />
                 <span class="hidden @md:block">Magasin</span>
-                <SquarePen size={16} />
+                <SquarePen class="size-4" />
               </button>
 
               <button
@@ -305,9 +305,9 @@
                 onmouseleave={() => hoverHelp.reset()}
                 title="Gérer les volontaires pour tous les produits de ce groupe"
               >
-                <Users size={16} />
+                <Users class="size-4" />
                 <span class="hidden @md:block"> Volontaires </span>
-                <SquarePen size={16} />
+                <SquarePen class="size-4" />
               </button>
 
               <!-- Bouton validation groupée -->
@@ -322,9 +322,9 @@
                       "Déclarez tout ou partie des produits de ce groupe comme acheté")}
                   onmouseleave={() => hoverHelp.reset()}
                 >
-                  <ShoppingCart size={16} />
+                  <ShoppingCart class="size-4" />
                   <span class="hidden @md:block"> Achat groupé </span>
-                  <CircleCheckBig size={16} />
+                  <CircleCheckBig class="size-4" />
                 </button>
               {/if}
             </div>
@@ -334,7 +334,7 @@
                 class="alert px-4 py-1"
                 title="Contient des dates passées - actions non disponibles"
               >
-                <Clock size={16} />
+                <Clock class="size-4" />
                 <span class="hidden @md:block">
                   Période partiellement passée
                 </span>

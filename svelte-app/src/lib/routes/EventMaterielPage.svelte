@@ -418,17 +418,16 @@
       </div>
       <ul
         class="menu dropdown-content z-10 w-48 rounded-box bg-base-100 p-2 shadow-lg"
-        tabindex="0"
       >
         <li>
           <button onclick={handleExportMarkdown}>
-            <Download size={16} />
+            <Download class="size-4" />
             Texte
           </button>
         </li>
         <li>
           <button onclick={handleExportCsv}>
-            <Download size={16} />
+            <Download class="size-4" />
             Excel / Calc
           </button>
         </li>
@@ -456,20 +455,20 @@
     >
       <li>
         <button onclick={openAddForm}>
-          <Plus size={16} />
+          <Plus class="size-4" />
           Ajouter
         </button>
       </li>
       <li>
         <button onclick={() => (catalogModalOpen = true)}>
-          <ListPlus size={16} />
+          <ListPlus class="size-4" />
           Catalogue
         </button>
       </li>
       {#if myTeams.length === 1}
         <li>
           <button onclick={() => openImportModal()}>
-            <ClipboardCopy size={16} />
+            <ClipboardCopy class="size-4" />
             {myTeams[0].name}
             {#if materielStore.loans.some((l) => l.ownerId === myTeams[0].id && l.eventId === eventId)}
               <span class="text-xs text-base-content/50"
@@ -483,7 +482,7 @@
         {#each myTeams as team (team.id)}
           <li>
             <button onclick={() => openImportModal(team.id)}>
-              <ClipboardCopy size={16} />
+              <ClipboardCopy class="size-4" />
               {team.name}
               {#if materielStore.loans.some((l) => l.ownerId === team.id && l.eventId === eventId)}
                 <span class="text-xs text-base-content/50">(résa.)</span>
@@ -656,7 +655,11 @@
                 <!-- Plusieurs équipes : l'appel sans teamId sortirait sans
                      effet (openImportModal), on laisse choisir l'équipe. -->
                 <div class="dropdown dropdown-end">
-                  <div tabindex="0" role="button" class="btn btn-outline btn-sm">
+                  <div
+                    tabindex="0"
+                    role="button"
+                    class="btn btn-outline btn-sm"
+                  >
                     <ClipboardCopy class="h-4 w-4" />
                     Importer depuis…
                     <ChevronDown size={14} class="opacity-50" />
@@ -667,7 +670,7 @@
                     {#each myTeams as team (team.id)}
                       <li>
                         <button onclick={() => openImportModal(team.id)}>
-                          <ClipboardCopy size={16} />
+                          <ClipboardCopy class="size-4" />
                           {team.name}
                         </button>
                       </li>

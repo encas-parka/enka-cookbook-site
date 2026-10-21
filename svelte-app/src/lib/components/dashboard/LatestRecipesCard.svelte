@@ -131,7 +131,7 @@
     title="Voir toutes les recettes"
   >
     Voir tout
-    <ArrowRight size={16} />
+    <ArrowRight class="size-4" />
   </button>
 </div>
 

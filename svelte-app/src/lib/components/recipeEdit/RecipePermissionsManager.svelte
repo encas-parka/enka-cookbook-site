@@ -156,7 +156,7 @@
     <div
       class="alert border-info/20 alert-soft text-xs alert-info max-md:alert-vertical"
     >
-      <Info size={16} />
+      <Info class="size-4" />
       <span>
         Par défaut, seul l'auteur·ice peut modifier la recette. Les autres
         utilisateur·ices peuvent la consulter ou la dupliquer pour créer leur
@@ -190,7 +190,7 @@
               onclick={() => removeContributor(contributorId)}
               title="Retirer les droits"
             >
-              <X size={16} />
+              <X class="size-4" />
             </button>
           {/if}
         </div>

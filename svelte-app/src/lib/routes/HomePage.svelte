@@ -217,7 +217,7 @@
         onclick={() => navigate("/recipe")}
         in:fadeScale={{ duration: 400, delay: 450, start: 0.9 }}
       >
-        <ChefHat size={24} />
+        <ChefHat class="size-6" />
         <span class="flex items-baseline gap-2"> Voir les recettes </span>
       </button>
 
@@ -227,7 +227,7 @@
           onclick={() => navigate("/dashboard")}
           in:fadeScale={{ duration: 400, delay: 500, start: 0.9 }}
         >
-          <ArrowRight size={24} />
+          <ArrowRight class="size-6" />
           Accéder au tableau de bord
         </button>
 
@@ -238,7 +238,7 @@
           onclick={openRegisterModal}
         >
           Créer un compte pour commencer
-          <ArrowRight size={24} />
+          <ArrowRight class="size-6" />
         </button>
       {/if}
     </div>

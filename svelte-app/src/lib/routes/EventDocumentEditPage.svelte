@@ -653,7 +653,7 @@
     onclick={handleSave}
     disabled={!canEdit || !isValid || isSaving}
   >
-    <Save size={16} class="mr-1" />
+    <Save class="mr-1 size-4" />
     Enregistrer
   </button>
 {/if}

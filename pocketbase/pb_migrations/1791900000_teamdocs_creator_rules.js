@@ -2,7 +2,7 @@
 
 // teamdocs — le créateur de l'event obtient le CRUD complet sur les documents
 // event-scopés de son event (mesuré 12-10, sonde
-// scripts_dev/probe-t04-teamdocs.ts, log /tmp/orchestrate/probe-t04-before-26-10-12.log :
+// scripts_dev/probe-t04-teamdocs.ts (sonde commitée) :
 // create teamdocs par le créateur non couvert — ni teamId.members, ni
 // eventId.teams.members, ni eventId.guestUsers, cas du click-through —
 // répond 400 « Failed to create record. » (data vide) = rejet de règle, le

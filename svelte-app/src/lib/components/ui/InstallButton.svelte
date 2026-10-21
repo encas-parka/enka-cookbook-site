@@ -55,7 +55,7 @@
 
 {#if isInstallable && !isInstalled}
   <button class="btn gap-2 shadow-md btn-primary btn-sm" onclick={installApp}>
-    <Download size={16} />
+    <Download class="size-4" />
     <span>Installer</span>
   </button>
 {/if}

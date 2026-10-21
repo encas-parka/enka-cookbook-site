@@ -258,7 +258,7 @@
               class="btn flex gap-2 btn-primary btn-sm"
               onclick={openCreateLoanModal}
             >
-              <Plus size={16} />
+              <Plus class="size-4" />
               Ajouter une reservation
             </button>
           </div>

@@ -100,7 +100,7 @@
       >
         {#if getSortIcon("created")}
           {@const Icon = getSortIcon("created")}
-          <Icon size={16} />
+          <Icon class="size-4" />
         {/if}
         Date de création
       </button>
@@ -112,7 +112,7 @@
       >
         {#if getSortIcon("updated")}
           {@const Icon = getSortIcon("updated")}
-          <Icon size={16} />
+          <Icon class="size-4" />
         {/if}
         Date de modification
       </button>

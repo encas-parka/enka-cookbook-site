@@ -256,7 +256,7 @@
                   (modalState.uiStates.overrideManagerEditMode = true)}
                 title="Modifier"
               >
-                <PencilLine size={16} />
+                <PencilLine class="size-4" />
               </button>
             {/if}
             {#if overrideData.comment}
@@ -281,7 +281,7 @@
             onclick={() => (modalState.uiStates.overrideManagerEditMode = true)}
           >
             Redéfinir manuellement les besoins
-            <SquarePen size={16} />
+            <SquarePen class="size-4" />
           </button>
         </div>
       {/if}

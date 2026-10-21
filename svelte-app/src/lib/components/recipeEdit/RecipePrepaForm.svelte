@@ -22,7 +22,7 @@
 </script>
 
 <div class="mb-4 alert alert-info max-sm:alert-vertical">
-  <TriangleAlert size={24} />
+  <TriangleAlert class="size-6" />
   <span>
     <ul class="mt-1 list-disc pl-5 text-sm">
       <li>

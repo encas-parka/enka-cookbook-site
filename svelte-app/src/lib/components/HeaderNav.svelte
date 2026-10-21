@@ -342,7 +342,7 @@
         class="btn btn-ghost btn-circle btn-sm ml-2"
         onclick={navBarStore.backAction}
       >
-        <ChevronLeftIcon size={20} />
+ <ChevronLeftIcon class="size-5" />
       </button>
     {/if} -->
   </div>
@@ -361,7 +361,7 @@
             <span class="text-xs opacity-40">›</span>
           {/if}
           <span class="opacity-80">{eventActiveTab.label}</span>
-          <ChevronDown size={16} class="opacity-50" />
+          <ChevronDown class="size-4 opacity-50" />
         </div>
         <ul
           class="menu dropdown-content z-1 mt-3 w-48 rounded-xl border border-base-200 bg-base-100 p-2 font-medium shadow-xl"
@@ -377,7 +377,7 @@
                 )}
                 onclick={closeAllCssDropdowns}
               >
-                <TabIcon size={16} />
+                <TabIcon class="size-4" />
                 {tab.label}
               </a>
             </li>
@@ -399,7 +399,7 @@
           <span class="opacity-80">
             {context?.type === "loans" ? "Réservations" : "Inventaire"}
           </span>
-          <ChevronDown size={16} class="opacity-50" />
+          <ChevronDown class="size-4 opacity-50" />
         </div>
         <ul
           class="menu dropdown-content z-1 mt-3 w-48 rounded-xl border border-base-200 bg-base-100 p-2 shadow-xl"
@@ -407,14 +407,14 @@
           {#if context?.type === "loans"}
             <li>
               <a href={getMaterielPath()} onclick={closeAllCssDropdowns}>
-                <Package size={16} />
+                <Package class="size-4" />
                 Inventaire
               </a>
             </li>
           {:else}
             <li>
               <a href={getLoansPath()} onclick={closeAllCssDropdowns}>
-                <Users size={16} />
+                <Users class="size-4" />
                 Réservations
               </a>
             </li>
@@ -474,7 +474,7 @@
               class="flex items-center gap-2"
               onclick={closeAllCssDropdowns}
             >
-              <LayoutDashboardIcon size={16} /> Dashboard
+              <LayoutDashboardIcon class="size-4" /> Dashboard
             </a>
           </li>
           <li>
@@ -483,7 +483,7 @@
               class="flex items-center gap-2"
               onclick={closeAllCssDropdowns}
             >
-              <UserIcon size={16} /> Mon compte
+              <UserIcon class="size-4" /> Mon compte
             </a>
           </li>
 
@@ -495,7 +495,7 @@
               class="flex items-center gap-2"
               onclick={closeAllCssDropdowns}
             >
-              <PlusIcon size={16} /> Nouvel événement
+              <PlusIcon class="size-4" /> Nouvel événement
             </a>
           </li>
           <li>
@@ -504,7 +504,7 @@
               class="flex items-center gap-2"
               onclick={closeAllCssDropdowns}
             >
-              <PlusIcon size={16} /> Nouvelle recette
+              <PlusIcon class="size-4" /> Nouvelle recette
             </a>
           </li>
           <li>
@@ -513,7 +513,7 @@
               class="flex items-center gap-2"
               onclick={closeAllCssDropdowns}
             >
-              <BookOpenIcon size={16} /> Recettes
+              <BookOpenIcon class="size-4" /> Recettes
             </a>
           </li>
 
@@ -532,7 +532,7 @@
                   class="flex items-center gap-2"
                   onclick={closeAllCssDropdowns}
                 >
-                  <Calendar size={16} class="shrink-0 opacity-60" />
+                  <Calendar class="size-4 shrink-0 opacity-60" />
                   <div class="flex min-w-0 flex-col gap-0.5">
                     <span class="truncate text-sm" title={event.name}>
                       {event.name}
@@ -582,14 +582,14 @@
           <li><InstallButton /></li>
           <li>
             <button class="text-error hover:bg-error/10" onclick={handleLogout}
-              ><LogOutIcon size={16} /> Se déconnecter</button
+              ><LogOutIcon class="size-4" /> Se déconnecter</button
             >
           </li>
         </ul>
       </div>
     {:else}
       <button class="btn shadow-md btn-primary sm:btn-sm" onclick={handleLogin}>
-        <LogInIcon size={16} />
+        <LogInIcon class="size-4" />
         <span class="hidden sm:inline">Connexion</span>
       </button>
     {/if}

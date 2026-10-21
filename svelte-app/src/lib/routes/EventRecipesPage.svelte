@@ -829,11 +829,11 @@
                           </div>
                         {/if}
                         <div class="badge badge-outline">
-                          <Utensils size={16} />
+                          <Utensils class="size-4" />
                           {meal.guests}
                         </div>
                         <div class="badge badge-outline">
-                          <CookingPot size={16} />
+                          <CookingPot class="size-4" />
                           {recipesMatchingSearch.length}
                         </div>
                       </div>
@@ -901,11 +901,11 @@
                           </div>
                         {/if}
                         <div class="badge badge-outline">
-                          <Utensils size={16} />
+                          <Utensils class="size-4" />
                           {meal.guests}
                         </div>
                         <div class="badge badge-outline">
-                          <CookingPot size={16} />
+                          <CookingPot class="size-4" />
                           {mealRecipesToDisplay.length}
                         </div>
                       </div>
@@ -1380,11 +1380,11 @@
                           </div>
                         {/if}
                         <div class="badge badge-outline">
-                          <Utensils size={16} />
+                          <Utensils class="size-4" />
                           {meal.guests}
                         </div>
                         <div class="badge badge-outline">
-                          <CookingPot size={16} />
+                          <CookingPot class="size-4" />
                           {recipesMatchingSearch.length}
                         </div>
                       </div>
@@ -1454,11 +1454,11 @@
                           </div>
                         {/if}
                         <div class="badge badge-outline">
-                          <Utensils size={16} />
+                          <Utensils class="size-4" />
                           {meal.guests}
                         </div>
                         <div class="badge badge-outline">
-                          <CookingPot size={16} />
+                          <CookingPot class="size-4" />
                           {mealRecipesToDisplay.length}
                         </div>
                       </div>

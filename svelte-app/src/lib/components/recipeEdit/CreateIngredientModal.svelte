@@ -435,7 +435,7 @@
           <div class="fieldset">
             <legend class="fieldset-legend"
               ><div class="flex items-center gap-2">
-                <Refrigerator size={16} class="opacity-50" />
+                <Refrigerator class="size-4 opacity-50" />
                 <span class="required">frais ?</span>
               </div></legend
             >
@@ -471,7 +471,7 @@
           <div class="fieldset">
             <legend class="fieldset-legend">
               <div class="flex items-center gap-2">
-                <Snowflake size={16} class="opacity-50" />
+                <Snowflake class="size-4 opacity-50" />
                 <span class="required">Produit surgelé ?</span>
               </div></legend
             >

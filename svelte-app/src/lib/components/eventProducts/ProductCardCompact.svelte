@@ -98,7 +98,7 @@
       onclick={() => onOpenModal(product.id, "recettes")}
       title="Voir les recettes"
     >
-      <typeInfo.icon size={16} class="shrink-0 text-primary/70" />
+      <typeInfo.icon class="size-4 shrink-0 text-primary/70" />
       <span class="font-semibold">{product.productName}</span>
       {#if product.pF}
         <ShoppingBasket size={13} class="shrink-0 text-success" />
@@ -148,12 +148,12 @@
     <div class="ms-auto flex gap-2">
       {#if productInDateRange.nbRecipes}
         <span class="flex items-center gap-0.5 text-sm text-base-content/50">
-          {productInDateRange.nbRecipes}<CookingPot size={12} />
+          {productInDateRange.nbRecipes}<CookingPot class="size-3" />
         </span>
       {/if}
       {#if productInDateRange.totalAssiettes}
         <span class="flex items-center gap-0.5 text-sm text-base-content/50">
-          {productInDateRange.totalAssiettes}<Utensils size={12} />
+          {productInDateRange.totalAssiettes}<Utensils class="size-3" />
         </span>
       {/if}
       {#if !showRecipeDetails && productInDateRange.concernedDates.length > 0}

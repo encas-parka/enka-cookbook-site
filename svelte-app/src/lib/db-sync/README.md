@@ -60,8 +60,10 @@ Every identity transition — boot, login, logout, register — runs
 `GlobalState.#ensureCacheForIdentity` (serialized, idempotent, driven by the
 `onAuthChange` watcher plus explicit boot/login calls): when the observed
 identity differs from the marker, private stores are purged via their
-`purgeLocal()` (cache only — subscriptions and live bridges stay alive and
-self-reconcile; `recipes` is public and never purged).
+`purgeLocal()` when available (cache only — subscriptions and live bridges
+stay alive and self-reconcile; `recipes` is public and never purged).
+`ProductsStore` exposes only `softReset()` (no `purgeLocal()`), so it is
+reset via that path instead.
 
 Why it matters: a cache inherited from another session (tab closed without
 logout, expired token) leaves a stale delta cursor — the next `syncInitial`

@@ -104,11 +104,11 @@
     >
       <span>{formatDateDayMonthShort(date)}</span>
       {#if getTimeIcon(date) === "sun"}
-        <Sun size={16} />
+        <Sun class="size-4" />
       {:else if getTimeIcon(date) === "moon"}
-        <Moon size={16} />
+        <Moon class="size-4" />
       {:else if getTimeIcon(date) === "cloud"}
-        <Cloud size={16} />
+        <Cloud class="size-4" />
       {/if}
     </button>
   {/each}

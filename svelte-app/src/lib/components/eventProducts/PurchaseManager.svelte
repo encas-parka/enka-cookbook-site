@@ -418,7 +418,7 @@
                   onclick={() => handleStartEdit(purchase)}
                   title="Modifier"
                 >
-                  <SquarePen size={16} />
+                  <SquarePen class="size-4" />
                 </button>
                 <button
                   class="btn btn-square btn-ghost text-error btn-sm"
@@ -429,7 +429,7 @@
                   {#if modalState.loading}
                     <span class="loading loading-xs loading-spinner"></span>
                   {:else}
-                    <Trash2 size={16} />
+                    <Trash2 class="size-4" />
                   {/if}
                 </button>
               </div>

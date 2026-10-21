@@ -108,7 +108,7 @@
               onclick={handleQuickAdd}
               disabled={modalState.loading || !newVolunteerName.trim()}
             >
-              <UserPlus size={16} />
+              <UserPlus class="size-4" />
             </button>
           </div>
 

@@ -341,7 +341,8 @@ class GlobalState {
 
   /**
    * Déconnexion : cleanup PB + stores privés
-   * PocketBase : pas de cache Appwrite ni de realtime centralisé à détruire
+   * PocketBase : pas de cache centralisé à détruire ; le realtime (SSE) est
+   * géré par chaque store via unsubscribeAll() lors du purgeLocal().
    */
   async logout(): Promise<void> {
     try {

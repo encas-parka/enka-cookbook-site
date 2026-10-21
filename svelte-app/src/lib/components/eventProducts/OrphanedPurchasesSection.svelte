@@ -27,7 +27,7 @@
     <div
       class="sticky top-12 z-2 flex items-center gap-2 rounded-lg bg-warning/20 px-4 py-1 opacity-70 shadow-md"
     >
-      <Ghost size={16} />
+      <Ghost class="size-4" />
       <span class="font-bold">Achats sans produit actif</span>
       <span class="text-sm opacity-70"
         >({orphanedPurchases.reduce((s, o) => s + o.purchases.length, 0)}
@@ -47,7 +47,7 @@
             <div
               class="flex shrink-0 items-center gap-1.5 rounded-sm px-0.5 text-warning/80"
             >
-              <typeInfo.icon size={16} class="shrink-0" />
+              <typeInfo.icon class="size-4 shrink-0" />
               <span class="font-semibold decoration-warning/40"
                 >{orphan.productName}</span
               >

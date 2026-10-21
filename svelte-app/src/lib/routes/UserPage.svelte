@@ -140,7 +140,7 @@
       class="btn btn-circle btn-ghost btn-sm"
       aria-label="Retour au tableau de bord"
     >
-      <ArrowLeft size={20} />
+      <ArrowLeft class="size-5" />
     </button>
     <h1 class="text-2xl font-bold">Mon compte</h1>
   </div>
@@ -149,7 +149,7 @@
   <section class="card mb-6 bg-base-100 shadow-xl">
     <div class="card-body">
       <h2 class="mb-4 card-title flex items-center gap-2">
-        <User size={20} />
+        <User class="size-5" />
         Modifier le nom d'utilisateur
       </h2>
 
@@ -175,7 +175,7 @@
             {#if isUpdatingName}
               <span class="loading loading-sm loading-spinner"></span>
             {:else}
-              <Save size={16} />
+              <Save class="size-4" />
             {/if}
             Mettre à jour
           </button>
@@ -188,7 +188,7 @@
   <section class="card bg-base-100 shadow-xl">
     <div class="card-body">
       <h2 class="mb-4 card-title flex items-center gap-2">
-        <Lock size={20} />
+        <Lock class="size-5" />
         Modifier le mot de passe
       </h2>
 
@@ -253,7 +253,7 @@
             {#if isUpdatingPassword}
               <span class="loading loading-sm loading-spinner"></span>
             {:else}
-              <Save size={16} />
+              <Save class="size-4" />
             {/if}
             Mettre à jour
           </button>

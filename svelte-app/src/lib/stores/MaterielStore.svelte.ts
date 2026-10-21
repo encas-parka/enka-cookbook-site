@@ -360,6 +360,9 @@ export class MaterielStore {
   }
 
   getLoanById(loanId: string): EnrichedMaterielLoan | undefined {
+    // N'expose pas les prêts marqués deleted (pb-sync pose deleted:true sur
+    // un 404 d'update) — cohérent avec #liveLoans utilisé pour l'enrichment.
+    if (!this.#liveLoans.some((l) => l.id === loanId)) return undefined;
     return this.#enrichedLoans.find((l) => l.id === loanId);
   }
 

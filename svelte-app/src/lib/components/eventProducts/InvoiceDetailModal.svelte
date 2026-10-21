@@ -665,7 +665,7 @@
                         disabled={loading}
                         title="Modifier cet achat"
                       >
-                        <SquarePen size={16} />
+                        <SquarePen class="size-4" />
                       </button>
                       <button
                         class="btn btn-square btn-ghost text-error btn-sm"
@@ -673,7 +673,7 @@
                         disabled={loading}
                         title="Supprimer"
                       >
-                        <Trash2 size={16} />
+                        <Trash2 class="size-4" />
                       </button>
                     </div>
                   </div>

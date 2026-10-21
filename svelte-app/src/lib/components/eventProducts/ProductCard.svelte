@@ -146,7 +146,7 @@
               class="flex size-6 items-center justify-center rounded-full bg-success/20"
               title="Produit frais"
             >
-              <ShoppingBasket size={16} class="text-success " />
+              <ShoppingBasket class="size-4 text-success " />
             </div>
           {/if}
           {#if product.pS}
@@ -291,13 +291,13 @@
         <div class="mx-4 flex gap-2 opacity-60">
           {#if product.storeInfo?.storeName}
             <div class="flex items-center gap-1 text-sm">
-              <Store size={16} />
+              <Store class="size-4" />
               {product.storeInfo.storeName}
             </div>
           {/if}
           {#if product.who && product.who.length > 0}
             <div class="flex items-center gap-1 text-sm">
-              <Users size={16} />
+              <Users class="size-4" />
               {product.who.join(", ")}
             </div>
           {/if}
@@ -420,10 +420,10 @@
                 ><span class="font-light">manque : </span>
                 {productInDateRange.formattedMissingQuantities}</span
               >
-              <IconSprite name="add-to-cart" size={16} />
+              <IconSprite name="add-to-cart" class="size-4" />
             </button>
           {:else if shouldShowActionButtons}
-            <CircleCheckBig size={24} class="ms-auto text-success" />
+            <CircleCheckBig class="ms-auto size-6 text-success" />
           {/if}
           {#if shouldShowActionButtons && overrideMismatch?.hasMismatch}
             <div

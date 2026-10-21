@@ -215,6 +215,7 @@ describe("GlobalState — team_joined : reset curseurs avant resync", () => {
     authMock.set(authMock.USER_A);
     await authMock.loginWithPassword("ghald@dev.local", "x");
     await globalState.refreshAuthAfterLogin();
+    await globalState.hydration;
     await waitForTick(3);
 
     expect(await db.events.get(EV_MINE)).toBeTruthy();
@@ -253,6 +254,7 @@ describe("GlobalState — team_joined : reset curseurs avant resync", () => {
     authMock.set(authMock.USER_A);
     await authMock.loginWithPassword("ghald@dev.local", "x");
     await globalState.refreshAuthAfterLogin();
+    await globalState.hydration;
     await waitForTick(3);
 
     seedTeamJoinedRecords();
@@ -286,6 +288,7 @@ describe("GlobalState — team_joined : reset curseurs avant resync", () => {
     authMock.set(authMock.USER_A);
     await authMock.loginWithPassword("ghald@dev.local", "x");
     await globalState.refreshAuthAfterLogin();
+    await globalState.hydration;
     await waitForTick(3);
 
     currentFakePb().emitToTopic(`user_${authMock.USER_A.id}`, {

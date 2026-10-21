@@ -207,6 +207,7 @@ describe("GlobalState — cache local mono-identité (login sans Ctrl-R)", () =>
     authMock.set(authMock.USER_A);
     await authMock.loginWithPassword("ghald@dev.local", "x");
     await globalState.refreshAuthAfterLogin();
+    await globalState.hydration;
     await waitForTick(3);
 
     // Les events du user atterrissent en cache (full fetch, curseur vierge)
@@ -247,6 +248,7 @@ describe("GlobalState — cache local mono-identité (login sans Ctrl-R)", () =>
     authMock.set(authMock.USER_A);
     await authMock.loginWithPassword("ghald@dev.local", "x");
     await globalState.refreshAuthAfterLogin();
+    await globalState.hydration;
     expect(await db.events.count()).toBe(2);
 
     await globalState.logout();

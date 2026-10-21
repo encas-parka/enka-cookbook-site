@@ -135,7 +135,7 @@ function hooksContext(pathname: string) {
   >[0];
 }
 
-/** Le guard doit rediriger le visiteur : throw sentinelle + toast. */
+/** Le guard doit rediriger le visiteur : throw sentinelle + modale ouverte. */
 async function expectVisitorRedirect(
   guard: typeof authGuard,
   pathname: string,
@@ -145,17 +145,23 @@ async function expectVisitorRedirect(
     NAV_SENTINEL,
   );
   expect(navigateMock).toHaveBeenCalledWith("/", { replace: true });
-  expect(toastSpy).toHaveBeenCalledTimes(1);
-  expect(toastSpy).toHaveBeenCalledWith(expect.stringContaining("connecté"));
+  // La modale de connexion porte le feedback (plus de toast d'erreur muet
+  // suivi d'un retour à l'accueil sans explication).
+  expect(globalState.authModal.isOpen).toBe(true);
+  expect(globalState.authModal.showLogin).toBe(true);
+  expect(globalState.authModal.pendingPath).toBe(pathname);
+  expect(toastSpy).not.toHaveBeenCalled();
   toastSpy.mockRestore();
 }
 
-describe("Guards — visiteur redirigé avec feedback, cache intact", () => {
+describe("Guards — visiteur redirigé vers la connexion, cache intact", () => {
   beforeEach(async () => {
     currentFakePb().reset();
     authMock.reset();
     navigateMock.mockClear();
     localStorage.clear();
+    globalState.authModal.isOpen = false;
+    globalState.authModal.pendingPath = null;
     await Promise.all(db.tables.map((t) => t.clear()));
     await waitForTick(1);
   });
@@ -165,16 +171,25 @@ describe("Guards — visiteur redirigé avec feedback, cache intact", () => {
     await globalState.logout().catch(() => {});
   });
 
-  it("authGuard, visiteur : toast + redirect / (plus de redirect muet)", async () => {
-    await expectVisitorRedirect(authGuard, "/dashboard");
+  it("authGuard, visiteur : modale de connexion + redirect /, cible mémorisée", async () => {
+    await expectVisitorRedirect(authGuard, "/dashboard/teams");
   });
 
-  it("eventGuard, visiteur : toast + redirect / sans toucher au cache", async () => {
+  it("eventGuard, visiteur : modale + redirect / sans toucher au cache", async () => {
     const loadCacheSpy = vi.spyOn(eventsStore, "loadCache");
     await expectVisitorRedirect(eventGuard, "/event/wqw07qq9ziy9kpw");
     // Aucun fetch de données protégées avant résolution du guard —
     // l'ancien guard appelait loadCache qui rejetait « Utilisateur non connecté ».
     expect(loadCacheSpy).not.toHaveBeenCalled();
+  });
+
+  it("ouvrir la modale depuis la home efface l'intention périmée", async () => {
+    await expectVisitorRedirect(authGuard, "/dashboard/teams");
+
+    globalState.openAuthModal();
+
+    expect(globalState.authModal.pendingPath).toBeNull();
+    expect(globalState.authModal.isOpen).toBe(true);
   });
 
   it("authGuard, authentifié : passage sans redirect ni toast", async () => {

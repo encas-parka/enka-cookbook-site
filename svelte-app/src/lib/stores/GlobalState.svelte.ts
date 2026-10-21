@@ -48,6 +48,10 @@ class GlobalState {
   // Purge d'identité en vol — sérialise le watcher onAuthChange et les
   // appels explicites (boot, login) vers une seule purge.
   #identityPurge: Promise<void> | null = null;
+  // Hydratation de session : `#localReady` = point de navigation (purge +
+  // cache Dexie), `#hydration` = phase réseau (fetch + realtime).
+  #localReady: Promise<void> | null = null;
+  #hydration: Promise<boolean> | null = null;
 
   constructor() {
     // Consomme onAuthChange : toute transition d'identité (login modal,
@@ -143,79 +147,136 @@ class GlobalState {
   }
 
   /**
-   * Réinitialise l'authentification après un login/inscription réussie
-   * Set l'utilisateur + synchronise tous les stores
-   * PocketBase : chaque store gère son propre realtime (pas de registry centralisé)
+   * Ouvre la session authentifiée après un login/inscription réussie.
+   *
+   * Résout au point « cache local prêt » (purge d'identité + `loadCache`) :
+   * c'est le seul état dont la navigation a besoin pour afficher des données
+   * cohérentes, et il garantit qu'aucun cache d'une autre identité n'est
+   * montré. La phase réseau (fetch complet + realtime) continue en
+   * arrière-plan — son issue est exposée par `hydration`.
+   *
+   * Idempotent : deux appels concurrents (modale, magic link, inscription)
+   * partagent la même hydratation.
    */
   async refreshAuthAfterLogin(): Promise<void> {
-    console.log("[GlobalState] Réinitialisation après login...");
+    const user = getCurrentUser();
+    if (!user) {
+      this.#authError = "Aucun utilisateur après login";
+      return;
+    }
+
+    // Synchrone : `authGuard` lit `isAuthenticated` dès la navigation qui
+    // suit, la session doit être posée avant le premier `await`.
+    this.#user = user;
     this.#authLoading = true;
     this.#authError = null;
 
-    try {
-      const user = getCurrentUser();
-      if (!user) throw new Error("Aucun utilisateur après login");
-      this.#user = user;
+    localStorage.setItem("enka-user-name", user.name);
+    localStorage.setItem("enka-user-email", user.email);
+    localStorage.setItem("enka-user-id", user.id);
 
-      localStorage.setItem("enka-user-name", user.name);
-      localStorage.setItem("enka-user-email", user.email);
-      localStorage.setItem("enka-user-id", user.id);
+    if (!this.#localReady) this.#startHydration(user);
+    return this.#localReady!;
+  }
 
-      // Ferme la course auth/stores : si le cache porte encore l'identité
-      // précédente (résidu de session crashée), la purge AVANT les 3 phases
-      // évite une delta sync muette (curseur étranger + fallback bloqué).
-      await this.#ensureCacheForIdentity(user.id).catch((err) =>
-        console.error("[GlobalState] Purge du cache au login échouée:", err),
-      );
+  /**
+   * Résout à la fin de la phase réseau (`true` = tous les stores à jour).
+   * Ne rejette jamais : une sync incomplète se lit comme une session en mode
+   * hors ligne, pas comme un login raté.
+   */
+  get hydration(): Promise<boolean> {
+    return this.#hydration ?? Promise.resolve(true);
+  }
 
-      // Signaux SSE (StatusBar + resync orchestrateur). Branchés AVANT la
-      // souscription des stores : la première connexion SSE est consommée
-      // ici (hasConnectedOnce) — tout PB_CONNECT ultérieur est une
-      // reconnexion et déclenche le resync delta. (Au boot avec session
-      // existante, initializeAuth les branche de la même façon.)
-      await initRealtimeSignals();
+  #startHydration(user: PBAuthUser): void {
+    console.log("[GlobalState] Hydratation de la session...");
+    // Une session remplacée en vol (logout, autres identifiants) ne doit ni
+    // peupler les stores ni souscrire au realtime pour un compte sorti.
+    const isCurrentUser = () => this.#user?.id === user.id;
 
-      // Phase 0: Initialiser le cache IDB pour les stores qui en dépendent
-      await Promise.all([
-        eventsStore.loadCache(),
-        recipesStore.loadCache(),
-        materielStore.loadCache(),
-        teamdocsStore.loadCache(),
-        nativeTeamsStore.loadCache(),
-      ]);
+    const local = (async () => {
+      try {
+        // Ferme la course auth/stores : si le cache porte encore l'identité
+        // précédente (résidu de session crashée), la purge AVANT les 3 phases
+        // évite une delta sync muette (curseur étranger + fallback bloqué).
+        await this.#ensureCacheForIdentity(user.id).catch((err) =>
+          console.error("[GlobalState] Purge du cache au login échouée:", err),
+        );
 
-      // Phase 1: Sync de TOUS les stores en parallèle
-      await Promise.all([
-        nativeTeamsStore.syncInitial(),
-        eventsStore.syncInitial(),
-        materielStore.syncInitial(),
-        teamdocsStore.syncInitial(),
-        recipesStore.syncInitial(),
-      ]);
+        // Phase 0: cache IDB des stores — la navigation attend ce point.
+        await Promise.all([
+          eventsStore.loadCache(),
+          recipesStore.loadCache(),
+          materielStore.loadCache(),
+          teamdocsStore.loadCache(),
+          nativeTeamsStore.loadCache(),
+        ]);
+      } catch (err) {
+        // Un cache local indisponible ne doit pas condamner la session :
+        // les stores se rempliront par la phase réseau.
+        console.error("[GlobalState] Hydratation locale échouée:", err);
+      }
+    })();
 
-      // Phase 2: Setup realtime pour TOUS les stores
-      // (chaque store gère son propre realtime via pb.collection().subscribe())
-      await Promise.all([
-        nativeTeamsStore.setupRealtime(),
-        eventsStore.setupRealtime(),
-        materielStore.setupRealtime(),
-        teamdocsStore.setupRealtime(),
-        recipesStore.setupRealtime(),
-      ]);
+    this.#localReady = local;
 
-      // Phase 3: Abonnement realtime custom (messages ciblés du backend)
-      await this.#setupUserRealtime(user.id);
+    const full = local.then(async () => {
+      if (!isCurrentUser()) return false;
 
-      console.log(
-        `[GlobalState] Réinitialisé après login: ${user.name} (${this.userTeams.length} équipes)`,
-      );
-    } catch (error) {
-      console.error("[GlobalState] Erreur lors de la réinitialisation:", error);
-      this.#authError =
-        error instanceof Error ? error.message : "Erreur de réinitialisation";
-    } finally {
-      this.#authLoading = false;
-    }
+      let complete = true;
+      try {
+        // Signaux SSE (StatusBar + resync orchestrateur). Branchés AVANT la
+        // souscription des stores : la première connexion SSE est consommée
+        // ici (hasConnectedOnce) — tout PB_CONNECT ultérieur est une
+        // reconnexion et déclenche le resync delta. (Au boot avec session
+        // existante, initializeAuth les branche de la même façon.)
+        await initRealtimeSignals();
+        if (!isCurrentUser()) return false;
+
+        // Phase 1: Sync de TOUS les stores en parallèle
+        await Promise.all([
+          nativeTeamsStore.syncInitial(),
+          eventsStore.syncInitial(),
+          materielStore.syncInitial(),
+          teamdocsStore.syncInitial(),
+          recipesStore.syncInitial(),
+        ]);
+        if (!isCurrentUser()) return false;
+
+        // Phase 2: Setup realtime pour TOUS les stores
+        // (chaque store gère son propre realtime via pb.collection().subscribe())
+        await Promise.all([
+          nativeTeamsStore.setupRealtime(),
+          eventsStore.setupRealtime(),
+          materielStore.setupRealtime(),
+          teamdocsStore.setupRealtime(),
+          recipesStore.setupRealtime(),
+        ]);
+
+        // Phase 3: Abonnement realtime custom (messages ciblés du backend)
+        await this.#setupUserRealtime(user.id);
+
+        console.log(
+          `[GlobalState] Session prête: ${user.name} (${this.userTeams.length} équipes)`,
+        );
+      } catch (error) {
+        complete = false;
+        console.error(
+          "[GlobalState] Synchronisation de session incomplète:",
+          error,
+        );
+        this.#authError =
+          error instanceof Error ? error.message : "Erreur de réinitialisation";
+      } finally {
+        if (this.#localReady === local) this.#localReady = null;
+        if (this.#hydration === full) this.#hydration = null;
+        this.#authLoading = false;
+      }
+
+      return complete;
+    });
+
+    this.#hydration = full;
   }
 
   /**
@@ -545,7 +606,47 @@ class GlobalState {
     progress: 0,
   });
 
-  authModal = $state({ isOpen: false, showLogin: true });
+  authModal = $state({
+    isOpen: false,
+    showLogin: true,
+    /** Cible mémorisée par un guard refusé — rejouée après login. */
+    pendingPath: null as string | null,
+    /** Email prérempli (lien de réinitialisation de mot de passe). */
+    prefillEmail: null as string | null,
+  });
+
+  /**
+   * Ouvre la modale d'authentification (header, home, reset password).
+   * Efface l'intention mémorisée : une cible refusée il y a longtemps ne doit
+   * pas ressurgir au login suivant.
+   */
+  openAuthModal(opts?: { showLogin?: boolean; prefillEmail?: string }): void {
+    this.authModal.pendingPath = null;
+    this.authModal.prefillEmail = opts?.prefillEmail ?? null;
+    this.authModal.showLogin = opts?.showLogin ?? true;
+    this.authModal.isOpen = true;
+  }
+
+  /**
+   * Ouvre la modale de connexion sur une cible refusée : la navigation
+   * reprendra là après login, au lieu de laisser l'utilisateur sur l'accueil.
+   */
+  requestAuth(pathname: string): void {
+    this.authModal.pendingPath = pathname;
+    this.authModal.prefillEmail = null;
+    this.authModal.showLogin = true;
+    this.authModal.isOpen = true;
+  }
+
+  /**
+   * Lit et oublie l'intention (usage unique) : un login ultérieur depuis
+   * l'accueil ne doit pas renvoyer sur la dernière page refusée.
+   */
+  consumePendingPath(): string | null {
+    const path = this.authModal.pendingPath;
+    this.authModal.pendingPath = null;
+    return path;
+  }
 }
 
 export const globalState = new GlobalState();

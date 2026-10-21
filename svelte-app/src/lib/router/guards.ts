@@ -6,9 +6,9 @@
  * - eventGuard : vérifie l'authentification puis initialise le cache EventsStore
  *
  * Invariant : la résolution du guard (redirect + feedback) précède TOUT accès
- * aux données — aucun store ne charge un cache pour un visiteur. Le redirect
- * est TOUJOURS accompagné d'un toast : un renvoi muet laisse l'utilisateur sans
- * explication sur la page d'accueil.
+ * aux données — aucun store ne charge un cache pour un visiteur. Le feedback
+ * est la modale de connexion elle-même (ouverte avec la cible mémorisée) :
+ * un renvoi muet laisserait l'utilisateur sans explication sur l'accueil.
  *
  * Les hooks se déclarent sur un objet de route (`{ hooks, "/" }`) — jamais
  * attachés à la fonction composant : `matchRoute` de sv-router ne lit `hooks`
@@ -20,18 +20,21 @@ import type { Hooks } from "sv-router";
 import { navigate } from "$lib/router";
 import { globalState } from "$lib/stores/GlobalState.svelte";
 import { eventsStore } from "$lib/stores/EventsStore.svelte";
-import { toastService } from "$lib/services/toast.service.svelte";
 
 /**
- * Résout l'exigence d'authentification : si visiteur, émet le feedback puis
+ * Résout l'exigence d'authentification : si visiteur, ouvre la modale de
+ * connexion en mémorisant la cible (elle sera rejouée après login) puis
  * déclenche la redirection vers l'accueil (via throw navigate, convention
  * sv-router beforeLoad). Ne retourne jamais si l'utilisateur n'est pas
  * connecté — le code qui suit est donc garanti post-auth.
+ *
+ * La modale porte le message : pas de toast d'erreur, il ne resterait qu'un
+ * aller-retour sur `/` sans explication utile.
  */
 function requireAuth(pathname: string): void {
   if (globalState.isAuthenticated) return;
   console.log(`[AuthGuard] Accès refusé à ${pathname} > Redirection /`);
-  toastService.error("Vous devez être connecté pour accéder à cette page.");
+  globalState.requestAuth(pathname);
   throw navigate("/", { replace: true });
 }
 

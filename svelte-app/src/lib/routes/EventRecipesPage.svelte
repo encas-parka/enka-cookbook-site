@@ -364,8 +364,8 @@
     }
 
     try {
-      // Le guard a déjà initialisé le store et vérifié l'event
-      // Charger les données de l'événement
+      // Le guard matérialise l'event (ensureEvent) ; l'effet de rattrapage
+      // plus bas recharge les meals si la donnée arrive après le montage.
       await loadEventData(id);
     } catch (err) {
       console.error("[EventRecipesPage] Erreur lors du chargement:", err);

@@ -1,5 +1,4 @@
 <script lang="ts">
-  import { onMount } from "svelte";
   import { fade } from "svelte/transition";
   import { SvelteSet } from "svelte/reactivity";
   import { eventsStore } from "$lib/stores/EventsStore.svelte";
@@ -13,7 +12,9 @@
   import { ListTodo } from "@lucide/svelte";
   import { online } from "svelte/reactivity/window";
 
-  // Event data
+  // Event data — le guard matérialise l'event (ensureEvent) ; la lecture
+  // reste réactive : currentEvent repeuple la page quand la donnée arrive,
+  // le rendu conditionnel plus bas n'a pas besoin d'init propre.
   let eventId = $derived(route.params.id);
   const currentEvent = $derived(
     eventId ? eventsStore.getEventById(eventId) : null,
@@ -70,10 +71,6 @@
       toastService.error("Erreur lors de la sauvegarde des tâches");
     }
   }
-
-  onMount(() => {
-    // Le guard a déjà initialisé le store, l'event devrait être disponible
-  });
 </script>
 
 {#snippet navActions()}

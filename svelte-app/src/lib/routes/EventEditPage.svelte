@@ -30,7 +30,7 @@
   } from "@lucide/svelte";
   import { nanoid } from "nanoid";
   import { flip } from "svelte/animate";
-  import { untrack, onDestroy, onMount } from "svelte";
+  import { untrack } from "svelte";
   import EventStats from "../components/EventStats.svelte";
   import EventDocumentsFieldset from "../components/eventEdit/EventDocumentsFieldset.svelte";
   import { navBarStore } from "../stores/NavBarStore.svelte";
@@ -79,12 +79,19 @@
   const sortedMeals = $derived([...sortedDatedMeals, ...undatedMeals]);
 
   // État UI
-  let isInitialised = $state(false);
   let isBusy = $state(false); // Quand on sauvegarde/charge (maître)
   let isAcquiringLock = $state(false); // Quand on acquiert le lock
   let isEditing = $state(false); // Mode édition (shadow draft actif)
   let editingMealIndex = $state<string | null>(null);
   let editingTitle = $state(false);
+
+  // « Init par id, jamais par montage » : la clé d'idempotence est l'eventId,
+  // pas la vie du composant (sv-router réutilise le composant entre /event/A
+  // et /event/B — un init one-shot par montage éditerait B sous le lock de A).
+  let initialisedFor = $state<string | null>(null);
+  const isInitialised = $derived(
+    initialisedFor !== null && initialisedFor === eventId,
+  );
   let editingDescription = $state(false);
 
   // États des modales de confirmation
@@ -115,7 +122,7 @@
   let lockUnsub: (() => void) | null = null;
 
   // eventId non-réactif capturé au moment de l'acquisition du lock
-  // pour garantir sa disponibilité lors du cleanup (onDestroy)
+  // pour garantir sa disponibilité lors du cleanup du cycle de vie
   // car eventId ($derived de route.params) peut déjà être vide après navigation
   let lockedEventId: string | null = null;
 
@@ -287,8 +294,57 @@
   });
 
   // ============================================================================
-  // INITIALISATION
+  // CYCLE DE VIE PAR EVENT — « init par id, jamais par montage »
   // ============================================================================
+
+  /**
+   * Cleanup du cycle de vie : tourne au CHANGEMENT d'eventId et au démontage,
+   * jamais aux mutations de l'event (seul `eventId` est une dépendance — un
+   * effet sans dépendance ne rejouant jamais, lire `eventId` ici est ce qui
+   * donne au cleanup son déclencheur).
+   *
+   * C'est ce cleanup qui rend l'init par id sûre : naviguer A→B libère le
+   * verrou de A, désabonne son SSE et repart d'un état d'édition vierge —
+   * sinon B serait affiché puis sauvé sous le verrou de A.
+   *
+   * Ordre de déclaration : ce bloc DOIT précéder l'effet d'init — Svelte
+   * exécute le cleanup d'un effet avant son propre re-run, dans l'ordre de
+   * création ; l'init de B doit voir l'état déjà nettoyé de A.
+   */
+  $effect(() => {
+    const id = eventId;
+    if (!id) return;
+
+    return () => {
+      if (autoSaveTimeout) {
+        clearTimeout(autoSaveTimeout);
+        autoSaveTimeout = null;
+      }
+      if (lockUnsub) {
+        lockUnsub();
+        lockUnsub = null;
+      }
+      // Libération réseau fire-and-forget (un cleanup est synchrone) :
+      // releaseLock() toucherait isEditing après l'await, au risque de
+      // couper une édition déjà relancée sur le nouvel event.
+      const heldId = lockedEventId;
+      lockedEventId = null;
+      if (heldId) {
+        void untrack(() => releaseLockRequest(heldId));
+      }
+      activeLock = null;
+      isEditing = false;
+      initialisedFor = null;
+      editingMealIndex = null;
+      editingTitle = false;
+      showAssignDateModal = false;
+      assigningRecipe = null;
+      showConfirmStatusModal = false;
+      showCancelStatusModal = false;
+      showCancelEditModal = false;
+      statusBarStore.clearLockStatus();
+    };
+  });
 
   /**
    * Charge le verrou de l'événement en arrière-plan (non bloquant : le shadow
@@ -316,8 +372,8 @@
   }
 
   $effect(() => {
-    // Guard 1 : une seule initialisation par montage.
-    if (isInitialised || isBusy) {
+    // Guard 1 : une seule initialisation par id.
+    if (initialisedFor === eventId || isBusy) {
       return;
     }
 
@@ -328,55 +384,12 @@
     // Dépendance volontaire : l'ARRIVÉE de l'event relance l'effet. Sans elle,
     // un montage sur cache froid (login après purge, deep link) sortait ici
     // pour toujours — le shadow draft ne se peuplait jamais (meals vides).
-    // L'idempotence est portée par `isInitialised`, posé avant tout await.
     if (!currentEvent) {
       return;
     }
 
-    isInitialised = true;
+    initialisedFor = eventId;
     void untrack(() => initializeLock(eventId));
-  });
-
-  // ============================================================================
-  // RESET AU CHANGEMENT DE ROUTE
-  // ============================================================================
-
-  // $effect(() => {
-  //   // Réinitialiser quand eventId change
-  //   // NOTE: Le cleanup s'exécute AVANT le prochain run de l'effect
-  //   return () => {
-  //     console.log("[EventEditPage] Changement de route, reset état...");
-  //     isInitialised = false;
-  //     activeLock = null;
-  //     if (lockUnsub) {
-  //       lockUnsub();
-  //       lockUnsub = null;
-  //     }
-  //   };
-  // });
-
-  onDestroy(() => {
-    // 1. Annuler l'auto-save planifié
-    if (autoSaveTimeout) {
-      clearTimeout(autoSaveTimeout);
-      autoSaveTimeout = null;
-    }
-
-    // 2. Désabonner du realtime des locks
-    if (lockUnsub) {
-      lockUnsub();
-      lockUnsub = null;
-    }
-
-    // 3. Libérer le lock si détenu
-    // Utilise lockedEventId (non-réactif) car eventId peut déjà être vide
-    if (lockedEventId && isEditing) {
-      console.log("🚪 Démontage du composant, libération du lock...");
-      releaseLock();
-    }
-
-    // 4. Nettoyer le statut de la barre
-    statusBarStore.clearLockStatus();
   });
 
   // ============================================================================
@@ -388,12 +401,19 @@
       return false;
 
     isAcquiringLock = true;
+    const requestedId = eventId;
     try {
       const lock = await locksService.acquireLock(
-        `event_${eventId}`,
+        `event_${requestedId}`,
         globalState.userId,
         globalState.userName,
       );
+      // Navigation pendant l'acquisition : le verrou ne concerne plus la
+      // page courante — le libérer aussitôt, ne jamais l'afficher comme nôtre.
+      if (eventId !== requestedId) {
+        void releaseLockRequest(requestedId);
+        return false;
+      }
       // L'état du verrou est posé immédiatement (le realtime confirmera)
       activeLock = lock;
 
@@ -423,10 +443,12 @@
     }
   }
 
-  async function releaseLock(): Promise<void> {
-    const eventIdToRelease = lockedEventId;
-    if (!eventIdToRelease || !globalState.userId) return;
-
+  /**
+   * Libération réseau seule — sans toucher aux états d'édition : utilisable
+   * depuis le cleanup du cycle de vie, où les états sont déjà réinitialisés.
+   */
+  async function releaseLockRequest(eventIdToRelease: string): Promise<void> {
+    if (!globalState.userId) return;
     try {
       await locksService.releaseLock(
         `event_${eventIdToRelease}`,
@@ -436,7 +458,13 @@
     } catch (error) {
       console.error("❌ Erreur libération verrou:", error);
     }
+  }
 
+  async function releaseLock(): Promise<void> {
+    const eventIdToRelease = lockedEventId;
+    if (!eventIdToRelease || !globalState.userId) return;
+
+    await releaseLockRequest(eventIdToRelease);
     lockedEventId = null;
     isEditing = false; // ✅ Désactiver le mode édition après libération du lock
     // activeLock sera mis à jour par le realtime

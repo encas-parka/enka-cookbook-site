@@ -162,7 +162,8 @@
   // Load event on mount
   onMount(() => {
     (async () => {
-      // Le guard a déjà initialisé le store, l'event devrait être disponible
+      // Le guard matérialise l'event (ensureEvent) ; la lecture reste réactive :
+      // currentEvent ($derived) repeuple la page quand la donnée arrive.
       if (!event) {
         eventLoading = true;
         try {

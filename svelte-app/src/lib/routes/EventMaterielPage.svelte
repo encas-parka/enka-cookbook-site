@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { onMount } from "svelte";
+  import { untrack } from "svelte";
   import {
     Plus,
     LoaderCircle,
@@ -398,10 +398,26 @@
     return team?.name || "";
   }
 
-  onMount(async () => {
-    if (eventId) {
-      await eventMaterielStore.initializeForEvent(eventId);
-    }
+  // Init keyée sur l'id — « init par id, jamais par montage » : sv-router
+  // réutilise le composant entre /event/A et /event/B, l'effet rejoue donc
+  // l'initialisation au changement d'id (le store reset son bridge seul).
+  let initialisedFor = $state<string | null>(null);
+
+  $effect(() => {
+    if (!eventId || !currentEvent) return;
+    if (initialisedFor === eventId) return;
+
+    initialisedFor = eventId;
+    void untrack(async () => {
+      try {
+        await eventMaterielStore.initializeForEvent(eventId);
+      } catch (error) {
+        console.error(
+          "[EventMaterielPage] Erreur lors de l'initialisation:",
+          error,
+        );
+      }
+    });
   });
 </script>
 

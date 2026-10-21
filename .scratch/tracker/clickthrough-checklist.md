@@ -61,12 +61,13 @@
       préparation alternative.
       _(passe 20-10 : ingrédients, astuces, préparation à l'avance OK ;
       **alternatives manquantes** — voir problème P1)_
+     _(passe 21-10: alternatives → affiche "recette inconnue"; lien http://localhost:5173/recipe/[object%20Object]; testé sur http://localhost:5173/recipe/banoffee_uw7nq3h3hzob_ )
 - [x] Recherche recettes (≥ 2 caractères) : résultats pertinents (fuzzysort 4),
       combinaison correcte avec le filtre `typeR`.
       _(passe 20-10 : résultats pertinents (« pomme » → 13/13) ; re-qualifié
       20-10 par click-through humain : **recherche + typeR fonctionnent** —
       P2 était un faux positif du driver, code vérifié correct statiquement)_
-- [ ] Route privée en visiteur → **modale de connexion** (le feedback), puis
+- [x] Route privée en visiteur → **modale de connexion** (le feedback), puis
       `/` : aucun toast d'erreur, et la page visée est rejouée après login.
       Jamais page vide, jamais loading infini, jamais
       `effect_update_depth_exceeded` (vérifier `/event/:id`, `/recipe/:uuid/edit`,
@@ -79,6 +80,7 @@
       restent à jouer.
       Historique 20-10 : redirect `/` + toast, flash « Démarrage... » sur
       `/createdocument/*` — voir P5)_
+     _(passe manuelle 21-10: ok)
 - [x] URL inconnue → page 404.
 
 ## 2. Auth & cache
@@ -114,13 +116,14 @@
 
 ## 3. Events
 
-- [ ] Éditer l'event A (verrou pris, modifs en cours) → naviguer vers l'event B
+- [X] Éditer l'event A (verrou pris, modifs en cours) → naviguer vers l'event B
       (lien direct) → B affiché vierge, verrou de A libéré, sauvegarde de B
       sous verrou B.
       _(ajouté 21-10 — « init par id » : le cleanup du cycle de vie libère le
       lock de A au changement d'id ; avant, B était édité puis sauvé sous le
       verrou de A. Le cleanup doit lire `eventId` — un `$effect` sans
       dépendance ne rejoue jamais)_
+      _(passe manuelle 21-10: semble ok)_
 - [x] `/dashboard/eventCreate` : création (teams, dates/repas, description,
       minContrib) → EventCard correcte après save.
       _(passe 20-10 : create → redirect `/event/:id`, repas + recette + team
@@ -176,7 +179,7 @@
       _(passe 20-10 : formulaire pré-rempli complet → copie créée avec id PB
       natif, `typeR` copié, `rootRecipeId` lié, `versionLabel="v2 - ghald"` ;
       note : la copie hérite du `publishedAt` du parent — à trancher produit)_
-- [ ] Ajout d'ingrédient : autocomplete, création si absent, surlignage du match.
+- [x] Ajout d'ingrédient : autocomplete, création si absent, surlignage du match.
       _(passe 20-10 : **partiel** — autocomplete ✓ (suggestions Carotte/
       carottes + option « Créer un nouvel ingrédient »), sélection ✓, ajout
       en ligne avec quantité/unité/note ✓ ; création d'ingrédient absent :

@@ -86,7 +86,8 @@ export const routes: Routes = {
 
   "/recipe/:uuid/edit": {
     hooks: authGuard,
-    "/": () => import("$lib/routes/RecipeEditPage.svelte"),
+    // Wrapper keyé sur l'uuid : la page suppose un montage par recette.
+    "/": () => import("$lib/routes/RecipeEditRoute.svelte"),
   },
 
   "/recipe/:uuid/duplicate": {
@@ -108,7 +109,8 @@ export const routes: Routes = {
 
   "/editdocument/:teamId/:docId": {
     hooks: authGuard,
-    "/": () => import("$lib/routes/EditDocumentPage.svelte"),
+    // Wrapper keyé sur (team, doc) : la page suppose un montage par document.
+    "/": () => import("$lib/routes/EditDocumentRoute.svelte"),
   },
 
   "/documents/:teamId": {
@@ -133,10 +135,11 @@ export const routes: Routes = {
     "/documents": () => import("$lib/routes/EventDocumentsPage.svelte"),
     "/document/create": () =>
       import("$lib/routes/EventDocumentCreatePage.svelte"),
+    // Wrapper keyé sur (event, doc) : la page suppose un montage par document.
     "/document/:docId": () =>
-      import("$lib/routes/EventDocumentEditPage.svelte"),
+      import("$lib/routes/EventDocumentEditRoute.svelte"),
     "/document/:docId/edit": () =>
-      import("$lib/routes/EventDocumentEditPage.svelte"),
+      import("$lib/routes/EventDocumentEditRoute.svelte"),
   },
 
   // ============================================

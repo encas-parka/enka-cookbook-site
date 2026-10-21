@@ -33,6 +33,7 @@ opencode.json*
 .ripgreprc
 .zprofile
 .zshrc
+.scratch
 
 # Binaires et fichiers de verrouillage
 pocketbase/pocketbase

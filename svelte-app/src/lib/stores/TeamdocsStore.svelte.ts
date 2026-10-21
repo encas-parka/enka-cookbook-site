@@ -6,10 +6,11 @@ import {
   db,
   pb,
 } from "$lib/db-sync/pb-sync";
-import { SESSION_FULL_SYNC_TTL_MS } from "$lib/constants/sync";
 
 export class TeamdocsStore {
-  #collection = createSyncCollection<Teamdocs>(pb, db.teamdocs, "teamdocs");
+  #collection = createSyncCollection<Teamdocs>(pb, db.teamdocs, "teamdocs", {
+    sessionCursor: true,
+  });
 
   #bridge = bridgeToMap<Teamdocs>(() => db.teamdocs.toArray());
   #documents = this.#bridge.map;
@@ -111,8 +112,7 @@ export class TeamdocsStore {
    * fois par session. Toggle `this.#loading` autour de la revalidation.
    */
   async syncInitial(): Promise<void> {
-    await this.#resetCursorForSession();
-    return this.#runWithLoading(() => this.syncRevalidate());
+    return this.#runWithLoading(() => this.syncRevalidate(true));
   }
 
   /**
@@ -120,26 +120,22 @@ export class TeamdocsStore {
    * UI skeleton). Skip silencieux si déjà en cours. Rethrow pour laisser
    * l'appelant (orchestrateur de resync) décider du signalement.
    * Un changement d'utilisateur en vol (logout) discard le résultat.
+   * `forceFull` asserte un début de session : full inconditionnel (le filet
+   * TTL des sessions longévives vit dans la collection).
    */
-  async syncRevalidate(): Promise<void> {
+  async syncRevalidate(forceFull = false): Promise<void> {
     if (!globalState.userId) {
       console.log("[TeamdocsStore] Pas de userId, skip syncRevalidate");
       return;
     }
 
     if (this.#revalidating) return;
-    // Filet TTL : une session restée en arrière-plan au-delà du TTL n'a plus
-    // de curseur fiable (grants manqués pendant l'absence) — on repasse par
-    // un full de session avant le delta.
-    if (Date.now() - this.#lastFullSyncAt > SESSION_FULL_SYNC_TTL_MS) {
-      await this.#resetCursorForSession();
-    }
     this.#revalidating = true;
     this.#error = null;
 
     try {
       const uid = globalState.userId;
-      await this.#collection.initialFetch();
+      await this.#collection.revalidate(undefined, forceFull);
       // Logout en vol : ne pas livrer les données de l'utilisateur précédent
       // à la cache du suivant.
       if (globalState.userId !== uid) return;
@@ -165,17 +161,8 @@ export class TeamdocsStore {
    * ramènerait.
    */
   async resetCursorAndSync(): Promise<void> {
-    await this.#resetCursorForSession();
-    await this.syncRevalidate();
-  }
-
-  /** Horodatage du dernier fetch complet de session (mémoire — vie de page). */
-  #lastFullSyncAt = Date.now();
-
-  /** Reset du curseur delta + horodatage du full de session qui suivra. */
-  async #resetCursorForSession(): Promise<void> {
     await this.#collection.resetCursor();
-    this.#lastFullSyncAt = Date.now();
+    await this.syncRevalidate();
   }
 
   async #runWithLoading(work: () => Promise<void>): Promise<void> {

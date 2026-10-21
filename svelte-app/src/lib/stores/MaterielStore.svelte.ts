@@ -17,7 +17,6 @@ import { globalState } from "./GlobalState.svelte";
 import { nativeTeamsStore } from "./NativeTeamsStore.svelte";
 import { eventMaterielStore } from "./EventMaterielStore.svelte";
 import { createSyncCollection, db, pb } from "$lib/db-sync/pb-sync";
-import { SESSION_FULL_SYNC_TTL_MS } from "$lib/constants/sync";
 
 /**
  * MaterielStore — Gestion du matériel avec Svelte 5 + aw-sync
@@ -56,13 +55,14 @@ export class MaterielStore {
     pb,
     db.materiels,
     "materiel",
-    { softDelete: true },
+    { softDelete: true, sessionCursor: true },
   );
 
   #loanCollection = createSyncCollection<MaterielLoan>(
     pb,
     db.materielLoans,
     "materiel_loan",
+    { sessionCursor: true },
   );
 
   // Single liveQuery subscription (observes both tables)
@@ -259,8 +259,7 @@ export class MaterielStore {
    * autour de la revalidation.
    */
   async syncInitial(): Promise<void> {
-    await this.#resetCursorForSession();
-    return this.#runWithLoading(() => this.syncRevalidate());
+    return this.#runWithLoading(() => this.syncRevalidate(true));
   }
 
   /**
@@ -268,27 +267,23 @@ export class MaterielStore {
    * UI skeleton). Skip silencieux si déjà en cours. Rethrow pour laisser
    * l'appelant (orchestrateur de resync) décider du signalement.
    * Un changement d'utilisateur en vol (logout) discard le résultat.
+   * `forceFull` asserte un début de session : full inconditionnel des deux
+   * collections (le filet TTL des sessions longévives vit dans chacune).
    */
-  async syncRevalidate(): Promise<void> {
+  async syncRevalidate(forceFull = false): Promise<void> {
     if (this.#revalidating) return;
     this.#revalidating = true;
     this.#error = null;
 
     try {
       if (!globalState.userId) return;
-      // Filet TTL : une session restée en arrière-plan au-delà du TTL n'a
-      // plus de curseur fiable (grants manqués pendant l'absence) — on
-      // repasse par un full de session avant le delta.
-      if (Date.now() - this.#lastFullSyncAt > SESSION_FULL_SYNC_TTL_MS) {
-        await this.#resetCursorForSession();
-      }
 
       const uid = globalState.userId;
-      await this.#materielCollection.initialFetch();
+      await this.#materielCollection.revalidate(undefined, forceFull);
       // Logout en vol : ne pas livrer les données de l'utilisateur précédent
       // à la cache du suivant.
       if (globalState.userId !== uid) return;
-      await this.#loanCollection.initialFetch();
+      await this.#loanCollection.revalidate(undefined, forceFull);
       if (globalState.userId !== uid) return;
 
       // Start observing Dexie tables after data is populated
@@ -316,16 +311,6 @@ export class MaterielStore {
     }
   }
 
-  /** Horodatage du dernier fetch complet de session (mémoire — vie de page). */
-  #lastFullSyncAt = Date.now();
-
-  /** Reset des curseurs delta (les deux collections) + horodatage du full. */
-  async #resetCursorForSession(): Promise<void> {
-    await this.#materielCollection.resetCursor();
-    await this.#loanCollection.resetCursor();
-    this.#lastFullSyncAt = Date.now();
-  }
-
   /**
    * Invalide les curseurs delta (materiel + materiel_loan) puis
    * resynchronise, SANS vider les tables locales (pas de fenêtre d'état
@@ -334,7 +319,8 @@ export class MaterielStore {
    * au curseur est invisible au delta comme au SSE.
    */
   async resetCursorAndSync(): Promise<void> {
-    await this.#resetCursorForSession();
+    await this.#materielCollection.resetCursor();
+    await this.#loanCollection.resetCursor();
     await this.syncRevalidate();
   }
 

@@ -25,19 +25,28 @@ Offline-first synchronization layer bridging **PocketBase** (remote) and **Dexie
 
 Collections whose authorization grant is **dynamic** (`events`, `teamdocs`,
 `materiel`, `materiel_loan`) do not let their delta cursor survive across
-sessions: `syncInitial` resets it before fetching (ADR
-`docs/adr/0001-delta-sync-cursor-invalidation.md`). The epoch fetch that
-follows catches everything missed while away — mutations **and**
-authorization widenings (team join offline, invitations), which no timestamp
-can express. Within a session, `syncRevalidate` stays a pure delta (SSE
-gaps), with a 24 h TTL fallback (`SESSION_FULL_SYNC_TTL_MS`) for long-lived
-background tabs. The session full fetch of `events` is bounded by
-`epochFilter` (`dateEnd >= now - 90 days`, empty dates included) — a bound
-that never applies to incremental fetches.
+sessions — the policy lives IN the collection, via the `sessionCursor` option
+of `createSyncCollection` (ADR
+`docs/adr/0001-delta-sync-cursor-invalidation.md`):
 
-Cursor-aligned collections (`recipes`/`ingredients` public,
-`products`/`purchases`/`event_materiel` scoped by `eventId`) keep the plain
-delta: their cursor scope already matches their grant.
+- `initialFetch` (session start — boot, login, `forceRefresh`) always runs
+  the full fetch: the persisted cursor is ignored, so everything missed
+  while away is caught — mutations **and** authorization widenings (team
+  join offline, invitations), which no timestamp can express.
+- `revalidate` (intra-session catch-up — SSE gaps, reconnects) stays a pure
+  delta while the last session full is fresh, and switches to the full
+  fetch past the TTL fallback (`SESSION_FULL_SYNC_TTL_MS` by default;
+  `sessionCursor: { ttlMs }` tunes it per collection) or when no full has
+  succeeded in this page yet.
+- `resetCursor` + `revalidate` (`resetCursorAndSync` on stores) repairs a
+  known in-session grant widening (SSE `team_joined`, share-link join).
+
+The session full fetch of `events` is bounded by `epochFilter`
+(`dateEnd >= now - 90 days`, empty dates included) — a bound that never
+applies to incremental fetches. Cursor-aligned collections
+(`recipes`/`ingredients` public, `products`/`purchases`/`event_materiel`
+scoped by `eventId`) keep the plain delta: no `sessionCursor`, no stamp, no
+TTL — their cursor scope already matches their grant.
 
 ---
 
@@ -325,12 +334,13 @@ interface PbSyncOptions<T> {
 
 #### Lifecycle
 
-| Method           | Signature                                                    | Description                                                                                                                               |
-| ---------------- | ------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------- |
-| `initialFetch`   | `(fetchOptions?: PbFetchOptions) => Promise<void>`           | Incremental sync: fetches records updated since the persisted cursor (scoped by `scopeKey`). Cursor + upserts written in one transaction. |
-| `subscribe`      | `(subOptions?: PbSubscribeOptions) => PbSubscriptionRef`     | Opens a PocketBase realtime subscription. Events are applied to Dexie. Returns a `PbSubscriptionRef` for later unsubscription.            |
-| `unsubscribe`    | `(subRefOrId: PbSubscriptionRef \| string) => Promise<void>` | Closes a specific realtime subscription.                                                                                                  |
-| `unsubscribeAll` | `() => Promise<void>`                                        | Closes all active realtime subscriptions for this collection.                                                                             |
+| Method           | Signature                                                               | Description                                                                                                                                                                                                                                                                    |
+| ---------------- | ----------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `initialFetch`   | `(fetchOptions?: PbFetchOptions) => Promise<void>`                      | Session start fetch. With `sessionCursor`: ALWAYS full — the persisted cursor is ignored (catches mutations and grant widenings). Without: classic delta since the persisted cursor (scoped by `scopeKey`). Cursor + upserts written in one transaction.                       |
+| `revalidate`     | `(fetchOptions?: PbFetchOptions, forceFull?: boolean) => Promise<void>` | Intra-session catch-up: pure delta while the last session full is fresh; full fetch past the TTL fallback (`sessionCursor.ttlMs`, default `SESSION_FULL_SYNC_TTL_MS`) or when no full succeeded yet. `forceFull` asserts a session start. Plain delta without `sessionCursor`. |
+| `subscribe`      | `(subOptions?: PbSubscribeOptions) => PbSubscriptionRef`                | Opens a PocketBase realtime subscription. Events are applied to Dexie. Returns a `PbSubscriptionRef` for later unsubscription.                                                                                                                                                 |
+| `unsubscribe`    | `(subRefOrId: PbSubscriptionRef \| string) => Promise<void>`            | Closes a specific realtime subscription.                                                                                                                                                                                                                                       |
+| `unsubscribeAll` | `() => Promise<void>`                                                   | Closes all active realtime subscriptions for this collection.                                                                                                                                                                                                                  |
 
 #### CRUD
 
@@ -471,7 +481,7 @@ Stores own one sync collection each and drive it through three phases:
 
 ```ts
 await store.loadCache(); // Dexie → SvelteMap via bridgeToMap liveQuery
-await store.syncInitial(); // PocketBase → Dexie via initialFetch()
+await store.syncInitial(); // PocketBase → Dexie — full fetch of the session (sessionCursor)
 await store.setupRealtime(); // SSE → Dexie via subscribe()
 ```
 

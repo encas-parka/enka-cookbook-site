@@ -50,10 +50,7 @@ import {
   type BridgeResult,
   type PbFetchOptions,
 } from "$lib/db-sync/pb-sync";
-import {
-  EVENTS_EPOCH_FLOOR_DAYS,
-  SESSION_FULL_SYNC_TTL_MS,
-} from "$lib/constants/sync";
+import { EVENTS_EPOCH_FLOOR_DAYS } from "$lib/constants/sync";
 
 // =============================================================================
 // STORE CLASS
@@ -61,7 +58,9 @@ import {
 
 export class EventsStore {
   // pb-sync collection for events (PocketBase 'events' table)
-  #collection = createSyncCollection<Main>(pb, db.events, "events");
+  #collection = createSyncCollection<Main>(pb, db.events, "events", {
+    sessionCursor: true,
+  });
 
   // Bridge: liveQuery on db.events → SvelteMap of raw PB data
   #bridge: BridgeResult<Main> = bridgeToMap<Main>(() => db.events.toArray());
@@ -283,9 +282,15 @@ export class EventsStore {
    * grant : join d'équipe hors ligne, invitation) est rattrapé ici, une fois
    * par session. Toggle `this.#loading` autour de la revalidation.
    */
+  /**
+   * Phase 2 : sync de session (ADR 0001 « curseurs de session ») — le fetch
+   * repart de l'époque (curseur ignoré par la collection en session) : tout
+   * ce qui a été manqué pendant l'absence (mutations ET élargissements de
+   * grant : join d'équipe hors ligne, invitation) est rattrapé ici, une fois
+   * par session. Toggle `this.#loading` autour de la revalidation.
+   */
   async syncInitial(): Promise<void> {
-    await this.#resetCursorForSession();
-    return this.#runWithLoading(() => this.syncRevalidate());
+    return this.#runWithLoading(() => this.syncRevalidate(true));
   }
 
   /**
@@ -293,22 +298,18 @@ export class EventsStore {
    * UI skeleton). Skip silencieux si déjà en cours. Rethrow pour laisser
    * l'appelant (orchestrateur de resync) décider du signalement.
    * Un changement d'utilisateur en vol (logout) discard le résultat.
+   * `forceFull` asserte un début de session : full inconditionnel (le filet
+   * TTL des sessions longévives vit dans la collection).
    */
-  async syncRevalidate(): Promise<void> {
+  async syncRevalidate(forceFull = false): Promise<void> {
     if (this.#revalidating) return;
-    // Filet TTL : une session restée en arrière-plan au-delà du TTL n'a plus
-    // de curseur fiable (grants manqués pendant l'absence) — on repasse par
-    // un full de session avant le delta.
-    if (Date.now() - this.#lastFullSyncAt > SESSION_FULL_SYNC_TTL_MS) {
-      await this.#resetCursorForSession();
-    }
     this.#revalidating = true;
 
     console.log("[EventsStore] Synchronisation depuis PocketBase...");
 
     try {
       const uid = globalState.userId;
-      await this.#collection.initialFetch(this.#sessionFetchOptions());
+      await this.#collection.revalidate(this.#sessionFetchOptions(), forceFull);
       // Logout en vol : ne pas livrer les données de l'utilisateur précédent
       // à la cache du suivant.
       if (globalState.userId !== uid) return;
@@ -337,9 +338,6 @@ export class EventsStore {
     }
   }
 
-  /** Horodatage du dernier fetch complet de session (mémoire — vie de page). */
-  #lastFullSyncAt = Date.now();
-
   /**
    * Bornes du fetch complet de session : les events terminés depuis plus de
    * EVENTS_EPOCH_FLOOR_DAYS ne sont pas re-populés (l'historique s'accumule,
@@ -355,12 +353,6 @@ export class EventsStore {
     return {
       epochFilter: ["dateEnd >= {:floor} || dateEnd = ''", { floor }],
     };
-  }
-
-  /** Reset du curseur delta + horodatage du full de session qui suivra. */
-  async #resetCursorForSession(): Promise<void> {
-    await this.#collection.resetCursor();
-    this.#lastFullSyncAt = Date.now();
   }
 
   /**
@@ -384,7 +376,7 @@ export class EventsStore {
    * delta comme au SSE.
    */
   async resetCursorAndSync(): Promise<void> {
-    await this.#resetCursorForSession();
+    await this.#collection.resetCursor();
     await this.syncRevalidate();
   }
 

@@ -118,6 +118,15 @@ export interface PbSyncOptions<T extends PbDoc> {
   softDelete?: boolean;
   /** Called when realtime subscription becomes active / inactive */
   onSubscriptionChange?: (active: boolean) => void;
+  /**
+   * Session-cursor policy (ADR 0001): the cursor does not survive across
+   * sessions. `initialFetch` ignores the persisted cursor and always runs
+   * the full session fetch (mutations AND grant widenings caught);
+   * `revalidate` stays a pure delta with a TTL fallback (`forceFull`
+   * asserts a session start). `true` = shared default TTL
+   * (`SESSION_FULL_SYNC_TTL_MS`); `{ ttlMs }` tunes it per collection.
+   */
+  sessionCursor?: true | { ttlMs?: number };
 }
 
 // =============================================================================

@@ -49,16 +49,16 @@ d'audit `.scratch/tracker/26-10-20_delta-sync-audit/report.md`) :
 
 1. **Le delta reste le régime des collections à curseur aligné** (public ou
    scopé au grant).
-2. **Curseurs de session** pour les collections à grant dynamique : le
-   curseur est reseté à chaque début de session (`syncInitial` — boot,
-   login), le fetch complet qui suit rattrape tout ce qui a été manqué
+2. **Curseurs de session** pour les collections à grant dynamique : à chaque
+   début de session (boot, login), le fetch de session repart de l'époque —
+   le curseur persisté n'est pas lu — et rattrape tout ce qui a été manqué
    pendant l'absence, mutations ET élargissements. Entre deux sessions, le
    delta intra-session rattrape les mutations manquées (déconnexions SSE) —
    c'est son cœur de métier, sans problème de grant (une mutation bump
    l'`updated` d'un record déjà visible).
 3. **Filet TTL** : une session en arrière-plan au-delà de 24 h repasse par un
-   reset au prochain déclenchement de resync (les messages `team_joined`
-   manqués pendant l'arrière-plan sont rattrapés).
+   fetch complet au prochain déclenchement de resync (les messages
+   `team_joined` manqués pendant l'arrière-plan sont rattrapés).
 4. **Reset ciblé en session** : tout événement d'élargissement connu appelle
    `resetCursor()` + resync au point client correspondant (handler SSE
    `team_joined` → events/teamdocs/materiel/materiel_loan ; join d'event par

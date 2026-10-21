@@ -36,6 +36,7 @@
 
 import type { Table, UpdateSpec } from "dexie";
 import type PocketBase from "pocketbase";
+import { SESSION_FULL_SYNC_TTL_MS } from "../constants/sync";
 import { db, type SyncMetaRow } from "./aw-db";
 import type {
   PbFetchOptions,
@@ -329,6 +330,16 @@ export function createSyncCollection<T extends PbDoc>(
   const softDelete = options?.softDelete ?? false;
   const onSubscriptionChange = options?.onSubscriptionChange;
 
+  // Session-cursor policy (ADR 0001): `true` = shared default TTL,
+  // `{ ttlMs }` = per-collection tuning. null stamp = no successful full in
+  // this page yet → the first revalidate runs the full.
+  const sessionMode = Boolean(options?.sessionCursor);
+  const sessionTtlMs =
+    typeof options?.sessionCursor === "object"
+      ? (options.sessionCursor.ttlMs ?? SESSION_FULL_SYNC_TTL_MS)
+      : SESSION_FULL_SYNC_TTL_MS;
+  let lastSessionFullAt: number | null = null;
+
   let subCounter = 0;
   const subscriptions = new Map<
     string,
@@ -353,23 +364,23 @@ export function createSyncCollection<T extends PbDoc>(
   }
 
   /**
-   * Incremental sync: fetches records updated since the persisted cursor of
-   * this collection (scoped by `scopeKey` when provided, key
-   * `${collectionName}:${scopeKey}` in the `syncMeta` table).
-   *
-   * The cursor is written in the SAME Dexie transaction as the upserts —
-   * if any upsert fails, both roll back, so the cursor never skips
-   * unfetched data (the old table-derived cursor made older scopes
-   * unfetchable after a newer scope had been synced).
-   *
-   * Uses `getFullList()` with auto-pagination (PocketBase SDK handles this).
-   *
-   * @param fetchOptions - Optional PocketBase filter/scope for the fetch
+   * Fetch engine — one body, two regimes. The persisted cursor (scoped by
+   * `scopeKey` when provided, key `${collectionName}:${scopeKey}` in the
+   * `syncMeta` table) bounds the fetch UNLESS `sessionFull` asserts a
+   * session fetch: the cursor is then ignored (read as absent) and the
+   * epochFilter applies. The cursor is written in the SAME Dexie
+   * transaction as the upserts — if any upsert fails, both roll back, so
+   * the cursor never skips unfetched data. Uses `getFullList()` with
+   * auto-pagination (PocketBase SDK handles this).
    */
-  async function initialFetch(fetchOptions?: PbFetchOptions): Promise<void> {
-    // 1. Read the persisted delta cursor (scoped when scopeKey is provided)
+  async function runFetch(
+    fetchOptions: PbFetchOptions | undefined,
+    sessionFull: boolean,
+  ): Promise<void> {
+    // 1. Read the persisted delta cursor (scoped when scopeKey is provided;
+    //    ignored when sessionFull — a session start catches everything)
     const syncKey = syncMetaKey(fetchOptions?.scopeKey);
-    const meta = await db.syncMeta.get(syncKey);
+    const meta = sessionFull ? undefined : await db.syncMeta.get(syncKey);
     const since = meta?.lastSync ?? "2000-01-01 00:00:00.000Z";
     const localCount = await table.count();
 
@@ -460,9 +471,48 @@ export function createSyncCollection<T extends PbDoc>(
       });
     }
 
+    // A successful fetch NOT bounded by a persisted cursor is a completed
+    // session catch-up — the TTL fallback restarts from it. A failed fetch
+    // never reaches this line: the next revalidate retries the full.
+    if (sessionMode && !meta?.lastSync) {
+      lastSessionFullAt = Date.now();
+    }
+
     console.log(
       `[pb-sync] ${collectionName}: ${freshRecords.length} records synced (since: ${since.slice(0, 19)})`,
     );
+  }
+
+  /**
+   * Session start: with `sessionCursor`, ALWAYS a full fetch — the
+   * persisted cursor is ignored so the catch-up covers everything missed
+   * while away, mutations AND authorization widenings. Without the option,
+   * this is the classic delta (cursor honored when present). The
+   * epochFilter applies only when the cursor is absent — bounding the
+   * initial population, never the incremental catch-up.
+   */
+  function initialFetch(fetchOptions?: PbFetchOptions): Promise<void> {
+    return runFetch(fetchOptions, sessionMode);
+  }
+
+  /**
+   * Intra-session catch-up: a pure delta (cursor honored) while the last
+   * session full is fresh — SSE-gap mutations. Past `ttlMs` (or when no
+   * full has succeeded in this page yet), it runs the full session fetch
+   * instead: grants widened during a long-lived background tab are caught.
+   * `forceFull` asserts a session start (boot, login): skip the TTL check,
+   * always the unbounded fetch. Without `sessionCursor`, a plain delta —
+   * no policy attached.
+   */
+  function revalidate(
+    fetchOptions?: PbFetchOptions,
+    forceFull = false,
+  ): Promise<void> {
+    if (!sessionMode) return runFetch(fetchOptions, false);
+    const stale =
+      lastSessionFullAt === null ||
+      Date.now() - lastSessionFullAt > sessionTtlMs;
+    return runFetch(fetchOptions, forceFull || stale);
   }
 
   /**
@@ -1053,6 +1103,7 @@ export function createSyncCollection<T extends PbDoc>(
   return {
     // Lifecycle
     initialFetch,
+    revalidate,
     subscribe: subscribeToCollection,
     unsubscribe,
     unsubscribeAll,

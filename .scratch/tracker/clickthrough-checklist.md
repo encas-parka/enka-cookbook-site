@@ -19,6 +19,8 @@
 > restantes sont soit des bugs constatés (laissés décochés), soit des items
 > bloqués par le driver (selects natifs, Échap, émulation print) — chacun
 > annoté. §11-3 (coupure PB) et §11-4 (onglet caché) seront joués à la main.
+> Ajout 20-10 (post-audit delta-sync, commit `01b5f6fa`) : 1 item en §10 —
+> join d'équipe avec cache établi (30 restants).
 
 ## 0. Prérequis
 
@@ -359,12 +361,23 @@
       préservés en base : `roles={qaldek:"owner", ghald:"owner",
       marion:"member"}` ✓. Côté invité : toujours **aucun feedback** (ni
       notification ni mention) — Marion voit simplement Q88 apparaître)_
-- [ ] Flux invité sans compte : `/join/:linkId` → demande de connexion ou de
+- [ ] Invitation team avec cache établi (fix delta-sync `01b5f6fa`, ADR 0001) :
+      A invite B pendant que la session de B est **ouverte avec un cache
+      établi** → sans reload, les records de l'équipe rejointe apparaissent
+      chez B : events au dashboard, teamdocs dans `/documents/:teamId`,
+      materiel dans `/dashboard/materiel`, prêts dans `/loans/:teamId`.
+      _(ajout 20-10, audit delta-sync : le handler SSE `team_joined` reset
+      maintenant les curseurs delta de events/teamdocs/materiel/materiel_loan
+      avant resync — trou de classe A, généralisation du fix P12 au join
+      d'équipe. Précondition du test : le cache de B doit être ÉTABLI (curseur
+      récent > `updated` des records de l'équipe) — avec un compte neuf
+      (curseur époque) le trou n'est pas reproductible, le delta passe toujours.
+      Jouer avec deux origines comme la passe 20-10 : ghald invitant sur
+      `localhost:5173`, Marion sur `[::1]:5173`)_
+- [x] Flux invité sans compte : `/join/:linkId` → demande de connexion ou de
       création de compte → redirection vers l'event.
       _(passe 20-10 : **partiel** — le flux « déjà connecté » est validé (cf.
-      share link). Le flux sans compte n'a pas été joué : il faudrait une
-      origine sans session ; `[::1]` porte Marion et `localhost` porte ghald,
-      et un troisième contexte n'était pas disponible)_
+      share link). Le flux sans compte à été jouer par le dev: vert._
 
 ## 11. Locks & temps réel
 

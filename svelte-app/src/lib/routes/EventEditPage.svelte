@@ -1218,8 +1218,8 @@
               >Recettes à planifier</legend
             >
             <div class="flex flex-wrap gap-2 p-2">
-              {#each undatedMeals as undatedMeal}
-                {#each undatedMeal.recipes as recipe}
+              {#each undatedMeals as undatedMeal (undatedMeal.id)}
+                {#each undatedMeal.recipes as recipe (recipe.recipeUuid)}
                   {@const recipeIndex = recipesStore.getRecipeIndexByUuid(
                     recipe.recipeUuid,
                   )}

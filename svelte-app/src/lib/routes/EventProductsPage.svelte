@@ -443,7 +443,7 @@
 
       <!-- Skeleton produits list -->
       <div class="space-y-4">
-        {#each Array(3) as _}
+        {#each Array(3) as _, i (i)}
           <div class="rounded-box border-2 border-base-300 bg-base-100 p-4">
             <div class="mb-3 flex items-center justify-between">
               <div class="h-6 w-48 skeleton"></div>
@@ -453,7 +453,7 @@
               </div>
             </div>
             <div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
-              {#each Array(3) as __}
+              {#each Array(3) as __, j (j)}
                 <div class="card-compact card bg-base-200">
                   <div class="card-body">
                     <div class="mb-2 h-5 w-32 skeleton"></div>

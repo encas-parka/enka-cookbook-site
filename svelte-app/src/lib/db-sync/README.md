@@ -490,6 +490,16 @@ await store.setupRealtime(); // SSE → Dexie via subscribe()
 Logout delegates to the cache-identity path (`purgeLocal()` / `clearLocal()`) —
 see « Cache identity invariant » above.
 
+On login, `GlobalState.refreshAuthAfterLogin()` splits the phases in two:
+identity purge + `loadCache` are the **navigation cut point** (it resolves
+there, so the redirect never shows another identity's cache), while
+`syncInitial` / `setupRealtime` keep running behind the navigation. The
+network outcome is exposed as `globalState.hydration` (`false` = incomplete
+sync, session kept in offline mode). Consequence for stores: `syncInitial()`
+must join an in-flight revalidation rather than return early — `syncReady`
+never resolves before the fetch it stands for (`RecipesStore` is the
+exemplar, pinned by `globalstate-login-hydration.test.ts`).
+
 ### 2. CRUD via the collection
 
 Components never call PocketBase directly. Stores go through the sync collection:

@@ -751,8 +751,10 @@ Format : page / action / attendu vs obtenu / console (coller l'erreur exacte).
 
 ## Idées produit (hors gate, à ticketiser)
 
-1. Après authentification, rediriger vers le dashboard plutôt que de rester sur
-   la home.
+1. ~~Après authentification, rediriger vers le dashboard plutôt que de rester
+   sur la home.~~ **Fait 21-10** : redirection post-login au point « cache local
+   prêt » (pas de course avec l'hydratation), cible = page refusée par un guard
+   sinon `/dashboard`, retour dashboard après réinitialisation de mot de passe.
 2. Générer le share link à la création de l'event, pour qu'il existe toujours.
 3. `EventMealCard` : auto-focus du champ `recipe.plates`, Entrée valide,
    Échap annule.

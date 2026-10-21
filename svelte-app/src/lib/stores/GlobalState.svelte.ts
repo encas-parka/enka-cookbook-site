@@ -250,21 +250,25 @@ class GlobalState {
               `[GlobalState] Realtime custom: ${action} — team ${data.teamName || data.teamId}`,
             );
             if (action === "team_joined") {
-              // Élargissement de périmètre (audit delta-sync, classe A) :
-              // le join d'équipe modifie `teams` seulement — les records
-              // nouvellement autorisés (events, teamdocs, materiel, loans)
-              // gardent leur `updated` antérieur au curseur : invisibles au
-              // delta comme au SSE. Reset des curseurs AVANT resync — un
-              // simple forceRefresh reproduit le trou P12.
-              try {
-                await eventsStore.resetCursorAndSync();
-                await teamdocsStore.resetCursorAndSync();
-                await materielStore.resetCursorAndSync();
-              } catch (err) {
-                console.error(
-                  "[GlobalState] team_joined — resync post-join échoué:",
-                  err,
-                );
+              // Élargissement de périmètre : le join d'équipe modifie
+              // `teams` seulement — les records nouvellement autorisés
+              // (events, teamdocs, materiel, loans) gardent leur `updated`
+              // antérieur au curseur : invisibles au delta comme au SSE.
+              // Reset des curseurs AVANT resync — un simple forceRefresh ne
+              // les voit pas. allSettled : un échec de resync n'empêche pas
+              // les autres collections de réparer leur curseur.
+              const results = await Promise.allSettled([
+                eventsStore.resetCursorAndSync(),
+                teamdocsStore.resetCursorAndSync(),
+                materielStore.resetCursorAndSync(),
+              ]);
+              for (const result of results) {
+                if (result.status === "rejected") {
+                  console.error(
+                    "[GlobalState] team_joined — resync post-join échoué:",
+                    result.reason,
+                  );
+                }
               }
             } else {
               // team_left (rétrécissement) / team_updated (pas d'impact

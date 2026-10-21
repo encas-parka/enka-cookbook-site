@@ -3,8 +3,7 @@
  */
 
 /**
- * GlobalState — join d'équipe : reset des curseurs delta AVANT resync
- * (audit delta-sync, reco 1 — généralisation du fix P12).
+ * GlobalState — join d'équipe : reset des curseurs delta AVANT resync.
  *
  * Le trou : l'invitation team acceptée modifie `teams` seulement — les
  * records nouvellement autorisés (events, teamdocs, materiel, loans)
@@ -12,7 +11,8 @@
  * (`updated >= since`) comme au SSE (PB ne pousse que les changements).
  * Le handler `team_joined` doit invalider les curseurs des collections à
  * curseur global AVANT de resynchroniser — un simple forceRefresh() (delta)
- * reproduirait le trou P12.
+ * ne les voit pas. Les resets sont indépendants : un échec de resync
+ * n'empêche pas les autres collections de réparer leur curseur.
  *
  * Seam : même machinerie que globalstate-identity-cache — vrai GlobalState
  * + vrais stores + vrai pb-sync + transport PB factice. `pb.realtime` du
@@ -124,7 +124,7 @@ import { db } from "$lib/db-sync/pb-sync";
 // Données de l'utilisateur : récentes → le curseur monte ici au login
 const T_CACHE = pbDate(new Date("2026-06-08T11:30:00.000Z"));
 // Records de l'équipe rejointe : ANCIENS (le join ne les modifie pas) —
-// strictement sous le curseur : c'est le trou de classe A
+// strictement sous le curseur : invisibles au delta comme au SSE
 const T_GRANTED = pbDate(new Date("2026-01-10T09:00:00.000Z"));
 
 const EV_MINE = "eventmine0000001";
@@ -243,6 +243,39 @@ describe("GlobalState — team_joined : reset curseurs avant resync", () => {
     expect(await db.events.get(EV_MINE)).toBeTruthy();
     // Les curseurs sont reposés (max updated du full fetch = T_CACHE)
     expect((await db.syncMeta.get("events"))?.lastSync).toBe(T_CACHE);
+  });
+
+  it("un échec de resync d'une collection n'empêche pas les autres de réparer", async () => {
+    authMock.set(null);
+    await globalState.initializeAuth();
+
+    seedServerForUserA();
+    authMock.set(authMock.USER_A);
+    await authMock.loginWithPassword("ghald@dev.local", "x");
+    await globalState.refreshAuthAfterLogin();
+    await waitForTick(3);
+
+    seedTeamJoinedRecords();
+
+    // L'échec est injecté sur un seul store (allSettled isole le rejet) :
+    // les deux autres doivent quand même réparer leur curseur
+    const spy = vi
+      .spyOn(teamdocsStore, "resetCursorAndSync")
+      .mockRejectedValueOnce(new Error("resync interrompu"));
+
+    currentFakePb().emitToTopic(`user_${authMock.USER_A.id}`, {
+      action: "team_joined",
+      teamId: TEST_TEAM_ID,
+      teamName: "Team One",
+    });
+
+    await untilTrue(async () => await db.events.get(EV_TEAM));
+    await untilTrue(async () => await db.materiels.get(MAT_TEAM));
+    await untilTrue(async () => await db.materielLoans.get(LOAN_TEAM));
+    // La collection en échec n'a pas réparé : record toujours invisible
+    expect(await db.teamdocs.get(TD_TEAM)).toBeUndefined();
+
+    spy.mockRestore();
   });
 
   it("team_left / team_updated ne resetent PAS les curseurs (delta suffit)", async () => {

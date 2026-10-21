@@ -276,13 +276,6 @@ export class EventsStore {
   }
 
   /**
-   * Phase 2 : sync de session (ADR 0001 « curseurs de session ») — le
-   * curseur est reseté AVANT le fetch, qui repart donc de l'époque : tout ce
-   * qui a été manqué pendant l'absence (mutations ET élargissements de
-   * grant : join d'équipe hors ligne, invitation) est rattrapé ici, une fois
-   * par session. Toggle `this.#loading` autour de la revalidation.
-   */
-  /**
    * Phase 2 : sync de session (ADR 0001 « curseurs de session ») — le fetch
    * repart de l'époque (curseur ignoré par la collection en session) : tout
    * ce qui a été manqué pendant l'absence (mutations ET élargissements de

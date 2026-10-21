@@ -253,10 +253,10 @@ export class MaterielStore {
 
   /**
    * Phase 2 : sync de session (ADR 0001 « curseurs de session ») — les
-   * curseurs (materiel + materiel_loan) sont resetés AVANT le fetch : tout
-   * ce qui a été manqué pendant l'absence (mutations ET élargissements de
-   * grant) est rattrapé ici, une fois par session. Toggle `this.#loading`
-   * autour de la revalidation.
+   * fetchs des deux collections repartent de l'époque (curseurs ignorés par
+   * la collection en session) : tout ce qui a été manqué pendant l'absence
+   * (mutations ET élargissements de grant) est rattrapé ici, une fois par
+   * session. Toggle `this.#loading` autour de la revalidation.
    */
   async syncInitial(): Promise<void> {
     return this.#runWithLoading(() => this.syncRevalidate(true));

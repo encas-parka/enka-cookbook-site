@@ -106,10 +106,11 @@ export class TeamdocsStore {
   }
 
   /**
-   * Phase 2 : sync de session (ADR 0001 « curseurs de session ») — le
-   * curseur est reseté AVANT le fetch : tout ce qui a été manqué pendant
-   * l'absence (mutations ET élargissements de grant) est rattrapé ici, une
-   * fois par session. Toggle `this.#loading` autour de la revalidation.
+   * Phase 2 : sync de session (ADR 0001 « curseurs de session ») — le fetch
+   * repart de l'époque (curseur ignoré par la collection en session) : tout
+   * ce qui a été manqué pendant l'absence (mutations ET élargissements de
+   * grant) est rattrapé ici, une fois par session. Toggle `this.#loading`
+   * autour de la revalidation.
    */
   async syncInitial(): Promise<void> {
     return this.#runWithLoading(() => this.syncRevalidate(true));

@@ -517,8 +517,9 @@ export function createSyncCollection<T extends PbDoc>(
 
   /**
    * Invalide le curseur delta de cette collection SANS toucher aux données
-   * locales : le prochain `initialFetch` repart de l'époque et rejoue un
-   * fetch complet en upserts idempotents (pas de fenêtre d'état vide).
+   * locales : le prochain fetch repart de l'époque (curseur absent — en
+   * session, `revalidate` fait alors un fetch complet) et rejoue des upserts
+   * idempotents (pas de fenêtre d'état vide).
    *
    * À appeler quand le périmètre autorisé côté serveur s'élargit (join
    * d'event par share link, invitation team…) : les records nouvellement

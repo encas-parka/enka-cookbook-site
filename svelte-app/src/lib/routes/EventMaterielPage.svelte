@@ -402,20 +402,29 @@
   // réutilise le composant entre /event/A et /event/B, l'effet rejoue donc
   // l'initialisation au changement d'id (le store reset son bridge seul).
   let initialisedFor = $state<string | null>(null);
+  // Non réactif : anti-doublon pendant l'init, sans déclencher de re-run.
+  let initInFlightFor: string | null = null;
 
   $effect(() => {
     if (!eventId || !currentEvent) return;
-    if (initialisedFor === eventId) return;
+    if (initialisedFor === eventId || initInFlightFor === eventId) return;
 
-    initialisedFor = eventId;
+    initInFlightFor = eventId;
+    const id = eventId;
     void untrack(async () => {
       try {
-        await eventMaterielStore.initializeForEvent(eventId);
+        await eventMaterielStore.initializeForEvent(id);
+        // Succès seul marque l'init faite : un échec laisse l'id « non fait »
+        // et le prochain re-run de l'effet (changement d'event, arrivée de la
+        // donnée) retente.
+        initialisedFor = id;
       } catch (error) {
         console.error(
           "[EventMaterielPage] Erreur lors de l'initialisation:",
           error,
         );
+      } finally {
+        if (initInFlightFor === id) initInFlightFor = null;
       }
     });
   });

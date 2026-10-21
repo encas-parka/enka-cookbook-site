@@ -1965,9 +1965,10 @@ class ProductsStore {
 
   /**
    * Met à jour les champs globaux de tous les purchases d'une facture groupée
-   * (statut, date de livraison, who, store) + l'expense (total), via un batch
-   * PocketBase (une seule requête). PB n'offre pas de transaction client
-   * multi-record — le batch en est la primitive la plus proche.
+   * (statut, date de livraison, who, store) + l'expense (total), via
+   * `bulkUpdate` (lots batchés pb-sync : miroir Dexie immédiat, rollback par
+   * lot). PB n'offre pas de transaction client multi-record — le batch en est
+   * la primitive la plus proche.
    */
   async updateInvoiceGroup(
     invoiceId: string,
@@ -1989,27 +1990,28 @@ class ProductsStore {
     );
     if (purchasesToUpdate.length === 0) return;
 
-    const data: Record<string, unknown> = {};
+    const data: Partial<Purchases> = {};
     if (updates.status !== undefined) data.status = updates.status;
     if (updates.deliveryDate !== undefined)
       data.deliveryDate = updates.deliveryDate;
     if (updates.who !== undefined) data.who = updates.who;
     if (updates.store !== undefined) data.store = updates.store;
 
-    const batch = pb.createBatch();
-    for (const p of purchasesToUpdate) {
-      batch.collection("purchases").update(p.id, data);
-    }
+    const items: { id: string; data: Partial<Purchases> }[] =
+      purchasesToUpdate.map((p) => ({ id: p.id, data }));
 
-    // Inclure la mise à jour de l'expense (total) dans le même batch
+    // Inclure la mise à jour de l'expense (total) dans le même lot
     if (updates.expense) {
-      batch.collection("purchases").update(updates.expense.purchaseId, {
-        price: updates.expense.price,
-        invoiceTotal: updates.expense.invoiceTotal,
+      items.push({
+        id: updates.expense.purchaseId,
+        data: {
+          price: updates.expense.price,
+          invoiceTotal: updates.expense.invoiceTotal,
+        },
       });
     }
 
-    await batch.send();
+    await this.#purchasesCollection.bulkUpdate(items);
   }
 
   /**
@@ -2026,8 +2028,9 @@ class ProductsStore {
   }
 
   /**
-   * Soft-delete tous les purchases d'une facture (status → "deleted"), via un
-   * batch PocketBase (une seule requête).
+   * Soft-delete tous les purchases d'une facture (status → "deleted"), via
+   * `bulkUpdate` (lots batchés pb-sync : miroir Dexie immédiat, rollback par
+   * lot).
    */
   async deleteInvoiceGroup(invoiceId: string): Promise<void> {
     const invoice = this.groupedInvoices.find(
@@ -2040,11 +2043,9 @@ class ProductsStore {
     );
     if (purchasesToDelete.length === 0) return;
 
-    const batch = pb.createBatch();
-    for (const p of purchasesToDelete) {
-      batch.collection("purchases").update(p.id, { status: "deleted" });
-    }
-    await batch.send();
+    await this.#purchasesCollection.bulkUpdate(
+      purchasesToDelete.map((p) => ({ id: p.id, data: { status: "deleted" } })),
+    );
   }
 
   async createProduct(productData: {
@@ -2423,8 +2424,6 @@ class ProductsStore {
     let totalExpensesCreated = 0;
 
     try {
-      // Découpage en lots de 50 opérations max par createBatch()
-      const BATCH_SIZE = 50;
       const allOperations: Array<{
         productId: string;
         qty: { q: number; u: string };
@@ -2442,31 +2441,27 @@ class ProductsStore {
         }
       }
 
-      // Traiter par lots
-      for (let i = 0; i < allOperations.length; i += BATCH_SIZE) {
-        const batch = pb.createBatch();
-        const chunk = allOperations.slice(i, i + BATCH_SIZE);
-
-        for (const op of chunk) {
-          batch.collection("purchases").create({
-            products: [op.productId],
-            eventId,
-            quantity: op.qty.q,
-            unit: op.qty.u,
-            status: purchaseStatus,
-            notes: invoiceData.notes || "",
-            store: invoiceData.store || null,
-            who: invoiceData.who || globalState.userName,
-            orderDate: null,
-            deliveryDate,
-            createdBy: globalState.userId,
-            invoiceId: invoiceData.invoiceId,
-          });
-          totalPurchasesCreated++;
-        }
-
-        await batch.send();
-      }
+      // bulkCreate découpe lui-même aux limites batch PB (rollback par lot).
+      // Le compteur est posé après le succès : il reflète ce qui est committé.
+      const payloads = allOperations.map((op) => ({
+        products: [op.productId],
+        eventId,
+        quantity: op.qty.q,
+        unit: op.qty.u,
+        status: purchaseStatus,
+        notes: invoiceData.notes || "",
+        store: invoiceData.store || null,
+        who: invoiceData.who || globalState.userName,
+        orderDate: null,
+        deliveryDate,
+        createdBy: globalState.userId,
+        invoiceId: invoiceData.invoiceId,
+        deleted: false,
+        price: null,
+        invoiceTotal: null,
+      }));
+      await this.#purchasesCollection.bulkCreate(payloads);
+      totalPurchasesCreated = payloads.length;
 
       // Expense optionnelle
       if (invoiceData.invoiceTotal) {

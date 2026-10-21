@@ -27,6 +27,10 @@
  *  - au point de résolution, la purge d'identité est terminée ;
  *  - une phase réseau en échec donne `hydration === false`, la session reste
  *    ouverte (mode hors ligne) ;
+ *  - ce verdict survit à la fin de la phase : un lecteur tardif ne relit pas
+ *    un `true` par défaut ;
+ *  - un autre compte pendant l'hydratation repart d'une hydratation neuve
+ *    (purge + fetch), au lieu de réutiliser celle du précédent ;
  *  - logout pendant l'hydratation : aucune souscription realtime ;
  *  - `syncInitial` pendant une revalidation en vol attend la fin réelle.
  */
@@ -253,6 +257,49 @@ describe("GlobalState — hydratation au login (point de navigation)", () => {
     expect(await globalState.hydration).toBe(false);
     expect(globalState.isAuthenticated).toBe(true);
     expect(globalState.authError).toContain("serveur indisponible");
+  });
+
+  it("le verdict d'hydratation survit à la fin de la phase réseau", async () => {
+    seedServerEventsForUserA();
+    authMock.set(authMock.USER_A);
+    vi.spyOn(materielStore, "syncInitial").mockRejectedValue(
+      new Error("serveur indisponible"),
+    );
+
+    await globalState.refreshAuthAfterLogin();
+    expect(await globalState.hydration).toBe(false);
+
+    // Lecteur tardif (page rouverte une fois la sync terminée) : le verdict
+    // ne doit pas retomber sur un `true` par défaut.
+    expect(await globalState.hydration).toBe(false);
+  });
+
+  it("un autre compte pendant l'hydratation repart d'une hydratation neuve", async () => {
+    seedServerEventsForUserA();
+    authMock.set(authMock.USER_A);
+
+    // Phase réseau de A bloquée : le compte suivant arrive pendant ce temps.
+    const gate = deferred();
+    const syncSpy = vi.spyOn(eventsStore, "syncInitial");
+    syncSpy.mockImplementationOnce(() => gate.promise);
+
+    await globalState.refreshAuthAfterLogin();
+    // Laisser A atteindre sa phase réseau : la sync events est alors gatée.
+    await waitForTick(2);
+    expect(syncSpy).toHaveBeenCalledTimes(1);
+    const hydrationA = globalState.hydration;
+
+    authMock.set(authMock.USER_B);
+    await globalState.refreshAuthAfterLogin();
+
+    // Nouvelle hydratation (pas celle de A), et purge passée à B : sans cela
+    // B héritait du cache de A sans fetch.
+    expect(globalState.hydration).not.toBe(hydrationA);
+    expect(localStorage.getItem(CACHE_OWNER_KEY)).toBe(authMock.USER_B.id);
+
+    gate.resolve();
+    expect(await globalState.hydration).toBe(true);
+    expect(syncSpy).toHaveBeenCalledTimes(2);
   });
 
   it("logout pendant l'hydratation : aucune souscription realtime", async () => {

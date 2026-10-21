@@ -50,8 +50,14 @@ class GlobalState {
   #identityPurge: Promise<void> | null = null;
   // Hydratation de session : `#localReady` = point de navigation (purge +
   // cache Dexie), `#hydration` = phase réseau (fetch + realtime).
+  // `#localReadyFor` = identité de l'hydratation en vol : une présence seule
+  // ne suffit pas, un autre compte doit repartir d'une purge et d'un fetch
+  // propres. `#hydrationOutcome` = dernière issue connue, pour qu'un lecteur
+  // tardif ne lise pas un `true` par défaut.
   #localReady: Promise<void> | null = null;
+  #localReadyFor: string | null = null;
   #hydration: Promise<boolean> | null = null;
+  #hydrationOutcome: boolean | null = null;
 
   constructor() {
     // Consomme onAuthChange : toute transition d'identité (login modal,
@@ -155,8 +161,10 @@ class GlobalState {
    * montré. La phase réseau (fetch complet + realtime) continue en
    * arrière-plan — son issue est exposée par `hydration`.
    *
-   * Idempotent : deux appels concurrents (modale, magic link, inscription)
-   * partagent la même hydratation.
+   * Idempotent : deux appels concurrents pour la même identité (modale,
+   * magic link, inscription) partagent la même hydratation. Un autre compte
+   * en revanche repart d'une hydratation neuve — réutiliser celle du
+   * précédent laisserait son cache en place, sans purge ni fetch.
    */
   async refreshAuthAfterLogin(): Promise<void> {
     const user = getCurrentUser();
@@ -175,7 +183,9 @@ class GlobalState {
     localStorage.setItem("enka-user-email", user.email);
     localStorage.setItem("enka-user-id", user.id);
 
-    if (!this.#localReady) this.#startHydration(user);
+    if (!this.#localReady || this.#localReadyFor !== user.id) {
+      this.#startHydration(user);
+    }
     return this.#localReady!;
   }
 
@@ -183,9 +193,12 @@ class GlobalState {
    * Résout à la fin de la phase réseau (`true` = tous les stores à jour).
    * Ne rejette jamais : une sync incomplète se lit comme une session en mode
    * hors ligne, pas comme un login raté.
+   *
+   * L'issue reste lisible après coup : une fois la phase terminée, la
+   * promesse n'existe plus mais `#hydrationOutcome` porte le même verdict.
    */
   get hydration(): Promise<boolean> {
-    return this.#hydration ?? Promise.resolve(true);
+    return this.#hydration ?? Promise.resolve(this.#hydrationOutcome ?? true);
   }
 
   #startHydration(user: PBAuthUser): void {
@@ -219,19 +232,30 @@ class GlobalState {
     })();
 
     this.#localReady = local;
+    this.#localReadyFor = user.id;
 
     const full = local.then(async () => {
-      if (!isCurrentUser()) return false;
-
-      let complete = true;
+      // `outcome` est posé dans TOUS les chemins (y compris les sorties
+      // anticipées) : le `finally` ci-dessous le publie, et un `return`
+      // prématuré hors du `try` laisserait la promesse et le flag de
+      // chargement pendants pour toujours.
+      let outcome = true;
       try {
+        if (!isCurrentUser()) {
+          outcome = false;
+          return outcome;
+        }
+
         // Signaux SSE (StatusBar + resync orchestrateur). Branchés AVANT la
         // souscription des stores : la première connexion SSE est consommée
         // ici (hasConnectedOnce) — tout PB_CONNECT ultérieur est une
         // reconnexion et déclenche le resync delta. (Au boot avec session
         // existante, initializeAuth les branche de la même façon.)
         await initRealtimeSignals();
-        if (!isCurrentUser()) return false;
+        if (!isCurrentUser()) {
+          outcome = false;
+          return outcome;
+        }
 
         // Phase 1: Sync de TOUS les stores en parallèle
         await Promise.all([
@@ -241,7 +265,10 @@ class GlobalState {
           teamdocsStore.syncInitial(),
           recipesStore.syncInitial(),
         ]);
-        if (!isCurrentUser()) return false;
+        if (!isCurrentUser()) {
+          outcome = false;
+          return outcome;
+        }
 
         // Phase 2: Setup realtime pour TOUS les stores
         // (chaque store gère son propre realtime via pb.collection().subscribe())
@@ -260,7 +287,7 @@ class GlobalState {
           `[GlobalState] Session prête: ${user.name} (${this.userTeams.length} équipes)`,
         );
       } catch (error) {
-        complete = false;
+        outcome = false;
         console.error(
           "[GlobalState] Synchronisation de session incomplète:",
           error,
@@ -268,12 +295,21 @@ class GlobalState {
         this.#authError =
           error instanceof Error ? error.message : "Erreur de réinitialisation";
       } finally {
-        if (this.#localReady === local) this.#localReady = null;
-        if (this.#hydration === full) this.#hydration = null;
-        this.#authLoading = false;
+        if (this.#localReady === local) {
+          this.#localReady = null;
+          this.#localReadyFor = null;
+        }
+        // L'hydratation courante seulement : une hydratation remplacée (autre
+        // compte) ne doit ni voler l'issue de la nouvelle, ni relâcher son
+        // flag de chargement.
+        if (this.#hydration === full) {
+          this.#hydration = null;
+          this.#hydrationOutcome = outcome;
+          this.#authLoading = false;
+        }
       }
 
-      return complete;
+      return outcome;
     });
 
     this.#hydration = full;

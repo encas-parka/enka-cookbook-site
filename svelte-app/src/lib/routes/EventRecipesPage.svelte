@@ -203,7 +203,6 @@
   // Le calendrier est pertinent uniquement s'il y a des dates
   const canShowCalendar = $derived(mealsByDate.size > 0);
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   type CalendarRecipeInfo = {
     recipeUuid: string;
     title: string;
@@ -1202,7 +1201,7 @@
 
             <!-- Skeleton des cartes de recettes -->
             <div class="space-y-10 print:hidden">
-              {#each Array(3) as _, i}
+              {#each Array(3) as _, i (i)}
                 <div class="space-y-6">
                   <!-- Skeleton de l'en-tête de repas -->
                   <div
@@ -1244,7 +1243,7 @@
                               <div class="h-5 w-32 skeleton"></div>
                             </h3>
                             <div class="space-y-2">
-                              {#each Array(4) as _, j}
+                              {#each Array(4) as _, j (j)}
                                 <div class="h-4 w-full skeleton"></div>
                               {/each}
                             </div>
@@ -1260,7 +1259,7 @@
                               <div class="h-5 w-32 skeleton"></div>
                             </h3>
                             <div class="space-y-2">
-                              {#each Array(3) as _, k}
+                              {#each Array(3) as _, k (k)}
                                 <div class="flex gap-2">
                                   <div class="h-4 w-6 shrink-0 skeleton"></div>
                                   <div class="h-4 w-full skeleton"></div>

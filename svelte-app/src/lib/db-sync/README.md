@@ -342,14 +342,22 @@ interface PbSyncOptions<T> {
 
 #### Batch & Upsert
 
-| Method        | Signature                                                                                | Description                                                                                |
-| ------------- | ---------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
-| `createBatch` | `() => CollectionBatch<T>`                                                               | Returns a chainable batch builder.                                                         |
-| `upsert`      | `(data: Omit<T, 'id' \| 'created' \| 'updated'> & { id?: string }) => Promise<T>`        | Sugar: one-operation batch upsert (update if the id exists server-side, create otherwise). |
-| `bulkCreate`  | `(items: Omit<T, 'id' \| 'created' \| 'updated'>[]) => Promise<T[]>`                     | Shorthand: create multiple records.                                                        |
-| `bulkUpdate`  | `(items: { id, data: Partial<T> }[]) => Promise<T[]>`                                    | Shorthand: update multiple records.                                                        |
-| `bulkUpsert`  | `(items: (Omit<T, 'id' \| 'created' \| 'updated'> & { id?: string })[]) => Promise<T[]>` | Shorthand: upsert multiple records.                                                        |
-| `bulkDelete`  | `(ids: string[]) => Promise<void>`                                                       | Shorthand: delete multiple records.                                                        |
+| Method        | Signature                                                                                                         | Description                                                                                |
+| ------------- | ----------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
+| `createBatch` | `() => CollectionBatch<T>`                                                                                        | Returns a chainable batch builder.                                                         |
+| `upsert`      | `(data: Omit<T, 'id' \| 'created' \| 'updated'> & { id?: string }) => Promise<T>`                                  | Sugar: one-operation batch upsert (update if the id exists server-side, create otherwise). |
+| `bulkCreate`  | `(items: Omit<T, 'id' \| 'created' \| 'updated'>[], options?: PbBulkOptions) => Promise<T[]>`                      | Shorthand: create multiple records.                                                        |
+| `bulkUpdate`  | `(items: { id, data: Partial<T> }[], options?: PbBulkOptions) => Promise<T[]>`                                     | Shorthand: update multiple records.                                                        |
+| `bulkUpsert`  | `(items: (Omit<T, 'id' \| 'created' \| 'updated'> & { id?: string })[], options?: PbBulkOptions) => Promise<T[]>` | Shorthand: upsert multiple records.                                                        |
+| `bulkDelete`  | `(ids: string[], options?: PbBulkOptions) => Promise<void>`                                                       | Shorthand: delete multiple records.                                                        |
+
+**Bulk chunking** — the `bulk*` operations split their items into batch-sized
+chunks so no request ever exceeds the server's `batch.maxRequests` (the client
+constant `PB_BATCH_MAX_REQUESTS`, default 100, mirrors the deployment setting —
+keep them in sync, checklist S2). `options.batchSize` forces a finer split.
+Rollback is **per chunk**: a chunk that fails rolls back its own Dexie mirror,
+but chunks already sent before it stay committed server-side — pass fewer
+items or a smaller `batchSize` when atomicity matters more than size.
 
 `CollectionBatch<T>` — chainable, terminates with `send(): Promise<{ records: T[] }>`:
 

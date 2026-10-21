@@ -22,10 +22,10 @@ vi.mock("$lib/services/pb-users", () => ({
 }));
 
 vi.mock("$lib/services/pb-invitations", () => ({
-  getEventShareLinks: vi.fn(async () => {
-    throw new Error("no share links in unit test");
-  }),
-  createShareLink: vi.fn(),
+  getOrCreateShareLink: vi.fn(async () => ({
+    id: "sharelinkmock0001",
+    created: true,
+  })),
 }));
 
 vi.mock("$lib/stores/GlobalState.svelte", () => ({

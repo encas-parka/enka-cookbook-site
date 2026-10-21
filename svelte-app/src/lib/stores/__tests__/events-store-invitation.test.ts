@@ -20,7 +20,11 @@
  *    join-event les y ajoutera au premier join, id réel à l'appui ;
  *  - updateContributorStatus (accept RSVP) ne touche pas guestUsers : le
  *    champ de visibilité n'est pas écrasé par un changement d'état RSVP ;
- *  - ré-inviter un invité déjà présent ne duplique pas guestUsers.
+ *  - ré-inviter un invité déjà présent ne duplique pas guestUsers ;
+ *  - règle d'écriture actée (ticket 02) : teamIds porte uniquement les
+ *    équipes entièrement cochées (grant vivant, membres non individualisés) ;
+ *    une équipe partielle passe en individus ; le champ de tracking
+ *    guestEmails n'est plus écrit par le client.
  */
 
 vi.mock("$lib/services/pb-users", () => ({
@@ -30,10 +34,9 @@ vi.mock("$lib/services/pb-users", () => ({
 vi.mock("$lib/services/pb-invitations", () => ({
   // Le step share-link/email reste non bloquant : lever ici reproduit un
   // échec et doit laisser l'invitation (guestUsers inclus) déjà appliquée.
-  getEventShareLinks: vi.fn(async () => {
+  getOrCreateShareLink: vi.fn(async () => {
     throw new Error("no share links in unit test");
   }),
-  createShareLink: vi.fn(),
 }));
 
 vi.mock("$lib/stores/GlobalState.svelte", () => ({
@@ -97,7 +100,8 @@ describe("EventsStore — invitation RSVP (write path)", () => {
     expect(contributors[0].id).toBe(GHALD.id);
     expect(contributors[0].status).toBe("invited");
     expect(contributors[0].invitedAt).toBeTruthy();
-    expect(server.guestEmails).toEqual([GHALD_EMAIL]);
+    // Le champ de tracking n'est plus écrit par le client
+    expect(server.guestEmails).toBeNull();
   });
 
   it("un email inconnu (fallback nanoid) ne touche pas guestUsers", async () => {
@@ -169,5 +173,61 @@ describe("EventsStore — invitation RSVP (write path)", () => {
     expect(server.guestUsers).toEqual([GHALD.id]);
     expect(server.contributors).toHaveLength(1);
     expect(server.guestEmails).toEqual([GHALD_EMAIL]);
+  });
+
+  it("une équipe entière cochée écrit le canal équipe sans individualiser ses membres", async () => {
+    await seedEvent({ contributors: [], guestUsers: null, teams: [] });
+
+    const updated = await eventsStore.inviteParticipants(TEST_EVENT_ID, {
+      // Équipe entièrement cochée : le grant équipe seul — les membres
+      // actuels ne passent ni au registre ni en visibilité individuelle
+      // (leur statut invité est dérivé de l'équipe)
+      teamIds: ["teamalpha000001"],
+      emails: [],
+    });
+
+    expect(updated.teams).toContain("teamalpha000001");
+    const server = await pb.collection("events").getOne(TEST_EVENT_ID);
+    expect(server.teams).toContain("teamalpha000001");
+    expect(server.contributors).toHaveLength(0);
+    expect(server.guestUsers ?? []).toEqual([]);
+  });
+
+  it("une équipe partiellement cochée n'écrit pas le canal équipe, seulement les individus", async () => {
+    await seedEvent({ contributors: [], guestUsers: null, teams: [] });
+    vi.mocked(lookupUsersByEmails).mockResolvedValue(
+      new Map([[GHALD_EMAIL, GHALD]]),
+    );
+
+    const updated = await eventsStore.inviteParticipants(TEST_EVENT_ID, {
+      // Pas de grant équipe : les seuls cochés passent en individuel
+      teamIds: [],
+      emails: [GHALD_EMAIL],
+    });
+
+    expect(updated.teams ?? []).toEqual([]);
+    const server = await pb.collection("events").getOne(TEST_EVENT_ID);
+    expect(server.teams).toEqual([]);
+    expect(server.guestUsers).toEqual([GHALD.id]);
+    const contributors = server.contributors as Array<Record<string, unknown>>;
+    expect(contributors).toHaveLength(1);
+    expect(contributors[0].status).toBe("invited");
+  });
+
+  it("notifyEmails étend l'expédition sans créer d'écriture individuelle", async () => {
+    await seedEvent({ contributors: [], guestUsers: null, teams: [] });
+    vi.mocked(lookupUsersByEmails).mockResolvedValue(new Map());
+
+    // Les membres d'une équipe entière reçoivent l'email groupé sans être
+    // écrits au registre ni en visibilité individuelle
+    const updated = await eventsStore.inviteParticipants(TEST_EVENT_ID, {
+      teamIds: ["teamalpha000001"],
+      emails: [],
+      notifyEmails: ["membre-equipe@enka-dev.local"],
+    });
+
+    expect(updated.teams).toContain("teamalpha000001");
+    expect(updated.contributors).toHaveLength(0);
+    expect(updated.guestUsers ?? []).toEqual([]);
   });
 });

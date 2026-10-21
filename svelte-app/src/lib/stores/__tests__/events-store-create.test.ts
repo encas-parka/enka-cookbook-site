@@ -31,10 +31,10 @@ vi.mock("$lib/services/pb-users", () => ({
 }));
 
 vi.mock("$lib/services/pb-invitations", () => ({
-  getEventShareLinks: vi.fn(async () => {
-    throw new Error("no share links in unit test");
-  }),
-  createShareLink: vi.fn(),
+  getOrCreateShareLink: vi.fn(async () => ({
+    id: "sharelinknew00001",
+    created: true,
+  })),
 }));
 
 vi.mock("$lib/stores/GlobalState.svelte", () => ({
@@ -56,6 +56,7 @@ import { currentFakePb } from "./harness/stub-pb";
 import { waitForTick } from "./harness/wait-for-tick";
 import { makeEvent } from "./harness/fixtures";
 import { eventsStore } from "$lib/stores/EventsStore.svelte";
+import { getOrCreateShareLink } from "$lib/services/pb-invitations";
 import { db, pb } from "$lib/db-sync/pb-sync";
 
 const ORGANIZER_ID = "userorganizer01";
@@ -82,6 +83,21 @@ describe("EventsStore — création d'event + idempotence réseau", () => {
     await waitForTick(2);
     const local = await db.events.get(enriched.id);
     expect(local?.name).toBe("Fête du village");
+  });
+
+  it("un event créé naît avec son lien de partage (get-or-create)", async () => {
+    vi.mocked(getOrCreateShareLink).mockClear();
+
+    const enriched = await eventsStore.createEventWithTeams({
+      name: "Naissance du lien",
+    });
+
+    // Le lien naît en fire-and-forget, juste après le create
+    await waitForTick(2);
+    expect(vi.mocked(getOrCreateShareLink)).toHaveBeenCalledWith(
+      enriched.id,
+      ORGANIZER_ID,
+    );
   });
 
   it("la clé de soumission est préservée comme id serveur", async () => {

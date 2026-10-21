@@ -33,6 +33,7 @@ import type {
 import type { RecettesTypeR } from "$lib/types/recipes.types";
 import { nanoid } from "nanoid";
 import { lookupUsersByEmails } from "$lib/services/pb-users";
+import { getOrCreateShareLink } from "$lib/services/pb-invitations";
 import { toastService } from "$lib/services/toast.service.svelte";
 import { globalState } from "./GlobalState.svelte";
 import {
@@ -602,6 +603,23 @@ export class EventsStore {
   }
 
   /**
+   * Fait naître le lien de partage d'un event — chaque event en porte un dès
+   * sa création. Fire-and-forget : un échec (réseau, règles) n'annule pas la
+   * création ; le lien se matérialisera au premier get-or-create (invitation,
+   * section lien des éditeurs).
+   */
+  #ensureEventShareLink(eventId: string): void {
+    const userId = globalState.userId;
+    if (!userId) return;
+    getOrCreateShareLink(eventId, userId).catch((err) => {
+      console.warn(
+        `[EventsStore] Lien de partage non créé pour ${eventId}:`,
+        err,
+      );
+    });
+  }
+
+  /**
    * Crée un nouvel événement avec des teams.
    * Avec PocketBase, la création est directe (pas de CF atomique).
    * Le système d'invitation PB (étape 1.3) gère les emails.
@@ -643,6 +661,8 @@ export class EventsStore {
         `[EventsStore] Événement créé avec ${teamIds.length} team(s): ${record.id}`,
       );
 
+      this.#ensureEventShareLink(record.id);
+
       return this.#enrichEvent(record);
     } catch (err) {
       // Rejet d'un id déjà pris ou réponse à nouveau perdue : la première
@@ -653,7 +673,10 @@ export class EventsStore {
       const reconciled = await this.#reconcileCreatedEvent(submissionKey).catch(
         () => null,
       );
-      if (reconciled) return this.#enrichEvent(reconciled);
+      if (reconciled) {
+        this.#ensureEventShareLink(reconciled.id);
+        return this.#enrichEvent(reconciled);
+      }
       throw err;
     }
   }
@@ -858,34 +881,50 @@ export class EventsStore {
   /**
    * Invite des participants à un événement.
    *
-   * Flux PocketBase — une seule écriture atomique de l'event :
-   *   1. contributors[] (état RSVP pour l'UI) + guestEmails[] + guestUsers[]
-   *      pour les emails résolus vers un compte PB — guestUsers est la RELATION
-   *      filtrée par les règles events (list/view/update) : sans elle, l'event
-   *      n'est jamais livré à l'invité et son RSVP est rejeté (les ids nanoid
-   *      des emails inconnus restent hors relation — le hook join-event les y
-   *      rattache au premier join) ;
-   *   2. teamIds dans la relation teams (ids PocketBase)
-   *   3. Crée/récupère un share link pour l'event
-   *   4. Appelle le hook email en fire-and-forget
+   * Règle d'écriture actée :
+   *   - `teamIds` : équipes ENTIÈREMENT invitées — seul cas où le canal équipe
+   *     est écrit (grant vivant : les futurs membres hériteront). Les membres
+   *     actuels ne sont pas individualisés ; leur statut invité se dérive de
+   *     l'équipe. L'appelant (picker) garantit le « entier » — le store ne
+   *     connaît pas les rosters d'équipe.
+   *   - `emails` : personnes invitées individuellement (membres d'équipes
+   *     partiellement cochées + emails saisis à la main). Connue (avec
+   *     compte) → visibilité individuelle (guestUsers, relation filtrée par
+   *     les règles events list/view/update) + entrée au registre (invité) ;
+   *     inconnue → registre avec identifiant temporaire (nanoid) — le hook
+   *     join-event la rattache au vrai userId au premier join.
+   *   - `notifyEmails` : destinataires de l'expédition groupée (défaut :
+   *     `emails`) — les membres d'équipes entières y figurent sans être
+   *     écrits individuellement.
+   *   - le champ de tracking guestEmails n'est plus écrit par le client.
+   *
+   * Une seule écriture atomique de l'event, puis get-or-create du lien et
+   * expédition en fire-and-forget : l'invitation est déjà posée si l'un des
+   * deux échoue.
    *
    * @param eventId - ID de l'événement
-   * @param options.emails - Emails à inviter (individuels + membres des teams, pré-calculé par l'appelant)
-   * @param options.teamIds - IDs des équipes à ajouter aux relations
+   * @param options.emails - Emails à inviter individuellement
+   * @param options.teamIds - IDs des équipes entièrement invitées
+   * @param options.notifyEmails - Destinataires de l'email groupé
    */
   async inviteParticipants(
     eventId: string,
     options: {
       teamIds?: string[];
       emails?: string[];
+      notifyEmails?: string[];
     },
   ): Promise<EnrichedEvent> {
     const event = this.#enrichedMap.get(eventId);
     if (!event) throw new Error("Événement introuvable");
 
-    const { emails = [], teamIds = [] } = options;
+    const { emails = [], teamIds = [], notifyEmails = [] } = options;
 
-    if (emails.length === 0 && teamIds.length === 0) {
+    if (
+      emails.length === 0 &&
+      teamIds.length === 0 &&
+      notifyEmails.length === 0
+    ) {
       return event;
     }
 
@@ -902,7 +941,12 @@ export class EventsStore {
     const newEmails = emails.filter(
       (email) => !existingEmails.has(email.toLowerCase()),
     );
-    const knownUsers = await lookupUsersByEmails(newEmails);
+    // Une invitation d'équipes entières ne porte aucun email : pas de
+    // résolution à faire (ni requête users)
+    const knownUsers =
+      newEmails.length > 0
+        ? await lookupUsersByEmails(newEmails)
+        : new Map<string, { id: string; name?: string }>();
 
     const newContributors = [...event.contributors];
     for (const email of newEmails) {
@@ -917,28 +961,9 @@ export class EventsStore {
       existingEmails.add(email.toLowerCase());
     }
 
-    // --- 2. Construire les nouveaux guestEmails (dédupliqués) ---
-    const currentGuests: string[] = Array.isArray(event.guestEmails)
-      ? event.guestEmails
-      : [];
-
-    const guestSet = new Set(currentGuests.map((e: string) => e.toLowerCase()));
-    for (const email of emails) {
-      guestSet.add(email.toLowerCase());
-    }
-    const updatedGuests = [...currentGuests];
-    for (const email of emails) {
-      if (
-        !currentGuests.some(
-          (g: string) => g.toLowerCase() === email.toLowerCase(),
-        )
-      ) {
-        updatedGuests.push(email);
-      }
-    }
-
-    // --- 3. Construire les nouvelles teams (dédupliquées) ---
-    // La relation teams porte des ids PocketBase
+    // --- 2. Construire les nouvelles teams (dédupliquées) ---
+    // La relation teams porte des ids PocketBase — le canal équipe n'est
+    // écrit que pour les équipes entièrement invitées.
     const currentTeams: string[] = event.teams || [];
     const updatedTeams = [...currentTeams];
 
@@ -948,7 +973,7 @@ export class EventsStore {
       }
     }
 
-    // --- 3b. Résoudre les guestUsers (dédupliqués) ---
+    // --- 2b. Résoudre les guestUsers (dédupliqués) ---
     // La relation guestUsers est le champ filtré par les règles events
     // (list/view/update) — contributors est un json non traversable par les
     // règles. N'écrire que contributors laisse l'invité connu hors de toute
@@ -962,43 +987,45 @@ export class EventsStore {
     }
     const updatedGuestUsers = [...guestUserIds];
 
-    // --- 4. Mise à jour atomique de l'event ---
+    // --- 3. Mise à jour atomique de l'event ---
+    // guestEmails n'est plus écrit : omettre la clé du PATCH laisse le champ
+    // serveur inchangé.
     const updatedEvent = await this.updateEvent(eventId, {
       contributors: newContributors,
-      guestEmails: updatedGuests,
       guestUsers: updatedGuestUsers,
       teams: updatedTeams,
     });
 
-    // --- 5. Créer ou récupérer un share link pour l'event ---
+    // --- 4. Get-or-create du lien de partage ---
+    // Chaque event porte son lien dès la création ; l'appel ici garantit
+    // aussi les events créés avant cette garantie. Non bloquant : échouer
+    // ici ne remet pas en cause l'invitation déjà posée.
     let shareLinkId: string | null = null;
     try {
-      const { getEventShareLinks, createShareLink } =
-        await import("$lib/services/pb-invitations");
       const userId = globalState.userId || event.createdBy;
-      const existingLinks = await getEventShareLinks(eventId);
-      if (existingLinks.length > 0) {
-        shareLinkId = existingLinks[0];
-      } else if (userId) {
-        const link = await createShareLink(eventId, userId);
+      if (userId) {
+        const link = await getOrCreateShareLink(eventId, userId);
         shareLinkId = link.id;
       } else {
         console.warn(
-          "[EventsStore] Pas de userId pour créer le share link de l'event",
+          "[EventsStore] Pas de userId pour le share link de l'event",
           eventId,
         );
       }
     } catch (err) {
-      console.warn("[EventsStore] Impossible de créer le share link:", err);
+      console.warn("[EventsStore] Share link indisponible:", err);
     }
 
-    // --- 6. Envoyer les emails (fire-and-forget) ---
-    if (shareLinkId && emails.length > 0) {
+    // --- 5. Expédition groupée (fire-and-forget) ---
+    // notifyEmails porte tous les invités du geste (y compris les membres
+    // d'équipes entières, non écrits individuellement).
+    const recipients = notifyEmails.length > 0 ? notifyEmails : emails;
+    if (shareLinkId && recipients.length > 0) {
       pb.send("/api/enka/send-emails", {
         method: "POST",
         body: {
           template: "invitation_to_event",
-          recipients: emails.map((email) => ({
+          recipients: recipients.map((email) => ({
             email,
             shareLinkId,
           })),
@@ -1007,19 +1034,19 @@ export class EventsStore {
         .then((result) => {
           const okCount =
             result.results?.filter((r: { ok: boolean }) => r.ok).length || 0;
-          const failCount = emails.length - okCount;
+          const failCount = recipients.length - okCount;
           if (failCount > 0) {
             console.warn(
-              `[EventsStore] Emails envoyés : ${okCount}/${emails.length} (${failCount} échec(s))`,
+              `[EventsStore] Emails envoyés : ${okCount}/${recipients.length} (${failCount} échec(s))`,
             );
             // L'invitation est posée, mais l'utilisateur doit savoir que le
             // mail n'est pas parti (même traitement que NativeTeamsStore).
             toastService.warning(
-              `Emails d'invitation : ${okCount}/${emails.length} envoyé(s)`,
+              `Emails d'invitation : ${okCount}/${recipients.length} envoyé(s)`,
             );
           } else {
             console.log(
-              `[EventsStore] Emails envoyés : ${okCount}/${emails.length}`,
+              `[EventsStore] Emails envoyés : ${okCount}/${recipients.length}`,
             );
           }
         })
@@ -1029,7 +1056,7 @@ export class EventsStore {
         });
 
       console.log(
-        `[EventsStore] Invitation: ${emails.length} email(s), ${teamIds.length} team(s) → event ${eventId}`,
+        `[EventsStore] Invitation: ${emails.length} écriture(s) individuelle(s), ${teamIds.length} équipe(s) entière(s) → event ${eventId}`,
       );
     }
 

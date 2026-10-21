@@ -24,6 +24,10 @@
 > **Ajout 21-10 (redirection post-login — `fac8e326`, `3c0ac6ce`, `ce80a318`,
 > `0fa77110`) : §1 « route privée en visiteur » requalifiée (modale, pas toast ;
 > décochée) + 4 items (§2 ×3, §10 ×1). État : 46 cochés / 34 restants.**
+> Passe 21-10 (fix event pages — `807d2bac`, `b4c45ea4`) : §2
+> « /event/:id visiteur → modale → login → meals + produits » **coché** (vert) ;
+> §1 vert sur `/event/:id` seulement — les autres routes privées restent à
+> jouer. **État : 47 cochés / 34 restants.**
 
 ## 0. Prérequis
 
@@ -69,6 +73,9 @@
       _(requalifié 21-10 — commit `fac8e326` : le guard n'affiche plus de toast,
       il ouvre la modale et mémorise le `pathname`. **À rejouer** : modale
       visible sur chaque route privée, aucun toast résiduel, redirect `/`.
+      Passe 21-10 : vert sur `/event/:id` (modale → login → retour sur la
+      page) ; `/recipe/:uuid/edit`, `/dashboard/*`, `/createdocument/*`
+      restent à jouer.
       Historique 20-10 : redirect `/` + toast, flash « Démarrage... » sur
       `/createdocument/*` — voir P5)_
 - [x] URL inconnue → page 404.
@@ -94,6 +101,10 @@
       _(ajouté 21-10 — `fac8e326` + `3c0ac6ce` : intention de guard rejouée.
       Vérifier aussi qu'une modale ouverte depuis le header n'hérite pas d'une
       intention restante : elle doit mener au dashboard)_
+- [x] Visiteur → `/event/:id` → modale → login → retour sur la page : meals
+      **et produits** chargés sans reload.
+      _(passe 21-10 : **vert** — guard `ensureEvent` (`807d2bac`) + init
+      réactive des pages (`b4c45ea4`) ; couvre aussi §1 sur cette route)_
 - [ ] « Mot de passe oublié » → reset abouti → retour `/` avec la modale ouverte
       et **l'email prérempli** → login → dashboard.
       _(ajouté 21-10 — `ce80a318` : l'email vient des claims du token. Réserve :

@@ -1988,7 +1988,9 @@ class ProductsStore {
     const purchasesToUpdate = invoice.purchases.filter(
       (p) => p.status !== "expense" && p.status !== "deleted",
     );
-    if (purchasesToUpdate.length === 0) return;
+    // Une facture peut n'avoir que l'expense à mettre à jour (achats déjà
+    // supprimés/expense) : ne pas sortir tôt dans ce cas.
+    if (purchasesToUpdate.length === 0 && !updates.expense) return;
 
     const data: Partial<Purchases> = {};
     if (updates.status !== undefined) data.status = updates.status;

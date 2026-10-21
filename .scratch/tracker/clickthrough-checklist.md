@@ -27,8 +27,9 @@
 > Passe 21-10 (fix event pages — `807d2bac`, `b4c45ea4`) : §2
 > « /event/:id visiteur → modale → login → meals + produits » **coché** (vert) ;
 > §1 vert sur `/event/:id` seulement — les autres routes privées restent à
-> jouer. **État : 47 cochés / 35 restants** (ajout §3 : édition A→B, verrou
-> libéré au changement d'id — fix « init par id » `21-10`).**
+> jouer. **État : 50 cochés / 35 restants** (édition A→B jouée verte le 21-10 ;
+> ajouts §4/§8/§11b : changement d'entité sur les pages d'édition keyées et
+> libération du verrou au confirm).**
 
 ## 0. Prérequis
 
@@ -175,6 +176,12 @@
       _(passe 20-10 : Marion ajoutée via membres d'équipe →
       `permissionWrite=[ghald,marion]` en base ; `publishedAt` posé au
       préalable via API, **intact** après save)_
+- [ ] Passer d'une recette à une autre sur la page d'édition
+      (`/recipe/R1/edit` → `/recipe/R2/edit`, historique ou URL) → formulaire
+      R2, aucun report du draft de R1, verrou de R1 libéré.
+      _(ajouté 21-10 — wrapper `{#key}` `RecipeEditRoute` : le composant est
+      remonté au changement d'uuid ; avant, `updateRecipe(R2)` recevait le
+      draft de R1)_
 - [x] Duplication `/recipe/:uuid/duplicate`.
       _(passe 20-10 : formulaire pré-rempli complet → copie créée avec id PB
       natif, `typeR` copié, `rootRecipeId` lié, `versionLabel="v2 - ghald"` ;
@@ -314,6 +321,13 @@
       listé et éditable ✓. **Aucune UI de suppression** confirmée (aucun
       « supprim/trash » dans `EditDocumentPage.svelte` ni dans la carte de
       liste) — à arbitrer comme feature)_
+- [ ] Passer d'un document à un autre sur la page d'édition
+      (`/editdocument/T/D1` → `/editdocument/T/D2`) → contenu de D2, aucun
+      report du draft de D1, verrou de D1 libéré. Même contrôle sur un
+      document d'event (`/event/A/document/D1` → `/event/A/document/D2`).
+      _(ajouté 21-10 — wrappers `{#key}` `EditDocumentRoute` et
+      `EventDocumentEditRoute` : remontage au changement d'id ; avant,
+      `updateDocument(D2)` recevait le draft de D1 sous le verrou de D1)_
 - [x] Création d'un doc depuis un event par son créateur → succès, pas de 400.
       _(passe 20-10 : `/event/:id/document/create?tag=tache` → doc
       `f6x1xsz3w62qm2d` créé (toast « Document créé avec succès »), contenu
@@ -467,6 +481,14 @@ vert à l'écran le 20-10 par l'humain.**
       simultanément → l'un gagne, l'autre voit l'état réel « verrouillé par
       X » (re-lecture du verrou, commit `26fddcf7`) et non une erreur
       générique. _(optionnel — course difficile à provoquer à la main)_
+- [ ] Quitter une page en édition avec des modifications : confirmer
+      « quitter sans sauvegarder » (navigation interne) → verrou libéré
+      immédiatement, pas au bout des 7 min.
+      _(ajouté 21-10 — libération câblée sur les quatre pages éditrices
+      (EventEditPage, RecipeEditPage, EditDocumentPage, EventDocumentEditPage).
+      Fermeture d'onglet non couverte : `beforeunload` ne permet ni await ni
+      callback — piste `pagehide` + `fetch keepalive`, ou s'en remettre au TTL
+      de 7 min)_
 
 - [x] SSE : modification dans A visible dans B sans reload (event, recette,
       produit, teamdoc). **À rejouer sur SDK pocketbase 0.28** (les deux items

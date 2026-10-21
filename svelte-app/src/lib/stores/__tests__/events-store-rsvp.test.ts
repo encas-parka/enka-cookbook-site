@@ -98,6 +98,16 @@ describe("getRsvpStatus — invitation virtuelle dérivée", () => {
     expect(eventsStore.getRsvpStatus(TEST_EVENT_ID)).toBeNull();
   });
 
+  it("le créateur avec une entrée de registre résiduelle non plus", async () => {
+    await seedEvent({
+      createdBy: session.userId,
+      teams: [TEST_TEAM_ID],
+      contributors: [sessionEntry("declined")],
+    });
+
+    expect(eventsStore.getRsvpStatus(TEST_EVENT_ID)).toBeNull();
+  });
+
   it("hors canaux de visibilité, pas de statut", async () => {
     await seedEvent({ teams: ["otherteam0000001"], guestUsers: [OTHER_USER] });
 

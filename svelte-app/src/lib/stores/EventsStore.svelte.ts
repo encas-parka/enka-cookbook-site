@@ -722,13 +722,6 @@ export class EventsStore {
     return event.contributors;
   }
 
-  getContributorStatus(eventId: string): string {
-    const event = this.#enrichedMap.get(eventId);
-    if (!event) return "";
-    const user = event.contributors.filter((c) => c.id === this.#userId);
-    return user.length > 0 ? user[0].status : "";
-  }
-
   /**
    * Statut de participation de l'utilisateur courant, dérivé.
    *
@@ -743,10 +736,12 @@ export class EventsStore {
     const event = this.#enrichedMap.get(eventId);
     if (!event) return null;
 
+    // Le créateur n'est jamais une invitation — même s'il traîne une entrée
+    // de registre (donnée migrée).
+    if (event.createdBy === this.#userId) return null;
+
     const entry = event.contributors?.find((c) => c.id === this.#userId);
     if (entry) return entry.status;
-
-    if (event.createdBy === this.#userId) return null;
 
     const viaTeam = event.teams?.some((teamId) =>
       this.#userTeams.includes(teamId),
@@ -896,7 +891,7 @@ export class EventsStore {
 
     // --- 1. Construire les nouveaux contributeurs (dédupliqués) ---
     // Les emails résolus vers un compte PB reçoivent le vrai userId (bandeau
-    // RSVP et getContributorStatus fonctionnels immédiatement) ; fallback
+    // RSVP et getRsvpStatus fonctionnels immédiatement) ; fallback
     // nanoid pour les inconnus — le hook join-event rattache l'id au vrai
     // userId au premier join (dédoublonnage par email côté serveur).
     const existingEmails = new Set(

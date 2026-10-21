@@ -290,55 +290,51 @@
   // INITIALISATION
   // ============================================================================
 
-  $effect(() => {
-    // Guard 1: déjà initialisé OU déjà en cours
-    if (isInitialised || isBusy) {
-      console.log("[Init] Guard 1 - Déjà initialisé ou occupé", {
-        isInitialised,
-        isBusy,
+  /**
+   * Charge le verrou de l'événement en arrière-plan (non bloquant : le shadow
+   * draft reste utilisable). Isolé de l'effet pour que ses lectures ne
+   * deviennent pas des dépendances réactives.
+   */
+  async function initializeLock(id: string): Promise<void> {
+    isBusy = true;
+    try {
+      activeLock = await locksService.getLock(`event_${id}`);
+      lockUnsub = await locksService.subscribeToLock(`event_${id}`, (lock) => {
+        console.log("[EventEditPage] 🔒 Verrou mis à jour:", {
+          lockedBy: lock?.userName,
+          userId: lock?.userId,
+          expiresAt: lock?.expiresAt,
+        });
+        activeLock = lock;
       });
+    } catch (err) {
+      console.error("[EventEditPage] Verrou indisponible:", err);
+    } finally {
+      isBusy = false;
+      console.log("[Init] Lock chargé, isBusy = false");
+    }
+  }
+
+  $effect(() => {
+    // Guard 1 : une seule initialisation par montage.
+    if (isInitialised || isBusy) {
       return;
     }
 
-    // Guard 2: pas d'eventId
     if (!eventId) {
-      console.log("[Init] Guard 2 - Pas d'eventId");
       return;
     }
 
-    console.log("[Init] Début initialisation pour eventId:", eventId);
+    // Dépendance volontaire : l'ARRIVÉE de l'event relance l'effet. Sans elle,
+    // un montage sur cache froid (login après purge, deep link) sortait ici
+    // pour toujours — le shadow draft ne se peuplait jamais (meals vides).
+    // L'idempotence est portée par `isInitialised`, posé avant tout await.
+    if (!currentEvent) {
+      return;
+    }
 
-    untrack(async () => {
-      const event = eventsStore.getEventById(eventId);
-      console.log("[Init] Event récupéré:", event?.id, event?.name);
-
-      if (!event) {
-        console.log("[Init] Event non trouvé dans le cache");
-        return;
-      }
-
-      isInitialised = true;
-
-      // Charger le lock en arrière-plan (non-bloquant)
-      isBusy = true;
-      try {
-        activeLock = await locksService.getLock(`event_${eventId}`);
-        lockUnsub = await locksService.subscribeToLock(
-          `event_${eventId}`,
-          (lock) => {
-            console.log("[EventEditPage] 🔒 Verrou mis à jour:", {
-              lockedBy: lock?.userName,
-              userId: lock?.userId,
-              expiresAt: lock?.expiresAt,
-            });
-            activeLock = lock;
-          },
-        );
-      } finally {
-        isBusy = false;
-        console.log("[Init] Lock chargé, isBusy = false");
-      }
-    });
+    isInitialised = true;
+    void untrack(() => initializeLock(eventId));
   });
 
   // ============================================================================

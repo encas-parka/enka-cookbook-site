@@ -48,7 +48,7 @@
   import LeftPanel from "$lib/components/ui/LeftPanel.svelte";
 
   import { eventsStore } from "$lib/stores/EventsStore.svelte";
-  import { onMount } from "svelte";
+  import { untrack } from "svelte";
   import { fade } from "svelte/transition";
 
   import { route } from "$lib/router";
@@ -166,28 +166,31 @@
     ) ?? false,
   );
 
-  onMount(async () => {
-    try {
-      if (!eventId) {
-        console.error("[EventProductsPage] eventId est requis");
-        isLoading = false;
-        return;
-      }
+  // ProductsStore se matérialise à l'ARRIVÉE de l'event : le guard
+  // (`ensureEvent`) garantit la cible au montage, cet effet couvre le reste
+  // (cache froid, changement d'event sans remontage du composant).
+  // Idempotent par eventId — une mutation de l'event ne rejoue jamais
+  // l'initialisation (le work n'est pas une dépendance).
+  let initializedFor = $state<string | null>(null);
 
-      // Initialiser ProductsStore (le guard a déjà vérifié l'event)
-      const event = eventsStore.getEventById(eventId);
-      console.log(
-        `[EventProductsPage] Initialisation de ProductsStore pour événement ${event?.name}`,
-      );
-      await productsStore.initialize(eventId);
-    } catch (error) {
-      console.error(
-        "[EventProductsPage] Erreur lors de l'initialisation:",
-        error,
-      );
-    } finally {
-      isLoading = false;
-    }
+  $effect(() => {
+    if (!eventId || !currentEvent) return;
+    if (initializedFor === eventId) return;
+
+    initializedFor = eventId;
+    isLoading = true;
+    void untrack(async () => {
+      try {
+        await productsStore.initialize(eventId);
+      } catch (error) {
+        console.error(
+          "[EventProductsPage] Erreur lors de l'initialisation:",
+          error,
+        );
+      } finally {
+        isLoading = false;
+      }
+    });
   });
 
   // Fonctions pour contrôler l'ouverture/fermeture

@@ -47,6 +47,7 @@ await store.setupRealtime(); // SSE → Dexie
 - Icônes : `@lucide/svelte`, tailles `size-3` (12px) à `size-6` (24px).
 - Opérations async post-modal : `toastService.track()` (`$lib/services/toast.service.svelte`).
 - Jamais copier de données store dans un état local — toujours `$derived`. Fichiers en kebab-case, stores en singletons importés directement.
+- Jamais un sync (ni une écriture Dexie) déclenché depuis un `$effect` qui lit aussi ces données : cycle lecture→écriture = boucle de sync (CreateLoanModal, 22-10). Déclencheurs valides : handler, `onMount`, orchestrateur `main.ts` — ou `untrack()` + garde d'ouverture si l'effet est le point d'entrée voulu. La fraîcheur en session vient du SSE et de l'orchestrateur de resync, pas des composants.
 
 ## Typage
 

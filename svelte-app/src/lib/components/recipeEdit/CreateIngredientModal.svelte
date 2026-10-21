@@ -311,6 +311,12 @@
         </div>
       {/if}
 
+      <div class="alert alert-outline alert-warning">
+        Faites attention à ne pas créer d'ingrédients qui existent déjà (avec
+        une orthographe différente par exemple), cela rend les aggrégations pour
+        les listes de courses foireuses...
+      </div>
+
       <fieldset disabled={loading} class="space-y-4">
         <!-- Nom -->
         <div class="fieldset">
@@ -339,7 +345,7 @@
           <!-- Guard anti-doublon : ingrédients similaires -->
           {#if similarIngredients.length > 0}
             {@const similar = similarIngredients}
-            <div class="alert text-sm alert-warning">
+            <div class="alert alert-soft text-sm alert-warning">
               <TriangleAlert size={18} class="shrink-0" />
               <div class="flex flex-col gap-2">
                 <span class="font-medium"

@@ -23,16 +23,4 @@
     "AGENTS.md",
   ],
   "context_servers": {},
-  "languages": {
-    "HTML": {
-      "prettier": {
-        "format_on_save": "on",
-        "allowed": true,
-        "parser": "go-template",
-        "plugins": [
-          "prettier-plugin-go-template"
-        ],
-      },
-    },
-  },
 }

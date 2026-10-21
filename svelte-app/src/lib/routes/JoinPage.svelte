@@ -58,6 +58,13 @@
     // FORCER le rafraîchissement de l'état global pour récupérer l'utilisateur connecté
     await globalState.refreshAuthAfterLogin();
 
+    // Le point de coupe du login est le cache local : la phase réseau — dont
+    // la sync events — est encore en vol. Or `syncRevalidate()` plus bas est
+    // un skip silencieux tant qu'une sync tourne, et le redeem vient d'élargir
+    // le périmètre côté serveur. On attend donc l'issue réseau : sans elle, la
+    // liste des contributeurs relue après le join peut être celle d'avant.
+    await globalState.hydration;
+
     const pendingLinkId = sessionStorage.getItem(SESSION_STORAGE_KEY);
     if (pendingLinkId && globalState.userId) {
       sessionStorage.removeItem(SESSION_STORAGE_KEY);
@@ -88,7 +95,8 @@
       // Le join élargit le périmètre autorisé (eventId.guestUsers) : les
       // teamdocs existants de l'event ont un `updated` antérieur au curseur
       // delta et n'y remonteraient jamais — on l'invalide avant de resync.
-      const { teamdocsStore } = await import("$lib/stores/TeamdocsStore.svelte");
+      const { teamdocsStore } =
+        await import("$lib/stores/TeamdocsStore.svelte");
       await teamdocsStore.resetCursorAndSync();
 
       step = "success";

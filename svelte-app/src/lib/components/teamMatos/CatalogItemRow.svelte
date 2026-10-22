@@ -8,6 +8,16 @@
     existingLabel?: string;
     sourcedBatches?: { label: string; qty: number }[];
     onchange: (quantity: number) => void;
+    /** Taille des contrôles ; "md" cible le tactile (emprunts). */
+    size?: "xs" | "md";
+    /** Plafond de quantité ; undefined = incrément toujours permis. */
+    maxQuantity?: number;
+    /** Bouton "tout" (quantité = maxQuantity). */
+    showTakeAll?: boolean;
+    /** Ligne grisée, contrôles inactifs (matériel indisponible sur la période). */
+    disabled?: boolean;
+    /** Badge de remplacement affiché quand disabled (ex. "Indisponible"). */
+    unavailableLabel?: string;
   }
 
   let {
@@ -17,28 +27,52 @@
     existingLabel = "déjà possédé",
     sourcedBatches = [],
     onchange,
+    size = "xs",
+    maxQuantity,
+    showTakeAll = false,
+    disabled = false,
+    unavailableLabel,
   }: Props = $props();
 
   const isActive = $derived(quantity > 0);
   const hasExisting = $derived(existingQuantity > 0);
+  const canIncrement = $derived(
+    !disabled && (maxQuantity === undefined || quantity < maxQuantity),
+  );
+  const showStatusBadge = $derived(disabled && unavailableLabel !== undefined);
 
   function increment() {
+    if (!canIncrement) return;
     onchange(quantity + 1);
   }
 
   function decrement() {
+    if (disabled) return;
     if (quantity > 0) onchange(quantity - 1);
+  }
+
+  function takeAll() {
+    if (disabled || maxQuantity === undefined) return;
+    onchange(maxQuantity);
   }
 </script>
 
 <div
-  class="flex items-center justify-between gap-2 rounded-lg border px-3 py-2 transition-colors {isActive
-    ? 'border-primary/40 bg-primary/10'
-    : 'border-base-300 bg-base-100'}"
+  class="flex items-center justify-between gap-2 rounded-lg border px-3 py-2 transition-colors {disabled
+    ? 'border-base-300 bg-base-200 opacity-60'
+    : isActive
+      ? 'border-primary/40 bg-primary/10'
+      : 'border-base-300 bg-base-100'}"
 >
   <div class="flex min-w-0 flex-1 items-center gap-2">
-    <span class="truncate text-sm">{name}</span>
-    {#if hasExisting}
+    <span class="truncate text-sm {showStatusBadge ? 'line-through' : ''}"
+      >{name}</span
+    >
+    {#if showStatusBadge}
+      <span class="badge flex-none badge-xs badge-error"
+        >{unavailableLabel}</span
+      >
+    {:else if hasExisting}
       <span class="badge flex-none badge-ghost badge-xs"
         >{existingLabel} {existingQuantity}</span
       >
@@ -55,36 +89,51 @@
 
   <div class="flex flex-none items-center gap-1">
     <button
-      class="btn btn-square btn-ghost btn-xs"
+      class="btn btn-square btn-ghost {size === 'md' ? 'btn-md' : 'btn-xs'}"
       onclick={decrement}
-      disabled={quantity <= 0}
+      disabled={disabled || quantity <= 0}
       aria-label="Diminuer"
     >
-      <Minus class="size-3" />
+      <Minus class={size === "md" ? "size-5" : "size-3"} />
     </button>
 
     <input
       type="number"
       min="0"
+      max={maxQuantity === undefined ? undefined : maxQuantity}
       step="1"
       value={quantity}
       oninput={(e) => {
         const v = parseInt(e.currentTarget.value);
         if (!isNaN(v) && v >= 0) onchange(v);
       }}
-      class="quantity-input input w-14 text-center font-semibold tabular-nums input-xs {isActive
+      class="quantity-input input {size === 'md'
+        ? 'w-16 input-md'
+        : 'w-14 input-xs'} text-center font-semibold tabular-nums {isActive
         ? 'input-primary'
         : ''}"
       aria-label="Quantité"
+      {disabled}
     />
 
     <button
-      class="btn btn-square btn-ghost btn-xs"
+      class="btn btn-square btn-ghost {size === 'md' ? 'btn-md' : 'btn-xs'}"
       onclick={increment}
+      disabled={!canIncrement}
       aria-label="Augmenter"
     >
-      <Plus class="size-3" />
+      <Plus class={size === "md" ? "size-5" : "size-3"} />
     </button>
+
+    {#if showTakeAll && maxQuantity !== undefined}
+      <button
+        class="btn btn-ghost {size === 'md' ? 'btn-sm' : 'btn-xs'}"
+        onclick={takeAll}
+        disabled={disabled || quantity >= maxQuantity}
+      >
+        tout
+      </button>
+    {/if}
   </div>
 </div>
 

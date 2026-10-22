@@ -13,6 +13,11 @@
   import { untrack } from "svelte";
   import { toInputDate } from "$lib/utils/date-helpers";
   import {
+    summarizeSelection,
+    type GhostLoanItem,
+  } from "$lib/utils/materiel-list.utils";
+  import LoanMaterielList from "./LoanMaterielList.svelte";
+  import {
     AlertCircle,
     Box,
     Calendar,
@@ -93,6 +98,13 @@
   let selectedEventId = $state<string | null>(null);
 
   let showQuickSelection = $state(false);
+
+  // Prototype « liste plate » : tout l'inventaire affiché avec une quantité
+  // par matériel (init 0). Rollback : repasser ce flag à false — l'ancien
+  // parcours (autocomplétion + ajout rapide) reste fonctionnel derrière.
+  const USE_FLAT_MATERIEL_LIST = true;
+  let quantities = $state<Record<string, number>>({});
+  let materielList = $state<ReturnType<typeof LoanMaterielList>>();
   let loading = $state(false);
   let loadingLoan = $state(false);
   let existingLoan = $state<EnrichedMaterielLoan | null>(null);
@@ -203,21 +215,74 @@
     return map;
   });
 
-  const conflictSummary = $derived.by(() => {
-    const toRemove: { name: string }[] = [];
-    const toReduce: { name: string; requested: number; available: number }[] =
-      [];
+  // --- Mode liste plate (prototype) : projection de la sélection ---
+  const flatGhostItems = $derived<GhostLoanItem[]>(
+    selectedMateriels
+      .filter((m) => m.isDeleted)
+      .map((m) => ({
+        materielId: m.materielId,
+        materielName: m.materielName,
+        quantity: m.quantity,
+      })),
+  );
 
-    for (const m of selectedMateriels) {
-      if (m.quantity === 0) continue;
+  const flatInitialQuantities = $derived(
+    Object.fromEntries(
+      selectedMateriels.map((m) => [m.materielId, m.quantity]),
+    ),
+  );
+
+  const flatNameById = $derived.by(() => {
+    const map = new Map<string, string>();
+    for (const m of allMaterielsWithAvailability) map.set(m.id, m.name);
+    for (const g of flatGhostItems) map.set(g.materielId, g.materielName);
+    return map;
+  });
+
+  const flatSelected = $derived(
+    Object.entries(quantities)
+      .filter(([, qty]) => qty >= 1)
+      .map(([materielId, quantity]) => ({ materielId, quantity })),
+  );
+
+  const flatSummary = $derived(summarizeSelection(quantities));
+
+  const conflictSummary = $derived.by(() => {
+    // Liste plate : les rows viennent des quantités ; sinon de l'ancienne
+    // sélection. materielId est porté pour une résolution par id (le nom n'est
+    // pas unique dans l'inventaire).
+    const rows = (
+      USE_FLAT_MATERIEL_LIST
+        ? flatSelected.map(({ materielId, quantity }) => ({
+            materielId,
+            materielName: flatNameById.get(materielId) ?? "",
+            quantity,
+          }))
+        : selectedMateriels.map((m) => ({
+            materielId: m.materielId,
+            materielName: m.materielName,
+            quantity: m.quantity,
+          }))
+    ).filter((m) => m.quantity > 0);
+
+    const toRemove: { name: string; materielId?: string }[] = [];
+    const toReduce: {
+      name: string;
+      requested: number;
+      available: number;
+      materielId?: string;
+    }[] = [];
+
+    for (const m of rows) {
       const available = availabilityMap.get(m.materielId) ?? 0;
       if (available === 0) {
-        toRemove.push({ name: m.materielName });
+        toRemove.push({ name: m.materielName, materielId: m.materielId });
       } else if (m.quantity > available) {
         toReduce.push({
           name: m.materielName,
           requested: m.quantity,
           available,
+          materielId: m.materielId,
         });
       }
     }
@@ -245,8 +310,10 @@
     startDate !== "" &&
       endDate !== "" &&
       startDate < endDate &&
-      selectedMateriels.length > 0 &&
-      selectedMateriels.some((m) => m.quantity >= 1) &&
+      (USE_FLAT_MATERIEL_LIST
+        ? flatSummary.itemCount > 0
+        : selectedMateriels.length > 0 &&
+          selectedMateriels.some((m) => m.quantity >= 1)) &&
       globalState.userId !== null &&
       globalState.userId !== undefined &&
       !loading &&
@@ -319,6 +386,15 @@
         }
       }
     });
+  });
+
+  // Liste plate : initialise la sélection du composant quand il apparaît
+  // (montage après saisie des dates en création, après chargement en
+  // édition). Lit materielList ($state bind:this) : l'effet re-court au
+  // montage du composant. reset() n'écrit que quantities — pas de boucle.
+  $effect(() => {
+    if (!USE_FLAT_MATERIEL_LIST || !isOpen || loadingLoan) return;
+    materielList?.reset(flatInitialQuantities);
   });
 
   function handleAddMateriel(
@@ -430,7 +506,26 @@
     return parts.join("\n\n");
   }
 
-  function applyConflictResolution(): SelectedMateriel[] {
+  function applyConflictResolution(): {
+    materielId: string;
+    materielName: string;
+    quantity: number;
+  }[] {
+    if (USE_FLAT_MATERIEL_LIST) {
+      const next: Record<string, number> = {};
+      for (const { materielId, quantity } of flatSelected) {
+        if (conflictSummary.toRemove.some((r) => r.materielId === materielId)) {
+          continue;
+        }
+        const reduce = conflictSummary.toReduce.find(
+          (r) => r.materielId === materielId,
+        );
+        next[materielId] = reduce ? reduce.available : quantity;
+      }
+      materielList?.applyQuantities(next);
+      return materielList?.getSelectedItems() ?? [];
+    }
+
     const removeIds = new Set(conflictSummary.toRemove.map((i) => i.name));
     return selectedMateriels
       .filter((m) => m.quantity > 0 && !removeIds.has(m.materielName))
@@ -466,7 +561,17 @@
       return;
     }
 
-    await doSubmit(selectedMateriels.filter((m) => m.quantity >= 1));
+    await doSubmit(currentSelection());
+  }
+
+  function currentSelection(): {
+    materielId: string;
+    materielName: string;
+    quantity: number;
+  }[] {
+    return USE_FLAT_MATERIEL_LIST
+      ? (materielList?.getSelectedItems() ?? [])
+      : selectedMateriels.filter((m) => m.quantity >= 1);
   }
 
   async function handleConflictConfirm() {
@@ -584,6 +689,7 @@
     endDate = "";
     notes = "";
     selectedMateriels = [];
+    quantities = {};
     loanStatus = "accepted";
     selectedEventId = null;
     userHasModifiedDates = false;
@@ -751,7 +857,9 @@
             class="flex items-center gap-2 text-sm font-semibold uppercase opacity-70"
           >
             <Sparkles class="h-4 w-4" />
-            Matériel à emprunter ({selectedMateriels.length})
+            Matériel à emprunter ({USE_FLAT_MATERIEL_LIST
+              ? flatSummary.itemCount
+              : selectedMateriels.length})
           </h4>
 
           {#if !startDate || !endDate}
@@ -800,6 +908,14 @@
                 </div>
               {/each}
             </div>
+          {:else if USE_FLAT_MATERIEL_LIST}
+            <LoanMaterielList
+              bind:this={materielList}
+              bind:quantities
+              materiels={allMaterielsWithAvailability}
+              ghostItems={flatGhostItems}
+              {loading}
+            />
           {:else}
             <div class="flex flex-wrap gap-6">
               <div class="flex-1">
@@ -875,7 +991,7 @@
             </div>
           {/if}
 
-          {#if selectedMateriels.length > 0 && !(mode === "edit" && isEndDatePast)}
+          {#if !USE_FLAT_MATERIEL_LIST && selectedMateriels.length > 0 && !(mode === "edit" && isEndDatePast)}
             <div class="space-y-2">
               <div class="flex items-center justify-between">
                 <p class="text-sm font-semibold opacity-70">
@@ -1028,7 +1144,7 @@
                 </div>
               {/each}
             </div>
-          {:else if !(mode === "edit" && isEndDatePast) && selectedMateriels.length === 0}
+          {:else if !USE_FLAT_MATERIEL_LIST && !(mode === "edit" && isEndDatePast) && selectedMateriels.length === 0}
             <div class="py-8 text-center opacity-50">
               <Package class="mx-auto mb-2 h-12 w-12" />
               <p class="text-sm">Aucun matériel sélectionné</p>
@@ -1054,7 +1170,14 @@
       </button>
     {/if}
 
-    <div class="flex-1"></div>
+    <div class="flex-1 text-sm text-base-content/70">
+      {#if USE_FLAT_MATERIEL_LIST && flatSummary.itemCount > 0}
+        {flatSummary.itemCount}
+        matériel{flatSummary.itemCount > 1 ? "s" : ""} —
+        {flatSummary.totalUnits}
+        unité{flatSummary.totalUnits > 1 ? "s" : ""}
+      {/if}
+    </div>
 
     <button
       class="btn btn-ghost btn-sm"

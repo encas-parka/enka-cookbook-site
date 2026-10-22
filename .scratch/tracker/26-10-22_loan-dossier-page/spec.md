@@ -55,3 +55,31 @@ supprimé. La page ne porte pas les composants du parcours legacy
   re-déclenché le guard de navigation).
 - La fiche de retour n'est plus une page : son url historique redirige vers le
   dossier (compat liens/bookmarks).
+
+## Itération 2 — chrome navbar + sidebar (même jour, design grillé)
+
+Décisions actées en interview (`/grill-with-docs`, 2 tours) :
+
+- **Actions en navbar**, contextuelles par onglet (pattern `RecipeEditPage`) :
+  Réservation → Annuler · Exporter · Enregistrer/Créer (masqué si date de fin
+  passée) ; Retour → Exporter la fiche · Valider le retour. Icônes seuls sous
+  `sm`. Barre d'action footer supprimée (pattern modal uniquement). Pas
+  d'export en création. « Annuler la réservation » reste destructive, en bas
+  de la card Réservation (geste porté par le cœur).
+- **Onglet par défaut** : `?tab=` explicite > prêt `completed` > `now >
+  endDate` (accepté) > Réservation ; jamais en création.
+- **Cards** : `LoanForm` gagne `framed` — « Période & événement » + « Matériel
+  » (résumé en badge d'en-tête) ; le modal garde son layout plat.
+- **Sidebar** (`LeftPanel`, desktop) / drawer + FAB (mobile), montée seulement
+  sur l'onglet Réservation ; facettes `LoanMaterielFilters` : Type + Segments
+  en `CheckboxBadge` **multi-sélection (union, rien coché = tout)** ; la
+  recherche reste en tête de liste, sticky. Contenu `lg:ml-96` + `max-w-7xl`.
+- **Groupes** : desktop toujours ouverts, en-têtes non interactifs ; mobile
+  repliés au départ, **accordéon** (déplier replie l'autre), suspendu si
+  recherche active ou « Sélectionnés » coché.
+- **Cœur retour symétrique** : `submit()` / `exportSheet()`, bindables
+  `valid`/`saving`/`dirty`, plus de boutons inline ; le `dirty` du retour
+  alimente le guard de navigation (trou comblé). Après validation : on reste
+  sur le dossier en lecture seule.
+- Glossaire : Retour + Fiche de retour ajoutés à `CONTEXT.md` ; « dossier
+  emprunt » volontairement absent (conteneur UI).

@@ -28,6 +28,38 @@
   échec (WIP étranger) est repassé au vert.
 - Build OK ; chunk `LoanLegacySelection` séparé (non chargé par la page).
 
+## Itération 2 — chrome navbar + sidebar (même jour)
+
+1. `d2e56208` — glossaire : Retour, Fiche de retour (`CONTEXT.md`).
+2. `4c72c49e` — segments en union (`LoanSegment`, `filterLoanMateriels`),
+   facettes `LoanMaterielFilters`, groupes desktop non repliables / accordéon
+   mobile ; labels partagés `loanTypeLabel`. Tests utils refaits (13 verts).
+3. `da634b3b` — `LoanForm` mode `framed` (2 cards, badge résumé, annulation
+   destructive dans la card) ; `getLoanStatusConfig` partagée (LoanCard
+   migré).
+4. `d0cdba5a` — page dossier : actions navbar contextuelles, sidebar à
+   facettes, onglet par défaut (rendu/échu), cœur retour symétrique + dirty
+   dans le guard.
+
+Vérifs : svelte-check 0/0 (195 fichiers) à chaque commit ; tests 353/353
+(`/tmp/opencode/tests-loan-ui-1.log`) ; build OK ; svelte-autofixer (MCP,
+disponible de nouveau) passé sur `LoanMaterielList`, `LoanMaterielFilters`,
+`LoanEditPage` — suggestions écartées en connaissance de cause (conventions
+`class:`, effets de navigation/délai, décision d'onglet à un coup).
+
+Reste (click-through humain, s'ajoute à l'itération 1) :
+
+- Navbar : 3 boutons par onglet, bascule des actions au changement d'onglet,
+  libellés masqués < sm.
+- Sidebar desktop : facettes type/segments, contenu décalé `lg:ml-96`,
+  bascule de largeur au changement d'onglet ; drawer + FAB en mobile.
+- Groupes : ouverts non cliquables en desktop ; accordéon mobile, suspension
+  par recherche / « Sélectionnés ».
+- Onglet par défaut sur un prêt échu (deep link sans `?tab=`) et sur un prêt
+  rendu ; `?tab=return` explicite gagne toujours.
+- Retour : validation depuis la navbar, reste en lecture seule sur le
+  dossier ; garde « déclarations non enregistrées » à la navigation.
+
 ## Reste (click-through humain)
 
 - Parcours création → dossier → onglet Retour → export .md.

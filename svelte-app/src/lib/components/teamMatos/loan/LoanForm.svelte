@@ -31,6 +31,7 @@
   import {
     summarizeSelection,
     type GhostLoanItem,
+    type LoanSegment,
   } from "$lib/utils/materiel-list.utils";
   import LoanMaterielList from "../LoanMaterielList.svelte";
   import {
@@ -44,6 +45,7 @@
     Package,
     SoapDispenserDroplet,
     Sparkles,
+    Trash2,
     User,
     Utensils,
     Wrench,
@@ -87,6 +89,13 @@
     endDatePast?: boolean;
     /** L'utilisateur a-t-il modifié le formulaire ? */
     dirty?: boolean;
+    /** Mode carte (page dossier) : les sections sont portées par des cards. */
+    framed?: boolean;
+    /**
+     * Facettes de la sidebar appliquées à la liste de matériel (types +
+     * segments en union) ; vide = tout afficher (modal).
+     */
+    listFilter?: { types: string[]; segments: LoanSegment[] };
     /**
      * Ancrage sticky de la liste de matériel, selon l'enveloppe (modal
      * compense le padding du scroll container, page se cale sous la navbar).
@@ -109,6 +118,8 @@
     existingLoanStatus = $bindable(null),
     endDatePast = $bindable(false),
     dirty = $bindable(false),
+    framed = false,
+    listFilter = { types: [], segments: [] },
     stickyTopClass = "-top-4 sm:-top-2",
   }: Props = $props();
 
@@ -728,7 +739,7 @@
       </div>
     {/if}
 
-    <div class="space-y-4">
+    {#snippet periodFields()}
       <label class="select w-full">
         <span class="label"
           ><Package class="h-4 w-4" />
@@ -817,18 +828,9 @@
           maxlength="500"
           disabled={loading}></textarea>
       </fieldset>
-    </div>
+    {/snippet}
 
-    <div class="space-y-4">
-      <h4
-        class="flex items-center gap-2 text-sm font-semibold uppercase opacity-70"
-      >
-        <Sparkles class="h-4 w-4" />
-        Matériel à emprunter ({useFlat
-          ? flatSummary.itemCount
-          : selectedMateriels.length})
-      </h4>
-
+    {#snippet materielBlock()}
       {#if !startDate || !endDate}
         <div class="alert alert-info max-md:alert-vertical">
           <Info class="h-5 w-5" />
@@ -881,6 +883,8 @@
           ghostItems={flatGhostItems}
           {loading}
           stickyClass={stickyTopClass}
+          typeFilter={listFilter.types}
+          segments={listFilter.segments}
         />
       {:else if LegacySelection}
         <LegacySelection
@@ -933,7 +937,71 @@
           </div>
         </div>
       {/if}
-    </div>
+    {/snippet}
+
+    {#if framed}
+      <div class="card bg-base-100 shadow-sm max-sm:card-xs">
+        <div class="card-body">
+          <h2 class="card-title">
+            <Calendar class="h-5 w-5" />
+            Période &amp; événement
+          </h2>
+          {@render periodFields()}
+          {#if mode === "edit" && existingLoanStatus === "accepted"}
+            <!-- Geste destructif gardé près de son contexte ; la confirmation
+                 vit dans ce composant. Le modal, lui, porte ce bouton dans son
+                 footer. -->
+            <div class="mt-2 flex justify-end border-t border-base-200 pt-4">
+              <button
+                class="btn btn-outline btn-error btn-sm"
+                onclick={handleCancelReservation}
+                disabled={loading}
+              >
+                <Trash2 class="h-4 w-4" />
+                Annuler la réservation
+              </button>
+            </div>
+          {/if}
+        </div>
+      </div>
+
+      <div class="card bg-base-100 shadow-sm max-sm:card-xs">
+        <div class="card-body">
+          <div class="flex flex-wrap items-center justify-between gap-2">
+            <h2 class="card-title">
+              <Sparkles class="h-5 w-5" />
+              Matériel à emprunter
+            </h2>
+            {#if summary.itemCount > 0}
+              <span class="badge badge-outline tabular-nums badge-primary">
+                {summary.itemCount}
+                matériel{summary.itemCount > 1 ? "s" : ""}
+                ·
+                {summary.totalUnits}
+                unité{summary.totalUnits > 1 ? "s" : ""}
+              </span>
+            {/if}
+          </div>
+          {@render materielBlock()}
+        </div>
+      </div>
+    {:else}
+      <div class="space-y-4">
+        {@render periodFields()}
+      </div>
+
+      <div class="space-y-4">
+        <h4
+          class="flex items-center gap-2 text-sm font-semibold uppercase opacity-70"
+        >
+          <Sparkles class="h-4 w-4" />
+          Matériel à emprunter ({useFlat
+            ? flatSummary.itemCount
+            : selectedMateriels.length})
+        </h4>
+        {@render materielBlock()}
+      </div>
+    {/if}
   {/if}
 </div>
 

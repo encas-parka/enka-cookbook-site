@@ -26,6 +26,7 @@
   import { navigate } from "$lib/router";
   import { materielStore } from "$lib/stores/MaterielStore.svelte";
   import { shareOrDownload } from "$lib/utils/share-utils";
+  import { getLoanStatusConfig } from "$lib/utils/materiel.utils";
 
   // Type union pour MaterielLoanStatus (évite les problèmes d'import enum)
   type MaterielLoanStatusLiteral =
@@ -131,7 +132,18 @@
     return "badge-success"; // vert
   }
 
-  // Configuration du statut
+  // Configuration du statut (libellés/badges partagés liste ↔ dossier ;
+  // les icônes restent propres à la carte).
+  const statusIcons: Partial<Record<MaterielLoanStatusLiteral, any>> = {
+    asked: AlertCircle,
+    accepted: Check,
+    refused: X,
+    canceled: X,
+    completed: Check,
+    archived: Archive,
+    returned: CheckCircle,
+  };
+
   const statusConfig = $derived.by(() => {
     if (!loan || !loan.status) {
       return {
@@ -141,54 +153,12 @@
       };
     }
 
-    const configs: Record<
-      MaterielLoanStatusLiteral,
-      { label: string; badgeClass: string; icon: any }
-    > = {
-      asked: {
-        label: "En attente",
-        badgeClass: "badge-warning",
-        icon: AlertCircle,
-      },
-      accepted: {
-        label: "confirmé",
-        badgeClass: "badge-info",
-        icon: Check,
-      },
-      refused: {
-        label: "Refusé",
-        badgeClass: "badge-error",
-        icon: X,
-      },
-      canceled: {
-        label: "Annulé",
-        badgeClass: "badge-neutral",
-        icon: X,
-      },
-      completed: {
-        label: "Retour effectué",
-        badgeClass: "badge-success",
-        icon: Check,
-      },
-      archived: {
-        label: "Archivé",
-        badgeClass: "badge-neutral",
-        icon: Archive,
-      },
-      returned: {
-        label: "Retourné",
-        badgeClass: "badge-success",
-        icon: CheckCircle,
-      },
+    const { label, badgeClass } = getLoanStatusConfig(loan.status);
+    return {
+      label,
+      badgeClass,
+      icon: statusIcons[loan.status] ?? AlertCircle,
     };
-
-    return (
-      configs[loan.status] || {
-        label: "Statut inconnu",
-        badgeClass: "badge-neutral",
-        icon: AlertCircle,
-      }
-    );
   });
 
   // Actions disponibles selon le statut

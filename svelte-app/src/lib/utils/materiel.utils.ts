@@ -130,6 +130,28 @@ export function getMaterielTypeConfig(
   return configs[type || "other"] || configs.other;
 }
 
+/** Libellé + badge d'affichage du statut d'un emprunt (liste et dossier). */
+export function getLoanStatusConfig(status: string | null | undefined): {
+  label: string;
+  badgeClass: string;
+} {
+  const configs: Record<string, { label: string; badgeClass: string }> = {
+    asked: { label: "En attente", badgeClass: "badge-warning" },
+    accepted: { label: "Confirmée", badgeClass: "badge-info" },
+    refused: { label: "Refusée", badgeClass: "badge-error" },
+    canceled: { label: "Annulée", badgeClass: "badge-neutral" },
+    completed: { label: "Retour effectué", badgeClass: "badge-success" },
+    archived: { label: "Archivée", badgeClass: "badge-neutral" },
+    returned: { label: "Retournée", badgeClass: "badge-success" },
+  };
+  return (
+    (status && configs[status]) || {
+      label: "Statut inconnu",
+      badgeClass: "badge-neutral",
+    }
+  );
+}
+
 /**
  * Retourne le label lisible pour un type de matériel
  * @deprecated Use getMaterielTypeConfig().label instead

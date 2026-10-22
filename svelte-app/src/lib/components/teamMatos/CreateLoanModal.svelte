@@ -42,6 +42,8 @@
   let summary = $state<LoanSelectionSummary>({ itemCount: 0, totalUnits: 0 });
   /** La réservation existe-t-elle encore ? (bouton d'annulation) */
   let existingLoanStatus = $state<string | null>(null);
+  /** Date de fin passée : pas d'enregistrement possible. */
+  let endDatePast = $state(false);
   function handleClose() {
     form?.reset();
     onClose();
@@ -74,6 +76,7 @@
       bind:busy
       bind:summary
       bind:existingLoanStatus
+      bind:endDatePast
       {ownerId}
       {ownerName}
       {loanId}
@@ -109,17 +112,19 @@
       <X class="h-5 w-5" />
       Annuler
     </button>
-    <button
-      class="btn btn-primary btn-sm"
-      onclick={() => form?.submit()}
-      disabled={!valid || busy}
-    >
-      {#if busy}
-        <span class="loading loading-sm loading-spinner"></span>
-      {:else}
-        <Check class="h-5 w-5" />
-      {/if}
-      {mode === "create" ? "Créer" : "Sauvegarder"}
-    </button>
+    {#if !endDatePast}
+      <button
+        class="btn btn-primary btn-sm"
+        onclick={() => form?.submit()}
+        disabled={!valid || busy}
+      >
+        {#if busy}
+          <span class="loading loading-sm loading-spinner"></span>
+        {:else}
+          <Check class="h-5 w-5" />
+        {/if}
+        {mode === "create" ? "Créer" : "Sauvegarder"}
+      </button>
+    {/if}
   </ModalFooter>
 </ModalContainer>

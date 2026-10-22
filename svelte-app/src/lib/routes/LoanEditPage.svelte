@@ -49,6 +49,8 @@
   let dirty = $state(false);
   let summary = $state<LoanSelectionSummary>({ itemCount: 0, totalUnits: 0 });
   let loanStatus = $state<string | null>(null);
+  /** Date de fin passée : la réservation est figée, pas d'enregistrement. */
+  let endDatePast = $state(false);
   /** Délai dépassé sans emprunt en store : l'emprunt n'existe pas. */
   let missing = $state(false);
 
@@ -198,6 +200,7 @@
         bind:dirty
         bind:summary
         bind:existingLoanStatus={loanStatus}
+        bind:endDatePast
         stickyTopClass="top-12"
         ownerId={teamId}
         ownerName={team?.name ?? ""}
@@ -222,16 +225,18 @@
         <button class="btn btn-ghost btn-sm" onclick={goBack} disabled={busy}>
           Annuler
         </button>
-        <button
-          class="btn btn-primary btn-sm"
-          onclick={() => form?.submit()}
-          disabled={!valid || busy}
-        >
-          {#if busy}
-            <span class="loading loading-sm loading-spinner"></span>
-          {/if}
-          {isCreate ? "Créer la réservation" : "Enregistrer"}
-        </button>
+        {#if !endDatePast}
+          <button
+            class="btn btn-primary btn-sm"
+            onclick={() => form?.submit()}
+            disabled={!valid || busy}
+          >
+            {#if busy}
+              <span class="loading loading-sm loading-spinner"></span>
+            {/if}
+            {isCreate ? "Créer la réservation" : "Enregistrer"}
+          </button>
+        {/if}
       </div>
     {:else if missing}
       <div class="alert alert-warning">

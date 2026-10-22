@@ -83,6 +83,8 @@
     summary?: LoanSelectionSummary;
     /** Statut de l'emprunt chargé (édition) ; null en création. */
     existingLoanStatus?: string | null;
+    /** Date de fin passée (édition) : les matériels sont figés. */
+    endDatePast?: boolean;
     /** L'utilisateur a-t-il modifié le formulaire ? */
     dirty?: boolean;
     /**
@@ -105,6 +107,7 @@
     busy = $bindable(false),
     summary = $bindable({ itemCount: 0, totalUnits: 0 }),
     existingLoanStatus = $bindable(null),
+    endDatePast = $bindable(false),
     dirty = $bindable(false),
     stickyTopClass = "-top-4 sm:-top-2",
   }: Props = $props();
@@ -369,6 +372,7 @@
   });
   $effect(() => {
     existingLoanStatus = existingLoan?.status ?? null;
+    endDatePast = isEndDatePast;
   });
 
   // Modifications non sauvegardées : comparaison à l'état d'ouverture. Le
@@ -540,9 +544,19 @@
     materielName: string;
     quantity: number;
   }[] {
-    return useFlat
-      ? (materielList?.getSelectedItems() ?? [])
-      : selectedMateriels.filter((m) => m.quantity >= 1);
+    if (useFlat) {
+      // Liste non montée (date de fin passée : édition figée) → l'état
+      // chargé de l'emprunt, sinon un submit écraserait les items.
+      if (materielList) return materielList.getSelectedItems();
+      return selectedMateriels
+        .filter((m) => m.quantity >= 1)
+        .map((m) => ({
+          materielId: m.materielId,
+          materielName: m.materielName,
+          quantity: m.quantity,
+        }));
+    }
+    return selectedMateriels.filter((m) => m.quantity >= 1);
   }
 
   async function handleConflictConfirm() {

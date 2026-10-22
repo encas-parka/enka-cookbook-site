@@ -21,13 +21,15 @@
   import { toastService } from "$lib/services/toast.service.svelte";
   import LoanForm from "$lib/components/teamMatos/loan/LoanForm.svelte";
   import LoanReturnForm from "$lib/components/teamMatos/loan/LoanReturnForm.svelte";
-  import LoanMaterielFilters, {
-    type LoanListFilters,
-  } from "$lib/components/teamMatos/loan/LoanMaterielFilters.svelte";
+  import LoanMaterielFilters from "$lib/components/teamMatos/loan/LoanMaterielFilters.svelte";
   import LeftPanel from "$lib/components/ui/LeftPanel.svelte";
   import UnsavedChangesGuard from "$lib/components/ui/UnsavedChangesGuard.svelte";
   import type { LoanSelectionSummary } from "$lib/components/teamMatos/loan/loan.types";
-  import { LOAN_TYPE_ORDER } from "$lib/utils/materiel-list.utils";
+  import {
+    EMPTY_LOAN_FILTERS,
+    LOAN_TYPE_ORDER,
+    type LoanListFilters,
+  } from "$lib/utils/materiel-list.utils";
   import { getLoanStatusConfig } from "$lib/utils/materiel.utils";
   import { formatDateDayMonthShort } from "$lib/utils/date-helpers";
   import { shareOrDownload, toSlug } from "$lib/utils/share-utils";
@@ -61,8 +63,8 @@
   let dirty = $state(false);
   let summary = $state<LoanSelectionSummary>({ itemCount: 0, totalUnits: 0 });
   let loanStatus = $state<string | null>(null);
-  /** Date de fin passée : la réservation est figée, pas d'enregistrement. */
-  let endDatePast = $state(false);
+  /** Date de fin passée ou retour effectué : la réservation est figée. */
+  let frozen = $state(false);
 
   let returnForm = $state<ReturnType<typeof LoanReturnForm>>();
   let returnValid = $state(false);
@@ -71,7 +73,7 @@
   let returnReadOnly = $state(false);
 
   /** Facettes de la sidebar, appliquées à la liste via le cœur du formulaire. */
-  let listFilters = $state<LoanListFilters>({ types: [], segments: [] });
+  let listFilters = $state<LoanListFilters>({ ...EMPTY_LOAN_FILTERS });
 
   /** Types présents dans l'inventaire de l'équipe, dans l'ordre canonique. */
   const availableTypes = $derived.by(() => {
@@ -88,7 +90,7 @@
   });
 
   function resetListFilters() {
-    listFilters = { types: [], segments: [] };
+    listFilters = { ...EMPTY_LOAN_FILTERS };
   }
 
   // Onglet par défaut : ?tab= explicite gagne ; sinon un prêt rendu ou échu
@@ -179,13 +181,12 @@
   <div class="flex items-center gap-2">
     {#if tab === "return" && loan}
       <button
-        class="btn btn-circle btn-outline btn-sm"
+        class="btn btn-circle btn-primary btn-sm"
         onclick={() => returnForm?.exportSheet()}
         disabled={returnSaving}
         title="Exporter la fiche de retour en Markdown"
       >
         <Download class="h-4 w-4" />
-        <span class="hidden sm:inline">Exporter la fiche</span>
       </button>
       {#if !returnReadOnly}
         <button
@@ -204,15 +205,14 @@
     {:else}
       {#if !isCreate}
         <button
-          class="btn btn-circle btn-outline btn-sm"
+          class="btn btn-circle btn-primary btn-sm"
           onclick={handleExportLoan}
           title="Exporter la réservation en Markdown"
         >
           <Download class="h-4 w-4" />
-          <span class="hidden sm:inline">Exporter</span>
         </button>
       {/if}
-      {#if !endDatePast}
+      {#if !frozen}
         <button
           class="btn btn-primary btn-sm"
           onclick={() => form?.submit()}
@@ -325,9 +325,9 @@
         bind:dirty
         bind:summary
         bind:existingLoanStatus={loanStatus}
-        bind:endDatePast
+        bind:frozen
         framed
-        listFilter={listFilters}
+        bind:listFilter={listFilters}
         stickyTopClass="top-12"
         ownerId={teamId}
         ownerName={team?.name ?? ""}

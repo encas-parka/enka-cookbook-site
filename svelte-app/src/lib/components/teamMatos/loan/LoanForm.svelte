@@ -27,11 +27,15 @@
     EnrichedMaterielLoan,
   } from "$lib/types/materiel.types";
   import { untrack } from "svelte";
-  import { toInputDate } from "$lib/utils/date-helpers";
+  import {
+    toInputDate,
+    formatDateDayMonthShort,
+  } from "$lib/utils/date-helpers";
   import {
     summarizeSelection,
     type GhostLoanItem,
-    type LoanSegment,
+    EMPTY_LOAN_FILTERS,
+    type LoanListFilters,
   } from "$lib/utils/materiel-list.utils";
   import LoanMaterielList from "../LoanMaterielList.svelte";
   import {
@@ -85,17 +89,25 @@
     summary?: LoanSelectionSummary;
     /** Statut de l'emprunt chargé (édition) ; null en création. */
     existingLoanStatus?: string | null;
-    /** Date de fin passée (édition) : les matériels sont figés. */
-    endDatePast?: boolean;
+    /**
+     * Fiche figée (édition) : date de fin passée ou retour effectué —
+     * plus modifiable, pas d'enregistrement.
+     */
+    frozen?: boolean;
     /** L'utilisateur a-t-il modifié le formulaire ? */
     dirty?: boolean;
     /** Mode carte (page dossier) : les sections sont portées par des cards. */
     framed?: boolean;
     /**
-     * Facettes de la sidebar appliquées à la liste de matériel (types +
-     * segments en union) ; vide = tout afficher (modal).
+     * Filtres de la liste (type, segment, disponible), partagés avec la
+     * sidebar : le sélecteur compact sous la recherche remonte ici.
      */
-    listFilter?: { types: string[]; segments: LoanSegment[] };
+    listFilter?: LoanListFilters;
+    /**
+     * Affiche le sélecteur de segment sous la recherche même en desktop :
+     * pour le modal, qui n'a pas de sidebar.
+     */
+    showSegmentInline?: boolean;
     /**
      * Ancrage sticky de la liste de matériel, selon l'enveloppe (modal
      * compense le padding du scroll container, page se cale sous la navbar).
@@ -116,10 +128,11 @@
     busy = $bindable(false),
     summary = $bindable({ itemCount: 0, totalUnits: 0 }),
     existingLoanStatus = $bindable(null),
-    endDatePast = $bindable(false),
+    frozen = $bindable(false),
     dirty = $bindable(false),
     framed = false,
-    listFilter = { types: [], segments: [] },
+    listFilter = $bindable({ ...EMPTY_LOAN_FILTERS }),
+    showSegmentInline = false,
     stickyTopClass = "-top-4 sm:-top-2",
   }: Props = $props();
 
@@ -244,6 +257,17 @@
     today.setHours(0, 0, 0, 0);
     return new Date(endDate) < today;
   });
+
+  /** Retour déjà effectué : la réservation est conservée en lecture seule. */
+  const loanReturned = $derived(
+    mode === "edit" && existingLoan?.status === "completed",
+  );
+
+  /**
+   * Fiche figée (retour effectué ou date de fin passée) : plus aucune
+   * modification — l'historique doit refléter ce qui a réellement eu lieu.
+   */
+  const isFrozen = $derived(mode === "edit" && (isEndDatePast || loanReturned));
 
   // Utilise allMaterielsWithAvailability pour avoir TOUS les matériels
   // (même ceux avec availableForPeriod === 0) afin de détecter les conflits partiels
@@ -383,7 +407,7 @@
   });
   $effect(() => {
     existingLoanStatus = existingLoan?.status ?? null;
-    endDatePast = isEndDatePast;
+    frozen = isFrozen;
   });
 
   // Modifications non sauvegardées : comparaison à l'état d'ouverture. Le
@@ -556,7 +580,7 @@
     quantity: number;
   }[] {
     if (useFlat) {
-      // Liste non montée (date de fin passée : édition figée) → l'état
+      // Liste non montée (fiche figée : édition figée) → l'état
       // chargé de l'emprunt, sinon un submit écraserait les items.
       if (materielList) return materielList.getSelectedItems();
       return selectedMateriels
@@ -729,12 +753,23 @@
       </div>
     </div>
   {:else}
-    {#if mode === "edit" && isEndDatePast}
+    {#if mode === "edit" && loanReturned}
       <div class="alert alert-soft alert-info">
         <Info class="h-5 w-5" />
         <span>
-          La date de fin est passée. Vous pouvez modifier les dates et les
-          notes, mais pas les matériels ni l'événement lié.
+          Retour effectué
+          {#if existingLoan?.returnedAt}
+            le {formatDateDayMonthShort(existingLoan.returnedAt)}
+          {/if}
+          : la réservation est conservée en lecture seule.
+        </span>
+      </div>
+    {:else if mode === "edit" && isEndDatePast}
+      <div class="alert alert-soft alert-info">
+        <Info class="h-5 w-5" />
+        <span>
+          La date de fin est passée : la réservation est figée, elle ne peut
+          plus être modifiée.
         </span>
       </div>
     {/if}
@@ -747,7 +782,7 @@
         >
         <select
           disabled={loading ||
-            (mode === "edit" && isEndDatePast) ||
+            (mode === "edit" && isFrozen) ||
             !!preselectedEventId}
           value={selectedEventId || ""}
           onchange={(e) => {
@@ -773,7 +808,7 @@
             class="grow"
             bind:value={startDate}
             oninput={() => (userHasModifiedDates = true)}
-            disabled={loading}
+            disabled={loading || (mode === "edit" && isFrozen)}
           />
         </label>
 
@@ -787,7 +822,7 @@
             class="grow"
             bind:value={endDate}
             oninput={() => (userHasModifiedDates = true)}
-            disabled={loading}
+            disabled={loading || (mode === "edit" && isFrozen)}
             min={startDate}
           />
         </label>
@@ -826,7 +861,7 @@
           bind:value={notes}
           placeholder="Informations complémentaires sur l'emprunt..."
           maxlength="500"
-          disabled={loading}></textarea>
+          disabled={loading || (mode === "edit" && isFrozen)}></textarea>
       </fieldset>
     {/snippet}
 
@@ -840,7 +875,7 @@
             période.
           </span>
         </div>
-      {:else if mode === "edit" && isEndDatePast}
+      {:else if mode === "edit" && isFrozen}
         <div class="space-y-2">
           {#each selectedMateriels as materiel (materiel.materielId)}
             {@const TypeIcon =
@@ -879,12 +914,12 @@
         <LoanMaterielList
           bind:this={materielList}
           bind:quantities
+          bind:filter={listFilter}
           materiels={allMaterielsWithAvailability}
           ghostItems={flatGhostItems}
           {loading}
           stickyClass={stickyTopClass}
-          typeFilter={listFilter.types}
-          segments={listFilter.segments}
+          {showSegmentInline}
         />
       {:else if LegacySelection}
         <LegacySelection
@@ -896,7 +931,7 @@
         />
       {/if}
 
-      {#if hasConflicts && !(mode === "edit" && isEndDatePast)}
+      {#if hasConflicts && !(mode === "edit" && isFrozen)}
         <div class="alert alert-soft alert-warning">
           <AlertCircle class="h-5 w-5" />
           <div>

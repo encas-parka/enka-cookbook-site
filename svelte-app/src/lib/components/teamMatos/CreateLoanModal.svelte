@@ -8,6 +8,7 @@
    */
   import LoanForm from "./loan/LoanForm.svelte";
   import type { LoanSelectionSummary } from "./loan/loan.types";
+  import { EMPTY_LOAN_FILTERS } from "$lib/utils/materiel-list.utils";
   import ModalContainer from "../ui/modal/ModalContainer.svelte";
   import ModalContent from "../ui/modal/ModalContent.svelte";
   import ModalFooter from "../ui/modal/ModalFooter.svelte";
@@ -42,8 +43,10 @@
   let summary = $state<LoanSelectionSummary>({ itemCount: 0, totalUnits: 0 });
   /** La réservation existe-t-elle encore ? (bouton d'annulation) */
   let existingLoanStatus = $state<string | null>(null);
-  /** Date de fin passée : pas d'enregistrement possible. */
-  let endDatePast = $state(false);
+  /** Fiche figée (date de fin passée ou retour effectué) : pas d'enregistrement. */
+  let frozen = $state(false);
+  /** Filtres de la liste, partagés avec le sélecteur compact sous la recherche. */
+  let listFilter = $state({ ...EMPTY_LOAN_FILTERS });
   function handleClose() {
     form?.reset();
     onClose();
@@ -76,7 +79,9 @@
       bind:busy
       bind:summary
       bind:existingLoanStatus
-      bind:endDatePast
+      bind:frozen
+      bind:listFilter
+      showSegmentInline
       {ownerId}
       {ownerName}
       {loanId}
@@ -112,7 +117,7 @@
       <X class="h-5 w-5" />
       Annuler
     </button>
-    {#if !endDatePast}
+    {#if !frozen}
       <button
         class="btn btn-primary btn-sm"
         onclick={() => form?.submit()}

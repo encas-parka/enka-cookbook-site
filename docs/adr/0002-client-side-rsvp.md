@@ -1,5 +1,7 @@
 # ADR 0002 — Le RSVP porte l'accès côté client, les règles serveur restent volontairement grossières
 
+Date : 2026-10-22 · Statut : accepté
+
 ## Contexte
 
 Héritage Appwrite : l'invitation d'emails extérieurs vivait dans un champ de
@@ -28,7 +30,7 @@ Le lot Participation RSVP a refondé le modèle d'invitation :
 ## Décision
 
 Le RSVP porte l'accès côté client. Le serveur n'évalue pas l'invitation : il
-expose deux canaux bruts que l'organisateur écrit en bloc — `guestUsers`
+expose deux canaux bruts que l'éditeur écrit en bloc — `guestUsers`
 (visibilité individuelle) et `teams` (grant équipe) — et les règles events
 restent la disjonction grossière `teams.members ~` / `guestUsers ~` /
 `createdBy =`. Le dérivé « invité » (membre d'une équipe entière cochée, non
@@ -57,7 +59,7 @@ est supprimé, pas remplacé.
 ## Conséquences
 
 - Les règles ne séparent pas « qui pose les grants » de « qui confirme son
-  RSVP » : un invité passe la même updateRule que l'organisateur et écrit le
+  RSVP » : un invité passe la même updateRule que l'éditeur et écrit le
   record entier. Modèle de confiance assumé — le client est le seul
   arbitre des champs de grant, le serveur les livre en bloc.
 - Le statut « invité » des membres d'équipes entières est dérivé donc
@@ -65,7 +67,7 @@ est supprimé, pas remplacé.
   aucune écriture d'event.
 - Un email hors compte n'a aucune existence serveur avant le join par lien :
   ni visibilité, ni action — l'invitation s'arrête au registre côté
-  organisateur.
+  éditeur.
 - Une invitation fine côté serveur (réservation d'adresse, RSVP par email
   sans lien) demandera un nouvel ADR : le champ supprimé n'est pas
   réintroduit.

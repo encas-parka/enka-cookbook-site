@@ -27,7 +27,6 @@
     countAvailable,
     filterLoanMateriels,
     groupMaterielsByType,
-    summarizeSelection,
   } from "$lib/utils/materiel-list.utils";
 
   interface Props {
@@ -72,8 +71,6 @@
   const allUnavailable = $derived(
     materiels.length > 0 && countAvailable(materiels) === 0,
   );
-
-  const summary = $derived(summarizeSelection(quantities));
 
   const segmentOptions: { value: LoanListSegment; label: string }[] = [
     { value: "all", label: "Tout" },
@@ -135,6 +132,22 @@
     }
     quantities = next;
   }
+
+  function clearAllVisible() {
+    const next = { ...quantities };
+    for (const g of filteredGroups) {
+      for (const item of g.items) {
+        if ((next[item.id] ?? 0) >= 1) next[item.id] = 0;
+      }
+    }
+    quantities = next;
+  }
+
+  const canClearVisible = $derived(
+    filteredGroups.some((g) =>
+      g.items.some((m) => (quantities[m.id] ?? 0) >= 1),
+    ),
+  );
 
   const canTakeAll = $derived(
     filteredGroups.some((g) =>
@@ -213,7 +226,20 @@
         {/if}
       </label>
 
-      <div class="join w-full">
+      <!-- Filtres : select natif sous sm (4 libellés débordent en mobile),
+           segmented au-delà -->
+      <select
+        class="select w-full select-md sm:hidden"
+        bind:value={segment}
+        aria-label="Filtrer les matériels"
+        disabled={loading}
+      >
+        {#each segmentOptions as opt (opt.value)}
+          <option value={opt.value}>{opt.label}</option>
+        {/each}
+      </select>
+
+      <div class="join hidden w-full sm:flex">
         {#each segmentOptions as opt (opt.value)}
           <button
             class="btn join-item flex-1 btn-sm {segment === opt.value
@@ -227,12 +253,16 @@
         {/each}
       </div>
 
-      <div class="flex items-center justify-between px-1">
-        <span class="text-xs opacity-70">
-          {summary.itemCount}
-          matériel{summary.itemCount > 1 ? "s" : ""}&nbsp;—
-          {summary.totalUnits}&nbsp;unité{summary.totalUnits > 1 ? "s" : ""}
-        </span>
+      <div class="flex items-center justify-end gap-3 px-1">
+        <button
+          class="link text-xs font-medium link-error {canClearVisible
+            ? ''
+            : 'link-disabled'}"
+          onclick={clearAllVisible}
+          disabled={loading || !canClearVisible}
+        >
+          Tout retirer
+        </button>
         <button
           class="link text-xs font-medium link-primary {canTakeAll
             ? ''

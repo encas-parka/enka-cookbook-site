@@ -134,6 +134,7 @@
       step="1"
       value={quantity}
       autocomplete="off"
+      onfocus={(e) => e.currentTarget.select()}
       oninput={(e) => {
         const v = parseInt(e.currentTarget.value);
         if (!isNaN(v) && v >= 0) onchange(v);

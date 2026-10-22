@@ -1185,7 +1185,7 @@
       disabled={loading || loadingLoan}
     >
       <X class="h-5 w-5" />
-      Fermer
+      Annuler
     </button>
     {#if !(mode === "edit" && isEndDatePast)}
       <button

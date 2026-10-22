@@ -1,4 +1,18 @@
 <script lang="ts">
+  /**
+   * Liste plate de sélection du matériel d'un emprunt : recherche locale,
+   * groupes par type, quantités par item.
+   *
+   * Les facettes (types + segments) viennent de la sidebar de la page
+   * dossier et restent vides dans le modal (tout afficher) ; la recherche,
+   * elle, reste propre à la liste.
+   *
+   * Regroupement : en desktop les groupes sont toujours ouverts et leur
+   * en-tête n'est pas interactif ; en mobile ils sont repliés au départ et
+   * se comportent en accordéon — sauf quand la recherche est active ou que
+   * le segment « Sélectionnés » est coché : tous les groupes non vides
+   * s'ouvrent.
+   */
   import {
     AlertTriangle,
     ChevronDown,
@@ -16,9 +30,10 @@
   } from "@lucide/svelte";
   import type { Component } from "svelte";
   import CatalogItemRow from "./CatalogItemRow.svelte";
+  import { globalState } from "$lib/stores/GlobalState.svelte";
   import type {
     GhostLoanItem,
-    LoanListSegment,
+    LoanSegment,
     MaterielGroup,
     MaterielWithAvailability,
   } from "$lib/utils/materiel-list.utils";
@@ -27,6 +42,7 @@
     countAvailable,
     filterLoanMateriels,
     groupMaterielsByType,
+    loanTypeLabel,
   } from "$lib/utils/materiel-list.utils";
 
   interface Props {
@@ -37,6 +53,10 @@
     loading?: boolean;
     /** Projection réactive de la sélection (lecture côté parent, mutation ici). */
     quantities?: Record<string, number>;
+    /** Types affichés (facette sidebar) ; vide = tous. */
+    typeFilter?: string[];
+    /** Segments actifs (facette sidebar, union) ; vide = tous. */
+    segments?: LoanSegment[];
     /**
      * Point d'ancrage de la barre sticky, selon l'enveloppe : la modale
      * compense le padding du scroll container, la page se cale sous la
@@ -50,24 +70,28 @@
     ghostItems = [],
     loading = false,
     quantities = $bindable({}),
+    typeFilter = [],
+    segments = [],
     stickyClass = "-top-4 sm:-top-2",
   }: Props = $props();
 
   let search = $state("");
-  let segment = $state<LoanListSegment>("all");
-  /** Types repliés ; le premier groupe est ouvert, la recherche force l'ouverture. */
-  let collapsed = $state<Set<string>>(new Set());
+  /** Groupe déplié en mobile (accordéon) ; ignoré en desktop / recherche. */
+  let openType = $state<string | null>(null);
 
   const searchActive = $derived(search.trim().length > 0);
+  /** Contextes où l'accordéon cède : tous les groupes non vides sont ouverts. */
+  const forcedOpen = $derived(searchActive || segments.includes("selected"));
 
   const groups = $derived(groupMaterielsByType(materiels));
 
   const filteredGroups = $derived(
     groups
+      .filter((g) => typeFilter.length === 0 || typeFilter.includes(g.type))
       .map((g) => ({
         ...g,
         items: filterLoanMateriels(g.items, {
-          segment,
+          segments,
           quantities,
           search,
         }),
@@ -78,24 +102,6 @@
   const allUnavailable = $derived(
     materiels.length > 0 && countAvailable(materiels) === 0,
   );
-
-  const segmentOptions: { value: LoanListSegment; label: string }[] = [
-    { value: "all", label: "Tout" },
-    { value: "selected", label: "Sélectionnés" },
-    { value: "unselected", label: "Non sélectionnés" },
-    { value: "available", label: "Disponible" },
-  ];
-
-  const typeLabels: Record<string, string> = {
-    cooking: "Matériel de cuisine",
-    dish: "Vaisselle",
-    gaz: "Gaz",
-    hygiene: "Hygiène",
-    electronic: "Électronique",
-    manual: "Ustensiles",
-    tools: "Outils",
-    other: "Autre",
-  };
 
   const typeIcons: Record<string, Component<any>> = {
     cooking: ChefHat,
@@ -109,19 +115,12 @@
   };
 
   function isOpen(type: string): boolean {
-    // La recherche et le filtre « Sélectionnés » forcent l'ouverture : les
-    // groupes visibles portent alors toujours du contenu à montrer.
-    return searchActive || segment === "selected" || !collapsed.has(type);
+    return globalState.isDesktop || forcedOpen || openType === type;
   }
 
+  /** Accordéon mobile : déplier un groupe replie l'éventuel autre. */
   function toggleGroup(type: string) {
-    const next = new Set(collapsed);
-    if (next.has(type)) {
-      next.delete(type);
-    } else {
-      next.add(type);
-    }
-    collapsed = next;
+    openType = openType === type ? null : type;
   }
 
   function setQuantity(item: MaterielWithAvailability, qty: number) {
@@ -166,12 +165,11 @@
 
   // --- API impérative (bind:this côté parent) ---
 
-  /** Réinitialise la sélection et les filtres ; le premier groupe reste ouvert. */
+  /** Réinitialise la sélection et la recherche ; groupes repliés (mobile). */
   export function reset(initial: Record<string, number>) {
     quantities = { ...initial };
     search = "";
-    segment = "all";
-    collapsed = new Set(groups.slice(1).map((g) => g.type));
+    openType = null;
   }
 
   /** Items sélectionnés (quantité >= 1) avec le nom figé au moment du submit. */
@@ -234,33 +232,6 @@
           </button>
         {/if}
       </label>
-
-      <!-- Filtres : select natif sous sm (4 libellés débordent en mobile),
-           segmented au-delà -->
-      <select
-        class="select w-full select-md sm:hidden"
-        bind:value={segment}
-        aria-label="Filtrer les matériels"
-        disabled={loading}
-      >
-        {#each segmentOptions as opt (opt.value)}
-          <option value={opt.value}>{opt.label}</option>
-        {/each}
-      </select>
-
-      <div class="join hidden w-full sm:flex">
-        {#each segmentOptions as opt (opt.value)}
-          <button
-            class="btn join-item flex-1 btn-sm {segment === opt.value
-              ? 'btn-primary'
-              : 'btn-outline'}"
-            onclick={() => (segment = opt.value)}
-            disabled={loading}
-          >
-            {opt.label}
-          </button>
-        {/each}
-      </div>
     </div>
 
     <div class="flex items-center justify-end gap-3 px-1">
@@ -321,26 +292,41 @@
         (m) => (quantities[m.id] ?? 0) >= 1,
       ).length}
       <div class="rounded-lg border border-base-300 bg-base-200">
-        <button
-          class="flex w-full items-center gap-2 p-3 text-left text-sm font-semibold"
-          onclick={() => toggleGroup(group.type)}
-          aria-expanded={isOpen(group.type)}
-        >
-          <TypeIcon class="size-4 opacity-70" />
-          {typeLabels[group.type] ?? group.type}
-          {#if selectedCount > 0}
-            <span class="badge badge-sm tabular-nums badge-primary"
-              >{selectedCount}</span
-            >
-          {/if}
-          <ChevronDown
-            class="ml-auto size-4 opacity-50 transition-transform {isOpen(
-              group.type,
-            )
-              ? ''
-              : '-rotate-90'}"
-          />
-        </button>
+        {#if globalState.isDesktop}
+          <!-- Desktop : structure de lecture, jamais repliable. -->
+          <div
+            class="flex w-full items-center gap-2 p-3 text-left text-sm font-semibold"
+          >
+            <TypeIcon class="size-4 opacity-70" />
+            {loanTypeLabel(group.type)}
+            {#if selectedCount > 0}
+              <span class="badge badge-sm tabular-nums badge-primary"
+                >{selectedCount}</span
+              >
+            {/if}
+          </div>
+        {:else}
+          <button
+            class="flex w-full items-center gap-2 p-3 text-left text-sm font-semibold"
+            onclick={() => toggleGroup(group.type)}
+            aria-expanded={isOpen(group.type)}
+          >
+            <TypeIcon class="size-4 opacity-70" />
+            {loanTypeLabel(group.type)}
+            {#if selectedCount > 0}
+              <span class="badge badge-sm tabular-nums badge-primary"
+                >{selectedCount}</span
+              >
+            {/if}
+            <ChevronDown
+              class="ml-auto size-4 opacity-50 transition-transform {isOpen(
+                group.type,
+              )
+                ? ''
+                : '-rotate-90'}"
+            />
+          </button>
+        {/if}
         {#if isOpen(group.type)}
           <div class="space-y-1 px-3 pb-3">
             {#each group.items as item (item.id)}

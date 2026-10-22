@@ -8,7 +8,7 @@ import {
 } from "../materiel-list.utils";
 import type {
   MaterielWithAvailability,
-  LoanListSegment,
+  LoanSegment,
 } from "../materiel-list.utils";
 
 // Les utils ne lisent que id/name/type/availableForPeriod : le cast évite de
@@ -57,37 +57,49 @@ describe("filterLoanMateriels", () => {
     makeItem({ id: "c", name: "Plaque", availableForPeriod: 5 }),
   ];
 
-  function filter(
-    segment: LoanListSegment,
+  function filterWith(
+    segments: LoanSegment[],
     quantities: Record<string, number> = {},
     search = "",
   ) {
-    return filterLoanMateriels(items, { segment, quantities, search });
+    return filterLoanMateriels(items, { segments, quantities, search });
   }
 
-  it("segment 'all' : tout passe", () => {
-    expect(filter("all")).toHaveLength(3);
+  it("aucun segment actif : tout passe", () => {
+    expect(filterWith([])).toHaveLength(3);
   });
 
-  it("segment 'selected' : quantité >= 1", () => {
-    expect(filter("selected", { a: 1 }).map((i) => i.id)).toEqual(["a"]);
+  it("un segment actif : filtre exclusif classique", () => {
+    expect(filterWith(["selected"], { a: 1 }).map((i) => i.id)).toEqual(["a"]);
+    expect(filterWith(["unselected"], { a: 2 }).map((i) => i.id)).toEqual([
+      "b",
+      "c",
+    ]);
+    expect(filterWith(["available"]).map((i) => i.id)).toEqual(["a", "c"]);
   });
 
-  it("segment 'unselected' : quantité 0 ou absente", () => {
-    expect(filter("unselected", { a: 2 }).map((i) => i.id)).toEqual(["b", "c"]);
-  });
-
-  it("segment 'available' : disponible sur période > 0 uniquement", () => {
-    expect(filter("available").map((i) => i.id)).toEqual(["a", "c"]);
+  it("plusieurs segments : union sans doublon", () => {
+    // a est à la fois sélectionné et disponible : une seule occurrence
+    expect(
+      filterWith(["selected", "available"], { a: 1 }).map((i) => i.id),
+    ).toEqual(["a", "c"]);
+    // l'union sélectionnés ∪ non sélectionnés couvre tout
+    expect(
+      filterWith(["selected", "unselected"], { a: 1 }).map((i) => i.id),
+    ).toEqual(["a", "b", "c"]);
   });
 
   it("recherche : filtre insensible à la casse sur le nom", () => {
-    expect(filter("all", {}, "louc").map((i) => i.id)).toEqual(["b"]);
+    expect(filterWith([], {}, "louc").map((i) => i.id)).toEqual(["b"]);
   });
 
-  it("recherche et segment se composent (critères indépendants)", () => {
-    expect(filter("selected", { c: 1 }, "pla").map((i) => i.id)).toEqual(["c"]);
-    expect(filter("selected", {}, "pla").map((i) => i.id)).toEqual([]);
+  it("recherche et union se composent (critères indépendants)", () => {
+    expect(
+      filterWith(["selected", "available"], { a: 1, c: 1 }, "pla").map(
+        (i) => i.id,
+      ),
+    ).toEqual(["c"]);
+    expect(filterWith(["selected"], {}, "pla")).toHaveLength(0);
   });
 });
 

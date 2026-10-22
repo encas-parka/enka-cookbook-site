@@ -205,7 +205,10 @@
       <p class="text-sm">Aucun matériel dans l'inventaire de l'équipe</p>
     </div>
   {:else}
-    <div class="sticky top-0 z-10 space-y-2 bg-base-100 py-2">
+    <!-- top négatif = padding-top de ModalContent (p-4 / sm:pt-2) : le bloc
+         se colle au bord réel du scroll container, juste sous le ModalHeader,
+         au lieu du padding edge qui laissait les rangées défiler en clair -->
+    <div class="sticky -top-4 z-10 space-y-2 bg-base-100 py-2 sm:-top-2">
       <label class="input w-full input-md">
         <Search class="size-4 opacity-50" />
         <input

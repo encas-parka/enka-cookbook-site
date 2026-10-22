@@ -623,7 +623,10 @@
       });
 
       toastService.success("Réservation modifiée avec succès");
-      resetForm();
+      // Pas de reset ici : la page dossier reste affichée après enregistrement,
+      // le formulaire doit garder ses valeurs (baseline recapturée → dirty
+      // repasse à false). Le modal se ferme de toute façon.
+      baseline = currentSignature();
       onSaved?.();
     } catch (error) {
       console.error(
@@ -661,6 +664,9 @@
       await materielStore.cancelLoan(loanId);
       toastService.success("Réservation annulée");
       resetForm();
+      // Recapture : sinon le reset relèverait `dirty` et le guard de
+      // navigation demanderait confirmation pour une navigation voulue.
+      baseline = currentSignature();
       onCancelled?.();
     } catch {
       toastService.error("Erreur lors de l'annulation de la réservation");

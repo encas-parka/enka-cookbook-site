@@ -68,7 +68,12 @@ export const routes: Routes = {
     "/materiel/:teamId": () => import("$lib/routes/MaterielPage.svelte"),
     "/loans": () => import("$lib/routes/LoansPage.svelte"),
     "/loans/:teamId": () => import("$lib/routes/LoansPage.svelte"),
+    // Fiche retour (url historique) : redirection vers le dossier emprunt.
     "/loans/return/:loanId": () => import("$lib/routes/LoanReturnPage.svelte"),
+    // Dossier emprunt : création (`new`) puis édition + fiche de retour.
+    "/loans/:teamId/new": () => import("$lib/routes/LoanEditRoute.svelte"),
+    "/loans/:teamId/loan/:loanId": () =>
+      import("$lib/routes/LoanEditRoute.svelte"),
   },
 
   // Recettes privées

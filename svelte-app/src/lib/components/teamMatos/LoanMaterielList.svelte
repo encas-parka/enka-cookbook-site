@@ -37,6 +37,12 @@
     loading?: boolean;
     /** Projection réactive de la sélection (lecture côté parent, mutation ici). */
     quantities?: Record<string, number>;
+    /**
+     * Point d'ancrage de la barre sticky, selon l'enveloppe : la modale
+     * compense le padding du scroll container, la page se cale sous la
+     * navbar (top-12).
+     */
+    stickyClass?: string;
   }
 
   let {
@@ -44,6 +50,7 @@
     ghostItems = [],
     loading = false,
     quantities = $bindable({}),
+    stickyClass = "-top-4 sm:-top-2",
   }: Props = $props();
 
   let search = $state("");
@@ -205,10 +212,9 @@
       <p class="text-sm">Aucun matériel dans l'inventaire de l'équipe</p>
     </div>
   {:else}
-    <!-- top négatif = padding-top de ModalContent (p-4 / sm:pt-2) : le bloc
-         se colle au bord réel du scroll container, juste sous le ModalHeader,
-         au lieu du padding edge qui laissait les rangées défiler en clair -->
-    <div class="sticky -top-4 z-10 space-y-2 bg-base-100 py-2 sm:-top-2">
+    <!-- Ancrage sticky défini par l'enveloppe (modal : compense le padding
+         du scroll container ; page : se cale sous la navbar) -->
+    <div class="sticky z-10 space-y-2 bg-base-100 py-2 {stickyClass}">
       <label class="input w-full input-md">
         <Search class="size-4 opacity-50" />
         <input

@@ -6,61 +6,32 @@
   import { globalState } from "$lib/stores/GlobalState.svelte";
   import { nativeTeamsStore } from "$lib/stores/NativeTeamsStore.svelte";
   import { navBarStore } from "../stores/NavBarStore.svelte";
-  import CreateLoanModal from "$lib/components/teamMatos/CreateLoanModal.svelte";
   import LoanCard from "$lib/components/teamMatos/LoanCard.svelte";
-  import { route, navigate } from "$lib/router";
+  import { route, navigate, navigateTo } from "$lib/router";
   import { toastService } from "$lib/services/toast.service.svelte";
 
   // État de la page
-  let createLoanModalOpen = $state(false);
   let activeTeamId = $state<string | null>(null);
   let isRedirecting = $state(false);
-  let editingLoanId = $state<string | null>(null); // ID du loan en édition
 
-  // Ouvrir le modal de création d'emprunt
-  function openCreateLoanModal() {
+  // Ouvrir la page de création d'emprunt
+  function openCreateLoanPage() {
     if (!activeTeamId) return;
-
-    // Trouver l'équipe active
-    const team = userTeams.find((t) => t.id === activeTeamId);
-    if (!team) {
-      toastService.error("Équipe introuvable");
-      return;
-    }
-
-    editingLoanId = null; // Réinitialiser en mode création
-    createLoanModalOpen = true;
+    navigateTo(`/dashboard/loans/${activeTeamId}/new`);
   }
 
-  // Ouvrir le modal d'édition d'emprunt
-  function openEditLoanModal(loanId: string) {
+  // Ouvrir le dossier d'un emprunt (modification, fiche de retour)
+  function openLoanDossier(loanId: string) {
     if (!activeTeamId) return;
-
-    const team = userTeams.find((t) => t.id === activeTeamId);
-    if (!team) {
-      toastService.error("Équipe introuvable");
-      return;
-    }
-
-    editingLoanId = loanId;
-    createLoanModalOpen = true;
+    navigateTo(`/dashboard/loans/${activeTeamId}/loan/${loanId}`);
   }
 
-  // Fermer le modal de création d'emprunt
-  function closeCreateLoanModal() {
-    createLoanModalOpen = false;
-    editingLoanId = null; // Réinitialiser le mode édition
-  }
-
-  // Après création d'emprunt
-  function handleLoanCreated() {
-    console.log("[LoansPage] Emprunt créé avec succès");
-    closeCreateLoanModal();
-  }
-
-  // Ouvrir la fiche de retour
+  // Ouvrir la fiche de retour (onglet du dossier emprunt)
   function openReturnForm(loanId: string) {
-    navigate(`/dashboard/loans/return/${loanId}`);
+    if (!activeTeamId) return;
+    navigateTo(`/dashboard/loans/${activeTeamId}/loan/${loanId}`, {
+      search: { tab: "return" },
+    });
   }
 
   // Actions sur les emprunts
@@ -246,7 +217,7 @@
           <p class="mb-6 text-base-content/60">
             Cette équipe n'a pas encore d'emprunt.
           </p>
-          <button class="btn btn-primary btn-sm" onclick={openCreateLoanModal}>
+          <button class="btn btn-primary btn-sm" onclick={openCreateLoanPage}>
             Créer une réservation
           </button>
         </div>
@@ -256,7 +227,7 @@
           <div class="mb-6 flex justify-end">
             <button
               class="btn flex gap-2 btn-primary btn-sm"
-              onclick={openCreateLoanModal}
+              onclick={openCreateLoanPage}
             >
               <Plus class="size-4" />
               Ajouter une reservation
@@ -269,7 +240,7 @@
               onAccept={handleAcceptLoan}
               onCancel={handleCancelLoan}
               onDelete={handleDeleteLoan}
-              onEdit={openEditLoanModal}
+              onEdit={openLoanDossier}
             />
           {/each}
           {#if oldCompletedCount > 0}
@@ -289,15 +260,3 @@
     {/if}
   </div>
 </div>
-
-<!-- Modal de création d'emprunt -->
-{#if activeTeam}
-  <CreateLoanModal
-    isOpen={createLoanModalOpen}
-    onClose={closeCreateLoanModal}
-    onSuccess={handleLoanCreated}
-    ownerId={activeTeam.id}
-    ownerName={activeTeam.name}
-    loanId={editingLoanId ?? undefined}
-  />
-{/if}

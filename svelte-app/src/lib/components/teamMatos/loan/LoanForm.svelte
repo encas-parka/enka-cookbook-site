@@ -69,8 +69,10 @@
     preselectedEventId?: string;
     /** Parcours de sélection du matériel. */
     selectionMode?: "flat" | "legacy";
-    /** Appelé après une sauvegarde réussie. */
-    onSaved?: () => void;
+    /** Appelé après une sauvegarde réussie (emprunt créé ou mis à jour). */
+    onSaved?: (loan?: EnrichedMaterielLoan) => void;
+    /** Appelé quand la réservation a été annulée. */
+    onCancelled?: () => void;
     /** Appelé quand l'utilisateur abandonne. */
     onCancel?: () => void;
     /** Le formulaire est-il prêt à être soumis ? */
@@ -81,6 +83,13 @@
     summary?: LoanSelectionSummary;
     /** Statut de l'emprunt chargé (édition) ; null en création. */
     existingLoanStatus?: string | null;
+    /** L'utilisateur a-t-il modifié le formulaire ? */
+    dirty?: boolean;
+    /**
+     * Ancrage sticky de la liste de matériel, selon l'enveloppe (modal
+     * compense le padding du scroll container, page se cale sous la navbar).
+     */
+    stickyTopClass?: string;
   }
 
   let {
@@ -90,11 +99,14 @@
     preselectedEventId,
     selectionMode = "flat",
     onSaved,
+    onCancelled,
     onCancel,
     valid = $bindable(false),
     busy = $bindable(false),
     summary = $bindable({ itemCount: 0, totalUnits: 0 }),
     existingLoanStatus = $bindable(null),
+    dirty = $bindable(false),
+    stickyTopClass = "-top-4 sm:-top-2",
   }: Props = $props();
 
   const useFlat = $derived(selectionMode === "flat");
@@ -359,12 +371,31 @@
     existingLoanStatus = existingLoan?.status ?? null;
   });
 
+  // Modifications non sauvegardées : comparaison à l'état d'ouverture. Le
+  // snapshot est lu hors graphe pour que sa capture ne relance pas l'effet.
+  let baseline = $state<string | null>(null);
+
+  function currentSignature(): string {
+    return JSON.stringify({
+      startDate,
+      endDate,
+      notes,
+      selectedEventId,
+      quantities,
+      selectedMateriels,
+    });
+  }
+
   // Passe d'ouverture : une exécution par (mode, loanId), hors graphe
   // réactif — syncRevalidate et getLoanById réécrivent #raw (sync → Dexie →
   // liveQuery) ; trackés, chaque écriture relancerait cet effet et
   // re-syncerait en boucle. Fraîcheur en session : SSE + orchestrateur de
   // resync ; disponibilités/conflits restent réactifs via les $derived.
   $effect(() => {
+    // L'init suit l'emprunt : sv-router réutilise le composant entre deux
+    // urls du même motif (création → édition d'un autre emprunt).
+    const openKey = `${mode}:${loanId ?? "new"}`;
+
     untrack(() => {
       // Delta sync silencieux à l'ouverture ; l'affichage se met à jour
       // quand le résultat atterrit en Dexie (échec silencieux — le statut
@@ -416,6 +447,19 @@
   $effect(() => {
     if (!useFlat || loadingLoan) return;
     materielList?.reset(flatInitialQuantities);
+  });
+
+  // Suivi des modifications non sauvegardées. L'effet est déclaré après
+  // l'init et après le remplissage de la sélection : le premier passage
+  // capture l'état d'ouverture, les suivants comparent.
+  $effect(() => {
+    const signature = currentSignature();
+    const base = untrack(() => baseline);
+    if (base === null) {
+      baseline = signature;
+      return;
+    }
+    dirty = signature !== base;
   });
 
   function buildConflictMessage(): string {
@@ -527,7 +571,7 @@
           ? availableEvents.find((e) => e.id === selectedEventId)
           : null;
 
-        await materielStore.createLoan({
+        const created = await materielStore.createLoan({
           startDate,
           endDate,
           responsibleId,
@@ -542,27 +586,29 @@
         });
 
         toastService.success("Réservation créée avec succès");
-      } else {
-        if (!loanId) {
-          throw new Error("loanId manquant en mode édition");
-        }
-
-        const evt = selectedEventId
-          ? availableEvents.find((e) => e.id === selectedEventId)
-          : null;
-
-        await materielStore.updateLoan(loanId, {
-          startDate,
-          endDate,
-          materiels: materielItems,
-          notes: notes.trim() || undefined,
-          eventId: selectedEventId,
-          eventName: evt?.name || null,
-        });
-
-        toastService.success("Réservation modifiée avec succès");
+        resetForm();
+        onSaved?.(created);
+        return;
       }
 
+      if (!loanId) {
+        throw new Error("loanId manquant en mode édition");
+      }
+
+      const evt = selectedEventId
+        ? availableEvents.find((e) => e.id === selectedEventId)
+        : null;
+
+      await materielStore.updateLoan(loanId, {
+        startDate,
+        endDate,
+        materiels: materielItems,
+        notes: notes.trim() || undefined,
+        eventId: selectedEventId,
+        eventName: evt?.name || null,
+      });
+
+      toastService.success("Réservation modifiée avec succès");
       resetForm();
       onSaved?.();
     } catch (error) {
@@ -601,7 +647,7 @@
       await materielStore.cancelLoan(loanId);
       toastService.success("Réservation annulée");
       resetForm();
-      onSaved?.();
+      onCancelled?.();
     } catch {
       toastService.error("Erreur lors de l'annulation de la réservation");
     } finally {
@@ -814,6 +860,7 @@
           materiels={allMaterielsWithAvailability}
           ghostItems={flatGhostItems}
           {loading}
+          stickyClass={stickyTopClass}
         />
       {:else if LegacySelection}
         <LegacySelection

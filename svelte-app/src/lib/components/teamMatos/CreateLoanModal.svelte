@@ -51,6 +51,11 @@
     onClose();
     onSuccess?.();
   }
+
+  function handleCancelled() {
+    onClose();
+    onSuccess?.();
+  }
 </script>
 
 <ModalContainer {isOpen} onClose={handleClose} maxWidth="lg">
@@ -74,6 +79,7 @@
       {loanId}
       {preselectedEventId}
       onSaved={handleSaved}
+      onCancelled={handleCancelled}
       onCancel={handleClose}
     />
   </ModalContent>

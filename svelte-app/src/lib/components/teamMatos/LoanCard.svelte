@@ -272,14 +272,14 @@
         </div>
         <!-- Notes (si présentes) -->
         {#if loan.notes}
-          <div class="text-xs text-base-content/60 italic">
+          <div class="text-sm text-base-content/60 italic">
             "{loan.notes}"
           </div>
         {/if}
         <!-- Matériels -->
         <div class="flex flex-wrap gap-2">
           {#each materiels as m (m.materielId)}
-            <span class="badge h-auto badge-soft badge-sm {getBadgeClass(m)}">
+            <span class="badge h-auto badge-soft {getBadgeClass(m)}">
               <span> {m.materielName} </span>
               <span class="badge badge-sm"> × {m.quantity}</span>
             </span>
@@ -288,7 +288,7 @@
 
         <!-- Return notes (si présentes) -->
         {#if loan.returnNotes}
-          <div class="rounded bg-warning/10 p-2 text-xs text-warning">
+          <div class="rounded bg-warning/10 p-2 text-sm text-warning">
             <strong>Retour :</strong>
             {loan.returnNotes}
           </div>

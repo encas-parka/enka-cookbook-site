@@ -859,7 +859,7 @@
           class="textarea w-full"
           rows="2"
           bind:value={notes}
-          placeholder="Informations complémentaires sur l'emprunt..."
+          placeholder="Informations complémentaires sur l'emprunt...Vous pouvez notamment y indiquer du matériel emprunté qui ne figure pas dans l'inventaire."
           maxlength="500"
           disabled={loading || (mode === "edit" && isFrozen)}></textarea>
       </fieldset>

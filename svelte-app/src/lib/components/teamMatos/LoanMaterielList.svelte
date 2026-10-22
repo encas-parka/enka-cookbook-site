@@ -28,6 +28,7 @@
     Wrench,
     X,
     Zap,
+    Info,
   } from "@lucide/svelte";
   import type { Component } from "svelte";
   import CatalogItemRow from "./CatalogItemRow.svelte";
@@ -292,7 +293,7 @@
         >
           {#each segmentInlineOptions as opt (opt.value)}
             <button
-              class="btn flex-1 btn-xs {filter.segment === opt.value &&
+              class="btn flex-1 btn-sm {filter.segment === opt.value &&
                 'btn-secondary'}"
               type="button"
               aria-pressed={filter.segment === opt.value}
@@ -306,18 +307,24 @@
       {/if}
     </div>
 
+    <div class="alert alert-soft alert-info">
+      <Info class="size-5" />
+      Sélectionner le matériel que vous souhaitez emprunter en indiquant les quantités
+      voulues
+    </div>
     {#if selectedItems.length > 0}
       <!-- Récapitulatif de la sélection : plié à deux lignes, badges
            cliquables (défile vers la rangée du matériel) -->
-      <div class="rounded-2xl border border-base-200 bg-base-100">
+      <div class="rounded-2xl border border-base-200 bg-base-200/60 p-2">
+        <div class=" text-base-content/70">Votre réservation :</div>
         <div
-          class="flex flex-wrap gap-1 overflow-hidden p-2 {badgesOpen
+          class="flex flex-wrap gap-1 overflow-hidden py-2 {badgesOpen
             ? 'max-h-none'
-            : 'max-h-14'}"
+            : 'max-h-18'}"
         >
           {#each selectedItems as sel (sel.id)}
             <button
-              class="btn gap-1 btn-outline btn-xs"
+              class="btn gap-1 btn-soft btn-sm"
               type="button"
               title="Aller au matériel dans la liste"
               onclick={() => scrollToMateriel(sel.id)}
@@ -343,7 +350,9 @@
       </div>
     {/if}
 
-    <div class="flex items-center justify-end gap-3 px-1">
+    <div
+      class="mx-auto mt-4 flex max-w-3xl items-center justify-end gap-3 px-1"
+    >
       <button
         class="link text-xs font-medium link-error {canClearVisible
           ? ''
@@ -400,13 +409,15 @@
       {@const selectedCount = group.items.filter(
         (m) => (quantities[m.id] ?? 0) >= 1,
       ).length}
-      <div class="rounded-lg border border-base-300 bg-base-200">
+      <div
+        class="mx-auto max-w-3xl rounded-lg border border-base-300 bg-base-200"
+      >
         {#if globalState.isDesktop}
           <!-- Desktop : structure de lecture, jamais repliable. -->
           <div
-            class="flex w-full items-center gap-2 p-3 text-left text-sm font-semibold"
+            class="flex w-full items-center gap-2 p-3 text-left font-semibold"
           >
-            <TypeIcon class="size-4 opacity-70" />
+            <TypeIcon class="size-6 opacity-70" />
             {loanTypeLabel(group.type)}
             {#if selectedCount > 0}
               <span class="badge badge-sm tabular-nums badge-primary"
@@ -416,11 +427,11 @@
           </div>
         {:else}
           <button
-            class="flex w-full items-center gap-2 p-3 text-left text-sm font-semibold"
+            class="flex w-full items-center gap-2 p-3 text-left text-base font-semibold"
             onclick={() => toggleGroup(group.type)}
             aria-expanded={isOpen(group.type)}
           >
-            <TypeIcon class="size-4 opacity-70" />
+            <TypeIcon class="size-6 opacity-70" />
             {loanTypeLabel(group.type)}
             {#if selectedCount > 0}
               <span class="badge badge-sm tabular-nums badge-primary"

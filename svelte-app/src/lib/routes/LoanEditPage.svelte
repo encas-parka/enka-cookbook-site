@@ -179,6 +179,15 @@
 
 {#snippet navActions()}
   <div class="flex items-center gap-2">
+    <button
+      class="btn btn-ghost btn-sm"
+      onclick={goBack}
+      disabled={busy || returnSaving}
+      title="Revenir aux réservations"
+    >
+      <X class="h-4 w-4" />
+      <span class="hidden sm:inline">Annuler</span>
+    </button>
     {#if tab === "return" && loan}
       <button
         class="btn btn-circle btn-primary btn-sm"
@@ -229,15 +238,6 @@
         </button>
       {/if}
     {/if}
-    <button
-      class="btn btn-ghost btn-sm"
-      onclick={goBack}
-      disabled={busy || returnSaving}
-      title="Revenir aux réservations"
-    >
-      <X class="h-4 w-4" />
-      <span class="hidden sm:inline">Annuler</span>
-    </button>
   </div>
 {/snippet}
 

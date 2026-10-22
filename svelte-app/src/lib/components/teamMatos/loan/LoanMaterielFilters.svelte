@@ -57,7 +57,8 @@
       </button>
       {#each availableTypes as type (type)}
         <button
-          class="btn flex-1 btn-sm {filters.type === type && 'btn-secondary'}"
+          class="btn min-w-fit flex-1 btn-sm {filters.type === type &&
+            'btn-secondary'}"
           type="button"
           aria-pressed={filters.type === type}
           onclick={() => setFilter({ type })}
@@ -72,7 +73,8 @@
   <Fieldset legend="Affichage" iconComponent={ListFilter}>
     <div class="flex flex-wrap gap-1 rounded-xl bg-base-100 p-2 font-semibold">
       <button
-        class="btn flex-1 btn-sm {filters.segment === '' && 'btn-secondary'}"
+        class="btn min-w-fit flex-1 btn-sm {filters.segment === '' &&
+          'btn-secondary'}"
         type="button"
         aria-pressed={filters.segment === ""}
         onclick={() => setFilter({ segment: "" })}
@@ -80,7 +82,7 @@
         Tous
       </button>
       <button
-        class="btn flex-1 btn-sm {filters.segment === 'selected' &&
+        class="btn min-w-fit flex-1 btn-sm {filters.segment === 'selected' &&
           'btn-secondary'}"
         type="button"
         aria-pressed={filters.segment === "selected"}
@@ -89,7 +91,7 @@
         Sélectionnés
       </button>
       <button
-        class="btn flex-1 btn-sm {filters.segment === 'unselected' &&
+        class="btn min-w-fit flex-1 btn-sm {filters.segment === 'unselected' &&
           'btn-secondary'}"
         type="button"
         aria-pressed={filters.segment === "unselected"}

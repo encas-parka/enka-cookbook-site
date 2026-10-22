@@ -69,26 +69,26 @@
 </script>
 
 <div
-  class="flex flex-col gap-2 rounded-lg border px-3 py-2 transition-colors sm:flex-row sm:items-center sm:justify-between {disabled
-    ? 'border-base-300 bg-base-300/50 opacity-60'
+  class="flex flex-col gap-2 rounded-lg border bg-base-100 px-3 py-2 transition-colors sm:flex-row sm:items-center sm:justify-between {disabled
+    ? 'border-base-300 bg-base-300/50 opacity-60 '
     : isActive
-      ? 'border-primary/40 bg-primary/10'
-      : 'border-base-300 bg-base-100'}"
+      ? 'border-0 font-medium text-primary ring-1 ring-primary/40 ring-inset'
+      : 'border-base-300'}"
 >
   <div class="flex min-w-0 items-center gap-2">
-    <span class="text-sm sm:truncate {showStatusBadge ? 'line-through' : ''}"
+    <span class="text-base sm:truncate {showStatusBadge ? 'line-through' : ''}"
       >{name}</span
     >
     {#if showStatusBadge}
-      <span class="badge flex-none badge-xs badge-error"
+      <span class="badge flex-none badge-sm badge-error"
         >{unavailableLabel}</span
       >
     {:else if badge !== undefined}
-      <span class="badge flex-none badge-ghost badge-xs tabular-nums"
-        >{badge}</span
+      <span class="badge flex-none badge-ghost badge-sm tabular-nums"
+        ><span class="opacity-70">dispo:</span> {badge}</span
       >
     {:else if hasExisting}
-      <span class="badge flex-none badge-ghost badge-xs"
+      <span class="badge flex-none badge-ghost badge-sm"
         >{existingLabel} {existingQuantity}</span
       >
     {/if}

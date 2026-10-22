@@ -198,7 +198,8 @@
         <input
           type="text"
           bind:value={search}
-          placeholder="Rechercher du matériel..."
+          placeholder="Rechercher du matériel…"
+          autocomplete="off"
           disabled={loading}
         />
         {#if searchActive}
@@ -229,9 +230,8 @@
       <div class="flex items-center justify-between px-1">
         <span class="text-xs opacity-70">
           {summary.itemCount}
-          matériel{summary.itemCount > 1 ? "s" : ""} —
-          {summary.totalUnits}
-          unité{summary.totalUnits > 1 ? "s" : ""}
+          matériel{summary.itemCount > 1 ? "s" : ""}&nbsp;—
+          {summary.totalUnits}&nbsp;unité{summary.totalUnits > 1 ? "s" : ""}
         </span>
         <button
           class="link text-xs font-medium link-primary {canTakeAll
@@ -267,7 +267,6 @@
               name={ghost.materielName}
               quantity={ghost.quantity}
               size="md"
-              wrap
               disabled
               unavailableLabel="Supprimé"
               onchange={() => {}}
@@ -279,6 +278,9 @@
 
     {#each filteredGroups as group (group.type)}
       {@const TypeIcon = typeIcons[group.type] ?? Package}
+      {@const selectedCount = group.items.filter(
+        (m) => (quantities[m.id] ?? 0) >= 1,
+      ).length}
       <div class="rounded-lg border border-base-300 bg-base-200">
         <button
           class="flex w-full items-center gap-2 p-3 text-left text-sm font-semibold"
@@ -287,6 +289,11 @@
         >
           <TypeIcon class="size-4 opacity-70" />
           {typeLabels[group.type] ?? group.type}
+          {#if selectedCount > 0}
+            <span class="badge badge-sm tabular-nums badge-primary"
+              >{selectedCount}</span
+            >
+          {/if}
           <ChevronDown
             class="ml-auto size-4 opacity-50 transition-transform {isOpen(
               group.type,
@@ -299,18 +306,19 @@
           <div class="space-y-1 px-3 pb-3">
             {#each group.items as item (item.id)}
               {@const max = item.availableForPeriod ?? 0}
-              <CatalogItemRow
-                name={item.name}
-                quantity={quantities[item.id] ?? 0}
-                maxQuantity={max}
-                showTakeAll
-                size="md"
-                wrap
-                badge={`${max}/${item.quantity}`}
-                disabled={loading || max === 0}
-                unavailableLabel="Indisponible"
-                onchange={(qty) => setQuantity(item, qty)}
-              />
+              <div class="materiel-row">
+                <CatalogItemRow
+                  name={item.name}
+                  quantity={quantities[item.id] ?? 0}
+                  maxQuantity={max}
+                  showTakeAll
+                  size="md"
+                  badge={`${max}/${item.quantity}`}
+                  disabled={loading || max === 0}
+                  unavailableLabel="Indisponible"
+                  onchange={(qty) => setQuantity(item, qty)}
+                />
+              </div>
             {/each}
           </div>
         {/if}
@@ -323,3 +331,12 @@
     {/each}
   {/if}
 </div>
+
+<style>
+  /* Inventaire ~110 items : skip layout/paint des rows hors viewport
+     (guideline >50 items) ; auto mémorise la dernière taille rendue. */
+  .materiel-row {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 60px;
+  }
+</style>

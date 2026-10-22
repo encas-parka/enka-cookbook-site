@@ -20,8 +20,6 @@
     unavailableLabel?: string;
     /** Badge informatif à côté du nom (ex. "2/5" : dispo/possédé). */
     badge?: string;
-    /** Nom sur 2 lignes (line-clamp) au lieu du tronquage — mobile. */
-    wrap?: boolean;
   }
 
   let {
@@ -37,7 +35,6 @@
     disabled = false,
     unavailableLabel,
     badge,
-    wrap = false,
   }: Props = $props();
 
   const isActive = $derived(quantity > 0);
@@ -64,17 +61,15 @@
 </script>
 
 <div
-  class="flex items-center justify-between gap-2 rounded-lg border px-3 py-2 transition-colors {disabled
+  class="flex flex-col gap-2 rounded-lg border px-3 py-2 transition-colors sm:flex-row sm:items-center sm:justify-between {disabled
     ? 'border-base-300 bg-base-300/50 opacity-60'
     : isActive
       ? 'border-primary/40 bg-primary/10'
       : 'border-base-300 bg-base-100'}"
 >
-  <div class="flex min-w-0 flex-1 items-center gap-2">
-    <span
-      class="text-sm {wrap
-        ? 'line-clamp-2 break-words whitespace-normal'
-        : 'truncate'} {showStatusBadge ? 'line-through' : ''}">{name}</span
+  <div class="flex min-w-0 items-center gap-2">
+    <span class="text-sm sm:truncate {showStatusBadge ? 'line-through' : ''}"
+      >{name}</span
     >
     {#if showStatusBadge}
       <span class="badge flex-none badge-xs badge-error"
@@ -99,9 +94,11 @@
     {/if}
   </div>
 
-  <div class="flex flex-none items-center gap-1">
+  <div class="flex flex-none items-center justify-end gap-1">
     <button
-      class="btn btn-square btn-ghost {size === 'md' ? 'btn-md' : 'btn-xs'}"
+      class="btn btn-square scroll-mt-40 btn-ghost {size === 'md'
+        ? 'btn-md'
+        : 'btn-xs'}"
       onclick={decrement}
       disabled={disabled || quantity <= 0}
       aria-label="Diminuer"
@@ -115,11 +112,12 @@
       max={maxQuantity === undefined ? undefined : maxQuantity}
       step="1"
       value={quantity}
+      autocomplete="off"
       oninput={(e) => {
         const v = parseInt(e.currentTarget.value);
         if (!isNaN(v) && v >= 0) onchange(v);
       }}
-      class="quantity-input input {size === 'md'
+      class="quantity-input input scroll-mt-40 {size === 'md'
         ? 'w-16 input-md'
         : 'w-14 input-xs'} text-center font-semibold tabular-nums {isActive
         ? 'input-primary'
@@ -129,7 +127,9 @@
     />
 
     <button
-      class="btn btn-square btn-ghost {size === 'md' ? 'btn-md' : 'btn-xs'}"
+      class="btn btn-square scroll-mt-40 btn-ghost {size === 'md'
+        ? 'btn-md'
+        : 'btn-xs'}"
       onclick={increment}
       disabled={!canIncrement}
       aria-label="Augmenter"
@@ -139,11 +139,11 @@
 
     {#if showTakeAll && maxQuantity !== undefined}
       <button
-        class="btn btn-ghost {size === 'md' ? 'btn-sm' : 'btn-xs'}"
+        class="btn scroll-mt-40 btn-ghost {size === 'md' ? 'btn-sm' : 'btn-xs'}"
         onclick={takeAll}
         disabled={disabled || quantity >= maxQuantity}
       >
-        tout
+        Tout
       </button>
     {/if}
   </div>

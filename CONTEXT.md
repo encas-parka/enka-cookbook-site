@@ -1,6 +1,6 @@
 # ENKA-COOKBOOK
 
-Application collaborative d'organisation d'événements culinaires (menus, repas, matériel, tâches) pour des équipes de cuisiniers. Ce glossaire fixe le vocabulaire du domaine participation & accès aux événements.
+Application collaborative d'organisation d'événements culinaires (menus, repas, matériel, tâches) pour des équipes de cuisiniers. Ce glossaire fixe le vocabulaire du domaine participation & accès aux événements, et du matériel & emprunts.
 
 ## Participation
 
@@ -45,3 +45,20 @@ Désactivation du lien de partage précédent et création d'un nouveau — rem�
 
 **Curieux** (informel):
 Un invité qui consulte l'événement sans avoir confirmé sa participation. La distinction curieux / participant justifie la lecture seule avant RSVP.
+
+## Matériel & emprunts
+
+**Emprunt**:
+Réservation de matériel appartenant à une équipe, pour une période (dates début/fin), portant une liste d'items {matériel, quantité}. L'UI emploie « réservation » pour le même objet.
+_Avoid_: prêt (réservé au sens inverse : prêter SON matériel)
+
+**Disponibilité sur période**:
+Quantité réservable d'un matériel sur les dates d'un emprunt : stock possédé moins les quantités portées par les emprunts qui chevauchent la période. Seule notion de disponibilité exposée à l'utilisateur d'un emprunt — la disponibilité globale du stock n'a pas de sens dans ce flux.
+_Avoid_: dispo globale (hors période), stock libre
+
+**Sélection**:
+Quantités demandées par matériel dans un emprunt en cours de saisie ; quantité 0 = non emprunté (état par défaut). Les conflits de disponibilité se jugent sur la sélection au moment de la soumission.
+
+**Matériel fantôme**:
+Item d'un emprunt dont le matériel a disparu de l'inventaire. L'emprunt conserve le snapshot de son nom et sa quantité ; il reste visible et identifiable sur l'emprunt, jamais proposable à une nouvelle réservation.
+_Avoid_: item supprimé, matériel orphelin

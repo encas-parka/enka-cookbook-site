@@ -8,6 +8,7 @@
     "dev:app": "cd svelte-app && bun run dev",
     "dev:all": "concurrently \"cd svelte-app && bun run dev\" \"bash scripts_dev/pb-dev.sh\" --names \"VITE,PB\" --prefix-colors \"cyan,green\"",
     "build": "cd svelte-app && bun run build",
+    "check": "bun check -b svelte-app/tsconfig.json",
     "format": "prettier --write .",
     "format:check": "prettier --check ."
   },

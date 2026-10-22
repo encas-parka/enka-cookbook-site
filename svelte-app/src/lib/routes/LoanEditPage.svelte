@@ -7,11 +7,12 @@
    * - `/dashboard/loans/:teamId/new` → création ;
    * - `/dashboard/loans/:teamId/loan/:loanId` → dossier (édition + retour).
    *
-   * Le formulaire vit dans `teamMatos/loan/LoanForm.svelte`, la fiche de
-   * retour dans `teamMatos/loan/LoanReturnForm.svelte` : la page n'est que
-   * le chrome qui les relie.
+   * Chrome uniquement : les actions vivent dans la navbar (contextuelles à
+   * l'onglet actif), les facettes de la liste dans la sidebar (desktop) ou
+   * le drawer (mobile). Le formulaire vit dans `loan/LoanForm.svelte`, la
+   * fiche de retour dans `loan/LoanReturnForm.svelte`.
    */
-  import { ArrowLeft, Download, LoaderCircle, Trash2 } from "@lucide/svelte";
+  import { Check, Download, LoaderCircle, RotateCcw, X } from "@lucide/svelte";
   import { fade } from "svelte/transition";
   import { navigate, route } from "$lib/router";
   import { materielStore } from "$lib/stores/MaterielStore.svelte";
@@ -20,8 +21,14 @@
   import { toastService } from "$lib/services/toast.service.svelte";
   import LoanForm from "$lib/components/teamMatos/loan/LoanForm.svelte";
   import LoanReturnForm from "$lib/components/teamMatos/loan/LoanReturnForm.svelte";
-  import type { LoanSelectionSummary } from "$lib/components/teamMatos/loan/loan.types";
+  import LoanMaterielFilters, {
+    type LoanListFilters,
+  } from "$lib/components/teamMatos/loan/LoanMaterielFilters.svelte";
+  import LeftPanel from "$lib/components/ui/LeftPanel.svelte";
   import UnsavedChangesGuard from "$lib/components/ui/UnsavedChangesGuard.svelte";
+  import type { LoanSelectionSummary } from "$lib/components/teamMatos/loan/loan.types";
+  import { LOAN_TYPE_ORDER } from "$lib/utils/materiel-list.utils";
+  import { getLoanStatusConfig } from "$lib/utils/materiel.utils";
   import { formatDateDayMonthShort } from "$lib/utils/date-helpers";
   import { shareOrDownload, toSlug } from "$lib/utils/share-utils";
 
@@ -42,7 +49,12 @@
     !!loan && (loan.status === "accepted" || loan.status === "completed"),
   );
 
+  const statusConfig = $derived(getLoanStatusConfig(loan?.status));
+
   let tab = $state<Tab>("reservation");
+  /** L'onglet par défaut n'est décidé qu'une fois (le store peut tarder). */
+  let tabDecided = $state(false);
+
   let form = $state<ReturnType<typeof LoanForm>>();
   let valid = $state(false);
   let busy = $state(false);
@@ -51,12 +63,57 @@
   let loanStatus = $state<string | null>(null);
   /** Date de fin passée : la réservation est figée, pas d'enregistrement. */
   let endDatePast = $state(false);
-  /** Délai dépassé sans emprunt en store : l'emprunt n'existe pas. */
-  let missing = $state(false);
 
-  // Onglet initial depuis l'url (?tab=return) — lien profond depuis la liste.
+  let returnForm = $state<ReturnType<typeof LoanReturnForm>>();
+  let returnValid = $state(false);
+  let returnSaving = $state(false);
+  let returnDirty = $state(false);
+  let returnReadOnly = $state(false);
+
+  /** Facettes de la sidebar, appliquées à la liste via le cœur du formulaire. */
+  let listFilters = $state<LoanListFilters>({ types: [], segments: [] });
+
+  /** Types présents dans l'inventaire de l'équipe, dans l'ordre canonique. */
+  const availableTypes = $derived.by(() => {
+    if (!teamId) return [];
+    const present = new Set<string>();
+    for (const m of materielStore.materiels) {
+      if (m.teamId === teamId || m.shareableWith?.includes(teamId)) {
+        present.add(m.type || "other");
+      }
+    }
+    return LOAN_TYPE_ORDER.filter((t) => present.has(t)).concat(
+      [...present].filter((t) => !LOAN_TYPE_ORDER.includes(t)).sort(),
+    );
+  });
+
+  function resetListFilters() {
+    listFilters = { types: [], segments: [] };
+  }
+
+  // Onglet par défaut : ?tab= explicite gagne ; sinon un prêt rendu ou échu
+  // s'ouvre sur sa fiche de retour ; sinon la réservation.
   $effect(() => {
-    if (route.search?.tab === "return") tab = "return";
+    const explicit = route.search?.tab;
+    if (explicit === "return" || explicit === "reservation") {
+      tab = explicit;
+      tabDecided = true;
+      return;
+    }
+    if (tabDecided) return;
+    if (isCreate) {
+      tab = "reservation";
+      tabDecided = true;
+      return;
+    }
+    if (!loan) return;
+    const endDatePassed =
+      !!loan.endDate && Date.now() > new Date(loan.endDate).getTime();
+    tab =
+      loan.status === "completed" || (endDatePassed && canReturn)
+        ? "return"
+        : "reservation";
+    tabDecided = true;
   });
 
   // Le store peut être en retard sur une url profonde : on patiente avant de
@@ -78,8 +135,12 @@
   $effect(() => {
     navBarStore.setConfig({
       title: isCreate ? "Nouvelle réservation" : "Réservation de matériel",
+      actions: navActions,
     });
   });
+
+  /** Délai dépassé sans emprunt en store : l'emprunt n'existe pas. */
+  let missing = $state(false);
 
   function goBack() {
     navigate(`/dashboard/loans/${teamId}`);
@@ -114,41 +175,36 @@
   }
 </script>
 
-<UnsavedChangesGuard
-  routeKey={`loan-edit-${loanId ?? "new"}`}
-  shouldProtect={() => dirty}
-  message="Vous avez des modifications non sauvegardées. Voulez-vous quitter sans enregistrer ?"
-/>
-
-<div class="container mx-auto p-4 pb-24" transition:fade>
-  <div class="mx-auto max-w-4xl">
-    <!-- En-tête -->
-    <div class="mb-4 flex flex-wrap items-center gap-x-4 gap-y-2">
+{#snippet navActions()}
+  <div class="flex items-center gap-2">
+    {#if tab === "return" && loan}
       <button
-        class="btn btn-circle btn-ghost"
-        onclick={goBack}
-        aria-label="Retour aux réservations"
+        class="btn btn-circle btn-outline btn-sm"
+        onclick={() => returnForm?.exportSheet()}
+        disabled={returnSaving}
+        title="Exporter la fiche de retour en Markdown"
       >
-        <ArrowLeft class="h-5 w-5" />
+        <Download class="h-4 w-4" />
+        <span class="hidden sm:inline">Exporter la fiche</span>
       </button>
-      <div class="min-w-2/3 flex-1">
-        <h1 class="text-xl font-bold sm:text-2xl">
-          {isCreate ? "Nouvelle réservation" : "Réservation de matériel"}
-        </h1>
-        <p class="text-sm opacity-70">
-          {#if team}
-            {team.name}
-          {/if}
-          {#if loan}
-            · Emprunt du {formatDateDayMonthShort(loan.startDate)} au
-            {formatDateDayMonthShort(loan.endDate)}
-          {/if}
-        </p>
-      </div>
-
-      {#if loan}
+      {#if !returnReadOnly}
         <button
-          class="btn btn-outline btn-sm"
+          class="btn btn-primary btn-sm"
+          onclick={() => returnForm?.submit()}
+          disabled={!returnValid || returnSaving}
+        >
+          {#if returnSaving}
+            <span class="loading loading-sm loading-spinner"></span>
+          {:else}
+            <RotateCcw class="h-4 w-4" />
+          {/if}
+          <span class="hidden sm:inline">Valider le retour</span>
+        </button>
+      {/if}
+    {:else}
+      {#if !isCreate}
+        <button
+          class="btn btn-circle btn-outline btn-sm"
           onclick={handleExportLoan}
           title="Exporter la réservation en Markdown"
         >
@@ -156,17 +212,79 @@
           <span class="hidden sm:inline">Exporter</span>
         </button>
       {/if}
-
-      {#if !isCreate && loanStatus === "accepted"}
+      {#if !endDatePast}
         <button
-          class="btn btn-outline btn-error btn-sm"
-          onclick={() => form?.cancelReservation()}
-          disabled={busy}
+          class="btn btn-primary btn-sm"
+          onclick={() => form?.submit()}
+          disabled={!valid || busy}
         >
-          <Trash2 class="h-4 w-4" />
-          <span class="hidden sm:inline">Annuler la réservation</span>
+          {#if busy}
+            <span class="loading loading-sm loading-spinner"></span>
+          {:else}
+            <Check class="h-4 w-4" />
+          {/if}
+          <span class="hidden sm:inline"
+            >{isCreate ? "Créer la réservation" : "Enregistrer"}</span
+          >
         </button>
       {/if}
+    {/if}
+    <button
+      class="btn btn-ghost btn-sm"
+      onclick={goBack}
+      disabled={busy || returnSaving}
+      title="Revenir aux réservations"
+    >
+      <X class="h-4 w-4" />
+      <span class="hidden sm:inline">Annuler</span>
+    </button>
+  </div>
+{/snippet}
+
+<UnsavedChangesGuard
+  routeKey={`loan-edit-${loanId ?? "new"}`}
+  shouldProtect={() => (tab === "return" ? returnDirty : dirty)}
+  message="Vous avez des modifications non sauvegardées. Voulez-vous quitter sans enregistrer ?"
+/>
+
+{#if tab === "reservation"}
+  <!-- Facettes : sidebar desktop / drawer mobile -->
+  <LeftPanel>
+    <LoanMaterielFilters
+      bind:filters={listFilters}
+      {availableTypes}
+      onReset={resetListFilters}
+    />
+  </LeftPanel>
+{/if}
+
+<!-- Contenu principal -->
+<div
+  class="p-4 pb-20 {tab === 'reservation' ? 'lg:ml-96' : ''}"
+  transition:fade
+>
+  <div class="mx-auto max-w-7xl">
+    <!-- En-tête sobre : les gestes vivent dans la navbar -->
+    <div class="mb-4">
+      <div class="flex flex-wrap items-center gap-x-3 gap-y-1">
+        <h1 class="text-xl font-bold sm:text-2xl">
+          {isCreate ? "Nouvelle réservation" : "Réservation de matériel"}
+        </h1>
+        {#if loan}
+          <span class="badge badge-sm {statusConfig.badgeClass}">
+            {statusConfig.label}
+          </span>
+        {/if}
+      </div>
+      <p class="text-sm opacity-70">
+        {#if team}
+          {team.name}
+        {/if}
+        {#if loan}
+          · Emprunt du {formatDateDayMonthShort(loan.startDate)} au
+          {formatDateDayMonthShort(loan.endDate)}
+        {/if}
+      </p>
     </div>
 
     <!-- Onglets -->
@@ -191,7 +309,14 @@
 
     <!-- Contenu -->
     {#if tab === "return" && loan}
-      <LoanReturnForm {loan} onCompleted={goBack} onCancel={goBack} />
+      <LoanReturnForm
+        bind:this={returnForm}
+        {loan}
+        bind:valid={returnValid}
+        bind:saving={returnSaving}
+        bind:dirty={returnDirty}
+        bind:isReadOnly={returnReadOnly}
+      />
     {:else if isCreate || loan}
       <LoanForm
         bind:this={form}
@@ -201,6 +326,8 @@
         bind:summary
         bind:existingLoanStatus={loanStatus}
         bind:endDatePast
+        framed
+        listFilter={listFilters}
         stickyTopClass="top-12"
         ownerId={teamId}
         ownerName={team?.name ?? ""}
@@ -209,35 +336,6 @@
         onCancelled={handleCancelled}
         onCancel={goBack}
       />
-
-      <!-- Barre d'action -->
-      <div
-        class="sticky bottom-0 -mx-4 mt-6 flex items-center gap-2 border-t border-base-300 bg-base-100 px-4 py-3"
-      >
-        <div class="flex-1 text-sm text-base-content/70">
-          {#if summary.itemCount > 0}
-            {summary.itemCount}
-            matériel{summary.itemCount > 1 ? "s" : ""} —
-            {summary.totalUnits}
-            unité{summary.totalUnits > 1 ? "s" : ""}
-          {/if}
-        </div>
-        <button class="btn btn-ghost btn-sm" onclick={goBack} disabled={busy}>
-          Annuler
-        </button>
-        {#if !endDatePast}
-          <button
-            class="btn btn-primary btn-sm"
-            onclick={() => form?.submit()}
-            disabled={!valid || busy}
-          >
-            {#if busy}
-              <span class="loading loading-sm loading-spinner"></span>
-            {/if}
-            {isCreate ? "Créer la réservation" : "Enregistrer"}
-          </button>
-        {/if}
-      </div>
     {:else if missing}
       <div class="alert alert-warning">
         <span>Emprunt introuvable.</span>

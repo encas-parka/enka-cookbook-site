@@ -3,10 +3,12 @@
    * Fiche de retour d'un emprunt : déclaration de l'état de chaque matériel
    * (ok / à réparer / perdu), notes de retour et validation.
    *
-   * Cœur sans chrome, partagé par la page historique de retour et par
-   * l'onglet « Retour » du dossier emprunt. Le parent fournit l'emprunt et
-   * reçoit `onCompleted` / `onCancel`.
+   * Cœur sans chrome : la page dossier (onglet Retour) est son enveloppe et
+   * déclenche `submit()` / `exportSheet()` depuis la navbar. Le parent
+   * fournit l'emprunt, reçoit `onCompleted` et lit `valid` / `saving` /
+   * `dirty`.
    */
+  import { untrack } from "svelte";
   import { toastService } from "$lib/services/toast.service.svelte";
   import { materielStore } from "$lib/stores/MaterielStore.svelte";
   import type {
@@ -28,10 +30,8 @@
     Box,
     Check,
     ChefHat,
-    Download,
     Flame,
     Package,
-    RotateCcw,
     SoapDispenserDroplet,
     Utensils,
     Wrench,
@@ -55,27 +55,29 @@
     loan: EnrichedMaterielLoan;
     /** Appelé après un retour enregistré. */
     onCompleted?: () => void;
-    /** Appelé quand l'utilisateur abandonne la fiche. */
-    onCancel?: () => void;
     /** Le prêt est déjà clôturé : la fiche est en lecture seule. */
     isReadOnly?: boolean;
     /** La saisie est-elle complète et cohérente ? */
     valid?: boolean;
+    /** Enregistrement en cours (état du bouton de l'enveloppe). */
+    saving?: boolean;
+    /** L'utilisateur a-t-il modifié la déclaration ? (garde de navigation) */
+    dirty?: boolean;
   }
 
   let {
     loan,
     onCompleted,
-    onCancel,
     isReadOnly = $bindable(false),
     valid = $bindable(false),
+    saving = $bindable(false),
+    dirty = $bindable(false),
   }: Props = $props();
 
   let showEarlyReturnModal = $state(false); // Confirmation de retour anticipé
   let returnNotes = $state("");
   let returnedAt = $state<string | null>(null);
   let materielsReturns = $state<ReturnRow[]>([]);
-  let saving = $state(false);
   let error = $state("");
 
   // Init : une fois par (emprunt, statut). Rejouer l'init à chaque mise à jour
@@ -122,6 +124,31 @@
         state: "pending" as const,
       };
     });
+
+    // La baseline « dirty » se capture une fois le remplissage terminé.
+    baseline = untrack(currentSignature);
+  });
+
+  // --- Garde de navigation : signature de la déclaration courante ---
+
+  let baseline = $state("");
+
+  function currentSignature(): string {
+    return JSON.stringify({
+      notes: returnNotes,
+      items: materielsReturns.map((item) => [
+        item.state,
+        item.lostQuantity,
+        item.brokenQuantity,
+        item.okQuantity,
+      ]),
+    });
+  }
+
+  const isDirty = $derived(baseline !== "" && currentSignature() !== baseline);
+
+  $effect(() => {
+    dirty = isDirty;
   });
 
   // Icône du type de matériel
@@ -247,6 +274,18 @@
     const slug =
       toSlug(loan.eventName || loan.responsibleName || "") || "reservation";
     shareOrDownload(markdown, `${slug}-retour.md`, "Fiche de retour exportée");
+  }
+
+  // --- API impérative (l'enveloppe porte les boutons : navbar de la page) ---
+
+  /** Déclenche la validation, avec son éventuelle confirmation de retour anticipé. */
+  export function submit() {
+    handleSubmit();
+  }
+
+  /** Exporte la fiche de retour (état déclaré courant) en Markdown. */
+  export function exportSheet() {
+    handleExport();
   }
 </script>
 
@@ -489,40 +528,6 @@
     <div class="label text-error">
       <span>{error}</span>
     </div>
-  {/if}
-</div>
-
-<!-- Actions -->
-<div class="flex flex-wrap justify-end gap-2">
-  {#if !isReadOnly}
-    <button
-      class="btn btn-ghost"
-      onclick={() => onCancel?.()}
-      disabled={saving}
-    >
-      Annuler
-    </button>
-    <button
-      class="btn gap-2 btn-outline"
-      onclick={handleExport}
-      disabled={saving}
-      title="Exporter la fiche en Markdown"
-    >
-      <Download class="h-4 w-4" />
-      Exporter
-    </button>
-    <button
-      class="btn gap-2 btn-primary"
-      onclick={handleSubmit}
-      disabled={!isValid || saving}
-    >
-      {#if saving}
-        <span class="loading loading-sm loading-spinner"></span>
-      {:else}
-        <RotateCcw class="h-4 w-4" />
-      {/if}
-      Valider le retour
-    </button>
   {/if}
 </div>
 

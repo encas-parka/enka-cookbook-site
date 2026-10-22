@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Check, Minus, Plus } from "@lucide/svelte";
+  import { Check, Minus, Plus, X } from "@lucide/svelte";
 
   interface Props {
     name: string;
@@ -12,8 +12,10 @@
     size?: "xs" | "md";
     /** Plafond de quantité ; undefined = incrément toujours permis. */
     maxQuantity?: number;
-    /** Bouton "tout" (quantité = maxQuantity). */
+    /** Bouton "Tout" (quantité = maxQuantity). */
     showTakeAll?: boolean;
+    /** Bouton de remise à zéro (icône X) à gauche du decrement. */
+    showClear?: boolean;
     /** Ligne grisée, contrôles inactifs (matériel indisponible sur la période). */
     disabled?: boolean;
     /** Badge de remplacement affiché quand disabled (ex. "Indisponible"). */
@@ -32,6 +34,7 @@
     size = "xs",
     maxQuantity,
     showTakeAll = false,
+    showClear = false,
     disabled = false,
     unavailableLabel,
     badge,
@@ -57,6 +60,11 @@
   function takeAll() {
     if (disabled || maxQuantity === undefined) return;
     onchange(maxQuantity);
+  }
+
+  function clearAll() {
+    if (disabled || quantity <= 0) return;
+    onchange(0);
   }
 </script>
 
@@ -95,6 +103,19 @@
   </div>
 
   <div class="flex flex-none items-center justify-end gap-1">
+    {#if showClear}
+      <button
+        class="btn btn-square scroll-mt-40 btn-ghost {size === 'md'
+          ? 'btn-md'
+          : 'btn-xs'}"
+        onclick={clearAll}
+        disabled={disabled || quantity <= 0}
+        aria-label="Tout retirer"
+      >
+        <X class={size === "md" ? "size-5" : "size-3"} />
+      </button>
+    {/if}
+
     <button
       class="btn btn-square scroll-mt-40 btn-ghost {size === 'md'
         ? 'btn-md'

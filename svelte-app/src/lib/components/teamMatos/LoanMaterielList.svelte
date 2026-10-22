@@ -312,6 +312,7 @@
                   quantity={quantities[item.id] ?? 0}
                   maxQuantity={max}
                   showTakeAll
+                  showClear
                   size="md"
                   badge={`${max}/${item.quantity}`}
                   disabled={loading || max === 0}

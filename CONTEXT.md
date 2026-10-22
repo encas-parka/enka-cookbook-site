@@ -62,3 +62,11 @@ Quantités demandées par matériel dans un emprunt en cours de saisie ; quantit
 **Matériel fantôme**:
 Item d'un emprunt dont le matériel a disparu de l'inventaire. L'emprunt conserve le snapshot de son nom et sa quantité ; il reste visible et identifiable sur l'emprunt, jamais proposable à une nouvelle réservation.
 _Avoid_: item supprimé, matériel orphelin
+
+**Retour**:
+Déclaration de l'état du matériel rendu, item par item et en quantités — rendu, à réparer, perdu — complétée de notes de retour. Peut être anticipé (avant la date de fin) après confirmation ; enregistré, il clôt l'emprunt (statut « completed »).
+_Avoid_: annulation (le retour n'annule pas la réservation), restitution
+
+**Fiche de retour**:
+L'export Markdown de l'état de retour, reflétant la saisie en cours (déclarations non encore enregistrées) autant que l'état persisté.
+_Avoid_: bon de retour, inventaire de retour

@@ -252,28 +252,28 @@
           </button>
         {/each}
       </div>
+    </div>
 
-      <div class="flex items-center justify-end gap-3 px-1">
-        <button
-          class="link text-xs font-medium link-error {canClearVisible
-            ? ''
-            : 'link-disabled'}"
-          onclick={clearAllVisible}
-          disabled={loading || !canClearVisible}
-        >
-          Tout retirer
-        </button>
-        <button
-          class="link text-xs font-medium link-primary {canTakeAll
-            ? ''
-            : 'link-disabled'}"
-          onclick={takeAllVisible}
-          disabled={loading || !canTakeAll}
-        >
-          <Plus class="inline size-3" />
-          Tout prendre
-        </button>
-      </div>
+    <div class="flex items-center justify-end gap-3 px-1">
+      <button
+        class="link text-xs font-medium link-error {canClearVisible
+          ? ''
+          : 'link-disabled'}"
+        onclick={clearAllVisible}
+        disabled={loading || !canClearVisible}
+      >
+        Tout retirer
+      </button>
+      <button
+        class="link text-xs font-medium link-primary {canTakeAll
+          ? ''
+          : 'link-disabled'}"
+        onclick={takeAllVisible}
+        disabled={loading || !canTakeAll}
+      >
+        <Plus class="inline size-3" />
+        Tout prendre
+      </button>
     </div>
 
     {#if allUnavailable}

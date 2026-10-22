@@ -85,7 +85,6 @@ export type Main = PbDoc & {
   minContrib: number | null;
   teams: string[] | null;
   status: EventsStatusOptions | null;
-  guestEmails: string[] | null;
   guestUsers: string[] | null;
   location: string | null;
   // JSON fields — shape écrit/parsé par le client (cf. events.d.ts)

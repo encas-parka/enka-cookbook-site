@@ -21,10 +21,9 @@
  *  - updateContributorStatus (accept RSVP) ne touche pas guestUsers : le
  *    champ de visibilité n'est pas écrasé par un changement d'état RSVP ;
  *  - ré-inviter un invité déjà présent ne duplique pas guestUsers ;
- *  - règle d'écriture actée (ticket 02) : teamIds porte uniquement les
- *    équipes entièrement cochées (grant vivant, membres non individualisés) ;
- *    une équipe partielle passe en individus ; le champ de tracking
- *    guestEmails n'est plus écrit par le client.
+ *  - règle d'écriture actée : teamIds porte uniquement les équipes
+ *    entièrement cochées (grant vivant, membres non individualisés) ; une
+ *    équipe partielle passe en individus.
  */
 
 vi.mock("$lib/services/pb-users", () => ({
@@ -81,7 +80,7 @@ describe("EventsStore — invitation RSVP (write path)", () => {
   });
 
   it("inviteParticipants écrit guestUsers pour un email résolu vers un compte PB", async () => {
-    await seedEvent({ contributors: [], guestUsers: null, guestEmails: null });
+    await seedEvent({ contributors: [], guestUsers: null });
     vi.mocked(lookupUsersByEmails).mockResolvedValue(
       new Map([[GHALD_EMAIL, GHALD]]),
     );
@@ -100,12 +99,10 @@ describe("EventsStore — invitation RSVP (write path)", () => {
     expect(contributors[0].id).toBe(GHALD.id);
     expect(contributors[0].status).toBe("invited");
     expect(contributors[0].invitedAt).toBeTruthy();
-    // Le champ de tracking n'est plus écrit par le client
-    expect(server.guestEmails).toBeNull();
   });
 
   it("un email inconnu (fallback nanoid) ne touche pas guestUsers", async () => {
-    await seedEvent({ contributors: [], guestUsers: null, guestEmails: null });
+    await seedEvent({ contributors: [], guestUsers: null });
     vi.mocked(lookupUsersByEmails).mockResolvedValue(new Map());
 
     const updated = await eventsStore.inviteParticipants(TEST_EVENT_ID, {
@@ -161,7 +158,6 @@ describe("EventsStore — invitation RSVP (write path)", () => {
         },
       ],
       guestUsers: [GHALD.id],
-      guestEmails: [GHALD_EMAIL],
     });
     vi.mocked(lookupUsersByEmails).mockResolvedValue(new Map());
 
@@ -172,7 +168,6 @@ describe("EventsStore — invitation RSVP (write path)", () => {
     const server = await pb.collection("events").getOne(TEST_EVENT_ID);
     expect(server.guestUsers).toEqual([GHALD.id]);
     expect(server.contributors).toHaveLength(1);
-    expect(server.guestEmails).toEqual([GHALD_EMAIL]);
   });
 
   it("une équipe entière cochée écrit le canal équipe sans individualiser ses membres", async () => {

@@ -199,7 +199,7 @@ export const EventsStatusOptions = {
 	"canceled": "canceled",
 } as const
 export type EventsStatusOptions = typeof EventsStatusOptions[keyof typeof EventsStatusOptions]
-export type EventsRecord<Tcontributors = unknown, Tdate = unknown, TguestEmails = unknown, Tmeals = unknown, Ttodos = unknown> = {
+export type EventsRecord<Tcontributors = unknown, Tdate = unknown, Tmeals = unknown, Ttodos = unknown> = {
 	contributors?: null | Tcontributors
 	created: IsoAutoDateString
 	createdBy?: RecordIdString
@@ -207,7 +207,6 @@ export type EventsRecord<Tcontributors = unknown, Tdate = unknown, TguestEmails 
 	dateEnd?: IsoDateString
 	dateStart?: IsoDateString
 	description?: string
-	guestEmails?: null | TguestEmails
 	guestUsers?: RecordIdString[]
 	id: string
 	location?: string
@@ -352,7 +351,7 @@ export type ProductsRecord<TmergedFrom = unknown, TpreviousNames = unknown, Tspe
 	pF?: boolean
 	pS?: boolean
 	previousNames?: null | TpreviousNames
-	productName?: string
+	productName: string
 	productType?: string
 	specs?: null | Tspecs
 	status?: string
@@ -495,7 +494,7 @@ export type SuperusersResponse<Texpand = unknown> = Required<SuperusersRecord> &
 export type CategoriesResponse<Texpand = unknown> = Required<CategoriesRecord> & BaseSystemFields<Texpand>
 export type EventMaterielResponse<Tspecs = unknown, Texpand = unknown> = Required<EventMaterielRecord<Tspecs>> & BaseSystemFields<Texpand>
 export type EventTodosResponse<Texpand = unknown> = Required<EventTodosRecord> & BaseSystemFields<Texpand>
-export type EventsResponse<Tcontributors = unknown, Tdate = unknown, TguestEmails = unknown, Tmeals = unknown, Ttodos = unknown, Texpand = unknown> = Required<EventsRecord<Tcontributors, Tdate, TguestEmails, Tmeals, Ttodos>> & BaseSystemFields<Texpand>
+export type EventsResponse<Tcontributors = unknown, Tdate = unknown, Tmeals = unknown, Ttodos = unknown, Texpand = unknown> = Required<EventsRecord<Tcontributors, Tdate, Tmeals, Ttodos>> & BaseSystemFields<Texpand>
 export type IngredientsResponse<Tallergens = unknown, Tsaisons = unknown, Texpand = unknown> = Required<IngredientsRecord<Tallergens, Tsaisons>> & BaseSystemFields<Texpand>
 export type LocksResponse<Texpand = unknown> = Required<LocksRecord> & BaseSystemFields<Texpand>
 export type MaterielResponse<Texpand = unknown> = Required<MaterielRecord> & BaseSystemFields<Texpand>

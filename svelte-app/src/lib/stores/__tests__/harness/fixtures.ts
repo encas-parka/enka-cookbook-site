@@ -52,7 +52,6 @@ export function makeEvent(
     minContrib: null,
     teams: undefined,
     status: "confirmed",
-    guestEmails: null,
     guestUsers: null,
     location: null,
     meals: [],

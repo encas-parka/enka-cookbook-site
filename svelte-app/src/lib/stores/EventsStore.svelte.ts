@@ -578,9 +578,6 @@ export class EventsStore {
     if (data.contributors !== undefined) {
       serialized.contributors = data.contributors;
     }
-    if (data.guestEmails !== undefined) {
-      serialized.guestEmails = data.guestEmails;
-    }
     if (data.guestUsers !== undefined) {
       serialized.guestUsers = data.guestUsers;
     }
@@ -896,7 +893,6 @@ export class EventsStore {
    *   - `notifyEmails` : destinataires de l'expédition groupée (défaut :
    *     `emails`) — les membres d'équipes entières y figurent sans être
    *     écrits individuellement.
-   *   - le champ de tracking guestEmails n'est plus écrit par le client.
    *
    * Une seule écriture atomique de l'event, puis get-or-create du lien et
    * expédition en fire-and-forget : l'invitation est déjà posée si l'un des
@@ -988,8 +984,6 @@ export class EventsStore {
     const updatedGuestUsers = [...guestUserIds];
 
     // --- 3. Mise à jour atomique de l'event ---
-    // guestEmails n'est plus écrit : omettre la clé du PATCH laisse le champ
-    // serveur inchangé.
     const updatedEvent = await this.updateEvent(eventId, {
       contributors: newContributors,
       guestUsers: updatedGuestUsers,

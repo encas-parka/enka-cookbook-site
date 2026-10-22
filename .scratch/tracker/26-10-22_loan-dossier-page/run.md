@@ -60,6 +60,36 @@ Reste (click-through humain, s'ajoute à l'itération 1) :
 - Retour : validation depuis la navbar, reste en lecture seule sur le
   dossier ; garde « déclarations non enregistrées » à la navigation.
 
+## Itération 3 — retours de revue (même jour)
+
+Retours utilisateur sur l'itération 2, appliqués :
+
+- **Filtres exclusifs** (fini les checkbox multi) : type exclusif, segment
+  « Sélectionnés / Non sélectionnés » exclusif, « Disponible » en case à
+  cocher indépendante — composés en **ET** (l'union corrigeait mal le cumul
+  signalé : un indisponible non sélectionné restait visible). UI boutons du
+  pattern `RecipeFilters` (rows `rounded-xl` + `btn-secondary` actif).
+  `LoanListFilters` (type/segment/availableOnly) dans `materiel-list.utils`,
+  bindé page → cœur → liste ; 15 tests utils.
+- **Navbar** : « Annuler » en dernier à droite ; export en bouton rond
+  `btn-circle btn-primary` icône seule (modèle EventMaterielPage).
+- **Sélecteur compact sous la recherche** (mobile page + modal
+  EventMaterielPage, où la sidebar n'existe pas) : segment exclusif 3
+  boutons, même état bindé que la sidebar.
+- **Badges de sélection** entre recherche et « tout retirer/prendre » :
+  dépliable façon `InfoCollapse` (plié = 2 lignes, `max-h-14`), badges
+  cliquables → ouvre le groupe (mobile) et défile vers la rangée
+  (`#loan-materiel-<id>` + `scrollIntoView`).
+- **Fiche figée** (`isFrozen` dans le cœur) : retour effectué **ou** date de
+  fin passée → dates/notes/événement désactivés, liste en lecture seule,
+  bouton d'enregistrement masqué (bindable `endDatePast` renommé `frozen`),
+  alert-info d'en-tête avec la date de retour. Le modal en profite aussi.
+  Renforcement backend déposé au backlog
+  (`backlog/26-10-22_loans-figeage-backend.md`).
+
+Vérifs : check 0/0, tests 355/355 (`/tmp/opencode/tests-loan-ui-2.log`),
+build OK, autofixer propre sur `LoanMaterielList`.
+
 ## Reste (click-through humain)
 
 - Parcours création → dossier → onglet Retour → export .md.

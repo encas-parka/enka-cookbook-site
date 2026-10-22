@@ -105,7 +105,9 @@
   };
 
   function isOpen(type: string): boolean {
-    return searchActive || !collapsed.has(type);
+    // La recherche et le filtre « Sélectionnés » forcent l'ouverture : les
+    // groupes visibles portent alors toujours du contenu à montrer.
+    return searchActive || segment === "selected" || !collapsed.has(type);
   }
 
   function toggleGroup(type: string) {
@@ -265,6 +267,7 @@
               name={ghost.materielName}
               quantity={ghost.quantity}
               size="md"
+              wrap
               disabled
               unavailableLabel="Supprimé"
               onchange={() => {}}
@@ -276,8 +279,7 @@
 
     {#each filteredGroups as group (group.type)}
       {@const TypeIcon = typeIcons[group.type] ?? Package}
-      {@const availableCount = countAvailable(group.items)}
-      <div class="rounded-lg border border-base-300 bg-base-100">
+      <div class="rounded-lg border border-base-300 bg-base-200">
         <button
           class="flex w-full items-center gap-2 p-3 text-left text-sm font-semibold"
           onclick={() => toggleGroup(group.type)}
@@ -285,9 +287,6 @@
         >
           <TypeIcon class="size-4 opacity-70" />
           {typeLabels[group.type] ?? group.type}
-          <span class="badge badge-ghost badge-sm"
-            >{availableCount}/{group.items.length} dispo</span
-          >
           <ChevronDown
             class="ml-auto size-4 opacity-50 transition-transform {isOpen(
               group.type,
@@ -306,6 +305,8 @@
                 maxQuantity={max}
                 showTakeAll
                 size="md"
+                wrap
+                badge={`${max}/${item.quantity}`}
                 disabled={loading || max === 0}
                 unavailableLabel="Indisponible"
                 onchange={(qty) => setQuantity(item, qty)}

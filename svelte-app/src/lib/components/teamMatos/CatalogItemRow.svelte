@@ -18,6 +18,10 @@
     disabled?: boolean;
     /** Badge de remplacement affiché quand disabled (ex. "Indisponible"). */
     unavailableLabel?: string;
+    /** Badge informatif à côté du nom (ex. "2/5" : dispo/possédé). */
+    badge?: string;
+    /** Nom sur 2 lignes (line-clamp) au lieu du tronquage — mobile. */
+    wrap?: boolean;
   }
 
   let {
@@ -32,6 +36,8 @@
     showTakeAll = false,
     disabled = false,
     unavailableLabel,
+    badge,
+    wrap = false,
   }: Props = $props();
 
   const isActive = $derived(quantity > 0);
@@ -59,18 +65,24 @@
 
 <div
   class="flex items-center justify-between gap-2 rounded-lg border px-3 py-2 transition-colors {disabled
-    ? 'border-base-300 bg-base-200 opacity-60'
+    ? 'border-base-300 bg-base-300/50 opacity-60'
     : isActive
       ? 'border-primary/40 bg-primary/10'
       : 'border-base-300 bg-base-100'}"
 >
   <div class="flex min-w-0 flex-1 items-center gap-2">
-    <span class="truncate text-sm {showStatusBadge ? 'line-through' : ''}"
-      >{name}</span
+    <span
+      class="text-sm {wrap
+        ? 'line-clamp-2 break-words whitespace-normal'
+        : 'truncate'} {showStatusBadge ? 'line-through' : ''}">{name}</span
     >
     {#if showStatusBadge}
       <span class="badge flex-none badge-xs badge-error"
         >{unavailableLabel}</span
+      >
+    {:else if badge !== undefined}
+      <span class="badge flex-none badge-ghost badge-xs tabular-nums"
+        >{badge}</span
       >
     {:else if hasExisting}
       <span class="badge flex-none badge-ghost badge-xs"

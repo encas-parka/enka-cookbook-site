@@ -15,14 +15,17 @@ vi.mock("pocketbase", async () => {
  * Le service tourne RÉEL contre le fake PocketBase (transport factice) :
  * aucune mock de pb-invitations ici, contrairement aux tests store qui
  * mockent le module. Vérifie le contrat du point de passage unique :
- *  - getOrCreateShareLink retourne le lien actif existant sans créer ;
- *  - il crée un lien pour un événement qui n'en possède pas ;
+ *  - getOrEnsureShareLinks retourne les liens actifs sans créer s'il y en a,
+ *    crée le premier sinon (et getOrCreateShareLink délègue à cette
+ *    garantie) ;
+ *  - les liens désactivés (régénérés) ne comptent plus ;
  *  - regenerateShareLink désactive les liens actifs puis en crée un neuf.
  */
 
 import { currentFakePb, pbDate } from "./harness/stub-pb";
 import {
   getOrCreateShareLink,
+  getOrEnsureShareLinks,
   regenerateShareLink,
   getEventShareLinks,
 } from "$lib/services/pb-invitations";
@@ -52,27 +55,30 @@ describe("pb-invitations — get-or-create du lien de partage", () => {
 
     const result = await getOrCreateShareLink(TEST_EVENT_ID, "userorganizer01");
 
-    expect(result).toEqual({ id: "linkexisting01", created: false });
+    expect(result.id).toBe("linkexisting01");
     const active = await getEventShareLinks(TEST_EVENT_ID);
     expect(active).toEqual(["linkexisting01"]);
+    // La variante liste retourne le même lien, sans duplication
+    const ensured = await getOrEnsureShareLinks(TEST_EVENT_ID, "userorg000001");
+    expect(ensured).toEqual(["linkexisting01"]);
   });
 
   it("crée un lien pour un événement qui n'en possède pas", async () => {
-    const result = await getOrCreateShareLink(TEST_EVENT_ID, "userorg000001");
+    const result = await getOrEnsureShareLinks(TEST_EVENT_ID, "userorg000001");
 
-    expect(result.created).toBe(true);
+    expect(result).toHaveLength(1);
     const active = await getEventShareLinks(TEST_EVENT_ID);
-    expect(active).toEqual([result.id]);
+    expect(active).toEqual(result);
   });
 
   it("ignore les liens désactivés (régénérés) et en crée un neuf", async () => {
     seedLink("linkdead000001", TEST_EVENT_ID, false);
 
-    const result = await getOrCreateShareLink(TEST_EVENT_ID, "userorg000001");
+    const result = await getOrEnsureShareLinks(TEST_EVENT_ID, "userorg000001");
 
-    expect(result.created).toBe(true);
+    expect(result).toHaveLength(1);
     const active = await getEventShareLinks(TEST_EVENT_ID);
-    expect(active).toEqual([result.id]);
+    expect(active).toEqual(result);
   });
 });
 

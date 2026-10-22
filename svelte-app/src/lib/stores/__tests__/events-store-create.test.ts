@@ -31,10 +31,7 @@ vi.mock("$lib/services/pb-users", () => ({
 }));
 
 vi.mock("$lib/services/pb-invitations", () => ({
-  getOrCreateShareLink: vi.fn(async () => ({
-    id: "sharelinknew00001",
-    created: true,
-  })),
+  getOrCreateShareLink: vi.fn(async () => ({ id: "sharelinknew00001" })),
 }));
 
 vi.mock("$lib/stores/GlobalState.svelte", () => ({

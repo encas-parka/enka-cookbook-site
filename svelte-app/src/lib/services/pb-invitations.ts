@@ -32,23 +32,32 @@ export async function createShareLink(
 }
 
 /**
- * Retourne le lien actif de l'événement, en créant un s'il n'en possède pas.
- * Chaque événement porte son lien dès la création — ce service est le point
- * de passage unique de cette garantie.
- *
- * @returns { id, created } — created distingue la création effective d'une
- *          simple lecture (telemetry d'usage, pas de différence de contrat).
+ * Garantie « chaque événement porte son lien » : retourne les liens actifs
+ * de l'événement, en créant le premier s'il n'en possède pas. Point de
+ * passage unique de cette garantie — l'appel n'orchestre rien lui-même.
+ */
+export async function getOrEnsureShareLinks(
+  eventId: string,
+  createdBy: string,
+): Promise<string[]> {
+  const existing = await getEventShareLinks(eventId);
+  if (existing.length > 0) {
+    return existing;
+  }
+  const link = await createShareLink(eventId, createdBy);
+  return [link.id];
+}
+
+/**
+ * Retourne le lien actif de l'événement (créé s'il n'en possède pas) —
+ * la variante mono-lien des usages non affichants (store, naissance).
  */
 export async function getOrCreateShareLink(
   eventId: string,
   createdBy: string,
-): Promise<{ id: string; created: boolean }> {
-  const existing = await getEventShareLinks(eventId);
-  if (existing.length > 0) {
-    return { id: existing[0], created: false };
-  }
-  const link = await createShareLink(eventId, createdBy);
-  return { id: link.id, created: true };
+): Promise<{ id: string }> {
+  const links = await getOrEnsureShareLinks(eventId, createdBy);
+  return { id: links[0] };
 }
 
 /**

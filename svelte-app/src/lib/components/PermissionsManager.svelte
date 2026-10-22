@@ -19,8 +19,7 @@
   import { nanoid } from "nanoid";
   import { toastService } from "$lib/services/toast.service.svelte";
   import {
-    getOrCreateShareLink,
-    getEventShareLinks,
+    getOrEnsureShareLinks,
     regenerateShareLink,
   } from "$lib/services/pb-invitations";
   import ModalContainer from "$lib/components/ui/modal/ModalContainer.svelte";
@@ -42,6 +41,10 @@
     onStartEdit: () => void;
   }
 
+  type TeamMember = NonNullable<
+    ReturnType<NativeTeamsStore["getTeamById"]>
+  >["members"][number];
+
   // Props
   let {
     minContrib = $bindable(),
@@ -57,16 +60,64 @@
   // État local - géré entièrement dans ce composant
   let checkedEmails = $state<string[]>([]);
   let newContributors = $state<EventContributor[]>([]);
-
-  // État local pour le modal
   let showInviteModal = $state(false);
   let showInviteConfirm = $state(false);
   let showRegenerateConfirm = $state(false);
   let editingMinContrib = $state(false);
+  let emailInput = $state("");
+  let inviteError = $state<string | null>(null);
+  let isGenerating = $state(false);
+  let shareLinkIds = $state<string[]>([]);
 
-  type TeamMember = NonNullable<
-    ReturnType<NativeTeamsStore["getTeamById"]>
-  >["members"][number];
+  // Groupes de contributeurs pour l'affichage
+  let acceptedContributors = $derived(
+    contributors.filter((c) => c.status === "accepted"),
+  );
+  let invitedContributors = $derived(
+    contributors.filter((c) => c.status === "invited"),
+  );
+  let declinedContributors = $derived(
+    contributors.filter((c) => c.status === "declined"),
+  );
+
+  // Vérifier si l'utilisateur courant peut se désinscrire
+  let canUserUnregister = $derived(
+    contributors.some((c) => c.id === userId && c.status === "accepted"),
+  );
+
+  let canUserBack = $derived(
+    contributors.some((c) => c.id === userId && c.status === "declined"),
+  );
+
+  /** Équipes affichées dans le picker : pas déjà invitées comme équipe, et
+   * avec au moins un membre invitable (tous verrouillés = déjà couverte). */
+  let pickerTeams = $derived.by(() => {
+    if (!eventId) return [];
+    const event = eventsStore.getEventById(eventId);
+    const invitedNames = new Set(event?.teams ?? []);
+    return nativeTeamsStore.myTeams.filter(
+      (team) =>
+        !invitedNames.has(team.name) && invitableMembers(team.id).length > 0,
+    );
+  });
+
+  let fullTeamIds = $derived(
+    pickerTeams.filter((t) => isFullTeam(t.id)).map((t) => t.id),
+  );
+
+  /** Nombre de personnes qui recevront l'email groupé. */
+  let pendingCount = $derived(buildInvitationPayload().notifyEmails.length);
+
+  // Reset la sélection quand le modal se ferme
+  $effect(() => {
+    if (!showInviteModal) {
+      newContributors = [];
+      checkedEmails = [];
+      showInviteConfirm = false;
+    } else {
+      // onStartEdit(); // TODO: relaseLock si pas de modif (close)
+    }
+  });
 
   /** L'accès de ce membre est déjà actif, quel que soit le canal
    * d'invitation : invité individuel (guestUsers ou registre) ou membre
@@ -102,18 +153,6 @@
     return (team?.members ?? []).filter((m) => !isAlreadyInvited(m));
   }
 
-  /** Équipes affichées dans le picker : pas déjà invitées comme équipe, et
-   * avec au moins un membre invitable (tous verrouillés = déjà couverte). */
-  let pickerTeams = $derived.by(() => {
-    if (!eventId) return [];
-    const event = eventsStore.getEventById(eventId);
-    const invitedNames = new Set(event?.teams ?? []);
-    return nativeTeamsStore.myTeams.filter(
-      (team) =>
-        !invitedNames.has(team.name) && invitableMembers(team.id).length > 0,
-    );
-  });
-
   /** Une équipe cochée « entière » (tous ses membres invitable cochés — les
    * déjà invités, verrouillés-cochés, ont déjà leur accès) écrit le grant
    * équipe : les futurs membres hériteront. */
@@ -124,10 +163,6 @@
       invitable.every((m) => checkedEmails.includes(m.userEmail!))
     );
   }
-
-  let fullTeamIds = $derived(
-    pickerTeams.filter((t) => isFullTeam(t.id)).map((t) => t.id),
-  );
 
   function toggleMember(member: TeamMember) {
     const email = member.userEmail!;
@@ -151,90 +186,6 @@
         .filter((email) => !checkedEmails.includes(email));
       checkedEmails = [...checkedEmails, ...additions];
     }
-  }
-
-  // Reset la sélection quand le modal se ferme
-  $effect(() => {
-    if (!showInviteModal) {
-      newContributors = [];
-      checkedEmails = [];
-      showInviteConfirm = false;
-    } else {
-      // onStartEdit(); // TODO: relaseLock si pas de modif (close)
-    }
-  });
-
-  let emailInput = $state("");
-  let inviteError = $state<string | null>(null);
-  let isGenerating = $state(false);
-  let shareLinkIds = $state<string[]>([]);
-
-  async function loadShareLinks() {
-    if (!eventId || !userId) return;
-    try {
-      let links = await getEventShareLinks(eventId);
-      if (links.length === 0) {
-        // Chaque event porte son lien dès la création ; le get-or-create
-        // rattrape aussi les events créés avant cette garantie
-        const link = await getOrCreateShareLink(eventId, userId);
-        links = [link.id];
-      }
-      shareLinkIds = links;
-    } catch {
-      shareLinkIds = [];
-    }
-  }
-
-  onMount(() => {
-    loadShareLinks();
-  });
-
-  // Groupes de contributeurs pour l'affichage
-  let acceptedContributors = $derived(
-    contributors.filter((c) => c.status === "accepted"),
-  );
-  let invitedContributors = $derived(
-    contributors.filter((c) => c.status === "invited"),
-  );
-  let declinedContributors = $derived(
-    contributors.filter((c) => c.status === "declined"),
-  );
-
-  // Vérifier si l'utilisateur courant peut se désinscrire
-  let canUserUnregister = $derived(
-    contributors.some((c) => c.id === userId && c.status === "accepted"),
-  );
-
-  let canUserBack = $derived(
-    contributors.some((c) => c.id === userId && c.status === "declined"),
-  );
-
-  // Ajouter par email (simplifié - la cloud function gère la vérification)
-  function handleAddEmail() {
-    if (!emailInput) return;
-    const email = emailInput.trim();
-
-    // Vérif doublons LOCALEMENT uniquement
-    if (
-      contributors.some((c) => c.email === email) ||
-      newContributors.some((c) => c.email === email)
-    ) {
-      inviteError = "Cet email est déjà invité.";
-      return;
-    }
-
-    inviteError = null;
-
-    // Ajouter simplement l'email - la cloud function fera la distinction
-    const newContributor: EventContributor = {
-      id: nanoid(), // ID temporaire
-      email: email,
-      status: "invited",
-      invitedAt: new Date().toISOString(),
-    };
-
-    newContributors = [...newContributors, newContributor];
-    emailInput = "";
   }
 
   /** Sélection courante → payload d'invitation (règle actée : équipe entière
@@ -277,8 +228,33 @@
     return { teamIds: fullTeams, emails, notifyEmails };
   }
 
-  /** Nombre de personnes qui recevront l'email groupé. */
-  let pendingCount = $derived(buildInvitationPayload().notifyEmails.length);
+  // Ajouter par email (simplifié - la cloud function gère la vérification)
+  function handleAddEmail() {
+    if (!emailInput) return;
+    const email = emailInput.trim();
+
+    // Vérif doublons LOCALEMENT uniquement
+    if (
+      contributors.some((c) => c.email === email) ||
+      newContributors.some((c) => c.email === email)
+    ) {
+      inviteError = "Cet email est déjà invité.";
+      return;
+    }
+
+    inviteError = null;
+
+    // Ajouter simplement l'email - la cloud function fera la distinction
+    const newContributor: EventContributor = {
+      id: nanoid(), // ID temporaire
+      email: email,
+      status: "invited",
+      invitedAt: new Date().toISOString(),
+    };
+
+    newContributors = [...newContributors, newContributor];
+    emailInput = "";
+  }
 
   // Fonction pour valider et envoyer les invitations
   async function validateInvitations() {
@@ -377,12 +353,27 @@
     }
   }
 
+  async function loadShareLinks() {
+    if (!eventId || !userId) return;
+    try {
+      // Chaque event porte son lien dès la création ; le get-or-ensure
+      // rattrape aussi les events créés avant cette garantie
+      shareLinkIds = await getOrEnsureShareLinks(eventId, userId);
+    } catch {
+      shareLinkIds = [];
+    }
+  }
+
   function copyToClipboard(linkId: string) {
     const url = `${window.location.origin}/join/${linkId}`;
     navigator.clipboard.writeText(url).then(() => {
       toastService.success("Lien copié dans le presse-papier !");
     });
   }
+
+  onMount(() => {
+    loadShareLinks();
+  });
 </script>
 
 <Fieldset legend="Participants">
@@ -614,11 +605,11 @@
       <div class="alert alert-soft text-sm alert-info">
         <Info class="h-5 w-5 shrink-0" />
         <span>
-          Un email groupé avec le lien de participation sera envoyé aux
-          personnes cochées — l'invitation est irrévocable. Une équipe
-          entièrement cochée accorde l'accès à ses futurs membres ; cochée
-          partiellement, seuls ses membres cochés sont invités. Les invités
-          voient l'événement et confirment ensuite leur participation.
+          Un email groupé avec le lien de partage sera envoyé aux personnes
+          cochées — l'invitation est irrévocable. Une équipe entièrement cochée
+          accorde l'accès à ses futurs membres ; cochée partiellement, seuls ses
+          membres cochés sont invités. Les invités voient l'événement et
+          confirment ensuite leur participation.
         </span>
       </div>
 
@@ -778,7 +769,7 @@
 <ConfirmModal
   isOpen={showInviteConfirm}
   title="Confirmer l'invitation"
-  message="Un email avec le lien de participation sera envoyé à {pendingCount}
+  message="Un email avec le lien de partage sera envoyé à {pendingCount}
     personne(s). L'invitation est irrévocable — le lien reste valable."
   variant="warning"
   confirmLabel="Envoyer l'invitation"

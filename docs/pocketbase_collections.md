@@ -1,6 +1,6 @@
 # Schéma PocketBase ↔ API rules ↔ svelte-app
 
-> État des lieux au 21-10-2026 (worktree `enka-cookbook-mig`, phase 1).
+> État des lieux au 22-10-2026 (worktree `enka-cookbook-mig`, phase 1).
 > Méthode : extraction directe de `_collections` dans `pocketbase/pb_data/data.db`,
 > croisée avec l'usage runtime (stores, services, hooks JSVM, routes).
 > Ce document signale les **champs et collections inutilisés** et les points

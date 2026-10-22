@@ -8,7 +8,7 @@ import {
 } from "../materiel-list.utils";
 import type {
   MaterielWithAvailability,
-  LoanSegment,
+  LoanListFilters,
 } from "../materiel-list.utils";
 
 // Les utils ne lisent que id/name/type/availableForPeriod : le cast évite de
@@ -58,48 +58,64 @@ describe("filterLoanMateriels", () => {
   ];
 
   function filterWith(
-    segments: LoanSegment[],
+    filter: Partial<LoanListFilters> = {},
     quantities: Record<string, number> = {},
     search = "",
   ) {
-    return filterLoanMateriels(items, { segments, quantities, search });
+    return filterLoanMateriels(items, {
+      segment: "",
+      availableOnly: false,
+      ...filter,
+      quantities,
+      search,
+    });
   }
 
-  it("aucun segment actif : tout passe", () => {
-    expect(filterWith([])).toHaveLength(3);
+  it("sans filtre : tout passe", () => {
+    expect(filterWith()).toHaveLength(3);
   });
 
-  it("un segment actif : filtre exclusif classique", () => {
-    expect(filterWith(["selected"], { a: 1 }).map((i) => i.id)).toEqual(["a"]);
-    expect(filterWith(["unselected"], { a: 2 }).map((i) => i.id)).toEqual([
-      "b",
+  it("segment exclusif 'selected' : quantité >= 1", () => {
+    expect(
+      filterWith({ segment: "selected" }, { a: 1 }).map((i) => i.id),
+    ).toEqual(["a"]);
+  });
+
+  it("segment exclusif 'unselected' : quantité 0 ou absente", () => {
+    expect(
+      filterWith({ segment: "unselected" }, { a: 2 }).map((i) => i.id),
+    ).toEqual(["b", "c"]);
+  });
+
+  it("availableOnly restreint aux disponibles sur la période", () => {
+    expect(filterWith({ availableOnly: true }).map((i) => i.id)).toEqual([
+      "a",
       "c",
     ]);
-    expect(filterWith(["available"]).map((i) => i.id)).toEqual(["a", "c"]);
   });
 
-  it("plusieurs segments : union sans doublon", () => {
-    // a est à la fois sélectionné et disponible : une seule occurrence
+  it("segment et availableOnly se composent en ET (l'indisponible non sélectionné reste masqué)", () => {
     expect(
-      filterWith(["selected", "available"], { a: 1 }).map((i) => i.id),
+      filterWith({ segment: "unselected", availableOnly: true }).map(
+        (i) => i.id,
+      ),
     ).toEqual(["a", "c"]);
-    // l'union sélectionnés ∪ non sélectionnés couvre tout
     expect(
-      filterWith(["selected", "unselected"], { a: 1 }).map((i) => i.id),
-    ).toEqual(["a", "b", "c"]);
+      filterWith({ segment: "selected", availableOnly: true }, { b: 1 }).map(
+        (i) => i.id,
+      ),
+    ).toEqual([]);
   });
 
   it("recherche : filtre insensible à la casse sur le nom", () => {
-    expect(filterWith([], {}, "louc").map((i) => i.id)).toEqual(["b"]);
+    expect(filterWith({}, {}, "louc").map((i) => i.id)).toEqual(["b"]);
   });
 
-  it("recherche et union se composent (critères indépendants)", () => {
+  it("recherche et filtres se composent (critères indépendants)", () => {
     expect(
-      filterWith(["selected", "available"], { a: 1, c: 1 }, "pla").map(
-        (i) => i.id,
-      ),
+      filterWith({ segment: "selected" }, { c: 1 }, "pla").map((i) => i.id),
     ).toEqual(["c"]);
-    expect(filterWith(["selected"], {}, "pla")).toHaveLength(0);
+    expect(filterWith({ segment: "selected" }, {}, "pla")).toHaveLength(0);
   });
 });
 

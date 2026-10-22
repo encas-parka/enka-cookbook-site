@@ -1,21 +1,17 @@
 <script lang="ts">
   /**
-   * Facettes de la sidebar du dossier emprunt : types de l'inventaire et
-   * segments d'affichage, tous deux multi-sélection (union). Le filtre ne
-   * porte que la liste de matériel — la recherche reste en tête de liste.
+   * Facettes de la sidebar du dossier emprunt : type exclusif, segment
+   * d'affichage exclusif et restriction « disponible » indépendante (ET).
+   * Le filtre ne porte que la liste de matériel — la recherche reste en
+   * tête de liste.
    */
   import { ListFilter, Package, FunnelX, Funnel } from "@lucide/svelte";
   import Fieldset from "$lib/components/ui/Fieldset.svelte";
   import CheckboxBadge from "$lib/components/ui/CheckboxBadge.svelte";
   import {
     loanTypeLabel,
-    type LoanSegment,
+    type LoanListFilters,
   } from "$lib/utils/materiel-list.utils";
-
-  export interface LoanListFilters {
-    types: string[];
-    segments: LoanSegment[];
-  }
 
   interface Props {
     filters: LoanListFilters;
@@ -32,21 +28,8 @@
     onReset,
   }: Props = $props();
 
-  const segmentOptions: { value: LoanSegment; label: string }[] = [
-    { value: "selected", label: "Sélectionnés" },
-    { value: "unselected", label: "Non sélectionnés" },
-    { value: "available", label: "Disponible" },
-  ];
-
-  function toggleArrayItem<T>(array: T[], item: T) {
-    const index = array.indexOf(item);
-    if (index === -1) {
-      array.push(item);
-    } else {
-      array.splice(index, 1);
-    }
-    // Trigger reactivity
-    filters = { ...filters };
+  function setFilter(patch: Partial<LoanListFilters>) {
+    filters = { ...filters, ...patch };
   }
 </script>
 
@@ -61,38 +44,69 @@
     </button>
   </div>
 
-  <!-- Types -->
+  <!-- Type : sélecteur exclusif -->
   <Fieldset legend="Type" iconComponent={Package}>
-    <div class="flex flex-wrap gap-3">
+    <div class="flex flex-wrap gap-1 rounded-xl bg-base-100 p-2 font-semibold">
+      <button
+        class="btn flex-1 btn-sm {filters.type === '' && 'btn-secondary'}"
+        type="button"
+        aria-pressed={filters.type === ""}
+        onclick={() => setFilter({ type: "" })}
+      >
+        Tous
+      </button>
       {#each availableTypes as type (type)}
-        <CheckboxBadge
-          checked={filters.types.includes(type)}
-          label={loanTypeLabel(type)}
-          onchange={() => toggleArrayItem(filters.types, type)}
-          {disabled}
-          color="secondary"
-          size="md"
-        />
+        <button
+          class="btn flex-1 btn-sm {filters.type === type && 'btn-secondary'}"
+          type="button"
+          aria-pressed={filters.type === type}
+          onclick={() => setFilter({ type })}
+        >
+          {loanTypeLabel(type)}
+        </button>
       {/each}
     </div>
   </Fieldset>
 
-  <!-- Segments (union) -->
+  <!-- Affichage : segment exclusif + disponible indépendant -->
   <Fieldset legend="Affichage" iconComponent={ListFilter}>
-    <div class="flex flex-wrap gap-3">
-      {#each segmentOptions as opt (opt.value)}
-        <CheckboxBadge
-          checked={filters.segments.includes(opt.value)}
-          label={opt.label}
-          onchange={() => toggleArrayItem(filters.segments, opt.value)}
-          {disabled}
-          color="secondary"
-          size="md"
-        />
-      {/each}
+    <div class="flex flex-wrap gap-1 rounded-xl bg-base-100 p-2 font-semibold">
+      <button
+        class="btn flex-1 btn-sm {filters.segment === '' && 'btn-secondary'}"
+        type="button"
+        aria-pressed={filters.segment === ""}
+        onclick={() => setFilter({ segment: "" })}
+      >
+        Tous
+      </button>
+      <button
+        class="btn flex-1 btn-sm {filters.segment === 'selected' &&
+          'btn-secondary'}"
+        type="button"
+        aria-pressed={filters.segment === "selected"}
+        onclick={() => setFilter({ segment: "selected" })}
+      >
+        Sélectionnés
+      </button>
+      <button
+        class="btn flex-1 btn-sm {filters.segment === 'unselected' &&
+          'btn-secondary'}"
+        type="button"
+        aria-pressed={filters.segment === "unselected"}
+        onclick={() => setFilter({ segment: "unselected" })}
+      >
+        Non sélectionnés
+      </button>
     </div>
-    <p class="mt-2 px-1 text-xs opacity-60">
-      Rien de coché : tout l'inventaire est affiché.
-    </p>
+    <div class="mt-2">
+      <CheckboxBadge
+        checked={filters.availableOnly}
+        label="Disponible sur la période"
+        onchange={() => setFilter({ availableOnly: !filters.availableOnly })}
+        {disabled}
+        color="secondary"
+        size="md"
+      />
+    </div>
   </Fieldset>
 </div>

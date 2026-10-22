@@ -3,14 +3,15 @@
    * Liste plate de sélection du matériel d'un emprunt : recherche locale,
    * groupes par type, quantités par item.
    *
-   * Les facettes (types + segments) viennent de la sidebar de la page
-   * dossier et restent vides dans le modal (tout afficher) ; la recherche,
-   * elle, reste propre à la liste.
+   * Les filtres (type exclusif, segment exclusif, disponible) vivent dans un
+   * objet bindable partagé avec la sidebar de la page dossier. Sous la
+   * recherche, un sélecteur de segment compact complete la sidebar là où
+   * elle n'est pas visible : mobile (page) et modal.
    *
    * Regroupement : en desktop les groupes sont toujours ouverts et leur
    * en-tête n'est pas interactif ; en mobile ils sont repliés au départ et
    * se comportent en accordéon — sauf quand la recherche est active ou que
-   * le segment « Sélectionnés » est coché : tous les groupes non vides
+   * le segment « Sélectionnés » est affiché : tous les groupes non vides
    * s'ouvrent.
    */
   import {
@@ -33,13 +34,14 @@
   import { globalState } from "$lib/stores/GlobalState.svelte";
   import type {
     GhostLoanItem,
-    LoanSegment,
+    LoanListFilters,
     MaterielGroup,
     MaterielWithAvailability,
   } from "$lib/utils/materiel-list.utils";
   import {
     clampQuantity,
     countAvailable,
+    EMPTY_LOAN_FILTERS,
     filterLoanMateriels,
     groupMaterielsByType,
     loanTypeLabel,
@@ -53,10 +55,16 @@
     loading?: boolean;
     /** Projection réactive de la sélection (lecture côté parent, mutation ici). */
     quantities?: Record<string, number>;
-    /** Types affichés (facette sidebar) ; vide = tous. */
-    typeFilter?: string[];
-    /** Segments actifs (facette sidebar, union) ; vide = tous. */
-    segments?: LoanSegment[];
+    /**
+     * Filtres partagés avec la sidebar (type, segment, disponible) ; les
+     * mutations du sélecteur compact sous la recherche remontent au parent.
+     */
+    filter?: LoanListFilters;
+    /**
+     * Affiche le sélecteur de segment sous la recherche même en desktop :
+     * pour le modal, qui n'a pas de sidebar.
+     */
+    showSegmentInline?: boolean;
     /**
      * Point d'ancrage de la barre sticky, selon l'enveloppe : la modale
      * compense le padding du scroll container, la page se cale sous la
@@ -70,28 +78,35 @@
     ghostItems = [],
     loading = false,
     quantities = $bindable({}),
-    typeFilter = [],
-    segments = [],
+    filter = $bindable({ ...EMPTY_LOAN_FILTERS }),
+    showSegmentInline = false,
     stickyClass = "-top-4 sm:-top-2",
   }: Props = $props();
 
   let search = $state("");
   /** Groupe déplié en mobile (accordéon) ; ignoré en desktop / recherche. */
   let openType = $state<string | null>(null);
+  /** Bandeaux de sélection dépliés (voir tous) ou limités à deux lignes. */
+  let badgesOpen = $state(false);
 
   const searchActive = $derived(search.trim().length > 0);
   /** Contextes où l'accordéon cède : tous les groupes non vides sont ouverts. */
-  const forcedOpen = $derived(searchActive || segments.includes("selected"));
+  const forcedOpen = $derived(searchActive || filter.segment === "selected");
+
+  const showInlineSegment = $derived(
+    showSegmentInline || !globalState.isDesktop,
+  );
 
   const groups = $derived(groupMaterielsByType(materiels));
 
   const filteredGroups = $derived(
     groups
-      .filter((g) => typeFilter.length === 0 || typeFilter.includes(g.type))
+      .filter((g) => !filter.type || g.type === filter.type)
       .map((g) => ({
         ...g,
         items: filterLoanMateriels(g.items, {
-          segments,
+          segment: filter.segment,
+          availableOnly: filter.availableOnly,
           quantities,
           search,
         }),
@@ -102,6 +117,14 @@
   const allUnavailable = $derived(
     materiels.length > 0 && countAvailable(materiels) === 0,
   );
+
+  /** Sélection courante, pour les badges récapitulatifs cliquables. */
+  const selectedItems = $derived.by(() => {
+    const nameById = new Map(materiels.map((m) => [m.id, m.name]));
+    return Object.entries(quantities)
+      .filter(([, qty]) => qty >= 1)
+      .map(([id, qty]) => ({ id, name: nameById.get(id) ?? "", qty }));
+  });
 
   const typeIcons: Record<string, Component<any>> = {
     cooking: ChefHat,
@@ -114,6 +137,15 @@
     other: Package,
   };
 
+  const segmentInlineOptions: {
+    value: LoanListFilters["segment"];
+    label: string;
+  }[] = [
+    { value: "", label: "Tous" },
+    { value: "selected", label: "Sélectionnés" },
+    { value: "unselected", label: "Non sélectionnés" },
+  ];
+
   function isOpen(type: string): boolean {
     return globalState.isDesktop || forcedOpen || openType === type;
   }
@@ -121,6 +153,25 @@
   /** Accordéon mobile : déplier un groupe replie l'éventuel autre. */
   function toggleGroup(type: string) {
     openType = openType === type ? null : type;
+  }
+
+  function setFilter(patch: Partial<LoanListFilters>) {
+    filter = { ...filter, ...patch };
+  }
+
+  /**
+   * Ouvre le groupe du matériel puis fait défiler jusqu'à sa rangée —
+   * utile depuis un badge de sélection, surtout en mobile où les groupes
+   * sont repliés.
+   */
+  function scrollToMateriel(id: string) {
+    const group = groups.find((g) => g.items.some((m) => m.id === id));
+    if (group && !isOpen(group.type)) openType = group.type;
+    setTimeout(() => {
+      document
+        .getElementById(`loan-materiel-${id}`)
+        ?.scrollIntoView({ behavior: "smooth", block: "center" });
+    });
   }
 
   function setQuantity(item: MaterielWithAvailability, qty: number) {
@@ -165,7 +216,7 @@
 
   // --- API impérative (bind:this côté parent) ---
 
-  /** Réinitialise la sélection et la recherche ; groupes repliés (mobile). */
+  /** Réinitialise la sélection, la recherche et les groupes (mobile). */
   export function reset(initial: Record<string, number>) {
     quantities = { ...initial };
     search = "";
@@ -232,7 +283,65 @@
           </button>
         {/if}
       </label>
+
+      {#if showInlineSegment}
+        <!-- Sélecteur compact : la sidebar n'est pas visible ici (mobile,
+             modal) — même état que les facettes, mutations partagées -->
+        <div
+          class="flex flex-wrap gap-1 rounded-xl bg-base-200 p-1 font-semibold"
+        >
+          {#each segmentInlineOptions as opt (opt.value)}
+            <button
+              class="btn flex-1 btn-xs {filter.segment === opt.value &&
+                'btn-secondary'}"
+              type="button"
+              aria-pressed={filter.segment === opt.value}
+              onclick={() => setFilter({ segment: opt.value })}
+              disabled={loading}
+            >
+              {opt.label}
+            </button>
+          {/each}
+        </div>
+      {/if}
     </div>
+
+    {#if selectedItems.length > 0}
+      <!-- Récapitulatif de la sélection : plié à deux lignes, badges
+           cliquables (défile vers la rangée du matériel) -->
+      <div class="rounded-2xl border border-base-200 bg-base-100">
+        <div
+          class="flex flex-wrap gap-1 overflow-hidden p-2 {badgesOpen
+            ? 'max-h-none'
+            : 'max-h-14'}"
+        >
+          {#each selectedItems as sel (sel.id)}
+            <button
+              class="btn gap-1 btn-outline btn-xs"
+              type="button"
+              title="Aller au matériel dans la liste"
+              onclick={() => scrollToMateriel(sel.id)}
+            >
+              {sel.name}
+              <span class="font-bold tabular-nums">×{sel.qty}</span>
+            </button>
+          {/each}
+        </div>
+        <button
+          class="flex w-full items-center justify-center gap-1 pb-1 text-xs text-base-content/60 italic"
+          type="button"
+          aria-expanded={badgesOpen}
+          onclick={() => (badgesOpen = !badgesOpen)}
+        >
+          {badgesOpen ? "masquer" : `tout voir (${selectedItems.length})`}
+          <ChevronDown
+            class="h-3.5 w-3.5 transition-transform {badgesOpen
+              ? 'rotate-180'
+              : ''}"
+          />
+        </button>
+      </div>
+    {/if}
 
     <div class="flex items-center justify-end gap-3 px-1">
       <button
@@ -331,7 +440,10 @@
           <div class="space-y-1 px-3 pb-3">
             {#each group.items as item (item.id)}
               {@const max = item.availableForPeriod ?? 0}
-              <div class="materiel-row">
+              <div
+                class="materiel-row scroll-mt-24"
+                id="loan-materiel-{item.id}"
+              >
                 <CatalogItemRow
                   name={item.name}
                   quantity={quantities[item.id] ?? 0}

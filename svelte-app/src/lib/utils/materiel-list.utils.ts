@@ -9,8 +9,25 @@ export type MaterielWithAvailability = EnrichedMateriel & {
   availableForPeriod?: number;
 };
 
-/** Segments cochables de la liste ; l'union des segments actifs filtre les items. */
-export type LoanSegment = "selected" | "unselected" | "available";
+/** Segment d'affichage exclusif de la liste ; "" = tous. */
+export type LoanSegmentFilter = "" | "selected" | "unselected";
+
+/**
+ * Filtres de la liste d'emprunt : type exclusif ("" = tous), segment
+ * d'affichage exclusif ("" = tous) et restriction « disponible sur la
+ * période » qui se compose en ET avec le segment.
+ */
+export interface LoanListFilters {
+  type: string;
+  segment: LoanSegmentFilter;
+  availableOnly: boolean;
+}
+
+export const EMPTY_LOAN_FILTERS: LoanListFilters = Object.freeze({
+  type: "",
+  segment: "",
+  availableOnly: false,
+});
 
 /** Item d'un emprunt sans matériel vivant correspondant (supprimé du stock). */
 export interface GhostLoanItem {
@@ -62,8 +79,9 @@ export function groupMaterielsByType(
 }
 
 interface FilterOptions {
-  /** Segments actifs (union) ; vide = tous les items. */
-  segments: LoanSegment[];
+  segment: LoanSegmentFilter;
+  /** Restreindre aux matériels disponibles sur la période (ET avec segment). */
+  availableOnly: boolean;
   /** Sélection courante (materielId → quantité). */
   quantities: Record<string, number>;
   /** Recherche insensible à la casse sur le nom. */
@@ -72,24 +90,16 @@ interface FilterOptions {
 
 export function filterLoanMateriels(
   items: MaterielWithAvailability[],
-  { segments, quantities, search }: FilterOptions,
+  { segment, availableOnly, quantities, search }: FilterOptions,
 ): MaterielWithAvailability[] {
   const q = search.toLowerCase().trim();
   return items.filter((item) => {
     if (q && !item.name.toLowerCase().includes(q)) return false;
-    if (segments.length === 0) return true;
     const selected = (quantities[item.id] ?? 0) >= 1;
-    // Union : un item passe s'il satisfait au moins un segment actif.
-    return segments.some((segment) => {
-      switch (segment) {
-        case "selected":
-          return selected;
-        case "unselected":
-          return !selected;
-        case "available":
-          return isAvailableForPeriod(item);
-      }
-    });
+    if (segment === "selected" && !selected) return false;
+    if (segment === "unselected" && selected) return false;
+    if (availableOnly && !isAvailableForPeriod(item)) return false;
+    return true;
   });
 }
 

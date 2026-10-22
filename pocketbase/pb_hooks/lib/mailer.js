@@ -144,7 +144,6 @@ function sendBatch(emails, senderName) {
   for (var g = 0; g < groups.length; g++) {
     var group = groups[g];
     var result = sendEmail({
-      to: "",
       bcc: group.recipients,
       subject: group.subject,
       html: group.html,

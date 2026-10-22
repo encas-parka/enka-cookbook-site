@@ -17,7 +17,7 @@ function respond(socket, line) {
 }
 
 // Extraire les en-têtes qui exposent les destinataires (To, Cc, Bcc)
-function recipientHeaders(dataLines) {
+function parseRecipientHeaders(dataLines) {
   const headers = {};
   for (const line of dataLines) {
     if (line === "") break; // fin des en-têtes
@@ -52,17 +52,18 @@ createServer((socket) => {
         if (line === ".") {
           inData = false;
           respond(socket, "250 OK queued");
+          const recipientHeaders = parseRecipientHeaders(dataLines);
           appendFileSync(
             SINK_LOG,
             JSON.stringify({
               ts: Date.now(),
               from,
               rcptTo,
-              headers: recipientHeaders(dataLines),
+              headers: recipientHeaders,
             }) + "\n",
           );
           console.log(
-            `[smtp-sink] message: from=${from} rcptTo=[${rcptTo.join(", ")}] headers=${JSON.stringify(recipientHeaders(dataLines))}`,
+            `[smtp-sink] message: from=${from} rcptTo=[${rcptTo.join(", ")}] headers=${JSON.stringify(recipientHeaders)}`,
           );
           from = "";
           rcptTo = [];

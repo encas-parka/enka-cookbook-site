@@ -164,6 +164,55 @@ déduplication du catalogue, qui est une autre opération (cf. ci-dessus).
   `cascade-delete-teams`, `invite-to-team` — les cascades delete
   `share_links` sont la raison du composite `(target_id, link_type)`.
 
+## Le flux d'invitation RSVP : registre, visibilité, grant équipe
+
+Trois canaux cohabitent sur `events` pour la participation (décision :
+[ADR 0002](adr/0002-client-side-rsvp.md) — le RSVP porte l'accès côté
+client, les règles serveur restent volontairement grossières) :
+
+```
+contributors (json) = registre des participants
+    état RSVP individuel : {id, email, name, status: invited|accepted|declined,
+    invitedAt, respondedAt} (+ dérivés d'équipe pour l'UI)
+    écrit par le client (inviteParticipants, updateContributorStatus) et par
+    le hook join-event (entrée en statut `invited`, rattachement nanoid →
+    userId au premier join par lien)
+    → jamais lu par le serveur (json non traversable : aucune règle)
+
+guestUsers (relation) = visibilité individuelle
+    comptes PB résolus à l'invitation (hook join-event inclus) — filtrée
+    par les règles events list/view/update
+
+teams (relation) = grant équipe vivant
+    équipes entières cochées : la règle `teams.members ~` rend leurs membres
+    visibles sans individualisation ; leur statut « invité » est dérivé côté
+    UI à la lecture, jamais persisté
+```
+
+### Ce qui est design assumé (à préserver)
+
+- **Le registre ne porte jamais la visibilité** (invariant du glossaire) :
+  l'accès ne passe que par `guestUsers` / `teams`, relations traversables
+  par le moteur de règles ; `contributors` décrit l'état, le serveur
+  l'ignore.
+- **Email hors compte = aucune existence serveur** : pas de
+  pré-enregistrement d'adresse (le champ de tracking des emails, héritage
+  Labels Appwrite, a été supprimé du schéma) — l'invitation d'un inconnu
+  s'arrête au registre, et le lien de partage est son seul chemin d'entrée
+  (le registre porte la confirmation).
+- **L'éditeur écrit les canaux en bloc** : les règles ne séparent pas « qui
+  pose les grants » de « qui confirme son RSVP » — même updateRule pour
+  tous les éditeurs ; modèle de confiance documenté dans l'ADR.
+
+### Ce que ce choix coûte
+
+- **Statut dérivé = statut volatil** : l'« invité » d'un membre d'équipe
+  entière n'existe nulle part en base — l'UI le dérive à la lecture ; un
+  lecteur hors UI (script, export) doit rejouer la même dérivation.
+- **Le registre n'est requêtable par rien** : pas de query ni d'index sur
+  les invitations (json non traversable) — même limite que
+  `events.todos` (cf. asymétrie n° 1).
+
 ## Règle de maintenance
 
 Toute évolution de schéma passe par une migration dans

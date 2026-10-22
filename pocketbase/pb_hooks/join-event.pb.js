@@ -14,11 +14,12 @@
 //   2. Verifier le lien : type "event", actif, non expire, maxUses non atteint
 //   3. Verifier l'evenement cible : statut joignable (proposition/confirmed,
 //      fail-closed sur toute autre valeur)
-//   4. Ajouter l'utilisateur dans guestUsers[] + guestEmails[] (si pas deja present)
-//   5. Contributors : entree dediee (id reel), dedoublonnee par email —
-//      une entree existante de meme email (id nanoid pose par inviteParticipants)
-//      est rattachee au vrai userId ; son statut n'est pas ecrase (le RSVP
-//      cote client reste maitre d'une invitation en attente)
+//   4. Ajouter l'utilisateur dans guestUsers[] (si pas deja present)
+//   5. Contributors : entree dediee (id reel) en statut "invited" — rejoindre
+//      par le lien vaut reception d'une invitation, la confirmation se fait
+//      depuis le bandeau ; dedoublonnage par email : une entree existante de
+//      meme email (id nanoid pose par inviteParticipants) est rattachee au
+//      vrai userId, son statut est preserve (le RSVP cote client reste maitre)
 //   6. Incrementer useCount (premier join uniquement) — read-modify-save sans
 //      verrou : race JSVM assumee, deux joins concurrents peuvent deborder
 //      maxUses d'une unite
@@ -149,15 +150,6 @@ routerAdd(
       guestUsersChanged = true;
     }
 
-    // --- Ajouter l'email dans guestEmails[] pour tracking ---
-    var guestArray = jsonArray(event, "guestEmails");
-
-    var guestEmailsChanged = false;
-    if (guestArray.indexOf(userEmail) === -1) {
-      event.set("guestEmails", guestArray.concat([userEmail]));
-      guestEmailsChanged = true;
-    }
-
     // --- Contributors : dedoublonnage par email ---
     var contributorArray = jsonArray(event, "contributors");
 
@@ -176,7 +168,9 @@ routerAdd(
     }
 
     if (matchIndex === -1) {
-      var entry = { id: userId, email: userEmail, status: "accepted" };
+      // Le lien invite, il ne confirme pas : l'entree nait "invited", la
+      // personne repond depuis le bandeau (RSVP cote client)
+      var entry = { id: userId, email: userEmail, status: "invited" };
       if (userName) {
         entry.name = userName;
       }
@@ -207,12 +201,7 @@ routerAdd(
     }
 
     // --- Save si quelque chose a change ---
-    if (
-      guestUsersChanged ||
-      guestEmailsChanged ||
-      contributorsChanged ||
-      useCountChanged
-    ) {
+    if (guestUsersChanged || contributorsChanged || useCountChanged) {
       $app.save(event);
       if (useCountChanged) {
         $app.save(shareLink);

@@ -3,7 +3,8 @@
  *
  * createShareLink : CRUD direct sur la collection share_links
  * redeemShareLink : appelle la route custom PB /api/enka/join-event
- *                   (le hook server-side ajoute l'email dans guestEmails[])
+ *                   (le hook server-side pose l'invitation : entrée au
+ *                   registre en statut invité, accès via guestUsers[])
  */
 
 import { pb } from "$lib/db-sync/pb-sync";
@@ -78,7 +79,9 @@ export async function regenerateShareLink(
 
 /**
  * Utilise un share link pour rejoindre un événement.
- * Appelle la route custom PB qui ajoute l'email dans guestEmails[] côté serveur.
+ * Appelle la route custom PB qui pose l'invitation côté serveur : entrée au
+ * registre en statut invité (le bandeau porte la confirmation) et accès via
+ * guestUsers[]. Idempotent — re-joindre ne duplique rien.
  *
  * @param linkId - ID du share_link (= UUID dans l'URL /join/:linkId)
  * @param _userId - ID de l'utilisateur courant (inutilisé — PB lit e.auth)

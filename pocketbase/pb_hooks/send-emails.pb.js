@@ -31,6 +31,11 @@
 //   results: [{ email: string, ok: boolean, error?: string }]
 // }
 //
+// L'expedition est groupee par le mailer : les emails de contenu identique
+// (un meme evenement, contenu relu serveur) partagent une seule expedition
+// SMTP, tous les destinataires en copie cachee — voir lib/mailer.js
+// sendBatch. Les resultats restent donnes par destinataire.
+//
 // Un refus (lien introuvable/inactif/etranger, event cible mort) est reporte
 // par destinataire (ok: false + error) et logge en warn ; la reponse reste 200.
 // Le SMTP n'est verifie que si au moins un email doit partir : un lot

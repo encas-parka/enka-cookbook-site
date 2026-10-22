@@ -139,7 +139,8 @@
         <PartyPopper class="mb-2 size-12 text-success" />
         <h2 class="card-title text-success">Accès accordé !</h2>
         <p class="mt-1 text-sm text-base-content/60">
-          Vous avez rejoint l'événement. Redirection en cours...
+          Vous avez rejoint l'événement. Confirmez votre participation depuis le
+          bandeau d'invitation.
         </p>
         <span class="loading mt-3 loading-sm loading-dots text-primary"></span>
       {:else if step === "error"}

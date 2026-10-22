@@ -5,6 +5,9 @@
  *   - Vérification de la config SMTP
  *   - Logging standardisé
  *   - Gestion d'erreur par email (un échec ne bloque pas les autres)
+ *   - Regroupement des envois batch : un contenu identique (sujet + html)
+ *     part en une seule expédition SMTP, tous les destinataires en copie
+ *     cachée (BCC)
  *
  * @usage (depuis un handler .pb.js) :
  *   var mailer = require(__hooks + "/lib/mailer.js");
@@ -14,7 +17,8 @@
  *     html: "<h1>Hello</h1>"
  *   });
  *
- * // Envoi batch (retourne les résultats individuels) :
+ * // Envoi batch (résultats individuels ; contenus identiques regroupés
+ * // en une expédition, destinataires en BCC) :
  *   var results = mailer.sendBatch([
  *     { to: "a@example.com", subject: "S1", html: "<p>A</p>" },
  *     { to: "b@example.com", subject: "S2", html: "<p>B</p>" },
@@ -40,7 +44,8 @@ function getSenderAddress() {
  * Envoie un seul email.
  *
  * @param {Object} opts
- * @param {string} opts.to - Adresse du destinataire
+ * @param {string} [opts.to] - Adresse du destinataire principal
+ * @param {Array<string>} [opts.bcc] - Destinataires en copie cachée
  * @param {string} opts.subject - Sujet de l'email
  * @param {string} opts.html - Corps HTML de l'email
  * @param {string} [opts.from] - Adresse d'expédition (défaut: config PB)
@@ -49,11 +54,12 @@ function getSenderAddress() {
  */
 function sendEmail(opts) {
   var to = opts.to || "";
+  var bcc = opts.bcc || [];
   var subject = opts.subject || "";
   var html = opts.html || "";
   var senderName = opts.senderName || "send-emails";
 
-  if (!to) {
+  if (!to && bcc.length === 0) {
     return { ok: false, error: "Adresse destinataire manquante" };
   }
 
@@ -62,18 +68,27 @@ function sendEmail(opts) {
   }
 
   var from = opts.from || getSenderAddress();
+  // Quand tout le monde est en copie cachée, le To reprend l'expéditeur :
+  // aucun destinataire n'est exposé aux autres.
+  var toAddress = to || from;
 
   try {
+    var bccAddresses = bcc.map(function (address) {
+      return { address: address };
+    });
     var message = new MailerMessage({
       from: { address: from },
-      to: [{ address: to }],
+      to: [{ address: toAddress }],
+      bcc: bccAddresses,
       subject: subject,
       html: html,
     });
 
     $app.newMailClient().send(message);
 
-    console.log("[" + senderName + "] Email envoye a " + to); // dev stdout
+    // dev stdout : la liste BCC s'y lit en clair
+    var recipientsLog = bcc.length > 0 ? bcc.join(", ") + " (bcc)" : toAddress;
+    console.log("[" + senderName + "] Email envoye a " + recipientsLog);
     return { ok: true };
   } catch (err) {
     $app
@@ -83,7 +98,9 @@ function sendEmail(opts) {
         "sender",
         senderName,
         "to",
-        to,
+        toAddress,
+        "bccCount",
+        String(bcc.length),
         "error",
         String(err),
       );
@@ -92,7 +109,10 @@ function sendEmail(opts) {
 }
 
 /**
- * Envoie un batch d'emails. Un échec individuel ne bloque pas les autres.
+ * Envoie un batch d'emails en regroupant les contenus identiques : un
+ * couple (sujet, html) = une seule expédition SMTP, tous ses destinataires
+ * en copie cachée. Un échec d'expédition marque tout son groupe ; les
+ * résultats restent donnés par destinataire.
  *
  * @param {Array<{ to: string, subject: string, html: string }>} emails
  * @param {string} [senderName] - Nom pour le logging
@@ -103,25 +123,46 @@ function sendBatch(emails, senderName) {
   var okCount = 0;
   var failCount = 0;
 
+  // Regroupe par contenu : les emails d'un même événement partagent sujet
+  // et html (contenu relu côté serveur) → une seule expédition par groupe.
+  var groups = [];
+  var byContent = {};
   for (var i = 0; i < emails.length; i++) {
     var opts = emails[i];
+    var key = opts.subject + "\u0000" + opts.html;
+    if (!byContent[key]) {
+      byContent[key] = {
+        subject: opts.subject,
+        html: opts.html,
+        recipients: [],
+      };
+      groups.push(byContent[key]);
+    }
+    byContent[key].recipients.push(opts.to);
+  }
+
+  for (var g = 0; g < groups.length; g++) {
+    var group = groups[g];
     var result = sendEmail({
-      to: opts.to,
-      subject: opts.subject,
-      html: opts.html,
+      to: "",
+      bcc: group.recipients,
+      subject: group.subject,
+      html: group.html,
       senderName: senderName || "send-batch",
     });
 
-    results.push({
-      to: opts.to,
-      ok: result.ok,
-      error: result.error || undefined,
-    });
+    for (var r = 0; r < group.recipients.length; r++) {
+      results.push({
+        to: group.recipients[r],
+        ok: result.ok,
+        error: result.error || undefined,
+      });
+    }
 
     if (result.ok) {
-      okCount++;
+      okCount += group.recipients.length;
     } else {
-      failCount++;
+      failCount += group.recipients.length;
     }
   }
 
@@ -131,6 +172,8 @@ function sendBatch(emails, senderName) {
       "Batch email complete",
       "sender",
       senderName || "send-batch",
+      "expeditions",
+      String(groups.length),
       "ok",
       String(okCount),
       "failed",

@@ -438,8 +438,6 @@
   $effect(() => {
     // L'init suit l'emprunt : sv-router réutilise le composant entre deux
     // urls du même motif (création → édition d'un autre emprunt).
-    const openKey = `${mode}:${loanId ?? "new"}`;
-
     untrack(() => {
       // La capture de baseline (effet dédié ci-dessous) suit l'init : à
       // null ici, elle recapture l'état fraîchement rempli.

@@ -106,14 +106,16 @@
 </script>
 
 <div
-  class="group card card-side cursor-pointer border border-base-200 bg-base-100 text-left shadow-sm transition-all card-xs hover:border-primary/50 hover:shadow-md"
+  class="group card card-side border border-base-200 bg-base-100 text-left shadow-sm transition-all card-xs {canEdit
+    ? 'cursor-pointer hover:border-primary/50 hover:shadow-md'
+    : ''}"
   role="button"
-  tabindex="0"
+  tabindex={canEdit ? 0 : -1}
   onclick={() => canEdit && onEdit?.(materiel.id)}
   onkeydown={(e) => {
-    if (e.key === "Enter" || e.key === " ") {
+    if (canEdit && (e.key === "Enter" || e.key === " ")) {
       e.preventDefault();
-      canEdit && onEdit?.(materiel.id);
+      onEdit?.(materiel.id);
     }
   }}
 >
@@ -251,13 +253,15 @@
   <!-- Actions -->
   {#if canEdit}
     <div class="flex items-center p-2">
+      <!-- Raccourci pointeur : la card porte déjà le geste (rôle + clavier) ;
+           ce bouton reste hors tabulation pour éviter l'interactif imbriqué. -->
       <button
         class="btn btn-ghost text-primary btn-xs"
+        tabindex="-1"
         onclick={(e) => {
           e.stopPropagation();
           onEdit?.(materiel.id);
         }}
-        aria-label="Éditer"
       >
         <Pencil class="h-4 w-4" />
       </button>

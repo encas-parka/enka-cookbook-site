@@ -39,7 +39,7 @@
     groupMaterielsByType,
     loanTypeLabel,
   } from "$lib/utils/materiel-list.utils";
-  import { getMaterielTypeIcon } from "$lib/utils/materiel.utils";
+  import MaterielTypeGroup from "./MaterielTypeGroup.svelte";
 
   interface Props {
     /** Matériels vivants de l'équipe, dispo calculée sur la période. */
@@ -131,11 +131,6 @@
 
   function isOpen(type: string): boolean {
     return globalState.isDesktop || forcedOpen || openType === type;
-  }
-
-  /** Accordéon mobile : déplier un groupe replie l'éventuel autre. */
-  function toggleGroup(type: string) {
-    openType = openType === type ? null : type;
   }
 
   function setFilter(patch: Partial<LoanListFilters>) {
@@ -387,72 +382,37 @@
     {/if}
 
     {#each filteredGroups as group (group.type)}
-      {@const TypeIcon = getMaterielTypeIcon(group.type)}
       {@const selectedCount = group.items.filter(
         (m) => (quantities[m.id] ?? 0) >= 1,
       ).length}
-      <div
-        class="mx-auto max-w-3xl rounded-lg border border-base-300 bg-base-200"
-      >
-        {#if globalState.isDesktop}
-          <!-- Desktop : structure de lecture, jamais repliable. -->
-          <div
-            class="flex w-full items-center gap-2 p-3 text-left font-semibold"
-          >
-            <TypeIcon class="size-6 opacity-70" />
-            {loanTypeLabel(group.type)}
-            {#if selectedCount > 0}
-              <span class="badge badge-sm tabular-nums badge-primary"
-                >{selectedCount}</span
-              >
-            {/if}
-          </div>
-        {:else}
-          <button
-            class="flex w-full items-center gap-2 p-3 text-left text-base font-semibold"
-            onclick={() => toggleGroup(group.type)}
-            aria-expanded={isOpen(group.type)}
-          >
-            <TypeIcon class="size-6 opacity-70" />
-            {loanTypeLabel(group.type)}
-            {#if selectedCount > 0}
-              <span class="badge badge-sm tabular-nums badge-primary"
-                >{selectedCount}</span
-              >
-            {/if}
-            <ChevronDown
-              class="ml-auto size-4 opacity-50 transition-transform {isOpen(
-                group.type,
-              )
-                ? ''
-                : '-rotate-90'}"
-            />
-          </button>
-        {/if}
-        {#if isOpen(group.type)}
-          <div class="space-y-1 px-3 pb-3">
-            {#each group.items as item (item.id)}
-              {@const max = item.availableForPeriod ?? 0}
-              <div
-                class="materiel-row scroll-mt-24"
-                id="loan-materiel-{item.id}"
-              >
-                <CatalogItemRow
-                  name={item.name}
-                  quantity={quantities[item.id] ?? 0}
-                  maxQuantity={max}
-                  showTakeAll
-                  showClear
-                  size="md"
-                  badge={`${max}/${item.quantity}`}
-                  disabled={loading || max === 0}
-                  unavailableLabel="Indisponible"
-                  onchange={(qty) => setQuantity(item, qty)}
-                />
-              </div>
-            {/each}
-          </div>
-        {/if}
+      <div class="mx-auto max-w-3xl">
+        <MaterielTypeGroup
+          type={group.type}
+          label={loanTypeLabel(group.type)}
+          count={selectedCount > 0 ? selectedCount : undefined}
+          countBadgeClass="badge-primary"
+          collapsible
+          {forcedOpen}
+          bind:openType
+        >
+          {#each group.items as item (item.id)}
+            {@const max = item.availableForPeriod ?? 0}
+            <div class="materiel-row scroll-mt-24" id="loan-materiel-{item.id}">
+              <CatalogItemRow
+                name={item.name}
+                quantity={quantities[item.id] ?? 0}
+                maxQuantity={max}
+                showTakeAll
+                showClear
+                size="md"
+                badge={`${max}/${item.quantity}`}
+                disabled={loading || max === 0}
+                unavailableLabel="Indisponible"
+                onchange={(qty) => setQuantity(item, qty)}
+              />
+            </div>
+          {/each}
+        </MaterielTypeGroup>
       </div>
     {:else}
       <div class="py-8 text-center opacity-60">

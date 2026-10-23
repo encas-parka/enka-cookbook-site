@@ -1,5 +1,6 @@
 <script lang="ts">
   import MaterielCard from "$lib/components/teamMatos/MaterielCard.svelte";
+  import MaterielTypeGroup from "$lib/components/teamMatos/MaterielTypeGroup.svelte";
   import MaterielFilters, {
     type MaterielFiltersType,
   } from "$lib/components/teamMatos/MaterielFilters.svelte";
@@ -10,6 +11,7 @@
   import { globalState } from "$lib/stores/GlobalState.svelte";
   import { materielStore } from "$lib/stores/MaterielStore.svelte";
   import { nativeTeamsStore } from "$lib/stores/NativeTeamsStore.svelte";
+  import { groupByTypeOrder } from "$lib/utils/materiel-list.utils";
   import { ListPlus, Package, Plus } from "@lucide/svelte";
   import { fade } from "svelte/transition";
   import { navBarStore } from "../stores/NavBarStore.svelte";
@@ -86,13 +88,14 @@
   });
 
   // Liste des matériels filtrés
+  const hasActiveFilters = $derived(
+    filters.types.length > 0 ||
+      filters.locations.length > 0 ||
+      filters.statuses.length > 0,
+  );
+
   const filteredMateriels = $derived.by(() => {
     const materiels = teamMateriels;
-
-    const hasActiveFilters =
-      filters.types.length > 0 ||
-      filters.locations.length > 0 ||
-      filters.statuses.length > 0;
 
     if (!hasActiveFilters) return materiels;
 
@@ -115,6 +118,14 @@
       return typeMatch && locationMatch && statusMatch;
     });
   });
+
+  /** Regroupement par type, ordre canonique (MATERIEL_TYPE_ORDER). */
+  const groupedMateriels = $derived(
+    groupByTypeOrder(filteredMateriels, (m) => m.type),
+  );
+
+  /** Groupe déplié en mobile (accordéon, partagé entre groupes). */
+  let openType = $state<string | null>(null);
 
   // Fonction reset des filtres
   function resetFilters() {
@@ -251,13 +262,24 @@
           </div>
         {/if}
       {:else}
-        <!-- Grille de matériel -->
-        <div class="grid grid-cols-1">
-          {#each filteredMateriels as materiel (materiel.id)}
-            <MaterielCard
-              {materiel}
-              onEdit={(materielId) => openEditModal(materielId)}
-            />
+        <!-- Groupes par type : desktop en-têtes statiques, mobile accordéon
+             (replié par défaut, tout ouvert quand des filtres sont actifs) -->
+        <div class="space-y-3">
+          {#each groupedMateriels as group (group.type)}
+            <MaterielTypeGroup
+              type={group.type}
+              count={group.items.length}
+              collapsible
+              forcedOpen={hasActiveFilters}
+              bind:openType
+            >
+              {#each group.items as materiel (materiel.id)}
+                <MaterielCard
+                  {materiel}
+                  onEdit={(materielId) => openEditModal(materielId)}
+                />
+              {/each}
+            </MaterielTypeGroup>
           {/each}
         </div>
       {/if}

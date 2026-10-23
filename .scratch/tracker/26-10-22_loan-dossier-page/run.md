@@ -85,7 +85,7 @@ Retours utilisateur sur l'itération 2, appliqués :
   bouton d'enregistrement masqué (bindable `endDatePast` renommé `frozen`),
   alert-info d'en-tête avec la date de retour. Le modal en profite aussi.
   Renforcement backend déposé au backlog
-  (`backlog/26-10-22_loans-figeage-backend.md`).
+  (`backlog/26-10-22_loans-invariants-backend.md`).
 
 Vérifs : check 0/0, tests 355/355 (`/tmp/opencode/tests-loan-ui-2.log`),
 build OK, autofixer propre sur `LoanMaterielList`.

@@ -41,7 +41,7 @@
     transition:scale={{ duration: 200, start: 0.8 }}
   >
     <div
-      class=" flex items-center gap-2 rounded-full bg-secondary/80 px-3 py-1.5 text-secondary-content shadow-lg"
+      class=" bg-secondary/80 text-secondary-content flex items-center gap-2 rounded-full px-3 py-1.5 shadow-lg"
     >
       <span class="max-w-32 truncate text-xs font-medium">{displayText}</span>
       <button

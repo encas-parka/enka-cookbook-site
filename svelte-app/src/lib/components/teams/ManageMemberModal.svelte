@@ -161,7 +161,7 @@
               disabled={loading}
             />
             <span class="label-text flex flex-1 items-center gap-2">
-              <Crown class="h-5 w-5 text-warning" />
+              <Crown class="text-warning h-5 w-5" />
               <div>
                 <strong class="block">Admin (Owner)</strong>
                 <span class="text-xs opacity-70">
@@ -181,9 +181,9 @@
               disabled={loading}
             />
             <span class="label-text flex flex-1 items-center gap-2">
-              <UserMinus class="h-5 w-5 text-error" />
+              <UserMinus class="text-error h-5 w-5" />
               <div>
-                <strong class="block text-error">Retirer de l'équipe</strong>
+                <strong class="text-error block">Retirer de l'équipe</strong>
                 <span class="text-xs opacity-70">
                   Ce membre ne pourra plus accéder aux ressources de l'équipe
                 </span>

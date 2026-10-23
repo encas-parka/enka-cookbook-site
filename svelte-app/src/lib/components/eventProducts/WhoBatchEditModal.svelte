@@ -224,7 +224,7 @@
         <!-- Gestion des volontaires avec BtnGroupCheck -->
         <div>
           <h5
-            class="mb-2 hidden text-sm text-base-content/70 {volunteerItems.length &&
+            class="text-base-content/70 mb-2 hidden text-sm {volunteerItems.length &&
               'inline'}"
           >
             Sélection rapide

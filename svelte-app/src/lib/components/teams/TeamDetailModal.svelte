@@ -178,7 +178,7 @@
         >
           <Users class="mr-1 h-5 w-5" />
           Membres
-          <span class="ml-1 badge badge-sm badge-secondary">
+          <span class="badge badge-sm badge-secondary ml-1">
             {team.members.length}
           </span>
         </button>
@@ -200,7 +200,7 @@
           <Settings class="mr-1 h-5 w-5" />
           Paramètres
           {#if hasChanges}
-            <div class="ml-1 h-2 w-2 rounded-full bg-warning"></div>
+            <div class="bg-warning ml-1 h-2 w-2 rounded-full"></div>
           {/if}
         </button>
       </div>

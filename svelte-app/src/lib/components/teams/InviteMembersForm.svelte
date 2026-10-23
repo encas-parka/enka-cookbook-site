@@ -123,7 +123,7 @@
     </div>
   {/if}
   <!-- Input email avec bouton d'ajout -->
-  <div class="flex flex-col gap-2 rounded-box bg-base-200 p-4">
+  <div class="rounded-box bg-base-200 flex flex-col gap-2 p-4">
     <div class="flex flex-wrap gap-2">
       <label class="input min-w-56 flex-1 gap-2">
         <Mail class="h-4 w-4 opacity-50" />
@@ -150,7 +150,7 @@
       informations concernant l'équipe et à supprimer des membres.
     </div>
     <button
-      class="btn ml-auto w-fit btn-primary btn-sm"
+      class="btn btn-primary btn-sm ml-auto w-fit"
       onclick={addEmail}
       disabled={loading || !emailInput.trim()}
       title="Ajouter à la liste"
@@ -168,7 +168,7 @@
       </div>
       <div class="flex flex-wrap gap-2">
         {#each invitedEmails as email (email)}
-          <div class="badge gap-2 badge-lg badge-primary">
+          <div class="badge badge-lg badge-primary gap-2">
             <Mail class="h-3 w-3" />
             {email}
             <button

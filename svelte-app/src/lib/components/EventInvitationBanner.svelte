@@ -43,7 +43,7 @@
 
 {#if rsvpStatus === "invited"}
   <div
-    class="mx-4 mt-4 alert alert-info max-md:alert-vertical print:hidden"
+    class="alert alert-info max-md:alert-vertical mx-4 mt-4 print:hidden"
     role="status"
   >
     <CircleAlert class="h-6 w-6 shrink-0" />
@@ -72,7 +72,7 @@
     </div>
   </div>
 {:else if rsvpStatus === "declined"}
-  <div class="mx-4 mt-4 alert max-md:alert-vertical print:hidden" role="status">
+  <div class="alert max-md:alert-vertical mx-4 mt-4 print:hidden" role="status">
     <CircleAlert class="h-6 w-6 shrink-0" />
     <div>
       <h3 class="font-bold">Invitation déclinée</h3>

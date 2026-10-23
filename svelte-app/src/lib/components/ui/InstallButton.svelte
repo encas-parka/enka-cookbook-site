@@ -54,7 +54,7 @@
 </script>
 
 {#if isInstallable && !isInstalled}
-  <button class="btn gap-2 shadow-md btn-primary btn-sm" onclick={installApp}>
+  <button class="btn btn-primary btn-sm gap-2 shadow-md" onclick={installApp}>
     <Download class="size-4" />
     <span>Installer</span>
   </button>

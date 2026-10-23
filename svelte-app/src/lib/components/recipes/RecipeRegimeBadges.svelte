@@ -38,7 +38,7 @@
       title={regime}
       class=" {iconOnly
         ? `text-${colorClass}`
-        : `badge badge-soft badge-lg print:badge-md badge-${colorClass} gap-1`}  flex items-center print:text-base-content"
+        : `badge badge-soft badge-lg print:badge-md badge-${colorClass} gap-1`}  print:text-base-content flex items-center"
     >
       {#if regimeIcons[regime]}
         <svg

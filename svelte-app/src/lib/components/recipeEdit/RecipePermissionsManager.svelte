@@ -154,7 +154,7 @@
 <Fieldset iconComponent={Users} legend="Permissions">
   <div class="space-y-4">
     <div
-      class="alert border-info/20 alert-soft text-xs alert-info max-md:alert-vertical"
+      class="alert border-info/20 alert-soft alert-info max-md:alert-vertical text-xs"
     >
       <Info class="size-4" />
       <span>
@@ -167,7 +167,7 @@
 
     <div class="flex flex-wrap gap-2">
       <!-- Propriétaire -->
-      <div class="badge gap-2 badge-soft p-4 badge-lg badge-info">
+      <div class="badge badge-soft badge-lg badge-info gap-2 p-4">
         <Lock size={14} />
         <span class=""
           >{createdBy
@@ -180,13 +180,13 @@
       <!-- Autres collaborateurs -->
       {#each (permissionWrite || []).filter((id) => createdBy !== undefined && id !== createdBy) as contributorId}
         <div
-          class="badge gap-2 badge-soft p-4 badge-lg"
+          class="badge badge-soft badge-lg gap-2 p-4"
           transition:fade={{ duration: 200 }}
         >
           <span>{memberNames[contributorId] || contributorId}</span>
           {#if canEdit}
             <button
-              class="btn ms-2 btn-circle btn-ghost btn-error btn-xs"
+              class="btn btn-circle btn-ghost btn-error btn-xs ms-2"
               onclick={() => removeContributor(contributorId)}
               title="Retirer les droits"
             >
@@ -198,7 +198,7 @@
 
       {#if canEdit}
         <button
-          class="btn ms-4 btn-outline btn-primary btn-sm"
+          class="btn btn-outline btn-primary btn-sm ms-4"
           onclick={() => (showInviteModal = true)}
           title="Gérer les collaborateurs"
         >
@@ -244,7 +244,7 @@
           </button>
         </div>
         {#if inviteError}
-          <p class="mt-2 flex items-center gap-1 text-xs text-error">
+          <p class="text-error mt-2 flex items-center gap-1 text-xs">
             <ShieldAlert size={14} />
             {inviteError}
           </p>

@@ -98,7 +98,7 @@
                 >
                 <span class="ml-1">{scaled.originalDisplayUnit}</span>
                 {#if scaled.hasDifferentQuantities}
-                  <span class="print-xs ml-1 text-base-content/70">
+                  <span class="print-xs text-base-content/70 ml-1">
                     ({scaled.normalizedDisplayQuantity}
                     {scaled.normalizedDisplayUnit})
                   </span>
@@ -119,7 +119,7 @@
     </Fieldset>
   {/each}
 
-  <div class="print-xs flex items-center gap-1 text-sm text-base-content/60">
+  <div class="print-xs text-base-content/60 flex items-center gap-1 text-sm">
     <TriangleAlert class="h-4 w-4" />
     <span>→ Allergènes</span>
   </div>

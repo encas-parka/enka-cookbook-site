@@ -36,7 +36,7 @@
 
 {#if show}
   <div
-    class="mx-auto mt-4 alert max-w-4xl alert-warning shadow-lg max-md:alert-vertical"
+    class="alert alert-warning max-md:alert-vertical mx-auto mt-4 max-w-4xl shadow-lg"
     role="alert"
     in:fade={{ duration: 300 }}
   >

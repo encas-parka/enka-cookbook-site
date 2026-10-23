@@ -334,7 +334,7 @@
 
   <ModalContent>
     {#if !todoToEdit}
-      <div role="tablist" class="tabs tabs-border mb-4 font-bold sm:tabs-lg">
+      <div role="tablist" class="tabs tabs-border sm:tabs-lg mb-4 font-bold">
         <button
           role="tab"
           class="tab {activeTab === 'individual' ? 'tab-active' : ''}"
@@ -437,7 +437,7 @@
                 >Manque {requiredPeopleNb - assignedTo.length} pers.</span
               >
             {:else}
-              <span class="badge flex items-center gap-1 badge-sm badge-success"
+              <span class="badge badge-sm badge-success flex items-center gap-1"
                 ><Check class="size-3" /> ok</span
               >
             {/if}
@@ -463,7 +463,7 @@
           {@const momentTasks = bulkTasks.filter((t) => t.taskOn === moment)}
 
           {#if momentTasks.length > 0}
-            <div class="collapse-arrow collapse bg-base-200">
+            <div class="collapse-arrow bg-base-200 collapse">
               <input type="checkbox" checked />
               <div
                 class="collapse-title flex items-center gap-2 text-base font-medium"
@@ -477,7 +477,7 @@
                   {#each momentTasks as task, index}
                     {@const globalIndex = bulkTasks.indexOf(task)}
                     <div
-                      class="flex items-center gap-4 rounded-lg bg-base-100 p-3"
+                      class="bg-base-100 flex items-center gap-4 rounded-lg p-3"
                     >
                       <input
                         type="checkbox"

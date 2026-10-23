@@ -104,7 +104,7 @@
       </button>
     {/if}
 
-    <div class="flex-1 text-sm text-base-content/70">
+    <div class="text-base-content/70 flex-1 text-sm">
       {#if summary.itemCount > 0}
         {summary.itemCount}
         matériel{summary.itemCount > 1 ? "s" : ""} —

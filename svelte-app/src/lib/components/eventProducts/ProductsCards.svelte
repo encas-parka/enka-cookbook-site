@@ -217,12 +217,12 @@
             class="flex items-center gap-2 font-bold text-shadow-md/20 @md:min-w-48"
           >
             {#if filters.groupBy === "store"}
-              <div class="flex items-center gap-2 text-primary-content">
+              <div class="text-primary-content flex items-center gap-2">
                 <Store class="size-4 md:size-5" />
                 {groupKey} ({groupProducts!.length})
               </div>
             {:else if filters.groupBy === "productType"}
-              <div class="flex items-center gap-2 text-primary-content">
+              <div class="text-primary-content flex items-center gap-2">
                 <groupTypeInfo.icon class="size-4 md:size-5" />
                 <span>{groupTypeInfo.displayName}</span>
                 <span class="text-sm opacity-70">({groupProducts!.length})</span
@@ -234,7 +234,7 @@
           </div>
 
           {#if !globalState.isMobile}
-            <div class="px-2 text-sm text-primary-content text-shadow-md">
+            <div class="text-primary-content px-2 text-sm text-shadow-md">
               {#if productsStore.dateStore.isFullRange && productsStore.dateStore.start !== productsStore.dateStore.end}
                 <div class="font-semibold">Sur toute la période</div>
               {:else if productsStore.dateStore.start !== productsStore.dateStore.end}
@@ -346,7 +346,7 @@
 
       <!-- Cards des produits du groupe -->
       {#if viewMode === "compact"}
-        <div class="my-2 mb-8 divide-y divide-neutral/20">
+        <div class="divide-neutral/20 my-2 mb-8 divide-y">
           {#each groupProducts as productModel (productModel.data.id)}
             <ProductCardCompact
               {productModel}

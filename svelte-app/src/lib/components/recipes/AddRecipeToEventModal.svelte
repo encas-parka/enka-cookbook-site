@@ -60,7 +60,7 @@
 <ModalContainer {isOpen} {onClose} maxWidth="sm">
   <ModalHeader title="Ajouter à un événement" {onClose} />
   <ModalContent>
-    <p class="mb-4 text-sm text-base-content/70">
+    <p class="text-base-content/70 mb-4 text-sm">
       Ajouter <span class="font-semibold">{recipeTitle}</span> à un événement à venir.
       La recette sera mise de côté sans date — vous pourrez lui attribuer un repas
       depuis la page de l'événement.
@@ -73,7 +73,7 @@
           {@const isSelected = selectedEventId === event.id}
           <label
             class="cursor-pointer rounded-lg px-3 py-2 transition-colors {isSelected
-              ? 'bg-primary/20 ring-1 ring-primary'
+              ? 'bg-primary/20 ring-primary ring-1'
               : 'bg-base-200 hover:bg-base-300'}"
           >
             <div class="flex items-center gap-3">
@@ -87,7 +87,7 @@
               <div class="flex-1">
                 <div class="font-medium">{event.name}</div>
                 {#if event.dateStart}
-                  <div class="text-xs text-base-content/60">
+                  <div class="text-base-content/60 text-xs">
                     {formatDateDayMonthShort(event.dateStart)}
                     {#if event.dateEnd && event.dateEnd !== event.dateStart}
                       — {formatDateDayMonthShort(event.dateEnd)}

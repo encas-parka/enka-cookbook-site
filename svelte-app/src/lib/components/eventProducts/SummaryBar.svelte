@@ -30,7 +30,7 @@
   }: Props = $props();
 </script>
 
-<div class="card border border-warning/60 bg-base-100 shadow-sm card-xs">
+<div class="card border-warning/60 bg-base-100 card-xs border shadow-sm">
   <div
     class="card-body flex-row items-center gap-4 max-sm:flex-col max-sm:items-stretch max-sm:gap-2"
   >
@@ -38,16 +38,16 @@
       <!-- Segment produits -->
       <div class="flex items-center gap-3">
         <div class="flex items-center gap-1.5">
-          <PackageCheck class="size-6 shrink-0 text-warning" />
+          <PackageCheck class="text-warning size-6 shrink-0" />
           <div class="text-base whitespace-nowrap">
             {#if missing > 0}
-              <span class="font-bold text-error">{missing}</span>
-              <span class="text-sm text-base-content/60">
+              <span class="text-error font-bold">{missing}</span>
+              <span class="text-base-content/60 text-sm">
                 manquant{missing > 1 ? "s" : ""} / {total}
               </span>
             {:else}
-              <span class="font-bold text-success">{completed}/{total}</span>
-              <span class="text-sm text-base-content/60">ok</span>
+              <span class="text-success font-bold">{completed}/{total}</span>
+              <span class="text-base-content/60 text-sm">ok</span>
             {/if}
           </div>
         </div>
@@ -67,7 +67,7 @@
 
       <!-- Séparateur : vertical sur desktop, horizontal (2e ligne) sur mobile -->
       <div
-        class="self-stretch border-s border-warning/30 max-sm:border-s-0 max-sm:border-t"
+        class="border-warning/30 self-stretch border-s max-sm:border-s-0 max-sm:border-t"
         aria-hidden="true"
       ></div>
     {/if}
@@ -75,7 +75,7 @@
     <!-- Segment dépenses -->
     <div class="flex items-center gap-3">
       <div class="flex items-center gap-1.5">
-        <BadgeEuro class="size-6 shrink-0 text-warning" />
+        <BadgeEuro class="text-warning size-6 shrink-0" />
         <span class="text-base font-semibold whitespace-nowrap">
           {totalGlobal} €
         </span>

@@ -376,7 +376,7 @@
         <!-- Recette masquée -->
         {#if !isVisible}
           <button
-            class="btn flex h-auto max-w-20 flex-col btn-outline py-3 btn-secondary"
+            class="btn btn-outline btn-secondary flex h-auto max-w-20 flex-col py-3"
             onclick={() => onToggleRecipe(recipeKey)}
             title="Afficher la recette"
           >
@@ -390,7 +390,7 @@
         <!-- Description masquée -->
         {#if isVisible && !isDescVisible}
           <button
-            class="btn flex h-auto flex-col btn-outline py-3 btn-secondary"
+            class="btn btn-outline btn-secondary flex h-auto flex-col py-3"
             onclick={() => handleToggleRecipeDescription(recipeKey)}
             title="Afficher la description"
           >

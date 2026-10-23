@@ -9,19 +9,19 @@
   let { loading = false }: Props = $props();
 </script>
 
-<div class="card border border-base-200 bg-base-100 shadow-xl">
+<div class="card border-base-200 bg-base-100 border shadow-xl">
   <div class="card-body">
     <h2 class="card-title flex items-center gap-2 text-xl">
-      <Package class="h-6 w-6 text-primary" />
+      <Package class="text-primary h-6 w-6" />
       Matériel
     </h2>
 
     {#if loading}
       <!-- Skeleton loader -->
       <div class="space-y-4 py-4">
-        <div class="h-20 w-full skeleton rounded-lg"></div>
-        <div class="h-14 w-full skeleton rounded-lg"></div>
-        <div class="h-14 w-full skeleton rounded-lg"></div>
+        <div class="skeleton h-20 w-full rounded-lg"></div>
+        <div class="skeleton h-14 w-full rounded-lg"></div>
+        <div class="skeleton h-14 w-full rounded-lg"></div>
       </div>
     {:else}
       <div class="card bg-base-300 card-sm">
@@ -32,7 +32,7 @@
       </div>
 
       <!-- Actions -->
-      <div class="mt-4 card-actions">
+      <div class="card-actions mt-4">
         <button
           class="btn btn-block btn-soft btn-lg btn-primary"
           onclick={() => navigate("/dashboard/materiel")}

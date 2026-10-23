@@ -54,11 +54,11 @@
   }
 </script>
 
-<div class="card border border-base-200 bg-base-100 shadow-xl">
+<div class="card border-base-200 bg-base-100 border shadow-xl">
   <div class="card-body">
     <div class="flex items-center justify-between">
       <h2 class="card-title flex items-center gap-2">
-        <Users class="h-5 w-5 text-primary" />
+        <Users class="text-primary h-5 w-5" />
         Mes Équipes
       </h2>
       <a
@@ -73,15 +73,15 @@
     {#if loading}
       <!-- Skeleton loader -->
       <div class="space-y-3 py-4">
-        <div class="h-24 w-full skeleton rounded-lg"></div>
-        <div class="h-24 w-full skeleton rounded-lg"></div>
-        <div class="h-24 w-full skeleton rounded-lg"></div>
+        <div class="skeleton h-24 w-full rounded-lg"></div>
+        <div class="skeleton h-24 w-full rounded-lg"></div>
+        <div class="skeleton h-24 w-full rounded-lg"></div>
       </div>
     {:else if teams.length === 0 && invitations.length === 0}
       <div class="py-6 text-center">
         <Users class="mx-auto mb-3 h-12 w-12 opacity-20" />
-        <p class="text-sm text-base-content/60">Aucune équipe ou invitation</p>
-        <a class="btn mt-3 btn-primary btn-sm" href={p("/dashboard/teams")}>
+        <p class="text-base-content/60 text-sm">Aucune équipe ou invitation</p>
+        <a class="btn btn-primary btn-sm mt-3" href={p("/dashboard/teams")}>
           Créer une équipe
         </a>
       </div>
@@ -90,13 +90,13 @@
         <!-- Équipes -->
         {#if teams.length > 0}
           <div>
-            <h3 class="mb-2 text-sm font-semibold text-base-content/70">
+            <h3 class="text-base-content/70 mb-2 text-sm font-semibold">
               Vos équipes ({teams.length})
             </h3>
             <div class="space-y-2">
               {#each teams as team (team.id)}
                 <div
-                  class="flex cursor-pointer items-center justify-between rounded-lg bg-base-200 p-2 transition-colors hover:bg-base-300"
+                  class="bg-base-200 hover:bg-base-300 flex cursor-pointer items-center justify-between rounded-lg p-2 transition-colors"
                   onclick={() => openTeamDetailModal(team.id)}
                   role="button"
                   tabindex="0"
@@ -110,7 +110,7 @@
                   <div>
                     <div class="text-sm font-medium">{team.name}</div>
                     {#if team.total}
-                      <div class="text-xs text-base-content/60">
+                      <div class="text-base-content/60 text-xs">
                         {team.total} membre{team.total > 1 ? "s" : ""}
                       </div>
                     {/if}
@@ -122,8 +122,8 @@
         {/if}
       </div>
     {/if}
-    <div class="mt-4 card-actions">
-      <button class="btn ms-auto btn-primary btn-sm" onclick={openCreateModal}
+    <div class="card-actions mt-4">
+      <button class="btn btn-primary btn-sm ms-auto" onclick={openCreateModal}
         ><Plus class="size-4" /> Créer une équipe</button
       >
     </div>

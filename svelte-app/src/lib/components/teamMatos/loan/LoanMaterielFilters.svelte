@@ -46,9 +46,9 @@
 
   <!-- Type : sélecteur exclusif -->
   <Fieldset legend="Type" iconComponent={Package}>
-    <div class="flex flex-wrap gap-1 rounded-xl bg-base-100 p-2 font-semibold">
+    <div class="bg-base-100 flex flex-wrap gap-1 rounded-xl p-2 font-semibold">
       <button
-        class="btn flex-1 btn-sm {filters.type === '' && 'btn-secondary'}"
+        class="btn btn-sm flex-1 {filters.type === '' && 'btn-secondary'}"
         type="button"
         aria-pressed={filters.type === ""}
         onclick={() => setFilter({ type: "" })}
@@ -57,7 +57,7 @@
       </button>
       {#each availableTypes as type (type)}
         <button
-          class="btn min-w-fit flex-1 btn-sm {filters.type === type &&
+          class="btn btn-sm min-w-fit flex-1 {filters.type === type &&
             'btn-secondary'}"
           type="button"
           aria-pressed={filters.type === type}
@@ -71,9 +71,9 @@
 
   <!-- Affichage : segment exclusif + disponible indépendant -->
   <Fieldset legend="Affichage" iconComponent={ListFilter}>
-    <div class="flex flex-wrap gap-1 rounded-xl bg-base-100 p-2 font-semibold">
+    <div class="bg-base-100 flex flex-wrap gap-1 rounded-xl p-2 font-semibold">
       <button
-        class="btn min-w-fit flex-1 btn-sm {filters.segment === '' &&
+        class="btn btn-sm min-w-fit flex-1 {filters.segment === '' &&
           'btn-secondary'}"
         type="button"
         aria-pressed={filters.segment === ""}
@@ -82,7 +82,7 @@
         Tous
       </button>
       <button
-        class="btn min-w-fit flex-1 btn-sm {filters.segment === 'selected' &&
+        class="btn btn-sm min-w-fit flex-1 {filters.segment === 'selected' &&
           'btn-secondary'}"
         type="button"
         aria-pressed={filters.segment === "selected"}
@@ -91,7 +91,7 @@
         Sélectionnés
       </button>
       <button
-        class="btn min-w-fit flex-1 btn-sm {filters.segment === 'unselected' &&
+        class="btn btn-sm min-w-fit flex-1 {filters.segment === 'unselected' &&
           'btn-secondary'}"
         type="button"
         aria-pressed={filters.segment === "unselected"}

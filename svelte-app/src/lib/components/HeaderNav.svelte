@@ -308,7 +308,7 @@
 </script>
 
 <div
-  class="justify-items-between navbar sticky top-0 z-1000 min-h-12 border-b border-base-300 bg-base-100 px-4 py-0 shadow-sm transition-transform duration-300 print:hidden {globalState.isMobile &&
+  class="justify-items-between navbar border-base-300 bg-base-100 sticky top-0 z-1000 min-h-12 border-b px-4 py-0 shadow-sm transition-transform duration-300 print:hidden {globalState.isMobile &&
     'min-h-12'}
     {globalState.isMobile && !globalState.headerVisible
     ? '-translate-y-full'
@@ -337,13 +337,13 @@
   </div>
 
   <!-- navbar-center : onglet actif + dropdown des autres routes -->
-  <div class="mx-auto navbar-center min-w-0 flex-1 items-center px-2">
+  <div class="navbar-center mx-auto min-w-0 flex-1 items-center px-2">
     {#if eventContext && eventActiveTab}
       <div class="dropdown mx-auto">
         <div
           tabindex="0"
           role="button"
-          class="btn gap-2 btn-ghost font-family-fredoka font-bold uppercase max-sm:btn-sm"
+          class="btn btn-ghost font-family-fredoka max-sm:btn-sm gap-2 font-bold uppercase"
         >
           {#if globalState.isDesktop && eventTitle}
             <span class="max-w-28 truncate opacity-70">{eventTitle}</span>
@@ -353,7 +353,7 @@
           <ChevronDown class="size-4 opacity-50" />
         </div>
         <ul
-          class="menu dropdown-content z-1 mt-3 w-48 rounded-xl border border-base-200 bg-base-100 p-2 font-medium shadow-xl"
+          class="menu dropdown-content border-base-200 bg-base-100 z-1 mt-3 w-48 rounded-xl border p-2 font-medium shadow-xl"
         >
           {#each eventOtherTabs as tab (tab.relativePath)}
             {@const TabIcon = tab.icon}
@@ -379,7 +379,7 @@
         <div
           tabindex="0"
           role="button"
-          class="btn gap-2 btn-ghost font-family-fredoka font-bold uppercase max-sm:btn-sm"
+          class="btn btn-ghost font-family-fredoka max-sm:btn-sm gap-2 font-bold uppercase"
         >
           {#if globalState.isDesktop && matosTeamName}
             <span class="max-w-28 truncate opacity-70">{matosTeamName}</span>
@@ -391,7 +391,7 @@
           <ChevronDown class="size-4 opacity-50" />
         </div>
         <ul
-          class="menu dropdown-content z-1 mt-3 w-48 rounded-xl border border-base-200 bg-base-100 p-2 shadow-xl"
+          class="menu dropdown-content border-base-200 bg-base-100 z-1 mt-3 w-48 rounded-xl border p-2 shadow-xl"
         >
           {#if context?.type === "loans"}
             <li>
@@ -411,10 +411,10 @@
         </ul>
       </div>
     {:else if context?.type === "documentEdit"}
-      <span class="btn btn-ghost font-medium btn-sm">Documents</span>
+      <span class="btn btn-ghost btn-sm font-medium">Documents</span>
     {:else if navBarStore.title}
       <h1
-        class="mx-auto truncate font-family-fredoka text-sm font-bold tracking-wider uppercase opacity-70"
+        class="font-family-fredoka mx-auto truncate text-sm font-bold tracking-wider uppercase opacity-70"
         title={navBarStore.title}
       >
         {navBarStore.title}
@@ -422,7 +422,7 @@
     {/if}
   </div>
 
-  <div class="z-10 ms-auto navbar-end w-fit flex-1 shrink-0 gap-4">
+  <div class="navbar-end z-10 ms-auto w-fit flex-1 shrink-0 gap-4">
     <!-- Actions -->
     <div class="flex items-center gap-2">
       {#if navBarStore.actions}
@@ -436,7 +436,7 @@
         <div
           tabindex="0"
           role="button"
-          class="btn avatar btn-circle border border-primary/20 bg-primary/10 btn-ghost text-primary sm:btn-sm"
+          class="btn avatar btn-circle border-primary/20 bg-primary/10 btn-ghost text-primary sm:btn-sm border"
         >
           <div
             class="flex w-10 items-center justify-center rounded-full text-lg font-bold"
@@ -445,10 +445,10 @@
           </div>
         </div>
         <ul
-          class="menu dropdown-content z-1 mt-3 w-60 rounded-xl border border-base-200 bg-base-100 p-2 shadow-xl"
+          class="menu dropdown-content border-base-200 bg-base-100 z-1 mt-3 w-60 rounded-xl border p-2 shadow-xl"
         >
           <!-- Email -->
-          <li class="mb-1 border-b border-base-100 px-4 py-2">
+          <li class="border-base-100 mb-1 border-b px-4 py-2">
             <span
               class="block truncate p-0 text-xs font-medium italic opacity-60"
             >
@@ -477,7 +477,7 @@
           </li>
 
           <!-- Création & contenu -->
-          <li class="my-1 border-t border-base-100"></li>
+          <li class="border-base-100 my-1 border-t"></li>
           <li>
             <a
               href={p("/dashboard/eventCreate")}
@@ -508,7 +508,7 @@
 
           <!-- Prochains événements -->
           {#if upcomingEvents.length > 0}
-            <li class="my-1 border-t border-base-100"></li>
+            <li class="border-base-100 my-1 border-t"></li>
             <li
               class="pointer-events-none px-4 pt-1 pb-0.5 text-xs font-semibold uppercase opacity-40"
             >
@@ -538,7 +538,7 @@
           {/if}
 
           <!-- Actions -->
-          <li class="my-1 border-t border-base-100"></li>
+          <li class="border-base-100 my-1 border-t"></li>
           <li>
             <button
               onclick={handleReloadRecipes}
@@ -567,7 +567,7 @@
               </button>
             </li>
           {/if}
-          <li class="my-1 border-t border-base-100"></li>
+          <li class="border-base-100 my-1 border-t"></li>
           <li><InstallButton /></li>
           <li>
             <button class="text-error hover:bg-error/10" onclick={handleLogout}
@@ -577,7 +577,7 @@
         </ul>
       </div>
     {:else}
-      <button class="btn shadow-md btn-primary sm:btn-sm" onclick={handleLogin}>
+      <button class="btn btn-primary sm:btn-sm shadow-md" onclick={handleLogin}>
         <LogInIcon class="size-4" />
         <span class="hidden sm:inline">Connexion</span>
       </button>

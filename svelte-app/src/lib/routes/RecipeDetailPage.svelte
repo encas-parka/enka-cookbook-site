@@ -176,7 +176,7 @@
           >
             <div class="flex flex-wrap items-center gap-x-4 gap-y-1">
               <h1
-                class="flex items-center gap-3 text-primary print:text-xl print:text-black"
+                class="text-primary flex items-center gap-3 print:text-xl print:text-black"
               >
                 <svg
                   class="me-2 size-6 shrink-0 stroke-3 sm:size-9 print:stroke-black"
@@ -188,7 +188,7 @@
 
               <!-- version -->
               {#if recipeDetails.versionLabel}
-                <div class="text-lg font-medium text-primary print:text-sm">
+                <div class="text-primary text-lg font-medium print:text-sm">
                   {recipeDetails.versionLabel}
                 </div>
               {/if}
@@ -219,14 +219,14 @@
                 <span class="badge badge-soft badge-primary">{category}</span>
               </div>
             {/each}
-            <p class="text-base text-base-content/70 italic">
+            <p class="text-base-content/70 text-base italic">
               {recipeDetails.description}
             </p>
           </div>
         {/if}
 
         <!-- badge info -->
-        <div class="mb-6 border-b border-base-300 py-4 print:mb-1 print:pb-2">
+        <div class="border-base-300 mb-6 border-b py-4 print:mb-1 print:pb-2">
           <div
             class="flex flex-wrap items-center justify-between gap-x-4 gap-y-2"
           >
@@ -258,7 +258,7 @@
 
             {#if allergens.length > 0}
               <div class="flex w-fit flex-wrap items-center gap-2">
-                <span class="font-semibold text-base-content/70"
+                <span class="text-base-content/70 font-semibold"
                   >Allergenes :</span
                 >
                 {#each allergens as allergen}
@@ -295,7 +295,7 @@
               min="1"
               value={currentServings}
               oninput={handleServingsInput}
-              class="input w-24 input-primary"
+              class="input input-primary w-24"
             />
           </div>
 

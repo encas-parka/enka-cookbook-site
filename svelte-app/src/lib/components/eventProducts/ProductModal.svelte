@@ -102,7 +102,7 @@
       <!-- Header avec indicateur d'archive -->
       {#if isArchiveMode}
         <div
-          class="m-4 alert border-b border-warning/20 px-4 py-2 text-xs alert-warning"
+          class="alert border-warning/20 alert-warning m-4 border-b px-4 py-2 text-xs"
         >
           <History class="h-4 w-4" />
           <span class="font-medium">Mode consultation</span>
@@ -111,7 +111,7 @@
       {/if}
 
       {#if modalState?.error}
-        <div class="mb-4 alert alert-error max-md:alert-vertical">
+        <div class="alert alert-error max-md:alert-vertical mb-4">
           <X class="h-4 w-4" />
           <span>Erreur : {modalState.error}</span>
         </div>
@@ -120,7 +120,7 @@
       <!-- Onglets -->
       <div class="flex-none">
         <div
-          class="tabs tabs-border mb-4 flex-1 border-b border-base-300 px-4"
+          class="tabs tabs-border border-base-300 mb-4 flex-1 border-b px-4"
           role="tablist"
         >
           <button
@@ -133,11 +133,11 @@
             <CookingPot class="mr-1 h-4 w-4" />
             <span class="hidden sm:inline">Recettes</span>
             {#if modalState?.product?.nbRecipes && modalState.product.nbRecipes > 0}
-              <span class="ml-1 badge badge-sm badge-secondary">
+              <span class="badge badge-sm badge-secondary ml-1">
                 {modalState.product.nbRecipes}
               </span>
             {:else}
-              <span class="ml-1 badge badge-ghost badge-sm">0</span>
+              <span class="badge badge-ghost badge-sm ml-1">0</span>
             {/if}
           </button>
 
@@ -151,7 +151,7 @@
             <Store class="mr-1 h-4 w-4" />
             <span class="hidden sm:inline">Magasin</span>
             {#if modalState?.hasChanges?.store}
-              <div class="ml-1 h-2 w-2 rounded-full bg-warning"></div>
+              <div class="bg-warning ml-1 h-2 w-2 rounded-full"></div>
             {/if}
           </button>
 
@@ -165,13 +165,13 @@
             <Users class="mr-1 h-4 w-4" />
             <span class="hidden sm:inline">Volontaires</span>
             {#if modalState?.hasChanges?.who}
-              <div class="ml-1 h-2 w-2 rounded-full bg-warning"></div>
+              <div class="bg-warning ml-1 h-2 w-2 rounded-full"></div>
             {:else if modalState?.product?.who && modalState.product.who.length > 0}
-              <span class="ml-1 badge badge-sm badge-secondary">
+              <span class="badge badge-sm badge-secondary ml-1">
                 {modalState.product.who.length}
               </span>
             {:else}
-              <span class="ml-1 badge badge-ghost badge-sm">0</span>
+              <span class="badge badge-ghost badge-sm ml-1">0</span>
             {/if}
           </button>
 
@@ -183,11 +183,11 @@
             <Archive class="mr-1 h-4 w-4" />
             <span class="hidden sm:inline">Stock</span>
             {#if modalState?.hasChanges?.stock}
-              <div class="ml-1 h-2 w-2 rounded-full bg-warning"></div>
+              <div class="bg-warning ml-1 h-2 w-2 rounded-full"></div>
             {:else if modalState?.stockParsed}
-              <span class="ml-1 badge badge-sm badge-secondary">1</span>
+              <span class="badge badge-sm badge-secondary ml-1">1</span>
             {:else}
-              <span class="ml-1 badge badge-ghost badge-sm">0</span>
+              <span class="badge badge-ghost badge-sm ml-1">0</span>
             {/if}
           </button>
 
@@ -201,11 +201,11 @@
             <ShoppingCart class="mr-1 h-4 w-4" />
             <span class="hidden sm:inline">Achats</span>
             {#if modalState?.purchasesList && modalState.purchasesList.length > 0}
-              <span class="ml-1 badge badge-sm badge-secondary">
+              <span class="badge badge-sm badge-secondary ml-1">
                 {modalState.purchasesList.length}
               </span>
             {:else}
-              <span class="ml-1 badge badge-ghost badge-sm">0</span>
+              <span class="badge badge-ghost badge-sm ml-1">0</span>
             {/if}
           </button>
         </div>

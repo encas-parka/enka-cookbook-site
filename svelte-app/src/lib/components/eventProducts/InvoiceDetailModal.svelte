@@ -419,7 +419,7 @@
             </div>
           {/if}
 
-          <span class="text-xs text-base-content/50">
+          <span class="text-base-content/50 text-xs">
             {displayPurchases.length} achat{displayPurchases.length > 1
               ? "s"
               : ""}
@@ -427,7 +427,7 @@
         </div>
 
         <!-- ═══ Zone : Modifier l'achat groupé ═══ -->
-        <div class="rounded-lg bg-base-200 p-4">
+        <div class="bg-base-200 rounded-lg p-4">
           <div class="mb-3 text-sm font-semibold">Modifier l'achat groupé</div>
 
           <div class="grid grid-cols-1 gap-3 sm:grid-cols-2">
@@ -551,7 +551,7 @@
             {#if editingPurchaseId === purchase.id}
               <!-- ─── Card en mode édition ─── -->
               <div
-                class="card border border-primary/40 bg-base-100 shadow-sm card-xs"
+                class="card border-primary/40 bg-base-100 card-xs border shadow-sm"
               >
                 <div class="card-body">
                   <div class="mb-2 text-sm font-medium">
@@ -631,7 +631,7 @@
             {:else}
               <!-- ─── Card en mode lecture ─── -->
               <div
-                class="card border border-neutral/40 bg-base-100 shadow-sm card-xs"
+                class="card border-neutral/40 bg-base-100 card-xs border shadow-sm"
               >
                 <div class="card-body">
                   <div class="flex flex-wrap items-center gap-x-3 gap-y-1.5">
@@ -683,14 +683,14 @@
           {/each}
 
           {#if displayPurchases.length === 0}
-            <div class="py-8 text-center text-sm text-base-content/50">
+            <div class="text-base-content/50 py-8 text-center text-sm">
               Aucun achat dans ce groupe
             </div>
           {/if}
         </div>
       </div>
     {:else}
-      <div class="py-8 text-center text-sm text-base-content/50">
+      <div class="text-base-content/50 py-8 text-center text-sm">
         Achat groupé introuvable
       </div>
     {/if}

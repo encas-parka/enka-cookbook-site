@@ -258,7 +258,7 @@
       <!-- Message si aucun résultat -->
       {#if filteredDocs.length === 0}
         <div class="py-12 text-center">
-          <p class="text-lg text-base-content/60">
+          <p class="text-base-content/60 text-lg">
             Aucun document ne correspond aux critères...
           </p>
         </div>
@@ -267,7 +267,7 @@
       <!-- Message si aucun document dans l'équipe -->
       {#if allDocs.length === 0 && !teamdocsStore.loading}
         <div class="py-12 text-center">
-          <p class="mb-4 text-lg text-base-content/60">
+          <p class="text-base-content/60 mb-4 text-lg">
             Aucun document dans cette équipe
           </p>
           <button

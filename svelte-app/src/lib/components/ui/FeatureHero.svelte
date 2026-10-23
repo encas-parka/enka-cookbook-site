@@ -152,14 +152,14 @@
         <!-- Carrousel avec transitions Svelte 5 -->
         <div
           bind:this={imageRef}
-          class="relative carousel h-full w-full rounded-xl shadow-2xl transition-all duration-1000 ease-out {imageVisible
+          class="carousel relative h-full w-full rounded-xl shadow-2xl transition-all duration-1000 ease-out {imageVisible
             ? 'opacity-100'
             : 'opacity-20'}"
         >
           {#each images as img, i (i)}
             {#if currentIndex === i}
               <div
-                class="relative carousel-item h-full w-full"
+                class="carousel-item relative h-full w-full"
                 transition:fade|global={{ duration: 500 }}
               >
                 <img
@@ -173,13 +173,13 @@
 
           <!-- Boutons de navigation -->
           <button
-            class="btn absolute top-1/2 left-2 z-10 btn-circle -translate-y-1/2 opacity-50 transition-opacity btn-sm hover:opacity-100"
+            class="btn btn-circle btn-sm absolute top-1/2 left-2 z-10 -translate-y-1/2 opacity-50 transition-opacity hover:opacity-100"
             onclick={prevImage}
           >
             ❮
           </button>
           <button
-            class="btn absolute top-1/2 right-2 z-10 btn-circle -translate-y-1/2 opacity-50 transition-opacity btn-sm hover:opacity-100"
+            class="btn btn-circle btn-sm absolute top-1/2 right-2 z-10 -translate-y-1/2 opacity-50 transition-opacity hover:opacity-100"
             onclick={nextImage}
           >
             ❯
@@ -192,8 +192,8 @@
             {#each images as _, i (i)}
               <button
                 class="h-2 rounded-full transition-all {currentIndex === i
-                  ? 'w-8 bg-primary'
-                  : 'w-2 bg-base-300/50 hover:bg-base-300'}"
+                  ? 'bg-primary w-8'
+                  : 'bg-base-300/50 hover:bg-base-300 w-2'}"
                 onclick={() => goToImage(i)}
                 aria-label="Go to slide {i + 1}"
               ></button>
@@ -216,7 +216,7 @@
 
     <!-- Côté Contenu avec animations staggered -->
     <div
-      class="relative hero-content flex h-full flex-col justify-center p-8 lg:p-12"
+      class="hero-content relative flex h-full flex-col justify-center p-8 lg:p-12"
     >
       <div class="max-w-xl">
         <!-- Titre : slide depuis la droite + fade (premier) -->
@@ -235,7 +235,7 @@
         {#if description}
           <p
             bind:this={descRef}
-            class="mb-6 text-lg text-base-content/80 transition-all duration-1000 ease-out {descVisible
+            class="text-base-content/80 mb-6 text-lg transition-all duration-1000 ease-out {descVisible
               ? 'translate-y-0 opacity-100'
               : 'translate-y-4 opacity-0'}"
           >

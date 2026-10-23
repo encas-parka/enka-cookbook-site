@@ -31,7 +31,7 @@
 
   <ModalContent>
     <!-- Contenu avec alerte -->
-    <div class="alert alert-soft text-base alert-warning max-md:alert-vertical">
+    <div class="alert alert-soft alert-warning max-md:alert-vertical text-base">
       <TriangleAlert class="h-5 w-5" />
       <span>{message}</span>
     </div>

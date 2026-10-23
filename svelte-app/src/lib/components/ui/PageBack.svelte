@@ -20,7 +20,7 @@
 </script>
 
 <button
-  class="btn btn-square shrink-0 btn-ghost btn-sm"
+  class="btn btn-square btn-ghost btn-sm shrink-0"
   onclick={go}
   {disabled}
   aria-label={label}

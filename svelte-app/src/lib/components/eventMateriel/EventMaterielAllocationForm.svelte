@@ -98,11 +98,11 @@
 </script>
 
 <form onsubmit={handleSubmit} class="space-y-4">
-  <div class="py-2 text-sm text-base-content/70">
+  <div class="text-base-content/70 py-2 text-sm">
     <div class="mb-2">
       <strong>{headerName}</strong>
       {#if maxQuantity > 0}
-        <span class="float-end badge badge-warning"
+        <span class="badge badge-warning float-end"
           >besoin total: {maxQuantity}</span
         >
       {/if}
@@ -126,7 +126,7 @@
         />
       </label>
       {#if exceedsMax}
-        <span class="flex items-center gap-1 text-xs text-warning/80">
+        <span class="text-warning/80 flex items-center gap-1 text-xs">
           <CircleAlert class="size-3" />
           Dépasse la quantité à trouver ({maxQuantity})
         </span>

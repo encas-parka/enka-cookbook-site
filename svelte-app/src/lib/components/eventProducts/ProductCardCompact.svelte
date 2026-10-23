@@ -87,37 +87,37 @@
 <div
   class="flex flex-wrap items-center gap-x-4 gap-y-1.5 px-3 py-1.5 {product.status ===
   'isSyncing'
-    ? 'animate-pulse bg-accent/10'
+    ? 'bg-accent/10 animate-pulse'
     : ''}"
 >
   <!-- ═══ GROUP 1: Identity + Store/Who ═══ -->
   <div class="flex min-w-0 flex-wrap items-center gap-3">
     <!-- Identity sub-group → opens modal on "recettes" -->
     <button
-      class="flex shrink-0 cursor-pointer items-center gap-1.5 rounded-sm px-0.5 transition-colors hover:bg-base-100"
+      class="hover:bg-base-100 flex shrink-0 cursor-pointer items-center gap-1.5 rounded-sm px-0.5 transition-colors"
       onclick={() => onOpenModal(product.id, "recettes")}
       title="Voir les recettes"
     >
-      <typeInfo.icon class="size-4 shrink-0 text-primary/70" />
+      <typeInfo.icon class="text-primary/70 size-4 shrink-0" />
       <span class="font-semibold">{product.productName}</span>
       {#if product.pF}
-        <ShoppingBasket size={13} class="shrink-0 text-success" />
+        <ShoppingBasket size={13} class="text-success shrink-0" />
       {/if}
       {#if product.pS}
-        <Snowflake size={13} class="shrink-0 text-info" />
+        <Snowflake size={13} class="text-info shrink-0" />
       {/if}
       {#if !product.ingredientRef}
-        <ClipboardPenLine size={13} class="shrink-0 text-warning" />
+        <ClipboardPenLine size={13} class="text-warning shrink-0" />
       {/if}
       {#if product.status === "isSyncing"}
-        <LoaderCircle size={13} class="shrink-0 animate-spin text-accent" />
+        <LoaderCircle size={13} class="text-accent shrink-0 animate-spin" />
       {/if}
     </button>
 
     <!-- Store + Who sub-group (truncated) -->
     <div class="flex max-w-64 min-w-0 items-center gap-2">
       <button
-        class="flex cursor-pointer items-center gap-1 rounded-sm px-0.5 text-sm font-medium transition-colors hover:bg-base-200/60 {product
+        class="hover:bg-base-200/60 flex cursor-pointer items-center gap-1 rounded-sm px-0.5 text-sm font-medium transition-colors {product
           .storeInfo?.storeName
           ? 'text-success/80'
           : 'text-base-content/40'}"
@@ -130,7 +130,7 @@
         >
       </button>
       <button
-        class="flex cursor-pointer items-center gap-1 rounded-sm px-0.5 text-sm font-medium transition-colors hover:bg-base-200/60 {product.who &&
+        class="hover:bg-base-200/60 flex cursor-pointer items-center gap-1 rounded-sm px-0.5 text-sm font-medium transition-colors {product.who &&
         product.who.length > 0
           ? 'text-success/80'
           : 'text-base-content/40'}"
@@ -147,19 +147,19 @@
     </div>
     <div class="ms-auto flex gap-2">
       {#if productInDateRange.nbRecipes}
-        <span class="flex items-center gap-0.5 text-sm text-base-content/50">
+        <span class="text-base-content/50 flex items-center gap-0.5 text-sm">
           {productInDateRange.nbRecipes}<CookingPot class="size-3" />
         </span>
       {/if}
       {#if productInDateRange.totalAssiettes}
-        <span class="flex items-center gap-0.5 text-sm text-base-content/50">
+        <span class="text-base-content/50 flex items-center gap-0.5 text-sm">
           {productInDateRange.totalAssiettes}<Utensils class="size-3" />
         </span>
       {/if}
       {#if !showRecipeDetails && productInDateRange.concernedDates.length > 0}
         <button
           type="button"
-          class="flex cursor-pointer items-center gap-0.5 rounded-md text-base-content/60 transition-colors hover:bg-base-200/40"
+          class="text-base-content/60 hover:bg-base-200/40 flex cursor-pointer items-center gap-0.5 rounded-md transition-colors"
           onclick={() => (localShowDetails = !localShowDetails)}
           aria-expanded={localShowDetails}
           title={localShowDetails
@@ -185,7 +185,7 @@
     <!-- ── Row 1: Need ── -->
     <!-- Need value (grid col 2) -->
     <button
-      class="flex min-h-6 cursor-pointer rounded-sm px-0.5 text-base font-semibold transition-colors hover:bg-base-100 {productInDateRange.hasMissing &&
+      class="hover:bg-base-100 flex min-h-6 cursor-pointer rounded-sm px-0.5 text-base font-semibold transition-colors {productInDateRange.hasMissing &&
       shouldShowActionButtons
         ? 'text-error'
         : 'text-success'}"
@@ -193,22 +193,22 @@
       title="Voir le détail des besoins"
     >
       <div class="flex items-center gap-0.5">
-        <span class="text-xs font-light text-base-content/30"
+        <span class="text-base-content/30 text-xs font-light"
           ><ClipboardX class="me-1 inline size-4" />
         </span>
         {#if totalNeededOverride?.totalOverride}
-          <span class="mr-0.5 text-xs text-base-content/40 line-through">
+          <span class="text-base-content/40 mr-0.5 text-xs line-through">
             {productInDateRange.formattedQuantities}
           </span>
           {productInDateRange.formattedMissingQuantities}
-          <span class="text-sm font-normal text-base-content/60"
+          <span class="text-base-content/60 text-sm font-normal"
             >/
             {totalNeededOverride.totalOverride.q}
             {totalNeededOverride.totalOverride.u}</span
           >
         {:else}
           <span>{productInDateRange.formattedMissingQuantities}</span>
-          <span class="text-sm font-normal text-base-content/60">
+          <span class="text-base-content/60 text-sm font-normal">
             / {productInDateRange.formattedQuantities}
           </span>
         {/if}
@@ -217,13 +217,13 @@
 
     <!-- ── Row 2: Purchases ── -->
     <button
-      class="flex min-h-6 cursor-pointer flex-wrap items-center justify-end gap-2 rounded bg-success/5 px-1 transition-colors hover:bg-base-100"
+      class="bg-success/5 hover:bg-base-100 flex min-h-6 cursor-pointer flex-wrap items-center justify-end gap-2 rounded px-1 transition-colors"
       onclick={() => onOpenModal(product.id, "achats")}
       title="Voir les achats"
     >
       <div class="flex items-center gap-1">
-        <ShoppingCart size={13} class="shrink-0 text-base-content/30" />
-        <span class="text-xs font-light text-base-content/50"> achats: </span>
+        <ShoppingCart size={13} class="text-base-content/30 shrink-0" />
+        <span class="text-base-content/50 text-xs font-light"> achats: </span>
       </div>
 
       {#if purchasesBadges.length > 0}
@@ -240,13 +240,13 @@
             >
           </span>
           {#if purchase.status === "ordered"}
-            <span class="text-xs whitespace-nowrap text-base-content/40">
+            <span class="text-base-content/40 text-xs whitespace-nowrap">
               liv. {purchase.deliveryDate ?? "?"}
             </span>
           {/if}
         {/each}
       {:else}
-        <span class="text-xs font-light text-base-content/60"> aucun... </span>
+        <span class="text-base-content/60 text-xs font-light"> aucun... </span>
       {/if}
     </button>
   </div>

@@ -112,21 +112,21 @@
   }
 </script>
 
-<div class="flex h-full items-center justify-center bg-base-200 p-4">
-  <div class="card w-full max-w-md bg-base-100 shadow-xl">
+<div class="bg-base-200 flex h-full items-center justify-center p-4">
+  <div class="card bg-base-100 w-full max-w-md shadow-xl">
     <!-- Header -->
     <div class="card-body">
       <div class="text-center">
         <div class="mb-4 flex justify-center">
-          <div class="rounded-full bg-primary/10 p-4">
-            <KeyRound class="h-8 w-8 text-primary" />
+          <div class="bg-primary/10 rounded-full p-4">
+            <KeyRound class="text-primary h-8 w-8" />
           </div>
         </div>
         <h2 class="card-title justify-center text-2xl">
           Réinitialisation du mot de passe
         </h2>
         {#if isValidLink}
-          <p class="mt-2 text-base-content/70">
+          <p class="text-base-content/70 mt-2">
             Entrez votre nouveau mot de passe
           </p>
         {/if}
@@ -135,17 +135,17 @@
       <!-- Processing -->
       {#if isProcessing}
         <div class="flex flex-col items-center py-8">
-          <Loader2 class="h-12 w-12 animate-spin text-primary" />
-          <p class="mt-4 text-base-content/70">Vérification du lien...</p>
+          <Loader2 class="text-primary h-12 w-12 animate-spin" />
+          <p class="text-base-content/70 mt-4">Vérification du lien...</p>
         </div>
 
         <!-- Lien invalide -->
       {:else if !isValidLink}
-        <div role="alert" class="mt-4 alert alert-error max-md:alert-vertical">
+        <div role="alert" class="alert alert-error max-md:alert-vertical mt-4">
           <AlertCircle class="h-6 w-6 shrink-0" />
           <span>{errorMessage}</span>
         </div>
-        <div class="mt-6 card-actions justify-center">
+        <div class="card-actions mt-6 justify-center">
           <button onclick={goToLogin} class="btn btn-primary">
             Retour à la connexion
           </button>
@@ -157,7 +157,7 @@
         {#if errorMessage}
           <div
             role="alert"
-            class="mb-4 alert alert-error max-md:alert-vertical"
+            class="alert alert-error max-md:alert-vertical mb-4"
           >
             <AlertCircle class="h-6 w-6 shrink-0" />
             <span>{errorMessage}</span>
@@ -167,12 +167,12 @@
         {#if successMessage}
           <div
             role="alert"
-            class="mb-4 alert alert-success max-md:alert-vertical"
+            class="alert alert-success max-md:alert-vertical mb-4"
           >
             <Check class="h-6 w-6 shrink-0" />
             <span>{successMessage}</span>
           </div>
-          <p class="text-center text-base-content/70">
+          <p class="text-base-content/70 text-center">
             Vous allez être redirigé...
           </p>
         {:else}
@@ -231,7 +231,7 @@
           </form>
 
           <!-- Lien retour -->
-          <div class="mt-4 card-actions justify-center">
+          <div class="card-actions mt-4 justify-center">
             <button
               onclick={goToLogin}
               class="btn btn-ghost btn-sm"

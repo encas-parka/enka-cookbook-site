@@ -77,7 +77,7 @@
   <!-- Pas d'actions spécifiques pour cette page -->
 {/snippet}
 
-<div class="min-h-lvh bg-base-200 px-4 pt-4 pb-20 md:px-20" transition:fade>
+<div class="bg-base-200 min-h-lvh px-4 pt-4 pb-20 md:px-20" transition:fade>
   <!-- Header -->
 
   <!-- Bloc Documents attachés -->
@@ -96,7 +96,7 @@
   {#if currentEvent}
     <div class="mx-auto mt-6 {maxWidthClass}">
       <div class="mb-4 flex items-center gap-4">
-        <ListTodo class="size-5 text-primary" />
+        <ListTodo class="text-primary size-5" />
         <h2 class="text-xl font-bold">
           Tâches ({currentEvent.todos.length}) - {currentEvent.name}
         </h2>

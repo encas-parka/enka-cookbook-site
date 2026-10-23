@@ -585,11 +585,11 @@
     <div
       class="flex flex-col items-center justify-center gap-4 py-24 text-center"
     >
-      <div class="rounded-full bg-warning/20 p-4">
-        <Lock class="h-8 w-8 text-warning" />
+      <div class="bg-warning/20 rounded-full p-4">
+        <Lock class="text-warning h-8 w-8" />
       </div>
       <h2 class="text-lg font-bold">{gateTitle}</h2>
-      <p class="max-w-md text-base-content/70">{gateMessage}</p>
+      <p class="text-base-content/70 max-w-md">{gateMessage}</p>
       <div class="mt-2 flex gap-2">
         <button class="btn btn-ghost" onclick={goBackToRecipe}>Retour</button>
         {#if gateVariant === "released"}
@@ -648,7 +648,7 @@
       <!-- Zone de danger - Suppression -->
       {#if canEdit}
         <div
-          class="mt-8 alert border border-error alert-soft alert-error max-md:alert-vertical"
+          class="alert border-error alert-soft alert-error max-md:alert-vertical mt-8 border"
         >
           <Trash2 class="h-5 w-5 shrink-0" />
           <div class="flex-1">
@@ -674,7 +674,7 @@
       <!-- Bouton flottant Sauvegarder (mobile uniquement) -->
       {#if isDirty && !isSaving}
         <button
-          class="btn sticky bottom-2 shadow-lg btn-accent btn-sm {!globalState.isMobile &&
+          class="btn btn-accent btn-sm sticky bottom-2 shadow-lg {!globalState.isMobile &&
             'hidden'}"
           onclick={save}
           disabled={!canEdit || isSaving || !isDirty}

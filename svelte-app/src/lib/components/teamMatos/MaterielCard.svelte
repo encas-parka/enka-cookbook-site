@@ -106,8 +106,8 @@
 </script>
 
 <div
-  class="group card card-side border border-base-200 bg-base-100 text-left shadow-sm transition-all card-xs {canEdit
-    ? 'cursor-pointer hover:border-primary/50 hover:shadow-md'
+  class="group card card-side border-base-200 bg-base-100 card-xs border text-left shadow-sm transition-all {canEdit
+    ? 'hover:border-primary/50 cursor-pointer hover:shadow-md'
     : ''}"
   role="button"
   tabindex={canEdit ? 0 : -1}
@@ -137,20 +137,20 @@
         <div class="flex flex-wrap items-center gap-x-4 gap-y-0">
           <div class="flex items-center gap-2">
             <h3
-              class="text-base font-semibold text-primary transition-colors group-hover:text-primary/80"
+              class="text-primary group-hover:text-primary/80 text-base font-semibold transition-colors"
             >
               {materiel.name}
             </h3>
             <span
               class="badge {getMaterielTypeBadgeClass(
                 materiel.type,
-              )} gap-1 badge-soft py-0 badge-sm"
+              )} badge-soft badge-sm gap-1 py-0"
             >
               {getMaterielTypeConfig(materiel.type).label}
             </span>
           </div>
           <div
-            class="flex flex-wrap items-center gap-x-2 gap-y-1 text-sm text-base-content/80"
+            class="text-base-content/80 flex flex-wrap items-center gap-x-2 gap-y-1 text-sm"
           >
             <!-- Localisation -->
             {#if materiel.location}
@@ -180,7 +180,7 @@
             >
               {materiel.availableQuantity}/{materiel.quantity}
             </span>
-            <span class="ml-1 text-xs text-base-content/60">dispo.</span>
+            <span class="text-base-content/60 ml-1 text-xs">dispo.</span>
           </div>
 
           <!-- Info sur les prêts (si présent) -->
@@ -191,14 +191,14 @@
           {/if}
           <!-- Description -->
           {#if truncatedDescription}
-            <div class="line-clamp-1 text-xs text-base-content/60">
+            <div class="text-base-content/60 line-clamp-1 text-xs">
               {truncatedDescription}
             </div>
           {/if}
 
           <!-- Statut principal -->
           {#if materiel.status !== "ok" && materiel.status !== "loan"}
-            <div class="badge {StatusConfig.badgeClass} gap-1 py-0 badge-sm">
+            <div class="badge {StatusConfig.badgeClass} badge-sm gap-1 py-0">
               {StatusConfig.label}
             </div>
           {/if}
@@ -226,11 +226,11 @@
         {#if materiel.loanDetails.length > 0}
           <div class="">
             <div class="text-xs">
-              <span class="font-semibold text-info">
+              <span class="text-info font-semibold">
                 {materiel.loanDetails.length} réservation
                 {materiel.loanDetails.length > 1 ? "s" : ""} :
               </span>
-              <span class="ml-2 text-base-content/80">
+              <span class="text-base-content/80 ml-2">
                 {#each materiel.loanDetails as loan, index}
                   {#if index > 0}
                     <span class="opacity-50"> • </span>

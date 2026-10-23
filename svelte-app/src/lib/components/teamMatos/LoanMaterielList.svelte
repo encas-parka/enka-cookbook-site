@@ -241,8 +241,8 @@
   {:else}
     <!-- Ancrage sticky défini par l'enveloppe (modal : compense le padding
          du scroll container ; page : se cale sous la navbar) -->
-    <div class="sticky z-10 space-y-2 bg-base-100 py-2 {stickyClass}">
-      <label class="input w-full input-md">
+    <div class="bg-base-100 sticky z-10 space-y-2 py-2 {stickyClass}">
+      <label class="input input-md w-full">
         <Search class="size-4 opacity-50" />
         <input
           type="text"
@@ -266,11 +266,11 @@
         <!-- Sélecteur compact : la sidebar n'est pas visible ici (mobile,
              modal) — même état que les facettes, mutations partagées -->
         <div
-          class="flex flex-wrap gap-1 rounded-xl bg-base-200 p-1 font-semibold"
+          class="bg-base-200 flex flex-wrap gap-1 rounded-xl p-1 font-semibold"
         >
           {#each segmentInlineOptions as opt (opt.value)}
             <button
-              class="btn flex-1 btn-sm {filter.segment === opt.value &&
+              class="btn btn-sm flex-1 {filter.segment === opt.value &&
                 'btn-secondary'}"
               type="button"
               aria-pressed={filter.segment === opt.value}
@@ -292,7 +292,7 @@
     {#if selectedItems.length > 0}
       <!-- Récapitulatif de la sélection : plié à deux lignes, badges
            cliquables (défile vers la rangée du matériel) -->
-      <div class="rounded-2xl border border-base-200 bg-base-200/60 p-2">
+      <div class="border-base-200 bg-base-200/60 rounded-2xl border p-2">
         <div class=" text-base-content/70">Votre réservation :</div>
         <div
           class="flex flex-wrap gap-1 overflow-hidden py-2 {badgesOpen
@@ -301,7 +301,7 @@
         >
           {#each selectedItems as sel (sel.id)}
             <button
-              class="btn gap-1 btn-soft btn-sm"
+              class="btn btn-soft btn-sm gap-1"
               type="button"
               title="Aller au matériel dans la liste"
               onclick={() => scrollToMateriel(sel.id)}
@@ -312,7 +312,7 @@
           {/each}
         </div>
         <button
-          class="flex w-full items-center justify-center gap-1 pb-1 text-xs text-base-content/60 italic"
+          class="text-base-content/60 flex w-full items-center justify-center gap-1 pb-1 text-xs italic"
           type="button"
           aria-expanded={badgesOpen}
           onclick={() => (badgesOpen = !badgesOpen)}
@@ -331,7 +331,7 @@
       class="mx-auto mt-4 flex max-w-3xl items-center justify-end gap-3 px-1"
     >
       <button
-        class="link text-xs font-medium link-error {canClearVisible
+        class="link link-error text-xs font-medium {canClearVisible
           ? ''
           : 'link-disabled'}"
         onclick={clearAllVisible}
@@ -340,7 +340,7 @@
         Tout retirer
       </button>
       <button
-        class="link text-xs font-medium link-primary {canTakeAll
+        class="link link-primary text-xs font-medium {canTakeAll
           ? ''
           : 'link-disabled'}"
         onclick={takeAllVisible}
@@ -362,7 +362,7 @@
     {/if}
 
     {#if ghostItems.length > 0}
-      <div class="rounded-lg border border-base-300 bg-base-200/50 p-2">
+      <div class="border-base-300 bg-base-200/50 rounded-lg border p-2">
         <p class="mb-2 px-1 text-xs font-semibold uppercase opacity-60">
           Hors inventaire ({ghostItems.length})
         </p>

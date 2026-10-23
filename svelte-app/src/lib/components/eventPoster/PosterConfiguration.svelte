@@ -53,7 +53,7 @@
   }
 </script>
 
-<div class="h-full w-full space-y-6 bg-base-200 sm:pt-16">
+<div class="bg-base-200 h-full w-full space-y-6 sm:pt-16">
   <!-- Display Options -->
   <Fieldset legend="Éléments à afficher">
     <!-- Display Checkbox Component: Date -->
@@ -102,7 +102,7 @@
     </div>
 
     <!-- Display Component: Recettes (always show label) -->
-    <fieldset class="my-2 fieldset">
+    <fieldset class="fieldset my-2">
       <!-- Display Checkbox Component: Régimes -->
       <div class="flex flex-wrap gap-x-4 gap-y-1">
         <label class="label cursor-pointer justify-start gap-3">
@@ -185,7 +185,7 @@
       <legend class="fieldset-legend text-xs opacity-60">
         Message en haut de chaque fiche
       </legend>
-      <label class="input w-full input-sm">
+      <label class="input input-sm w-full">
         <input
           type="text"
           class="grow"
@@ -199,7 +199,7 @@
       <legend class="fieldset-legend text-xs opacity-60">
         Message en bas de chaque fiche
       </legend>
-      <label class="input w-full input-sm">
+      <label class="input input-sm w-full">
         <input
           type="text"
           class="grow"
@@ -224,7 +224,7 @@
       )}
         {#if visible}
           <div
-            class="rounded-xl border border-base-content/5 bg-base-200/30 p-3"
+            class="border-base-content/5 bg-base-200/30 rounded-xl border p-3"
           >
             <div class="mb-2 flex items-center justify-between">
               <span class="text-xs font-bold uppercase opacity-60">{label}</span
@@ -252,7 +252,7 @@
 
                 <!-- Size controls -->
                 <button
-                  class="btn btn-square btn-ghost font-bold btn-xs"
+                  class="btn btn-square btn-ghost btn-xs font-bold"
                   onclick={() =>
                     (config[sizeKey] = Math.max(0, config[sizeKey] - 1))}
                   disabled={config[sizeKey] === 0}
@@ -271,7 +271,7 @@
                   {/each}
                 </div>
                 <button
-                  class="btn btn-square btn-ghost font-bold btn-xs"
+                  class="btn btn-square btn-ghost btn-xs font-bold"
                   onclick={() =>
                     (config[sizeKey] = Math.min(3, config[sizeKey] + 1))}
                   disabled={config[sizeKey] === 3}
@@ -282,7 +282,7 @@
             </div>
 
             <select
-              class="select w-full select-sm"
+              class="select select-sm w-full"
               bind:value={config[fontKey]}
             >
               <option value="montserrat-font">Montserrat (Standard)</option>
@@ -386,7 +386,7 @@
     <div class="space-y-4">
       <div class="max-h-60 space-y-2 overflow-y-auto pr-1">
         {#if versions.length === 0}
-          <div class="py-2 text-center text-sm text-base-content/50 italic">
+          <div class="text-base-content/50 py-2 text-center text-sm italic">
             Aucune version archivée
           </div>
         {:else}
@@ -395,12 +395,12 @@
               class="flex items-center justify-between rounded-lg border p-3 transition-all {activeVersionId ===
               version.id
                 ? 'border-secondary/30 bg-secondary/30'
-                : 'border-transparent bg-base-100/50 hover:border-base-300 hover:bg-base-100'}"
+                : 'bg-base-100/50 hover:border-base-300 hover:bg-base-100 border-transparent'}"
             >
               <div class="flex flex-col">
                 <span class="text-sm font-medium">{version.name}</span>
                 <span
-                  class="flex items-center gap-1 text-xs text-base-content/50"
+                  class="text-base-content/50 flex items-center gap-1 text-xs"
                 >
                   <Clock class="size-3" />
                   {new Date(version.createdAt).toLocaleDateString()}
@@ -428,7 +428,7 @@
       </div>
 
       <button
-        class="btn btn-block gap-2 border-dashed btn-outline"
+        class="btn btn-block btn-outline gap-2 border-dashed"
         onclick={handleCreateVersion}
       >
         <Plus class="size-4" />
@@ -443,7 +443,7 @@
   <!-- Save Action -->
   <div class="px-4 pb-10">
     <button
-      class="btn btn-block gap-2 shadow-lg btn-primary"
+      class="btn btn-block btn-primary gap-2 shadow-lg"
       onclick={() => (showSaveModal = true)}
     >
       <Save class="size-5" />
@@ -459,7 +459,7 @@
 {#if showLimitModal}
   <div class="modal modal-open">
     <div class="modal-box">
-      <h3 class="flex items-center gap-2 text-lg font-bold text-warning">
+      <h3 class="text-warning flex items-center gap-2 text-lg font-bold">
         <AlertTriangle class="size-6" />
         Limite atteinte
       </h3>
@@ -500,8 +500,8 @@
 <!-- Save Confirmation Modal -->
 {#if showSaveModal}
   <div class="modal modal-open">
-    <div class="modal-box border border-warning/20">
-      <div class="mb-4 flex items-center gap-3 text-warning">
+    <div class="modal-box border-warning/20 border">
+      <div class="text-warning mb-4 flex items-center gap-3">
         <AlertTriangle class="size-8" />
         <h3 class="text-lg font-bold">Sauvegarde locale</h3>
       </div>
@@ -513,7 +513,7 @@
       </p>
 
       <div
-        class="space-y-2 rounded-lg border border-warning/10 bg-warning/5 p-4 text-sm"
+        class="border-warning/10 bg-warning/5 space-y-2 rounded-lg border p-4 text-sm"
       >
         <p>⚠️ <strong>Attention :</strong></p>
         <ul class="list-disc pl-5 opacity-80">
@@ -529,7 +529,7 @@
         <button class="btn btn-ghost" onclick={() => (showSaveModal = false)}>
           Annuler
         </button>
-        <button class="btn gap-2 btn-warning" onclick={handleSave}>
+        <button class="btn btn-warning gap-2" onclick={handleSave}>
           <Save class="size-4" />
           Confirmer la sauvegarde
         </button>

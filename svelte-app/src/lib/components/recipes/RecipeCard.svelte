@@ -19,15 +19,15 @@
 </script>
 
 <a
-  class="card cursor-pointer bg-base-100 p-4 shadow-sm transition-shadow hover:shadow-md {recipe.auteur ===
-    globalState.userName && 'border-l-3 border-accent/60'}"
+  class="card bg-base-100 cursor-pointer p-4 shadow-sm transition-shadow hover:shadow-md {recipe.auteur ===
+    globalState.userName && 'border-accent/60 border-l-3'}"
   href={p(`/recipe/${recipe.id}`)}
   role="button"
 >
   <!-- Absolute top @md -->
   {#if globalState.isDesktop}
     <h3
-      class="absolute -top-4 left-0 flex max-w-5/6 items-center-safe gap-3 rounded-t-box border-t border-t-base-300 bg-base-100 py-1 ps-4 pe-6 text-primary"
+      class="rounded-t-box border-t-base-300 bg-base-100 text-primary absolute -top-4 left-0 flex max-w-5/6 items-center-safe gap-3 border-t py-1 ps-4 pe-6"
     >
       <svg class="inline size-6 stroke-3">
         <use href={`/icons/sprite.svg#${typeDisplay.iconId}`} />
@@ -42,7 +42,7 @@
     </h3>
 
     <div
-      class="absolute -top-4 right-0 rounded-t-box border-t border-base-300 bg-base-100 px-1"
+      class="rounded-t-box border-base-300 bg-base-100 absolute -top-4 right-0 border-t px-1"
     >
       {#if recipe.regime}
         <RecipeRegimeBadges regimes={recipe.regime} iconOnly />
@@ -59,7 +59,7 @@
       {#if !globalState.isDesktop}
         <div class="flex gap-4">
           <div
-            class="mb-2 inline-flex flex-wrap items-center gap-2 font-bold text-primary"
+            class="text-primary mb-2 inline-flex flex-wrap items-center gap-2 font-bold"
           >
             <div class="inline-flex items-center gap-x-2 leading-5">
               <svg class=" size-6 shrink-0 self-start stroke-3">
@@ -88,12 +88,12 @@
           {#if recipe.auteur}
             <span
               class={recipe.auteur === globalState.userName
-                ? "font-semibold text-accent"
+                ? "text-accent font-semibold"
                 : "text-base-content/70 "}>de {recipe.auteur}</span
             >
           {/if}
         </div>
-        <div class="text-sm text-wrap text-base-content/60">
+        <div class="text-base-content/60 text-sm text-wrap">
           {#if recipe.check}
             <p>
               testée pour {recipe.plate}

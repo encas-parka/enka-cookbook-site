@@ -114,37 +114,37 @@
 </script>
 
 <div
-  class="flex min-h-dvh items-center justify-center bg-base-200 p-4"
+  class="bg-base-200 flex min-h-dvh items-center justify-center p-4"
   transition:fade
 >
-  <div class="card w-full max-w-sm bg-base-100 shadow-xl">
+  <div class="card bg-base-100 w-full max-w-sm shadow-xl">
     <div class="card-body items-center text-center">
       {#if step === "loading"}
         <span class="loading loading-lg loading-spinner text-primary"></span>
-        <p class="mt-4 text-base-content/60">Vérification de l'invitation...</p>
+        <p class="text-base-content/60 mt-4">Vérification de l'invitation...</p>
       {:else if step === "auth-required"}
         <div class="mb-2 text-4xl">🔑</div>
         <h2 class="card-title">Connectez-vous pour continuer</h2>
-        <p class="mt-1 text-sm text-base-content/60">
+        <p class="text-base-content/60 mt-1 text-sm">
           Ce lien d'invitation nécessite d'être connecté pour rejoindre
           l'événement.
         </p>
         <button
-          class="btn mt-4 w-full btn-primary"
+          class="btn btn-primary mt-4 w-full"
           onclick={() => (authModalOpen = true)}
         >
           Se connecter / Créer un compte
         </button>
       {:else if step === "success"}
-        <PartyPopper class="mb-2 size-12 text-success" />
+        <PartyPopper class="text-success mb-2 size-12" />
         <h2 class="card-title text-success">Accès accordé !</h2>
-        <p class="mt-1 text-sm text-base-content/60">
+        <p class="text-base-content/60 mt-1 text-sm">
           Vous avez rejoint l'événement. Confirmez votre participation depuis le
           bandeau d'invitation.
         </p>
-        <span class="loading mt-3 loading-sm loading-dots text-primary"></span>
+        <span class="loading loading-sm loading-dots text-primary mt-3"></span>
       {:else if step === "error"}
-        <TriangleAlert class="mb-2 size-10 text-error" />
+        <TriangleAlert class="text-error mb-2 size-10" />
         <h2 class="card-title text-error">Lien invalide</h2>
         <p class="py-3 text-sm">{errorMsg}</p>
         <button class="btn btn-ghost btn-sm" onclick={() => navigate("/")}>

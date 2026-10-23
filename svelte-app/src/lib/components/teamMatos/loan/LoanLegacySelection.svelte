@@ -180,7 +180,7 @@
       />
     </div>
     <button
-      class="btn flex-1 gap-2 btn-md btn-secondary"
+      class="btn btn-md btn-secondary flex-1 gap-2"
       onclick={() => (showQuickSelection = true)}
       disabled={loading || availableMateriels.length === 0}
     >
@@ -205,7 +205,7 @@
           return eMax > m.quantity && !getItemConflictInfo(m.materielId, m.quantity).isUnavailable;
         })}
           <button
-            class="link text-xs font-medium link-primary"
+            class="link link-primary text-xs font-medium"
             onclick={handleTakeAll}
             disabled={loading}
           >
@@ -248,7 +248,7 @@
               : 'bg-base-200'}"
         >
           <div class="flex items-center gap-2">
-            <div class="rounded bg-base-300 p-1">
+            <div class="bg-base-300 rounded p-1">
               <TypeIcon class="h-4 w-4 opacity-70" />
             </div>
 
@@ -287,7 +287,7 @@
                 <X class="size-3" />
               </button>
               <button
-                class="btn hidden btn-circle btn-ghost btn-xs sm:flex"
+                class="btn btn-circle btn-ghost btn-xs hidden sm:flex"
                 onclick={() =>
                   handleQuantityChange(
                     materiel.materielId,
@@ -300,7 +300,7 @@
               </button>
               <input
                 type="number"
-                class="input w-16 [appearance:textfield] text-center input-sm [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
+                class="input input-sm w-16 [appearance:textfield] text-center [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
                 min={0}
                 max={effectiveMax}
                 step={getStep(effectiveMax)}
@@ -315,7 +315,7 @@
                 disabled={loading}
               />
               <button
-                class="btn hidden btn-circle btn-ghost btn-xs sm:flex"
+                class="btn btn-circle btn-ghost btn-xs hidden sm:flex"
                 onclick={() =>
                   handleQuantityChange(
                     materiel.materielId,

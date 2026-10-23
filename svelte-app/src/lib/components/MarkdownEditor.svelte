@@ -110,7 +110,7 @@
   {/if}
 
   <div
-    class="overflow-hidden rounded-lg border-2 bg-base-100 transition-all {disabled
+    class="bg-base-100 overflow-hidden rounded-lg border-2 transition-all {disabled
       ? 'pointer-events-none opacity-60'
       : ''}"
     class:border-primary={isFocused && !disabled}
@@ -120,7 +120,7 @@
     <!-- Toolbar -->
     {#if editor}
       <div
-        class="flex flex-wrap items-center gap-1 border-b border-base-200 bg-base-200 p-1"
+        class="border-base-200 bg-base-200 flex flex-wrap items-center gap-1 border-b p-1"
       >
         <button
           type="button"
@@ -140,7 +140,7 @@
         >
           <Italic class="h-4 w-4" />
         </button>
-        <div class="divider mx-0 divider-horizontal h-6"></div>
+        <div class="divider divider-horizontal mx-0 h-6"></div>
         <button
           type="button"
           class="btn btn-square btn-ghost btn-sm"
@@ -160,7 +160,7 @@
         >
           <ListOrdered class="h-4 w-4" />
         </button>
-        <div class="divider mx-0 divider-horizontal h-6"></div>
+        <div class="divider divider-horizontal mx-0 h-6"></div>
         <button
           type="button"
           class="btn btn-square btn-ghost btn-sm"

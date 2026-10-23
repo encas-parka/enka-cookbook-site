@@ -11,7 +11,7 @@
 </script>
 
 {#if isChecked}
-  <div class="text-sm text-base-content/70">
+  <div class="text-base-content/70 text-sm">
     Cette recette a été testée pour {defaultServings} couverts
     {#if checkedFor}
       et pour {checkedFor} couverts

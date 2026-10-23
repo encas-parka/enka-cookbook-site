@@ -153,7 +153,7 @@
         {@const canRemove = canManageMembers && !isCurrentUser}
 
         <div
-          class="card border border-base-200 bg-base-100 p-4 transition-shadow hover:shadow-md"
+          class="card border-base-200 bg-base-100 border p-4 transition-shadow hover:shadow-md"
         >
           <div class="flex items-center justify-between gap-4">
             <!-- Avatar et infos -->
@@ -163,7 +163,7 @@
                 <div
                   class="{member.name === globalState.userName
                     ? 'bg-accent'
-                    : 'bg-neutral'} w-12 rounded-full text-neutral-content"
+                    : 'bg-neutral'} text-neutral-content w-12 rounded-full"
                 >
                   <span class="text-lg">
                     {member.name
@@ -188,7 +188,7 @@
                   Membre depuis {formatDate(member.joinedAt)}
                   <!-- Bouton renvoyer l'invitation (visible pour tous les membres) -->
                   <button
-                    class="btn btn-link py-4 btn-info btn-xs"
+                    class="btn btn-link btn-info btn-xs py-4"
                     onclick={() => resendInvite(member)}
                     disabled={resendingInvite === member.id}
                     title="Renvoyer l'invitation par email"

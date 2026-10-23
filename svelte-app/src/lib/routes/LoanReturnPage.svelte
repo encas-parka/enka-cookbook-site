@@ -43,6 +43,6 @@
       <button class="btn btn-sm" onclick={goBack}>Retour</button>
     </div>
   {:else}
-    <LoaderCircle class="h-10 w-10 animate-spin text-primary" />
+    <LoaderCircle class="text-primary h-10 w-10 animate-spin" />
   {/if}
 </div>

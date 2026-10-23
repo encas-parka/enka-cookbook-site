@@ -166,7 +166,7 @@
 
   {#if showDropdown && suggestions.length > 0}
     <ul
-      class="absolute z-50 mt-1 w-full rounded-box border border-base-200 bg-base-100 shadow-lg"
+      class="rounded-box border-base-200 bg-base-100 absolute z-50 mt-1 w-full border shadow-lg"
       role="listbox"
     >
       {#each suggestions as suggestion, i (suggestion.name + suggestion.source)}

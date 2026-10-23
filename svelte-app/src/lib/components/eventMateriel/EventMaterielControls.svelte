@@ -58,7 +58,7 @@
 
 <div class="space-y-2">
   <div
-    class="flex flex-wrap items-center justify-between gap-3 rounded-box bg-base-300 px-4 py-3"
+    class="rounded-box bg-base-300 flex flex-wrap items-center justify-between gap-3 px-4 py-3"
   >
     <fieldset class="fieldset">
       <legend class="legend label">
@@ -84,7 +84,7 @@
 
   {#if activeBadges.length > 0}
     <div class="flex flex-wrap items-center gap-2">
-      <span class="text-sm text-base-content/50">Filtres :</span>
+      <span class="text-base-content/50 text-sm">Filtres :</span>
       {#each activeBadges as badge (badge.id)}
         <button
           type="button"

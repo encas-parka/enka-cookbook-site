@@ -290,7 +290,7 @@
 
     <!-- Onglets -->
     {#if canReturn}
-      <div class="tabs tabs-border mb-6 bg-base-200 font-semibold sm:tabs-lg">
+      <div class="tabs tabs-border bg-base-200 sm:tabs-lg mb-6 font-semibold">
         <button
           class="tab"
           class:tab-active={tab === "reservation"}
@@ -346,7 +346,7 @@
       <div class="flex items-center justify-center py-12">
         <div class="text-center">
           <LoaderCircle
-            class="mx-auto mb-4 h-10 w-10 animate-spin text-primary"
+            class="text-primary mx-auto mb-4 h-10 w-10 animate-spin"
           />
           <p class="text-base-content/70">Chargement de la réservation...</p>
         </div>

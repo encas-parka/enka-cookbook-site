@@ -278,7 +278,7 @@
       {#if badgeItems.length > 0}
         <div>
           <h4 class="mb-2 font-medium">Produits concernés</h4>
-          <div class="mb-4 text-sm text-base-content/70">
+          <div class="text-base-content/70 mb-4 text-sm">
             Les quantités manquantes du
             <span class="badge badge-sm badge-info">
               {formatDateWdDayMonthShort(productsStore.dateRange.start)}
@@ -297,7 +297,7 @@
           />
         </div>
       {:else}
-        <div class="alert alert-soft font-medium alert-warning">
+        <div class="alert alert-soft alert-warning font-medium">
           Aucun besoin dans le groupe séléctionné
         </div>
       {/if}

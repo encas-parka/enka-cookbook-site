@@ -219,7 +219,7 @@
   <div class="space-y-4">
     <!-- Titre -->
     <fieldset class="fieldset flex">
-      <label class="input w-full input-lg">
+      <label class="input input-lg w-full">
         <span class="label">Nom</span>
         <input
           type="text"
@@ -278,7 +278,7 @@
     <!-- Bouton flottant Créer (mobile uniquement) -->
     {#if hasUnsavedChanges && !isSaving}
       <button
-        class="btn sticky bottom-2 shadow-lg btn-primary btn-sm {!globalState.isMobile &&
+        class="btn btn-primary btn-sm sticky bottom-2 shadow-lg {!globalState.isMobile &&
           'hidden'}"
         onclick={handleCreate}
         disabled={!canEdit || !isValid || isSaving}

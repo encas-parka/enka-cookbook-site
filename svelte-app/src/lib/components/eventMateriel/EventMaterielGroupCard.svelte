@@ -76,7 +76,7 @@
   }
 </script>
 
-<div class="card border border-base-200 bg-base-100 shadow-sm card-xs">
+<div class="card border-base-200 bg-base-100 card-xs border shadow-sm">
   <div class="card-body">
     <!-- Header row -->
     <div class="flex flex-wrap items-center gap-3">
@@ -109,7 +109,7 @@
             <span
               class="badge hidden sm:flex {getMaterielTypeBadgeClass(
                 header.type,
-              )} gap-1 badge-soft py-0 badge-sm"
+              )} badge-soft badge-sm gap-1 py-0"
             >
               {getMaterielTypeConfig(header.type).label}
             </span>
@@ -148,17 +148,17 @@
                     </div>
                   {/if}
                   {#if alloc.fromTeamName}
-                    <span class="text-sm text-base-content/50 sm:text-xs">
+                    <span class="text-base-content/50 text-sm sm:text-xs">
                       ({alloc.fromTeamName})
                     </span>
                   {/if}
 
                   {#if alloc.notes}
                     <div
-                      class="tooltip max-w-24 tooltip-info"
+                      class="tooltip tooltip-info max-w-24"
                       data-tip={alloc.notes}
                     >
-                      <span class="max-w-24 truncate text-base-content/60">
+                      <span class="text-base-content/60 max-w-24 truncate">
                         <MessageSquareWarning class="inline-block size-4" />
                       </span>
                     </div>

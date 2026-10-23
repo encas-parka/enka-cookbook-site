@@ -306,7 +306,7 @@
             Mot de passe oublié ?
           </button>
 
-          <div class="text-sm text-base-content/70">
+          <div class="text-base-content/70 text-sm">
             Pas encore de compte ?
             <button
               onclick={() => (showLogin = false)}
@@ -406,7 +406,7 @@
           </div>
         </form>
 
-        <div class="text-center text-sm text-base-content/70">
+        <div class="text-base-content/70 text-center text-sm">
           Déjà un compte ?
           <button
             onclick={() => (showLogin = true)}

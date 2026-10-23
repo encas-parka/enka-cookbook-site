@@ -24,7 +24,7 @@
       {@const Icon = tab.icon}
       <a
         class="tab rounded-box font-medium {i === activeIndex
-          ? 'bg-accent/30 font-bold text-base-content/80'
+          ? 'bg-accent/30 text-base-content/80 font-bold'
           : 'text-accent'}"
         href={getEventTabPath(tab, eventId, basePath)}
       >

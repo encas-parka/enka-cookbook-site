@@ -77,11 +77,11 @@
     </button>
   </div>
 
-  <div class="rounded-lg bg-base-200 p-4">
+  <div class="bg-base-200 rounded-lg p-4">
     <h3 class="mb-2 font-bold">Toasts actifs:</h3>
     <div class="space-y-1 text-sm">
       {#each toastService.toasts as toast (toast.id)}
-        <div class="flex items-center justify-between rounded bg-base-100 p-2">
+        <div class="bg-base-100 flex items-center justify-between rounded p-2">
           <span>
             {toast.state}: {toast.message}
             {toast.autoCloseDelay && `(ferme après ${toast.autoCloseDelay}ms)`}

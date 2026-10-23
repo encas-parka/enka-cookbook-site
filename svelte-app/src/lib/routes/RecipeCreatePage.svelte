@@ -259,7 +259,7 @@
       <!-- Bouton flottant Créer (mobile uniquement) -->
       {#if isDirty && !isSaving}
         <button
-          class="btn sticky bottom-2 shadow-lg btn-primary btn-sm {!globalState.isMobile &&
+          class="btn btn-primary btn-sm sticky bottom-2 shadow-lg {!globalState.isMobile &&
             'hidden'}"
           onclick={save}
           disabled={isSaving || !isDirty}

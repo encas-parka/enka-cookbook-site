@@ -38,7 +38,7 @@
 </script>
 
 <div
-  class="flex cursor-pointer items-start gap-3 rounded-lg bg-base-200/60 p-3 shadow-sm transition-colors hover:bg-base-200 {cardClass} @container"
+  class="bg-base-200/60 hover:bg-base-200 flex cursor-pointer items-start gap-3 rounded-lg p-3 shadow-sm transition-colors {cardClass} @container"
   onclick={() => navigate(`/event/${event.id}`)}
   role="button"
   tabindex="0"
@@ -53,7 +53,7 @@
 >
   <div class="min-w-0 flex-1 space-y-4">
     <div class="flex flex-wrap items-center gap-4">
-      <div class="truncate text-base font-semibold text-primary">
+      <div class="text-primary truncate text-base font-semibold">
         {event.name}
       </div>
       <div class="badge h-auto font-medium">
@@ -73,7 +73,7 @@
       />
 
       {#if contributorStatus === "invited"}
-        <div class="ms-auto badge h-auto badge-lg badge-info">
+        <div class="badge badge-lg badge-info ms-auto h-auto">
           <Rocket class="size-4" />
           Vous êtes invité à participer
         </div>
@@ -82,10 +82,10 @@
 
     <!-- Métadonnées -->
     <div
-      class="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-base-content/70"
+      class="text-base-content/70 mt-2 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm"
     >
       {#if event.teams && event.teams.length > 0}
-        <div class="flex items-center gap-1 font-semibold text-primary">
+        <div class="text-primary flex items-center gap-1 font-semibold">
           <Users class="h-3 w-3 stroke-3" />
           <span>{nativeTeamsStore.teamNames(event.teams).join(", ")}</span>
         </div>
@@ -95,7 +95,7 @@
         {@const acceptedCount = event.contributors.filter(
           (c) => c.status === "accepted",
         ).length}
-        <div class="flex items-center gap-1 text-base-content/90">
+        <div class="text-base-content/90 flex items-center gap-1">
           <Users class="h-3 w-3" />
           <span>{acceptedCount} participant{acceptedCount > 1 ? "s" : ""}</span>
           <span>({event.minContrib} requis)</span>

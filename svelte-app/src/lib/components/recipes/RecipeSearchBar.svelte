@@ -11,7 +11,7 @@
 </script>
 
 <div class="">
-  <label class="input w-full input-lg">
+  <label class="input input-lg w-full">
     <Search class="h-5 w-5 opacity-50" />
     <input
       type="text"

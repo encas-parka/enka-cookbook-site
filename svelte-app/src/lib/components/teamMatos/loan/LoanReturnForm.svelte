@@ -316,7 +316,7 @@
   }
 </script>
 
-<div class="card mx-auto max-w-3xl bg-base-100 shadow-sm max-sm:card-xs">
+<div class="card bg-base-100 max-sm:card-xs mx-auto max-w-3xl shadow-sm">
   <div class="card-body">
     {#if isReadOnly && returnedAt}
       <div class="alert alert-info max-md:alert-vertical">
@@ -345,14 +345,14 @@
                 (item) => !isRowDeclared(item),
               ).length}
               {#if undeclared === 0}
-                <span class="badge gap-1 badge-success">
+                <span class="badge badge-success gap-1">
                   <Check class="h-3 w-3" />
                   Conforme
                 </span>
               {:else}
                 <span class="badge badge-warning">{undeclared} à déclarer</span>
                 <button
-                  class="btn ms-auto btn-ghost text-success btn-sm"
+                  class="btn btn-ghost text-success btn-sm ms-auto"
                   onclick={() =>
                     (confirmGroup = { type: group.type, rows: group.items })}
                   title="Attester les rangées non déclarées du groupe"
@@ -373,19 +373,19 @@
               {#if isReadOnly}
                 <!-- Lecture seule : l'état enregistré en badges -->
                 {#if item.brokenQuantity > 0}
-                  <div class="badge gap-1 badge-warning">
+                  <div class="badge badge-warning gap-1">
                     <AlertTriangle class="h-3 w-3" />
                     À réparer : {item.brokenQuantity}
                   </div>
                 {/if}
                 {#if item.lostQuantity > 0}
-                  <div class="badge gap-1 badge-error">
+                  <div class="badge badge-error gap-1">
                     <X class="h-3 w-3" />
                     Perdu : {item.lostQuantity}
                   </div>
                 {/if}
                 {#if item.quantity - item.lostQuantity - item.brokenQuantity > 0}
-                  <div class="badge gap-1 badge-success">
+                  <div class="badge badge-success gap-1">
                     <Check class="h-3 w-3" />
                     OK : {item.quantity -
                       item.lostQuantity -
@@ -438,7 +438,7 @@
                      saisies, toute édition le décoche. -->
                 <div class="ms-auto flex items-center gap-2">
                   <label class="input">
-                    <span class="label border-r border-base-300 pr-2"
+                    <span class="label border-base-300 border-r pr-2"
                       >Perdus</span
                     >
                     <input
@@ -456,7 +456,7 @@
                     />
                   </label>
                   <label class="input">
-                    <span class="label border-r border-base-300 pr-2"
+                    <span class="label border-base-300 border-r pr-2"
                       >À réparer</span
                     >
                     <input
@@ -496,7 +496,7 @@
     </div>
 
     {#if !isReadOnly && undeclaredCount > 0}
-      <p class="mt-3 text-sm text-base-content/70">
+      <p class="text-base-content/70 mt-3 text-sm">
         {undeclaredCount}
         matériel{undeclaredCount > 1 ? "s" : ""} à déclarer : saisissez les quantités
         perdues / à réparer, puis attestez le restant avec « Ok ».
@@ -504,7 +504,7 @@
     {/if}
 
     <!-- Notes de retour -->
-    <fieldset class="mt-4 fieldset bg-base-100">
+    <fieldset class="fieldset bg-base-100 mt-4">
       <legend class="fieldset-legend">Notes de retour (optionnel)</legend>
       {#if isReadOnly}
         <!-- Mode lecture seule -->

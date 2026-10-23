@@ -30,7 +30,7 @@
   }
 </script>
 
-<div class="flex items-center gap-4 rounded-box bg-base-300 px-4 py-3">
+<div class="rounded-box bg-base-300 flex items-center gap-4 px-4 py-3">
   <fieldset class="fieldset">
     <legend class="legend label">
       <ArrowDownNarrowWide class="inline size-4" /> Trier par :

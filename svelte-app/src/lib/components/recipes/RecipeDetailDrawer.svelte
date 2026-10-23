@@ -69,7 +69,7 @@
 <Drawer bind:open={recipeDrawer.isOpen} direction="right">
   <DrawerOverlay class="fixed inset-0 z-1050 bg-black/40 backdrop-blur-sm" />
   <DrawerContent
-    class="fixed top-0 right-0 bottom-0 z-1060 flex h-full w-[90vw] max-w-lg flex-row bg-base-100 shadow-xl"
+    class="bg-base-100 fixed top-0 right-0 bottom-0 z-1060 flex h-full w-[90vw] max-w-lg flex-row shadow-xl"
   >
     <DrawerHandle class="mx-1 my-auto items-center bg-black/20 px-1" />
 
@@ -83,7 +83,7 @@
     >
       <!-- Bouton fermer -->
       <button
-        class="btn absolute top-5 right-3 z-10 btn-circle md:top-15"
+        class="btn btn-circle absolute top-5 right-3 z-10 md:top-15"
         onclick={handleClose}
         aria-label="Fermer"
       >
@@ -93,7 +93,7 @@
       {#if isLoading}
         <div class="flex flex-col items-center justify-center py-20">
           <span class="loading loading-lg loading-spinner text-primary"></span>
-          <p class="mt-4 text-base-content/60">Chargement…</p>
+          <p class="text-base-content/60 mt-4">Chargement…</p>
         </div>
       {:else if error}
         <div class="p-6">
@@ -108,7 +108,7 @@
         )}
         <div class="p-6">
           <!-- Header -->
-          <div class="border-b border-base-300 pb-4">
+          <div class="border-base-300 border-b pb-4">
             <!-- Ligne titre -->
             <div class="flex items-center gap-2 pr-10">
               <svg class="size-6 shrink-0">
@@ -138,7 +138,7 @@
 
           <!-- Infos -->
           <div class="flex flex-wrap items-center gap-4 py-4">
-            <div class="flex items-center gap-2 text-lg text-base-content/80">
+            <div class="text-base-content/80 flex items-center gap-2 text-lg">
               <Users class="h-4 w-4" />
               <span>{formatPlates(recipeDrawer.servings)}</span>
             </div>
@@ -173,7 +173,7 @@
 
           <!-- Description -->
           {#if recipe.quantite_desc}
-            <p class="pb-4 text-sm text-base-content/70 italic">
+            <p class="text-base-content/70 pb-4 text-sm italic">
               {recipe.quantite_desc}
             </p>
           {/if}

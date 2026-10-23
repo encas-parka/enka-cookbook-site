@@ -15,22 +15,22 @@
 </script>
 
 {#if !globalState.isMobile}
-  <div class="card border border-base-200 bg-base-100 shadow-sm">
+  <div class="card border-base-200 bg-base-100 border shadow-sm">
     <div class="card-body">
       <div class="flex items-center gap-3">
-        <div class="self-baseline stroke-3 text-primary">{@render icon()}</div>
+        <div class="text-primary self-baseline stroke-3">{@render icon()}</div>
         <div>
           <h4 class="">{title}</h4>
-          <p class="py-2 text-sm text-base-content/60">{description}</p>
+          <p class="text-base-content/60 py-2 text-sm">{description}</p>
         </div>
       </div>
-      <div class="mt-auto card-actions justify-end">
+      <div class="card-actions mt-auto justify-end">
         {@render action()}
       </div>
     </div>
   </div>
 {:else}
-  <div class="rounded-lg border border-base-200 bg-base-100">
+  <div class="border-base-200 bg-base-100 rounded-lg border">
     <button
       class="flex w-full items-center gap-2 p-3 text-left"
       onclick={() => (open = !open)}
@@ -42,14 +42,14 @@
         {@render action()}
       </div>
       <ChevronDown
-        class="size-4 shrink-0 text-base-content/40 transition-transform {open
+        class="text-base-content/40 size-4 shrink-0 transition-transform {open
           ? 'rotate-180'
           : ''}"
       />
     </button>
     {#if open}
-      <div class="border-t border-base-200 px-3 py-2">
-        <p class="text-sm text-base-content/60">{description}</p>
+      <div class="border-base-200 border-t px-3 py-2">
+        <p class="text-base-content/60 text-sm">{description}</p>
       </div>
     {/if}
   </div>

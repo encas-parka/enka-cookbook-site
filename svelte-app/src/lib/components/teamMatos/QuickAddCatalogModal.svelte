@@ -150,7 +150,7 @@
 
   <ModalContent>
     <div class="mb-4">
-      <label class="input w-full input-sm">
+      <label class="input input-sm w-full">
         <Search class="size-4 opacity-50" />
         <input
           type="text"
@@ -164,7 +164,7 @@
       {#each CATALOG_TYPE_GROUPS as group (group.type)}
         {@const items = catalogByType.get(group.type) || []}
         {#if items.length > 0}
-          <div class="collapse-arrow collapse bg-base-200">
+          <div class="collapse-arrow bg-base-200 collapse">
             <input
               type="checkbox"
               checked={group.defaultOpen || searchQuery.trim().length > 0}
@@ -203,7 +203,7 @@
       {/each}
 
       {#if catalogByType.size === 0}
-        <div class="py-8 text-center text-base-content/60">
+        <div class="text-base-content/60 py-8 text-center">
           Aucun résultat pour "{searchQuery}"
         </div>
       {/if}
@@ -212,7 +212,7 @@
 
   <ModalFooter>
     <div class="flex w-full items-center justify-between">
-      <span class="text-sm text-base-content/70">
+      <span class="text-base-content/70 text-sm">
         {#if hasSelection}
           {summary.itemCount} item{summary.itemCount > 1 ? "s" : ""} — quantité totale
           : {summary.totalQty}

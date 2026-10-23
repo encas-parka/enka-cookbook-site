@@ -159,7 +159,7 @@
 <link rel="stylesheet" href="{import.meta.env.BASE_URL}fonts/sora.css" />
 
 <div class="flex min-h-dvh flex-col">
-  <div class="flex-1 bg-base-200">
+  <div class="bg-base-200 flex-1">
     <HeaderNav />
     {#if appState === "ERROR"}
       <div class="flex h-[50vh] items-center justify-center">
@@ -168,7 +168,7 @@
     {:else if appState === "BOOTING"}
       <div class="flex h-[80vh] flex-col items-center justify-center gap-4">
         <div class="loading loading-lg loading-spinner text-primary"></div>
-        <p class="animate-pulse font-medium text-base-content/70">
+        <p class="text-base-content/70 animate-pulse font-medium">
           Démarrage...
         </p>
       </div>

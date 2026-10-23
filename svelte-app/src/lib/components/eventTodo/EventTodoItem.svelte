@@ -131,7 +131,7 @@
 </script>
 
 <div
-  class="group relative rounded-xl bg-base-200/50 p-4 shadow transition-all {hasEnoughAssignees
+  class="group bg-base-200/50 relative rounded-xl p-4 shadow transition-all {hasEnoughAssignees
     ? 'shadow-success/40 '
     : 'shadow-warning/40 '}"
   class:opacity-50={isUpdating}
@@ -200,7 +200,7 @@
                 >
                   <div
                     class="badge badge-soft badge-sm badge-info {assignee.isCurrentUser &&
-                      'font-semibold ring-1 ring-info'}"
+                      'ring-info font-semibold ring-1'}"
                   >
                     <span>{assignee.name}</span>
                   </div>
@@ -209,14 +209,14 @@
 
               {#if assigneeInfos.length > 3}
                 <div class="" title="+{assigneeInfos.length - 3} autres">
-                  <div class="w-7 rounded-full bg-base-300 text-base-content">
+                  <div class="bg-base-300 text-base-content w-7 rounded-full">
                     <span class="text-base">+{assigneeInfos.length - 3}</span>
                   </div>
                 </div>
               {/if}
 
               {#if assigneeInfos.length === 0}
-                <span class="mx-1 text-sm text-warning italic">
+                <span class="text-warning mx-1 text-sm italic">
                   Non assigné
                 </span>
               {/if}
@@ -235,7 +235,7 @@
 
         <!-- Description (if exists) -->
         {#if todo.taskDescription}
-          <p class="mt-1 line-clamp-2 text-sm text-base-content/60">
+          <p class="text-base-content/60 mt-1 line-clamp-2 text-sm">
             {todo.taskDescription}
           </p>
         {/if}
@@ -265,7 +265,7 @@
       <!-- Assign/Unassign button -->
       {#if !isAssigned}
         <button
-          class="btn gap-1 btn-outline btn-primary btn-sm"
+          class="btn btn-outline btn-primary btn-sm gap-1"
           onclick={handleToggleAssign}
           title="Me porter volontaire pour cette tâche"
         >
@@ -274,7 +274,7 @@
         </button>
       {:else if isAssigned}
         <button
-          class="btn gap-1 btn-outline btn-error btn-sm"
+          class="btn btn-outline btn-error btn-sm gap-1"
           onclick={handleToggleAssign}
           title="Quitter cette tâche"
         >

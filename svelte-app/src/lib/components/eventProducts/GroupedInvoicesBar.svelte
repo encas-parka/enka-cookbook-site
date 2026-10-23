@@ -28,14 +28,14 @@
 {#if hasInvoices}
   <div class="ms-auto mt-auto">
     <span
-      class="text-xs font-medium tracking-wider text-base-content/60 uppercase"
+      class="text-base-content/60 text-xs font-medium tracking-wider uppercase"
     >
       Achats groupés
     </span>
     <div class="mt-1 flex flex-wrap gap-2">
       {#each invoices as invoice (invoice.invoiceId)}
         <button
-          class="btn gap-1.5 btn-sm {invoice.purchaseStatus === 'delivered'
+          class="btn btn-sm gap-1.5 {invoice.purchaseStatus === 'delivered'
             ? 'btn-outline btn-success'
             : 'btn-outline btn-info'}"
           onclick={() => onInvoiceClick(invoice.invoiceId)}
@@ -66,14 +66,14 @@
 
           {#if invoice.purchaseStatus === "ordered" && invoice.deliveryDate}
             <span
-              class="flex items-center gap-0.5 text-sm text-base-content/80"
+              class="text-base-content/80 flex items-center gap-0.5 text-sm"
             >
               <CalendarArrowDown class="size-4" />
               {formatDateOrNull(invoice.deliveryDate)}
             </span>
           {:else}
             <span
-              class="flex items-center gap-0.5 text-sm text-base-content/80"
+              class="text-base-content/80 flex items-center gap-0.5 text-sm"
             >
               <CalendarMinus2 class="size-4" />
             </span>
@@ -81,7 +81,7 @@
 
           {#if invoice.who}
             <span
-              class="flex items-center gap-0.5 text-sm text-base-content/50"
+              class="text-base-content/50 flex items-center gap-0.5 text-sm"
             >
               <User class="size-4" />
               {invoice.who}

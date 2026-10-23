@@ -195,7 +195,7 @@
 <div class="p-4 pb-20 lg:ml-96" transition:fade>
   <div class="mx-auto max-w-7xl sm:px-4 sm:py-8">
     <!-- Tabs Inventaire / Réservation -->
-    <div class="tabs tabs-border mb-6 bg-base-200 font-semibold sm:tabs-lg">
+    <div class="tabs tabs-border bg-base-200 sm:tabs-lg mb-6 font-semibold">
       <button class="tab tab-active"> Inventaire </button>
       <button
         class="tab"
@@ -240,7 +240,7 @@
         {#if filters.types.length > 0 || filters.locations.length > 0 || filters.statuses.length > 0}
           <!-- Aucun résultat avec les filtres -->
           <div class="py-12 text-center">
-            <p class="mb-4 text-lg text-base-content/60">
+            <p class="text-base-content/60 mb-4 text-lg">
               Aucun matériel ne correspond aux critères de filtrage...
             </p>
             <button class="btn btn-sm btn-warning" onclick={resetFilters}>
@@ -250,13 +250,13 @@
         {:else}
           <!-- Empty state -->
           <div
-            class="rounded-box border-2 border-dashed border-base-200 bg-base-200 py-20 text-center"
+            class="rounded-box border-base-200 bg-base-200 border-2 border-dashed py-20 text-center"
           >
-            <div class="mb-4 inline-block rounded-full bg-base-200 p-4">
+            <div class="bg-base-200 mb-4 inline-block rounded-full p-4">
               <Package class="h-8 w-8 opacity-50" />
             </div>
             <h3 class="mb-2 text-lg font-bold">Aucun matériel</h3>
-            <p class="mb-6 text-base-content/60">
+            <p class="text-base-content/60 mb-6">
               Cette équipe n'a pas encore de matériel.
             </p>
           </div>

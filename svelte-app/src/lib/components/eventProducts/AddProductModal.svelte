@@ -210,7 +210,7 @@
       class="flex h-full flex-col space-y-4"
     >
       {#if error}
-        <div class="alert text-sm alert-error">
+        <div class="alert alert-error text-sm">
           <TriangleAlert size={18} />
           <span>{error}</span>
         </div>
@@ -218,7 +218,7 @@
 
       {#if isArchiveMode}
         <div
-          class="alert border-b border-warning/20 px-4 py-2 text-xs alert-warning"
+          class="alert border-warning/20 alert-warning border-b px-4 py-2 text-xs"
         >
           <History class="h-4 w-4" />
           <span class="font-medium">Mode consultation</span>
@@ -226,7 +226,7 @@
         </div>
       {/if}
 
-      <div class="alert px-4 py-2 text-xs alert-info">
+      <div class="alert alert-info px-4 py-2 text-xs">
         <Info class="h-4 w-4 shrink-0" />
         <span>
           Produit <strong>hors recettes</strong>&nbsp;: déclarez votre besoin
@@ -244,7 +244,7 @@
                 ? 'input-error'
                 : ''}"
             >
-              <PackagePlus class="h-5 w-5 text-base-content/50" />
+              <PackagePlus class="text-base-content/50 h-5 w-5" />
               <input
                 id="product-name"
                 type="text"
@@ -255,7 +255,7 @@
               />
             </label>
             {#if showErrors && validationErrors.productName}
-              <p class="text-xs text-error">{validationErrors.productName}</p>
+              <p class="text-error text-xs">{validationErrors.productName}</p>
             {/if}
           </fieldset>
           <!-- Quantité et Unité -->
@@ -291,7 +291,7 @@
             />
           </div>
           {#if showErrors && validationErrors.productType}
-            <p class="text-xs text-error">{validationErrors.productType}</p>
+            <p class="text-error text-xs">{validationErrors.productType}</p>
           {/if}
         </fieldset>
 
@@ -342,7 +342,7 @@
 
         <!-- Actions avec mt-auto pour rester en bas -->
         <div
-          class="mt-auto flex flex-wrap items-center justify-end gap-2 border-t border-base-300 pt-4"
+          class="border-base-300 mt-auto flex flex-wrap items-center justify-end gap-2 border-t pt-4"
         >
           <button
             type="button"

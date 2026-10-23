@@ -183,14 +183,14 @@
           <div class="space-y-2">
             {#each manuallyAddedVariants as variant}
               <div
-                class="card-compact card border-1 border-success/30 bg-success/10"
+                class="card-compact card border-success/30 bg-success/10 border-1"
               >
                 <div class="card-body py-2">
                   <div class="flex items-center justify-between gap-2">
                     <div class="flex min-w-0 flex-1 items-center gap-2">
                       <span class="truncate font-medium">{variant.title}</span>
                       {#if variant.versionLabel}
-                        <span class="badge shrink-0 badge-ghost badge-xs">
+                        <span class="badge badge-ghost badge-xs shrink-0">
                           {variant.versionLabel}
                         </span>
                       {/if}
@@ -219,12 +219,12 @@
     <!-- Variantes marquées pour suppression -->
     {#if variantsToRemove.length > 0}
       <div class="space-y-2">
-        <div class="text-sm font-medium text-error">
+        <div class="text-error text-sm font-medium">
           Variantes à supprimer ({variantsToRemove.length})
         </div>
         <div class="space-y-2">
           {#each variantsToRemove as variant}
-            <div class="card-compact card border-1 border-error/30 bg-error/10">
+            <div class="card-compact card border-error/30 bg-error/10 border-1">
               <div class="card-body py-2">
                 <div class="flex items-center justify-between gap-2">
                   <div class="flex min-w-0 flex-1 items-center gap-2">
@@ -232,7 +232,7 @@
                       {variant.title}
                     </span>
                     {#if variant.versionLabel}
-                      <span class="badge shrink-0 badge-ghost badge-xs">
+                      <span class="badge badge-ghost badge-xs shrink-0">
                         {variant.versionLabel}
                       </span>
                     {/if}
@@ -269,7 +269,7 @@
         >
 
         <!-- Info sur l'utilité des variantes -->
-        <div class="mb-4 alert alert-soft alert-info max-md:alert-vertical">
+        <div class="alert alert-soft alert-info max-md:alert-vertical mb-4">
           <Info class="h-4 w-4" />
           <span>
             Les variantes permettent de regrouper différentes versions d'une
@@ -280,19 +280,19 @@
         </div>
         <div class="space-y-2">
           {#each displayVariants as variant}
-            <div class="card border-1 border-base-300 bg-base-200 card-xs">
+            <div class="card border-base-300 bg-base-200 card-xs border-1">
               <div class="card-body px-3">
                 <div class="flex items-start justify-between gap-2">
                   <div class="flex min-w-0 flex-1 items-center gap-2">
                     <a
                       href={p(`/recipe/${variant.id}`)}
                       target="_blank"
-                      class="link truncate font-medium link-primary link-hover"
+                      class="link link-primary link-hover truncate font-medium"
                     >
                       {variant.title}
                     </a>
                     {#if variant.versionLabel}
-                      <span class="badge shrink-0 badge-ghost badge-xs">
+                      <span class="badge badge-ghost badge-xs shrink-0">
                         {variant.versionLabel}
                       </span>
                     {/if}
@@ -300,7 +300,7 @@
 
                   {#if canEdit}
                     <button
-                      class="btn btn-circle shrink-0 btn-ghost btn-error btn-xs"
+                      class="btn btn-circle btn-ghost btn-error btn-xs shrink-0"
                       onclick={() => confirmRemoveVariant(variant)}
                       title="Retirer cette variante"
                     >

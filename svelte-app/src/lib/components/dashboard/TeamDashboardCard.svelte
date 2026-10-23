@@ -75,16 +75,16 @@
   }
 </script>
 
-<div class="card border border-base-200 bg-base-100/70 shadow-xl">
+<div class="card border-base-200 bg-base-100/70 border shadow-xl">
   <div class="card-body gap-4 max-sm:px-2">
     <!-- === HEADER PRINCIPAL === -->
     <div class="flex flex-wrap items-start justify-between gap-2">
       <!-- Nom + Localisation -->
       <div class="flex items-center gap-2">
-        <Users class="size-6 shrink-0 stroke-3 text-primary" />
+        <Users class="text-primary size-6 shrink-0 stroke-3" />
         <h2>{team.name}</h2>
         {#if teamLocation}
-          <div class="badge gap-1 badge-soft badge-secondary">
+          <div class="badge badge-soft badge-secondary gap-1">
             <MapPin class="h-3 w-3" />
             {teamLocation}
           </div>
@@ -104,24 +104,24 @@
     <!-- === SOUS-CARD MEMBRES | materiel  -->
     <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
       <div
-        class="shoadow-sm card self-start border border-neutral/20 bg-base-100 shadow card-sm"
+        class="shoadow-sm card border-neutral/20 bg-base-100 card-sm self-start border shadow"
       >
         <div class="card-body">
           <div
             class="flex flex-wrap items-center justify-between gap-2 text-sm"
           >
             <div class=" flex items-center gap-2">
-              <div class="indicator rounded-full bg-primary/20 p-2">
+              <div class="indicator bg-primary/20 rounded-full p-2">
                 <span class="indicator-item badge badge-sm badge-primary">
                   {teamMembers.length}</span
                 >
-                <Users class=" inline size-5 shrink-0 text-primary " />
+                <Users class=" text-primary inline size-5 shrink-0 " />
               </div>
               <!-- Liste des noms -->
               <div class="text-base-content/70">{memberNamesDisplay}</div>
             </div>
             <button
-              class="btn ms-auto btn-accent sm:btn-sm"
+              class="btn btn-accent sm:btn-sm ms-auto"
               onclick={inviteMember}
             >
               <Plus class="h-4 w-4" />
@@ -130,7 +130,7 @@
           </div>
           {#if team.prefs.description}
             <blockquote
-              class="mt-2 rounded-lg border-x-4 border-neutral/20 bg-base-200/50 p-2 text-base-content/70"
+              class="border-neutral/20 bg-base-200/50 text-base-content/70 mt-2 rounded-lg border-x-4 p-2"
             >
               {team.prefs.description.slice(0, 250)}
               {#if team.prefs.description.length > 250}
@@ -142,7 +142,7 @@
       </div>
 
       <div
-        class="card mb-auto flex w-full justify-center border border-neutral/20 bg-base-100 shadow-sm card-sm"
+        class="card border-neutral/20 bg-base-100 card-sm mb-auto flex w-full justify-center border shadow-sm"
       >
         <!-- Actions Matériel -->
         <div class="card-body place-content-center">
@@ -156,14 +156,14 @@
           </div>
           <div class="flex w-full flex-wrap justify-around gap-2">
             <a
-              class="btn flex-1 btn-soft btn-primary"
+              class="btn btn-soft btn-primary flex-1"
               href={p(`/dashboard/materiel/${team.id}`)}
             >
               <NotebookPen class="size-4" />
               Inventaire
             </a>
             <a
-              class="btn flex-1 btn-soft btn-primary"
+              class="btn btn-soft btn-primary flex-1"
               href={p(`/dashboard/loans/${team.id}`)}
             >
               <ScrollText class="size-4" />
@@ -177,12 +177,12 @@
     <div class="card grid grid-cols-1 gap-6 text-sm lg:grid-cols-6">
       <!-- === ÉVÉNEMENTS === -->
       <div
-        class="card border border-neutral/20 bg-base-100 shadow-sm card-sm lg:col-span-4"
+        class="card border-neutral/20 bg-base-100 card-sm border shadow-sm lg:col-span-4"
       >
         <div class="card-body">
           <div class="flex flex-wrap justify-between gap-2">
             <h3 class="card-title items-center">
-              <Calendar class="inline size-5 text-primary" /> Événements
+              <Calendar class="text-primary inline size-5" /> Événements
             </h3>
             <a class="btn btn-link btn-sm" href={p("/eventList")}>
               Voir les événements passés
@@ -201,10 +201,10 @@
             <div class="fieldset-legend">Récents</div>
             <ListEventCard events={teamPastEvents} {loading} />
           {/if}
-          <div class="mt-auto card-actions items-center justify-end">
+          <div class="card-actions mt-auto items-center justify-end">
             <!-- Bouton Créer un événement -->
             <a
-              class="btn ml-auto btn-soft btn-primary sm:btn-sm"
+              class="btn btn-soft btn-primary sm:btn-sm ml-auto"
               href={p(`/dashboard/eventCreate/${team.id}`)}
             >
               <Plus class="h-4 w-4" />

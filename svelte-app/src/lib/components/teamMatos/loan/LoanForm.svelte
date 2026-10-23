@@ -757,7 +757,7 @@
     <div class="flex items-center justify-center py-12">
       <div class="text-center">
         <LoaderCircle
-          class="mx-auto mb-4 h-12 w-12 animate-spin text-primary"
+          class="text-primary mx-auto mb-4 h-12 w-12 animate-spin"
         />
         <p class="text-lg font-medium">Chargement de la réservation...</p>
       </div>
@@ -839,7 +839,7 @@
       </div>
 
       {#if selectedEvent && selectedEvent.dateStart && selectedEvent.dateEnd}
-        <p class="-mt-2 px-1 text-sm text-base-content/50">
+        <p class="text-base-content/50 -mt-2 px-1 text-sm">
           L'événement aura lieu du <span class="font-medium"
             >{formatShortDate(selectedEvent.dateStart)}</span
           >
@@ -973,7 +973,7 @@
     {/snippet}
 
     {#if framed}
-      <div class="card bg-base-100 shadow-sm max-sm:card-xs">
+      <div class="card bg-base-100 max-sm:card-xs shadow-sm">
         <div class="card-body">
           <h2 class="card-title">
             <Calendar class="h-5 w-5" />
@@ -984,7 +984,7 @@
             <!-- Geste destructif gardé près de son contexte ; la confirmation
                  vit dans ce composant. Le modal, lui, porte ce bouton dans son
                  footer. -->
-            <div class="mt-2 flex justify-end border-t border-base-200 pt-4">
+            <div class="border-base-200 mt-2 flex justify-end border-t pt-4">
               <button
                 class="btn btn-outline btn-error btn-sm"
                 onclick={handleCancelReservation}
@@ -998,7 +998,7 @@
         </div>
       </div>
 
-      <div class="card bg-base-100 shadow-sm max-sm:card-xs">
+      <div class="card bg-base-100 max-sm:card-xs shadow-sm">
         <div class="card-body">
           <div class="flex flex-wrap items-center justify-between gap-2">
             <h2 class="card-title">
@@ -1006,7 +1006,7 @@
               Matériel à emprunter
             </h2>
             {#if summary.itemCount > 0}
-              <span class="badge badge-outline tabular-nums badge-primary">
+              <span class="badge badge-outline badge-primary tabular-nums">
                 {summary.itemCount}
                 matériel{summary.itemCount > 1 ? "s" : ""}
                 ·

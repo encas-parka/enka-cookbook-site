@@ -50,10 +50,10 @@
   };
 </script>
 
-<section class="relative bg-gradient-to-b from-base-200 to-base-100 py-20">
+<section class="from-base-200 to-base-100 relative bg-gradient-to-b py-20">
   <div class="container mx-auto px-4">
     <h2
-      class="mb-20 text-center text-4xl font-bold text-base-content md:text-5xl"
+      class="text-base-content mb-20 text-center text-4xl font-bold md:text-5xl"
     >
       Fonctionnalités Principales
     </h2>
@@ -62,7 +62,7 @@
       <!-- Screenshot fixe (sticky) -->
       <div class="lg:w-1/2">
         <div
-          class="relative aspect-video overflow-hidden rounded-2xl bg-base-300 shadow-2xl lg:sticky lg:top-24"
+          class="bg-base-300 relative aspect-video overflow-hidden rounded-2xl shadow-2xl lg:sticky lg:top-24"
         >
           {#each features as feature, i}
             <img
@@ -91,7 +91,7 @@
             <div class="w-full space-y-6">
               <!-- Titre -->
               <h3
-                class="text-3xl font-bold text-base-content transition-all delay-100 duration-700 md:text-4xl"
+                class="text-base-content text-3xl font-bold transition-all delay-100 duration-700 md:text-4xl"
                 class:translate-x-0={activeIndex === i}
                 class:opacity-100={activeIndex === i}
                 class:-translate-x-8={activeIndex !== i}
@@ -101,7 +101,7 @@
 
               <!-- Description -->
               <p
-                class="text-lg leading-relaxed text-base-content/70 transition-all delay-200 duration-700"
+                class="text-base-content/70 text-lg leading-relaxed transition-all delay-200 duration-700"
                 class:translate-x-0={activeIndex === i}
                 class:opacity-100={activeIndex === i}
                 class:-translate-x-8={activeIndex !== i}
@@ -114,7 +114,7 @@
                 <ul class="mt-8 space-y-3">
                   {#each feature.items as item, j}
                     <li
-                      class="flex items-start gap-3 text-base-content transition-all duration-700"
+                      class="text-base-content flex items-start gap-3 transition-all duration-700"
                       style="transition-delay: {300 + j * 100}ms"
                       class:translate-x-0={activeIndex === i}
                       class:opacity-100={activeIndex === i}
@@ -122,7 +122,7 @@
                       class:opacity-0={activeIndex !== i}
                     >
                       <svg
-                        class="mt-0.5 h-6 w-6 flex-shrink-0 text-primary"
+                        class="text-primary mt-0.5 h-6 w-6 flex-shrink-0"
                         fill="none"
                         viewBox="0 0 24 24"
                         stroke="currentColor"

@@ -1018,14 +1018,14 @@
 {/snippet}
 
 <div
-  class="relative min-h-lvh space-y-6 overflow-x-clip bg-base-200 px-4 pt-4 pb-20 md:px-20"
+  class="bg-base-200 relative min-h-lvh space-y-6 overflow-x-clip px-4 pt-4 pb-20 md:px-20"
 >
   <div class="flex flex-wrap items-center justify-between gap-x-6 gap-y-3">
     <div class="min-w-80 flex-1 gap-2">
       {#if editingTitle}
         <input
           type="text"
-          class="input min-w-full shadow-md input-lg"
+          class="input input-lg min-w-full shadow-md"
           value={eventName}
           oninput={handleNameInput}
           onfocus={startEditing}
@@ -1074,7 +1074,7 @@
             <p class="label">{description.length}/3000 caractères</p>
           {:else}
             <button
-              class="btn h-auto justify-start bg-base-100 btn-ghost py-4 text-left font-normal"
+              class="btn bg-base-100 btn-ghost h-auto justify-start py-4 text-left font-normal"
               onclick={() => (editingDescription = true)}
               disabled={!canEdit}
             >
@@ -1206,10 +1206,10 @@
         <!-- Recettes à planifier (meals sans date) -->
         {#if undatedMeals.length > 0}
           <fieldset
-            class="mb-4 fieldset rounded-box border border-base-300 bg-base-100/50 p-4 shadow"
+            class="fieldset rounded-box border-base-300 bg-base-100/50 mb-4 border p-4 shadow"
           >
             <legend
-              class="fieldset-legend rounded-2xl bg-base-100/70 px-4 text-lg"
+              class="fieldset-legend bg-base-100/70 rounded-2xl px-4 text-lg"
               >Recettes à planifier</legend
             >
             <div class="flex flex-wrap gap-2 p-2">
@@ -1252,9 +1252,9 @@
 
         {#if sortedDatedMeals.length === 0}
           <div
-            class="flex flex-col items-center justify-center rounded-box border-2 border-dashed border-base-200 bg-base-200 py-12 text-base-content/60"
+            class="rounded-box border-base-200 bg-base-200 text-base-content/60 flex flex-col items-center justify-center border-2 border-dashed py-12"
           >
-            <div class="mb-4 rounded-full bg-base-200 p-4">
+            <div class="bg-base-200 mb-4 rounded-full p-4">
               <Calendar class="h-8 w-8 opacity-50" />
             </div>
             <p class="font-medium">Aucun repas planifié</p>
@@ -1287,7 +1287,7 @@
         {/if}
         <div class="flex">
           <button
-            class="btn mt-4 btn-block btn-outline btn-primary"
+            class="btn btn-block btn-outline btn-primary mt-4"
             onclick={addMeal}
             disabled={!canEdit}
           >
@@ -1302,7 +1302,7 @@
   <!-- Bouton flottant Enregistrer (mobile uniquement) -->
   {#if (isDirty || isEditing) && !isBusy}
     <button
-      class="btn sticky bottom-2 shadow-lg btn-accent btn-sm {!globalState.isMobile &&
+      class="btn btn-accent btn-sm sticky bottom-2 shadow-lg {!globalState.isMobile &&
         'hidden'}"
       onclick={handleSave}
       disabled={!isDirty || !canEdit}

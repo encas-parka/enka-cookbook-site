@@ -290,10 +290,10 @@
   </div>
 {/snippet}
 
-<div class="min-h-lvh space-y-10 bg-base-200 px-4 pt-4 pb-20 md:px-20">
+<div class="bg-base-200 min-h-lvh space-y-10 px-4 pt-4 pb-20 md:px-20">
   <div class="card bg-base-100 card-sm">
     <div class="card-body">
-      <div class="mb-2 card-title">
+      <div class="card-title mb-2">
         <CalendarPlus2 /> Création d'un événement
       </div>
       <p>
@@ -309,7 +309,7 @@
     <div class="min-w-80 flex-1 gap-2">
       <input
         type="text"
-        class="input min-w-2/3 shadow-md input-lg"
+        class="input input-lg min-w-2/3 shadow-md"
         value={eventName}
         oninput={handleNameInput}
         disabled={isBusy}
@@ -362,7 +362,7 @@
             </label>
           </div>
           {#if statusError}
-            <p class="mt-2 text-sm text-error">
+            <p class="text-error mt-2 text-sm">
               Veuillez sélectionner un statut
             </p>
           {/if}
@@ -385,7 +385,7 @@
         <!-- Sélection des teams -->
         <Fieldset legend="Équipes participantes">
           {#if teamsStore.myTeams.length > 0}
-            <fieldset class="mb-6 fieldset">
+            <fieldset class="fieldset mb-6">
               <legend class="fieldset-legend">Minimum de participant·es</legend>
               <label class="input">
                 <input
@@ -401,16 +401,16 @@
               </p>
             </fieldset>
 
-            <fieldset class="mb-4 fieldset">
+            <fieldset class="fieldset mb-4">
               <legend class="fieldset-legend"
                 >Sélectionnez les équipes à inviter à l'événement :</legend
               >
               <div class="flex flex-wrap gap-2">
                 {#each teamsStore.myTeams as team (team.id)}
                   <label
-                    class="flex cursor-pointer items-center gap-3 rounded-lg bg-secondary/10 px-4 py-2 hover:bg-secondary/20 {selectedTeams.includes(
+                    class="bg-secondary/10 hover:bg-secondary/20 flex cursor-pointer items-center gap-3 rounded-lg px-4 py-2 {selectedTeams.includes(
                       team.id,
-                    ) && 'ring-2 ring-secondary'}"
+                    ) && 'ring-secondary ring-2'}"
                   >
                     <input
                       type="checkbox"
@@ -433,7 +433,7 @@
                 {/each}
               </div>
               <div
-                class="mt-4 alert alert-vertical text-sm text-base-content/70"
+                class="alert alert-vertical text-base-content/70 mt-4 text-sm"
               >
                 <Info class="size-4 shrink-0" />
                 Une fois l'événement crée, il vous sera possible d'inviter des personnes
@@ -453,7 +453,7 @@
                   Envoyer un email de notification aux membres des équipes
                 </span>
               </label>
-              <p class="mt-1 text-xs text-base-content/60">
+              <p class="text-base-content/60 mt-1 text-xs">
                 Si désactivé, les membres auront accès à l'événement mais ne
                 recevront pas d'email.
               </p>
@@ -480,9 +480,9 @@
 
         {#if sortedMeals.length === 0}
           <div
-            class="flex flex-col items-center justify-center rounded-box border-2 border-dashed border-base-200 bg-base-200 py-12 text-base-content/60"
+            class="rounded-box border-base-200 bg-base-200 text-base-content/60 flex flex-col items-center justify-center border-2 border-dashed py-12"
           >
-            <div class="mb-4 rounded-full bg-base-200 p-4">
+            <div class="bg-base-200 mb-4 rounded-full p-4">
               <Calendar class="h-8 w-8 opacity-50" />
             </div>
             <p class="font-medium">Aucun repas planifié</p>
@@ -508,7 +508,7 @@
         {/if}
         <div class="flex">
           <button
-            class="btn mt-4 btn-block btn-outline btn-primary"
+            class="btn btn-block btn-outline btn-primary mt-4"
             onclick={addMeal}
           >
             <Plus class="mr-1 h-4 w-4" />
@@ -522,7 +522,7 @@
   <!-- Bouton flottant Créer (mobile uniquement) -->
   {#if hasData && !isBusy}
     <button
-      class="btn sticky bottom-2 shadow-lg btn-accent btn-sm {!globalState.isMobile &&
+      class="btn btn-accent btn-sm sticky bottom-2 shadow-lg {!globalState.isMobile &&
         'hidden'}"
       onclick={handleSave}
       disabled={isBusy || !hasData}

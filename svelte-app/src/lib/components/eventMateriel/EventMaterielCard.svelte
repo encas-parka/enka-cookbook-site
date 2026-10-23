@@ -106,7 +106,7 @@
 </script>
 
 <div
-  class="group card card-side cursor-pointer border border-base-200 bg-base-100 text-left shadow-sm transition-all card-xs hover:border-primary/50 hover:shadow-md"
+  class="group card card-side border-base-200 bg-base-100 card-xs hover:border-primary/50 cursor-pointer border text-left shadow-sm transition-all hover:shadow-md"
   role="button"
   tabindex="0"
   onclick={() => canUserEdit && onEdit(item)}
@@ -132,7 +132,7 @@
             <span
               class="badge hidden sm:flex {getMaterielTypeBadgeClass(
                 item.type,
-              )} gap-1 badge-soft py-0 badge-sm"
+              )} badge-soft badge-sm gap-1 py-0"
             >
               {getMaterielTypeConfig(item.type).label}
             </span>
@@ -142,7 +142,7 @@
         <div class="flex flex-wrap items-baseline gap-x-4 gap-y-2">
           <!-- Location -->
           {#if item.where}
-            <div class="flex items-center gap-1 text-sm text-base-content/70">
+            <div class="text-base-content/70 flex items-center gap-1 text-sm">
               <MapPin class="h-3 w-3" />
               <span class="max-w-60 truncate">{item.where}</span>
             </div>
@@ -150,7 +150,7 @@
 
           <!-- Who -->
           {#if item.who}
-            <div class="flex items-center gap-1 text-sm text-base-content/70">
+            <div class="text-base-content/70 flex items-center gap-1 text-sm">
               <User class="h-3 w-3" />
               <span class="truncate">{item.who}</span>
             </div>
@@ -158,7 +158,7 @@
 
           <!-- From Team -->
           {#if item.fromTeamName}
-            <div class="flex items-center gap-1 text-xs text-base-content/50">
+            <div class="text-base-content/50 flex items-center gap-1 text-xs">
               <Users class="h-3 w-3" />
               <span class="truncate">{item.fromTeamName}</span>
             </div>
@@ -167,7 +167,7 @@
           <!-- Notes -->
           {#if item.notes}
             <button
-              class="flex items-center gap-1 text-xs text-base-content/50 transition-colors hover:cursor-pointer hover:text-base-content/80"
+              class="text-base-content/50 hover:text-base-content/80 flex items-center gap-1 text-xs transition-colors hover:cursor-pointer"
               onclick={toggleNotes}
               title={notesExpanded ? "Masquer la note" : "Afficher la note"}
             >
@@ -178,7 +178,7 @@
         </div>
         {#if notesExpanded}
           <div
-            class="w-full rounded bg-base-200 px-2 text-sm text-base-content/60"
+            class="bg-base-200 text-base-content/60 w-full rounded px-2 text-sm"
           >
             <MessageSquare class="inline h-3 w-3" />
 
@@ -191,7 +191,7 @@
       <div class="ms-auto flex items-center gap-2">
         <!-- Status badge -->
         <span
-          class="badge {statusConfig.badgeClass} gap-1 badge-soft py-0"
+          class="badge {statusConfig.badgeClass} badge-soft gap-1 py-0"
           title={statusConfig.label}
         >
           <StatusIcon class="size-3" />

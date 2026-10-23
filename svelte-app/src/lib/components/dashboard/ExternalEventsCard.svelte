@@ -66,20 +66,20 @@
   <!-- Pas d'événements du tout -->
 {:else if externalEvents.length === 0 && !showAllEvents}
   <!-- Affichage minimaliste : pas d'invitations externes -->
-  <div class="card border border-base-200 bg-base-300 shadow-xl">
+  <div class="card border-base-200 bg-base-300 border shadow-xl">
     <div class="card-body">
       <div class="flex items-center justify-between">
         <div class="flex items-center gap-3">
-          <Calendar class="h-6 w-6 stroke-3 text-primary" />
+          <Calendar class="text-primary h-6 w-6 stroke-3" />
           <div>
-            <h2 class="mb-1 card-title">Événements</h2>
-            <p class="text-sm text-base-content/60">
+            <h2 class="card-title mb-1">Événements</h2>
+            <p class="text-base-content/60 text-sm">
               Aucune invitation à participer à un événement hors de vos équipes.
             </p>
           </div>
         </div>
         {#if teamEvents.length > 0}
-          <button class="btn gap-2 btn-sm" onclick={toggleEventsView}>
+          <button class="btn btn-sm gap-2" onclick={toggleEventsView}>
             <Users class="h-4 w-4" />
             Voir tous mes événements
             <div class="badge badge-xs badge-neutral">{totalEventsCount}</div>
@@ -91,17 +91,17 @@
 {:else}
   <!-- Affichage normal avec événements -->
   <div
-    class="card mb-6 border border-base-200 bg-base-100 shadow-md max-sm:card-sm"
+    class="card border-base-200 bg-base-100 max-sm:card-sm mb-6 border shadow-md"
   >
     <div class="card-body">
       <div class="mb-4 flex flex-wrap items-center justify-between">
         <div class="flex items-center gap-3">
-          <Calendar class="h-6 w-6 stroke-3 text-primary" />
+          <Calendar class="text-primary h-6 w-6 stroke-3" />
           <div>
-            <h2 class="mb-1 card-title">
+            <h2 class="card-title mb-1">
               {showAllEvents ? "Tous mes événements" : "Invitations externes"}
             </h2>
-            <p class="text-sm text-base-content/60">
+            <p class="text-base-content/60 text-sm">
               {#if showAllEvents}
                 {displayedEvents.length} événement{displayedEvents.length > 1
                   ? "s"
@@ -118,7 +118,7 @@
         <!-- Bouton toggle -->
         {#if teamEvents.length > 0}
           <button
-            class="btn ms-auto btn-link btn-secondary btn-sm"
+            class="btn btn-link btn-secondary btn-sm ms-auto"
             onclick={toggleEventsView}
           >
             {#if showAllEvents}

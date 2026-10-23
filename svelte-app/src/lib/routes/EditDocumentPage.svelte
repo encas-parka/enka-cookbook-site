@@ -551,7 +551,7 @@
 >
   <!-- Alertes -->
   {#if isLockedByOthers}
-    <div class="mb-4 alert alert-warning max-md:alert-vertical">
+    <div class="alert alert-warning max-md:alert-vertical mb-4">
       <LockIcon class="h-5 w-5" />
       <div>
         <h4 class="font-bold">Document verrouillé</h4>
@@ -602,7 +602,7 @@
       {#if mode === "edit"}
         <!-- Titre -->
         <fieldset class="fieldset flex">
-          <label class="input w-full input-lg">
+          <label class="input input-lg w-full">
             <span class="label">Nom</span>
             <input
               type="text"
@@ -676,7 +676,7 @@
             </div>
           </div>
         </div>
-        <div class="prose max-w-none rounded-lg bg-base-100 p-6 shadow-lg">
+        <div class="prose bg-base-100 max-w-none rounded-lg p-6 shadow-lg">
           {#if content}
             <SvelteMarkdown source={content} />
           {:else}
@@ -704,7 +704,7 @@
 <!-- Bouton flottant Enregistrer (mobile uniquement) -->
 {#if isDirty && !isSaving}
   <button
-    class="btn sticky bottom-2 shadow-lg btn-primary btn-sm {!globalState.isMobile &&
+    class="btn btn-primary btn-sm sticky bottom-2 shadow-lg {!globalState.isMobile &&
       'hidden'}"
     onclick={handleSave}
     disabled={!canEdit || !isValid || isSaving}

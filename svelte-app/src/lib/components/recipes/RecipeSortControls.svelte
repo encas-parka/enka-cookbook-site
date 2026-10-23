@@ -77,7 +77,7 @@
 </script>
 
 <div
-  class="flex flex-wrap items-center justify-between gap-6 rounded-box bg-base-300 px-6 py-6"
+  class="rounded-box bg-base-300 flex flex-wrap items-center justify-between gap-6 px-6 py-6"
 >
   <fieldset class="fieldset">
     <legend class="legend label"

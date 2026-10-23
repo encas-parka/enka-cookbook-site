@@ -116,7 +116,7 @@
 
 {#if dateStore.isEventPassed}
   <!-- Événement terminé : afficher le message -->
-  <div class="p-1 text-end text-xs text-base-content/60 italic">
+  <div class="text-base-content/60 p-1 text-end text-xs italic">
     événement terminé
   </div>
 {:else}

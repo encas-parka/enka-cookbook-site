@@ -185,7 +185,7 @@
 
       <ModalContent>
         <div class="mb-4">
-          <div class="alert flex flex-col alert-soft alert-success">
+          <div class="alert alert-soft alert-success flex flex-col">
             <p>Équipe "{team.name}" créée avec succès !</p>
             <p>Ajoutez les email des personnes que vous souhaitez inviter</p>
           </div>

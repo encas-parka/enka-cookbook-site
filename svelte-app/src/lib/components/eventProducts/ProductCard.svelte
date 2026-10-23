@@ -99,9 +99,9 @@
 <!-- Card du produit -->
 <div
   out:fade
-  class="card overflow-x-clip bg-base-100 {globalState.isMobile &&
-    'border border-base-300 shadow'} {product.status === 'isSyncing'
-    ? 'animate-pulse border-2 border-accent bg-accent/30'
+  class="card bg-base-100 overflow-x-clip {globalState.isMobile &&
+    'border-base-300 border shadow'} {product.status === 'isSyncing'
+    ? 'border-accent bg-accent/30 animate-pulse border-2'
     : ''}"
 >
   <div class="card-body p-2">
@@ -111,7 +111,7 @@
       <div class="flex flex-1 flex-wrap items-center gap-4">
         <!-- Nom du produit & type icon -->
         <div
-          class="flex cursor-pointer flex-wrap items-center gap-x-2 gap-y-1 text-base font-semibold text-primary"
+          class="text-primary flex cursor-pointer flex-wrap items-center gap-x-2 gap-y-1 text-base font-semibold"
           role="button"
           tabindex="0"
           onclick={() => onOpenModal(product.id, "recettes")}
@@ -123,12 +123,12 @@
         >
           <typeInfo.icon class="h-4 w-4 shrink-0" />{product.productName}
           {#if product.mergedFrom?.length}
-            <div class="text-xs font-normal text-base-content/70">
+            <div class="text-base-content/70 text-xs font-normal">
               dont: {product.mergedFrom.map((f) => f.name).join(", ")}
             </div>
           {/if}
           {#if product.previousNames && product.previousNames.length > 0}
-            <div class="text-sm font-normal text-base-content/60">
+            <div class="text-base-content/60 text-sm font-normal">
               Ancien: {product.previousNames[0]}
             </div>
           {/if}
@@ -137,30 +137,30 @@
               class="tooltip"
               data-tip="Ajouté manuellement, ne fait pas partie des recette"
             >
-              <ClipboardPenLine class="h-4 w-4 text-warning" />
+              <ClipboardPenLine class="text-warning h-4 w-4" />
             </div>
           {/if}
           <!-- icone and sync spinner -->
           {#if product.pF}
             <div
-              class="flex size-6 items-center justify-center rounded-full bg-success/20"
+              class="bg-success/20 flex size-6 items-center justify-center rounded-full"
               title="Produit frais"
             >
-              <ShoppingBasket class="size-4 text-success " />
+              <ShoppingBasket class="text-success size-4 " />
             </div>
           {/if}
           {#if product.pS}
             <div
-              class="flex size-6 items-center justify-center rounded-full bg-info/20"
+              class="bg-info/20 flex size-6 items-center justify-center rounded-full"
               title="Produit surgelé"
             >
-              <Snowflake class="h-4 w-4 text-info" />
+              <Snowflake class="text-info h-4 w-4" />
             </div>
           {/if}
         </div>
         {#if product.status === "isSyncing"}
           <div
-            class="flex items-center gap-1 text-accent"
+            class="text-accent flex items-center gap-1"
             title="Synchronisation en cours..."
           >
             <LoaderCircle class="h-4 w-4 animate-spin" />
@@ -184,7 +184,7 @@
             {:else}
               <button
                 type="button"
-                class="flex cursor-pointer flex-wrap items-center gap-1 rounded-md transition-colors hover:bg-base-200/40"
+                class="hover:bg-base-200/40 flex cursor-pointer flex-wrap items-center gap-1 rounded-md transition-colors"
                 onclick={() => (localShowDetails = !localShowDetails)}
                 onmouseenter={() =>
                   (hoverHelp.msg = "Cliquez pour voir le détail des recettes")}
@@ -219,7 +219,7 @@
           <!-- Store -->
           <button
             title="Modifier le magasin"
-            class="group btn relative btn-soft btn-sm {product.storeInfo
+            class="group btn btn-soft btn-sm relative {product.storeInfo
               ?.storeName
               ? 'btn-success'
               : ''}"
@@ -252,7 +252,7 @@
           <!-- Who -->
           <button
             title="Modifier les volontaires"
-            class="group btn relative btn-soft btn-sm {product.who &&
+            class="group btn btn-soft btn-sm relative {product.who &&
             product.who?.length > 0
               ? 'btn-success'
               : ''}"
@@ -273,7 +273,7 @@
                     .map((person) => person.slice(0, 5))
                     .join(" | ")}...
                   {#if product.who.length > 2}
-                    <span class="text-xs text-base-content/50"
+                    <span class="text-base-content/50 text-xs"
                       >+{product.who.length - 2}</span
                     >
                   {/if}
@@ -322,7 +322,7 @@
         {:else}
           <button
             type="button"
-            class="flex cursor-pointer flex-wrap items-center gap-1 rounded-md transition-colors hover:bg-base-200/40"
+            class="hover:bg-base-200/40 flex cursor-pointer flex-wrap items-center gap-1 rounded-md transition-colors"
             onclick={() => (localShowDetails = !localShowDetails)}
             aria-expanded={localShowDetails}
             title={localShowDetails
@@ -351,14 +351,14 @@
     <div class="flex min-h-12 flex-wrap gap-3" id="card-needs-missing">
       <!-- Besoins -->
       <div class="flex min-w-75 flex-1 flex-col">
-        <div class="ms-1 text-sm text-base-content/60">
+        <div class="text-base-content/60 ms-1 text-sm">
           Besoins total sur la période
         </div>
         <div
           id="needs-card"
           role="button"
           tabindex="0"
-          class=" group relative flex flex-1 cursor-pointer flex-wrap items-center justify-between gap-x-4 gap-y-1 rounded-lg bg-base-300/80 p-2 shadow-sm hover:ring-2 hover:ring-accent/60"
+          class=" group bg-base-300/80 hover:ring-accent/60 relative flex flex-1 cursor-pointer flex-wrap items-center justify-between gap-x-4 gap-y-1 rounded-lg p-2 shadow-sm hover:ring-2"
           onclick={() => onOpenModal(product.id, "recettes")}
           onkeydown={(e) =>
             e.key === "Enter" && onOpenModal(product.id, "recettes")}
@@ -391,7 +391,7 @@
               {/if}
             </div>
             {#if productInDateRange.nbRecipes || productInDateRange.totalAssiettes}
-              <div class="flex items-center gap-2 text-base-content/90">
+              <div class="text-base-content/90 flex items-center gap-2">
                 <span class="flex items-center gap-1">
                   {productInDateRange.nbRecipes}
                   <CookingPot class="h-3 w-3" />
@@ -407,7 +407,7 @@
           <!-- Bouton d'achat rapide -->
           {#if shouldShowActionButtons && productInDateRange.hasMissing}
             <button
-              class="btn ms-auto btn-outline btn-primary sm:btn-sm"
+              class="btn btn-outline btn-primary sm:btn-sm ms-auto"
               onclick={(e) => {
                 e.stopPropagation();
                 onQuickValidation(product, productInDateRange);
@@ -423,12 +423,12 @@
               <IconSprite name="add-to-cart" class="size-4" />
             </button>
           {:else if shouldShowActionButtons}
-            <CircleCheckBig class="ms-auto size-6 text-success" />
+            <CircleCheckBig class="text-success ms-auto size-6" />
           {/if}
           {#if shouldShowActionButtons && overrideMismatch?.hasMismatch}
             <div
               id="override_alert"
-              class="mt-1 alert alert-outline px-2 py-1 text-xs alert-warning"
+              class="alert alert-outline alert-warning mt-1 px-2 py-1 text-xs"
             >
               <CircleAlert size={18} />
               <span>
@@ -451,12 +451,12 @@
 
       <!-- Achats -->
       <div class="flex flex-1 flex-col md:min-w-75">
-        <div class="ms-1 text-sm text-base-content/60">
+        <div class="text-base-content/60 ms-1 text-sm">
           Achat / reccup effectué
         </div>
 
         <div
-          class="group relative flex flex-1 cursor-pointer items-start justify-between gap-2 rounded-lg bg-base-300/80 p-2 shadow-sm transition-colors hover:ring-2 hover:ring-accent/60"
+          class="group bg-base-300/80 hover:ring-accent/60 relative flex flex-1 cursor-pointer items-start justify-between gap-2 rounded-lg p-2 shadow-sm transition-colors hover:ring-2"
           role="button"
           tabindex="0"
           onclick={() => onOpenModal(product.id, "achats")}
@@ -468,7 +468,7 @@
           <!-- Liste des achats -->
           <ShoppingCart class="h-4 w-4 opacity-60" />
           <div
-            class="blocktransition-opacity ms-2 text-xs text-base-content/30 italic {!shouldShowActionButtons
+            class="blocktransition-opacity text-base-content/30 ms-2 text-xs italic {!shouldShowActionButtons
               ? 'hidden'
               : 'group-hover:block'} sm:hidden"
           >
@@ -478,10 +478,10 @@
             <!-- Badge de stock actuel -->
             {#if product.stockParsed}
               <div
-                class="badge flex h-auto flex-col items-center gap-1 badge-outline badge-lg badge-secondary"
+                class="badge badge-outline badge-lg badge-secondary flex h-auto flex-col items-center gap-1"
               >
                 <div class="flex items-center gap-1">
-                  <Warehouse class="h-4 w-4 text-secondary" />
+                  <Warehouse class="text-secondary h-4 w-4" />
                   <span class="text-sm font-medium text-nowrap">
                     {product.stockParsed.quantity}
                     {product.stockParsed.unit}
@@ -496,7 +496,7 @@
             {#each purchasesBadges as purchase, index (index)}
               {@const IconComponent = statusIcons[purchase.icon]}
               <div
-                class="badge flex h-auto flex-col items-center gap-1 badge-outline badge-lg {purchase.badgeClass}"
+                class="badge badge-outline badge-lg flex h-auto flex-col items-center gap-1 {purchase.badgeClass}"
               >
                 <div class="flex items-center gap-1">
                   <IconComponent class="h-4 w-4" />
@@ -518,7 +518,7 @@
             {/each}
 
             {#if purchasesBadges.length === 0 && !product?.stockParsed}
-              <div class="text-xs text-base-content/50 italic">aucun</div>
+              <div class="text-base-content/50 text-xs italic">aucun</div>
             {/if}
           </div>
         </div>

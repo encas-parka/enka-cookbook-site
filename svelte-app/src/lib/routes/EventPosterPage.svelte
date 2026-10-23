@@ -463,7 +463,7 @@
 
   <!-- Main Content Area with left margin for desktop -->
   <div
-    class="min-h-screen bg-base-200 print:h-auto print:min-h-0"
+    class="bg-base-200 min-h-screen print:h-auto print:min-h-0"
     transition:fade
   >
     <div class="print:m-0 print:p-0 {globalState.isDesktop ? 'ml-96' : ''}">

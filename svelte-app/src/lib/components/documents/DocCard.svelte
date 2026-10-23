@@ -30,14 +30,14 @@
 </script>
 
 <a
-  class="{bgClass} group flex cursor-pointer items-start gap-3 rounded-lg p-4 shadow-sm transition-colors hover:bg-base-200 hover:shadow-md"
+  class="{bgClass} group hover:bg-base-200 flex cursor-pointer items-start gap-3 rounded-lg p-4 shadow-sm transition-colors hover:shadow-md"
   {href}
 >
   <div class="min-w-0 flex-1">
     <div class="flex flex-wrap items-center gap-x-6 gap-y-2">
       <!-- Title with icon -->
-      <div class="flex items-center gap-2 text-primary">
-        <FileText class="h-4 w-4 shrink-0 text-primary" />
+      <div class="text-primary flex items-center gap-2">
+        <FileText class="text-primary h-4 w-4 shrink-0" />
         <div class="truncate text-sm font-medium">
           {doc.title}
         </div>
@@ -65,7 +65,7 @@
       {/if}
 
       <!-- Metadata -->
-      <div class="me-4 flex items-center gap-3 text-xs text-base-content/50">
+      <div class="text-base-content/50 me-4 flex items-center gap-3 text-xs">
         <!-- Created date -->
         {#if !doc.updated}
           <div class="flex items-center gap-1">

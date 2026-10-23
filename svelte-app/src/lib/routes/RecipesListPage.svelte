@@ -340,7 +340,7 @@
     <!-- header -->
     <div class="mb-10 space-y-6">
       <!-- Tabs de filtrage par type -->
-      <div class="tabs tabs-border mb-6 flex-wrap font-bold sm:tabs-lg">
+      <div class="tabs tabs-border sm:tabs-lg mb-6 flex-wrap font-bold">
         <button
           class="tab {filters.typeR === '' ? 'tab-active' : ''}"
           onclick={() => setTypeR("")}
@@ -406,7 +406,7 @@
       <!-- État initial : Skeleton loader -->
       <div class="my-8 space-y-10">
         {#each Array(5) as _, i (i)}
-          <div class="h-40 w-full skeleton rounded-lg"></div>
+          <div class="skeleton h-40 w-full rounded-lg"></div>
         {/each}
       </div>
     {:else if recipesStore.loading && paginatedRecipes.length === 0}
@@ -414,7 +414,7 @@
       <div class="flex justify-center py-12">
         <div class="text-center">
           <div class="loading loading-lg loading-spinner text-primary"></div>
-          <p class="mt-4 text-sm text-base-content/60">
+          <p class="text-base-content/60 mt-4 text-sm">
             Chargement des recettes...
           </p>
         </div>
@@ -439,7 +439,7 @@
       <!-- Message si aucun résultat -->
       {#if filteredRecipes.length === 0 && recipesStore.isInitialized}
         <div class="py-12 text-center">
-          <p class="text-lg text-base-content/60">
+          <p class="text-base-content/60 text-lg">
             Aucune recette ne correspond aux critères...
           </p>
         </div>

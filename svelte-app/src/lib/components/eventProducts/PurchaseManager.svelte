@@ -213,7 +213,7 @@
 
     <div
       class="card bg-base-200 {isEditMode
-        ? 'ring-2 ring-accent ring-offset-2'
+        ? 'ring-accent ring-2 ring-offset-2'
         : ''}"
       id="purchase-form-card"
     >
@@ -260,7 +260,7 @@
             disabled={modalState.loading}
           />
         </div>
-        <div class="mt-4 card-actions justify-end">
+        <div class="card-actions mt-4 justify-end">
           {#if isEditMode}
             <button class="btn btn-ghost btn-sm" onclick={resetForm}>
               Annuler
@@ -292,7 +292,7 @@
 {:else if !globalState.isMobile}
   <!-- Desktop Table View -->
   <div class="mt-4 overflow-x-auto">
-    <table class="table table-zebra table-sm">
+    <table class="table-zebra table-sm table">
       <thead>
         <tr>
           <th>Quantité</th>
@@ -363,7 +363,7 @@
     livraison ordered en warning) -->
   <div class="mt-4 space-y-2">
     {#each modalState.purchasesList as purchase (purchase.id)}
-      <div class="card border border-neutral/40 bg-base-100 shadow-sm card-xs">
+      <div class="card border-neutral/40 bg-base-100 card-xs border shadow-sm">
         <div class="card-body">
           <!-- Ligne 1 : données principales + contexte + actions -->
           <div class="flex flex-wrap items-center gap-x-3 gap-y-1.5">
@@ -383,7 +383,7 @@
                 {getStatusBadge(purchase.status).text}
               </div>
               {#if purchase.status === "ordered"}
-                <span class="flex items-center gap-1 font-medium text-warning">
+                <span class="text-warning flex items-center gap-1 font-medium">
                   <Calendar class="size-3.5" />
                   {purchase.deliveryDate
                     ? formatDateOrNull(purchase.deliveryDate)
@@ -396,13 +396,13 @@
             {#if purchase.store || purchase.who}
               <div class="inline-flex shrink-0 items-center gap-1.5">
                 {#if purchase.store}
-                  <div class="badge gap-1 badge-soft badge-sm">
+                  <div class="badge badge-soft badge-sm gap-1">
                     <Store class="size-3" />
                     <span class="max-w-37.5 truncate">{purchase.store}</span>
                   </div>
                 {/if}
                 {#if purchase.who}
-                  <div class="badge gap-1 badge-soft badge-sm">
+                  <div class="badge badge-soft badge-sm gap-1">
                     <User class="size-3" />
                     <span class="max-w-25 truncate">{purchase.who}</span>
                   </div>

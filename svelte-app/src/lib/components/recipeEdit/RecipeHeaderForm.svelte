@@ -58,9 +58,9 @@
   }
 </script>
 
-<div class="card bg-base-100 shadow-xl max-sm:card-sm">
+<div class="card bg-base-100 max-sm:card-sm shadow-xl">
   <div class="card-body">
-    <h2 class="mb-4 card-title">
+    <h2 class="card-title mb-4">
       <BookOpen class="h-5 w-5" />
       Informations générales
     </h2>
@@ -74,7 +74,7 @@
             <legend class="required fieldset-legend">Titre de la recette</legend
             >
             <label
-              class="input w-full flex-1 input-lg {validationErrors.title
+              class="input input-lg w-full flex-1 {validationErrors.title
                 ? 'input-error'
                 : ''}"
             >
@@ -94,7 +94,7 @@
               {#if validationErrors.title}
                 <span class="text-error">{validationErrors.title}</span>
               {/if}
-              <span class="ms-auto fieldset-label italic"
+              <span class="fieldset-label ms-auto italic"
                 >{recipe.title?.length || 0}/80 caractères</span
               >
             </div>
@@ -109,7 +109,7 @@
               {#if versionNumber}
                 <fieldset class="fieldset w-full flex-1 sm:min-w-1/5">
                   <legend class="fieldset-legend">Version</legend>
-                  <label class="input w-max input-lg">
+                  <label class="input input-lg w-max">
                     <span class="badge badge-ghost font-mono"
                       >v{versionNumber}</span
                     >
@@ -134,7 +134,7 @@
                     ex: "économique", "sans fromages", "plus rapide"...
                   </p>
                   {#if validationErrors.versionLabel}
-                    <span class="text-wrap text-error"
+                    <span class="text-error text-wrap"
                       >{validationErrors.versionLabel}</span
                     >
                   {/if}
@@ -142,7 +142,7 @@
               {/if}
             {/if}
           {:else if recipe.versionLabel}
-            <span class="badge h-full badge-lg badge-secondary">
+            <span class="badge badge-lg badge-secondary h-full">
               {recipe.versionLabel}
             </span>
           {/if}
@@ -430,7 +430,7 @@
         <label class="flex cursor-pointer gap-3 sm:w-full">
           <input
             type="checkbox"
-            class="checkbox mt-1 checkbox-sm checkbox-primary"
+            class="checkbox checkbox-sm checkbox-primary mt-1"
             bind:checked={recipe.draft}
             disabled={!canEdit || recipe.check !== true}
           />

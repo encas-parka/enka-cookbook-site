@@ -118,7 +118,7 @@
 
   <ModalContent>
     {#if isEdit && currentMateriel}
-      <div class="mb-4 alert alert-soft">
+      <div class="alert alert-soft mb-4">
         <div class="flex items-center gap-2 text-sm">
           <Users class="h-4 w-4" />
           <div>
@@ -166,7 +166,7 @@
     {/if}
 
     {#if error}
-      <div class="mt-4 alert alert-error">
+      <div class="alert alert-error mt-4">
         <span class="text-sm">{error}</span>
       </div>
     {/if}

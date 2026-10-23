@@ -19,20 +19,20 @@
     {#if docs.length > 0}
       {#each docs as doc (doc.id)}
         <a
-          class="flex cursor-pointer items-center gap-2 rounded-lg bg-base-200/60 p-4 shadow-sm transition-colors hover:bg-base-200"
+          class="bg-base-200/60 hover:bg-base-200 flex cursor-pointer items-center gap-2 rounded-lg p-4 shadow-sm transition-colors"
           href={`/event/${eventId}/document/${doc.id}/edit`}
         >
-          <FileText class="h-4 w-4 shrink-0 text-primary" />
+          <FileText class="text-primary h-4 w-4 shrink-0" />
           <span class="flex-1 truncate font-medium">{doc.title}</span>
         </a>
       {/each}
     {:else}
-      <p class="py-2 text-xs text-base-content/50">Aucun document</p>
+      <p class="text-base-content/50 py-2 text-xs">Aucun document</p>
     {/if}
 
     {#if canEdit}
       <button
-        class="btn w-full justify-start gap-2 btn-ghost btn-sm"
+        class="btn btn-ghost btn-sm w-full justify-start gap-2"
         onclick={() =>
           navigate(`/event/${eventId}/document/create` as `/${string}`)}
       >

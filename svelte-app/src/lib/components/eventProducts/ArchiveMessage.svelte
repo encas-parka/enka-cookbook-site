@@ -16,21 +16,21 @@
   }>();
 </script>
 
-<div class="rounded-lg border border-warning/20 bg-base-200 p-4 text-center">
+<div class="border-warning/20 bg-base-200 rounded-lg border p-4 text-center">
   <div class="mb-2 flex items-center justify-center gap-2">
-    <History class="h-5 w-5 text-warning" />
-    <Lock class="h-4 w-4 text-warning/70" />
-    <span class="font-medium text-warning">{title}</span>
+    <History class="text-warning h-5 w-5" />
+    <Lock class="text-warning/70 h-4 w-4" />
+    <span class="text-warning font-medium">{title}</span>
   </div>
 
-  <p class="mb-3 text-sm text-base-content/70">
+  <p class="text-base-content/70 mb-3 text-sm">
     {message}
   </p>
 
   {#if showData && data}
-    <div class="rounded bg-base-300/50 p-2 text-left">
+    <div class="bg-base-300/50 rounded p-2 text-left">
       {#if dataLabel}
-        <div class="mb-1 text-xs font-medium text-base-content/60">
+        <div class="text-base-content/60 mb-1 text-xs font-medium">
           {dataLabel} :
         </div>
       {/if}
@@ -43,7 +43,7 @@
           {#if data.storeName}
             <div class="font-medium">{data.storeName}</div>
             {#if data.storeComment}
-              <div class="mt-1 text-xs text-base-content/60">
+              <div class="text-base-content/60 mt-1 text-xs">
                 {data.storeComment}
               </div>
             {/if}

@@ -305,7 +305,7 @@
     >
       <!-- Erreur -->
       {#if serverError}
-        <div class="alert text-sm alert-error max-md:alert-vertical">
+        <div class="alert alert-error max-md:alert-vertical text-sm">
           <TriangleAlert size={18} />
           <span>{serverError}</span>
         </div>
@@ -326,7 +326,7 @@
               ? 'input-error'
               : ''}"
           >
-            <PackagePlus class="h-5 w-5 text-base-content/50" />
+            <PackagePlus class="text-base-content/50 h-5 w-5" />
             <input
               id="ingredient-name-input"
               type="text"
@@ -339,13 +339,13 @@
             />
           </label>
           {#if showErrors && validationErrors.name}
-            <p class="text-xs text-error">{validationErrors.name}</p>
+            <p class="text-error text-xs">{validationErrors.name}</p>
           {/if}
 
           <!-- Guard anti-doublon : ingrédients similaires -->
           {#if similarIngredients.length > 0}
             {@const similar = similarIngredients}
-            <div class="alert alert-soft text-sm alert-warning">
+            <div class="alert alert-soft alert-warning text-sm">
               <TriangleAlert size={18} class="shrink-0" />
               <div class="flex flex-col gap-2">
                 <span class="font-medium"
@@ -355,19 +355,19 @@
                   {#each similar as result}
                     <button
                       type="button"
-                      class="btn justify-start btn-outline text-left btn-primary btn-sm"
+                      class="btn btn-outline btn-primary btn-sm justify-start text-left"
                       onclick={() => useExistingIngredient(result.ingredient)}
                     >
                       <span class="fuzzysort-highlight"
                         >{@html result.highlighted}</span
                       >
-                      <span class="ml-auto text-xs text-base-content/50"
+                      <span class="text-base-content/50 ml-auto text-xs"
                         >{result.ingredient.type}</span
                       >
                     </button>
                   {/each}
                 </div>
-                <span class="text-xs text-base-content/60"
+                <span class="text-base-content/60 text-xs"
                   >Cliquez sur un ingrédient ci-dessus pour l'utiliser, ou
                   continuez la création.</span
                 >
@@ -393,14 +393,14 @@
             {/each}
           </select>
           {#if showErrors && validationErrors.type}
-            <p class="text-xs text-error">{validationErrors.type}</p>
+            <p class="text-error text-xs">{validationErrors.type}</p>
           {/if}
         </div>
 
         <!-- Allergènes -->
         <div class="fieldset">
           <legend class="required fieldset-legend">Allergènes</legend>
-          <p class="mb-2 text-xs text-base-content/60">
+          <p class="text-base-content/60 mb-2 text-xs">
             Précisez les allergènes présents dans l'ingrédient et/ou la nature
             de l'ingrédients (ou cochez "Aucun"). Sert notamment à la
             classification des recettes comme végétarienne, sans-gluten, etc.)
@@ -408,7 +408,7 @@
           <div class="flex flex-wrap gap-2">
             {#each ALLERGENS as allergen (allergen)}
               <label
-                class="label cursor-pointer gap-2 rounded-lg border border-base-300 px-3 py-1 {formData.allergens.includes(
+                class="label border-base-300 cursor-pointer gap-2 rounded-lg border px-3 py-1 {formData.allergens.includes(
                   allergen,
                 )
                   ? 'border-primary bg-primary/20'
@@ -429,7 +429,7 @@
             {/each}
           </div>
           {#if showErrors && validationErrors.allergens}
-            <p class="text-xs text-error">
+            <p class="text-error text-xs">
               {validationErrors.allergens}
             </p>
           {/if}
@@ -445,7 +445,7 @@
                 <span class="required">frais ?</span>
               </div></legend
             >
-            <p class="mb-2 text-xs text-base-content/60">
+            <p class="text-base-content/60 mb-2 text-xs">
               Fruits et légumes frais, ou ingrédients qui se conservent au frigo
             </p>
             <div class="join w-full">
@@ -469,7 +469,7 @@
               </button>
             </div>
             {#if showErrors && validationErrors.pF}
-              <p class="text-xs text-error">{validationErrors.pF}</p>
+              <p class="text-error text-xs">{validationErrors.pF}</p>
             {/if}
           </div>
 
@@ -481,7 +481,7 @@
                 <span class="required">Produit surgelé ?</span>
               </div></legend
             >
-            <p class="mb-2 text-xs text-base-content/60">
+            <p class="text-base-content/60 mb-2 text-xs">
               Ingrédients qui se conservent au congélateur
             </p>
             <div class="join w-full">
@@ -505,7 +505,7 @@
               </button>
             </div>
             {#if showErrors && validationErrors.pS}
-              <p class="text-xs text-error">
+              <p class="text-error text-xs">
                 {validationErrors.pS}
               </p>
             {/if}
@@ -515,13 +515,13 @@
         <!-- Saisons -->
         <div class="fieldset">
           <legend class="fieldset-legend">Saisons (optionnel)</legend>
-          <p class="mb-2 text-xs text-base-content/60">
+          <p class="text-base-content/60 mb-2 text-xs">
             Si l'ingrédient se trouve surtout à certaines saisons
           </p>
           <div class="flex flex-wrap gap-2">
             {#each SAISONS as saison (saison.value)}
               <label
-                class="label cursor-pointer gap-2 rounded-lg border-base-300 px-3 py-1 {formData.saisons.includes(
+                class="label border-base-300 cursor-pointer gap-2 rounded-lg px-3 py-1 {formData.saisons.includes(
                   saison.value,
                 )
                   ? 'border-success bg-success/20'

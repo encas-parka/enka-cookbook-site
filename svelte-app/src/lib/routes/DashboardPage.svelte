@@ -60,7 +60,7 @@
   </div>
 {/snippet}
 
-<div class="min-h-screen bg-base-200" in:fade>
+<div class="bg-base-200 min-h-screen" in:fade>
   <!-- Alerte de vérification d'email -->
   <EmailVerificationAlert />
 
@@ -76,13 +76,13 @@
     {#if !globalState.isAuthenticated}
       <!-- État non connecté -->
       <div
-        class="rounded-xl border border-base-200 bg-base-100 p-8 text-center shadow-sm"
+        class="border-base-200 bg-base-100 rounded-xl border p-8 text-center shadow-sm"
       >
         <Settings class="mx-auto mb-4 h-16 w-16 opacity-20" />
         <h2 class="mb-2 text-xl font-semibold">
           Connectez-vous pour accéder à votre tableau de bord
         </h2>
-        <p class="mb-6 text-base-content/60">
+        <p class="text-base-content/60 mb-6">
           Connectez-vous pour voir vos équipes, événements et recettes.
         </p>
         <button class="btn btn-primary" onclick={() => {}}>
@@ -167,7 +167,7 @@
           />
         </div>
         <div
-          class="card border border-base-200 bg-base-100 shadow-md card-sm lg:col-span-2"
+          class="card border-base-200 bg-base-100 card-sm border shadow-md lg:col-span-2"
         >
           <div class="card-body">
             <LatestRecipesCard />

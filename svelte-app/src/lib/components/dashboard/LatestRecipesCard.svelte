@@ -78,8 +78,8 @@
   {@const iconInfo = getRecipeIcon(recipe)}
   <div
     class="{withBorder
-      ? 'border-l-2 border-accent/60'
-      : ''} flex cursor-pointer items-start gap-3 rounded-lg bg-base-200 p-3 transition-colors hover:bg-base-300"
+      ? 'border-accent/60 border-l-2'
+      : ''} bg-base-200 hover:bg-base-300 flex cursor-pointer items-start gap-3 rounded-lg p-3 transition-colors"
     onclick={() => viewRecipe(recipe.id)}
     role="button"
     tabindex="0"
@@ -91,8 +91,8 @@
   >
     <div class="min-w-0 flex-1">
       <div class="flex flex-wrap items-center gap-x-4 gap-y-2">
-        <div class="flex flex-wrap items-center gap-x-2 text-primary">
-          <svg class="h-4 w-4 shrink-0 text-primary">
+        <div class="text-primary flex flex-wrap items-center gap-x-2">
+          <svg class="text-primary h-4 w-4 shrink-0">
             <use href={`/icons/sprite.svg#${iconInfo.iconId}`} />
           </svg>
           <div class="truncate text-sm font-medium">
@@ -106,7 +106,7 @@
         </div>
 
         <!-- Métadonnées -->
-        <div class="flex items-center gap-3 text-xs text-base-content/50">
+        <div class="text-base-content/50 flex items-center gap-3 text-xs">
           <div class="flex items-center gap-1">
             <span>{formatRecipeDate(recipe)}</span>
           </div>
@@ -122,7 +122,7 @@
 
 <div class="flex items-center justify-between">
   <h2 class="card-title flex items-center gap-2">
-    <BookOpen class="h-5 w-5 stroke-3 text-primary" />
+    <BookOpen class="text-primary h-5 w-5 stroke-3" />
     Vos dernières Recettes
   </h2>
   <button
@@ -137,14 +137,14 @@
 
 {#if recipesStore.error}
   <div class="py-6 text-center">
-    <div class="mb-2 text-error">
+    <div class="text-error mb-2">
       <AlertTriangle class="mx-auto h-8 w-8" />
     </div>
-    <p class="text-sm text-base-content/60">
+    <p class="text-base-content/60 text-sm">
       Erreur de chargement des recettes
     </p>
     <button
-      class="btn mt-2 btn-ghost btn-xs"
+      class="btn btn-ghost btn-xs mt-2"
       onclick={() => window.location.reload()}
     >
       Réessayer
@@ -153,14 +153,14 @@
 {:else if isLoading}
   <!-- Skeleton loader -->
   <div class="space-y-3 py-4">
-    <div class="h-32 w-full skeleton rounded-lg"></div>
-    <div class="h-32 w-full skeleton rounded-lg"></div>
-    <div class="h-32 w-full skeleton rounded-lg"></div>
+    <div class="skeleton h-32 w-full rounded-lg"></div>
+    <div class="skeleton h-32 w-full rounded-lg"></div>
+    <div class="skeleton h-32 w-full rounded-lg"></div>
   </div>
 {:else if myLatestRecipes.length === 0}
   <div class="py-6 text-center">
     <ChefHat class="mx-auto mb-3 h-12 w-12 opacity-20" />
-    <p class="mb-4 text-sm text-base-content/60">Aucune recette publiée</p>
+    <p class="text-base-content/60 mb-4 text-sm">Aucune recette publiée</p>
     <button class="btn btn-primary btn-sm" onclick={createNewRecipe}>
       <BookOpen class="mr-2 h-4 w-4" />
       Créer une recette

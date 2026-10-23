@@ -110,7 +110,7 @@
 
 {#snippet navActions()}{/snippet}
 
-<div class="min-h-lvh bg-base-200 px-4 pt-4 pb-20 md:px-20" transition:fade>
+<div class="bg-base-200 min-h-lvh px-4 pt-4 pb-20 md:px-20" transition:fade>
   <div class="mx-auto mt-6 max-w-4xl">
     <!-- Header -->
     <div class="mb-4 flex flex-wrap items-center justify-between gap-4">
@@ -121,7 +121,7 @@
       {/if}
       {#if canEdit}
         <button
-          class="btn ms-auto btn-primary btn-sm"
+          class="btn btn-primary btn-sm ms-auto"
           onclick={() => navigate(`/event/${eventId}/document/create`)}
         >
           <PlusIcon class="mr-1 size-4" />
@@ -157,14 +157,14 @@
 
       {#if filteredDocs.length === 0 && !teamdocsStore.loading}
         <div class="py-12 text-center">
-          <p class="text-lg text-base-content/60">
+          <p class="text-base-content/60 text-lg">
             {searchQuery.length >= 2
               ? "Aucun document ne correspond à la recherche"
               : "Aucun document pour cet événement"}
           </p>
           {#if canEdit && searchQuery.length < 2}
             <button
-              class="btn mt-4 btn-primary"
+              class="btn btn-primary mt-4"
               onclick={() => navigate(`/event/${eventId}/document/create`)}
             >
               <PlusIcon size={18} />

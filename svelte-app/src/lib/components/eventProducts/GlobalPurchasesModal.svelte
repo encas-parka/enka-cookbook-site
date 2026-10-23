@@ -207,7 +207,7 @@ Modal de récapitulatif des dépenses
         </div>
 
         <!-- Breakdown Lists -->
-        <div class="w-max-3xl card h-full bg-base-200 p-4 shadow-sm">
+        <div class="w-max-3xl card bg-base-200 h-full p-4 shadow-sm">
           <h4
             class="mb-2 text-sm font-semibold tracking-wider uppercase opacity-70"
           >
@@ -223,7 +223,7 @@ Modal de récapitulatif des dépenses
           </div>
         </div>
 
-        <div class="w-max-3xl card h-full bg-base-200 p-4 shadow-sm">
+        <div class="w-max-3xl card bg-base-200 h-full p-4 shadow-sm">
           <h4
             class="mb-2 text-sm font-semibold tracking-wider uppercase opacity-70"
           >
@@ -285,7 +285,7 @@ Modal de récapitulatif des dépenses
                 disabled={loading}
               />
             </div>
-            <div class="mt-2 card-actions justify-end">
+            <div class="card-actions mt-2 justify-end">
               <button class="btn btn-ghost btn-sm" onclick={resetForm}
                 >Annuler</button
               >
@@ -300,7 +300,7 @@ Modal de récapitulatif des dépenses
               </button>
             </div>
             {#if error}
-              <div class="mt-2 text-xs text-error">{error}</div>
+              <div class="text-error mt-2 text-xs">{error}</div>
             {/if}
           </div>
         </div>
@@ -309,13 +309,13 @@ Modal de récapitulatif des dépenses
       <!-- Purchases Table (Desktop) -->
       {#if !globalState.isMobile}
         <div
-          class="overflow-x-auto rounded-lg border border-base-200 bg-base-100"
+          class="border-base-200 bg-base-100 overflow-x-auto rounded-lg border"
         >
-          <table class="table w-full table-zebra table-xs">
-            <thead class="sticky top-0 bg-base-200">
+          <table class="table-zebra table-xs table w-full">
+            <thead class="bg-base-200 sticky top-0">
               <tr>
                 <th
-                  class="cursor-pointer hover:bg-base-300"
+                  class="hover:bg-base-300 cursor-pointer"
                   onclick={() => toggleSort("date")}
                 >
                   Date {sortColumn === "date"
@@ -326,7 +326,7 @@ Modal de récapitulatif des dépenses
                 </th>
                 <th>Description</th>
                 <th
-                  class="cursor-pointer hover:bg-base-300"
+                  class="hover:bg-base-300 cursor-pointer"
                   onclick={() => toggleSort("store")}
                 >
                   Magasin {sortColumn === "store"
@@ -336,7 +336,7 @@ Modal de récapitulatif des dépenses
                     : ""}
                 </th>
                 <th
-                  class="cursor-pointer hover:bg-base-300"
+                  class="hover:bg-base-300 cursor-pointer"
                   onclick={() => toggleSort("who")}
                 >
                   Qui {sortColumn === "who"
@@ -346,7 +346,7 @@ Modal de récapitulatif des dépenses
                     : ""}
                 </th>
                 <th
-                  class="cursor-pointer text-right hover:bg-base-300"
+                  class="hover:bg-base-300 cursor-pointer text-right"
                   onclick={() => toggleSort("amount")}
                 >
                   Montant {sortColumn === "amount"
@@ -375,7 +375,7 @@ Modal de récapitulatif des dépenses
                         >{purchase["_productName"] || "Produit inconnu"}</span
                       >
                       {#if purchase.notes}
-                        <span class="ml-1 text-xs text-base-content/50"
+                        <span class="text-base-content/50 ml-1 text-xs"
                           >- {purchase.notes}</span
                         >
                       {/if}
@@ -398,7 +398,7 @@ Modal de récapitulatif des dépenses
               {/each}
               {#if displayedPurchases.length === 0}
                 <tr>
-                  <td colspan="7" class="py-8 text-center text-base-content/50"
+                  <td colspan="7" class="text-base-content/50 py-8 text-center"
                     >Aucune dépense trouvée</td
                   >
                 </tr>
@@ -456,7 +456,7 @@ Modal de récapitulatif des dépenses
                 <!-- Magasin et Qui -->
                 <div class="mt-3 flex flex-wrap gap-3">
                   {#if purchase.store}
-                    <div class="badge gap-1 badge-soft">
+                    <div class="badge badge-soft gap-1">
                       <StoreIcon class="h-3 w-3" />
                       <span class="max-w-[150px] truncate"
                         >{purchase.store}</span
@@ -464,7 +464,7 @@ Modal de récapitulatif des dépenses
                     </div>
                   {/if}
                   {#if purchase.who}
-                    <div class="badge gap-1 badge-soft">
+                    <div class="badge badge-soft gap-1">
                       <User class="h-3 w-3" />
                       <span class="max-w-[100px] truncate">{purchase.who}</span>
                     </div>

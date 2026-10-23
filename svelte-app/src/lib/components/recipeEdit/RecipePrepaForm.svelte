@@ -21,7 +21,7 @@
   let { recipe = $bindable(), validationErrors, canEdit }: Props = $props();
 </script>
 
-<div class="mb-4 alert alert-info max-sm:alert-vertical">
+<div class="alert alert-info max-sm:alert-vertical mb-4">
   <TriangleAlert class="size-6" />
   <span>
     <ul class="mt-1 list-disc pl-5 text-sm">
@@ -45,12 +45,12 @@
 <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
   <!-- Ingrédients -->
   <div
-    class="card bg-base-100 shadow-xl max-sm:card-sm {validationErrors.ingredients
-      ? 'ring-2 ring-error'
+    class="card bg-base-100 max-sm:card-sm shadow-xl {validationErrors.ingredients
+      ? 'ring-error ring-2'
       : ''}"
   >
     <div class="card-body">
-      <h2 class="mb-4 card-title">
+      <h2 class="card-title mb-4">
         <Utensils class="h-5 w-4" />
         Ingrédients
       </h2>
@@ -60,7 +60,7 @@
         disabled={!canEdit}
       />
       {#if validationErrors.ingredients && recipe.ingredients.length === 0}
-        <div class="mt-4 alert alert-error">
+        <div class="alert alert-error mt-4">
           <span class="text-sm">{validationErrors.ingredients}</span>
         </div>
       {/if}
@@ -68,9 +68,9 @@
   </div>
 
   <!-- Préparation -->
-  <div class="card bg-base-100 shadow-xl max-sm:card-sm">
+  <div class="card bg-base-100 max-sm:card-sm shadow-xl">
     <div class="card-body">
-      <h2 class="mb-4 card-title">
+      <h2 class="card-title mb-4">
         <FileText class="h-5 w-4" />
         Préparation
       </h2>
@@ -110,7 +110,7 @@
       <div class="space-y-4">
         <div class="flex items-center justify-between">
           <h3 class="flex items-center gap-2 font-semibold">
-            <Lightbulb class="h-4 w-4 text-warning" />
+            <Lightbulb class="text-warning h-4 w-4" />
             Astuces et conseils
           </h3>
           <button
@@ -159,7 +159,7 @@
                 </div>
                 <div class="flex justify-between px-1">
                   {#if validationErrors.astuces?.[i]}
-                    <span class="text-xs text-error"
+                    <span class="text-error text-xs"
                       >{validationErrors.astuces[i]}</span
                     >
                   {:else}
@@ -167,7 +167,7 @@
                   {/if}
                   <span
                     class="text-xs {astuceObj.astuce.length > 250
-                      ? 'font-bold text-error'
+                      ? 'text-error font-bold'
                       : 'opacity-50'}"
                   >
                     {astuceObj.astuce.length} / 250

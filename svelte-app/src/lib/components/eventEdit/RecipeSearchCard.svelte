@@ -181,11 +181,11 @@
   }
 </script>
 
-<div class="card border border-base-300 bg-base-100 shadow-sm">
+<div class="card border-base-300 bg-base-100 border shadow-sm">
   <div class="card-body gap-3 p-3">
     <div class="flex items-center justify-between">
       <h6 class="flex items-center gap-2">
-        <Plus class="h-4 w-4 text-primary" />
+        <Plus class="text-primary h-4 w-4" />
         Ajouter une recette
       </h6>
     </div>
@@ -218,7 +218,7 @@
             />
             {#if isLoadingDetails}
               <div class="absolute top-1/2 right-10 -translate-y-1/2">
-                <LoaderCircle class="h-4 w-4 animate-spin text-primary" />
+                <LoaderCircle class="text-primary h-4 w-4 animate-spin" />
               </div>
             {/if}
           </div>
@@ -226,7 +226,7 @@
           <!-- Dropdown toggle button -->
           <button
             type="button"
-            class="btn absolute top-1/2 right-1 -translate-y-1/2 btn-ghost btn-sm"
+            class="btn btn-ghost btn-sm absolute top-1/2 right-1 -translate-y-1/2"
             onclick={toggleDropdown}
             {disabled}
             aria-label={isOpen ? "Fermer le menu" : "Ouvrir le menu"}
@@ -241,14 +241,14 @@
             <div
               id="recipes-list"
               bind:this={listboxRef}
-              class="absolute z-50 mt-1 max-h-60 w-full overflow-auto rounded-lg border border-base-300 bg-base-100 shadow-lg"
+              class="border-base-300 bg-base-100 absolute z-50 mt-1 max-h-60 w-full overflow-auto rounded-lg border shadow-lg"
               role="listbox"
             >
               {#each filteredRecipes as recipe, index (recipe.id)}
                 <button
                   type="button"
                   id="recipe-{index}"
-                  class="flex w-full items-center gap-2 px-4 py-3 text-left hover:cursor-pointer hover:bg-base-200 {index ===
+                  class="hover:bg-base-200 flex w-full items-center gap-2 px-4 py-3 text-left hover:cursor-pointer {index ===
                   clampedSelectedIndex
                     ? 'bg-base-200'
                     : ''}"
@@ -258,7 +258,7 @@
                   aria-selected={index === clampedSelectedIndex}
                   disabled={isLoadingDetails}
                 >
-                  <div class="rounded bg-base-200 p-1">
+                  <div class="bg-base-200 rounded p-1">
                     <ChefHat class="h-4 w-4 opacity-70" />
                   </div>
                   <div class="flex min-w-0 flex-1 flex-wrap items-center gap-2">
@@ -266,13 +266,13 @@
                       >{recipe.title}</span
                     >
                     {#if recipe.versionLabel}
-                      <span class="text-xs font-normal text-base-content/70"
+                      <span class="text-base-content/70 text-xs font-normal"
                         >({recipe.versionLabel})</span
                       >
                     {/if}
                     {#if recipe.draft}
                       <span
-                        class="badge badge-ghost text-xs badge-sm opacity-70"
+                        class="badge badge-ghost badge-sm text-xs opacity-70"
                         >brouillon</span
                       >
                     {/if}

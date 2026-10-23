@@ -378,7 +378,7 @@
 
 <Fieldset legend="Participants">
   <!-- Équipe minimale -->
-  <fieldset class="mb-4 fieldset">
+  <fieldset class="fieldset mb-4">
     {#if editingMinContrib}
       <label class="input w-56">
         <span class="label">Minimum</span>
@@ -415,7 +415,7 @@
         </div>
       </button>
     {/if}
-    <div class="ms-1 fieldset-label">
+    <div class="fieldset-label ms-1">
       Combien faudrait-il être pour tout gérer ?
     </div>
   </fieldset>
@@ -431,7 +431,7 @@
             <legend class="legend">Équipes invitées</legend>
             <div class="flex flex-wrap gap-2">
               {#each nativeTeamsStore.teamNames(event.teams) as teamName}
-                <div class="badge gap-2 badge-soft p-3 badge-lg badge-primary">
+                <div class="badge badge-soft badge-lg badge-primary gap-2 p-3">
                   <Users class="inline size-4" />
                   <span class="font-medium">{teamName}</span>
                 </div>
@@ -448,7 +448,7 @@
 
           <div class="flex flex-wrap gap-2">
             {#each acceptedContributors as contributor (contributor.id)}
-              <div class="badge gap-2 badge-soft p-3 badge-success">
+              <div class="badge badge-soft badge-success gap-2 p-3">
                 <span class="font-medium"
                   >{contributor.name || contributor.email}</span
                 >
@@ -473,12 +473,12 @@
       <!-- Invited -->
       {#if invitedContributors.length > 0}
         <fieldset class="fieldset">
-          <legend class="text-sm font-medium text-base-content/70"
+          <legend class="text-base-content/70 text-sm font-medium"
             >Invité·es</legend
           >
           <div class="flex flex-wrap gap-2">
             {#each invitedContributors as contributor (contributor.id)}
-              <div class="badge gap-2 badge-soft p-3 badge-warning">
+              <div class="badge badge-soft badge-warning gap-2 p-3">
                 <span class="font-medium"
                   >{contributor.name || contributor.email}</span
                 >
@@ -491,12 +491,12 @@
       <!-- Declined -->
       {#if declinedContributors.length > 0}
         <fieldset class="fieldset">
-          <legend class="text-sm font-medium text-base-content/70"
+          <legend class="text-base-content/70 text-sm font-medium"
             >ne participent pas</legend
           >
           <div class="flex flex-wrap items-center gap-2">
             {#each declinedContributors as contributor (contributor.id)}
-              <div class="badge gap-2 badge-soft p-3 badge-error">
+              <div class="badge badge-soft badge-error gap-2 p-3">
                 <span class="font-medium"
                   >{contributor.name || contributor.email}</span
                 >
@@ -518,7 +518,7 @@
     <!-- Bouton pour ouvrir le modal d'invitation (pouvoir d'éditeur) -->
     <div class="my-2">
       <button
-        class="btn btn-block gap-1 btn-outline btn-primary"
+        class="btn btn-block btn-outline btn-primary gap-1"
         onclick={() => (showInviteModal = true)}
       >
         <UserPlus class="mr-2 h-4 w-4" />
@@ -535,7 +535,7 @@
       <LinkIcon class="inline size-4 shrink-0" /> Lien de partage
     </div>
 
-    <div class="mt-6 alert alert-info">
+    <div class="alert alert-info mt-6">
       <div class="text-sm">
         <p>
           Le lien permet de rejoindre l'événement en tant qu'invité — les
@@ -551,10 +551,10 @@
       <div class="mt-4 space-y-2">
         {#each shareLinkIds as linkId (linkId)}
           <div
-            class="flex items-center justify-between gap-2 rounded-md bg-base-200 p-2"
+            class="bg-base-200 flex items-center justify-between gap-2 rounded-md p-2"
           >
             <div
-              class="flex-1 overflow-auto font-mono text-xs text-base-content/80"
+              class="text-base-content/80 flex-1 overflow-auto font-mono text-xs"
             >
               {window.location.origin}/join/{linkId}
             </div>
@@ -570,13 +570,13 @@
         {/each}
       </div>
       <button
-        class="btn mt-4 w-full btn-outline btn-warning"
+        class="btn btn-outline btn-warning mt-4 w-full"
         onclick={() => (showRegenerateConfirm = true)}
         disabled={isGenerating}
       >
         {#if isGenerating}
           <span
-            class="loading hidden loading-xs loading-spinner md:inline-block"
+            class="loading loading-xs loading-spinner hidden md:inline-block"
           ></span>
           Régénération...
         {:else}
@@ -585,7 +585,7 @@
         {/if}
       </button>
     {:else}
-      <p class="mt-2 py-4 text-sm text-base-content/50 italic">
+      <p class="text-base-content/50 mt-2 py-4 text-sm italic">
         Lien de partage indisponible — réessayez en rouvrant cette page.
       </p>
     {/if}
@@ -602,7 +602,7 @@
   <ModalContent>
     <div class="space-y-6">
       <!-- En-tête explicatif : les effets avant la validation -->
-      <div class="alert alert-soft text-sm alert-info">
+      <div class="alert alert-soft alert-info text-sm">
         <Info class="h-5 w-5 shrink-0" />
         <span>
           Un email groupé avec le lien de partage sera envoyé aux personnes
@@ -637,12 +637,12 @@
           </button>
         </div>
         {#if inviteError}
-          <p class="mt-1 text-xs text-error">{inviteError}</p>
+          <p class="text-error mt-1 text-xs">{inviteError}</p>
         {/if}
 
         <div class="flex flex-wrap gap-2">
           {#each newContributors as contributor (contributor.email)}
-            <div class="badge gap-2 badge-soft badge-warning">
+            <div class="badge badge-soft badge-warning gap-2">
               <Mail class="inline size-3" />
               {contributor.email}
             </div>
@@ -680,7 +680,7 @@
         {#if pickerTeams.length > 0}
           <div class="space-y-4">
             {#each pickerTeams as team (team.id)}
-              <div class="rounded-lg border border-base-300 bg-base-200/40 p-3">
+              <div class="border-base-300 bg-base-200/40 rounded-lg border p-3">
                 <!-- Header d'équipe : tout cocher / décocher -->
                 <label class="flex cursor-pointer items-center gap-3">
                   <input
@@ -697,7 +697,7 @@
                       >
                     </span>
                     {#if isFullTeam(team.id)}
-                      <span class="text-xs text-success">
+                      <span class="text-success text-xs">
                         Équipe entière — les futurs membres hériteront
                       </span>
                     {/if}
@@ -725,7 +725,7 @@
                         >{member.name || member.userEmail}</span
                       >
                       {#if isAlreadyInvited(member)}
-                        <span class="text-xs text-base-content/50 italic"
+                        <span class="text-base-content/50 text-xs italic"
                           >accès actif</span
                         >
                       {/if}

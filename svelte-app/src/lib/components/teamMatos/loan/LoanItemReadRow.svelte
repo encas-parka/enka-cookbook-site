@@ -31,7 +31,7 @@
 </script>
 
 <div
-  class="flex flex-wrap items-center justify-between gap-2 rounded-lg border border-base-300 bg-base-100 px-3 py-2"
+  class="border-base-300 bg-base-100 flex flex-wrap items-center justify-between gap-2 rounded-lg border px-3 py-2"
 >
   <div class="flex min-w-0 items-center gap-2">
     <Icon

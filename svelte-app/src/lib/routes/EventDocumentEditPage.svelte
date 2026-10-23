@@ -506,7 +506,7 @@
 
 <!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
 <div
-  class="min-h-lvh bg-base-200 px-4 pt-4 pb-20 md:px-20"
+  class="bg-base-200 min-h-lvh px-4 pt-4 pb-20 md:px-20"
   onkeydown={handleKeydown}
   role="region"
   tabindex="-1"
@@ -540,7 +540,7 @@
     {/if}
 
     {#if isLockedByOthers}
-      <div class="mb-4 alert alert-warning max-md:alert-vertical">
+      <div class="alert alert-warning max-md:alert-vertical mb-4">
         <LockIcon class="h-5 w-5" />
         <div>
           <h4 class="font-bold">Document verrouillé</h4>
@@ -562,7 +562,7 @@
       <div class="space-y-4">
         {#if mode === "edit"}
           <fieldset class="fieldset flex">
-            <label class="input w-full input-lg">
+            <label class="input input-lg w-full">
               <span class="label">Nom</span>
               <input
                 type="text"
@@ -598,7 +598,7 @@
                   </button>
                 {/each}
               </div>
-              <p class="text-xs text-base-content/60">
+              <p class="text-base-content/60 text-xs">
                 Sélectionnez les pages où ce document apparaîtra
               </p>
             </fieldset>
@@ -626,7 +626,7 @@
               </div>
             </div>
           </div>
-          <div class="prose max-w-none rounded-lg bg-base-100 p-6 shadow-lg">
+          <div class="prose bg-base-100 max-w-none rounded-lg p-6 shadow-lg">
             {#if content}
               <SvelteMarkdown source={content} />
             {:else}
@@ -654,7 +654,7 @@
 <!-- Bouton flottant Enregistrer (mobile uniquement) -->
 {#if isDirty && !isSaving}
   <button
-    class="btn sticky bottom-2 shadow-lg btn-primary btn-sm {!globalState.isMobile &&
+    class="btn btn-primary btn-sm sticky bottom-2 shadow-lg {!globalState.isMobile &&
       'hidden'}"
     onclick={handleSave}
     disabled={!canEdit || !isValid || isSaving}

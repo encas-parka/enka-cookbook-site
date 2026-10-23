@@ -69,10 +69,10 @@
 </script>
 
 <div
-  class="flex flex-col gap-2 rounded-lg border bg-base-100 px-3 py-2 transition-colors sm:flex-row sm:items-center sm:justify-between {disabled
+  class="bg-base-100 flex flex-col gap-2 rounded-lg border px-3 py-2 transition-colors sm:flex-row sm:items-center sm:justify-between {disabled
     ? 'border-base-300 bg-base-300/50 opacity-60 '
     : isActive
-      ? 'border-0 font-medium text-primary ring-1 ring-primary/40 ring-inset'
+      ? 'text-primary ring-primary/40 border-0 font-medium ring-1 ring-inset'
       : 'border-base-300'}"
 >
   <div class="flex min-w-0 items-center gap-2">
@@ -80,21 +80,21 @@
       >{name}</span
     >
     {#if showStatusBadge}
-      <span class="badge flex-none badge-sm badge-error"
+      <span class="badge badge-sm badge-error flex-none"
         >{unavailableLabel}</span
       >
     {:else if badge !== undefined}
-      <span class="badge flex-none badge-ghost badge-sm tabular-nums"
+      <span class="badge badge-ghost badge-sm flex-none tabular-nums"
         >{badge} <span class="opacity-70">dispo.</span></span
       >
     {:else if hasExisting}
-      <span class="badge flex-none badge-ghost badge-sm"
+      <span class="badge badge-ghost badge-sm flex-none"
         >{existingLabel} {existingQuantity}</span
       >
     {/if}
     {#if sourcedBatches.length > 0}
       {#each sourcedBatches as batch (batch.label)}
-        <span class="badge flex-none gap-0.5 badge-xs badge-success">
+        <span class="badge badge-xs badge-success flex-none gap-0.5">
           <Check class="size-2.5" />
           {batch.label}: {batch.qty}
         </span>
@@ -105,7 +105,7 @@
   <div class="flex flex-none items-center justify-end gap-1">
     {#if showClear}
       <button
-        class="btn btn-square scroll-mt-40 btn-ghost {size === 'md'
+        class="btn btn-square btn-ghost scroll-mt-40 {size === 'md'
           ? 'btn-md'
           : 'btn-xs'}"
         onclick={clearAll}
@@ -117,7 +117,7 @@
     {/if}
 
     <button
-      class="btn btn-square scroll-mt-40 btn-ghost {size === 'md'
+      class="btn btn-square btn-ghost scroll-mt-40 {size === 'md'
         ? 'btn-md'
         : 'btn-xs'}"
       onclick={decrement}
@@ -140,8 +140,8 @@
         if (!isNaN(v) && v >= 0) onchange(v);
       }}
       class="qty-input input scroll-mt-40 {size === 'md'
-        ? 'w-16 input-md'
-        : 'w-14 input-xs'} text-center font-semibold tabular-nums {isActive
+        ? 'input-md w-16'
+        : 'input-xs w-14'} text-center font-semibold tabular-nums {isActive
         ? 'input-primary'
         : ''}"
       aria-label="Quantité"
@@ -149,7 +149,7 @@
     />
 
     <button
-      class="btn btn-square scroll-mt-40 btn-ghost {size === 'md'
+      class="btn btn-square btn-ghost scroll-mt-40 {size === 'md'
         ? 'btn-md'
         : 'btn-xs'}"
       onclick={increment}
@@ -161,7 +161,7 @@
 
     {#if showTakeAll && maxQuantity !== undefined}
       <button
-        class="btn scroll-mt-40 btn-ghost {size === 'md' ? 'btn-sm' : 'btn-xs'}"
+        class="btn btn-ghost scroll-mt-40 {size === 'md' ? 'btn-sm' : 'btn-xs'}"
         onclick={takeAll}
         disabled={disabled || quantity >= maxQuantity}
       >

@@ -149,7 +149,7 @@
   <ModalContent>
     <div class="space-y-6">
       <!-- Alerte info -->
-      <div class="alert alert-soft text-base alert-info">
+      <div class="alert alert-soft alert-info text-base">
         <Info class="h-5 w-5" />
         <span>
           Les nombres indiquent les quantités disponibles de chaque matériel,
@@ -159,7 +159,7 @@
 
       <!-- Alerte warning si matériels indisponibles -->
       {#if unavailableMateriels.length > 0}
-        <div class="alert alert-soft text-base alert-warning">
+        <div class="alert alert-soft alert-warning text-base">
           <AlertTriangle class="h-5 w-5" />
           <span>
             {unavailableMateriels.length} matériel{unavailableMateriels.length >
@@ -176,12 +176,12 @@
         {@const TypeIcon = TypeIcons[type]}
         <div class="mb-6">
           <h4 class="mb-3 flex items-center gap-2 text-base font-semibold">
-            <div class="rounded-lg bg-primary/10 p-1.5">
-              <TypeIcon class="h-4 w-4 text-primary" />
+            <div class="bg-primary/10 rounded-lg p-1.5">
+              <TypeIcon class="text-primary h-4 w-4" />
             </div>
             {typeLabels[type]}
             <button
-              class="btn ml-auto btn-link btn-xs"
+              class="btn btn-link btn-xs ml-auto"
               onclick={() => handleToggleAllByType(materiels)}
               disabled={materiels.filter((m) => !m.isUnavailable).length === 0}
             >

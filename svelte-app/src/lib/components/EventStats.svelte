@@ -19,31 +19,31 @@
 
 <div class="flex flex-wrap justify-end gap-2 font-medium">
   <!-- Repas -->
-  <div class="badge flex items-center gap-2 badge-soft badge-lg badge-primary">
+  <div class="badge badge-soft badge-lg badge-primary flex items-center gap-2">
     <CalendarDays class="h-4 w-4" />
     <span>{stats.mealsCount} Repas</span>
   </div>
 
   <!-- Couverts -->
-  <div class="badge flex items-center gap-2 badge-soft badge-lg badge-primary">
+  <div class="badge badge-soft badge-lg badge-primary flex items-center gap-2">
     <Utensils class="h-4 w-4" />
     <span>{stats.totalGuests} Couverts</span>
   </div>
 
   <!-- Recettes -->
-  <div class="badge flex items-center gap-2 badge-soft badge-lg badge-primary">
+  <div class="badge badge-soft badge-lg badge-primary flex items-center gap-2">
     <CookingPot class="h-4 w-4" />
     <span>{stats.totalRecipes} Recettes</span>
   </div>
 
   <!-- Ingrédients -->
-  <div class="badge flex items-center gap-2 badge-soft badge-lg badge-primary">
+  <div class="badge badge-soft badge-lg badge-primary flex items-center gap-2">
     <ShoppingCart class="h-4 w-4" />
     <span>{stats.totalIngredients} Ingrédients</span>
   </div>
 
   <!-- Contributeurs -->
-  <div class="badge flex items-center gap-2 badge-soft badge-lg badge-primary">
+  <div class="badge badge-soft badge-lg badge-primary flex items-center gap-2">
     <Users class="h-4 w-4" />
     <span>{stats.contributorsStats.accepted} Participant·es</span>
   </div>
@@ -51,7 +51,7 @@
   <!-- Recettes manquantes -->
   {#if stats.missingRecipes.size > 0}
     <div
-      class="badge flex cursor-help items-center gap-2 badge-lg badge-error"
+      class="badge badge-lg badge-error flex cursor-help items-center gap-2"
       title="Recettes non disponibles : {Array.from(stats.missingRecipes)
         .map((uuid) => uuid.split('_')[0])
         .join(', ')}"

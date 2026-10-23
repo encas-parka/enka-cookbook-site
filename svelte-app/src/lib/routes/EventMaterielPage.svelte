@@ -442,7 +442,7 @@
         <Download size={18} />
       </div>
       <ul
-        class="menu dropdown-content z-10 w-48 rounded-box bg-base-100 p-2 shadow-lg"
+        class="menu dropdown-content rounded-box bg-base-100 z-10 w-48 p-2 shadow-lg"
       >
         <li>
           <button onclick={handleExportMarkdown}>
@@ -476,7 +476,7 @@
       <ChevronDown size={14} class="opacity-50" />
     </div>
     <ul
-      class="menu dropdown-content z-1 mt-3 w-52 rounded-xl border border-base-200 bg-base-100 p-2 font-medium shadow-xl"
+      class="menu dropdown-content border-base-200 bg-base-100 z-1 mt-3 w-52 rounded-xl border p-2 font-medium shadow-xl"
     >
       <li>
         <button onclick={openAddForm}>
@@ -496,7 +496,7 @@
             <ClipboardCopy class="size-4" />
             {myTeams[0].name}
             {#if materielStore.loans.some((l) => l.ownerId === myTeams[0].id && l.eventId === eventId)}
-              <span class="text-xs text-base-content/50"
+              <span class="text-base-content/50 text-xs"
                 >(réservation existante)</span
               >
             {/if}
@@ -510,7 +510,7 @@
               <ClipboardCopy class="size-4" />
               {team.name}
               {#if materielStore.loans.some((l) => l.ownerId === team.id && l.eventId === eventId)}
-                <span class="text-xs text-base-content/50">(résa.)</span>
+                <span class="text-base-content/50 text-xs">(résa.)</span>
               {/if}
             </button>
           </li>
@@ -539,7 +539,7 @@
     <div class="mt-4 flex-1 lg:ml-96">
       <!-- Header -->
       <div class="mb-4 flex flex-wrap items-center gap-4">
-        <Package class="size-5 text-primary" />
+        <Package class="text-primary size-5" />
         <h2 class="text-xl font-bold">
           Matériel ({eventMaterielStore?.count})- {currentEvent?.name}
         </h2>
@@ -556,7 +556,7 @@
       <InfoCollapse
         title="Aide"
         contentVisible="Gestion du matériel requis pour l'événement : lister les besoins, suivre ce qui est trouvé, emprunté ou confirmé. Cliquez pour en savoir plus…"
-        class="my-8 shadow shadow-info "
+        class="shadow-info my-8 shadow "
       >
         <p>
           Cette page sert à <span class="font-semibold"
@@ -646,10 +646,10 @@
       <!-- Loading -->
       {#if eventMaterielStore.loading && eventMaterielStore.count === 0}
         <div class="flex justify-center py-12">
-          <LoaderCircle class="h-8 w-8 animate-spin text-base-content/30" />
+          <LoaderCircle class="text-base-content/30 h-8 w-8 animate-spin" />
         </div>
       {:else if groupedItems.length === 0}
-        <div class="py-12 text-center text-base-content/50">
+        <div class="text-base-content/50 py-12 text-center">
           <Package class="mx-auto mb-2 h-12 w-12 opacity-30" />
           <p>
             {#if eventMaterielStore.count === 0}Aucun matériel ajouté{:else}Aucun
@@ -690,7 +690,7 @@
                     <ChevronDown size={14} class="opacity-50" />
                   </div>
                   <ul
-                    class="menu dropdown-content z-1 mt-3 w-52 rounded-xl border border-base-200 bg-base-100 p-2 font-medium shadow-xl"
+                    class="menu dropdown-content border-base-200 bg-base-100 z-1 mt-3 w-52 rounded-xl border p-2 font-medium shadow-xl"
                   >
                     {#each myTeams as team (team.id)}
                       <li>
@@ -723,7 +723,7 @@
       {/if}
 
       {#if eventMaterielStore.error}
-        <div class="mt-4 alert alert-error">
+        <div class="alert alert-error mt-4">
           {eventMaterielStore.error}
         </div>
       {/if}

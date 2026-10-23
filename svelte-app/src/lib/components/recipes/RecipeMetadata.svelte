@@ -10,7 +10,7 @@
   let { auteur, createdBy, id, createdAt, updatedAt }: Props = $props();
 </script>
 
-<div class="mt-12 rounded-box bg-base-200 p-6 text-sm opacity-60 print:hidden">
+<div class="rounded-box bg-base-200 mt-12 p-6 text-sm opacity-60 print:hidden">
   <div
     class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
   >

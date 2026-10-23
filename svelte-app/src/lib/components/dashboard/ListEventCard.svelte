@@ -20,14 +20,14 @@
 {#if loading}
   <!-- Skeleton loader -->
   <div class="space-y-6 py-4">
-    <div class="h-40 w-full skeleton rounded-lg"></div>
-    <div class="h-40 w-full skeleton rounded-lg"></div>
-    <div class="h-40 w-full skeleton rounded-lg"></div>
+    <div class="skeleton h-40 w-full rounded-lg"></div>
+    <div class="skeleton h-40 w-full rounded-lg"></div>
+    <div class="skeleton h-40 w-full rounded-lg"></div>
   </div>
 {:else if events.length === 0}
   <div class="py-6 text-center">
-    <Calendar size={32} class="mx-auto mb-3 text-base-content/20" />
-    <p class="mb-4 text-sm text-base-content/60">Aucun événement prévu</p>
+    <Calendar size={32} class="text-base-content/20 mx-auto mb-3" />
+    <p class="text-base-content/60 mb-4 text-sm">Aucun événement prévu</p>
   </div>
 {:else}
   <!-- Événements à venir -->

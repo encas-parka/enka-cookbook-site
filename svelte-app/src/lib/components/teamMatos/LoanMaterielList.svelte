@@ -17,20 +17,12 @@
   import {
     AlertTriangle,
     ChevronDown,
-    ChefHat,
-    Flame,
-    Hammer,
+    Info,
     Package,
     Plus,
     Search,
-    SoapDispenserDroplet,
-    Utensils,
-    Wrench,
     X,
-    Zap,
-    Info,
   } from "@lucide/svelte";
-  import type { Component } from "svelte";
   import CatalogItemRow from "./CatalogItemRow.svelte";
   import { globalState } from "$lib/stores/GlobalState.svelte";
   import type {
@@ -47,6 +39,7 @@
     groupMaterielsByType,
     loanTypeLabel,
   } from "$lib/utils/materiel-list.utils";
+  import { getMaterielTypeIcon } from "$lib/utils/materiel.utils";
 
   interface Props {
     /** Matériels vivants de l'équipe, dispo calculée sur la période. */
@@ -126,17 +119,6 @@
       .filter(([, qty]) => qty >= 1)
       .map(([id, qty]) => ({ id, name: nameById.get(id) ?? "", qty }));
   });
-
-  const typeIcons: Record<string, Component<any>> = {
-    cooking: ChefHat,
-    dish: Utensils,
-    gaz: Flame,
-    hygiene: SoapDispenserDroplet,
-    electronic: Zap,
-    manual: Wrench,
-    tools: Hammer,
-    other: Package,
-  };
 
   const segmentInlineOptions: {
     value: LoanListFilters["segment"];
@@ -405,7 +387,7 @@
     {/if}
 
     {#each filteredGroups as group (group.type)}
-      {@const TypeIcon = typeIcons[group.type] ?? Package}
+      {@const TypeIcon = getMaterielTypeIcon(group.type)}
       {@const selectedCount = group.items.filter(
         (m) => (quantities[m.id] ?? 0) >= 1,
       ).length}

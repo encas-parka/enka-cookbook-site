@@ -4,6 +4,7 @@
  */
 import type { MaterielTypeOptions } from "$lib/types/pb-generated";
 import type { EnrichedMateriel } from "$lib/types/materiel.types";
+import { MATERIEL_TYPE_ORDER } from "./materiel.utils";
 
 export type MaterielWithAvailability = EnrichedMateriel & {
   availableForPeriod?: number;
@@ -41,41 +42,36 @@ export interface MaterielGroup {
   items: MaterielWithAvailability[];
 }
 
-/** Ordre canonique d'affichage des sections par type. */
-const TYPE_ORDER: MaterielTypeOptions[] = [
-  "cooking",
-  "dish",
-  "gaz",
-  "hygiene",
-  "electronic",
-  "manual",
-  "tools",
-  "other",
-];
-
-/** Ordre canonique des types, exposé pour trier les facettes de la sidebar. */
-export const LOAN_TYPE_ORDER: string[] = [...TYPE_ORDER];
-
 function isAvailableForPeriod(m: MaterielWithAvailability): boolean {
   return (m.availableForPeriod ?? 0) > 0;
+}
+
+/**
+ * Regroupe des items par type dans l'ordre canonique (MATERIEL_TYPE_ORDER) ;
+ * les types inconnus partent dans « other », l'absence de type aussi.
+ */
+export function groupByTypeOrder<T>(
+  items: T[],
+  getType: (item: T) => string | null | undefined,
+): { type: string; items: T[] }[] {
+  const byType = new Map<string, T[]>();
+  for (const item of items) {
+    const raw = getType(item);
+    const type = raw && MATERIEL_TYPE_ORDER.includes(raw) ? raw : "other";
+    const list = byType.get(type) ?? [];
+    list.push(item);
+    byType.set(type, list);
+  }
+  return MATERIEL_TYPE_ORDER.filter((type) => byType.has(type)).map((type) => ({
+    type,
+    items: byType.get(type)!,
+  }));
 }
 
 export function groupMaterielsByType(
   items: MaterielWithAvailability[],
 ): MaterielGroup[] {
-  const byType = new Map<MaterielTypeOptions, MaterielWithAvailability[]>();
-  for (const item of items) {
-    const type = TYPE_ORDER.includes(item.type as MaterielTypeOptions)
-      ? (item.type as MaterielTypeOptions)
-      : "other";
-    const list = byType.get(type) ?? [];
-    list.push(item);
-    byType.set(type, list);
-  }
-  return TYPE_ORDER.filter((type) => byType.has(type)).map((type) => ({
-    type,
-    items: byType.get(type)!,
-  }));
+  return groupByTypeOrder(items, (m) => m.type) as MaterielGroup[];
 }
 
 interface FilterOptions {

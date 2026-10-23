@@ -85,7 +85,7 @@
       >
     {:else if badge !== undefined}
       <span class="badge flex-none badge-ghost badge-sm tabular-nums"
-        ><span class="opacity-70">dispo:</span> {badge}</span
+        >{badge} <span class="opacity-70">dispo.</span></span
       >
     {:else if hasExisting}
       <span class="badge flex-none badge-ghost badge-sm"

@@ -27,10 +27,12 @@
   import type { LoanSelectionSummary } from "$lib/components/teamMatos/loan/loan.types";
   import {
     EMPTY_LOAN_FILTERS,
-    LOAN_TYPE_ORDER,
     type LoanListFilters,
   } from "$lib/utils/materiel-list.utils";
-  import { getLoanStatusConfig } from "$lib/utils/materiel.utils";
+  import {
+    getLoanStatusConfig,
+    MATERIEL_TYPE_ORDER,
+  } from "$lib/utils/materiel.utils";
   import { formatDateDayMonthShort } from "$lib/utils/date-helpers";
   import { shareOrDownload, toSlug } from "$lib/utils/share-utils";
 
@@ -84,8 +86,8 @@
         present.add(m.type || "other");
       }
     }
-    return LOAN_TYPE_ORDER.filter((t) => present.has(t)).concat(
-      [...present].filter((t) => !LOAN_TYPE_ORDER.includes(t)).sort(),
+    return MATERIEL_TYPE_ORDER.filter((t) => present.has(t)).concat(
+      [...present].filter((t) => !MATERIEL_TYPE_ORDER.includes(t)).sort(),
     );
   });
 

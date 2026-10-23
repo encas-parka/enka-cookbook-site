@@ -40,21 +40,15 @@
   import LoanMaterielList from "../LoanMaterielList.svelte";
   import {
     AlertCircle,
-    Box,
     Calendar,
-    ChefHat,
-    Flame,
     Info,
     LoaderCircle,
     Package,
-    SoapDispenserDroplet,
     Sparkles,
     Trash2,
     User,
-    Utensils,
-    Wrench,
-    Zap,
   } from "@lucide/svelte";
+  import { getMaterielTypeIcon } from "$lib/utils/materiel.utils";
   import ConfirmModal from "../../ui/ConfirmModal.svelte";
   import type { Component } from "svelte";
   import type { LoanSelectionSummary, SelectedMateriel } from "./loan.types";
@@ -878,20 +872,7 @@
       {:else if mode === "edit" && isFrozen}
         <div class="space-y-2">
           {#each selectedMateriels as materiel (materiel.materielId)}
-            {@const TypeIcon =
-              materiel.type === "electronic"
-                ? Zap
-                : materiel.type === "manual"
-                  ? Wrench
-                  : materiel.type === "cooking"
-                    ? ChefHat
-                    : materiel.type === "dish"
-                      ? Utensils
-                      : materiel.type === "gaz"
-                        ? Flame
-                        : materiel.type === "hygiene"
-                          ? SoapDispenserDroplet
-                          : Box}
+            {@const TypeIcon = getMaterielTypeIcon(materiel.type)}
 
             <div class="rounded-lg bg-base-200 p-2">
               <div class="flex items-center gap-2">

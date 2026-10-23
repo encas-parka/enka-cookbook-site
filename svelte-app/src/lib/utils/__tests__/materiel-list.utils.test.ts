@@ -1,5 +1,6 @@
 import { describe, it, expect } from "vitest";
 import {
+  groupByTypeOrder,
   groupMaterielsByType,
   filterLoanMateriels,
   summarizeSelection,
@@ -47,6 +48,35 @@ describe("groupMaterielsByType", () => {
 
   it("renvoie un tableau vide pour une liste vide", () => {
     expect(groupMaterielsByType([])).toEqual([]);
+  });
+});
+
+describe("groupByTypeOrder", () => {
+  it("regroupe par type dans l'ordre canonique", () => {
+    const groups = groupByTypeOrder(
+      [
+        { t: "dish", n: "a" },
+        { t: "cooking", n: "b" },
+        { t: "dish", n: "c" },
+      ],
+      (i) => i.t,
+    );
+    expect(groups.map((g) => g.type)).toEqual(["cooking", "dish"]);
+    expect(groups[1].items.map((i) => i.n)).toEqual(["a", "c"]);
+  });
+
+  it("type inconnu ou absent : bascule dans 'other'", () => {
+    const groups = groupByTypeOrder(
+      [{ t: "mystere", n: "a" }, { n: "b" }],
+      (i) => i.t,
+    );
+    expect(groups).toHaveLength(1);
+    expect(groups[0].type).toBe("other");
+    expect(groups[0].items).toHaveLength(2);
+  });
+
+  it("liste vide : aucun groupe", () => {
+    expect(groupByTypeOrder([], () => null)).toEqual([]);
   });
 });
 

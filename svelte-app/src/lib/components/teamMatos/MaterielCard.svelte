@@ -1,25 +1,5 @@
 <script lang="ts">
-  import {
-    Package,
-    Wrench,
-    Zap,
-    ChefHat,
-    Box,
-    CheckCircle,
-    XCircle,
-    MapPin,
-    Edit,
-    Users,
-    AlertCircle,
-    Hand,
-    CalendarClock,
-    Share2,
-    Utensils,
-    SoapDispenserDroplet,
-    FireExtinguisher,
-    Flame,
-    Pencil,
-  } from "@lucide/svelte";
+  import { MapPin, Users, Pencil } from "@lucide/svelte";
   import type { EnrichedMateriel } from "$lib/types/materiel.types";
   import type { MaterielStatus } from "$lib/types/pb";
   import { globalState } from "$lib/stores/GlobalState.svelte";
@@ -27,10 +7,10 @@
   import { online } from "svelte/reactivity/window";
   import { formatDateDayMonthShort } from "$lib/utils/date-helpers";
   import {
-    getMaterielTypeLabel,
     getMaterielTypeBadgeClass,
     getMaterielTypeColorClass,
     getMaterielTypeBgClass,
+    getMaterielTypeIcon,
     getMaterielStatusLabel,
     getMaterielTypeConfig,
   } from "$lib/utils/materiel.utils";
@@ -42,27 +22,8 @@
 
   let { materiel, onEdit }: Props = $props();
 
-  // Icône du type
-  const TypeIcon = $derived.by(() => {
-    switch (materiel.type) {
-      case "electronic":
-        return Zap;
-      case "manual":
-        return Wrench;
-      case "cooking":
-        return ChefHat;
-      case "dish":
-        return Utensils;
-      case "gaz":
-        return Flame;
-      case "hygiene":
-        return SoapDispenserDroplet;
-
-      case "other":
-      default:
-        return Box;
-    }
-  });
+  // Icône du type — source unique (materiel.utils)
+  const TypeIcon = $derived(getMaterielTypeIcon(materiel.type));
 
   // Badge du type
 
@@ -139,7 +100,7 @@
   const truncatedDescription = $derived.by(() => {
     if (!materiel.description) return null;
     return materiel.description.length > 80
-      ? materiel.description.substring(0, 80) + "..."
+      ? materiel.description.substring(0, 80) + "…"
       : materiel.description;
   });
 </script>
@@ -217,7 +178,7 @@
             >
               {materiel.availableQuantity}/{materiel.quantity}
             </span>
-            <span class="ml-1 text-xs text-base-content/60">disp.</span>
+            <span class="ml-1 text-xs text-base-content/60">dispo.</span>
           </div>
 
           <!-- Info sur les prêts (si présent) -->

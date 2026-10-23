@@ -12,6 +12,32 @@ import type {
 } from "$lib/types/materiel.types";
 import type { Materiel } from "$lib/types/pb";
 import type { EventMaterielStatus } from "$lib/types/event-materiel.types";
+import {
+  Box,
+  ChefHat,
+  Flame,
+  Hammer,
+  SoapDispenserDroplet,
+  Utensils,
+  Wrench,
+  Zap,
+} from "@lucide/svelte";
+import type { Component } from "svelte";
+
+/**
+ * Ordre canonique d'affichage des types (groupes, facettes, tris) —
+ * source unique, partagée par l'inventaire et les emprunts.
+ */
+export const MATERIEL_TYPE_ORDER: string[] = [
+  "cooking",
+  "dish",
+  "gaz",
+  "hygiene",
+  "electronic",
+  "manual",
+  "tools",
+  "other",
+];
 
 export interface EventMaterielStatusConfig {
   label: string;
@@ -68,6 +94,8 @@ export interface MaterielTypeConfig {
   badgeClass: string;
   textColor: string; // Classe de couleur pour le texte (ex: "text-warning")
   bgColor: string; // Classe de fond (ex: "bg-warning/10")
+  /** Icône du type — source unique pour en-têtes, cards et rangées. */
+  icon: Component<any>;
 }
 
 /**
@@ -82,48 +110,56 @@ export function getMaterielTypeConfig(
       badgeClass: "badge-warning",
       textColor: "text-warning",
       bgColor: "bg-warning/10",
+      icon: Zap,
     },
     manual: {
       label: "Manuel",
       badgeClass: "badge-info",
       textColor: "text-info",
       bgColor: "bg-info/10",
+      icon: Wrench,
     },
     tools: {
       label: "Outils",
       badgeClass: "badge-secondary",
       textColor: "text-secondary",
       bgColor: "bg-secondary/10",
+      icon: Hammer,
     },
     dish: {
       label: "Vaisselle",
       badgeClass: "badge-primary",
       textColor: "text-primary",
       bgColor: "bg-primary/10",
+      icon: Utensils,
     },
     cooking: {
       label: "Cuisine",
       badgeClass: "badge-success",
       textColor: "text-success",
       bgColor: "bg-success/10",
+      icon: ChefHat,
     },
     gaz: {
       label: "Gaz",
       badgeClass: "badge-error",
       textColor: "text-error",
       bgColor: "bg-error/10",
+      icon: Flame,
     },
     hygiene: {
       label: "Hygiène",
       badgeClass: "badge-info",
       textColor: "text-info",
       bgColor: "bg-info/10",
+      icon: SoapDispenserDroplet,
     },
     other: {
       label: "Autre",
       badgeClass: "badge-neutral",
       textColor: "text-neutral",
       bgColor: "bg-neutral/10",
+      icon: Box,
     },
   };
 
@@ -187,6 +223,16 @@ export function getMaterielTypeBgClass(
   type: MaterielType | string | null | undefined,
 ): string {
   return getMaterielTypeConfig(type).bgColor;
+}
+
+/**
+ * Icône d'un type de matériel (composant Lucide) — remplace les quatre
+ * mappings locaux qui coexistaient (listes, cards, retours).
+ */
+export function getMaterielTypeIcon(
+  type: MaterielType | string | null | undefined,
+): Component<any> {
+  return getMaterielTypeConfig(type).icon;
 }
 
 /**

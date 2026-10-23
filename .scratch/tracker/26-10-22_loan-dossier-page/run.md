@@ -90,6 +90,45 @@ Retours utilisateur sur l'itération 2, appliqués :
 Vérifs : check 0/0, tests 355/355 (`/tmp/opencode/tests-loan-ui-2.log`),
 build OK, autofixer propre sur `LoanMaterielList`.
 
+## Itération 4 — cohérence UI des 4 surfaces (23-10)
+
+Analyse guidée par web-design-guidelines + ui-ux-pro-max, design discuté et
+acté en 2 tours (maquette interactive de la grammaire de retour). Le lot :
+
+- **Lot 1 — fondations** : `getMaterielTypeConfig` porte désormais l'icône
+  (4 mappings locaux supprimés ; `tools` → Hammer partout, était Box hors
+  inventaire) ; `MATERIEL_TYPE_ORDER` unique (fini l'ordre codé en dur de
+  l'inventaire) ; regroupement générique `groupByTypeOrder` ; vocabulaire
+  quantité « N/M dispo. » et « ×N » `tabular-nums`.
+- **Lot 2 — inventaire** : regroupé par type via le nouveau
+  `MaterielTypeGroup` (en-tête compact partagé ; desktop statique, mobile
+  accordéon mono-ouverture `openType` possédé par le parent, tout ouvert
+  quand filtres actifs) ; `MaterielCard` : affordance liée à `canEdit`,
+  un seul interactif (la card porte rôle+clavier, crayon décoratif
+  `tabindex="-1"`), imports morts et « ... » nettoyés.
+- **Lot 3 — fiche retour** (grammaire actée) : groupes tout dépliés,
+  badge d'avancement + « tout est ok » par groupe et « Tout est conforme »
+  global — ne touchent que les rangées pending ; qty=1 → trio exclusif
+  (actif plein) ; qty>1 → inputs Perdus/À réparer (divider dans le label,
+  focus = sélection totale, steppers masqués via `.qty-input` global
+  partagé avec CatalogItemRow) ; **restant OK calculé** (l'input « ok »
+  supprimé : cohérence garantie, la validation ne porte plus que sur
+  « chaque matériel est déclaré » — l'état d'erreur global disparaît) ;
+  retour anticipé → `ConfirmModal` (fini le modal artisanal « Bizarre ! ») ;
+  colonne de lecture `max-w-3xl` ; `mb-6` résiduel retiré.
+- **Lot 4 — fiche figée** : items groupés par type sur `LoanItemReadRow`
+  (icône colorée attenuée, « ×N »), même anatomie que le retour read-only.
+
+Grammaire d'icônes actée : pastille colorée = en-têtes de groupe + cards
+inventaire ; icône colorée attenuée = rangées de lecture ; pas d'icône =
+rangées de sélection (`CatalogItemRow`).
+
+Vérifs : check 0/0 (197 fichiers), tests 358/358
+(`/tmp/opencode/tests-loan-ui-3.log`), build OK, autofixer propre sur les
+nouveaux composants. Commits : `3bca5989`, `e3c31cb6`, `92f7e05b`,
+`44ce7852`. Backlog libellés mis à jour (ordre+icônes réglés, vocabulaire
+emprunt restant).
+
 ## Reste (click-through humain)
 
 - Parcours création → dossier → onglet Retour → export .md.

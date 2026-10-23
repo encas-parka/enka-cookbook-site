@@ -45,6 +45,7 @@ await store.setupRealtime(); // SSE → Dexie
 
 - Ordre du `<script>` : imports → types → `$props()` → `$state` → `$derived` → `$effect` → fonctions.
 - Icônes : `@lucide/svelte`, tailles `size-3` (12px) à `size-6` (24px).
+- Types de matériel : source unique `getMaterielTypeConfig` (label, badge, couleurs, **icône**) + `MATERIEL_TYPE_ORDER` — jamais de mapping local. Regroupement par type : `MaterielTypeGroup` (en-tête compact desktop statique / accordéon mobile à état `openType` possédé par le parent) ; rangées de lecture d'emprunt : `LoanItemReadRow`. Vocabulaire des libellés encore double côté emprunt (`loanTypeLabel`) — backlog libellés.
 - Opérations async post-modal : `toastService.track()` (`$lib/services/toast.service.svelte`).
 - Jamais copier de données store dans un état local — toujours `$derived`. Fichiers en kebab-case, stores en singletons importés directement.
 - Jamais un sync (ni une écriture Dexie) déclenché depuis un `$effect` qui lit aussi ces données : cycle lecture→écriture = boucle de sync (CreateLoanModal, 22-10). Déclencheurs valides : handler, `onMount`, orchestrateur `main.ts` — ou `untrack()` + garde d'ouverture si l'effet est le point d'entrée voulu. La fraîcheur en session vient du SSE et de l'orchestrateur de resync, pas des composants.

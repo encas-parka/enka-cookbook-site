@@ -129,6 +129,31 @@ nouveaux composants. Commits : `3bca5989`, `e3c31cb6`, `92f7e05b`,
 `44ce7852`. Backlog libellés mis à jour (ordre+icônes réglés, vocabulaire
 emprunt restant).
 
+## Itération 5 — la fiche retour fait vérifier (23-10)
+
+Retour utilisateur : la fiche doit **inciter à vérifier**, pas permettre un
+« oui oui » expéditif. Ajustements en deux tours de discussion :
+
+- Bouton global « Tout est conforme » **supprimé** (commenté puis retiré) ;
+- Le badge « ×N OK » calculé remplacé par un **bouton Ok manuel** dont le
+  label « Ok ×N » annonce ce qu'on atteste, recalculé en direct ; toute
+  édition d'input décoche ; N = 0 (tout perdu/cassé) → Ok désactivé, les
+  valeurs saisies sont la déclaration ; inputs toujours visibles ;
+- Trio qty=1 **toggle** (recliquer la valeur active la démarque — sinon Ok
+  disabled verrouillerait la rangée perdue) ; même modèle d'état que les
+  inputs (`okChecked` + valeurs, plus de champ `state`) ;
+- « tout est ok » de groupe passe en **ConfirmModal** (« Vous confirmez
+  avoir vérifié qu'il ne manque rien dans le groupe « X » ? » /
+  « Non, pas vraiment » / « Oui ») et n'atteste que les non déclarées ;
+- Ajustements UI utilisateur : pastille type masquée en mobile sur les
+  cards, groupes adoucis `bg-base-200/60`, ×N côté nom, inputs `w-8`,
+  grille 2-3 colonnes du figé (+ fix typo `grid-col-s-1`), retrait des
+  `badge-sm`/`input-sm` — **convention à discuter et documenter dans
+  `docs/`** (à venir).
+
+Vérifs : check 0/0, tests 358/358 (`/tmp/opencode/tests-loan-ui-4.log`),
+build OK. Commits : `81d4d649`, `8f661094`.
+
 ## Reste (click-through humain)
 
 - Parcours création → dossier → onglet Retour → export .md.

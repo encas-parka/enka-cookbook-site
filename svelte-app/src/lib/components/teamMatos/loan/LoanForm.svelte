@@ -36,8 +36,12 @@
     type GhostLoanItem,
     EMPTY_LOAN_FILTERS,
     type LoanListFilters,
+    groupByTypeOrder,
+    loanTypeLabel,
   } from "$lib/utils/materiel-list.utils";
   import LoanMaterielList from "../LoanMaterielList.svelte";
+  import MaterielTypeGroup from "../MaterielTypeGroup.svelte";
+  import LoanItemReadRow from "./LoanItemReadRow.svelte";
   import {
     AlertCircle,
     Calendar,
@@ -48,7 +52,6 @@
     Trash2,
     User,
   } from "@lucide/svelte";
-  import { getMaterielTypeIcon } from "$lib/utils/materiel.utils";
   import ConfirmModal from "../../ui/ConfirmModal.svelte";
   import type { Component } from "svelte";
   import type { LoanSelectionSummary, SelectedMateriel } from "./loan.types";
@@ -262,6 +265,11 @@
    * modification — l'historique doit refléter ce qui a réellement eu lieu.
    */
   const isFrozen = $derived(mode === "edit" && (isEndDatePast || loanReturned));
+
+  /** Réservation figée : items groupés par type (ordre canonique). */
+  const frozenGroups = $derived(
+    isFrozen ? groupByTypeOrder(selectedMateriels, (m) => m.type) : [],
+  );
 
   // Utilise allMaterielsWithAvailability pour avoir TOUS les matériels
   // (même ceux avec availableForPeriod === 0) afin de détecter les conflits partiels
@@ -870,25 +878,22 @@
           </span>
         </div>
       {:else if mode === "edit" && isFrozen}
-        <div class="space-y-2">
-          {#each selectedMateriels as materiel (materiel.materielId)}
-            {@const TypeIcon = getMaterielTypeIcon(materiel.type)}
-
-            <div class="rounded-lg bg-base-200 p-2">
-              <div class="flex items-center gap-2">
-                <div class="rounded bg-base-300 p-1">
-                  <TypeIcon class="h-4 w-4 opacity-70" />
-                </div>
-                <div class="flex min-w-0 flex-1 items-center gap-x-4 gap-y-1">
-                  <div class="truncate font-medium">
-                    {materiel.materielName}
-                  </div>
-                  <div class="text-xs opacity-70">
-                    × <span class="font-semibold">{materiel.quantity}</span>
-                  </div>
-                </div>
-              </div>
-            </div>
+        <!-- Lecture seule groupée : même anatomie que la fiche de retour -->
+        <div class="mx-auto max-w-3xl space-y-3">
+          {#each frozenGroups as group (group.type)}
+            <MaterielTypeGroup
+              type={group.type}
+              label={loanTypeLabel(group.type)}
+              count={group.items.length}
+            >
+              {#each group.items as materiel (materiel.materielId)}
+                <LoanItemReadRow
+                  name={materiel.materielName}
+                  quantity={materiel.quantity}
+                  type={materiel.type}
+                />
+              {/each}
+            </MaterielTypeGroup>
           {/each}
         </div>
       {:else if useFlat}

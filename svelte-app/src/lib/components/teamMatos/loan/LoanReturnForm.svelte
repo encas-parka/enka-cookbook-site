@@ -8,17 +8,20 @@
    * fournit l'emprunt, reçoit `onCompleted` et lit `valid` / `saving` /
    * `dirty`.
    *
-   * Grammaire de déclaration :
+   * Grammaire de déclaration — l'esprit : la fiche doit inciter à
+   * vérifier, pas permettre un « oui oui » expéditif :
    * - rangées groupées par type, tout déplié ; en-tête de groupe avec
-   *   badge d'avancement et raccourci « tout est ok » (ne touche que les
-   *   rangées non déclarées) ;
-   * - quantité 1 : trio de boutons À réparer / Perdu / Ok (actif plein) ;
-   * - quantité > 1 : saisies Perdus / À réparer (sélection au focus,
-   *   steppers masqués), le restant OK est calculé — jamais saisissable,
-   *   donc la somme est cohérente par construction ;
-   * - validation : chaque matériel est déclaré (plus de contrôle de
-   *   cohérence, garanti par le calcul) ;
-   * - bouton global « Tout est conforme » pour le cas nominal.
+   *   badge d'avancement et raccourci « tout est ok » qui passe par une
+   *   confirmation (« Vous confirmez avoir vérifié… ») et n'atteste que
+   *   les rangées non déclarées ;
+   * - chaque rangée porte ses valeurs (perdus, à réparer) et une
+   *   attestation « Ok » : le label « Ok ×N » annonce ce qu'on valide ;
+   *   toute édition décoche, et à N = 0 (tout perdu/cassé) Ok est
+   *   désactivé — les valeurs saisies sont alors la déclaration ;
+   * - quantité 1 : trio exclusif À réparer / Perdu / Ok, les
+   *   boutons-valeur se démarquent au second clic ;
+   * - validation : chaque matériel est déclaré (attesté, ou ne laissant
+   *   rien d'intact à attester).
    */
   import { untrack } from "svelte";
   import { toastService } from "$lib/services/toast.service.svelte";
@@ -34,6 +37,7 @@
   import { shareOrDownload, toSlug } from "$lib/utils/share-utils";
   import { formatDateDayMonthShort } from "$lib/utils/date-helpers";
   import { groupByTypeOrder } from "$lib/utils/materiel-list.utils";
+  import { getMaterielTypeConfig } from "$lib/utils/materiel.utils";
   import MaterielTypeGroup from "../MaterielTypeGroup.svelte";
   import LoanItemReadRow from "./LoanItemReadRow.svelte";
   import ConfirmModal from "../../ui/ConfirmModal.svelte";
@@ -46,8 +50,11 @@
     quantity: number;
     lostQuantity: number;
     brokenQuantity: number;
-    /** Déclaration de l'utilisateur : pending = pas encore exprimée. */
-    state: "pending" | "ok" | "issues";
+    /**
+     * Attestation « vérifié » de l'utilisateur — distincte des valeurs
+     * saisies : toute édition d'input la décoche.
+     */
+    okChecked: boolean;
   }
 
   interface Props {
@@ -78,6 +85,8 @@
   let returnNotes = $state("");
   let returnedAt = $state<string | null>(null);
   let materielsReturns = $state<ReturnRow[]>([]);
+  /** Groupe en cours d'attestation via le raccourci « tout est ok ». */
+  let confirmGroup = $state<{ type: string; rows: ReturnRow[] } | null>(null);
 
   // Init : une fois par (emprunt, statut). Rejouer l'init à chaque mise à jour
   // du store effacerait les déclarations en cours de saisie.
@@ -107,7 +116,7 @@
           quantity: item.quantity,
           lostQuantity: lost,
           brokenQuantity: broken,
-          state: lost > 0 || broken > 0 ? ("issues" as const) : ("ok" as const),
+          okChecked: true,
         };
       }
 
@@ -118,7 +127,7 @@
         quantity: item.quantity,
         lostQuantity: 0,
         brokenQuantity: 0,
-        state: "pending" as const,
+        okChecked: false,
       };
     });
 
@@ -134,7 +143,7 @@
     return JSON.stringify({
       notes: returnNotes,
       items: materielsReturns.map((item) => [
-        item.state,
+        item.okChecked,
         item.lostQuantity,
         item.brokenQuantity,
       ]),
@@ -153,11 +162,25 @@
     groupByTypeOrder(materielsReturns, (r) => r.materielType),
   );
 
-  const pendingCount = $derived(
-    materielsReturns.filter((item) => item.state === "pending").length,
+  /** Restant intact de la rangée, recalculé en direct. */
+  function remainingOf(item: ReturnRow): number {
+    return item.quantity - item.lostQuantity - item.brokenQuantity;
+  }
+
+  /**
+   * Rangée déclarée : attestée par l'utilisateur, ou ne laissant rien
+   * d'intact à attester — quand tout est perdu/à réparer, les valeurs
+   * saisies sont elles-mêmes la déclaration.
+   */
+  function isRowDeclared(item: ReturnRow): boolean {
+    return item.okChecked || remainingOf(item) === 0;
+  }
+
+  const undeclaredCount = $derived(
+    materielsReturns.filter((item) => !isRowDeclared(item)).length,
   );
 
-  const isValid = $derived(pendingCount === 0);
+  const isValid = $derived(undeclaredCount === 0);
 
   $effect(() => {
     valid = isValid;
@@ -165,23 +188,34 @@
 
   // --- Déclarations ---
 
-  /** Trio quantité 1 : un seul état actif à la fois. */
+  /**
+   * Trio quantité 1 : les boutons-valeur sont des toggles (recliquer la
+   * valeur active la démarque) ; Ok remet la rangée entière intacte et
+   * l'atteste d'un geste.
+   */
   function setTri(item: ReturnRow, kind: "ok" | "lost" | "broken") {
     if (kind === "ok") {
-      item.state = "ok";
       item.lostQuantity = 0;
       item.brokenQuantity = 0;
+      item.okChecked = true;
       return;
     }
-    item.state = "issues";
-    item.lostQuantity = kind === "lost" ? 1 : 0;
-    item.brokenQuantity = kind === "broken" ? 1 : 0;
+    const active =
+      kind === "lost" ? item.lostQuantity > 0 : item.brokenQuantity > 0;
+    if (active) {
+      if (kind === "lost") item.lostQuantity = 0;
+      else item.brokenQuantity = 0;
+      return;
+    }
+    if (kind === "lost") item.lostQuantity = 1;
+    else item.brokenQuantity = 1;
+    item.okChecked = false;
   }
 
   /**
    * Saisie quantité > 1 : borne la valeur pour que perdu + à réparer ne
-   * dépasse pas la quantité empruntée ; à zéro la rangée redevient à
-   * déclarer. Le restant OK est calculé à l'affichage.
+   * dépasse pas la quantité empruntée, et décoche l'attestation — elle
+   * porte sur les valeurs courantes, toute édition l'invalide.
    */
   function onQty(item: ReturnRow, which: "lost" | "broken", value: number) {
     const parsed = Number.isNaN(value) ? 0 : Math.max(0, value);
@@ -189,20 +223,14 @@
     const capped = Math.min(parsed, item.quantity - other);
     if (which === "lost") item.lostQuantity = capped;
     else item.brokenQuantity = capped;
-    item.state =
-      item.lostQuantity + item.brokenQuantity > 0 ? "issues" : "pending";
+    item.okChecked = false;
   }
 
-  /** Raccourci groupe/global : ne touche que les rangées non déclarées. */
+  /** Raccourci de groupe : n'atteste que les rangées non déclarées. */
   function markRowsOk(rows: ReturnRow[]) {
     for (const row of rows) {
-      if (row.state === "pending") row.state = "ok";
+      if (!isRowDeclared(row)) row.okChecked = true;
     }
-  }
-
-  /** Reprendre la saisie sur une rangée déclarée ok. */
-  function reopen(item: ReturnRow) {
-    item.state = "pending";
   }
 
   // --- Validation du retour ---
@@ -305,23 +333,6 @@
         <Package class="h-5 w-5" />
         Matériels empruntés
       </h2>
-      {#if !isReadOnly}
-        {#if pendingCount > 0}
-          <button
-            class="btn btn-outline btn-sm btn-success"
-            onclick={() => markRowsOk(materielsReturns)}
-            title="Déclarer conformes toutes les rangées non déclarées"
-          >
-            <Check class="h-4 w-4" />
-            Tout est conforme
-          </button>
-        {:else}
-          <span class="badge gap-1 badge-sm badge-success">
-            <Check class="h-3 w-3" />
-            Conforme
-          </span>
-        {/if}
-      {/if}
     </div>
 
     <!-- Groupes par type, tout déplié (lecture comme déclaration) -->
@@ -330,22 +341,21 @@
         <MaterielTypeGroup type={group.type} count={group.items.length}>
           {#snippet headerRight()}
             {#if !isReadOnly}
-              {@const pending = group.items.filter(
-                (item) => item.state === "pending",
+              {@const undeclared = group.items.filter(
+                (item) => !isRowDeclared(item),
               ).length}
-              {#if pending === 0}
-                <span class="badge gap-1 badge-sm badge-success">
+              {#if undeclared === 0}
+                <span class="badge gap-1 badge-success">
                   <Check class="h-3 w-3" />
                   Conforme
                 </span>
               {:else}
-                <span class="badge badge-sm badge-warning"
-                  >{pending} à déclarer</span
-                >
+                <span class="badge badge-warning">{undeclared} à déclarer</span>
                 <button
-                  class="btn btn-ghost text-success btn-xs"
-                  onclick={() => markRowsOk(group.items)}
-                  title="Déclarer conformes les rangées non déclarées du groupe"
+                  class="btn ms-auto btn-ghost text-success btn-sm"
+                  onclick={() =>
+                    (confirmGroup = { type: group.type, rows: group.items })}
+                  title="Attester les rangées non déclarées du groupe"
                 >
                   <Check class="h-3 w-3" />
                   tout est ok
@@ -363,19 +373,19 @@
               {#if isReadOnly}
                 <!-- Lecture seule : l'état enregistré en badges -->
                 {#if item.brokenQuantity > 0}
-                  <div class="badge gap-1 badge-sm badge-warning">
+                  <div class="badge gap-1 badge-warning">
                     <AlertTriangle class="h-3 w-3" />
                     À réparer : {item.brokenQuantity}
                   </div>
                 {/if}
                 {#if item.lostQuantity > 0}
-                  <div class="badge gap-1 badge-sm badge-error">
+                  <div class="badge gap-1 badge-error">
                     <X class="h-3 w-3" />
                     Perdu : {item.lostQuantity}
                   </div>
                 {/if}
                 {#if item.quantity - item.lostQuantity - item.brokenQuantity > 0}
-                  <div class="badge gap-1 badge-sm badge-success">
+                  <div class="badge gap-1 badge-success">
                     <Check class="h-3 w-3" />
                     OK : {item.quantity -
                       item.lostQuantity -
@@ -383,7 +393,8 @@
                   </div>
                 {/if}
               {:else if item.quantity === 1}
-                <!-- Trio exclusif : actif plein, inactif outline -->
+                <!-- Trio exclusif : actif plein, inactif outline ; les
+                     boutons-valeur se démarquent au second clic -->
                 <div class="flex flex-wrap items-center gap-1">
                   <button
                     class="btn btn-sm {item.brokenQuantity > 0
@@ -408,41 +419,31 @@
                     Perdu
                   </button>
                   <button
-                    class="btn btn-sm {item.state === 'ok'
+                    class="btn btn-sm {item.okChecked
                       ? 'btn-success'
                       : 'btn-outline btn-success'}"
                     type="button"
                     aria-label="Ok"
+                    disabled={remainingOf(item) === 0}
                     onclick={() => setTri(item, "ok")}
                   >
                     <Check class="h-4 w-4" />
                     Ok
                   </button>
                 </div>
-              {:else if item.state === "ok"}
-                <div class="flex items-center gap-1">
-                  <span class="badge badge-sm tabular-nums badge-success"
-                    >×{item.quantity} OK</span
-                  >
-                  <button
-                    class="btn btn-ghost btn-xs"
-                    type="button"
-                    onclick={() => reopen(item)}
-                  >
-                    modifier
-                  </button>
-                </div>
               {:else}
-                <!-- Saisie : sélection au focus (frappe = remplacement),
-                     steppers masqués (.qty-input), restant OK calculé -->
-                <div class="flex flex-wrap items-center gap-2">
-                  <label class="input input-sm">
+                <!-- Saisie toujours visible : sélection au focus (frappe =
+                     remplacement), steppers masqués (.qty-input). Le bouton
+                     Ok atteste les restants intacts — son label suit les
+                     saisies, toute édition le décoche. -->
+                <div class="ms-auto flex items-center gap-2">
+                  <label class="input">
                     <span class="label border-r border-base-300 pr-2"
                       >Perdus</span
                     >
                     <input
                       type="number"
-                      class="qty-input w-12 text-center font-semibold tabular-nums"
+                      class="qty-input w-8 text-center font-semibold tabular-nums"
                       inputmode="numeric"
                       autocomplete="off"
                       min="0"
@@ -454,13 +455,13 @@
                         onQty(item, "lost", parseInt(e.currentTarget.value))}
                     />
                   </label>
-                  <label class="input input-sm">
+                  <label class="input">
                     <span class="label border-r border-base-300 pr-2"
                       >À réparer</span
                     >
                     <input
                       type="number"
-                      class="qty-input w-12 text-center font-semibold tabular-nums"
+                      class="qty-input w-8 text-center font-semibold tabular-nums"
                       inputmode="numeric"
                       autocomplete="off"
                       min="0"
@@ -472,14 +473,20 @@
                         onQty(item, "broken", parseInt(e.currentTarget.value))}
                     />
                   </label>
-                  {#if item.quantity - item.lostQuantity - item.brokenQuantity > 0}
-                    <span class="badge badge-sm tabular-nums badge-success"
-                      >×{item.quantity -
-                        item.lostQuantity -
-                        item.brokenQuantity}
-                      OK</span
-                    >
-                  {/if}
+                  <button
+                    class="btn {item.okChecked
+                      ? 'btn-success'
+                      : 'btn-outline btn-success'}"
+                    type="button"
+                    disabled={remainingOf(item) === 0}
+                    onclick={() => (item.okChecked = true)}
+                    title={remainingOf(item) === 0
+                      ? "Rien d'intact à attester dans cette rangée"
+                      : `Attester les ${remainingOf(item)} restant(s) intact(s)`}
+                  >
+                    <Check class="h-4 w-4" />
+                    Ok{remainingOf(item) > 0 ? ` ×${remainingOf(item)}` : ""}
+                  </button>
                 </div>
               {/if}
             </LoanItemReadRow>
@@ -488,11 +495,11 @@
       {/each}
     </div>
 
-    {#if !isReadOnly && pendingCount > 0}
+    {#if !isReadOnly && undeclaredCount > 0}
       <p class="mt-3 text-sm text-base-content/70">
-        {pendingCount}
-        matériel{pendingCount > 1 ? "s" : ""} à déclarer : indiquez l'état de chaque
-        matériel (OK, à réparer ou perdu).
+        {undeclaredCount}
+        matériel{undeclaredCount > 1 ? "s" : ""} à déclarer : saisissez les quantités
+        perdues / à réparer, puis attestez le restant avec « Ok ».
       </p>
     {/if}
 
@@ -532,5 +539,23 @@
     confirmLabel="Confirmer le retour"
     onConfirm={confirmSubmit}
     onCancel={() => (showEarlyReturnModal = false)}
+  />
+{/if}
+
+<!-- Attestation groupée : un geste conscient par type -->
+{#if confirmGroup}
+  <ConfirmModal
+    isOpen={!!confirmGroup}
+    title="Vérification du groupe"
+    message={`Vous confirmez avoir vérifié qu'il ne manque rien dans le groupe « ${getMaterielTypeConfig(confirmGroup.type).label} » ?`}
+    variant="warning"
+    confirmLabel="Oui"
+    cancelLabel="Non, pas vraiment"
+    onConfirm={() => {
+      if (!confirmGroup) return;
+      markRowsOk(confirmGroup.rows);
+      confirmGroup = null;
+    }}
+    onCancel={() => (confirmGroup = null)}
   />
 {/if}

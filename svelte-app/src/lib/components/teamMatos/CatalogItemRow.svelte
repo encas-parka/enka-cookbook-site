@@ -139,7 +139,7 @@
         const v = parseInt(e.currentTarget.value);
         if (!isNaN(v) && v >= 0) onchange(v);
       }}
-      class="quantity-input input scroll-mt-40 {size === 'md'
+      class="qty-input input scroll-mt-40 {size === 'md'
         ? 'w-16 input-md'
         : 'w-14 input-xs'} text-center font-semibold tabular-nums {isActive
         ? 'input-primary'
@@ -170,16 +170,3 @@
     {/if}
   </div>
 </div>
-
-<style>
-  .quantity-input::-webkit-inner-spin-button,
-  .quantity-input::-webkit-outer-spin-button {
-    -webkit-appearance: none;
-    appearance: none;
-    margin: 0;
-  }
-  .quantity-input {
-    -moz-appearance: textfield;
-    appearance: textfield;
-  }
-</style>

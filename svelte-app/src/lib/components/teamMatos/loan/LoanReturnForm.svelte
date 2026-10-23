@@ -1,12 +1,24 @@
 <script lang="ts">
   /**
-   * Fiche de retour d'un emprunt : déclaration de l'état de chaque matériel
-   * (ok / à réparer / perdu), notes de retour et validation.
+   * Fiche de retour d'un emprunt : déclaration de l'état de chaque
+   * matériel (ok / à réparer / perdu), notes de retour et validation.
    *
-   * Cœur sans chrome : la page dossier (onglet Retour) est son enveloppe et
-   * déclenche `submit()` / `exportSheet()` depuis la navbar. Le parent
+   * Cœur sans chrome : la page dossier (onglet Retour) est son enveloppe
+   * et déclenche `submit()` / `exportSheet()` depuis la navbar. Le parent
    * fournit l'emprunt, reçoit `onCompleted` et lit `valid` / `saving` /
    * `dirty`.
+   *
+   * Grammaire de déclaration :
+   * - rangées groupées par type, tout déplié ; en-tête de groupe avec
+   *   badge d'avancement et raccourci « tout est ok » (ne touche que les
+   *   rangées non déclarées) ;
+   * - quantité 1 : trio de boutons À réparer / Perdu / Ok (actif plein) ;
+   * - quantité > 1 : saisies Perdus / À réparer (sélection au focus,
+   *   steppers masqués), le restant OK est calculé — jamais saisissable,
+   *   donc la somme est cohérente par construction ;
+   * - validation : chaque matériel est déclaré (plus de contrôle de
+   *   cohérence, garanti par le calcul) ;
+   * - bouton global « Tout est conforme » pour le cas nominal.
    */
   import { untrack } from "svelte";
   import { toastService } from "$lib/services/toast.service.svelte";
@@ -21,33 +33,21 @@
   } from "$lib/utils/loan-return-markdown";
   import { shareOrDownload, toSlug } from "$lib/utils/share-utils";
   import { formatDateDayMonthShort } from "$lib/utils/date-helpers";
-  import {
-    getMaterielTypeBgClass,
-    getMaterielTypeColorClass,
-  } from "$lib/utils/materiel.utils";
-  import {
-    AlertTriangle,
-    Box,
-    Check,
-    ChefHat,
-    Flame,
-    Package,
-    SoapDispenserDroplet,
-    Utensils,
-    Wrench,
-    X,
-    Zap,
-  } from "@lucide/svelte";
+  import { groupByTypeOrder } from "$lib/utils/materiel-list.utils";
+  import MaterielTypeGroup from "../MaterielTypeGroup.svelte";
+  import LoanItemReadRow from "./LoanItemReadRow.svelte";
+  import ConfirmModal from "../../ui/ConfirmModal.svelte";
+  import { AlertTriangle, Check, Package, X } from "@lucide/svelte";
 
   interface ReturnRow {
     materielId: string;
     materielName: string;
-    materielType: string | null; // Type du matériel
+    materielType: string | null;
     quantity: number;
     lostQuantity: number;
     brokenQuantity: number;
-    okQuantity: number;
-    state: "pending" | "ok" | "issues"; // État déclaratif de l'utilisateur
+    /** Déclaration de l'utilisateur : pending = pas encore exprimée. */
+    state: "pending" | "ok" | "issues";
   }
 
   interface Props {
@@ -57,7 +57,7 @@
     onCompleted?: () => void;
     /** Le prêt est déjà clôturé : la fiche est en lecture seule. */
     isReadOnly?: boolean;
-    /** La saisie est-elle complète et cohérente ? */
+    /** La déclaration est-elle complète ? */
     valid?: boolean;
     /** Enregistrement en cours (état du bouton de l'enveloppe). */
     saving?: boolean;
@@ -74,11 +74,10 @@
     dirty = $bindable(false),
   }: Props = $props();
 
-  let showEarlyReturnModal = $state(false); // Confirmation de retour anticipé
+  let showEarlyReturnModal = $state(false);
   let returnNotes = $state("");
   let returnedAt = $state<string | null>(null);
   let materielsReturns = $state<ReturnRow[]>([]);
-  let error = $state("");
 
   // Init : une fois par (emprunt, statut). Rejouer l'init à chaque mise à jour
   // du store effacerait les déclarations en cours de saisie.
@@ -108,8 +107,7 @@
           quantity: item.quantity,
           lostQuantity: lost,
           brokenQuantity: broken,
-          okQuantity: item.quantity - lost - broken,
-          state: lost > 0 || broken > 0 ? "issues" : "ok",
+          state: lost > 0 || broken > 0 ? ("issues" as const) : ("ok" as const),
         };
       }
 
@@ -120,7 +118,6 @@
         quantity: item.quantity,
         lostQuantity: 0,
         brokenQuantity: 0,
-        okQuantity: item.quantity,
         state: "pending" as const,
       };
     });
@@ -140,7 +137,6 @@
         item.state,
         item.lostQuantity,
         item.brokenQuantity,
-        item.okQuantity,
       ]),
     });
   }
@@ -151,59 +147,63 @@
     dirty = isDirty;
   });
 
-  // Icône du type de matériel
-  function getTypeIcon(type: string | null | undefined) {
-    switch (type) {
-      case "electronic":
-        return Zap;
-      case "manual":
-        return Wrench;
-      case "cooking":
-        return ChefHat;
-      case "dish":
-        return Utensils;
-      case "gaz":
-        return Flame;
-      case "hygiene":
-        return SoapDispenserDroplet;
-      case "other":
-      default:
-        return Box;
-    }
-  }
+  // --- Regroupement et validation ---
 
-  // Recalcule les quantités OK
-  function updateQuantities(index: number) {
-    const item = materielsReturns[index];
-    const totalLost = item.lostQuantity;
-    const totalBroken = item.brokenQuantity;
-    item.okQuantity = item.quantity - totalLost - totalBroken;
-    (item.lostQuantity > 0 || item.brokenQuantity > 0) &&
-      (item.state = "issues");
-  }
-
-  // Sommes cohérentes : perdu + cassé + ok = quantité empruntée
-  const quantitiesConsistent = $derived(
-    materielsReturns.every(
-      (item) =>
-        item.lostQuantity + item.brokenQuantity + item.okQuantity ===
-        item.quantity,
-    ),
+  const groupedReturns = $derived(
+    groupByTypeOrder(materielsReturns, (r) => r.materielType),
   );
 
-  // Chaque matériel doit avoir été déclaré
-  const allDeclared = $derived(
-    materielsReturns.every((item) => item.state !== "pending"),
+  const pendingCount = $derived(
+    materielsReturns.filter((item) => item.state === "pending").length,
   );
 
-  const isValid = $derived(quantitiesConsistent && allDeclared);
+  const isValid = $derived(pendingCount === 0);
 
   $effect(() => {
     valid = isValid;
-    error = quantitiesConsistent
-      ? ""
-      : "erreur, veuillez vérifez le formulaire ";
   });
+
+  // --- Déclarations ---
+
+  /** Trio quantité 1 : un seul état actif à la fois. */
+  function setTri(item: ReturnRow, kind: "ok" | "lost" | "broken") {
+    if (kind === "ok") {
+      item.state = "ok";
+      item.lostQuantity = 0;
+      item.brokenQuantity = 0;
+      return;
+    }
+    item.state = "issues";
+    item.lostQuantity = kind === "lost" ? 1 : 0;
+    item.brokenQuantity = kind === "broken" ? 1 : 0;
+  }
+
+  /**
+   * Saisie quantité > 1 : borne la valeur pour que perdu + à réparer ne
+   * dépasse pas la quantité empruntée ; à zéro la rangée redevient à
+   * déclarer. Le restant OK est calculé à l'affichage.
+   */
+  function onQty(item: ReturnRow, which: "lost" | "broken", value: number) {
+    const parsed = Number.isNaN(value) ? 0 : Math.max(0, value);
+    const other = which === "lost" ? item.brokenQuantity : item.lostQuantity;
+    const capped = Math.min(parsed, item.quantity - other);
+    if (which === "lost") item.lostQuantity = capped;
+    else item.brokenQuantity = capped;
+    item.state =
+      item.lostQuantity + item.brokenQuantity > 0 ? "issues" : "pending";
+  }
+
+  /** Raccourci groupe/global : ne touche que les rangées non déclarées. */
+  function markRowsOk(rows: ReturnRow[]) {
+    for (const row of rows) {
+      if (row.state === "pending") row.state = "ok";
+    }
+  }
+
+  /** Reprendre la saisie sur une rangée déclarée ok. */
+  function reopen(item: ReturnRow) {
+    item.state = "pending";
+  }
 
   // --- Validation du retour ---
 
@@ -222,7 +222,6 @@
       confirmSubmit();
     }
   }
-
   // Confirmer et envoyer le retour
   async function confirmSubmit() {
     showEarlyReturnModal = false;
@@ -289,10 +288,10 @@
   }
 </script>
 
-<div class="card mb-6 bg-base-100 shadow-sm max-sm:card-xs">
+<div class="card mx-auto max-w-3xl bg-base-100 shadow-sm max-sm:card-xs">
   <div class="card-body">
     {#if isReadOnly && returnedAt}
-      <div class="mb-4 alert alert-info max-md:alert-vertical">
+      <div class="alert alert-info max-md:alert-vertical">
         <Package class="h-5 w-5" />
         <div>
           <div class="font-bold">Retour enregistré</div>
@@ -301,207 +300,204 @@
       </div>
     {/if}
 
-    <h2 class="mb-4 card-title">
-      <Package class="h-5 w-5" />
-      Matériels empruntés
-    </h2>
+    <div class="mb-4 flex flex-wrap items-center justify-between gap-2">
+      <h2 class="card-title">
+        <Package class="h-5 w-5" />
+        Matériels empruntés
+      </h2>
+      {#if !isReadOnly}
+        {#if pendingCount > 0}
+          <button
+            class="btn btn-outline btn-sm btn-success"
+            onclick={() => markRowsOk(materielsReturns)}
+            title="Déclarer conformes toutes les rangées non déclarées"
+          >
+            <Check class="h-4 w-4" />
+            Tout est conforme
+          </button>
+        {:else}
+          <span class="badge gap-1 badge-sm badge-success">
+            <Check class="h-3 w-3" />
+            Conforme
+          </span>
+        {/if}
+      {/if}
+    </div>
 
-    <!-- Liste des matériels -->
-    <div class="space-y-4">
-      {#each materielsReturns as item, index (index)}
-        {#snippet typeIcon(type)}
-          {@const Icon = getTypeIcon(type)}
-          <div class="{getMaterielTypeBgClass(type)} rounded-lg p-2">
-            <Icon class="{getMaterielTypeColorClass(type)} size-4 sm:size-5" />
-          </div>
-        {/snippet}
+    <!-- Groupes par type, tout déplié (lecture comme déclaration) -->
+    <div class="space-y-3">
+      {#each groupedReturns as group (group.type)}
+        <MaterielTypeGroup type={group.type} count={group.items.length}>
+          {#snippet headerRight()}
+            {#if !isReadOnly}
+              {@const pending = group.items.filter(
+                (item) => item.state === "pending",
+              ).length}
+              {#if pending === 0}
+                <span class="badge gap-1 badge-sm badge-success">
+                  <Check class="h-3 w-3" />
+                  Conforme
+                </span>
+              {:else}
+                <span class="badge badge-sm badge-warning"
+                  >{pending} à déclarer</span
+                >
+                <button
+                  class="btn btn-ghost text-success btn-xs"
+                  onclick={() => markRowsOk(group.items)}
+                  title="Déclarer conformes les rangées non déclarées du groupe"
+                >
+                  <Check class="h-3 w-3" />
+                  tout est ok
+                </button>
+              {/if}
+            {/if}
+          {/snippet}
 
-        <div
-          class="flex flex-wrap items-center justify-between rounded-box bg-base-200 px-2 py-1 sm:px-4"
-        >
-          <!-- Nom du matériel -->
-          <div class="mb-2 flex items-center gap-4">
-            {@render typeIcon(item.materielType)}
-            <div class="font-medium sm:text-base">{item.materielName}</div>
-            <div class="font-semibold opacity-70">({item.quantity})</div>
-          </div>
-
-          {#if item.quantity === 1}
-            {#if isReadOnly}
-              <!-- Mode lecture seule : afficher l'état -->
-              <div class="ms-auto flex items-center justify-end gap-6 p-2">
+          {#each group.items as item (item.materielId)}
+            <LoanItemReadRow
+              name={item.materielName}
+              quantity={item.quantity}
+              type={item.materielType}
+            >
+              {#if isReadOnly}
+                <!-- Lecture seule : l'état enregistré en badges -->
                 {#if item.brokenQuantity > 0}
-                  <div class="badge gap-2 badge-warning">
-                    <AlertTriangle class="h-4 w-4" />
+                  <div class="badge gap-1 badge-sm badge-warning">
+                    <AlertTriangle class="h-3 w-3" />
                     À réparer : {item.brokenQuantity}
                   </div>
                 {/if}
                 {#if item.lostQuantity > 0}
-                  <div class="badge gap-2 badge-error">
-                    <X class="h-4 w-4" />
+                  <div class="badge gap-1 badge-sm badge-error">
+                    <X class="h-3 w-3" />
                     Perdu : {item.lostQuantity}
                   </div>
                 {/if}
-                {#if item.okQuantity > 0}
-                  <div class="badge gap-2 badge-success">
-                    <Check class="h-4 w-4" />
-                    OK : {item.okQuantity}
+                {#if item.quantity - item.lostQuantity - item.brokenQuantity > 0}
+                  <div class="badge gap-1 badge-sm badge-success">
+                    <Check class="h-3 w-3" />
+                    OK : {item.quantity -
+                      item.lostQuantity -
+                      item.brokenQuantity}
                   </div>
                 {/if}
-              </div>
-            {:else}
-              <!-- Mode édition : boutons interactifs -->
-              <div
-                class="ms-auto flex flex-wrap items-center justify-end gap-6 p-2"
-              >
-                <button
-                  class="btn btn-sm btn-warning {item.brokenQuantity === 0 &&
-                    'btn-outline'}"
-                  class:ring-2={item.brokenQuantity > 0}
-                  class:ring-warning={item.brokenQuantity > 0}
-                  type="button"
-                  aria-label="À réparer"
-                  onclick={() => {
-                    item.state = "issues";
-                    item.lostQuantity = 0;
-                    item.brokenQuantity = 1;
-                    updateQuantities(index);
-                  }}
-                >
-                  <AlertTriangle class="h-4 w-4" /> à réparer
-                </button>
-                <button
-                  class="btn btn-error btn-sm {item.lostQuantity === 0 &&
-                    'btn-outline'}"
-                  class:ring-2={item.lostQuantity > 0}
-                  class:ring-error={item.lostQuantity > 0}
-                  type="button"
-                  aria-label="Perdu"
-                  onclick={() => {
-                    item.state = "issues";
-                    item.lostQuantity = 1;
-                    item.brokenQuantity = 0;
-                    updateQuantities(index);
-                  }}
-                >
-                  <X class="h-4 w-4" />
-                  perdu
-                </button>
-                <button
-                  class="btn btn-circle btn-sm btn-success {item.state !==
-                    'ok' && 'btn-outline'}"
-                  type="button"
-                  aria-label="Tout OK"
-                  onclick={() => {
-                    item.state = "ok";
-                    item.lostQuantity = 0;
-                    item.brokenQuantity = 0;
-                    updateQuantities(index);
-                  }}
-                >
-                  <Check class="" />
-                </button>
-              </div>
-            {/if}
-          {:else}
-            {#if isReadOnly}
-              <!-- Mode lecture seule : afficher les quantités -->
-              <div class="ms-auto flex flex-wrap justify-end gap-4">
-                {#if item.brokenQuantity > 0}
-                  <div class="badge gap-2 badge-warning">
-                    <AlertTriangle class="h-4 w-4" />
-                    À réparer : {item.brokenQuantity}
-                  </div>
-                {/if}
-                {#if item.lostQuantity > 0}
-                  <div class="badge gap-2 badge-error">
-                    <X class="h-4 w-4" />
-                    Perdus : {item.lostQuantity}
-                  </div>
-                {/if}
-                {#if item.okQuantity > 0}
-                  <div class="badge gap-2 badge-success">
-                    <Check class="h-4 w-4" />
-                    OK : {item.okQuantity}
-                  </div>
-                {/if}
-              </div>
-            {:else}
-              <!-- Mode édition : inputs interactifs -->
-              <div class="flex flex-wrap gap-4">
-                <div class="min-w-[140px]">
-                  <label class="input">
-                    <span class="label-text">À réparer</span>
-                    <input
-                      type="number"
-                      class=" w-full input-sm"
-                      aria-label="Marquer comme à réparer"
-                      min={0}
-                      max={item.quantity}
-                      bind:value={item.brokenQuantity}
-                      onchange={() => updateQuantities(index)}
-                    />
-                  </label>
-                </div>
-                <div class="min-w-[140px]">
-                  <label class="input w-full">
-                    <span class="label-text">Perdus</span>
-                    <input
-                      type="number"
-                      class=""
-                      min={0}
-                      max={item.quantity}
-                      bind:value={item.lostQuantity}
-                      onchange={() => updateQuantities(index)}
-                    />
-                  </label>
-                </div>
-
-                {#if item.lostQuantity > 0 || item.brokenQuantity > 0}
-                  <div class="min-w-[100px]">
-                    <label class="input w-full">
-                      <span class="label-text">ok</span>
-                      <input
-                        type="number"
-                        class=""
-                        min={0}
-                        max={item.quantity}
-                        bind:value={item.okQuantity}
-                        onchange={() => {
-                          // Recalculer en fonction de lost/broken
-                          const totalLost = item.lostQuantity;
-                          const totalBroken = item.brokenQuantity;
-                          item.state = "issues";
-                          item.okQuantity = Math.min(
-                            item.quantity - totalLost - totalBroken,
-                            item.okQuantity,
-                          );
-                        }}
-                      />
-                    </label>
-                  </div>
-                {:else}
+              {:else if item.quantity === 1}
+                <!-- Trio exclusif : actif plein, inactif outline -->
+                <div class="flex flex-wrap items-center gap-1">
                   <button
-                    class="btn btn-success {item.state !== 'ok' &&
-                      'btn-outline'}"
-                    aria-label="Marquer comme ok"
-                    onclick={() => {
-                      item.state = "ok"; // ← Déclarer comme OK
-                      item.lostQuantity = 0;
-                      item.brokenQuantity = 0;
-                      updateQuantities(index);
-                    }}>tout est ok</button
+                    class="btn btn-sm {item.brokenQuantity > 0
+                      ? 'btn-warning'
+                      : 'btn-outline btn-warning'}"
+                    type="button"
+                    aria-label="À réparer"
+                    onclick={() => setTri(item, "broken")}
                   >
-                {/if}
-              </div>
-            {/if}
-          {/if}
-        </div>
+                    <AlertTriangle class="h-4 w-4" />
+                    À réparer
+                  </button>
+                  <button
+                    class="btn btn-sm {item.lostQuantity > 0
+                      ? 'btn-error'
+                      : 'btn-outline btn-error'}"
+                    type="button"
+                    aria-label="Perdu"
+                    onclick={() => setTri(item, "lost")}
+                  >
+                    <X class="h-4 w-4" />
+                    Perdu
+                  </button>
+                  <button
+                    class="btn btn-sm {item.state === 'ok'
+                      ? 'btn-success'
+                      : 'btn-outline btn-success'}"
+                    type="button"
+                    aria-label="Ok"
+                    onclick={() => setTri(item, "ok")}
+                  >
+                    <Check class="h-4 w-4" />
+                    Ok
+                  </button>
+                </div>
+              {:else if item.state === "ok"}
+                <div class="flex items-center gap-1">
+                  <span class="badge badge-sm tabular-nums badge-success"
+                    >×{item.quantity} OK</span
+                  >
+                  <button
+                    class="btn btn-ghost btn-xs"
+                    type="button"
+                    onclick={() => reopen(item)}
+                  >
+                    modifier
+                  </button>
+                </div>
+              {:else}
+                <!-- Saisie : sélection au focus (frappe = remplacement),
+                     steppers masqués (.qty-input), restant OK calculé -->
+                <div class="flex flex-wrap items-center gap-2">
+                  <label class="input input-sm">
+                    <span class="label border-r border-base-300 pr-2"
+                      >Perdus</span
+                    >
+                    <input
+                      type="number"
+                      class="qty-input w-12 text-center font-semibold tabular-nums"
+                      inputmode="numeric"
+                      autocomplete="off"
+                      min="0"
+                      max={item.quantity}
+                      value={item.lostQuantity}
+                      aria-label="Quantité perdue"
+                      onfocus={(e) => e.currentTarget.select()}
+                      oninput={(e) =>
+                        onQty(item, "lost", parseInt(e.currentTarget.value))}
+                    />
+                  </label>
+                  <label class="input input-sm">
+                    <span class="label border-r border-base-300 pr-2"
+                      >À réparer</span
+                    >
+                    <input
+                      type="number"
+                      class="qty-input w-12 text-center font-semibold tabular-nums"
+                      inputmode="numeric"
+                      autocomplete="off"
+                      min="0"
+                      max={item.quantity}
+                      value={item.brokenQuantity}
+                      aria-label="Quantité à réparer"
+                      onfocus={(e) => e.currentTarget.select()}
+                      oninput={(e) =>
+                        onQty(item, "broken", parseInt(e.currentTarget.value))}
+                    />
+                  </label>
+                  {#if item.quantity - item.lostQuantity - item.brokenQuantity > 0}
+                    <span class="badge badge-sm tabular-nums badge-success"
+                      >×{item.quantity -
+                        item.lostQuantity -
+                        item.brokenQuantity}
+                      OK</span
+                    >
+                  {/if}
+                </div>
+              {/if}
+            </LoanItemReadRow>
+          {/each}
+        </MaterielTypeGroup>
       {/each}
     </div>
 
+    {#if !isReadOnly && pendingCount > 0}
+      <p class="mt-3 text-sm text-base-content/70">
+        {pendingCount}
+        matériel{pendingCount > 1 ? "s" : ""} à déclarer : indiquez l'état de chaque
+        matériel (OK, à réparer ou perdu).
+      </p>
+    {/if}
+
     <!-- Notes de retour -->
-    <fieldset class="mt-6 fieldset bg-base-100">
+    <fieldset class="mt-4 fieldset bg-base-100">
       <legend class="fieldset-legend">Notes de retour (optionnel)</legend>
       {#if isReadOnly}
         <!-- Mode lecture seule -->
@@ -518,61 +514,23 @@
           class="textarea-bordered textarea w-full"
           rows="2"
           bind:value={returnNotes}
-          placeholder="Remarques sur l'état du matériel, problèmes constatés..."
+          placeholder="Remarques sur l'état du matériel, problèmes constatés…"
           maxlength="500"
           disabled={saving}></textarea>
       {/if}
     </fieldset>
   </div>
-  {#if error}
-    <div class="label text-error">
-      <span>{error}</span>
-    </div>
-  {/if}
 </div>
 
-<!-- Modal de confirmation pour retour anticipé -->
+<!-- Confirmation du retour anticipé -->
 {#if showEarlyReturnModal}
-  <div class="modal modal-open">
-    <div class="modal-box">
-      <p class="py-4">
-        Bizarre ! La date de fin de l'emprunt est prévue pour le{" "}
-        <strong>{formatDateDayMonthShort(loan.endDate)}</strong>. Vous êtes en
-        train d'effectuer le retour avant cette date.
-      </p>
-      <p class="pb-4">Vous confirmez ce retour anticipé ?</p>
-      <div class="modal-action">
-        <button
-          class="btn btn-ghost"
-          onclick={() => (showEarlyReturnModal = false)}
-          disabled={saving}
-        >
-          Annuler
-        </button>
-        <button
-          class="btn btn-warning"
-          onclick={confirmSubmit}
-          disabled={saving}
-        >
-          {#if saving}
-            <span class="loading loading-sm loading-spinner"></span>
-          {:else}
-            Confirmer le retour
-          {/if}
-        </button>
-      </div>
-    </div>
-    <div
-      class="modal-backdrop"
-      role="button"
-      tabindex="0"
-      onclick={() => (showEarlyReturnModal = false)}
-      onkeydown={(e) => {
-        if (e.key === "Enter" || e.key === "Escape") {
-          showEarlyReturnModal = false;
-        }
-      }}
-      aria-label="Fermer le modal"
-    ></div>
-  </div>
+  <ConfirmModal
+    isOpen={showEarlyReturnModal}
+    title="Retour anticipé"
+    message={`La date de fin de l'emprunt est prévue pour le ${formatDateDayMonthShort(loan.endDate)}. Vous confirmez ce retour anticipé ?`}
+    variant="warning"
+    confirmLabel="Confirmer le retour"
+    onConfirm={confirmSubmit}
+    onCancel={() => (showEarlyReturnModal = false)}
+  />
 {/if}

@@ -84,7 +84,7 @@
   {/if}
 {/snippet}
 
-<div class="rounded-lg border border-base-300 bg-base-200">
+<div class="rounded-lg border border-base-300 bg-base-200/60">
   {#if interactive}
     <button
       class="flex w-full items-center gap-2 p-3 text-left text-base font-semibold"

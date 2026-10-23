@@ -120,7 +120,7 @@
   }}
 >
   <!-- Image/Icon placeholder -->
-  <div class="flex items-center p-2 sm:pl-4">
+  <div class="flex items-center p-2 max-md:hidden">
     <div class="{getMaterielTypeBgClass(materiel.type)} rounded-lg p-1 sm:p-3">
       <TypeIcon
         class="{getMaterielTypeColorClass(materiel.type)} size-4 sm:size-6"

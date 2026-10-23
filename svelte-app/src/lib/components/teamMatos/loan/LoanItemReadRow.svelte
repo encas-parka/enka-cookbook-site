@@ -38,9 +38,9 @@
       class="size-5 shrink-0 opacity-70 {getMaterielTypeColorClass(type)}"
     />
     <span class="min-w-0 truncate text-base font-medium">{name}</span>
+    <span class="badge badge-ghost tabular-nums">×{quantity}</span>
   </div>
-  <div class="flex flex-wrap items-center gap-2">
-    <span class="badge badge-ghost badge-sm tabular-nums">×{quantity}</span>
+  <div class="ms-auto flex flex-wrap items-center gap-2">
     {@render children?.()}
   </div>
 </div>

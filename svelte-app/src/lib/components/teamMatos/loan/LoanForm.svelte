@@ -879,7 +879,11 @@
         </div>
       {:else if mode === "edit" && isFrozen}
         <!-- Lecture seule groupée : même anatomie que la fiche de retour -->
-        <div class="mx-auto max-w-3xl space-y-3">
+        <div
+          class="mx-auto space-y-3 {isFrozen
+            ? 'grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3'
+            : 'max-w-3xl'}"
+        >
           {#each frozenGroups as group (group.type)}
             <MaterielTypeGroup
               type={group.type}

@@ -334,16 +334,6 @@
         <span class="hidden md:inline">Recettes</span>
       </a>
     </div>
-
-    <!-- Back button (Keep if really needed by some specific page logic) -->
-    <!-- {#if navBarStore.backAction}
-      <button
-        class="btn btn-ghost btn-circle btn-sm ml-2"
-        onclick={navBarStore.backAction}
-      >
- <ChevronLeftIcon class="size-5" />
-      </button>
-    {/if} -->
   </div>
 
   <!-- navbar-center : onglet actif + dropdown des autres routes -->

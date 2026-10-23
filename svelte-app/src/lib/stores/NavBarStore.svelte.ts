@@ -2,7 +2,6 @@ import type { Snippet } from "svelte";
 
 export interface NavBarConfig {
   title?: string;
-  backAction?: () => void;
   actions?: Snippet;
   hasUnsavedChanges?: boolean;
   /** When true, the page manages its own LeftPanel layout (sticky) — HeaderNav should not apply ml-96 to EventTabs */
@@ -16,10 +15,6 @@ class NavBarStore {
 
   get title() {
     return this.#config.title || "ENKA Cookbook";
-  }
-
-  get backAction() {
-    return this.#config.backAction;
   }
 
   get actions() {

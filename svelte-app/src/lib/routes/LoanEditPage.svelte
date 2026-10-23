@@ -12,7 +12,7 @@
    * le drawer (mobile). Le formulaire vit dans `loan/LoanForm.svelte`, la
    * fiche de retour dans `loan/LoanReturnForm.svelte`.
    */
-  import { Check, Download, LoaderCircle, RotateCcw, X } from "@lucide/svelte";
+  import { Check, Download, LoaderCircle, RotateCcw } from "@lucide/svelte";
   import { fade } from "svelte/transition";
   import { navigate, route } from "$lib/router";
   import { materielStore } from "$lib/stores/MaterielStore.svelte";
@@ -24,6 +24,7 @@
   import LoanMaterielFilters from "$lib/components/teamMatos/loan/LoanMaterielFilters.svelte";
   import LeftPanel from "$lib/components/ui/LeftPanel.svelte";
   import UnsavedChangesGuard from "$lib/components/ui/UnsavedChangesGuard.svelte";
+  import PageBack from "$lib/components/ui/PageBack.svelte";
   import type { LoanSelectionSummary } from "$lib/components/teamMatos/loan/loan.types";
   import {
     EMPTY_LOAN_FILTERS,
@@ -181,15 +182,6 @@
 
 {#snippet navActions()}
   <div class="flex items-center gap-2">
-    <button
-      class="btn btn-ghost btn-sm"
-      onclick={goBack}
-      disabled={busy || returnSaving}
-      title="Revenir aux réservations"
-    >
-      <X class="h-4 w-4" />
-      <span class="hidden sm:inline">Annuler</span>
-    </button>
     {#if tab === "return" && loan}
       <button
         class="btn btn-circle btn-primary btn-sm"
@@ -203,7 +195,7 @@
         <button
           class="btn btn-primary btn-sm"
           onclick={() => returnForm?.submit()}
-          disabled={!returnValid || returnSaving}
+          disabled={!returnValid || returnSaving || !returnDirty}
         >
           {#if returnSaving}
             <span class="loading loading-sm loading-spinner"></span>
@@ -227,7 +219,7 @@
         <button
           class="btn btn-primary btn-sm"
           onclick={() => form?.submit()}
-          disabled={!valid || busy}
+          disabled={!valid || busy || (!isCreate && !dirty)}
         >
           {#if busy}
             <span class="loading loading-sm loading-spinner"></span>
@@ -269,6 +261,13 @@
     <!-- En-tête sobre : les gestes vivent dans la navbar -->
     <div class="mb-4">
       <div class="flex flex-wrap items-center gap-x-3 gap-y-1">
+        <!-- Geste retour conventionnel : parent canonique = liste des
+             réservations ; le guard de navigation confirme si dirty. -->
+        <PageBack
+          label="Retour aux réservations"
+          go={goBack}
+          disabled={busy || returnSaving}
+        />
         <h1 class="text-xl font-bold sm:text-2xl">
           {isCreate ? "Nouvelle réservation" : "Réservation de matériel"}
         </h1>

@@ -30,9 +30,10 @@ Un composant, posé dans la rangée du titre de la page :
 ```
 
 - **Tous breakpoints** : bouton icône seule (`ArrowLeft`, [PageBack.svelte](../svelte-app/src/lib/components/ui/PageBack.svelte))
-  à gauche du H1 — l'utilisateur voit ce qu'il regarde et l'action de sortie
-  au même endroit. `aria-label` + `title` = `label`, qui nomme la
-  destination (jamais « Retour » seul).
+  dans la rangée du titre quand la page en porte une, sinon en tête du
+  contenu — l'utilisateur voit ce qu'il regarde et l'action de sortie au
+  même endroit. `aria-label` + `title` = `label`, qui nomme la destination
+  (jamais « Retour » seul).
 - **La navbar ne porte jamais le geste** — ni desktop ni mobile : la barre
   est à densité figée et le bouton global poserait « retour vers où ? » ;
   seule la page connaît son parent.
@@ -45,9 +46,15 @@ Un composant, posé dans la rangée du titre de la page :
   contextuelles (ex. « Annuler la réservation ») restent près de leur
   contexte, dans la page.
 
-À migrer vers cette convention : `RecipeCreatePage`, `RecipeEditPage`,
-`CreateDocumentPage`, `EditDocumentPage` (les pages event tranchent par
-surface : drill-in interne → back, sinon chrome d'onglets suffit).
+À migrer vers cette convention : `LoanReturnPage` et `EventListPage`
+(retours ad-hoc à uniformiser ou retirer — `LoanReturnPage` est peut-être
+une route morte, doublon de l'onglet retour du dossier emprunt),
+`RecipeDetailPage` (consultation, secondaire). À trancher : `EventCreatePage`,
+`EventDocumentCreatePage`, `EventDocumentEditPage` (chrome event — drill-in
+interne → back, sinon chrome d'onglets suffit).
+
+Déjà migrées : `LoanEditPage`, `RecipeEditPage`, `RecipeCreatePage`,
+`CreateDocumentPage`, `EditDocumentPage`.
 
 ## Formulaires d'édition
 

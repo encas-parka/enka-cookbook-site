@@ -18,6 +18,7 @@
   import MarkdownEditorAdvanced from "$lib/components/MarkdownEditorAdvanced.svelte";
   import BtnGroupCheck from "$lib/components/ui/BtnGroupCheck.svelte";
   import UnsavedChangesGuard from "$lib/components/ui/UnsavedChangesGuard.svelte";
+  import PageBack from "$lib/components/ui/PageBack.svelte";
   import SvelteMarkdown from "@humanspeak/svelte-markdown";
   import { navBarStore } from "$lib/stores/NavBarStore.svelte";
   import { statusBarStore } from "$lib/stores/StatusBarStore.svelte";
@@ -478,6 +479,10 @@
     );
   }
 
+  function goBack(): void {
+    navigate(`/documents/${teamId}`);
+  }
+
   // ============================================================================
   // NAVBAR CONFIGURATION
   // ============================================================================
@@ -549,6 +554,10 @@
   tabindex="-1"
   transition:fade
 >
+  <div class="mb-3">
+    <PageBack label="Retour aux documents" go={goBack} disabled={isSaving} />
+  </div>
+
   <!-- Alertes -->
   {#if isLockedByOthers}
     <div class="alert alert-warning max-md:alert-vertical mb-4">

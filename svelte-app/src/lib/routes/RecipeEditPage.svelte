@@ -14,6 +14,7 @@
   import RecipePrepaForm from "$lib/components/recipeEdit/RecipePrepaForm.svelte";
   import RecipePermissionsManager from "$lib/components/recipeEdit/RecipePermissionsManager.svelte";
   import UnsavedChangesGuard from "$lib/components/ui/UnsavedChangesGuard.svelte";
+  import PageBack from "$lib/components/ui/PageBack.svelte";
   import RecipeMetadata from "$lib/components/recipes/RecipeMetadata.svelte";
   import ConfirmModal from "$lib/components/ui/ConfirmModal.svelte";
   import {
@@ -578,6 +579,14 @@
 <!-- ============================================================================ -->
 
 <div transition:fade class="max-w-9xl container mx-auto px-4 py-8">
+  <div class="mb-3">
+    <PageBack
+      label="Retour à la recette"
+      go={goBackToRecipe}
+      disabled={isSaving}
+    />
+  </div>
+
   {#if pageState === "gate"}
     <!-- Gate bloquant : aucun formulaire rendu sans verrou résolu en notre
          faveur — l'écrasement de modifications concurrentes est impossible
@@ -591,7 +600,6 @@
       <h2 class="text-lg font-bold">{gateTitle}</h2>
       <p class="text-base-content/70 max-w-md">{gateMessage}</p>
       <div class="mt-2 flex gap-2">
-        <button class="btn btn-ghost" onclick={goBackToRecipe}>Retour</button>
         {#if gateVariant === "released"}
           <button class="btn btn-primary" onclick={retryAcquisition}>
             Éditer

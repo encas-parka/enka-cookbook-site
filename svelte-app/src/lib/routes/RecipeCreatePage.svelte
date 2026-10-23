@@ -10,6 +10,7 @@
   import RecipePrepaForm from "$lib/components/recipeEdit/RecipePrepaForm.svelte";
   import RecipePermissionsManager from "$lib/components/recipeEdit/RecipePermissionsManager.svelte";
   import UnsavedChangesGuard from "$lib/components/ui/UnsavedChangesGuard.svelte";
+  import PageBack from "$lib/components/ui/PageBack.svelte";
   import {
     type RecipeFormState,
     type ValidationError,
@@ -201,6 +202,10 @@
       setTimeout(() => toastService.dismiss(toastId), 3000);
     }
   }
+
+  function goBack(): void {
+    navigate("/recipe");
+  }
 </script>
 
 <!-- ============================================================================ -->
@@ -227,6 +232,10 @@
 <!-- ============================================================================ -->
 
 <div class="max-w-9xl container mx-auto p-4 pb-20" in:fade>
+  <div class="mb-3">
+    <PageBack label="Retour aux recettes" go={goBack} disabled={isSaving} />
+  </div>
+
   {#if !loaded}
     <div class="flex items-center justify-center py-20">
       <div class="loading loading-lg loading-spinner"></div>

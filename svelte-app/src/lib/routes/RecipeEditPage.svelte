@@ -579,13 +579,11 @@
 <!-- ============================================================================ -->
 
 <div transition:fade class="max-w-9xl container mx-auto px-4 py-8">
-  <div class="mb-3">
-    <PageBack
-      label="Retour à la recette"
-      go={goBackToRecipe}
-      disabled={isSaving}
-    />
-  </div>
+  <PageBack
+    label="Retour à la recette"
+    go={goBackToRecipe}
+    disabled={isSaving}
+  />
 
   {#if pageState === "gate"}
     <!-- Gate bloquant : aucun formulaire rendu sans verrou résolu en notre

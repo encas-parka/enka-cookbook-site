@@ -258,16 +258,17 @@
   transition:fade
 >
   <div class="mx-auto max-w-7xl">
+    <!-- Geste retour conventionnel : parent canonique = liste des
+         réservations ; le guard de navigation confirme si dirty. -->
+    <PageBack
+      label="Retour aux réservations"
+      go={goBack}
+      disabled={busy || returnSaving}
+    />
+
     <!-- En-tête sobre : les gestes vivent dans la navbar -->
     <div class="mb-4">
       <div class="flex flex-wrap items-center gap-x-3 gap-y-1">
-        <!-- Geste retour conventionnel : parent canonique = liste des
-             réservations ; le guard de navigation confirme si dirty. -->
-        <PageBack
-          label="Retour aux réservations"
-          go={goBack}
-          disabled={busy || returnSaving}
-        />
         <h1 class="text-xl font-bold sm:text-2xl">
           {isCreate ? "Nouvelle réservation" : "Réservation de matériel"}
         </h1>

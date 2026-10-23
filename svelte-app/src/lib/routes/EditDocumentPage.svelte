@@ -554,9 +554,7 @@
   tabindex="-1"
   transition:fade
 >
-  <div class="mb-3">
-    <PageBack label="Retour aux documents" go={goBack} disabled={isSaving} />
-  </div>
+  <PageBack label="Retour aux documents" go={goBack} disabled={isSaving} />
 
   <!-- Alertes -->
   {#if isLockedByOthers}

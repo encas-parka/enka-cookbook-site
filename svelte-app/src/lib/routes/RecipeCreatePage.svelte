@@ -232,9 +232,7 @@
 <!-- ============================================================================ -->
 
 <div class="max-w-9xl container mx-auto p-4 pb-20" in:fade>
-  <div class="mb-3">
-    <PageBack label="Retour aux recettes" go={goBack} disabled={isSaving} />
-  </div>
+  <PageBack label="Retour aux recettes" go={goBack} disabled={isSaving} />
 
   {#if !loaded}
     <div class="flex items-center justify-center py-20">

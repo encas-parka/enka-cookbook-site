@@ -19,7 +19,7 @@ haute ; breadcrumbs inutiles sous 3 niveaux de profondeur), WCAG 2.2 AA
 
 ## Geste retour
 
-Un composant, posé dans la rangée du titre de la page :
+Un composant, posé au-dessus du titre de la page :
 
 ```svelte
 <PageBack
@@ -29,11 +29,12 @@ Un composant, posé dans la rangée du titre de la page :
 />
 ```
 
-- **Tous breakpoints** : bouton icône seule (`ArrowLeft`, [PageBack.svelte](../svelte-app/src/lib/components/ui/PageBack.svelte))
-  dans la rangée du titre quand la page en porte une, sinon en tête du
-  contenu — l'utilisateur voit ce qu'il regarde et l'action de sortie au
-  même endroit. `aria-label` + `title` = `label`, qui nomme la destination
-  (jamais « Retour » seul).
+- **Tous breakpoints** : bouton libellé (`ArrowLeft` + texte,
+  [PageBack.svelte](../svelte-app/src/lib/components/ui/PageBack.svelte)),
+  au-dessus du titre. C'est un _up_ vers le parent canonique, pas un _back_
+  temporel (réservé au navigateur et au geste système) : le libellé nomme la
+  destination (jamais « Retour » seul) et rend le geste prévisible quel que
+  soit le point d'entrée — dashboard, liste ou lien profond.
 - **La navbar ne porte jamais le geste** — ni desktop ni mobile : la barre
   est à densité figée et le bouton global poserait « retour vers où ? » ;
   seule la page connaît son parent.

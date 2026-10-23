@@ -412,8 +412,11 @@
     frozen = isFrozen;
   });
 
-  // Modifications non sauvegardées : comparaison à l'état d'ouverture. Le
-  // snapshot est lu hors graphe pour que sa capture ne relance pas l'effet.
+  // Modifications non sauvegardées : signature courante vs baseline
+  // d'ouverture. Le $derived observe aussi les recaptures de baseline
+  // (save sans quitter la page, annulation) : dirty retombe à false sans
+  // réécriture du formulaire — l'ancien effet ne re-courtait qu'aux
+  // changements de champs et gardait dirty à true après un save.
   let baseline = $state<string | null>(null);
 
   function currentSignature(): string {
@@ -438,6 +441,10 @@
     const openKey = `${mode}:${loanId ?? "new"}`;
 
     untrack(() => {
+      // La capture de baseline (effet dédié ci-dessous) suit l'init : à
+      // null ici, elle recapture l'état fraîchement rempli.
+      baseline = null;
+
       // Delta sync silencieux à l'ouverture ; l'affichage se met à jour
       // quand le résultat atterrit en Dexie (échec silencieux — le statut
       // serveur est déjà porté par la barre d'état).
@@ -490,17 +497,20 @@
     materielList?.reset(flatInitialQuantities);
   });
 
-  // Suivi des modifications non sauvegardées. L'effet est déclaré après
-  // l'init et après le remplissage de la sélection : le premier passage
-  // capture l'état d'ouverture, les suivants comparent.
+  // Capture initiale de la baseline : déclaré après le remplissage de la
+  // sélection (l'effet de reset alimente quantities au premier flush), la
+  // signature est lue hors graphe pour ne pas re-déclencher l'effet.
   $effect(() => {
-    const signature = currentSignature();
-    const base = untrack(() => baseline);
-    if (base === null) {
-      baseline = signature;
-      return;
-    }
-    dirty = signature !== base;
+    if (baseline !== null) return;
+    baseline = untrack(currentSignature);
+  });
+
+  const isDirty = $derived(
+    baseline !== null && currentSignature() !== baseline,
+  );
+
+  $effect(() => {
+    dirty = isDirty;
   });
 
   function buildConflictMessage(): string {

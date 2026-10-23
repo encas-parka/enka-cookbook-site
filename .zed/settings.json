@@ -23,4 +23,56 @@
     "AGENTS.md",
   ],
   "context_servers": {},
+  "languages": {
+    "Svelte": {
+      // Format-on-save via bun fmt (CLI identique au pré-commit) — remplace la
+      // chaîne language_server → prettier, incompatible avec la désinstallation
+      // de prettier-plugin-svelte. Config : bunfig.toml [fmt].
+      "formatter": {
+        "external": {
+          "command": "bun",
+          "arguments": [
+            "fmt",
+            "--stdin-filepath",
+            "{buffer_path}"
+          ]
+        }
+      }
+    },
+    // Biome (extension Zed globale, actif même sans biome.json) désactivé sur ce
+    // worktree : ses suggestions de tri d'imports ne sont rattachées à aucun
+    // outil du repo. Reste actif sur les autres projets.
+    "JavaScript": {
+      "language_servers": [
+        "!biome",
+        "vtsls",
+        "typescript-language-server",
+        "eslint"
+      ]
+    },
+    "TypeScript": {
+      "language_servers": [
+        "!biome",
+        "vtsls",
+        "typescript-language-server",
+        "eslint"
+      ]
+    },
+    "JSX": {
+      "language_servers": [
+        "!biome",
+        "vtsls",
+        "typescript-language-server",
+        "eslint"
+      ]
+    },
+    "TSX": {
+      "language_servers": [
+        "!biome",
+        "vtsls",
+        "typescript-language-server",
+        "eslint"
+      ]
+    }
+  },
 }

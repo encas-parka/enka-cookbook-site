@@ -59,7 +59,7 @@ await store.setupRealtime(); // SSE → Dexie
 
 - `bun run build` → `svelte-app/dist/`, base `/` en dev comme en prod, chunks manuels `@lucide/svelte` + `pocketbase`, minify esbuild.
 - Pas de proxy : les assets (`/icons/`, `/images/`, `/fonts/`, PWA) sont servis depuis `svelte-app/public/` en dev comme au build (toolchain Hugo supprimée 16-10).
-- `bun run format` / `bun run format:check` (depuis la racine) : prettier sur tout le repo, config `.prettierrc` à la racine (`prettier-plugin-tailwindcss` avec `tailwindStylesheet` → tri des classes). Exclus : `content/`, `static/`, `pocketbase/pb_migrations`, `pb-generated.ts`, dotfiles locaux (`.prettierignore`).
+- `bun run format` / `bun run format:check` (depuis la racine) : `bun fmt` (natif bun 1.4.4, remplace prettier) sur tout le repo, config `bunfig.toml` `[fmt]` + `.prettierignore` (toujours lu). Tri Tailwind activé : ordre canonique Tailwind **sans contexte daisyUI** (pas d'équivalent de `tailwindStylesheet`) — normalisation one-shot des `.svelte` le 24-10 (ordre d'attributs `class` uniquement, cascade CSS inchangée). Le tri ne s'engage que là où `tailwindcss` se résout depuis le fichier (sous `svelte-app/`).
 
 ## Canons de vérification
 

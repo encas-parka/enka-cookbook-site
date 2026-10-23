@@ -9,13 +9,11 @@
     "dev:all": "concurrently \"cd svelte-app && bun run dev\" \"bash scripts_dev/pb-dev.sh\" --names \"VITE,PB\" --prefix-colors \"cyan,green\"",
     "build": "cd svelte-app && bun run build",
     "check": "bun check -b svelte-app/tsconfig.json",
-    "format": "prettier --write .",
-    "format:check": "prettier --check ."
+    "check:app": "cd svelte-app && bun run check",
+    "format": "bun fmt .",
+    "format:check": "bun fmt --check ."
   },
   "devDependencies": {
-    "concurrently": "^10.0.6",
-    "prettier": "^3.9.10",
-    "prettier-plugin-svelte": "^4.1.1",
-    "prettier-plugin-tailwindcss": "^0.8.1"
+    "concurrently": "^10.0.6"
   }
 }

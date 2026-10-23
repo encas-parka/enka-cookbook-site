@@ -1,0 +1,9 @@
+# Config bun fmt (remplace .prettierrc, supprimé avec la migration bun 1.4.4).
+# .prettierignore reste lu.
+#
+# Tri Tailwind natif : ordre canonique Tailwind, SANS contexte daisyUI (pas
+# d'équivalent de tailwindStylesheet). A nécessité une normalisation one-shot
+# des .svelte (24-10, ordre d'attributs class uniquement). Ne s'engage que là
+# où tailwindcss se résout depuis le fichier (sous svelte-app/).
+[fmt]
+sortTailwindcss = true

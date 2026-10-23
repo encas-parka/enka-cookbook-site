@@ -24,4 +24,4 @@ Maintenance: mettre à jour au retrait de Hugo (Phase 2, SvelteKit) ; d'ici là,
 
 ## Outils
 
-- `hugo server -D` (port 1313) ; prettier avec parser `go-template` (+ `prettier-plugin-go-template`) pour les fichiers HTML de `layouts/`.
+- `hugo server -D` (port 1313) ; pour les fichiers HTML de `layouts/`, le parser `go-template` (+ `prettier-plugin-go-template`) n'est plus installé dans ce repo — il reste documenté côté `enka-cookbook-site` (Hugo y est actif).

@@ -268,14 +268,13 @@
       `ok` ✓. Nuance UX : pour une quantité de 1, « tout est OK » est un bouton
       **icône sans libellé** et le formulaire reste invalide sans message tant
       qu'on ne l'a pas cliqué — O6)_
-- [ ] `/event/:id/materiel` : allocations, réattachement d'un groupe à un autre.
-      _(passe 20-10 : **partiel** — page ✓ (0 erreur), realtime ✓ (2 headers
-      créés via API apparaissent sans reload), allocation confirmée créée par
-      le badge de statut ✓ (`groupId` = header, toast, manque 5→2). Le
-      **réattachement** existe dans le modal (« Rattacher à un autre besoin »)
-      mais son select natif n'est pas pilotable (limite driver) ; création
-      d'un item bloquée par le select « Type » (limite driver) ; **P10** :
-      « Importer depuis {équipe} » sans effet avec ≥ 2 équipes)_
+- [ ] `/event/:id/materiel` : **P10** — « Importer depuis {équipe} » sans
+      effet avec ≥ 2 équipes (bug non corrigé).
+      _(réduit 24-10 — allocations, création d'un item et réattachement
+      d'un groupe à un autre sont couverts par les tests composants
+      eventMateriel (les selects natifs « Type » et « Rattacher à un autre
+      besoin », bloquants au driver le 20-10, sont pilotables en jsdom) ;
+      reste ce bug P10 et le parcours visuel condensé de la page)_
 - [x] Changement d'équipe : l'affichage se rétablit sans reload manuel.
       _(passe 20-10 : dashboard → Inventaire Q88 → 10 matériels Q88 affichés,
       aucun reliquat d'Enka Parka ✓. Note : `switchTeam()` existe dans

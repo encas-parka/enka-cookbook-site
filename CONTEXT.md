@@ -83,6 +83,14 @@ _Avoid_: réparé (le résultat, pas le geste)
 Geste qui déclare des exemplaires définitivement hors service, typiquement jugés irréparables : ils quittent le stock et deviennent manquants.
 _Avoid_: mise au rebut, destruction
 
+**Rebut**:
+Item dont la quantité est 0 : il reste visible dans l'inventaire et éditable, mais n'est plus empruntable — un état, pas un geste (la réforme est le geste).
+_Avoid_: hors service, HS
+
+**Stock épuisé**:
+État d'affichage dérivé d'un matériel sans unité utilisable côté stock : quantité 0 (rebut) ou inconnue (lecture conservatrice) — à distinguer de « emprunté »/« réservé » (activité) et de « en réparation » (stock en réparation).
+_Avoid_: rupture, stock mort
+
 **Fiche de retour**:
 L'export Markdown de l'état de retour, reflétant la saisie en cours (déclarations non encore enregistrées) autant que l'état persisté.
 _Avoid_: bon de retour, inventaire de retour

@@ -25,18 +25,20 @@ repose sur la passe click-through manuelle, dont la checklist accumulée
    - tout affichage d'état dérivé (badges, libellés conditionnels) ;
    - tout contrat de validation (dirty/save, bornage de saisie).
    Les composants de présentation pure (layout, style) n'en ont pas besoin.
-2. **Outillage** : zéro dépendance runtime de test — `mount`/`unmount`/
+2. **Outillage** : montage sans lib de rendu — `mount`/`unmount`/
    `flushSync` de Svelte 5 via le helper `src/lib/test/mount-svelte.ts`,
-   requêtes DOM natives, `@testing-library/user-event` pour les interactions
-   (séquences réalistes). `window.matchMedia` est stubé au harness setup
-   (jsdom ne l'implémente pas ; `svelte/reactivity/window` l'exige à
-   l'import).
+   requêtes DOM natives ; `@testing-library/user-event` pour les
+   interactions (séquences réalistes). `window.matchMedia` est stubé au
+   harness setup (jsdom ne l'implémente pas ; `svelte/reactivity/window`
+   l'exige à l'import).
 3. **Pitfall jsdom documenté** : sur un composant qui réassigne une prop
    `$bindable` dans son handler, la délégation d'événements ne délivre
    qu'un seul événement fiable par montage — écrire les scénarios à **une
    interaction par montage** (état initial via props). Les chaînes async
-   (update optimiste + liveQuery + resync) s'attendent par **condition
-   (polling)**, jamais par un nombre de ticks figé.
+   **déclenchées par une interaction** (update optimiste + liveQuery +
+   resync) s'attendent par **condition (polling)**, jamais par un nombre
+   de ticks figé — le seed de setup, lui, garde la convention
+   `waitForTick` du harness.
 4. **Le click-through manuel garde** : la cohérence visuelle (jsdom ne fait
    aucun layout), les décisions produit, et un parcours de bout en bout
    condensé par lot. La checklist click-through ne contient plus que ce qui

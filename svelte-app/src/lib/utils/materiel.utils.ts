@@ -255,6 +255,26 @@ export function getMaterielDisplayStateLabel(
   return (state && labels[state]) || "Inconnu";
 }
 
+/**
+ * Libellé court d'un état d'affichage, sans le décompte — le vocabulaire de
+ * getMaterielDisplayStateLabel pour les facettes agrégées (« Partiel (à
+ * réparer) » plutôt que « Partiel : N à réparer », sans sens pour une
+ * facette qui ne décrit aucun item en particulier).
+ */
+export function getMaterielDisplayStateShortLabel(
+  state: MaterielDisplayState | string | null | undefined,
+): string {
+  const labels: Record<string, string> = {
+    complete: "Complet",
+    partial: "Partiel (à réparer)",
+    repair: "En réparation",
+    depleted: "Stock épuisé",
+    loan: "Emprunté",
+    reserved: "Réservé",
+  };
+  return (state && labels[state]) || "Inconnu";
+}
+
 // =============================================================================
 // PARSING - Parsing des données PocketBase (JSON multi-formats)
 // =============================================================================

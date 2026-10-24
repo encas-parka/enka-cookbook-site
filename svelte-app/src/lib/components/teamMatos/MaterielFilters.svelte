@@ -11,6 +11,7 @@
   import CheckboxBadge from "$lib/components/ui/CheckboxBadge.svelte";
   import RadioBadgeGroup from "$lib/components/ui/RadioBadgeGroup.svelte";
   import type { MaterielDisplayState } from "$lib/types/materiel.types";
+  import { getMaterielDisplayStateShortLabel } from "$lib/utils/materiel.utils";
 
   export interface MaterielFiltersType {
     types: string[]; // Sélection multiple
@@ -61,22 +62,6 @@
       hygiene: "Hygiène",
     };
     return labels[type] || type;
-  }
-
-  // Libellés de filtre des états dérivés — vocabulaire de
-  // getMaterielDisplayStateLabel sans le décompte (« Partiel (à réparer) »
-  // plutôt que « Partiel : N à réparer »), qui n'a pas de sens pour une
-  // facette agrégée.
-  function getDisplayStateLabel(state: MaterielDisplayState): string {
-    const labels: Record<MaterielDisplayState, string> = {
-      complete: "Complet",
-      partial: "Partiel (à réparer)",
-      repair: "En réparation",
-      depleted: "Stock épuisé",
-      loan: "Emprunté",
-      reserved: "Réservé",
-    };
-    return labels[state];
   }
 </script>
 
@@ -129,7 +114,7 @@
       {#each availableStatuses as status (status)}
         <CheckboxBadge
           checked={filters.statuses.includes(status)}
-          label={getDisplayStateLabel(status)}
+          label={getMaterielDisplayStateShortLabel(status)}
           onchange={() => toggleArrayItem(filters.statuses, status)}
           {disabled}
           color="secondary"

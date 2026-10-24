@@ -2,6 +2,7 @@ import { describe, it, expect } from "vitest";
 import {
   enrichMateriel,
   getMaterielDisplayStateLabel,
+  getMaterielDisplayStateShortLabel,
 } from "../materiel.utils";
 import type { Materiel, MaterielLoan } from "$lib/types/pb";
 import type { MaterielLoanItem } from "$lib/types/materiel.types";
@@ -165,5 +166,23 @@ describe("getMaterielDisplayStateLabel", () => {
   it("état inconnu ou absent : libellé de repli", () => {
     expect(getMaterielDisplayStateLabel(null)).toBe("Inconnu");
     expect(getMaterielDisplayStateLabel("mystere")).toBe("Inconnu");
+  });
+});
+
+describe("getMaterielDisplayStateShortLabel", () => {
+  it("libellés courts sans décompte — pour les facettes agrégées", () => {
+    expect(getMaterielDisplayStateShortLabel("complete")).toBe("Complet");
+    expect(getMaterielDisplayStateShortLabel("partial")).toBe(
+      "Partiel (à réparer)",
+    );
+    expect(getMaterielDisplayStateShortLabel("repair")).toBe("En réparation");
+    expect(getMaterielDisplayStateShortLabel("depleted")).toBe("Stock épuisé");
+    expect(getMaterielDisplayStateShortLabel("loan")).toBe("Emprunté");
+    expect(getMaterielDisplayStateShortLabel("reserved")).toBe("Réservé");
+  });
+
+  it("état inconnu ou absent : libellé de repli", () => {
+    expect(getMaterielDisplayStateShortLabel(null)).toBe("Inconnu");
+    expect(getMaterielDisplayStateShortLabel("mystere")).toBe("Inconnu");
   });
 });

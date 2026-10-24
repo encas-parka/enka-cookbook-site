@@ -204,6 +204,38 @@ describe("MaterielStore — retour qui met le stock à la vérité", () => {
     expect(serverIntact.quantity).toBe(4);
   });
 
+  it("item endommagé absent du cache : zéro écriture pour son id, clôture du prêt intacte", async () => {
+    // Déclaré dans le prêt mais jamais seedé : l'item est inconnu du cache
+    // local — le skip est sans écriture, pas de projection absolue sur un
+    // état inconnu (la déclaration reste tracée dans le JSON du prêt).
+    const ghostItem = loanItem("t12mater0000009", {
+      quantity: 2,
+      lostQuantity: 2,
+    });
+    const damagedItem = loanItem(TEST_MATERIEL_ID, {
+      quantity: 1,
+      brokenQuantity: 1,
+    });
+    await seedAndInitialize(
+      [makeMaterielRecord({ quantity: 5 })],
+      [makeLoanRecord({ materiels: [ghostItem, damagedItem] })],
+    );
+    const { updates } = trackMaterielUpdates(currentFakePb());
+
+    await materielStore.completeLoanWithReturn(TEST_LOAN_ID, {
+      materiels: [ghostItem, damagedItem],
+    });
+    await waitForTick(5);
+
+    expect(updates.map((u) => u.id)).toEqual([TEST_MATERIEL_ID]);
+
+    const serverLoan = await pb
+      .collection("materiel_loan")
+      .getOne(TEST_LOAN_ID);
+    expect(serverLoan.status).toBe("completed");
+    expect(serverLoan.materiels).toEqual([ghostItem, damagedItem]);
+  });
+
   it("clôture du prêt inchangée : completed, returnedAt, notes, lignes réécrites en bloc", async () => {
     const damagedItem = loanItem(TEST_MATERIEL_ID, {
       quantity: 2,

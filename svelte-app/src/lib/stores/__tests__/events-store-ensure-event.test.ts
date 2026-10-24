@@ -45,6 +45,7 @@ import { describe, it, expect, beforeEach, afterEach, vi } from "vitest";
 import { currentFakePb } from "./harness/stub-pb";
 import { clearDexie } from "./harness/seed-dexie";
 import { waitForTick } from "./harness/wait-for-tick";
+import { waitForCondition } from "./harness/wait-for-condition";
 import { makeEvent } from "./harness/fixtures";
 import { eventsStore } from "$lib/stores/EventsStore.svelte";
 import { db } from "$lib/db-sync/pb-sync";
@@ -83,7 +84,13 @@ describe("EventsStore — ensureEvent", () => {
       makeEvent({ id: "ensure0000000002", createdBy: "testuser12345678" }),
     ]);
     await eventsStore.syncInitial();
-    await waitForTick(1);
+    // Précondition du scénario : l'event est monté dans le cache bridge
+    // (liveQuery → SvelteMap → $derived) — chaîne async non bornée par un
+    // nombre de ticks, d'où l'attente par condition plutôt que figée.
+    await waitForCondition(
+      () => eventsStore.getEventById("ensure0000000002") !== null,
+      "l'event seedé monte dans le cache bridge après syncInitial",
+    );
 
     const collectionSpy = vi.spyOn(fake, "collection");
     const event = await eventsStore.ensureEvent("ensure0000000002");

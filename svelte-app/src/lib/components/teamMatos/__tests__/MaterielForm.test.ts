@@ -36,6 +36,7 @@ import { flushSync } from "svelte";
 import { currentFakePb } from "$lib/stores/__tests__/harness/stub-pb";
 import { clearDexie } from "$lib/stores/__tests__/harness/seed-dexie";
 import { waitForTick } from "$lib/stores/__tests__/harness/wait-for-tick";
+import { waitForCondition } from "$lib/stores/__tests__/harness/wait-for-condition";
 import {
   makeMaterielRecord,
   TEST_MATERIEL_ID,
@@ -78,24 +79,8 @@ function makeInitialValues(
 }
 
 /**
- * Attend qu'une condition devienne vraie (chaîne async du geste : update
- * optimiste, liveQuery, resync du formulaire) — bien plus fiable qu'un
- * nombre de ticks figé ; échoue avec l'état atteint si timeout.
+ * L'input quantité principale (celui sans aria-label du geste).
  */
-async function waitForCondition(
-  condition: () => boolean,
-  description: string,
-  maxTicks = 100,
-): Promise<void> {
-  for (let i = 0; i < maxTicks; i++) {
-    if (condition()) return;
-    await waitForTick(1);
-    flushSync();
-  }
-  throw new Error(`Timeout : ${description}`);
-}
-
-/** L'input quantité principale (celui sans aria-label du geste). */
 function quantityInput(target: HTMLElement): HTMLInputElement {
   const input = target.querySelector<HTMLInputElement>(
     'input[type="number"]:not([aria-label])',
@@ -160,6 +145,8 @@ describe("MaterielForm — gestes de réparation", () => {
     await waitForCondition(
       () => quantityInput(target).value === "4",
       "le formulaire se resync après la réforme",
+      100,
+      flushSync,
     );
     // Le snapshot suit le store : quantité 4, plus que 2 en réparation
     expect(quantityInput(target).value).toBe("4");
@@ -182,6 +169,8 @@ describe("MaterielForm — gestes de réparation", () => {
     await waitForCondition(
       () => gestureInput(target).max === "2",
       "repairQuantity redescend après la remise en service",
+      100,
+      flushSync,
     );
     expect(quantityInput(target).value).toBe("5");
   });

@@ -40,7 +40,7 @@ Multi-context repo (presence of `CONTEXT-MAP.md` at the root):
 
 Ce repo est **single-context** (pas de signal monorepo : pas de `workspaces`, pas de `packages/*`). Un `docs/svelte-app.md` (référence stack) et `docs/hugo.md` (legacy) complètent la couche domaine ; `CONTEXT.md` naîtra de `/domain-modeling`.
 
-ADRs posés : [0001 — curseurs de session, delta sync](../adr/0001-delta-sync-cursor-invalidation.md) · [0002 — le RSVP porte l'accès côté client](../adr/0002-client-side-rsvp.md).
+ADRs posés : [0001 — curseurs de session, delta sync](../adr/0001-delta-sync-cursor-invalidation.md) · [0002 — le RSVP porte l'accès côté client](../adr/0002-client-side-rsvp.md) · [0003 — modèle de stock : soldes projetés, manquants définitifs, journal différé](../adr/0003-materiel-stock-model.md).
 
 ## Use the glossary's vocabulary
 

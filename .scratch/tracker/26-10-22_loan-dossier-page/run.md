@@ -1,6 +1,10 @@
 # Run — Page dossier emprunt
 
 > 22-10-2026 · 5 commits sur `mig/pocketbase`, rien poussé.
+>
+> **Suspendu le 24-10** : la refonte UI de la fiche de retour reprendra après la
+> décision de modèle sur la granularité des dommages — handoff autoporteur dans
+> `.scratch/tracker/26-10-24_materiel-damage-granularity/handoff.md`.
 
 ## Livré
 

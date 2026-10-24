@@ -53,7 +53,7 @@ Réservation de matériel appartenant à une équipe, pour une période (dates d
 _Avoid_: prêt (réservé au sens inverse : prêter SON matériel)
 
 **Disponibilité sur période**:
-Quantité réservable d'un matériel sur les dates d'un emprunt : stock possédé moins les quantités portées par les emprunts qui chevauchent la période. Seule notion de disponibilité exposée à l'utilisateur d'un emprunt — la disponibilité globale du stock n'a pas de sens dans ce flux.
+Quantité réservable d'un matériel sur les dates d'un emprunt : stock possédé en état de servir — hors exemplaires en réparation — moins les quantités portées par les emprunts qui chevauchent la période. Seule notion de disponibilité exposée à l'utilisateur d'un emprunt — la disponibilité globale du stock n'a pas de sens dans ce flux.
 _Avoid_: dispo globale (hors période), stock libre
 
 **Sélection**:
@@ -64,8 +64,24 @@ Item d'un emprunt dont le matériel a disparu de l'inventaire. L'emprunt conserv
 _Avoid_: item supprimé, matériel orphelin
 
 **Retour**:
-Déclaration de l'état du matériel rendu, item par item et en quantités — rendu, à réparer, perdu — complétée de notes de retour. Peut être anticipé (avant la date de fin) après confirmation ; enregistré, il clôt l'emprunt (statut « completed »).
+Déclaration de l'état du matériel rendu, item par item et en quantités — rendu, à réparer, manquant — complétée de notes de retour. Peut être anticipé (avant la date de fin) après confirmation ; enregistré, il clôt l'emprunt (statut « completed »).
 _Avoid_: annulation (le retour n'annule pas la réservation), restitution
+
+**Manquant**:
+Exemplaire d'un matériel déclaré non revenu au retour, quelle que soit la cause — perdu, ou cassé puis jeté. Au niveau du stock, un manquant n'existe plus : sa disparition est définitive et diminue le stock ; l'emprunt qui l'a déclaré en conserve la trace.
+_Avoid_: perdu, disparu
+
+**Mouvement de stock**:
+Variation datée, quantifiée et causée du stock d'un matériel : achat, perte, remise en service, réforme, correction. Le journal des mouvements est la source de vérité des variations ; les quantités d'un matériel en sont des projections. Un manquant n'est pas un état du matériel : c'est un mouvement.
+_Avoid_: historique (pour la donnée), delta
+
+**Remise en service**:
+Geste qui fait revenir au stock en état de servir des exemplaires sortis pour réparation.
+_Avoid_: réparé (le résultat, pas le geste)
+
+**Réforme**:
+Geste qui déclare des exemplaires définitivement hors service, typiquement jugés irréparables : ils quittent le stock et deviennent manquants.
+_Avoid_: mise au rebut, destruction
 
 **Fiche de retour**:
 L'export Markdown de l'état de retour, reflétant la saisie en cours (déclarations non encore enregistrées) autant que l'état persisté.

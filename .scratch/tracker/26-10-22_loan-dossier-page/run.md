@@ -185,6 +185,13 @@ retour qui décrémente les manquants — ADR 0003) ; les libellés « Manquant(
   grammaire en une ligne avant la liste ; la phrase du bas, devenue
   redondante, se réduit au compteur (« N matériel(s) reste(nt) à
   déclarer »).
+- **Ajustement utilisateur — toggles** : les deux boutons de ligne sont
+  toujours visibles et se démarent au re-click. « Ok » décoche (un faux
+  clic n'exige plus de passer par le panneau) ; « Un problème » referme
+  le panneau tant qu'il est vierge, mais se **verrouille** (comme Ok)
+  dès que des valeurs sont déclarées — un toggle destructeur gommerait
+  la déclaration d'un faux clic ; « retirer le problème » reste le seul
+  geste de rétraction, le lien « annuler » disparaît (doublon).
 
 Vérifs : check 0/0 (198 fichiers), build OK ; suite complète 382/383 — le
 seul échec (`events-store-ensure-event`, cache chaud) est un flake de

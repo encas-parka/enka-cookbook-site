@@ -14,10 +14,12 @@
    *   badge d'avancement et raccourci « tout est ok » qui passe par une
    *   confirmation (« Vous confirmez avoir vérifié… ») et n'atteste que
    *   les rangées non déclarées ;
-   * - au repos, une rangée propose deux gestes : « Un problème » (ouvre
-   *   un panneau sous la ligne) et « Ok ×N » — atteste que tout est
-   *   revenu intact, posé en bout de lecture (geste affirmatif à
-   *   droite) ;
+   * - en bout de lecture, deux toggles exclusifs et toujours visibles :
+   *   « Ok ×N » atteste que tout est revenu intact (re-click décoche),
+   *   « Un problème » ouvre le panneau de déclaration (re-click le
+   *   referme tant que rien n'est saisi) — avec des valeurs déclarées,
+   *   les deux se verrouillent et « retirer le problème » est le seul
+   *   geste qui remet à zéro ;
    * - le panneau problème porte les valeurs (manquants / à réparer ;
    *   bascules pour une quantité de 1) : les valeurs font foi, la
    *   rangée est déclarée dès qu'une valeur est saisie — « retirer le
@@ -195,17 +197,40 @@
 
   // --- Déclarations ---
 
-  /** Ouvre le panneau problème ; une attestation en cours est retirée. */
-  function openProblem(item: ReturnRow) {
-    item.okChecked = false;
-    item.panelOpen = true;
+  /**
+   * Bascule « Un problème » : ouvre le panneau ; le referme tant que
+   * rien n'y est déclaré. Avec des valeurs saisies le bouton est
+   * désactivé — « retirer le problème » reste le seul geste qui remet
+   * à zéro (un toggle destructeur gommerait la déclaration d'un faux
+   * clic).
+   */
+  function toggleProblem(item: ReturnRow) {
+    if (item.panelOpen) {
+      item.panelOpen = false;
+    } else {
+      item.okChecked = false;
+      item.panelOpen = true;
+    }
   }
 
-  /** Ferme le panneau et remet les valeurs à zéro (rangée non déclarée). */
-  function closeProblem(item: ReturnRow) {
+  /**
+   * « Retirer le problème » : remet les valeurs à zéro et referme le
+   * panneau — le seul geste qui annule une déclaration renseignée.
+   */
+  function retractProblem(item: ReturnRow) {
     item.lostQuantity = 0;
     item.brokenQuantity = 0;
     item.panelOpen = false;
+  }
+
+  /**
+   * Bascule « Ok » : atteste le cas nominal — refermant au passage un
+   * panneau resté ouvert à zéro —, re-click décoche (annuler un faux
+   * clic).
+   */
+  function toggleOk(item: ReturnRow) {
+    item.okChecked = !item.okChecked;
+    if (item.okChecked) item.panelOpen = false;
   }
 
   /**
@@ -429,15 +454,25 @@
                         item.brokenQuantity}
                     </div>
                   {/if}
-                {:else if !item.panelOpen}
-                  <!-- Repos : « Un problème » ouvre le panneau sous la
-                       ligne ; « Ok ×N » atteste le cas nominal, posé en
-                       bout de lecture (geste affirmatif à droite). -->
+                {:else}
+                  <!-- Deux toggles exclusifs, toujours visibles en bout de
+                       lecture : « Un problème » pilote le panneau (plein
+                       tant qu'il est ouvert), « Ok ×N » atteste le cas
+                       nominal — re-click décoche. Avec des valeurs
+                       déclarées, les deux se verrouillent : le panneau
+                       porte l'édition, « retirer le problème » annule. -->
                   <div class="flex items-center gap-2">
                     <button
-                      class="btn btn-outline btn-warning"
+                      class="btn {item.panelOpen
+                        ? 'btn-warning'
+                        : 'btn-outline btn-warning'}"
                       type="button"
-                      onclick={() => openProblem(item)}
+                      aria-pressed={item.panelOpen}
+                      disabled={problemOf(item) > 0}
+                      title={problemOf(item) > 0
+                        ? "Déclaration en cours : « retirer le problème » dans le panneau pour l'annuler"
+                        : "Déclarer des exemplaires manquants ou à réparer"}
+                      onclick={() => toggleProblem(item)}
                     >
                       <AlertTriangle class="h-4 w-4" />
                       Un problème
@@ -447,8 +482,12 @@
                         ? 'btn-success'
                         : 'btn-outline btn-success'}"
                       type="button"
-                      title="Attester que tout est revenu intact"
-                      onclick={() => (item.okChecked = true)}
+                      aria-pressed={item.okChecked}
+                      disabled={problemOf(item) > 0}
+                      title={problemOf(item) > 0
+                        ? "Verrouillé tant qu'un problème est déclaré"
+                        : "Attester que tout est revenu intact"}
+                      onclick={() => toggleOk(item)}
                     >
                       <Check class="h-4 w-4" />
                       Ok{item.quantity > 1 ? ` ×${item.quantity}` : ""}
@@ -541,19 +580,17 @@
                         </label>
                       </div>
                     {/if}
-                    <div
-                      class="mt-2 flex flex-wrap items-center gap-x-4 gap-y-1"
-                    >
-                      <button
-                        class="link link-hover text-base-content/60 text-xs"
-                        type="button"
-                        onclick={() => closeProblem(item)}
+                    {#if problemOf(item) > 0}
+                      <div
+                        class="mt-2 flex flex-wrap items-center gap-x-4 gap-y-1"
                       >
-                        {problemOf(item) > 0
-                          ? "retirer le problème"
-                          : "annuler"}
-                      </button>
-                      {#if problemOf(item) > 0}
+                        <button
+                          class="link link-hover text-base-content/60 text-xs"
+                          type="button"
+                          onclick={() => retractProblem(item)}
+                        >
+                          retirer le problème
+                        </button>
                         <button
                           class="link text-warning ms-auto text-xs"
                           type="button"
@@ -561,8 +598,8 @@
                         >
                           préciser dans les notes
                         </button>
-                      {/if}
-                    </div>
+                      </div>
+                    {/if}
                   </div>
                 {/if}
               {/snippet}

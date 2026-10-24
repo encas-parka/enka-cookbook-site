@@ -1,6 +1,6 @@
 # Schéma PocketBase ↔ API rules ↔ svelte-app
 
-> État des lieux au 22-10-2026 (worktree `enka-cookbook-mig`, phase 1).
+> État des lieux au 24-10-2026 (worktree `enka-cookbook-mig`, phase 1).
 > Méthode : extraction directe de `_collections` dans `pocketbase/pb_data/data.db`,
 > croisée avec l'usage runtime (stores, services, hooks JSVM, routes).
 > Ce document signale les **champs et collections inutilisés** et les points
@@ -92,6 +92,26 @@ migration (delta sync `updated`, composites `(eventId, updated)`,
 9. **`users.listRule = id = @request.auth.id`** mais `viewRule` ouvert à
    tout authentifié : la liste est verrouillée, le détail non — c'est ce
    qui permet l'expand des `members` dans les stores.
+
+## Le modèle de stock `materiel` : quantités, plus de statut
+
+Le stock est purement quantitatif (décision
+[ADR 0003](adr/0003-materiel-stock-model.md), migrations `1792805000` +
+`1792900000`) :
+
+- `quantity` = ce qui existe physiquement ; les **manquants** déclarés au
+  retour d'emprunt le décrémentent définitivement (l'emprunt complété, dans
+  son json `materiels`, reste le registre de la perte). Nullable traité
+  comme 0 (conservateur).
+- `repairQuantity` = compteur temporaire des exemplaires en réparation ;
+  la disponibilité calculée côté client est
+  `quantity − enEmprunt − repairQuantity`, et sur période
+  `quantity − empruntsChevauchants − repairQuantity`.
+- **Le champ `status` (ok/lost/torepair) est supprimé** : c'était une
+  dérivation d'affichage écrasée à chaque retour, jamais une donnée. Les
+  gestes « remise en service » et « réforme » passent par `repairQuantity` ;
+  l'état affiché (`displayState` : complete/partial/repair/depleted +
+  loan/reserved) est dérivé à la lecture, jamais persisté.
 
 ## Le flux `ingredients.ref` ↔ `recipes.ingredients` ↔ `products.ingredientRef`
 

@@ -481,9 +481,10 @@ function main() {
 
     migrationMap.materiel[appwriteId] = { refId, name: awMat.name };
 
-    // Backfill conservateur du modèle de stock (ADR 0003) : « à réparer » met
-    // tout l'item en réparation, « perdu » vide la quantité. `status` reste
-    // écrit tant que le schéma le porte — il n'a plus de lecteur à terme.
+    // Backfill conservateur du modèle de stock (ADR 0003), lu depuis le
+    // statut hérité Appwrite : « à réparer » met tout l'item en réparation,
+    // « perdu » vide la quantité. Le statut lui-même n'est pas copié — le
+    // schéma cible ne le connaît plus.
     const repairQuantity =
       awMat.status === "torepair" ? (awMat.quantity ?? 0) : 0;
     const quantity = awMat.status === "lost" ? 0 : (awMat.quantity ?? null);
@@ -494,7 +495,6 @@ function main() {
       description: awMat.description || null,
       ownerUser,
       teamId,
-      status: awMat.status || "ok",
       deleted: awMat.deleted || false,
       createdBy: null, // Not in Appwrite
       quantity,

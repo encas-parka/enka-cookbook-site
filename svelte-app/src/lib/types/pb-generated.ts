@@ -265,13 +265,6 @@ export const MaterielTypeOptions = {
 	"hygiene": "hygiene",
 } as const
 export type MaterielTypeOptions = typeof MaterielTypeOptions[keyof typeof MaterielTypeOptions]
-
-export const MaterielStatusOptions = {
-	"ok": "ok",
-	"lost": "lost",
-	"torepair": "torepair",
-} as const
-export type MaterielStatusOptions = typeof MaterielStatusOptions[keyof typeof MaterielStatusOptions]
 export type MaterielRecord = {
 	created: IsoAutoDateString
 	createdBy?: RecordIdString
@@ -285,7 +278,6 @@ export type MaterielRecord = {
 	quantity?: number
 	repairQuantity?: number
 	shareableWith?: RecordIdString[]
-	status?: MaterielStatusOptions
 	storeIn?: RecordIdString
 	teamId?: RecordIdString
 	type?: MaterielTypeOptions

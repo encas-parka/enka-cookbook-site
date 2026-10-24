@@ -1,7 +1,7 @@
 <script lang="ts">
   /**
    * Fiche de retour d'un emprunt : déclaration de l'état de chaque
-   * matériel (ok / à réparer / perdu), notes de retour et validation.
+   * matériel (ok / à réparer / manquant), notes de retour et validation.
    *
    * Cœur sans chrome : la page dossier (onglet Retour) est son enveloppe
    * et déclenche `submit()` / `exportSheet()` depuis la navbar. Le parent
@@ -14,11 +14,11 @@
    *   badge d'avancement et raccourci « tout est ok » qui passe par une
    *   confirmation (« Vous confirmez avoir vérifié… ») et n'atteste que
    *   les rangées non déclarées ;
-   * - chaque rangée porte ses valeurs (perdus, à réparer) et une
+   * - chaque rangée porte ses valeurs (manquants, à réparer) et une
    *   attestation « Ok » : le label « Ok ×N » annonce ce qu'on valide ;
-   *   toute édition décoche, et à N = 0 (tout perdu/cassé) Ok est
+   *   toute édition décoche, et à N = 0 (tout manquant/cassé) Ok est
    *   désactivé — les valeurs saisies sont alors la déclaration ;
-   * - quantité 1 : trio exclusif À réparer / Perdu / Ok, les
+   * - quantité 1 : trio exclusif À réparer / Manquant / Ok, les
    *   boutons-valeur se démarquent au second clic ;
    * - validation : chaque matériel est déclaré (attesté, ou ne laissant
    *   rien d'intact à attester).
@@ -169,7 +169,7 @@
 
   /**
    * Rangée déclarée : attestée par l'utilisateur, ou ne laissant rien
-   * d'intact à attester — quand tout est perdu/à réparer, les valeurs
+   * d'intact à attester — quand tout est manquant/à réparer, les valeurs
    * saisies sont elles-mêmes la déclaration.
    */
   function isRowDeclared(item: ReturnRow): boolean {
@@ -213,7 +213,7 @@
   }
 
   /**
-   * Saisie quantité > 1 : borne la valeur pour que perdu + à réparer ne
+   * Saisie quantité > 1 : borne la valeur pour que manquant + à réparer ne
    * dépasse pas la quantité empruntée, et décoche l'attestation — elle
    * porte sur les valeurs courantes, toute édition l'invalide.
    */
@@ -381,7 +381,7 @@
                 {#if item.lostQuantity > 0}
                   <div class="badge badge-error gap-1">
                     <X class="h-3 w-3" />
-                    Perdu : {item.lostQuantity}
+                    Manquant : {item.lostQuantity}
                   </div>
                 {/if}
                 {#if item.quantity - item.lostQuantity - item.brokenQuantity > 0}
@@ -412,11 +412,11 @@
                       ? 'btn-error'
                       : 'btn-outline btn-error'}"
                     type="button"
-                    aria-label="Perdu"
+                    aria-label="Manquant"
                     onclick={() => setTri(item, "lost")}
                   >
                     <X class="h-4 w-4" />
-                    Perdu
+                    Manquant
                   </button>
                   <button
                     class="btn btn-sm {item.okChecked
@@ -439,7 +439,7 @@
                 <div class="ms-auto flex items-center gap-2">
                   <label class="input">
                     <span class="label border-base-300 border-r pr-2"
-                      >Perdus</span
+                      >Manquants</span
                     >
                     <input
                       type="number"
@@ -449,7 +449,7 @@
                       min="0"
                       max={item.quantity}
                       value={item.lostQuantity}
-                      aria-label="Quantité perdue"
+                      aria-label="Quantité manquante"
                       onfocus={(e) => e.currentTarget.select()}
                       oninput={(e) =>
                         onQty(item, "lost", parseInt(e.currentTarget.value))}
@@ -499,7 +499,7 @@
       <p class="text-base-content/70 mt-3 text-sm">
         {undeclaredCount}
         matériel{undeclaredCount > 1 ? "s" : ""} à déclarer : saisissez les quantités
-        perdues / à réparer, puis attestez le restant avec « Ok ».
+        manquantes / à réparer, puis attestez le restant avec « Ok ».
       </p>
     {/if}
 

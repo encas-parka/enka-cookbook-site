@@ -2,7 +2,7 @@
  * Export Markdown de la fiche de retour d'un emprunt.
  *
  * Fonction pure : l'export reflète l'état de saisie en cours (quantités
- * déclarées perdues / cassées), pas seulement l'état persisté de l'emprunt —
+ * déclarées manquantes / cassées), pas seulement l'état persisté de l'emprunt —
  * ce qui permet d'exporter la fiche avant validation.
  */
 
@@ -11,7 +11,7 @@ export interface LoanReturnItem {
   materielName: string;
   /** Quantité empruntée. */
   quantity: number;
-  /** Quantité déclarée perdue. */
+  /** Quantité déclarée manquante. */
   lostQuantity: number;
   /** Quantité déclarée cassée / à réparer. */
   brokenQuantity: number;
@@ -76,7 +76,7 @@ export function buildLoanReturnMarkdown(
     lines.push("_Aucun matériel._");
     lines.push("");
   } else {
-    lines.push("| Matériel | Emportés | OK | À réparer | Perdus |");
+    lines.push("| Matériel | Emportés | OK | À réparer | Manquants |");
     lines.push("| --- | --- | --- | --- | --- |");
     for (const item of input.items) {
       lines.push(

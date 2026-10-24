@@ -118,12 +118,12 @@
     const totalIssues = lost + broken;
     const ok = m.quantity - totalIssues;
 
-    // Tout est perdu ou cassé
+    // Tout est manquant ou cassé
     if (ok === 0) {
       return "badge-error"; // rouge
     }
 
-    // Partiellement endommagé/perdu
+    // Partiellement endommagé/manquant
     if (totalIssues > 0) {
       return "badge-warning"; // orange
     }

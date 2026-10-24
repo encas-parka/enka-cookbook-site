@@ -824,7 +824,7 @@ export class MaterielStore {
         const broken = item.brokenQuantity ?? 0;
         if (lost > 0 || broken > 0) {
           lines.push(
-            `- ${item.materielName} × ${item.quantity} (perdu: ${lost}, cassé: ${broken})`,
+            `- ${item.materielName} × ${item.quantity} (manquant: ${lost}, cassé: ${broken})`,
           );
         }
       }

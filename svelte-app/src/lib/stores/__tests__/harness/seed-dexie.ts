@@ -9,7 +9,12 @@
 import { db } from "$lib/db-sync/pb-sync";
 import type { ProductNeedRow } from "$lib/db-sync/pb-sync";
 
-/** Tables touched by the store tests — cleared between tests. */
+/**
+ * Tables touched by the store/component tests — cleared between tests.
+ * Covers every sync scope the lots under run consume (events, teamdocs,
+ * locks, ingredients, categories, nativeTeams included: teams components
+ * read the Dexie cache, so a leftover row leaks across tests).
+ */
 export async function clearDexie(): Promise<void> {
   await db.transaction(
     "rw",
@@ -22,6 +27,12 @@ export async function clearDexie(): Promise<void> {
       db.materiels,
       db.materielLoans,
       db.eventMateriels,
+      db.events,
+      db.teamdocs,
+      db.locks,
+      db.ingredients,
+      db.categories,
+      db.nativeTeams,
     ],
     async () => {
       await db.products.clear();
@@ -32,6 +43,12 @@ export async function clearDexie(): Promise<void> {
       await db.materiels.clear();
       await db.materielLoans.clear();
       await db.eventMateriels.clear();
+      await db.events.clear();
+      await db.teamdocs.clear();
+      await db.locks.clear();
+      await db.ingredients.clear();
+      await db.categories.clear();
+      await db.nativeTeams.clear();
     },
   );
 }

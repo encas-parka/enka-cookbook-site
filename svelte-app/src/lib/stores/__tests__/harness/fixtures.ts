@@ -7,7 +7,19 @@
  * `T`) — since the delta-sync cursor is a LEXICAL comparison on those
  * strings. All dates below are fixed so tests are deterministic.
  */
-import type { EnrichedEvent } from "$lib/types/events";
+import type { EnrichedEvent, EventTodo } from "$lib/types/events";
+import type { RecipeIndexEntry } from "$lib/types/recipes.types";
+import type {
+  EnrichedNativeTeam,
+  NativeTeamMember,
+} from "$lib/types/aw_native_team.d";
+import type {
+  CategoriesRecord,
+  IngredientsRecord,
+  LocksRecord,
+  RecipesStatusOptions,
+  RecipesTypeROptions,
+} from "$lib/types/pb-generated";
 import type {
   Materiel,
   MaterielLoan,
@@ -31,6 +43,19 @@ export const TEST_PURCHASE_ID = "t12purchase0001";
 export const TEST_TEAM_ID = "t12team00000001";
 export const TEST_MATERIEL_ID = "t12mater0000001";
 export const TEST_LOAN_ID = "t12loan00000001";
+export const TEST_INGREDIENT_ID = "t12ingred000001";
+export const TEST_CATEGORY_ID = "t12catego000001";
+export const TEST_RECIPE_ID = "t12recipe000001";
+export const TEST_LOCK_ID = "t12lock00000001";
+export const TEST_USER_ID = "t12user00000001";
+export const TEST_MEMBER_ID = "t12member000001";
+
+/**
+ * Business ref of the fixture ingredient — the join key between
+ * `recipes.ingredients[].ref` / `products.ingredientRef` and the
+ * ingredient catalogue (NOT the PB id, see `toAppIngredient`).
+ */
+export const TEST_INGREDIENT_REF = "t12ingref0001";
 
 /** Service date used in byDate / dateDisplayInfo fixtures. */
 export const TEST_DATE = "2026-12-19";
@@ -223,6 +248,149 @@ export function makeNeedRow(
     }),
     updated: pbDate(T0),
     created: pbDate(T0),
+    ...overrides,
+  };
+}
+
+/** A PB "ingredients" record (catalogue — join key is `ref`, not `id`). */
+export function makeIngredientRecord(
+  overrides: Partial<IngredientsRecord> = {},
+): IngredientsRecord {
+  return {
+    id: TEST_INGREDIENT_ID,
+    created: pbDate(T0),
+    updated: pbDate(T0),
+    ref: TEST_INGREDIENT_REF,
+    name: "Eau",
+    type: "legumes",
+    allergens: [],
+    pF: false,
+    pS: false,
+    saisons: [],
+    ...overrides,
+  };
+}
+
+/** A PB "categories" record (recipe category, type="category"). */
+export function makeCategoryRecord(
+  overrides: Partial<CategoriesRecord> = {},
+): CategoriesRecord {
+  return {
+    id: TEST_CATEGORY_ID,
+    created: pbDate(T0),
+    updated: pbDate(T0),
+    name: "Plats",
+    type: "category",
+    ...overrides,
+  };
+}
+
+/**
+ * A recipes-index entry (RecipesStore.recipesIndex) — the shape consumed by
+ * EventMealCard / RecipeSearchCard / RecipeAlternatives. Ingredients are
+ * refs (string[]), not parsed RecipeIngredient rows.
+ */
+export function makeRecipeIndexEntry(
+  overrides: Partial<RecipeIndexEntry> = {},
+): RecipeIndexEntry {
+  return {
+    id: TEST_RECIPE_ID,
+    created: pbDate(T0),
+    updated: pbDate(T0),
+    title: "Tarte aux pommes",
+    typeR: "dessert" as RecipesTypeROptions,
+    categories: ["Plats"],
+    regime: null,
+    draft: false,
+    materiel: null,
+    region: null,
+    serveHot: false,
+    cuisson: true,
+    check: false,
+    saison: null,
+    permissionWrite: null,
+    plate: 6,
+    createdBy: null,
+    ingredients: [TEST_INGREDIENT_REF],
+    status: "public" as RecipesStatusOptions,
+    rootRecipeId: null,
+    versionLabel: null,
+    teams: null,
+    ...overrides,
+  };
+}
+
+/** A todo embedded in `events.todos` JSON (makeEvent({ todos: [...] })). */
+export function makeEventTodo(overrides: Partial<EventTodo> = {}): EventTodo {
+  return {
+    id: "todo-t12-000001",
+    taskName: "Préparer la salle",
+    taskDescription: null,
+    dueDate: null,
+    priority: "medium",
+    status: "todo",
+    taskOn: "beforeEvent",
+    requiredPeopleNb: 2,
+    assignedTo: null,
+    ...overrides,
+  };
+}
+
+/** A member of an enriched native team (NativeTeamsStore). */
+export function makeTeamMember(
+  overrides: Partial<NativeTeamMember> = {},
+): NativeTeamMember {
+  return {
+    id: TEST_MEMBER_ID,
+    userId: TEST_USER_ID,
+    name: "Test User",
+    userEmail: "testuser@example.test",
+    roles: ["member"],
+    joinedAt: pbDate(T0),
+    confirmed: true,
+    ...overrides,
+  };
+}
+
+/** An enriched native team (db.nativeTeams cache / NativeTeamsStore). */
+export function makeTeam(
+  overrides: Partial<EnrichedNativeTeam> = {},
+): EnrichedNativeTeam {
+  const members = overrides.members ?? [makeTeamMember()];
+  return {
+    id: TEST_TEAM_ID,
+    name: "Team One",
+    total: members.length,
+    created: pbDate(T0),
+    updated: pbDate(T0),
+    members,
+    prefs: { description: "", location: "", city: "", isPublic: false },
+    description: "",
+    ...overrides,
+  };
+}
+
+/**
+ * A PB "locks" record — expiry is client-written (`toISOString`, `T`
+ * separator, unlike pbDate). Fixed past-future pair: T1 + 1 h is still
+ * future relative to every fixture mutation date.
+ */
+export const LOCK_EXPIRES_AT = new Date(
+  T1.getTime() + 60 * 60 * 1000,
+).toISOString();
+
+export function makeLockRecord(
+  overrides: Partial<LocksRecord> = {},
+): LocksRecord {
+  return {
+    id: TEST_LOCK_ID,
+    created: pbDate(T0),
+    updated: pbDate(T0),
+    collection: "recipes",
+    recordId: TEST_RECIPE_ID,
+    userId: TEST_USER_ID,
+    userName: "Test User",
+    expiresAt: LOCK_EXPIRES_AT,
     ...overrides,
   };
 }

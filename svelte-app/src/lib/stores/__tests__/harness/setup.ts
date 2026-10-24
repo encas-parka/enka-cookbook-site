@@ -8,3 +8,19 @@
  * and the polyfill must be registered before that happens.
  */
 import "fake-indexeddb/auto";
+
+// jsdom n'implémente pas matchMedia — requis par svelte/reactivity/window
+// (DevicePixelRatio est construit à l'import du module : `online` de
+// MaterielCard, etc.). Stub minimal, hors environnement node (pas de window).
+if (typeof window !== "undefined" && !window.matchMedia) {
+  window.matchMedia = ((query: string) => ({
+    matches: false,
+    media: query,
+    onchange: null,
+    addListener: () => {},
+    removeListener: () => {},
+    addEventListener: () => {},
+    removeEventListener: () => {},
+    dispatchEvent: () => false,
+  })) as unknown as typeof window.matchMedia;
+}

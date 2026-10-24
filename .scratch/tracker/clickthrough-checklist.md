@@ -481,14 +481,17 @@ vert à l'écran le 20-10 par l'humain.**
       simultanément → l'un gagne, l'autre voit l'état réel « verrouillé par
       X » (re-lecture du verrou, commit `26fddcf7`) et non une erreur
       générique. _(optionnel — course difficile à provoquer à la main)_
-- [ ] Quitter une page en édition avec des modifications : confirmer
-      « quitter sans sauvegarder » (navigation interne) → verrou libéré
-      immédiatement, pas au bout des 7 min.
+- [ ] Effet réel du guard sur les verrous : quitter une page en édition
+      avec des modifications → verrou libéré immédiatement, pas au bout
+      des 7 min ; et fermeture d'onglet (onglet caché).
       _(ajouté 21-10 — libération câblée sur les quatre pages éditrices
       (EventEditPage, RecipeEditPage, EditDocumentPage, EventDocumentEditPage).
-      Fermeture d'onglet non couverte : `beforeunload` ne permet ni await ni
-      callback — piste `pagehide` + `fetch keepalive`, ou s'en remettre au TTL
-      de 7 min)_
+      Réduit 24-10 : le contrat handler est testé (`UnsavedChangesGuard.test.ts`
+      — blockNavigation/shouldProtect/onLeaveWithoutSave/unblock au
+      démontage) ; restent manuels l'effet réel sur `locks` (flux
+      store/SSE, intrinsèquement multi-sessions) et la fermeture d'onglet :
+      `beforeunload` ne permet ni await ni callback — piste `pagehide` +
+      `fetch keepalive`, ou s'en remettre au TTL de 7 min)_
 
 - [x] SSE : modification dans A visible dans B sans reload (event, recette,
       produit, teamdoc). **À rejouer sur SDK pocketbase 0.28** (les deux items

@@ -500,22 +500,6 @@ export function enrichLoanFromDb(loan: MaterielLoan): EnrichedMaterielLoan {
 // =============================================================================
 
 /**
- * Vérifie si un emprunt est actif à une date donnée
- * @param loan - Emprunt à vérifier
- * @param date - Date de référence (défaut: maintenant)
- * @returns true si l'emprunt est actif
- */
-export function isLoanActive(
-  loan: MaterielLoan,
-  date: Date = new Date(),
-): boolean {
-  if (loan.startDate === null || loan.endDate === null) return false;
-  const startDate = new Date(loan.startDate);
-  const endDate = new Date(loan.endDate);
-  return startDate <= date && endDate >= date;
-}
-
-/**
  * Vérifie si un emprunt est planifié (futur)
  * @param loan - Emprunt à vérifier
  * @param date - Date de référence (défaut: maintenant)
@@ -537,42 +521,6 @@ export function isLoanPlanned(
  */
 export function isLoanValid(loan: MaterielLoan): boolean {
   return loan.status !== null && ["asked", "accepted"].includes(loan.status);
-}
-
-/**
- * Calcule la quantité totale empruntée pour un matériel à une date donnée
- * Ne compte que les prêts ACTIFS (pas les prêts planifiés/futurs)
- * @param materielId - ID du matériel
- * @param loans - Liste des emprunts
- * @param now - Date de référence
- * @returns Quantité totale empruntée (prêts actifs uniquement)
- */
-export function calculateTotalLoanedQuantity(
-  materielId: string,
-  loans: MaterielLoan[],
-  now: Date = new Date(),
-): number {
-  let total = 0;
-
-  loans.forEach((loan) => {
-    // Vérifier si le loan est actif et valide (pas planifié)
-    if (!isLoanActive(loan, now)) {
-      return;
-    }
-    if (!isLoanValid(loan)) {
-      return;
-    }
-
-    // Parser les items et sommer les quantités pour ce matériel
-    const loanItems = parseLoanItemsFromDb(loan.materiels);
-    const itemsForThisMateriel = loanItems.filter(
-      (item) => item.materielId === materielId,
-    );
-
-    total += itemsForThisMateriel.reduce((sum, item) => sum + item.quantity, 0);
-  });
-
-  return total;
 }
 
 /**
@@ -669,107 +617,4 @@ export function calculateLoanedQuantityForPeriod(
   });
 
   return total;
-}
-
-/**
- * Vérifie si un matériel est disponible sur une période donnée
- * @param materiel - Matériel enrichi
- * @param loans - Liste des emprunts
- * @param periodStart - Date de début de la période
- * @param periodEnd - Date de fin de la période
- * @param requestedQuantity - Quantité demandée (défaut: 1)
- * @returns true si le matériel est disponible
- */
-export function isMaterielAvailableForPeriod(
-  materiel: EnrichedMateriel,
-  loans: MaterielLoan[],
-  periodStart: Date,
-  periodEnd: Date,
-  requestedQuantity: number = 1,
-): boolean {
-  // Quantité inconnue (null) → déclaré non disponible
-  if (materiel.quantity === null) return false;
-
-  const loanedQuantity = calculateLoanedQuantityForPeriod(
-    materiel.id,
-    loans,
-    periodStart,
-    periodEnd,
-  );
-
-  return materiel.quantity - loanedQuantity >= requestedQuantity;
-}
-
-/**
- * Retourne les détails des conflits pour un matériel sur une période
- * @param materielId - ID du matériel
- * @param materielName - Nom du matériel
- * @param loans - Liste des emprunts
- * @param periodStart - Date de début de la période
- * @param periodEnd - Date de fin de la période
- * @returns Liste des conflits avec détails
- */
-export function getMaterielConflictsForPeriod(
-  materielId: string,
-  materielName: string,
-  loans: MaterielLoan[],
-  periodStart: Date,
-  periodEnd: Date,
-): Array<{
-  loanId: string;
-  responsibleName: string;
-  startDate: string;
-  endDate: string;
-  quantity: number;
-}> {
-  const conflicts: Array<{
-    loanId: string;
-    responsibleName: string;
-    startDate: string;
-    endDate: string;
-    quantity: number;
-  }> = [];
-
-  loans.forEach((loan) => {
-    // Vérifier si le loan est valide
-    if (!isLoanValid(loan)) {
-      return;
-    }
-
-    // Comparaison de période sans sens si les dates manquent
-    if (loan.startDate === null || loan.endDate === null) {
-      return;
-    }
-
-    // Vérifier si les périodes se chevauchent
-    const loanStart = new Date(loan.startDate);
-    const loanEnd = new Date(loan.endDate);
-
-    if (!doPeriodsOverlap(loanStart, loanEnd, periodStart, periodEnd)) {
-      return;
-    }
-
-    // Parser les items et vérifier si ce matériel est concerné
-    const loanItems = parseLoanItemsFromDb(loan.materiels);
-    const itemsForThisMateriel = loanItems.filter(
-      (item) => item.materielId === materielId,
-    );
-
-    if (itemsForThisMateriel.length > 0) {
-      const quantity = itemsForThisMateriel.reduce(
-        (sum, item) => sum + item.quantity,
-        0,
-      );
-
-      conflicts.push({
-        loanId: loan.id,
-        responsibleName: loan.responsibleName || "Inconnu",
-        startDate: loan.startDate,
-        endDate: loan.endDate,
-        quantity,
-      });
-    }
-  });
-
-  return conflicts;
 }

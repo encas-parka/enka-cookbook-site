@@ -23,6 +23,14 @@
 - **Test canon après ticket 05** (attesté, `/tmp/orchestrate/tests-t05-full-suite.log`)
   : suite complète 53 fichiers / 382 tests verts · `check:app` 198 fichiers,
   0 erreur (`/tmp/orchestrate/check-t05-checkapp.log`).
+- **Test canon après ticket 06** (attesté, `/tmp/opencode/tests-t06-full-suite.log`)
+  : suite complète 53 fichiers / 380 tests verts (−2 : describe de coexistence
+  statut/displayState supprimé avec le champ, couverture déjà portée par le
+  bloc disponibilité) · `check:app` 198 fichiers, 0 erreur
+  (`/tmp/orchestrate/check-t06-checkapp.log`, post-regen
+  `check-t06-checkapp-post-regen.log`) · pipeline managed **VERT**
+  `scripts_dev/runs/2026-10-24-050642.md` (12/12 steps exit 0, validate 86/86,
+  0 non-verdicted, log `/tmp/orchestrate/pipeline-t06.log`).
 - **Outils déjà trouvés** : `bun` partout ; check complet = `bun run check:app`
   (racine) ; tests = `cd svelte-app && bun run test` (vitest, setup
   `stores/__tests__/harness/setup.ts`, transport factice `stub-pb.ts`,
@@ -402,6 +410,27 @@ dispo : pure dérivation, rien d'autre à faire.
   store, enrich, interface morte, QuickAddCatalogModal, appwrite.d.ts au
   choix) ; regen types + purge dans le même commit ; re-run managed ; doc
   schéma à jour dans la même session.
+- **06 — livré** (commits `52b592ef` purge app, `b5b7c178` migration +
+  transform + regen + doc) : les 5 sites `pb.d.ts` à la main, bloc statut de
+  `enrichMateriel` (hasActiveLoans/hasFutureLoans conservés — ils alimentent
+  `displayState`), `getMaterielStatusLabel`, `EnrichedMaterielStatus`,
+  `EnrichedMateriel` rebasé sur `Materiel` (l'`Omit<…, "status">` n'avait plus
+  de raison d'être), interface `MaterielFilters` morte (note d'origine
+  laissée sur place), signatures store, `QuickAddCatalogModal`, enum
+  `appwrite.d.ts` (candidat purge, tranché oui). Migration
+  `1792900000_materiel_drop_status.js` sur le modèle ticket 01 (garde
+  d'idempotence ; down recrée le select à l'id d'origine
+  `select2063623452`, valeurs non reconstituées — dérivation perdue depuis
+  la conversion quantitative). Test de coexistence obsolète supprimé plutôt
+  que réécrit : ses 3 cas (repair/depleted/null) existaient déjà dans le
+  bloc disponibilité du même fichier — 380 tests, zéro perte de couverture.
+  Pipeline managed re-run **VERT** (`2026-10-24-050642.md`, base jetable
+  `/tmp/opencode/pb-mig-t06` ; un premier essai ROUGE au même endroit —
+  superuser non provisioné sur la base neuve, corrigé par
+  `pocketbase superuser upsert` avant le re-run) ; sonde sqlite sur la base
+  importée : pas de colonne `status`, backfill visible (2 en réparation,
+  9 à quantité 0 sur 110). Grep de preuve zéro lecteur restant :
+  `/tmp/orchestrate/grep-preuve-t06.log`.
 - **Arbitrages tranchés par l'orchestrateur (profil délégué, 24-10)** :
   1. *Périmètre vocabulaire 05* — les 2 chaînes hors zone stricte
      (`loan-return-markdown.ts` en-tête « Perdus », `exportLoanToMarkdown`

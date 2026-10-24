@@ -5,13 +5,15 @@ Tag: bug · Urgence: soon · Source: note manuelle utilisateur, checklist click-
 # « Recette inconnue » affiché sur certaines fiches recette
 
 **Constat** — la page recette affiche « recette inconnue » pour certaines
-recettes ; repro utilisateur 24-10 : `recipe/banoffee_uw7nq3h3hzob`. La note
-originale (« Début de correction, mais maintenant : affiche recette inconnue… »)
-indique qu'une correction était en cours au moment du symptôme. Site d'affichage
-non qualifié : le seul libellé littéral du code est le fallback
-`recipesIndex.get(uuid)?.n || "Recette inconnue"` de `RecipeAlternatives`
-(hypothèse : un uuid absent de l'index recettes au rendu — cache froid, recette
-supprimée ou ref cassée depuis une liste d'alternatives ; inféré, à qualifier).
+recettes ; repro utilisateur 24-10 : `recipe/banoffee_uw7nq3h3hzob`. Contexte
+qualifié le 24-10 (grep, mesuré) : le composant `RecipeAlternatives` — longtemps
+non câblé (P1 checklist, état du 20-10) — est désormais importé par
+`RecipeDetailPage.svelte` (l.9) et monté (l.347-354) ; son fallback
+`recipesIndex.get(uuid)?.n || "Recette inconnue"` (l.16) s'affiche dès qu'un
+uuid d'alternative manque à l'index au rendu (cache froid, recette supprimée ou
+ref cassée — cause racine à qualifier). La note originale (« Début de
+correction, mais maintenant : affiche recette inconnue… ») décrit ce
+symptôme apparu après le câblage.
 
 **Impact** — fiche publique en échec de rendu partiel pour au moins une recette
 réelle du catalogue ; l'étendue (« certaines ») n'est pas chiffrée.

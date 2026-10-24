@@ -180,7 +180,11 @@ retour qui décrémente les manquants — ADR 0003) ; les libellés « Manquant(
   raccourci de groupe ne change pas (ConfirmModal, épargne les problèmes
   déclarés, referme les panneaux ouverts) ;
 - débordement mobile réglé par construction : plus aucun cluster fixe dans
-  la ligne.
+  la ligne ;
+- **en-tête guide** (`alert alert-soft alert-info`, idiome existant) : la
+  grammaire en une ligne avant la liste ; la phrase du bas, devenue
+  redondante, se réduit au compteur (« N matériel(s) reste(nt) à
+  déclarer »).
 
 Vérifs : check 0/0 (198 fichiers), build OK ; suite complète 382/383 — le
 seul échec (`events-store-ensure-event`, cache chaud) est un flake de

@@ -43,7 +43,7 @@
   import MaterielTypeGroup from "../MaterielTypeGroup.svelte";
   import LoanItemReadRow from "./LoanItemReadRow.svelte";
   import ConfirmModal from "../../ui/ConfirmModal.svelte";
-  import { AlertTriangle, Check, Package, X } from "@lucide/svelte";
+  import { AlertTriangle, Check, Info, Package, X } from "@lucide/svelte";
 
   interface ReturnRow {
     materielId: string;
@@ -343,6 +343,17 @@
 
 <div class="card bg-base-100 max-sm:card-xs mx-auto max-w-3xl shadow-sm">
   <div class="card-body">
+    {#if !isReadOnly}
+      <!-- Guide de déclaration : la grammaire en une ligne, avant la liste -->
+      <div class="alert alert-soft alert-info mb-3">
+        <Info class="h-5 w-5" />
+        <span>
+          Vérifiez chaque matériel : « Ok » s'il est revenu intact, « Un
+          problème » pour déclarer du matériel manquant ou à réparer.
+        </span>
+      </div>
+    {/if}
+
     {#if isReadOnly && returnedAt}
       <div class="alert alert-info max-md:alert-vertical">
         <Package class="h-5 w-5" />
@@ -564,8 +575,8 @@
     {#if !isReadOnly && undeclaredCount > 0}
       <p class="text-base-content/70 mt-3 text-sm">
         {undeclaredCount}
-        matériel{undeclaredCount > 1 ? "s" : ""} à déclarer : « Ok » si tout est revenu,
-        « Un problème » sinon.
+        matériel{undeclaredCount > 1 ? "s" : ""}
+        {undeclaredCount > 1 ? "restent" : "reste"} à déclarer.
       </p>
     {/if}
 

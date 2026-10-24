@@ -33,7 +33,6 @@ vi.mock("pocketbase", async () => {
 
 import { describe, it, expect, beforeEach, afterEach, vi } from "vitest";
 import { flushSync } from "svelte";
-import userEvent from "@testing-library/user-event";
 import { currentFakePb } from "$lib/stores/__tests__/harness/stub-pb";
 import { clearDexie } from "$lib/stores/__tests__/harness/seed-dexie";
 import { waitForTick } from "$lib/stores/__tests__/harness/wait-for-tick";
@@ -122,13 +121,16 @@ async function seedAndInitialize(repairQuantity: number, quantity: number) {
   await waitForTick(5);
 }
 
+/** État neuf : transport, spies, store et Dexie remis à zéro. */
+async function resetMaterielState() {
+  currentFakePb().reset();
+  vi.restoreAllMocks();
+  await materielStore.destroy();
+  await clearDexie();
+}
+
 describe("MaterielForm — gestes de réparation", () => {
-  beforeEach(async () => {
-    currentFakePb().reset();
-    vi.restoreAllMocks();
-    await materielStore.destroy();
-    await clearDexie();
-  });
+  beforeEach(resetMaterielState);
 
   afterEach(() => cleanupSvelte());
 
@@ -155,22 +157,10 @@ describe("MaterielForm — gestes de réparation", () => {
 
     // Réformer 1 exemplaire (valeur par défaut du geste)
     getByText(target, "button", "Réformer").click();
-    try {
-      await waitForCondition(
-        () => quantityInput(target).value === "4",
-        "le formulaire se resync après la réforme",
-      );
-    } catch (e) {
-      // Instrumentation : où en sont le transport et le store ?
-      const server = await currentFakePb()
-        .collection("materiel")
-        .getOne(TEST_MATERIEL_ID);
-      const fresh = materielStore.getMaterielById(TEST_MATERIEL_ID);
-      process.stdout.write(
-        `\n[debug] transport: ${JSON.stringify(server)}\n[debug] store: ${JSON.stringify(fresh ? { quantity: fresh.quantity, repairQuantity: fresh.repairQuantity } : null)}\n`,
-      );
-      throw e;
-    }
+    await waitForCondition(
+      () => quantityInput(target).value === "4",
+      "le formulaire se resync après la réforme",
+    );
     // Le snapshot suit le store : quantité 4, plus que 2 en réparation
     expect(quantityInput(target).value).toBe("4");
     expect(gestureInput(target).max).toBe("2");
@@ -196,32 +186,37 @@ describe("MaterielForm — gestes de réparation", () => {
     expect(quantityInput(target).value).toBe("5");
   });
 
-  it("garde du geste : n > repairQuantity désactive les boutons", async () => {
+  it("garde du geste : bornes inclusives, hors bornes désactivé", async () => {
     await seedAndInitialize(3, 5);
     const target = mountSvelte(MaterielForm, {
       initialValues: makeInitialValues(),
     });
-
-    setInputValue(gestureInput(target), "4");
     const reformer = getByText(
       target,
       "button",
       "Réformer",
     ) as HTMLButtonElement;
+
+    // Borne haute inclusive : n = repairQuantity reste valide
+    setInputValue(gestureInput(target), "3");
+    expect(reformer.disabled).toBe(false);
+
+    // Dépassement : désactivé
+    setInputValue(gestureInput(target), "4");
     expect(reformer.disabled).toBe(true);
 
+    // Borne basse : n = 0 invalide (le geste commence à 1)
+    setInputValue(gestureInput(target), "0");
+    expect(reformer.disabled).toBe(true);
+
+    // Valeur valide : réactivé
     setInputValue(gestureInput(target), "2");
     expect(reformer.disabled).toBe(false);
   });
 });
 
 describe("MaterielForm — rebut et validation", () => {
-  beforeEach(async () => {
-    currentFakePb().reset();
-    vi.restoreAllMocks();
-    await materielStore.destroy();
-    await clearDexie();
-  });
+  beforeEach(resetMaterielState);
 
   afterEach(() => cleanupSvelte());
 
@@ -244,11 +239,14 @@ describe("MaterielForm — rebut et validation", () => {
     expect(submitted[0].quantity).toBe(0);
   });
 
-  it("en création, le stock commence à 1 (pas de rebut à la création)", () => {
+  it("en création, le stock commence à 1 et les gestes n'existent pas", () => {
     const target = mountSvelte(MaterielForm, {});
     expect(quantityInput(target).min).toBe("1");
     expect(quantityInput(target).value).toBe("1");
     // L'aide au rebut n'a de sens qu'en édition
     expect(target.textContent).not.toContain("0 = au rebut");
+    // Les gestes sont un contrat d'édition : absents en création
+    expect(queryByText(target, "button", "Réformer")).toBeNull();
+    expect(queryByText(target, "button", "Remettre en service")).toBeNull();
   });
 });

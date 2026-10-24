@@ -9,9 +9,9 @@
  */
 import "fake-indexeddb/auto";
 
-// jsdom n'implémente pas matchMedia — requis par svelte/reactivity/window
-// (DevicePixelRatio est construit à l'import du module : `online` de
-// MaterielCard, etc.). Stub minimal, hors environnement node (pas de window).
+// jsdom n'implémente pas matchMedia — requis par svelte/reactivity/window :
+// l'import du module construit un DevicePixelRatio (ex. `online`, importé
+// par MaterielCard). Stub minimal, hors environnement node (pas de window).
 if (typeof window !== "undefined" && !window.matchMedia) {
   window.matchMedia = ((query: string) => ({
     matches: false,

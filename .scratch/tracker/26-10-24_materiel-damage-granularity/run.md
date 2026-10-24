@@ -20,6 +20,9 @@
 - **Test canon après ticket 04** (attesté, `/tmp/orchestrate/tests-t04-full-suite.log`)
   : suite complète 53 fichiers / 382 tests verts · `check:app` 198 fichiers,
   0 erreur (`/tmp/orchestrate/check-t04-checkapp.log`).
+- **Test canon après ticket 05** (attesté, `/tmp/orchestrate/tests-t05-full-suite.log`)
+  : suite complète 53 fichiers / 382 tests verts · `check:app` 198 fichiers,
+  0 erreur (`/tmp/orchestrate/check-t05-checkapp.log`).
 - **Outils déjà trouvés** : `bun` partout ; check complet = `bun run check:app`
   (racine) ; tests = `cd svelte-app && bun run test` (vitest, setup
   `stores/__tests__/harness/setup.ts`, transport factice `stub-pb.ts`,
@@ -340,6 +343,7 @@ dispo : pure dérivation, rien d'autre à faire.
 | 22 | Régression sélecteurs sans filtre statut | les suites store qui consomment `getAvailableMaterielsForPeriod` restent vertes (fixtures sans repairQuantity ⇒ formules inchangées pour elles) | mesuré | `/tmp/orchestrate/tests-t03-store-regression.log` (4 fichiers / 19 tests) |
 | 23 | Zone inventaire « perdu » après 04 | 0 occurrence (Form/Card/Filters/Modal/Page) ; restantes = zone retour/loan (ticket 05) | mesuré | grep `[Pp]erd[u]` sur `components/teamMatos` + `routes/MaterielPage.svelte` post-04 |
 | 24 | Canon après 04 | suite 53 fichiers / 382 tests verte, check:app 198 fichiers / 0 erreur | mesuré | `/tmp/orchestrate/tests-t04-full-suite.log`, `/tmp/orchestrate/check-t04-checkapp.log` |
+| 25 | Zone retour « perdu » après 05 | 0 occurrence (LoanReturnForm, LoanCard, loan-return-markdown, MaterielStore, MaterielPage) ; `lostQuantity`/`"lost"` (noms de champ payload) intacts | mesuré | grep `[Pp]erd[u]` sur `components/teamMatos` + `utils/loan-return-markdown.ts` + `stores/MaterielStore.svelte.ts` + `routes/MaterielPage.svelte` post-05 ; en-tête markdown non épinglé par son test (vert, `/tmp/orchestrate/tests-t05-loan-return-markdown.log`) |
 
 ## Décisions par ticket
 
@@ -438,6 +442,19 @@ dispo : pure dérivation, rien d'autre à faire.
   car la fonction canonique y injecterait « Partiel : 0 à réparer », sans
   sens pour une facette agrégée ; le vocabulaire reste le sien. Omit
   `loanStatus` vestigial de MaterielPage nettoyé au passage.
+- **05 — livré** (commit `0645f77f`) : les deux arbitrages de l'orchestrateur
+  appliqués tels quels — les 2 chaînes hors zone stricte entrent au ticket
+  (en-tête « Manquants » de `loan-return-markdown.ts`, ligne « (manquant: …,
+  cassé: …) » de `exportLoanToMarkdown`) et LoanCard ne porte que des
+  commentaires relabelisés (badge couleur conservé, pas de nouveau texte
+  d'état) ; diff 18⁺/18⁻ strictement lexical — `confirmSubmit` hors diff,
+  identifiants `setTri`/`onQty` "lost" et bornage inchangés, formes
+  Manquant/Manquants/manquante appliquées à libellés, aria et aide ; test
+  markdown ciblé vert 7/7 (`/tmp/orchestrate/tests-t05-loan-return-markdown.log`,
+  l'en-tête n'y est pas épinglé, confirmé) ; grep zone retour zéro occurrence
+  (sonde 25) ; click-throughs scénarios 1-4 marqués `[!]` « passe humaine
+  requise » — passe de clôture mainteneur (checklist
+  `.scratch/tracker/clickthrough-checklist.md`).
 
 ## Trouvailles différées
 

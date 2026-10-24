@@ -14,14 +14,16 @@
    *   badge d'avancement et raccourci « tout est ok » qui passe par une
    *   confirmation (« Vous confirmez avoir vérifié… ») et n'atteste que
    *   les rangées non déclarées ;
-   * - chaque rangée porte ses valeurs (manquants, à réparer) et une
-   *   attestation « Ok » : le label « Ok ×N » annonce ce qu'on valide ;
-   *   toute édition décoche, et à N = 0 (tout manquant/cassé) Ok est
-   *   désactivé — les valeurs saisies sont alors la déclaration ;
-   * - quantité 1 : trio exclusif À réparer / Manquant / Ok, les
-   *   boutons-valeur se démarquent au second clic ;
-   * - validation : chaque matériel est déclaré (attesté, ou ne laissant
-   *   rien d'intact à attester).
+   * - au repos, une rangée propose deux gestes : « Un problème » (ouvre
+   *   un panneau sous la ligne) et « Ok ×N » — atteste que tout est
+   *   revenu intact, posé en bout de lecture (geste affirmatif à
+   *   droite) ;
+   * - le panneau problème porte les valeurs (manquants / à réparer ;
+   *   bascules pour une quantité de 1) : les valeurs font foi, la
+   *   rangée est déclarée dès qu'une valeur est saisie — « retirer le
+   *   problème » remet à zéro, un lien renvoie aux notes pour détailler ;
+   * - validation : chaque matériel est déclaré (attesté, ou problème
+   *   déclaré).
    */
   import { untrack } from "svelte";
   import { toastService } from "$lib/services/toast.service.svelte";
@@ -51,10 +53,12 @@
     lostQuantity: number;
     brokenQuantity: number;
     /**
-     * Attestation « vérifié » de l'utilisateur — distincte des valeurs
-     * saisies : toute édition d'input la décoche.
+     * Attestation « vérifié » de l'utilisateur — le cas nominal « tout
+     * est revenu intact », posée d'un geste sur une rangée sans valeur.
      */
     okChecked: boolean;
+    /** Panneau problème ouvert sous la ligne. */
+    panelOpen: boolean;
   }
 
   interface Props {
@@ -87,6 +91,8 @@
   let materielsReturns = $state<ReturnRow[]>([]);
   /** Groupe en cours d'attestation via le raccourci « tout est ok ». */
   let confirmGroup = $state<{ type: string; rows: ReturnRow[] } | null>(null);
+  /** Champ notes, ciblé par le lien « préciser dans les notes ». */
+  let notesEl = $state<HTMLTextAreaElement | null>(null);
 
   // Init : une fois par (emprunt, statut). Rejouer l'init à chaque mise à jour
   // du store effacerait les déclarations en cours de saisie.
@@ -117,6 +123,7 @@
           lostQuantity: lost,
           brokenQuantity: broken,
           okChecked: true,
+          panelOpen: false,
         };
       }
 
@@ -128,6 +135,7 @@
         lostQuantity: 0,
         brokenQuantity: 0,
         okChecked: false,
+        panelOpen: false,
       };
     });
 
@@ -162,18 +170,17 @@
     groupByTypeOrder(materielsReturns, (r) => r.materielType),
   );
 
-  /** Restant intact de la rangée, recalculé en direct. */
-  function remainingOf(item: ReturnRow): number {
-    return item.quantity - item.lostQuantity - item.brokenQuantity;
+  /** Valeurs de problème déclarées sur la rangée (manquants + à réparer). */
+  function problemOf(item: ReturnRow): number {
+    return item.lostQuantity + item.brokenQuantity;
   }
 
   /**
-   * Rangée déclarée : attestée par l'utilisateur, ou ne laissant rien
-   * d'intact à attester — quand tout est manquant/à réparer, les valeurs
-   * saisies sont elles-mêmes la déclaration.
+   * Rangée déclarée : attestée par l'utilisateur (« Ok », cas nominal),
+   * ou portant un problème déclaré — les valeurs saisies font foi.
    */
   function isRowDeclared(item: ReturnRow): boolean {
-    return item.okChecked || remainingOf(item) === 0;
+    return item.okChecked || problemOf(item) > 0;
   }
 
   const undeclaredCount = $derived(
@@ -188,18 +195,24 @@
 
   // --- Déclarations ---
 
+  /** Ouvre le panneau problème ; une attestation en cours est retirée. */
+  function openProblem(item: ReturnRow) {
+    item.okChecked = false;
+    item.panelOpen = true;
+  }
+
+  /** Ferme le panneau et remet les valeurs à zéro (rangée non déclarée). */
+  function closeProblem(item: ReturnRow) {
+    item.lostQuantity = 0;
+    item.brokenQuantity = 0;
+    item.panelOpen = false;
+  }
+
   /**
-   * Trio quantité 1 : les boutons-valeur sont des toggles (recliquer la
-   * valeur active la démarque) ; Ok remet la rangée entière intacte et
-   * l'atteste d'un geste.
+   * Une unité (quantité 1) : les boutons-valeur du panneau sont des
+   * toggles — recliquer la valeur active la démarque.
    */
-  function setTri(item: ReturnRow, kind: "ok" | "lost" | "broken") {
-    if (kind === "ok") {
-      item.lostQuantity = 0;
-      item.brokenQuantity = 0;
-      item.okChecked = true;
-      return;
-    }
+  function setTri(item: ReturnRow, kind: "lost" | "broken") {
     const active =
       kind === "lost" ? item.lostQuantity > 0 : item.brokenQuantity > 0;
     if (active) {
@@ -226,11 +239,23 @@
     item.okChecked = false;
   }
 
-  /** Raccourci de groupe : n'atteste que les rangées non déclarées. */
+  /**
+   * Raccourci de groupe : n'atteste que les rangées non déclarées — une
+   * rangée avec problème déclaré est épargnée — et referme leur panneau.
+   */
   function markRowsOk(rows: ReturnRow[]) {
     for (const row of rows) {
-      if (!isRowDeclared(row)) row.okChecked = true;
+      if (!isRowDeclared(row)) {
+        row.okChecked = true;
+        row.panelOpen = false;
+      }
     }
+  }
+
+  /** Fait défiler jusqu'aux notes et y place le curseur. */
+  function focusNotes() {
+    notesEl?.scrollIntoView({ behavior: "smooth", block: "center" });
+    notesEl?.focus();
   }
 
   // --- Validation du retour ---
@@ -370,125 +395,166 @@
               quantity={item.quantity}
               type={item.materielType}
             >
-              {#if isReadOnly}
-                <!-- Lecture seule : l'état enregistré en badges -->
-                {#if item.brokenQuantity > 0}
-                  <div class="badge badge-warning gap-1">
-                    <AlertTriangle class="h-3 w-3" />
-                    À réparer : {item.brokenQuantity}
-                  </div>
-                {/if}
-                {#if item.lostQuantity > 0}
-                  <div class="badge badge-error gap-1">
-                    <X class="h-3 w-3" />
-                    Manquant : {item.lostQuantity}
-                  </div>
-                {/if}
-                {#if item.quantity - item.lostQuantity - item.brokenQuantity > 0}
-                  <div class="badge badge-success gap-1">
-                    <Check class="h-3 w-3" />
-                    OK : {item.quantity -
-                      item.lostQuantity -
-                      item.brokenQuantity}
-                  </div>
-                {/if}
-              {:else if item.quantity === 1}
-                <!-- Trio exclusif : actif plein, inactif outline ; les
-                     boutons-valeur se démarquent au second clic -->
-                <div class="flex flex-wrap items-center gap-1">
-                  <button
-                    class="btn btn-sm {item.brokenQuantity > 0
-                      ? 'btn-warning'
-                      : 'btn-outline btn-warning'}"
-                    type="button"
-                    aria-label="À réparer"
-                    onclick={() => setTri(item, "broken")}
-                  >
-                    <AlertTriangle class="h-4 w-4" />
-                    À réparer
-                  </button>
-                  <button
-                    class="btn btn-sm {item.lostQuantity > 0
-                      ? 'btn-error'
-                      : 'btn-outline btn-error'}"
-                    type="button"
-                    aria-label="Manquant"
-                    onclick={() => setTri(item, "lost")}
-                  >
-                    <X class="h-4 w-4" />
-                    Manquant
-                  </button>
-                  <button
-                    class="btn btn-sm {item.okChecked
-                      ? 'btn-success'
-                      : 'btn-outline btn-success'}"
-                    type="button"
-                    aria-label="Ok"
-                    disabled={remainingOf(item) === 0}
-                    onclick={() => setTri(item, "ok")}
-                  >
-                    <Check class="h-4 w-4" />
-                    Ok
-                  </button>
-                </div>
-              {:else}
-                <!-- Saisie toujours visible : sélection au focus (frappe =
-                     remplacement), steppers masqués (.qty-input). Le bouton
-                     Ok atteste les restants intacts — son label suit les
-                     saisies, toute édition le décoche. -->
-                <div class="ms-auto flex items-center gap-2">
-                  <label class="input">
-                    <span class="label border-base-300 border-r pr-2"
-                      >Manquants</span
+              {#snippet children()}
+                {#if isReadOnly}
+                  <!-- Lecture seule : l'état enregistré en badges -->
+                  {#if item.brokenQuantity > 0}
+                    <div class="badge badge-warning gap-1">
+                      <AlertTriangle class="h-3 w-3" />
+                      À réparer : {item.brokenQuantity}
+                    </div>
+                  {/if}
+                  {#if item.lostQuantity > 0}
+                    <div class="badge badge-error gap-1">
+                      <X class="h-3 w-3" />
+                      Manquant : {item.lostQuantity}
+                    </div>
+                  {/if}
+                  {#if item.quantity - item.lostQuantity - item.brokenQuantity > 0}
+                    <div class="badge badge-success gap-1">
+                      <Check class="h-3 w-3" />
+                      OK : {item.quantity -
+                        item.lostQuantity -
+                        item.brokenQuantity}
+                    </div>
+                  {/if}
+                {:else if !item.panelOpen}
+                  <!-- Repos : « Un problème » ouvre le panneau sous la
+                       ligne ; « Ok ×N » atteste le cas nominal, posé en
+                       bout de lecture (geste affirmatif à droite). -->
+                  <div class="flex items-center gap-2">
+                    <button
+                      class="btn btn-outline btn-warning"
+                      type="button"
+                      onclick={() => openProblem(item)}
                     >
-                    <input
-                      type="number"
-                      class="qty-input w-8 text-center font-semibold tabular-nums"
-                      inputmode="numeric"
-                      autocomplete="off"
-                      min="0"
-                      max={item.quantity}
-                      value={item.lostQuantity}
-                      aria-label="Quantité manquante"
-                      onfocus={(e) => e.currentTarget.select()}
-                      oninput={(e) =>
-                        onQty(item, "lost", parseInt(e.currentTarget.value))}
-                    />
-                  </label>
-                  <label class="input">
-                    <span class="label border-base-300 border-r pr-2"
-                      >À réparer</span
+                      <AlertTriangle class="h-4 w-4" />
+                      Un problème
+                    </button>
+                    <button
+                      class="btn {item.okChecked
+                        ? 'btn-success'
+                        : 'btn-outline btn-success'}"
+                      type="button"
+                      title="Attester que tout est revenu intact"
+                      onclick={() => (item.okChecked = true)}
                     >
-                    <input
-                      type="number"
-                      class="qty-input w-8 text-center font-semibold tabular-nums"
-                      inputmode="numeric"
-                      autocomplete="off"
-                      min="0"
-                      max={item.quantity}
-                      value={item.brokenQuantity}
-                      aria-label="Quantité à réparer"
-                      onfocus={(e) => e.currentTarget.select()}
-                      oninput={(e) =>
-                        onQty(item, "broken", parseInt(e.currentTarget.value))}
-                    />
-                  </label>
-                  <button
-                    class="btn {item.okChecked
-                      ? 'btn-success'
-                      : 'btn-outline btn-success'}"
-                    type="button"
-                    disabled={remainingOf(item) === 0}
-                    onclick={() => (item.okChecked = true)}
-                    title={remainingOf(item) === 0
-                      ? "Rien d'intact à attester dans cette rangée"
-                      : `Attester les ${remainingOf(item)} restant(s) intact(s)`}
+                      <Check class="h-4 w-4" />
+                      Ok{item.quantity > 1 ? ` ×${item.quantity}` : ""}
+                    </button>
+                  </div>
+                {/if}
+              {/snippet}
+              {#snippet details()}
+                {#if !isReadOnly && item.panelOpen}
+                  <!-- Panneau problème : les valeurs font foi — la rangée
+                       est déclarée dès qu'une valeur est saisie. -->
+                  <div
+                    class="border-warning/40 mt-1 border-t border-dashed pt-2"
                   >
-                    <Check class="h-4 w-4" />
-                    Ok{remainingOf(item) > 0 ? ` ×${remainingOf(item)}` : ""}
-                  </button>
-                </div>
-              {/if}
+                    {#if item.quantity === 1}
+                      <!-- Une unité : deux bascules suffisent (recliquer
+                           la valeur active la démarque). -->
+                      <div class="flex flex-wrap items-center gap-1">
+                        <button
+                          class="btn btn-sm {item.brokenQuantity > 0
+                            ? 'btn-warning'
+                            : 'btn-outline btn-warning'}"
+                          type="button"
+                          aria-label="À réparer"
+                          onclick={() => setTri(item, "broken")}
+                        >
+                          <AlertTriangle class="h-4 w-4" />
+                          À réparer
+                        </button>
+                        <button
+                          class="btn btn-sm {item.lostQuantity > 0
+                            ? 'btn-error'
+                            : 'btn-outline btn-error'}"
+                          type="button"
+                          aria-label="Manquant"
+                          onclick={() => setTri(item, "lost")}
+                        >
+                          <X class="h-4 w-4" />
+                          Manquant
+                        </button>
+                      </div>
+                    {:else}
+                      <!-- Sélection au focus (frappe = remplacement),
+                           steppers masqués (.qty-input) ; la somme est
+                           plafonnée par onQty. -->
+                      <div class="grid grid-cols-2 gap-2">
+                        <label class="input">
+                          <span class="label border-base-300 border-r pr-2"
+                            >Manquants</span
+                          >
+                          <input
+                            type="number"
+                            class="qty-input w-8 text-center font-semibold tabular-nums"
+                            inputmode="numeric"
+                            autocomplete="off"
+                            min="0"
+                            max={item.quantity}
+                            value={item.lostQuantity}
+                            aria-label="Quantité manquante"
+                            onfocus={(e) => e.currentTarget.select()}
+                            oninput={(e) =>
+                              onQty(
+                                item,
+                                "lost",
+                                parseInt(e.currentTarget.value),
+                              )}
+                          />
+                        </label>
+                        <label class="input">
+                          <span class="label border-base-300 border-r pr-2"
+                            >À réparer</span
+                          >
+                          <input
+                            type="number"
+                            class="qty-input w-8 text-center font-semibold tabular-nums"
+                            inputmode="numeric"
+                            autocomplete="off"
+                            min="0"
+                            max={item.quantity}
+                            value={item.brokenQuantity}
+                            aria-label="Quantité à réparer"
+                            onfocus={(e) => e.currentTarget.select()}
+                            oninput={(e) =>
+                              onQty(
+                                item,
+                                "broken",
+                                parseInt(e.currentTarget.value),
+                              )}
+                          />
+                        </label>
+                      </div>
+                    {/if}
+                    <div
+                      class="mt-2 flex flex-wrap items-center gap-x-4 gap-y-1"
+                    >
+                      <button
+                        class="link link-hover text-base-content/60 text-xs"
+                        type="button"
+                        onclick={() => closeProblem(item)}
+                      >
+                        {problemOf(item) > 0
+                          ? "retirer le problème"
+                          : "annuler"}
+                      </button>
+                      {#if problemOf(item) > 0}
+                        <button
+                          class="link text-warning ms-auto text-xs"
+                          type="button"
+                          onclick={focusNotes}
+                        >
+                          préciser dans les notes
+                        </button>
+                      {/if}
+                    </div>
+                  </div>
+                {/if}
+              {/snippet}
             </LoanItemReadRow>
           {/each}
         </MaterielTypeGroup>
@@ -498,8 +564,8 @@
     {#if !isReadOnly && undeclaredCount > 0}
       <p class="text-base-content/70 mt-3 text-sm">
         {undeclaredCount}
-        matériel{undeclaredCount > 1 ? "s" : ""} à déclarer : saisissez les quantités
-        manquantes / à réparer, puis attestez le restant avec « Ok ».
+        matériel{undeclaredCount > 1 ? "s" : ""} à déclarer : « Ok » si tout est revenu,
+        « Un problème » sinon.
       </p>
     {/if}
 
@@ -521,6 +587,7 @@
           class="textarea-bordered textarea w-full"
           rows="2"
           bind:value={returnNotes}
+          bind:this={notesEl}
           placeholder="Remarques sur l'état du matériel, problèmes constatés…"
           maxlength="500"
           disabled={saving}></textarea>

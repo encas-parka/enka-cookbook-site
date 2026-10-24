@@ -2,9 +2,10 @@
 
 > 22-10-2026 · 5 commits sur `mig/pocketbase`, rien poussé.
 >
-> **Suspendu le 24-10** : la refonte UI de la fiche de retour reprendra après la
-> décision de modèle sur la granularité des dommages — handoff autoporteur dans
-> `.scratch/tracker/26-10-24_materiel-damage-granularity/handoff.md`.
+> **Suspendu le 24-10** puis **repris le même jour** : la décision de modèle
+> sur la granularité des dommages est tombée entre-temps (ADR 0003, lot
+> `.scratch/tracker/26-10-24_materiel-damage-granularity/`) — la grammaire
+> UI convenue s'applique sur le nouveau modèle, payload inchangé.
 
 ## Livré
 
@@ -157,6 +158,35 @@ Retour utilisateur : la fiche doit **inciter à vérifier**, pas permettre un
 
 Vérifs : check 0/0, tests 358/358 (`/tmp/opencode/tests-loan-ui-4.log`),
 build OK. Commits : `81d4d649`, `8f661094`.
+
+## Itération 6 — grammaire « Un problème / Ok » (24-10, après le lot granularité)
+
+Le modèle de stock a changé sous la fiche (statut supprimé, `repairQuantity`,
+retour qui décrémente les manquants — ADR 0003) ; les libellés « Manquant(s) »
+étaient déjà passés. La grammaire actée en discussion s'applique telle quelle :
+
+- au repos, une rangée = deux gestes : « Un problème » (outline warning) et
+  « Ok ×N » (atteste le cas nominal), **Ok en bout de lecture** ;
+- « Un problème » ouvre un **panneau pleine largeur sous la ligne** (nouveau
+  slot `details` de `LoanItemReadRow`) : champs Manquants / À réparer en
+  grille 2 colonnes, **bascules** pour une quantité de 1 ;
+- **les valeurs font foi** : la rangée est déclarée dès qu'une valeur est
+  saisie — pas d'attestation supplémentaire à donner sur une ligne abîmée ;
+  « retirer le problème » / « annuler » remet à zéro ;
+- lien « **préciser dans les notes** » (visible seulement une valeur saisie)
+  : fait défiler jusqu'au champ notes et y place le curseur ; les notes
+  restent optionnelles ;
+- le trio qty=1 et les inputs toujours visibles disparaissent ; le
+  raccourci de groupe ne change pas (ConfirmModal, épargne les problèmes
+  déclarés, referme les panneaux ouverts) ;
+- débordement mobile réglé par construction : plus aucun cluster fixe dans
+  la ligne.
+
+Vérifs : check 0/0 (198 fichiers), build OK ; suite complète 382/383 — le
+seul échec (`events-store-ensure-event`, cache chaud) est un flake de
+pollution inter-fichiers, **vert isolé** (5/5), entrée backlog dédiée
+(`backlog/26-10-24_events-ensure-event-flaky.md`). Log
+`/tmp/opencode/tests-loan-ui-5.log`.
 
 ## Reste (click-through humain)
 

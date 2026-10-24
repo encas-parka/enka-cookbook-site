@@ -8,7 +8,8 @@
    * Le vocabulaire visuel est celui des rangées de sélection
    * (`CatalogItemRow`) : conteneur bordé sur fond clair, dans un
    * `MaterielTypeGroup` — seule l'icône distingue la lecture de la
-   * saisie.
+   * saisie. Un second slot, `details`, rend un bloc pleine largeur sous
+   * la ligne (panneau de déclaration du retour).
    */
   import type { Snippet } from "svelte";
   import {
@@ -23,9 +24,11 @@
     type?: string | null;
     /** Badges ou annexes à droite (état de retour, notes…). */
     children?: Snippet;
+    /** Bloc pleine largeur sous la ligne (panneau de déclaration). */
+    details?: Snippet;
   }
 
-  let { name, quantity, type = null, children }: Props = $props();
+  let { name, quantity, type = null, children, details }: Props = $props();
 
   const Icon = $derived(getMaterielTypeIcon(type));
 </script>
@@ -43,4 +46,9 @@
   <div class="ms-auto flex flex-wrap items-center gap-2">
     {@render children?.()}
   </div>
+  {#if details}
+    <div class="w-full">
+      {@render details()}
+    </div>
+  {/if}
 </div>

@@ -199,6 +199,8 @@ export type Materiel = PbDoc & {
   deleted: boolean;
   createdBy: string | null;
   quantity: number | null;
+  /** Exemplaires actuellement en réparation (non empruntables). */
+  repairQuantity?: number;
   location: string | null;
   shareableWith: string[] | null;
   isStorage: boolean;

@@ -188,10 +188,14 @@ retour qui décrémente les manquants — ADR 0003) ; les libellés « Manquant(
 - **Ajustement utilisateur — toggles** : les deux boutons de ligne sont
   toujours visibles et se démarent au re-click. « Ok » décoche (un faux
   clic n'exige plus de passer par le panneau) ; « Un problème » referme
-  le panneau tant qu'il est vierge, mais se **verrouille** (comme Ok)
-  dès que des valeurs sont déclarées — un toggle destructeur gommerait
-  la déclaration d'un faux clic ; « retirer le problème » reste le seul
-  geste de rétraction, le lien « annuler » disparaît (doublon).
+  le panneau tant qu'il est vierge, reste **plein** une fois les valeurs
+  déclarées — **jamais de style disabled** (un état déclaré normal ne
+  doit pas ressembler à une ligne cassée), re-click inopérant ;
+  « retirer le problème » reste le seul geste de rétraction directe, le
+  lien « annuler » disparaît (doublon). Sur une ligne avec problème,
+  « Ok » ouvre un **ConfirmModal** — « Oui, tout est revenu » retire le
+  problème puis atteste, « Non, garder le problème » sort — le message
+  nomme explicitement ce qui sera effacé.
 
 Vérifs : check 0/0 (198 fichiers), build OK ; suite complète 382/383 — le
 seul échec (`events-store-ensure-event`, cache chaud) est un flake de

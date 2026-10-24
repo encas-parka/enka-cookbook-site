@@ -14,12 +14,12 @@
    *   badge d'avancement et raccourci « tout est ok » qui passe par une
    *   confirmation (« Vous confirmez avoir vérifié… ») et n'atteste que
    *   les rangées non déclarées ;
-   * - en bout de lecture, deux toggles exclusifs et toujours visibles :
-   *   « Ok ×N » atteste que tout est revenu intact (re-click décoche),
+   * - en bout de lecture, deux toggles exclusifs et toujours actifs :
+   *   « Ok ×N » atteste que tout est revenu intact (re-click décoche ;
+   *   avec un problème déclaré, une confirmation propose de le retirer),
    *   « Un problème » ouvre le panneau de déclaration (re-click le
-   *   referme tant que rien n'est saisi) — avec des valeurs déclarées,
-   *   les deux se verrouillent et « retirer le problème » est le seul
-   *   geste qui remet à zéro ;
+   *   referme tant que rien n'est saisi, reste plein sinon) — « retirer
+   *   le problème » est le seul geste direct qui remet à zéro ;
    * - le panneau problème porte les valeurs (manquants / à réparer ;
    *   bascules pour une quantité de 1) : les valeurs font foi, la
    *   rangée est déclarée dès qu'une valeur est saisie — « retirer le
@@ -93,6 +93,8 @@
   let materielsReturns = $state<ReturnRow[]>([]);
   /** Groupe en cours d'attestation via le raccourci « tout est ok ». */
   let confirmGroup = $state<{ type: string; rows: ReturnRow[] } | null>(null);
+  /** Ligne dont l'attestation « Ok » doit retirer un problème déclaré. */
+  let confirmOkRow = $state<ReturnRow | null>(null);
   /** Champ notes, ciblé par le lien « préciser dans les notes ». */
   let notesEl = $state<HTMLTextAreaElement | null>(null);
 
@@ -197,14 +199,26 @@
 
   // --- Déclarations ---
 
+  /** Résumé lisible des valeurs déclarées (« 1 manquant et 2 à réparer »). */
+  function problemSummary(item: ReturnRow): string {
+    const parts: string[] = [];
+    if (item.lostQuantity > 0)
+      parts.push(
+        `${item.lostQuantity} manquant${item.lostQuantity > 1 ? "s" : ""}`,
+      );
+    if (item.brokenQuantity > 0) parts.push(`${item.brokenQuantity} à réparer`);
+    return parts.join(" et ");
+  }
+
   /**
    * Bascule « Un problème » : ouvre le panneau ; le referme tant que
-   * rien n'y est déclaré. Avec des valeurs saisies le bouton est
-   * désactivé — « retirer le problème » reste le seul geste qui remet
-   * à zéro (un toggle destructeur gommerait la déclaration d'un faux
-   * clic).
+   * rien n'y est déclaré. Avec des valeurs saisies, le bouton reste
+   * plein (affichage de l'état) mais le re-click est inopérant —
+   * « retirer le problème » reste le seul geste qui remet à zéro (un
+   * toggle destructeur gommerait la déclaration d'un faux clic).
    */
   function toggleProblem(item: ReturnRow) {
+    if (problemOf(item) > 0) return;
     if (item.panelOpen) {
       item.panelOpen = false;
     } else {
@@ -226,11 +240,24 @@
   /**
    * Bascule « Ok » : atteste le cas nominal — refermant au passage un
    * panneau resté ouvert à zéro —, re-click décoche (annuler un faux
-   * clic).
+   * clic). Sur une ligne avec problème déclaré, passe par une
+   * confirmation : attester effacera la déclaration.
    */
   function toggleOk(item: ReturnRow) {
+    if (problemOf(item) > 0) {
+      confirmOkRow = item;
+      return;
+    }
     item.okChecked = !item.okChecked;
     if (item.okChecked) item.panelOpen = false;
+  }
+
+  /** Sortie de la confirmation « Ok » : retire le problème puis atteste. */
+  function confirmOk() {
+    if (!confirmOkRow) return;
+    retractProblem(confirmOkRow);
+    confirmOkRow.okChecked = true;
+    confirmOkRow = null;
   }
 
   /**
@@ -455,12 +482,12 @@
                     </div>
                   {/if}
                 {:else}
-                  <!-- Deux toggles exclusifs, toujours visibles en bout de
+                  <!-- Deux toggles exclusifs, toujours actifs, en bout de
                        lecture : « Un problème » pilote le panneau (plein
-                       tant qu'il est ouvert), « Ok ×N » atteste le cas
-                       nominal — re-click décoche. Avec des valeurs
-                       déclarées, les deux se verrouillent : le panneau
-                       porte l'édition, « retirer le problème » annule. -->
+                       tant qu'il est ouvert ou déclaré — re-click
+                       inopérant à valeurs saisies), « Ok ×N » atteste le
+                       cas nominal (re-click décoche) et passe par une
+                       confirmation pour retirer un problème déclaré. -->
                   <div class="flex items-center gap-2">
                     <button
                       class="btn {item.panelOpen
@@ -468,9 +495,8 @@
                         : 'btn-outline btn-warning'}"
                       type="button"
                       aria-pressed={item.panelOpen}
-                      disabled={problemOf(item) > 0}
                       title={problemOf(item) > 0
-                        ? "Déclaration en cours : « retirer le problème » dans le panneau pour l'annuler"
+                        ? "Problème déclaré : « retirer le problème » dans le panneau pour l'annuler"
                         : "Déclarer des exemplaires manquants ou à réparer"}
                       onclick={() => toggleProblem(item)}
                     >
@@ -483,9 +509,8 @@
                         : 'btn-outline btn-success'}"
                       type="button"
                       aria-pressed={item.okChecked}
-                      disabled={problemOf(item) > 0}
                       title={problemOf(item) > 0
-                        ? "Verrouillé tant qu'un problème est déclaré"
+                        ? "Retirera le problème déclaré et attestera la ligne intacte"
                         : "Attester que tout est revenu intact"}
                       onclick={() => toggleOk(item)}
                     >
@@ -672,5 +697,19 @@
       confirmGroup = null;
     }}
     onCancel={() => (confirmGroup = null)}
+  />
+{/if}
+
+<!-- « Ok » sur une ligne avec problème : confirmation qui efface -->
+{#if confirmOkRow}
+  <ConfirmModal
+    isOpen={!!confirmOkRow}
+    title="Attester « Ok » avec un problème déclaré ?"
+    message={`« ${confirmOkRow.materielName} » : ${problemSummary(confirmOkRow)}. Attester « Ok » retirera ce problème — la ligne redevient intacte.`}
+    variant="warning"
+    confirmLabel="Oui, tout est revenu"
+    cancelLabel="Non, garder le problème"
+    onConfirm={confirmOk}
+    onCancel={() => (confirmOkRow = null)}
   />
 {/if}

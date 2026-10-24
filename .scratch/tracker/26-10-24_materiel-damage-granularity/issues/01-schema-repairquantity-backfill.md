@@ -19,12 +19,12 @@ Zone : `pocketbase/pb_migrations/` (delta après `1792600000`), `scripts_dev/2-t
 - [x] Backfill conservateur des données existantes : items « à réparer » → `repairQuantity = quantity` ; items « perdus » → `quantity = 0` ; le champ `status` n'est pas modifié ni supprimé ici
 - [x] Transform d'import : même mapping appliqué aux données source ; `status` toujours écrit (contrat au ticket 06)
 - [x] Types régénérés ; `bun run check:app` vert sans aucun autre changement d'app
-- [!] Re-run du pipeline de migration local (`scripts_dev/migrate.ts`) : verdicts verts, sans divergence
-  - 85/86 checks, 0 déviation sans verdict. L'unique échec (`guestEmails: 0/34`) est
-    **antérieur à ce ticket** : le champ a été supprimé du schéma le 22-10 (commit
-    3f005fb4) alors que le transform l'écrit encore et que le validateur le contrôle
-    toujours. Aucun lien avec `materiel`. Entrée backlog :
-    `.scratch/tracker/backlog/26-10-24_validation-guestemails-champ-supprime.md`.
+- [x] Re-run du pipeline de migration local (`scripts_dev/migrate.ts`) : verdicts verts, sans divergence
+  - Premier re-run : 85/86, échec `guestEmails` **antérieur à ce ticket** (champ supprimé le
+    22-10, validateur et transform non suivis). Réglé par 9f8d2cf1 (contrôle rebasé sur
+    `guestUsers`, clé retirée du payload) ; re-run du 24-10 : **86/86 checks, verdict VERT**,
+    `materiel` 110 créés, backfill conforme (2 items en réparation 5/5 et 1/1, 9 items
+    « perdus » à quantité 0).
 - [x] Vocabulaire et mapping conformes au glossaire (`manquant`, jamais `perdu`, dans tout nouveau texte)
 
 ## Comments

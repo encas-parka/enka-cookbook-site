@@ -111,7 +111,7 @@ Transforme les données Appwrite en format PB-ready avec remappage d'IDs.
 - **Output** : `pb-import/*.json` + `migration-map.json`
 - **Transformations** :
   - Remappage IDs : `refId = "aw_" + appwriteId` (format déterministe, globalement unique)
-  - Labels Appwrite → `guestEmails[]` sur les events
+  - Labels Appwrite → `guestUsers[]` sur les events (emails extraits des labels, résolus en ids users connus)
   - Users : extraction depuis les documents events (labels = accès) + export users séparé
   - Teams : déduplication des noms, `members` en refIds
   - Events : `contributors`, `todos`, `date`, `meals` préservés en JSON
@@ -276,7 +276,7 @@ Vérifie l'intégrité des données importées. Cible retargetable par env
   1. Record counts : PB vs **sources brutes** (appwrite-export + Hugo `content/recipe` + `static/data`) — tout écart doit être couvert par un verdict
   2. Relation integrity : tous les champs relation pointent vers des records PB existants
   3. Recipe field population : created/createdBy/permissionWrite/rootRecipeId peuplés comme dans `pb-import/recipes.json`
-  4. guestEmails : tous les events ont leurs emails attendus
+  4. guestUsers : tous les events ont leurs guests attendus (refIds d'import résolus via `id-map.json`)
   5. RefId coverage : tous les refIds dans `migration-map.json` ont un PB ID correspondant (tolère les absences couvertes par un verdict)
   6. Convergence des recettes Appwrite (id = slug Hugo) vs leur copie PB : divergence de contenu = bloquant sauf verdict ; drift de `updatedAt` au jour = informatif (Hugo est la source la plus fraîche) ; absentes = inventaire verdicté
   7. Structurel : `teams.roles` peuplé (non-NULL), `materiel.createdBy`/`ownerUser` vides par design (deleteRules team-scopées, pas de backfill)

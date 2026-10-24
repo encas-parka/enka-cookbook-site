@@ -7,7 +7,8 @@
  *   2. Relation integrity: all relation fields point to existing PB records
  *   3. Recipe field population: createdBy/permissionWrite/rootRecipeId/created
  *      counts must match pb-import/recipes.json (import nullification regression)
- *   4. guestEmails: all events have their expected guest emails
+ *   4. guestUsers: all events have their expected guest users (import
+ *      refIds resolved via id-map)
  *   5. RefId coverage: all refIds in migration-map have a corresponding PB ID
  *   6. Text references (share_links.target_id)
  *   7. Recipe convergence: each Appwrite-native recipe (its $id IS the Hugo
@@ -701,25 +702,15 @@ async function checkRecipeFieldPopulation(): Promise<void> {
   );
 }
 
-async function checkGuestEmails(): Promise<void> {
-  console.log("\n📧 Check 3: Guest Emails in Events\n");
+async function checkGuestUsers(): Promise<void> {
+  console.log("\n👥 Check 4: Guest Users in Events\n");
 
-  const migrationMap = loadMigrationMap();
-  const userMap = migrationMap.users || {};
   const eventsImport = loadImportFile("events");
   const pbEvents = await pbListAll("events");
-
-  // Build expected guestEmails from import file
-  const expectedByEmail: Record<string, string[]> = {};
-  for (const ev of eventsImport) {
-    if (ev.guestEmails && ev.guestEmails.length > 0) {
-      expectedByEmail[ev._refId] = ev.guestEmails;
-    }
-  }
+  const idMap = loadIdMap();
 
   // PB events carry generated ids — match via id-map.json (refId → PB id, saved by
   // 3-import). Matching by name is ambiguous: prod data has homonym events.
-  const idMap = loadIdMap();
   const pbEventsById = new Map<string, any>();
   for (const ev of pbEvents) {
     pbEventsById.set(ev.id, ev);
@@ -730,7 +721,10 @@ async function checkGuestEmails(): Promise<void> {
   const errors: string[] = [];
 
   for (const impEvent of eventsImport) {
-    const expected = impEvent.guestEmails || [];
+    // The import payload stores guestUsers as refIds; PB stores resolved ids
+    const expected = (impEvent.guestUsers || [])
+      .map((refId: string) => idMap[refId])
+      .filter(Boolean) as string[];
     if (expected.length === 0) continue;
 
     checked++;
@@ -740,30 +734,30 @@ async function checkGuestEmails(): Promise<void> {
       continue;
     }
 
-    const actual = pbEvent.guestEmails || [];
-    const missing = expected.filter((e: string) => !actual.includes(e));
-    const extra = actual.filter((e: string) => !expected.includes(e));
+    const actual: string[] = pbEvent.guestUsers || [];
+    const missing = expected.filter((id) => !actual.includes(id));
+    const extra = actual.filter((id) => !expected.includes(id));
 
     if (missing.length === 0 && extra.length === 0) {
       passed++;
     } else {
       if (missing.length > 0) {
         errors.push(
-          `Event "${impEvent.name}": missing ${missing.length} emails: ${missing.slice(0, 3).join(", ")}`,
+          `Event "${impEvent.name}": missing ${missing.length} guest users: ${missing.slice(0, 3).join(", ")}`,
         );
       }
       if (extra.length > 0) {
         errors.push(
-          `Event "${impEvent.name}": ${extra.length} unexpected emails: ${extra.slice(0, 3).join(", ")}`,
+          `Event "${impEvent.name}": ${extra.length} unexpected guest users: ${extra.slice(0, 3).join(", ")}`,
         );
       }
     }
   }
 
   addResult(
-    "guestEmails",
+    "guestUsers",
     errors.length === 0,
-    `${passed}/${checked} events have correct guestEmails`,
+    `${passed}/${checked} events have correct guestUsers`,
     errors,
   );
 }
@@ -1235,7 +1229,7 @@ async function main() {
   await checkCountsAgainstSources();
   await checkRelationIntegrity();
   await checkRecipeFieldPopulation();
-  await checkGuestEmails();
+  await checkGuestUsers();
   await checkRefIdCoverage();
   await checkTextReferences();
   await checkRecipeConvergence();

@@ -537,7 +537,7 @@ function main() {
       `Orphan labels: ${orphanLabelCount} user labels reference ${orphanLabelEventIds.size} deleted events: ${[...orphanLabelEventIds].slice(0, 5).join(", ")}${orphanLabelEventIds.size > 5 ? " ..." : ""}`,
     );
     warn(
-      `  These labels will be ignored — guestEmails only populated for existing events`,
+      `  These labels will be ignored — guestUsers only populated for existing events`,
     );
     categorize("events.orphanLabels", orphanLabelCount);
   }
@@ -582,9 +582,9 @@ function main() {
     // todos (remap user IDs inside JSON strings, keep embedded in event)
     const remappedTodos = remapTodos(awEvent.todos || [], userMap);
 
-    // Build guestUsers: match guestEmails → known registered users
-    // guestEmails stays for invitation tracking (emails of non-registered users)
-    // guestUsers is a relation field resolved during import (IDs only, safe with ~ operator)
+    // Build guestUsers: match guest emails extracted from labels → known
+    // registered users. Relation resolved during import (IDs only, safe
+    // with ~ operator)
     const guestUsers = guestEmails
       .map((email) => findUserByEmail(email, userMap))
       .filter((id): id is string => id !== null);
@@ -599,7 +599,6 @@ function main() {
       location: awEvent.location || null,
       createdBy,
       teams: pbTeamIds.length > 0 ? pbTeamIds : null,
-      guestEmails: guestEmails.length > 0 ? guestEmails : null,
       guestUsers: guestUsers.length > 0 ? guestUsers : null,
       contributors: contributors.length > 0 ? contributors : null,
       meals: awEvent.meals ? parseJsonArray(awEvent.meals) : null,
@@ -664,7 +663,7 @@ function main() {
 
   saveImport("events", pbEvents);
   console.log(
-    `   ✅ ${pbEvents.length} events, guestEmails peuplés pour ${eventLabelsExtracted}/${pbEvents.length}\n`,
+    `   ✅ ${pbEvents.length} events, guestUsers peuplés pour ${eventLabelsExtracted}/${pbEvents.length}\n`,
   );
 
   const eventMap = migrationMap.events;
@@ -1310,7 +1309,7 @@ function main() {
     [
       "events",
       pbEvents.length,
-      `guestEmails: ${eventLabelsExtracted}/${pbEvents.length}${orphanLabelEventIds.size > 0 ? `, ${orphanLabelEventIds.size} orphan labels ignored` : ""}`,
+      `guestUsers: ${eventLabelsExtracted}/${pbEvents.length}${orphanLabelEventIds.size > 0 ? `, ${orphanLabelEventIds.size} orphan labels ignored` : ""}`,
     ],
     [
       "products",

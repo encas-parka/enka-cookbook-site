@@ -54,6 +54,7 @@ await store.setupRealtime(); // SSE → Dexie
 
 - `src/lib/types/pb-generated.ts` = vérité du schéma PB (pocketbase-typegen, **ne pas modifier à la main**, régénérer via `bun run generate-types`). Les valeurs d'enum (select) n'existent qu'ici, en `as const`.
 - Les shapes JSON métier (`events.meals/todos`, `recipes.ingredients/astuces`, `products.store`) sont typées dans `pb.d.ts` — le typegen les produit en `unknown`. Toute nouvelle collection JSON doit y être typée, sinon résurrection du cluster `{}`/`unknown` au `check-legacy`. Les parse fns acceptent le natif PB + le legacy `string[]`.
+- Les record types applicatifs (`Materiel`, `MaterielLoan`, …) dans `pb.d.ts` sont alignés **à la main** sur `pb-generated.ts` : `generate-types` ne les touche pas. Tout champ ajouté au schéma doit y être répercuté à la main, sinon il reste invisible côté app malgré une regen verte.
 
 ## Build & dev
 

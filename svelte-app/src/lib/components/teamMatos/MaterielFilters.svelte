@@ -24,7 +24,7 @@
     disabled?: boolean;
     availableTypes: string[];
     availableLocations: string[];
-    availableStatuses: MaterielDisplayState[];
+    availableDisplayStates: MaterielDisplayState[];
     onReset: () => void;
   }
 
@@ -33,7 +33,7 @@
     disabled = false,
     availableTypes,
     availableLocations,
-    availableStatuses,
+    availableDisplayStates,
     onReset,
   }: Props = $props();
 
@@ -111,7 +111,7 @@
   <!-- États dérivés -->
   <Fieldset legend="État" iconComponent={AlertCircle}>
     <div class="flex flex-wrap gap-3">
-      {#each availableStatuses as status (status)}
+      {#each availableDisplayStates as status (status)}
         <CheckboxBadge
           checked={filters.statuses.includes(status)}
           label={getMaterielDisplayStateShortLabel(status)}

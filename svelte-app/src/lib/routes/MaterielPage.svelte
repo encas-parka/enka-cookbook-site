@@ -58,7 +58,7 @@
   ];
 
   // États d'affichage dérivés proposés au filtre (jamais persistés)
-  const availableStatuses: MaterielDisplayState[] = [
+  const availableDisplayStates: MaterielDisplayState[] = [
     "complete",
     "partial",
     "repair",
@@ -194,7 +194,7 @@
     disabled={false}
     {availableTypes}
     {availableLocations}
-    {availableStatuses}
+    {availableDisplayStates}
     onReset={resetFilters}
   />
 </LeftPanel>

@@ -177,16 +177,6 @@
     onCancel?.();
   }
 
-  function resetForm() {
-    name = "";
-    description = "";
-    type = "";
-    quantity = 1;
-    location = "";
-    shareableWithTeamNames = [];
-    error = null;
-  }
-
   /** Quantité du geste valide : entière, entre 1 et le stock en réparation. */
   const isGestureQuantityValid = $derived(
     Number.isInteger(gestureQuantity) &&

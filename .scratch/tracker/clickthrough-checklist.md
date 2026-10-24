@@ -860,16 +860,12 @@ semble suspecte plus tard.
 
 ## Lot granularité des dommages (24-10) — passe humaine de clôture
 
-> Ajout 24-10 (orchestrateur, fin de run `26-10-24_materiel-damage-granularity`,
-> tickets 03→06 verts : suite 53 f./383 t., check:app 198/0, pipeline 86/86).
-> Les scénarios 1-4 sont la définition de fini du lot (ticket 05). Comptes dev :
-> ghald + marionael (`AGENTS.md`) ; `bun run dev:pb` puis `bun run dev`.
+> Ajout 24-10 (orchestrateur, fin de run `26-10-24_materiel-damage-granularity`),
+> nettoyé le même jour : les items couverts par les tests composants (ADR 0004,
+> `svelte-app/src/lib/components/teamMatos/__tests__/`) et par les tests store
+> du ticket 03 ont été **retirés** — la checklist ne porte que le
+> non-automatisable. Comptes dev : ghald + marionael (`AGENTS.md`) ;
+> `bun run dev:pb` puis `bun run dev`.
 
-- [ ] §12-1 Scénario « 2 cassés sur 12 » : item 12 unités, emprunt de 6, retour avec 2 « À réparer » → l'inventaire annonce le lot comme « Partiel : 2 à réparer » et le sélecteur d'emprunt propose 10 unités sur les dates
-- [ ] §12-2 Scénario « 2 manquants sur 12 » : retour avec 2 « Manquant » → la quantité de l'item passe à 10 (annoncée partout : carte inventaire, sélecteur), aucun badge de réparation
-- [ ] §12-3 Scénario « perte totale d'un petit emprunt » : 3 manquants sur un prêt de 3, stock 50 → quantité 47, seules 3 lignes d'écriture (pas de statut « perdu » nulle part)
-- [ ] §12-4 Remise en service : sur l'item des 2 cassés, geste « Remettre en service ×2 » → retour à la pleine disponibilité (badge Complet ou sans badge, 12 empruntables)
-- [ ] §12-5 Épreuve écran du fix review : réformer des unités PUIS « Enregistrer » sans toucher aux champs → la quantité réformée N'est PAS restaurée (le formulaire resync le stock du store après chaque geste)
-- [ ] §12-6 Item au rebut (quantity 0) : visible dans l'inventaire, badge « Stock épuisé », non proposé au sélecteur ; ré-éditable (quantité 0 acceptée en édition seulement)
-- [ ] §12-7 Filtres d'inventaire : les 6 états dérivés (Complet/Partiel/En réparation/Stock épuisé/Emprunté/Réservé) filtrent correctement ; zéro occurrence de « perdu » dans la zone
-- [ ] §12-8 Décision produit (finding review standards) : sur une carte empruntée, le badge « Emprunté » coexiste avec le compteur « N/quantity en prêt(s) » — redondance à trancher à l'écran (masquer l'un des deux) ; trancher aussi si le badge de LoanCard gagne un texte d'état
+- [ ] §12-1 Parcours de bout en bout : item 12 unités, emprunt de 6, retour avec 2 « À réparer » puis remise en service — les maillons sont testés automatiquement (store + composants) ; cet item valide l'enchaînement réel des écrans
+- [ ] §12-2 Décision produit : sur une carte empruntée, le badge « Emprunté » coexiste avec le compteur « N/quantity en prêt(s) » — redondance à trancher à l'écran (masquer l'un des deux) ; trancher aussi si le badge de LoanCard gagne un texte d'état

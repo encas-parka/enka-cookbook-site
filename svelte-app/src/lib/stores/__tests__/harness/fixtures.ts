@@ -21,6 +21,7 @@ import type {
   RecipesTypeROptions,
 } from "$lib/types/pb-generated";
 import type {
+  EventMateriel,
   Materiel,
   MaterielLoan,
   Products,
@@ -49,6 +50,12 @@ export const TEST_RECIPE_ID = "t12recipe000001";
 export const TEST_LOCK_ID = "t12lock00000001";
 export const TEST_USER_ID = "t12user00000001";
 export const TEST_MEMBER_ID = "t12member000001";
+/** Identifiants event_materiel : besoins (headers), allocations, item lié à un emprunt. */
+export const TEST_EM_HEADER_ID = "t12evem00000001";
+export const TEST_EM_HEADER2_ID = "t12evem00000002";
+export const TEST_EM_ALLOC_ID = "t12evem00000003";
+export const TEST_EM_ALLOC2_ID = "t12evem00000004";
+export const TEST_EM_LOANITEM_ID = "t12evem00000005";
 
 /**
  * Business ref of the fixture ingredient — the join key between
@@ -212,6 +219,37 @@ export function makeLoanRecord(
     returnedAt: null,
     returnNotes: null,
     eventName: null,
+    ...overrides,
+  };
+}
+
+/**
+ * A PB "event_materiel" record. Without `groupId` it is a need (header);
+ * with one it is an allocation attached to that header. `status: "to_find"`
+ * is the default of a need, allocations carry "to_check"/"confirmed".
+ */
+export function makeEventMaterielRecord(
+  overrides: Partial<EventMateriel> = {},
+): EventMateriel {
+  return {
+    id: TEST_EM_HEADER_ID,
+    created: pbDate(T0),
+    updated: pbDate(T0),
+    eventId: TEST_EVENT_ID,
+    type: "other",
+    status: "to_find",
+    groupId: null,
+    specs: null,
+    deleted: false,
+    name: "Tables pliantes",
+    quantity: 5,
+    who: null,
+    where: null,
+    sourceMaterielId: null,
+    notes: null,
+    createdBy: null,
+    fromTeamName: null,
+    loanId: null,
     ...overrides,
   };
 }

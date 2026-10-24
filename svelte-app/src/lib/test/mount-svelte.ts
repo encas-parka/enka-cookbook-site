@@ -39,6 +39,16 @@ export function setInputValue(input: HTMLInputElement, value: string): void {
   flushSync();
 }
 
+/**
+ * Positionne la valeur d'un `<select>` lié (bind:value) et force la synchro —
+ * Svelte écoute l'event « change » sur les selects (pas « input »).
+ */
+export function setSelectValue(select: HTMLSelectElement, value: string): void {
+  select.value = value;
+  select.dispatchEvent(new Event("change", { bubbles: true }));
+  flushSync();
+}
+
 /** Premier élément du sélecteur dont le texte trimmé vaut exactement `text`. */
 export function getByText(
   root: ParentNode,

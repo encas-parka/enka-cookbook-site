@@ -553,160 +553,9 @@ Format : page / action / attendu vs obtenu / console (coller l'erreur exacte).
   mais jamais affiché en lecture.
 - Console : rien.
 
-### P2 — Recherche × filtre `typeR` : le badge se met à jour, pas la liste
+→ Début de correction, mais maintenant : affiche "recette inconnue" sur certaine recette: ex: recipe/banoffee_uw7nq3h3hzob
 
-> **Verdict 20-10 : FAUX POSITIF (driver).** Le click-through humain confirme
-> que recherche et filtre typeR fonctionnent ensemble. Le code est statiquement
-> correct (`RecipesListPage.svelte` l.92-107 : fuzzysort ∩ typeR, compteur et
-> liste partagent `filteredRecipes`) — l'écart observé était un artefact de
-> capture du driver. Clos.
 
-- Page : `/recipe?q=pomme&type=dessert`.
-- Attendu : la liste ne montre que les correspondances de type dessert (2)
-  ou a minima un rendu cohérent avec le compteur.
-- Obtenu : compteur « 2 desserts » exact, mais la liste affiche les 13
-  correspondances non filtrées (Burgers, Accras…) puis le catalogue complet.
-  Hors recherche, `?type=dessert` filtre correctement (89 desserts). Le
-  placeholder annonce « Désactive les filtres » — les filtres latéraux sont
-  grisés mais l'onglet typeR reste cliquable/actif avec un effet nul sur la
-  liste : état trompeur.
-- Console : rien.
-
-### P3 — Bannière « Email non vérifié » pour tout utilisateur connecté
-
-- Page : `/dashboard` (tous les comptes testés : Marion, ghald).
-- Attendu : bannière seulement si `users.verified = false` (les deux comptes
-  sont `verified=1` en base).
-- Obtenu : bannière visible pour tous. Cause : `pb-auth.ts` l.38,
-  `emailVerification: Boolean(record.emailVerification)` — champ **Appwrite** ;
-  PocketBase expose `verified`. `undefined` → `false` pour tout le monde.
-  Fix candidat : `Boolean(record.verified)`.
-- Console : rien.
-
-### P4 — Ids d'équipes bruts au lieu des noms (EventCard + page event)
-
-- Page : `/dashboard` (cartes d'events, Marion et ghald), `/event/:id`
-  (bloc « Équipes invitées »), `/eventList`.
-- Attendu : nom de l'équipe (ex. « Enka Parka », « Q88 »).
-- Obtenu : id relation brut (« 111c8999e321489 », « f2a557b645f699a »).
-  Cause : `EventCard.svelte` l.89 `{event.teams.join(", ")}` — la relation PB
-  (ids) est rendue sans résolution/expand des noms ; même affichage sur la
-  page event.
-- Console : rien.
-
-### P5 — Bloc 404 persistant après navigation SPA
-
-> **Décision 20-10 : DIFFÉRÉ.** Non élucidé statiquement : pas de keep-alive
-> dans sv-router 0.19 (`RecursiveComponentTree` remplace l'arbre sec,
-> `componentTree.value = routeComponents`) et la page 404 est un catch-all
-> banal — le symptôme contredit le mécanisme. À rejouer en runtime avec
-> inspection DOM (quel parent contient le bloc 404 au moment du bug ?).
-
-- Page : `/cette-route-nexiste-pas` → clic « Tableau de bord » → `/dashboard`.
-- Attendu : la page 404 est démontée.
-- Obtenu : le bloc 404 (« Page non trouvée » + bouton « Retour à l'accueil »)
-  reste monté **au-dessus du contenu dashboard** (visible, pousse le layout).
-  Ne se reproduit pas home → dashboard ; logout nettoie. À creuser côté
-  outlet sv-router / page 404.
-- Console : rien.
-
-### P6 (mineur) — `/createdocument/:teamId/new` en visiteur : flash « Démarrage... »
-
-- Page : `/createdocument/111c8999e321489/new` en visiteur.
-- Attendu : redirect immédiat + toast, comme les routes sous `authGuard`.
-- Obtenu : ~1-2 s d'écran « Démarrage... » (headerbar seul) puis redirect `/`
-  correct — cette route passe par un check auth en page, pas par un guard
-  `beforeLoad`. Issue fonctionnelle nulle, incohérence de câblage à aligner.
-
-### P7 — `minContrib` saisi à la création jamais persisté
-
-- Page : `/dashboard/eventCreate`.
-- Attendu : le « minimum de participant·es » saisi part dans le record.
-- Obtenu : `minContrib = 0` en base pour les 2 events créés, alors que le
-  champ est lié (`EventCreatePage.svelte` l.71 `let minContrib = $state(1)`,
-  bind l.394). Cause : `eventData` (l.175-187) **n'inclut pas minContrib**.
-  L'édition masque le bug (`EventEditPage.svelte` l.249 `minContrib || 1`
-  affiche 1 ; resauvegarder depuis l'édition écrit bien la valeur).
-- Console : rien.
-
-### P8 — Recherche produits : badge posé, liste non filtrée
-
-> **Verdict 20-10 : FAUX POSITIF (driver).** Le click-through humain confirme
-> que la recherche filtre la liste. Chaîne vérifiée statiquement correcte
-> (`setSearchQuery` → `#rebuildGroups` → `matchesFilters` bypass recherche,
-> `ProductsStore.svelte.ts` l.1375-1384 / `productsUtils.ts` l.324-325).
-> Clos.
-
-- Page : `/event/:id/products`, champ « Nom du produit... » (`#search-input`).
-- Attendu : la liste ne montre que les produits correspondant à « beur ».
-- Obtenu : URL `?search=true`, badge « "beur" », message « Les filtres sont
-  désactivés pendant une recherche par nom » — mais les 18 cartes restent
-  affichées, dans le même ordre (ni filtre, ni re-rank). Même famille que P2.
-- Console : rien.
-
-### P9 — Création de prêt : cliquer une suggestion d'autocomplete casse le rendu
-
-- Page : `/dashboard/loans/:teamId` → « Ajouter une reservation » → recherche
-  de matériel → clic sur une suggestion.
-- Attendu : le matériel s'ajoute à la réservation.
-- Obtenu : le composant plante et le dropdown devient inutilisable ; le
-  matériel n'est pas ajouté. Console :
-  `Uncaught Svelte error: each_key_duplicate — Keyed each block has duplicate
-key 'Bols' at indexes 5 and 12 ... in AutocompleteInput.svelte in
-CreateLoanModal.svelte`.
-- Cause : `ui/AutocompleteInput.svelte` l.151
-  `{#each filteredItems as item, index (itemToString(item))}` — la clé est le
-  libellé, or l'inventaire contient des noms en double (Bols ×2, Couteaux ×2,
-  Ramequins ×2…). Toute liste déroulante contenant deux fois le même nom fait
-  planter le bloc. Sévérité haute : le chemin principal de création de prêt
-  est cassé, le contournement est « Ajout rapide ».
-
-### P10 — « Importer depuis {équipe} » sans effet pour un membre de ≥ 2 équipes
-
-- Page : `/event/:id/materiel` (état vide) → bouton « Importer depuis Enka
-  Parka ».
-- Attendu : ouverture du modal d'import (choix du prêt / création).
-- Obtenu : rien du tout — pas de modal, pas de toast. Cause :
-  `EventMaterielPage.svelte` l.378 `openImportModal(teamId?)` commence par
-  `if (myTeams.length === 1 || teamId)` ; le bouton de l'état vide (l.648)
-  appelle `openImportModal()` **sans teamId**, donc pour un utilisateur
-  membre de plusieurs équipes la fonction sort immédiatement. Le menu déroulant
-  de la navbar (l.481) passe bien `team.id`.
-
-### P11 — Dates relatives décalées d'un jour (« Modifié Hier » à l'instant)
-
-- Page : `/event/:id/documents`, cartes de doc ; aussi `DocCard`,
-  `LatestRecipesCard`, `RecipeVersionManager`.
-- Attendu : un document modifié il y a quelques secondes affiche
-  « Aujourd'hui ».
-- Obtenu : « Modifié Hier » (vérifié : `updated` à 17 s de l'instant).
-- Cause : `utils/date-helpers.ts` l.75
-  `const diffDays = Math.ceil(diffTime / 86400000)` → tout écart > 0 ms donne
-  `1`. `Math.floor` rétablit « Aujourd'hui » pour < 24 h (et corrige « Il y a
-  n jours » d'un cran). Fix d'une ligne, 4 consommateurs.
-
-### P12 — Après un partage, les données existantes de l'event restent invisibles
-
-- Page : `/join/:linkId` → redirection `/event/:id` (session B) ; constaté sur
-  `/event/:id/documents` (« 0 Documents… Aucun document pour cet événement »)
-  alors que l'API renvoie bien le doc.
-- Attendu : en rejoignant un event, on voit tout ce que les droits viennent
-  d'ouvrir (documents, et par extension produits/matériel de l'event).
-- Obtenu : l'event s'affiche, le participant est bien ajouté
-  (`guestUsers`/`contributors` en base), mais les **documents existants ne
-  remontent jamais** — ni à l'arrivée, ni après un reload complet, ni après la
-  resynchro « Mise à jour des données en cours… ».
-- Cause : `JoinPage.svelte` l.84-86 ne revalide que `eventsStore`
-  (`syncRevalidate()`), qui est un **delta** (`pb-collection.ts` l.306
-  `updated >= since`). Comme le cache local de B n'est pas vide (il a déjà des
-  teamdocs d'autres events), le fallback « delta vide → full fetch »
-  (l.338-345) ne se déclenche pas, et un document antérieur au curseur n'est
-  jamais retéléchargé. Le doc reste autorisé côté serveur (vérifié avec le
-  token de B) mais absent côté client.
-- Effet : trou de données persistant, invisible pour l'utilisateur ; seule une
-  modification ultérieure du doc (ou une purge du cache) le ferait
-  réapparaître. Fix attendu : purger/refetch les collections concernées après
-  un join (ou invalider le curseur), pas seulement `eventsStore`.
 
 ### P13 — Invitation par email : l'échec d'envoi n'est jamais montré
 
@@ -723,54 +572,6 @@ CreateLoanModal.svelte`.
   échec(s) » (`NativeTeamsStore.svelte.ts` l.386) : le traitement devrait être
   homogène.
 
-### P14 — Verrou de recette orphelin : la recette reste bloquée pour tout le monde
-
-> **Corrigé 20-10 (migration vers la collection `locks`)** : le verrou vit
-> désormais dans `locks` via `locksService` (resourceId `recipe_<uuid>`,
-> même socle que les documents et événements) — TTL `expiresAt` 7 min
-> (heartbeat 4 min, refresh au retour d'onglet), takeover du verrou expiré,
-> reprise réactive quand le détenteur libère (SSE), releases idempotents
-> (save + onDestroy), nom du détenteur affiché. Le « Smart Lock »
-> (contributeur unique → pas de verrou) est conservé. `recipes.lockedBy`
-> est mort : plus aucun code applicatif ne le lit ou l'écrit (retrait du
-> schéma et des types au cutover). Contrat du socle piné par
-> `services/__tests__/pb-locks.test.ts` (9 cas). À revalider à l'écran :
-> A quitte → B peut éditer ; badge avec le nom ; reprise après expiration.
->
-> **Validé à l'écran 20-10 (humain) : vert.** Complété le même jour par le
-> gate bloquant (commits `9748dac3`, `8e4db46c`) : la reprise à chaud par SSE
-> a été remplacée par gate + re-cycle au clic — scénarios en §11a.
->
-> Suivi du premier test écran (ghald, même jour) : (1) le create du verrou
-> renvoyait 400 — l'id `recipe_<slug>_<uuid>` dépasse la borne 40 des ids
-> `locks` (migration LOCK-3 `1792515000_locks_id_max_recipe.js`, borne 255 ;
-> **PB doit être relancé** pour l'appliquer) ; (2) l'autocancel du SDK sur la
-> lecture initiale empêchait la souscription temps réel — découplée ;
-> (3) `acquireLock` distingue désormais refus (`false`) et panne (lève) ;
-> (4) les ids bruts des contributeurs dans le panneau permissions se
-> résolvent en noms (`resolveUserNames`, getOne users via viewRule).
-
-- Page : `/recipe/:uuid/edit`, ouverte par A puis quittée par navigation SPA.
-- Attendu : le verrou est relâché en quittant la page (ou périmé après 5 min),
-  donc B peut prendre la main.
-- Obtenu : `lockedBy` reste à l'id de A en base après son départ (vérifié
-  `recipes.lockedBy` inchangé, `updated` non plus) ; B voit
-  « Vérouillé : document en cours d'édition par un·e autre
-  utilisateur·ice » et son bouton **Sauvegarder reste désactivé** — sans issue.
-- Deux causes qui se cumulent :
-  1. `RecipeEditPage.svelte` l.196 : le release est dans `onDestroy`, qui ne
-     s'exécute pas quand la route est en keep-alive (navigation interne). Le
-     verrou n'est donc jamais relâché dans le cas nominal.
-  2. `isLockedByOthers` (l.87-89) ignore l'expiration, alors que l'acquisition
-     (l.245-268) la gère : « reprise de contrôle » sur un verrou de plus de
-     5 min. Or l'`$effect` d'acquisition (l.160-166) ne s'exécute que si
-     `!isLockedByOthers` → un verrou orphelin ne peut jamais être repris.
-- Effet : un simple aller-retour de A sur la recette la verrouille pour tous.
-  Sortie de secours actuelle : nettoyage manuel de `recipes.lockedBy` en base.
-- À noter aussi : le nom du détenteur n'est pas affiché (texte figé « un·e
-  autre utilisateur·ice », `statusBarStore.setLockStatus({userName: "un autre
-utilisateur"})` l.185-188), alors que les documents affichent bien
-  « édité par Marion ».
 
 ### Observations (pas des bugs)
 
@@ -781,43 +582,24 @@ DB empty — retrying without updated filter` (`pb-collection.ts:215`),
 - **O2** — La validation `EventCreatePage` exige ≥ 1 repas (« Veuillez ajouter
   au moins un repas », toast 5 s) : bloquant volontaire, mais un utilisateur
   peut cliquer Créer sans comprendre ce qui manque si le toast est manqué.
-- **O3** — Groupement produits par « Type » : un seul groupe (Autres)
-  apparent tant qu'on n'a pas changé de groupement ; en « Aucun », les 18
-  besoins s'affichent. À vérifier si c'est un défaut de dépliage.
-- **O4** — Besoins produits calculés sur les couverts du repas (100) : la
-  modification des parts au niveau recette (80, `hasOwnPlatesNb`) ne change
-  pas les besoins affichés. À qualifier : attendu ou effet de bord ?
+
 - **O5** — Warning récurrent `[ProductsStore] syncRevalidate() appelé sans
 currentEventId` sur les pages hors event (loans, matériel, tâches). Bruit de
   log ; à vérifier que la revalidation est bien court-circuitée proprement.
-- **O6** — Fiche de retour de prêt : pour une quantité de 1, le choix « tout
-  est ok » est un bouton **icône seule** (aucun libellé, `aria-label="Tout
-OK"`), et tant qu'il n'est pas cliqué le bouton « Valider le retour » reste
-  désactivé **sans expliquer ce qui manque**. Un utilisateur peut rester
-  bloqué sans comprendre. (Pour une quantité > 1, un bouton texte « tout est
-  ok » existe.)
+
 - **O7** — Bloc « documents liés par tag » : présent en haut de page sur
   Matériel / Produits / Tâches, mais sur `/recipes` il n'est rendu qu'en mode
   calendrier (`{#if calendarVisible}`). En mode liste, la page Recettes n'a
-  aucun accès aux documents tagués. Asymétrie à corriger ou à assumer.
+  aucun accès aux documents tagués. Asymétrie à corriger ou à assumer. → **A CORRIGER**
+  
 - **O8** — Chargement des teamdocs sur une session fraîche : `/documents/:teamId`
   affiche d'abord « Aucun document ne correspond aux critères… » (message
   d'état vide, donc trompeur) puis la liste se remplit ; `/editdocument/:id`
   reste **entièrement blanc** (juste la navbar) plusieurs secondes avant
   d'afficher le doc. Aucun squelette/indicateur de chargement. Observé sur la
   session Marion (`[::1]:5173`), ~3-5 s après login — à rapprocher du
-  `initialFetch` du TeamdocsStore.
-- **O9** — Démarrage très lent à froid : l'écran « Démarrage… » est tenu
-  **~20-23 s** avant que l'app ne s'affiche (mesuré deux fois sur
-  `localhost:5173` en onglet neuf, session ghald avec cache Dexie garni), et
-  ~15 s sur `[::1]`. Le P6 (flash « Démarrage… ») est l'aspect cosmétique ; le
-  sujet ici est la durée. À mesurer proprement hors environnement de test (le
-  driver garde plusieurs onglets ouverts, ce qui peut peser).
-- **O10** — Page Affiches : un second clic sur « Ouvrir les filtres » a rendu
-  l'onglet non réactif (`browser.click` en timeout 20 s, snapshots vides),
-  puis les onglets neufs de cette origine sont restés bloqués sur
-  « Démarrage… ». Non reproduit ensuite, cause non établie (boucle réactive
-  possible dans le tiroir de config ?) — à rejouer à la main avant de conclure.
+  `initialFetch` du TeamdocsStore. → A REVERIFIER
+
 
 ## Idées produit (hors gate, à ticketiser)
 

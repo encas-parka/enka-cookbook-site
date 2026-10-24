@@ -531,15 +531,19 @@ Un finding = un commit ; canon final à HEAD `6c48a01e` : suite 53 fichiers /
 
 ## Trouvailles différées
 
-(trivial = une ligne, fixé à la clôture ; finding = tag `!`/`S2`/`?` → entrée
-backlog écrite par l'orchestrateur à la clôture)
+Section close le 24-10 : chaque ligne est partie en fix ou en entrée de
+backlog.
 
-- `MaterielForm.resetForm` jamais appelé — code mort (9 lignes ; les autres
-  occurrences du grep `resetForm` sont des fonctions homonymes d'autres
-  composants, appelées chez elles). Repéré au ticket 04, non purgé
-  (au-delà du trivial) : candidat naturel au nettoyage 06 qui touchera
-  déjà la zone. **Réglé** au housekeeping de la review (`6c48a01e`).
-- `isLoanPlanned` et `extractMaterielIdsFromLoans` (`materiel.utils.ts`)
-  sont orphelins (définition sans consommateur, mesuré au grep 24-10) mais
-  sans sémantique périmée — hors finding A4 (qui ne purge que la formule de
-  stock ancienne) ; candidats purge si un jour on retouche la zone.
+- `MaterielForm.resetForm` mort — **fixé** au housekeeping de la review
+  (`6c48a01e`).
+- Redondance visuelle badge « Emprunté » / compteur « N/quantity en prêt(s) »
+  sur MaterielCard (review standards, mineur) — choix produit : **transféré à
+  la passe click-through humaine** (item dédié de la checklist, décision à
+  l'écran).
+- `isLoanPlanned` / `extractMaterielIdsFromLoans` orphelins (dette légère,
+  sans sémantique périmée) — **entrée backlog**
+  [backlog/26-10-24_materiel-utils-orphelins.md](../backlog/26-10-24_materiel-utils-orphelins.md).
+- Cap 999 du backfill de la migration 1792805000 (review spec, trivial) —
+  **non actionné** : dataset 110 records, migration one-shot avant cutoff,
+  risque nul ; re-jouer un delta de backfill uniquement si la source grossit
+  avant le cutoff.

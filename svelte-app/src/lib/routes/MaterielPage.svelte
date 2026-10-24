@@ -12,6 +12,7 @@
   import { materielStore } from "$lib/stores/MaterielStore.svelte";
   import { nativeTeamsStore } from "$lib/stores/NativeTeamsStore.svelte";
   import { groupByTypeOrder } from "$lib/utils/materiel-list.utils";
+  import type { MaterielDisplayState } from "$lib/types/materiel.types";
   import { ListPlus, Package, Plus } from "@lucide/svelte";
   import { fade } from "svelte/transition";
   import { navBarStore } from "../stores/NavBarStore.svelte";
@@ -23,7 +24,7 @@
   let activeTeamId = $state<string | null>(null);
   let isRedirecting = $state(false);
 
-  let filters = $state<Omit<MaterielFiltersType, "loanStatus">>({
+  let filters = $state<MaterielFiltersType>({
     types: [],
     locations: [],
     statuses: [],
@@ -56,8 +57,15 @@
     "hygiene",
   ];
 
-  // Statuts disponibles
-  const availableStatuses = ["ok", "lost", "loan", "reserved", "torepair"];
+  // États d'affichage dérivés proposés au filtre (jamais persistés)
+  const availableStatuses: MaterielDisplayState[] = [
+    "complete",
+    "partial",
+    "repair",
+    "depleted",
+    "loan",
+    "reserved",
+  ];
 
   // Équipes de l'utilisateur
   const userTeams = $derived(nativeTeamsStore.myTeams);
@@ -110,12 +118,12 @@
         filters.locations.length === 0 ||
         (materiel.location && filters.locations.includes(materiel.location));
 
-      // Statut (OU logique)
-      const statusMatch =
+      // État dérivé (OU logique)
+      const displayStateMatch =
         filters.statuses.length === 0 ||
-        filters.statuses.includes(materiel.status);
+        filters.statuses.includes(materiel.displayState);
 
-      return typeMatch && locationMatch && statusMatch;
+      return typeMatch && locationMatch && displayStateMatch;
     });
   });
 

@@ -10,11 +10,12 @@
   import Fieldset from "$lib/components/ui/Fieldset.svelte";
   import CheckboxBadge from "$lib/components/ui/CheckboxBadge.svelte";
   import RadioBadgeGroup from "$lib/components/ui/RadioBadgeGroup.svelte";
+  import type { MaterielDisplayState } from "$lib/types/materiel.types";
 
   export interface MaterielFiltersType {
     types: string[]; // Sélection multiple
     locations: string[]; // Sélection multiple
-    statuses: string[]; // Sélection multiple
+    statuses: MaterielDisplayState[]; // Sélection multiple (états dérivés)
   }
 
   interface Props {
@@ -22,7 +23,7 @@
     disabled?: boolean;
     availableTypes: string[];
     availableLocations: string[];
-    availableStatuses: string[];
+    availableStatuses: MaterielDisplayState[];
     onReset: () => void;
   }
 
@@ -62,16 +63,20 @@
     return labels[type] || type;
   }
 
-  // Labels pour les statuts
-  function getStatusLabel(status): string {
-    const labels = {
-      ok: "OK",
-      lost: "Perdu",
-      loan: "Utilisé",
+  // Libellés de filtre des états dérivés — vocabulaire de
+  // getMaterielDisplayStateLabel sans le décompte (« Partiel (à réparer) »
+  // plutôt que « Partiel : N à réparer »), qui n'a pas de sens pour une
+  // facette agrégée.
+  function getDisplayStateLabel(state: MaterielDisplayState): string {
+    const labels: Record<MaterielDisplayState, string> = {
+      complete: "Complet",
+      partial: "Partiel (à réparer)",
+      repair: "En réparation",
+      depleted: "Stock épuisé",
+      loan: "Emprunté",
       reserved: "Réservé",
-      torepair: "À réparer",
     };
-    return labels[status] || status;
+    return labels[state];
   }
 </script>
 
@@ -118,13 +123,13 @@
     </div>
   </Fieldset>
 
-  <!-- Statuts -->
-  <Fieldset legend="Statut" iconComponent={AlertCircle}>
+  <!-- États dérivés -->
+  <Fieldset legend="État" iconComponent={AlertCircle}>
     <div class="flex flex-wrap gap-3">
       {#each availableStatuses as status (status)}
         <CheckboxBadge
           checked={filters.statuses.includes(status)}
-          label={getStatusLabel(status)}
+          label={getDisplayStateLabel(status)}
           onchange={() => toggleArrayItem(filters.statuses, status)}
           {disabled}
           color="secondary"

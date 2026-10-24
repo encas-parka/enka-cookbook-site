@@ -109,7 +109,6 @@
             type: item.type,
             quantity: newQty,
             teamId,
-            status: "ok",
           });
           created++;
         } else if (existing && newQty !== existing.quantity) {

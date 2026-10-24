@@ -18,7 +18,6 @@ function makeMateriel(overrides: Partial<Materiel> = {}): Materiel {
     description: null,
     ownerUser: null,
     teamId: "team1",
-    status: "ok",
     deleted: false,
     createdBy: null,
     quantity: 12,
@@ -145,43 +144,6 @@ describe("enrichMateriel — disponibilité (quantity − emprunté − réparat
     const enriched = enrichMateriel(makeMateriel(), [loan], NOW);
     expect(enriched.availableQuantity).toBe(12);
     expect(enriched.displayState).toBe("complete");
-  });
-});
-
-describe("enrichMateriel — état dérivé vs ancien statut enrichi (coexistence au ticket 06)", () => {
-  it("l'activité d'emprunt prime sur l'état de stock", () => {
-    // Item partiellement en réparation mais dont un emprunt est en cours
-    const enriched = enrichMateriel(
-      makeMateriel({ repairQuantity: 2 }),
-      [makeLoan()],
-      NOW,
-    );
-    expect(enriched.displayState).toBe("loan");
-  });
-
-  it("l'ancien champ status enrichi reste calculé tel quel", () => {
-    // Backfill ticket 01 : « à réparer » → repairQuantity = quantity
-    const inRepair = enrichMateriel(
-      makeMateriel({ status: "torepair", repairQuantity: 12 }),
-      [],
-      NOW,
-    );
-    expect(inRepair.status).toBe("torepair");
-    expect(inRepair.displayState).toBe("repair");
-
-    // Backfill ticket 01 : « perdu » → quantity = 0
-    const lost = enrichMateriel(
-      makeMateriel({ status: "lost", quantity: 0 }),
-      [],
-      NOW,
-    );
-    expect(lost.status).toBe("lost");
-    expect(lost.displayState).toBe("depleted");
-
-    // Statut absent → « ok », état de stock dérivé complet
-    const ok = enrichMateriel(makeMateriel({ status: null }), [], NOW);
-    expect(ok.status).toBe("ok");
-    expect(ok.displayState).toBe("complete");
   });
 });
 

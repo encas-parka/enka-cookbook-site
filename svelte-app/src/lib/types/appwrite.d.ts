@@ -35,12 +35,6 @@ export enum MaterielType {
   HYGIENE = "hygiene",
 }
 
-export enum MaterielStatus {
-  OK = "ok",
-  LOST = "lost",
-  TOREPAIR = "torepair",
-}
-
 export enum EventTodoPriority {
   LOW = "low",
   MEDIUM = "medium",
@@ -176,7 +170,6 @@ export type Materiel = Models.Row & {
   name: string;
   location: string | null;
   shareableWith: string[] | null;
-  status: MaterielStatus;
   owner: string;
   storeIn: string[] | null;
   isStorage: boolean;

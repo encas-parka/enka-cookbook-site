@@ -16,7 +16,6 @@ import type {
   EventTodosPriorityOptions,
   EventTodosStatusOptions,
   MaterielTypeOptions,
-  MaterielStatusOptions,
   MaterielLoanStatusOptions,
   RecipesTypeROptions,
   RecipesStatusOptions,
@@ -40,7 +39,6 @@ export {
   EventTodosPriorityOptions,
   EventTodosStatusOptions,
   MaterielTypeOptions,
-  MaterielStatusOptions,
   MaterielLoanStatusOptions,
   RecipesTypeROptions,
   RecipesStatusOptions,
@@ -52,7 +50,6 @@ export {
   RecipesTypeROptions as RecettesTypeR,
   RecipesStatusOptions as RecettesStatus,
   MaterielTypeOptions as MaterielType,
-  MaterielStatusOptions as MaterielStatus,
   EventTodosPriorityOptions as EventTodoPriority,
   EventTodosStatusOptions as EventTodoStatus,
   MaterielLoanStatusOptions as MaterielLoanStatus,
@@ -64,7 +61,6 @@ export type {
   RecipesTypeROptions as RecettesTypeRType,
   RecipesStatusOptions as RecettesStatusType,
   MaterielTypeOptions as MaterielTypeType,
-  MaterielStatusOptions as MaterielStatusType,
   EventTodosPriorityOptions as EventTodoPriorityType,
   EventTodosStatusOptions as EventTodoStatusType,
   MaterielLoanStatusOptions as MaterielLoanStatusType,
@@ -195,7 +191,6 @@ export type Materiel = PbDoc & {
   description: string | null;
   ownerUser: string | null;
   teamId: string | null;
-  status: MaterielStatusOptions | null;
   deleted: boolean;
   createdBy: string | null;
   quantity: number | null;

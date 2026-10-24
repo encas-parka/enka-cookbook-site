@@ -3,7 +3,7 @@
  * Parsing centralisé et testable des données PocketBase
  */
 
-import type { MaterielLoan, MaterielStatus, MaterielType } from "$lib/types/pb";
+import type { MaterielLoan, MaterielType } from "$lib/types/pb";
 import type {
   EnrichedMateriel,
   EnrichedMaterielLoan,
@@ -237,22 +237,6 @@ export function getMaterielTypeIcon(
 }
 
 /**
- * Retourne le label lisible pour un statut de matériel
- */
-export function getMaterielStatusLabel(
-  status: MaterielStatus | string | null | undefined,
-): string {
-  const labels: Record<string, string> = {
-    ok: "OK",
-    lost: "Perdu",
-    torepair: "À réparer",
-    loan: "Emprunté",
-    reserved: "Réserver",
-  };
-  return labels[status || "ok"] || status || "OK";
-}
-
-/**
  * Libellé FR d'un état d'affichage dérivé (jamais persisté). L'état
  * « partial » porte le nombre d'exemplaires en réparation.
  */
@@ -406,7 +390,7 @@ export function enrichMateriel(
     }
   });
 
-  // 3. Calculer le statut du matériel
+  // 3. Emprunts actifs / planifiés — l'activité prime sur l'état de stock
   const hasActiveLoans = loanDetails.some((detail) => {
     const start = new Date(detail.startDate);
     const end = new Date(detail.endDate);
@@ -418,15 +402,6 @@ export function enrichMateriel(
     return start > now;
   });
 
-  // Statut PB nullable : matériel sans statut explicite traité comme "ok"
-  let status: MaterielStatus | "loan" | "reserved" = doc.status ?? "ok";
-
-  if (hasActiveLoans) {
-    status = "loan"; // En cours d'utilisation
-  } else if (hasFutureLoans) {
-    status = "reserved"; // Réservé pour le futur
-  }
-
   // Exemplaires actuellement en réparation (champ PB optionnel → 0) ;
   // non empruntables tant qu'ils ne sont pas remis en service
   const repairQuantity = doc.repairQuantity ?? 0;
@@ -437,7 +412,7 @@ export function enrichMateriel(
     (doc.quantity ?? 0) - totalLoanedQuantity - repairQuantity;
 
   // État d'affichage dérivé — jamais persisté (ADR 0003) : l'état de stock
-  // cède devant l'activité d'emprunt, comme le statut enrichi existant
+  // cède devant l'activité d'emprunt
   const stockState: MaterielDisplayState =
     repairQuantity > 0
       ? availableQuantity > 0
@@ -456,9 +431,6 @@ export function enrichMateriel(
   return {
     // Tous les champs de Materiel (y compris PbDoc)
     ...doc,
-
-    // Override du statut calculé
-    status: status as MaterielStatus,
 
     // État d'affichage dérivé (stock × activité)
     displayState,

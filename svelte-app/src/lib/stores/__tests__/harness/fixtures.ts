@@ -150,7 +150,6 @@ export function makeMaterielRecord(
     description: null,
     ownerUser: null,
     teamId: TEST_TEAM_ID,
-    status: "ok",
     deleted: false,
     createdBy: null,
     quantity: 5,

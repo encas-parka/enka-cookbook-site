@@ -7,11 +7,7 @@
  */
 
 import type { Materiel, MaterielLoan } from "./pb";
-import type {
-  MaterielTypeOptions,
-  MaterielStatusOptions,
-  MaterielLoanStatusOptions,
-} from "./pb-generated";
+import type { MaterielLoanStatusOptions } from "./pb-generated";
 
 // Re-export select types (single source of truth)
 export type { MaterielLoanStatusOptions } from "./pb-generated";
@@ -63,21 +59,13 @@ export interface MaterielLoanDetail {
 // =============================================================================
 
 /**
- * Statut calculé côté client pour le matériel enrichi
- * - Les statuts PB bruts : ok, lost, torepair
- * - Les statuts calculés depuis les emprunts : loan (en cours), reserved (futur)
- */
-export type EnrichedMaterielStatus =
-  MaterielStatusOptions | "loan" | "reserved";
-
-/**
  * État d'affichage dérivé du stock et de l'activité — jamais persisté
  * (ADR 0003) :
  * - état de stock : complete (stock entier disponible), partial (N exemplaires
  *   en réparation, les sains disponibles), repair (stock en réparation, plus
  *   rien de disponible), depleted (stock épuisé ou quantité inconnue)
  * - activité d'emprunt : loan (emprunt actif), reserved (emprunt planifié) —
- *   prioritaire sur l'état de stock, comme sur le statut enrichi.
+ *   prioritaire sur l'état de stock.
  */
 export type MaterielDisplayState =
   "complete" | "partial" | "repair" | "depleted" | "loan" | "reserved";
@@ -88,11 +76,7 @@ export type MaterielDisplayState =
  * - Conserve tous les champs PB bruts (dont teamId, ownerUser)
  * - Ajoute les champs calculés (loanDetails, availableQuantity, etc.)
  */
-export interface EnrichedMateriel extends Omit<Materiel, "status"> {
-  // Statut enrichi (PB ou calculé depuis emprunts) — coexiste avec
-  // displayState jusqu'au retrait du champ persisté
-  status: EnrichedMaterielStatus;
-
+export interface EnrichedMateriel extends Materiel {
   // État d'affichage dérivé (stock × activité) — jamais écrit en base
   displayState: MaterielDisplayState;
 
@@ -129,12 +113,6 @@ export interface EnrichedMaterielLoan extends Omit<MaterielLoan, "materiels"> {
 // FILTRES UI
 // =============================================================================
 
-export interface MaterielFilters {
-  type?: MaterielTypeOptions | null;
-  status?: MaterielStatusOptions | null;
-  location?: string | null;
-  loan?: string | null;
-  hasAvailable?: boolean;
-  ownerType?: "me" | "myTeams" | "others";
-  search?: string;
-}
+// L'interface MaterielFilters (type, status, location…) est supprimée : morte
+// depuis la migration PB — MaterielFilters.svelte définit son propre
+// MaterielFiltersType, désormais adossé aux états dérivés (MaterielDisplayState).

@@ -373,7 +373,6 @@ export class MaterielStore {
     description?: string;
     type?: string;
     quantity: number;
-    status?: string;
     location?: string;
     shareableWith?: string[];
     teamId?: string | null;
@@ -391,7 +390,6 @@ export class MaterielStore {
         description: data.description || null,
         type: data.type || null,
         quantity: data.quantity,
-        status: (data.status || "ok") as Materiel["status"],
         location: data.location || null,
         shareableWith: data.shareableWith || null,
         teamId: data.teamId || null,
@@ -419,7 +417,6 @@ export class MaterielStore {
       description?: string;
       type?: string;
       quantity?: number;
-      status?: string;
       location?: string;
       shareableWith?: string[];
       owner?: string;

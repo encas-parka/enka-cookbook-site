@@ -67,6 +67,7 @@ await store.setupRealtime(); // SSE → Dexie
 - `bun run check` = svelte-check-native : a11y/runes/compile — **ne voit PAS les erreurs de type** (mesuré 06-10).
 - `bun run check-legacy` = vrai audit type (svelte-check) — raisonner par diff par fichier (dette préexistante ~193 erreurs au 06-10, à ne pas attendre à 0).
 - `bun run test` = vitest. `resolve.conditions: ["browser"]` dans `vitest.config.ts` **obligatoire** (réactivité Svelte 5 en test) ; `@vitest-environment jsdom` par docblock ; faux SDK PocketBase : `src/lib/stores/__tests__/harness/stub-pb.ts` (dates `YYYY-MM-DD HH:mm:ss.SSSZ`, évaluation lexicale du delta).
+- Preuve « zéro écriture » au transport factice : `vi.spyOn(fakePb, "collection")` posé mid-test pour capter les updates émis (pattern `rejectEventMaterielWrites` / `trackMaterielUpdates` des tests store materiel) — le stub n'a pas de journal d'appels.
 
 ## Layout `src/lib/`
 

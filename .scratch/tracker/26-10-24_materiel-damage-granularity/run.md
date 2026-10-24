@@ -14,6 +14,9 @@
   suite complète 52 fichiers / 372 tests verts
   (`tests-materiel-damage-lot1.log`) · `check:app` 198 fichiers, 0 erreur
   (`check-materiel-displaystate.log`).
+- **Test canon après ticket 03** (attesté, `/tmp/orchestrate/tests-t03-full-suite.log`)
+  : suite complète 53 fichiers / 382 tests verts · `check:app` 198 fichiers,
+  0 erreur (`/tmp/orchestrate/check-t03-checkapp.log`).
 - **Outils déjà trouvés** : `bun` partout ; check complet = `bun run check:app`
   (racine) ; tests = `cd svelte-app && bun run test` (vitest, setup
   `stores/__tests__/harness/setup.ts`, transport factice `stub-pb.ts`,
@@ -330,6 +333,8 @@ dispo : pure dérivation, rien d'autre à faire.
 | 18 | Docs schéma | pocketbase_collections.md ne mentionne ni materiel.status ni repairQuantity | mesuré | grep `status\|repairQuantity\|torepair\|lost` sur `docs/pocketbase_collections.md` |
 | 19 | Tickets 01–02 vérifiés contre l'arbre | migration + repairQuantity (pb-generated + pb.d.ts manuel) + displayState/labels/tests présents à HEAD `bbc8af6d` | mesuré | lectures citées + `git log --oneline -8` (arbre propre, seul run.md non tracké) |
 | 20 | Aucun test composant .svelte | le payload de retour n'est pas épinglé par un test UI | mesuré | glob `svelte-app/src/**/*.test.ts` (stores/db-sync/utils/services/router uniquement) |
+| 21 | Spy mid-test = preuve « zéro écriture » | `vi.spyOn(fakePb, "collection")` (pattern `rejectEventMaterielWrites`) capte chaque update materiel émis par le retour — item intact absent, aucun payload ne porte `status` | mesuré | tests ticket 03 (`materiel-store-return-stock.test.ts`), verts 10/10 |
+| 22 | Régression sélecteurs sans filtre statut | les suites store qui consomment `getAvailableMaterielsForPeriod` restent vertes (fixtures sans repairQuantity ⇒ formules inchangées pour elles) | mesuré | `/tmp/orchestrate/tests-t03-store-regression.log` (4 fichiers / 19 tests) |
 
 ## Décisions par ticket
 
@@ -344,6 +349,19 @@ dispo : pure dérivation, rien d'autre à faire.
   `availableQuantity`). **03 — retour** : ne toucher que la boucle d'écritures
   materiel ; clôture via `updateLoan` et la projection event_materiel
   inchangées.
+- **03 — livré** (commits `4ebc9eaa` retour, `8b668be1` sélecteurs+gestes) :
+  noms retenus `returnToService` / `scrapUnits` (suggérés au dispatch) ;
+  garde partagée dans `#adjustRepairQuantity` — violation ⇒ throw, `#error`
+  du store posé (pattern `updateMateriel`), zéro écriture ; réforme borne
+  `quantity` à 0 (`Math.max`) — un stock négatif n'a pas de sens physique ;
+  projection du retour = un patch `{quantity, repairQuantity}` par item
+  endommagé, lu depuis `#raw.materiels` (vérité locale, modèle offline-first)
+  — **item absent du cache local ⇒ item sauté sans écriture** (une
+  projection absolue sur un état inconnu serait une corruption ; la
+  déclaration reste tracée dans le json du prêt complété) ; tests : nouveau
+  fichier `stores/__tests__/materiel-store-return-stock.test.ts` (10 tests,
+  spy transport pour « zéro écriture », clôture du prêt épinglée — base du
+  to-verify 05).
 - **04 — filtres** : **remplacement**, pas extension — `filters.statuses`
   garde son nom et sa mécanique, les valeurs deviennent `MaterielDisplayState`
   (`availableStatuses` → états dérivés, label via `getMaterielDisplayStateLabel`,

@@ -17,6 +17,10 @@
  * // …interaction…
  * expect(holder.value).toBe(12.5);
  * ```
+ *
+ * Piège : passer TOUTES les props (bindables et statiques) dans l'objet
+ * `$state` — étaler le proxy dans un littéral (`{...holder, x: 1}`)
+ * recopie les valeurs dans un objet brut et rompt la remontée.
  */
 export function bindableProps<T extends Record<string, unknown>>(
   initial: T,

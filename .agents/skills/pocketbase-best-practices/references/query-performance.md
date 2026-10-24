@@ -668,13 +668,11 @@ async function findOrderByNumber(orderNumber) {
 
 // Complex filter conditions
 async function findActiveSubscription(userId) {
-  return pb
-    .collection("subscriptions")
-    .getFirstListItem(
-      pb.filter('user = {:userId} && status = "active" && expiresAt > @now', {
-        userId,
-      }),
-    );
+  return pb.collection("subscriptions").getFirstListItem(
+    pb.filter('user = {:userId} && status = "active" && expiresAt > @now', {
+      userId,
+    }),
+  );
 }
 
 // With field selection

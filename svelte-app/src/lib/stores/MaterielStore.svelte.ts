@@ -643,24 +643,28 @@ export class MaterielStore {
       returnNotes?: string;
     },
   ): Promise<void> {
-    // Pour chaque materiel avec pertes/cassures, mettre à jour son statut
+    // Le stock dit la vérité unité par unité (ADR 0003) : les manquants
+    // décrémentent définitivement la quantité, les exemplaires à réparer
+    // incrémentent le compteur. Aucun statut n'est écrit ; un item sans
+    // dommage déclaré ne reçoit AUCUNE écriture — un état saisi à la main
+    // (réparation en cours) survit donc aux retours.
     for (const item of data.materiels) {
       const lost = item.lostQuantity || 0;
       const broken = item.brokenQuantity || 0;
+      if (lost <= 0 && broken <= 0) continue;
 
-      if (lost + broken >= item.quantity) {
-        await this.#materielCollection.update(item.materielId, {
-          status: "lost",
-        } as Partial<Materiel>);
-      } else if (broken > 0) {
-        await this.#materielCollection.update(item.materielId, {
-          status: "torepair",
-        } as Partial<Materiel>);
-      } else {
-        await this.#materielCollection.update(item.materielId, {
-          status: "ok",
-        } as Partial<Materiel>);
-      }
+      const current = this.#raw.materiels.find((m) => m.id === item.materielId);
+      // Sans l'état courant, la projection absolue serait une corruption —
+      // l'item est sauté ; la déclaration reste tracée dans le JSON du prêt
+      // complété, d'où elle reste réconciliable.
+      if (!current) continue;
+
+      await this.#materielCollection.update(item.materielId, {
+        // Borne 0 : une correction manuelle du stock entre création et
+        // retour peut rendre le décrément supérieur au stock restant.
+        quantity: Math.max(0, (current.quantity ?? 0) - lost),
+        repairQuantity: (current.repairQuantity ?? 0) + broken,
+      } as Partial<Materiel>);
     }
 
     await this.updateLoan(loanId, {

@@ -41,7 +41,9 @@
   AGENTS.md.
 - **Sandbox** : pas de substitutions shell (`$var`, `$(…)`) ni redirections
   douteuses — littéraux + `tee` ; logs de tests : `/tmp/orchestrate/tests-*.log`
-  ; commits `GIT_EDITOR=true git commit` ; pas de push.
+  ; commits `GIT_EDITOR=true git commit` ; pas de push. `/tmp/orchestrate` ne
+  survit pas d'un appel shell à l'autre (tmpfs volatile) : `mkdir -p` dans le
+  MÊME appel que chaque écriture de log.
 - **Click-through (tickets 04, 05)** : aucun navigateur piloté dans les sessions
   agents ⇒ critères click-through marqués `[!]` « passe humaine requise » ;
   passe à mener par le mainteneur en clôture (skill `browser-clickthrough`,
@@ -485,6 +487,48 @@ dispo : pure dérivation, rien d'autre à faire.
   requise » — passe de clôture mainteneur (checklist
   `.scratch/tracker/clickthrough-checklist.md`).
 
+### Review de fin de run — appliquée (24-10, micro-dispatch de clôture)
+
+Un finding = un commit ; canon final à HEAD `6c48a01e` : suite 53 fichiers /
+383 tests (380 + 1 test A2 + 2 tests A3), logs `/tmp/orchestrate/tests-final-review-fixes.log`
+· `check:app` 198 fichiers / 0 erreur, `/tmp/orchestrate/check-final-review-fixes.log`.
+
+- `b5451a3a` (**A1, majeur**) — MaterielForm : après CHAQUE geste réussi, le
+  snapshot du formulaire est resynchronisé sur la vérité du store
+  (`getMaterielById`) pour `quantity` ET `repairQuantity` (couvre les deux
+  gestes et tout futur geste) — nouvelle baseline, formulaire non-dirty sur
+  ces champs ; la relecture suit un tour de macrotâche (update optimiste :
+  Dexie déjà écrit, liveQuery propageant en microtâches) ; item absent du
+  cache ⇒ repli miroir local (même arithmétique que
+  `#adjustRepairQuantity`). Le bug « geste puis Enregistrer restaure le
+  stock réformé » est fermé par construction. **[!] Épreuve écran « geste
+  puis Enregistrer » à jouer par la passe humaine de clôture** (checklist
+  click-through).
+- `47bef46e` (**A2**) — test « item endommagé absent du cache » : déclaré
+  dans le prêt, absent du seed ⇒ zéro update émis pour son id (spy
+  transport), clôture du prêt intacte. Épingle la décision 03 « skip sans
+  écriture » (11ᵉ test de la suite retour).
+- `4702b57b` (**A3**) — `getMaterielDisplayStateShortLabel` extraite dans
+  `materiel.utils.ts` (l'arbitrage « libellé court » est conservé) et
+  consommée par MaterielFilters ; source unique rétablie, le libellé complet
+  avec décompte reste `getMaterielDisplayStateLabel` ; le map sort d'un
+  composant non testé pour le seam utils (2 its).
+- `a1874a49` (**A4**) — purge des helpers de période à formule périmée :
+  `calculateTotalLoanedQuantity`, `isMaterielAvailableForPeriod`,
+  `getMaterielConflictsForPeriod` (zéro consommateur, zéro test — preuves
+  `/tmp/orchestrate/grep-preuve-a4-cibles-avant.log` et `-apres.log`) +
+  `isLoanActive` (ne servait que le premier) ; chaîne vivante conservée
+  (`calculateLoanedQuantityForPeriod` + `doPeriodsOverlap` + `isLoanValid`,
+  consommateur : `getAvailableMaterielsForPeriod`).
+- `8e9e74ec` (**A5**) — invariant documenté dans `completeLoanWithReturn` :
+  un item unique par materielId et par prêt (un doublon écraserait le
+  premier décrément ; LoanForm ne peut pas en produire, données exportées
+  sans doublon).
+- `6c48a01e` (**housekeeping groupé**) — `resetForm` mort de MaterielForm
+  purgé (trouvailles différées réglées) ; `availableStatuses` →
+  `availableDisplayStates` dans MaterielPage ET côté prop de MaterielFilters
+  (extension assumée : même vestige, unique consommateur prouvé au grep).
+
 ## Trouvailles différées
 
 (trivial = une ligne, fixé à la clôture ; finding = tag `!`/`S2`/`?` → entrée
@@ -494,4 +538,8 @@ backlog écrite par l'orchestrateur à la clôture)
   occurrences du grep `resetForm` sont des fonctions homonymes d'autres
   composants, appelées chez elles). Repéré au ticket 04, non purgé
   (au-delà du trivial) : candidat naturel au nettoyage 06 qui touchera
-  déjà la zone.
+  déjà la zone. **Réglé** au housekeeping de la review (`6c48a01e`).
+- `isLoanPlanned` et `extractMaterielIdsFromLoans` (`materiel.utils.ts`)
+  sont orphelins (définition sans consommateur, mesuré au grep 24-10) mais
+  sans sémantique périmée — hors finding A4 (qui ne purge que la formule de
+  stock ancienne) ; candidats purge si un jour on retouche la zone.

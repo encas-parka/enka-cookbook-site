@@ -13,14 +13,19 @@ Zone : `svelte-app/src/lib/components/teamMatos/MaterielForm.svelte`, `MaterielC
 
 **Blocked by:** 02 (états dérivés), 03 (gestes exposés par le store).
 
-**Status:** ready-for-agent
+**Status:** done
 
-- [ ] Sélecteur de statut supprimé du formulaire ; quantité toujours éditable (correction de stock à la main)
-- [ ] Gestes remise en service / réforme visibles seulement si `repairQuantity > 0`, bornés à `repairQuantity`, avec retour visuel de succès
-- [ ] Badge d'état dérivé sur la carte : complet / partiel : N à réparer / en réparation / stock épuisé / emprunté / réservé — jamais « perdu »
-- [ ] Filtres et page d'inventaire rebasés sur les états dérivés (plus de filtre sur le statut persisté)
-- [ ] Aucune occurrence de « perdu » restante dans la zone inventaire (composants + page)
-- [ ] Click-through de la zone inventaire à l'écran : création/édition d'item, geste de remise en service, geste de réforme (convention maison : flux touchés vérifiés dans l'UI réelle)
-- [ ] `bun run check:app` vert ; `bun fmt` sur les fichiers modifiés
+- [x] Sélecteur de statut supprimé du formulaire ; quantité toujours éditable (correction de stock à la main)
+- [x] Gestes remise en service / réforme visibles seulement si `repairQuantity > 0`, bornés à `repairQuantity`, avec retour visuel de succès
+- [x] Badge d'état dérivé sur la carte : complet / partiel : N à réparer / en réparation / stock épuisé / emprunté / réservé — jamais « perdu »
+- [x] Filtres et page d'inventaire rebasés sur les états dérivés (plus de filtre sur le statut persisté)
+- [x] Aucune occurrence de « perdu » restante dans la zone inventaire (composants + page)
+- [!] Click-through de la zone inventaire à l'écran : création/édition d'item, geste de remise en service, geste de réforme (convention maison : flux touchés vérifiés dans l'UI réelle) — passe humaine requise (clôture du run ; aucun navigateur piloté dans la session)
+- [x] `bun run check:app` vert ; `bun fmt` sur les fichiers modifiés
+
+## Comments
+
+Livré en 3 commits (`a0034a1b` formulaire+modal, `55b906bd` badge carte,
+`010d32bd` filtres+page) — détail et arbitrages au rapport § Décisions 04.
 
 ## Comments

@@ -17,6 +17,9 @@
 - **Test canon après ticket 03** (attesté, `/tmp/orchestrate/tests-t03-full-suite.log`)
   : suite complète 53 fichiers / 382 tests verts · `check:app` 198 fichiers,
   0 erreur (`/tmp/orchestrate/check-t03-checkapp.log`).
+- **Test canon après ticket 04** (attesté, `/tmp/orchestrate/tests-t04-full-suite.log`)
+  : suite complète 53 fichiers / 382 tests verts · `check:app` 198 fichiers,
+  0 erreur (`/tmp/orchestrate/check-t04-checkapp.log`).
 - **Outils déjà trouvés** : `bun` partout ; check complet = `bun run check:app`
   (racine) ; tests = `cd svelte-app && bun run test` (vitest, setup
   `stores/__tests__/harness/setup.ts`, transport factice `stub-pb.ts`,
@@ -335,6 +338,8 @@ dispo : pure dérivation, rien d'autre à faire.
 | 20 | Aucun test composant .svelte | le payload de retour n'est pas épinglé par un test UI | mesuré | glob `svelte-app/src/**/*.test.ts` (stores/db-sync/utils/services/router uniquement) |
 | 21 | Spy mid-test = preuve « zéro écriture » | `vi.spyOn(fakePb, "collection")` (pattern `rejectEventMaterielWrites`) capte chaque update materiel émis par le retour — item intact absent, aucun payload ne porte `status` | mesuré | tests ticket 03 (`materiel-store-return-stock.test.ts`), verts 10/10 |
 | 22 | Régression sélecteurs sans filtre statut | les suites store qui consomment `getAvailableMaterielsForPeriod` restent vertes (fixtures sans repairQuantity ⇒ formules inchangées pour elles) | mesuré | `/tmp/orchestrate/tests-t03-store-regression.log` (4 fichiers / 19 tests) |
+| 23 | Zone inventaire « perdu » après 04 | 0 occurrence (Form/Card/Filters/Modal/Page) ; restantes = zone retour/loan (ticket 05) | mesuré | grep `[Pp]erd[u]` sur `components/teamMatos` + `routes/MaterielPage.svelte` post-04 |
+| 24 | Canon après 04 | suite 53 fichiers / 382 tests verte, check:app 198 fichiers / 0 erreur | mesuré | `/tmp/orchestrate/tests-t04-full-suite.log`, `/tmp/orchestrate/check-t04-checkapp.log` |
 
 ## Décisions par ticket
 
@@ -406,8 +411,41 @@ dispo : pure dérivation, rien d'autre à faire.
   4. *Classes badge par état (04)* — arbitrage esthétique laissé à
      l'implémenteur, sous `docs/ui-conventions.md`.
   La review de fin de run valide ces quatre arbitrages.
+- **04 — livré** (commits `a0034a1b` formulaire+modal, `55b906bd` badge
+  carte, `010d32bd` filtres+page) : arbitrage n° 3 appliqué tel quel —
+  `quantity = 0` valide en ÉDITION seulement (`min` et garde conditionnés à
+  `isEdit`, aide « 0 = au rebut » sous l'input) ; au passage `quantity`
+  s'initialise avec `?? 1` et plus `|| 1` — l'ancien `||` écrasait un rebut
+  0 en 1 à l'ouverture du formulaire. `MaterielInitialValues` étendu de
+  `repairQuantity` **et de `id`** (requis par les appels store du geste ;
+  MaterielModal les fournit tous deux). Gestes branchés dans MaterielForm :
+  snapshot local `repairStock` décrémenté seulement après un succès
+  constaté — `toastService.track` toast l'erreur puis re-throw, d'où un
+  catch muet documenté ; borne UI `[1, repairStock]` (`max` + `$derived`
+  de validité) en plus de la garde store ; bloc masqué dès
+  `repairStock = 0` ; Enregistrer et les deux gestes se désactivent
+  mutuellement (`loading` / `gestureBusy`) — une écriture du record à la
+  fois. Badge carte : `complete` masqué (état neutre, remplace l'ancien
+  masquage de `ok`) ; `loan`/`reserved` désormais rendus — l'ancien code
+  masquait `loan`, le critère du ticket énumère les six états ; classes
+  alignées sur le prior art LoanCard (warning si partiel, error si tout le
+  stock immobilisé) et sur les badges existants de la carte (info prêt,
+  secondary réservé). Filtres : remplacement pur appliqué (même mécanique,
+  valeurs `MaterielDisplayState` typées dans `MaterielFiltersType`, match
+  sur `materiel.displayState`, legend « Statut » → « État ») — **écart
+  assumé à la reco « label via getMaterielDisplayStateLabel »** : un map
+  local court documenté dans MaterielFilters (« Partiel (à réparer) »...),
+  car la fonction canonique y injecterait « Partiel : 0 à réparer », sans
+  sens pour une facette agrégée ; le vocabulaire reste le sien. Omit
+  `loanStatus` vestigial de MaterielPage nettoyé au passage.
 
 ## Trouvailles différées
 
 (trivial = une ligne, fixé à la clôture ; finding = tag `!`/`S2`/`?` → entrée
 backlog écrite par l'orchestrateur à la clôture)
+
+- `MaterielForm.resetForm` jamais appelé — code mort (9 lignes ; les autres
+  occurrences du grep `resetForm` sont des fonctions homonymes d'autres
+  composants, appelées chez elles). Repéré au ticket 04, non purgé
+  (au-delà du trivial) : candidat naturel au nettoyage 06 qui touchera
+  déjà la zone.

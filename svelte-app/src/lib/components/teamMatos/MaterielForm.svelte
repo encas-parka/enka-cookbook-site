@@ -197,7 +197,9 @@
   /**
    * Remise en service / réforme des exemplaires en réparation (ADR 0003) :
    * la garde fine (1 ≤ n ≤ repairQuantity) vit dans le store et lève sans
-   * écriture ; le compteur local ne descend qu'après un succès constaté.
+   * écriture ; après un succès constaté, le snapshot du formulaire est relu
+   * du store (quantity ET repairQuantity) — nouvelle baseline : « Enregistrer »
+   * soumet l'état post-geste, jamais celui d'ouverture.
    */
   async function handleRepairGesture(scrap: boolean) {
     if (!initialValues || !isGestureQuantityValid || gestureBusy) return;
@@ -216,7 +218,22 @@
           error: (err) => (err instanceof Error ? err.message : undefined),
         },
       );
-      repairStock -= n;
+      // Resync sur la vérité du store : le geste a réécrit quantity et
+      // repairQuantity sous le formulaire — soumettre l'état d'ouverture
+      // restaurerait silencieusement ce que le geste a retiré (le décrément
+      // de réforme est définitif). La relecture suit un tour de macrotâche :
+      // l'update est optimiste (Dexie déjà écrit) et la liveQuery propage en
+      // microtâches. Item absent du cache : miroir local du geste, même
+      // arithmétique que le store.
+      await new Promise((resolve) => setTimeout(resolve, 0));
+      const fresh = materielStore.getMaterielById(initialValues.id);
+      if (fresh) {
+        repairStock = fresh.repairQuantity ?? 0;
+        if (fresh.quantity !== null) quantity = fresh.quantity;
+      } else {
+        repairStock = Math.max(0, repairStock - n);
+        if (scrap) quantity = Math.max(0, quantity - n);
+      }
       gestureQuantity = 1;
     } catch {
       // Erreur déjà toastée par track ; le formulaire reste ouvert.

@@ -69,22 +69,20 @@
 </script>
 
 <div
-  class="bg-base-100 flex flex-col gap-2 rounded-lg border px-3 py-2 transition-colors sm:flex-row sm:items-center sm:justify-between {disabled
+  class="bg-base-100 border-base-300 flex flex-col gap-2 rounded-lg border px-3 py-2 transition-colors sm:flex-row sm:items-center sm:justify-between {disabled
     ? 'border-base-300 bg-base-300/50 opacity-60 '
     : isActive
-      ? 'text-primary ring-primary/40 border-0 font-medium ring-1 ring-inset'
-      : 'border-base-300'}"
+      ? 'text-primary ring-neutral/30 border-0 font-medium ring-2 ring-inset'
+      : ''}"
 >
   <div class="flex min-w-0 items-center gap-2">
-    <span class="text-base sm:truncate {showStatusBadge ? 'line-through' : ''}"
-      >{name}</span
-    >
+    <span class="text-base sm:truncate">{name}</span>
     {#if showStatusBadge}
       <span class="badge badge-sm badge-error flex-none"
         >{unavailableLabel}</span
       >
     {:else if badge !== undefined}
-      <span class="badge badge-ghost badge-sm flex-none tabular-nums"
+      <span class="badge badge-ghost flex-none tabular-nums"
         >{badge} <span class="opacity-70">dispo.</span></span
       >
     {:else if hasExisting}

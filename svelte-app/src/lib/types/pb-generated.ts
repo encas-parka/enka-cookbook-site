@@ -283,6 +283,7 @@ export type MaterielRecord = {
 	name: string
 	ownerUser?: RecordIdString
 	quantity?: number
+	repairQuantity?: number
 	shareableWith?: RecordIdString[]
 	status?: MaterielStatusOptions
 	storeIn?: RecordIdString

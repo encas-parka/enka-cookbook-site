@@ -490,7 +490,7 @@
                        confirmation pour retirer un problème déclaré. -->
                   <div class="flex items-center gap-2">
                     <button
-                      class="btn {item.panelOpen
+                      class="btn btn-sm {item.panelOpen
                         ? 'btn-warning'
                         : 'btn-outline btn-warning'}"
                       type="button"
@@ -504,7 +504,7 @@
                       Un problème
                     </button>
                     <button
-                      class="btn {item.okChecked
+                      class="btn btn-sm {item.okChecked
                         ? 'btn-success'
                         : 'btn-outline btn-success'}"
                       type="button"

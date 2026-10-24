@@ -71,22 +71,40 @@ export type EnrichedMaterielStatus =
   MaterielStatusOptions | "loan" | "reserved";
 
 /**
+ * État d'affichage dérivé du stock et de l'activité — jamais persisté
+ * (ADR 0003) :
+ * - état de stock : complete (stock entier disponible), partial (N exemplaires
+ *   en réparation, les sains disponibles), repair (stock en réparation, plus
+ *   rien de disponible), depleted (stock épuisé ou quantité inconnue)
+ * - activité d'emprunt : loan (emprunt actif), reserved (emprunt planifié) —
+ *   prioritaire sur l'état de stock, comme sur le statut enrichi.
+ */
+export type MaterielDisplayState =
+  "complete" | "partial" | "repair" | "depleted" | "loan" | "reserved";
+
+/**
  * Matériel enrichi avec données calculées
  *
  * - Conserve tous les champs PB bruts (dont teamId, ownerUser)
  * - Ajoute les champs calculés (loanDetails, availableQuantity, etc.)
  */
 export interface EnrichedMateriel extends Omit<Materiel, "status"> {
-  // Statut enrichi (PB ou calculé depuis emprunts)
+  // Statut enrichi (PB ou calculé depuis emprunts) — coexiste avec
+  // displayState jusqu'au retrait du champ persisté
   status: EnrichedMaterielStatus;
+
+  // État d'affichage dérivé (stock × activité) — jamais écrit en base
+  displayState: MaterielDisplayState;
 
   // Champs enrichis
   loanDetails: MaterielLoanDetail[];
 
   // Champs dérivés calculés
+  /** quantity − enEmprunt − repairQuantity (stock inconnu = 0, conservateur). */
   availableQuantity: number;
   totalLoanedQuantity: number;
   isAvailable: boolean;
+  /** Plus aucune unité disponible : empruntée, en réparation ou épuisée. */
   isFullyLoaned: boolean;
 }
 

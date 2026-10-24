@@ -156,12 +156,10 @@ export class MaterielStore {
   // =============================================================================
 
   getAvailableMaterielsByOwner(teamId: string): EnrichedMateriel[] {
+    // La disponibilité calculée décide seule (ADR 0003) : plus aucun filtre
+    // de statut — l'enrichissement soustrait déjà les unités en réparation.
     return this.#enrichedMateriels.filter(
-      (m) =>
-        m.teamId === teamId &&
-        m.status !== "lost" &&
-        m.status !== "torepair" &&
-        m.isAvailable,
+      (m) => m.teamId === teamId && m.isAvailable,
     );
   }
 
@@ -181,7 +179,6 @@ export class MaterielStore {
 
     return this.#enrichedMateriels
       .filter((m) => m.teamId === teamId)
-      .filter((m) => m.status !== "lost" && m.status !== "torepair")
       .map((materiel) => {
         const loanedQuantity = calculateLoanedQuantityForPeriod(
           materiel.id,
@@ -190,8 +187,13 @@ export class MaterielStore {
           periodEnd,
           excludeLoanId,
         );
-        // Stock inconnu (null) traité comme 0 — conservateur
-        const availableForPeriod = (materiel.quantity ?? 0) - loanedQuantity;
+        // Stock inconnu (null) traité comme 0 — conservateur. La réparation
+        // se soustrait ici directement, PAS via availableQuantity : celui-ci
+        // compte les emprunts ACTIFS à now, pas ceux chevauchant la période.
+        const availableForPeriod =
+          (materiel.quantity ?? 0) -
+          loanedQuantity -
+          (materiel.repairQuantity ?? 0);
         return { ...materiel, availableForPeriod };
       })
       .filter((m) => m.availableForPeriod > 0);
@@ -451,6 +453,65 @@ export class MaterielStore {
     } catch (err) {
       this.#error =
         err instanceof Error ? err.message : "Erreur de suppression";
+      throw err;
+    } finally {
+      this.#loading = false;
+    }
+  }
+
+  /**
+   * Remise en service : N exemplaires réparés redeviennent empruntables
+   * (repairQuantity −= N, quantity inchangée).
+   */
+  async returnToService(materielId: string, quantity: number): Promise<void> {
+    await this.#adjustRepairQuantity(materielId, quantity, false);
+  }
+
+  /**
+   * Réforme : N exemplaires jugés irréparables deviennent manquants — ils
+   * quittent le stock (quantity −= N) autant que la réparation.
+   */
+  async scrapUnits(materielId: string, quantity: number): Promise<void> {
+    await this.#adjustRepairQuantity(materielId, quantity, true);
+  }
+
+  /**
+   * Geste partagé des deux fermetures de cycle (ADR 0003). La garde
+   * 1 ≤ N ≤ repairQuantity est côté client : une violation est un bug
+   * d'appel et lève sans aucune écriture. En réforme le stock est borné
+   * à 0 — un stock négatif n'a pas de sens physique.
+   */
+  async #adjustRepairQuantity(
+    materielId: string,
+    quantity: number,
+    scrapFromStock: boolean,
+  ): Promise<void> {
+    this.#loading = true;
+    this.#error = null;
+
+    try {
+      const current = this.#raw.materiels.find((m) => m.id === materielId);
+      const repairQuantity = current?.repairQuantity ?? 0;
+      if (
+        !Number.isInteger(quantity) ||
+        quantity < 1 ||
+        quantity > repairQuantity
+      ) {
+        throw new Error(
+          `Quantité invalide : 1 à ${repairQuantity} exemplaire(s) en réparation.`,
+        );
+      }
+
+      const patch: Partial<Materiel> = {
+        repairQuantity: repairQuantity - quantity,
+      };
+      if (scrapFromStock) {
+        patch.quantity = Math.max(0, (current?.quantity ?? 0) - quantity);
+      }
+      await this.#materielCollection.update(materielId, patch);
+    } catch (err) {
+      this.#error =
+        err instanceof Error ? err.message : "Erreur de mise à jour";
       throw err;
     } finally {
       this.#loading = false;

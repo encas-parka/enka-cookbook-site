@@ -234,3 +234,121 @@ describe("MaterielStore — retour qui met le stock à la vérité", () => {
     expect(serverLoan.completedAt).toBeNull();
   });
 });
+
+describe("MaterielStore — sélecteurs et gestes (disponibilité calculée)", () => {
+  beforeEach(async () => {
+    currentFakePb().reset();
+    vi.restoreAllMocks();
+    await materielStore.destroy();
+    await clearDexie();
+  });
+
+  it("scénario complet « 2 cassés sur 12, 6 empruntés » : après retour, l'item est proposé pour 10", async () => {
+    const item = loanItem(TEST_MATERIEL_ID, { quantity: 6, brokenQuantity: 2 });
+    await seedAndInitialize(
+      [makeMaterielRecord({ quantity: 12 })],
+      [makeLoanRecord({ materiels: [item] })],
+    );
+
+    await materielStore.completeLoanWithReturn(TEST_LOAN_ID, {
+      materiels: [item],
+    });
+    await waitForTick(5);
+
+    // Prêt complété ⇒ plus d'emprunté : 12 − 0 − 2 en réparation = 10
+    const byOwner = materielStore
+      .getAvailableMaterielsByOwner(TEST_TEAM_ID)
+      .find((m) => m.id === TEST_MATERIEL_ID);
+    expect(byOwner?.availableQuantity).toBe(10);
+
+    const forPeriod = materielStore
+      .getAvailableMaterielsForPeriod(TEST_TEAM_ID, "2026-12-19", "2026-12-21")
+      .find((m) => m.id === TEST_MATERIEL_ID);
+    expect(forPeriod?.availableForPeriod).toBe(10);
+  });
+
+  it("sélecteurs : la réparation soustrait partout, l'item partiel reste proposé pour ses unités saines", async () => {
+    // Item tout en réparation (backfill ticket 01) : jamais proposé
+    const fullRepair = makeMaterielRecord({
+      id: INTACT_MATERIEL_ID,
+      quantity: 5,
+      repairQuantity: 5,
+    });
+    // Item partiel : 2 exemplaires en réparation, prêt futur de 6 sur la période
+    const partial = makeMaterielRecord({ quantity: 12, repairQuantity: 2 });
+    const futureLoan = makeLoanRecord({
+      materiels: [loanItem(TEST_MATERIEL_ID, { quantity: 6 })],
+    });
+    await seedAndInitialize([partial, fullRepair], [futureLoan]);
+
+    // Hors période : 12 − 0 emprunté actif (prêt futur) − 2 réparation = 10
+    const byOwner = materielStore.getAvailableMaterielsByOwner(TEST_TEAM_ID);
+    expect(byOwner.map((m) => m.id)).toEqual([TEST_MATERIEL_ID]);
+    expect(byOwner[0].availableQuantity).toBe(10);
+
+    // Sur la période : 12 − 6 chevauchant − 2 réparation = 4 — calculé
+    // directement, PAS via availableQuantity (emprunts actifs ≠ chevauchants)
+    const forPeriod = materielStore.getAvailableMaterielsForPeriod(
+      TEST_TEAM_ID,
+      "2026-12-19",
+      "2026-12-21",
+    );
+    expect(forPeriod.map((m) => m.id)).toEqual([TEST_MATERIEL_ID]);
+    expect(forPeriod[0].availableForPeriod).toBe(4);
+  });
+
+  it("geste remise en service : repairQuantity décrémenté, garde hors bornes sans écriture", async () => {
+    await seedAndInitialize([
+      makeMaterielRecord({ quantity: 12, repairQuantity: 2 }),
+    ]);
+    const { updates } = trackMaterielUpdates(currentFakePb());
+
+    await materielStore.returnToService(TEST_MATERIEL_ID, 2);
+    await waitForTick(5);
+
+    const server = await pb.collection("materiel").getOne(TEST_MATERIEL_ID);
+    expect(server.repairQuantity).toBe(0);
+    expect(server.quantity).toBe(12);
+
+    // Garde 1 ≤ n ≤ repairQuantity : au-delà du compteur restant (0) ou nul,
+    // throw sans aucune écriture
+    await expect(
+      materielStore.returnToService(TEST_MATERIEL_ID, 1),
+    ).rejects.toThrow();
+    await expect(
+      materielStore.returnToService(TEST_MATERIEL_ID, 0),
+    ).rejects.toThrow();
+    expect(updates).toHaveLength(1);
+  });
+
+  it("geste réforme : repairQuantity ET quantity décrémentés (les exemplaires deviennent manquants)", async () => {
+    await seedAndInitialize([
+      makeMaterielRecord({ quantity: 12, repairQuantity: 2 }),
+    ]);
+
+    await materielStore.scrapUnits(TEST_MATERIEL_ID, 2);
+    await waitForTick(5);
+
+    const server = await pb.collection("materiel").getOne(TEST_MATERIEL_ID);
+    expect(server.repairQuantity).toBe(0);
+    expect(server.quantity).toBe(10);
+  });
+
+  it("remise en service rouvre la disponibilité d'un item tout en réparation", async () => {
+    await seedAndInitialize([
+      makeMaterielRecord({ quantity: 5, repairQuantity: 5 }),
+    ]);
+
+    // Tout le stock en réparation : non proposé
+    expect(
+      materielStore.getAvailableMaterielsByOwner(TEST_TEAM_ID),
+    ).toHaveLength(0);
+
+    await materielStore.returnToService(TEST_MATERIEL_ID, 5);
+    await waitForTick(5);
+
+    const avail = materielStore.getAvailableMaterielsByOwner(TEST_TEAM_ID);
+    expect(avail.map((m) => m.id)).toEqual([TEST_MATERIEL_ID]);
+    expect(avail[0].availableQuantity).toBe(5);
+  });
+});

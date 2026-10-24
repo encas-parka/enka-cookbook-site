@@ -1,7 +1,9 @@
 <script lang="ts">
   import { MapPin, Users, Pencil } from "@lucide/svelte";
-  import type { EnrichedMateriel } from "$lib/types/materiel.types";
-  import type { MaterielStatus } from "$lib/types/pb";
+  import type {
+    EnrichedMateriel,
+    MaterielDisplayState,
+  } from "$lib/types/materiel.types";
   import { globalState } from "$lib/stores/GlobalState.svelte";
   import { nativeTeamsStore } from "$lib/stores/NativeTeamsStore.svelte";
   import { online } from "svelte/reactivity/window";
@@ -11,7 +13,7 @@
     getMaterielTypeColorClass,
     getMaterielTypeBgClass,
     getMaterielTypeIcon,
-    getMaterielStatusLabel,
+    getMaterielDisplayStateLabel,
     getMaterielTypeConfig,
   } from "$lib/utils/materiel.utils";
 
@@ -27,47 +29,29 @@
 
   // Badge du type
 
-  // Configuration du statut
-  const StatusConfig = $derived.by(() => {
-    if (!materiel || !materiel.status) {
-      return {
-        label: "Chargement...",
-        badgeClass: "badge-neutral",
-        priority: 99,
-      };
-    }
+  // Badge d'état dérivé (jamais persisté, ADR 0003) — classes alignées sur
+  // LoanCard (warning si partiel, error si tout le stock est immobilisé) et
+  // sur les badges existants de la carte (info pour l'activité d'emprunt).
+  const displayStateBadgeClasses: Record<MaterielDisplayState, string> = {
+    complete: "badge-success",
+    partial: "badge-warning",
+    repair: "badge-error",
+    depleted: "badge-neutral",
+    loan: "badge-info",
+    reserved: "badge-secondary",
+  };
 
-    const statusLabel = getMaterielStatusLabel(materiel.status);
-
-    const configs: Record<
-      MaterielStatus,
-      { label: string; badgeClass: string; priority: number }
-    > = {
-      ok: {
-        label: statusLabel,
-        badgeClass: "badge-success",
-        priority: 0,
-      },
-      lost: {
-        label: statusLabel,
-        badgeClass: "badge-error",
-        priority: 4,
-      },
-      torepair: {
-        label: statusLabel,
-        badgeClass: "badge-warning",
-        priority: 1,
-      },
-    };
-
-    return (
-      configs[materiel.status] || {
-        label: statusLabel,
-        badgeClass: "badge-neutral",
-        priority: 99,
-      }
-    );
-  });
+  const displayStateLabel = $derived(
+    getMaterielDisplayStateLabel(
+      materiel.displayState,
+      materiel.repairQuantity ?? 0,
+    ),
+  );
+  const displayStateBadgeClass = $derived(
+    displayStateBadgeClasses[materiel.displayState],
+  );
+  // « Complet » est l'état neutre : tout va bien, le badge ne rend pas.
+  const showDisplayStateBadge = $derived(materiel.displayState !== "complete");
 
   // Est partageable ?
   const isShareable = $derived(
@@ -196,10 +180,10 @@
             </div>
           {/if}
 
-          <!-- Statut principal -->
-          {#if materiel.status !== "ok" && materiel.status !== "loan"}
-            <div class="badge {StatusConfig.badgeClass} badge-sm gap-1 py-0">
-              {StatusConfig.label}
+          <!-- État dérivé -->
+          {#if showDisplayStateBadge}
+            <div class="badge {displayStateBadgeClass} badge-sm gap-1 py-0">
+              {displayStateLabel}
             </div>
           {/if}
         </div>

@@ -48,18 +48,6 @@
     isEdit ? "Modifier le matériel" : "Ajouter du matériel",
   );
 
-  // Convertir les statuts calculés (loan, reserved) en "ok" pour l'édition
-  const formStatus = $derived.by(() => {
-    if (!currentMateriel) return "ok";
-    if (
-      currentMateriel.status === "loan" ||
-      currentMateriel.status === "reserved"
-    ) {
-      return "ok";
-    }
-    return currentMateriel.status;
-  });
-
   // Sélection d'un item existant dans les suggestions → bascule en mode édition
   function handleExistingSelected(id: string) {
     activeMaterielId = id;
@@ -74,7 +62,6 @@
           name: data.name,
           description: data.description || undefined,
           type: data.type || "other",
-          status: data.status,
           quantity: data.quantity,
           location: data.location || undefined,
         });
@@ -141,14 +128,14 @@
     {:else}
       {#key activeMaterielId}
         <MaterielForm
-          showStatus={isEdit}
           initialValues={currentMateriel
             ? {
+                id: currentMateriel.id,
                 name: currentMateriel.name,
                 description: currentMateriel.description,
                 type: currentMateriel.type,
-                status: formStatus,
                 quantity: currentMateriel.quantity ?? 0,
+                repairQuantity: currentMateriel.repairQuantity ?? 0,
                 location: currentMateriel.location,
                 shareableWith: currentMateriel.shareableWith,
               }

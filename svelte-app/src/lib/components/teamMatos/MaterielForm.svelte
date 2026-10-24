@@ -1,7 +1,17 @@
 <script lang="ts">
-  import { Package, MapPin, Hash, X, Check, Trash2 } from "@lucide/svelte";
+  import {
+    Package,
+    MapPin,
+    Hash,
+    X,
+    Check,
+    Trash2,
+    Wrench,
+  } from "@lucide/svelte";
   import RadioBadgeGroup from "$lib/components/ui/RadioBadgeGroup.svelte";
   import { nativeTeamsStore } from "$lib/stores/NativeTeamsStore.svelte";
+  import { materielStore } from "$lib/stores/MaterielStore.svelte";
+  import { toastService } from "$lib/services/toast.service.svelte";
   import TeamMaterielNameSuggest from "./TeamMaterielNameSuggest.svelte";
   import Suggestions from "$lib/components/ui/Suggestions.svelte";
   import ConfirmModal from "$lib/components/ui/ConfirmModal.svelte";
@@ -17,20 +27,19 @@
     | "gaz"
     | "hygiene"
     | "";
-  type MaterielStatusLiteral = "ok" | "lost" | "torepair";
 
   interface MaterielInitialValues {
+    id: string;
     name: string;
     description: string | null;
     type: MaterielTypeLiteral | null;
-    status: MaterielStatusLiteral;
     quantity: number;
+    repairQuantity: number;
     location: string | null;
     shareableWith: string[] | null;
   }
 
   interface Props {
-    showStatus?: boolean;
     buttonAction?: boolean;
     ownerId?: string;
     ownerName?: string;
@@ -41,7 +50,6 @@
       name: string;
       description: string | null;
       type: MaterielTypeLiteral | null;
-      status: MaterielStatusLiteral;
       quantity: number;
       location: string | null;
       shareableWith: string[] | null;
@@ -53,7 +61,6 @@
   }
 
   let {
-    showStatus = false,
     onSubmit,
     onCancel,
     buttonAction = true,
@@ -78,9 +85,13 @@
   // svelte-ignore state_referenced_locally
   let type = $state<MaterielTypeLiteral>(initialValues?.type || "");
   // svelte-ignore state_referenced_locally
-  let status = $state<MaterielStatusLiteral>(initialValues?.status || "ok");
+  let quantity = $state(initialValues?.quantity ?? 1);
+  // Exemplaires en réparation (édition) — snapshot décrémenté après chaque
+  // geste réussi ; la vérité vit dans le store.
   // svelte-ignore state_referenced_locally
-  let quantity = $state(initialValues?.quantity || 1);
+  let repairStock = $state(initialValues?.repairQuantity ?? 0);
+  let gestureQuantity = $state(1);
+  let gestureBusy = $state(false);
   // svelte-ignore state_referenced_locally
   let location = $state(initialValues?.location || "");
   // svelte-ignore state_referenced_locally
@@ -109,12 +120,6 @@
     { id: "other", label: "Autre" },
   ]);
 
-  const statusOptions = $derived([
-    { id: "ok", label: "OK" },
-    { id: "lost", label: "Perdu" },
-    { id: "torepair", label: "À réparer" },
-  ]);
-
   // Options d'équipes pour owner
   const teamOptions = $derived(
     nativeTeamsStore.myTeams.map((t) => ({ id: t.id, name: t.name })),
@@ -130,7 +135,14 @@
   );
 
   // Validation
-  const isValid = $derived(name.trim().length > 0 && quantity >= 1 && !loading);
+  // En création le stock commence à 1 ; en édition 0 est valide (rebut
+  // re-sauvable — l'item reste visible mais n'est plus empruntable).
+  const isValid = $derived(
+    name.trim().length > 0 &&
+      quantity >= (isEdit ? 0 : 1) &&
+      !loading &&
+      !gestureBusy,
+  );
 
   // Gestion du toggle d'équipe pour shareableWith
   function handleShareableWithToggle(teamId: string) {
@@ -151,7 +163,6 @@
       name: name.trim(),
       description: description.trim() || null,
       type: type || "other", // "other" par défaut si non renseigné
-      status,
       quantity,
       location: location.trim() || null,
       shareableWith:
@@ -170,11 +181,48 @@
     name = "";
     description = "";
     type = "";
-    status = "ok";
     quantity = 1;
     location = "";
     shareableWithTeamNames = [];
     error = null;
+  }
+
+  /** Quantité du geste valide : entière, entre 1 et le stock en réparation. */
+  const isGestureQuantityValid = $derived(
+    Number.isInteger(gestureQuantity) &&
+      gestureQuantity >= 1 &&
+      gestureQuantity <= repairStock,
+  );
+
+  /**
+   * Remise en service / réforme des exemplaires en réparation (ADR 0003) :
+   * la garde fine (1 ≤ n ≤ repairQuantity) vit dans le store et lève sans
+   * écriture ; le compteur local ne descend qu'après un succès constaté.
+   */
+  async function handleRepairGesture(scrap: boolean) {
+    if (!initialValues || !isGestureQuantityValid || gestureBusy) return;
+    const n = gestureQuantity;
+    gestureBusy = true;
+    try {
+      await toastService.track(
+        scrap
+          ? materielStore.scrapUnits(initialValues.id, n)
+          : materielStore.returnToService(initialValues.id, n),
+        {
+          loading: "Opération en cours...",
+          success: scrap
+            ? `${n} exemplaire${n > 1 ? "s" : ""} réformé${n > 1 ? "s" : ""} — retiré${n > 1 ? "s" : ""} du stock`
+            : `${n} exemplaire${n > 1 ? "s" : ""} remis${n > 1 ? "s" : ""} en service`,
+          error: (err) => (err instanceof Error ? err.message : undefined),
+        },
+      );
+      repairStock -= n;
+      gestureQuantity = 1;
+    } catch {
+      // Erreur déjà toastée par track ; le formulaire reste ouvert.
+    } finally {
+      gestureBusy = false;
+    }
   }
 
   function handleNameInput(val: string) {
@@ -272,7 +320,7 @@
     </fieldset>
   </div>
 
-  <!-- Section 3: Type + Status + Quantité + Localisation -->
+  <!-- Section 3: Type + Quantité + Localisation -->
   <div class="flex flex-wrap items-center gap-x-4 gap-y-3">
     <!-- Type -->
     <div class="flex min-w-[200px] flex-1 flex-col gap-1">
@@ -284,35 +332,29 @@
         disabled={loading}
       />
     </div>
-
-    <!-- Status -->
-    {#if showStatus}
-      <div class="flex min-w-[200px] flex-1 flex-col gap-1">
-        <span class="label-text-alt text-base-content/70">Status</span>
-        <RadioBadgeGroup
-          items={statusOptions}
-          bind:selected={status}
-          size="sm"
-          disabled={loading}
-        />
-      </div>
-    {/if}
   </div>
 
   <div class="flex flex-1 flex-wrap gap-x-6 gap-y-4">
     <!-- Quantité -->
-    <label class="input w-58">
-      <span class="required label"> <Hash class="size-4" />Quantité</span>
-      <input
-        type="number"
-        class=""
-        min="1"
-        bind:value={quantity}
-        disabled={loading}
-        required
-        aria-required="true"
-      />
-    </label>
+    <div>
+      <label class="input w-58">
+        <span class="required label"> <Hash class="size-4" />Quantité</span>
+        <input
+          type="number"
+          class=""
+          min={isEdit ? 0 : 1}
+          bind:value={quantity}
+          disabled={loading}
+          required
+          aria-required="true"
+        />
+      </label>
+      {#if isEdit}
+        <p class="text-base-content/60 mt-1 text-xs">
+          0 = au rebut : l'item reste visible mais n'est plus empruntable
+        </p>
+      {/if}
+    </div>
 
     <!-- Localisation -->
     <div class="flex flex-1 flex-col gap-1">
@@ -335,6 +377,48 @@
       {/if}
     </div>
   </div>
+
+  <!-- Réparation (édition) : fermeture de cycle des exemplaires abîmés -->
+  {#if isEdit && repairStock > 0}
+    <fieldset class="fieldset bg-base-100">
+      <legend class="fieldset-legend">En réparation</legend>
+      <p class="mb-2 text-sm opacity-70">
+        {repairStock}
+        exemplaire(s) en réparation. Remettez-les en service une fois réparés, ou
+        réformez-les s'ils sont irréparables (ils quittent alors définitivement le
+        stock).
+      </p>
+      <div class="flex flex-wrap items-center gap-2">
+        <label class="input w-28">
+          <span class="label"><Hash class="size-4" />Quantité</span>
+          <input
+            type="number"
+            min="1"
+            max={repairStock}
+            bind:value={gestureQuantity}
+            disabled={loading || gestureBusy}
+            aria-label="Quantité concernée par le geste"
+          />
+        </label>
+        <button
+          class="btn btn-outline btn-success btn-sm"
+          onclick={() => handleRepairGesture(false)}
+          disabled={loading || gestureBusy || !isGestureQuantityValid}
+        >
+          <Wrench class="size-4" />
+          Remettre en service
+        </button>
+        <button
+          class="btn btn-outline btn-error btn-sm"
+          onclick={() => handleRepairGesture(true)}
+          disabled={loading || gestureBusy || !isGestureQuantityValid}
+        >
+          <Trash2 class="size-4" />
+          Réformer
+        </button>
+      </div>
+    </fieldset>
+  {/if}
 
   <!-- Section 4: ShareableWith -->
   <!-- <fieldset class="fieldset bg-base-100">

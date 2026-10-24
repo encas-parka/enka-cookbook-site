@@ -706,6 +706,7 @@ export class MaterielStore {
     // incrémentent le compteur. Aucun statut n'est écrit ; un item sans
     // dommage déclaré ne reçoit AUCUNE écriture — un état saisi à la main
     // (réparation en cours) survit donc aux retours.
+    // Hypothèse structurelle : un item unique par materielId et par prêt — un doublon écraserait le premier décrément (update absolu) ; vérifié : aucun doublon dans les données exportées et LoanForm ne peut pas en produire.
     for (const item of data.materiels) {
       const lost = item.lostQuantity || 0;
       const broken = item.brokenQuantity || 0;

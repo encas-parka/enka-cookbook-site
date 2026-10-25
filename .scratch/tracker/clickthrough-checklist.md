@@ -206,27 +206,14 @@
 - [x] `/event/:id/products` : liste rendue, 0 erreur console.
       _(passe 20-10 : 0 erreur ; 2 warnings pb-sync collections vides — O1 ;
       18 besoins rendus en groupement « Aucun »)_
-- [ ] Création produit : `updatedBy` posé ; `store`/`specs` éditables et
-      re-rendus.
-      _(passe 20-10 : **partiel** — produit créé via validation rapide avec
-      `updatedBy` et `specs` posés ✓ ; modal « Ajouter un produit » ouvert ✓
-      mais champs non pilotés (extracteur) ; édition store/specs non testée)_
-- [ ] Édition d'un produit existant (upsert) : pas de « record not found in
-      Dexie ».
-      _(passe 20-10 : **partiel** — drawer produit ouvert (stock, achats,
-      fusion, recettes utilisant) ; aucune erreur Dexie en console ; le modal
-      d'édition lui-même n'a pas été piloté)_
-- [x] Validation rapide d'achat (crée le produit s'il n'existe pas).
-      _(passe 20-10 : bouton « manque : X » → produit `ail_tve170thokuayig`
-      créé (updatedBy, specs) + achat 176,47 gr, `deliveryDate` préremplie
-      (maintenant), statut delivered ; compteur passé à 17/18)_
-- [ ] Création d'achat : `orderDate`/`deliveryDate` préremplies.
-      _(passe 20-10 : **partiel** — quick-buy : `deliveryDate` préremplie ✓,
-      `orderDate` vide (réservé aux commandes) ; le modal d'achat complet
-      n'a pas été piloté)_
-- [ ] Édition + suppression produit/achat.
-      _(passe 20-10 : non piloté — dépend des modals à selects natifs ;
-      suppression = confirm natif, branche « valider » non pilotable)_
+- [ ] Suppression d'un produit dans l'UI.
+      _(réduit 25-10 — création produit (`updatedBy` posé, `store`/`specs`
+      saisis et re-rendus), édition produit existante (upsert, « record not
+      found in Dexie »), création d'achat (`orderDate`/`deliveryDate`
+      préremplies) et édition/suppression d'achat (confirm natif, soft
+      delete) sont couverts par les tests composants eventProducts ; reste
+      la suppression d'un PRODUIT : aucun bouton dans l'UI — même statut
+      que la suppression de tâche, §7)_
 - [x] Recherche produits (nom, et titres de recettes quand l'option est active) :
       résultats pertinents.
       _(passe 20-10 : **P8** — badge de recherche et désactivation des filtres

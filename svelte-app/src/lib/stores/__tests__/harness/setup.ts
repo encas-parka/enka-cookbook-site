@@ -32,6 +32,14 @@ if (typeof Element !== "undefined" && !Element.prototype.scrollIntoView) {
   Element.prototype.scrollIntoView = () => {};
 }
 
+// jsdom n'implémente pas getAnimations — Svelte l'appelle pour `animate:`
+// (flip) dès qu'une liste à clés est réordonnée ou raccourcie (ex.
+// EventMealCard : tri par type, retrait d'une recette). Aucune animation
+// n'est mesurable en jsdom : liste vide = pas d'animation en cours.
+if (typeof Element !== "undefined" && !Element.prototype.getAnimations) {
+  Element.prototype.getAnimations = () => [];
+}
+
 // jsdom n'implémente pas IntersectionObserver — sv-router (createRouter →
 // preloadOnHover) le construit à l'IMPORT du module $lib/router : tout
 // composant qui importe navigate/p fait tomber le montage sans ce stub.

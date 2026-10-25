@@ -160,17 +160,18 @@
       _(passe 20-10 : compteur exact — 5 recettes ghald, 3 brouillons = DB ;
       sémantique de liste « les miennes d'abord, puis le catalogue » — idem
       /recipe, assumé)_
-- [x] Réglages des repas d'un event (`EventMealCard`) : compteur de parts
-      modifiable, icônes lucide rendues (pas de trou ni décalage).
-      _(passe 20-10 : parts recette 100→80 persistées — `hasOwnPlatesNb:true,
-    plates:80` en base ; screenshot `eventmealcard-icons-*.jpg` propre)_
-- [ ] Création `/recipe/new` : statut par défaut, id PB natif (le slug lisible
-      est une idée produit, pas un bug).
-      _(passe 20-10 : **partiel** — statut par défaut ✓ (brouillon forcé pour
-      non-testée, checkbox verrouillée + règle affichée) ; finalisation
-      **bloquée par limite driver** : select natif « Type de recette » non
-      pilotable (le clic sur l'option ne déclenche pas le `change` écouté par
-      Svelte). Id natif vérifié en revanche via la duplication)_
+- [x] Réglages des repas d'un event (`EventMealCard`) : icônes lucide rendues
+      (pas de trou ni décalage).
+      _(réduit 25-10 — compteur de parts, parts par recette et
+      `hasOwnPlatesNb` couverts par les tests composants (EventMealCard) ;
+      reste le visuel des icônes, screenshot `eventmealcard-icons-*.jpg`
+      propre)_
+- [ ] Création `/recipe/new` : id PB natif (le slug lisible est une idée
+      produit, pas un bug).
+      _(réduit 25-10 — statut par défaut couvert par les tests composants
+      (RecipeHeaderForm : brouillon verrouillé tant que non testée, règle
+      affichée) ; reste la finalisation UI : select natif « Type de recette »
+      non pilotable par le driver, id natif vérifié via la duplication)_
 - [x] Édition `/recipe/:uuid/edit` : `permissionWrite` via PermissionsManager,
       save ne purge pas `publishedAt`.
       _(passe 20-10 : Marion ajoutée via membres d'équipe →
@@ -186,12 +187,11 @@
       _(passe 20-10 : formulaire pré-rempli complet → copie créée avec id PB
       natif, `typeR` copié, `rootRecipeId` lié, `versionLabel="v2 - ghald"` ;
       note : la copie hérite du `publishedAt` du parent — à trancher produit)_
-- [x] Ajout d'ingrédient : autocomplete, création si absent, surlignage du match.
-      _(passe 20-10 : **partiel** — autocomplete ✓ (suggestions Carotte/
-      carottes + option « Créer un nouvel ingrédient »), sélection ✓, ajout
-      en ligne avec quantité/unité/note ✓ ; création d'ingrédient absent :
-      modal complet ouvert ✓ mais soumission bloquée par le select natif
-      « Type » (limite driver) ; surlignage fin non vérifié)_
+- [x] Ajout d'ingrédient : surlignage du match.
+      _(réduit 25-10 — autocomplete, sélection clavier et création d'ingrédient
+      (modal complet, soumission comprise) couverts par les tests composants
+      (RecipeIngredientsEditor, CreateIngredientModal) ; reste le surlignage
+      fin du match, visuel)_
 - [x] Rendu markdown des instructions (svelte-markdown 2).
       _(passe 20-10 : `preparation24h` markdown (#####/**…**) rendu en titre +
       gras, aucun marqueur littéral — banoffee vegan)_

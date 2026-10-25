@@ -95,7 +95,13 @@ describe("CreateMaterielModal — persistance (bug épinglé)", () => {
     await clearDexie();
     await clearCustomCatalog();
   });
-  afterEach(() => cleanupSvelte());
+  afterEach(async () => {
+    // Le focus différé de la modale (setTimeout 50 ms, effet d'ouverture) doit
+    // s'exécuter tant que l'environnement jsdom vit : sinon il tombe après le
+    // démontage (« document is not defined ») en erreur non gérée.
+    await new Promise((resolve) => setTimeout(resolve, 60));
+    cleanupSvelte();
+  });
 
   it("BUG épinglé : le submit valide échoue en DataCloneError, rien n'est persisté", async () => {
     const created: string[] = [];

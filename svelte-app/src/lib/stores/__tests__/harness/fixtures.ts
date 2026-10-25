@@ -40,6 +40,8 @@ export const T1 = new Date("2026-06-08T11:30:00.000Z");
 export const TEST_EVENT_ID = "t12event00000001";
 export const TEST_TEAMDOC_ID = "t02teamdoc000001";
 export const TEST_PRODUCT_ID = "eau_t12test0001";
+/** Second produit du même event (scénarios multi-produits). */
+export const TEST_PRODUCT2_ID = "riz_t12test0001";
 export const TEST_PURCHASE_ID = "t12purchase0001";
 export const TEST_TEAM_ID = "t12team00000001";
 export const TEST_MATERIEL_ID = "t12mater0000001";

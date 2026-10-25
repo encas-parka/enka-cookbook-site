@@ -24,3 +24,10 @@ if (typeof window !== "undefined" && !window.matchMedia) {
     dispatchEvent: () => false,
   })) as unknown as typeof window.matchMedia;
 }
+
+// jsdom n'implémente pas scrollIntoView non plus — les composants qui
+// défilent vers un formulaire (ex. PurchaseManager.startEdit, en différé
+// via setTimeout) le déclenchent après la fin du test : un no-op suffit.
+if (typeof Element !== "undefined" && !Element.prototype.scrollIntoView) {
+  Element.prototype.scrollIntoView = () => {};
+}

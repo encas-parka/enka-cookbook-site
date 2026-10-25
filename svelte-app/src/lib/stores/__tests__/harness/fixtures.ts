@@ -26,6 +26,7 @@ import type {
   MaterielLoan,
   Products,
   Purchases,
+  Recettes,
   Teamdocs,
 } from "$lib/types/pb";
 import type { ProductNeedRow } from "$lib/db-sync/pb-sync";
@@ -49,6 +50,8 @@ export const TEST_LOAN_ID = "t12loan00000001";
 export const TEST_INGREDIENT_ID = "t12ingred000001";
 export const TEST_CATEGORY_ID = "t12catego000001";
 export const TEST_RECIPE_ID = "t12recipe000001";
+/** Seconde recette du même catalogue (scénarios multi-recettes). */
+export const TEST_RECIPE2_ID = "t12recipe000002";
 export const TEST_LOCK_ID = "t12lock00000001";
 export const TEST_USER_ID = "t12user00000001";
 export const TEST_MEMBER_ID = "t12member000001";
@@ -356,6 +359,48 @@ export function makeRecipeIndexEntry(
     rootRecipeId: null,
     versionLabel: null,
     teams: null,
+    ...overrides,
+  };
+}
+
+/**
+ * A PB "recipes" record (Recettes) — feeding `db.recipes` populates the
+ * recipesStore index through its bridge liveQuery (parseRecipeToIndexEntry
+ * skips records with status "deleted").
+ */
+export function makeRecipeRecord(overrides: Partial<Recettes> = {}): Recettes {
+  return {
+    id: TEST_RECIPE_ID,
+    created: pbDate(T0),
+    updated: pbDate(T0),
+    title: "Tarte aux pommes",
+    plate: 6,
+    preparation: "Étape 1. Étape 2.",
+    draft: false,
+    typeR: "dessert" as RecipesTypeROptions,
+    categories: ["Desserts"],
+    regime: null,
+    publishedAt: null,
+    createdBy: null,
+    teams: null,
+    materiel: null,
+    prepAlt: null,
+    ingredients: null,
+    description: null,
+    region: null,
+    cuisson: true,
+    quantite_desc: null,
+    check: true,
+    preparation24h: null,
+    permissionWrite: null,
+    serveHot: false,
+    lockedBy: null,
+    saison: null,
+    auteur: null,
+    astuces: null,
+    status: "public" as RecipesStatusOptions,
+    rootRecipeId: null,
+    versionLabel: null,
     ...overrides,
   };
 }

@@ -31,3 +31,26 @@ if (typeof window !== "undefined" && !window.matchMedia) {
 if (typeof Element !== "undefined" && !Element.prototype.scrollIntoView) {
   Element.prototype.scrollIntoView = () => {};
 }
+
+// jsdom n'implémente pas IntersectionObserver — sv-router (createRouter →
+// preloadOnHover) le construit à l'IMPORT du module $lib/router : tout
+// composant qui importe navigate/p fait tomber le montage sans ce stub.
+// Les méthodes restent des no-ops : aucun test ne pilote le preload.
+if (typeof window !== "undefined" && !("IntersectionObserver" in window)) {
+  class IntersectionObserverStub {
+    root = null;
+    rootMargin = "";
+    thresholds = [];
+    observe(): void {}
+    unobserve(): void {}
+    disconnect(): void {}
+    takeRecords(): IntersectionObserverEntry[] {
+      return [];
+    }
+  }
+  Object.defineProperty(globalThis, "IntersectionObserver", {
+    value: IntersectionObserverStub,
+    writable: true,
+    configurable: true,
+  });
+}

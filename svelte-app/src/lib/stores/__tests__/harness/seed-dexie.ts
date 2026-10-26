@@ -14,43 +14,33 @@ import type { ProductNeedRow } from "$lib/db-sync/pb-sync";
  * Covers every sync scope the lots under run consume (events, teamdocs,
  * locks, ingredients, categories, nativeTeams included: teams components
  * read the Dexie cache, so a leftover row leaks across tests).
+ *
+ * Single source of truth: the transaction table list and the clear calls
+ * MUST stay in sync — both derive from this array.
  */
+const CLEARED_TABLES = [
+  db.products,
+  db.purchases,
+  db.productNeeds,
+  db.recipes,
+  db.syncMeta,
+  db.materiels,
+  db.materielLoans,
+  db.eventMateriels,
+  db.events,
+  db.teamdocs,
+  db.locks,
+  db.ingredients,
+  db.categories,
+  db.nativeTeams,
+];
+
 export async function clearDexie(): Promise<void> {
-  await db.transaction(
-    "rw",
-    [
-      db.products,
-      db.purchases,
-      db.productNeeds,
-      db.recipes,
-      db.syncMeta,
-      db.materiels,
-      db.materielLoans,
-      db.eventMateriels,
-      db.events,
-      db.teamdocs,
-      db.locks,
-      db.ingredients,
-      db.categories,
-      db.nativeTeams,
-    ],
-    async () => {
-      await db.products.clear();
-      await db.purchases.clear();
-      await db.productNeeds.clear();
-      await db.recipes.clear();
-      await db.syncMeta.clear();
-      await db.materiels.clear();
-      await db.materielLoans.clear();
-      await db.eventMateriels.clear();
-      await db.events.clear();
-      await db.teamdocs.clear();
-      await db.locks.clear();
-      await db.ingredients.clear();
-      await db.categories.clear();
-      await db.nativeTeams.clear();
-    },
-  );
+  await db.transaction("rw", CLEARED_TABLES, async () => {
+    for (const table of CLEARED_TABLES) {
+      await table.clear();
+    }
+  });
 }
 
 /** Seed calculated product needs directly into Dexie (store skips recalc when non-empty). */

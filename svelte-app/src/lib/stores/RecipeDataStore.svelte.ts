@@ -512,6 +512,14 @@ class RecipeDataStore {
   // ===========================================================================
 
   /**
+   * Persiste une liste catalogue : relire un `$state` rend un Proxy, que le
+   * clonage structuré d'IndexedDB refuse (DataCloneError) — cloner avant put.
+   */
+  async #putCatalogList(key: string, list: string[]): Promise<void> {
+    await db.catalog.put({ key, data: $state.snapshot(list) });
+  }
+
+  /**
    * Ajoute un matériel localement (db.catalog).
    * Les matériels sont des constantes TS + ajouts utilisateur persistés.
    */
@@ -525,12 +533,7 @@ class RecipeDataStore {
       this.#customMateriel = [...this.#customMateriel, name].sort((a, b) =>
         a.localeCompare(b, "fr"),
       );
-      // $state.snapshot : relire un $state rend un Proxy, que le clonage
-      // structuré d'IndexedDB refuse (DataCloneError) — cloner avant put.
-      await db.catalog.put({
-        key: KEY_CUSTOM_MATERIEL,
-        data: $state.snapshot(this.#customMateriel),
-      });
+      await this.#putCatalogList(KEY_CUSTOM_MATERIEL, this.#customMateriel);
       console.log(`[RecipeDataStore] ✓ Matériel ajouté: ${name}`);
     } catch (err) {
       console.error("[RecipeDataStore] Erreur ajout matériel:", err);
@@ -556,12 +559,7 @@ class RecipeDataStore {
       this.#customRegimes = [...this.#customRegimes, name].sort((a, b) =>
         a.localeCompare(b, "fr"),
       );
-      // $state.snapshot : relire un $state rend un Proxy, que le clonage
-      // structuré d'IndexedDB refuse (DataCloneError) — cloner avant put.
-      await db.catalog.put({
-        key: KEY_CUSTOM_REGIMES,
-        data: $state.snapshot(this.#customRegimes),
-      });
+      await this.#putCatalogList(KEY_CUSTOM_REGIMES, this.#customRegimes);
       console.log(`[RecipeDataStore] ✓ Régime ajouté: ${name}`);
     } catch (err) {
       console.error("[RecipeDataStore] Erreur ajout régime:", err);

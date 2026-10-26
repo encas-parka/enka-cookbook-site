@@ -1,6 +1,6 @@
 ---
 title: Wraps végés simples mais pimpés
-date: '2026-10-26T12:26:45.669Z'
+date: '2026-10-26T13:29:48.385Z'
 draft: true
 typeR: plat
 categories:
@@ -121,15 +121,6 @@ ingredients:
     allergens:
       - Soja
     type: epices
-  - uuid: zkmmgt
-    name: 'Sirop d''érable '
-    originalQuantity: 60
-    originalUnit: ml
-    normalizedQuantity: 60
-    normalizedUnit: ml
-    comment: ''
-    allergens: []
-    type: sucres
   - uuid: ique18
     name: Paprika fumé
     originalQuantity: 20
@@ -166,12 +157,21 @@ ingredients:
     comment: ''
     allergens: []
     type: legumes
+  - uuid: 0da2bg
+    name: Sirop de glucose
+    originalQuantity: 70
+    originalUnit: ml
+    normalizedQuantity: 70
+    normalizedUnit: ml
+    comment: ''
+    allergens: []
+    type: sucres
 preparation: |-
   #### 1. Le tofu fumé
 
   1. Couper le **tofu fumé** en bâtonnets ou l’émietter selon la texture souhaitée.
   2. Le faire poêler rapidement dans un filet d’huile, par petites quantités pour qu’il colore au lieu de rendre de l’eau.
-  3. En fin de cuisson, ajouter la **sauce soja**, le **sirop d’érable** et le **paprika fumé**, et laisser caraméliser légèrement. Assaisonner un peu plus franchement que d’habitude, car le tofu servi froid paraît plus fade.
+  3. Diluer le sirop de glucose dans la sauce soja. En fin de cuisson, ajouter la **sauce soja**, le **sirop de glucose** et le **paprika fumé**, et laisser caraméliser légèrement. Assaisonner un peu plus franchement que d’habitude, car le tofu servi froid paraît plus fade.
   4. Réserver.
 
   #### 2. Les garnitures sèches
@@ -227,12 +227,13 @@ prepAlt: []
 astuces:
   - '{"astuce":"Prévoir une recette pour la sauce. Environs 15ml/wraps"}'
   - '{"astuce":"Une salade type batavia entière pèse entre 350 g et 500 g"}'
+  - '{"astuce":"Le sirop de glucose peut être remplacé par du sirop d''érable (plus chère), ou du sucre roux (dans ce cas là, diviser les quantité d''un tiers voir de moitié."}'
 preparation24h: null
 permissionWrite:
   - 68975cbc002469058f8b
 auteur: ghald
 createdAt: '2026-10-26T12:15:57.875+00:00'
-updatedAt: '2026-10-26T12:26:42.522+00:00'
+updatedAt: '2026-10-26T13:29:47.999+00:00'
 createdBy: 68975cbc002469058f8b
 teams: []
 status: public

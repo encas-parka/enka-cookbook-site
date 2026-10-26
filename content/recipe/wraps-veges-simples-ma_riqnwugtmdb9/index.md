@@ -1,6 +1,6 @@
 ---
 title: Wraps végés simples mais pimpés
-date: '2026-10-26T13:29:48.385Z'
+date: '2026-10-26T13:36:30.716Z'
 draft: true
 typeR: plat
 categories:
@@ -159,9 +159,9 @@ ingredients:
     type: legumes
   - uuid: 0da2bg
     name: Sirop de glucose
-    originalQuantity: 70
+    originalQuantity: 60
     originalUnit: ml
-    normalizedQuantity: 70
+    normalizedQuantity: 60
     normalizedUnit: ml
     comment: ''
     allergens: []
@@ -233,7 +233,7 @@ permissionWrite:
   - 68975cbc002469058f8b
 auteur: ghald
 createdAt: '2026-10-26T12:15:57.875+00:00'
-updatedAt: '2026-10-26T13:29:47.999+00:00'
+updatedAt: '2026-10-26T13:36:30.282+00:00'
 createdBy: 68975cbc002469058f8b
 teams: []
 status: public

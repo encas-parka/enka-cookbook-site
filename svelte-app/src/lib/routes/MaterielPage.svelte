@@ -144,11 +144,6 @@
     };
   }
 
-  // Changer d'équipe
-  function switchTeam(teamId: string) {
-    navigate(`/dashboard/materiel/${teamId}`);
-  }
-
   // Surveiller les changements de teamId dans l'URL pour mettre à jour activeTeamId
   $effect(() => {
     const teamIdFromParams = route.params.teamId;

@@ -17,7 +17,6 @@
   interface Props {
     sort: EventMaterielSort;
     onSortChange: (sort: EventMaterielSort) => void;
-    hasActiveFilters: boolean;
     activeBadges: ActiveBadge[];
     onRemoveBadge: (id: string) => void;
     onResetFilters: () => void;
@@ -27,7 +26,6 @@
   let {
     sort,
     onSortChange,
-    hasActiveFilters,
     activeBadges,
     onRemoveBadge,
     onResetFilters,

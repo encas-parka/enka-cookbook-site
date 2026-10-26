@@ -131,15 +131,6 @@
     direction: "asc",
   });
 
-  const hasActiveFilters = $derived.by(() => {
-    return (
-      filters.statuses.length > 0 ||
-      filters.who.length > 0 ||
-      filters.where.length > 0 ||
-      filters.search.length > 0
-    );
-  });
-
   const availableTypes = [
     "electronic",
     "manual",
@@ -636,7 +627,6 @@
       <EventMaterielControls
         sort={currentSort}
         onSortChange={(s) => (currentSort = s)}
-        {hasActiveFilters}
         {activeBadges}
         onRemoveBadge={removeBadge}
         onResetFilters={resetFilters}

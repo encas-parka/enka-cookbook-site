@@ -190,8 +190,6 @@ export class DateRangeStore {
 
     this.#start = startDate;
     this.#end = sortedDates[sortedDates.length - 1];
-
-    console.log(`[DateRangeStore] Initialized: ${this.#start} - ${this.#end}`);
   }
 
   /**
@@ -202,6 +200,5 @@ export class DateRangeStore {
     this.#availableDates = [];
     this.#start = null;
     this.#end = null;
-    console.log("[DateRangeStore] Reset");
   }
 }

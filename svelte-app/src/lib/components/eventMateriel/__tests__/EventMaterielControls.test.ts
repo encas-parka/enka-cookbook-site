@@ -12,8 +12,6 @@
  *    (rendu conditionnel `{#if activeBadges.length > 1}`) — enlever les
  *    badges un à un reste possible, la remise à zéro globale exige
  *    plusieurs filtres
- *  - la prop `hasActiveFilters` est déclarée mais jamais lue dans le
- *    rendu (voir rapport de run, Findings) — non exercée ici
  */
 
 vi.mock("$lib/stores/GlobalState.svelte", () => ({
@@ -62,7 +60,6 @@ function mountControls(
   const target = mountSvelte(EventMaterielControls, {
     sort,
     onSortChange,
-    hasActiveFilters: badges.length > 0,
     activeBadges: badges,
     onRemoveBadge,
     onResetFilters,

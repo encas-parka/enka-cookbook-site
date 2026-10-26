@@ -1,6 +1,6 @@
 ---
 title: Wraps végés simples mais pimpés
-date: '2026-10-26T12:15:58.507Z'
+date: '2026-10-26T12:26:45.669Z'
 draft: true
 typeR: plat
 categories:
@@ -17,12 +17,7 @@ description: null
 region: null
 saison: []
 id: wraps-veges-simples-ma_riqnwugtmdb9
-materiel:
-  - Gastro 1/1 (20cm)
-  - Essoreuse à salade
-  - Bruleur
-  - Robot-coupe
-  - Gastro Perforé 1/1 (25cm)
+materiel: []
 ingredients:
   - uuid: tzv9yk
     name: Galettes wrap (grandes)
@@ -164,9 +159,9 @@ ingredients:
     type: epices
   - uuid: ujisot
     name: Salade Batavia
-    originalQuantity: 0
-    originalUnit: gr.
-    normalizedQuantity: 0
+    originalQuantity: 3
+    originalUnit: kg
+    normalizedQuantity: 3000
     normalizedUnit: gr.
     comment: ''
     allergens: []
@@ -194,7 +189,7 @@ preparation: |-
 
   1) **Persil :** incorporer le persil ciselé au mélange carottes-pommes égoutté, juste avant le montage.
 
-  #### 4. Le montage 
+  #### 4. Le montage
 
   Disposer tous les composants à portée de main sur un plan de travail propre, dans l’ordre du montage. Prévoir un wrap test avant de lancer la production pour valider les volumes et l’assaisonnement.
 
@@ -214,14 +209,14 @@ preparation: |-
   *Maintien au chaud (quelle que soit la méthode)*
 
   1. Tapisser un contenant d’un linge propre et sec, en laissant dépasser les bords (pour éviter la condensation)
-  2. Y empiler les tortillas chaudes au fur et à mesure, rabattre le linge dessus, puis couvrir  (pour garder la chaleur):
+  2. Y empiler les tortillas chaudes au fur et à mesure, rabattre le linge dessus, puis couvrir (pour garder la chaleur):
      - Glacière ou bac isotherme, propre et sèche.
      - Bain-marie en bacs gastro : remplir un bac gastro profond d’eau chaude (frémissante, sans bouillir, sous 70 °C), puis poser dessus un bac gastro moins profond qui repose sur ses bords sans toucher l’eau.
 
   **Montage :**
 
   1. Étaler une tortilla à plat.
-  2. Étaler **25 ml** de **sauce** en fine couche, en laissant une marge sur les bords.
+  2. Étaler **15 ml** de **sauce** en fine couche, en laissant une marge sur les bords.
   3. Disposer un lit de **35 g** de **salade émincée**, qui sert de barrière anti-humidité et donne du volume.
   4. Ajouter **60 g** du mélange **carottes-pommes-persil** bien égoutté.
   5. Ajouter **17 g** de lamelles de **cornichons** (2 à 3 lamelles) et **60 g** de **tofu fumé**.
@@ -230,15 +225,16 @@ preparation: |-
   8. Rouler fermement en rabattant les côtés, puis couper en deux en biais si souhaité, ou envelopper dans du papier ou du film.
 prepAlt: []
 astuces:
-  - '{"astuce":"Prévoir une recette pour la sauce. Environs 25ml/wraps"}'
+  - '{"astuce":"Prévoir une recette pour la sauce. Environs 15ml/wraps"}'
+  - '{"astuce":"Une salade type batavia entière pèse entre 350 g et 500 g"}'
 preparation24h: null
 permissionWrite:
   - 68975cbc002469058f8b
-auteur: null
+auteur: ghald
 createdAt: '2026-10-26T12:15:57.875+00:00'
-updatedAt: '2026-10-26T12:15:57.875+00:00'
+updatedAt: '2026-10-26T12:26:42.522+00:00'
 createdBy: 68975cbc002469058f8b
-teams: null
+teams: []
 status: public
 rootRecipeId: null
 versionLabel: null

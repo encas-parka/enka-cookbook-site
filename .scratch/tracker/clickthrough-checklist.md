@@ -276,14 +276,14 @@
       ✓, groupée sous « Pendant l'événement ». En base :
       `events.todos=[{taskName, taskOn:"onEvent", assignedTo:[ghald],
     requiredPeopleNb:1, status:"todo"}]` ✓)_
-- [ ] Modification et suppression d'une tâche ; persistance après reload
-      (stockage `events.todos`).
-      _(passe 20-10 : **partiel** — modification ✓ (titre + `updatedAt`
-      persistés, toast « Tâche mise à jour »), persistance ✓ (aller-retour
-      dashboard → Tâches, la tâche modifiée est toujours là) ; **suppression
-      absente de l'UI** : `eventsStore.deleteTodo()`
-      (EventsStore.svelte.ts l.1195) n'est appelé nulle part, aucun bouton de
-      suppression dans EventTodoItem/EventTodoModal)_
+- [ ] Suppression d'une tâche.
+      _(réduit 26-10 — modification et persistance couvertes (passe 20-10 ✓ ;
+      préremplissage, `updateTodo` avec champs saisis, toasts et fermeture
+      par les tests composants EventTodoModal, bascules statut/assignation
+      par EventTodoItem) ; reste la suppression : **absente de l'UI** —
+      `eventsStore.deleteTodo()` (EventsStore.svelte.ts l.1195) n'est appelé
+      nulle part, aucun bouton de suppression dans
+      EventTodoItem/EventTodoModal)_
 - [ ] Un contributeur invité voit et édite selon ses droits.
       _(passe 20-10 : **non testé** — les 2 events de test n'ont que ghald en
       contributeur (`contributors=[ghald]`, `guestUsers=[]`) ; nécessite

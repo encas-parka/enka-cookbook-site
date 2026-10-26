@@ -149,8 +149,7 @@
       {#each team.members.filter((m) => m.confirmed) as member (member.id)}
         {@const role = member.roles[0]}
         {@const RoleIcon = getRoleIcon(role)}
-        {@const isCurrentUser = member.id === currentUserId}
-        {@const canRemove = canManageMembers && !isCurrentUser}
+        {@const isCurrentUser = member.userId === currentUserId}
 
         <div
           class="card border-base-200 bg-base-100 border p-4 transition-shadow hover:shadow-md"
@@ -161,7 +160,7 @@
               <!-- Avatar avec initiales -->
               <div class="avatar avatar-placeholder">
                 <div
-                  class="{member.name === globalState.userName
+                  class="{isCurrentUser
                     ? 'bg-accent'
                     : 'bg-neutral'} text-neutral-content w-12 rounded-full"
                 >

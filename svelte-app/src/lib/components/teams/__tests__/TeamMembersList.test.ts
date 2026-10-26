@@ -11,18 +11,13 @@
  *
  * Contrats épinglés :
  *  - seuls les membres confirmés sont listés, avec initiales et rôle
- *    (« Admin »/« Membre »)
- *  - owner : crayon « Gérer ce membre » et ouverture de la modale de gestion
+ *    (« Admin »/« Membre ») ; le membre courant est reconnu par
+ *    `member.userId` (« (vous) », avatar en accent)
+ *  - owner : crayon « Gérer ce membre » sur les autres membres uniquement,
+ *    et ouverture de la modale de gestion
  *  - renvoi d'invitation : réservé au owner (guard silencieux sinon)
- *
- * BUG ÉPINGLÉ (découvert en testant, lot 6) : `isCurrentUser` compare
- * `member.id` (id du record PB) à `globalState.userId` (l.152) — jamais
- * égaux. Conséquences figées par les tests : aucun « (vous) », bouton
- * « Quitter l'équipe » jamais rendu (le flux confirm + removeMember est
- * inatteignable ici ; le retrait passe par TeamCard, qui compare
- * `member.userId`, correct), et le crayon de gestion s'affiche aussi sur sa
- * propre ligne. Le fix (`member.userId === currentUserId`) fera repasser ces
- * tests au contrat nominal.
+ *  - quitter l'équipe : bouton rendu pour le membre courant non-owner
+ *    (confirm → removeMember → onMemberRemoved), jamais pour un owner
  */
 
 const teamsStoreMock = vi.hoisted(() => ({
@@ -85,6 +80,15 @@ const PENDING = makeTeamMember({
   name: "Invité",
   confirmed: false,
 });
+const OWNER_TEAM = [
+  makeTeamMember({
+    id: TEST_MEMBER_ID,
+    userId: TEST_USER_ID,
+    name: "Test User",
+    roles: ["owner"],
+  }),
+  MARION,
+];
 
 function mountList(
   members: EnrichedNativeTeam["members"],
@@ -135,10 +139,12 @@ describe("TeamMembersList — affichage", () => {
     expect(target.textContent).not.toContain("Invité");
   });
 
-  it("BUG épinglé : aucun « (vous) » (isCurrentUser compare member.id à userId)", () => {
+  it("le membre courant porte « (vous) » et l'avatar en accent ; pas les autres", () => {
     const { target } = mountList([ME_MEMBER, MARION]);
 
-    expect(target.textContent).not.toContain("(vous)");
+    expect(target.textContent).toContain("(vous)");
+    expect(target.textContent.match(/\(vous\)/g)).toHaveLength(1);
+    expect(target.querySelectorAll(".bg-accent")).toHaveLength(1);
   });
 
   it("équipe sans membre : « Aucun membre »", () => {
@@ -149,23 +155,13 @@ describe("TeamMembersList — affichage", () => {
 });
 
 describe("TeamMembersList — gestion (owner)", () => {
-  const OWNER_TEAM = [
-    makeTeamMember({
-      id: TEST_MEMBER_ID,
-      userId: TEST_USER_ID,
-      name: "Test User",
-      roles: ["owner"],
-    }),
-    MARION,
-  ];
-
-  it("BUG épinglé : le crayon s'affiche aussi sur sa propre ligne", () => {
+  it("pas de crayon de gestion sur la propre ligne de l'owner", () => {
     const { target } = mountList(OWNER_TEAM);
 
     const pencils = target.querySelectorAll<HTMLButtonElement>(
       'button[title="Gérer ce membre"]',
     );
-    expect(pencils).toHaveLength(2);
+    expect(pencils).toHaveLength(1);
   });
 
   it("le crayon d'un autre membre ouvre la modale de gestion", async () => {
@@ -174,7 +170,7 @@ describe("TeamMembersList — gestion (owner)", () => {
     const pencils = target.querySelectorAll<HTMLButtonElement>(
       'button[title="Gérer ce membre"]',
     );
-    pencils[1].click();
+    pencils[0].click();
     flushSync();
 
     await waitForCondition(
@@ -202,15 +198,39 @@ describe("TeamMembersList — gestion (owner)", () => {
   });
 });
 
-describe("TeamMembersList — quitter l'équipe (inatteignable, bug épinglé)", () => {
-  it("BUG épinglé : le bouton Quitter n'est jamais rendu", () => {
+describe("TeamMembersList — quitter l'équipe", () => {
+  it("bouton rendu pour un membre non-owner ; confirm → removeMember → onMemberRemoved", async () => {
     const { target, onMemberRemoved } = mountList([ME_MEMBER, MARION]);
+
+    const leaveButton = target.querySelector<HTMLButtonElement>(
+      'button[title="Quitter l\'équipe"]',
+    );
+    expect(leaveButton).not.toBeNull();
+    leaveButton!.click();
+    flushSync();
+
+    // La modale de confirmation est apparue ; « Quitter » confirme
+    const confirmButton = [
+      ...target.querySelectorAll<HTMLButtonElement>("button"),
+    ].find((b) => b.textContent.trim() === "Quitter");
+    expect(confirmButton).toBeDefined();
+    confirmButton!.click();
+
+    await vi.waitFor(() => {
+      expect(teamsStoreMock.removeMember).toHaveBeenCalledWith(
+        TEST_TEAM_ID,
+        TEST_MEMBER_ID,
+      );
+      expect(onMemberRemoved).toHaveBeenCalled();
+    });
+  });
+
+  it("pas de bouton Quitter pour un owner", () => {
+    const { target } = mountList(OWNER_TEAM);
 
     expect(
       target.querySelector('button[title="Quitter l\'équipe"]'),
     ).toBeNull();
-    expect(teamsStoreMock.removeMember).not.toHaveBeenCalled();
-    expect(onMemberRemoved).not.toHaveBeenCalled();
   });
 });
 

@@ -7,18 +7,15 @@
  *
  * Seam : vraie modale + vrai recipeDataStore + fake-indexeddb. Contrairement
  * aux catégories, le matériel N'EST PAS un enregistrement PocketBase :
- * `addMateriel` est censé persister un ajout utilisateur dans `db.catalog`
- * (Dexie, clé "custom-materiel") par-dessus les constantes DEFAULT_MATERIEL.
+ * `addMateriel` persiste un ajout utilisateur dans `db.catalog` (Dexie, clé
+ * "custom-materiel") par-dessus les constantes DEFAULT_MATERIEL.
  *
- * BUG ÉPINGLÉ (découvert en testant, lot 5) : la persistance échoue TOUJOURS —
- * `RecipeDataStore.addMateriel` passe le tableau `$state` (#customMateriel,
- * un Proxy) directement à `db.catalog.put` et le clonage structuré d'IndexedDB
- * refuse les proxy (spéc. StructuredSerialize, mesuré aussi en Node : même
- * DataCloneError). Le submit valide affiche donc l'erreur serveur, la modale
- * reste ouverte et RIEN n'est persisté. Comportement actuel épinglé : le fix
- * store (copier le tableau avant put — `$state.snapshot` ou spread) fera
- * repasser ces tests au contrat nominal (patron GroupPurchaseModal, lot 4a).
- * `addRegime` porte la même forme (aucun composant ne l'appelle aujourd'hui).
+ * Le store clone le tableau `$state` avant put (`$state.snapshot`) : le
+ * clonage structuré d'IndexedDB refuse les Proxy (DataCloneError). Les tests
+ * ont d'abord épinglé l'inverse (échec systématique du submit, lot 5) avant
+ * le fix ; ils portent désormais le contrat nominal (patron
+ * GroupPurchaseModal, lot 4a). `addRegime` porte la même forme (aucun
+ * composant ne l'appelle aujourd'hui).
  */
 
 vi.mock("$lib/services/toast.service.svelte", async () => {
@@ -88,7 +85,7 @@ function submit(target: HTMLElement): void {
   flushSync();
 }
 
-describe("CreateMaterielModal — persistance (bug épinglé)", () => {
+describe("CreateMaterielModal — persistance", () => {
   beforeEach(async () => {
     vi.restoreAllMocks();
     toastStub.reset();
@@ -103,7 +100,7 @@ describe("CreateMaterielModal — persistance (bug épinglé)", () => {
     cleanupSvelte();
   });
 
-  it("BUG épinglé : le submit valide échoue en DataCloneError, rien n'est persisté", async () => {
+  it("le submit valide persiste, toast le succès, ferme et notifie le parent", async () => {
     const created: string[] = [];
     const { target, holder } = mountModal((name) => created.push(name));
 
@@ -111,18 +108,22 @@ describe("CreateMaterielModal — persistance (bug épinglé)", () => {
     submit(target);
 
     await waitForCondition(
-      () => toastStub.error.mock.calls.length > 0,
-      "l'échec de persistance est toasté",
+      () => toastStub.success.mock.calls.length > 0,
+      "le succès de persistance est toasté",
       100,
       flushSync,
     );
-    // La modale reste ouverte pour correction (chemin catch de handleSubmit)
-    expect(modalDialog(target)).not.toBeNull();
-    expect(holder.open).toBe(true);
-    expect(created).toEqual([]);
-    expect(await customMaterielRow()).toBeUndefined();
-    // Ni succès ni confirmation parent
-    expect(toastStub.success).not.toHaveBeenCalled();
+    await waitForCondition(
+      () => modalDialog(target) === null,
+      "la modale se ferme au succès",
+      100,
+      flushSync,
+    );
+    expect(holder.open).toBe(false);
+    expect(created).toEqual(["Déhydrateur Test"]);
+    // Ligne custom-materiel persistée avec le nom ajouté (tableau trié).
+    expect(await customMaterielRow()).toEqual(["Déhydrateur Test"]);
+    expect(toastStub.error).not.toHaveBeenCalled();
   });
 
   it("le submit à vide affiche la validation et n'appelle jamais le store", () => {

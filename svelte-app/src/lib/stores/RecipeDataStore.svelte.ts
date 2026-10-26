@@ -525,9 +525,11 @@ class RecipeDataStore {
       this.#customMateriel = [...this.#customMateriel, name].sort((a, b) =>
         a.localeCompare(b, "fr"),
       );
+      // $state.snapshot : relire un $state rend un Proxy, que le clonage
+      // structuré d'IndexedDB refuse (DataCloneError) — cloner avant put.
       await db.catalog.put({
         key: KEY_CUSTOM_MATERIEL,
-        data: this.#customMateriel,
+        data: $state.snapshot(this.#customMateriel),
       });
       console.log(`[RecipeDataStore] ✓ Matériel ajouté: ${name}`);
     } catch (err) {
@@ -554,9 +556,11 @@ class RecipeDataStore {
       this.#customRegimes = [...this.#customRegimes, name].sort((a, b) =>
         a.localeCompare(b, "fr"),
       );
+      // $state.snapshot : relire un $state rend un Proxy, que le clonage
+      // structuré d'IndexedDB refuse (DataCloneError) — cloner avant put.
       await db.catalog.put({
         key: KEY_CUSTOM_REGIMES,
-        data: this.#customRegimes,
+        data: $state.snapshot(this.#customRegimes),
       });
       console.log(`[RecipeDataStore] ✓ Régime ajouté: ${name}`);
     } catch (err) {

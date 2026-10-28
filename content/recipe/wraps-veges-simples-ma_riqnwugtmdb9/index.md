@@ -1,6 +1,6 @@
 ---
-title: Wraps végés simples mais pimpés
-date: '2026-10-26T13:36:30.716Z'
+title: Wraps végés toffu fumé - légume
+date: '2026-10-28T18:21:35.087Z'
 draft: true
 typeR: plat
 categories:
@@ -233,7 +233,7 @@ permissionWrite:
   - 68975cbc002469058f8b
 auteur: ghald
 createdAt: '2026-10-26T12:15:57.875+00:00'
-updatedAt: '2026-10-26T13:36:30.282+00:00'
+updatedAt: '2026-10-28T18:20:58.440+00:00'
 createdBy: 68975cbc002469058f8b
 teams: []
 status: public

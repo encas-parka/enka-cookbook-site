@@ -1,6 +1,6 @@
 ---
 title: Wraps végés pois chiche légumes
-date: '2026-10-28T18:28:26.295Z'
+date: '2026-10-28T18:29:40.422Z'
 draft: true
 typeR: plat
 categories:
@@ -245,13 +245,12 @@ prepAlt: []
 astuces:
   - '{"astuce":"Prévoir une recette pour la sauce. Environs 15ml/wraps"}'
   - '{"astuce":"Une salade type batavia entière pèse entre 350 g et 500 g"}'
-  - '{"astuce":"Le sirop de glucose peut être remplacé par du sirop d''érable (plus chère), ou du sucre roux (dans ce cas là, diviser les quantité d''un tiers voir de moitié."}'
 preparation24h: null
 permissionWrite:
   - 68975cbc002469058f8b
 auteur: ghald
 createdAt: '2026-10-26T16:29:14.103+00:00'
-updatedAt: '2026-10-28T18:28:25.907+00:00'
+updatedAt: '2026-10-28T18:29:40.192+00:00'
 createdBy: 68975cbc002469058f8b
 teams: []
 status: public

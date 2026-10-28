@@ -1,6 +1,6 @@
 ---
 title: Wraps végés pois chiche légumes
-date: '2026-10-28T18:29:40.422Z'
+date: '2026-10-28T18:30:36.859Z'
 draft: true
 typeR: plat
 categories:
@@ -245,12 +245,13 @@ prepAlt: []
 astuces:
   - '{"astuce":"Prévoir une recette pour la sauce. Environs 15ml/wraps"}'
   - '{"astuce":"Une salade type batavia entière pèse entre 350 g et 500 g"}'
+  - '{"astuce":"Le chou, les cornichons, les graines, les oignons et les pois chiches peuvent être préparés la veille. Carottes-pommes, salade et persil se font le jour même."}'
 preparation24h: null
 permissionWrite:
   - 68975cbc002469058f8b
 auteur: ghald
 createdAt: '2026-10-26T16:29:14.103+00:00'
-updatedAt: '2026-10-28T18:29:40.192+00:00'
+updatedAt: '2026-10-28T18:30:36.536+00:00'
 createdBy: 68975cbc002469058f8b
 teams: []
 status: public

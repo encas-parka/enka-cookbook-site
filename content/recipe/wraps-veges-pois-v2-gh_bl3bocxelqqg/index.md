@@ -1,6 +1,6 @@
 ---
 title: Wraps végés pois chiche légumes
-date: '2026-10-28T18:30:36.859Z'
+date: '2026-10-29T09:24:49.500Z'
 draft: true
 typeR: plat
 categories:
@@ -251,11 +251,11 @@ permissionWrite:
   - 68975cbc002469058f8b
 auteur: ghald
 createdAt: '2026-10-26T16:29:14.103+00:00'
-updatedAt: '2026-10-28T18:30:36.536+00:00'
+updatedAt: '2026-10-29T09:24:21.411+00:00'
 createdBy: 68975cbc002469058f8b
 teams: []
 status: public
 rootRecipeId: wraps-veges-simples-ma_riqnwugtmdb9
-versionLabel: v2 - ghald
+versionLabel: v2 - eco
 ---
 

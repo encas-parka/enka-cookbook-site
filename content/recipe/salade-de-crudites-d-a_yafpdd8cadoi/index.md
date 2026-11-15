@@ -1,6 +1,6 @@
 ---
 title: Salade de crudités d automne
-date: '2026-11-15T10:50:29.091Z'
+date: '2026-11-15T13:03:03.435Z'
 draft: true
 typeR: entree
 categories: []
@@ -76,19 +76,19 @@ ingredients:
     type: legumes
   - uuid: 4vxqlr
     name: Graine de tournesol
-    originalQuantity: 0
-    originalUnit: gr.
-    normalizedQuantity: 0
-    normalizedUnit: gr.
+    originalQuantity: 1
+    originalUnit: au goût
+    normalizedQuantity: 1
+    normalizedUnit: au goût
     comment: ''
     allergens: []
     type: sec
   - uuid: z9plfy
     name: Graines de sésame blanc
-    originalQuantity: 0
-    originalUnit: gr.
-    normalizedQuantity: 0
-    normalizedUnit: gr.
+    originalQuantity: 1
+    originalUnit: au goût
+    normalizedQuantity: 1
+    normalizedUnit: au goût
     comment: ''
     allergens:
       - Sésame
@@ -99,11 +99,11 @@ astuces: []
 preparation24h: null
 permissionWrite:
   - 6af8546c2bf3832d3d70
-auteur: null
+auteur: chaplati
 createdAt: '2026-11-15T10:50:27.963+00:00'
-updatedAt: '2026-11-15T10:50:27.963+00:00'
+updatedAt: '2026-11-15T13:03:02.787+00:00'
 createdBy: 6af8546c2bf3832d3d70
-teams: null
+teams: []
 status: public
 rootRecipeId: null
 versionLabel: null

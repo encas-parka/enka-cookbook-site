@@ -1,6 +1,6 @@
 ---
 title: Ragoût de pois chiches aux fruits secs et à la cannelle
-date: '2026-11-15T12:25:55.436Z'
+date: '2026-11-15T12:31:04.717Z'
 draft: true
 typeR: plat
 categories: []
@@ -121,19 +121,19 @@ ingredients:
     type: legumes
   - uuid: 12dn4a
     name: gingembre frais
-    originalQuantity: 0
-    originalUnit: gr.
-    normalizedQuantity: 0
-    normalizedUnit: gr.
+    originalQuantity: 1
+    originalUnit: au goût
+    normalizedQuantity: 1
+    normalizedUnit: au goût
     comment: ''
     allergens: []
     type: epices
   - uuid: va2wu4
     name: Curcuma
-    originalQuantity: 0
-    originalUnit: gr.
-    normalizedQuantity: 0
-    normalizedUnit: gr.
+    originalQuantity: 1
+    originalUnit: au goût
+    normalizedQuantity: 1
+    normalizedUnit: au goût
     comment: quelques bouts de racine
     allergens: []
     type: epices
@@ -152,17 +152,17 @@ preparation: |-
   Quand le jus a bien réduit et devient onctueux, ajouter le reste des épices et de l'ail, le tamari et le sel. Laisser cuire à feu doux jusqu'à ce que le jus soit épais et collant.
 prepAlt: []
 astuces:
-  - '{"astuce":"A défaut de fruits secs, des fruits trop mûrs (ou m^me de la confiture) feront l''affaire."}'
+  - '{"astuce":"A défaut de fruits secs, des fruits trop mûrs (ou même de la confiture) feront l''affaire."}'
   - '{"astuce":"Ce plat peut être accompagné de n''importe quelle céréale, de crudités ou de pommes de terre à l''eau (arrosées d''huile, de citron et d''herbes fraîches)."}'
-  - '{"astuce":"Comme le couscous, ce plat ragoût gagne à être préparé à l''avance et réchauffé avant le service."}'
+  - '{"astuce":"Comme le couscous, ragoût gagne à être préparé à l''avance et réchauffé avant le service."}'
 preparation24h: Faire tremper les pois chiche pendant 8 à 12h. Les cuire dans deux fois et demi leur volume d'eau, pendant 1h à partir de l'ébullition. Si le temps de trempage n'a pas été respecté, prévoir un temps de cuisson plus long.
 permissionWrite:
   - 6af8546c2bf3832d3d70
-auteur: null
+auteur: chaplati
 createdAt: '2026-11-15T12:25:47.242+00:00'
-updatedAt: '2026-11-15T12:25:47.242+00:00'
+updatedAt: '2026-11-15T12:31:03.523+00:00'
 createdBy: 6af8546c2bf3832d3d70
-teams: null
+teams: []
 status: public
 rootRecipeId: null
 versionLabel: null

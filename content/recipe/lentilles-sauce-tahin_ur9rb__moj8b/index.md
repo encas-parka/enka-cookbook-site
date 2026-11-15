@@ -1,6 +1,6 @@
 ---
 title: Lentilles sauce tahin
-date: '2026-11-15T11:34:37.504Z'
+date: '2026-11-15T11:38:10.682Z'
 draft: true
 typeR: plat
 categories: []
@@ -13,7 +13,7 @@ quantite_desc: null
 check: false
 cuisson: true
 serveHot: true
-description: lentilles au vin rouge et aux épices, pommes de terre à la tomate et herbes fraîches. Une recette qui se prépare la veille qui demande peu de temps et d'orga le jour J
+description: lentilles au vin rouge et aux épices, pommes de terre grillées aux herbes fraîches. Une recette qui se prépare la veille qui demande peu de temps et d'orga le jour J
 region: null
 saison:
   - automne
@@ -32,28 +32,28 @@ ingredients:
     type: sec
   - uuid: vs2dfm
     name: Ail en poudre
-    originalQuantity: 0
-    originalUnit: gr.
-    normalizedQuantity: 0
-    normalizedUnit: gr.
+    originalQuantity: 1
+    originalUnit: au goût
+    normalizedQuantity: 1
+    normalizedUnit: au goût
     comment: ''
     allergens: []
     type: epices
   - uuid: a16yd7
     name: Thym
-    originalQuantity: 0
-    originalUnit: gr.
-    normalizedQuantity: 0
-    normalizedUnit: gr.
+    originalQuantity: 1
+    originalUnit: au goût
+    normalizedQuantity: 1
+    normalizedUnit: au goût
     comment: ''
     allergens: []
     type: epices
   - uuid: ruvnjp
     name: Vin Rouge
-    originalQuantity: 0
-    originalUnit: gr.
-    normalizedQuantity: 0
-    normalizedUnit: gr.
+    originalQuantity: 1
+    originalUnit: au goût
+    normalizedQuantity: 1
+    normalizedUnit: au goût
     comment: ''
     allergens:
       - Sulfites
@@ -118,37 +118,37 @@ ingredients:
     type: legumes
   - uuid: h3c8al
     name: huile d'olive
-    originalQuantity: 0
-    originalUnit: gr.
-    normalizedQuantity: 0
-    normalizedUnit: gr.
+    originalQuantity: 1
+    originalUnit: au goût
+    normalizedQuantity: 1
+    normalizedUnit: au goût
     comment: ''
     allergens: []
     type: lof
   - uuid: u2m28w
     name: Ail
-    originalQuantity: 0
-    originalUnit: gr.
-    normalizedQuantity: 0
-    normalizedUnit: gr.
+    originalQuantity: 1
+    originalUnit: au goût
+    normalizedQuantity: 1
+    normalizedUnit: au goût
     comment: ''
     allergens: []
     type: legumes
   - uuid: rtavky
     name: Oignon
-    originalQuantity: 0
-    originalUnit: gr.
-    normalizedQuantity: 0
-    normalizedUnit: gr.
+    originalQuantity: 1
+    originalUnit: au goût
+    normalizedQuantity: 1
+    normalizedUnit: au goût
     comment: ''
     allergens: []
     type: legumes
   - uuid: dy7i9o
     name: herbes fraîches
-    originalQuantity: 0
-    originalUnit: gr.
-    normalizedQuantity: 0
-    normalizedUnit: gr.
+    originalQuantity: 1
+    originalUnit: au goût
+    normalizedQuantity: 1
+    normalizedUnit: au goût
     comment: ''
     allergens: []
     type: epices
@@ -170,11 +170,11 @@ preparation24h: |-
   Réserver le tout au frais jusqu'au lendemain.
 permissionWrite:
   - 6af8546c2bf3832d3d70
-auteur: null
+auteur: chaplati
 createdAt: '2026-11-15T11:34:37.048+00:00'
-updatedAt: '2026-11-15T11:34:37.048+00:00'
+updatedAt: '2026-11-15T11:38:10.261+00:00'
 createdBy: 6af8546c2bf3832d3d70
-teams: null
+teams: []
 status: public
 rootRecipeId: null
 versionLabel: null

@@ -1,7 +1,7 @@
 ---
 title: Wraps végés pois chiche légumes
-date: '2026-10-29T09:24:49.500Z'
-draft: true
+date: '2026-11-20T13:32:59.497Z'
+draft: false
 typeR: plat
 categories:
   - Snacking
@@ -10,7 +10,7 @@ regime:
   - sans-lactose
 plate: 70
 quantite_desc: 1 wrap par personnes
-check: false
+check: true
 cuisson: true
 serveHot: false
 description: null
@@ -251,7 +251,7 @@ permissionWrite:
   - 68975cbc002469058f8b
 auteur: ghald
 createdAt: '2026-10-26T16:29:14.103+00:00'
-updatedAt: '2026-10-29T09:24:21.411+00:00'
+updatedAt: '2026-11-20T13:32:17.959+00:00'
 createdBy: 68975cbc002469058f8b
 teams: []
 status: public

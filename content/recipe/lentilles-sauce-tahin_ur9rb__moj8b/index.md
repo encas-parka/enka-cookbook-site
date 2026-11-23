@@ -1,7 +1,7 @@
 ---
 title: Lentilles sauce tahin
-date: '2026-11-15T11:38:10.682Z'
-draft: true
+date: '2026-11-23T12:32:21.136Z'
+draft: false
 typeR: plat
 categories: []
 regime:
@@ -10,7 +10,7 @@ regime:
   - sans-lactose
 plate: 100
 quantite_desc: null
-check: false
+check: true
 cuisson: true
 serveHot: true
 description: lentilles au vin rouge et aux épices, pommes de terre grillées aux herbes fraîches. Une recette qui se prépare la veille qui demande peu de temps et d'orga le jour J
@@ -172,7 +172,7 @@ permissionWrite:
   - 6af8546c2bf3832d3d70
 auteur: chaplati
 createdAt: '2026-11-15T11:34:37.048+00:00'
-updatedAt: '2026-11-15T11:38:10.261+00:00'
+updatedAt: '2026-11-23T12:32:20.773+00:00'
 createdBy: 6af8546c2bf3832d3d70
 teams: []
 status: public

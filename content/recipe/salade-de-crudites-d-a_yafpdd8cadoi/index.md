@@ -1,7 +1,7 @@
 ---
 title: Salade de crudités d automne
-date: '2026-11-15T15:25:27.320Z'
-draft: true
+date: '2026-11-23T12:32:14.051Z'
+draft: false
 typeR: entree
 categories: []
 regime:
@@ -10,7 +10,7 @@ regime:
   - sans-lactose
 plate: 100
 quantite_desc: null
-check: false
+check: true
 cuisson: false
 serveHot: false
 description: une entrée qui peut être composante d'un repas complet accompagnée d'une soupe et une tartine
@@ -101,7 +101,7 @@ permissionWrite:
   - 6af8546c2bf3832d3d70
 auteur: chaplati
 createdAt: '2026-11-15T10:50:27.963+00:00'
-updatedAt: '2026-11-15T15:25:23.692+00:00'
+updatedAt: '2026-11-23T12:31:29.067+00:00'
 createdBy: 6af8546c2bf3832d3d70
 teams: []
 status: public

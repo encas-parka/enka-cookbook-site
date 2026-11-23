@@ -1,7 +1,7 @@
 ---
 title: Lassi à l eau de rose
-date: '2026-11-15T12:58:18.311Z'
-draft: true
+date: '2026-11-23T12:34:21.876Z'
+draft: false
 typeR: dessert
 categories: []
 regime:
@@ -9,15 +9,14 @@ regime:
   - sans-gluten
 plate: 100
 quantite_desc: null
-check: false
+check: true
 cuisson: false
 serveHot: false
 description: un dessert facile à préparer ou une boisson pour accompagner les plats indiens épicés
 region: null
 saison: []
 id: lassi-a-l-eau-de-rose_x5j9tvyu8gk9
-materiel:
-  - mixer
+materiel: []
 ingredients:
   - uuid: a73fzw
     name: Yaourt brassé
@@ -74,14 +73,15 @@ prepAlt: []
 astuces:
   - '{"astuce":"A servir bien frais, éventuellement avec des glaçons."}'
   - '{"astuce":"On peut ajouter un peu d''eau de fleur d''oranger."}'
+  - '{"astuce":"Si le résultat est trop liquide (ce qui nous est arrivé) on peut rajouter des bananes mixées\n"}'
 preparation24h: null
 permissionWrite:
   - 6af8546c2bf3832d3d70
-auteur: null
+auteur: chaplati
 createdAt: '2026-11-15T12:58:17.883+00:00'
-updatedAt: '2026-11-15T12:58:17.883+00:00'
+updatedAt: '2026-11-23T12:34:21.611+00:00'
 createdBy: 6af8546c2bf3832d3d70
-teams: null
+teams: []
 status: public
 rootRecipeId: null
 versionLabel: null

@@ -1,7 +1,7 @@
 ---
 title: Ragoût de pois chiches aux fruits secs et à la cannelle
-date: '2026-11-15T12:31:04.717Z'
-draft: true
+date: '2026-11-23T12:32:56.973Z'
+draft: false
 typeR: plat
 categories: []
 regime:
@@ -10,7 +10,7 @@ regime:
   - sans-lactose
 plate: 100
 quantite_desc: null
-check: false
+check: true
 cuisson: true
 serveHot: true
 description: Si les choses se passent bien, on peut obtenir avec cette recette un mélange onctueux, sirupeux, où les légumes sont fondants, imprégnés d'ail, d'épices et du sucre des fruits secs.
@@ -160,7 +160,7 @@ permissionWrite:
   - 6af8546c2bf3832d3d70
 auteur: chaplati
 createdAt: '2026-11-15T12:25:47.242+00:00'
-updatedAt: '2026-11-15T12:31:03.523+00:00'
+updatedAt: '2026-11-23T12:32:56.634+00:00'
 createdBy: 6af8546c2bf3832d3d70
 teams: []
 status: public
